@@ -11,17 +11,21 @@ printf "\e[1m"
 ################################################################################
 
 
-if [[ "$os" = "Darwin" ]]; then
-################################################################################
-## Mac
-################################################################################
+update (){
 
-	printf "Checking Dependencies for Mac..."
-
-	if [[ -z "$(which brew)" ]]; then
-		#install homebrew
-		echo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	if [[ -z "$(which $1)" ]]; then
+		if [[ $2 == mac ]]; then
+			echo brew install "$1"
+		else
+			echo sudo apt-get install -y "$1"
+		fi
+	else
+		printf "Already have $1\n"
 	fi
+
+
+
+}
 
 	#Dependencies
 
@@ -42,6 +46,20 @@ if [[ "$os" = "Darwin" ]]; then
 	# 15) powerline
 	# 16) powerline-mem-segment
 
+declare -a dependencies_ary = (vim tmux git wget lolcat cmatrix htop cmake)
+
+
+if [[ "$os" == "Darwin" ]]; then
+################################################################################
+## Mac
+################################################################################
+
+	printf "Checking Dependencies for Mac...\n"
+
+	if [[ -z "$(which brew)" ]]; then
+		#install homebrew
+		echo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	fi
 
 
 	echo brew ls python > /dev/null 2>&1
@@ -51,48 +69,9 @@ if [[ "$os" = "Darwin" ]]; then
 	fi
 
 
-	if [[ -z "$(which vim)" ]]; then
-		echo brew install vim
-	fi
-
-	if [[ -z "$(which tmux)" ]]; then
-		echo brew install tmux
-	fi
-
-	if [[ -z "$(which git)" ]]; then
-		echo brew install git
-	fi
-
-	if [[ -z "$(which wget)" ]]; then
-		echo brew install wget
-	fi
-
-	if [[ -z "$(which lolcat)" ]]; then
-		echo brew install lolcat
-	fi
-
-	if [[ -z "$(which cmatrix)" ]]; then
-		echo brew install cmatrix
-	fi
-
-	if [[ -z "$(which htop)" ]]; then
-		echo brew install htop
-	fi
-
-	if [[ -z "$(which cmake)" ]]; then
-		echo brew install cmake
-	fi
-
-
-
-
-
-
-
-
-
-
-
+	for prog in ${dependencies_ary[@]}; do
+		update $prog mac
+	done
 
 
 else
@@ -101,98 +80,126 @@ else
 ## Linux
 ################################################################################
 
+	printf "Checking Dependencies for Linux...\n"
 
-
-	printf "Checking Dependencies for Linux..."
-
-	echo sudo apt-get install build-essential cmake
+	echo sudo apt-get install build-essential
 
 	echo sudo apt-get install python-dev python3-dev
 
-
+	for prog in ${dependencies_ary[@]}; do
+		update $prog linux
+	done
 
 fi
 
+################################################################################
+## Vim
+################################################################################
+
+printf "Installing Pathogen\n"
+#install pathogen
+echo mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
+echo curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+
+
+printf "Installing Vundle\n"
+#install vundle
+
+echo git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
+
+
+printf "Installing Nerdtree\n"
+#install nerdtree
+echo git clone https://github.com/scrooloose/nerdtree.git $HOME/.vim/bundle/nerdtree
+
+printf "Installing CtrlP\n"
+#install ctrl p
+echo git clone https://github.com/kien/ctrlp.vim.git $HOME/.vim/bundle/ctrlp.vim
+
+printf "Running Vundle\n"
+#run vundle install for ultisnips, supertab
+echo "cat .vimrc >> $HOME/.vimrc"
+echo vim +PluginInstall +qall
 
 ################################################################################
 ## YouCompleteMe
 ################################################################################
 
-printf "Installing YouCompleteMe"
+printf "Installing YouCompleteMe\n"
 
-echo cd ~/.vim/bundle/YouCompleteMe
+echo cd $HOME/.vim/bundle/YouCompleteMe
 echo ./install.py --clang-completer
 
 
+################################################################################
+## Powerline
+################################################################################
+printf "Installing Powerline...\n"
 
-printf "Installing Powerline..."
+echo pip install --user powerline-status
+
+printf "Adding Powerline to .vimrc \n"
+
+powerline_dir="$(pip show powerline-status | grep Location | awk '{print $2}')"
+echo "set rtp+=$powerline_dir/powerline/bindings/vim" >> .vimrc
 
 
 ################################################################################
 ## Zsh
 ################################################################################
-echo pip install --user powerline-status
 
-printf "Installing oh-my-zsh..."
+printf "Installing oh-my-zsh...\n"
 #oh-my-zsh
 echo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
 echo cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
-echo cat zshrc >> $HOME/.zshrc
+echo "cat .zshrc >> $HOME/.zshrc"
 
 #add aliases and functions
 echo cat ShellAliasesFunctions >> $HOME/.zshrc
-
-################################################################################
-## Vim
-################################################################################
-#install vundle
-if [[ ! -d $HOME/.vim/bundle ]]; then
-	echo mkdir -p $HOME/.vim/bundle
-fi
-echo git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
-#youcompleteme, ultisnips, supertab
-echo cat vimrc >> $HOME/.vimrc
-echo vim +PluginInstall +qall
-
-#install pathogen
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-#install nerdtree
-git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
-
-#install ctrl p
-git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
-
 
 
 ################################################################################
 ## Tmux
 ################################################################################
-printf "Installing Tmux Config"
+printf "Installing Tmux Powerline\n"
 
 
 tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
 echo pip install powerline-mem-segment
 
+
+
+#custom settings for tmux powerline
 if [[ ! -d $tmuxPowerlineDir ]]; then
 	echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
 fi
 
 
-
+printf "Installing Tmux Plugin Manager\n"
 if [[ ! -d ~/.tmux/plugins/tpm  ]]; then
 	echo mkdir -p ~/.tmux/plugins/tpm
-	echo git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
-echo "cat tmux/tmux.conf >> $HOME/.tmux.conf"
+
+printf "Adding Powerline to .tmux.conf\n"
+# add powerline to .tmux.conf
+echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux.conf"
+echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
+
+
+echo "cat tmux/.tmux.conf >> $HOME/.tmux.conf"
+
+
+printf "Installing Custom Tmux Commands\n"
+if [[ ! -d $HOME/.tmux ]]; then
+	mkdir -p $HOME/.tmux
+fi
 echo "cat tmux/four-panes >> $HOME/.tmux/four-panes"
 echo "cat tmux/control-window >> $HOME/.tmux/control-window"
 
 
-
+printf "Changing default shell to Zsh\n"
 echo ch -s "$(which zsh)"
 
 
