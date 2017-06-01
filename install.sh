@@ -102,6 +102,10 @@ fi
 #add aliases and functions
 echo cat ShellAliasesFunctions >> $HOME/.zshrc
 
+
+printf "Installing Tmux Config"
+echo cat tmux.conf >> $HOME/.tmux.conf
+
 echo ch -s "$(which zsh)"
 
 
