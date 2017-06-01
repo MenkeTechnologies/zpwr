@@ -1,0 +1,110 @@
+# export CLICOLOR="YES"
+# export LSCOLORS="ExFxBxDxCxegedabagacad"
+# export TERM="xterm-256color"
+
+export D="$HOME/Desktop"
+export WCC="/Volumes/JAKESD/wcc/cps"
+# Setting PATH for Python 3.5
+# The orginal version is saved in .profile.pysave
+
+export EDITOR='vim'
+export HISTTIMEFORMAT=' %F %T _ '
+
+#**********************************************************************
+#                           MARK:ALIASES
+#**********************************************************************
+#portable aliases
+alias ll="clearList"
+alias la="clearList"
+alias l="ls -AFlhO"
+alias r="cd ..;clearList"
+alias t="cd /;clearList"
+alias d="cd ~/Desktop; clearList"
+alias vrc="vim ~/.vimrc"
+alias deleteTab="sed -e '/^[ tab]*$/d'"
+
+#set -o vi
+
+alias b="bash"
+alias upper='tr '\''a-z'\'' '\''A-Z'\'''
+#over alias es
+alias grep="grep --color=auto"
+alias egrep="egrep --color=always"
+alias tree='tree -afC'
+#Darwin specific aliases
+alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
+alias cpu="top -o cpu"
+alias mem="top -o mem"
+alias tip="top -o +command"
+
+alias pkill="pkill -iIl"
+alias tclsh="rlwrap tclsh"
+alias p="vim + ~/.shell_aliases_functions; source ~/.shell_aliases_functions"
+alias z="vim + ~/.zshrc; source ~/.zshrc"
+alias logs="tail -f /var/log/*.log | lolcat"
+alias matr="cmatrix -C blue -abs"
+alias i="ipconfig getifaddr en0"
+#**********************************************************************
+#                           MARK:SHELL SCRIPTS
+#**********************************************************************
+
+alias jobs="jobs -l"
+#alias who="who -uHTba | sed '$ d'"
+
+#**********************************************************************
+#                           MARK:REMOTE SHELLS SCRIPTS
+#**********************************************************************
+alias vi=vim
+alias v=vim
+
+
+
+clearList () {
+    clear
+    ls -FlhAO
+}
+animate(){
+    bash $SCRIPTS/animation.sh
+}
+blocksToSize(){
+    read input
+    local bytes=$(( input * 512 ))
+    echo $bytes | humanReadable 
+}
+
+humanReadable(){
+awk 'function human(x) {
+         s=" B   KiB MiB GiB TiB EiB PiB YiB ZiB"
+         while (x>=1024 && length(s)>1)
+               {x/=1024; s=substr(s,5)}
+         s=substr(s,1,4)
+         xf=(s==" B  ")?"%5d   ":"%8.2f"
+         return sprintf("Your size:"xf"%s", x, s)
+      }
+      {gsub(/^[0-9]+/, human($1));print}'
+}
+
+f(){
+    cd "$1"
+    clear
+    ls -AlhFO
+}
+search(){
+    if [[ -z $2 ]];then
+         grep -iRnC 5 "$1" *
+    else
+         grep -iRnC 5 "$1" "$2"
+    fi
+
+}
+cd(){
+    builtin cd "$@";
+
+    clearList
+}
+
+q(){
+    /usr/local/bin/git add .
+    /usr/local/bin/git commit -m "$1"
+    /usr/local/bin/git push
+}
