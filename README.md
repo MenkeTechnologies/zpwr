@@ -4,8 +4,8 @@ This script is my own version of Hashrocket's Dotmatrix repo.  This allows to in
 Powerline for Vim, Tmux.  Oh-my-zsh with the Agnosterzak theme and much more.
 
 
-!(/tmuxfinal.png?raw=true)
 
+![Alt text](/tmuxfinal.png?raw=true)
 
 
 
