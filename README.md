@@ -9,7 +9,7 @@ Screenshots
 ![Alt text](/tmuxfinal.png?raw=true)
 ![Alt text](/tmuxfinal2.png?raw=true)
 
-Includes my Iterm colors profile.
+Includes my iTerm colors profile.
 
 
 
