@@ -11,7 +11,6 @@ printf "\e[1m"
 ################################################################################
 
 
-
 if [[ "$os" = "Darwin" ]]; then
 ################################################################################
 ## Mac
@@ -23,6 +22,26 @@ if [[ "$os" = "Darwin" ]]; then
 		#install homebrew
 		echo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	fi
+
+	#Dependencies
+
+	# 1) vim 8.0
+	# 2) tmux 2.1
+	# 3) lolcat
+	# 4) cmatrix
+	# 5) htop
+	# 6) cmake
+	# 7) youcompleteme
+	# 8) ultisnips
+	# 9) supertab
+	# 10) oh-my-zsh
+	# 11) agnosterzak
+	# 12) pathogen
+	# 13) nerdtree
+	# 14) ctrlp
+	# 15) powerline
+	# 16) powerline-mem-segment
+
 
 
 	echo brew ls python > /dev/null 2>&1
@@ -66,12 +85,6 @@ if [[ "$os" = "Darwin" ]]; then
 
 
 
-################################################################################
-## YouCompleteMe
-################################################################################
-
-	echo cd ~/.vim/bundle/YouCompleteMe
-	echo ./install.py --clang-completer
 
 
 
@@ -97,15 +110,18 @@ else
 	echo sudo apt-get install python-dev python3-dev
 
 
+
+fi
+
+
 ################################################################################
 ## YouCompleteMe
 ################################################################################
 
-	echo cd ~/.vim/bundle/YouCompleteMe
-	echo ./install.py --clang-completer
+printf "Installing YouCompleteMe"
 
-
-fi
+echo cd ~/.vim/bundle/YouCompleteMe
+echo ./install.py --clang-completer
 
 
 
