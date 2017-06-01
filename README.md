@@ -1,6 +1,6 @@
 # customTerminalInstaller
 
-This script is my own version of Hashrocket's Dotmatrix repo.  This allows to install a custome terminal environment with
+This script is my own version of Hashrocket's Dotmatrix repo.  This allows to install a custom terminal environment with
 Powerline for Vim, Tmux.  Oh-my-zsh with the Agnosterzak theme and much more.
 
 
