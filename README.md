@@ -6,6 +6,7 @@ Powerline for Vim, Tmux.  Oh-my-zsh with the Agnosterzak theme and much more.
 
 
 ![Alt text](/tmuxfinal.png?raw=true)
+![Alt text](/tmuxfinal2.png?raw=true)
 
 
 
