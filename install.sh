@@ -13,7 +13,9 @@ printf "\e[1m"
 
 
 if [[ "$os" = "Darwin" ]]; then
-	#must be mac
+################################################################################
+## Mac
+################################################################################
 
 	printf "Checking Dependencies for Mac..."
 
@@ -58,6 +60,19 @@ if [[ "$os" = "Darwin" ]]; then
 		echo brew install htop
 	fi
 
+	if [[ -z "$(which cmake)" ]]; then
+		echo brew install cmake
+	fi
+
+
+
+################################################################################
+## YouCompleteMe
+################################################################################
+
+	echo cd ~/.vim/bundle/YouCompleteMe
+	echo ./install.py --clang-completer
+
 
 
 
@@ -69,10 +84,26 @@ if [[ "$os" = "Darwin" ]]; then
 
 else
 
+################################################################################
+## Linux
+################################################################################
+
+
+
 	printf "Checking Dependencies for Linux..."
 
-	:
-	#must be linux
+	echo sudo apt-get install build-essential cmake
+
+	echo sudo apt-get install python-dev python3-dev
+
+
+################################################################################
+## YouCompleteMe
+################################################################################
+
+	echo cd ~/.vim/bundle/YouCompleteMe
+	echo ./install.py --clang-completer
+
 
 fi
 
@@ -118,8 +149,6 @@ git clone https://github.com/scrooloose/nerdtree.git ~/.vim/bundle/nerdtree
 
 #install ctrl p
 git clone https://github.com/kien/ctrlp.vim.git ~/.vim/bundle/ctrlp.vim
-
-
 
 
 
