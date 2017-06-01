@@ -1,5 +1,14 @@
 # customTerminalInstaller
 
+This script is my own version of Hashrocket's Dotmatrix repo.  This allows to install a custome terminal environment with
+Powerline for Vim, Tmux.  Oh-my-zsh with the Agnosterzak theme and much more.
+
+
+!(/tmuxFinal.png?raw=true)
+
+
+
+
 
 
 ```
