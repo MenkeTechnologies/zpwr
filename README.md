@@ -17,6 +17,6 @@ Includes my iTerm colors profile.
 git clone https://github.com/MenkeTechnologies/customTerminalInstaller.git
 
 
-cd customTerminalInstaller && bash ./install.sh to begin install
+cd customTerminalInstaller && bash ./install.sh
 ```
 
