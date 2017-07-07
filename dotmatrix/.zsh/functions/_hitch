@@ -1,0 +1,32 @@
+#compdef hitch
+
+__hitch_authors() {
+  local -a _authors
+  if [ -f $HOME/.hitch_pairs ]; then
+    _authors=(${${(f)"$(cat $HOME/.hitch_pairs | awk '/:/ { print }')"}/:[ $'\t']##/:})
+  fi
+  _describe -t hitch-authors 'hitch authors' _authors "$@"
+}
+
+_hitch() {
+  local ret=1
+  local context state line
+  local curcontext="$curcontext"
+  typeset -A opt_args
+
+  _arguments -C \
+    '(- 1 *)'{-v,--version}'[Display version information]' \
+    '(- 1 *)'{-h,--help}'[Show help message]' \
+    '(- 1 *)'{-u,--unhitch}'[Clear pair information]' \
+    '(- 1 *)'{-s,--setup}'[Print out shell goodies]' \
+    '(-e --expire)'{-e,--expire}'[Expire pair information in N hours]:number' \
+    '*:: :->hitch_authors' && ret=0
+
+  if [[ ${state} == "hitch_authors" ]]; then
+    _call_function ret __hitch_authors
+  fi
+
+  return ret
+}
+
+_hitch

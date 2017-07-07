@@ -28,7 +28,7 @@ update (){
 }
 
 installPathogenVimPlugin(){
-git clone "$1" $HOME/.vim/bundle
+    git clone "$1" $HOME/.vim/bundle
 }
 
 #Dependencies
@@ -50,7 +50,7 @@ git clone "$1" $HOME/.vim/bundle
 # 15) powerline
 # 16) powerline-mem-segment
 
-declare -a dependencies_ary = (vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet)
+dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag)
 
 
 if [[ "$os" == "Darwin" ]]; then
@@ -108,32 +108,9 @@ mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
 
 printf "Installing Vundle\n"
 #install vundle
-installPathogenVimPlugin https://github.com/VundleVim/Vundle.vim.git
-installPathogenVimPlugin https://github.com/mileszs/ack.vim.git
-camelcasemotion https://github.com/bkad/CamelCaseMotion.git
-clam.vim https://github.com/sjl/clam.vim.git
-ctrlp.vim https://github.com/kien/ctrlp.vim.git
-delimitmate https://github.com/Raimondi/delimitMate
-html5.vim 
-neobundle.vim
-nerdcommenter
-nerdtree
-rainbow
-supertab
-syntastic
-tagexplorer.vim
-taglist_46
-tlib_vim
-ttags_vim
-ultisnips
-undotree
-unite-tag
-vim-asterisk
-vim-auto-save
-vim-autocorrect
-vim-autotag
-vim-bookmarks
-vim-devicons
+
+vimPlugins=(VundleVim/Vundle.vim.git https://github.com/mileszs/ack.vim.git https://github.com/bkad/CamelCaseMotion.git https://github.com/sjl/clam.vim.git https://github.com/kien/ctrlp.vim.git https://github.com/Raimondi/delimitMate https://github.com/othree/html5.vim.git https://github.com/Shougo/neobundle.vim.git https://github.com/scrooloose/nerdcommenter.git https://github.com/scrooloose/nerdtree https://github.com/luochen1990/rainbow https://github.com/ervandew/supertab https://github.com/vim-syntastic/syntastic https://github.com/tomtom/tlib_vim https://github.com/vim-scripts/ttags https://github.com/SirVer/ultisnips https://github.com/mbbill/undotree https://github.com/tsukkee/unite-tag https://github.com/haya14busa/vim-asterisk https://github.com/vim-scripts/vim-auto-save https://github.com/panozzaj/vim-autocorrect https://github.com/craigemery/vim-autotag https://github.com/MattesGroeger/vim-bookmarks https://github.com/ryanoasis/vim-devicons https://github.com/tpope/vim-dispatch )
+
 vim-dispatch
 vim-easymotion
 vim-indent-guides
@@ -252,9 +229,9 @@ cp "./.colortailconf" "$HOME"
 
 #printf "Installing IFTOP-color"
 #if [[ ! -d "$HOME/ForkedRepos" ]]; then
-    #mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
-    #git clone https://github.com/MenkeTechnologies/iftopcolor
-    #sudo ./configure && make
+#mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
+#git clone https://github.com/MenkeTechnologies/iftopcolor
+#sudo ./configure && make
 #fi
 
 printf "Installing PyDf"
