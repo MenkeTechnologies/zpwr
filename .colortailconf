@@ -1,0 +1,190 @@
+
+COLOR brightred
+{
+^.*(ERROR.*)$
+}
+
+COLOR brightblue
+{
+# matches the output from the "program"
+^... .. ..:..:.. [^ ]+ [^ ]+ (.*)
+}
+COLOR brightblue
+{
+# matches the output from the "program"
+^... ... .. ..:..:...... [^ ]+ [^ ]+ (.*)
+}
+
+COLOR brightblue
+{
+# matches the output from the "program"
+^....-..-.. ..:..:......... ... [^ ]+ [^ ]+: 0x[0]+ - (.*)
+}
+COLOR brightblue
+{
+# matches the output from the "program"
+^... .. ..:..:..   [ ]*(.*)
+}
+
+#matches u> 
+COLOR brightblue
+{
+# matches the output from the "program"
+^u>.* (.*) at.*$
+}
+
+COLOR brightblue
+{
+#match output from /dev/:
+^/.*:[ ]+(.* at).*$
+}
+
+COLOR brightblue
+{
+#match output from /dev/: and no at
+^/.*:[ ]+(.*\.).*$
+}
+#match mount_hfs[16222] output
+COLOR brightblue
+{
+# matches the "program" that wrote to syslog
+^.*\[.*\] (.*)$
+}
+
+COLOR magenta
+{
+# matches the date
+^(... ..)[^;]+$
+}
+COLOR magenta
+{
+# matches the date
+^(... ... ..)[^;]+$
+}
+COLOR magenta
+{
+# matches the date
+^(....-..-..).*$
+}
+COLOR magenta
+{
+# matches the date
+^.*at (... ... ..) .*$
+}
+
+COLOR brightgreen
+{
+# matches the time
+^... .. (..:..:..).*$
+}
+COLOR brightgreen
+{
+# matches the time
+^... ... .. (..:..:......).*$
+}
+COLOR brightgreen
+{
+# matches the time
+^....-..-.. (..:..:......... ... . ).*$
+}
+COLOR brightgreen
+{
+# matches the time
+^.*at ... ... .. (.*)$
+}
+COLOR blue
+{
+# matches the hostname
+^... .. ..:..:.. ([^ ]+).*$
+}
+
+COLOR blue
+{
+# matches the hostname
+^... ... .. ..:..:...... ([^ ]+).*$
+}
+COLOR yellow
+{
+# matches the "program" that wrote to syslog
+^... .. ..:..:.. [^ ]+ ([^ ]+)
+}
+COLOR yellow
+{
+# matches the "program" that wrote to syslog
+^... ... .. ..:..:...... [^ ]+ ([^ ]+)
+}
+
+COLOR yellow
+{
+# matches the "program" that wrote to syslog
+^....-..-.. ..:..:......... ... [^ ]+ ([^ ]+: 0x[0]+ -)
+}
+
+#match /dev/rdisk:
+COLOR yellow
+{
+# matches the "program" that wrote to syslog
+^(/.*: ).*$
+}
+#match u> /.*/:
+COLOR yellow
+{
+# matches the "program" that wrote to syslog
+^(u>.* ).*$
+}
+
+#match mount_hfs[16222]
+COLOR yellow
+{
+# matches the "program" that wrote to syslog
+^(.*\[.*\]) .*$
+}
+
+COLOR brightyellow
+{
+# matches all ip adresses
+^.*([0-9]{3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*$
+^.*([0-9]{2}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*$
+^.*([0-9]{1}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*$
+# matches two ip adresses in one line
+^.*([0-9]{3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*([0-9]{3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*$
+^.*([0-9]{2}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*([0-9]{2}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*$
+^.*([0-9]{1}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*([0-9]{1}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}).*$
+}
+
+COLOR brightred
+{
+# matches the word root
+^.*(root).*$
+# matches DENY
+^.*(ppp-in DENY ppp0).*$
+^.*(eth-in DENY eth0).*$
+}
+
+
+COLOR blue
+{
+^... ... ..:..:...... <kernel>.*$
+}
+
+COLOR red
+{
+^Process.*$
+}
+
+COLOR brightgreen
+{
+^.*CLEAN.*$
+}
+#matches json output = ;
+COLOR brightblue
+{
+# matches the "program" that wrote to syslog
+^(.* = .*;).*$
+}
+#json closing }
+COLOR brightblue
+{
+# matches the "program" that wrote to syslog
+^(.*}).*$
+}

@@ -46,7 +46,7 @@ update (){
 # 15) powerline
 # 16) powerline-mem-segment
 
-declare -a dependencies_ary = (vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev)
+declare -a dependencies_ary = (vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop)
 
 
 if [[ "$os" == "Darwin" ]]; then
@@ -111,7 +111,6 @@ printf "Installing Python Glances"
 sudo pip install glances
 
 echo git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-
 
 printf "Installing Nerdtree\n"
 #install nerdtree
@@ -203,6 +202,19 @@ fi
 echo "cat tmux/four-panes >> $HOME/.tmux/four-panes"
 echo "cat tmux/control-window >> $HOME/.tmux/control-window"
 
+printf "Installing Colotail Config"
+cp "./.colortailconf" "$HOME/.colortailconf"
+
+
+#printf "Installing IFTOP-color"
+#if [[ ! -d "$HOME/ForkedRepos" ]]; then
+    #mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
+    #git clone https://github.com/MenkeTechnologies/iftopcolor
+    #sudo ./configure && make
+#fi
+
+printf "Installing PyDf"
+sudo pip install pydf
 
 printf "Changing default shell to Zsh\n"
 echo ch -s "$(which zsh)"
