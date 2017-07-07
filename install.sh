@@ -50,7 +50,7 @@ installPathogenVimPlugin(){
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag)
+dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh)
 
 
 if [[ "$os" == "Darwin" ]]; then
@@ -175,13 +175,14 @@ echo "set rtp+=$powerline_dir/powerline/bindings/vim" >> .vimrc
 
 printf "Installing oh-my-zsh...\n"
 #oh-my-zsh
-echo sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
 echo cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
 echo "cat .zshrc >> $HOME/.zshrc"
 
 #add aliases and functions
-echo cat ShellAliasesFunctions >> $HOME/.zshrc
+printf "Adding common shell aliases"
+echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
 
 ################################################################################
