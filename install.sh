@@ -27,6 +27,10 @@ update (){
 
 }
 
+installPathogenVimPlugin(){
+git clone "$1" $HOME/.vim/bundle
+}
+
 #Dependencies
 
 # 1) vim 8.0
@@ -104,6 +108,53 @@ mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
 
 printf "Installing Vundle\n"
 #install vundle
+installPathogenVimPlugin https://github.com/VundleVim/Vundle.vim.git
+installPathogenVimPlugin https://github.com/mileszs/ack.vim.git
+camelcasemotion https://github.com/bkad/CamelCaseMotion.git
+clam.vim https://github.com/sjl/clam.vim.git
+ctrlp.vim https://github.com/kien/ctrlp.vim.git
+delimitmate https://github.com/Raimondi/delimitMate
+html5.vim 
+neobundle.vim
+nerdcommenter
+nerdtree
+rainbow
+supertab
+syntastic
+tagexplorer.vim
+taglist_46
+tlib_vim
+ttags_vim
+ultisnips
+undotree
+unite-tag
+vim-asterisk
+vim-auto-save
+vim-autocorrect
+vim-autotag
+vim-bookmarks
+vim-devicons
+vim-dispatch
+vim-easymotion
+vim-indent-guides
+vim-lotr
+vim-markology
+vim-minimap
+vim-misc
+vim-multiple-cursors
+vim-nerdtree-syntax-highlight
+vim-obsession
+vim-plugin-random-colorscheme-picker
+vim-repeat
+vim-session
+vim-sexp
+vim-sexp-mappings-for-regular-people
+vim-slime
+vim-snippets
+vim-startify
+vim-surround
+vimux
+wildfire.vim
 
 printf "Installing psutil for Python Glances"
 sudo pip install psutil 
