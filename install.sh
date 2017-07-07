@@ -196,7 +196,7 @@ echo "cat tmux/four-panes >> $HOME/.tmux/four-panes"
 echo "cat tmux/control-window >> $HOME/.tmux/control-window"
 
 printf "Installing Colotail Config"
-cp "./.colortailconf" "$HOME/.colortailconf"
+cp "./.colortailconf" "$HOME"
 
 
 #printf "Installing IFTOP-color"
