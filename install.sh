@@ -46,7 +46,7 @@ update (){
 # 15) powerline
 # 16) powerline-mem-segment
 
-declare -a dependencies_ary = (vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop)
+declare -a dependencies_ary = (vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet)
 
 
 if [[ "$os" == "Darwin" ]]; then
