@@ -13,82 +13,82 @@ printf "\e[1m"
 
 update (){
 
-	if [[ -z "$(which $1)" ]]; then
-		if [[ $2 == mac ]]; then
-			echo brew install "$1"
-		else
-			echo sudo apt-get install -y "$1"
-		fi
-	else
-		printf "Already have $1\n"
-	fi
+    if [[ -z "$(which $1)" ]]; then
+        if [[ $2 == mac ]]; then
+            echo brew install "$1"
+        else
+            echo sudo apt-get install -y "$1"
+        fi
+    else
+        printf "Already have $1\n"
+    fi
 
 
 
 }
 
-	#Dependencies
+#Dependencies
 
-	# 1) vim 8.0
-	# 2) tmux 2.1
-	# 3) lolcat
-	# 4) cmatrix
-	# 5) htop
-	# 6) cmake
-	# 7) youcompleteme
-	# 8) ultisnips
-	# 9) supertab
-	# 10) oh-my-zsh
-	# 11) agnosterzak
-	# 12) pathogen
-	# 13) nerdtree
-	# 14) ctrlp
-	# 15) powerline
-	# 16) powerline-mem-segment
+# 1) vim 8.0
+# 2) tmux 2.1
+# 3) lolcat
+# 4) cmatrix
+# 5) htop
+# 6) cmake
+# 7) youcompleteme
+# 8) ultisnips
+# 9) supertab
+# 10) oh-my-zsh
+# 11) agnosterzak
+# 12) pathogen
+# 13) nerdtree
+# 14) ctrlp
+# 15) powerline
+# 16) powerline-mem-segment
 
-declare -a dependencies_ary = (vim tmux git wget lolcat cmatrix htop cmake)
+declare -a dependencies_ary = (vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev)
 
 
 if [[ "$os" == "Darwin" ]]; then
-################################################################################
-## Mac
-################################################################################
+    ################################################################################
+    ## Mac
+    ################################################################################
 
-	printf "Checking Dependencies for Mac...\n"
+    printf "Checking Dependencies for Mac...\n"
 
-	if [[ -z "$(which brew)" ]]; then
-		#install homebrew
-		echo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-	fi
-
-
-	echo brew ls python > /dev/null 2>&1
-	if [[ $? == 1 ]]; then
-		echo brew install python
-		echo brew install pip
-	fi
+    if [[ -z "$(which brew)" ]]; then
+        #install homebrew
+        echo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
 
 
-	for prog in ${dependencies_ary[@]}; do
-		update $prog mac
-	done
+    echo brew ls python > /dev/null 2>&1
+    if [[ $? == 1 ]]; then
+        echo brew install python
+        echo brew install pip
+    fi
+
+
+    for prog in ${dependencies_ary[@]}; do
+        update $prog mac
+    done
 
 
 else
 
-################################################################################
-## Linux
-################################################################################
+    ################################################################################
+    ## Linux
+    ################################################################################
 
-	printf "Checking Dependencies for Linux...\n"
+    printf "Checking Dependencies for Linux...\n"
 
-	echo sudo apt-get install build-essential
+    echo sudo apt-get install build-essential
 
-	echo sudo apt-get install python-dev python3-dev
+    echo sudo apt-get install python-dev python3-dev
 
-	for prog in ${dependencies_ary[@]}; do
-		update $prog linux
-	done
+    for prog in ${dependencies_ary[@]}; do
+        update $prog linux
+    done
 
 fi
 
@@ -99,11 +99,16 @@ fi
 printf "Installing Pathogen\n"
 #install pathogen
 echo mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
-echo curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+    echo curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 
 printf "Installing Vundle\n"
 #install vundle
+
+printf "Installing psutil for Python Glances"
+sudo pip install psutil 
+printf "Installing Python Glances"
+sudo pip install glances
 
 echo git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
 
@@ -172,14 +177,14 @@ echo pip install powerline-mem-segment
 
 #custom settings for tmux powerline
 if [[ ! -d $tmuxPowerlineDir ]]; then
-	echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
+    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
 fi
 
 
 printf "Installing Tmux Plugin Manager\n"
 if [[ ! -d ~/.tmux/plugins/tpm  ]]; then
-	echo mkdir -p ~/.tmux/plugins/tpm
-	echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+    echo mkdir -p ~/.tmux/plugins/tpm
+    echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
 printf "Adding Powerline to .tmux.conf\n"
@@ -193,7 +198,7 @@ echo "cat tmux/.tmux.conf >> $HOME/.tmux.conf"
 
 printf "Installing Custom Tmux Commands\n"
 if [[ ! -d $HOME/.tmux ]]; then
-	mkdir -p $HOME/.tmux
+    mkdir -p $HOME/.tmux
 fi
 echo "cat tmux/four-panes >> $HOME/.tmux/four-panes"
 echo "cat tmux/control-window >> $HOME/.tmux/control-window"
@@ -201,6 +206,5 @@ echo "cat tmux/control-window >> $HOME/.tmux/control-window"
 
 printf "Changing default shell to Zsh\n"
 echo ch -s "$(which zsh)"
-
 
 printf "\e[0m"
