@@ -98,8 +98,8 @@ fi
 
 printf "Installing Pathogen\n"
 #install pathogen
-echo mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
-    echo curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
+    curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 
 printf "Installing Vundle\n"
@@ -110,15 +110,8 @@ sudo pip install psutil
 printf "Installing Python Glances"
 sudo pip install glances
 
-echo git clone https://github.com/VundleVim/Vundle.vim.git $HOME/.vim/bundle/Vundle.vim
-
-printf "Installing Nerdtree\n"
-#install nerdtree
-echo git clone https://github.com/scrooloose/nerdtree.git $HOME/.vim/bundle/nerdtree
-
-printf "Installing CtrlP\n"
-#install ctrl p
-echo git clone https://github.com/kien/ctrlp.vim.git $HOME/.vim/bundle/ctrlp.vim
+printf "Installing all the vim plugins"
+cp -R ./.vim $HOME/.vim
 
 printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
