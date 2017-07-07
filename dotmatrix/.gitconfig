@@ -1,0 +1,53 @@
+[alias]
+	aliases=!git config -l | grep '^alias' | cut -c 7- | sort
+	aa = add -A .
+	b  = branch
+	st = status
+	cheddar = commit --amend -CHEAD
+	ci = commit
+	co = checkout
+	cp = cherry-pick
+	put = push origin HEAD
+	find = !sh -c 'git ls-files | grep --color=always -i "$@" | less -FRSX' -
+	fixup = commit --fixup
+	squash = commit --squash
+	doff = reset HEAD^
+	ri = rebase --interactive
+	br = branch
+	pruneremote = remote prune origin
+	tree = log --graph --oneline --decorate --color --all
+	tr = log --graph --oneline --decorate --color
+	add-untracked = !"git status --porcelain | awk '/\\?\\?/{ print $2 }' | xargs git add"
+	reset-authors = commit --amend --reset-author -CHEAD
+	rmbranch = "!f(){ git branch -d ${1} && git push origin --delete ${1}; };f"
+        snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+[branch]
+	autosetuprebase = always
+[color]
+	ui = auto
+[core]
+	excludesfile = ~/.cvsignore
+	editor = vim
+	whitespace = warn
+[help]
+	autocorrect = 10
+[interactive]
+	singlekey = true
+[merge]
+	summary = true
+[merge "bundlelock"]
+	name = lock Gemfile
+	driver = bundle install
+[merge "bundle"]
+	name = bundle
+	driver = bundle
+[push]
+	default = tracking
+[rebase]
+	autosquash = true
+[diff]
+	algorithm = patience
+[include]
+	path = ~/.gitconfig.local
+[fetch]
+	prune = true
