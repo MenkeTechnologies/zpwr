@@ -1,0 +1,14 @@
+snippet shebang "shebang line"
+#!/usr/bin/env ${1:bash}
+endsnippet
+
+snippet pr "printf default"
+printf "%$1\n" $2
+endsnippet
+
+
+snippet ff "for loop shell"
+for (( i = 0; i < $1; i++ )); do
+	$2
+done
+endsnippet
