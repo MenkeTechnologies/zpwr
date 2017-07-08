@@ -109,7 +109,6 @@ cd vim-master
             --enable-perlinterp=yes \
             --enable-luainterp=yes \
             --enable-gui=gtk2 --enable-cscope --prefix=/usr
-make -j 4
 sudo make install
 
 printf "Installing Pathogen\n"
