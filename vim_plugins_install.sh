@@ -11,7 +11,7 @@ installVimPlugin(){
     git clone "https://github.com/$1.git" 
 }
 
-printf "Installing Vim Plugins"
+printf "Installing Vim Plugins\n"
 if [[ ! -d "$HOME/.vim/bundle" ]]; then
     mkdir -p "$HOME/.vim/bundle"
 fi
@@ -23,5 +23,4 @@ while read repo; do
     installVimPlugin "$repo"
 done < "$INSTALLER_DIR/.vimbundle"
 }
-
 
