@@ -166,7 +166,7 @@ printf "Installing oh-my-zsh...\n"
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
-echo cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
+cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
 
 #add aliases and functions
 printf "Adding common shell aliases"
