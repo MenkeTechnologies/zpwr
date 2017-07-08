@@ -146,7 +146,7 @@ echo ./install.py --clang-completer
 ################################################################################
 printf "Installing Powerline...\n"
 
-echo pip install --user powerline-status
+sudo pip install powerline-status
 
 printf "Adding Powerline to .vimrc \n"
 
