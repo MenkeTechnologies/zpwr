@@ -21,6 +21,6 @@ INSTALLER_DIR="$(pwd)"
 cd "$HOME/.vim/bundle" && {
 while read repo; do
     installVimPlugin "$repo"
-done < "$INSTALLER_DIR/.vimbundle"
+done < "$INSTALLER_DIR/.tmuxplugins"
 }
 
