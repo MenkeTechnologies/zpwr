@@ -5,16 +5,16 @@
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
 export TERM="xterm-256color"
-export SCRIPTS="/Users/jacobmenke/Documents/shellScripts"
-export PYEXECUTABLES="/Users/jacobmenke/Documents/pythonScripts"
-export PYSCRIPTS="/Users/jacobmenke/PycharmProjects"
-export D="/Users/jacobmenke/Desktop"
+export SCRIPTS="$HOME/Documents/shellScripts"
+export PYEXECUTABLES="$HOME/Documents/pythonScripts"
+export PYSCRIPTS="$HOME/PycharmProjects"
+export D="$HOME/Desktop"
 export WCC="/Volumes/JAKESD/wcc/cps"
 # Setting PATH for Python 3.5
 # The orginal version is saved in .profile.pysave
 unset PATH
 export PATH="$PATH:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
-export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:/Users/jacobmenke/.local/bin:/Users/jacobmenke/perl5/bin:Library/Frameworks/Python.framework/Versions/3.5/bin:/Users/jacobmenke/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
+export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:Library/Frameworks/Python.framework/Versions/3.5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
 export GITHUB_ACCOUNT='MenkeTechnologies'
 export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
 
@@ -31,7 +31,6 @@ export HOMEBREW_DBHOME='/usr/local/var'
 export HOMEBREW_DB_CONF='/usr/local/etc'
 export YARN_HOME="$HOME/.config/yarn"
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
-eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
 export MANPATH=$HOME/perl5/man:$MANPATH
 export HISTSIZE=50000
 export EDITOR='vim'
@@ -39,7 +38,7 @@ export HISTTIMEFORMAT=' %F %T _ '
 export BLUE="\e[37;44m"
 export RED="\e[31m"
 export RESET="\e[0m"
-export TUTORIAL_FILES="/Users/jacobmenke/Documents/tutorialsRepo"
+export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
 export LOGFILE="$HOME/updaterlog.txt"
 #}}}
 
@@ -100,12 +99,12 @@ alias sf="bash $SCRIPTS/directoryContentsSize.sh"
 alias sc="cd $SCRIPTS; clearList"
 alias blue="source $SCRIPTS/blueText.sh"
 alias n="open /Volumes/homes/JAKENAS/softwareTutorials; exit"
-alias dl="cd /Users/jacobmenke/Downloads; clearList; open ."
+alias dl="cd $HOME/Downloads; clearList; open ."
 alias c="cd /Volumes/JAKESD/wcc/cps; clearList"
 alias o="open ."
 alias jobs="jobs -l"
 #alias who="who -uHTba | sed '$ d'"
-alias ts="cd /Users/jacobmenke/.Trash; clearList"
+alias ts="cd $HOME/.Trash; clearList"
 alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
 alias 8="bash updater.sh"
 alias sd="clear;ssh d "
@@ -129,9 +128,9 @@ alias glt="ssh d -t 'sh /var/services/homes/JAKENAS/scripts/downloadTitlesLocal.
 alias grt="ssh d -tt 'sh /var/services/homes/JAKENAS/scripts/downloadTitlesRemote.sh'"
 alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $SCRIPTS/sshTunnelVnc.sh" 
 alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $SCRIPTS/sshTunnelVnc2.sh"
-alias rr="/Users/jacobmenke/Documents/shellScripts/rsyncr.sh"
-alias mntpi="sshfs -o IdentityFile=/Users/jacobmenke/.ssh/id_rsa r:/var/www/html /Users/jacobmenke/Desktop/tuts/piweb/"
-alias mntds="sshfs -o IdentityFile=/Users/jacobmenke/.ssh/id_rsa d:/volume1/homes/JAKENAS/softwareTutorials /Users/jacobmenke/Desktop/tuts/ds/"
+alias rr="$HOME/Documents/shellScripts/rsyncr.sh"
+alias mntpi="sshfs -o IdentityFile=$HOME/.ssh/id_rsa r:/var/www/html $HOME/Desktop/tuts/piweb/"
+alias mntds="sshfs -o IdentityFile=$HOME/.ssh/id_rsa d:/volume1/homes/JAKENAS/softwareTutorials $HOME/Desktop/tuts/ds/"
 
 bold=$(tput bold || tput md)
 red=$(tput setaf 1)
@@ -140,15 +139,13 @@ alias il="idea list"
 #**********************************************************************
 #                           MARK:RUST                           
 #**********************************************************************
-export PATH="$PATH:/Users/jacobmenke/.cargo/bin:$PATH"
+export PATH="$PATH:$HOME/.cargo/bin:$PATH"
 #**********************************************************************
 #                           MARK:RVM                           
 #**********************************************************************
 export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 #**************************************************************
 #}}}
-
-export PATH="$(yarn global bin):$PATH"
 
 #{{{                    MARK:Shell functions
 #**************************************************************
@@ -158,7 +155,7 @@ scnew(){
         return 1
     fi
 
-    bash '/Users/jacobmenke/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
+    bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
 nn(){
     if [[ -z "$1" ]];then
@@ -175,7 +172,7 @@ nn(){
 suc(){
     subl $SCRIPTS
     f $SCRIPTS
-    python3 /Users/jacobmenke/PycharmProjects/textEditorTwoColumns.py
+    python3 $HOME/PycharmProjects/textEditorTwoColumns.py
 }
 db(){
     #open -a Firefox $IP:8080/db
@@ -183,7 +180,7 @@ db(){
 }
 clearList () {
     clear
-    ls -iFlhAO
+    ls -iFlhA
 }
 animate(){
     bash $SCRIPTS/animation.sh
@@ -334,5 +331,4 @@ humanReadable(){
     }
     #}}}***********************************************************
 
-    source "$HOME/.tokens.sh"
 

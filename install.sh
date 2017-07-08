@@ -22,13 +22,14 @@ update (){
     else
         printf "Already have $1\n"
     fi
-
-
-
 }
 
 installPathogenVimPlugin(){
-    git clone "$1" $HOME/.vim/bundle
+    git clone "https://github/$1.git" $HOME/.vim/bundle
+}
+
+installOhMyZshPlugin(){
+    git clone "https://github/$1.git" $HOME/.oh-my-zsh/plugins"
 }
 
 #Dependencies
@@ -178,10 +179,10 @@ printf "Installing oh-my-zsh...\n"
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
 echo cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
-echo "cat .zshrc >> $HOME/.zshrc"
 
 #add aliases and functions
 printf "Adding common shell aliases"
+cp ".shell_aliases_functions.sh" "$HOME"
 echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
 
@@ -237,6 +238,8 @@ cp "./.colortailconf" "$HOME"
 
 printf "Installing PyDf"
 sudo pip install pydf
+
+
 
 printf "Changing default shell to Zsh\n"
 echo ch -s "$(which zsh)"
