@@ -31,6 +31,7 @@ export HOMEBREW_DBHOME='/usr/local/var'
 export HOMEBREW_DB_CONF='/usr/local/etc'
 export YARN_HOME="$HOME/.config/yarn"
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
+eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
 export MANPATH=$HOME/perl5/man:$MANPATH
 export HISTSIZE=50000
 export EDITOR='vim'
@@ -120,7 +121,6 @@ alias vi=vim
 alias v=vim
 alias cl=clear
 alias mkdir='mkdir -pv'
-alias git=hub
 #**********************************************************************
 #                           MARK:REMOTE SHELLS SCRIPTS
 #**********************************************************************
@@ -146,6 +146,8 @@ export PATH="$PATH:$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 #**************************************************************
 #}}}
+
+export PATH="$(yarn global bin):$PATH"
 
 #{{{                    MARK:Shell functions
 #**************************************************************
@@ -180,7 +182,7 @@ db(){
 }
 clearList () {
     clear
-    ls -iFlhA
+    ls -iFlhAO
 }
 animate(){
     bash $SCRIPTS/animation.sh
@@ -330,3 +332,6 @@ humanReadable(){
     sed '1!G;h;$!d' "$@"
     }
     #}}}***********************************************************
+
+    source "$HOME/.tokens.sh"
+
