@@ -18,4 +18,3 @@ while read repo; do
 done < .vimbundle
 }
 
-
