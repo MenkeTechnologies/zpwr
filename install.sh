@@ -207,8 +207,6 @@ cp "./.colortailconf" "$HOME"
 printf "Installing PyDf"
 sudo pip install pydf
 
-
-
 printf "Changing default shell to Zsh\n"
 echo ch -s "$(which zsh)"
 
