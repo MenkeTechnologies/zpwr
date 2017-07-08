@@ -24,10 +24,6 @@ update (){
     fi
 }
 
-installPathogenVimPlugin(){
-    git clone "https://github/$1.git" $HOME/.vim/bundle
-}
-
 #Dependencies
 
 # 1) vim 8.0
@@ -102,33 +98,7 @@ printf "Installing Pathogen\n"
 mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
     curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-
-printf "Installing Vundle\n"
-#install vundle
-
-vimPlugins=(VundleVim/Vundle.vim.git https://github.com/mileszs/ack.vim.git https://github.com/bkad/CamelCaseMotion.git https://github.com/sjl/clam.vim.git https://github.com/kien/ctrlp.vim.git https://github.com/Raimondi/delimitMate https://github.com/othree/html5.vim.git https://github.com/Shougo/neobundle.vim.git https://github.com/scrooloose/nerdcommenter.git https://github.com/scrooloose/nerdtree https://github.com/luochen1990/rainbow https://github.com/ervandew/supertab https://github.com/vim-syntastic/syntastic https://github.com/tomtom/tlib_vim https://github.com/vim-scripts/ttags https://github.com/SirVer/ultisnips https://github.com/mbbill/undotree https://github.com/tsukkee/unite-tag https://github.com/haya14busa/vim-asterisk https://github.com/vim-scripts/vim-auto-save https://github.com/panozzaj/vim-autocorrect https://github.com/craigemery/vim-autotag https://github.com/MattesGroeger/vim-bookmarks https://github.com/ryanoasis/vim-devicons https://github.com/tpope/vim-dispatch )
-
-vim-dispatch
-vim-easymotion
-vim-indent-guides
-vim-lotr
-vim-markology
-vim-minimap
-vim-misc
-vim-multiple-cursors
-vim-nerdtree-syntax-highlight
-vim-obsession
-vim-plugin-random-colorscheme-picker
-vim-repeat
-vim-session
-vim-sexp
-vim-sexp-mappings-for-regular-people
-vim-slime
-vim-snippets
-vim-startify
-vim-surround
-vimux
-wildfire.vim
+bash "./vim_plugins_install.sh"
 
 printf "Installing psutil for Python Glances"
 sudo pip install psutil 
