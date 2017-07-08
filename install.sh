@@ -110,7 +110,7 @@ sudo pip install glances
 
 printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
-echo "cat .vimrc >> $HOME/.vimrc"
+cp "$INSTALLER_DIR/.vimrc $HOME"
 echo vim +PluginInstall +qall
 
 ################################################################################
