@@ -8,76 +8,10 @@ export ZSH=$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="rkj-repos"
-ZSH_THEME="powerlevel9k/powerlevel9k"
-. ~/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme
 
-#{{{                    MARK:PowerLevel9k
-#**************************************************************
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir history   ssh rbenv time vcs  root_indicator status)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode command_execution_time dir_writable  background_jobs custom_pid swap)
-
-POWERLEVEL9K_MODE='nerdfont-complete'
-ZLE_RPROMPT_INDENT=0
-
-POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
-
-POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=true
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1
-POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=3
-POWERLEVEL9K_TIME_BACKGROUND='green'
-POWERLEVEL9K_HISTORY_BACKGROUND='235'
-POWERLEVEL9K_HISTORY_FOREGROUND='green'
-POWERLEVEL9K_CONTEXT_FOREGROUND='white'
-POWERLEVEL9K_CONTEXT_BACKGROUND='235'
-
-
-POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"
-
-POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\u256D \n"
-POWERLEVEL9K_MULTILINE_SECOND_PROMPT_PREFIX="\u2570>%K{blue}%F{white} \Uf136 `tty` \uf168 %f%k%F{blue}%f "
-
-POWERLEVEL9K_VCS_CLEAN_FOREGROUND='white'
-POWERLEVEL9K_VCS_CLEAN_BACKGROUND='cyan'
-POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='red'
-POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='green'
-POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'
-POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='cyan'
-
-POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='black'
-POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND='green'
-
-POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND='black'
-POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND='blue'
-
-#POWERLEVEL9K_DIR_BACKGROUND='white'
-POWERLEVEL9K_DIR_HOME_FOREGROUND="red"
-POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"
-POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
-
-POWERLEVEL9K_CUSTOM_PID='echo -e "\uf258  $$ \uf258  `date +%D` \uf168"'
-POWERLEVEL9K_CUSTOM_PID_BACKGROUND="green"
-POWERLEVEL9K_CUSTOM_PID_FOREGROUND="black"
-
-POWERLEVEL9K_CUSTOM_NEWLINE="print '\n'"
-POWERLEVEL9K_CUSTOM_NEWLINE_BACKGROUND="green"
-POWERLEVEL9K_CUSTOM_NEWLINE_FOREGROUND="white"
-
-POWERLEVEL9K_CUSTOM_TTY="tty"
-POWERLEVEL9K_CUSTOM_TTY_BACKGROUND="blue"
-POWERLEVEL9K_CUSTOM_TTY_FOREGROUND="white"
-
-milliamps(){
-    amps="$(ioreg -rc AppleSmartBattery | grep CurrentCapacity | awk '{printf "%s mAh\n", $3}')"
-    echo -e "$amps \uf168"
-}
-
-POWERLEVEL9K_CUSTOM_BATT="milliamps"
-POWERLEVEL9K_CUSTOM_BATT_BACKGROUND="red"
-POWERLEVEL9K_CUSTOM_BATT_FOREGROUND="black"
-
-
-#}}}***********************************************************
+if [[ "$(uname)" == "Darwin" ]]; then
+source "$HOME/.powerlevel9kconfig.sh"
+fi
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -331,7 +265,7 @@ alias -g L='|less'
 alias -g nul="> /dev/null 2>&1"
 
 #allow for awesome z command
-. ~/z.sh
+source "$HOME/z.sh"
 #
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
