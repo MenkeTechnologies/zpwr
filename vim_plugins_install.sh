@@ -24,3 +24,6 @@ while read repo; do
 done < "$INSTALLER_DIR/.vimbundle"
 }
 
+
+printf "Installing Vim Colorschemes\n" 
+git clone https://github.com/flazz/vim-colorschemes.git ~/.vim
