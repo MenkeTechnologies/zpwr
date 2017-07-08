@@ -31,14 +31,13 @@ printf "\e[1m"
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh)
+dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh libevent-dev libncurses5-dev)
 
 #}}}***********************************************************
 
 #{{{                    MARK:Functions
 #**************************************************************
 
-#}}}***********************************************************
 update (){
 
     if [[ -z "$(which $1)" ]]; then
@@ -51,6 +50,7 @@ update (){
         printf "Already have $1\n"
     fi
 }
+#}}}***********************************************************
 
 if [[ "$os" == "Darwin" ]]; then
     #{{{                    MARK:Mac
