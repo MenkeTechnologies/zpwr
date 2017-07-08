@@ -100,9 +100,11 @@ printf "Installing Pathogen\n"
 mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
     curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-printf "Instpalling Vim Plugins"
+printf "Installing Vim Plugins"
 bash "./vim_plugins_install.sh"
 
+printf "Installing Vim Colors"
+cp "$INSTALLER_DIR/colors" "$HOME/.vim"
 printf "Installing psutil for Python Glances"
 sudo pip install psutil 
 printf "Installing Python Glances"
