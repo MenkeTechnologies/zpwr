@@ -162,7 +162,7 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
-source '$HOME/.oh-my-zsh/lib/key-bindings.zsh'
+source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 
 bindkey -v
 bindkey -M viins '^r' history-incremental-search-backward
@@ -206,7 +206,7 @@ bindkey '^S' _gitfunc
 bindkey '\ed' _tutsUpdate
 
 #Filter stderr through shell scripts
-exec 2> >(redText.sh)
+exec 2> >("$SCRIPTS"/redText.sh)
 
 my-accept-line () {
 if [[ "$BUFFER" == "bash" ]] || [[ "$BUFFER" == "ksh" ]]; then
