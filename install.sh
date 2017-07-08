@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 #Created by jacobmenke at Wed May 31 22:54:32 EDT 2017
 
 #{{{                    MARK:Setup
@@ -95,19 +96,26 @@ else
 
 fi
 
+printf "Installing Vim8\n"
+git clone https://github.com/vim/vim.git vim-master
+cd vim-master
+./configure
+make -j 4
+sudo make install
+
 printf "Installing Pathogen\n"
 #install pathogen
 mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
     curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-printf "Installing Vim Plugins"
+printf "Installing Vim Plugins\n"
 bash "./vim_plugins_install.sh"
 
-printf "Installing Vim Colors"
+printf "Installing Vim Colors\n"
 cp "$INSTALLER_DIR/colors" "$HOME/.vim"
-printf "Installing psutil for Python Glances"
+printf "Installing psutil for Python Glances\n"
 sudo pip install psutil 
-printf "Installing Python Glances"
+printf "Installing Python Glances\n"
 sudo pip install glances
 
 printf "Running Vundle\n"
