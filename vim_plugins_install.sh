@@ -15,9 +15,12 @@ printf "Installing Vim Plugins"
 if [[ ! -d "$HOME/.vim/bundle" ]]; then
     mkdir -p "$HOME/.vim/bundle"
 fi
+
+PWD="$(pwd)"
+
 cd "$HOME/.vim/bundle" && {
 while read repo; do
     installVimPlugin "$repo"
-done < .vimbundle
+done < "$PWD/.vimbundle"
 }
 
