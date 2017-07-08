@@ -9,7 +9,7 @@
 
 
 installOhMyZshPlugin(){
-    git clone "https://github/$1.git" $HOME/.oh-my-zsh/plugins"
+    git clone "https://github/$1.git" "$HOME/.oh-my-zsh/plugins"
 }
 
 printf "Installing Zsh Plugins"
