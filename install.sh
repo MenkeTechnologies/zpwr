@@ -28,10 +28,6 @@ installPathogenVimPlugin(){
     git clone "https://github/$1.git" $HOME/.vim/bundle
 }
 
-installOhMyZshPlugin(){
-    git clone "https://github/$1.git" $HOME/.oh-my-zsh/plugins"
-}
-
 #Dependencies
 
 # 1) vim 8.0

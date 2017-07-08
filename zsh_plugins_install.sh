@@ -8,6 +8,10 @@
 #}}}***********************************************************
 
 
+installOhMyZshPlugin(){
+    git clone "https://github/$1.git" $HOME/.oh-my-zsh/plugins"
+}
+
 printf "Installing Zsh Plugins"
 cd "$HOME/.oh-my-zsh/custom/plugins" && {
 installOhMyZshPlugin "zsh-users/zsh-completions"
