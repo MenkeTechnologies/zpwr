@@ -183,14 +183,17 @@ echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux
 echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
 
+printf "Copying tmux config"
 cp "./.tmux.conf" "$HOME"
 
 printf "Installing Custom Tmux Commands\n"
-cp -R ""
+cp -R "$INSTALLER_DIR/.tmux" "$HOME"
+
+printf "Installing Tmux plugins"
+bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 printf "Installing Colotail Config"
 cp "./.colortailconf" "$HOME"
-
 
 #printf "Installing IFTOP-color"
 #if [[ ! -d "$HOME/ForkedRepos" ]]; then
