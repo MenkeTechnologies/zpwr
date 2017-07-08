@@ -1,28 +1,14 @@
 #!/usr/bin/env bash
 #Created by jacobmenke at Wed May 31 22:54:32 EDT 2017
+
+#{{{                    MARK:Setup
+#**************************************************************
+
 set -x
 
 os=`uname -s`
 
 printf "\e[1m"
-
-################################################################################
-## Dependencies
-################################################################################
-
-
-update (){
-
-    if [[ -z "$(which $1)" ]]; then
-        if [[ $2 == mac ]]; then
-            echo brew install "$1"
-        else
-            echo sudo apt-get install -y "$1"
-        fi
-    else
-        printf "Already have $1\n"
-    fi
-}
 
 #Dependencies
 
@@ -45,12 +31,28 @@ update (){
 
 dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh)
 
+#}}}***********************************************************
+
+#{{{                    MARK:Functions
+#**************************************************************
+
+#}}}***********************************************************
+update (){
+
+    if [[ -z "$(which $1)" ]]; then
+        if [[ $2 == mac ]]; then
+            echo brew install "$1"
+        else
+            echo sudo apt-get install -y "$1"
+        fi
+    else
+        printf "Already have $1\n"
+    fi
+}
 
 if [[ "$os" == "Darwin" ]]; then
-    ################################################################################
-    ## Mac
-    ################################################################################
-
+#{{{                    MARK:Mac
+#**************************************************************
     printf "Checking Dependencies for Mac...\n"
 
     if [[ -z "$(which brew)" ]]; then
@@ -70,13 +72,13 @@ if [[ "$os" == "Darwin" ]]; then
         update $prog mac
     done
 
+#}}}***********************************************************
 
 else
 
-    ################################################################################
-    ## Linux
-    ################################################################################
-
+    #{{{                    MARK:Linux
+    #**************************************************************
+    
     printf "Checking Dependencies for Linux...\n"
 
     echo sudo apt-get install build-essential
@@ -87,26 +89,22 @@ else
         update $prog linux
     done
 
-fi
+    #}}}***********************************************************
 
-################################################################################
-## Vim
-################################################################################
+fi
 
 printf "Installing Pathogen\n"
 #install pathogen
 mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
     curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
+printf "Instpalling Vim Plugins"
 bash "./vim_plugins_install.sh"
 
 printf "Installing psutil for Python Glances"
 sudo pip install psutil 
 printf "Installing Python Glances"
 sudo pip install glances
-
-printf "Installing all the vim plugins"
-cp -R ./.vim $HOME/.vim
 
 printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
