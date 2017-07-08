@@ -181,6 +181,8 @@ printf "Adding common shell aliases"
 cp ".shell_aliases_functions.sh" "$HOME"
 echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
+printf "Instpalling zsh plguins"
+bash "./zsh_plugins_install.sh"
 
 ################################################################################
 ## Tmux
