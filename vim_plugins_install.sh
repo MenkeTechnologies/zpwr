@@ -16,11 +16,11 @@ if [[ ! -d "$HOME/.vim/bundle" ]]; then
     mkdir -p "$HOME/.vim/bundle"
 fi
 
-PWD="$(pwd)"
+INSTALLER_DIR="$(pwd)"
 
 cd "$HOME/.vim/bundle" && {
 while read repo; do
-    installVimPlugin "$repo"
-done < "$PWD/.vimbundle"
+    echo installVimPlugin "$repo"
+done < "$INSTALLER_DIR/.vimbundle"
 }
 
