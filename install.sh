@@ -8,6 +8,8 @@ set -x
 
 os=`uname -s`
 
+INSTALLER_DIR="$(pwd -P)"
+
 printf "\e[1m"
 
 #Dependencies
@@ -51,8 +53,8 @@ update (){
 }
 
 if [[ "$os" == "Darwin" ]]; then
-#{{{                    MARK:Mac
-#**************************************************************
+    #{{{                    MARK:Mac
+    #**************************************************************
     printf "Checking Dependencies for Mac...\n"
 
     if [[ -z "$(which brew)" ]]; then
@@ -72,13 +74,13 @@ if [[ "$os" == "Darwin" ]]; then
         update $prog mac
     done
 
-#}}}***********************************************************
+    #}}}***********************************************************
 
 else
 
     #{{{                    MARK:Linux
     #**************************************************************
-    
+
     printf "Checking Dependencies for Linux...\n"
 
     echo sudo apt-get install build-essential
@@ -181,15 +183,10 @@ echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux
 echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
 
-echo "cat tmux/.tmux.conf >> $HOME/.tmux.conf"
-
+cp "./.tmux.conf" "$HOME"
 
 printf "Installing Custom Tmux Commands\n"
-if [[ ! -d $HOME/.tmux ]]; then
-    mkdir -p $HOME/.tmux
-fi
-echo "cat tmux/four-panes >> $HOME/.tmux/four-panes"
-echo "cat tmux/control-window >> $HOME/.tmux/control-window"
+cp -R ""
 
 printf "Installing Colotail Config"
 cp "./.colortailconf" "$HOME"
