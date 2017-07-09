@@ -91,6 +91,9 @@ else
 
     echo sudo apt-get install python-dev python3-dev
 
+    echo sudo apt-get install reptyr
+
+
     for prog in ${dependencies_ary[@]}; do
         update $prog linux
     done
