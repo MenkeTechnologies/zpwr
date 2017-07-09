@@ -48,7 +48,7 @@ update (){
 
     if [[ -z "$(which $1)" ]]; then
         if [[ $2 == mac ]]; then
-            echo brew install "$1"
+            brew install "$1"
         else
             sudo apt-get install -y "$1"
         fi
@@ -65,13 +65,13 @@ if [[ "$os" == "Darwin" ]]; then
 
     if [[ -z "$(which brew)" ]]; then
         #install homebrew
-        echo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
     echo brew ls python > /dev/null 2>&1
     if [[ $? == 1 ]]; then
-        echo brew install python
-        echo brew install pip
+        brew install python
+        brew install pip
     fi
 
 
@@ -102,15 +102,15 @@ fi
 #git clone https://github.com/vim/vim.git vim-master
 #cd vim-master
 #./configure --with-features=huge \
-            #--enable-multibyte \
-            #--enable-rubyinterp=yes \
-            #--enable-pythoninterp=yes \
-            #--with-python-config-dir=/usr/lib/python2.7/config \
-            #--enable-python3interp=yes \
-            #--with-python3-config-dir=/usr/lib/python3.5/config \
-            #--enable-perlinterp=yes \
-            #--enable-luainterp=yes \
-            #--enable-gui=gtk2 --enable-cscope --prefix=/usr
+    #--enable-multibyte \
+    #--enable-rubyinterp=yes \
+    #--enable-pythoninterp=yes \
+    #--with-python-config-dir=/usr/lib/python2.7/config \
+    #--enable-python3interp=yes \
+    #--with-python3-config-dir=/usr/lib/python3.5/config \
+    #--enable-perlinterp=yes \
+    #--enable-luainterp=yes \
+    #--enable-gui=gtk2 --enable-cscope --prefix=/usr
 #sudo make install
 
 printf "Installing Pathogen\n"
@@ -226,7 +226,10 @@ if [[ ! -f "$HOME/.token.sh" ]]; then
     touch "$HOME/.tokens.sh"
 fi
 
-printf "Changing default shell to Zsh\n"
-ch -s "$(which zsh)"
+
+type chsh >/dev/null 2>&1 && {
+    printf "Changing default shell to Zsh\n"
+    chsh -s "$(which zsh)"
+}
 
 printf "\e[0m"
