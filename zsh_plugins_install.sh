@@ -19,3 +19,5 @@ installOhMyZshPlugin "zsh-users/zsh-autosuggestions"
 installOhMyZshPlugin "zsh-users/zsh-syntax-highlighting"
 }
 
+cp ./z.sh "$HOME"
+
