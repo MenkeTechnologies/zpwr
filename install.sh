@@ -50,7 +50,7 @@ update (){
         if [[ $2 == mac ]]; then
             echo brew install "$1"
         else
-            echo sudo apt-get install -y "$1"
+            sudo apt-get install -y "$1"
         fi
     else
         printf "Already have $1\n"
