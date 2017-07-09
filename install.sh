@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 #Created by jacobmenke at Wed May 31 22:54:32 EDT 2017
 
 #{{{                    MARK:Setup
@@ -7,6 +8,8 @@
 set -x
 
 os=`uname -s`
+
+INSTALLER_DIR="$(pwd -P)"
 
 printf "\e[1m"
 
@@ -29,14 +32,17 @@ printf "\e[1m"
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh)
+dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch \
+    libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh libevent-dev libncurses5-dev libgnome2-dev\
+    libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
+    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap)
 
 #}}}***********************************************************
 
 #{{{                    MARK:Functions
 #**************************************************************
 
-#}}}***********************************************************
 update (){
 
     if [[ -z "$(which $1)" ]]; then
@@ -49,10 +55,11 @@ update (){
         printf "Already have $1\n"
     fi
 }
+#}}}***********************************************************
 
 if [[ "$os" == "Darwin" ]]; then
-#{{{                    MARK:Mac
-#**************************************************************
+    #{{{                    MARK:Mac
+    #**************************************************************
     printf "Checking Dependencies for Mac...\n"
 
     if [[ -z "$(which brew)" ]]; then
@@ -72,13 +79,13 @@ if [[ "$os" == "Darwin" ]]; then
         update $prog mac
     done
 
-#}}}***********************************************************
+    #}}}***********************************************************
 
 else
 
     #{{{                    MARK:Linux
     #**************************************************************
-    
+
     printf "Checking Dependencies for Linux...\n"
 
     echo sudo apt-get install build-essential
@@ -93,22 +100,39 @@ else
 
 fi
 
+printf "Installing Vim8\n"
+git clone https://github.com/vim/vim.git vim-master
+cd vim-master
+./configure --with-features=huge \
+            --enable-multibyte \
+            --enable-rubyinterp=yes \
+            --enable-pythoninterp=yes \
+            --with-python-config-dir=/usr/lib/python2.7/config \
+            --enable-python3interp=yes \
+            --with-python3-config-dir=/usr/lib/python3.5/config \
+            --enable-perlinterp=yes \
+            --enable-luainterp=yes \
+            --enable-gui=gtk2 --enable-cscope --prefix=/usr
+sudo make install
+
 printf "Installing Pathogen\n"
 #install pathogen
 mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
     curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-printf "Instpalling Vim Plugins"
+printf "Installing Vim Plugins\n"
 bash "./vim_plugins_install.sh"
 
-printf "Installing psutil for Python Glances"
+printf "Installing Vim Colors\n"
+cp "$INSTALLER_DIR/colors" "$HOME/.vim"
+printf "Installing psutil for Python Glances\n"
 sudo pip install psutil 
-printf "Installing Python Glances"
+printf "Installing Python Glances\n"
 sudo pip install glances
 
 printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
-echo "cat .vimrc >> $HOME/.vimrc"
+cp "$INSTALLER_DIR/.vimrc $HOME"
 echo vim +PluginInstall +qall
 
 ################################################################################
@@ -126,7 +150,7 @@ echo ./install.py --clang-completer
 ################################################################################
 printf "Installing Powerline...\n"
 
-echo pip install --user powerline-status
+sudo pip install powerline-status
 
 printf "Adding Powerline to .vimrc \n"
 
@@ -142,7 +166,7 @@ printf "Installing oh-my-zsh...\n"
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
-echo cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
+cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
 
 #add aliases and functions
 printf "Adding common shell aliases"
@@ -181,19 +205,17 @@ echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux
 echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
 
-echo "cat tmux/.tmux.conf >> $HOME/.tmux.conf"
-
+printf "Copying tmux config"
+cp "./.tmux.conf" "$HOME"
 
 printf "Installing Custom Tmux Commands\n"
-if [[ ! -d $HOME/.tmux ]]; then
-    mkdir -p $HOME/.tmux
-fi
-echo "cat tmux/four-panes >> $HOME/.tmux/four-panes"
-echo "cat tmux/control-window >> $HOME/.tmux/control-window"
+cp -R "$INSTALLER_DIR/.tmux" "$HOME"
+
+printf "Installing Tmux plugins"
+bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 printf "Installing Colotail Config"
 cp "./.colortailconf" "$HOME"
-
 
 #printf "Installing IFTOP-color"
 #if [[ ! -d "$HOME/ForkedRepos" ]]; then
@@ -205,6 +227,8 @@ cp "./.colortailconf" "$HOME"
 printf "Installing PyDf"
 sudo pip install pydf
 
+printf "Installing MyCLI"
+sudo pip install mycli
 printf "Changing default shell to Zsh\n"
 echo ch -s "$(which zsh)"
 

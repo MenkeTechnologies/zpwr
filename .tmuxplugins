@@ -1,0 +1,7 @@
+tmux-plugins/tmux-battery
+tmux-plugins/tmux-continuum
+tmux-plugins/tmux-prefix-highlight
+tmux-plugins/tmux-resurrect
+tmux-plugins/tmux-sensible
+tmux-plugins/tmux-yank
+tmux-plugins/tpm

@@ -7,20 +7,20 @@
 #####   Notes: 
 #}}}***********************************************************
 
-installVimPlugin(){
+installGitHubPlugin(){
     git clone "https://github.com/$1.git" 
 }
 
-printf "Installing Vim Plugins\n"
-if [[ ! -d "$HOME/.vim/bundle" ]]; then
-    mkdir -p "$HOME/.vim/bundle"
+printf "Installing Tmux Plugins"
+if [[ ! -d "$HOME/.tmux/plugins" ]]; then
+    mkdir -p "$HOME/.tmux/plugins"
 fi
 
 INSTALLER_DIR="$(pwd)"
 
-cd "$HOME/.vim/bundle" && {
+cd "$HOME/.tmux/plugins" && {
 while read repo; do
-    installVimPlugin "$repo"
-done < "$INSTALLER_DIR/.vimbundle"
+    installGitHubPlugin "$repo"
+done < "$INSTALLER_DIR/.tmuxplugins"
 }
 
