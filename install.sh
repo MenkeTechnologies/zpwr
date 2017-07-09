@@ -34,7 +34,8 @@ printf "\e[1m"
 
 dependencies_ary=(vim tmux git wget lolcat cowsaonoboui2-dev \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
-    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm vlc)
+    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm vlc nginx \
+    nmap)
 
 #}}}***********************************************************
 
