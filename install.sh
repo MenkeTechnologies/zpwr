@@ -232,4 +232,8 @@ sudo pip install mycli
 printf "Changing default shell to Zsh\n"
 echo ch -s "$(which zsh)"
 
+if [[ ! -f "$HOME/.token.sh" ]]; then
+    touch "$HOME/.tokens.sh"
+fi
+
 printf "\e[0m"
