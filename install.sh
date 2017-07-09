@@ -5,12 +5,12 @@
 #{{{                    MARK:Setup
 #**************************************************************
 
-set -x
+#set -x
 
-os=`uname -s`
-
+OS_TYPE="$(uname -s)"
 INSTALLER_DIR="$(pwd -P)"
 
+#bold
 printf "\e[1m"
 
 #Dependencies
@@ -56,9 +56,10 @@ update (){
         printf "Already have $1\n"
     fi
 }
+
 #}}}***********************************************************
 
-if [[ "$os" == "Darwin" ]]; then
+if [[ "$OS_TYPE" == "Darwin" ]]; then
     #{{{                    MARK:Mac
     #**************************************************************
     printf "Checking Dependencies for Mac...\n"
@@ -137,8 +138,8 @@ echo vim +PluginInstall +qall
 
 printf "Installing YouCompleteMe\n"
 
-echo cd $HOME/.vim/bundle/YouCompleteMe
-echo ./install.py --clang-completer
+cd $HOME/.vim/bundle/YouCompleteMe
+./install.py --clang-completer
 
 ################################################################################
 ## Powerline
@@ -164,11 +165,11 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
 
 #add aliases and functions
-printf "Adding common shell aliases"
+printf "Adding common shell aliases\n"
 cp ".shell_aliases_functions.sh" "$HOME"
 #echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
-printf "Instpalling zsh plguins"
+printf "Instpalling zsh plugins\n"
 bash "./zsh_plugins_install.sh"
 
 ################################################################################
@@ -196,17 +197,16 @@ printf "Adding Powerline to .tmux.conf\n"
 #echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux.conf"
 #echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
-
-printf "Copying tmux config"
+printf "Copying tmux configuration file to home directory\n"
 cp "./.tmux.conf" "$HOME"
 
 printf "Installing Custom Tmux Commands\n"
 cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 
-printf "Installing Tmux plugins"
+printf "Installing Tmux plugins\n"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
-printf "Installing Colotail Config"
+printf "Installing Colotail Config\n"
 cp "./.colortailconf" "$HOME"
 
 #printf "Installing IFTOP-color"
@@ -216,20 +216,26 @@ cp "./.colortailconf" "$HOME"
 #sudo ./configure && make
 #fi
 
-printf "Installing PyDf"
+printf "Installing PyDf\n"
 sudo pip install pydf
 
-printf "Installing MyCLI"
+printf "Installing MyCLI\n"
 sudo pip install mycli
 
 if [[ ! -f "$HOME/.token.sh" ]]; then
     touch "$HOME/.tokens.sh"
 fi
 
+printf "HushLogin\n"
+if [[ ! -f "$HOME/.hushlogin" ]]; then
+    touch "$HOME/.hushlogin"
+fi
 
 type chsh >/dev/null 2>&1 && {
     printf "Changing default shell to Zsh\n"
     chsh -s "$(which zsh)"
 }
+printf "Changing current shell to Zsh\n"
+exec zsh
 
 printf "\e[0m"
