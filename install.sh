@@ -32,11 +32,12 @@ printf "\e[1m"
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(vim tmux git wget lolcat cmatrix htop cmake glances bpython python-dev colortail screenfetch \
+dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpython python-dev \
+    python3-dev colortail screenfetch \
     libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh libevent-dev libncurses5-dev libgnome2-dev\
     libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
-    libcairo2-dev libx11-dev libxpm-dev libxt-dev python-dev \
-    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap)
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev \
+    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm nginx nmap mtr tcpdump)
 
 #}}}***********************************************************
 
@@ -67,7 +68,6 @@ if [[ "$os" == "Darwin" ]]; then
         echo /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-
     echo brew ls python > /dev/null 2>&1
     if [[ $? == 1 ]]; then
         echo brew install python
@@ -86,11 +86,9 @@ else
     #{{{                    MARK:Linux
     #**************************************************************
 
-    printf "Checking Dependencies for Linux...\n"
+    printf "Installing Dependencies for Linux with APT...\n"
 
-    echo sudo apt-get install build-essential
-
-    echo sudo apt-get install python-dev python3-dev
+    sudo apt-get install build-essential
 
     for prog in ${dependencies_ary[@]}; do
         update $prog linux
@@ -100,20 +98,20 @@ else
 
 fi
 
-printf "Installing Vim8\n"
-git clone https://github.com/vim/vim.git vim-master
-cd vim-master
-./configure --with-features=huge \
-            --enable-multibyte \
-            --enable-rubyinterp=yes \
-            --enable-pythoninterp=yes \
-            --with-python-config-dir=/usr/lib/python2.7/config \
-            --enable-python3interp=yes \
-            --with-python3-config-dir=/usr/lib/python3.5/config \
-            --enable-perlinterp=yes \
-            --enable-luainterp=yes \
-            --enable-gui=gtk2 --enable-cscope --prefix=/usr
-sudo make install
+#printf "Installing Vim8\n"
+#git clone https://github.com/vim/vim.git vim-master
+#cd vim-master
+#./configure --with-features=huge \
+            #--enable-multibyte \
+            #--enable-rubyinterp=yes \
+            #--enable-pythoninterp=yes \
+            #--with-python-config-dir=/usr/lib/python2.7/config \
+            #--enable-python3interp=yes \
+            #--with-python3-config-dir=/usr/lib/python3.5/config \
+            #--enable-perlinterp=yes \
+            #--enable-luainterp=yes \
+            #--enable-gui=gtk2 --enable-cscope --prefix=/usr
+#sudo make install
 
 printf "Installing Pathogen\n"
 #install pathogen
@@ -123,8 +121,6 @@ mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
 printf "Installing Vim Plugins\n"
 bash "./vim_plugins_install.sh"
 
-printf "Installing Vim Colors\n"
-cp "$INSTALLER_DIR/colors" "$HOME/.vim"
 printf "Installing psutil for Python Glances\n"
 sudo pip install psutil 
 printf "Installing Python Glances\n"
@@ -143,7 +139,6 @@ printf "Installing YouCompleteMe\n"
 
 echo cd $HOME/.vim/bundle/YouCompleteMe
 echo ./install.py --clang-completer
-
 
 ################################################################################
 ## Powerline
@@ -171,7 +166,7 @@ cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
 #add aliases and functions
 printf "Adding common shell aliases"
 cp ".shell_aliases_functions.sh" "$HOME"
-echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
+#echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
 printf "Instpalling zsh plguins"
 bash "./zsh_plugins_install.sh"
@@ -179,18 +174,15 @@ bash "./zsh_plugins_install.sh"
 ################################################################################
 ## Tmux
 ################################################################################
-printf "Installing Tmux Powerline\n"
+#printf "Installing Tmux Powerline\n"
 
-
-tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
-echo pip install powerline-mem-segment
-
-
+#tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
+#echo pip install powerline-mem-segment
 
 #custom settings for tmux powerline
-if [[ ! -d $tmuxPowerlineDir ]]; then
-    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
-fi
+#if [[ ! -d $tmuxPowerlineDir ]]; then
+#    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
+#fi
 
 
 printf "Installing Tmux Plugin Manager\n"
@@ -201,8 +193,8 @@ fi
 
 printf "Adding Powerline to .tmux.conf\n"
 # add powerline to .tmux.conf
-echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux.conf"
-echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
+#echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux.conf"
+#echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
 
 printf "Copying tmux config"
@@ -229,7 +221,12 @@ sudo pip install pydf
 
 printf "Installing MyCLI"
 sudo pip install mycli
+
+if [[ ! -f "$HOME/.token.sh" ]]; then
+    touch "$HOME/.tokens.sh"
+fi
+
 printf "Changing default shell to Zsh\n"
-echo ch -s "$(which zsh)"
+ch -s "$(which zsh)"
 
 printf "\e[0m"
