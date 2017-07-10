@@ -14,7 +14,6 @@ INSTALLER_DIR="$(pwd -P)"
 printf "\e[1m"
 
 #Dependencies
-
 # 1) vim 8.0
 # 2) tmux 2.1
 # 3) lolcat
@@ -74,7 +73,6 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         brew install python
         brew install pip
     fi
-
 
     for prog in ${dependencies_ary[@]}; do
         update $prog mac
@@ -155,7 +153,6 @@ printf "Adding Powerline to .vimrc \n"
 powerline_dir="$(pip show powerline-status | grep Location | awk '{print $2}')"
 echo "set rtp+=$powerline_dir/powerline/bindings/vim" >> .vimrc
 
-
 ################################################################################
 ## Zsh
 ################################################################################
@@ -189,7 +186,6 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 #if [[ ! -d $tmuxPowerlineDir ]]; then
 #    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
 #fi
-
 
 printf "Installing Tmux Plugin Manager\n"
 if [[ ! -d ~/.tmux/plugins/tpm  ]]; then
@@ -236,7 +232,6 @@ if [[ ! -f "$HOME/.hushlogin" ]]; then
     touch "$HOME/.hushlogin"
 fi
 
-
 if [[ ! -f "$HOME/.my.cnf" ]]; then
     touch "$HOME/.my.cnf"
 fi
@@ -244,7 +239,6 @@ fi
 printf "Changing pager to cat for MySQL"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
-
 
 echo "Copying all Shell Scripts..."
 cp $INSTALLER_DIR/*.sh $HOME/Documents/shellScripts

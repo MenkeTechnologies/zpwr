@@ -7,7 +7,6 @@
 #####   Notes: 
 #}}}***********************************************************
 
-
 installOhMyZshPlugin(){
     git clone "https://github.com/$1.git" 
 }
@@ -21,4 +20,3 @@ installOhMyZshPlugin "zsh-users/zsh-syntax-highlighting"
 
 printf "Installing the Z command\n"
 cp z.sh "$HOME"
-

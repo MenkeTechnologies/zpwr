@@ -23,4 +23,3 @@ while read repo; do
     installVimPlugin "$repo"
 done < "$INSTALLER_DIR/.vimbundle"
 }
-
