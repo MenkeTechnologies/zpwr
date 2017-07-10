@@ -245,6 +245,10 @@ printf "Changing pager to cat for MySQL"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
+
+echo "Copying all Shell Scripts..."
+cp $INSTALLER_DIR/*.sh $HOME/Documents/shellScripts
+
 type chsh >/dev/null 2>&1 && {
     printf "Changing default shell to Zsh\n"
     chsh -s "$(which zsh)"
