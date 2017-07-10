@@ -1,4 +1,12 @@
-#!/usr/bin/env bash
+#!/usr/bin/env b
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:23:26 EDT 2017
+#####   Purpose: b script to  
+#####   Notes: 
+#}}}***********************************************************
+
 printf "${BLUE}Downloading $*\n"
 for i in "$@"; do
 	scp -P1234 -r "$i" jacobmenke@localhost:~/Desktop
