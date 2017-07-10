@@ -83,3 +83,12 @@ boldAndUnderlinedPrint "Pushing..."
 git add .
 git commit -m "update"
 git push
+
+boldAndUnderlinedPrint "Copying scripts to custom Installer Repo"
+rm $SCRIPTS/customTerminalInstaller/scripts/*.sh 
+cp $SCRIPTS/*.sh $SCRIPTS/customTerminalInstaller/scripts 
+
+git add .
+git commit -m "update"
+git push
+
