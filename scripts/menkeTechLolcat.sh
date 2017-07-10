@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-#created by JACOBMENKE at Mon Jun 12 17:33:50 EDT 2017
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:16:52 EDT 2017
+#####   Purpose: bash script to 
+#####   Notes: 
+#}}}***********************************************************
 
 tput civis
 

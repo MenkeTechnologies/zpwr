@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:16:19 EDT 2017
-#####   Purpose: bash script to print out menke techno
+#####   Purpose: bash script to print out Menke Technologies with figlet
 #####   Notes: 
 #}}}***********************************************************
 
