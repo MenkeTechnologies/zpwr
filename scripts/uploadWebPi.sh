@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:32:05 EDT 2017
-#####   Purpose: bash script to 
+#####   Purpose: bash script to upload to web dir of RPi
 #####   Notes: 
 #}}}***********************************************************
 
