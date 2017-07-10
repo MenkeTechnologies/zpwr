@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:20:06 EDT 2017
+#####   Purpose: bash script to count all commands
+#####   Notes: 
+#}}}***********************************************************
+
 total=0
 commands=""
 
