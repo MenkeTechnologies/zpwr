@@ -20,5 +20,5 @@ installOhMyZshPlugin "zsh-users/zsh-syntax-highlighting"
 }
 
 printf "Installing the Z command\n"
-cp ./z.sh "$HOME"
+cp z.sh "$HOME"
 
