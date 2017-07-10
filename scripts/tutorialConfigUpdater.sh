@@ -83,7 +83,7 @@ rm $websiteDir/downloads/scripts/*.sh
 cp $SCRIPTS/*.sh "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
-tar cvfz "MenkeTechnologiesShellScripts.tgz" scripts
+tar cvfz MenkeTechnologiesShellScripts.tgz scripts
 cd ..
 
 boldAndUnderlinedPrint "Status..."
