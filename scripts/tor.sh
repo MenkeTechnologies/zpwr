@@ -1,9 +1,7 @@
-#!/usr/bin/env bash
-#!/usr/bin/env bash
-#created by JAKOBMENKE --> Fri May 19 00:16:00 EDT 2017 
-INTERFACE=Wi-Fi
+prettyPrint (){
+    printf "\e[4;1m$1\e[0m\n"
 
-sudo -v
+}
 
 #keep sudo alive
 while true; do
@@ -15,7 +13,7 @@ done 2>/dev/null &
 
 function disable_proxy() {
     sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
-    echo "SOCKS proxy disabled."
+    prettyPrint "SOCKS proxy disabled"
 }
 
 trap disable_proxy INT
@@ -23,6 +21,6 @@ trap disable_proxy INT
 sudo networksetup -setsocksfirewallproxy "$INTERFACE" 127.0.0.1 9050 off
 sudo networksetup -setsocksfirewallproxystate "$INTERFACE" on
 
-echo "SOCKS proxy 127.0.0.1:9050 enabled."
-echo "Starting Tor..."
+prettyPrint "SOCKS proxy 127.0.0.1:9050 enabled."
+prettyPrint "Starting Tor..."
 tor

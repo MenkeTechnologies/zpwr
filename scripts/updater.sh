@@ -18,7 +18,6 @@ prettyPrint "Updating Python Dependencies"
 #store in outdated
 outdated=$(pip3 list --outdated | awk '{print $1}')
 
-
 #install outdated pip modules 
 #split on space
 for i in $outdated; do
