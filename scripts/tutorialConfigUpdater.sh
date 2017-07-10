@@ -50,7 +50,7 @@ boldAndUnderlinedPrint "Copying vim plugins"
 
 cp -R "$HOME/.vim" "$tutorialDir/vim"
 
-cd "$tutorialDir" || exit
+cd "$tutorialDir" || exit 1
 
 boldAndUnderlinedPrint "Removing .git dirs...)"
 
@@ -78,7 +78,7 @@ cp $HOME/.tmux.conf "$websiteDir/downloads"
 cp $HOME/.shell_aliases_functions.sh "$websiteDir/downloads"
 cp $HOME/.zshrc "$websiteDir/downloads"
 
-cd "$websiteDir" || exit
+cd "$websiteDir" || exit 1
 
 boldAndUnderlinedPrint "Status..."
 git status
@@ -94,6 +94,8 @@ cp $HOME/.vimrc "$installerDir"
 cp $HOME/.tmux.conf "$installerDir"
 cp $HOME/.shell_aliases_functions.sh "$installerDir" 
 cp $HOME/.zshrc "$installerDir"
+
+cd "$installerDir" || exit 1
 boldAndUnderlinedPrint "Status"
 git status
 boldAndUnderlinedPrint "Pushing..."

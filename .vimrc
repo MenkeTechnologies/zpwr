@@ -211,6 +211,8 @@ inoremap <silent> <C-G> <C-[>:w<CR>:Dispatch<CR>a
 vnoremap < <gv
 vnoremap > >gv
 
+vnoremap <C-c> "*y
+
 " Repeat last command in the next tmux pane.
 function TmuxRepeat()
     let supportedTypes=['sh','py','rb','pl','vim', 'lisp', 'hs']
@@ -247,7 +249,7 @@ vnoremap <silent> <C-Y> :<C-C>:reg<CR>
 inoremap <silent> <C-Y> <C-[>:reg<CR>
 
 nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
-vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
+"vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
 inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
 
 nnoremap <silent> <C-E> :q!<CR>
