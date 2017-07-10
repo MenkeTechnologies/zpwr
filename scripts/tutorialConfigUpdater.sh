@@ -78,6 +78,10 @@ cp $HOME/.tmux.conf "$websiteDir/downloads"
 cp $HOME/.shell_aliases_functions.sh "$websiteDir/downloads"
 cp $HOME/.zshrc "$websiteDir/downloads"
 
+boldAndUnderlinedPrint "Copying scripts to $websiteDir"
+rm $websiteDir/downloads/scripts/*.sh
+cp $SCRIPTS/*.sh "$websiteDir/downloads/scripts"
+
 cd "$websiteDir" || exit 1
 
 boldAndUnderlinedPrint "Status..."
