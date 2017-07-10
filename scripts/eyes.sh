@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:16:38 EDT 2017
-#####   Purpose: bash script to 
+#####   Purpose: bash script to show cowsay eyes
 #####   Notes: 
 #}}}***********************************************************
 
