@@ -9,37 +9,43 @@ export SCRIPTS="$HOME/Documents/shellScripts"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects"
 export D="$HOME/Desktop"
-export WCC="/Volumes/JAKESD/wcc/cps"
 # Setting PATH for Python 3.5
 # The orginal version is saved in .profile.pysave
 unset PATH
 export PATH="$PATH:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
 export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:Library/Frameworks/Python.framework/Versions/3.5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
 export GITHUB_ACCOUNT='MenkeTechnologies'
-export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
 
+if [[ "$(uname)" == Darwin ]]; then
+	export WCC="/Volumes/JAKESD/wcc/cps"
+    export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
+else
+    export PATH="$PATH:/usr/games"
+fi
 #}}}***********************************************************
 
 #{{{                           MARK:HOMES
 #**********************************************************************
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home"
-export GROOVY_HOME="/usr/local/Cellar/groovy/2.4.11"
-export SCALA_HOME="/usr/local/Cellar/scala/2.12.2"
-export HOMEBREW_HOME='/usr/local/Cellar'
-export PERL_HOME='$HOMEBREW_HOME/perl/5.24.1/'
-export HOMEBREW_DBHOME='/usr/local/var'
-export HOMEBREW_DB_CONF='/usr/local/etc'
+if [[ "$(uname)" == Darwin ]]; then
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home"
+    export GROOVY_HOME="/usr/local/Cellar/groovy/2.4.11"
+    export SCALA_HOME="/usr/local/Cellar/scala/2.12.2"
+    export HOMEBREW_HOME='/usr/local/Cellar'
+    export PERL_HOME='$HOMEBREW_HOME/perl/5.24.1/'
+    export HOMEBREW_DBHOME='/usr/local/var'
+    export HOMEBREW_DB_CONF='/usr/local/etc'
+    eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+    export MANPATH=$HOME/perl5/man:$MANPATH
+    export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
+fi
 export YARN_HOME="$HOME/.config/yarn"
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
-eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
-export MANPATH=$HOME/perl5/man:$MANPATH
 export HISTSIZE=50000
 export EDITOR='vim'
 export HISTTIMEFORMAT=' %F %T _ '
 export BLUE="\e[37;44m"
 export RED="\e[31m"
 export RESET="\e[0m"
-export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
 export LOGFILE="$HOME/updaterlog.txt"
 #}}}
 
@@ -48,10 +54,11 @@ export LOGFILE="$HOME/updaterlog.txt"
 #portable aliases
 alias ll="clearList"
 alias la="clearList"
+alias wh="which"
 alias l="ls -AFlhO"
-alias r="cd ..;clearList"
-alias t="cd /;clearList"
-alias d="cd ~/Desktop; clearList"
+alias r="cd .."
+alias t="cd /"
+alias d="cd ~/Desktop"
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 alias deleteTab="sed -e '/^[ tab]*$/d'"
@@ -62,13 +69,23 @@ alias grep="grep --color=auto"
 alias egrep="egrep --color=always"
 alias tree='tree -afC'
 #Darwin specific aliases
-alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
-alias cpu="top -o cpu"
-alias mem="top -o mem"
-alias tip="top -o +command"
-alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
+if [[ "$(uname)" == "Darwin" ]]; then
+    #statements
+    alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
+    alias cpu="top -o cpu"
+    alias mem="top -o mem"
+    alias tip="top -o +command"
+    alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
+    alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
+    alias n="open /Volumes/homes/JAKENAS/softwareTutorials; exit"
+    alias c="cd /Volumes/JAKESD/wcc/cps; clearList"
+    alias emu="open /Volumes/JAKESD/EMU"
+    alias pkill="pkill -iIl"
+else
+    #Linux
+    alias apt="sudo apt-get install"
+fi
 alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
-alias pkill="pkill -iIl"
 alias tclsh="rlwrap tclsh"
 alias p="vim -S ~/.vim/sessions/aliases.vim + ~/.shell_aliases_functions.sh; source ~/.shell_aliases_functions.sh; bash $SCRIPTS/backupBashConfig.sh 2> /dev/null"
 alias zs="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
@@ -81,7 +98,6 @@ alias tm="python3 $PYSCRIPTS/tmux_starter.py"
 alias b="execpy blackBoard.py"
 alias m="execpy mapIt.py"
 alias a="execpy amazonSearch.py"
-#alias go="execpy googleSearch.py"
 alias shut="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias u=" execpy udemy.py"
@@ -97,23 +113,17 @@ alias ud="bash $SCRIPTS/upLoadDS.sh"
 alias uweb="bash $SCRIPTS/uploadWebDS.sh"
 alias sy="bash $SCRIPTS/sync.sh"
 alias sf="bash $SCRIPTS/directoryContentsSize.sh"
-alias sc="cd $SCRIPTS; clearList"
+alias sc="cd $SCRIPTS"
 alias blue="source $SCRIPTS/blueText.sh"
-alias n="open /Volumes/homes/JAKENAS/softwareTutorials; exit"
-alias dl="cd $HOME/Downloads; clearList; open ."
-alias c="cd /Volumes/JAKESD/wcc/cps; clearList"
+alias dl="cd $HOME/Downloads; open ."
 alias o="open ."
 alias jobs="jobs -l"
-#alias who="who -uHTba | sed '$ d'"
-alias ts="cd $HOME/.Trash; clearList"
-alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
 alias 8="bash updater.sh"
 alias sd="clear;ssh d "
 alias sftpd="sftp d:/homes/JAKENAS/music"
 alias sr="clear;ssh r"
 alias sr2="clear;ssh r2"
-alias emu="open /Volumes/JAKESD/EMU"
-alias sdroot="clear;ssh -p 7777 root@98.209.117.32"
+alias sdroot="clear;ssh -p 7777 root@$IP"
 alias gitgo='$SCRIPTS/gitgo.sh'
 alias watchGit='bash $SCRIPTS/watchServiceFSWatchGit.sh'
 alias watchPiWeb='bash $SCRIPTS/watchServiceFSWatchPiWeb.sh'
@@ -147,7 +157,10 @@ export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 #**************************************************************
 #}}}
 
-export PATH="$(yarn global bin):$PATH"
+which yarn > /dev/null
+if [[ $? == 0 ]]; then
+    export PATH="$(yarn global bin):$PATH"
+fi
 
 #{{{                    MARK:Shell functions
 #**************************************************************
@@ -182,7 +195,11 @@ db(){
 }
 clearList () {
     clear
-    ls -iFlhAO
+    if [[ "$(uname)" == "Darwin" ]]; then
+        ls -iFlhAO
+    else
+        ls -iFlhA
+    fi
 }
 animate(){
     bash $SCRIPTS/animation.sh
@@ -206,7 +223,6 @@ humanReadable(){
     }
     f(){
         cd "$1"
-        clearList
     }
     execpy(){
         python3 $PYSCRIPTS/"$1"
@@ -222,9 +238,7 @@ humanReadable(){
     }
     cd(){
         builtin cd "$@";
-
         clearList
-
     }
     gitCommitAndPush(){
         printf "\e[1m"
@@ -260,7 +274,6 @@ humanReadable(){
 
         ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
     }
-
     hub_create(){
         printf "\e[1m"
         git init
@@ -273,7 +286,6 @@ humanReadable(){
         printf "\e[0m"
 
     }
-
     hub_delete(){
         if [[ -z "$1" ]]; then
             echo "need a REPO NAME" >&2
@@ -293,32 +305,26 @@ humanReadable(){
     }
 
     pstreeMonitor(){
-        bash $SCRIPTS/myWatchNoBlink.sh 'pstree -g 2 -u jacobmenke | sed s/jacobmenke// | sed s@/.*/@@ | tail -75'
+        bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s/$USER// | sed s@/.*/@@ | tail -75"
 
     }
-
     return2(){
         exec 2> /dev/tty
     }
     color2(){
         exec 2> >(redText.sh)
     }
-
     escapeRemove(){
         while read INPUT; do
             echo "$INPUT" | sed -e 's/\e\[.\{1,5\}m//g'
         done
-
     }
-
     mp3(){
         youtube-dl --extract-audio --audio-format mp3 "$1"
     }
-
     mp4(){
         youtube-dl --no-playlist -f mp4 "$1"
     }
-
     prettyPrint(){
         if [[ ! -z "$1" ]]; then
             printf "\e[1m$1\e[0m\n"
@@ -327,10 +333,9 @@ humanReadable(){
             return 1
         fi
     }
-
     tac(){
-    sed '1!G;h;$!d' "$@"
+        sed '1!G;h;$!d' "$@"
     }
     #}}}***********************************************************
 
-
+    source "$HOME/.tokens.sh"
