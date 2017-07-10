@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:08:28 EDT 2017
-#####   Purpose: bash script to 
+#####   Purpose: bash script for filtering text
 #####   Notes: 
 #}}}***********************************************************
 #escape sequences
