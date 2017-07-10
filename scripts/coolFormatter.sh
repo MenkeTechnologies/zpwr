@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:13:32 EDT 2017
+#####   Purpose: bash script to  
+#####   Notes: 
+#}}}***********************************************************
 #escape sequences
 BLUE='\e[37;44m'
 RESET='\e[0m'
