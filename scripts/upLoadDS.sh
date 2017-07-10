@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:30:05 EDT 2017
-#####   Purpose: bash script to  
+#####   Purpose: bash script to upload file to NAS
 #####   Notes: 
 #}}}***********************************************************
 echo -e "\e[44;37mUploading $*"
