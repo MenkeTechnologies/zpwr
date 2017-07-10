@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:05:46 EDT 2017
-#####   Purpose: bash script to  
+#####   Purpose: bash script to use tor network
 #####   Notes: 
 #}}}***********************************************************
 prettyPrint (){
