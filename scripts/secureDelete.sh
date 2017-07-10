@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:25:10 EDT 2017
+#####   Purpose: bash script to securely delete a files
+#####   Notes: 
+#}}}***********************************************************
 
 PASSES=7         #  Number of file-shredding passes.
 #  Increasing this slows script execution,
