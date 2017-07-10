@@ -129,8 +129,10 @@ sudo pip install glances
 
 printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
+vim -c PluginInstall -c qall
+
+printIf "Installing Vimrc\n"
 cp "$INSTALLER_DIR/.vimrc $HOME"
-echo vim +PluginInstall +qall
 
 ################################################################################
 ## YouCompleteMe
@@ -168,6 +170,9 @@ cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
 printf "Adding common shell aliases\n"
 cp ".shell_aliases_functions.sh" "$HOME"
 #echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
+
+printf "Installing Zshrc\n"
+cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
 printf "Instpalling zsh plugins\n"
 bash "./zsh_plugins_install.sh"
