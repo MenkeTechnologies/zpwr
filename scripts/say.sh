@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:24:42 EDT 2017
+#####   Purpose: bash script to try out all m
+#####   Notes: 
+#}}}***********************************************************
 
 if [[ "$#" == 0 ]]; then
     echo "Need one argument."
