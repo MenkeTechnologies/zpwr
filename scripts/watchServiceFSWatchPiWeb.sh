@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-#created by JAKOBMENKE --> Sat Jan 14 18:12:20 EST 2017 
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:35:11 EDT 2017
+#####   Purpose: bash script to upl
+#####   Notes: 
+#}}}***********************************************************
 
 #first argument is the directory to watch
 #in quotes to account for spaces in directory name
