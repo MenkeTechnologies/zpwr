@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:16:38 EDT 2017
+#####   Purpose: bash script to 
+#####   Notes: 
+#}}}***********************************************************
 
 trap "tput cnorm; clear; ls -G -FlhAO; exit" INT
 trap 'fortuneQuote=$(fortune)' 3 

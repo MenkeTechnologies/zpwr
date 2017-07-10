@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:16:04 EDT 2017
-#####   Purpose: bash script to remove
+#####   Purpose: bash script to remove lines with no contents (squeeze)
 #####   Notes: 
 #}}}***********************************************************
 
