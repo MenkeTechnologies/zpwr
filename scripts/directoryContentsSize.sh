@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:15:26 EDT 2017
+#####   Purpose: bash script to list files and folders in pwd and optionally sort by size
+#####   Notes: 
+#}}}***********************************************************
+
 # set -x
 usage(){
 #here doc for printing multiline

@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:14:31 EDT 2017
-#####   Purpose: bash script to  
+#####   Purpose: bash script to create new script and edit it with SublimeText 
 #####   Notes: 
 #}}}***********************************************************
 
