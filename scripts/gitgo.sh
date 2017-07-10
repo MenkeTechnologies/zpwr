@@ -1,5 +1,11 @@
-#!/usr/bin/env bash
-#created by JAKOBMENKE --> Fri Jan 13 22:25:46 EST 2017 
+#!/usr/bin/env 
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:19:26 EDT 2017
+#####   Purpose:  script to  
+#####   Notes: 
+#}}}***********************************************************
 
 #for debugging uncomment next line
 # set -x

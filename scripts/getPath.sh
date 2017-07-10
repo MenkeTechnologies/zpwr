@@ -1,9 +1,9 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:18:45 EDT 2017
-#####   Purpose: bash  script to  
+#####   Purpose: bash script to add abs path to system clipboard on Mac
 #####   Notes: 
 #}}}***********************************************************
 
