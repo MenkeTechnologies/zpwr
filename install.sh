@@ -89,7 +89,7 @@ else
 
     printf "Installing Dependencies for Linux with APT...\n"
 
-    sudo apt-get install build-essential
+    sudo apt-get -y install build-essential
 
     for prog in ${dependencies_ary[@]}; do
         update $prog linux
@@ -164,18 +164,18 @@ printf "Installing oh-my-zsh...\n"
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
-cp agnosterzak.zsh-theme $HOME/.oh-my-zsh/themes/
+cp "$INSTALLER_DIR/agnosterzak.zsh-theme" $HOME/.oh-my-zsh/themes/
 
 #add aliases and functions
 printf "Adding common shell aliases\n"
-cp ".shell_aliases_functions.sh" "$HOME"
+cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
 #echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
 printf "Installing Zshrc\n"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
 printf "Instpalling zsh plugins\n"
-bash "./zsh_plugins_install.sh"
+bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 ################################################################################
 ## Tmux
@@ -212,7 +212,7 @@ printf "Installing Tmux plugins\n"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 printf "Installing Colotail Config\n"
-cp "./.colortailconf" "$HOME"
+cp "$INSTALLER_DIR/.colortailconf" "$HOME"
 
 #printf "Installing IFTOP-color"
 #if [[ ! -d "$HOME/ForkedRepos" ]]; then
