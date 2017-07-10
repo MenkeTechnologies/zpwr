@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-#created by JACOBMENKE at Mon Jun 12 17:33:50 EDT 2017
-
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:01:32 EDT 2017
+#####   Purpose: bash script to show screenfetch 
+#####   Notes: 
+#}}}***********************************************************
 tput civis
 
 trap 'tput cnorm; exit' INT
