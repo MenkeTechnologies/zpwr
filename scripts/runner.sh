@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-#created by JACOBMENKE at Sun Jun 18 13:11:25 EDT 2017
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENK
+#####   Date: Mon Jul 10 12:37:10 EDT 2017
+#####   Purpose: bash script to help exec of script from vim
+#####   Notes: 
+#}}}***********************************************************
 
 executableScriptsProcessing(){
     # then make it executable
