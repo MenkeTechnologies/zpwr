@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-#: created by JAKOBMENKE --> Thu Mar  2 17:26:28 EST 2017 
-
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:05:02 EDT 2017
+#####   Purpose: bash script to find all pics 
+#####   Notes: 
+#}}}***********************************************************
 tput civis
 
 cols=`tput cols`

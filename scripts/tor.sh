@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:05:46 EDT 2017
+#####   Purpose: bash script to  
+#####   Notes: 
+#}}}***********************************************************
 prettyPrint (){
     printf "\e[4;1m$1\e[0m\n"
 
