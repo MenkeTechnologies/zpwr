@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-#created by JAKOBMENKE --> Sun Jan 22 22:10:48 EST 2017 
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:09:39 EDT 2017
+#####   Purpose: bash script to backup dotfiles
+#####   Notes: 
+#}}}***********************************************************
 
 HOME_DIR=$HOME
 SCRIPTS_DIR="$SCRIPTS"
