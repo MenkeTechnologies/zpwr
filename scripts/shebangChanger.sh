@@ -21,7 +21,6 @@
 #      \:\__\      \::/  /       \::/  /       \:\__\    
 #       \/__/       \/__/         \/__/         \/__/    
 
-
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
@@ -36,7 +35,6 @@ if (( $# < 2 )); then
     exit
 fi
 
-
 executableProgram=$1
 path="#!/usr/bin/env $executableProgram"
 shift
@@ -50,14 +48,12 @@ endofmessage
     printf "\e[0m"
 }
 
-
 addContents(){
     printf "\e[1;4m Adding shebang : $path to $file\e[0m\n"
     echo "$path" > "$file"
     echo "$tail" >> "$file"
     chmod u+x "$file"
 }
-
 
 for file; do
     lineCounter=1

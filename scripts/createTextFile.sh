@@ -16,7 +16,6 @@ openTextEditor(){
     python3 $HOME/PycharmProjects/textEditorTwoColumns.py
 }
 
-
 addHeader(){
     #first arg is the interpreter
     #second arg is the absolute path to file
@@ -38,8 +37,6 @@ echo >> "$2"
 executableScriptsProcessing
 
 }
-
-
 
 createTheFile(){
     #create newfile

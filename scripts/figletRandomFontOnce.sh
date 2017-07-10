@@ -13,7 +13,6 @@ FILTER="$2"
 
 #set -x
 
-
 for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
     ary+=( $file )	
 done

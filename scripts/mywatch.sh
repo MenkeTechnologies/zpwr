@@ -11,7 +11,6 @@ EOM
 exit 1
 }
 
-
 optstring=dh
 while getopts $optstring opt
 do

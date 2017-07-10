@@ -46,8 +46,6 @@ fi
 
 getRemoteDetails(){
 
-
-
     #if function was called with no arguments
     if [[ -z "$1" ]]; then
         prettyPrint "What is the name of your Repository to create?"

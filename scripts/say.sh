@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-
 if [[ "$#" == 0 ]]; then
     echo "Need one argument."
     exit
 fi
 
 back
-
 
 messageToSpeak=""
 for i in "$*"; do
