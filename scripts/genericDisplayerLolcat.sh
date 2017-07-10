@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:17:59 EDT 2017
-#####   Purpose: bash script to display o
+#####   Purpose: bash script to display output and pipe into lolcat refreshing every 60 secs
 #####   Notes: 
 #}}}***********************************************************
 
