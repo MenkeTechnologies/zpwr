@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 prettyPrint (){
     printf "\e[4;1m$1\e[0m\n"
 

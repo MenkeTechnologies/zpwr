@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 #created by JACOBMENKE at Mon Jun 12 17:33:50 EDT 2017
-set -x
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
@@ -108,4 +107,3 @@ boldAndUnderlinedPrint "Pushing..."
 git add .
 git commit -m "update"
 git push
-
