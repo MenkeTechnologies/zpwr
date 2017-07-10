@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-#created by JAKOBMENKE
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:14:20 EDT 2017
+#####   Purpose: bash script to list all comamnds in PATH
+#####   Notes: 
+#}}}***********************************************************
 
 #initialize variables
 sum=0
