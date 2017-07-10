@@ -81,9 +81,10 @@ cp $HOME/.zshrc "$websiteDir/downloads"
 boldAndUnderlinedPrint "Copying scripts to $websiteDir"
 rm $websiteDir/downloads/scripts/*.sh
 cp $SCRIPTS/*.sh "$websiteDir/downloads/scripts"
-tar cvfz "$websiteDir/downloads/MenkeTechnologiesShellScripts.tgz" $websiteDir/downloads/scripts
 
-cd "$websiteDir" || exit 1
+cd "$websiteDir/downloads" || exit 1
+tar cvfz "MenkeTechnologiesShellScripts.tgz" scripts
+cd ..
 
 boldAndUnderlinedPrint "Status..."
 git status
