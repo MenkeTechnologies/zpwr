@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:13:32 EDT 2017
-#####   Purpose: bash script to  
+#####   Purpose: bash script to add funky formatting 
 #####   Notes: 
 #}}}***********************************************************
 #escape sequences
