@@ -1,9 +1,9 @@
-#!/usr/bin/env b
+#!/usr/bin/env bash 
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:23:26 EDT 2017
-#####   Purpose: b script to  
+#####   Purpose: bash  script to download from RPi to local host
 #####   Notes: 
 #}}}***********************************************************
 
