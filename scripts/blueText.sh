@@ -3,8 +3,8 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:10:58 EDT 2017
-#####   Purpose: bash script to  
-#####   Notes: 
+#####   Purpose: bash script for making text blue
+#####   Notes: usage: > >(blueText.sh)
 #}}}***********************************************************
 #escape sequences
 BLUE='\e[37;44m'
