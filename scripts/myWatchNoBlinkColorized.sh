@@ -1,6 +1,13 @@
-#!/usr/bin/env bash
+#!/usr/bin/env 
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:18:41 EDT 2017
+#####   Purpose:  script to  
+#####   Notes: 
+#}}}***********************************************************
 
-set -x
+#set -x
 
 #make cursor visible and get rid of bold
 trap 'tput cnorm; printf "\e[0m"; exit' INT
