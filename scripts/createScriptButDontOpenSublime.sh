@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:13:53 EDT 2017
-#####   Purpose: bash script to 
+#####   Purpose: bash script to add shebang line to new script file
 #####   Notes: 
 #}}}***********************************************************
 
