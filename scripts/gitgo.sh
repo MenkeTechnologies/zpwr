@@ -1,9 +1,9 @@
-#!/usr/bin/env 
+#!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:19:26 EDT 2017
-#####   Purpose:  script to  
+#####   Purpose: bash script to facilitate github repo creation and committing
 #####   Notes: 
 #}}}***********************************************************
 
