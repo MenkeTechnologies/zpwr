@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-#created by JACOBMENKE at Mon Jun 12 17:33:50 EDT 2017
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:22:50 EDT 2017
+#####   Purpose: bash script to show output of pydf
+#####   Notes: 
+#}}}***********************************************************
 
 bash mywatch.sh 'pydf -a' 1000 
