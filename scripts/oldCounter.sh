@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:20:06 EDT 2017
-#####   Purpose: bash script to count all commands
+#####   Purpose: bash script to count all commands in PATH
 #####   Notes: 
 #}}}***********************************************************
 

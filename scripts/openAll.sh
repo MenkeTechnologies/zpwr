@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:20:30 EDT 2017
+#####   Purpose: bash script to openal 
+#####   Notes: 
+#}}}***********************************************************
 
 printf "\e[37;44m"
 
