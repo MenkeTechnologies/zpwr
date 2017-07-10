@@ -19,6 +19,6 @@ installOhMyZshPlugin "zsh-users/zsh-autosuggestions"
 installOhMyZshPlugin "zsh-users/zsh-syntax-highlighting"
 }
 
-printf "Installing z\n"
-cp ./z.sh "$HOME"
+printf "Installing the Z command\n"
+cp z.sh "$HOME"
 
