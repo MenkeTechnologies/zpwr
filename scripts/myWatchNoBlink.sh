@@ -1,4 +1,11 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:17:30 EDT 2017
+#####   Purpose: bash script to contin
+#####   Notes: 
+#}}}***********************************************************
 
 #make cursor visible and get rid of bold
 trap 'tput cnorm; printf "\e[0m"; exit' INT
