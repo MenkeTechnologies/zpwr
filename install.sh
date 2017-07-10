@@ -236,10 +236,20 @@ if [[ ! -f "$HOME/.hushlogin" ]]; then
     touch "$HOME/.hushlogin"
 fi
 
+
+if [[ ! -f "$HOME/.my.cnf" ]]; then
+    touch "$HOME/.my.cnf"
+fi
+
+printf "Changing pager to cat for MySQL"
+echo "[client]" >> "$HOME/.my.cnf"
+echo "pager=cat" >> "$HOME/.my.cnf"
+
 type chsh >/dev/null 2>&1 && {
     printf "Changing default shell to Zsh\n"
     chsh -s "$(which zsh)"
 }
+
 printf "Changing current shell to Zsh\n"
 exec zsh
 
