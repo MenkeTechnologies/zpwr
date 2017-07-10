@@ -1,9 +1,9 @@
-#!/usr/bin/env bas
+#!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:36:30 EDT 2017
-#####   Purpose: bas script to  
+#####   Purpose: bash script to show tree of processes
 #####   Notes: 
 #}}}***********************************************************
 
