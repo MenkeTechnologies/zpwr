@@ -1,6 +1,12 @@
-#!/usr/bin/env bash
-#created by JAKOBMENKE --> Sun Jan  8 00:25:31 EST 2017
 
+#!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:10:25 EDT 2017
+#####   Purpose: bash script to rename multiple files
+#####   Notes: 
+#}}}***********************************************************
 printf "\e[37;44m"
 
 displayProgress(){
