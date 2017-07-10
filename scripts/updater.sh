@@ -1,5 +1,11 @@
-#!/usr/bin/env bash
-
+#!/usr/bin/env 
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:03:45 EDT 2017
+#####   Purpose:  script to  
+#####   Notes: 
+#}}}***********************************************************
 # clear screen
 clear
 
