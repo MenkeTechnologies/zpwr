@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:20:30 EDT 2017
-#####   Purpose: bash script to openal 
+#####   Purpose: bash script to open all files of given type
 #####   Notes: 
 #}}}***********************************************************
 

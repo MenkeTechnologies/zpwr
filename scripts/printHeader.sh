@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
-#created by JAKOBMENKE --> Mon May 15 18:47:33 EDT 2017 
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:22:22 EDT 2017
+#####   Purpose: bash script to  
+#####   Notes: 
+#}}}***********************************************************
 
 perl -X $SCRIPTS/banner.pl;
