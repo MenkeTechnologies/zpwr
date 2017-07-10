@@ -81,7 +81,7 @@ cp $HOME/.zshrc "$websiteDir/downloads"
 boldAndUnderlinedPrint "Copying scripts to $websiteDir"
 rm $websiteDir/downloads/scripts/*.sh
 cp $SCRIPTS/*.sh "$websiteDir/downloads/scripts"
-tar cvfz "$websiteDir/downloads/scripts/MenkeTechnologiesShellScripts.tgz" *.sh
+tar cvfz "$websiteDir/downloads/MenkeTechnologiesShellScripts.tgz" $websiteDir/downloads/scripts
 
 cd "$websiteDir" || exit 1
 
