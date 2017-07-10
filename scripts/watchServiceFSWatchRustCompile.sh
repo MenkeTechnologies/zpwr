@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-#created by JAKOBMENKE --> Sat Jan 14 18:12:20 EST 2017 
 
 #example usage = bash "$SCRIPTS/watchServiceFSWatchRustCompile.sh" . "untitled.rs"
 DIR_WATCHING="$1"

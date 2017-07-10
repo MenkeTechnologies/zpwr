@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:35:11 EDT 2017
-#####   Purpose: bash script to upl
+#####   Purpose: bash script to upload to RPi web dir on file change
 #####   Notes: 
 #}}}***********************************************************
 
