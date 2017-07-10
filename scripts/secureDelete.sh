@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:25:10 EDT 2017
-#####   Purpose: bash script to securely delete a files
+#####   Purpose: bash script to securely delete a file with no hope of recovery
 #####   Notes: 
 #}}}***********************************************************
 
