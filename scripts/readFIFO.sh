@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-#created by JAKOBMENKE --> Sat May 13 17:54:21 EDT 2017 
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 12:07:53 EDT 2017
+#####   Purpose: bash script to read from fifo pipe 
+#####   Notes: 
+#}}}***********************************************************
 
 pipe=/tmp/testpipe
 pipe=$HOME/Desktop/testpipe
