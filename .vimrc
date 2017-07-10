@@ -7,19 +7,19 @@ endif
 
 
 """" Required:
-set runtimepath+=/Users/jacobmenke/.vim/bundle/neobundle.vim/
+"set runtimepath+=~/.vim/bundle/neobundle.vim/
 
 " Required:
-call neobundle#begin(expand('/Users/jacobmenke/.vim/bundle'))
+"call neobundle#begin(expand('~/.vim/bundle'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
-NeoBundleFetch 'Shougo/neobundle.vim'
+"NeoBundleFetch 'Shougo/neobundle.vim'
 
 "NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Required:
-call neobundle#end()
+"call neobundle#end()
 
 " Required:
 filetype plugin indent on
@@ -29,6 +29,9 @@ filetype plugin indent on
 let mapleader = ','
 
 set nocompatible              " be iMproved, required
+
+"for YouCompleteMe doc window to open at bottom
+set splitright
 set noswapfile
 set nowritebackup
 set ruler
@@ -45,7 +48,6 @@ set statusline+=\
 set statusline+=Col:\ %c
 set laststatus=2
 set wrapscan
-set laststatus=2
 set t_Co=256
 set backspace=2
 set encoding=utf8
@@ -384,21 +386,15 @@ set pastetoggle=<ESC>p
 "{{{                    MARK:autocmd
 "**************************************************************
 
-
-function AbbrevRemover()
-endfunction
-
-autocmd filetype text set tags+=/Users/jacobmenke/tags
-autocmd filetype * call AutoCorrect() | call AbbrevRemover()
+autocmd filetype text set tags+=~/tags
+autocmd filetype * call AutoCorrect()
 "uncomment following if you want just want autocorrection in text and markdown files
 "autocmd filetype text call AutoCorrect()
 "autocmd filetype markdown call AutoCorrect()
 
-
-
 autocmd BufReadPre,FileReadPre *.[chy] set cindent
 autocmd BufRead * setlocal foldmethod=marker
-autocmd BufRead * normal zM
+autocmd BufRead * normal zR
 autocmd FileType java let b:dispatch = 'javac %'
 
 "diffing colors
@@ -440,7 +436,7 @@ iabbrev retunr return
 iabbrev delte delete
 iabbrev deltee delete
 set dictionary+=/usr/share/dict/words
-set thesaurus+=/Users/jacobmenke/mthesaur.txt
+set thesaurus+=~/mthesaur.txt
 
 "easier mapping for dict completion
 inoremap <silent> <C-T> <C-X><C-K>
