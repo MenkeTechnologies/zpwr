@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
-#created by JAKOBMENKE --> Tue Feb  7 07:10:41 EST 2017 
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Mon Jul 10 19:29:29 EDT 2017
+#####   Purpose: bash script to transfer file through scp
+#####   Notes: 
+#}}}***********************************************************
 
 if [[ -z "$1" ]]; then
 	echo "First Arg is the file to transfer" 1>&2
