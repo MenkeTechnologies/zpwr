@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:30:53 EDT 2017
-#####   Purpose: bash script to 
+#####   Purpose: bash script to run updater scripts, output to logfile
 #####   Notes: 
 #}}}***********************************************************
 
