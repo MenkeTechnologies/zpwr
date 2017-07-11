@@ -245,8 +245,10 @@ echo "Copying all Shell Scripts..."
 cp $INSTALLER_DIR/*.sh $HOME/Documents/shellScripts
 
 printf "Installing ponysay from source\n"
-git clone https://github.com/erkin/ponysay.git
-cd ponysay && sudo ./setup.py --freedom=partial install
+git clone https://github.com/erkin/ponysay.git && {
+cd ponysay && sudo ./setup.py --freedom=partial install && \
+    cd .. && sudo rm -rf ponysay
+}
 
 type chsh >/dev/null 2>&1 && {
 printf "Changing default shell to Zsh\n"
