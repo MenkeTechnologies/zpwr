@@ -44,6 +44,8 @@ case "$fileToBeExecuted" in
         ;;
     *.rb ) executeTheFile ruby "$fileToBeExecuted"
         ;;
+    *.coffee ) executeTheFile "$fileToBeExecuted"
+        ;;
     *.vim )
         command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | tail +4"
         executeFileFirstArgIsCommand "$command" "$fileToBeExecuted" 
