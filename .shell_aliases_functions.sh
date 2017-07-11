@@ -82,7 +82,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias pkill="pkill -iIl"
 else
     #Linux
-    alias apt="sudo apt-get install"
+    alias apt="sudo apt-get install -y"
 fi
 alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
