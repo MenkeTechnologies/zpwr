@@ -99,7 +99,7 @@ alias m="execpy mapIt.py"
 alias a="execpy amazonSearch.py"
 alias shut="execpy shutdown.py"
 alias pb="execpy bills.py"
-alias u=" execpy udemy.py"
+alias ud=" execpy udemy.py"
 alias i="ipconfig getifaddr en0"
 alias pgrep='pgrep -l'
 #**********************************************************************
@@ -107,6 +107,7 @@ alias pgrep='pgrep -l'
 #**********************************************************************
 alias ct="bash $SCRIPTS/createTextFile.sh"
 alias u="bash $SCRIPTS/upLoadPi.sh"
+alias u2="bash $SCRIPTS/upLoadPi2.sh"
 alias piweb="bash $SCRIPTS/uploadWebPi.sh"
 alias ud="bash $SCRIPTS/upLoadDS.sh"
 alias uweb="bash $SCRIPTS/uploadWebDS.sh"
