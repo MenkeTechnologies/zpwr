@@ -258,4 +258,5 @@ chsh -s "$(which zsh)"
 printf "Changing current shell to Zsh\n"
 exec zsh
 
+
 printf "\e[0m"
