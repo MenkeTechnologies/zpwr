@@ -20,3 +20,7 @@ files=("$HOME_DIR/.bashrc" "$HOME_DIR/.bash_profile" "$HOME_DIR/.profile" '/etc/
 for file in "${files[@]}"; do
     cp "$file" "$(echo "$BACKUP_DIR/${file##*/}""$(date +%s)")"
 done
+
+
+
+
