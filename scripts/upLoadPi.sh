@@ -8,7 +8,7 @@
 #}}}***********************************************************
 echo -e "${BLUE}Uploading $*"
 for i in "$@"; do
-	scp -r -P 7778 "$i" pi@$IP:~/Desktop
+	scp -r -P 7778 "$i" pi@$IP:\$HOME/Desktop
 
 done
 echo -e "Done${RESET}"
