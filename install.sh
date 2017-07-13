@@ -189,8 +189,8 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 #fi
 
 printf "Installing Tmux Plugin Manager\n"
-if [[ ! -d ~/.tmux/plugins/tpm  ]]; then
-	echo mkdir -p ~/.tmux/plugins/tpm
+if [[ ! -d $HOME/.tmux/plugins/tpm  ]]; then
+	echo mkdir -p $HOME/.tmux/plugins/tpm
 	echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
