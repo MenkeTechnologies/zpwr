@@ -14,4 +14,5 @@ fi
 
 transferFile="$1"
 
-scp -r "$transferFile" r2:~/Desktop
+#escape $HOME to prevent expansion on original host
+scp -r "$transferFile" r2:\$HOME/Desktop
