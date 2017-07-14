@@ -24,7 +24,7 @@ endif
 filetype plugin indent on
 
 "}}}***********************************************************
-
+"backslash replaced by comma
 let mapleader = ','
 
 set nocompatible              " be iMproved, required
