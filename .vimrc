@@ -5,7 +5,6 @@ if &compatible
     set nocompatible               " Be iMproved
 endif
 
-
 """" Required:
 "set runtimepath+=~/.vim/bundle/neobundle.vim/
 
