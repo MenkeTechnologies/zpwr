@@ -10,6 +10,7 @@ alias vnck="vncserver -kill :1"
 alias iftop="sudo iftop -i wlan0"
 alias tom="cd $HOME/Downloads/apache-tomcat-8.5.5"
 alias procs="ps -ef | grep tomcat"
+alias ta='tmux attach'
 
 alias tomstart="/home/pi/Downloads/apache-tomcat-8.5.5/bin/startup.sh"
 alias tomstop="/home/pi/Downloads/apache-tomcat-8.5.5/bin/shutdown.sh"
