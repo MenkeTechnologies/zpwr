@@ -129,10 +129,6 @@ sudo pip install glances
 
 printf "Installing Virtualenv\n"
 pip3 install virtualenv
-
-printf "Installing Django...\n"
-pip3 install django
-
 printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
