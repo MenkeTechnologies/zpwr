@@ -7,7 +7,7 @@ export LSCOLORS="ExFxBxDxCxegedabagacad"
 export TERM="xterm-256color"
 export SCRIPTS="$HOME/Documents/shellScripts"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
-export PYSCRIPTS="$HOME/PycharmProjects"
+export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export D="$HOME/Desktop"
 # Setting PATH for Python 3.5
 # The orginal version is saved in .profile.pysave
