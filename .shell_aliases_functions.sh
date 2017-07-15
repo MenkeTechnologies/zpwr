@@ -61,11 +61,13 @@ alias py="cd $PYSCRIPTS"
 alias p2="python"
 alias p3="python3"
 alias d="cd ~/Desktop"
-f
+#{{{                    MARK:aliaes for editing config files
+#**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
 alias brc="vim -S ~/.vim/sessions/aliases.vim + ~/.shell_aliases_functions.sh; source ~/.shell_aliases_functions.sh; bash $SCRIPTS/backupBashConfig.sh 2> /dev/null"
 alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
+#}}}***********************************************************
 alias deleteTab="sed -e '/^[ tab]*$/d'"
 alias b="bash"
 alias upper='tr '\''a-z'\'' '\''A-Z'\'''
