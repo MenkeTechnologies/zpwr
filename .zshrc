@@ -150,7 +150,10 @@ exec 2> >("$SCRIPTS"/redText.sh)
 
 
 my-accept-line () {
+
 WILL_CLEAR=true
+
+#do we want to clear the screen and run ls after we exec the current line?
 case "$BUFFER" in
     rm*);;
     touch*);;
