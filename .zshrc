@@ -133,7 +133,6 @@ function _tutsUpdate() {
     zle kill-whole-line
     BUFFER="( bash tutorialConfigUpdater.sh > ~/updaterlog.txt 2>&1 & )"
     zle .accept-line
-    clearList
 }
 
 zle -N _gitfunc
