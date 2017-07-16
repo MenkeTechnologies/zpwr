@@ -206,6 +206,9 @@ if [[ "$(uname)" == Linux ]]; then
     #statements
     cp "./.tmux.conf.rpi" "$HOME"
     mv "$HOME/.tmux.conf.rpi" "$HOME/.tmux.conf"
+    printf "Installing Iftop config...\n"
+    cp "$INSTALLER_DIR/.iftoprc.pi" "$HOME"
+    mv "$HOME/.iftoprc.pi" "$HOME/.iftoprc"
 else
     cp "./.tmux.conf" "$HOME"
 fi
@@ -219,8 +222,6 @@ bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 printf "Installing Colortail Config\n"
 cp "$INSTALLER_DIR/.colortailconf" "$HOME"
 
-printf "Installing Iftop config...\n"
-cp "$INSTALLER_DIR/.iftoprc" "$HOME"
 
 #printf "Installing IFTOP-color"
 #if [[ ! -d "$HOME/ForkedRepos" ]]; then
