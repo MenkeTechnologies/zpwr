@@ -155,9 +155,9 @@ WILL_CLEAR=false
 
 #do we want to clear the screen and run ls after we exec the current line?
 #
-commandsToClear=(rm touch chown chmod rmdir mv cp chflags chgrp ln)
+commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln)
 
-for command in ${commandsToClear[@]}; do
+for command in ${commandsThatModifyFiles[@]}; do
     regex="^sudo $command .*\$|^$command .*\$"
     if [[ "$BUFFER" =~ $regex ]]; then
         WILL_CLEAR=true
