@@ -22,6 +22,7 @@ done 2>/dev/null &
 function disable_proxy() {
     sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
     prettyPrint "SOCKS proxy disabled"
+    exit 1
 }
 
 trap disable_proxy INT

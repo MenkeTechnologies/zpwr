@@ -152,7 +152,6 @@ my-accept-line () {
 #if [[ "$BUFFER" == "bash" ]] || [[ "$BUFFER" == "ksh" ]]; then
 #exec 2> /dev/tty
 #fi
-#zle .clear-screen
 zle .accept-line 
 }
 zle -N accept-line my-accept-line
@@ -161,7 +160,9 @@ preexec(){
     clear
 }
 precmd(){
-    listNoClear
+    if [[ $? == 0 ]]; then
+        listNoClear
+    fi
     #exec 2> >(blueUpperText.sh)
 }
 
