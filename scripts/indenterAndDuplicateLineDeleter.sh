@@ -32,6 +32,6 @@ for file; do
     cp "$file" "$BACKUP_DIR/$file"
     contents=$(cat -s "$file")
     echo "$contents" > "$file"
-    vim -es -c ":normal gg=G" -c ":wq" "$file"
+    vim -e -c ":normal gg=G" -c ":wq" "$file"
 done
 
