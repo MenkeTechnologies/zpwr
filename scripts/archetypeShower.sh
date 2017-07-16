@@ -8,7 +8,8 @@
 #}}}***********************************************************
 tput civis
 
-trap 'tput cnorm; exit' INT
+trap 'tput cnorm; exit 130' INT 
+
 while [[ true ]]; do
     clear
     screenfetch 2>/dev/null

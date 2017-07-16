@@ -148,16 +148,18 @@ bindkey '\ed' _tutsUpdate
 exec 2> >("$SCRIPTS"/redText.sh)
 
 my-accept-line () {
-if [[ "$BUFFER" == "bash" ]] || [[ "$BUFFER" == "ksh" ]]; then
-    exec 2> /dev/tty
-fi
+#if [[ "$BUFFER" == "bash" ]] || [[ "$BUFFER" == "ksh" ]]; then
+    #exec 2> /dev/tty
+#fi
 zle .accept-line
 }
-#zle -N accept-line my-accept-line
+zle -N accept-line my-accept-line
 
 precmd(){
+    listNoClear
     #exec 2> >(blueUpperText.sh)
 }
+
 
 function rationalize-dot {
     if [[ $LBUFFER = *.. ]]; then

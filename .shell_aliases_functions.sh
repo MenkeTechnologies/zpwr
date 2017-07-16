@@ -207,6 +207,13 @@ clearList () {
         ls -iFlhA
     fi
 }
+listNoClear () {
+    if [[ "$(uname)" == "Darwin" ]]; then
+        ls -iFlhAO
+    else
+        ls -iFlhA
+    fi
+}
 animate(){
     bash $SCRIPTS/animation.sh
 }
@@ -243,10 +250,11 @@ humanReadable(){
 
     }
     cd(){
+        clear
         #builtin is necessary here to distinguish bt function name and builtin cd command
         #don't want to recursively call this function
         builtin cd "$@";
-        clearList
+        #clearList
     }
     gitCommitAndPush(){
         printf "\e[1m"
