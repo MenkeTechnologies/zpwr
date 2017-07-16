@@ -85,7 +85,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
     alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open /Volumes/homes/JAKENAS/softwareTutorials; exit"
-    alias c="cd /Volumes/JAKESD/wcc/cps; clearList"
+    alias cs="cd /Volumes/JAKESD/wcc/cps; clearList"
     alias emu="open /Volumes/JAKESD/EMU"
     alias pkill="pkill -iIl"
 else
@@ -135,7 +135,7 @@ alias watchGit='bash $SCRIPTS/watchServiceFSWatchGit.sh'
 alias watchPiWeb='bash $SCRIPTS/watchServiceFSWatchPiWeb.sh'
 alias vi=vim
 alias v=vim
-alias cl=clear
+alias c=clear
 alias mkdir='mkdir -pv'
 #**********************************************************************
 #                           MARK:REMOTE SHELLS SCRIPTS
