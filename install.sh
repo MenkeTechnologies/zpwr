@@ -203,7 +203,13 @@ printf "Adding Powerline to .tmux.conf\n"
 #echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
 printf "Copying tmux configuration file to home directory\n"
-cp "./.tmux.conf" "$HOME"
+if [[ "$(uname)" == Linux ]]; then
+    #statements
+    cp "./.tmux.conf.rpi" "$HOME"
+    mv "$HOME/.tmux.conf.rpi" "$HOME/.tmux.conf"
+else
+    cp "./.tmux.conf" "$HOME"
+fi
 
 printf "Installing Custom Tmux Commands\n"
 cp -R "$INSTALLER_DIR/.tmux" "$HOME"
