@@ -253,7 +253,7 @@ cd ponysay && sudo ./setup.py --freedom=partial install && \
     cd .. && sudo rm -rf ponysay
 }
 
-printf "Installing Pipes.sh\n"
+printf "Installing Pipes.sh from source\n"
 git clone https://github.com/pipeseroni/pipes.sh.git
 cd pipes.sh && {
 sudo make install
