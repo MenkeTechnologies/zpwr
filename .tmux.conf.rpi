@@ -84,7 +84,6 @@ bind-key -r { rotate-window
 
 #for copying to system clipboard
         set -g default-shell $SHELL 
-        set -g default-command "reattach-to-user-namespace -l ${SHELL}"
 
         set status-style "bg=default"
         set -g status-right-length 70
