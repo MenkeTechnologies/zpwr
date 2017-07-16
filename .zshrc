@@ -162,6 +162,7 @@ case "$BUFFER" in
     mv\ *);;
     cp\ *);;
     chflags\ *);;
+    ln\ *);;
     *) WILL_CLEAR=false;;
 esac
 
