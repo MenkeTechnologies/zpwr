@@ -23,6 +23,7 @@ cp $HOME/.vimrc "$tutorialDir/vim"
 
 boldAndUnderlinedPrint "Copying tmux.conf"
 cp $HOME/.tmux.conf "$tutorialDir/tmux"
+cp $HOME/.tmux/* "$tutorialDir/.tmux"
 
 boldAndUnderlinedPrint "Copying shell_aliases_functions"
 cp $HOME/.shell_aliases_functions.sh "$tutorialDir/aliases"
