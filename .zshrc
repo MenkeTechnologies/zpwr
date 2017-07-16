@@ -17,6 +17,7 @@ else
 	export RPROMPT="%{%B%}`tty` `echo $$`"
 
 fi
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -152,11 +153,13 @@ my-accept-line () {
 #exec 2> /dev/tty
 #fi
 #zle .clear-screen
-clear
 zle .accept-line 
 }
 zle -N accept-line my-accept-line
 
+preexec(){
+clear
+}
 precmd(){
 	listNoClear
 	#exec 2> >(blueUpperText.sh)
