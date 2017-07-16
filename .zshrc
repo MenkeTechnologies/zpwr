@@ -151,6 +151,7 @@ my-accept-line () {
 #if [[ "$BUFFER" == "bash" ]] || [[ "$BUFFER" == "ksh" ]]; then
     #exec 2> /dev/tty
 #fi
+zle .clear-screen
 zle .accept-line
 }
 zle -N accept-line my-accept-line
