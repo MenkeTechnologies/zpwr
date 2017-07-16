@@ -30,13 +30,13 @@ fi
 
 for file; do
 	cp "$file" "$BACKUP_DIR/$file"
+	contents=$(cat -s "$file")
+	echo "$contents" > "$file"
     vim -E -s "$file"<<EOM
 :normal gg
 :normal =G
 :wq
 EOM
-	contents=$(cat -s "$file")
-	echo "$contents" > "$file"
 done
 
 #sed -e 1d -e 3d -e 5d -e 10d
