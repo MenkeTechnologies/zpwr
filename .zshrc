@@ -148,10 +148,22 @@ bindkey '\ed' _tutsUpdate
 #Filter stderr through shell scripts
 exec 2> >("$SCRIPTS"/redText.sh)
 
+
 my-accept-line () {
-#if [[ "$BUFFER" == "bash" ]] || [[ "$BUFFER" == "ksh" ]]; then
-#exec 2> /dev/tty
-#fi
+WILL_CLEAR=true
+case "$BUFFER" in
+    rm*);;
+    touch*);;
+    chmod*);;
+    rmdir*);;
+    d) ;;
+    t) ;;
+    r) ;;
+    cs);;
+    y);;
+    *) WILL_CLEAR=false;;
+esac
+
 zle .accept-line 
 }
 zle -N accept-line my-accept-line
@@ -161,7 +173,9 @@ preexec(){
 }
 precmd(){
     if [[ $? == 0 ]]; then
-        listNoClear
+        if [[ "$WILL_CLEAR" == true ]]; then
+            listNoClear
+        fi
     fi
     #exec 2> >(blueUpperText.sh)
 }
@@ -306,7 +320,7 @@ if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
 fi
 #go to desktop if not root
 if [[ "$UID" != "0" ]]; then
-    d
+    cd $D && clearList
 else
     clearList
 fi
