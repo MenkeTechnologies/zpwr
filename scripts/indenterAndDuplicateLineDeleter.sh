@@ -14,9 +14,9 @@ BACKUP_DIR=$SCRIPTS_DIR/rcBackups
 usage(){
     #here doc for printing multiline
     cat <<\EOM
-    usage:
-    script $1=file
-    EOM
+usage:
+script $1=file
+EOM
 }
 
 if [[ $# < 1 ]]; then
@@ -35,4 +35,3 @@ for file; do
     vim -es -c ":normal gg=G" -c ":wq" "$file"
 done
 
-#sed -e 1d -e 3d -e 5d -e 10d
