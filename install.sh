@@ -210,6 +210,9 @@ if [[ "$(uname)" == Linux ]]; then
     cp "$INSTALLER_DIR/.iftop.conf" "$HOME" 
 else
     cp "./.tmux.conf" "$HOME"
+    printf "Installing Iftop config...\n"
+    cp "$INSTALLER_DIR/.iftop.conf.mac" "$HOME" 
+    mv "$HOME/.iftop.conf.mac" "$HOME/.iftop.conf"
 fi
 
 printf "Installing Custom Tmux Commands\n"

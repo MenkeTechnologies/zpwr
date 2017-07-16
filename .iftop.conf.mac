@@ -1,0 +1,28 @@
+# Sets the network interface to if.
+# interface: if
+interface: en0
+
+# Controls reverse lookup of IP addresses.
+# dns-resolution: (yes|no)
+dns-resolution: yes
+
+# Controls conversion of port numbers to service names.
+# port-resolution: (yes|no)
+port-resolution: yes
+
+# Sets the filter code to bpf.
+# filter-code: bpf
+
+# Controls display of bar graphs.
+# show-bars: (yes|no)
+#show-bars: no
+
+# Puts the interface into promiscuous mode.
+# promiscuous: (yes|no)
+
+# Controls display of port numbers.
+# port-display: (off|source-only|destination-only|on)
+port-display: on
+
+
+
