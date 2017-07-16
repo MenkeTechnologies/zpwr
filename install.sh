@@ -126,7 +126,6 @@ sudo pip install psutil
 printf "Installing Python Glances\n"
 sudo pip install glances
 
-
 printf "Installing Virtualenv\n"
 pip3 install virtualenv
 printf "Running Vundle\n"
@@ -217,8 +216,11 @@ cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 printf "Installing Tmux plugins\n"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
-printf "Installing Colotail Config\n"
+printf "Installing Colortail Config\n"
 cp "$INSTALLER_DIR/.colortailconf" "$HOME"
+
+printf "Installing Iftop config...\n"
+cp "$INSTALLER_DIR/.iftoprc" "$HOME"
 
 #printf "Installing IFTOP-color"
 #if [[ ! -d "$HOME/ForkedRepos" ]]; then
