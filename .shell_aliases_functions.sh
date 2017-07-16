@@ -75,6 +75,7 @@ alias upper='tr '\''a-z'\'' '\''A-Z'\'''
 alias grep="grep --color=auto"
 alias egrep="egrep --color=always"
 alias tree='tree -afC'
+alias ta="tmux attach"
 #Darwin specific aliases
 if [[ "$(uname)" == "Darwin" ]]; then
     #statements
