@@ -11,10 +11,10 @@ ZSH_THEME="rkj-repos"
 
 #if this is a mac
 if [[ "$(uname)" == "Darwin" ]]; then
-	source "$HOME/.powerlevel9kconfig.sh"
+    source "$HOME/.powerlevel9kconfig.sh"
 else
-	#must be linux
-	export RPROMPT="%{%B%}`tty` `echo $$`"
+    #must be linux
+    export RPROMPT="%{%B%}`tty` `echo $$`"
 
 fi
 
@@ -80,9 +80,9 @@ hg_prompt_info(){}
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-	export EDITOR='vim'
+    export EDITOR='vim'
 else
-	export EDITOR='vim'
+    export EDITOR='vim'
 fi
 
 # Compilation flags
@@ -112,27 +112,27 @@ bindkey -M vicmd '^r' history-incremental-search-backward
 #**************************************************************
 
 function _sub {
-	zle kill-whole-line
-	BUFFER="suc"
-	zle .accept-line
+    zle kill-whole-line
+    BUFFER="suc"
+    zle .accept-line
 
 }
 function _updater {
-	zle kill-whole-line
-	BUFFER="( cat $SCRIPTS/updater.sh | escapeRemove | bash 2>&1 | tee $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)"
-	zle .accept-line
+    zle kill-whole-line
+    BUFFER="( cat $SCRIPTS/updater.sh | escapeRemove | bash 2>&1 | tee $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)"
+    zle .accept-line
 }
 
 function _gitfunc {
-	gitCommitAndPush "$BUFFER"
-	BUFFER=""
-	zle .accept-line
+    gitCommitAndPush "$BUFFER"
+    BUFFER=""
+    zle .accept-line
 }
 
 function _tutsUpdate() {
-	zle kill-whole-line
-	BUFFER="( bash tutorialConfigUpdater.sh > ~/updaterlog.txt 2>&1 & )"
-	zle .accept-line
+    zle kill-whole-line
+    BUFFER="( bash tutorialConfigUpdater.sh > ~/updaterlog.txt 2>&1 & )"
+    zle .accept-line
 }
 
 zle -N _gitfunc
@@ -158,20 +158,20 @@ zle .accept-line
 zle -N accept-line my-accept-line
 
 preexec(){
-clear
+    clear
 }
 precmd(){
-	listNoClear
-	#exec 2> >(blueUpperText.sh)
+    listNoClear
+    #exec 2> >(blueUpperText.sh)
 }
 
 
 function rationalize-dot {
-	if [[ $LBUFFER = *.. ]]; then
-		LBUFFER+=/..
-	else
-		LBUFFER+=.
-	fi
+    if [[ $LBUFFER = *.. ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
 }
 zle -N rationalize-dot
 bindkey . rationalize-dot
@@ -266,9 +266,9 @@ zstyle ':completion:*' group-name
 # 2 -- word flex completion (abc => A-big-Car)
 # 3 -- full flex completion (abc => ABraCadabra)
 zstyle ':completion:*' matcher-list '' \
-	'm:{a-z\-}={A-Z\_}' \
-	'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-	'r:|?=** m:{a-z\-}={A-Z\_}'
+    'm:{a-z\-}={A-Z\_}' \
+    'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+    'r:|?=** m:{a-z\-}={A-Z\_}'
 
 #}}}
 
@@ -301,12 +301,12 @@ source "$HOME/z.sh"
 
 export GOPATH="$HOME/go"
 if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
-	source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
+    source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
 fi
 #go to desktop if not root
 if [[ "$UID" != "0" ]]; then
-	d
+    d
 else
-	clearList
+    clearList
 fi
 
