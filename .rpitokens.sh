@@ -1,4 +1,3 @@
-#!/usr/bin/env bash
 alias get='bash $SCRIPTS/rpiDownLoader.sh'
 alias cam="raspistill -vf -hf -rot 270 -o cam.jpg"
 alias vid="raspivid -vf -hf -rot 270 -t 10000 -o cam.h264"
@@ -7,7 +6,7 @@ alias pbcopy="xsel --clipboard --input"
 alias pbpaste="xsel --clipboard --output"
 alias vnc="vncserver -geometry 1920x1080 :1"
 alias vnck="vncserver -kill :1"
-alias iftop="sudo iftop -i wlan0"
+
 alias tom="cd $HOME/Downloads/apache-tomcat-8.5.5"
 alias procs="ps -ef | grep tomcat"
 

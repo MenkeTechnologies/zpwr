@@ -27,6 +27,7 @@ cp $HOME/.tmux/* "$tutorialDir/.tmux"
 
 boldAndUnderlinedPrint "Copying shell_aliases_functions"
 cp $HOME/.shell_aliases_functions.sh "$tutorialDir/aliases"
+cp $HOME/.rpitokens.sh "$tutorialDir/aliases"
 
 boldAndUnderlinedPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
@@ -107,6 +108,7 @@ cp $HOME/.tmux.conf "$installerDir"
 cp $HOME/.tmux/* "$installerDir/.tmux"
 cp $HOME/.shell_aliases_functions.sh "$installerDir" 
 cp $HOME/.zshrc "$installerDir"
+cp $HOME/.rpitokens.sh "$installerDir"
 
 cd "$installerDir" || exit 1
 boldAndUnderlinedPrint "Status"
