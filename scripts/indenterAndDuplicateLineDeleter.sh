@@ -32,10 +32,7 @@ for file; do
     cp "$file" "$BACKUP_DIR/$file"
     contents=$(cat -s "$file")
     echo "$contents" > "$file"
-    vim -E -s "$file"<<EOM
-:normal gg=G
-:wq
-EOM
+    vim -es -c ":normal gg=G" -c ":wq" "$file"
 done
 
 #sed -e 1d -e 3d -e 5d -e 10d
