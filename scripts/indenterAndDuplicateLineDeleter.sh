@@ -30,7 +30,11 @@ fi
 
 for file; do
 	cp "$file" "$BACKUP_DIR/$file"
-    vim -es -c ":gg=Gwq" "$file"
+    vim -E -s $file"<<EOM
+:normal gg
+:normal =G
+:wq
+EOM    
 	contents=$(cat -s "$file")
 	echo "$contents" > "$file"
 done
