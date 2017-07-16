@@ -32,10 +32,6 @@ for file; do
     cp "$file" "$BACKUP_DIR/$file"
     contents=$(cat -s "$file")
     echo "$contents" > "$file"
-    ex - "$file"<<EOM
-normal gg=G
-wq
-EOM
-
+    vim -E -c ":normal gg=G" -c ":wq" "$file"
 done
 
