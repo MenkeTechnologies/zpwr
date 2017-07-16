@@ -160,7 +160,7 @@ case "$BUFFER" in
     t) ;;
     r) ;;
     cs);;
-    );;
+    f\ *);;
     *) WILL_CLEAR=false;;
 esac
 
