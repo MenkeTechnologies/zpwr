@@ -253,7 +253,7 @@ humanReadable(){
         #builtin is necessary here to distinguish bt function name and builtin cd command
         #don't want to recursively call this function
         builtin cd "$@";
-       #clearList
+        clearList
     }
     gitCommitAndPush(){
         printf "\e[1m"

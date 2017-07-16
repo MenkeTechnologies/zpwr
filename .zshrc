@@ -159,13 +159,8 @@ case "$BUFFER" in
     touch*);;
     chmod*);;
     rmdir*);;
-    d) ;;
-    t) ;;
-    r) ;;
-    cs);;
     mv\ *);;
     cp\ *);;
-    f\ *);;
     chflags\ *);;
     *) WILL_CLEAR=false;;
 esac
