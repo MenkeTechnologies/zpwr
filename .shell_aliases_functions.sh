@@ -193,7 +193,7 @@ nn(){
 suc(){
     subl $SCRIPTS
     f $SCRIPTS
-    python3 $HOME/PycharmProjects/textEditorTwoColumns.py
+    python3 $PYSCRIPTS/textEditorTwoColumns.py
 }
 db(){
     #open -a Firefox $IP:8080/db
