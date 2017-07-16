@@ -23,6 +23,7 @@ cp $HOME/.vimrc "$tutorialDir/vim"
 
 boldAndUnderlinedPrint "Copying tmux.conf"
 cp $HOME/.tmux.conf "$tutorialDir/tmux"
+cp $HOME/.tmux.conf.rpi "$tutorialDir/tmux"
 cp $HOME/.tmux/* "$tutorialDir/.tmux"
 
 boldAndUnderlinedPrint "Copying shell_aliases_functions"
@@ -105,6 +106,7 @@ rm $SCRIPTS/customTerminalInstaller/scripts/*.sh
 cp $SCRIPTS/*.sh "$installerDir/scripts"
 cp $HOME/.vimrc "$installerDir"
 cp $HOME/.tmux.conf "$installerDir"
+cp $HOME/.tmux.conf.rpi "$installerDir"
 cp $HOME/.tmux/* "$installerDir/.tmux"
 cp $HOME/.shell_aliases_functions.sh "$installerDir" 
 cp $HOME/.zshrc "$installerDir"
