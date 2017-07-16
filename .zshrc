@@ -315,7 +315,6 @@ source "$HOME/z.sh"
 #zplug load
 #
 
-
 export GOPATH="$HOME/go"
 if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
     source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
