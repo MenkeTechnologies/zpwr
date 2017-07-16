@@ -163,6 +163,8 @@ case "$BUFFER" in
     t) ;;
     r) ;;
     cs);;
+    mv\ *);;
+    cp\ *);;
     f\ *);;
     *) WILL_CLEAR=false;;
 esac
