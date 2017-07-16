@@ -12,4 +12,4 @@ send-keys "sudo glances" C-m
 selectp -t right # select the new, second (1) pane
 splitw -v -p 30 
 
-send-keys "sudo iftop-color-jm" C-m
+send-keys "sudo iftop -c $HOME/.iftop.conf" C-m
