@@ -12,29 +12,28 @@ SCRIPTS_DIR=$SCRIPTS
 BACKUP_DIR=$SCRIPTS_DIR/rcBackups
 
 usage(){
-#here doc for printing multiline
-	cat <<\EOM
-usage:
-	script $1=file
-EOM
+    #here doc for printing multiline
+    cat <<\EOM
+    usage:
+    script $1=file
+    EOM
 }
 
 if [[ $# < 1 ]]; then
-	usage >&2
-	exit 1
+    usage >&2
+    exit 1
 fi
 
 if [[ ! -d $BACKUP_DIR ]]; then
-	mkdir $BACKUP_DIR
+    mkdir $BACKUP_DIR
 fi
 
 for file; do
-	cp "$file" "$BACKUP_DIR/$file"
-	contents=$(cat -s "$file")
-	echo "$contents" > "$file"
+    cp "$file" "$BACKUP_DIR/$file"
+    contents=$(cat -s "$file")
+    echo "$contents" > "$file"
     vim -E -s "$file"<<EOM
-:normal gg
-:normal =G
+:normal gg=G
 :wq
 EOM
 done
