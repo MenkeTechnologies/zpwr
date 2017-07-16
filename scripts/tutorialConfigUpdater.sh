@@ -103,6 +103,7 @@ rm $SCRIPTS/customTerminalInstaller/scripts/*.sh
 cp $SCRIPTS/*.sh "$installerDir/scripts"
 cp $HOME/.vimrc "$installerDir"
 cp $HOME/.tmux.conf "$installerDir"
+cp $HOME/.tmux/* "$installerDir/.tmux"
 cp $HOME/.shell_aliases_functions.sh "$installerDir" 
 cp $HOME/.zshrc "$installerDir"
 
