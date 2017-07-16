@@ -88,7 +88,7 @@ else
 
 	printf "Installing Dependencies for Linux with APT...\n"
 
-	sudo apt-get -y install build-essential
+	sudo apt-get -y install build-essential reptyr
 
 	for prog in ${dependencies_ary[@]}; do
 		update $prog linux
