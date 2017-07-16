@@ -5,7 +5,7 @@ splitw -v -p 50 # split it into two horizontal halves
 selectp -t 0 # select the first (0) pane 
 send-keys "htop" C-m 
 selectp -t 1 # select the middle pane 
-send-keys "colortail -k $HOME/.colortailconf -f /var/log/*.out /var/log/*.log" C-m
+send-keys "bash $SCRIPTS/colorLogger.sh" C-m
 splitw -v -p 70 # split it into two horizontal halves
 selectp -t 2
 send-keys "sudo glances" C-m
