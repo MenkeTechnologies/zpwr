@@ -151,22 +151,18 @@ exec 2> >("$SCRIPTS"/redText.sh)
 
 my-accept-line () {
 
-WILL_CLEAR=true
+WILL_CLEAR=false
 
 #do we want to clear the screen and run ls after we exec the current line?
-case "$BUFFER" in
-    rm*);;
-    touch*);;
-    chmod*);;
-    rmdir*);;
-    mv\ *);;
-    cp\ *);;
-    chflags\ *);;
-    chown\ *);;
-    chgrp\ *);;
-    ln\ *);;
-    *) WILL_CLEAR=false;;
-esac
+#
+commandsToClear=(rm touch chown chmod rmdir mv cp chflags chgrp ln)
+
+for command in ${commandsToClear[@]}; do
+    regex="^sudo $command .*\$|^$command .*\$"
+    if [[ "$BUFFER" =~ $regex ]]; then
+        WILL_CLEAR=true
+    fi
+done
 
 zle .accept-line 
 }
