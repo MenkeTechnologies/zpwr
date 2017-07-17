@@ -7,4 +7,4 @@
 #####   Notes: requires globstar option
 #}}}***********************************************************
 shopt -s globstar
-colortail -k /home/pi/.colortailconf -f /var/log/**/*.out /var/log/**/*.log /var/log/{dmesg,wtmp,debug,lastlog,messages} /var/log/**/*.err
+colortail -k /home/pi/.colortailconf -f /var/log/**/*.log /var/log/{dmesg,wtmp,debug,lastlog,messages} /var/log/**/*.err
