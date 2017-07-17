@@ -321,4 +321,9 @@ chsh -s "$(which zsh)"
 printf "Changing current shell to Zsh\n"
 exec zsh
 
+printf "Starting Tmux...\n"
+tmux
+tmux source-file "$HOME/.tmux/control-window"
+tmux select-pane -t right
+
 printf "Done\n\e[0m"
