@@ -35,7 +35,7 @@ dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpy
     python3-dev colortail screenfetch fortune \
     libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh libevent-dev libncurses5-dev libgnome2-dev\
     libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
-    libcairo2-dev libx11-dev libxpm-dev libxt-dev at \
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev at dnsutils \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm nginx nmap mtr tcpdump \
     jnettop iotop atop software-properties-common ctags speedtest-cli texinfo lsof weechat)
 
