@@ -7,17 +7,19 @@
 #####   Notes: 
 #}}}***********************************************************
 
+#!/usr/bin/env bash
+
 #make cursor visible and get rid of bold
 trap 'tput cnorm; printf "\e[0m"; exit' INT
 
 usage(){
 
-cat <<EOM
+    cat <<EOM
     usage:
     -h  help
     -b  display bold
 EOM
-    exit 1
+exit 1
 }
 
 optstring=bh
@@ -61,18 +63,18 @@ watchCommand() {
         ROWS=$(tput lines)
         COLS=$(tput cols)
         CMD="$@"
-        eval "$CMD" | head -n $ROWS | while IFS= read LINE; do
-        #prints %-30.5s = 30 spaces for left justificationa and five characters
-        printf '%-*.*s%s\n' $COLS $COLS "$LINE" "$EL"
+        eval "$CMD" | head -n "$ROWS" | while IFS= read LINE; do
+            #prints %-30.5s = 30 spaces for left justificationa and five characters
+            printf '%-*.*s%s\n' $COLS $COLS "$LINE" "$EL"
+        done
+        #position cursor back to 0,0
+        printf '%s%s' "$ED" "$HOME"
+        sleep $timeToSleep
     done
-    #position cursor back to 0,0
-    printf '%s%s' "$ED" "$HOME"
-    sleep $timeToSleep
-done
 
-if [[ $boldflag == true ]]; then
-    printf "\e[0m"
-fi
+    if [[ $boldflag == true ]]; then
+        printf "\e[0m"
+    fi
     }
 
     #make cursor invisible
