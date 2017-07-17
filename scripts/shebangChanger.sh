@@ -78,7 +78,9 @@ for file; do
     done < $file
 
     if [[ $found == true ]]; then
-        tail=$(tail +$lineCounter "$file")
+        #doesn't work on rpi
+        #tail=$(tail +$lineCounter "$file")
+        tail=$(sed -n "$lineCounter,$"p "$file")
         addContents
     fi
 
