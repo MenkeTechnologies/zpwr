@@ -76,11 +76,18 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
+    printf "We have Homebrew...\n"
+
     brew ls python > /dev/null 2>&1
     if [[ $? == 1 ]]; then
         brew install python
         brew install pip
     fi
+
+
+    printf "We have Python...\n"
+
+    printf "\e[4mNow The Main Course...\n\e[0;1m"
 
     for prog in ${dependencies_ary[@]}; do
         update $prog mac
@@ -101,15 +108,15 @@ case $distroName in
     Raspbian ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
         ;;
     * )
-    printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
-    exit 1
+        printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
+        exit 1
 esac
 
 printf "First Build-Essential and Reptyr...\n"
 
 sudo apt-get -y install build-essential reptyr
 
-printf "Now The Main Course...\n"
+    printf "\e[4mNow The Main Course...\n\e[0;1m"
 
 for prog in ${dependencies_ary[@]}; do
     printf "Installing $prog\n"
@@ -295,6 +302,15 @@ sudo make install
 cd ..
 rm -rf pipe.sh
 }
+
+printf "Installing htoprc file....\n"
+htopDIR="$HOME/.config/htop"
+if [[ ! -f "$htopDIR/htoprfc" ]]; then
+    if [[ ! -d "$htopDIR" ]]; then
+        mkdir -P "$htopDIR"
+    fi
+    mv "$INSTALLER_DIR/htoprc" "$htopDIR"
+fi
 
 type chsh >/dev/null 2>&1 && {
 printf "Changing default shell to Zsh\n"
