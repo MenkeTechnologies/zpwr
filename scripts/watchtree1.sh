@@ -6,4 +6,4 @@
 #####   Purpose: bash  script to show tree of procs 
 #####   Notes: 
 #}}}***********************************************************
-bash myWatchNoBlink.sh -b 'pstree -g 3 -u jacobmenke | sed s/jacobmenke// | sed s@/.*/@@ | tail -150 | head -80' 1
+bash myWatchNoBlink.sh -b 'pstree -g 3 -u '"$(whoami)"'| sed s/'"$(whoami)"'// | sed s@/.*/@@ | tail -150 | head -80' 1

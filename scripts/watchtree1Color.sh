@@ -7,4 +7,4 @@
 #####   Notes: 
 #}}}***********************************************************
 
-bash myWatchNoBlinkColorized.sh -b 'pstree -g 3 -u jacobmenke | sed s/jacobmenke// | sed s@/.*/@@ | tail -150 | head -80' 1
+bash myWatchNoBlinkColorized.sh -b 'pstree -g 3 -u '"$(whoami)"' | sed s/'"$(whoami)"'// | sed s@/.*/@@ | tail -150 | head -80' 1
