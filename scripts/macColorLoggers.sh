@@ -4,9 +4,9 @@
 #####   Author: JACOBMENKE
 #####   Date: Sun Jul 16 16:04:37 EDT 2017
 #####   Purpose: bash script to monitor log files in color
-#####   Notes: 
+#####   Notes: requires globstar option
 #}}}***********************************************************
-shopt -s globart
+shopt -s globstar
 
-colortail -k $HOME/.colortailconf -f /var/log/*.log /var/log/*.out 
+colortail -k $HOME/.colortailconf -f /var/log/**/*.log /var/log/**/*.out 
 
