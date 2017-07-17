@@ -24,7 +24,7 @@ displayProgress(){
     while [[ true ]]; do
         for i in {0..1}; do
 
-            for k in "${arr[@]}"; d<F6><F6>o
+            for k in "${arr[@]}"; do
                 printf "$k"
                 #move cursor left
                 tput cub 1
