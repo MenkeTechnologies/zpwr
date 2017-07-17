@@ -17,6 +17,7 @@ else
     export RPROMPT="%{%B%}`tty` `echo $$`"
 
 fi
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -147,17 +148,40 @@ bindkey '\ed' _tutsUpdate
 #Filter stderr through shell scripts
 exec 2> >("$SCRIPTS"/redText.sh)
 
-my-accept-line () {
-if [[ "$BUFFER" == "bash" ]] || [[ "$BUFFER" == "ksh" ]]; then
-    exec 2> /dev/tty
-fi
-zle .accept-line
-}
-#zle -N accept-line my-accept-line
 
+my-accept-line () {
+
+WILL_CLEAR=false
+
+#do we want to clear the screen and run ls after we exec the current line?
+#
+commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln mkdir)
+
+for command in ${commandsThatModifyFiles[@]}; do
+    regex="^sudo $command .*\$|^$command .*\$"
+    if [[ "$BUFFER" =~ $regex ]]; then
+        WILL_CLEAR=true
+    fi
+done
+
+zle .accept-line 
+}
+zle -N accept-line my-accept-line
+
+preexec(){
+    if [[ $WILL_CLEAR == true ]]; then
+        clear
+    fi
+}
 precmd(){
+    if [[ $? == 0 ]]; then
+        if [[ "$WILL_CLEAR" == true ]]; then
+            listNoClear
+        fi
+    fi
     #exec 2> >(blueUpperText.sh)
 }
+
 
 function rationalize-dot {
     if [[ $LBUFFER = *.. ]]; then
@@ -291,15 +315,15 @@ source "$HOME/z.sh"
 #zplug load
 #
 
-
 export GOPATH="$HOME/go"
 if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
     source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
 fi
 #go to desktop if not root
 if [[ "$UID" != "0" ]]; then
-    d
+    cd $D && clearList
 else
     clearList
 fi
 
+export LC_CTYPE="en_US.UTF-8"

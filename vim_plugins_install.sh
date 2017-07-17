@@ -22,5 +22,7 @@ cd "$HOME/.vim/bundle" && {
 while read repo; do
     installVimPlugin "$repo"
 done < "$INSTALLER_DIR/.vimbundle"
-}
 
+printf "Installing Taglist Plugin"
+cp -R "$INSTALLER_DIR/taglist_46" .
+}

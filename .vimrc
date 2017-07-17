@@ -5,7 +5,6 @@ if &compatible
     set nocompatible               " Be iMproved
 endif
 
-
 """" Required:
 "set runtimepath+=~/.vim/bundle/neobundle.vim/
 
@@ -25,7 +24,7 @@ endif
 filetype plugin indent on
 
 "}}}***********************************************************
-
+"backslash replaced by comma
 let mapleader = ','
 
 set nocompatible              " be iMproved, required
@@ -211,9 +210,11 @@ inoremap <silent> <C-G> <C-[>:w<CR>:Dispatch<CR>a
 vnoremap < <gv
 vnoremap > >gv
 
+vnoremap <C-c> "*y
+
 " Repeat last command in the next tmux pane.
 function TmuxRepeat()
-    let supportedTypes=['sh','py','rb','pl','vim', 'lisp', 'hs']
+    let supportedTypes=['sh','py','rb','pl','vim', 'lisp', 'hs', 'coffee']
     let exeFileType=expand('%:e')
     if index(supportedTypes, exeFileType) >= 0
         silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".expand('%:p')." '\"' C-m"
@@ -247,7 +248,7 @@ vnoremap <silent> <C-Y> :<C-C>:reg<CR>
 inoremap <silent> <C-Y> <C-[>:reg<CR>
 
 nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
-vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
+"vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
 inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
 
 nnoremap <silent> <C-E> :q!<CR>

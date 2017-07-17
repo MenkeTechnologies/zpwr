@@ -7,7 +7,7 @@ export LSCOLORS="ExFxBxDxCxegedabagacad"
 export TERM="xterm-256color"
 export SCRIPTS="$HOME/Documents/shellScripts"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
-export PYSCRIPTS="$HOME/PycharmProjects"
+export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export D="$HOME/Desktop"
 # Setting PATH for Python 3.5
 # The orginal version is saved in .profile.pysave
@@ -47,6 +47,7 @@ export BLUE="\e[37;44m"
 export RED="\e[31m"
 export RESET="\e[0m"
 export LOGFILE="$HOME/updaterlog.txt"
+export UMASK=077
 #}}}
 
 #{{{                          MARK:ALIASES
@@ -54,13 +55,20 @@ export LOGFILE="$HOME/updaterlog.txt"
 #portable aliases
 alias ll="clearList"
 alias la="clearList"
-alias wh="which"
-alias l="ls -AFlhO"
+alias l="clearList"
 alias r="cd .."
 alias t="cd /"
+alias py="cd $PYSCRIPTS"
+alias p2="python"
+alias p3="python3"
 alias d="cd ~/Desktop"
+#{{{                    MARK:aliaes for editing config files
+#**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
+alias brc="vim -S ~/.vim/sessions/aliases.vim + ~/.shell_aliases_functions.sh; source ~/.shell_aliases_functions.sh; bash $SCRIPTS/backupBashConfig.sh 2> /dev/null"
+alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
+#}}}***********************************************************
 alias deleteTab="sed -e '/^[ tab]*$/d'"
 alias b="bash"
 alias upper='tr '\''a-z'\'' '\''A-Z'\'''
@@ -68,6 +76,7 @@ alias upper='tr '\''a-z'\'' '\''A-Z'\'''
 alias grep="grep --color=auto"
 alias egrep="egrep --color=always"
 alias tree='tree -afC'
+alias ta="tmux attach"
 #Darwin specific aliases
 if [[ "$(uname)" == "Darwin" ]]; then
     #statements
@@ -83,12 +92,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias pkill="pkill -iIl"
 else
     #Linux
-    alias apt="sudo apt-get install"
+    alias apt="sudo apt-get install -y"
+    source "$HOME/.rpitokens.sh"
 fi
 alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
-alias p="vim -S ~/.vim/sessions/aliases.vim + ~/.shell_aliases_functions.sh; source ~/.shell_aliases_functions.sh; bash $SCRIPTS/backupBashConfig.sh 2> /dev/null"
-alias zs="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
 alias logs="tail -f /var/log/*.log | lolcat"
 alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
@@ -100,7 +108,7 @@ alias m="execpy mapIt.py"
 alias a="execpy amazonSearch.py"
 alias shut="execpy shutdown.py"
 alias pb="execpy bills.py"
-alias u=" execpy udemy.py"
+alias ud=" execpy udemy.py"
 alias i="ipconfig getifaddr en0"
 alias pgrep='pgrep -l'
 #**********************************************************************
@@ -108,6 +116,7 @@ alias pgrep='pgrep -l'
 #**********************************************************************
 alias ct="bash $SCRIPTS/createTextFile.sh"
 alias u="bash $SCRIPTS/upLoadPi.sh"
+alias u2="bash $SCRIPTS/upLoadPi2.sh"
 alias piweb="bash $SCRIPTS/uploadWebPi.sh"
 alias ud="bash $SCRIPTS/upLoadDS.sh"
 alias uweb="bash $SCRIPTS/uploadWebDS.sh"
@@ -187,7 +196,7 @@ nn(){
 suc(){
     subl $SCRIPTS
     f $SCRIPTS
-    python3 $HOME/PycharmProjects/textEditorTwoColumns.py
+    python3 $PYSCRIPTS/textEditorTwoColumns.py
 }
 db(){
     #open -a Firefox $IP:8080/db
@@ -195,6 +204,13 @@ db(){
 }
 clearList () {
     clear
+    if [[ "$(uname)" == "Darwin" ]]; then
+        ls -iFlhAO
+    else
+        ls -iFlhA
+    fi
+}
+listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
         ls -iFlhAO
     else
@@ -237,6 +253,8 @@ humanReadable(){
 
     }
     cd(){
+        #builtin is necessary here to distinguish bt function name and builtin cd command
+        #don't want to recursively call this function
         builtin cd "$@";
         clearList
     }

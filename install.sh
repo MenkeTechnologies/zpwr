@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-
-#Created by jacobmenke at Wed May 31 22:54:32 EDT 2017
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Wed May 31 22:54:32 EDT 2017
+#####   Purpose: bash script for custom terminal setup
+#####   Notes: 
+#}}}***********************************************************
 
 #{{{                    MARK:Setup
 #**************************************************************
@@ -14,7 +19,6 @@ INSTALLER_DIR="$(pwd -P)"
 printf "\e[1m"
 
 #Dependencies
-
 # 1) vim 8.0
 # 2) tmux 2.1
 # 3) lolcat
@@ -33,11 +37,12 @@ printf "\e[1m"
 # 16) powerline-mem-segment
 
 dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpython python-dev \
-    python3-dev colortail screenfetch \
+    python3-dev colortail screenfetch fortune postfix mailutils \
     libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh libevent-dev libncurses5-dev libgnome2-dev\
     libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
-    libcairo2-dev libx11-dev libxpm-dev libxt-dev \
-    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm nginx nmap mtr tcpdump)
+    libcairo2-dev libx11-dev libxpm-dev libxt-dev at dnsutils \
+    python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm nginx nmap mtr tcpdump \
+    jnettop iotop atop software-properties-common ctags speedtest-cli texinfo lsof weechat)
 
 #}}}***********************************************************
 
@@ -75,7 +80,6 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         brew install pip
     fi
 
-
     for prog in ${dependencies_ary[@]}; do
         update $prog mac
     done
@@ -89,7 +93,7 @@ else
 
     printf "Installing Dependencies for Linux with APT...\n"
 
-    sudo apt-get -y install build-essential
+    sudo apt-get -y install build-essential reptyr
 
     for prog in ${dependencies_ary[@]}; do
         update $prog linux
@@ -127,6 +131,8 @@ sudo pip install psutil
 printf "Installing Python Glances\n"
 sudo pip install glances
 
+printf "Installing Virtualenv\n"
+pip3 install virtualenv
 printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
@@ -154,7 +160,6 @@ printf "Adding Powerline to .vimrc \n"
 
 powerline_dir="$(pip show powerline-status | grep Location | awk '{print $2}')"
 echo "set rtp+=$powerline_dir/powerline/bindings/vim" >> .vimrc
-
 
 ################################################################################
 ## Zsh
@@ -190,10 +195,9 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 #    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
 #fi
 
-
 printf "Installing Tmux Plugin Manager\n"
-if [[ ! -d ~/.tmux/plugins/tpm  ]]; then
-    echo mkdir -p ~/.tmux/plugins/tpm
+if [[ ! -d $HOME/.tmux/plugins/tpm  ]]; then
+    echo mkdir -p $HOME/.tmux/plugins/tpm
     echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
@@ -203,7 +207,18 @@ printf "Adding Powerline to .tmux.conf\n"
 #echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
 printf "Copying tmux configuration file to home directory\n"
-cp "./.tmux.conf" "$HOME"
+if [[ "$(uname)" == Linux ]]; then
+    #statements
+    cp "./.tmux.conf.rpi" "$HOME"
+    mv "$HOME/.tmux.conf.rpi" "$HOME/.tmux.conf"
+    printf "Installing Iftop config...\n"
+    cp "$INSTALLER_DIR/.iftop.conf" "$HOME" 
+else
+    cp "./.tmux.conf" "$HOME"
+    printf "Installing Iftop config...\n"
+    cp "$INSTALLER_DIR/.iftop.conf.mac" "$HOME" 
+    mv "$HOME/.iftop.conf.mac" "$HOME/.iftop.conf"
+fi
 
 printf "Installing Custom Tmux Commands\n"
 cp -R "$INSTALLER_DIR/.tmux" "$HOME"
@@ -211,7 +226,7 @@ cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 printf "Installing Tmux plugins\n"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
-printf "Installing Colotail Config\n"
+printf "Installing Colortail Config\n"
 cp "$INSTALLER_DIR/.colortailconf" "$HOME"
 
 #printf "Installing IFTOP-color"
@@ -236,21 +251,38 @@ if [[ ! -f "$HOME/.hushlogin" ]]; then
     touch "$HOME/.hushlogin"
 fi
 
-
 if [[ ! -f "$HOME/.my.cnf" ]]; then
     touch "$HOME/.my.cnf"
 fi
 
-printf "Changing pager to cat for MySQL"
+printf "Changing pager to cat for MySQL\n"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
+echo "Copying all Shell Scripts..."
+cp $INSTALLER_DIR/*.sh $HOME/Documents/shellScripts
+
+printf "Installing ponysay from source\n"
+git clone https://github.com/erkin/ponysay.git && {
+cd ponysay && sudo ./setup.py --freedom=partial install && \
+    cd .. && sudo rm -rf ponysay
+}
+
+printf "Installing Pipes.sh from source\n"
+git clone https://github.com/pipeseroni/pipes.sh.git
+cd pipes.sh && {
+sudo make install
+cd ..
+rm -rf pipe.sh
+}
+
 type chsh >/dev/null 2>&1 && {
-    printf "Changing default shell to Zsh\n"
-    chsh -s "$(which zsh)"
+printf "Changing default shell to Zsh\n"
+chsh -s "$(which zsh)"
 }
 
 printf "Changing current shell to Zsh\n"
 exec zsh
+
 
 printf "\e[0m"

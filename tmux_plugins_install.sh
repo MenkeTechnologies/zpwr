@@ -23,4 +23,3 @@ while read repo; do
     installGitHubPlugin "$repo"
 done < "$INSTALLER_DIR/.tmuxplugins"
 }
-
