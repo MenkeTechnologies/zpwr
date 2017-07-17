@@ -155,7 +155,7 @@ WILL_CLEAR=false
 
 #do we want to clear the screen and run ls after we exec the current line?
 #
-commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln)
+commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln mkdir)
 
 for command in ${commandsThatModifyFiles[@]}; do
     regex="^sudo $command .*\$|^$command .*\$"
