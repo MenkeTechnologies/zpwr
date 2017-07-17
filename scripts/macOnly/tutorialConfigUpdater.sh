@@ -6,7 +6,6 @@
 #####   Purpose:  script to update multiple Github repos
 #####   Notes:TutorialFiles, PersonalWebsite, customTerminalInstaller 
 #}}}***********************************************************
-set -x
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
@@ -99,8 +98,8 @@ rm -rf $websiteDir/downloads/scripts/*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -P "$websiteDir/downloads/scripts"
 fi
-cp $SCRIPTS/*.sh " $websiteDir/downloads/scripts"
-cp -R $SCRIPTS/macOnly " $websiteDir/downloads/scripts"
+cp $SCRIPTS/*.sh "$websiteDir/downloads/scripts"
+cp -R $SCRIPTS/macOnly "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
 tar cvfz MenkeTechnologiesShellScripts.tgz scripts
