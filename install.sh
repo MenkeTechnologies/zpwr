@@ -13,6 +13,7 @@
 #set -x
 
 OS_TYPE="$(uname -s)"
+#resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
 #bold
@@ -71,10 +72,11 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     if [[ -z "$(which brew)" ]]; then
         #install homebrew
+        printf "Installing HomeBrew...\n"
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    echo brew ls python > /dev/null 2>&1
+    brew ls python > /dev/null 2>&1
     if [[ $? == 1 ]]; then
         brew install python
         brew install pip
@@ -91,11 +93,16 @@ else
     #{{{                    MARK:Linux
     #**************************************************************
 
-    printf "Installing Dependencies for Linux with APT...\n"
+    printf "Installing Dependencies for Linux with the Advanced Package Manager...\n"
+
+    printf "First Build-Essential and Reptyr...\n"
 
     sudo apt-get -y install build-essential reptyr
 
+    printf "Now The Main Course...\n"
+
     for prog in ${dependencies_ary[@]}; do
+        printf "Installing $prog\n"
         update $prog linux
     done
 
@@ -284,5 +291,4 @@ chsh -s "$(which zsh)"
 printf "Changing current shell to Zsh\n"
 exec zsh
 
-
-printf "\e[0m"
+printf "Done\n\e[0m"
