@@ -1,0 +1,18 @@
+.\" Manpage for count.
+.\" Contact jamenk@email.wm.edu to correct errors or typos.
+.TH man 8 "27 July 2016 "1.0" "count man page"
+.SH NAME
+count - count all commands in PATH variable and optionally list them.
+.SH SYNOPSIS
+count
+.SH DESCRIPTION
+ This  commands  runs  a  script which counts all the commands in the PATH variable and outputs them to screen when prompted.  The command uses the less pager to display the results.
+.SH OPTIONS
+-c Displays just the count.
+-h Shows the help menu.
+.SH SEE ALSO
+export $PATH, .bashrc, .profile, set
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Jacob Menke (jamenk@email.wm.edu)
