@@ -96,6 +96,9 @@ cp $HOME/.zshrc "$websiteDir/downloads"
 
 boldAndUnderlinedPrint "Copying scripts to $websiteDir"
 rm -rf $websiteDir/downloads/scripts/*
+if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
+    mkdir -P "$websiteDir/downloads/scripts"
+fi
 cp $SCRIPTS/*.sh " $websiteDir/downloads/scripts"
 cp -R $SCRIPTS/macOnly " $websiteDir/downloads/scripts"
 
