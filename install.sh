@@ -235,7 +235,7 @@ printf "Adding Powerline to .tmux.conf\n"
 printf "Copying tmux configuration file to home directory\n"
 if [[ "$(uname)" == Linux ]]; then
     #statements
-    cp "./.tmux.conf.rpi" "$HOME"
+    cp "$INSTALLER_DIR/.tmux.conf.rpi" "$HOME"
     mv "$HOME/.tmux.conf.rpi" "$HOME/.tmux.conf"
     printf "Installing Iftop config...\n"
     cp "$INSTALLER_DIR/.iftop.conf" "$HOME" 
