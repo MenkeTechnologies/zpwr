@@ -15,6 +15,10 @@ prettyPrint(){
     printf "\n\e[0m"
 }
 
+exists(){
+type "$1" >/dev/null 2>&1
+}
+
 #start white text on blue background \e44:37m, -e required for escape sequences
 #echo -e "\e[44;37m"
 bash "$SCRIPTS/printHeader.sh"
@@ -22,6 +26,8 @@ bash "$SCRIPTS/printHeader.sh"
 prettyPrint "Updating Python Dependencies"
 #pip lists outdated programs and get first column with awk
 #store in outdated
+
+exists pip3 && {
 outdated=$(pip3 list --outdated | awk '{print $1}')
 
 #install outdated pip modules 
@@ -33,13 +39,18 @@ done
 #update pip itself
 pip3 install --upgrade pip setuptools wheel &> /dev/null
 
+}
+
+exists rvm && {
 prettyPrint "Updating Ruby Dependencies"
 rvm get stable
 gem update --system
 gem update
 gem cleanup
 rvm cleanup all
+}
 
+exists brew && {
 prettyPrint "Updating Homebrew Dependencies"
 brew update #&> /dev/null
 brew upgrade #&> /dev/null
@@ -50,7 +61,9 @@ brew prune
 #remote old programs occupying disk sectors
 brew cleanup
 brew cask cleanup
+}
 
+exists npm && {
 prettyPrint "Updating NPM Dependencies"
 for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
 do
@@ -58,9 +71,14 @@ do
 done
 #updating npm itself
 npm i -g npm
+}
 
+exists yarn && {
 prettyPrint "Updating yarn modules"
 yarn global upgrade
+}
+
+exists cpanm && {
 
 prettyPrint "Updating Perl Dependencies"
 perlOutdated=$(cpan-outdated -p)
@@ -70,6 +88,8 @@ if [[ ! -z "$perlOutdated" ]]; then
 fi
 #have to run expect script to deal with sudo cpan
 #expect $SCRIPTS/CPANupdater.tcl
+
+}
 
 prettyPrint "Updating Pathogen Plugins"
 #update pathogen plugins
@@ -106,7 +126,7 @@ updatePI(){
     yes | sudo apt-get dist-upgrade
     yes | sudo apt-get autoremove
     yes | sudo apt-get upgrade
-EOM
+    EOM
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     cat $SCRIPTS/rpiSoftwareUpdater.sh | ssh -t "$1"
 }
