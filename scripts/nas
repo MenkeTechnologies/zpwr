@@ -1,2 +1,0 @@
-echo -e "\E[1mOpening /Volumes/homes/JAKENAS/softwareTutorials\E[0m"
-open /Volumes/homes/JAKENAS/softwareTutorials
