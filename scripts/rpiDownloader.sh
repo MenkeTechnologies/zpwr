@@ -9,7 +9,9 @@
 
 printf "${BLUE}Downloading $*\n"
 for i in "$@"; do
+    #username of main computer is hardcoded
 	scp -P1234 -r "$i" jacobmenke@localhost:\$HOME/Desktop
+    #if not using reverse port forwarding then ip address must be hardcoded
 	#scp -r "$i" jacobmenke@192.168.0.105:~/Desktop
 done
 printf "Done${RESET}\n"
