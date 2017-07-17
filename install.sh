@@ -119,8 +119,10 @@ done
 #}}}***********************************************************
 
 fi
+#{{{                    MARK:vim
+#**************************************************************
 
-#printf "Installing Vim8\n"
+#printf "Installing Vim8 From Source\n"
 #git clone https://github.com/vim/vim.git vim-master
 #cd vim-master
 #./configure --with-features=huge \
@@ -157,6 +159,8 @@ vim -c PluginInstall -c qall
 printIf "Installing .vimrc\n"
 cp "$INSTALLER_DIR/.vimrc $HOME"
 
+#}}}***********************************************************
+
 ################################################################################
 ## YouCompleteMe
 ################################################################################
@@ -178,10 +182,8 @@ printf "Adding Powerline to .vimrc \n"
 powerline_dir="$(pip show powerline-status | grep Location | awk '{print $2}')"
 echo "set rtp+=$powerline_dir/powerline/bindings/vim" >> .vimrc
 
-################################################################################
-## Zsh
-################################################################################
-
+#{{{                    MARK:zsh
+#**************************************************************
 printf "Installing oh-my-zsh...\n"
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
@@ -199,9 +201,9 @@ cp "$INSTALLER_DIR/.zshrc" "$HOME"
 printf "Installing Zsh plugins\n"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
-################################################################################
-## Tmux
-################################################################################
+#}}}***********************************************************
+#{{{                    MARK:Tmux
+#**************************************************************
 #printf "Installing Tmux Powerline\n"
 
 #tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
@@ -243,6 +245,7 @@ cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 printf "Installing Tmux plugins\n"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
+#}}}***********************************************************
 printf "Installing Colortail Config\n"
 cp "$INSTALLER_DIR/.colortailconf" "$HOME"
 
@@ -272,7 +275,7 @@ if [[ ! -f "$HOME/.my.cnf" ]]; then
     touch "$HOME/.my.cnf"
 fi
 
-printf "Changing pager to cat for MySQL\n"
+printf "Changing pager to cat for MySQL Clients such as MyCLI\n"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
