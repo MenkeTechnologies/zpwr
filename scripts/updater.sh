@@ -121,7 +121,7 @@ updatePI(){
     #pipe yes into programs that require confirmation
     #alternatively apt-get has -y option
     #semicolon to chain commands
-    ssh -t "$1" 'yes | sudo apt-get update
+    ssh -t -t "$1" 'yes | sudo apt-get update
     yes | sudo apt-get dist-upgrade
     yes | sudo apt-get autoremove
     yes | sudo apt-get upgrade'
