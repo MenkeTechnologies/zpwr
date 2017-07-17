@@ -1,4 +1,4 @@
-alias get='bash $SCRIPTS/rpiDownLoader.sh'
+alias get='bash $SCRIPTS/rpiDownloader.sh'
 alias cam="raspistill -vf -hf -rot 270 -o cam.jpg"
 alias vid="raspivid -vf -hf -rot 270 -t 10000 -o cam.h264"
 alias web="f /var/www/html/"
