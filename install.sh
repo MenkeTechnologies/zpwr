@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
-
-#Created by jacobmenke at Wed May 31 22:54:32 EDT 2017
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Wed May 31 22:54:32 EDT 2017
+#####   Purpose: bash script for custom terminal setup
+#####   Notes: 
+#}}}***********************************************************
 
 #{{{                    MARK:Setup
 #**************************************************************
