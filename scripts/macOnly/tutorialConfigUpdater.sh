@@ -17,6 +17,8 @@ boldAndUnderlinedPrint(){
     printf "\e[1;4m$1\n\e[0m"
 }
 
+#{{{                    MARK:tutorialsDir
+#**************************************************************
 boldAndUnderlinedPrint "Copying zshrc"
 cp $HOME/.zshrc "$tutorialDir/zsh"
 boldAndUnderlinedPrint "Copying vimrc"
@@ -80,13 +82,11 @@ boldAndUnderlinedPrint "Pushing..."
 git add .
 git commit -m "update"
 git push
+#}}}***********************************************************
 
 
 #{{{                    MARK:websiteDir
 #**************************************************************
-
-#}}}***********************************************************
-
 boldAndUnderlinedPrint "Copying config files to websiteDir"
 cp $HOME/.vimrc "$websiteDir/downloads"
 cp $HOME/.vim/colors/bluewolf.vim "$websiteDir/downloads"
@@ -109,7 +109,10 @@ boldAndUnderlinedPrint "Pushing..."
 git add .
 git commit -m "update"
 git push
+#}}}***********************************************************
 
+#{{{                    MARK:installer
+#**************************************************************
 boldAndUnderlinedPrint "Copying scripts to custom Installer Repo"
 rm -rf $SCRIPTS/customTerminalInstaller/scripts/*
 cp "$SCRIPTS"/*.sh "$installerDir/scripts"
@@ -129,3 +132,4 @@ boldAndUnderlinedPrint "Pushing..."
 git add .
 git commit -m "update"
 git push
+#}}}***********************************************************
