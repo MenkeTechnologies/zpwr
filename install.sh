@@ -287,7 +287,8 @@ echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
 echo "Copying all Shell Scripts..."
-cp $INSTALLER_DIR/*.sh $HOME/Documents/shellScripts
+cp $INSTALLER_DIR/scripts/*.sh $HOME/Documents/shellScripts
+cp -R $INSTALLER_DIR/scripts/macOnly $HOME/Documents/shellScripts
 
 printf "Installing ponysay from source\n"
 git clone https://github.com/erkin/ponysay.git && {
