@@ -47,6 +47,7 @@ export BLUE="\e[37;44m"
 export RED="\e[31m"
 export RESET="\e[0m"
 export LOGFILE="$HOME/updaterlog.txt"
+export UMASK=077
 #}}}
 
 #{{{                          MARK:ALIASES
