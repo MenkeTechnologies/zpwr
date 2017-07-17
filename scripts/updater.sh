@@ -16,7 +16,7 @@ prettyPrint(){
 }
 
 exists(){
-type "$1" >/dev/null 2>&1
+    type "$1" >/dev/null 2>&1
 }
 
 #start white text on blue background \e44:37m, -e required for escape sequences
@@ -121,14 +121,14 @@ updatePI(){
     #pipe yes into programs that require confirmation
     #alternatively apt-get has -y option
     #semicolon to chain commands
-    ssh -t "$1" <<\EOM
-    yes | sudo apt-get update
+    ssh -t "$1" 'yes | sudo apt-get update
     yes | sudo apt-get dist-upgrade
     yes | sudo apt-get autoremove
-    yes | sudo apt-get upgrade
-EOM
+    yes | sudo apt-get upgrade'
+
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
-    cat $SCRIPTS/rpiSoftwareUpdater.sh | ssh -t "$1"
+    #avoid sending commmands from stdin into ssh, better to use string after ssh
+    ssh -t -t "$1" "$(< $SCRIPTS/rpiSoftwareUpdater.sh)"
 }
 
 arrayOfPI=(r r2)
