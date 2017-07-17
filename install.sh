@@ -93,20 +93,30 @@ else
     #{{{                    MARK:Linux
     #**************************************************************
 
-    printf "Installing Dependencies for Linux with the Advanced Package Manager...\n"
 
-    printf "First Build-Essential and Reptyr...\n"
+    distroName=$(lsb_release -a | head -1 | awk '{print $3}')
+}
 
-    sudo apt-get -y install build-essential reptyr
+case $distroName in
+    Raspbian ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+        ;;
+    * )
+    printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
+    exit 1
+esac
 
-    printf "Now The Main Course...\n"
+printf "First Build-Essential and Reptyr...\n"
 
-    for prog in ${dependencies_ary[@]}; do
-        printf "Installing $prog\n"
-        update $prog linux
-    done
+sudo apt-get -y install build-essential reptyr
 
-    #}}}***********************************************************
+printf "Now The Main Course...\n"
+
+for prog in ${dependencies_ary[@]}; do
+    printf "Installing $prog\n"
+    update $prog linux
+done
+
+#}}}***********************************************************
 
 fi
 
