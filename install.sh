@@ -144,7 +144,7 @@ printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
 
-printIf "Installing Vimrc\n"
+printIf "Installing .vimrc\n"
 cp "$INSTALLER_DIR/.vimrc $HOME"
 
 ################################################################################
@@ -179,14 +179,14 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 cp "$INSTALLER_DIR/agnosterzak.zsh-theme" $HOME/.oh-my-zsh/themes/
 
 #add aliases and functions
-printf "Adding common shell aliases\n"
+printf "Adding common shell aliases for Bash and Zsh\n"
 cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
 #echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
-printf "Installing Zshrc\n"
+printf "Installing .zshrc\n"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
-printf "Instpalling zsh plugins\n"
+printf "Installing Zsh plugins\n"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 ################################################################################
