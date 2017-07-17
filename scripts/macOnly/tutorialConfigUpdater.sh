@@ -58,7 +58,7 @@ cp "$HOME/Documents/iterm-jm-colors.itermcolors" "$tutorialDir"
 
 boldAndUnderlinedPrint "Copying vim plugins"
 
-cp -R "$HOME/.vim" "$tutorialDir/vim"
+sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
 cd "$tutorialDir" || exit 1
 
@@ -80,6 +80,12 @@ boldAndUnderlinedPrint "Pushing..."
 git add .
 git commit -m "update"
 git push
+
+
+#{{{                    MARK:websiteDir
+#**************************************************************
+
+#}}}***********************************************************
 
 boldAndUnderlinedPrint "Copying config files to websiteDir"
 cp $HOME/.vimrc "$websiteDir/downloads"
