@@ -6,6 +6,7 @@
 #####   Purpose:  script to update multiple Github repos
 #####   Notes:TutorialFiles, PersonalWebsite, customTerminalInstaller 
 #}}}***********************************************************
+set -x
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
@@ -33,7 +34,8 @@ cp $HOME/.rpitokens.sh "$tutorialDir/aliases"
 boldAndUnderlinedPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/*"
-cp -R "$SCRIPTS"/*.sh "$SCRIPTS"/macOnly "$tutorialDir/shell"
+cp "$SCRIPTS"/*.sh "$tutorialDir/shell"
+cp -R "$SCRIPTS"/macOnly "$tutorialDir/shell"
 
 boldAndUnderlinedPrint "Copying tags file"
 cp "$HOME/Documents/shellScripts/tags" "$tutorialDir/shell"
@@ -88,7 +90,8 @@ cp $HOME/.zshrc "$websiteDir/downloads"
 
 boldAndUnderlinedPrint "Copying scripts to $websiteDir"
 rm -rf $websiteDir/downloads/scripts/*
-cp -R $SCRIPTS/*.sh "$SCRIPTS"/macOnly $websiteDir/downloads/scripts"
+cp $SCRIPTS/*.sh " $websiteDir/downloads/scripts"
+cp -R $SCRIPTS/macOnly " $websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
 tar cvfz MenkeTechnologiesShellScripts.tgz scripts
@@ -103,7 +106,8 @@ git push
 
 boldAndUnderlinedPrint "Copying scripts to custom Installer Repo"
 rm -rf $SCRIPTS/customTerminalInstaller/scripts/*
-cp -R "$SCRIPTS"/*.sh "$SCRIPTS"/macOnly "$installerDir/scripts"
+cp "$SCRIPTS"/*.sh "$installerDir/scripts"
+cp -R "$SCRIPTS"/macOnly "$installerDir/scripts"
 cp $HOME/.vimrc "$installerDir"
 cp $HOME/.tmux.conf "$installerDir"
 cp $HOME/.tmux.conf.rpi "$installerDir"
