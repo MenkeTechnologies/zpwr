@@ -325,5 +325,6 @@ printf "Starting Tmux...\n"
 tmux
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
+tmux send-keys "matr" C-m
 
 printf "Done\n\e[0m"
