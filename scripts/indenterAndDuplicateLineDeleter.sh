@@ -34,4 +34,3 @@ for file; do
     echo "$contents" > "$file"
     vim -E -c ":normal gg=G" -c ":wq" "$file"
 done
-

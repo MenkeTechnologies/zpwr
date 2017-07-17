@@ -6,10 +6,3 @@ say my pwd is `echo dogs`
 
 ls
 pwd
-
-
-
-
-
-
-

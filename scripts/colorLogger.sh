@@ -12,7 +12,13 @@ shopt -s globstar
 if [[ $(uname) == Darwin ]]; then
     colortail -k $HOME/.colortailconf -f /var/log/**/*.log /var/log/**/*.out 
 else
-    colortail -k /home/pi/.colortailconf -f /var/log/**/*.log /var/log/{dmesg,wtmp,debug,lastlog,messages} /var/log/**/*.err
+    #linux
+    distroName=$(lsb_release -a | head -1 | awk '{print $3}')
+
+    if [[ $distroName == Raspbian ]]; then
+        colortail -k /home/pi/.colortailconf -f /var/log/**/*.log /var/log/{dmesg,wtmp,debug,lastlog,messages} /var/log/**/*.err
+    else 
+        printf "Unsupported distro: $distroName...\n" >&2
+    fi
+
 fi
-
-
