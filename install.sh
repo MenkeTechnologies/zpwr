@@ -13,6 +13,7 @@
 #set -x
 
 OS_TYPE="$(uname -s)"
+#resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
 #bold
@@ -71,10 +72,11 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     if [[ -z "$(which brew)" ]]; then
         #install homebrew
+        printf "Installing HomeBrew...\n"
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
 
-    echo brew ls python > /dev/null 2>&1
+    brew ls python > /dev/null 2>&1
     if [[ $? == 1 ]]; then
         brew install python
         brew install pip
@@ -91,19 +93,36 @@ else
     #{{{                    MARK:Linux
     #**************************************************************
 
-    printf "Installing Dependencies for Linux with APT...\n"
 
-    sudo apt-get -y install build-essential reptyr
+    distroName=$(lsb_release -a | head -1 | awk '{print $3}')
+}
 
-    for prog in ${dependencies_ary[@]}; do
-        update $prog linux
-    done
+case $distroName in
+    Raspbian ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+        ;;
+    * )
+    printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
+    exit 1
+esac
 
-    #}}}***********************************************************
+printf "First Build-Essential and Reptyr...\n"
+
+sudo apt-get -y install build-essential reptyr
+
+printf "Now The Main Course...\n"
+
+for prog in ${dependencies_ary[@]}; do
+    printf "Installing $prog\n"
+    update $prog linux
+done
+
+#}}}***********************************************************
 
 fi
+#{{{                    MARK:vim
+#**************************************************************
 
-#printf "Installing Vim8\n"
+#printf "Installing Vim8 From Source\n"
 #git clone https://github.com/vim/vim.git vim-master
 #cd vim-master
 #./configure --with-features=huge \
@@ -137,8 +156,10 @@ printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
 
-printIf "Installing Vimrc\n"
+printIf "Installing .vimrc\n"
 cp "$INSTALLER_DIR/.vimrc $HOME"
+
+#}}}***********************************************************
 
 ################################################################################
 ## YouCompleteMe
@@ -161,10 +182,8 @@ printf "Adding Powerline to .vimrc \n"
 powerline_dir="$(pip show powerline-status | grep Location | awk '{print $2}')"
 echo "set rtp+=$powerline_dir/powerline/bindings/vim" >> .vimrc
 
-################################################################################
-## Zsh
-################################################################################
-
+#{{{                    MARK:zsh
+#**************************************************************
 printf "Installing oh-my-zsh...\n"
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
@@ -172,19 +191,19 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 cp "$INSTALLER_DIR/agnosterzak.zsh-theme" $HOME/.oh-my-zsh/themes/
 
 #add aliases and functions
-printf "Adding common shell aliases\n"
+printf "Adding common shell aliases for Bash and Zsh\n"
 cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
 #echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
-printf "Installing Zshrc\n"
+printf "Installing .zshrc\n"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
-printf "Instpalling zsh plugins\n"
+printf "Installing Zsh plugins\n"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
-################################################################################
-## Tmux
-################################################################################
+#}}}***********************************************************
+#{{{                    MARK:Tmux
+#**************************************************************
 #printf "Installing Tmux Powerline\n"
 
 #tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
@@ -226,6 +245,7 @@ cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 printf "Installing Tmux plugins\n"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
+#}}}***********************************************************
 printf "Installing Colortail Config\n"
 cp "$INSTALLER_DIR/.colortailconf" "$HOME"
 
@@ -255,7 +275,7 @@ if [[ ! -f "$HOME/.my.cnf" ]]; then
     touch "$HOME/.my.cnf"
 fi
 
-printf "Changing pager to cat for MySQL\n"
+printf "Changing pager to cat for MySQL Clients such as MyCLI\n"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
@@ -284,5 +304,4 @@ chsh -s "$(which zsh)"
 printf "Changing current shell to Zsh\n"
 exec zsh
 
-
-printf "\e[0m"
+printf "Done\n\e[0m"
