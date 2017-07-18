@@ -116,7 +116,7 @@ printf "First Build-Essential and Reptyr...\n"
 
 sudo apt-get -y install build-essential reptyr
 
-    printf "\e[4mNow The Main Course...\n\e[0;1m"
+printf "\e[4mNow The Main Course...\n\e[0;1m"
 
 for prog in ${dependencies_ary[@]}; do
     printf "Installing $prog\n"
@@ -313,8 +313,10 @@ if [[ ! -f "$htopDIR/htoprfc" ]]; then
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
 fi
 
-printf "Installing youtube-dl\n"
-sudo pip install --upgrade youtube_dl
+type youtube-dl >/dev/null 2>&1 || {
+    printf "Installing youtube-dl\n"
+    sudo pip install --upgrade youtube_dl
+}
 
 
 type chsh >/dev/null 2>&1 && {

@@ -12,7 +12,7 @@ export D="$HOME/Desktop"
 # Setting PATH for Python 3.5
 # The orginal version is saved in .profile.pysave
 unset PATH
-export PATH="$PATH:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
+export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
 export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:Library/Frameworks/Python.framework/Versions/3.5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
 export GITHUB_ACCOUNT='MenkeTechnologies'
 
