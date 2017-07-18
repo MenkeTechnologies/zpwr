@@ -182,6 +182,12 @@ precmd(){
     #exec 2> >(blueUpperText.sh)
 }
 
+periodic(){
+    clearList
+}
+
+PERIOD=60
+
 
 function rationalize-dot {
     if [[ $LBUFFER = *.. ]]; then
