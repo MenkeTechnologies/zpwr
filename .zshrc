@@ -156,7 +156,7 @@ WILL_CLEAR=false
 
 #do we want to clear the screen and run ls after we exec the current line?
 #
-commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl)
+commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
 
 for command in ${commandsThatModifyFiles[@]}; do
     regex="^sudo $command .*\$|^$command .*\$"
@@ -196,7 +196,6 @@ zle -N rationalize-dot
 bindkey . rationalize-dot
 
 #}}}***********************************************************
-
 
 # Set Options {{{
 # ===== Basics
