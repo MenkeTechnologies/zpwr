@@ -315,8 +315,8 @@ if [[ ! -f "$htopDIR/htoprfc" ]]; then
 fi
 
 type youtube-dl >/dev/null 2>&1 || {
-    printf "Installing youtube-dl\n"
-    sudo pip install --upgrade youtube_dl
+printf "Installing youtube-dl\n"
+sudo pip install --upgrade youtube_dl
 }
 
 
@@ -329,6 +329,7 @@ printf "Changing current shell to Zsh\n"
 exec zsh
 
 printf "Starting Tmux...\n"
+printf "Matrix time...\n"
 tmux
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
