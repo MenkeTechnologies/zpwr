@@ -130,8 +130,9 @@ function _gitfunc {
 }
 
 function _tutsUpdate() {
+    commit="$BUFFER"
     zle kill-whole-line
-    BUFFER="( echo tutorialConfigUpdater.sh $BUFFER > ~/updaterlog.txt 2>&1 & )"
+    BUFFER="( tutorialConfigUpdater.sh '$commit' > ~/updaterlog.txt 2>&1 & )"
     zle .accept-line
 }
 
