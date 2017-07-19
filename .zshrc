@@ -330,4 +330,5 @@ fi
 
 export LC_CTYPE="en_US.UTF-8"
 
+#imgcat and other special features from iTerm's shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
