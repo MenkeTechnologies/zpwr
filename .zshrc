@@ -323,7 +323,7 @@ if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
 fi
 #go to desktop if not root
 if [[ "$UID" != "0" ]]; then
-    cd $D && clearList
+    cd $D
 else
     clearList
 fi
