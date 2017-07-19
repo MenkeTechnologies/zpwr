@@ -61,7 +61,6 @@ brew prune
 #remote old programs occupying disk sectors
 brew cleanup
 brew cask cleanup
-}
 #check is we have brew cu
 "brew cu" 1>/dev/null 2>&1 && {
 prettyPrint "Updating Homebrew Casks!"
@@ -73,6 +72,7 @@ brew update
 prettyPrint "Updating Homebrew Casks!"
 brew cu --all -y --cleanup
 } 
+}
 
 exists npm && {
 prettyPrint "Updating NPM Dependencies"
