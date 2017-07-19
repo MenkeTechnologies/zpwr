@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Thu Jul  6 23:16:50 EDT 2017
+#####   Purpose: bash script to change the shebang line
+#####   Notes: 
+#}}}***********************************************************
+
 #     /\  \         /\__\         /\  \         /|  |         /\__\    
 #    |::\  \       /:/ _/_        \:\  \       |:|  |        /:/ _/_   
 #    |:|:\  \     /:/ /\__\        \:\  \      |:|  |       /:/ /\__\  
@@ -20,16 +28,6 @@
 # \/__\:\  \      \:\/:/  /     \:\/:/  /     \:\  \     
 #      \:\__\      \::/  /       \::/  /       \:\__\    
 #       \/__/       \/__/         \/__/         \/__/    
-
-#!/usr/bin/env bash
-#{{{                    MARK:Header
-#**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Thu Jul  6 23:16:50 EDT 2017
-#####   Purpose: bash script to change the shebang line
-#####   Notes: 
-#}}}***********************************************************
-
 usage(){
     #here doc for printing multiline
     cat <<\endofmessage
