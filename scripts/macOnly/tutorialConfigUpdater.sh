@@ -16,6 +16,13 @@ boldAndUnderlinedPrint(){
     printf "\e[1;4m$1\n\e[0m"
 }
 
+
+if [[ ! -z "$1" ]]; then
+    commitMessage="$1"
+else
+    commitMessage="update"
+fi
+
 #{{{                    MARK:tutorialsDir
 #**************************************************************
 boldAndUnderlinedPrint "Copying zshrc"
@@ -79,7 +86,7 @@ boldAndUnderlinedPrint "Status..."
 git status
 boldAndUnderlinedPrint "Pushing..."
 git add .
-git commit -m "update"
+git commit -m "$commitMessage"
 git push
 #}}}***********************************************************
 
@@ -109,7 +116,7 @@ boldAndUnderlinedPrint "Status..."
 git status
 boldAndUnderlinedPrint "Pushing..."
 git add .
-git commit -m "update"
+git commit -m "$commitMessage"
 git push
 #}}}***********************************************************
 
@@ -132,6 +139,6 @@ boldAndUnderlinedPrint "Status"
 git status
 boldAndUnderlinedPrint "Pushing..."
 git add .
-git commit -m "update"
+git commit -m "$commitMessage"
 git push
 #}}}***********************************************************

@@ -131,7 +131,7 @@ function _gitfunc {
 
 function _tutsUpdate() {
     zle kill-whole-line
-    BUFFER="( tutorialConfigUpdater.sh > ~/updaterlog.txt 2>&1 & )"
+    BUFFER="( echo tutorialConfigUpdater.sh $BUFFER > ~/updaterlog.txt 2>&1 & )"
     zle .accept-line
 }
 
@@ -182,11 +182,6 @@ precmd(){
     #exec 2> >(blueUpperText.sh)
 }
 
-periodic(){
-    clearList
-}
-
-PERIOD=60
 
 
 function rationalize-dot {
