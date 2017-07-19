@@ -130,8 +130,9 @@ function _gitfunc {
 }
 
 function _tutsUpdate() {
+    commit="$BUFFER"
     zle kill-whole-line
-    BUFFER="( bash tutorialConfigUpdater.sh > ~/updaterlog.txt 2>&1 & )"
+    BUFFER="( tutorialConfigUpdater.sh '$commit' > ~/updaterlog.txt 2>&1 & )"
     zle .accept-line
 }
 
@@ -155,7 +156,7 @@ WILL_CLEAR=false
 
 #do we want to clear the screen and run ls after we exec the current line?
 #
-commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln mkdir)
+commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl)
 
 for command in ${commandsThatModifyFiles[@]}; do
     regex="^sudo $command .*\$|^$command .*\$"
@@ -181,6 +182,7 @@ precmd(){
     fi
     #exec 2> >(blueUpperText.sh)
 }
+
 
 
 function rationalize-dot {

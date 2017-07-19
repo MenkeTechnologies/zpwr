@@ -7,4 +7,4 @@
 #####   Notes: 
 #}}}***********************************************************
 
-bash myWatchNoBlink.sh "lsof -i | sed 's/jacobmenke//'" 1
+bash myWatchNoBlink.sh "lsof -i | sed s/""$(whoami)""//" 1

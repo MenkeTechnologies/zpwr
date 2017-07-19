@@ -1,4 +1,4 @@
-#!/usr/bin/env bash 
+#!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
@@ -16,6 +16,15 @@ boldAndUnderlinedPrint(){
     printf "\e[1;4m$1\n\e[0m"
 }
 
+
+if [[ ! -z "$1" ]]; then
+    commitMessage="$1"
+else
+    commitMessage="update"
+fi
+
+#{{{                    MARK:tutorialsDir
+#**************************************************************
 boldAndUnderlinedPrint "Copying zshrc"
 cp $HOME/.zshrc "$tutorialDir/zsh"
 boldAndUnderlinedPrint "Copying vimrc"
@@ -32,8 +41,9 @@ cp $HOME/.rpitokens.sh "$tutorialDir/aliases"
 
 boldAndUnderlinedPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
-rm -f "$tutorialDir/shell/"*.sh
-cp "$HOME/Documents/shellScripts/"*.sh "$tutorialDir/shell"
+rm -rf "$tutorialDir/shell/*"
+cp "$SCRIPTS"/*.sh "$tutorialDir/shell"
+cp -R "$SCRIPTS"/macOnly "$tutorialDir/shell"
 
 boldAndUnderlinedPrint "Copying tags file"
 cp "$HOME/Documents/shellScripts/tags" "$tutorialDir/shell"
@@ -56,7 +66,7 @@ cp "$HOME/Documents/iterm-jm-colors.itermcolors" "$tutorialDir"
 
 boldAndUnderlinedPrint "Copying vim plugins"
 
-cp -R "$HOME/.vim" "$tutorialDir/vim"
+sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
 cd "$tutorialDir" || exit 1
 
@@ -76,9 +86,13 @@ boldAndUnderlinedPrint "Status..."
 git status
 boldAndUnderlinedPrint "Pushing..."
 git add .
-git commit -m "update"
+git commit -m "$commitMessage"
 git push
+#}}}***********************************************************
 
+
+#{{{                    MARK:websiteDir
+#**************************************************************
 boldAndUnderlinedPrint "Copying config files to websiteDir"
 cp $HOME/.vimrc "$websiteDir/downloads"
 cp $HOME/.vim/colors/bluewolf.vim "$websiteDir/downloads"
@@ -87,8 +101,12 @@ cp $HOME/.shell_aliases_functions.sh "$websiteDir/downloads"
 cp $HOME/.zshrc "$websiteDir/downloads"
 
 boldAndUnderlinedPrint "Copying scripts to $websiteDir"
-rm $websiteDir/downloads/scripts/*.sh
+rm -rf $websiteDir/downloads/scripts/*
+if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
+    mkdir -P "$websiteDir/downloads/scripts"
+fi
 cp $SCRIPTS/*.sh "$websiteDir/downloads/scripts"
+cp -R $SCRIPTS/macOnly "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
 tar cvfz MenkeTechnologiesShellScripts.tgz scripts
@@ -98,12 +116,16 @@ boldAndUnderlinedPrint "Status..."
 git status
 boldAndUnderlinedPrint "Pushing..."
 git add .
-git commit -m "update"
+git commit -m "$commitMessage"
 git push
+#}}}***********************************************************
 
+#{{{                    MARK:installer
+#**************************************************************
 boldAndUnderlinedPrint "Copying scripts to custom Installer Repo"
-rm $SCRIPTS/customTerminalInstaller/scripts/*.sh 
-cp $SCRIPTS/*.sh "$installerDir/scripts"
+rm -rf $SCRIPTS/customTerminalInstaller/scripts/*
+cp "$SCRIPTS"/*.sh "$installerDir/scripts"
+cp -R "$SCRIPTS"/macOnly "$installerDir/scripts"
 cp $HOME/.vimrc "$installerDir"
 cp $HOME/.tmux.conf "$installerDir"
 cp $HOME/.tmux.conf.rpi "$installerDir"
@@ -117,5 +139,6 @@ boldAndUnderlinedPrint "Status"
 git status
 boldAndUnderlinedPrint "Pushing..."
 git add .
-git commit -m "update"
+git commit -m "$commitMessage"
 git push
+#}}}***********************************************************

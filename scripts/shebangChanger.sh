@@ -30,23 +30,24 @@
 #####   Notes: 
 #}}}***********************************************************
 
-if (( $# < 2 )); then
-    usage
-    exit
-fi
-
-executableProgram=$1
-path="#!/usr/bin/env $executableProgram"
-shift
-
 usage(){
     #here doc for printing multiline
     cat <<\endofmessage
     usage:
     script $1=executableProgram $*=files
 endofmessage
+
     printf "\e[0m"
 }
+if (( $# < 2 )); then
+    usage >&2
+    exit 1
+fi
+
+executableProgram=$1
+path="#!/usr/bin/env $executableProgram"
+shift
+
 
 addContents(){
     printf "\e[1;4m Adding shebang : $path to $file\e[0m\n"
@@ -78,7 +79,9 @@ for file; do
     done < $file
 
     if [[ $found == true ]]; then
-        tail=$(tail +$lineCounter "$file")
+        #doesn't work on rpi
+        #tail=$(tail +$lineCounter "$file")
+        tail=$(sed -n "$lineCounter,$"p "$file")
         addContents
     fi
 

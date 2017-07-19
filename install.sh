@@ -40,7 +40,7 @@ printf "\e[1m"
 dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpython python-dev \
     python3-dev colortail screenfetch fortune postfix mailutils \
     libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh libevent-dev libncurses5-dev libgnome2-dev\
-    libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev netatalk \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev at dnsutils \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm nginx nmap mtr tcpdump \
     jnettop iotop atop software-properties-common ctags speedtest-cli texinfo lsof weechat)
@@ -116,7 +116,7 @@ printf "First Build-Essential and Reptyr...\n"
 
 sudo apt-get -y install build-essential reptyr
 
-    printf "\e[4mNow The Main Course...\n\e[0;1m"
+printf "\e[4mNow The Main Course...\n\e[0;1m"
 
 for prog in ${dependencies_ary[@]}; do
     printf "Installing $prog\n"
@@ -235,7 +235,7 @@ printf "Adding Powerline to .tmux.conf\n"
 printf "Copying tmux configuration file to home directory\n"
 if [[ "$(uname)" == Linux ]]; then
     #statements
-    cp "./.tmux.conf.rpi" "$HOME"
+    cp "$INSTALLER_DIR/.tmux.conf.rpi" "$HOME"
     mv "$HOME/.tmux.conf.rpi" "$HOME/.tmux.conf"
     printf "Installing Iftop config...\n"
     cp "$INSTALLER_DIR/.iftop.conf" "$HOME" 
@@ -287,7 +287,8 @@ echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
 echo "Copying all Shell Scripts..."
-cp $INSTALLER_DIR/*.sh $HOME/Documents/shellScripts
+cp $INSTALLER_DIR/scripts/*.sh $HOME/Documents/shellScripts
+cp -R $INSTALLER_DIR/scripts/macOnly $HOME/Documents/shellScripts
 
 printf "Installing ponysay from source\n"
 git clone https://github.com/erkin/ponysay.git && {
@@ -312,6 +313,12 @@ if [[ ! -f "$htopDIR/htoprfc" ]]; then
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
 fi
 
+type youtube-dl >/dev/null 2>&1 || {
+    printf "Installing youtube-dl\n"
+    sudo pip install --upgrade youtube_dl
+}
+
+
 type chsh >/dev/null 2>&1 && {
 printf "Changing default shell to Zsh\n"
 chsh -s "$(which zsh)"
@@ -319,5 +326,11 @@ chsh -s "$(which zsh)"
 
 printf "Changing current shell to Zsh\n"
 exec zsh
+
+printf "Starting Tmux...\n"
+tmux
+tmux source-file "$HOME/.tmux/control-window"
+tmux select-pane -t right
+tmux send-keys "matr" C-m
 
 printf "Done\n\e[0m"

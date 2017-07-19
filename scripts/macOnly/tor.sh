@@ -11,6 +11,11 @@ prettyPrint (){
 
 }
 
+
+INTERFACE=Wi-Fi
+
+sudo -v
+
 #keep sudo alive
 while true; do
     sudo -n true
