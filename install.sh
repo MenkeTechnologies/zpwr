@@ -51,17 +51,20 @@ dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpy
 #{{{                    MARK:Functions
 #**************************************************************
 
+exists(){
+    type "$1" >/dev/null 2>&1
+}
+
 update (){
 
-    if [[ -z "$(which $1)" ]]; then
+    exists "$1" || {
+
         if [[ $2 == mac ]]; then
             brew install "$1"
         else
             sudo apt-get install -y "$1"
         fi
-    else
-        printf "Already have $1\n"
-    fi
+    }
 }
 
 #}}}***********************************************************
@@ -71,11 +74,11 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     #**************************************************************
     printf "Checking Dependencies for Mac...\n"
 
-    if [[ -z "$(which brew)" ]]; then
+    exists "brew" || {
         #install homebrew
         printf "Installing HomeBrew...\n"
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    fi
+    }
 
     printf "We have Homebrew...\n"
 
