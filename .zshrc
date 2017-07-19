@@ -137,7 +137,7 @@ function _tutsUpdate() {
             zle .accept-line
         else
             zle kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh '$commit' > ~/updaterlog.txt 2>&1 & )"
+            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' > ~/updaterlog.txt 2>&1 & )"
             zle .accept-line
         fi
     else
