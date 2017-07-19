@@ -125,7 +125,7 @@ function _updater {
 
 function _gitfunc {
     gitCommitAndPush "$BUFFER"
-    BUFFER=""
+    zle kill-whole-line
     zle .accept-line
 }
 
