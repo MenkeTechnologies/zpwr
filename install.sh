@@ -103,28 +103,27 @@ else
 
 
     distroName=$(lsb_release -a | head -1 | awk '{print $3}')
-}
 
-case $distroName in
-    Raspbian ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
-        ;;
-    * )
-        printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
-        exit 1
-esac
+    case $distroName in
+        Raspbian ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+            ;;
+        * )
+            printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
+            exit 1
+    esac
 
-printf "First Build-Essential and Reptyr...\n"
+    printf "First Build-Essential and Reptyr...\n"
 
-sudo apt-get -y install build-essential reptyr
+    sudo apt-get -y install build-essential reptyr
 
-printf "\e[4mNow The Main Course...\n\e[0;1m"
+    printf "\e[4mNow The Main Course...\n\e[0;1m"
 
-for prog in ${dependencies_ary[@]}; do
-    printf "Installing $prog\n"
-    update $prog linux
-done
+    for prog in ${dependencies_ary[@]}; do
+        printf "Installing $prog\n"
+        update $prog linux
+    done
 
-#}}}***********************************************************
+    #}}}***********************************************************
 
 fi
 #{{{                    MARK:vim
