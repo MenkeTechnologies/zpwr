@@ -131,6 +131,9 @@ function _gitfunc {
 
 function _tutsUpdate() {
     commit="$BUFFER"
+    if [[ condition ]]; then
+        #statements
+    fi
     zle kill-whole-line
     BUFFER="( tutorialConfigUpdater.sh '$commit' > ~/updaterlog.txt 2>&1 & )"
     zle .accept-line
