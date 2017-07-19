@@ -91,6 +91,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias c="cd /Volumes/JAKESD/wcc/cps; clearList"
     alias emu="open /Volumes/JAKESD/EMU"
     alias pkill="pkill -iIl"
+    alias q="qlmanage -p &>/dev/null"
 else
     #Linux
     alias apt="sudo apt-get install -y"
