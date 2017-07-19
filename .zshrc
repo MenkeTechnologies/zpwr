@@ -329,3 +329,5 @@ else
 fi
 
 export LC_CTYPE="en_US.UTF-8"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
