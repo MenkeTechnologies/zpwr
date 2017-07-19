@@ -8,6 +8,9 @@
 #}}}***********************************************************
 
 for file; do
-    echo "$(basename $file) $(sed -n 6p $file)"
+    purpose=$(sed -n 6p $file)"
+    if [[ ! -z "$purpose" ]]; then
+        echo "$(basename $file) $(sed -n 6p $file)"
+    fi
     echo
 done
