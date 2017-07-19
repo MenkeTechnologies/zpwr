@@ -65,13 +65,13 @@ exists brew && {
     "brew cu" 1>/dev/null 2>&1 && {
         prettyPrint "Updating Homebrew Casks!"
         brew cu --all -y --cleanup
-        } || {
-            prettyPrint "Installing brew-cask-upgrade"
-            brew tap buo/cask-upgrade
-            brew update
-            prettyPrint "Updating Homebrew Casks!"
-            brew cu --all -y --cleanup
-        } 
+     } || {
+        prettyPrint "Installing brew-cask-upgrade"
+        brew tap buo/cask-upgrade
+        brew update
+        prettyPrint "Updating Homebrew Casks!"
+        brew cu --all -y --cleanup
+     } 
 }
 
 exists npm && {
