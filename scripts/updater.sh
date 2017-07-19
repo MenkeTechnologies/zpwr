@@ -134,6 +134,7 @@ updatePI(){
     #pipe yes into programs that require confirmation
     #alternatively apt-get has -y option
     #semicolon to chain commands
+    # -x option to disable x11 forwarding
     ssh -x "$1" 'yes | sudo apt-get update
     yes | sudo apt-get dist-upgrade
     yes | sudo apt-get autoremove
