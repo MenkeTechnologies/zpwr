@@ -257,8 +257,8 @@ setopt nolistbeep
 # }}}
 
 # Auto Completion {{{
-# avoid insecure warnign message with -u
-autoload -U compinit && compinit -u
+# avoid insecure warning message with -u
+autoload -U compinit && compinit u
 zmodload -i zsh/complist
 
 # Enable completion caching, use rehash to clear
