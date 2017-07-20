@@ -12,7 +12,7 @@ shopt -s globstar
 if [[ $(uname) == Darwin ]]; then
     colortail -k $HOME/.colortailconf -f /var/log/**/*.log /var/log/**/*.out /var/log/DiagnosticMessages \
         /var/log/asl /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
-        /Library/Logs/**/*.log /Library/Logs/**/*.diag
+        /Library/Logs/**/*.log 
 else
     #linux
     distroName=$(lsb_release -a | head -1 | awk '{print $3}')
