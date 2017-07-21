@@ -290,6 +290,9 @@ echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
 echo "Copying all Shell Scripts..."
+if [[ ! -d "$HOME/Documents/shellScripts" ]]; then
+    mkdir -p "$HOME/Documents/shellScripts"
+fi
 cp $INSTALLER_DIR/scripts/*.sh $HOME/Documents/shellScripts
 cp -R $INSTALLER_DIR/scripts/macOnly $HOME/Documents/shellScripts
 
