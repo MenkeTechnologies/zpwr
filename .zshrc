@@ -60,7 +60,7 @@ fi
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh zsh-completions zsh-autosuggestions rvm perl osx node brews cpanm git mvn pip python scala)
+plugins=(fzf-zsh zsh-completions zsh-autosuggestions tmux sublime ng ruby yarn github gem npm rvm perl osx node brews cpanm git mvn pip python scala)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -119,7 +119,7 @@ function _sub {
 }
 function _updater {
     zle kill-whole-line
-    BUFFER="( cat $SCRIPTS/updater.sh | escapeRemove | bash -l 2>&1 | tee $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)"
+    BUFFER="( cat $SCRIPTS/updater.sh | perl $SCRIPTS/escapeRemover.pl | bash -l 2>&1 | tee $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)"
     zle .accept-line
 }
 

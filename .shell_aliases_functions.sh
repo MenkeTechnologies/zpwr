@@ -19,7 +19,7 @@ export GITHUB_ACCOUNT='MenkeTechnologies'
 if [[ "$(uname)" == Darwin ]]; then
 	export WCC="/Volumes/JAKESD/wcc/cps"
     export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
-    export PATH="$SCRIPTS/macOnly:$PATH"
+    export PATH="$SCRIPTS/macOnly:$HOME/.platformio/penv/bin:$PATH"
 else
     export PATH="$PATH:/usr/games"
 fi
