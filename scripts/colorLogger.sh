@@ -9,18 +9,15 @@
 
 shopt -s globstar
 
-tailVersion=colortail
+set -x
+tailVersion="colortail -k $HOME/.colortailconf"
 
-type $tailVersion 1>/dev/null 2>&1 || {
+type colortail 1>/dev/null 2>&1 || {
     tailVersion=tail
 }
 
-
-
-
-
 if [[ $(uname) == Darwin ]]; then
-   $tailVersion  -k $HOME/.colortailconf -f /var/log/**/*.log /var/log/**/*.out /var/log/DiagnosticMessages \
+  $tailVersion -f /var/log/**/*.log /var/log/**/*.out /var/log/DiagnosticMessages \
         /var/log/asl /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
         /Library/Logs/**/*.log 
 else
@@ -28,10 +25,10 @@ else
     distroName=$(lsb_release -a | head -1 | awk '{print $3}')
 
     if [[ $distroName == Raspbian ]]; then
-        $tailVersion -k $HOME/.colortailconf -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages} /var/log/**/*.err
+        $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages} /var/log/**/*.err
     else 
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
-        $tailVersion -k $HOME/.colortailconf -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages} /var/log/**/*.err
+        $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages} /var/log/**/*.err
     fi
 
 fi
