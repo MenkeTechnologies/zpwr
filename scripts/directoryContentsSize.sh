@@ -7,6 +7,11 @@
 #####   Notes: 
 #}}}***********************************************************
 
+sortedCommand=sort
+
+type $sortedCommand >/dev/null 2>&1 && {
+sortedCommand=$sortedCommand
+}
 # set -x
 usage(){
 #here doc for printing multiline
@@ -24,7 +29,7 @@ Endofmessage
 #set in getopts
 dontSummarizeSizes(){
 	if [[ $sorted ]]; then
-		du -sh * | gsort -h
+		du -sh * | $sortedCommand -h
 	else
 		du -sh * 
 	fi
@@ -39,14 +44,14 @@ showHidden(){
 	#checking for presence of sorted flag which is
 	#set in getopts
 	if [[ $sorted ]]; then
-		#take output of ls -A (no . and ..) and call du -sh on each file and then pipe into gsort -h
+		#take output of ls -A (no . and ..) and call du -sh on each file and then pipe into $sortedCommand -h
 		{
 			while read line; do
 			du -sh "$line"
 			done < <(ls -A)
-		} | gsort -h
+		} | $sortedCommand -h
 	else
-		#same while read llop but dont pipe into gsort
+		#same while read llop but dont pipe into $sortedCommand
 		while read line; do
 		du -sh "$line"
 		done < <(ls -A)
