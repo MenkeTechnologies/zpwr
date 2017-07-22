@@ -152,8 +152,11 @@ alias rr="$HOME/Documents/shellScripts/rsyncr.sh"
 alias mntpi="sshfs -o IdentityFile=$HOME/.ssh/id_rsa r:/var/www/html $HOME/Desktop/tuts/piweb/"
 alias mntds="sshfs -o IdentityFile=$HOME/.ssh/id_rsa d:/volume1/homes/JAKENAS/softwareTutorials $HOME/Desktop/tuts/ds/"
 
+
+type tput >/dev/null 2>&1 && {
 bold=$(tput bold || tput md)
 red=$(tput setaf 1)
+}
 alias ic="idea create"
 alias il="idea list"
 #**********************************************************************
