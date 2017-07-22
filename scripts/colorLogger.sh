@@ -9,17 +9,17 @@
 
 shopt -s globstar
 
-set -x
-tailVersion="colortail -k $HOME/.colortailconf"
+#tailVersion="colortail -k $HOME/.colortailconf"
 
-type colortail 1>/dev/null 2>&1 || {
-    tailVersion=tail
+#type colortail 1>/dev/null 2>&1 || {
+#    tailVersion=tail
 }
 
+  tailVersion="tail"
 if [[ $(uname) == Darwin ]]; then
   $tailVersion -f /var/log/**/*.log /var/log/**/*.out /var/log/DiagnosticMessages \
         /var/log/asl /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
-        /Library/Logs/**/*.log 
+        /Library/Logs/**/*.log | ccze
 else
     #linux
     distroName=$(lsb_release -a | head -1 | awk '{print $3}')
