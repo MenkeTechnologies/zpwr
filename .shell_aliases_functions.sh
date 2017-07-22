@@ -141,6 +141,7 @@ alias vi=vim
 alias v=vim
 alias cl=clear
 alias mkdir='mkdir -pv'
+alias rm='rm -i'
 #**********************************************************************
 #                           MARK:REMOTE SHELLS SCRIPTS
 #**********************************************************************
