@@ -131,7 +131,7 @@ done
 if [[ -d "$HOME/.tmux/plugins" ]]; then
     prettyPrint "Updating Tmux Plugins"
 
-    for tmuxPlugin in $HOME/.tmux/plugins/*; do
+    for tmuxPlugin in "$HOME/.tmux/plugins/"*; do
         printf "%s: " "$(basename "$tmuxPlugin")"
         git -C "$tmuxPlugin" pull
     done
