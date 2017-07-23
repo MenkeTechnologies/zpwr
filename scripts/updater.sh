@@ -128,12 +128,15 @@ for zshPlugin in $HOME/.oh-my-zsh/custom/themes/*; do
     git -C "$zshPlugin" pull
 done
 
-prettyPrint "Updating Tmux Plugins"
+if [[ -d "$HOME/.tmux/plugins" ]]; then
+    prettyPrint "Updating Tmux Plugins"
 
-for tmuxPlugin in $HOME/.tmux/plugins/*; do
-    printf "%s: " "$(basename "$tmuxPlugin")"
-    git -C "$tmuxPlugin" pull
-done
+    for tmuxPlugin in $HOME/.tmux/plugins/*; do
+        printf "%s: " "$(basename "$tmuxPlugin")"
+        git -C "$tmuxPlugin" pull
+    done
+fi
+
 
 #first argument is user@host and port number configured in .ssh/config
 updatePI(){
