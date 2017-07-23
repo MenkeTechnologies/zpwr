@@ -7,11 +7,12 @@
 #####   Notes: 
 #}}}***********************************************************
 
+outputDir=Desktop
+
 printf "${BLUE}Downloading $*\n"
 for i in "$@"; do
-    #username of main computer is hardcoded
-	scp -P2234 -r "$i" jacobmenke@localhost:\$HOME/Desktop
+    scp -P2234 -r "$i" $(whoami)@localhost:\$HOME/"$outputDir"
     #if not using reverse port forwarding then ip address must be hardcoded
-	#scp -r "$i" jacobmenke@192.168.0.105:~/Desktop
+    #scp -r "$i" $(whoami)@192.168.0.105:~/"$outputDir"
 done
 printf "Done${RESET}\n"
