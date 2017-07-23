@@ -7,11 +7,11 @@
 #####   Notes: 
 #}}}***********************************************************
 
-outputDir=Desktop
-
+outputDir="Desktop"
+master="jacobmenke"
 printf "${BLUE}Downloading $*\n"
 for i in "$@"; do
-    scp -P2234 -r "$i" $(whoami)@localhost:\$HOME/"$outputDir"
+    scp -P2234 -r "$i" "$master"@localhost:\$HOME/"$outputDir"
     #if not using reverse port forwarding then ip address must be hardcoded
     #scp -r "$i" $(whoami)@192.168.0.105:~/"$outputDir"
 done
