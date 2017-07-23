@@ -73,6 +73,12 @@ filesArray=()
 trap 'killCursor; echo; exit' INT
 startCursor
 
+DIR_TO_SEARCH="$(pwd)"
+
+if [[ ! -z "$2" ]]; then
+	DIR_TO_SEARCH="$2"
+fi
+
 #process substituion to find all files with the fileExtension
 while read line; do
 
@@ -92,7 +98,7 @@ while read line; do
 		
 	fi
 #find all files in pwd that have the fileExtensions in their names, remove last pipe from fileString
-done < <(find "`pwd`" -type f | egrep -i "${fileString%|}")
+done < <(find "$DIR_TO_SEARCH" -type f | egrep -i "${fileString%|}")
 
 killCursor
 
@@ -100,13 +106,12 @@ if (( ${#filesArray[@]} < 1 )); then
 	echo "No files found with file extension: \"$fileExtension\""
 	exit 25
 else
+	for file in "${filesArray[@]}"; do
+		echo "$file"
+	done
 	#echo the count of items in the array
 	echo "We found ${#filesArray[@]} files."
 fi
-
-for file in "${filesArray[@]}"; do
-	echo "$file"
-done
 
 printf "\e[1mDo want to open these ${#filesArray[@]} files? \e[0m"
 read -n1 
