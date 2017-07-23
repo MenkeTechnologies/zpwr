@@ -128,6 +128,13 @@ for zshPlugin in $HOME/.oh-my-zsh/custom/themes/*; do
     git -C "$zshPlugin" pull
 done
 
+prettyPrint "Updating Tmux Plugins"
+
+for tmuxPlugin in $HOME/.tmux/plugins/*; do
+    printf "%s: " "$(basename "$tmuxPlugin")"
+    git -C "$tmuxPlugin" pull
+done
+
 #first argument is user@host and port number configured in .ssh/config
 updatePI(){
     #-t to force pseudoterminal allocation for interactive programs on remote host
