@@ -91,6 +91,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias emu="open /Volumes/JAKESD/EMU"
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
+    #keep remote tty sessions alive by stopping sleep
+    sudo pmset -c ttyskeepawake 1
 else
     #Linux
     alias apt="sudo apt-get install -y"
