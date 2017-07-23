@@ -157,7 +157,8 @@ bindkey '^S' _gitfunc
 bindkey '\ed' _tutsUpdate
 
 #Filter stderr through shell scripts
-exec 2> >("$SCRIPTS"/redText.sh)
+#having this setting messes with tmux resurrect so will enable it on individual basis
+#exec 2> >("$SCRIPTS"/redText.sh)
 
 
 my-accept-line () {
@@ -222,7 +223,7 @@ setopt extended_glob # treat #, ~, and ^ as part of patterns for filename genera
 setopt append_history # Allow multiple terminal sessions to all append to one zsh command history
 setopt extended_history # save timestamp of command and duration
 setopt inc_append_history # Add comamnds as they are typed, don't wait until shell exit
-setopt hist_expire_dups_first # when trimming history, lose oldest duplicates first
+s etopt hist_expire_dups_first # when trimming history, lose oldest duplicates first
 
 setopt hist_ignore_dups # Do not write events to history that are duplicates of previous events
 setopt hist_ignore_space # remove command line from history list when first character on the line is a space
