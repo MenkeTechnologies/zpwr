@@ -37,7 +37,6 @@ bind-key -r { rotate-window
         bind | split-window -h
         bind - split-window -v
 
-        set-option -g mouse on
 # Use vim keybindings in copy mode
 
         setw -g mode-keys vi
