@@ -37,14 +37,10 @@ bind-key -r { rotate-window
         bind | split-window -h
         bind - split-window -v
 
-
+        set-option -g mouse on
 # Use vim keybindings in copy mode
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
 
-setw -g mode-keys vi
+        setw -g mode-keys vi
 
 # Setup 'v' to begin selection as in Vim
 #        bind-key -T copy-mode-vi v send-keys -X begin-selection
@@ -89,7 +85,11 @@ setw -g mode-keys vi
 
         set status-style "bg=default"
         set -g status-right-length 70
-        set -g status-right  "\"#{=22:pane_title}\" %H:%M %d-%b-%y #(ifconfig wlan0 | ag 'inet ' | awk '{print \"wlan0\",$2}')"
+        set -g status-right  "\"#{=22:pane_title}\" %H:%M %d-%b-%y #(ifconfig wlan0 | grep 'inet ' | awk '{print \"wlan0\",$2}')"
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 
         run '~/.tmux/plugins/tpm/tpm'
+
+
+
+
