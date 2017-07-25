@@ -41,6 +41,10 @@ bind-key -r { rotate-window
 # Use vim keybindings in copy mode
 
         setw -g mode-keys vi
+set -g mode-mouse on
+set -g mouse-resize-pane on
+set -g mouse-select-pane on
+set -g mouse-select-window on
 
 # Setup 'v' to begin selection as in Vim
 #        bind-key -T copy-mode-vi v send-keys -X begin-selection
