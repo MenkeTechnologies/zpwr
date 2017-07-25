@@ -16,7 +16,7 @@ export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:L
 export GITHUB_ACCOUNT='MenkeTechnologies'
 
 if [[ "$(uname)" == Darwin ]]; then
-	export WCC="/Volumes/JAKESD/wcc/cps"
+    export WCC="/Volumes/JAKESD/wcc/cps"
     export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
     export PATH="$SCRIPTS/macOnly:$HOME/.platformio/penv/bin:$PATH"
 else
@@ -27,7 +27,7 @@ fi
 #{{{                           MARK:HOMES
 #**********************************************************************
 if [[ "$(uname)" == Darwin ]]; then
-    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home"
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
     export GROOVY_HOME="/usr/local/Cellar/groovy/2.4.11"
     export SCALA_HOME="/usr/local/Cellar/scala/2.12.2"
     export HOMEBREW_HOME='/usr/local/Cellar'
