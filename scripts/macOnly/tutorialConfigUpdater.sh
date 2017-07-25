@@ -23,7 +23,7 @@ else
     commitMessage="update"
 fi
 
-#{{{                    MARK:tutorialsDir
+#{{{                    MARK:tutorialDir
 #**************************************************************
 boldAndUnderlinedPrint "Copying zshrc"
 cp $HOME/.zshrc "$tutorialDir/zsh"
@@ -44,6 +44,11 @@ boldAndUnderlinedPrint "Copying shellScripts"
 rm -rf "$tutorialDir/shell/*"
 cp "$SCRIPTS"/*.sh "$tutorialDir/shell"
 cp -R "$SCRIPTS"/macOnly "$tutorialDir/shell"
+#README="$tutorialDir/shell/README.md"
+#echo "# Mac and Linux Scripts" > "$README"
+#bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"*.sh >> "$README" 
+#echo "# Mac Only Scripts" >> "$README"
+#bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"macOnly/*.sh >> "$README"
 
 boldAndUnderlinedPrint "Copying tags file"
 cp "$HOME/Documents/shellScripts/tags" "$tutorialDir/shell"
