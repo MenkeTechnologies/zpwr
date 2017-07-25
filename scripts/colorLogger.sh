@@ -17,6 +17,8 @@ type ccze 1>/dev/null 2>&1 && {
 weHaveCCZE=yes
 }
 
+#dont care about std err
+exec 2>/dev/null
 
 if [[ $(uname) == Darwin ]]; then
     if [[ $weHaveCCZE == yes ]]; then
@@ -41,7 +43,7 @@ else
         fi
     else 
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
-        $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages} /var/log/**/*.err
+        $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages, syslog} /var/log/**/*.err
     fi
 
 fi
