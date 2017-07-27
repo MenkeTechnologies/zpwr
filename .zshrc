@@ -182,14 +182,10 @@ zle .accept-line
 }
 zle -N accept-line my-accept-line
 
-preexec(){
-    if [[ $WILL_CLEAR == true ]]; then
-        clear
-    fi
-}
 precmd(){
     if [[ $? == 0 ]]; then
         if [[ "$WILL_CLEAR" == true ]]; then
+            clear
             listNoClear
         fi
     fi
