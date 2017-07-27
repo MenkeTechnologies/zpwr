@@ -7,10 +7,10 @@
 #####   Notes: 
 #}}}***********************************************************
 
-sortedCommand=sort
+sortedCommand=gsort
 
-type $sortedCommand >/dev/null 2>&1 && {
-sortedCommand=$sortedCommand
+type $sortedCommand >/dev/null 2>&1 || {
+sortedCommand=sort
 }
 # set -x
 usage(){
