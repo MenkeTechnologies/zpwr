@@ -17,7 +17,7 @@ executableScriptsProcessing(){
 addHeader(){
     #first arg is the interpreter
     #second arg is the absolute path to file
-    firstString=$(cat<<EOM
+    headerSTRING=$(cat<<EOM
 #!/usr/bin/env $1
 #{{{                    MARK:Header
 #**************************************************************
@@ -30,10 +30,9 @@ EOM
 )
 
 #add header to first argument which is the absolute path to file
-echo "$firstString" > "$2"
+echo "$headerSTRING" > "$2"
 echo >> "$2"
 echo >> "$2"
-
 }
 
 createTemplate(){

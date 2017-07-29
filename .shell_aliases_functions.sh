@@ -386,3 +386,5 @@ humanReadable(){
     #}}}***********************************************************
 
     source "$HOME/.tokens.sh"
+    export LC_COLLATE=C
+
