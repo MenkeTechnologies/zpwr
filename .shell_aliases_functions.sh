@@ -109,6 +109,7 @@ alias tclsh="rlwrap tclsh"
 alias logs="tail -f /var/log/*.log | lolcat"
 alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
+alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
 #**********************************************************************
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
