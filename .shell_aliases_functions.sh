@@ -62,6 +62,7 @@ alias py="cd $PYSCRIPTS"
 alias p2="python"
 alias p3="python3"
 alias d="cd ~/Desktop"
+alias please='sudo $(fc -ln -1)'
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
