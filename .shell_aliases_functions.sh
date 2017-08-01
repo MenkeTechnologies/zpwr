@@ -138,7 +138,7 @@ alias blue="source $SCRIPTS/blueText.sh"
 alias dl="cd $HOME/Downloads; open ."
 alias o="open ."
 alias jobs="jobs -l"
-alias \$="bash -l updater.sh"
+alias 8="bash -l updater.sh"
 alias sd="clear;ssh d "
 alias gitgo='$SCRIPTS/gitgo.sh'
 alias watchGit='bash $SCRIPTS/watchServiceFSWatchGit.sh'
@@ -364,7 +364,7 @@ humanReadable(){
         sed '1!G;h;$!d' "$@"
     }
 
-    in(){
+    inst(){
         if [[ -z "$1" ]]; then
             if [[ ! -f "configure" ]];then
                 echo "Not in an installer dir..." >&2
