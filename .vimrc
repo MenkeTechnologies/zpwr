@@ -204,6 +204,8 @@ vnoremap <silent> <C-D> :<C-C>:update<CR>
 inoremap <silent> <C-D> <C-[>:update<CR>a
 
 nnoremap <silent> <C-G> :w<CR>:Dispatch<CR>
+nnoremap <silent> <C-H> wgUl
+
 "vnoremap <silent> <C-G> :<C-C>:w<CR>:Dispatch<CR>
 inoremap <silent> <C-G> <C-[>:w<CR>:Dispatch<CR>a
 
