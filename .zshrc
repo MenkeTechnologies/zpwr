@@ -162,7 +162,6 @@ bindkey '\ed' _tutsUpdate
 #having this setting messes with tmux resurrect so will enable it on individual basis
 #exec 2> >("$SCRIPTS"/redText.sh)
 
-
 my-accept-line () {
 
 WILL_CLEAR=false
@@ -285,7 +284,6 @@ zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
 zstyle ':completion:*' group-name 
 
-
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
 # 2 -- word flex completion (abc => A-big-Car)
@@ -338,3 +336,8 @@ export LC_CTYPE="en_US.UTF-8"
 
 #imgcat and other special features from iTerm's shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+if [[ "$(uname)" = Darwin ]]; then
+    export PATH="$PATH:$HOME/.rvm/bin"
+fi

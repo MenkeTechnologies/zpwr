@@ -99,9 +99,6 @@ perlOutdated=$(cpan-outdated -p)
 if [[ ! -z "$perlOutdated" ]]; then
     echo "$perlOutdated" | cpanm --force 2> /dev/null
 fi
-#have to run expect script to deal with sudo cpan
-#expect $SCRIPTS/CPANupdater.tcl
-
 }
 
 prettyPrint "Updating Pathogen Plugins"
