@@ -40,7 +40,7 @@ prettyPrint "Updating Pathogen Plugins"
 gitRepoUpdater "$HOME/.vim/bundle"
 
 prettyPrint "Updating OhMyZsh"
-upgrade_oh_my_zsh
+cd "$HOME/.oh-my-zsh/tools" && bash "$HOME/.oh-my-zsh/tools/upgrade.sh"
 
 prettyPrint "Updating OhMyZsh Plugins"
 gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
