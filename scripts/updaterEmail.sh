@@ -7,4 +7,4 @@
 #####   Notes: 
 #}}}***********************************************************
 
-( cat $SCRIPTS/updater.sh | escapeRemove | bash 2>&1 | tee $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)
+( cat $SCRIPTS/updater.sh | escapeRemove | bash -l 2>&1 | tee $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)
