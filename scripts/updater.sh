@@ -101,39 +101,40 @@ if [[ ! -z "$perlOutdated" ]]; then
 fi
 }
 
+gitRepoUpdater(){
+    enclosing_dir="$1"
+
+    if [[ -d "$enclosing_dir" ]]; then
+
+        for generic_git_repo_plugin in "$enclosing_dir/"*; do
+            if [[ -d "$generic_git_repo_plugin" ]]; then
+                if [[ -d "$generic_git_repo_plugin"/.git ]]; then
+                    printf "%s: " "$(basename "$generic_git_repo_plugin")"
+                    git -C "$generic_git_repo_plugin" pull
+                fi
+            fi
+        done
+    fi
+}
+
+prettyPrint "Updating Tmux Plugins"
+gitRepoUpdater "$HOME/.tmux/plugins"
+
 prettyPrint "Updating Pathogen Plugins"
 #update pathogen plugins
-for pluginRepo in $HOME/.vim/bundle/*; do
-    printf "%s: " "$(basename "$pluginRepo")"
-    git -C "$pluginRepo" pull
-done
+gitRepoUpdater "$HOME/.vim/bundle"
 
 prettyPrint "Updating OhMyZsh"
 #upgrade_oh_my_zsh
 
 prettyPrint "Updating OhMyZsh Plugins"
-
-for zshPlugin in $HOME/.oh-my-zsh/custom/plugins/*; do
-    printf "%s: " "$(basename "$zshPlugin")"
-    git -C "$zshPlugin" pull
-done
+gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
 
 prettyPrint "Updating OhMyZsh Themes"
+gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
-for zshPlugin in $HOME/.oh-my-zsh/custom/themes/*; do
-    printf "%s: " "$(basename "$zshPlugin")"
-    git -C "$zshPlugin" pull
-done
-
-if [[ -d "$HOME/.tmux/plugins" ]]; then
-    prettyPrint "Updating Tmux Plugins"
-
-    for tmuxPlugin in "$HOME/.tmux/plugins/"*; do
-        printf "%s: " "$(basename "$tmuxPlugin")"
-        git -C "$tmuxPlugin" pull
-    done
-fi
-
+prettyPrint "Updating Tmux Plugins"
+gitRepoUpdater "$HOME/.tmux/plugins"
 
 #first argument is user@host and port number configured in .ssh/config
 updatePI(){
