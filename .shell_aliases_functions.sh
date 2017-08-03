@@ -96,7 +96,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     sudo pmset -c ttyskeepawake 1
     alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $SCRIPTS/sshTunnelVnc.sh" 
     alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $SCRIPTS/sshTunnelVnc2.sh"
-    alias rr="$HOME/Documents/shellScripts/rsyncr.sh"
+    alias rtsync="$HOME/Documents/shellScripts/rsyncr.sh"
 else
     #Linux
     alias apt="sudo apt-get install -y"
