@@ -1,5 +1,10 @@
 #created by JACOBMENKE at Mon Jun 12 17:33:50 EDT 2017
 
+#global utility functions
+exists(){
+    type "$1" >/dev/null 2>&1
+}
+
 #{{{                    MARK:ENV Var
 #**************************************************************
 export CLICOLOR="YES"
@@ -215,13 +220,23 @@ db(){
 clearList () {
     clear
     if [[ "$(uname)" == "Darwin" ]]; then
+       exists grc && {
         grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
+       } || {
+       ls -iFlhAO
+       }
     else
+        exists grc && {
+
         grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
+    } || {
+    ls -iFhlA
+    }
     fi
 }
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
+        
         grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
     else
         grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
