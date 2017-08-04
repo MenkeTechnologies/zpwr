@@ -215,14 +215,14 @@ db(){
 clearList () {
     clear
     if [[ "$(uname)" == "Darwin" ]]; then
-        grc ls -iFlhAO
+        grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
     else
         grc ls -iFlhA
     fi
 }
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
-        ls -iFlhAO
+        grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
     else
         ls -iFlhA
     fi
