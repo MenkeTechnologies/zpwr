@@ -138,6 +138,7 @@ cp $HOME/.tmux/* "$installerDir/.tmux"
 cp $HOME/.shell_aliases_functions.sh "$installerDir" 
 cp $HOME/.zshrc "$installerDir"
 cp $HOME/.rpitokens.sh "$installerDir"
+cp /usr/local/share/grc/conf.gls "$installerDir"
 
 cd "$installerDir" || exit 1
 boldAndUnderlinedPrint "Status"
