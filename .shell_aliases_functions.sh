@@ -217,14 +217,14 @@ clearList () {
     if [[ "$(uname)" == "Darwin" ]]; then
         grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
     else
-        grc ls -iFlhA
+        grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
     fi
 }
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
         grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
     else
-        ls -iFlhA
+        grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
     fi
 }
 animate(){
