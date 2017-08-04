@@ -48,9 +48,5 @@ gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
 prettyPrint "Updating OhMyZsh Themes"
 gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
-prettyPrint "Updating Tmux Plugins"
-gitRepoUpdater "$HOME/.tmux/plugins"
-
-
 prettyPrint "Updating Vundle Plugins"
 #vim -c VundleUpdate -c quitall
