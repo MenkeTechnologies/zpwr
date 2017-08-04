@@ -88,7 +88,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
     alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
-    alias c="cd /Volumes/JAKESD/wcc/cps; clearList"
+    alias c="cd /Volumes/JAKESD/wcc/cps"
     alias emu="open /Volumes/JAKESD/EMU"
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
@@ -215,9 +215,9 @@ db(){
 clearList () {
     clear
     if [[ "$(uname)" == "Darwin" ]]; then
-        ls -iFlhAO
+        grc ls -iFlhAO
     else
-        ls -iFlhA
+        grc ls -iFlhA
     fi
 }
 listNoClear () {
