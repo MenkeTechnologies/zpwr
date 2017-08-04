@@ -133,9 +133,6 @@ gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
 prettyPrint "Updating OhMyZsh Themes"
 gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
-prettyPrint "Updating Tmux Plugins"
-gitRepoUpdater "$HOME/.tmux/plugins"
-
 #first argument is user@host and port number configured in .ssh/config
 updatePI(){
     #-t to force pseudoterminal allocation for interactive programs on remote host
