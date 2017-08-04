@@ -18,6 +18,10 @@ else
 
 fi
 
+if [[ -f "$HOME/grc.zsh" ]]; then
+    source "$HOME/grc.zsh"
+fi
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
