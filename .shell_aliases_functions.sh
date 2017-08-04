@@ -236,10 +236,18 @@ clearList () {
 }
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
-        
+       exists grc && {
         grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
+       } || {
+       ls -iFlhAO
+       }
     else
+        exists grc && {
+
         grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
+    } || {
+    ls -iFhlA
+    }
     fi
 }
 animate(){
