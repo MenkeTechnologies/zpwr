@@ -82,7 +82,7 @@ colours=unchanged,on_cyan bold white
 regexp=^\s*(\d+)\s
 colours=blue
 -
-regexp=\s(staff|pi)\s
+regexp=\s(staff)\s
 colours=green
 -
 regexp=pi\s+(pi)\s
