@@ -256,8 +256,6 @@ printf "Installing Tmux plugins\n"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 #}}}***********************************************************
-#printf "Installing Colortail Config\n"
-#cp "$INSTALLER_DIR/.colortailconf" "$HOME"
 
 #printf "Installing IFTOP-color"
 #if [[ ! -d "$HOME/ForkedRepos" ]]; then
