@@ -21,6 +21,11 @@ exists(){
 
 #start white text on blue background \e44:37m, -e required for escape sequences
 #echo -e "\e[44;37m"
+
+if [[ -z "$SCRIPTS" ]]; then
+    SCRIPTS=/Users/jacobmenke/Documents/shellScripts
+fi
+
 bash "$SCRIPTS/printHeader.sh"
 
 prettyPrint "Updating Python Dependencies"
