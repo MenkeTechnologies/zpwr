@@ -291,8 +291,8 @@ echo "Copying all Shell Scripts..."
 if [[ ! -d "$HOME/Documents/shellScripts" ]]; then
     mkdir -p "$HOME/Documents/shellScripts"
 fi
-cp $INSTALLER_DIR/scripts/*.sh $HOME/Documents/shellScripts
-cp -R $INSTALLER_DIR/scripts/macOnly $HOME/Documents/shellScripts
+cp $INSTALLER_DIR/scripts/*.sh "$HOME/Documents/shellScripts"
+cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
 
 printf "Installing ponysay from source\n"
 git clone https://github.com/erkin/ponysay.git && {
@@ -327,6 +327,15 @@ type chsh >/dev/null 2>&1 && {
 printf "Changing default shell to Zsh\n"
 chsh -s "$(which zsh)"
 }
+
+printf "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo\n"
+if [[ "$(uname)" == Darwin ]]; then
+    GRC_DIR=/usr/local/share/grc
+else
+    GRC_DIR=/usr/share/grc
+fi
+cp "$INSTALLER_DIR/grc.zsh" "$HOME"
+sudo cp "$INSTALLER_DIR/conf.gls" "$GRC_DIR"
 
 printf "Changing current shell to Zsh\n"
 exec zsh
