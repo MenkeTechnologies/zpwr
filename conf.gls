@@ -35,7 +35,7 @@ colours=default,yellow ,yellow
 regexp=(\s|^)[0-2]?\d(:[0-5]\d)(?=[\s,]|$)
 colours=green
 =======
-regexp=(201\d|199\d)
+regexp=(201\d|199\d|196\d,197\d,198\d)
 colours=green
 ======
 # month
