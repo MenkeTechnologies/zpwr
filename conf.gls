@@ -8,7 +8,7 @@
 #
 # The regexp uses lookahead to match a date following the size
 
-regexp=\S+K
+regexp=\S+K\s
 colours=blue
 =======
 # size: 1M <= size < 10M
