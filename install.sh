@@ -322,7 +322,6 @@ printf "Installing youtube-dl\n"
 sudo pip install --upgrade youtube_dl
 }
 
-
 type chsh >/dev/null 2>&1 && {
 printf "Changing default shell to Zsh\n"
 chsh -s "$(which zsh)"
@@ -333,6 +332,7 @@ if [[ "$(uname)" == Darwin ]]; then
     GRC_DIR=/usr/local/share/grc
 else
     GRC_DIR=/usr/share/grc
+    sudo cp "$INSTALLER_DIR/conf.df" "$GRC_DIR"
 fi
 cp "$INSTALLER_DIR/grc.zsh" "$HOME"
 sudo cp "$INSTALLER_DIR/conf.gls" "$GRC_DIR"
