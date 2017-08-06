@@ -105,7 +105,9 @@ colours=blue
 -
 regexp=\+
 colours=red
-#regexp=[-xt+]\s+(\d+)\s
-#colours=yellow
+
 regexp=\s([a-zA-Z]{3})\s
 colours=yellow
+
+regexp=/
+colours=blue
