@@ -241,7 +241,7 @@ clearList () {
             while read locale;do
                 last_fields="$(echo $locale | cut -d' ' -f3-10)"
                 [[ -f "$last_fields" ]] && eval "$ls_command" $last_fields || echo "$locale"
-            done < <(type -a $command)
+            done < <(type -a $command | uniq)
         } || {
         #path matching
         eval "$ls_command" $command
