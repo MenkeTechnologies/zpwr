@@ -218,36 +218,56 @@ db(){
     ( python3 $PYSCRIPTS/logIntoMyDB.py & )
 }
 clearList () {
-    clear
+
     if [[ "$(uname)" == "Darwin" ]]; then
-       exists grc && {
-        grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
-       } || {
-       ls -iFlhAO
-       }
+        exists grc && {
+        ls_command="grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always"
+    } || {
+    ls_command="ls -iFlhAO"
+}
     else
         exists grc && {
 
-        grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
+        ls_command="grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always"
     } || {
-    ls -iFhlA
+    ls_command="ls -iFhlA"
+}
+    fi
+
+    if [[ ! -z "$1" ]]; then
+        for command in "$@"; do
+            exists $command &&  {
+            #exe matching
+            while read locale;do
+                last_fields="$(echo $locale | cut -d' ' -f3-10)"
+                [[ -f "$last_fields" ]] && eval "$ls_command" $last_fields || echo "$locale"
+            done < <(type -a $command)
+        } || {
+        #path matching
+        eval "$ls_command" $command
     }
+
+
+done
+    else
+        clear && eval "$ls_command"
+
     fi
 }
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
-       exists grc && {
+        exists grc && {
         grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
-       } || {
-       ls -iFlhAO
-       }
+    } || {
+    ls -iFlhAO
+}
     else
         exists grc && {
 
         grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
     } || {
     ls -iFhlA
-    }
+}
     fi
 }
 animate(){
@@ -400,6 +420,10 @@ humanReadable(){
                 dir="${1%.tar.gz}"
             elif [[ "$1" =~ .*.tgz ]];then
                 dir="${1%.tgz}"
+            else
+                echo "Need to be tar.gz or .tgz for automatic!" >&2
+                echo "What is the dir name?"
+                read dir
             fi
 
             cd "$dir"

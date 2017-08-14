@@ -18,6 +18,7 @@ else
 
 fi
 
+#colors for common commands
 if [[ -f "$HOME/grc.zsh" ]]; then
     source "$HOME/grc.zsh"
 fi
@@ -125,7 +126,7 @@ function _updater {
     zle kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
-    BUFFER="( cat $SCRIPTS/updater.sh | perl $SCRIPTS/escapeRemover.pl | bash -l 2>&1 | tee $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)"
+    BUFFER="( cat $SCRIPTS/updater.sh | perl $SCRIPTS/escapeRemover.pl | bash -l 2>&1 | tee -a $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)"
     zle .accept-line
 }
 
@@ -143,7 +144,7 @@ function _tutsUpdate() {
             zle .accept-line
         else
             zle kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' > ~/updaterlog.txt 2>&1 & )"
+            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$LOGFILE\" 2>&1 & )"
             zle .accept-line
         fi
     else
