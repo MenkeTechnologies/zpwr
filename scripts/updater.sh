@@ -66,6 +66,7 @@ exists brew && {
     #remote old programs occupying disk sectors
     brew cleanup
     brew cask cleanup
+    brew services cleanup
     #check is we have brew cu
     brew cu 1>/dev/null 2>&1 && {
         # we have brew cu
