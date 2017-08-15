@@ -14,7 +14,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     source "$HOME/.powerlevel9kconfig.sh"
 else
     #must be linux
-    export RPROMPT="%{%B%}`tty` `echo $$`"
+    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 
 fi
 
