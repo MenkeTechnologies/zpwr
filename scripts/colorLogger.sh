@@ -24,7 +24,7 @@ if [[ $(uname) == Darwin ]]; then
     if [[ $weHaveCCZE == yes ]]; then
    $tailVersion -f /var/log/**/*.log /var/log/**/*.out \
        /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
-        /Library/Logs/**/*.log | ccze
+        /Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
    else
    $tailVersion -f /var/log/**/*.log /var/log/**/*.out \
        /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
