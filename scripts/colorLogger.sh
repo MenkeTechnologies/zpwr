@@ -43,7 +43,11 @@ else
         fi
     else 
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
-        $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages, syslog} /var/log/**/*.err
+        if [[ $weHaveCCZE == yes ]]; then
+            $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/log/**/*.err | ccze
+        else
+            $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages, syslog} /var/log/**/*.err
+        fi
     fi
 
 fi
