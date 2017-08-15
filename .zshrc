@@ -153,6 +153,19 @@ function _tutsUpdate() {
     fi
 }
 
+
+expand-aliases() {
+  unset 'functions[_expand-aliases]'
+  functions[_expand-aliases]=$BUFFER
+  (($+functions[_expand-aliases])) &&
+    BUFFER=${functions[_expand-aliases]#$'\t'} &&
+    CURSOR=$#BUFFER
+}
+
+zle -N expand-aliases
+
+bindkey '\e^E' expand-aliases
+
 zle -N _gitfunc
 zle -N _updater
 zle -N _sub
