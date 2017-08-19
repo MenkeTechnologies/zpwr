@@ -119,6 +119,7 @@ alias logs="tail -f /var/log/*.log | lolcat"
 alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
 alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
+alias inst="source $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
@@ -407,32 +408,8 @@ humanReadable(){
         sed '1!G;h;$!d' "$@"
     }
 
-    inst(){
-        if [[ -z "$1" ]]; then
-            if [[ ! -f "configure" ]];then
-                echo "Not in an installer dir..." >&2
-                return 1
-            fi
-            ./configure && make and sudo make install
-        else
-            tar xvfz "$1"
-            if [[ "$1" =~ .*.tar.gz ]];then
-                dir="${1%.tar.gz}"
-            elif [[ "$1" =~ .*.tgz ]];then
-                dir="${1%.tgz}"
-            else
-                echo "Need to be tar.gz or .tgz for automatic!" >&2
-                echo "What is the dir name?"
-                read dir
-            fi
+        #}}}***********************************************************
 
-            cd "$dir"
-            ./configure && make and sudo make install
-        fi
-
-    }
-    #}}}***********************************************************
-
-    source "$HOME/.tokens.sh"
-    export LC_COLLATE=C
+        source "$HOME/.tokens.sh"
+        export LC_COLLATE=C
 
