@@ -149,7 +149,8 @@ updatePI(){
     ssh -x "$1" 'yes | sudo apt-get update
     yes | sudo apt-get dist-upgrade
     yes | sudo apt-get autoremove
-    yes | sudo apt-get upgrade'
+    yes | sudo apt-get upgrade
+    yes | sudo apt-get autoclean'
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to use string after ssh
