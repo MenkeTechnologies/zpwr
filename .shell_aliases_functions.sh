@@ -408,8 +408,15 @@ humanReadable(){
         sed '1!G;h;$!d' "$@"
     }
 
-        #}}}***********************************************************
+    backup(){
+        newfile="$1".$(date +%Y%m%d.%H.%M.bak)
+        mv "$1" "$newfile"
+        cp -pR "$newfile" "$1"
+        printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
+    }
 
-        source "$HOME/.tokens.sh"
-        export LC_COLLATE=C
+    #}}}***********************************************************
+
+    source "$HOME/.tokens.sh"
+    export LC_COLLATE=C
 
