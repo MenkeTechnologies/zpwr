@@ -14,6 +14,7 @@ export SCRIPTS="$HOME/Documents/shellScripts"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export D="$HOME/Desktop"
+export DL="$HOME/Downloads"
 # Setting PATH for Python 3.5
 # The orginal version is saved in .profile.pysave
 export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
@@ -119,6 +120,7 @@ alias logs="tail -f /var/log/*.log | lolcat"
 alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
 alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
+alias inst="source $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
@@ -218,36 +220,56 @@ db(){
     ( python3 $PYSCRIPTS/logIntoMyDB.py & )
 }
 clearList () {
-    clear
+
     if [[ "$(uname)" == "Darwin" ]]; then
-       exists grc && {
-        grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
-       } || {
-       ls -iFlhAO
-       }
+        exists grc && {
+        ls_command="grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always"
+    } || {
+    ls_command="ls -iFlhAO"
+}
     else
         exists grc && {
 
-        grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
+        ls_command="grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always"
     } || {
-    ls -iFhlA
+    ls_command="ls -iFhlA"
+}
+    fi
+
+    if [[ ! -z "$1" ]]; then
+        for command in "$@"; do
+            exists $command &&  {
+            #exe matching
+            while read locale;do
+                last_fields="$(echo $locale | cut -d' ' -f3-10)"
+                [[ -f "$last_fields" ]] && eval "$ls_command" $last_fields || echo "$locale"
+            done < <(type -a $command | sort | uniq)
+        } || {
+        #path matching
+        eval "$ls_command" $command
     }
+
+
+done
+    else
+        clear && eval "$ls_command"
+
     fi
 }
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
-       exists grc && {
+        exists grc && {
         grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
-       } || {
-       ls -iFlhAO
-       }
+    } || {
+    ls -iFlhAO
+}
     else
         exists grc && {
 
         grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
     } || {
     ls -iFhlA
-    }
+}
     fi
 }
 animate(){
@@ -387,26 +409,13 @@ humanReadable(){
         sed '1!G;h;$!d' "$@"
     }
 
-    inst(){
-        if [[ -z "$1" ]]; then
-            if [[ ! -f "configure" ]];then
-                echo "Not in an installer dir..." >&2
-                return 1
-            fi
-            ./configure && make and sudo make install
-        else
-            tar xvfz "$1"
-            if [[ "$1" =~ .*.tar.gz ]];then
-                dir="${1%.tar.gz}"
-            elif [[ "$1" =~ .*.tgz ]];then
-                dir="${1%.tgz}"
-            fi
-
-            cd "$dir"
-            ./configure && make and sudo make install
-        fi
-
+    backup(){
+        newfile="$1".$(date +%Y%m%d.%H.%M.bak)
+        mv "$1" "$newfile"
+        cp -pR "$newfile" "$1"
+        printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
     }
+
     #}}}***********************************************************
 
     source "$HOME/.tokens.sh"
