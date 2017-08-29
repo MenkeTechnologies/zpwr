@@ -14,10 +14,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     source "$HOME/.powerlevel9kconfig.sh"
 else
     #must be linux
-    export RPROMPT="%{%B%}`tty` `echo $$`"
+    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 
 fi
 
+#colors for common commands
 if [[ -f "$HOME/grc.zsh" ]]; then
     source "$HOME/grc.zsh"
 fi
@@ -125,7 +126,7 @@ function _updater {
     zle kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
-    BUFFER="( cat $SCRIPTS/updater.sh | perl $SCRIPTS/escapeRemover.pl | bash -l 2>&1 | tee $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)"
+    BUFFER="( cat $SCRIPTS/updater.sh | perl $SCRIPTS/escapeRemover.pl | bash -l 2>&1 | tee -a $LOGFILE | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>$LOGFILE &)"
     zle .accept-line
 }
 
@@ -143,7 +144,7 @@ function _tutsUpdate() {
             zle .accept-line
         else
             zle kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' > ~/updaterlog.txt 2>&1 & )"
+            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$LOGFILE\" 2>&1 & )"
             zle .accept-line
         fi
     else
@@ -151,6 +152,19 @@ function _tutsUpdate() {
         zle .accept-line
     fi
 }
+
+
+expand-aliases() {
+  unset 'functions[_expand-aliases]'
+  functions[_expand-aliases]=$BUFFER
+  (($+functions[_expand-aliases])) &&
+    BUFFER=${functions[_expand-aliases]#$'\t'} &&
+    CURSOR=$#BUFFER
+}
+
+zle -N expand-aliases
+
+bindkey '\e^E' expand-aliases
 
 zle -N _gitfunc
 zle -N _updater

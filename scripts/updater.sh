@@ -23,7 +23,7 @@ exists(){
 #echo -e "\e[44;37m"
 
 if [[ -z "$SCRIPTS" ]]; then
-    SCRIPTS=/Users/jacobmenke/Documents/shellScripts
+    SCRIPTS="$HOME/Documents/shellScripts"
 fi
 
 bash "$SCRIPTS/printHeader.sh"
@@ -66,6 +66,7 @@ exists brew && {
     #remote old programs occupying disk sectors
     brew cleanup
     brew cask cleanup
+    brew services cleanup
     #check is we have brew cu
     brew cu 1>/dev/null 2>&1 && {
         # we have brew cu
@@ -148,7 +149,8 @@ updatePI(){
     ssh -x "$1" 'yes | sudo apt-get update
     yes | sudo apt-get dist-upgrade
     yes | sudo apt-get autoremove
-    yes | sudo apt-get upgrade'
+    yes | sudo apt-get upgrade
+    yes | sudo apt-get autoclean'
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to use string after ssh
