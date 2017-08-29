@@ -418,6 +418,6 @@ humanReadable(){
 
     #}}}***********************************************************
 
-    source "$HOME/.tokens.sh"
+    [[ -f "$HOME/.token.sh" ]] && source "$HOME/.tokens.sh"
     export LC_COLLATE=C
 
