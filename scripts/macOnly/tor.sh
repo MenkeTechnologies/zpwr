@@ -14,15 +14,16 @@ prettyPrint (){
 
 INTERFACE=Wi-Fi
 
-sudo -v
+#commented out sections not necessary if sudo is not requiring passwd
+#sudo -v
 
-#keep sudo alive
-while true; do
-    sudo -n true
-    sleep 60
-    kill -0 "$$"
-    exit
-done 2>/dev/null &
+##keep sudo alive
+#while true; do
+    #sudo -n true
+    #sleep 60
+    #kill -0 "$$"
+    #exit
+#done 2>/dev/null &
 
 function disable_proxy() {
     sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
