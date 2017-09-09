@@ -26,13 +26,14 @@ if [[ -z "$SCRIPTS" ]]; then
     SCRIPTS="$HOME/Documents/shellScripts"
 fi
 
-bash "$SCRIPTS/printHeader.sh"
+if [[ -f "$SCRIPTS/printHeader.sh" ]];then
+    bash "$SCRIPTS/printHeader.sh"
+fi
 
+exists pip3 && {
 prettyPrint "Updating Python Dependencies"
 #pip lists outdated programs and get first column with awk
 #store in outdated
-
-exists pip3 && {
 outdated=$(pip3 list --outdated | awk '{print $1}')
 
 #install outdated pip modules 
@@ -43,7 +44,6 @@ done
 
 #update pip itself
 pip3 install --upgrade pip setuptools wheel &> /dev/null
-
 }
 
 exists rvm && {
@@ -56,30 +56,30 @@ rvm cleanup all
 }
 
 exists brew && {
-    prettyPrint "Updating Homebrew Dependencies"
-    brew update #&> /dev/null
-    brew upgrade #&> /dev/null
-    #remove brew cache
-    rm -rf "$(brew --cache)"
-    #removing old symbolic links
-    brew prune
-    #remote old programs occupying disk sectors
-    brew cleanup
-    brew cask cleanup
-    brew services cleanup
-    #check is we have brew cu
-    brew cu 1>/dev/null 2>&1 && {
-        # we have brew cu
-        prettyPrint "Updating Homebrew Casks!"
-        brew cu --all -y --cleanup
+prettyPrint "Updating Homebrew Dependencies"
+brew update #&> /dev/null
+brew upgrade #&> /dev/null
+#remove brew cache
+rm -rf "$(brew --cache)"
+#removing old symbolic links
+brew prune
+#remote old programs occupying disk sectors
+brew cleanup
+brew cask cleanup
+brew services cleanup
+#check is we have brew cu
+brew cu 1>/dev/null 2>&1 && {
+# we have brew cu
+prettyPrint "Updating Homebrew Casks!"
+brew cu --all -y --cleanup
      } || {
-        # we don't have brew cu
-        prettyPrint "Installing brew-cask-upgrade"
-        brew tap buo/cask-upgrade
-        brew update
-        prettyPrint "Updating Homebrew Casks!"
-        brew cu --all -y --cleanup
-     } 
+     # we don't have brew cu
+     prettyPrint "Installing brew-cask-upgrade"
+     brew tap buo/cask-upgrade
+     brew update
+     prettyPrint "Updating Homebrew Casks!"
+     brew cu --all -y --cleanup
+ } 
 }
 
 exists npm && {
