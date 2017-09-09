@@ -213,7 +213,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 vnoremap <C-c> "*y
-
+ 
 " Repeat last command in the next tmux pane.
 function TmuxRepeat()
     let supportedTypes=['sh','py','rb','pl','vim', 'lisp', 'hs', 'coffee']

@@ -384,6 +384,7 @@ humanReadable(){
         exec 2> /dev/tty
     }
     color2(){
+
         exec 2> >(redText.sh)
     }
     escapeRemove(){
