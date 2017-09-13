@@ -7,9 +7,21 @@
 #####   Notes: 
 #}}}***********************************************************
 
+declare -a problem_files
+
 while read file;do
     file_name="$(basename "$file")"
     length="$(echo $file_name | wc -c | tr -d ' ')"
     let length--
-    printf "$file_name has a file length of $length\n"
-done < <(find $1)
+    if (( $length > 143)) ;then
+        printf "$file has a file length of $length\n"
+        problem_files+=( "$file" )
+    else
+        :
+       # echo "$file_name is short at length $length"
+    fi
+done < <(find `pwd`/"$1")
+
+for file in "${problem_files[@]}"; do
+    rm -i "$file"
+done

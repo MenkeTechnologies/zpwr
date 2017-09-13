@@ -37,4 +37,3 @@ if [[ -z "$1" ]]; then
 else
     install "$1"
 fi
-
