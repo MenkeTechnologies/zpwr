@@ -7,4 +7,3 @@ echo "coolio got back"
 ls
 
 echo "your name is $name"
-
