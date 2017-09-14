@@ -7,21 +7,24 @@
 #####   Notes: 
 #}}}***********************************************************
 
+counter=0
 declare -a problem_files
+for dir in "$@"; do
+    while read file;do
+        file_name="$(basename "$file")"
+        length="$(echo $file_name | wc -c | tr -d ' ')"
+        let length--
+        if (( $length > 143)) ;then
+            printf "$file has a file length of $length\n"
+            problem_files+=( "$file" )
+        else
+            let counter++
+            printf "Done with $counter\n"
+            # echo "$file_name is short at length $length"
+        fi
+    done < <(find `pwd`/"$dir")
 
-while read file;do
-    file_name="$(basename "$file")"
-    length="$(echo $file_name | wc -c | tr -d ' ')"
-    let length--
-    if (( $length > 143)) ;then
-        printf "$file has a file length of $length\n"
-        problem_files+=( "$file" )
-    else
-        :
-       # echo "$file_name is short at length $length"
-    fi
-done < <(find `pwd`/"$1")
-
-for file in "${problem_files[@]}"; do
-    rm -i "$file"
+    for file in "${problem_files[@]}"; do
+        rm -i "$file"
+    done
 done
