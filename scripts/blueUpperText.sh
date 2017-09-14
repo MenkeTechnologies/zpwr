@@ -14,3 +14,5 @@ RESET='\e[0m'
 while read input; do
     echo "$input" | sed 's/.*/_______ & ______/' | boldText.sh | blueText.sh 
 done
+
+

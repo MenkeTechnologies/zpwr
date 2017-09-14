@@ -109,6 +109,12 @@ if [[ ! -z "$perlOutdated" ]]; then
 fi
 }
 
+exists pio && {
+prettyPrint "Updating PlatformIO"
+pio update
+pio upgrade
+}
+
 gitRepoUpdater(){
     enclosing_dir="$1"
 
