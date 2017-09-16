@@ -227,6 +227,7 @@ clearList () {
     } || {
     ls_command="ls -iFlhAO"
 }
+    lib_command="otool -L"
     else
         exists grc && {
 
@@ -234,6 +235,7 @@ clearList () {
     } || {
     ls_command="ls -iFhlA"
 }
+    lib_command="ldd"
     fi
 
     if [[ ! -z "$1" ]]; then
@@ -242,7 +244,7 @@ clearList () {
             #exe matching
             while read locale;do
                 last_fields="$(echo $locale | cut -d' ' -f3-10)"
-                [[ -f "$last_fields" ]] && eval "$ls_command" $last_fields && eval "file $last_fields"|| echo "$locale"
+                [[ -f "$last_fields" ]] && eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields"|| echo "$locale"
             done < <(type -a $command | sort | uniq)
         } || {
         #path matching
