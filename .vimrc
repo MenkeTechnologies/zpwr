@@ -59,6 +59,7 @@ set mouse=a
 set shiftwidth=4 "indent set to four spaces
 set expandtab
 set number
+set wildmenu
 syntax on
 set grepprg=ag
 "show the leader
