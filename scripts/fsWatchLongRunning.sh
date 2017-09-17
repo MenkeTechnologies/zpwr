@@ -16,9 +16,12 @@ while read -d "" event; do
     if [[ $first_iteration = true ]]; then
         first_iteration=false
         {
-            echo "First Iteration.  Starting long running task..."
+            echo
+            printf "\e[4;1mFirst Iteration.  Starting long running task like rsync...\n\e[0m"
+
             sleep 10
-            echo "First Iteration.  Completing long running task like rsync..."
+            printf "\e[4;1mFirst Iteration.  Completing long running task like rsync...\n\e[0m"
+            echo
         } &
         pid=$!
     else
@@ -27,9 +30,11 @@ while read -d "" event; do
         ps -ef | awk '{print $1,$2}' | grep -q "$pid" && echo "blocking next call..." || {
 
             {
-                echo "Starting long running task..."
+                echo
+                printf "\e[4;1mStarting long running task like rsync...\n\e[0m"
                 sleep 10
-                echo "completing long running task like rsync"
+                printf "\e[4;1mCompleting long running task like rsync...\n\e[0m"
+                echo
             } &
             pid=$!
         }
