@@ -7,35 +7,33 @@
 #####   Notes: 
 #}}}***********************************************************
 DIR_WATCHING="$1"
-done=false
+first_iteration=true
 while read -d "" event; do
 
     echo "The event was $event"
 
     # initial run
-    if [[ $done = false ]]; then
-    done=true
-    {
-        echo "starting long running task"
-        sleep 10
-        echo completing long running task like rsync
-    } &
-    pid=$!
-else
-    #subsequent runs
-    #dont execute commands is previous command still running
-    ps -ef | cut -c1-15 | grep -q "$pid" && echo "blocking next call..." || {
+    if [[ $first_iteration = true ]]; then
+        first_iteration=false
+        {
+            echo "First Iteration.  Starting long running task..."
+            sleep 10
+            echo "First Iteration.  Completing long running task like rsync..."
+        } &
+        pid=$!
+    else
+        #subsequent runs
+        #dont execute commands is previous command still running
+        ps -ef | awk '{print $1,$2}' | grep -q "$pid" && echo "blocking next call..." || {
 
-    {
-        echo "starting long running task"
-        sleep 10
-        echo "completing long running task like rsync"
-    } &
-    pid=$!
-}
+            {
+                echo "Starting long running task..."
+                sleep 10
+                echo "completing long running task like rsync"
+            } &
+            pid=$!
+        }
 
-fi
-
-
+    fi
 
 done < <(fswatch -r -0 -E "$DIR_WATCHING" -e "/\.." )
