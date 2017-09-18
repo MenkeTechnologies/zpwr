@@ -31,7 +31,7 @@ if [[ -f "$SCRIPTS/printHeader.sh" ]];then
 fi
 
 exists pip3 && {
-prettyPrint "Updating Python Dependencies"
+prettyPrint "Updating Python Packages"
 #pip lists outdated programs and get first column with awk
 #store in outdated
 outdated=$(pip3 list --outdated | awk '{print $1}')
@@ -47,7 +47,7 @@ pip3 install --upgrade pip setuptools wheel &> /dev/null
 }
 
 exists rvm && {
-prettyPrint "Updating Ruby Dependencies"
+prettyPrint "Updating Ruby Packages"
 rvm get stable
 gem update --system
 gem update
@@ -56,7 +56,7 @@ rvm cleanup all
 }
 
 exists brew && {
-prettyPrint "Updating Homebrew Dependencies"
+prettyPrint "Updating Homebrew Packages"
 brew update #&> /dev/null
 brew upgrade #&> /dev/null
 #remove brew cache
@@ -83,7 +83,7 @@ brew cu --all -y --cleanup
 }
 
 exists npm && {
-prettyPrint "Updating NPM Dependencies"
+prettyPrint "Updating NPM Packages"
 for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
 do
     npm install -g "$package"
@@ -101,7 +101,7 @@ yarn global upgrade
 
 exists cpanm && {
 
-prettyPrint "Updating Perl Dependencies"
+prettyPrint "Updating Perl Packages"
 perlOutdated=$(cpan-outdated -p)
 
 if [[ ! -z "$perlOutdated" ]]; then
