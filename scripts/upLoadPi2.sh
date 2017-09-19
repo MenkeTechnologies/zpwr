@@ -6,9 +6,9 @@
 #####   Purpose: bash  script to to upload to RPi
 #####   Notes: 
 #}}}***********************************************************
-echo -e "${BLUE}Uploading $*"
+printf "${BLUE}Uploading $*\n"
 for i in "$@"; do
-    scp -r -P $RPI2_PORT "$i" pi@$IP:\$HOME/Desktop
+    scp -r -P "$RPI2_PORT" "$i" pi@"$IP":'$HOME/Desktop'
 
 done
-echo -e "Done${RESET}"
+printf "Done\n${RESET}"
