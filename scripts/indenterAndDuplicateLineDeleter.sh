@@ -7,9 +7,9 @@
 #####   Notes: 
 #}}}***********************************************************
 
-HOME_DIR=$HOME
-SCRIPTS_DIR=$SCRIPTS
-BACKUP_DIR=$SCRIPTS_DIR/rcBackups
+home_dir=$HOME
+scripts_dir=$SCRIPTS
+backup_dir=$scripts_dir/rcBackups
 
 usage(){
     #here doc for printing multiline
@@ -24,12 +24,12 @@ if [[ $# < 1 ]]; then
     exit 1
 fi
 
-if [[ ! -d $BACKUP_DIR ]]; then
-    mkdir $BACKUP_DIR
+if [[ ! -d $backup_dir ]]; then
+    mkdir $backup_dir
 fi
 
 for file; do
-    cp "$file" "$BACKUP_DIR/$file"
+    cp "$file" "$backup_dir/$file"
     contents=$(cat -s "$file")
     echo "$contents" > "$file"
     vim -E -c ":normal gg=G" -c ":wq" "$file"

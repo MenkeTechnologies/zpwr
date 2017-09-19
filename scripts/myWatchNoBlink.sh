@@ -51,13 +51,13 @@ if [[ $boldflag == true ]]; then
 fi
 
 watchCommand() {
-    HOME=$(tput cup 0 0)
+    home=$(tput cup 0 0)
     #tput ed clears to end of screen
-    ED=$(tput ed)
+    ed=$(tput ed)
     #tput el clears to end of line
-    EL=$(tput el)
+    el=$(tput el)
     #position cursor at 0,0
-    printf '%s%s' "$HOME" "$ED"
+    printf '%s%s' "$home" "$ed"
     while true; do
         #adapts to resizing of screen
         ROWS=$(tput lines)
@@ -65,10 +65,10 @@ watchCommand() {
         CMD="$@"
         eval "$CMD" | head -n "$ROWS" | while IFS= read LINE; do
             #prints %-30.5s = 30 spaces for left justificationa and five characters
-            printf '%-*.*s%s\n' $COLS $COLS "$LINE" "$EL"
+            printf '%-*.*s%s\n' $COLS $COLS "$LINE" "$el"
         done
         #position cursor back to 0,0
-        printf '%s%s' "$ED" "$HOME"
+        printf '%s%s' "$ed" "$home"
         sleep $timeToSleep
     done
 

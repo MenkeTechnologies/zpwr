@@ -73,10 +73,10 @@ filesArray=()
 trap 'killCursor; echo; exit' INT
 startCursor
 
-DIR_TO_SEARCH="$(pwd)"
+dir_to_search="$(pwd)"
 
 if [[ ! -z "$2" ]]; then
-	DIR_TO_SEARCH="$2"
+	dir_to_search="$2"
 fi
 
 #process substituion to find all files with the fileExtension
@@ -98,7 +98,7 @@ while read line; do
 		
 	fi
 #find all files in pwd that have the fileExtensions in their names, remove last pipe from fileString
-done < <(find "$DIR_TO_SEARCH" -type f | egrep -i "${fileString%|}")
+done < <(find "$dir_to_search" -type f | egrep -i "${fileString%|}")
 
 killCursor
 

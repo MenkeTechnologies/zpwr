@@ -37,9 +37,9 @@ if [[ -z "$1" ]]; then
 fi
 
 if [[ -z "$2" ]]; then
-    TIME=1
+    time=1
 else
-    TIME="$2"
+    time="$2"
 fi
 
 clear
@@ -58,5 +58,5 @@ while [[ true ]]; do
     else
         echo -n "$x"
     fi
-    sleep $TIME
+    sleep $time
 done

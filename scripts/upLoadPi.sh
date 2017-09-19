@@ -7,6 +7,7 @@
 #####   Notes: 
 #}}}***********************************************************
 printf "${BLUE}Uploading $*\n"
+#loop through all arguments and upload with scp recursively to synology server
 for i in "$@"; do
     scp -r -P $RPI_PORT "$i" pi@"$IP":'$HOME/Desktop'
 
