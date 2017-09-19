@@ -10,7 +10,7 @@
 IP=$IP
 ADDRESS="pi@$IP:/var/www/html"
 
-echo -e "${BLUE}Uploading $* to $ADDRESS"
+printf "${BLUE}Uploading $* to $ADDRESS\n"
 
 #loop through all arguments and upload with scp recursively to pi server
 for i in "$@"; do
@@ -18,7 +18,7 @@ for i in "$@"; do
 done
 
 #decolrize prompt with RESET environment variable
-echo -e "Done${RESET}"
+printf "Done\n${RESET}"
 
 #if just uploading to website one html file
 if [[ "$#" == 1 && "$1" =~ .*.html  ]]; then
