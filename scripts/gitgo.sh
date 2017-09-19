@@ -139,11 +139,11 @@ gitPush(){
 commitTheDirectory(){
     #commitMessage is first argument
     local commitMessage="$1"
-    local ORIGIN="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
-    prettyPrint "Commiting to $ORIGIN with message $commitMessage"
+    local origin="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
+    prettyPrint "Commiting to $origin with message $commitMessage"
     git add .
     git commit -m "$commitMessage"
-    git push "$ORIGIN" master
+    git push "$origin" master
     #if error then need to establish remote repository
     if [[ $? > 0 ]]; then
         local REPO_NAME="$(git remote -v | awk '{print $2}' | tail -1 | tr -d ' ')"

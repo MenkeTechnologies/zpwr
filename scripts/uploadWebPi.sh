@@ -7,14 +7,14 @@
 #####   Notes: 
 #}}}***********************************************************
 
-IP=$IP
-ADDRESS="pi@$IP:/var/www/html"
+ip=$ip
+address="pi@$ip:/var/www/html"
 
-printf "${BLUE}Uploading $* to $ADDRESS\n"
+printf "${BLUE}Uploading $* to $address\n"
 
 #loop through all arguments and upload with scp recursively to pi server
 for i in "$@"; do
-	scp -r -P $RPI_PORT "$i" "$ADDRESS" 2>/dev/null
+	scp -r -P $RPI_PORT "$i" "$address" 2>/dev/null
 done
 
 #decolrize prompt with RESET environment variable
@@ -22,6 +22,6 @@ printf "Done\n${RESET}"
 
 #if just uploading to website one html file
 if [[ "$#" == 1 && "$1" =~ .*.html  ]]; then
-	open "http://$IP:443/$1"
+	open "http://$ip:443/$1"
 	#open -a "Sublime Text"
 fi
