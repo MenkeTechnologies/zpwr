@@ -31,7 +31,7 @@ if [[ -f "$SCRIPTS/printHeader.sh" ]];then
 fi
 
 exists pip3 && {
-prettyPrint "Updating Python Packages"
+prettyPrint "Updating Python3 Packages"
 #pip lists outdated programs and get first column with awk
 #store in outdated
 outdated=$(pip3 list --outdated | awk '{print $1}')
@@ -46,6 +46,21 @@ done
 pip3 install --upgrade pip setuptools wheel &> /dev/null
 }
 
+exists pip && {
+prettyPrint "Updating Python2 Packages"
+#pip lists outdated programs and get first column with awk
+#store in outdated
+outdated=$(pip list --outdated | awk '{print $1}')
+
+#install outdated pip modules 
+#split on space
+for i in $outdated; do
+    pip install --upgrade "$i" #&> /dev/null
+done
+
+#update pip itself
+pip install --upgrade pip setuptools wheel &> /dev/null
+}
 exists rvm && {
 prettyPrint "Updating Ruby Packages"
 rvm get stable
