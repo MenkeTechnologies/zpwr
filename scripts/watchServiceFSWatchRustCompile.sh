@@ -7,7 +7,7 @@
 #####   Notes: 
 #}}}***********************************************************
 #example usage = bash "$SCRIPTS/watchServiceFSWatchRustCompile.sh" . "untitled.rs"
-DIR_WATCHING="$1"
+dir_watching="$1"
 while read -d "" event; do
 	
 	fileName=`basename $event`
@@ -39,4 +39,4 @@ while read -d "" event; do
 
 	
 
-done < <(fswatch -r -0 -E "$DIR_WATCHING" -e "/\.." )
+done < <(fswatch -r -0 -E "$dir_watching" -e "/\.." )

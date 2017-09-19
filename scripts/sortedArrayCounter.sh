@@ -6,7 +6,7 @@
 #####   Purpose: bash script to see sorted commands in PATH 
 #####   Notes: 
 #}}}***********************************************************
-OLDIFS="$IFS"
+oldifs="$IFS"
 
 IFS=:
 
@@ -19,7 +19,7 @@ for i in $PATH; do
     if [[ $? = 0 ]]; then
         let "sum += `ls $i | wc -w`"
 
-        IFS="$OLDIFS"
+        IFS="$oldifs"
         for i in  `ls $i`; do
             arr+=($i)
         done

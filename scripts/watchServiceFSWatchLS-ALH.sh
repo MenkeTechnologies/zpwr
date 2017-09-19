@@ -6,9 +6,9 @@
 #####   Purpose: bash script to list files on file change
 #####   Notes: 
 #}}}***********************************************************
-DIR_WATCHING="$1"
+dir_watching="$1"
 while read -d "" event; do
 	clear
 	echo "The event was $event"
 	ls -AlhF
-done < <(fswatch -r -0 -E "$DIR_WATCHING" -e "/\.." )
+done < <(fswatch -r -0 -E "$dir_watching" -e "/\.." )

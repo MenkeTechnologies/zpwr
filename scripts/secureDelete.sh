@@ -7,14 +7,14 @@
 #####   Notes: 
 #}}}***********************************************************
 
-PASSES=7         #  Number of file-shredding passes.
+passes=7         #  Number of file-shredding passes.
 #  Increasing this slows script execution,
 #+ especially on large target files.
-BLOCKSIZE=1      #  I/O with /dev/urandom requires unit block size,
+blocksize=1      #  I/O with /dev/urandom requires unit block size,
 #+ otherwise you get weird results.
-E_BADARGS=70     #  Various error exit codes.
-E_NOT_FOUND=71
-E_CHANGED_MIND=72
+e_badargs=70     #  Various error exit codes.
+e_not_found=71
+e_changed_mind=72
 
 displayProgress(){
 
@@ -63,7 +63,7 @@ trap 'killCursor; echo; exit' INT
 
 if [[ -z "$1" ]]; then
     echo "Usage: `basename $0` filename"
-    exit $E_BADARGS
+    exit $e_badargs
 fi
 
 for i in "$@"; do
@@ -72,7 +72,7 @@ for i in "$@"; do
     if [[ ! -e "$file" ]]
     then
         echo "File \"$file\" not found."
-        exit $E_NOT_FOUND
+        exit $e_not_found
     fi  
 
     printf "Are you sure you want to blot out \"$file\" (y/n)? "; 
@@ -83,7 +83,7 @@ for i in "$@"; do
     case "$answer" in
         [nN]) echo "Bye"
             killCursor
-            exit $E_CHANGED_MIND;;
+            exit $e_changed_mind;;
         *)    echo "Blotting out file \"$file\".";;
     esac
 
@@ -91,14 +91,14 @@ for i in "$@"; do
     pass_count=1
     chmod u+w "$file"   # Allow overwriting/deleting the file.
 
-    while [ "$pass_count" -le "$PASSES" ]
+    while [ "$pass_count" -le "$passes" ]
     do
         echo "Pass #$pass_count"
         sync         # Flush buffers.
-        dd if=/dev/urandom of="$file" bs=$BLOCKSIZE count=$flength
+        dd if=/dev/urandom of="$file" bs=$blocksize count=$flength
         # Fill with random bytes.
         sync         # Flush buffers again.
-        dd if=/dev/zero of="$file" bs=$BLOCKSIZE count=$flength
+        dd if=/dev/zero of="$file" bs=$blocksize count=$flength
         # Fill with zeros.
         sync         # Flush buffers yet again.
         let "pass_count += 1"
