@@ -14,6 +14,7 @@
 ##########################################
 ###############  functions  ##############
 ##########################################
+
 prettyPrint(){
     #print white text 37m on blue qbackground 44m
     printf "\e[37;44m"
@@ -110,7 +111,8 @@ exit 1
 gitPull(){
     #if .git directory exists and remote repository established
     if [[ -d ".git" && ! -z "$(git remote)" ]]; then
-        local PULL_URL="$(git remote -v | awk '{print $2}' | tail -1 | tr -d ' ')"
+        local PULL_URL="$(git remote -v | \
+        awk '{print $2}' | tail -1 | tr -d ' ')"
         git pull "$PULL_URL"
     else
         usage "No Remote Repository established."

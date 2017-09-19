@@ -14,7 +14,7 @@ echo -e "${BLUE}Uploading $* to $ADDRESS"
 
 #loop through all arguments and upload with scp recursively to pi server
 for i in "$@"; do
-	scp -r -P 7778 "$i" "$ADDRESS" 2>/dev/null
+	scp -r -P $RPI_PORT "$i" "$ADDRESS" 2>/dev/null
 done
 
 #decolrize prompt with RESET environment variable
