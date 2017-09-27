@@ -24,6 +24,7 @@ Endofmessage
 printf "\e[0m"
 }
 
+
 #show file sizes of all files in pwd
 #checking for presence of sorted flag which is
 #set in getopts
