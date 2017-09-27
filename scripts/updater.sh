@@ -83,19 +83,6 @@ brew cleanup
 brew cask cleanup
 brew services cleanup
 #check is we have brew cu
-brew cu 1>/dev/null 2>&1 && {
-# we have brew cu
-prettyPrint "Updating Homebrew Casks!"
-brew cu --all -y --cleanup
-     } || {
-     # we don't have brew cu
-     prettyPrint "Installing brew-cask-upgrade"
-     brew tap buo/cask-upgrade
-     brew update
-     prettyPrint "Updating Homebrew Casks!"
-     brew cu --all -y --cleanup
- } 
-}
 
 exists npm && {
 prettyPrint "Updating NPM Packages"
@@ -104,7 +91,7 @@ do
     npm install -g "$package"
 done
 #updating npm itself
-npm i -g npm
+npm install -g npm
 }
 
 exists yarn && {
@@ -190,6 +177,19 @@ done
 prettyPrint "Updating Vundle Plugins"
 vim -c VundleUpdate -c quitall
 
+brew cu 1>/dev/null 2>&1 && {
+# we have brew cu
+prettyPrint "Updating Homebrew Casks!"
+brew cu --all -y --cleanup
+     } || {
+     # we don't have brew cu
+     prettyPrint "Installing brew-cask-upgrade"
+     brew tap buo/cask-upgrade
+     brew update
+     prettyPrint "Updating Homebrew Casks!"
+     brew cu --all -y --cleanup
+ } 
+}
 #decolorize prompt
 echo -e "Done\e[0m"
 clear

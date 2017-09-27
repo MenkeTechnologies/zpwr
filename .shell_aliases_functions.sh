@@ -33,7 +33,7 @@ fi
 #{{{                           MARK:HOMES
 #**********************************************************************
 if [[ "$(uname)" == Darwin ]]; then
-    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home"
     export GROOVY_HOME="/usr/local/Cellar/groovy/2.4.11"
     export SCALA_HOME="/usr/local/Cellar/scala/2.12.2"
     export HOMEBREW_HOME='/usr/local/Cellar'
@@ -120,6 +120,7 @@ alias logs="tail -f /var/log/*.log | lolcat"
 alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
 alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
+alias tmm_full="python3 $PYSCRIPTS/complete_ssh_starter.py" 
 alias inst="source $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 #                           MARK:PYTHON SCRIPTS
@@ -227,7 +228,7 @@ clearList () {
     } || {
     ls_command="ls -iFlhAO"
 }
-    lib_command="otool -L"
+lib_command="otool -L"
     else
         exists grc && {
 
@@ -235,7 +236,7 @@ clearList () {
     } || {
     ls_command="ls -iFhlA"
 }
-    lib_command="ldd"
+lib_command="ldd"
     fi
 
     if [[ ! -z "$1" ]]; then
