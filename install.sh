@@ -242,6 +242,8 @@ if [[ "$(uname)" == Linux ]]; then
     mv "$HOME/.tmux.conf.rpi" "$HOME/.tmux.conf"
     printf "Installing Iftop config...\n"
     cp "$INSTALLER_DIR/.iftop.conf" "$HOME" 
+    printf "Installing custom motd for RPI...\n"
+    cp "$INSTALLER_DIR/motd.sh" "$HOME"
 else
     cp "./.tmux.conf" "$HOME"
     printf "Installing Iftop config...\n"
