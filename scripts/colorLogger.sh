@@ -11,11 +11,16 @@ shopt -s globstar
 
 #tailVersion="colortail -k $HOME/.colortailconf"
 tailVersion=tail
+
 weHaveCCZE=no
 
 type ccze 1>/dev/null 2>&1 && {
 weHaveCCZE=yes
 }
+
+if [[ ! -z "$1" ]]; then
+    weHaveCCZE=no
+fi
 
 #dont care about std err
 exec 2>/dev/null
