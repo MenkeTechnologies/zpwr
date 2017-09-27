@@ -349,7 +349,7 @@ if [[ "$(uname)" = Darwin ]]; then
     if [[ "$UID" != "0" ]]; then
         builtin cd "$D" && clear
         type figlet > /dev/null 2>&1 && {
-        printf "\e[1;4m"
+        printf "\e[1m"
         [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)"
     }
         printf "\e[0m"
