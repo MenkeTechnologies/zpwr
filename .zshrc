@@ -155,9 +155,9 @@ function _tutsUpdate() {
 
 
 expand-aliases() {
-  unset 'functions[_expand-aliases]'
-  functions[_expand-aliases]=$BUFFER
-  (($+functions[_expand-aliases])) &&
+unset 'functions[_expand-aliases]'
+functions[_expand-aliases]=$BUFFER
+(($+functions[_expand-aliases])) &&
     BUFFER=${functions[_expand-aliases]#$'\t'} &&
     CURSOR=$#BUFFER
 }
@@ -347,7 +347,9 @@ fi
 if [[ "$(uname)" = Darwin ]]; then
     export PATH="$PATH:$HOME/.rvm/bin"
     if [[ "$UID" != "0" ]]; then
-        cd $D
+        builtin cd "$D" && clear
+        type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
+        listNoClear
     else
         clearList
     fi
@@ -356,11 +358,11 @@ else
     distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
 
     if [[ "$UID" != "0" ]]; then
-    builtin cd "$D"
-    if [[ "$distro" =~ Raspbian* ]]; then
-        bash "$HOME/motd.sh"
-    fi
-    listNoClear
+        builtin cd "$D"
+        if [[ "$distro" =~ Raspbian* ]]; then
+            bash "$HOME/motd.sh"
+        fi
+        listNoClear
     else
         clearList
     fi
