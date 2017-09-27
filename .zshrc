@@ -344,10 +344,22 @@ if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
     source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
 fi
 #go to desktop if not root
-if [[ "$UID" != "0" ]]; then
-    cd $D
+if [[ "$(uname)" = Darwin ]]; then
+    export PATH="$PATH:$HOME/.rvm/bin"
+    if [[ "$UID" != "0" ]]; then
+        cd $D
+    else
+        clearList
+    fi
 else
-    clearList
+    if [[ "$UID" != "0" ]]; then
+    builtin cd "$D"
+    bash "$HOME/motd.sh"
+    listNoClear
+    else
+        clearList
+    fi
+
 fi
 
 export LC_CTYPE="en_US.UTF-8"
@@ -356,6 +368,3 @@ export LC_CTYPE="en_US.UTF-8"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-if [[ "$(uname)" = Darwin ]]; then
-    export PATH="$PATH:$HOME/.rvm/bin"
-fi
