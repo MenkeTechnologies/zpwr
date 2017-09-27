@@ -357,7 +357,7 @@ else
 
     if [[ "$UID" != "0" ]]; then
     builtin cd "$D"
-    if [[ "$distro" =~ Raspian* ]]; then
+    if [[ "$distro" =~ Raspbian* ]]; then
         bash "$HOME/motd.sh"
     fi
     listNoClear
