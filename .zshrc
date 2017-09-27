@@ -352,9 +352,14 @@ if [[ "$(uname)" = Darwin ]]; then
         clearList
     fi
 else
+
+    distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
+
     if [[ "$UID" != "0" ]]; then
     builtin cd "$D"
-    bash "$HOME/motd.sh"
+    if [[ "$distro" =~ Raspian* ]]; then
+        bash "$HOME/motd.sh"
+    fi
     listNoClear
     else
         clearList
