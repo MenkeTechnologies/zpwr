@@ -7,7 +7,7 @@
 #####   Notes: 
 #}}}***********************************************************
 
-ip=$ip
+ip=$IP
 address="pi@$ip:/var/www/html"
 
 printf "${BLUE}Uploading $* to $address\n"
