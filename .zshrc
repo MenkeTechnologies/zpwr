@@ -348,11 +348,16 @@ if [[ "$(uname)" = Darwin ]]; then
     export PATH="$PATH:$HOME/.rvm/bin"
     if [[ "$UID" != "0" ]]; then
         builtin cd "$D" && clear
-        type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
-        listNoClear
-    else
-        clearList
-    fi
+        type figlet > /dev/null 2>&1 && {
+        printf "\e[1;4m"
+        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)"
+    }
+        printf "\e[0m"
+    type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
+    listNoClear
+else
+    clearList
+fi
 else
 
     distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
