@@ -352,8 +352,8 @@ if [[ "$(uname)" = Darwin ]]; then
         printf "\e[1m"
         [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)"
     }
-        printf "\e[0m"
-    type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
+    printf "\e[0m"
+    # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
     listNoClear
 else
     clearList
@@ -365,7 +365,10 @@ else
     if [[ "$UID" != "0" ]]; then
         builtin cd "$D"
         if [[ "$distro" =~ Raspbian* ]]; then
-            bash "$HOME/motd.sh"
+            type ponysay 1>/dev/null 2>&1 && {
+            bash "$HOME/motd.sh" | ponysay -W 100
+
+        } || bash "$HOME/motd.sh"
         fi
         listNoClear
     else
