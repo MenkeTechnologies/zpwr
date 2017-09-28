@@ -245,7 +245,10 @@ lib_command="ldd"
             #exe matching
             while read locale;do
                 last_fields="$(echo $locale | cut -d' ' -f3-10)"
-                [[ -f "$last_fields" ]] && eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields" && du -sh "$last_fields"|| echo "$locale"
+                [[ -f "$last_fields" ]] && { 
+
+                eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
+                du -sh "$last_fields" } || echo "$locale"
             done < <(type -a $command | sort | uniq)
         } || {
         #path matching
