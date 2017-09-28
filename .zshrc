@@ -350,7 +350,7 @@ if [[ "$(uname)" = Darwin ]]; then
         builtin cd "$D" && clear
         type figlet > /dev/null 2>&1 && {
         printf "\e[1m"
-        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)"
+        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" | ponysay -W 100
     }
     printf "\e[0m"
     # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
