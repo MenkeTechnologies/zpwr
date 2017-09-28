@@ -34,9 +34,9 @@ fi
 #**********************************************************************
 if [[ "$(uname)" == Darwin ]]; then
     export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home"
-    export GROOVY_HOME="/usr/local/Cellar/groovy/2.4.11"
-    export SCALA_HOME="/usr/local/Cellar/scala/2.12.2"
     export HOMEBREW_HOME='/usr/local/Cellar'
+    export GROOVY_HOME="$HOMEBREW_HOME/groovy/2.4.11"
+    export SCALA_HOME="$HOMEBREW_HOME/scala/2.12.2"
     export PERL_HOME='$HOMEBREW_HOME/perl/5.24.1/'
     export HOMEBREW_DBHOME='/usr/local/var'
     export HOMEBREW_DB_CONF='/usr/local/etc'
