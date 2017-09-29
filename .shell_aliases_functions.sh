@@ -252,7 +252,7 @@ lib_command="ldd -v"
             done < <(type -a "$command" | sort | uniq)
         } || {
         #path matching, not exe
-        eval "$ls_command -d \"$command\""
+        eval "$ls_command -d \"$command\"" || return 1
         file "$command"
         du -sh "$command"
         stat "$command"
