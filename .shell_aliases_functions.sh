@@ -236,7 +236,7 @@ lib_command="otool -L"
     } || {
     ls_command="ls -iFhlA"
 }
-lib_command="ldd"
+lib_command="ldd -v"
     fi
 
     if [[ ! -z "$1" ]]; then
