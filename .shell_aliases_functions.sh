@@ -248,13 +248,15 @@ lib_command="ldd"
                 [[ -f "$last_fields" ]] && { 
 
                 eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
-                du -sh "$last_fields" } || echo "$locale"
+                du -sh "$last_fields"; stat "$last_fields";echo } || echo "$locale"
             done < <(type -a "$command" | sort | uniq)
         } || {
         #path matching, not exe
         eval "$ls_command -d \"$command\""
         file "$command"
         du -sh "$command"
+        stat "$command"
+        echo
     }
 
 
