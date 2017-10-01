@@ -242,31 +242,28 @@ lib_command="ldd -v"
     if [[ ! -z "$1" ]]; then
         for command in "$@"; do
             exists $command &&  {
-            #exe matching
-            while read locale;do
-                last_fields="$(echo $locale | cut -d' ' -f3-10)"
-                [[ -f "$last_fields" ]] && { 
+                #exe matching
+                while read locale;do
+                    last_fields="$(echo $locale | cut -d' ' -f3-10)"
+                    [[ -f "$last_fields" ]] && { 
 
-                eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
-                du -sh "$last_fields"
-                stat "$last_fields"
-                echo
-            } || echo "$locale"
-            done < <(type -a "$command" | sort | uniq)
-        } || {
-        #path matching, not exe
-        eval "$ls_command -d \"$command\"" || return 1
-        file "$command"
-        du -sh "$command"
-        stat "$command"
-        echo #for readibility
-    }
-
-
-done
+                        eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
+                        du -sh "$last_fields"
+                        stat "$last_fields"
+                        echo
+                        } || echo "$locale"
+                done < <(type -a "$command" | sort | uniq)
+            } || {
+            #path matching, not exe
+                eval "$ls_command -d \"$command\"" || return 1
+                file "$command"
+                du -sh "$command"
+                stat "$command"
+                echo #for readibility
+            }
+        done
     else
         clear && eval "$ls_command"
-
     fi
 }
 listNoClear () {
