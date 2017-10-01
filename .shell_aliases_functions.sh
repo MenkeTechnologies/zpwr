@@ -235,8 +235,8 @@ lib_command="otool -L"
         ls_command="grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always"
     } || {
     ls_command="ls -iFhlA"
-}
-lib_command="ldd -v"
+    }
+    lib_command="ldd -v"
     fi
 
     if [[ ! -z "$1" ]]; then
@@ -247,8 +247,11 @@ lib_command="ldd -v"
                 last_fields="$(echo $locale | cut -d' ' -f3-10)"
                 [[ -f "$last_fields" ]] && { 
 
-                eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
-                du -sh "$last_fields"; stat "$last_fields";echo } || echo "$locale"
+                    eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
+                    du -sh "$last_fields"
+                    stat "$last_fields"
+                    echo }
+                    || echo "$locale"
             done < <(type -a "$command" | sort | uniq)
         } || {
         #path matching, not exe
@@ -256,7 +259,7 @@ lib_command="ldd -v"
         file "$command"
         du -sh "$command"
         stat "$command"
-        echo
+        echo 
     }
 
 
@@ -430,5 +433,5 @@ humanReadable(){
     #}}}***********************************************************
 
     [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
-    export LC_COLLATE=C
+    export LC_COLLATE=c
 
