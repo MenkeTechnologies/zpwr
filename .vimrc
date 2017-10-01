@@ -351,7 +351,6 @@ nnoremap <silent> <leader>' :call Quoter()<CR>lmaea'<ESC>bi'<ESC>:call Reset()<C
 inoremap <silent> <C-U> <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 nnoremap <silent> <C-U> :silent !open -t %:p:h<CR>:redraw!<CR>
 
-
 nnoremap <silent> <leader>n :n<CR>
 inoremap <F8> <ESC>:%s///g<Left><Left><Left>
 nnoremap <F8> :%s///g<Left><Left><Left>

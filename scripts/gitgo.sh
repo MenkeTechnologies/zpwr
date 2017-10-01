@@ -112,7 +112,7 @@ gitPull(){
     #if .git directory exists and remote repository established
     if [[ -d ".git" && ! -z "$(git remote)" ]]; then
         local PULL_URL="$(git remote -v | \
-        awk '{print $2}' | tail -1 | tr -d ' ')"
+            awk '{print $2}' | tail -1 | tr -d ' ')"
         git pull "$PULL_URL"
     else
         usage "No Remote Repository established."

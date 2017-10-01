@@ -6,26 +6,26 @@
 #####   Purpose: bash script to install .tgz packages
 #####   Notes: 
 #}}}***********************************************************
-tarball_directory="$1"
+tarbellDirectory="$1"
 
 install(){
 
-    if [[ "$tarball_directory" =~ .*.tar.gz ]];then
-        directory_name="${tarball_directory%.tar.gz}"
-    elif [[ "$tarball_directory" =~ .*.tgz ]];then
-        directory_name="${tarball_directory%.tgz}"
+    if [[ "$tarbellDirectory" =~ .*.tar.gz ]];then
+        directory_name="${tarbellDirectory%.tar.gz}"
+    elif [[ "$tarbellDirectory" =~ .*.tgz ]];then
+        directory_name="${tarbellDirectory%.tgz}"
     else
         echo "Need to be tar.gz or .tgz for automatic!" >&2
         echo "What is the directory_name name?"
         read directory_name
     fi
 
-    tar xvfz "$tarball_directory"
+    tar xvfz "$tarbellDirectory"
     cd "$directory_name" && {
-        ./configure && make && sudo make install}
+    ./configure && make && sudo make install}
 }
 
-if [[ -z "$tarball_directory" ]]; then
+if [[ -z "$tarbellDirectory" ]]; then
     if [[ ! -f "configure" ]];then
         for file in $(ls -A); do
             if [[ "$file" =~ .*.tar.gz || "$file" =~ .*.tgz ]];then
@@ -36,5 +36,7 @@ if [[ -z "$tarball_directory" ]]; then
         ./configure && make && sudo make install
     fi
 else
-    install "$tarball_directory"
+    install "$tarbellDirectory"
 fi
+
+
