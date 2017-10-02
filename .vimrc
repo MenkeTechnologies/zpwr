@@ -62,6 +62,7 @@ set number
 set wildmenu
 syntax on
 set grepprg=ag
+
 "show the leader
 set showcmd
 "for copying to system clipboard

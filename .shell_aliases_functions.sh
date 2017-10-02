@@ -1,9 +1,5 @@
 #created by JACOBMENKE at Mon Jun 12 17:33:50 EDT 2017
 
-#global utility functions
-exists(){
-    type "$1" >/dev/null 2>&1
-}
 
 #{{{                    MARK:ENV Var
 #**************************************************************
@@ -34,7 +30,7 @@ fi
 #{{{                           MARK:HOMES
 #**********************************************************************
 if [[ "$(uname)" == Darwin ]]; then
-    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home"
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
     export HOMEBREW_HOME='/usr/local/Cellar'
     export GROOVY_HOME="$HOMEBREW_HOME/groovy/2.4.11"
     export SCALA_HOME="$HOMEBREW_HOME/scala/2.12.2"
@@ -430,8 +426,11 @@ humanReadable(){
         printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
     }
 
+    exists(){
+        type "$1" >/dev/null 2>&1
+    }
+
     #}}}***********************************************************
 
     [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
-    export LC_COLLATE=c
 
