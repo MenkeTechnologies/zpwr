@@ -319,7 +319,6 @@ alias -g nul="> /dev/null 2>&1"
 
 #allow for awesome z command
 source "$HOME/z.sh"
-#
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
@@ -337,7 +336,6 @@ source "$HOME/z.sh"
 #
 ## Then, source plugins and add commands to $PATH
 #zplug load
-#
 
 export GOPATH="$HOME/go"
 if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then

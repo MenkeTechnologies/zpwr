@@ -19,6 +19,7 @@ export DL="$HOME/Downloads"
 # The orginal version is saved in .profile.pysave
 export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
 export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:Library/Frameworks/Python.framework/Versions/3.5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
+export TERMINAL_APP="Terminal.app"
 export GITHUB_ACCOUNT='MenkeTechnologies'
 
 if [[ "$(uname)" == Darwin ]]; then
@@ -242,25 +243,25 @@ lib_command="ldd -v"
     if [[ ! -z "$1" ]]; then
         for command in "$@"; do
             exists $command &&  {
-                #exe matching
-                while read locale;do
-                    last_fields="$(echo $locale | cut -d' ' -f3-10)"
-                    [[ -f "$last_fields" ]] && { 
+            #exe matching
+            while read locale;do
+                last_fields="$(echo $locale | cut -d' ' -f3-10)"
+                [[ -f "$last_fields" ]] && { 
 
-                        eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
-                        du -sh "$last_fields"
-                        stat "$last_fields"
-                        echo
-                        } || echo "$locale"
-                done < <(type -a "$command" | sort | uniq)
-            } || {
-            #path matching, not exe
-                eval "$ls_command -d \"$command\"" || return 1
-                file "$command"
-                du -sh "$command"
-                stat "$command"
-                echo #for readibility
-            }
+                eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
+                du -sh "$last_fields"
+                stat "$last_fields"
+                echo
+            } || echo "$locale"
+        done < <(type -a "$command" | sort | uniq)
+    } || {
+    #path matching, not exe
+    eval "$ls_command -d \"$command\"" || return 1
+    file "$command"
+    du -sh "$command"
+    stat "$command"
+    echo #for readibility
+}
         done
     else
         clear && eval "$ls_command"
@@ -405,9 +406,11 @@ humanReadable(){
     mp3(){
         youtube-dl --extract-audio --audio-format mp3 "$1"
     }
+
     mp4(){
-        youtube-dl --no-playlist -f mp4 "$1"
+        [[ -z "$2" ]] && youtube-dl --no-playlist -f mp4 "$1" || youtube-dl -f mp4 "$1"
     }
+
     prettyPrint(){
         if [[ ! -z "$1" ]]; then
             printf "\e[1m$1\e[0m\n"
