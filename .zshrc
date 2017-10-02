@@ -1,3 +1,4 @@
+export LC_ALL="en_US.UTF-8"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -375,7 +376,6 @@ else
 
 fi
 
-export LC_CTYPE="en_US.UTF-8"
 
 #imgcat and other special features from iTerm's shell integration
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
