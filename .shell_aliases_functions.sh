@@ -21,13 +21,11 @@ export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:L
 export TERMINAL_APP="Terminal.app"
 export GITHUB_ACCOUNT='MenkeTechnologies'
 
-if [[ "$(uname)" == Darwin ]]; then
+[[ "$(uname)" == Darwin ]] && {
     export WCC="/Volumes/JAKESD/wcc/cps"
     export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
     export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
-else
-    export PATH="$PATH:/usr/games"
-fi
+} || export PATH="$PATH:/usr/games"
 
     exists yarn && export PATH="$(yarn global bin):$PATH"
 #}}}***********************************************************
