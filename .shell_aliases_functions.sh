@@ -193,15 +193,16 @@ scnew(){
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
+
 nn(){
-    [[ -z "$1" ]] && echo "Title is \$1 and message is \$2..." > &2 && return 1
+    [[ -z "$1" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
 
     title="$1"
     msg="$2"
 
     echo "display notification \"$msg\" with title \"$title\"" | osascript 
-
 }
+
 suc(){
     subl $SCRIPTS
     f $SCRIPTS
