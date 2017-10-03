@@ -189,18 +189,12 @@ fi
 #{{{                    MARK:Shell functions
 #**************************************************************
 scnew(){
-    if [[ -z "$1" ]];then
-        echo "no arg..."
-        return 1
-    fi
+    [[ -z "$1" ]] && echo "no arg..." >&2 && return 1
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
 nn(){
-    if [[ -z "$1" ]];then
-        echo "Title is \$1 and message is \$2..."
-        return 1
-    fi
+    [[ -z "$1" ]] && echo "Title is \$1 and message is \$2..." > &2 && return 1
 
     title="$1"
     msg="$2"
@@ -299,138 +293,119 @@ humanReadable(){
     }
     {gsub(/^[0-9]+/, human($1));print}'
     }
-    f(){
-        cd "$1"
-    }
-    execpy(){
-        python3 $PYSCRIPTS/"$1"
+f(){
+    cd "$1"
+}
+execpy(){
+    python3 $PYSCRIPTS/"$1"
 
-    }
-    search(){
-        if [[ -z $2 ]];then
-            grep -iRnC 5 "$1" *
-        else
-            grep -iRnC 5 "$1" "$2"
-        fi
+}
+search(){
+    [[ -z $2 ]] && grep -iRnC 5 "$1" * || grep -iRnC 5 "$1" "$2"
 
-    }
-    cd(){
-        #builtin is necessary here to distinguish bt function name and builtin cd command
-        #don't want to recursively call this function
-        builtin cd "$@" && clearList
-    }
-    gitCommitAndPush(){
-        printf "\e[1m"
-        /usr/local/bin/git add .
-        /usr/local/bin/git commit -m "$1"
-        /usr/local/bin/git push
-        printf "\e[0m"
-    }
-    replacer(){
-        orig="$1"
-        shift
-        replace="$1"
-        shift
-        sed -i'' "s/$orig/$replace/g" $@
+}
+cd(){
+    #builtin is necessary here to distinguish bt function name and builtin cd command
+    #don't want to recursively call this function
+    builtin cd "$@" && clearList
+}
+gitCommitAndPush(){
+    printf "\e[1m"
+    /usr/local/bin/git add .
+    /usr/local/bin/git commit -m "$1"
+    /usr/local/bin/git push
+    printf "\e[0m"
+}
+replacer(){
+    orig="$1"
+    shift
+    replace="$1"
+    shift
+    sed -i'' "s/$orig/$replace/g" $@
 
+}
+createGIF(){
+    outFile=out.gif
+    res=600x400
+
+    [[ -z "$1" ]] && echo "One arg need..." >&2 && return 1
+
+    [[ "$2" ]] && res="$2"
+
+    [[ "$3" ]] && outFile="$3"	
+
+    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
+}
+hub_create(){
+    printf "\e[1m"
+    git init
+    hub create
+    echo "# `basename $(pwd)`" > README.md
+    echo "# created by Jacob Menke" >> README.md
+    git add .
+    git commit -m "first commit"
+    git push --set-upstream origin master
+    printf "\e[0m"
+}
+hub_delete(){
+    [[ -z "$1" ]] && echo "need a REPO NAME" >&2 && return 1
+    REPO="$1"
+    out="$(curl -u menketechnologies -X "DELETE" https://api.github.com/repos/menketechnologies/"$REPO")"
+
+    printf "\e[1m"
+    [[ -z "$out" ]] && echo "Successful deletion of $REPO" || {
+        echo "Error in deletion of $REPO"
+        echo "$out"
     }
-    createGIF(){
-        outFile=out.gif
-        res=600x400
+    printf "\e[0m"
+}
 
-        if [[ -z "$1" ]]; then
-            echo "One arg need..." >&2
-            return 1
-        fi
+pstreeMonitor(){
+    bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s/$USER// | sed s@/.*/@@ | tail -75"
 
-        if [[ ! -z "$2" ]]; then
-            res="$2"
-        fi
+}
+return2(){
+    exec 2> /dev/tty
+}
+color2(){
 
-        if [[ ! -z "$3" ]];then
-            outFile="$3"	
-        fi
+    exec 2> >(redText.sh)
+}
+escapeRemove(){
+    while read INPUT; do
+        echo "$INPUT" | sed -e 's/\e\[.\{1,5\}m//g'
+    done
+}
+mp3(){
+    youtube-dl --extract-audio --audio-format mp3 "$1"
+}
 
-        ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
+mp4(){
+    [[ -z "$2" ]] && youtube-dl --no-playlist -f mp4 "$1" || youtube-dl -f mp4 "$1"
+}
+
+prettyPrint(){
+    [[ "$1" ]] && printf "\e[1m$1\e[0m\n" || {
+        echo "Need one arg" >&2
+        return 1
     }
-    hub_create(){
-        printf "\e[1m"
-        git init
-        hub create
-        echo "# `basename $(pwd)`" > README.md
-        echo "# created by Jacob Menke" >> README.md
-        git add .
-        git commit -m "first commit"
-        git push --set-upstream origin master
-        printf "\e[0m"
+}
+tac(){
+    sed '1!G;h;$!d' "$@"
+}
 
-    }
-    hub_delete(){
-        if [[ -z "$1" ]]; then
-            echo "need a REPO NAME" >&2
-            return 1
-        fi
-        REPO="$1"
-        out="$(curl -u menketechnologies -X "DELETE" https://api.github.com/repos/menketechnologies/"$REPO")"
+backup(){
+    newfile="$1".$(date +%Y%m%d.%H.%M.bak)
+    mv "$1" "$newfile"
+    cp -pR "$newfile" "$1"
+    printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
+}
 
-        printf "\e[1m"
-        if [[ -z "$out" ]]; then
-            echo "Successful deletion of $REPO"
-        else
-            echo "Error in deletion of $REPO"
-            echo "$out"
-        fi
-        printf "\e[0m"
-    }
+exists(){
+    type "$1" >/dev/null 2>&1
+}
 
-    pstreeMonitor(){
-        bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s/$USER// | sed s@/.*/@@ | tail -75"
+#}}}***********************************************************
 
-    }
-    return2(){
-        exec 2> /dev/tty
-    }
-    color2(){
-
-        exec 2> >(redText.sh)
-    }
-    escapeRemove(){
-        while read INPUT; do
-            echo "$INPUT" | sed -e 's/\e\[.\{1,5\}m//g'
-        done
-    }
-    mp3(){
-        youtube-dl --extract-audio --audio-format mp3 "$1"
-    }
-
-    mp4(){
-        [[ -z "$2" ]] && youtube-dl --no-playlist -f mp4 "$1" || youtube-dl -f mp4 "$1"
-    }
-
-    prettyPrint(){
-        if [[ ! -z "$1" ]]; then
-            printf "\e[1m$1\e[0m\n"
-        else 
-            echo "Need one arg" >&2
-            return 1
-        fi
-    }
-    tac(){
-        sed '1!G;h;$!d' "$@"
-    }
-
-    backup(){
-        newfile="$1".$(date +%Y%m%d.%H.%M.bak)
-        mv "$1" "$newfile"
-        cp -pR "$newfile" "$1"
-        printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
-    }
-
-    exists(){
-        type "$1" >/dev/null 2>&1
-    }
-
-    #}}}***********************************************************
-
-    [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
+[[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 
