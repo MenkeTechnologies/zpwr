@@ -10,19 +10,11 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="simonoff"
 
-#if this is a mac
-if [[ "$(uname)" == "Darwin" ]]; then
-    source "$HOME/.powerlevel9kconfig.sh"
-else
-    #must be linux
-    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
-
-fi
+#if this is a mac or linux
+[[ "$(uname)" == "Darwin" ]] && source "$HOME/.powerlevel9kconfig.sh" || export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 
 #colors for common commands
-if [[ -f "$HOME/grc.zsh" ]]; then
-    source "$HOME/grc.zsh"
-fi
+[[ -f "$HOME/grc.zsh" ]] && source "$HOME/grc.zsh"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
