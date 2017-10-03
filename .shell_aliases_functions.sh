@@ -1,5 +1,8 @@
 #created by JACOBMENKE at Mon Jun 12 17:33:50 EDT 2017
 
+exists(){
+    type "$1" >/dev/null 2>&1
+}
 
 #{{{                    MARK:ENV Var
 #**************************************************************
@@ -25,6 +28,8 @@ if [[ "$(uname)" == Darwin ]]; then
 else
     export PATH="$PATH:/usr/games"
 fi
+
+    exists yarn && export PATH="$(yarn global bin):$PATH"
 #}}}***********************************************************
 
 #{{{                           MARK:HOMES
@@ -84,6 +89,7 @@ alias ta="tmux attach"
 #Darwin specific aliases
 if [[ "$(uname)" == "Darwin" ]]; then
     #statements
+    alias ifconfig='grc --colour=auto /sbin/ifconfig'
     alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
     alias cpu="top -o cpu"
     alias mem="top -o mem"
@@ -181,10 +187,6 @@ export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 #**************************************************************
 #}}}
 
-which yarn > /dev/null
-if [[ $? == 0 ]]; then
-    export PATH="$(yarn global bin):$PATH"
-fi
 
 #{{{                    MARK:Shell functions
 #**************************************************************
@@ -402,9 +404,6 @@ backup(){
     printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
 }
 
-exists(){
-    type "$1" >/dev/null 2>&1
-}
 
 #}}}***********************************************************
 
