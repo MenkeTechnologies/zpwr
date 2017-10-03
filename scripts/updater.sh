@@ -31,58 +31,59 @@ if [[ -f "$SCRIPTS/printHeader.sh" ]];then
 fi
 
 exists pip3 && {
-prettyPrint "Updating Python3 Packages"
-#pip lists outdated programs and get first column with awk
-#store in outdated
-outdated=$(pip3 list --outdated | awk '{print $1}')
+    prettyPrint "Updating Python3 Packages"
+    #pip lists outdated programs and get first column with awk
+    #store in outdated
+    outdated=$(pip3 list --outdated | awk '{print $1}')
 
-#install outdated pip modules 
-#split on space
-for i in $outdated; do
-    pip3 install --upgrade "$i" #&> /dev/null
-done
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        pip3 install --upgrade "$i" #&> /dev/null
+    done
 
-#update pip itself
-pip3 install --upgrade pip setuptools wheel &> /dev/null
+    #update pip itself
+    pip3 install --upgrade pip setuptools wheel &> /dev/null
 }
 
 exists pip && {
-prettyPrint "Updating Python2 Packages"
-#pip lists outdated programs and get first column with awk
-#store in outdated
-outdated=$(pip list --outdated | awk '{print $1}')
+    prettyPrint "Updating Python2 Packages"
+    #pip lists outdated programs and get first column with awk
+    #store in outdated
+    outdated=$(pip list --outdated | awk '{print $1}')
 
-#install outdated pip modules 
-#split on space
-for i in $outdated; do
-    pip install --upgrade "$i" #&> /dev/null
-done
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        pip install --upgrade "$i" #&> /dev/null
+    done
 
-#update pip itself
-pip install --upgrade pip setuptools wheel &> /dev/null
+    #update pip itself
+    pip install --upgrade pip setuptools wheel &> /dev/null
 }
 exists rvm && {
-prettyPrint "Updating Ruby Packages"
-rvm get stable
-gem update --system
-gem update
-gem cleanup
-rvm cleanup all
+    prettyPrint "Updating Ruby Packages"
+    rvm get stable
+    gem update --system
+    gem update
+    gem cleanup
+    rvm cleanup all
 }
 
 exists brew && {
-prettyPrint "Updating Homebrew Packages"
-brew update #&> /dev/null
-brew upgrade #&> /dev/null
-#remove brew cache
-rm -rf "$(brew --cache)"
-#removing old symbolic links
-brew prune
-#remote old programs occupying disk sectors
-brew cleanup
-brew cask cleanup
-brew services cleanup
-#check is we have brew cu
+    prettyPrint "Updating Homebrew Packages"
+    brew update #&> /dev/null
+    brew upgrade #&> /dev/null
+    #remove brew cache
+    rm -rf "$(brew --cache)"
+    #removing old symbolic links
+    brew prune
+    #remote old programs occupying disk sectors
+    brew cleanup
+    brew cask cleanup
+    brew services cleanup
+    #check is we have brew cu
+}
 
 exists npm && {
 prettyPrint "Updating NPM Packages"
@@ -178,18 +179,18 @@ prettyPrint "Updating Vundle Plugins"
 vim -c VundleUpdate -c quitall
 
 brew cu 1>/dev/null 2>&1 && {
-# we have brew cu
-prettyPrint "Updating Homebrew Casks!"
-brew cu --all -y --cleanup
-     } || {
-     # we don't have brew cu
-     prettyPrint "Installing brew-cask-upgrade"
-     brew tap buo/cask-upgrade
-     brew update
-     prettyPrint "Updating Homebrew Casks!"
-     brew cu --all -y --cleanup
- } 
-}
+    # we have brew cu
+    prettyPrint "Updating Homebrew Casks!"
+    brew cu --all -y --cleanup
+} || {
+    # we don't have brew cu
+    prettyPrint "Installing brew-cask-upgrade"
+    brew tap buo/cask-upgrade
+    brew update
+    prettyPrint "Updating Homebrew Casks!"
+    brew cu --all -y --cleanup
+} 
+
 #decolorize prompt
 echo -e "Done\e[0m"
 clear
