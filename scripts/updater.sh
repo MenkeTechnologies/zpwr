@@ -86,36 +86,36 @@ exists brew && {
 }
 
 exists npm && {
-prettyPrint "Updating NPM Packages"
-for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
-do
-    npm install -g "$package"
-done
-#updating npm itself
-npm install -g npm
+    prettyPrint "Updating NPM Packages"
+    for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
+    do
+        npm install -g "$package"
+    done
+    #updating npm itself
+    npm install -g npm
 }
 
 exists yarn && {
-prettyPrint "Updating yarn itself"
-npm install --global yarn
-prettyPrint "Updating yarn modules"
-yarn global upgrade
+    prettyPrint "Updating yarn itself"
+    npm install --global yarn
+    prettyPrint "Updating yarn modules"
+    yarn global upgrade
 }
 
 exists cpanm && {
 
-prettyPrint "Updating Perl Packages"
-perlOutdated=$(cpan-outdated -p)
+    prettyPrint "Updating Perl Packages"
+    perlOutdated=$(cpan-outdated -p)
 
-if [[ ! -z "$perlOutdated" ]]; then
-    echo "$perlOutdated" | cpanm --force 2> /dev/null
-fi
+    if [[ ! -z "$perlOutdated" ]]; then
+        echo "$perlOutdated" | cpanm --force 2> /dev/null
+    fi
 }
 
 exists pio && {
-prettyPrint "Updating PlatformIO"
-pio update
-pio upgrade
+    prettyPrint "Updating PlatformIO"
+    pio update
+    pio upgrade
 }
 
 gitRepoUpdater(){
@@ -189,7 +189,7 @@ brew cu 1>/dev/null 2>&1 && {
     brew update
     prettyPrint "Updating Homebrew Casks!"
     brew cu --all -y --cleanup
-} 
+}
 
 #decolorize prompt
 echo -e "Done\e[0m"
