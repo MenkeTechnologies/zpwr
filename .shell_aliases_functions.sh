@@ -27,7 +27,7 @@ export GITHUB_ACCOUNT='MenkeTechnologies'
     export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
 } || export PATH="$PATH:/usr/games"
 
-    exists yarn && export PATH="$(yarn global bin):$PATH"
+exists yarn && export PATH="$(yarn global bin):$PATH"
 #}}}***********************************************************
 
 #{{{                           MARK:HOMES
@@ -64,11 +64,11 @@ alias la="clearList"
 alias l="clearList"
 alias r="cd .."
 alias t="cd /"
-alias py="cd $PYSCRIPTS"
+[[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python"
 alias p3="python3"
-alias d="cd ~/Desktop"
-alias please='sudo $(fc -ln -1)'
+[[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
+exists fc && alias please='sudo $(fc -ln -1)'
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
@@ -155,8 +155,10 @@ alias sd="clear;ssh d "
 alias gitgo='$SCRIPTS/gitgo.sh'
 alias watchGit='bash $SCRIPTS/watchServiceFSWatchGit.sh'
 alias watchPiWeb='bash $SCRIPTS/watchServiceFSWatchPiWeb.sh'
-alias vi=vim
-alias v=vim
+exists vim && { 
+	alias vi=vim
+	alias v=vim
+}
 alias cl=clear
 alias mkdir='mkdir -pv'
 #**********************************************************************
@@ -312,9 +314,9 @@ cd(){
 }
 gitCommitAndPush(){
     printf "\e[1m"
-    /usr/local/bin/git add .
-    /usr/local/bin/git commit -m "$1"
-    /usr/local/bin/git push
+    git add .
+    git commit -m "$1"
+    git push
     printf "\e[0m"
 }
 replacer(){
@@ -369,7 +371,6 @@ return2(){
     exec 2> /dev/tty
 }
 color2(){
-
     exec 2> >(redText.sh)
 }
 escapeRemove(){
@@ -402,8 +403,6 @@ backup(){
     printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
 }
 
-
 #}}}***********************************************************
 
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
-
