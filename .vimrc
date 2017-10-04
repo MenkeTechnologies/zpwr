@@ -335,14 +335,13 @@ endfunction
 
 let blacklist=['md']
 
-
 augroup indentGroup
     autocmd!
 
     let currentFileEnding=tolower(expand('%:e'))
     "if the filetype is not in blacklist (index = -1) then we will indent
     if index(blacklist, currentFileEnding) < 0
-        autocmd CursorHoldI * :call Indent()
+        "autocmd CursorHoldI * :call Indent()
     endif
 augroup end
 

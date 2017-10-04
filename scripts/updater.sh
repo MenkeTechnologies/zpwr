@@ -30,6 +30,7 @@ if [[ -f "$SCRIPTS/printHeader.sh" ]];then
     bash "$SCRIPTS/printHeader.sh"
 fi
 
+#python 3.6
 exists pip3 && {
     prettyPrint "Updating Python3.6 Packages"
     #pip lists outdated programs and get first column with awk
@@ -62,6 +63,7 @@ exists pip3.5 && {
     pip3.5 install --upgrade pip setuptools wheel &> /dev/null
 }
 
+#python 2.7 (non system)
 exists pip2 && {
     prettyPrint "Updating Python2 Packages"
     #pip lists outdated programs and get first column with awk
