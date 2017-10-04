@@ -6,6 +6,7 @@
 #####   Purpose: bash script to upload to web dir of RPi
 #####   Notes: 
 #}}}***********************************************************
+[[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
 
 ip=$IP
 address="pi@$ip:/var/www/html"

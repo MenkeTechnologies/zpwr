@@ -360,11 +360,11 @@ else
             bash "$HOME/motd.sh" | ponysay -W 100
 
         } || bash "$HOME/motd.sh"
-        fi
-        listNoClear
-    else
-        clearList
     fi
+    listNoClear
+else
+    clearList
+fi
 
 fi
 
