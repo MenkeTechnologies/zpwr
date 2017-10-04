@@ -241,26 +241,28 @@ lib_command="ldd -v"
                 last_fields="$(echo $locale | cut -d' ' -f3-10)"
                 [[ -f "$last_fields" ]] && { 
 
-                eval "$ls_command" $last_fields && prettyPrint "TYPE" && eval "file $last_fields" && prettyPrint "LDD" && eval "$lib_command $last_fields";
-    prettyPrint "SIZE"
+                eval "$ls_command" $last_fields && prettyPrint "FILE TYPE:" && eval "file $last_fields" && prettyPrint "DEPENDENT ON:" && eval "$lib_command $last_fields";
+    prettyPrint "SIZE:"
                 du -sh "$last_fields"
-    prettyPrint "STATS"
+    prettyPrint "STATS:"
                 stat "$last_fields"
                 width=$(tput cols)
                 perl -e "print '#' x $width,\"\n\""
+                echo
             } || echo "$locale"
         done < <(type -a "$command" | sort | uniq)
     } || {
     #path matching, not exe
     eval "$ls_command -d \"$command\"" || return 1
-    prettyPrint "TYPE"
+    prettyPrint "FILE TYPE:"
     file "$command"
-    prettyPrint "SIZE"
+    prettyPrint "SIZE:"
     du -sh "$command"
-    prettyPrint "STATS"
+    prettyPrint "STATS:"
     stat "$command"
     #for readibility
     perl -e "print '#' x $width,\"\n\""
+    echo
 }
         done
     else
