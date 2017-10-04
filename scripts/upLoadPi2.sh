@@ -6,6 +6,8 @@
 #####   Purpose: bash  script to to upload to RPi
 #####   Notes: 
 #}}}***********************************************************
+[[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
+
 printf "${BLUE}Uploading $*\n"
 #loop through all arguments and upload with scp recursively to synology server
 for i in "$@"; do

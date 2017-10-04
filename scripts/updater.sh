@@ -62,20 +62,20 @@ exists pip3.5 && {
     pip3.5 install --upgrade pip setuptools wheel &> /dev/null
 }
 
-exists pip && {
+exists pip2 && {
     prettyPrint "Updating Python2 Packages"
     #pip lists outdated programs and get first column with awk
     #store in outdated
-    outdated=$(pip list --outdated | awk '{print $1}')
+    outdated=$(pip2 list --outdated | awk '{print $1}')
 
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        pip install --upgrade "$i" #&> /dev/null
+        pip2 install --upgrade "$i" #&> /dev/null
     done
 
     #update pip itself
-    pip install --upgrade pip setuptools wheel &> /dev/null
+    pip2 install --upgrade pip setuptools wheel &> /dev/null
 }
 exists rvm && {
     prettyPrint "Updating Ruby Packages"
@@ -192,6 +192,7 @@ for pi in "${arrayOfPI[@]}"; do
 done
 
 prettyPrint "Updating Vundle Plugins"
+
 vim -c VundleUpdate -c quitall
 
 brew cu 1>/dev/null 2>&1 && {

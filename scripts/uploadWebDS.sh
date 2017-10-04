@@ -6,6 +6,8 @@
 #####   Purpose: bash script to upload to web direcctory of NAS
 #####   Notes: 
 #}}}***********************************************************
+[[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
+
 address="jacobmenke@$IP:/var/services/web"
 
 printf "${BLUE}Uploading $* to $address\n"

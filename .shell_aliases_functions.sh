@@ -33,11 +33,11 @@ exists yarn && export PATH="$(yarn global bin):$PATH"
 #{{{                           MARK:HOMES
 #**********************************************************************
 [[ "$(uname)" == Darwin ]] && {
-    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home"
     export HOMEBREW_HOME='/usr/local/Cellar'
-    export GROOVY_HOME="$HOMEBREW_HOME/groovy/2.4.11"
-    export SCALA_HOME="$HOMEBREW_HOME/scala/2.12.2"
-    export PERL_HOME='$HOMEBREW_HOME/perl/5.24.1/'
+    export GROOVY_HOME="/usr/local/opt/groovy"
+    export SCALA_HOME="/usr/local/opt/scala"
+    export PERL_HOME="/usr/local/opt/perl"
     export HOMEBREW_DBHOME='/usr/local/var'
     export HOMEBREW_DB_CONF='/usr/local/etc'
     eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
@@ -66,7 +66,7 @@ alias r="cd .."
 alias t="cd /"
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python"
-alias p3="python3"
+alias p3="python3.5"
 [[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
 exists fc && alias please='sudo $(fc -ln -1)'
 #{{{                    MARK:ALIASES for editing config files
@@ -210,11 +210,11 @@ nn(){
 suc(){
     subl $SCRIPTS
     f $SCRIPTS
-    python3 $PYSCRIPTS/textEditorTwoColumns.py
+    python3.5 $PYSCRIPTS/textEditorTwoColumns.py
 }
 db(){
     #open -a Firefox $IP:8080/db
-    ( python3 $PYSCRIPTS/logIntoMyDB.py & )
+    ( python3.5 $PYSCRIPTS/logIntoMyDB.py & )
 }
 clearList () {
 
@@ -314,7 +314,7 @@ f(){
     cd "$1"
 }
 execpy(){
-    python3 $PYSCRIPTS/"$1"
+    python3.5 $PYSCRIPTS/"$1"
 
 }
 search(){
