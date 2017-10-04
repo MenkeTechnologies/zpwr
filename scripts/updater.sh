@@ -31,7 +31,7 @@ if [[ -f "$SCRIPTS/printHeader.sh" ]];then
 fi
 
 exists pip3 && {
-    prettyPrint "Updating Python3 Packages"
+    prettyPrint "Updating Python3.6 Packages"
     #pip lists outdated programs and get first column with awk
     #store in outdated
     outdated=$(pip3 list --outdated | awk '{print $1}')
@@ -44,6 +44,22 @@ exists pip3 && {
 
     #update pip itself
     pip3 install --upgrade pip setuptools wheel &> /dev/null
+}
+
+exists pip3.5 && {
+    prettyPrint "Updating Python3.5 Packages"
+    #pip lists outdated programs and get first column with awk
+    #store in outdated
+    outdated=$(pip3.5 list --outdated | awk '{print $1}')
+
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        pip3.5 install --upgrade "$i" #&> /dev/null
+    done
+
+    #update pip itself
+    pip3.5 install --upgrade pip setuptools wheel &> /dev/null
 }
 
 exists pip && {

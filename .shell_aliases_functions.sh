@@ -119,9 +119,9 @@ alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
 alias logs="tail -f /var/log/*.log | lolcat"
 alias matr="cmatrix -C blue -abs"
-alias tm="python3 $PYSCRIPTS/tmux_starter.py"
-alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
-alias tmm_full="python3 $PYSCRIPTS/complete_ssh_starter.py" 
+alias tm="python3.5 $PYSCRIPTS/tmux_starter.py"
+alias tmm="python3.5 $PYSCRIPTS/ssh_starter.py" 
+alias tmm_full="python3.5 $PYSCRIPTS/complete_ssh_starter.py" 
 alias inst="source $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 #                           MARK:PYTHON SCRIPTS
@@ -241,19 +241,26 @@ lib_command="ldd -v"
                 last_fields="$(echo $locale | cut -d' ' -f3-10)"
                 [[ -f "$last_fields" ]] && { 
 
-                eval "$ls_command" $last_fields && eval "file $last_fields" && eval "$lib_command $last_fields";
+                eval "$ls_command" $last_fields && prettyPrint "TYPE" && eval "file $last_fields" && prettyPrint "LDD" && eval "$lib_command $last_fields";
+    prettyPrint "SIZE"
                 du -sh "$last_fields"
+    prettyPrint "STATS"
                 stat "$last_fields"
-                echo
+                width=$(tput cols)
+                perl -e "print '#' x $width,\"\n\""
             } || echo "$locale"
         done < <(type -a "$command" | sort | uniq)
     } || {
     #path matching, not exe
     eval "$ls_command -d \"$command\"" || return 1
+    prettyPrint "TYPE"
     file "$command"
+    prettyPrint "SIZE"
     du -sh "$command"
+    prettyPrint "STATS"
     stat "$command"
-    echo #for readibility
+    #for readibility
+    perl -e "print '#' x $width,\"\n\""
 }
         done
     else
