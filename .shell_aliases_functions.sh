@@ -84,6 +84,8 @@ alias grep="grep --color=auto"
 alias egrep="egrep --color=always"
 alias tree='tree -afC'
 alias ta="tmux attach"
+alias h="cd /usr/local"
+alias e="cd /etc"
 #Darwin specific aliases
 if [[ "$(uname)" == "Darwin" ]]; then
     #statements
