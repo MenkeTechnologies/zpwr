@@ -8,6 +8,7 @@
 #}}}***********************************************************
 # clear screen
 clear
+set -x
 
 prettyPrint(){
     printf "\e[1;4m"
@@ -65,7 +66,7 @@ exists pip3.5 && {
 
 #python 2.7 (non system)
 exists pip2 && {
-    prettyPrint "Updating Python2 Packages"
+    prettyPrint "Updating Python2.7 Packages"
     #pip lists outdated programs and get first column with awk
     #store in outdated
     outdated=$(pip2 list --outdated | awk '{print $1}')
@@ -100,7 +101,6 @@ exists brew && {
     brew cleanup
     brew cask cleanup
     brew services cleanup
-    #check is we have brew cu
 }
 
 exists npm && {
@@ -197,7 +197,7 @@ prettyPrint "Updating Vundle Plugins"
 
 vim -c VundleUpdate -c quitall
 
-brew cu 1>/dev/null 2>&1 && {
+brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
     # we have brew cu
     prettyPrint "Updating Homebrew Casks!"
     brew cu --all -y --cleanup
