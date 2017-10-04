@@ -250,7 +250,10 @@ lib_command="ldd -v"
                 stat "$last_fields"
                 echo
                 echo
-            } || echo "$locale"
+            } || {
+            echo "$locale"
+            echo
+            echo }
         done < <(type -a "$command" | sort | uniq)
     } || {
     #path matching, not exe
