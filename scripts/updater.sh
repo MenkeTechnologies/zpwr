@@ -8,7 +8,6 @@
 #}}}***********************************************************
 # clear screen
 clear
-set -x
 
 prettyPrint(){
     printf "\e[1;4m"
@@ -126,7 +125,7 @@ exists cpanm && {
     perlOutdated=$(cpan-outdated -p)
 
     if [[ ! -z "$perlOutdated" ]]; then
-        echo "$perlOutdated" | cpanm --force 2> /dev/null
+        echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
     fi
 }
 
