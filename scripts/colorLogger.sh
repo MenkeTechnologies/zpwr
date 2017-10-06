@@ -42,16 +42,16 @@ else
     if [[ $distroName == Raspbian ]]; then
 
         if [[ $weHaveCCZE == yes ]]; then
-            $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/log/**/*.err | ccze
+            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err | ccze
         else
-            $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/log/**/*.err
+            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err
         fi
     else 
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
         if [[ $weHaveCCZE == yes ]]; then
-            $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/log/**/*.err | ccze
+            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err | ccze
         else
-            $tailVersion -f /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages, syslog} /var/log/**/*.err
+            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages, syslog} /var/**/*.err
         fi
     fi
 
