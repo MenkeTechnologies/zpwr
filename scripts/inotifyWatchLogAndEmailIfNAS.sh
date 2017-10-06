@@ -21,7 +21,7 @@ while inotifywait "$file" &> /dev/null;do
     python -c 'print("_"*100)'
     echo
 
-    echo "$out" |  mutt -s "$file" jamenk@me.com
+    echo "$out" |  mutt -s "NAS ALERT: $file at $(date)" jamenk@me.com
      sleep 10
 }
 done
