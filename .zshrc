@@ -326,6 +326,7 @@ zstyle ':completion:*' matcher-list '' \
 #global aliases
 alias -g L='|less'
 alias -g nul="> /dev/null 2>&1"
+alias -g nerr="2> /dev/null"
 
 #allow for awesome z command
 source "$HOME/z.sh"
