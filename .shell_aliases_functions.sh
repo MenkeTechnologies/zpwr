@@ -14,10 +14,9 @@ export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export D="$HOME/Desktop"
 export DL="$HOME/Downloads"
-# Setting PATH for Python 3.5
-# The orginal version is saved in .profile.pysave
+
 export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
-export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:Library/Frameworks/Python.framework/Versions/3.5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
+export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
 export TERMINAL_APP="Terminal.app"
 export GITHUB_ACCOUNT='MenkeTechnologies'
 
@@ -66,7 +65,7 @@ alias r="cd .."
 alias t="cd /"
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python"
-alias p3="python3.5"
+alias p3="python3"
 [[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
 exists fc && alias please='sudo $(fc -ln -1)'
 #{{{                    MARK:ALIASES for editing config files
@@ -121,9 +120,9 @@ alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
 alias logs="tail -f /var/log/*.log | lolcat"
 alias matr="cmatrix -C blue -abs"
-alias tm="python3.5 $PYSCRIPTS/tmux_starter.py"
-alias tmm="python3.5 $PYSCRIPTS/ssh_starter.py" 
-alias tmm_full="python3.5 $PYSCRIPTS/complete_ssh_starter.py" 
+alias tm="python3 $PYSCRIPTS/tmux_starter.py"
+alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
+alias tmm_full="python3 $PYSCRIPTS/complete_ssh_starter.py" 
 alias inst="source $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 #                           MARK:PYTHON SCRIPTS
@@ -210,11 +209,11 @@ nn(){
 suc(){
     subl $SCRIPTS
     f $SCRIPTS
-    python3.5 $PYSCRIPTS/textEditorTwoColumns.py
+    python3 $PYSCRIPTS/textEditorTwoColumns.py
 }
 db(){
     #open -a Firefox $IP:8080/db
-    ( python3.5 $PYSCRIPTS/logIntoMyDB.py & )
+    ( python3 $PYSCRIPTS/logIntoMyDB.py & )
 }
 clearList () {
 
@@ -314,7 +313,7 @@ f(){
     cd "$1"
 }
 execpy(){
-    python3.5 $PYSCRIPTS/"$1"
+    python3 $PYSCRIPTS/"$1"
 
 }
 search(){
