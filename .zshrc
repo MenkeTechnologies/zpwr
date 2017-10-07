@@ -146,6 +146,11 @@ function _tutsUpdate() {
     fi
 }
 
+function _tmm() {
+    zle kill-whole-line
+    BUFFER=tmm
+    zle .accept-line
+}
 
 expand-aliases() {
 unset 'functions[_expand-aliases]'
@@ -162,9 +167,13 @@ bindkey '\e^E' expand-aliases
 zle -N _gitfunc
 zle -N _updater
 zle -N _sub
+zle -N _tmm
 zle -N _tutsUpdate
 
 bindkey '\e[1;5D' _sub
+bindkey '\e[1;2D' _sub
+bindkey '^@' _tmm
+
 bindkey '\e[1;5B' _updater
 bindkey '\e[1;5A' _gitfunc
 bindkey '^S' _gitfunc
