@@ -164,10 +164,11 @@ zle -N _updater
 zle -N _sub
 zle -N _tutsUpdate
 
-bindkey '\eg' _sub
-bindkey '\ex' _updater
+bindkey '\e[1;5D' _sub
+bindkey '\e[1;5B' _updater
+bindkey '\e[1;5A' _gitfunc
 bindkey '^S' _gitfunc
-bindkey '\ed' _tutsUpdate
+bindkey '\e[1;5C' _tutsUpdate
 
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
