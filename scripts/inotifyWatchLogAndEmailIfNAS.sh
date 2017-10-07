@@ -1,3 +1,8 @@
+trap "echo;\
+python -c 'print(\"_\" * 100)';
+echo going down;\
+python -c 'print(\"_\" * 100)';
+" 15 2
 
 if [[ $# < 1 ]]; then
     echo "First arg is the Directory!" >&2
@@ -12,16 +17,19 @@ python -c 'print("_"*100)'
 echo "`date` Watching $file......"
 python -c 'print("_"*100)'
 
-while inotifywait "$file" &> /dev/null;do
-    tail -1 "$file" | grep -q " nas 1 2" && grep -v "127.0.0.1" && {
-    out=$(tail -5 "$file" | grep "nas")
+while inotifywait "$file" ;do
+    tail -1 "$file" | grep " nas 1 2" | grep -qv "127.0.0.1" && {
+    out=$(tail -1 "$file" | grep "nas")
     echo
     python -c 'print("_"*100)'
     echo "`date` Sending email......"
     python -c 'print("_"*100)'
     echo
-
     echo "$out" |  mutt -s "NAS ALERT: $file at $(date)" jamenk@me.com
-     sleep 10
-}
+} || { echo
+    python -c 'print("_"*100)'
+    echo "No Match"
+    python -c 'print("_"*100)'
+    echo; }
+
 done
