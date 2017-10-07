@@ -47,22 +47,6 @@ exists pip3 && {
     pip3 install --upgrade pip setuptools wheel &> /dev/null
 }
 
-exists pip3.5 && {
-    prettyPrint "Updating Python3.5 Packages"
-    #pip lists outdated programs and get first column with awk
-    #store in outdated
-    outdated=$(pip3.5 list --outdated | awk '{print $1}')
-
-    #install outdated pip modules 
-    #split on space
-    for i in $outdated; do
-        pip3.5 install --upgrade "$i" #&> /dev/null
-    done
-
-    #update pip itself
-    pip3.5 install --upgrade pip setuptools wheel &> /dev/null
-}
-
 #python 2.7 (non system)
 exists pip2 && {
     prettyPrint "Updating Python2.7 Packages"
