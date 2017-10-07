@@ -212,7 +212,6 @@ suc(){
     python3 $PYSCRIPTS/textEditorTwoColumns.py
 }
 db(){
-    #open -a Firefox $IP:8080/db
     ( python3 $PYSCRIPTS/logIntoMyDB.py & )
 }
 clearList () {
