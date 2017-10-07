@@ -152,6 +152,12 @@ function _tmm() {
     zle .accept-line
 }
 
+function _db() {
+    zle kill-whole-line
+    BUFFER=db
+    zle .accept-line
+}
+
 expand-aliases() {
 unset 'functions[_expand-aliases]'
 functions[_expand-aliases]=$BUFFER
@@ -167,10 +173,11 @@ bindkey '\e^E' expand-aliases
 zle -N _gitfunc
 zle -N _updater
 zle -N _sub
+zle -N _db
 zle -N _tmm
 zle -N _tutsUpdate
 
-bindkey '\e[1;5D' _sub
+bindkey '\e[1;5D' _db
 bindkey '\e[1;2D' _sub
 bindkey '^@' _tmm
 
