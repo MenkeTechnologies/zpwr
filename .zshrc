@@ -395,3 +395,11 @@ color2
 #homebrew conflicts with /usr/bin/perl
 unset PERL5LIB
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+h=()
+if [[ -r ~/.ssh/config ]]; then
+  h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+fi
+if [[ $#h -gt 0 ]]; then
+  zstyle ':completion:*:ssh:*' hosts $h
+  zstyle ':completion:*:slogin:*' hosts $h
+fi
