@@ -18,7 +18,7 @@ echo "`date` Watching $file......"
 python -c 'print("_"*100)'
 
 while inotifywait "$file" ;do
-    tail -1 "$file" | grep " nas 1 2" | grep -qv "127.0.0.1" && {
+    tail -1 "$file" | grep " nas 1 2" | grep -v "$IP" | grep -qv "127.0.0.1" && {
     out=$(tail -1 "$file" | grep "nas")
     echo
     python -c 'print("_"*100)'
