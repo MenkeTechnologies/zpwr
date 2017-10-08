@@ -23,7 +23,7 @@ randIndex=$(($RANDOM % $rangePossibleIndices))
 font=${ary[$randIndex]}
 output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
 
-if [[ ! -z "$FILTER" ]]; then
+if [[ "$FILTER" ]]; then
     echo "$output" | "$FILTER"
 else
     echo "$output"

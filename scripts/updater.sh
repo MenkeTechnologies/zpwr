@@ -108,7 +108,7 @@ exists cpanm && {
     prettyPrint "Updating Perl Packages"
     perlOutdated=$(cpan-outdated -p)
 
-    if [[ ! -z "$perlOutdated" ]]; then
+    if [[ "$perlOutdated" ]]; then
         echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
     fi
 }

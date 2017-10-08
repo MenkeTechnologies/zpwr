@@ -20,14 +20,14 @@ rangePossibleIndices=${#ary[*]}
 while true; do
     tput civis
     fortuneQuote="$(fortune)"
-    if [[ ! -z "$1" ]]; then
+    if [[ "$1" ]]; then
         fortuneQuote="$(figlet -f $1 \"$fortuneQuote\")"
     fi
     clear
     randIndex=$(($RANDOM % $rangePossibleIndices))
     view=${ary[$randIndex]}
 
-    if [[ ! -z "$2" ]]; then
+    if [[ "$2" ]]; then
         echo "$fortuneQuote" | cowsay -f $view -n | "$2"
     else
         echo "$fortuneQuote" | cowsay -f $view -n | lolcat

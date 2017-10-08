@@ -93,7 +93,7 @@ usage(){
     #prettyPrint format
     printf "\e[37;44m"
     #if argument passed in then print it
-    if [[ ! -z "$1" ]]; then
+    if [[ "$1" ]]; then
         printf "$1\n"
     fi
     #here doc for printing multiline
@@ -110,7 +110,7 @@ exit 1
 
 gitPull(){
     #if .git directory exists and remote repository established
-    if [[ -d ".git" && ! -z "$(git remote)" ]]; then
+    if [[ -d ".git" && "$(git remote)" ]]; then
         local PULL_URL="$(git remote -v | \
             awk '{print $2}' | tail -1 | tr -d ' ')"
         git pull "$PULL_URL"
@@ -128,7 +128,7 @@ gitPush(){
         exit 1
     fi
     #if .git directory exists and remote repository established
-    if [[ -d ".git" && ! -z "$(git remote)" ]]; then
+    if [[ -d ".git" && "$(git remote)" ]]; then
         commitTheDirectory "$1"
     else
         usage "No Remote Repository established."

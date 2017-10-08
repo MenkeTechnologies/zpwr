@@ -28,7 +28,7 @@ while true; do
     font=${ary[$randIndex]}
     output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
 
-    if [[ ! -z "$FILTER" ]]; then
+    if [[ "$FILTER" ]]; then
         echo "$(basename $font)" | $FILTER
         clear
         echo "$output" | "$FILTER"

@@ -17,7 +17,7 @@ boldAndUnderlinedPrint(){
 }
 
 
-if [[ ! -z "$1" ]]; then
+if [[ "$1" ]]; then
     commitMessage="$1"
 else
     commitMessage="update"

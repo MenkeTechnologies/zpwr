@@ -25,7 +25,7 @@ if [[ -f "$1" && ! "$1" =~ .*.zip ]]; then
 else
     encrypt_program=zip
 
-    type $encrypt_program 1>/dev/null 2>&1 && {
+    type $encrypt_program >/dev/null 2>&1 && {
     if [[ $1 =~ .*.zip ]]; then
         if [[ $encrypt_program == zip ]]; then
             eval "un$encrypt_program $1"
