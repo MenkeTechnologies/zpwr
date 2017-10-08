@@ -214,7 +214,7 @@ suc(){
     python3 $PYSCRIPTS/textEditorTwoColumns.py
 }
 db(){
-    ( python3 $PYSCRIPTS/logIntoMyDB.py & )
+    python3 $PYSCRIPTS/logIntoMyDB.py
 }
 clearList () {
 
