@@ -87,6 +87,7 @@ alias tree='tree -afC'
 alias ta="tmux attach"
 alias h="cd /usr/local"
 alias e="cd /etc"
+alias sin="./configure && make && sudo make install"
 #Darwin specific aliases
 if [[ "$(uname)" == "Darwin" ]]; then
     #statements
