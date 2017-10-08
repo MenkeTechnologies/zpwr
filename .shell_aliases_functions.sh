@@ -254,7 +254,8 @@ lib_command="ldd -v"
             } || {
             echo "$locale"
             echo
-            echo }
+            echo 
+        }
         done < <(type -a "$command" | sort | uniq)
     } || {
     #path matching, not exe
