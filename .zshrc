@@ -398,6 +398,7 @@ unset PERL5LIB
 h=()
 if [[ -r ~/.ssh/config ]]; then
   h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+  h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
 fi
 if [[ $#h -gt 0 ]]; then
   zstyle ':completion:*:ssh:*' hosts $h
