@@ -236,7 +236,7 @@ lib_command="otool -L"
 lib_command="ldd -v"
     fi
 
-    if [[ ! -z "$1" ]]; then
+    if [[ "$1" ]]; then
         for command in "$@"; do
             exists $command &&  {
             #exe matching
