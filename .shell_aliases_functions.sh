@@ -417,6 +417,14 @@ backup(){
     printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
 }
 
+unalias gcl
+gcl() {
+    git_name="${1##*/}"
+    dir_name=${git_name%.*}
+    git clone --recursive "$1"
+    cd "$dir_name"
+}
+
 #}}}***********************************************************
 
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
