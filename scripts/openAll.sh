@@ -75,7 +75,7 @@ startCursor
 
 dir_to_search="$(pwd)"
 
-if [[ ! -z "$2" ]]; then
+if [[  "$2" ]]; then
 	dir_to_search="$2"
 fi
 

@@ -24,7 +24,7 @@ if [[ $# < 1 ]]; then
 	exit 1
 fi
 
-if [[ ! -d $backup_dir ]]; then
+if [[ ! -d "$backup_dir" ]]; then
 	mkdir $backup_dir
 fi
 

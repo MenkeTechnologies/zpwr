@@ -12,7 +12,7 @@ installGitHubPlugin(){
 }
 
 printf "Installing Tmux Plugins"
-if [[ ! -d "$HOME/.tmux/plugins" ]]; then
+if [[ d "$HOME/.tmux/plugins" ]]; then
     mkdir -p "$HOME/.tmux/plugins"
 fi
 

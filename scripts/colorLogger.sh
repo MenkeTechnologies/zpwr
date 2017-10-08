@@ -18,7 +18,7 @@ type ccze 1>/dev/null 2>&1 && {
 weHaveCCZE=yes
 }
 
-if [[ ! -z "$1" ]]; then
+if [[  "$1" ]]; then
     weHaveCCZE=no
 fi
 

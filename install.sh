@@ -220,12 +220,12 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 #echo pip install powerline-mem-segment
 
 #custom settings for tmux powerline
-#if [[ ! -d $tmuxPowerlineDir ]]; then
+#if [[ d $tmuxPowerlineDir ]]; then
 #    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
 #fi
 
 printf "Installing Tmux Plugin Manager\n"
-if [[ ! -d $HOME/.tmux/plugins/tpm  ]]; then
+if [[ d $HOME/.tmux/plugins/tpm  ]]; then
     echo mkdir -p $HOME/.tmux/plugins/tpm
     echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
@@ -260,7 +260,7 @@ bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 #}}}***********************************************************
 
 #printf "Installing IFTOP-color"
-#if [[ ! -d "$HOME/ForkedRepos" ]]; then
+#if [[ d "$HOME/ForkedRepos" ]]; then
 #mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
 #git clone https://github.com/MenkeTechnologies/iftopcolor
 #sudo ./configure && make
@@ -272,16 +272,16 @@ sudo pip install pydf
 printf "Installing MyCLI\n"
 sudo pip install mycli
 
-if [[ ! -f "$HOME/.token.sh" ]]; then
+if [[ f "$HOME/.token.sh" ]]; then
     touch "$HOME/.tokens.sh"
 fi
 
 printf "HushLogin\n"
-if [[ ! -f "$HOME/.hushlogin" ]]; then
+if [[ f "$HOME/.hushlogin" ]]; then
     touch "$HOME/.hushlogin"
 fi
 
-if [[ ! -f "$HOME/.my.cnf" ]]; then
+if [[ f "$HOME/.my.cnf" ]]; then
     touch "$HOME/.my.cnf"
 fi
 
@@ -290,7 +290,7 @@ echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
 echo "Copying all Shell Scripts..."
-if [[ ! -d "$HOME/Documents/shellScripts" ]]; then
+if [[ d "$HOME/Documents/shellScripts" ]]; then
     mkdir -p "$HOME/Documents/shellScripts"
 fi
 cp $INSTALLER_DIR/scripts/*.sh "$HOME/Documents/shellScripts"
@@ -312,8 +312,8 @@ rm -rf pipe.sh
 
 printf "Installing htoprc file....\n"
 htopDIR="$HOME/.config/htop"
-if [[ ! -f "$htopDIR/htoprfc" ]]; then
-    if [[ ! -d "$htopDIR" ]]; then
+if [[ f "$htopDIR/htoprfc" ]]; then
+    if [[ d "$htopDIR" ]]; then
         mkdir -P "$htopDIR"
     fi
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
