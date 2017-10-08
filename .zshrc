@@ -131,7 +131,7 @@ function _gitfunc {
 
 function _tutsUpdate() {
     commitMessage="$BUFFER"
-    if [[ ! -z "$commitMessage" ]]; then
+    if [[ "$commitMessage" ]]; then
         if [[ "$commitMessage" =~ ^\ +$ ]]; then
             printf "No commit message\n" >&2
             zle .accept-line
