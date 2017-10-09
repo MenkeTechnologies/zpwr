@@ -3,7 +3,7 @@ splitw -h -p 50 # vertical split
 selectp -t 0 # select the first (0) pane 
 splitw -v -p 50 # horizontal split on left
 selectp -t 0 # select the first (0) pane 
-send-keys "sudo glances" C-m 
+send-keys "sudo glances --disable-alert --disable-network" C-m 
 selectp -t 1 # select the bottom pane
 send-keys "bash $SCRIPTS/colorLogger.sh" C-m
 selectp -t right # select the new, second (1) pane
