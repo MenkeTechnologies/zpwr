@@ -118,8 +118,9 @@ read -n1
 
 if [[ "$REPLY" == "y" ]]; then
 	#loop through all files in array and open them
+    string=""
 	for file in "${filesArray[@]}"; do
-		open "$file"
+        open "$file"
 	done
 	
 else

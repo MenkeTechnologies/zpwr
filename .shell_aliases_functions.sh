@@ -254,7 +254,7 @@ lib_command="ldd -v"
             } || {
             echo "$locale"
             echo
-            echo 
+            echo
         }
         done < <(type -a "$command" | sort | uniq)
     } || {
@@ -425,6 +425,29 @@ gcl() {
     dir_name=${git_name%.*}
     git clone --recursive "$1"
     cd "$dir_name"
+}
+
+#alias pio=platformio
+pion (){
+dir="$1"
+mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
+{
+cat <<\EOF
+#include <Arduino.h>
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(1000);
+}
+EOF
+} > src/main.cpp
+clion .
 }
 
 #}}}***********************************************************
