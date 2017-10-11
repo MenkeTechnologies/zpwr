@@ -4,7 +4,10 @@ echo "my second ag is $1"
 
 echo "my args are $*"
 
-
-
-
 echo the dogs
+
+
+read name
+
+
+say "$name"
