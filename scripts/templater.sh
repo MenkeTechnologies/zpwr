@@ -10,7 +10,7 @@
 executableScriptsProcessing(){
     # then make it executable
     if [[ ! -x "$1" ]]; then
-        chmod 700 "$1"
+        chmod 744 "$1"
     fi
 }
 

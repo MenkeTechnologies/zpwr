@@ -271,6 +271,7 @@ inoremap <silent> <C-I> <C-[>:SaveSession<CR>a
 nnoremap <silent> <leader>q :qa!<CR>
 nnoremap <silent> <leader>w :w!<CR>
 nnoremap <silent> <leader>s :vs<CR>
+nnoremap <silent> <leader>h :sp<CR>
 nnoremap <silent> <leader>t :tabnew<CR>
 
 onoremap <silent> i# ?#<CR>jV/#<CR>kc 
