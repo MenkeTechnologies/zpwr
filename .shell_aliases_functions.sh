@@ -435,8 +435,9 @@ gcl() {
     cd "$dir_name"
 }
 
-#alias pio=platformio
-pion (){
+alias p_refresh="pio -f clion init --ide clion "
+
+p (){
 dir="$1"
 mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
 {
@@ -485,10 +486,10 @@ EOF
 
 clion .
 
-JETBRAINS_WORKSPACE_EDIT "$dir"
+jetbrainsWorkspaceEdit "$dir"
 
 }
-JETBRAINS_WORKSPACE_EDIT(){
+jetbrainsWorkspaceEdit(){
         python -c "print('_'*100)"
         prettyPrint "MONITORING WORKSPACE..."
         python -c "print('_'*100)"
