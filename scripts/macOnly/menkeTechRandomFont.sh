@@ -11,6 +11,7 @@ FIGLET_DIR=/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts
 TEXT_TO_DISPLAY="Menke Technologies"
 FILTER="$1"
 
+
 #set -x
 
 trap "tput cnorm; clear; ls -G -FlhAO; exit" INT
