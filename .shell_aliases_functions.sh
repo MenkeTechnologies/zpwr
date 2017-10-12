@@ -110,6 +110,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $SCRIPTS/sshTunnelVnc.sh" 
     alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $SCRIPTS/sshTunnelVnc2.sh"
     alias rtsync="$HOME/Documents/shellScripts/macOnly/rsyncr.sh"
+    alias ig="cd $HOME/IdeaProjects"
+    alias pg="cd $HOME/PycharmProjects"
+    alias cg="cd $HOME/ClionProjects"
+    alias wg="cd $HOME/WebstormProjects"
+    alias rg="cd $HOME/RubymineProjects"
 else
     #Linux
     alias apt="sudo apt-get install -y"
