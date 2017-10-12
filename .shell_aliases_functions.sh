@@ -34,13 +34,15 @@ exists yarn && export PATH="$(yarn global bin):$PATH"
 [[ "$(uname)" == Darwin ]] && {
     export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home"
     export HOMEBREW_HOME='/usr/local/Cellar'
-    export GROOVY_HOME="/usr/local/opt/groovy"
-    export SCALA_HOME="/usr/local/opt/scala"
-    export PERL_HOME="/usr/local/opt/perl"
+    export HOMEBREW_OPT_HOME='/usr/local/opt'
+    export GROOVY_HOME="$HOMEBREW_OPT_HOME/groovy"
+    export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
+    export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
     export HOMEBREW_DBHOME='/usr/local/var'
     export HOMEBREW_DB_CONF='/usr/local/etc'
     eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
     export MANPATH=$HOME/perl5/man:$MANPATH
+    export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
     export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
     export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
     export PIP_HOME="/usr/local/lib/python2.7/site-packages"
@@ -395,7 +397,7 @@ escapeRemove(){
     done
 }
 mp3(){
-    youtube-dl --extract-audio --audio-format mp3 "$1"
+    youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 "$1"
 }
 
 mp4(){
