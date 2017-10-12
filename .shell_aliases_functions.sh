@@ -455,7 +455,53 @@ void loop() {
 }
 EOF
 } > src/main.cpp
+{
+cat <<\EOF
+#!/usr/bin/env bash
+
+[[ "$1" ]] && cd "$1"
+
+ps -ef | grep platformio | grep -v grep > /dev/null && {
+
+    figletRandomFontOnce.sh "GO GO GO !!!" | cowsay -f eyes -W 150
+
+   ps -ef | grep platformio | grep -v grep | awk '{print $2}' | xargs kill
+}
+
+platformio run -t upload && platformio device monitor
+EOF
+} > Runner.sh
+
+chmod +x Runner.sh
+
+{
+cat <<\EOF
+add_custom_target(
+        PLATFORMIO_JAKE ALL
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+EOF
+} >> CMakeLists.txt
+
 clion .
+
+JETBRAINS_WORKSPACE_EDIT "$dir"
+
+}
+JETBRAINS_WORKSPACE_EDIT(){
+        python -c "print('_'*100)"
+        prettyPrint "MONITORING WORKSPACE..."
+        python -c "print('_'*100)"
+while : ; do
+    grep -q '<component name="RunManager" selected=' .idea/workspace.xml && {
+        python -c "print('_'*100)" | lolcat
+        figletRandomFontOnce.sh "MATCH ENJOY>>>>" | ponysay -W 120
+        python -c "print('_'*100)" | lolcat
+        sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
+    
+    } || echo "No Match Yet" >&2
+    sleep 1
+done
 }
 
 getrc(){

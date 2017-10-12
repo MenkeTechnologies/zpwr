@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 
-"$1" && cd "$1" || echo "Couldn't changed directory to $1" && exit 1
+[[ "$1" ]] && cd "$1"
 
 ps -ef | grep platformio | grep -v grep > /dev/null && {
 
