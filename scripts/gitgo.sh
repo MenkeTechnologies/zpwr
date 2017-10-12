@@ -158,6 +158,8 @@ commitTheDirectory(){
 #possible options to script= -h for help, -p with argument to push with commit,
 #-l to pull from github, and -c to create repo
 #only one option at a time forced with break
+#{{{                    MARK:GETOPTS
+#**************************************************************
 optstring=p:hcl
 while getopts $optstring opt
 do
@@ -169,6 +171,8 @@ do
         *) usage >&2;;
     esac
 done
+
+#}}}***********************************************************
 
 #if no options and no arguments passed to script then commit with "default-commit"
 #if no options and 1 argument then commit with 1 argument
