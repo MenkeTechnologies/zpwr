@@ -58,7 +58,7 @@ ZSH_THEME="simonoff"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh zsh-completions zsh-autosuggestions tmux sublime ng ruby yarn github gem npm rvm perl osx node brews cpanm git mvn pip python scala)
+plugins=(fzf-zsh zsh-completions zsh-autosuggestions tmux sublime ng ruby yarn github gem npm rvm perl osx node brews cpanm git gradle pip python scala)
 
 source $ZSH/oh-my-zsh.sh
 
