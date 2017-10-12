@@ -1,2 +1,4 @@
-gradle shadowJar && java -jar build/libs/javafx9-1.0-SNAPSHOT-all.jar
+
+cd "$HOME/IdeaProjects/$1" && gradle shadowJar && java -jar build/libs/*.jar
+
 
