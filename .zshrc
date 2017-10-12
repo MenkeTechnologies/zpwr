@@ -58,7 +58,7 @@ ZSH_THEME="simonoff"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh zsh-completions zsh-autosuggestions tmux sublime ng ruby yarn github gem npm rvm perl osx node brews cpanm git gradle pip python scala)
+plugins=(fzf-zsh zsh-completions zsh-autosuggestions tmux sublime ng ruby yarn github gem npm rvm perl osx node brews cpanm git gradle pip python scala man nmap postgres colorize django ruby spring sudo xcode)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -185,6 +185,7 @@ bindkey '\e[1;5B' _updater
 bindkey '\e[1;5A' _gitfunc
 bindkey '^S' _gitfunc
 bindkey '\e[1;5C' _tutsUpdate
+bindkey '```' sudo-command-line
 
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis

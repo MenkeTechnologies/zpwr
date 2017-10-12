@@ -115,6 +115,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias cg="cd $HOME/ClionProjects"
     alias wg="cd $HOME/WebstormProjects"
     alias rg="cd $HOME/RubymineProjects"
+    alias sudoedit='sudo $EDITOR'
 else
     #Linux
     alias apt="sudo apt-get install -y"
