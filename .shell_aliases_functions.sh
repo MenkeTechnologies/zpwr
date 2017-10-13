@@ -427,7 +427,7 @@ backup(){
     printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
 }
 
-alias gcl && unalias gcl
+alias gcl >/dev/null 2>&1 && unalias gcl
 gcl() {
     git_name="${1##*/}"
     dir_name=${git_name%.*}
