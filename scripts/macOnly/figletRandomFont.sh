@@ -22,6 +22,7 @@ done
 
 rangePossibleIndices=${#ary[*]}
 
+
 while true; do
     tput civis
     randIndex=$(($RANDOM % $rangePossibleIndices))
