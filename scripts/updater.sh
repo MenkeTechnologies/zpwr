@@ -176,9 +176,6 @@ for pi in "${arrayOfPI[@]}"; do
     updatePI "$pi"
 done
 
-prettyPrint "Updating Vundle Plugins"
-
-vim -c VundleUpdate -c quitall
 
 brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
     # we have brew cu
@@ -192,6 +189,9 @@ brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
     prettyPrint "Updating Homebrew Casks!"
     brew cu --all -y --cleanup
 }
+prettyPrint "Updating Vundle Plugins"
+
+vim -c VundleUpdate -c quitall
 
 #decolorize prompt
 echo -e "Done\e[0m"
