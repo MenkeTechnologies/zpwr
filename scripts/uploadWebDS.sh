@@ -10,10 +10,13 @@
 
 address="jacobmenke@$IP:/var/services/web"
 
-printf "${BLUE}Uploading $* to $address\n"
+printf "${BLUE}Uploading $* to $address\n" | ponysay -W 120
+
+python -c "print('_'*100)" | lolcat
 #loop through all arguments and upload with scp recursively to synology server
 for i in "$@"; do
     scp -r -P $DS_PORT "$i" "$address"
 done
+python -c "print('_'*100)" | lolcat
 
 printf "Done\n${RESET}"

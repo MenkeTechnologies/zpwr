@@ -11,14 +11,18 @@
 ip=$IP
 address="pi@$ip:/var/www/html"
 
-printf "${BLUE}Uploading $* to $address\n"
+printf "${BLUE}"
+printf "Uploading $* to $address\n" | figlet | ponysay -W 120
 
 #loop through all arguments and upload with scp recursively to pi server
+python -c "print('_'*100)" | lolcat
+printf "${BLUE}"
 for i in "$@"; do
 	scp -r -P $RPI_PORT "$i" "$address" 2>/dev/null
 done
 
 #decolrize prompt with RESET environment variable
+python -c "print('_'*100)" | lolcat
 printf "Done\n${RESET}"
 
 #if just uploading to website one html file
