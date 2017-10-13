@@ -22,8 +22,8 @@ for i in "$@"; do
 done
 
 #decolrize prompt with RESET environment variable
-python -c "print('_'*100)" | lolcat
-printf "Done\n${RESET}"
+perl -le 'print"_"x 100' | lolcat
+printf "$BLUEDone\n${RESET}"
 
 #if just uploading to website one html file
 if [[ "$#" == 1 && "$1" =~ .*.html  ]]; then
