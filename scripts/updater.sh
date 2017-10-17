@@ -109,7 +109,8 @@ exists cpanm && {
     perlOutdated=$(cpan-outdated -p)
 
     if [[ "$perlOutdated" ]]; then
-        echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
+        :
+        #echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
     fi
 }
 
@@ -120,6 +121,7 @@ exists pio && {
 }
 
 gitRepoUpdater(){
+
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then
