@@ -102,7 +102,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
     alias c="cd /Volumes/JAKESD/wcc/cps"
-    alias emu="open /Volumes/JAKESD/EMU"
+    alias emu="cd /Volumes/JAKESD/EMU"
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
     #keep remote tty sessions alive by stopping sleep
@@ -435,13 +435,13 @@ gcl() {
     cd "$dir_name"
 }
 
-alias p_refresh="pio -f clion init --ide clion "
+alias p_refresh="pio -f -c clion init --ide clion "
 
 p (){
-dir="$1"
-mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
-{
-cat <<\EOF
+    dir="$1"
+    mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
+    {
+    cat <<\EOF
 #include <Arduino.h>
 
 void setup() {
@@ -455,9 +455,9 @@ void loop() {
   delay(1000);
 }
 EOF
-} > src/main.cpp
-{
-cat <<\EOF
+    } > src/main.cpp
+    {
+    cat <<\EOF
 #!/usr/bin/env bash
 
 [[ "$1" ]] && cd "$1"
@@ -471,22 +471,22 @@ ps -ef | grep platformio | grep -v grep > /dev/null && {
 
 platformio run -t upload && platformio device monitor
 EOF
-} > Runner.sh
+    } > Runner.sh
 
-chmod +x Runner.sh
+    chmod +x Runner.sh
 
-{
-cat <<\EOF
+    {
+    cat <<\EOF
 add_custom_target(
         PLATFORMIO_JAKE ALL
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 EOF
-} >> CMakeLists.txt
+    } >> CMakeLists.txt
 
-clion .
+    clion .
 
-jetbrainsWorkspaceEdit "$dir"
+    jetbrainsWorkspaceEdit "$dir"
 
 }
 jetbrainsWorkspaceEdit(){
