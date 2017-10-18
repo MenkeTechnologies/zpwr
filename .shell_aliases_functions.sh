@@ -32,7 +32,7 @@ exists yarn && export PATH="$(yarn global bin):$PATH"
 #{{{                           MARK:HOMES
 #**********************************************************************
 [[ "$(uname)" == Darwin ]] && {
-    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk-9.jdk/Contents/Home"
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
     export HOMEBREW_HOME='/usr/local/Cellar'
     export HOMEBREW_OPT_HOME='/usr/local/opt'
     export GROOVY_HOME="$HOMEBREW_OPT_HOME/groovy"
