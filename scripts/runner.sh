@@ -56,8 +56,10 @@ case "$fileToBeExecuted" in
         ;;
     *.hs ) executeFileFirstArgIsCommand "ghc -e ':script $fileToBeExecuted'" "$fileToBeExecuted"
         ;;
-    *.java ) executeTheFile java"$fileToBeExecuted"
+    *.java ) executeTheFile java "$fileToBeExecuted"
 
+        ;;
+    *.clj ) executeTheFile clojure "$fileToBeExecuted"
         ;;
     *.*)
         echo "Don't know what the run with. File ending is not recognized!" >&2
