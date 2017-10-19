@@ -518,3 +518,4 @@ exec "$SHELL"
 
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 
+export PERL5LIB="$HOME/perl5/lib/perl5"

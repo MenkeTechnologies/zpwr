@@ -106,13 +106,13 @@ exists yarn && {
 exists cpanm && {
 
     prettyPrint "Updating Perl Packages"
-    perlOutdated=$(cpan-outdated -p)
+    perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
 
     if [[ "$perlOutdated" ]]; then
-        :
-        #echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
+        echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
     fi
 }
+exit 0
 
 exists pio && {
     prettyPrint "Updating PlatformIO"
