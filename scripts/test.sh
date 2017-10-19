@@ -7,9 +7,11 @@
 #####   Notes: 
 #}}}***********************************************************
 
+exec 2> >(blueText.sh)
 exec >&2
 ls
 id
 pwd
+exec > >(tr a-z A-Z)
 
-exec 2> >(blueText.sh)
+echo "$(ls)" 
