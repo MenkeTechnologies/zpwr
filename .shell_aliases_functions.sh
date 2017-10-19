@@ -14,6 +14,7 @@ export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export D="$HOME/Desktop"
 export DL="$HOME/Downloads"
+export XAUTHORITY="$HOME/.Xauthority"
 
 export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
 export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
@@ -516,3 +517,4 @@ exec "$SHELL"
 #}}}***********************************************************
 
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
+
