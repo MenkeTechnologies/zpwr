@@ -27,7 +27,10 @@ if [[ -z "$SCRIPTS" ]]; then
 fi
 
 if [[ -f "$SCRIPTS/printHeader.sh" ]];then
-    bash "$SCRIPTS/printHeader.sh"
+    w=80
+    perl -le "print '_'x$w" | lolcat
+    bash "$SCRIPTS/printHeader.sh" | ponysay -W 180
+    perl -le "print '_'x$w" | lolcat
 fi
 
 #python 3.6
@@ -112,7 +115,6 @@ exists cpanm && {
         echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
     fi
 }
-exit 0
 
 exists pio && {
     prettyPrint "Updating PlatformIO"

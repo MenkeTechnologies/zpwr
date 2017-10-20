@@ -11,4 +11,4 @@ if [[ -z "$SCRIPTS" ]]; then
     SCRIPTS="$HOME/Documents/shellScripts"
 fi
 
-perl -X "$SCRIPTS/banner.pl";
+perl -X "$SCRIPTS/banner.pl"
