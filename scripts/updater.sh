@@ -33,6 +33,8 @@ if [[ -f "$SCRIPTS/printHeader.sh" ]];then
     perl -le "print '_'x$w" | lolcat
 fi
 
+{
+
 #python 3.6
 exists pip3 && {
     prettyPrint "Updating Python3.6 Packages"
