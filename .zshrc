@@ -358,7 +358,7 @@ fi
 if [[ "$(uname)" = Darwin ]]; then
     export PATH="$PATH:$HOME/.rvm/bin"
     if [[ "$UID" != "0" ]]; then
-        builtin cd "$D" && clear
+        # builtin cd "$D" && clear
         type figlet > /dev/null 2>&1 && {
         printf "\e[1m"
         [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" | ponysay -W 100
@@ -406,3 +406,7 @@ if [[ $#h -gt 0 ]]; then
   zstyle ':completion:*:ssh:*' hosts $h
   zstyle ':completion:*:slogin:*' hosts $h
 fi
+
+#colors in options tab completion
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=37}:${(s.:.)LS_COLORS}")'
+
