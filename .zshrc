@@ -308,7 +308,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:descriptions' format '%B%F{red}<<%b%F{blue}%d%B%F{red}>>%f%b'
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
@@ -360,7 +360,7 @@ if [[ "$(uname)" = Darwin ]]; then
     if [[ "$UID" != "0" ]]; then
         # builtin cd "$D" && clear
         type figlet > /dev/null 2>&1 && {
-        printf "\e[1m"
+            printf "\e[1m"
         [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" | ponysay -W 100
     }
     printf "\e[0m"
@@ -377,14 +377,14 @@ else
         builtin cd "$D"
         if [[ "$distro" =~ Raspbian* ]]; then
             type ponysay 1>/dev/null 2>&1 && {
-            bash "$HOME/motd.sh" | ponysay -W 100
+                bash "$HOME/motd.sh" | ponysay -W 100
 
         } || bash "$HOME/motd.sh"
-        fi
-        listNoClear
-    else
-        clearList
     fi
+    listNoClear
+else
+    clearList
+fi
 
 fi
 
@@ -399,12 +399,12 @@ color2
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 h=()
 if [[ -r ~/.ssh/config ]]; then
-  h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-  h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
+    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
 fi
 if [[ $#h -gt 0 ]]; then
-  zstyle ':completion:*:ssh:*' hosts $h
-  zstyle ':completion:*:slogin:*' hosts $h
+    zstyle ':completion:*:ssh:*' hosts $h
+    zstyle ':completion:*:slogin:*' hosts $h
 fi
 
 #colors in options tab completion
