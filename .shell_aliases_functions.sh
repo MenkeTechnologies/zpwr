@@ -170,7 +170,7 @@ alias watchGit='bash $SCRIPTS/watchServiceFSWatchGit.sh'
 alias watchPiWeb='bash $SCRIPTS/watchServiceFSWatchPiWeb.sh'
 exists vim && { 
 	alias vi=vim
-	alias v='vim -u NONE'
+	alias v='vim -u ~/.minvimrc'
 }
 alias cl=clear
 alias mkdir='mkdir -pv'
