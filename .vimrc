@@ -448,4 +448,3 @@ set thesaurus+=~/mthesaur.txt
 inoremap <silent> <C-T> <C-X><C-K>
 "easier mapping for thesaurus completion
 inoremap <silent> <ESC>t <C-X><C-T>
-
