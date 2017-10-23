@@ -308,7 +308,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%F{red}-<<%b%F{blue}%d%B%F{red}>>-%f%b'
+zstyle ':completion:*:descriptions' format $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
@@ -407,6 +408,6 @@ if [[ $#h -gt 0 ]]; then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-#colors in options tab completion
-zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==34=37}:${(s.:.)LS_COLORS}")'
-
+zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+#
+zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
