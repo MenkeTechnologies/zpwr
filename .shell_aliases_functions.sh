@@ -117,6 +117,11 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias wg="cd $HOME/WebstormProjects"
     alias rg="cd $HOME/RubymineProjects"
     alias sudoedit='sudo $EDITOR'
+    exists mvim && { 
+        alias vi='mvim -v'
+        alias vim='mvim -v'
+        alias v='mvim -v -u ~/.minvimrc'
+    }
 else
     #Linux
     alias apt="sudo apt-get install -y"
@@ -125,7 +130,10 @@ else
     if [[ $distroName == Raspbian ]]; then
         source "$HOME/.rpitokens.sh"
     fi
-
+    exists vim && { 
+        alias vi=vim
+        alias v='vim -u ~/.minvimrc'
+    }
 }
 fi
 alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
@@ -168,10 +176,6 @@ alias sd="clear;ssh d "
 alias gitgo='$SCRIPTS/gitgo.sh'
 alias watchGit='bash $SCRIPTS/watchServiceFSWatchGit.sh'
 alias watchPiWeb='bash $SCRIPTS/watchServiceFSWatchPiWeb.sh'
-exists vim && { 
-	alias vi=vim
-	alias v='vim -u ~/.minvimrc'
-}
 alias cl=clear
 alias mkdir='mkdir -pv'
 #**********************************************************************
