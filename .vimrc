@@ -424,7 +424,14 @@ autocmd BufNewFile * exe "normal! G" | startinsert!
 "load all pathogen plugins
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
 set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+elseif os == "Linux"
+    set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+endif
+
 
 " :e will find files automatically in these locations
 set path+=~/Desktop
@@ -433,7 +440,7 @@ set path+=~/Documents/shellScripts
 colorscheme badwolf
 
 "common mispellings
-iabbrev teh the
+iabbrev tth the
 iabbrev adn and
 iabbrev waht what
 iabbrev tehn then
