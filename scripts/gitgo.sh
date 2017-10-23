@@ -7,25 +7,44 @@
 #####   Notes: 
 #}}}***********************************************************
 
-#for debugging uncomment next line
-# set -x
+
+#          .                                                      .
+#        .n                   .                 .                  n.
+#  .   .dP                  dP                   9b                 9b.    .
+# 4    qXb         .       dX                     Xb       .        dXp     t
+#dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb
+#9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP
+# 9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
+#  `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'
+#    `9XXXXXXXXXXXP' `9XX'   DIE    `98v8P'  HUMAN   `XXP' `9XXXXXXXXXXXP'
+#        ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~
+#                        )b.  .dbo.dP'`v'`9b.odb.  .dX(
+#                      ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.
+#                     dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb
+#                    dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb
+#                    9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP
+#                     `'      9XXXXXX(   )XXXXXXP      `'
+#                              XXXX X.`v'.X XXXX
+#                              XP^X'`b   d'`X^XX
+#                              X. 9  `   '  P )X
+#                              `b  `       '  d'
+
 
 #GITHUB_ACCOUNT environment variable needed for the script to create a remote repository
 ##########################################
 ###############  functions  ##############
 ##########################################
 
-prettyPrint(){
+myPrettyPrint(){
     #print white text 37m on blue qbackground 44m
     printf "\e[37;44m"
     printf "$1"
     printf "\e[0m\n"
 }
-
 initializeGitDirectory(){
     #there is no .git directory
     if [[ ! -d ".git" ]]; then
-        prettyPrint "Do you want to initialize this diqrectory with Git?"
+        myPrettyPrint "Do you want to initialize this diqrectory with Git?"
         #read one character
         read -n1
         echo
@@ -41,7 +60,7 @@ else
         getRemoteDetails
     else
         #there is a .git directory and there is setup for remote so exit
-        prettyPrint "Already initialized."
+        myPrettyPrint "Already initialized."
         exit 1
 
     fi
@@ -55,11 +74,11 @@ getRemoteDetails(){
 
     #if function was called with no arguments
     if [[ -z "$1" ]]; then
-        prettyPrint "What is the name of your Repository to create?"
+        myPrettyPrint "What is the name of your Repository to create?"
         read REPO_NAME_TO_CREATE
         #function called with at least one argument
     else
-        prettyPrint "Remaking Deleted Repository."
+        myPrettyPrint "Remaking Deleted Repository."
         local REPO_NAME_TO_CREATE="$1"
     fi
 
@@ -73,7 +92,7 @@ getRemoteDetails(){
     local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
     if [[ -z "$ORGIN_NAME" ]]; then
         #no origin so prompt for it
-        prettyPrint "What is your origin?"
+        myPrettyPrint "What is your origin?"
         read ORGIN_NAME
     fi
     #concat url from variables
@@ -84,13 +103,13 @@ getRemoteDetails(){
 }
 
 getInitialCommit(){
-    prettyPrint "What is your commit message?"
+    myPrettyPrint "What is your commit message?"
     read commitMessage
     commitTheDirectory "$commitMessage"
 }
 
 usage(){
-    #prettyPrint format
+    #myPrettyPrint format
     printf "\e[37;44m"
     #if argument passed in then print it
     if [[ "$1" ]]; then
@@ -140,7 +159,7 @@ commitTheDirectory(){
     #commitMessage is first argument
     local commitMessage="$1"
     local origin="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
-    prettyPrint "Commiting to $origin with message $commitMessage"
+    myPrettyPrint "Commiting to $origin with message $commitMessage"
     git add .
     git commit -m "$commitMessage"
     git push "$origin" master
@@ -184,3 +203,7 @@ if [[ $OPTIND == 1 ]]; then
         gitPush "$1"
     fi
 fi
+
+
+
+
