@@ -313,7 +313,6 @@ zstyle ':completion:*:descriptions' format $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
 zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
-zstyle ':completion:*' group-name 
 
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
@@ -408,6 +407,9 @@ if [[ $#h -gt 0 ]]; then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-zstyle ':completion:*:options' list-colors '=^(-- *)=34'
+zstyle ':completion:*:options' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 #
+
 zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+
+zstyle ':completion:*' group-name ''
