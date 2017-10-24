@@ -189,8 +189,6 @@ sudo pip install powerline-status
 
 printf "Adding Powerline to .vimrc \n"
 
-powerline_dir="$(pip show powerline-status | grep Location | awk '{print $2}')"
-echo "set rtp+=$powerline_dir/powerline/bindings/vim" >> .vimrc
 
 #{{{                    MARK:zsh
 #**************************************************************
