@@ -407,8 +407,7 @@ if [[ $#h -gt 0 ]]; then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-zstyle ':completion:*:options' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
-#
+zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;34=1;33=34'
 
 zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 
