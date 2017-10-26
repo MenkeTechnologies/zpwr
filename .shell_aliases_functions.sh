@@ -316,7 +316,7 @@ blocksToSize(){
 
 humanReadable(){
     awk 'function human(x) {
-    s=" B   KiB MiB GiB TiB EiB PiB YiB ZiB"
+    s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"
     while (x>=1024 && length(s)>1)
         {x/=1024; s=substr(s,5)}
         s=substr(s,1,4)

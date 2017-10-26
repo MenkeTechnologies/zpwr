@@ -8,8 +8,7 @@
 #}}}***********************************************************
 [[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
 
-ip=$IP
-address="pi@$ip:/var/www/html"
+address="pi@$MY_IP:/var/www/html"
 
 printf "${BLUE}"
 printf "Uploading $* to $address\n" | figlet | ponysay -W 120
@@ -27,6 +26,6 @@ printf "$BLUEDone\n${RESET}"
 
 #if just uploading to website one html file
 if [[ "$#" == 1 && "$1" =~ .*.html  ]]; then
-	open "http://$ip:443/$1"
+	open "http://$MY_IP:443/$1"
 	#open -a "Sublime Text"
 fi
