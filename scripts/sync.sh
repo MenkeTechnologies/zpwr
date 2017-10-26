@@ -10,7 +10,7 @@ firstFile="$1"
 
 #exit is argument count less than 2
 if (( $# < 2 ));then
-    echo "Need two args"
+    echo "${0##*/} needs two args" >&2
     exit 1
 fi
 
