@@ -8,7 +8,7 @@
 #}}}***********************************************************
 [[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
 
-address="jacobmenke@$IP:/var/services/web"
+address="jacobmenke@$MY_IP:/var/services/web"
 
 printf "${BLUE}Uploading $* to $address\n" | ponysay -W 120
 
