@@ -91,6 +91,7 @@ alias ta="tmux attach"
 alias h="cd /usr/local"
 alias e="cd /etc"
 alias sin="./configure && make && sudo make install"
+alias curl='curl -sL'
 #Darwin specific aliases
 if [[ "$(uname)" == "Darwin" ]]; then
     #statements
@@ -442,7 +443,7 @@ gcl() {
 
 alias p_refresh="pio -f -c clion init --ide clion "
 
-p (){
+p(){
     dir="$1"
     mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
     {
