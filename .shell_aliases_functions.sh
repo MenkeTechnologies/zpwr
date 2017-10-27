@@ -26,6 +26,7 @@ export GITHUB_ACCOUNT='MenkeTechnologies'
     export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
     export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
 } || export PATH="$PATH:/usr/games"
+export PS4='> \e[37m${BASH_SOURCE}:\e[1;33m${LINENO} \e[0;32m>> \e[0m '
 
 exists yarn && export PATH="$(yarn global bin):$PATH"
 #}}}***********************************************************
