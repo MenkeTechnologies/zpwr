@@ -208,7 +208,7 @@ export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
 #{{{                    MARK:Shell functions
 #**************************************************************
-pgr(){
+p(){
     ps -ef | grep "$@"
 }
 scnew(){
@@ -446,7 +446,7 @@ gcl() {
 
 alias p_refresh="pio -f -c clion init --ide clion "
 
-p(){
+ino(){
     dir="$1"
     mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
     {
