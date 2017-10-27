@@ -15,25 +15,21 @@ tailVersion=tail
 weHaveCCZE=no
 
 type ccze 1>/dev/null 2>&1 && {
-weHaveCCZE=yes
+    weHaveCCZE=yes
 }
 
-if [[  "$1" ]]; then
+if [[ "$1" ]]; then
     weHaveCCZE=no
 fi
 
 #dont care about std err
-exec 2>/dev/null
+#exec 2>/dev/null
 
 if [[ $(uname) == Darwin ]]; then
     if [[ $weHaveCCZE == yes ]]; then
-   $tailVersion -f /var/log/**/*.log /var/log/**/*.out \
-       /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
-        /Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
+   $tailVersion -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* $HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
    else
-   $tailVersion -f /var/log/**/*.log /var/log/**/*.out \
-       /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
-        /Library/Logs/**/*.log 
+   $tailVersion -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log
     fi
 else
     #linux

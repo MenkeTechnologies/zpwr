@@ -389,9 +389,7 @@ fi
 fi
 
 
-#imgcat and other special features from iTerm's shell integration
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
+#std error colorization
 color2
 
 #homebrew conflicts with /usr/bin/perl

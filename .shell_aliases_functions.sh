@@ -208,6 +208,9 @@ export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
 #{{{                    MARK:Shell functions
 #**************************************************************
+pgr(){
+    ps -ef | grep "$@"
+}
 scnew(){
     [[ -z "$1" ]] && echo "no arg..." >&2 && return 1
 
