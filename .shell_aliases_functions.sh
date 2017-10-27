@@ -82,7 +82,7 @@ alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 #}}}***********************************************************
 alias deleteTab="sed -e '/^[ tab]*$/d'"
-alias b="bash"
+alias ba="bash"
 alias upper='tr '\''a-z'\'' '\''A-Z'\'''
 #over alias es
 alias grep="grep --color=auto"
@@ -149,7 +149,6 @@ alias inst="source $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
-alias b="execpy blackBoard.py"
 alias m="execpy mapIt.py"
 alias a="execpy amazonSearch.py"
 alias shut="execpy shutdown.py"
@@ -209,15 +208,18 @@ export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 
 #{{{                    MARK:Shell functions
 #**************************************************************
-p(){
-    ps -ef | grep "$@"
-}
 scnew(){
     [[ -z "$1" ]] && echo "no arg..." >&2 && return 1
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
+b(){
+    ( "$@" & )
+}
 
+p(){
+    ps -ef | grep "$@"
+}
 nn(){
     [[ -z "$1" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
 
@@ -426,6 +428,7 @@ prettyPrint(){
         return 1
     }
 }
+
 tac(){
     sed '1!G;h;$!d' "$@"
 }
