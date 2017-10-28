@@ -241,19 +241,20 @@ clearList () {
 
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-        ls_command="grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always"
-    } || {
-    ls_command="ls -iFlhAO"
-}
-lib_command="otool -L"
+        ls_command="grc -c /usr/local/share/grc/conf.gls \
+        gls -iFlhA --color=always"
+        } || {
+        ls_command="ls -iFlhAO"
+        }
+        lib_command="otool -L"
     else
         exists grc && {
-
-        ls_command="grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always"
-    } || {
-    ls_command="ls -iFhlA"
-}
-lib_command="ldd -v"
+        ls_command="grc -c /usr/share/grc/conf.gls \
+        ls -iFlhA --color=always"
+        } || {
+        ls_command="ls -iFhlA"
+        }
+        lib_command="ldd -v"
     fi
 
     if [[ "$1" ]]; then
@@ -261,36 +262,42 @@ lib_command="ldd -v"
             exists $command &&  {
             #exe matching
             while read locale;do
-                last_fields="$(echo $locale | cut -d' ' -f3-10)"
+                last_fields="$(echo $locale \
+                    | cut -d' ' -f3-10)"
                 [[ -f "$last_fields" ]] && { 
-
-                prettyPrint "$last_fields" && eval "$ls_command" $last_fields && prettyPrint "FILE TYPE:" && eval "file $last_fields" && prettyPrint "DEPENDENT ON:" && eval "$lib_command $last_fields";
-    prettyPrint "SIZE:"
-                du -sh "$last_fields"
-    prettyPrint "STATS:"
-                stat "$last_fields"
-                echo
-                echo
+                    prettyPrint "$last_fields" && \
+                    eval "$ls_command" $last_fields && \
+                    prettyPrint "FILE TYPE:" && \
+                    eval "file $last_fields" && \
+                    prettyPrint "DEPENDENT ON:" && \
+                    eval "$lib_command $last_fields";
+                    prettyPrint "SIZE:"
+                    du -sh "$last_fields"
+                    prettyPrint "STATS:"
+                    stat "$last_fields"
+                    echo
+                    echo
+                } || {
+                    echo "$locale"
+                    echo
+                    echo
+                }
+            done < <(type -a "$command" | sort | uniq)
             } || {
-            echo "$locale"
-            echo
-            echo
-        }
-        done < <(type -a "$command" | sort | uniq)
-    } || {
-    #path matching, not exe
-    prettyPrint "$command"
-    eval "$ls_command -d \"$command\"" || return 1
-    prettyPrint "FILE TYPE:"
-    file "$command"
-    prettyPrint "SIZE:"
-    du -sh "$command"
-    prettyPrint "STATS:"
-    stat "$command"
-    #for readibility
-    echo
-    echo
-}
+                #path matching, not exe
+                prettyPrint "$command"
+                eval "$ls_command -d \"$command\"" || \
+                return 1
+                prettyPrint "FILE TYPE:"
+                file "$command"
+                prettyPrint "SIZE:"
+                du -sh "$command"
+                prettyPrint "STATS:"
+                stat "$command"
+                #for readibility
+                echo
+                echo
+            }
         done
     else
         clear && eval "$ls_command"
@@ -299,17 +306,18 @@ lib_command="ldd -v"
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-        grc -c /usr/local/share/grc/conf.gls gls -iFlhA --color=always
-    } || {
-    ls -iFlhAO
-}
+        grc -c /usr/local/share/grc/conf.gls gls \
+        -iFlhA --color=always
+        } || {
+        ls -iFlhAO
+        }
     else
         exists grc && {
-
-        grc -c /usr/share/grc/conf.gls ls -iFlhA --color=always
-    } || {
-    ls -iFhlA
-}
+            grc -c /usr/share/grc/conf.gls \
+            ls -iFlhA --color=always
+        } || {
+        ls -iFhlA
+        }
     fi
 }
 animate(){
