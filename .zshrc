@@ -49,7 +49,7 @@ ZSH_THEME="simonoff"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-HIST_STAMPS="mm/dd/yyyy"
+ HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -326,7 +326,7 @@ zstyle ':completion:*' matcher-list '' \
 #}}}
 
 #global aliases
-alias -g L='|less'
+alias -g l='|less'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
 
