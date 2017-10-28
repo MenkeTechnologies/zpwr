@@ -245,6 +245,12 @@ suc(){
 db(){
     python3 $PYSCRIPTS/logIntoMyDB.py
 }
+
+if [[ -f /usr/local/share/grc/conf.gls ]];then
+alias lr='grc -c /usr/local/share/grc/conf.gls gls -iAlhFR --color=always'
+elif [[ -f /usr/share/grc/conf.gls ]];then
+alias lr='grc -c /usr/share/grc/conf.gls ls -iAlhFR --color=always'
+fi
 clearList () {
 
     if [[ "$(uname)" == "Darwin" ]]; then
