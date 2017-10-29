@@ -192,6 +192,7 @@ bindkey '\e[1;5A' _gitfunc
 bindkey '^S' _gitfunc
 bindkey '\e[1;5C' _tutsUpdate
 bindkey '```' sudo-command-line
+bindkey '^t' transpose-words
 
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
@@ -203,7 +204,7 @@ WILL_CLEAR=false
 
 #do we want to clear the screen and run ls after we exec the current line?
 #
-commandsThatModifyFiles=(rm touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
+commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
 
 for command in ${commandsThatModifyFiles[@]}; do
     regex="^sudo $command .*\$|^$command .*\$"
