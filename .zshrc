@@ -179,6 +179,8 @@ zle -N _tutsUpdate
 
 bindkey '\e[1;5D' _db
 bindkey '\e[1;2D' _sub
+#press both escape and control f then oo
+bindkey '\e^foo' _sub
 bindkey '^@' _tmm
 
 bindkey '\e[1;5B' _updater
@@ -326,7 +328,7 @@ zstyle ':completion:*' matcher-list '' \
 #}}}
 
 #global aliases
-alias -g l='|less'
+alias -g l='|less -M'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
 
