@@ -362,7 +362,6 @@ if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
 fi
 #go to desktop if not root
 if [[ "$(uname)" = Darwin ]]; then
-    export PATH="$PATH:$HOME/.rvm/bin"
     if [[ "$UID" != "0" ]]; then
         # builtin cd "$D" && clear
         type figlet > /dev/null 2>&1 && {
