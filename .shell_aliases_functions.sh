@@ -201,7 +201,7 @@ export PATH="$PATH:$HOME/.cargo/bin:$PATH"
 #**********************************************************************
 #                           MARK:RVM                           
 #**********************************************************************
-export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+#export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
 #**************************************************************
 #}}}
 

@@ -184,6 +184,10 @@ bindkey '\e^f' _sub
 bindkey '^@' _tmm
 
 bindkey '\e[1;5B' _updater
+#F1 key
+bindkey '\eOP' _updater
+#F2 key
+bindkey '\eOQ' _sub
 bindkey '\e[1;5A' _gitfunc
 bindkey '^S' _gitfunc
 bindkey '\e[1;5C' _tutsUpdate
@@ -407,7 +411,7 @@ if [[ $#h -gt 0 ]]; then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;30=1;33=34'
+zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;32=1;33=34'
 
 #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 
