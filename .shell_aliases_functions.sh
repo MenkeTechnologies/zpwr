@@ -221,13 +221,14 @@ scnew(){
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
-b(){
-    ( "$@" & )
+p(){
+    ps -ef | grep "$*"
 }
 
-p(){
-    ps -ef | grep "$@"
+b(){
+    ( "$@" & ) ; p "$*"
 }
+
 nn(){
     [[ -z "$1" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
 
@@ -437,7 +438,7 @@ escapeRemove(){
     done
 }
 mp3(){
-    youtube-dl --extract-audio --audio-format mp3 --audio-quality 0 "$1"
+    youtube-dl --extract-audio --audio-format mp3 "$1"
 }
 
 mp4(){
