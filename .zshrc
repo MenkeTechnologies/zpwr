@@ -192,7 +192,7 @@ bindkey '\e[1;5A' _gitfunc
 bindkey '^S' _gitfunc
 bindkey '\e[1;5C' _tutsUpdate
 bindkey '```' sudo-command-line
-bindkey '^t' transpose-words
+bindkey '^T' transpose-words
 
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
