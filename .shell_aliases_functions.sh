@@ -15,7 +15,6 @@ export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export D="$HOME/Desktop"
 export DL="$HOME/Downloads"
 export XAUTHORITY="$HOME/.Xauthority"
-
 export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
 export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
 export TERMINAL_APP="Terminal.app"
@@ -226,11 +225,11 @@ p(){
 }
 
 b(){
-    ( "$@" & ) ; p "$*"
+    ( "$@" & ) ; p "$@"
 }
 
 nn(){
-    [[ -z "$1" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
+    [[ -z "$2" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
 
     title="$1"
     msg="$2"
