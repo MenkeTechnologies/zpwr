@@ -11,7 +11,9 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="simonoff"
 
 #if this is a mac or linux
-[[ "$(uname)" == "Darwin" ]] && source "$HOME/.powerlevel9kconfig.sh" || export RPROMPT="%{%B%}`tty` `echo $$ $-`"
+[[ "$(uname)" == "Darwin" ]] && source \
+    "$HOME/.powerlevel9kconfig.sh" \
+    || export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 
 #colors for common commands
 [[ -f "$HOME/grc.zsh" ]] && source "$HOME/grc.zsh"
@@ -49,7 +51,7 @@ ZSH_THEME="simonoff"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
- HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -305,7 +307,8 @@ zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character 
 # Make the selection prompt friendly when there are a lot of choices
 zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
 # Add simple colors to kill
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+zstyle ':completion:*:*:kill:*:processes' list-colors \
+    '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 # list of completers to use
 zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate
@@ -315,7 +318,8 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+zstyle ':completion:*:descriptions' format \
+    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
 
 zstyle ':completion:*:messages' format '%d'
 zstyle ':completion:*:warnings' format 'No matches for: %d'
@@ -358,6 +362,7 @@ source "$HOME/z.sh"
 #zplug load
 
 export GOPATH="$HOME/go"
+
 if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
     source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
 fi
@@ -367,7 +372,9 @@ if [[ "$(uname)" = Darwin ]]; then
         # builtin cd "$D" && clear
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
-        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" | ponysay -W 100
+        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] \
+            && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+            "$(hostname)" | ponysay -W 100
     }
     printf "\e[0m"
     # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
@@ -376,7 +383,6 @@ else
     clearList
 fi
 else
-
     distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
 
     if [[ "$UID" != "0" ]]; then
@@ -384,7 +390,6 @@ else
         if [[ "$distro" =~ Raspbian* ]]; then
             type ponysay 1>/dev/null 2>&1 && {
                 bash "$HOME/motd.sh" | ponysay -W 100
-
         } || bash "$HOME/motd.sh"
     fi
     listNoClear
