@@ -19,19 +19,15 @@ exists(){
     type "$1" >/dev/null 2>&1
 }
 
-#start white text on blue background \e44:37m, -e required for escape sequences
-#echo -e "\e[44;37m"
+[[ -z "$SCRIPTS" ]] && SCRIPTS="$HOME/Documents/shellScripts"
 
-if [[ -z "$SCRIPTS" ]]; then
-    SCRIPTS="$HOME/Documents/shellScripts"
-fi
 
-if [[ -f "$SCRIPTS/printHeader.sh" ]];then
+[[ -f "$SCRIPTS/printHeader.sh" ]] && {
     w=80
     perl -le "print '_'x$w" | lolcat
     bash "$SCRIPTS/printHeader.sh" | ponysay -W 180
     perl -le "print '_'x$w" | lolcat
-fi
+}
 
 #python 3.6
 exists pip3 && {
@@ -90,7 +86,7 @@ exists brew && {
 }
 
 exists npm && {
-    prettyPrint "Updating NPM Packages"
+    prettyPrint "Updating NPM packages"
     for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
     do
         npm install -g "$package"
@@ -100,17 +96,15 @@ exists npm && {
 }
 
 exists yarn && {
-    prettyPrint "Updating yarn modules"
+    prettyPrint "Updating yarn packages"
     yarn global upgrade
     prettyPrint "Updating yarn itself"
-    npm install --global yarn
+    npm install -g yarn
 }
 
 exists cpanm && {
-
     prettyPrint "Updating Perl Packages"
     perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
-
     if [[ "$perlOutdated" ]]; then
         echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
     fi
@@ -123,11 +117,9 @@ exists pio && {
 }
 
 gitRepoUpdater(){
-
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then
-
         for generic_git_repo_plugin in "$enclosing_dir/"*; do
             if [[ -d "$generic_git_repo_plugin" ]]; then
                 if [[ -d "$generic_git_repo_plugin"/.git ]]; then
