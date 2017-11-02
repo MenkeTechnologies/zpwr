@@ -24,6 +24,8 @@ openTextEditor(){
 	python3 $HOME/PycharmProjects/textEditorTwoColumns.py
 }
 
+
+
 createTheFile(){
 	#create newfile
 	> "$newfile"
