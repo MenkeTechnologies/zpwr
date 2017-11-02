@@ -5,7 +5,7 @@
 #####   Date: Mon Oct 23 02:35:16 EDT 2017
 #####   Purpose: bash script to 
 #####   Notes: 
-#}}}***********************************************************
+#}}}DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD***********************************************************
 #          .                                                      .
 #        .n                   .                 .                  n.
 #  .   .dP                  dP                   9b                 9b.    .
@@ -35,7 +35,6 @@ fi
 
 ls
 pwd
-say dogs
 
 echo "my name is dogs"
 
@@ -46,23 +45,12 @@ while (( x > 10)); do
     let x--
 done
 
+say "bash scripting is cool"
 
-for (( i = 0; i < 10000; i++ )); do
-    bash -c 'echo "$$"'
-done
+echo -n "what is your name: "
 
+read name
 
-
-
-
-
-
-
-
-
-
-
-
-
+echo "your name is $name"
 
 
