@@ -29,7 +29,7 @@ echo s5 >> temp.`whoami`
 } &
 s5_pid=$!
 
-(
+{
     while [[ true ]]; do
         #if s4 and s5 echoed to file then we can
         #run s10
@@ -42,14 +42,14 @@ s5_pid=$!
             break
         fi
     done
-) &
+} &
 s10_pid=$!
 
-(
+{
 bash S8
 wait $!
 bash s9
-) &
+} &
 s8_pid=$!
 
 #block for s1 and s2
