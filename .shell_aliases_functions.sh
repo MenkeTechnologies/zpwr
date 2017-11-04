@@ -127,8 +127,8 @@ else
     #Linux
     alias apt="sudo apt-get install -y"
     type lsb_release >/dev/null 2>&1 && {
-    distroName=$(lsb_release -a | head -1 | awk '{print $3}')
-    if [[ $distroName == Raspbian ]]; then
+    distroName=$(cat /etc/os-release| sed -n 5p | awk -F= '{print $2}')
+    if [[ $distroName == raspbian ]]; then
         source "$HOME/.rpitokens.sh"
     fi
     exists vim && { 
