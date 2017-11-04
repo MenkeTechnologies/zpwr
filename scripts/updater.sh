@@ -98,8 +98,8 @@ exists npm && {
 exists yarn && {
     prettyPrint "Updating yarn packages"
     yarn global upgrade
-    prettyPrint "Updating yarn itself"
-    npm install -g yarn
+#    prettyPrint "Updating yarn itself"
+#    npm install -g yarn
 }
 
 exists cpanm && {
