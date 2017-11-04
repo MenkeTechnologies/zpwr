@@ -134,7 +134,6 @@ else
         alias vi=vim
         alias v='vim -u ~/.minvimrc'
     }
-}
 fi
 alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
