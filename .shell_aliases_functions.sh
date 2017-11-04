@@ -126,7 +126,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #Linux
     alias apt="sudo apt-get install -y"
-    type lsb_release >/dev/null 2>&1 && {
     distroName=$(cat /etc/os-release| sed -n 5p | awk -F= '{print $2}')
     if [[ $distroName == raspbian ]]; then
         source "$HOME/.rpitokens.sh"
