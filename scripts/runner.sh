@@ -59,6 +59,8 @@ case "$fileToBeExecuted" in
     *.java ) executeTheFile java "$fileToBeExecuted"
 
         ;;
+    *.tcl ) executeTheFile tclsh "$fileToBeExecuted"
+        ;;
     *.clj ) executeTheFile clojure "$fileToBeExecuted"
         ;;
     *.*)
