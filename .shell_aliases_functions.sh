@@ -21,7 +21,8 @@ export TERMINAL_APP="Terminal.app"
 export GITHUB_ACCOUNT='MenkeTechnologies'
 
 [[ "$(uname)" == Darwin ]] && {
-    export WCC="/Volumes/JAKESD/wcc/cps"
+    export SD_PATH="/Volumes/SD"
+    export WCC="$SD_PATH/wcc/cps"
     export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
     export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
 } || export PATH="$PATH:/usr/games"
@@ -103,8 +104,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
     alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
-    alias c="cd /Volumes/JAKESD/wcc/cps"
-    alias emu="cd /Volumes/JAKESD/EMU"
+    alias c="cd $WCC"
+    alias emu="cd $SD_PATH/emu"
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
     #keep remote tty sessions alive by stopping sleep
