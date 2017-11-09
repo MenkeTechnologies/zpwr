@@ -13,12 +13,13 @@ trap 'rm "$file"' INT
 
 file=/tmp/temp$$
 regex="$1"
+filter="$2"
 cat > "$file"
 output=`cat /tmp/temp$$` 
 delim=$(echo "$output" | grep -n -- "$regex" | cut -d: -f1)
 
 [[ $delim -ne 0 ]] && {
-sed -n "1,$delim"p "$file" | lolcat
+sed -n "1,$delim"p "$file" | "$filter"
 ((delim++))
 sed -n "$delim,$"p "$file"
 } || sed -n '1,$p' "$file"
