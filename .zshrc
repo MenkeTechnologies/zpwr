@@ -372,16 +372,22 @@ if [[ "$(uname)" = Darwin ]]; then
         # builtin cd "$D" && clear
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
-        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] \
-            && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-            "$(hostname)" | ponysay -W 100 | splitStdoutByRegex.sh -- ---------------------- lolcat
-    }
+            [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
+                [[ -f "$SCRIPTS/macOnly/splitStdoutByRegex.sh" ]] && {
+                    bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+                    "$(hostname)" | ponysay -W 100 | splitStdoutByRegex.sh -- ---------------------- lolcat
+                    } || {
+                    bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+                        "$(hostname)" | ponysay -W 100
+                    }
+                }
+            }
     printf "\e[0m"
     # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
     listNoClear
-else
-    clearList
-fi
+    else
+        clearList
+    fi
 else
     distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
 
@@ -390,13 +396,12 @@ else
         if [[ "$distro" =~ Raspbian* ]]; then
             type ponysay 1>/dev/null 2>&1 && {
                 bash "$HOME/motd.sh" | ponysay -W 120 
-        } || bash "$HOME/motd.sh"
+            } || bash "$HOME/motd.sh"
+        fi
+        listNoClear
+    else
+        clearList
     fi
-    listNoClear
-else
-    clearList
-fi
-
 fi
 
 
