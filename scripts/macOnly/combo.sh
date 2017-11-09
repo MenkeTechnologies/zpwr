@@ -13,9 +13,9 @@ echo "$o" | {
     echo "we got $o"
     echo "tommy was here @ $o"
     echo "bad ass peeeeps are "
-    perl -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's/.*/<&>/g' | cowsay -f www
+    perl -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's/.*/<&>/g' | "$SCRIPTS/macOnly/randomCow.sh" 80
     echo
-    perl -E 'say "perl"' | figlet -f cosmic
+    perl -E 'say "perl"' | "$SCRIPTS/macOnly/figletRandomFontOnce.sh"
     echo
     cat /etc/passwd | perl -nE 'print "dogs gone wild $_"' | head | sed 's/./<&>/g'| cowsay -f eyes
 } | sed 's/./&/g' | {
@@ -26,10 +26,10 @@ echo "$o" | {
     ruby -e "10.times do |x| puts \"dogs are cool $x #{x}\" end"
     perl -E 'say "TCL IN THE HOUSE",a..z,-235..235' | fold -w 10 | pr -t -3
     perl -E 'say "perl ftw"' | toilet 
-    node -e 'console.log(process)'  | head | cowsay -f kiss
+    node -e 'console.log(process)'  | head | "$SCRIPTS/macOnly/randomCow.sh" 80
     x=$(date | cut -c1-10)
-    #echo "set x 55; puts \"we got \$x $x\"" | tclsh | figlet -f kban
-    echo "puts \"$o\"" | tclsh | fold -w 6 | figlet -f rozzo
+    #echo "set x 55; puts \"we got \$x $x\"" | tclsh | "$SCRIPTS/macOnly/figletRandomFontOnce.sh"
+    echo "puts \"$o\"" | tclsh | fold -w 6 | "$SCRIPTS/macOnly/figletRandomFontOnce.sh"
 
-} | fold -w 70 | cowsay -f dragon -W 100 |  ponysay -W 100 | splitReg.sh -- ------ lolcat
+} | fold -w 70 | "$SCRIPTS/macOnly/randomCow.sh" 100 |  ponysay -W 100 | splitReg.sh -- ------ lolcat
 

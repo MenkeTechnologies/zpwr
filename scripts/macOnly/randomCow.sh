@@ -3,15 +3,15 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul  3 12:41:20 EDT 2017
-#####   Purpose: bash script to display random figlet fonts
+#####   Purpose: bash script to display random cowsay fonts
 #####   Notes: 
 #}}}***********************************************************
 
-FIGLET_DIR=/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts
+COWSAY_DIR=/usr/local/lib/node_modules/cowsay/cows
 TEXT_TO_DISPLAY="$1"
 FILTER="$2"
 
-for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
+for file in $(find "$COWSAY_DIR" -iname "*.cow"); do
     ary+=( $file )	
 done
 
@@ -21,10 +21,11 @@ randIndex=$(($RANDOM % $rangePossibleIndices))
 font=${ary[$randIndex]}
 
 
-if [[ $# = 0 ]]; then
-    cat | figlet -f "$font" | lolcat
-else
-    output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
+if (( $# == 1 )); then
+    width=$1
+    cat | cowsay -f "$font" -W $width | lolcat
+elif (( $# == 2 ));then
+    output="$(echo $TEXT_TO_DISPLAY | cowsay -f $font)"
 
     if [[ "$FILTER" ]]; then
         echo "$output" | "$FILTER"
