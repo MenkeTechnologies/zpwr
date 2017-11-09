@@ -373,9 +373,9 @@ if [[ "$(uname)" = Darwin ]]; then
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
             [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
-                [[ -f "$SCRIPTS/macOnly/splitStdoutByRegex.sh" ]] && {
+                [[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
                     bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-                    "$(hostname)" | ponysay -W 100 | splitStdoutByRegex.sh -- ---------------------- lolcat
+                    "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
                     } || {
                     bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
                         "$(hostname)" | ponysay -W 100
