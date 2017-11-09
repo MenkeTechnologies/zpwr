@@ -13,7 +13,7 @@ echo "$o" | {
     echo "we got $o"
     echo "tommy was here @ $o"
     echo "bad ass peeeeps are "
-    perl -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's/.*/<&>/g' | "$SCRIPTS/macOnly/randomCow.sh" 80
+    perl -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's/.*/<&>/g' | fold -w 50 | "$SCRIPTS/macOnly/randomCow.sh" 120
     echo
     perl -E 'say "perl"' | "$SCRIPTS/macOnly/figletRandomFontOnce.sh"
     echo
