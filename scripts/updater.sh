@@ -25,7 +25,8 @@ exists(){
 [[ -f "$SCRIPTS/printHeader.sh" ]] && {
     w=80
     perl -le "print '_'x$w" | lolcat
-    bash "$SCRIPTS/printHeader.sh" | ponysay -W 100 | splitStdoutByRegex.sh -- ----------------------- lolcat
+#    bash "$SCRIPTS/printHeader.sh" | ponysay -W 100 | splitReg.sh -- ----------------------- lolcat
+    echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
     perl -le "print '_'x$w" | lolcat
 }
 
