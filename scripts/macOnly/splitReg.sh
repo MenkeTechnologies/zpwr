@@ -11,7 +11,6 @@ trap 'rm "$file"' INT
 
 (( $# < 2 )) && echo "Need a regex and filter.." >&2 && exit 1
 
-
 function usage ()
 {
     echo -e "\e[34mUsage :  $0 [options] [--]
@@ -29,7 +28,9 @@ function usage ()
 
 __ScriptVersion=1.0.0
 
-while getopts "hvi" opt
+level=1
+
+while getopts "hvil:" opt
 do
   case $opt in
 
@@ -38,6 +39,8 @@ do
     v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
     i|inverse )  inverse=true ;;
+
+    l|level)  level=$OPTARG ;;
 
     * )  echo -e "\n  Option does not exist : $OPTARG\n"
           usage; exit 1   ;;
@@ -52,7 +55,7 @@ filter="$2"
 file=/tmp/temp$$
 cat > "$file"
 output=`cat /tmp/temp$$` 
-delim=$(echo "$output" | grep -n -- "$regex" | tail -1 | cut -d: -f1)
+delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
 
 [[ $delim -ne 0 ]] && {
 
