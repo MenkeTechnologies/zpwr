@@ -374,7 +374,7 @@ if [[ "$(uname)" = Darwin ]]; then
             printf "\e[1m"
         [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] \
             && bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-            "$(hostname)" | ponysay -W 100
+            "$(hostname)" | ponysay -W 100 | splitStdoutByRegex.sh ---------------------- lolcat
     }
     printf "\e[0m"
     # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
@@ -389,7 +389,7 @@ else
         builtin cd "$D"
         if [[ "$distro" =~ Raspbian* ]]; then
             type ponysay 1>/dev/null 2>&1 && {
-                bash "$HOME/motd.sh" | ponysay -W 100
+                bash "$HOME/motd.sh" | ponysay -W 120 
         } || bash "$HOME/motd.sh"
     fi
     listNoClear
