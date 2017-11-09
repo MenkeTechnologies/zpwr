@@ -46,12 +46,13 @@ do
 done
 shift $(($OPTIND-1))
 
-file=/tmp/temp$$
 regex="$1"
 filter="$2"
+
+file=/tmp/temp$$
 cat > "$file"
 output=`cat /tmp/temp$$` 
-delim=$(echo "$output" | grep -n -- "$regex" | cut -d: -f1)
+delim=$(echo "$output" | grep -n -- "$regex" | tail -1 | cut -d: -f1)
 
 [[ $delim -ne 0 ]] && {
 
@@ -67,3 +68,9 @@ delim=$(echo "$output" | grep -n -- "$regex" | cut -d: -f1)
 } || sed -n '1,$p' "$file"
 
 rm "$file"
+
+
+#alternatively
+
+#cat | tee >(sed -n "1,/$regex"p) >(sed -n "/$regex/,$p" | "$filter" ) >/dev/null
+#however possibly issues with ordering of output to screen
