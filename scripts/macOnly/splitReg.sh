@@ -9,7 +9,6 @@
 
 trap 'rm "$file"' INT
 
-(( $# < 2 )) && echo "Need a regex and filter.." >&2 && exit 1
 
 function usage ()
 {
@@ -48,6 +47,8 @@ do
   esac    # --- end of case ---
 done
 shift $(($OPTIND-1))
+
+(( $# < 2 )) && echo "Need a regex and filter.." >&2 && exit 1
 
 regex="$1"
 filter="$2"
