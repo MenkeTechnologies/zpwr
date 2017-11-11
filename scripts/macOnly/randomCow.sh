@@ -22,18 +22,11 @@ rangePossibleIndices=${#ary[*]}
 randIndex=$(($RANDOM % $rangePossibleIndices))
 font=${ary[$randIndex]}
 
-
+width=$1
 if (( $# == 1 )); then
-    width=$1
-    cat | cowsay -f "$font" -W$width | lolcat
+    cat | cowsay -f "$font" -W$width
 elif (( $# == 2 ));then
-    output="$(echo $TEXT_TO_DISPLAY | cowsay -f $font)"
-
-    if [[ "$FILTER" ]]; then
-        echo "$output" | "$FILTER"
-    else
-        echo "$output"
-    fi
+    cat | cowsay -f "$font" -W$width | "$FILTER"
 
 fi
 
