@@ -7,6 +7,8 @@
 #####   Notes: 
 #}}}***********************************************************
 
+(( $# == 0 )) && echo "need an arg " >&2 && exit 1
+
 COWSAY_DIR=/usr/local/lib/node_modules/cowsay/cows
 TEXT_TO_DISPLAY="$1"
 FILTER="$2"
