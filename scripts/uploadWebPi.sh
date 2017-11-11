@@ -14,14 +14,17 @@ printf "${BLUE}"
 printf "Uploading $* to $address\n" | "$SCRIPTS/macOnly/combo.sh"
 
 #loop through all arguments and upload with scp recursively to pi server
-python -c "print('_'*100)" | lolcat
+
+w=80
+
+python -c "print('_'*$w)" | lolcat
 printf "${BLUE}"
 for i in "$@"; do
 	scp -r -P $RPI_PORT "$i" "$address" 2>/dev/null
 done
 
 #decolrize prompt with RESET environment variable
-perl -le 'print"_"x 100' | lolcat
+perl -le "print'_'x $w" | lolcat
 printf "$BLUEDone\n${RESET}"
 
 #if just uploading to website one html file
