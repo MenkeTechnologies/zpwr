@@ -23,7 +23,7 @@ font=${ary[$randIndex]}
 
 if (( $# == 1 )); then
     width=$1
-    cat | cowsay -f "$font" -W $width | lolcat
+    cat | cowsay -f "$font" -W$width | lolcat
 elif (( $# == 2 ));then
     output="$(echo $TEXT_TO_DISPLAY | cowsay -f $font)"
 
