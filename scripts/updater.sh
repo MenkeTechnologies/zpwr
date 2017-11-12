@@ -7,6 +7,7 @@
 #####   Notes:
 #}}}***********************************************************
 # clear screen
+trap 'figlet bye | ponysay -Wn; exit 0' INT
 clear
 
 prettyPrint(){
