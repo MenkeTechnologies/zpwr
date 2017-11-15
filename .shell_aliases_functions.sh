@@ -119,6 +119,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias wg="cd $HOME/WebstormProjects"
     alias rg="cd $HOME/RubymineProjects"
     alias sudoedit='sudo $EDITOR'
+    alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
     exists mvim && { 
         alias vi='mvim -v'
         alias vim='mvim -v'

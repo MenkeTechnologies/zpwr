@@ -10,7 +10,7 @@
 (( $# == 0 )) && echo "need an arg " >&2 && exit 1
 
 COWSAY_DIR=/usr/local/lib/node_modules/cowsay/cows
-TEXT_TO_DISPLAY="$1"
+width=$1
 FILTER="$2"
 
 for file in $(find "$COWSAY_DIR" -iname "*.cow"); do
@@ -22,7 +22,6 @@ rangePossibleIndices=${#ary[*]}
 randIndex=$(($RANDOM % $rangePossibleIndices))
 font=${ary[$randIndex]}
 
-width=$1
 if (( $# == 1 )); then
     cat | cowsay -f "$font" -W$width
 elif (( $# == 2 ));then
