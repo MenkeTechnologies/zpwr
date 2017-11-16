@@ -337,7 +337,7 @@ zstyle ':completion:*' matcher-list '' \
 #}}}
 
 #global aliases
-alias -g L='|less -M'
+alias -g L='|less -MN'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
 
