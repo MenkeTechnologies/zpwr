@@ -361,11 +361,6 @@ source "$HOME/z.sh"
 ## Then, source plugins and add commands to $PATH
 #zplug load
 
-export GOPATH="$HOME/go"
-
-if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
-    source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
-fi
 #go to desktop if not root
 if [[ "$(uname)" = Darwin ]]; then
     if [[ "$UID" != "0" ]]; then
