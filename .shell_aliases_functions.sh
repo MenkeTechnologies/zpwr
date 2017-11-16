@@ -69,6 +69,13 @@ if [[ -z "$SCRIPTS" ]]; then
     #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
     #**************************************************************
     #}}}
+    say hello
+
+    export GOPATH="$HOME/go"
+
+    if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
+        source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
+    fi
 fi
 #}}}
 
