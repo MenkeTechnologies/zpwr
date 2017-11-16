@@ -51,6 +51,7 @@ if [[ -z "$SCRIPTS" ]]; then
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
     }
     export YARN_HOME="$HOME/.config/yarn"
+    export PERL5LIB="$HOME/perl5/lib/perl5"
     export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
     export HISTSIZE=50000
     export EDITOR='vim'
@@ -69,7 +70,6 @@ if [[ -z "$SCRIPTS" ]]; then
     #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
     #**************************************************************
     #}}}
-    say hello
 
     export GOPATH="$HOME/go"
 
@@ -561,4 +561,3 @@ exec "$SHELL"
 
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 
-export PERL5LIB="$HOME/perl5/lib/perl5"
