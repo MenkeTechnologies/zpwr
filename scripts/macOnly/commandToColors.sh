@@ -8,6 +8,8 @@
 #}}}***********************************************************
 
 command="$@"
+out="$(eval $command)"
 
-echo "$command"
-ponysay -Wn "$(eval "$command" | randomCow.sh n)" | splitReg.sh -- --------------- lolcat
+[[ -z "$out" ]] && out=NULL
+
+ponysay -Wn "$(echo "$out" | randomCow.sh n)" | splitReg.sh -- --------------- lolcat

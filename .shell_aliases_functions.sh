@@ -6,59 +6,70 @@ exists(){
 
 #{{{                    MARK:ENV Var
 #**************************************************************
-export CLICOLOR="YES"
-export LSCOLORS="ExFxBxDxCxegedabagacad"
-export TERM="xterm-256color"
-export SCRIPTS="$HOME/Documents/shellScripts"
-export PYEXECUTABLES="$HOME/Documents/pythonScripts"
-export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
-export D="$HOME/Desktop"
-export DL="$HOME/Downloads"
-export XAUTHORITY="$HOME/.Xauthority"
-export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
-export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
-export TERMINAL_APP="Terminal.app"
-export GITHUB_ACCOUNT='MenkeTechnologies'
+if [[ -z "$SCRIPTS" ]]; then
+    export CLICOLOR="YES"
+    export LSCOLORS="ExFxBxDxCxegedabagacad"
+    export TERM="xterm-256color"
+    export SCRIPTS="$HOME/Documents/shellScripts"
+    export PYEXECUTABLES="$HOME/Documents/pythonScripts"
+    export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
+    export D="$HOME/Desktop"
+    export DL="$HOME/Downloads"
+    export XAUTHORITY="$HOME/.Xauthority"
+    export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
+    export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
+    export TERMINAL_APP="Terminal.app"
+    export GITHUB_ACCOUNT='MenkeTechnologies'
 
-[[ "$(uname)" == Darwin ]] && {
-    export SD_PATH="/Volumes/SD"
-    export WCC="$SD_PATH/wcc/cps"
-    export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
-    export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
-} || export PATH="$PATH:/usr/games"
-export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m:\e[0;34m${LINENO}\e[37m:\e[0;32m${FUNCNAME[0]}> \e[0m'
+    [[ "$(uname)" == Darwin ]] && {
+        export SD_PATH="/Volumes/SD"
+        export WCC="$SD_PATH/wcc/cps"
+        export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
+        export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
+    } || export PATH="$PATH:/usr/games"
+    export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m:\e[0;34m${LINENO}\e[37m:\e[0;32m${FUNCNAME[0]}> \e[0m'
 
-exists yarn && export PATH="$(yarn global bin):$PATH"
-#}}}***********************************************************
+    exists yarn && export PATH="$(yarn global bin):$PATH"
+    #}}}***********************************************************
 
-#{{{                           MARK:HOMES
-#**********************************************************************
-[[ "$(uname)" == Darwin ]] && {
-    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
-    export HOMEBREW_HOME='/usr/local/Cellar'
-    export HOMEBREW_OPT_HOME='/usr/local/opt'
-    export GROOVY_HOME="$HOMEBREW_OPT_HOME/groovy"
-    export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
-    export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
-    export HOMEBREW_DBHOME='/usr/local/var'
-    export HOMEBREW_DB_CONF='/usr/local/etc'
-    eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
-    export MANPATH=$HOME/perl5/man:$MANPATH
-    export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
-    export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
-    export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
-    export PIP_HOME="/usr/local/lib/python2.7/site-packages"
-}
-export YARN_HOME="$HOME/.config/yarn"
-export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
-export HISTSIZE=50000
-export EDITOR='vim'
-export HISTTIMEFORMAT=' %F %T _ '
-export BLUE="\e[37;44m"
-export RED="\e[31m"
-export RESET="\e[0m"
-export LOGFILE="$HOME/updaterlog.txt"
-export UMASK=077
+    #{{{                           MARK:HOMES
+    #**********************************************************************
+    [[ "$(uname)" == Darwin ]] && {
+        export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+        export HOMEBREW_HOME='/usr/local/Cellar'
+        export HOMEBREW_OPT_HOME='/usr/local/opt'
+        export GROOVY_HOME="$HOMEBREW_OPT_HOME/groovy"
+        export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
+        export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
+        export HOMEBREW_DBHOME='/usr/local/var'
+        export HOMEBREW_DB_CONF='/usr/local/etc'
+        eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+        export MANPATH=$HOME/perl5/man:$MANPATH
+        export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
+        export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
+        export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
+        export PIP_HOME="/usr/local/lib/python2.7/site-packages"
+    }
+    export YARN_HOME="$HOME/.config/yarn"
+    export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
+    export HISTSIZE=50000
+    export EDITOR='vim'
+    export HISTTIMEFORMAT=' %F %T _ '
+    export BLUE="\e[37;44m"
+    export RED="\e[31m"
+    export RESET="\e[0m"
+    export LOGFILE="$HOME/updaterlog.txt"
+    export UMASK=077
+    #                           MARK:RUST                           
+    #**********************************************************************
+    export PATH="$HOME/.cargo/bin:$PATH"
+    #**********************************************************************
+    #                           MARK:RVM                           
+    #**********************************************************************
+    #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
+    #**************************************************************
+    #}}}
+fi
 #}}}
 
 #{{{                          MARK:ALIASES
@@ -194,15 +205,6 @@ exists tput && {
 alias ic="idea create"
 alias il="idea list"
 #**********************************************************************
-#                           MARK:RUST                           
-#**********************************************************************
-export PATH="$PATH:$HOME/.cargo/bin:$PATH"
-#**********************************************************************
-#                           MARK:RVM                           
-#**********************************************************************
-#export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
-#**************************************************************
-#}}}
 
 
 #{{{                    MARK:Shell functions
