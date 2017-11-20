@@ -216,6 +216,10 @@ alias il="idea list"
 
 #{{{                    MARK:Shell functions
 #**************************************************************
+s(){
+[[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
+
+}
 to(){
     for file;do
         dirname="$(dirname $file)"
