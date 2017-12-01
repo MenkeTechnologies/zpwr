@@ -18,6 +18,8 @@ ZSH_THEME="simonoff"
 #colors for common commands
 [[ -f "$HOME/grc.zsh" ]] && source "$HOME/grc.zsh"
 
+export SHELL="/usr/local/bin/zsh"
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
