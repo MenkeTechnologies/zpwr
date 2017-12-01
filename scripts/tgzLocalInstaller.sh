@@ -8,39 +8,35 @@
 #}}}***********************************************************
 tarbellDirectory="$1"
 
+trap "echo bye | ponysay" INT
+
 install(){
-    if [[ "$tarbellDirectory" =~ .*.tar.gz ]];then
-        directory_name="${tarbellDirectory%.tar.gz}"
-    elif [[ "$tarbellDirectory" =~ .*.tgz ]];then
-        directory_name="${tarbellDirectory%.tgz}"
+    if [[ "$1" =~ .*\.tar\.gz ]];then
+        directory_name="${1%.tar.gz}"
+    elif [[ "$1" =~ .*\.tgz ]];then
+        directory_name="${1%.tgz}"
     else
         echo "Need to be tar.gz or .tgz for automatic!"
         echo "What is the tarball path?"
         read directory_name
     fi
 
-    tar xvfz "$tarbellDirectory"
-    cd "$directory_name" && {
+    tar xvfz "$1"
+    cd *"$directory_name" && {
     ./configure && make && sudo make install
     }
 }
 
 if [[ -z "$tarbellDirectory" ]]; then
     if [[ ! -f "configure" ]];then
-        for file in "$(ls -A)"; do
-            if [[ "$file" =~ .*.tar.gz || "$file" =~ .*.tgz ]];then
-                install "$file"
-                exit 0
-            fi
-            echo "$file"
+        for file in $(\ls -A); do
+            echo "$file" | egrep -q '\.tar\.gz|\.tgz' && echo "huere" && install "$file" && break
         done
 
-        install
     else
         ./configure && make && sudo make install
     fi
 else
     install "$tarbellDirectory"
 fi
-
 
