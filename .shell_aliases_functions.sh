@@ -162,7 +162,7 @@ alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
 alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
 alias tmm_full="python3 $PYSCRIPTS/complete_ssh_starter.py" 
-alias inst="source $SCRIPTS/tgzLocalInstaller.sh"
+alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************

@@ -6,9 +6,49 @@
 #####   Purpose: bash script to install .tgz packages
 #####   Notes: 
 #}}}***********************************************************
-tarbellDirectory="$1"
 
-trap "echo bye | ponysay" INT
+
+trap "echo bye; exit 1" INT
+
+__ScriptVersion="1.0.0"
+
+#===  FUNCTION  ================================================================
+#         NAME:  usage
+#  DESCRIPTION:  Display usage information.
+#===============================================================================
+function usage ()
+{
+    echo "Usage :  $0 [options] [--]
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version
+    -n|no-install No sudo make install" >&2
+
+}    # ----------  end of function usage  ----------
+
+#-----------------------------------------------------------------------
+#  Handle command line arguments
+#-----------------------------------------------------------------------
+
+while getopts ":hvn" opt
+do
+  case $opt in
+
+    h|help     )  usage; exit 0   ;;
+
+    v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+
+    n|no-install  )  no_install=true   ;;
+
+    * )  echo -e "\n  Option does not exist : $OPTARG\n"
+          usage; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
+tarbellDirectory="$1"
 
 install(){
     if [[ "$1" =~ .*\.tar\.gz ]];then
@@ -23,7 +63,11 @@ install(){
 
     tar xvfz "$1"
     cd *"$directory_name" && {
-    ./configure && make && sudo make install
+        if [[ $no_install == true ]]; then
+            ./configure && make
+        else
+            ./configure && make && sudo make install
+        fi
     }
 }
 
@@ -32,11 +76,16 @@ if [[ -z "$tarbellDirectory" ]]; then
         for file in $(\ls -A); do
             echo "$file" | egrep -q '\.tar\.gz|\.tgz' && echo "huere" && install "$file" && break
         done
-
+        "$SHELL"
     else
-        ./configure && make && sudo make install
+        if [[ $no_install == true ]]; then
+            ./configure && make
+        else
+            ./configure && make && sudo make install
+        fi
     fi
 else
     install "$tarbellDirectory"
+    "$SHELL"
 fi
 
