@@ -336,7 +336,7 @@ function Reset()
     set iskeyword&
 endfunction
 
-let blacklist=['md', 'sh','hs']
+let blacklist=['md', 'sh','hs', 'pl']
 
 augroup indentGroup
     autocmd!
