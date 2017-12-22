@@ -369,30 +369,30 @@ if [[ "$(uname)" = Darwin ]]; then
         # builtin cd "$D" && clear
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
-            [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
-                [[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
-                    bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-                    "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
-                    } || {
-                    bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-                        "$(hostname)" | ponysay -W 100
-                    }
+        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
+            [[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
+            bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+            "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
+    } || {
+        bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+        "$(hostname)" | ponysay -W 100
+}
                 }
             }
-    printf "\e[0m"
-    # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
-    listNoClear
+            printf "\e[0m"
+            # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
+            listNoClear
+        else
+            clearList
+        fi
     else
-        clearList
-    fi
-else
-    distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
+        distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
 
-    if [[ "$UID" != "0" ]]; then
-        builtin cd "$D"
-        if [[ "$distro" =~ Raspbian* ]]; then
-            type ponysay 1>/dev/null 2>&1 && {
-                bash "$HOME/motd.sh" | ponysay -W 120 
+        if [[ "$UID" != "0" ]]; then
+            builtin cd "$D"
+            if [[ "$distro" =~ Raspbian* ]]; then
+                type ponysay 1>/dev/null 2>&1 && {
+                    bash "$HOME/motd.sh" | ponysay -W 120 
             } || bash "$HOME/motd.sh"
         fi
         listNoClear
@@ -424,4 +424,6 @@ zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;32=1;33
 
 zstyle ':completion:*' group-name ''
 
-SAVEHIST=20000
+export SAVEHIST=50000
+export HISTSIZE=50000
+
