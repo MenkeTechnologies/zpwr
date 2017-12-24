@@ -285,6 +285,9 @@ setopt CSH_NULL_GLOB
 
 setopt nolistbeep
 
+# > file creates file
+setopt shnullcmd
+
 # }}}
 
 # Auto Completion {{{
