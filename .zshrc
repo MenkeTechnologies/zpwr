@@ -418,8 +418,14 @@ zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;32=1;33
 
 zstyle ':completion:*' group-name ''
 
+#change history file size
 export SAVEHIST=50000
+#change history size
 export HISTSIZE=50000
+
+#shell to recognize env variables in prompt
 : ~WCC
 : ~SCRIPTS
+
+#set right prompt string during continuation 
 RPS2='+%N:%i:%^'
