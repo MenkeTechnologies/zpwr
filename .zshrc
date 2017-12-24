@@ -68,8 +68,6 @@ source $ZSH/oh-my-zsh.sh
 
 source $ZSH/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-#has all my aliases and functioms
-source ~/.shell_aliases_functions.sh
 
 #get rid of mercurial prompt
 hg_prompt_info(){}
@@ -80,12 +78,8 @@ hg_prompt_info(){}
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
-else
-    export EDITOR='vim'
-fi
+#has all my aliases and functioms
+source ~/.shell_aliases_functions.sh
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -426,4 +420,6 @@ zstyle ':completion:*' group-name ''
 
 export SAVEHIST=50000
 export HISTSIZE=50000
-
+: ~WCC
+: ~SCRIPTS
+RPS2='+%N:%i:%^'

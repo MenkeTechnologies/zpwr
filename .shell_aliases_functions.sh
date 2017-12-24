@@ -49,12 +49,14 @@ if [[ -z "$SCRIPTS" ]]; then
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
         export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
+        export EDITOR='mvim -v'
+    } || {
+        export EDITOR='vim'
     }
     export YARN_HOME="$HOME/.config/yarn"
     export PERL5LIB="$HOME/perl5/lib/perl5"
     export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
     export HISTSIZE=50000
-    export EDITOR='vim'
     export HISTTIMEFORMAT=' %F %T _ '
     export BLUE="\e[37;44m"
     export RED="\e[31m"
