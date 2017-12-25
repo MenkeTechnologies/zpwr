@@ -285,8 +285,11 @@ setopt CSH_NULL_GLOB
 
 setopt nolistbeep
 
-# > file creates file
+# > file creates files
 setopt shnullcmd
+
+# allow unquoted globs to pass through
+setopt nobadpattern
 
 # }}}
 
