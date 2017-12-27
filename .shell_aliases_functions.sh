@@ -186,9 +186,9 @@ alias ud="bash $SCRIPTS/upLoadDS.sh"
 alias uweb="bash $SCRIPTS/uploadWebDS.sh"
 alias sy="bash $SCRIPTS/sync.sh"
 alias sf="bash $SCRIPTS/directoryContentsSize.sh"
-alias sc="cd $SCRIPTS"
-alias blue="source $SCRIPTS/blueText.sh"
-alias dl="cd $HOME/Downloads"
+alias sc='cd $SCRIPTS'
+alias blue='source $SCRIPTS/blueText.sh'
+alias dl='cd $HOME/Downloads'
 alias o="open ."
 alias jobs="jobs -l"
 alias 8="bash -l updater.sh"
@@ -262,9 +262,9 @@ db(){
 }
 
 if [[ -f /usr/local/share/grc/conf.gls ]];then
-alias lr='grc -c /usr/local/share/grc/conf.gls gls -iAlhFR --color=always'
+    alias lr='grc -c /usr/local/share/grc/conf.gls gls -iAlhFR --color=always'
 elif [[ -f /usr/share/grc/conf.gls ]];then
-alias lr='grc -c /usr/share/grc/conf.gls ls -iAlhFR --color=always'
+    alias lr='grc -c /usr/share/grc/conf.gls ls -iAlhFR --color=always'
 fi
 clearList () {
 

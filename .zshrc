@@ -291,6 +291,10 @@ setopt shnullcmd
 # allow unquoted globs to pass through
 setopt nobadpattern
 
+setopt numericglobsort
+
+setopt magicequalsubst
+
 # }}}
 
 # Auto Completion {{{
