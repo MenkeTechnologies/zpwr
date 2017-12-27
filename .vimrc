@@ -69,6 +69,7 @@ set showcmd
 "set clipboard=unnamed
 
 set list listchars=tab:\ \ ,trail:·
+
 filetype off                  " required
 
 "{{{                    MARK:Vundle
