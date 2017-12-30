@@ -106,13 +106,13 @@ bindkey -M vicmd '^r' history-incremental-search-backward
 #{{{                    MARK:Custom Fxns
 #**************************************************************
 
-function _sub {
+_sub (){
     zle kill-whole-line
     BUFFER="suc"
     zle .accept-line
 
 }
-function _updater {
+_updater (){
     zle kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
@@ -120,13 +120,13 @@ function _updater {
     zle .accept-line
 }
 
-function _gitfunc {
+_gitfunc () {
     gitCommitAndPush "$BUFFER"
     zle kill-whole-line
     zle .accept-line
 }
 
-function _tutsUpdate() {
+_tutsUpdate() {
     commitMessage="$BUFFER"
     if [[ "$commitMessage" ]]; then
         if [[ "$commitMessage" =~ ^\ +$ ]]; then
@@ -143,13 +143,13 @@ function _tutsUpdate() {
     fi
 }
 
-function _tmm() {
+_tmm() {
     zle kill-whole-line
     BUFFER=tmm
     zle .accept-line
 }
 
-function _db() {
+_db() {
     zle kill-whole-line
     BUFFER=db
     zle .accept-line
@@ -224,7 +224,7 @@ precmd(){
     #exec 2> >(blueUpperText.sh)
 }
 
-function rationalize-dot {
+rationalize-dot (){
     if [[ $LBUFFER = *.. ]]; then
         LBUFFER+=/..
     else
