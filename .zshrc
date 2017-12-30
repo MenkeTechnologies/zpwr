@@ -11,9 +11,14 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="simonoff"
 
 #if this is a mac or linux
-[[ "$(uname)" == "Darwin" ]] && source \
-    "$HOME/.powerlevel9kconfig.sh" \
-    || export RPROMPT="%{%B%}`tty` `echo $$ $-`"
+[[ "$(uname)" == "Darwin" ]] && {
+    source "$HOME/.powerlevel9kconfig.sh" \
+	: ~WCC
+} || {
+	export RPROMPT="%{%B%}`tty` `echo $$ $-`"
+}
+#shell to recognize env variables in prompt
+: ~SCRIPTS
 
 #colors for common commands
 [[ -f "$HOME/grc.zsh" ]] && source "$HOME/grc.zsh"
@@ -432,9 +437,6 @@ export SAVEHIST=50000
 #change history size
 export HISTSIZE=50000
 
-#shell to recognize env variables in prompt
-: ~WCC
-: ~SCRIPTS
 
 #set right prompt string during continuation 
 RPS2='+%N:%i:%^'
