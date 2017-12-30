@@ -133,11 +133,12 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $SCRIPTS/sshTunnelVnc.sh" 
     alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $SCRIPTS/sshTunnelVnc2.sh"
     alias rtsync="$HOME/Documents/shellScripts/macOnly/rsyncr.sh"
-    alias ig="cd $HOME/IdeaProjects"
-    alias pg="cd $HOME/PycharmProjects"
-    alias cg="cd $HOME/ClionProjects"
-    alias wg="cd $HOME/WebstormProjects"
-    alias rg="cd $HOME/RubymineProjects"
+    alias ig='cd $HOME/IdeaProjects'
+    alias pg='cd $HOME/PycharmProjects'
+    alias cg='cd $HOME/ClionProjects'
+    alias wg='cd $HOME/WebstormProjects'
+    alias rg='cd $HOME/RubymineProjects'
+    alias ap='cd /Applications'
     alias sudoedit='sudo $EDITOR'
     alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
     exists mvim && { 
@@ -189,6 +190,7 @@ alias sf="bash $SCRIPTS/directoryContentsSize.sh"
 alias sc='cd $SCRIPTS'
 alias blue='source $SCRIPTS/blueText.sh'
 alias dl='cd $HOME/Downloads'
+alias doc='cd $HOME/Documents'
 alias o="open ."
 alias jobs="jobs -l"
 alias 8="bash -l updater.sh"
@@ -202,7 +204,7 @@ alias mkdir='mkdir -pv'
 #                           MARK:REMOTE SHELLS SCRIPTS
 #**********************************************************************
 alias glt="ssh d -t 'sh /var/services/homes/JAKENAS/scripts/downloadTitlesLocal.sh'"
-alias grt="ssh d -tt 'sh /var/services/homes/JAKENAS/scripts/downloadTitlesRemote.sh'"
+alias grt="ssh d -tt 'sh /var/services/homes/JAKENAS/scripts/downloadTitlesRemote.shc"
 alias mntpi="sshfs -o IdentityFile=$HOME/.ssh/id_rsa r:/var/www/html $HOME/Desktop/tuts/piweb/"
 alias mntds="sshfs -o IdentityFile=$HOME/.ssh/id_rsa d:/volume1/homes/JAKENAS/softwareTutorials $HOME/Desktop/tuts/ds/"
 
@@ -387,6 +389,7 @@ cd(){
 }
 gitCommitAndPush(){
     printf "\e[1m"
+
     git add .
     git commit -m "$1"
     git push

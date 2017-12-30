@@ -438,3 +438,6 @@ export HISTSIZE=50000
 
 #set right prompt string during continuation 
 RPS2='+%N:%i:%^'
+
+zstyle ':completion:*:manuals' separate-sections true
+

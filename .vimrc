@@ -427,8 +427,9 @@ execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 let os = substitute(system('uname'), "\n", "", "")
+
 if os == "Darwin"
-set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+    set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 elseif os == "Linux"
     set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 endif
