@@ -10,15 +10,6 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="simonoff"
 
-#if this is a mac or linux
-[[ "$(uname)" == "Darwin" ]] && {
-    source "$HOME/.powerlevel9kconfig.sh" \
-	: ~WCC
-} || {
-	export RPROMPT="%{%B%}`tty` `echo $$ $-`"
-}
-#shell to recognize env variables in prompt
-: ~SCRIPTS
 
 #colors for common commands
 [[ -f "$HOME/grc.zsh" ]] && source "$HOME/grc.zsh"
@@ -85,6 +76,15 @@ hg_prompt_info(){}
 #has all my aliases and functioms
 source ~/.shell_aliases_functions.sh
 
+#if this is a mac or linux
+[[ "$(uname)" == "Darwin" ]] && {
+    source "$HOME/.powerlevel9kconfig.sh" \
+	: ~WCC
+} || {
+	export RPROMPT="%{%B%}`tty` `echo $$ $-`"
+}
+#shell to recognize env variables in prompt
+: ~SCRIPTS
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
