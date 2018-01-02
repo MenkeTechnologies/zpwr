@@ -239,6 +239,11 @@ fi
 zle -N rationalize-dot
 bindkey . rationalize-dot
 
+bindkey -M listscroll q send-break
+bindkey -M listscroll f complete-word
+
+
+bindkey -M menuselect '\C-o' accept-and-menu-complete
 #}}}***********************************************************
 
 # Set Options {{{
@@ -299,6 +304,8 @@ setopt numericglobsort
 
 setopt magicequalsubst
 
+#auto select first item of menu completion
+setopt menu_complete
 # }}}
 
 # Auto Completion {{{
@@ -310,12 +317,12 @@ zmodload -i zsh/complist
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-# Fallback to built in ls colors
+# Fallback to built in ls colors, menu active to white text on blue background
 zstyle ':completion:*' list-colors 'ma=37;44'
 
 # Make the list prompt friendly
 zstyle ':completion:*' list-prompt \
-    $'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%M%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
 
 # Make the selection prompt friendly when there are a lot of choices
 zstyle ':completion:*' select-prompt \
