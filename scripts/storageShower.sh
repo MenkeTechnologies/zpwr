@@ -7,4 +7,4 @@
 #####   Notes: 
 #}}}***********************************************************
 
-bash $SCRIPTS/myWatchMaintainEscapes.sh 'grc --colour=auto df -h'
+bash $SCRIPTS/myWatchMaintainEscapes.sh 'grc --colour=auto df -h' "$@"

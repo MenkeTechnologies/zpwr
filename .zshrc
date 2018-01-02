@@ -107,6 +107,7 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 bindkey -v
 bindkey -M viins '^r' history-incremental-search-backward
 bindkey -M vicmd '^r' history-incremental-search-backward
+bindkey -M viins '^z' undo
 
 #{{{                    MARK:Custom Fxns
 #**************************************************************
@@ -305,6 +306,11 @@ setopt magicequalsubst
 
 #auto select first item of menu completion
 setopt menu_complete
+
+setopt rcexpandparam
+
+#display octal and hex like C
+setopt cbases
 # }}}
 
 # Auto Completion {{{
@@ -345,12 +351,16 @@ zstyle ':completion:*' format \
 zstyle ':completion:*:descriptions' format \
     $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
 
-zstyle ':completion:*:corrections' format '%B%d (errors: %e)%b'
+zstyle ':completion:*:corrections' format \
+    $'\e[1;31m-<<\e[0;34m%d (errors: %e)\e[1;31m>>-\e[0m'
+
 zstyle ':completion:*:messages' format \
     $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
 
 zstyle ':completion:*:warnings' format \
     $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
+zstyle ':completion:*' auto-description 'Specify: %d'
+
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
 # 2 -- word flex completion (abc => A-big-Car)
