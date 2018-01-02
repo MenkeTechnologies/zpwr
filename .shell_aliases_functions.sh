@@ -375,7 +375,9 @@ f(){
     cd "$1"
 }
 execpy(){
-    python3 $PYSCRIPTS/"$1"
+    script="$1"
+    shift
+    python3 $PYSCRIPTS/"$script" "$@"
 
 }
 search(){
