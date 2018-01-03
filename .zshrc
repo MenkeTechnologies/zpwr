@@ -58,7 +58,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions tmux sublime ruby gem rake rails yarn ng coffee node npm perl osx pod debian brews cpanm git github gradle scala spring django pip python man nmap postgres colorize sudo z rsync)
+plugins=(fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions ruby gem rake rails yarn ng coffee node npm perl cpanm osx pod debian brew git github gradle ant mvn scala lein spring django pip python go man nmap postgres redis-cli colorize sudo z rsync docker tmux sublime vundle)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -74,15 +74,6 @@ hg_prompt_info(){}
 #has all my aliases and functioms
 source ~/.shell_aliases_functions.sh
 
-#if this is a mac or linux
-[[ "$(uname)" == "Darwin" ]] && {
-    source "$HOME/.powerlevel9kconfig.sh" \
-    : ~WCC
-} || {
-    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
-}
-#shell to recognize env variables in prompt
-: ~SCRIPTS
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -464,3 +455,12 @@ export HISTSIZE=50000
 RPS2='+%N:%i:%^'
 
 
+#if this is a mac or linux
+[[ "$(uname)" == "Darwin" ]] && {
+    source "$HOME/.powerlevel9kconfig.sh"
+    : ~WCC
+} || {
+    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
+}
+#shell to recognize env variables in prompt
+: ~SCRIPTS
