@@ -203,11 +203,6 @@ alias mkdir='mkdir -pv'
 #**********************************************************************
 #                           MARK:REMOTE SHELLS SCRIPTS
 #**********************************************************************
-alias glt="ssh d -t 'sh /var/services/homes/JAKENAS/scripts/downloadTitlesLocal.sh'"
-alias grt="ssh d -tt 'sh /var/services/homes/JAKENAS/scripts/downloadTitlesRemote.shc"
-alias mntpi="sshfs -o IdentityFile=$HOME/.ssh/id_rsa r:/var/www/html $HOME/Desktop/tuts/piweb/"
-alias mntds="sshfs -o IdentityFile=$HOME/.ssh/id_rsa d:/volume1/homes/JAKENAS/softwareTutorials $HOME/Desktop/tuts/ds/"
-
 
 exists tput && {
 	bold=$(tput bold || tput md)
