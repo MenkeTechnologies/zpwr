@@ -19,7 +19,7 @@ executableScriptsProcessing(){
 openTextEditor(){
     open -t "$newfile"
     #run python3 script with pyautogi commands for keyboard shortcuts
-    python3 $HOME/PycharmProjects/textEditorTwoColumns.py
+    python3 $HOME/PycharmProjects/fromShell/textEditorTwoColumns.py
 }
 
 addHeader(){
