@@ -160,7 +160,7 @@ else
 fi
 alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
-alias logs="tail -f /var/log/*.log | lolcat"
+alias logs="tail -f /var/log/**/*.log | ccze"
 alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
 alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
