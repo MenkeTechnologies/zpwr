@@ -58,7 +58,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions tmux sublime ng ruby yarn github gem npm perl osx node brews cpanm git gradle pip python scala man nmap postgres colorize django ruby spring sudo)
+plugins=(fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions tmux sublime ruby gem rake rails yarn ng coffee node npm perl osx pod debian brews cpanm git github gradle scala spring django pip python man nmap postgres colorize sudo z rsync)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -392,9 +392,6 @@ zstyle ':completion:*:manuals' separate-sections true
 alias -g L='|less -MN'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
-
-#allow for awesome z command
-source "$HOME/z.sh"
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
