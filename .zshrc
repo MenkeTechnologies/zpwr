@@ -62,8 +62,6 @@ plugins=(fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions tmu
 
 source $ZSH/oh-my-zsh.sh
 
-
-
 #get rid of mercurial prompt
 hg_prompt_info(){}
 # User configuration
