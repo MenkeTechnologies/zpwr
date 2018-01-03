@@ -19,12 +19,13 @@ EOM
 exit 1
 }
 
-optstring=dh
+optstring=dhl:
 while getopts $optstring opt
 do
     case $opt in
         h) usage >&2; break;;
-        d)dateflag=true;break;;
+        d) dateflag=true;break;;
+        l) limitFlag=true; num=$OPTARG; break;;
         *) usage >&2;;
     esac
 done
@@ -55,7 +56,11 @@ while [[ true ]]; do
         echo
         printf "\e[1m`date`\e[0m"
     else
+    if [[ $limitFlag == true ]]; then
+        echo -en "$x" | head -n $num
+    else
         echo -en "$x"
+    fi
     fi
     sleep $time
 done
