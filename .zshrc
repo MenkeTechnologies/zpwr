@@ -101,13 +101,13 @@ bindkey -M viins '^z' undo
 #{{{                    MARK:Custom Fxns
 #**************************************************************
 
-_sub (){
+sub (){
     zle kill-whole-line
     BUFFER="suc"
     zle .accept-line
 
 }
-_updater (){
+updater (){
     zle kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
@@ -115,13 +115,13 @@ _updater (){
     zle .accept-line
 }
 
-_gitfunc () {
+gitfunc () {
     gitCommitAndPush "$BUFFER"
     zle kill-whole-line
     zle .accept-line
 }
 
-_tutsUpdate() {
+tutsUpdate() {
     commitMessage="$BUFFER"
     if [[ "$commitMessage" ]]; then
         if [[ "$commitMessage" =~ ^\ +$ ]]; then
@@ -138,13 +138,13 @@ _tutsUpdate() {
     fi
 }
 
-_tmm() {
+sshRegain() {
     zle kill-whole-line
     BUFFER=tmm
     zle .accept-line
 }
 
-_db() {
+db() {
     zle kill-whole-line
     BUFFER=db
     zle .accept-line
@@ -162,27 +162,27 @@ zle -N expand-aliases
 
 bindkey '\e^E' expand-aliases
 
-zle -N _gitfunc
-zle -N _updater
-zle -N _sub
-zle -N _db
-zle -N _tmm
-zle -N _tutsUpdate
+zle -N gitfunc
+zle -N updater
+zle -N sub
+zle -N db
+zle -N sshRegain
+zle -N tutsUpdate
 
-bindkey '\e[1;5D' _db
-bindkey '\e[1;2D' _sub
+bindkey '\e[1;5D' db
+bindkey '\e[1;2D' sub
 #press both escape and control f then oo
-bindkey '\e^f' _sub
-bindkey '^@' _tmm
+bindkey '\e^f' sub
+bindkey '^@' sshRegain
 
-bindkey '\e[1;5B' _updater
+bindkey '\e[1;5B' updater
 #F1 key
-bindkey '\eOP' _updater
+bindkey '\eOP' updater
 #F2 key
-bindkey '\eOQ' _sub
-bindkey '\e[1;5A' _gitfunc
-bindkey '^S' _gitfunc
-bindkey '\e[1;5C' _tutsUpdate
+bindkey '\eOQ' sub
+bindkey '\e[1;5A' gitfunc
+bindkey '^S' gitfunc
+bindkey '\e[1;5C' tutsUpdate
 bindkey '```' sudo-command-line
 bindkey '^T' transpose-words
 
@@ -350,6 +350,11 @@ zstyle ':completion:*:warnings' format \
     $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
 zstyle ':completion:*' auto-description 'Specify: %d'
 
+# don't complete duplicates for these commands
+zstyle ':completion::*:(git-add|git-rm|less|rm|vi|vim|v):*' ignore-line true
+
+zstyle ':complete:*' ignore-parents parent pwd
+
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
 # 2 -- word flex completion (abc => A-big-Car)
@@ -377,6 +382,7 @@ zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;32=1;33
 zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:manuals' separate-sections true
+
 #}}}
 
 #global aliases
@@ -458,9 +464,21 @@ RPS2='+%N:%i:%^'
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
     source "$HOME/.powerlevel9kconfig.sh"
-    : ~WCC
+: ~WCC
 } || {
     export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 }
 #shell to recognize env variables in prompt
 : ~SCRIPTS
+
+
+colortest(){
+    for backgroundColor in ${(ko)bg}; do
+        print -n "$bg[$backgroundColor]"
+        for foregroundColor in ${(ko)fg}; do
+            printf '%s%-8s' $fg[$foregroundColor] $foregroundColor
+        done
+        print $reset_color
+        printf "%40s\n" "on $backgroundColor"
+    done
+}
