@@ -158,6 +158,18 @@ functions[_expand-aliases]=$BUFFER
     CURSOR=$#BUFFER
 }
 
+changeQuotes(){
+    echo "$BUFFER" | grep -q \' && {
+    BUFFER=${BUFFER//\'/\"}
+    } || {
+        BUFFER=${BUFFER//\"/\'}
+    }
+}
+
+zle -N changeQuotes
+
+bindkey '^K' changeQuotes
+
 zle -N expand-aliases
 
 bindkey '\e^E' expand-aliases
