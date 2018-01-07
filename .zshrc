@@ -475,9 +475,25 @@ RPS2='+%N:%i:%^'
 colortest(){
     for backgroundColor in ${(ko)bg}; do
         print -n "$bg[$backgroundColor]"
-        for foregroundColor in ${(ko)fg}; do
-            printf '%s%-8s' $fg[$foregroundColor] $foregroundColor
-        done
+        printf '%s%-8s' $fg[black] black
+        printf '%s%-8s' $fg[red] red
+        printf '%s%-8s' $fg[green] green
+        printf '%s%-8s' $fg[yellow] yellow
+        printf '%s%-8s' $fg[blue] blue
+        printf '%s%-8s' $fg[magenta] magenta
+        printf '%s%-8s' $fg[cyan] cyan
+        printf '%s%-8s' $fg[white] white
+        print $reset_color
+        print -n "$bg[$backgroundColor]"
+        printf "\x1b[1m"
+        printf '%s%-8s' $fg[black] black
+        printf '%s%-8s' $fg[red] red
+        printf '%s%-8s' $fg[green] green
+        printf '%s%-8s' $fg[yellow] yellow
+        printf '%s%-8s' $fg[blue] blue
+        printf '%s%-8s' $fg[magenta] magenta
+        printf '%s%-8s' $fg[cyan] cyan
+        printf '%s%-8s' $fg[white] white
         print $reset_color
         printf "%40s\n" "on $backgroundColor"
     done
