@@ -102,13 +102,13 @@ bindkey -M viins '^z' undo
 #**************************************************************
 
 sub (){
-    zle kill-whole-line
+    zle .kill-whole-line
     BUFFER="suc"
     zle .accept-line
 
 }
 updater (){
-    zle kill-whole-line
+    zle .kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
     BUFFER="( cat $SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $LOGFILE | perl -pne 's/\\e\[.*m/\n/g' | mutt -s \"Log from `date`\" jamenk@me.com 2>$LOGFILE &)"
@@ -117,7 +117,7 @@ updater (){
 
 gitfunc () {
     gitCommitAndPush "$BUFFER"
-    zle kill-whole-line
+    zle .kill-whole-line
     zle .accept-line
 }
 
@@ -128,7 +128,7 @@ tutsUpdate() {
             printf "No commit message\n" >&2
             zle .accept-line
         else
-            zle kill-whole-line
+            zle .kill-whole-line
             BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$LOGFILE\" 2>&1 & )"
             zle .accept-line
         fi
@@ -139,13 +139,13 @@ tutsUpdate() {
 }
 
 sshRegain() {
-    zle kill-whole-line
+    zle .kill-whole-line
     BUFFER=tmm
     zle .accept-line
 }
 
 db() {
-    zle kill-whole-line
+    zle .kill-whole-line
     BUFFER=db
     zle .accept-line
 }
