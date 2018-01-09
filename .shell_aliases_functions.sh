@@ -219,7 +219,7 @@ s(){
 [[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
 
 }
-to(){
+,(){
     for file;do
         dirname="$(dirname $file)"
         [[ "$dirname" != . ]] && mkdir -p "$dirname"
