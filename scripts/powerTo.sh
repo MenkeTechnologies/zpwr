@@ -20,7 +20,7 @@ function usage ()
     Options:
     -h|help       Display this message
     -v|version    Display script version
-    -l|alone      Leave me alone" >&2
+    -l|alone      Don't run the command in the active pane" >&2
 
 }    # ----------  end of function usage  ----------
 
