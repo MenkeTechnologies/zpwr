@@ -20,7 +20,7 @@ function usage ()
     Options:
     -h|help       Display this message
     -v|version    Display script version
-    -l|alone      Leave me alone"
+    -l|alone      Leave me alone" >&2
 
 }    # ----------  end of function usage  ----------
 
@@ -43,11 +43,11 @@ do
 
     h|help     )  usage; exit 0   ;;
 
-    v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+    v|version  )  echo "$0 -- Version $__ScriptVersion" >&2; exit 0   ;;
 
     l)  leavePresentPaneAloneFlag=true ;;
 
-    * )  echo -e "\n  Option does not exist : $OPTARG\n"
+    * )  echo -e "\n  Option does not exist : $OPTARG\n" >&2
           usage; exit 1   ;;
 
   esac    # --- end of case ---
