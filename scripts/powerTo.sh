@@ -1,0 +1,74 @@
+#!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+#####   Author: JACOBMENKE
+#####   Date: Wed Jan 10 17:43:40 EST 2018
+#####   Purpose: bash script to 
+#####   Notes: 
+#}}}***********************************************************
+
+__ScriptVersion="1.0.0"
+
+#===  FUNCTION  ================================================================
+#         NAME:  usage
+#  DESCRIPTION:  Display usage information.
+#===============================================================================
+function usage ()
+{
+    echo "Usage :  $0 [options] [--]
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version
+    -l|alone      Leave me alone"
+
+}    # ----------  end of function usage  ----------
+
+#-----------------------------------------------------------------------
+#  Handle command line arguments
+#-----------------------------------------------------------------------
+
+set -x
+
+leaveMeAlone=false
+
+while getopts ":hvl" opt
+do
+  case $opt in
+
+    h|help     )  usage; exit 0   ;;
+
+    v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+
+    l)  leaveMeAlone=true ;;
+
+    * )  echo -e "\n  Option does not exist : $OPTARG\n"
+          usage; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
+(( $# == 0)) && echo "Need an arg." >&2 && exit 1
+
+if (( $# == 2 ));then
+    num=$1
+    shift
+else
+    num=`tmux list-panes | wc -l`
+fi
+
+active=$(tmux list-panes | grep active | cut -c1)
+
+for (( i = 0; i < $num; i++ )); do
+    if [[ leaveMeAlone == true ]]; then
+        if (( $i == $active ));then
+            continue
+        fi
+    fi
+    tmux selectp -t $i
+    tmux send-keys "$*" C-M
+
+done
+
+tmux selectp -t $active

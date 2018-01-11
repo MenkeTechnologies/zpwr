@@ -563,16 +563,6 @@ wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller
 exec "$SHELL"
 }
 
-powerTo(){
-    num=$1
-    shift
-for (( i = 0; i < $num; i++ )); do
-    tmux selectp -t $i
-    tmux send-keys "$@" C-M
-done
-tmux selectp -t 0
-
-}
 
 #}}}***********************************************************
 
