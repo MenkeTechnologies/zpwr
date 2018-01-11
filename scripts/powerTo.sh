@@ -28,15 +28,14 @@ function usage ()
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
-set -x
-
+#set -x
 
 type tmux >/dev/null 2>&1 || {
     echo "You don't have tmux so we are exiting..." >&2
     exit 1
 }
 
-leaveMeAlone=false
+leavePresentPaneAloneFlag=false
 
 while getopts ":hvl" opt
 do
@@ -46,7 +45,7 @@ do
 
     v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
-    l)  leaveMeAlone=true ;;
+    l)  leavePresentPaneAloneFlag=true ;;
 
     * )  echo -e "\n  Option does not exist : $OPTARG\n"
           usage; exit 1   ;;
@@ -57,7 +56,7 @@ shift $(($OPTIND-1))
 
 (( $# == 0)) && echo "Need an arg." >&2 && exit 1
 
-realNum=`tmux list-panes | wc -l`
+realNum=$(tmux list-panes | wc -l)
 
 if (( $# == 2 ));then
     num=$1
@@ -73,7 +72,7 @@ fi
 active=$(tmux list-panes | grep active | cut -c1)
 
 for (( i = 0; i < $num; i++ )); do
-    if [[ leaveMeAlone == true ]]; then
+    if [[ $leavePresentPaneAloneFlag == true ]]; then
         if (( $i == $active ));then
             continue
         fi
