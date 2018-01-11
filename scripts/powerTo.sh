@@ -30,6 +30,12 @@ function usage ()
 
 set -x
 
+
+type tmux >/dev/null 2>&1 || {
+    echo "You don't have tmux so we are exiting..." >&2
+    exit 1
+}
+
 leaveMeAlone=false
 
 while getopts ":hvl" opt
@@ -51,11 +57,17 @@ shift $(($OPTIND-1))
 
 (( $# == 0)) && echo "Need an arg." >&2 && exit 1
 
+realNum=`tmux list-panes | wc -l`
+
 if (( $# == 2 ));then
     num=$1
+    #limit to number of panes
+    if (( num > realNum ));then
+        num=realNum
+    fi
     shift
 else
-    num=`tmux list-panes | wc -l`
+    num=realNum
 fi
 
 active=$(tmux list-panes | grep active | cut -c1)
