@@ -111,6 +111,7 @@ alias tree='tree -afC'
 alias ta="tmux attach"
 alias h="cd /usr/local"
 alias e="cd /etc"
+alias ~="cd"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -sL'
 #Darwin specific aliases
@@ -125,7 +126,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
     alias c="cd $WCC"
-    alias ~="cd"
     alias emu="cd $SD_PATH/emu"
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
