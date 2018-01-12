@@ -125,6 +125,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
     alias c="cd $WCC"
+    alias ~="cd"
     alias emu="cd $SD_PATH/emu"
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
