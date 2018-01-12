@@ -268,7 +268,7 @@ clearList () {
 
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-        ls_command="grc -c /usr/local/share/grc/conf.gls \
+        ls_command="grc -c $HOME/conf.gls \
         gls -iFlhA --color=always"
         } || {
         ls_command="ls -iFlhAO"
@@ -276,7 +276,7 @@ clearList () {
         lib_command="otool -L"
     else
         exists grc && {
-        ls_command="grc -c /usr/share/grc/conf.gls \
+        ls_command="grc -c $HOME/conf.gls \
         ls -iFlhA --color=always"
         } || {
         ls_command="ls -iFhlA"
