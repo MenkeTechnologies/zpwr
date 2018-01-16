@@ -160,9 +160,9 @@ functions[_expand-aliases]=$BUFFER
 
 changeQuotes(){
     echo "$BUFFER" | grep -q \' && {
-    BUFFER=${BUFFER//\'/\"}
-    } || {
-        BUFFER=${BUFFER//\"/\'}
+        BUFFER=${BUFFER//\'/\"}
+} || {
+    BUFFER=${BUFFER//\"/\'}
     }
 }
 
@@ -510,3 +510,9 @@ colortest(){
         printf "%40s\n" "on $backgroundColor"
     done
 }
+
+_gimp(){
+    _files -g '*.(jpg|png|tif)(-.)'
+}
+
+compdef _gimp gimp
