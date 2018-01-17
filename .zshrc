@@ -58,7 +58,7 @@ HIST_STAMPS="mm/dd/yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions ruby gem rake rails yarn ng coffee node npm perl cpanm osx pod debian brew git github gradle ant mvn scala lein spring django pip python go man nmap postgres redis-cli colorize sudo z rsync docker tmux sublime vundle)
+plugins=(more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions ruby gem rake rails yarn ng coffee node npm perl cpanm osx pod debian brew git github gradle ant mvn scala lein spring django pip python go man nmap postgres redis-cli colorize sudo z rsync docker tmux sublime vundle)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -510,9 +510,3 @@ colortest(){
         printf "%40s\n" "on $backgroundColor"
     done
 }
-
-_gimp(){
-    _files -g '*.(jpg|png|tif)(-.)'
-}
-
-compdef _gimp gimp
