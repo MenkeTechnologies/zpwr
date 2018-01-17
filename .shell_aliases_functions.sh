@@ -268,7 +268,7 @@ clearList () {
 
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-        ls_command="grc -c $HOME/conf.gls \
+        ls_command="grc -c "$HOME/conf.gls" \
         gls -iFlhA --color=always"
         } || {
         ls_command="ls -iFlhAO"
@@ -276,7 +276,7 @@ clearList () {
         lib_command="otool -L"
     else
         exists grc && {
-        ls_command="grc -c $HOME/conf.gls \
+        ls_command="grc -c "$HOME/conf.gls" \
         ls -iFlhA --color=always"
         } || {
         ls_command="ls -iFhlA"
@@ -333,14 +333,14 @@ clearList () {
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-        grc -c /usr/local/share/grc/conf.gls gls \
+        grc -c "$HOME/conf.gls" gls \
         -iFlhA --color=always
         } || {
         ls -iFlhAO
         }
     else
         exists grc && {
-            grc -c /usr/share/grc/conf.gls \
+            grc -c "$HOME/conf.gls" \
             ls -iFlhA --color=always
         } || {
         ls -iFhlA
@@ -353,7 +353,7 @@ animate(){
 blocksToSize(){
     read input
     local bytes=$(( input * 512 ))
-    echo $bytes | humanReadable 
+    echo $bytes | humanReadable
 }
 
 humanReadable(){
