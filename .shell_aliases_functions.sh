@@ -284,7 +284,7 @@ clearList () {
         lib_command="ldd -v"
     fi
 
-    if [[ "$1" ]]; then
+    if [[ ! -z "$1" ]]; then
         for command in "$@"; do
             exists $command &&  {
             #exe matching
@@ -353,7 +353,7 @@ animate(){
 blocksToSize(){
     read input
     local bytes=$(( input * 512 ))
-    echo $bytes | humanReadable
+    echo $bytes | humanceadable
 }
 
 humanReadable(){
@@ -407,9 +407,9 @@ createGIF(){
 
     [[ -z "$1" ]] && echo "One arg need..." >&2 && return 1
 
-    [[ "$2" ]] && res="$2"
+    [[ ! -z "$2" ]] && res="$2"
 
-    [[ "$3" ]] && outFile="$3"	
+    [[ ! -z "$3" ]] && outFile="$3"	
 
     ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
 }
@@ -461,7 +461,7 @@ mp4(){
 }
 
 prettyPrint(){
-    [[ "$1" ]] && printf "\e[1m$1\e[0m\n" || {
+    [[ ! -z "$1" ]] && printf "\e[1m$1\e[0m\n" || {
         echo "Need one arg" >&2
         return 1
     }
