@@ -73,6 +73,8 @@ if [[ -z "$SCRIPTS" ]]; then
     #**************************************************************
     #}}}
 
+    #{{{                    MARK:GO
+    #**************************************************************
     export GOPATH="$HOME/go"
 
     if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
