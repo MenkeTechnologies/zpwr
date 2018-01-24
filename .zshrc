@@ -258,7 +258,8 @@ bindkey -M listscroll f complete-word
 bindkey -M menuselect '\C-o' accept-and-menu-complete
 #}}}***********************************************************
 
-# Set Options {{{
+#{{{                    MARK:Setopt Options
+#**************************************************************
 # ===== Basics
 setopt rcquotes # allow '' escape
 setopt interactive_comments # Allow comments even in interactive shells (especially for Muness)
@@ -323,9 +324,10 @@ setopt rcexpandparam
 
 #display octal and hex like C
 setopt cbases
-# }}}
+#}}}***********************************************************
 
-# Auto Completion {{{
+#{{{                    MARK:AutoCompletions
+#**************************************************************
 # avoid insecure warning message with -u
 autoload -U compinit && compinit u
 # allow scrolling pager through completion list
@@ -406,7 +408,7 @@ zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:manuals' separate-sections true
 
-#}}}
+#}}}***********************************************************
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
@@ -532,4 +534,3 @@ colortest(){
 }
 
 #}}}***********************************************************
-
