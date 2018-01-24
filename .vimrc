@@ -24,11 +24,13 @@ endif
 filetype plugin indent on
 
 "}}}***********************************************************
+
+""{{{                    MARK:Settings
+""**************************************************************
 "backslash replaced by comma
 let mapleader = ','
 
 set nocompatible              " be iMproved, required
-
 "for YouCompleteMe doc window to open at bottom
 set splitright
 set noswapfile
@@ -69,11 +71,11 @@ set showcmd
 "set clipboard=unnamed
 
 set list listchars=tab:\ \ ,trail:·
-
-filetype off                  " required
+""}}}***********************************************************
 
 "{{{                    MARK:Vundle
 "**************************************************************
+filetype off                  " required
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -190,10 +192,11 @@ let g:webdevicons_enable_nerdtree=0
 
 
 call vundle#end()            " required
-""}}}***********************************************************
+
 filetype plugin indent on    " required
 filetype plugin on
 
+""}}}***********************************************************
 
 "{{{                    MARK:Mappings
 "**************************************************************
