@@ -1,3 +1,5 @@
+#{{{                    MARK:Exports
+#**************************************************************
 export LC_ALL="en_US.UTF-8"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -51,34 +53,16 @@ export SHELL="/usr/local/bin/zsh"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 HIST_STAMPS="mm/dd/yyyy"
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions ruby gem rake rails yarn ng coffee node npm perl cpanm osx pod debian brew git github gradle ant mvn scala lein spring django pip python go man nmap postgres redis-cli colorize sudo z rsync docker tmux sublime vundle)
-
-source $ZSH/oh-my-zsh.sh
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 #get rid of mercurial prompt
 hg_prompt_info(){}
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-#has all my aliases and functioms
-source ~/.shell_aliases_functions.sh
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -93,10 +77,31 @@ ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 
-bindkey -v
-bindkey -M viins '^r' history-incremental-search-backward
-bindkey -M vicmd '^r' history-incremental-search-backward
-bindkey -M viins '^z' undo
+#}}}***********************************************************
+
+#{{{                    MARK:Plugins
+#**************************************************************
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions ruby gem rake rails yarn ng coffee node npm perl cpanm osx pod debian brew git github gradle ant mvn scala lein spring django pip python go man nmap postgres redis-cli colorize sudo z rsync docker tmux sublime vundle)
+#}}}***********************************************************
+
+#{{{                    MARK:Sourcing
+#**************************************************************
+
+source $ZSH/oh-my-zsh.sh
+
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
+
+#has all my aliases and functioms
+source ~/.shell_aliases_functions.sh
+#}}}***********************************************************
 
 #{{{                    MARK:Custom Fxns
 #**************************************************************
@@ -166,6 +171,11 @@ changeQuotes(){
     }
 }
 
+bindkey -v
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
+bindkey -M viins '^z' undo
+
 zle -N changeQuotes
 
 bindkey '^K' changeQuotes
@@ -197,6 +207,7 @@ bindkey '^S' gitfunc
 bindkey '\e[1;5C' tutsUpdate
 bindkey '```' sudo-command-line
 bindkey '^T' transpose-words
+
 
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
@@ -397,7 +408,8 @@ zstyle ':completion:*:manuals' separate-sections true
 
 #}}}
 
-#global aliases
+#{{{                    MARK:Global Aliases
+#**************************************************************
 alias -g L='|less -MN'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
@@ -418,7 +430,13 @@ alias -g nerr="2> /dev/null"
 #
 ## Then, source plugins and add commands to $PATH
 #zplug load
+#
+#
 
+#}}}***********************************************************
+
+#{{{                    MARK:Initialize Login
+#**************************************************************
 #go to desktop if not root
 if [[ "$(uname)" = Darwin ]]; then
     if [[ "$UID" != "0" ]]; then
@@ -482,8 +500,10 @@ RPS2='+%N:%i:%^'
 }
 #shell to recognize env variables in prompt
 : ~SCRIPTS
+#}}}***********************************************************
 
-
+#{{{                    MARK:ColorTest
+#**************************************************************
 colortest(){
     for backgroundColor in ${(ko)bg}; do
         print -n "$bg[$backgroundColor]"
@@ -510,3 +530,6 @@ colortest(){
         printf "%40s\n" "on $backgroundColor"
     done
 }
+
+#}}}***********************************************************
+
