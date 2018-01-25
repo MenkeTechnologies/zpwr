@@ -7,7 +7,7 @@
 #####   Notes:
 #}}}***********************************************************
 # clear screen
-trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn; exit 0' INT
+trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
 clear
 
 prettyPrint(){
@@ -15,6 +15,9 @@ prettyPrint(){
     printf "$1"
     printf "\n\e[0m"
 }
+
+
+prettyPrint 
 
 exists(){
     type "$1" >/dev/null 2>&1
