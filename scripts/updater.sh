@@ -67,9 +67,9 @@ exists pip2 && {
 
 exists /usr/local/bin/ruby && {
     prettyPrint "Updating Ruby Packages"
-    /usr/loca/bin/gem update --system
-    /usr/loca/bin/gem update
-    /usr/loca/bin/gem cleanup
+    /usr/local/bin/gem update --system
+    /usr/local/bin/gem update
+    /usr/local/bin/gem cleanup
 }
 
 exists brew && {
@@ -192,4 +192,5 @@ vim -c VundleUpdate -c quitall
 
 #decolorize prompt
 echo -e "Done\e[0m"
-clear
+
+clear && ls -AlhFi
