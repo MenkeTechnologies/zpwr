@@ -497,11 +497,14 @@ RPS2='+%N:%i:%^'
 [[ "$(uname)" == "Darwin" ]] && {
     source "$HOME/.powerlevel9kconfig.sh"
 : ~WCC
+: ~HOMEBREW_HOME_FORMULAE
 } || {
     export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 }
 #shell to recognize env variables in prompt
 : ~SCRIPTS
+: ~D
+: ~DL
 #}}}***********************************************************
 
 #{{{                    MARK:ColorTest
