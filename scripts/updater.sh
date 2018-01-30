@@ -193,4 +193,4 @@ vim -c VundleUpdate -c quitall
 #decolorize prompt
 echo -e "Done\e[0m"
 
-clear && ls -AlhFi
+clear && cd ~/Desktop
