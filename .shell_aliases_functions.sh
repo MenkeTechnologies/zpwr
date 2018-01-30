@@ -115,7 +115,7 @@ alias tree='tree -afC'
 alias ta="tmux attach"
 alias h="cd /usr/local"
 alias e="cd /etc"
-alias j="cd $HOME"
+alias a="cd $HOME"
 alias k="pkill"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -sL'
@@ -176,7 +176,7 @@ alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
 alias m="execpy mapIt.py"
-alias a="execpy amazonSearch.py"
+alias j="execpy amazonSearch.py"
 alias shut="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
