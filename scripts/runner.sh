@@ -17,7 +17,7 @@ executableScriptsProcessing(){
 executeTheFile(){
     executableScriptsProcessing "$2"
     #execute the file with the proper interpreter or compiler
-    eval "$1 $2"
+    eval "$1 \"$2\""
     sleep 1000
 }
 
