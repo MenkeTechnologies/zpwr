@@ -115,7 +115,8 @@ alias tree='tree -afC'
 alias ta="tmux attach"
 alias h="cd /usr/local"
 alias e="cd /etc"
-alias ~="cd ~"
+alias j="cd ~"
+alias k="pkill"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -sL'
 #Darwin specific aliases
