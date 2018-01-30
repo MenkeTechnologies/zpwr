@@ -19,8 +19,16 @@ w=80
 
 python -c "print('_'*$w)" | lolcat
 printf "${BLUE}"
+total=$#
+count=0
 for i in "$@"; do
 	scp -r -P $RPI_PORT "$i" "$address" 2>/dev/null
+    ((count++))
+    if (( count == total )); then
+        link="http://$MY_IP:$RPI_HTML_PORT/$i"
+        echo "Download at $link" | figletRandomFontOnce.sh | ponysay | splitReg.sh -- --------- lolcat
+        printf "$link" | pbcopy
+    fi
 done
 
 #decolrize prompt with RESET environment variable
