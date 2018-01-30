@@ -569,6 +569,11 @@ wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller
 exec "$SHELL"
 }
 
+torip(){
+    ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
+    whois $ip
+    echo $ip
+}
 
 #}}}***********************************************************
 
