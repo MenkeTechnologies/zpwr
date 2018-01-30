@@ -28,13 +28,23 @@ INTERFACE=Wi-Fi
 function disable_proxy() {
     sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
     prettyPrint "SOCKS proxy disabled"
+    sudo spoof reset wi-fi
+    sudo networksetup -setairportpower en0 off
+    sudo networksetup -setairportpower en0 on
     exit 1
 }
 
 trap disable_proxy INT
 
+sudo networksetup -setairportpower en0 off
+sudo spoof randomize wi-fi
+sudo networksetup -setairportpower en0 on
+
+
 sudo networksetup -setsocksfirewallproxy "$INTERFACE" 127.0.0.1 9050 off
 sudo networksetup -setsocksfirewallproxystate "$INTERFACE" on
+
+
 
 prettyPrint "SOCKS proxy 127.0.0.1:9050 enabled."
 prettyPrint "Starting Tor..."
