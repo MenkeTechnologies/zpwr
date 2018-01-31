@@ -359,10 +359,10 @@ if os == "Darwin"
     map <ESC>[1;5C <C-Right>
     map <ESC>[1;5D <C-Left>
 elseif os == "Linux"
-    map <ESC>OA <C-Up>
-    map <ESC>OB <C-Down>
-    map <ESC>OC <C-Right>
-    map <ESC>OD <C-Left>
+    map <ESC>[A <C-Up>
+    map <ESC>[B <C-Down>
+    map <ESC>[C <C-Right>
+    map <ESC>[D <C-Left>
 
 endif
 
