@@ -192,20 +192,23 @@ zle -N db
 zle -N sshRegain
 zle -N tutsUpdate
 
-bindkey '\e[1;5D' db
 bindkey '\e[1;2D' sub
 #press both escape and control f then oo
 bindkey '\e^f' sub
 bindkey '^@' sshRegain
 
-bindkey '\e[1;5B' updater
 #F1 key
 bindkey '\eOP' updater
 #F2 key
 bindkey '\eOQ' sub
+
+#Ctrl plus arrow keys
 bindkey '\e[1;5A' gitfunc
-bindkey '^S' gitfunc
+bindkey '\e[1;5B' updater
 bindkey '\e[1;5C' tutsUpdate
+bindkey '\e[1;5D' db
+
+bindkey '^S' gitfunc
 bindkey '```' sudo-command-line
 bindkey '^T' transpose-words
 

@@ -221,7 +221,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 vnoremap <C-c> "*y
- 
+
 " Repeat last command in the next tmux pane.
 function TmuxRepeat()
     let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua']
@@ -318,10 +318,10 @@ endfunction
 
 nnoremap <silent> <leader>z :call IndentSqueeze()<cr>
 "for navigating thru fold markers set by vim
-inoremap <silent> <C-down> <C-[>:<C-U>call GoToNextMarker("{{{",0)<CR>i
-inoremap <silent> <C-up> <C-[>:<C-U>call GoToNextMarker("{{{",1)<CR>i
-nnoremap <silent> <C-down> :<C-U>call GoToNextMarker("{{{",0)<CR>
-nnoremap <silent> <C-up> :<C-U>call GoToNextMarker("{{{",1)<CR>
+inoremap <silent> <C-Down> <C-[>:<C-U>call GoToNextMarker("{{{",0)<CR>i
+inoremap <silent> <C-Up> <C-[>:<C-U>call GoToNextMarker("{{{",1)<CR>i
+nnoremap <silent> <C-Down> :<C-U>call GoToNextMarker("{{{",0)<CR>
+nnoremap <silent> <C-Up> :<C-U>call GoToNextMarker("{{{",1)<CR>
 
 function Quoter()
     "w,e,b will not see these characters as delimiters
@@ -351,6 +351,12 @@ augroup indentGroup
         autocmd CursorHoldI * :call Indent()
     endif
 augroup end
+
+
+map <ESC>[1;5A <C-Up>
+map <ESC>[1;5B <C-Down>
+map <ESC>[1;5C <C-Right>
+map <ESC>[1;5D <C-Left>
 
 nnoremap <silent> <leader>" :call Quoter()<CR>lmaea"<ESC>bi"<ESC>:call Reset()<CR>`a
 nnoremap <silent> <leader>' :call Quoter()<CR>lmaea'<ESC>bi'<ESC>:call Reset()<CR>`a
