@@ -352,11 +352,20 @@ augroup indentGroup
     endif
 augroup end
 
+let os = substitute(system('uname'), "\n", "", "")
+if os == "Darwin"
+    map <ESC>[1;5A <C-Up>
+    map <ESC>[1;5B <C-Down>
+    map <ESC>[1;5C <C-Right>
+    map <ESC>[1;5D <C-Left>
+elseif os == "Linux"
+    map <ESC>0A <C-Up>
+    map <ESC>0B <C-Down>
+    map <ESC>0C <C-Right>
+    map <ESC>0D <C-Left>
 
-map <ESC>[1;5A <C-Up>
-map <ESC>[1;5B <C-Down>
-map <ESC>[1;5C <C-Right>
-map <ESC>[1;5D <C-Left>
+endif
+
 
 nnoremap <silent> <leader>" :call Quoter()<CR>lmaea"<ESC>bi"<ESC>:call Reset()<CR>`a
 nnoremap <silent> <leader>' :call Quoter()<CR>lmaea'<ESC>bi'<ESC>:call Reset()<CR>`a
@@ -436,7 +445,6 @@ autocmd BufNewFile * exe "normal! G" | startinsert!
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-let os = substitute(system('uname'), "\n", "", "")
 
 if os == "Darwin"
     set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
