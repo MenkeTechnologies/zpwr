@@ -145,7 +145,8 @@ tutsUpdate() {
 
 sshRegain() {
     zle .kill-whole-line
-    BUFFER=tmm
+
+    ps -ef | grep tmux && BUFFER=tmm_full || BUFFER=tmm
     zle .accept-line
 }
 
