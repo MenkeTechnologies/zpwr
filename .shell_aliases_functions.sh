@@ -8,7 +8,7 @@ exists(){
 
 #{{{                    MARK:ENV Var
 #**************************************************************
-    export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
+export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 if [[ -z "$SCRIPTS" ]]; then
     export CLICOLOR="YES"
     export LSCOLORS="ExFxBxDxCxegedabagacad"
@@ -26,62 +26,57 @@ if [[ -z "$SCRIPTS" ]]; then
 
     [[ "$(uname)" == Darwin ]] && {
         export SD_PATH="/Volumes/SD"
-        export WCC="$SD_PATH/wcc/cps"
-        export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
-        export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
-    } || export PATH="$PATH:/usr/games"
+    export WCC="$SD_PATH/wcc/cps"
+    export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
+    export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
+} || export PATH="$PATH:/usr/games"
 
-    exists yarn && export PATH="$(yarn global bin):$PATH"
-    #}}}***********************************************************
+exists yarn && export PATH="$(yarn global bin):$PATH"
+#}}}***********************************************************
 
-    #{{{                           MARK:HOMES
-    #**********************************************************************
-    [[ "$(uname)" == Darwin ]] && {
-        export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
-        export HOMEBREW_HOME='/usr/local/Cellar'
-        export HOMEBREW_OPT_HOME='/usr/local/opt'
-        export GROOVY_HOME="$HOMEBREW_OPT_HOME/groovy"
-        export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
-        export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
-        export HOMEBREW_DBHOME='/usr/local/var'
-        export HOMEBREW_DB_CONF='/usr/local/etc'
-        eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
-        export MANPATH=$HOME/perl5/man:$MANPATH
-        export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
-        export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
-        export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
-        export PIP_HOME="/usr/local/lib/python2.7/site-packages"
-        export EDITOR='mvim -v'
-    } || {
-        export EDITOR='vim'
-    }
-    export YARN_HOME="$HOME/.config/yarn"
-    export PERL5LIB="$HOME/perl5/lib/perl5"
-    export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
-    export HISTSIZE=50000
-    export HISTTIMEFORMAT=' %F %T _ '
-    export BLUE="\e[37;44m"
-    export RED="\e[31m"
-    export RESET="\e[0m"
-    export LOGFILE="$HOME/updaterlog.txt"
-    export UMASK=077
-    #                           MARK:RUST                           
-    #**********************************************************************
-    export PATH="$HOME/.cargo/bin:$PATH"
-    #**********************************************************************
-    #                           MARK:RVM                           
-    #**********************************************************************
-    #export PATH="$HOME/.rvm/bin:$PATH" # Add RVM to PATH for scripting
-    #**************************************************************
-    #}}}
+#{{{                           MARK:HOMES
+#**********************************************************************
+[[ "$(uname)" == Darwin ]] && {
+    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+export HOMEBREW_HOME='/usr/local/Cellar'
+export HOMEBREW_OPT_HOME='/usr/local/opt'
+export GROOVY_HOME="$HOMEBREW_OPT_HOME/groovy"
+export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
+export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
+export HOMEBREW_DBHOME='/usr/local/var'
+export HOMEBREW_DB_CONF='/usr/local/etc'
+eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+export MANPATH=$HOME/perl5/man:$MANPATH
+export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
+export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
+export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
+export PIP_HOME="/usr/local/lib/python2.7/site-packages"
+export EDITOR='mvim -v'
+} || {
+    export EDITOR='vim'
+}
+export YARN_HOME="$HOME/.config/yarn"
+export PERL5LIB="$HOME/perl5/lib/perl5"
+export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
+export HISTSIZE=50000
+export HISTTIMEFORMAT=' %F %T _ '
+export BLUE="\e[37;44m"
+export RED="\e[31m"
+export RESET="\e[0m"
+export LOGFILE="$HOME/updaterlog.txt"
+export UMASK=077
+#{{{                    MARK:Rust
+#**************************************************************
+export PATH="$HOME/.cargo/bin:$PATH"
+#}}}***********************************************************
 
-    #{{{                    MARK:GO
-    #**************************************************************
-    export GOPATH="$HOME/go"
+#{{{                    MARK:GO
+#**************************************************************
+export GOPATH="$HOME/go"
 
-    if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
-        source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
-    fi
+if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
+    source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
+fi
 fi
 #}}}
 
@@ -149,9 +144,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
     exists mvim && { 
         alias vi='mvim -v'
-        alias vim='mvim -v'
-        alias v='mvim -v -u ~/.minvimrc'
-    }
+    alias vim='mvim -v'
+    alias v='mvim -v -u ~/.minvimrc'
+}
 else
     #Linux
     alias apt="sudo apt-get install -y"
@@ -161,8 +156,8 @@ else
     fi
     exists vim && { 
         alias vi=vim
-        alias v='vim -u ~/.minvimrc'
-    }
+    alias v='vim -u ~/.minvimrc'
+}
 fi
 alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
@@ -211,8 +206,8 @@ alias mkdir='mkdir -pv'
 #**********************************************************************
 
 exists tput && {
-	bold=$(tput bold || tput md)
-	red=$(tput setaf 1)
+    bold=$(tput bold || tput md)
+red=$(tput setaf 1)
 }
 alias ic="idea create"
 alias il="idea list"
@@ -222,15 +217,15 @@ alias il="idea list"
 #{{{                    MARK:Shell functions
 #**************************************************************
 s(){
-[[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
+    [[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
 
 }
 ,(){
-    for file;do
-        dirname="$(dirname $file)"
-        [[ "$dirname" != . ]] && mkdir -p "$dirname"
-        touch "$file"
-    done
+for file;do
+    dirname="$(dirname $file)"
+    [[ "$dirname" != . ]] && mkdir -p "$dirname"
+    touch "$file"
+done
 }
 
 scnew(){
@@ -273,26 +268,26 @@ clearList () {
 
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-        ls_command="grc -c "$HOME/conf.gls" \
-        gls -iFlhA --color=always"
-        } || {
+            ls_command="grc -c "$HOME/conf.gls" \
+            gls -iFlhA --color=always"
+    } || {
         ls_command="ls -iFlhAO"
-        }
-        lib_command="otool -L"
+}
+lib_command="otool -L"
     else
         exists grc && {
-        ls_command="grc -c "$HOME/conf.gls" \
-        ls -iFlhA --color=always"
-        } || {
+            ls_command="grc -c "$HOME/conf.gls" \
+            ls -iFlhA --color=always"
+    } || {
         ls_command="ls -iFhlA"
-        }
-        lib_command="ldd -v"
+}
+lib_command="ldd -v"
     fi
 
     if [[ ! -z "$1" ]]; then
         for command in "$@"; do
             exists $command &&  {
-            #exe matching
+                #exe matching
             while read locale;do
                 last_fields="$(echo $locale \
                     | cut -d' ' -f3-10)"
@@ -303,32 +298,32 @@ clearList () {
                     eval "file $last_fields" && \
                     prettyPrint "DEPENDENT ON:" && \
                     eval "$lib_command $last_fields";
-                    prettyPrint "SIZE:"
-                    du -sh "$last_fields"
-                    prettyPrint "STATS:"
-                    stat "$last_fields"
-                    echo
-                    echo
-                } || {
-                    echo "$locale"
-                    echo
-                    echo
-                }
-            done < <(type -a "$command" | sort | uniq)
-            } || {
-                #path matching, not exe
-                prettyPrint "$command"
-                eval "$ls_command -d \"$command\"" || \
-                return 1
-                prettyPrint "FILE TYPE:"
-                file "$command"
                 prettyPrint "SIZE:"
-                du -sh "$command"
+                du -sh "$last_fields"
                 prettyPrint "STATS:"
-                stat "$command"
-                #for readibility
+                stat "$last_fields"
                 echo
                 echo
+            } || {
+                echo "$locale"
+            echo
+            echo
+        }
+    done < <(type -a "$command" | sort | uniq)
+} || {
+    #path matching, not exe
+prettyPrint "$command"
+eval "$ls_command -d \"$command\"" || \
+    return 1
+prettyPrint "FILE TYPE:"
+file "$command"
+prettyPrint "SIZE:"
+du -sh "$command"
+prettyPrint "STATS:"
+stat "$command"
+#for readibility
+echo
+echo
             }
         done
     else
@@ -338,18 +333,18 @@ clearList () {
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-        grc -c "$HOME/conf.gls" gls \
-        -iFlhA --color=always
-        } || {
+            grc -c "$HOME/conf.gls" gls \
+            -iFlhA --color=always
+    } || {
         ls -iFlhAO
-        }
+}
     else
         exists grc && {
             grc -c "$HOME/conf.gls" \
             ls -iFlhA --color=always
-        } || {
+    } || {
         ls -iFhlA
-        }
+}
     fi
 }
 animate(){
@@ -372,71 +367,71 @@ humanReadable(){
     }
     {gsub(/^[0-9]+/, human($1));print}'
     }
-f(){
-    cd "$1"
-}
-execpy(){
-    script="$1"
-    shift
-    python3 $PYSCRIPTS/"$script" "$@"
+    f(){
+        cd "$1"
+    }
+    execpy(){
+        script="$1"
+        shift
+        python3 $PYSCRIPTS/"$script" "$@"
 
-}
-search(){
-    [[ -z $2 ]] && grep -iRnC 5 "$1" * || grep -iRnC 5 "$1" "$2"
+    }
+    search(){
+        [[ -z $2 ]] && grep -iRnC 5 "$1" * || grep -iRnC 5 "$1" "$2"
 
-}
-cd(){
-    #builtin is necessary here to distinguish bt function name and builtin cd command
-    #don't want to recursively call this function
-    builtin cd "$@" && clearList
-}
-gitCommitAndPush(){
-    printf "\e[1m"
-    git pull
-    git add .
-    git commit -m "$1"
-    git push
-    printf "\e[0m"
-}
-replacer(){
-    orig="$1"
-    shift
-    replace="$1"
-    shift
-    sed -i'' "s/$orig/$replace/g" $@
+    }
+    cd(){
+        #builtin is necessary here to distinguish bt function name and builtin cd command
+        #don't want to recursively call this function
+        builtin cd "$@" && clearList
+    }
+    gitCommitAndPush(){
+        printf "\e[1m"
+        git pull
+        git add .
+        git commit -m "$1"
+        git push
+        printf "\e[0m"
+    }
+    replacer(){
+        orig="$1"
+        shift
+        replace="$1"
+        shift
+        sed -i'' "s/$orig/$replace/g" $@
 
-}
-createGIF(){
-    outFile=out.gif
-    res=600x400
+    }
+    createGIF(){
+        outFile=out.gif
+        res=600x400
 
-    [[ -z "$1" ]] && echo "One arg need..." >&2 && return 1
+        [[ -z "$1" ]] && echo "One arg need..." >&2 && return 1
 
-    [[ ! -z "$2" ]] && res="$2"
+        [[ ! -z "$2" ]] && res="$2"
 
-    [[ ! -z "$3" ]] && outFile="$3"	
+        [[ ! -z "$3" ]] && outFile="$3"	
 
-    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
-}
-hub_create(){
-    printf "\e[1m"
-    git init
-    hub create
-    echo "# `basename $(pwd)`" > README.md
-    echo "# created by Jacob Menke" >> README.md
-    git add .
-    git commit -m "first commit"
-    git push --set-upstream origin master
-    printf "\e[0m"
-}
-hub_delete(){
-    [[ -z "$1" ]] && echo "need a REPO NAME" >&2 && return 1
-    REPO="$1"
-    out="$(curl -u menketechnologies -X "DELETE" https://api.github.com/repos/menketechnologies/"$REPO")"
+        ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
+    }
+    hub_create(){
+        printf "\e[1m"
+        git init
+        hub create
+        echo "# `basename $(pwd)`" > README.md
+        echo "# created by Jacob Menke" >> README.md
+        git add .
+        git commit -m "first commit"
+        git push --set-upstream origin master
+        printf "\e[0m"
+    }
+    hub_delete(){
+        [[ -z "$1" ]] && echo "need a REPO NAME" >&2 && return 1
+        REPO="$1"
+        out="$(curl -u menketechnologies -X "DELETE" https://api.github.com/repos/menketechnologies/"$REPO")"
 
-    printf "\e[1m"
-    [[ -z "$out" ]] && echo "Successful deletion of $REPO" || {
-        echo "Error in deletion of $REPO"
+        printf "\e[1m"
+        [[ -z "$out" ]] && echo "Successful deletion of $REPO" || {
+            echo "Error in deletion of $REPO"
         echo "$out"
     }
     printf "\e[0m"
@@ -468,8 +463,8 @@ mp4(){
 prettyPrint(){
     [[ ! -z "$1" ]] && printf "\e[1m$1\e[0m\n" || {
         echo "Need one arg" >&2
-        return 1
-    }
+    return 1
+}
 }
 
 tac(){
@@ -497,7 +492,7 @@ ino(){
     dir="$1"
     mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
     {
-    cat <<\EOF
+        cat <<\EOF
 #include <Arduino.h>
 
 void setup() {
@@ -513,7 +508,7 @@ void loop() {
 EOF
     } > src/main.cpp
     {
-    cat <<\EOF
+        cat <<\EOF
 #!/usr/bin/env bash
 
 [[ "$1" ]] && cd "$1"
@@ -532,7 +527,7 @@ EOF
     chmod +x Runner.sh
 
     {
-    cat <<\EOF
+        cat <<\EOF
 add_custom_target(
         PLATFORMIO_JAKE ALL
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -546,16 +541,16 @@ EOF
 
 }
 jetbrainsWorkspaceEdit(){
-        python -c "print('_'*100)"
-        prettyPrint "MONITORING WORKSPACE..."
-        python -c "print('_'*100)"
-while : ; do
-    grep -q '<component name="RunManager" selected=' .idea/workspace.xml && {
-        python -c "print('_'*100)" | lolcat
+    python -c "print('_'*100)"
+    prettyPrint "MONITORING WORKSPACE..."
+    python -c "print('_'*100)"
+    while : ; do
+        grep -q '<component name="RunManager" selected=' .idea/workspace.xml && {
+            python -c "print('_'*100)" | lolcat
         figletRandomFontOnce.sh "MATCH ENJOY>>>>" | ponysay -W 120
         python -c "print('_'*100)" | lolcat
         sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
-    
+
     } || echo "No Match Yet" >&2
     sleep 1
 done
@@ -563,10 +558,10 @@ done
 
 getrc(){
     cd "$HOME"
-wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.shell_aliases_functions.sh -O .shell_aliases_functions.sh
-wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.zshrc -O .zshrc
-wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.vimrc -O .vimrc
-exec "$SHELL"
+    wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.shell_aliases_functions.sh -O .shell_aliases_functions.sh
+    wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.zshrc -O .zshrc
+    wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.vimrc -O .vimrc
+    exec "$SHELL"
 }
 
 torip(){
@@ -576,6 +571,6 @@ torip(){
 }
 
 #}}}***********************************************************
-
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
+
 
