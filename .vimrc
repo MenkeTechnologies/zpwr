@@ -353,6 +353,7 @@ augroup indentGroup
 augroup end
 
 let os = substitute(system('uname'), "\n", "", "")
+"mac and linux send different codes for Ctrl arrow keys
 if os == "Darwin"
     map <ESC>[1;5A <C-Up>
     map <ESC>[1;5B <C-Down>
@@ -365,7 +366,6 @@ elseif os == "Linux"
     map <ESC>[D <C-Left>
 
 endif
-
 
 nnoremap <silent> <leader>" :call Quoter()<CR>lmaea"<ESC>bi"<ESC>:call Reset()<CR>`a
 nnoremap <silent> <leader>' :call Quoter()<CR>lmaea'<ESC>bi'<ESC>:call Reset()<CR>`a
@@ -431,7 +431,6 @@ fun! SetDiffColors()
     highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
 
-
 autocmd FilterWritePre * call SetDiffColors()
 
 autocmd BufNewFile *.sh silent! exe "!templater.sh %:p" | e
@@ -445,13 +444,11 @@ autocmd BufNewFile * exe "normal! G" | startinsert!
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-
 if os == "Darwin"
     set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 elseif os == "Linux"
     set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 endif
-
 
 " :e will find files automatically in these locations
 set path+=~/Desktop
