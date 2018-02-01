@@ -65,6 +65,10 @@ export RED="\e[31m"
 export RESET="\e[0m"
 export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
+
+#**************************************************************
+#}}}
+
 #{{{                    MARK:Rust
 #**************************************************************
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -93,6 +97,7 @@ alias p2="python2"
 alias p3="python3"
 [[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
 exists fc && alias please='sudo $(fc -ln -1)'
+endmark
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
@@ -168,6 +173,7 @@ alias tmm="python3 $PYSCRIPTS/ssh_starter.py"
 alias tmm_full="python3 $PYSCRIPTS/complete_ssh_starter.py" 
 alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
+
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
 alias m="execpy mapIt.py"
@@ -213,6 +219,8 @@ alias ic="idea create"
 alias il="idea list"
 #**********************************************************************
 
+#**************************************************************
+#}}}
 
 #{{{                    MARK:Shell functions
 #**************************************************************
