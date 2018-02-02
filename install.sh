@@ -110,7 +110,7 @@ else
     #**************************************************************
 
 
-    distroName=$(lsb_release -a | head -1 | awk '{print $3}')
+    distroName=$(cat /etc/os-release | grep "^ID=" | cut -d= -f2)
 
     case $distroName in
         Raspbian ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
