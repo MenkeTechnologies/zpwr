@@ -171,7 +171,7 @@ printf "Running Vundle\n"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
 
-printIf "Installing .vimrc\n"
+printf "Installing .vimrc\n"
 cp "$INSTALLER_DIR/.vimrc $HOME"
 
 #}}}***********************************************************
