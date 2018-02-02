@@ -110,10 +110,10 @@ else
     #**************************************************************
 
 
-    distroName=$(cat /etc/os-release | grep "^ID=" | cut -d= -f2)
+    distroName=$(cat /etc/os-release | grep "^ID=" | cut -d= -f2 | tr -d \")
 
     case $distroName in
-        Raspbian ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+        debian|raspbian) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
            distro=debian
             ;;
         CentOS* ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
