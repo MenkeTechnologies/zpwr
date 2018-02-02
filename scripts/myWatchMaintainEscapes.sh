@@ -48,7 +48,11 @@ clear
 tput civis
 
 while [[ true ]]; do
-    x="$(script -q /dev/null $1 | tr -d '\r' | cat)"
+    script -c ls &> /dev/null && {
+        x="$(script -q /dev/null -c "$1" | tr -d '\r' | cat)"
+    } || {
+        x="$(script -q /dev/null $1 | tr -d '\r' | cat)"
+    }
     clear
 
     if [[ $dateflag == true ]]; then
