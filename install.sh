@@ -297,8 +297,8 @@ prettyPrint "Changing pager to cat for MySQL Clients such as MyCLI"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
-echo "Copying all Shell Scripts..."
-if [[ -d "$HOME/Documents/shellScripts" ]]; then
+prettyPrint "Copying all Shell Scripts..."
+if [[ ! -d "$HOME/Documents/shellScripts" ]]; then
     mkdir -p "$HOME/Documents/shellScripts"
 fi
 cp $INSTALLER_DIR/scripts/*.sh "$HOME/Documents/shellScripts"
@@ -348,14 +348,15 @@ cp "$INSTALLER_DIR/grc.zsh" "$HOME"
 cp "$INSTALLER_DIR/conf.gls" "$HOME"
 cp "$INSTALLER_DIR/conf.df" "$HOME"
 
-prettyPrint "Changing current shell to Zsh"
-exec zsh
-
 prettyPrint "Starting Tmux..."
 prettyPrint "Matrix time..."
 tmux
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
+prettyPrint "Starting the matrix"
 tmux send-keys "matr" C-m
 
+prettyPrint "Changing current shell to Zsh"
+
 prettyPrint "Done\e[0m"
+
