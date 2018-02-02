@@ -140,6 +140,22 @@ else
         update $prog $distro
     done
 
+
+    prettyPrint "Installing Powerline fonts"
+    if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
+        wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+        wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+        # move font to valid font path
+        mv PowerlineSymbols.otf /usr/share/fonts/
+        # Update font cache for the path the font
+        fc-cache -vf /usr/share/fonts/
+        # Install the fontconfig file
+        mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+    else
+        printf "/usr/share/fonts and /etc/fonts/conf.d must exist" >&2
+    fi
+
+
     #}}}***********************************************************
 
 fi
