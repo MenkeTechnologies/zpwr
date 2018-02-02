@@ -113,7 +113,7 @@ else
     distroName=$(cat /etc/os-release | grep "^ID=" | cut -d= -f2 | tr -d \")
 
     case $distroName in
-        (debian|raspbian|kali) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+        (debian|ubuntu|raspbian|kali) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
            distro=debian
             ;;
         (centos) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
