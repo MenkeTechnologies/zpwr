@@ -245,7 +245,13 @@ fi
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
 prettyPrint "Installing Iftop config..."
+ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's/addr://')
+iface=$(ifconfig | grep -B1 "inet addr:$ip" | awk '$1!="inet" && $1!="--" {print $1}')
+echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
+
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
+
+
 
 if [[ "distroName" == raspbian]]; then
     prettyPrint "Installing custom motd for RPI..."
