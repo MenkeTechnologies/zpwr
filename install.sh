@@ -274,16 +274,16 @@ sudo pip install pydf
 printf "Installing MyCLI\n"
 sudo pip install mycli
 
-if [[ f "$HOME/.token.sh" ]]; then
+if [[ -f "$HOME/.token.sh" ]]; then
     touch "$HOME/.tokens.sh"
 fi
 
 printf "HushLogin\n"
-if [[ f "$HOME/.hushlogin" ]]; then
+if [[ -f "$HOME/.hushlogin" ]]; then
     touch "$HOME/.hushlogin"
 fi
 
-if [[ f "$HOME/.my.cnf" ]]; then
+if [[ -f "$HOME/.my.cnf" ]]; then
     touch "$HOME/.my.cnf"
 fi
 
@@ -292,7 +292,7 @@ echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
 echo "Copying all Shell Scripts..."
-if [[ d "$HOME/Documents/shellScripts" ]]; then
+if [[ -d "$HOME/Documents/shellScripts" ]]; then
     mkdir -p "$HOME/Documents/shellScripts"
 fi
 cp $INSTALLER_DIR/scripts/*.sh "$HOME/Documents/shellScripts"
@@ -314,21 +314,21 @@ cd pipes.sh && {
 
 printf "Installing htoprc file....\n"
 htopDIR="$HOME/.config/htop"
-if [[ f "$htopDIR/htoprfc" ]]; then
-    if [[ d "$htopDIR" ]]; then
+if [[ -f "$htopDIR/htoprfc" ]]; then
+    if [[ -d "$htopDIR" ]]; then
         mkdir -P "$htopDIR"
     fi
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
 fi
 
 type youtube-dl >/dev/null 2>&1 || {
-printf "Installing youtube-dl\n"
-sudo pip install --upgrade youtube_dl
+    printf "Installing youtube-dl\n"
+    sudo pip install --upgrade youtube_dl
 }
 
 type chsh >/dev/null 2>&1 && {
-printf "Changing default shell to Zsh\n"
-chsh -s "$(which zsh)"
+    printf "Changing default shell to Zsh\n"
+    chsh -s "$(which zsh)"
 }
 
 printf "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo\n"
