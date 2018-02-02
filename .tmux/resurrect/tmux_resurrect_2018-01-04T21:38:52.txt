@@ -1,0 +1,76 @@
+pane	config-4	0	:zrc	1	:*	0	:/Users/jacobmenke/Desktop	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/aliases.vim + /Users/jacobmenke/.shell_aliases_functions.sh
+pane	config-4	0	:zrc	1	:*	0	:/Users/jacobmenke/Desktop	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/aliases.vim + /Users/jacobmenke/.shell_aliases_functions.sh
+pane	config-4	0	:zrc	1	:*	1	:/Users/jacobmenke/Desktop	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/vrc.vim /Users/jacobmenke/.vimrc
+pane	config-4	0	:zrc	1	:*	1	:/Users/jacobmenke/Desktop	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/vrc.vim /Users/jacobmenke/.vimrc
+pane	config-4	0	:zrc	1	:*	2	:/Users/jacobmenke	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	config-4	0	:zrc	1	:*	2	:/Users/jacobmenke	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/trc.vim /Users/jacobmenke/.tmux.conf
+/usr/local/Cellar/macvim/8.0-144/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/trc.vim /Users/jacobmenke/.tmux.conf
+pane	config-4	0	:zrc	1	:*	3	:/Users/jacobmenke/Desktop	1	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/zshrc.vim + /Users/jacobmenke/.zshrc
+pane	config-4	0	:zrc	1	:*	3	:/Users/jacobmenke/Desktop	1	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/zshrc.vim + /Users/jacobmenke/.zshrc
+pane	main-5	0	:~/Desktop	1	:*	0	:	0	sudo	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+sudo htop
+pane	main-5	0	:~/Desktop	1	:*	0	:	0	sudo	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+sudo htop
+pane	main-5	0	:~/Desktop	1	:*	1	:/Users/jacobmenke	0	tail	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+tail -f /var/log/alf.log /var/log/appfirewall.log /var/log/corecaptured.log /var/log/displaypolicy/displaypolicyd.log /var/log/displaypolicyd.stdout.log /var/log/fsck_apfs.log /var/log/fsck_hfs.log /var/log/hfs_convert.log /var/log/install.log /var/log/kernel-shutdown.log /var/log/prl_disp_service_server.log /var/log/system.log /var/log/wifi-01-04-2018__15:25:32.196.log /var/log/wifi-01-04-2018__15:25:48.641.log /var/log/wifi-01-04-2018__15:25:48.781.log /var/log/wifi-01-04-2018__15:26:21.667.log /var/log/wifi-01-04-2018__15:26:21.811.log /var/log/wifi-01-04-2018__15:26:31.338.log /var/log/wifi.log
+ccze
+pane	main-5	0	:~/Desktop	1	:*	1	:/Users/jacobmenke	0	tail	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+tail -f /var/log/alf.log /var/log/appfirewall.log /var/log/corecaptured.log /var/log/displaypolicy/displaypolicyd.log /var/log/displaypolicyd.stdout.log /var/log/fsck_apfs.log /var/log/fsck_hfs.log /var/log/hfs_convert.log /var/log/install.log /var/log/kernel-shutdown.log /var/log/prl_disp_service_server.log /var/log/system.log /var/log/wifi-01-04-2018__15:25:32.196.log /var/log/wifi-01-04-2018__15:25:48.641.log /var/log/wifi-01-04-2018__15:25:48.781.log /var/log/wifi-01-04-2018__15:26:21.667.log /var/log/wifi-01-04-2018__15:26:21.811.log /var/log/wifi-01-04-2018__15:26:31.338.log /var/log/wifi.log
+ccze
+pane	main-5	0	:~/Desktop	1	:*	2	:/Users/jacobmenke	0	bash	:bash /Users/jacobmenke/Documents/shellScripts/storageShower.sh 8 1
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	0	:~/Desktop	1	:*	2	:/Users/jacobmenke	0	bash	:bash /Users/jacobmenke/Documents/shellScripts/storageShower.sh 8 1
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	0	:~/Desktop	1	:*	3	:/Users/jacobmenke/Desktop	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	0	:~/Desktop	1	:*	3	:/Users/jacobmenke/Desktop	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	0	:~/Desktop	1	:*	4	:	0	sudo	:sudo iftop -c /Users/jacobmenke/.iftop.conf
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	0	:~/Desktop	1	:*	4	:	0	sudo	:sudo iftop -c /Users/jacobmenke/.iftop.conf
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	1	:ncmpcpp	0	:-	0	:/Users/jacobmenke	1	ncmpcpp	:ncmpcpp
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	1	:ncmpcpp	0	:-	0	:/Users/jacobmenke	1	ncmpcpp	:ncmpcpp
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	1	:ncmpcpp	0	:-	1	:/Users/jacobmenke/Desktop	0	ncmpcpp	:ncmpcpp
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-5	1	:ncmpcpp	0	:-	1	:/Users/jacobmenke/Desktop	0	ncmpcpp	:ncmpcpp
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	sds-2	0	:sds	1	:*	0	:/Users/jacobmenke	1	ssh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ssh ds -x -L 50002:localhost:139
+pane	sds-2	0	:sds	1	:*	0	:/Users/jacobmenke	1	ssh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ssh ds -x -L 50002:localhost:139
+pane	sr-0	0	:sr	1	:*	0	:/Users/jacobmenke	1	ssh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ssh r -Y -L 50000:localhost:548 -L 5902:localhost:5901 -L9100:192.168.0.109:9100 -R9100:localhost:9100
+pane	sr-0	0	:sr	1	:*	0	:/Users/jacobmenke	1	ssh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ssh r -Y -L 50000:localhost:548 -L 5902:localhost:5901 -L9100:192.168.0.109:9100 -R9100:localhost:9100
+pane	sr2-1	0	:sr2	1	:*	0	:/Users/jacobmenke	1	ssh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ssh r2 -Y -L 50001:localhost:548 -L 5903:localhost:5901
+pane	sr2-1	0	:sr2	1	:*	0	:/Users/jacobmenke	1	ssh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ssh r2 -Y -L 50001:localhost:548 -L 5903:localhost:5901
+pane	wcc-3	0	:w	1	:*	0	:/Users/jacobmenke	1	ssh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ssh w
+pane	wcc-3	0	:w	1	:*	0	:/Users/jacobmenke	1	ssh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ssh w
+window	config-4	0	1	:*	58ca,249x69,0,0{61x69,0,0,4,62x69,62,0,6,61x69,125,0,5,62x69,187,0,7}
+window	main-5	0	1	:*	db3c,249x69,0,0{132x69,0,0[132x24,0,0,8,132x31,0,25,10,132x12,0,57,26],116x69,133,0[116x48,133,0,180,116x20,133,49,181]}
+window	main-5	1	0	:-	da88,249x70,0,0{124x70,0,0,18,124x70,125,0,21}
+window	sds-2	0	1	:*	d81f,249x69,0,0,2
+window	sr-0	0	1	:*	d81d,249x69,0,0,0
+window	sr2-1	0	1	:*	d81e,249x69,0,0,1
+window	wcc-3	0	1	:*	d820,249x69,0,0,3
+window	config-4	0	1	:*	58ca,249x69,0,0{61x69,0,0,4,62x69,62,0,6,61x69,125,0,5,62x69,187,0,7}
+window	main-5	0	1	:*	db3c,249x69,0,0{132x69,0,0[132x24,0,0,8,132x31,0,25,10,132x12,0,57,26],116x69,133,0[116x48,133,0,180,116x20,133,49,181]}
+window	main-5	1	0	:-	da88,249x70,0,0{124x70,0,0,18,124x70,125,0,21}
+window	sds-2	0	1	:*	d81f,249x69,0,0,2
+window	sr-0	0	1	:*	d81d,249x69,0,0,0
+window	sr2-1	0	1	:*	d81e,249x69,0,0,1
+window	wcc-3	0	1	:*	d820,249x69,0,0,3
+state	main-5	
+state	main-5	

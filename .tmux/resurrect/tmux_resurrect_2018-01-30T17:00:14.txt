@@ -1,0 +1,6 @@
+pane	0	0	:vim	1	:*	0	:/Users/jacobmenke/.oh-my-zsh/custom/plugins/more-completions/src	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/bin/../MacOS/Vim -g -v _otool
+pane	0	0	:vim	1	:*	1	:/Users/jacobmenke/.oh-my-zsh/custom/plugins/more-completions/src	1	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/bin/../MacOS/Vim -g -v _mycli
+window	0	0	1	:*	77de,253x64,0,0{126x64,0,0,0,126x64,127,0,1}
+state	0	

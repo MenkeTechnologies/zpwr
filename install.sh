@@ -241,22 +241,16 @@ if [[ -d $HOME/.tmux/plugins/tpm  ]]; then
     echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
-prettyPrint "Adding Powerline to .tmux.conf"
-# add powerline to .tmux.conf
-#echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux.conf"
-#echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
 prettyPrint "Copying tmux configuration file to home directory"
+cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
 if [[ "$(uname)" == Linux ]]; then
     #statements
-    cp "$INSTALLER_DIR/.tmux.conf.rpi" "$HOME"
-    mv "$HOME/.tmux.conf.rpi" "$HOME/.tmux.conf"
     prettyPrint "Installing Iftop config..."
     cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
     prettyPrint "Installing custom motd for RPI..."
     cp "$INSTALLER_DIR/motd.sh" "$HOME"
 else
-    cp "./.tmux.conf" "$HOME"
     prettyPrint "Installing Iftop config..."
     cp "$INSTALLER_DIR/.iftop.conf.mac" "$HOME" 
     mv "$HOME/.iftop.conf.mac" "$HOME/.iftop.conf"

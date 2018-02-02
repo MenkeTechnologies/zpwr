@@ -1,0 +1,29 @@
+pane	config-4	0	:zrc	1	:*	0	:/Users/jacobmenke/Desktop	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/aliases.vim + /Users/jacobmenke/.shell_aliases_functions.sh
+pane	config-4	0	:zrc	1	:*	1	:/Users/jacobmenke/Desktop	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/vrc.vim /Users/jacobmenke/.vimrc
+pane	config-4	0	:zrc	1	:*	2	:/Users/jacobmenke	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/trc.vim /Users/jacobmenke/.tmux.conf
+pane	config-4	0	:zrc	1	:*	3	:/Users/jacobmenke/Desktop	1	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_3/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/zshrc.vim + /Users/jacobmenke/.zshrc
+pane	main-5	0	:8	1	:*	0	:/Users/jacobmenke/.oh-my-zsh/tools	0	bash	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+bash -l updater.sh
+pane	main-5	0	:8	1	:*	1	:/Users/jacobmenke/IdeaProjects/reallingua-web	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	sds-2	0	:~/Desktop	1	:*	0	:/Users/jacobmenke/Desktop	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	sr-0	0	:~/Desktop	1	:*	0	:/Users/jacobmenke/Desktop	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	sr2-1	0	:~/Desktop	1	:*	0	:/Users/jacobmenke/Desktop	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	wcc-3	0	:ncmpcpp	1	:*	0	:/Users/jacobmenke/Desktop	1	ncmpcpp	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ncmpcpp
+pane	wcc-3	0	:ncmpcpp	1	:*	1	:/Users/jacobmenke/Desktop	0	ncmpcpp	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ncmpcpp
+pane	wcc-3	0	:ncmpcpp	1	:*	2	:/Users/jacobmenke/Desktop	0	ncmpcpp	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ncmpcpp
+pane	wcc-3	0	:ncmpcpp	1	:*	3	:/Users/jacobmenke/Desktop	0	ncmpcpp	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+ncmpcpp
+window	config-4	0	1	:*	8eba,260x68,0,0{64x68,0,0,4,64x68,65,0,6,64x68,130,0,5,65x68,195,0,7}
+window	main-5	0	1	:*	9a05,260x68,0,0{130x68,0,0,8,129x68,131,0,35}
+window	sds-2	0	1	:*	d01f,260x68,0,0,2
+window	sr-0	0	1	:*	e848,260x68,0,0,29
+window	sr2-1	0	1	:*	d01e,260x68,0,0,1
+window	wcc-3	0	1	:*	965d,260x68,0,0{129x68,0,0[129x33,0,0,3,129x34,0,34,11],130x68,130,0[130x33,130,0,10,130x34,130,34,12]}
+state	main-5	

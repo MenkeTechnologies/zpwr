@@ -1,0 +1,5 @@
+pane	0	0	:mycli	1	:*	0	:/Users/jacobmenke/IdeaProjects/reallingua-web	0	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	0	0	:mycli	1	:*	1	:/Users/jacobmenke/IdeaProjects/reallingua-web/webproject	1	python	:/usr/local/Cellar/mycli/1.16.0/libexec/bin/python /usr/local/bin/mycli -h 45.55.166.27 -u appuser -p r34lLingua#
+bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+window	0	0	1	:*	ee85,261x73,0,0{130x73,0,0,0,130x73,131,0,1}
+state	0	

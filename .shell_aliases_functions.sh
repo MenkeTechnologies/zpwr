@@ -568,6 +568,7 @@ getrc(){
     wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.shell_aliases_functions.sh -O .shell_aliases_functions.sh
     wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.zshrc -O .zshrc
     wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.vimrc -O .vimrc
+    wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.vimrc -O .vimrc
     exec "$SHELL"
 }
 
