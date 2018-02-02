@@ -227,7 +227,7 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 #fi
 
 printf "Installing Tmux Plugin Manager\n"
-if [[ d $HOME/.tmux/plugins/tpm  ]]; then
+if [[ -d $HOME/.tmux/plugins/tpm  ]]; then
     echo mkdir -p $HOME/.tmux/plugins/tpm
     echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
@@ -265,7 +265,7 @@ bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 #if [[ d "$HOME/ForkedRepos" ]]; then
 #mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
 #git clone https://github.com/MenkeTechnologies/iftopcolor
-#sudo ./configure && make
+#sudo ./configure && make && sudo make install
 #fi
 
 printf "Installing PyDf\n"
@@ -307,9 +307,9 @@ cd ponysay && sudo ./setup.py --freedom=partial install && \
 printf "Installing Pipes.sh from source\n"
 git clone https://github.com/pipeseroni/pipes.sh.git
 cd pipes.sh && {
-sudo make install
-cd ..
-rm -rf pipe.sh
+    sudo make install
+    cd ..
+    rm -rf pipe.sh
 }
 
 printf "Installing htoprc file....\n"
