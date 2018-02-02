@@ -15,4 +15,5 @@ cd "$HOME/.oh-my-zsh/custom/plugins" && {
 installOhMyZshPlugin "zsh-users/zsh-completions"
 installOhMyZshPlugin "zsh-users/zsh-autosuggestions"
 installOhMyZshPlugin "zsh-users/zsh-syntax-highlighting"
+installOhMyZshPlugin "MenkeTechnologies/zsh-more-completions"
 }
