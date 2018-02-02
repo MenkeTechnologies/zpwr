@@ -1,0 +1,4 @@
+pane	main-0	0	:..eb/webproject	1	:*	0	:/Users/jacobmenke/IdeaProjects/reallingua-web/webproject	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	main-0	0	:..eb/webproject	1	:*	1	:	0	reattach-to-user-namespace	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+window	main-0	0	1	:*	6a08,261x72,0,0{130x72,0,0,3,130x72,131,0,1}
+state	main-0	

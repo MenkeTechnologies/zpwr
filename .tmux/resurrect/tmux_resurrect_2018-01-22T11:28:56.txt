@@ -1,0 +1,4 @@
+pane	0	0	:..eb/webproject	1	:*	0	:/Users/jacobmenke/Desktop	0	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+pane	0	0	:..eb/webproject	1	:*	1	:/Users/jacobmenke/IdeaProjects/reallingua-web/webproject	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+window	0	0	1	:*	ee85,261x73,0,0{130x73,0,0,0,130x73,131,0,1}
+state	0	
