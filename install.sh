@@ -359,5 +359,5 @@ tmux send-keys "matr" C-m
 
 prettyPrint "Changing current shell to Zsh"
 
-prettyPrint "Done\e[0m"
+prettyPrint "Done"
 
