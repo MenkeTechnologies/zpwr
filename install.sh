@@ -172,7 +172,7 @@ printf "Running Vundle\n"
 vim -c PluginInstall -c qall
 
 printf "Installing .vimrc\n"
-cp "$INSTALLER_DIR/.vimrc $HOME"
+cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
 #}}}***********************************************************
 
@@ -182,8 +182,7 @@ cp "$INSTALLER_DIR/.vimrc $HOME"
 
 printf "Installing YouCompleteMe\n"
 
-cd $HOME/.vim/bundle/YouCompleteMe
-./install.py --clang-completer
+cd $HOME/.vim/bundle/YouCompleteMe && ./install.py --clang-completer
 
 ################################################################################
 ## Powerline
