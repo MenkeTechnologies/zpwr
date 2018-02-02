@@ -44,7 +44,8 @@ dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpy
     libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev netatalk dstat \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev at dnsutils fuse afpfs-ng \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm nginx nmap mtr mytop tcpdump \
-    jnettop iotop atop software-properties-common ctags speedtest-cli texinfo lsof weechat grc gradle sysv-rc-conf)
+    jnettop iotop atop software-properties-common ctags speedtest-cli texinfo lsof weechat grc gradle sysv-rc-conf \
+    build-essential reptyr)
 
 #}}}***********************************************************
 
@@ -61,8 +62,12 @@ update (){
 
         if [[ $2 == mac ]]; then
             brew install "$1"
-        else
+        elif [[ $2 == debian ]]
             sudo apt-get install -y "$1"
+        elif [[ $2 == redhat ]]
+            yum install -y "$1"
+        else
+            printf "Error at install with $2." >&2; exit 1
         fi
     }
 }
@@ -109,21 +114,21 @@ else
 
     case $distroName in
         Raspbian ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+           distro=debian
+            ;;
+        CentOS* ) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+            distro=redhat
             ;;
         * )
             printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
             exit 1
     esac
 
-    printf "First Build-Essential and Reptyr...\n"
-
-    sudo apt-get -y install build-essential reptyr
-
     printf "\e[4mNow The Main Course...\n\e[0;1m"
 
     for prog in ${dependencies_ary[@]}; do
         printf "Installing $prog\n"
-        update $prog linux
+        update $prog $distro
     done
 
     #}}}***********************************************************
