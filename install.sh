@@ -60,6 +60,7 @@ prettyPrint(){
     printf "$1\n"
     perl -le "print '#'x100"
     printf "\x1b[0m"
+    printf "\n"
 }
 
 update (){
