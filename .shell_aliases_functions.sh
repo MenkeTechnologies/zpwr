@@ -279,63 +279,63 @@ clearList () {
             gls -iFlhA --color=always"
     } || {
         ls_command="ls -iFlhAO"
-}
-lib_command="otool -L"
-    else
-        exists grc && {
-            ls_command="grc -c "$HOME/conf.gls" \
-            ls -iFlhA --color=always"
-    } || {
-        ls_command="ls -iFhlA"
-}
-lib_command="ldd -v"
-    fi
+    }
+    lib_command="otool -L"
+        else
+            exists grc && {
+                ls_command="grc -c "$HOME/conf.gls" \
+                ls -iFlhA --color=always"
+        } || {
+            ls_command="ls -iFhlA"
+    }
+    lib_command="ldd -v"
+        fi
 
-    if [[ ! -z "$1" ]]; then
-        for command in "$@"; do
-            exists $command &&  {
-                #exe matching
-            while read locale;do
-                last_fields="$(echo $locale \
-                    | cut -d' ' -f3-10)"
-                [[ -f "$last_fields" ]] && {
-                    prettyPrint "$last_fields" && \
-                    eval "$ls_command" $last_fields && \
-                    prettyPrint "FILE TYPE:" && \
-                    eval "file $last_fields" && \
-                    prettyPrint "DEPENDENT ON:" && \
-                    eval "$lib_command $last_fields";
-                prettyPrint "SIZE:"
-                du -sh "$last_fields"
-                prettyPrint "STATS:"
-                stat "$last_fields"
+        if [[ ! -z "$1" ]]; then
+            for command in "$@"; do
+                exists $command &&  {
+                    #exe matching
+                while read locale;do
+                    last_fields="$(echo $locale \
+                        | cut -d' ' -f3-10)"
+                    [[ -f "$last_fields" ]] && {
+                        prettyPrint "$last_fields" && \
+                        eval "$ls_command" $last_fields && \
+                        prettyPrint "FILE TYPE:" && \
+                        eval "file $last_fields" && \
+                        prettyPrint "DEPENDENT ON:" && \
+                        eval "$lib_command $last_fields";
+                    prettyPrint "SIZE:"
+                    du -sh "$last_fields"
+                    prettyPrint "STATS:"
+                    stat "$last_fields"
+                    echo
+                    echo
+                } || {
+                    echo "$locale"
                 echo
                 echo
-            } || {
-                echo "$locale"
-            echo
-            echo
-        }
-    done < <(type -a "$command" | sort | uniq)
-} || {
-    #path matching, not exe
-prettyPrint "$command"
-eval "$ls_command -d \"$command\"" || \
-    return 1
-prettyPrint "FILE TYPE:"
-file "$command"
-prettyPrint "SIZE:"
-du -sh "$command"
-prettyPrint "STATS:"
-stat "$command"
-#for readibility
-echo
-echo
             }
-        done
-    else
-        clear && eval "$ls_command"
-    fi
+        done < <(type -a "$command" | sort | uniq)
+    } || {
+        #path matching, not exe
+    prettyPrint "$command"
+    eval "$ls_command -d \"$command\"" || \
+        return 1
+    prettyPrint "FILE TYPE:"
+    file "$command"
+    prettyPrint "SIZE:"
+    du -sh "$command"
+    prettyPrint "STATS:"
+    stat "$command"
+    #for readibility
+    echo
+    echo
+                }
+            done
+        else
+            clear && eval "$ls_command"
+        fi
 }
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
@@ -344,14 +344,14 @@ listNoClear () {
             -iFlhA --color=always
     } || {
         ls -iFlhAO
-}
+    }
     else
         exists grc && {
             grc -c "$HOME/conf.gls" \
             ls -iFlhA --color=always
-    } || {
-        ls -iFhlA
-}
+        } || {
+            ls -ifhla
+        }
     fi
 }
 animate(){
@@ -374,72 +374,73 @@ humanReadable(){
     }
     {gsub(/^[0-9]+/, human($1));print}'
     }
-    f(){
-        cd "$1"
-    }
-    execpy(){
-        script="$1"
-        shift
-        python3 $PYSCRIPTS/"$script" "$@"
 
-    }
-    search(){
-        [[ -z $2 ]] && grep -iRnC 5 "$1" * || grep -iRnC 5 "$1" "$2"
+f(){
+    cd "$1"
+}
+execpy(){
+    script="$1"
+    shift
+    python3 $PYSCRIPTS/"$script" "$@"
 
-    }
-    cd(){
-        #builtin is necessary here to distinguish bt function name and builtin cd command
-        #don't want to recursively call this function
-        builtin cd "$@" && clearList
-    }
-    gitCommitAndPush(){
-        printf "\e[1m"
-        git pull
-        git add .
-        git commit -m "$1"
-        git push
-        printf "\e[0m"
-    }
-    replacer(){
-        orig="$1"
-        shift
-        replace="$1"
-        shift
-        sed -i'' "s/$orig/$replace/g" $@
+}
+search(){
+    [[ -z $2 ]] && grep -iRnC 5 "$1" * || grep -iRnC 5 "$1" "$2"
 
-    }
-    createGIF(){
-        outFile=out.gif
-        res=600x400
+}
+cd(){
+    #builtin is necessary here to distinguish bt function name and builtin cd command
+    #don't want to recursively call this function
+    builtin cd "$@" && clearList
+}
+gitCommitAndPush(){
+    printf "\e[1m"
+    git pull
+    git add .
+    git commit -m "$1"
+    git push
+    printf "\e[0m"
+}
+replacer(){
+    orig="$1"
+    shift
+    replace="$1"
+    shift
+    sed -i'' "s/$orig/$replace/g" $@
 
-        [[ -z "$1" ]] && echo "One arg need..." >&2 && return 1
+}
+createGIF(){
+    outFile=out.gif
+    res=600x400
 
-        [[ ! -z "$2" ]] && res="$2"
+    [[ -z "$1" ]] && echo "One arg need..." >&2 && return 1
 
-        [[ ! -z "$3" ]] && outFile="$3"	
+    [[ ! -z "$2" ]] && res="$2"
 
-        ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
-    }
-    hub_create(){
-        printf "\e[1m"
-        git init
-        hub create
-        echo "# `basename $(pwd)`" > README.md
-        echo "# created by Jacob Menke" >> README.md
-        git add .
-        git commit -m "first commit"
-        git push --set-upstream origin master
-        printf "\e[0m"
-    }
-    hub_delete(){
-        [[ -z "$1" ]] && echo "need a REPO NAME" >&2 && return 1
-        REPO="$1"
-        out="$(curl -u menketechnologies -X "DELETE" https://api.github.com/repos/menketechnologies/"$REPO")"
+    [[ ! -z "$3" ]] && outFile="$3"	
 
-        printf "\e[1m"
-        [[ -z "$out" ]] && echo "Successful deletion of $REPO" || {
-            echo "Error in deletion of $REPO"
-        echo "$out"
+    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
+}
+hub_create(){
+    printf "\e[1m"
+    git init
+    hub create
+    echo "# `basename $(pwd)`" > README.md
+    echo "# created by Jacob Menke" >> README.md
+    git add .
+    git commit -m "first commit"
+    git push --set-upstream origin master
+    printf "\e[0m"
+}
+hub_delete(){
+    [[ -z "$1" ]] && echo "need a REPO NAME" >&2 && return 1
+    REPO="$1"
+    out="$(curl -u menketechnologies -X "DELETE" https://api.github.com/repos/menketechnologies/"$REPO")"
+
+    printf "\e[1m"
+    [[ -z "$out" ]] && echo "Successful deletion of $REPO" || {
+    echo "Error in deletion of $REPO"
+    echo "$out"
     }
     printf "\e[0m"
 }
