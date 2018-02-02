@@ -11,12 +11,8 @@ installOhMyZshPlugin(){
     git clone "https://github.com/$1.git" 
 }
 
-printf "Installing Zsh Plugins\n"
 cd "$HOME/.oh-my-zsh/custom/plugins" && {
 installOhMyZshPlugin "zsh-users/zsh-completions"
 installOhMyZshPlugin "zsh-users/zsh-autosuggestions"
 installOhMyZshPlugin "zsh-users/zsh-syntax-highlighting"
 }
-
-printf "Installing the Z command\n"
-cp z.sh "$HOME"
