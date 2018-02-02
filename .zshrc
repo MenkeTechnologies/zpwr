@@ -482,21 +482,16 @@ if [[ "$(uname)" = Darwin ]]; then
     fi
 fi
 
-
-#std error colorization
+#standard error colorization
 color2
 
-#homebrew conflicts with /usr/bin/perl
-#unset PERL5LIB
 #change history file size
 export SAVEHIST=50000
 #change history size
 export HISTSIZE=50000
 
-
 #set right prompt string during continuation 
 RPS2='+%N:%i:%^'
-
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
