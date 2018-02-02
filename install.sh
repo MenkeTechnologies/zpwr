@@ -45,7 +45,7 @@ dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpy
     libcairo2-dev libx11-dev libxpm-dev libxt-dev at dnsutils fuse afpfs-ng \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm nginx nmap mtr mytop tcpdump \
     jnettop iotop atop software-properties-common ctags speedtest-cli texinfo lsof weechat grc gradle sysv-rc-conf \
-    build-essential reptyr)
+    build-essential reptyr python-pip python3-pip)
 
 #}}}***********************************************************
 
@@ -158,7 +158,7 @@ mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
     curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
 printf "Installing Vim Plugins\n"
-bash "./vim_plugins_install.sh"
+bash "$INSTALLER_DIR/vim_plugins_install.sh"
 
 printf "Installing psutil for Python Glances\n"
 sudo pip install psutil 
