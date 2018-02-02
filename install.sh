@@ -17,9 +17,6 @@ OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
-#bold
-printf "\e[1m"
-
 #Dependencies
 # 1) vim 8.0
 # 2) tmux 2.1
@@ -56,6 +53,10 @@ exists(){
     type "$1" >/dev/null 2>&1
 }
 
+prettyPrint(){
+    printf "\x1b[4;1m$1\n\x1b[0m"
+}
+
 update (){
 
     exists "$1" || {
@@ -67,7 +68,7 @@ update (){
         elif [[ $2 == redhat ]];then
             yum install -y "$1"
         else
-            printf "Error at install with $2." >&2; exit 1
+            prettyPrint "Error at install with $2." >&2; exit 1
         fi
     }
 }
@@ -77,15 +78,15 @@ update (){
 if [[ "$OS_TYPE" == "Darwin" ]]; then
     #{{{                    MARK:Mac
     #**************************************************************
-    printf "Checking Dependencies for Mac...\n"
+    prettyPrint "Checking Dependencies for Mac...\n"
 
     exists "brew" || {
         #install homebrew
-        printf "Installing HomeBrew...\n"
+        prettyPrint "Installing HomeBrew...\n"
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     }
 
-    printf "We have Homebrew...\n"
+    prettyPrint "We have Homebrew...\n"
 
     brew ls python > /dev/null 2>&1
     if [[ $? == 1 ]]; then
@@ -94,9 +95,9 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     fi
 
 
-    printf "We have Python...\n"
+    prettyPrint "We have Python...\n"
 
-    printf "\e[4mNow The Main Course...\n\e[0;1m"
+    prettyPrint "\e[4mNow The Main Course...\n\e[0;1m"
 
     for prog in ${dependencies_ary[@]}; do
         update $prog mac
@@ -113,21 +114,21 @@ else
     distroName=$(cat /etc/os-release | grep "^ID=" | cut -d= -f2 | tr -d \")
 
     case $distroName in
-        (debian|ubuntu|raspbian|kali) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+        (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
            distro=debian
             ;;
-        (centos) printf "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
+        (centos) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager...\n"
             distro=redhat
             ;;
         * )
-            printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
+            prettyPrint "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
             exit 1
     esac
 
-    printf "\e[4mNow The Main Course...\n\e[0;1m"
+    prettyPrint "Now The Main Course...\n"
 
     for prog in ${dependencies_ary[@]}; do
-        printf "Installing $prog\n"
+        prettyPrint "Installing $prog\n"
         update $prog $distro
     done
 
@@ -137,7 +138,7 @@ fi
 #{{{                    MARK:vim
 #**************************************************************
 
-#printf "Installing Vim8 From Source\n"
+#prettyPrint "Installing Vim8 From Source\n"
 #git clone https://github.com/vim/vim.git vim-master
 #cd vim-master
 #./configure --with-features=huge \
@@ -152,26 +153,26 @@ fi
     #--enable-gui=gtk2 --enable-cscope --prefix=/usr
 #sudo make install
 
-printf "Installing Pathogen\n"
+prettyPrint "Installing Pathogen\n"
 #install pathogen
 mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
     curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
-printf "Installing Vim Plugins\n"
+prettyPrint "Installing Vim Plugins\n"
 bash "$INSTALLER_DIR/vim_plugins_install.sh"
 
-printf "Installing psutil for Python Glances\n"
+prettyPrint "Installing psutil for Python Glances\n"
 sudo pip install psutil 
-printf "Installing Python Glances\n"
+prettyPrint "Installing Python Glances\n"
 sudo pip install glances
 
-printf "Installing Virtualenv\n"
+prettyPrint "Installing Virtualenv\n"
 pip3 install virtualenv
-printf "Running Vundle\n"
+prettyPrint "Running Vundle\n"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
 
-printf "Installing .vimrc\n"
+prettyPrint "Installing .vimrc\n"
 cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
 #}}}***********************************************************
@@ -180,43 +181,43 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 ## YouCompleteMe
 ################################################################################
 
-printf "Installing YouCompleteMe\n"
+prettyPrint "Installing YouCompleteMe\n"
 
 cd $HOME/.vim/bundle/YouCompleteMe && ./install.py --clang-completer
 
 ################################################################################
 ## Powerline
 ################################################################################
-printf "Installing Powerline...\n"
+prettyPrint "Installing Powerline...\n"
 
 sudo pip install powerline-status
 
-printf "Adding Powerline to .vimrc \n"
+prettyPrint "Adding Powerline to .vimrc \n"
 
 
 #{{{                    MARK:zsh
 #**************************************************************
-printf "Installing oh-my-zsh...\n"
+prettyPrint "Installing oh-my-zsh...\n"
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
 cp "$INSTALLER_DIR/agnosterzak.zsh-theme" $HOME/.oh-my-zsh/themes/
 
 #add aliases and functions
-printf "Adding common shell aliases for Bash and Zsh\n"
+prettyPrint "Adding common shell aliases for Bash and Zsh\n"
 cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
 #echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
-printf "Installing .zshrc\n"
+prettyPrint "Installing .zshrc\n"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
-printf "Installing Zsh plugins\n"
+prettyPrint "Installing Zsh plugins\n"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 #}}}***********************************************************
 #{{{                    MARK:Tmux
 #**************************************************************
-#printf "Installing Tmux Powerline\n"
+#prettyPrint "Installing Tmux Powerline\n"
 
 #tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
 #echo pip install powerline-mem-segment
@@ -226,59 +227,59 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 #    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
 #fi
 
-printf "Installing Tmux Plugin Manager\n"
+prettyPrint "Installing Tmux Plugin Manager\n"
 if [[ -d $HOME/.tmux/plugins/tpm  ]]; then
     echo mkdir -p $HOME/.tmux/plugins/tpm
     echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
 
-printf "Adding Powerline to .tmux.conf\n"
+prettyPrint "Adding Powerline to .tmux.conf\n"
 # add powerline to .tmux.conf
 #echo "source $powerline_dir/powerline/bindings/tmux/powerline.conf >> tmux/.tmux.conf"
 #echo "run '~/.tmux/plugins/tpm/tpm' >> tmux/.tmux.conf"
 
-printf "Copying tmux configuration file to home directory\n"
+prettyPrint "Copying tmux configuration file to home directory\n"
 if [[ "$(uname)" == Linux ]]; then
     #statements
     cp "$INSTALLER_DIR/.tmux.conf.rpi" "$HOME"
     mv "$HOME/.tmux.conf.rpi" "$HOME/.tmux.conf"
-    printf "Installing Iftop config...\n"
+    prettyPrint "Installing Iftop config...\n"
     cp "$INSTALLER_DIR/.iftop.conf" "$HOME" 
-    printf "Installing custom motd for RPI...\n"
+    prettyPrint "Installing custom motd for RPI...\n"
     cp "$INSTALLER_DIR/motd.sh" "$HOME"
 else
     cp "./.tmux.conf" "$HOME"
-    printf "Installing Iftop config...\n"
+    prettyPrint "Installing Iftop config...\n"
     cp "$INSTALLER_DIR/.iftop.conf.mac" "$HOME" 
     mv "$HOME/.iftop.conf.mac" "$HOME/.iftop.conf"
 fi
 
-printf "Installing Custom Tmux Commands\n"
+prettyPrint "Installing Custom Tmux Commands\n"
 cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 
-printf "Installing Tmux plugins\n"
+prettyPrint "Installing Tmux plugins\n"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 #}}}***********************************************************
 
-#printf "Installing IFTOP-color"
+#prettyPrint "Installing IFTOP-color"
 #if [[ d "$HOME/ForkedRepos" ]]; then
 #mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
 #git clone https://github.com/MenkeTechnologies/iftopcolor
 #sudo ./configure && make && sudo make install
 #fi
 
-printf "Installing PyDf\n"
+prettyPrint "Installing PyDf\n"
 sudo pip install pydf
 
-printf "Installing MyCLI\n"
+prettyPrint "Installing MyCLI\n"
 sudo pip install mycli
 
 if [[ -f "$HOME/.token.sh" ]]; then
     touch "$HOME/.tokens.sh"
 fi
 
-printf "HushLogin\n"
+prettyPrint "HushLogin\n"
 if [[ -f "$HOME/.hushlogin" ]]; then
     touch "$HOME/.hushlogin"
 fi
@@ -287,7 +288,7 @@ if [[ -f "$HOME/.my.cnf" ]]; then
     touch "$HOME/.my.cnf"
 fi
 
-printf "Changing pager to cat for MySQL Clients such as MyCLI\n"
+prettyPrint "Changing pager to cat for MySQL Clients such as MyCLI\n"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
@@ -298,13 +299,13 @@ fi
 cp $INSTALLER_DIR/scripts/*.sh "$HOME/Documents/shellScripts"
 cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
 
-printf "Installing ponysay from source\n"
+prettyPrint "Installing ponysay from source\n"
 git clone https://github.com/erkin/ponysay.git && {
 cd ponysay && sudo ./setup.py --freedom=partial install && \
     cd .. && sudo rm -rf ponysay
 }
 
-printf "Installing Pipes.sh from source\n"
+prettyPrint "Installing Pipes.sh from source\n"
 git clone https://github.com/pipeseroni/pipes.sh.git
 cd pipes.sh && {
     sudo make install
@@ -312,7 +313,7 @@ cd pipes.sh && {
     rm -rf pipe.sh
 }
 
-printf "Installing htoprc file....\n"
+prettyPrint "Installing htoprc file....\n"
 htopDIR="$HOME/.config/htop"
 if [[ -f "$htopDIR/htoprfc" ]]; then
     if [[ -d "$htopDIR" ]]; then
@@ -322,16 +323,16 @@ if [[ -f "$htopDIR/htoprfc" ]]; then
 fi
 
 type youtube-dl >/dev/null 2>&1 || {
-    printf "Installing youtube-dl\n"
+    prettyPrint "Installing youtube-dl\n"
     sudo pip install --upgrade youtube_dl
 }
 
 type chsh >/dev/null 2>&1 && {
-    printf "Changing default shell to Zsh\n"
+    prettyPrint "Changing default shell to Zsh\n"
     chsh -s "$(which zsh)"
 }
 
-printf "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo\n"
+prettyPrint "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo\n"
 if [[ "$(uname)" == Darwin ]]; then
     GRC_DIR=/usr/local/share/grc
 else
@@ -341,14 +342,14 @@ fi
 cp "$INSTALLER_DIR/grc.zsh" "$HOME"
 sudo cp "$INSTALLER_DIR/conf.gls" "$GRC_DIR"
 
-printf "Changing current shell to Zsh\n"
+prettyPrint "Changing current shell to Zsh\n"
 exec zsh
 
-printf "Starting Tmux...\n"
-printf "Matrix time...\n"
+prettyPrint "Starting Tmux...\n"
+prettyPrint "Matrix time...\n"
 tmux
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
 tmux send-keys "matr" C-m
 
-printf "Done\n\e[0m"
+prettyPrint "Done\n\e[0m"
