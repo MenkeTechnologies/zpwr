@@ -183,7 +183,7 @@ alias ud=" execpy udemy.py"
 alias i="ipconfig getifaddr en0"
 alias pgrep='pgrep -l'
 #**********************************************************************
-#                           MARK:SHELL SCRIPTS
+#                           MARK:SHEL LSCRIPTS
 #**********************************************************************
 alias ct="bash $SCRIPTS/createTextFile.sh"
 alias u="bash $SCRIPTS/upLoadPi.sh"
