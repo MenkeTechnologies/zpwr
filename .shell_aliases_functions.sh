@@ -117,7 +117,7 @@ alias e="cd /etc"
 alias a="cd $HOME"
 alias k="pkill"
 alias sin="./configure && make && sudo make install"
-alias curl='curl -sL'
+alias curl='curl -fsSL'
 #Darwin specific aliases
 if [[ "$(uname)" == "Darwin" ]]; then
     #statements
