@@ -111,6 +111,9 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         update $prog mac
     done
 
+    prettyPrint "Installing Powerline fonts"
+    brew cask install font-hack-nerd-font
+
     #}}}***********************************************************
 
 else
