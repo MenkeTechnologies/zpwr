@@ -196,6 +196,7 @@ zle -N tutsUpdate
 bindkey '\e[1;2D' sub
 #press both escape and control f then oo
 bindkey '\e^f' sub
+#bound to control spacebar
 bindkey '^@' sshRegain
 
 #F1 key
