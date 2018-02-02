@@ -244,16 +244,12 @@ fi
 
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
-if [[ "$(uname)" == Linux ]]; then
-    #statements
-    prettyPrint "Installing Iftop config..."
-    cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
+prettyPrint "Installing Iftop config..."
+cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
+
+if [[ "distroName" == raspbian]]; then
     prettyPrint "Installing custom motd for RPI..."
     cp "$INSTALLER_DIR/motd.sh" "$HOME"
-else
-    prettyPrint "Installing Iftop config..."
-    cp "$INSTALLER_DIR/.iftop.conf.mac" "$HOME" 
-    mv "$HOME/.iftop.conf.mac" "$HOME/.iftop.conf"
 fi
 
 prettyPrint "Installing Custom Tmux Commands"
