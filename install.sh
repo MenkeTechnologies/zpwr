@@ -62,9 +62,9 @@ update (){
 
         if [[ $2 == mac ]]; then
             brew install "$1"
-        elif [[ $2 == debian ]]
+        elif [[ $2 == debian ]];then
             sudo apt-get install -y "$1"
-        elif [[ $2 == redhat ]]
+        elif [[ $2 == redhat ]];then
             yum install -y "$1"
         else
             printf "Error at install with $2." >&2; exit 1
