@@ -270,8 +270,6 @@ echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
 
-
-
 if [[ "distroName" == raspbian]]; then
     prettyPrint "Installing custom motd for RPI..."
     cp "$INSTALLER_DIR/motd.sh" "$HOME"
@@ -285,12 +283,12 @@ bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 #}}}***********************************************************
 
-#prettyPrint "Installing IFTOP-color"
-#if [[ d "$HOME/ForkedRepos" ]]; then
-#mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
-#git clone https://github.com/MenkeTechnologies/iftopcolor
-#sudo ./configure && make && sudo make install
-#fi
+prettyPrint "Installing IFTOP-color by MenkeTechnologies"
+if [[ d "$HOME/ForkedRepos" ]]; then
+    mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
+    git clone https://github.com/MenkeTechnologies/iftopcolor
+    sudo ./configure && make && sudo make install
+fi
 
 prettyPrint "Installing PyDf"
 sudo pip install pydf
@@ -366,15 +364,11 @@ cp "$INSTALLER_DIR/grc.zsh" "$HOME"
 cp "$INSTALLER_DIR/conf.gls" "$HOME"
 cp "$INSTALLER_DIR/conf.df" "$HOME"
 
+prettyPrint "Done!!!!!!"
+
 prettyPrint "Starting Tmux..."
-prettyPrint "Matrix time..."
+prettyPrint "Starting the matrix"
 tmux
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
-prettyPrint "Starting the matrix"
 tmux send-keys "matr" C-m
-
-prettyPrint "Changing current shell to Zsh"
-
-prettyPrint "Done"
-
