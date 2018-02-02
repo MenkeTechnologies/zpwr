@@ -128,7 +128,7 @@ else
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
            distro=debian
             ;;
-        (centos) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
+        (centos) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
             distro=redhat
             ;;
         * )
