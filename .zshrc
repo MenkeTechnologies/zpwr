@@ -93,7 +93,6 @@ plugins=(zsh-xcode-completions zsh-more-completions fzf-zsh zsh-completions zsh-
 
 #{{{                    MARK:Sourcing
 #**************************************************************
-
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -101,6 +100,7 @@ source $ZSH/oh-my-zsh.sh
 
 #has all my aliases and functioms
 source ~/.shell_aliases_functions.sh
+
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Fxns
