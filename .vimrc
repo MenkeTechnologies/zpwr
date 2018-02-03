@@ -243,12 +243,11 @@ function TmuxRepeatGeneric()
     exe "normal! zz"
 endfunction
 
-nnoremap <silent> <C-s> :w<CR>:call TmuxRepeat()<CR>
-inoremap <silent> <C-s> <C-[>:w<CR>:call TmuxRepeat()<CR>a
+nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
+inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
 
-nnoremap <silent> <C-F> :w<CR>:call TmuxRepeatGeneric()<CR>
-"vnoremap <silent> <C-V> :<C-C>:w<CR>:call TmuxRepeat()<CR>
-inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
+nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>
+inoremap <silent> <C-V> <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
 
 nnoremap <silent> <Esc>t mbgg=G`b
 inoremap <silent> <Esc>t <ESC>mbgg=G`ba
