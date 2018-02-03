@@ -248,8 +248,18 @@ p(){
 }
 
 b(){
+
+    if [[ $1 == -s ]]; then
+        sleepTime=$2
+        shift 2
+    fi
+
     for cmd in "$@"; do
-        ( eval "$cmd" & ) ; p $(echo "$cmd" | awk '{print $1}')
+        if [[ -z $sleepTime ]]; then
+            ( eval "$cmd" & ) ; p $(echo "$cmd" | awk '{print $1}')
+        else
+            ( eval "sleep $sleepTime && $cmd" & ) ; p $(echo "$cmd" | awk '{print $1}')
+        fi
     done
 }
 
