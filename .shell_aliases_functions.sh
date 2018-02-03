@@ -241,11 +241,16 @@ scnew(){
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
 p(){
-    ps -ef | grep "$*"
+    out="$(ps -ef)"
+    for cmd in "$@" ; do
+        echo "$out" | fgrep -- "$cmd"
+    done
 }
 
 b(){
-    ( "$@" & ) ; p "$@"
+    for cmd in "$@"; do
+        ( eval "$cmd" & ) ; p $(echo "$cmd" | awk '{print $1}')
+    done
 }
 
 nn(){
