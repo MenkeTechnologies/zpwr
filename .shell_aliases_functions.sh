@@ -243,7 +243,7 @@ scnew(){
 p(){
     out="$(ps -ef)"
     for cmd in "$@" ; do
-        echo "$out" | fgrep -- "$cmd"
+        echo "$out" | fgrep -i -- "$cmd"
     done
 }
 
