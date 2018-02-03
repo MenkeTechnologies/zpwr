@@ -76,16 +76,16 @@ update (){
         elif [[ $2 == redhat ]];then
             yum install -y "$1"
         else
-            prettyPrint "Error at install with $2." >&2; exit 1
+            prettyPrint "Error at install with $2." >&2
         fi
     }
 }
 
 #}}}***********************************************************
 
+#{{{                    MARK:Mac
+#**************************************************************
 if [[ "$OS_TYPE" == "Darwin" ]]; then
-    #{{{                    MARK:Mac
-    #**************************************************************
     prettyPrint "Checking Dependencies for Mac..."
 
     exists "brew" || {
@@ -102,7 +102,6 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         brew install pip
     fi
 
-
     prettyPrint "We have Python..."
 
     prettyPrint "Now The Main Course..."
@@ -116,11 +115,10 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     #}}}***********************************************************
 
+#{{{                    MARK:Linux
+#**************************************************************
+
 else
-
-    #{{{                    MARK:Linux
-    #**************************************************************
-
 
     distroName=$(cat /etc/os-release | grep "^ID=" | cut -d= -f2 | tr -d \")
 
@@ -158,14 +156,16 @@ else
         printf "/usr/share/fonts and /etc/fonts/conf.d must exist" >&2
     fi
 
-
-    #}}}***********************************************************
-
 fi
+
+#}}}***********************************************************
+
 #{{{                    MARK:vim
 #**************************************************************
 
-#prettyPrint "Installing Vim8 From Source"
+
+printf "Common Installer Section"
+
 #git clone https://github.com/vim/vim.git vim-master
 #cd vim-master
 #./configure --with-features=huge \
@@ -182,8 +182,7 @@ fi
 
 prettyPrint "Installing Pathogen"
 #install pathogen
-mkdir -p $HOME/.vim/autoload $HOME/.vim/bundle && \
-    curl -LSso $HOME/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
 
 prettyPrint "Installing Vim Plugins"
 bash "$INSTALLER_DIR/vim_plugins_install.sh"
@@ -204,6 +203,8 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
 #}}}***********************************************************
 
+#{{{                    MARK:Vim Plugs
+#**************************************************************
 ################################################################################
 ## YouCompleteMe
 ################################################################################
@@ -221,6 +222,8 @@ sudo pip install powerline-status
 
 prettyPrint "Adding Powerline to .vimrc"
 
+
+#}}}***********************************************************
 
 #{{{                    MARK:zsh
 #**************************************************************
@@ -242,6 +245,7 @@ prettyPrint "Installing Zsh plugins"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 #}}}***********************************************************
+
 #{{{                    MARK:Tmux
 #**************************************************************
 #prettyPrint "Installing Tmux Powerline"
@@ -283,6 +287,8 @@ bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 #}}}***********************************************************
 
+#{{{                    MARK:Utilities
+#**************************************************************
 prettyPrint "Installing IFTOP-color by MenkeTechnologies"
 if [[ d "$HOME/ForkedRepos" ]]; then
     mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
@@ -364,6 +370,11 @@ cp "$INSTALLER_DIR/grc.zsh" "$HOME"
 cp "$INSTALLER_DIR/conf.gls" "$HOME"
 cp "$INSTALLER_DIR/conf.df" "$HOME"
 
+
+#}}}***********************************************************
+
+#{{{                    MARK:Final
+#**************************************************************
 prettyPrint "Done!!!!!!"
 
 prettyPrint "Starting Tmux..."
@@ -372,3 +383,5 @@ tmux
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
 tmux send-keys "matr" C-m
+
+#}}}***********************************************************
