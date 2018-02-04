@@ -171,8 +171,8 @@ changeQuotes(){
 	}
 }
 basicSedSub(){
-	  emulate -LR zsh
-   [[ -z "$BUFFER" && {
+   emulate -LR zsh
+   echo "$BUFFER" | egrep -q '\w+' || {
         printf "\x1b[1;31m"
         zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
         printf "\x1b[0m"
