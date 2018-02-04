@@ -350,6 +350,14 @@ function InsertVar(toInsert, front, back)
     exe "normal! i".a:toInsert
     exe "normal! `b"
 endfunction
+function InsertVarPunct(toInsert, front, back)
+    exe "normal! lmb"
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! f".a:back
+    exe "normal! i".a:toInsert
+    exe "normal! `b"
+endfunction
 
 function InsertBackTick(toInsert, front, back)
     exe "normal! lmb"
@@ -409,6 +417,12 @@ function Quoter(type)
     elseif (line =~ '\v.*`.*`.*')
         call InsertBackTick(quote, '`', '`')
         echo "`command substitution`"
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\).*')
+        call InsertVarPunct(quote, '$', ')')
+        echo "$var)"
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\].*')
+        call InsertVarPunct(quote, '$', ']')
+        echo "$var]"
     elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
         call InsertVar(quote, '$', '/\s')
         echo "$var "

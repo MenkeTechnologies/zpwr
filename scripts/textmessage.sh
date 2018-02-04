@@ -24,9 +24,9 @@ else
     member_1="5551113333"
     default_recipent="555111333"
 
-    family_phone_numbers=($member_1)
+    family_phone_numbers=("$member_1")
     declare -A names_from_phone_numbers
-    names_from_phone_numbers[$member_1]=Member1Name
+    names_from_phone_numbers["$member_1"]=Member1Name
 
     if [[ -z "$3" ]]; then
         #read from stdin
@@ -46,7 +46,7 @@ else
             if [[ -p /dev/stdin ]]; then
                 #we have stdin
                 if [[ "$2" == "family" ]]; then
-                    for person in ${family_phone_numbers[@]} ; do
+                    for person in "${family_phone_numbers[@]}" ; do
                         prettyPrint "${names_from_phone_numbers[$person]} ..."
                         mutt -s "$1" "$person"@txt.att.net <&0 2>$LOGFILE
                     done
@@ -60,7 +60,7 @@ else
                             exit 0
                         fi
                         #checking for number in keys of associative array
-                        if [[ "$2" == $number ]]; then
+                        if [[ "$2" == "$number" ]]; then
                             prettyPrint "${names_from_phone_numbers[$number]}..."
                             mutt -s "$1" "$2"@txt.att.net <&0 2>$LOGFILE
                             exit 0
