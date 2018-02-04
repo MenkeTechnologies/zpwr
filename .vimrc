@@ -383,7 +383,8 @@ function Quoter(type)
     elseif a:type == "back"
         let quote="`"
     endif
-
+    "if line matches regex and cursor position within matching capture group
+    "then run the quoting
 
     if (line =~ '\v^.*\$\(.*\).*$') 
         call Insert(quote, '$', ')')
