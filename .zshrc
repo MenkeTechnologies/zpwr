@@ -241,8 +241,10 @@ bindkey '\e[1;5D' db
 
 bindkey '^S' gitfunc
 bindkey '```' sudo-command-line
-bindkey '^T' transpose-words
-bindkey '^Y' transpose-chars
+bindkey -M viins '^T' transpose-words
+bindkey -M vicmd '^T' transpose-words
+bindkey -M viins '^Y' transpose-chars
+bindkey -M vicmd '^Y' transpose-chars
 
 
 #Filter stderr through shell scripts
