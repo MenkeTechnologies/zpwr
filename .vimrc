@@ -322,6 +322,15 @@ inoremap <silent> <C-Up> <C-[>:<C-U>call GoToNextMarker("{{{",1)<CR>i
 nnoremap <silent> <C-Down> :<C-U>call GoToNextMarker("{{{",0)<CR>
 nnoremap <silent> <C-Up> :<C-U>call GoToNextMarker("{{{",1)<CR>
 
+function InsertEOLVar(toInsert, front, back)
+    exe "normal! lmb"
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    "move to last char on line
+    exe "normal! g_"
+    exe "normal! a".a:toInsert
+    exe "silent! normal! `b"
+endfunction
 function InsertEquals(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! T".a:front
@@ -338,7 +347,17 @@ function InsertVar(toInsert, front, back)
     exe "normal! i".a:toInsert
     exe "normal! f ".a:back
     exe "normal! i".a:toInsert
-    exe "silent! normal! `b"
+    exe "normal! `b"
+endfunction
+
+function InsertBackTick(toInsert, front, back)
+    exe "normal! lmb"
+    exe "normal! f".a:back
+    exe "normal! a".a:toInsert
+    exe "normal! F".a:front
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! `b"
 endfunction
 
 function Insert(toInsert, front, back)
@@ -368,13 +387,16 @@ function Quoter(type)
         call Insert(quote, '$', ')')
         echo "$(command substitution)"
     elseif (line =~'.*=.*')
-        call InsertEquals(quote, '=', '/[\s]')
+        call InsertEquals(quote, '=', '')
         echo "var=value"
     elseif (line =~'.*`.*`.*')
-        call Insert(quote, '`', '`')
+        call InsertBackTick(quote, '`', '`')
         echo "`command substitution`"
-    elseif (line =~'.*\$\w\w*.*')
+    elseif (line =~'.*\$[\w\!\?\$]\w*..*')
         call InsertVar(quote, '$', '/\s')
+        echo "$var"
+    elseif (line =~'.*\$[\w\!\?\$]\w*$')
+        call InsertEOLVar(quote, '$', '')
         echo "$var"
     else
         echo "Unknown Quoting Option"
