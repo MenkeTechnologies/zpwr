@@ -361,6 +361,15 @@ function InsertBackTick(toInsert, front, back)
     exe "normal! `b"
 endfunction
 
+function InsertMatchingPunct(toInsert, front)
+    exe "normal! lmb"
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! ll%"
+    exe "normal! a".a:toInsert
+    exe "normal! `b"
+endfunction
+
 function Insert(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! f".a:back
@@ -375,6 +384,8 @@ function Quoter(type)
     let wordCursor=expand("<cword>")
     let charCursor=nr2char(strgetchar(getline('.')[col('.') - 1:], 0))
 
+    let colIndex=col('.')
+
     if a:type == "single"
         let quote="'"
         "if matches echo .* L=echo R=last non space
@@ -387,7 +398,7 @@ function Quoter(type)
     "then run the quoting
 
     if (line =~ '\v^.*\$\(.*\).*$') 
-        call Insert(quote, '$', ')')
+        call InsertMatchingPunct(quote, '$')
         echo "$(command substitution)"
     elseif (line =~ '\v^.*\$\{.*\}.*$') 
         call Insert(quote, '$', '}')
