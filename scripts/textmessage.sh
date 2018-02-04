@@ -21,8 +21,8 @@ if [[ -z "$1" ]]; then
     prettyPrint "need a subject" >&2
     exit 1
 else
-    member_1=5551113333
-    default_recipent=555111333
+    member_1="5551113333"
+    default_recipent="555111333"
 
     family_phone_numbers=($member_1)
     declare -A names_from_phone_numbers
@@ -35,7 +35,7 @@ else
             #pass stdin from fxn directly into mutt as body
             if [[ -p /dev/stdin ]]; then
                 prettyPrint "Texting default recipient..."
-                mutt -s "$1" $default_recipient@txt.att.net <&0 2>$LOGFILE
+                mutt -s "$1" "$default_recipient@txt.att.net" <&0 2> $LOGFILE
             else
                 prettyPrint "Need stdin for the body of the message if you want to text to me." >&2
                 exit 1
