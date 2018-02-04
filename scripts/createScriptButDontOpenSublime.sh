@@ -18,9 +18,9 @@ executableScriptsProcessing(){
 
 openTextEditor(){
 	# open -t "$newfile"
-	subl $newfile
+	subl "$newfile/dogs"
 	#run python3 script with pyautogi commands for keyboard shortcuts
-	python3 $HOME/PycharmProjects/textEditorTwoColumns.py
+	python3 "$HOME/PycharmProjects/textEditorTwoColumns.py"
 }
 
 
@@ -34,7 +34,7 @@ createTheFile(){
 		.sh ) echo "#!/usr/local/bin/bash" > "$newfile" ;;
 		.pl ) echo "#!/usr/local/bin/perl" > "$newfile" ;;
 		.rb ) echo "#!/usr/bin/env ruby" > "$newfile" ;;
-		.py ) echo "#!/Library/Frameworks/Python.framework/Versions/3.5/bin/python3" > $newfile ;;
+		.py ) echo "#!/Library/Frameworks/Python.framework/Versions/3.5/bin/python3" > "$newfile" ;;
 		#if .txt or some other file ending then just open the file, no processing
 		#exit so do not call executableScriptsProcessing
 		* 	) subl "$newfile" && exit;;
@@ -74,7 +74,7 @@ elif [[ "$newfile" =~ .*\..* ]]; then # a file ending that we do not want to pro
 else
 	#if no file ending default to text file
 	#construct file with ending of .txt
-	newfile="$newfile".txt
+	newfile="$newfile.txt"
 
 	createTheFile .txt
 fi

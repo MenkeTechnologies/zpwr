@@ -331,6 +331,7 @@ function InsertEOLVar(toInsert, front, back)
     exe "normal! a".a:toInsert
     exe "silent! normal! `b"
 endfunction
+
 function InsertEquals(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! T".a:front
@@ -383,23 +384,27 @@ function Quoter(type)
         let quote="`"
     endif
 
-    if (line =~ '^.*\$(.*).*$') 
+
+    if (line =~ '\v^.*\$\(.*\).*$') 
         call Insert(quote, '$', ')')
         echo "$(command substitution)"
     elseif (line =~'.*=.*')
         call InsertEquals(quote, '=', '')
         echo "var=value"
-    elseif (line =~'.*`.*`.*')
+    elseif (line =~'.*=.*')
+        call InsertEquals(quote, '=', '')
+        echo "var=value"
+    elseif (line =~ '\v.*`.*`.*')
         call InsertBackTick(quote, '`', '`')
         echo "`command substitution`"
-    elseif (line =~'.*\$[\w\!\?\$]\w*..*')
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
         call InsertVar(quote, '$', '/\s')
-        echo "$var"
-    elseif (line =~'.*\$[\w\!\?\$]\w*$')
+        echo "$var "
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|\`|\'')+$')
         call InsertEOLVar(quote, '$', '')
-        echo "$var"
+        echo "$varEOL"
     else
-        echo "Unknown Quoting Option"
+        echo "Unknown Quoting Option:".line
     endif
 
 endfunction
