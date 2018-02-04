@@ -12,14 +12,13 @@ executableScriptsProcessing(){
 	chmod 700 "$newfile"
 	#add hr	echo "#created by JAKOBMENKE --> `date` " >> "$newfile"
 	#and open file
-
 	openTextEditor
 
 }
 
 openTextEditor(){
 	# open -t "$newfile"
-	subl "$newfile"
+	subl $newfile
 	#run python3 script with pyautogi commands for keyboard shortcuts
 	python3 $HOME/PycharmProjects/textEditorTwoColumns.py
 }
