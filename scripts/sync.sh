@@ -25,5 +25,3 @@ echo -e "\e[44;37mSyncing \"$firstFile\" to \"$2\""
 #direct output to dev/null
 rsync -avvhr --info=progress2 --stats "$firstFile" "$2" &> /dev/null
 echo -e "Done\e[0m"
-
-tt
