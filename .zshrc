@@ -170,9 +170,9 @@ changeQuotes(){
 	BUFFER=${BUFFER//\"/\'}
 	}
 }
-sedsubs(){
+basicSedSub(){
 	emulate -LR zsh
-	zle -R "Substitution:"
+	zle -R "Basic Substitution (two args seperated by space):"
 	local SEDARG=""
 	local key=""
 	read -k key
@@ -184,7 +184,7 @@ sedsubs(){
 		else
 			SEDARG="${SEDARG}$key"
 		fi
-		zle -R "Substitution: $SEDARG"
+		zle -R "Basic Substitution (two args seperated by space): $SEDARG"
 		read -k key || return 1
 	done	
 	orig="$(echo $SEDARG | awk '{print $1}')"
@@ -192,6 +192,7 @@ sedsubs(){
 	SEDARG="s/$orig/$replace/g"
 
 	BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
+    zle .accept-line
 }
 
 #vim  mode
@@ -201,8 +202,8 @@ bindkey -M viins '^r' history-incremental-search-backward
 bindkey -M vicmd '^r' history-incremental-search-backward
 bindkey -M viins '^z' undo
 
-zle -N sedsubs
-bindkey '^O' sedsubs
+zle -N basicSedSub
+bindkey '^O' basicSedSub
 
 zle -N changeQuotes
 
