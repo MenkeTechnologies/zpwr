@@ -187,7 +187,6 @@ basicSedSub(){
 			SEDARG="${SEDARG}$key"
 		fi
 
-
         zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
 		read -k key || return 1
 	done	
@@ -207,6 +206,13 @@ basicSedSub(){
 	orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
 	replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
 	SEDARG="s@$orig@$replace@g"
+
+    echo "$BUFFER" | egrep -q "$orig" || {
+        printf "\x1b[1;31m"
+        zle -R  "No Match." && read -k 1
+        printf "\x1b[0m"
+        return 1
+    }
 
 	BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
 }
