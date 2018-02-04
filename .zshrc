@@ -172,7 +172,7 @@ changeQuotes(){
 }
 basicSedSub(){
 	emulate -LR zsh
-	zle -R "Basic Substitution (original>replaced):"
+    zle -R "Basic Substitution (original>replaced) (@ not allowed in any string):"
 	local SEDARG=""
 	local key=""
 	read -k key
@@ -184,9 +184,10 @@ basicSedSub(){
 		else
 			SEDARG="${SEDARG}$key"
 		fi
-		zle -R "Basic Substitution (original>replaced): $SEDARG"
+        zle -R "Basic Substitution (original>replaced) (@ not allowed in any string): $SEDARG"
 		read -k key || return 1
 	done	
+    echo "$SEDARG" | grep -q "@" && return 1
 	orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
 	replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
 	SEDARG="s@$orig@$replace@g"
@@ -202,7 +203,8 @@ bindkey -M vicmd '^r' history-incremental-search-backward
 bindkey -M viins '^z' undo
 
 zle -N basicSedSub
-bindkey '^O' basicSedSub
+bindkey -M viins '^O' basicSedSub
+bindkey -M vicmd '^O' basicSedSub
 
 zle -N changeQuotes
 
