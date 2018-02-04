@@ -192,7 +192,6 @@ basicSedSub(){
 	SEDARG="s@$orig@$replace@g"
 
 	BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
-    zle .accept-line
 }
 
 #vim  mode
