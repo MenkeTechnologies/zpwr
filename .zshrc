@@ -172,7 +172,7 @@ changeQuotes(){
 }
 basicSedSub(){
 	emulate -LR zsh
-    zle -R "Basic Substitution (original>replaced) (@ not allowed in any string):"
+    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
 	local SEDARG=""
 	local key=""
 	read -k key
@@ -184,10 +184,16 @@ basicSedSub(){
 		else
 			SEDARG="${SEDARG}$key"
 		fi
-        zle -R "Basic Substitution (original>replaced) (@ not allowed in any string): $SEDARG"
+        zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
 		read -k key || return 1
 	done	
-    echo "$SEDARG" | grep -q "@" && return 1
+    echo "$SEDARG" | grep -q "@" && { 
+        zle -R "No '@' allowed! That is the sed delimiter!" && read -k key && return 1
+}
+
+    echo "$SEDARG" | grep -q ">" || {
+        zle -R "'>' needed for separation of original regex string and substitution!" && read -k 1 && return 1
+}
 	orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
 	replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
 	SEDARG="s@$orig@$replace@g"
