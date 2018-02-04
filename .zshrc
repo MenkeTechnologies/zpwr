@@ -243,8 +243,8 @@ bindkey '^S' gitfunc
 bindkey '```' sudo-command-line
 bindkey -M viins '^T' transpose-words
 bindkey -M vicmd '^T' transpose-words
-bindkey -M viins '^Y' transpose-chars
-bindkey -M vicmd '^Y' transpose-chars
+bindkey -M viins '^E' transpose-chars
+bindkey -M vicmd '^E' transpose-chars
 
 
 #Filter stderr through shell scripts
@@ -281,12 +281,13 @@ precmd(){
 }
 
 rationalize-dot (){
-if [[ $LBUFFER = *.. ]]; then
-	LBUFFER+=/..
-else
-	LBUFFER+=.
-fi
+    if [[ $LBUFFER = *.. ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
 }
+
 zle -N rationalize-dot
 bindkey . rationalize-dot
 
