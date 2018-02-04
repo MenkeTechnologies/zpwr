@@ -327,16 +327,17 @@ clearList () {
                     echo
                     echo
                 } || {
-                    echo "$locale"
+                echo "$locale"
                 echo
                 echo
             }
         done < <(type -a "$command" | sort | uniq)
     } || {
         #path matching, not exe
+    eval "$ls_command \"$command\"" || return 1
+    echo
     prettyPrint "$command"
-    eval "$ls_command -d \"$command\"" || \
-        return 1
+    eval "$ls_command -d \"$command\"" || return 1
     prettyPrint "FILE TYPE:"
     file "$command"
     prettyPrint "SIZE:"
