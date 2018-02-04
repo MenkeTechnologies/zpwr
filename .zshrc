@@ -189,7 +189,7 @@ basicSedSub(){
 	done	
 	orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
 	replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
-	SEDARG="s/$orig/$replace/g"
+	SEDARG="s@$orig@$replace@g"
 
 	BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
     zle .accept-line
