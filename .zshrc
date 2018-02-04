@@ -188,11 +188,17 @@ basicSedSub(){
 		read -k key || return 1
 	done	
     echo "$SEDARG" | grep -q "@" && { 
-        zle -R "No '@' allowed! That is the sed delimiter!" && read -k key && return 1
+        print "\x1b[1;33m"
+        zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
+        print "\x1b[0m"
+        return 1
 }
 
     echo "$SEDARG" | grep -q ">" || {
-        zle -R "'>' needed for separation of original regex string and substitution!" && read -k 1 && return 1
+        print "\x1b[1;33m"
+        zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
+        print "\x1b[0m"
+        return 1
 }
 	orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
 	replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
