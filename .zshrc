@@ -172,7 +172,7 @@ changeQuotes(){
 }
 basicSedSub(){
 	emulate -LR zsh
-	zle -R "Basic Substitution (two args seperated by space):"
+	zle -R "Basic Substitution (two args seperated by >):"
 	local SEDARG=""
 	local key=""
 	read -k key
@@ -184,11 +184,11 @@ basicSedSub(){
 		else
 			SEDARG="${SEDARG}$key"
 		fi
-		zle -R "Basic Substitution (two args seperated by space): $SEDARG"
+		zle -R "Basic Substitution (two args seperated by >): $SEDARG"
 		read -k key || return 1
 	done	
-	orig="$(echo $SEDARG | awk '{print $1}')"
-	replace="$(echo $SEDARG | awk '{print $2}')"
+	orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
+	replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
 	SEDARG="s/$orig/$replace/g"
 
 	BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
