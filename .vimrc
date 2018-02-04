@@ -298,15 +298,15 @@ fun GoToNextMarker(searchTerm, backwardsSearch)
         endif
         let loopCounter += 1
     endw
-    exe ":normal jj^zz"
+    exe "normal jj^zz"
     let &wrapscan = oldwrap
     unlet oldwrap
 endf
 
 function! IndentSqueeze()
-    silent! exe ":normal mbgg=G"
-    silent! exe " 1,$!cat -s"
-    silent! exe ":normal `bzz"
+    silent! exe "normal! mbgg=G"
+    silent! exe "1,$!cat -s"
+    silent! exe "normal! `bzz"
     redraw!
 endfunction
 
@@ -322,22 +322,66 @@ inoremap <silent> <C-Up> <C-[>:<C-U>call GoToNextMarker("{{{",1)<CR>i
 nnoremap <silent> <C-Down> :<C-U>call GoToNextMarker("{{{",0)<CR>
 nnoremap <silent> <C-Up> :<C-U>call GoToNextMarker("{{{",1)<CR>
 
-function Quoter()
-    "w,e,b will not see these characters as delimiters
-    set iskeyword+=/
-    set iskeyword+=$
-    set iskeyword+={
-    set iskeyword+=(
-    set iskeyword+=)
-    set iskeyword+=}
-    set iskeyword+=-
-    set iskeyword+=\
-    set iskeyword+=.
+function InsertEquals(toInsert, front, back)
+    exe "normal! lmb"
+    exe "normal! T".a:front
+    exe "normal! i".a:toInsert
+    "move to last char on line
+    exe "normal! g_"
+    exe "normal! a".a:toInsert
+    exe "silent! normal! `b"
 endfunction
 
-function Reset()
-    set iskeyword&
+function InsertVar(toInsert, front, back)
+    exe "normal! lmb"
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! f ".a:back
+    exe "normal! i".a:toInsert
+    exe "silent! normal! `b"
 endfunction
+
+function Insert(toInsert, front, back)
+    exe "normal! lmb"
+    exe "normal! f".a:back
+    exe "normal! a".a:toInsert
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! `b"
+endfunction
+
+function Quoter(type)
+    let line=getline('.')
+    let wordCursor=expand("<cword>")
+    let charCursor=nr2char(strgetchar(getline('.')[col('.') - 1:], 0))
+
+    if a:type == "single"
+        let quote="'"
+        "if matches echo .* L=echo R=last non space
+    elseif a:type == "double"
+        let quote='"'
+    elseif a:type == "back"
+        let quote="`"
+    endif
+
+    if (line =~ '^.*\$(.*).*$') 
+        call Insert(quote, '$', ')')
+        echo "$(command substitution)"
+    elseif (line =~'.*=.*')
+        call InsertEquals(quote, '=', '/[\s]')
+        echo "var=value"
+    elseif (line =~'.*`.*`.*')
+        call Insert(quote, '`', '`')
+        echo "`command substitution`"
+    elseif (line =~'.*\$\w\w*.*')
+        call InsertVar(quote, '$', '/\s')
+        echo "$var"
+    else
+        echo "Unknown Quoting Option"
+    endif
+
+endfunction
+
 
 let blacklist=['md', 'sh','hs', 'pl']
 
@@ -366,8 +410,9 @@ elseif os == "Linux"
 
 endif
 
-nnoremap <silent> <leader>" :call Quoter()<CR>lmaea"<ESC>bi"<ESC>:call Reset()<CR>`a
-nnoremap <silent> <leader>' :call Quoter()<CR>lmaea'<ESC>bi'<ESC>:call Reset()<CR>`a
+nnoremap <silent> <leader>" :call Quoter("double")<CR>
+nnoremap <silent> <leader>' :call Quoter("single")<CR>
+nnoremap <silent> <leader>` :call Quoter("back")<CR>
 
 inoremap <silent> <C-U> <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 nnoremap <silent> <C-U> :silent !open -t %:p:h<CR>:redraw!<CR>

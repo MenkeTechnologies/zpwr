@@ -11,23 +11,23 @@ trap 'kill $s1_pid $s2_pid $s3_pid $s4_pid \
     $s5_pid $s6_pid $s8_pid $s10_pid' INT HUP
 
 bash S1 &
-s1_pid=$!
+s1_pid="$!"
 bash S2 &
-s2_pid=$!
+s2_pid="$!"
 
 {
 bash S4
 #once s4 is done, s4 echoed to temp file
 echo s4 >> temp.`whoami`
 } &
-s4_pid=$!
+s4_pid="$!"
 
 {
 bash S5
 #once s5 is done, s5 echoed to temp file
-echo s5 >> temp.`whoami`
+echo s5 >> temp.`whoami"`"
 } &
-s5_pid=$!
+s5_pid="$!"
 
 {
     while [[ true ]]; do
