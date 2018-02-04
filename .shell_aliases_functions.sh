@@ -87,6 +87,7 @@ fi
 #{{{                          MARK:ALIASES
 #**********************************************************************
 #portable aliases
+alias nz='exec zsh'
 alias ll="clearList"
 alias la="clearList"
 alias l="clearList"
