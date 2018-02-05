@@ -162,21 +162,22 @@ functions[_expand-aliases]=$BUFFER
     BUFFER=${functions[_expand-aliases]#$'\t'} &&
     CURSOR=$#BUFFER
 }
-x=0
-
+_COUNTER=0
+_OLDBUFFER=""
 changeQuotes(){
-    OLDBUFFER=""
-    if (( $x % 4 == 0 )); then
-        BUFFER=${BUFFER//\'/\"}
-    elif (( $x % 4 == 1 )); then
+    if (( $_COUNTER % 5 == 0 )); then
+        _OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
-    elif (( $x % 4 == 2 )); then
-        OLDBUFFER="${BUFFER}"
-        BUFFER=${BUFFER//\'/}
+    elif (( $_COUNTER % 5 == 1 )); then
+        BUFFER=${BUFFER//\'/\`}
+    elif (( $_COUNTER % 5 == 2 )); then
+        BUFFER=${BUFFER//\`/}
+    elif (( $_COUNTER % 5 == 3 )); then
+        BUFFER="\$(${BUFFER})"
     else
-        BUFFER="${OLDBUFFER}"
+        BUFFER="${_OLDBUFFER}"
     fi
-    let x++
+    let _COUNTER++
 }
 
     basicSedSub(){
