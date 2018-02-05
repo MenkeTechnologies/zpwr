@@ -170,6 +170,7 @@ changeQuotes(){
     BUFFER=${BUFFER//\"/\'}
     }
 }
+
 basicSedSub(){
     emulate -LR zsh
     echo "$BUFFER" | egrep -q '\w+' || {
@@ -238,7 +239,8 @@ bindkey -M vicmd '^O' basicSedSub
 
 zle -N changeQuotes
 
-bindkey '^K' changeQuotes
+bindkey -M viins '^K' changeQuotes
+bindkey -M vicmd '^K' changeQuotes
 
 zle -N expand-aliases
 
