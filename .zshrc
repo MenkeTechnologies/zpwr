@@ -296,11 +296,11 @@ basicSedSub(){
     SEDARG="s@$orig@$replace@g"
 
     echo "$BUFFER" | egrep -q "$orig" || {
-        printf "\x1b[1;31m"
-    zle -R  "No Match." && read -k 1
-    printf "\x1b[0m"
-    return 1
-        }
+        printf "\x1b[0;1;31m"
+        zle -R  "No Match." && read -k 1
+        printf "\x1b[0m"
+        return 1
+    }
 
     BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
 }
