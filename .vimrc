@@ -283,8 +283,8 @@ vnoremap <silent> <C-E> :<C-C>:q!<CR>
 inoremap <silent> <C-E> <C-[>:q!<CR>
 
 "comment out
-inoremap <silent> <C-M> <ESC>I//<ESC>ji
-inoremap <silent> <C-B> <ESC>^2xji
+inoremap <silent> <C-B> <ESC>I//<ESC>ji
+inoremap <silent> <ESC><C-B> <ESC>^2xji
 
 nnoremap <silent> <C-I> :SaveSession<CR>
 vnoremap <silent> <C-I> :<C-C>:SaveSession<CR>
@@ -296,7 +296,7 @@ nnoremap <silent> <leader>s :vs<CR>
 nnoremap <silent> <leader>h :sp<CR>
 nnoremap <silent> <leader>t :tabnew<CR>
 
-onoremap <silent> i# ?#<CR>jV/#<CR>kc 
+onoremap <silent> i# ?#<CR>jV/#<CR>kc
 
 fun GoToNextMarker(searchTerm, backwardsSearch)
     let oldwrap = &wrapscan
