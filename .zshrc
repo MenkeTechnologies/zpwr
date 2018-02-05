@@ -162,47 +162,55 @@ functions[_expand-aliases]=$BUFFER
     BUFFER=${functions[_expand-aliases]#$'\t'} &&
     CURSOR=$#BUFFER
 }
+x=0
 
 changeQuotes(){
-    echo "$BUFFER" | grep -q \' && {
+    OLDBUFFER=""
+    if (( $x % 4 == 0 )); then
         BUFFER=${BUFFER//\'/\"}
-} || {
-    BUFFER=${BUFFER//\"/\'}
+    elif (( $x % 4 == 1 )); then
+        BUFFER=${BUFFER//\"/\'}
+    elif (( $x % 4 == 2 )); then
+        OLDBUFFER="${BUFFER}"
+        BUFFER=${BUFFER//\'/}
+    else
+        BUFFER="${OLDBUFFER}"
+    fi
+    let x++
+}
+
+    basicSedSub(){
+        emulate -LR zsh
+        echo "$BUFFER" | egrep -q '\w+' || {
+            printf "\x1b[1;31m"
+        zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
+        printf "\x1b[0m"
+        return 1
     }
-}
 
-basicSedSub(){
-    emulate -LR zsh
-    echo "$BUFFER" | egrep -q '\w+' || {
-        printf "\x1b[1;31m"
-    zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
-    printf "\x1b[0m"
-    return 1
-}
+    printf "\x1b[1;34m"
+    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
+    printf "\x1b[1;35m"
+    local SEDARG=""
+    local key=""
+    read -k key
+    local -r start=$key
+    while (( (#key)!=(##\n) &&
+        (#key)!=(##\r) )) ; do
+    if (( (#key)==(##^?) || (#key)==(##^h) )) ; then
+        SEDARG=${SEDARG[1,-2]}
+    else
+        SEDARG="${SEDARG}$key"
+    fi
 
-printf "\x1b[1;34m"
-zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
-printf "\x1b[1;35m"
-local SEDARG=""
-local key=""
-read -k key
-local -r start=$key
-while (( (#key)!=(##\n) &&
-    (#key)!=(##\r) )) ; do
-if (( (#key)==(##^?) || (#key)==(##^h) )) ; then
-    SEDARG=${SEDARG[1,-2]}
-else
-    SEDARG="${SEDARG}$key"
-fi
-
-zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
-read -k key || return 1
-    done	
-    echo "$SEDARG" | grep -q "@" && { 
-        printf "\x1b[1;31m"
-    zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
-    printf "\x1b[0m"
-    return 1
+    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
+    read -k key || return 1
+done	
+echo "$SEDARG" | grep -q "@" && { 
+    printf "\x1b[1;31m"
+zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
+printf "\x1b[0m"
+return 1
 }
 
 echo "$SEDARG" | grep -q ">" || {
