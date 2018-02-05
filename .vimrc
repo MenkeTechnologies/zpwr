@@ -410,7 +410,7 @@ function Quoter(type)
         echo "$(command substitution)"
     elseif (line =~ '\v^.*\$\{.*\}.*$') 
         call Insert(quote, '$', '}')
-        echo "${paramater substitution}"
+        echo "${parameter substitution}"
     elseif (line =~'\v\s*\w+\=\w+\s*$')
         call InsertEquals(quote, '=', '')
         echo "var=value"
