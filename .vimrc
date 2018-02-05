@@ -265,8 +265,7 @@ endfunction
 
 "Transpose Chars Like Emacs
 nnoremap <silent> <C-T> xp
-vnoremap <silent> <C-T> xp
-inoremap <silent> <C-T> xp
+inoremap <c-t> i<bs><c-o>:silent! undojoin \| normal! xp<cr>
 
 "Transpose Words Like Emacs
 nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
@@ -584,6 +583,6 @@ set dictionary+=/usr/share/dict/words
 set thesaurus+=~/mthesaur.txt
 
 "easier mapping for dict completion
-inoremap <silent> <C-T> <C-X><C-K>
+"inoremap <silent> <C-T> <C-X><C-K>
 "easier mapping for thesaurus completion
-inoremap <silent> <ESC>t <C-X><C-T>
+"inoremap <silent> <ESC>t <C-X><C-T>
