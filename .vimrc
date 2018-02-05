@@ -427,7 +427,7 @@ function Quoter(type)
         call InsertMatchingPunct(quote, '$')
         echo "$(command substitution)"
     elseif (line =~ '\v^.*\$\{.*\}.*$') 
-        call Insert(quote, '$', '}')
+        call InsertMatchingPunct(quote, '$')
         echo "${parameter substitution}"
     elseif (line =~'\v\s*\w+\=\w+\s*$')
         call InsertEquals(quote, '=', '')
