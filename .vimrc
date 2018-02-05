@@ -271,6 +271,7 @@ inoremap <c-t> i<bs><c-o>:silent! undojoin \| normal! xp<cr>
 nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
 inoremap <silent> <ESC><C-T> <C-O>:call TransposeWords()<CR>
 
+
 "Ctrl-C exits like in shell
 nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
 "vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
