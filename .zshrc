@@ -244,49 +244,61 @@ basicSedSub(){
     zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
     printf "\x1b[0m"
     return 1
-}
-
-printf "\x1b[1;34m"
-zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
-printf "\x1b[1;35m"
-local SEDARG=""
-local key=""
-read -k key
-local -r start=$key
-while (( (#key)!=(##\n) &&
-    (#key)!=(##\r) )) ; do
-if (( (#key)==(##^?) || (#key)==(##^h) )) ; then
-    SEDARG=${SEDARG[1,-2]}
-else
-    SEDARG="${SEDARG}$key"
-fi
-
-zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
-read -k key || return 1
-done	
-echo "$SEDARG" | grep -q "@" && { 
-    printf "\x1b[1;31m"
-zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
-printf "\x1b[0m"
-return 1
-}
-
-echo "$SEDARG" | grep -q ">" || {
-    printf "\x1b[1;31m"
-zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
-printf "\x1b[0m"
-return 1
-}
-orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
-replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
-SEDARG="s@$orig@$replace@g"
-
-echo "$BUFFER" | egrep -q "$orig" || {
-    printf "\x1b[1;31m"
-zle -R  "No Match." && read -k 1
-printf "\x1b[0m"
-return 1
     }
+
+    printf "\x1b[1;34m"
+    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
+    printf "\x1b[1;35m"
+    local SEDARG=""
+    local key=""
+    read -k key
+    local -r start=$key
+    while (( (#key)!=(##\n) &&
+        (#key)!=(##\r) )) ; do
+
+        
+        if (( (#key)==(##\>) ));then
+            printf "\x1b[4;1;34m"
+        else
+            printf "\x1b[0;1;35m"
+        fi
+
+        if (( (#key)==(##^?) || (#key)==(##^h) ));then
+            SEDARG=${SEDARG[1,-2]}
+        elif (( (#key)==(##^U) ));then
+            SEDARG=""
+        else
+            if (( (#key)!=(##@) ));then
+            SEDARG="${SEDARG}$key"
+            fi
+        fi
+
+        zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
+        read -k key || return 1
+    done	
+    echo "$SEDARG" | grep -q "@" && { 
+        printf "\x1b[1;31m"
+    zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
+    printf "\x1b[0m"
+    return 1
+    }
+
+    echo "$SEDARG" | grep -q ">" || {
+        printf "\x1b[1;31m"
+    zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
+    printf "\x1b[0m"
+    return 1
+    }
+    orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
+    replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
+    SEDARG="s@$orig@$replace@g"
+
+    echo "$BUFFER" | egrep -q "$orig" || {
+        printf "\x1b[1;31m"
+    zle -R  "No Match." && read -k 1
+    printf "\x1b[0m"
+    return 1
+        }
 
     BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
 }
@@ -300,8 +312,8 @@ bindkey -M viins '^z' undo
 bindkey -M vicmd '^z' undo
 
 zle -N basicSedSub
-bindkey -M viins '^O' basicSedSub
-bindkey -M vicmd '^O' basicSedSub
+bindkey -M viins '^P' basicSedSub
+bindkey -M vicmd '^P' basicSedSub
 
 zle -N changeQuotes
 zle -N alternateQuotes
