@@ -192,12 +192,22 @@ changeQuotes(){
         BUFFER="\$(${_SEMI_OLDBUFFER})"
     elif (( $_COUNTER % 7 == 4 )); then
         #only diff should be $()
+        if (( ${#BUFFER} < 4 )); then
+            _COUNTER=0
+            return 1
+            #statements
+        fi
         if [[ "$_SEMI_OLDBUFFER" != "$(echo "${BUFFER:2:-1}" )" ]]; then
             _COUNTER=0
             return 1
         fi
         BUFFER="\"${BUFFER}\""
     elif (( $_COUNTER % 7 == 5 )); then
+        if (( ${#BUFFER} < 6 )); then
+            _COUNTER=0
+            return 1
+            #statements
+        fi
         if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER:3:-2}" ]]; then
             _COUNTER=0
             return 1
