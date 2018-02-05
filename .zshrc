@@ -227,9 +227,10 @@ basicSedSub(){
 #vim  mode
 bindkey -v
 
-bindkey -M viins '^r' history-incremental-search-backward
-bindkey -M vicmd '^r' history-incremental-search-backward
+bindkey -M viins '^r' redo
+bindkey -M vicmd '^r' redo
 bindkey -M viins '^z' undo
+bindkey -M vicmd '^z' undo
 
 zle -N basicSedSub
 bindkey -M viins '^O' basicSedSub
