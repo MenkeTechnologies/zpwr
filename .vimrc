@@ -200,7 +200,6 @@ filetype plugin on
 
 "{{{                    MARK:Mappings
 "**************************************************************
-imap jk <Esc>
 
 "faster movements, used in any modes
 noremap <c-j> 4j
