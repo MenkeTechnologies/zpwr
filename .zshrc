@@ -163,49 +163,89 @@ functions[_expand-aliases]=$BUFFER
     CURSOR=$#BUFFER
 }
 _COUNTER=0
-_OLDBUFFER=""
 changeQuotes(){
-    if (( $_COUNTER % 5 == 0 )); then
+
+    if (( $_COUNTER % 7 == 0 )); then
         _OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
-    elif (( $_COUNTER % 5 == 1 )); then
+    elif (( $_COUNTER % 7 == 1 )); then
+        if [[ "${BUFFER//\'/}" != "${_OLDBUFFER//\"/}" ]]; then
+            BUFFER="\"$BUFFER\""
+            _COUNTER=0
+            return 1
+        fi
         BUFFER=${BUFFER//\'/\`}
-    elif (( $_COUNTER % 5 == 2 )); then
-        BUFFER=${BUFFER//\`/}
-    elif (( $_COUNTER % 5 == 3 )); then
-        BUFFER="\$(${BUFFER})"
+    elif (( $_COUNTER % 7 == 2 )); then
+        if [[ "${BUFFER//\`/}" != "${_OLDBUFFER//\"/}" ]]; then
+            BUFFER="\"$BUFFER\""
+            _COUNTER=0
+            return 1
+        fi
+        _SEMI_OLDBUFFER="$BUFFER"
+        BUFFER="\"${BUFFER}\""
+    elif (( $_COUNTER % 7 == 3 )); then
+        if [[ ${_SEMI_OLDBUFFER} != ${BUFFER//\"/} ]]; then
+            _COUNTER=0
+            BUFFER="\"$BUFFER\""
+            return 1
+        fi
+        #semi has no quotes
+        _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
+        BUFFER="\$(${_SEMI_OLDBUFFER})"
+    elif (( $_COUNTER % 7 == 4 )); then
+        if [[ ${_SEMI_OLDBUFFER} != "$(echo "$BUFFER" | tr -d '$()')" ]]; then
+            BUFFER="\"$BUFFER\""
+            _COUNTER=0
+            return 1
+        fi
+        BUFFER="\"${BUFFER}\""
+    elif (( $_COUNTER % 7 == 5 )); then
+        if [[ ${_SEMI_OLDBUFFER} != "$(echo "$BUFFER" | tr -d '"$()')" ]]; then
+            BUFFER="\"$BUFFER\""
+            _COUNTER=0
+            return 1
+        fi
+        # back to no quotes
+        BUFFER="$_SEMI_OLDBUFFER"
     else
+        if [[ "${BUFFER}" != "${_SEMI_OLDBUFFER}" ]]; then
+            BUFFER="\"$BUFFER\""
+            _COUNTER=0
+            return 1
+        fi
+        #should have double quotes
         BUFFER="${_OLDBUFFER}"
     fi
+
     let _COUNTER++
 }
 
-    basicSedSub(){
-        emulate -LR zsh
-        echo "$BUFFER" | egrep -q '\w+' || {
-            printf "\x1b[1;31m"
-        zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
-        printf "\x1b[0m"
-        return 1
-    }
+basicSedSub(){
+    emulate -LR zsh
+    echo "$BUFFER" | egrep -q '\w+' || {
+        printf "\x1b[1;31m"
+    zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
+    printf "\x1b[0m"
+    return 1
+}
 
-    printf "\x1b[1;34m"
-    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
-    printf "\x1b[1;35m"
-    local SEDARG=""
-    local key=""
-    read -k key
-    local -r start=$key
-    while (( (#key)!=(##\n) &&
-        (#key)!=(##\r) )) ; do
-    if (( (#key)==(##^?) || (#key)==(##^h) )) ; then
-        SEDARG=${SEDARG[1,-2]}
-    else
-        SEDARG="${SEDARG}$key"
-    fi
+printf "\x1b[1;34m"
+zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
+printf "\x1b[1;35m"
+local SEDARG=""
+local key=""
+read -k key
+local -r start=$key
+while (( (#key)!=(##\n) &&
+    (#key)!=(##\r) )) ; do
+if (( (#key)==(##^?) || (#key)==(##^h) )) ; then
+    SEDARG=${SEDARG[1,-2]}
+else
+    SEDARG="${SEDARG}$key"
+fi
 
-    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
-    read -k key || return 1
+zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
+read -k key || return 1
 done	
 echo "$SEDARG" | grep -q "@" && { 
     printf "\x1b[1;31m"
