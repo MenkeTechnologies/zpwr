@@ -276,7 +276,6 @@ bindkey -M vicmd '\e^T' transpose-words
 bindkey -M viins '^T' transpose-chars
 bindkey -M vicmd '^T' transpose-chars
 
-
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
 #exec 2> >("$SCRIPTS"/redText.sh)
@@ -329,11 +328,9 @@ bindkey -M menuselect '\C-o' accept-and-menu-complete
 
 #{{{                    MARK:Setopt Options
 #**************************************************************
-# ===== Basics
 setopt rcquotes # allow '' escape
 setopt interactive_comments # Allow comments even in interactive shells (especially for Muness)
 
-# ===== Changing Directories
 setopt auto_cd # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
 setopt cdablevarS # if argument to cd is the name of a parameter whose value is a valid directory, it will become the current directory
 setopt pushd_ignore_dups # don't push multiple copies of the same directory onto the directory stack
@@ -352,27 +349,23 @@ setopt hist_find_no_dups # When searching history don't display results already 
 setopt hist_reduce_blanks # Remove extra blanks from each command line being added to history
 unsetopt hist_verify # do not execute, just expand history
 setopt share_history # imports new commands and appends typed commands to history
-# ===== Completion
 setopt always_to_end # When completing from the middle of a word, move the cursor to the end of the word
 #setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
 #unsetopt menu_complete # do not autoselect the first completion entry
-# ===== Correction
 #setopt correct # spelling correction for commands
 #setopt correctall # spelling correction for arguments
-# ===== Prompt
 setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
 setopt transient_rprompt # only show the rprompt on the current prompt
 
-# ===== Scripts and Functions
 setopt multios # perform implicit tees or cats when multiple redirections are attempted
 
+#dot files included in regular globs
 setopt globdots
 
-setopt CSH_NULL_GLOB
-#select first options on tab
-#setopt menucomplete
+# no glob in all globs then error
+setopt cshnullglob
 
 setopt nolistbeep
 
@@ -382,13 +375,16 @@ setopt shnullcmd
 # allow unquoted globs to pass through
 setopt nobadpattern
 
+#globs sorted numerically
 setopt numericglobsort
 
+# filename completion after =
 setopt magicequalsubst
 
 #auto select first item of menu completion
 setopt menu_complete
 
+#array expandsion include prefix
 setopt rcexpandparam
 
 #display octal and hex like C
