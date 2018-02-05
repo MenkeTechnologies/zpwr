@@ -279,14 +279,14 @@ basicSedSub(){
         read -k key || return 1
     done	
     echo "$SEDARG" | grep -q "@" && { 
-        printf "\x1b[1;31m"
+        printf "\x1b[0;1;31m"
     zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
     printf "\x1b[0m"
     return 1
     }
 
     echo "$SEDARG" | grep -q ">" || {
-        printf "\x1b[1;31m"
+        printf "\x1b[0;1;31m"
     zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
     printf "\x1b[0m"
     return 1
