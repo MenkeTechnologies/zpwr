@@ -2,7 +2,7 @@
 "**************************************************************
 "NeoBundle Scripts-----------------------------
 if &compatible
-	set nocompatible               " Be iMproved
+    set nocompatible               " Be iMproved
 endif
 
 """" Required:
@@ -91,27 +91,27 @@ Plugin 'beloglazov/vim-online-thesaurus'
 let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
 
 let g:rainbow_conf = {
-			\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-			\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-			\	'operators': '_,_',
-			\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-			\	'separately': {
-			\		'*': {},
-			\		'tex': {
-			\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-			\		},
-			\		'lisp': {
-			\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-			\		},
-			\		'vim': {
-			\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-			\		},
-			\		'html': {
-			\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-			\		},
-			\		'css': 0,
-			\	}
-			\}
+            \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+            \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+            \	'operators': '_,_',
+            \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+            \	'separately': {
+            \		'*': {},
+            \		'tex': {
+            \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+            \		},
+            \		'lisp': {
+            \			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+            \		},
+            \		'vim': {
+            \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+            \		},
+            \		'html': {
+            \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+            \		},
+            \		'css': 0,
+            \	}
+            \}
 
 " Track the engine.
 Plugin 'SirVer/ultisnips'
@@ -221,45 +221,19 @@ vnoremap > >gv
 
 vnoremap <C-c> "*y
 
-" Repeat last command in the next tmux pane.
-function TmuxRepeat()
-	let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua']
-	let exeFileType=expand('%:e')
-	if index(supportedTypes, exeFileType) >= 0
-		silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
-		redraw!
-	else
-		silent! exec "!tmux send-keys -t right C-c up C-m"
-		echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
-		redraw!
-	endif
-	exe "normal! zz"
-endfunction
-
-function TmuxRepeatGeneric()
-	silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
-	redraw!
-	exe "normal! zz"
-endfunction
-
-nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
-inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
-
-nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>
-inoremap <silent> <C-V> <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
 
 inoremap <silent> <C-L> <ESC>mbgg=G`ba
 
 "transpose words (like emacs `transpose-words')
 function! TransposeWords()
-	if search('\w\+\%#\w*\W\+\w\+')
-	elseif search('\w\+\W\+\%#\W*\w\+')
-	endif
-	let l:pos = getpos('.')
-	exec 'silent! :s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/'
-	call setpos('.', l:pos)
-	let l:_ = search('\(\%#\w\+\W\+\)\@<=\w\+')
-	normal el
+    if search('\w\+\%#\w*\W\+\w\+')
+    elseif search('\w\+\W\+\%#\W*\w\+')
+    endif
+    let l:pos = getpos('.')
+    exec 'silent! :s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/'
+    call setpos('.', l:pos)
+    let l:_ = search('\(\%#\w\+\W\+\)\@<=\w\+')
+    normal el
 endfunction
 
 "Transpose Chars Like Emacs
@@ -302,39 +276,39 @@ nnoremap <silent> <leader>t :tabnew<CR>
 onoremap <silent> i# ?#<CR>jV/#<CR>kc
 
 fun GoToNextMarker(searchTerm, backwardsSearch)
-	let oldwrap = &wrapscan
-	set nowrapscan
-	let loopCounter = 0
-	if v:count == 0
-		let mycount = 1
-	else
-		let mycount = v:count
-	endif
+    let oldwrap = &wrapscan
+    set nowrapscan
+    let loopCounter = 0
+    if v:count == 0
+        let mycount = 1
+    else
+        let mycount = v:count
+    endif
 
-	while loopCounter < mycount
-		if a:backwardsSearch == 0
-			silent! exe "/".a:searchTerm 
-		else
-			silent! exe "?".a:searchTerm 
-			silent! exe "?".a:searchTerm
-		endif
-		let loopCounter += 1
-	endw
-	exe "normal jj^zz"
-	let &wrapscan = oldwrap
-	unlet oldwrap
+    while loopCounter < mycount
+        if a:backwardsSearch == 0
+            silent! exe "/".a:searchTerm 
+        else
+            silent! exe "?".a:searchTerm 
+            silent! exe "?".a:searchTerm
+        endif
+        let loopCounter += 1
+    endw
+    exe "normal jj^zz"
+    let &wrapscan = oldwrap
+    unlet oldwrap
 endf
 
 function! IndentSqueeze()
-	silent! exe "normal! mbgg=G"
-	silent! exe "1,$!cat -s"
-	silent! exe "normal! `bzz"
-	redraw!
+    silent! exe "normal! mbgg=G"
+    silent! exe "1,$!cat -s"
+    silent! exe "normal! `bzz"
+    redraw!
 endfunction
 
 function! Indent()
-	exe ":normal mbgg=G"
-	exe ":normal `bzz"
+    exe ":normal mbgg=G"
+    exe ":normal `bzz"
 endfunction
 
 nnoremap <silent> <leader>z :call IndentSqueeze()<cr>
@@ -345,149 +319,186 @@ nnoremap <silent> <C-Down> :<C-U>call GoToNextMarker("{{{",0)<CR>
 nnoremap <silent> <C-Up> :<C-U>call GoToNextMarker("{{{",1)<CR>
 
 function InsertEOLVar(toInsert, front, back)
-	exe "normal! lmb"
-	exe "normal! F".a:front
-	exe "normal! i".a:toInsert
-	"move to last char on line
-	exe "normal! g_"
-	exe "normal! a".a:toInsert
-	exe "silent! normal! `b"
+    exe "normal! lmb"
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    "move to last char on line
+    exe "normal! g_"
+    exe "normal! a".a:toInsert
+    exe "silent! normal! `b"
 endfunction
 
 function InsertEquals(toInsert, front, back)
-	exe "normal! lmb"
-	exe "normal! T".a:front
-	exe "normal! i".a:toInsert
-	"move to last char on line
-	exe "normal! g_"
-	exe "normal! a".a:toInsert
-	exe "silent! normal! `b"
+    exe "normal! lmb"
+    exe "normal! T".a:front
+    exe "normal! i".a:toInsert
+    "move to last char on line
+    exe "normal! g_"
+    exe "normal! a".a:toInsert
+    exe "silent! normal! `b"
 endfunction
 
 function InsertVar(toInsert, front, back)
-	exe "normal! lmb"
-	exe "normal! F".a:front
-	exe "normal! i".a:toInsert
-	exe "normal! f ".a:back
-	exe "normal! i".a:toInsert
-	exe "normal! `b"
+    exe "normal! lmb"
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! f ".a:back
+    exe "normal! i".a:toInsert
+    exe "normal! `b"
 endfunction
 function InsertVarPunct(toInsert, front, back)
-	exe "normal! lmb"
-	exe "normal! F".a:front
-	exe "normal! i".a:toInsert
-	exe "normal! f".a:back
-	exe "normal! i".a:toInsert
-	exe "normal! `b"
+    exe "normal! lmb"
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! f".a:back
+    exe "normal! i".a:toInsert
+    exe "normal! `b"
 endfunction
 
 function InsertBackTick(toInsert, front, back)
-	exe "normal! lmb"
-	exe "normal! f".a:back
-	exe "normal! a".a:toInsert
-	exe "normal! F".a:front
-	exe "normal! F".a:front
-	exe "normal! i".a:toInsert
-	exe "normal! `b"
+    exe "normal! lmb"
+    exe "normal! f".a:back
+    exe "normal! a".a:toInsert
+    exe "normal! F".a:front
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! `b"
 endfunction
 
 function InsertMatchingPunct(toInsert, front)
-	exe "normal! lmb"
-	exe "normal! F".a:front
-	exe "normal! i".a:toInsert
-	exe "normal! ll%"
-	exe "normal! a".a:toInsert
-	exe "normal! `b"
+    exe "normal! lmb"
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! ll%"
+    exe "normal! a".a:toInsert
+    exe "normal! `b"
 endfunction
 
 function Insert(toInsert, front, back)
-	exe "normal! lmb"
-	exe "normal! f".a:back
-	exe "normal! a".a:toInsert
-	exe "normal! F".a:front
-	exe "normal! i".a:toInsert
-	exe "normal! `b"
+    exe "normal! lmb"
+    exe "normal! f".a:back
+    exe "normal! a".a:toInsert
+    exe "normal! F".a:front
+    exe "normal! i".a:toInsert
+    exe "normal! `b"
 endfunction
 
+function ReplaceBracket(open,close, openR, closeR)
+    exe "normal! mb"
+    exe "normal! F".a:open
+    exe "normal! hxx"
+    exe "normal! i".a:openR.a:openR
+    exe "normal! f".a:close
+    exe "normal! xx"
+    exe "normal! i".a:closeR.a:closeR
+    exe "normal! `b"
+endfunction
+
+let g:COUNTER=0
 function Quoter(type)
-	let line=getline('.')
-	let wordCursor=expand("<cword>")
-	let charCursor=nr2char(strgetchar(getline('.')[col('.') - 1:], 0))
+    let line=getline('.')
+    let wordCursor=expand("<cword>")
+    let charCursor=nr2char(strgetchar(getline('.')[col('.') - 1:], 0))
 
-	let colIndex=col('.')
+    let colIndex=col('.')
 
-	if a:type == "single"
-		let quote="'"
-		"if matches echo .* L=echo R=last non space
-	elseif a:type == "double"
-		let quote='"'
-	elseif a:type == "back"
-		let quote="`"
-	endif
-	"if line matches regex and cursor position within matching capture group
-	"then run the quoting
+    if a:type == "single"
+        let quote="'"
+        "if matches echo .* L=echo R=last non space
+    elseif a:type == "double"
+        let quote='"'
+    elseif a:type == "back"
+        let quote="`"
+    endif
 
-	if (line =~ '\v^.*\$\(.*\).*$') 
-		call InsertMatchingPunct(quote, '$')
-		echo "$(command substitution)"
-	elseif (line =~ '\v^.*\$\{.*\}.*$') 
-		call InsertMatchingPunct(quote, '$')
-		echo "${parameter substitution}"
-	elseif (line =~'\v\s*\w+\=\w+\s*$')
-		call InsertEquals(quote, '=', '')
-		echo "var=value"
-	elseif (line =~ '\v.*`.*`.*')
-		call InsertBackTick(quote, '`', '`')
-		echo "`command substitution`"
-	elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\).*')
-		call InsertVarPunct(quote, '$', ')')
-		echo "$var)"
-	elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\].*')
-		call InsertVarPunct(quote, '$', ']')
-		echo "$var]"
-	elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
-		call InsertVar(quote, '$', '/\s')
-		echo "$var "
-	elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|\`|\'')+$')
-		call InsertEOLVar(quote, '$', '')
-		echo "$varEOL"
-	else
-		echo "Unknown Quoting Option:".line
-	endif
+    if a:type == "bracket"
+        let lineToEnd=strpart(line, colIndex-1, col('$'))
+        let matchingIndex=stridx(lineToEnd, ')')
+
+        if matchingIndex == -1
+            let matchingIndex=stridx(lineToEnd, ']')
+        endif
+
+        "echo "lineToEnd".lineToEnd
+        "echo "matching index".matchingIndex
+
+        let lineToPunct=strpart(lineToEnd, 1,matchingIndex)
+        "echo "line to punct: ".lineToPunct
+
+        if (lineToPunct=~ '\v.*\].*')
+            call ReplaceBracket("[","]", "(",")")
+            echo "Replace with ()"
+        else
+            call ReplaceBracket("(",")","[","]") 
+            echo "Replace with []"
+        endif 
+        let g:COUNTER=g:COUNTER +1
+        return 0
+    endif
+    "if line matches regex and cursor position within matching capture group
+    "then run the quoting
+
+    if (line =~ '\v^.*\$\(.*\).*$') 
+        call InsertMatchingPunct(quote, '$')
+        echo "$(command substitution)"
+    elseif (line =~ '\v^.*\$\{.*\}.*$') 
+        call InsertMatchingPunct(quote, '$')
+        echo "${parameter substitution}"
+    elseif (line =~'\v\s*\w+\=\w+\s*$')
+        call InsertEquals(quote, '=', '')
+        echo "var=value"
+    elseif (line =~ '\v.*`.*`.*')
+        call InsertBackTick(quote, '`', '`')
+        echo "`command substitution`"
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\).*')
+        call InsertVarPunct(quote, '$', ')')
+        echo "$var)"
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\].*')
+        call InsertVarPunct(quote, '$', ']')
+        echo "$var]"
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
+        call InsertVar(quote, '$', '/\s')
+        echo "$var "
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|\`|\'')+$')
+        call InsertEOLVar(quote, '$', '')
+        echo "$varEOL"
+    else
+        echo "Unknown Quoting Option:".line
+    endif
 
 endfunction
-
 
 let blacklist=['md', 'sh','hs', 'pl']
 
 augroup indentGroup
-	autocmd!
+    autocmd!
 
-	let currentFileEnding=tolower(expand('%:e'))
-	"if the filetype is not in blacklist (index = -1) then we will indent
-	if index(blacklist, currentFileEnding) < 0
-		autocmd CursorHoldI * :call Indent()
-	endif
+    let currentFileEnding=tolower(expand('%:e'))
+    "if the filetype is not in blacklist (index = -1) then we will indent
+    if index(blacklist, currentFileEnding) < 0
+        autocmd CursorHoldI * :call Indent()
+    endif
 augroup end
 
 let os = substitute(system('uname'), "\n", "", "")
 "mac and linux send different codes for Ctrl arrow keys
 if os == "Darwin"
-	map <ESC>[1;5A <C-Up>
-	map <ESC>[1;5B <C-Down>
-	map <ESC>[1;5C <C-Right>
-	map <ESC>[1;5D <C-Left>
+    map <ESC>[1;5A <C-Up>
+    map <ESC>[1;5B <C-Down>
+    map <ESC>[1;5C <C-Right>
+    map <ESC>[1;5D <C-Left>
 elseif os == "Linux"
-	map <ESC>[A <C-Up>
-	map <ESC>[B <C-Down>
-	map <ESC>[C <C-Right>
-	map <ESC>[D <C-Left>
+    map <ESC>[A <C-Up>
+    map <ESC>[B <C-Down>
+    map <ESC>[C <C-Right>
+    map <ESC>[D <C-Left>
 
 endif
 
 nnoremap <silent> <leader>" :call Quoter("double")<CR>
 nnoremap <silent> <leader>' :call Quoter("single")<CR>
 nnoremap <silent> <leader>` :call Quoter("back")<CR>
+nnoremap <silent> <leader>[ :call Quoter("bracket")<CR>
 
 inoremap <silent> <C-U> <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 nnoremap <silent> <C-U> :silent !open -t %:p:h<CR>:redraw!<CR>
@@ -527,6 +538,36 @@ sunmap w
 sunmap b
 sunmap e
 set pastetoggle=<F9>
+
+" Repeat last command in the next tmux pane.
+function TmuxRepeat()
+    let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua']
+    let exeFileType=expand('%:e')
+    if index(supportedTypes, exeFileType) >= 0
+        silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+        redraw!
+    else
+        silent! exec "!tmux send-keys -t right C-c up C-m"
+        echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
+        redraw!
+    endif
+    exe "normal! zz"
+endfunction
+
+function TmuxRepeatGeneric()
+    silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
+    redraw!
+    exe "normal! zz"
+endfunction
+
+" get rid of plugin mapping
+autocmd VimEnter * iunmap <C-F>
+
+nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
+autocmd VimEnter * inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
+
+nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>
+inoremap <silent> <C-V> <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
 "}}}***********************************************************
 "{{{                    MARK:autocmd
 "**************************************************************
@@ -544,10 +585,10 @@ autocmd FileType java let b:dispatch = 'javac %'
 
 "diffing colors
 fun! SetDiffColors()
-	highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
-	highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
-	highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
-	highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
+    highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
+    highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
+    highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
+    highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
 
 autocmd FilterWritePre * call SetDiffColors()
@@ -563,10 +604,11 @@ autocmd BufNewFile * exe "normal! G" | startinsert!
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+
 if os == "Darwin"
-	set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+    set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 elseif os == "Linux"
-	set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+    set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
 endif
 
 " :e will find files automatically in these locations
