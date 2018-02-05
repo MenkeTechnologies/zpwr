@@ -522,7 +522,7 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
-set pastetoggle=<C-P><ESC>p
+set pastetoggle=<F9>
 "}}}***********************************************************
 "{{{                    MARK:autocmd
 "**************************************************************
