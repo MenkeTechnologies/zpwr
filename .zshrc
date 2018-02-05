@@ -107,121 +107,121 @@ source ~/.shell_aliases_functions.sh
 #**************************************************************
 
 sub (){
-	zle .kill-whole-line
-	BUFFER="suc"
-	zle .accept-line
+    zle .kill-whole-line
+    BUFFER="suc"
+    zle .accept-line
 
 }
 updater (){
-	zle .kill-whole-line
-	#bash -l options for creating login shell to run script
-	#avoiding issues with rvm which only runs on login shell
-	BUFFER="( cat $SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $LOGFILE | perl -pne 's/\\e\[.*m/\n/g' | mutt -s \"Log from `date`\" jamenk@me.com 2>$LOGFILE &)"
-	zle .accept-line
+    zle .kill-whole-line
+    #bash -l options for creating login shell to run script
+    #avoiding issues with rvm which only runs on login shell
+    BUFFER="( cat $SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $LOGFILE | perl -pne 's/\\e\[.*m/\n/g' | mutt -s \"Log from `date`\" jamenk@me.com 2>$LOGFILE &)"
+    zle .accept-line
 }
 
 gitfunc () {
-	gitCommitAndPush "$BUFFER"
-	zle .kill-whole-line
-	zle .accept-line
+    gitCommitAndPush "$BUFFER"
+    zle .kill-whole-line
+    zle .accept-line
 }
 
 tutsUpdate() {
-	commitMessage="$BUFFER"
-	if [[ "$commitMessage" ]]; then
-		if [[ "$commitMessage" =~ ^\ +$ ]]; then
-			printf "No commit message\n" >&2
-			zle .accept-line
-		else
-			zle .kill-whole-line
-			BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$LOGFILE\" 2>&1 & )"
-			zle .accept-line
-		fi
-	else
-		printf "No commit message\n" >&2
-		zle .accept-line
-	fi
+    commitMessage="$BUFFER"
+    if [[ "$commitMessage" ]]; then
+        if [[ "$commitMessage" =~ ^\ +$ ]]; then
+            printf "No commit message\n" >&2
+            zle .accept-line
+        else
+            zle .kill-whole-line
+            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$LOGFILE\" 2>&1 & )"
+            zle .accept-line
+        fi
+    else
+        printf "No commit message\n" >&2
+        zle .accept-line
+    fi
 }
 
 sshRegain() {
-	zle .kill-whole-line
-	tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
-	zle .accept-line
+    zle .kill-whole-line
+    tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
+    zle .accept-line
 }
 
 db() {
-	zle .kill-whole-line
-	BUFFER=db
-	zle .accept-line
+    zle .kill-whole-line
+    BUFFER=db
+    zle .accept-line
 }
 
 expand-aliases() {
 unset 'functions[_expand-aliases]'
 functions[_expand-aliases]=$BUFFER
 (($+functions[_expand-aliases])) &&
-	BUFFER=${functions[_expand-aliases]#$'\t'} &&
-	CURSOR=$#BUFFER
+    BUFFER=${functions[_expand-aliases]#$'\t'} &&
+    CURSOR=$#BUFFER
 }
 
 changeQuotes(){
-	echo "$BUFFER" | grep -q \' && {
-		BUFFER=${BUFFER//\'/\"}
+    echo "$BUFFER" | grep -q \' && {
+        BUFFER=${BUFFER//\'/\"}
 } || {
-	BUFFER=${BUFFER//\"/\'}
-	}
+    BUFFER=${BUFFER//\"/\'}
+    }
 }
 basicSedSub(){
-   emulate -LR zsh
-   echo "$BUFFER" | egrep -q '\w+' || {
+    emulate -LR zsh
+    echo "$BUFFER" | egrep -q '\w+' || {
         printf "\x1b[1;31m"
-        zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
-        printf "\x1b[0m"
-        return 1
-    }
+    zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
+    printf "\x1b[0m"
+    return 1
+}
 
-      printf "\x1b[1;34m"
-    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
-      printf "\x1b[1;35m"
-	local SEDARG=""
-	local key=""
-	read -k key
-	local -r start=$key
-	while (( (#key)!=(##\n) &&
-		(#key)!=(##\r) )) ; do
-		if (( (#key)==(##^?) || (#key)==(##^h) )) ; then
-			SEDARG=${SEDARG[1,-2]}
-		else
-			SEDARG="${SEDARG}$key"
-		fi
+printf "\x1b[1;34m"
+zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
+printf "\x1b[1;35m"
+local SEDARG=""
+local key=""
+read -k key
+local -r start=$key
+while (( (#key)!=(##\n) &&
+    (#key)!=(##\r) )) ; do
+if (( (#key)==(##^?) || (#key)==(##^h) )) ; then
+    SEDARG=${SEDARG[1,-2]}
+else
+    SEDARG="${SEDARG}$key"
+fi
 
-        zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
-		read -k key || return 1
-	done	
+zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
+read -k key || return 1
+    done	
     echo "$SEDARG" | grep -q "@" && { 
         printf "\x1b[1;31m"
-        zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
-        printf "\x1b[0m"
-        return 1
+    zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
+    printf "\x1b[0m"
+    return 1
 }
 
-    echo "$SEDARG" | grep -q ">" || {
-        printf "\x1b[1;31m"
-        zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
-        printf "\x1b[0m"
-        return 1
+echo "$SEDARG" | grep -q ">" || {
+    printf "\x1b[1;31m"
+zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
+printf "\x1b[0m"
+return 1
 }
-	orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
-	replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
-	SEDARG="s@$orig@$replace@g"
+orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
+replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
+SEDARG="s@$orig@$replace@g"
 
-    echo "$BUFFER" | egrep -q "$orig" || {
-        printf "\x1b[1;31m"
-        zle -R  "No Match." && read -k 1
-        printf "\x1b[0m"
-        return 1
+echo "$BUFFER" | egrep -q "$orig" || {
+    printf "\x1b[1;31m"
+zle -R  "No Match." && read -k 1
+printf "\x1b[0m"
+return 1
     }
 
-	BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
+    BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
 }
 
 #vim  mode
@@ -271,10 +271,10 @@ bindkey '\e[1;5D' db
 
 bindkey '^S' gitfunc
 bindkey '```' sudo-command-line
-bindkey -M viins '^T' transpose-words
-bindkey -M vicmd '^T' transpose-words
-bindkey -M viins '^Y' transpose-chars
-bindkey -M vicmd '^Y' transpose-chars
+bindkey -M viins '\e^T' transpose-words
+bindkey -M vicmd '\e^T' transpose-words
+bindkey -M viins '^T' transpose-chars
+bindkey -M vicmd '^T' transpose-chars
 
 
 #Filter stderr through shell scripts
@@ -290,10 +290,10 @@ WILL_CLEAR=false
 commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
 
 for command in ${commandsThatModifyFiles[@]}; do
-	regex="^sudo $command .*\$|^$command .*\$"
-	if [[ "$BUFFER" =~ $regex ]]; then
-		WILL_CLEAR=true
-	fi
+    regex="^sudo $command .*\$|^$command .*\$"
+    if [[ "$BUFFER" =~ $regex ]]; then
+        WILL_CLEAR=true
+    fi
 done
 
 zle .accept-line 
@@ -301,21 +301,21 @@ zle .accept-line
 zle -N accept-line my-accept-line
 
 precmd(){
-	if [[ $? == 0 ]]; then
-		if [[ "$WILL_CLEAR" == true ]]; then
-			clear
-			listNoClear
-		fi
-	fi
-	#exec 2> >(blueUpperText.sh)
+    if [[ $? == 0 ]]; then
+        if [[ "$WILL_CLEAR" == true ]]; then
+            clear
+            listNoClear
+        fi
+    fi
+    #exec 2> >(blueUpperText.sh)
 }
 
 rationalize-dot (){
-    if [[ $LBUFFER = *.. ]]; then
-        LBUFFER+=/..
-    else
-        LBUFFER+=.
-    fi
+if [[ $LBUFFER = *.. ]]; then
+    LBUFFER+=/..
+else
+    LBUFFER+=.
+fi
 }
 
 zle -N rationalize-dot
@@ -410,15 +410,15 @@ zstyle ':completion:*' list-colors 'ma=37;44'
 
 # Make the list prompt friendly
 zstyle ':completion:*' list-prompt \
-	$'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%M%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%M%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
 
 # Make the selection prompt friendly when there are a lot of choices
 zstyle ':completion:*' select-prompt \
-	$'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[32;44m%p\e[0;1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[32;44m%p\e[0;1;31m>>-\e[0m'
 
 # Add simple colors to kill
 zstyle ':completion:*:*:kill:*:processes' list-colors \
-	'=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+    '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
 # list of completers to use
 zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate
@@ -429,19 +429,19 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' format \
-	$'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
 
 zstyle ':completion:*:descriptions' format \
-	$'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
 
 zstyle ':completion:*:corrections' format \
-	$'\e[1;31m-<<\e[0;34m%d (errors: %e)\e[1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34m%d (errors: %e)\e[1;31m>>-\e[0m'
 
 zstyle ':completion:*:messages' format \
-	$'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
 
 zstyle ':completion:*:warnings' format \
-	$'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
 zstyle ':completion:*' auto-description 'Specify: %d'
 
 # don't complete duplicates for these commands
@@ -454,19 +454,19 @@ zstyle ':complete:*' ignore-parents parent pwd
 # 2 -- word flex completion (abc => A-big-Car)
 # 3 -- full flex completion (abc => ABraCadabra)
 zstyle ':completion:*' matcher-list '' \
-	'm:{a-z\-}={A-Z\_}' \
-	'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-	'r:|?=** m:{a-z\-}={A-Z\_}'
+    'm:{a-z\-}={A-Z\_}' \
+    'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
+    'r:|?=** m:{a-z\-}={A-Z\_}'
 
 h=()
 if [[ -r ~/.ssh/config ]]; then
-	h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-	h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
+    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
 fi
 
 if [[ $#h -gt 0 ]]; then
-	zstyle ':completion:*:ssh:*' hosts $h
-	zstyle ':completion:*:slogin:*' hosts $h
+    zstyle ':completion:*:ssh:*' hosts $h
+    zstyle ':completion:*:slogin:*' hosts $h
 fi
 
 zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;32=1;33=34'
@@ -510,40 +510,40 @@ alias -g nerr="2> /dev/null"
 #**************************************************************
 #go to desktop if not root
 if [[ "$(uname)" = Darwin ]]; then
-	if [[ "$UID" != "0" ]]; then
-		# builtin cd "$D" && clear
-		type figlet > /dev/null 2>&1 && {
-			printf "\e[1m"
-		[[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
-			[[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
-			bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-			"$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
-	} || {
-		bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-		"$(hostname)" | ponysay -W 100
+    if [[ "$UID" != "0" ]]; then
+        # builtin cd "$D" && clear
+        type figlet > /dev/null 2>&1 && {
+            printf "\e[1m"
+        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
+            [[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
+            bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+            "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
+    } || {
+        bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+        "$(hostname)" | ponysay -W 100
 }
-				}
-			}
-			printf "\e[0m"
-			# type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
-			listNoClear
-		else
-			clearList
-		fi
-	else
-		distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
+                }
+            }
+            printf "\e[0m"
+            # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
+            listNoClear
+        else
+            clearList
+        fi
+    else
+        distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
 
-		if [[ "$UID" != "0" ]]; then
-			builtin cd "$D"
-			if [[ "$distro" =~ Raspbian* ]]; then
-				type ponysay 1>/dev/null 2>&1 && {
-					bash "$HOME/motd.sh" | ponysay -W 120 
-			} || bash "$HOME/motd.sh"
-		fi
-		listNoClear
-	else
-		clearList
-	fi
+        if [[ "$UID" != "0" ]]; then
+            builtin cd "$D"
+            if [[ "$distro" =~ Raspbian* ]]; then
+                type ponysay 1>/dev/null 2>&1 && {
+                    bash "$HOME/motd.sh" | ponysay -W 120 
+            } || bash "$HOME/motd.sh"
+        fi
+        listNoClear
+    else
+        clearList
+    fi
 fi
 
 #standard error colorization
@@ -559,11 +559,11 @@ RPS2='+%N:%i:%^'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-	source "$HOME/.powerlevel9kconfig.sh"
+    source "$HOME/.powerlevel9kconfig.sh"
 : ~WCC
 : ~HOMEBREW_HOME_FORMULAE
 } || {
-	export RPROMPT="%{%B%}`tty` `echo $$ $-`"
+    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 }
 #shell to recognize env variables in prompt
 : ~SCRIPTS
@@ -574,30 +574,30 @@ RPS2='+%N:%i:%^'
 #{{{                    MARK:ColorTest
 #**************************************************************
 colortest(){
-	for backgroundColor in ${(ko)bg}; do
-		print -n "$bg[$backgroundColor]"
-		printf '%s%-8s' $fg[black] black
-		printf '%s%-8s' $fg[red] red
-		printf '%s%-8s' $fg[green] green
-		printf '%s%-8s' $fg[yellow] yellow
-		printf '%s%-8s' $fg[blue] blue
-		printf '%s%-8s' $fg[magenta] magenta
-		printf '%s%-8s' $fg[cyan] cyan
-		printf '%s%-8s' $fg[white] white
-		print $reset_color
-		print -n "$bg[$backgroundColor]"
-		printf "\x1b[1m"
-		printf '%s%-8s' $fg[black] black
-		printf '%s%-8s' $fg[red] red
-		printf '%s%-8s' $fg[green] green
-		printf '%s%-8s' $fg[yellow] yellow
-		printf '%s%-8s' $fg[blue] blue
-		printf '%s%-8s' $fg[magenta] magenta
-		printf '%s%-8s' $fg[cyan] cyan
-		printf '%s%-8s' $fg[white] white
-		print $reset_color
-		printf "%40s\n" "on $backgroundColor"
-	done
+    for backgroundColor in ${(ko)bg}; do
+        print -n "$bg[$backgroundColor]"
+        printf '%s%-8s' $fg[black] black
+        printf '%s%-8s' $fg[red] red
+        printf '%s%-8s' $fg[green] green
+        printf '%s%-8s' $fg[yellow] yellow
+        printf '%s%-8s' $fg[blue] blue
+        printf '%s%-8s' $fg[magenta] magenta
+        printf '%s%-8s' $fg[cyan] cyan
+        printf '%s%-8s' $fg[white] white
+        print $reset_color
+        print -n "$bg[$backgroundColor]"
+        printf "\x1b[1m"
+        printf '%s%-8s' $fg[black] black
+        printf '%s%-8s' $fg[red] red
+        printf '%s%-8s' $fg[green] green
+        printf '%s%-8s' $fg[yellow] yellow
+        printf '%s%-8s' $fg[blue] blue
+        printf '%s%-8s' $fg[magenta] magenta
+        printf '%s%-8s' $fg[cyan] cyan
+        printf '%s%-8s' $fg[white] white
+        print $reset_color
+        printf "%40s\n" "on $backgroundColor"
+    done
 }
 
 #}}}***********************************************************
