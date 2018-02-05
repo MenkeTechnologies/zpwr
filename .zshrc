@@ -163,53 +163,49 @@ functions[_expand-aliases]=$BUFFER
     CURSOR=$#BUFFER
 }
 _COUNTER=0
+
 changeQuotes(){
 
     if (( $_COUNTER % 7 == 0 )); then
         _OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
     elif (( $_COUNTER % 7 == 1 )); then
-        if [[ "${BUFFER//\'/}" != "${_OLDBUFFER//\"/}" ]]; then
-            BUFFER="\"$BUFFER\""
+        if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
             _COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\'/\`}
     elif (( $_COUNTER % 7 == 2 )); then
-        if [[ "${BUFFER//\`/}" != "${_OLDBUFFER//\"/}" ]]; then
-            BUFFER="\"$BUFFER\""
+        if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
             _COUNTER=0
             return 1
         fi
         _SEMI_OLDBUFFER="$BUFFER"
         BUFFER="\"${BUFFER}\""
     elif (( $_COUNTER % 7 == 3 )); then
-        if [[ ${_SEMI_OLDBUFFER} != ${BUFFER//\"/} ]]; then
+        if [[ "$(echo "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
             _COUNTER=0
-            BUFFER="\"$BUFFER\""
             return 1
         fi
         #semi has no quotes
         _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
         BUFFER="\$(${_SEMI_OLDBUFFER})"
     elif (( $_COUNTER % 7 == 4 )); then
-        if [[ ${_SEMI_OLDBUFFER} != "$(echo "$BUFFER" | tr -d '$()')" ]]; then
-            BUFFER="\"$BUFFER\""
+        #only diff should be $()
+        if [[ "$_SEMI_OLDBUFFER" != "$(echo "${BUFFER:2:-1}" )" ]]; then
             _COUNTER=0
             return 1
         fi
         BUFFER="\"${BUFFER}\""
     elif (( $_COUNTER % 7 == 5 )); then
-        if [[ ${_SEMI_OLDBUFFER} != "$(echo "$BUFFER" | tr -d '"$()')" ]]; then
-            BUFFER="\"$BUFFER\""
+        if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER:3:-2}" ]]; then
             _COUNTER=0
             return 1
         fi
         # back to no quotes
         BUFFER="$_SEMI_OLDBUFFER"
     else
-        if [[ "${BUFFER}" != "${_SEMI_OLDBUFFER}" ]]; then
-            BUFFER="\"$BUFFER\""
+        if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER}" ]]; then
             _COUNTER=0
             return 1
         fi
@@ -219,6 +215,11 @@ changeQuotes(){
 
     let _COUNTER++
 }
+
+alternateQuotes(){
+    BUFFER="$(echo "$BUFFER" | tr "\"'" "'\"" )"
+}
+
 
 basicSedSub(){
     emulate -LR zsh
@@ -287,9 +288,13 @@ bindkey -M viins '^O' basicSedSub
 bindkey -M vicmd '^O' basicSedSub
 
 zle -N changeQuotes
+zle -N alternateQuotes
 
 bindkey -M viins '^K' changeQuotes
 bindkey -M vicmd '^K' changeQuotes
+
+bindkey -M viins '\e^K' alternateQuotes
+bindkey -M vicmd '\e^K' alternateQuotes
 
 zle -N expand-aliases
 
