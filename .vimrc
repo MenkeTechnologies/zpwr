@@ -249,8 +249,8 @@ inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
 nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>
 inoremap <silent> <C-V> <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
 
-nnoremap <silent> <C-Y mbgg=G`b
-inoremap <silent> <C-Y> <ESC>mbgg=G`ba
+nnoremap <silent> <C-L mbgg=G`b
+inoremap <silent> <C-L> <ESC>mbgg=G`ba
 
 "transpose words (like emacs `transpose-words')
 function! TransposeWords()
@@ -264,13 +264,16 @@ function! TransposeWords()
     normal el
 endfunction
 
+"Transpose Chars Like Emacs
 nnoremap <silent> <C-T> xp
 vnoremap <silent> <C-T> xp
 inoremap <silent> <C-T> xp
 
+"Transpose Words Like Emacs
 nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
 inoremap <silent> <ESC><C-T> <C-O>:call TransposeWords()<CR>
 
+"Ctrl-C exits like in shell
 nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
 "vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
 inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
@@ -279,8 +282,9 @@ nnoremap <silent> <C-E> :q!<CR>
 vnoremap <silent> <C-E> :<C-C>:q!<CR>
 inoremap <silent> <C-E> <C-[>:q!<CR>
 
-inoremap <silent> <C-Y> <ESC>I//<ESC>ji
-inoremap <silent> <C-B> <ESC>^xx<ESC>ji
+"comment out
+inoremap <silent> <C-M> <ESC>I//<ESC>ji
+inoremap <silent> <C-B> <ESC>^2xji
 
 nnoremap <silent> <C-I> :SaveSession<CR>
 vnoremap <silent> <C-I> :<C-C>:SaveSession<CR>
