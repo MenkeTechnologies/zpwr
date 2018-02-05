@@ -248,7 +248,7 @@ basicSedSub(){
 
     printf "\x1b[1;34m"
     zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
-    printf "\x1b[1;35m"
+    printf "\x1b[1;44;37m"
     local SEDARG=""
     local key=""
     read -k key
@@ -258,9 +258,10 @@ basicSedSub(){
 
         
         if (( (#key)==(##\>) ));then
-            printf "\x1b[4;1;34m"
+            printf "\x1b[0;4;1;34m"
         else
-            printf "\x1b[0;1;35m"
+            printf "\x1b[1;44;37m"
+            echo "$SEDARG" | grep -q '>' && printf "\x1b[0;1;37;45m"
         fi
 
         if (( (#key)==(##^?) || (#key)==(##^h) ));then
@@ -272,6 +273,7 @@ basicSedSub(){
             SEDARG="${SEDARG}$key"
             fi
         fi
+
 
         zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
         read -k key || return 1
