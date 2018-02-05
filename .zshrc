@@ -274,6 +274,7 @@ basicSedSub(){
             SEDARG=${SEDARG[1,-2]}
         elif (( (#key)==(##^U) ));then
             SEDARG=""
+            printf "\x1b[0m"
         else
             if (( (#key)!=(##@) ));then
             SEDARG="${SEDARG}$key"
