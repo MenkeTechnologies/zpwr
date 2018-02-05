@@ -596,6 +596,7 @@ rename(){
     search="$1"
     shift
 for file in "$@"; do
+    [[ -d "$file" ]] && continue
     out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
     if [[ $out != 0 ]]; then
         #statements
