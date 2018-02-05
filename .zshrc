@@ -166,23 +166,29 @@ _COUNTER=0
 
 changeQuotes(){
 
-    if (( $_COUNTER % 7 == 0 )); then
+    if (( $_COUNTER % 8 == 0 )); then
         _OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
-    elif (( $_COUNTER % 7 == 1 )); then
+    elif (( $_COUNTER % 8 == 1 )); then
         if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
             _COUNTER=0
             return 1
         fi
-        BUFFER=${BUFFER//\'/\`}
-    elif (( $_COUNTER % 7 == 2 )); then
+        BUFFER=${BUFFER//\'/\"}
+    elif (( $_COUNTER % 8 == 2 )); then
+        if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
+            _COUNTER=0
+            return 1
+        fi
+        BUFFER=${BUFFER//\"/\`}
+    elif (( $_COUNTER % 8 == 3 )); then
         if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
             _COUNTER=0
             return 1
         fi
         _SEMI_OLDBUFFER="$BUFFER"
         BUFFER="\"${BUFFER}\""
-    elif (( $_COUNTER % 7 == 3 )); then
+    elif (( $_COUNTER % 8 == 4 )); then
         if [[ "$(echo "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
             _COUNTER=0
             return 1
@@ -190,7 +196,7 @@ changeQuotes(){
         #semi has no quotes
         _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
         BUFFER="\$(${_SEMI_OLDBUFFER})"
-    elif (( $_COUNTER % 7 == 4 )); then
+    elif (( $_COUNTER % 8 == 5 )); then
         #only diff should be $()
         if (( ${#BUFFER} < 4 )); then
             _COUNTER=0
@@ -202,7 +208,7 @@ changeQuotes(){
             return 1
         fi
         BUFFER="\"${BUFFER}\""
-    elif (( $_COUNTER % 7 == 5 )); then
+    elif (( $_COUNTER % 8 == 6 )); then
         if (( ${#BUFFER} < 6 )); then
             _COUNTER=0
             return 1
@@ -219,7 +225,7 @@ changeQuotes(){
             _COUNTER=0
             return 1
         fi
-        #should have double quotes
+        #back to original
         BUFFER="${_OLDBUFFER}"
     fi
 
