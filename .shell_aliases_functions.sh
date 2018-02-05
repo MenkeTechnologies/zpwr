@@ -592,6 +592,18 @@ getrc(){
         printf "No $HOME Dir!\n" >&2
     }
 }
+rename(){
+    search="$1"
+    shift
+for file in "$@"; do
+    out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
+    if [[ $out != 0 ]]; then
+        #statements
+        mv "$file" "$(echo "$file" | sed -E "$search")"
+    fi
+    
+done
+}
 
 torip(){
     ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
