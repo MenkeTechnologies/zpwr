@@ -155,18 +155,27 @@ updatePI(){
     #alternatively apt-get has -y option
     #semicolon to chain commands
     # -x option to disable x11 forwarding
-    ssh -x "$1" 'yes | sudo apt-get update
-    yes | sudo apt-get dist-upgrade
-    yes | sudo apt-get autoremove
-    yes | sudo apt-get upgrade
-    yes | sudo apt-get autoclean'
+    hostname="$(echo $1 | awk -F: '{print $1}')"
+    manager="$(echo $1 | awk -F: '{print $2}')"
+
+    [[ "$manager" == "apt" ]] && { 
+        ssh -x "$2" 'yes | sudo apt-get update
+        yes | sudo apt-get dist-upgrade
+        yes | sudo apt-get autoremove
+        yes | sudo apt-get upgrade
+        yes | sudo apt-get autoclean'
+    }
+    
+    [[ "$manager" == yum ]] ** {
+        :
+    }
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to use string after ssh
     ssh -x "$1" "$(< $SCRIPTS/rpiSoftwareUpdater.sh)"
 }
 
-arrayOfPI=(r r2)
+arrayOfPI=(r:apt r2:apt)
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file
 for pi in "${arrayOfPI[@]}"; do
