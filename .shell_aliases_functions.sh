@@ -586,10 +586,23 @@ done
 getrc(){
     REPO_NAME="customTerminalInstaller"
     cd "$HOME" && {
-        wget "https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/master/.shell_aliases_functions.sh" -O .shell_aliases_functions.sh
-        wget "https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/master/.zshrc" -O .zshrc
-        wget "https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/master/.vimrc" -O .vimrc
-        wget "https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/master/.tmux.conf" -O .tmux.conf
+        git clone "https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME.g"
+        cd "$REPO_NAME"
+
+        cp .shell_aliases_functions.sh "$HOME"
+        cp .zshrc "$HOME"
+        cp .vimrc "$HOME"
+        cp .tmux.conf "$HOME"
+        cp conf.gls "$HOME"
+        cp conf.df "$HOME"
+        cp grc.zsh "$HOME"
+
+        cp -R .tmux/* "$HOME/.tmux"
+        cp scripts/* "$SCRIPTS"
+
+        cd ..
+        rm -rf "$REPO_NAME"
+
         exec "$SHELL"
     } || {
         printf "No $HOME Dir!\n" >&2
