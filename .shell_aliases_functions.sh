@@ -593,6 +593,7 @@ getrc(){
         printf "No $HOME Dir!\n" >&2
     }
 }
+
 rename(){
     search="$1"
     shift
