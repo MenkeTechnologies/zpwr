@@ -226,15 +226,27 @@ alias il="idea list"
 
 #{{{                    MARK:Shell functions
 #**************************************************************
+[[ "$(uname)" == "Darwin" ]] && {
 
-ex(){
-python3 "$PYSCRIPTS/ssh_runner.py" "$@"
+    ex(){
+        python3 "$PYSCRIPTS/ssh_runner.py" "$@"
+    }
+
+
+    nn(){
+        [[ -z "$2" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
+
+        title="$1"
+        msg="$2"
+
+        echo "display notification \"$msg\" with title \"$title\"" | osascript 
+    }
+
 }
-
 s(){
     [[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
-
 }
+
 ,(){
 for file;do
     dirname="$(dirname $file)"
@@ -271,14 +283,6 @@ b(){
     done
 }
 
-nn(){
-    [[ -z "$2" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
-
-    title="$1"
-    msg="$2"
-
-    echo "display notification \"$msg\" with title \"$title\"" | osascript 
-}
 
 suc(){
     subl $SCRIPTS
@@ -430,7 +434,7 @@ replacer(){
     shift
     replace="$1"
     shift
-    sed -i'' "s/$orig/$replace/g" $@
+    sed -i'' "s/$orig/$replace/g" "$@"
 
 }
 createGIF(){
