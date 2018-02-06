@@ -166,7 +166,7 @@ updatePI(){
         yes | sudo apt-get autoclean'
     }
     
-    [[ "$manager" == yum ]] ** {
+    [[ "$manager" == yum ]] &&  {
         :
     }
 
