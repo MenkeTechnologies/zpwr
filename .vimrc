@@ -451,8 +451,6 @@ function Quoter(type)
             endif
 
             endfor
-
-
             "echo "lineToEnd ".lineToEnd
             "echo "matching index )".matchingIndexParen
             "echo "matching index ]]".matchingIndexDblB
