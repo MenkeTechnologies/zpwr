@@ -17,7 +17,7 @@ fi
 INSTALLER_DIR="$(pwd)"
 
 installOhMyZshPlugin(){
-    echo git clone "https://github.com/$1.git" 
+    git clone "https://github.com/$1.git" 
 }
 
 cd "$HOME/.oh-my-zsh/custom/plugins" && {
