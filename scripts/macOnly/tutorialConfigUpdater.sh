@@ -140,6 +140,10 @@ cp $HOME/.rpitokens.sh "$installerDir"
 cp $HOME/conf.gls "$installerDir"
 cp $HOME/conf.df"$installerDir"
 
+
+bash "$SCRIPTS/gitRemoteRepoInformation.sh "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh "$HOME/.oh-my-zsh/custom/plugins"* > "$installerDir/.zshplugins"
+
 cd "$installerDir" || exit 1
 boldAndUnderlinedPrint "Status"
 git status
