@@ -31,13 +31,13 @@ boldAndUnderlinedPrint "Copying vimrc"
 cp $HOME/.vimrc "$tutorialDir/vim"
 
 boldAndUnderlinedPrint "Copying tmux.conf"
-cp $HOME/.tmux.conf "$tutorialDir/tmux"
-cp $HOME/.tmux.conf.rpi "$tutorialDir/tmux"
-cp $HOME/.tmux/* "$tutorialDir/.tmux"
+rm -rf "$tutorialDir/tmux/"*
+cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
+cp -R $HOME/.tmux/* "$tutorialDir/.tmux"
 
 boldAndUnderlinedPrint "Copying shell_aliases_functions"
-cp $HOME/.shell_aliases_functions.sh "$tutorialDir/aliases"
-cp $HOME/.rpitokens.sh "$tutorialDir/aliases"
+cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
+cp "$HOME/.rpitokens.sh" "$tutorialDir/aliases"
 
 boldAndUnderlinedPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
