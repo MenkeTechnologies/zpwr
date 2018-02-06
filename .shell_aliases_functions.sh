@@ -587,8 +587,7 @@ getrc(){
     REPO_NAME="customTerminalInstaller"
     cd "$HOME" && {
         git clone "https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
-        cd "$REPO_NAME"
-
+        cd "$REPO_NAME" && {
         cp .shell_aliases_functions.sh "$HOME"
         cp .zshrc "$HOME"
         cp .vimrc "$HOME"
@@ -604,6 +603,10 @@ getrc(){
         rm -rf "$REPO_NAME"
 
         exec "$SHELL"
+        } || {
+            printf "Failed to cd to $REPO_NAME\n" >&2
+        }
+
     } || {
         printf "No $HOME Dir!\n" >&2
     }
