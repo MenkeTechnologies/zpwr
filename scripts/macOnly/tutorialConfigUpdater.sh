@@ -140,8 +140,9 @@ cp $HOME/.rpitokens.sh "$installerDir"
 cp $HOME/conf.gls "$installerDir"
 cp $HOME/conf.df"$installerDir"
 
-
+boldAndUnderlinedPrint "Updating vim plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
+boldAndUnderlinedPrint "Updating zsh plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh "$HOME/.oh-my-zsh/custom/plugins"* > "$installerDir/.zshplugins"
 
 cd "$installerDir" || exit 1
