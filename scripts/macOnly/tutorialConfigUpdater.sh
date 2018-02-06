@@ -67,7 +67,7 @@ cp -R $HOME/.config/ncmpcpp "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R $HOME/.mpd "$tutorialDir/ncmpcpp-mpd-vis"
 
 boldAndUnderlinedPrint "Copying iterm Colors"
-cp "$HOME/Documents/iterm-jm-colors.itermcolors" "$tutorialDir"
+cp "$HOME/iterm-jm-colors.itermcolors" "$tutorialDir"
 
 boldAndUnderlinedPrint "Copying vim plugins"
 
@@ -75,7 +75,7 @@ sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
 cd "$tutorialDir" || exit 1
 
-boldAndUnderlinedPrint "Removing .git dirs...)"
+boldAndUnderlinedPrint "Removing .git dirs..."
 
 while read -r file; do
     if [[ -d "$file" ]]; then
@@ -141,9 +141,9 @@ cp $HOME/conf.gls "$installerDir"
 cp $HOME/conf.df"$installerDir"
 
 boldAndUnderlinedPrint "Updating vim plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
 boldAndUnderlinedPrint "Updating zsh plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh "$HOME/.oh-my-zsh/custom/plugins"* > "$installerDir/.zshplugins"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* > "$installerDir/.zshplugins"
 
 cd "$installerDir" || exit 1
 boldAndUnderlinedPrint "Status"
