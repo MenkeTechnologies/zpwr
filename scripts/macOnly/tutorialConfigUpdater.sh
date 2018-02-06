@@ -12,7 +12,7 @@ websiteDir="$HOME/WebstormProjects/PersonalWebsite"
 installerDir="$HOME/Documents/shellScripts/customTerminalInstaller"
 SCRIPTS="$HOME/Documents/shellScripts"
 
-boldAndUnderlinedPrint(){
+prettyPrint(){
     printf "\e[1;4m$1\n\e[0m"
 }
 
@@ -25,21 +25,21 @@ fi
 
 #{{{                    MARK:tutorialDir
 #**************************************************************
-boldAndUnderlinedPrint "Copying zshrc"
+prettyPrint "Copying zshrc"
 cp $HOME/.zshrc "$tutorialDir/zsh"
-boldAndUnderlinedPrint "Copying vimrc"
+prettyPrint "Copying vimrc"
 cp $HOME/.vimrc "$tutorialDir/vim"
 
-boldAndUnderlinedPrint "Copying tmux.conf"
+prettyPrint "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
 cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
 cp -R $HOME/.tmux/* "$tutorialDir/.tmux"
 
-boldAndUnderlinedPrint "Copying shell_aliases_functions"
+prettyPrint "Copying shell_aliases_functions"
 cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
 cp "$HOME/.rpitokens.sh" "$tutorialDir/aliases"
 
-boldAndUnderlinedPrint "Copying shellScripts"
+prettyPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/*"
 cp "$SCRIPTS"/*.sh "$tutorialDir/shell"
@@ -50,32 +50,32 @@ cp -R "$SCRIPTS"/macOnly "$tutorialDir/shell"
 #echo "# Mac Only Scripts" >> "$README"
 #bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"macOnly/*.sh >> "$README"
 
-boldAndUnderlinedPrint "Copying tags file"
+prettyPrint "Copying tags file"
 cp "$HOME/Documents/shellScripts/tags" "$tutorialDir/shell"
 
-boldAndUnderlinedPrint "Copying $HOME/.ctags" 
+prettyPrint "Copying $HOME/.ctags" 
 cp "$HOME/.ctags" "$tutorialDir/ctags"
 
-boldAndUnderlinedPrint "Copying vis ncmpcpp mpd"
+prettyPrint "Copying vis ncmpcpp mpd"
 cp -R $HOME/.config/vis "$tutorialDir/ncmpcpp-mpd-vis"
 
-boldAndUnderlinedPrint "Emptying mpd log"
+prettyPrint "Emptying mpd log"
 echo > "$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
 
 echo > "$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
 cp -R $HOME/.config/ncmpcpp "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R $HOME/.mpd "$tutorialDir/ncmpcpp-mpd-vis"
 
-boldAndUnderlinedPrint "Copying iterm Colors"
+prettyPrint "Copying iterm Colors"
 cp "$HOME/iterm-jm-colors.itermcolors" "$tutorialDir"
 
-boldAndUnderlinedPrint "Copying vim plugins"
+prettyPrint "Copying vim plugins"
 
 sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
 cd "$tutorialDir" || exit 1
 
-boldAndUnderlinedPrint "Removing .git dirs..."
+prettyPrint "Removing .git dirs..."
 
 while read -r file; do
     if [[ -d "$file" ]]; then
@@ -86,10 +86,10 @@ while read -r file; do
         fi
     fi
 done < <(find ./vim)
-boldAndUnderlinedPrint "Updating Tutorial Files Repo"
-boldAndUnderlinedPrint "Status..."
+prettyPrint "Updating Tutorial Files Repo"
+prettyPrint "Status..."
 git status
-boldAndUnderlinedPrint "Pushing..."
+prettyPrint "Pushing..."
 git add .
 git commit -m "$commitMessage"
 git push
@@ -98,14 +98,14 @@ git push
 
 #{{{                    MARK:websiteDir
 #**************************************************************
-boldAndUnderlinedPrint "Copying config files to websiteDir"
+prettyPrint "Copying config files to websiteDir"
 cp $HOME/.vimrc "$websiteDir/downloads"
 cp $HOME/.vim/colors/bluewolf.vim "$websiteDir/downloads"
 cp $HOME/.tmux.conf "$websiteDir/downloads"
 cp $HOME/.shell_aliases_functions.sh "$websiteDir/downloads"
 cp $HOME/.zshrc "$websiteDir/downloads"
 
-boldAndUnderlinedPrint "Copying scripts to $websiteDir"
+prettyPrint "Copying scripts to $websiteDir"
 rm -rf $websiteDir/downloads/scripts/*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -P "$websiteDir/downloads/scripts"
@@ -117,9 +117,9 @@ cd "$websiteDir/downloads" || exit 1
 tar cvfz MenkeTechnologiesShellScripts.tgz scripts
 cd ..
 
-boldAndUnderlinedPrint "Status..."
+prettyPrint "Status..."
 git status
-boldAndUnderlinedPrint "Pushing..."
+prettyPrint "Pushing..."
 git add .
 git commit -m "$commitMessage"
 git push
@@ -127,7 +127,7 @@ git push
 
 #{{{                    MARK:installer
 #**************************************************************
-boldAndUnderlinedPrint "Copying scripts to custom Installer Repo"
+prettyPrint "Copying scripts to custom Installer Repo"
 rm -rf $SCRIPTS/customTerminalInstaller/scripts/*
 cp "$SCRIPTS"/*.sh "$installerDir/scripts"
 cp -R "$SCRIPTS"/macOnly "$installerDir/scripts"
@@ -140,15 +140,15 @@ cp $HOME/.rpitokens.sh "$installerDir"
 cp $HOME/conf.gls "$installerDir"
 cp $HOME/conf.df"$installerDir"
 
-boldAndUnderlinedPrint "Updating vim plugins list"
+prettyPrint "Updating vim plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
-boldAndUnderlinedPrint "Updating zsh plugins list"
+prettyPrint "Updating zsh plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* > "$installerDir/.zshplugins"
 
 cd "$installerDir" || exit 1
-boldAndUnderlinedPrint "Status"
+prettyPrint "Status"
 git status
-boldAndUnderlinedPrint "Pushing..."
+prettyPrint "Pushing..."
 git add .
 git commit -m "$commitMessage"
 git push

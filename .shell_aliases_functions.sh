@@ -588,6 +588,7 @@ getrc(){
     cd "$HOME" && {
         git clone "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
         cd "$REPO_NAME" && {
+
         cp .shell_aliases_functions.sh "$HOME"
         cp .zshrc "$HOME"
         cp .vimrc "$HOME"
@@ -601,8 +602,8 @@ getrc(){
 
         cd ..
         rm -rf "$REPO_NAME"
-
         exec "$SHELL"
+
         } || {
             printf "Failed to cd to $REPO_NAME\n" >&2
         }
