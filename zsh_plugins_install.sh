@@ -7,13 +7,21 @@
 #####   Notes: 
 #}}}***********************************************************
 
+
+
+printf "Installing ZshPlugins\n"
+if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins" ]]; then
+    mkdir -p "$HOME/.oh-my-zsh/custom/plugins"
+fi
+
+INSTALLER_DIR="$(pwd)"
+
 installOhMyZshPlugin(){
-    git clone "https://github.com/$1.git" 
+    echo git clone "https://github.com/$1.git" 
 }
 
 cd "$HOME/.oh-my-zsh/custom/plugins" && {
-installOhMyZshPlugin "zsh-users/zsh-completions"
-installOhMyZshPlugin "zsh-users/zsh-autosuggestions"
-installOhMyZshPlugin "zsh-users/zsh-syntax-highlighting"
-installOhMyZshPlugin "MenkeTechnologies/zsh-more-completions"
+    while read repo; do
+        installOhMyZshPlugin "$repo"
+    done < "$INSTALLER_DIR/.zshplugins"
 }

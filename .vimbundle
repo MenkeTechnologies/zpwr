@@ -1,4 +1,5 @@
 lrvick/Conque-Shell
+MenkeTechnologies/VimColorSchemes
 VundleVim/Vundle.vim
 Valloric/YouCompleteMe
 mileszs/ack.vim
@@ -35,8 +36,11 @@ xolox/vim-misc
 TerryMa/vim-multiple-cursors
 tiagofumo/vim-nerdtree-syntax-highlight
 tpope/vim-obsession
+beloglazov/vim-online-thesaurus
 sunuslee/vim-plugin-random-colorscheme-picker
+LucHermitte/vim-refactor
 tpope/vim-repeat
+tpope/vim-rsi
 xolox/vim-session
 guns/vim-sexp
 tpope/vim-sexp-mappings-for-regular-people
@@ -46,4 +50,3 @@ mhinz/vim-startify
 tpope/vim-surround
 benmills/vimux
 gcmt/wildfire.vim
-MenkeTechnologies/VimColorSchemes
