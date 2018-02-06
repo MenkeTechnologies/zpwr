@@ -584,11 +584,12 @@ done
 }
 
 getrc(){
+    REPO_NAME="customTerminalInstaller"
     cd "$HOME" && {
-        wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.shell_aliases_functions.sh -O .shell_aliases_functions.sh
-        wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.zshrc -O .zshrc
-        wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.vimrc -O .vimrc
-        wget https://raw.githubusercontent.com/MenkeTechnologies/customTerminalInstaller/master/.tmux.conf -O .tmux.conf
+        wget https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/master/.shell_aliases_functions.sh -O .shell_aliases_functions.sh
+        wget https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/master/.zshrc -O .zshrc
+        wget https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/master/.vimrc -O .vimrc
+        wget https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME/master/.tmux.conf -O .tmux.conf
         exec "$SHELL"
     } || {
         printf "No $HOME Dir!\n" >&2
