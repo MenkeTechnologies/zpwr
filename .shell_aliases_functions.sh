@@ -226,6 +226,11 @@ alias il="idea list"
 
 #{{{                    MARK:Shell functions
 #**************************************************************
+
+ex(){
+python3 "$PYSCRIPTS/ssh_runner.py" "$@"
+}
+
 s(){
     [[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
 
