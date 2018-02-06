@@ -90,7 +90,7 @@ getRemoteDetails(){
     #get origin from git remote -v if the origin has been established
     #awk to print first column, tail for last line and tr to delete any spaces
     local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
-    if [[ -z "$ORGIN_NAME" ]]; then
+    if [ -z "$ORGIN_NAME" ]; then
         #no origin so prompt for it
         myPrettyPrint "What is your origin?"
         read ORGIN_NAME
