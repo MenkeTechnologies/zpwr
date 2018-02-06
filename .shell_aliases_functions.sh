@@ -586,7 +586,7 @@ done
 getrc(){
     REPO_NAME="customTerminalInstaller"
     cd "$HOME" && {
-        git clone "https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME.g"
+        git clone "https://raw.githubusercontent.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
         cd "$REPO_NAME"
 
         cp .shell_aliases_functions.sh "$HOME"
