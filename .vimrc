@@ -543,8 +543,8 @@ function Quoter(type)
 
     nnoremap <Tab> :SaveSession!<CR><CR>
     nnoremap <silent> <leader>n :n<CR>
-    inoremap <F8> <ESC>:%s///g<Left><Left><Left>
-    nnoremap <F8> :%s///g<Left><Left><Left>
+    inoremap <F8> <ESC>:%s@@@g<Left><Left><Left>
+    nnoremap <F8> :%s@@@g<Left><Left><Left>
     map <F1> :NERDTreeToggle<CR>
     inoremap <F1> <ESC>:NERDTreeToggle<CR>
     map <F2> :UndotreeToggle<CR>
