@@ -5,7 +5,7 @@
 #####   Date: Mon Oct 23 02:35:16 EDT 2017
 #####   Purpose: bash script to 
 #####   Notes: 
-#}}}DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD***********************************************************
+#}}}
 #          .                                                      .
 #        .n                   .                 .                  n.
 #  .   .dP                  dP                   9b                 9b.    .
@@ -40,21 +40,17 @@ echo "my name is dogs"
 
 x=50
 
-y = 100
-
 while (( x > 10)); do
     echo "its $x"
-    let x--
+    ((x--))
 done
         
 say "bash scripting is cool"
 
 echo -n "what is your name: "
 
-read name
-
+read -r name
 
 echo "your name is $name" and your mom 
-
 
 

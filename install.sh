@@ -128,8 +128,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     
     addDependenciesMac
 
-    for prog in ${dependencies_ary[@]}; do
-        update $prog mac
+    for prog in "${dependencies_ary[@]}"; do
+        update "$prog" mac
     done
 
     prettyPrint "Installing Powerline fonts"
@@ -143,7 +143,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 else
 
     addDependenciesLinux
-    distroName=$(cat /etc/os-release | grep "^ID=" | cut -d= -f2 | tr -d \")
+    distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \")
 
     case $distroName in
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
@@ -161,9 +161,9 @@ else
 
     prettyPrint "Now The Main Course..."
 
-    for prog in ${dependencies_ary[@]}; do
+    for prog in "${dependencies_ary[@]}"; do
         prettyPrint "Installing $prog"
-        update $prog $distro
+        update "$prog" "$distro"
     done
 
 
@@ -192,8 +192,9 @@ fi
 printf "Common Installer Section"
 
 vimV="$(vim --version | head -1 | awk '{print $5}')"
+res=$(echo "$vimV >= 8.0" | bc)
 
-(( "$vimV" == 8.0 )) && {
+[[ $res == 0 ]] && {
     prettyPrint "Vim Version less than 8.0! Installing Vim from Source."
     git clone https://github.com/vim/vim.git vim-master
     cd "vim-master" && {
@@ -336,7 +337,7 @@ echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
 
-if [[ "distroName" == raspbian ]]; then
+if [[ "$distroName" == raspbian ]]; then
     prettyPrint "Installing custom motd for RPI..."
     cp "$INSTALLER_DIR/motd.sh" "$HOME"
 fi
@@ -353,9 +354,10 @@ bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 #**************************************************************
 prettyPrint "Installing IFTOP-color by MenkeTechnologies"
 if [[ -d "$HOME/ForkedRepos" ]]; then
-    mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
-    git clone https://github.com/MenkeTechnologies/iftopcolor
-    sudo ./configure && make && sudo make install
+    mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos" && {
+        git clone https://github.com/MenkeTechnologies/iftopcolor
+        sudo ./configure && make && sudo make install
+    }
 fi
 
 
