@@ -37,18 +37,35 @@ INSTALLER_DIR="$(pwd -P)"
 # 16) powerline-mem-segment
 
 dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpython python-dev \
-    python3-dev colortail screenfetch fortune postfix mailutils ccze ecryptfs-utils \
+    python3-dev screenfetch fortune postfix mailutils ccze ecryptfs-utils \
     libpcap-dev ncurses-dev iftop htop figlet silversearcher-ag zsh libevent-dev libncurses5-dev libgnome2-dev\
     libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev netatalk dstat \
     libcairo2-dev libx11-dev libxpm-dev libxt-dev at dnsutils fuse afpfs-ng \
     python3-dev ruby-dev lua5.1 lua5.1-dev libperl-dev rlwrap tor npm nginx nmap mtr mytop tcpdump \
     jnettop iotop atop software-properties-common ctags speedtest-cli texinfo lsof weechat grc gradle sysv-rc-conf \
-    build-essential reptyr python-pip python3-pip)
+    build-essential)
 
 #}}}***********************************************************
 
 #{{{                    MARK:Functions
 #**************************************************************
+
+addDependenciesLinux(){
+    dependencies_ary+=(reptyr iptraf)
+}
+
+addDependenciesDebian(){
+    dependencies_ary+=(python-pip python3-pip)
+
+}
+
+addDependenciesRedHat(){
+    dependencies_ary+=()
+}
+
+addDependenciesMac(){
+    dependencies_ary+=()
+}
 
 exists(){
     type "$1" >/dev/null 2>&1
@@ -66,7 +83,6 @@ prettyPrint(){
 }
 
 update (){
-
     exists "$1" || {
 
         if [[ $2 == mac ]]; then
@@ -107,6 +123,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Now The Main Course..."
 
     for prog in ${dependencies_ary[@]}; do
+        addDependenciesMac
         update $prog mac
     done
 
@@ -120,14 +137,17 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
 else
 
+    addDependenciesLinux
     distroName=$(cat /etc/os-release | grep "^ID=" | cut -d= -f2 | tr -d \")
 
     case $distroName in
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
            distro=debian
+            addDependenciesDebian
             ;;
-        (centos) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
+        (centos|fedora|rhel) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
             distro=redhat
+            addDependenciesRedHat
             ;;
         * )
             prettyPrint "Your distro $distroName is unsupported now...cannot proceed!" >&2
