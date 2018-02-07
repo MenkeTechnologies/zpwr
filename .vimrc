@@ -206,9 +206,9 @@ noremap <c-j> 4j
 noremap <c-k> 4k
 noremap <c-h> 4h
 noremap <c-l> 4l
-nnoremap <silent> <C-D> :update<CR>
-vnoremap <silent> <C-D> :<C-C>:update<CR>
-inoremap <silent> <C-D> <C-[>:update<CR>a
+nnoremap <silent> <C-D> :update<CR>:SyntasticCheck<CR>
+vnoremap <silent> <C-D> :<C-C>:update<CR>:SyntasticCheck<CR>
+inoremap <silent> <C-D> <C-[>:update<CR>:SyntasticCheck<CR>a
 
 nnoremap <silent> <C-G> :w<CR>:Dispatch<CR>
 nnoremap <silent> <C-H> wgUl
@@ -450,224 +450,224 @@ function Quoter(type)
                 endif
             endif
 
-            endfor
-            "echo "lineToEnd ".lineToEnd
-            "echo "matching index )".matchingIndexParen
-            "echo "matching index ]]".matchingIndexDblB
-            "echo "matching index ]".matchingIndexB
-            "echo "least index ]".least
+        endfor
+        "echo "lineToEnd ".lineToEnd
+        "echo "matching index )".matchingIndexParen
+        "echo "matching index ]]".matchingIndexDblB
+        "echo "matching index ]".matchingIndexB
+        "echo "least index ]".least
 
-            let lineToPunct=strpart(lineToEnd, 1,least)
-            "echo "line to punct: ".lineToPunct
+        let lineToPunct=strpart(lineToEnd, 1,least)
+        "echo "line to punct: ".lineToPunct
 
-            if (lineToPunct=~ '\v.*\]\].*')
-                call ReplaceBracket("[","]", "(",")")
-                echo "Replace [[]] with (())"
-            elseif (lineToPunct=~ '\v.*\)\).*')
-                call ReplaceBracketToSingle("(",")","[","]") 
-                echo "Replace (()) with []"
-            else
-                call ReplaceBracketToDouble("[","]","[","]") 
-                echo "Replace [] with [[]]"
-            endif 
-            let g:COUNTER=g:COUNTER +1
-            return 0
-        endif
-        "if line matches regex and cursor position within matching capture group
-        "then run the quoting
-
-        if (line =~ '\v^.*\$\(.*\).*$') 
-            call InsertMatchingPunct(quote, '$')
-            echo "$(command substitution)"
-        elseif (line =~ '\v^.*\$\{.*\}.*$') 
-            call InsertMatchingPunct(quote, '$')
-            echo "${parameter substitution}"
-        elseif (line =~'\v\s*\w+\=\w+\s*$')
-            call InsertEquals(quote, '=', '')
-            echo "var=value"
-        elseif (line =~ '\v.*`.*`.*')
-            call InsertBackTick(quote, '`', '`')
-            echo "`command substitution`"
-        elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\).*')
-            call InsertVarPunct(quote, '$', ')')
-            echo "$var)"
-        elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\].*')
-            call InsertVarPunct(quote, '$', ']')
-            echo "$var]"
-        elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
-            call InsertVar(quote, '$', '/\s')
-            echo "$var "
-        elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|\`|\'')+$')
-            call InsertEOLVar(quote, '$', '')
-            echo "$varEOL"
+        if (lineToPunct=~ '\v.*\]\].*')
+            call ReplaceBracket("[","]", "(",")")
+            echo "Replace [[]] with (())"
+        elseif (lineToPunct=~ '\v.*\)\).*')
+            call ReplaceBracketToSingle("(",")","[","]") 
+            echo "Replace (()) with []"
         else
-            echo "Unknown Quoting Option:".line
-        endif
+            call ReplaceBracketToDouble("[","]","[","]") 
+            echo "Replace [] with [[]]"
+        endif 
+        let g:COUNTER=g:COUNTER +1
+        return 0
+    endif
+    "if line matches regex and cursor position within matching capture group
+    "then run the quoting
 
-    endfunction
-
-    let blacklist=['md', 'sh','hs', 'pl']
-
-    augroup indentGroup
-        autocmd!
-
-        let currentFileEnding=tolower(expand('%:e'))
-        "if the filetype is not in blacklist (index = -1) then we will indent
-        if index(blacklist, currentFileEnding) < 0
-            autocmd CursorHoldI * :call Indent()
-        endif
-    augroup end
-
-    let os = substitute(system('uname'), "\n", "", "")
-    "mac and linux send different codes for Ctrl arrow keys
-    if os == "Darwin"
-        map <ESC>[1;5A <C-Up>
-        map <ESC>[1;5B <C-Down>
-        map <ESC>[1;5C <C-Right>
-        map <ESC>[1;5D <C-Left>
-    elseif os == "Linux"
-        map <ESC>[A <C-Up>
-        map <ESC>[B <C-Down>
-        map <ESC>[C <C-Right>
-        map <ESC>[D <C-Left>
-
+    if (line =~ '\v^.*\$\(.*\).*$') 
+        call InsertMatchingPunct(quote, '$')
+        echo "$(command substitution)"
+    elseif (line =~ '\v^.*\$\{.*\}.*$') 
+        call InsertMatchingPunct(quote, '$')
+        echo "${parameter substitution}"
+    elseif (line =~'\v\s*\w+\=\w+\s*$')
+        call InsertEquals(quote, '=', '')
+        echo "var=value"
+    elseif (line =~ '\v.*`.*`.*')
+        call InsertBackTick(quote, '`', '`')
+        echo "`command substitution`"
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\).*')
+        call InsertVarPunct(quote, '$', ')')
+        echo "$var)"
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\].*')
+        call InsertVarPunct(quote, '$', ']')
+        echo "$var]"
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
+        call InsertVar(quote, '$', '/\s')
+        echo "$var "
+    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|\`|\'')+$')
+        call InsertEOLVar(quote, '$', '')
+        echo "$varEOL"
+    else
+        echo "Unknown Quoting Option:".line
     endif
 
-    nnoremap <silent> <leader>" :call Quoter("double")<CR>
-    nnoremap <silent> <leader>' :call Quoter("single")<CR>
-    nnoremap <silent> <leader>` :call Quoter("back")<CR>
-    nnoremap <silent> <leader>[ :call Quoter("bracket")<CR>
+endfunction
 
-    inoremap <silent> <C-U> <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
-    nnoremap <silent> <C-U> :silent !open -t %:p:h<CR>:redraw!<CR>
+let blacklist=['md', 'sh','hs', 'pl']
 
-    nnoremap <Tab> :SaveSession!<CR><CR>
-    nnoremap <silent> <leader>n :n<CR>
-    inoremap <F8> <ESC>:%s@@@g<Left><Left><Left>
-    nnoremap <F8> :%s@@@g<Left><Left><Left>
-    map <F1> :NERDTreeToggle<CR>
-    inoremap <F1> <ESC>:NERDTreeToggle<CR>
-    map <F2> :UndotreeToggle<CR>
-    inoremap <F2> <ESC>:UndotreeToggle<CR>
-    map <F3> :TlistAddFiles *<CR>:TlistToggle<CR>
-    inoremap <F3> <ESC>:TlistAddFiles *<CR>:TlistToggle<CR>
-    map <F4> :MinimapToggle<CR>
-    inoremap <F4> <ESC>:MinimapToggle<CR>
-    map <F5> :LOTRToggle<CR>
-    inoremap <F5> <ESC>:LOTRToggle<CR>
-    map <F6> :SyntasticToggleMode<CR>
-    inoremap <F6> <ESC>:SyntasticToggleMode<CR>
+augroup indentGroup
+    autocmd!
 
-    map <F7> :TTags<CR>
-    inoremap <F7> <ESC>:TTags<CR>
+    let currentFileEnding=tolower(expand('%:e'))
+    "if the filetype is not in blacklist (index = -1) then we will indent
+    if index(blacklist, currentFileEnding) < 0
+        autocmd CursorHoldI * :call Indent()
+    endif
+augroup end
 
-    map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
-    map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
-    "map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
+let os = substitute(system('uname'), "\n", "", "")
+"mac and linux send different codes for Ctrl arrow keys
+if os == "Darwin"
+    map <ESC>[1;5A <C-Up>
+    map <ESC>[1;5B <C-Down>
+    map <ESC>[1;5C <C-Right>
+    map <ESC>[1;5D <C-Left>
+elseif os == "Linux"
+    map <ESC>[A <C-Up>
+    map <ESC>[B <C-Down>
+    map <ESC>[C <C-Right>
+    map <ESC>[D <C-Left>
 
-    "for moving selection up and down, displacing other text 
-    xmap <C-Down> :m '> + <CR> gv
-    xmap <C-Up> :m '< -- <CR> gv
+endif
 
-    map <silent> w <Plug>CamelCaseMotion_w
-    map <silent> b <Plug>CamelCaseMotion_b
-    map <silent> e <Plug>CamelCaseMotion_e
-    sunmap w
-    sunmap b
-    sunmap e
-    set pastetoggle=<F9>
+nnoremap <silent> <leader>" :call Quoter("double")<CR>
+nnoremap <silent> <leader>' :call Quoter("single")<CR>
+nnoremap <silent> <leader>` :call Quoter("back")<CR>
+nnoremap <silent> <leader>[ :call Quoter("bracket")<CR>
 
-    " Repeat last command in the next tmux pane.
-    function TmuxRepeat()
-        let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua']
-        let exeFileType=expand('%:e')
-        if index(supportedTypes, exeFileType) >= 0
-            silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
-            redraw!
-        else
-            silent! exec "!tmux send-keys -t right C-c up C-m"
-            echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
-            redraw!
-        endif
-        exe "normal! zz"
-    endfunction
+inoremap <silent> <C-U> <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
+nnoremap <silent> <C-U> :silent !open -t %:p:h<CR>:redraw!<CR>
 
-    function TmuxRepeatGeneric()
-        silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
+nnoremap <Tab> :SaveSession!<CR><CR>
+nnoremap <silent> <leader>n :n<CR>
+inoremap <F8> <ESC>:%s@@@g<Left><Left><Left>
+nnoremap <F8> :%s@@@g<Left><Left><Left>
+map <F1> :NERDTreeToggle<CR>
+inoremap <F1> <ESC>:NERDTreeToggle<CR>
+map <F2> :UndotreeToggle<CR>
+inoremap <F2> <ESC>:UndotreeToggle<CR>
+map <F3> :TlistAddFiles *<CR>:TlistToggle<CR>
+inoremap <F3> <ESC>:TlistAddFiles *<CR>:TlistToggle<CR>
+map <F4> :MinimapToggle<CR>
+inoremap <F4> <ESC>:MinimapToggle<CR>
+map <F5> :LOTRToggle<CR>
+inoremap <F5> <ESC>:LOTRToggle<CR>
+map <F6> :SyntasticToggleMode<CR>
+inoremap <F6> <ESC>:SyntasticToggleMode<CR>
+
+map <F7> :TTags<CR>
+inoremap <F7> <ESC>:TTags<CR>
+
+map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
+map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
+"map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
+
+"for moving selection up and down, displacing other text 
+xmap <C-Down> :m '> + <CR> gv
+xmap <C-Up> :m '< -- <CR> gv
+
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
+set pastetoggle=<F9>
+
+" Repeat last command in the next tmux pane.
+function TmuxRepeat()
+    let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua']
+    let exeFileType=expand('%:e')
+    if index(supportedTypes, exeFileType) >= 0
+        silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
         redraw!
-        exe "normal! zz"
-    endfunction
-
-    " get rid of plugin mapping
-    autocmd VimEnter * iunmap <C-F>
-
-    nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
-    autocmd VimEnter * inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
-
-    nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>
-    inoremap <silent> <C-V> <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
-    "}}}***********************************************************
-    "{{{                    MARK:autocmd
-    "**************************************************************
-
-    autocmd filetype text set tags+=~/tags
-    autocmd filetype * call AutoCorrect()
-    "uncomment following if you want just want autocorrection in text and markdown files
-    "autocmd filetype text call AutoCorrect()
-    "autocmd filetype markdown call AutoCorrect()
-
-    autocmd BufReadPre,FileReadPre *.[chy] set cindent
-    autocmd BufRead * setlocal foldmethod=marker
-    autocmd BufRead * normal zR
-    autocmd FileType java let b:dispatch = 'javac %'
-
-    "diffing colors
-    fun! SetDiffColors()
-        highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
-        highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
-        highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
-        highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
-    endfun
-
-    autocmd FilterWritePre * call SetDiffColors()
-
-    autocmd BufNewFile *.sh silent! exe "!templater.sh %:p" | e
-    autocmd BufNewFile *.rb silent! exe "!templater.sh %:p" | e
-    autocmd BufNewFile *.py silent! exe "!templater.sh %:p" | e
-    autocmd BufNewFile *.pl silent! exe "!templater.sh %:p" | e
-    autocmd BufNewFile * exe "normal! G" | startinsert!
-
-    "}}}***********************************************************
-    "load all pathogen plugins
-    execute pathogen#infect()
-    set runtimepath^=~/.vim/bundle/ctrlp.vim
-
-
-    if os == "Darwin"
-        set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
-    elseif os == "Linux"
-        set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+    else
+        silent! exec "!tmux send-keys -t right C-c up C-m"
+        echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
+        redraw!
     endif
+    exe "normal! zz"
+endfunction
 
-    " :e will find files automatically in these locations
-    set path+=~/Desktop
-    set path+=~/Documents/shellScripts
+function TmuxRepeatGeneric()
+    silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
+    redraw!
+    exe "normal! zz"
+endfunction
 
-    colorscheme badwolf
+" get rid of plugin mapping
+autocmd VimEnter * iunmap <C-F>
 
-    "common mispellings
-    iabbrev tth the
-    iabbrev adn and
-    iabbrev waht what
-    iabbrev tehn then
-    iabbrev retrun return
-    iabbrev retunr return
-    iabbrev delte delete
-    iabbrev deltee delete
-    set dictionary+=/usr/share/dict/words
-    set thesaurus+=~/mthesaur.txt
+nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
+autocmd VimEnter * inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
 
-    "easier mapping for dict completion
-    "inoremap <silent> <C-T> <C-X><C-K>
-    "easier mapping for thesaurus completion
-    "inoremap <silent> <ESC>t <C-X><C-T>
+nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>
+inoremap <silent> <C-V> <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
+"}}}***********************************************************
+"{{{                    MARK:autocmd
+"**************************************************************
+
+autocmd filetype text set tags+=~/tags
+autocmd filetype * call AutoCorrect()
+"uncomment following if you want just want autocorrection in text and markdown files
+"autocmd filetype text call AutoCorrect()
+"autocmd filetype markdown call AutoCorrect()
+
+autocmd BufReadPre,FileReadPre *.[chy] set cindent
+autocmd BufRead * setlocal foldmethod=marker
+autocmd BufRead * normal zR
+autocmd FileType java let b:dispatch = 'javac %'
+
+"diffing colors
+fun! SetDiffColors()
+    highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
+    highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
+    highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
+    highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
+endfun
+
+autocmd FilterWritePre * call SetDiffColors()
+
+autocmd BufNewFile *.sh silent! exe "!templater.sh %:p" | e
+autocmd BufNewFile *.rb silent! exe "!templater.sh %:p" | e
+autocmd BufNewFile *.py silent! exe "!templater.sh %:p" | e
+autocmd BufNewFile *.pl silent! exe "!templater.sh %:p" | e
+autocmd BufNewFile * exe "normal! G" | startinsert!
+
+"}}}***********************************************************
+"load all pathogen plugins
+execute pathogen#infect()
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
+
+if os == "Darwin"
+    set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
+elseif os == "Linux"
+    set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+endif
+
+" :e will find files automatically in these locations
+set path+=~/Desktop
+set path+=~/Documents/shellScripts
+
+colorscheme badwolf
+
+"common mispellings
+iabbrev tth the
+iabbrev adn and
+iabbrev waht what
+iabbrev tehn then
+iabbrev retrun return
+iabbrev retunr return
+iabbrev delte delete
+iabbrev deltee delete
+set dictionary+=/usr/share/dict/words
+set thesaurus+=~/mthesaur.txt
+
+"easier mapping for dict completion
+"inoremap <silent> <C-T> <C-X><C-K>
+"easier mapping for thesaurus completion
+"inoremap <silent> <ESC>t <C-X><C-T>
