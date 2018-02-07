@@ -336,7 +336,7 @@ echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
 
-if [[ "distroName" == raspbian]]; then
+if [[ "distroName" == raspbian ]]; then
     prettyPrint "Installing custom motd for RPI..."
     cp "$INSTALLER_DIR/motd.sh" "$HOME"
 fi
@@ -352,7 +352,7 @@ bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 #{{{                    MARK:Utilities
 #**************************************************************
 prettyPrint "Installing IFTOP-color by MenkeTechnologies"
-if [[ d "$HOME/ForkedRepos" ]]; then
+if [[ -d "$HOME/ForkedRepos" ]]; then
     mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos"
     git clone https://github.com/MenkeTechnologies/iftopcolor
     sudo ./configure && make && sudo make install
