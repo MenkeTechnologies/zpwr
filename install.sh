@@ -90,7 +90,7 @@ update (){
         elif [[ $2 == debian ]];then
             sudo apt-get install -y "$1"
         elif [[ $2 == redhat ]];then
-            yum install -y "$1"
+            sudo yum install -y "$1"
         else
             prettyPrint "Error at install with $2." >&2
         fi
@@ -121,9 +121,10 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "We have Python..."
 
     prettyPrint "Now The Main Course..."
+    
+    addDependenciesMac
 
     for prog in ${dependencies_ary[@]}; do
-        addDependenciesMac
         update $prog mac
     done
 
@@ -142,7 +143,7 @@ else
 
     case $distroName in
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
-           distro=debian
+            distro=debian
             addDependenciesDebian
             ;;
         (centos|fedora|rhel) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
