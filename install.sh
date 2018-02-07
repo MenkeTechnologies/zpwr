@@ -36,11 +36,11 @@ INSTALLER_DIR="$(pwd -P)"
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpython
-    screenfetch fortune postfix mailutils ccze htop figlet zsh docker erlang elixir links
-    fuse rlwrap tor npm nginx nmap mtr mytop tcpdump redis toilet mysql mongodb postgresql\
-    jnettop iotop atop ctags speedtest-cli texinfo lsof weechat grc gradle ant maven tree mc
-    )
+dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake bpython sl \
+    screenfetch fortune mailutils ccze htop figlet zsh docker erlang elixir links \
+    rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql mongodb postgresql \
+    jnettop iotop atop ctags speedtest-cli texinfo lsof weechat grc gradle ant maven tree mc ocaml groovy \
+    ) 
 
 #}}}***********************************************************
 
@@ -49,10 +49,10 @@ dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake glances bpy
 
 addDependenciesLinux(){
     dependencies_ary+=(reptyr iptraf lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev \
-    libpcap-dev ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev 
-    python3-dev python-dev ruby-dev libperl-dev dstat ecryptfs-utils at silversearcher-ag netatalk dnsutils
-    lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark
-    samba samba-common scrot
+    libpcap-dev ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
+    python3-dev python-dev ruby-dev libperl-dev dstat ecryptfs-utils at silversearcher-ag netatalk dnsutils \
+    lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
+    samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang\
     )
 }
 
@@ -67,7 +67,7 @@ addDependenciesRedHat(){
 
 addDependenciesMac(){
     dependencies_ary+=(the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace \
-    aalib ncmpcpp mpd
+    aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go\
     )
 }
 
