@@ -531,6 +531,9 @@ zstyle ':completion:*:corrections' format \
 zstyle ':completion:*:messages' format \
     $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
 
+zstyle ':completion:*:explanations' format \
+    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+
 zstyle ':completion:*:warnings' format \
     $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
 zstyle ':completion:*' auto-description 'Specify: %d'
