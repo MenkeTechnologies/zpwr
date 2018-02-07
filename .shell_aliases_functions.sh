@@ -603,7 +603,6 @@ getrc(){
         cp .vimrc "$HOME"
         cp .tmux.conf "$HOME"
         cp conf.gls "$HOME"
-        echo "COPYING" cp conf.df "$HOME"
         cp conf.df "$HOME"
         cp grc.zsh "$HOME"
 
