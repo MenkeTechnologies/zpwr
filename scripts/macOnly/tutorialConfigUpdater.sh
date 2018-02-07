@@ -87,11 +87,11 @@ while read -r file; do
     fi
 done < <(find ./vim)
 prettyPrint "Updating Tutorial Files Repo"
+git add .
+git commit -m "$commitMessage"
 prettyPrint "Status..."
 git status
 prettyPrint "Pushing..."
-git add .
-git commit -m "$commitMessage"
 git push
 #}}}***********************************************************
 
@@ -117,11 +117,11 @@ cd "$websiteDir/downloads" || exit 1
 tar cvfz MenkeTechnologiesShellScripts.tgz scripts
 cd ..
 
+git add .
+git commit -m "$commitMessage"
 prettyPrint "Status..."
 git status
 prettyPrint "Pushing..."
-git add .
-git commit -m "$commitMessage"
 git push
 #}}}***********************************************************
 
@@ -146,10 +146,10 @@ prettyPrint "Updating zsh plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* > "$installerDir/.zshplugins"
 
 cd "$installerDir" || exit 1
+git add .
+git commit -m "$commitMessage"
 prettyPrint "Status"
 git status
 prettyPrint "Pushing..."
-git add .
-git commit -m "$commitMessage"
 git push
 #}}}***********************************************************
