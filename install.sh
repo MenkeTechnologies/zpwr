@@ -154,7 +154,7 @@ else
             distro=redhat
             addDependenciesRedHat
             ;;
-        * )
+        (*)
             prettyPrint "Your distro $distroName is unsupported now...cannot proceed!" >&2
             exit 1
     esac
@@ -219,13 +219,57 @@ mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/aut
 prettyPrint "Installing Vim Plugins"
 bash "$INSTALLER_DIR/vim_plugins_install.sh"
 
-prettyPrint "Installing psutil for Python Glances"
-sudo pip install psutil 
-prettyPrint "Installing Python Glances"
-sudo pip install glances
+if [[ "$OS_TYPE" == "Darwin" ]]; then
+    prettyPrint "Installing psutil for Python Glances"
+    pip install psutil 
+    prettyPrint "Installing Python Glances"
+    pip install glances
+    prettyPrint "Installing Virtualenv"
+    pip3 install virtualenv
 
-prettyPrint "Installing Virtualenv"
-pip3 install virtualenv
+    prettyPrint "Installing Powerline..."
+
+    pip install powerline-status
+    prettyPrint "Installing Tmux Powerline"
+
+    tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
+    pip install powerline-mem-segment
+    prettyPrint "Installing PyDf"
+    pip install pydf
+
+    prettyPrint "Installing MyCLI"
+    pip install mycli
+
+    type youtube-dl >/dev/null 2>&1 || {
+        prettyPrint "Installing youtube-dl"
+        pip install --upgrade youtube_dl
+    }
+else
+    prettyPrint "Installing psutil for Python Glances"
+    sudo pip install psutil 
+    prettyPrint "Installing Python Glances"
+    sudo pip install glances
+    prettyPrint "Installing Powerline..."
+
+    sudo pip install powerline-status
+    prettyPrint "Installing Tmux Powerline"
+
+    tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
+    sudo pip install powerline-mem-segment
+    prettyPrint "Installing PyDf"
+    sudo pip install pydf
+
+    prettyPrint "Installing MyCLI"
+    sudo pip install mycli
+
+    type youtube-dl >/dev/null 2>&1 || {
+        prettyPrint "Installing youtube-dl"
+        sudo pip install --upgrade youtube_dl
+    }
+
+fi
+prettyPrint "Done With Python Packages"
+
 prettyPrint "Running Vundle"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
@@ -244,15 +288,6 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 prettyPrint "Installing YouCompleteMe"
 
 cd $HOME/.vim/bundle/YouCompleteMe && ./install.py --clang-completer
-
-################################################################################
-## Powerline
-################################################################################
-prettyPrint "Installing Powerline..."
-
-sudo pip install powerline-status
-
-prettyPrint "Adding Powerline to .vimrc"
 
 
 #}}}***********************************************************
@@ -280,22 +315,17 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 #{{{                    MARK:Tmux
 #**************************************************************
-prettyPrint "Installing Tmux Powerline"
-
-tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
-echo pip install powerline-mem-segment
 
 #custom settings for tmux powerline
-if [[ -d $tmuxPowerlineDir ]]; then
-    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
+if [[ -d "$tmuxPowerlineDir" ]]; then
+     mkdir -p "$tmuxPowerlineDir" && cat default.json >> "$tmuxPowerlineDir/default.json"
 fi
 
 prettyPrint "Installing Tmux Plugin Manager"
-if [[ -d $HOME/.tmux/plugins/tpm  ]]; then
-    echo mkdir -p $HOME/.tmux/plugins/tpm
-    echo git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+if [[ -d "$HOME/.tmux/plugins/tpm"  ]]; then
+     mkdir -p $HOME/.tmux/plugins/tpm
+     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
-
 
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
@@ -328,11 +358,6 @@ if [[ d "$HOME/ForkedRepos" ]]; then
     sudo ./configure && make && sudo make install
 fi
 
-prettyPrint "Installing PyDf"
-sudo pip install pydf
-
-prettyPrint "Installing MyCLI"
-sudo pip install mycli
 
 if [[ -f "$HOME/.token.sh" ]]; then
     touch "$HOME/.tokens.sh"
@@ -355,7 +380,8 @@ prettyPrint "Copying all Shell Scripts..."
 if [[ ! -d "$HOME/Documents/shellScripts" ]]; then
     mkdir -p "$HOME/Documents/shellScripts"
 fi
-cp $INSTALLER_DIR/scripts/*.sh "$HOME/Documents/shellScripts"
+
+cp "$INSTALLER_DIR/scripts/"*.sh "$HOME/Documents/shellScripts"
 cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
 
 prettyPrint "Installing ponysay from source"
@@ -380,11 +406,6 @@ if [[ -f "$htopDIR/htoprfc" ]]; then
     fi
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
 fi
-
-type youtube-dl >/dev/null 2>&1 || {
-    prettyPrint "Installing youtube-dl"
-    sudo pip install --upgrade youtube_dl
-}
 
 type chsh >/dev/null 2>&1 && {
     prettyPrint "Changing default shell to Zsh"
