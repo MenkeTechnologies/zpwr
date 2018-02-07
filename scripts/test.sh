@@ -29,7 +29,7 @@
 
 x=5
 
-if [[ x > 50 ]]; then
+if (( x > 50 )); then
     echo "the dogs are coll"
 fi
 
@@ -40,16 +40,21 @@ echo "my name is dogs"
 
 x=50
 
+y = 100
+
 while (( x > 10)); do
     echo "its $x"
     let x--
 done
-
+        
 say "bash scripting is cool"
 
 echo -n "what is your name: "
 
 read name
 
-echo "your name is $name"
+
+echo "your name is $name" and your mom 
+
+
 

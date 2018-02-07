@@ -206,9 +206,6 @@ noremap <c-j> 4j
 noremap <c-k> 4k
 noremap <c-h> 4h
 noremap <c-l> 4l
-nnoremap <silent> <C-D> :update<CR>:SyntasticCheck<CR>
-vnoremap <silent> <C-D> :<C-C>:update<CR>:SyntasticCheck<CR>
-inoremap <silent> <C-D> <C-[>:update<CR>:SyntasticCheck<CR>a
 
 nnoremap <silent> <C-G> :w<CR>:Dispatch<CR>
 nnoremap <silent> <C-H> wgUl
@@ -254,6 +251,14 @@ inoremap <ESC><C-C> <C-O>w<C-O>vU
 nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
 "vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
 inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
+
+nnoremap <silent> <C-D> :update<CR>
+vnoremap <silent> <C-D> :<C-C>:update<CR>:SyntasticCheck<CR>
+inoremap <silent> <C-D> <C-[>:update<CR>:SyntasticCheck<CR>a
+
+nnoremap <silent> <C-W> :update<CR>:SyntasticCheck<CR>
+vnoremap <silent> <C-W> :<C-C>:update<CR>:SyntasticCheck<CR>
+inoremap <silent> <C-W> <C-[>:update<CR>:SyntasticCheck<CR>a
 
 nnoremap <silent> <C-E> :q!<CR>
 vnoremap <silent> <C-E> :<C-C>:q!<CR>
@@ -600,6 +605,7 @@ endfunction
 
 " get rid of plugin mapping
 autocmd VimEnter * iunmap <C-F>
+
 
 nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
 autocmd VimEnter * inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
