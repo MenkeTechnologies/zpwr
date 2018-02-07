@@ -219,7 +219,7 @@ inoremap <silent> <C-G> <C-[>:w<CR>:Dispatch<CR>a
 vnoremap < <gv
 vnoremap > >gv
 
-vnoremap <C-c> "*y
+vnoremap <C-F> "*y
 
 
 inoremap <silent> <C-L> <ESC>mbgg=G`ba
