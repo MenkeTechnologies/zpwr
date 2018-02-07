@@ -191,19 +191,26 @@ fi
 
 printf "Common Installer Section"
 
-#git clone https://github.com/vim/vim.git vim-master
-#cd vim-master
-#./configure --with-features=huge \
-    #--enable-multibyte \
-    #--enable-rubyinterp=yes \
-    #--enable-pythoninterp=yes \
-    #--with-python-config-dir=/usr/lib/python2.7/config \
-    #--enable-python3interp=yes \
-    #--with-python3-config-dir=/usr/lib/python3.5/config \
-    #--enable-perlinterp=yes \
-    #--enable-luainterp=yes \
-    #--enable-gui=gtk2 --enable-cscope --prefix=/usr
-#sudo make install
+vimV="$(vim --version | head -1 | awk '{print $5}')"
+
+(( "$vimV" == 8.0 )) && {
+    prettyPrint "Vim Version less than 8.0! Installing Vim from Source."
+    git clone https://github.com/vim/vim.git vim-master
+    cd "vim-master" && {
+        ./configure --with-features=huge \
+            --enable-multibyte \
+            --enable-rubyinterp=yes \
+            --enable-pythoninterp=yes \
+            --with-python-config-dir=/usr/lib/python2.7/config \
+            --enable-python3interp=yes \
+            --with-python3-config-dir=/usr/lib/python3.5/config \
+            --enable-perlinterp=yes \
+            --enable-luainterp=yes \
+            --enable-gui=gtk2 --enable-cscope --prefix=/usr
+            sudo make install
+    }
+}
+
 
 prettyPrint "Installing Pathogen"
 #install pathogen
@@ -273,15 +280,15 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 #{{{                    MARK:Tmux
 #**************************************************************
-#prettyPrint "Installing Tmux Powerline"
+prettyPrint "Installing Tmux Powerline"
 
-#tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
-#echo pip install powerline-mem-segment
+tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
+echo pip install powerline-mem-segment
 
 #custom settings for tmux powerline
-#if [[ d $tmuxPowerlineDir ]]; then
-#    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
-#fi
+if [[ -d $tmuxPowerlineDir ]]; then
+    echo mkdir -p $tmuxPowerlineDir && cat default.json >> $tmuxPowerlineDir/default.json
+fi
 
 prettyPrint "Installing Tmux Plugin Manager"
 if [[ -d $HOME/.tmux/plugins/tpm  ]]; then
