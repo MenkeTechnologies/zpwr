@@ -1,5 +1,8 @@
 # FS
 #regexp=^.*?\s
+regexp=^(Filesystem.*)$
+colours=blue underline
+======
 regexp=^(?!Filesystem).*?\s
 colours=green
 ======
@@ -41,4 +44,4 @@ colours=bold red
 
 # tmpfs lines
 regexp=^tmpfs.*
-colours=blue
+colours=bright_black
