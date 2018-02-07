@@ -26,14 +26,14 @@ fi
 #{{{                    MARK:tutorialDir
 #**************************************************************
 prettyPrint "Copying zshrc"
-cp $HOME/.zshrc "$tutorialDir/zsh"
+cp "$HOME/.zshrc" "$tutorialDir/zsh"
 prettyPrint "Copying vimrc"
-cp $HOME/.vimrc "$tutorialDir/vim"
+cp "$HOME/.vimrc" "$tutorialDir/vim"
 
 prettyPrint "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
 cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
-cp -R $HOME/.tmux/* "$tutorialDir/.tmux"
+cp -R "$HOME/.tmux/"* "$tutorialDir/.tmux"
 
 prettyPrint "Copying shell_aliases_functions"
 cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
@@ -57,14 +57,14 @@ prettyPrint "Copying $HOME/.ctags"
 cp "$HOME/.ctags" "$tutorialDir/ctags"
 
 prettyPrint "Copying vis ncmpcpp mpd"
-cp -R $HOME/.config/vis "$tutorialDir/ncmpcpp-mpd-vis"
+cp -R "$HOME/.config/vis" "$tutorialDir/ncmpcpp-mpd-vis"
 
 prettyPrint "Emptying mpd log"
 echo > "$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
 
 echo > "$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
-cp -R $HOME/.config/ncmpcpp "$tutorialDir/ncmpcpp-mpd-vis"
-cp -R $HOME/.mpd "$tutorialDir/ncmpcpp-mpd-vis"
+cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
+cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
 prettyPrint "Copying iterm Colors"
 cp "$HOME/iterm-jm-colors.itermcolors" "$tutorialDir"
@@ -99,19 +99,19 @@ git push
 #{{{                    MARK:websiteDir
 #**************************************************************
 prettyPrint "Copying config files to websiteDir"
-cp $HOME/.vimrc "$websiteDir/downloads"
-cp $HOME/.vim/colors/bluewolf.vim "$websiteDir/downloads"
-cp $HOME/.tmux.conf "$websiteDir/downloads"
-cp $HOME/.shell_aliases_functions.sh "$websiteDir/downloads"
-cp $HOME/.zshrc "$websiteDir/downloads"
+cp "$HOME/.vimrc" "$websiteDir/downloads"
+cp "$HOME/.vim/colors/bluewolf.vim" "$websiteDir/downloads"
+cp "$HOME/.tmux.conf" "$websiteDir/downloads"
+cp "$HOME/.shell_aliases_functions.sh" "$websiteDir/downloads"
+cp "$HOME/.zshrc" "$websiteDir/downloads"
 
 prettyPrint "Copying scripts to $websiteDir"
-rm -rf $websiteDir/downloads/scripts/*
+rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -P "$websiteDir/downloads/scripts"
 fi
-cp $SCRIPTS/*.sh "$websiteDir/downloads/scripts"
-cp -R $SCRIPTS/macOnly "$websiteDir/downloads/scripts"
+cp "$SCRIPTS/*.sh" "$websiteDir/downloads/scripts"
+cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
 tar cvfz MenkeTechnologiesShellScripts.tgz scripts
@@ -128,17 +128,17 @@ git push
 #{{{                    MARK:installer
 #**************************************************************
 prettyPrint "Copying scripts to custom Installer Repo"
-rm -rf $SCRIPTS/customTerminalInstaller/scripts/*
+rm -rf "$SCRIPTS/customTerminalInstaller/scripts/"*
 cp "$SCRIPTS"/*.sh "$installerDir/scripts"
 cp -R "$SCRIPTS"/macOnly "$installerDir/scripts"
-cp $HOME/.vimrc "$installerDir"
-cp $HOME/.tmux.conf "$installerDir"
-cp -R $HOME/.tmux/* "$installerDir/.tmux"
-cp $HOME/.shell_aliases_functions.sh "$installerDir" 
-cp $HOME/.zshrc "$installerDir"
-cp $HOME/.rpitokens.sh "$installerDir"
-cp $HOME/conf.gls "$installerDir"
-cp $HOME/conf.df "$installerDir"
+cp "$HOME/.vimrc" "$installerDir"
+cp "$HOME/.tmux.conf" "$installerDir"
+cp -R "$HOME/.tmux/"* "$installerDir/.tmux"
+cp "$HOME/.shell_aliases_functions.sh" "$installerDir" 
+cp "$HOME/.zshrc" "$installerDir"
+cp "$HOME/.rpitokens.sh" "$installerDir"
+cp "$HOME/conf.gls" "$installerDir"
+cp "$HOME/conf.df" "$installerDir"
 
 prettyPrint "Updating vim plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
