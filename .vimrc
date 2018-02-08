@@ -592,8 +592,8 @@ endfunction
     vnoremap <silent> <leader>' :call InsertQuoteVisualMode("single")<CR<CR>
     vnoremap <silent> <leader>` :call InsertQuoteVisualMode("back")<CR>
     vnoremap <silent> <leader>[ :call InsertQuoteVisualMode("bracket")<CR>
-    vnoremap <silent> <leader>( :call InsertQuoteVisualMode("curlybracket")<CR>
-    vnoremap <silent> <leader>{ :call InsertQuoteVisualMode("paren")<CR>
+    vnoremap <silent> <leader>{ :call InsertQuoteVisualMode("curlybracket")<CR>
+    vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
 
 
 "}}}***********************************************************
