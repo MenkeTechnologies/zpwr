@@ -571,13 +571,12 @@ zstyle ':completion:*' matcher-list '' \
     'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
     'r:|?=** m:{a-z\-}={A-Z\_}'
 
-h=()
-if [[ -r ~/.ssh/config ]]; then
-    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+if [[ -r "$HOME/.ssh/config" ]]; then
+    h=(${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
     h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
 fi
 
-if [[ $#h -gt 0 ]]; then
+if (( $#h > 0 )); then
     zstyle ':completion:*:ssh:*' hosts $h
     zstyle ':completion:*:slogin:*' hosts $h
 fi
@@ -629,13 +628,13 @@ if [[ "$(uname)" = Darwin ]]; then
             printf "\e[1m"
         [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
             [[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
-            bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-            "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
-    } || {
-        bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-        "$(hostname)" | ponysay -W 100
-}
-                }
+                bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+                "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
+            } || {
+                bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+                "$(hostname)" | ponysay -W 100
+            }
+    }
             }
             printf "\e[0m"
             # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
@@ -644,11 +643,11 @@ if [[ "$(uname)" = Darwin ]]; then
             clearList
         fi
     else
-        distro="$(cat /etc/os-release | grep "^NAME" | cut -d= -f2 | tr -d \")"
+       distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \")"
 
         if [[ "$UID" != "0" ]]; then
             builtin cd "$D"
-            if [[ "$distro" =~ Raspbian* ]]; then
+            if [[ "$distro" == raspbian ]]; then
                 type ponysay 1>/dev/null 2>&1 && {
                     bash "$HOME/motd.sh" | ponysay -W 120 
             } || bash "$HOME/motd.sh"
