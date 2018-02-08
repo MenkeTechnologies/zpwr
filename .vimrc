@@ -216,7 +216,8 @@ inoremap <silent> <C-G> <C-[>:w<CR>:Dispatch<CR>a
 vnoremap < <gv
 vnoremap > >gv
 
-vnoremap <C-F> "*y
+"copy to system clipboard
+vnoremap <C-B> "*y
 
 
 inoremap <silent> <C-L> <ESC>mbgg=G`ba
