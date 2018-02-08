@@ -157,6 +157,7 @@ else
         (*)
             prettyPrint "Your distro $distroName is unsupported now...cannot proceed!" >&2
             exit 1
+            ;;
     esac
 
     prettyPrint "Now The Main Course..."
