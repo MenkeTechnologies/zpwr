@@ -93,7 +93,24 @@ plugins=(zsh-more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zs
 [[ "$(uname)" == "Darwin" ]] && {
     plugins+=(zsh-xcode-completions brew osx pod)
 } || {
-    plugins+=(debian)
+
+distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \")
+
+    case $distroName in
+        (debian|raspbian|kali) 
+		plugins+=(debian)
+            ;;
+        (ubuntu) 
+		plugins+=(debian)
+            ;;
+        (centos|fedora|rhel) 
+		plugins+=(yum)
+
+            ;;
+        (*) :
+			;;
+    esac
+
 }
 #}}}***********************************************************
 
