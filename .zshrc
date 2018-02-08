@@ -434,7 +434,7 @@ fi
 }
 
 zle -N rationalize-dot
-bindkey . rationalize-dot
+bindkey -M viins . rationalize-dot
 
 bindkey -M listscroll q send-break
 bindkey -M listscroll f complete-word
@@ -469,39 +469,40 @@ setopt always_to_end # When completing from the middle of a word, move the curso
 #setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
-#unsetopt menu_complete # do not autoselect the first completion entry
-#setopt correct # spelling correction for commands
-#setopt correctall # spelling correction for arguments
+setopt correct # spelling correction for commands
+
+setopt correct_all # spelling correction for arguments
+
 setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
 setopt transient_rprompt # only show the rprompt on the current prompt
 
 setopt multios # perform implicit tees or cats when multiple redirections are attempted
 
 #dot files included in regular globs
-setopt globdots
+setopt glob_dots
 
 # no glob in all globs then error
-setopt cshnullglob
+setopt csh_null_glob
 
-setopt nolistbeep
+setopt no_list_beep
 
 # > file creates file
-setopt shnullcmd
+setopt sh_null_cmd
 
 # allow unquoted globs to pass through
-setopt nobadpattern
+setopt no_badp_attern
 
 #globs sorted numerically
-setopt numericglobsort
+setopt numeric_glob_sort
 
 # filename completion after =
-setopt magicequalsubst
+setopt magic_equal_subst
 
 #auto select first item of menu completion
 setopt menu_complete
 
 #array expandsion include prefix
-setopt rcexpandparam
+setopt rc_expand_param
 
 #display octal and hex like C
 setopt cbases
