@@ -45,7 +45,7 @@ do
 
     v|version  )  echo "$0 -- Version $__ScriptVersion" >&2; exit 0   ;;
 
-    l)  leavePresentPaneAloneFlag=true ;;
+    l|alone)  leavePresentPaneAloneFlag=true ;;
 
     * )  echo -e "\n  Option does not exist : $OPTARG\n" >&2
           usage; exit 1   ;;

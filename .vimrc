@@ -247,7 +247,6 @@ nnoremap <ESC><C-C> wvU
 "Insert mode mappings:
 inoremap <ESC><C-C> <C-O>w<C-O>vU
 
-
 "Ctrl-C exits like in shell
 nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
 "vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
