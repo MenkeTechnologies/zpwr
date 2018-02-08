@@ -94,6 +94,8 @@ plugins=(zsh-more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zs
     plugins+=(zsh-xcode-completions brew osx pod)
 } || {
 
+    plugins+=(systemd)
+
 distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \")
 
     case $distroName in
