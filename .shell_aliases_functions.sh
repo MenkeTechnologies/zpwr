@@ -178,7 +178,7 @@ alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
-alias m="execpy mapIt.py"
+alias mapit="execpy mapIt.py"
 alias j="execpy amazonSearch.py"
 alias shut="execpy shutdown.py"
 alias pb="execpy bills.py"
