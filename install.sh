@@ -11,7 +11,7 @@
 #{{{                    MARK:Setup
 #**************************************************************
 
-#set -x
+set -x
 set -v
 
 OS_TYPE="$(uname -s)"
@@ -179,7 +179,7 @@ else
         # Install the fontconfig file
         sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
     else
-        printf "/usr/share/fonts and /etc/fonts/conf.d must exist" >&2
+        printf "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
     fi
 
 fi
@@ -248,21 +248,21 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     }
 else
     prettyPrint "Installing psutil for Python Glances"
-     sudo pip install psutil 
+    sudo pip install psutil 
     prettyPrint "Installing Python Glances"
-     sudo pip install glances
+    sudo pip install glances
     prettyPrint "Installing Powerline..."
 
      sudo pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
-     sudo pip install powerline-mem-segment
+    sudo pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
-     sudo pip install pydf
+    sudo pip install pydf
 
     prettyPrint "Installing MyCLI"
-     sudo pip install mycli
+    sudo pip install mycli
 
     type youtube-dl >/dev/null 2>&1 || {
         prettyPrint "Installing youtube-dl"
