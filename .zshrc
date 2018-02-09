@@ -481,7 +481,7 @@ setopt auto_name_dirs # any parameter that is set to the absolute name of a dire
 setopt complete_in_word # Allow completion from within a word/phrase
 #setopt correct # spelling correction for commands
 
-setopt correct_all # spelling correction for arguments
+#setopt correct_all # spelling correction for arguments
 
 setopt prompt_subst # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
 setopt transient_rprompt # only show the rprompt on the current prompt
@@ -672,7 +672,7 @@ listNoClear
 fi
 
 #standard error colorization
-color2
+#color2
 
 #change history file size
 export SAVEHIST=50000
@@ -684,7 +684,8 @@ RPS2='+%N:%i:%^'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-    source "$HOME/.powerlevel9kconfig.sh"
+   #source "$HOME/.powerlevel9kconfig.sh"
+    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 : ~WCC
 : ~HOMEBREW_HOME_FORMULAE
 } || {
