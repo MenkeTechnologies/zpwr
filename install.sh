@@ -36,6 +36,7 @@ INSTALLER_DIR="$(pwd -P)"
 # 15) powerline
 # 16) powerline-mem-segment
 
+
 dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake bpython sl \
     screenfetch fortune mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql mongodb postgresql \
@@ -57,7 +58,7 @@ addDependenciesLinux(){
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(python-pip python3-pip curl)
+    dependencies_ary+=(python-pip python3-pip curl libffi-dev )
 
 }
 
