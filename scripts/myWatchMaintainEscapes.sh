@@ -15,6 +15,7 @@ usage(){
     usage:
     -h	help
     -d 	display date
+    -l  <lines> limit output to certain number of lines
 EOM
 exit 1
 }

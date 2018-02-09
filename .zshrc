@@ -479,7 +479,7 @@ setopt always_to_end # When completing from the middle of a word, move the curso
 #setopt auto_menu # show completion menu on successive tab press. needs unsetop menu_complete to work
 setopt auto_name_dirs # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
 setopt complete_in_word # Allow completion from within a word/phrase
-setopt correct # spelling correction for commands
+#setopt correct # spelling correction for commands
 
 setopt correct_all # spelling correction for arguments
 
@@ -656,7 +656,7 @@ listNoClear
             clearList
         fi
     else
-        distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \")"
+        distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
         if [[ "$UID" != "0" ]]; then
             builtin cd "$D"
