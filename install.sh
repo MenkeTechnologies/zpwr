@@ -143,7 +143,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 else
 
     addDependenciesLinux
-    distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \")
+    distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
 
     case $distroName in
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
@@ -248,21 +248,21 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     }
 else
     prettyPrint "Installing psutil for Python Glances"
-     pip install psutil 
+     sudo pip install psutil 
     prettyPrint "Installing Python Glances"
-     pip install glances
+     sudo pip install glances
     prettyPrint "Installing Powerline..."
 
-     pip install powerline-status
+     sudo pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
-     pip install powerline-mem-segment
+     sudo pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
-     pip install pydf
+     sudo pip install pydf
 
     prettyPrint "Installing MyCLI"
-     pip install mycli
+     sudo pip install mycli
 
     type youtube-dl >/dev/null 2>&1 || {
         prettyPrint "Installing youtube-dl"
