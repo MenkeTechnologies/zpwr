@@ -190,6 +190,8 @@ let g:NERDTreeDisablePatternMatchHighlight = 1
 "too slow with icons
 let g:webdevicons_enable_nerdtree=0
 
+let g:multi_cursor_next_key='<C-G>'
+
 
 call vundle#end()            " required
 
@@ -207,10 +209,6 @@ noremap <c-k> 4k
 noremap <c-h> 4h
 noremap <c-l> 4l
 
-nnoremap <silent> <C-G> :w<CR>:Dispatch<CR>
-
-"vnoremap <silent> <C-G> :<C-C>:w<CR>:Dispatch<CR>
-inoremap <silent> <C-G> <C-[>:w<CR>:Dispatch<CR>a
 
 vnoremap < <gv
 vnoremap > >gv
