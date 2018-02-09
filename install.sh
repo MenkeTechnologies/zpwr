@@ -12,11 +12,13 @@
 #**************************************************************
 
 set -x
+
 set -v
 
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
+exec 2> "$INSTALLER_DIR"/logfile.txt
 
 #Dependencies
 # 1) vim 8.0
