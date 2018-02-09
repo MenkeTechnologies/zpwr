@@ -218,7 +218,7 @@ vnoremap > >gv
 "copy to system clipboard
 vnoremap <C-B> "*y
 
-inoremap <silent> <C-L> <ESC>mbgg=G`ba
+inoremap <silent> <C-L> <ESC>mbgg=G`bzza
 
 "transpose words (like emacs `transpose-words')
 function! TransposeWords()
@@ -678,7 +678,8 @@ endfunction
 autocmd VimEnter * iunmap <C-F>
 
 nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
-vnoremap <silent> <C-F> :call NERDComment("x","Toggle")<CR>
+vnoremap <silent> <C-F> :call NERDComment("x","Toggle")<CR>`>
+vnoremap <silent> y y`>
 autocmd VimEnter * inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
 
 nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>

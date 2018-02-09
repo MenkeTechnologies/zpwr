@@ -1,0 +1,6 @@
+pane	config-5	0	:brc	1	:*	0	:/Users/jacobmenke/Desktop	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_4/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/aliases.vim + /Users/jacobmenke/.shell_aliases_functions.sh
+pane	config-5	0	:brc	1	:*	0	:/Users/jacobmenke/Desktop	0	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_4/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/aliases.vim + /Users/jacobmenke/.shell_aliases_functions.sh
+pane	config-5	0	:brc	1	:*	1	:/Users/jacobmenke/Desktop	1	Vim	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
+/usr/local/Cellar/macvim/8.0-144_4/MacVim.app/Contents/bin/../MacOS/Vim -g -v -S /Users/jacobmenke/.vim/sessions/vrc.vim /Users/jacobmenke/.vimrc
