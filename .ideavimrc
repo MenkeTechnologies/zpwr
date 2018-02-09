@@ -1,1 +1,2 @@
 vnoremap <silent> y y`>
+nnoremap <silent> p p`]
