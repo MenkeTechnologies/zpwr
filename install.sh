@@ -57,7 +57,7 @@ addDependenciesLinux(){
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(python-pip python3-pip)
+    dependencies_ary+=(python-pip python3-pip curl)
 
 }
 
@@ -173,11 +173,11 @@ else
         wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
         wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
         # move font to valid font path
-        mv PowerlineSymbols.otf /usr/share/fonts/
+        sudo mv PowerlineSymbols.otf /usr/share/fonts/
         # Update font cache for the path the font
-        fc-cache -vf /usr/share/fonts/
+        sudo fc-cache -vf /usr/share/fonts/
         # Install the fontconfig file
-        mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+        sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
     else
         printf "/usr/share/fonts and /etc/fonts/conf.d must exist" >&2
     fi
@@ -248,21 +248,21 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     }
 else
     prettyPrint "Installing psutil for Python Glances"
-    sudo pip install psutil 
+     pip install psutil 
     prettyPrint "Installing Python Glances"
-    sudo pip install glances
+     pip install glances
     prettyPrint "Installing Powerline..."
 
-    sudo pip install powerline-status
+     pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
-    sudo pip install powerline-mem-segment
+     pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
-    sudo pip install pydf
+     pip install pydf
 
     prettyPrint "Installing MyCLI"
-    sudo pip install mycli
+     pip install mycli
 
     type youtube-dl >/dev/null 2>&1 || {
         prettyPrint "Installing youtube-dl"
@@ -287,10 +287,8 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 ## YouCompleteMe
 ################################################################################
 
-prettyPrint "Installing YouCompleteMe"
-
-cd $HOME/.vim/bundle/YouCompleteMe && ./install.py --clang-completer
-
+#prettyPrint "Installing YouCompleteMe"
+#cd $HOME/.vim/bundle/YouCompleteMe && ./install.py --clang-completer
 
 #}}}***********************************************************
 
@@ -426,7 +424,9 @@ cp "$INSTALLER_DIR/grc.zsh" "$HOME"
 cp "$INSTALLER_DIR/conf.gls" "$HOME"
 cp "$INSTALLER_DIR/conf.df" "$HOME"
 
-
+cd "$INSTALLER_DIR"
+cd ..
+rm -rf customTerminalInstaller
 #}}}***********************************************************
 
 #{{{                    MARK:Final
