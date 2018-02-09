@@ -298,12 +298,11 @@ prettyPrint "Installing oh-my-zsh..."
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
-cp "$INSTALLER_DIR/agnosterzak.zsh-theme" $HOME/.oh-my-zsh/themes/
+cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
 
 #add aliases and functions
 prettyPrint "Adding common shell aliases for Bash and Zsh"
 cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
-#echo "source $HOME/.shell_aliases_functions.sh" >> "$HOME/.zshrc"
 
 prettyPrint "Installing .zshrc"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
@@ -355,10 +354,11 @@ prettyPrint "Installing IFTOP-color by MenkeTechnologies"
 if [[ -d "$HOME/ForkedRepos" ]]; then
     mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos" && {
         git clone https://github.com/MenkeTechnologies/iftopcolor
-        sudo ./configure && make && sudo make install
+        cd iftopcolor && {
+        ./configure && make && sudo make install
+        }
     }
 fi
-
 
 if [[ -f "$HOME/.token.sh" ]]; then
     touch "$HOME/.tokens.sh"
@@ -425,8 +425,8 @@ cp "$INSTALLER_DIR/conf.gls" "$HOME"
 cp "$INSTALLER_DIR/conf.df" "$HOME"
 
 cd "$INSTALLER_DIR"
-cd ..
-rm -rf customTerminalInstaller
+cd
+rm -rf "$INSTALLER_DIR"
 #}}}***********************************************************
 
 #{{{                    MARK:Final
