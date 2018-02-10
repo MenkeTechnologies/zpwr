@@ -214,7 +214,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 "copy to system clipboard
-vnoremap <C-B> "*y
+vnoremap <C-B> "*y`>
 
 inoremap <silent> <C-L> <ESC>mbgg=G`bzza
 
@@ -677,8 +677,8 @@ autocmd VimEnter * iunmap <C-F>
 
 nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
 vnoremap <silent> <C-F> :call NERDComment("x","Toggle")<CR>`>
-vnoremap <silent> y y`>
-nnoremap <silent> p p`]
+"vnoremap <silent> y y`>
+"nnoremap <silent> p p`]
 autocmd VimEnter * inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
 
 nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>
