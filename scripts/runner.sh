@@ -17,7 +17,17 @@ executableScriptsProcessing(){
 executeTheFile(){
     executableScriptsProcessing "$2"
     #execute the file with the proper interpreter or compiler
-    eval "$1 \"$2\""
+    if [[ "$1" == "java" ]];then
+        dir="$(dirname "$2")"
+        file="$(basename "$2")"
+        cd "$dir" && { 
+            javac "$file"
+            java "${file%.*}"
+        }
+    else
+        eval "$1 \"$2\""
+    fi
+
     sleep 1000
 }
 

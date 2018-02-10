@@ -40,7 +40,7 @@ exists yarn && export PATH="$(yarn global bin):$PATH"
     export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
 export HOMEBREW_HOME='/usr/local/Cellar'
 export HOMEBREW_OPT_HOME='/usr/local/opt'
-export GROOVY_HOMEBREW="$HOMEBREW_OPT_HOME/groovy"
+export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
 export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
 export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
 export HOMEBREW_DBHOME='/usr/local/var'
@@ -647,5 +647,6 @@ torip(){
 #{{{                    MARK:Source Tokens
 #**************************************************************
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
+
 
 #}}}***********************************************************
