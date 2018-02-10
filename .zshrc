@@ -12,7 +12,6 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="simonoff"
 
-
 #colors for common commands
 [[ -f "$HOME/grc.zsh" ]] && source "$HOME/grc.zsh"
 
@@ -125,8 +124,13 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-#has all my aliases and functioms
+#has all my aliases and functions
+
+
+
 source ~/.shell_aliases_functions.sh
+
+
 
 #}}}***********************************************************
 
@@ -733,3 +737,5 @@ colortest(){
 }
 
 #}}}***********************************************************
+
+unset GROOVY_HOME

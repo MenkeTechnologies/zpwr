@@ -1,2 +1,4 @@
 "vnoremap <silent> y y`>
 "nnoremap <silent> p p`]
+vnoremap <C-J> 4j
+vnoremap <C-K> 4k
