@@ -601,11 +601,11 @@ fi
 zstyle ':completion:*' list-colors 'ma=37;44'
 
 #main option for menu selection colors
-zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;43'
+zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
+zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=37;43'
 zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
 zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
 zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=1;37;42;4'
-zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=1;37;46'
 zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
 zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
 #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
