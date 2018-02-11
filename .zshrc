@@ -603,12 +603,12 @@ zstyle ':completion:*' list-colors 'ma=37;44'
 zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;43'
 zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
 zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
-zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=1;37;42'
+zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=1;37;42;4'
 zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=1;37;46'
 zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
 zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
-zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
-
+#zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
+zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
 #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 #
 
