@@ -533,7 +533,6 @@ zmodload -i zsh/complist
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 # Fallback to built in ls colors, menu active to white text on blue background
-zstyle ':completion:*' list-colors 'ma=37;44'
 
 # Make the list prompt friendly
 zstyle ':completion:*' list-prompt \
@@ -598,9 +597,22 @@ if (( $#h > 0 )); then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;30=1;33=34'
+zstyle ':completion:*' list-colors 'ma=37;44'
+
+#zstyle -e ':completion:*:*:*:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==37;45==37;45}:${(s.:.)LS_COLORS}")
+
+#main option for menu selection colors
+zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;30=1;31=34'
+zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;43'
+zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
+zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=1;37;42'
+zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=1;37;46'
+zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
+zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
+zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
 
 #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+#
 
 zstyle ':completion:*' group-name ''
 
@@ -688,8 +700,8 @@ RPS2='+%N:%i:%^'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-   #source "$HOME/.powerlevel9kconfig.sh"
-    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
+    #source "$HOME/.powerlevel9kconfig.sh"
+export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 : ~WCC
 : ~HOMEBREW_HOME_FORMULAE
 } || {

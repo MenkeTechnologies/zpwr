@@ -676,7 +676,8 @@ endfunction
 autocmd VimEnter * iunmap <C-F>
 
 nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
-vnoremap <silent> <C-F> :call NERDComment("x","Toggle")<CR>`>
+vnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
+nnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
 "vnoremap <silent> y y`>
 "nnoremap <silent> p p`]
 autocmd VimEnter * inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
