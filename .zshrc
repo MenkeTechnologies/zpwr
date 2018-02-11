@@ -599,10 +599,7 @@ fi
 
 zstyle ':completion:*' list-colors 'ma=37;44'
 
-#zstyle -e ':completion:*:*:*:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)*==37;45==37;45}:${(s.:.)LS_COLORS}")
-
 #main option for menu selection colors
-zstyle ':completion:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;30=1;31=34'
 zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;43'
 zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
 zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=1;37;42'
@@ -614,6 +611,9 @@ zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA
 #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 #
 
+zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+
+zstyle ':completion:*:*:*:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;30=1;31=34'
 zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:manuals' separate-sections true
