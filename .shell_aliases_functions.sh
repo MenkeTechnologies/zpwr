@@ -241,6 +241,12 @@ alias il="idea list"
 
         echo "display notification \"$msg\" with title \"$title\"" | osascript 
     }
+    db(){
+        python3 "$PYSCRIPTS/loginDBChrome.py"
+    }
+    db2(){
+        python3 "$PYSCRIPTS/logIntoMyDB.py"
+    }
 
 }
 s(){
@@ -285,12 +291,9 @@ b(){
 
 
 suc(){
-    subl $SCRIPTS
-    f $SCRIPTS
-    python3 $PYSCRIPTS/textEditorTwoColumns.py
-}
-db(){
-    python3 $PYSCRIPTS/logIntoMyDB.py
+    subl "$SCRIPTS"
+    f "$SCRIPTS"
+    python3 "$PYSCRIPTS/textEditorTwoColumns.py"
 }
 
 if [[ -f /usr/local/share/grc/conf.gls ]];then
