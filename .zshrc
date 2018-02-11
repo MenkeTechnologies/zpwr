@@ -611,9 +611,17 @@ zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA
 #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 #
 
-zstyle -e ':completion:*:default' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:local-directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:*:f:*:*' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:globbed-files' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:argument-rest:*' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:all-files' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:files' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:named-directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 
 zstyle ':completion:*:*:*:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;30=1;31=34'
+
 zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:manuals' separate-sections true
