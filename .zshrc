@@ -623,7 +623,7 @@ zstyle -e ':completion:*:files' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)
 zstyle -e ':completion:*:directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 zstyle -e ':completion:*:named-directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 
-zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)([a-zA-Z0-9.@-]#)*=1;30=1;31=34'
+zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9.,@#-]##) #([<)(>]#) #([a-zA-Z0-9.,@3-]#)*=1;30=1;31=34=1;31=34'
 
 zstyle ':completion:*' group-name ''
 
