@@ -542,6 +542,7 @@ zstyle ':completion:*' list-prompt \
 zstyle ':completion:*' select-prompt \
     $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[32;44m%p\e[0;1;31m>>-\e[0m'
 
+
 # Add simple colors to kill
 zstyle ':completion:*:*:kill:*:processes' list-colors \
     '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
@@ -611,6 +612,7 @@ zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
 zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
 #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 #
+zstyle ':completion:*' list-separator '<<)(>>'
 
 zstyle -e ':completion:*:local-directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 zstyle -e ':completion:*:*:f:*:*' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
@@ -621,7 +623,7 @@ zstyle -e ':completion:*:files' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)
 zstyle -e ':completion:*:directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 zstyle -e ':completion:*:named-directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 
-zstyle ':completion:*:*:*:*:options' list-colors '=(#b)(--#)([a-zA-Z0-9-]#)*=1;30=1;31=34'
+zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)([a-zA-Z0-9-]#)*=1;30=1;31=34'
 
 zstyle ':completion:*' group-name ''
 
