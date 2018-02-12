@@ -606,7 +606,7 @@ if (( $#h > 0 )); then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-zstyle ':completion:*' list-colors 'ma=37;44'
+zstyle ':completion:*' list-colors 'ma=37;4;44'
 
 #main option for menu selection colors
 zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
