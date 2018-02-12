@@ -313,19 +313,19 @@ clearList () {
         exists grc && {
             ls_command="grc -c "$HOME/conf.gls" \
             gls -iFlhA --color=always"
-    } || {
-        ls_command="ls -iFlhAO"
-    }
-    lib_command="otool -L"
-        else
+            } || {
+                ls_command="ls -iFlhAO"
+            }
+            lib_command="otool -L"
+    else
             exists grc && {
                 ls_command="grc -c "$HOME/conf.gls" \
                 ls -iFlhA --color=always"
-        } || {
-            ls_command="ls -iFhlA"
-    }
-    lib_command="ldd -v"
-        fi
+            } || {
+                ls_command="ls -iFhlA"
+            }
+    lib_command="ldd"
+    fi
 
         if [[ ! -z "$1" ]]; then
             for command in "$@"; do
@@ -348,26 +348,32 @@ clearList () {
                     echo
                     echo
                 } || {
-                echo "$locale"
+                    echo "$locale"
+                    echo "$locale" | grep -q "function" && {
+                        type -f "$(echo "$locale" | awk '{print $1}')" 
+                    }
+                    echo "$locale" | grep -q "alias" && {
+                        alias "$(echo "$locale" | awk '{print $1}')" 
+                    }
                 echo
                 echo
             }
         done < <(type -a "$command" | sort | uniq)
-    } || {
-        #path matching, not exe
-    eval "$ls_command \"$command\"" || return 1
-    echo
-    prettyPrint "$command"
-    eval "$ls_command -d \"$command\"" || return 1
-    prettyPrint "FILE TYPE:"
-    file "$command"
-    prettyPrint "SIZE:"
-    du -sh "$command"
-    prettyPrint "STATS:"
-    stat "$command"
-    #for readibility
-    echo
-    echo
+            } || {
+                #path matching, not exe
+                eval "$ls_command \"$command\"" || return 1
+                echo
+                prettyPrint "$command"
+                eval "$ls_command -d \"$command\"" || return 1
+                prettyPrint "FILE TYPE:"
+                file "$command"
+                prettyPrint "SIZE:"
+                du -sh "$command"
+                prettyPrint "STATS:"
+                stat "$command"
+                #for readibility
+                echo
+                echo
                 }
             done
         else
