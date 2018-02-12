@@ -126,11 +126,7 @@ source $ZSH/oh-my-zsh.sh
 
 #has all my aliases and functions
 
-
-
 source ~/.shell_aliases_functions.sh
-
-
 
 #}}}***********************************************************
 
@@ -352,6 +348,12 @@ while (( (#key)!=(##\n) && (#key)!=(##\r) )) ; do
     printf "\x1b[0m"
 }
 
+clipboard(){
+    [[ "$(uname)" == Darwin ]] && {
+        echo "$BUFFER" | pbcopy
+    }
+}
+
 #vim  mode
 bindkey -v
 
@@ -366,12 +368,16 @@ bindkey -M vicmd '^P' basicSedSub
 
 zle -N changeQuotes
 zle -N alternateQuotes
+zle -N clipboard
 
 bindkey -M viins '^K' changeQuotes
 bindkey -M vicmd '^K' changeQuotes
 
 bindkey -M viins '\e^K' alternateQuotes
 bindkey -M vicmd '\e^K' alternateQuotes
+
+bindkey -M viins '^B' clipboard
+bindkey -M vicmd '^B' clipboard
 
 zle -N expand-aliases
 
