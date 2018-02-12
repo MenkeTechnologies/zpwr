@@ -125,6 +125,7 @@ alias h="cd /usr/local"
 alias e="cd /etc"
 alias a="cd $HOME"
 alias k="pkill"
+alias ka="killall"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
 #Darwin specific aliases
