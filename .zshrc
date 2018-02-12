@@ -548,7 +548,7 @@ zstyle ':completion:*' list-prompt \
 
 # Make the selection prompt friendly when there are a lot of choices
 zstyle ':completion:*' select-prompt \
-    $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[32;44m%p\e[0;1;31m>>-\e[0m'
+    $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[37;44m%p\e[0;1;31m>>-\e[0m'
 
 
 # Add simple colors to kill
