@@ -35,6 +35,7 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export WCC="$SD_PATH/wcc/cps"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
+        export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$PATH"
     } || export PATH="$PATH:/usr/games"
 
 exists yarn && export PATH="$(yarn global bin):$PATH"
