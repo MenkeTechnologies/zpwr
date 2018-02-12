@@ -421,6 +421,7 @@ for command in ${commandsThatModifyFiles[@]}; do
 done
 
 zle .accept-line 
+printf "\x1b[0m"
 }
 zle -N accept-line my-accept-line
 
@@ -431,6 +432,7 @@ precmd(){
             listNoClear
         fi
     fi
+    printf "\x1b[0m"
     #exec 2> >(blueUpperText.sh)
 }
 
