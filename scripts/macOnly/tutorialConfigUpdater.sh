@@ -139,6 +139,7 @@ cp "$HOME/.zshrc" "$installerDir"
 cp "$HOME/.rpitokens.sh" "$installerDir"
 cp "$HOME/conf.gls" "$installerDir"
 cp "$HOME/conf.df" "$installerDir"
+cp "$HOME/conf.mount" "$installerDir"
 cp "$HOME/.ideavimrc" "$installerDir"
 
 prettyPrint "Updating vim plugins list"
