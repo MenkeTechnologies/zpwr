@@ -407,21 +407,21 @@ bindkey -M vicmd '^T' transpose-chars
 
 my-accept-line () {
 
-WILL_CLEAR=false
+    WILL_CLEAR=false
 
-#do we want to clear the screen and run ls after we exec the current line?
-#
-commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
+    #do we want to clear the screen and run ls after we exec the current line?
+    commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
 
-for command in ${commandsThatModifyFiles[@]}; do
-    regex="^sudo $command .*\$|^$command .*\$"
-    if [[ "$BUFFER" =~ $regex ]]; then
-        WILL_CLEAR=true
-    fi
-done
+    for command in ${commandsThatModifyFiles[@]}; do
+        regex="^sudo $command .*\$|^$command .*\$"
+        if [[ "$BUFFER" =~ $regex ]]; then
+            WILL_CLEAR=true
+        fi
+    done
 
-zle .accept-line 
-printf "\x1b[0m"
+    zle .accept-line 
+    #leaky simonoff zsh theme
+    printf "\x1b[0m"
 }
 zle -N accept-line my-accept-line
 
@@ -432,6 +432,7 @@ precmd(){
             listNoClear
         fi
     fi
+    #leaky simonoff zsh theme
     printf "\x1b[0m"
     #exec 2> >(blueUpperText.sh)
 }
