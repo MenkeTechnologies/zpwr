@@ -182,8 +182,12 @@ tutsUpdate() {
 }
 
 sshRegain() {
-    zle .kill-whole-line
-    tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
+    ps -ef | grep -q 'ssh ' && {
+        BUFFER="ex $BUFFER"
+    } || {
+        zle .kill-whole-line
+        tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
+    }
     zle .accept-line
 }
 
