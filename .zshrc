@@ -186,7 +186,7 @@ tutsUpdate() {
 }
 
 sshRegain() {
-    ps -ef | grep -q 'ssh ' && {
+    ps -ef |  grep -v grep | grep -q 'ssh ' && {
         BUFFER="ex $BUFFER"
     } || {
         zle .kill-whole-line
