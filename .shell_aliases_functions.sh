@@ -1,15 +1,21 @@
 #{{{                    MARK:exists
 #**************************************************************
 exists(){
-    type "$1" >/dev/null 2>&1
+    type "$1" >/dev/null 2>&1 #alternative is command -v
 }
 
 #}}}***********************************************************
 
+#{{{                    MARK:Global Vars
+#**************************************************************
+declare -a BLACKLISTED_DIRECTORIES
+BLACKLISTED_DIRECTORIES=( "$HOME/IdeaProjects/reallingua-web" )
+#}}}***********************************************************
+
 #{{{                    MARK:ENV Var
 #**************************************************************
-export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
-if [[ -z "$SCRIPTS" ]]; then
+if [[ -z "$PYSCRIPTS" ]]; then
+    export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
     export CLICOLOR="YES"
     export LSCOLORS="ExFxBxDxCxegedabagacad"
     export TERM="xterm-256color"
@@ -26,10 +32,10 @@ if [[ -z "$SCRIPTS" ]]; then
 
     [[ "$(uname)" == Darwin ]] && {
         export SD_PATH="/Volumes/SD"
-    export WCC="$SD_PATH/wcc/cps"
-    export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
-    export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
-} || export PATH="$PATH:/usr/games"
+        export WCC="$SD_PATH/wcc/cps"
+        export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
+        export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
+    } || export PATH="$PATH:/usr/games"
 
 exists yarn && export PATH="$(yarn global bin):$PATH"
 #}}}***********************************************************
@@ -38,50 +44,50 @@ exists yarn && export PATH="$(yarn global bin):$PATH"
 #**********************************************************************
 [[ "$(uname)" == Darwin ]] && {
     export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
-export HOMEBREW_HOME='/usr/local/Cellar'
-export HOMEBREW_OPT_HOME='/usr/local/opt'
-export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
-export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
-export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
-export HOMEBREW_DBHOME='/usr/local/var'
-export HOMEBREW_DB_CONF='/usr/local/etc'
-eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
-export MANPATH=$HOME/perl5/man:$MANPATH
-export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
-export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
-export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
-export PIP_HOME="/usr/local/lib/python2.7/site-packages"
-export EDITOR='mvim -v'
-} || {
-    export EDITOR='vim'
-}
-export YARN_HOME="$HOME/.config/yarn"
-export NODE_HOME="/usr/local/lib/node_modules"
-export PERL5LIB="$HOME/perl5/lib/perl5"
-export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
-export HISTSIZE=50000
-export HISTTIMEFORMAT=' %F %T _ '
-export BLUE="\e[37;44m"
-export RED="\e[31m"
-export RESET="\e[0m"
-export LOGFILE="$HOME/updaterlog.txt"
-export UMASK=077
+    export HOMEBREW_HOME='/usr/local/Cellar'
+    export HOMEBREW_OPT_HOME='/usr/local/opt'
+    export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
+    export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
+    export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
+    export HOMEBREW_DBHOME='/usr/local/var'
+    export HOMEBREW_DB_CONF='/usr/local/etc'
+    eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+    export MANPATH=$HOME/perl5/man:$MANPATH
+    export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
+    export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
+    export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
+    export PIP_HOME="/usr/local/lib/python2.7/site-packages"
+    export EDITOR='mvim -v'
+    } || {
+        export EDITOR='vim'
+    }
+    export YARN_HOME="$HOME/.config/yarn"
+    export NODE_HOME="/usr/local/lib/node_modules"
+    export PERL5LIB="$HOME/perl5/lib/perl5"
+    export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
+    export HISTSIZE=50000
+    export HISTTIMEFORMAT=' %F %T _ '
+    export BLUE="\e[37;44m"
+    export RED="\e[31m"
+    export RESET="\e[0m"
+    export LOGFILE="$HOME/updaterlog.txt"
+    export UMASK=077
 
 #**************************************************************
 #}}}
 
 #{{{                    MARK:Rust
 #**************************************************************
-export PATH="$HOME/.cargo/bin:$PATH"
+    export PATH="$HOME/.cargo/bin:$PATH"
 #}}}***********************************************************
 
 #{{{                    MARK:GO
 #**************************************************************
-export GOPATH="$HOME/go"
+    export GOPATH="$HOME/go"
 
-if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
-    source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
-fi
+    if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
+        source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
+    fi
 fi
 #}}}
 
@@ -425,9 +431,8 @@ cd(){
     builtin cd "$@" && clearList
 }
 gitCommitAndPush(){
-    blackListDirs=( "$HOME/IdeaProjects/reallingua-web" )
     currentDir="$(pwd -P)"
-    for dir in "${blackListDirs[@]}" ; do
+    for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
        if [[ "$currentDir" == "$dir" ]]; then
            return 1
        fi 
@@ -659,6 +664,5 @@ torip(){
 #{{{                    MARK:Source Tokens
 #**************************************************************
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
-
 
 #}}}***********************************************************
