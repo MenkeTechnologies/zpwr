@@ -33,9 +33,8 @@ if [[ $(uname) == Darwin ]]; then
     fi
 else
     #linux
-    distroName=$(lsb_release -a | head -1 | awk '{print $3}')
-
-    if [[ $distroName == Raspbian ]]; then
+    distroName="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
+    if [[ $distroName == raspbian ]]; then
 
         if [[ $weHaveCCZE == yes ]]; then
             $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log | ccze
