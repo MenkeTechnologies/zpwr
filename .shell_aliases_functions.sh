@@ -445,7 +445,7 @@ gitCommitAndPush(){
        fi 
     done
 
-    printf "\e[1m"
+    printf "\n\e[1m"
     git pull
     git add .
     git commit -m "$1"
@@ -631,7 +631,7 @@ getrc(){
         cp grc.zsh "$HOME"
 
         cp -R .tmux/* "$HOME/.tmux"
-        cp -f scripts/* "$SCRIPTS"
+        cp f scripts/* "$SCRIPTS"
 
         cd ..
         rm -rf "$REPO_NAME"
