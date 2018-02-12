@@ -152,9 +152,16 @@ updater (){
 }
 
 gitfunc () {
-    gitCommitAndPush "$BUFFER"
-    zle .kill-whole-line
-    zle .accept-line
+    emulate -LR zsh
+    gitCommitAndPush "$BUFFER" && {
+        zle .kill-whole-line
+        zle .accept-line
+    } || {
+        printf "\x1b[0;1;31m"
+        zle -R "Directory of $(pwd -P) has been blacklisted."
+        printf "\x1b[0m"
+        return 1
+    }
 }
 
 tutsUpdate() {
@@ -180,19 +187,19 @@ sshRegain() {
     zle .accept-line
 }
 
-db() {
+dbz() {
     zle .kill-whole-line
     BUFFER=db
     zle .accept-line
 }
 
 expand-aliases() {
-unset 'functions[_expand-aliases]'
-functions[_expand-aliases]=$BUFFER
-(($+functions[_expand-aliases])) &&
-    BUFFER=${functions[_expand-aliases]#$'\t'} &&
-    CURSOR=$#BUFFER
-}
+    unset 'functions[_expand-aliases]'
+    functions[_expand-aliases]=$BUFFER
+    (($+functions[_expand-aliases])) &&
+        BUFFER=${functions[_expand-aliases]#$'\t'} &&
+        CURSOR=$#BUFFER
+    }
 _COUNTER=0
 
 changeQuotes(){
@@ -284,45 +291,43 @@ local SEDARG=""
 local key=""
 read -k key
 local -r start=$key
-while (( (#key)!=(##\n) &&
-    (#key)!=(##\r) )) ; do
+while (( (#key)!=(##\n) && (#key)!=(##\r) )) ; do
 
-
-if (( (#key)==(##\>) ));then
-    printf "\x1b[0;4;1;34m"
-else
-    printf "\x1b[1;44;37m"
-    echo "$SEDARG" | grep -q '>' && printf "\x1b[0;1;37;45m"
-fi
-
-if (( (#key)==(##^?) || (#key)==(##^h) ));then
-    SEDARG=${SEDARG[1,-2]}
-    printf "\x1b[0m"
-elif (( (#key)==(##^U) ));then
-    SEDARG=""
-    printf "\x1b[0m"
-else
-    if (( (#key)!=(##@) ));then
-        SEDARG="${SEDARG}$key"
+    if (( (#key)==(##\>) ));then
+        printf "\x1b[0;4;1;34m"
+    else
+        printf "\x1b[1;44;37m"
+        echo "$SEDARG" | grep -q '>' && printf "\x1b[0;1;37;45m"
     fi
-fi
+
+    if (( (#key)==(##^?) || (#key)==(##^h) ));then
+        SEDARG=${SEDARG[1,-2]}
+        printf "\x1b[0m"
+    elif (( (#key)==(##^U) ));then
+        SEDARG=""
+        printf "\x1b[0m"
+    else
+        if (( (#key)!=(##@) ));then
+            SEDARG="${SEDARG}$key"
+        fi
+    fi
 
 
-zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
-read -k key || return 1
-    done	
-    echo "$SEDARG" | grep -q "@" && { 
+    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
+    read -k key || return 1
+        done	
+        echo "$SEDARG" | grep -q "@" && { 
+            printf "\x1b[0;1;31m"
+        zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
+        printf "\x1b[0m"
+        return 1
+    }
+
+    echo "$SEDARG" | grep -q ">" || {
         printf "\x1b[0;1;31m"
-    zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
+    zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
     printf "\x1b[0m"
     return 1
-}
-
-echo "$SEDARG" | grep -q ">" || {
-    printf "\x1b[0;1;31m"
-zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
-printf "\x1b[0m"
-return 1
     }
     orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
     replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
@@ -335,8 +340,8 @@ return 1
     return 1
 }
 
-BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
-printf "\x1b[0m"
+    BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
+    printf "\x1b[0m"
 }
 
 #vim  mode
@@ -367,7 +372,7 @@ bindkey '\e^E' expand-aliases
 zle -N gitfunc
 zle -N updater
 zle -N sub
-zle -N db
+zle -N dbz
 zle -N sshRegain
 zle -N tutsUpdate
 zle -N subLine
@@ -387,7 +392,7 @@ bindkey '\eOQ' sub
 bindkey '\e[1;5A' gitfunc
 bindkey '\e[1;5B' updater
 bindkey '\e[1;5C' tutsUpdate
-bindkey '\e[1;5D' db
+bindkey '\e[1;5D' dbz
 
 bindkey '^S' gitfunc
 bindkey '```' sudo-command-line

@@ -425,12 +425,21 @@ cd(){
     builtin cd "$@" && clearList
 }
 gitCommitAndPush(){
+    blackListDirs=( "$HOME/IdeaProjects/reallingua-web" )
+    currentDir="$(pwd -P)"
+    for dir in "${blackListDirs[@]}" ; do
+       if [[ "$currentDir" == "$dir" ]]; then
+           return 1
+       fi 
+    done
+
     printf "\e[1m"
     git pull
     git add .
     git commit -m "$1"
     git push
     printf "\e[0m"
+    return 0
 }
 replacer(){
     orig="$1"

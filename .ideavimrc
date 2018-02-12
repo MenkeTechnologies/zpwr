@@ -1,4 +1,6 @@
 "vnoremap <silent> y y`>
 "nnoremap <silent> p p`]
+noremap <C-J> 4j
+noremap <C-K> 4k
 vnoremap <C-J> 4j
 vnoremap <C-K> 4k
