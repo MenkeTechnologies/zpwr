@@ -158,7 +158,11 @@ gitfunc () {
         zle .accept-line
     } || {
         printf "\x1b[0;1;31m"
-        zle -R "Directory of $(pwd -P) has been blacklisted."
+        print -sr "$BUFFER"
+        echo
+        printf "BLACKLISTED $(pwd -P)" >&2
+        zle .kill-whole-line
+        zle .accept-line
         printf "\x1b[0m"
         return 1
     }
