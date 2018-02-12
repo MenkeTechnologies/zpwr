@@ -129,6 +129,12 @@ alias ka="killall"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
 #Darwin specific aliases
+alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
+if [[ -f /usr/local/share/grc/conf.gls ]];then
+    alias lr='grc -c /usr/local/share/grc/conf.gls gls -iAlhFR --color=always'
+elif [[ -f /usr/share/grc/conf.gls ]];then
+    alias lr='grc -c /usr/share/grc/conf.gls ls -iAlhFR --color=always'
+fi
 if [[ "$(uname)" == "Darwin" ]]; then
     #statements
     alias ifconfig='grc --colour=auto /sbin/ifconfig'
@@ -303,11 +309,6 @@ suc(){
     python3 "$PYSCRIPTS/textEditorTwoColumns.py"
 }
 
-if [[ -f /usr/local/share/grc/conf.gls ]];then
-    alias lr='grc -c /usr/local/share/grc/conf.gls gls -iAlhFR --color=always'
-elif [[ -f /usr/share/grc/conf.gls ]];then
-    alias lr='grc -c /usr/share/grc/conf.gls ls -iAlhFR --color=always'
-fi
 clearList () {
 
     if [[ "$(uname)" == "Darwin" ]]; then
