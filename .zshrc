@@ -456,15 +456,14 @@ printf "\x1b[0m"
 zle -N accept-line my-accept-line
 
 precmd(){
-    if [[ $? == 0 ]]; then
+    (( $? == 0)) && {
         if [[ "$WILL_CLEAR" == true ]]; then
             clear
             listNoClear
         fi
-    fi
+    }
     #leaky simonoff zsh theme
     printf "\x1b[0m"
-    #exec 2> >(blueUpperText.sh)
 }
 
 rationalize-dot (){
