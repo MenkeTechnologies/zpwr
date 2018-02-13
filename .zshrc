@@ -152,27 +152,29 @@ gitfunc () {
 
 	git status &> /dev/null || {
 		printf "\x1b[0;1;31m"
-	print -sr "$BUFFER"
-	echo
-	printf "NOT GIT DIR: $(pwd -P)\n" >&2
-	printf "\x1b[0m"
-	zle .kill-whole-line
-	zle .accept-line-and-down-history
-	return 0
-}
+		print -sr "$BUFFER"
+		echo
+		printf "NOT GIT DIR: $(pwd -P)\n" >&2
+		printf "\x1b[0m"
+		zle .kill-whole-line
+		zle .accept-line-and-down-history
+		return 0
+	}
+    #leaky simonoff
+	printf "\x1b[0;34m"
 
-gitCommitAndPush "$BUFFER" && {
-	zle .kill-whole-line
-zle .accept-line
-	} || {
-		printf "\x1b[0;1;31m"
-	print -sr "$BUFFER"
-	echo
-	printf "BLACKLISTED: $(pwd -P)\n" >&2
-	BUFFER=""
-	printf "\x1b[0m"	
-	zle .accept-line
-}
+	gitCommitAndPush "$BUFFER" && {
+		zle .kill-whole-line
+		zle .accept-line
+    } || {
+        printf "\x1b[0;1;31m"
+        print -sr "$BUFFER"
+        echo
+        printf "BLACKLISTED: $(pwd -P)\n" >&2
+        BUFFER=""
+        printf "\x1b[0m"	
+        zle .accept-line
+    }
 }
 
 tutsUpdate() {
@@ -447,19 +449,21 @@ bindkey -M vicmd '^T' transpose-chars
 
 my-accept-line () {
 
-WILL_CLEAR=false
+    WILL_CLEAR=false
 
-#do we want to clear the screen and run ls after we exec the current line?
-commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
+    #do we want to clear the screen and run ls after we exec the current line?
+    commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
-for command in ${commandsThatModifyFiles[@]}; do
-	regex="^sudo $command .*\$|^$command .*\$"
-	printf "$BUFFER" | egrep -q "$regex" && WILL_CLEAR=true
-done
+    for command in ${commandsThatModifyFiles[@]}; do
+        regex="^sudo $command .*\$|^$command .*\$"
+        printf "$BUFFER" | egrep -q "$regex" && {
+            WILL_CLEAR=true
+        }
+    done
 
-zle .accept-line 
-#leaky simonoff zsh theme
-printf "\x1b[0m"
+    zle .accept-line 
+    #leaky simonoff zsh theme
+    printf "\x1b[0m"
 }
 zle -N accept-line my-accept-line
 
@@ -468,6 +472,7 @@ precmd(){
 		if [[ "$WILL_CLEAR" == true ]]; then
 			clear
 			listNoClear
+            WILL_CLEAR=false
 		fi
 	}
 	#leaky simonoff zsh theme
@@ -710,6 +715,7 @@ alias -g nerr="2> /dev/null"
 if [[ "$(uname)" = Darwin ]]; then
 	if [[ "$UID" != "0" ]]; then
 		# builtin cd "$D" && clear
+        clear
 		type figlet > /dev/null 2>&1 && {
 			printf "\e[1m"
 		[[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
