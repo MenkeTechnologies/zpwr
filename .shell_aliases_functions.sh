@@ -450,7 +450,7 @@ gitCommitAndPush(){
        fi 
     done
 
-    printf "\n\e[1m"
+    printf "\n"
     git pull
     git add .
     git commit -m "$1"
