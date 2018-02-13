@@ -150,7 +150,7 @@ updater (){
 gitfunc () {
     emulate -LR zsh
 
-    [[ ! -d .git ]] && {
+    git status &> /dev/null || {
         printf "\x1b[0;1;31m"
         print -sr "$BUFFER"
         echo
