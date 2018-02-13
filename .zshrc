@@ -350,7 +350,12 @@ while (( (#key)!=(##\n) && (#key)!=(##\r) )) ; do
 
 clipboard(){
     [[ "$(uname)" == Darwin ]] && {
-        echo "$BUFFER" | pbcopy
+        print -sr "$BUFFER"
+        printf "$BUFFER" | pbcopy
+        echo
+        printf  "Copied to System Clipboard!\n"
+        echo
+        zle .redisplay
     }
 }
 
