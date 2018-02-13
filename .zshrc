@@ -156,11 +156,10 @@ gitfunc () {
         printf "\x1b[0;1;31m"
         print -sr "$BUFFER"
         echo
-        printf "BLACKLISTED $(pwd -P)" >&2
-        zle .kill-whole-line
-        zle .accept-line
+        printf "BLACKLISTED $(pwd -P)\n" >&2
         printf "\x1b[0m"
-        return 1
+        zle .kill-whole-line
+        zle .accept-line-and-down-history
     }
 }
 
