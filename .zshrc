@@ -471,14 +471,15 @@ bindkey -M viins . rationalize-dot
 bindkey -M listscroll q send-break
 bindkey -M listscroll f complete-word
 
-bindkey -M menuselect '^@' accept-and-menu-complete
+bindkey -M menuselect '\e ' accept-and-menu-complete
 bindkey -M menuselect '^k' vi-backward-word
 bindkey -M menuselect '^j' vi-forward-word
 bindkey -M menuselect '^h' vi-beginning-of-line
 bindkey -M menuselect '^l' vi-end-of-line
-bindkey -M menuselect '^P' accept-and-infer-next-history 
+bindkey -M menuselect '^@' accept-and-infer-next-history 
 bindkey -M menuselect '/' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
+bindkey -M menuselect '^M' .accept-line
 
 #}}}***********************************************************
 
