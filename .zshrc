@@ -198,9 +198,9 @@ sshRegain() {
 	ps -ef |  grep -v grep | grep -q 'ssh ' && {
 		if [[ "$BUFFER" != "" ]]; then
 			print -sr "$BUFFER"
-			NEW_BUFFER="ex \"$BUFFER\""
+			__NEW_BUFFER="ex \"$BUFFER\""
 			echo
-			eval "$NEW_BUFFER"
+			eval "$__NEW_BUFFER"
 			BUFFER=""
 			zle .accept-line
 			return 0
@@ -227,74 +227,74 @@ functions[_expand-aliases]=$BUFFER
 	BUFFER=${functions[_expand-aliases]#$'\t'} &&
 	CURSOR=$#BUFFER
 	}
-	_COUNTER=0
+	__COUNTER=0
 
 	changeQuotes(){
 
-		if (( $_COUNTER % 8 == 0 )); then
-			_OLDBUFFER="${BUFFER}"
+		if (( $__COUNTER % 8 == 0 )); then
+			__OLDBUFFER="${BUFFER}"
 			BUFFER=${BUFFER//\"/\'}
-		elif (( $_COUNTER % 8 == 1 )); then
-			if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
-				_COUNTER=0
+		elif (( $__COUNTER % 8 == 1 )); then
+			if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
+				__COUNTER=0
 				return 1
 			fi
 			BUFFER=${BUFFER//\'/\"}
-		elif (( $_COUNTER % 8 == 2 )); then
-			if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
-				_COUNTER=0
+		elif (( $__COUNTER % 8 == 2 )); then
+			if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
+				__COUNTER=0
 				return 1
 			fi
 			BUFFER=${BUFFER//\"/\`}
-		elif (( $_COUNTER % 8 == 3 )); then
-			if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
-				_COUNTER=0
+		elif (( $__COUNTER % 8 == 3 )); then
+			if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
+				__COUNTER=0
 				return 1
 			fi
 			_SEMI_OLDBUFFER="$BUFFER"
 			BUFFER="\"${BUFFER}\""
-		elif (( $_COUNTER % 8 == 4 )); then
+		elif (( $__COUNTER % 8 == 4 )); then
 			if [[ "$(echo "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
-				_COUNTER=0
+				__COUNTER=0
 				return 1
 			fi
 			#semi has no quotes
 			_SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
 			BUFFER="\$(${_SEMI_OLDBUFFER})"
-		elif (( $_COUNTER % 8 == 5 )); then
+		elif (( $__COUNTER % 8 == 5 )); then
 			#only diff should be $()
 			if (( ${#BUFFER} < 4 )); then
-				_COUNTER=0
+				__COUNTER=0
 				return 1
 				#statements
 			fi
 			if [[ "$_SEMI_OLDBUFFER" != "$(echo "${BUFFER:2:-1}" )" ]]; then
-				_COUNTER=0
+				__COUNTER=0
 				return 1
 			fi
 			BUFFER="\"${BUFFER}\""
-		elif (( $_COUNTER % 8 == 6 )); then
+		elif (( $__COUNTER % 8 == 6 )); then
 			if (( ${#BUFFER} < 6 )); then
-				_COUNTER=0
+				__COUNTER=0
 				return 1
 				#statements
 			fi
 			if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER:3:-2}" ]]; then
-				_COUNTER=0
+				__COUNTER=0
 				return 1
 			fi
 			# back to no quotes
 			BUFFER="$_SEMI_OLDBUFFER"
 		else
 			if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER}" ]]; then
-				_COUNTER=0
+				__COUNTER=0
 				return 1
 			fi
 			#back to original
-			BUFFER="${_OLDBUFFER}"
+			BUFFER="${__OLDBUFFER}"
 		fi
 
-		let _COUNTER++
+		let __COUNTER++
 	}
 
 	alternateQuotes(){
@@ -449,7 +449,7 @@ bindkey -M vicmd '^T' transpose-chars
 
 my-accept-line () {
 
-    WILL_CLEAR=false
+    __WILL_CLEAR=false
 
     #do we want to clear the screen and run ls after we exec the current line?
     commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
@@ -457,7 +457,7 @@ my-accept-line () {
     for command in ${commandsThatModifyFiles[@]}; do
         regex="^sudo $command .*\$|^$command .*\$"
         printf "$BUFFER" | egrep -q "$regex" && {
-            WILL_CLEAR=true
+            __WILL_CLEAR=true
         }
     done
 
@@ -469,10 +469,10 @@ zle -N accept-line my-accept-line
 
 precmd(){
 	(( $? == 0)) && {
-		if [[ "$WILL_CLEAR" == true ]]; then
+		if [[ "$__WILL_CLEAR" == true ]]; then
 			clear
 			listNoClear
-            WILL_CLEAR=false
+            __WILL_CLEAR=false
 		fi
 	}
 	#leaky simonoff zsh theme
