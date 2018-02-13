@@ -169,7 +169,7 @@ zle .accept-line
 	print -sr "$BUFFER"
 	echo
 	printf "BLACKLISTED: $(pwd -P)\n" >&2
-	BUFFER="#>>>BLACKLISTED: $(pwd -P)\n" >&2
+	BUFFER=""
 	printf "\x1b[0m"	
 	zle .accept-line
 }
@@ -199,7 +199,7 @@ sshRegain() {
 			NEW_BUFFER="ex \"$BUFFER\""
 			echo
 			eval "$NEW_BUFFER"
-			BUFFER="#>>> $BUFFER is in your history."
+			BUFFER=""
 			zle .accept-line
 			return 0
 		else
