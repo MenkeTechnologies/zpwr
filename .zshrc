@@ -472,6 +472,7 @@ precmd(){
 		if [[ "$__WILL_CLEAR" == true ]]; then
 			clear
 			listNoClear
+            # to prevent __WILL_CLEAR staying true when called from zle widgets and not from pressing enter key
             __WILL_CLEAR=false
 		fi
 	}
