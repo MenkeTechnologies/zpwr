@@ -149,6 +149,18 @@ updater (){
 
 gitfunc () {
     emulate -LR zsh
+
+    [[ ! -d .git ]] && {
+        printf "\x1b[0;1;31m"
+        print -sr "$BUFFER"
+        echo
+        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        printf "\x1b[0m"
+        zle .kill-whole-line
+        zle .accept-line-and-down-history
+        return 0
+    }
+
     gitCommitAndPush "$BUFFER" && {
         zle .kill-whole-line
         zle .accept-line
@@ -156,7 +168,7 @@ gitfunc () {
         printf "\x1b[0;1;31m"
         print -sr "$BUFFER"
         echo
-        printf "BLACKLISTED $(pwd -P)\n" >&2
+        printf "BLACKLISTED: $(pwd -P)\n" >&2
         printf "\x1b[0m"
         zle .kill-whole-line
         zle .accept-line-and-down-history
@@ -183,9 +195,9 @@ tutsUpdate() {
 sshRegain() {
     ps -ef |  grep -v grep | grep -q 'ssh ' && {
         BUFFER="ex $BUFFER"
-    } || {
-        zle .kill-whole-line
-        tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
+} || {
+    zle .kill-whole-line
+tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
     }
     zle .accept-line
 }
@@ -197,140 +209,140 @@ dbz() {
 }
 
 expand-aliases() {
-    unset 'functions[_expand-aliases]'
-    functions[_expand-aliases]=$BUFFER
-    (($+functions[_expand-aliases])) &&
-        BUFFER=${functions[_expand-aliases]#$'\t'} &&
-        CURSOR=$#BUFFER
+unset 'functions[_expand-aliases]'
+functions[_expand-aliases]=$BUFFER
+(($+functions[_expand-aliases])) &&
+    BUFFER=${functions[_expand-aliases]#$'\t'} &&
+    CURSOR=$#BUFFER
     }
-_COUNTER=0
+    _COUNTER=0
 
-changeQuotes(){
+    changeQuotes(){
 
-    if (( $_COUNTER % 8 == 0 )); then
-        _OLDBUFFER="${BUFFER}"
-        BUFFER=${BUFFER//\"/\'}
-    elif (( $_COUNTER % 8 == 1 )); then
-        if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
-            _COUNTER=0
-            return 1
+        if (( $_COUNTER % 8 == 0 )); then
+            _OLDBUFFER="${BUFFER}"
+            BUFFER=${BUFFER//\"/\'}
+        elif (( $_COUNTER % 8 == 1 )); then
+            if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
+                _COUNTER=0
+                return 1
+            fi
+            BUFFER=${BUFFER//\'/\"}
+        elif (( $_COUNTER % 8 == 2 )); then
+            if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
+                _COUNTER=0
+                return 1
+            fi
+            BUFFER=${BUFFER//\"/\`}
+        elif (( $_COUNTER % 8 == 3 )); then
+            if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
+                _COUNTER=0
+                return 1
+            fi
+            _SEMI_OLDBUFFER="$BUFFER"
+            BUFFER="\"${BUFFER}\""
+        elif (( $_COUNTER % 8 == 4 )); then
+            if [[ "$(echo "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
+                _COUNTER=0
+                return 1
+            fi
+            #semi has no quotes
+            _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
+            BUFFER="\$(${_SEMI_OLDBUFFER})"
+        elif (( $_COUNTER % 8 == 5 )); then
+            #only diff should be $()
+            if (( ${#BUFFER} < 4 )); then
+                _COUNTER=0
+                return 1
+                #statements
+            fi
+            if [[ "$_SEMI_OLDBUFFER" != "$(echo "${BUFFER:2:-1}" )" ]]; then
+                _COUNTER=0
+                return 1
+            fi
+            BUFFER="\"${BUFFER}\""
+        elif (( $_COUNTER % 8 == 6 )); then
+            if (( ${#BUFFER} < 6 )); then
+                _COUNTER=0
+                return 1
+                #statements
+            fi
+            if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER:3:-2}" ]]; then
+                _COUNTER=0
+                return 1
+            fi
+            # back to no quotes
+            BUFFER="$_SEMI_OLDBUFFER"
+        else
+            if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER}" ]]; then
+                _COUNTER=0
+                return 1
+            fi
+            #back to original
+            BUFFER="${_OLDBUFFER}"
         fi
-        BUFFER=${BUFFER//\'/\"}
-    elif (( $_COUNTER % 8 == 2 )); then
-        if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
-            _COUNTER=0
-            return 1
-        fi
-        BUFFER=${BUFFER//\"/\`}
-    elif (( $_COUNTER % 8 == 3 )); then
-        if [[ "$(echo "$_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
-            _COUNTER=0
-            return 1
-        fi
-        _SEMI_OLDBUFFER="$BUFFER"
-        BUFFER="\"${BUFFER}\""
-    elif (( $_COUNTER % 8 == 4 )); then
-        if [[ "$(echo "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
-            _COUNTER=0
-            return 1
-        fi
-        #semi has no quotes
-        _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
-        BUFFER="\$(${_SEMI_OLDBUFFER})"
-    elif (( $_COUNTER % 8 == 5 )); then
-        #only diff should be $()
-        if (( ${#BUFFER} < 4 )); then
-            _COUNTER=0
-            return 1
-            #statements
-        fi
-        if [[ "$_SEMI_OLDBUFFER" != "$(echo "${BUFFER:2:-1}" )" ]]; then
-            _COUNTER=0
-            return 1
-        fi
-        BUFFER="\"${BUFFER}\""
-    elif (( $_COUNTER % 8 == 6 )); then
-        if (( ${#BUFFER} < 6 )); then
-            _COUNTER=0
-            return 1
-            #statements
-        fi
-        if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER:3:-2}" ]]; then
-            _COUNTER=0
-            return 1
-        fi
-        # back to no quotes
-        BUFFER="$_SEMI_OLDBUFFER"
-    else
-        if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER}" ]]; then
-            _COUNTER=0
-            return 1
-        fi
-        #back to original
-        BUFFER="${_OLDBUFFER}"
-    fi
 
-    let _COUNTER++
-}
+        let _COUNTER++
+    }
 
-alternateQuotes(){
-    BUFFER="$(echo "$BUFFER" | tr "\"'" "'\"" )"
-}
+    alternateQuotes(){
+        BUFFER="$(echo "$BUFFER" | tr "\"'" "'\"" )"
+    }
 
 
-basicSedSub(){
-    emulate -LR zsh
-    echo "$BUFFER" | egrep -q '\w+' || {
-        printf "\x1b[1;31m"
-    zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
-    printf "\x1b[0m"
-    return 1
-}
-
-printf "\x1b[1;34m"
-zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
-printf "\x1b[1;44;37m"
-local SEDARG=""
-local key=""
-read -k key
-local -r start=$key
-while (( (#key)!=(##\n) && (#key)!=(##\r) )) ; do
-
-    if (( (#key)==(##\>) ));then
-        printf "\x1b[0;4;1;34m"
-    else
-        printf "\x1b[1;44;37m"
-        echo "$SEDARG" | grep -q '>' && printf "\x1b[0;1;37;45m"
-    fi
-
-    if (( (#key)==(##^?) || (#key)==(##^h) ));then
-        SEDARG=${SEDARG[1,-2]}
-        printf "\x1b[0m"
-    elif (( (#key)==(##^U) ));then
-        SEDARG=""
-        printf "\x1b[0m"
-    else
-        if (( (#key)!=(##@) ));then
-            SEDARG="${SEDARG}$key"
-        fi
-    fi
-
-
-    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
-    read -k key || return 1
-        done	
-        echo "$SEDARG" | grep -q "@" && { 
-            printf "\x1b[0;1;31m"
-        zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
+    basicSedSub(){
+        emulate -LR zsh
+        echo "$BUFFER" | egrep -q '\w+' || {
+            printf "\x1b[1;31m"
+        zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
         printf "\x1b[0m"
         return 1
     }
 
-    echo "$SEDARG" | grep -q ">" || {
+    printf "\x1b[1;34m"
+    zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string):"
+    printf "\x1b[1;44;37m"
+    local SEDARG=""
+    local key=""
+    read -k key
+    local -r start=$key
+    while (( (#key)!=(##\n) && (#key)!=(##\r) )) ; do
+
+        if (( (#key)==(##\>) ));then
+            printf "\x1b[0;4;1;34m"
+        else
+            printf "\x1b[1;44;37m"
+            echo "$SEDARG" | grep -q '>' && printf "\x1b[0;1;37;45m"
+        fi
+
+        if (( (#key)==(##^?) || (#key)==(##^h) ));then
+            SEDARG=${SEDARG[1,-2]}
+            printf "\x1b[0m"
+        elif (( (#key)==(##^U) ));then
+            SEDARG=""
+            printf "\x1b[0m"
+        else
+            if (( (#key)!=(##@) ));then
+                SEDARG="${SEDARG}$key"
+            fi
+        fi
+
+
+        zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
+        read -k key || return 1
+    done	
+    echo "$SEDARG" | grep -q "@" && { 
         printf "\x1b[0;1;31m"
-    zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
+    zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
     printf "\x1b[0m"
     return 1
+}
+
+echo "$SEDARG" | grep -q ">" || {
+    printf "\x1b[0;1;31m"
+zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
+printf "\x1b[0m"
+return 1
     }
     orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
     replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
@@ -343,19 +355,19 @@ while (( (#key)!=(##\n) && (#key)!=(##\r) )) ; do
     return 1
 }
 
-    BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
-    printf "\x1b[0m"
+BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
+printf "\x1b[0m"
 }
 
 clipboard(){
     [[ "$(uname)" == Darwin ]] && {
         print -sr "$BUFFER"
-        printf "$BUFFER" | pbcopy
-        echo
-        printf  "Copied to System Clipboard!\n"
-        echo
-        zle .redisplay
-    }
+    printf "$BUFFER" | pbcopy
+    echo
+    printf  "Copied to System Clipboard!\n"
+    echo
+    zle .redisplay
+}
 }
 
 #vim  mode
@@ -425,21 +437,21 @@ bindkey -M vicmd '^T' transpose-chars
 
 my-accept-line () {
 
-    WILL_CLEAR=false
+WILL_CLEAR=false
 
-    #do we want to clear the screen and run ls after we exec the current line?
-    commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
+#do we want to clear the screen and run ls after we exec the current line?
+commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir git\ reset git\ clone gcl dot_clean)
 
-    for command in ${commandsThatModifyFiles[@]}; do
-        regex="^sudo $command .*\$|^$command .*\$"
-        if [[ "$BUFFER" =~ $regex ]]; then
-            WILL_CLEAR=true
-        fi
-    done
+for command in ${commandsThatModifyFiles[@]}; do
+    regex="^sudo $command .*\$|^$command .*\$"
+    if [[ "$BUFFER" =~ $regex ]]; then
+        WILL_CLEAR=true
+    fi
+done
 
-    zle .accept-line 
-    #leaky simonoff zsh theme
-    printf "\x1b[0m"
+zle .accept-line 
+#leaky simonoff zsh theme
+printf "\x1b[0m"
 }
 zle -N accept-line my-accept-line
 

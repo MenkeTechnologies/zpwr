@@ -303,7 +303,7 @@ endf
 function! IndentSqueeze()
     silent! exe "normal! mbgg=G"
     silent! exe "1,$!cat -s"
-    silent! exe "normal! `bzz"
+    silent! exe "norl! `bzz"
     redraw!
 endfunction
 
