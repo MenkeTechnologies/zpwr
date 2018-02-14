@@ -499,8 +499,8 @@ bindkey -M listscroll f complete-word
 
 bindkey -M menuselect '\e ' accept-and-menu-complete
 [[ "$(uname)" == Darwin ]] && {
-    parent="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
-    echo "$parent" | grep -q login && {
+    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
+    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
         bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
