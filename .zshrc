@@ -152,30 +152,31 @@ gitfunc () {
 
     git status &> /dev/null || {
         printf "\x1b[0;1;31m"
-    print -sr "$BUFFER"
-    echo
-    printf "NOT GIT DIR: $(pwd -P)\n" >&2
-    printf "\x1b[0m"
-    zle .kill-whole-line
-    zle .accept-line-and-down-history
-    return 0
-}
-#leaky simonoff
-printf "\x1b[0;34m"
+        print -sr "$BUFFER"
+        echo
+        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        printf "\x1b[0m"
+        zle .kill-whole-line
+        zle .accept-line-and-down-history
+        return 0
+    }
+    #leaky simonoff
+    printf "\x1b[0;34m"
 
-gitCommitAndPush "$BUFFER" && {
-    print -sr "$BUFFER"
-zle .kill-whole-line
-zle .redisplay
+    gitCommitAndPush "$BUFFER" && {
+        print -sr "$BUFFER"
+        zle .kill-whole-line
+        printf "\x1b[0m"	
+        zle .redisplay
     } || {
         printf "\x1b[0;1;31m"
-    print -sr "$BUFFER"
-    echo
-    printf "BLACKLISTED: $(pwd -P)\n" >&2
-    BUFFER=""
-    printf "\x1b[0m"	
-    zle .accept-line
-}
+        print -sr "$BUFFER"
+        echo
+        printf "BLACKLISTED: $(pwd -P)\n" >&2
+        BUFFER=""
+        printf "\x1b[0m"	
+        zle .accept-line
+    }
 }
 
 tutsUpdate() {
@@ -210,9 +211,9 @@ sshRegain() {
         fi
     } || {
         zle .kill-whole-line
-    tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
-    zle .accept-line
-}
+        tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
+        zle .accept-line
+    }
 }
 
 dbz() {
