@@ -498,10 +498,12 @@ bindkey -M listscroll q send-break
 bindkey -M listscroll f complete-word
 
 bindkey -M menuselect '\e ' accept-and-menu-complete
-bindkey -M menuselect '^k' vi-backward-word
-bindkey -M menuselect '^j' vi-forward-word
-bindkey -M menuselect '^h' vi-beginning-of-line
-bindkey -M menuselect '^l' vi-end-of-line
+
+bindkey -M menuselect '\e[1;5A' vi-backward-word
+bindkey -M menuselect '\e[1;5B' vi-forward-word
+bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+bindkey -M menuselect '\e[1;5C' vi-end-of-line
+
 bindkey -M menuselect '^@' accept-and-infer-next-history 
 bindkey -M menuselect '/' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
