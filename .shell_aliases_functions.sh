@@ -455,7 +455,6 @@ gitCommitAndPush(){
     git add .
     git commit -m "$1"
     git push
-    printf "\e[0m"
     return 0
 }
 replacer(){
