@@ -164,8 +164,9 @@ gitfunc () {
 	printf "\x1b[0;34m"
 
 	gitCommitAndPush "$BUFFER" && {
+		print -sr "$BUFFER"
 		zle .kill-whole-line
-		zle .accept-line
+		zle .redisplay
     } || {
         printf "\x1b[0;1;31m"
         print -sr "$BUFFER"
