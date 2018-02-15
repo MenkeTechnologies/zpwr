@@ -65,7 +65,7 @@ addDependenciesDebian(){
 }
 
 addDependenciesRedHat(){
-    dependencies_ary+=(libpcap-devel ncurses-devel automake)
+    dependencies_ary+=(libpcap-devel python-devel curses-devel automake)
 }
 
 addDependenciesMac(){
@@ -266,7 +266,7 @@ else
     sudo pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
 
-    tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
+    tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
     sudo pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
     sudo pip install pydf
