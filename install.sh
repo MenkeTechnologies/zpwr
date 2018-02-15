@@ -295,25 +295,6 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
 #}}}***********************************************************
 
-#{{{                    MARK:zsh
-#**************************************************************
-prettyPrint "Installing oh-my-zsh..."
-#oh-my-zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-#install custom theme based on agnosterzak
-cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
-
-#add aliases and functions
-prettyPrint "Adding common shell aliases for Bash and Zsh"
-cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
-
-prettyPrint "Installing .zshrc"
-cp "$INSTALLER_DIR/.zshrc" "$HOME"
-
-prettyPrint "Installing Zsh plugins"
-bash "$INSTALLER_DIR/zsh_plugins_install.sh"
-
-#}}}***********************************************************
 
 #{{{                    MARK:Tmux
 #**************************************************************
@@ -428,13 +409,35 @@ cp "$INSTALLER_DIR/conf.gls" "$HOME"
 cp "$INSTALLER_DIR/conf.df" "$HOME"
 cp "$INSTALLER_DIR/conf.mount" "$HOME"
 
-cd "$INSTALLER_DIR"
-cd
-rm -rf "$INSTALLER_DIR"
+
+#}}}***********************************************************
+
+#{{{                    MARK:zsh
+#**************************************************************
+
+#add aliases and functions
+prettyPrint "Adding common shell aliases for Bash and Zsh"
+cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
+
+prettyPrint "Installing .zshrc"
+cp "$INSTALLER_DIR/.zshrc" "$HOME"
+
+prettyPrint "Installing oh-my-zsh..."
+#oh-my-zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+#install custom theme based on agnosterzak
+cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
+
+prettyPrint "Installing Zsh plugins"
+bash "$INSTALLER_DIR/zsh_plugins_install.sh"
+
 #}}}***********************************************************
 
 #{{{                    MARK:Final
 #**************************************************************
+cd "$INSTALLER_DIR"
+cd
+rm -rf "$INSTALLER_DIR"
 prettyPrint "Done!!!!!!"
 
 prettyPrint "Starting Tmux..."
