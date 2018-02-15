@@ -197,6 +197,7 @@ tutsUpdate() {
 }
 
 sshRegain() {
+    set -x
     ps -ef |  grep -v grep | grep -q 'ssh ' && {
         if [[ "$BUFFER" != "" ]]; then
             print -sr "$BUFFER"
@@ -213,8 +214,11 @@ sshRegain() {
         zle .kill-whole-line
         tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
         zle .accept-line
-    }
+    
 }
+ession -t sds
+sds
+ta
 
 dbz() {
     zle .kill-whole-line
@@ -514,10 +518,21 @@ bindkey -M menuselect '\e ' accept-and-menu-complete
         bindkey -M menuselect '\e[5C' vi-end-of-line
     }
 } || {
+        distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
+
+if [[ "$distro" == raspbian ]]; then
     bindkey -M menuselect '\e[A' vi-backward-word
     bindkey -M menuselect '\e[B' vi-forward-word
     bindkey -M menuselect '\e[D' vi-beginning-of-line
     bindkey -M menuselect '\e[C' vi-end-of-line
+else
+        bindkey -M menuselect '\e[1;5A' vi-backward-word
+        bindkey -M menuselect '\e[1;5B' vi-forward-word
+        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+        bindkey -M menuselect '\e[1;5C' vi-end-of-line
+    
+fi
+
 }
 bindkey -M menuselect '^K' vi-backward-word
 bindkey -M menuselect '^J' vi-forward-word
