@@ -59,7 +59,7 @@ else
         else
             "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log 
         fi
-    elif [[ "$distroName" == redhat ]]; then
+    elif [[ "$distro" == redhat ]]; then
 
         if [[ "$weHaveCCZE" == yes ]]; then
             sudo "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log | ccze

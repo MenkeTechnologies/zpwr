@@ -197,7 +197,6 @@ tutsUpdate() {
 }
 
 sshRegain() {
-    set -x
     ps -ef |  grep -v grep | grep -q 'ssh ' && {
         if [[ "$BUFFER" != "" ]]; then
             print -sr "$BUFFER"
