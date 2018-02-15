@@ -688,15 +688,16 @@ zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
 #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
 #
 zstyle ':completion:*' list-separator '<<)(>>'
+COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 
-zstyle -e ':completion:*:local-directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-zstyle -e ':completion:*:*:f:*:*' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-zstyle -e ':completion:*:globbed-files' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-zstyle -e ':completion:*:argument-rest:*' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-zstyle -e ':completion:*:all-files' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-zstyle -e ':completion:*:files' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-zstyle -e ':completion:*:directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-zstyle -e ':completion:*:named-directories' list-colors 'reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+zstyle -e ':completion:*:local-directories' list-colors "$COMMON_ZSTYLE_OPTS"
+zstyle -e ':completion:*:*:f:*:*' list-colors "$COMMON_ZSTYLE_OPTS"
+zstyle -e ':completion:*:globbed-files' list-colors "$COMMON_ZSTYLE_OPTS"
+zstyle -e ':completion:*:argument-rest:*' list-colors "$COMMON_ZSTYLE_OPTS"
+zstyle -e ':completion:*:all-files' list-colors "$COMMON_ZSTYLE_OPTS"
+zstyle -e ':completion:*:files' list-colors "$COMMON_ZSTYLE_OPTS"
+zstyle -e ':completion:*:directories' list-colors "$COMMON_ZSTYLE_OPTS"
+zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
 
 zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9.,@#-]##) #([<)(>]#) #([a-zA-Z0-9.,@3-]#)*=1;30=1;31=34=1;31=34'
 
