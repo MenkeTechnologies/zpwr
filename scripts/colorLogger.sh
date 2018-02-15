@@ -41,6 +41,13 @@ else
         else
             $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log 
         fi
+    elif [[ $distroName == fedora ]]; then
+
+        if [[ $weHaveCCZE == yes ]]; then
+            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog, secure} /var/**/*.err "$HOME"/**/*.log | ccze
+        else
+            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog, secure} /var/**/*.err "$HOME"/**/*.log 
+        fi
     else 
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
         if [[ $weHaveCCZE == yes ]]; then

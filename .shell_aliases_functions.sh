@@ -543,6 +543,7 @@ backup(){
 }
 
 alias gcl >/dev/null 2>&1 && unalias gcl
+
 gcl() {
     git_name="${1##*/}"
     dir_name=${git_name%.*}
