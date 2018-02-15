@@ -25,17 +25,17 @@ fi
 #dont care about std err
 #exec 2>/dev/null
 
-if [[ $(uname) == Darwin ]]; then
-    if [[ $weHaveCCZE == yes ]]; then
-   $tailVersion -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* $HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
+if [[ "$(uname)" == Darwin ]]; then
+    if [[ "$weHaveCCZE" == yes ]]; then
+   "$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* $HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
    else
-   $tailVersion -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log
+   "$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log
     fi
 else
     #linux
     distroName="$(grep `^ID=` /etc/os-release | cut -d= -f2 | tr -d \")"
 
-    case $distroName in
+    case "$distroName" in
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
             distro=debian
             ;;
@@ -44,26 +44,26 @@ else
             ;;
     esac
 
-    if [[ $distro == debian ]]; then
+    if [[ "$distro" == debian ]]; then
 
-        if [[ $weHaveCCZE == yes ]]; then
-            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log | ccze
+        if [[ "$weHaveCCZE" == yes ]]; then
+            "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log | ccze
         else
-            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log 
+            "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log 
         fi
-    elif [[ $distroName == redhat ]]; then
+    elif [[ "$distroName" == redhat ]]; then
 
-        if [[ $weHaveCCZE == yes ]]; then
-            sudo $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log | ccze
+        if [[ "$weHaveCCZE" == yes ]]; then
+            sudo "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log | ccze
         else
-            sudo $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log 
+            sudo "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log 
         fi
     else 
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
-        if [[ $weHaveCCZE == yes ]]; then
-            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log | ccze
+        if [[ "$weHaveCCZE" == yes ]]; then
+            "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log | ccze
         else
-            $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log
+            "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log
         fi
     fi
 
