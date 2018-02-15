@@ -44,10 +44,10 @@ else
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
     case "$distroName" in
-        (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
+        (debian|ubuntu|raspbian|kali) prettyPrint "Color logging for $distroName"
             distro=debian
             ;;
-        (centos|fedora|rhel) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
+        (centos|fedora|rhel) prettyPrint "Color logging for $distroName"
             distro=redhat
             ;;
     esac
