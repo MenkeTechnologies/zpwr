@@ -7,6 +7,14 @@
 #####   Notes: 
 #}}}***********************************************************
 
+prettyPrint () {
+	[[ ! -z "$1" ]] && printf "\e[1m$1\e[0m\n" || {
+			echo "Need one arg" >&2
+			return 1
+	}
+}
+
+
 shopt -s globstar
 
 #tailVersion="colortail -k $HOME/.colortailconf"
