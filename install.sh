@@ -249,7 +249,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     if [[ "$distro" == redhat ]]; then
         prettyPrint "Installing grc with pip"
-        pip install --upgrade grc
+        git clone https://github.com/garabik/grc.git && cd grc && sudo bash install.sh
     fi
 
     type youtube-dl >/dev/null 2>&1 || {
