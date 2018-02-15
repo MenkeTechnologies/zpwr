@@ -95,7 +95,7 @@ plugins=(zsh-more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zs
 
     plugins+=(systemd)
 
-distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \")
+distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
 case $distroName in
     (debian|raspbian|kali) 
