@@ -165,7 +165,7 @@ updatePI(){
         yes | sudo apt-get autoclean'
     }
     
-    [[ "$manager" == dnf ]] &&  {
+    [[ "$manager" == yum ]] &&  {
         ssh -x "$hostname" 'yes | sudo yum update'
     }
 
@@ -174,7 +174,7 @@ updatePI(){
     ssh -x "$hostname" "$(< $SCRIPTS/rpiSoftwareUpdater.sh)"
 }
 
-arrayOfPI=(r:apt r2:apt)
+arrayOfPI=(r:apt r2:apt r3:yum)
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file
 for pi in "${arrayOfPI[@]}"; do
