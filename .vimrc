@@ -593,7 +593,6 @@ elseif os == "Linux"
     map <ESC>[B <C-Down>
     map <ESC>[C <C-Right>
     map <ESC>[D <C-Left>
-
 endif
 
 "{{{                    MARK:Quoter Mappings
@@ -724,8 +723,13 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 if os == "Darwin"
     set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 elseif os == "Linux"
-    "check for distroname
-    set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+    let distro = substitute(system('grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \"'), "\n", "", "")
+     
+    if distro == "raspbian"
+        set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
+    elseif distro == "fedora"
+        set  rtp+=/usr//lib/python2.7/site-packages/powerline/bindings/vim/
+    endif
 endif
 
 " :e will find files automatically in these locations
