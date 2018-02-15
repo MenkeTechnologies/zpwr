@@ -263,7 +263,7 @@ else
     sudo pip install glances
     prettyPrint "Installing Powerline..."
 
-     sudo pip install powerline-status
+    sudo pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
@@ -321,7 +321,7 @@ prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
 prettyPrint "Installing Iftop config..."
 ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's/addr://')
-iface=$(ifconfig | grep -B1 "inet addr:$ip" | awk '$1!="inet" && $1!="--" {print $1}')
+iface=$(ifconfig | grep -B1 "inet .*$ip" | awk '$1!="inet" && $1!="--" {print $1} | tr -d ":"')
 echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
