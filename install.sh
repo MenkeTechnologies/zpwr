@@ -42,7 +42,7 @@ exec &> >(tee "$INSTALLER_DIR"/logfile.txt)
 dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake bpython sl \
     screenfetch fortune mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql mongodb postgresql \
-    jnettop iotop atop ctags speedtest-cli texinfo lsof weechat grc gradle ant maven tree mc ocaml groovy \
+    jnettop iotop atop ctags speedtest-cli texinfo lsof weechat gradle ant maven tree mc ocaml groovy \
     ) 
 
 #}}}***********************************************************
@@ -60,12 +60,12 @@ addDependenciesLinux(){
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(python-pip python3-pip curl libffi-dev )
+    dependencies_ary+=(python-pip python3-pip curl libffi-dev grc)
 
 }
 
 addDependenciesRedHat(){
-    dependencies_ary+=()
+    dependencies_ary+=(libpcap-devel ncurses-devel automake)
 }
 
 addDependenciesMac(){
@@ -244,6 +244,13 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "Installing MyCLI"
     pip install mycli
+
+
+
+    if [[ "$distro" == redhat ]]; then
+        prettyPrint "Installing grc with pip"
+        pip install --upgrade grc
+    fi
 
     type youtube-dl >/dev/null 2>&1 || {
         prettyPrint "Installing youtube-dl"
