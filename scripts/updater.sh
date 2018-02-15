@@ -165,8 +165,8 @@ updatePI(){
         yes | sudo apt-get autoclean'
     }
     
-    [[ "$manager" == yum ]] &&  {
-        :
+    [[ "$manager" == dnf ]] &&  {
+        ssh -x "$hostname" 'yes | sudo yum update'
     }
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get)

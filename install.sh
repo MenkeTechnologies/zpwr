@@ -97,7 +97,7 @@ update (){
         elif [[ $2 == debian ]];then
             sudo apt-get install -y "$1"
         elif [[ $2 == redhat ]];then
-            sudo yum install -y "$1"
+            sudo dnf install -y "$1"
         else
             prettyPrint "Error at install with $2." >&2
         fi
