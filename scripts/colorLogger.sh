@@ -33,15 +33,25 @@ if [[ $(uname) == Darwin ]]; then
     fi
 else
     #linux
-    distroName="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
-    if [[ $distroName == raspbian ]]; then
+    distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
+
+    case $distroName in
+        (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
+            distro=debian
+            ;;
+        (centos|fedora|rhel) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
+            distro=redhat
+            ;;
+    esac
+
+    if [[ $distro == debian ]]; then
 
         if [[ $weHaveCCZE == yes ]]; then
             $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log | ccze
         else
             $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log 
         fi
-    elif [[ $distroName == fedora ]]; then
+    elif [[ $distroName == redhat ]]; then
 
         if [[ $weHaveCCZE == yes ]]; then
             $tailVersion -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog, secure} /var/**/*.err "$HOME"/**/*.log | ccze
