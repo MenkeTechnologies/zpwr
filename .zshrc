@@ -773,8 +773,8 @@ listNoClear
         distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
         if [[ "$UID" != "0" ]]; then
-            builtin cd "$D"
             if [[ "$distro" == raspbian ]]; then
+                builtin cd "$D"
                 type ponysay 1>/dev/null 2>&1 && {
                     bash "$HOME/motd.sh" | ponysay -W 120 
             } || bash "$HOME/motd.sh"
