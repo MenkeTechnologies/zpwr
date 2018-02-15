@@ -33,7 +33,7 @@ if [[ $(uname) == Darwin ]]; then
     fi
 else
     #linux
-    distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
+    distroName="$(grep `^ID=` /etc/os-release | cut -d= -f2 | tr -d \")"
 
     case $distroName in
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
