@@ -728,7 +728,7 @@ elseif os == "Linux"
     if distro == "raspbian"
         set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
     elseif distro == "fedora"
-        set  rtp+=/usr//lib/python2.7/site-packages/powerline/bindings/vim/
+        set  rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
     endif
 endif
 
