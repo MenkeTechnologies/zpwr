@@ -415,8 +415,8 @@ bindkey -M vicmd '^K' changeQuotes
 bindkey -M viins '\e^K' alternateQuotes
 bindkey -M vicmd '\e^K' alternateQuotes
 
-bindkey -M viins '\e^B' clipboard
-bindkey -M vicmd '\e^B' clipboard
+bindkey -M viins '\e^b' clipboard
+bindkey -M vicmd '\e^b' clipboard
 
 zle -N expand-aliases
 
