@@ -272,6 +272,7 @@ s(){
 
 xx(){
     cmd="$1"
+    trap 'return 1' INT
     [[ -z "$2" ]] && counter=10 || counter="$2"
 
     for iter in {1..$counter} ; do
