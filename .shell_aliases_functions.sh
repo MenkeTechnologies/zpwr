@@ -272,12 +272,19 @@ s(){
 
 xx(){
     cmd="$1"
-    trap 'return 1' INT
     [[ -z "$2" ]] && counter=10 || counter="$2"
 
+    trap '__DONE=true' INT
+    __DONE=false
     for iter in {1..$counter} ; do
-       eval "$cmd" 
+       if [[ $__DONE == true ]]; then
+           break
+       else
+           eval "$cmd" 
+       fi
     done
+
+    trap INT
 }
 
 cgh(){
