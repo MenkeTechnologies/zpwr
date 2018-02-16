@@ -393,7 +393,10 @@ clipboard(){
             echo
             zle .redisplay
             } || { 
-            
+            echo
+            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m !\n"
+            echo
+            zle .redisplay
             }
         }
 }
