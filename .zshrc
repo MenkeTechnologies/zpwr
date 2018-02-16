@@ -483,6 +483,8 @@ precmd(){
     }
     #leaky simonoff zsh theme
     printf "\x1b[0m"
+	#lose normal mode
+  	RPROMPT="%{%B%} `echo $$ $-`"
 }
 
 rationalize-dot (){
@@ -540,6 +542,33 @@ bindkey -M menuselect '^@' accept-and-infer-next-history
 bindkey -M menuselect '/' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
 bindkey -M menuselect '^M' .accept-line
+
+autoload -U select-bracketed select-quoted
+zle -N select-bracketed
+zle -N select-quoted
+  for km in viopp visual; do
+  bindkey -M $km -- '-' vi-up-line-or-history
+  for c in {a,i}"${(s..):-\'\"\`\|,./:;-=+@}"; do
+    bindkey -M $km $c select-quoted
+  done
+  for c in {a,i}${(s..):-'()[]{}<>bB'}; do
+    bindkey -M $km $c select-bracketed
+  done
+done
+
+bindkey -M vicmd '^G' what-cursor-position
+
+zle-keymap-select() {
+  RPROMPT="%{%B%} `echo $$ $-`"
+  [[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
+  () { return $__prompt_status }
+  zle reset-prompt
+}
+zle-line-init() {
+  typeset -g __prompt_status="$?"
+}
+zle -N zle-keymap-select
+zle -N zle-line-init
 
 #}}}***********************************************************
 
@@ -801,11 +830,10 @@ RPS2='+%N:%i:%^'
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
     #source "$HOME/.powerlevel9kconfig.sh"
-export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 : ~WCC
 : ~HOMEBREW_HOME_FORMULAE
 } || {
-    export RPROMPT="%{%B%}`tty` `echo $$ $-`"
+	:
 }
 #shell to recognize env variables in prompt
 : ~SCRIPTS
