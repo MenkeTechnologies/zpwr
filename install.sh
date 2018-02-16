@@ -252,7 +252,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         git clone https://github.com/garabik/grc.git && cd grc && sudo bash install.sh
     fi
 
-    type youtube-dl >/dev/null 2>&1 || {
+    exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
         pip install --upgrade youtube_dl
     }
@@ -274,9 +274,13 @@ else
     prettyPrint "Installing MyCLI"
     sudo pip install mycli
 
-    type youtube-dl >/dev/null 2>&1 || {
+    exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
         sudo pip install --upgrade youtube_dl
+    }
+
+    exists pip3 && {
+        sudo pip3 install bpython
     }
 
 fi
