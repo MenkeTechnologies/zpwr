@@ -274,7 +274,7 @@ xx(){
     cmd="$1"
     [[ -z "$2" ]] && counter=10 || counter="$2"
 
-    trap '__DONE=true' INT
+    trap '__DONE=true' QUIT
     __DONE=false
     for iter in {1..$counter} ; do
        if [[ $__DONE == true ]]; then
@@ -284,7 +284,7 @@ xx(){
        fi
     done
 
-    trap INT
+    trap QUIT
 }
 
 cgh(){
