@@ -152,31 +152,31 @@ gitfunc () {
 
     git status &> /dev/null || {
         printf "\x1b[0;1;31m"
-        print -sr "$BUFFER"
-        echo
-        printf "NOT GIT DIR: $(pwd -P)\n" >&2
-        printf "\x1b[0m"
-        zle .kill-whole-line
-        zle .accept-line-and-down-history
-        return 0
-    }
-    #leaky simonoff
-    printf "\x1b[0;34m"
+    print -sr "$BUFFER"
+    echo
+    printf "NOT GIT DIR: $(pwd -P)\n" >&2
+    printf "\x1b[0m"
+    zle .kill-whole-line
+    zle .accept-line-and-down-history
+    return 0
+}
+#leaky simonoff
+printf "\x1b[0;34m"
 
-    gitCommitAndPush "$BUFFER" && {
-        print -sr "$BUFFER"
-        zle .kill-whole-line
-        printf "\x1b[0m"	
-        zle .redisplay
+gitCommitAndPush "$BUFFER" && {
+    print -sr "$BUFFER"
+zle .kill-whole-line
+printf "\x1b[0m"	
+zle .redisplay
     } || {
         printf "\x1b[0;1;31m"
-        print -sr "$BUFFER"
-        echo
-        printf "BLACKLISTED: $(pwd -P)\n" >&2
-        BUFFER=""
-        printf "\x1b[0m"	
-        zle .accept-line
-    }
+    print -sr "$BUFFER"
+    echo
+    printf "BLACKLISTED: $(pwd -P)\n" >&2
+    BUFFER=""
+    printf "\x1b[0m"	
+    zle .accept-line
+}
 }
 
 tutsUpdate() {
@@ -211,11 +211,11 @@ sshRegain() {
         fi
     } || {
         zle .kill-whole-line
-        tmux ls &> /dev/null && {
-            BUFFER=tmm; } || {
-            BUFFER=tmm_full; }
-        zle .accept-line
-    }
+    tmux ls &> /dev/null && {
+        BUFFER=tmm; } || {
+        BUFFER=tmm_full; }
+    zle .accept-line
+}
 }
 
 dbz() {
@@ -378,19 +378,19 @@ printf "\x1b[0m"
 clipboard(){
     [[ "$(uname)" == Darwin ]] && {
         print -sr "$BUFFER"
-		printf "$BUFFER" | pbcopy
-		echo
-		printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
-		echo
-		zle .redisplay
-	}  || {
-		print -sr "$BUFFER"
-		printf "$BUFFER" | xclip
-		echo
-		printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
-		echo
-		zle .redisplay
-	}
+    printf "$BUFFER" | pbcopy
+    echo
+    printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
+    echo
+    zle .redisplay
+}  || {
+    print -sr "$BUFFER"
+printf "$BUFFER" | xclip
+echo
+printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
+echo
+zle .redisplay
+    }
 }
 
 #vim  mode
@@ -490,8 +490,8 @@ precmd(){
     }
     #leaky simonoff zsh theme
     printf "\x1b[0m"
-	#lose normal mode
-  	RPROMPT="%{%B%} `echo $$ $-`"
+    #lose normal mode
+    RPROMPT="%{%B%} `echo $$ $-`"
 }
 
 rationalize-dot (){
@@ -513,31 +513,31 @@ bindkey -M listscroll f complete-word
 bindkey -M menuselect '\e ' accept-and-menu-complete
 [[ "$(uname)" == Darwin ]] && {
     PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
-        bindkey -M menuselect '\e[1;5A' vi-backward-word
-        bindkey -M menuselect '\e[1;5B' vi-forward-word
-        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[1;5C' vi-end-of-line
+echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
+    bindkey -M menuselect '\e[1;5A' vi-backward-word
+bindkey -M menuselect '\e[1;5B' vi-forward-word
+bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+bindkey -M menuselect '\e[1;5C' vi-end-of-line
     } || {
         bindkey -M menuselect '\e[5A' vi-backward-word
-        bindkey -M menuselect '\e[5B' vi-forward-word
-        bindkey -M menuselect '\e[5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[5C' vi-end-of-line
-    }
+    bindkey -M menuselect '\e[5B' vi-forward-word
+    bindkey -M menuselect '\e[5D' vi-beginning-of-line
+    bindkey -M menuselect '\e[5C' vi-end-of-line
+}
 } || {
-        distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
+    distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
-    if [[ "$distro" == raspbian ]]; then
-        bindkey -M menuselect '\e[A' vi-backward-word
-        bindkey -M menuselect '\e[B' vi-forward-word
-        bindkey -M menuselect '\e[D' vi-beginning-of-line
-        bindkey -M menuselect '\e[C' vi-end-of-line
-    else
-        bindkey -M menuselect '\e[1;5A' vi-backward-word
-        bindkey -M menuselect '\e[1;5B' vi-forward-word
-        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[1;5C' vi-end-of-line
-    fi
+if [[ "$distro" == raspbian ]]; then
+    bindkey -M menuselect '\e[A' vi-backward-word
+    bindkey -M menuselect '\e[B' vi-forward-word
+    bindkey -M menuselect '\e[D' vi-beginning-of-line
+    bindkey -M menuselect '\e[C' vi-end-of-line
+else
+    bindkey -M menuselect '\e[1;5A' vi-backward-word
+    bindkey -M menuselect '\e[1;5B' vi-forward-word
+    bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+    bindkey -M menuselect '\e[1;5C' vi-end-of-line
+fi
 
 }
 bindkey -M menuselect '^K' vi-backward-word
@@ -553,27 +553,34 @@ bindkey -M menuselect '^M' .accept-line
 autoload -U select-bracketed select-quoted
 zle -N select-bracketed
 zle -N select-quoted
-  for km in viopp visual; do
-  bindkey -M $km -- '-' vi-up-line-or-history
-  for c in {a,i}"${(s..):-\'\"\`\|,./:;-=+@}"; do
-    bindkey -M $km $c select-quoted
-  done
-  for c in {a,i}${(s..):-'()[]{}<>bB'}; do
-    bindkey -M $km $c select-bracketed
-  done
+
+for km in viopp visual; do
+    bindkey -M $km -- '-' vi-up-line-or-history
+
+    for c in ${(s..):-'()[]{}<>bB'}; do
+        bindkey -M $km i$c select-bracketed
+        bindkey -M $km a$c select-bracketed
+    done
+
+    for c in "${(s..):-\'\"\`\|,./:;-=+@}"; do
+        bindkey -M $km i$c select-quoted
+        bindkey -M $km a$c select-quoted
+    done
+
 done
 
 bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 
+# RPROMPT shows vi mode
 zle-keymap-select() {
-  RPROMPT="%{%B%} `echo $$ $-`"
-  [[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
-  () { return $__prompt_status }
-  zle reset-prompt
+RPROMPT="%{%B%} `echo $$ $-`"
+[[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
+() { return $__prompt_status }
+zle reset-prompt
 }
 zle-line-init() {
-  typeset -g __prompt_status="$?"
+typeset -g __prompt_status="$?"
 }
 zle -N zle-keymap-select
 zle -N zle-line-init
@@ -841,7 +848,7 @@ RPS2='+%N:%i:%^'
 : ~WCC
 : ~HOMEBREW_HOME_FORMULAE
 } || {
-	:
+    :
 }
 #shell to recognize env variables in prompt
 : ~SCRIPTS
