@@ -211,7 +211,9 @@ sshRegain() {
         fi
     } || {
         zle .kill-whole-line
-        tmux ls &> /dev/null && BUFFER=tmm || BUFFER=tmm_full
+        tmux ls &> /dev/null && {
+            BUFFER=tmm; } || {
+            BUFFER=tmm_full; }
         zle .accept-line
     }
 }
@@ -815,7 +817,6 @@ export RPROMPT="%{%B%}`tty` `echo $$ $-`"
 #**************************************************************
 source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
 #}}}***********************************************************
-
 
 #{{{                    MARK:ColorTest
 #**************************************************************
