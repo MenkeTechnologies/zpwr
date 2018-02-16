@@ -173,7 +173,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #Linux
     alias apt="sudo apt-get install -y"
-    alias ip="grc -c /usr/share/grc/conf.ifconfig ip"
+    alias ip="grc -c $HOME/conf.ifconfig ip"
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
     if [[ $distroName == raspbian ]]; then
         source "$HOME/.rpitokens.sh"
@@ -635,6 +635,7 @@ getrc(){
         cp .tmux.conf "$HOME"
         cp conf.gls "$HOME"
         cp conf.df "$HOME"
+        cp conf.ifconfig "$HOME"
         cp grc.zsh "$HOME"
 
         cp -R .tmux/* "$HOME/.tmux"
