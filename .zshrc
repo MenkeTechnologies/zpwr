@@ -415,8 +415,8 @@ bindkey -M vicmd '^K' changeQuotes
 bindkey -M viins '\e^K' alternateQuotes
 bindkey -M vicmd '\e^K' alternateQuotes
 
-bindkey -M viins '^B' clipboard
-bindkey -M vicmd '^B' clipboard
+bindkey -M viins '\e^B' clipboard
+bindkey -M vicmd '\e^B' clipboard
 
 zle -N expand-aliases
 
@@ -574,14 +574,16 @@ bindkey -M viins '^G' what-cursor-position
 
 # RPROMPT shows vi mode
 zle-keymap-select() {
-RPROMPT="%{%B%} `echo $$ $-`"
-[[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
-() { return $__prompt_status }
-zle reset-prompt
+    RPROMPT="%{%B%} `echo $$ $-`"
+    [[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
+    () { return $__prompt_status }
+    zle reset-prompt
 }
+
 zle-line-init() {
-typeset -g __prompt_status="$?"
+    typeset -g __prompt_status="$?"
 }
+
 zle -N zle-keymap-select
 zle -N zle-line-init
 
