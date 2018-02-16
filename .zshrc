@@ -387,7 +387,7 @@ clipboard(){
 
         type xclip &> /dev/null && {
             print -sr "$BUFFER"
-            printf "$BUFFER" | xclip
+            printf "$BUFFER" | xclip -selection c -i
             echo
             printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
             echo
