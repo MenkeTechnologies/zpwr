@@ -392,9 +392,9 @@ clipboard(){
             printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
             echo
             zle .redisplay
-            } || { 
+        } || { 
             echo
-            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m !\n"
+            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
             echo
             zle .redisplay
             }
