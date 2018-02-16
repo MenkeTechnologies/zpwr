@@ -65,7 +65,7 @@ addDependenciesDebian(){
 }
 
 addDependenciesRedHat(){
-    dependencies_ary+=(libpcap-devel python-devel curses-devel automake)
+    dependencies_ary+=(libpcap-devel python-devel python3-devel curses-devel automake)
 }
 
 addDependenciesMac(){
