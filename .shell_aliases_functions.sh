@@ -286,7 +286,8 @@ scnew(){
 p(){
     out="$(ps -ef)"
     for cmd in "$@" ; do
-        echo "$out" | fgrep -i -- "$cmd"
+        echo "$out" | fgrep -i -- "$cmd" || echo "Nothing found for $cmd."
+        echo
     done
 }
 

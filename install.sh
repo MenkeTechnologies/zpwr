@@ -41,7 +41,7 @@ exec &> >(tee "$INSTALLER_DIR"/logfile.txt)
 
 dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake bpython sl \
     screenfetch fortune mailutils ccze htop figlet zsh docker erlang elixir links \
-    rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql mongodb postgresql \
+    rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet ysql mongodb postgresql \
     jnettop iotop atop ctags speedtest-cli texinfo lsof weechat gradle ant maven tree mc ocaml groovy \
     ) 
 
