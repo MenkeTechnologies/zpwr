@@ -272,7 +272,7 @@ s(){
 
 xx(){
     cmd="$1"
-    [[ -z "$2" ]] && counter=10 || counter="$2"
+    [[ -z "$2" ]] && counter=100 || counter="$2"
 
     trap '__DONE=true' QUIT
     __DONE=false
