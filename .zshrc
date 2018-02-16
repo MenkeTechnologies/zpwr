@@ -105,10 +105,10 @@ case $distroName in
         plugins+=(ubuntu)
         ;;
     (centos|rhel) 
-        plugins+=(yum)
+        plugins+=(yum dnf)
         ;;
     (fedora) 
-        plugins+=(yum fedora)
+        plugins+=(yum fedora dnf)
         ;;
     (*) :
         ;;
