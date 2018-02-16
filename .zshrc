@@ -450,11 +450,13 @@ bindkey '\eOP' updater
 #F2 key
 bindkey '\eOQ' sub
 
-#Ctrl plus arrow keys
-bindkey '\e[1;5A' gitfunc
-bindkey '\e[1;5B' updater
-bindkey '\e[1;5C' tutsUpdate
-bindkey '\e[1;5D' dbz
+[[ "$(uname)" == Darwin ]] && {
+    #Ctrl plus arrow keys
+    bindkey '\e[1;5A' gitfunc
+    bindkey '\e[1;5B' updater
+    bindkey '\e[1;5C' tutsUpdate
+    bindkey '\e[1;5D' dbz
+}
 
 bindkey '^S' gitfunc
 bindkey '```' sudo-command-line
@@ -523,11 +525,11 @@ bindkey -M menuselect '\e ' accept-and-menu-complete
     PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
 echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
     bindkey -M menuselect '\e[1;5A' vi-backward-word
-bindkey -M menuselect '\e[1;5B' vi-forward-word
-bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-bindkey -M menuselect '\e[1;5C' vi-end-of-line
+    bindkey -M menuselect '\e[1;5B' vi-forward-word
+    bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+    bindkey -M menuselect '\e[1;5C' vi-end-of-line
     } || {
-        bindkey -M menuselect '\e[5A' vi-backward-word
+    bindkey -M menuselect '\e[5A' vi-backward-word
     bindkey -M menuselect '\e[5B' vi-forward-word
     bindkey -M menuselect '\e[5D' vi-beginning-of-line
     bindkey -M menuselect '\e[5C' vi-end-of-line
@@ -536,10 +538,10 @@ bindkey -M menuselect '\e[1;5C' vi-end-of-line
     distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
 if [[ "$distro" == raspbian ]]; then
-    bindkey -M menuselect '\e[A' vi-backward-word
-    bindkey -M menuselect '\e[B' vi-forward-word
-    bindkey -M menuselect '\e[D' vi-beginning-of-line
-    bindkey -M menuselect '\e[C' vi-end-of-line
+    bindkey -M menuselect '\e0[A' vi-backward-word
+    bindkey -M menuselect '\e0[B' vi-forward-word
+    bindkey -M menuselect '\e0[D' vi-beginning-of-line
+    bindkey -M menuselect '\e0[C' vi-end-of-line
 else
     bindkey -M menuselect '\e[1;5A' vi-backward-word
     bindkey -M menuselect '\e[1;5B' vi-forward-word
