@@ -270,6 +270,15 @@ s(){
     [[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
 }
 
+xx(){
+    cmd="$1"
+    [[ -z "$2" ]] && counter=10 || counter="$2"
+
+    for iter in {1..$counter} ; do
+       eval "$cmd" 
+    done
+}
+
 cgh(){
 
     [[ -z "$1" ]] && user=MenkeTechnologies || user="$1"
