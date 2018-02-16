@@ -53,19 +53,19 @@ dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake bpython sl 
 addDependenciesLinux(){
     dependencies_ary+=(reptyr iptraf lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev \
     libpcap-dev ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
-    python3-dev python-dev ruby-dev libperl-dev dstat ecryptfs-utils at silversearcher-ag netatalk dnsutils \
+    libperl-dev dstat ecryptfs-utils at silversearcher-ag netatalk dnsutils \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip \
     )
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(python-pip python3-pip curl libffi-dev grc)
+    dependencies_ary+=(python3-dev python-dev ruby-devpython-pip python3-pip curl libffi-dev grc)
 
 }
 
 addDependenciesRedHat(){
-    dependencies_ary+=(libpcap-devel python-devel python3-devel curses-devel automake)
+    dependencies_ary+=(libpcap-devel python-devel python3-devel curses-devel automake the_silver_searcher)
 }
 
 addDependenciesMac(){
@@ -97,7 +97,7 @@ update (){
         elif [[ $2 == debian ]];then
             sudo apt-get install -y "$1"
         elif [[ $2 == redhat ]];then
-            sudo dnf install -y "$1"
+            sudo yum install -y "$1"
         else
             prettyPrint "Error at install with $2." >&2
         fi
