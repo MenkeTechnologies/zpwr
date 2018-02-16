@@ -286,7 +286,7 @@ scnew(){
 p(){
     out="$(ps -ef)"
     for cmd in "$@" ; do
-        prettyPrint "Search Term:$cmd"
+        prettyPrint "SEARCH TERM: $cmd"
         echo "$out" | fgrep -i -- "$cmd" || echo "Nothing found for $cmd."
         echo
     done
