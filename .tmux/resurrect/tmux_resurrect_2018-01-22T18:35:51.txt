@@ -1,4 +1,0 @@
-pane	0	0	:..ontents/MacOS	1	:*M	0	:/Applications/System Preferences.app/Contents/MacOS	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
-pane	0	0	:..ontents/MacOS	1	:*M	1	:/Users/jacobmenke/IdeaProjects/reallingua-web/webproject	0	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
-window	0	0	1	:*M	ee85,261x73,0,0{130x73,0,0,0,130x73,131,0,1}
-state	0	

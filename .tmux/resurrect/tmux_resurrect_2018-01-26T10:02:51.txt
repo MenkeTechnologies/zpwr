@@ -1,4 +1,0 @@
-pane	main-0	0	:..eb/webproject	1	:*	0	:/Users/jacobmenke/IdeaProjects/reallingua-web/webproject	0	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
-pane	main-0	0	:..eb/webproject	1	:*	1	:/private/etc	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
-window	main-0	0	1	:*	6e8b,261x73,0,0{130x73,0,0,3,130x73,131,0,6}
-state	main-0	

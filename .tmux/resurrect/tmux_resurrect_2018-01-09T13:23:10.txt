@@ -1,4 +1,0 @@
-pane	main-0	0	:~/Desktop	1	:*M	0	:/Users/jacobmenke/Desktop	0	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
-pane	main-0	0	:~/Desktop	1	:*M	1	:/Users/jacobmenke/Desktop	1	zsh	:bash /Users/jacobmenke/Documents/shellScripts/redText.sh
-window	main-0	0	1	:*M	b7d0,260x69,0,0{130x69,0,0,0,129x69,131,0,1}
-state	main-0	
