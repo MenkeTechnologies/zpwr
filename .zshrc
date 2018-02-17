@@ -541,25 +541,15 @@ bindkey -M menuselect '\e ' accept-and-menu-complete
     distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
 if [[ "$distro" == raspbian ]]; then
-    echo "distro is $distro"
-    bindkey -M menuselect
-    bindkey -M menuselect '\eOA' vi-backward-word
-    bindkey -M menuselect '\eOB' vi-forward-word
-    bindkey -M menuselect '\eOD' vi-beginning-of-line
-    bindkey -M menuselect '\eOC' vi-end-of-line
+    #bindkey -M menuselect '\eOA' vi-backward-word
+    #bindkey -M menuselect '\eOB' vi-forward-word
+    #bindkey -M menuselect '\eOD' vi-beginning-of-line
+    #bindkey -M menuselect '\eOC' vi-end-of-line
 else
-    echo "else distro is $distro"
-    bindkey -r -M menuselect '\eOA'
-    bindkey -r -M menuselect '\eOB'
-    bindkey -r -M menuselect '\eOC'
-    bindkey -r -M menuselect '\eOD'
-
     bindkey -M menuselect '\e[1;5A' vi-backward-word
     bindkey -M menuselect '\e[1;5B' vi-forward-word
     bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
     bindkey -M menuselect '\e[1;5C' vi-end-of-line
-
-    bindkey -M menuselect
 fi
 
 }
