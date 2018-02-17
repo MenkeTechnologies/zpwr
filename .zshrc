@@ -525,15 +525,15 @@ bindkey -M listscroll f complete-word
 bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history 
 
-[[ "$(uname)" == Darwin ]] && {
-    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
+#[[ "$(uname)" == Darwin ]] && {
+    #PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
 #echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
     #bindkey -M menuselect '\e[1;5A' vi-backward-word
     #bindkey -M menuselect '\e[1;5B' vi-forward-word
     #bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
     #bindkey -M menuselect '\e[1;5C' vi-end-of-line
         #} || {
-        #bindkey -M menuselect '\e[5A' vi-backward-word
+            #bindkey -M menuselect '\e[5A' vi-backward-word
         #bindkey -M menuselect '\e[5B' vi-forward-word
         #bindkey -M menuselect '\e[5D' vi-beginning-of-line
         #bindkey -M menuselect '\e[5C' vi-end-of-line
