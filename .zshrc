@@ -527,36 +527,37 @@ bindkey -M listscroll f complete-word
 bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history 
 
-#[[ "$(uname)" == Darwin ]] && {
-    #PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
-#echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
-    #bindkey -M menuselect '\e[1;5A' vi-backward-word
-#bindkey -M menuselect '\e[1;5B' vi-forward-word
-#bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-#bindkey -M menuselect '\e[1;5C' vi-end-of-line
-#} || {
-    #bindkey -M menuselect '\e[5A' vi-backward-word
-#bindkey -M menuselect '\e[5B' vi-forward-word
-#bindkey -M menuselect '\e[5D' vi-beginning-of-line
-#bindkey -M menuselect '\e[5C' vi-end-of-line
-#}
-#} || {
-    #distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
+[[ "$(uname)" == Darwin ]] && {
+    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
+echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
+    bindkey -M menuselect '\e[1;5A' vi-backward-word
+    bindkey -M menuselect '\e[1;5B' vi-forward-word
+    bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+    bindkey -M menuselect '\e[1;5C' vi-end-of-line
+} || {
+    bindkey -M menuselect '\e[5A' vi-backward-word
+    bindkey -M menuselect '\e[5B' vi-forward-word
+    bindkey -M menuselect '\e[5D' vi-beginning-of-line
+    bindkey -M menuselect '\e[5C' vi-end-of-line
+    }
+} || {
+    distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
-#if [[ "$distro" == raspbian ]]; then
+if [[ "$distro" == raspbian ]]; then
+    :
 #bindkey -M menuselect '\eOA' vi-backward-word
 #bindkey -M menuselect '\eOB' vi-forward-word
 #bindkey -M menuselect '\eOD' vi-beginning-of-line
 #bindkey -M menuselect '\eOC' vi-end-of-line
-#else
-#bindkey -M menuselect '\e[1;5A' vi-backward-word
-#bindkey -M menuselect '\e[1;5B' vi-forward-word
-#bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-#bindkey -M menuselect '\e[1;5C' vi-end-of-line
-#fi
+else
+    bindkey -M menuselect '\e[1;5A' vi-backward-word
+    bindkey -M menuselect '\e[1;5B' vi-forward-word
+    bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+    bindkey -M menuselect '\e[1;5C' vi-end-of-line
+fi
 
-#}
-#
+}
+
 #bind function arrow keus in menuselect mode
 bindkey -M menuselect '\e[5~' vi-backward-word
 bindkey -M menuselect '\e[6~' vi-forward-word
