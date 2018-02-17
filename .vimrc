@@ -724,7 +724,7 @@ if os == "Darwin"
     set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 elseif os == "Linux"
     let distro = substitute(system('grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \"'), "\n", "", "")
-     
+
     if distro == "raspbian"
         set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
     elseif distro == "fedora"
@@ -751,6 +751,6 @@ set dictionary+=/usr/share/dict/words
 set thesaurus+=~/mthesaur.txt
 
 "easier mapping for dict completion
-"inoremap <silent> <C-T> <C-X><C-K>
+inoremap <silent> <F9> <C-X><C-K>
 "easier mapping for thesaurus completion
-"inoremap <silent> <ESC>t <C-X><C-T>
+inoremap <silent> <F10> <C-X><C-T>
