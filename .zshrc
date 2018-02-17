@@ -423,8 +423,8 @@ bindkey -M vicmd '^K' changeQuotes
 bindkey -M viins '\e^K' alternateQuotes
 bindkey -M vicmd '\e^K' alternateQuotes
 
-bindkey -M viins '\e^b' clipboard
-bindkey -M vicmd '\e^b' clipboard
+bindkey -M viins '\e[5~' clipboard
+bindkey -M vicmd '\e[5~' clipboard
 
 zle -N expand-aliases
 
@@ -565,6 +565,8 @@ autoload -U select-bracketed select-quoted
 zle -N select-bracketed
 zle -N select-quoted
 
+
+# bind vim text objects on command line
 for km in viopp visual; do
     bindkey -M $km -- '-' vi-up-line-or-history
 
