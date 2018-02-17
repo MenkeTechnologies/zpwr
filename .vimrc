@@ -248,17 +248,12 @@ nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
 "vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
 inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
 
-nnoremap <silent> <C-D> :update<CR>
-vnoremap <silent> <C-D> :<C-C>:update<CR>
-inoremap <silent> <C-D> <C-[>:update<CR>
 
-nnoremap <silent> <C-W> :update<CR>:SyntasticCheck<CR>
-vnoremap <silent> <C-W> :<C-C>:update<CR>:SyntasticCheck<CR>
-inoremap <silent> <C-W> <C-[>:update<CR>:SyntasticCheck<CR>a
-
+nnoremap <silent> <C-V> :q!<CR>
 nnoremap <silent> <C-E> :q!<CR>
+vnoremap <silent> <C-V> :<C-C>:q!<CR>
 vnoremap <silent> <C-E> :<C-C>:q!<CR>
-inoremap <silent> <C-E> <C-[>:q!<CR>
+inoremap <silent> <C-V> <C-[>:q!<CR>
 
 "comment out
 inoremap <silent> <C-B> <ESC>I//<ESC>ji
@@ -567,8 +562,6 @@ function Quoter(type)
 
 endfunction
 
-
-
 let blacklist=['md', 'sh','hs', 'pl']
 
 augroup indentGroup
@@ -577,7 +570,10 @@ augroup indentGroup
     let currentFileEnding=tolower(expand('%:e'))
     "if the filetype is not in blacklist (index = -1) then we will indent
     if index(blacklist, currentFileEnding) < 0
-        autocmd CursorHoldI * :call Indent()
+        let filename=expand('%:p:t')
+        if filename != '.zshrc'
+            autocmd CursorHoldI * :call Indent()
+        endif
     endif
 augroup end
 
@@ -611,8 +607,6 @@ vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
 
 
 "}}}***********************************************************
-inoremap <silent> <C-U> <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
-nnoremap <silent> <C-U> :silent !open -t %:p:h<CR>:redraw!<CR>
 
 nnoremap <Tab> :SaveSession!<CR><CR>
 nnoremap <silent> <leader>n :n<CR>
@@ -681,8 +675,23 @@ nnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
 "nnoremap <silent> p p`]
 autocmd VimEnter * inoremap <silent> <C-F> <C-[>:w<CR>:call TmuxRepeat()<CR>a
 
-nnoremap <silent> <C-V> :w<CR>:call TmuxRepeatGeneric()<CR>
-inoremap <silent> <C-V> <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
+"{{{                    MARK:C-G mappings
+"**************************************************************
+nnoremap <silent> <C-D>d :update<CR>
+vnoremap <silent> <C-D>d :<C-C>:update<CR>
+inoremap <silent> <C-D>d <C-[>:update<CR>a
+
+nnoremap <silent> <C-D>f :w<CR>:call TmuxRepeatGeneric()<CR>
+inoremap <silent> <C-D>f <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
+inoremap <silent> <C-D>g <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
+nnoremap <silent> <C-D>g :silent !open -t %:p:h<CR>:redraw!<CR>
+
+nnoremap <silent> <C-D>s :update<CR>:SyntasticCheck<CR>
+vnoremap <silent> <C-D>s :<C-C>:update<CR>:SyntasticCheck<CR>
+inoremap <silent> <C-D>s <C-[>:update<CR>:SyntasticCheck<CR>a
+
+"}}}***********************************************************
+"
 "}}}***********************************************************
 "{{{                    MARK:autocmd
 "**************************************************************
