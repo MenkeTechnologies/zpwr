@@ -16,12 +16,7 @@ prettyPrint(){
     printf "\e[1;4m$1\n\e[0m"
 }
 
-
-if [[ "$1" ]]; then
-    commitMessage="$1"
-else
-    commitMessage="update"
-fi
+[[ ! -z "$1" ]] && commitMessage="$1" || commitMessage="update"
 
 #{{{                    MARK:tutorialDir
 #**************************************************************
