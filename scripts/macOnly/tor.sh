@@ -8,9 +8,7 @@
 #}}}***********************************************************
 prettyPrint (){
     printf "\e[4;1m$1\e[0m\n"
-
 }
-
 
 INTERFACE=Wi-Fi
 
@@ -24,6 +22,8 @@ INTERFACE=Wi-Fi
     #kill -0 "$$"
     #exit
 #done 2>/dev/null &
+
+type spoof &> /dev/null || { printf "you need spoof!. Exiting." >&2; exit; }
 
 function disable_proxy() {
     sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
