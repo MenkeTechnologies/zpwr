@@ -211,10 +211,10 @@ sshRegain() {
         fi
     } || {
         zle .kill-whole-line
-        ps -ef |  grep -v grep | grep -q 'tmux ' && {
-            BUFFER=tmm
-        } || {
-            BUFFER=tmm_full
+    ps -ef |  grep -v grep | grep -q 'tmux ' && {
+        BUFFER=tmm
+} || {
+    BUFFER=tmm_full
         }
         zle .accept-line
     }
@@ -380,80 +380,80 @@ printf "\x1b[0m"
 clipboard(){
     [[ "$(uname)" == Darwin ]] && {
         print -sr "$BUFFER"
-        printf "$BUFFER" | pbcopy
-        echo
-        printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
-        echo
-        zle .redisplay
-    }  || {
+    printf "$BUFFER" | pbcopy
+    echo
+    printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
+    echo
+    zle .redisplay
+}  || {
 
-        type xclip &> /dev/null && {
-            print -sr "$BUFFER"
-            printf "$BUFFER" | xclip -selection c -i
-            echo
-            printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
-            echo
-            zle .redisplay
-        } || { 
-            echo
-            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
-            echo
-            zle .redisplay
+    type xclip &> /dev/null && {
+    print -sr "$BUFFER"
+    printf "$BUFFER" | xclip -selection c -i
+    echo
+    printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
+    echo
+    zle .redisplay
+} || { 
+    echo
+printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
+echo
+zle .redisplay
             }
         }
-}
+    }
 
-#vim  mode
-bindkey -v
+    #vim  mode
+    bindkey -v
 
-bindkey -M viins '^r' redo
-bindkey -M vicmd '^r' redo
-bindkey -M viins '^z' undo
-bindkey -M vicmd '^z' undo
+    bindkey -M viins '^r' redo
+    bindkey -M vicmd '^r' redo
+    bindkey -M viins '^z' undo
+    bindkey -M vicmd '^z' undo
 
-zle -N basicSedSub
-bindkey -M viins '^P' basicSedSub
-bindkey -M vicmd '^P' basicSedSub
+    zle -N basicSedSub
+    bindkey -M viins '^P' basicSedSub
+    bindkey -M vicmd '^P' basicSedSub
 
-zle -N changeQuotes
-zle -N alternateQuotes
-zle -N clipboard
+    zle -N changeQuotes
+    zle -N alternateQuotes
+    zle -N clipboard
 
-bindkey -M viins '^K' changeQuotes
-bindkey -M vicmd '^K' changeQuotes
+    bindkey -M viins '^K' changeQuotes
+    bindkey -M vicmd '^K' changeQuotes
 
-bindkey -M viins '\e^K' alternateQuotes
-bindkey -M vicmd '\e^K' alternateQuotes
+    bindkey -M viins '\e^K' alternateQuotes
+    bindkey -M vicmd '\e^K' alternateQuotes
 
-bindkey -M viins '\e[5~' clipboard
-bindkey -M vicmd '\e[5~' clipboard
+    bindkey -M viins '\e[5~' clipboard
+    bindkey -M vicmd '\e[5~' clipboard
 
-zle -N expand-aliases
+    zle -N expand-aliases
 
-bindkey '\e^E' expand-aliases
+    bindkey '\e^E' expand-aliases
 
-zle -N gitfunc
-zle -N updater
-zle -N sub
-zle -N dbz
-zle -N sshRegain
-zle -N tutsUpdate
-zle -N subLine
+    zle -N gitfunc
+    zle -N updater
+    zle -N sub
+    zle -N dbz
+    zle -N sshRegain
+    zle -N tutsUpdate
+    zle -N subLine
 
-bindkey '\e[1;2D' sub
-#press both escape and control f then oo
-bindkey '\e^f' sub
-#bound to control spacebar
-bindkey -M vicmd '^@' sshRegain
-bindkey -M viins '^@' sshRegain
+    bindkey '\e[1;2D' sub
+    #press both escape and control f then oo
+    bindkey '\e^f' sub
+    #bound to control spacebar
+    bindkey -M vicmd '^@' sshRegain
+    bindkey -M viins '^@' sshRegain
 
-#F1 key
-bindkey '\eOP' updater
-#F2 key
-bindkey '\eOQ' sub
+    #F1 key
+    bindkey '\eOP' updater
+    #F2 key
+    bindkey '\eOQ' sub
 
-[[ "$(uname)" == Darwin ]] && {
-    #Ctrl plus arrow keys
+    [[ "$(uname)" == Darwin ]] && {
+        #Ctrl plus arrow keys
     bindkey '\e[1;5A' gitfunc
     bindkey '\e[1;5B' updater
     bindkey '\e[1;5C' tutsUpdate
@@ -522,20 +522,21 @@ bindkey -M viins . rationalize-dot
 bindkey -M listscroll q send-break
 bindkey -M listscroll f complete-word
 
-bindkey -M menuselect '\e ' accept-and-menu-complete
+bindkey -M menuselect '^d' accept-and-menu-complete
+bindkey -M menuselect '^f' accept-and-infer-next-history 
 
 [[ "$(uname)" == Darwin ]] && {
     PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
-        bindkey -M menuselect '\e[1;5A' vi-backward-word
-        bindkey -M menuselect '\e[1;5B' vi-forward-word
-        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[1;5C' vi-end-of-line
+echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
+    bindkey -M menuselect '\e[1;5A' vi-backward-word
+bindkey -M menuselect '\e[1;5B' vi-forward-word
+bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+bindkey -M menuselect '\e[1;5C' vi-end-of-line
         } || {
-        bindkey -M menuselect '\e[5A' vi-backward-word
-        bindkey -M menuselect '\e[5B' vi-forward-word
-        bindkey -M menuselect '\e[5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[5C' vi-end-of-line
+        #bindkey -M menuselect '\e[5A' vi-backward-word
+        #bindkey -M menuselect '\e[5B' vi-forward-word
+        #bindkey -M menuselect '\e[5D' vi-beginning-of-line
+        #bindkey -M menuselect '\e[5C' vi-end-of-line
     }
 } || {
     distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
@@ -558,7 +559,6 @@ bindkey -M menuselect '^J' vi-forward-word
 bindkey -M menuselect '^H' vi-beginning-of-line
 bindkey -M menuselect '^L' vi-end-of-line
 
-bindkey -M menuselect '^@' accept-and-infer-next-history 
 bindkey -M menuselect '/' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
 bindkey -M menuselect '^M' .accept-line
@@ -589,10 +589,10 @@ bindkey -M viins '^G' what-cursor-position
 
 # RPROMPT shows vi mode
 zle-keymap-select() {
-    RPROMPT="%{%B%} `echo $$ $-`"
-    [[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
-    () { return $__prompt_status }
-    zle reset-prompt
+RPROMPT="%{%B%} `echo $$ $-`"
+[[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
+() { return $__prompt_status }
+zle reset-prompt
 }
 
 zle -N zle-keymap-select
