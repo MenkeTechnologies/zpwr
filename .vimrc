@@ -618,20 +618,20 @@ nnoremap <Tab> :SaveSession!<CR><CR>
 nnoremap <silent> <leader>n :n<CR>
 inoremap <F8> <ESC>:%s@@@g<Left><Left><Left>
 nnoremap <F8> :%s@@@g<Left><Left><Left>
-map <F1> :NERDTreeToggle<CR>
+nnoremap <F1> :NERDTreeToggle<CR>
 inoremap <F1> <ESC>:NERDTreeToggle<CR>
-map <F2> :UndotreeToggle<CR>
+nnoremap <F2> :UndotreeToggle<CR>
 inoremap <F2> <ESC>:UndotreeToggle<CR>
-map <F3> :TlistAddFiles *<CR>:TlistToggle<CR>
+nnoremap <F3> :TlistAddFiles *<CR>:TlistToggle<CR>
 inoremap <F3> <ESC>:TlistAddFiles *<CR>:TlistToggle<CR>
-map <F4> :MinimapToggle<CR>
+nnoremap <F4> :MinimapToggle<CR>
 inoremap <F4> <ESC>:MinimapToggle<CR>
-map <F5> :LOTRToggle<CR>
+nnoremap <F5> :LOTRToggle<CR>
 inoremap <F5> <ESC>:LOTRToggle<CR>
-map <F6> :SyntasticToggleMode<CR>
+nnoremap <F6> :SyntasticToggleMode<CR>
 inoremap <F6> <ESC>:SyntasticToggleMode<CR>
 
-map <F7> :TTags<CR>
+nnoremap <F7> :TTags<CR>
 inoremap <F7> <ESC>:TTags<CR>
 
 map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
