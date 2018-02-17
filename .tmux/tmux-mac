@@ -1,5 +1,5 @@
 unbind C-b
-set -g prefix C-a
+set -g prefix C-v
 
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 
