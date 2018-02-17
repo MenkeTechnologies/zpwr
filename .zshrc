@@ -560,8 +560,8 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
 #bind function arrow keus in menuselect mode
 bindkey -M menuselect '\e[5~' vi-backward-word
 bindkey -M menuselect '\e[6~' vi-forward-word
-bindkey -M menuselect '\e[4~' vi-beginning-of-line
-bindkey -M menuselect '\e[1~' vi-end-of-line
+bindkey -M menuselect '\e[1~' vi-beginning-of-line
+bindkey -M menuselect '\e[4~' vi-end-of-line
 
 bindkey -M menuselect '^K' vi-backward-word
 bindkey -M menuselect '^J' vi-forward-word
