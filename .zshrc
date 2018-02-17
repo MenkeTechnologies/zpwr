@@ -482,7 +482,7 @@ commandsThatModifyFiles=(rm to md touch chown chmod rmdir mv cp chflags chgrp ln
 
 for command in ${commandsThatModifyFiles[@]}; do
     regex="^sudo $command .*\$|^$command .*\$"
-    printf "$BUFFER" | egrep -q "$regex" && {
+    print "$BUFFER" | egrep -q "$regex" && {
         __WILL_CLEAR=true
 }
     done
