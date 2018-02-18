@@ -39,7 +39,7 @@ exec &> >(tee "$INSTALLER_DIR"/logfile.txt)
 # 16) powerline-mem-segment
 
 
-dependencies_ary=(vim tmux git wget lolcat cowsay cmatrix htop cmake bpython sl \
+dependencies_ary=(vim tmux git wget cowsay cmatrix htop cmake bpython sl \
     screenfetch fortune mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet ysql mongodb postgresql \
     jnettop iotop atop ctags speedtest-cli texinfo lsof weechat gradle ant maven tree mc ocaml groovy \
@@ -60,7 +60,7 @@ addDependenciesLinux(){
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(python3-dev python-dev ruby-devpython-pip python3-pip curl libffi-dev grc)
+    dependencies_ary+=(python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc)
 
 }
 
@@ -285,6 +285,10 @@ else
 
 fi
 prettyPrint "Done With Python Packages"
+
+
+prettyPrint "Installing Lolcat"
+gem install lolcat
 
 prettyPrint "Running Vundle"
 #run vundle install for ultisnips, supertab
