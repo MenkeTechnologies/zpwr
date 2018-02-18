@@ -426,7 +426,8 @@ zle .redisplay
     bindkey -M vicmd '\e^K' alternateQuotes
 
     bindkey -M viins '\e[5~' clipboard
-    bindkey -M vicmd '\e[5~' clipboard
+    bindkey -M viins '^B' clipboard
+    bindkey -M vicmd '^B' clipboard
 
     zle -N expand-aliases
 
