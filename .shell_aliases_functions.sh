@@ -201,7 +201,8 @@ alias j="execpy amazonSearch.py"
 alias shut="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias i="ipconfig getifaddr en0"
+alias i="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's/addr://'"
+
 alias pgrep='pgrep -l'
 #**********************************************************************
 #                           MARK:SHEL LSCRIPTS
