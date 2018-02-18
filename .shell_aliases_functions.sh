@@ -124,6 +124,7 @@ alias tree='tree -afC'
 alias ta="tmux attach"
 alias h="cd /usr/local"
 alias e="cd /etc"
+alias de="cd /dev"
 alias a="cd $HOME"
 alias k="pkill"
 alias ka="killall"
@@ -675,7 +676,7 @@ getrc(){
     } || {
         printf "No $HOME Dir!\n" >&2
     }
-}rename
+}
 
 rename(){
     search="$1"
