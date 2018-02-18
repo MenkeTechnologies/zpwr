@@ -675,7 +675,7 @@ getrc(){
     } || {
         printf "No $HOME Dir!\n" >&2
     }
-}
+}rename
 
 rename(){
     search="$1"

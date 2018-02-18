@@ -563,7 +563,7 @@ function Quoter(type)
 
 endfunction
 
-let blacklist=['md', 'sh','hs', 'pl']
+let blacklist=['md', 'zsh','sh','hs', 'pl']
 
 augroup indentGroup
     autocmd!
