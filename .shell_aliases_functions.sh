@@ -257,7 +257,6 @@ alias il="idea list"
 
         title="$1"
         msg="$2"
-
         echo "display notification \"$msg\" with title \"$title\"" | osascript 
     }
     db(){
