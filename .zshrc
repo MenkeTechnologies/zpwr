@@ -164,19 +164,19 @@ gitfunc () {
     printf "\x1b[0;34m"
 
 gitCommitAndPush "$BUFFER" && {
-    print -sr "$BUFFER"
-    zle .kill-whole-line
-    printf "\x1b[0m"	
-    zle .redisplay
+        print -sr "$BUFFER"
+        zle .kill-whole-line
+        printf "\x1b[0m"	
+        zle .redisplay
     } || {
-    printf "\x1b[0;1;31m"
-    print -sr "$BUFFER"
-    echo
-    printf "BLACKLISTED: $(pwd -P)\n" >&2
-    BUFFER=""
-    printf "\x1b[0m"	
-    zle .accept-line
-}
+        printf "\x1b[0;1;31m"
+        print -sr "$BUFFER"
+        echo
+        printf "BLACKLISTED: $(pwd -P)\n" >&2
+        BUFFER=""
+        printf "\x1b[0m"	
+        zle .accept-line
+    }
 }
 
 tutsUpdate() {
@@ -209,15 +209,15 @@ sshRegain() {
         else
             return 1
         fi
-    } || {
-        zle .kill-whole-line
-    ps -ef |  grep -v grep | grep -q 'tmux ' && {
-        BUFFER=tmm
-} || {
-    BUFFER=tmm_full
+        } || {
+            zle .kill-whole-line
+            ps -ef |  grep -v grep | grep -q 'tmux ' && {
+            BUFFER=tmm
+            } || {
+                BUFFER=tmm_full
+            }
+            zle .accept-line
         }
-        zle .accept-line
-    }
 }
 
 dbz() {
@@ -356,50 +356,50 @@ functions[_expand-aliases]=$BUFFER
     return 1
 }
 
-echo "$SEDARG" | grep -q ">" || {
-    printf "\x1b[0;1;31m"
-zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
-printf "\x1b[0m"
-return 1
+    echo "$SEDARG" | grep -q ">" || {
+        printf "\x1b[0;1;31m"
+        zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
+        printf "\x1b[0m"
+        return 1
     }
+
     orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
     replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
     SEDARG="s@$orig@$replace@g"
 
     echo "$BUFFER" | egrep -q "$orig" || {
         printf "\x1b[0;1;31m"
-    zle -R  "No Match." && read -k 1
-    printf "\x1b[0m"
-    return 1
-}
+        zle -R  "No Match." && read -k 1
+        printf "\x1b[0m"
+        return 1
+    }
 
-BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
-printf "\x1b[0m"
+    BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
+    printf "\x1b[0m"
 }
 
 clipboard(){
     [[ "$(uname)" == Darwin ]] && {
         print -sr "$BUFFER"
-    printf "$BUFFER" | pbcopy
-    echo
-    printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
-    echo
-    zle .redisplay
-}  || {
-
-    type xclip &> /dev/null && {
-    print -sr "$BUFFER"
-    printf "$BUFFER" | xclip -selection c -i
-    echo
-    printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
-    echo
-    zle .redisplay
-} || { 
-    echo
-printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
-echo
-zle .redisplay
-            }
+        printf "$BUFFER" | pbcopy
+        echo
+        printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
+        echo
+        zle .redisplay
+    }  || {
+        type xclip &> /dev/null && {
+        print -sr "$BUFFER"
+        printf "$BUFFER" | xclip -selection c -i
+        echo
+        printf  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!\n"
+        echo
+        zle .redisplay
+        } || { 
+            echo
+            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
+            echo
+            zle .redisplay
+        }
         }
     }
 
@@ -485,7 +485,7 @@ for command in ${commandsThatModifyFiles[@]}; do
     regex="^sudo $command .*\$|^$command .*\$"
     print "$BUFFER" | egrep -q "$regex" && {
         __WILL_CLEAR=true
-}
+    }
     done
 
     zle .accept-line 
@@ -530,32 +530,32 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
 
 [[ "$(uname)" == Darwin ]] && {
     PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
-echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
-    bindkey -M menuselect '\e[1;5A' vi-backward-word
-    bindkey -M menuselect '\e[1;5B' vi-forward-word
-    bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-    bindkey -M menuselect '\e[1;5C' vi-end-of-line
-} || {
-    bindkey -M menuselect '\e[5A' vi-backward-word
-    bindkey -M menuselect '\e[5B' vi-forward-word
-    bindkey -M menuselect '\e[5D' vi-beginning-of-line
-    bindkey -M menuselect '\e[5C' vi-end-of-line
+    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
+        bindkey -M menuselect '\e[1;5A' vi-backward-word
+        bindkey -M menuselect '\e[1;5B' vi-forward-word
+        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+        bindkey -M menuselect '\e[1;5C' vi-end-of-line
+    } || {
+        bindkey -M menuselect '\e[5A' vi-backward-word
+        bindkey -M menuselect '\e[5B' vi-forward-word
+        bindkey -M menuselect '\e[5D' vi-beginning-of-line
+        bindkey -M menuselect '\e[5C' vi-end-of-line
     }
 } || {
     distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
-if [[ "$distro" == raspbian ]]; then
-    :
-#bindkey -M menuselect '\eOA' vi-backward-word
-#bindkey -M menuselect '\eOB' vi-forward-word
-#bindkey -M menuselect '\eOD' vi-beginning-of-line
-#bindkey -M menuselect '\eOC' vi-end-of-line
-else
-    bindkey -M menuselect '\e[1;5A' vi-backward-word
-    bindkey -M menuselect '\e[1;5B' vi-forward-word
-    bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-    bindkey -M menuselect '\e[1;5C' vi-end-of-line
-fi
+    if [[ "$distro" == raspbian ]]; then
+        :
+    #bindkey -M menuselect '\eOA' vi-backward-word
+    #bindkey -M menuselect '\eOB' vi-forward-word
+    #bindkey -M menuselect '\eOD' vi-beginning-of-line
+    #bindkey -M menuselect '\eOC' vi-end-of-line
+    else
+        bindkey -M menuselect '\e[1;5A' vi-backward-word
+        bindkey -M menuselect '\e[1;5B' vi-forward-word
+        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+        bindkey -M menuselect '\e[1;5C' vi-end-of-line
+    fi
 
 }
 
@@ -600,10 +600,10 @@ bindkey -M viins '^G' what-cursor-position
 
 # RPROMPT shows vi mode
 zle-keymap-select() {
-RPROMPT="%{%B%} `echo $$ $-`"
-[[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
-() { return $__prompt_status }
-zle reset-prompt
+    RPROMPT="%{%B%} `echo $$ $-`"
+    [[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
+    () { return $__prompt_status }
+    zle reset-prompt
 }
 
 zle -N zle-keymap-select
