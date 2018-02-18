@@ -65,7 +65,7 @@ addDependenciesDebian(){
 }
 
 addDependenciesRedHat(){
-    dependencies_ary+=(libpcap-devel python-devel python3-devel curses-devel automake the_silver_searcher)
+    dependencies_ary+=(libpcap-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++)
 }
 
 addDependenciesMac(){
