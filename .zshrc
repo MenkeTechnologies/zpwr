@@ -400,10 +400,12 @@ clipboard(){
             echo
             zle .redisplay
         }
-        }
     }
+}
 
-    surround(){
+#automatically add closing punct
+
+surround(){
 
     case "$KEYS" in
         '"')
@@ -411,6 +413,9 @@ clipboard(){
             ;;
         '`')
         BUFFER="$LBUFFER\`\`$RBUFFER"
+            ;;
+        "'")
+            BUFFER="$LBUFFER''$RBUFFER"
             ;;
         '{')
         BUFFER="$LBUFFER{}$RBUFFER"
@@ -421,75 +426,110 @@ clipboard(){
         "(")
         BUFFER="$LBUFFER()$RBUFFER"
             ;;
-        "'")
-            BUFFER="$LBUFFER''$RBUFFER"
-        ;;
-    *) say not match
+    *) 
         ;;
     esac
-        zle .vi-forward-char
-    }
-    zle -N surround
+    zle .vi-forward-char
+}
 
-    #vim  mode
-    bindkey -v
 
-    bindkey -M viins '"' surround
-    bindkey -M viins "'" surround
-    bindkey -M viins '`' surround
-    bindkey -M viins "(" surround
-    bindkey -M viins "[" surround
-    bindkey -M viins "{" surround
+#delete the next matching closing punct
+deleteMatching(){
+    x=$CURSOR
 
-    bindkey -M viins '^r' redo
-    bindkey -M vicmd '^r' redo
-    bindkey -M viins '^z' undo
-    bindkey -M vicmd '^z' undo
+    char=${BUFFER[$CURSOR]}
+    echo char is $char >> $LOGFILE
 
-    zle -N basicSedSub
-    bindkey -M viins '^P' basicSedSub
-    bindkey -M vicmd '^P' basicSedSub
+    case "$char" in
+        '"')
+            BUFFER="$LBUFFER${RBUFFER/$char/}"
+            ;;
+        '`')
+            BUFFER="$LBUFFER${RBUFFER/$char/}"
+            ;;
+        "'")
+            BUFFER="$LBUFFER${RBUFFER/$char/}"
+            ;;
+        '{')
+            BUFFER="$LBUFFER${RBUFFER/}/}"
+            ;;
+        "[")
+            BUFFER="$LBUFFER${RBUFFER/]/}"
+            ;;
+        "(")
+          BUFFER="$LBUFFER${RBUFFER/)/}"
+            ;;
+        *) 
+            ;;
+    esac
 
-    zle -N changeQuotes
-    zle -N alternateQuotes
-    zle -N clipboard
+    zle .vi-backward-delete-char
 
-    bindkey -M viins '^K' changeQuotes
-    bindkey -M vicmd '^K' changeQuotes
+}
 
-    bindkey -M viins '\e^K' alternateQuotes
-    bindkey -M vicmd '\e^K' alternateQuotes
+zle -N surround
+zle -N deleteMatching
 
-    bindkey -M viins '\e[5~' clipboard
-    bindkey -M viins '^B' clipboard
-    bindkey -M vicmd '^B' clipboard
+#vim  mode
+bindkey -v
 
-    zle -N expand-aliases
+bindkey -M viins '"' surround
+bindkey -M viins "'" surround
+bindkey -M viins '`' surround
+bindkey -M viins "(" surround
+bindkey -M viins "[" surround
+bindkey -M viins "{" surround
+bindkey -M viins "^?" deleteMatching
 
-    bindkey '\e^E' expand-aliases
+bindkey -M viins '^r' redo
+bindkey -M vicmd '^r' redo
+bindkey -M viins '^z' undo
+bindkey -M vicmd '^z' undo
 
-    zle -N gitfunc
-    zle -N updater
-    zle -N sub
-    zle -N dbz
-    zle -N sshRegain
-    zle -N tutsUpdate
-    zle -N subLine
+zle -N basicSedSub
+bindkey -M viins '^P' basicSedSub
+bindkey -M vicmd '^P' basicSedSub
 
-    bindkey '\e[1;2D' sub
-    #press both escape and control f then oo
-    bindkey '\e^f' sub
-    #bound to control spacebar
-    bindkey -M vicmd '^@' sshRegain
-    bindkey -M viins '^@' sshRegain
+zle -N changeQuotes
+zle -N alternateQuotes
+zle -N clipboard
 
-    #F1 key
-    bindkey '\eOP' updater
-    #F2 key
-    bindkey '\eOQ' sub
+bindkey -M viins '^K' changeQuotes
+bindkey -M vicmd '^K' changeQuotes
 
-    [[ "$(uname)" == Darwin ]] && {
-        #Ctrl plus arrow keys
+bindkey -M viins '\e^K' alternateQuotes
+bindkey -M vicmd '\e^K' alternateQuotes
+
+bindkey -M viins '\e[5~' clipboard
+bindkey -M viins '^B' clipboard
+bindkey -M vicmd '^B' clipboard
+
+zle -N expand-aliases
+
+bindkey '\e^E' expand-aliases
+
+zle -N gitfunc
+zle -N updater
+zle -N sub
+zle -N dbz
+zle -N sshRegain
+zle -N tutsUpdate
+zle -N subLine
+
+bindkey '\e[1;2D' sub
+#press both escape and control f then oo
+bindkey '\e^f' sub
+#bound to control spacebar
+bindkey -M vicmd '^@' sshRegain
+bindkey -M viins '^@' sshRegain
+
+#F1 key
+bindkey '\eOP' updater
+#F2 key
+bindkey '\eOQ' sub
+
+[[ "$(uname)" == Darwin ]] && {
+    #Ctrl plus arrow keys
     bindkey '\e[1;5A' gitfunc
     bindkey '\e[1;5B' updater
     bindkey '\e[1;5C' tutsUpdate
@@ -954,3 +994,8 @@ colortest(){
 #**************************************************************
 unset GROOVY_HOME # when set this messes up classpath
 #}}}***********************************************************
+#
+#
+#
+#
+#
