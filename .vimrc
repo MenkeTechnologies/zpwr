@@ -274,6 +274,7 @@ vnoremap <silent> <C-I> :<C-C>:SaveSession<CR>
 inoremap <silent> <C-I> <C-[>:SaveSession<CR>a
 
 nnoremap <silent> <leader>q :qa!<CR>
+nnoremap <silent> <leader>c :wq!<CR>
 nnoremap <silent> <leader>e :q!<CR>
 nnoremap <silent> <leader>w :w!<CR>
 nnoremap <silent> <leader>s :vs<CR>
@@ -655,11 +656,11 @@ xmap <C-Up> :m '< -- <CR> gv
 
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
-sunmap w
-sunmap b
+"sunmap w
+"sunmap b
 "TODO = combine CamelCaseMotion and repmo
-:noremap <expr> W repmo#SelfKey('W', 'B')|sunmap W
-:noremap <expr> B repmo#SelfKey('B', 'W')|sunmap B
+:noremap <expr> W repmo#SelfKey('w', 'b')|sunmap w
+:noremap <expr> B repmo#SelfKey('b', 'w')|sunmap b
 :noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
 :noremap <expr> ge repmo#SelfKey('ge', 'e')|sunmap ge
 :noremap <expr> ( repmo#SelfKey('(', ')')|sunmap (
