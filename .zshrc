@@ -403,8 +403,43 @@ clipboard(){
         }
     }
 
+    surround(){
+
+    case "$KEYS" in
+        '"')
+            BUFFER="$LBUFFER\"\"$RBUFFER"
+            ;;
+        '`')
+        BUFFER="$LBUFFER\`\`$RBUFFER"
+            ;;
+        '{')
+        BUFFER="$LBUFFER{}$RBUFFER"
+            ;;
+        "[")
+        BUFFER="$LBUFFER[]$RBUFFER"
+            ;;
+        "(")
+        BUFFER="$LBUFFER()$RBUFFER"
+            ;;
+        "'")
+            BUFFER="$LBUFFER''$RBUFFER"
+        ;;
+    *) say not match
+        ;;
+    esac
+        zle .vi-forward-char
+    }
+    zle -N surround
+
     #vim  mode
     bindkey -v
+
+    bindkey -M viins '"' surround
+    bindkey -M viins "'" surround
+    bindkey -M viins '`' surround
+    bindkey -M viins "(" surround
+    bindkey -M viins "[" surround
+    bindkey -M viins "{" surround
 
     bindkey -M viins '^r' redo
     bindkey -M vicmd '^r' redo
