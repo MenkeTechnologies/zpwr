@@ -652,10 +652,15 @@ xmap <C-Up> :m '< -- <CR> gv
 :noremap <expr> t repmo#ZapKey('t')|sunmap t
 :noremap <expr> T repmo#ZapKey('T')|sunmap T
 
-:noremap <expr> w repmo#SelfKey('w', 'b')|sunmap w
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+sunmap w
+sunmap b
+"TODO = combine CamelCaseMotion and repmo
+":noremap <expr> w repmo#SelfKey('w', 'b')|sunmap w
+":noremap <expr> b repmo#SelfKey('b', 'w')|sunmap b
 :noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
 :noremap <expr> ge repmo#SelfKey('ge', 'e')|sunmap ge
-:noremap <expr> b repmo#SelfKey('b', 'w')|sunmap b
 :noremap <expr> ( repmo#SelfKey('(', ')')|sunmap (
 :noremap <expr> ) repmo#SelfKey(')', '(')|sunmap )
 
