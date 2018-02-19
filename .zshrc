@@ -413,7 +413,7 @@ surround(){
     echo char is $char >> $LOGFILE
     echo nextChar is $nextChar >> $LOGFILE
 
-    count=$(echo "$BUFFER" | grep -c "$KEYS")
+    count=$(echo "$BUFFER" | fgrep -o "$KEYS" | wc -l)
 
     #TODO = only if next char is space or end of line then insert quotes
     case "$nextChar" in
@@ -427,20 +427,32 @@ surround(){
     esac
 
 
-    if (( $count % 2 == 1 )); then
-            BUFFER="$LBUFFER$KEYS$RBUFFER"
-            zle .vi-forward-char
-            return 0
-    fi
-
     case "$KEYS" in
         '"')
+            if (( $count % 2 == 1 )); then
+                    BUFFER="$LBUFFER$KEYS$RBUFFER"
+                    echo odd Char is $count >> $LOGFILE
+                    zle .vi-forward-char
+                    return 0
+            fi
             BUFFER="$LBUFFER\"\"$RBUFFER"
             ;;
         '`')
-        BUFFER="$LBUFFER\`\`$RBUFFER"
+            if (( $count % 2 == 1 )); then
+                    BUFFER="$LBUFFER$KEYS$RBUFFER"
+                    echo odd Char is $count >> $LOGFILE
+                    zle .vi-forward-char
+                    return 0
+            fi
+            BUFFER="$LBUFFER\`\`$RBUFFER"
             ;;
         "'")
+            if (( $count % 2 == 1 )); then
+                    BUFFER="$LBUFFER$KEYS$RBUFFER"
+                    echo odd Char is $count >> $LOGFILE
+                    zle .vi-forward-char
+                    return 0
+            fi
             BUFFER="$LBUFFER''$RBUFFER"
             ;;
         '{')
