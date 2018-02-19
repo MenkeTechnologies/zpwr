@@ -18,6 +18,37 @@ prettyPrint(){
 
 [[ ! -z "$1" ]] && commitMessage="$1" || commitMessage="update"
 
+#{{{                    MARK:installer
+#**************************************************************
+prettyPrint "Copying scripts to custom Installer Repo"
+rm -rf "$SCRIPTS/customTerminalInstaller/scripts/"*
+cp "$SCRIPTS"/*.sh "$installerDir/scripts"
+cp -R "$SCRIPTS"/macOnly "$installerDir/scripts"
+cp "$HOME/.vimrc" "$installerDir"
+cp "$HOME/.tmux.conf" "$installerDir"
+cp -R "$HOME/.tmux/"* "$installerDir/.tmux"
+cp "$HOME/.shell_aliases_functions.sh" "$installerDir"
+cp "$HOME/.zshrc" "$installerDir"
+cp "$HOME/.rpitokens.sh" "$installerDir"
+cp "$HOME/conf.gls" "$installerDir"
+cp "$HOME/conf.df" "$installerDir"
+cp "$HOME/conf.mount" "$installerDir"
+cp "$HOME/.ideavimrc" "$installerDir"
+
+prettyPrint "Updating vim plugins list"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
+prettyPrint "Updating zsh plugins list"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* > "$installerDir/.zshplugins"
+
+cd "$installerDir" || exit 1
+git add .
+git commit -m "$commitMessage"
+prettyPrint "Status"
+git status
+prettyPrint "Pushing..."
+git push
+#}}}***********************************************************
+
 #{{{                    MARK:tutorialDir
 #**************************************************************
 prettyPrint "Copying zshrc"
@@ -120,33 +151,3 @@ prettyPrint "Pushing..."
 git push
 #}}}***********************************************************
 
-#{{{                    MARK:installer
-#**************************************************************
-prettyPrint "Copying scripts to custom Installer Repo"
-rm -rf "$SCRIPTS/customTerminalInstaller/scripts/"*
-cp "$SCRIPTS"/*.sh "$installerDir/scripts"
-cp -R "$SCRIPTS"/macOnly "$installerDir/scripts"
-cp "$HOME/.vimrc" "$installerDir"
-cp "$HOME/.tmux.conf" "$installerDir"
-cp -R "$HOME/.tmux/"* "$installerDir/.tmux"
-cp "$HOME/.shell_aliases_functions.sh" "$installerDir"
-cp "$HOME/.zshrc" "$installerDir"
-cp "$HOME/.rpitokens.sh" "$installerDir"
-cp "$HOME/conf.gls" "$installerDir"
-cp "$HOME/conf.df" "$installerDir"
-cp "$HOME/conf.mount" "$installerDir"
-cp "$HOME/.ideavimrc" "$installerDir"
-
-prettyPrint "Updating vim plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
-prettyPrint "Updating zsh plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* > "$installerDir/.zshplugins"
-
-cd "$installerDir" || exit 1
-git add .
-git commit -m "$commitMessage"
-prettyPrint "Status"
-git status
-prettyPrint "Pushing..."
-git push
-#}}}***********************************************************
