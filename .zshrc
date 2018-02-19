@@ -541,7 +541,7 @@ precmd(){
     #leaky simonoff zsh theme
     printf "\x1b[0m"
     #lose normal mode
-    RPROMPT="%{%B%} `echo $$ $-`"
+    RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
 }
 
 rationalize-dot (){
@@ -635,8 +635,8 @@ bindkey -M viins '^G' what-cursor-position
 
 # RPROMPT shows vi mode
 zle-keymap-select() {
-    RPROMPT="%{%B%} `echo $$ $-`"
-    [[ $KEYMAP = vicmd ]] && RPROMPT="%{%B%}-<<NORMAL>>-$RPROMPT"
+    RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
+    [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>-%B%F{blue}$RPROMPT"
     () { return $__prompt_status }
     zle reset-prompt
 }
