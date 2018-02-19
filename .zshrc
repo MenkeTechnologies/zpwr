@@ -421,7 +421,7 @@ surround(){
         BUFFER="$LBUFFER{}$RBUFFER"
             ;;
         "[")
-        BUFFER="$LBUFFER[]$RBUFFER"
+        BUFFER="$LBUFFER"'[]'"$RBUFFER"
             ;;
         "(")
         BUFFER="$LBUFFER()$RBUFFER"
@@ -451,10 +451,10 @@ deleteMatching(){
             BUFFER="$LBUFFER${RBUFFER/$char/}"
             ;;
         '{')
-            BUFFER="$LBUFFER${RBUFFER/}/}"
+            BUFFER="$LBUFFER${RBUFFER/\}/}"
             ;;
         "[")
-            BUFFER="$LBUFFER${RBUFFER/]/}"
+            BUFFER="$LBUFFER${RBUFFER/\]/}"
             ;;
         "(")
           BUFFER="$LBUFFER${RBUFFER/)/}"
