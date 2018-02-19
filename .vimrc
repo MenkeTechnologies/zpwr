@@ -28,7 +28,7 @@ filetype plugin indent on
 ""{{{                    MARK:Settings
 ""**************************************************************
 "backslash replaced by comma
-let mapleader = ','
+let mapleader = "\<SPACE>"
 
 set nocompatible              " be iMproved, required
 "for YouCompleteMe doc window to open at bottom
@@ -233,6 +233,15 @@ endfunction
 "Transpose Chars Like Emacs
 nnoremap <silent> <C-T> xp
 inoremap <c-t> i<bs><c-o>:silent! undojoin \| normal! xp<cr>
+
+"nnoremap <silent><Plug>DownChar + :call repeat#set("\<Plug>DownChar")<CR>
+"nmap + <Plug>DownChar
+
+"nnoremap <silent><Plug>UpChar - :call repeat#set("\<Plug>UpChar")<CR>
+"nmap - <Plug>UpChar
+
+nnoremap <silent><Plug>RepeatEx @: :call repeat#set("\<Plug>RepeatEx")<CR>
+nmap @: <Plug>RepeatEx
 
 "Transpose Words Like Emacs
 nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
@@ -637,12 +646,32 @@ map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 xmap <C-Down> :m '> + <CR> gv
 xmap <C-Up> :m '< -- <CR> gv
 
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-map <silent> e <Plug>CamelCaseMotion_e
-sunmap w
-sunmap b
-sunmap e
+" map a motion and its reverse motion:
+:noremap <expr> f repmo#ZapKey('f')|sunmap f
+:noremap <expr> F repmo#ZapKey('F')|sunmap F
+:noremap <expr> t repmo#ZapKey('t')|sunmap t
+:noremap <expr> T repmo#ZapKey('T')|sunmap T
+
+:noremap <expr> w repmo#SelfKey('w', 'b')|sunmap w
+:noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
+:noremap <expr> ge repmo#SelfKey('ge', 'e')|sunmap ge
+:noremap <expr> b repmo#SelfKey('b', 'w')|sunmap b
+:noremap <expr>  repmo#SelfKey('', 'w')|sunmap 
+:noremap <expr> b repmo#SelfKey('b', 'w')|sunmap b
+
+:noremap <expr> j repmo#SelfKey('j', 'k')|sunmap j
+:noremap <expr> k repmo#SelfKey('k', 'j')|sunmap k
+:noremap <expr> h repmo#SelfKey('h', 'l')|sunmap h
+:noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
+
+" if you like `:noremap j gj', you can keep that:
+:map <expr> j repmo#Key('gj', 'gk')|sunmap j
+:map <expr> k repmo#Key('gk', 'gj')|sunmap k
+
+" repeat the last [count]motion or the last zap-key:
+:map <expr> ; repmo#LastKey(';')|sunmap ;
+:map <expr> , repmo#LastRevKey(',')|sunmap ,
+
 set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
