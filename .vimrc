@@ -656,8 +656,8 @@ xmap <C-Up> :m '< -- <CR> gv
 :noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
 :noremap <expr> ge repmo#SelfKey('ge', 'e')|sunmap ge
 :noremap <expr> b repmo#SelfKey('b', 'w')|sunmap b
-:noremap <expr>  repmo#SelfKey('', 'w')|sunmap 
-:noremap <expr> b repmo#SelfKey('b', 'w')|sunmap b
+:noremap <expr> ( repmo#SelfKey('(', ')')|sunmap (
+:noremap <expr> ) repmo#SelfKey(')', '(')|sunmap )
 
 :noremap <expr> j repmo#SelfKey('j', 'k')|sunmap j
 :noremap <expr> k repmo#SelfKey('k', 'j')|sunmap k
