@@ -12,6 +12,7 @@ Shougo/neobundle.vim
 scrooloose/nerdcommenter
 scrooloose/nerdtree
 luochen1990/rainbow
+Houl/repmo-vim
 ervandew/supertab
 vim-syntastic/syntastic
 vim-scripts/tagexplorer.vim
@@ -48,5 +49,6 @@ jpalardy/vim-slime
 honza/vim-snippets
 mhinz/vim-startify
 tpope/vim-surround
+tpope/vim-unimpaired
 benmills/vimux
 gcmt/wildfire.vim
