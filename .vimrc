@@ -664,11 +664,9 @@ xmap <C-Up> :m '< -- <CR> gv
 :noremap <expr> h repmo#SelfKey('h', 'l')|sunmap h
 :noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
 
-" if you like `:noremap j gj', you can keep that:
 :map <expr> j repmo#Key('gj', 'gk')|sunmap j
 :map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
-" repeat the last [count]motion or the last zap-key:
 :map <expr> ; repmo#LastKey(';')|sunmap ;
 :map <expr> , repmo#LastRevKey(',')|sunmap ,
 
@@ -695,16 +693,18 @@ function TmuxRepeatGeneric()
     exe "normal! zz"
 endfunction
 
-" get rid of plugin mapping
-autocmd VimEnter * iunmap <C-F>
+" reassing readline plugin mapping
+autocmd VimEnter * inoremap <silent> <C-F> <ESC>:w<CR>:call TmuxRepeat()<CR>a
 
 nnoremap <silent> <C-F> :w<CR>:call TmuxRepeat()<CR>
+
 vnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
 nnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
+
 "vnoremap <silent> y y`>
 "nnoremap <silent> p p`]
 
-"{{{                    MARK:C-G mappings
+"{{{                    MARK:C-D mappings
 "**************************************************************
 nnoremap <silent> <C-D>d :update<CR>
 vnoremap <silent> <C-D>d :<C-C>:update<CR>
