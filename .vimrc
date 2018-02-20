@@ -663,6 +663,8 @@ map <silent> b <Plug>CamelCaseMotion_b
 :noremap <expr> B repmo#SelfKey('b', 'w')|sunmap b
 :noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
 :noremap <expr> ge repmo#SelfKey('ge', 'e')|sunmap ge
+:noremap <expr> + repmo#SelfKey('+', '-')|sunmap +
+:noremap <expr> - repmo#SelfKey('-', '+')|sunmap -
 :noremap <expr> ( repmo#SelfKey('(', ')')|sunmap (
 :noremap <expr> ) repmo#SelfKey(')', '(')|sunmap )
 
