@@ -85,6 +85,9 @@ colours=blue
 regexp=\s(staff)\s
 colours=green
 -
+regexp=jmenke\s+(jmenke)\s
+colours=green
+-
 regexp=pi\s+(pi)\s
 colours=green
 -
