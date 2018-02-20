@@ -949,34 +949,36 @@ if [[ "$(uname)" = Darwin ]]; then
         clear
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
-        [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
-            [[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
-            bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-            "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
-    } || {
+            [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
+                [[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
+                bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+                "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
+            } || {
         bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
         "$(hostname)" | ponysay -W 100
-}
+        }
     }
 }
-printf "\e[0m"
-# type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
-listNoClear
-        else
-            clearList
-        fi
-    else
-        distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
-
-        if [[ "$UID" != "0" ]]; then
-            if [[ "$distro" == raspbian ]]; then
-                builtin cd "$D"
-                type ponysay 1>/dev/null 2>&1 && {
-                    bash "$HOME/motd.sh" | ponysay -W 120 
-            } || bash "$HOME/motd.sh"
-        fi
+        printf "\e[0m"
+        # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
         listNoClear
     else
+        #root on unix
+        clearList
+    fi
+else
+    if [[ "$UID" != "0" ]]; then
+        if [[ "$distroName" == raspbian ]]; then
+            builtin cd "$D"
+            type ponysay 1>/dev/null 2>&1 && {
+                bash "$HOME/motd.sh" | ponysay -W 120 
+            } || bash "$HOME/motd.sh"
+        elif [[ "$distro" == fedora ]];then
+            figlet -f block "$(fortune)" | ponysay -W 120
+        fi
+    listNoClear
+    else
+        #root on linux
         clearList
     fi
 fi
