@@ -905,7 +905,7 @@ zstyle -e ':completion:*:files' list-colors "$COMMON_ZSTYLE_OPTS"
 zstyle -e ':completion:*:directories' list-colors "$COMMON_ZSTYLE_OPTS"
 zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
 
-zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,@#-]##) #([<)(>]#) #([a-zA-Z0-9+.,@3-]#)*=1;30=1;31=34=1;31=34'
+zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,@3-]#)*=1;30=1;31=34=1;31=34'
 
 zstyle ':completion:*' group-name ''
 
@@ -950,7 +950,7 @@ if [[ "$(uname)" = Darwin ]]; then
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
             [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
-                [[ -f "$SCRIPTS/macOnly/splitReg.sh" ]] && {
+                [[ -f "$SCRIPTS/splitReg.sh" ]] && {
                 bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
                 "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
             } || {
