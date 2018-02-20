@@ -975,7 +975,7 @@ else
             } || bash "$HOME/motd.sh"
         elif [[ "$distro" == fedora ]];then
             builtin cd "$D"
-            figlet -f block "$(fortune)" | ponysay -W 120
+            figlet -f block "$(fortune)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
         fi
     listNoClear
     else
