@@ -728,7 +728,7 @@ bindkey -M viins '^G' what-cursor-position
 # RPROMPT shows vi mode
 zle-keymap-select() {
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
-    [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>-%B%F{blue}$RPROMPT"
+    [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
     () { return $__prompt_status }
     zle reset-prompt
 }
