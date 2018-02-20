@@ -1,0 +1,21 @@
+
+selectp -t 0 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 2 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 4 # select the first (0) pane 
+
+splitw -v -p 50  # split it into two halves
+selectp -t 4 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 6 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
