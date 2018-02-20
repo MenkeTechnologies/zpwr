@@ -174,7 +174,7 @@ updatePI(){
     ssh -x "$hostname" "$(< $SCRIPTS/rpiSoftwareUpdater.sh)"
 }
 
-arrayOfPI=(r:apt r2:apt r3:yum)
+arrayOfPI=(r1:apt r2:apt r3:yum)
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file
 for pi in "${arrayOfPI[@]}"; do

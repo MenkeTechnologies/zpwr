@@ -310,6 +310,7 @@ scnew(){
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
 p(){
+    [[ -z $1 ]] && ps -ef
     out="$(ps -ef)"
     for cmd in "$@" ; do
         prettyPrint "SEARCH TERM: $cmd"
