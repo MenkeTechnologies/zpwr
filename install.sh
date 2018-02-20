@@ -40,7 +40,7 @@ exec &> >(tee "$INSTALLER_DIR"/logfile.txt)
 
 
 dependencies_ary=(vim tmux git wget cowsay cmatrix htop cmake bpython sl mutt \
-    Screenfetch fortune mailutils ccze htop figlet zsh docker erlang elixir links \
+    Screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet ysql mongodb postgresql \
     jnettop iotop atop ctags speedtest-cli texinfo lsof weechat gradle ant maven tree mc ocaml groovy \
     slurm bmon \
@@ -61,16 +61,16 @@ addDependenciesLinux(){
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc)
+    dependencies_ary+=(fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc)
 
 }
 
 addDependenciesRedHat(){
-    dependencies_ary+=(libpcap-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++)
+    dependencies_ary+=('fortune-mod.*' libpcap-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++)
 }
 
 addDependenciesMac(){
-    dependencies_ary+=(the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace \
+    dependencies_ary+=(fortune the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace \
     aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go\
     )
 }
