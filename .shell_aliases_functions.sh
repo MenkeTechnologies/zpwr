@@ -666,7 +666,7 @@ getrc(){
         cp grc.zsh "$HOME"
 
         cp -R .tmux/* "$HOME/.tmux"
-        cp f scripts/* "$SCRIPTS"
+        cp -f scripts/* "$SCRIPTS"
 
         cd ..
         rm -rf "$REPO_NAME"
