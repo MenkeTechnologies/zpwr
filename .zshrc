@@ -974,6 +974,7 @@ else
                 bash "$HOME/motd.sh" | ponysay -W 120 
             } || bash "$HOME/motd.sh"
         elif [[ "$distro" == fedora ]];then
+            builtin cd "$D"
             figlet -f block "$(fortune)" | ponysay -W 120
         fi
     listNoClear
