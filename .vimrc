@@ -726,8 +726,8 @@ nnoremap <silent> <C-D>d :update<CR>
 vnoremap <silent> <C-D>d :<C-C>:update<CR>
 inoremap <silent> <C-D>d <C-[>:update<CR>a
 
-nnoremap <silent> <C-D>f :w<CR>:call TmuxRepeatGeneric()<CR>
-inoremap <silent> <C-D>f <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
+nnoremap <silent> <C-D>v :w<CR>:call TmuxRepeatGeneric()<CR>
+inoremap <silent> <C-D>v <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
 inoremap <silent> <C-D>g <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 nnoremap <silent> <C-D>g :silent !open -t %:p:h<CR>:redraw!<CR>
 
