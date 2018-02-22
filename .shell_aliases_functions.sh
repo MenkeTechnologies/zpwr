@@ -199,7 +199,7 @@ alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
 alias mapit="execpy mapIt.py"
-alias j="execpy amazonSearch.py"
+alias ,="execpy amazonSearch.py"
 alias shut="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
@@ -296,7 +296,7 @@ cgh(){
     curl -s https://github.com/$user | grep 'contributions' | head -1 | tr -s ' '
 }
 
-,(){
+j(){
 for file;do
     dirname="$(dirname $file)"
     [[ "$dirname" != . ]] && mkdir -p "$dirname"
