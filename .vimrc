@@ -287,8 +287,6 @@ nnoremap <silent> <leader>t :tabnew<CR>
 
 onoremap <silent> i# ?#<CR>jV/#<CR>kc
 
-vnoremap Y y`>
-nnoremap Y yy`>
 
 fun GoToNextMarker(searchTerm, backwardsSearch)
     let oldwrap = &wrapscan
@@ -718,7 +716,9 @@ vnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
 nnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
 
 "vnoremap <silent> y y`>
-"nnoremap <silent> p p`]
+"nnoremap <silent> gp p`]
+vnoremap Y y`>j
+nnoremap Y yy`>
 
 "{{{                    MARK:C-D mappings
 "**************************************************************
