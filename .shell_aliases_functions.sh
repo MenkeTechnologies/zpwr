@@ -132,18 +132,18 @@ alias k="pkill"
 alias ka="killall"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
-#Darwin specific aliases
 
 if [[ -f /usr/local/share/grc/conf.gls ]];then
     alias lr='grc -c /usr/local/share/grc/conf.gls gls -iAlhFR --color=always'
-alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
+    alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
     alias ifconfig='grc --colour=auto /sbin/ifconfig'
 elif [[ -f /usr/share/grc/conf.gls ]];then
     alias lr='grc -c /usr/share/grc/conf.gls ls -iAlhFR --color=always'
-alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
+    alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
 fi
 if [[ "$(uname)" == "Darwin" ]]; then
-    #statements
+    #Darwin specific aliases
+    alias p_refresh="pio -f -c clion init --ide clion "
     alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
     alias cpu="top -o cpu"
     alias mem="top -o mem"
@@ -253,7 +253,6 @@ alias il="idea list"
         python3 "$PYSCRIPTS/ssh_runner.py" "$@"
     }
 
-
     nn(){
         [[ -z "$2" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
 
@@ -261,9 +260,11 @@ alias il="idea list"
         msg="$2"
         echo "display notification \"$msg\" with title \"$title\"" | osascript 
     }
+
     db(){
         python3 "$PYSCRIPTS/loginDBChrome.py"
     }
+
     db2(){
         python3 "$PYSCRIPTS/logIntoMyDB.py"
     }
@@ -301,6 +302,7 @@ jd(){
             mkdir -p "$dir"
         done
 }
+
 j(){
 for file;do
     dirname="$(dirname $file)"
@@ -314,6 +316,7 @@ scnew(){
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
+
 p(){
     [[ -z $1 ]] && ps -ef
     out="$(ps -ef)"
@@ -325,7 +328,6 @@ p(){
 }
 
 b(){
-
     if [[ $1 == -s ]]; then
         sleepTime=$2
         shift 2
@@ -339,7 +341,6 @@ b(){
         fi
     done
 }
-
 
 suc(){
     subl "$SCRIPTS"
@@ -420,6 +421,7 @@ clearList () {
             clear && eval "$ls_command"
         fi
 }
+
 listNoClear () {
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
@@ -437,9 +439,11 @@ listNoClear () {
         }
     fi
 }
+
 animate(){
     bash $SCRIPTS/animation.sh
 }
+
 blocksToSize(){
     read input
     local bytes=$(( input * 512 ))
@@ -461,21 +465,25 @@ humanReadable(){
 f(){
     cd "$1"
 }
+
 execpy(){
     script="$1"
     shift
     python3 $PYSCRIPTS/"$script" "$@"
 
 }
+
 search(){
     [[ -z $2 ]] && grep -iRnC 5 "$1" * || grep -iRnC 5 "$1" "$2"
 
 }
+
 cd(){
     #builtin is necessary here to distinguish bt function name and builtin cd command
     #don't want to recursively call this function
     builtin cd "$@" && clearList
 }
+
 gitCommitAndPush(){
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
@@ -585,7 +593,6 @@ gcl() {
     cd "$dir_name"
 }
 
-alias p_refresh="pio -f -c clion init --ide clion "
 
 ino(){
     dir="$1"
