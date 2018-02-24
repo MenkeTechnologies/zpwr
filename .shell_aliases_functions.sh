@@ -8,8 +8,6 @@ exists(){
 
 #{{{                    MARK:Global Vars
 #**************************************************************
-declare -a BLACKLISTED_DIRECTORIES
-BLACKLISTED_DIRECTORIES=( "$HOME/IdeaProjects/reallingua-web" )
 export TMUX_PREFIX="x"
 export TMUX_REMOTE_PREFIX="b"
 #}}}***********************************************************
