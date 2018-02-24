@@ -165,8 +165,9 @@ updatePI(){
         yes | sudo apt-get autoclean'
     }
     
-    [[ "$manager" == yum ]] &&  {
-        ssh -x "$hostname" 'yes | sudo yum update'
+    [[ "$manager" == dnf ]] &&  {
+        ssh -x "$hostname" 'yes | sudo dnf upgrade 
+        yes | sudo dnf clean all'
     }
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
@@ -174,7 +175,7 @@ updatePI(){
     ssh -x "$hostname" "$(< $SCRIPTS/rpiSoftwareUpdater.sh)"
 }
 
-arrayOfPI=(r1:apt r2:apt r3:yum)
+arrayOfPI=(r1:apt r2:apt r3:dnf)
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file
 for pi in "${arrayOfPI[@]}"; do
