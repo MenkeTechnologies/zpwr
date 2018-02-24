@@ -296,6 +296,11 @@ cgh(){
     curl -s https://github.com/$user | grep 'contributions' | head -1 | tr -s ' '
 }
 
+jd(){
+        for dir;do
+            mkdir -p "$dir"
+        done
+}
 j(){
 for file;do
     dirname="$(dirname $file)"
