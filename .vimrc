@@ -653,17 +653,10 @@ map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 xmap <C-Down> :m '> + <CR> gv
 xmap <C-Up> :m '< -- <CR> gv
 
-" map a motion and its reverse motion:
-":noremap <expr> f repmo#ZapKey('f')|sunmap f
-":noremap <expr> F repmo#ZapKey('F')|sunmap F
-":noremap <expr> t repmo#ZapKey('t')|sunmap t
-":noremap <expr> T repmo#ZapKey('T')|sunmap T
-
 map  <expr> ; repmo#LastKey('<Plug>Sneak_;')|sunmap ;
 map  <expr> , repmo#LastRevKey('<Plug>Sneak_,')|sunmap ,
 
 map  <expr> s repmo#ZapKey('<Plug>Sneak_s')|ounmap s|sunmap s
-map  <expr> S repmo#ZapKey('<Plug>Sneak_S')|ounmap S|sunmap S
 omap <expr> z repmo#ZapKey('<Plug>Sneak_s')
 omap <expr> Z repmo#ZapKey('<Plug>Sneak_S')
 map  <expr> f repmo#ZapKey('<Plug>Sneak_f')|sunmap f
@@ -719,6 +712,7 @@ endfunction
 
 " reassing readline plugin mapping
 autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w<CR>:call TmuxRepeat()<CR>a
+autocmd VimEnter * nunmap S
 
 nnoremap <silent> <C-V> :w<CR>:call TmuxRepeat()<CR>
 
