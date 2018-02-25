@@ -671,11 +671,11 @@ map  <expr> F repmo#ZapKey('<Plug>Sneak_F')|sunmap F
 map  <expr> t repmo#ZapKey('<Plug>Sneak_t')|sunmap t
 map  <expr> T repmo#ZapKey('<Plug>Sneak_T')|sunmap T
 
-"map <silent> w <Plug>CamelCaseMotion_w
-"map <silent> b <Plug>CamelCaseMotion_b
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
 
-map <expr> w repmo#ZapKey('<Plug>CamelCaseMotion_w')
-map <expr> b repmo#ZapKey('<Plug>CamelCaseMotion_b')
+"map <expr> w repmo#ZapKey('<Plug>CamelCaseMotion_w')
+"map <expr> b repmo#ZapKey('<Plug>CamelCaseMotion_b')
 noremap <expr> W repmo#SelfKey('w', 'b')|sunmap w
 noremap <expr> B repmo#SelfKey('b', 'w')|sunmap b
 noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
