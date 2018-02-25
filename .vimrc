@@ -555,22 +555,22 @@ function Quoter(type)
     elseif (line =~ '\v^.*\$\{.*\}.*$') 
         call InsertMatchingPunct(quote, '$')
         echo "${parameter substitution}"
-    elseif (line =~'\v\s*\w+\=\w+\s*$')
+    elseif (line =~'\v\s*\S+\=\S+\s*$')
         call InsertEquals(quote, '=', '')
         echo "var=value"
     elseif (line =~ '\v.*`.*`.*')
         call InsertBackTick(quote, '`', '`')
         echo "`command substitution`"
-    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\).*')
+    elseif (line =~ '\v.*\$(\S|\$|\!|\?|\/|\.|\"|`|\'')+\).*')
         call InsertVarPunct(quote, '$', ')')
         echo "$var)"
-    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\].*')
+    elseif (line =~ '\v.*\$(\S|\$|\!|\?|\/|\.|\"|`|\'')+\].*')
         call InsertVarPunct(quote, '$', ']')
         echo "$var]"
-    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
+    elseif (line =~ '\v.*\$(\S|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
         call InsertVar(quote, '$', '/\s')
         echo "$var "
-    elseif (line =~ '\v.*\$(\w|\$|\!|\?|\/|\.|\"|\`|\'')+$')
+    elseif (line =~ '\v.*\$(\S|\$|\!|\?|\/|\.|\"|\`|\'')+$')
         call InsertEOLVar(quote, '$', '')
         echo "$varEOL"
     else
@@ -664,6 +664,8 @@ map  <expr> F repmo#ZapKey('<Plug>Sneak_F')|sunmap F
 map  <expr> t repmo#ZapKey('<Plug>Sneak_t')|sunmap t
 map  <expr> T repmo#ZapKey('<Plug>Sneak_T')|sunmap T
 
+"nmap  <expr> mn repmo#zapkey('<plug>bookmarknext')
+"nmap  <expr> mp repmo#zapkey('<plug>bookmarkprev')
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
 
