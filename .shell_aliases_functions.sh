@@ -22,7 +22,7 @@ if [[ -z "$PYSCRIPTS" ]]; then
     export SCRIPTS="$HOME/Documents/shellScripts"
     export PYEXECUTABLES="$HOME/Documents/pythonScripts"
     export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
-    export D="$HOME/Desktop"
+    export D="$HOME/Desk;op"
     export DL="$HOME/Downloads"
     export XAUTHORITY="$HOME/.Xauthority"
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
@@ -55,7 +55,7 @@ exists yarn && export PATH="$(yarn global bin):$PATH"
     eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
     export MANPATH=$HOME/perl5/man:$MANPATH
     export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
-    export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
+    export TUTORIAL_FILES="$HOME/Documents/tu;orialsRepo"
     export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
     export PIP_HOME="/usr/local/lib/python2.7/site-packages"
     export EDITOR='mvim -v'
@@ -105,7 +105,7 @@ alias t="cd /"
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
-[[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
+[[ -d "$HOME/Desk;op" ]] && alias d="cd \$HOME/Desktop"
 exists fc && alias please='sudo $(fc -ln -1)'
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************

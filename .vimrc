@@ -674,27 +674,25 @@ map  <expr> T repmo#ZapKey('<Plug>Sneak_T')|sunmap T
 "map <silent> w <Plug>CamelCaseMotion_w
 "map <silent> b <Plug>CamelCaseMotion_b
 
-:map <expr> w repmo#ZapKey('<Plug>CamelCaseMotion_w')
-:map <expr> b repmo#ZapKey('<Plug>CamelCaseMotion_b')
-:noremap <expr> W repmo#SelfKey('w', 'b')|sunmap w
-:noremap <expr> B repmo#SelfKey('b', 'w')|sunmap b
-:noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
-:noremap <expr> ge repmo#SelfKey('ge', 'e')|sunmap ge
-:noremap <expr> + repmo#SelfKey('+', '-')|sunmap +
-:noremap <expr> - repmo#SelfKey('-', '+')|sunmap -
-:noremap <expr> ( repmo#SelfKey('(', ')')|sunmap (
-:noremap <expr> ) repmo#SelfKey(')', '(')|sunmap )
+map <expr> w repmo#ZapKey('<Plug>CamelCaseMotion_w')
+map <expr> b repmo#ZapKey('<Plug>CamelCaseMotion_b')
+noremap <expr> W repmo#SelfKey('w', 'b')|sunmap w
+noremap <expr> B repmo#SelfKey('b', 'w')|sunmap b
+noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
+noremap <expr> ge repmo#SelfKey('ge', 'e')|sunmap ge
+noremap <expr> + repmo#SelfKey('+', '-')|sunmap +
+noremap <expr> - repmo#SelfKey('-', '+')|sunmap -
+noremap <expr> ( repmo#SelfKey('(', ')')|sunmap (
+noremap <expr> ) repmo#SelfKey(')', '(')|sunmap )
 
-:noremap <expr> j repmo#SelfKey('j', 'k')|sunmap j
-:noremap <expr> k repmo#SelfKey('k', 'j')|sunmap k
-:noremap <expr> h repmo#SelfKey('h', 'l')|sunmap h
-:noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
+noremap <expr> j repmo#SelfKey('j', 'k')|sunmap j
+noremap <expr> k repmo#SelfKey('k', 'j')|sunmap k
+noremap <expr> h repmo#SelfKey('h', 'l')|sunmap h
+noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
 
-:map <expr> j repmo#Key('gj', 'gk')|sunmap j
-:map <expr> k repmo#Key('gk', 'gj')|sunmap k
+map <expr> j repmo#Key('gj', 'gk')|sunmap j
+map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
-":map <expr> , repmo#LastRevKey('<Plug>CamelCaseMotion_b')|sunmap ,
-":map <expr> ; repmo#LastKey('<Plug>CamelCaseMotion_w')|sunmap ;
 
 set pastetoggle=<F9>
 
