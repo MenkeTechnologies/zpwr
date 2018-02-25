@@ -811,6 +811,6 @@ set dictionary+=/usr/share/dict/words
 set thesaurus+=~/mthesaur.txt
 
 "easier mapping for dict completion
-inoremap <silent> <F9> <C-X><C-K>
+inoremap <silent> <F10> <C-X><C-K>
 "easier mapping for thesaurus completion
-inoremap <silent> <F10> <C-X><C-T>
+inoremap <silent> <F11> <C-X><C-T>
