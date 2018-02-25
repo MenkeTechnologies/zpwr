@@ -148,37 +148,32 @@ prettyPrint "Updating OhMyZsh Themes"
 gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
 #first argument is user@host and port number configured in .ssh/config
-updatePI(){
-    #-t to force pseudoterminal allocation for interactive programs on remote host
-    #pipe yes into programs that require confirmation
-    #alternatively apt-get has -y option
-    #semicolon to chain commands
+updatePI(){ #-t to force pseudoterminal allocation for interactive programs on
+    remote host #pipe yes into programs that require confirmation
+    #alternatively apt-get has -y option #semicolon to chain commands
     # -x option to disable x11 forwarding
-    hostname="$(echo "$1" | awk -F: '{print $1}')"
-    manager="$(echo "$1" | awk -F: '{print $2}')"
+    hostname="$(echo "$1" | awk -F: '{print $1}')" manager="$(echo "$1" | awk
+    -F: '{print $2}')"
 
-    [[ "$manager" == "apt" ]] && { 
-        ssh -x "$hostname" 'yes | sudo apt-get update
-        yes | sudo apt-get dist-upgrade
-        yes | sudo apt-get autoremove
-        yes | sudo apt-get clean'
-    }
-    
-    [[ "$manager" == dnf ]] &&  {
-        ssh -x "$hostname" 'yes | sudo dnf upgrade 
+    if [[ "$manager" == "apt" ]]; then
+        ssh -x "$hostname" 'yes | sudo apt-get
+    update yes | sudo apt-get dist-upgrade yes | sudo apt-get autoremove yes |
+        sudo apt-get clean'
+    elif [[ "$manager" == dnf ]]; then
+        ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'
-    }
+    else
+        :
+    fi
 
-    #here we will update the Pi's own software and vim plugins (not included in apt-get)
-    #avoid sending commmands from stdin into ssh, better to use string after ssh
+    #here we will update the Pi's own software and vim plugins (not included in apt-get) #avoid sending commmands from stdin into ssh, better to use string after ssh
     ssh -x "$hostname" "$(< $SCRIPTS/rpiSoftwareUpdater.sh)"
 }
 
 arrayOfPI=(r1:apt r2:apt r3:dnf)
 
-#for loop through arrayOfPI, each item in array is item is .ssh/config file
-for pi in "${arrayOfPI[@]}"; do
-    updatePI "$pi"
+#for loop through arrayOfPI, each item in array is item is .ssh/config file for
+pi in "${arrayOfPI[@]}"; do updatePI "$pi"
 done
 
 
