@@ -40,9 +40,10 @@ export SHELL="$(which zsh)"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+# COPLETION_WAITING_DOTS="TRUE"IN
+# DU
 
-# Uncomment the following line if you want to disable marking untracked files
+# UNCOMMENT THE FOLLOWING LINE IF YOU WANT TO DISABLE MARKING UNTRACKED FILES
 # under VCS as dirty. This makes repository status check for large repositories
 # much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
@@ -1048,7 +1049,7 @@ colortest(){
 
 #{{{                    MARK:Groovy
 #**************************************************************
-unset GROOVY_HOME # when set this messes up classpath
+unset GROOVY_HOE # when set this messes up classpath
 #}}}***********************************************************
 #
 #
