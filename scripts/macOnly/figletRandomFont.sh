@@ -27,7 +27,8 @@ while true; do
     tput civis
     randIndex=$(($RANDOM % $rangePossibleIndices))
     font=${ary[$randIndex]}
-    output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
+    echo "random font is $font" &> "$LOGFILE"
+    Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
 
     if [[ "$FILTER" ]]; then
         echo "$(basename $font)" | $FILTER
