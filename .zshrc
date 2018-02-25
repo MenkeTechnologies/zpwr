@@ -916,6 +916,7 @@ zstyle ':completion:*:manuals' separate-sections true
 #{{{                    MARK:Global Aliases
 #**************************************************************
 alias -g L='|less -MN'
+alias -g W='| wc -l'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
 
