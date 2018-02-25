@@ -161,8 +161,7 @@ updatePI(){
         ssh -x "$hostname" 'yes | sudo apt-get update
         yes | sudo apt-get dist-upgrade
         yes | sudo apt-get autoremove
-        yes | sudo apt-get upgrade
-        yes | sudo apt-get autoclean'
+        yes | sudo apt-get clean'
     }
     
     [[ "$manager" == dnf ]] &&  {
