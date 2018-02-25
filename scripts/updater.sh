@@ -148,17 +148,18 @@ prettyPrint "Updating OhMyZsh Themes"
 gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
 #first argument is user@host and port number configured in .ssh/config
-updatePI(){ #-t to force pseudoterminal allocation for interactive programs on
-    remote host #pipe yes into programs that require confirmation
+updatePI(){ #-t to force pseudoterminal allocation for interactive programs on remote host
+    #pipe yes into programs that require confirmation
     #alternatively apt-get has -y option #semicolon to chain commands
     # -x option to disable x11 forwarding
     hostname="$(echo "$1" | awk -F: '{print $1}')" manager="$(echo "$1" | awk
     -F: '{print $2}')"
 
     if [[ "$manager" == "apt" ]]; then
-        ssh -x "$hostname" 'yes | sudo apt-get
-    update yes | sudo apt-get dist-upgrade yes | sudo apt-get autoremove yes |
-        sudo apt-get clean'
+        ssh -x "$hostname" 'yes | sudo apt-get update
+        yes | sudo apt-get dist-upgrade
+        yes | sudo apt-get autoremove
+        yes | sudo apt-get clean'
     elif [[ "$manager" == dnf ]]; then
         ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'
