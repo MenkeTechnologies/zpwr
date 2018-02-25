@@ -105,7 +105,7 @@ exists yarn && {
 exists cpanm && {
     prettyPrint "Updating Perl Packages"
     perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
-    if [[ "$perlOutdated" ]]; then
+    if [[ ! -z "$perlOutdated" ]]; then
         echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
     fi
 }
@@ -152,8 +152,8 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
     #pipe yes into programs that require confirmation
     #alternatively apt-get has -y option #semicolon to chain commands
     # -x option to disable x11 forwarding
-    hostname="$(echo "$1" | awk -F: '{print $1}')" manager="$(echo "$1" | awk
-    -F: '{print $2}')"
+    hostname="$(echo "$1" | awk -F: '{print $1}')"
+    manager="$(echo "$1" | awk -F: '{print $2}')"
 
     if [[ "$manager" == "apt" ]]; then
         ssh -x "$hostname" 'yes | sudo apt-get update
