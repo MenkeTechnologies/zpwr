@@ -22,7 +22,7 @@ if [[ -z "$PYSCRIPTS" ]]; then
     export SCRIPTS="$HOME/Documents/shellScripts"
     export PYEXECUTABLES="$HOME/Documents/pythonScripts"
     export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
-    export D="$HOME/Desk;op"
+    export D="$HOME/Desktop"
     export DL="$HOME/Downloads"
     export XAUTHORITY="$HOME/.Xauthority"
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
@@ -105,7 +105,7 @@ alias t="cd /"
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
-[[ -d "$HOME/Desk;op" ]] && alias d="cd \$HOME/Desktop"
+[[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
 exists fc && alias please='sudo $(fc -ln -1)'
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
