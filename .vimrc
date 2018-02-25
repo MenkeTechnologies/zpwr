@@ -654,16 +654,28 @@ xmap <C-Down> :m '> + <CR> gv
 xmap <C-Up> :m '< -- <CR> gv
 
 " map a motion and its reverse motion:
-:noremap <expr> f repmo#ZapKey('f')|sunmap f
-:noremap <expr> F repmo#ZapKey('F')|sunmap F
-:noremap <expr> t repmo#ZapKey('t')|sunmap t
-:noremap <expr> T repmo#ZapKey('T')|sunmap T
+":noremap <expr> f repmo#ZapKey('f')|sunmap f
+":noremap <expr> F repmo#ZapKey('F')|sunmap F
+":noremap <expr> t repmo#ZapKey('t')|sunmap t
+":noremap <expr> T repmo#ZapKey('T')|sunmap T
 
-map <silent> w <Plug>CamelCaseMotion_w
-map <silent> b <Plug>CamelCaseMotion_b
-"sunmap w
-"sunmap b
-"TODO = combine CamelCaseMotion and repmo
+map  <expr> ; repmo#LastKey('<Plug>Sneak_;')|sunmap ;
+map  <expr> , repmo#LastRevKey('<Plug>Sneak_,')|sunmap ,
+
+map  <expr> s repmo#ZapKey('<Plug>Sneak_s')|ounmap s|sunmap s
+map  <expr> S repmo#ZapKey('<Plug>Sneak_S')|ounmap S|sunmap S
+omap <expr> z repmo#ZapKey('<Plug>Sneak_s')
+omap <expr> Z repmo#ZapKey('<Plug>Sneak_S')
+map  <expr> f repmo#ZapKey('<Plug>Sneak_f')|sunmap f
+map  <expr> F repmo#ZapKey('<Plug>Sneak_F')|sunmap F
+map  <expr> t repmo#ZapKey('<Plug>Sneak_t')|sunmap t
+map  <expr> T repmo#ZapKey('<Plug>Sneak_T')|sunmap T
+
+"map <silent> w <Plug>CamelCaseMotion_w
+"map <silent> b <Plug>CamelCaseMotion_b
+
+:map <expr> w repmo#ZapKey('<Plug>CamelCaseMotion_w')
+:map <expr> b repmo#ZapKey('<Plug>CamelCaseMotion_b')
 :noremap <expr> W repmo#SelfKey('w', 'b')|sunmap w
 :noremap <expr> B repmo#SelfKey('b', 'w')|sunmap b
 :noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
@@ -681,8 +693,8 @@ map <silent> b <Plug>CamelCaseMotion_b
 :map <expr> j repmo#Key('gj', 'gk')|sunmap j
 :map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
-:map <expr> ; repmo#LastKey(';')|sunmap ;
-:map <expr> , repmo#LastRevKey(',')|sunmap ,
+":map <expr> , repmo#LastRevKey('<Plug>CamelCaseMotion_b')|sunmap ,
+":map <expr> ; repmo#LastKey('<Plug>CamelCaseMotion_w')|sunmap ;
 
 set pastetoggle=<F9>
 
