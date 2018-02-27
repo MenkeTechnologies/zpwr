@@ -884,6 +884,7 @@ zstyle ':completion:*' list-colors 'ma=37;1;4;44'
 
 #main option for menu selection colors
 zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
+zstyle ':completion:*:executables' list-colors '=(#b)(*)=1;30=1;37;4;44'
 zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=37;43'
 zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
 zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
