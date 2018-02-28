@@ -70,6 +70,7 @@ set showcmd
 "for copying to system clipboard
 "set clipboard=unnamed
 
+"show trailing spaces and tabs
 set list listchars=tab:\ \ ,trail:·
 ""}}}***********************************************************
 
