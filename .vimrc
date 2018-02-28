@@ -85,7 +85,6 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'TerryMa/vim-multiple-cursors'
 Plugin 'luochen1990/rainbow'
-
 Plugin 'craigemery/vim-autotag'
 Plugin 'beloglazov/vim-online-thesaurus'
 
@@ -117,17 +116,15 @@ let g:rainbow_conf = {
 " Track the engine.
 Plugin 'SirVer/ultisnips'
 Plugin 'ervandew/supertab'
-
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-Plugin '907th/vim-auto-save'
+"Sublime Like Minimap
 Plugin 'severin-lemaignan/vim-minimap'
 
-
+Plugin '907th/vim-auto-save'
 let g:auto_save = 1  " enable AutoSave on Vim startup
 let g:auto_save_silent = 1  " do not display the auto-save notification
 let g:auto_save_events = ["InsertLeave", "TextChanged", "TextChangedI"]
-
 
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
