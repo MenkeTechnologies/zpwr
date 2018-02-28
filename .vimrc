@@ -688,7 +688,6 @@ noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
 map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
-
 set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
