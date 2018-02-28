@@ -201,7 +201,7 @@ sshRegain() {
     ps -ef |  grep -v grep | grep -q 'ssh ' && {
         if [[ "$BUFFER" != "" ]]; then
             print -sr "$BUFFER"
-            __NEW_BUFFER="ex \"$BUFFER\""
+            __NEW_BUFFER="exe \"$BUFFER\""
             echo
             eval "$__NEW_BUFFER"
             BUFFER=""
