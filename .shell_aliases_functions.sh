@@ -247,7 +247,7 @@ alias il="idea list"
 #**************************************************************
 [[ "$(uname)" == "Darwin" ]] && {
 
-    ex(){
+    exe(){
         python3 "$PYSCRIPTS/ssh_runner.py" "$@"
     }
 
