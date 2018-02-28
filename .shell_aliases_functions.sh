@@ -525,7 +525,7 @@ hc(){
     printf "\e[1m"
     git init
     hub create
-    echo "# `basename $(pwd)`" > README.md
+    echo "# $(basename "$(pwd)")" > README.md
     echo "# created by Jacob Menke" >> README.md
     git add .
     git commit -m "first commit"
