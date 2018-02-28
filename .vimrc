@@ -131,8 +131,8 @@ let g:SuperTabCrMapping                = 0
 let g:UltiSnipsExpandTrigger           = '<tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
-let g:ycm_key_list_select_completion   = ['<C-j>', '<C-n>']
-let g:ycm_key_list_previous_completion = ['<C-k>', '<C-p>']
+let g:ycm_key_list_select_completion   = ['<C-n>']
+let g:ycm_key_list_previous_completion = ['<C-p>']
 let g:ycm_min_num_of_chars_for_completion = 1
 
 let g:ycm_filetype_whitelist = { '*': 1 }
@@ -174,12 +174,8 @@ let g:slime_paste_file = "$HOME/.slime_paste"
 "let g:slime_paste_file = tempname()
 "let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":"}
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<c-j>"
-"
 let g:ycm_collect_identifiers_from_tags_files=1
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
-
 
 let g:NERDTreeDisableFileExtensionHighlight = 1
 let g:NERDTreeDisableExactMatchHighlight = 1
@@ -188,8 +184,8 @@ let g:NERDTreeDisablePatternMatchHighlight = 1
 "too slow with icons
 let g:webdevicons_enable_nerdtree=0
 
+"matches JetBrains IDE mappings
 let g:multi_cursor_next_key='<C-G>'
-
 
 call vundle#end()            " required
 
