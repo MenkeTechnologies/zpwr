@@ -229,12 +229,7 @@ endfunction
 nnoremap <silent> <C-T> xp
 inoremap <c-t> i<bs><c-o>:silent! undojoin \| normal! xp<cr>
 
-"nnoremap <silent><Plug>DownChar + :call repeat#set("\<Plug>DownChar")<CR>
-"nmap + <Plug>DownChar
-
-"nnoremap <silent><Plug>UpChar - :call repeat#set("\<Plug>UpChar")<CR>
-"nmap - <Plug>UpChar
-
+"allow dot to repeat @:
 nnoremap <silent><Plug>RepeatEx @: :call repeat#set("\<Plug>RepeatEx")<CR>
 nmap @: <Plug>RepeatEx
 
@@ -242,6 +237,7 @@ nmap @: <Plug>RepeatEx
 nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
 inoremap <silent> <ESC><C-T> <C-O>:call TransposeWords()<CR>
 
+"move to next word and capitalize
 nnoremap <ESC><C-C> wvU
 
 "Insert mode mappings:

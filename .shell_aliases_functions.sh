@@ -521,7 +521,7 @@ createGIF(){
 
     ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
 }
-hub_create(){
+hc(){
     printf "\e[1m"
     git init
     hub create
@@ -532,7 +532,7 @@ hub_create(){
     git push --set-upstream origin master
     printf "\e[0m"
 }
-hub_delete(){
+hd(){
     [[ -z "$1" ]] && echo "need a REPO NAME" >&2 && return 1
     REPO="$1"
     out="$(curl -u menketechnologies -X "DELETE" https://api.github.com/repos/menketechnologies/"$REPO")"
