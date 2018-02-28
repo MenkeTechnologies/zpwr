@@ -7,3 +7,10 @@ vnoremap <C-K> 4k
 
 vnoremap < <gv
 vnoremap > >gv
+
+set incsearch
+set hlsearch
+set ignorecase
+set showmode
+set visualbell
+set wrapscan
