@@ -49,10 +49,10 @@ else
             distro=debian
             ;;
         (centos|fedora|rhel)
-            Distro=redhat
+            distro=redhat
             ;;
         (opensuse|suse)
-            Distro=suse
+            distro=suse
             ;;
     esac
 
