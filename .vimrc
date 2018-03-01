@@ -266,15 +266,17 @@ nnoremap <End> G
 inoremap <silent> <C-B> <ESC>I//<ESC>ji
 inoremap <silent> <ESC><C-B> <ESC>^2xji
 
-nnoremap <silent> <C-I> :SaveSession<CR>
-vnoremap <silent> <C-I> :<C-C>:SaveSession<CR>
-inoremap <silent> <C-I> <C-[>:SaveSession<CR>a
+"nnoremap <silent> <C-I> :SaveSession<CR>
+"vnoremap <silent> <C-I> :<C-C>:SaveSession<CR>
+"inoremap <silent> <C-I> <C-[>:SaveSession<CR>a
 
 nnoremap <silent> <leader>q :qa!<CR>
 nnoremap <silent> <leader>c :wq!<CR>
 nnoremap <silent> <leader>e :q!<CR>
 nnoremap <silent> <leader>w :w!<CR>
+"vertical split
 nnoremap <silent> <leader>s :vs<CR>
+"horizontal split
 nnoremap <silent> <leader>h :sp<CR>
 nnoremap <silent> <leader>t :tabnew<CR>
 
