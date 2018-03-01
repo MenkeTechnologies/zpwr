@@ -48,8 +48,11 @@ else
         (debian|ubuntu|raspbian|kali) 
             distro=debian
             ;;
-        (centos|fedora|rhel) prettyPrint "Color logging for $distroName"
-            distro=redhat
+        (centos|fedora|rhel)
+            Distro=redhat
+            ;;
+        (opensuse|suse)
+            Distro=suse
             ;;
     esac
 
