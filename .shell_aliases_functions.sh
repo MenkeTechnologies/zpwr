@@ -522,7 +522,7 @@ createGIF(){
     ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
 }
 hc(){
-    [[ -z "$1" ]] && reponame="$(basename "$(pwd)")"
+    [[ -z "$1" ]] && reponame="$(basename "$(pwd)")" || reponame="$1"
     printf "\e[1m"
     git init
     hub create "$reponame"
