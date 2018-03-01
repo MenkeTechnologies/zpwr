@@ -584,7 +584,6 @@ endfunction
 "**************************************************************
 "}}}
 
-
 "{{{                    MARK:Blacklists
 "**************************************************************
 let blacklist=['md', 'zsh','sh','hs', 'pl']
@@ -618,7 +617,6 @@ endif
 
 "}}}***********************************************************
 
-
 "{{{                    MARK:Quoter Mappings
 "**************************************************************
 nnoremap <silent> <leader>" :call Quoter("double")<CR>
@@ -636,6 +634,8 @@ vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
 
 "}}}***********************************************************
 
+"{{{                    MARK:Plugin Mappings
+"**************************************************************
 nnoremap <Tab> :SaveSession!<CR><CR>
 nnoremap <silent> <leader>n :n<CR>
 inoremap <F8> <ESC>:%s@@@g<Left><Left><Left>
@@ -699,6 +699,10 @@ noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
 map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
+"}}}***********************************************************
+
+"{{{                    MARK:Remaps
+"**************************************************************
 set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
@@ -736,6 +740,8 @@ nnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
 vnoremap Y y`>j
 nnoremap Y yy`>
 
+"}}}***********************************************************
+
 "{{{                    MARK:C-D mappings
 "**************************************************************
 nnoremap <silent> <C-D>d :update<CR>
@@ -752,8 +758,7 @@ vnoremap <silent> <C-D>s :<C-C>:update<CR>:SyntasticCheck<CR>
 inoremap <silent> <C-D>s <C-[>:update<CR>:SyntasticCheck<CR>a
 
 "}}}***********************************************************
-"
-"}}}***********************************************************
+
 "{{{                    MARK:autocmd
 "**************************************************************
 
@@ -785,6 +790,9 @@ autocmd BufNewFile *.pl silent! exe "!templater.sh %:p" | e
 autocmd BufNewFile * exe "normal! G" | startinsert!
 
 "}}}***********************************************************
+
+"{{{                    MARK:Ending
+"**************************************************************
 "load all pathogen plugins
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
@@ -824,3 +832,5 @@ set thesaurus+=~/mthesaur.txt
 inoremap <silent> <F10> <C-X><C-K>
 "easier mapping for thesaurus completion
 inoremap <silent> <F11> <C-X><C-T>
+
+"}}}***********************************************************
