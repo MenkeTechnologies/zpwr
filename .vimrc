@@ -55,7 +55,7 @@ set t_Co=256
 set backspace=2
 set encoding=utf8
 set autoindent
-se showmatch
+set showmatch
 set showmode
 set hlsearch
 set incsearch
@@ -63,7 +63,7 @@ set mouse=a
 set shiftwidth=4 "indent set to four spaces
 set expandtab
 set number
-set wildmenu
+set wildmenu "tab completion in command mode cycles through menu
 syntax on
 set grepprg=ag
 
