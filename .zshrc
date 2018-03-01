@@ -198,7 +198,7 @@ tutsUpdate() {
 }
 
 sshRegain() {
-    ps -ef |  grep -v grep | grep -q 'ssh ' && {
+    echo "$(ps -ef)" |  grep -q 'ssh ' && {
         if [[ "$BUFFER" != "" ]]; then
             print -sr "$BUFFER"
             __NEW_BUFFER="exe \"$BUFFER\""
@@ -212,8 +212,8 @@ sshRegain() {
         fi
         } || {
             zle .kill-whole-line
-            ps -ef |  grep -v grep | grep -q 'tmux ' && {
-            BUFFER=tmm
+            echo "$(ps -ef)" | grep -q 'tmux ' && {
+                BUFFER=tmm
             } || {
                 BUFFER=tmm_full
             }
