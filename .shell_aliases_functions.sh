@@ -501,6 +501,7 @@ gitCommitAndPush(){
     git push
     return 0
 }
+
 replacer(){
     orig="$1"
     shift
@@ -509,6 +510,7 @@ replacer(){
     sed -i'' "s/$orig/$replace/g" "$@"
 
 }
+
 createGIF(){
     outFile=out.gif
     res=600x400
@@ -521,6 +523,7 @@ createGIF(){
 
     ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
 }
+
 hc(){
     [[ -z "$1" ]] && reponame="$(basename "$(pwd)")" || reponame="$1"
     printf "\e[1m"
@@ -533,6 +536,7 @@ hc(){
     git push --set-upstream origin master
     printf "\e[0m"
 }
+
 hd(){
     [[ -z "$1" ]] && echo "need a REPO NAME" >&2 && return 1
     REPO="$1"
@@ -552,17 +556,21 @@ pstreeMonitor(){
     bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s/$USER// | sed s@/.*/@@ | tail -75"
 
 }
+
 return2(){
     exec 2> /dev/tty
 }
+
 color2(){
     exec 2> >(redText.sh)
 }
+
 escapeRemove(){
     while read INPUT; do
         echo "$INPUT" | sed -e 's/\e\[.\{1,5\}m//g'
     done
 }
+
 mp3(){
     youtube-dl --extract-audio --audio-format mp3 "$1"
 }
@@ -597,7 +605,6 @@ gcl() {
     git clone --recursive "$1"
     cd "$dir_name"
 }
-
 
 ino(){
     dir="$1"
@@ -651,6 +658,7 @@ EOF
     jetbrainsWorkspaceEdit "$dir"
 
 }
+
 jetbrainsWorkspaceEdit(){
     python -c "print('_'*100)"
     prettyPrint "MONITORING WORKSPACE..."
