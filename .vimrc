@@ -804,7 +804,7 @@ autocmd BufNewFile * exe "normal! G" | startinsert!
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-
+"powerline-status pip package installs to different locations of different OS
 if os == "Darwin"
     set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
 elseif os == "Linux"
