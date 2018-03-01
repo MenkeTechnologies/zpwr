@@ -39,7 +39,7 @@ exec &> >(tee "$INSTALLER_DIR"/logfile.txt)
 # 16) powerline-mem-segment
 
 
-dependencies_ary=(vim tmux git wget cowsay cmatrix htop cmake bpython sl mutt \
+dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
     Screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet ysql mongodb postgresql \
     jnettop iotop atop ctags speedtest-cli texinfo lsof weechat gradle ant maven tree mc ocaml groovy \
@@ -52,7 +52,7 @@ dependencies_ary=(vim tmux git wget cowsay cmatrix htop cmake bpython sl mutt \
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary+=(reptyr iptraf lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev \
+    dependencies_ary+=(git reptyr iptraf lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev \
     libpcap-dev ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
     libperl-dev dstat ecryptfs-utils at silversearcher-ag netatalk dnsutils \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
@@ -74,7 +74,7 @@ addDependenciesRedHat(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=(fortune the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace \
+    dependencies_ary+=("git --without-completions" fortune the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace \
     aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go\
     )
 }
