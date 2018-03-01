@@ -325,7 +325,11 @@ function! Indent()
     exe ":normal mbgg=G"
     exe ":normal `bzz"
 endfunction
+"**************************************************************
+"}}}
 
+"{{{                    MARK:Find Vim Markers
+"**************************************************************
 nnoremap <silent> <leader>z :call IndentSqueeze()<cr>
 "bind control arrow keys in insert and normal modes to navigate fold markers
 inoremap <silent> <C-Down> <C-[>:<C-U>call GoToNextMarker("{{{",0)<CR>i
@@ -333,6 +337,10 @@ inoremap <silent> <C-Up> <C-[>:<C-U>call GoToNextMarker("{{{",1)<CR>i
 nnoremap <silent> <C-Down> :<C-U>call GoToNextMarker("{{{",0)<CR>
 nnoremap <silent> <C-Up> :<C-U>call GoToNextMarker("{{{",1)<CR>
 
+"}}}***********************************************************
+
+"{{{                    MARK:Quoting Fxns
+"**************************************************************
 function InsertEOLVar(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! F".a:front
@@ -581,8 +589,7 @@ function Quoter(type)
 
 endfunction
 
-"**************************************************************
-"}}}
+"}}}***********************************************************
 
 "{{{                    MARK:Blacklists
 "**************************************************************
