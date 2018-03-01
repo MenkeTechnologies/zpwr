@@ -282,6 +282,11 @@ nnoremap <silent> <leader>t :tabnew<CR>
 
 onoremap <silent> i# ?#<CR>jV/#<CR>kc
 
+"#**************************************************************
+"}}}
+
+"{{{                    MARK:Custom Fxns
+"**************************************************************
 "navigate to next or previous vim fold marker
 fun GoToNextMarker(searchTerm, backwardsSearch)
     let oldwrap = &wrapscan
@@ -576,6 +581,12 @@ function Quoter(type)
 
 endfunction
 
+"**************************************************************
+"}}}
+
+
+"{{{                    MARK:Blacklists
+"**************************************************************
 let blacklist=['md', 'zsh','sh','hs', 'pl']
 
 augroup indentGroup
@@ -604,6 +615,9 @@ elseif os == "Linux"
     map <ESC>[C <C-Right>
     map <ESC>[D <C-Left>
 endif
+
+"}}}***********************************************************
+
 
 "{{{                    MARK:Quoter Mappings
 "**************************************************************
