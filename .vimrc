@@ -315,13 +315,14 @@ function! IndentSqueeze()
     redraw!
 endfunction
 
+"indent and move cursor to middle of screen
 function! Indent()
     exe ":normal mbgg=G"
     exe ":normal `bzz"
 endfunction
 
 nnoremap <silent> <leader>z :call IndentSqueeze()<cr>
-"for navigating thru fold markers set by vim
+"bind control arrow keys in insert and normal modes to navigate fold markers
 inoremap <silent> <C-Down> <C-[>:<C-U>call GoToNextMarker("{{{",0)<CR>i
 inoremap <silent> <C-Up> <C-[>:<C-U>call GoToNextMarker("{{{",1)<CR>i
 nnoremap <silent> <C-Down> :<C-U>call GoToNextMarker("{{{",0)<CR>
