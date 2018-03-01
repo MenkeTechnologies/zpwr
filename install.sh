@@ -59,6 +59,10 @@ addDependenciesLinux(){
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace \
     )
 }
+addDependenciesSuse(){
+    dependencies_ary+=(fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc)
+
+}
 
 addDependenciesDebian(){
     dependencies_ary+=(fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc)
@@ -97,6 +101,8 @@ update (){
             brew install "$1"
         elif [[ $2 == debian ]];then
             sudo apt-get install -y "$1"
+        elif [[ $2 == suse ]];then
+            sudo zypper --non-interactive install "$1"
         elif [[ $2 == redhat ]];then
             sudo yum install -y "$1"
         else
@@ -153,6 +159,10 @@ else
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
             distro=debian
             addDependenciesDebian
+            ;;
+        (opensuse|suse) prettyPrint "Installing Dependencies for $distroName with zypper"
+            distro=suse
+            addDependenciesSuse
             ;;
         (centos|fedora|rhel) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
             distro=redhat
