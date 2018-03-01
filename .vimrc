@@ -817,22 +817,24 @@ elseif os == "Linux"
     endif
 endif
 
-" :e will find files automatically in these locations
+"gf and :find will find files automatically in these locations
 set path+=~/Desktop
 set path+=~/Documents/shellScripts
 
+"default colorscheme
 colorscheme badwolf
 
-"common mispellings
+"personal common mispellings
 iabbrev tth the
-iabbrev adn and
-iabbrev waht what
 iabbrev tehn then
 iabbrev retrun return
 iabbrev retunr return
 iabbrev delte delete
 iabbrev deltee delete
+
+"dict completion normally invoked in insert mode with C-X C-K
 set dictionary+=/usr/share/dict/words
+"thesaurus completion normally invoked in insert mode with C-X C-T
 set thesaurus+=~/mthesaur.txt
 
 "easier mapping for dict completion
