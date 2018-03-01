@@ -15,6 +15,7 @@ export TMUX_REMOTE_PREFIX="b"
 #{{{                    MARK:ENV Var
 #**************************************************************
 if [[ -z "$PYSCRIPTS" ]]; then
+    export GITHUB_ACCOUNT='MenkeTechnologies'
     export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
     export CLICOLOR="YES"
     export LSCOLORS="ExFxBxDxCxegedabagacad"
@@ -28,7 +29,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
     export TERMINAL_APP="Terminal.app"
-    export GITHUB_ACCOUNT='MenkeTechnologies'
 
     [[ "$(uname)" == Darwin ]] && {
         export SD_PATH="/Volumes/SD"
@@ -522,11 +522,12 @@ createGIF(){
     ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
 }
 hc(){
+    [[ -z "$1" ]] && reponame="$(basename "$(pwd)")"
     printf "\e[1m"
     git init
-    hub create
-    echo "# $(basename "$(pwd)")" > README.md
-    echo "# created by Jacob Menke" >> README.md
+    hub create "$reponame"
+    echo "$reponame" > README.md
+    echo "# created by $GITHUB_ACCOUNT" >> README.md
     git add .
     git commit -m "first commit"
     git push --set-upstream origin master
@@ -535,7 +536,9 @@ hc(){
 hd(){
     [[ -z "$1" ]] && echo "need a REPO NAME" >&2 && return 1
     REPO="$1"
-    out="$(curl -u menketechnologies -X "DELETE" https://api.github.com/repos/menketechnologies/"$REPO")"
+    user="$(echo "$GITHUB_ACCOUNT" | tr 'A-Z' 'a-z')"
+
+    out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$REPO")"
 
     printf "\e[1m"
     [[ -z "$out" ]] && echo "Successful deletion of $REPO" || {
