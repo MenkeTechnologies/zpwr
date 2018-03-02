@@ -297,14 +297,14 @@ cgh(){
 
 jd(){
         for dir;do
-            mkdir -p "$dir"
+            command mkdir -p "$dir"
         done
 }
 
 j(){
 for file;do
     dirname="$(dirname $file)"
-    [[ "$dirname" != . ]] && mkdir -p "$dirname"
+    [[ "$dirname" != . ]] && command mkdir -p "$dirname"
     touch "$file"
 done
 }
