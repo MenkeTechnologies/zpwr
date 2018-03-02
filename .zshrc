@@ -545,8 +545,8 @@ bindkey -M vicmd '^O' edit-command-line
 bindkey -M viins '^F' fzf-file-widget
 bindkey -M vicmd '^F' fzf-file-widget
 
-bindkey -M viins '^H' fzf-history-widget
-bindkey -M vicmd '^H' fzf-history-widget
+#bindkey -M viins '^H' fzf-history-widget
+#bindkey -M vicmd '^H' fzf-history-widget
 
 zle -N changeQuotes
 zle -N alternateQuotes
@@ -934,7 +934,7 @@ alias -g L='|less -MN'
 alias -g W='| wc -l'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
-alias -g F=' "$(fzf --height 60% --reverse --border --preview "cat {}")"'
+alias -g F=' "$(fzf --height 60% --reverse --border --preview "[[ -f {} ]] && rougify {} 2>/dev/null || ls -dAlhFi {} | head -500")"'
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
 #
@@ -1068,6 +1068,8 @@ colortest(){
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 #to include hidden files in search
 export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
+export FZF_DEFAULT_OPTS="--reverse --border --height 60%"
+export FZF_CTRL_T_OPTS='--preview "[[ -f {} ]] && rougify {} 2>/dev/null || ls -dAlhFi {} | head -500"'
 #}}}***********************************************************
 
 #{{{                    MARK:override default FTP completion
