@@ -88,10 +88,11 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zsh-autosuggestions history-substring-search ruby gem rake rails yarn ng coffee node npm perl cpanm git github gradle ant mvn scala lein spring django pip pyenv python go man nmap postgres redis-cli colorize sudo z rsync docker tmux sublime vundle rust cargo meteor gulp grunt glassfish)
+plugins=(zsh-more-completions zsh-completions zsh-syntax-highlighting zsh-autosuggestions history-substring-search ruby gem rake rails yarn ng coffee node npm perl cpanm git github gradle ant mvn scala lein spring django pip pyenv python go man nmap postgres redis-cli colorize sudo z rsync docker tmux sublime vundle rust cargo meteor gulp grunt glassfish)
 
 [[ "$(uname)" == "Darwin" ]] && {
     plugins+=(zsh-xcode-completions brew osx pod)
+    plugins=(fzf-zsh $plugins)
 } || {
 
     plugins+=(systemd)
@@ -925,6 +926,7 @@ alias -g L='|less -MN'
 alias -g W='| wc -l'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
+alias -g F=' "$(fzf)"'
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
