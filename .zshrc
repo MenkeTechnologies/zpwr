@@ -925,8 +925,7 @@ alias -g L='|less -MN'
 alias -g W='| wc -l'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
-alias -g F=' "$(fzf --height 60% --reverse --border)"'
-
+alias -g F=' "$(fzf --height 60% --reverse --border --preview "cat {}")"'
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
 #
