@@ -95,7 +95,6 @@ plugins=(zsh-more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zs
 } || {
 
     plugins+=(systemd)
-
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
     case $distroName in
@@ -227,91 +226,90 @@ dbz() {
 }
 
 expand-aliases() {
-unset 'functions[_expand-aliases]'
-functions[_expand-aliases]=$BUFFER
-(($+functions[_expand-aliases])) &&
+    unset 'functions[_expand-aliases]'
+    functions[_expand-aliases]=$BUFFER
+    (($+functions[_expand-aliases])) &&
     BUFFER=${functions[_expand-aliases]#$'\t'} &&
     CURSOR=$#BUFFER
     }
-    __COUNTER=0
+__COUNTER=0
 
-    changeQuotes(){
+changeQuotes(){
 
-        if (( $__COUNTER % 8 == 0 )); then
-            __OLDBUFFER="${BUFFER}"
-            BUFFER=${BUFFER//\"/\'}
-        elif (( $__COUNTER % 8 == 1 )); then
-            if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
-                __COUNTER=0
-                return 1
-            fi
-            BUFFER=${BUFFER//\'/\"}
-        elif (( $__COUNTER % 8 == 2 )); then
-            if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
-                __COUNTER=0
-                return 1
-            fi
-            BUFFER=${BUFFER//\"/\`}
-        elif (( $__COUNTER % 8 == 3 )); then
-            if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
-                __COUNTER=0
-                return 1
-            fi
-            _SEMI_OLDBUFFER="$BUFFER"
-            BUFFER="\"${BUFFER}\""
-        elif (( $__COUNTER % 8 == 4 )); then
-            if [[ "$(echo "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
-                __COUNTER=0
-                return 1
-            fi
-            #semi has no quotes
-            _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
-            BUFFER="\$(${_SEMI_OLDBUFFER})"
-        elif (( $__COUNTER % 8 == 5 )); then
-            #only diff should be $()
-            if (( ${#BUFFER} < 4 )); then
-                __COUNTER=0
-                return 1
-                #statements
-            fi
-            if [[ "$_SEMI_OLDBUFFER" != "$(echo "${BUFFER:2:-1}" )" ]]; then
-                __COUNTER=0
-                return 1
-            fi
-            BUFFER="\"${BUFFER}\""
-        elif (( $__COUNTER % 8 == 6 )); then
-            if (( ${#BUFFER} < 6 )); then
-                __COUNTER=0
-                return 1
-                #statements
-            fi
-            if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER:3:-2}" ]]; then
-                __COUNTER=0
-                return 1
-            fi
-            # back to no quotes
-            BUFFER="$_SEMI_OLDBUFFER"
-        else
-            if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER}" ]]; then
-                __COUNTER=0
-                return 1
-            fi
-            #back to original
-            BUFFER="${__OLDBUFFER}"
+    if (( $__COUNTER % 8 == 0 )); then
+        __OLDBUFFER="${BUFFER}"
+        BUFFER=${BUFFER//\"/\'}
+    elif (( $__COUNTER % 8 == 1 )); then
+        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
+            __COUNTER=0
+            return 1
         fi
+        BUFFER=${BUFFER//\'/\"}
+    elif (( $__COUNTER % 8 == 2 )); then
+        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
+            __COUNTER=0
+            return 1
+        fi
+        BUFFER=${BUFFER//\"/\`}
+    elif (( $__COUNTER % 8 == 3 )); then
+        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
+            __COUNTER=0
+            return 1
+        fi
+        _SEMI_OLDBUFFER="$BUFFER"
+        BUFFER="\"${BUFFER}\""
+    elif (( $__COUNTER % 8 == 4 )); then
+        if [[ "$(echo "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
+            __COUNTER=0
+            return 1
+        fi
+        #semi has no quotes
+        _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
+        BUFFER="\$(${_SEMI_OLDBUFFER})"
+    elif (( $__COUNTER % 8 == 5 )); then
+        #only diff should be $()
+        if (( ${#BUFFER} < 4 )); then
+            __COUNTER=0
+            return 1
+            #statements
+        fi
+        if [[ "$_SEMI_OLDBUFFER" != "$(echo "${BUFFER:2:-1}" )" ]]; then
+            __COUNTER=0
+            return 1
+        fi
+        BUFFER="\"${BUFFER}\""
+    elif (( $__COUNTER % 8 == 6 )); then
+        if (( ${#BUFFER} < 6 )); then
+            __COUNTER=0
+            return 1
+            #statements
+        fi
+        if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER:3:-2}" ]]; then
+            __COUNTER=0
+            return 1
+        fi
+        # back to no quotes
+        BUFFER="$_SEMI_OLDBUFFER"
+    else
+        if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER}" ]]; then
+            __COUNTER=0
+            return 1
+        fi
+        #back to original
+        BUFFER="${__OLDBUFFER}"
+    fi
 
-        let __COUNTER++
-    }
+    let __COUNTER++
+}
 
-    alternateQuotes(){
-        BUFFER="$(echo "$BUFFER" | tr "\"'" "'\"" )"
-    }
+alternateQuotes(){
+    BUFFER="$(echo "$BUFFER" | tr "\"'" "'\"" )"
+}
 
-
-    basicSedSub(){
-        emulate -LR zsh
-        echo "$BUFFER" | egrep -q '\w+' || {
-            printf "\x1b[1;31m"
+basicSedSub(){
+    emulate -LR zsh
+    echo "$BUFFER" | egrep -q '\w+' || {
+        printf "\x1b[1;31m"
         zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
         printf "\x1b[0m"
         return 1
@@ -706,8 +704,7 @@ autoload -U select-bracketed select-quoted
 zle -N select-bracketed
 zle -N select-quoted
 
-
-# bind vim text objects on command line
+# bind vim text objects on command line, depends on zsh having visual mode in zle
 for km in viopp visual; do
     bindkey -M $km -- '-' vi-up-line-or-history
 
@@ -1001,12 +998,13 @@ RPS2='+%N:%i:%^'
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
     #source "$HOME/.powerlevel9kconfig.sh"
-: ~WCC
-: ~HOMEBREW_HOME_FORMULAE
+    #make this environ vars show up in prompt %~
+    : ~WCC
+    : ~HOMEBREW_HOME_FORMULAE
 } || {
     :
 }
-#shell to recognize env variables in prompt
+#shell to recognize env variables in prompt %~
 : ~SCRIPTS
 : ~D
 : ~DL
