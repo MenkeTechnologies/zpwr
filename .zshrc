@@ -160,7 +160,7 @@ gitfunc () {
         zle .accept-line-and-down-history
         return 0
     }
-    #leaky simonoff
+    #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0;34m"
 
 gitCommitAndPush "$BUFFER" && {
@@ -603,22 +603,23 @@ bindkey -M viins '^E' end-of-line
 
 my-accept-line () {
 
-__WILL_CLEAR=false
+    __WILL_CLEAR=false
 
-#do we want to clear the screen and run ls after we exec the current line?
-commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
+    #do we want to clear the screen and run ls after we exec the current line?
+    commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
-for command in ${commandsThatModifyFiles[@]}; do
-    regex="^sudo $command .*\$|^$command .*\$"
-    print "$BUFFER" | egrep -q "$regex" && {
-        __WILL_CLEAR=true
-    }
-    done
+    for command in ${commandsThatModifyFiles[@]}; do
+        regex="^sudo $command .*\$|^$command .*\$"
+        print "$BUFFER" | egrep -q "$regex" && {
+            __WILL_CLEAR=true
+        }
+        done
 
     zle .accept-line 
-    #leaky simonoff zsh theme
+    #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
 }
+
 zle -N accept-line my-accept-line
 
 precmd(){
@@ -630,18 +631,18 @@ precmd(){
             __WILL_CLEAR=false
         fi
     }
-    #leaky simonoff zsh theme
+    #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
 }
 
 rationalize-dot (){
-if [[ $LBUFFER = *.. ]]; then
-    LBUFFER+=/..
-else
-    LBUFFER+=.
-fi
+    if [[ $LBUFFER = *.. ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
 }
 
 
