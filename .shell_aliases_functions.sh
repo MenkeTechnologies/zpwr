@@ -38,41 +38,41 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$PATH"
     } || export PATH="$PATH:/usr/games"
 
-exists yarn && export PATH="$(yarn global bin):$PATH"
+    exists yarn && export PATH="$(yarn global bin):$PATH"
 #}}}***********************************************************
 
 #{{{                           MARK:HOMES
 #**********************************************************************
-[[ "$(uname)" == Darwin ]] && {
-    export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
-    export HOMEBREW_HOME='/usr/local/Cellar'
-    export HOMEBREW_OPT_HOME='/usr/local/opt'
-    export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
-    export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
-    export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
-    export HOMEBREW_DBHOME='/usr/local/var'
-    export HOMEBREW_DB_CONF='/usr/local/etc'
-    eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
-    export MANPATH=$HOME/perl5/man:$MANPATH
-    export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
-    export TUTORIAL_FILES="$HOME/Documents/tu;orialsRepo"
-    export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
-    export PIP_HOME="/usr/local/lib/python2.7/site-packages"
-    export EDITOR='mvim -v'
-    } || {
-        export EDITOR='vim'
-    }
-    export YARN_HOME="$HOME/.config/yarn"
-    export NODE_HOME="/usr/local/lib/node_modules"
-    export PERL5LIB="$HOME/perl5/lib/perl5"
-    export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
-    export HISTSIZE=50000
-    export HISTTIMEFORMAT=' %F %T _ '
-    export BLUE="\e[37;44m"
-    export RED="\e[31m"
-    export RESET="\e[0m"
-    export LOGFILE="$HOME/updaterlog.txt"
-    export UMASK=077
+    [[ "$(uname)" == Darwin ]] && {
+        export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+        export HOMEBREW_HOME='/usr/local/Cellar'
+        export HOMEBREW_OPT_HOME='/usr/local/opt'
+        export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
+        export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
+        export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
+        export HOMEBREW_DBHOME='/usr/local/var'
+        export HOMEBREW_DB_CONF='/usr/local/etc'
+        eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+        export MANPATH=$HOME/perl5/man:$MANPATH
+        export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
+        export TUTORIAL_FILES="$HOME/Documents/tu;orialsRepo"
+        export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
+        export PIP_HOME="/usr/local/lib/python2.7/site-packages"
+        export EDITOR='mvim -v'
+        } || {
+            export EDITOR='vim'
+        }
+        export YARN_HOME="$HOME/.config/yarn"
+        export NODE_HOME="/usr/local/lib/node_modules"
+        export PERL5LIB="$HOME/perl5/lib/perl5"
+        export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
+        export HISTSIZE=50000
+        export HISTTIMEFORMAT=' %F %T _ '
+        export BLUE="\e[37;44m"
+        export RED="\e[31m"
+        export RESET="\e[0m"
+        export LOGFILE="$HOME/updaterlog.txt"
+        export UMASK=077
 
 #**************************************************************
 #}}}
