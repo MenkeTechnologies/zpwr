@@ -558,6 +558,12 @@ bindkey -M vicmd '\e^K' alternateQuotes
 bindkey -M viins '\e^D' capitalize-word
 bindkey -M vicmd '\e^D' capitalize-word
 
+bindkey -M viins '\e^L' down-case-word
+bindkey -M vicmd '\e^L' down-case-word
+
+bindkey -M viins '\e^U' up-case-word
+bindkey -M vicmd '\e^U' up-case-word
+
 bindkey -M viins '\e[5~' clipboard
 bindkey -M viins '^B' clipboard
 bindkey -M vicmd '^B' clipboard
