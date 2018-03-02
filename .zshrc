@@ -182,7 +182,7 @@ gitCommitAndPush "$BUFFER" && {
 
 tutsUpdate() {
     commitMessage="$BUFFER"
-    if [[ "$commitMessage" ]]; then
+    if [[ ! -z "$commitMessage" ]]; then
         if [[ "$commitMessage" =~ ^\ +$ ]]; then
             printf "No commit message\n" >&2
             zle .accept-line
