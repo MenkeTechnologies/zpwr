@@ -181,7 +181,6 @@ else
         update "$prog" "$distro"
     done
 
-
     prettyPrint "Installing Powerline fonts"
     if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
         wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
@@ -235,6 +234,7 @@ mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/aut
 prettyPrint "Installing Vim Plugins"
 cd "$INSTALLER_DIR"
 bash "$INSTALLER_DIR/vim_plugins_install.sh"
+
 if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Installing psutil for Python Glances"
     pip install psutil 
@@ -257,17 +257,16 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     pip install mycli
 
 
-
-    if [[ "$distro" == redhat ]]; then
-        prettyPrint "Installing grc with pip"
-        git clone https://github.com/garabik/grc.git && cd grc && sudo bash install.sh
-    fi
-
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
         pip install --upgrade youtube_dl
     }
 else
+    if [[ "$distro" == redhat ]]; then
+        prettyPrint "Installing grc for RedHat"
+        git clone https://github.com/garabik/grc.git && cd grc && sudo bash install.sh
+    fi
+
     prettyPrint "Installing psutil for Python Glances"
     sudo pip install psutil 
     prettyPrint "Installing Python Glances"
