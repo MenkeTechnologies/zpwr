@@ -1,3 +1,1 @@
-if-shell "(( $(tmux -V | awk '{print ($2 >= 2.1)}') == 1 ))" 'source ~/.tmux/tmux_ge_21.conf' 'source ~/.tmux/tmux_lt_21.conf'
-
 if-shell '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = raspbian ]' 'source /usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf' 'source /usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
