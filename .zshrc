@@ -672,30 +672,29 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
 
     if [[ "$distro" == raspbian ]]; then
         :
-    #bindkey -M menuselect '\eOA' vi-backward-word
-    #bindkey -M menuselect '\eOB' vi-forward-word
-    #bindkey -M menuselect '\eOD' vi-beginning-of-line
-    #bindkey -M menuselect '\eOC' vi-end-of-line
+        #bindkey -M menuselect '\eOA' vi-backward-word
+        #bindkey -M menuselect '\eOB' vi-forward-word
+        #bindkey -M menuselect '\eOD' vi-beginning-of-line
+        #bindkey -M menuselect '\eOC' vi-end-of-line
     else
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
         bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
         bindkey -M menuselect '\e[1;5C' vi-end-of-line
     fi
-
 }
 
-#bind function arrow keus in menuselect mode
+#bind function arrow keys in menuselect mode
 bindkey -M menuselect '\e[5~' vi-backward-word
 bindkey -M menuselect '\e[6~' vi-forward-word
 bindkey -M menuselect '\e[1~' vi-beginning-of-line
 bindkey -M menuselect '\e[4~' vi-end-of-line
-
+#just like in vimrc
 bindkey -M menuselect '^K' vi-backward-word
 bindkey -M menuselect '^J' vi-forward-word
 bindkey -M menuselect '^H' vi-beginning-of-line
 bindkey -M menuselect '^L' vi-end-of-line
-
+#search through options
 bindkey -M menuselect '/' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
 bindkey -M menuselect '^M' .accept-line
@@ -704,7 +703,7 @@ autoload -U select-bracketed select-quoted
 zle -N select-bracketed
 zle -N select-quoted
 
-# bind vim text objects on command line, depends on zsh having visual mode in zle
+# bind vim text objects on command line, depends on zsh having visual and operator pendings modes in zle
 for km in viopp visual; do
     bindkey -M $km -- '-' vi-up-line-or-history
 
@@ -723,7 +722,7 @@ done
 bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 
-# RPROMPT shows vi mode
+# RPROMPT shows vim modes (insert vs normal)
 zle-keymap-select() {
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
     [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
