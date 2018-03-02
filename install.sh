@@ -464,7 +464,7 @@ bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 #{{{                    MARK:Final
 #**************************************************************
 cd "$INSTALLER_DIR"
-cd
+cd ..
 rm -rf "$INSTALLER_DIR"
 prettyPrint "Done!!!!!!"
 
