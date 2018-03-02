@@ -11,7 +11,6 @@ installGitHubPlugin(){
     git clone "https://github.com/$1.git" 
 }
 
-printf "Installing Tmux Plugins"
 if [[ -d "$HOME/.tmux/plugins" ]]; then
     mkdir -p "$HOME/.tmux/plugins"
 fi
