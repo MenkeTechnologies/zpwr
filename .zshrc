@@ -1058,7 +1058,7 @@ colortest(){
 #**************************************************************
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
 #to include hidden files in search
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
 #}}}***********************************************************
 
 #{{{                    MARK:override default FTP completion
