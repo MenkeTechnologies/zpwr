@@ -537,13 +537,16 @@ bindkey -M viins '^z' undo
 bindkey -M vicmd '^z' undo
 
 zle -N basicSedSub
-bindkey -M viins '^N' basicSedSub
-bindkey -M vicmd '^N' basicSedSub
+bindkey -M viins '^P' basicSedSub
+bindkey -M vicmd '^P' basicSedSub
 bindkey -M viins '^O' edit-command-line
 bindkey -M vicmd '^O' edit-command-line
 
-bindkey -M viins '^P' fzf-history-widget
-bindkey -M vicmd '^P' fzf-history-widget
+bindkey -M viins '^F' fzf-file-widget
+bindkey -M vicmd '^F' fzf-file-widget
+
+bindkey -M viins '^H' fzf-history-widget
+bindkey -M vicmd '^H' fzf-history-widget
 
 zle -N changeQuotes
 zle -N alternateQuotes
