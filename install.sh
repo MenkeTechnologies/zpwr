@@ -157,19 +157,19 @@ else
 
     case $distroName in
         (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
-            distro=debian
+            distroFamily=debian
             addDependenciesDebian
             ;;
         (opensuse|suse) prettyPrint "Installing Dependencies for $distroName with zypper"
-            distro=suse
+            distroFamily=suse
             addDependenciesSuse
             ;;
         (centos|fedora|rhel) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
-            distro=redhat
+            distroFamily=redhat
             addDependenciesRedHat
             ;;
         (*)
-            prettyPrint "Your distro $distroName is unsupported now...cannot proceed!" >&2
+            prettyPrint "Your distroFamily $distroName is unsupported now...cannot proceed!" >&2
             exit 1
             ;;
     esac
@@ -178,7 +178,7 @@ else
 
     for prog in "${dependencies_ary[@]}"; do
         prettyPrint "Installing $prog"
-        update "$prog" "$distro"
+        update "$prog" "$distroFamily"
     done
 
     prettyPrint "Installing Powerline fonts"
@@ -262,9 +262,15 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         pip install --upgrade youtube_dl
     }
 else
-    if [[ "$distro" == redhat ]]; then
+    if [[ "$distroFamily" == redhat ]]; then
         prettyPrint "Installing grc for RedHat"
         git clone https://github.com/garabik/grc.git && cd grc && sudo bash install.sh
+    fi
+
+    if [[ "$distroName" == centos ]]; then
+        sudo yum install epel-release
+        sudo yum install -y python36
+        sudo ln -s /usr/bin/python36 /usr/bin/python3
     fi
 
     prettyPrint "Installing psutil for Python Glances"
