@@ -11,9 +11,8 @@
 #{{{                    MARK:Setup
 #**************************************************************
 
-set -x
-
-set -v
+#set -x
+#set -v
 
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
