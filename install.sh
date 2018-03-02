@@ -353,6 +353,7 @@ fi
 prettyPrint "Installing Custom Tmux Commands"
 cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 
+cd "$INSTALLER_DIR"
 prettyPrint "Installing Tmux plugins"
 bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 

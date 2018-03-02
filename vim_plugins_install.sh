@@ -11,7 +11,6 @@ installVimPlugin(){
     git clone "https://github.com/$1.git" 
 }
 
-printf "Installing Vim Plugins\n"
 if [[ -d "$HOME/.vim/bundle" ]]; then
     mkdir -p "$HOME/.vim/bundle"
 fi
