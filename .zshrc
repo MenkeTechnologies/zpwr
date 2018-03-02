@@ -925,7 +925,7 @@ alias -g L='|less -MN'
 alias -g W='| wc -l'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
-alias -g F=' "$(fzf)"'
+alias -g F=' "$(fzf --height 60% --reverse --border)"'
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
@@ -1058,6 +1058,8 @@ colortest(){
 #{{{                    MARK:FZF
 #**************************************************************
 [[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
+#to include hidden files in search
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 #}}}***********************************************************
 
 #{{{                    MARK:override default FTP completion
