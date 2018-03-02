@@ -1055,7 +1055,7 @@ _comps[ftp]=_ftp
 
 #{{{                    MARK:Groovy
 #**************************************************************
-unset GROOVY_HOE # when set this messes up classpath
+unset GROOVY_HOME # when set this messes up classpath
 #}}}***********************************************************
 #
 #
