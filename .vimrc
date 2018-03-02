@@ -695,6 +695,8 @@ noremap <expr> e repmo#SelfKey('e', 'ge')|sunmap e
 noremap <expr> ge repmo#SelfKey('ge', 'e')|sunmap ge
 noremap <expr> + repmo#SelfKey('+', '-')|sunmap +
 noremap <expr> - repmo#SelfKey('-', '+')|sunmap -
+noremap <expr> { repmo#SelfKey('{', '}')|sunmap {
+noremap <expr> } repmo#SelfKey('}', '{')|sunmap }
 noremap <expr> ( repmo#SelfKey('(', ')')|sunmap (
 noremap <expr> ) repmo#SelfKey(')', '(')|sunmap )
 
@@ -817,7 +819,7 @@ elseif os == "Linux"
     endif
 endif
 
-"gf and :find will find files automatically in these locations
+"gf and :find will find file automatically in these locations
 set path+=~/Desktop
 set path+=~/Documents/shellScripts
 
