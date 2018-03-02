@@ -290,23 +290,22 @@ xx(){
 }
 
 cgh(){
-
     [[ -z "$1" ]] && user=MenkeTechnologies || user="$1"
     curl -s https://github.com/$user | grep 'contributions' | head -1 | tr -s ' '
 }
 
 jd(){
-        for dir;do
-            command mkdir -p "$dir"
-        done
+    for dir;do
+        command mkdir -p "$dir"
+    done
 }
 
 j(){
-for file;do
-    dirname="$(dirname $file)"
-    [[ "$dirname" != . ]] && command mkdir -p "$dirname"
-    touch "$file"
-done
+    for file;do
+        dirname="$(dirname $file)"
+        [[ "$dirname" != . ]] && command mkdir -p "$dirname"
+        touch "$file"
+    done
 }
 
 scnew(){
@@ -582,8 +581,8 @@ mp4(){
 prettyPrint(){
     [[ ! -z "$1" ]] && printf "\e[1m$1\e[0m\n" || {
         echo "Need one arg" >&2
-    return 1
-}
+        return 1
+    }
 }
 
 tac(){
@@ -608,7 +607,7 @@ gcl() {
 
 ino(){
     dir="$1"
-    mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
+    command mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
     {
         cat <<\EOF
 #include <Arduino.h>
@@ -625,6 +624,7 @@ void loop() {
 }
 EOF
     } > src/main.cpp
+
     {
         cat <<\EOF
 #!/usr/bin/env bash
@@ -643,7 +643,6 @@ EOF
     } > Runner.sh
 
     chmod +x Runner.sh
-
     {
         cat <<\EOF
 add_custom_target(
@@ -672,7 +671,7 @@ jetbrainsWorkspaceEdit(){
 
     } || echo "No Match Yet" >&2
     sleep 1
-done
+    done
 }
 
 getrc(){
