@@ -537,8 +537,13 @@ bindkey -M viins '^z' undo
 bindkey -M vicmd '^z' undo
 
 zle -N basicSedSub
-bindkey -M viins '^P' basicSedSub
-bindkey -M vicmd '^P' basicSedSub
+bindkey -M viins '^N' basicSedSub
+bindkey -M vicmd '^N' basicSedSub
+bindkey -M viins '^O' edit-command-line
+bindkey -M vicmd '^O' edit-command-line
+
+bindkey -M viins '^P' fzf-history-widget
+bindkey -M vicmd '^P' fzf-history-widget
 
 zle -N changeQuotes
 zle -N alternateQuotes
@@ -549,6 +554,9 @@ bindkey -M vicmd '^K' changeQuotes
 
 bindkey -M viins '\e^K' alternateQuotes
 bindkey -M vicmd '\e^K' alternateQuotes
+
+bindkey -M viins '\e^D' capitalize-word
+bindkey -M vicmd '\e^D' capitalize-word
 
 bindkey -M viins '\e[5~' clipboard
 bindkey -M viins '^B' clipboard
@@ -944,7 +952,7 @@ alias -g nerr="2> /dev/null"
 #go to desktop if not root
 if [[ "$(uname)" = Darwin ]]; then
     if [[ "$UID" != "0" ]]; then
-        # builtin cd "$D" && clear
+         builtin cd "$D" && clear
         clear
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
@@ -1054,6 +1062,10 @@ _comps[ftp]=_ftp
 #{{{                    MARK:Groovy
 #**************************************************************
 unset GROOVY_HOME # when set this messes up classpath
+#}}}***********************************************************
+#{{{                    MARK:Suffix aliases
+#**************************************************************
+alias -s txt='vim'
 #}}}***********************************************************
 #
 #
