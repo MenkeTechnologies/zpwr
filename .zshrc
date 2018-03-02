@@ -96,25 +96,24 @@ plugins=(zsh-more-completions fzf-zsh zsh-completions zsh-syntax-highlighting zs
 
     plugins+=(systemd)
 
-distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
+    distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
-case $distroName in
-    (debian|raspbian|kali) 
-        plugins+=(debian)
-        ;;
-    (ubuntu) 
-        plugins+=(ubuntu)
-        ;;
-    (centos|rhel) 
-        plugins+=(yum dnf)
-        ;;
-    (fedora) 
-        plugins+=(yum fedora dnf)
-        ;;
-    (*) :
-        ;;
-esac
-
+    case $distroName in
+        (debian|raspbian|kali) 
+            plugins+=(debian)
+            ;;
+        (ubuntu) 
+            plugins+=(ubuntu)
+            ;;
+        (centos|rhel) 
+            plugins+=(yum dnf)
+            ;;
+        (fedora) 
+            plugins+=(yum fedora dnf)
+            ;;
+        (*) :
+            ;;
+    esac
 }
 #}}}***********************************************************
 
@@ -182,7 +181,7 @@ gitCommitAndPush "$BUFFER" && {
 
 tutsUpdate() {
     commitMessage="$BUFFER"
-    if [[ ! -z "$commitMessage" ]]; then
+    if [[ "$commitMessage" ]]; then
         if [[ "$commitMessage" =~ ^\ +$ ]]; then
             printf "No commit message\n" >&2
             zle .accept-line
@@ -1019,6 +1018,7 @@ source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
 
 #{{{                    MARK:ColorTest
 #**************************************************************
+#print 2d array of colors
 colortest(){
     for backgroundColor in ${(ko)bg}; do
         print -n "$bg[$backgroundColor]"
