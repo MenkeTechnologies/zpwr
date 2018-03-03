@@ -7,6 +7,7 @@ vim-scripts/camelcasemotion
 sjl/clam.vim
 ctrlpvim/ctrlp.vim
 raimondi/delimitmate
+mattn/emmet-vim
 othree/html5.vim
 Shougo/neobundle.vim
 scrooloose/nerdcommenter
