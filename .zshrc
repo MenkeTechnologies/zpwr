@@ -934,8 +934,8 @@ alias -g L='|less -MN'
 alias -g W='| wc -l'
 alias -g nul="> /dev/null 2>&1"
 alias -g nerr="2> /dev/null"
-ROUGIFY_THEME="tulip"
-alias -g F=' "$(fzf --reverse --border --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || ls -dAlhFi {} | head -500")"'
+ROUGIFY_THEME="github"
+alias -g F=' "$(fzf --reverse --border --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
 #
@@ -1070,7 +1070,7 @@ colortest(){
 #to include hidden files in search
 export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
 export FZF_DEFAULT_OPTS="--reverse --border --height 100%" 
-export FZF_CTRL_T_OPTS="--preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || ls -dAlhFi {} | head -500\""
+export FZF_CTRL_T_OPTS="--preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
 
 local base03="234"
 local base02="235"
