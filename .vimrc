@@ -715,7 +715,7 @@ function CompleteLine()
     let exeFileType=expand('%:e')
     if index(SemiColon, exeFileType) >= 0
         inoremap <C-Space> <C-O>$;<Enter>
-        inoremap <ESC><CR> <C-O>$;<ESC>+
+        inoremap <ESC><Space> <ESC>+
     else
         inoremap <C-Space> <C-O>$<Enter>
         inoremap <ESC><Space> <ESC>+
