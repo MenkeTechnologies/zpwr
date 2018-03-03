@@ -711,12 +711,12 @@ map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
 function CompleteLine()
-    let noSemiColon=['sh','py','rb','pl','coffee']
+    let SemiColon=['java','pl','c','cpp','js']
     let exeFileType=expand('%:e')
-    if index(noSemiColon, exeFileType) >= 0
-        inoremap <Esc><Enter> <C-O>$<Enter>
+    if index(SemiColon, exeFileType) >= 0
+        inoremap <C-Space> <C-O>$;<Enter>
     else
-        inoremap <Esc><Enter> <C-O>$;<Enter>
+        inoremap <C-Space> <C-O>$<Enter>
     endif
 endfunction
 
