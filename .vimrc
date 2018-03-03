@@ -710,6 +710,18 @@ noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
 map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
+function CompleteLine()
+    let noSemiColon=['sh','py','rb','pl','coffee']
+    let exeFileType=expand('%:e')
+    if index(noSemiColon, exeFileType) >= 0
+        inoremap <Esc><Enter> <C-O>$<Enter>
+    else
+        inoremap <Esc><Enter> <C-O>$;<Enter>
+    endif
+endfunction
+
+autocmd VimEnter * call CompleteLine()
+
 "}}}***********************************************************
 
 "{{{                    MARK:Remaps
