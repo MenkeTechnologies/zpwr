@@ -1066,8 +1066,7 @@ colortest(){
 
 #{{{                    MARK:FZF
 #**************************************************************
-[[ -f "$HOME/.fzf.zsh" ]] && source "$HOME/.fzf.zsh"
-#to include hidden files in search
+#to include dirs in search
 export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
 export FZF_DEFAULT_OPTS="--reverse --border --height 100%" 
 export FZF_CTRL_T_OPTS="--preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
