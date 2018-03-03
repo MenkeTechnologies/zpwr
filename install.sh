@@ -486,6 +486,9 @@ cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
 prettyPrint "Installing Zsh plugins"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
+prettyPrint "Installing fzf"
+${ZSH}/custom/plugins/fzf/install --bin
+
 #}}}***********************************************************
 
 #{{{                    MARK:Final
