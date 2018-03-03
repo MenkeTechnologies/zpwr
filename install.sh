@@ -305,8 +305,28 @@ fi
 prettyPrint "Done With Python Packages"
 
 
-prettyPrint "Installing Lolcat"
-gem install lolcat
+prettyPrint "Installing rougify"
+case "$distroName" in
+    fedora)
+        needSudo=no
+        ;;
+    raspbian)
+        needSudo=yes
+        ;;
+    *)
+        needSudo=no
+        ;;
+esac
+
+prettyPrint "Installing lolcat, rouge"
+if [[ "$needSudo" == yes ]]; then
+    sudo gem install lolcat
+    sudo gem install rouge
+else
+     gem install lolcat
+     gem install rouge
+fi
+
 
 prettyPrint "Running Vundle"
 #run vundle install for ultisnips, supertab
