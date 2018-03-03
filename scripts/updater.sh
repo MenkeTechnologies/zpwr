@@ -156,10 +156,10 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
     manager="$(echo "$1" | awk -F: '{print $2}')"
 
     if [[ "$manager" == "apt" ]]; then
-        ssh -x "$hostname" 'yes | sudo apt-get update
-        yes | sudo apt-get dist-upgrade
-        yes | sudo apt-get autoremove
-        yes | sudo apt-get clean'
+        ssh -x "$hostname" 'yes | sudo apt update
+        yes | sudo apt dist-upgrade
+        yes | sudo apt autoremove
+        yes | sudo apt autoclean'
     elif [[ "$manager" == zypper ]]; then
         ssh -x "$hostname" 'zypper --non-interactive refresh
         sudo zypper --non-interactive update
