@@ -716,9 +716,11 @@ function CompleteLine()
     if index(SemiColon, exeFileType) >= 0
         inoremap <C-Space> <C-O>$;<Enter>
         inoremap <ESC><Space> <ESC>+
+        nnoremap <ESC><Space> +
     else
         inoremap <C-Space> <C-O>$<Enter>
         inoremap <ESC><Space> <ESC>+
+        nnoremap <ESC><Space> +
     endif
 endfunction
 
