@@ -940,9 +940,9 @@ alias -g NE="2> /dev/null"
 alias -g G='|& egrep -i'
 
 if [[ "$(uname)" == Darwin ]]; then
-    alias -g P='| pbcopy'
+    alias -g P='| pbcopy -pboard general'
 else
-    alias -g P='| xclip'
+    alias -g P='| xclip -selection clipboard'
 fi
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
@@ -1159,6 +1159,7 @@ globalias() {
 zle -N globalias
 
 bindkey -M viins " " globalias
+bindkey -M viins "^ " magic-space
 bindkey -M vicmd " " magic-space
 bindkey -M isearch '^A' beginning-of-line
 
