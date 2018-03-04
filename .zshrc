@@ -1149,6 +1149,9 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 globalias() {
    if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
      zle _expand_alias
+   else
+     zle expand-history
+        
    fi
    zle self-insert
 }
@@ -1156,7 +1159,7 @@ globalias() {
 zle -N globalias
 
 bindkey -M viins " " globalias
-bindkey -M viins "^ " magic-space
+bindkey -M vicmd " " magic-space
 bindkey -M isearch " " magic-space
 
 #}}}***********************************************************
