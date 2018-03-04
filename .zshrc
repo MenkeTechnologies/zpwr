@@ -934,8 +934,8 @@ zstyle ':completion:*:manuals' separate-sections true
 #{{{                    MARK:Global Aliases
 #**************************************************************
 alias -g L='|less -MN'
-alias -g A="| awk '{printf \"%s\\n\", \$1}'"
-alias -g S="| sed 's@@@g'"
+alias -g A="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g S="| sed -E 's@@@g'"
 alias -g W='| wc -l'
 alias -g N="> /dev/null 2>&1"
 alias -g NE="2> /dev/null"
