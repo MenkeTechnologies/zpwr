@@ -1159,8 +1159,7 @@ globalias() {
 zle -N globalias
 
 bindkey -M viins " " globalias
-bindkey -M viins "^ " magic-space
-bindkey -M vicmd " " magic-space
+bindkey -M viins "\e " magic-space
 bindkey -M isearch '^A' beginning-of-line
 
 #}}}***********************************************************
