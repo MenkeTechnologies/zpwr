@@ -1084,7 +1084,7 @@ export FZF_COMPLETION_OPTS="--prompt='>>> ' --preview  \"[[ -f {} ]] &&
             echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
                 ping -c 1 {}
             } || {
-                cat ~/.aliases | grep {} || set | grep {} | grep -v ZSH_EXEC || alias | grep {} ||  ping -c 1 {}
+                cat ~/.common_aliases | grep {} || set | grep {} | grep -v ZSH_EXEC || alias | grep {} ||  ping -c 1 {}
             }
             
          } | cowsay | ponysay
@@ -1098,7 +1098,6 @@ _fzf_complete_alias() {
       alias | sed 's/=.*//'
         )
 }
-
 
 [[ -f "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" ]] && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" 
 
@@ -1141,6 +1140,7 @@ unset GROOVY_HOME # when set this messes up classpath
 #{{{                    MARK:Suffix aliases
 #**************************************************************
 alias -s txt='vim'
+alias > "$HOME/.common_aliases"
 #}}}***********************************************************
 #
 #
