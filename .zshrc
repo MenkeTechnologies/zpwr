@@ -1074,6 +1074,23 @@ export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
 export FZF_DEFAULT_OPTS="--reverse --border --height 100%" 
 export FZF_CTRL_T_OPTS="--preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
 
+export FZF_COMPLETION_OPTS="--prompt='>>> ' --preview  \"[[ -f {} ]] &&
+    rougify -t $ROUGIFY_THEME {} 2>/dev/null || {
+        [[ -e {} ]] && {
+            stat {} | fold -80 | head -500
+        } || {
+            source ~/.shell_aliases_functions.sh
+        { 
+            echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
+                ping -c 1 {}
+            } || {
+                cat ~/.aliases | grep {} || set | grep {} | grep -v ZSH_EXEC || ping -c 1 {}
+            }
+            
+         } | cowsay | ponysay
+   }
+}\""
+
 export FZF_COMPLETION_TRIGGER=';'
 
 
