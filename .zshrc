@@ -1086,9 +1086,9 @@ export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] &&
             source ~/.shell_aliases_functions.sh
         { 
             echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
-                ping -c 1 {}
+                whois {}
             } || {
-                cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} ||  ping -c 1 {}
+                cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} ||  whois {}
             }
             
          } | cowsay | ponysay
