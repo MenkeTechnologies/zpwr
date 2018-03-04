@@ -1070,7 +1070,7 @@ colortest(){
 #{{{                    MARK:FZF
 #**************************************************************
 ROUGIFY_THEME="github"
-__COMMON_FZF_ELEMENTS="--prompt='<<()>> '"
+__COMMON_FZF_ELEMENTS="--prompt='-->>> '"
 alias -g F=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
 
 #to include dirs files in search
@@ -1119,7 +1119,6 @@ local red="160"
 local magenta="125"
 local violet="61"
 local blue="33"
-local deepblue="19"
 local cyan="37"
 local green="64"
 
@@ -1128,7 +1127,7 @@ local green="64"
 # Solarized Dark color scheme for fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-    --color info:$yellow,prompt:$blue,pointer:$base3,marker:$base3,spinner:$yellow
+    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
   "
 #}}}***********************************************************
 
