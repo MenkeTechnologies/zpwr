@@ -545,8 +545,11 @@ bindkey -M vicmd '^O' edit-command-line
 bindkey -M viins '^F' fzf-file-widget
 bindkey -M vicmd '^F' fzf-file-widget
 
-bindkey -M viins '^H' fzf-history-widget
-bindkey -M vicmd '^H' fzf-history-widget
+bindkey -M viins '^N' fzf-history-widget
+bindkey -M vicmd '^N' fzf-history-widget
+
+bindkey -M viins '^H' fzf-cd-widget
+bindkey -M vicmd '^H' fzf-cd-widget
 
 zle -N changeQuotes
 zle -N alternateQuotes
@@ -1070,6 +1073,8 @@ colortest(){
 export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
 export FZF_DEFAULT_OPTS="--reverse --border --height 100%" 
 export FZF_CTRL_T_OPTS="--preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
+
+export FZF_COMPLETION_TRIGGER='~~'
 
 local base03="234"
 local base02="235"
