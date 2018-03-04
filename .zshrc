@@ -1084,7 +1084,7 @@ export FZF_COMPLETION_OPTS="--prompt='>>> ' --preview  \"[[ -f {} ]] &&
             echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
                 ping -c 1 {}
             } || {
-                cat ~/.aliases | grep {} || set | grep {} | grep -v ZSH_EXEC || ping -c 1 {}
+                cat ~/.aliases | grep {} || set | grep {} | grep -v ZSH_EXEC || alias | grep {} ||  ping -c 1 {}
             }
             
          } | cowsay | ponysay
@@ -1092,6 +1092,12 @@ export FZF_COMPLETION_OPTS="--prompt='>>> ' --preview  \"[[ -f {} ]] &&
 }\""
 
 export FZF_COMPLETION_TRIGGER=';'
+
+_fzf_complete_alias() {
+  _fzf_complete '+m' "$@" < <(
+      alias | sed 's/=.*//'
+        )
+}
 
 
 [[ -f "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" ]] && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" 
