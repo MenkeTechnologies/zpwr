@@ -1074,7 +1074,10 @@ export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
 export FZF_DEFAULT_OPTS="--reverse --border --height 100%" 
 export FZF_CTRL_T_OPTS="--preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
 
-export FZF_COMPLETION_TRIGGER='~~'
+export FZF_COMPLETION_TRIGGER=';'
+
+
+[[ -f "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" ]] && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" 
 
 local base03="234"
 local base02="235"
