@@ -935,10 +935,16 @@ zstyle ':completion:*:manuals' separate-sections true
 #**************************************************************
 alias -g L='|less -MN'
 alias -g W='| wc -l'
-alias -g nul="> /dev/null 2>&1"
-alias -g nerr="2> /dev/null"
-ROUGIFY_THEME="github"
-alias -g F=' "$(fzf --reverse --border --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
+alias -g N="> /dev/null 2>&1"
+alias -g NE="2> /dev/null"
+alias -g G='|& egrep -i'
+
+if [[ "$(uname)" == Darwin ]]; then
+    alias -g P='| pbcopy'
+else
+    alias -g P='| xclip'
+fi
+
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
 #
@@ -1136,6 +1142,25 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
   "
 #}}}***********************************************************
+
+#{{{                    MARK:Expand Global Aliases
+#**************************************************************
+
+globalias() {
+   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+     zle _expand_alias
+   fi
+   zle self-insert
+}
+
+zle -N globalias
+
+bindkey -M viins " " globalias
+bindkey -M viins "^ " magic-space
+bindkey -M isearch " " magic-space
+
+#}}}***********************************************************
+
 
 #{{{                    MARK:override default FTP completion
 #**************************************************************
