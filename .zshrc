@@ -934,12 +934,15 @@ zstyle ':completion:*:manuals' separate-sections true
 #{{{                    MARK:Global Aliases
 #**************************************************************
 alias -g L='|less -MN'
+alias -g B='&> "$LOGFILE" &; disown %1; ps -ef | grep $!'
 alias -g A="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g S="| sed -E 's@@@g'"
+alias -g T="| tr '' "
 alias -g W='| wc -l'
 alias -g N="> /dev/null 2>&1"
 alias -g NE="2> /dev/null"
-alias -g G='|& egrep -i'
+alias -g G='git add . && git commit -m "" && git push'
+alias -g E='|& egrep -i'
 alias -g P="| perl -lanE ''"
 
 if [[ "$(uname)" == Darwin ]]; then
