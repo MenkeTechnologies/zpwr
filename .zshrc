@@ -1097,6 +1097,12 @@ export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] &&
 
 export FZF_COMPLETION_TRIGGER=';'
 
+_fzf_complete_echo() {
+  _fzf_complete '-m' "$@" < <(
+      declare -xp | sed 's/=.*//' | sed 's/.* //'
+    )
+}
+
 _fzf_complete_alias() {
   _fzf_complete '+m' "$@" < <(
       alias | sed 's/=.*//'
