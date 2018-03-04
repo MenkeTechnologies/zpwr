@@ -1108,6 +1108,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 #{{{                    MARK:override default FTP completion
 #**************************************************************
 _comps[ftp]=_ftp
+_comps[passwd]=_passwd
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
