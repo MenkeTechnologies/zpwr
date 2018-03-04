@@ -96,6 +96,7 @@ fi
 #**********************************************************************
 #portable aliases
 alias va='cd /var'
+alias plrepl='rlwrap perl -de1'
 alias nz='exec zsh'
 alias ll="clearList"
 alias la="clearList"
