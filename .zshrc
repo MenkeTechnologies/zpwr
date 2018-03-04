@@ -940,10 +940,11 @@ alias -g W='| wc -l'
 alias -g N="> /dev/null 2>&1"
 alias -g NE="2> /dev/null"
 alias -g G='|& egrep -i'
-alias -g P='| perl -lanE ""'
+alias -g P="| perl -lanE ''"
 
 if [[ "$(uname)" == Darwin ]]; then
     alias -g C='| pbcopy -pboard general'
+    alias ge="exe 'z src;gl;getrc;nz'"
 else
     alias -g C='| xclip -selection clipboard'
 fi
