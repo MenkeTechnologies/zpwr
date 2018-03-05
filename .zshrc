@@ -1159,7 +1159,11 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 
 supernatural-space() {
 	    #statements
-        alias $LBUFFER | egrep -q '(grc|_z)' || zle _expand_alias
+    alias $LBUFFER | egrep -q '(grc|_z)' || {
+            if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]];then
+                zle _expand_alias
+            fi
+    }
      zle expand-history
      zle self-insert
 }
