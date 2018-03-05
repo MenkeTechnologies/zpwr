@@ -135,7 +135,7 @@ alias curl='curl -fsSL'
 alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always'
 alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=auto -c "$HOME/conf.ifconfig" ifconfig'
-alias df='grc --colour=auto -c "$HOME/conf.df" df'
+#alias df='grc --colour=auto -c "$HOME/conf.df" df'
 
 if [[ "$(uname)" == "Darwin" ]]; then
     #Darwin specific aliases
@@ -145,7 +145,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias mem="top -o mem"
     alias tip="top -o +command"
     alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
-    alias back="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
+    alias bsaver="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
     alias c="cd $WCC"
     alias emu="cd $SD_PATH/emu"
