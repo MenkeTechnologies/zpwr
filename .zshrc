@@ -986,6 +986,7 @@ __CORRECT_WORDS[they]="tehy ethy"
 __CORRECT_WORDS[back]="abck bak"
 __CORRECT_WORDS[that]="taht"
 __CORRECT_WORDS[than]="tahn"
+__CORRECT_WORDS[then]="tehn"
 __CORRECT_WORDS[to]="ot"
 __CORRECT_WORDS[why]="hwy wyh"
 __CORRECT_WORDS[inside]="insdie inisde isnide sindie"
@@ -997,17 +998,22 @@ __CORRECT_WORDS[store]="sotre"
 
 supernatural-space() {
 	    #statements
-    __TEMP_BUFFER="$(echo $BUFFER | tr -d "()[]{}\$'\"" )"
+    __TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
     mywords=("${(z)__TEMP_BUFFER}")
     finished=false
 
     for key in ${(k)__CORRECT_WORDS[@]}; do
         badWords=("${(z)__CORRECT_WORDS[$key]}")
         for misspelling in $badWords[@];do
-        echo "$misspelling mathcces $mywords[-1]" >> $LOGFILE
-        echo "words: $mywords" >> $LOGFILE
+
+            echo "Does $misspelling matches $mywords[-1]?" >> $LOGFILE
+            echo "words: $mywords" >> $LOGFILE
+
             if [[ $mywords[-1] == $misspelling ]]; then
-                BUFFER="$(echo $BUFFER | sed "s@$misspelling@$key@g")"
+                echo  >> $LOGFILE
+            echo "$misspelling matches $mywords[-1]!" >> $LOGFILE
+                echo  >> $LOGFILE
+                LBUFFER="$(echo $LBUFFER | sed -E "s@\\b$misspelling\\b@$key@g")"
                 break
                 finished=true
             fi
