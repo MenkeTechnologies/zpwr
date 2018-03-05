@@ -953,6 +953,8 @@ else
     alias -g V='| xclip -selection clipboard'
 fi
 
+
+
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
 #
@@ -1028,6 +1030,7 @@ export HISTSIZE=50000
 
 #set right prompt string during continuation 
 RPS2='+%N:%i:%^'
+export PS3=$'\e[1;34m-->>>> \e[0m'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
