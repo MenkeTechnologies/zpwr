@@ -962,12 +962,13 @@ alias -g jt="| tr '' "
 alias -g ji="| tail" 
 alias -g jw='| wc -l'
 alias -g jn="> /dev/null 2>&1"
+alias -g jo='&>> "$LOGFILE"'
 alias -g jne="2> /dev/null"
 alias -g jg='git add . && git commit -m "" && git push'
 alias -g je='|& fgrep -v "grep" |& egrep -i'
 alias -g jp="| perl -lanE 'say'"
 alias -g jc="| cut -d ' ' -f1"
-alias -g jo="| sort"
+alias -g jr="| sort"
 alias -g ju="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
 
 if [[ "$(uname)" == Darwin ]]; then
@@ -996,15 +997,17 @@ __CORRECT_WORDS[store]="sotre"
 
 supernatural-space() {
 	    #statements
-    mywords=("${(z)BUFFER}")
+    __TEMP_BUFFER="$(echo $BUFFER | tr -d "()[]{}\$'\"" )"
+    mywords=("${(z)__TEMP_BUFFER}")
     finished=false
 
     for key in ${(k)__CORRECT_WORDS[@]}; do
         badWords=("${(z)__CORRECT_WORDS[$key]}")
-        #say $badWords
         for misspelling in $badWords[@];do
+        echo "$misspelling mathcces $mywords[-1]" >> $LOGFILE
+        echo "words: $mywords" >> $LOGFILE
             if [[ $mywords[-1] == $misspelling ]]; then
-                mywords[-1]=$key
+                BUFFER="$(echo $BUFFER | sed "s@$misspelling@$key@g")"
                 break
                 finished=true
             fi
@@ -1013,8 +1016,6 @@ supernatural-space() {
             break
         fi
     done
-
-    BUFFER="$mywords"
 
     alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
             #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
