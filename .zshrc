@@ -991,6 +991,7 @@ __CORRECT_WORDS[inside]="insdie inisde isnide"
 __CORRECT_WORDS[just]="jsut jutsi just"
 __CORRECT_WORDS[here]="ehre"
 __CORRECT_WORDS[not]="not"
+__CORRECT_WORDS[store]="sotre"
 
 
 supernatural-space() {
