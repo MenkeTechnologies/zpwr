@@ -956,6 +956,7 @@ zstyle ':completion:*:manuals' separate-sections true
 alias -g jl='|less -MN'
 alias -g jb='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
 alias -g ja="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g jap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g js="| sed -E 's@@@g'"
 alias -g jt="| tr '' "
 alias -g jw='| wc -l'
@@ -967,15 +968,15 @@ alias -g jp="| perl -lanE ''"
 alias -g jc="| cut -d ' ' -f1"
 
 if [[ "$(uname)" == Darwin ]]; then
-    alias -g V='| pbcopy -pboard general'
+    alias -g jv='| pbcopy -pboard general'
     alias ge="exe 'z src;gl;getrc;nz'"
 else
-    alias -g V='| xclip -selection clipboard'
+    alias -g jv='| xclip -selection clipboard'
 fi
 
 supernatural-space() {
 	    #statements
-    alias $LBUFFER | egrep -q '(grc|_z)' || {
+    alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
             #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
                [[ -z $RBUFFER ]] && zle _expand_alias
             #fi
