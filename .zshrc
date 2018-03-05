@@ -1013,9 +1013,9 @@ supernatural-space() {
                 echo  >> $LOGFILE
             echo "$misspelling matches $mywords[-1]!" >> $LOGFILE
                 echo  >> $LOGFILE
-                LBUFFER="$(echo $LBUFFER | sed -E "s@\\b$misspelling\\b@$key@g")"
-                break
+                LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$misspelling\\b@$key@g")"
                 finished=true
+                break
             fi
         done
         if [[ $finished == true ]]; then
