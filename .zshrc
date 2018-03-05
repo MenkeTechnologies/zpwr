@@ -1158,13 +1158,14 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 #**************************************************************
 
 globalias() {
-   if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+   #if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
+     #zle _expand_alias
+   #else
+     #zle expand-aliases
      zle _expand_alias
-   else
      zle expand-history
-        
-   fi
-   zle self-insert
+   #fi
+     zle self-insert
 }
 
 zle -N globalias
