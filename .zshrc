@@ -942,18 +942,18 @@ zstyle ':completion:*:manuals' separate-sections true
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
-alias -g L='|less -MN'
-alias -g B='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
-alias -g A="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-alias -g S="| sed -E 's@@@g'"
-alias -g T="| tr '' "
-alias -g W='| wc -l'
-alias -g N="> /dev/null 2>&1"
-alias -g NE="2> /dev/null"
-alias -g G='git add . && git commit -m "" && git push'
-alias -g E='|& fgrep -v "grep" |& egrep -i'
-alias -g P="| perl -lanE ''"
-alias -g C="| cut -d ' ' -f1"
+alias -g l='|less -MN'
+alias -g b='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
+alias -g a="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g s="| sed -E 's@@@g'"
+alias -g t="| tr '' "
+alias -g w='| wc -l'
+alias -g n="> /dev/null 2>&1"
+alias -g ne="2> /dev/null"
+alias -g g='git add . && git commit -m "" && git push'
+alias -g e='|& fgrep -v "grep" |& egrep -i'
+alias -g p="| perl -lanE ''"
+alias -g c="| cut -d ' ' -f1"
 
 if [[ "$(uname)" == Darwin ]]; then
     alias -g V='| pbcopy -pboard general'
@@ -962,7 +962,22 @@ else
     alias -g V='| xclip -selection clipboard'
 fi
 
+supernatural-space() {
+	    #statements
+    alias $LBUFFER | egrep -q '(grc|_z)' || {
+            if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
+                zle _expand_alias
+            fi
+    }
+     zle expand-history
+     zle self-insert
+}
 
+zle -N supernatural-space
+
+bindkey -M viins " " supernatural-space
+bindkey -M viins "\e " magic-space
+bindkey -M isearch '^A' beginning-of-line
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
@@ -1166,22 +1181,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 #{{{                    MARK:Expand Global Aliases
 #**************************************************************
 
-supernatural-space() {
-	    #statements
-    alias $LBUFFER | egrep -q '(grc|_z)' || {
-            if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]];then
-                zle _expand_alias
-            fi
-    }
-     zle expand-history
-     zle self-insert
-}
-
-zle -N supernatural-space
-
-bindkey -M viins " " supernatural-space
-bindkey -M viins "\e " magic-space
-bindkey -M isearch '^A' beginning-of-line
 
 #}}}***********************************************************
 
