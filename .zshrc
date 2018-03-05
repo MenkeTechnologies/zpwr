@@ -953,29 +953,29 @@ zstyle ':completion:*:manuals' separate-sections true
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
-alias -g L='|less -MN'
-alias -g B='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
-alias -g A="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-alias -g S="| sed -E 's@@@g'"
-alias -g T="| tr '' "
-alias -g W='| wc -l'
-alias -g N="> /dev/null 2>&1"
-alias -g NE="2> /dev/null"
-alias -g G='git add . && git commit -m "" && git push'
-alias -g E='|& fgrep -v "grep" |& egrep -i'
-alias -g P="| perl -lanE ''"
-alias -g C="| cut -d ' ' -f1"
+alias -g jl='|less -MN'
+alias -g jb='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
+alias -g ja="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g js="| sed -E 's@@@g'"
+alias -g jt="| tr '' "
+alias -g jw='| wc -l'
+alias -g jn="> /dev/null 2>&1"
+alias -g jne="2> /dev/null"
+alias -g jg='git add . && git commit -m "" && git push'
+alias -g je='|& fgrep -v "grep" |& egrep -i'
+alias -g jp="| perl -lanE ''"
+alias -g jc="| cut -d ' ' -f1"
 
 if [[ "$(uname)" == Darwin ]]; then
     alias -g V='| pbcopy -pboard general'
-    alias GE="exe 'z src;gl;getrc;nz'"
+    alias ge="exe 'z src;gl;getrc;nz'"
 else
     alias -g V='| xclip -selection clipboard'
 fi
 
 supernatural-space() {
 	    #statements
-    alias $LBUFFER | egrep -q '(grc|_z|cd)' || {
+    alias $LBUFFER | egrep -q '(grc|_z)' || {
             #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
                [[ -z $RBUFFER ]] && zle _expand_alias
             #fi
