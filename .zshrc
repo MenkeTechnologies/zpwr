@@ -633,16 +633,27 @@ my-accept-line () {
         }
     done
 
-    mywords=("${(z)BUFFER}")
-    for GL in $(alias -g | awk -F= '{print $1}'); do
-        if [[ $mywords[-1] == $GL ]]; then
-            mywords[-1]='"'$GL'"'
-            BUFFER="$mywords"
-            #echo we got $mywords>> $LOGFILE
-        fi
-    done
+    #mywords=("${(z)BUFFER}")
 
-    zle .accept-line 
+    #if [[ $#mywords == 1 ]]; then
+        #unalias -g $mywords[1]
+        #statements
+        #mywords[-1]='"'$GL'"'
+        #BUFFER="$mywords"
+        #zle .accept-line 
+        #alias -g $mywords[1]
+    #else
+        #zle .accept-line
+    #fi
+    #for GL in $(alias -g | awk -F= '{print $1}'); do
+        #if [[ $mywords[-1] == $GL ]]; then
+            #mywords[-1]='"'$GL'"'
+            #BUFFER="$mywords"
+            #echo we got $mywords>> $LOGFILE
+        #fi
+    #done
+        zle .accept-line
+
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
 }
@@ -942,22 +953,22 @@ zstyle ':completion:*:manuals' separate-sections true
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
-alias -g l='|less -MN'
-alias -g b='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
-alias -g a="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-alias -g s="| sed -E 's@@@g'"
-alias -g t="| tr '' "
-alias -g w='| wc -l'
-alias -g n="> /dev/null 2>&1"
-alias -g ne="2> /dev/null"
-alias -g g='git add . && git commit -m "" && git push'
-alias -g e='|& fgrep -v "grep" |& egrep -i'
-alias -g p="| perl -lanE ''"
-alias -g c="| cut -d ' ' -f1"
+alias -g L='|less -MN'
+alias -g B='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
+alias -g A="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g S="| sed -E 's@@@g'"
+alias -g T="| tr '' "
+alias -g W='| wc -l'
+alias -g N="> /dev/null 2>&1"
+alias -g NE="2> /dev/null"
+alias -g G='git add . && git commit -m "" && git push'
+alias -g E='|& fgrep -v "grep" |& egrep -i'
+alias -g P="| perl -lanE ''"
+alias -g C="| cut -d ' ' -f1"
 
 if [[ "$(uname)" == Darwin ]]; then
     alias -g V='| pbcopy -pboard general'
-    alias ge="exe 'z src;gl;getrc;nz'"
+    alias GE="exe 'z src;gl;getrc;nz'"
 else
     alias -g V='| xclip -selection clipboard'
 fi
@@ -965,9 +976,9 @@ fi
 supernatural-space() {
 	    #statements
     alias $LBUFFER | egrep -q '(grc|_z)' || {
-            if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
-                zle _expand_alias
-            fi
+            #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
+               [[ -z $RBUFFER ]] && zle _expand_alias
+            #fi
     }
      zle expand-history
      zle self-insert
@@ -1176,12 +1187,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
   "
-#}}}***********************************************************
-
-#{{{                    MARK:Expand Global Aliases
-#**************************************************************
-
-
 #}}}***********************************************************
 
 #{{{                    MARK:override default FTP completion
