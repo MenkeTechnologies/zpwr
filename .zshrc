@@ -942,7 +942,7 @@ alias -g W='| wc -l'
 alias -g N="> /dev/null 2>&1"
 alias -g NE="2> /dev/null"
 alias -g G='git add . && git commit -m "" && git push'
-alias -g E='|& egrep -i'
+alias -g E='|& fgrep -v "grep" |& egrep -i'
 alias -g P="| perl -lanE ''"
 alias -g C="| cut -d ' ' -f1"
 
