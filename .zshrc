@@ -977,8 +977,39 @@ else
     alias -g jv='| xclip -selection clipboard'
 fi
 
+
+declare -A __CORRECT_WORDS
+__CORRECT_WORDS[and]="adn nad"
+__CORRECT_WORDS[the]="teh tthe"
+__CORRECT_WORDS[they]="tehy ethy"
+__CORRECT_WORDS[back]="abck"
+__CORRECT_WORDS[that]="taht"
+__CORRECT_WORDS[than]="tahn"
+__CORRECT_WORDS[to]="ot"
+__CORRECT_WORDS[why]="hwy wyh"
+
 supernatural-space() {
 	    #statements
+    mywords=("${(z)BUFFER}")
+    finished=false
+
+    for key in ${(k)__CORRECT_WORDS[@]}; do
+        badWords=("${(z)__CORRECT_WORDS[$key]}")
+        #say $badWords
+        for misspelling in $badWords[@];do
+            if [[ $mywords[-1] == $misspelling ]]; then
+                mywords[-1]=$key
+                break
+                finished=true
+            fi
+        done
+        if [[ $finished == true ]]; then
+            break
+        fi
+    done
+
+    BUFFER="$mywords"
+
     alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
             #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
                [[ -z $RBUFFER ]] && zle _expand_alias
