@@ -103,6 +103,7 @@ alias la="clearList"
 alias l="clearList"
 alias r="cd .."
 alias t="cd /"
+alias cat='cat -tn'
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
