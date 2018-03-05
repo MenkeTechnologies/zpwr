@@ -631,7 +631,16 @@ my-accept-line () {
         print "$BUFFER" | egrep -q "$regex" && {
             __WILL_CLEAR=true
         }
-        done
+    done
+
+    mywords=("${(z)BUFFER}")
+    for GL in $(alias -g | awk -F= '{print $1}'); do
+        if [[ $mywords[-1] == $GL ]]; then
+            mywords[-1]='"'$GL'"'
+            BUFFER="$mywords"
+            #echo we got $mywords>> $LOGFILE
+        fi
+    done
 
     zle .accept-line 
     #leaky simonoff theme so reset ANSI escape sequences
