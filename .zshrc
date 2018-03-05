@@ -982,6 +982,7 @@ fi
 declare -A __CORRECT_WORDS
 __CORRECT_WORDS[and]="adn nad"
 __CORRECT_WORDS[the]="teh hte eht eth"
+__CORRECT_WORDS[this]="this"
 __CORRECT_WORDS[they]="tehy ethy"
 __CORRECT_WORDS[back]="abck bak"
 __CORRECT_WORDS[that]="taht"
@@ -1006,13 +1007,13 @@ supernatural-space() {
         badWords=("${(z)__CORRECT_WORDS[$key]}")
         for misspelling in $badWords[@];do
 
-            echo "Does $misspelling matches $mywords[-1]?" >> $LOGFILE
-            echo "words: $mywords" >> $LOGFILE
+            #echo "Does $misspelling matches $mywords[-1]?" >> $LOGFILE
+            #echo "words: $mywords" >> $LOGFILE
 
             if [[ $mywords[-1] == $misspelling ]]; then
-                echo  >> $LOGFILE
-            echo "$misspelling matches $mywords[-1]!" >> $LOGFILE
-                echo  >> $LOGFILE
+                #echo  >> $LOGFILE
+            #echo "$misspelling matches $mywords[-1]!" >> $LOGFILE
+                #echo  >> $LOGFILE
                 LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$misspelling\\b@$key@g")"
                 finished=true
                 break
