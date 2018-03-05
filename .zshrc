@@ -1157,20 +1157,15 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 #{{{                    MARK:Expand Global Aliases
 #**************************************************************
 
-globalias() {
-   #if [[ $LBUFFER =~ ' [A-Z0-9]+$' ]]; then
-     #zle _expand_alias
-   #else
-     #zle expand-aliases
+supernatural-space() {
      zle _expand_alias
      zle expand-history
-   #fi
      zle self-insert
 }
 
-zle -N globalias
+zle -N supernatural-space
 
-bindkey -M viins " " globalias
+bindkey -M viins " " supernatural-space
 bindkey -M viins "\e " magic-space
 bindkey -M isearch '^A' beginning-of-line
 
