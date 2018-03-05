@@ -982,7 +982,7 @@ fi
 declare -A __CORRECT_WORDS
 __CORRECT_WORDS[and]="adn nad"
 __CORRECT_WORDS[the]="teh hte eht eth"
-__CORRECT_WORDS[this]="this"
+__CORRECT_WORDS[this]="tihs"
 __CORRECT_WORDS[they]="tehy ethy"
 __CORRECT_WORDS[back]="abck bak"
 __CORRECT_WORDS[that]="taht"
