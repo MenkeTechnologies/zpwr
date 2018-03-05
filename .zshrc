@@ -975,7 +975,7 @@ fi
 
 supernatural-space() {
 	    #statements
-    alias $LBUFFER | egrep -q '(grc|_z)' || {
+    alias $LBUFFER | egrep -q '(grc|_z|cd)' || {
             #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
                [[ -z $RBUFFER ]] && zle _expand_alias
             #fi

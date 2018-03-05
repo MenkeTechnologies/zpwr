@@ -196,10 +196,10 @@ alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 alias mapit="execpy mapIt.py"
 alias ,="execpy amazonSearch.py"
-alias shut="execpy shutdown.py"
+alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias i="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's/addr://'"
+alias ipa="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's/addr://'"
 
 alias pgrep='pgrep -l'
 #**********************************************************************
@@ -214,12 +214,12 @@ alias uweb="bash $SCRIPTS/uploadWebDS.sh"
 alias sy="bash $SCRIPTS/sync.sh"
 alias sf="bash $SCRIPTS/directoryContentsSize.sh"
 alias sc='cd $SCRIPTS'
-alias blue='source $SCRIPTS/blueText.sh'
+alias bluef='source $SCRIPTS/blueText.sh'
 alias dl='cd $HOME/Downloads'
-alias doc='cd $HOME/Documents'
+alias docu='cd $HOME/Documents'
 alias o="open ."
 alias jobs="jobs -l"
-alias 8="bash -l updater.sh"
+alias u8="bash -l updater.sh"
 alias sd="clear;ssh d "
 alias gitgo='$SCRIPTS/gitgo.sh'
 alias watchGit='bash $SCRIPTS/watchServiceFSWatchGit.sh'
@@ -232,7 +232,7 @@ alias mkdir='mkdir -pv'
 
 exists tput && {
     bold=$(tput bold || tput md)
-red=$(tput setaf 1)
+    red=$(tput setaf 1)
 }
 alias ic="idea create"
 alias il="idea list"
