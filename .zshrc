@@ -987,6 +987,7 @@ __CORRECT_WORDS[that]="taht"
 __CORRECT_WORDS[than]="tahn"
 __CORRECT_WORDS[to]="ot"
 __CORRECT_WORDS[why]="hwy wyh"
+__CORRECT_WORDS[inside]="insdie"
 
 supernatural-space() {
 	    #statements
