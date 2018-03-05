@@ -980,14 +980,18 @@ fi
 
 declare -A __CORRECT_WORDS
 __CORRECT_WORDS[and]="adn nad"
-__CORRECT_WORDS[the]="teh tthe"
+__CORRECT_WORDS[the]="teh hte"
 __CORRECT_WORDS[they]="tehy ethy"
-__CORRECT_WORDS[back]="abck"
+__CORRECT_WORDS[back]="abck bak"
 __CORRECT_WORDS[that]="taht"
 __CORRECT_WORDS[than]="tahn"
 __CORRECT_WORDS[to]="ot"
 __CORRECT_WORDS[why]="hwy wyh"
-__CORRECT_WORDS[inside]="insdie"
+__CORRECT_WORDS[inside]="insdie inisde"
+__CORRECT_WORDS[just]="jsut jutsi just"
+__CORRECT_WORDS[here]="ehre"
+__CORRECT_WORDS[not]="not"
+
 
 supernatural-space() {
 	    #statements
