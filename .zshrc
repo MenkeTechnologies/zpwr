@@ -959,13 +959,16 @@ alias -g ja="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g jap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g js="| sed -E 's@@@g'"
 alias -g jt="| tr '' "
+alias -g ji="| tail" 
 alias -g jw='| wc -l'
 alias -g jn="> /dev/null 2>&1"
 alias -g jne="2> /dev/null"
 alias -g jg='git add . && git commit -m "" && git push'
 alias -g je='|& fgrep -v "grep" |& egrep -i'
-alias -g jp="| perl -lanE ''"
+alias -g jp="| perl -lanE 'say'"
 alias -g jc="| cut -d ' ' -f1"
+alias -g jo="| sort"
+alias -g ju="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
 
 if [[ "$(uname)" == Darwin ]]; then
     alias -g jv='| pbcopy -pboard general'
