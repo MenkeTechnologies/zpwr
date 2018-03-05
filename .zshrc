@@ -934,7 +934,7 @@ zstyle ':completion:*:manuals' separate-sections true
 #{{{                    MARK:Global Aliases
 #**************************************************************
 alias -g L='|less -MN'
-alias -g B='&> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
+alias -g B='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
 alias -g A="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g S="| sed -E 's@@@g'"
 alias -g T="| tr '' "
