@@ -944,12 +944,13 @@ alias -g NE="2> /dev/null"
 alias -g G='git add . && git commit -m "" && git push'
 alias -g E='|& egrep -i'
 alias -g P="| perl -lanE ''"
+alias -g C="| cut -d ' ' -f1"
 
 if [[ "$(uname)" == Darwin ]]; then
-    alias -g C='| pbcopy -pboard general'
+    alias -g V='| pbcopy -pboard general'
     alias ge="exe 'z src;gl;getrc;nz'"
 else
-    alias -g C='| xclip -selection clipboard'
+    alias -g V='| xclip -selection clipboard'
 fi
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
