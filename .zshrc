@@ -379,7 +379,7 @@ basicSedSub(){
 clipboard(){
     [[ "$(uname)" == Darwin ]] && {
         print -sr "$BUFFER"
-        print "$BUFFER" | pbcopy
+        print -n "$BUFFER" | pbcopy
         echo
         print  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!"
         echo
@@ -387,7 +387,7 @@ clipboard(){
     }  || {
         type xclip &> /dev/null && {
         print -sr "$BUFFER"
-        print "$BUFFER" | xclip -selection c -i
+        print -n "$BUFFER" | xclip -selection c -i
         echo
         print  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!"
         echo
