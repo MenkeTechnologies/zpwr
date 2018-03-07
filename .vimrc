@@ -811,6 +811,8 @@ autocmd BufNewFile * exe "normal! G" | startinsert!
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+let os = substitute(system('uname'), "\n", "", "")
+
 "powerline-status pip package installs to different locations of different OS
 if os == "Darwin"
     set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
@@ -818,8 +820,6 @@ if os == "Darwin"
     map <ESC>[1;5B <C-Down>
     map <ESC>[1;5C <C-Right>
     map <ESC>[1;5D <C-Left>
-elseif os == "Linux"
-endif
 elseif os == "Linux"
     let distro = substitute(system('grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \"'), "\n", "", "")
 
@@ -848,7 +848,7 @@ elseif os == "Linux"
         map <ESC>[C <C-Right>
         map <ESC>[D <C-Left>
     endif
-    
+
 endif
 
 "gf and :find will find file automatically in these locations
