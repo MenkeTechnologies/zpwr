@@ -8,7 +8,8 @@
 #}}}***********************************************************
 
 installVimPlugin(){
-    git clone "https://github.com/$1.git" 
+    echo "Installing vim plugin $1."
+    git clone "https://github.com/$1.git"
 }
 
 if [[ -d "$HOME/.vim/bundle" ]]; then
@@ -18,10 +19,10 @@ fi
 INSTALLER_DIR="$(pwd)"
 
 cd "$HOME/.vim/bundle" && {
-while read repo; do
-    installVimPlugin "$repo"
-done < "$INSTALLER_DIR/.vimbundle"
+    while read repo; do
+        installVimPlugin "$repo"
+    done < "$INSTALLER_DIR/.vimbundle"
 
-printf "Installing Taglist Plugin"
-cp -R "$INSTALLER_DIR/taglist_46" .
+    printf "Installing Taglist Plugin"
+    cp -R "$INSTALLER_DIR/taglist_46" .
 }

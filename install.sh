@@ -37,7 +37,6 @@ exec 2> "$INSTALLER_DIR"/logfile.txt
 # 15) powerline
 # 16) powerline-mem-segment
 
-
 dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet ysql mongodb postgresql \
@@ -434,7 +433,7 @@ git clone https://github.com/pipeseroni/pipes.sh.git
 cd pipes.sh && {
     sudo make install
     cd ..
-    rm -rf pipe.sh
+    rm -rf pipes.sh
 }
 
 prettyPrint "Installing htoprc file...."

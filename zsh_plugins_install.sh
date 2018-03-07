@@ -15,6 +15,7 @@ fi
 INSTALLER_DIR="$(pwd)"
 
 installOhMyZshPlugin(){
+    echo "Installing zsh plugin $1."
     git clone "https://github.com/$1.git" 
 }
 
