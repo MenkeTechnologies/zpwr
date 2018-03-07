@@ -107,6 +107,9 @@ plugins=(fzf-zsh zsh-more-completions zsh-completions zsh-syntax-highlighting zs
         (centos|rhel) 
             plugins+=(yum dnf)
             ;;
+        (opensuse) 
+            plugins+=(suse)
+            ;;
         (fedora) 
             plugins+=(yum fedora dnf)
             ;;
@@ -1093,6 +1096,10 @@ else
             type ponysay 1>/dev/null 2>&1 && {
                 bash "$HOME/motd.sh" | ponysay -W 120 
             } || bash "$HOME/motd.sh"
+        elif [[ "$distro" == opensuse ]];then
+            builtin cd "$D"
+            figlet -f block "$(whoami)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
+        fi
         elif [[ "$distro" == fedora ]];then
             builtin cd "$D"
             figlet -f block "$(whoami)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
