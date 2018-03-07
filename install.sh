@@ -250,6 +250,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
+
     pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
     pip install pydf
@@ -285,6 +286,7 @@ else
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
+    [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
     sudo pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
     sudo pip install pydf
@@ -357,7 +359,7 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
 #custom settings for tmux powerline
 if [[ -d "$tmuxPowerlineDir" ]]; then
-     mkdir -p "$tmuxPowerlineDir" && cat default.json >> "$tmuxPowerlineDir/default.json"
+     mkdir -p "$tmuxPowerlineDir" && cat "$INSTALLER_DIR"/default.json >> "$tmuxPowerlineDir/default.json"
 fi
 
 prettyPrint "Installing Tmux Plugin Manager"
