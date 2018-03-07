@@ -75,6 +75,9 @@ else
             prettyPrint "Decolorized logging for $distroName"
             sudo "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log 
         fi
+    elif [[ "$distro" == suse ]]; then
+        prettyPrint "Color logging for $distroName"
+        sudo journalctl | ccze 
     else 
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
         if [[ "$weHaveCCZE" == yes ]]; then
