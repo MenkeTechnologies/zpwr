@@ -282,6 +282,7 @@ else
     prettyPrint "Installing Powerline..."
 
     exists pip2 && sudo pip2 install powerline-status || sudo pip install powerline-status
+    exists pip2 && sudo pip2 install powerline-mem-segment || sudo pip install powerline-mem-segment
     
     prettyPrint "Installing Tmux Powerline"
 
