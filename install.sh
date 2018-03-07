@@ -408,7 +408,7 @@ if [[ -f "$HOME/.token.sh" ]]; then
 fi
 
 prettyPrint "HushLogin"
-if [[ -f "$HOME/.hushlogin" ]]; then
+if [[ ! -f "$HOME/.hushlogin" ]]; then
     touch "$HOME/.hushlogin"
 fi
 
