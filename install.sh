@@ -388,8 +388,8 @@ bash "$INSTALLER_DIR/tmux_plugins_install.sh"
 #{{{                    MARK:Utilities
 #**************************************************************
 prettyPrint "Installing IFTOP-color by MenkeTechnologies"
-if [[ -d "$HOME/ForkedRepos" ]]; then
-    mkdir "$HOME/ForkedRepos" && cd "$HOME/ForkedRepos" && {
+if [[ ! -d "$HOME/forkedRepos" ]]; then
+    mkdir "$HOME/forkedRepos" && cd "$HOME/forkedRepos" && {
         git clone https://github.com/MenkeTechnologies/iftopcolor
         cd iftopcolor && {
         ./configure && make && sudo make install
