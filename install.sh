@@ -280,7 +280,8 @@ else
     sudo pip install glances
     prettyPrint "Installing Powerline..."
 
-    sudo pip install powerline-status
+    exists pip2 && sudo pip2 install powerline-status || sudo pip install powerline-status
+    
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
