@@ -10,8 +10,10 @@ SYNOPSIS
 DESCRIPTION
      For each operand [[[[that names]]]] a file of a type other than directory, ls
      displays its [name as well as any requested, associated information.  For
-     each operand ]that 'names a file of type directory, ls displays the names
-     of files contained' within that directory, as well as any requested, asso-
+     each operand ]that 'names a file of typasdfaklsdfjalkjflakdjf e directory, ls displays the names
+     asjfalksjfd alksdjf laksjf lkadjsf kj 
+     of files contained' within that direc asdfkjas lfkj  tory, as well as any requested, asso-
+
      ciated information.
 
      If no ((([[['operands']]]))) are given, the 'contents of the current directory are dis-
