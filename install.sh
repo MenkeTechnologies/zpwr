@@ -51,19 +51,19 @@ dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
 
 addDependenciesLinux(){
     dependencies_ary+=(git reptyr iptraf lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev \
-    libpcap-dev ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
-    libperl-dev dstat ecryptfs-utils at silversearcher-ag netatalk dnsutils \
+    #ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
+    libperl-dev dstat ecryptfs-utils at netatalk dnsutils \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace \
     )
 }
 addDependenciesSuse(){
-    dependencies_ary+=(fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc)
+    dependencies_ary+=(fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc libpcap-devel the_silver_searcher) 
 
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc)
+    dependencies_ary+=(libpcap-dev fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc)
 
 }
 
@@ -309,6 +309,9 @@ prettyPrint "Installing rougify"
 case "$distroName" in
     fedora)
         needSudo=no
+        ;;
+    opensuse)
+        needSudo=yes
         ;;
     raspbian)
         needSudo=yes
