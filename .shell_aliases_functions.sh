@@ -19,7 +19,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
     export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
     export CLICOLOR="YES"
     export LSCOLORS="ExFxBxDxCxegedabagacad"
-    export TERM="xterm-256color"
     export SCRIPTS="$HOME/Documents/shellScripts"
     export PYEXECUTABLES="$HOME/Documents/pythonScripts"
     export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
@@ -31,6 +30,7 @@ if [[ -z "$PYSCRIPTS" ]]; then
     export TERMINAL_APP="Terminal.app"
 
     [[ "$(uname)" == Darwin ]] && {
+        export TERM="xterm-256color"
         export SD_PATH="/Volumes/SD"
         export WCC="$SD_PATH/wcc/cps"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
