@@ -836,7 +836,10 @@ elseif os == "Linux"
         set  rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
     elseif distro == "fedora"
         set  rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
+    else
+        set  rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
     endif
+    
 endif
 
 "gf and :find will find file automatically in these locations
