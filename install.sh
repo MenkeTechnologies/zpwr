@@ -39,7 +39,7 @@ exec 2> "$INSTALLER_DIR"/logfile.txt
 
 
 dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
-    Screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
+    screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet ysql mongodb postgresql \
     jnettop iotop atop ctags speedtest-cli texinfo lsof weechat gradle ant maven tree mc ocaml groovy \
     slurm bmon \
