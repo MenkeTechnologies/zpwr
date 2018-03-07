@@ -495,7 +495,7 @@ ${ZSH}/custom/plugins/fzf/install --bin
 #**************************************************************
 cd "$INSTALLER_DIR"
 cd ..
-rm -rf "$INSTALLER_DIR"
+#rm -rf "$INSTALLER_DIR"
 prettyPrint "Done!!!!!!"
 
 prettyPrint "Starting Tmux..."
