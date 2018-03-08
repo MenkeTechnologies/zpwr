@@ -1043,7 +1043,7 @@ supernatural-space() {
 }
 
 terminate-space(){
-[[ -z $RBUFFER ]] && zle magic-space || { zle end-of-line; zle-}
+[[ -z $RBUFFER ]] && zle magic-space || { zle end-of-line; zle magic-space}
 
 
 }
