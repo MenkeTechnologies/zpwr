@@ -1265,6 +1265,9 @@ unset GROOVY_HOME # when set this messes up classpath
 #**************************************************************
 alias -s txt='vim'
 alias > "$HOME/.common_aliases"
+
+
+alias numcmd='print -rlo -- $commands:t | wc -l'
 #}}}***********************************************************
 #
 #
