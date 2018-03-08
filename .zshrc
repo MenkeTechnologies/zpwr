@@ -647,7 +647,13 @@ my-accept-line () {
 
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
-            BUFFER="${line:1:-1} $mywords[2,$]"
+            if [[ -z $line ]];then
+                #fxn
+                BUFFER="\\$mywords"
+            else
+                #non global alias
+                BUFFER="${line:1:-1} $mywords[2,$]"
+            fi
         else
             zle .accept-line 
             return 0
@@ -955,7 +961,8 @@ zstyle ':completion:*:manuals' separate-sections true
 #{{{                    MARK:Global Aliases
 #**************************************************************
 __GLOBAL_ALIAS_PREFIX=
-alias -g ${__GLOBAL_ALIAS_PREFIX}l='|less -MN'
+alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
+alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
 alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
 alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
