@@ -161,7 +161,7 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
         yes | sudo apt-get autoremove
         yes | sudo apt-get autoclean'
     elif [[ "$manager" == zypper ]]; then
-        ssh -x "$hostname" 'zypper --non-interactive refresh
+        ssh -x "$hostname" 'sudo zypper --non-interactive refresh
         sudo zypper --non-interactive update
         sudo zypper --non-interactive dist-upgrade
         sudo zypper --non-interactive clean -a'
