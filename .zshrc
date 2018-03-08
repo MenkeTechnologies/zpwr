@@ -1267,7 +1267,7 @@ alias -s txt='vim'
 alias > "$HOME/.common_aliases"
 
 
-alias numcmd='print -rlo -- $commands:t | wc -l'
+alias numcmd='print -rlo -- $commands | wc -l'
 #}}}***********************************************************
 #
 #
