@@ -645,18 +645,13 @@ my-accept-line () {
 
     mywords=("${(z)BUFFER}")
 
-    if (( $#mywords == 1 )); then
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
-            BUFFER="${line:1:-1}"
+            BUFFER="${line:1:-1} $mywords[2,$]"
         else
             zle .accept-line 
             return 0
         fi
-    else
-        zle .accept-line
-        return 0
-    fi
 
         zle .accept-line
 
@@ -1033,7 +1028,7 @@ supernatural-space() {
 
     alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
             #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
-               [[ -z $RBUFFER ]] && zle _expand_alias
+    [[ -z $RBUFFER ]] && [[ -z $(alias -g $LBUFFER) ]] && zle _expand_alias
             #fi
     }
      zle expand-history
