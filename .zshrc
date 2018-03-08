@@ -1042,10 +1042,17 @@ supernatural-space() {
      zle self-insert
 }
 
+terminate-space(){
+[[ -z $RBUFFER ]] && zle magic-space || { zle end-of-line; zle-}
+
+
+}
+
 zle -N supernatural-space
+zle -N terminate-space
 
 bindkey -M viins " " supernatural-space
-bindkey -M viins "\e " magic-space
+bindkey -M viins "\e " terminate-space
 bindkey -M isearch '^A' beginning-of-line
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
