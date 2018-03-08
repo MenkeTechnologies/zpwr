@@ -960,29 +960,30 @@ zstyle ':completion:*:manuals' separate-sections true
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
-alias -g jl='|less -MN'
-alias -g jb='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
-alias -g ja="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-alias -g jap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-alias -g js="| sed -E 's@@@g'"
-alias -g jt="| tr '' "
-alias -g ji="| tail" 
-alias -g jw='| wc -l'
-alias -g jn="> /dev/null 2>&1"
-alias -g jo='&>> "$LOGFILE"'
-alias -g jne="2> /dev/null"
-alias -g jg='git add . && git commit -m "" && git push'
-alias -g je='|& fgrep -v "grep" |& egrep -i'
-alias -g jp="| perl -lanE 'say'"
-alias -g jc="| cut -d ' ' -f1"
-alias -g jr="| sort"
-alias -g ju="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
+__GLOBAL_ALIAS_PREFIX=j
+alias -g ${__GLOBAL_ALIAS_PREFIX}l='|less -MN'
+alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
+alias -g ${__GLOBAL_ALIAS_PREFIX}a="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
+alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '' "
+alias -g ${__GLOBAL_ALIAS_PREFIX}i="| tail" 
+alias -g ${__GLOBAL_ALIAS_PREFIX}w='| wc -l'
+alias -g ${__GLOBAL_ALIAS_PREFIX}n="> /dev/null 2>&1"
+alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
+alias -g ${__GLOBAL_ALIAS_PREFIX}ne="2> /dev/null"
+alias -g ${__GLOBAL_ALIAS_PREFIX}g='git add . && git commit -m "" && git push'
+alias -g ${__GLOBAL_ALIAS_PREFIX}e='|& fgrep -v "grep" |& egrep -i'
+alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say'"
+alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
+alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
+alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
 
 if [[ "$(uname)" == Darwin ]]; then
-    alias -g jv='| pbcopy -pboard general'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
     alias ge="exe 'z src;gl;getrc;nz'"
 else
-    alias -g jv='| xclip -selection clipboard'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
 fi
 
 
@@ -1182,7 +1183,7 @@ colortest(){
 #**************************************************************
 ROUGIFY_THEME="github"
 __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
-alias -g F=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
+alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
 
 #to include dirs files in search
 export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
