@@ -235,7 +235,7 @@ expand-aliases() {
     (($+functions[_expand-aliases])) &&
     BUFFER=${functions[_expand-aliases]#$'\t'} &&
     CURSOR=$#BUFFER
-    }
+}
 __COUNTER=0
 
 changeQuotes(){
@@ -654,13 +654,9 @@ my-accept-line () {
                 #non global alias
                 BUFFER="${line:1:-1} $mywords[2,$]"
             fi
-        else
-            zle .accept-line 
-            return 0
         fi
 
-        zle .accept-line
-
+    zle .accept-line 
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
 }

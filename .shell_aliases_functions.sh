@@ -34,7 +34,7 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export SD_PATH="/Volumes/SD"
         export WCC="$SD_PATH/wcc/cps"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
-        export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$HOME/.platformio/penv/bin:$PATH"
+        export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$PATH"
     } || export PATH="$PATH:/usr/games"
 
