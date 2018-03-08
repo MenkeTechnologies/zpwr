@@ -1068,7 +1068,7 @@ bindkey -M isearch '^A' beginning-of-line
 #go to desktop if not root
 if [[ "$(uname)" = Darwin ]]; then
     if [[ "$UID" != "0" ]]; then
-         builtin cd "$D" && clear
+         #builtin cd "$D" && clear
         clear
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
