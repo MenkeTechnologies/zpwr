@@ -598,8 +598,8 @@ bindkey '\e[1;2D' sub
 #press both escape and control f then oo
 bindkey '\e^f' sub
 #bound to control spacebar
-bindkey -M vicmd '^@' sshRegain
-bindkey -M viins '^@' sshRegain
+bindkey -M vicmd '\e ' sshRegain
+bindkey -M viins '\e ' sshRegain
 
 #F1 key
 bindkey '\eOP' updater
@@ -1052,7 +1052,7 @@ zle -N supernatural-space
 zle -N terminate-space
 
 bindkey -M viins " " supernatural-space
-bindkey -M viins "\e " terminate-space
+bindkey -M viins "^@" terminate-space
 bindkey -M isearch '^A' beginning-of-line
 
 #export ZPLUG_HOME=/usr/local/opt/zplug
