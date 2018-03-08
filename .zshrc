@@ -962,7 +962,7 @@ zstyle ':completion:*:manuals' separate-sections true
 __GLOBAL_ALIAS_PREFIX=
 alias -g ${__GLOBAL_ALIAS_PREFIX}l='|less -MN'
 alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
-alias -g ${__GLOBAL_ALIAS_PREFIX}w="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '' "
