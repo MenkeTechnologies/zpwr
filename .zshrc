@@ -129,6 +129,7 @@ source $ZSH/oh-my-zsh.sh
 #has all my aliases and functions
 
 source ~/.shell_aliases_functions.sh
+alias -r > "$HOME/.common_aliases"
 
 #}}}***********************************************************
 
@@ -640,25 +641,23 @@ my-accept-line () {
         }
     done
 
-    #mywords=("${(z)BUFFER}")
+    [[ -z "$BUFFER" ]] && zle .accept-line && return 0
 
-    #if [[ $#mywords == 1 ]]; then
-        #unalias -g $mywords[1]
-        #statements
-        #mywords[-1]='"'$GL'"'
-        #BUFFER="$mywords"
-        #zle .accept-line 
-        #alias -g $mywords[1]
-    #else
-        #zle .accept-line
-    #fi
-    #for GL in $(alias -g | awk -F= '{print $1}'); do
-        #if [[ $mywords[-1] == $GL ]]; then
-            #mywords[-1]='"'$GL'"'
-            #BUFFER="$mywords"
-            #echo we got $mywords>> $LOGFILE
-        #fi
-    #done
+    mywords=("${(z)BUFFER}")
+
+    if (( $#mywords == 1 )); then
+        if [[ ! -z $(alias -g $mywords[1]) ]];then
+            line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
+            BUFFER="${line:1:-1}"
+        else
+            zle .accept-line 
+            return 0
+        fi
+    else
+        zle .accept-line
+        return 0
+    fi
+
         zle .accept-line
 
     #leaky simonoff theme so reset ANSI escape sequences
@@ -960,14 +959,14 @@ zstyle ':completion:*:manuals' separate-sections true
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
-__GLOBAL_ALIAS_PREFIX=j
+__GLOBAL_ALIAS_PREFIX=
 alias -g ${__GLOBAL_ALIAS_PREFIX}l='|less -MN'
 alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
-alias -g ${__GLOBAL_ALIAS_PREFIX}a="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+alias -g ${__GLOBAL_ALIAS_PREFIX}w="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '' "
-alias -g ${__GLOBAL_ALIAS_PREFIX}i="| tail" 
+alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail" 
 alias -g ${__GLOBAL_ALIAS_PREFIX}w='| wc -l'
 alias -g ${__GLOBAL_ALIAS_PREFIX}n="> /dev/null 2>&1"
 alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
@@ -1265,8 +1264,6 @@ unset GROOVY_HOME # when set this messes up classpath
 #{{{                    MARK:Suffix aliases
 #**************************************************************
 alias -s txt='vim'
-alias > "$HOME/.common_aliases"
-
 
 alias numcmd='print -rlo -- $commands | wc -l'
 #}}}***********************************************************
