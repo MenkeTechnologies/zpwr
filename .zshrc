@@ -384,7 +384,9 @@ clipboard(){
         print -sr "$BUFFER"
         print -n "$BUFFER" | pbcopy
         echo
-        print  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!"
+        print -n "\x1b[0;34mCopied \x1b[1m\""
+        print -n "$BUFFER"
+        print  "\"\x1b[0;34m to System Clipboard!"
         echo
         zle .redisplay
     }  || {
@@ -392,7 +394,9 @@ clipboard(){
         print -sr "$BUFFER"
         print -n "$BUFFER" | xclip -selection c -i
         echo
-        print  "\x1b[0;34mCopied \x1b[1m\"$BUFFER\"\x1b[0;34m to System Clipboard!"
+        print -n "\x1b[0;34mCopied \x1b[1m\""
+        print -nR "$BUFFER"
+        print  "\"\x1b[0;34m to System Clipboard!"
         echo
         zle .redisplay
         } || { 
