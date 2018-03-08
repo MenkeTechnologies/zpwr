@@ -108,7 +108,7 @@ plugins=(fzf-zsh zsh-more-completions zsh-completions zsh-syntax-highlighting zs
             plugins+=(yum dnf)
             ;;
         (opensuse) 
-            plugins+=(suse)
+            plugins+=(suse z)
             ;;
         (fedora) 
             plugins+=(yum fedora dnf)
