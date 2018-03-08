@@ -641,21 +641,25 @@ my-accept-line () {
         }
     done
 
-    [[ -z "$BUFFER" ]] && zle .accept-line && return 0
+    [[ -z "$__GLOBAL_ALIAS_PREFIX" ]] && {
+    
+        [[ -z "$BUFFER" ]] && zle .accept-line && return 0
 
-    mywords=("${(z)BUFFER}")
+        mywords=("${(z)BUFFER}")
 
-    if [[ ! -z $(alias -g $mywords[1]) ]];then
-        line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
-        if [[ -z $line ]];then
-            #fxn
-            BUFFER="\\$mywords"
-        else
-            #non global alias
-            
-            print "$line" | fgrep "'" && BUFFER="${line:1:-1} $mywords[2,$]" || BUFFER="$line $mywords[2,$]"
+        if [[ ! -z $(alias -g $mywords[1]) ]];then
+            line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
+            if [[ -z $line ]];then
+                #fxn
+                BUFFER="\\$mywords"
+            else
+                #non global alias
+                
+                print "$line" | fgrep "'" && BUFFER="${line:1:-1} $mywords[2,$]" || BUFFER="$line $mywords[2,$]"
+            fi
         fi
-    fi
+    
+    }
 
     zle .accept-line 
     #leaky simonoff theme so reset ANSI escape sequences
