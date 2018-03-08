@@ -1248,6 +1248,9 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 #**************************************************************
 _comps[ftp]=_ftp
 _comps[passwd]=_passwd
+_comps[ksh]=_ksh
+_comps[tcsh]=_tcsh
+_comps[csh]=_tcsh
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
