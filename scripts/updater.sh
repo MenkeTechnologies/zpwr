@@ -44,7 +44,7 @@ exists pip3 && {
     done
 
     #update pip itself
-    pip3 install --upgrade pip setuptools wheel &> /dev/null
+    pip3 install --upgrade pip setuptools wheel #&> /dev/null
 }
 
 #python 2.7 (non system)
@@ -61,7 +61,7 @@ exists pip2 && {
     done
 
     #update pip itself
-    pip2 install --upgrade pip setuptools wheel &> /dev/null
+    pip2 install --upgrade pip setuptools wheel #&> /dev/null
 }
 
 exists /usr/local/bin/ruby && {
