@@ -1,0 +1,20 @@
+set show-mode-in-prompt on
+set editing-mode vi
+
+#$if mode=vi
+#set keymap vi-insert
+#"\C-o": edit-and-execute-command
+#$endif
+
+"\C-o" edit-and-execute-command
+
+set colored-stats On
+set visible-stats On
+set mark-symlinked-directories On
+set colored-completion-prefix On
+set menu-complete-display-prefix On
+
+set echo-control-characters off
+
+
+
