@@ -41,8 +41,7 @@ set ignorecase
 set smartcase
 set tabstop=4
 "60 ms wait for next key in mappings
-"remove annoying delay from insert to normal mode with escape key
-set timeoutlen=60
+"set timeoutlen=300
 "using powerline status bar instead
 "set statusline+=%F
 "set statusline+=%=
@@ -173,8 +172,8 @@ highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=194 ctermfg=NONE
 let g:bookmark_highlight_lines = 0
 
-let g:slime_target = "tmux"
-let g:slime_paste_file = "$HOME/.slime_paste"
+"let g:slime_target = "tmux"
+"let g:slime_paste_file = "$HOME/.slime_paste"
 " or maybe...
 "let g:slime_paste_file = tempname()
 "let g:slime_default_config = {"socket_name": split($TMUX, ",")[0], "target_pane": ":"}
@@ -240,13 +239,13 @@ nmap @: <Plug>RepeatEx
 
 "Transpose Words Like Emacs
 nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
-inoremap <silent> <ESC><C-T> <C-O>:call TransposeWords()<CR>
+inoremap <silent> <C-D><C-T> <C-O>:call TransposeWords()<CR>
 
 "move to next word and capitalize
 nnoremap <ESC><C-C> wvU
 
 "Insert mode mappings:
-inoremap <ESC><C-C> <C-O>w<C-O>vU
+"inoremap <C-C> <C-O>w<C-O>vU
 
 "Ctrl-C exits like in shell
 nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
@@ -267,7 +266,7 @@ nnoremap <End> G
 
 "comment out
 inoremap <silent> <C-B> <ESC>I//<ESC>ji
-inoremap <silent> <ESC><C-B> <ESC>^2xji
+inoremap <silent> <C-B><C-N> <ESC>^2xji
 
 "nnoremap <silent> <C-I> :SaveSession<CR>
 "vnoremap <silent> <C-I> :<C-C>:SaveSession<CR>
@@ -303,9 +302,9 @@ fun GoToNextMarker(searchTerm, backwardsSearch)
 
     while loopCounter < mycount
         if a:backwardsSearch == 0
-            silent! exe "/".a:searchTerm 
+            silent! exe "/".a:searchTerm
         else
-            silent! exe "?".a:searchTerm 
+            silent! exe "?".a:searchTerm
             silent! exe "?".a:searchTerm
         endif
         let loopCounter += 1
@@ -467,7 +466,7 @@ function InsertQuoteVisualMode(type)
         let sym=0
     endif
 
-    if sym == 1 
+    if sym == 1
         exe "normal! `<"
         let lineNumR=line('.')
         exe "normal! i".quote
@@ -555,17 +554,17 @@ function Quoter(type)
         else
             call ReplaceBracketToDouble("[","]","[","]") 
             echo "Replace [] with [[]]"
-        endif 
+        endif
         let g:COUNTER=g:COUNTER +1
         return 0
     endif
     "if line matches regex and cursor position within matching capture group
     "then run the quoting
 
-    if (line =~ '\v^.*\$\(.*\).*$') 
+    if (line =~ '\v^.*\$\(.*\).*$')
         call InsertMatchingPunct(quote, '$')
         echo "$(command substitution)"
-    elseif (line =~ '\v^.*\$\{.*\}.*$') 
+    elseif (line =~ '\v^.*\$\{.*\}.*$')
         call InsertMatchingPunct(quote, '$')
         echo "${parameter substitution}"
     elseif (line =~'\v\s*\S+\=\S+\s*$')
@@ -705,13 +704,13 @@ function CompleteLine()
     let exeFileType=expand('%:e')
     if index(SemiColon, exeFileType) >= 0
         inoremap <C-Space> <C-O>$;<Enter>
-        inoremap <ESC><Space> <ESC>+
-        nnoremap <ESC><Space> +
+        inoremap <C-D><Space> <ESC>+
+        nnoremap <C-D><Space> +
     else
         inoremap <C-Space> <C-O>$<Enter>
-        inoremap <ESC><Space> <ESC>+
-        nnoremap <ESC><Space> +
-    endif
+        inoremap <C-D><Space> <ESC>+
+        nnoremap <C-D><Space> +
+endif
 endfunction
 
 autocmd VimEnter * call CompleteLine()
@@ -724,23 +723,23 @@ set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
 function TmuxRepeat()
-    let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua', 'java']
-    let exeFileType=expand('%:e')
-    if index(supportedTypes, exeFileType) >= 0
-        silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
-        redraw!
-    else
-        silent! exec "!tmux send-keys -t right C-c up C-m"
-        echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
-        redraw!
-    endif
-    exe "normal! zz"
+let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua', 'java']
+let exeFileType=expand('%:e')
+if index(supportedTypes, exeFileType) >= 0
+    silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+    redraw!
+else
+    silent! exec "!tmux send-keys -t right C-c up C-m"
+    echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
+    redraw!
+endif
+exe "normal! zz"
 endfunction
 
 function TmuxRepeatGeneric()
-    silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
-    redraw!
-    exe "normal! zz"
+silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
+redraw!
+exe "normal! zz"
 endfunction
 
 " reassing readline plugin mapping
