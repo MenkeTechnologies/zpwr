@@ -93,7 +93,7 @@ plugins=(fzf-zsh zsh-more-completions zsh-completions zsh-syntax-highlighting zs
 [[ "$(uname)" == "Darwin" ]] && {
     plugins+=(zsh-xcode-completions brew osx pod)
 } || {
-
+    #linux
     plugins+=(systemd)
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
@@ -654,7 +654,6 @@ my-accept-line () {
                 BUFFER="\\$mywords"
             else
                 #non global alias
-                
                 print "$line" | fgrep "'" && BUFFER="${line:1:-1} $mywords[2,$]" || BUFFER="$line $mywords[2,$]"
             fi
         fi
@@ -963,6 +962,7 @@ zstyle ':completion:*:manuals' separate-sections true
 #**************************************************************
 __GLOBAL_ALIAS_PREFIX=
 alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
+alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
 alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
 alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
 alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
@@ -1277,6 +1277,8 @@ unset GROOVY_HOME # when set this messes up classpath
 alias -s txt='vim'
 
 alias numcmd='print -rlo -- $commands | wc -l'
+
+export KEYTIMEOUT=1
 #}}}***********************************************************
 #
 #
