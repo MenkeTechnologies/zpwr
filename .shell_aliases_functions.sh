@@ -687,6 +687,7 @@ getrc(){
         cp conf.df "$HOME"
         cp conf.ifconfig "$HOME"
         cp grc.zsh "$HOME"
+        cp .inputrc "$HOME"
 
         cp -R .tmux/* "$HOME/.tmux"
         cp -f scripts/* "$SCRIPTS"
