@@ -58,7 +58,7 @@ addDependenciesLinux(){
     )
 }
 addDependenciesSuse(){
-    dependencies_ary+=(fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev grc libpcap-devel the_silver_searcher) 
+    dependencies_ary+=(fortune python3-devel python-devel ruby-devel python-pip python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel) 
 
 }
 
@@ -71,7 +71,7 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install epel-release
     fi
-    dependencies_ary+=('fortune-mod.*' libpcap-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++)
+    #dependencies_ary+=('fortune-mod.*' libpcap-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel)
 }
 
 addDependenciesMac(){
