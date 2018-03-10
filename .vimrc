@@ -40,6 +40,9 @@ set autoread
 set ignorecase
 set smartcase
 set tabstop=4
+"60 ms wait for next key in mappings
+"remove annoying delay from insert to normal mode with escape key
+set timeoutlen=60
 "using powerline status bar instead
 "set statusline+=%F
 "set statusline+=%=
@@ -875,5 +878,6 @@ set thesaurus+=~/mthesaur.txt
 inoremap <silent> <F10> <C-X><C-K>
 "easier mapping for thesaurus completion
 inoremap <silent> <F11> <C-X><C-T>
+
 
 "}}}*****************za******************************************
