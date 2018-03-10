@@ -46,6 +46,7 @@ tpope/vim-rsi
 xolox/vim-session
 guns/vim-sexp
 tpope/vim-sexp-mappings-for-regular-people
+jpalardy/vim-slime
 justinmk/vim-sneak
 honza/vim-snippets
 mhinz/vim-startify
