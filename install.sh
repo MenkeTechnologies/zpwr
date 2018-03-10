@@ -476,6 +476,10 @@ cp "$INSTALLER_DIR/conf.ifconfig" "$HOME"
 cp "$INSTALLER_DIR/conf.mount" "$HOME"
 
 
+prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap."
+cp "$INSTALLER_DIR/.inputrc" "$HOME"
+
+
 #}}}***********************************************************
 
 #{{{                    MARK:zsh
