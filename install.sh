@@ -349,8 +349,11 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 ## YouCompleteMe
 ################################################################################
 
-#prettyPrint "Installing YouCompleteMe"
-#cd $HOME/.vim/bundle/YouCompleteMe && ./install.py --clang-completer
+prettyPrint "Installing YouCompleteMe"
+cd $HOME/.vim/bundle/YouCompleteMe && {
+    git submodule update --init --recursive
+    ./install.py --clang-completer
+}
 
 #}}}***********************************************************
 
