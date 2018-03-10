@@ -352,7 +352,9 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 prettyPrint "Installing YouCompleteMe"
 cd $HOME/.vim/bundle/YouCompleteMe && {
     git submodule update --init --recursive
-    ./install.py --clang-completer
+
+    #need greater than 3GB RAM for compiling
+    YCM_CORES=1 ./install.py --clang-completer
 }
 
 #}}}***********************************************************
