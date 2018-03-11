@@ -1060,7 +1060,7 @@ supernatural-space() {
 
     alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
             #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
-    [[ -z $RBUFFER ]] && [[ -z $(alias -g $LBUFFER) ]] && [[ ${LBUFFER:0:1} != '\' ]] && zle _expand_alias
+    [[ -z $RBUFFER ]] && [[ -z $(alias -g $LBUFFER) ]] && [[ ${LBUFFER:0:1} != '\' ]] && [[ ${LBUFFER:0:1} != "'" ]] && [[ ${LBUFFER:0:1} != '"' ]] && zle _expand_alias
             #fi
     }
      zle expand-history
