@@ -615,7 +615,7 @@ bindkey '\eOQ' sub
 }
 
 bindkey '^S' gitfunc
-bindkey '```' sudo-command-line
+bindkey '^Q' sudo-command-line
 bindkey -M viins '\e^T' transpose-words
 bindkey -M vicmd '\e^T' transpose-words
 bindkey -M viins '^T' transpose-chars
@@ -960,7 +960,7 @@ zstyle ':completion:*:manuals' separate-sections true
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
-__GLOBAL_ALIAS_PREFIX=
+__GLOBAL_ALIAS_PREFIX=j
 alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
 alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
 alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
