@@ -9,18 +9,15 @@
 firstFile="$1"
 
 #exit is argument count less than 2
-if (( $# < 2 ));then
-    echo "${0##*/} needs two args" >&2
-    exit 1
-fi
+(( $# < 2 )) && echo "${0##*/} needs two args" >&2 && exit 1
 
 #add backslash if not already present to first file
-#to make sure the contents of file 1 are synced not the file itself
+#to make sure the contents of folder 1 are synced not the folder itself
 if [[ "${firstFile: -1}" != "/" ]]; then
     firstFile="${firstFile}/"
 fi
 
-echo -e "\e[44;37mSyncing \"$firstFile\" to \"$2\""
+printf "\e[44;37mSyncing \"$firstFile\" to \"$2\"\n"
 #sync first folder to second folder
 rsync -avvhr --info=progress2 --stats "$firstFile" "$2"
-echo -e "Done\e[0m"
+printf "Done\n\e[0m"
