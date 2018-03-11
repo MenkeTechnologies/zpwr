@@ -657,6 +657,9 @@ map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 "map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
 
 "for moving selection up and down, displacing other text 
+xmap <C-Right> >gv
+xmap <C-Left> <gv
+
 xmap <C-Down> :m '> + <CR> gv
 xmap <C-Up> :m '< -- <CR> gv
 
