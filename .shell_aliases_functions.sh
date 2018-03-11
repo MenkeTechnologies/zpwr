@@ -31,8 +31,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
 
     [[ "$(uname)" == Darwin ]] && {
         export TERM="xterm-256color"
-        export SD_PATH="/Volumes/SD"
-        export WCC="$SD_PATH/wcc/cps"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$PATH"
@@ -148,8 +146,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
     alias bsaver="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
-    alias c="cd $WCC"
-    alias emu="cd $SD_PATH/emu"
+    alias c='cd $WCC'
+    alias emu='cd $SD_PATH/emu'
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
     #keep remote tty sessions alive by stopping sleep
