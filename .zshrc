@@ -1060,7 +1060,7 @@ supernatural-space() {
 
     alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
             #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
-    [[ -z $RBUFFER ]] && [[ -z $(alias -g $LBUFFER) ]] && zle _expand_alias
+    [[ -z $RBUFFER ]] && [[ -z $(alias -g $LBUFFER) ]] && [[ ${LBUFFER:0:1} != '\' ]] && zle _expand_alias
             #fi
     }
      zle expand-history
@@ -1068,9 +1068,7 @@ supernatural-space() {
 }
 
 terminate-space(){
-[[ -z $RBUFFER ]] && zle magic-space || { zle end-of-line; zle magic-space}
-
-
+    [[ -z $RBUFFER ]] && zle magic-space || { zle end-of-line; zle magic-space}
 }
 
 zle -N supernatural-space
@@ -1162,7 +1160,7 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-    source "$HOME/.powerlevel9kconfig.sh"
+    #source "$HOME/.powerlevel9kconfig.sh"
     #make this environ vars show up in prompt %~
     : ~WCC
     : ~HOMEBREW_HOME_FORMULAE
