@@ -525,9 +525,33 @@ deleteMatching(){
 
 }
 
+runner() {
+
+    if [[ ! -z "$BUFFER" ]]; then
+        tutsUpdate
+    else
+        zle .kill-whole-line
+        BUFFER=ge
+        zle .accept-line
+    fi
+}
+
+updater() {
+    zle .kill-whole-line
+    BUFFER=u8
+    zle .accept-line
+}
+
 zle -N surround
 zle -N deleteMatching
+zle -N updater
+zle -N runner
 
+bindkey -M viins "\e^O" runner
+bindkey -M vicmd "\e^O" runner
+
+bindkey -M viins "\e^P" updater
+bindkey -M vicmd "\e^P" updater
 #vim  mode
 bindkey -v
 
