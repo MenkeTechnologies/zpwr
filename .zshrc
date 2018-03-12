@@ -190,7 +190,7 @@ tutsUpdate() {
             zle .accept-line
         else
             zle .kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$LOGFILE\" 2>&1 & )"
+            BUFFER="( tutorialConfigUpdater.sh '${commitMessage}' >> \"$LOGFILE\" 2>&1 & )"
             zle .accept-line
         fi
     else
@@ -1058,11 +1058,19 @@ supernatural-space() {
         fi
     done
 
-    alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
-            #if [[ $LBUFFER =~ ' [a-z][a-z]?$' ]];then
-    [[ -z $RBUFFER ]] && [[ -z $(alias -g $LBUFFER) ]] && [[ ${LBUFFER:0:1} != '\' ]] && [[ ${LBUFFER:0:1} != "'" ]] && [[ ${LBUFFER:0:1} != '"' ]] && zle _expand_alias
-            #fi
-    }
+
+    if (( $#mywords == 1 )); then
+        alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
+            #dont expand first word if \,' or " and buffer is one word long
+            [[ -z $(alias -g $LBUFFER) ]] && {
+                [[ ${LBUFFER:0:1} != '\' ]] && \
+                [[ ${LBUFFER:0:1} != "'" ]] && [[ ${LBUFFER:0:1} != '"' ]] && zle _expand_alias
+            
+            }
+        }
+    else
+        zle _expand_alias
+    fi
      zle expand-history
      zle self-insert
 }
