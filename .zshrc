@@ -631,11 +631,19 @@ bindkey '\eOP' updater
 bindkey '\eOQ' sub
 
 [[ "$(uname)" == Darwin ]] && {
+    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
+    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
     #Ctrl plus arrow keys
-    bindkey '\e[1;5A' gitfunc
-    bindkey '\e[1;5B' updater
-    bindkey '\e[1;5C' tutsUpdate
-    bindkey '\e[1;5D' dbz
+        bindkey '\e[1;5A' gitfunc
+        bindkey '\e[1;5B' updater
+        bindkey '\e[1;5C' tutsUpdate
+        bindkey '\e[1;5D' dbz
+    } || {
+        bindkey '\e[5A' gitfunc
+        bindkey '\e[5B' updater
+        bindkey '\e[5C' tutsUpdate
+        bindkey '\e[5D' dbz
+    }
 }
 
 bindkey '^S' gitfunc
