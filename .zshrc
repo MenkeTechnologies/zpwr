@@ -381,6 +381,10 @@ basicSedSub(){
 }
 
 clipboard(){
+    if [[ -z "$BUFFER" ]]; then
+        return 1
+    fi
+
     [[ "$(uname)" == Darwin ]] && {
         print -sr "$BUFFER"
         print -n "$BUFFER" | pbcopy
