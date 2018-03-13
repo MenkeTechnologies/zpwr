@@ -1246,10 +1246,10 @@ export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] &&
             source ~/.shell_aliases_functions.sh
         { 
             echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
-               whois {} | grep -q 'No match' && dig {} || whois {}
+                whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
             } || {
                 cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} || \
-                whois {} | grep -q 'No match' && dig {} || whois {}
+                whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
             }
             
          } | cowsay | ponysay
