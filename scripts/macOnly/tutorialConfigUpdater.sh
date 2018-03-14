@@ -130,11 +130,16 @@ git push
 
 #{{{                    MARK:websiteDir
 #**************************************************************
+
+dotdir="$websiteDir/downloads/dotfiles"
+
+[[ ! -d "$dotdir" ]] && mkdir -p "$dotdir"
+
 prettyPrint "Copying config files to websiteDir"
-cp "$HOME/.vimrc" "$websiteDir/downloads"
-cp "$HOME/.tmux.conf" "$websiteDir/downloads"
-cp "$HOME/.shell_aliases_functions.sh" "$websiteDir/downloads"
-cp "$HOME/.zshrc" "$websiteDir/downloads"
+cp "$HOME/.vimrc" "$dotdir" 
+cp "$HOME/.tmux.conf" "$dotdir" 
+cp "$HOME/.shell_aliases_functions.sh" "$dotdir"
+cp "$HOME/.zshrc" "$dotdir" 
 
 prettyPrint "Copying scripts to $websiteDir"
 rm -rf "$websiteDir/downloads/scripts/"*
@@ -146,6 +151,7 @@ cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
 tar cvfz MenkeTechnologiesShellScripts.tgz scripts
+tar cvfz dotfiles.tgz dotfiles
 cd ..
 
 git add .
