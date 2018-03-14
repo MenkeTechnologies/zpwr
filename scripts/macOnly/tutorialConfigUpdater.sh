@@ -108,13 +108,12 @@ prettyPrint "Removing .git dirs..."
 while read -r file; do
     if [[ -d "$file" ]]; then
         if [[ "$file" = .*\.git.* ]]; then
-            rm -rf "$file"
+            sudo rm -rf "$file"
         else
             :
         fi
     fi
 done < <(find ./vim)
-
 
 prettyPrint "Updating Tutorial Files Repo"
 git add .
