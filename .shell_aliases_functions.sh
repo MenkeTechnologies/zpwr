@@ -673,6 +673,13 @@ jetbrainsWorkspaceEdit(){
 
 getrc(){
     REPO_NAME="customTerminalInstaller"
+    if [[ $(uname) == Darwin ]]; then
+       printf "Are you sure? "
+       read
+       if [[ $REPLY != "y" ]]; then
+           return 0
+       fi
+    fi
     cd "$HOME" && {
         git clone "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
         cd "$REPO_NAME" && {

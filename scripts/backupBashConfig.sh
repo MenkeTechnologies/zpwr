@@ -21,7 +21,3 @@ for file in "${files[@]}"; do
     cp "$file" "$(echo "$my_backup_dir/${file##*/}""$(date +%s)")"
 done
 
-
-
-
-echo "we are so cool date "
