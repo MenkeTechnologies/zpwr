@@ -115,8 +115,6 @@ while read -r file; do
     fi
 done < <(find ./vim)
 
-say "my pwd is $(pwd)"
-exit 1
 
 prettyPrint "Updating Tutorial Files Repo"
 git add .
@@ -125,6 +123,9 @@ prettyPrint "Status..."
 git status
 prettyPrint "Pushing..."
 git push
+
+echo "my pwd is $(pwd)"
+exit 1
 #}}}***********************************************************
 
 
