@@ -115,6 +115,8 @@ cd "$tutorialDir" || exit 1
     #fi
 #done < <(find ./vim)
 
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$tutorialDir/.vimbundle"
+
 prettyPrint "Updating Tutorial Files Repo"
 git add .
 git commit -m "$commitMessage"
