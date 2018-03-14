@@ -97,23 +97,23 @@ cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 prettyPrint "Copying iterm Colors"
 cp "$HOME/iterm-jm-colors.itermcolors" "$tutorialDir"
 
-prettyPrint "Copying vim plugins"
+#prettyPrint "Copying vim plugins"
 
-sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
+#sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
 cd "$tutorialDir" || exit 1
 
-prettyPrint "Removing .git dirs..."
+#prettyPrint "Removing .git dirs..."
 
-while read -r file; do
-    if [[ -d "$file" ]]; then
-        if [[ "$file" = .*\.git.* ]]; then
-            sudo rm -rf "$file"
-        else
-            :
-        fi
-    fi
-done < <(find ./vim)
+#while read -r file; do
+    #if [[ -d "$file" ]]; then
+        #if [[ "$file" = .*\.git.* ]]; then
+            #sudo rm -rf "$file"
+        #else
+            #:
+        #fi
+    #fi
+#done < <(find ./vim)
 
 prettyPrint "Updating Tutorial Files Repo"
 git add .
@@ -130,7 +130,6 @@ git push
 #**************************************************************
 prettyPrint "Copying config files to websiteDir"
 cp "$HOME/.vimrc" "$websiteDir/downloads"
-cp "$HOME/.vim/colors/bluewolf.vim" "$websiteDir/downloads"
 cp "$HOME/.tmux.conf" "$websiteDir/downloads"
 cp "$HOME/.shell_aliases_functions.sh" "$websiteDir/downloads"
 cp "$HOME/.zshrc" "$websiteDir/downloads"
