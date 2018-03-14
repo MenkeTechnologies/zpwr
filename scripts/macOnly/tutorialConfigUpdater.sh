@@ -53,78 +53,76 @@ git push
 
 #{{{                    MARK:tutorialDir
 #**************************************************************
-#prettyPrint "Copying zshrc"
-#cp "$HOME/.zshrc" "$tutorialDir/zsh"
-#prettyPrint "Copying vimrc"
-#cp "$HOME/.vimrc" "$tutorialDir/vim"
+prettyPrint "Copying zshrc"
+cp "$HOME/.zshrc" "$tutorialDir/zsh"
+prettyPrint "Copying vimrc"
+cp "$HOME/.vimrc" "$tutorialDir/vim"
 
-#prettyPrint "Copying tmux.conf"
-#rm -rf "$tutorialDir/tmux/"*
-#cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
-#cp -R "$HOME/.tmux/"* "$tutorialDir/.tmux"
+prettyPrint "Copying tmux.conf"
+rm -rf "$tutorialDir/tmux/"*
+cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
+cp -R "$HOME/.tmux/"* "$tutorialDir/.tmux"
 
-#prettyPrint "Copying shell_aliases_functions"
-#cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
-#cp "$HOME/.rpitokens.sh" "$tutorialDir/aliases"
+prettyPrint "Copying shell_aliases_functions"
+cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
+cp "$HOME/.rpitokens.sh" "$tutorialDir/aliases"
 
-#prettyPrint "Copying shellScripts"
-##clear out old scripts, dbl quotes escape asterisk
-#rm -rf "$tutorialDir/shell/"*
-#cp "$SCRIPTS"/*.sh "$tutorialDir/shell"
-#cp -R "$SCRIPTS/macOnly" "$tutorialDir/shell"
-##README="$tutorialDir/shell/README.md"
-##echo "# Mac and Linux Scripts" > "$README"
-##bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"*.sh >> "$README" 
-##echo "# Mac Only Scripts" >> "$README"
-##bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"macOnly/*.sh >> "$README"
+prettyPrint "Copying shellScripts"
+#clear out old scripts, dbl quotes escape asterisk
+rm -rf "$tutorialDir/shell/"*
+cp "$SCRIPTS"/*.sh "$tutorialDir/shell"
+cp -R "$SCRIPTS/macOnly" "$tutorialDir/shell"
+#README="$tutorialDir/shell/README.md"
+#echo "# Mac and Linux Scripts" > "$README"
+#bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"*.sh >> "$README" 
+#echo "# Mac Only Scripts" >> "$README"
+#bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"macOnly/*.sh >> "$README"
 
-#prettyPrint "Copying tags file"
-#cp "$HOME/Documents/shellScripts/tags" "$tutorialDir/shell"
+prettyPrint "Copying tags file"
+cp "$HOME/Documents/shellScripts/tags" "$tutorialDir/shell"
 
-#prettyPrint "Copying $HOME/.ctags" 
-#cp "$HOME/.ctags" "$tutorialDir/ctags"
+prettyPrint "Copying $HOME/.ctags" 
+cp "$HOME/.ctags" "$tutorialDir/ctags"
 
-#prettyPrint "Copying vis ncmpcpp mpd"
-#cp -R "$HOME/.config/vis" "$tutorialDir/ncmpcpp-mpd-vis"
+prettyPrint "Copying vis ncmpcpp mpd"
+cp -R "$HOME/.config/vis" "$tutorialDir/ncmpcpp-mpd-vis"
 
-#prettyPrint "Emptying mpd log"
-#echo > "$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
+prettyPrint "Emptying mpd log"
+echo > "$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
 
-#echo > "$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
-#cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
-#cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
+echo > "$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
+cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
+cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
-#prettyPrint "Copying iterm Colors"
-#cp "$HOME/iterm-jm-colors.itermcolors" "$tutorialDir"
+prettyPrint "Copying iterm Colors"
+cp "$HOME/iterm-jm-colors.itermcolors" "$tutorialDir"
 
-#prettyPrint "Copying vim plugins"
+prettyPrint "Copying vim plugins"
 
-#sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
+sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
-#cd "$tutorialDir" || exit 1
+cd "$tutorialDir" || exit 1
 
-#prettyPrint "Removing .git dirs..."
+prettyPrint "Removing .git dirs..."
 
-#while read -r file; do
-    #if [[ -d "$file" ]]; then
-        #if [[ "$file" = .*\.git.* ]]; then
-            #sudo rm -rf "$file"
-        #else
-            #:
-        #fi
-    #fi
-#done < <(find ./vim)
+while read -r file; do
+    if [[ -d "$file" ]]; then
+        if [[ "$file" = .*\.git.* ]]; then
+            sudo rm -rf "$file"
+        else
+            :
+        fi
+    fi
+done < <(find ./vim)
 
-#prettyPrint "Updating Tutorial Files Repo"
-#git add .
-#git commit -m "$commitMessage"
-#prettyPrint "Status..."
-#git status
-#prettyPrint "Pushing..."
-#git push
+prettyPrint "Updating Tutorial Files Repo"
+git add .
+git commit -m "$commitMessage"
+prettyPrint "Status..."
+git status
+prettyPrint "Pushing..."
+git push
 
-#echo "my pwd is $(pwd)"
-#exit 1
 #}}}***********************************************************
 
 
