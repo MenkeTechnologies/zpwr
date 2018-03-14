@@ -18,12 +18,13 @@ prettyPrint(){
 
 [[ ! -z "$1" ]] && commitMessage="$1" || commitMessage="update"
 
+
 #{{{                    MARK:installer
 #**************************************************************
 prettyPrint "Copying scripts to custom Installer Repo"
 rm -rf "$SCRIPTS/customTerminalInstaller/scripts/"*
 cp "$SCRIPTS"/*.sh "$installerDir/scripts"
-cp -R "$SCRIPTS"/macOnly "$installerDir/scripts"
+cp -R "$SCRIPTS/macOnly" "$installerDir/scripts"
 cp "$HOME/.vimrc" "$installerDir"
 cp "$HOME/.tmux.conf" "$installerDir"
 cp -R "$HOME/.tmux/"* "$installerDir/.tmux"
@@ -68,9 +69,9 @@ cp "$HOME/.rpitokens.sh" "$tutorialDir/aliases"
 
 prettyPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
-rm -rf "$tutorialDir/shell/*"
+rm -rf "$tutorialDir/shell/"*
 cp "$SCRIPTS"/*.sh "$tutorialDir/shell"
-cp -R "$SCRIPTS"/macOnly "$tutorialDir/shell"
+cp -R "$SCRIPTS/macOnly" "$tutorialDir/shell"
 #README="$tutorialDir/shell/README.md"
 #echo "# Mac and Linux Scripts" > "$README"
 #bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"*.sh >> "$README" 
@@ -113,6 +114,10 @@ while read -r file; do
         fi
     fi
 done < <(find ./vim)
+
+say "my pwd is $(pwd)"
+exit 1
+
 prettyPrint "Updating Tutorial Files Repo"
 git add .
 git commit -m "$commitMessage"
@@ -137,7 +142,7 @@ rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -P "$websiteDir/downloads/scripts"
 fi
-cp "$SCRIPTS/*.sh" "$websiteDir/downloads/scripts"
+cp "$SCRIPTS/"*.sh "$websiteDir/downloads/scripts"
 cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
