@@ -176,11 +176,9 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
     ssh -x "$hostname" "$(< $SCRIPTS/rpiSoftwareUpdater.sh)"
 }
 
-arrayOfPI=(r1:apt r2:apt r3:dnf r4:zypper)
-
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for
 
-for pi in "${arrayOfPI[@]}"; do
+for pi in "${PI_ARRAY[@]}"; do
     updatePI "$pi"
 done
 
