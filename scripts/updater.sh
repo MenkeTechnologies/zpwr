@@ -6,6 +6,45 @@
 #####   Purpose: bash  script to update all command line packages locally and on servers 
 #####   Notes:
 #}}}***********************************************************
+
+__ScriptVersion="1.0.0"
+
+#===  FUNCTION  ================================================================
+#         NAME:  usage
+#  DESCRIPTION:  Display usage information.
+#===============================================================================
+function usage ()
+{
+    echo "Usage :  $0 [options] [--]
+
+    Options:
+    -h|help       Display this message
+    -s|skip       Skip the main
+    -v|version    Display script version"
+
+}    # ----------  end of function usage  ----------
+
+#-----------------------------------------------------------------------
+#  Handle command line arguments
+#-----------------------------------------------------------------------
+
+while getopts ":hvs" opt
+do
+  case $opt in
+
+    h|help     )  usage; exit 0   ;;
+    s|skip ) skip=true ;;
+
+    v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+
+    * )  echo -e "\n  Option does not exist : $OPTARG\n"
+          usage; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
+
 # clear screen
 trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
 clear
@@ -30,91 +69,94 @@ exists(){
     perl -le "print '_'x$w" | lolcat
 }
 
-#python 3.6
-exists pip3 && {
-    prettyPrint "Updating Python3.6 Packages"
-    #pip lists outdated programs and get first column with awk
-    #store in outdated
-    outdated=$(pip3 list --outdated | awk '{print $1}')
 
-    #install outdated pip modules 
-    #split on space
-    for i in $outdated; do
-        pip3 install --upgrade "$i" #&> /dev/null
-    done
+if [[ $skip != true ]]; then
+    #python 3.6
+    exists pip3 && {
+        prettyPrint "Updating Python3.6 Packages"
+        #pip lists outdated programs and get first column with awk
+        #store in outdated
+        outdated=$(pip3 list --outdated | awk '{print $1}')
 
-    #update pip itself
-    pip3 install --upgrade pip setuptools wheel #&> /dev/null
-}
+        #install outdated pip modules 
+        #split on space
+        for i in $outdated; do
+            pip3 install --upgrade "$i" #&> /dev/null
+        done
 
-#python 2.7 (non system)
-exists pip2 && {
-    prettyPrint "Updating Python2.7 Packages"
-    #pip lists outdated programs and get first column with awk
-    #store in outdated
-    outdated=$(pip2 list --outdated | awk '{print $1}')
+        #update pip itself
+        pip3 install --upgrade pip setuptools wheel #&> /dev/null
+    }
 
-    #install outdated pip modules 
-    #split on space
-    for i in $outdated; do
-        pip2 install --upgrade "$i" #&> /dev/null
-    done
+    #python 2.7 (non system)
+    exists pip2 && {
+        prettyPrint "Updating Python2.7 Packages"
+        #pip lists outdated programs and get first column with awk
+        #store in outdated
+        outdated=$(pip2 list --outdated | awk '{print $1}')
 
-    #update pip itself
-    pip2 install --upgrade pip setuptools wheel #&> /dev/null
-}
+        #install outdated pip modules 
+        #split on space
+        for i in $outdated; do
+            pip2 install --upgrade "$i" #&> /dev/null
+        done
 
-exists /usr/local/bin/ruby && {
-    prettyPrint "Updating Ruby Packages"
-    /usr/local/bin/gem update --system
-    /usr/local/bin/gem update
-    /usr/local/bin/gem cleanup
-}
+        #update pip itself
+        pip2 install --upgrade pip setuptools wheel #&> /dev/null
+    }
 
-exists brew && {
-    prettyPrint "Updating Homebrew Packages"
-    brew update #&> /dev/null
-    brew upgrade #&> /dev/null
-    #remove brew cache
-    rm -rf "$(brew --cache)"
-    #removing old symbolic links
-    brew prune
-    #remote old programs occupying disk sectors
-    brew cleanup
-    brew cask cleanup
-    brew services cleanup
-}
+    exists /usr/local/bin/ruby && {
+        prettyPrint "Updating Ruby Packages"
+        /usr/local/bin/gem update --system
+        /usr/local/bin/gem update
+        /usr/local/bin/gem cleanup
+    }
 
-exists npm && {
-    prettyPrint "Updating NPM packages"
-    for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
-    do
-        npm install -g "$package"
-    done
-    prettyPrint "Updating NPM itself"
-    npm install -g npm
-}
+    exists brew && {
+        prettyPrint "Updating Homebrew Packages"
+        brew update #&> /dev/null
+        brew upgrade #&> /dev/null
+        #remove brew cache
+        rm -rf "$(brew --cache)"
+        #removing old symbolic links
+        brew prune
+        #remote old programs occupying disk sectors
+        brew cleanup
+        brew cask cleanup
+        brew services cleanup
+    }
 
-exists yarn && {
-    prettyPrint "Updating yarn packages"
-    yarn global upgrade
-#    prettyPrint "Updating yarn itself"
-#    npm install -g yarn
-}
+    exists npm && {
+        prettyPrint "Updating NPM packages"
+        for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
+        do
+            npm install -g "$package"
+        done
+        prettyPrint "Updating NPM itself"
+        npm install -g npm
+    }
 
-exists cpanm && {
-    prettyPrint "Updating Perl Packages"
-    perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
-    if [[ ! -z "$perlOutdated" ]]; then
-        echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
-    fi
-}
+    exists yarn && {
+        prettyPrint "Updating yarn packages"
+        yarn global upgrade
+    #    prettyPrint "Updating yarn itself"
+    #    npm install -g yarn
+    }
 
-exists pio && {
-    prettyPrint "Updating PlatformIO"
-    pio update
-    pio upgrade
-}
+    exists cpanm && {
+        prettyPrint "Updating Perl Packages"
+        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
+        if [[ ! -z "$perlOutdated" ]]; then
+            echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
+        fi
+    }
+
+    exists pio && {
+        prettyPrint "Updating PlatformIO"
+        pio update
+        pio upgrade
+    }
+fi
 
 gitRepoUpdater(){
     enclosing_dir="$1"
