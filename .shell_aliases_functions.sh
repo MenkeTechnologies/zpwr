@@ -670,7 +670,7 @@ jetbrainsWorkspaceEdit(){
     sleep 1
     done
 }
-revealV(){
+reveal(){
     [[ ! -d .git ]] && echo "Not git dir" >&2 && return 1
     open "$(git remote -v | grep fetch | awk '{print $2}' | sed 's/.git$//')"
 }
