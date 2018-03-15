@@ -59,6 +59,21 @@ exists(){
     type "$1" >/dev/null 2>&1
 }
 
+gitRepoUpdater(){
+    enclosing_dir="$1"
+
+    if [[ -d "$enclosing_dir" ]]; then
+        for generic_git_repo_plugin in "$enclosing_dir/"*; do
+            if [[ -d "$generic_git_repo_plugin" ]]; then
+                if [[ -d "$generic_git_repo_plugin"/.git ]]; then
+                    printf "%s: " "$(basename "$generic_git_repo_plugin")"
+                    git -C "$generic_git_repo_plugin" pull
+                fi
+            fi
+        done
+    fi
+}
+
 [[ -z "$SCRIPTS" ]] && SCRIPTS="$HOME/Documents/shellScripts"
 
 
@@ -156,38 +171,23 @@ if [[ $skip != true ]]; then
         pio update
         pio upgrade
     }
+    prettyPrint "Updating Tmux Plugins"
+    gitRepoUpdater "$HOME/.tmux/plugins"
+
+    prettyPrint "Updating Pathogen Plugins"
+    #update pathogen plugins
+    gitRepoUpdater "$HOME/.vim/bundle"
+
+    prettyPrint "Updating OhMyZsh"
+    cd "$HOME/.oh-my-zsh/tools" && bash "$HOME/.oh-my-zsh/tools/upgrade.sh"
+
+    prettyPrint "Updating OhMyZsh Plugins"
+    gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
+
+    prettyPrint "Updating OhMyZsh Themes"
+    gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 fi
 
-gitRepoUpdater(){
-    enclosing_dir="$1"
-
-    if [[ -d "$enclosing_dir" ]]; then
-        for generic_git_repo_plugin in "$enclosing_dir/"*; do
-            if [[ -d "$generic_git_repo_plugin" ]]; then
-                if [[ -d "$generic_git_repo_plugin"/.git ]]; then
-                    printf "%s: " "$(basename "$generic_git_repo_plugin")"
-                    git -C "$generic_git_repo_plugin" pull
-                fi
-            fi
-        done
-    fi
-}
-
-prettyPrint "Updating Tmux Plugins"
-gitRepoUpdater "$HOME/.tmux/plugins"
-
-prettyPrint "Updating Pathogen Plugins"
-#update pathogen plugins
-gitRepoUpdater "$HOME/.vim/bundle"
-
-prettyPrint "Updating OhMyZsh"
-cd "$HOME/.oh-my-zsh/tools" && bash "$HOME/.oh-my-zsh/tools/upgrade.sh"
-
-prettyPrint "Updating OhMyZsh Plugins"
-gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
-
-prettyPrint "Updating OhMyZsh Themes"
-gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
 #first argument is user@host and port number configured in .ssh/config
 updatePI(){ #-t to force pseudoterminal allocation for interactive programs on remote host
