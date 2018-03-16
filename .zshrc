@@ -787,20 +787,25 @@ zle -N select-bracketed
 zle -N select-quoted
 
 # bind vim text objects on command line, depends on zsh having visual and operator pendings modes in zle
-for km in viopp visual; do
-    bindkey -M $km -- '-' vi-up-line-or-history
+#
+version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"
 
-    for c in ${(s..):-'()[]{}<>bB'}; do
-        bindkey -M $km i$c select-bracketed
-        bindkey -M $km a$c select-bracketed
+if (( $version > 5.2 )); then
+    for km in viopp visual; do
+        bindkey -M $km -- '-' vi-up-line-or-history
+
+        for c in ${(s..):-'()[]{}<>bB'}; do
+            bindkey -M $km i$c select-bracketed
+            bindkey -M $km a$c select-bracketed
+        done
+
+        for c in "${(s..):-\'\"\`\|,./:;-=+@}"; do
+            bindkey -M $km i$c select-quoted
+            bindkey -M $km a$c select-quoted
+        done
+
     done
-
-    for c in "${(s..):-\'\"\`\|,./:;-=+@}"; do
-        bindkey -M $km i$c select-quoted
-        bindkey -M $km a$c select-quoted
-    done
-
-done
+fi
 
 bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
