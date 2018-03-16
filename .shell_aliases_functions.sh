@@ -10,7 +10,7 @@ exists(){
 #**************************************************************
 export TMUX_PREFIX="x"
 export TMUX_REMOTE_PREFIX="b"
-declare -a PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
+PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
 export PI_ARRAY
 #}}}***********************************************************
 
