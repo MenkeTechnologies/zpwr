@@ -459,10 +459,12 @@ humanReadable(){
     }
 
 f(){
-    if [[ ! -d "$1" ]]; then
+    if [[ -f "$1" ]]; then
         cd "$(dirname "$1")"
-    else
+    elif [[ -d "$1" ]];then
         cd "$1"
+    else
+        echo "Not a valid file or directory." >&2 && return 1
     fi
 }
 
