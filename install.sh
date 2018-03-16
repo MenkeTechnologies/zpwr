@@ -13,11 +13,11 @@
 
 set -x
 set -v
+exec 2> "$INSTALLER_DIR"/logfile.txt
 
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
-exec 2> "$INSTALLER_DIR"/logfile.txt
 
 #Dependencies
 # 1) vim 8.0
@@ -270,7 +270,6 @@ else
     fi
 
     if [[ "$distroName" == centos ]]; then
-        sudo yum install epel-release
         sudo yum install -y python36
         sudo ln -s /usr/bin/python36 /usr/bin/python3
     fi
