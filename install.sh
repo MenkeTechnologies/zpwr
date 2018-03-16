@@ -69,7 +69,7 @@ addDependenciesDebian(){
 
 addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
-        sudo yum install epel-release
+        sudo yum install -y epel-release
     fi
     #dependencies_ary+=('fortune-mod.*' libpcap-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel)
 }
