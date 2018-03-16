@@ -1257,8 +1257,9 @@ export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] &&
             echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
                 whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
             } || {
-                cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} || \
+                cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} || {
                 whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+                }
             }
             
          } | cowsay | ponysay
