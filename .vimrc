@@ -707,13 +707,13 @@ function CompleteLine()
     let exeFileType=expand('%:e')
     if index(SemiColon, exeFileType) >= 0
         inoremap <C-Space> <C-O>$;<Enter>
-        inoremap <C-D><Space> <ESC>+
-        nnoremap <C-D><Space> +
+        inoremap <C-\> <ESC>+
+        nnoremap <C-\> +
     else
         inoremap <C-Space> <C-O>$<Enter>
-        inoremap <C-D><Space> <ESC>+
-        nnoremap <C-D><Space> +
-endif
+        inoremap <C-\> <ESC>+
+        nnoremap <C-\> +
+    endif
 endfunction
 
 autocmd VimEnter * call CompleteLine()
@@ -726,23 +726,23 @@ set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
 function TmuxRepeat()
-let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua', 'java']
-let exeFileType=expand('%:e')
-if index(supportedTypes, exeFileType) >= 0
-    silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
-    redraw!
-else
-    silent! exec "!tmux send-keys -t right C-c up C-m"
-    echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
-    redraw!
-endif
-exe "normal! zz"
+    let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua', 'java']
+    let exeFileType=expand('%:e')
+    if index(supportedTypes, exeFileType) >= 0
+        silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+        redraw!
+    else
+        silent! exec "!tmux send-keys -t right C-c up C-m"
+        echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
+        redraw!
+    endif
+    exe "normal! zz"
 endfunction
 
 function TmuxRepeatGeneric()
-silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
-redraw!
-exe "normal! zz"
+    silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
+    redraw!
+    exe "normal! zz"
 endfunction
 
 " reassing readline plugin mapping
