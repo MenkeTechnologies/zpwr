@@ -704,7 +704,9 @@ getrc(){
     cp -f scripts/* "$SCRIPTS"
     cd ..
     rm -rf "$REPO_NAME"
-    exec "$SHELL"
+    if [[ ! -z "$TERM" ]]; then
+        exec "$SHELL"
+    fi
 
 }
 
