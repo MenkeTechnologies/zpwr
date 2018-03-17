@@ -1320,6 +1320,10 @@ _comps[passwd]=_passwd
 _comps[ksh]=_ksh
 _comps[tcsh]=_tcsh
 _comps[csh]=_tcsh
+
+
+autoload zmv
+# zmv -W '*.pl' '*.perl'
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
