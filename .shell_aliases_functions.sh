@@ -682,9 +682,12 @@ reveal(){
 getrc(){
     REPO_NAME="customTerminalInstaller"
     if [[ $(uname) == Darwin ]]; then
-       printf "Are you sure? "
-       read
+        dialog --inputbox 'Are you sure you want to run getrc on this Apple device?' 8 40 2> temp$$
+        clear
+        REPLY="$(cat temp$$)"
+        rm temp$$
        if [[ $REPLY != "y" ]]; then
+           d
            return 0
        fi
     fi
