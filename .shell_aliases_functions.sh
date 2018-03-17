@@ -730,6 +730,13 @@ torip(){
     echo $ip
 }
 
+pirun(){
+    for pi in "${PI_ARRAY[@]}" ; do
+        ssh "${pi%:*}" "$1"
+    done
+
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Source Tokens
