@@ -228,7 +228,7 @@ done
 brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
     # we have brew cu
     prettyPrint "Updating Homebrew Casks!"
-    brew cu --all -y --cleanup
+    brew cu -fay --cleanup
 } || {
     # we don't have brew cu
     prettyPrint "Installing brew-cask-upgrade"
