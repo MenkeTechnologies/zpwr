@@ -581,8 +581,8 @@ bindkey -M vicmd '^O' edit-command-line
 bindkey -M viins '^F' fzf-file-widget
 bindkey -M vicmd '^F' fzf-file-widget
 
-bindkey -M viins '^N' fzf-history-widget
-bindkey -M vicmd '^N' fzf-history-widget
+bindkey -M viins '^Q' fzf-history-widget
+bindkey -M vicmd '^Q' fzf-history-widget
 
 bindkey -M viins '^V' fzf-cd-widget
 bindkey -M vicmd '^V' fzf-cd-widget
