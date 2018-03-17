@@ -810,6 +810,9 @@ fi
 bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 
+bindkey -M viins '^[^M' self-insert-unmeta
+bindkey -M viins '^D^M' self-insert-unmeta
+
 # RPROMPT shows vim modes (insert vs normal)
 zle-keymap-select() {
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
@@ -1093,7 +1096,7 @@ supernatural-space() {
 }
 
 terminate-space(){
-    [[ -z $RBUFFER ]] && zle magic-space || { zle end-of-line; zle magic-space}
+    zle .magic-space
 }
 
 zle -N supernatural-space
