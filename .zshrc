@@ -811,7 +811,6 @@ bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 
 bindkey -M viins '^[^M' self-insert-unmeta
-bindkey -M viins '^D^M' self-insert-unmeta
 
 # RPROMPT shows vim modes (insert vs normal)
 zle-keymap-select() {
@@ -877,6 +876,9 @@ setopt no_badp_attern
 
 #globs sorted numerically
 setopt numeric_glob_sort
+
+#global substitution is case insensitive
+setopt nocaseglob
 
 # filename completion after =
 setopt magic_equal_subst
