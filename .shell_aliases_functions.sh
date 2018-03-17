@@ -682,14 +682,21 @@ reveal(){
 getrc(){
     REPO_NAME="customTerminalInstaller"
     if [[ $(uname) == Darwin ]]; then
-        dialog --inputbox 'Are you sure you want to run getrc on this Apple device?' 8 40 2> temp$$
-        clear
-        REPLY="$(cat temp$$)"
-        rm temp$$
+        exists dialog && {
+            dialog --inputbox 'Are you sure you want to run getrc on this Apple device?' 8 40 2> /tmp/temp$$
+            clear
+            REPLY="$(cat /tmp/temp$$)"
+            rm /tmp/temp$$
+        } || {
+            printf "Are you sure? "
+            read
+        }
+
        if [[ $REPLY != "y" ]]; then
-           d
+           clearList
            return 0
        fi
+
     fi
     cd "$HOME"
     git clone "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
