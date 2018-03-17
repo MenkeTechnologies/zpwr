@@ -691,24 +691,20 @@ getrc(){
     cd "$HOME" && {
         git clone "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
         cd "$REPO_NAME" && {
-
-        cp .shell_aliases_functions.sh "$HOME"
-        cp .zshrc "$HOME"
-        cp .vimrc "$HOME"
-        cp .tmux.conf "$HOME"
-        cp conf.gls "$HOME"
-        cp conf.df "$HOME"
-        cp conf.ifconfig "$HOME"
-        cp grc.zsh "$HOME"
-        cp .inputrc "$HOME"
-
-        cp -R .tmux/* "$HOME/.tmux"
-        cp -f scripts/* "$SCRIPTS"
-
-        cd ..
-        rm -rf "$REPO_NAME"
-        exec "$SHELL"
-
+            cp .shell_aliases_functions.sh "$HOME"
+            cp .zshrc "$HOME"
+            cp .vimrc "$HOME"
+            cp .tmux.conf "$HOME"
+            cp conf.gls "$HOME"
+            cp conf.df "$HOME"
+            cp conf.ifconfig "$HOME"
+            cp grc.zsh "$HOME"
+            cp .inputrc "$HOME"
+            cp -R .tmux/* "$HOME/.tmux"
+            cp -f scripts/* "$SCRIPTS"
+            cd ..
+            rm -rf "$REPO_NAME"
+            exec "$SHELL"
         } || {
             printf "Failed to cd to $REPO_NAME\n" >&2
         }
