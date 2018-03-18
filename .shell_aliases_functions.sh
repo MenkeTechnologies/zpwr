@@ -742,7 +742,7 @@ torip(){
 
 pirun(){
     for pi in "${PI_ARRAY[@]}" ; do
-        ssh "${pi%:*}" "$1"
+        ssh "${pi%:*}" "$1" 2>/dev/null
     done
 
 }
