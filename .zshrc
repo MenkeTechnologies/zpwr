@@ -900,10 +900,14 @@ autoload -U compinit && compinit u
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
 
+
+zstyle ':completion:*' ignore-parents parent pwd
+
+# remove slash if argument is a directory
+zstyle ':completion:*' squeeze-slashes true
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-# Fallback to built in ls colors, menu active to white text on blue background
 
 # Make the list prompt friendly
 zstyle ':completion:*' list-prompt \
@@ -912,7 +916,6 @@ zstyle ':completion:*' list-prompt \
 # Make the selection prompt friendly when there are a lot of choices
 zstyle ':completion:*' select-prompt \
     $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[37;44m%p\e[0;1;31m>>-\e[0m'
-
 
 # Add simple colors to kill
 zstyle ':completion:*:*:kill:*:processes' list-colors \
@@ -948,7 +951,8 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 # don't complete duplicates for these commands
 zstyle ':completion::*:(git-add|git-rm|less|rm|vi|vim|v):*' ignore-line true
 
-zstyle ':complete:*' ignore-parents parent pwd
+#insert unambiguous for correct completer
+zstyle ':completion:*:correct:*' insert-unambiguous true
 
 # 0 -- vanilla completion (abc => abc)
 # 1 -- smart case completion (abc => Abc)
@@ -1003,7 +1007,8 @@ zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:manuals' separate-sections true
 
-zstyle ':completion:*:cd:*' ignore-parents parent pwd
+# Ignore completion functions for commands you don't have
+zstyle ':completion:*:functions' ignored-patterns '_*'
 
 #}}}***********************************************************
 
