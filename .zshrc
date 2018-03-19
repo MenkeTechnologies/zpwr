@@ -998,9 +998,12 @@ zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
 
 zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,@3-]#)*=1;30=1;31=34=1;31=34'
 
+#use tag names as menu select separators
 zstyle ':completion:*' group-name ''
 
 zstyle ':completion:*:manuals' separate-sections true
+
+zstyle ':completion:*:cd:*' ignore-parents parent pwd
 
 #}}}***********************************************************
 
