@@ -256,6 +256,7 @@ nnoremap <silent> <C-F> :q!<CR>
 vnoremap <silent> <C-F> :<C-C>:q!<CR>
 
 autocmd VimEnter * inoremap <silent> <C-F> <C-[>:q!<CR>
+autocmd VimEnter * set background=dark
 inoremap <silent> <C-Z> <C-[>:suspend<CR>
 
 vnoremap <RightMouse> "*y`>
