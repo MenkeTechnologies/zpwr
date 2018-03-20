@@ -1312,8 +1312,6 @@ local blue="33"
 local cyan="37"
 local green="64"
 
-# Comment and uncomment below for the light theme.
-
 # Solarized Dark color scheme for fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
@@ -1329,10 +1327,8 @@ _comps[ksh]=_ksh
 _comps[tcsh]=_tcsh
 _comps[csh]=_tcsh
 
-
-
+# Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
-# zmv -W '*.pl' '*.perl'
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
