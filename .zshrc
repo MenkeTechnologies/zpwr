@@ -734,7 +734,7 @@ bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history 
 
 [[ "$(uname)" == Darwin ]] && {
-    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
+    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print}" | tr -s ' ' | cut -d ' ' -f9-)"
     echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
