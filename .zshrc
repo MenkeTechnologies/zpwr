@@ -1063,12 +1063,12 @@ __CORRECT_WORDS[store]="sotre"
 
 supernatural-space() {
 	    #statements
-    __TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
-    mywords=("${(z)__TEMP_BUFFER}")
-    finished=false
+    local __TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
+    local mywords=("${(z)__TEMP_BUFFER}")
+    local finished=false
 
     for key in ${(k)__CORRECT_WORDS[@]}; do
-        badWords=("${(z)__CORRECT_WORDS[$key]}")
+        local badWords=("${(z)__CORRECT_WORDS[$key]}")
         for misspelling in $badWords[@];do
 
             #echo "Does $misspelling matches $mywords[-1]?" >> $LOGFILE
