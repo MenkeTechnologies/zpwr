@@ -40,6 +40,7 @@ set autoread
 set ignorecase
 set smartcase
 set tabstop=4
+set cindent
 "60 ms wait for next key in mappings
 "set timeoutlen=300
 "using powerline status bar instead
@@ -56,7 +57,6 @@ set wrapscan
 set t_Co=256
 set backspace=2
 set encoding=utf8
-set autoindent
 set showmatch
 set showmode
 set hlsearch
@@ -752,8 +752,8 @@ autocmd VimEnter * nunmap S
 
 nnoremap <silent> <C-V> :w<CR>:call TmuxRepeat()<CR>
 
-vnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
-nnoremap <silent> <ESC>/ :call NERDComment("x","Toggle")<CR>`>
+vnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
+nnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
 
 "vnoremap <silent> y y`>
 "nnoremap <silent> gp p`]
