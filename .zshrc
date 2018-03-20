@@ -63,15 +63,11 @@ hg_prompt_info(){}
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-#  alias ohmyzsh="mate ~/.oh-my-zsh"
 
 ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
@@ -203,7 +199,7 @@ sshRegain() {
     echo "$(ps -ef)" |  grep -q 'ssh ' && {
         if [[ "$BUFFER" != "" ]]; then
             print -sr "$BUFFER"
-            __NEW_BUFFER="exe \"$BUFFER\""
+            local __NEW_BUFFER="exe \"$BUFFER\""
             echo
             eval "$__NEW_BUFFER"
             BUFFER=""
@@ -381,9 +377,7 @@ basicSedSub(){
 }
 
 clipboard(){
-    if [[ -z "$BUFFER" ]]; then
-        return 1
-    fi
+    [[ -z "$BUFFER" ]] && return 1
 
     [[ "$(uname)" == Darwin ]] && {
         print -sr "$BUFFER"
@@ -418,10 +412,10 @@ clipboard(){
 surround(){
     next=$((CURSOR+1))
 
-    char=${BUFFER[$CURSOR]}
-    nextChar=${BUFFER[$next]}
-    echo char is $char >> $LOGFILE
-    echo nextChar is $nextChar >> $LOGFILE
+    local char=${BUFFER[$CURSOR]}
+    local nextChar=${BUFFER[$next]}
+    #echo char is $char >> $LOGFILE
+    #echo nextChar is $nextChar >> $LOGFILE
 
     count=$(echo "$BUFFER" | fgrep -o "$KEYS" | wc -l)
 
@@ -450,7 +444,7 @@ surround(){
         '`')
             if (( $count % 2 == 1 )); then
                     BUFFER="$LBUFFER$KEYS$RBUFFER"
-                    echo odd Char is $count >> $LOGFILE
+                    #echo odd Char is $count >> $LOGFILE
                     zle .vi-forward-char
                     return 0
             fi
@@ -459,7 +453,7 @@ surround(){
         "'")
             if (( $count % 2 == 1 )); then
                     BUFFER="$LBUFFER$KEYS$RBUFFER"
-                    echo odd Char is $count >> $LOGFILE
+                    #echo odd Char is $count >> $LOGFILE
                     zle .vi-forward-char
                     return 0
             fi
@@ -483,10 +477,10 @@ surround(){
 
 #delete the next matching closing punct
 deleteMatching(){
-    next=$((CURSOR+1))
+    local next=$((CURSOR+1))
+    local char=${BUFFER[$CURSOR]}
+    local nextChar=${BUFFER[$next]}
 
-    char=${BUFFER[$CURSOR]}
-    nextChar=${BUFFER[$next]}
     #echo char is $char >> $LOGFILE
     #echo nextChar is $nextChar >> $LOGFILE
 
@@ -551,13 +545,14 @@ zle -N deleteMatching
 zle -N updater
 zle -N runner
 
+#vim mode is default
+bindkey -v
+
 bindkey -M viins "\e^O" runner
 bindkey -M vicmd "\e^O" runner
 
 bindkey -M viins "\e^P" updater
 bindkey -M vicmd "\e^P" updater
-#vim  mode
-bindkey -v
 
 bindkey -M viins '"' surround
 bindkey -M viins "'" surround
@@ -623,9 +618,9 @@ zle -N tutsUpdate
 zle -N subLine
 
 bindkey '\e[1;2D' sub
-#press both escape and control f then oo
 bindkey '\e^f' sub
-#bound to control spacebar
+
+#bound to escape spacebar
 bindkey -M vicmd '\e ' sshRegain
 bindkey -M viins '\e ' sshRegain
 
@@ -634,6 +629,7 @@ bindkey '\eOP' updater
 #F2 key
 bindkey '\eOQ' sub
 
+#determine if this terminal was started in IDE
 [[ "$(uname)" == Darwin ]] && {
     PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
     echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
@@ -668,10 +664,10 @@ my-accept-line () {
     __WILL_CLEAR=false
 
     #do we want to clear the screen and run ls after we exec the current line?
-    commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
+    local commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
     for command in ${commandsThatModifyFiles[@]}; do
-        regex="^sudo $command .*\$|^$command .*\$"
+        local regex="^sudo $command .*\$|^$command .*\$"
         print "$BUFFER" | egrep -q "$regex" && {
             __WILL_CLEAR=true
         }
@@ -681,10 +677,10 @@ my-accept-line () {
     
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
 
-        mywords=("${(z)BUFFER}")
+        local mywords=("${(z)BUFFER}")
 
         if [[ ! -z $(alias -g $mywords[1]) ]];then
-            line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
+            local line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
@@ -754,11 +750,11 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
     distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
     if [[ "$distro" == raspbian ]]; then
-        :
         #bindkey -M menuselect '\eOA' vi-backward-word
         #bindkey -M menuselect '\eOB' vi-forward-word
         #bindkey -M menuselect '\eOD' vi-beginning-of-line
         #bindkey -M menuselect '\eOC' vi-end-of-line
+        :
     else
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
@@ -809,7 +805,6 @@ fi
 
 bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
-
 bindkey -M viins '^[^M' self-insert-unmeta
 
 # RPROMPT shows vim modes (insert vs normal)
@@ -872,7 +867,7 @@ setopt no_list_beep
 setopt sh_null_cmd
 
 # allow unquoted globs to pass through
-setopt no_badp_attern
+setopt no_bad_pattern
 
 #globs sorted numerically
 setopt numeric_glob_sort
@@ -900,7 +895,7 @@ autoload -U compinit && compinit u
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
 
-
+#dont include pwd after ../
 zstyle ':completion:*' ignore-parents parent pwd
 
 # remove slash if argument is a directory
@@ -927,7 +922,7 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-# formatting and messages
+# formatting and messages, blue text with red punctuation
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' format \
     $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
@@ -963,6 +958,7 @@ zstyle ':completion:*' matcher-list '' \
     'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
     'r:|?=** m:{a-z\-}={A-Z\_}'
 
+#parse out host aliases and hostnames from ssh config
 if [[ -r "$HOME/.ssh/config" ]]; then
     h=(${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
     h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
@@ -1063,8 +1059,8 @@ __CORRECT_WORDS[store]="sotre"
 
 supernatural-space() {
 	    #statements
-    local __TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
-    local mywords=("${(z)__TEMP_BUFFER}")
+    local TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
+    local mywords=("${(z)TEMP_BUFFER}")
     local finished=false
 
     for key in ${(k)__CORRECT_WORDS[@]}; do
