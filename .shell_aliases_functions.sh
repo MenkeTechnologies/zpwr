@@ -200,7 +200,7 @@ alias ,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias ipa="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's/addr://'"
+alias ipa="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's/addr://' | head -1"
 
 alias pgrep='pgrep -l'
 #**********************************************************************
