@@ -10,9 +10,7 @@ splitw -v -p 30 # split it into two horizontal halves
 selectp -t 2
 
 if-shell "uname | grep -q Darwin" 'send-keys "storageShower.sh 8 1" C-m' 'send-keys "sudo glances" C-M'
-
-
 selectp -t right # select the new, second (1) pane
 splitw -v -p 30 
-send-keys "sudo iftop -c $HOME/.iftop.conf" C-m
+if-shell "uname | grep -q Darwin" 'send-keys "sudo iftop -f \"not port mdns and not port ssdp and not port llmnr\" -c $HOME/.iftop.conf" C-m' 'send-keys "sudo iftop -c $HOME/.iftop.conf" C-M'
 selectp -t 3 # select top right pane
