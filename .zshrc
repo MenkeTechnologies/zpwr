@@ -664,10 +664,12 @@ my-accept-line () {
     __WILL_CLEAR=false
 
     #do we want to clear the screen and run ls after we exec the current line?
-    local commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
+    local commandsThatModifyFiles regex mywords line
+
+     commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
     for command in ${commandsThatModifyFiles[@]}; do
-        local regex="^sudo $command .*\$|^$command .*\$"
+         regex="^sudo $command .*\$|^$command .*\$"
         print "$BUFFER" | egrep -q "$regex" && {
             __WILL_CLEAR=true
         }
@@ -677,10 +679,10 @@ my-accept-line () {
     
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
 
-        local mywords=("${(z)BUFFER}")
+         mywords=("${(z)BUFFER}")
 
         if [[ ! -z $(alias -g $mywords[1]) ]];then
-            local line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
+             line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
@@ -1059,12 +1061,13 @@ __CORRECT_WORDS[store]="sotre"
 
 supernatural-space() {
 	    #statements
-    local TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
-    local mywords=("${(z)TEMP_BUFFER}")
-    local finished=false
+    local TEMP_BUFFER mywords badWords
+     TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
+     mywords=("${(z)TEMP_BUFFER}")
+     finished=false
 
     for key in ${(k)__CORRECT_WORDS[@]}; do
-        local badWords=("${(z)__CORRECT_WORDS[$key]}")
+         badWords=("${(z)__CORRECT_WORDS[$key]}")
         for misspelling in $badWords[@];do
 
             #echo "Does $misspelling matches $mywords[-1]?" >> $LOGFILE
