@@ -11,14 +11,14 @@
 #{{{                    MARK:Setup
 #**************************************************************
 
-set -x
-set -v
-exec 2> "$INSTALLER_DIR"/logfile.txt
 
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
+set -x
+set -v
+exec 2> "$INSTALLER_DIR"/logfile.txt
 #Dependencies
 # 1) vim 8.0
 # 2) tmux 2.1
