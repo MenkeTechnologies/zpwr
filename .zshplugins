@@ -1,8 +1,8 @@
-/fzf
-/fzf-zsh
-/warhol.plugin.zsh
-/zsh-autosuggestions
-/zsh-completions
-/zsh-more-completions
-/zsh-syntax-highlighting
-/zsh-xcode-completions
+its junegunn/fzf
+its Treri/fzf-zsh
+its unixorn/warhol.plugin.zsh
+its zsh-users/zsh-autosuggestions
+its zsh-users/zsh-completions
+its MenkeTechnologies/zsh-more-completions
+its zsh-users/zsh-syntax-highlighting
+its keith/zsh-xcode-completions
