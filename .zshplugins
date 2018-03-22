@@ -1,9 +1,8 @@
-robbyrussell/oh-my-zsh
-junegunn/fzf
-Treri/fzf-zsh
-unixorn/warhol.plugin.zsh
-zsh-users/zsh-autosuggestions
-zsh-users/zsh-completions
-MenkeTechnologies/zsh-more-completions
-zsh-users/zsh-syntax-highlighting
-keith/zsh-xcode-completions
+/fzf
+/fzf-zsh
+/warhol.plugin.zsh
+/zsh-autosuggestions
+/zsh-completions
+/zsh-more-completions
+/zsh-syntax-highlighting
+/zsh-xcode-completions

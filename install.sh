@@ -498,6 +498,7 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
 
 prettyPrint "Installing Zsh plugins"
+cd "$INSTALLER_DIR"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Installing fzf"
