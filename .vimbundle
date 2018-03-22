@@ -1,55 +1,55 @@
-/Conque-Shell
-/VimColorSchemes
-/Vundle.vim
-/YouCompleteMe
-/ack.vim
-/camelcasemotion
-/clam.vim
-/ctrlp.vim
-/delimitmate
-/emmet-vim
-/html5.vim
-/neobundle.vim
-/nerdcommenter
-/nerdtree
-/rainbow
-/repmo-vim
-/supertab
-/syntastic
-/tagexplorer.vim
-/tlib_vim
-/ttags_vim
-/ultisnips
-/undotree
-/unite-tag
-/vim-asterisk
-/vim-auto-save
-/vim-autocorrect
-/vim-autotag
-/vim-bookmarks
-/vim-devicons
-/vim-dispatch
-/vim-easymotion
-/vim-indent-guides
-/vim-lotr
-/vim-markology
-/vim-minimap
-/vim-misc
-/vim-multiple-cursors
-/vim-nerdtree-syntax-highlight
-/vim-obsession
-/vim-online-thesaurus
-/vim-plugin-random-colorscheme-picker
-/vim-refactor
-/vim-repeat
-/vim-rsi
-/vim-session
-/vim-sexp
-/vim-sexp-mappings-for-regular-people
-/vim-sneak
-/vim-snippets
-/vim-startify
-/vim-surround
-/vim-unimpaired
-/vimux
-/wildfire.vim
+its lrvick/Conque-Shell
+its MenkeTechnologies/VimColorSchemes
+its VundleVim/Vundle.vim
+its Valloric/YouCompleteMe
+its mileszs/ack.vim
+its vim-scripts/camelcasemotion
+its sjl/clam.vim
+its ctrlpvim/ctrlp.vim
+its raimondi/delimitmate
+its mattn/emmet-vim
+its othree/html5.vim
+its Shougo/neobundle.vim
+its scrooloose/nerdcommenter
+its scrooloose/nerdtree
+its luochen1990/rainbow
+its Houl/repmo-vim
+its ervandew/supertab
+its vim-syntastic/syntastic
+its vim-scripts/tagexplorer.vim
+its tomtom/tlib_vim
+its tomtom/ttags_vim
+its SirVer/ultisnips
+its mbbill/undotree
+its tsukkee/unite-tag
+its haya14busa/vim-asterisk
+its 907th/vim-auto-save
+its MenkeTechnologies/vim-autocorrect
+its craigemery/vim-autotag
+its MattesGroeger/vim-bookmarks
+its ryanoasis/vim-devicons
+its MenkeTechnologies/vim-dispatch
+its easymotion/vim-easymotion
+its nathanaelkane/vim-indent-guides
+its dahu/vim-lotr
+its jeetsukumaran/vim-markology
+its severin-lemaignan/vim-minimap
+its xolox/vim-misc
+its TerryMa/vim-multiple-cursors
+its tiagofumo/vim-nerdtree-syntax-highlight
+its tpope/vim-obsession
+its beloglazov/vim-online-thesaurus
+its sunuslee/vim-plugin-random-colorscheme-picker
+its LucHermitte/vim-refactor
+its tpope/vim-repeat
+its tpope/vim-rsi
+its xolox/vim-session
+its guns/vim-sexp
+its tpope/vim-sexp-mappings-for-regular-people
+its justinmk/vim-sneak
+its honza/vim-snippets
+its mhinz/vim-startify
+its tpope/vim-surround
+its tpope/vim-unimpaired
+its benmills/vimux
+its gcmt/wildfire.vim

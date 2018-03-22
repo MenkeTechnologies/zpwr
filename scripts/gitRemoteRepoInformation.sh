@@ -7,13 +7,14 @@
 #####   Notes: 
 #}}}***********************************************************
 
-for file; do
-    if [[ -d "$file" ]]; then
-        cd "$file" && {
+for directory; do
+    if [[ -d "$directory" ]]; then
+        cd "$directory" && {
             [[ -d .git ]] && {
                 line="$(git remote -v 2>/dev/null)" && {
+                    user="$(echo $line | awk -F'/' '{print $4}')"
                     repo="$(echo $line | awk -F'/' '{print $5}' | awk '{print $1}')"
-                    echo "$user/${repo%%.git*}"
+                    echo "its $user/${repo%%.git*}"
                 }
         }
     }
