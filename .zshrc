@@ -1055,7 +1055,7 @@ __CORRECT_WORDS[why]="hwy wyh"
 __CORRECT_WORDS[inside]="insdie inisde isnide sindie"
 __CORRECT_WORDS[just]="jsut jutsi just"
 __CORRECT_WORDS[here]="ehre"
-__CORRECT_WORDS[not]="not"
+__CORRECT_WORDS[not]="nto tno"
 __CORRECT_WORDS[store]="sotre"
 
 
