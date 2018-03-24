@@ -26,6 +26,7 @@ INTERFACE=Wi-Fi
 type spoof &> /dev/null || { printf "you need spoof!. Exiting." >&2; exit; }
 
 function disable_proxy() {
+    kill $!
     sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
     prettyPrint "SOCKS proxy disabled"
     sudo spoof reset wi-fi
@@ -51,4 +52,9 @@ sudo networksetup -setsocksfirewallproxystate "$INTERFACE" on
 
 prettyPrint "SOCKS proxy 127.0.0.1:9050 enabled."
 prettyPrint "Starting Tor..."
-tor
+
+tor &
+while [[ 1 ]]; do
+    sleep 3
+    curl --socks5 127.0.0.1:9050 icanhazip.com
+done
