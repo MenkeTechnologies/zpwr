@@ -86,8 +86,13 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(fzf-zsh zsh-more-completions zsh-completions zsh-syntax-highlighting zsh-autosuggestions history-substring-search ruby gem rake rails yarn ng coffee node npm perl cpanm git github gradle ant mvn scala lein spring django pip pyenv python go man nmap postgres redis-cli colorize sudo z rsync docker sublime vundle rust cargo meteor gulp grunt glassfish)
 
+PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
+
 [[ "$(uname)" == "Darwin" ]] && {
     plugins+=(zsh-xcode-completions brew osx pod)
+    #determine if this terminal was started in IDE
+    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && plugins=(tmux $plugins)
+
 } || {
     #linux
     plugins+=(systemd)
@@ -631,10 +636,8 @@ bindkey '\eOQ' sub
 
 #determine if this terminal was started in IDE
 [[ "$(uname)" == Darwin ]] && {
-    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
     echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
-        plugins+=(tmux)
-    #Ctrl plus arrow keys
+        #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
         bindkey '\e[1;5B' updater
         bindkey '\e[1;5C' tutsUpdate
@@ -646,6 +649,7 @@ bindkey '\eOQ' sub
         bindkey '\e[5D' dbz
     }
 }
+
 
 bindkey '^S' gitfunc
 bindkey '^N' sudo-command-line
