@@ -88,12 +88,11 @@ plugins=(fzf-zsh zsh-more-completions zsh-completions zsh-syntax-highlighting zs
 
 PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
 
-[[ "$(uname)" == "Darwin" ]] && {
+if [[ "$(uname)" == "Darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && plugins=(tmux $plugins)
-
-} || {
+    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && plugins+=(tmux)
+else
     #linux
     plugins+=(systemd)
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
@@ -117,7 +116,7 @@ PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
         (*) :
             ;;
     esac
-}
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:Sourcing
