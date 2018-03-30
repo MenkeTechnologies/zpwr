@@ -296,6 +296,10 @@ else
     prettyPrint "Installing MyCLI"
     sudo pip install mycli
 
+    prettyPrint "Installing PGCLI"
+    sudo pip install pgcli
+
+
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
         sudo pip install --upgrade youtube_dl
