@@ -23,6 +23,6 @@ cd "$HOME/.vim/bundle" && {
         installVimPlugin "$repo"
     done < "$INSTALLER_DIR/.vimbundle"
 
-    printf "Installing Taglist Plugin"
+    echo "Installing Taglist Plugin"
     cp -R "$INSTALLER_DIR/taglist_46" .
 }

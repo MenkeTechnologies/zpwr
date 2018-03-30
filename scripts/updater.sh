@@ -76,16 +76,13 @@ gitRepoUpdater(){
 
 [[ -z "$SCRIPTS" ]] && SCRIPTS="$HOME/Documents/shellScripts"
 
-
-[[ -f "$SCRIPTS/printHeader.sh" ]] && {
-    w=80
-    perl -le "print '_'x$w" | lolcat
-    echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
-    perl -le "print '_'x$w" | lolcat
-}
-
-
 if [[ $skip != true ]]; then
+    [[ -f "$SCRIPTS/printHeader.sh" ]] && {
+        w=80
+        perl -le "print '_'x$w" | lolcat
+        echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
+        perl -le "print '_'x$w" | lolcat
+    }
     #python 3.6
     exists pip3 && {
         prettyPrint "Updating Python3.6 Packages"
@@ -219,11 +216,9 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
 }
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for
-
 for pi in "${PI_ARRAY[@]}"; do
     updatePI "$pi"
 done
-
 
 brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
     # we have brew cu
