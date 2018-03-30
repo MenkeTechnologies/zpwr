@@ -455,11 +455,6 @@ if [[ -f "$htopDIR/htoprfc" ]]; then
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
 fi
 
-type chsh >/dev/null 2>&1 && {
-    prettyPrint "Changing default shell to Zsh"
-    chsh -s "$(which zsh)"
-}
-
 prettyPrint "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
 if [[ "$(uname)" == Darwin ]]; then
     GRC_DIR=/usr/local/share/grc
@@ -484,18 +479,18 @@ cp "$INSTALLER_DIR/.inputrc" "$HOME"
 #{{{                    MARK:zsh
 #**************************************************************
 
+prettyPrint "Installing oh-my-zsh..."
+#oh-my-zsh
+sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+#install custom theme based on agnosterzak
+cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
+
 #add aliases and functions
 prettyPrint "Adding common shell aliases for Bash and Zsh"
 cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
 
 prettyPrint "Installing .zshrc"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
-
-prettyPrint "Installing oh-my-zsh..."
-#oh-my-zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
-#install custom theme based on agnosterzak
-cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
 
 prettyPrint "Installing Zsh plugins"
 cd "$INSTALLER_DIR"
