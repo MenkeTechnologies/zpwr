@@ -2,6 +2,12 @@
 
 This repo is my own version of Hashrocket's Dotmatrix repo.  This allows one to install a custom terminal environment with Powerline for Vim, Tmux,oh-my-zsh with the Agnosterzak theme, iftop, htop, glances, mtr and much more.  So far only the Mac and Raspberry Pi are supported.
 
+# Installation Instructions
+
+```sh
+git clone https://github.com/MenkeTechnologies/customTerminalInstaller.git && cd customTerminalInstaller && ./install.sh
+```
+
 # Running on a MacbookPro
 ![Alt text](/tmuxfinal1.png?raw=true)
 ![Alt text](/tmuxfinal22.png?raw=true)
@@ -13,9 +19,4 @@ This repo is my own version of Hashrocket's Dotmatrix repo.  This allows one to 
 Includes my iTerm colors profile and the background image.
 
 
-# Installation Instructions
-
-```sh
-git clone https://github.com/MenkeTechnologies/customTerminalInstaller.git && cd customTerminalInstaller && ./install.sh
-```
 
