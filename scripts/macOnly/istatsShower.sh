@@ -7,4 +7,4 @@
 #####   Notes: need ruby gem istats 
 #}}}***********************************************************
 
-bash "$SCRIPTS/mywatch.sh" istats
+bash "$SCRIPTS/mywatch.sh" istats 2>/dev/null
