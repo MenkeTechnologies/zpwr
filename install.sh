@@ -237,6 +237,9 @@ cd "$INSTALLER_DIR"
 bash "$INSTALLER_DIR/vim_plugins_install.sh"
 
 if [[ "$OS_TYPE" == "Darwin" ]]; then
+
+    prettyPrint "Upgrading pip"
+    pip install --upgrade pip
     prettyPrint "Installing psutil for Python Glances"
     pip install psutil 
     prettyPrint "Installing Python Glances"
@@ -276,6 +279,8 @@ else
         sudo ln -s /usr/bin/python36 /usr/bin/python3
     fi
 
+    prettyPrint "Upgrading pip"
+    sudo pip install --upgrade pip
     prettyPrint "Installing psutil for Python Glances"
     sudo pip install psutil 
     prettyPrint "Installing Python Glances"
