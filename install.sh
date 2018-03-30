@@ -258,6 +258,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Installing MyCLI"
     pip install mycli
 
+    prettyPrint "Installing PGCLI"
+    pip install pgcli
 
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
@@ -351,7 +353,6 @@ cp "$INSTALLER_DIR/.vimrc" "$HOME"
 prettyPrint "Installing YouCompleteMe"
 cd $HOME/.vim/bundle/YouCompleteMe && {
     git submodule update --init --recursive
-
     #need greater than 3GB RAM for compiling
     YCM_CORES=1 ./install.py --clang-completer
 }
