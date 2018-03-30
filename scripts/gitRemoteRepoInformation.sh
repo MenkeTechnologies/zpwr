@@ -14,7 +14,7 @@ for directory; do
                 line="$(git remote -v 2>/dev/null)" && {
                     user="$(echo $line | awk -F'/' '{print $4}')"
                     repo="$(echo $line | awk -F'/' '{print $5}' | awk '{print $1}')"
-                    echo "its $user/${repo%%.git*}"
+                    echo "$user/${repo%%.git*}"
                 }
         }
     }

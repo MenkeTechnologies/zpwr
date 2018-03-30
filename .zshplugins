@@ -1,8 +1,8 @@
-its junegunn/fzf
-its Treri/fzf-zsh
-its unixorn/warhol.plugin.zsh
-its zsh-users/zsh-autosuggestions
-its zsh-users/zsh-completions
-its MenkeTechnologies/zsh-more-completions
-its zsh-users/zsh-syntax-highlighting
-its keith/zsh-xcode-completions
+junegunn/fzf
+Treri/fzf-zsh
+unixorn/warhol.plugin.zsh
+zsh-users/zsh-autosuggestions
+zsh-users/zsh-completions
+MenkeTechnologies/zsh-more-completions
+zsh-users/zsh-syntax-highlighting
+keith/zsh-xcode-completions

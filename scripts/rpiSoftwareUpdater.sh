@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 #no complaining about no glob results for * from zsh
-setopt null_glob
+#setopt null_glob
 
 prettyPrint(){
     printf "\e[1;4m"
@@ -20,7 +20,6 @@ gitRepoUpdater(){
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then
-
         for generic_git_repo_plugin in "$enclosing_dir/"*; do
             if [[ -d "$generic_git_repo_plugin" ]]; then
                 if [[ -d "$generic_git_repo_plugin"/.git ]]; then
