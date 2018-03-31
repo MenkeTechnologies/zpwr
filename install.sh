@@ -39,7 +39,7 @@ exec 2> "$INSTALLER_DIR"/logfile.txt
 
 dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
-    rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet ysql mongodb postgresql \
+    rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql mongodb postgresql \
     jnettop iotop atop ctags speedtest-cli texinfo lsof whois weechat gradle ant maven tree mc ocaml groovy \
     slurm bmon \
     ) 
@@ -71,7 +71,7 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary+=('fortune-mod.*' libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
+    dependencies_ary+=('fortune-mod.*' mysql-server libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
 }
 
 addDependenciesMac(){
