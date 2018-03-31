@@ -58,7 +58,7 @@ addDependenciesLinux(){
     )
 }
 addDependenciesSuse(){
-    dependencies_ary+=(fortune python3-devel python-devel ruby-devel python-pip python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel) 
+    dependencies_ary+=(mariadb postgresql-server fortune python3-devel python-devel ruby-devel python-pip python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel) 
 
 }
 
