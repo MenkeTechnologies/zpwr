@@ -16,9 +16,17 @@ OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
-set -x
-set -v
-exec 2> "$INSTALLER_DIR"/logfile.txt
+turnOffDebugging(){
+    set +x
+    set +v
+    exec 2> /dev/tty
+}
+turnOnDebugging(){
+    set -x
+    set -v
+    exec 2> "$INSTALLER_DIR"/logfile.txt
+}
+
 #Dependencies
 # 1) vim 8.0
 # 2) tmux 2.1
@@ -111,6 +119,8 @@ update (){
         fi
     }
 }
+
+turnOnDebugging
 
 #}}}***********************************************************
 
@@ -326,6 +336,9 @@ case "$distroName" in
     opensuse)
         needSudo=yes
         ;;
+    ubuntu)
+        needSudo=yes
+        ;;
     raspbian)
         needSudo=yes
         ;;
@@ -488,12 +501,14 @@ cp "$INSTALLER_DIR/.inputrc" "$HOME"
 
 #{{{                    MARK:zsh
 #**************************************************************
-
+turnOffDebugging
 prettyPrint "Installing oh-my-zsh..."
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
 cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
+
+turnOnDebugging
 
 #add aliases and functions
 prettyPrint "Adding common shell aliases for Bash and Zsh"
@@ -507,12 +522,13 @@ cd "$INSTALLER_DIR"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Installing fzf"
-${ZSH}/custom/plugins/fzf/install --bin
+$HOME/.oh-my-zsh/custom/plugins/fzf/install --bin
 
 #}}}***********************************************************
 
 #{{{                    MARK:Final
 #**************************************************************
+turnOffDebugging
 cd "$INSTALLER_DIR"
 cd ..
 #rm -rf "$INSTALLER_DIR"
