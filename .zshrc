@@ -1345,6 +1345,13 @@ alias -s txt='vim'
 alias numcmd='print -rlo -- $commands | wc -l'
 
 export KEYTIMEOUT=1
+
+if [[ "$(uname)" == Linux ]]; then
+    if [[ -z "$TMUX" ]]; then
+        tmux ls &>/dev/null && tmux attach
+    fi
+fi
+
 #}}}***********************************************************
 #
 #
