@@ -742,7 +742,7 @@ torip(){
 
 pirun(){
     for pi in "${PI_ARRAY[@]}" ; do
-        if [[ -z $2 ]]; then
+        if [[ ! -z $2 ]]; then
             ssh "${pi%:*}" "$1" 2>/dev/null
         else
             ssh "${pi%:*}" "$1"
