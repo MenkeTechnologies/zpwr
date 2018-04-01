@@ -533,6 +533,7 @@ cd "$INSTALLER_DIR"
 cd ..
 #rm -rf "$INSTALLER_DIR"
 prettyPrint "Done!!!!!!"
+exec zsh
 
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
