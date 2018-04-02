@@ -203,7 +203,7 @@ else
         # Install the fontconfig file
         sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
     else
-        printf "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
+        prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
     fi
 
 fi
@@ -213,8 +213,7 @@ fi
 #{{{                    MARK:vim
 #**************************************************************
 
-
-printf "Common Installer Section"
+prettyPrint "Common Installer Section"
 
 vimV="$(vim --version | head -1 | awk '{print $5}')"
 res=$(echo "$vimV >= 8.0" | bc)
