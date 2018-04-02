@@ -1353,7 +1353,7 @@ export KEYTIMEOUT=1
 
 if [[ "$(uname)" == Linux ]]; then
     if [[ -z "$TMUX" ]]; then
-        tmux ls &>/dev/null && tmux attach
+        { tmux ls && tmux attach; } &> /dev/null 
     fi
 fi
 
