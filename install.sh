@@ -98,7 +98,7 @@ prettyPrint(){
     printf "\x1b[34;4m"
     printf "$1\n"
     printf "\x1b[0;32;1m"
-    perl -le "print '#'x100"
+    perl -le "print '#'x80"
     printf "\x1b[0m"
     printf "\n"
 }
