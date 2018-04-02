@@ -47,10 +47,9 @@ turnOnDebugging(){
 
 dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
-    rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql mongodb postgresql \
-    jnettop iotop atop ctags speedtest-cli texinfo lsof whois weechat gradle ant maven tree mc ocaml groovy \
-    slurm bmon \
-    ) 
+    rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
+    mongodb postgresql jnettop iotop atop ctags speedtest-cli texinfo lsof \
+    whois weechat gradle ant maven tree mc ocaml groovy slurm bmon ruby) 
 
 #}}}***********************************************************
 
