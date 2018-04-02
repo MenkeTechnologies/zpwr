@@ -714,6 +714,11 @@ precmd(){
             __WILL_CLEAR=false
         fi
     }
+    [[ -z "$TMUX" ]] && echo $DISPLAY > ~/.display.txt || {
+        if [[ -f ~/.display.txt ]]; then
+            export DISPLAY=$(cat ~/.display.txt)
+        fi        
+    }
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
