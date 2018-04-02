@@ -218,6 +218,7 @@ alias sc='cd $SCRIPTS'
 alias bluef='source $SCRIPTS/blueText.sh'
 alias dl='cd $HOME/Downloads'
 alias docu='cd $HOME/Documents'
+alias mus='cd $HOME/Music'
 alias o="open ."
 alias jobs="jobs -l"
 alias u8="bash -l updater.sh"
