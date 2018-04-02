@@ -71,7 +71,7 @@ addDependenciesSuse(){
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev libssl-dev grc)
+    dependencies_ary+=(libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev python-pip python3-pip curl libffi-dev libssl-dev grc automake)
 
 }
 
