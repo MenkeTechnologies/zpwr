@@ -59,19 +59,19 @@ dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
 addDependenciesLinux(){
     dependencies_ary+=(git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
-    samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace \
+    samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace python-pip
     )
 }
 addDependenciesSuse(){
     dependencies_ary+=(mariadb postgresql-server fortune python3-devel python-devel ruby-devel \
-        python-pip python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel) 
+        python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel) 
 
 }
 
 addDependenciesDebian(){
     dependencies_ary+=(lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
-    libperl-dev libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev python-pip \
+    libperl-dev libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev\
     python3-pip curl libffi-dev libssl-dev grc automake)
 
 }
@@ -80,7 +80,7 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary+=('fortune-mod.*' mysql-server libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
+    dependencies_ary+=('fortune-mod.*' mysql-server python36-tools libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
 }
 
 addDependenciesMac(){
