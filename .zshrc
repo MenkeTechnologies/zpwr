@@ -1066,7 +1066,7 @@ __CORRECT_WORDS[just]="jsut jutsi just"
 __CORRECT_WORDS[here]="ehre"
 __CORRECT_WORDS[not]="nto tno"
 __CORRECT_WORDS[store]="sotre"
-
+__CORRECT_WORDS[mount]="mounr mounf"
 
 supernatural-space() {
 	    #statements
@@ -1352,9 +1352,9 @@ alias numcmd='print -rlo -- $commands | wc -l'
 export KEYTIMEOUT=1
 
 if [[ "$(uname)" == Linux ]]; then
-    if [[ -z "$TMUX" ]]; then
+    [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
         { tmux ls && tmux attach; } &> /dev/null 
-    fi
+    }
 fi
 
 #}}}***********************************************************
