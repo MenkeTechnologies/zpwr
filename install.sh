@@ -62,6 +62,10 @@ addDependenciesLinux(){
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace python-pip
     )
 }
+addDependenciesArch(){
+    dependencies_ary+=() 
+}
+
 addDependenciesSuse(){
     dependencies_ary+=(mariadb postgresql-server fortune python3-devel python-devel ruby-devel \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel) 
@@ -113,6 +117,8 @@ update (){
             sudo apt-get install -y "$1"
         elif [[ $2 == suse ]];then
             sudo zypper --non-interactive install "$1"
+        elif [[ $2 == arch ]];then
+            sudo pacman -Suy "$1"
         elif [[ $2 == redhat ]];then
             sudo yum install -y "$1"
         else
@@ -172,6 +178,9 @@ else
             distroFamily=debian
             addDependenciesDebian
             ;;
+        (arch) prettyPrint "Installing Dependencies for $distroName with zypper"
+            distroFamily=arch
+            addDependenciesArch
         (opensuse|suse) prettyPrint "Installing Dependencies for $distroName with zypper"
             distroFamily=suse
             addDependenciesSuse
