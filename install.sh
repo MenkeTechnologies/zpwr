@@ -327,8 +327,6 @@ else
 fi
 prettyPrint "Done With Python Packages"
 
-
-prettyPrint "Installing rougify"
 case "$distroName" in
     fedora)
         needSudo=no
@@ -347,7 +345,7 @@ case "$distroName" in
         ;;
 esac
 
-prettyPrint "Installing lolcat, rouge"
+prettyPrint "Installing Ruby gems lolcat and rouge"
 if [[ "$needSudo" == yes ]]; then
     sudo gem install lolcat
     sudo gem install rouge
