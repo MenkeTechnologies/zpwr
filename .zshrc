@@ -1181,6 +1181,9 @@ else
         elif [[ "$distro" == opensuse ]];then
             builtin cd "$D"
             figlet -f block "$(whoami)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
+        elif [[ "$distro" == centos ]];then
+            builtin cd "$D"
+            figlet -f block "$(whoami)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
         elif [[ "$distro" == fedora ]];then
             builtin cd "$D"
             figlet -f block "$(whoami)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
