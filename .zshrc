@@ -1173,6 +1173,7 @@ if [[ "$(uname)" = Darwin ]]; then
     fi
 else
     if [[ "$UID" != "0" ]]; then
+        clear
         if [[ "$distroName" == raspbian ]]; then
             builtin cd "$D"
             type ponysay 1>/dev/null 2>&1 && {
