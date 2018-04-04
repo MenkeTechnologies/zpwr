@@ -59,7 +59,7 @@ dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
 addDependenciesLinux(){
     dependencies_ary+=(git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
-    samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace python-pip
+    samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace python-pip snort
     )
 }
 addDependenciesArch(){
@@ -118,7 +118,7 @@ update (){
         elif [[ $2 == suse ]];then
             sudo zypper --non-interactive install "$1"
         elif [[ $2 == arch ]];then
-            sudo pacman -Suy "$1"
+            yes | sudo pacman -Suy "$1"
         elif [[ $2 == redhat ]];then
             sudo yum install -y "$1"
         else
