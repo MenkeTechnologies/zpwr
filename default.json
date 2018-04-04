@@ -1,71 +1,90 @@
 {
-        "segments": {
-              
-                "right": [
-                      
-                      {
-                        "function" : "powerline.segments.common.vcs.branch"
-                      },
+    "segments": {
 
-                         {
-                                "function": "powerlinemem.mem_usage.mem_usage"
-                        },
-                        
-                        {
+        "right": [
 
-                                "function": "powerline.segments.common.sys.cpu_load_percent"
-                        },
+            {
+                "function" : "powerline.segments.common.vcs.branch"
+            },
+            {
+                "function" : "powerline.segments.common.vcs.stash"
+            },
 
-                        {
-                                    "function": "powerlinemem.mem_usage.mem_usage_percent",
-                                    "priority": 50,
-                                        "args": {
-                                            "format": "Mem: %d%%"
-                                        }
-                        },
 
-                        {
-                                "function": "powerline.segments.common.sys.system_load",
-                                "priority": 50
-                        },
-                        {
-                                "function": "powerline.segments.common.time.date"
-                        },
-                        {
-                                "function": "powerline.segments.common.time.date",
-                                "name": "time",
-                                "args": {
-                                        "format": "%H:%M",
-                                        "istime": true
-                                }
-                        },
-                        {
-                                "function": "powerline.segments.common.wthr.weather",
-                                "name" : "weather",
-                                "priority" : 50,
-                                "args" : {
-                                "unit": "F"
-                                }
-                        },
-                        {
-                                "function": "powerline.segments.common.bat.battery"
-                        },
+            {
+                "function": "powerlinemem.mem_usage.mem_usage"
+            },
 
-                        {
 
-                                "function": "powerline.segments.common.net.external_ip"
-                        },
+            {
+                "function": "powerlinemem.mem_usage.mem_usage_percent",
+                "priority": 50,
+                "args": {
+                    "format": "Mem: %d%%"
+                }
+            },
 
-                        {
-                                "function": "powerline.segments.common.net.internal_ip"
-                        },
+            {
+                "function": "powerline.segments.common.players.itunes",
+                "name": "player",
+                "priority": 50
+            },
 
-                        {
-                                "function": "powerline.segments.common.net.hostname"
-                        }
+            {
 
-                        
-                       
-                ]
-        }
+                "function": "powerline.segments.common.sys.cpu_load_percent"
+            },
+
+            {
+                "function": "powerline.segments.common.sys.system_load",
+                "priority": 50
+            },
+            {
+                "function": "powerline.segments.common.sys.uptime"
+            },
+            {
+                "function": "powerline.segments.common.time.date"
+            },
+            {
+                "function": "powerline.segments.common.time.date",
+                "name": "time",
+                "args": {
+                    "format": "%H:%M",
+                    "istime": true
+                }
+            },
+            {
+                "function": "powerline.segments.common.wthr.weather",
+                "name" : "weather",
+                "priority" : 50,
+                "args" : {
+                    "unit": "F"
+                }
+            },
+            {
+                "function": "powerline.segments.common.bat.battery"
+            },
+
+            {
+                "function": "powerline.segments.common.net.network_load",
+                "interface": "en0"
+            },
+
+            {
+
+                "function": "powerline.segments.common.net.external_ip"
+            },
+
+            {
+                "function": "powerline.segments.common.net.internal_ip"
+            },
+
+            {
+                "function": "powerline.segments.common.net.hostname"
+            }
+
+
+
+        ]
+    }
 }
