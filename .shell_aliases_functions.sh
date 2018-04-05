@@ -587,6 +587,20 @@ prettyPrint(){
     }
 }
 
+alternatingPrettyPrint(){
+    counter=0
+
+    for arg in "$@" ; do
+       if [[ $((counter % 2 )) == 0 ]]; then
+             printf "\x1b[36m$arg\x1b[0m"
+       else
+             printf "\x1b[1;4;34m$arg\x1b[0m"
+         fi
+       ((counter++))
+    done
+    printf "\n"
+}
+
 tac(){
     sed '1!G;h;$!d' "$@"
 }
