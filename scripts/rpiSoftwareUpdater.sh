@@ -16,6 +16,10 @@ prettyPrint(){
     printf "\n\e[0m"
 }
 
+exists(){
+    type "$1" >/dev/null 2>&1
+}
+
 gitRepoUpdater(){
     enclosing_dir="$1"
 
@@ -52,3 +56,50 @@ prettyPrint "Updating Vundle Plugins"
 
 prettyPrint "Updating Ruby Gems for $(whoami))"
 sudo gem update
+
+prettyPrint "Updating NPM packages for $(whoami))"
+exists npm && {
+    prettyPrint "Updating NPM packages"
+    for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
+    do
+        npm install -g "$package"
+    done
+    prettyPrint "Updating NPM itself"
+    npm install -g npm
+}
+
+
+prettyPrint "Updating Pip3 packages for $(whoami))"
+exists pip3 && {
+    prettyPrint "Updating Python3.6 Packages"
+    #pip lists outdated programs and get first column with awk
+    #store in outdated
+    outdated=$(pip3 list --outdated | awk '{print $1}')
+
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        pip3 install --upgrade "$i" #&> /dev/null
+    done
+
+    #update pip itself
+    pip3 install --upgrade pip setuptools wheel #&> /dev/null
+}
+
+prettyPrint "Updating Pip2 packages for $(whoami))"
+#python 2.7 (non system)
+exists pip2 && {
+    prettyPrint "Updating Python2.7 Packages"
+    #pip lists outdated programs and get first column with awk
+    #store in outdated
+    outdated=$(pip2 list --outdated | awk '{print $1}')
+
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        pip2 install --upgrade "$i" #&> /dev/null
+    done
+
+    #update pip itself
+    pip2 install --upgrade pip setuptools wheel #&> /dev/null
+}
