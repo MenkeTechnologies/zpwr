@@ -592,9 +592,9 @@ alternatingPrettyPrint(){
     lines="$(echo "$@" | perl -F\\. -lanE 'say foreach @F')"
     while IFS='\n' read arg ; do
        if [[ $((counter % 2 )) == 0 ]]; then
-             printf "\x1b[36m${arg//\n/ }\x1b[0m"
+             printf "\x1b[36m${arg//\\n/ }\x1b[0m"
        else
-             printf "\x1b[1;4;34m${arg//\n/ }\x1b[0m"
+             printf "\x1b[1;4;34m${arg//\\n/ }\x1b[0m"
         fi
        ((counter++))
     done <<< "$lines"
