@@ -19,6 +19,19 @@ prettyPrint(){
 exists(){
     type "$1" >/dev/null 2>&1
 }
+alternatingPrettyPrint(){
+    counter=0
+    lines="$(echo "$@" | perl -F\\. -lanE 'say foreach @F')"
+    while IFS='\n' read arg ; do
+       if [[ $((counter % 2 )) == 0 ]]; then
+             printf "\x1b[36m${arg//\\n/ }\x1b[0m"
+       else
+             printf "\x1b[1;4;34m${arg//\\n/ }\x1b[0m"
+        fi
+       ((counter++))
+    done <<< "$lines"
+    printf "\n"
+}
 
 gitRepoUpdater(){
     enclosing_dir="$1"
@@ -69,7 +82,7 @@ exists npm && {
 }
 
 
-prettyPrint "Updating Pip3 packages for $(whoami))"
+alternatingPrettyPrint "Updating .Pip3. packages for .$(whoami)."
 exists pip3 && {
     prettyPrint "Updating Python3.6 Packages"
     #pip lists outdated programs and get first column with awk
@@ -86,7 +99,7 @@ exists pip3 && {
     pip3 install --upgrade pip setuptools wheel #&> /dev/null
 }
 
-prettyPrint "Updating Pip2 packages for $(whoami))"
+alternatingPrettyPrint "Updating .Pip2. packages for .$(whoami)."
 #python 2.7 (non system)
 exists pip2 && {
     prettyPrint "Updating Python2.7 Packages"
