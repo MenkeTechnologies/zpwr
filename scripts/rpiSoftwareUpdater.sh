@@ -88,7 +88,7 @@ sudo gem update
 
 exists npm && {
     alternatingPrettyPrint "Updating .NPM. packages for .$(whoami)."
-    for package in $(sudo npm -g outdated --parseable --depth=0 | cut -d: -f4)
+    for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
     do
         sudo npm install -g "$package"
     done
@@ -106,11 +106,11 @@ exists pip3 && {
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        pip3 install --upgrade "$i" #&> /dev/null
+        sudo pip3 install --upgrade "$i" #&> /dev/null
     done
 
     #update pip itself
-    pip3 install --upgrade pip setuptools wheel #&> /dev/null
+    sudo pip3 install --upgrade pip setuptools wheel #&> /dev/null
 }
 
 #python 2.7 (non system)
@@ -123,9 +123,9 @@ exists pip2 && {
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        pip2 install --upgrade "$i" #&> /dev/null
+        sudo pip2 install --upgrade "$i" #&> /dev/null
     done
 
     #update pip itself
-    pip2 install --upgrade pip setuptools wheel #&> /dev/null
+    sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
 }
