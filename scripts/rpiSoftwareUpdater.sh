@@ -92,7 +92,7 @@ exists npm && {
     do
         sudo npm install -g "$package"
     done
-    alternatingPrettyPrint "Updating NPM itself"
+    alternatingPrettyPrint "Updating .NPM. itself"
     sudo npm install -g npm
 }
 
@@ -109,6 +109,7 @@ exists pip3 && {
         echo sudo pip3 install --upgrade "$i" #&> /dev/null
     done
 
+    alternatingPrettyPrint "Updating .Pip3. itself"
     #update pip itself
     sudo pip3 install --upgrade pip setuptools wheel #&> /dev/null
 }
@@ -126,6 +127,7 @@ exists pip2 && {
         echo sudo pip2 install --upgrade "$i" #&> /dev/null
     done
 
+    alternatingPrettyPrint "Updating .Pip2. itself"
     #update pip itself
     sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
 }
