@@ -68,14 +68,14 @@ addDependenciesArch(){
 
 addDependenciesSuse(){
     dependencies_ary+=(mariadb postgresql-server fortune python3-devel python-devel ruby-devel \
-        python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel) 
+        python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc) 
 
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev \
+    dependencies_ary+=(lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev gcc \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
-    libperl-dev libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev\
+    libperl-dev libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev \
     python3-pip curl libffi-dev libssl-dev grc automake)
 
 }
