@@ -730,7 +730,7 @@ function TmuxRepeat()
     let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua', 'java']
     let exeFileType=expand('%:e')
     if index(supportedTypes, exeFileType) >= 0
-        silent! exec "!tmux send-keys -t right C-c 'bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+        silent! exec "!tmux send-keys -t right C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
         redraw!
     else
         silent! exec "!tmux send-keys -t right C-c up C-m"
