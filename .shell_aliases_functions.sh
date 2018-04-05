@@ -590,7 +590,7 @@ prettyPrint(){
 alternatingPrettyPrint(){
     counter=0
 
-    perl -F: -anE '
+    perl -F\\. -anE '
     my $counter=0;
     for my $arg (@F){
         if ($counter % 2 == 0){

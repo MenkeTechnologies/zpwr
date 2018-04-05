@@ -48,6 +48,22 @@ gitRepoUpdater(){
     fi
 }
 
+alternatingPrettyPrint(){
+    counter=0
+
+    perl -F\\. -anE '
+    my $counter=0;
+    for my $arg (@F){
+        if ($counter % 2 == 0){
+             print "\x1b[36m$arg\x1b[0m"
+        } else {
+             print "\x1b[1;4;34m$arg\x1b[0m"
+        }
+    $counter++;
+    }' <<< "$@"
+}
+
+
 prettyPrint "Updating Tmux Plugins"
 gitRepoUpdater "$HOME/.tmux/plugins"
 
