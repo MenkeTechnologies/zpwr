@@ -744,6 +744,7 @@ torip(){
 pirun(){
     for pi in "${PI_ARRAY[@]}" ; do
         if [[ -z $2 ]]; then
+            prettyPrint "Executing '$1' on $pi"
             ssh "${pi%:*}" "$1" 2>/dev/null
         else
             ssh "${pi%:*}" "$1"
