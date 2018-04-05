@@ -1200,9 +1200,9 @@ fi
 #color2
 
 #change history file size
-export SAVEHIST=50000
-#change history size
-export HISTSIZE=50000
+export SAVEHIST=100000
+#change history size in memory
+export HISTSIZE=100000
 
 #set right prompt string during continuation 
 RPS2='+%N:%i:%^'

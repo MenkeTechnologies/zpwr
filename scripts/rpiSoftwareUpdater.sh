@@ -106,7 +106,7 @@ exists pip3 && {
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        sudo pip3 install --upgrade "$i" #&> /dev/null
+        echo sudo pip3 install --upgrade "$i" #&> /dev/null
     done
 
     #update pip itself
@@ -123,7 +123,7 @@ exists pip2 && {
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        sudo pip2 install --upgrade "$i" #&> /dev/null
+        echo sudo pip2 install --upgrade "$i" #&> /dev/null
     done
 
     #update pip itself
