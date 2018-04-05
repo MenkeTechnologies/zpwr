@@ -741,7 +741,7 @@ function TmuxRepeat()
 endfunction
 
 function TmuxRepeatGeneric()
-    silent! exec "!tmux send-keys -t right C-c 'clear' C-m up up C-m"
+    silent! exec "!tmux send-keys -t right C-c C-c 'clear' C-m up up C-m"
     redraw!
     exe "normal! zz"
 endfunction
