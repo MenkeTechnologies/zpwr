@@ -213,7 +213,7 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
     fi
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get) #avoid sending commmands from stdin into ssh, better to use string after ssh
-    ssh -x "$hostname" "$(< $SCRIPTS/rpiSoftwareUpdater.sh)"
+    ssh -x "$hostname" "$(cat < $SCRIPTS/rpiSoftwareUpdater.sh)"
 }
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for

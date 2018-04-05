@@ -49,3 +49,6 @@ gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
 prettyPrint "Updating Vundle Plugins"
 #vim -c VundleUpdate -c quitall
+
+prettyPrint "Updating Ruby Gems for $(whoami))"
+sudo gem update
