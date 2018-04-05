@@ -92,7 +92,7 @@ exists npm && {
     do
         sudo npm install -g "$package"
     done
-    prettyPrint "Updating NPM itself"
+    alternatingPrettyPrint "Updating NPM itself"
     sudo npm install -g npm
 }
 
