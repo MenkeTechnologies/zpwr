@@ -589,15 +589,15 @@ prettyPrint(){
 
 alternatingPrettyPrint(){
     counter=0
-
-    for arg in "$@" ; do
+    lines="$(echo "$@" | perl -F\\. -lanE 'say foreach @F')"
+    while IFS='\n' read arg ; do
        if [[ $((counter % 2 )) == 0 ]]; then
-             printf "\x1b[36m$arg\x1b[0m"
+             printf "\x1b[36m${arg//\n/ }\x1b[0m"
        else
-             printf "\x1b[1;4;34m$arg\x1b[0m"
-         fi
+             printf "\x1b[1;4;34m${arg//\n/ }\x1b[0m"
+        fi
        ((counter++))
-    done
+    done <<< "$lines"
     printf "\n"
 }
 
@@ -758,7 +758,7 @@ torip(){
 pirun(){
     for pi in "${PI_ARRAY[@]}" ; do
         if [[ -z $2 ]]; then
-			printf "\x1b[36mExecuting \x1b[1;4;34m'$1'\x1b[0;36m on \x1b[1;4;34m$pi\x1b[0m\n"
+            alternatingPrettyPrint "Executing .'$1'. on .$pi."
             ssh "${pi%:*}" "$1" 2>/dev/null
         else
             ssh "${pi%:*}" "$1"
