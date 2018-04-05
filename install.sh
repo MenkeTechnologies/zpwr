@@ -181,6 +181,7 @@ else
         (arch) prettyPrint "Installing Dependencies for $distroName with zypper"
             distroFamily=arch
             addDependenciesArch
+            ;;
         (opensuse|suse) prettyPrint "Installing Dependencies for $distroName with zypper"
             distroFamily=suse
             addDependenciesSuse
