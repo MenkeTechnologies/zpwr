@@ -1210,7 +1210,7 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-    #source "$HOME/.powerlevel9kconfig.sh"
+    source "$HOME/.powerlevel9kconfig.sh"
     #make this environ vars show up in prompt %~
     : ~WCC
     : ~HOMEBREW_HOME_FORMULAE
