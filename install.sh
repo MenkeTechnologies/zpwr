@@ -225,7 +225,7 @@ else
         update "$prog" "$distroFamily"
     done
 
-    upgrade "distroFamily"
+    upgrade "$distroFamily"
 
     prettyPrint "Installing Powerline fonts"
     if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
