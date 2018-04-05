@@ -127,6 +127,26 @@ update (){
     }
 }
 
+
+upgrade(){
+
+        if [[ $1 == mac ]]; then
+            brew update
+            brew upgrade
+        elif [[ $1 == debian ]];then
+            yes | sudo apt-get update
+            yes| sudo apt-get upgrade
+        elif [[ $1 == suse ]];then
+            yes |sudo zypper update
+        elif [[ $1 == arch ]];then
+            sudo pacman -Suy
+        elif [[ $1 == redhat ]];then
+            yes | sudo yum upgrade
+        else
+            prettyPrint "Error at install with $2." >&2
+        fi
+}
+
 turnOnDebugging
 
 #}}}***********************************************************
@@ -159,6 +179,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     for prog in "${dependencies_ary[@]}"; do
         update "$prog" mac
     done
+
+    upgrade mac
 
     prettyPrint "Installing Powerline fonts"
     brew cask install font-hack-nerd-font
@@ -202,6 +224,8 @@ else
         prettyPrint "Installing $prog"
         update "$prog" "$distroFamily"
     done
+
+    upgrade "distroFamily"
 
     prettyPrint "Installing Powerline fonts"
     if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
