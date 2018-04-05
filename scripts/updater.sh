@@ -96,6 +96,7 @@ if [[ $skip != true ]]; then
             pip3 install --upgrade "$i" #&> /dev/null
         done
 
+        prettyPrint "Updating Pip3 Packages"
         #update pip itself
         pip3 install --upgrade pip setuptools wheel #&> /dev/null
     }
@@ -114,6 +115,7 @@ if [[ $skip != true ]]; then
         done
 
         #update pip itself
+        prettyPrint "Updating Pip2 Packages"
         pip2 install --upgrade pip setuptools wheel #&> /dev/null
     }
 
