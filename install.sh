@@ -24,7 +24,7 @@ turnOffDebugging(){
 turnOnDebugging(){
     set -x
     set -v
-    exec 2> "$INSTALLER_DIR"/logfile.txt
+    exec 2>> "$INSTALLER_DIR"/logfile.txt
 }
 
 #Dependencies
