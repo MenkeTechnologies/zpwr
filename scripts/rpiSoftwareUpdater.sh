@@ -86,21 +86,19 @@ prettyPrint "Updating Vundle Plugins"
 alternatingPrettyPrint "Updating Ruby .Gems. for .$(whoami)."
 sudo gem update
 
-alternatingPrettyPrint "Updating .NPM. packages for .$(whoami)."
 exists npm && {
-    prettyPrint "Updating NPM packages"
-    for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
+    alternatingPrettyPrint "Updating .NPM. packages for .$(whoami)."
+    for package in $(sudo npm -g outdated --parseable --depth=0 | cut -d: -f4)
     do
-        npm install -g "$package"
+        sudo npm install -g "$package"
     done
     prettyPrint "Updating NPM itself"
-    npm install -g npm
+    sudo npm install -g npm
 }
 
 
-alternatingPrettyPrint "Updating .Pip3. packages for .$(whoami)."
 exists pip3 && {
-    prettyPrint "Updating Python3.6 Packages"
+    alternatingPrettyPrint "Updating .Pip3. packages for .$(whoami)."
     #pip lists outdated programs and get first column with awk
     #store in outdated
     outdated=$(pip3 list --outdated | awk '{print $1}')
@@ -115,10 +113,9 @@ exists pip3 && {
     pip3 install --upgrade pip setuptools wheel #&> /dev/null
 }
 
-alternatingPrettyPrint "Updating .Pip2. packages for .$(whoami)."
 #python 2.7 (non system)
 exists pip2 && {
-    prettyPrint "Updating Python2.7 Packages"
+    alternatingPrettyPrint "Updating .Pip2. packages for .$(whoami)."
     #pip lists outdated programs and get first column with awk
     #store in outdated
     outdated=$(pip2 list --outdated | awk '{print $1}')
