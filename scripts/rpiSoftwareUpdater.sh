@@ -21,16 +21,32 @@ exists(){
 }
 alternatingPrettyPrint(){
     counter=0
-    lines="$(echo "$@" | perl -F\\. -lanE 'say foreach @F')"
-    while IFS='\n' read arg ; do
-       if [[ $((counter % 2 )) == 0 ]]; then
-             printf "\x1b[36m${arg//\\n/ }\x1b[0m"
-       else
-             printf "\x1b[1;4;34m${arg//\\n/ }\x1b[0m"
-        fi
-       ((counter++))
-    done <<< "$lines"
-    printf "\n"
+
+    if [[ -z $1 ]]; then
+        cat | perl -F\\. -anE '
+        my $counter=0;
+        for my $arg (@F){
+            if ($counter % 2 == 0){
+                 print "\x1b[36m$arg\x1b[0m"
+            } else {
+                 print "\x1b[1;4;34m$arg\x1b[0m"
+            }
+        $counter++;
+        };print "\x1b[0m"'
+    else
+        perl -F\\. -anE '
+        my $counter=0;
+        for my $arg (@F){
+            if ($counter % 2 == 0){
+                 print "\x1b[36m$arg\x1b[0m"
+            } else {
+                 print "\x1b[1;4;34m$arg\x1b[0m"
+            }
+        $counter++;
+        }; print "\x1b[0m"' <<< "$@"
+
+    fi
+
 }
 
 gitRepoUpdater(){
@@ -47,22 +63,6 @@ gitRepoUpdater(){
         done
     fi
 }
-
-alternatingPrettyPrint(){
-    counter=0
-
-    perl -F\\. -anE '
-    my $counter=0;
-    for my $arg (@F){
-        if ($counter % 2 == 0){
-             print "\x1b[36m$arg\x1b[0m"
-        } else {
-             print "\x1b[1;4;34m$arg\x1b[0m"
-        }
-    $counter++;
-    }' <<< "$@"
-}
-
 
 prettyPrint "Updating Tmux Plugins"
 gitRepoUpdater "$HOME/.tmux/plugins"
