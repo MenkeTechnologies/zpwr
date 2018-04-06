@@ -37,27 +37,60 @@ alternatingPrettyPrint(){
 
 }
 
+alternatingPrettyPrint "Updating .Pip2. Packages"
 outdated=$(pip2 list --outdated | awk '{print $1}')
 
-#install outdated pip modules 
-#split on space
-for i in $outdated; do
-    sudo pip2 install --upgrade "$i" #&> /dev/null
-done
 
-alternatingPrettyPrint "Updating .Pip3. itself"
-#update pip itself
-sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
+if [[ "$(uname)" == Darwin ]]; then
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        alternatingPrettyPrint "Updating .$i. with .Pip2."
+        pip2 install --upgrade "$i" #&> /dev/null
+    done
 
-outdated=$(pip3 list --outdated | awk '{print $1}')
+    alternatingPrettyPrint "Updating .Pip3. itself"
+    #update pip itself
+    pip2 install --upgrade pip setuptools wheel #&> /dev/null
 
-#install outdated pip modules 
-#split on space
-for i in $outdated; do
-    sudo pip3 install --upgrade "$i" #&> /dev/null
-done
+    alternatingPrettyPrint "Updating .Pip3. Packages"
+    outdated=$(pip3 list --outdated | awk '{print $1}')
 
-alternatingPrettyPrint "Updating .Pip3. itself"
-#update pip itself
-sudo pip3 install --upgrade pip setuptools wheel #&> /dev/null
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        alternatingPrettyPrint "Updating .$i. with .Pip3."
+        pip3 install --upgrade "$i" #&> /dev/null
+    done
+
+    alternatingPrettyPrint "Updating .Pip3. itself"
+    #update pip itself
+    pip3 install --upgrade pip setuptools wheel #&> /dev/null
+else
+    alternatingPrettyPrint "Updating with .sudo."
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        alternatingPrettyPrint "Updating .$i. with .Pip2."
+        sudo pip2 install --upgrade "$i" #&> /dev/null
+    done
+
+    alternatingPrettyPrint "Updating .Pip3. itself"
+    #update pip itself
+    sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
+
+    alternatingPrettyPrint "Updating .Pip3. Packages"
+    outdated=$(pip3 list --outdated | awk '{print $1}')
+
+    #install outdated pip modules 
+    #split on space
+    for i in $outdated; do
+        alternatingPrettyPrint "Updating .$i. with .Pip3."
+        sudo pip3 install --upgrade "$i" #&> /dev/null
+    done
+
+    alternatingPrettyPrint "Updating .Pip3. itself"
+    #update pip itself
+    sudo pip3 install --upgrade pip setuptools wheel #&> /dev/null
+fi
 

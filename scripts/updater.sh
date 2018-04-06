@@ -238,9 +238,11 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
         sudo zypper --non-interactive update
         sudo zypper --non-interactive dist-upgrade
         sudo zypper --non-interactive clean -a'
+		cat "$SCRIPTS/pipUpdater.sh" ssh -x "$hostname" "cat | bash"
     elif [[ "$manager" == dnf ]]; then
         ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'
+		cat "$SCRIPTS/pipUpdater.sh" ssh -x "$hostname" "cat | bash"
     else
         :
     fi
