@@ -1044,7 +1044,7 @@ alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | h
 
 if [[ "$(uname)" == Darwin ]]; then
     alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
-    alias ge="exe 'z src;gl;getrc;nz'"
+    alias ge="exe 'z src;gl;getrc;nz';nz"
 else
     alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
 fi
