@@ -34,11 +34,12 @@ fi
 
 if [[ "$(uname)" == Darwin ]]; then
     if [[ "$weHaveCCZE" == yes ]]; then
-    prettyPrint "Color logging for Darwin"
-   "$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* $HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
+        prettyPrint "Color logging for Darwin"
+       #"$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* $HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
+       "$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* | ccze
    else
-    prettyPrint "Decolorized logging for Darwin"
-   "$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log
+        prettyPrint "Decolorized logging for Darwin"
+        "$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* "$HOME"/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log
     fi
 else
     #linux
