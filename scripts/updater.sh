@@ -55,6 +55,37 @@ prettyPrint(){
     printf "\n\e[0m"
 }
 
+alternatingPrettyPrint(){
+    counter=0
+
+    if [[ -z $1 ]]; then
+        cat | perl -F\\. -anE '
+        my $counter=0;
+        for my $arg (@F){
+            if ($counter % 2 == 0){
+                 print "\x1b[36m$arg\x1b[0m"
+            } else {
+                 print "\x1b[1;4;34m$arg\x1b[0m"
+            }
+        $counter++;
+        };print "\x1b[0m"'
+    else
+        perl -F\\. -anE '
+        my $counter=0;
+        for my $arg (@F){
+            if ($counter % 2 == 0){
+                 print "\x1b[36m$arg\x1b[0m"
+            } else {
+                 print "\x1b[1;4;34m$arg\x1b[0m"
+            }
+        $counter++;
+        }; print "\x1b[0m"' <<< "$@"
+
+    fi
+
+}
+
+
 exists(){
     type "$1" >/dev/null 2>&1
 }
