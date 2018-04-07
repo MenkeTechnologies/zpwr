@@ -189,7 +189,10 @@ let g:NERDTreeDisablePatternMatchHighlight = 1
 let g:webdevicons_enable_nerdtree=0
 
 "matches JetBrains IDE mappings
-let g:multi_cursor_next_key='<C-G>'
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_start_word_key      = '<C-g>'
+let g:multi_cursor_next_key  = '<C-g>'
+let g:multi_cursor_quit_key            = '<Esc>'
 
 call vundle#end()            " required
 
