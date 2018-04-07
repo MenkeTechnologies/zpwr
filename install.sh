@@ -57,7 +57,7 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary+=(mariadb postgresql-server postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel \
+    dependencies_ary+=(openldap-devel mariadb postgresql-server postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel) 
 
 }
@@ -74,7 +74,7 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary+=('fortune-mod.*' libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
+    dependencies_ary+=('fortune-mod.*' openldap-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
 }
 
 addDependenciesMac(){
