@@ -178,6 +178,45 @@ upgrade(){
         fi
 }
 
+
+__ScriptVersion="1.0.0"
+
+#===  FUNCTION  ================================================================
+#         NAME:  usage
+#  DESCRIPTION:  Display usage information.
+#===============================================================================
+function usage ()
+{
+    echo "Usage :  $0 [options] [--]
+
+    Options:
+    -h|help       Display this message
+    -s|skip       Skip main section
+    -v|version    Display script version"
+
+}    # ----------  end of function usage  ----------
+
+#-----------------------------------------------------------------------
+#  Handle command line arguments
+#-----------------------------------------------------------------------
+
+while getopts ":hv" opt
+do
+  case $opt in
+
+    h|help     )  usage; exit 0   ;;
+
+    v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+
+    s|skip     )  skip=true ;;
+
+    * )  echo -e "\n  Option does not exist : $OPTARG\n"
+          usage; exit 1   ;;
+
+  esac    # --- end of case ---
+done
+shift $(($OPTIND-1))
+
 turnOnDebugging
 
 #}}}***********************************************************
@@ -203,15 +242,18 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "We have Python..."
 
-    prettyPrint "Now The Main Course..."
-    
-    addDependenciesMac
 
-    for prog in "${dependencies_ary[@]}"; do
-        update "$prog" mac
-    done
+    if [[ $skip != true ]]; then
+        prettyPrint "Now The Main Course..."
+        
+        addDependenciesMac
 
-    upgrade mac
+        for prog in "${dependencies_ary[@]}"; do
+            update "$prog" mac
+        done
+
+        upgrade mac
+    fi
 
     prettyPrint "Installing Powerline fonts"
     brew cask install font-hack-nerd-font
@@ -249,14 +291,16 @@ else
             ;;
     esac
 
-    prettyPrint "Now The Main Course..."
+    if [[ $skip != true ]]; then
+        prettyPrint "Now The Main Course..."
 
-    for prog in "${dependencies_ary[@]}"; do
-        prettyPrint "Installing $prog"
-        update "$prog" "$distroFamily"
-    done
+        for prog in "${dependencies_ary[@]}"; do
+            prettyPrint "Installing $prog"
+            update "$prog" "$distroFamily"
+        done
 
-    upgrade "$distroFamily"
+        upgrade "$distroFamily"
+    fi
 
     prettyPrint "Installing Powerline fonts"
     if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
