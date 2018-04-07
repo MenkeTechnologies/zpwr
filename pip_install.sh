@@ -7,6 +7,16 @@
 #####   Notes: 
 #}}}***********************************************************
 OS_TYPE=$(uname)
+prettyPrint(){
+    printf "\x1b[32;1m"
+    perl -le "print '#'x80"
+    printf "\x1b[34;4m"
+    printf "$1\n"
+    printf "\x1b[0;32;1m"
+    perl -le "print '#'x80"
+    printf "\x1b[0m"
+    printf "\n"
+}
 
 if [[ "$OS_TYPE" == "Darwin" ]]; then
 
