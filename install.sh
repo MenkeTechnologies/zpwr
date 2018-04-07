@@ -38,7 +38,7 @@ source common.sh || echo "Must be in customTerminalInstaller directory" >&2 && e
 dependencies_ary=(vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
-    mongodb postgresql jnettop iotop atop ctags speedtest-cli texinfo lsof \
+    mongodb postgresql jnettop iotop atop ctags texinfo lsof \
     whois weechat gradle ant maven tree mc ocaml groovy slurm bmon ruby) 
 
 #}}}***********************************************************
@@ -78,9 +78,7 @@ addDependenciesRedHat(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=("git --without-completions" fortune the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace \
-    aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go\
-    )
+    dependencies_ary+=("git --without-completions" fortune the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 
