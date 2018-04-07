@@ -37,32 +37,32 @@ alternatingPrettyPrint(){
 
 }
 
-alternatingPrettyPrint "Updating .Pip2. Packages for .$(whoami)."
+alternatingPrettyPrint "Updating .Pip2. Packages for .$(whoami). on .$(hostname)."
 outdated=$(pip2 list --outdated | awk '{print $1}')
 
 if [[ "$(uname)" == Darwin ]]; then
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        alternatingPrettyPrint "Updating .$i. with .Pip2. for .$(whoami)."
+        alternatingPrettyPrint "Updating .$i. with .Pip2. for .$(whoami). on .$(hostname)."
         pip2 install --upgrade "$i" #&> /dev/null
     done
 
-    alternatingPrettyPrint "Updating .Pip2. itself for .$(whoami)."
+    alternatingPrettyPrint "Updating .Pip2. itself for .$(whoami). on .$(hostname)."
     #update pip itself
     pip2 install --upgrade pip setuptools wheel #&> /dev/null
 
-    alternatingPrettyPrint "Updating .Pip3. Packages for .$(whoami)."
+    alternatingPrettyPrint "Updating .Pip3. Packages for .$(whoami). on .$(hostname)."
     outdated=$(pip3 list --outdated | awk '{print $1}')
 
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        alternatingPrettyPrint "Updating .$i. with .Pip3. for .$(whoami)."
+        alternatingPrettyPrint "Updating .$i. with .Pip3. for .$(whoami). on .$(hostname)."
         pip3 install --upgrade "$i" #&> /dev/null
     done
 
-    alternatingPrettyPrint "Updating .Pip3. itself for .$(whoami)."
+    alternatingPrettyPrint "Updating .Pip3. itself for .$(whoami). on .$(hostname)."
     #update pip itself
     pip3 install --upgrade pip setuptools wheel #&> /dev/null
 else
@@ -70,25 +70,25 @@ else
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        alternatingPrettyPrint "Updating .$i. with .Pip2. for .$(whoami)."
+        alternatingPrettyPrint "Updating .$i. with .Pip2. for .$(whoami). on .$(hostname)."
         sudo pip2 install --upgrade "$i" #&> /dev/null
     done
 
-    alternatingPrettyPrint "Updating .Pip2. itself for .$(whoami)."
+    alternatingPrettyPrint "Updating .Pip2. itself for .$(whoami). on .$(hostname)."
     #update pip itself
     sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
 
-    alternatingPrettyPrint "Updating .Pip3. Packages for .$(whoami)."
+    alternatingPrettyPrint "Updating .Pip3. Packages for .$(whoami). on .$(hostname)."
     outdated=$(pip3 list --outdated | awk '{print $1}')
 
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        alternatingPrettyPrint "Updating .$i. with .Pip3. for .$(whoami)."
+        alternatingPrettyPrint "Updating .$i. with .Pip3. for .$(whoami). on .$(hostname)."
         sudo pip3 install --upgrade "$i" #&> /dev/null
     done
 
-    alternatingPrettyPrint "Updating .Pip3. itself for .$(whoami)."
+    alternatingPrettyPrint "Updating .Pip3. itself for .$(whoami). on .$(hostname)."
     #update pip itself
     sudo pip3 install --upgrade pip setuptools wheel #&> /dev/null
 fi
