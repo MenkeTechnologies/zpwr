@@ -590,8 +590,8 @@ zle -N changeQuotes
 zle -N alternateQuotes
 zle -N clipboard
 
-bindkey -M viins '^K' changeQuotes
-bindkey -M vicmd '^K' changeQuotes
+bindkey -M viins '^Y' changeQuotes
+bindkey -M vicmd '^Y' changeQuotes
 
 bindkey -M viins '\e^K' alternateQuotes
 bindkey -M vicmd '\e^K' alternateQuotes
