@@ -1068,6 +1068,7 @@ __CORRECT_WORDS[not]="nto tno"
 __CORRECT_WORDS[store]="sotre"
 __CORRECT_WORDS[mount]="mounr mounf"
 __CORRECT_WORDS[print]="pirtn pirnt"
+__CORRECT_WORDS[for]="fro rfo"
 
 supernatural-space() {
 	    #statements
