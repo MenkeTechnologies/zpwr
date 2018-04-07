@@ -18,6 +18,11 @@ prettyPrint(){
     printf "\n"
 }
 
+exists(){
+    type "$1" >/dev/null 2>&1
+}
+
+
 if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "Upgrading pip"
