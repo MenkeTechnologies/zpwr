@@ -74,6 +74,9 @@ else
     prettyPrint "Installing MyCLI"
     sudo pip install mycli
 
+    prettyPrint "Installing Speedtest"
+    sudo pip install speedtest-cli
+
     prettyPrint "Installing PGCLI"
     sudo pip install pgcli
 
