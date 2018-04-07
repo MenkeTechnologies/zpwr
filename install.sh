@@ -165,14 +165,14 @@ upgrade(){
             brew update
             brew upgrade
         elif [[ $1 == debian ]];then
-            yes | sudo apt-get update
-            yes| sudo apt-get upgrade
+            sudo apt-get update -y
+            sudo apt-get upgrade -y
         elif [[ $1 == suse ]];then
-            yes |sudo zypper update
+            sudo zypper --non-interactive update
         elif [[ $1 == arch ]];then
             sudo pacman -Suy
         elif [[ $1 == redhat ]];then
-            yes | sudo yum upgrade
+            sudo yum upgrade -y
         else
             prettyPrint "Error at install with $2." >&2
         fi
