@@ -57,7 +57,7 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary+=(openldap-devel mariadb postgresql-server postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel \
+    dependencies_ary+=(openldap2-devel mariadb postgresql-server postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel) 
 
 }
