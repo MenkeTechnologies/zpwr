@@ -11,21 +11,11 @@
 #{{{                    MARK:Setup
 #**************************************************************
 
-
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
-turnOffDebugging(){
-    set +x
-    set +v
-    exec 2> /dev/tty
-}
-turnOnDebugging(){
-    set -x
-    set -v
-    exec 2>> "$INSTALLER_DIR"/logfile.txt
-}
+source common.sh || echo "Must be in customTerminalInstaller directory" >&2 && exit 1
 
 #Dependencies
 # 1) vim 8.0
@@ -67,7 +57,7 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary+=(mariadb postgresql-server fortune python3-devel python-devel ruby-devel openssl-devel \
+    dependencies_ary+=(mariadb postgresql-server postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel) 
 
 }
@@ -93,51 +83,6 @@ addDependenciesMac(){
     )
 }
 
-exists(){
-    type "$1" >/dev/null 2>&1
-}
-
-prettyPrint(){
-    printf "\x1b[32;1m"
-    perl -le "print '#'x80"
-    printf "\x1b[34;4m"
-    printf "$1\n"
-    printf "\x1b[0;32;1m"
-    perl -le "print '#'x80"
-    printf "\x1b[0m"
-    printf "\n"
-}
-
-
-alternatingPrettyPrint(){
-    counter=0
-
-    if [[ -z $1 ]]; then
-        cat | perl -F\\. -anE '
-        my $counter=0;
-        for my $arg (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
-            }
-        $counter++;
-        };print "\x1b[0m"'
-    else
-        perl -F\\. -anE '
-        my $counter=0;
-        for my $arg (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
-            }
-        $counter++;
-        }; print "\x1b[0m"' <<< "$@"
-
-    fi
-
-}
 
 update (){
     exists "$1" || {
@@ -354,7 +299,7 @@ mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/aut
 prettyPrint "Installing Vim Plugins"
 cd "$INSTALLER_DIR"
 bash "$INSTALLER_DIR/vim_plugins_install.sh"
-
+cd "$INSTALLER_DIR"
 bash "$INSTALLER_DIR/pip_install.sh"
 
 
