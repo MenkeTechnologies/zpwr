@@ -6,22 +6,8 @@
 #####   Purpose: bash script to 
 #####   Notes: 
 #}}}***********************************************************
-OS_TYPE=$(uname)
-prettyPrint(){
-    printf "\x1b[32;1m"
-    perl -le "print '#'x80"
-    printf "\x1b[34;4m"
-    printf "$1\n"
-    printf "\x1b[0;32;1m"
-    perl -le "print '#'x80"
-    printf "\x1b[0m"
-    printf "\n"
-}
 
-exists(){
-    type "$1" >/dev/null 2>&1
-}
-
+source common.sh
 
 if [[ "$OS_TYPE" == "Darwin" ]]; then
 
