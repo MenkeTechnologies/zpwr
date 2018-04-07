@@ -96,38 +96,3 @@ exists npm && {
     sudo npm install -g npm
 }
 
-
-exists pip3 && {
-    alternatingPrettyPrint "Updating .Pip3. packages for .$(whoami)."
-    #pip lists outdated programs and get first column with awk
-    #store in outdated
-    outdated=$(pip3 list --outdated | awk '{print $1}')
-
-    #install outdated pip modules 
-    #split on space
-    for i in $outdated; do
-        echo sudo pip3 install --upgrade "$i" #&> /dev/null
-    done
-
-    alternatingPrettyPrint "Updating .Pip3. itself"
-    #update pip itself
-    sudo pip3 install --upgrade pip setuptools wheel #&> /dev/null
-}
-
-#python 2.7 (non system)
-exists pip2 && {
-    alternatingPrettyPrint "Updating .Pip2. packages for .$(whoami)."
-    #pip lists outdated programs and get first column with awk
-    #store in outdated
-    outdated=$(pip2 list --outdated | awk '{print $1}')
-
-    #install outdated pip modules 
-    #split on space
-    for i in $outdated; do
-        echo sudo pip2 install --upgrade "$i" #&> /dev/null
-    done
-
-    alternatingPrettyPrint "Updating .Pip2. itself"
-    #update pip itself
-    sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
-}
