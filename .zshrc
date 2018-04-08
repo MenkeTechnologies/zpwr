@@ -1093,9 +1093,7 @@ supernatural-space() {
                 break
             fi
         done
-        if [[ $finished == true ]]; then
-            break
-        fi
+        [[ $finished == true ]] && break
     done
 
 
