@@ -1107,15 +1107,15 @@ supernatural-space() {
             }
         }
     else
-		regex='[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
 		lastWord=${mywords[-1]}
-        echo $lastWord | grep -qE '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$' && {
+        echo $lastWord | grep -qE '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\.?$' && {
             #DNS lookup
             A_Record=$(host $lastWord) 2>/dev/null && {
                 A_Record=$(echo $A_Record | grep ' address' | head -1 | awk '{print $4}')
+
             } || A_Record=bad
 
-            [[ $A_Record != bad ]] && LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord\\b@$A_Record@g")"
+            [[ $A_Record != bad ]] && LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord@$A_Record@g")" 
 
         } || {
             echo $lastWord | grep -qE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' && {
