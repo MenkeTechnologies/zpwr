@@ -1113,8 +1113,8 @@ supernatural-space() {
 		string=${mywords[-1]}
         echo $string | grep -qE '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$' && {
             #DNS lookup
-            A_Record=$(nslookup $string) 2>/dev/null && {
-                A_Record=$(echo $A_Record | grep '^Address' |tail -1 | awk '{print $2}')
+            A_Record=$(host $string) 2>/dev/null && {
+                A_Record=$(echo $A_Record | grep ' address' | head -1 | awk '{print $4}')
             } || A_Record=bad
 
             [[ $A_Record != bad ]] && mywords[-1]="$A_Record" && LBUFFER="$mywords[@]"
