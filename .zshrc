@@ -1109,8 +1109,23 @@ supernatural-space() {
             }
         }
     else
-        zle _expand_alias
+		regex='[-A-Za-z0-9\+&@#/%?=~_|!:,.;]*[-A-Za-z0-9\+&@#/%=~_|]'
+		string=${mywords[-1]}
+        echo $string | grep -qE '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}$' && {
+            #valid IP address
+            out=$(nslookup $string) 2>/dev/null && {
+                out=$(echo $out | grep '^Address' |tail -1 | awk '{print $2}')
+            } || out=bad
+
+            [[ $out != bad ]] && mywords[-1]="$out" && LBUFFER="$mywords[@]"
+
+        } || {
+			zle _expand_alias
+        }
+
     fi
+
+
      zle expand-history
      zle self-insert
 }

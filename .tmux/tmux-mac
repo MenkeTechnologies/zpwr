@@ -13,6 +13,3 @@ source '/usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline
 
 set -g default-command "reattach-to-user-namespace -l ${SHELL}"
 
-bind-key -T root MouseDown1Pane select-pane -t =
-bind-key -T root MouseDown3Pane select-pane -t =
-
