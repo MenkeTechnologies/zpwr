@@ -173,6 +173,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #Linux
     alias apt="sudo apt-get install -y"
+    alias iptables="sudo iptables -vL --line-numbers"
     alias ip="grc -c $HOME/conf.ifconfig ip"
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
     if [[ $distroName == raspbian ]]; then
@@ -602,7 +603,7 @@ alternatingPrettyPrint(){
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F\\. -anE '
+        echo "$@" | perl -F\\. -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -611,7 +612,7 @@ alternatingPrettyPrint(){
                  print "\x1b[1;4;34m$arg\x1b[0m"
             }
         $counter++;
-        }; print "\x1b[0m"' <<< "$@"
+        }; print "\x1b[0m"'
 
     fi
 
