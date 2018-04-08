@@ -12,7 +12,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #works for RPi
 
-    distroName=$(lsb_release -a | head -1 | awk '{print $3}')
+    distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
     case $distroName in
         Raspbian ) rm -rf $HOME/.local/share/Trash/files/*
