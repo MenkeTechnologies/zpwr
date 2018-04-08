@@ -173,7 +173,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #Linux
     alias apt="sudo apt-get install -y"
-    alias iptables="sudo iptables -vL --line-numbers"
+    alias iptables="sudo apt-get install -y"
     alias ip="grc -c $HOME/conf.ifconfig ip"
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
     if [[ $distroName == raspbian ]]; then
@@ -517,7 +517,7 @@ createGIF(){
     outFile=out.gif
     res=600x400
 
-    [[ -z "$1" ]] && echo "One arg need..." >&2 && return 1
+    [[ -z "$1" ]] && echo "One arg needed..." >&2 && return 1
 
     [[ ! -z "$2" ]] && res="$2"
 
@@ -548,8 +548,8 @@ hd(){
 
     printf "\e[1m"
     [[ -z "$out" ]] && echo "Successful deletion of $REPO" || {
-    echo "Error in deletion of $REPO"
-    echo "$out"
+        echo "Error in deletion of $REPO"
+        echo "$out"
     }
     printf "\e[0m"
 }
