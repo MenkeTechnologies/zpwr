@@ -1133,8 +1133,8 @@ supernatural-space() {
 
     fi
 
-
      zle expand-history
+     zle expand-word
      zle self-insert
 }
 
