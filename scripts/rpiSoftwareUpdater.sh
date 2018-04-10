@@ -83,16 +83,16 @@ gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 prettyPrint "Updating Vundle Plugins"
 #vim -c VundleUpdate -c quitall
 
-alternatingPrettyPrint "Updating Ruby .Gems. for .$(whoami)."
+alternatingPrettyPrint "Updating Ruby .Gems. for .$(whoami). on .$(hostname)."
 sudo gem update
 
 exists npm && {
-    alternatingPrettyPrint "Updating .NPM. packages for .$(whoami)."
+    alternatingPrettyPrint "Updating .NPM. packages for .$(whoami). on.$(hostname)."
     for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
     do
         sudo npm install -g "$package"
     done
-    alternatingPrettyPrint "Updating .NPM. itself"
+    alternatingPrettyPrint "Updating .NPM. itself for .$(whoami). on .$(hostname)."
     sudo npm install -g npm
 }
 
