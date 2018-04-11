@@ -95,6 +95,7 @@ fi
 #{{{                          MARK:ALIASES
 #**********************************************************************
 #portable aliases
+alias lo="tail -f $LOGFILE"
 alias va='cd /var'
 alias plr='rlwrap perl -de1'
 alias nz='exec zsh'
