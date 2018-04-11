@@ -1383,43 +1383,38 @@ export KEYTIMEOUT=1
 if [[ "$(uname)" == Linux ]]; then
     [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
 
+        distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
-    distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
+        mobile=true
 
-    mobile=true
+        case $distroName in
+            (debian|raspbian|kali) 
+                out="$(tail /var/log/auth.log)"
+                ;;
+            (ubuntu) 
+                ;;
+            (centos|rhel) 
+                out="$(tail /var/log/messages)"
+                ;;
+            (opensuse) 
+                out="$(journalctl | tail)"
+                ;;
+            (fedora) 
+                out="$(tail /var/log/auth.log)"
+                ;;
+            (*) :
+                ;;
+        esac
 
-    case $distroName in
-        (debian|raspbian|kali) 
-            out="$(cat /var/log/auth.log)"
-            ;;
-        (ubuntu) 
-            plugins+=(ubuntu)
-            ;;
-        (centos|rhel) 
-            plugins+=(yum dnf)
-            out="$(cat /var/log/message)"
-            ;;
-        (opensuse) 
-            plugins+=(suse z)
-            out="$(journalctl)"
-            ;;
-        (fedora) 
-            plugins+=(yum fedora dnf)
-            out="$(cat /var/log/auth.log)"
-            ;;
-        (*) :
-            ;;
-    esac
+        key="$(ssh-keygen -l -f ~/.ssh/authorized_keys | grep MenkeTechnologies | awk '{print $2}' | awk -F: '{print $2}')"
+        echo "searching for $key" >> "$LOGFILE"
+        echo "$out" | grep -q "$key" && mobile=false
 
-    key="$(ssh-keygen -l -f ~/.ssh/authorized_keys | grep MenkeTechnologies | awk '{print $2}' | awk -F: '{print $2}')"
-	echo "searching for $key" >> "$LOGFILE"
-    echo $out | tail | grep -q $key || mobile=false
-
-if [[ mobile == false ]]; then
-	{ tmux ls && tmux attach; } &> /dev/null 
-fi
-	
-}
+        if [[ mobile == false ]]; then
+            { tmux ls && tmux attach; } &> /dev/null 
+        fi
+        
+    }
 
 fi
 
