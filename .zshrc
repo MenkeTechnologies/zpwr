@@ -1387,9 +1387,12 @@ if [[ "$(uname)" == Linux ]]; then
 
         mobile=true
 
+        cat ~/.ssh/authorized_keys | grep MenkeTechnologies > ~/temp$$
+
         case $distroName in
             (debian|raspbian|kali) 
-                out="$(tail /var/log/auth.log)"
+                out="$(cat /var/log/auth.log | grep 'Accepted publickey' | tail -1)"
+                key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
                 ;;
             (ubuntu) 
                 ;;
@@ -1397,20 +1400,25 @@ if [[ "$(uname)" == Linux ]]; then
                 out="$(tail /var/log/messages)"
                 ;;
             (opensuse) 
-                out="$(journalctl | tail)"
+                out="$(journalctl -u sshd.service | grep 'Accepted publickey' | tail -1)"
+                key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
             (fedora) 
-                out="$(tail /var/log/auth.log)"
+                out="$(cat /var/log/secure | grep 'Accepted publickey' | tail -1)"
+                key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
             (*) :
                 ;;
         esac
 
-        key="$(ssh-keygen -l -f ~/.ssh/authorized_keys | grep MenkeTechnologies | awk '{print $2}' | awk -F: '{print $2}')"
-        echo "searching for $key" >> "$LOGFILE"
-        echo "$out" | grep -q "$key" && mobile=false
 
-        if [[ mobile == false ]]; then
+        echo "searching for $key in $out" >> "$LOGFILE"
+        echo "$out" | grep -q "$key" && mobile=false
+        echo "mobile is $mobile" >> "$LOGFILE"
+
+        rm ~/temp$$
+
+        if [[ $mobile == false ]]; then
             { tmux ls && tmux attach; } &> /dev/null 
         fi
         
