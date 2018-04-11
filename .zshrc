@@ -1412,7 +1412,8 @@ if [[ "$(uname)" == Linux ]]; then
     esac
 
     key="$(ssh-keygen -l -f ~/.ssh/authorized_keys | grep MenkeTechnologies | awk '{print $2}' | awk -F: '{print $2}')"
-    echo $out | tail | grep $key || mobile=false
+	echo "searching for $key" >> "$LOGFILE"
+    echo $out | tail | grep -q $key || mobile=false
 
 if [[ mobile == false ]]; then
 	{ tmux ls && tmux attach; } &> /dev/null 
