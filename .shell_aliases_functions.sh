@@ -276,6 +276,7 @@ s(){
 }
 
 xx(){
+    local counter
     cmd="$1"
     [[ -z "$2" ]] && counter=100 || counter="$2"
 
@@ -591,6 +592,7 @@ prettyPrint(){
 }
 
 alternatingPrettyPrint(){
+    local counter
     counter=0
 
     if [[ -z $1 ]]; then
@@ -775,13 +777,19 @@ torip(){
 }
 
 pirun(){
+    local picounter
+    picounter=1
     for pi in "${PI_ARRAY[@]}" ; do
+        alternatingPrettyPrint "Executing .'$1'. on .$pi."
         if [[ -z $2 ]]; then
-            alternatingPrettyPrint "Executing .'$1'. on .$pi."
             ssh "${pi%:*}" "$1" 2>/dev/null
         else
-            ssh "${pi%:*}" "$1"
+            ssh "${pi%:*}" "$1" 2>/dev/null
+            if (( $picounter == $2 )); then
+                return
+            fi 
         fi
+        ((picounter++))
     done
 
 }
