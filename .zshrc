@@ -1382,8 +1382,44 @@ export KEYTIMEOUT=1
 
 if [[ "$(uname)" == Linux ]]; then
     [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
-        { tmux ls && tmux attach; } &> /dev/null 
-    }
+
+
+    distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
+
+    mobile=true
+
+    case $distroName in
+        (debian|raspbian|kali) 
+            out="$(cat /var/log/auth.log)"
+            ;;
+        (ubuntu) 
+            plugins+=(ubuntu)
+            ;;
+        (centos|rhel) 
+            plugins+=(yum dnf)
+            out="$(cat /var/log/message)"
+            ;;
+        (opensuse) 
+            plugins+=(suse z)
+            out="$(journalctl)"
+            ;;
+        (fedora) 
+            plugins+=(yum fedora dnf)
+            out="$(cat /var/log/auth.log)"
+            ;;
+        (*) :
+            ;;
+    esac
+
+    key="$(ssh-keygen -l -f ~/.ssh/authorized_keys | grep MenkeTechnologies | awk '{print $2}' | awk -F: '{print $2}')"
+    echo $out | tail | grep $key || mobile=false
+
+if [[ mobile == false ]]; then
+	{ tmux ls && tmux attach; } &> /dev/null 
+fi
+	
+}
+
 fi
 
 
