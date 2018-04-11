@@ -1136,7 +1136,7 @@ supernatural-space() {
 }
 
 terminate-space(){
-    zle .magic-space
+    LBUFFER+=" "
 }
 
 zle -N supernatural-space
@@ -1222,9 +1222,10 @@ fi
 #color2
 
 #change history file size
-export SAVEHIST=100000
+export SAVEHIST=10000000
 #change history size in memory
-export HISTSIZE=100000
+export HISTSIZE=10000000
+
 
 #set right prompt string during continuation 
 RPS2='+%N:%i:%^'
