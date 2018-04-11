@@ -1404,7 +1404,7 @@ if [[ "$(uname)" == Linux ]]; then
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
             (fedora) 
-                out="$(cat /var/log/secure | grep 'Accepted publickey' | tail -1)"
+                out="$(sudo cat /var/log/secure | grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
             (*) :
@@ -1416,7 +1416,7 @@ if [[ "$(uname)" == Linux ]]; then
         echo "$out" | grep -q "$key" && mobile=false
         echo "mobile is $mobile" >> "$LOGFILE"
 
-        rm ~/temp$$
+        \rm ~/temp$$
 
         if [[ $mobile == false ]]; then
             { tmux ls && tmux attach; } &> /dev/null 
