@@ -1411,7 +1411,6 @@ if [[ "$(uname)" == Linux ]]; then
                 ;;
         esac
 
-
         echo "searching for $key in $out" >> "$LOGFILE"
         echo "$out" | grep -q "$key" && mobile=false
         echo "mobile is $mobile" >> "$LOGFILE"
@@ -1419,7 +1418,7 @@ if [[ "$(uname)" == Linux ]]; then
         \rm ~/temp$$
 
         if [[ $mobile == false ]]; then
-            { tmux ls && tmux attach; } &> /dev/null 
+            { tmux ls || tmux new-session -t main; tmux attach; } &> /dev/null 
         fi
         
     }
