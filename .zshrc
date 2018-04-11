@@ -1415,7 +1415,9 @@ if [[ "$(uname)" == Linux ]]; then
         \rm ~/temp$$
 
         if [[ $mobile == false ]]; then
-            { tmux ls && tmux attach || tmux new-session \; source-file ~/.tmux/control-window } &> /dev/null 
+            if [[ -z "$(tmux list-client)" ]]; then
+                { tmux ls && tmux attach || tmux new-session \; source-file ~/.tmux/control-window } &> /dev/null 
+            fi
         fi
         
     }
