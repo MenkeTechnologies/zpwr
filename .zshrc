@@ -714,16 +714,13 @@ precmd(){
             __WILL_CLEAR=false
         fi
     }
-    [[ -z "$TMUX" ]] && echo $DISPLAY > ~/.display.txt || {
-        if [[ -f ~/.display.txt ]]; then
-            export DISPLAY=$(cat ~/.display.txt)
-        fi        
-    }
+    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && export DISPLAY=$(cat ~/.display.txt) || echo $DISPLAY > ~/.display.txt 
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
 }
+    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && export DISPLAY=$(cat ~/.display.txt) || echo $DISPLAY > ~/.display.txt 
 
 rationalize-dot (){
     if [[ $LBUFFER = *.. ]]; then
