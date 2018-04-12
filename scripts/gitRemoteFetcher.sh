@@ -11,32 +11,32 @@ dir="$HOME/forkedRepos/customTerminalInstaller"
 moredir="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
 
 gitters(){
-        git reset --hard origin/master
-        git checkout -B master origin/master
-        git pull --force
-        git reset --hard origin/master
+    git reset --hard origin/master
+    git checkout -B master origin/master
+    git pull --force
+    git reset --hard origin/master
 }
 
 main(){
-        gitters
-		cp .shell_aliases_functions.sh "$HOME"
-		cp .zshrc "$HOME"
-		cp .vimrc "$HOME"
-		cp .tmux.conf "$HOME"
-		cp conf.gls "$HOME"
-		cp conf.df "$HOME"
-		cp conf.ifconfig "$HOME"
-		cp grc.zsh "$HOME"
-		cp .inputrc "$HOME"
-		cp -R .tmux/* "$HOME/.tmux"
-		cp -f scripts/* "$SCRIPTS"
-        killers
+    gitters
+    cp .shell_aliases_functions.sh "$HOME"
+    cp .zshrc "$HOME"
+    cp .vimrc "$HOME"
+    cp .tmux.conf "$HOME"
+    cp conf.gls "$HOME"
+    cp conf.df "$HOME"
+    cp conf.ifconfig "$HOME"
+    cp grc.zsh "$HOME"
+    cp .inputrc "$HOME"
+    cp -R .tmux/* "$HOME/.tmux"
+    cp -f scripts/* "$SCRIPTS"
+    killers
 }
  
 killers(){
-        tmux kill-server
-        pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
-        sudo kill "$pid" 
+    tmux kill-server
+    pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
+    sudo kill "$pid" 
 }
 
 while [[ 1 ]]; do
