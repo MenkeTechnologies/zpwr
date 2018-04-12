@@ -275,6 +275,10 @@ s(){
     [[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
 }
 
+logg(){
+    echo "$@" >> "$LOGFILE"
+}
+
 xx(){
     local counter
     cmd="$1"
