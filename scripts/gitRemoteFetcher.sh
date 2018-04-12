@@ -3,8 +3,8 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Thu Apr 12 00:02:45 EDT 2018
-#####   Purpose: bash script to 
-#####   Notes: 
+#####   Purpose: bash script to keep remote hosts in sync with master
+#####   Notes: watches 2 repos
 #}}}***********************************************************
 
 dir="$HOME/forkedRepos/customTerminalInstaller"
