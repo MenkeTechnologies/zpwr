@@ -92,10 +92,9 @@ shift $(($OPTIND-1))
 
 
 killpids(){
-    echo "${1:1}" | perl -F: -ae '`kill $_`for@F'
+    echo "${1:1}" | perl -ae '`kill $_`for@F'
     exit 0
 }
-
 
 if [[ "$detach" == true ]]; then
     alternatingPrettyPrint "Spawning .$nproc. processes in background."
@@ -110,10 +109,10 @@ else
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
         yes &> /dev/null &
-        pids="$pids:$!"
+        pids="$pids $!"
     done
     
-    trap 'killpids $pids 2>/dev/null' INT QUIT
+    trap 'killpids "$pids" 2>/dev/null' INT QUIT
 
     alternatingPrettyPrint ".Ctrl-C. to kill all spawned processes."
 
