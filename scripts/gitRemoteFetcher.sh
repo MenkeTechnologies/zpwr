@@ -31,7 +31,8 @@ main(){
 		cp -R .tmux/* "$HOME/.tmux"
 		cp -f scripts/* "$SCRIPTS"
         tmux kill-server
-        sudo pkill ssh
+        pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
+        sudo kill "$pid" 
 
     }
 
@@ -58,6 +59,6 @@ while [[ 1 ]]; do
     else
         :
     fi
-    sleep 5
+    ssshleep 5
 done
 
