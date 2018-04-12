@@ -50,7 +50,7 @@ shift $(($OPTIND-1))
 
 
 killpids(){
-    echo "${1:1}" | perl -F/:/ -lanE 'system "kill $_" foreach @F'
+    echo "${1:1}" | perl -F: -lanE 'system "kill $_" foreach @F'
     exit 0
 }
 
