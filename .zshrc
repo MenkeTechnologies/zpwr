@@ -1436,9 +1436,8 @@ if [[ "$(uname)" == Linux ]]; then
 
 fi
 
-
-  autoload -Uz bracketed-paste-magic
-  zle -N bracketed-paste bracketed-paste-magic
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
 
 #}}}***********************************************************
 #
