@@ -1286,36 +1286,42 @@ colortest(){
 
 #{{{                    MARK:FZF
 #**************************************************************
-ROUGIFY_THEME="github"
-__COMMON_FZF_ELEMENTS="--prompt='-->>> '"
-alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
+fzf_setup(){
+    local ROUGIFY_THEME
+    ROUGIFY_THEME="github"
+    local __COMMON_FZF_ELEMENTS
+    __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
 
-#to include dirs files in search
-export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
-export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS --reverse --border --height 100%" 
-export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
+    #to include dirs files in search
+    export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
+    export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS --reverse --border --height 100%" 
+    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
 
-#completion trigger plus tab, defaults to ~~
-export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] &&
-    rougify -t $ROUGIFY_THEME {} 2>/dev/null || {
-        [[ -e {} ]] && {
-            stat {} | fold -80 | head -500
-        } || {
-            source ~/.shell_aliases_functions.sh
-        { 
-            echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
-                whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+    #completion trigger plus tab, defaults to ~~
+    export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] &&
+        rougify -t $ROUGIFY_THEME {} 2>/dev/null || {
+            [[ -e {} ]] && {
+                stat {} | fold -80 | head -500
             } || {
-                cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} || {
-                whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+                source ~/.shell_aliases_functions.sh
+            { 
+                echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
+                    whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+                } || {
+                    cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} || {
+                    whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+                    }
                 }
-            }
-            
-         } | cowsay | ponysay
-   }
-}\""
+                
+             } | cowsay | ponysay
+       }
+    }\""
 
-export FZF_COMPLETION_TRIGGER=';'
+    export FZF_COMPLETION_TRIGGER=';'
+}
+
+fzf_setup
 
 _fzf_complete_echo() {
   _fzf_complete '-m' "$@" < <(
