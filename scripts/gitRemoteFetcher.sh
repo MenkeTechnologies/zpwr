@@ -8,21 +8,11 @@
 #}}}***********************************************************
 
 dir="$HOME/forkedRepos/customTerminalInstaller"
+moredir="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
 
-cd "$dir" || { echo "Directory $dir does not exist" >&2 && exit 1; }
-
-while [[ 1 ]]; do
-
-    git fetch origin
-    output=$(git log HEAD..origin/master --oneline)
-
-    if [[  ! -z "$output" ]] ; then
-        echo "We have change to $(git remote -v)"
+main(){
+        cd "$dir"
         git merge origin/master
-
-        moredir="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
-        [[ -d "$moredir" ]] && git -C "$moredir" pull
-
 		cp .shell_aliases_functions.sh "$HOME"
 		cp .zshrc "$HOME"
 		cp .vimrc "$HOME"
@@ -35,11 +25,32 @@ while [[ 1 ]]; do
 		cp -R .tmux/* "$HOME/.tmux"
 		cp -f scripts/* "$SCRIPTS"
 
-        git pull -C
+    }
+
+while [[ 1 ]]; do
+
+    cd "$dir" || { echo "Directory $dir does not exist" >&2 && exit 1; }
+    git fetch origin
+    output=$(git log HEAD..origin/master --oneline)
+
+    if [[  ! -z "$output" ]] ; then
+        echo "We have change to $(git remote -v)"
+        main
     else
-        echo "No change to $(git remote -v)"
+        echo "No changes to $dir"
     fi
 
+    cd "$moredir" || { echo "Directory $moredir does not exist" >&2 && exit 1; }
+    git fetch origin
+    output=$(git log HEAD..origin/master --oneline)
+
+    if [[  ! -z "$output" ]] ; then
+        echo "We have change to $(git remote -v)"
+        [[ -d "$moredir" ]] && git -C "$moredir" pull
+    else
+        echo "No changes to $dir"
+
+    fi
     sleep 5
 done
 
