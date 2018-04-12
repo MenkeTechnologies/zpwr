@@ -45,8 +45,6 @@ while [[ 1 ]]; do
     if [[  ! -z "$output" ]] ; then
         echo "We have change to $(git remote -v)"
         main
-    else
-        :
     fi
 
     cd "$moredir" || { echo "Directory $moredir does not exist" >&2 && exit 1; }
@@ -56,8 +54,6 @@ while [[ 1 ]]; do
     if [[  ! -z "$output" ]] ; then
         echo "We have change to $(git remote -v)"
         gitters
-    else
-        :
     fi
 
     sleep 5
