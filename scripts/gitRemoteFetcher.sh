@@ -31,7 +31,7 @@ main(){
 		cp -R .tmux/* "$HOME/.tmux"
 		cp -f scripts/* "$SCRIPTS"
         tmux kill-server
-        sudo kill -1 $(cat /var/run/sshd.pid)
+        sudo pkill ssh
 
     }
 
