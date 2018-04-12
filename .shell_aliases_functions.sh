@@ -327,7 +327,7 @@ p(){
     out="$(ps -ef)"
     for cmd in "$@" ; do
         prettyPrint "SEARCH TERM: $cmd"
-        echo "$out" | fgrep -i -- "$cmd" || echo "Nothing found for $cmd."
+        echo "$out" | fgrep -a -i -- "$cmd" || echo "Nothing found for $cmd."
         echo
     done
 }
