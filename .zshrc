@@ -1047,29 +1047,29 @@ else
     alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
 fi
 
-local __CORRECT_WORDS
-declare -A __CORRECT_WORDS
-__CORRECT_WORDS[and]="adn nad"
-__CORRECT_WORDS[the]="teh hte eht eth"
-__CORRECT_WORDS[this]="tihs"
-__CORRECT_WORDS[they]="tehy ethy"
-__CORRECT_WORDS[back]="abck bak"
-__CORRECT_WORDS[that]="taht"
-__CORRECT_WORDS[than]="tahn"
-__CORRECT_WORDS[then]="tehn"
-__CORRECT_WORDS[to]="ot"
-__CORRECT_WORDS[why]="hwy wyh"
-__CORRECT_WORDS[inside]="insdie inisde isnide sindie"
-__CORRECT_WORDS[just]="jsut jutsi just"
-__CORRECT_WORDS[here]="ehre"
-__CORRECT_WORDS[not]="nto tno"
-__CORRECT_WORDS[store]="sotre"
-__CORRECT_WORDS[mount]="mounr mounf"
-__CORRECT_WORDS[print]="pirtn pirnt"
-__CORRECT_WORDS[for]="fro rfo rof"
-__CORRECT_WORDS[directory]="direcotry directroy"
 
 supernatural-space() {
+    local __CORRECT_WORDS
+    declare -A __CORRECT_WORDS
+    __CORRECT_WORDS[and]="adn nad"
+    __CORRECT_WORDS[the]="teh hte eht eth"
+    __CORRECT_WORDS[this]="tihs"
+    __CORRECT_WORDS[they]="tehy ethy"
+    __CORRECT_WORDS[back]="abck bak"
+    __CORRECT_WORDS[that]="taht"
+    __CORRECT_WORDS[than]="tahn"
+    __CORRECT_WORDS[then]="tehn"
+    __CORRECT_WORDS[to]="ot"
+    __CORRECT_WORDS[why]="hwy wyh"
+    __CORRECT_WORDS[inside]="insdie inisde isnide sindie"
+    __CORRECT_WORDS[just]="jsut jutsi just"
+    __CORRECT_WORDS[here]="ehre"
+    __CORRECT_WORDS[not]="nto tno"
+    __CORRECT_WORDS[store]="sotre"
+    __CORRECT_WORDS[mount]="mounr mounf"
+    __CORRECT_WORDS[print]="pirtn pirnt"
+    __CORRECT_WORDS[for]="fro rfo rof"
+    __CORRECT_WORDS[directory]="direcotry directroy"
 	    #statements
     local TEMP_BUFFER mywords badWords
      TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
