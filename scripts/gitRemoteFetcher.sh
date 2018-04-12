@@ -30,10 +30,10 @@ main(){
     cp .inputrc "$HOME"
     cp -R .tmux/* "$HOME/.tmux"
     cp -f scripts/* "$SCRIPTS"
-    killers
+    refreshers
 }
  
-killers(){
+refreshers(){
     #create new zsh in right pane
     #space for safety
     tmux send-keys -t right C-c " nz" C-m
@@ -60,7 +60,7 @@ while [[ 1 ]]; do
     if [[  ! -z "$output" ]] ; then
         echo "We have change to $(git remote -v)"
         gitters
-        killers
+        refreshers
     fi
 
     sleep 5
