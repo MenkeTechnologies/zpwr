@@ -1019,33 +1019,38 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
-__GLOBAL_ALIAS_PREFIX=j
-alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
-alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
-alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
-alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; unset __pid; __pid=$!; ps -ef | grep -v grep | grep $__pid; unset __pid'
-alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
-alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '' "
-alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail" 
-alias -g ${__GLOBAL_ALIAS_PREFIX}w='| wc -l'
-alias -g ${__GLOBAL_ALIAS_PREFIX}n="> /dev/null 2>&1"
-alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
-alias -g ${__GLOBAL_ALIAS_PREFIX}ne="2> /dev/null"
-alias -g ${__GLOBAL_ALIAS_PREFIX}g='git add . && git commit -m "" && git push'
-alias -g ${__GLOBAL_ALIAS_PREFIX}e='|& fgrep -v "grep" |& egrep -i'
-alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say'"
-alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
-alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
-alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
+globalAliasesInit(){
+    local __GLOBAL_ALIAS_PREFIX
+    __GLOBAL_ALIAS_PREFIX=j
+    alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; unset __pid; __pid=$!; ps -ef | grep -v grep | grep $__pid; unset __pid'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '' "
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail" 
+    alias -g ${__GLOBAL_ALIAS_PREFIX}w='| wc -l'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}n="> /dev/null 2>&1"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ne="2> /dev/null"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}g='git add . && git commit -m "" && git push'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}e='|& fgrep -v "grep" |& egrep -i'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
 
-if [[ "$(uname)" == Darwin ]]; then
-    alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
-    alias ge="exe 'nz';nz"
-else
-    alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
-fi
+    if [[ "$(uname)" == Darwin ]]; then
+        alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
+        alias ge="exe 'nz';nz"
+    else
+        alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
+    fi
+}
+
+globalAliasesInit 
 
 
 supernatural-space() {
