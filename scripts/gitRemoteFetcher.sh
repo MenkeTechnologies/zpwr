@@ -11,6 +11,7 @@ dir="$HOME/forkedRepos/customTerminalInstaller"
 moredir="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
 
 main(){
+        git reset --hard
         git pull --force
 		cp .shell_aliases_functions.sh "$HOME"
 		cp .zshrc "$HOME"
@@ -45,6 +46,7 @@ while [[ 1 ]]; do
 
     if [[  ! -z "$output" ]] ; then
         echo "We have change to $(git remote -v)"
+        git reset --hard
         git pull --force
     else
         :
