@@ -1047,7 +1047,6 @@ else
     alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
 fi
 
-
 declare -A __CORRECT_WORDS
 __CORRECT_WORDS[and]="adn nad"
 __CORRECT_WORDS[the]="teh hte eht eth"
