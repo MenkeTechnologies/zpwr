@@ -1444,8 +1444,6 @@ fi
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
-
-alias tweed=ls
 #}}}***********************************************************
 #
 #
