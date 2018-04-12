@@ -6,8 +6,80 @@
 #####   Purpose: bash script to stress system 
 #####   Notes: high CPU usage
 #}}}***********************************************************
-for (( i = 0; i < 10; i++ )); do
-	#launch yes in the background in subshell disowning it
-	#send all output to /dev/null
-	( yes &> /dev/null &)
+__ScriptVersion="version"
+
+#===  FUNCTION  ================================================================
+#         NAME:  usage
+#  DESCRIPTION:  Display usage information.
+#===============================================================================
+function usage ()
+{
+    echo "Usage :  $0 [options] [--]
+
+    Options:
+    -h|help       Display this message
+    -d|detach     Disown
+    -n|nproc      Number of processes to spawn
+    -v|version    Display script version"
+
+}    # ----------  end of function usage  ----------
+
+#-----------------------------------------------------------------------
+#  Handle command line arguments
+#-----------------------------------------------------------------------
+
+nproc=10
+
+while getopts "n:dhv" opt
+do
+  case $opt in
+
+    h|help     )  usage; exit 0   ;;
+
+    v|version  )  echo "$0  -- Version $__ScriptVersion"; exit 0   ;;
+
+    d|detach ) detach=true ;;
+
+    n|nproc ) nproc=$OPTARG ;;
+
+    * )  echo -e "\n  Option does not exist : $OPTARG\n"
+          usage; exit 1   ;;
+
+  esac    # --- end of case ---
 done
+shift $(($OPTIND-1))
+
+
+killpids(){
+    echo "${1:1}" | perl -F/:/ -lanE 'system "kill $_" foreach @F'
+    exit 0
+}
+
+printf "Spawning $nproc processes"
+
+if [[ "$detach" == true ]]; then
+    printf " in background.\n"
+    for (( i = 0; i < $nproc; i++ )); do
+        #launch yes in the background in subshell disowning it
+        #send all output to /dev/null
+        ( yes &> /dev/null &)
+    done
+else
+    printf " interactively.\n"
+    pids=""
+    for (( i = 0; i < $nproc; i++ )); do
+        #launch yes in the background in subshell disowning it
+        #send all output to /dev/null
+        yes &> /dev/null &
+        pids="$pids:$!"
+    done
+
+    
+    trap 'killpids $pids 2>/dev/null' INT QUIT
+
+    echo "Ctrl-C to kill all spawned"
+
+    wait $!
+
+fi
+
