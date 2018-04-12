@@ -34,7 +34,7 @@ main(){
 }
  
 killers(){
-    tmux kill-server
+    tmux send-keys -t right "nz" C-m
     pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
     sudo kill "$pid" 
 }
