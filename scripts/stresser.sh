@@ -40,7 +40,7 @@ alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
-        cat | perl -F\\. -anE '
+        cat | perl -F\\. -ane '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -51,7 +51,7 @@ alternatingPrettyPrint(){
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F\\. -anE '
+        perl -F\\. -ane '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -92,7 +92,7 @@ shift $(($OPTIND-1))
 
 
 killpids(){
-    echo "${1:1}" | perl -F: -aE 'system "kill $_" foreach @F'
+    echo "${1:1}" | perl -F: -ae 'system "kill $_" foreach @F'
     exit 0
 }
 
