@@ -7,6 +7,7 @@
 #####   Notes: high CPU usage
 #}}}***********************************************************
 __ScriptVersion="1.0.1"
+nproc=10
 
 #===  FUNCTION  ================================================================
 #         NAME:  usage
@@ -15,6 +16,8 @@ __ScriptVersion="1.0.1"
 function usage ()
 {
     echo "Usage :  $0 [options] [--]
+    Default number of spawned processes is $nproc.
+    Change this with -n option.
 
     Options:
     -h|help             Display this message
@@ -28,7 +31,6 @@ function usage ()
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
-nproc=10
 while getopts "n:dhv" opt
 do
   case $opt in
