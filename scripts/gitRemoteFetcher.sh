@@ -9,7 +9,7 @@
 
 dir="$HOME/forkedRepos/customTerminalInstaller"
 
-cd "$dir" || echo "Directory $dir does not exist" >&2 && exit 1
+cd "$dir" || { echo "Directory $dir does not exist" >&2 && exit 1; }
 
 while [[ 1 ]]; do
 
