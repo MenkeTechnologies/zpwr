@@ -36,7 +36,7 @@ while [[ 1 ]]; do
         echo "We have change to $(git remote -v)"
         main
     else
-        echo "No changes to $dir"
+        :
     fi
 
     cd "$moredir" || { echo "Directory $moredir does not exist" >&2 && exit 1; }
@@ -47,7 +47,7 @@ while [[ 1 ]]; do
         echo "We have change to $(git remote -v)"
         git pull --force
     else
-        echo "No changes to $dir"
+        :
     fi
     sleep 5
 done
