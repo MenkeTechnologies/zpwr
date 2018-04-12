@@ -13,6 +13,7 @@ moredir="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
 main(){
         git reset --hard
         git pull --force
+        git reset --hard origin/master
 		cp .shell_aliases_functions.sh "$HOME"
 		cp .zshrc "$HOME"
 		cp .vimrc "$HOME"
@@ -48,6 +49,7 @@ while [[ 1 ]]; do
         echo "We have change to $(git remote -v)"
         git reset --hard
         git pull --force
+        git reset --hard origin/master
     else
         :
     fi
