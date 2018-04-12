@@ -6,7 +6,7 @@
 #####   Purpose: bash script to stress system 
 #####   Notes: high CPU usage
 #}}}***********************************************************
-__ScriptVersion="version"
+__ScriptVersion="1.0.1"
 
 #===  FUNCTION  ================================================================
 #         NAME:  usage
@@ -29,7 +29,6 @@ function usage ()
 #-----------------------------------------------------------------------
 
 nproc=10
-
 while getopts "n:dhv" opt
 do
   case $opt in
