@@ -92,7 +92,7 @@ shift $(($OPTIND-1))
 
 
 killpids(){
-    echo "${1:1}" | perl -F: -ae 'system "kill $_" foreach @F'
+    echo "${1:1}" | perl -F: -ae '`kill $_`for@F'
     exit 0
 }
 
