@@ -1386,9 +1386,10 @@ unset GROOVY_HOME # when set this messes up classpath
 #**************************************************************
 alias -s txt='vim'
 
-alias numcmd='print -rlo -- $commands | wc -l'
 
-export KEYTIMEOUT=1
+#}}}***********************************************************
+#{{{                    MARK:SSH Public Key ID
+#**************************************************************
 
 if [[ "$(uname)" == Linux ]]; then
     [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
@@ -1440,12 +1441,16 @@ if [[ "$(uname)" == Linux ]]; then
     }
 
 fi
+#}}}***********************************************************
+
+#{{{                    MARK:Misc
+#**************************************************************
+alias numcmd='print -rlo -- $commands | wc -l'
+
+export KEYTIMEOUT=1
 
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
 #}}}***********************************************************
-#
-#
-#
 #
