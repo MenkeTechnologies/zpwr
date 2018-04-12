@@ -1050,7 +1050,7 @@ globalAliasesInit(){
     fi
 }
 
-globalAliasesInit 
+globalAliasesInit
 
 
 supernatural-space() {
