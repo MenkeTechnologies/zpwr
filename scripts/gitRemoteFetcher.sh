@@ -34,9 +34,10 @@ main(){
 }
  
 killers(){
-    tmux send-keys -t right "nz" C-m
-    pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
-    sudo kill "$pid" 
+    tmux send-keys -t right C-c "nz" C-m
+    #tmux kill-server
+    #pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
+    #sudo kill "$pid" 
 }
 
 while [[ 1 ]]; do
