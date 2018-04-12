@@ -94,6 +94,7 @@ if [[ "$(uname)" == "Darwin" ]];then
     echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && plugins+=(tmux)
 else
     #linux
+    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && plugins+=(tmux)
     plugins+=(systemd)
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
@@ -1417,7 +1418,11 @@ if [[ "$(uname)" == Linux ]]; then
 
         if [[ $mobile == false ]]; then
             if [[ -z "$(tmux list-client)" ]]; then
-                { tmux ls && tmux attach || tmux new-session \; source-file ~/.tmux/control-window } &> /dev/null 
+                echo "no tmux clients" >> "$LOGFILE"
+
+                {
+                    tmux ls && { tmux attach; echo "attaching" >> "$LOGFILE"; }  || { tmux new-session \; source-file ~/.tmux/control-window; echo "creating new tmux session"; }
+                } &> /dev/null 
             fi
         fi
         
