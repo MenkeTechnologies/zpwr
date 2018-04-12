@@ -63,9 +63,9 @@ watchCommand() {
         ROWS=$(tput lines)
         COLS=$(tput cols)
         CMD="$@"
-        eval "$CMD" | head -n "$ROWS" | while IFS= read LINE; do
+        eval "$CMD" | head -n "$ROWS" | while IFS= read; do
             #prints %-30.5s = 30 spaces for left justificationa and five characters
-            printf '%-*.*s%s\n' $COLS $COLS "$LINE" "$el"
+            printf '%-*.*s%s\n' $COLS $COLS "$REPLY" "$el"
         done
         #position cursor back to 0,0
         printf '%s%s' "$ed" "$home"
@@ -75,9 +75,9 @@ watchCommand() {
     if [[ $boldflag == true ]]; then
         printf "\e[0m"
     fi
-    }
+}
 
-    #make cursor invisible
-    tput civis
-    #call function with first positional parameter
-    watchCommand $1
+#make cursor invisible
+tput civis
+#call function with first positional parameter
+watchCommand $1
