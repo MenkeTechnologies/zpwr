@@ -59,6 +59,6 @@ while [[ 1 ]]; do
     else
         :
     fi
-    ssshleep 5
+    sleep 5
 done
 
