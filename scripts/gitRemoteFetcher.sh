@@ -7,6 +7,10 @@
 #####   Notes: 
 #}}}***********************************************************
 
+dir="$HOME/forkedRepos/customTerminalInstaller"
+
+cd "$dir" || echo "Directory $dir does not exist" >&2 && exit 1
+
 while [[ 1 ]]; do
 
     git fetch origin
@@ -29,7 +33,6 @@ while [[ 1 ]]; do
 		cp -f scripts/* "$SCRIPTS"
     else
         echo "No change to $(git remote)" >> "$LOGFILE"
-          :
     fi
 
     sleep 10
