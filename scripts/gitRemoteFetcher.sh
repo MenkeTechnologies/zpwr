@@ -35,7 +35,7 @@ main(){
  
 refreshers(){
     #create new zsh in right pane
-    #space for safety
+    #space for safety as C-c tends to cut off first character
     tmux send-keys -t right C-c " nz" C-m
     #tmux kill-server
     #pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
