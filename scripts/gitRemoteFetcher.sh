@@ -40,6 +40,6 @@ while [[ 1 ]]; do
         echo "No change to $(git remote -v)"
     fi
 
-    sleep 10
+    sleep 5
 done
 
