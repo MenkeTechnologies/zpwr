@@ -20,6 +20,9 @@ while [[ 1 ]]; do
         echo "We have change to $(git remote -v)"
         git merge origin/master
 
+        moredir="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
+        [[ -d "$moredir" ]] && git -C "$moredir" pull
+
 		cp .shell_aliases_functions.sh "$HOME"
 		cp .zshrc "$HOME"
 		cp .vimrc "$HOME"
@@ -31,6 +34,8 @@ while [[ 1 ]]; do
 		cp .inputrc "$HOME"
 		cp -R .tmux/* "$HOME/.tmux"
 		cp -f scripts/* "$SCRIPTS"
+
+        git pull -C
     else
         echo "No change to $(git remote -v)"
     fi
