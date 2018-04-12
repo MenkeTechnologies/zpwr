@@ -17,10 +17,10 @@ function usage ()
     echo "Usage :  $0 [options] [--]
 
     Options:
-    -h|help       Display this message
-    -d|detach     Disown
-    -n|nproc      Number of processes to spawn
-    -v|version    Display script version"
+    -h|help             Display this message
+    -d|disown           Disown process to init
+    -n|nproc <number>   Number of processes to spawn
+    -v|version          Display script version"
 
 }    # ----------  end of function usage  ----------
 
