@@ -35,6 +35,7 @@ main(){
  
 killers(){
     #create new zsh in right pane
+    #space for safety
     tmux send-keys -t right C-c " nz" C-m
     #tmux kill-server
     #pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
