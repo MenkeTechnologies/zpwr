@@ -14,6 +14,7 @@ gitters(){
         git reset --hard origin/master
         git checkout -B master origin/master
         git pull --force
+        git reset --hard origin/master
 }
 
 main(){
