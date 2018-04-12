@@ -17,7 +17,7 @@ while [[ 1 ]]; do
     output=$(git log HEAD..origin/master --oneline)
 
     if [[  ! -z "$output" ]] ; then
-        echo "We have change to $(git remote)" >> "$LOGFILE"
+        echo "We have change to $(git remote -v)"
         git merge origin/master
 
 		cp .shell_aliases_functions.sh "$HOME"
@@ -32,7 +32,7 @@ while [[ 1 ]]; do
 		cp -R .tmux/* "$HOME/.tmux"
 		cp -f scripts/* "$SCRIPTS"
     else
-        echo "No change to $(git remote)" >> "$LOGFILE"
+        echo "No change to $(git remote -v)"
     fi
 
     sleep 10
