@@ -1023,7 +1023,7 @@ __GLOBAL_ALIAS_PREFIX=j
 alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
 alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
 alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
-alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; ps -ef | grep -v grep | grep $!'
+alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; pid=$!; ps -ef | grep -v grep | grep $pid'
 alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
 alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
