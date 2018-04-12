@@ -30,11 +30,14 @@ main(){
 		cp .inputrc "$HOME"
 		cp -R .tmux/* "$HOME/.tmux"
 		cp -f scripts/* "$SCRIPTS"
+        killers
+}
+ 
+killers(){
         tmux kill-server
         pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
         sudo kill "$pid" 
-
-    }
+}
 
 while [[ 1 ]]; do
 
@@ -54,6 +57,7 @@ while [[ 1 ]]; do
     if [[  ! -z "$output" ]] ; then
         echo "We have change to $(git remote -v)"
         gitters
+        killers
     fi
 
     sleep 5
