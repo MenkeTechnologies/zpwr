@@ -11,7 +11,7 @@ dir="$HOME/forkedRepos/customTerminalInstaller"
 moredir="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
 
 main(){
-        git merge origin/master
+        git pull --force
 		cp .shell_aliases_functions.sh "$HOME"
 		cp .zshrc "$HOME"
 		cp .vimrc "$HOME"
@@ -45,7 +45,7 @@ while [[ 1 ]]; do
 
     if [[  ! -z "$output" ]] ; then
         echo "We have change to $(git remote -v)"
-        git merge origin/master
+        git pull --force
     else
         echo "No changes to $dir"
     fi
