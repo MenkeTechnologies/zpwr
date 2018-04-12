@@ -27,6 +27,46 @@ function usage ()
 
 }    # ----------  end of function usage  ----------
 
+prettyPrint(){
+    printf "\e[1;4m"
+    printf "$1"
+    printf "\n\e[0m"
+}
+
+exists(){
+    type "$1" >/dev/null 2>&1
+}
+alternatingPrettyPrint(){
+    counter=0
+
+    if [[ -z $1 ]]; then
+        cat | perl -F\\. -anE '
+        my $counter=0;
+        for my $arg (@F){
+            if ($counter % 2 == 0){
+                 print "\x1b[36m$arg\x1b[0m"
+            } else {
+                 print "\x1b[1;4;34m$arg\x1b[0m"
+            }
+        $counter++;
+        };print "\x1b[0m"'
+    else
+        perl -F\\. -anE '
+        my $counter=0;
+        for my $arg (@F){
+            if ($counter % 2 == 0){
+                 print "\x1b[36m$arg\x1b[0m"
+            } else {
+                 print "\x1b[1;4;34m$arg\x1b[0m"
+            }
+        $counter++;
+        }; print "\x1b[0m"' <<< "$@"
+
+    fi
+
+}
+
+
 #-----------------------------------------------------------------------
 #  Handle command line arguments
 #-----------------------------------------------------------------------
@@ -56,29 +96,26 @@ killpids(){
     exit 0
 }
 
-printf "Spawning $nproc processes"
 
 if [[ "$detach" == true ]]; then
-    printf " in background.\n"
+    alternatingPrettyPrint "Spawning .$nproc. processes in background."
     for (( i = 0; i < $nproc; i++ )); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
         ( yes &> /dev/null &)
     done
 else
-    printf " interactively.\n"
-    pids=""
+    alternatingPrettyPrint "Spawning .$nproc. processes interactively."
     for (( i = 0; i < $nproc; i++ )); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
         yes &> /dev/null &
         pids="$pids:$!"
     done
-
     
     trap 'killpids $pids 2>/dev/null' INT QUIT
 
-    echo "Ctrl-C to kill all spawned"
+    alternatingPrettyPrint ".Ctrl-C. to kill all spawned processes."
 
     wait $!
 
