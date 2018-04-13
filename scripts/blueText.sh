@@ -11,6 +11,6 @@ BLUE='\e[37;44m'
 RESET='\e[0m'
 
 #loop through stdin and add escape sequences at head and tail of each line
-while read input; do
-    echo -e "${BLUE}$input${RESET}"
+while read; do
+    echo -e "${BLUE}$REPLY${RESET}"
 done

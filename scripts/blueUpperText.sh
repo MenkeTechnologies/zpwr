@@ -4,15 +4,15 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:11:46 EDT 2017
 #####   Purpose: bash script to make text white on blue background and some underscores
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 #escape sequences
 BLUE='\e[37;44m'
 RESET='\e[0m'
 
 #loop through stdin and add escape sequences at head and tail of each line
-while read input; do
-    echo "$input" | sed 's/.*/_______ & ______/' | boldText.sh | blueText.sh 
+while read; do
+    echo "$REPLY" | sed 's/.*/_______ & ______/' | boldText.sh | blueText.sh
 done
 
 

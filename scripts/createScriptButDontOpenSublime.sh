@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:13:53 EDT 2017
 #####   Purpose: bash script to add shebang line to new script file
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 executableScriptsProcessing(){
@@ -45,10 +45,7 @@ createTheFile(){
 }
 
 #if no arguments then exit
-if [[ -z "$1" ]]; then
-	printf "I need an argument ...\n"
-	exit 1
-fi
+[[ -z "$1" ]] && echo "I need an argument ..."  && exit 1
 
 #file name is the first argument
 newfile="$1"

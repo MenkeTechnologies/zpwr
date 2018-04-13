@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 17 13:30:47 EDT 2017
 #####   Purpose: bash script to monitor log files in color
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 prettyPrint () {
@@ -21,13 +21,9 @@ tailVersion=tail
 
 weHaveCCZE=no
 
-type ccze 1>/dev/null 2>&1 && {
-    weHaveCCZE=yes
-}
+type ccze 1>/dev/null 2>&1 && weHaveCCZE=yes
 
-if [[ "$1" ]]; then
-    weHaveCCZE=no
-fi
+[[ ! -z "$1" ]] && weHaveCCZE=no
 
 #dont care about std err
 #exec 2>/dev/null
@@ -46,7 +42,7 @@ else
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
     case "$distroName" in
-        (debian|ubuntu|raspbian|kali) 
+        (debian|ubuntu|raspbian|kali)
             distro=debian
             ;;
         (centos|fedora|rhel)
@@ -64,7 +60,7 @@ else
             "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log | ccze
         else
             prettyPrint "Decolorized logging for $distroName"
-            "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log 
+            "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} /var/**/*.err "$HOME"/**/*.log
         fi
 
     elif [[ "$distro" == redhat ]]; then
@@ -74,12 +70,12 @@ else
             sudo "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log | ccze
         else
             prettyPrint "Decolorized logging for $distroName"
-            sudo "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log 
+            sudo "$tailVersion" -f /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log
         fi
     elif [[ "$distro" == suse ]]; then
         prettyPrint "Color logging for $distroName"
-        sudo journalctl -f | ccze 
-    else 
+        sudo journalctl -f | ccze
+    else
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
         if [[ "$weHaveCCZE" == yes ]]; then
              prettyPrint "Color logging for $distroName"
