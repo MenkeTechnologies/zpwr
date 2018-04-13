@@ -10,6 +10,9 @@ OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
+export DELIMITER_CHAR='%'
+
+
 turnOffDebugging(){
     set +x
     set +v
@@ -40,7 +43,7 @@ alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
-        cat | perl -F\\. -anE '
+        cat | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -51,7 +54,7 @@ alternatingPrettyPrint(){
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F\\. -anE '
+        perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){

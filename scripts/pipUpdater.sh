@@ -7,11 +7,14 @@
 #####   Notes: 
 #}}}***********************************************************
 
+export DELIMITER_CHAR='%'
+
+
 alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
-        cat | perl -F\\. -anE '
+        cat | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -22,7 +25,7 @@ alternatingPrettyPrint(){
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F\\. -anE '
+        perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -37,32 +40,32 @@ alternatingPrettyPrint(){
 
 }
 
-alternatingPrettyPrint "Updating .Pip2. Packages for .$(whoami). on .$(hostname)."
+alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
 outdated=$(pip2 list --outdated | awk '{print $1}')
 
 if [[ "$(uname)" == Darwin ]]; then
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        alternatingPrettyPrint "Updating .$i. with .Pip2. for .$(whoami). on .$(hostname)."
+        alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
         pip2 install --upgrade "$i" #&> /dev/null
     done
 
-    alternatingPrettyPrint "Updating .Pip2. itself for .$(whoami). on .$(hostname)."
+    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     #update pip itself
     pip2 install --upgrade pip setuptools wheel #&> /dev/null
 
-    alternatingPrettyPrint "Updating .Pip3. Packages for .$(whoami). on .$(hostname)."
+    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     outdated=$(pip3 list --outdated | awk '{print $1}')
 
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        alternatingPrettyPrint "Updating .$i. with .Pip3. for .$(whoami). on .$(hostname)."
+        alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
         pip3 install --upgrade "$i" #&> /dev/null
     done
 
-    alternatingPrettyPrint "Updating .Pip3. itself for .$(whoami). on .$(hostname)."
+    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     #update pip itself
     pip3 install --upgrade pip setuptools wheel #&> /dev/null
 else
@@ -70,25 +73,25 @@ else
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        alternatingPrettyPrint "Updating .$i. with .Pip2. for .$(whoami). on .$(hostname)."
+        alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
         sudo pip2 install --upgrade "$i" #&> /dev/null
     done
 
-    alternatingPrettyPrint "Updating .Pip2. itself for .$(whoami). on .$(hostname)."
+    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     #update pip itself
     sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
 
-    alternatingPrettyPrint "Updating .Pip3. Packages for .$(whoami). on .$(hostname)."
+    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     outdated=$(pip3 list --outdated | awk '{print $1}')
 
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
-        alternatingPrettyPrint "Updating .$i. with .Pip3. for .$(whoami). on .$(hostname)."
+        alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
         sudo pip3 install --upgrade "$i" #&> /dev/null
     done
 
-    alternatingPrettyPrint "Updating .Pip3. itself for .$(whoami). on .$(hostname)."
+    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     #update pip itself
     sudo pip3 install --upgrade pip setuptools wheel #&> /dev/null
 fi
