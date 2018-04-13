@@ -759,15 +759,15 @@ getrc(){
 rename(){
     search="$1"
     shift
-for file in "$@"; do
-    [[ -d "$file" ]] && continue
-    out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
-    if [[ $out != 0 ]]; then
-        #statements
-        mv "$file" "$(echo "$file" | sed -E "$search")"
-    fi
-    
-done
+    for file in "$@"; do
+        [[ -d "$file" ]] && continue
+        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
+        if (( $out != 0 )); then
+            #statements
+            mv "$file" "$(echo "$file" | sed -E "$search")"
+        fi
+        
+    done
 }
 
 torip(){
@@ -787,7 +787,7 @@ pirun(){
             ssh "${pi%:*}" "$1" 2>/dev/null
             if (( $picounter == $2 )); then
                 return
-            fi 
+            fi
         fi
         ((picounter++))
     done
