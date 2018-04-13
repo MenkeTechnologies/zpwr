@@ -69,7 +69,7 @@ if [[ "$(uname)" == Darwin ]]; then
     #update pip itself
     pip3 install --upgrade pip setuptools wheel #&> /dev/null
 else
-    alternatingPrettyPrint "Updating with .sudo."
+    alternatingPrettyPrint "Updating with ${DELIMITER_CHAR}sudo${DELIMITER_CHAR}"
     #install outdated pip modules 
     #split on space
     for i in $outdated; do
