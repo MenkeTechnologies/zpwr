@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Sun Jul 16 02:44:18 EDT 2017
 #####   Purpose: bash script to reindent and delete duplicate lines
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 home_dir=$HOME
@@ -19,10 +19,7 @@ script $1=file
 EOM
 }
 
-if [[ $# < 1 ]]; then
-    usage >&2
-    exit 1
-fi
+(( $# < 1 )) && usage >&2 && exit 1
 
 if [[ ! -d $backup_dir ]]; then
     mkdir $backup_dir

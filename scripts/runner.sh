@@ -4,7 +4,7 @@
 #####   Author: JACOBMENK
 #####   Date: Mon Jul 10 12:37:10 EDT 2017
 #####   Purpose: bash script to help exec of script from vim
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 executableScriptsProcessing(){
@@ -20,7 +20,7 @@ executeTheFile(){
     if [[ "$1" == "java" ]];then
         dir="$(dirname "$2")"
         file="$(basename "$2")"
-        cd "$dir" && { 
+        cd "$dir" && {
             javac "$file"
             java "${file%.*}"
         }
@@ -38,10 +38,9 @@ executeFileFirstArgIsCommand(){
 }
 
 #if no arguments then exit
-if (( $# < 1 )); then
-    printf "I need an argument ...\n" >&2
-    exit 1
-fi
+
+(( $# < 1 )) && echo "Need one argument." >&2 && exit 1
+
 
 #file name is the first argument
 clear
@@ -58,7 +57,7 @@ case "$fileToBeExecuted" in
         ;;
     *.vim )
         command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | tail +4"
-        executeFileFirstArgIsCommand "$command" "$fileToBeExecuted" 
+        executeFileFirstArgIsCommand "$command" "$fileToBeExecuted"
         ;;
     *.py ) executeTheFile python3 "$fileToBeExecuted"
         ;;
