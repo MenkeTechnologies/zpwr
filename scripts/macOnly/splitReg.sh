@@ -3,8 +3,8 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Wed Nov  8 23:57:19 EST 2017
-#####   Purpose: bash script to 
-#####   Notes: 
+#####   Purpose: bash script to
+#####   Notes:
 #}}}***********************************************************
 
 trap 'rm "$file"' INT
@@ -55,10 +55,10 @@ filter="$2"
 
 file=/tmp/temp$$
 cat > "$file"
-output=`cat /tmp/temp$$` 
+output=`cat /tmp/temp$$`
 delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
 
-[[ $delim -ne 0 ]] && {
+[[ $delim != 0 ]] && {
 
     if [[ -z "$inverse" ]]; then
         sed -n "1,$delim"p "$file" | "$filter"
