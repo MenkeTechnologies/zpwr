@@ -491,6 +491,10 @@ cd(){
     builtin cd "$@" && clearList
 }
 
+contribCount(){
+    git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn
+}
+
 gitCommitAndPush(){
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
