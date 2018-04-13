@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 11:59:28 EDT 2017
 #####   Purpose:  script to update multiple Github repos
-#####   Notes:TutorialFiles, PersonalWebsite, customTerminalInstaller 
+#####   Notes:TutorialFiles, PersonalWebsite, customTerminalInstaller
 #}}}***********************************************************
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
@@ -16,7 +16,7 @@ prettyPrint(){
     printf "\e[1;4m$1\n\e[0m"
 }
 
-[[ ! -z "$1" ]] && commitMessage="$1" || commitMessage="update"
+[[ -n "$1" ]] && commitMessage="$1" || commitMessage="update"
 
 
 #{{{                    MARK:installer
@@ -74,14 +74,14 @@ cp "$SCRIPTS"/*.sh "$tutorialDir/shell"
 cp -R "$SCRIPTS/macOnly" "$tutorialDir/shell"
 #README="$tutorialDir/shell/README.md"
 #echo "# Mac and Linux Scripts" > "$README"
-#bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"*.sh >> "$README" 
+#bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"*.sh >> "$README"
 #echo "# Mac Only Scripts" >> "$README"
 #bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"macOnly/*.sh >> "$README"
 
 prettyPrint "Copying tags file"
 cp "$HOME/Documents/shellScripts/tags" "$tutorialDir/shell"
 
-prettyPrint "Copying $HOME/.ctags" 
+prettyPrint "Copying $HOME/.ctags"
 cp "$HOME/.ctags" "$tutorialDir/ctags"
 
 prettyPrint "Copying vis ncmpcpp mpd"
@@ -136,10 +136,10 @@ dotdir="$websiteDir/downloads/dotfiles"
 [[ ! -d "$dotdir" ]] && mkdir -p "$dotdir"
 
 prettyPrint "Copying config files to websiteDir"
-cp "$HOME/.vimrc" "$dotdir" 
-cp "$HOME/.tmux.conf" "$dotdir" 
+cp "$HOME/.vimrc" "$dotdir"
+cp "$HOME/.tmux.conf" "$dotdir"
 cp "$HOME/.shell_aliases_functions.sh" "$dotdir"
-cp "$HOME/.zshrc" "$dotdir" 
+cp "$HOME/.zshrc" "$dotdir"
 
 prettyPrint "Copying scripts to $websiteDir"
 rm -rf "$websiteDir/downloads/scripts/"*
