@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Fri Jun 30 15:18:40 EDT 2017
 #####   Purpose: file templates for bash, perl, python
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 executableScriptsProcessing(){
@@ -23,8 +23,8 @@ addHeader(){
 #**************************************************************
 #####   Author: $(whoami | tr 'a-z' 'A-Z')
 #####   Date: $(date)
-#####   Purpose: $1 script to 
-#####   Notes: 
+#####   Purpose: $1 script to
+#####   Notes:
 #}}}***********************************************************
 EOM
 )
@@ -41,10 +41,7 @@ createTemplate(){
 }
 
 #if no arguments then exit
-if (( $# < 1 )); then
-    printf "I need an argument ...\n" >&2
-    exit 1
-fi
+(( $# < 1 )) && echo "Need one argument." >&2 && exit 1
 
 #file name is the first argument
 fileToBeExecuted="$1"

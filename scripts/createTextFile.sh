@@ -3,8 +3,8 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:14:31 EDT 2017
-#####   Purpose: bash script to create new script and edit it with SublimeText 
-#####   Notes: 
+#####   Purpose: bash script to create new script and edit it with SublimeText
+#####   Notes:
 #}}}***********************************************************
 
 executableScriptsProcessing(){
@@ -19,13 +19,13 @@ executableScriptsProcessing(){
 openTextEditor(){
     open -t "$newfile"
     #run python3 script with pyautogi commands for keyboard shortcuts
-    python3 $HOME/PycharmProjects/fromShell/textEditorTwoColumns.py
+    python3 "$HOME/PycharmProjects/fromShell/textEditorTwoColumns.py"
 }
 
 addHeader(){
     #first arg is the interpreter
     #second arg is the absolute path to file
-    firstString=$(cat<<EOM
+    firstString="$(cat<<EOM
 #!/usr/bin/env $1
 #{{{                    MARK:Header
 #**************************************************************
@@ -35,7 +35,7 @@ addHeader(){
 #####   Notes:
 #}}}***********************************************************
 EOM
-)
+)"
 
 echo "$firstString" > "$2"
 echo >> "$2"
@@ -64,10 +64,7 @@ createTheFile(){
 }
 
 #if no arguments then exit
-if [[ -z "$1" ]]; then
-    printf "I need an argument ...\n"
-    exit 1
-fi
+[[ -z "$1" ]] && echo "I need an argument ..." && exit 1
 
 #file name is the first argument
 newfile="$1"

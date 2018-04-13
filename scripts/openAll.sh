@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:20:30 EDT 2017
 #####   Purpose: bash script to open all files of given type
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 printf "\e[37;44m"
@@ -47,10 +47,10 @@ killCursor(){
 	printf "\e[0m"
 }
 #$# is number of arguments
-if [[ $# == 0 ]]; then
-	echo "Need one argument."
-	exit
-fi
+
+
+(( $# < 1 )) && echo "Need one argument." >&2 && exit 1
+
 
 #set the fileExtension variable to first argument
 declare -a fileExtensions
@@ -95,7 +95,7 @@ while read line; do
 			fi
 		done
 
-		
+
 	fi
 #find all files in pwd that have the fileExtensions in their names, remove last pipe from fileString
 done < <(find "$dir_to_search" -type f | egrep -i "${fileString%|}")
@@ -114,7 +114,7 @@ else
 fi
 
 printf "\e[1mDo want to open these ${#filesArray[@]} files? \e[0m"
-read -n1 
+read -n1
 
 if [[ "$REPLY" == "y" ]]; then
 	#loop through all files in array and open them
@@ -122,7 +122,7 @@ if [[ "$REPLY" == "y" ]]; then
 	for file in "${filesArray[@]}"; do
         open "$file"
 	done
-	
+
 else
 	#start prompt on next line
 	echo

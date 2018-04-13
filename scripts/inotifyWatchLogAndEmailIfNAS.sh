@@ -4,10 +4,8 @@ echo going down;\
 python -c 'print(\"_\" * 100)';
 " 15 2
 
-if [[ $# < 1 ]]; then
-    echo "First arg is the Directory!" >&2
-    exit 0
-fi
+
+(( $# < 1 )) && echo "First arg is the Directory!" >&2 && exit 1
 
 file="$1"
 exec 1>>"$LOGFILE"

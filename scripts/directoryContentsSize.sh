@@ -4,23 +4,21 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:15:26 EDT 2017
 #####   Purpose: bash script to list files and folders in pwd and optionally sort by size
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 sortedCommand=gsort
 
-type $sortedCommand >/dev/null 2>&1 || {
-sortedCommand=sort
-}
+type "$sortedCommand" >/dev/null 2>&1 || sortedCommand=sort
 # set -x
 usage(){
     #here doc for printing multiline
-    cat <<Endofmessage >&2
+    cat <<EOM >&2
     usage:
     -h	help
     -s 	summarize
     -a 	show hidden files
-Endofmessage
+EOM
 printf "\e[0m"
 }
 
@@ -29,11 +27,7 @@ printf "\e[0m"
 #checking for presence of sorted flag which is
 #set in getopts
 dontSummarizeSizes(){
-    if [[ $sorted ]]; then
-        du -sh * | $sortedCommand -h
-    else
-        du -sh * 
-    fi
+    [[ ! -z $sorted ]] && du -sh * | $sortedCommand -h || du -sh *
 }
 
 #show just summarize size
