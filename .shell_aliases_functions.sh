@@ -280,18 +280,14 @@ logg(){
 }
 
 xx(){
-    local counter
+    local counter cmd __DONE
     cmd="$1"
     [[ -z "$2" ]] && counter=100 || counter="$2"
 
     trap '__DONE=true' QUIT
     __DONE=false
     for iter in {1..$counter} ; do
-       if [[ $__DONE == true ]]; then
-           break
-       else
-           eval "$cmd" 
-       fi
+       [[ $__DONE == true ]] && break || eval "$cmd"
     done
 
     trap QUIT
@@ -299,7 +295,7 @@ xx(){
 
 cgh(){
     [[ -z "$1" ]] && user=MenkeTechnologies || user="$1"
-    curl -s https://github.com/$user | grep 'contributions' | head -1 | tr -s ' '
+    curl -s "https://github.com/$user" | grep 'contributions' | head -1 | tr -s ' '
 }
 
 jd(){
@@ -589,7 +585,7 @@ mp4(){
 }
 
 prettyPrint(){
-    [[ ! -z "$1" ]] && printf "\e[1m$1\e[0m\n" || {
+    [[ -n "$1" ]] && printf "\e[1m$1\e[0m\n" || {
         echo "Need one arg" >&2
         return 1
     }
