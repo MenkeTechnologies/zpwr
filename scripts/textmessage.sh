@@ -3,18 +3,12 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:03:02 EDT 2017
-#####   Purpose: bash  script to facilitate text messaging from command line 
+#####   Purpose: bash  script to facilitate text messaging from command line
 #####   Notes: high complexity
 #}}}***********************************************************
 
 prettyPrint () {
-	if [[ "$1" ]]
-	then
-		printf "\e[1m$1\e[0m\n"
-	else
-		echo "Need one arg" >&2
-		return 1
-	fi
+	if [[ -n "$1" ]] && printf "\e[1m$1\e[0m\n" || { echo "Need one arg" >&2 && return 1; }
 }
 
 if [[ -z "$1" ]]; then
@@ -77,7 +71,7 @@ else
                         fi
                         mutt -s "$1" "$2"@txt.att.net <&0 2>$LOGFILE
                         exit 0
-                    else 
+                    else
                         prettyPrint "Couldn't find name '$2'...Need number..." >&2
                     fi
 
@@ -125,7 +119,7 @@ else
 
                 mutt -s "$1" "$3@txt.att.net" <<< "$2" 2>$LOGFILE
                 exit 0
-            else 
+            else
                 prettyPrint "Couldn't find name '$3'...Need number..." >&2
                 exit 1
             fi

@@ -23,7 +23,7 @@ weHaveCCZE=no
 
 type ccze 1>/dev/null 2>&1 && weHaveCCZE=yes
 
-[[ ! -z "$1" ]] && weHaveCCZE=no
+[[ -n "$1" ]] && weHaveCCZE=no
 
 #dont care about std err
 #exec 2>/dev/null
