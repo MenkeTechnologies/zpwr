@@ -32,17 +32,17 @@ main(){
     cp -f scripts/* "$SCRIPTS"
     refreshers
 }
- 
+
 refreshers(){
     #create new zsh in right pane
     #space for safety as C-c tends to cut off first character
     tmux send-keys -t right C-c " nz" C-m
     #tmux kill-server
     #pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"
-    #sudo kill "$pid" 
+    #sudo kill "$pid"
 }
 
-while [[ 1 ]]; do
+while true; do
 
     cd "$dir" || { echo "Directory $dir does not exist" >&2 && exit 1; }
     git fetch origin

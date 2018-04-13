@@ -30,7 +30,7 @@ echo s5 >> temp."`whoami`"
 s5_pid="$!"
 
 {
-    while [[ true ]]; do
+    while true; do
         #if s4 and s5 echoed to file then we can
         #run s10
         if [[ $(wc -l temp."$(whoami)" \

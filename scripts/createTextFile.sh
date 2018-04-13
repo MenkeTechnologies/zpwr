@@ -64,7 +64,7 @@ createTheFile(){
 }
 
 #if no arguments then exit
-[[ -z "$1" ]] && echo "I need an argument ..." && exit 1
+[[ -z "$1" ]] && echo "${0##*/} needs an argument ..." && exit 1
 
 #file name is the first argument
 newfile="$1"

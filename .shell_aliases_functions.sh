@@ -575,8 +575,8 @@ color2(){
 }
 
 escapeRemove(){
-    while read INPUT; do
-        echo "$INPUT" | sed -e 's/\e\[.\{1,5\}m//g'
+    while read; do
+        echo "$REPLY" | sed -e 's/\e\[.\{1,5\}m//g'
     done
 }
 

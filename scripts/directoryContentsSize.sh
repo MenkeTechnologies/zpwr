@@ -73,12 +73,12 @@ done
 
 #check boolean for showing hidden files, sorted flag has been set or not set by here
 #exit after finishing to prevent illegal combination of -a and -t
-if [[ "$showHiddenBool" ]]; then
+if [[ -n "$showHiddenBool" ]]; then
     showHidden
     exit
     #check boolean for showing summary, sorted flag has been set or not set by here
     #exit after finishing
-elif [[ "$summarizeSizesBool" ]]; then
+elif [[ -n "$summarizeSizesBool" ]]; then
     summarizeSizes
     exit
 fi

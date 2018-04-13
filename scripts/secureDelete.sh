@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:25:10 EDT 2017
 #####   Purpose: bash script to securely delete a file with no hope of recovery
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 passes=7         #  Number of file-shredding passes.
@@ -21,7 +21,7 @@ displayProgress(){
     local arr=(  '|' '\' '-' '/' )
     local revarr=( '|' '/' '-' '\')
 
-    while [[ true ]]; do
+    while true; do
         for i in {0..1}; do
 
             for k in "${arr[@]}"; do
@@ -73,9 +73,9 @@ for i in "$@"; do
     then
         echo "File \"$file\" not found."
         exit $e_not_found
-    fi  
+    fi
 
-    printf "Are you sure you want to blot out \"$file\" (y/n)? "; 
+    printf "Are you sure you want to blot out \"$file\" (y/n)? ";
     startCursor
     read -n1 answer
     #newline
@@ -103,7 +103,7 @@ for i in "$@"; do
         sync         # Flush buffers yet again.
         let "pass_count += 1"
         echo
-    done  
+    done
 
     rm -f "$file"    # Finally, delete scrambled and shredded file.
     sync           # Flush buffers a final time.

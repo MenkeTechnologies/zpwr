@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:19:24 EDT 2017
 #####   Purpose: bash script to watch output of command using clear
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 trap "tput cnorm; exit" INT TERM QUIT
@@ -46,7 +46,7 @@ clear
 
 tput civis
 
-while [[ true ]]; do
+while true; do
 
     x=$(eval "$1")
     clear
