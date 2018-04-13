@@ -7,7 +7,7 @@
 #####   Notes:
 #}}}***********************************************************
 
-my_home_dir=$HOME
+my_home_dir="$HOME"
 my_scripts_dir="$SCRIPTS"
 my_backup_dir="$my_scripts_dir/rcBackups"
 
