@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:10:25 EDT 2017
 #####   Purpose: bash script to rename multiple files
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 printf "\e[37;44m"
 
@@ -27,7 +27,6 @@ displayProgress(){
         local temp=${spinner#?}               # remove first character from $spinner
         spinner="$temp${spinner%"$temp"}" # and add it to the end
         sleep "$delay"
-
     done
 }
 
@@ -47,19 +46,18 @@ killCursor(){
 
 convertFiles(){
 
-    for file in `ls *.$originalFileEnding`; do
-
+    for file in $(ls *.$originalFileEnding); do
         #get first part of name ie frame, delimited by underscore
-        local first=`echo ${file%%$delim*}`
-        local last=`echo ${file##*_}`
-        local number=`echo ${last%%.*}`
+        local first=$(echo ${file%%$delim*})
+        local last=$(echo ${file##*_})
+        local number=$(echo ${last%%.*})
         #get number convert to base 10 and strip leading zeros
         local number=$((10#$number))
 
-        local newfile=$first$number.$endFileEnding
+        local newfile="$first$number.$endFileEnding"
 
         if [[ -z "$1" ]]; then
-            echo mv "$file" "$newfile"
+            mv "$file" "$newfile"
         else
             mv "$file" "$newfile"
         fi
@@ -68,11 +66,7 @@ convertFiles(){
 }
 
 checkForExistence(){
-    ls *.$originalFileEnding &> /dev/null
-    if [[ $? == 1 ]]; then
-        echo "No '$originalFileEnding' files found..."
-        exit
-    fi
+    ls *.$originalFileEnding &> /dev/null || { echo "No '$originalFileEnding' files found..."; exit; }
 }
 
 #store file ending in originalFileEnding
@@ -95,7 +89,7 @@ read -n1 -p "Proceed? "
 echo
 
 case "$REPLY" in
-    [yY] ) 
+    [yY] )
         startCursor
         convertFiles change
         killCursor

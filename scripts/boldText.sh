@@ -11,6 +11,6 @@ BLUE='\e[37;44m'
 RESET='\e[0m'
 
 #loop through stdin and add escape sequences at head and tail of each line
-while read input; do
-	printf "\e[1m$input\n\e[0m"
+while read; do
+	printf "\e[1m$REPLY\n\e[0m"
 done
