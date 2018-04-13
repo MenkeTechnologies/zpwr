@@ -12,6 +12,7 @@ export TMUX_PREFIX="x"
 export TMUX_REMOTE_PREFIX="b"
 PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
 export PI_ARRAY
+export DELIMITER_CHAR='%'
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
@@ -492,7 +493,7 @@ cd(){
 }
 
 contribCount(){
-    git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn | perl -panE 's/(\d) ([a-zA-Z])(.*)$/\1 .\2\3./' | alternatingPrettyPrint
+    git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn | perl -panE 's/(\d) (\D)(.*)$/\1 '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | alternatingPrettyPrint
 }
 
 gitCommitAndPush(){
@@ -600,7 +601,7 @@ alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
-        cat | perl -F\\. -anE '
+        cat | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -611,7 +612,7 @@ alternatingPrettyPrint(){
         $counter++;
         };print "\x1b[0m"'
     else
-        echo "$@" | perl -F\\. -anE '
+        echo "$@" | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -784,7 +785,7 @@ pirun(){
     local picounter
     picounter=1
     for pi in "${PI_ARRAY[@]}" ; do
-        alternatingPrettyPrint "Executing .'$1'. on .$pi."
+        alternatingPrettyPrint "Executing %'$1'% on %$pi%"
         if [[ -z $2 ]]; then
             ssh "${pi%:*}" "$1" 2>/dev/null
         else

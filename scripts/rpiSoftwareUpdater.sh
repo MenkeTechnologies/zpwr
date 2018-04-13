@@ -23,7 +23,7 @@ alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
-        cat | perl -F\\. -anE '
+        cat | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -34,7 +34,7 @@ alternatingPrettyPrint(){
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F\\. -anE '
+        perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -83,16 +83,16 @@ gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 prettyPrint "Updating Vundle Plugins"
 #vim -c VundleUpdate -c quitall
 
-alternatingPrettyPrint "Updating Ruby .Gems. for .$(whoami). on .$(hostname)."
+alternatingPrettyPrint "Updating Ruby ${DELIMITER_CHAR}Gems${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
 sudo gem update
 
 exists npm && {
-    alternatingPrettyPrint "Updating .NPM. packages for .$(whoami). on.$(hostname)."
+    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}NPM${DELIMITER_CHAR} packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
     do
         sudo npm install -g "$package"
     done
-    alternatingPrettyPrint "Updating .NPM. itself for .$(whoami). on .$(hostname)."
+    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}NPM${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     sudo npm install -g npm
 }
 
