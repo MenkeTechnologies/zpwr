@@ -27,11 +27,7 @@ if (( $# == 0 )); then
 else
     output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
 
-    if [[ -n "$FILTER" ]]; then
-        echo "$output" | "$FILTER"
-    else
-        echo "$output"
-    fi
+    if [[ -n "$FILTER" ]] && echo "$output" | "$FILTER" || echo "$output"
 
 fi
 

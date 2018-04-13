@@ -3,7 +3,7 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:03:45 EDT 2017
-#####   Purpose: bash  script to update all command line packages locally and on servers 
+#####   Purpose: bash  script to update all command line packages locally and on servers
 #####   Notes:
 #}}}***********************************************************
 
@@ -58,7 +58,7 @@ prettyPrint(){
 alternatingPrettyPrint(){
     counter=0
 
-    if [[ -z $1 ]]; then
+    if [[ -z "$1" ]]; then
         cat | perl -F\\. -anE '
         my $counter=0;
         for my $arg (@F){
@@ -121,7 +121,7 @@ if [[ $skip != true ]]; then
         #store in outdated
         outdated=$(pip3 list --outdated | awk '{print $1}')
 
-        #install outdated pip modules 
+        #install outdated pip modules
         #split on space
         for i in $outdated; do
             pip3 install --upgrade "$i" #&> /dev/null
@@ -139,7 +139,7 @@ if [[ $skip != true ]]; then
         #store in outdated
         outdated=$(pip2 list --outdated | awk '{print $1}')
 
-        #install outdated pip modules 
+        #install outdated pip modules
         #split on space
         for i in $outdated; do
             pip2 install --upgrade "$i" #&> /dev/null
@@ -249,7 +249,7 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to use string after ssh
-    cat $SCRIPTS/rpiSoftwareUpdater.sh | ssh -x "$hostname" "cat | bash "
+    cat "$SCRIPTS/rpiSoftwareUpdater.sh" | ssh -x "$hostname" "cat | bash "
 }
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for

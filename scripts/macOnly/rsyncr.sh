@@ -4,14 +4,11 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 19:24:04 EDT 2017
 #####   Purpose: bash script to rsync to RPi and upload to Tomcat
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 
-if [[ -z "$1" || -z "$2" ]]; then
-    echo "Need two args local and remote dirs....." >&2
-    exit 1
-fi
+[[ -z "$2" ]] && echo "Need two args local and remote dirs....." >&2 && exit 1
 
 localDIR="$1"
 remoteDIR="$2"
