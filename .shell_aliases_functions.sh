@@ -493,7 +493,13 @@ cd(){
 }
 
 contribCount(){
-    git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn | perl -panE 's/(\d) (\D)(.*)$/\1 '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | alternatingPrettyPrint
+    lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
+    lineCount="$(echo $lines | wc -l)"
+    if (( $lineCount > 10 )); then
+        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1 '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | alternatingPrettyPrint | less
+    else
+        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1 '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | alternatingPrettyPrint
+    fi
 }
 
 gitCommitAndPush(){
@@ -771,7 +777,6 @@ rename(){
             #statements
             mv "$file" "$(echo "$file" | sed -E "$search")"
         fi
-        
     done
 }
 
