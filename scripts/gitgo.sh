@@ -4,7 +4,7 @@
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:19:26 EDT 2017
 #####   Purpose: bash script to facilitate github repo creation and committing
-#####   Notes: 
+#####   Notes:
 #}}}***********************************************************
 
 
@@ -167,7 +167,7 @@ commitTheDirectory(){
     if [[ $? > 0 ]]; then
         local REPO_NAME="$(git remote -v | awk '{print $2}' | tail -1 | tr -d ' ')"
         getRemoteDetails "${REPO_NAME##*/}"
-    fi	
+    fi
 }
 
 ##########################################
@@ -197,10 +197,7 @@ done
 #if no options and 1 argument then commit with 1 argument
 #gitPush function checks for presence of .git directory
 if [[ $OPTIND == 1 ]]; then
-    if [[ -z "$1" ]]; then
-        gitPush "default-commit"
-    else
-        gitPush "$1"
+    [[ -z "$1" ]] && gitPush "default-commit" || gitPush "$1"
     fi
 fi
 

@@ -3,8 +3,8 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Mon Jul 10 12:05:02 EDT 2017
-#####   Purpose: bash script to find all pics 
-#####   Notes: 
+#####   Purpose: bash script to find all pics
+#####   Notes:
 #}}}***********************************************************
 tput civis
 
@@ -36,7 +36,7 @@ displayProgress(){
 local arr=(  '|' '\' '-' '/' )
 local revarr=( '|' '/' '-' '\')
 
-while [[ 1 ]]; do
+while true; do
 
 	for i in {0..1}; do
 
@@ -62,7 +62,7 @@ sleep 1
 killCursor
 echo
 
-#user gives the output directory 
+#user gives the output directory
 read -p "What is the output directory: " destinationDirectory
 read -p "What is the directory to search: " searchDirectory
 
@@ -92,7 +92,7 @@ while read picture; do
 		cp $picture $destinationFile
 	fi
 
-#find all jpeg, jpg and png files	
+#find all jpeg, jpg and png files
 done < <(find $searchDirectory -iname "*png" -o -iname "*jpeg" -o -iname "*jpg")
 
 exit 0
