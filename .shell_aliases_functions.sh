@@ -492,7 +492,7 @@ cd(){
 }
 
 contribCount(){
-    git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn | perl -panE 's/(\d) ([a-zA-Z])(.*)$/\1 .\2\3./'
+    git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn | perl -panE 's/(\d) ([a-zA-Z])(.*)$/\1 .\2\3./' | alternatingPrettyPrint
 }
 
 gitCommitAndPush(){
