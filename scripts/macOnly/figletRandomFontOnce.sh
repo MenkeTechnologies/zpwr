@@ -7,7 +7,7 @@
 #####   Notes:
 #}}}***********************************************************
 
-FIGLET_DIR=/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts
+FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
 TEXT_TO_DISPLAY="$1"
 FILTER="$2"
 
@@ -27,7 +27,7 @@ if (( $# == 0 )); then
 else
     output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
 
-    if [[ -n "$FILTER" ]] && echo "$output" | "$FILTER" || echo "$output"
+    [[ -n "$FILTER" ]] && echo "$output" | "$FILTER" || echo "$output"
 
 fi
 
