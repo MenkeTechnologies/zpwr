@@ -1132,10 +1132,11 @@ supernatural-space() {
                     } || PTR_Record=bad
 
                         [[ $PTR_Record != bad ]] && LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord\\b@${PTR_Record:0:-1}@g")"
-                    } || zle _expand_alias
+                    }
 
                 }
             }
+            zle _expand_alias
         fi
 
     fi
