@@ -7,8 +7,8 @@
 #####   Notes: watches 2 repos
 #}}}***********************************************************
 
-dir="$HOME/forkedRepos/customTerminalInstaller"
-moredir="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
+CONFIG_DIR="$HOME/forkedRepos/customTerminalInstaller"
+ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
 
 gitters(){
     git reset --hard origin/master
@@ -44,7 +44,7 @@ refreshers(){
 
 while true; do
 
-    cd "$dir" || { echo "Directory $dir does not exist" >&2 && exit 1; }
+    cd "$CONFIG_DIR" || { echo "Directory $CONFIG_DIR does not exist" >&2 && exit 1; }
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
@@ -53,7 +53,7 @@ while true; do
         main
     fi
 
-    cd "$moredir" || { echo "Directory $moredir does not exist" >&2 && exit 1; }
+    cd "$ZSH_COMP_DIR" || { echo "Directory $ZSH_COMP_DIR does not exist" >&2 && exit 1; }
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
