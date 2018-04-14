@@ -70,6 +70,8 @@ case "$fileToBeExecuted" in
         ;;
     *.lua ) executeTheFile lua "$fileToBeExecuted"
         ;;
+    *.groovy ) executeTheFile groovy "$fileToBeExecuted"
+        ;;
     *.tcl ) executeTheFile tclsh "$fileToBeExecuted"
         ;;
     *.clj ) executeTheFile clojure "$fileToBeExecuted"
