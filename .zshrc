@@ -671,10 +671,10 @@ my-accept-line () {
     #do we want to clear the screen and run ls after we exec the current line?
     local commandsThatModifyFiles regex mywords line
 
-     commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
+    commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
     for command in ${commandsThatModifyFiles[@]}; do
-         regex="^sudo $command .*\$|^$command .*\$"
+        regex="^sudo $command .*\$|^$command .*\$"
         print "$BUFFER" | egrep -q "$regex" && {
             __WILL_CLEAR=true
         }
@@ -684,16 +684,19 @@ my-accept-line () {
 
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
 
-         mywords=("${(z)BUFFER}")
+        mywords=("${(z)BUFFER}")
 
         if [[ ! -z $(alias -g $mywords[1]) ]];then
-             line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
+             line="$(cat $HOME/.common_aliases | grep \
+                 "^$mywords[1]=.*" | awk -F= '{print $2}')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
             else
                 #non global alias
-                print "$line" | fgrep "'" && BUFFER="${line:1:-1} $mywords[2,$]" || BUFFER="$line $mywords[2,$]"
+                print "$line" | fgrep "'" && \
+                    BUFFER="${line:1:-1} $mywords[2,$]" || \
+                    BUFFER="$line $mywords[2,$]"
             fi
         fi
 
@@ -1052,7 +1055,6 @@ globalAliasesInit(){
 
 globalAliasesInit
 
-
 supernatural-space() {
     local __CORRECT_WORDS
     declare -A __CORRECT_WORDS
@@ -1077,22 +1079,19 @@ supernatural-space() {
     __CORRECT_WORDS[directory]="direcotry directroy"
 	    #statements
     local TEMP_BUFFER mywords badWords
-     TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
-     mywords=("${(z)TEMP_BUFFER}")
-     finished=false
+    TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
+    mywords=("${(z)TEMP_BUFFER}")
+    finished=false
 
     for key in ${(k)__CORRECT_WORDS[@]}; do
-         badWords=("${(z)__CORRECT_WORDS[$key]}")
+        badWords=("${(z)__CORRECT_WORDS[$key]}")
         for misspelling in $badWords[@];do
-
-            #echo "Does $misspelling matches $mywords[-1]?" >> $LOGFILE
             #echo "words: $mywords" >> $LOGFILE
-
             if [[ $mywords[-1] == $misspelling ]]; then
                 #echo  >> $LOGFILE
-            #echo "$misspelling matches $mywords[-1]!" >> $LOGFILE
                 #echo  >> $LOGFILE
-                LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$misspelling\\b@$key@g")"
+                LBUFFER="$(print -R "$LBUFFER" | sed -E \
+                    "s@\\b$misspelling\\b@$key@g")"
                 finished=true
                 break
             fi
@@ -1106,8 +1105,9 @@ supernatural-space() {
             #dont expand first word if \,' or " and buffer is one word long
             [[ -z $(alias -g $LBUFFER) ]] && {
                 [[ ${LBUFFER:0:1} != '\' ]] && \
-                [[ ${LBUFFER:0:1} != "'" ]] && [[ ${LBUFFER:0:1} != '"' ]] && zle _expand_alias
-
+                [[ ${LBUFFER:0:1} != "'" ]] && \
+                [[ ${LBUFFER:0:1} != '"' ]] && \
+                zle _expand_alias
             }
         }
     else
