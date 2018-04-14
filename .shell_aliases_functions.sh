@@ -359,18 +359,18 @@ clearList () {
             } || {
                 ls_command="ls -iFlhAO"
             }
-            lib_command="otool -L"
+        lib_command="otool -L"
     else
-            exists grc && {
-                ls_command="grc -c "$HOME/conf.gls" \
-                ls -iFlhA --color=always"
+        exists grc && {
+            ls_command="grc -c "$HOME/conf.gls" \
+            ls -iFlhA --color=always"
             } || {
                 ls_command="ls -iFhlA"
             }
-    lib_command="ldd"
+        lib_command="ldd"
     fi
 
-        if [[ ! -z "$1" ]]; then
+        if [[ -n "$1" ]]; then
             for command in "$@"; do
                 exists $command &&  {
                     #exe matching
