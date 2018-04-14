@@ -1137,13 +1137,15 @@ supernatural-space() {
                 }
             }
             zle _expand_alias
+            zle expand-history
+            zle expand-word
+        else
+            #its a file
         fi
 
     fi
 
-     zle expand-history
-     zle expand-word
-     zle self-insert
+    zle self-insert
 }
 
 terminate-space(){
