@@ -1431,13 +1431,14 @@ if [[ "$(uname)" == Linux ]]; then
 
         \rm ~/temp$$
 
-        if [[ $mobile == false ]]; then
-            if [[ -z "$(tmux list-client)" ]]; then
+        if [[ $mobile == "false" ]]; then
+            if [[ -z "$(tmux list-clients)" ]]; then
                 echo "no tmux clients" >> "$LOGFILE"
-
                 {
                     tmux ls && { tmux attach; echo "attaching" >> "$LOGFILE"; }  || { tmux new-session \; source-file ~/.tmux/control-window; echo "creating new tmux session"; }
                 } &> /dev/null 
+            else
+                tmux attach
             fi
         fi
         
