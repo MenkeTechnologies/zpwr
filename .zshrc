@@ -99,19 +99,19 @@ else
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
     case $distroName in
-        (debian|raspbian|kali) 
+        (debian|raspbian|kali)
             plugins+=(debian)
             ;;
-        (ubuntu) 
+        (ubuntu)
             plugins+=(ubuntu)
             ;;
-        (centos|rhel) 
+        (centos|rhel)
             plugins+=(yum dnf)
             ;;
-        (opensuse) 
+        (opensuse)
             plugins+=(suse z)
             ;;
-        (fedora) 
+        (fedora)
             plugins+=(yum fedora dnf)
             ;;
         (*) :
@@ -170,7 +170,7 @@ gitfunc () {
 gitCommitAndPush "$BUFFER" && {
         print -sr "$BUFFER"
         zle .kill-whole-line
-        printf "\x1b[0m"	
+        printf "\x1b[0m"
         zle .redisplay
     } || {
         printf "\x1b[0;1;31m"
@@ -178,7 +178,7 @@ gitCommitAndPush "$BUFFER" && {
         echo
         printf "BLACKLISTED: $(pwd -P)\n" >&2
         BUFFER=""
-        printf "\x1b[0m"	
+        printf "\x1b[0m"
         zle .accept-line
     }
 }
@@ -351,8 +351,8 @@ basicSedSub(){
 
         zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
         read -k key || return 1
-    done	
-    echo "$SEDARG" | grep -q "@" && { 
+    done
+    echo "$SEDARG" | grep -q "@" && {
         printf "\x1b[0;1;31m"
     zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
     printf "\x1b[0m"
@@ -403,7 +403,7 @@ clipboard(){
         print  "\"\x1b[0;34m to System Clipboard!"
         echo
         zle .redisplay
-        } || { 
+        } || {
             echo
             printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
             echo
@@ -426,7 +426,7 @@ surround(){
 
     #TODO = only if next char is space or end of line then insert quotes
     case "$nextChar" in
-        [a-zA-Z0-9]*) 
+        [a-zA-Z0-9]*)
             BUFFER="$LBUFFER$KEYS$RBUFFER"
             zle .vi-forward-char
             return 0
@@ -473,7 +473,7 @@ surround(){
         "(")
         BUFFER="$LBUFFER()$RBUFFER"
             ;;
-    *) 
+    *)
         ;;
     esac
     zle .vi-forward-char
@@ -520,7 +520,7 @@ deleteMatching(){
               BUFFER="$LBUFFER${RBUFFER/)/}"
             fi
             ;;
-        *) 
+        *)
             ;;
     esac
 
@@ -658,7 +658,7 @@ bindkey -M vicmd '\e^T' transpose-words
 bindkey -M viins '^T' transpose-chars
 bindkey -M vicmd '^T' transpose-chars
 
-bindkey -M viins '^A' beginning-of-line 
+bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
@@ -681,7 +681,7 @@ my-accept-line () {
     done
 
     [[ -z "$__GLOBAL_ALIAS_PREFIX" ]] && {
-    
+
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
 
          mywords=("${(z)BUFFER}")
@@ -696,10 +696,10 @@ my-accept-line () {
                 print "$line" | fgrep "'" && BUFFER="${line:1:-1} $mywords[2,$]" || BUFFER="$line $mywords[2,$]"
             fi
         fi
-    
+
     }
 
-    zle .accept-line 
+    zle .accept-line
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
 }
@@ -715,13 +715,13 @@ precmd(){
             __WILL_CLEAR=false
         fi
     }
-    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && export DISPLAY=$(cat ~/.display.txt) || echo $DISPLAY > ~/.display.txt 
+    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && export DISPLAY=$(cat ~/.display.txt) || echo $DISPLAY > ~/.display.txt
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
 }
-    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && export DISPLAY=$(cat ~/.display.txt) || echo $DISPLAY > ~/.display.txt 
+    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && export DISPLAY=$(cat ~/.display.txt) || echo $DISPLAY > ~/.display.txt
 
 rationalize-dot (){
     if [[ $LBUFFER = *.. ]]; then
@@ -740,7 +740,7 @@ bindkey -M listscroll q send-break
 bindkey -M listscroll f complete-word
 
 bindkey -M menuselect '^d' accept-and-menu-complete
-bindkey -M menuselect '^f' accept-and-infer-next-history 
+bindkey -M menuselect '^f' accept-and-infer-next-history
 
 [[ "$(uname)" == Darwin ]] && {
     PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print}" | tr -s ' ' | cut -d ' ' -f9-)"
@@ -1019,9 +1019,8 @@ zstyle ':completion:*:functions' ignored-patterns '_*'
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
+__GLOBAL_ALIAS_PREFIX=j
 globalAliasesInit(){
-    local __GLOBAL_ALIAS_PREFIX
-    __GLOBAL_ALIAS_PREFIX=j
     alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
     alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
@@ -1031,7 +1030,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}sp="| sed -n ',\$p'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '' "
-    alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail" 
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail"
     alias -g ${__GLOBAL_ALIAS_PREFIX}w='| wc -l'
     alias -g ${__GLOBAL_ALIAS_PREFIX}n="> /dev/null 2>&1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
@@ -1108,14 +1107,14 @@ supernatural-space() {
             [[ -z $(alias -g $LBUFFER) ]] && {
                 [[ ${LBUFFER:0:1} != '\' ]] && \
                 [[ ${LBUFFER:0:1} != "'" ]] && [[ ${LBUFFER:0:1} != '"' ]] && zle _expand_alias
-            
+
             }
         }
     else
 		lastWord=${mywords[-1]}
         if [[ ! -f "$lastWord" ]]; then
             type -a "$lastWord" &> /dev/null || {
-            
+
                 echo $lastWord | grep -qE '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\.?$' && {
                     #DNS lookup
                     A_Record=$(host $lastWord) 2>/dev/null && {
@@ -1123,7 +1122,7 @@ supernatural-space() {
 
                     } || A_Record=bad
 
-                    [[ $A_Record != bad ]] && LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord@$A_Record@g")" 
+                    [[ $A_Record != bad ]] && LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord@$A_Record@g")"
 
                 } || {
                     echo $lastWord | grep -qE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' && {
@@ -1210,7 +1209,7 @@ else
         if [[ "$distroName" == raspbian ]]; then
             builtin cd "$D"
             type ponysay 1>/dev/null 2>&1 && {
-                bash "$HOME/motd.sh" | ponysay -W 120 
+                bash "$HOME/motd.sh" | ponysay -W 120
             } || bash "$HOME/motd.sh"
         elif [[ "$distro" == opensuse ]];then
             builtin cd "$D"
@@ -1238,13 +1237,13 @@ export SAVEHIST=10000000
 export HISTSIZE=10000000
 
 
-#set right prompt string during continuation 
+#set right prompt string during continuation
 RPS2='+%N:%i:%^'
 export PS3=$'\e[1;34m-->>>> \e[0m'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-    source "$HOME/.powerlevel9kconfig.sh"
+    #source "$HOME/.powerlevel9kconfig.sh"
     #make this environ vars show up in prompt %~
     : ~WCC
     : ~HOMEBREW_HOME_FORMULAE
@@ -1302,32 +1301,27 @@ fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
-
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
-    export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS --reverse --border --height 100%" 
-    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview \"[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
-
+    export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS --reverse --border --height 100%"
+    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview \"[[ -f {} ]] && { echo {} | egrep '\.jar$' && jar tf {} ; } || rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
-    export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] &&
-        rougify -t $ROUGIFY_THEME {} 2>/dev/null || {
-            [[ -e {} ]] && {
-                stat {} | fold -80 | head -500
-            } || {
-                source ~/.shell_aliases_functions.sh
-            { 
-                echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
-                    whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
-                } || {
-                    cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} || {
-                    whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
-                    }
-                }
-                
-             } | cowsay | ponysay
-       }
-    }\""
+    export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] && { echo {} | egrep '\.jar$' && jar tf {} ; } || { rougify -t $ROUGIFY_THEME {} 2>/dev/null || {
+                [[ -e {} ]] && stat {} | fold -80 | head -500 || {
+                    source ~/.shell_aliases_functions.sh
+                    {
+                        echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
+                            whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+                        } || {
+                            cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} || {
+                            whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+                            }
+                        }
 
+                     } | cowsay | ponysay
+           }
+        }
+    }\""
     export FZF_COMPLETION_TRIGGER=';'
 }
 
@@ -1338,15 +1332,13 @@ _fzf_complete_echo() {
       declare -xp | sed 's/=.*//' | sed 's/.* //'
     )
 }
-
 _fzf_complete_alias() {
   _fzf_complete '+m' "$@" < <(
       alias | sed 's/=.*//'
         )
 }
 
-[[ -f "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" ]] && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" 
-
+[[ -f "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" ]] && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh"
 local base03="234"
 local base02="235"
 local base01="240"
@@ -1363,7 +1355,6 @@ local violet="61"
 local blue="33"
 local cyan="37"
 local green="64"
-
 # Solarized Dark color scheme for fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
@@ -1406,20 +1397,20 @@ if [[ "$(uname)" == Linux ]]; then
         cat ~/.ssh/authorized_keys | grep MenkeTechnologies > ~/temp$$
 
         case $distroName in
-            (debian|raspbian|kali) 
+            (debian|raspbian|kali)
                 out="$(cat /var/log/auth.log | grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
                 ;;
-            (ubuntu) 
+            (ubuntu)
                 ;;
-            (centos|rhel) 
+            (centos|rhel)
                 out="$(tail /var/log/messages)"
                 ;;
-            (opensuse) 
+            (opensuse)
                 out="$(journalctl -u sshd.service | grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
-            (fedora) 
+            (fedora)
                 out="$(sudo cat /var/log/secure | grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
@@ -1438,12 +1429,12 @@ if [[ "$(uname)" == Linux ]]; then
                 echo "no tmux clients" >> "$LOGFILE"
                 {
                     tmux ls && { tmux attach; echo "attaching" >> "$LOGFILE"; }  || { tmux new-session \; source-file ~/.tmux/control-window; echo "creating new tmux session"; }
-                } &> /dev/null 
+                } &> /dev/null
             else
                 tmux attach
             fi
         fi
-        
+
     }
 
 fi
