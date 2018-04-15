@@ -685,7 +685,7 @@ EOF
         cat <<\EOF
 #!/usr/bin/env bash
 
-[[ "$1" ]] && cd "$1"
+[[ -n "$1" ]] && cd "$1"
 
 ps -ef | grep platformio | grep -v grep > /dev/null && {
 
