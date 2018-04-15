@@ -203,7 +203,7 @@ alias ud=" execpy udemy.py"
 alias ipa="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's/addr://' | head -1"
 alias pgrep='pgrep -l'
 #**********************************************************************
-#                           MARK:SHEL LSCRIPTS
+#                           MARK:SHELL SCRIPTS
 #**********************************************************************
 alias ct="bash $SCRIPTS/createTextFile.sh"
 alias u="bash $SCRIPTS/upLoadPi.sh"
@@ -230,13 +230,14 @@ alias mkdir='mkdir -pv'
 #**********************************************************************
 #                           MARK:REMOTE SHELLS SCRIPTS
 #**********************************************************************
-
 exists tput && {
     bold=$(tput bold || tput md)
     red=$(tput setaf 1)
 }
-alias ic="idea create"
-alias il="idea list"
+exists idea && {
+    alias ic="idea create"
+    alias il="idea list"
+}
 #**********************************************************************
 
 #**************************************************************
@@ -269,7 +270,7 @@ alias il="idea list"
 
 }
 s(){
-    [[ -z "$1" ]] && subl . || /usr/local/bin/s "$@"
+    [[ -z "$1" ]] && subl . || command s "$@"
 }
 
 logg(){
