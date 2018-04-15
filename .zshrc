@@ -91,13 +91,15 @@ PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
 if [[ "$(uname)" == "Darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && plugins+=(tmux)
+    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' \
+        && plugins+=(tmux)
 else
     #linux
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && plugins+=(tmux)
+    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' \
+        && plugins+=(tmux)
     plugins+=(systemd)
-    distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
-
+    distroName="$(grep '^ID=' /etc/os-release | \
+        cut -d= -f2 | tr -d \")"
     case $distroName in
         (debian|raspbian|kali)
             plugins+=(debian)
@@ -191,7 +193,8 @@ tutsUpdate() {
             zle .accept-line
         else
             zle .kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh '${commitMessage}' >> \"$LOGFILE\" 2>&1 & )"
+            BUFFER="( tutorialConfigUpdater.sh \
+                '${commitMessage}' >> \"$LOGFILE\" 2>&1 & )"
             zle .accept-line
         fi
     else
@@ -213,15 +216,13 @@ sshRegain() {
         else
             return 1
         fi
-        } || {
-            zle .kill-whole-line
-            echo "$(ps -ef)" | grep -q 'tmux ' && {
-                BUFFER=tmm
-            } || {
-                BUFFER=tmm_full
-            }
-            zle .accept-line
-        }
+    } || {
+        zle .kill-whole-line
+        echo "$(ps -ef)" | grep -q 'tmux ' && {
+            BUFFER=tmm
+        } || BUFFER=tmm_full
+        zle .accept-line
+    }
 }
 
 dbz() {
@@ -245,26 +246,31 @@ changeQuotes(){
         __OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
     elif (( $__COUNTER % 8 == 1 )); then
-        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
+        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" \
+            != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
             __COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\'/\"}
     elif (( $__COUNTER % 8 == 2 )); then
-        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
+        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" \
+            != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
             __COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\"/\`}
     elif (( $__COUNTER % 8 == 3 )); then
-        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
+        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" \
+            != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
             __COUNTER=0
             return 1
         fi
         _SEMI_OLDBUFFER="$BUFFER"
         BUFFER="\"${BUFFER}\""
     elif (( $__COUNTER % 8 == 4 )); then
-        if [[ "$(echo "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
+        if [[ "$(echo "$_SEMI_OLDBUFFER" \
+            | tr -d "'\"\`" )" != "$(echo "$BUFFER" \
+            | tr -d "\`\"" )" ]]; then
             __COUNTER=0
             return 1
         fi
@@ -278,7 +284,8 @@ changeQuotes(){
             return 1
             #statements
         fi
-        if [[ "$_SEMI_OLDBUFFER" != "$(echo "${BUFFER:2:-1}" )" ]]; then
+        if [[ "$_SEMI_OLDBUFFER" != \
+            "$(echo "${BUFFER:2:-1}" )" ]]; then
             __COUNTER=0
             return 1
         fi
@@ -289,7 +296,8 @@ changeQuotes(){
             return 1
             #statements
         fi
-        if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER:3:-2}" ]]; then
+        if [[ "${_SEMI_OLDBUFFER}" != \
+            "${BUFFER:3:-2}" ]]; then
             __COUNTER=0
             return 1
         fi
@@ -328,14 +336,13 @@ basicSedSub(){
     read -k key
     local -r start=$key
     while (( (#key)!=(##\n) && (#key)!=(##\r) )) ; do
-
         if (( (#key)==(##\>) ));then
             printf "\x1b[0;4;1;34m"
         else
             printf "\x1b[1;44;37m"
-            echo "$SEDARG" | grep -q '>' && printf "\x1b[0;1;37;45m"
+            echo "$SEDARG" | grep -q '>' && printf \
+                "\x1b[0;1;37;45m"
         fi
-
         if (( (#key)==(##^?) || (#key)==(##^h) ));then
             SEDARG=${SEDARG[1,-2]}
             printf "\x1b[0m"
@@ -347,14 +354,12 @@ basicSedSub(){
                 SEDARG="${SEDARG}$key"
             fi
         fi
-
-
         zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
         read -k key || return 1
     done
     echo "$SEDARG" | grep -q "@" && {
         printf "\x1b[0;1;31m"
-    zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
+        zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
     printf "\x1b[0m"
     return 1
 }
@@ -405,7 +410,8 @@ clipboard(){
         zle .redisplay
         } || {
             echo
-            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
+            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\
+                \x1b[0;34m Found!\n"
             echo
             zle .redisplay
         }
@@ -424,7 +430,8 @@ surround(){
 
     count=$(echo "$BUFFER" | fgrep -o "$KEYS" | wc -l)
 
-    #TODO = only if next char is space or end of line then insert quotes
+    #TODO = only if next char is space or
+    #end of line then insert quotes
     case "$nextChar" in
         [a-zA-Z0-9]*)
             BUFFER="$LBUFFER$KEYS$RBUFFER"
@@ -432,35 +439,35 @@ surround(){
             return 0
             ;;
        *)
-               ;;
+            ;;
     esac
 
 
     case "$KEYS" in
         '"')
             if (( $count % 2 == 1 )); then
-                    BUFFER="$LBUFFER$KEYS$RBUFFER"
-                    echo odd Char is $count >> $LOGFILE
-                    zle .vi-forward-char
-                    return 0
+                BUFFER="$LBUFFER$KEYS$RBUFFER"
+                echo odd Char is $count >> $LOGFILE
+                zle .vi-forward-char
+                return 0
             fi
             BUFFER="$LBUFFER\"\"$RBUFFER"
             ;;
         '`')
             if (( $count % 2 == 1 )); then
-                    BUFFER="$LBUFFER$KEYS$RBUFFER"
-                    #echo odd Char is $count >> $LOGFILE
-                    zle .vi-forward-char
-                    return 0
+                BUFFER="$LBUFFER$KEYS$RBUFFER"
+                #echo odd Char is $count >> $LOGFILE
+                zle .vi-forward-char
+                return 0
             fi
             BUFFER="$LBUFFER\`\`$RBUFFER"
             ;;
         "'")
             if (( $count % 2 == 1 )); then
-                    BUFFER="$LBUFFER$KEYS$RBUFFER"
-                    #echo odd Char is $count >> $LOGFILE
-                    zle .vi-forward-char
-                    return 0
+                BUFFER="$LBUFFER$KEYS$RBUFFER"
+                #echo odd Char is $count >> $LOGFILE
+                zle .vi-forward-char
+                return 0
             fi
             BUFFER="$LBUFFER''$RBUFFER"
             ;;
@@ -681,11 +688,8 @@ my-accept-line () {
     done
 
     [[ -z "$__GLOBAL_ALIAS_PREFIX" ]] && {
-
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
-
         mywords=("${(z)BUFFER}")
-
         if [[ ! -z $(alias -g $mywords[1]) ]];then
              line="$(cat $HOME/.common_aliases | grep \
                  "^$mywords[1]=.*" | awk -F= '{print $2}')"
@@ -699,7 +703,6 @@ my-accept-line () {
                     BUFFER="$line $mywords[2,$]"
             fi
         fi
-
     }
 
     zle .accept-line
@@ -714,7 +717,9 @@ precmd(){
         if [[ "$__WILL_CLEAR" == true ]]; then
             clear
             listNoClear
-            # to prevent __WILL_CLEAR staying true when called from zle widgets and not from pressing enter key
+            # to prevent __WILL_CLEAR staying true when
+            # called from zle widgets and not from 
+            # pressing enter key
             __WILL_CLEAR=false
         fi
     }
@@ -724,7 +729,9 @@ precmd(){
     #lose normal mode
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
 }
-    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && export DISPLAY=$(cat ~/.display.txt) || echo $DISPLAY > ~/.display.txt
+[[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && \
+    export DISPLAY=$(cat ~/.display.txt) || \
+    echo $DISPLAY > ~/.display.txt
 
 rationalize-dot (){
     if [[ $LBUFFER = *.. ]]; then
@@ -746,7 +753,8 @@ bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
 [[ "$(uname)" == Darwin ]] && {
-    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print}" | tr -s ' ' | cut -d ' ' -f9-)"
+    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print}" \
+    | tr -s ' ' | cut -d ' ' -f9-)"
     echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
@@ -759,7 +767,8 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
         bindkey -M menuselect '\e[5C' vi-end-of-line
     }
 } || {
-    distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
+    distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 \
+    | tr -d \" | head -n 1)"
 
     if [[ "$distro" == raspbian ]]; then
         #bindkey -M menuselect '\eOA' vi-backward-word
@@ -801,17 +810,14 @@ version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"
 if (( $version > 5.2 )); then
     for km in viopp visual; do
         bindkey -M $km -- '-' vi-up-line-or-history
-
         for c in ${(s..):-'()[]{}<>bB'}; do
             bindkey -M $km i$c select-bracketed
             bindkey -M $km a$c select-bracketed
         done
-
         for c in "${(s..):-\'\"\`\|,./:;-=+@}"; do
             bindkey -M $km i$c select-quoted
             bindkey -M $km a$c select-quoted
         done
-
     done
 fi
 
@@ -822,7 +828,8 @@ bindkey -M viins '^[^M' self-insert-unmeta
 # RPROMPT shows vim modes (insert vs normal)
 zle-keymap-select() {
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
-    [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
+    [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}\
+        -<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
     () { return $__prompt_status }
     zle reset-prompt
 }
@@ -966,9 +973,8 @@ zstyle ':completion:*:correct:*' insert-unambiguous true
 # 2 -- word flex completion (abc => A-big-Car)
 # 3 -- full flex completion (abc => ABraCadabra)
 zstyle ':completion:*' matcher-list '' \
-    'm:{a-z\-}={A-Z\_}' \
-    'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-    'r:|?=** m:{a-z\-}={A-Z\_}'
+    'm:{a-z\-}={A-Z\_}' 'r:[^[:alpha:]]||[[:alpha:]]=** \
+    r:|=* m:{a-z\-}={A-Z\_}' 'r:|?=** m:{a-z\-}={A-Z\_}'
 
 #parse out host aliases and hostnames from ssh config
 if [[ -r "$HOME/.ssh/config" ]]; then
@@ -1046,10 +1052,12 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
 
     if [[ "$(uname)" == Darwin ]]; then
-        alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
+        alias -g ${__GLOBAL_ALIAS_PREFIX}v=\
+            '| pbcopy -pboard general'
         alias ge="exe 'nz';nz"
     else
-        alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
+        alias -g ${__GLOBAL_ALIAS_PREFIX}v=\
+            '| xclip -selection clipboard'
     fi
 }
 
@@ -1077,7 +1085,7 @@ supernatural-space() {
     __CORRECT_WORDS[print]="pirtn pirnt"
     __CORRECT_WORDS[for]="fro rfo rof"
     __CORRECT_WORDS[directory]="direcotry directroy"
-	    #statements
+
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
     mywords=("${(z)TEMP_BUFFER}")
@@ -1102,7 +1110,8 @@ supernatural-space() {
 
     if (( $#mywords == 1 )); then
         alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
-            #dont expand first word if \,' or " and buffer is one word long
+            #dont expand first word if \,' or "
+            #and buffer is one word long
             [[ -z $(alias -g $LBUFFER) ]] && {
                 [[ ${LBUFFER:0:1} != '\' ]] && \
                 [[ ${LBUFFER:0:1} != "'" ]] && \
@@ -1114,26 +1123,34 @@ supernatural-space() {
 		lastWord=${mywords[-1]}
         if [[ ! -f "$lastWord" ]]; then
             type -a "$lastWord" &> /dev/null || {
-
-                echo $lastWord | grep -qE '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\.?$' && {
+                echo $lastWord | grep -qE \
+                '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\.?$'\
+                && {
                     #DNS lookup
-                    A_Record=$(host $lastWord) 2>/dev/null && {
-                        A_Record=$(echo $A_Record | grep ' address' | head -1 | awk '{print $4}')
-
+                    A_Record=$(host $lastWord) 2>/dev/null \
+                        && {
+                        A_Record=$(echo $A_Record | grep \
+                        ' address' | head -1 | \
+                        awk '{print $4}')
                     } || A_Record=bad
-
-                    [[ $A_Record != bad ]] && LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord@$A_Record@g")"
-
+                    [[ $A_Record != bad ]] && LBUFFER=\
+                        "$(print -R "$LBUFFER" | sed -E \
+                        "s@\\b$lastWord@$A_Record@g")"
                 } || {
-                    echo $lastWord | grep -qE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' && {
+                    echo $lastWord | grep -qE \
+                    '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' && {
                     #reverse DNS lookup
-                    PTR_Record=$(nslookup $lastWord) 2>/dev/null && {
-                        PTR_Record=$(echo $PTR_Record | grep 'name = ' |tail -1 | awk '{print $4}')
+                    PTR_Record=$(nslookup $lastWord) \
+                        2>/dev/null && {
+                        PTR_Record=$(echo $PTR_Record | \
+                        grep 'name = ' |tail -1 | awk \
+                        '{print $4}')
                     } || PTR_Record=bad
-
-                        [[ $PTR_Record != bad ]] && LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord\\b@${PTR_Record:0:-1}@g")"
+                        [[ $PTR_Record != bad ]] && \
+                            LBUFFER="$(print -R "$LBUFFER" \
+                            | sed -E "s@\\b$lastWord\\b@\
+                            ${PTR_Record:0:-1}@g")"
                     }
-
                 }
             }
             zle _expand_alias
@@ -1142,7 +1159,6 @@ supernatural-space() {
         else
             #its a file
         fi
-
     fi
 
     zle self-insert
@@ -1189,18 +1205,22 @@ if [[ "$(uname)" = Darwin ]]; then
         clear
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
-            [[ -f "$SCRIPTS/macOnly/figletRandomFontOnce.sh" ]] && {
+            [[ -f \
+                "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
+                ]] && {
                 [[ -f "$SCRIPTS/splitReg.sh" ]] && {
-                bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-                "$(hostname)" | ponysay -W 100 | splitReg.sh -- ---------------------- lolcat
-            } || {
-        bash "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-        "$(hostname)" | ponysay -W 100
+                    bash "$SCRIPTS/"macOnly/figletRandomFontOnce.sh \
+                    "$(hostname)" | ponysay -W 100 \
+                    | splitReg.sh -- \
+                    ---------------------- lolcat
+                } || {
+                    bash \
+                    "$SCRIPTS/"macOnly/figletRandomFontOnce.sh \
+                    "$(hostname)" | ponysay -W 100
+                }
+            }
         }
-    }
-}
         printf "\e[0m"
-        # type screenfetch > /dev/null 2>&1 && screenfetch 2> /dev/null
         listNoClear
     else
         #root on unix
@@ -1216,15 +1236,18 @@ else
             } || bash "$HOME/motd.sh"
         elif [[ "$distro" == opensuse ]];then
             builtin cd "$D"
-            figlet -f block "$(whoami)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
+            figlet -f block "$(whoami)" | ponysay -W 120 \
+                | splitReg.sh -- ------------- lolcat
         elif [[ "$distro" == centos ]];then
             builtin cd "$D"
-            figlet -f block "$(whoami)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
+            figlet -f block "$(whoami)" | ponysay -W 120 \
+                | splitReg.sh -- ------------- lolcat
         elif [[ "$distro" == fedora ]];then
             builtin cd "$D"
-            figlet -f block "$(whoami)" | ponysay -W 120 | splitReg.sh -- ------------- lolcat
+            figlet -f block "$(whoami)" | ponysay -W 120 \
+                | splitReg.sh -- ------------- lolcat
         fi
-    listNoClear
+        listNoClear
     else
         #root on linux
         clearList
@@ -1303,24 +1326,40 @@ fzf_setup(){
     ROUGIFY_THEME="github"
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500")"'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
+        --border '"$__COMMON_FZF_ELEMENTS"' --preview \
+        "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} \
+        2>/dev/null || stat {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
-    export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS --reverse --border --height 100%"
-    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview \"[[ -f {} ]] && { echo {} | egrep '\.jar$' && jar tf {} ; } || rougify -t $ROUGIFY_THEME {} 2>/dev/null || stat {} | fold -80 | head -500\""
+    export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
+            --reverse --border --height 100%"
+    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
+        --preview \"[[ -f {} ]] && { echo {} | egrep '\.jar\
+        $' && jar tf {} ; } || rougify -t $ROUGIFY_THEME {}\
+        2>/dev/null || stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
-    export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview  \"[[ -f {} ]] && { echo {} | egrep '\.jar$' && jar tf {} ; } || { rougify -t $ROUGIFY_THEME {} 2>/dev/null || {
-                [[ -e {} ]] && stat {} | fold -80 | head -500 || {
+    export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
+        --preview  \"[[ -f {} ]] && { echo {} | egrep \
+        '\.jar$' && jar tf {} ; } || { rougify -t \
+        $ROUGIFY_THEME {} 2>/dev/null || {
+                [[ -e {} ]] && stat {} | fold -80 | \
+                head -500 || {
                     source ~/.shell_aliases_functions.sh
                     {
-                        echo {} | egrep '(\d{1,3}\.){3}\d{1,3}' && {
-                            whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+                        echo {} | egrep '(\d{1,3}\.){3}\d\
+                            {1,3}' && {
+                            whois {} | egrep -q 'No (match\
+                            |whois)' && dig {} || whois {}
                         } || {
-                            cat ~/.common_aliases | grep {}= || set | grep {} | grep -v ZSH_EXEC || alias | grep {} || {
-                            whois {} | egrep -q 'No (match|whois)' && dig {} || whois {}
+                            cat ~/.common_aliases | grep \
+                            {}= || set | grep {} | grep -v \
+                                ZSH_EXEC || alias | grep {}\
+                                || {
+                            whois {} | egrep -q 'No (match\
+                            |whois)' && dig {} || whois {}
                             }
                         }
-
                      } | cowsay | ponysay
            }
         }
@@ -1338,7 +1377,7 @@ _fzf_complete_echo() {
 _fzf_complete_alias() {
   _fzf_complete '+m' "$@" < <(
       alias | sed 's/=.*//'
-        )
+    )
 }
 
 [[ -f "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" ]] && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh"
