@@ -444,7 +444,7 @@ listNoClear () {
 }
 
 animate(){
-    bash $SCRIPTS/animation.sh
+    bash $SCRIPTS/animation
 }
 
 blocksToSize(){
