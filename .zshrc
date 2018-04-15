@@ -193,8 +193,7 @@ tutsUpdate() {
             zle .accept-line
         else
             zle .kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh \
-                '${commitMessage}' >> \"$LOGFILE\" 2>&1 & )"
+            BUFFER="( tutorialConfigUpdater.sh '${commitMessage}' >> \"$LOGFILE\" 2>&1 & )"
             zle .accept-line
         fi
     else
@@ -1326,6 +1325,7 @@ fzf_setup(){
     ROUGIFY_THEME="github"
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
+
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
         "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} \
@@ -1335,8 +1335,9 @@ fzf_setup(){
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
             --reverse --border --height 100%"
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview \"[[ -f {} ]] && { echo {} | egrep '\.jar\
-        $' && jar tf {} ; } || rougify -t $ROUGIFY_THEME {}\
+        --preview \"[[ -f {} ]] && { echo {} | egrep \
+        '\.jar$' && jar tf {} ; } \
+        || rougify -t $ROUGIFY_THEME {}\
         2>/dev/null || stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
