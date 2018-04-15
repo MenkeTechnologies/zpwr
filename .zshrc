@@ -268,8 +268,7 @@ changeQuotes(){
         BUFFER="\"${BUFFER}\""
     elif (( $__COUNTER % 8 == 4 )); then
         if [[ "$(echo "$_SEMI_OLDBUFFER" \
-            | tr -d "'\"\`" )" != "$(echo "$BUFFER" \
-            | tr -d "\`\"" )" ]]; then
+            | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
             __COUNTER=0
             return 1
         fi
@@ -409,8 +408,7 @@ clipboard(){
         zle .redisplay
         } || {
             echo
-            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\
-                \x1b[0;34m Found!\n"
+            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
             echo
             zle .redisplay
         }
@@ -690,8 +688,7 @@ my-accept-line () {
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         mywords=("${(z)BUFFER}")
         if [[ ! -z $(alias -g $mywords[1]) ]];then
-             line="$(cat $HOME/.common_aliases | grep \
-                 "^$mywords[1]=.*" | awk -F= '{print $2}')"
+             line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
@@ -722,12 +719,15 @@ precmd(){
             __WILL_CLEAR=false
         fi
     }
-    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && export DISPLAY=$(cat ~/.display.txt) || echo $DISPLAY > ~/.display.txt
+    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && \
+        export DISPLAY=$(cat ~/.display.txt) \
+        || echo $DISPLAY > ~/.display.txt
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
 }
+
 [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && \
     export DISPLAY=$(cat ~/.display.txt) || \
     echo $DISPLAY > ~/.display.txt
@@ -1051,12 +1051,10 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
 
     if [[ "$(uname)" == Darwin ]]; then
-        alias -g ${__GLOBAL_ALIAS_PREFIX}v=\
-            '| pbcopy -pboard general'
+        alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
         alias ge="exe 'nz';nz"
     else
-        alias -g ${__GLOBAL_ALIAS_PREFIX}v=\
-            '| xclip -selection clipboard'
+        alias -g ${__GLOBAL_ALIAS_PREFIX}v= '| xclip -selection clipboard'
     fi
 }
 
@@ -1202,20 +1200,18 @@ if [[ "$(uname)" = Darwin ]]; then
     if [[ "$UID" != "0" ]]; then
          #builtin cd "$D" && clear
         clear
+        fig="$SCRIPTS/macOnly/figletRandomFontOnce.sh"
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
-            [[ -f \
-                "$SCRIPTS/macOnly/figletRandomFontOnce.sh" \
-                ]] && {
+            [[ -f "$fig" ]] && {
                 [[ -f "$SCRIPTS/splitReg.sh" ]] && {
-                    bash "$SCRIPTS/"macOnly/figletRandomFontOnce.sh \
-                    "$(hostname)" | ponysay -W 100 \
+                    bash "$fig" "$(hostname)" \
+                    | ponysay -W 100 \
                     | splitReg.sh -- \
                     ---------------------- lolcat
                 } || {
-                    bash \
-                    "$SCRIPTS/"macOnly/figletRandomFontOnce.sh \
-                    "$(hostname)" | ponysay -W 100
+                    bash "$fig" "$(hostname)" \
+                    | ponysay -W 100
                 }
             }
         }
