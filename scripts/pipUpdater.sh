@@ -9,7 +9,6 @@
 
 export DELIMITER_CHAR='%'
 
-
 alternatingPrettyPrint(){
     counter=0
 
