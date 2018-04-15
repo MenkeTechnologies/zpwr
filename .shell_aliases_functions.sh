@@ -60,9 +60,7 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
         export EDITOR='mvim -v'
-        } || {
-            export EDITOR='vim'
-        }
+        } || export EDITOR='vim'
         export YARN_HOME="$HOME/.config/yarn"
         export NODE_HOME="/usr/local/lib/node_modules"
         export PERL5LIB="$HOME/perl5/lib/perl5"
@@ -74,7 +72,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export RESET="\e[0m"
         export LOGFILE="$HOME/updaterlog.txt"
         export UMASK=077
-
 #**************************************************************
 #}}}
 
@@ -121,7 +118,7 @@ alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 alias deleteTab="sed -e '/^[ tab]*$/d'"
 alias ba="bash"
 alias upper='tr '\''a-z'\'' '\''A-Z'\'''
-#over alias es
+#over aliases
 alias grep="grep --color=auto"
 alias egrep="egrep --color=always"
 alias tree='tree -afC'
@@ -135,7 +132,6 @@ alias k="pkill"
 alias ka="killall"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
-
 alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always'
 alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=auto -c "$HOME/conf.ifconfig" ifconfig'
@@ -170,9 +166,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
     exists mvim && { 
         alias vi='mvim -v'
-    alias vim='mvim -v'
-    alias v='mvim -v -u ~/.minvimrc'
-}
+        alias vim='mvim -v'
+        alias v='mvim -v -u ~/.minvimrc'
+    }
 else
     #Linux
     alias apt="sudo apt-get install -y"
@@ -184,8 +180,8 @@ else
     fi
     exists vim && { 
         alias vi=vim
-    alias v='vim -u ~/.minvimrc'
-}
+        alias v='vim -u ~/.minvimrc'
+    }
 fi
 alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
@@ -205,7 +201,6 @@ alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
 alias ipa="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's/addr://' | head -1"
-
 alias pgrep='pgrep -l'
 #**********************************************************************
 #                           MARK:SHEL LSCRIPTS
@@ -256,8 +251,9 @@ alias il="idea list"
     }
 
     nn(){
-        [[ -z "$2" ]] && echo "Title is \$1 and message is \$2..." >&2 && return 1
-
+        [[ -z "$2" ]] && echo \
+            "Title is \$1 and message is \$2..." \
+            >&2 && return 1
         title="$1"
         msg="$2"
         echo "display notification \"$msg\" with title \"$title\"" | osascript 
@@ -296,7 +292,8 @@ xx(){
 
 cgh(){
     [[ -z "$1" ]] && user=MenkeTechnologies || user="$1"
-    curl -s "https://github.com/$user" | grep 'contributions' | head -1 | tr -s ' '
+    curl -s "https://github.com/$user" | \
+        grep 'contributions' | head -1 | tr -s ' '
 }
 
 jd(){
@@ -437,16 +434,12 @@ listNoClear () {
         exists grc && {
             grc -c "$HOME/conf.gls" gls \
             -iFlhA --color=always
-        } || {
-            ls -iFlhAO
-        }
+        } || ls -iFlhAO
     else
         exists grc && {
             grc -c "$HOME/conf.gls" \
             ls -iFlhA --color=always
-        } || {
-            ls -ifhla
-        }
+        } || ls -ifhla
     fi
 }
 
@@ -490,27 +483,25 @@ execpy(){
 }
 
 search(){
-    [[ -z $2 ]] && grep -iRnC 5 "$1" * || grep -iRnC 5 "$1" "$2"
-
+    [[ -z $2 ]] && grep -iRnC 5 "$1" * || \
+        grep -iRnC 5 "$1" "$2"
 }
 
 cd(){
-    #builtin is necessary here to distinguish bt function name and builtin cd command
+    #builtin is necessary here to distinguish
+    #bt function name and builtin cd command
     #don't want to recursively call this function
     builtin cd "$@" && clearList
 }
 
 contribCount(){
-    lines="$(git status > /dev/null && git log \
-        --pretty="%an" | sort | uniq -c | sort -rn)"
+    lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
     if (( $lineCount > 10 )); then
-        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1 \
-            '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | \
+        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1'"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | \
             alternatingPrettyPrint | less
     else
-        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1 \
-            '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | \
+        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1'"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | \
             alternatingPrettyPrint
     fi
 }
@@ -523,7 +514,7 @@ gitCommitAndPush(){
        fi 
     done
 
-    printf "\n"
+    echo
     git pull
     git add .
     git commit -m "$1"
@@ -537,7 +528,6 @@ replacer(){
     replace="$1"
     shift
     sed -i'' "s/$orig/$replace/g" "$@"
-
 }
 
 createGIF(){
@@ -550,11 +540,13 @@ createGIF(){
 
     [[ ! -z "$3" ]] && outFile="$3"	
 
-    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - | gifsicle --optimize=3 --delay=3 > "$outFile" 
+    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - \
+        | gifsicle --optimize=3 --delay=3 > "$outFile" 
 }
 
 hc(){
-    [[ -z "$1" ]] && reponame="$(basename "$(pwd)")" || reponame="$1"
+    [[ -z "$1" ]] && reponame="$(basename "$(pwd)")" \
+        || reponame="$1"
     printf "\e[1m"
     git init
     hub create "$reponame"
@@ -574,7 +566,8 @@ hd(){
     out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$REPO")"
 
     printf "\e[1m"
-    [[ -z "$out" ]] && echo "Successful deletion of $REPO" || {
+    [[ -z "$out" ]] && echo "Successful deletion of $REPO" \
+        || {
         echo "Error in deletion of $REPO"
         echo "$out"
     }
@@ -583,7 +576,6 @@ hd(){
 
 pstreeMonitor(){
     bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s/$USER// | sed s@/.*/@@ | tail -75"
-
 }
 
 return2(){
@@ -605,7 +597,8 @@ mp3(){
 }
 
 mp4(){
-    [[ -z "$2" ]] && youtube-dl --no-playlist -f mp4 "$1" || youtube-dl -f mp4 "$1"
+    [[ -z "$2" ]] && youtube-dl --no-playlist -f mp4 "$1" \
+        || youtube-dl -f mp4 "$1"
 }
 
 prettyPrint(){
@@ -654,7 +647,8 @@ backup(){
     newfile="$1".$(date +%Y%m%d.%H.%M.bak)
     mv "$1" "$newfile"
     cp -pR "$newfile" "$1"
-    printf "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
+    printf \
+        "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
 }
 
 alias gcl >/dev/null 2>&1 && unalias gcl
@@ -668,7 +662,8 @@ gcl() {
 
 ino(){
     dir="$1"
-    command mkdir "$dir" && cd "$dir" && platformio init --ide clion --board uno
+    command mkdir "$dir" && cd "$dir" && \
+        platformio init --ide clion --board uno
     {
         cat <<\EOF
 #include <Arduino.h>
@@ -724,11 +719,13 @@ jetbrainsWorkspaceEdit(){
     prettyPrint "MONITORING WORKSPACE..."
     python -c "print('_'*100)"
     while : ; do
-        grep -q '<component name="RunManager" selected=' .idea/workspace.xml && {
+        grep -q '<component name="RunManager" selected=' \
+            .idea/workspace.xml && {
             python -c "print('_'*100)" | lolcat
-        figletRandomFontOnce.sh "MATCH ENJOY>>>>" | ponysay -W 120
-        python -c "print('_'*100)" | lolcat
-        sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
+            figletRandomFontOnce.sh "MATCH ENJOY>>>>" \
+            | ponysay -W 120
+            python -c "print('_'*100)" | lolcat
+            sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
 
     } || echo "No Match Yet" >&2
     sleep 1
@@ -751,15 +748,11 @@ getrc(){
             printf "Are you sure? "
             read
         }
-
-       if [[ $REPLY != "y" ]]; then
-           clearList
-           return 0
-       fi
-
+        [[ $REPLY != "y" ]] && clearList && return 0
     fi
     cd "$HOME"
-    git clone "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
+    git clone \
+        "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
     cd "$REPO_NAME"
     cp .shell_aliases_functions.sh "$HOME"
     cp .zshrc "$HOME"
@@ -785,7 +778,8 @@ rename(){
     shift
     for file in "$@"; do
         [[ -d "$file" ]] && continue
-        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
+        out=$(echo "$file" | sed -n "$search"p \
+            |  wc -l | tr -d ' ')
         if (( $out != 0 )); then
             #statements
             mv "$file" "$(echo "$file" | sed -E "$search")"

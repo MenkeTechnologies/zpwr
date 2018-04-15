@@ -688,7 +688,7 @@ my-accept-line () {
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         mywords=("${(z)BUFFER}")
         if [[ ! -z $(alias -g $mywords[1]) ]];then
-             line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
+            line="$(cat $HOME/.common_aliases | grep "^$mywords[1]=.*" | awk -F= '{print $2}')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
