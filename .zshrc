@@ -1360,12 +1360,12 @@ fzf_setup
 
 _fzf_complete_echo() {
   _fzf_complete '-m' "$@" < <(
-      declare -xp | sed 's/=.*//' | sed 's/.* //'
+      declare -xp | sed 's@=.*@@' | sed 's@.* @@'
     )
 }
 _fzf_complete_alias() {
   _fzf_complete '+m' "$@" < <(
-      alias | sed 's/=.*//'
+      alias | sed 's@=.*@@'
     )
 }
 

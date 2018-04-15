@@ -183,7 +183,7 @@ else
         alias v='vim -u ~/.minvimrc'
     }
 fi
-alias cf2="sed 's/.*/_\U\l&_/' | boldText.sh | blue"
+alias cf2="sed 's@.*@_\U\l&_@' | boldText.sh | blue"
 alias tclsh="rlwrap tclsh"
 alias logs="tail -f /var/log/**/*.log | ccze"
 alias matr="cmatrix -C blue -abs"
@@ -576,7 +576,7 @@ hd(){
 }
 
 pstreeMonitor(){
-    bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s/$USER// | sed s@/.*/@@ | tail -75"
+    bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
 }
 
 return2(){
@@ -589,7 +589,7 @@ color2(){
 
 escapeRemove(){
     while read; do
-        echo "$REPLY" | sed -e 's/\e\[.\{1,5\}m//g'
+        echo "$REPLY" | sed -e 's@\e\[.\{1,5\}m@@g'
     done
 }
 
@@ -734,7 +734,7 @@ jetbrainsWorkspaceEdit(){
 }
 reveal(){
     [[ ! -d .git ]] && echo "Not git dir" >&2 && return 1
-    open "$(git remote -v | grep fetch | awk '{print $2}' | sed 's/.git$//')"
+    open "$(git remote -v | grep fetch | awk '{print $2}' | sed 's@.git$@@')"
 }
 
 getrc(){
