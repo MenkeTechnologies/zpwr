@@ -19,6 +19,8 @@ prettyPrint(){
 exists(){
     type "$1" >/dev/null 2>&1
 }
+export DELIMITER_CHAR='%'
+
 alternatingPrettyPrint(){
     counter=0
 
