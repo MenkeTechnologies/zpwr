@@ -200,7 +200,7 @@ alias ,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias ipa="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's/addr://' | head -1"
+alias ipa="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's@addr:@@' | head -1"
 alias pgrep='pgrep -l'
 #**********************************************************************
 #                           MARK:SHELL SCRIPTS
@@ -499,10 +499,10 @@ contribCount(){
     lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
     if (( $lineCount > 10 )); then
-        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | \
+        echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint | less
     else
-        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | \
+        echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint
     fi
 }

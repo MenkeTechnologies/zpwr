@@ -371,7 +371,7 @@ fi
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
 prettyPrint "Installing Iftop config..."
-ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's/addr://')
+ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
 iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
 echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 

@@ -12,5 +12,5 @@ RESET='\e[0m'
 
 #loop through stdin and add escape sequences at head and tail of each line
 while read; do
-	echo "$REPLY" | sed -e 's/[^[:blank:]]/_&_/g' -e 's/[[:blank:]]/\/\/\/\/\//g'
+	echo "$REPLY" | sed -e 's@[^[:blank:]]@_&_@g' -e 's@[[:blank:]]@/////@g'
 done
