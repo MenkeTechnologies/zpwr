@@ -278,14 +278,14 @@ logg(){
 }
 
 xx(){
-    local counter cmd __DONE
+    local counter cmd DONE
     cmd="$1"
     [[ -z "$2" ]] && counter=100 || counter="$2"
 
-    trap '__DONE=true' QUIT
-    __DONE=false
+    trap 'DONE=true' QUIT
+    DONE=false
     for iter in {1..$counter} ; do
-       [[ $__DONE == true ]] && break || eval "$cmd"
+       [[ $DONE == true ]] && break || eval "$cmd"
     done
 
     trap QUIT
@@ -336,11 +336,11 @@ b(){
 
     for cmd in "$@"; do
         if [[ -z $sleepTime ]]; then
-            ( eval "$cmd" & ) ; p $(echo "$cmd" \
-                | awk '{print $1}')
+            ( eval "$cmd" & ) 
+            p $(echo "$cmd" | awk '{print $1}')
         else
-            ( eval "sleep $sleepTime && $cmd" & );\
-                p $(echo "$cmd" | awk '{print $1}')
+            ( eval "sleep $sleepTime && $cmd" & )
+            p $(echo "$cmd" | awk '{print $1}')
         fi
     done
 }
@@ -451,7 +451,7 @@ animate(){
 blocksToSize(){
     read input
     local bytes=$(( input * 512 ))
-    echo $bytes | humanceadable
+    echo $bytes | humanreadable
 }
 
 humanReadable(){
@@ -479,7 +479,7 @@ f(){
 execpy(){
     script="$1"
     shift
-    python3 $PYSCRIPTS/"$script" "$@"
+    python3 "$PYSCRIPTS/$script" "$@"
 
 }
 
@@ -528,7 +528,7 @@ replacer(){
     shift
     replace="$1"
     shift
-    sed -i'' "s/$orig/$replace/g" "$@"
+    sed -i'' "s@$orig@$replace@g" "$@"
 }
 
 createGIF(){
@@ -551,7 +551,7 @@ hc(){
     printf "\e[1m"
     git init
     hub create "$reponame"
-    echo "$reponame" > README.md
+    echo "# $reponame" > README.md
     echo "# created by $GITHUB_ACCOUNT" >> README.md
     git add .
     git commit -m "first commit"
