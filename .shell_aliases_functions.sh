@@ -324,7 +324,8 @@ p(){
     out="$(ps -ef)"
     for cmd in "$@" ; do
         prettyPrint "SEARCH TERM: $cmd"
-        echo "$out" | \fgrep --color=auto -a -i -- "$cmd" || echo "Nothing found for $cmd."
+        echo "$out" | \fgrep --color=auto -a -i -- "$cmd" \
+            || echo "Nothing found for $cmd."
         echo
     done
 }
@@ -337,9 +338,11 @@ b(){
 
     for cmd in "$@"; do
         if [[ -z $sleepTime ]]; then
-            ( eval "$cmd" & ) ; p $(echo "$cmd" | awk '{print $1}')
+            ( eval "$cmd" & ) ; p $(echo "$cmd" \
+                | awk '{print $1}')
         else
-            ( eval "sleep $sleepTime && $cmd" & ) ; p $(echo "$cmd" | awk '{print $1}')
+            ( eval "sleep $sleepTime && $cmd" & );\
+                p $(echo "$cmd" | awk '{print $1}')
         fi
     done
 }
@@ -354,16 +357,16 @@ clearList () {
 
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-            ls_command="grc -c "$HOME/conf.gls" \
-            gls -iFlhA --color=always"
+                ls_command="grc -c "$HOME/conf.gls" \
+                gls -iFlhA --color=always"
             } || {
                 ls_command="ls -iFlhAO"
             }
         lib_command="otool -L"
     else
         exists grc && {
-            ls_command="grc -c "$HOME/conf.gls" \
-            ls -iFlhA --color=always"
+                ls_command="grc -c "$HOME/conf.gls" \
+                ls -iFlhA --color=always"
             } || {
                 ls_command="ls -iFhlA"
             }
@@ -374,40 +377,45 @@ clearList () {
             for command in "$@"; do
                 exists $command &&  {
                     #exe matching
-                while read locale;do
-                    last_fields="$(echo $locale \
-                        | cut -d' ' -f3-10)"
-                    [[ -f "$last_fields" ]] && {
-                        prettyPrint "$last_fields" && \
-                        eval "$ls_command" $last_fields && \
-                        prettyPrint "FILE TYPE:" && \
-                        eval "file $last_fields" && \
-                        prettyPrint "DEPENDENT ON:" && \
-                        eval "$lib_command $last_fields";
-                    prettyPrint "SIZE:"
-                    du -sh "$last_fields"
-                    prettyPrint "STATS:"
-                    stat "$last_fields"
-                    echo
-                    echo
-                } || {
-                    echo "$locale"
-                    echo "$locale" | grep -q "function" && {
-                        type -f "$(echo "$locale" | awk '{print $1}')" 
-                    }
-                    echo "$locale" | grep -q "alias" && {
-                        alias "$(echo "$locale" | awk '{print $1}')" 
-                    }
-                echo
-                echo
-            }
-        done < <(type -a "$command" | sort | uniq)
+                    while read locale;do
+                        last_fields="$(echo $locale \
+                            | cut -d' ' -f3-10)"
+                        [[ -f "$last_fields" ]] && {
+                            prettyPrint "$last_fields" && \
+                            eval "$ls_command" $last_fields \
+                            && prettyPrint "FILE TYPE:" && \
+                            eval "file $last_fields" && \
+                            prettyPrint "DEPENDENT ON:" && \
+                            eval "$lib_command $last_fields"
+                            prettyPrint "SIZE:"
+                            du -sh "$last_fields"
+                            prettyPrint "STATS:"
+                            stat "$last_fields"
+                            echo
+                            echo
+                        } || {
+                            echo "$locale"
+                            echo "$locale" | grep -q \
+                                "function" && {
+                                type -f "$(echo "$locale" \
+                                | awk '{print $1}')" 
+                            }
+                            echo "$locale" | grep -q \
+                                "alias" && {
+                                alias "$(echo "$locale" \
+                                | awk '{print $1}')"
+                            }
+                            echo
+                            echo
+                        }
+                done < <(type -a "$command" | sort | uniq)
             } || {
                 #path matching, not exe
                 eval "$ls_command \"$command\"" || return 1
                 echo
                 prettyPrint "$command"
-                eval "$ls_command -d \"$command\"" || return 1
+                eval "$ls_command -d \"$command\"" \
+                    || return 1
                 prettyPrint "FILE TYPE:"
                 file "$command"
                 prettyPrint "SIZE:"
@@ -429,9 +437,9 @@ listNoClear () {
         exists grc && {
             grc -c "$HOME/conf.gls" gls \
             -iFlhA --color=always
-    } || {
-        ls -iFlhAO
-    }
+        } || {
+            ls -iFlhAO
+        }
     else
         exists grc && {
             grc -c "$HOME/conf.gls" \
@@ -493,12 +501,17 @@ cd(){
 }
 
 contribCount(){
-    lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
+    lines="$(git status > /dev/null && git log \
+        --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
     if (( $lineCount > 10 )); then
-        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1 '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | alternatingPrettyPrint | less
+        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1 \
+            '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | \
+            alternatingPrettyPrint | less
     else
-        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1 '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | alternatingPrettyPrint
+        echo "$lines" | perl -panE 's/(\d) (\D)(.*)$/\1 \
+            '"$DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR/" | \
+            alternatingPrettyPrint
     fi
 }
 
