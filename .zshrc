@@ -1091,10 +1091,7 @@ supernatural-space() {
     for key in ${(k)__CORRECT_WORDS[@]}; do
         badWords=("${(z)__CORRECT_WORDS[$key]}")
         for misspelling in $badWords[@];do
-            #echo "words: $mywords" >> $LOGFILE
             if [[ $mywords[-1] == $misspelling ]]; then
-                #echo  >> $LOGFILE
-                #echo  >> $LOGFILE
                 LBUFFER="$(print -R "$LBUFFER" | sed -E \
                     "s@\\b$misspelling\\b@$key@g")"
                 finished=true
@@ -1108,7 +1105,6 @@ supernatural-space() {
     if (( $#mywords == 1 )); then
         alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
             #dont expand first word if \,' or "
-            #and buffer is one word long
             [[ -z $(alias -g $LBUFFER) ]] && {
                 [[ ${LBUFFER:0:1} != '\' ]] && \
                 [[ ${LBUFFER:0:1} != "'" ]] && \
@@ -1118,6 +1114,7 @@ supernatural-space() {
         }
     else
 		lastWord=${mywords[-1]}
+        #DNS lookups
         if [[ ! -f "$lastWord" ]]; then
             type -a "$lastWord" &> /dev/null || {
                 echo $lastWord | grep -qE \
@@ -1126,27 +1123,20 @@ supernatural-space() {
                     #DNS lookup
                     A_Record=$(host $lastWord) 2>/dev/null \
                         && {
-                        A_Record=$(echo $A_Record | grep \
-                        ' address' | head -1 | \
-                        awk '{print $4}')
+                        A_Record=$(echo $A_Record | grep ' address' | head -1 | awk '{print $4}')
                     } || A_Record=bad
-                    [[ $A_Record != bad ]] && LBUFFER=\
-                        "$(print -R "$LBUFFER" | sed -E \
-                        "s@\\b$lastWord@$A_Record@g")"
+                    [[ $A_Record != bad ]] && \
+                        LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord@$A_Record@g")"
                 } || {
                     echo $lastWord | grep -qE \
                     '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' && {
                     #reverse DNS lookup
                     PTR_Record=$(nslookup $lastWord) \
                         2>/dev/null && {
-                        PTR_Record=$(echo $PTR_Record | \
-                        grep 'name = ' |tail -1 | awk \
-                        '{print $4}')
+                        PTR_Record=$(echo $PTR_Record | grep 'name = ' |tail -1 | awk '{print $4}')
                     } || PTR_Record=bad
                         [[ $PTR_Record != bad ]] && \
-                            LBUFFER="$(print -R "$LBUFFER" \
-                            | sed -E "s@\\b$lastWord\\b@\
-                            ${PTR_Record:0:-1}@g")"
+                            LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord\\b@${PTR_Record:0:-1}@g")"
                     }
                 }
             }
