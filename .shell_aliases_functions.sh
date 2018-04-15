@@ -369,25 +369,23 @@ clearList () {
             }
         lib_command="ldd"
     fi
-
         if [[ -n "$1" ]]; then
             for command in "$@"; do
                 exists $command &&  {
                     #exe matching
                     while read locale;do
-                        last_fields="$(echo $locale \
-                            | cut -d' ' -f3-10)"
-                        [[ -f "$last_fields" ]] && {
-                            prettyPrint "$last_fields" && \
-                            eval "$ls_command" $last_fields \
+                        lf="$(echo $locale|cut -d' ' -f3-10)"
+                        [[ -f "$lf" ]] && {
+                            prettyPrint "$lf" && \
+                            eval "$ls_command" $lf \
                             && prettyPrint "FILE TYPE:" && \
-                            eval "file $last_fields" && \
+                            eval "file $lf" && \
                             prettyPrint "DEPENDENT ON:" && \
-                            eval "$lib_command $last_fields"
+                            eval "$lib_command $lf"
                             prettyPrint "SIZE:"
-                            du -sh "$last_fields"
+                            du -sh "$lf"
                             prettyPrint "STATS:"
-                            stat "$last_fields"
+                            stat "$lf"
                             echo
                             echo
                         } || {
@@ -405,23 +403,25 @@ clearList () {
                             echo
                             echo
                         }
-                done < <(type -a "$command" | sort | uniq)
-            } || {
-                #path matching, not exe
-                eval "$ls_command \"$command\"" || return 1
-                echo
-                prettyPrint "$command"
-                eval "$ls_command -d \"$command\"" \
-                    || return 1
-                prettyPrint "FILE TYPE:"
-                file "$command"
-                prettyPrint "SIZE:"
-                du -sh "$command"
-                prettyPrint "STATS:"
-                stat "$command"
-                #for readibility
-                echo
-                echo
+                    done \
+                        < <(type -a "$command" | sort | uniq)
+                } || {
+                    #path matching, not exe
+                    eval "$ls_command \"$command\"" \
+                        || return 1
+                    echo
+                    prettyPrint "$command"
+                    eval "$ls_command -d \"$command\"" \
+                        || return 1
+                    prettyPrint "FILE TYPE:"
+                    file "$command"
+                    prettyPrint "SIZE:"
+                    du -sh "$command"
+                    prettyPrint "STATS:"
+                    stat "$command"
+                    #for readibility
+                    echo
+                    echo
                 }
             done
         else
