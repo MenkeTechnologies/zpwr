@@ -577,8 +577,8 @@ bindkey -M viins '^z' undo
 bindkey -M vicmd '^z' undo
 
 zle -N basicSedSub
-bindkey -M viins '^P' basicSedSub
-bindkey -M vicmd '^P' basicSedSub
+bindkey -M viins '^]' basicSedSub
+bindkey -M vicmd '^]' basicSedSub
 bindkey -M viins '^O' edit-command-line
 bindkey -M vicmd '^O' edit-command-line
 
@@ -822,9 +822,16 @@ if (( $version > 5.2 )); then
     done
 fi
 
+endofline(){
+    CURSOR=$#BUFFER
+}
+
+zle -N endofline
+
 bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 bindkey -M viins '^[^M' self-insert-unmeta
+bindkey -M viins '^P' endofline
 
 # RPROMPT shows vim modes (insert vs normal)
 zle-keymap-select() {
