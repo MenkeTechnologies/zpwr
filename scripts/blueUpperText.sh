@@ -12,7 +12,7 @@ RESET='\e[0m'
 
 #loop through stdin and add escape sequences at head and tail of each line
 while read; do
-    echo "$REPLY" | sed 's/.*/_______ & ______/' | boldText.sh | blueText.sh
+    echo "$REPLY" | sed 's@.*@_______ & ______@' | boldText.sh | blueText.sh
 done
 
 

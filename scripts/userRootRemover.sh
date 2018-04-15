@@ -8,5 +8,5 @@
 #}}}***********************************************************
 
 while read; do
-    echo "$REPLY" | sed -E "s/$(whoami)|root//g"
+    echo "$REPLY" | sed -E "s@$(whoami)|root@@g"
 done
