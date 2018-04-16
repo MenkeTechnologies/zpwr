@@ -231,18 +231,28 @@ dbz() {
 }
 
 expand-aliases() {
-if (( $CURSOR != $#BUFFER )); then
-    zle _expand_alias
-else
-    {
-        unset 'functions[_expand-aliases]'
-        functions[_expand-aliases]=$BUFFER
-        (($+functions[_expand-aliases])) &&
-        BUFFER=${functions[_expand-aliases]#$'\t'} &&
-        CURSOR=$#BUFFER
-    } &> /dev/null
+    if (( $CURSOR != $#BUFFER )); then
+        zle _expand_alias
+    elif [[ $LBUFFER[-1] == " " ]]; then
+        :
+    else
+            alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
+                #dont expand first word if \,' or "
+                [[ -z $(alias -g $LBUFFER) ]] && {
+                    [[ ${LBUFFER:0:1} != '\' ]] && \
+                    [[ ${LBUFFER:0:1} != "'" ]] && \
+                    [[ ${LBUFFER:0:1} != '"' ]] && \
+                    {
+                        unset 'functions[_expand-aliases]'
+                        functions[_expand-aliases]=$BUFFER
+                        (($+functions[_expand-aliases])) &&
+                BUFFER=${functions[_expand-aliases]#$'\t'} \
+                        && CURSOR=$#BUFFER
+                    } &> /dev/null
+                }
+            }
 
-fi
+    fi
 }
 __COUNTER=0
 
@@ -1111,6 +1121,7 @@ supernatural-space() {
     __CORRECT_WORDS[print]="pirtn pirnt"
     __CORRECT_WORDS[for]="fro rfo rof"
     __CORRECT_WORDS[directory]="direcotry directroy"
+    __CORRECT_WORDS[go]="og"
 
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
