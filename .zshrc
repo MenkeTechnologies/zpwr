@@ -1016,8 +1016,7 @@ zstyle ':completion:*:correct:*' insert-unambiguous true
 # 2 -- word flex completion (abc => A-big-Car)
 # 3 -- full flex completion (abc => ABraCadabra)
 zstyle ':completion:*' matcher-list '' \
-    'm:{a-z\-}={A-Z\_}' 'r:[^[:alpha:]]||[[:alpha:]]=** \
-    r:|=* m:{a-z\-}={A-Z\_}' 'r:|?=** m:{a-z\-}={A-Z\_}'
+    'm:{a-z\-}={A-Z\_}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' 'r:|?=** m:{a-z\-}={A-Z\_}'
 
 #parse out host aliases and hostnames from ssh config
 if [[ -r "$HOME/.ssh/config" ]]; then
