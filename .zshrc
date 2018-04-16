@@ -392,7 +392,7 @@ clipboard(){
         print -n "$BUFFER" | pbcopy
         echo
         print -n "\x1b[0;34mCopied \x1b[1m\""
-        print -n "$BUFFER"
+        print -rn "$BUFFER"
         print  "\"\x1b[0;34m to System Clipboard!"
         echo
         zle .redisplay
