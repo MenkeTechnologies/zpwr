@@ -858,7 +858,9 @@ if (( $version > 5.2 )); then
 fi
 
 endofline(){
-    BUFFER+=" "
+    if [[ $BUFFER[-1] != " " ]]; then
+        BUFFER+=" "
+    fi
     CURSOR=$#BUFFER
     zle vi-insert
 }
