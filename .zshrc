@@ -231,11 +231,18 @@ dbz() {
 }
 
 expand-aliases() {
-    unset 'functions[_expand-aliases]'
-    functions[_expand-aliases]=$BUFFER
-    (($+functions[_expand-aliases])) &&
-    BUFFER=${functions[_expand-aliases]#$'\t'} &&
-    CURSOR=$#BUFFER
+if (( $CURSOR != $#BUFFER )); then
+    zle _expand_alias
+else
+    {
+        unset 'functions[_expand-aliases]'
+        functions[_expand-aliases]=$BUFFER
+        (($+functions[_expand-aliases])) &&
+        BUFFER=${functions[_expand-aliases]#$'\t'} &&
+        CURSOR=$#BUFFER
+    } &> /dev/null
+
+fi
 }
 __COUNTER=0
 
@@ -810,7 +817,8 @@ expandAliasAccept(){
 zle -N expandAliasAccept
 
 bindkey -M menuselect '^M' .accept-line
-bindkey -M menuselect '^@' reverse-menu-complete
+bindkey -M menuselect '^@' accept-line
+bindkey -M menuselect '^S' reverse-menu-complete
 
 autoload -U select-bracketed select-quoted
 zle -N select-bracketed
@@ -849,8 +857,7 @@ bindkey -M vicmd G end-of-buffer-or-history
 # RPROMPT shows vim modes (insert vs normal)
 zle-keymap-select() {
     RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
-    [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}\
-        -<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
+    [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
     () { return $__prompt_status }
     zle reset-prompt
 }
@@ -1054,7 +1061,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
     alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1; unset __pid; __pid=$!; ps -ef | grep -v grep | grep $__pid; unset __pid'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! &&ps -ef | \grep -v grep | \grep --color=always $__pid && unset __pid'
     alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
@@ -1066,7 +1073,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}ne="2> /dev/null"
     alias -g ${__GLOBAL_ALIAS_PREFIX}g='git add . && git commit -m "" && git push'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}e='|& fgrep -v "grep" |& egrep -i'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}e='|& fgrep -v "grep" |& \egrep --color=always -i'
     alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
@@ -1162,13 +1169,21 @@ supernatural-space() {
                     }
                 }
             }
-            zle _expand_alias
-            zle expand-history
-            zle expand-word
         else
             #its a file
         fi
+
+        {
+            alias -g | grep -q "^$lastWord" || {
+                [[ $CURSOR]]        
+                zle expand-word
+            }
+        } &> /dev/null
     fi
+
+
+    zle expand-history
+    expand-aliases
 
     zle self-insert
 }
