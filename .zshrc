@@ -655,7 +655,8 @@ bindkey '\eOQ' sub
 }
 
 
-bindkey '^S' gitfunc
+bindkey -M viins '^S' gitfunc
+bindkey -M vicmd '^S' gitfunc
 bindkey '^N' sudo-command-line
 bindkey -M viins '\e^T' transpose-words
 bindkey -M vicmd '\e^T' transpose-words
