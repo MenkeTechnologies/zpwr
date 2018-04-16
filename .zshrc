@@ -249,8 +249,10 @@ expand-aliases() {
                         #(($+functions[_expand-aliases])) &&
                 #BUFFER=${functions[_expand-aliases]#$'\t'} \
                         #&& CURSOR=$#BUFFER
-                    [[ $LBUFFER[-1] != '"' ]] && \
-                    zle expand-word
+                        alias -g | grep -q "^$1" || {
+                            [[ $LBUFFER[-1] != '"' ]] && \
+                            zle expand-word
+                        }
                     } &> /dev/null
                 }
             }
@@ -1190,6 +1192,7 @@ supernatural-space() {
 
         {
             alias -g | grep -q "^$lastWord" || {
+                        #
                 [[ $CURSOR == $#BUFFER ]] && \
                 [[ $LBUFFER[-1] != '"' ]] && \
                 zle expand-word
@@ -1199,7 +1202,7 @@ supernatural-space() {
 
 
     zle expand-history
-    expand-aliases
+    expand-aliases "$lastWord"
 
     zle self-insert
 }
