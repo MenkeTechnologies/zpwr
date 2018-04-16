@@ -860,6 +860,7 @@ fi
 endofline(){
     BUFFER+=" "
     CURSOR=$#BUFFER
+    zle vi-insert
 }
 
 zle -N endofline
@@ -868,6 +869,7 @@ bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 bindkey -M viins '^[^M' self-insert-unmeta
 bindkey -M viins '^P' endofline
+bindkey -M vicmd '^P' endofline
 bindkey -M vicmd G end-of-buffer-or-history
 
 # RPROMPT shows vim modes (insert vs normal)
