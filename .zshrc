@@ -1344,9 +1344,8 @@ colortest(){
 
 #{{{                    MARK:FZF
 #**************************************************************
+export ROUGIFY_THEME="github"
 fzf_setup(){
-    local ROUGIFY_THEME
-    ROUGIFY_THEME="github"
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
 
