@@ -799,7 +799,18 @@ bindkey -M menuselect '^L' vi-end-of-line
 #search through options
 bindkey -M menuselect '/' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
+
+expandAliasAccept(){
+    zle _expand_alias
+    zle expand-history
+    zle expand-word
+    zle .accept-line
+}
+
+zle -N expandAliasAccept
+
 bindkey -M menuselect '^M' .accept-line
+bindkey -M menuselect '^@' reverse-menu-complete
 
 autoload -U select-bracketed select-quoted
 zle -N select-bracketed
@@ -833,6 +844,7 @@ bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 bindkey -M viins '^[^M' self-insert-unmeta
 bindkey -M viins '^P' endofline
+bindkey -M vicmd G end-of-buffer-or-history
 
 # RPROMPT shows vim modes (insert vs normal)
 zle-keymap-select() {
