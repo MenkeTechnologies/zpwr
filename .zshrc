@@ -858,6 +858,7 @@ if (( $version > 5.2 )); then
 fi
 
 endofline(){
+    BUFFER+=" "
     CURSOR=$#BUFFER
 }
 
