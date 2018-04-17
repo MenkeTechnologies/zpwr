@@ -524,10 +524,10 @@ gitCommitAndPush(){
 }
 
 replacer(){
-    if [[ -n "$3" ]]; then
         orig="$1"
         replace="$2"
         shift 2
+    if [[ -n "$3" ]]; then
         for file in "$@" ; do
             sed -i'' "s@$orig@$replace@g" "$file"
         done
