@@ -395,7 +395,7 @@ clearList () {
                                 "function" && {
                                 type -f "$(echo "$loc" | \
                                 awk '{print $1}')" | \
-                                tail +2 | cat -n
+                                tail -n +2 | cat -n
                             }
                             echo "$loc" | grep -q \
                                 "alias" && {
