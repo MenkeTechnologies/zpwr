@@ -374,8 +374,8 @@ clearList () {
             for command in "$@"; do
                 exists $command &&  {
                     #exe matching
-                    while read locale;do
-                        lf="$(echo $locale|cut -d' ' -f3-10)"
+                    while read loc;do
+                        lf="$(echo $loc|cut -d' ' -f3-10)"
                         [[ -f "$lf" ]] && {
                             prettyPrint "$lf" && \
                             eval "$ls_command" $lf \
@@ -390,15 +390,16 @@ clearList () {
                             echo
                             echo
                         } || {
-                            echo "$locale"
-                            echo "$locale" | grep -q \
+                            echo "$loc"
+                            echo "$loc" | grep -q \
                                 "function" && {
-                                type -f "$(echo "$locale" \
-                                | awk '{print $1}')" 
+                                type -f "$(echo "$loc" | \
+                                awk '{print $1}')" | \
+                                tail +2 | cat -n
                             }
-                            echo "$locale" | grep -q \
+                            echo "$loc" | grep -q \
                                 "alias" && {
-                                alias "$(echo "$locale" \
+                                alias "$(echo "$loc" \
                                 | awk '{print $1}')"
                             }
                             echo
