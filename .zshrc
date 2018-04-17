@@ -336,7 +336,7 @@ changeQuotes(){
 }
 
 alternateQuotes(){
-    BUFFER="$(echo "$BUFFER" | tr "\"'" "'\"" )"
+    BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"
 }
 
 basicSedSub(){
