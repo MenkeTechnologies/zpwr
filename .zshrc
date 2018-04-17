@@ -1147,7 +1147,7 @@ supernatural-space() {
         badWords=("${(z)__CORRECT_WORDS[$key]}")
         for misspelling in $badWords[@];do
             if [[ $mywords[-1] == $misspelling ]]; then
-                LBUFFER="$(print -R "$LBUFFER" | sed -E \
+                LBUFFER="$(print -r -- "$LBUFFER" | sed -E \
                     "s@\\b$misspelling\\b@$key@g")"
                 finished=true
                 break
@@ -1173,26 +1173,26 @@ supernatural-space() {
         #DNS lookups
         if [[ ! -f "$lastWord" ]]; then
             type -a "$lastWord" &> /dev/null || {
-                print -r $lastWord | grep -qE \
+                print -r -- $lastWord | grep -qE \
                 '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\.?$'\
                 && {
                     #DNS lookup
                     A_Record=$(host $lastWord) 2>/dev/null \
                         && {
-                        A_Record=$(print -r $A_Record | grep ' address' | head -1 | awk '{print $4}')
+                        A_Record=$(print -r -- $A_Record | grep ' address' | head -1 | awk '{print $4}')
                     } || A_Record=bad
                     [[ $A_Record != bad ]] && \
-                        LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord@$A_Record@g")"
+                        LBUFFER="$(print -r -- "$LBUFFER" | sed -E "s@\\b$lastWord@$A_Record@g")"
                 } || {
-                    print -r $lastWord | grep -qE \
+                    print -r -- $lastWord | grep -qE \
                     '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' && {
                     #reverse DNS lookup
                     PTR_Record=$(nslookup $lastWord) \
                         2>/dev/null && {
-                        PTR_Record=$(print -r $PTR_Record | grep 'name = ' |tail -1 | awk '{print $4}')
+                        PTR_Record=$(print -r --$PTR_Record | grep 'name = ' |tail -1 | awk '{print $4}')
                     } || PTR_Record=bad
                         [[ $PTR_Record != bad ]] && \
-                            LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord\\b@${PTR_Record:0:-1}@g")"
+                            LBUFFER="$(print -R -- "$LBUFFER" | sed -E "s@\\b$lastWord\\b@${PTR_Record:0:-1}@g")"
                     }
                 }
             }
