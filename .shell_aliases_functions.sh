@@ -524,11 +524,16 @@ gitCommitAndPush(){
 }
 
 replacer(){
-    orig="$1"
-    shift
-    replace="$1"
-    shift
-    sed -i'' "s@$orig@$replace@g" "$@"
+    if [[ -n "$3" ]]; then
+        orig="$1"
+        replace="$2"
+        shift 2
+        for file in "$@" ; do
+            sed -i'' "s@$orig@$replace@g" "$@"
+        done
+    else
+        cat | sed "s@$orig@$replace@g"
+    fi
 }
 
 createGIF(){
