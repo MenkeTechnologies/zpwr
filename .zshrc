@@ -193,7 +193,7 @@ tutsUpdate() {
             zle .accept-line
         else
             zle .kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh '${commitMessage}' >> \"$LOGFILE\" 2>&1 & )"
+            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$LOGFILE\" 2>&1 & )"
             zle .accept-line
         fi
     else
@@ -267,30 +267,35 @@ changeQuotes(){
         __OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
     elif (( $__COUNTER % 8 == 1 )); then
-        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(echo "$BUFFER" | tr -d "'" )" ]]; then
+        if [[ "$(print -r "$__OLDBUFFER" \
+            | tr -d "'\"\`" )" \
+            != "$(print -r "$BUFFER" | tr -d "'" )" ]]; then
             __COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\'/\"}
     elif (( $__COUNTER % 8 == 2 )); then
-        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(echo "$BUFFER" | tr -d "\"" )" ]]; then
+        if [[ "$(print -r "$__OLDBUFFER" | tr -d \
+            "'\"\`" )" != \
+            "$(print -r "$BUFFER" | tr -d "\"" )" ]]; then
             __COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\"/\`}
     elif (( $__COUNTER % 8 == 3 )); then
-        if [[ "$(echo "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(echo "$BUFFER" | tr -d "\`" )" ]]; then
+        if [[ \
+            "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
+            != "$(print -r "$BUFFER" | tr -d "\`" )" ]]; \
+        then
             __COUNTER=0
             return 1
         fi
         _SEMI_OLDBUFFER="$BUFFER"
         BUFFER="\"${BUFFER}\""
     elif (( $__COUNTER % 8 == 4 )); then
-        if [[ "$(echo "$_SEMI_OLDBUFFER" \
-            | tr -d "'\"\`" )" != "$(echo "$BUFFER" | tr -d "\`\"" )" ]]; then
+        if [[ "$(print -r "$_SEMI_OLDBUFFER" \
+            | tr -d "'\"\`" )" != \
+            "$(print -r "$BUFFER" | tr -d "\`\"" )" ]]; then
             __COUNTER=0
             return 1
         fi
@@ -305,7 +310,7 @@ changeQuotes(){
             #statements
         fi
         if [[ "$_SEMI_OLDBUFFER" != \
-            "$(echo "${BUFFER:2:-1}" )" ]]; then
+            "$(print -r "${BUFFER:2:-1}" )" ]]; then
             __COUNTER=0
             return 1
         fi
@@ -341,7 +346,7 @@ alternateQuotes(){
 
 basicSedSub(){
     emulate -LR zsh
-    echo "$BUFFER" | egrep -q '\w+' || {
+    print -r "$BUFFER" | egrep -q '\w+' || {
         printf "\x1b[1;31m"
         zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
         printf "\x1b[0m"
@@ -360,7 +365,7 @@ basicSedSub(){
             printf "\x1b[0;4;1;34m"
         else
             printf "\x1b[1;44;37m"
-            echo "$SEDARG" | grep -q '>' && printf \
+            print -r "$SEDARG" | grep -q '>' && printf \
                 "\x1b[0;1;37;45m"
         fi
         if (( (#key)==(##^?) || (#key)==(##^h) ));then
@@ -377,32 +382,32 @@ basicSedSub(){
         zle -R "Extended Regex Sed Substitution (original>replaced) (@ not allowed in either string): $SEDARG"
         read -k key || return 1
     done
-    echo "$SEDARG" | grep -q "@" && {
+    print -r "$SEDARG" | grep -q "@" && {
         printf "\x1b[0;1;31m"
         zle -R "No '@' allowed! That is the sed delimiter!" && read -k key
     printf "\x1b[0m"
     return 1
 }
 
-    echo "$SEDARG" | grep -q ">" || {
+    print -r "$SEDARG" | grep -q ">" || {
         printf "\x1b[0;1;31m"
         zle -R  "Needed '>' for separation of original regex string and substitution!" && read -k 1
         printf "\x1b[0m"
         return 1
     }
 
-    orig="$(echo $SEDARG | awk -F'>' '{print $1}')"
-    replace="$(echo $SEDARG | awk -F'>' '{print $2}')"
+    orig="$(print -r $SEDARG | awk -F'>' '{print $1}')"
+    replace="$(print -r $SEDARG | awk -F'>' '{print $2}')"
     SEDARG="s@$orig@$replace@g"
 
-    echo "$BUFFER" | egrep -q "$orig" || {
+    print -r "$BUFFER" | egrep -q "$orig" || {
         printf "\x1b[0;1;31m"
         zle -R  "No Match." && read -k 1
         printf "\x1b[0m"
         return 1
     }
 
-    BUFFER="$(echo $BUFFER | sed -E "$SEDARG")"
+    BUFFER="$(print -r $BUFFER | sed -E "$SEDARG")"
     printf "\x1b[0m"
 }
 
@@ -424,7 +429,7 @@ clipboard(){
         print -n "$BUFFER" | xclip -selection c -i
         echo
         print -n "\x1b[0;34mCopied \x1b[1m\""
-        print -nR "$BUFFER"
+        print -nr "$BUFFER"
         print  "\"\x1b[0;34m to System Clipboard!"
         echo
         zle .redisplay
@@ -447,7 +452,7 @@ surround(){
     #echo char is $char >> $LOGFILE
     #echo nextChar is $nextChar >> $LOGFILE
 
-    count=$(echo "$BUFFER" | fgrep -o "$KEYS" | wc -l)
+    count=$(print -r "$BUFFER" | fgrep -o "$KEYS" | wc -l)
 
     #TODO = only if next char is space or
     #end of line then insert quotes
@@ -466,7 +471,7 @@ surround(){
         '"')
             if (( $count % 2 == 1 )); then
                 BUFFER="$LBUFFER$KEYS$RBUFFER"
-                echo odd Char is $count >> $LOGFILE
+                #echo odd Char is $count >> $LOGFILE
                 zle .vi-forward-char
                 return 0
             fi
@@ -712,8 +717,8 @@ my-accept-line () {
         mywords=("${(z)BUFFER}")
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             aliases="$(cat $HOME/.common_aliases)"
-            line="$(echo $aliases | grep "^$mywords[1]=.*")"
-            line="$(echo $line | awk -F= '{print $2}')"
+            line="$(print -r $aliases | grep "^$mywords[1]=.*")"
+            line="$(print -r $line | awk -F= '{print $2}')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
@@ -1133,7 +1138,7 @@ supernatural-space() {
     __CORRECT_WORDS[go]="og"
 
     local TEMP_BUFFER mywords badWords
-    TEMP_BUFFER="$(echo $LBUFFER | tr -d "()[]{}\$,%'\"" )"
+    TEMP_BUFFER="$(print -r $LBUFFER | tr -d "()[]{}\$,%'\"" )"
     mywords=("${(z)TEMP_BUFFER}")
     finished=false
 
@@ -1167,23 +1172,23 @@ supernatural-space() {
         #DNS lookups
         if [[ ! -f "$lastWord" ]]; then
             type -a "$lastWord" &> /dev/null || {
-                echo $lastWord | grep -qE \
+                print -r $lastWord | grep -qE \
                 '^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\.?$'\
                 && {
                     #DNS lookup
                     A_Record=$(host $lastWord) 2>/dev/null \
                         && {
-                        A_Record=$(echo $A_Record | grep ' address' | head -1 | awk '{print $4}')
+                        A_Record=$(print -r $A_Record | grep ' address' | head -1 | awk '{print $4}')
                     } || A_Record=bad
                     [[ $A_Record != bad ]] && \
                         LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord@$A_Record@g")"
                 } || {
-                    echo $lastWord | grep -qE \
+                    print -r $lastWord | grep -qE \
                     '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' && {
                     #reverse DNS lookup
                     PTR_Record=$(nslookup $lastWord) \
                         2>/dev/null && {
-                        PTR_Record=$(echo $PTR_Record | grep 'name = ' |tail -1 | awk '{print $4}')
+                        PTR_Record=$(print -r $PTR_Record | grep 'name = ' |tail -1 | awk '{print $4}')
                     } || PTR_Record=bad
                         [[ $PTR_Record != bad ]] && \
                             LBUFFER="$(print -R "$LBUFFER" | sed -E "s@\\b$lastWord\\b@${PTR_Record:0:-1}@g")"
@@ -1232,7 +1237,7 @@ bindkey -M isearch '^A' beginning-of-line
 #if ! zplug check --verbose; then
 #    printf "Install? [y/N]: "
 #    if read -q; then
-#        echo; zplug install
+#        print -r; zplug install
 #    fi
 #fi
 #
@@ -1380,20 +1385,21 @@ fzf_setup(){
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
             --reverse --border --height 100%"
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview \"[[ -f {} ]] && { echo {} | egrep \
+        --preview \"[[ -f {} ]] && { print -r {} | egrep \
         '\.jar$' && jar tf {} ; } \
         || rougify -t $ROUGIFY_THEME {}\
         2>/dev/null || stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview  \"[[ -f {} ]] && { echo {} | egrep \
+        --preview  \"[[ -f {} ]] && { print -r {} | egrep \
         '\.jar$' && jar tf {} ; } || { rougify -t \
         $ROUGIFY_THEME {} 2>/dev/null || {
                 [[ -e {} ]] && stat {} | fold -80 | \
                 head -500 || {
                     source ~/.shell_aliases_functions.sh
                     {
-                        echo {} | egrep '(\d{1,3}\.){3}\d\
+                        print -r {} \
+                            | egrep '(\d{1,3}\.){3}\d\
                             {1,3}' && {
                             whois {} | egrep -q 'No (match\
                             |whois)' && dig {} || whois {}
