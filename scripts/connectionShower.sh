@@ -7,4 +7,4 @@
 #####   Notes:
 #}}}***********************************************************
 
-bash myWatchNoBlink.sh "lsof -i | sed s@""$(whoami)""@@" 1
+bash myWatchNoBlink.sh "sudo lsof -i | sed s@""$(whoami)""@@" 1
