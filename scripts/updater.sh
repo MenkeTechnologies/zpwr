@@ -119,7 +119,7 @@ if [[ $skip != true ]]; then
         prettyPrint "Updating Python3.6 Packages"
         #pip lists outdated programs and get first column with awk
         #store in outdated
-        outdated=$(pip3 list --outdated | awk '{print $1}')
+        outdated=$(pip3 list --outdated --format=columns | awk '{print $1}')
 
         #install outdated pip modules
         #split on space
@@ -137,7 +137,7 @@ if [[ $skip != true ]]; then
         prettyPrint "Updating Python2.7 Packages"
         #pip lists outdated programs and get first column with awk
         #store in outdated
-        outdated=$(pip2 list --outdated | awk '{print $1}')
+        outdated=$(pip2 list --outdated --format=columns | awk '{print $1}')
 
         #install outdated pip modules
         #split on space
