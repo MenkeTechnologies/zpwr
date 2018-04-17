@@ -529,7 +529,7 @@ replacer(){
         replace="$2"
         shift 2
         for file in "$@" ; do
-            sed -i'' "s@$orig@$replace@g" "$@"
+            sed -i'' "s@$orig@$replace@g" "$file"
         done
     else
         cat | sed "s@$orig@$replace@g"
