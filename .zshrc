@@ -625,8 +625,8 @@ zle -N clipboard
 bindkey -M viins '^Y' changeQuotes
 bindkey -M vicmd '^Y' changeQuotes
 
-bindkey -M viins '\e^K' alternateQuotes
-bindkey -M vicmd '\e^K' alternateQuotes
+bindkey -M viins '^K' alternateQuotes
+bindkey -M vicmd '^K' alternateQuotes
 
 bindkey -M viins '\e^D' capitalize-word
 bindkey -M vicmd '\e^D' capitalize-word
