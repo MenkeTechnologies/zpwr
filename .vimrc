@@ -864,10 +864,10 @@ elseif os == "Linux"
         map <ESC>[D <C-Left>
     else
         set  rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
-        map <ESC>[A <C-Up>
-        map <ESC>[B <C-Down>
-        map <ESC>[C <C-Right>
-        map <ESC>[D <C-Left>
+        "map <ESC>[A <C-Up>
+        "map <ESC>[B <C-Down>
+        "map <ESC>[C <C-Right>
+        "map <ESC>[D <C-Left>
     endif
 
 endif
