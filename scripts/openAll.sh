@@ -10,26 +10,26 @@
 printf "\e[37;44m"
 
 displayProgressIndicator(){
-local spinner="\|/-" # spinner
-local chars=1 # number of characters to display
-local delay=.1 # time in seconds between characters
-local prompt="press any key..." # user prompt
-local clearline="\e[K" # clear to end of line (ANSI terminal)
-local CR="\r"
+    local spinner="\|/-" # spinner
+    local chars=1 # number of characters to display
+    local delay=.1 # time in seconds between characters
+    local prompt="press any key..." # user prompt
+    local clearline="\e[K" # clear to end of line (ANSI terminal)
+    local CR="\r"
 
-#make cursor invisible
-tput civis
+    #make cursor invisible
+    tput civis
 
-while true; do # loop until user presses a key
+    while true; do # loop until user presses a key
 
-	printf "thinking... "
-	printf " %.${chars}s$CR" "$spinner" ##print first character of spinner then
-	# carriage return to beginning of line
-	local temp=${spinner#?}               # remove first character from $spinner
-	spinner=$temp${spinner%"$temp"} # and add it to the end
-	sleep $delay
+        printf "thinking... "
+        printf " %.${chars}s$CR" "$spinner" ##print first character of spinner then
+        # carriage return to beginning of line
+        local temp=${spinner#?}               # remove first character from $spinner
+        spinner=$temp${spinner%"$temp"} # and add it to the end
+        sleep $delay
 
-done
+    done
 }
 
 startCursor(){
@@ -49,7 +49,7 @@ killCursor(){
 #$# is number of arguments
 
 
-(( $# < 1 )) && echo "Need one argument." >&2 && exit 1
+(( $# == 0 )) && echo "Need one argument." >&2 && exit 1
 
 
 #set the fileExtension variable to first argument
@@ -75,7 +75,7 @@ startCursor
 
 dir_to_search="$(pwd)"
 
-if [[  "$2" ]]; then
+if [[ -n "$2" ]]; then
 	dir_to_search="$2"
 fi
 
