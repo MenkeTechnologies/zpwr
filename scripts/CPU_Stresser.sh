@@ -6,7 +6,7 @@
 #####   Purpose: bash script to stress system 
 #####   Notes: high CPU usage
 #}}}***********************************************************
-__ScriptVersion="1.0.1"
+__ScriptVersion="1.0.2"
 nproc=10
 
 #===  FUNCTION  ================================================================
@@ -17,7 +17,6 @@ function usage ()
 {
     echo "Usage :  $0 [options] [--]
     Default number of spawned processes is $nproc.
-    Change this with -n option.
 
     Options:
     -h|help             Display this message
@@ -65,7 +64,6 @@ alternatingPrettyPrint(){
     fi
 
 }
-
 
 #-----------------------------------------------------------------------
 #  Handle command line arguments

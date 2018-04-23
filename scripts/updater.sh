@@ -30,58 +30,58 @@ function usage ()
 
 while getopts ":hvs" opt
 do
-  case $opt in
+    case $opt in
 
-    h|help     )  usage; exit 0   ;;
-    s|skip ) skip=true ;;
+        h|he:lp     )  usage; exit 0   ;;
+        s|skip ) skip=true ;;
 
-    v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+        v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
-    * )  echo -e "\n  Option does not exist : $OPTARG\n"
-          usage; exit 1   ;;
+        * )  echo -e "\n  Option does not exist : $OPTARG\n"
+            usage; exit 1   ;;
 
-  esac    # --- end of case ---
-done
-shift $(($OPTIND-1))
+        esac    # --- end of case ---
+    done
+    shift $(($OPTIND-1))
 
 
-# clear screen
-trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
-clear
+    # clear screen
+    trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
+    clear
 
-prettyPrint(){
-    printf "\e[1;4m"
-    printf "$1"
-    printf "\n\e[0m"
-}
+    prettyPrint(){
+        printf "\e[1;4m"
+        printf "$1"
+        printf "\n\e[0m"
+    }
 
-alternatingPrettyPrint(){
-    counter=0
+    alternatingPrettyPrint(){
+        counter=0
 
-    if [[ -z "$1" ]]; then
-        cat | perl -F"$DELIMITER_CHAR" -anE '
-        my $counter=0;
-        for my $arg (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
+        if [[ -z "$1" ]]; then
+            cat | perl -F"$DELIMITER_CHAR" -anE '
+            my $counter=0;
+            for my $arg (@F){
+                if ($counter % 2 == 0){
+                    print "\x1b[36m$arg\x1b[0m"
+                } else {
+                print "\x1b[1;4;34m$arg\x1b[0m"
             }
-        $counter++;
+            $counter++;
         };print "\x1b[0m"'
     else
         perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
+                print "\x1b[36m$arg\x1b[0m"
             } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
-            }
+            print "\x1b[1;4;34m$arg\x1b[0m"
+        }
         $counter++;
-        }; print "\x1b[0m"' <<< "$@"
+    }; print "\x1b[0m"' <<< "$@"
 
-    fi
+fi
 
 }
 
@@ -110,112 +110,112 @@ gitRepoUpdater(){
 if [[ $skip != true ]]; then
     [[ -f "$SCRIPTS/printHeader.sh" ]] && {
         w=80
-        perl -le "print '_'x$w" | lolcat
-        echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
-        perl -le "print '_'x$w" | lolcat
-    }
-    #python 3.6
-    exists pip3 && {
-        prettyPrint "Updating Python3.6 Packages"
-        #pip lists outdated programs and get first column with awk
-        #store in outdated
-        outdated=$(pip3 list --outdated --format=columns | awk '{print $1}')
+    perl -le "print '_'x$w" | lolcat
+    echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
+    perl -le "print '_'x$w" | lolcat
+}
+#python 3.6
+exists pip3 && {
+    prettyPrint "Updating Python3.6 Packages"
+#pip lists outdated programs and get first column with awk
+#store in outdated
+outdated=$(pip3 list --outdated --format=columns | awk '{print $1}')
 
-        #install outdated pip modules
-        #split on space
-        for i in $outdated; do
-            pip3 install --upgrade "$i" #&> /dev/null
-        done
+#install outdated pip modules
+#split on space
+for i in $outdated; do
+    pip3 install --upgrade "$i" #&> /dev/null
+done
 
-        prettyPrint "Updating Pip3 Packages"
-        #update pip itself
-        pip3 install --upgrade pip setuptools wheel #&> /dev/null
+prettyPrint "Updating Pip3 Packages"
+#update pip itself
+pip3 install --upgrade pip setuptools wheel #&> /dev/null
     }
 
     #python 2.7 (non system)
     exists pip2 && {
         prettyPrint "Updating Python2.7 Packages"
-        #pip lists outdated programs and get first column with awk
-        #store in outdated
-        outdated=$(pip2 list --outdated --format=columns | awk '{print $1}')
+    #pip lists outdated programs and get first column with awk
+    #store in outdated
+    outdated=$(pip2 list --outdated --format=columns | awk '{print $1}')
 
-        #install outdated pip modules
-        #split on space
-        for i in $outdated; do
-            pip2 install --upgrade "$i" #&> /dev/null
-        done
+    #install outdated pip modules
+    #split on space
+    for i in $outdated; do
+        pip2 install --upgrade "$i" #&> /dev/null
+    done
 
-        #update pip itself
-        prettyPrint "Updating Pip2 Packages"
-        pip2 install --upgrade pip setuptools wheel #&> /dev/null
-    }
+    #update pip itself
+    prettyPrint "Updating Pip2 Packages"
+    pip2 install --upgrade pip setuptools wheel #&> /dev/null
+}
 
-    exists /usr/local/bin/ruby && {
-        prettyPrint "Updating Ruby Packages"
-        /usr/local/bin/gem update --system
-        /usr/local/bin/gem update
-        /usr/local/bin/gem cleanup
+exists /usr/local/bin/ruby && {
+    prettyPrint "Updating Ruby Packages"
+/usr/local/bin/gem update --system
+/usr/local/bin/gem update
+/usr/local/bin/gem cleanup
     }
 
     exists brew && {
         prettyPrint "Updating Homebrew Packages"
-        brew update #&> /dev/null
-        brew upgrade #&> /dev/null
-        #remove brew cache
-        rm -rf "$(brew --cache)"
-        #removing old symbolic links
-        brew prune
-        #remote old programs occupying disk sectors
-        brew cleanup
-        brew cask cleanup
-        brew services cleanup
-    }
+    brew update #&> /dev/null
+    brew upgrade #&> /dev/null
+    #remove brew cache
+    rm -rf "$(brew --cache)"
+    #removing old symbolic links
+    brew prune
+    #remote old programs occupying disk sectors
+    brew cleanup
+    brew cask cleanup
+    brew services cleanup
+}
 
-    exists npm && {
-        prettyPrint "Updating NPM packages"
-        for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
-        do
-            npm install -g "$package"
-        done
-        prettyPrint "Updating NPM itself"
-        npm install -g npm
+exists npm && {
+    prettyPrint "Updating NPM packages"
+for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
+do
+    npm install -g "$package"
+done
+prettyPrint "Updating NPM itself"
+npm install -g npm
     }
 
     exists yarn && {
         prettyPrint "Updating yarn packages"
-        yarn global upgrade
+    yarn global upgrade
     #    prettyPrint "Updating yarn itself"
     #    npm install -g yarn
-    }
+}
 
-    exists cpanm && {
-        prettyPrint "Updating Perl Packages"
-        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
-        if [[ ! -z "$perlOutdated" ]]; then
-            echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
-        fi
+exists cpanm && {
+    prettyPrint "Updating Perl Packages"
+perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
+if [[ ! -z "$perlOutdated" ]]; then
+    echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
+fi
     }
 
     exists pio && {
         prettyPrint "Updating PlatformIO"
-        pio update
-        pio upgrade
-    }
-    prettyPrint "Updating Tmux Plugins"
-    gitRepoUpdater "$HOME/.tmux/plugins"
+    pio update
+    pio upgrade
+}
+prettyPrint "Updating Tmux Plugins"
+gitRepoUpdater "$HOME/.tmux/plugins"
 
-    prettyPrint "Updating Pathogen Plugins"
-    #update pathogen plugins
-    gitRepoUpdater "$HOME/.vim/bundle"
+prettyPrint "Updating Pathogen Plugins"
+#update pathogen plugins
+gitRepoUpdater "$HOME/.vim/bundle"
 
-    prettyPrint "Updating OhMyZsh"
-    cd "$HOME/.oh-my-zsh/tools" && bash "$HOME/.oh-my-zsh/tools/upgrade.sh"
+prettyPrint "Updating OhMyZsh"
+cd "$HOME/.oh-my-zsh/tools" && bash "$HOME/.oh-my-zsh/tools/upgrade.sh"
 
-    prettyPrint "Updating OhMyZsh Plugins"
-    gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
+prettyPrint "Updating OhMyZsh Plugins"
+gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
 
-    prettyPrint "Updating OhMyZsh Themes"
-    gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
+prettyPrint "Updating OhMyZsh Themes"
+gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 fi
 
 
@@ -259,15 +259,15 @@ done
 
 brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
     # we have brew cu
-    prettyPrint "Updating Homebrew Casks!"
-    brew cu -fay --cleanup
+prettyPrint "Updating Homebrew Casks!"
+brew cu -fay --cleanup
 } || {
     # we don't have brew cu
-    prettyPrint "Installing brew-cask-upgrade"
-    brew tap buo/cask-upgrade
-    brew update
-    prettyPrint "Updating Homebrew Casks!"
-    brew cu --all -y --cleanup
+prettyPrint "Installing brew-cask-upgrade"
+brew tap buo/cask-upgrade
+brew update
+prettyPrint "Updating Homebrew Casks!"
+brew cu --all -y --cleanup
 }
 prettyPrint "Updating Vundle Plugins"
 
