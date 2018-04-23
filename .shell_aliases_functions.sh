@@ -801,9 +801,13 @@ torip(){
 }
 
 pirun(){
+    trap 'DONE=true' QUIT
+    local DONE
+    DONE=false
     local picounter
     picounter=1
     for pi in "${PI_ARRAY[@]}" ; do
+        [[ $DONE == true ]] && return 1
         alternatingPrettyPrint "Executing %'$1'% on %$pi%"
         if [[ -z $2 ]]; then
             ssh "${pi%:*}" "$1" 2>/dev/null
@@ -815,7 +819,7 @@ pirun(){
         fi
         ((picounter++))
     done
-
+    trap QUIT
 }
 
 #}}}***********************************************************
