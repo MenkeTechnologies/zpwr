@@ -67,6 +67,7 @@ set expandtab
 set number
 set backupdir=~/tmp
 set wildmenu "tab completion in command mode cycles through menu
+set wildignorecase "globbing is case insensitive
 syntax on
 set grepprg=ag
 

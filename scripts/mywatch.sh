@@ -48,15 +48,15 @@ tput civis
 
 while true; do
 
-    x=$(eval "$1")
+    output=$(eval "$1")
     clear
 
     if [[ $dateflag == true ]]; then
-        echo "$x"
+        echo "$output"
         echo
         printf "\e[1m`date`\e[0m"
     else
-        echo -n "$x"
+        echo -n "$output"
     fi
     sleep $time
 done

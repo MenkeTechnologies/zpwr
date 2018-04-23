@@ -50,21 +50,21 @@ tput civis
 
 while [[ true ]]; do
     script -c ls &> /dev/null && {
-        x="$(script -q /dev/null -c "$1" | tr -d '\r' | cat)"
+        output="$(script -q /dev/null -c "$1" | tr -d '\r' | cat)"
     } || {
-        x="$(script -q /dev/null $1 | tr -d '\r' | cat)"
+        output="$(script -q /dev/null $1 | tr -d '\r' | cat)"
     }
     clear
 
     if [[ $dateflag == true ]]; then
-        echo "$x"
+        echo "$output"
         echo
         printf "\e[1m`date`\e[0m"
     else
     if [[ $limitFlag == true ]]; then
-        echo -en "$x" | head -n $num
+        echo -en "$output" | head -n $num
     else
-        echo -en "$x"
+        echo -en "$output"
     fi
     fi
     sleep $time
