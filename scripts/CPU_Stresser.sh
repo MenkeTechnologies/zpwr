@@ -17,6 +17,7 @@ function usage ()
 {
     echo "Usage :  $0 [options] [--]
     Default number of spawned processes is $nproc.
+    Change this with -n option.
 
     Options:
     -h|help             Display this message
@@ -64,6 +65,7 @@ alternatingPrettyPrint(){
     fi
 
 }
+
 
 #-----------------------------------------------------------------------
 #  Handle command line arguments

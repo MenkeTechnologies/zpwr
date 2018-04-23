@@ -65,6 +65,7 @@ set mouse=a
 set shiftwidth=4 "indent set to four spaces
 set expandtab
 set number
+set backupdir=~/tmp
 set wildmenu "tab completion in command mode cycles through menu
 syntax on
 set grepprg=ag
@@ -663,8 +664,8 @@ map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 "map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
 
 "for moving selection up and down, displacing other text 
-xmap <C-Right> >gv
-xmap <C-Left> <gv
+vnoremap <C-Right> >gv
+vnoremap <C-Left> <gv
 
 xmap <C-Down> :m '> + <CR> gv
 xmap <C-Up> :m '< -- <CR> gv
