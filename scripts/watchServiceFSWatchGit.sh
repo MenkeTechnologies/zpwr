@@ -23,3 +23,6 @@ while read -d "" event; do
 	#r for recursive option, E for extended regex, e to exclude .git and .idea etc from triggering
 	#watch service, 0 to use null \0 character as delimiter
 done < <(fswatch -r -0 -E "$dir_watching" -e "/\.." )
+
+
+

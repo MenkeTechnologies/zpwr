@@ -1323,7 +1323,7 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
     #source "$HOME/.powerlevel9kconfig.sh"
     #make this environ vars show up in prompt %~
     : ~WCC
-    : ~SD_PATH
+    : ~SD
     : ~HOMEBREW_HOME_FORMULAE
 } || {
     :

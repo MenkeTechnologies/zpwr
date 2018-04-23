@@ -23,7 +23,7 @@ export DELIMITER_CHAR='%'
 
 alternatingPrettyPrint(){
     counter=0
-
+:
     if [[ -z $1 ]]; then
         cat | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
@@ -48,7 +48,6 @@ alternatingPrettyPrint(){
         }; print "\x1b[0m"' <<< "$@"
 
     fi
-
 }
 
 gitRepoUpdater(){

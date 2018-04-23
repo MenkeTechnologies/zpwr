@@ -148,7 +148,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias bsaver="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
     alias c='cd $WCC'
-    alias emu='cd $SD_PATH/emu'
+    alias emu='cd $SD/emu'
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
     #keep remote tty sessions alive by stopping sleep
