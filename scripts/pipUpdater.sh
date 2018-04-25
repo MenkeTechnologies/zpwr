@@ -40,7 +40,7 @@ alternatingPrettyPrint(){
 }
 
 alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-outdated=$(pip2 list --outdated --format=columns | awk '{print $1}')
+outdated=$(pip2 list --outdated --format=columns | tail +3 | awk '{print $1}')
 
 if [[ "$(uname)" == Darwin ]]; then
     #install outdated pip modules 
