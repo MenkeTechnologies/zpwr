@@ -81,7 +81,7 @@ else
     sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-    outdated=$(pip3 list --outdated | awk '{print $1}')
+    outdated=$(pip3 list --outdated | tail +3 | awk '{print $1}')
 
     #install outdated pip modules 
     #split on space
