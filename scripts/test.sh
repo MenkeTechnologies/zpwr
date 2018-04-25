@@ -10,6 +10,11 @@
 id
 
 
+pwd
+
+
+echo "we are here and so cool"
+
 
 
 
