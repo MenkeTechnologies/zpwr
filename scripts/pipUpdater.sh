@@ -40,7 +40,7 @@ alternatingPrettyPrint(){
 }
 
 alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-outdated=$(pip2 list --outdated --format=columns | tail +3 | awk '{print $1}')
+outdated=$(pip2 list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
 if [[ "$(uname)" == Darwin ]]; then
     #install outdated pip modules 
@@ -55,7 +55,7 @@ if [[ "$(uname)" == Darwin ]]; then
     pip2 install --upgrade pip setuptools wheel #&> /dev/null
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-    outdated=$(pip3 list --outdated --format=columns | tail +3 | awk '{print $1}')
+    outdated=$(pip3 list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
     #install outdated pip modules 
     #split on space
@@ -81,7 +81,7 @@ else
     sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-    outdated=$(pip3 list --outdated | tail +3 | awk '{print $1}')
+    outdated=$(pip3 list --outdated | sed -n '3,$p' | awk '{print $1}')
 
     #install outdated pip modules 
     #split on space
