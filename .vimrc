@@ -64,6 +64,8 @@ set incsearch
 set mouse=a
 set shiftwidth=4 "indent set to four spaces
 set expandtab
+set linebreak
+set showbreak=--> 
 set number
 set backupdir=~/tmp
 set wildmenu "tab completion in command mode cycles through menu

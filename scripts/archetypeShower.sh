@@ -15,3 +15,7 @@ while true; do
     screenfetch 2>/dev/null
     sleep 1000
 done
+
+
+
+
