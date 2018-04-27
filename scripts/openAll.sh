@@ -90,9 +90,7 @@ while read line; do
 		#then increment counter
 
 		for ending in ${fileExtensions[@]}; do
-			if [[ `echo "${lcline##*.}"` == "$ending" ]]; then
-				filesArray+=("$line")
-			fi
+            [[ "${lcline##*.}" == "$ending" ]] && filesArray+=("$line")
 		done
 
 
