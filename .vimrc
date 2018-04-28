@@ -671,8 +671,8 @@ map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 vnoremap <C-Right> >gv
 vnoremap <C-Left> <gv
 
-xmap <C-Down> :m '> + <CR> gv
-xmap <C-Up> :m '< -- <CR> gv
+vnoremap <C-Down> :m '> + <CR> gv
+vnoremap <C-Up> :m '< -- <CR> gv
 
 map  <expr> ; repmo#LastKey('<Plug>Sneak_;')|sunmap ;
 map  <expr> , repmo#LastRevKey('<Plug>Sneak_,')|sunmap ,
