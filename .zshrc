@@ -625,6 +625,15 @@ zle -N clipboard
 bindkey -M viins '^Y' changeQuotes
 bindkey -M vicmd '^Y' changeQuotes
 
+bindkey -M viins -r '^D' 
+bindkey -M vicmd -r '^D' 
+
+bindkey -M viins -r '^G' 
+bindkey -M vicmd -r '^G' 
+
+bindkey -M viins '^G^F' list-choices
+bindkey -M vicmd '^G^F' list-choices
+
 bindkey -M viins '^K' alternateQuotes
 bindkey -M vicmd '^K' alternateQuotes
 
@@ -872,8 +881,8 @@ endofline(){
 
 zle -N endofline
 
-bindkey -M vicmd '^G' what-cursor-position
-bindkey -M viins '^G' what-cursor-position
+bindkey -M vicmd '^G^G' what-cursor-position
+bindkey -M viins '^G^G' what-cursor-position
 bindkey -M viins '^[^M' self-insert-unmeta
 bindkey -M viins '^P' endofline
 bindkey -M vicmd '^P' endofline
