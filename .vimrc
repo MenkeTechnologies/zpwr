@@ -41,6 +41,7 @@ set ignorecase
 set smartcase
 set tabstop=4
 set cindent
+set ttyfast
 "60 ms wait for next key in mappings
 "set timeoutlen=300
 "using powerline status bar instead
