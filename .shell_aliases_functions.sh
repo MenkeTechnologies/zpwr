@@ -165,9 +165,10 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias sudoedit='sudo $EDITOR'
     alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
     exists mvim && { 
+        alias v='mvim -v'
         alias vi='mvim -v'
         alias vim='mvim -v'
-        alias v='mvim -v -u ~/.minvimrc'
+        alias vm='mvim -v -u ~/.minvimrc'
     }
 else
     #Linux
