@@ -80,7 +80,6 @@ alternatingPrettyPrint(){
         }
         $counter++;
         }; print "\x1b[0m"' <<< "$@"
-        
     fi
 }
 

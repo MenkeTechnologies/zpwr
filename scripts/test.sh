@@ -8,7 +8,130 @@
 #}}}***********************************************************
 
 
+pwd
 
-say ym pwid is $(pwd)
+set
+
+id
+
+if (( x > 05 )); then
+    echo "we are hree"
+fi
+
+if [[ x > 60 ]]; then
+    echo "here"
+else
+    echo "not here"
+fi
+
+pwd
+ls
+id
+pwd
+
+set
+
+id
+
+if (( x > 05 )); then
+    echo "we are hree"
+fi
+
+pwd
+
+
+
+set
+
+id
+
+if (( x > 05 )); then
+    echo "we are hree"
+fi
+
+if [[ x > 60 ]]; then
+    echo "here"
+else
+    echo "not here"
+fi
+
+
+pwd
+ls
+id
+pwd
+
+
+
+set
+
+id
+
+if (( x > 05 )); then
+    echo "we are hree"
+fi
+
+if [[ x > 60 ]]; then
+    echo "here"
+else
+    echo "not here"
+fi
+
+
+pwd
+ls
+id
+pwd
+
+
+
+set
+
+id
+
+if (( x > 05 )); then
+    echo "we are hree"
+fi
+
+if [[ x > 60 ]]; then
+    echo "here"
+else
+    echo "not here"
+fi
+
+
+pwd
+ls
+id
+pwd
+
+
+
+set
+
+id
+
+if (( x > 05 )); then
+    echo "we are hree"
+fi
+
+if [[ x > 60 ]]; then
+    echo "here"
+else
+    echo "not here"
+fi
+
+
+pwd
+ls
+id
+
+
+
+
+
+
+
+
 
 

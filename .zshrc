@@ -236,9 +236,9 @@ expand-aliases() {
     elif [[ $LBUFFER[-1] == " " ]]; then
         :
     else
-            alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
+            alias -- $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
                 #dont expand first word if \,' or "
-                [[ -z $(alias -g $LBUFFER) ]] && {
+                [[ -z $(alias -g -- $LBUFFER) ]] && {
                     [[ ${LBUFFER:0:1} != '\' ]] && \
                     [[ ${LBUFFER:0:1} != "'" ]] && \
                     [[ ${LBUFFER:0:1} != '"' ]] && \
