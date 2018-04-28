@@ -352,10 +352,9 @@ suc(){
 }
 
 clearList () {
-
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
-                ls_command="grc -c "$HOME/conf.gls" \
+                ls_command="grc -c $HOME/conf.gls \
                 gls -iFlhA --color=always"
             } || {
                 ls_command="ls -iFlhAO"
@@ -363,7 +362,7 @@ clearList () {
         lib_command="otool -L"
     else
         exists grc && {
-                ls_command="grc -c "$HOME/conf.gls" \
+                ls_command="grc -c $HOME/conf.gls \
                 ls -iFlhA --color=always"
             } || {
                 ls_command="ls -iFhlA"
@@ -394,8 +393,7 @@ clearList () {
                             echo "$loc" | grep -q \
                                 "function" && {
                                 type -f "$(echo "$loc" | \
-                                awk '{print $1}')" | \
-                                tail -n +2 | cat -n
+                                awk '{print $1}')" | cat -n
                             }
                             echo "$loc" | grep -q \
                                 "alias" && {
