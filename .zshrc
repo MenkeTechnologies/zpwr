@@ -609,14 +609,14 @@ bindkey -M vicmd '^]' basicSedSub
 bindkey -M viins '^O' edit-command-line
 bindkey -M vicmd '^O' edit-command-line
 
-bindkey -M viins '^F' fzf-file-widget
-bindkey -M vicmd '^F' fzf-file-widget
+bindkey -M viins '^F^F' fzf-file-widget
+bindkey -M vicmd '^F^F' fzf-file-widget
 
 bindkey -M viins '^Q' fzf-history-widget
 bindkey -M vicmd '^Q' fzf-history-widget
 
-bindkey -M viins '^V' fzf-cd-widget
-bindkey -M vicmd '^V' fzf-cd-widget
+bindkey -M viins '^V^V' fzf-cd-widget
+bindkey -M vicmd '^V^V' fzf-cd-widget
 
 zle -N changeQuotes
 zle -N alternateQuotes
@@ -628,11 +628,14 @@ bindkey -M vicmd '^Y' changeQuotes
 bindkey -M viins -r '^D' 
 bindkey -M vicmd -r '^D' 
 
-bindkey -M viins -r '^G' 
-bindkey -M vicmd -r '^G' 
+bindkey -M viins -r '^V' 
+bindkey -M vicmd -r '^V' 
 
-bindkey -M viins '^G^F' list-choices
-bindkey -M vicmd '^G^F' list-choices
+bindkey -M viins -r '^F' 
+bindkey -M vicmd -r '^F' 
+
+bindkey -M viins '^F^S' list-choices
+bindkey -M vicmd '^F^S' list-choices
 
 bindkey -M viins '^K' alternateQuotes
 bindkey -M vicmd '^K' alternateQuotes
@@ -881,8 +884,8 @@ endofline(){
 
 zle -N endofline
 
-bindkey -M vicmd '^G^G' what-cursor-position
-bindkey -M viins '^G^G' what-cursor-position
+bindkey -M vicmd '^G' what-cursor-position
+bindkey -M viins '^G' what-cursor-position
 bindkey -M viins '^[^M' self-insert-unmeta
 bindkey -M viins '^P' endofline
 bindkey -M vicmd '^P' endofline
