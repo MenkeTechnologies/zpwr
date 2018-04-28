@@ -612,8 +612,8 @@ bindkey -M vicmd '^O' edit-command-line
 bindkey -M viins '^F^F' fzf-file-widget
 bindkey -M vicmd '^F^F' fzf-file-widget
 
-bindkey -M viins '^Q' fzf-history-widget
-bindkey -M vicmd '^Q' fzf-history-widget
+bindkey -M viins '^V^Z' fzf-history-widget
+bindkey -M vicmd '^V^Z' fzf-history-widget
 
 bindkey -M viins '^V^V' fzf-cd-widget
 bindkey -M vicmd '^V^V' fzf-cd-widget
@@ -624,9 +624,6 @@ zle -N clipboard
 
 bindkey -M viins '^Y' changeQuotes
 bindkey -M vicmd '^Y' changeQuotes
-
-bindkey -M viins -r '^D' 
-bindkey -M vicmd -r '^D' 
 
 bindkey -M viins -r '^V' 
 bindkey -M vicmd -r '^V' 
