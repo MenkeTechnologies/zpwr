@@ -56,7 +56,7 @@ case "$fileToBeExecuted" in
     *.coffee ) executeTheFile coffee "$fileToBeExecuted"
         ;;
     *.vim )
-        command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | tail +4"
+        command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | sed -n '4,$p'"
         executeFileFirstArgIsCommand "$command" "$fileToBeExecuted"
         ;;
     *.py ) executeTheFile python3 "$fileToBeExecuted"
