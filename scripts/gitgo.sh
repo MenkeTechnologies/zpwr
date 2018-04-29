@@ -36,7 +36,7 @@
 ##########################################
 
 myPrettyPrint(){
-    #print white text 37m on blue qbackground 44m
+    #print white text 37m on blue background 44m
     printf "\e[37;44m"
     printf "$1"
     printf "\e[0m\n"
