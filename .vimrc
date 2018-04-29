@@ -40,6 +40,8 @@ set autoread
 set ignorecase
 set smartcase
 set tabstop=4
+"snap to nearest tabstop
+set shiftround
 set cindent
 set ttyfast
 "60 ms wait for next key in mappings
@@ -799,6 +801,12 @@ nnoremap <silent> <C-D>g :silent !open -t %:p:h<CR>:redraw!<CR>
 nnoremap <silent> <C-D>s :update<CR>:SyntasticCheck<CR>
 vnoremap <silent> <C-D>s :<C-C>:update<CR>:SyntasticCheck<CR>
 inoremap <silent> <C-D>s <C-[>:update<CR>:SyntasticCheck<CR>a
+
+
+nmap [[ ?{<CR>w99[{
+nmap ][ /}<CR>b99]}
+nmap ]] j0[[%/{<CR>
+nmap [] k$][%?}<CR>]}]]}]]
 
 "}}}***********************************************************
 
