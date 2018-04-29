@@ -106,10 +106,10 @@ gitRepoUpdater(){
 
 if [[ $skip != true ]]; then
     [[ -f "$SCRIPTS/printHeader.sh" ]] && {
-        w=80
-        perl -le "print '_'x$w" | lolcat
+        width=80
+        perl -le "print '_'x$width" | lolcat
         echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
-        perl -le "print '_'x$w" | lolcat
+        perl -le "print '_'x$width" | lolcat
     }
     #python 3.6
     exists pip3 && {

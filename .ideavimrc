@@ -14,3 +14,10 @@ set ignorecase
 set showmode
 set visualbell
 set wrapscan
+
+
+nmap [[ ?{<CR>w99[{
+nmap ][ /}<CR>b99]}
+nmap ]] j0[[%/{<CR>
+nmap [] k$][%?}<CR>]}]]}]]
+

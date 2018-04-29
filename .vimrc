@@ -195,7 +195,7 @@ let g:NERDTreeDisableExactMatchHighlight = 1
 let g:NERDTreeDisablePatternMatchHighlight = 1
 
 "too slow with icons
-let g:webdevicons_enable_nerdtree=0
+let g:webdevicons_enable_nerdtree=1
 
 "matches JetBrains IDE mappings
 let g:multi_cursor_use_default_mapping=0
@@ -706,6 +706,12 @@ noremap <expr> { repmo#SelfKey('{', '}')|sunmap {
 noremap <expr> } repmo#SelfKey('}', '{')|sunmap }
 noremap <expr> ( repmo#SelfKey('(', ')')|sunmap (
 noremap <expr> ) repmo#SelfKey(')', '(')|sunmap )
+
+noremap <expr> [[ repmo#SelfKey('[[', ']]')|sunmap [[
+noremap <expr> ]] repmo#SelfKey(']]', '[[')|sunmap ]]
+
+noremap <expr> ]m repmo#SelfKey(']m', '[m')|sunmap ]m
+noremap <expr> [m repmo#SelfKey('[m', ']m')|sunmap [m
 
 noremap <expr> j repmo#SelfKey('j', 'k')|sunmap j
 noremap <expr> k repmo#SelfKey('k', 'j')|sunmap k

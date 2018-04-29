@@ -37,6 +37,6 @@ printf "$BLUEDone\n${RESET}"
 
 #if just uploading to website one html file
 if [[ "$#" == 1 && "$1" =~ .*.html  ]]; then
-	open "http://$MY_IP:443/$1"
+	open "http://$MY_IP:2/$1"
 	#open -a "Sublime Text"
 fi

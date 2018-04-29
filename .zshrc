@@ -91,11 +91,11 @@ PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
 if [[ "$(uname)" == "Darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' \
+    echo "$PARENT_PROCESS" | egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
 else
     #linux
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' \
+    echo "$PARENT_PROCESS" | egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
     distroName="$(grep '^ID=' /etc/os-release | \
