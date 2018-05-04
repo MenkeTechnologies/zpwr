@@ -1146,6 +1146,7 @@ supernatural-space() {
     __CORRECT_WORDS[directory]="direcotry directroy"
     __CORRECT_WORDS[go]="og"
     __CORRECT_WORDS[namespace]="namepsace naemspace naempsace"
+    __CORRECT_WORDS[is]="si"
 
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(print -r -- $LBUFFER | tr -d "()[]{}\$,%'\"" )"
@@ -1196,8 +1197,7 @@ supernatural-space() {
                     print -r -- $lastWord | grep -qE \
                     '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b' && {
                     #reverse DNS lookup
-                    PTR_Record=$(nslookup $lastWord)
-                        2>/dev/null && {
+                    PTR_Record=$(nslookup $lastWord) 2>/dev/null && {
                         PTR_Record=$(print -r -- $PTR_Record | grep 'name = ' | tail -1 | awk '{print $4}')
                     } || PTR_Record=bad
                         [[ $PTR_Record != bad ]] && \
@@ -1218,7 +1218,6 @@ supernatural-space() {
             }
         } &> /dev/null
     fi
-
 
     zle expand-history
     expand-aliases "$lastWord"
