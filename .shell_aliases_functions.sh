@@ -19,7 +19,6 @@ export DELIMITER_CHAR='%'
 #**************************************************************
 if [[ -z "$PYSCRIPTS" ]]; then
     export GITHUB_ACCOUNT='MenkeTechnologies'
-    export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
     export CLICOLOR="YES"
     export LSCOLORS="ExFxBxDxCxegedabagacad"
     export SCRIPTS="$HOME/Documents/shellScripts"
@@ -28,6 +27,7 @@ if [[ -z "$PYSCRIPTS" ]]; then
     export D="$HOME/Desktop"
     export DL="$HOME/Downloads"
     export XAUTHORITY="$HOME/.Xauthority"
+    export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
     export TERMINAL_APP="Terminal.app"
