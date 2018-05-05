@@ -13,7 +13,7 @@ export TMUX_REMOTE_PREFIX="b"
 PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
 export PI_ARRAY
 export DELIMITER_CHAR='%'
-export PROMPT4='+'
+export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
