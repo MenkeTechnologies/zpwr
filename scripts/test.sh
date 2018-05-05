@@ -7,15 +7,26 @@
 #####   Notes:
 #}}}***********************************************************
 
-
-
 pwd
+
+id
+
+ls
+
+
+
+x='dogsarecool'
+
+
+if (( condition )); then
+    #statements
+fi
 
 
 id
 
 
-ls
+
 
 
 

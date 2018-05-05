@@ -71,13 +71,13 @@ alternatingPrettyPrint(){
     else
         perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
+        $counter++;
         for my $arg (@F){
             if ($counter % 2 == 0){
                 print "\x1b[36m$arg\x1b[0m"
             } else {
             print "\x1b[1;4;34m$arg\x1b[0m"
         }
-        $counter++;
         }; print "\x1b[0m"' <<< "$@"
     fi
 }

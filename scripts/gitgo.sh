@@ -42,7 +42,7 @@ myPrettyPrint(){
     printf "\e[0m\n"
 }
 initializeGitDirectory(){
-    #there is no .git directory
+        #there is no .git directory
     if [[ ! -d ".git" ]]; then
         myPrettyPrint "Do you want to initialize this diqrectory with Git?"
         #read one character

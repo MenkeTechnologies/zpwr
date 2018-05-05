@@ -76,10 +76,17 @@ set wildignorecase "globbing is case insensitive
 syntax on
 set grepprg=ag
 
+"visual selection automatically into system clipboard
+set guioptions+=a
+"start browsing in current dir
+set browsedir=current
+"reduce enter key after message alerts
+set shortmess=a
+
 "show the leader
 set showcmd
-"for copying to system clipboard
-"set clipboard=unnamed
+"visual mode automatically copies to system clipboard
+set clipboard=autoselect
 
 "show trailing spaces and tabs
 set list listchars=tab:\ \ ,trail:·
@@ -522,6 +529,8 @@ function Quoter(type)
 
     let colIndex=col('.')
 
+    echohl ErrorMsg
+
     if a:type == "single"
         let quote="'"
         "if matches echo .* L=echo R=last non space
@@ -554,6 +563,8 @@ function Quoter(type)
         "echo "matching index ]]".matchingIndexDblB
         "echo "matching index ]".matchingIndexB
         "echo "least index ]".least
+        "
+        "
 
         let lineToPunct=strpart(lineToEnd, 1,least)
         "echo "line to punct: ".lineToPunct
@@ -601,6 +612,8 @@ function Quoter(type)
     else
         echo "Unknown Quoting Option:".line
     endif
+
+    echohl None
 
 endfunction
 
@@ -778,10 +791,10 @@ function TmuxRepeatGeneric()
 endfunction
 
 " reassing readline plugin mapping
-autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w<CR>:call TmuxRepeat()<CR>a
+autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat()<CR>a
 autocmd VimEnter * nunmap S
 
-nnoremap <silent> <C-V> :w<CR>:call TmuxRepeat()<CR>
+nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat()<CR>
 
 vnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
 nnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
@@ -799,8 +812,8 @@ nnoremap <silent> <C-D>d :update<CR>
 vnoremap <silent> <C-D>d :<C-C>:update<CR>
 inoremap <silent> <C-D>d <C-[>:update<CR>a
 
-nnoremap <silent> <C-D>v :w<CR>:call TmuxRepeatGeneric()<CR>
-inoremap <silent> <C-D>v <C-[>:w<CR>:call TmuxRepeatGeneric()<CR>a
+nnoremap <silent> <C-D>v :w!<CR>:call TmuxRepeatGeneric()<CR>
+inoremap <silent> <C-D>v <C-[>:w!<CR>:call TmuxRepeatGeneric()<CR>a
 inoremap <silent> <C-D>g <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 nnoremap <silent> <C-D>g :silent !open -t %:p:h<CR>:redraw!<CR>
 
