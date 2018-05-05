@@ -21,3 +21,4 @@ nmap ][ /}<CR>b99]}
 nmap ]] j0[[%/{<CR>
 nmap [] k$][%?}<CR>]}]]}]]
 
+imap <C-e> <C-o>A
