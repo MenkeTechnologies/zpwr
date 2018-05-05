@@ -13,6 +13,7 @@ export TMUX_REMOTE_PREFIX="b"
 PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
 export PI_ARRAY
 export DELIMITER_CHAR='%'
+export PROMPT4='+'
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var

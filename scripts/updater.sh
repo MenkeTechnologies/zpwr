@@ -43,7 +43,6 @@ do
 done
 shift $(($OPTIND-1))
 
-
 # clear screen
 trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
 clear
