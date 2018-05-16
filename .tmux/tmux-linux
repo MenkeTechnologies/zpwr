@@ -2,7 +2,7 @@ if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " 
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = ubuntu ]' 'source /usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = fedora ]' 'source /usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = opensuse ]' 'source /usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
-if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = kali ]' 'source /usr/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf'
+if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = kali ]' 'source /usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf'
 
 bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t="
 
