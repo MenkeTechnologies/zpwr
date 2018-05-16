@@ -181,8 +181,9 @@ else
         source "$HOME/.rpitokens.sh"
     fi
     exists vim && { 
+        alias v=vim
         alias vi=vim
-        alias v='vim -u ~/.minvimrc'
+        alias vm='vim -u ~/.minvimrc'
     }
 fi
 alias cf2="sed 's@.*@_\U\l&_@' | boldText.sh | blue"
