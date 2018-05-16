@@ -15,7 +15,7 @@ OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
-source common.sh || echo "Must be in customTerminalInstaller directory" >&2 && exit 1
+source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
 
 #Dependencies
 # 1) vim 8.0
