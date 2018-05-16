@@ -13,6 +13,7 @@ export TMUX_REMOTE_PREFIX="b"
 PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
 export PI_ARRAY
 export DELIMITER_CHAR='%'
+export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 #}}}***********************************************************
 
@@ -28,7 +29,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
     export D="$HOME/Desktop"
     export DL="$HOME/Downloads"
     export XAUTHORITY="$HOME/.Xauthority"
-    export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
     export TERMINAL_APP="Terminal.app"
