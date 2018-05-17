@@ -1168,16 +1168,15 @@ supernatural-space() {
 
 
     if (( $#mywords == 1 )); then
-        :
-        #alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
-            ##dont expand first word if \,' or "
-            #[[ -z $(alias -g $LBUFFER) ]] && {
-                #[[ ${LBUFFER:0:1} != '\' ]] && \
-                #[[ ${LBUFFER:0:1} != "'" ]] && \
-                #[[ ${LBUFFER:0:1} != '"' ]] && \
-                #zle _expand_alias
-            #}
-        #}
+        alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
+            #dont expand first word if \,' or "
+            [[ -z $(alias -g $LBUFFER) ]] && {
+                [[ ${LBUFFER:0:1} != '\' ]] && \
+                [[ ${LBUFFER:0:1} != "'" ]] && \
+                [[ ${LBUFFER:0:1} != '"' ]] && \
+                zle _expand_alias
+            }
+        }
     else
 		lastWord=${mywords[-1]}
         #DNS lookups
@@ -1217,10 +1216,10 @@ supernatural-space() {
                 zle expand-word
             }
         } &> /dev/null
+        expand-aliases "$lastWord"
     fi
 
     zle expand-history
-    expand-aliases "$lastWord"
 
     zle self-insert
 }
