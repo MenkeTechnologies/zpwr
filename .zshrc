@@ -231,6 +231,7 @@ dbz() {
 }
 
 expand-aliases() {
+#set -x
     if (( $CURSOR != $#BUFFER )); then
         zle _expand_alias
     elif [[ $LBUFFER[-1] == " " ]]; then
@@ -239,9 +240,9 @@ expand-aliases() {
             alias -- $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
                 #dont expand first word if \,' or "
                 [[ -z $(alias -g -- $LBUFFER) ]] && {
-                    [[ ${LBUFFER:0:1} != '\' ]] && \
-                    [[ ${LBUFFER:0:1} != "'" ]] && \
-                    [[ ${LBUFFER:0:1} != '"' ]] && \
+                    #[[ ${LBUFFER:0:1} != '\' ]] && \
+                    #[[ ${LBUFFER:0:1} != "'" ]] && \
+                    #[[ ${LBUFFER:0:1} != '"' ]] && \
                     {
                         zle _expand_alias
                         #unset 'functions[_expand-aliases]'
@@ -258,6 +259,7 @@ expand-aliases() {
             }
 
     fi
+    set +x
 }
 __COUNTER=0
 
@@ -1166,7 +1168,6 @@ supernatural-space() {
         done
         [[ $finished == true ]] && break
     done
-
 
     if (( $#mywords == 1 )); then
         alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
