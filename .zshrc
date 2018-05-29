@@ -1079,13 +1079,17 @@ zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
 
 zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,@3-]#)*=1;30=1;31=34=1;31=34'
 
-#use tag names as menu select separators
+# use tag names as menu select separators
 zstyle ':completion:*' group-name ''
 
+# divide man pages by sections
 zstyle ':completion:*:manuals' separate-sections true
 
 # Ignore completion functions for commands you don't have
 zstyle ':completion:*:functions' ignored-patterns '_*'
+
+# ignore .. as completion option
+zstyle ':completion:*' ignored-patterns '..'
 
 #}}}***********************************************************
 
