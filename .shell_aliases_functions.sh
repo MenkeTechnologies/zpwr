@@ -556,6 +556,10 @@ hc(){
     [[ -z "$1" ]] && reponame="$(basename "$(pwd)")" \
         || reponame="$1"
     printf "\e[1m"
+    old_dir="$(pwd)"
+    if [[ -n "$1" ]]; then
+        cd "$reponame"
+    fi
     git init
     hub create "$reponame"
     echo "# $reponame" > README.md
@@ -563,6 +567,9 @@ hc(){
     git add .
     git commit -m "first commit"
     git push --set-upstream origin master
+    if [[ -n "$1" ]]; then
+        cd "$old_dir"
+    fi
     printf "\e[0m"
 }
 
