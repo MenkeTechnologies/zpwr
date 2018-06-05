@@ -714,7 +714,7 @@ my-accept-line () {
     #do we want to clear the screen and run ls after we exec the current line?
     local commandsThatModifyFiles regex mywords line
 
-    commandsThatModifyFiles=(unlink rm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
+    commandsThatModifyFiles=(unlink rm srm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
     for command in ${commandsThatModifyFiles[@]}; do
         regex="^sudo $command .*\$|^$command .*\$"
@@ -1089,7 +1089,8 @@ zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # ignore .. as completion option
-zstyle ':completion:*' ignored-patterns '..'
+zstyle ':completion:*' ignored-patterns '*..'
+zstyle ':completion:*' ignored-patterns '*.'
 
 #}}}***********************************************************
 
