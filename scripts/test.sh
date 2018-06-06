@@ -18,16 +18,7 @@ ls
 x='dogsarecool'
 
 
-if (( condition )); then
-    #statements
-fi
-
-
-id
-
-
-
-
+pwd
 
 
 

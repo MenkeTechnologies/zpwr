@@ -418,7 +418,7 @@ clipboard(){
 
     [[ "$(uname)" == Darwin ]] && {
         print -sr "$BUFFER"
-        print -n "$BUFFER" | pbcopy
+        print -rn "$BUFFER" | pbcopy
         echo
         print -n "\x1b[0;34mCopied \x1b[1m\""
         print -rn "$BUFFER"
