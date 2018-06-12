@@ -817,7 +817,7 @@ torip(){
 
 
 perlremovespaces(){
-    perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@' "$@"
+    perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$@"
 }
 
 pirun(){

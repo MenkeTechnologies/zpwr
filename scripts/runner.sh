@@ -66,13 +66,14 @@ case "$fileToBeExecuted" in
     *.hs ) executeFileFirstArgIsCommand "ghc -e ':script $fileToBeExecuted'" "$fileToBeExecuted"
         ;;
     *.java ) executeTheFile java "$fileToBeExecuted"
-
         ;;
     *.lua ) executeTheFile lua "$fileToBeExecuted"
         ;;
     *.groovy ) executeTheFile groovy "$fileToBeExecuted"
         ;;
     *.tcl ) executeTheFile tclsh "$fileToBeExecuted"
+        ;;
+    *.ml ) executeTheFile ocaml "$fileToBeExecuted"
         ;;
     *.clj ) executeTheFile clojure "$fileToBeExecuted"
         ;;
