@@ -815,6 +815,10 @@ torip(){
     echo $ip
 }
 
+mycurl(){
+    \curl -fsSL -v "$1" &> >(sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|)/d")
+}
+
 
 perlremovespaces(){
     perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$@"
