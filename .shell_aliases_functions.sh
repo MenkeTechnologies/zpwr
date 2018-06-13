@@ -816,7 +816,7 @@ torip(){
 }
 
 mycurl(){
-    \curl -fsSL -v "$1" &> >(sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|)/d")
+    \curl -fsSL -v "$1" &> >(sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|C)/d")
 }
 
 
