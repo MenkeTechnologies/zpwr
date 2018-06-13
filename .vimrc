@@ -736,9 +736,14 @@ map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
 function CompleteLine()
     let SemiColon=['java','pl','c','cpp','js']
+    let doubleSemiColon=['ml']
     let exeFileType=expand('%:e')
     if index(SemiColon, exeFileType) >= 0
         inoremap <C-Space> <C-O>$;<Enter>
+        inoremap <C-\> <ESC>+
+        nnoremap <C-\> +
+    elseif index(doubleSemiColon, exeFileType) >= 0
+        inoremap <C-Space> <C-O>$;;<Enter>
         inoremap <C-\> <ESC>+
         nnoremap <C-\> +
     else
@@ -758,7 +763,7 @@ set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
 function TmuxRepeat()
-    let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'coffee', 'lua', 'java']
+    let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'lua', 'java']
     let exeFileType=expand('%:e')
 
     if has("gui_running")
