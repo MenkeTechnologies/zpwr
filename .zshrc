@@ -235,7 +235,11 @@ expand-aliases() {
     if (( $CURSOR != $#BUFFER )); then
         zle _expand_alias
     elif [[ $LBUFFER[-1] == " " ]]; then
-        :
+        unset 'functions[_expand-aliases]'
+        functions[_expand-aliases]=$BUFFER
+        (($+functions[_expand-aliases])) && \
+        BUFFER='\'${functions[_expand-aliases]#$'\t'} && \
+        CURSOR=$#BUFFER
     else
             alias -- $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
                 #dont expand first word if \,' or "
@@ -1181,7 +1185,8 @@ supernatural-space() {
                 [[ ${LBUFFER:0:1} != '\' ]] && \
                 [[ ${LBUFFER:0:1} != "'" ]] && \
                 [[ ${LBUFFER:0:1} != '"' ]] && \
-                zle _expand_alias
+                { expand-aliases "$LBUFFER"; }
+                
             }
         }
     else
