@@ -510,6 +510,15 @@ contribCount(){
 }
 
 gds(){
+
+    git status &> /dev/null || {
+        printf "\x1b[0;1;31m"
+        echo
+        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        printf "\x1b[0m"
+        return 1
+    }
+
     if [[ -n "$PERL5LIB" ]]; then
         old="$PERL5LIB"
         unset PERL5LIB
