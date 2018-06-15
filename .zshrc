@@ -231,15 +231,23 @@ dbz() {
 }
 
 expand-aliases() {
-#set -x
+    #set -x
     if (( $CURSOR != $#BUFFER )); then
         zle _expand_alias
     elif [[ $LBUFFER[-1] == " " ]]; then
-        unset 'functions[_expand-aliases]'
-        functions[_expand-aliases]=$BUFFER
-        (($+functions[_expand-aliases])) && \
-        BUFFER='\'${functions[_expand-aliases]#$'\t'} && \
-        CURSOR=$#BUFFER
+        BUFFER="${BUFFER[1,-2]}"
+        zle _expand_alias
+        #BUFFER="$BUFFER "
+        #old="${LBUFFER[1,-2]}"
+        #unset 'functions[_expand-aliases]'
+        #functions[_expand-aliases]=$BUFFER
+        #(($+functions[_expand-aliases])) && \
+        #BUFFER=${functions[_expand-aliases]#$'\t'} && \
+        #mywords=("${(z)BUFFER}")
+        #if [[ $mywords[1] == "$old" ]]; then
+        #    BUFFER="\\$BUFFER"
+        #fi
+        #CURSOR=$#BUFFER
     else
             alias -- $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
                 #dont expand first word if \,' or "
