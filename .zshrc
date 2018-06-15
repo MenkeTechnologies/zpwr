@@ -235,7 +235,7 @@ expand-aliases() {
     if (( $CURSOR != $#BUFFER )); then
         zle _expand_alias
     elif [[ $LBUFFER[-1] == " " ]]; then
-        BUFFER="${BUFFER[1,-2]}"
+        BUFFER="${BUFFER:0:-1}"
         zle _expand_alias
         #BUFFER="$BUFFER "
         #old="${LBUFFER[1,-2]}"
