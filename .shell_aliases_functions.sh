@@ -509,6 +509,45 @@ contribCount(){
     fi
 }
 
+gds(){
+    if [[ -n "$PERL5LIB" ]]; then
+        old="$PERL5LIB"
+        unset PERL5LIB
+    fi
+    git add .
+    git status | grep -q nothing && printf "Nothing to commit.\n" && return 1
+    exists csdiff && difftool=csdiff || difftool=sdiff
+
+    { 
+        printf "\x1b[1;4mStatus\x1b[0m\n"
+        git status && \
+            git difftool -y -x \
+            'printf "\x1b[1;4m$REMOTE\x1b[0m\n";'"$difftool -w $COLUMNS" HEAD * ; }  | less
+
+    if [[ -n "$PERL5LIB" ]]; then
+        PERL5LIB="$old"
+        export PERL5LIB
+    fi
+    printf "\x1b[0m"
+
+    if [[ -z "$1" ]]; then
+        return 0
+    else
+        printf "\x1b[4;34m>>>>>> Push? "
+        if echo "$SHELL" | grep -q zsh ; then
+            read -k 1
+        else
+            read -n 1
+        fi
+        if [[ "$REPLY" == 'y' ]]; then
+            return 0
+        else
+            return 1
+        fi
+    fi
+
+}
+
 gitCommitAndPush(){
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do

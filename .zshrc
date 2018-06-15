@@ -169,7 +169,7 @@ gitfunc () {
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0;34m"
 
-gitCommitAndPush "$BUFFER" && {
+    gitCommitAndPush "$BUFFER" && {
         print -sr "$BUFFER"
         zle .kill-whole-line
         printf "\x1b[0m"
