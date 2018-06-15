@@ -159,8 +159,7 @@ gitfunc () {
     git status &> /dev/null || {
         printf "\x1b[0;1;31m"
         print -sr "$BUFFER"
-        echo
-        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        printf "NOT GIT DIR: $(pwd -P)" >&2
         printf "\x1b[0m"
         zle .kill-whole-line
         zle .accept-line-and-down-history
