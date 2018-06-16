@@ -137,6 +137,7 @@ alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always'
 alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=auto -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=auto -c "$HOME/conf.df" df'
+alias gpf='git push --force'
 
 if [[ "$(uname)" == "Darwin" ]]; then
     #Darwin specific aliases
@@ -510,7 +511,6 @@ contribCount(){
 }
 
 gds(){
-
     git status &> /dev/null || {
         printf "\x1b[0;1;31m"
         printf "NOT GIT DIR: $(pwd -P)\n" >&2
@@ -518,30 +518,35 @@ gds(){
         return 1
     }
 
-    if [[ -n "$PERL5LIB" ]]; then
-        old="$PERL5LIB"
-        unset PERL5LIB
-    fi
-    git add .
-    git status | grep -q nothing && printf "Nothing to commit.\n" && return 1
-    exists csdiff && difftool=csdiff || difftool=sdiff
+    currentDir="$(pwd -P)"
+    for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
+        if [[ "$currentDir" == "$dir" ]]; then
+            printf "\x1b[0;1;31m"
+            print -sr "$BUFFER"
+            printf "BLACKLISTED: $(pwd -P)" >&2
+            echo
+            printf "\x1b[0m"
+            return 1
+        fi 
+    done
 
-    { 
-        printf "\x1b[1;4mStatus\x1b[0m\n"
-        git status && \
-            git difftool -y -x \
-            'printf "\x1b[1;4m$REMOTE\x1b[0m\n";'"$difftool -w $COLUMNS" HEAD * ; }  | less
+	git status | grep -q "nothing to commit" && {
+        printf "\x1b[0;1;31m"
+        printf "Nothing has changed." >&2
+        echo
+        BUFFER=""
+        printf "\x1b[0m"
+        return 0
+	}
 
-    if [[ -n "$PERL5LIB" ]]; then
-        PERL5LIB="$old"
-        export PERL5LIB
-    fi
+	sdiffColorizer.pl "$COLUMNS" | less
+
     printf "\x1b[0m"
 
     if [[ -z "$1" ]]; then
         return 0
     else
-        printf "\x1b[4;34m>>>>>> Push? "
+        printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
         if echo "$SHELL" | grep -q zsh ; then
             read -k 1
         else
