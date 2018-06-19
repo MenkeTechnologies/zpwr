@@ -113,6 +113,9 @@ else
         (opensuse)
             plugins+=(suse z)
             ;;
+        (opensuse-tumbleweed)
+            plugins+=(suse z)
+            ;;
         (fedora)
             plugins+=(yum fedora dnf)
             ;;
