@@ -138,6 +138,7 @@ alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=auto -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=auto -c "$HOME/conf.df" df'
 alias gpf='git push --force'
+alias glf='git pull --force'
 
 if [[ "$(uname)" == "Darwin" ]]; then
     #Darwin specific aliases
