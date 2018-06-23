@@ -1510,6 +1510,8 @@ export ROUGIFY_THEME="github"
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
+    echo "$SHELL" | grep -q "zsh" && ps='$pipestatus[1]' || \
+        ps='${PIPESTATUS[0]}'
 
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
@@ -1522,8 +1524,7 @@ fzf_setup(){
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"[[ -f {} ]] && { print -r {} | egrep \
         '\.jar$' && jar tf {} ; } \
-        || rougify -t $ROUGIFY_THEME {} \
-        2>/dev/null | cat -n || stat {} | fold -80 | head -500\""
+        || { rougify -t $ROUGIFY_THEME {} 2>/dev/null | cat -n; rc=$ps; }; [[ \$rc = 0 ]] || stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview  \"[[ -f {} ]] && { print -r {} | egrep \
