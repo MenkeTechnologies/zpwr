@@ -899,7 +899,7 @@ pirun(){
     trap QUIT
 }
 
-di(){
+digs(){
     dig +trace "$@"
 }
 
