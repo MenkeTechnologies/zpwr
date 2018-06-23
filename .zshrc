@@ -1514,7 +1514,7 @@ fzf_setup(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
         "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} \
-        2>/dev/null || stat {} | fold -80 | head -500")"'
+        2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
@@ -1522,8 +1522,8 @@ fzf_setup(){
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"[[ -f {} ]] && { print -r {} | egrep \
         '\.jar$' && jar tf {} ; } \
-        || rougify -t $ROUGIFY_THEME {}\
-        2>/dev/null || stat {} | fold -80 | head -500\""
+        || rougify -t $ROUGIFY_THEME {} \
+        2>/dev/null | cat -n || stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview  \"[[ -f {} ]] && { print -r {} | egrep \
