@@ -70,7 +70,7 @@ cp "$HOME/.rpitokens.sh" "$tutorialDir/aliases"
 prettyPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/"*
-cp "$SCRIPTS"/*.sh "$SCRIPTS/"*.pl $tutorialDir/shell"
+cp "$SCRIPTS"/*.sh "$SCRIPTS/"*.pl "$tutorialDir/shell"
 cp -R "$SCRIPTS/macOnly" "$tutorialDir/shell"
 #README="$tutorialDir/shell/README.md"
 #echo "# Mac and Linux Scripts" > "$README"
