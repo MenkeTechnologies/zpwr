@@ -23,7 +23,7 @@ prettyPrint(){
 #**************************************************************
 prettyPrint "Copying scripts to custom Installer Repo"
 rm -rf "$SCRIPTS/customTerminalInstaller/scripts/"*
-cp "$SCRIPTS"/*.sh "$SCRIPTS/*.pl" "$installerDir/scripts"
+cp "$SCRIPTS"/*.sh "$SCRIPTS/"*.pl "$installerDir/scripts"
 cp -R "$SCRIPTS/macOnly" "$installerDir/scripts"
 cp "$HOME/.vimrc" "$installerDir"
 cp "$HOME/.tmux.conf" "$installerDir"
