@@ -1268,7 +1268,7 @@ supernatural-space() {
     __CORRECT_WORDS[mount]="mounr mounf"
     __CORRECT_WORDS[print]="pirtn pirnt"
     __CORRECT_WORDS[for]="fro rfo rof"
-    __CORRECT_WORDS[directory]="direcotry directroy"
+    __CORRECT_WORDS[directory]="direcotry direcorty directroy"
     __CORRECT_WORDS[go]="og"
     __CORRECT_WORDS[namespace]="namepsace naemspace naempsace"
     __CORRECT_WORDS[is]="si"
