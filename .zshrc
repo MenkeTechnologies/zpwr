@@ -1230,7 +1230,6 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}n="> /dev/null 2>&1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}ne="2> /dev/null"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}g='git add . && git commit -m "" && git push'
     alias -g ${__GLOBAL_ALIAS_PREFIX}e='|& fgrep -v "grep" |& \egrep --color=always -i'
     alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
