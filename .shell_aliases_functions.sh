@@ -116,7 +116,7 @@ alias brc="vim -S ~/.vim/sessions/aliases.vim + ~/.shell_aliases_functions.sh; s
 alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 #}}}***********************************************************
-alias deleteTab="sed -e '/^[ tab]*$/d'"
+alias deleteTab="sed -e '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper='tr '\''a-z'\'' '\''A-Z'\'''
 #over aliases
@@ -189,7 +189,6 @@ else
         alias vm='vim -u ~/.minvimrc'
     }
 fi
-alias -g cf2=" | sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
 alias tclsh="rlwrap tclsh"
 alias logs="tail -f /var/log/**/*.log | ccze"
 alias matr="cmatrix -C blue -abs"
@@ -222,7 +221,7 @@ alias sf="bash $SCRIPTS/directoryContentsSize.sh"
 alias sc='cd $SCRIPTS'
 alias bluef='source $SCRIPTS/blueText.sh'
 alias dl='cd $HOME/Downloads'
-alias docu='cd $HOME/Documents'
+alias doc='cd $HOME/Documents'
 alias mus='cd $HOME/Music'
 alias o="open ."
 alias jobs="jobs -l"
