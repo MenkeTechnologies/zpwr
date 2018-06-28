@@ -1235,6 +1235,8 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
     alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
+
 
     if [[ "$(uname)" == Darwin ]]; then
         alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
