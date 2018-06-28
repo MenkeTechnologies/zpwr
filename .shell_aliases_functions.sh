@@ -189,7 +189,7 @@ else
         alias vm='vim -u ~/.minvimrc'
     }
 fi
-alias cf2="sed 's@.*@_\U\l&_@' | boldText.sh | blue"
+alias -g cf2=" | sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
 alias tclsh="rlwrap tclsh"
 alias logs="tail -f /var/log/**/*.log | ccze"
 alias matr="cmatrix -C blue -abs"
