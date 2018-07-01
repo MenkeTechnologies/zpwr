@@ -13,7 +13,7 @@ installerDir="$HOME/Documents/shellScripts/customTerminalInstaller"
 SCRIPTS="$HOME/Documents/shellScripts"
 
 prettyPrint(){
-    printf "\e[1;4m$1\n\e[0m"
+    printf "\x1b[1;4m$1\n\x1b[0m"
 }
 
 [[ -n "$1" ]] && commitMessage="$1" || commitMessage="update"
@@ -146,7 +146,7 @@ rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -P "$websiteDir/downloads/scripts"
 fi
-cp "$SCRIPTS/"*.sh "$SCRIPTS/"*.pl $websiteDir/downloads/scripts"
+cp "$SCRIPTS/"*.sh "$SCRIPTS/"*.pl "$websiteDir/downloads/scripts"
 cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
