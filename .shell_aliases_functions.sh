@@ -544,7 +544,7 @@ gds(){
         return 0
 	}
 
-	sdiffColorizer.pl "$COLUMNS" | less
+	gitSdiffColorizer.pl | less
 
     printf "\x1b[0m"
 
