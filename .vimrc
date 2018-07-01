@@ -876,15 +876,15 @@ let os = substitute(system('uname'), "\n", "", "")
 
 "powerline-status pip package installs to different locations of different OS
 if os == "Darwin"
-    if has('python3')
-        command! -nargs=1 Py py3 <args>
-        set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.6/Python
-        set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.6
-    else
-        command! -nargs=1 Py py <args>
-        set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
-        set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
-    endif
+    "if has('python3')
+        "command! -nargs=1 Py py3 <args>
+        "set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
+        "set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.7
+    "else
+        "command! -nargs=1 Py py <args>
+        "set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
+        "set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
+    "endif
 
     set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
     map <ESC>[1;5A <C-Up>

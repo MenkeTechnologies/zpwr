@@ -7,8 +7,7 @@
 #####   Notes:
 #}}}***********************************************************
 
-
-my $numColumns = `tput cols`;
+my $numColumns =`tput cols`;
 chomp $numColumns;
 
 my $changeColor="41";
@@ -18,21 +17,10 @@ my $insertFormatting="1;4";
 my $deleteColor="42";
 my $deleteFormatting="1;4";
 
-my $file1 = $ARGV[0];
-my $file2 = $ARGV[1];
+print "\x1b[1;4mStatus\x1b[0m\n";
+print `git status`;
 
-open my $less, "|-", "less -M" or die "$!";
-select $less;
-
-open my $fh, "sdiff --expand-tabs -w $numColumns $file1 $file2 | cat -n | ";
-
-printf "\x1b[1;4m$file1\x1b[0m";
-
-my $numSpaces = int (($numColumns / 2)) - length ($file1);
-
-print "\x20" x $numSpaces;
-
-printf "\x1b[1;4m$file2 \x1b[0m\n";
+open my $fh, "git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\n\";sdiff --expand-tabs -w '$numColumns HEAD * | cat -n | ";
 
 while (<$fh>) {
     my $length = length $_;
@@ -59,5 +47,3 @@ while (<$fh>) {
 
     print $_;
 }
-
-close $less;
