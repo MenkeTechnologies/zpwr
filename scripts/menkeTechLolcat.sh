@@ -9,7 +9,7 @@
 
 tput civis
 
-printf "\e[0;8m"
+printf "\e[0m"
 trap 'tput cnorm; exit' INT
 while true; do
     clear
