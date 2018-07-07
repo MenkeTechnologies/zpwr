@@ -12,7 +12,7 @@ use feature 'say';
 sub removeSpaces {
     if (-d $_[0]) {
         #say "it a dir $_[0]";
-        for (glob("$_[0]/*")){
+        for (glob("$_[0]/* $_[0]/.[!.]*")){
             removeSpaces($_);
         }
     } else {
