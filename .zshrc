@@ -255,7 +255,7 @@ gitfunc () {
         return 0
 	}
 	
-    sdiffColorizer.pl "$COLUMNS" | less
+    gitSdiffColorizer.pl | less
     echo
     printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
     if echo "$SHELL" | grep -q zsh ; then
@@ -1454,8 +1454,8 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-    #source "$HOME/.powerlevel9kconfig.sh"
-    #make this environ vars show up in prompt %~
+    # source "$HOME/.powerlevel9kconfig.sh"
+    #make these env vars show up in prompt as %~
     : ~WCC
     : ~SD
     : ~HOMEBREW_HOME_FORMULAE
