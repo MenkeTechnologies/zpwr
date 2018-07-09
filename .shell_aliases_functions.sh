@@ -61,7 +61,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
         export EDITOR='mvim -v'
-        say here
     } || export EDITOR='vim'
     export YARN_HOME="$HOME/.config/yarn"
     export NODE_HOME="/usr/local/lib/node_modules"
