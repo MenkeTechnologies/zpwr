@@ -58,21 +58,22 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export MANPATH=$HOME/perl5/man:$MANPATH
         export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
-        export PIP3_HOME="/usr/local/lib/python3.6/site-packages"
+        export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
         export EDITOR='mvim -v'
-        } || export EDITOR='vim'
-        export YARN_HOME="$HOME/.config/yarn"
-        export NODE_HOME="/usr/local/lib/node_modules"
-        export PERL5LIB="$HOME/perl5/lib/perl5"
-        export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
-        export HISTSIZE=50000
-        export HISTTIMEFORMAT=' %F %T _ '
-        export BLUE="\e[37;44m"
-        export RED="\e[31m"
-        export RESET="\e[0m"
-        export LOGFILE="$HOME/updaterlog.txt"
-        export UMASK=077
+        say here
+    } || export EDITOR='vim'
+    export YARN_HOME="$HOME/.config/yarn"
+    export NODE_HOME="/usr/local/lib/node_modules"
+    export PERL5LIB="$HOME/perl5/lib/perl5"
+    export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
+    export HISTSIZE=50000
+    export HISTTIMEFORMAT=' %F %T _ '
+    export BLUE="\e[37;44m"
+    export RED="\e[31m"
+    export RESET="\e[0m"
+    export LOGFILE="$HOME/updaterlog.txt"
+    export UMASK=077
 #**************************************************************
 #}}}
 
