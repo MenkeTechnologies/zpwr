@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 while [[ 1 ]]; do
-    bash -l updater.sh
+    bash -l updater.sh -e
     sleep $((3600 * 24))
 
 done

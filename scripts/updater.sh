@@ -19,6 +19,7 @@ usage() {
     Options:
     -h|help       Display this message
     -s|skip       Skip the main
+    -e|end        Skip the end
     -v|version    Display script version"
 
 }    # ----------  end of function usage  ----------
@@ -27,12 +28,13 @@ usage() {
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
-while getopts ":hvs" opt
+while getopts ":hvse" opt
 do
     case $opt in
 
         h|he:lp     )  usage; exit 0   ;;
         s|skip ) skip=true ;;
+        e|end ) end=true ;;
 
         v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
@@ -268,7 +270,9 @@ brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
 }
 prettyPrint "Updating Vundle Plugins"
 
-vim -c VundleUpdate -c quitall
+if [[ $end != true ]]; then
+    vim -c VundleUpdate -c quitall
+fi
 
 #decolorize prompt
 echo -e "Done\e[0m"
