@@ -64,7 +64,7 @@ while true; do
         refreshers
     fi
 
-    sleep 5
+    sleep 8
 
 done
 
