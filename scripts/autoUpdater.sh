@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 while [[ 1 ]]; do
+    echo "$(date) Updating Software" >> "$LOGFILE"
     bash -l updater.sh -e
     sleep $((3600 * 24))
-
 done
