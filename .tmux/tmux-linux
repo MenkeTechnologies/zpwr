@@ -7,4 +7,4 @@ if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " 
 bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t="
 
 
-bindkey C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
+bind-key C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
