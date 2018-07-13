@@ -33,13 +33,13 @@ while (<$fh>) {
     my $debug=0;
 
     if ($debug) {
-        $_ =~ s@(^.*\|[ ]{1,2}.*$)@(\x1b[$changeColor;$changeFormatting;37m$1\x1b[0m)@g;
-        $_ =~ s@(^.*>[ ]{1,2}.*$)@-(\x1b[$insertColor;$insertFormatting;37m$1\x1b[0m)@g;
-        $_ =~ s@(^.*<[ ]{1,2}.*$)@-(\x1b[$deleteColor;$deleteFormatting;37m$1\x1b[0m)@g;
+        $_ =~ s@(^.*\s\|[ ]{1,2}.*$)@(\x1b[$changeColor;$changeFormatting;37m$1\x1b[0m)@g;
+        $_ =~ s@(^.*\s>[ ]{1,2}.*$)@-(\x1b[$insertColor;$insertFormatting;37m$1\x1b[0m)@g;
+        $_ =~ s@(^.*\s<[ ]{1,2}.*$)@-(\x1b[$deleteColor;$deleteFormatting;37m$1\x1b[0m)@g;
     } else {
-        $_ =~ s@(^.*\|[ ]{1,2}.*$)@\x1b[$changeColor;$changeFormatting;37m$1\x1b[0m@g;
-        $_ =~ s@(^.*>[ ]{1,2}.*$)@\x1b[$insertColor;$insertFormatting;37m$1\x1b[0m@g;
-        $_ =~ s@(^.*<[ ]{1,2}.*$)@\x1b[$deleteColor;$deleteFormatting;37m$1\x1b[0m@g;
+        $_ =~ s@(^.*[ ]{2,}\|[ ]+.*$)@\x1b[$changeColor;$changeFormatting;37m$1\x1b[0m@g;
+        $_ =~ s@(^.*[ ]{15,}\>.*$)@\x1b[$insertColor;$insertFormatting;37m$1\x1b[0m@g;
+        $_ =~ s@(^.*\<[ ]+$)@\x1b[$deleteColor;$deleteFormatting;37m$1\x1b[0m@g;
     
     }
     
