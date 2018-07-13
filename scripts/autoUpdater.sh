@@ -10,5 +10,16 @@
 while [[ 1 ]]; do
     echo "$(date) Updating Software" >> "$LOGFILE"
     bash -l updater.sh -e
-    sleep $((3600 * 24))
+    oldtime=$(date +"%s")
+
+    while [[ 1 ]]; do
+        sleep $((3*60))
+        newtime=$(Date +"%s")
+        timediff=$(($newtime-$oldtime))
+        echo "Time diff $timediff for $(date) new:$newtime old: $oldtime " >> "$LOGFILE"
+        
+        if (( $timediff > $((3600*24)) )); then
+            break
+        fi
+    done
 done
