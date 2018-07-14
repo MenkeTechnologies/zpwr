@@ -1684,7 +1684,7 @@ fi
 
 #{{{                    MARK:Misc
 #**************************************************************
-alias numcmd='print -rlo -- $commands | wc -l'
+alias numcmd='print $#commands'
 alias mmv='noglob zmv -W'
 
 export KEYTIMEOUT=1
