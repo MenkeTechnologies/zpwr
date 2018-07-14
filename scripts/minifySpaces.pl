@@ -19,14 +19,14 @@ sub removeSpaces {
         say "working on $_[0]";
         my $tmp=$_[0].".bak";
         rename($_[0], $tmp);
-        open($in, "<$_[0].bak");
+        open($in, "<$tmp");
         open($out, ">$_[0]");
         while (<$in>) {
             $_ =~ s@\s+$@\n@g;
-            $_ =~ s@\x09$@    @g;
             $_ =~ s@\x20@ @g;
-            $_ =~ s@^s*\n$@@;
-            $_ =~ s@(\S)[\x20]{2,}@$1\x20@;
+            $_ =~ s@^\s*\n$@@;
+            #$_ =~ s@(\S)[\x20]{2,}@$1\x20@;
+            $_ =~ s@\x09$@    @g;
             print $out $_;
         }
         
