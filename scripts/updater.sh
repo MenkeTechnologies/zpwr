@@ -150,9 +150,9 @@ if [[ $skip != true ]]; then
 
     exists /usr/local/bin/ruby && {
         prettyPrint "Updating Ruby Packages"
-        /usr/local/bin/gem update --system
-        /usr/local/bin/gem update
-        /usr/local/bin/gem cleanup
+        yes | /usr/local/bin/gem update --system
+        yes | /usr/local/bin/gem update
+        yes | /usr/local/bin/gem cleanup
     }
 
     exists brew && {
