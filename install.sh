@@ -47,7 +47,7 @@ dependencies_ary=(boxes tal iperf vim tmux wget cowsay cmatrix htop cmake bpytho
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary+=(gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace \
+    dependencies_ary+=(clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace python-pip snort
     )
