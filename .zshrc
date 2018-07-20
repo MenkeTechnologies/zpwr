@@ -1648,7 +1648,7 @@ if [[ "$(uname)" == Linux ]]; then
             (centos|rhel)
                 out="$(tail /var/log/messages)"
                 ;;
-            (opensuse)
+            (opensuse*)
                 out="$(journalctl -u sshd.service | grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
