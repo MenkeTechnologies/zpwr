@@ -17,6 +17,11 @@ INSTALLER_DIR="$(pwd -P)"
 
 source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
 
+
+# replicate stdout and sterr to logfile
+exec >> >("$INSTALLER_DIR"/installer_logfile.txt)
+exec 2>> >("$INSTALLER_DIR"/installer_logfile.txt)
+
 #Dependencies
 # 1) vim 8.0
 # 2) tmux 2.1
