@@ -121,7 +121,7 @@ alias deleteTab="sed -e '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper='tr '\''a-z'\'' '\''A-Z'\'''
 #over aliases
-alias grep="grep --color=auto"
+alias grep="grep --color=always"
 alias egrep="egrep --color=always"
 alias tree='tree -afC'
 alias ta="tmux attach"
@@ -135,9 +135,9 @@ alias ka="killall"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
 alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always'
-alias mount='grc --colour=auto -c "$HOME/conf.mount" mount'
-alias ifconfig='grc --colour=auto -c "$HOME/conf.ifconfig" ifconfig'
-#alias df='grc --colour=auto -c "$HOME/conf.df" df'
+alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
+alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
+#alias df='grc --colour=on -c "$HOME/conf.df" df'
 alias gpf='git push --force'
 alias glf='git pull --force'
 alias gac='git add . && git commit -m "" && git push'
@@ -332,7 +332,7 @@ p(){
     out="$(ps -ef)"
     for cmd in "$@" ; do
         prettyPrint "SEARCH TERM: $cmd"
-        echo "$out" | \fgrep --color=auto -a -i -- "$cmd" \
+        echo "$out" | \fgrep --color=always -a -i -- "$cmd" \
             || echo "Nothing found for $cmd."
         echo
     done
@@ -905,7 +905,13 @@ pirun(){
 }
 
 digs(){
-    dig +trace "$@"
+    {
+        out="$(dig +trace "$@")"
+        ip="$(echo $out | grep -E 'IN\s+A\s+\d' | awk '{print $5}')"
+        echo "$out"
+        whois "$ip"
+
+    } | less -MN
 }
 
 #}}}***********************************************************
