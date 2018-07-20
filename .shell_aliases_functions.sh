@@ -121,8 +121,12 @@ alias deleteTab="sed -e '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper='tr '\''a-z'\'' '\''A-Z'\'''
 #over aliases
-alias grep="grep --color=always"
-alias egrep="egrep --color=always"
+pwd | grep -q --color=always / 2>/dev/null && {
+    alias grep="grep --color=always"
+}
+pwd | egrep -q --color=always / 2>/dev/null && {
+    alias egrep="egrep --color=always"
+}
 alias tree='tree -afC'
 alias ta="tmux attach"
 alias h="cd /usr/local"
