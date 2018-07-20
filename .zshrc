@@ -306,7 +306,7 @@ tutsUpdate() {
 }
 
 sshRegain() {
-    echo "$(ps -ef)" |  grep -q 'ssh ' && {
+    echo "$(command ps -ef)" |  grep -q 'ssh ' && {
         if [[ "$BUFFER" != "" ]]; then
             print -sr "$BUFFER"
             local __NEW_BUFFER="exe \"$BUFFER\""
@@ -320,7 +320,7 @@ sshRegain() {
         fi
     } || {
         zle .kill-whole-line
-        echo "$(ps -ef)" | grep -q 'tmux ' && {
+        echo "$(command ps -ef)" | grep -q 'tmux ' && {
             BUFFER=tmm
         } || BUFFER=tmm_full
         zle .accept-line
@@ -1219,7 +1219,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
     alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! &&ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
     alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
