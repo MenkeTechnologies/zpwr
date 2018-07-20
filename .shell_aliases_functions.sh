@@ -182,7 +182,6 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #Linux
     alias apt="sudo apt-get install -y"
-    alias iptables="sudo apt-get install -y"
     alias ip="grc -c $HOME/conf.ifconfig ip"
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
     if [[ $distroName == raspbian ]]; then
