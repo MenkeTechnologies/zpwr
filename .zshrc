@@ -794,7 +794,7 @@ bindkey '\eOQ' sub
 
 #determine if this terminal was started in IDE
 [[ "$(uname)" == Darwin ]] && {
-    echo "$PARENT_PROCESS" | comamnd egrep -q 'login|tmux' && {
+    echo "$PARENT_PROCESS" | command egrep -q 'login|tmux' && {
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
         bindkey '\e[1;5B' updater
