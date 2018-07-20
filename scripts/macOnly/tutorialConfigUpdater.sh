@@ -36,6 +36,7 @@ cp "$HOME/conf.df" "$installerDir"
 cp "$HOME/conf.mount" "$installerDir"
 cp "$HOME/.ideavimrc" "$installerDir"
 cp "$HOME/.inputrc" "$installerDir"
+cp "$HOME/grc.zsh" "$installerDir"
 
 prettyPrint "Updating vim plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
