@@ -91,11 +91,11 @@ PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print \$8}")"
 if [[ "$(uname)" == "Darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$PARENT_PROCESS" | egrep -iq 'login|tmux|vim' \
+    echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
 else
     #linux
-    echo "$PARENT_PROCESS" | egrep -iq 'login|tmux|vim' \
+    echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
     distroName="$(grep '^ID=' /etc/os-release | \
@@ -352,7 +352,7 @@ expand-aliases() {
         #fi
         #CURSOR=$#BUFFER
     else
-            alias -- $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
+            alias -- $LBUFFER | command egrep -q '(grc|_z|cd|cat)' || {
                 #dont expand first word if \,' or "
                 [[ -z $(alias -g -- $LBUFFER) ]] && {
                     #[[ ${LBUFFER:0:1} != '\' ]] && \
@@ -463,7 +463,7 @@ alternateQuotes(){
 
 basicSedSub(){
     emulate -LR zsh
-    print -r "$BUFFER" | egrep -q '\w+' || {
+    print -r "$BUFFER" | command egrep -q '\w+' || {
         printf "\x1b[1;31m"
         zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
         printf "\x1b[0m"
@@ -517,7 +517,7 @@ basicSedSub(){
     replace="$(print -r $SEDARG | awk -F'>' '{print $2}')"
     SEDARG="s@$orig@$replace@g"
 
-    print -r "$BUFFER" | egrep -q "$orig" || {
+    print -r "$BUFFER" | command egrep -q "$orig" || {
         printf "\x1b[0;1;31m"
         zle -R  "No Match." && read -k 1
         printf "\x1b[0m"
@@ -794,7 +794,7 @@ bindkey '\eOQ' sub
 
 #determine if this terminal was started in IDE
 [[ "$(uname)" == Darwin ]] && {
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
+    echo "$PARENT_PROCESS" | comamnd egrep -q 'login|tmux' && {
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
         bindkey '\e[1;5B' updater
@@ -836,7 +836,7 @@ my-accept-line () {
 
     for command in ${commandsThatModifyFiles[@]}; do
         regex="^sudo $command .*\$|^$command .*\$"
-        print "$BUFFER" | egrep -q "$regex" && {
+        print "$BUFFER" | command egrep -q "$regex" && {
             __WILL_CLEAR=true
         }
     done
@@ -913,7 +913,7 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
 [[ "$(uname)" == Darwin ]] && {
     PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print}" \
     | tr -s ' ' | cut -d ' ' -f9-)"
-    echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
+    echo "$PARENT_PROCESS" | command egrep -q 'login|tmux' && {
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
         bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
@@ -1295,7 +1295,7 @@ supernatural-space() {
     done
 
     if (( $#mywords == 1 )); then
-        alias $LBUFFER | egrep -q '(grc|_z|cd|cat)' || {
+        alias $LBUFFER | command egrep -q '(grc|_z|cd|cat)' || {
             #dont expand first word if \,' or "
             [[ -z $(alias -g $LBUFFER) ]] && {
                 [[ ${LBUFFER:0:1} != '\' ]] && \
@@ -1532,14 +1532,14 @@ fzf_setup(){
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
             --reverse --border --height 100%"
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview \"[[ -f {} ]] && { print -r {} | egrep \
+        --preview \"[[ -f {} ]] && { print -r {} | command egrep \
         '\.jar$' && jar tf {} ; } \
         || { rougify -t $ROUGIFY_THEME {} 2>/dev/null | \
         cat -n; rc=$ps; }; [[ \$rc = 0 ]] || \
         stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview  \"[[ -f {} ]] && { print -r {} | egrep \
+        --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
         '\.jar$' && jar tf {} ; } || { rougify -t \
         $ROUGIFY_THEME {} 2>/dev/null || {
                 [[ -e {} ]] && stat {} | fold -80 | \
@@ -1547,16 +1547,16 @@ fzf_setup(){
                     source ~/.shell_aliases_functions.sh
                     {
                         print -r {} \
-                            | egrep '(\d{1,3}\.){3}\d\
+                            | command egrep '(\d{1,3}\.){3}\d\
                             {1,3}' && {
-                            whois {} | egrep -q 'No (match\
+                            whois {} | command egrep -q 'No (match\
                             |whois)' && dig {} || whois {}
                         } || {
                             cat ~/.common_aliases | grep \
                             {}= || set | grep {} | grep -v \
                                 ZSH_EXEC || alias | grep {}\
                                 || {
-                            whois {} | egrep -q 'No (match\
+                            whois {} | command egrep -q 'No (match\
                             |whois)' && dig {} || whois {}
                             }
                         }

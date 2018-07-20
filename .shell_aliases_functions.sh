@@ -906,13 +906,15 @@ pirun(){
 
 digs(){
     [[ -z "$1" ]] && echo "need args" >&2 && return 1
-    {
-        dig +trace "$@"
-        out="$(command dig +trace "$@")"
-        ip="$(echo $out | command grep -E 'IN\s+A\s+\d' | awk '{print $5}')"
-        whois "$ip"
+    exists digs && {
+        {
+            dig +trace "$@"
+            out="$(command dig +trace "$@")"
+            ip="$(echo $out | command grep -E 'IN\s+A\s+\d' | awk '{print $5}')"
+            whois "$ip"
 
-    } | less -MN
+        } | less -MN
+    } || echo "you need dig" >&2
 }
 
 #}}}***********************************************************
