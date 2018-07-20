@@ -767,11 +767,11 @@ EOF
 
 [[ -n "$1" ]] && cd "$1"
 
-ps -ef | grep platformio | grep -v grep > /dev/null && {
+command ps -ef | command grep platformio | command grep -v grep > /dev/null && {
 
     figletRandomFontOnce.sh "GO GO GO !!!" | cowsay -f eyes -W 150
 
-   ps -ef | grep platformio | grep -v grep | awk '{print $2}' | xargs kill
+   command ps -ef | command grep platformio | command grep -v grep | awk '{print $2}' | xargs kill
 }
 
 platformio run -t upload && platformio device monitor
@@ -799,7 +799,7 @@ jetbrainsWorkspaceEdit(){
     prettyPrint "MONITORING WORKSPACE..."
     python -c "print('_'*100)"
     while : ; do
-        grep -q '<component name="RunManager" selected=' \
+        command grep -q '<component name="RunManager" selected=' \
             .idea/workspace.xml && {
             python -c "print('_'*100)" | lolcat
             figletRandomFontOnce.sh "MATCH ENJOY>>>>" \
@@ -905,10 +905,11 @@ pirun(){
 }
 
 digs(){
+    [[ -z "$1" ]] && echo "need args" >&2 && return 1
     {
-        out="$(dig +trace "$@")"
-        ip="$(echo $out | grep -E 'IN\s+A\s+\d' | awk '{print $5}')"
-        echo "$out"
+        dig +trace "$@"
+        out="$(command dig +trace "$@")"
+        ip="$(echo $out | command grep -E 'IN\s+A\s+\d' | awk '{print $5}')"
         whois "$ip"
 
     } | less -MN
