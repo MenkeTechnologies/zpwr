@@ -908,11 +908,18 @@ digs(){
     [[ -z "$1" ]] && echo "need args" >&2 && return 1
     exists digs && {
         {
+            exec 2>&1
+            prettyPrint "DIG: $@"
             dig +trace "$@"
+            prettyPrint "HOST: $@"
+            host "$@"
             out="$(command dig +trace "$@")"
             ip="$(echo $out | command grep -E 'IN\s+A\s+\d' | awk '{print $5}')"
+            prettyPrint "WHOIS: $ip"
             whois "$ip"
-
+            prettyPrint "CURL: $@"
+            curl -vvv -k -fsSL "$@"
+            exec 2>/dev/tty
         } | less -MN
     } || echo "you need dig" >&2
 }
