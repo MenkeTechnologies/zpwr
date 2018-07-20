@@ -86,7 +86,7 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(fzf-zsh zsh-more-completions zsh-completions zsh-syntax-highlighting zsh-autosuggestions history-substring-search ruby gem rake rails yarn ng coffee node npm perl cpanm git github gradle ant mvn scala lein spring django pip pyenv python go man nmap postgres redis-cli colorize sudo z rsync docker sublime vundle rust cargo meteor gulp grunt glassfish)
 
-PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print \$8}")"
+PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print \$8}")"
 
 if [[ "$(uname)" == "Darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
@@ -911,7 +911,7 @@ bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
 [[ "$(uname)" == Darwin ]] && {
-    PARENT_PROCESS="$(ps -ef | awk "\$2 == $PPID{print}" \
+    PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print}" \
     | tr -s ' ' | cut -d ' ' -f9-)"
     echo "$PARENT_PROCESS" | egrep -q 'login|tmux' && {
         bindkey -M menuselect '\e[1;5A' vi-backward-word
