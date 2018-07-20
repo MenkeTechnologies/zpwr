@@ -308,7 +308,7 @@ urlsafe(){
 cgh(){
     [[ -z "$1" ]] && user=MenkeTechnologies || user="$1"
     curl -s "https://github.com/$user" | \
-        grep 'contributions' | head -1 | tr -s ' '
+        command grep 'contributions' | head -1 | tr -s ' '
 }
 
 jd(){
