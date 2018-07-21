@@ -915,8 +915,11 @@ digs(){
             prettyPrint "DIG: $@"
             dig +trace "$@"
             prettyPrint "HOST: $@"
-            host "$@"
-            ip="$(host "$@" | command grep -E 'address' | head -n 1 | awk '{print $4}')"
+            out="$(host "$@")"
+            echo "$out"
+            echo "$out" | command grep -q 'adresss' && {
+                ip="$(echo "$oute" | command grep -E 'address' | head -n 1 | awk '{print $4}')"
+            } || ip="$@"
             prettyPrint "WHOIS: $ip"
             whois "$ip"
             prettyPrint "CURL: $@"
