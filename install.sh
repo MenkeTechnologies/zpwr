@@ -19,8 +19,8 @@ source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 &&
 
 
 # replicate stdout and sterr to logfile
-exec >> >("$INSTALLER_DIR"/installer_logfile.txt)
-exec 2>> >("$INSTALLER_DIR"/installer_logfile.txt)
+exec >> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
+exec 2>> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
 
 #Dependencies
 # 1) vim 8.0

@@ -21,8 +21,8 @@ turnOffDebugging(){
 turnOnDebugging(){
     set -x
     set -v
-    exec 2>> >("$INSTALLER_DIR"/logfile.txt)
-    exec >> >("$INSTALLER_DIR"/logfile.txt)
+    exec 2>> >(tee "$INSTALLER_DIR"/logfile.txt)
+    exec >> >(tee "$INSTALLER_DIR"/logfile.txt)
 }
 exists(){
     type "$1" >/dev/null 2>&1
