@@ -512,7 +512,7 @@ contribCount(){
     lineCount="$(echo $lines | wc -l)"
     if (( $lineCount > 10 )); then
         echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
-            alternatingPrettyPrint | less
+            alternatingPrettyPrint | less -R
     else
         echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint
@@ -548,7 +548,7 @@ gds(){
         return 0
 	}
 
-	gitSdiffColorizer.pl | less
+	gitSdiffColorizer.pl | less -R
 
     printf "\x1b[0m"
 
@@ -931,7 +931,7 @@ digs(){
             prettyPrint "CURL: $@"
             curl -vvv -k -fsSL "$@"
             exec 2>/dev/tty
-        } | less -MN
+        } | less -RMN
     } || echo "you need dig" >&2
 }
 
