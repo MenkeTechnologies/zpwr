@@ -1673,8 +1673,6 @@ if [[ "$(uname)" == Linux ]]; then
                 out="$(sudo cat /var/log/secure | grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
-            (*) :
-                ;;
         esac
 
         echo "searching for $key in $out" >> "$LOGFILE"
