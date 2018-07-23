@@ -1647,17 +1647,17 @@ alias -s txt='vim'
 if [[ "$(uname)" == Linux ]]; then
     [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
 
-        distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \" | awk -F'-' '{print $1}')"
+        distroName="$(command grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \" | awk -F'-' '{print $1}')"
 
         mobile=true
 
         echo "distroName is $distroName" >> "$LOGFILE"
 
-        cat ~/.ssh/authorized_keys | grep MenkeTechnologies > ~/temp$$
+        cat ~/.ssh/authorized_keys | command grep MenkeTechnologies > ~/temp$$
 
-        case "$distroName" in
+        case $distroName in
             (debian|raspbian|kali)
-                out="$(cat /var/log/auth.log | grep 'Accepted publickey' | tail -1)"
+                out="$(cat /var/log/auth.log | command grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
                 ;;
             (ubuntu)
@@ -1665,13 +1665,15 @@ if [[ "$(uname)" == Linux ]]; then
             (centos|rhel)
                 out="$(tail /var/log/messages)"
                 ;;
-            (opensuse)
-                out="$(journalctl -u sshd.service | grep 'Accepted publickey' | tail -1)"
+            (opensuse*)
+                out="$(journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
             (fedora)
-                out="$(sudo cat /var/log/secure | grep 'Accepted publickey' | tail -1)"
+                out="$(sudo cat /var/log/secure | command grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
+                ;;
+            (*) :
                 ;;
         esac
 
@@ -1679,7 +1681,7 @@ if [[ "$(uname)" == Linux ]]; then
         echo "$out" | grep -q "$key" && mobile=false
         echo "mobile is $mobile" >> "$LOGFILE"
 
-        \rm ~/temp$$
+        command rm ~/temp$$
 
         if [[ $mobile == "false" ]]; then
             if [[ -z "$(tmux list-clients)" ]]; then
