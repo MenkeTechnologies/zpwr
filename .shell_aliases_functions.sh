@@ -909,7 +909,7 @@ pirun(){
 
 digs(){
     [[ -z "$1" ]] && echo "need args" >&2 && return 1
-    exists digs && {
+    exists dig && {
         {
             exec 2>&1
             prettyPrint "DIG: $@"
