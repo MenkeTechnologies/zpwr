@@ -914,14 +914,15 @@ digs(){
             exec 2>&1
             prettyPrint "DIG: $@"
             dig +trace "$@"
-            prettyPrint "HOST: $@"
-            out="$(host "$@")"
+            ip="$(echo "$@" | sed -E 's@https://|http://@@')"
+            prettyPrint "HOST: $ip"
+            out="$(host "$ip")"
             echo "$out"
             echo "$out" | command grep -q 'adress' && {
                 #regular domain name
                 ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
             } || ip="$@"
-            ip="$(echo "$ip" | sed -E 's@^https://|http://@@')"
+        ip="$(echo "$ip" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
             prettyPrint "WHOIS: $ip"
             whois "$ip"
             prettyPrint "CURL: $@"
