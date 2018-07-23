@@ -840,10 +840,20 @@ my-accept-line () {
             __WILL_CLEAR=true
         }
     done
+    mywords=("${(z)BUFFER}")
+
+    if [[ ${mywords[1]} == 'sudo' ]]; then
+        cmd=${mywords[2]}
+        out="$(alias $cmd)"
+        echo "$out" | command grep -q -E "grc" && {
+            cmdlet="$(eval echo "${out#*=}")"
+            echo "cmdlet $cmdlet" >> ~/updaterlog.txt
+            BUFFER="sudo $cmdlet $mywords[3,$]"
+        }
+    fi
 
     [[ -z "$__GLOBAL_ALIAS_PREFIX" ]] && {
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
-        mywords=("${(z)BUFFER}")
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             aliases="$(cat $HOME/.common_aliases)"
             line="$(print -r $aliases | grep "^$mywords[1]=.*")"
@@ -1623,7 +1633,6 @@ unset GROOVY_HOME # when set this messes up classpath
 #{{{                    MARK:Suffix aliases
 #**************************************************************
 alias -s txt='vim'
-
 
 #}}}***********************************************************
 #{{{                    MARK:SSH Public Key ID
