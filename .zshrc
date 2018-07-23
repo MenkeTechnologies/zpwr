@@ -1647,7 +1647,7 @@ alias -s txt='vim'
 if [[ "$(uname)" == Linux ]]; then
     [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
 
-        distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
+        distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \" | awk -F'-' '{print $1}')"
 
         mobile=true
 
