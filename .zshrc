@@ -851,7 +851,7 @@ my-accept-line () {
             print -srn "$BUFFER"
             BUFFER="sudo $cmdlet $mywords[3,$]"
             echo
-            eval $BUFFER | sed -E 's@\n@_@g'
+            eval "$BUFFER"
             BUFFER=""
             zle .accept-line
             return 0
