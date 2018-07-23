@@ -848,7 +848,13 @@ my-accept-line () {
         echo "$out" | command grep -q -E "grc" && {
             cmdlet="$(eval echo "${out#*=}")"
             echo "cmdlet $cmdlet" >> ~/updaterlog.txt
+            print -srn "$BUFFER"
             BUFFER="sudo $cmdlet $mywords[3,$]"
+            echo
+            eval $BUFFER | sed -E 's@\n@_@g'
+            BUFFER=""
+            zle .accept-line
+            return 0
         }
     fi
 
