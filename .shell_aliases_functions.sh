@@ -922,7 +922,10 @@ digs(){
                 #regular domain name
                 ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
             } || ip="$@"
-        ip="$(echo "$ip" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
+            if [[ ${ip: -1} == "." ]]; then
+                ip="${ip:0:-1}"
+            fi
+            ip="$(echo "$ip" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
             prettyPrint "WHOIS: $ip"
             whois "$ip"
             prettyPrint "CURL: $@"
