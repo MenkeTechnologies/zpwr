@@ -255,7 +255,7 @@ gitfunc () {
         return 0
 	}
 	
-    gitSdiffColorizer.pl | less
+    gitSdiffColorizer.pl | less -R
     echo
     printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
     if echo "$SHELL" | grep -q zsh ; then
@@ -1232,7 +1232,7 @@ zstyle ':completion:*' ignored-patterns '*.'
 #**************************************************************
 __GLOBAL_ALIAS_PREFIX=j
 globalAliasesInit(){
-    alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -MN'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -RMN'
     alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
     alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
