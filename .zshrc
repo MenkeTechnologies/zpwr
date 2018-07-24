@@ -941,7 +941,7 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
         bindkey -M menuselect '\e[5C' vi-end-of-line
     }
 } || {
-    distro="$(grep "^ID=" /etc/os-release | cut -d= -f2 \
+    distro="$(command grep "^ID=" /etc/os-release | cut -d= -f2 \
     | tr -d \" | head -n 1)"
 
     if [[ "$distro" == raspbian ]]; then
@@ -1436,19 +1436,19 @@ else
             type ponysay 1>/dev/null 2>&1 && {
                 bash "$HOME/motd.sh" | ponysay -W 120
             } || bash "$HOME/motd.sh"
-        elif [[ "$distro" == opensuse ]];then
+        elif [[ "$distroName" == opensuse ]];then
             builtin cd "$D"
             figlet -f block "$(whoami)" | ponysay -W 120 \
                 | splitReg.sh -- ------------- lolcat
-        elif [[ "$distro" == ubuntu ]];then
+        elif [[ "$distroName" == ubuntu ]];then
             builtin cd "$D"
             figlet -f block "$(whoami)" | ponysay -W 120 \
                 | splitReg.sh -- ------------- lolcat
-        elif [[ "$distro" == centos ]];then
+        elif [[ "$distroName" == centos ]];then
             builtin cd "$D"
             figlet -f block "$(whoami)" | ponysay -W 120 \
                 | splitReg.sh -- ------------- lolcat
-        elif [[ "$distro" == fedora ]];then
+        elif [[ "$distroName" == fedora ]];then
             builtin cd "$D"
             figlet -f block "$(whoami)" | ponysay -W 120 \
                 | splitReg.sh -- ------------- lolcat
@@ -1651,7 +1651,7 @@ alias -s txt='vim'
 if [[ "$(uname)" == Linux ]]; then
     [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
 
-        distroName="$(command grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \" | awk -F'-' '{print $1}')"
+        distroName="$(command grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
         mobile=true
 
