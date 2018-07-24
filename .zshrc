@@ -1703,6 +1703,7 @@ fi
 #**************************************************************
 alias numcmd='print $#commands'
 alias mmv='noglob zmv -W'
+unalias ag &> /dev/null
 
 export KEYTIMEOUT=1
 
