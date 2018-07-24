@@ -7,6 +7,7 @@
 #####   Notes: watches 2 repos
 #}}}***********************************************************
 
+BASE_DIR="$HOME/forkedRepos"
 CONFIG_DIR="$HOME/forkedRepos/customTerminalInstaller"
 ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
 
@@ -46,7 +47,16 @@ refreshers(){
 
 while true; do
 
-    cd "$CONFIG_DIR" || { echo "Directory $CONFIG_DIR does not exist" >&2 && exit 1; }
+    cd "$CONFIG_DIR" || {
+        echo "Directory $CONFIG_DIR does not exist" >&2
+        if [[ ! -d "$BASE_DIR" ]]; then
+            mkdir -pv "BASE_DIR"
+            cd "$BASE_DIR"
+            echo "Created $CONFIG_DIR and exiting." >&2
+            exit 1
+        fi
+    }
+
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
