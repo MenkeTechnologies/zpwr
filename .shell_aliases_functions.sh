@@ -94,7 +94,9 @@ fi
 #{{{                          MARK:ALIASES
 #**********************************************************************
 #portable aliases
-alias rm='rm -v'
+rm(){
+    command rm -v "$@"
+}
 alias lo="tail -f $LOGFILE"
 alias va='cd /var'
 alias plr='rlwrap perl -de1'
