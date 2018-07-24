@@ -68,7 +68,7 @@ addDependenciesSuse(){
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(lib-gnome2-dev libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev gcc \
+    dependencies_ary+=(lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev gcc \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
     libperl-dev libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev \
     python3-pip curl libffi-dev libssl-dev grc automake)
