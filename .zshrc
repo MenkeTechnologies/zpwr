@@ -98,7 +98,7 @@ else
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
-    distroName="$(grep '^ID=' /etc/os-release | \
+    distroName="$(command grep '^ID=' /etc/os-release | \
         cut -d= -f2 | tr -d \")"
     case $distroName in
         (debian|raspbian|kali)
@@ -1437,6 +1437,10 @@ else
                 bash "$HOME/motd.sh" | ponysay -W 120
             } || bash "$HOME/motd.sh"
         elif [[ "$distro" == opensuse ]];then
+            builtin cd "$D"
+            figlet -f block "$(whoami)" | ponysay -W 120 \
+                | splitReg.sh -- ------------- lolcat
+        elif [[ "$distro" == ubuntu ]];then
             builtin cd "$D"
             figlet -f block "$(whoami)" | ponysay -W 120 \
                 | splitReg.sh -- ------------- lolcat
