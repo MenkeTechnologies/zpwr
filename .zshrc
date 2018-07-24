@@ -1431,28 +1431,31 @@ if [[ "$(uname)" = Darwin ]]; then
 else
     if [[ "$UID" != "0" ]]; then
         clear
-        if [[ "$distroName" == raspbian ]]; then
-            builtin cd "$D"
-            type ponysay 1>/dev/null 2>&1 && {
-                bash "$HOME/motd.sh" | ponysay -W 120
-            } || bash "$HOME/motd.sh"
-        elif [[ "$distroName" == opensuse ]];then
-            builtin cd "$D"
-            figlet -f block "$(whoami)" | ponysay -W 120 \
-                | splitReg.sh -- ------------- lolcat
-        elif [[ "$distroName" == ubuntu ]];then
-            builtin cd "$D"
-            figlet -f block "$(whoami)" | ponysay -W 120 \
-                | splitReg.sh -- ------------- lolcat
-        elif [[ "$distroName" == centos ]];then
-            builtin cd "$D"
-            figlet -f block "$(whoami)" | ponysay -W 120 \
-                | splitReg.sh -- ------------- lolcat
-        elif [[ "$distroName" == fedora ]];then
-            builtin cd "$D"
-            figlet -f block "$(whoami)" | ponysay -W 120 \
-                | splitReg.sh -- ------------- lolcat
-        fi
+        case $distroname in
+            (raspbian)
+                builtin cd "$D"
+                type ponysay 1>/dev/null 2>&1 && {
+                    bash "$HOME/motd.sh" | ponysay -W 120
+                } || bash "$HOME/motd.sh"
+                ;;
+            (ubuntu|debian|kali)
+                builtin cd "$D"
+                figlet -f block "$(whoami)" | ponysay -W 120 \
+                    | splitReg.sh -- ------------- lolcat
+                ;;
+            (fedora|centos|rhel)
+                builtin cd "$D"
+                figlet -f block "$(whoami)" | ponysay -W 120 \
+                    | splitReg.sh -- ------------- lolcat
+                ;;
+            (opensuse*)
+                builtin cd "$D"
+                figlet -f block "$(whoami)" | ponysay -W 120 \
+                    | splitReg.sh -- ------------- lolcat
+                ;;
+            (*) :
+                ;;
+        esac
         listNoClear
     else
         #root on linux
