@@ -98,7 +98,7 @@ else
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
-    distroName="$(command grep --color=never "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
+    distroName="$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
     case $distroName in
         (debian|raspbian|kali)
