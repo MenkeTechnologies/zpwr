@@ -98,8 +98,9 @@ else
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
-    distroName="$(command grep '^ID=' /etc/os-release | \
-        cut -d= -f2 | tr -d \")"
+    distroName="$(command grep "^ID=" /etc/os-release | cut -d= -f2 \
+            | tr -d \" | head -n 1)"
+
     case $distroName in
         (debian|raspbian|kali)
             plugins+=(debian)
@@ -941,10 +942,8 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
         bindkey -M menuselect '\e[5C' vi-end-of-line
     }
 } || {
-    distro="$(command grep "^ID=" /etc/os-release | cut -d= -f2 \
-    | tr -d \" | head -n 1)"
 
-    if [[ "$distro" == raspbian ]]; then
+    if [[ "$distroName" == raspbian ]]; then
         #bindkey -M menuselect '\eOA' vi-backward-word
         #bindkey -M menuselect '\eOB' vi-forward-word
         #bindkey -M menuselect '\eOD' vi-beginning-of-line
@@ -1653,8 +1652,6 @@ alias -s txt='vim'
 
 if [[ "$(uname)" == Linux ]]; then
     [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
-
-        distroName="$(command grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
         mobile=true
 
