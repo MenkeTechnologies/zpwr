@@ -836,7 +836,7 @@ my-accept-line () {
 
     for command in ${commandsThatModifyFiles[@]}; do
         regex="^sudo $command .*\$|^$command .*\$"
-        print "$BUFFER" | command egrep -q "$regex" && {
+        print -r "$BUFFER" | command grep -q -E "$regex" && {
             __WILL_CLEAR=true
         }
     done
