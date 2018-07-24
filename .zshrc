@@ -255,7 +255,7 @@ gitfunc () {
         return 0
 	}
 	
-    gitSdiffColorizer.pl | less -R
+    gitSdiffColorizer.pl | less -r
     echo
     printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
     if echo "$SHELL" | grep -q zsh ; then
