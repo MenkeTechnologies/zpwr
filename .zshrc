@@ -1431,7 +1431,7 @@ if [[ "$(uname)" = Darwin ]]; then
 else
     if [[ "$UID" != "0" ]]; then
         clear
-        case $distroname in
+        case $distroName in
             (raspbian)
                 builtin cd "$D"
                 type ponysay 1>/dev/null 2>&1 && {
