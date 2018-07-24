@@ -186,8 +186,11 @@ else
     #Linux
     alias apt="sudo apt-get install -y"
     alias ip="grc -c $HOME/conf.ifconfig ip"
-    distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
-    if [[ $distroName == raspbian ]]; then
+    if [[ -z "$distroName" ]]; then
+        distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
+    fi
+
+    if [[ "$distroName" == raspbian ]]; then
         source "$HOME/.rpitokens.sh"
     fi
     exists vim && { 
