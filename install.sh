@@ -122,7 +122,7 @@ upgrade(){
         elif [[ $1 == redhat ]];then
             sudo yum upgrade -y
         else
-            prettyPrint "Error at install with $2." >&2
+            prettyPrint "Error with upgrade with $2." >&2
         fi
 }
 
