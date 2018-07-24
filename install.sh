@@ -165,7 +165,6 @@ do
 done
 shift $(($OPTIND-1))
 
-turnOnDebugging
 
 #}}}***********************************************************
 
@@ -478,14 +477,11 @@ cp "$INSTALLER_DIR/.inputrc" "$HOME"
 
 #{{{                    MARK:zsh
 #**************************************************************
-turnOffDebugging
 prettyPrint "Installing oh-my-zsh..."
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
 cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
-
-turnOnDebugging
 
 #add aliases and functions
 prettyPrint "Adding common shell aliases for Bash and Zsh"
@@ -505,7 +501,6 @@ $HOME/.oh-my-zsh/custom/plugins/fzf/install --bin
 
 #{{{                    MARK:Final
 #**************************************************************
-turnOffDebugging
 cd "$INSTALLER_DIR"
 cd ..
 #rm -rf "$INSTALLER_DIR"

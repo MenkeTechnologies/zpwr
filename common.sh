@@ -29,6 +29,19 @@ prettyPrint(){
 }
 
 
+turnOffDebugging(){
+    set +x
+    set +v
+    exec 2> /dev/tty
+}
+turnOnDebugging(){
+    set -x
+    set -v
+    exec 2>> >(tee "$INSTALLER_DIR"/logfile.txt)
+    exec >> >(tee "$INSTALLER_DIR"/logfile.txt)
+}
+
+
 alternatingPrettyPrint(){
     counter=0
 
