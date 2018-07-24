@@ -94,6 +94,7 @@ fi
 #{{{                          MARK:ALIASES
 #**********************************************************************
 #portable aliases
+unalias rm
 rm(){
     command rm -v "$@"
 }
