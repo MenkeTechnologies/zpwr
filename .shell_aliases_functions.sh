@@ -215,7 +215,7 @@ alias ,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias ipa="ifconfig | grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's@addr:@@' | head -1"
+alias ipa="ifconfig | command grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's@addr:@@' | head -1"
 alias pgrep='pgrep -l'
 #**********************************************************************
 #                           MARK:SHELL SCRIPTS
@@ -341,7 +341,7 @@ p(){
     out="$(ps -ef)"
     for cmd in "$@" ; do
         prettyPrint "SEARCH TERM: $cmd"
-        echo "$out" | \fgrep --color=always -a -i -- "$cmd" \
+        echo "$out" | command fgrep --color=always -a -i -- "$cmd" \
             || echo "Nothing found for $cmd."
         echo
     done
@@ -409,12 +409,12 @@ clearList () {
                             echo
                         } || {
                             echo "$loc"
-                            echo "$loc" | grep -q \
+                            echo "$loc" | command grep -q \
                                 "function" && {
                                 type -f "$(echo "$loc" | \
                                 awk '{print $1}')" | cat -n
                             }
-                            echo "$loc" | grep -q \
+                            echo "$loc" | command grep -q \
                                 "alias" && {
                                 alias "$(echo "$loc" \
                                 | awk '{print $1}')"
@@ -502,8 +502,8 @@ execpy(){
 }
 
 search(){
-    [[ -z $2 ]] && grep -iRnC 5 "$1" * || \
-        grep -iRnC 5 "$1" "$2"
+    [[ -z $2 ]] && command grep -iRnC 5 "$1" * || \
+        command grep -iRnC 5 "$1" "$2"
 }
 
 cd(){
@@ -545,7 +545,7 @@ gds(){
         fi 
     done
 
-	git status | grep -q "nothing to commit" && {
+	git status | command grep -q "nothing to commit" && {
         printf "\x1b[0;1;31m"
         printf "Nothing has changed." >&2
         echo
@@ -562,7 +562,7 @@ gds(){
         return 0
     else
         printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
-        if echo "$SHELL" | grep -q zsh ; then
+        if echo "$SHELL" | command grep -q zsh ; then
             read -k 1
         else
             read -n 1
@@ -643,7 +643,7 @@ hc(){
 hd(){
     [[ -n "$1" ]] && repo="$1" && user="$(echo "$GITHUB_ACCOUNT")" || {
 		line="$(git remote -v 2>/dev/null | sed 1q)" && {
-            echo "$line" | grep -q 'git@' && {
+            echo "$line" | command grep -q 'git@' && {
                 #ssh
         
                 user="$(echo $line | awk -F':' '{print $2}' | awk -F'/' '{print $1}')"
@@ -822,7 +822,7 @@ jetbrainsWorkspaceEdit(){
 }
 reveal(){
     [[ ! -d .git ]] && echo "Not git dir" >&2 && return 1
-    open "$(git remote -v | grep fetch | awk '{print $2}' | sed 's@.git$@@')"
+    open "$(git remote -v | command grep fetch | awk '{print $2}' | sed 's@.git$@@')"
 }
 
 getrc(){
