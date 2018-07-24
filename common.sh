@@ -13,16 +13,16 @@ INSTALLER_DIR="$(pwd -P)"
 export DELIMITER_CHAR='%'
 
 
-turnOffDebugging(){
-    set +x
-    set +v
-    exec 2> /dev/tty
-}
 turnOnDebugging(){
     set -x
     set -v
     exec 2>> >(tee "$INSTALLER_DIR"/logfile.txt)
     exec >> >(tee "$INSTALLER_DIR"/logfile.txt)
+}
+turnOffDebugging(){
+    set +x
+    set +v
+    exec 2> /dev/tty
 }
 exists(){
     type "$1" >/dev/null 2>&1
