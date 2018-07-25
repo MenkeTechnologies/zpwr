@@ -215,7 +215,7 @@ alias ,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias ipa="ifconfig | command grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's@addr:@@' | head -1"
+alias ipa="command ifconfig | command grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's@addr:@@' | head -1"
 alias pgrep='pgrep -l'
 #**********************************************************************
 #                           MARK:SHELL SCRIPTS
@@ -314,6 +314,10 @@ cgh(){
     [[ -z "$1" ]] && user=MenkeTechnologies || user="$1"
     curl -s "https://github.com/$user" | \
         command grep 'contributions' | head -1 | tr -s ' '
+}
+
+upload(){
+    \curl -fsSL -F file=@"$1" http://"$2"
 }
 
 jd(){
