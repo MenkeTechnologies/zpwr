@@ -929,18 +929,19 @@ digs(){
             prettyPrint "HOST: $noproto"
             out="$(host "$noproto")"
             echo "$out"
-            #echo "$out" | command grep -q 'address' && {
-                ##regular domain name
-                #ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
-            #} || ip="$noport"
-
-            if [[ ${noproto: -1} == "." ]]; then
-                noproto="${noproto:0:-1}"
-            fi
-
-            primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
-            prettyPrint "WHOIS: $primary"
-            whois "$primary"
+            echo "$out" | command grep -q 'address' && {
+                #regular domain name
+                ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
+                if [[ ${noproto: -1} == "." ]]; then
+                    noproto="${noproto:0:-1}"
+                fi
+                primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
+                prettyPrint "WHOIS: $primary"
+                whois "$primary"
+            } || {
+                prettyPrint "WHOIS: $noproto"
+                whois "$noproto"
+            }
             prettyPrint "CURL: $@"
             curl -vvv -k -fsSL "$@"
             exec 2>/dev/tty
