@@ -317,7 +317,7 @@ cgh(){
 }
 
 upload(){
-    \curl -fsSL -F file=@"$1" http://"$2"
+    \curl -vvv -fsSL -F file=@"$1" http://"$2"
 }
 
 jd(){
