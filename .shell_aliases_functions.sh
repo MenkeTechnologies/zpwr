@@ -941,7 +941,7 @@ digs(){
             prettyPrint "CURL: $@"
             curl -vvv -k -fsSL "$@"
             exec 2>/dev/tty
-        } | less -rMN
+        } | less -MN
     } || echo "you need dig" >&2
 }
 
