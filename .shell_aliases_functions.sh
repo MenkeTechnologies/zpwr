@@ -921,26 +921,30 @@ digs(){
     [[ -z "$1" ]] && echo "need args" >&2 && return 1
     exists dig && {
         {
+            noport="$(echo "$@" | sed -E 's@:[0-9]{1,4}$@@')"
             exec 2>&1
-            prettyPrint "DIG: $@"
-            dig +trace "$@"
-            ip="$(echo "$@" | sed -E 's@https://|http://@@')"
-            prettyPrint "HOST: $ip"
-            out="$(host "$ip")"
+            prettyPrint "DIG: $noport"
+            dig +trace "$noport"
+            noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
+            prettyPrint "HOST: $noproto"
+            out="$(host "$noproto")"
             echo "$out"
-            echo "$out" | command grep -q 'adress' && {
-                #regular domain name
-                ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
-            } || ip="$@"
-            if [[ ${ip: -1} == "." ]]; then
-                ip="${ip:0:-1}"
+            #echo "$out" | command grep -q 'address' && {
+                ##regular domain name
+                #ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
+            #} || ip="$noport"
+
+            if [[ ${noproto: -1} == "." ]]; then
+                noproto="${noproto:0:-1}"
             fi
-            ip="$(echo "$ip" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
-            prettyPrint "WHOIS: $ip"
-            whois "$ip"
+
+            primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
+            prettyPrint "WHOIS: $primary"
+            whois "$primary"
             prettyPrint "CURL: $@"
             curl -vvv -k -fsSL "$@"
             exec 2>/dev/tty
+            
         } | less -MN
     } || echo "you need dig" >&2
 }
