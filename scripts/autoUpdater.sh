@@ -8,8 +8,8 @@
 #}}}***********************************************************
 while [[ 1 ]]; do
     echo "$(date) Updating Software" >> "$LOGFILE"
-    bash -l updater.sh -e
     oldtime=$(date +"%s")
+    bash -l updater.sh -e
     while [[ 1 ]]; do
         sleep $((3*60))
         newtime=$(Date +"%s")
