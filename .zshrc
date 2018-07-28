@@ -844,7 +844,7 @@ my-accept-line () {
 
     if [[ ${mywords[1]} == 'sudo' ]]; then
         cmd=${mywords[2]}
-        out="$(alias $cmd)"
+        out="$(alias -- $cmd)"
         echo "$out" | command grep -q -E "grc" && {
             cmdlet="$(eval echo "${out#*=}")"
             echo "cmdlet $cmdlet" >> ~/updaterlog.txt
