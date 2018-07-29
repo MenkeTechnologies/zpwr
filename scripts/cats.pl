@@ -12,7 +12,7 @@ open $less, "|-","less -MN" or die $!;
 select $less;
 for (@ARGV) {
     if (! -d $_) {
-    print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
+        print "\x1b[4;1m$_\x1b[0m\n".`cat "$_" | rougify -t github - | cat -n`."\n";
     }
 
 }
