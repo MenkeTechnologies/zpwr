@@ -922,8 +922,8 @@ pirun(){
 digs(){
     [[ -z "$1" ]] && echo "need args" >&2 && return 1
     exists dig && {
-        {
-            noport="$(echo "$@" | sed -E 's@:[0-9]{1,4}$@@')"
+        for url in "$@"; do
+            noport="$(echo "$url" | sed -E 's@(.*\..+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
             exec 2>&1
             prettyPrint "DIG: $noport"
             dig +trace "$noport"
@@ -958,11 +958,11 @@ digs(){
                 
                 }
             }
-            prettyPrint "CURL: $@"
-            curl -vvv -k -fsSL "$@"
+            prettyPrint "CURL: $url"
+            curl -vvv -k -fsSL "$url"
             exec 2>/dev/tty
+        done | less -MN
             
-        } | less -MN
     } || echo "you need dig" >&2
 }
 
