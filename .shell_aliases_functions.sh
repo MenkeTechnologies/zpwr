@@ -426,8 +426,7 @@ clearList () {
                             echo
                             echo
                         }
-                    done \
-                        < <(type -a "$command" | sort | uniq)
+                    done < <(type -a "$command" | sort | uniq)
                 } || {
                     #path matching, not exe
                     eval "$ls_command \"$command\"" \
@@ -936,11 +935,25 @@ digs(){
                     noproto="${noproto:0:-1}"
                 fi
                 primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
-                prettyPrint "WHOIS: $primary"
-                whois "$primary"
+                out="$(whois "$primary")"
+                echo "$out" | grep -q 'No match' && {
+                    prettyPrint "WHOIS: $ip"
+                    whois "$ip"
+                } || {
+                    prettyPrint "WHOIS: $primary"
+                    echo "$out"
+                
+                }
             } || {
-                prettyPrint "WHOIS: $noproto"
-                whois "$noproto"
+                out="$(whois "$noproto")"
+                echo "$out" | grep -q 'No match' && {
+                    prettyPrint "WHOIS: $ip"
+                    whois "$ip"
+                } || {
+                    prettyPrint "WHOIS: $noproto"
+                    echo "$out"
+                
+                }
             }
             prettyPrint "CURL: $@"
             curl -vvv -k -fsSL "$@"
