@@ -923,7 +923,7 @@ digs(){
     [[ -z "$1" ]] && echo "need args" >&2 && return 1
     exists dig && {
         for url in "$@"; do
-            noport="$(echo "$url" | sed -E 's@(.*\..+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
+            noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
             exec 2>&1
             prettyPrint "DIG: $noport"
             dig +trace "$noport"
