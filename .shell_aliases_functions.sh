@@ -945,7 +945,6 @@ digs(){
                 } || {
                     prettyPrint "WHOIS: $primary"
                     echo "$out"
-                
                 }
             } || {
                 out="$(whois "$noproto")"
@@ -955,14 +954,12 @@ digs(){
                 } || {
                     prettyPrint "WHOIS: $noproto"
                     echo "$out"
-                
                 }
             }
             prettyPrint "CURL: $url"
             curl -vvv -k -fsSL "$url"
             exec 2>/dev/tty
         done | less -MN
-            
     } || echo "you need dig" >&2
 }
 
