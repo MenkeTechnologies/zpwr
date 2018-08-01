@@ -133,8 +133,8 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 #has all my aliases and functions
-
-source ~/.shell_aliases_functions.sh
+_alias_file="$HOME/.shell_aliases_functions.sh"
+test -f "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
 #}}}***********************************************************
@@ -152,19 +152,16 @@ updater (){
     zle .kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
-    BUFFER="( cat $SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" jamenk@me.com 2>$LOGFILE &)"
+    BUFFER="( cat $SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $EMAIL 2>$LOGFILE &)"
     zle .accept-line
 }
-
 
 gitfuncNoCheck() {
     emulate -LR zsh
 
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
-       if [[ "$currentDir" == "$dir" ]]; then
-           return 1
-       fi 
+       [[ "$currentDir" == "$dir" ]] && return 1
     done
 
     git status &> /dev/null || {
@@ -1446,7 +1443,7 @@ else
                 figlet -f block "$(whoami)" | ponysay -W 120 \
                     | splitReg.sh -- ------------- lolcat
                 ;;
-            (opensuse*)
+            (*suse*)
                 builtin cd "$D"
                 figlet -f block "$(whoami)" | ponysay -W 120 \
                     | splitReg.sh -- ------------- lolcat
@@ -1666,7 +1663,7 @@ if [[ "$(uname)" == Linux ]]; then
             (centos|rhel)
                 out="$(tail /var/log/messages)"
                 ;;
-            (opensuse*)
+            (*suse*)
                 out="$(journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;

@@ -85,8 +85,8 @@ if [[ -z "$PYSCRIPTS" ]]; then
 #**************************************************************
     export GOPATH="$HOME/go"
 
-    if [ -f $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash ]; then
-        source $GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash
+    if [ -f "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" ]; then
+        source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
     fi
 fi
 #}}}
@@ -122,7 +122,7 @@ alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 #}}}***********************************************************
 alias deleteTab="sed -e '/^[\x20\x09]*$/d'"
 alias ba="bash"
-alias upper='tr '\''a-z'\'' '\''A-Z'\'''
+alias upper="tr 'a-z' 'A-Z'"
 #over aliases
 pwd | grep -q --color=always / 2>/dev/null && {
     alias grep="grep --color=always"
@@ -186,13 +186,12 @@ else
     #Linux
     alias apt="sudo apt-get install -y"
     alias ip="grc -c $HOME/conf.ifconfig ip"
-    if [[ -z "$distroName" ]]; then
+    test -z "$distroName" && {
         distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
-    fi
+    }
 
-    if [[ "$distroName" == raspbian ]]; then
-        source "$HOME/.rpitokens.sh"
-    fi
+    [[ "$distroName" == raspbian ]] && source "$HOME/.rpitokens.sh"
+
     exists vim && { 
         alias v=vim
         alias vi=vim
@@ -343,7 +342,7 @@ scnew(){
 p(){
     [[ -z $1 ]] && ps -ef
     out="$(ps -ef)"
-    for cmd in "$@" ; do
+    for cmd; do
         prettyPrint "SEARCH TERM: $cmd"
         echo "$out" | command fgrep --color=always -a -i -- "$cmd" \
             || echo "Nothing found for $cmd."
@@ -357,14 +356,14 @@ b(){
         shift 2
     fi
 
-    for cmd in "$@"; do
-        if [[ -z $sleepTime ]]; then
+    for cmd; do
+        test -z $sleepTime && {
             ( eval "$cmd" & ) 
             p $(echo "$cmd" | awk '{print $1}')
-        else
+        } || {
             ( eval "sleep $sleepTime && $cmd" & )
             p $(echo "$cmd" | awk '{print $1}')
-        fi
+        }
     done
 }
 
@@ -592,31 +591,30 @@ gitCommitAndPush(){
     git add .
     git commit -m "$1"
     git push
-    return 0
 }
 
 replacer(){
-        orig="$1"
-        replace="$2"
-        shift 2
-    if [[ -n "$3" ]]; then
+    orig="$1"
+    replace="$2"
+    shift 2
+    test -n "$3" && {
         for file in "$@" ; do
             sed -i'' "s@$orig@$replace@g" "$file"
         done
-    else
+    } || {
         cat | sed "s@$orig@$replace@g"
-    fi
+    }
 }
 
 createGIF(){
     outFile=out.gif
     res=600x400
 
-    [[ -z "$1" ]] && echo "One arg needed..." >&2 && return 1
+    test -z "$1" && echo "One arg needed..." >&2 && return 1
 
-    [[ ! -z "$2" ]] && res="$2"
+    test -n "$2" && res="$2"
 
-    [[ ! -z "$3" ]] && outFile="$3"	
+    test -n "$3" && outFile="$3"	
 
     ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - \
         | gifsicle --optimize=3 --delay=3 > "$outFile" 
@@ -627,9 +625,8 @@ hc(){
         || reponame="$1"
     printf "\e[1m"
     old_dir="$(pwd)"
-    if [[ -n "$1" ]]; then
-        cd "$reponame"
-    fi
+    test -n "$1" && cd "$reponame"
+
     git init
     hub create "$reponame"
     echo "# $reponame" > README.md
@@ -637,9 +634,7 @@ hc(){
     git add .
     git commit -m "first commit"
     git push --set-upstream origin master
-    if [[ -n "$1" ]]; then
-        cd "$old_dir"
-    fi
+    test -n "$1" && cd "$old_dir"
     printf "\e[0m"
 }
 
@@ -707,22 +702,22 @@ alternatingPrettyPrint(){
     if [[ -z $1 ]]; then
         cat | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
-        for my $arg (@F){
+        for (@F){
             if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
+                 print "\x1b[36m$_\x1b[0m"
             } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
+                 print "\x1b[1;4;34m$_\x1b[0m"
             }
         $counter++;
         };print "\x1b[0m"'
     else
         echo "$@" | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
-        for my $arg (@F){
+        for (@F){
             if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
+                 print "\x1b[36m$_\x1b[0m"
             } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
+                 print "\x1b[1;4;34m$_\x1b[0m"
             }
         $counter++;
         }; print "\x1b[0m"'
@@ -810,7 +805,7 @@ jetbrainsWorkspaceEdit(){
     python -c "print('_'*100)"
     prettyPrint "MONITORING WORKSPACE..."
     python -c "print('_'*100)"
-    while : ; do
+    while [[ 1 ]]; do
         command grep -q '<component name="RunManager" selected=' \
             .idea/workspace.xml && {
             python -c "print('_'*100)" | lolcat
@@ -859,9 +854,7 @@ getrc(){
     cp -f scripts/* "$SCRIPTS"
     cd ..
     rm -rf "$REPO_NAME"
-    if [[ ! -z "$TERM" ]]; then
-        exec "$SHELL"
-    fi
+    test -n "$TERM" && exec "$SHELL"
 
 }
 
@@ -891,7 +884,7 @@ mycurl(){
 
 
 perlremovespaces(){
-    for file in "$@";do
+    for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
         perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
     done
