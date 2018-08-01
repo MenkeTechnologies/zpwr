@@ -110,10 +110,7 @@ else
         (centos|rhel)
             plugins+=(yum dnf)
             ;;
-        (opensuse)
-            plugins+=(suse z)
-            ;;
-        (opensuse-tumbleweed)
+        (*suse*)
             plugins+=(suse z)
             ;;
         (fedora)
