@@ -9,14 +9,20 @@
 while [[ 1 ]]; do
     echo "$(date) Updating Software" >> "$LOGFILE"
     oldtime=$(date +"%s")
+    olddate="$(date +'%Y-%m-%d %H:%M:%S')"
+    unset PERL5LIB
+    perlscript=$(cat <<EOF
+    \$tp = localtime->strptime("$olddate", "%Y-%m-%d %H:%M:%S") + 3600*24;
+    print \$tp->strftime("%Y-%m-%d %H:%M:%S")."\n";
+EOF
+)
+    nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)
     bash -l updater.sh -e
     while [[ 1 ]]; do
         sleep $((3*60))
         newtime=$(Date +"%s")
         timediff=$(($newtime-$oldtime))
-        echo "Time diff $timediff for $(date) new:$newtime old: $oldtime " >> "$LOGFILE"
-        if (( $timediff > $((3600*24)) )); then
-            break
-        fi
+        echo "Time diff $timediff for $(date).  Next update at $nextdate " >> "$LOGFILE"
+        (( $timediff > $((3600*24)) )) && break
     done
 done
