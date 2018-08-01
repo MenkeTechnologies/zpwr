@@ -8,8 +8,8 @@ exists(){
 
 #{{{                    MARK:Global Vars
 #**************************************************************
-export TMUX_PREFIX="x"
-export TMUX_REMOTE_PREFIX="b"
+export TMUX_PREFIX=x
+export TMUX_REMOTE_PREFIX=b
 PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
 export PI_ARRAY
 export DELIMITER_CHAR='%'
@@ -961,6 +961,23 @@ digs(){
             exec 2>/dev/tty
         done | less -MN
     } || echo "you need dig" >&2
+}
+
+
+ww(){
+    while [[ 1 ]]; do
+        eval "$@"
+    done
+}
+
+
+ff(){
+    num=$1
+    shift
+    for (( i = 0; i < $num;i++ )); do
+        eval "$@"
+    done
+
 }
 
 #}}}***********************************************************
