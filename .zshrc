@@ -111,7 +111,7 @@ else
             plugins+=(yum dnf)
             ;;
         (*suse*)
-            plugins+=(suse z)
+            plugins+=(suse)
             ;;
         (fedora)
             plugins+=(yum fedora dnf)
