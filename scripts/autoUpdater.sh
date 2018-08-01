@@ -19,10 +19,10 @@ EOF
     nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)
     bash -l updater.sh -e
     while [[ 1 ]]; do
-        sleep $((3*60))
-        newtime=$(Date +"%s")
+        sleep $((1*60))
+        newtime=$(date +"%s")
         timediff=$(($newtime-$oldtime))
-        echo "Time diff $timediff for $(date).  Next update at $nextdate " >> "$LOGFILE"
+        echo "$(date): Time diff $timediff.  Next update at $nextdate." >> "$LOGFILE"
         (( $timediff > $((3600*24)) )) && break
     done
 done
