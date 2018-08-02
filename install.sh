@@ -40,7 +40,7 @@ exec 2>> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(boxes tal iperf vim tmux wget cowsay cmatrix htop cmake bpython sl mutt \
+dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop atop ctags texinfo lsof \
