@@ -40,7 +40,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:$PATH"
     } || {
         export PATH="$PATH:/usr/games"
-        export NMON=mndckt
     }
 
     exists yarn && export PATH="$(yarn global bin):$PATH"
@@ -64,7 +63,10 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
         export EDITOR='mvim -v'
-    } || export EDITOR='vim'
+    } || {
+        export NMON=mndckt
+        export EDITOR='vim'
+    }
     export YARN_HOME="$HOME/.config/yarn"
     export NODE_HOME="/usr/local/lib/node_modules"
     export PERL5LIB="$HOME/perl5/lib/perl5"
