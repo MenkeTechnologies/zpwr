@@ -38,7 +38,10 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:$PATH"
-    } || export PATH="$PATH:/usr/games"
+    } || {
+        export PATH="$PATH:/usr/games"
+        export NMON=mndckt
+    }
 
     exists yarn && export PATH="$(yarn global bin):$PATH"
 #}}}***********************************************************
