@@ -15,6 +15,7 @@ export PI_ARRAY
 export DELIMITER_CHAR='%'
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
+export NMON='mndckt'
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
@@ -64,7 +65,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
         export EDITOR='mvim -v'
     } || {
-        export NMON=mndckt
         export EDITOR='vim'
     }
     export YARN_HOME="$HOME/.config/yarn"
