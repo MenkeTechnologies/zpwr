@@ -841,7 +841,6 @@ my-accept-line () {
         out="$(alias -- $cmd)"
         echo "$out" | command grep -q -E "grc" && {
             cmdlet="$(eval echo "${out#*=}")"
-            echo "cmdlet $cmdlet" >> ~/updaterlog.txt
             print -srn "$BUFFER"
             BUFFER="sudo $cmdlet $mywords[3,$]"
             echo
@@ -1283,6 +1282,7 @@ supernatural-space() {
     __CORRECT_WORDS[is]="si"
     __CORRECT_WORDS[for]="fro ofr"
     __CORRECT_WORDS[network]="netowrk netwokr"
+    __CORRECT_WORDS[point]="opint ponit"
 
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(print -r -- $LBUFFER | tr -d "()[]{}\$,%'\"" )"
