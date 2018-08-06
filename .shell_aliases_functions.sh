@@ -137,6 +137,7 @@ pwd | egrep -q --color=always / 2>/dev/null && {
 }
 alias tree='tree -afC'
 alias ta="tmux attach"
+alias tn="tmux new-session"
 alias h="cd /usr/local"
 alias e="cd /etc"
 alias ue="cd /usr/local/etc"
@@ -961,6 +962,14 @@ digs(){
     } || echo "you need dig" >&2
 }
 
+www(){
+    time=$1
+    shift
+    while [[ 1 ]]; do
+        eval "$@"
+        sleep $time
+    done
+}
 
 ww(){
     while [[ 1 ]]; do
