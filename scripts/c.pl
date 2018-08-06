@@ -16,14 +16,15 @@ my $exe_exists = grep -x "$_/$exe", @PATH;
 select $less;
 for (@ARGV) {
     if (! -d $_) {
-        if ($exe_exists) {
-            print "\x1b[4;1m$_\x1b[0m\n".`cat "$_" | rougify -t github - | cat -n`."\n";
-        } else {
-            print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
+        my $type = `file $_`;
+        if ($type =~ /text/) {
+            if ($exe_exists) {
+                print "\x1b[4;1m$_\x1b[0m\n".`cat "$_" | rougify -t github - | cat -n`."\n";
+            } else {
+                print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
+            }
         }
-        
     }
-
 }
 
 close $less;
