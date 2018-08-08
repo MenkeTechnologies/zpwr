@@ -1556,7 +1556,7 @@ fzf_setup(){
     #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
-        '\.jar$' && jar tf {} ; } || { rougify -t \
+        '\.[jw]ar$' && jar tf {} ; } || { rougify -t \
         $ROUGIFY_THEME {} 2>/dev/null || {
                 [[ -e {} ]] && stat {} | fold -80 | \
                 head -500 || {
@@ -1672,13 +1672,10 @@ if [[ "$(uname)" == Linux ]]; then
             (*) :
                 ;;
         esac
-
         echo "searching for $key in $out" >> "$LOGFILE"
         echo "$out" | grep -q "$key" && mobile=false
         echo "mobile is $mobile" >> "$LOGFILE"
-
         command rm ~/temp$$
-
         if [[ $mobile == "false" ]]; then
             if [[ -z "$(tmux list-clients)" ]]; then
                 echo "no tmux clients" >> "$LOGFILE"
