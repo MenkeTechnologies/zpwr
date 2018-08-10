@@ -362,15 +362,15 @@ cd $HOME/.vim/bundle/YouCompleteMe && {
 #**************************************************************
 
 #custom settings for tmux powerline
-if [[ -d "$tmuxPowerlineDir" ]]; then
-     mkdir -p "$tmuxPowerlineDir" && cat "$INSTALLER_DIR"/default.json >> "$tmuxPowerlineDir/default.json"
-fi
+tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
+[[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
+
+cat "$INSTALLER_DIR"/default.json >> "$tmuxPowerlineDir/default.json"
 
 prettyPrint "Installing Tmux Plugin Manager"
-if [[ -d "$HOME/.tmux/plugins/tpm"  ]]; then
-     mkdir -p $HOME/.tmux/plugins/tpm
-     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
-fi
+[[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p $HOME/.tmux/plugins/tpm
+
+git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
@@ -406,27 +406,19 @@ cd "$HOME/forkedRepos" && {
     }
 }
 
-if [[ -f "$HOME/.token.sh" ]]; then
-    touch "$HOME/.tokens.sh"
-fi
+[[ ! -f "$HOME/.token.sh" ]] && touch "$HOME/.tokens.sh"
 
 prettyPrint "HushLogin"
-if [[ ! -f "$HOME/.hushlogin" ]]; then
-    touch "$HOME/.hushlogin"
-fi
+[[ ! -f "$HOME/.hushlogin" ]] && touch "$HOME/.hushlogin"
 
-if [[ -f "$HOME/.my.cnf" ]]; then
-    touch "$HOME/.my.cnf"
-fi
+[[ ! -f "$HOME/.my.cnf" ]] && touch "$HOME/.my.cnf"
 
 prettyPrint "Changing pager to cat for MySQL Clients such as MyCLI"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
 prettyPrint "Copying all Shell Scripts..."
-if [[ ! -d "$HOME/Documents/shellScripts" ]]; then
-    mkdir -p "$HOME/Documents/shellScripts"
-fi
+[[ ! -d "$HOME/Documents/shellScripts" ]] && mkdir -p "$HOME/Documents/shellScripts"
 
 cp "$INSTALLER_DIR/scripts/"*.sh "$HOME/Documents/shellScripts"
 cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
@@ -447,8 +439,8 @@ cd pipes.sh && {
 
 prettyPrint "Installing htoprc file...."
 htopDIR="$HOME/.config/htop"
-if [[ -f "$htopDIR/htoprfc" ]]; then
-    if [[ -d "$htopDIR" ]]; then
+if [[ ! -f "$htopDIR/htoprc" ]]; then
+    if [[ ! -d "$htopDIR" ]]; then
         mkdir -P "$htopDIR"
     fi
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
