@@ -380,6 +380,7 @@ iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $
 echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
+cp "$INSTALLER_DIR/.iftopcolors" "$HOME"
 
 if [[ "$distroName" == raspbian ]]; then
     prettyPrint "Installing custom motd for RPI..."
