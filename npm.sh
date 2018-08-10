@@ -50,5 +50,3 @@ npm i -g vue-cli
 npm i -g webpack
 npm i -g yarn
 npm i -g yosay
-
-
