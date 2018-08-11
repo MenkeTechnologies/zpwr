@@ -62,3 +62,4 @@ brew cask install wireshark
 brew cask install xld
 brew cask install xquartz
 brew cask install zotero
+brew cask install electric-sheep
