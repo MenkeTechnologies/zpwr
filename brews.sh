@@ -3,11 +3,8 @@ brew install ack
 brew install adns
 brew install aircrack-ng
 brew install alpine
-brew install android-platform-tools
 brew install angular-cli
-brew install animationtutorial
 brew install ant
-brew install apple-gcc42
 brew install apr
 brew install apr-util
 brew install argon2
@@ -36,6 +33,7 @@ brew install camlp4
 brew install cassandra
 brew install ccrypt
 brew install ccze
+brew install chkrootkit
 brew install chmlib
 brew install clingo
 brew install clisp
@@ -47,6 +45,7 @@ brew install conan
 brew install confuse
 brew install contacts
 brew install coreutils
+brew install cowsay
 brew install cscope
 brew install ctags
 brew install ctop
@@ -99,6 +98,7 @@ brew install grc
 brew install greed
 brew install grep
 brew install groovy
+brew install gsasl
 brew install gstreamer
 brew install htop
 brew install httpd
@@ -162,9 +162,9 @@ brew install lolcat
 brew install lua
 brew install lua@5.1
 brew install luajit
-brew install macchanger
 brew install macvim
 brew install mad
+brew install mailutils
 brew install makedepend
 brew install man2html
 brew install maven
@@ -188,6 +188,7 @@ brew install ncmpcpp
 brew install ncurses
 brew install nettle
 brew install nghttp2
+brew install nginx
 brew install ninvaders
 brew install nmap
 brew install nnn
@@ -210,7 +211,6 @@ brew install perl
 brew install pg_top
 brew install pgcli
 brew install php
-brew install php72
 brew install pidof
 brew install pinentry
 brew install pipes-sh
@@ -222,7 +222,6 @@ brew install postgresql
 brew install pstree
 brew install pv
 brew install python
-brew install python3
 brew install python@2
 brew install readline
 brew install reattach-to-user-namespace
@@ -232,7 +231,6 @@ brew install rsync
 brew install ruby
 brew install s-lang
 brew install s-search
-brew install saverun
 brew install sbt
 brew install scala
 brew install screenfetch
@@ -250,7 +248,7 @@ brew install slurm
 brew install smpeg
 brew install sntop
 brew install sox
-brew install speedtest_cli
+brew install speedtest-cli
 brew install sphinx-doc
 brew install springboot
 brew install sqlite
@@ -259,6 +257,8 @@ brew install taglib
 brew install tal
 brew install tbb
 brew install tcptraceroute
+brew install telnet
+brew install texinfo
 brew install the_silver_searcher
 brew install tmux
 brew install toilet
@@ -268,6 +268,7 @@ brew install tor
 brew install torsocks
 brew install tree
 brew install unixodbc
+brew install unrar
 brew install urlview
 brew install vim
 brew install vnstat
