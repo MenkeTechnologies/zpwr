@@ -991,7 +991,7 @@ post(){
     postfix="$1"
     shift
     out="$(eval "$@")"
-    echo "$out" | perl -lane "print \"\$_ $postfix\""
+    echo "$out" | perl -lnE "say \"\$_ $postfix\""
 }
 
 pre(){
@@ -999,7 +999,7 @@ pre(){
     prefix="$1"
     shift
     out="$(eval "$@")"
-    echo "$out" | perl -lane "print \"$prefix \$_\""
+    echo "$out" | perl -lnE "say \"$prefix \$_\""
 }
 
 #}}}***********************************************************
