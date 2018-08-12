@@ -109,6 +109,7 @@ brew install ifstat
 brew install ilmbase
 brew install imap-uw
 brew install iperf
+brew install iperf3
 brew install isl
 brew install jansson
 brew install jasper
