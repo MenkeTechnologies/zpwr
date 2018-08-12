@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:07:53 EDT 2017
-#####   Purpose: bash script to read from fifo pipe 
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:07:53 EDT 2017
+##### Purpose: bash script to read from fifo pipe
+##### Notes:
 #}}}***********************************************************
 
 pipe=/tmp/testpipe

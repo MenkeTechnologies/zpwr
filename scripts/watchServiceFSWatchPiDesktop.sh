@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:34:26 EDT 2017
-#####   Purpose: bash script to upload to RPi on file change
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:34:26 EDT 2017
+##### Purpose: bash script to upload to RPi on file change
+##### Notes:
 #}}}***********************************************************
 
 #first argument is the directory to watch

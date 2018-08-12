@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Wed Oct 11 17:52:47 EDT 2017
-#####   Purpose: bash script to upload to Arduino
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Wed Oct 11 17:52:47 EDT 2017
+##### Purpose: bash script to upload to Arduino
+##### Notes:
 #}}}***********************************************************
-
 
 [[ -n "$1" ]] && cd "$1"
 

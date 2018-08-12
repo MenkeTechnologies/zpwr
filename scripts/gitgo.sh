@@ -1,38 +1,36 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:19:26 EDT 2017
-#####   Purpose: bash script to facilitate github repo creation and committing
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:19:26 EDT 2017
+##### Purpose: bash script to facilitate github repo creation and committing
+##### Notes:
 #}}}***********************************************************
 
-
-#          .                                                      .
-#        .n                   .                 .                  n.
-#  .   .dP                  dP                   9b                 9b.    .
-# 4    qXb         .       dX                     Xb       .        dXp     t
-#dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb
-#9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP
-# 9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
-#  `9XXXXXXXXXXXXXXXXXXXXX'~   ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'
-#    `9XXXXXXXXXXXP' `9XX'   DIE    `98v8P'  HUMAN   `XXP' `9XXXXXXXXXXXP'
-#        ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~
-#                        )b.  .dbo.dP'`v'`9b.odb.  .dX(
-#                      ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.
-#                     dXXXXXXXXXXXP'   .   `9XXXXXXXXXXXb
-#                    dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb
-#                    9XXb'   `XXXXXb.dX|Xb.dXXXXX'   `dXXP
-#                     `'      9XXXXXX(   )XXXXXXP      `'
-#                              XXXX X.`v'.X XXXX
-#                              XP^X'`b   d'`X^XX
-#                              X. 9  `   '  P )X
-#                              `b  `       '  d'
-
+# . .
+# .n .                 .                  n.
+# . .dP                  dP                   9b                 9b.    .
+# 4 qXb .       dX                     Xb       .        dXp     t
+#dX. 9Xb .dXb    __                         __    dXb.     dXP     .Xb
+#9XXb._ _.dXXXXb dXXXXbo. .odXXXXb dXXXXb._       _.dXXP
+# 9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo. .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
+# `9XXXXXXXXXXXXXXXXXXXXX'~ ~`OOO8b   d8OOO'~   ~`XXXXXXXXXXXXXXXXXXXXXP'
+# `9XXXXXXXXXXXP' `9XX' DIE    `98v8P'  HUMAN   `XXP' `9XXXXXXXXXXXP'
+# ~~~~~~~ 9X.          .db|db.          .XP       ~~~~~~~
+# )b. .dbo.dP'`v'`9b.odb.  .dX(
+# ,dXXXXXXXXXXXb dXXXXXXXXXXXb.
+# dXXXXXXXXXXXP' .   `9XXXXXXXXXXXb
+# dXXXXXXXXXXXXb d|b   dXXXXXXXXXXXXb
+# 9XXb' `XXXXXb.dX|Xb.dXXXXX'   `dXXP
+# `' 9XXXXXX(   )XXXXXXP      `'
+# XXXX X.`v'.X XXXX
+# XP^X'`b d'`X^XX
+# X. 9 `   '  P )X
+# `b `       '  d'
 
 #GITHUB_ACCOUNT environment variable needed for the script to create a remote repository
 ##########################################
-###############  functions  ##############
+############### functions ##############
 ##########################################
 
 myPrettyPrint(){
@@ -171,13 +169,13 @@ commitTheDirectory(){
 }
 
 ##########################################
-###############    MAIN     ##############
+############### MAIN ##############
 ##########################################
 
 #possible options to script= -h for help, -p with argument to push with commit,
 #-l to pull from github, and -c to create repo
 #only one option at a time forced with break
-#{{{                    MARK:GETOPTS
+#{{{ MARK:GETOPTS
 #**************************************************************
 optstring=p:hcl
 while getopts $optstring opt
@@ -200,7 +198,4 @@ if [[ $OPTIND == 1 ]]; then
     [[ -z "$1" ]] && gitPush "default-commit" || gitPush "$1"
     fi
 fi
-
-
-
 

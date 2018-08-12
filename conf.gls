@@ -3,8 +3,8 @@
 # enough to be reliably matched, especially considering ls -s(k|m|g|G).
 #
 # Example lines:
-# -rw-r--r--   1 user staff 344M Mar 22 22:51 MVI_8735.m4v
-# -rw-r--r--   1 user staff 360050327 Mar 22 22:51 MVI_8735.m4v
+# -rw-r--r-- 1 user staff 344M Mar 22 22:51 MVI_8735.m4v
+# -rw-r--r-- 1 user staff 360050327 Mar 22 22:51 MVI_8735.m4v
 #
 # The regexp uses lookahead to match a date following the size
 

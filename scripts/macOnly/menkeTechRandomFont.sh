@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul  3 12:41:20 EDT 2017
-#####   Purpose: bash script to display random figlet fonts
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul  3 12:41:20 EDT 2017
+##### Purpose: bash script to display random figlet fonts
+##### Notes:
 #}}}***********************************************************
 
 FIGLET_DIR=/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts

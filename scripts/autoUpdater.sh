@@ -22,7 +22,7 @@ EOF
         sleep $((1*60))
         newtime=$(date +"%s")
         timediff=$(($newtime-$oldtime))
-        echo "$(date): Time diff $timediff.  Next update at $nextdate." >> "$LOGFILE"
+        echo "$(date): Time diff $timediff. Next update at $nextdate." >> "$LOGFILE"
         (( $timediff > $((3600*24)) )) && break
     done
 done

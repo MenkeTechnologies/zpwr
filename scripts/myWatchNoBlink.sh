@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:17:30 EDT 2017
-#####   Purpose: bash script to continuously monitor output of a process
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:17:30 EDT 2017
+##### Purpose: bash script to continuously monitor output of a process
+##### Notes:
 #}}}***********************************************************
 
 #!/usr/bin/env bash
@@ -16,8 +16,8 @@ usage(){
 
     cat <<EOM
     usage:
-    -h  help
-    -b  display bold
+    -h help
+    -b display bold
 EOM
 exit 1
 }

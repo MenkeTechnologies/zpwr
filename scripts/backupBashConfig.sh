@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:09:39 EDT 2017
-#####   Purpose: bash script to backup dotfiles
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:09:39 EDT 2017
+##### Purpose: bash script to backup dotfiles
+##### Notes:
 #}}}***********************************************************
 
 my_home_dir="$HOME"

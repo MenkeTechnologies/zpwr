@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Wed Jan 10 17:43:40 EST 2018
-#####   Purpose: bash script to 
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Wed Jan 10 17:43:40 EST 2018
+##### Purpose: bash script to
+##### Notes:
 #}}}***********************************************************
 
 __ScriptVersion="1.0.0"
 
-#===  FUNCTION  ================================================================
-#         NAME:  usage
-#  DESCRIPTION:  Display usage information.
+#=== FUNCTION ================================================================
+# NAME: usage
+# DESCRIPTION: Display usage information.
 #===============================================================================
 function usage ()
 {
-    echo "Usage :  $0 [options] [--]
+    echo "Usage : $0 [options] [--]
 
     Options:
-    -h|help       Display this message
-    -v|version    Display script version
-    -l|alone      Don't run the command in the active pane" >&2
+    -h|help Display this message
+    -v|version Display script version
+    -l|alone Don't run the command in the active pane" >&2
 
-}    # ----------  end of function usage  ----------
+} # ---------- end of function usage  ----------
 
 #-----------------------------------------------------------------------
-#  Handle command line arguments
+# Handle command line arguments
 #-----------------------------------------------------------------------
 
 #set -x
@@ -41,16 +41,16 @@ while getopts ":hvl" opt
 do
     case $opt in
 
-        h|help     )  usage; exit 0   ;;
+        h|help ) usage; exit 0   ;;
 
-        v|version  )  echo "$0 -- Version $__ScriptVersion" >&2; exit 0   ;;
+        v|version ) echo "$0 -- Version $__ScriptVersion" >&2; exit 0   ;;
 
-        l|alone)  leavePresentPaneAloneFlag=true ;;
+        l|alone) leavePresentPaneAloneFlag=true ;;
 
-        * )  echo -e "\n  Option does not exist : $OPTARG\n" >&2
-            usage; exit 1   ;;
+        * ) echo -e "\n Option does not exist : $OPTARG\n" >&2
+            usage; exit 1 ;;
 
-        esac    # --- end of case ---
+        esac # --- end of case ---
     done
     shift $(($OPTIND-1))
 

@@ -1,31 +1,31 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:06:21 EDT 2017
-#####   Purpose: bash script to stress system 
-#####   Notes: high CPU usage
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:06:21 EDT 2017
+##### Purpose: bash script to stress system
+##### Notes: high CPU usage
 #}}}***********************************************************
 __ScriptVersion="1.0.2"
 nproc=10
 
-#===  FUNCTION  ================================================================
-#         NAME:  usage
-#  DESCRIPTION:  Display usage information.
+#=== FUNCTION ================================================================
+# NAME: usage
+# DESCRIPTION: Display usage information.
 #===============================================================================
 function usage ()
 {
-    echo "Usage :  $0 [options] [--]
+    echo "Usage : $0 [options] [--]
     Default number of spawned processes is $nproc.
     Change this with -n option.
 
     Options:
-    -h|help             Display this message
-    -d|disown           Disown process to init
-    -n|nproc <number>   Number of processes to spawn
-    -v|version          Display script version"
+    -h|help Display this message
+    -d|disown Disown process to init
+    -n|nproc <number> Number of processes to spawn
+    -v|version Display script version"
 
-}    # ----------  end of function usage  ----------
+} # ---------- end of function usage  ----------
 
 prettyPrint(){
     printf "\e[1;4m"
@@ -66,30 +66,28 @@ alternatingPrettyPrint(){
 
 }
 
-
 #-----------------------------------------------------------------------
-#  Handle command line arguments
+# Handle command line arguments
 #-----------------------------------------------------------------------
 
 while getopts "n:dhv" opt
 do
   case $opt in
 
-    h|help     )  usage; exit 0   ;;
+    h|help ) usage; exit 0   ;;
 
-    v|version  )  echo "$0  -- Version $__ScriptVersion"; exit 0   ;;
+    v|version ) echo "$0  -- Version $__ScriptVersion"; exit 0   ;;
 
     d|detach ) detach=true ;;
 
     n|nproc ) nproc=$OPTARG ;;
 
-    * )  echo -e "\n  Option does not exist : $OPTARG\n"
-          usage; exit 1   ;;
+    * ) echo -e "\n Option does not exist : $OPTARG\n"
+          usage; exit 1 ;;
 
-  esac    # --- end of case ---
+  esac # --- end of case ---
 done
 shift $(($OPTIND-1))
-
 
 killpids(){
     echo "${1:1}" | perl -ae '`kill $_`for@F'
@@ -111,7 +109,7 @@ else
         yes &> /dev/null &
         pids="$pids $!"
     done
-    
+
     trap 'killpids "$pids" 2>/dev/null' INT QUIT
 
     alternatingPrettyPrint "${DELIMITER_CHAR}Ctrl-C$DELIMITER_CHAR to kill all spawned processes."

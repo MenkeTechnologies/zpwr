@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:35:57 EDT 2017
-#####   Purpose: bash script to compile rust file on file change
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:35:57 EDT 2017
+##### Purpose: bash script to compile rust file on file change
+##### Notes:
 #}}}***********************************************************
 #example usage = bash "$SCRIPTS/watchServiceFSWatchRustCompile.sh" . "untitled.rs"
 dir_watching="$1"

@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Sat Apr 21 17:07:54 EDT 2018
-#####   Purpose: bash script to
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Sat Apr 21 17:07:54 EDT 2018
+##### Purpose: bash script to
+##### Notes:
 #}}}***********************************************************
-
 
 for file in "$@" ; do
     newfile=${file%.*}

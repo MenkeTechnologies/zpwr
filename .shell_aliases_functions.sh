@@ -49,7 +49,7 @@ if [[ -z "$PYSCRIPTS" ]]; then
 #{{{                           MARK:HOMES
 #**********************************************************************
     [[ "$(uname)" == Darwin ]] && {
-        export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_141.jdk/Contents/Home"
+        export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
         export HOMEBREW_HOME='/usr/local/Cellar'
         export HOMEBREW_OPT_HOME='/usr/local/opt'
         export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
@@ -984,7 +984,22 @@ ff(){
     for (( i = 0; i < $num;i++ )); do
         eval "$@"
     done
+}
 
+post(){
+    test -z $2 && echo "need two args" >&2 && return 1
+    postfix="$1"
+    shift
+    out="$(eval "$@")"
+    echo "$out" | perl -lane "print \"\$_ $postfix\""
+}
+
+pre(){
+    test -z $2 && echo "need two args" >&2 && return 1
+    prefix="$1"
+    shift
+    out="$(eval "$@")"
+    echo "$out" | perl -lane "print \"$prefix \$_\""
 }
 
 #}}}***********************************************************

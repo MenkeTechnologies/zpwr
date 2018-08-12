@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:13:53 EDT 2017
-#####   Purpose: bash script to add shebang line to new script file
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:13:53 EDT 2017
+##### Purpose: bash script to add shebang line to new script file
+##### Notes:
 #}}}***********************************************************
 
 executableScriptsProcessing(){
@@ -22,8 +22,6 @@ openTextEditor(){
 	#run python3 script with pyautogi commands for keyboard shortcuts
 	python3 "$HOME/PycharmProjects/textEditorTwoColumns.py"
 }
-
-
 
 createTheFile(){
 	#create newfile
@@ -45,7 +43,7 @@ createTheFile(){
 }
 
 #if no arguments then exit
-[[ -z "$1" ]] && echo "${0##*/} needs an argument ..."  && exit 1
+[[ -z "$1" ]] && echo "${0##*/} needs an argument ..." && exit 1
 
 #file name is the first argument
 newfile="$1"
@@ -64,7 +62,7 @@ elif [[ "$newfile" =~ .*\.rb ]]; then
 	createTheFile .rb
 elif [[ "$newfile" =~ .*\.py ]]; then
 	createTheFile .py
-elif [[ "$newfile" =~ .*\.txt ]]; then  #.txt
+elif [[ "$newfile" =~ .*\.txt ]]; then #.txt
 	createTheFile .txt
 elif [[ "$newfile" =~ .*\..* ]]; then # a file ending that we do not want to process
 	createTheFile

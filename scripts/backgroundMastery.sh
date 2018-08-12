@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Wed Nov  1 21:16:06 EDT 2017
-#####   Purpose: bash script to launch background sripts as quickly as possible
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Wed Nov 1 21:16:06 EDT 2017
+##### Purpose: bash script to launch background sripts as quickly as possible
+##### Notes:
 #}}}***********************************************************
 
 trap 'kill $s1_pid $s2_pid $s3_pid $s4_pid \

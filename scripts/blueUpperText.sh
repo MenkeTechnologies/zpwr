@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:11:46 EDT 2017
-#####   Purpose: bash script to make text white on blue background and some underscores
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:11:46 EDT 2017
+##### Purpose: bash script to make text white on blue background and some underscores
+##### Notes:
 #}}}***********************************************************
 #escape sequences
 BLUE='\e[37;44m'
@@ -14,5 +14,4 @@ RESET='\e[0m'
 while read; do
     echo "$REPLY" | sed 's@.*@_______ & ______@' | boldText.sh | blueText.sh
 done
-
 

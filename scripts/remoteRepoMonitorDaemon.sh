@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Thu Apr 12 00:02:45 EDT 2018
-#####   Purpose: bash script to keep remote hosts in sync with master
-#####   Notes: watches 2 repos
+##### Author: JACOBMENKE
+##### Date: Thu Apr 12 00:02:45 EDT 2018
+##### Purpose: bash script to keep remote hosts in sync with master
+##### Notes: watches 2 repos
 #}}}***********************************************************
 
 BASE_DIR="$HOME/forkedRepos"
@@ -60,7 +60,7 @@ while true; do
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
-    if [[  ! -z "$output" ]] ; then
+    if [[ ! -z "$output" ]] ; then
         echo "We have change to $(git remote -v)"
         main
     fi
@@ -69,7 +69,7 @@ while true; do
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
-    if [[  ! -z "$output" ]] ; then
+    if [[ ! -z "$output" ]] ; then
         echo "We have change to $(git remote -v)"
         gitters
         refreshers

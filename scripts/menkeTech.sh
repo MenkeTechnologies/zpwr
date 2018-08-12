@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:16:19 EDT 2017
-#####   Purpose: bash script to print out Menke Technologies with figlet
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:16:19 EDT 2017
+##### Purpose: bash script to print out Menke Technologies with figlet
+##### Notes:
 #}}}***********************************************************
 
 tput civis

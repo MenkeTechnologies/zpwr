@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: SUZIE
-#####   Date: Fri Apr  6 15:40:01 EDT 2018
-#####   Purpose: bash script to 
-#####   Notes: 
+##### Author: SUZIE
+##### Date: Fri Apr 6 15:40:01 EDT 2018
+##### Purpose: bash script to
+##### Notes:
 #}}}***********************************************************
 
 export DELIMITER_CHAR='%'
@@ -43,7 +43,7 @@ alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} Packages
 outdated=$(pip2 list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
 if [[ "$(uname)" == Darwin ]]; then
-    #install outdated pip modules 
+    #install outdated pip modules
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
@@ -57,7 +57,7 @@ if [[ "$(uname)" == Darwin ]]; then
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     outdated=$(pip3 list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
-    #install outdated pip modules 
+    #install outdated pip modules
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
@@ -69,7 +69,7 @@ if [[ "$(uname)" == Darwin ]]; then
     pip3 install --upgrade pip setuptools wheel #&> /dev/null
 else
     alternatingPrettyPrint "Updating with ${DELIMITER_CHAR}sudo${DELIMITER_CHAR}"
-    #install outdated pip modules 
+    #install outdated pip modules
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
@@ -83,7 +83,7 @@ else
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     outdated=$(pip3 list --outdated | sed -n '3,$p' | awk '{print $1}')
 
-    #install outdated pip modules 
+    #install outdated pip modules
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"

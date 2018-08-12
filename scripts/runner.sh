@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENK
-#####   Date: Mon Jul 10 12:37:10 EDT 2017
-#####   Purpose: bash script to help exec of script from vim
-#####   Notes:
+##### Author: JACOBMENK
+##### Date: Mon Jul 10 12:37:10 EDT 2017
+##### Purpose: bash script to help exec of script from vim
+##### Notes:
 #}}}***********************************************************
 
 executableScriptsProcessing(){
@@ -40,7 +40,6 @@ executeFileFirstArgIsCommand(){
 #if no arguments then exit
 
 (( $# < 1 )) && echo "Need one argument." >&2 && exit 1
-
 
 #file name is the first argument
 clear

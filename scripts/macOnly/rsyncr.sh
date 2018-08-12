@@ -1,12 +1,11 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:24:04 EDT 2017
-#####   Purpose: bash script to rsync to RPi and upload to Tomcat
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:24:04 EDT 2017
+##### Purpose: bash script to rsync to RPi and upload to Tomcat
+##### Notes:
 #}}}***********************************************************
-
 
 [[ -z "$2" ]] && echo "Need two args local and remote dirs....." >&2 && exit 1
 

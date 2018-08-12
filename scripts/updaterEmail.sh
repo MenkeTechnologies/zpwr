@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Sat Jul  8 20:17:34 EDT 2017
-#####   Purpose: bash script for updating and sending email with results
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Sat Jul 8 20:17:34 EDT 2017
+##### Purpose: bash script for updating and sending email with results
+##### Notes:
 #}}}***********************************************************
 
 SCRIPTS="/Users/jacobmenke/Documents/shellScripts"

@@ -4,7 +4,6 @@ echo going down;\
 python -c 'print(\"_\" * 100)';
 " 15 2
 
-
 (( $# < 1 )) && echo "First arg is the Directory!" >&2 && exit 1
 
 file="$1"
@@ -23,7 +22,7 @@ while inotifywait "$file" ;do
     echo "`date` Sending email......"
     python -c 'print("_"*100)'
     echo
-    echo "$out" |  mutt -s "NAS ALERT: $file at $(date)" jamenk@me.com
+    echo "$out" | mutt -s "NAS ALERT: $file at $(date)" jamenk@me.com
 } || { echo
     python -c 'print("_"*100)'
     echo "No Match"

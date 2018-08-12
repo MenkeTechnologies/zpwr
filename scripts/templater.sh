@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Fri Jun 30 15:18:40 EDT 2017
-#####   Purpose: file templates for bash, perl, python
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Fri Jun 30 15:18:40 EDT 2017
+##### Purpose: file templates for bash, perl, python
+##### Notes:
 #}}}***********************************************************
 
 executableScriptsProcessing(){
@@ -19,12 +19,12 @@ addHeader(){
     #second arg is the absolute path to file
     headerSTRING=$(cat<<EOM
 #!/usr/bin/env $1
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: $(whoami | tr 'a-z' 'A-Z')
-#####   Date: $(date)
-#####   Purpose: $1 script to
-#####   Notes:
+##### Author: $(whoami | tr 'a-z' 'A-Z')
+##### Date: $(date)
+##### Purpose: $1 script to
+##### Notes:
 #}}}***********************************************************
 EOM
 )

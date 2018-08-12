@@ -1,28 +1,27 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Wed Nov  8 23:57:19 EST 2017
-#####   Purpose: bash script to
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Wed Nov  8 23:57:19 EST 2017
+##### Purpose: bash script to
+##### Notes:
 #}}}***********************************************************
 
 trap 'rm "$file"' INT
 
-
 function usage ()
 {
-    echo -e "\e[34mUsage :  $0 [options] [--]
+    echo -e "\e[34mUsage : $0 [options] [--]
 
     Options:
-    -i|inverse    set filter to after regex
-    -h|help       Display this message
-    -v|version    Display script version\e[0m"
+    -i|inverse set filter to after regex
+    -h|help Display this message
+    -v|version Display script version\e[0m"
 
-}    # ----------  end of function usage  ----------
+} # ----------  end of function usage  ----------
 
 #-----------------------------------------------------------------------
-#  Handle command line arguments
+# Handle command line arguments
 #-----------------------------------------------------------------------
 
 __ScriptVersion=1.0.0
@@ -33,18 +32,18 @@ while getopts "hvil:" opt
 do
   case $opt in
 
-    h|help     )  usage; exit 0   ;;
+    h|help )  usage; exit 0   ;;
 
-    v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+    v|version )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
-    i|inverse )  inverse=true ;;
+    i|inverse ) inverse=true ;;
 
-    l|level)  level=$OPTARG ;;
+    l|level) level=$OPTARG ;;
 
-    * )  echo -e "\n  Option does not exist : $OPTARG\n"
-          usage; exit 1   ;;
+    * ) echo -e "\n  Option does not exist : $OPTARG\n"
+          usage; exit 1 ;;
 
-  esac    # --- end of case ---
+  esac # --- end of case ---
 done
 shift $(($OPTIND-1))
 
@@ -72,7 +71,6 @@ delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: 
 } || sed -n '1,$p' "$file"
 
 rm "$file"
-
 
 #alternatively
 

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:28:12 EDT 2017
-#####   Purpose: bash script to sync two directories 
-#####   Notes: first arg is origin 2nd arg is destination 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:28:12 EDT 2017
+##### Purpose: bash script to sync two directories
+##### Notes: first arg is origin 2nd arg is destination
 #}}}***********************************************************
 firstFile="$1"
 

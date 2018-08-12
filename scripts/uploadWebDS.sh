@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:31:35 EDT 2017
-#####   Purpose: bash script to upload to web direcctory of NAS
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:31:35 EDT 2017
+##### Purpose: bash script to upload to web direcctory of NAS
+##### Notes:
 #}}}***********************************************************
 [[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
 

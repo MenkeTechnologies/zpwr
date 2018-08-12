@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:08:28 EDT 2017
-#####   Purpose: bash script for filtering text
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:08:28 EDT 2017
+##### Purpose: bash script for filtering text
+##### Notes:
 #}}}***********************************************************
 #escape sequences
 RED='\e[31;1m'

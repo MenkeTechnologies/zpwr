@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:33:52 EDT 2017
-#####   Purpose: bash script to list files on file change
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:33:52 EDT 2017
+##### Purpose: bash script to list files on file change
+##### Notes:
 #}}}***********************************************************
 dir_watching="$1"
 while read -d "" event; do
