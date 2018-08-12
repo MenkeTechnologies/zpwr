@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:32:05 EDT 2017
-#####   Purpose: bash script to upload to web dir of RPi
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:32:05 EDT 2017
+##### Purpose: bash script to upload to web dir of RPi
+##### Notes:
 #}}}***********************************************************
 [[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
 
@@ -36,7 +36,7 @@ perl -le "print'_'x $w" | lolcat
 printf "$BLUEDone\n${RESET}"
 
 #if just uploading to website one html file
-if [[ "$#" == 1 && "$1" =~ .*.html  ]]; then
+if [[ "$#" == 1 && "$1" =~ .*.html ]]; then
 	open "http://$MY_IP:2/$1"
 	#open -a "Sublime Text"
 fi

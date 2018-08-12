@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:30:30 EDT 2017
-#####   Purpose: bash  script to to upload to RPi
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:30:30 EDT 2017
+##### Purpose: bash script to to upload to RPi
+##### Notes:
 #}}}***********************************************************
 [[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
-
 
 printf "${BLUE}Uploading $* to $IP\n" | ponysay -W 120
 

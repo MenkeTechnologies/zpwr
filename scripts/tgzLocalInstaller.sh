@@ -1,50 +1,49 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Sat Aug 19 15:31:53 EDT 2017
-#####   Purpose: bash script to install .tgz packages
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Sat Aug 19 15:31:53 EDT 2017
+##### Purpose: bash script to install .tgz packages
+##### Notes:
 #}}}***********************************************************
-
 
 trap "echo bye; exit 1" INT
 
 __ScriptVersion="1.0.0"
 
-#===  FUNCTION  ================================================================
-#         NAME:  usage
-#  DESCRIPTION:  Display usage information.
+#=== FUNCTION ================================================================
+# NAME: usage
+# DESCRIPTION: Display usage information.
 #===============================================================================
 function usage ()
 {
-    echo "Usage :  $0 [options] [--]
+    echo "Usage : $0 [options] [--]
 
     Options:
-    -h|help       Display this message
-    -v|version    Display script version
+    -h|help Display this message
+    -v|version Display script version
     -n|no-install No sudo make install" >&2
 
-}    # ----------  end of function usage  ----------
+} # ---------- end of function usage  ----------
 
 #-----------------------------------------------------------------------
-#  Handle command line arguments
+# Handle command line arguments
 #-----------------------------------------------------------------------
 
 while getopts ":hvn" opt
 do
   case $opt in
 
-    h|help     )  usage; exit 0   ;;
+    h|help ) usage; exit 0   ;;
 
-    v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+    v|version ) echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
-    n|no-install  )  no_install=true   ;;
+    n|no-install ) no_install=true   ;;
 
-    * )  echo -e "\n  Option does not exist : $OPTARG\n"
-          usage; exit 1   ;;
+    * ) echo -e "\n Option does not exist : $OPTARG\n"
+          usage; exit 1 ;;
 
-  esac    # --- end of case ---
+  esac # --- end of case ---
 done
 shift $(($OPTIND-1))
 

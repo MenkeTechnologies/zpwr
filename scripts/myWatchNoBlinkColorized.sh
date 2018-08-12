@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:18:41 EDT 2017
-#####   Purpose: bash script to watch output of an command with color
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:18:41 EDT 2017
+##### Purpose: bash script to watch output of an command with color
+##### Notes:
 #}}}***********************************************************
 
 set -x
@@ -15,8 +15,8 @@ usage(){
 
 cat <<EOM
 usage:
-    -h  help
-    -b  display bold
+    -h help
+    -b display bold
 EOM
 exit 1
 }
@@ -65,9 +65,9 @@ watchCommand() {
         eval "$CMD" | head -n $ROWS | while IFS= read LINE; do
 	#prints %-30.5s = 30 spaces for left justificationa and five characters
 	    	concat="$(java parser $LINE)"
-	    	#concat="$first\e[35m$pid  \e[32m$pname\e[0m"
+	    	#concat="$first\e[35m$pid \e[32m$pname\e[0m"
             printf '%-*.*b%s\n' $COLS $COLS "$concat" "$el"
-			
+
         done
 	#position cursor back to 0,0
         printf '%s%s' "$ed" "$home"

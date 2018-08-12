@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:20:06 EDT 2017
-#####   Purpose: bash script to count all commands in PATH
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:20:06 EDT 2017
+##### Purpose: bash script to count all commands in PATH
+##### Notes:
 #}}}***********************************************************
 
 total=0
@@ -16,7 +16,7 @@ while getopts "chd" OPTION; do
                 c)
                         ECHO="true"
                         ;;
-	
+
 				d)
                         echo here too
                         ;;
@@ -26,8 +26,8 @@ while getopts "chd" OPTION; do
                         echo "count.sh -h "
                         echo "count.sh -c "
                         echo ""
-                        echo "   -c     to see just count"
-                        echo "   -h     help (this output)\033[0m"
+                        echo " -c to see just count"
+                        echo " -h help (this output)\033[0m"
                         exit 0
                         ;;
 
@@ -39,12 +39,12 @@ findTotal (){
 total=`expr $(ls -F $1 | grep ".*[*@]" | wc -l) + $total`
 
 for f in `ls -A $1`; do
-	
+
 	if [ -x "$1/$f" ]; then
-	
+
 		commands="$f $commands"
 	fi
-	
+
 done
 
 }

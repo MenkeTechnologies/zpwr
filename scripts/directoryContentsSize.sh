@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:15:26 EDT 2017
-#####   Purpose: bash script to list files and folders in pwd and optionally sort by size
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:15:26 EDT 2017
+##### Purpose: bash script to list files and folders in pwd and optionally sort by size
+##### Notes:
 #}}}***********************************************************
 
 sortedCommand=gsort
@@ -21,7 +21,6 @@ usage(){
 EOM
 printf "\e[0m"
 }
-
 
 #show file sizes of all files in pwd
 #checking for presence of sorted flag which is

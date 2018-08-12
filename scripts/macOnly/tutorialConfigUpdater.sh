@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 11:59:28 EDT 2017
-#####   Purpose:  script to update multiple Github repos
-#####   Notes:TutorialFiles, PersonalWebsite, customTerminalInstaller
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 11:59:28 EDT 2017
+##### Purpose:  script to update multiple Github repos
+##### Notes:TutorialFiles, PersonalWebsite, customTerminalInstaller
 #}}}***********************************************************
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
@@ -18,8 +18,7 @@ prettyPrint(){
 
 [[ -n "$1" ]] && commitMessage="$1" || commitMessage="update"
 
-
-#{{{                    MARK:installer
+#{{{ MARK:installer
 #**************************************************************
 prettyPrint "Copying scripts to custom Installer Repo"
 rm -rf "$SCRIPTS/customTerminalInstaller/scripts/"*
@@ -52,7 +51,7 @@ prettyPrint "Pushing..."
 git push
 #}}}***********************************************************
 
-#{{{                    MARK:tutorialDir
+#{{{ MARK:tutorialDir
 #**************************************************************
 prettyPrint "Copying zshrc"
 cp "$HOME/.zshrc" "$tutorialDir/zsh"
@@ -128,8 +127,7 @@ git push
 
 #}}}***********************************************************
 
-
-#{{{                    MARK:websiteDir
+#{{{ MARK:websiteDir
 #**************************************************************
 
 dotdir="$websiteDir/downloads/dotfiles"

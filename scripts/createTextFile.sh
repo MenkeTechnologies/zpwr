@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:14:31 EDT 2017
-#####   Purpose: bash script to create new script and edit it with SublimeText
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:14:31 EDT 2017
+##### Purpose: bash script to create new script and edit it with SublimeText
+##### Notes:
 #}}}***********************************************************
 
 executableScriptsProcessing(){
@@ -27,12 +27,12 @@ addHeader(){
     #second arg is the absolute path to file
     firstString="$(cat<<EOM
 #!/usr/bin/env $1
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: $(whoami | tr 'a-z' 'A-Z')
-#####   Date: $(date)
-#####   Purpose: $1 script to
-#####   Notes:
+##### Author: $(whoami | tr 'a-z' 'A-Z')
+##### Date: $(date)
+##### Purpose: $1 script to
+##### Notes:
 #}}}***********************************************************
 EOM
 )"
@@ -83,7 +83,7 @@ elif [[ "$newfile" =~ .*\.rb ]]; then
     createTheFile .rb
 elif [[ "$newfile" =~ .*\.py ]]; then
     createTheFile .py
-elif [[ "$newfile" =~ .*\.txt ]]; then  #.txt
+elif [[ "$newfile" =~ .*\.txt ]]; then #.txt
     createTheFile .txt
 elif [[ "$newfile" =~ .*\..* ]]; then # a file ending that we do not want to process
     createTheFile

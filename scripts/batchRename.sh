@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:10:25 EDT 2017
-#####   Purpose: bash script to rename multiple files
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:10:25 EDT 2017
+##### Purpose: bash script to rename multiple files
+##### Notes:
 #}}}***********************************************************
 printf "\e[37;44m"
 
@@ -24,7 +24,7 @@ displayProgress(){
         printf "thinking... "
         printf " %.${chars}s$CR" "$spinner" ##print first character of spinner then
         # carriage return to beginning of line
-        local temp=${spinner#?}               # remove first character from $spinner
+        local temp=${spinner#?} # remove first character from $spinner
         spinner="$temp${spinner%"$temp"}" # and add it to the end
         sleep "$delay"
     done

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:14:20 EDT 2017
-#####   Purpose: bash script to list all comamnds in PATH
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:14:20 EDT 2017
+##### Purpose: bash script to list all comamnds in PATH
+##### Notes:
 #}}}***********************************************************
 
 #initialize variables
@@ -23,7 +23,7 @@ for path in $PATH; do
 	while read command; do
 		arr+=("$command")
 	done < <(ls -c1 $path)
-	
+
 done
 
 #escape sequences are for white text on blue background
@@ -38,7 +38,7 @@ if [[ "$REPLY" == "y" ]]; then
 	for i in ${arr[*]}; do
 	echo -e "$i"
 #sort the array (-f ignore case) and get rid of duplicates and use less pager
-done | sort -f | uniq | less 
+done | sort -f | uniq | less
 fi
 #newline
 echo

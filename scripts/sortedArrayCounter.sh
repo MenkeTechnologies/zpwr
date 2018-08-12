@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:26:32 EDT 2017
-#####   Purpose: bash script to see sorted commands in PATH 
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:26:32 EDT 2017
+##### Purpose: bash script to see sorted commands in PATH
+##### Notes:
 #}}}***********************************************************
 oldifs="$IFS"
 
@@ -20,7 +20,7 @@ for i in $PATH; do
         let "sum += `ls $i | wc -w`"
 
         IFS="$oldifs"
-        for i in  `ls $i`; do
+        for i in `ls $i`; do
             arr+=($i)
         done
 

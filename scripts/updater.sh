@@ -1,47 +1,47 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:03:45 EDT 2017
-#####   Purpose: bash  script to update all command line packages locally and on servers
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:03:45 EDT 2017
+##### Purpose: bash script to update all command line packages locally and on servers
+##### Notes:
 #}}}***********************************************************
 
 __ScriptVersion="1.0.0"
 
-#===  FUNCTION  ================================================================
-#         NAME:  usage
-#  DESCRIPTION:  Display usage information.
+#=== FUNCTION ================================================================
+# NAME: usage
+# DESCRIPTION: Display usage information.
 #===============================================================================
 usage() {
-    echo "Usage :  $0 [options] [--]
+    echo "Usage : $0 [options] [--]
 
     Options:
-    -h|help       Display this message
-    -s|skip       Skip the main
-    -e|end        Skip the end
-    -v|version    Display script version"
+    -h|help Display this message
+    -s|skip Skip the main
+    -e|end Skip the end
+    -v|version Display script version"
 
-}    # ----------  end of function usage  ----------
+} # ---------- end of function usage  ----------
 
 #-----------------------------------------------------------------------
-#  Handle command line arguments
+# Handle command line arguments
 #-----------------------------------------------------------------------
 
 while getopts ":hvse" opt
 do
     case $opt in
 
-        h|he:lp     )  usage; exit 0   ;;
+        h|he:lp ) usage; exit 0   ;;
         s|skip ) skip=true ;;
         e|end ) end=true ;;
 
-        v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+        v|version ) echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
-        * )  echo -e "\n  Option does not exist : $OPTARG\n"
-            usage; exit 1   ;;
+        * ) echo -e "\n Option does not exist : $OPTARG\n"
+            usage; exit 1 ;;
 
-        esac    # --- end of case ---
+        esac # --- end of case ---
 done
 shift $(($OPTIND-1))
 
@@ -82,7 +82,6 @@ alternatingPrettyPrint(){
         }; print "\x1b[0m"' <<< "$@"
     fi
 }
-
 
 exists(){
     type "$1" >/dev/null 2>&1
@@ -182,8 +181,8 @@ if [[ $skip != true ]]; then
     exists yarn && {
         prettyPrint "Updating yarn packages"
         yarn global upgrade
-        #    prettyPrint "Updating yarn itself"
-        #    npm install -g yarn
+        # prettyPrint "Updating yarn itself"
+        # npm install -g yarn
     }
 
     exists cpanm && {
@@ -216,7 +215,6 @@ if [[ $skip != true ]]; then
     prettyPrint "Updating OhMyZsh Themes"
     gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 fi
-
 
 #first argument is user@host and port number configured in .ssh/config
 updatePI(){ #-t to force pseudoterminal allocation for interactive programs on remote host

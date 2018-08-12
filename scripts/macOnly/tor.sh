@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:05:46 EDT 2017
-#####   Purpose: bash script to use tor network
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:05:46 EDT 2017
+##### Purpose: bash script to use tor network
+##### Notes:
 #}}}***********************************************************
 prettyPrint (){
     printf "\e[4;1m$1\e[0m\n"
@@ -45,7 +45,6 @@ sudo spoof randomize wi-fi
 prettyPrint "MAC Address Spoofed"
 sudo networksetup -setairportpower en0 on
 prettyPrint "Wi-Fi On With Artificial Identification"
-
 
 sudo networksetup -setsocksfirewallproxy "$INTERFACE" 127.0.0.1 9050 off
 sudo networksetup -setsocksfirewallproxystate "$INTERFACE" on

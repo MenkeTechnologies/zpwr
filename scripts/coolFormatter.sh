@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:13:32 EDT 2017
-#####   Purpose: bash script to add funky formatting
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:13:32 EDT 2017
+##### Purpose: bash script to add funky formatting
+##### Notes:
 #}}}***********************************************************
 #escape sequences
 BLUE='\e[37;44m'

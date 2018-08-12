@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:33:52 EDT 2017
-#####   Purpose: bash script to list files on file change
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:33:52 EDT 2017
+##### Purpose: bash script to list files on file change
+##### Notes:
 #}}}***********************************************************
 dir_watched="$1"
 first_iteration=true
@@ -17,10 +17,10 @@ while read -d "" event; do
         first_iteration=false
         {
             echo
-            printf "\e[4;1mFirst Iteration.  Starting long running task like rsync...\n\e[0m"
+            printf "\e[4;1mFirst Iteration. Starting long running task like rsync...\n\e[0m"
 
             sleep 10
-            printf "\e[4;1mFirst Iteration.  Completing long running task like rsync...\n\e[0m"
+            printf "\e[4;1mFirst Iteration. Completing long running task like rsync...\n\e[0m"
             echo
         } &
         pid=$!

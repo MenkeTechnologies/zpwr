@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Sat Jul  8 20:57:59 EDT 2017
-#####   Purpose: bash script to update software on the RPI itself
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Sat Jul 8 20:57:59 EDT 2017
+##### Purpose: bash script to update software on the RPI itself
+##### Notes:
 #}}}***********************************************************
 
 #no complaining about no glob results for * from zsh

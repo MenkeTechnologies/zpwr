@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:23:26 EDT 2017
-#####   Purpose: bash  script to download from RPi to local host
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:23:26 EDT 2017
+##### Purpose: bash script to download from RPi to local host
+##### Notes:
 #}}}***********************************************************
 
 outputDir="Desktop"

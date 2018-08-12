@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:19:24 EDT 2017
-#####   Purpose: bash script to watch output of command using clear
-#####   Notes: 
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:19:24 EDT 2017
+##### Purpose: bash script to watch output of command using clear
+##### Notes:
 #}}}***********************************************************
 
 trap "tput cnorm; exit" INT TERM QUIT
@@ -15,7 +15,7 @@ usage(){
     usage:
     -h	help
     -d 	display date
-    -l  <lines> limit output to certain number of lines
+    -l <lines> limit output to certain number of lines
 EOM
 exit 1
 }

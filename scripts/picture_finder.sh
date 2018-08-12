@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 12:05:02 EDT 2017
-#####   Purpose: bash script to find all pics
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:05:02 EDT 2017
+##### Purpose: bash script to find all pics
+##### Notes:
 #}}}***********************************************************
 tput civis
 
@@ -33,7 +33,7 @@ killCursor(){
 
 displayProgress(){
 
-local arr=(  '|' '\' '-' '/' )
+local arr=( '|' '\' '-' '/' )
 local revarr=( '|' '/' '-' '\')
 
 while true; do

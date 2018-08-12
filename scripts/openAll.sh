@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:20:30 EDT 2017
-#####   Purpose: bash script to open all files of given type
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:20:30 EDT 2017
+##### Purpose: bash script to open all files of given type
+##### Notes:
 #}}}***********************************************************
 
 printf "\e[37;44m"
@@ -25,7 +25,7 @@ displayProgressIndicator(){
         printf "thinking... "
         printf " %.${chars}s$CR" "$spinner" ##print first character of spinner then
         # carriage return to beginning of line
-        local temp=${spinner#?}               # remove first character from $spinner
+        local temp=${spinner#?} # remove first character from $spinner
         spinner=$temp${spinner%"$temp"} # and add it to the end
         sleep $delay
 
@@ -48,9 +48,7 @@ killCursor(){
 }
 #$# is number of arguments
 
-
 (( $# == 0 )) && echo "Need one argument." >&2 && exit 1
-
 
 #set the fileExtension variable to first argument
 declare -a fileExtensions
@@ -92,7 +90,6 @@ while read line; do
 		for ending in ${fileExtensions[@]}; do
             [[ "${lcline##*.}" == "$ending" ]] && filesArray+=("$line")
 		done
-
 
 	fi
 #find all files in pwd that have the fileExtensions in their names, remove last pipe from fileString

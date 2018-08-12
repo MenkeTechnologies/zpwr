@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Mon Jul 10 19:24:42 EDT 2017
-#####   Purpose: bash script to try out all macOS voices
-#####   Notes:
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 19:24:42 EDT 2017
+##### Purpose: bash script to try out all macOS voices
+##### Notes:
 #}}}***********************************************************
 
 (( "$#" == 0 )) && echo "Need one argument." && exit 1
