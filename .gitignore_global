@@ -21,3 +21,6 @@ out/
 #cmake
 cmake-build-debug/
 
+#gradle
+.gradle
+build/

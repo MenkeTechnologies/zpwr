@@ -205,6 +205,10 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Installing Powerline fonts"
     brew cask install font-hack-nerd-font
 
+
+    # system sed breaks extended regex
+    ln -s /usr/local/bin/gsed /usr/local/bin/sed
+
     #}}}***********************************************************
 
 #{{{                    MARK:Linux
