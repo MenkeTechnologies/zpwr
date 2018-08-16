@@ -190,7 +190,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     }
 else
     #Linux
-    alias apt="sudo apt-get install -y"
+    alias api="sudo apt-get install -y"
     alias ip="grc -c $HOME/conf.ifconfig ip"
     test -z "$distroName" && {
         distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
@@ -533,7 +533,7 @@ contribCount(){
     fi
 }
 
-gds(){
+gsdc(){
     git status &> /dev/null || {
         printf "\x1b[0;1;31m"
         printf "NOT GIT DIR: $(pwd -P)\n" >&2
