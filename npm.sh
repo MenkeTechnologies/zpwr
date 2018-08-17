@@ -51,3 +51,4 @@ npm i -g webpack
 npm i -g yarn
 npm i -g yosay
 npm i -g shelobsay
+npm i -g cordova
