@@ -344,6 +344,8 @@ vim -c PluginInstall -c qall
 prettyPrint "Installing .vimrc"
 cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
+prettyPrint "Installing .ideavimrc"
+cp "$INSTALLER_DIR/.ideavimrc" "$HOME"
 #}}}***********************************************************
 
 #{{{                    MARK:Vim Plugs
