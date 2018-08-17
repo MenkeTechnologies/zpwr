@@ -11,3 +11,13 @@ id
 
 pwd
 
+
+ls
+
+
+id
+
+pwd
+
+id
+
