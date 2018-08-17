@@ -21,3 +21,17 @@ pwd
 
 id
 
+
+ls
+
+pwd
+
+
+echo iam cool Aug 17, 2018
+
+
+
+
+
+
+
