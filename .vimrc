@@ -78,6 +78,7 @@ set grepprg=ag
 
 "visual selection automatically into system clipboard
 set guioptions+=a
+set guifont=Hack\ Nerd\ Font:h14
 "start browsing in current dir
 set browsedir=current
 "reduce enter key after message alerts
@@ -879,13 +880,13 @@ let os = substitute(system('uname'), "\n", "", "")
 "powerline-status pip package installs to different locations of different OS
 if os == "Darwin"
     "if has('python3')
-        "command! -nargs=1 Py py3 <args>
-        "set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
-        "set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.7
+    "command! -nargs=1 Py py3 <args>
+    "set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
+    "set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.7
     "else
-        "command! -nargs=1 Py py <args>
-        "set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
-        "set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
+    "command! -nargs=1 Py py <args>
+    "set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
+    "set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
     "endif
 
     set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim

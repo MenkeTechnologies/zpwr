@@ -83,7 +83,6 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
 plugins=(fzf-zsh zsh-more-completions zsh-completions zsh-syntax-highlighting zsh-autosuggestions history-substring-search ruby gem rake rails yarn ng coffee node npm perl cpanm git github gradle ant mvn scala lein spring django pip pyenv python go man nmap postgres redis-cli colorize sudo z rsync docker sublime vundle rust cargo meteor gulp grunt glassfish)
 
 PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print \$8}")"
