@@ -771,10 +771,12 @@ function TmuxRepeat()
 
     if has("gui_running")
         if index(supportedTypes, exeFileType) >= 0
-            silent! exec "!tmux send-keys -t vimmers:0. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+            echom "gui vim supported"
+            silent! exec "!tmux send-keys -t vimmers:1. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
             redraw!
         else
-            silent! exec "!tmux send-keys -t vimmer:0. C-c up C-m"
+            echom "gui vim not supported"
+            silent! exec "!tmux send-keys -t vimmer:1. C-c up C-m"
             echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
             redraw!
         endif

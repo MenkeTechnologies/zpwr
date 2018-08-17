@@ -570,17 +570,11 @@ surround(){
         [a-zA-Z0-9]*)
             BUFFER="$LBUFFER$KEYS$RBUFFER"
             zle .vi-forward-char
-            return 0
-            ;;
-       *)
-            ;;
-    esac
+            return 0 ;; *) ;; esac
 
 
-    case "$KEYS" in
-        '"')
-            if (( $count % 2 == 1 )); then
-                BUFFER="$LBUFFER$KEYS$RBUFFER"
+    case "$KEYS" in '"') if (( $count % 2 == 1 )); then
+        BUFFER="$LBUFFER$KEYS$RBUFFER"
                 #echo odd Char is $count >> $LOGFILE
                 zle .vi-forward-char
                 return 0
