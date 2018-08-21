@@ -1629,6 +1629,14 @@ _comps[ksh]=_ksh
 _comps[tcsh]=_tcsh
 _comps[csh]=_tcsh
 
+_cl(){
+    _alternative \
+        'function:fxns:_values functions ${(k)functions}' \
+        'files:filenames:_files'
+}
+
+compdef _cl clearList
+
 # Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
 #}}}***********************************************************
