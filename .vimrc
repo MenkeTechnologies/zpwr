@@ -950,4 +950,6 @@ inoremap <silent> <F10> <C-X><C-K>
 "easier mapping for thesaurus completion
 inoremap <silent> <F11> <C-X><C-T>
 
+map :w :up
+
 "}}}*****************za******************************************

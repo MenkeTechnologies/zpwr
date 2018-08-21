@@ -1684,7 +1684,7 @@ if [[ "$(uname)" == Linux ]]; then
                     tmux ls && { tmux attach; echo "attaching" >> "$LOGFILE"; }  || { tmux new-session \; source-file ~/.tmux/control-window; echo "creating new tmux session"; }
                 } &> /dev/null
             else
-                tmux attach
+                :
             fi
         fi
 
