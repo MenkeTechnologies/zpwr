@@ -1631,7 +1631,9 @@ _comps[csh]=_tcsh
 
 _cl(){
     _alternative \
-        'function:fxns:_values functions ${(k)functions}' \
+        'aliases:aliases:('"echo ${(k)aliases}"')' \
+        'builtins:builtin:('"$(enable) $(disable)"')' \
+        'functions:functions:('"echo ${(k)functions}"')' \
         'files:filenames:_files'
 }
 
