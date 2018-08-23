@@ -1634,6 +1634,7 @@ _cl(){
         'aliases:aliases:('"echo ${(k)aliases}"')' \
         'builtins:builtin:('"$(enable) $(disable)"')' \
         'functions:functions:('"echo ${(k)functions}"')' \
+        'commands:commands:('"echo ${(k)commands}"')' \
         'files:filenames:_files'
 }
 
