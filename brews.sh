@@ -265,6 +265,7 @@ brew install tmux
 brew install toilet
 brew install tokyo-cabinet
 brew install tomcat
+brew install tomee-plume
 brew install tor
 brew install torsocks
 brew install tree
