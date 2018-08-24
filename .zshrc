@@ -1692,7 +1692,14 @@ if [[ "$(uname)" == Linux ]]; then
             if [[ -z "$(tmux list-clients)" ]]; then
                 echo "no tmux clients" >> "$LOGFILE"
                 {
-                    tmux ls && { tmux attach; echo "attaching" >> "$LOGFILE"; }  || { tmux new-session \; source-file ~/.tmux/control-window; echo "creating new tmux session"; }
+                    tmux ls && {
+                        tmux attach
+                        echo "attaching to existing" >> "$LOGFILE"
+                    } || {
+                        tmux new-session \; \
+                        source-file ~/.tmux/control-window
+                        echo "creating new session" >> "$LOGFILE"
+                    }
                 } &> /dev/null
             else
                 :
