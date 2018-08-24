@@ -1686,9 +1686,9 @@ if [[ "$(uname)" == Linux ]]; then
         esac
         echo "searching for $key in $out" >> "$LOGFILE"
         echo "$out" | grep -q "$key" && mobile=false
-        echo "mobile is $mobile" >> "$LOGFILE"
         command rm ~/temp$$
         if [[ $mobile == "false" ]]; then
+            echo "not mobile" >> "$LOGFILE"
             if [[ -z "$(tmux list-clients)" ]]; then
                 echo "no tmux clients" >> "$LOGFILE"
                 {
@@ -1702,8 +1702,10 @@ if [[ "$(uname)" == Linux ]]; then
                     }
                 } &> /dev/null
             else
-                :
+                echo "clients so NO" >> "$LOGFILE"
             fi
+        else
+            echo "mobile so NO" >> "$LOGFILE"
         fi
 
     }
