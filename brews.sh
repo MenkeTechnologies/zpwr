@@ -114,6 +114,7 @@ brew install isl
 brew install jansson
 brew install jasper
 brew install jemalloc
+brew install jetty
 brew install jnettop
 brew install jpeg
 brew install jvmtop
@@ -230,6 +231,7 @@ brew install redis
 brew install rlwrap
 brew install rsync
 brew install ruby
+brew install rustup-init
 brew install s-lang
 brew install s-search
 brew install sbt
