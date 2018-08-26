@@ -52,7 +52,7 @@ dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop c
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary+=(nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace \
+    dependencies_ary+=(php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace python-pip snort
     )
@@ -62,7 +62,7 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary+=(openldap2-devel mariadb postgresql-server postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel \
+    dependencies_ary+=(openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel mysql-devel libevent-devel postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel) 
 
 }
@@ -79,7 +79,7 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary+=('fortune-mod.*' clamav-update openldap-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
+    dependencies_ary+=('fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
 }
 
 addDependenciesMac(){
