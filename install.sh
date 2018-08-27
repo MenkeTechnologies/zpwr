@@ -500,7 +500,7 @@ cd "$INSTALLER_DIR"
 bash "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Installing fzf"
-$HOME/.oh-my-zsh/custom/plugins/fzf/install --bin
+"$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
 
 prettyPrint "Installing mylg"
 go get github.com/mehrdadrad/mylg
