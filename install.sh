@@ -52,7 +52,7 @@ dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop c
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary+=(php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace \
+    dependencies_ary+=(php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 postfix golang xclip strace python-pip snort
     )
@@ -427,7 +427,7 @@ echo "pager=cat" >> "$HOME/.my.cnf"
 prettyPrint "Copying all Shell Scripts..."
 [[ ! -d "$HOME/Documents/shellScripts" ]] && mkdir -p "$HOME/Documents/shellScripts"
 
-cp "$INSTALLER_DIR/scripts/"*.sh "$INSTALLER_DIR/scripts/"*.pl" $HOME/Documents/shellScripts"
+cp "$INSTALLER_DIR/scripts/"*.sh "$INSTALLER_DIR/scripts/"*.pl "$HOME/Documents/shellScripts"
 cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
 
 prettyPrint "Installing ponysay from source"
