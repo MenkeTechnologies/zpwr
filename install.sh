@@ -453,6 +453,12 @@ if [[ ! -f "$htopDIR/htoprc" ]]; then
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
 fi
 
+exists grc || {
+    git clone https://github.com/garabik/grc.git
+    cd grc
+    sudo bash install.sh
+}
+
 prettyPrint "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
 if [[ "$(uname)" == Darwin ]]; then
     GRC_DIR=/usr/local/share/grc
