@@ -17,11 +17,13 @@ exists(){
     type "$1" >/dev/null 2>&1
 }
 
+install_counter=0
 prettyPrint(){
+    (( install_counter++ ))
     printf "\x1b[32;1m"
     perl -le "print '#'x80"
     printf "\x1b[34;4m"
-    printf "$1\n"
+    printf "$install_counter: $1\n"
     printf "\x1b[0;32;1m"
     perl -le "print '#'x80"
     printf "\x1b[0m"

@@ -250,6 +250,8 @@ else
             update "$prog" "$distroFamily"
         done
 
+        prettyPrint "Updating $distroFamily"
+
         upgrade "$distroFamily"
     fi
 
