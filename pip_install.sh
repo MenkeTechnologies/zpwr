@@ -40,7 +40,13 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
-        pip install -
+        pip install --upgrade youtube_dl
+    }
+else
+    if [[ "$distroFamily" == redhat ]]; then
+        prettyPrint "Installing grc for RedHat"
+        git clone https://github.com/garabik/grc.git && cd grc && sudo bash install.sh
+    fi
 
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y python36
@@ -90,4 +96,3 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
 fi
 prettyPrint "Done With Python Packages"
-
