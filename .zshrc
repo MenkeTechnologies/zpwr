@@ -1432,7 +1432,7 @@ else
                     bash "$HOME/motd.sh" | ponysay -W 120
                 } || bash "$HOME/motd.sh"
                 ;;
-            (ubuntu|debian|kali)
+            (ubuntu|debian|kali|linuxmint)
                 builtin cd "$D"
                 figlet -f block "$(whoami)" | ponysay -W 120 \
                     | splitReg.sh -- ------------- lolcat
