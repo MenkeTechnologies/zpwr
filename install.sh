@@ -35,6 +35,8 @@ cat<<\EOF
                             "Y88P"                     
 EOF
 
+sleep 1
+
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
