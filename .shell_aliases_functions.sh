@@ -187,6 +187,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
         alias vi='mvim -v'
         alias vim='mvim -v'
         alias vm='mvim -v -u ~/.minvimrc'
+        alias sv='sudo mvim -v'
     }
 else
     #Linux
@@ -202,6 +203,7 @@ else
         alias v=vim
         alias vi=vim
         alias vm='vim -u ~/.minvimrc'
+        alias sv='sudo vim'
     }
 fi
 alias tclsh="rlwrap tclsh"
