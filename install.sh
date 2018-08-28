@@ -11,6 +11,10 @@
 #{{{                    MARK:Setup
 #**************************************************************
 
+
+# highly recommended to run 'sudo visudo' to allow noninteractive install
+# <user> ALL=(ALL) NOPASSWD:ALL
+
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
