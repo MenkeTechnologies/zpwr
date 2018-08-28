@@ -1,4 +1,4 @@
-#H!/usr/bin/env bash
+#!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
