@@ -17,6 +17,7 @@ INSTALLER_DIR="$(pwd -P)"
 
 source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
 
+clear
 # replicate stdout and sterr to logfile
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
 [[ -f "$escapeRemover" ]] && {
