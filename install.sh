@@ -20,35 +20,38 @@ source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 &&
 clear
 # replicate stdout and sterr to logfile
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
+
 [[ -f "$escapeRemover" ]] && {
     exec >> >( tee >(cat | "$escapeRemover" > "$INSTALLER_DIR/installer_logfile.txt"))
-} || exec >> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
-
-exec 2>> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
+    exec 2>> >( tee >(cat | "$escapeRemover" > "$INSTALLER_DIR/installer_logfile.txt"))
+} || {
+    exec >> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
+    exec 2>> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
+}
 
 cat<<\EOF
-888b     d888                888         88888888888             888      
-8888b   d8888                888             888                 888      
-88888b.d88888                888             888                 888      
-888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b.  
-888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b 
-888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888 
-888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888 
-888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888 
-                                                                          
-                                                                          
-                                                                          
-                888                d8b                 
-                888                Y8P                 
-                888                                    
-88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b  
-888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K      
-888  888888  888888888  888888  88888888888888"Y8888b. 
-888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88 
-888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P' 
-                                888                    
-                           Y8b d88P                    
-                            "Y88P"                     
+888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
 EOF
 
 sleep 1
