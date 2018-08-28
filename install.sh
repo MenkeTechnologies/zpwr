@@ -551,9 +551,8 @@ prettyPrint "Done!!!!!!"
 
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
-tmux new-session -t main
-tmux source-file "$HOME/.tmux/control-window"
-tmux select-pane -t right
-tmux send-keys "matr" C-m
+tmux new-session -d -s "main" "zsh"
+tmux send-keys -t "main" 'tmux source-file "$HOME/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m'
+tmux attach -t main
 
 #}}}***********************************************************
