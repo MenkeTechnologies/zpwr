@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#H!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
@@ -538,7 +538,7 @@ prettyPrint "Installing fzf"
 
 prettyPrint "Installing mylg"
 go get github.com/mehrdadrad/mylg
-cd "$GOPATH/src/github.com/mehrdadrad/mylg/"
+cd "$HOME/go/src/github.com/mehrdadrad/mylg/"
 go build mylg.go
 
 #}}}***********************************************************
