@@ -220,7 +220,7 @@ else
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
 
     case $distroName in
-        (debian|ubuntu|raspbian|kali) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
+        (debian|ubuntu|raspbian|kali|linuxmint) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
             distroFamily=debian
             addDependenciesDebian
             ;;
@@ -228,7 +228,7 @@ else
             distroFamily=arch
             addDependenciesArch
             ;;
-        (opensuse|suse) prettyPrint "Installing Dependencies for $distroName with zypper"
+        (*suse*) prettyPrint "Installing Dependencies for $distroName with zypper"
             distroFamily=suse
             addDependenciesSuse
             ;;
@@ -329,15 +329,17 @@ case "$distroName" in
         ;;
 esac
 
-prettyPrint "Installing Ruby gems lolcat and rouge"
 if [[ "$needSudo" == yes ]]; then
+    prettyPrint "Installing Ruby gem lolcat"
     sudo gem install lolcat
+    prettyPrint "Installing Ruby gem rouge"
     sudo gem install rouge
 else
+    prettyPrint "Installing Ruby gem lolcat"
      gem install lolcat
+    prettyPrint "Installing Ruby gem rouge"
      gem install rouge
 fi
-
 
 prettyPrint "Running Vundle"
 #run vundle install for ultisnips, supertab
@@ -373,6 +375,7 @@ cd $HOME/.vim/bundle/YouCompleteMe && {
 tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
 [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
 
+prettyPrint "Installing Tmux Powerline Config"
 cat "$INSTALLER_DIR"/default.json >> "$tmuxPowerlineDir/default.json"
 
 prettyPrint "Installing Tmux Plugin Manager"
@@ -382,12 +385,15 @@ git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
+
 prettyPrint "Installing Iftop config..."
 ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
 iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
 echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
+
+prettyPrint "Installing Iftop colors to $HOME"
 cp "$INSTALLER_DIR/.iftopcolors" "$HOME"
 
 if [[ "$distroName" == raspbian ]]; then
@@ -417,16 +423,17 @@ cd "$HOME/forkedRepos" && {
 
 [[ ! -f "$HOME/.token.sh" ]] && touch "$HOME/.tokens.sh"
 
-prettyPrint "HushLogin"
+prettyPrint "HushLogin to $HOME"
 [[ ! -f "$HOME/.hushlogin" ]] && touch "$HOME/.hushlogin"
 
+prettyPrint "Installing my.cnf to $HOME"
 [[ ! -f "$HOME/.my.cnf" ]] && touch "$HOME/.my.cnf"
 
 prettyPrint "Changing pager to cat for MySQL Clients such as MyCLI"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
-prettyPrint "Copying all Shell Scripts..."
+prettyPrint "Copying all Shell Scripts to $HOME/Documents"
 [[ ! -d "$HOME/Documents/shellScripts" ]] && mkdir -p "$HOME/Documents/shellScripts"
 
 cp "$INSTALLER_DIR/scripts/"*.sh "$INSTALLER_DIR/scripts/"*.pl "$HOME/Documents/shellScripts"
@@ -520,6 +527,7 @@ prettyPrint "Done!!!!!!"
 
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
+exec zsh -c ""
 tmux
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
