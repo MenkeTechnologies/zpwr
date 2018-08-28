@@ -26,7 +26,7 @@ logfile="$INSTALLER_DIR/escaped_logfile.txt"
 clear
 # replicate stdout and sterr to logfile
 exec >> >(tee "$logfile")
-exec 2>> >(tee "$logfile")
+exec 2>&1
 
 cat<<\EOF
 888b     d888                888         88888888888             888
