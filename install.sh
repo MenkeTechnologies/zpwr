@@ -26,7 +26,8 @@ logfile="$INSTALLER_DIR/escaped_logfile.txt"
 clear
 # replicate stdout and sterr to logfile
 exec >> >(tee "$logfile")
-exec 2>&1
+exec 2>&d
+1
 
 cat<<\EOF
 888b     d888                888         88888888888             888
@@ -74,7 +75,7 @@ sleep 1
 # 16) powerline-mem-segment
 
 dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
-    screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
+    screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop atop ctags texinfo lsof \
     whois weechat gradle ant maven tree mc ocaml groovy slurm bmon ruby) 
@@ -513,6 +514,7 @@ cp "$INSTALLER_DIR/.inputrc" "$HOME"
 if [[ "$OS_TYPE" != Darwin ]]; then
     update snort "$distroFamily"
     update postfix "$distroFamily"
+    update mailutils "$distroFamily"
     update wireshark "$distroFamily"
 fi
 
