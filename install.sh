@@ -306,9 +306,9 @@ mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/aut
 
 prettyPrint "Installing Vim Plugins"
 cd "$INSTALLER_DIR"
-bash "$INSTALLER_DIR/vim_plugins_install.sh"
+source  "$INSTALLER_DIR/vim_plugins_install.sh"
 cd "$INSTALLER_DIR"
-bash "$INSTALLER_DIR/pip_install.sh"
+source "$INSTALLER_DIR/pip_install.sh"
 
 
 case "$distroName" in
@@ -400,7 +400,7 @@ cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 
 cd "$INSTALLER_DIR"
 prettyPrint "Installing Tmux plugins"
-bash "$INSTALLER_DIR/tmux_plugins_install.sh"
+. "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 #}}}***********************************************************
 
@@ -499,7 +499,7 @@ cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
 prettyPrint "Installing Zsh plugins"
 cd "$INSTALLER_DIR"
-bash "$INSTALLER_DIR/zsh_plugins_install.sh"
+source "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
