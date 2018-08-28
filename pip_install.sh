@@ -57,6 +57,10 @@ else
     sudo pip install --upgrade pip
     prettyPrint "Installing psutil for Python Glances"
     sudo pip install psutil 
+
+    prettyPrint "Installing setuptools"
+    sudo pip install setuptools
+
     prettyPrint "Installing Python Glances"
     sudo pip install glances
     prettyPrint "Installing Powerline..."
