@@ -11,7 +11,7 @@ bind-key -T copy-mode-vi Enter send-keys -X  copy-pipe "reattach-to-user-namespa
 
 source '/usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf' 
 
-set -g default-command "reattach-to-user-namespace -l ${SHELL}"
+set -g default-command "reattach-to-user-namespace -l $SHELL"
 
 bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t="
 
