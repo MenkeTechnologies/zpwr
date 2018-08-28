@@ -514,9 +514,9 @@ cp "$INSTALLER_DIR/.inputrc" "$HOME"
 if [[ "$OS_TYPE" != Darwin ]]; then
     update snort "$distroFamily"
     update postfix "$distroFamily"
-    update mailutils "$distroFamily"
     update wireshark "$distroFamily"
 fi
+update mailutils "$distroFamily"
 
 #}}}***********************************************************
 
