@@ -10,6 +10,21 @@
 
 #{{{                    MARK:Setup
 #**************************************************************
+
+OS_TYPE="$(uname -s)"
+#resolve all symlinks
+INSTALLER_DIR="$(pwd -P)"
+
+source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
+
+# replicate stdout and sterr to logfile
+escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
+[[ -f "$escapeRemover" ]] && {
+    exec >> >( tee >(cat | "$escapeRemover" > "$INSTALLER_DIR/installer_logfile.txt"))
+} || exec >> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
+
+exec 2>> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
+
 cat<<\EOF
 888b     d888                888         88888888888             888      
 8888b   d8888                888             888                 888      
@@ -36,21 +51,6 @@ cat<<\EOF
 EOF
 
 sleep 1
-
-OS_TYPE="$(uname -s)"
-#resolve all symlinks
-INSTALLER_DIR="$(pwd -P)"
-
-source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
-
-
-# replicate stdout and sterr to logfile
-escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
-[[ -f "$escapeRemover" ]] && {
-    exec >> >( tee >(cat | "$escapeRemover" > "$INSTALLER_DIR/installer_logfile.txt"))
-} || exec >> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
-
-exec 2>> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
 
 #Dependencies
 # 1) vim 8.0
