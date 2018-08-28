@@ -30,7 +30,9 @@ main(){
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
     cp -R .tmux/* "$HOME/.tmux"
-    rm -f "$SCRIPTS/"*
+    if [[ -n "$SCRIPTS" ]]; then
+        rm -f "$SCRIPTS/"*
+    fi
     cp -f scripts/* "$SCRIPTS"
     refreshers
 }
