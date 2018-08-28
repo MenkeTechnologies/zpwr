@@ -119,8 +119,7 @@ addDependenciesMac(){
     dependencies_ary+=("git --without-completions" fortune node the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
-
-update (){
+update(){
     exists "$1" || {
 
         if [[ $2 == mac ]]; then
@@ -138,7 +137,6 @@ update (){
         fi
     }
 }
-
 
 upgrade(){
 
@@ -166,8 +164,7 @@ __ScriptVersion="1.0.0"
 #         NAME:  usage
 #  DESCRIPTION:  Display usage information.
 #===============================================================================
-function usage ()
-{
+usage(){
     echo "Usage :  $0 [options] [--]
 
     Options:
