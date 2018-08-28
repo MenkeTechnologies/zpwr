@@ -342,17 +342,11 @@ source "$INSTALLER_DIR/pip_install.sh"
 
 
 case "$distroName" in
+    *suse*|ubuntu|linuxmint|raspbian)
+        needSudo=yes
+        ;;
     fedora)
         needSudo=no
-        ;;
-    opensuse)
-        needSudo=yes
-        ;;
-    ubuntu)
-        needSudo=yes
-        ;;
-    raspbian)
-        needSudo=yes
         ;;
     *)
         needSudo=no
@@ -557,7 +551,7 @@ prettyPrint "Done!!!!!!"
 
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
-tmux
+tmux new-session -t main
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
 tmux send-keys "matr" C-m
