@@ -6,6 +6,9 @@
 #####   Purpose: bash script to 
 #####   Notes: 
 #}}}***********************************************************
+
+
+
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
