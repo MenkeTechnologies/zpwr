@@ -73,7 +73,7 @@ sleep 1
 
 dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch mailutils ccze htop figlet zsh docker erlang elixir links \
-    rlwrap tor node nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
+    rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop atop ctags texinfo lsof \
     whois weechat gradle ant maven tree mc ocaml groovy slurm bmon ruby) 
 
@@ -99,7 +99,7 @@ addDependenciesSuse(){
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev gcc \
+    dependencies_ary+=(lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-devi libbonoboui2-dev nodejs gcc \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
     libperl-dev libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev \
     python3-pip curl libffi-dev libssl-dev grc automake)
@@ -114,7 +114,7 @@ addDependenciesRedHat(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=("git --without-completions" fortune the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=("git --without-completions" fortune node the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 
