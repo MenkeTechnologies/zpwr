@@ -86,7 +86,7 @@ dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop c
 
 addDependenciesLinux(){
     dependencies_ary+=(php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
-    lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch wireshark \
+    lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace python-pip)
 }
 addDependenciesArch(){
@@ -513,6 +513,7 @@ cp "$INSTALLER_DIR/.inputrc" "$HOME"
 if [[ "$OS_TYPE" != Darwin ]]; then
     update snort "$distroFamily"
     update postfix "$distroFamily"
+    update wireshark "$distroFamily"
 fi
 
 #}}}***********************************************************
