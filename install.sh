@@ -46,8 +46,10 @@ source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 &&
 
 # replicate stdout and sterr to logfile
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
-[[ -f "$escapeRemover" ]] && exec >> >(cat | "$escapeRemover" | tee "$INSTALLER_DIR"/installer_logfile.txt) \
-    || exec >> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
+[[ -f "$escapeRemover" ]] && {
+    exec >> >( tee >(cat | "$escapeRemover" > "$INSTALLER_DIR/installer_logfile.txt"))
+} || exec >> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
+
 exec 2>> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
 
 #Dependencies
