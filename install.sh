@@ -527,7 +527,6 @@ prettyPrint "Done!!!!!!"
 
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
-exec zsh -c ""
 tmux
 tmux source-file "$HOME/.tmux/control-window"
 tmux select-pane -t right
