@@ -7,7 +7,8 @@
 #####   Notes: 
 #}}}***********************************************************
 
-source common.sh
+#not called from main
+echo "$0" | grep -q pip_install.sh && source common.sh
 
 if [[ "$OS_TYPE" == "Darwin" ]]; then
 
