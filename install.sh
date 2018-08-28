@@ -17,17 +17,12 @@ INSTALLER_DIR="$(pwd -P)"
 
 source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
 
+logfile="$INSTALLER_DIR/escaped_logfile.txt"
+
 clear
 # replicate stdout and sterr to logfile
-escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
-
-[[ -f "$escapeRemover" ]] && {
-    exec >> >( tee >(cat | "$escapeRemover" > "$INSTALLER_DIR/installer_logfile.txt"))
-    exec 2>> >( tee >(cat | "$escapeRemover" > "$INSTALLER_DIR/installer_logfile.txt"))
-} || {
-    exec >> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
-    exec 2>> >(tee "$INSTALLER_DIR"/installer_logfile.txt)
-}
+exec >> >(tee "$logfile")
+exec 2>> >(tee "$logfile")
 
 cat<<\EOF
 888b     d888                888         88888888888             888
@@ -551,6 +546,13 @@ go build mylg.go
 #**************************************************************
 cd "$INSTALLER_DIR"
 cd ..
+
+escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
+
+[[ -f "$escapeRemover" ]] && {
+    "$escapeRemover" "$logfile" > "$INSTALLER_DIR/log.txt"
+}
+
 #rm -rf "$INSTALLER_DIR"
 prettyPrint "Done!!!!!!"
 
@@ -558,6 +560,7 @@ prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
 export SHELL="$(which zsh)"
 export SCRIPTS="$HOME/Documents/shellScripts"
+
 
 zsh -c 'tmux new-session -d -s main'
 tmux send-keys -t "main" 'tmux source-file "$HOME/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
