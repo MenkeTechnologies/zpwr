@@ -26,8 +26,7 @@ logfile="$INSTALLER_DIR/escaped_logfile.txt"
 clear
 # replicate stdout and sterr to logfile
 exec >> >(tee "$logfile")
-exec 2>&d
-1
+exec 2>&1
 
 cat<<\EOF
 888b     d888                888         88888888888             888
@@ -87,7 +86,7 @@ dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop c
 
 addDependenciesLinux(){
     dependencies_ary+=(php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
-    lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng logwatch \
+    lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace python-pip)
 }
 addDependenciesArch(){
@@ -514,6 +513,8 @@ cp "$INSTALLER_DIR/.inputrc" "$HOME"
 if [[ "$OS_TYPE" != Darwin ]]; then
     prettyPrint "Installing snort"
     update snort "$distroFamily"
+    prettyPrint "Installing logwatch"
+    update logwatch "$distroFamily"
     prettyPrint "Installing postfix"
     update postfix "$distroFamily"
 fi
