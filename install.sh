@@ -218,9 +218,9 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "We have Python..."
 
-
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
+        sleep 1
         
         addDependenciesMac
 
@@ -273,6 +273,7 @@ else
 
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
+        sleep 1
 
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
