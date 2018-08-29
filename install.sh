@@ -512,10 +512,15 @@ cp "$INSTALLER_DIR/.inputrc" "$HOME"
 
 
 if [[ "$OS_TYPE" != Darwin ]]; then
+    prettyPrint "Installing snort"
     update snort "$distroFamily"
+    prettyPrint "Installing postfix"
     update postfix "$distroFamily"
-    update wireshark "$distroFamily"
 fi
+
+prettyPrint "Installing wireshark"
+update wireshark "$distroFamily"
+prettyPrint "Installing mailutils"
 update mailutils "$distroFamily"
 
 #}}}***********************************************************
