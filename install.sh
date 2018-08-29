@@ -575,7 +575,6 @@ prettyPrint "Starting the matrix"
 export SHELL="$(which zsh)"
 export SCRIPTS="$HOME/Documents/shellScripts"
 
-
 zsh -c 'tmux new-session -d -s main'
 tmux send-keys -t "main" 'tmux source-file "$HOME/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
 tmux attach -t main
