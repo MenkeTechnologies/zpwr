@@ -663,16 +663,17 @@ hd(){
 	}
     user="$(echo "$user" | tr 'A-Z' 'a-z')"
 
+    test -z "$repo" && echo "bad repo $repo" >&2 && return 1
+    test -z "$user" && echo "bad user $user" >&2 && return 1
 
-
-    out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$REPO")"
+    out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$repo")"
 
 
 
     printf "\e[1m"
-    [[ -z "$out" ]] && echo "Successful deletion of $REPO" \
+    [[ -z "$out" ]] && echo "Successful deletion of $repo" \
         || {
-        echo "Error in deletion of $REPO"
+        echo "Error in deletion of $repo"
         echo "$out"
     }
     printf "\e[0m"
