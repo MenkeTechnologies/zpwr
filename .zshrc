@@ -1707,7 +1707,6 @@ if [[ "$(uname)" == Linux ]]; then
         else
             echo "mobile so NO" >> "$LOGFILE"
         fi
-
     }
 
 fi

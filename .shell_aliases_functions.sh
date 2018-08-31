@@ -112,7 +112,7 @@ alias la="clearList"
 alias l="clearList"
 alias r="cd .."
 alias t="cd /"
-alias ca='cat -tn'
+alias c='cat -n'
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
@@ -165,7 +165,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
     alias bsaver="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
-    alias c='cd $WCC'
+    alias cps='cd $WCC'
     alias emu='cd $SD/emu'
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
