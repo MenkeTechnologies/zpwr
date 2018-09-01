@@ -29,7 +29,7 @@ while true; do
 
         host_status=$(fping $gateway_ip)
 
-        (($network_check_tries++))
+        (( network_check_tries++ ))
         
         echo "$host_status" | grep -iq alive && {
             echo "Network is working correctly" && exit 0
