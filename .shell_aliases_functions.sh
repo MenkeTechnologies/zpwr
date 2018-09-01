@@ -814,7 +814,7 @@ jetbrainsWorkspaceEdit(){
     python -c "print('_'*100)"
     prettyPrint "MONITORING WORKSPACE..."
     python -c "print('_'*100)"
-    while 1; do
+    while true; do
         command grep -q '<component name="RunManager" selected=' \
             .idea/workspace.xml && {
             python -c "print('_'*100)" | lolcat
@@ -968,14 +968,14 @@ digs(){
 www(){
     time=$1
     shift
-    while 1; do
+    while true; do
         eval "$@"
         sleep $time
     done
 }
 
 ww(){
-    while 1; do
+    while true; do
         eval "$@"
     done
 }
