@@ -7,6 +7,11 @@
 ##### Notes:
 #}}}***********************************************************
 
+type fping > /dev/null 2>&1 || {
+    echo "$(date) no fping"
+    exit 1
+}
+
 gateway_ip='8.8.8.8'
 
 network_check_tries=0
