@@ -16,27 +16,38 @@ export DELIMITER_CHAR='%'
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
+export GITHUB_ACCOUNT='MenkeTechnologies'
+export CLICOLOR="YES"
+export LSCOLORS="ExFxBxDxCxegedabagacad"
+export SCRIPTS="$HOME/Documents/shellScripts"
+export PYEXECUTABLES="$HOME/Documents/pythonScripts"
+export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
+export D="$HOME/Desktop"
+export DL="$HOME/Downloads"
+export XAUTHORITY="$HOME/.Xauthority"
+export TERMINAL_APP="Terminal.app"
+export TERM="xterm-256color"
+export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
+export YARN_HOME="$HOME/.config/yarn"
+export NODE_HOME="/usr/local/lib/node_modules"
+export PERL5LIB="$HOME/perl5/lib/perl5"
+export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
+export HISTSIZE=50000
+export HISTTIMEFORMAT=' %F %T _ '
+export BLUE="\e[37;44m"
+export RED="\e[31m"
+export RESET="\e[0m"
+export LOGFILE="$HOME/updaterlog.txt"
+export UMASK=077
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
 #**************************************************************
-if [[ -z "$PYSCRIPTS" ]]; then
-    export GITHUB_ACCOUNT='MenkeTechnologies'
-    export CLICOLOR="YES"
-    export LSCOLORS="ExFxBxDxCxegedabagacad"
-    export SCRIPTS="$HOME/Documents/shellScripts"
-    export PYEXECUTABLES="$HOME/Documents/pythonScripts"
-    export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
-    export D="$HOME/Desktop"
-    export DL="$HOME/Downloads"
-    export XAUTHORITY="$HOME/.Xauthority"
+echo "$PATH" | grep -iq shellScripts || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
-    export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$HOME/Documents/shellScripts:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
-    export TERMINAL_APP="Terminal.app"
+    export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$SCRIPTS:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Library/Developer/CommandLineTools/usr/bin:/usr/local/sbin:$PATH"
 
     [[ "$(uname)" == Darwin ]] && {
-        export TERM="xterm-256color"
-        export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:$PATH"
     } || {
@@ -67,17 +78,6 @@ if [[ -z "$PYSCRIPTS" ]]; then
     } || {
         export EDITOR='vim'
     }
-    export YARN_HOME="$HOME/.config/yarn"
-    export NODE_HOME="/usr/local/lib/node_modules"
-    export PERL5LIB="$HOME/perl5/lib/perl5"
-    export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
-    export HISTSIZE=50000
-    export HISTTIMEFORMAT=' %F %T _ '
-    export BLUE="\e[37;44m"
-    export RED="\e[31m"
-    export RESET="\e[0m"
-    export LOGFILE="$HOME/updaterlog.txt"
-    export UMASK=077
 #**************************************************************
 #}}}
 
@@ -90,10 +90,8 @@ if [[ -z "$PYSCRIPTS" ]]; then
 #**************************************************************
     export GOPATH="$HOME/go"
 
-    if [ -f "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" ]; then
-        source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
-    fi
-fi
+    [[ -f "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" ]] && source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
+}
 #}}}
 
 #{{{                          MARK:ALIASES
