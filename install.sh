@@ -128,7 +128,7 @@ update(){
         elif [[ $2 == suse ]];then
             sudo zypper --non-interactive install "$1"
         elif [[ $2 == arch ]];then
-            yes | sudo pacman -Suy "$1"
+            sudo pacman -S --noconfirm "$1"
         elif [[ $2 == redhat ]];then
             sudo yum install -y "$1"
         else
@@ -154,6 +154,23 @@ upgrade(){
         else
             prettyPrint "Error with upgrade with $2." >&2
         fi
+}
+
+refresh(){
+        if [[ $1 == mac ]]; then
+            brew update
+        elif [[ $1 == debian ]];then
+            sudo apt-get update -y
+        elif [[ $1 == suse ]];then
+            sudo zypper refresh
+        elif [[ $1 == arch ]];then
+            sudo pacman -Syy
+        elif [[ $1 == redhat ]];then
+            sudo yum update
+        else
+            prettyPrint "Error with refresh with $2." >&2
+        fi
+
 }
 
 
@@ -221,7 +238,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
         sleep 1
-        
+        refresh mac
+
         addDependenciesMac
 
         for prog in "${dependencies_ary[@]}"; do
@@ -248,21 +266,26 @@ else
     addDependenciesLinux
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
 
+
     case $distroName in
         (debian|ubuntu|raspbian|kali|linuxmint) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
             distroFamily=debian
+            refresh "$distroFamily"
             addDependenciesDebian
             ;;
         (arch) prettyPrint "Installing Dependencies for $distroName with zypper"
             distroFamily=arch
+            refresh "$distroFamily"
             addDependenciesArch
             ;;
         (*suse*) prettyPrint "Installing Dependencies for $distroName with zypper"
             distroFamily=suse
+            refresh "$distroFamily"
             addDependenciesSuse
             ;;
         (centos|fedora|rhel) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
             distroFamily=redhat
+            refresh "$distroFamily"
             addDependenciesRedHat
             ;;
         (*)
