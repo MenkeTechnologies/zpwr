@@ -1688,26 +1688,28 @@ if [[ "$(uname)" == Linux ]]; then
         echo "$out" | grep -q "$key" && mobile=false
         command rm ~/temp$$
         if [[ $mobile == "false" ]]; then
-            echo "not mobile" >> "$LOGFILE"
+            echo "$(date) not mobile" >> "$LOGFILE"
             num_con="$(who | wc -l)"
-            echo "num cons is $num_con" >> "$LOGFILE"
+            echo "$(date) num cons is $num_con" >> "$LOGFILE"
             if (( $num_con == 1 )); then
                 echo "no tmux clients" >> "$LOGFILE"
                 {
                     tmux ls && {
                         tmux attach
-                        echo "attaching to existing" >> "$LOGFILE"
+                        echo "$(date) attaching to existing" \
+                        >> "$LOGFILE"
                     } || {
                         tmux new-session \; \
                         source-file ~/.tmux/control-window
-                        echo "creating new session" >> "$LOGFILE"
+                        echo "$(date) creating new session" \
+                        >> "$LOGFILE"
                     }
                 } &> /dev/null
             else
-                echo "clients so NO" >> "$LOGFILE"
+                echo "$(date) clients so NO" >> "$LOGFILE"
             fi
         else
-            echo "mobile so NO" >> "$LOGFILE"
+            echo "$(date) mobile so NO" >> "$LOGFILE"
         fi
     }
 
