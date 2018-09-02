@@ -537,6 +537,12 @@ cp "$INSTALLER_DIR/conf.mount" "$HOME"
 prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap."
 cp "$INSTALLER_DIR/.inputrc" "$HOME"
 
+prettyPrint "Installing mylg"
+go get github.com/mehrdadrad/mylg
+cd "$HOME/go/src/github.com/mehrdadrad/mylg/"
+go build mylg.go
+
+exists iftop || update iftop "$distroFamily"
 
 if [[ "$OS_TYPE" != Darwin ]]; then
     prettyPrint "Installing snort"
@@ -576,10 +582,6 @@ source "$INSTALLER_DIR/zsh_plugins_install.sh"
 prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
 
-prettyPrint "Installing mylg"
-go get github.com/mehrdadrad/mylg
-cd "$HOME/go/src/github.com/mehrdadrad/mylg/"
-go build mylg.go
 
 #}}}***********************************************************
 
