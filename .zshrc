@@ -1689,7 +1689,9 @@ if [[ "$(uname)" == Linux ]]; then
         command rm ~/temp$$
         if [[ $mobile == "false" ]]; then
             echo "not mobile" >> "$LOGFILE"
-            if [[ -z "$(tmux list-clients)" ]]; then
+            num_con="$(who | wc -l)"
+            echo "num cons is $num_con" >> "$LOGFILE"
+            if (( $num_con == 1 )); then
                 echo "no tmux clients" >> "$LOGFILE"
                 {
                     tmux ls && {
