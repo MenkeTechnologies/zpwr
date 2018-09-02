@@ -1704,6 +1704,7 @@ if [[ "$(uname)" == Linux ]]; then
                     }
                 } &> /dev/null
             else
+                tmux attach
                 echo "$(date) clients so NO" >> "$LOGFILE"
             fi
         else
