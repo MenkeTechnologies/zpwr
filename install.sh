@@ -542,8 +542,10 @@ go get github.com/mehrdadrad/mylg
 cd "$HOME/go/src/github.com/mehrdadrad/mylg/"
 go build mylg.go
 
-exists iftop || update iftop "$distroFamily"
-
+exists iftop || {
+    prettyPrint "No iftop so installing"
+    update iftop "$distroFamily"
+}
 if [[ "$OS_TYPE" != Darwin ]]; then
     prettyPrint "Installing snort"
     update snort "$distroFamily"
