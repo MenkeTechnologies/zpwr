@@ -90,7 +90,7 @@ addDependenciesLinux(){
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace python-pip)
 }
 addDependenciesArch(){
-    dependencies_ary+=() 
+    dependencies_ary+=(linux-headers net-tools) 
 }
 
 addDependenciesSuse(){
@@ -238,6 +238,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
         sleep 1
+        
+        prettyPrint "Updating repos"
         refresh mac
 
         addDependenciesMac
@@ -246,6 +248,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
             update "$prog" mac
         done
 
+        prettyPrint "Upgrading packages"
         upgrade mac
     fi
 
@@ -267,6 +270,7 @@ else
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
 
 
+    prettyPrint "Updating repos for $distroName"
     case $distroName in
         (debian|ubuntu|raspbian|kali|linuxmint) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
             distroFamily=debian
@@ -303,7 +307,7 @@ else
             update "$prog" "$distroFamily"
         done
 
-        prettyPrint "Updating $distroFamily"
+        prettyPrint "Upgrading $distroFamily"
 
         upgrade "$distroFamily"
     fi
