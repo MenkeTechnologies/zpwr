@@ -1657,11 +1657,9 @@ alias -s txt='vim'
 #**************************************************************
 
 if [[ "$(uname)" == Linux ]]; then
-    [[ -z "$TMUX" ]] && [[ ! -z $SSH_CONNECTION ]] && {
-
+    [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]] && {
         mobile=true
-
-        cat ~/.ssh/authorized_keys | command grep MenkeTechnologies > ~/temp$$
+        cat ~/.ssh/authorized_keys | command grep "$GITHUB_ACCOUNT" > ~/temp$$
 
         case $distroName in
             (debian|raspbian|kali)
@@ -1689,7 +1687,7 @@ if [[ "$(uname)" == Linux ]]; then
         command rm ~/temp$$
         if [[ $mobile == "false" ]]; then
             echo "$(date) not mobile" >> "$LOGFILE"
-            num_con="$(who | grep pts | wc -l)"
+            num_con="$(sudo command ps -ef | command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
             echo "$(date) num cons is $num_con" >> "$LOGFILE"
             if (( $num_con == 1 )); then
                 echo "no tmux clients" >> "$LOGFILE"
