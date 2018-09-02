@@ -1687,7 +1687,7 @@ if [[ "$(uname)" == Linux ]]; then
         command rm ~/temp$$
         if [[ $mobile == "false" ]]; then
             echo "$(date) not mobile" >> "$LOGFILE"
-            num_con="$(sudo command ps -ef | command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
+            num_con="$(command ps -ef | command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
             echo "$(date) num cons is $num_con" >> "$LOGFILE"
             if (( $num_con == 1 )); then
                 echo "no tmux clients" >> "$LOGFILE"
