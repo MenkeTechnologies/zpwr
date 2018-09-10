@@ -91,6 +91,7 @@ brew install gnupg
 brew install gnutls
 brew install go
 brew install gobject-introspection
+brew install gperftools
 brew install gradle
 brew install grails
 brew install graphicsmagick
@@ -100,8 +101,11 @@ brew install grep
 brew install groovy
 brew install gsasl
 brew install gstreamer
+brew install heroku
+brew install heroku-node
 brew install htop
 brew install httpd
+brew install httpie
 brew install httrack
 brew install hub
 brew install icu4c
@@ -274,6 +278,7 @@ brew install tree
 brew install unixodbc
 brew install unrar
 brew install urlview
+brew install valgrind
 brew install vim
 brew install vnstat
 brew install w3m
