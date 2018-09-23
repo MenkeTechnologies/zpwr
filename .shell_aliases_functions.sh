@@ -415,6 +415,8 @@ clearList () {
                             du -sh "$lf"
                             prettyPrint "STATS:"
                             stat "$lf"
+                            prettyPrint "cAN:"
+                            man -wa "$(basename $lf)"
                             echo
                             echo
                         } || {
