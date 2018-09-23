@@ -164,7 +164,6 @@ if [[ $skip != true ]]; then
         brew prune
         #remote old programs occupying disk sectors
         brew cleanup
-        brew cask cleanup
         brew services cleanup
     }
 
