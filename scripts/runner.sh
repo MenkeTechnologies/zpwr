@@ -74,6 +74,8 @@ case "$fileToBeExecuted" in
         ;;
     *.ml ) executeTheFile ocaml "$fileToBeExecuted"
         ;;
+    *.swift ) executeTheFile swift "$fileToBeExecuted"
+        ;;
     *.clj ) executeTheFile clojure "$fileToBeExecuted"
         ;;
     *.*)
