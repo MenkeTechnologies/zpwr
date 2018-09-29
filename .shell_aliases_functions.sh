@@ -39,6 +39,7 @@ export RED="\e[31m"
 export RESET="\e[0m"
 export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
+export LESS="-M -N"
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
@@ -217,7 +218,7 @@ alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 #                           MARK:PYTHON SCRIPTS
 #**********************************************************************
 alias mapit="execpy mapIt.py"
-alias ,="execpy amazonSearch.py"
+alias ,,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
