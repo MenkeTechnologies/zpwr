@@ -39,7 +39,7 @@ export RED="\e[31m"
 export RESET="\e[0m"
 export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
-export LESS="-M -N"
+export LESS="-M -N -R"
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
