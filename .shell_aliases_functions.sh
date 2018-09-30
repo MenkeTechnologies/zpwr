@@ -318,9 +318,9 @@ urlsafe(){
 }
 
 cgh(){
-    [[ -z "$1" ]] && user=$GITHUB_ACCOUNT|| user="$1"
+    [[ -z "$1" ]] && user="$GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/$user" | \
-        command grep '\d contributions' | sed 1q | tr -s ' '
+        command grep -E '\d contributions' | sed 1q | tr -s ' '
 }
 
 upload(){
