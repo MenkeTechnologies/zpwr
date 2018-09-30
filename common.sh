@@ -46,29 +46,28 @@ turnOnDebugging(){
     exec >> >(tee "$INSTALLER_DIR"/logfile.txt)
 }
 
-
 alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
         cat | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
-        for my $arg (@F){
+        for (@F){
             if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
+                 print "\x1b[36m$_\x1b[0m"
             } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
+                 print "\x1b[1;4;34m$_\x1b[0m"
             }
         $counter++;
         };print "\x1b[0m"'
     else
         perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
-        for my $arg (@F){
+        for (@F){
             if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
+                 print "\x1b[36m$_\x1b[0m"
             } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
+                 print "\x1b[1;4;34m$_\x1b[0m"
             }
         $counter++;
         }; print "\x1b[0m"' <<< "$@"
