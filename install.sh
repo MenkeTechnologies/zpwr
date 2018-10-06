@@ -584,6 +584,10 @@ prettyPrint "Installing Zsh plugins"
 cd "$INSTALLER_DIR"
 source "$INSTALLER_DIR/zsh_plugins_install.sh"
 
+prettyPrint "Installing Powerlevel9k"
+git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+
+
 prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
 
