@@ -1472,7 +1472,7 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-    # source "$HOME/.powerlevel9kconfig.sh"
+    source "$HOME/.powerlevel9kconfig.sh"
     #make these env vars show up in prompt as %~
     : ~WCC
     : ~SD
@@ -1648,6 +1648,9 @@ autoload zmv
 #**************************************************************
 unset GROOVY_HOME # when set this messes up classpath
 #}}}***********************************************************
+
+
+
 #{{{                    MARK:Suffix aliases
 #**************************************************************
 alias -s txt='vim'
