@@ -1470,9 +1470,9 @@ export HISTSIZE=10000000
 RPS2='+%N:%i:%^'
 export PS3=$'\e[1;34m-->>>> \e[0m'
 
+source "$HOME/.powerlevel9kconfig.sh"
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
-    source "$HOME/.powerlevel9kconfig.sh"
     #make these env vars show up in prompt as %~
     : ~WCC
     : ~SD
