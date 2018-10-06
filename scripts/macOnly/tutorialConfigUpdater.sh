@@ -41,7 +41,7 @@ cp "$HOME/.powerlevel9kconfig.sh" "$installerDir"
 prettyPrint "Updating vim plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
 prettyPrint "Updating zsh plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* > "$installerDir/.zshplugins"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/{plugins,themes}/"* > "$installerDir/.zshplugins"
 
 cd "$installerDir" || exit 1
 git add .
