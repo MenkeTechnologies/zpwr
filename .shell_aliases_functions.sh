@@ -858,6 +858,7 @@ getrc(){
     cp .tmux.conf "$HOME"
     cp conf.gls "$HOME"
     cp conf.df "$HOME"
+    cp .powerlevel9kconfig.sh "$HOME"
     cp conf.ifconfig "$HOME"
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
