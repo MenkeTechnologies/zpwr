@@ -36,7 +36,7 @@ cp "$HOME/conf.mount" "$installerDir"
 cp "$HOME/.ideavimrc" "$installerDir"
 cp "$HOME/.inputrc" "$installerDir"
 cp "$HOME/grc.zsh" "$installerDir"
-cp "$HOME/.powerlevel8kconfig.sh" "$installerDir"
+cp "$HOME/.powerlevel9kconfig.sh" "$installerDir"
 
 prettyPrint "Updating vim plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
@@ -97,7 +97,7 @@ cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
 prettyPrint "Copying iterm Colors"
 cp "$HOME/iterm-jm-colors.itermcolors" "$tutorialDir"
-cp "$HOME/.powerlevel8kconfig.sh" "$tutorialDir"
+cp "$HOME/.powerlevel9kconfig.sh" "$tutorialDir"
 
 #prettyPrint "Copying vim plugins"
 
