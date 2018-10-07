@@ -511,7 +511,7 @@ prettyPrint "Installing htoprc file...."
 htopDIR="$HOME/.config/htop"
 if [[ ! -f "$htopDIR/htoprc" ]]; then
     if [[ ! -d "$htopDIR" ]]; then
-        mkdir -P "$htopDIR"
+        mkdir -p "$htopDIR"
     fi
     mv "$INSTALLER_DIR/htoprc" "$htopDIR"
 fi
