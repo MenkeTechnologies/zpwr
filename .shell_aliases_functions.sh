@@ -295,6 +295,13 @@ exists idea && {
         vim "$1" -c "hardcopy > $tempFile" -c quitall; cat "$tempFile" | open -fa Preview; rm "$tempFile"
     }
 
+} || {
+    exists ps2pdf && {
+        scriptToPDF(){
+            tempFile=__test.ps
+            vim "$1" -c "hardcopy > $tempFile" -c quitall; ps2pdf "$tempFile"; rm "$tempFile"
+        }
+    }
 }
 s(){
     [[ -z "$1" ]] && subl . || command s "$@"
