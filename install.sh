@@ -586,11 +586,10 @@ source "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Installing Powerlevel9k"
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-
+cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$HOME"
 
 prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
-
 
 #}}}***********************************************************
 
