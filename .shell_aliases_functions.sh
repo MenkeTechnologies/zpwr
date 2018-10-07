@@ -299,7 +299,7 @@ exists idea && {
     exists ps2pdf && {
         scriptToPDF(){
             tempFile=__test.ps
-            vim "$1" -c "hardcopy > $tempFile" -c quitall; ps2pdf "$tempFile"; rm "$tempFile"
+            vim "$1" -c "hardcopy > $tempFile" -c quitall; ps2pdf "$tempFile" "$1".pdf ; rm "$tempFile"
         }
     }
 }
