@@ -166,7 +166,7 @@ refresh(){
         elif [[ $1 == arch ]];then
             sudo pacman -Syy
         elif [[ $1 == redhat ]];then
-            sudo yum update
+            sudo yum update -y
         else
             prettyPrint "Error with refresh with $2." >&2
         fi
