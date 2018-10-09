@@ -980,6 +980,18 @@ digs(){
     } || echo "you need dig" >&2
 }
 
+to(){
+    file="$HOME/.config/powerline/themes/tmux/default.json"
+    [[ ! -f "$file" ]] && echo "no tmux config" >&2 && return 1
+    cat "$file" | grep -q "external_ip" && {
+        perl -pi -E 's@^.*external_ip.*$@@' "$file"
+        printf "Removing External IP\n"
+    } || {
+        perl -0pi -E 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
+        printf "Adding External IP\n"
+    }
+}
+
 www(){
     time=$1
     shift
