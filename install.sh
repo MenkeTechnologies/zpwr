@@ -467,10 +467,18 @@ prettyPrint "Installing Tmux plugins"
 #{{{                    MARK:Utilities
 #**************************************************************
 prettyPrint "Installing IFTOP-color by MenkeTechnologies"
+
+automake --version 2>&1 | grep -q '16' || {
+    wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
+    cd automake-1.16
+    ./configure && make && sudo make install
+}
+
 [[ ! -d "$HOME/forkedRepos" ]] && mkdir "$HOME/forkedRepos"
 cd "$HOME/forkedRepos" && {
     git clone https://github.com/MenkeTechnologies/iftopcolor
     cd iftopcolor && {
+        automake --add-missing
         ./configure && make && sudo make install
     }
 }
