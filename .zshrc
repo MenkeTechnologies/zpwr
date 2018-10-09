@@ -139,6 +139,7 @@ alias -r > "$HOME/.common_aliases"
 #{{{                    MARK:Custom Fxns
 #**************************************************************
 
+
 sub (){
     zle .kill-whole-line
     BUFFER="suc"
@@ -212,7 +213,7 @@ gitfunc () {
             printf "\x1b[0m"
             zle .accept-line
             return 1
-        fi 
+        fi
     done
 
     git status &> /dev/null || {
@@ -240,7 +241,7 @@ gitfunc () {
 	git status | grep -q "nothing to commit" && {
         printf "\x1b[0;1;31m"
         print -sr "$BUFFER"
-        echo	
+        echo
         printf "Nothing to commit" >&2
         echo
         BUFFER=""
@@ -248,7 +249,7 @@ gitfunc () {
         zle .accept-line
         return 0
 	}
-	
+
     gitSdiffColorizer.pl | less -r
     echo
     printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
@@ -736,11 +737,11 @@ zle -N clipboard
 bindkey -M viins '^Y' changeQuotes
 bindkey -M vicmd '^Y' changeQuotes
 
-bindkey -M viins -r '^V' 
-bindkey -M vicmd -r '^V' 
+bindkey -M viins -r '^V'
+bindkey -M vicmd -r '^V'
 
-bindkey -M viins -r '^F' 
-bindkey -M vicmd -r '^F' 
+bindkey -M viins -r '^F'
+bindkey -M vicmd -r '^F'
 
 bindkey -M viins '^F^S' list-choices
 bindkey -M vicmd '^F^S' list-choices
@@ -882,7 +883,7 @@ precmd(){
             clear
             listNoClear
             # to prevent __WILL_CLEAR staying true when
-            # called from zle widgets and not from 
+            # called from zle widgets and not from
             # pressing enter key
             __WILL_CLEAR=false
         fi
