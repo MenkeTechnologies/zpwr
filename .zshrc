@@ -1285,6 +1285,7 @@ supernatural-space() {
     __CORRECT_WORDS[point]="opint ponit"
     __CORRECT_WORDS[range]="rnage arnge"
     __CORRECT_WORDS[value]="vlaue valeu"
+    __CORRECT_WORDS[found]="ofund fuound"
 
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(print -r -- $LBUFFER | tr -d "()[]{}\$,%'\"" )"
@@ -1305,14 +1306,13 @@ supernatural-space() {
     done
 
     if (( $#mywords == 1 )); then
-        alias $LBUFFER | command egrep -q '(grc|_z|cd|cat)' || {
+        alias -- $LBUFFER | command egrep -q '(grc|_z|cd|cat)' || {
             #dont expand first word if \,' or "
-            [[ -z $(alias -g $LBUFFER) ]] && {
+            [[ -z $(alias -g -- $LBUFFER) ]] && {
                 [[ ${LBUFFER:0:1} != '\' ]] && \
                 [[ ${LBUFFER:0:1} != "'" ]] && \
                 [[ ${LBUFFER:0:1} != '"' ]] && \
                 { expand-aliases "$LBUFFER"; }
-                
             }
         }
     else
