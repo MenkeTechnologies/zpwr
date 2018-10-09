@@ -479,6 +479,7 @@ automake --version 2>&1 | grep -q '16' || {
 cd "$HOME/forkedRepos" && {
     git clone https://github.com/MenkeTechnologies/iftopcolor
     cd iftopcolor && {
+        aclocal
         automake --add-missing
         ./configure && make && sudo make install
     }
