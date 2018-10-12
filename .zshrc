@@ -1286,6 +1286,7 @@ supernatural-space() {
     __CORRECT_WORDS[point]="opint ponit"
     __CORRECT_WORDS[range]="rnage arnge"
     __CORRECT_WORDS[value]="vlaue valeu"
+    __CORRECT_WORDS[bad]="bda"
     __CORRECT_WORDS[found]="ofund fuond foudn"
 
     local TEMP_BUFFER mywords badWords
