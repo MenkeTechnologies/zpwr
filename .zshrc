@@ -13,7 +13,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="simonoff"
 
 #colors for common commands
-[[ -f "$HOME/grc.zsh" ]] && source "$HOME/grc.zsh"
+test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 export SHELL="$(which zsh)"
 
@@ -84,7 +84,13 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(fzf-zsh zsh-more-completions zsh-completions zsh-syntax-highlighting zsh-autosuggestions history-substring-search ruby gem rake rails yarn ng coffee node npm perl cpanm git github gradle ant mvn scala lein spring django pip pyenv python go man nmap postgres redis-cli colorize sudo z rsync docker sublime vundle rust cargo meteor gulp grunt glassfish)
+plugins=(fzf-zsh zsh-more-completions zsh-completions \
+    zsh-syntax-highlighting zsh-autosuggestions \
+    history-substring-search ruby gem rake rails yarn ng \
+    coffee node npm perl cpanm git github gradle ant mvn \
+    scala lein spring django pip pyenv python go man nmap \
+    postgres redis-cli colorize sudo z rsync docker sublime \
+    vundle rust cargo meteor gulp grunt glassfish)
 
 PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print \$8}")"
 
@@ -131,7 +137,7 @@ source $ZSH/oh-my-zsh.sh
 
 #has all my aliases and functions
 _alias_file="$HOME/.shell_aliases_functions.sh"
-test -f "$_alias_file" && source "$_alias_file"
+test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
 #}}}***********************************************************
@@ -1473,7 +1479,9 @@ export HISTSIZE=10000000
 RPS2='+%N:%i:%^'
 export PS3=$'\e[1;34m-->>>> \e[0m'
 
-source "$HOME/.powerlevel9kconfig.sh"
+test -s "$HOME/.powerlevel9kconfig.sh" && \
+    source "$HOME/.powerlevel9kconfig.sh"
+
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
     #make these env vars show up in prompt as %~
@@ -1611,7 +1619,8 @@ _fzf_complete_alias() {
     )
 }
 
-[[ -f "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" ]] && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh"
+test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \
+    && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh"
 local base03="234"
 local base02="235"
 local base01="240"
