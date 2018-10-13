@@ -498,15 +498,16 @@ blocksToSize(){
 
 humanReadable(){
     awk 'function human(x) {
-    s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"
-    while (x>=1024 && length(s)>1)
-        {x/=1024; s=substr(s,5)}
+        s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"
+        while (x>=1024 && length(s)>1){
+            x/=1024; s=substr(s,5)
+        }
         s=substr(s,1,4)
-        xf=(s==" B  ")?"%5d   ":"%8.2f"
-        return sprintf("Your size:"xf"%s", x, s)
+        xf=(s==" B  ") ? "%d" : "%.2f"
+        return sprintf(xf"%s", x, s)
     }
     {gsub(/^[0-9]+/, human($1));print}'
-    }
+}
 
 f(){
     if [[ -f "$1" ]]; then
@@ -825,16 +826,16 @@ EOF
 }
 
 jetbrainsWorkspaceEdit(){
-    python -c "print('_'*100)"
+    perl -E 'say "_"x100'
     prettyPrint "MONITORING WORKSPACE..."
-    python -c "print('_'*100)"
+    perl -E 'say "_"x100'
     while true; do
         command grep -q '<component name="RunManager" selected=' \
             .idea/workspace.xml && {
-            python -c "print('_'*100)" | lolcat
+            perl -E 'say "_"x100' | lolcat
             figletRandomFontOnce.sh "MATCH ENJOY>>>>" \
             | ponysay -W 120
-            python -c "print('_'*100)" | lolcat
+            perl -E 'say "_"x100' | lolcat
             sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
 
     } || echo "No Match Yet" >&2
@@ -993,17 +994,17 @@ to(){
 }
 
 www(){
+    while true; do
+        eval "$@"
+    done
+}
+
+ww(){
     time=$1
     shift
     while true; do
         eval "$@"
         sleep $time
-    done
-}
-
-ww(){
-    while true; do
-        eval "$@"
     done
 }
 
