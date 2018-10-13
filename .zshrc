@@ -25,7 +25,7 @@ export SHELL="$(which zsh)"
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -37,10 +37,10 @@ export SHELL="$(which zsh)"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COPLETION_WAITING_DOTS="TRUE"IN
+COPLETION_WAITING_DOTS="TRUE"IN
 # DU
 
 # UNCOMMENT THE FOLLOWING LINE IF YOU WANT TO DISABLE MARKING UNTRACKED FILES
@@ -1477,16 +1477,27 @@ source "$HOME/.powerlevel9kconfig.sh"
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
     #make these env vars show up in prompt as %~
-    : ~WCC
-    : ~SD
-    : ~HOMEBREW_HOME_FORMULAE
+    if [[ -d "$WCC" ]]; then
+        : ~WCC
+    fi
+    if [[ -d "$SD" ]]; then
+        : ~SD
+    fi
+    if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
+        : ~HOMEBREW_HOME_FORMULAE
+    fi
 } || {
     :
 }
-#shell to recognize env variables in prompt %~
-: ~SCRIPTS
-: ~D
-: ~DL
+if [[ -d "$SCRIPTS" ]]; then
+    : ~SCRIPTS
+fi
+if [[ -d "$D" ]]; then
+    : ~D
+fi
+if [[ -d "$DL" ]]; then
+    : ~DL
+fi
 #}}}***********************************************************
 #
 #{{{                    MARK:OPAM env
