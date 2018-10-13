@@ -993,13 +993,13 @@ to(){
     }
 }
 
-www(){
+ww(){
     while true; do
         eval "$@"
     done
 }
 
-ww(){
+www(){
     time=$1
     shift
     while true; do
@@ -1008,8 +1008,13 @@ ww(){
     done
 }
 
-
 ff(){
+    for (( i = 0; i < 10;i++ )); do
+        eval "$@"
+    done
+}
+
+fff(){
     num=$1
     shift
     for (( i = 0; i < $num;i++ )); do
