@@ -3,11 +3,12 @@ brew cask install adobe-acrobat-reader
 brew cask install android-platform-tools
 brew cask install android-studio
 brew cask install appcode
+brew cask install atom
 brew cask install bettertouchtool
 brew cask install blender
-brew cask install chromedriver
 brew cask install clion
 brew cask install cycling74-max
+brew cask install dash
 brew cask install datagrip
 brew cask install disk-inventory-x
 brew cask install duet
@@ -27,6 +28,7 @@ brew cask install goland
 brew cask install google-chrome
 brew cask install hex-fiend
 brew cask install intellij-idea
+brew cask install iterm2
 brew cask install java
 brew cask install java6
 brew cask install java8
@@ -41,8 +43,11 @@ brew cask install microsoft-office
 brew cask install multibit-hd
 brew cask install mysqlworkbench
 brew cask install netbeans
+brew cask install ngrok
 brew cask install onyx
+brew cask install opera
 brew cask install phpstorm
+brew cask install postico
 brew cask install postman
 brew cask install processing
 brew cask install pycharm
@@ -52,10 +57,12 @@ brew cask install racket
 brew cask install rar
 brew cask install rider
 brew cask install robo-3t
+brew cask install rowanj-gitx
 brew cask install rubymine
 brew cask install scenebuilder
 brew cask install skype
 brew cask install slack
+brew cask install sourcetree
 brew cask install spotify
 brew cask install sublime-text
 brew cask install switchresx
