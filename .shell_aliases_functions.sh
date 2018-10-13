@@ -91,7 +91,8 @@ echo "$PATH" | grep -iq shellScripts || {
 #**************************************************************
     export GOPATH="$HOME/go"
 
-    [[ -f "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" ]] && source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
+    test -s "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" \
+        && source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
 }
 #}}}
 
