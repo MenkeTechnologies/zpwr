@@ -40,6 +40,7 @@ export RESET="\e[0m"
 export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
 export LESS="-M -N -R"
+export PSQL_EDITOR='vim -c "setf sql"'
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
@@ -119,6 +120,13 @@ alias p2="python2"
 alias p3="python3"
 [[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
 exists fc && alias please='sudo $(fc -ln -1)'
+exists spotify && {
+    alias re='spotify replay'
+    alias ne='spotify next'
+    alias pe='spotify prev'
+    alias spa='spotify pause'
+    
+}
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
