@@ -13,20 +13,31 @@ use feature 'say';
 
 my @files=();
 
-for (@ARGV) {
-    if (! -d $_) {
-        my $type = `file $_`;
+sub addToAry {
+    if (-d $_[0]) {
+        for (glob("$_[0]/* $_[0]/.[!.]*")){
+            addToAry($_);
+        }
+    } else {
+    say "working on $_[0]";
+        my $type = `file $_[0]`;
         if ($type =~ /text/) {
-            my $out = `cat $_`;
+            my $out = `cat $_[0]`;
             if ($out =~ /\r/){
-                say "\x1b[34m$_\x1b[0m has got carriage returns!";
-                push @files, $_;
+                say "\x1b[34m$_[0]\x1b[0m has got \x1b[34;1mcarriage returns!\x1b[0m";
+                push @files, $_[0];
             }
         }
     }
 }
 
+addToAry $_ for @ARGV;
+
 if (scalar @files > 0){
+    say "*"x100;
+    say "*"x100;
+    say "*"x100;
+    say "\x1b[34m$_[0]\x1b[0m has got \x1b[34;1mcarriage returns!\x1b[0m" for @files;
     print "Remove CR?\x1b[1;34m>\x1b[0m ";
     my $answer = <STDIN>;
     chomp $answer;
