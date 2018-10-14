@@ -34,10 +34,10 @@ sub addToAry {
 addToAry $_ for @ARGV;
 
 if (scalar @files > 0){
-    say "*"x100;
-    say "*"x100;
-    say "*"x100;
-    say "\x1b[34m$_[0]\x1b[0m has got \x1b[34;1mcarriage returns!\x1b[0m" for @files;
+    say "";
+    say "*"x80 for (0..2);
+    say "";
+    say "\x1b[34m$_\x1b[0m has got \x1b[34;1mcarriage returns!\x1b[0m" for @files;
     print "Remove CR?\x1b[1;34m>\x1b[0m ";
     my $answer = <STDIN>;
     chomp $answer;
