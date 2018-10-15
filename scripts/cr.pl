@@ -3,13 +3,11 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Wed Jun 20 11:37:12 EDT 2018
-#####   Purpose: perl script to
-#####   Notes:
+#####   Purpose: perl script to remove carriage returns
+#####   Notes: works recursively
 #}}}***********************************************************
 
-#open $less, "|-","less -MN" or die $!;
 use feature 'say';
-#select $less;
 
 my @files=();
 
@@ -37,6 +35,8 @@ sub addToAry {
 addToAry $_ for @ARGV;
 
 if (scalar @files > 0){
+    #open $less, "|-","less -MN" or die $!;
+    #select $less;
     say "";
     say "*"x80 for (0..2);
     say "";
@@ -49,9 +49,9 @@ if (scalar @files > 0){
     } else {
         say "bye";
     }
+    #close $less;
 }
 
 
-#close $less;
 
 
