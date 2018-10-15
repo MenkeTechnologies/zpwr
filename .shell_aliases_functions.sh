@@ -972,6 +972,8 @@ digs(){
                 } || {
                     prettyPrint "WHOIS: $primary"
                     echo "$out"
+                    prettyPrint "WHOIS: $ip"
+                    whois "$ip"
                 }
             } || {
                 out="$(whois "$noproto")"
@@ -981,6 +983,8 @@ digs(){
                 } || {
                     prettyPrint "WHOIS: $noproto"
                     echo "$out"
+                    prettyPrint "WHOIS: $ip"
+                    whois "$ip"
                 }
             }
             prettyPrint "CURL: $url"
