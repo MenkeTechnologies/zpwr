@@ -1288,6 +1288,7 @@ supernatural-space() {
     __CORRECT_WORDS[file]="feil fiel"
     __CORRECT_WORDS[namespace]="namepsace naemspace naempsace"
     __CORRECT_WORDS[is]="si"
+    __CORRECT_WORDS[with]="with wiht"
     __CORRECT_WORDS[for]="fro ofr rfo"
     __CORRECT_WORDS[network]="netowrk netwokr"
     __CORRECT_WORDS[point]="opint ponit"

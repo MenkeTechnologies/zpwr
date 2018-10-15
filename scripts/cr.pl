@@ -33,14 +33,17 @@ sub addToAry {
 }
 
 addToAry $_ for @ARGV;
+my $length = scalar @files;
 
-if (scalar @files > 0){
+if ($length > 0){
     #open $less, "|-","less -MN" or die $!;
     #select $less;
     say "";
     say "*"x80 for (0..2);
     say "";
     say "\x1b[34;1m<<<(\x1b[0;34m$_\x1b[0m has got \x1b[34mcarriage returns!\x1b[0;34;1m)>>>\x1b[0m" for @files;
+
+    say "\x1b[34;1m<<<(\x1b[0;34m$length \x1b[0;34mfiles!\x1b[0;34;1m)>>>\x1b[0m" for @files;
     print "Remove CR?\x1b[1;34m>\x1b[0m ";
     my $answer = <STDIN>;
     chomp $answer;
