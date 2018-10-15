@@ -47,7 +47,7 @@ if ($length > 0){
     print "Remove CR?\x1b[1;34m>\x1b[0m ";
     my $answer = <STDIN>;
     chomp $answer;
-    if ($answer eq 'y') {
+    if ($answer =~ /y|yes/i) {
         `perl -i -pe 's#\r##g' "$_"` for @files;
     } else {
         say "bye";
