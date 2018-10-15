@@ -15,6 +15,9 @@ my @files=();
 
 sub addToAry {
     if (-d $_[0]) {
+        if ($_[0] =~ /\.git/) {
+            return;
+        }
         for (glob("$_[0]/* $_[0]/.[!.]*")){
             addToAry($_);
         }
