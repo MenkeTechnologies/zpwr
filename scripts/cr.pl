@@ -22,12 +22,12 @@ sub addToAry {
             addToAry($_);
         }
     } else {
-    say "working on $_[0]";
+    say "<<<($_[0])>>>";
         my $type = `file $_[0]`;
         if ($type =~ /text/) {
             my $out = `cat $_[0]`;
             if ($out =~ /\r/){
-                say "\x1b[34m$_[0]\x1b[0m has got \x1b[34;1mcarriage returns!\x1b[0m";
+                say "\x1b[34;1m<<<(\x1b[0;34m$_[0]\x1b[0m has got \x1b[34mcarriage returns!\x1b[0;34;1m)>>>\x1b[0m";
                 push @files, $_[0];
             }
         }
@@ -40,7 +40,7 @@ if (scalar @files > 0){
     say "";
     say "*"x80 for (0..2);
     say "";
-    say "\x1b[34m$_\x1b[0m has got \x1b[34;1mcarriage returns!\x1b[0m" for @files;
+    say "\x1b[34;1m<<<(\x1b[0;34m$_\x1b[0m has got \x1b[34mcarriage returns!\x1b[0;34;1m)>>>\x1b[0m" for @files;
     print "Remove CR?\x1b[1;34m>\x1b[0m ";
     my $answer = <STDIN>;
     chomp $answer;
