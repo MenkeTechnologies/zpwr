@@ -145,7 +145,7 @@ pwd | egrep -q --color=always / 2>/dev/null && {
     alias egrep="egrep --color=always"
 }
 alias tree='tree -afC'
-alias ta="tmux attach"
+alias ta="tmux attach-session"
 alias tn="tmux new-session"
 alias h="cd /usr/local"
 alias e="cd /etc"
