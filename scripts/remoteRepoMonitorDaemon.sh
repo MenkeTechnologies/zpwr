@@ -50,11 +50,11 @@ refreshers(){
 while true; do
 
     cd "$CONFIG_DIR" || {
-        echo "Directory $CONFIG_DIR does not exist" >&2
+        echo "$(date) Directory $CONFIG_DIR does not exist" >&2
         if [[ ! -d "$BASE_DIR" ]]; then
             mkdir -pv "BASE_DIR"
             cd "$BASE_DIR"
-            echo "Created $CONFIG_DIR and exiting." >&2
+            echo "$(date) Created $CONFIG_DIR and exiting." >&2
             exit 1
         fi
     }
@@ -63,16 +63,16 @@ while true; do
     output=$(git log HEAD..origin/master --oneline)
 
     if [[ ! -z "$output" ]] ; then
-        echo "We have change to $(git remote -v)"
+        echo "$(date) We have change to $(git remote -v)"
         main
     fi
 
-    cd "$ZSH_COMP_DIR" || { echo "Directory $ZSH_COMP_DIR does not exist" >&2 && exit 1; }
+    cd "$ZSH_COMP_DIR" || { echo "$(date) Directory $ZSH_COMP_DIR does not exist" >&2 && exit 1; }
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
     if [[ ! -z "$output" ]] ; then
-        echo "We have change to $(git remote -v)"
+        echo "$(date) We have change to $(git remote -v)"
         gitters
         refreshers
     fi
