@@ -887,6 +887,10 @@ getrc(){
     cp -R .tmux/* "$HOME/.tmux"
     cp -f scripts/* "$SCRIPTS"
     cd ..
+
+    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
+    test -d "$COMPLETION_DIR" && git -C "$COMPLETION_DIR" pull
+
     rm -rf "$REPO_NAME"
     test -n "$TERM" && exec "$SHELL"
 
