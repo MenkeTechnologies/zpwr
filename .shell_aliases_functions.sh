@@ -30,6 +30,7 @@ export TERM="xterm-256color"
 export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
 export YARN_HOME="$HOME/.config/yarn"
 export NODE_HOME="/usr/local/lib/node_modules"
+export PERL5LIB="$HOME/perl5/lib/perl5"
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
 export HISTSIZE=50000
 export HISTTIMEFORMAT=' %F %T _ '
