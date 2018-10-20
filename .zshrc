@@ -1318,15 +1318,17 @@ supernatural-space() {
     done
 
     if (( $#mywords == 1 )); then
-        alias -- $LBUFFER | command egrep -q '(grc|_z|cd|cat)' || {
-            #dont expand first word if \,' or "
-            [[ -z $(alias -g -- $LBUFFER) ]] && {
-                [[ ${LBUFFER:0:1} != '\' ]] && \
-                [[ ${LBUFFER:0:1} != "'" ]] && \
-                [[ ${LBUFFER:0:1} != '"' ]] && \
-                { expand-aliases "$LBUFFER"; }
+        [[ ${LBUFFER:0:1} != '=' ]] && {
+            alias -- $LBUFFER | command egrep -q '(grc|_z|cd|cat)' || {
+                #dont expand first word if \,' or "
+                    [[ -z $(alias -g -- $LBUFFER) ]] && {
+                        [[ ${LBUFFER:0:1} != '\' ]] && \
+                        [[ ${LBUFFER:0:1} != "'" ]] && \
+                        [[ ${LBUFFER:0:1} != '"' ]] && \
+                        { expand-aliases "$LBUFFER"; }
+                    }
+                }
             }
-        }
     else
 		lastWord=${mywords[-1]}
         #DNS lookups
@@ -1368,6 +1370,7 @@ supernatural-space() {
         } &> /dev/null
         expand-aliases "$lastWord"
     fi
+
 
     zle expand-history
 
