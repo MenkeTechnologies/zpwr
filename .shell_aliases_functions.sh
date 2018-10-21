@@ -207,10 +207,10 @@ else
         distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
     }
 
-    alias tra='cd $HOME/.local/share/Trash'
+    test -d "$HOME/.local/share/Trash" && \
+        alias tra='cd $HOME/.local/share/Trash'
     [[ "$distroName" == raspbian ]] && {
         source "$HOME/.rpitokens.sh"
-
     }
 
     exists vim && { 
