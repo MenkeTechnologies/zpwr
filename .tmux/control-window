@@ -19,4 +19,6 @@ if-shell "uname | grep -q Darwin" 'send-keys "sudo iftop -f \"not port mdns and 
 selectp -t right # select top right pane
 splitw -h -p 40
 selectp -t left# select top right pane
-split-window -v -c "#{pane_current_path}" \; select-pane -l\; kill-pane
+split-window -v
+select-pane -l
+kill-pane
