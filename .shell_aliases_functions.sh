@@ -190,7 +190,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias rg='cd $HOME/RubymineProjects'
     alias ap='cd /Applications'
     alias sudoedit='sudo $EDITOR'
-    alias ts='cd $HOME/.Trash'
+    alias tra='cd $HOME/.Trash'
     alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
     exists mvim && { 
         alias v='mvim -v'
@@ -207,7 +207,7 @@ else
         distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
     }
 
-    alias ts='cd $HOME/.local/share/Trash'
+    alias tra='cd $HOME/.local/share/Trash'
     [[ "$distroName" == raspbian ]] && {
         source "$HOME/.rpitokens.sh"
 
