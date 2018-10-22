@@ -9,7 +9,11 @@
 
 use feature 'say';
 
+use Getopt::Long;
 my @files=();
+my $regex = '\r';
+my $replacement = "";
+GetOptions ('regex=s' => \$regex);
 
 sub addToAry {
     if (-d $_[0]) {
@@ -24,8 +28,8 @@ sub addToAry {
         my $type = `file $_[0]`;
         if ($type =~ /text/) {
             my $out = `cat $_[0]`;
-            if ($out =~ /\r/){
-                say "\x1b[34;1m<<<(\x1b[0;34m$_[0]\x1b[0m has got \x1b[34mcarriage returns!\x1b[0;34;1m)>>>\x1b[0m";
+            if ($out =~ /$regex/){
+                say "\x1b[34;1m<<<(\x1b[0;34m$_[0]\x1b[0m has got \x1b[34m$regex!\x1b[0;34;1m)>>>\x1b[0m";
                 push @files, $_[0];
             }
         }
@@ -41,14 +45,14 @@ if ($length > 0){
     say "";
     say "*"x80 for (0..2);
     say "";
-    say "\x1b[34;1m<<<(\x1b[0;34m$_\x1b[0m has got \x1b[34mcarriage returns!\x1b[0;34;1m)>>>\x1b[0m" for @files;
+    say "\x1b[34;1m<<<(\x1b[0;34m$_\x1b[0m has got \x1b[34m$regex!\x1b[0;34;1m)>>>\x1b[0m" for @files;
 
     say "\x1b[34;1m<<<(\x1b[0;34m$length \x1b[0;34mfiles!\x1b[0;34;1m)>>>\x1b[0m";
-    print "Remove CR?\x1b[1;34m>\x1b[0m ";
+    print "Remove $regex?\x1b[1;34m>\x1b[0m ";
     my $answer = <STDIN>;
     chomp $answer;
     if ($answer =~ /y|yes/i) {
-        `perl -i -pe 's#\r##g' "$_"` for @files;
+        `perl -i -pe 's#$regex#$replacement#g' "$_"` for @files;
     } else {
         say "bye";
     }
