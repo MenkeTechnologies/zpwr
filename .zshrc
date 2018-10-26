@@ -1209,7 +1209,7 @@ zstyle -e ':completion:*:files' list-colors "$COMMON_ZSTYLE_OPTS"
 zstyle -e ':completion:*:directories' list-colors "$COMMON_ZSTYLE_OPTS"
 zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
 
-zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,@3-]#)*=1;32=1;31=34=1;31=34'
+zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,()@3-]#)*=1;32=1;31=34=1;31=34'
 
 # use tag names as menu select separators
 zstyle ':completion:*' group-name ''
