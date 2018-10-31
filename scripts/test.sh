@@ -8,3 +8,19 @@
 #}}}***********************************************************
 
 
+
+
+echo the date is 2018-10-26
+
+
+pwd
+
+id
+
+say dogs are really cool
+
+
+pwd i am cool
+
+
+
