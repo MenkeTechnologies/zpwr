@@ -191,7 +191,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias sudoedit='sudo $EDITOR'
     alias tra='cd $HOME/.Trash'
     alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
-    alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always'
+    exists gls && \
+        alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' \
+        || alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
     exists mvim && { 
         alias v='mvim -v'
         alias vi='mvim -v'
