@@ -156,7 +156,6 @@ alias k="pkill"
 alias ka="killall"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
-alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always'
 alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
@@ -192,6 +191,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias sudoedit='sudo $EDITOR'
     alias tra='cd $HOME/.Trash'
     alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
+    alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always'
     exists mvim && { 
         alias v='mvim -v'
         alias vi='mvim -v'
@@ -203,6 +203,7 @@ else
     #Linux
     alias api="sudo apt-get install -y"
     alias ip="grc -c $HOME/conf.ifconfig ip"
+    alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
     test -z "$distroName" && {
         distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
     }
