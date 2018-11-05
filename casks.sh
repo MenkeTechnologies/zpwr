@@ -10,10 +10,12 @@ brew cask install clion
 brew cask install cycling74-max
 brew cask install dash
 brew cask install datagrip
+brew cask install db-browser-for-sqlite
 brew cask install disk-inventory-x
 brew cask install duet
 brew cask install eclipse-jee
 brew cask install electric-sheep
+brew cask install etcher
 brew cask install filezilla
 brew cask install firefox
 brew cask install font-codenewroman-nerd-font

@@ -45,6 +45,7 @@ brew install confuse
 brew install contacts
 brew install coreutils
 brew install cowsay
+brew install crystal
 brew install cscope
 brew install ctags
 brew install ctop
@@ -83,6 +84,7 @@ brew install gdk-pixbuf
 brew install geckodriver
 brew install geoip
 brew install gettext
+brew install gforth
 brew install ghc
 brew install gifsicle
 brew install git
@@ -171,10 +173,12 @@ brew install libupnp
 brew install libusb
 brew install libusb-compat
 brew install libvorbis
+brew install libvpx
 brew install libxml2
 brew install libyaml
 brew install libzip
 brew install links
+brew install llvm@6
 brew install lolcat
 brew install lua
 brew install lua@5.1
@@ -187,6 +191,7 @@ brew install man2html
 brew install maven
 brew install mercurial
 brew install midnight-commander
+brew install minicom
 brew install mongodb
 brew install mono
 brew install mp3blaster
@@ -201,6 +206,7 @@ brew install mycli
 brew install mysql
 brew install mysql-client
 brew install mytop
+brew install nasm
 brew install ncdu
 brew install ncmpcpp
 brew install ncurses
@@ -217,6 +223,7 @@ brew install nvm
 brew install ocaml
 brew install ocamlbuild
 brew install opam
+brew install openblas
 brew install openexr
 brew install openldap
 brew install openssl
@@ -270,6 +277,7 @@ brew install shellcheck
 brew install sl
 brew install slurm
 brew install smpeg
+brew install snappy
 brew install sntop
 brew install sox
 brew install speedtest-cli
@@ -280,10 +288,12 @@ brew install srm
 brew install taglib
 brew install tal
 brew install tbb
+brew install tcl-tk
 brew install tcptraceroute
 brew install telnet
 brew install texinfo
 brew install the_silver_searcher
+brew install theora
 brew install tmux
 brew install toilet
 brew install tokei
@@ -310,6 +320,7 @@ brew install wireshark
 brew install with-readline
 brew install wxmac
 brew install x264
+brew install x265
 brew install xvid
 brew install xz
 brew install yasm
