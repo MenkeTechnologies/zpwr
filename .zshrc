@@ -40,8 +40,7 @@ DISABLE_AUTO_UPDATE="true"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COPLETION_WAITING_DOTS="TRUE"IN
-# DU
+COMPLETION_WAITING_DOTS="true"
 
 # UNCOMMENT THE FOLLOWING LINE IF YOU WANT TO DISABLE MARKING UNTRACKED FILES
 # under VCS as dirty. This makes repository status check for large repositories
@@ -570,7 +569,7 @@ surround(){
     #echo char is $char >> $LOGFILE
     #echo nextChar is $nextChar >> $LOGFILE
 
-    count=$(print -r "$BUFFER" | fgrep -o "$KEYS" | wc -l)
+    count=$(print -r -- "$BUFFER" | fgrep -o "$KEYS" | wc -l)
 
     #TODO = only if next char is space or
     #end of line then insert quotes
@@ -583,7 +582,6 @@ surround(){
        *)
             ;;
     esac
-
 
     case "$KEYS" in
         '"')
@@ -822,6 +820,10 @@ bindkey -M vicmd '^T' transpose-chars
 
 bindkey -M viins '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
+
+# env var to show dots does not work with vim mode
+bindkey '^I' expand-or-complete-with-dots
+
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
 #exec 2> >("$SCRIPTS"/redText.sh)
@@ -1698,11 +1700,9 @@ if [[ "$(uname)" == Linux ]]; then
         cat ~/.ssh/authorized_keys | command grep "$GITHUB_ACCOUNT" > ~/temp$$
 
         case $distroName in
-            (debian|raspbian|kali)
+            (debian|raspbian|kali|ubunut)
                 out="$(cat /var/log/auth.log | command grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
-                ;;
-            (ubuntu)
                 ;;
             (centos|rhel)
                 out="$(tail /var/log/messages)"
