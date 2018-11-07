@@ -1700,7 +1700,7 @@ if [[ "$(uname)" == Linux ]]; then
         cat ~/.ssh/authorized_keys | command grep "$GITHUB_ACCOUNT" > ~/temp$$
 
         case $distroName in
-            (debian|raspbian|kali|ubunut)
+            (debian|raspbian|kali|ubuntu)
                 out="$(cat /var/log/auth.log | command grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
                 ;;
