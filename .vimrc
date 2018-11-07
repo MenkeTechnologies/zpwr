@@ -903,7 +903,7 @@ elseif os == "Linux"
         map <ESC>[B <C-Down>
         map <ESC>[C <C-Right>
         map <ESC>[D <C-Left>
-    elif distro == "raspbian"
+    elseif distro == "raspbian"
         set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
         map <ESC>[A <C-Up>
         map <ESC>[B <C-Down>
