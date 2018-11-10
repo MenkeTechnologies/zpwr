@@ -661,7 +661,6 @@ vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
 
 "{{{                    MARK:Plugin Mappings
 "**************************************************************
-nnoremap <Tab> :SaveSession!<CR><CR>
 nnoremap <silent> <leader>n :n<CR>
 inoremap <F8> <ESC>:%s@@@g<Left><Left><Left>
 nnoremap <F8> :%s@@@g<Left><Left><Left>
