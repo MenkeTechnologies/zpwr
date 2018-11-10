@@ -1703,7 +1703,7 @@ if [[ "$(uname)" == Linux ]]; then
 
         case $distroName in
             (debian|raspbian|kali|ubuntu)
-                out="$(command grep 'Accepted publickey' /var/log/auth.log | tail -1)"
+                out="$(command grep -a 'Accepted publickey' /var/log/auth.log | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
                 ;;
             (centos|rhel)
