@@ -828,7 +828,6 @@ nnoremap <silent> <C-D>s :update<CR>:SyntasticCheck<CR>
 vnoremap <silent> <C-D>s :<C-C>:update<CR>:SyntasticCheck<CR>
 inoremap <silent> <C-D>s <C-[>:update<CR>:SyntasticCheck<CR>a
 
-
 nmap [[ ?{<CR>w99[{
 nmap ][ /}<CR>b99]}
 nmap ]] j0[[%/{<CR>
