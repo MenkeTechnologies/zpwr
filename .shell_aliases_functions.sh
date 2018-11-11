@@ -106,7 +106,7 @@ rm(){
 }
 alias lo="tail -f $LOGFILE"
 alias va='cd /var'
-alias plr='rlwrap perl -de1'
+alias plr='rlwrap perl -dE1'
 alias cpan='rlwrap cpan'
 alias nz='exec zsh'
 alias ll="clearList"
