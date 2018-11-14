@@ -325,7 +325,7 @@ s(){
 }
 
 logg(){
-    echo "$@" >> "$LOGFILE"
+    echo "$(date) $@" >> "$LOGFILE"
 }
 
 xx(){
