@@ -161,7 +161,8 @@ alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
 alias gpf='git push --force'
 alias glf='git pull --force'
-alias gac='git add . && git commit -m "" && git push'
+alias gacp='git add . && git commit -m "" && git push'
+alias gac='git add . && git commit -m '
 
 if [[ "$(uname)" == "Darwin" ]]; then
     #Darwin specific aliases
