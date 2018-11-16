@@ -1070,6 +1070,7 @@ boxesPrint(){
     len=${#1}
     spacerlen=2
     boxesChar='/'
+    spaceChar=' '
     sidelen=$(($width - $len - $spacerlen * 2))
     #ceil
     sidelen=$(( ($sidelen + 2 -1) / 2))
@@ -1078,9 +1079,9 @@ boxesPrint(){
         ((--sidelen2 ))
     fi
 
-    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print ' ' x $spacerlen"
+    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print '"$spaceChar"' x $spacerlen"
     printf "$1"
-    perl -E "print ' ' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
+    perl -E "print '"$spaceChar"' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
     echo
 }
 
