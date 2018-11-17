@@ -1083,6 +1083,7 @@ boxesPrint(){
     printf "$1"
     perl -E "print '"$spaceChar"' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
     echo
+
 }
 
 
