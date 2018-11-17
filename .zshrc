@@ -1278,6 +1278,7 @@ supernatural-space() {
     __CORRECT_WORDS[than]="tahn"
     __CORRECT_WORDS[then]="tehn"
     __CORRECT_WORDS[to]="ot"
+    __CORRECT_WORDS[of]="fo"
     __CORRECT_WORDS[why]="hwy wyh"
     __CORRECT_WORDS[inside]="insdie inisde isnide sindie"
     __CORRECT_WORDS[just]="jsut jutsi just"
