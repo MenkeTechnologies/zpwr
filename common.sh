@@ -37,7 +37,8 @@ prettyPrint(){
 prettyPrint(){
     (( install_counter++ ))
     width=70
-    len=${#1}
+    msg="$install_counter>>> $1"
+    len=${#msg}
     spacerlen=2
     boxesChar='/'
     spaceChar=' '
@@ -50,14 +51,16 @@ prettyPrint(){
     fi
 
     printf "\x1b[32;1m"
-    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print '"$spaceChar"' x $spacerlen"
+    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print '$spaceChar' x $spacerlen"
     printf "\x1b[34;4m"
-    printf "$install_counter>>>$1"
+    printf "$msg"
     printf "\x1b[0;32;1m"
-    perl -E "print '"$spaceChar"' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
+    perl -E "print '$spaceChar' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
     printf "\x1b[0m"
     echo
 }
+
+
 
 
 
