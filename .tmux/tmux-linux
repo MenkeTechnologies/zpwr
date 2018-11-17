@@ -1,4 +1,5 @@
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = raspbian ]' 'source /usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf'
+if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = debian ]' 'source /usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = ubuntu ]' 'source /usr/local/lib/python2.7/dist-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = fedora ]' 'source /usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = centos ]' 'source /usr/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf'
