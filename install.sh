@@ -430,7 +430,7 @@ tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
 [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
 
 prettyPrint "Installing Tmux Powerline Config"
-cat "$INSTALLER_DIR"/default.json >> "$tmuxPowerlineDir/default.json"
+cat "$INSTALLER_DIR"/default.json > "$tmuxPowerlineDir/default.json"
 
 prettyPrint "Installing Tmux Plugin Manager"
 [[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p $HOME/.tmux/plugins/tpm
