@@ -279,6 +279,8 @@ vnoremap <silent> <C-F> :<C-C>:q!<CR>
 
 autocmd VimEnter * inoremap <silent> <C-F> <C-[>:q!<CR>
 autocmd VimEnter * set background=dark
+" dont hide json quotes
+autocmd VimEnter * set conceallevel=0
 inoremap <silent> <C-Z> <C-[>:suspend<CR>
 
 vnoremap <RightMouse> "*y`>
