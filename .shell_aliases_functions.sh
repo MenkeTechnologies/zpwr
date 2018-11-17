@@ -1079,11 +1079,10 @@ boxesPrint(){
         ((--sidelen2 ))
     fi
 
-    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print '"$spaceChar"' x $spacerlen"
+    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print '$spaceChar' x $spacerlen"
     printf "$1"
-    perl -E "print '"$spaceChar"' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
+    perl -E "print '$spaceChar' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
     echo
-
 }
 
 
