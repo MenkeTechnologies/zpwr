@@ -13,7 +13,7 @@ use Getopt::Long;
 my @files=();
 my $regex = '\r';
 my $replacement = "";
-GetOptions ('regex=s' => \$regex);
+GetOptions ('regex=s' => \$regex, 'replacement=s' => \$replacement);
 
 sub addToAry {
     if (-d $_[0]) {
