@@ -13,7 +13,16 @@ use Getopt::Long;
 my @files=();
 my $regex = '\r';
 my $replacement = "";
-GetOptions ('regex=s' => \$regex, 'replacement=s' => \$replacement);
+
+my $help=0;
+GetOptions ('help|?'=>\$help, 'regex=s' => \$regex, 'replacement=s' => \$replacement);
+
+
+if ($help == 1) {
+    say STDERR "Use --regex or --replacement to specify strings.";
+    exit 1;
+}
+
 
 sub addToAry {
     if (-d $_[0]) {
