@@ -7,10 +7,11 @@
 #####   Notes:
 #}}}***********************************************************
 
-open $less, "|-","less -MN" or die $!;
-
 use warnings;
 use strict;
+
+open my $less, "|-","less -MN" or die $!;
+
 use Env '@PATH';
 my $exe = 'rougify';
 my $exe_exists = grep -x "$_/$exe", @PATH;
