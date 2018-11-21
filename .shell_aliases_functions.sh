@@ -1,5 +1,3 @@
-#{{{                    MARK:exists
-#**************************************************************
 exists(){
     type "$1" >/dev/null 2>&1 #alternative is command -v
 }
@@ -426,7 +424,7 @@ clearList () {
                 ls_command="ls -iFlhAO"
             }
         lib_command="otool -L"
-    else
+    elif [[ "$(uname)" == Linux ]];then
         exists grc && {
                 ls_command="grc -c $HOME/conf.gls \
                 ls -iFlhA --color=always"
@@ -434,6 +432,15 @@ clearList () {
                 ls_command="ls -iFhlA"
             }
         lib_command="ldd"
+    else
+        exists grc && {
+                ls_command="grc -c $HOME/conf.gls \
+                ls -iFlhA"
+            } || {
+                ls_command="ls -iFhlA"
+            }
+        lib_command="ldd"
+        
     fi
         if [[ -n "$1" ]]; then
             for command in "$@"; do

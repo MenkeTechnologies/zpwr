@@ -114,6 +114,10 @@ addDependenciesRedHat(){
     dependencies_ary+=('fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
 }
 
+addDependenciesFreeBSD(){
+    dependencies_ary+=(vim python3 gnome3)
+}
+
 addDependenciesMac(){
     dependencies_ary+=("git --without-completions" fortune node the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
@@ -334,9 +338,12 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     fi
 
 else
+    #unix
     if [[ "$OS_TYPE" == FreeBSD ]]; then
         distroFamily=freebsd
         refresh "$distroFamily"
+
+        addDependenciesFreeBSD
 
         if [[ $skip != true ]]; then
             prettyPrint "Now The Main Course..."
@@ -365,7 +372,6 @@ else
         else
             prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
         fi
-    ts
     else
         prettyPrint "Your OS $OS_TYPE is unsupported!" >&2 && exit 1
     fi
