@@ -131,6 +131,8 @@ update(){
             sudo pacman -S --noconfirm "$1"
         elif [[ $2 == redhat ]];then
             sudo yum install -y "$1"
+        elif [[ $2 == freebsd ]];then
+            sudo pkg install -y "$1"
         else
             prettyPrint "Error at install with $2." >&2
         fi
@@ -138,7 +140,6 @@ update(){
 }
 
 upgrade(){
-
         if [[ $1 == mac ]]; then
             brew update
             brew upgrade
@@ -151,6 +152,8 @@ upgrade(){
             sudo pacman -Suy
         elif [[ $1 == redhat ]];then
             sudo yum upgrade -y
+        elif [[ $1 == freebsd ]];then
+            sudo pkg upgrade
         else
             prettyPrint "Error with upgrade with $2." >&2
         fi
@@ -165,6 +168,8 @@ refresh(){
             sudo zypper refresh
         elif [[ $1 == arch ]];then
             sudo pacman -Syy
+        elif [[ $1 == freebsd ]];then
+            sudo pkg update
         elif [[ $1 == redhat ]];then
             sudo yum update -y
         else
@@ -329,7 +334,43 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     fi
 
 else
-    prettyPrint "Your OS $OS_TYPE is unsupported!" >&2 && exit 1
+    if [[ "$OS_TYPE" == FreeBSD ]]; then
+        distroFamily=freebsd
+        refresh "$distroFamily"
+
+        if [[ $skip != true ]]; then
+            prettyPrint "Now The Main Course..."
+            sleep 1
+
+            for prog in "${dependencies_ary[@]}"; do
+                prettyPrint "Installing $prog"
+                update "$prog" "$distroFamily"
+            done
+
+            prettyPrint "Upgrading $distroFamily"
+
+            upgrade "$distroFamily"
+        fi
+
+        prettyPrint "Installing Powerline fonts"
+        if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
+            wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
+            wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
+            # move font to valid font path
+            sudo mv PowerlineSymbols.otf /usr/share/fonts/
+            # Update font cache for the path the font
+            sudo fc-cache -vf /usr/share/fonts/
+            # Install the fontconfig file
+            sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
+        else
+            prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
+        fi
+    ts
+    else
+        prettyPrint "Your OS $OS_TYPE is unsupported!" >&2 && exit 1
+    fi
+
+
 fi
 
 #}}}***********************************************************
@@ -373,13 +414,13 @@ source "$INSTALLER_DIR/pip_install.sh"
 
 
 case "$distroName" in
-    *suse*|ubuntu|debian|linuxmint|raspbian)
+    (*suse*|ubuntu|debian|linuxmint|raspbian)
         needSudo=yes
         ;;
-    fedora)
+    (fedora)
         needSudo=no
         ;;
-    *)
+    (*)
         needSudo=no
         ;;
 esac
