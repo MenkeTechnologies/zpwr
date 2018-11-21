@@ -95,16 +95,19 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
     }
 else
     if [[ "$OS_TYPE" == "FreeBSD" ]]; then
+        sudo python3 -m pip
+        sudo python3 -m pip install --upgrade
+
         prettyPrint "Upgrading pip"
-        sudo python3 -m pip install --upgrade pip
+        sudo pip3 install --upgrade pip
         prettyPrint "Installing psutil for Python Glances"
-        sudo python3 -m pip install psutil
+        sudo pip3 install psutil
 
         prettyPrint "Installing setuptools"
-        sudo python3 -m pip install setuptools
+        sudo pip3 install setuptools
 
         prettyPrint "Installing Python Glances"
-        sudo python3 -m pip install glances
+        sudo pip3 install glances
         prettyPrint "Installing Powerline..."
 
         exists pip2 && sudo pip2 install powerline-status || sudo pip install powerline-status
@@ -114,24 +117,24 @@ else
 
         tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
         [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-        sudo python3 -m pip install powerline-mem-segment
+        sudo pip3 install powerline-mem-segment
         prettyPrint "Installing PyDf"
-        sudo python3 -m pip install pydf
+        sudo pip3 install pydf
 
         prettyPrint "Installing MyCLI"
-        sudo python3 -m pip install mycli
+        sudo pip3 install mycli
 
         prettyPrint "Installing Speedtest"
-        sudo python3 -m pip install speedtest-cli
+        sudo pip3 install speedtest-cli
 
         prettyPrint "Installing PGCLI"
-        sudo python3 -m pip install pgcli
+        sudo pip3 install pgcli
 
         exists youtube_dl || {
             prettyPrint "Installing youtube-dl"
-            sudo python3 -m pip install youtube_dl
+            sudo pip3 install youtube_dl
         }
-        sudo python3 -m pip install bpython
+        sudo pip3 install bpython
     fi
 fi
 prettyPrint "Done With Python Packages"
