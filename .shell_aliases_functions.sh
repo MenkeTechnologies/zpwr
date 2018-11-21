@@ -104,6 +104,7 @@ unalias rm &>/dev/null
 rm(){
     command rm -v "$@"
 }
+exists c.pl && alias pp='c.pl *'
 alias lo="tail -f $LOGFILE"
 alias va='cd /var'
 alias plr='rlwrap perl -dE1'
