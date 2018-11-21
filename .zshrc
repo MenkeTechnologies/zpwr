@@ -1110,7 +1110,7 @@ setopt cbases
 #{{{                    MARK:AutoCompletions
 #**************************************************************
 # avoid insecure warning message with -u
-autoload -U compinit && compinit u
+autoload -U compinit && compinit -u
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
 
