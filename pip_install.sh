@@ -42,7 +42,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         prettyPrint "Installing youtube-dl"
         pip install --upgrade youtube_dl
     }
-else
+elif [[ "$OS_TYPE" == "Linux" ]];then
     if [[ "$distroFamily" == redhat ]]; then
         prettyPrint "Installing grc for RedHat"
         git clone https://github.com/garabik/grc.git && cd grc && sudo bash install.sh
@@ -93,6 +93,45 @@ else
     exists pip3 && {
         sudo pip3 install bpython
     }
+else
+    if [[ "$OS_TYPE" == "FreeBSD" ]]; then
+        prettyPrint "Upgrading pip"
+        sudo python3 -m pip install --upgrade pip
+        prettyPrint "Installing psutil for Python Glances"
+        sudo python3 -m pip install psutil
 
+        prettyPrint "Installing setuptools"
+        sudo python3 -m pip install setuptools
+
+        prettyPrint "Installing Python Glances"
+        sudo python3 -m pip install glances
+        prettyPrint "Installing Powerline..."
+
+        exists pip2 && sudo pip2 install powerline-status || sudo pip install powerline-status
+        exists pip2 && sudo pip2 install powerline-mem-segment || sudo pip install powerline-mem-segment
+        
+        prettyPrint "Installing Tmux Powerline"
+
+        tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
+        [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
+        sudo python3 -m pip install powerline-mem-segment
+        prettyPrint "Installing PyDf"
+        sudo python3 -m pip install pydf
+
+        prettyPrint "Installing MyCLI"
+        sudo python3 -m pip install mycli
+
+        prettyPrint "Installing Speedtest"
+        sudo python3 -m pip install speedtest-cli
+
+        prettyPrint "Installing PGCLI"
+        sudo python3 -m pip install pgcli
+
+        exists youtube_dl || {
+            prettyPrint "Installing youtube-dl"
+            sudo python3 -m pip install youtube_dl
+        }
+        sudo python3 -m pip install bpython
+    fi
 fi
 prettyPrint "Done With Python Packages"
