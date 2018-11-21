@@ -376,6 +376,8 @@ else
         prettyPrint "Your OS $OS_TYPE is unsupported!" >&2 && exit 1
     fi
 
+    sudo python3 -m pip
+    sudo python3 -m pip install --upgrade
 
 fi
 
