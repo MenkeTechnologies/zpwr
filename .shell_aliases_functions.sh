@@ -119,6 +119,7 @@ alias l="clearList"
 alias r="cd .."
 alias t="cd /"
 alias c='cat -n'
+alias sa='sudo cat -n'
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"

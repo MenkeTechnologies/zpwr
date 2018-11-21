@@ -355,7 +355,7 @@ expand-aliases() {
         #fi
         #CURSOR=$#BUFFER
     else
-            alias -- $LBUFFER | command egrep -q '(grc|_z|cd|cat)' || {
+            alias -- $LBUFFER | command egrep -q '(grc|_z|cd)' || {
                 #dont expand first word if \,' or "
                 [[ -z $(alias -g -- $LBUFFER) ]] && {
                     #[[ ${LBUFFER:0:1} != '\' ]] && \
