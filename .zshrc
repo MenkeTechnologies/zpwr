@@ -12,6 +12,7 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="simonoff"
 
+ZSH_DISABLE_COMPFIX=true
 #colors for common commands
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
@@ -1110,7 +1111,7 @@ setopt cbases
 #{{{                    MARK:AutoCompletions
 #**************************************************************
 # avoid insecure warning message with -u
-autoload -U compinit && compinit -u
+autoload -U compinit && compinit -C
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
 
