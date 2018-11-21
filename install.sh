@@ -266,8 +266,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
 #{{{                    MARK:Linux
 #**************************************************************
-
-else
+elif [[ "$OS_TYPE" == "Linux" ]]; then
 
     addDependenciesLinux
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
@@ -296,7 +295,7 @@ else
             addDependenciesRedHat
             ;;
         (*)
-            prettyPrint "Your distroFamily $distroName is unsupported now...cannot proceed!" >&2
+            prettyPrint "Your distroFamily $distroName is unsupported!" >&2
             exit 1
             ;;
     esac
@@ -329,6 +328,8 @@ else
         prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
     fi
 
+else
+    prettyPrint "Your OS $OS_TYPE is unsupported!" >&2 && exit 1
 fi
 
 #}}}***********************************************************
