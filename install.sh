@@ -115,7 +115,7 @@ addDependenciesRedHat(){
 }
 
 addDependenciesFreeBSD(){
-    dependencies_ary+=(vim python3 gnome3)
+    dependencies_ary+=(vim python3 gnome3 devel/ruby-gems)
 }
 
 addDependenciesMac(){
@@ -375,9 +375,6 @@ else
     else
         prettyPrint "Your OS $OS_TYPE is unsupported!" >&2 && exit 1
     fi
-
-    sudo python3 -m pip
-    sudo python3 -m pip install --upgrade
 
 fi
 
