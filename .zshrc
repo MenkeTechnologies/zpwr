@@ -1671,7 +1671,7 @@ _comps[csh]=_tcsh
 _cl(){
     _alternative \
         'aliases:aliases:('"echo ${(k)aliases}"')' \
-        'builtins:builtin:('"$(enable) $(disable)"')' \
+        'builtins:builtins:('"$(enable) $(disable)"')' \
         'functions:functions:('"echo ${(k)functions}"')' \
         'commands:commands:('"echo ${(k)commands}"')' \
         'files:filenames:_files'
