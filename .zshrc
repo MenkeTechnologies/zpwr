@@ -99,8 +99,7 @@ if [[ "$(uname)" == "Darwin" ]];then
     #determine if this terminal was started in IDE
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
-else
-    #linux
+elif [[ "$(uname)" == "Linux"]];then
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
@@ -126,7 +125,9 @@ else
             ;;
     esac
 
-
+else
+    #unix
+    :
 fi
 #}}}***********************************************************
 
