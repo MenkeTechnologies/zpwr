@@ -383,7 +383,12 @@ scnew(){
 
 p(){
     [[ -z $1 ]] && ps -ef
-    out="$(ps -ef)"
+    if [[ "$(uname)" == Linux || "$(uname)" == Darwin ]]; then
+        out="$(ps -ef)"
+    else
+        out="$(ps aux)"
+    fi
+
     for cmd; do
         prettyPrint "SEARCH TERM: $cmd"
         echo "$out" | command fgrep --color=always -a -i -- "$cmd" \
