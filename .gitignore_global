@@ -9,18 +9,19 @@ ehthumbs.db
 Thumbs.db
 #Jetbrains
 .idea/
-*.[oa]
 *.iml
 *~
+*.iws
+*.ipr
+out/
 #node
 node_modules/
 test.java
-out/
 .tmux/resurrect/
-
 #cmake
 cmake-build-debug/
-
+#object files
+*.[oa]
 #gradle
 .gradle
 build/
