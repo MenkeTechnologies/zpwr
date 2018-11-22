@@ -164,6 +164,7 @@ alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
 alias gpf='git push --force'
 alias glf='git pull --force'
+alias gla='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --all --stat -p'
 alias gacp='git add . && git commit -m "" && git push'
 alias gac='git add . && git commit -m '
 
