@@ -382,10 +382,11 @@ scnew(){
 }
 
 p(){
-    [[ -z $1 ]] && ps -ef
     if [[ "$(uname)" == Linux || "$(uname)" == Darwin ]]; then
+        [[ -z $1 ]] && ps -ef && return 0
         out="$(ps -ef)"
     else
+        [[ -z $1 ]] && ps aux && return 0
         out="$(ps aux)"
     fi
 
