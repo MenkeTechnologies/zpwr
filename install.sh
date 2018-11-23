@@ -77,7 +77,7 @@ dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop c
     screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping atop ctags texinfo lsof \
-    whois weechat gradle ant maven tree mc ocaml groovy slurm bmon ruby whatweb) 
+    whois weechat gradle ant maven tree mc ocaml groovy slurm bmon ruby) 
 
 #}}}***********************************************************
 
@@ -103,7 +103,7 @@ addDependenciesDebian(){
     dependencies_ary+=(lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs gcc \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
     libperl-dev libpq-dev libpcap-dev fortune python3-dev python-dev ruby-dev \
-    python3-pip curl libffi-dev libssl-dev grc automake)
+    python3-pip curl libffi-dev libssl-dev grc automake whatweb)
 
 }
 
