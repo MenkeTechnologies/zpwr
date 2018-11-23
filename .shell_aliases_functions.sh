@@ -1085,11 +1085,13 @@ pre(){
 }
 
 exists pssh && {
-    pir(){ [[ -s "$HOME/hosts.txt" ]] && {
+    pir(){
+        [[ -s "$HOME/hosts.txt" ]] || {\
+            echo "you need hosts.txt in your homedir" >&2 && \
+            return 1; }
             pssh --inline-stdout -h "$HOME"/hosts.txt "$@"
-        } || echo "you need hosts.txt in your homedir" >&2 \
-            && return 1
     }
+
 
 }
 
