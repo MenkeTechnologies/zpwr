@@ -1084,6 +1084,15 @@ pre(){
     echo "$out" | perl -lnE "say \"$prefix \$_\""
 }
 
+exists pssh && {
+    pir(){ [[ -s "$HOME/hosts.txt" ]] && {
+            pssh --inline-stdout -h "$HOME"/hosts.txt "$@"
+        } || echo "you need hosts.txt in your homedir" >&2 \
+            && return 1
+    }
+
+}
+
 boxesPrint(){
     width=70
     len=${#1}
