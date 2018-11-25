@@ -53,7 +53,7 @@ prettyPrint "SOCKS proxy 127.0.0.1:9050 enabled."
 prettyPrint "Starting Tor..."
 
 tor &
-while [[ 1 ]]; do
+while true; do
     sleep 3
     curl --socks5 127.0.0.1:9050 icanhazip.com
 done
