@@ -1,5 +1,6 @@
 brew cask install adafruit-arduino
 brew cask install adobe-acrobat-reader
+brew cask install alfred
 brew cask install android-platform-tools
 brew cask install android-studio
 brew cask install appcode
