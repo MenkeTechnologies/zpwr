@@ -6,7 +6,7 @@
 ##### Purpose: bash script to
 ##### Notes:
 #}}}***********************************************************
-while [[ 1 ]]; do
+while true; do
     echo "$(date) Updating Software" >> "$LOGFILE"
     oldtime=$(date +"%s")
     olddate="$(date +'%Y-%m-%d %H:%M:%S')"
@@ -18,7 +18,7 @@ EOF
 )
     nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)
     bash -l updater.sh -e
-    while [[ 1 ]]; do
+    while true; do
         sleep $((1*60))
         newtime=$(date +"%s")
         timediff=$(($newtime-$oldtime))

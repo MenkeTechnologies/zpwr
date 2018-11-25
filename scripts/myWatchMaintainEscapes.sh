@@ -48,7 +48,7 @@ clear
 
 tput civis
 
-while [[ true ]]; do
+while true; do
     script -c ls &> /dev/null && {
         output="$(script -q /dev/null -c "$1" | tr -d '\r' | cat)"
     } || {

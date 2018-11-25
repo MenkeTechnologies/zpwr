@@ -19,7 +19,7 @@ displayProgress(){
     #make cursor invisible
     tput civis
 
-    while 'true' ; do # loop until user presses a key
+    while true ; do # loop until user presses a key
 
         printf "thinking... "
         printf " %.${chars}s$CR" "$spinner" ##print first character of spinner then
