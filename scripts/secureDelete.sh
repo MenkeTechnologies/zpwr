@@ -92,8 +92,7 @@ for i in "$@"; do
     pass_count=1
     chmod u+w "$file" # Allow overwriting/deleting the file.
 
-    while [ "$pass_count" -le "$passes" ]
-    do
+    while (("$pass_count" < "$passes"));do
         echo "Pass #$pass_count"
         sync # Flush buffers.
         dd if=/dev/urandom of="$file" bs=$blocksize count=$flength
