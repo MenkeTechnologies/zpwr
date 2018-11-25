@@ -77,7 +77,8 @@ dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop c
     screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping atop ctags texinfo lsof \
-    whois weechat gradle ant maven tree mc ocaml groovy slurm bmon ruby parallel pssh) 
+    whois weechat gradle ant maven telnet tree mc ocaml groovy slurm \
+    bmon ruby parallel pssh) 
 
 #}}}***********************************************************
 
