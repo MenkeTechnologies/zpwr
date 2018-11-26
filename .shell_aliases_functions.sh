@@ -209,16 +209,16 @@ if [[ "$(uname)" == "Darwin" ]]; then
     }
 else
     #Linux or Unix
+    alias ip="grc -c $HOME/conf.ifconfig ip"
+    alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
+    test -d "$HOME/.local/share/Trash" && \
+        alias tra='cd $HOME/.local/share/Trash'
     if [[ "$(uname)" == Linux ]]; then
         alias api="sudo apt-get install -y"
-        alias ip="grc -c $HOME/conf.ifconfig ip"
-        alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
         test -z "$distroName" && {
             distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
         }
 
-        test -d "$HOME/.local/share/Trash" && \
-            alias tra='cd $HOME/.local/share/Trash'
         [[ "$distroName" == raspbian ]] && {
             source "$HOME/.rpitokens.sh"
         }
