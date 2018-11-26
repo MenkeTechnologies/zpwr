@@ -256,14 +256,14 @@ done
 brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
     # we have brew cu
     prettyPrint "Updating Homebrew Casks!"
-    brew cu -fay --cleanup
+    brew cu -ay --cleanup
 } || {
     # we don't have brew cu
     prettyPrint "Installing brew-cask-upgrade"
     brew tap buo/cask-upgrade
     brew update
     prettyPrint "Updating Homebrew Casks!"
-    brew cu --all -y --cleanup
+    brew cu -ay --cleanup
 }
 prettyPrint "Updating Vundle Plugins"
 
