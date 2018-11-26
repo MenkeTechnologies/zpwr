@@ -47,7 +47,6 @@ for command abs in ${(kv)commands}; do
        echo "killing $abs at $!"
        kill $!
        if [[ ! -s "$comp_dir/_$command" ]]; then
-            command rm "$comp_dir/_$command"
             $abs -h < /dev/null |& help2comp.py $command > "$comp_dir"/_$command &
             sleep 0.25
             echo "killing $abs at $!"
