@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #{{{ MARK:Header
 #**************************************************************
 ##### Author: WIZARD
@@ -40,7 +40,7 @@ exists help2comp.py || {
 test ! -d "$comp_dir" && command mkdir -p "$comp_dir"
 
 for command abs in ${(kv)commands}; do
-    if [[ -z "${_comps[$command]}" ]]; then
+    if [[ ${+_comps[$command]} == 0 ]]; then
         boxesPrint $command | lolcat
        $abs --help < /dev/null |& help2comp.py $command > "$comp_dir"/_$command &
        sleep 0.25
