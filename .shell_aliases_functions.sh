@@ -1093,7 +1093,7 @@ exists pssh && {
         [[ -s "$HOME/hosts.txt" ]] || {\
             echo "you need hosts.txt in your homedir" >&2 && \
             return 1; }
-            pssh --inline-stdout -h "$HOME"/hosts.txt "$@"
+            pssh --inline-stdout --timeout 60 -h "$HOME"/hosts.txt "$@"
     }
 
 
