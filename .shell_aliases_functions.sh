@@ -217,6 +217,7 @@ else
         alias tra='cd $HOME/.local/share/Trash'
     if [[ "$(uname)" == Linux ]]; then
         alias api="sudo apt-get install -y"
+        alias ipt="sudo iptables --line-numbers -L"
         test -z "$distroName" && {
             distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
         }
@@ -1093,7 +1094,7 @@ exists pssh && {
         [[ -s "$HOME/hosts.txt" ]] || {\
             echo "you need hosts.txt in your homedir" >&2 && \
             return 1; }
-            pssh --inline-stdout --timeout 60 -h "$HOME"/hosts.txt "$@"
+            pssh --inline-stdout --timeout 90 -h "$HOME"/hosts.txt "$@"
     }
 
 
