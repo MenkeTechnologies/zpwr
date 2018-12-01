@@ -1306,7 +1306,7 @@ supernatural-space() {
     __CORRECT_WORDS[found]="ofund fuond foudn"
     __CORRECT_WORDS[echo]="ehco ceho ecoh"
     __CORRECT_WORDS[block]="blokc bolck"
-    __CORRECT_WORDS[high]="hgih hihg"
+    __CORRECT_WORDS[high]="hgih hihg ihgh"
 
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(print -r -- $LBUFFER | tr -d "()[]{}\$,%'\"" )"
