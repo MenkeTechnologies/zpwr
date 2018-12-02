@@ -7,7 +7,12 @@
 ##### Notes:
 #}}}***********************************************************
 
-FIGLET_DIR=/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts
+[[ "$(uname)" == Darwin ]] && {
+    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+} || {
+    FIGLET_DIR="/usr/share/figlet"
+}
+
 TEXT_TO_DISPLAY="Menke Technologies"
 FILTER="$1"
 
