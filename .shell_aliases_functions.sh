@@ -811,7 +811,7 @@ alias gcl >/dev/null 2>&1 && unalias gcl
 gcl() {
     git_name="${1##*/}"
     dir_name=${git_name%.*}
-    git clone --recursive "$1"
+    git clone -v --progress --recursive "$1"
     cd "$dir_name"
 }
 
