@@ -16,6 +16,7 @@
 # <user> ALL=(ALL) NOPASSWD:ALL
 
 OS_TYPE="$(uname -s)"
+d
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
@@ -73,7 +74,7 @@ sleep 1
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
+dependencies_ary=(cargo boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping atop ctags texinfo lsof \
