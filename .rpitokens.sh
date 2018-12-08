@@ -9,10 +9,11 @@ alias vnck="vncserver -kill :1"
 
 alias tom="cd $HOME/Downloads/apache-tomcat-8.5.5"
 alias procs="ps -ef | grep tomcat"
+alias tomstart="/home/$USER/Downloads/apache-tomcat-8.5.5/bin/startup.sh"
 
-alias tomstart="/home/pi/Downloads/apache-tomcat-8.5.5/bin/startup.sh"
-alias tomstop="/home/pi/Downloads/apache-tomcat-8.5.5/bin/shutdown.sh"
-
-export PATH="$PATH:/home/pi/Downloads/apache-ant-1.9.7/bin:$SCRIPTS:."
-export CLASSPATH="/home/pi/Java/:/home/pi/Desktop:/home/pi/jars/*:."
+alias tomstop="/home/$USER/Downloads/apache-tomcat-8.5.5/bin/shutdown.sh"
+export PATH="$PATH:/home/$USER/Downloads/apache-ant-1.9.7/bin:$SCRIPTS:."
+export CLASSPATH="/home/$USER/Java/:/home/$USER/Desktop:/home/$USER/jars/*:."
 export JAVA_RUNTIME="/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt/jre/bin/java"
+
+
