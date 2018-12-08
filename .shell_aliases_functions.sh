@@ -1101,6 +1101,10 @@ exists pssh && {
 
 }
 
+exists exa && {
+    alias exa='exa --git -il -F -H --extended --color-scale -g'
+}
+
 boxesPrint(){
     width=70
     len=${#1}
