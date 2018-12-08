@@ -1,0 +1,6 @@
+IdeaVim
+Custom Postfix Templates
+.ignore
+BashSupport
+Rainbow Brackets
+Nyan Progress Bar
