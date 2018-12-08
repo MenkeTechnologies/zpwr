@@ -39,6 +39,11 @@ export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
 export LESS="-M -N -R"
 export PSQL_EDITOR='vim -c "setf sql"'
+
+exists exa && {
+    export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4"
+    alias exa='exa --git -il -F -H --extended --color-scale -g -a'
+}
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
@@ -430,20 +435,25 @@ suc(){
 
 clearList () {
     if [[ "$(uname)" == "Darwin" ]]; then
-        exists grc && {
+        exists exa && ls_command="exa" || {
+            exists grc && {
                 ls_command="grc -c $HOME/conf.gls \
                 gls -iFlhA --color=always"
             } || {
                 ls_command="ls -iFlhAO"
             }
+        }
         lib_command="otool -L"
     elif [[ "$(uname)" == Linux ]];then
-        exists grc && {
+
+        exists exa && ls_command="exa" || {
+            exists grc && {
                 ls_command="grc -c $HOME/conf.gls \
                 ls -iFlhA --color=always"
             } || {
                 ls_command="ls -iFhlA"
             }
+        }
         lib_command="ldd"
     else
         exists grc && {
@@ -517,6 +527,8 @@ clearList () {
 }
 
 listNoClear () {
+    exists exa && exa && return 0
+
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
             grc -c "$HOME/conf.gls" gls \
@@ -1101,9 +1113,6 @@ exists pssh && {
 
 }
 
-exists exa && {
-    alias exa='exa --git -il -F -H --extended --color-scale -g'
-}
 
 boxesPrint(){
     width=70
