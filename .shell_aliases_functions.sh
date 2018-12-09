@@ -1149,6 +1149,7 @@ c(){
     local counter
     counter=0
     exists ccat && {
+        set -x
         echo | ccat &>/dev/null && {
             for file in "$@";do
                     if (( $# > 1)); then
@@ -1159,6 +1160,7 @@ c(){
             done
         } || cat -n "$@"
     } || cat -n "$@"
+set +x
 }
 
 #}}}***********************************************************
