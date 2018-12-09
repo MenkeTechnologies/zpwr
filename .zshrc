@@ -1242,7 +1242,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
     alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}s="| sed -E 's@@@g'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}se="| sed -E 's@@@g'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}sp="| sed -n ',\$p'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '' "
     alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail"
