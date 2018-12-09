@@ -1272,6 +1272,7 @@ supernatural-space() {
     local __CORRECT_WORDS
     declare -A __CORRECT_WORDS
     __CORRECT_WORDS[and]="adn nad"
+    __CORRECT_WORDS[are]="aer rea"
     __CORRECT_WORDS[the]="teh hte eht eth"
     __CORRECT_WORDS[this]="tihs"
     __CORRECT_WORDS[they]="tehy ethy"
