@@ -666,9 +666,8 @@ cd ..
 
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
 
-[[ -f "$escapeRemover" ]] && {
+test -f "$escapeRemover" ]] && \
     "$escapeRemover" "$logfile" > "$INSTALLER_DIR/log.txt"
-}
 
 #rm -rf "$INSTALLER_DIR"
 prettyPrint "Done!!!!!!"
