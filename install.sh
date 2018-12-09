@@ -16,7 +16,6 @@
 # <user> ALL=(ALL) NOPASSWD:ALL
 
 OS_TYPE="$(uname -s)"
-d
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
