@@ -1151,11 +1151,14 @@ c(){
     exists ccat && {
         for file in "$@";do
             {
-                ccat "$file" 2>/dev/null || break
+                ccat "$file" 2>/dev/null || {
+                    logg "bad ccat"
+                    break
+                }
             } | nl -b a
             (( counter++ ))
         done
-        logg "counts are $counter and $@"
+        logg "counts are $counter and $#"
         if (( $counter != $# )); then
             cat -n "$@"
         fi
