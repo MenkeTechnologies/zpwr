@@ -1148,7 +1148,7 @@ boxesPrint(){
 c(){
     local counter
     counter=0
-    set +o pipefail
+    set -o pipefail
     exists ccat && {
         for file in "$@";do
                 ccat "$file" 2>/dev/null | nl -b a || {
@@ -1163,7 +1163,7 @@ c(){
             cat -n "$@"
         fi
     } || cat -n "$@"
-    set -o pipefail
+    set +o pipefail
 }
 
 
