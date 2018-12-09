@@ -123,21 +123,6 @@ alias l="clearList"
 alias r="cd .."
 alias t="cd /"
 alias ca='cat -n'
-c(){
-    local counter
-    counter=0
-    exists ccat && {
-        for file in "$@";do
-            {
-                ccat "$file" 2>/dev/null || break
-            } | nl -b a
-            (( counter++ ))
-        done
-        if (( $counter != $# )); then
-            cat -n "$@"
-        fi
-    } || cat -n "$@"
-}
 alias sa='sudo cat -n'
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python2"
@@ -1158,6 +1143,23 @@ boxesPrint(){
     printf "$1"
     perl -E "print '$spaceChar' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
     echo
+}
+
+c(){
+    local counter
+    counter=0
+    exists ccat && {
+        for file in "$@";do
+            {
+                ccat "$file" 2>/dev/null || break
+            } | nl -b a
+            (( counter++ ))
+        done
+        logg counts are $counter and $@
+        if (( $counter != $# )); then
+            cat -n "$@"
+        fi
+    } || cat -n "$@"
 }
 
 
