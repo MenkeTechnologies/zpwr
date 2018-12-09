@@ -1012,7 +1012,7 @@ if (( $version > 5.2 )); then
 fi
 
 endofline(){
-    if [[ $BUFFER[-1] != " " ]]; then
+    if [[ $BUFFER[-1] = ";" ]]; then
         BUFFER+=" "
     fi
     CURSOR=$#BUFFER
