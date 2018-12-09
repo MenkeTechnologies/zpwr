@@ -1151,15 +1151,15 @@ c(){
     exists ccat && {
         echo | ccat &>/dev/null && {
             for file in "$@";do
-                    printf "\x1b[34;1;4m$file\x1b[0m\n"
+                    if (( $# > 1)); then
+                        printf "\x1b[34;1;4m$file\x1b[0m\n"
+                    fi
                     ccat "$file" | nl -b a
                     (( counter++ ))
-                    echo
             done
         } || cat -n "$@"
     } || cat -n "$@"
 }
-
 
 #}}}***********************************************************
 
