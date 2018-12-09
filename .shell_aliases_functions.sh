@@ -228,10 +228,20 @@ else
         test -z "$distroName" && {
             distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
         }
-
-        [[ "$distroName" == raspbian ]] && {
-            source "$HOME/.rpitokens.sh"
-        }
+        case $distroName in
+            (raspbian)
+                source "$HOME/.rpitokens.sh"
+                ;;
+            (ubuntu|debian|kali|linuxmint) :
+                ;;
+            (fedora|centos|rhel)
+    alias exa='exa --git -il -F -H --color-scale -g -a'
+                ;;
+            (*suse*) :
+                ;;
+            (*) :
+                ;;
+        esac
     fi
 
     exists vim && { 
