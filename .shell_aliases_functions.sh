@@ -1152,8 +1152,10 @@ c(){
     exists ccat && {
         for file in "$@";do
                 ccat "$file" 2>/dev/null | nl -b a || {
+                    logg breaking
                     break
                 }
+            logg incrementing
             (( counter++ ))
         done
         logg "counts are $counter and $#"
