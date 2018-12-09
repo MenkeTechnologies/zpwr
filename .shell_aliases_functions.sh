@@ -122,7 +122,11 @@ alias la="clearList"
 alias l="clearList"
 alias r="cd .."
 alias t="cd /"
-alias c='cat -n'
+c(){
+    exists ccat && {
+        ccat "$@" | nl
+    } || cat -n "$@"
+}
 alias sa='sudo cat -n'
 [[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
 alias p2="python2"
