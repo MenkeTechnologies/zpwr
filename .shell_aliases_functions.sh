@@ -1155,7 +1155,7 @@ c(){
             } | nl -b a
             (( counter++ ))
         done
-        logg counts are $counter and $@
+        logg "counts are $counter and $@"
         if (( $counter != $# )); then
             cat -n "$@"
         fi
