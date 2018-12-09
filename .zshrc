@@ -1107,6 +1107,9 @@ setopt rc_expand_param
 
 #display octal and hex like C
 setopt cbases
+
+#any failing command in pipeline fails entire pipeline
+setopt pipefail
 #}}}***********************************************************
 
 #{{{                    MARK:AutoCompletions
