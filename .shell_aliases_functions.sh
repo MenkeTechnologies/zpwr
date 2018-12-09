@@ -1146,7 +1146,6 @@ boxesPrint(){
 }
 
 c(){
-    set -x
     exists ccat && {
         echo | ccat &>/dev/null && {
             for file in "$@";do
