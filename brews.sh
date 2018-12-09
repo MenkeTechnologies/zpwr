@@ -50,6 +50,8 @@ brew install crystal
 brew install cscope
 brew install ctags
 brew install ctop
+brew install cunit
+brew install curl-openssl
 brew install cython
 brew install dart
 brew install dbus
@@ -61,6 +63,7 @@ brew install eigen
 brew install elixir
 brew install emacs
 brew install erlang
+brew install exa
 brew install expat
 brew install faac
 brew install faad2
@@ -177,6 +180,7 @@ brew install librsvg
 brew install libsamplerate
 brew install libshout
 brew install libsigsegv
+brew install libsmi
 brew install libsodium
 brew install libsoup
 brew install libssh
@@ -208,6 +212,7 @@ brew install maven
 brew install mercurial
 brew install midnight-commander
 brew install minicom
+brew install mksh
 brew install mongodb
 brew install mono
 brew install mp3blaster
@@ -350,7 +355,6 @@ brew install x265
 brew install xvid
 brew install xz
 brew install yasm
-brew install youtube-dl
 brew install zlib
 brew install zplug
 brew install zsh

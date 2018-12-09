@@ -58,6 +58,7 @@ brew cask install pycharm-ce
 brew cask install qt-creator
 brew cask install racket
 brew cask install rar
+brew cask install react-studio
 brew cask install rider
 brew cask install robo-3t
 brew cask install rowanj-gitx
