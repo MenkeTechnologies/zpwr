@@ -1148,21 +1148,16 @@ boxesPrint(){
 c(){
     local counter
     counter=0
-    set -o pipefail
     exists ccat && {
-        for file in "$@";do
-            printf "\x1b[34;1;4m$file\x1b[0m\n"
-                ccat "$file" 2>/dev/null | nl -b a || {
-                    break
-                }
-            (( counter++ ))
-            echo
-        done
-        if (( $counter != $# )); then
-            cat -n "$@"
-        fi
+        echo | ccat &>/dev/null && {
+            for file in "$@";do
+                    printf "\x1b[34;1;4m$file\x1b[0m\n"
+                    ccat "$file" | nl -b a
+                    (( counter++ ))
+                    echo
+            done
+        } || cat -n "$@"
     } || cat -n "$@"
-    set +o pipefail
 }
 
 
