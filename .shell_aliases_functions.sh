@@ -124,7 +124,7 @@ alias r="cd .."
 alias t="cd /"
 c(){
     exists ccat && {
-        ccat "$@" | nl
+        { ccat "$@" 2>/dev/null || cat "$@"; } | nl
     } || cat -n "$@"
 }
 alias sa='sudo cat -n'
