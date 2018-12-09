@@ -124,8 +124,18 @@ alias r="cd .."
 alias t="cd /"
 alias ca='cat -n'
 c(){
+    local counter
+    counter=0
     exists ccat && {
-        { ccat "$@" 2>/dev/null || cat "$@"; } | nl -b a
+        for file in "$@";do
+            {
+                ccat "$file" 2>/dev/null || break
+            } | nl -b a
+            (( counter++ ))
+        done
+        if (( $counter != $# )); then
+            cat -n "$@"
+        fi
     } || cat -n "$@"
 }
 alias sa='sudo cat -n'
