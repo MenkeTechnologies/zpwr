@@ -1146,17 +1146,14 @@ boxesPrint(){
 }
 
 c(){
-    local counter
-    counter=0
+    set -x
     exists ccat && {
-        set -x
         echo | ccat &>/dev/null && {
             for file in "$@";do
                     if (( $# > 1)); then
                         printf "\x1b[34;1;4m$file\x1b[0m\n"
                     fi
                     ccat "$file" | nl -b a
-                    (( counter++ ))
             done
         } || cat -n "$@"
     } || cat -n "$@"
