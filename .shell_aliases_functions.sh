@@ -1148,14 +1148,12 @@ boxesPrint(){
 c(){
     local counter
     counter=0
+    set +o pipefail
     exists ccat && {
         for file in "$@";do
-            {
-                ccat "$file" 2>/dev/null || {
+                ccat "$file" 2>/dev/null | nl -b a || {
                     break
-                    logg "bad ccat"
                 }
-            } | nl -b a
             (( counter++ ))
         done
         logg "counts are $counter and $#"
@@ -1163,6 +1161,7 @@ c(){
             cat -n "$@"
         fi
     } || cat -n "$@"
+    set -o pipefail
 }
 
 
