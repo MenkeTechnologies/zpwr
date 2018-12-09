@@ -122,6 +122,7 @@ alias la="clearList"
 alias l="clearList"
 alias r="cd .."
 alias t="cd /"
+alias ca='cat -n'
 c(){
     exists ccat && {
         { ccat "$@" 2>/dev/null || cat "$@"; } | nl -b a
