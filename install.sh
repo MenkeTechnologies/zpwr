@@ -121,7 +121,7 @@ addDependenciesFreeBSD(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=("git --without-completions" fortune node the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=("git --without-completions" exa fortune node the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
@@ -338,6 +338,12 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     else
         prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
     fi
+
+    exists exa || {
+        exists cargo || curl https://sh.rustup.rs -sSf | sh
+        prettyPrint "Installing Exa with Cargo"
+        cargo install exa
+    }
 
 else
     #unix
