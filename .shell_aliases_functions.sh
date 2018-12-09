@@ -1151,14 +1151,13 @@ c(){
     set -o pipefail
     exists ccat && {
         for file in "$@";do
+            printf "\x1b[34;1;4m$file\x1b[0m\n"
                 ccat "$file" 2>/dev/null | nl -b a || {
-                    logg breaking
                     break
                 }
-            logg incrementing
             (( counter++ ))
+            echo
         done
-        logg "counts are $counter and $#"
         if (( $counter != $# )); then
             cat -n "$@"
         fi
