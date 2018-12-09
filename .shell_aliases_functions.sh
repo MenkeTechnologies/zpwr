@@ -1152,8 +1152,8 @@ c(){
         for file in "$@";do
             {
                 ccat "$file" 2>/dev/null || {
-                    logg "bad ccat"
                     break
+                    logg "bad ccat"
                 }
             } | nl -b a
             (( counter++ ))
