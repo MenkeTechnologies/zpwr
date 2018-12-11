@@ -1,60 +1,49 @@
 snippet sig "My Signature" b
 #created by `whoami | tr 'a-z' 'A-Z'''''` at `date`
 endsnippet
-
 snippet mypy ""
 `!p import os
 if not snip.c:
 	snip.rv = os.environ.items()`
 endsnippet
-
 snippet fmarker "simple marker"
-#{{{                    MARK:$1
+#{{{ MARK:$1
 #**************************************************************
 endsnippet
-
 snippet fm "complete fold marker"
-#{{{                    MARK:$1
+#{{{ MARK:$1
 #**************************************************************
 $2
 #}}}***********************************************************
 endsnippet
-		
-
 snippet endmark "simple marker"
 #**************************************************************
 #}}}
 $1
 endsnippet
-
 snippet marker "description"
 #**************************************************************
-#                       MARK:$1
+# MARK:$1
 #**************************************************************
-endsnippet	
-
-
+endsnippet
 snippet sect "section"
 ##########################################
-###############  $1  ##############
+############### $1  ##############
 ##########################################
 endsnippet
-
 snippet email "my email"
 jamenk@email.wm.edu
 endsnippet
-
 snippet temp "default header"
 #!/usr/bin/env $1
-#{{{                    MARK:Header
+#{{{ MARK:Header
 #**************************************************************
-#####   Author: `whoami | tr 'a-z' 'A-Z'`
-#####   Date: `date`
-#####   Purpose: $1 script to $2 
-#####   Notes: 
+##### Author: `whoami | tr 'a-z' 'A-Z'`
+##### Date: `date`
+##### Purpose: $1 script to $2
+##### Notes:
 #}}}***********************************************************
 endsnippet
-
 snippet evil "evil skull"
 #        .n                   .                 .                  n.
 #  .   .dP                  dP                   9b                 9b.    .
@@ -77,7 +66,4 @@ snippet evil "evil skull"
 #                              \`b  \`       '  d'
 
 endsnippet
-
-
-
 
