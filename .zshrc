@@ -1263,21 +1263,27 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
     alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}bb='&>> "$LOGFILE'"$__TS"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
     alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$__TS@$__TS@g'"
+    #default value tabstops
+    alias -g ${__GLOBAL_ALIAS_PREFIX}see="| sed -E 's@$__TS.*@$__TS@g'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}seee="| sed -E 's@$__TS.@$__TS(&)@g'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}sp="| sed -n '$__TS,\$p'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '$__T' "
+    alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '$__TS' '$__TS'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail"
     alias -g ${__GLOBAL_ALIAS_PREFIX}w='| wc -l'
     alias -g ${__GLOBAL_ALIAS_PREFIX}nn="> /dev/null 2>&1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}oo='&>> "$LOGFILE'"$__TS"'"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}n="2> /dev/null"
     alias -g ${__GLOBAL_ALIAS_PREFIX}e='|& fgrep -v "grep" |& \egrep --color=always -i'
     alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say $__TS'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
     alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}uu="| awk '{$__TS}' | uniq -c | sort -rn | head -10"
     alias -g ${__GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
 
 
@@ -1604,6 +1610,11 @@ fzf_setup(){
     echo "$SHELL" | grep -q "zsh" && ps='$pipestatus[1]' || \
         ps='${PIPESTATUS[0]}'
 
+    #default value for rougify theme
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
+        --border '"$__COMMON_FZF_ELEMENTS"' --preview \
+        "[[ -f {} ]] && rougify -t '"$__TS$ROUGIFY_THEME"' {} \
+        2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
         "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} \
