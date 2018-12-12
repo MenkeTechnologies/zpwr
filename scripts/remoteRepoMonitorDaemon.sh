@@ -40,7 +40,7 @@ main(){
 refreshers(){
     #create new zsh in right pane
     #space for safety as C-c tends to cut off first character
-    tmux send-keys -t right C-c C-c C-c " tmux  source-file ~/.tmux.conf; nz" C-m
+    tmux send-keys -t right C-c C-c C-c " tmux source-file ~/.tmux.conf; nz" C-m
     tmux display-message "Got the latest code!"
     #tmux kill-server
     #pid="$(ps -ef | grep sshd | grep @pts | awk '{print $2}')"

@@ -343,6 +343,7 @@ dbz() {
     zle .accept-line
 }
 
+__EXPAND=true
 expand-aliases() {
     __EXPAND=true
     #set -x
