@@ -148,7 +148,7 @@ alias -r > "$HOME/.common_aliases"
 #{{{                    MARK:Custom Fxns
 #**************************************************************
 __GLOBAL_ALIAS_PREFIX=j
-__TS=______
+__TS=________
 
 sub (){
     zle .kill-whole-line
