@@ -147,7 +147,8 @@ alias -r > "$HOME/.common_aliases"
 
 #{{{                    MARK:Custom Fxns
 #**************************************************************
-
+__GLOBAL_ALIAS_PREFIX=j
+__TS=______
 
 sub (){
     zle .kill-whole-line
@@ -338,6 +339,7 @@ dbz() {
 }
 
 expand-aliases() {
+    __EXPAND=true
     #set -x
     if (( $CURSOR != $#BUFFER )); then
         zle _expand_alias
@@ -364,6 +366,13 @@ expand-aliases() {
                     #[[ ${LBUFFER:0:1} != '"' ]] && \
                     {
                         zle _expand_alias
+                        lenToFirstTS=${#BUFFER%%$__TS*}
+                        if (( $lenToFirstTS < ${#BUFFER} )); then
+                            __EXPAND=false
+                            CURSOR=$lenToFirstTS
+                            RBUFFER=${RBUFFER:$#__TS}
+                        fi
+                     
                         #unset 'functions[_expand-aliases]'
                         #functions[_expand-aliases]=$BUFFER
                         #(($+functions[_expand-aliases])) &&
@@ -378,7 +387,6 @@ expand-aliases() {
             }
 
     fi
-    set +x
 }
 __COUNTER=0
 
@@ -1012,11 +1020,18 @@ if (( $version > 5.2 )); then
 fi
 
 endofline(){
-    if [[ $BUFFER[-1] = ";" ]]; then
-        BUFFER+=" "
+    lenToFirstTS=${#BUFFER%%$__TS*}
+    if (( $lenToFirstTS < ${#BUFFER} )); then
+        CURSOR=$lenToFirstTS
+        RBUFFER=${RBUFFER:$#__TS}
+    else
+        if [[ $BUFFER[-1] = ";" ]]; then
+            BUFFER+=" "
+        fi
+        CURSOR=$#BUFFER
+        zle vi-insert
     fi
-    CURSOR=$#BUFFER
-    zle vi-insert
+
 }
 
 zle -N endofline
@@ -1237,24 +1252,23 @@ zstyle ':completion:*' ignored-patterns '*.'
 
 #{{{                    MARK:Global Aliases
 #**************************************************************
-__GLOBAL_ALIAS_PREFIX=j
 globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -rMN'
     alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
     alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {} {printf \"%s\\n\", \$1} END {}'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}se="| sed -E 's@@@g'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}sp="| sed -n ',\$p'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '' "
+    alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$__TS@$__TS@g'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}sp="| sed -n '$__TS,\$p'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '$__T' "
     alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail"
     alias -g ${__GLOBAL_ALIAS_PREFIX}w='| wc -l'
     alias -g ${__GLOBAL_ALIAS_PREFIX}nn="> /dev/null 2>&1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}n="2> /dev/null"
     alias -g ${__GLOBAL_ALIAS_PREFIX}e='|& fgrep -v "grep" |& \egrep --color=always -i'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say $__TS'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
     alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
@@ -1376,7 +1390,7 @@ supernatural-space() {
 
         {
             alias -g | grep -q "^$lastWord" || {
-                        #
+                #global alias expansion
                 [[ $CURSOR == $#BUFFER ]] && \
                 [[ $LBUFFER[-1] != '"' ]] && \
                 zle expand-word
@@ -1388,7 +1402,9 @@ supernatural-space() {
 
     zle expand-history
 
-    zle self-insert
+    if [[ $__EXPAND == true ]];then
+        zle self-insert
+    fi
 }
 
 terminate-space(){
