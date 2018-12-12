@@ -447,7 +447,7 @@ suc(){
 
 clearList () {
     if [[ "$(uname)" == "Darwin" ]]; then
-        exists exa && ls_command="exa --git -il -F -H --extended --color-scale -g -a" || {
+        exists exa && ls_command="command exa --git -il -F -H --extended --color-scale -g -a" || {
             exists grc && {
                 ls_command="grc -c $HOME/conf.gls \
                 gls -iFlhA --color=always"
@@ -458,7 +458,7 @@ clearList () {
         lib_command="otool -L"
     elif [[ "$(uname)" == Linux ]];then
 
-        exists exa && ls_command="exa --git -il -F -H --extended --color-scale -g -a" || {
+        exists exa && ls_command="command exa --git -il -F -H --extended --color-scale -g -a" || {
             exists grc && {
                 ls_command="grc -c $HOME/conf.gls \
                 ls -iFlhA --color=always"
