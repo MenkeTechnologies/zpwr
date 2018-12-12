@@ -426,7 +426,7 @@ source "$INSTALLER_DIR/pip_install.sh"
 
 prettyPrint "Installing Ultisnips snippets"
 cd "$INSTALLER_DIR"
-cp -R Ultisnips "$HOME/.vim"
+cp -R "$INSTALLER_DIR/Ultisnips" "$HOME/.vim"
 
 case "$distroName" in
     (*suse*|ubuntu|debian|linuxmint|raspbian)
