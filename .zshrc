@@ -145,10 +145,15 @@ alias -r > "$HOME/.common_aliases"
 
 #}}}***********************************************************
 
-#{{{                    MARK:Custom Fxns
+
+#{{{                    MARK:Global Vars for Global Aliases
 #**************************************************************
 __GLOBAL_ALIAS_PREFIX=j
-__TS=________
+__TS=__________
+#}}}***********************************************************
+
+#{{{                    MARK:Custom Fxns
+#**************************************************************
 
 sub (){
     zle .kill-whole-line
@@ -1019,7 +1024,7 @@ if (( $version > 5.2 )); then
     done
 fi
 
-endofline(){
+EOLorNextTabStop(){
     lenToFirstTS=${#BUFFER%%$__TS*}
     if (( $lenToFirstTS < ${#BUFFER} )); then
         CURSOR=$lenToFirstTS
@@ -1034,13 +1039,13 @@ endofline(){
 
 }
 
-zle -N endofline
+zle -N EOLorNextTabStop
 
 bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 bindkey -M viins '^[^M' self-insert-unmeta
-bindkey -M viins '^P' endofline
-bindkey -M vicmd '^P' endofline
+bindkey -M viins '^P' EOLorNextTabStop
+bindkey -M vicmd '^P' EOLorNextTabStop
 bindkey -M vicmd G end-of-buffer-or-history
 
 # RPROMPT shows vim modes (insert vs normal)
