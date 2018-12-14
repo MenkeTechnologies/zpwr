@@ -539,7 +539,7 @@ clearList () {
 }
 
 listNoClear () {
-    exists exa && exa --git -il -F -H --extended --color-scale -g -a && return 0
+    exists exa && command exa --git -il -F -H --extended --color-scale -g -a && return 0
 
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
