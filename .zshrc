@@ -1274,7 +1274,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}sp="| sed -n '$__TS,\$p'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '$__TS' '$__TS'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}w='| wc -l'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}wc='| wc -l'
     alias -g ${__GLOBAL_ALIAS_PREFIX}nn="> /dev/null 2>&1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}oo='&>> "$LOGFILE'"$__TS"'"'
@@ -1289,6 +1289,9 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
         '$__TS'
     fi'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}w='while [[ true'$__TS' ]];do
+        '$__TS'
+    done'
     alias -g ${__GLOBAL_ALIAS_PREFIX}fe='for i in '$__TS';do
         '$__TS'
     done'
