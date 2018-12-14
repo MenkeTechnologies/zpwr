@@ -366,7 +366,8 @@ expand-aliases() {
     else
             alias -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
                 #dont expand first word if \,' or "
-                [[ -z $(alias -g -- $LBUFFER) ]] && {
+                #[[ -z alias -g -- $LBUFFER) ]] && {
+                [[ true ]] && {
                     #[[ ${LBUFFER:0:1} != '\' ]] && \
                     #[[ ${LBUFFER:0:1} != "'" ]] && \
                     #[[ ${LBUFFER:0:1} != '"' ]] && \
@@ -1285,6 +1286,12 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
     alias -g ${__GLOBAL_ALIAS_PREFIX}uu="| awk '{$__TS}' | uniq -c | sort -rn | head -10"
     alias -g ${__GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
+        '$__TS'
+    fi'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}fe='for in '$__TS';do
+        '$__TS'
+    done'
 
 
     if [[ "$(uname)" == Darwin ]]; then
@@ -1361,7 +1368,8 @@ supernatural-space() {
         [[ ${LBUFFER:0:1} != '=' ]] && {
             alias -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
                 #dont expand first word if \,' or "
-                    [[ -z $(alias -g -- $LBUFFER) ]] && {
+                    #[[ -z $(alias -g -- $LBUFFER) ]] && {
+                    [[ true ]] && {
                         [[ ${LBUFFER:0:1} != '\' ]] && \
                         [[ ${LBUFFER:0:1} != "'" ]] && \
                         [[ ${LBUFFER:0:1} != '"' ]] && \
