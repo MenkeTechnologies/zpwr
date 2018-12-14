@@ -1268,8 +1268,8 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$__TS@$__TS@g'"
     #default value tabstops
-    alias -g ${__GLOBAL_ALIAS_PREFIX}see="| sed -E 's@$__TS.*@$__TS@g'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}seee="| sed -E 's@$__TS.@$__TS(&)@g'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}see="| sed -E 's@.*$__TS@$__TS@g'"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}seee="| sed -E 's@.$__TS@(&)$__TS@g'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}sp="| sed -n '$__TS,\$p'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '$__TS' '$__TS'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail"
@@ -1337,6 +1337,7 @@ supernatural-space() {
     __CORRECT_WORDS[block]="blokc bolck lbock"
     __CORRECT_WORDS[high]="hgih hihg ihgh"
     __CORRECT_WORDS[probe]="porbe rpobe"
+    __CORRECT_WORDS[network]="newtork entwork ntework"
 
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(print -r -- $LBUFFER | tr -d "()[]{}\$,%'\"" )"
@@ -1613,7 +1614,7 @@ fzf_setup(){
     #default value for rougify theme
     alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
-        "[[ -f {} ]] && rougify -t '"$__TS$ROUGIFY_THEME"' {} \
+        "[[ -f {} ]] && rougify -t '"$ROUGIFY_THEME$__TS"' {} \
         2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
