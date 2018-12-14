@@ -1289,7 +1289,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
         '$__TS'
     fi'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}fe='for in '$__TS';do
+    alias -g ${__GLOBAL_ALIAS_PREFIX}fe='for i in '$__TS';do
         '$__TS'
     done'
 
