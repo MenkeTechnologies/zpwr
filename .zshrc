@@ -1341,6 +1341,7 @@ supernatural-space() {
     __CORRECT_WORDS[probe]="porbe rpobe"
     __CORRECT_WORDS[radius]="radisu raduis"
     __CORRECT_WORDS[range]="rnage arnge"
+    __CORRECT_WORDS[spelling]="spellign spelilng"
     __CORRECT_WORDS[state]="staet steta sttae"
     __CORRECT_WORDS[store]="sotre"
     __CORRECT_WORDS[than]="tahn"
