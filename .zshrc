@@ -1331,6 +1331,7 @@ supernatural-space() {
     __CORRECT_WORDS[is]="si"
     __CORRECT_WORDS[inside]="insdie inisde isnide sindie"
     __CORRECT_WORDS[just]="jsut jutsi just"
+    __CORRECT_WORDS[like]="liek"
     __CORRECT_WORDS[mount]="mounr mounf"
     __CORRECT_WORDS[namespace]="namepsace naemspace naempsace"
     __CORRECT_WORDS[not]="nto tno"
