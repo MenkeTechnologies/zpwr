@@ -4,3 +4,4 @@ Custom Postfix Templates
 BashSupport
 Rainbow Brackets
 Nyan Progress Bar
+Extra Icons
