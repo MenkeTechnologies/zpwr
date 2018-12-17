@@ -1318,6 +1318,7 @@ supernatural-space() {
     __CORRECT_WORDS[based]="baesd absed"
     __CORRECT_WORDS[block]="blokc bolck lbock"
     __CORRECT_WORDS[capture]="catpure catprue caputre"
+    __CORRECT_WORDS[custom]="custmo cusotm"
     __CORRECT_WORDS[directory]="direcotry direcorty directroy"
     __CORRECT_WORDS[echo]="ehco ceho ecoh"
     __CORRECT_WORDS[file]="feil fiel"
@@ -1334,8 +1335,8 @@ supernatural-space() {
     __CORRECT_WORDS[namespace]="namepsace naemspace naempsace"
     __CORRECT_WORDS[not]="nto tno"
     __CORRECT_WORDS[of]="fo"
-    __CORRECT_WORDS[print]="pirtn pirnt"
-    __CORRECT_WORDS[with]="with wiht"
+    __CORRECT_WORDS[outside]="otuside outsdie"
+    __CORRECT_WORDS[over]="voer ovre"
     __CORRECT_WORDS[network]="newtork entwork ntework"
     __CORRECT_WORDS[point]="opint ponit"
     __CORRECT_WORDS[print]="pirnt rpint prnit"
@@ -1355,6 +1356,7 @@ supernatural-space() {
     __CORRECT_WORDS[to]="ot"
     __CORRECT_WORDS[using]="suing usnig"
     __CORRECT_WORDS[value]="vlaue valeu"
+    __CORRECT_WORDS[with]="with wiht"
     __CORRECT_WORDS[why]="hwy wyh"
 
     local TEMP_BUFFER mywords badWords
