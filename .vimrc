@@ -953,9 +953,36 @@ set thesaurus+=~/mthesaur.txt
 
 source ~/.oh-my-zsh/custom/plugins/fzf/plugin/fzf.vim 
 
+
 "easier mapping for dict completion
 inoremap <silent> <F10> <C-X><C-K>
 "easier mapping for thesaurus completion
 inoremap <silent> <F11> <C-X><C-T>
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+let g:fzf_layout = { 'down': '~50%' }
+
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap('ag',
+            \ {'options': "--preview 'rougify -t github $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
+
+
+command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options':"--preview 'test -f {} && { rougify -t github {} | nl -b a; } || stat {}'"}))
+
+nnoremap <silent> <C-D>p :Files<CR>
+nnoremap <silent> <C-D>a :Ag<CR>
 
 "}}}*****************za******************************************
