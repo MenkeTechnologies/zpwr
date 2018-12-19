@@ -8,6 +8,7 @@ sjl/clam.vim
 ctrlpvim/ctrlp.vim
 raimondi/delimitmate
 mattn/emmet-vim
+junegunn/fzf.vim
 othree/html5.vim
 Yggdroot/indentLine
 Shougo/neobundle.vim
