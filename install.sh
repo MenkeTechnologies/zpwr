@@ -95,7 +95,7 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary+=(openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel mysql-devel libevent-devel postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel \
+    dependencies_ary+=(autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel mysql-devel libevent-devel postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel net-tools-deprecated \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel) 
 
 }
