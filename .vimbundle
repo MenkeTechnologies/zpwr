@@ -3,6 +3,7 @@ MenkeTechnologies/VimColorSchemes
 VundleVim/Vundle.vim
 Valloric/YouCompleteMe
 mileszs/ack.vim
+w0rp/ale
 vim-scripts/camelcasemotion
 sjl/clam.vim
 ctrlpvim/ctrlp.vim
