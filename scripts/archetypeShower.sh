@@ -1,13 +1,4 @@
 #!/usr/bin/env bash
-:Ag test
-
-
-
-q
-
-
-
-
 #{{{ MARK:Header
 #**************************************************************
 ##### Author: JACOBMENKE
@@ -22,4 +13,3 @@ while true; do
     screenfetch 2>/dev/null
     sleep 1000
 done
-
