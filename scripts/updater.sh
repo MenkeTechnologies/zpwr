@@ -33,12 +33,10 @@ while getopts ":hvse" opt
 do
     case $opt in
 
-        h|he:lp ) usage; exit 0   ;;
+        h|help ) usage; exit 0   ;;
         s|skip ) skip=true ;;
         e|end ) end=true ;;
-
         v|version ) echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
-
         * ) echo -e "\n Option does not exist : $OPTARG\n"
             usage; exit 1 ;;
 
