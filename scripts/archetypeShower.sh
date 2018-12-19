@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+:Ag test
+
+
+
+q
+
+
+
+
 #{{{ MARK:Header
 #**************************************************************
 ##### Author: JACOBMENKE
