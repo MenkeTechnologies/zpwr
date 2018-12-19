@@ -985,8 +985,7 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '~50%' }
 
 "give :Ag preview window with first line of matched file matches fzf input
-command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap('ag',
-            \ {'options': "--preview 'rougify -t ".expand("$ROUGIFY_THEME")." $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
+command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'rougify -t ".expand("$ROUGIFY_THEME")." $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
 
 
 "give :Files preview window
