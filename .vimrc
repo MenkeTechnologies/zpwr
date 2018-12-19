@@ -959,6 +959,7 @@ inoremap <silent> <F10> <C-X><C-K>
 "easier mapping for thesaurus completion
 inoremap <silent> <F11> <C-X><C-T>
 
+"use vim colorscheme colors
 let g:fzf_colors =
 \ { 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
@@ -974,17 +975,21 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+"default keybindings
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
   \ 'ctrl-v': 'vsplit' }
 
+"default fzf location and size
 let g:fzf_layout = { 'down': '~50%' }
 
+"give :Ag preview window with first line of matched file matches fzf input
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap('ag',
             \ {'options': "--preview 'rougify -t ".expand("$ROUGIFY_THEME")." $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
 
 
+"give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { rougify -t ".expand("$ROUGIFY_THEME")." {} | nl -b a; } || stat {}'"}))
 
 nnoremap <silent> <C-D>p :Files<CR>
