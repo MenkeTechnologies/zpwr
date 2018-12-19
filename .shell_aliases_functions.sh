@@ -445,7 +445,7 @@ suc(){
     python3 "$PYSCRIPTS/textEditorTwoColumns.py"
 }
 
-clearList () {
+clearList() {
     if [[ "$(uname)" == "Darwin" ]]; then
         exists exa && ls_command="command exa --git -il -F -H --extended --color-scale -g -a" || {
             exists grc && {
