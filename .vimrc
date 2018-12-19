@@ -974,6 +974,11 @@ let g:fzf_colors =
   \ 'spinner': ['fg', 'Label'],
   \ 'header':  ['fg', 'Comment'] }
 
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
 let g:fzf_layout = { 'down': '~50%' }
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap('ag',
