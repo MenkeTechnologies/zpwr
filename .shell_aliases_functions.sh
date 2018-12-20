@@ -1161,7 +1161,7 @@ c(){
 set +x
 }
 fz(){
-    ag '.' --color| fzf --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && pygmentize -g $(cut -d: -f1 <<< {}) \
+    command ag '.' --color| fzf --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && pygmentize -g $(cut -d: -f1 <<< {}) \
         2>/dev/null | cat -n | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | cut -d ':' -f1
 }
 
