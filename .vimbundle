@@ -33,6 +33,7 @@ MattesGroeger/vim-bookmarks
 ryanoasis/vim-devicons
 MenkeTechnologies/vim-dispatch
 easymotion/vim-easymotion
+tpope/vim-fugitive
 dahu/vim-lotr
 jeetsukumaran/vim-markology
 severin-lemaignan/vim-minimap
