@@ -42,7 +42,7 @@ do
 
         esac # --- end of case ---
 done
-shift $(($OPTIND-1))
+shift $((OPTIND-1))
 
 # clear screen
 trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
@@ -55,7 +55,6 @@ prettyPrint(){
 }
 
 alternatingPrettyPrint(){
-    counter=0
 
     if [[ -z "$1" ]]; then
         cat | perl -F"$DELIMITER_CHAR" -anE '
@@ -186,7 +185,7 @@ if [[ $skip != true ]]; then
     exists cpanm && {
         prettyPrint "Updating Perl Packages"
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
-        if [[ ! -z "$perlOutdated" ]]; then
+        if [[ -n "$perlOutdated" ]]; then
             echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
         fi
     }
@@ -233,18 +232,18 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
         sudo zypper --non-interactive update
         sudo zypper --non-interactive dist-upgrade
         sudo zypper --non-interactive clean -a'
-        cat "$SCRIPTS/pipUpdater.sh" | ssh -x "$hostname" "cat | bash"
+        ssh -x "$hostname" "cat | bash" < "$SCRIPTS/pipUpdater.sh"
     elif [[ "$manager" == dnf ]]; then
         ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'
-        cat "$SCRIPTS/pipUpdater.sh" | ssh -x "$hostname" "cat | bash"
+        ssh -x "$hostname" "cat | bash" < "$SCRIPTS/pipUpdater.sh"
     else
         :
     fi
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to use string after ssh
-    cat "$SCRIPTS/rpiSoftwareUpdater.sh" | ssh -x "$hostname" "cat | bash "
+    ssh -x "$hostname" "cat | bash " < "$SCRIPTS/rpiSoftwareUpdater.sh"
 }
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for
