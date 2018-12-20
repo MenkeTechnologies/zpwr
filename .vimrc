@@ -985,17 +985,17 @@ let g:fzf_action = {
 let g:fzf_layout = { 'down': '~50%' }
 
 "give :Ag preview window with first line of matched file matches fzf input
-command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'rougify -t ".expand("$ROUGIFY_THEME")." $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
+command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'pygmentize -g $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'bottom':'50%'}))
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap("with_preview", {"options": '--delimiter : --nth 4.. --preview'}))
 
 
 "give :Files preview window
-command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { rougify -t ".expand("$ROUGIFY_THEME")." {} | nl -b a; } || stat {}'"}))
+command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { pygmentize -g {} | nl -b a; } || stat {}'"}))
 
 nnoremap <silent> <C-D>p :Files<CR>
-nnoremap <silent> <C-D>a :Agg<CR>
+nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 
 "}}}*****************za******************************************
