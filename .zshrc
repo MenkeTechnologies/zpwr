@@ -711,10 +711,22 @@ updater() {
     zle .accept-line
 }
 
+intoFzf(){
+    BUFFER="$BUFFER | fzf --border"
+    zle .accept-line
+}
+
+intoFzfAg(){
+    BUFFER="$BUFFER $(fz)"
+    zle .accept-line
+}
+
 zle -N surround
 zle -N deleteMatching
 zle -N updater
 zle -N runner
+zle -N intoFzf
+zle -N intoFzfAg
 
 #vim mode is default
 bindkey -v
@@ -747,11 +759,20 @@ bindkey -M vicmd '^O' edit-command-line
 bindkey -M viins '^F^F' fzf-file-widget
 bindkey -M vicmd '^F^F' fzf-file-widget
 
+bindkey -M viins '^F^D' intoFzf
+bindkey -M vicmd '^F^D' intoFzf
+
+bindkey -M viins '^F^G' intoFzfAg
+bindkey -M vicmd '^F^G' intoFzfAg
+
 bindkey -M viins '^V^Z' fzf-history-widget
 bindkey -M vicmd '^V^Z' fzf-history-widget
 
 bindkey -M viins '^V^V' fzf-cd-widget
 bindkey -M vicmd '^V^V' fzf-cd-widget
+export FZF_COMPLETION_TRIGGER=';'
+
+#bindkey '^F^A' fzf-completion
 
 zle -N changeQuotes
 zle -N alternateQuotes
@@ -1345,6 +1366,7 @@ supernatural-space() {
     __CORRECT_WORDS[radius]="radisu raduis"
     __CORRECT_WORDS[range]="rnage arnge"
     __CORRECT_WORDS[runnning]="runnign"
+    __CORRECT_WORDS[single]="signle"
     __CORRECT_WORDS[spelling]="spellign spelilng"
     __CORRECT_WORDS[state]="staet steta sttae"
     __CORRECT_WORDS[store]="sotre"
@@ -1359,6 +1381,7 @@ supernatural-space() {
     __CORRECT_WORDS[value]="vlaue valeu"
     __CORRECT_WORDS[with]="with wiht"
     __CORRECT_WORDS[why]="hwy wyh"
+
 
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(print -r -- $LBUFFER | tr -d "()[]{}\$,%'\"" )"
@@ -1633,6 +1656,7 @@ colortest(){
 #{{{                    MARK:FZF
 #**************************************************************
 export ROUGIFY_THEME="github"
+export PYGMENTIZE_OPTS="-f terminal256 -O style=xcode -g"
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
@@ -1646,7 +1670,7 @@ fzf_setup(){
         2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
-        "[[ -f {} ]] && rougify -t $ROUGIFY_THEME {} \
+        "[[ -f {} ]] && pygmentize -g {} \
         2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
@@ -1655,14 +1679,14 @@ fzf_setup(){
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"[[ -f {} ]] && { print -r {} | command egrep \
         '\.jar$' && jar tf {} ; } \
-        || { rougify -t $ROUGIFY_THEME {} 2>/dev/null | \
+        || { pygmentize -g {} 2>/dev/null | \
         cat -n; rc=$ps; }; [[ \$rc = 0 ]] || \
         stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
-        '\.[jw]ar$' && jar tf {} ; } || { rougify -t \
-        $ROUGIFY_THEME {} 2>/dev/null || {
+        '\.[jw]ar$' && jar tf {} ; } || { pygmentize -g {} \
+        2>/dev/null || {
                 [[ -e {} ]] && stat {} | fold -80 | \
                 head -500 || {
                     source ~/.shell_aliases_functions.sh
@@ -1685,7 +1709,6 @@ fzf_setup(){
            }
         }
     }\""
-    export FZF_COMPLETION_TRIGGER=';'
 }
 
 fzf_setup
