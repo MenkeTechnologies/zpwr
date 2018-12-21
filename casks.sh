@@ -42,7 +42,6 @@ brew cask install libreoffice
 brew cask install little-snitch
 brew cask install macs-fan-control
 brew cask install macvim
-brew cask install microsoft-office
 brew cask install multibit-hd
 brew cask install mysqlworkbench
 brew cask install netbeans

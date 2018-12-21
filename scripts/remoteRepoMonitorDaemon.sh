@@ -53,7 +53,7 @@ while true; do
         echo "$(date) Directory $CONFIG_DIR does not exist" >&2
         if [[ ! -d "$BASE_DIR" ]]; then
             mkdir -pv "BASE_DIR"
-            cd "$BASE_DIR"
+            cd "$BASE_DIR" || exit 1
             echo "$(date) Created $CONFIG_DIR and exiting." >&2
             exit 1
         fi
@@ -62,7 +62,7 @@ while true; do
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
-    if [[ ! -z "$output" ]] ; then
+    if [[ -n "$output" ]] ; then
         echo "$(date) We have change to $(git remote -v)"
         main
     fi
@@ -71,7 +71,7 @@ while true; do
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
-    if [[ ! -z "$output" ]] ; then
+    if [[ -n "$output" ]] ; then
         echo "$(date) We have change to $(git remote -v)"
         gitters
         refreshers

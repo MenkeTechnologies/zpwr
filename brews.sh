@@ -1,6 +1,7 @@
 brew install aalib
 brew install ack
 brew install adns
+brew install algol68g
 brew install alpine
 brew install amap
 brew install angular-cli
@@ -203,7 +204,6 @@ brew install lolcat
 brew install lua
 brew install lua@5.1
 brew install luajit
-brew install macvim
 brew install mad
 brew install mailutils
 brew install makedepend
@@ -278,6 +278,7 @@ brew install py3cairo
 brew install pygobject3
 brew install python
 brew install python@2
+brew install qt
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis

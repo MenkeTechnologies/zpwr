@@ -26,7 +26,7 @@ printf "\e[0m"
 #checking for presence of sorted flag which is
 #set in getopts
 dontSummarizeSizes(){
-    [[ ! -z $sorted ]] && du -sh * | $sortedCommand -h || du -sh *
+    [[ -n $sorted ]] && du -sh * | $sortedCommand -h || du -sh *
 }
 
 #show just summarize size
