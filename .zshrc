@@ -1374,7 +1374,7 @@ supernatural-space() {
     __CORRECT_WORDS[that]="taht"
     __CORRECT_WORDS[the]="teh hte eht eth"
     __CORRECT_WORDS[they]="tehy ethy"
-    __CORRECT_WORDS[this]="tihs"
+    __CORRECT_WORDS[this]="tihs htis"
     __CORRECT_WORDS[then]="tehn"
     __CORRECT_WORDS[to]="ot"
     __CORRECT_WORDS[using]="suing usnig"
