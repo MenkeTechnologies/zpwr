@@ -953,11 +953,20 @@ set thesaurus+=~/mthesaur.txt
 
 source ~/.oh-my-zsh/custom/plugins/fzf/plugin/fzf.vim 
 
-
 "easier mapping for dict completion
 inoremap <silent> <F10> <C-X><C-K>
 "easier mapping for thesaurus completion
 inoremap <silent> <F11> <C-X><C-T>
+
+"default keybindings
+let g:fzf_action = {
+            \ 'ctrl-t': 'tab split',
+            \ 'ctrl-x': 'split',
+            \ 'ctrl-v': 'vsplit' }
+
+"default fzf location and size
+let g:fzf_layout = { 'down': '~50%' }
+
 
 "use vim colorscheme colors
 let g:fzf_colors =
@@ -974,15 +983,6 @@ let g:fzf_colors =
             \ 'marker':  ['fg', 'Keyword'],
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
-
-"default keybindings
-let g:fzf_action = {
-            \ 'ctrl-t': 'tab split',
-            \ 'ctrl-x': 'split',
-            \ 'ctrl-v': 'vsplit' }
-
-"default fzf location and size
-let g:fzf_layout = { 'down': '~50%' }
 
 "give :Ag preview window with first line of matched file matches fzf input
 command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'pygmentize -g $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
