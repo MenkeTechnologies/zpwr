@@ -767,7 +767,7 @@ set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
 function TmuxRepeat()
-    let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java']
+    let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
     let exeFileType=expand('%:e')
 
     if has("gui_running")
@@ -994,7 +994,7 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { pygmentize -g {} | nl -b a; } || stat {}'"}))
 
-nnoremap <silent> <C-D>p :Files<CR>
+nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 

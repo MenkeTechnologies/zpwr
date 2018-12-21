@@ -14,6 +14,17 @@ executableScriptsProcessing(){
     fi
 }
 
+compileExecuteTheFile(){
+    executableScriptsProcessing "$2"
+    #compile
+    eval "$1 \"$2\""
+    dir="$(dirname "$2")"
+    file="$(basename "$2")"
+    #exec
+    "$dir/a.out"
+
+    sleep 1000
+}
 executeTheFile(){
     executableScriptsProcessing "$2"
     #execute the file with the proper interpreter or compiler
@@ -75,6 +86,8 @@ case "$fileToBeExecuted" in
     *.ml ) executeTheFile ocaml "$fileToBeExecuted"
         ;;
     *.swift ) executeTheFile swift "$fileToBeExecuted"
+        ;;
+    *.f90 ) compileExecuteTheFile gfortran "$fileToBeExecuted"
         ;;
     *.clj ) executeTheFile clojure "$fileToBeExecuted"
         ;;
