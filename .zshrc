@@ -717,7 +717,15 @@ intoFzf(){
 }
 
 intoFzfAg(){
-    BUFFER="$BUFFER $(fz)"
+    mywords=("${(z)BUFFER}")
+
+    if echo ${mywords[1]} | grep -q vim; then
+        BUFFER="$BUFFER $(fz vim)"
+    else
+        BUFFER="$BUFFER $(fz)"
+
+    fi
+
     zle .accept-line
 }
 
