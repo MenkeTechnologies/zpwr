@@ -1379,7 +1379,7 @@ supernatural-space() {
     __CORRECT_WORDS[single]="signle"
     __CORRECT_WORDS[spelling]="spellign spelilng"
     __CORRECT_WORDS[state]="staet steta sttae"
-    __CORRECT_WORDS[store]="sotre"
+    __CORRECT_WORDS[store]="tsore sotre"
     __CORRECT_WORDS[string]="stirng stinrg"
     __CORRECT_WORDS[than]="tahn"
     __CORRECT_WORDS[that]="taht"
