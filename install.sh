@@ -120,7 +120,7 @@ addDependenciesFreeBSD(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=("git --without-completions" exa fortune node the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=("git --without-completions" ag automake autoconf exa fortune node the-silver-searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
@@ -262,7 +262,9 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         upgrade mac
     fi
 
-    prettyPrint "Installing Powerline fonts"
+    prettyPrint "Tapping Homebrew fonts"
+    brew tap homebrew/fonts
+    prettyPrint "Installing hack nerd font"
     brew cask install font-hack-nerd-font
 
     prettyPrint "Installing meteor"
