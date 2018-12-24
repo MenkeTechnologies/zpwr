@@ -13,7 +13,7 @@ use strict;
 open my $less, "|-","less -MN" or die $!;
 
 use Env '@PATH';
-my $exe = 'rougify';
+my $exe = 'pygmentize';
 my $exe_exists = grep -x "$_/$exe", @PATH;
 
 select $less;
@@ -22,7 +22,7 @@ for (@ARGV) {
         my $type = `file $_`;
         if ($type =~ /text/) {
             if ($exe_exists) {
-                print "\x1b[4;1m$_\x1b[0m\n".`cat "$_" | rougify -t github - | cat -n`."\n";
+                print "\x1b[4;1m$_\x1b[0m\n".`pygmentize -g $_ | cat -n`."\n";
             } else {
                 print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
             }
