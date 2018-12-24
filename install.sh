@@ -589,6 +589,13 @@ exists grc || {
     sudo bash install.sh
 }
 
+
+if [[ "$(uname)" == Darwin ]]; then
+    prettyPrint "Try again for ponysay and lolcat on mac"
+    exists ponysay || brew install ponysay
+    exists lolcat || sudo gem install lolcat
+fi
+
 prettyPrint "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
 if [[ "$(uname)" == Darwin ]]; then
     GRC_DIR=/usr/local/share/grc
