@@ -22,7 +22,7 @@ for (@ARGV) {
         my $type = `file $_`;
         if ($type =~ /text/) {
             if ($exe_exists) {
-                print "\x1b[4;1m$_\x1b[0m\n".`pygmentize -g $_ | cat -n`."\n";
+                print "\x1b[4;1m$_\x1b[0m\n".`pygmentize -g "$_" | cat -n`."\n";
             } else {
                 print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
             }
