@@ -193,7 +193,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
     #keep remote tty sessions alive by stopping sleep
-    sudo pmset -c ttyskeepawake 1
+    #sudo pmset -c ttyskeepawake 1
     alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $SCRIPTS/sshTunnelVnc.sh" 
     alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $SCRIPTS/sshTunnelVnc2.sh"
     alias rtsync="$HOME/Documents/shellScripts/macOnly/rsyncr.sh"
