@@ -69,7 +69,7 @@ echo "$PATH" | grep -iq shellScripts || {
         export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
         export HOMEBREW_DBHOME='/usr/local/var'
         export HOMEBREW_DB_CONF='/usr/local/etc'
-        eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+        #eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
         export MANPATH=$HOME/perl5/man:$MANPATH
         export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
