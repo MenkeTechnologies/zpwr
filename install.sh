@@ -251,10 +251,10 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         
         prettyPrint "Updating repos"
         refresh mac
-
         addDependenciesMac
-
+        brew cask install java
         for prog in "${dependencies_ary[@]}"; do
+            prettyPrint "Installing $prog"
             update "$prog" mac
         done
 
@@ -263,7 +263,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     fi
 
     prettyPrint "Tapping Homebrew fonts"
-    brew tap homebrew/fonts
+    brew tap homebrew/cask-fonts
     prettyPrint "Installing hack nerd font"
     brew cask install font-hack-nerd-font
 
@@ -315,14 +315,11 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
         sleep 1
-
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
             update "$prog" "$distroFamily"
         done
-
         prettyPrint "Upgrading $distroFamily"
-
         upgrade "$distroFamily"
     fi
 
