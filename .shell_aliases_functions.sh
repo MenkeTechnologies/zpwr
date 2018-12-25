@@ -39,6 +39,7 @@ export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
 export LESS="-M -N -R"
 export PSQL_EDITOR='vim -c "setf sql"'
+export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a'
 
 #}}}***********************************************************
 
@@ -86,7 +87,7 @@ echo "$PATH" | grep -iq shellScripts || {
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
     exists exa && {
-        alias exa='exa --git -il -F -H --extended --color-scale -g -a'
+        alias exa="$EXA_COMMAND"
         export LS_COLORS="fi=38:di=32;1:ex=31;1"
         export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"
     }
@@ -447,7 +448,7 @@ suc(){
 
 clearList() {
     if [[ "$(uname)" == "Darwin" ]]; then
-        exists exa && ls_command="command exa --git -il -F -H --extended --color-scale -g -a" || {
+        exists exa && ls_command="$EXA_COMMAND" || {
             exists grc && {
                 ls_command="grc -c $HOME/conf.gls \
                 gls -iFlhA --color=always"
@@ -458,7 +459,7 @@ clearList() {
         lib_command="otool -L"
     elif [[ "$(uname)" == Linux ]];then
 
-        exists exa && ls_command="command exa --git -il -F -H --extended --color-scale -g -a" || {
+        exists exa && ls_command="$EXA_COMMAND" || {
             exists grc && {
                 ls_command="grc -c $HOME/conf.gls \
                 ls -iFlhA --color=always"
@@ -539,7 +540,7 @@ clearList() {
 }
 
 listNoClear () {
-    exists exa && command exa --git -il -F -H --extended --color-scale -g -a && return 0
+    exists exa && eval "$EXA_COMMAND" && return 0
 
     if [[ "$(uname)" == "Darwin" ]]; then
         exists grc && {
@@ -1177,4 +1178,4 @@ fz(){
 #**************************************************************
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 #}}}***********************************************************
-alias exa='exa --git -il -F -H --extended --color-scale -g -a'
+alias exa="$EXA_COMMAND"
