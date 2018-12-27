@@ -4,13 +4,11 @@ brew install adns
 brew install algol68g
 brew install alpine
 brew install amap
-brew install angular-cli
 brew install ant
 brew install apr
 brew install apr-util
 brew install argon2
 brew install asciidoctor
-brew install ask-cli
 brew install aspcud
 brew install aspell
 brew install autoconf
@@ -237,7 +235,6 @@ brew install nginx
 brew install ninvaders
 brew install nmap
 brew install nnn
-brew install node
 brew install npth
 brew install numpy
 brew install nvm
