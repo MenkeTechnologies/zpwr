@@ -1390,7 +1390,7 @@ supernatural-space() {
     __CORRECT_WORDS[to]="ot"
     __CORRECT_WORDS[using]="suing usnig"
     __CORRECT_WORDS[value]="vlaue valeu"
-    __CORRECT_WORDS[with]="with wiht"
+    __CORRECT_WORDS[with]="with wiht itwh"
     __CORRECT_WORDS[why]="hwy wyh"
 
 
