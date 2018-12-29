@@ -1161,6 +1161,38 @@ c(){
     } || cat -n "$@"
 set +x
 }
+
+httpie(){
+    styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
+
+    if [[ -d "$styles_dir" ]]; then
+        declare -a file_ary
+        for file in "$styles_dir"/* ; do
+            file=${file##*/}
+            echo "$file" | grep -q -E "init|pycache" || \
+                file_ary+=("${file%.*}")
+        done
+        len=${#file_ary}
+
+        logg ${file_ary[@]}
+
+        rand=$((RANDOM % len))
+        echo $SHELL | grep -q zsh && ((rand++))
+
+        for (( i = 0; i < $len; i++ )); do
+            random_color=${file_ary[$i]}
+            if (( $rand == $i)); then
+                break
+            fi
+        done
+        http -v --follow --style=$random_color GET http://$1 --pretty=colors
+    else
+        http -v --follow --style=autumn GET http://$1 --pretty=colors
+    fi
+    set +x
+    
+}
+
 fz(){
     test -z "$1" && {
         command ag '^.*$' --color| fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && pygmentize -g $(cut -d: -f1 <<< {}) \
