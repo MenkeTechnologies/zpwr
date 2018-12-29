@@ -723,10 +723,12 @@ intoFzfAg(){
         BUFFER="$BUFFER $(fz vim)"
     else
         BUFFER="$BUFFER $(fz)"
-
     fi
 
-    zle .accept-line
+    BUFFER=${BUFFER:s@  @ @}
+
+    CURSOR=$#BUFFER
+
 }
 
 zle -N surround
@@ -1369,6 +1371,7 @@ supernatural-space() {
     __CORRECT_WORDS[of]="fo"
     __CORRECT_WORDS[outside]="otuside outsdie"
     __CORRECT_WORDS[over]="voer ovre"
+    __CORRECT_WORDS[name]="anme naem"
     __CORRECT_WORDS[network]="newtork entwork ntework"
     __CORRECT_WORDS[point]="opint ponit"
     __CORRECT_WORDS[print]="pirnt rpint prnit"
