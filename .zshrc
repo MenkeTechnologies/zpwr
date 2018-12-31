@@ -1320,6 +1320,21 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
         '$__TS'
     fi'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}iee='if [[ '$__TS' ]];then
+        '$__TS'
+    elif [[ '$__TS' ]];then
+        '$__TS'
+    else
+        '$__TS'
+    fi'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ie='if [[ '$__TS' ]];then
+        '$__TS'
+    else
+        '$__TS'
+    fi'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}wr='while read line;do
+        '$__TS'
+    done < '$__TS''
     alias -g ${__GLOBAL_ALIAS_PREFIX}w='while [[ true'$__TS' ]];do
         '$__TS'
     done'
