@@ -1372,7 +1372,7 @@ supernatural-space() {
     __CORRECT_WORDS[echo]="ehco ceho ecoh"
     __CORRECT_WORDS[file]="feil fiel"
     __CORRECT_WORDS[finger]="fingre finegr figner"
-    __CORRECT_WORDS[for]="fro rfo rof ofr"
+    __CORRECT_WORDS[for]="fro rfo rof fr"
     __CORRECT_WORDS[found]="ofund fuond foudn"
     __CORRECT_WORDS[go]="og"
     __CORRECT_WORDS[here]="ehre"
@@ -1425,7 +1425,7 @@ supernatural-space() {
         for misspelling in $badWords[@];do
             if [[ $mywords[-1] == $misspelling ]]; then
                 BUFFER="$(print -r -- "$LBUFFER" | sed -E \
-                    "s@\\b$misspelling\\b@$key@g")"
+                    "s@\\b$misspelling\\b\$@$key@g")"
                 finished=true
                 CURSOR=$#BUFFER
                 break
