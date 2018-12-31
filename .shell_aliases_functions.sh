@@ -446,6 +446,14 @@ suc(){
     python3 "$PYSCRIPTS/textEditorTwoColumns.py"
 }
 
+allRemotes(){
+    while read; do
+        printf "\x1b[1;34m$REPLY"
+        printf "\x1b[0m\x0a"
+        git remote show "$REPLY"
+    done < <(git remote)
+}
+
 clearList() {
     if [[ "$(uname)" == "Darwin" ]]; then
         exists exa && ls_command="$EXA_COMMAND" || {
