@@ -355,7 +355,8 @@ s(){
 }
 
 logg(){
-    echo "$(date) $@" >> "$LOGFILE"
+    [[ -z "$1" ]] && echo "need arg" >&2 && return 1
+    printf "\n_____________$(date)____$@_____________\n\n" >> "$LOGFILE"
 }
 
 xx(){
@@ -932,15 +933,16 @@ reveal() {
 
     [[ ! -d .git ]] && echo "Not a git directory" >&2 && return 1
 
-    git remote -v | \grep "$1" | \grep 'heroku' | \grep fetch | \grep -o -E ':.*' | \
-    cut -c 19- | awk '{print $1}' | sed 's@.git$@@' | \
-    xargs -I {} "$open_cmd" https://dashboard.heroku.com/apps/{} https://{}.herokuapp.com
+    command git remote -v | command grep "$1" | command grep 'heroku' | command grep fetch | command grep -o -E ':.*' | \
+    cut -c 19- | command awk '{print $1}' | command sed 's@.git$@@' | \
+    command xargs -I {} "$open_cmd" https://dashboard.heroku.com/apps/{} https://{}.herokuapp.com
 
   {
-    git remote -v | \grep "$1" | \grep '@'  | \grep -o -E '@.*' | cut -c 2-
-    git remote -v | \grep "$1" | \grep '//' | \grep -o -E ':.*' | cut -c 4- | \grep -v 'heroku'
-  } | \grep fetch | sed 's@:/\\@@g' | awk '{print $1}' | sed 's@.git$@@' | xargs -I {} "$open_cmd" https://www.{}
+    command git remote -v | command grep "$1" | command grep '@'  | command grep -o -E '@.*' | cut -c 2-
+    command git remote -v | command grep "$1" | command grep '//' | command grep -o -E ':.*' | cut -c 4- | command grep -v 'heroku'
+  } | command grep fetch | command sed 's@:/\\@@g' | command awk '{print $1}' | sed 's@.git$@@' | command xargs -I {} "$open_cmd" https://www.{}
 }
+
 
 getrc(){
     REPO_NAME="customTerminalInstaller"

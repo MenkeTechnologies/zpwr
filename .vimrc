@@ -995,6 +995,7 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { pygmentize -g {} | nl -b a; } || stat {}'"}))
 
 nnoremap <silent> <C-D>f :Files<CR>
+nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 
