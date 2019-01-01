@@ -367,7 +367,7 @@ expand-aliases() {
             alias -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
                 #dont expand first word if \,' or "
                 #[[ -z alias -g -- $LBUFFER) ]] && {
-                [[ true ]] && {
+                true && {
                     #[[ ${LBUFFER:0:1} != '\' ]] && \
                     #[[ ${LBUFFER:0:1} != "'" ]] && \
                     #[[ ${LBUFFER:0:1} != '"' ]] && \
@@ -1374,6 +1374,7 @@ supernatural-space() {
     __CORRECT_WORDS[finger]="fingre finegr figner"
     __CORRECT_WORDS[for]="fro rfo rof fr"
     __CORRECT_WORDS[found]="ofund fuond foudn"
+    __CORRECT_WORDS[get]="ge"
     __CORRECT_WORDS[go]="og"
     __CORRECT_WORDS[here]="ehre"
     __CORRECT_WORDS[high]="hgih hihg ihgh"
@@ -1439,7 +1440,7 @@ supernatural-space() {
             alias -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
                 #dont expand first word if \,' or "
                     #[[ -z $(alias -g -- $LBUFFER) ]] && {
-                    [[ true ]] && {
+                    true && {
                         [[ ${LBUFFER:0:1} != '\' ]] && \
                         [[ ${LBUFFER:0:1} != "'" ]] && \
                         [[ ${LBUFFER:0:1} != '"' ]] && \
