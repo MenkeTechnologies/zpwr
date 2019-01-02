@@ -73,7 +73,7 @@ sleep 1
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(hexedit cargo boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
+dependencies_ary=(httpie hexedi3t cargo boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping atop ctags texinfo lsof \
