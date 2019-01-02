@@ -1389,6 +1389,7 @@ supernatural-space() {
     __CORRECT_WORDS[of]="fo"
     __CORRECT_WORDS[outside]="otuside outsdie"
     __CORRECT_WORDS[over]="voer ovre"
+    __CORRECT_WORDS[other]="othe toher"
     __CORRECT_WORDS[name]="anme naem"
     __CORRECT_WORDS[network]="newtork entwork ntework"
     __CORRECT_WORDS[point]="opint ponit"
