@@ -1,3 +1,4 @@
+#{{{                    MARK:Global Fxn
 exists(){
     type "$1" >/dev/null 2>&1 #alternative is command -v
 }
@@ -63,7 +64,7 @@ echo "$PATH" | grep -iq shellScripts || {
 #{{{                           MARK:HOMES
 #**********************************************************************
     [[ "$(uname)" == Darwin ]] && {
-        export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home"
+        export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_192.jdk/Contents/Home"
         export HOMEBREW_HOME='/usr/local/Cellar'
         export HOMEBREW_OPT_HOME='/usr/local/opt'
         export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
@@ -1239,5 +1240,9 @@ fz(){
 #**************************************************************
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 #}}}***********************************************************
+
+#{{{                    MARK:Global Alias
+#**************************************************************
 alias exa="$EXA_COMMAND"
 exists hexedit && alias he='hexedit -l 16'
+#}}}***********************************************************
