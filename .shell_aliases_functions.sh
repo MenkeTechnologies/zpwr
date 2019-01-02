@@ -57,6 +57,7 @@ echo "$PATH" | grep -iq shellScripts || {
     }
 
     exists yarn && export PATH="$(yarn global bin):$PATH"
+
 #}}}***********************************************************
 
 #{{{                           MARK:HOMES
@@ -1239,3 +1240,4 @@ fz(){
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 #}}}***********************************************************
 alias exa="$EXA_COMMAND"
+exists hexedit && alias he='hexedit -l 16'
