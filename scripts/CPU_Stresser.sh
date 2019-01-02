@@ -96,7 +96,7 @@ killpids(){
 
 if [[ "$detach" == true ]]; then
     alternatingPrettyPrint "Spawning $DELIMITER_CHAR${nproc}$DELIMITER_CHAR processes in background."
-    for (( i = 0; i < $nproc; i++ )); do
+    for (( i = 0; i < nproc; i++ )); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
         ( yes &> /dev/null &)
