@@ -145,7 +145,6 @@ alias -r > "$HOME/.common_aliases"
 
 #}}}***********************************************************
 
-
 #{{{                    MARK:Global Vars for Global Aliases
 #**************************************************************
 __GLOBAL_ALIAS_PREFIX=j
@@ -1420,7 +1419,6 @@ supernatural-space() {
     __CORRECT_WORDS[with]="with wiht itwh"
     __CORRECT_WORDS[why]="hwy wyh"
 
-
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(print -r -- $LBUFFER | tr -d "()[]{}\$,%'\"" )"
     mywords=("${(z)TEMP_BUFFER}")
@@ -1640,7 +1638,7 @@ if [[ -d "$DL" ]]; then
     : ~DL
 fi
 #}}}***********************************************************
-#
+
 #{{{                    MARK:OPAM env
 #**************************************************************
 source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
@@ -1818,13 +1816,11 @@ autoload zmv
 unset GROOVY_HOME # when set this messes up classpath
 #}}}***********************************************************
 
-
-
 #{{{                    MARK:Suffix aliases
 #**************************************************************
 alias -s txt='vim'
-
 #}}}***********************************************************
+
 #{{{                    MARK:SSH Public Key ID
 #**************************************************************
 
@@ -1897,4 +1893,3 @@ autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
 #}}}***********************************************************
-#
