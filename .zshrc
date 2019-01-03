@@ -1847,33 +1847,31 @@ if [[ "$(uname)" == Linux ]]; then
             (*) :
                 ;;
         esac
-        echo "searching for $key in $out" >> "$LOGFILE"
+        logg "searching for $key in $out"
         echo "$out" | grep -q "$key" && mobile=false
         command rm ~/temp$$
         if [[ $mobile == "false" ]]; then
-            echo "$(date) not mobile" >> "$LOGFILE"
+            logg "not mobile"
             num_con="$(command ps -ef | command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
-            echo "$(date) num cons is $num_con" >> "$LOGFILE"
+            logg "num cons is $num_con"
             if (( $num_con == 1 )); then
-                echo "no tmux clients" >> "$LOGFILE"
+                logg "no tmux clients"
                 {
                     tmux ls && {
                         tmux attach
-                        echo "$(date) attaching to existing" \
-                        >> "$LOGFILE"
+                        logg "attaching to existing"
                     } || {
                         tmux new-session \; \
                         source-file ~/.tmux/control-window
-                        echo "$(date) creating new session" \
-                        >> "$LOGFILE"
+                        logg "creating new session"
                     }
                 } &> /dev/null
             else
                 tmux attach
-                echo "$(date) clients so NO" >> "$LOGFILE"
+                logg "clients so NO"
             fi
         else
-            echo "$(date) mobile so NO" >> "$LOGFILE"
+            logg "mobile so NO"
         fi
     }
 
@@ -1894,5 +1892,4 @@ zle -N bracketed-paste bracketed-paste-magic
 revealRecurse(){
     for i in **/*(/); do ( builtin cd $i && reveal 2>/dev/null); done
 }
-
 #}}}***********************************************************
