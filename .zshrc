@@ -1892,4 +1892,9 @@ export KEYTIMEOUT=1
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
+revealRecurse(){
+    for i in **/*(/); do ( builtin cd $i && reveal 2>/dev/null); done
+}
+
+
 #}}}***********************************************************
