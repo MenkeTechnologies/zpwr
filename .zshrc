@@ -1895,8 +1895,4 @@ revealRecurse(){
     for i in **/*(/); do ( builtin cd $i && reveal 2>/dev/null); done
 }
 
-
 #}}}***********************************************************
-#
-source $D/zsh-vimode-visual/zsh-vimode-visual.zsh
-
