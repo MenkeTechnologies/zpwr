@@ -711,7 +711,7 @@ updater() {
 }
 
 intoFzf(){
-    BUFFER="$BUFFER | fzf --border"
+    LBUFFER="$LBUFFER | fzf --border"
     zle .accept-line
 }
 
@@ -1372,7 +1372,7 @@ supernatural-space() {
     __CORRECT_WORDS[echo]="ehco ceho ecoh"
     __CORRECT_WORDS[file]="feil fiel"
     __CORRECT_WORDS[finger]="fingre finegr figner"
-    __CORRECT_WORDS[for]="fro rfo rof fr"
+    __CORRECT_WORDS[for]="fro rfo rof fr ofr"
     __CORRECT_WORDS[found]="ofund fuond foudn"
     __CORRECT_WORDS[get]="ge"
     __CORRECT_WORDS[go]="og"
