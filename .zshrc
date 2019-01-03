@@ -727,7 +727,6 @@ intoFzfAg(){
     BUFFER=${BUFFER:s@  @ @}
 
     CURSOR=$#BUFFER
-
 }
 
 zle -N surround
@@ -1898,3 +1897,6 @@ revealRecurse(){
 
 
 #}}}***********************************************************
+#
+source $D/zsh-vimode-visual/zsh-vimode-visual.zsh
+

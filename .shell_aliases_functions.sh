@@ -358,7 +358,11 @@ s(){
 
 logg(){
     [[ -z "$1" ]] && echo "need arg" >&2 && return 1
-    printf "\n_____________$(date)____$@_____________\n\n" >> "$LOGFILE"
+    {
+    printf "\n_____________$(date)____"
+    printf "%s " "$@"
+    printf "_____________\n\n"
+    } >> "$LOGFILE"
 }
 
 xx(){
