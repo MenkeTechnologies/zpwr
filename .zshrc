@@ -1369,7 +1369,7 @@ supernatural-space() {
     __CORRECT_WORDS[declare]="delcare"
     __CORRECT_WORDS[default]="defalut deafult"
     __CORRECT_WORDS[directory]="direcotry direcorty directroy"
-    __CORRECT_WORDS[echo]="ehco ceho ecoh"
+    __CORRECT_WORDS[echo]="ehco ceho ecoh eco"
     __CORRECT_WORDS[file]="feil fiel"
     __CORRECT_WORDS[finger]="fingre finegr figner"
     __CORRECT_WORDS[for]="fro rfo rof fr ofr"
