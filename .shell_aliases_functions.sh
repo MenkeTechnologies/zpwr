@@ -945,14 +945,10 @@ reveal() {
   } | command grep fetch | command sed 's@:/\\@@g' | command awk '{print $1}' | sed 's@.git$@@' | command xargs -I {} "$open_cmd" https://www.{}
 }
 
-revealRecurse(){
-    for i in **/*(/); do ( builtin cd $i && reveal 2>/dev/null); done
-}
 
 openMyGH(){
     open "https://github.com/$GITHUB_ACCOUNT"
 }
-
 
 getrc(){
     REPO_NAME="customTerminalInstaller"
