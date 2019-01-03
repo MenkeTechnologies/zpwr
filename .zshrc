@@ -711,7 +711,7 @@ updater() {
 }
 
 intoFzf(){
-    LBUFFER="$LBUFFER | fzf --border"
+    LBUFFER="$LBUFFER | fzf -m --border"
     zle .accept-line
 }
 

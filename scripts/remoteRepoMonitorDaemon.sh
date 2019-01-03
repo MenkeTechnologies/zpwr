@@ -11,6 +11,9 @@ BASE_DIR="$HOME/forkedRepos"
 CONFIG_DIR="$HOME/forkedRepos/customTerminalInstaller"
 ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
 
+[[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && return 1
+[[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && return 1
+
 gitters(){
     git reset --hard origin/master
     git checkout -B master origin/master
