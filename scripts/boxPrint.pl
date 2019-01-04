@@ -14,6 +14,9 @@ use POSIX;
 
 my $width = 70;
 my $str = '';
+my $boxColor = "\x1b[0;32;1m";
+my $textColor="\x1b[0;34;4m";
+my $resetColor="\x1b[0m";
 
 if (scalar @ARGV > 0) {
     $str .= "$_ " for @ARGV;
@@ -47,6 +50,7 @@ if ($proposedTextLength > $maxTextLength) {
     # say STDOUT '___________$numSideCharLength = ' . $numSideCharLength . '___________';
 
 
+    print "$boxColor";
     say $boxesChar x $width;
 
     for (my $i = 0; $i < $lineCounter; $i++) {
@@ -55,10 +59,12 @@ if ($proposedTextLength > $maxTextLength) {
 
         print $boxesChar x $numSideCharLength;
         print $spaceChar x $spacerLength;
+        print "$textColor";
 
         print substr $str, $startIndex, $charactersPerLine;
 
         print $spaceChar x $spacerLength;
+        print "$boxColor";
         print $boxesChar x $numSideCharLength;
         print "\n";
     }
@@ -73,13 +79,17 @@ else {
         --$side2len;
     }
 
+    print "$boxColor";
     say $boxesChar x $width;
     print $boxesChar x $sideCharacterLength;
     print $spaceChar x $spacerLength;
+    print "$textColor";
     print $str;
+    print "$boxColor";
     print $spaceChar x $spacerLength;
     say $boxesChar x $side2len;
     say $boxesChar x $width;
 
 }
 
+print "$resetColor";
