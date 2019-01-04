@@ -12,11 +12,15 @@ use warnings;
 use feature 'say';
 use POSIX;
 
-my $width = 70;
+my $width = 80;
 my $str = '';
 my $boxColor = "\x1b[0;32;1m";
 my $textColor="\x1b[0;34;4m";
 my $resetColor="\x1b[0m";
+my $spacerLength = 2;
+my $boxesChar = '/';
+my $spaceChar = ' ';
+my $boxWidth=4;
 
 if (scalar @ARGV > 0) {
     $str .= "$_ " for @ARGV;
@@ -31,19 +35,16 @@ if (scalar @ARGV > 0) {
 
 my $inputStringLength = length $str;
 
-my $spacerLength = 2;
-my $boxesChar = '/';
-my $spaceChar = ' ';
 my $sideCharacterLength = (($width - $inputStringLength - $spacerLength * 2) + 1) / 2;
 
-my $proposedTextLength = $inputStringLength + $spacerLength * 2 + 4;
-my $maxTextLength = $width - (($spacerLength * 2) + 4);
+my $proposedTextLength = $inputStringLength + $spacerLength * 2 + $boxWidth;
+my $maxTextLength = $width - (($spacerLength * 2) + $boxWidth);
 
 if ($proposedTextLength > $maxTextLength) {
 
     my $lineCounter = int($inputStringLength / $maxTextLength) + 1;
     my $charactersPerLine = int($inputStringLength / $lineCounter);
-    my $numSideCharLength = int(int($width - $charactersPerLine - 4 )/2);
+    my $numSideCharLength = int(int($width - $charactersPerLine - $boxWidth )/2);
 
     # say STDOUT '___________$lineCounter = ' . $lineCounter . '___________';
     # say STDOUT '___________$charactersPerLine = ' . $charactersPerLine . '___________';
