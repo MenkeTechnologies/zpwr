@@ -35,8 +35,10 @@ prettyPrint(){
 
 
 prettyPrint(){
+    perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
+    [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( install_counter++ ))
-    printf "$install_counter>>> $1\n" | "$INSTALLER_DIR/scripts/boxPrint.pl"
+    printf "$install_counter>>> $1\n" | "$perlfile"
     echo
 }
 
