@@ -36,7 +36,7 @@ prettyPrint(){
 
 prettyPrint(){
     (( install_counter++ ))
-    printf "$install_counter>>> $1\n" |i "$INSTALLER_DIR/scripts/boxPrint.pl"
+    printf "$install_counter>>> $1\n" | "$INSTALLER_DIR/scripts/boxPrint.pl"
 }
 
 turnOffDebugging(){
