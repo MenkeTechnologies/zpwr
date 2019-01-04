@@ -1206,7 +1206,7 @@ httpie(){
         http -v --follow --style=$random_color GET http://$1 --pretty=colors
     else
         http -v --follow --style=autumn GET http://$1 --pretty=colors
-    fi
+    fi | less
     set +x
     
 }
