@@ -1164,26 +1164,6 @@ exists pssh && {
 
 }
 
-boxesPrint(){
-    width=70
-    len=${#1}
-    spacerlen=2
-    boxesChar='/'
-    spaceChar=' '
-    sidelen=$(($width - $len - $spacerlen * 2))
-    #ceil
-    sidelen=$(( ($sidelen + 2 -1) / 2))
-    sidelen2=$sidelen
-    if (( $len % 2 == 1 )); then
-        ((--sidelen2 ))
-    fi
-
-    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print '$spaceChar' x $spacerlen"
-    printf "$1"
-    perl -E "print '$spaceChar' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
-    echo
-}
-
 c(){
     exists ccat && {
         echo | ccat &>/dev/null && {
