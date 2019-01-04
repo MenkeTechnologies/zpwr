@@ -36,33 +36,8 @@ prettyPrint(){
 
 prettyPrint(){
     (( install_counter++ ))
-    width=70
-    msg="$install_counter>>> $1"
-    len=${#msg}
-    spacerlen=2
-    boxesChar='/'
-    spaceChar=' '
-    sidelen=$(($width - $len - $spacerlen * 2))
-    #ceil
-    sidelen=$(( ($sidelen + 2 -1) / 2))
-    sidelen2=$sidelen
-    if (( $len % 2 == 1 )); then
-        ((--sidelen2 ))
-    fi
-
-    printf "\x1b[32;1m"
-    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print '$spaceChar' x $spacerlen"
-    printf "\x1b[34;4m"
-    printf "$msg"
-    printf "\x1b[0;32;1m"
-    perl -E "print '$spaceChar' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
-    printf "\x1b[0m"
-    echo
+    printf "$install_counter>>> $1\n" |i "$INSTALLER_DIR/scripts/boxPrint.pl"
 }
-
-
-
-
 
 turnOffDebugging(){
     set +x
