@@ -38,7 +38,7 @@ export RED="\e[31m"
 export RESET="\e[0m"
 export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
-export LESS="-M -N -R"
+export LESS="-M -N -R -K"
 export PSQL_EDITOR='vim -c "setf sql"'
 export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a'
 
@@ -1174,18 +1174,35 @@ exists pssh && pir(){
     }
 
 c(){
-    exists ccat && {
-        echo | ccat &>/dev/null && {
-            for file in "$@";do
-                    if [[ ! -d "$file" && -s "$file" ]]; then
-                        if (( $# > 1)); then
-                            printf "\x1b[34;1;4m$file\x1b[0m\n"
+    if [[ ! -p /dev/stdout ]];then
+        {
+            exists ccat && {
+                echo | ccat &>/dev/null && {
+                    for file in "$@";do
+                            if [[ ! -d "$file" && -s "$file" ]]; then
+                                if (( $# > 1)); then
+                                    printf "\x1b[34;1;4m$file\x1b[0m\n"
+                                fi
+                                ccat "$file" | nl -b a
+                            fi
+                        done
+                } || cat -n "$@"
+            } || cat -n "$@"
+        } | less -FX
+    else
+        exists ccat && {
+            echo | ccat &>/dev/null && {
+                for file in "$@";do
+                        if [[ ! -d "$file" && -s "$file" ]]; then
+                            if (( $# > 1)); then
+                                printf "\x1b[34;1;4m$file\x1b[0m\n"
+                            fi
+                            ccat "$file" | nl -b a
                         fi
-                        ccat "$file" | nl -b a
-                    fi
-            done
+                done
+            } || cat -n "$@"
         } || cat -n "$@"
-    } || cat -n "$@"
+    fi
 }
 
 exists http && httpie(){
