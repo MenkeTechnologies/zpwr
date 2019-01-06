@@ -42,22 +42,22 @@ alternatingPrettyPrint(){
     if [[ -z $1 ]]; then
         cat | perl -F"$DELIMITER_CHAR" -ane '
         my $counter=0;
-        for my $arg (@F){
+        for (@F){
             if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
+                 print "\x1b[36m$_\x1b[0m"
             } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
+                 print "\x1b[1;4;34m$_\x1b[0m"
             }
         $counter++;
         };print "\x1b[0m"'
     else
         perl -F"$DELIMITER_CHAR" -ane '
         my $counter=0;
-        for my $arg (@F){
+        for (@F){
             if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
+                 print "\x1b[36m$_\x1b[0m"
             } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
+                 print "\x1b[1;4;34m$_\x1b[0m"
             }
         $counter++;
         }; print "\x1b[0m"' <<< "$@"
@@ -87,7 +87,7 @@ do
 
   esac # --- end of case ---
 done
-shift $(($OPTIND-1))
+shift $((OPTIND-1))
 
 killpids(){
     echo "${1:1}" | perl -ae '`kill $_`for@F'
@@ -103,7 +103,7 @@ if [[ "$detach" == true ]]; then
     done
 else
     alternatingPrettyPrint "Spawning $DELIMITER_CHAR${nproc}$DELIMITER_CHAR processes interactively."
-    for (( i = 0; i < $nproc; i++ )); do
+    for (( i = 0; i < nproc; i++ )); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
         yes &> /dev/null &
