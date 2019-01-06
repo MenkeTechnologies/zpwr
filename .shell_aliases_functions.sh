@@ -138,7 +138,6 @@ exists spotify && {
     alias ne='spotify next'
     alias pe='spotify prev'
     alias spa='spotify pause'
-    
 }
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
@@ -147,7 +146,7 @@ alias brc="vim -S ~/.vim/sessions/aliases.vim + ~/.shell_aliases_functions.sh; s
 alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 #}}}***********************************************************
-alias deleteTab="sed -e '/^[\x20\x09]*$/d'"
+alias deleteTab="sed '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper="tr 'a-z' 'A-Z'"
 #over aliases
@@ -571,7 +570,7 @@ listNoClear () {
 }
 
 animate(){
-    bash $SCRIPTS/animation
+    bash "$SCRIPTS/animation"
 }
 
 blocksToSize(){
@@ -1090,7 +1089,7 @@ digs(){
                 }
             }
             prettyPrint "CURL: $url"
-            exists httpie && {
+            exists http && {
                 httpie "$url"
             } || curl -vvv -k -fsSL "$url"
             exec 2>/dev/tty
@@ -1155,16 +1154,12 @@ pre(){
     echo "$out" | perl -lnE "say \"$prefix \$_\""
 }
 
-exists pssh && {
-    pir(){
+exists pssh && pir(){
         [[ -s "$HOME/hosts.txt" ]] || {\
             echo "you need hosts.txt in your homedir" >&2 && \
             return 1; }
             pssh --inline-stdout --timeout 90 -h "$HOME"/hosts.txt "$@"
     }
-
-
-}
 
 c(){
     exists ccat && {
@@ -1179,10 +1174,9 @@ c(){
             done
         } || cat -n "$@"
     } || cat -n "$@"
-set +x
 }
 
-httpie(){
+exists http && httpie(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's#[^/]*//\([^@]*@\)\?\([^:/]*.*\)#\2#')"
@@ -1212,8 +1206,6 @@ httpie(){
     else
         http -v --follow --style=autumn GET $proto://$url --pretty=colors "$@"
     fi |& less
-    set +x
-    
 }
 
 fz(){
