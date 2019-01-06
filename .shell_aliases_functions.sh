@@ -124,7 +124,6 @@ alias nz='exec zsh'
 alias ll="clearList"
 alias la="clearList"
 alias l="clearList"
-alias r="cd .."
 alias t="cd /"
 alias ca='cat -n'
 alias sa='sudo cat -n'
@@ -315,6 +314,19 @@ exists idea && {
 
 #{{{                    MARK:Shell functions
 #**************************************************************
+
+r(){
+    local cdstr
+    if [[ -z $1 ]]; then
+        cd ..
+    else
+        for (( i = 0; i < $1; i++ )); do
+            cdstr+="../"
+        done
+        cd "$cdstr"
+    fi
+}
+
 [[ "$(uname)" == "Darwin" ]] && {
 
     exe(){
