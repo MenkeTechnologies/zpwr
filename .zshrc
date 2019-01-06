@@ -1736,8 +1736,8 @@ fzf_setup(){
                             |whois)' && dig {} || whois {}
                         } || {
                             cat ~/.common_aliases | grep \
-                            {}= || set | grep {} | grep -v \
-                                ZSH_EXEC || alias | grep {}\
+                            {}= || set | grep -a {} | grep -v \
+                                ZSH_EXEC || alias | grep -a {}\
                                 || {
                             whois {} | command egrep -q 'No (match\
                             |whois)' && dig {} || whois {}
