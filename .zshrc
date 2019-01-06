@@ -1089,6 +1089,9 @@ zle-keymap-select() {
 
 zle -N zle-keymap-select
 
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
 #}}}***********************************************************
 
 #{{{                    MARK:Setopt Options
@@ -1808,6 +1811,7 @@ compdef _cl clearList
 
 # Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
+alias mmv='noglob zmv -W'
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
@@ -1881,13 +1885,9 @@ fi
 #{{{                    MARK:Misc
 #**************************************************************
 alias numcmd='print $#commands'
-alias mmv='noglob zmv -W'
 unalias ag &> /dev/null
 
 export KEYTIMEOUT=1
-
-autoload -Uz bracketed-paste-magic
-zle -N bracketed-paste bracketed-paste-magic
 
 revealRecurse(){
     for i in **/*(/); do ( builtin cd $i && reveal 2>/dev/null); done
