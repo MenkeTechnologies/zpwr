@@ -1394,7 +1394,7 @@ supernatural-space() {
     __CORRECT_WORDS[network]="newtork entwork ntework"
     __CORRECT_WORDS[please]="plase"
     __CORRECT_WORDS[point]="opint ponit"
-    __CORRECT_WORDS[print]="pirnt rpint prnit"
+    __CORRECT_WORDS[print]="pirnt pritn rpint prnit"
     __CORRECT_WORDS[probe]="porbe rpobe"
     __CORRECT_WORDS[radius]="radisu raduis"
     __CORRECT_WORDS[range]="rnage arnge"
