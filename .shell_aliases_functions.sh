@@ -203,6 +203,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias cg='cd $HOME/ClionProjects'
     alias wg='cd $HOME/WebstormProjects'
     alias rg='cd $HOME/RubymineProjects'
+    alias asg='cd $HOME/AndroidStudioProjects'
+    alias xg='cd $HOME/Documents/xcode'
     alias ap='cd /Applications'
     alias sudoedit='sudo $EDITOR'
     alias tra='cd $HOME/.Trash'
