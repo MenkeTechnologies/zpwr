@@ -361,7 +361,7 @@ logg(){
     {
     printf "\n_____________$(date)____"
     printf "%s " "$@"
-    printf "_____________\n\n"
+    printf "\n"
     } >> "$LOGFILE"
 }
 
@@ -1183,6 +1183,9 @@ set +x
 httpie(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
+    url="$(echo $1 | sed 's#[^/]*//\([^@]*@\)\?\([^:/]*\).*#\2#')"
+    shift
+
     if [[ -d "$styles_dir" ]]; then
         declare -a file_ary
         for file in "$styles_dir"/* ; do
@@ -1191,8 +1194,6 @@ httpie(){
                 file_ary+=("${file%.*}")
         done
         len=${#file_ary}
-
-        logg ${file_ary[@]}
 
         rand=$((RANDOM % len))
         echo $SHELL | grep -q zsh && ((rand++))
@@ -1203,10 +1204,11 @@ httpie(){
                 break
             fi
         done
-        http -v --follow --style=$random_color GET http://$1 --pretty=colors
+        logg http -v --follow --style=$random_color GET http://$url --pretty=colors "$@"
+        http -v --follow --style=$random_color GET http://$url --pretty=colors "$@"
     else
-        http -v --follow --style=autumn GET http://$1 --pretty=colors
-    fi | less
+        http -v --follow --style=autumn GET http://$url --pretty=colors "$@"
+    fi |& less
     set +x
     
 }
