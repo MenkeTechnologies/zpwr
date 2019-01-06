@@ -1090,7 +1090,9 @@ digs(){
                 }
             }
             prettyPrint "CURL: $url"
-            curl -vvv -k -fsSL "$url"
+            exists httpie && {
+                httpie "$url"
+            } || curl -vvv -k -fsSL "$url"
             exec 2>/dev/tty
         done | less -MN
     } || echo "you need dig" >&2
@@ -1184,6 +1186,7 @@ httpie(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's#[^/]*//\([^@]*@\)\?\([^:/]*.*\)#\2#')"
+    echo $1 | grep -q https && proto=https|| proto=http
     shift
 
     if [[ -d "$styles_dir" ]]; then
@@ -1204,10 +1207,10 @@ httpie(){
                 break
             fi
         done
-        logg http -v --follow --style=$random_color GET http://$url --pretty=colors "$@"
-        http -v --follow --style=$random_color GET http://$url --pretty=colors "$@"
+        logg http -v --follow --style=$random_color GET $proto://$url --pretty=colors "$@"
+        http -v --follow --style=$random_color GET $proto://$url --pretty=colors "$@"
     else
-        http -v --follow --style=autumn GET http://$url --pretty=colors "$@"
+        http -v --follow --style=autumn GET $proto://$url --pretty=colors "$@"
     fi |& less
     set +x
     
