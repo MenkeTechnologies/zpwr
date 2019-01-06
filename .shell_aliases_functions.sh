@@ -1183,7 +1183,7 @@ set +x
 httpie(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
-    url="$(echo $1 | sed 's#[^/]*//\([^@]*@\)\?\([^:/]*\).*#\2#')"
+    url="$(echo $1 | sed 's#[^/]*//\([^@]*@\)\?\([^:/]*.*\)#\2#')"
     shift
 
     if [[ -d "$styles_dir" ]]; then
