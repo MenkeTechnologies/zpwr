@@ -1,0 +1,126 @@
+selectp -t 0 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 2 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 4 # select the first (0) pane 
+
+splitw -v -p 50  # split it into two halves
+selectp -t 4 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 6 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+
+selectp -t 7 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 6 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 5 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 4 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 3 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 2 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 1 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 3 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 6 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 9 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 2 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 6 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 10 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 14 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 16 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 19 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 22 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 25 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 18 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 22 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 26 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+selectp -t 30 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+send-keys -t 0 'lua' C-m
+send-keys -t 1 'swift' C-m
+send-keys -t 2 'ghci' C-m
+send-keys -t 3 'clisp' C-m
+send-keys -t 4 'ocaml' C-m
+send-keys -t 5 'rlwrap clojure' C-m
+send-keys -t 6 'pry' C-m
+send-keys -t 7 'python3 -m bpython' C-m
+send-keys -t 8 'php -a' C-m
+send-keys -t 9 'groovysh' C-m
+send-keys -t 10 'csharp' C-m
+send-keys -t 11 'kotlinc' C-m
+send-keys -t 12 'node' C-m
+send-keys -t 13 'coffee' C-m
+send-keys -t 14 'tclsh' C-m
+send-keys -t 15 'ksh' C-m
+send-keys -t 16 'bash' C-m
+send-keys -t 17 'csh' C-m
+send-keys -t 18 'rlwrap perl -dE1' C-m
+send-keys -t 19 'gore' C-m
+send-keys -t 20 'jshell' C-m
+send-keys -t 21 'mycli' C-m
+send-keys -t 22 'pgcli' C-m
+send-keys -t 23 'python2 -m bpython' C-m
+send-keys -t 24 'wish' C-m
+send-keys -t 25 'mongo' C-m
+send-keys -t 26 'irb' C-m
+send-keys -t 27 'scala' C-m
+send-keys -t 28 'racket' C-m
+send-keys -t 29 'iex' C-m
+send-keys -t 30 'bc' C-m
+send-keys -t 31 'gforth' C-m
