@@ -1,0 +1,62 @@
+selectp -t 0 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 2 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 4 # select the first (0) pane 
+
+splitw -v -p 50  # split it into two halves
+selectp -t 4 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+selectp -t 6 # select the first (0) pane 
+splitw -v -p 50  # split it into two halves
+
+
+selectp -t 7 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 6 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 5 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 4 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 3 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 2 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 1 # select the first (0) pane 
+splitw -h -p 50  # split it into two halves
+
+selectp -t 0 # select the first (0) pane 
+splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
+
+send-keys -t 0 'lua' C-m
+send-keys -t 1 'swift' C-m
+send-keys -t 2 'ghci' C-m
+send-keys -t 3 'clisp' C-m
+send-keys -t 4 'ocaml' C-m
+send-keys -t 5 'rlwrap clojure' C-m
+send-keys -t 6 'pry' C-m
+send-keys -t 7 'python3 -m bpython' C-m
+send-keys -t 8 'php -a' C-m
+send-keys -t 9 'groovysh' C-m
+send-keys -t 10 'csharp' C-m
+send-keys -t 11 'kotlinc' C-m
+send-keys -t 12 'node' C-m
+send-keys -t 13 'coffee' C-m
+send-keys -t 14 'tclsh' C-m
+send-keys -t 15 'gforth' C-m
