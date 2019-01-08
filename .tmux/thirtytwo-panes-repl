@@ -92,35 +92,35 @@ splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two 
 selectp -t 30 # select the first (0) pane 
 splitw -h -p 50  # split it into two halvessplitw -h -p 50  # split it into two halves
 
-send-keys -t 0 'lua' C-m
-send-keys -t 1 'swift' C-m
-send-keys -t 2 'ghci' C-m
-send-keys -t 3 'clisp' C-m
-send-keys -t 4 'ocaml' C-m
-send-keys -t 5 'rlwrap clojure' C-m
-send-keys -t 6 'pry' C-m
-send-keys -t 7 'python3 -m bpython' C-m
-send-keys -t 8 'php -a' C-m
-send-keys -t 9 'groovysh' C-m
-send-keys -t 10 'csharp' C-m
-send-keys -t 11 'kotlinc' C-m
-send-keys -t 12 'node' C-m
-send-keys -t 13 'coffee' C-m
-send-keys -t 14 'tclsh' C-m
-send-keys -t 15 'ksh' C-m
-send-keys -t 16 'bash' C-m
-send-keys -t 17 'csh' C-m
-send-keys -t 18 'rlwrap perl -dE1' C-m
-send-keys -t 19 'gore' C-m
-send-keys -t 20 'jshell' C-m
-send-keys -t 21 'mycli' C-m
-send-keys -t 22 'pgcli' C-m
-send-keys -t 23 'python2 -m bpython' C-m
-send-keys -t 24 'wish' C-m
-send-keys -t 25 'mongo' C-m
-send-keys -t 26 'irb' C-m
-send-keys -t 27 'scala' C-m
-send-keys -t 28 'racket' C-m
-send-keys -t 29 'iex' C-m
-send-keys -t 30 'bc' C-m
-send-keys -t 31 'gforth' C-m
+send-keys -t 0 'clear;lua' C-m
+send-keys -t 1 'clear;swift' C-m
+send-keys -t 2 'clear;ghci' C-m
+send-keys -t 3 'clear;clisp' C-m
+send-keys -t 4 'clear;ocaml' C-m
+send-keys -t 5 'clear;rlwrap clojure' C-m
+send-keys -t 6 'clear;pry' C-m
+send-keys -t 7 'clear;python3 -m bpython' C-m
+send-keys -t 8 'clear;php -a' C-m
+send-keys -t 9 'clear;groovysh' C-m
+send-keys -t 10 'clear;csharp' C-m
+send-keys -t 11 'clear;kotlinc' C-m
+send-keys -t 12 'clear;node' C-m
+send-keys -t 13 'clear;coffee' C-m
+send-keys -t 14 'clear;tclsh' C-m
+send-keys -t 15 'clear;ksh' C-m
+send-keys -t 16 'clear;bash' C-m
+send-keys -t 17 'clear;csh' C-m
+send-keys -t 18 'clear;rlwrap perl -dE1' C-m
+send-keys -t 19 'clear;gore' C-m
+send-keys -t 20 'clear;jshell' C-m
+send-keys -t 21 'clear;mycli' C-m
+send-keys -t 22 'clear;pgcli' C-m
+send-keys -t 23 'clear;python2 -m bpython' C-m
+send-keys -t 24 'clear;nslookup' C-m
+send-keys -t 25 'clear;mongo' C-m
+send-keys -t 26 'clear;irb' C-m
+send-keys -t 27 'clear;scala' C-m
+send-keys -t 28 'clear;racket' C-m
+send-keys -t 29 'clear;iex' C-m
+send-keys -t 30 'clear;bc' C-m
+send-keys -t 31 'clear;gforth' C-m
