@@ -169,6 +169,7 @@ refresh(){
             brew update
         elif [[ $1 == debian ]];then
             sudo apt-get update -y
+            sudo apt autoremove
         elif [[ $1 == suse ]];then
             sudo zypper refresh
         elif [[ $1 == arch ]];then
