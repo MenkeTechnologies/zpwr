@@ -1360,7 +1360,7 @@ supernatural-space() {
     __CORRECT_WORDS[and]="adn nad"
     __CORRECT_WORDS[are]="aer rea"
     __CORRECT_WORDS[back]="bkac bakc abck"
-    __CORRECT_WORDS[bad]="bda abd adb"
+    __CORRECT_WORDS[bad]="bda abd"
     __CORRECT_WORDS[based]="baesd absed"
     __CORRECT_WORDS[block]="blokc bolck lbock"
     __CORRECT_WORDS[capture]="catpure catprue caputre"
