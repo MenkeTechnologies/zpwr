@@ -18,6 +18,7 @@ out/
 node_modules/
 test.java
 .tmux/resurrect/
+package-lock.json
 #cmake
 cmake-build-debug/
 #object files
@@ -26,3 +27,5 @@ cmake-build-debug/
 .gradle
 build/
 .gradletasknamecache
+#maven
+target/

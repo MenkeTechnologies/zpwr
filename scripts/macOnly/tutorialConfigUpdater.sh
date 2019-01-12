@@ -37,6 +37,7 @@ cp "$HOME/.ideavimrc" "$installerDir"
 cp "$HOME/.inputrc" "$installerDir"
 cp "$HOME/grc.zsh" "$installerDir"
 cp "$HOME/.powerlevel9kconfig.sh" "$installerDir"
+cp "$HOME/.gitignore_global" "$installerDir"
 cp -R "$HOME/.vim/Ultisnips" "$installerDir"
 
 prettyPrint "Updating vim plugins list"
