@@ -35,7 +35,7 @@ command git remote -v | command grep "$(echo ${argValues// /\\|})" | command gre
 
 
 
-if [[-z $WIZARD ]];then
+if [[ -z $WIZARD ]];then
     echo "tommy was her elol 2019-01-11"
 fi
 
@@ -49,9 +49,11 @@ if [[ -z "$WIZARD" ]]; then
 
 fi
 
-if [[ x > 50 ]]; then
+x=1
+
+if (( x > 50 )); then
     echo "wer cool"
-elif [[ x > 10 ]]; then
+elif (( x > 10 )); then
     echo "asdfadf"
 else
     ####
@@ -61,7 +63,3 @@ else
     echo "the dtae is 2019-01-11"
 fi
 
-echo one line to give the program's name and a brief description
-Copyright 2019 yourname
-
-echo one l
