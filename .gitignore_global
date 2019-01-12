@@ -14,11 +14,16 @@ Thumbs.db
 *.iws
 *.ipr
 out/
+#java
+test.java
 #node
 node_modules/
-test.java
 .tmux/resurrect/
 package-lock.json
+*.lock
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 #cmake
 cmake-build-debug/
 #object files
