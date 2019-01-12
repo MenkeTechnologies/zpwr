@@ -286,7 +286,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
 
     prettyPrint "Updating repos for $distroName"
     case $distroName in
-        (debian|ubuntu|raspbian|kali|linuxmint) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
+        (debian|ubuntu|elementary|raspbian|kali|linuxmint) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
             distroFamily=debian
             refresh "$distroFamily"
             addDependenciesDebian
@@ -469,7 +469,7 @@ cp "$INSTALLER_DIR/.ideavimrc" "$HOME"
 ################################################################################
 
 prettyPrint "Installing YouCompleteMe"
-cd $HOME/.vim/bundle/YouCompleteMe && {
+cd "$HOME/.vim/bundle/YouCompleteMe" && {
     git submodule update --init --recursive
     #need greater than 3GB RAM for compiling
     YCM_CORES=1 ./install.py --clang-completer
@@ -489,9 +489,9 @@ prettyPrint "Installing Tmux Powerline Config"
 cat "$INSTALLER_DIR"/default.json > "$tmuxPowerlineDir/default.json"
 
 prettyPrint "Installing Tmux Plugin Manager"
-[[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p $HOME/.tmux/plugins/tpm
+[[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p "$HOME/.tmux/plugins/tpm"
 
-git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
