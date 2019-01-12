@@ -263,7 +263,10 @@ gitfunc () {
         return 0
 	}
 
-    gitSdiffColorizer.pl | less -r
+    local __old="$LESS"
+    unset LESS
+    gitSdiffColorizer.pl | less -R
+    export LESS="$__old"
     echo
     printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
     if echo "$SHELL" | grep -q zsh ; then
