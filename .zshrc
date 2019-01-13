@@ -108,7 +108,7 @@ elif [[ "$(uname)" == "Linux" ]];then
         (debian|raspbian|kali)
             plugins+=(debian)
             ;;
-        (ubuntu)
+        (ubuntu|linuxmint|elementary)
             plugins+=(ubuntu)
             ;;
         (centos|rhel)
