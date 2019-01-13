@@ -83,7 +83,7 @@ def react_routine(name):
 
     modelFile = f'{name}.js'
     model = f"""import React from 'react';
-export default class Test extends React.Component {{
+export default class {name} extends React.Component {{
     render() {{
         return (
             <div>
@@ -111,12 +111,12 @@ def check_dir_exists(dir):
         print(f"create {dir}?")
         ans = input()
         if ans == "y":
-            os.mkdir(dir)
+            os.makedirs(dir)
         else:
             exit(1)
 
 
-if len(sys.argv) < 1:
+if len(sys.argv) < 2:
     sys.stderr.write("what is the framework?\n")
     exit(2)
 
@@ -125,7 +125,7 @@ user_framework = sys.argv[1]
 
 def min_args_check(min_args):
     if len(sys.argv) < min_args:
-        sys.stderr.write(f"need {min_args} args\n")
+        sys.stderr.write(f"need {min_args-1} args at least\n")
         exit(2)
 
 
