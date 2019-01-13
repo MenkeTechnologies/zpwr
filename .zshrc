@@ -1405,6 +1405,7 @@ supernatural-space() {
     __CORRECT_WORDS[point]="opint ponit"
     __CORRECT_WORDS[print]="pirnt pritn rpint prnit"
     __CORRECT_WORDS[probe]="porbe rpobe"
+    __CORRECT_WORDS[project]="projcet proejct proeject porject"
     __CORRECT_WORDS[radius]="radisu raduis"
     __CORRECT_WORDS[range]="rnage arnge"
     __CORRECT_WORDS[runnning]="runnign"
