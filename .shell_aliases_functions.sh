@@ -116,6 +116,7 @@ exists c.pl && {
     alias pp='c.pl'
     alias ppp='c.pl *'
 }
+alias dirs='dirs -v'
 alias lo="tail -f $LOGFILE"
 alias va='cd /var'
 alias plr='rlwrap perl -dE1'
@@ -138,6 +139,16 @@ exists spotify && {
     alias pe='spotify prev'
     alias spa='spotify pause'
 }
+echo $SHELL | grep -q zsh && {
+    alias 10='cd -10'
+    alias 11='cd -11'
+    alias 12='cd -12'
+    alias 13='cd -13'
+    alias 14='cd -14'
+    alias 15='cd -15'
+}
+
+
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
