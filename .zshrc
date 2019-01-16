@@ -1373,7 +1373,7 @@ supernatural-space() {
     __CORRECT_WORDS[client]="cleint"
     __CORRECT_WORDS[click]="clikc"
     __CORRECT_WORDS[custom]="custmo cusotm"
-    __CORRECT_WORDS[declare]="delcare"
+    __CORRECT_WORDS[declare]="delcare declaer"
     __CORRECT_WORDS[default]="defalut deafult"
     __CORRECT_WORDS[directory]="direcotry direcorty directroy"
     __CORRECT_WORDS[drag]="darg"

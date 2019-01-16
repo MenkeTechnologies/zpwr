@@ -147,8 +147,6 @@ echo $SHELL | grep -q zsh && {
     alias 14='cd -14'
     alias 15='cd -15'
 }
-
-
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
