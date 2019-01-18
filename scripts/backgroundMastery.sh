@@ -61,3 +61,4 @@ s3_pid="$!"
 wait $s3_pid $s4_pid $s5_pid
 bash S6 &
 s6_pid="$!"
+
