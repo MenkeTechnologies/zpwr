@@ -10,7 +10,7 @@ git clone https://github.com/MenkeTechnologies/customTerminalInstaller.git && cd
 
 Some interactivity is required near end of installer for postfix, wireshark and snort installs.
 
-Once you reach the oh-my-zsh prompt, type logout, exit or ^D to return to installer script.
+Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Control-D to return to installer script.
 
 # Running on a MacbookPro
 ![Alt text](/tmuxfinal1.png?raw=true)
