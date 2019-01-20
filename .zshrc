@@ -1410,6 +1410,7 @@ supernatural-space() {
     __CORRECT_WORDS[range]="rnage arnge"
     __CORRECT_WORDS[runnning]="runnign"
     __CORRECT_WORDS[single]="signle"
+    __CORRECT_WORDS[some]="soem som seom"
     __CORRECT_WORDS[spelling]="spellign spelilng"
     __CORRECT_WORDS[state]="staet steta sttae"
     __CORRECT_WORDS[store]="tsore sotre"
