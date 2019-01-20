@@ -1232,7 +1232,9 @@ exists http && httpie(){
         done
         len=${#file_ary}
 
-        rand=$((RANDOM % len))
+        randscript="print int(rand()*$len)"
+        rand=$(echo "$randscript" | perl)
+        logg $rand
         echo $SHELL | grep -q zsh && ((rand++))
 
         for (( i = 0; i < $len; i++ )); do
@@ -1241,8 +1243,8 @@ exists http && httpie(){
                 break
             fi
         done
-        logg http -v --follow --style=$random_color GET $proto://$url --pretty=colors "$@"
-        http -v --follow --style=$random_color GET $proto://$url --pretty=colors "$@"
+        logg http -v ---follow --style=$random_color GET $proto://$url --pretty=all "$@"
+        http -v --follow --style=$random_color GET $proto://$url --pretty=all "$@"
     else
         http -v --follow --style=autumn GET $proto://$url --pretty=colors "$@"
     fi 2>&1 | less
