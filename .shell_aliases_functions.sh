@@ -1243,7 +1243,7 @@ exists http && httpie(){
                 break
             fi
         done
-        logg http -v ---follow --style=$random_color GET $proto://$url --pretty=all "$@"
+        logg http -v --follow --style=$random_color GET $proto://$url --pretty=all "$@"
         http -v --follow --style=$random_color GET $proto://$url --pretty=all "$@"
     else
         http -v --follow --style=autumn GET $proto://$url --pretty=colors "$@"
