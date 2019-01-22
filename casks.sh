@@ -16,6 +16,7 @@ brew cask install disk-inventory-x
 brew cask install duet
 brew cask install eclipse-jee
 brew cask install electric-sheep
+brew cask install emacs
 brew cask install etcher
 brew cask install filezilla
 brew cask install firefox
@@ -38,6 +39,7 @@ brew cask install java8
 brew cask install karabiner
 brew cask install keyboard-maestro
 brew cask install kicad
+brew cask install latexit
 brew cask install libreoffice
 brew cask install little-snitch
 brew cask install macs-fan-control
@@ -61,6 +63,7 @@ brew cask install react-studio
 brew cask install rider
 brew cask install robo-3t
 brew cask install rowanj-gitx
+brew cask install rstudio
 brew cask install rubymine
 brew cask install scenebuilder
 brew cask install skype

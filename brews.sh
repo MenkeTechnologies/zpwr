@@ -1,6 +1,7 @@
 brew install aalib
 brew install ack
 brew install adns
+brew install akka
 brew install algol68g
 brew install alpine
 brew install amap
@@ -11,6 +12,7 @@ brew install argon2
 brew install asciidoctor
 brew install aspcud
 brew install aspell
+brew install atk
 brew install autoconf
 brew install automake
 brew install autossh
@@ -54,6 +56,7 @@ brew install curl-openssl
 brew install cython
 brew install dart
 brew install dbus
+brew install dhex
 brew install dialog
 brew install diff-so-fancy
 brew install doc
@@ -120,9 +123,12 @@ brew install gst-plugins-base
 brew install gst-plugins-good
 brew install gst-plugins-ugly
 brew install gstreamer
+brew install gtk+3
 brew install harfbuzz
 brew install heroku
 brew install heroku-node
+brew install hexedit
+brew install hicolor-icon-theme
 brew install htop
 brew install httpd
 brew install httpie
@@ -152,6 +158,7 @@ brew install libcaca
 brew install libcroco
 brew install libcuefile
 brew install libelf
+brew install libepoxy
 brew install libev
 brew install libevent
 brew install libffi
@@ -161,9 +168,11 @@ brew install libgpg-error
 brew install libgtop
 brew install libiconv
 brew install libid3tag
+brew install libidn
 brew install libidn2
 brew install libksba
 brew install libmaxminddb
+brew install libmetalink
 brew install libmikmod
 brew install libmms
 brew install libmodplug
@@ -177,9 +186,11 @@ brew install libpsl
 brew install libreplaygain
 brew install librsvg
 brew install libsamplerate
+brew install libscrypt
 brew install libshout
 brew install libsigsegv
 brew install libsmi
+brew install libsndfile
 brew install libsodium
 brew install libsoup
 brew install libssh
@@ -210,6 +221,7 @@ brew install maven
 brew install mercurial
 brew install midnight-commander
 brew install minicom
+brew install mit-scheme
 brew install mksh
 brew install mongodb
 brew install mono
@@ -235,6 +247,7 @@ brew install nginx
 brew install ninvaders
 brew install nmap
 brew install nnn
+brew install node
 brew install npth
 brew install numpy
 brew install nvm
@@ -247,6 +260,7 @@ brew install openldap
 brew install openssl
 brew install openssl@1.1
 brew install opus
+brew install opusfile
 brew install orc
 brew install p11-kit
 brew install p7zip
@@ -266,6 +280,7 @@ brew install pipes-sh
 brew install pixman
 brew install pkg-config
 brew install ponysay
+brew install portaudio
 brew install portmidi
 brew install postgresql
 brew install pssh
@@ -276,11 +291,13 @@ brew install pygobject3
 brew install python
 brew install python@2
 brew install qt
+brew install r
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis
 brew install rlwrap
 brew install rsync
+brew install rtmpdump
 brew install ruby
 brew install rust
 brew install rustup-init
@@ -304,6 +321,7 @@ brew install smpeg
 brew install snappy
 brew install sntop
 brew install sox
+brew install spaceinvaders-go
 brew install speedtest-cli
 brew install speex
 brew install sphinx-doc
