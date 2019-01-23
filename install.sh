@@ -86,7 +86,7 @@ dependencies_ary=(httpie hexedit cargo boxes tal iperf vim tmux chkrootkit wget 
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary+=(mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
+    dependencies_ary+=(tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace python-pip)
 }
