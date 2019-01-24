@@ -1194,7 +1194,7 @@ c(){
                                 if (( $# > 1)); then
                                     printf "\x1b[34;1;4m$file\x1b[0m\n"
                                 fi
-                                ccat "$file" | nl -b a
+                                eval "pygmentize $PYGMENTIZE_OPTS $file" | nl -b a
                             fi
                         done
                 } || cat -n "$@"
@@ -1208,7 +1208,7 @@ c(){
                             if (( $# > 1)); then
                                 printf "\x1b[34;1;4m$file\x1b[0m\n"
                             fi
-                            ccat "$file" | nl -b a
+                            eval "pygmentize $PYGMENTIZE_OPTS $file" | nl -b a
                         fi
                 done
             } || cat -n "$@"
