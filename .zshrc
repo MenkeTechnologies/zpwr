@@ -1703,7 +1703,7 @@ colortest(){
 #{{{                    MARK:FZF
 #**************************************************************
 export ROUGIFY_THEME="github"
-export PYGMENTIZE_OPTS="-f terminal256 -O style=xcode -g"
+export PYGMENTIZE_OPTS="-f terminal256 -g -O style=arduino"
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
@@ -1713,11 +1713,11 @@ fzf_setup(){
     #default value for rougify theme
     alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
-        "[[ -f {} ]] && rougify -t '"$ROUGIFY_THEME$__TS"' {} \
+        "[[ -f {} ]] && pygmentize '"$PYGMENTIZE_OPTS$__TS"' {} \
         2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
-        "[[ -f {} ]] && pygmentize -g {} \
+        "[[ -f {} ]] && pygmentize '"$PYGMENTIZE_OPTS"' {} \
         2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
@@ -1726,13 +1726,13 @@ fzf_setup(){
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"[[ -f {} ]] && { print -r {} | command egrep \
         '\.[jw]ar\$' && jar tf {} ; } \
-        || { pygmentize -g {} 2>/dev/null | \
+        || { pygmentize $PYGMENTIZE_OPTS {} 2>/dev/null | \
         cat -n; rc=$ps; }; [[ \$rc = 0 ]] || \
         stat {} | fold -80 | head -500\""
     #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
-        '\.[jw]ar\$' && jar tf {} ; } || { pygmentize -g {} \
+        '\.[jw]ar\$' && jar tf {} ; } || { pygmentize $PYGMENTIZE_OPTS {} \
         2>/dev/null || {
                 [[ -e {} ]] && stat {} | fold -80 | \
                 head -500 || {
