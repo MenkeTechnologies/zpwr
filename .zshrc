@@ -1703,7 +1703,7 @@ colortest(){
 #{{{                    MARK:FZF
 #**************************************************************
 export ROUGIFY_THEME="github"
-export PYGMENTIZE_COLOR="arduino"
+export PYGMENTIZE_COLOR="emacs"
 export PYGMENTIZE_OPTS="-f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
