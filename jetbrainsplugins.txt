@@ -5,3 +5,6 @@ BashSupport
 Rainbow Brackets
 Nyan Progress Bar
 Extra Icons
+Material Theme UI
+VisualVM Launcher
+SequenceDiagram
