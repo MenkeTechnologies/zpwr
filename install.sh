@@ -221,6 +221,16 @@ do
 done
 shift $(($OPTIND-1))
 
+showDeps(){
+    {
+        printf "Installing ${#dependencies_ary[@]} packages: " 
+        for dep in "${dependencies_ary[@]}" ; do
+                printf "$dep "
+        done 
+    } | prettyPrintStdin
+    proceed
+}
+
 
 #}}}***********************************************************
 
@@ -233,13 +243,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
     proceed
 
-    {
-        printf "Installing: " 
-        for dep in "${dependencies_ary[@]}" ; do
-                printf "$dep "
-        done 
-    } | prettyPrintStdin
-    proceed
+    showDeps
 
     exists "brew" || {
         #install homebrew
@@ -325,14 +329,8 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
 
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
     proceed
-
-    {
-        printf "Installing: " 
-        for dep in "${dependencies_ary[@]}" ; do
-                printf "$dep "
-        done 
-    } | prettyPrintStdin
-    proceed
+    
+    showDeps
 
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
