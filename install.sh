@@ -231,6 +231,11 @@ showDeps(){
     proceed
 }
 
+warnOverwrite(){
+    prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .ideavimrc, .iftoprc, .shell_aliases_functions.sh in $HOME"
+    proceed
+}
+
 
 #}}}***********************************************************
 
@@ -241,8 +246,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     addDependenciesMac
     distroName=Mac
 
-    prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
-    proceed
+    warnOverwrite
 
     showDeps
 
@@ -332,9 +336,8 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
             ;;
     esac
 
-    prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
-    proceed
-    
+    warnOverwrite
+
     showDeps
 
     if [[ $skip != true ]]; then
@@ -376,8 +379,8 @@ else
         refresh "$distroFamily"
 
         addDependenciesFreeBSD
-        prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
-        proceed
+
+        warnOverwrite
         
         showDeps
 
