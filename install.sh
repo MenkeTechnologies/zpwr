@@ -233,11 +233,13 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
     proceed
 
-    for dep in "${dependencies_ary[@]}" ; do
-       printf "$dep "
-    done | prettyPrintStdin
+    {
+        printf "Installing: " 
+        for dep in "${dependencies_ary[@]}" ; do
+                printf "$dep "
+        done 
+    } | prettyPrintStdin
     proceed
-
 
     exists "brew" || {
         #install homebrew
@@ -324,9 +326,12 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
     proceed
 
-    for dep in "${dependencies_ary[@]}" ; do
-       printf "$dep "
-    done | prettyPrintStdin
+    {
+        printf "Installing: " 
+        for dep in "${dependencies_ary[@]}" ; do
+                printf "$dep "
+        done 
+    } | prettyPrintStdin
     proceed
 
     if [[ $skip != true ]]; then
