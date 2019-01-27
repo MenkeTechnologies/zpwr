@@ -33,12 +33,34 @@ prettyPrint(){
     printf "\n"
 }
 
+proceed(){
+    read
+    case $REPLY in
+        [yY][eE][sS]|[yY])
+            :
+            ;;
+        *)
+            exit 1
+            ;;
+    esac
+}
+
+prettyPrintStdin(){
+    perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
+    [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
+    (( install_counter++ ))
+    {
+        printf "$install_counter>>> $@\n"
+        cat
+    } | "$perlfile"
+    echo
+}
 
 prettyPrint(){
     perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( install_counter++ ))
-    printf "$install_counter>>> $1\n" | "$perlfile"
+    printf "$install_counter>>> $@\n" | "$perlfile"
     echo
 }
 

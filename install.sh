@@ -53,7 +53,6 @@ cat<<\EOF
                             "Y88P"
 EOF
 
-sleep 1
 
 #Dependencies
 # 1) vim 8.0
@@ -229,6 +228,15 @@ shift $(($OPTIND-1))
 #**************************************************************
 if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Checking Dependencies for Mac..."
+    addDependenciesMac
+
+    prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
+    proceed
+
+    for dep in "${dependencies_ary[@]}" ; do
+       printf "$dep "
+    done | prettyPrintStdin
+
 
     exists "brew" || {
         #install homebrew
@@ -252,7 +260,6 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         
         prettyPrint "Updating repos"
         refresh mac
-        addDependenciesMac
         brew cask install java
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
@@ -312,6 +319,13 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
             exit 1
             ;;
     esac
+
+    prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
+    proceed
+
+    for dep in "${dependencies_ary[@]}" ; do
+       printf "$dep "
+    done | prettyPrintStdin
 
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
