@@ -563,6 +563,7 @@ automake --version 2>&1 | grep -q '16' || {
     wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
     tar xvfz automake-1.16.tar.gz
     cd automake-1.16 && ./configure && make && sudo make install
+    make clean
 }
 
 [[ ! -d "$HOME/forkedRepos" ]] && mkdir "$HOME/forkedRepos"
