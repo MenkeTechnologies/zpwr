@@ -1190,7 +1190,7 @@ c(){
             exists ccat && {
                 echo | ccat &>/dev/null && {
                     for file in "$@";do
-                            if [[ ! -d "$file" && -s "$file" ]]; then
+                        if [[ ! -d "$file" ]] && [[ -s "$file" || -L "$file" ]]; then
                                 if (( $# > 1)); then
                                     printf "\x1b[34;1;4m$file\x1b[0m\n"
                                 fi
@@ -1199,12 +1199,12 @@ c(){
                         done
                 } || cat -n "$@"
             } || cat -n "$@"
-        } | less -FX
+        } | less -FXS
     else
         exists ccat && {
             echo | ccat &>/dev/null && {
                 for file in "$@";do
-                        if [[ ! -d "$file" && -s "$file" ]]; then
+                        if [[ ! -d "$file" ]] && [[ -s "$file" || -L "$file" ]]; then
                             if (( $# > 1)); then
                                 printf "\x1b[34;1;4m$file\x1b[0m\n"
                             fi
