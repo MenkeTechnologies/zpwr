@@ -302,24 +302,28 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
 
     prettyPrint "Updating repos for $distroName"
     case $distroName in
-        (debian|ubuntu|elementary|raspbian|kali|linuxmint) prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
+        (debian|ubuntu|elementary|raspbian|kali|linuxmint)
             distroFamily=debian
+            prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
             refresh "$distroFamily"
             addDependenciesDebian
             ;;
-        (arch) prettyPrint "Installing Dependencies for $distroName with zypper"
+        (arch)
             distroFamily=arch
+            prettyPrint "Installing Dependencies for $distroName with zypper"
             refresh "$distroFamily"
             addDependenciesArch
             ;;
-        (*suse*) prettyPrint "Installing Dependencies for $distroName with zypper"
+        (*suse*)
             distroFamily=suse
             refresh "$distroFamily"
+            prettyPrint "Installing Dependencies for $distroName with zypper"
             addDependenciesSuse
             ;;
-        (centos|fedora|rhel) prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
+        (centos|fedora|rhel)
             distroFamily=redhat
             refresh "$distroFamily"
+            prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
             addDependenciesRedHat
             ;;
         (*)
