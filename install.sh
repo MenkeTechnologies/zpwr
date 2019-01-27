@@ -236,6 +236,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     for dep in "${dependencies_ary[@]}" ; do
        printf "$dep "
     done | prettyPrintStdin
+    proceed
 
 
     exists "brew" || {
@@ -326,6 +327,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     for dep in "${dependencies_ary[@]}" ; do
        printf "$dep "
     done | prettyPrintStdin
+    proceed
 
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
