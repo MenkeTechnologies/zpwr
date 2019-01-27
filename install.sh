@@ -223,7 +223,7 @@ shift $(($OPTIND-1))
 
 showDeps(){
     {
-        printf "Installing ${#dependencies_ary[@]} packages: " 
+        printf "Installing ${#dependencies_ary[@]} packages on $distroFamily: " 
         for dep in "${dependencies_ary[@]}" ; do
                 printf "$dep "
         done 
@@ -239,6 +239,7 @@ showDeps(){
 if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Checking Dependencies for Mac..."
     addDependenciesMac
+    distroFamily=Mac
 
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
     proceed
@@ -370,6 +371,10 @@ else
         refresh "$distroFamily"
 
         addDependenciesFreeBSD
+        prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .shell_aliases_functions.sh in $HOME"
+        proceed
+        
+        showDeps
 
         if [[ $skip != true ]]; then
             prettyPrint "Now The Main Course..."
