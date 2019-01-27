@@ -42,6 +42,14 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         prettyPrint "Installing youtube-dl"
         pip install --upgrade youtube_dl
     }
+
+    exists pip3 && {
+        prettyPrint "Installing bpython for python3"
+        sudo pip3 install bpython
+
+        prettyPrint "Installing pygments for python3"
+        sudo pip3 install pygments
+    }
 elif [[ "$OS_TYPE" == "Linux" ]];then
     if [[ "$distroFamily" == redhat ]]; then
         prettyPrint "Installing grc for RedHat"
@@ -91,7 +99,11 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
     }
 
     exists pip3 && {
+        prettyPrint "Installing bpython for python3"
         sudo pip3 install bpython
+
+        prettyPrint "Installing pygments for python3"
+        sudo pip3 install pygments
     }
 else
     if [[ "$OS_TYPE" == "FreeBSD" ]]; then
@@ -134,7 +146,13 @@ else
             prettyPrint "Installing youtube-dl"
             sudo pip3 install youtube_dl
         }
-        sudo pip3 install bpython
+        exists pip3 && {
+            prettyPrint "Installing bpython for python3"
+            sudo pip3 install bpython
+
+            prettyPrint "Installing pygments for python3"
+            sudo pip3 install pygments
+        }
     fi
 fi
 prettyPrint "Done With Python Packages"
