@@ -34,6 +34,7 @@ prettyPrint(){
 }
 
 proceed(){
+    printf "Proceed? >>> "
     read
     case $REPLY in
         [yY][eE][sS]|[yY])
