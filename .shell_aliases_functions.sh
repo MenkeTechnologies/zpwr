@@ -1262,7 +1262,7 @@ fz(){
 }
 
 pygmentColors(){
-    dir="$(pip3 show pygments | grep Location | awk '{print $2}')"
+    dir="$(python3 -m pip show pygments | grep Location | awk '{print $2}')"
     for i in "$dir/pygments/styles/"* ; do
         echo "$i"
     done
