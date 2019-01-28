@@ -15,30 +15,13 @@ case "$OS" in
     *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
 esac
 
-[[ ! -d .git ]] && echo "Not a git directory" >&2 && return 1
-
-name=$(git config user.name)
-if ! [[ $(git remote -v) ]]; then
-    $machine https://github.com/$name?tab=repositories
-fi
-
-argValues="$*";
-command git remote -v | command grep "$(echo ${argValues// /\\|})" | command grep 'heroku' | command grep fetch | command grep -o -E ':.*' | \
-    cut -c 19- | command awk '{print $1}' | command sed 's@.git$@@' | \
-    command xargs -I {} "$open_cmd" https://dashboard.heroku.com/apps/{} https://{}.herokuapp.com
-
-{
-    command git remote -v | command grep "$(echo ${argValues// /\\|})" | command grep '@'  | command grep -o -E '@.*' | cut -c 2-
-    command git remote -v | command grep "$(echo ${argValues// /\\|})" | command grep '//' | command grep -o -E ':.*' | cut -c 4- | command grep -v 'heroku'
-} | command grep fetch | command sed 's@:/\\@@g' | command awk '{print $1}' | sed 's@.git$@@' | command xargs -I {} "$open_cmd" https://www.{}
-
 
 if [[ -z $WIZARD ]];then
     
     echo "tommy was her elol 2019-01-11"
 fi
 
-f [[ -z "$WIZARD" ]]; then
+if [[ -z "$WIZARD" ]]; then
     ##################################
     #  asdfkaskdfjlaksdjflkjadkflsj  #
     ##################################

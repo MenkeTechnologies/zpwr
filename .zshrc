@@ -780,6 +780,7 @@ bindkey -M vicmd '^V^Z' fzf-history-widget
 
 bindkey -M viins '^V^V' fzf-cd-widget
 bindkey -M vicmd '^V^V' fzf-cd-widget
+#completion trigger plus tab, defaults to ~~
 export FZF_COMPLETION_TRIGGER=';'
 
 #bindkey '^F^A' fzf-completion
@@ -1703,7 +1704,9 @@ colortest(){
 
 #{{{                    MARK:FZF
 #**************************************************************
+#default value for rougify theme
 export ROUGIFY_THEME="github"
+#default value for pygmentize theme
 export PYGMENTIZE_COLOR="emacs"
 export PYGMENTIZE_OPTS="-f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
 fzf_setup(){
@@ -1712,7 +1715,6 @@ fzf_setup(){
     echo "$SHELL" | grep -q "zsh" && ps='$pipestatus[1]' || \
         ps='${PIPESTATUS[0]}'
 
-    #default value for rougify theme
     alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
         "[[ -f {} ]] && pygmentize '"$PYGMENTIZE_OPTS$__TS"' {} \
@@ -1731,7 +1733,6 @@ fzf_setup(){
         || { pygmentize $PYGMENTIZE_OPTS {} 2>/dev/null | \
         cat -n; rc=$ps; }; [[ \$rc = 0 ]] || \
         stat {} | fold -80 | head -500\""
-    #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
         '\.[jw]ar\$' && jar tf {} ; } || { pygmentize $PYGMENTIZE_OPTS {} \
