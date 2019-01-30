@@ -82,6 +82,7 @@ brew install fpc
 brew install fping
 brew install freetds
 brew install freetype
+brew install frei0r
 brew install fribidi
 brew install fswatch
 brew install gawk
@@ -124,6 +125,7 @@ brew install gst-plugins-good
 brew install gst-plugins-ugly
 brew install gstreamer
 brew install gtk+3
+brew install gts
 brew install harfbuzz
 brew install heroku
 brew install heroku-node
@@ -153,6 +155,7 @@ brew install kotlin
 brew install lame
 brew install leiningen
 brew install libao
+brew install libass
 brew install libassuan
 brew install libcaca
 brew install libcroco
@@ -241,6 +244,7 @@ brew install nasm
 brew install ncdu
 brew install ncmpcpp
 brew install ncurses
+brew install netpbm
 brew install nettle
 brew install nghttp2
 brew install nginx
@@ -255,6 +259,7 @@ brew install ocaml
 brew install ocamlbuild
 brew install opam
 brew install openblas
+brew install opencore-amr
 brew install openexr
 brew install openldap
 brew install openssl
@@ -339,6 +344,7 @@ brew install texinfo
 brew install the_silver_searcher
 brew install theora
 brew install tidy-html5
+brew install tig
 brew install tmux
 brew install toilet
 brew install tokei

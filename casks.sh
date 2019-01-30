@@ -8,6 +8,7 @@ brew cask install atom
 brew cask install bettertouchtool
 brew cask install blender
 brew cask install clion
+brew cask install cyberduck
 brew cask install cycling74-max
 brew cask install dash
 brew cask install datagrip
