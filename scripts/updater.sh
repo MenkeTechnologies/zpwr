@@ -158,8 +158,6 @@ if [[ $skip != true ]]; then
         brew upgrade #&> /dev/null
         #remove brew cache
         rm -rf "$(brew --cache)"
-        #removing old symbolic links
-        brew prune
         #remote old programs occupying disk sectors
         brew cleanup
         brew services cleanup
