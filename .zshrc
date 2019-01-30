@@ -813,8 +813,8 @@ bindkey -M vicmd -r '^V'
 bindkey -M viins -r '^F'
 bindkey -M vicmd -r '^F'
 
-bindkey -M viins '^F^S' list-choices
-bindkey -M vicmd '^F^S' list-choices
+bindkey -M viins '^F^L' list-choices
+bindkey -M vicmd '^F^L' list-choices
 
 bindkey -M viins '^K' alternateQuotes
 bindkey -M vicmd '^K' alternateQuotes
@@ -874,8 +874,8 @@ bindkey '\eOQ' sub
 }
 
 
-bindkey -M viins '^S^S' gitfuncNoCheck
-bindkey -M vicmd '^S^S' gitfuncNoCheck
+bindkey -M viins '^F^S' gitfuncNoCheck
+bindkey -M vicmd '^F^S' gitfuncNoCheck
 bindkey -M viins '^S' gitfunc
 bindkey -M vicmd '^S' gitfunc
 bindkey '^N' sudo-command-line
