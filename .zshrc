@@ -159,6 +159,18 @@ sub (){
     zle .accept-line
 
 }
+
+lastWordDouble(){
+    mywords=("${(z)BUFFER}")
+    if [[ $BUFFER[-1] == " " ]]; then
+        LBUFFER="$BUFFER"$mywords[-1]
+    else
+        LBUFFER="$BUFFER "$mywords[-1]
+    fi
+}
+
+zle -N lastWordDouble
+
 updater (){
     zle .kill-whole-line
     #bash -l options for creating login shell to run script
@@ -775,6 +787,9 @@ bindkey -M vicmd '^F^D' intoFzf
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
 
+bindkey -M viins '^Q' lastWordDouble
+bindkey -M vicmd '^Q' lastWordDouble
+
 bindkey -M viins '^V^Z' fzf-history-widget
 bindkey -M vicmd '^V^Z' fzf-history-widget
 
@@ -859,8 +874,8 @@ bindkey '\eOQ' sub
 }
 
 
-bindkey -M viins '^Q' gitfuncNoCheck
-bindkey -M vicmd '^Q' gitfuncNoCheck
+bindkey -M viins '^S^S' gitfuncNoCheck
+bindkey -M vicmd '^S^S' gitfuncNoCheck
 bindkey -M viins '^S' gitfunc
 bindkey -M vicmd '^S' gitfunc
 bindkey '^N' sudo-command-line
