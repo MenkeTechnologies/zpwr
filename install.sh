@@ -53,7 +53,6 @@ cat<<\EOF
                             "Y88P"
 EOF
 
-
 #Dependencies
 # 1) vim 8.0
 # 2) tmux 2.1
@@ -703,8 +702,7 @@ prettyPrint "Installing fzf"
 
 #{{{                    MARK:Final
 #**************************************************************
-cd "$INSTALLER_DIR"
-cd ..
+cd "$INSTALLER_DIR/.." || echo "what happened to $INSTALLER_DIR ?" >&2 && exit 1
 
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
 
@@ -713,7 +711,6 @@ test -f "$escapeRemover" && \
 
 #rm -rf "$INSTALLER_DIR"
 prettyPrint "Done!!!!!!"
-
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
 export SHELL="$(which zsh)"
