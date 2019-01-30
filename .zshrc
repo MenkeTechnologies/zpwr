@@ -163,9 +163,11 @@ sub (){
 lastWordDouble(){
     mywords=("${(z)BUFFER}")
     if [[ $BUFFER[-1] == " " ]]; then
-        LBUFFER="$BUFFER"$mywords[-1]
+        BUFFER="$BUFFER"$mywords[-1]
+        CURSOR=$#BUFFER
     else
-        LBUFFER="$BUFFER "$mywords[-1]
+        BUFFER="$BUFFER "$mywords[-1]
+        CURSOR=$#BUFFER
     fi
 }
 
