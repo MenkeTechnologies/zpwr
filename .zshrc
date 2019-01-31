@@ -1341,7 +1341,6 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
     alias -g ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"" && git push"
 
-
     alias -g ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
         '$__TS'
     fi'

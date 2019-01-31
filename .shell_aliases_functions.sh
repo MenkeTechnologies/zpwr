@@ -1261,6 +1261,33 @@ fz(){
     }
 }
 
+figletfonts(){
+
+    alternatingPrettyPrint "${DELIMITER_CHAR}Figlet${DELIMITER_CHAR} Fonts are:"
+
+    [[ "$(uname)" == Darwin ]] && {
+        FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+    } || {
+        FIGLET_DIR="/usr/share/figlet"
+    }
+
+    if [[ ! -d "$FIGLET_DIR" ]]; then
+        echo "Can not find $FIGLET_DIR" >&2 && return 1
+    fi
+
+    declare -a ary
+
+
+    for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
+        ary+=${file##*/}
+    done
+
+    for font in ${ary[@]} ; do
+        printf "${font%.*} "
+    done | ponysay | splitReg.sh -- ---------------------- lolcat
+
+}
+
 pygmentColors(){
     dir="$(python3 -m pip show pygments | grep Location | awk '{print $2}')"
     for i in "$dir/pygments/styles/"* ; do
