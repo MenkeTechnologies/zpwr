@@ -10,7 +10,7 @@
 for directory; do
     if [[ -d "$directory" ]]; then
         cd "$directory" && {
-            [[ -d .git ]] && {
+            git rev-parse --git-dir &>/dev/null && {
                 line="$(git remote -v 2>/dev/null | sed 1q)" && {
                     echo "$line" | grep -q 'git@' && {
                         #ssh
