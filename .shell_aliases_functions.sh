@@ -959,7 +959,7 @@ reveal() {
         *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
     esac
 
-    [[ ! -d .git ]] && echo "Not a git directory" >&2 && return 1
+    git rev-parse --git-dir &>/dev/null || { echo "Not a git directory" >&2 && return 1; }
 
     command git remote -v | command grep "$1" | command grep 'heroku' | command grep fetch | command grep -o -E ':.*' | \
     cut -c 19- | command awk '{print $1}' | command sed 's@.git$@@' | \

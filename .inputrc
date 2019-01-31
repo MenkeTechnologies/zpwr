@@ -6,7 +6,7 @@ set editing-mode vi
 #"\C-o": edit-and-execute-command
 #$endif
 
-"\C-o" edit-and-execute-command
+#"\C-o" edit-and-execute-command
 
 set colored-stats On
 set visible-stats On
