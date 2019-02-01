@@ -45,7 +45,9 @@ done
 shift $((OPTIND-1))
 
 # clear screen
-trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
+if [[ -n "$PONIES" ]]; then
+    trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
+fi
 clear
 
 prettyPrint(){
@@ -106,7 +108,9 @@ if [[ $skip != true ]]; then
     [[ -f "$SCRIPTS/printHeader.sh" ]] && {
         width=80
         perl -le "print '_'x$width" | lolcat
-        echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
+        if [[ -n "$PONIES" ]]; then
+            echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
+        fi
         perl -le "print '_'x$width" | lolcat
     }
     #python 3.6
