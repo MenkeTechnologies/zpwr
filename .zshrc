@@ -1,7 +1,7 @@
 #{{{                    MARK:Exports
 #**************************************************************
 export LC_ALL="en_US.UTF-8"
-export PONIES=
+export PONIES=true
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
