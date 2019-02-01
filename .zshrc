@@ -1,6 +1,7 @@
 #{{{                    MARK:Exports
 #**************************************************************
 export LC_ALL="en_US.UTF-8"
+export PONIES=
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -1577,10 +1578,14 @@ if [[ "$(uname)" = Darwin ]]; then
             printf "\e[1m"
             [[ -f "$fig" ]] && {
                 [[ -f "$SCRIPTS/splitReg.sh" ]] && {
-                    bash "$fig" "$(hostname)" \
-                    | ponysay -W 100 \
-                    | splitReg.sh -- \
-                    ---------------------- lolcat
+                    if [[ -n "$PONIES" ]]; then
+                        bash "$fig" "$(hostname)" \
+                        | ponysay -W 100 \
+                        | splitReg.sh -- \
+                        ---------------------- lolcat
+                    else
+                        bash "$fig" "$(hostname)"
+                    fi
                 } || {
                     bash "$fig" "$(hostname)" \
                     | ponysay -W 100
