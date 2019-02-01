@@ -244,13 +244,13 @@ warnSudo(){
 #{{{                    MARK:Mac
 #**************************************************************
 if [[ "$OS_TYPE" == "Darwin" ]]; then
+    warnOverwrite
+    warnSudo
+
     prettyPrint "Checking Dependencies for Mac..."
     addDependenciesMac
     distroName=Mac
 
-    warnOverwrite
-
-    warnSudo
 
     showDeps
 
@@ -307,6 +307,8 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     addDependenciesLinux
     distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
 
+    warnOverwrite
+    warnSudo
 
     prettyPrint "Updating repos for $distroName"
     case $distroName in
@@ -340,8 +342,6 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
             ;;
     esac
 
-    warnOverwrite
-    warnSudo
 
     showDeps
 
