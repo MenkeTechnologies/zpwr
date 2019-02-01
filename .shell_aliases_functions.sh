@@ -1288,9 +1288,16 @@ figletfonts(){
     alternatingPrettyPrint "${DELIMITER_CHAR}F${DELIMITER_CHAR}iglet ${DELIMITER_CHAR}F${DELIMITER_CHAR}onts ${DELIMITER_CHAR}A${DELIMITER_CHAR}re:"
 
 
-    for font in ${ary[@]} ; do
-        printf "${font%.*} "
-    done | ponysay -W $(tput cols) | splitReg.sh -- ---------------------- lolcat
+    if [[ -n "$PONIES" ]]; then
+        for font in ${ary[@]} ; do
+            printf "${font%.*} "
+        done | ponysay -W $(tput cols) | splitReg.sh -- ---------------------- lolcat
+    else
+        for font in ${ary[@]} ; do
+            printf "${font%.*} "
+        done
+        printf "\n"
+    fi
 }
 
 pygmentColors(){
