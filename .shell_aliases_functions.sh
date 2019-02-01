@@ -1285,7 +1285,7 @@ figletfonts(){
     exists splitReg.sh || { echo "you need splitReg.sh" >&2 && return 1; }
     exists tput || { echo "you need tput" >&2 && return 1; }
 
-    alternatingPrettyPrint "${DELIMITER_CHAR}F${DELIMITER_CHAR}iglet ${DELIMITER_CHAR}F${DELIMITER_CHAR}onts ${DELIMITER_CHAR}A${DELIMITER_CHAR}re$DELIMITER_CHAR:$DELIMITER_CHAR"
+    alternatingPrettyPrint "${DELIMITER_CHAR}F${DELIMITER_CHAR}iglet ${DELIMITER_CHAR}F${DELIMITER_CHAR}onts ${DELIMITER_CHAR}A${DELIMITER_CHAR}re:"
 
 
     for font in ${ary[@]} ; do
