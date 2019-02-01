@@ -297,6 +297,11 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     # system sed breaks extended regex
     ln -s /usr/local/bin/gsed /usr/local/bin/sed
 
+    test -f '/usr/local/share/zsh/site-functions/_git' && {
+        prettyPrint "Removing homebrew installed git zsh completion at /usr/local/share/zsh/site-functions/_git because conflicts with zsh's git completion"
+        rm '/usr/local/share/zsh/site-functions/_git'
+    }
+
     #}}}***********************************************************
 
 #{{{                    MARK:Linux
