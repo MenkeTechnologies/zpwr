@@ -12,8 +12,6 @@
 #**************************************************************
 
 
-# highly recommended to run 'sudo visudo' to allow noninteractive install
-# <user> ALL=(ALL) NOPASSWD:ALL
 
 OS_TYPE="$(uname -s)"
 #resolve all symlinks
@@ -234,6 +232,11 @@ warnOverwrite(){
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .ideavimrc, .iftoprc, .shell_aliases_functions.sh in $HOME"
     proceed
 }
+warnSudo(){
+    prettyPrint "It is highly recommended to run 'sudo visudo' to allow noninteractive install.  This allows running sudo without a password.  The following line would be added to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:ALL"
+    proceed
+
+}
 
 
 #}}}***********************************************************
@@ -246,6 +249,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     distroName=Mac
 
     warnOverwrite
+
+    warnSudo
 
     showDeps
 
@@ -336,6 +341,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     esac
 
     warnOverwrite
+    warnSudo
 
     showDeps
 
