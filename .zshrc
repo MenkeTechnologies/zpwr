@@ -727,6 +727,11 @@ updater() {
     zle .accept-line
 }
 
+getrcWidget(){
+    zle .kill-whole-line
+    BUFFER="getrc"
+    zle .accept-line
+}
 intoFzf(){
     LBUFFER="$LBUFFER |& fzf -m --border --ansi"
     zle .accept-line
@@ -752,6 +757,8 @@ zle -N updater
 zle -N runner
 zle -N intoFzf
 zle -N intoFzfAg
+zle -N getrcWidget
+
 
 #vim mode is default
 bindkey -v
@@ -761,6 +768,7 @@ bindkey -M vicmd "\e^O" runner
 
 bindkey -M viins "\e^P" updater
 bindkey -M vicmd "\e^P" updater
+
 
 bindkey -M viins '"' surround
 bindkey -M viins "'" surround
@@ -859,6 +867,8 @@ bindkey -M viins '\e ' sshRegain
 bindkey '\eOP' updater
 #F2 key
 bindkey '\eOQ' sub
+
+bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
 [[ "$(uname)" == Darwin ]] && {
