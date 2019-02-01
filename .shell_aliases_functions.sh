@@ -1285,10 +1285,11 @@ figletfonts(){
     exists ponysay || { echo "you need ponysay" >&2 && return 1; }
     exists lolcat || { echo "you need lolca" >&2 && return 1; }
     exists splitReg.sh || { echo "you need splitReg.sh" >&2 && return 1; }
+    exists tput || { echo "you need tput" >&2 && return 1; }
 
     for font in ${ary[@]} ; do
         printf "${font%.*} "
-    done | ponysay | splitReg.sh -- ---------------------- lolcat
+    done | ponysay -W $(tput cols) | splitReg.sh -- ---------------------- lolcat
 }
 
 pygmentColors(){
