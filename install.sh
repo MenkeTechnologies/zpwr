@@ -238,7 +238,6 @@ warnSudo(){
 
 }
 
-
 #}}}***********************************************************
 
 #{{{                    MARK:Mac
@@ -310,30 +309,29 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     warnOverwrite
     warnSudo
 
-    prettyPrint "Updating repos for $distroName"
     case $distroName in
         (debian|ubuntu|elementary|raspbian|kali|linuxmint)
             distroFamily=debian
-            prettyPrint "Installing Dependencies for $distroName with the Advanced Package Manager..."
+            prettyPrint "Fetching Dependencies for $distroName with the Advanced Package Manager..."
             refresh "$distroFamily"
             addDependenciesDebian
             ;;
         (arch)
             distroFamily=arch
-            prettyPrint "Installing Dependencies for $distroName with zypper"
+            prettyPrint "Fetching Dependencies for $distroName with zypper"
             refresh "$distroFamily"
             addDependenciesArch
             ;;
         (*suse*)
             distroFamily=suse
             refresh "$distroFamily"
-            prettyPrint "Installing Dependencies for $distroName with zypper"
+            prettyPrint "Fetching Dependencies for $distroName with zypper"
             addDependenciesSuse
             ;;
         (centos|fedora|rhel)
             distroFamily=redhat
             refresh "$distroFamily"
-            prettyPrint "Installing Dependencies for $distroName with the Yellowdog Updater Modified"
+            prettyPrint "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
             addDependenciesRedHat
             ;;
         (*)
@@ -341,7 +339,6 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
             exit 1
             ;;
     esac
-
 
     showDeps
 
@@ -381,11 +378,15 @@ else
     if [[ "$OS_TYPE" == FreeBSD ]]; then
         distroFamily=freebsd
         distroName=FreeBSD
+
+
+        prettyPrint "Fetching Dependencies for $distroName with pkg"
         refresh "$distroFamily"
 
         addDependenciesFreeBSD
 
         warnOverwrite
+        warnSudo
         
         showDeps
 
