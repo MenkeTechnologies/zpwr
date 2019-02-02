@@ -985,7 +985,7 @@ getrc(){
             REPLY="$(cat /tmp/temp$$)"
             rm /tmp/temp$$
         } || {
-            printf "Are you sure? "
+            printf "Are you sure?(y/n) >>> "
             read
         }
         [[ $REPLY != "y" ]] && clearList && return 0
