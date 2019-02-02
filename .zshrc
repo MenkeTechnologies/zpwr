@@ -1572,7 +1572,20 @@ bindkey -M isearch '^A' beginning-of-line
 ## Then, source plugins and add commands to $PATH
 #zplug load
 #
-#
+
+banner(){
+    bash "$fig" "$(hostname)" \
+    | ponysay -W 100
+}
+bannerLolcat(){
+    bash "$fig" "$(hostname)" \
+    | ponysay -W 100 \
+    | splitReg.sh -- \
+    ---------------------- lolcat
+}
+noPonyBanner(){
+    bash "$fig" "$(hostname)"
+}
 
 #}}}***********************************************************
 
@@ -1589,16 +1602,12 @@ if [[ "$(uname)" = Darwin ]]; then
             [[ -f "$fig" ]] && {
                 [[ -f "$SCRIPTS/splitReg.sh" ]] && {
                     if [[ -n "$PONIES" ]]; then
-                        bash "$fig" "$(hostname)" \
-                        | ponysay -W 100 \
-                        | splitReg.sh -- \
-                        ---------------------- lolcat
+                        bannerLolcat
                     else
-                        bash "$fig" "$(hostname)"
+                        banner
                     fi
                 } || {
-                    bash "$fig" "$(hostname)" \
-                    | ponysay -W 100
+                    noPonyBanner
                 }
             }
         }
@@ -1611,31 +1620,54 @@ if [[ "$(uname)" = Darwin ]]; then
 else
     if [[ "$UID" != "0" ]]; then
         clear
-        case $distroName in
-            (raspbian)
-                builtin cd "$D"
-                type ponysay 1>/dev/null 2>&1 && {
-                    bash "$HOME/motd.sh" | ponysay -W 120
-                } || bash "$HOME/motd.sh"
-                ;;
-            (ubuntu|debian|kali|linuxmint)
-                builtin cd "$D"
-                figlet -f block "$(whoami)" | ponysay -W 120 \
-                    | splitReg.sh -- ------------- lolcat
-                ;;
-            (fedora|centos|rhel)
-                builtin cd "$D"
-                figlet -f block "$(whoami)" | ponysay -W 120 \
-                    | splitReg.sh -- ------------- lolcat
-                ;;
-            (*suse*)
-                builtin cd "$D"
-                figlet -f block "$(whoami)" | ponysay -W 120 \
-                    | splitReg.sh -- ------------- lolcat
-                ;;
-            (*) :
-                ;;
-        esac
+        if [[ -n "$PONIES" ]]; then
+            case $distroName in
+                (raspbian)
+                    builtin cd "$D"
+                    type ponysay 1>/dev/null 2>&1 && {
+                        bash "$HOME/motd.sh" | ponysay -W 120
+                    } || bash "$HOME/motd.sh"
+                    ;;
+                (ubuntu|debian|kali|linuxmint)
+                    builtin cd "$D"
+                    figlet -f block "$(whoami)" | ponysay -W 120 \
+                        | splitReg.sh -- ------------- lolcat
+                    ;;
+                (fedora|centos|rhel)
+                    builtin cd "$D"
+                    figlet -f block "$(whoami)" | ponysay -W 120 \
+                        | splitReg.sh -- ------------- lolcat
+                    ;;
+                (*suse*)
+                    builtin cd "$D"
+                    figlet -f block "$(whoami)" | ponysay -W 120 \
+                        | splitReg.sh -- ------------- lolcat
+                    ;;
+                (*) :
+                    ;;
+            esac
+        else
+            case $distroName in
+                (raspbian)
+                    builtin cd "$D"
+                    bash "$HOME/motd.sh"
+                    ;;
+                (ubuntu|debian|kali|linuxmint)
+                    builtin cd "$D"
+                    figlet -f block "$(whoami)"
+                    ;;
+                (fedora|centos|rhel)
+                    builtin cd "$D"
+                    figlet -f block "$(whoami)"
+                    ;;
+                (*suse*)
+                    builtin cd "$D"
+                    figlet -f block "$(whoami)"
+                    ;;
+                (*) :
+                    ;;
+            esac
+        fi
         listNoClear
     else
         #root on linux
@@ -1767,32 +1799,62 @@ fzf_setup(){
         || { pygmentize $PYGMENTIZE_OPTS {} 2>/dev/null | \
         cat -n; rc=$ps; }; [[ \$rc = 0 ]] || \
         stat {} | fold -80 | head -500\""
-    export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
-        '\.[jw]ar\$' && jar tf {} ; } || { pygmentize $PYGMENTIZE_OPTS {} \
-        2>/dev/null || {
-                [[ -e {} ]] && stat {} | fold -80 | \
-                head -500 || {
-                    source ~/.shell_aliases_functions.sh
-                    {
-                        print -r {} \
-                            | command egrep '(\d{1,3}\.){3}\d\
-                            {1,3}' && {
-                            whois {} | command egrep -q 'No (match\
-                            |whois)' && dig {} || whois {}
-                        } || {
-                            cat ~/.common_aliases | grep \
-                            {}= || set | grep -a {} | grep -v \
-                                ZSH_EXEC || alias | grep -a {}\
-                                || {
-                            whois {} | command egrep -q 'No (match\
-                            |whois)' && dig {} || whois {}
+    if [[ -n "$PONIES" ]]; then
+        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
+            --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
+            '\.[jw]ar\$' && jar tf {} ; } || { pygmentize $PYGMENTIZE_OPTS {} \
+            2>/dev/null || {
+                    [[ -e {} ]] && stat {} | fold -80 | \
+                    head -500 || {
+                        source ~/.shell_aliases_functions.sh
+                        {
+                            print -r {} \
+                                | command egrep '(\d{1,3}\.){3}\d\
+                                {1,3}' && {
+                                whois {} | command egrep -q 'No (match\
+                                |whois)' && dig {} || whois {}
+                            } || {
+                                cat ~/.common_aliases | grep \
+                                {}= || set | grep -a {} | grep -v \
+                                    ZSH_EXEC || alias | grep -a {}\
+                                    || {
+                                whois {} | command egrep -q 'No (match\
+                                |whois)' && dig {} || whois {}
+                                }
+                            }
+                        } | cowsay | ponysay
+            }
+            }
+        }\""
+    else
+        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
+            --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
+            '\.[jw]ar\$' && jar tf {} ; } || { pygmentize $PYGMENTIZE_OPTS {} \
+            2>/dev/null || {
+                    [[ -e {} ]] && stat {} | fold -80 | \
+                    head -500 || {
+                        source ~/.shell_aliases_functions.sh
+                        {
+                            print -r {} \
+                                | command egrep '(\d{1,3}\.){3}\d\
+                                {1,3}' && {
+                                whois {} | command egrep -q 'No (match\
+                                |whois)' && dig {} || whois {}
+                            } || {
+                                cat ~/.common_aliases | grep \
+                                {}= || set | grep -a {} | grep -v \
+                                    ZSH_EXEC || alias | grep -a {}\
+                                    || {
+                                whois {} | command egrep -q 'No (match\
+                                |whois)' && dig {} || whois {}
+                                }
                             }
                         }
-                     } | cowsay | ponysay
-           }
-        }
-    }\""
+            }
+            }
+        }\""
+
+        fi
 }
 
 fzf_setup
