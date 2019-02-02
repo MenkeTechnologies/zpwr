@@ -1602,15 +1602,15 @@ if [[ "$(uname)" = Darwin ]]; then
         type figlet > /dev/null 2>&1 && {
             printf "\e[1m"
             [[ -f "$fig" ]] && {
-                [[ -f "$SCRIPTS/splitReg.sh" ]] && {
-                    if [[ "$MYBANNER" == ponies ]]; then
+                if [[ "$MYBANNER" == ponies ]]; then
+                    if [[ -f "$SCRIPTS/splitReg.sh" ]];then
                         bannerLolcat
                     else
-                        noPonyBanner
+                        banner
                     fi
-                } || {
-                    banner
-                }
+                else
+                    noPonyBanner
+                fi
             }
         }
         printf "\e[0m"
@@ -1855,7 +1855,6 @@ fzf_setup(){
             }
             }
         }\""
-
         fi
 }
 
