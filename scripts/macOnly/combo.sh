@@ -6,7 +6,11 @@
 ##### Purpose: bash script to
 ##### Notes:
 #}}}***********************************************************
-o="$(cat)"
+if [[ -p /dev/stdin ]]; then
+    o="$(cat)"
+else
+    o="$(hostname)"
+fi
 randomFigletFontScript="$SCRIPTS/macOnly/figletRandomFontOnce.sh"
 randomCowsayCowScript="$SCRIPTS/macOnly/randomCow.sh"
 
