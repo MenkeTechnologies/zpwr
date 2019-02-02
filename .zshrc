@@ -1,7 +1,6 @@
 #{{{                    MARK:Exports
 #**************************************************************
 export LC_ALL="en_US.UTF-8"
-export PONIES=true
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -142,6 +141,9 @@ source $ZSH/oh-my-zsh.sh
 _alias_file="$HOME/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
+
+export MYBANNER=ponies
+export MYBANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
 #}}}***********************************************************
 
@@ -1584,8 +1586,7 @@ bannerLolcat(){
     ---------------------- lolcat
 }
 noPonyBanner(){
-    fig="$SCRIPTS/macOnly/figletRandomFontOnce.sh"
-    bash "$fig" "$(hostname)"
+    eval "$MYBANNER_CMD"
 }
 
 #}}}***********************************************************
@@ -1602,13 +1603,13 @@ if [[ "$(uname)" = Darwin ]]; then
             printf "\e[1m"
             [[ -f "$fig" ]] && {
                 [[ -f "$SCRIPTS/splitReg.sh" ]] && {
-                    if [[ -n "$PONIES" ]]; then
+                    if [[ "$MYBANNER" == ponies ]]; then
                         bannerLolcat
                     else
-                        banner
+                        noPonyBanner
                     fi
                 } || {
-                    noPonyBanner
+                    banner
                 }
             }
         }
@@ -1621,7 +1622,7 @@ if [[ "$(uname)" = Darwin ]]; then
 else
     if [[ "$UID" != "0" ]]; then
         clear
-        if [[ -n "$PONIES" ]]; then
+        if [[ $MYBANNER == ponies ]]; then
             case $distroName in
                 (raspbian)
                     builtin cd "$D"
@@ -1800,7 +1801,7 @@ fzf_setup(){
         || { pygmentize $PYGMENTIZE_OPTS {} 2>/dev/null | \
         cat -n; rc=$ps; }; [[ \$rc = 0 ]] || \
         stat {} | fold -80 | head -500\""
-    if [[ -n "$PONIES" ]]; then
+    if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
             --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
             '\.[jw]ar\$' && jar tf {} ; } || { pygmentize $PYGMENTIZE_OPTS {} \

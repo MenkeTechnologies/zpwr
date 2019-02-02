@@ -1279,7 +1279,7 @@ figletfonts(){
         ary+=${file##*/}
     done
 
-    if [[ -n "$PONIES" ]]; then
+    if [[ "$MYBANNER" == ponies ]]; then
         exists ponysay || { echo "you need ponysay" >&2 && return 1; }
     fi
     exists lolcat || { echo "you need lolca" >&2 && return 1; }
@@ -1289,7 +1289,7 @@ figletfonts(){
     alternatingPrettyPrint "${DELIMITER_CHAR}F${DELIMITER_CHAR}iglet ${DELIMITER_CHAR}F${DELIMITER_CHAR}onts ${DELIMITER_CHAR}A${DELIMITER_CHAR}re:"
 
 
-    if [[ -n "$PONIES" ]]; then
+    if [[ "$MYBANNER" == ponies ]]; then
         for font in ${ary[@]} ; do
             printf "${font%.*} "
         done | ponysay -W $(tput cols) | splitReg.sh -- ---------------------- lolcat
