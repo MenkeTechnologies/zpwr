@@ -1275,12 +1275,13 @@ figletfonts(){
 
     declare -a ary
 
-
     for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
         ary+=${file##*/}
     done
 
-    exists ponysay || { echo "you need ponysay" >&2 && return 1; }
+    if [[ -n "$PONIES" ]]; then
+        exists ponysay || { echo "you need ponysay" >&2 && return 1; }
+    fi
     exists lolcat || { echo "you need lolca" >&2 && return 1; }
     exists splitReg.sh || { echo "you need splitReg.sh" >&2 && return 1; }
     exists tput || { echo "you need tput" >&2 && return 1; }
