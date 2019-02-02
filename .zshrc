@@ -1584,6 +1584,7 @@ bannerLolcat(){
     ---------------------- lolcat
 }
 noPonyBanner(){
+    fig="$SCRIPTS/macOnly/figletRandomFontOnce.sh"
     bash "$fig" "$(hostname)"
 }
 
@@ -1654,15 +1655,15 @@ else
                     ;;
                 (ubuntu|debian|kali|linuxmint)
                     builtin cd "$D"
-                    figlet -f block "$(whoami)"
+                    noPonyBanner
                     ;;
                 (fedora|centos|rhel)
                     builtin cd "$D"
-                    figlet -f block "$(whoami)"
+                    noPonyBanner
                     ;;
                 (*suse*)
                     builtin cd "$D"
-                    figlet -f block "$(whoami)"
+                    noPonyBanner
                     ;;
                 (*) :
                     ;;
