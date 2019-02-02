@@ -143,7 +143,7 @@ test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
 export MYBANNER=ponies
-export MY_NOPONY_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
+export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
 #}}}***********************************************************
 
@@ -1586,7 +1586,7 @@ bannerLolcat(){
     ---------------------- lolcat
 }
 noPonyBanner(){
-    eval "$MY_NOPONY_BANNER"
+    eval "$NOPONY_BANNER_CMD"
 }
 
 #}}}***********************************************************
