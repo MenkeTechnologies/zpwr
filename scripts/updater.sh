@@ -45,7 +45,7 @@ done
 shift $((OPTIND-1))
 
 # clear screen
-if [[ -n "$PONIES" ]]; then
+if [[ "$MYBANNER" == ponies ]]; then
     trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
 fi
 clear
@@ -108,7 +108,7 @@ if [[ $skip != true ]]; then
     [[ -f "$SCRIPTS/printHeader.sh" ]] && {
         width=80
         perl -le "print '_'x$width" | lolcat
-        if [[ -n "$PONIES" ]]; then
+        if [[ "$MYBANNER" == ponies ]]; then
             echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
         fi
         perl -le "print '_'x$width" | lolcat
