@@ -11,6 +11,10 @@ if [[ -p /dev/stdin ]]; then
 else
     o="$(hostname)"
 fi
+
+if [[ -z "$o" ]]; then
+    o="$(hostname)"
+fi
 randomFigletFontScript="$SCRIPTS/macOnly/figletRandomFontOnce.sh"
 randomCowsayCowScript="$SCRIPTS/macOnly/randomCow.sh"
 
