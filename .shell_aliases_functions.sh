@@ -980,7 +980,7 @@ getrc(){
     REPO_NAME="customTerminalInstaller"
     if [[ $(uname) == Darwin ]]; then
         exists dialog && {
-            dialog --inputbox 'Are you sure you want to run getrc on this Apple device?' 8 40 2> /tmp/temp$$
+            dialog --inputbox 'Are you sure you want to run getrc on this Apple device?(y/n)' 8 40 2> /tmp/temp$$
             clear
             REPLY="$(cat /tmp/temp$$)"
             rm /tmp/temp$$
