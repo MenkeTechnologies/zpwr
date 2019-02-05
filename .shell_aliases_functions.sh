@@ -132,6 +132,7 @@ alias sa='sudo cat -n'
 alias p2="python2"
 alias p3="python3"
 [[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
+[[ -d "/var/www/html" ]] && alias we="/var/www/html"
 exists fc && alias please='sudo $(fc -ln -1)'
 exists spotify && {
     alias re='spotify replay'
