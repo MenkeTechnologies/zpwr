@@ -117,7 +117,7 @@ exists c.pl && {
     alias ppp='c.pl *'
 }
 alias dirs='dirs -v'
-alias lo="tail -f $LOGFILE"
+alias lo="tail -n 100 -F $LOGFILE"
 alias va='cd /var'
 alias plr='rlwrap perl -dE1'
 alias cpan='rlwrap cpan'
