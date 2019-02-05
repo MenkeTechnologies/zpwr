@@ -384,6 +384,9 @@ else
         distroFamily=freebsd
         distroName=FreeBSD
 
+        warnOverwrite
+        warnSudo
+
 
         prettyPrint "Fetching Dependencies for $distroName with pkg"
         refresh "$distroFamily"
