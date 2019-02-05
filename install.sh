@@ -390,11 +390,7 @@ else
 
         prettyPrint "Fetching Dependencies for $distroName with pkg"
         refresh "$distroFamily"
-
         addDependenciesFreeBSD
-
-        warnOverwrite
-        warnSudo
         
         showDeps
 
