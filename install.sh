@@ -154,7 +154,7 @@ upgrade(){
         elif [[ $1 == redhat ]];then
             sudo yum upgrade -y
         elif [[ $1 == freebsd ]];then
-            sudo pkg upgrade
+            sudo pkg upgrade -y
         else
             prettyPrint "Error with upgrade with $2." >&2
         fi
@@ -171,7 +171,7 @@ refresh(){
         elif [[ $1 == arch ]];then
             sudo pacman -Syy
         elif [[ $1 == freebsd ]];then
-            sudo pkg update
+            sudo pkg update -y
         elif [[ $1 == redhat ]];then
             sudo yum update -y
         else
