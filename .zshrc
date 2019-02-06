@@ -1400,6 +1400,7 @@ supernatural-space() {
     __CORRECT_WORDS[bad]="bda abd"
     __CORRECT_WORDS[based]="baesd absed"
     __CORRECT_WORDS[best]="bets"
+    __CORRECT_WORDS[between]="bt between"
     __CORRECT_WORDS[block]="blokc bolck lbock"
     __CORRECT_WORDS[capture]="catpure catprue caputre"
     __CORRECT_WORDS[change]="cahnge changen"
@@ -1415,6 +1416,7 @@ supernatural-space() {
     __CORRECT_WORDS[finger]="fingre finegr figner"
     __CORRECT_WORDS[for]="fro rfo rof fr ofr"
     __CORRECT_WORDS[found]="ofund fuond foudn"
+    __CORRECT_WORDS[function]="fxn func"
     __CORRECT_WORDS[get]="ge"
     __CORRECT_WORDS[go]="og"
     __CORRECT_WORDS[here]="ehre"
@@ -1462,6 +1464,7 @@ supernatural-space() {
     __CORRECT_WORDS[value]="vlaue valeu"
     __CORRECT_WORDS[with]="with wiht itwh"
     __CORRECT_WORDS[why]="hwy wyh"
+    __CORRECT_WORDS[without]="wo"
 
     local TEMP_BUFFER mywords badWords
     TEMP_BUFFER="$(print -r -- $LBUFFER | tr -d "()[]{}\$,%'\"" )"
