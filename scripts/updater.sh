@@ -253,17 +253,19 @@ for pi in "${PI_ARRAY[@]}"; do
     updatePI "$pi"
 done
 
-brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
-    # we have brew cu
-    prettyPrint "Updating Homebrew Casks!"
-    brew cu -ay --cleanup
-} || {
-    # we don't have brew cu
-    prettyPrint "Installing brew-cask-upgrade"
-    brew tap buo/cask-upgrade
-    brew update
-    prettyPrint "Updating Homebrew Casks!"
-    brew cu -ay --cleanup
+exists brew && {
+    brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
+        # we have brew cu
+        prettyPrint "Updating Homebrew Casks!"
+        brew cu -ay --cleanup
+    } || {
+        # we don't have brew cu
+        prettyPrint "Installing brew-cask-upgrade"
+        brew tap buo/cask-upgrade
+        brew update
+        prettyPrint "Updating Homebrew Casks!"
+        brew cu -ay --cleanup
+    }
 }
 prettyPrint "Updating Vundle Plugins"
 
@@ -274,4 +276,4 @@ fi
 #decolorize prompt
 echo -e "Done\e[0m"
 
-clear && cd ~/Desktop
+clearList
