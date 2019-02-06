@@ -642,10 +642,11 @@ f(){
     else
         test -z "$1" && cd - && return 0
         base="$(dirname "$1")"
-        test -d "$base" && cd "$base"&& return 0
-
+        while [[ "$base" != "/" ]]; do
+            test -d "$base" && cd "$base"&& return 0
+            base="$(dirname "$base")"
+        done
         echo "Not a valid file or directory." >&2 && return 1
-
     fi
 }
 
