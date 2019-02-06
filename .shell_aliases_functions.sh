@@ -1327,6 +1327,10 @@ pygmentColors(){
     done
 }
 
+detachAll(){
+    tmux list-clients | tr -d : | perl -ane '`tmux detach-client -t $F[0]`'
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Source Tokens
