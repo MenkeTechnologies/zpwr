@@ -642,7 +642,7 @@ f(){
     else
         test -z "$1" && cd - && return 0
         base="$(dirname "$1")"
-        while [[ "$base" != "/" ]]; do
+        while [[ "$base" != / ]]; do
             test -d "$base" && cd "$base"&& return 0
             base="$(dirname "$base")"
         done
