@@ -640,7 +640,12 @@ f(){
     elif [[ -d "$1" ]];then
         cd "$1"
     else
-        test -z "$1" && cd - || echo "Not a valid file or directory." >&2 && return 1
+        test -z "$1" && cd - && return 0
+        base="$(dirname "$1")"
+        test -d "$base" && cd "$base"&& return 0
+
+        echo "Not a valid file or directory." >&2 && return 1
+
     fi
 }
 
