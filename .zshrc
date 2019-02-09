@@ -1449,6 +1449,7 @@ supernatural-space() {
     __CORRECT_WORDS[radius]="radisu raduis"
     __CORRECT_WORDS[range]="rnage arnge"
     __CORRECT_WORDS[runnning]="runnign"
+    __CORRECT_WORDS[shell_script]="sh"
     __CORRECT_WORDS[single]="signle"
     __CORRECT_WORDS[some]="soem som seom"
     __CORRECT_WORDS[spelling]="spellign spelilng"
