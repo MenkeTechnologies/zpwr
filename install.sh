@@ -713,7 +713,7 @@ prettyPrint "Installing fzf"
 
 #{{{                    MARK:Final
 #**************************************************************
-cd "$INSTALLER_DIR/.." || echo "what happened to $INSTALLER_DIR ?" >&2 && exit 1
+cd "$INSTALLER_DIR/.." || { echo "what happened to $INSTALLER_DIR ?" >&2 && exit 1; }
 
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
 
