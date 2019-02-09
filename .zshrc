@@ -1394,6 +1394,7 @@ supernatural-space() {
     local __CORRECT_WORDS
     declare -A __CORRECT_WORDS
     __CORRECT_WORDS[alternate]="alternaet alterntae"
+    __CORRECT_WORDS[also]="laso alos"
     __CORRECT_WORDS[and]="adn nad"
     __CORRECT_WORDS[are]="aer rea"
     __CORRECT_WORDS[back]="bkac bakc abck"
@@ -1401,6 +1402,7 @@ supernatural-space() {
     __CORRECT_WORDS[based]="baesd absed"
     __CORRECT_WORDS[best]="bets"
     __CORRECT_WORDS[between]="bt between"
+    __CORRECT_WORDS[by_the_way]="btw"
     __CORRECT_WORDS[block]="blokc bolck lbock"
     __CORRECT_WORDS[capture]="catpure catprue caputre"
     __CORRECT_WORDS[change]="cahnge changen"
@@ -1412,6 +1414,7 @@ supernatural-space() {
     __CORRECT_WORDS[directory]="direcotry direcorty directroy"
     __CORRECT_WORDS[drag]="darg"
     __CORRECT_WORDS[echo]="ehco ceho ecoh eco"
+    __CORRECT_WORDS[expansion]="exp"
     __CORRECT_WORDS[file]="feil fiel"
     __CORRECT_WORDS[finger]="fingre finegr figner"
     __CORRECT_WORDS[for]="fro rfo rof fr ofr"
@@ -1437,6 +1440,7 @@ supernatural-space() {
     __CORRECT_WORDS[other]="othe toher"
     __CORRECT_WORDS[name]="anme naem"
     __CORRECT_WORDS[network]="newtork entwork ntework"
+    __CORRECT_WORDS[parameter]="parm"
     __CORRECT_WORDS[please]="plase plz"
     __CORRECT_WORDS[point]="opint ponit"
     __CORRECT_WORDS[print]="pirnt pritn rpint prnit"
@@ -1477,7 +1481,7 @@ supernatural-space() {
         for misspelling in $badWords[@];do
             if [[ $mywords[-1] == $misspelling ]]; then
                 LBUFFER="$(print -r -- "$LBUFFER" | sed -E \
-                    "s@\\b$misspelling\\b\$@$key@g")"
+                    "s@\\b$misspelling\\b\$@${key:gs/_/ /}@g")"
                 finished=true
                 CURSOR=$#LBUFFER
                 break
