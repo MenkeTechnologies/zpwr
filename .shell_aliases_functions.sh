@@ -1337,6 +1337,62 @@ detachAll(){
     tmux list-clients | tr -d : | perl -ane '`tmux detach-client -t $F[0]`'
 }
 
+
+scripts(){
+    ( {
+        gvim -S ~/.vim/sessions/gvim.vim &> /dev/null
+        sleep 2
+        open -a Terminal.app
+    } &>/dev/null & )
+}
+
+le(){
+    [[ -z "$1" ]] && return 1
+    echo "insert into root.LearningCollection (category, learning, dateAdded) values ('programming', '""$*""', now())" | mysql 2>> "$LOGFILE"
+}
+
+
+see(){
+    test -z "$1" && {
+        echo "select dateAdded,learning,category from root.LearningCollection" | mysql 2>> $LOGFILE | cat -n
+    } || {
+        echo "select dateAdded, learning,category from root.LearningCollection" | mysql 2>> $LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
+    }
+}
+
+se(){
+    test -z "$1" && {
+        echo "select learning,category from root.LearningCollection" | mysql 2>> $LOGFILE | cat -n
+    } || {
+        echo "select learning,category from root.LearningCollection" | mysql 2>> $LOGFILE | cat -n | perl -laE 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$1"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+        paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1")
+        command rm ~/temp1-$$ ~/temp2-$$
+    }
+}
+
+del(){
+
+    [[ -z "$1" ]] && count=1 || count="$1"
+    echo "delete from root.LearningCollection order by id desc limit $count" | mysql
+}
+
+echo $0 | grep -q bash || {
+    learn(){
+        if [[ ! -z "$BUFFER" ]]; then
+            local mywords
+            mywords=("${(z)BUFFER}")
+            [[ $mywords[1] == le ]] && return 1
+            BUFFER="le '$BUFFER'"
+            zle .accept-line
+        else
+            return 1
+        fi
+    }
+    zle -N learn
+    bindkey -M viins '^J' learn
+    bindkey -M vicmd '^J' learn
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Source Tokens
