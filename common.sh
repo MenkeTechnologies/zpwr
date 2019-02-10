@@ -20,18 +20,17 @@ exists(){
     type "$1" >/dev/null 2>&1
 }
 
-install_counter=0
-prettyPrint(){
-    (( install_counter++ ))
-    printf "\x1b[32;1m"
-    perl -le "print '#'x80"
-    printf "\x1b[34;4m"
-    printf "$install_counter>>> $1\n"
-    printf "\x1b[0;32;1m"
-    perl -le "print '#'x80"
-    printf "\x1b[0m"
-    printf "\n"
-}
+#prettyPrint(){
+    #(( install_counter++ ))
+    #printf "\x1b[32;1m"
+    #perl -le "print '#'x80"
+    #printf "\x1b[34;4m"
+    #printf "$install_counter>>> $1\n"
+    #printf "\x1b[0;32;1m"
+    #perl -le "print '#'x80"
+    #printf "\x1b[0m"
+    #printf "\n"
+#}
 
 proceed(){
     printf "Proceed?(y/n) >>> "
@@ -45,6 +44,8 @@ proceed(){
             ;;
     esac
 }
+
+install_counter=0
 
 prettyPrintStdin(){
     perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
