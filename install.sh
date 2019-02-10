@@ -453,6 +453,7 @@ res=$(echo "$vimV >= 8.0" | bc)
             --enable-perlinterp=yes \
             --enable-luainterp=yes \
             --enable-gui=gtk2 --enable-cscope --prefix=/usr
+            make
             sudo make install
     }
 }
