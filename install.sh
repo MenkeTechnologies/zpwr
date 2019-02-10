@@ -27,7 +27,7 @@ clear
 exec > >(tee -a "$logfile")
 exec 2>&1
 
-stty size | say
+eval $(resize)
 
 cat<<\EOF
 888b     d888                888         88888888888             888
