@@ -317,7 +317,6 @@ alias bluef='source $SCRIPTS/blueText.sh'
 alias dl='cd $HOME/Downloads'
 alias docu='cd $HOME/Documents'
 alias mus='cd $HOME/Music'
-alias o="open ."
 alias jobs="jobs -l"
 alias u8="bash -l updater.sh"
 alias sd="clear;ssh d "
@@ -972,6 +971,20 @@ jetbrainsWorkspaceEdit(){
     } || echo "No Match Yet" >&2
     sleep 1
     done
+}
+
+o(){
+    OS="$(uname -s)"
+    case "$OS" in
+        Linux*)     open_cmd=xdg-open;;
+        Darwin*)    open_cmd=open;;
+        CYGWIN*)    open_cmd=cygstart;;
+        MINGW*)     open_cmd=start;;
+        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
+    esac
+
+    $open_cmd "$@"
+
 }
 
 reveal() {
