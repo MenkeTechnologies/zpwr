@@ -1355,25 +1355,28 @@ scripts(){
     } &>/dev/null & )
 }
 
+export SCHEMA_NAME=root
+export TABLE_NAME=LearningCollection
+
 le(){
     [[ -z "$1" ]] && return 1
-    echo "insert into root.LearningCollection (category, learning, dateAdded) values ('programming', '""$*""', now())" | mysql 2>> "$LOGFILE"
+    echo "insert into $SCHEMA_NAME.$TABLE_NAME (category, learning, dateAdded) values ('programming', '""$*""', now())" | mysql 2>> "$LOGFILE"
 }
 
 
 see(){
     test -z "$1" && {
-        echo "select dateAdded,learning,category from root.LearningCollection" | mysql 2>> $LOGFILE | cat -n
+        echo "select dateAdded,learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | cat -n
     } || {
-        echo "select dateAdded, learning,category from root.LearningCollection" | mysql 2>> $LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
+        echo "select dateAdded, learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
     }
 }
 
 se(){
     test -z "$1" && {
-        echo "select learning,category from root.LearningCollection" | mysql 2>> $LOGFILE | cat -n
+        echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | cat -n
     } || {
-        echo "select learning,category from root.LearningCollection" | mysql 2>> $LOGFILE | cat -n | perl -laE 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$1"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+        echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | cat -n | perl -laE 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$1"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
         paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1")
         command rm ~/temp1-$$ ~/temp2-$$
     }
@@ -1382,7 +1385,7 @@ se(){
 del(){
 
     [[ -z "$1" ]] && count=1 || count="$1"
-    echo "delete from root.LearningCollection order by id desc limit $count" | mysql
+    echo "delete from $SCHEMA_NAME.$TABLE_NAME order by id desc limit $count" | mysql
 }
 
 echo $0 | grep -q bash || {
