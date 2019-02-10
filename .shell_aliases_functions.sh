@@ -998,7 +998,16 @@ reveal() {
 
 
 openMyGH(){
-    open "https://github.com/$GITHUB_ACCOUNT"
+    OS="$(uname -s)"
+    case "$OS" in
+        Linux*)     open_cmd=xdg-open;;
+        Darwin*)    open_cmd=open;;
+        CYGWIN*)    open_cmd=cygstart;;
+        MINGW*)     open_cmd=start;;
+        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
+    esac
+
+    $open_cmd "https://github.com/$GITHUB_ACCOUNT"
 }
 
 getrc(){
