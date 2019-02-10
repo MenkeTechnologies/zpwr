@@ -17,6 +17,7 @@ OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
+
 source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
 
 logfile="$INSTALLER_DIR/escaped_logfile.txt"
@@ -25,6 +26,8 @@ clear
 # replicate stdout and sterr to logfile
 exec > >(tee -a "$logfile")
 exec 2>&1
+
+stty size | say
 
 cat<<\EOF
 888b     d888                888         88888888888             888
