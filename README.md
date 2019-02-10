@@ -12,6 +12,11 @@ Some interactivity is required near end of installer for postfix, wireshark and 
 
 Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Control-D to return to installer script.
 
+Change line 18 in ~/.shell_aliases_functions.sh to match your GitHub account name to enable various interactions with it.
+```export GITHUB_ACCOUNT='MenkeTechnologies'``
+like openMyGitHub, hd and hc shell functions for creating and deleting GitHub repos from the command line.
+
+
 # Running on a MacbookPro
 ![Alt text](/tmuxfinal1.png?raw=true)
 ![Alt text](/tmuxfinal22.png?raw=true)
