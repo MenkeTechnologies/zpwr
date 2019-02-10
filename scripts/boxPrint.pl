@@ -27,6 +27,11 @@ if ($full == 0 ) {
     $width=80;
 } else {
     $width = `tput cols`;
+    if ($width == 80) {
+        if (defined $ENV{'COLUMNS'}) { $prefix = $ENV{'COLUMNS'} }
+        
+    }
+
 
     if ($width % 2 == 1) {
         $width-=1;
