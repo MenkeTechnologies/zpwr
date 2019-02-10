@@ -996,16 +996,26 @@ command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options
 
 inoremap <silent> <C-D>f <C-O>:Files<CR>
 inoremap <silent> <C-D>c <C-O>:Colors<CR>
+inoremap <silent> <C-D>g <C-O>:Commits<CR>
 inoremap <silent> <C-D>b <C-O>:Buffers<CR>
 inoremap <silent> <C-D>a <C-O>:Ag<CR>
 inoremap <silent> <C-D>l <C-O>:Lines<CR>
 inoremap <silent> <C-D>m <C-O>:Marks<CR>
+inoremap <silent> <C-D>w <C-O>:Windows<CR>
+inoremap <silent> <C-D>h <C-O>:History:<CR>
+inoremap <silent> <C-D>/ <C-O>:History/<CR>
+inoremap <silent> <C-D>s <C-O>:Snippets<CR>
 
 nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
+nnoremap <silent> <C-D>g :Commits<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 nnoremap <silent> <C-D>b :Buffers<CR>
 nnoremap <silent> <C-D>m :Marks<CR>
+nnoremap <silent> <C-D>w :Windows<CR>
+nnoremap <silent> <C-D>h :History:<CR>
+nnoremap <silent> <C-D>s :Snippets<CR>
+nnoremap <silent> <C-D>/ :History/<CR>
 
 "}}}*****************za******************************************
