@@ -973,7 +973,7 @@ jetbrainsWorkspaceEdit(){
     done
 }
 
-o(){
+getOpenCommand(){
     OS="$(uname -s)"
     case "$OS" in
         Linux*)     open_cmd=xdg-open;;
@@ -982,6 +982,11 @@ o(){
         MINGW*)     open_cmd=start;;
         *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
     esac
+    echo "$open_cmd"
+}
+
+o(){
+    open_cmd="$(getOpenCommand)" || return 1
 
     if [[ -z "$1" ]]; then
         $open_cmd .
@@ -992,14 +997,7 @@ o(){
 }
 
 reveal() {
-    OS="$(uname -s)"
-    case "$OS" in
-        Linux*)     open_cmd=xdg-open;;
-        Darwin*)    open_cmd=open;;
-        CYGWIN*)    open_cmd=cygstart;;
-        MINGW*)     open_cmd=start;;
-        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
-    esac
+    open_cmd="$(getOpenCommand)" || return 1
 
     git rev-parse --git-dir &>/dev/null || { echo "Not a git directory" >&2 && return 1; }
 
@@ -1015,14 +1013,7 @@ reveal() {
 
 
 openMyGH(){
-    OS="$(uname -s)"
-    case "$OS" in
-        Linux*)     open_cmd=xdg-open;;
-        Darwin*)    open_cmd=open;;
-        CYGWIN*)    open_cmd=cygstart;;
-        MINGW*)     open_cmd=start;;
-        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
-    esac
+    open_cmd="$(getOpenCommand)" || return 1
 
     $open_cmd "https://github.com/$GITHUB_ACCOUNT"
 }
