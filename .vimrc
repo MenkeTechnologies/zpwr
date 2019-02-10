@@ -996,6 +996,7 @@ command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options
 
 inoremap <silent> <C-D>f <C-O>:Files<CR>
 inoremap <silent> <C-D>c <C-O>:Colors<CR>
+inoremap <silent> <C-D>b <C-O>:Buffers<CR>
 inoremap <silent> <C-D>a <C-O>:Ag<CR>
 inoremap <silent> <C-D>l <C-O>:Lines<CR>
 
@@ -1003,5 +1004,6 @@ nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
+nnoremap <silent> <C-D>b <C-O>:Buffers<CR>
 
 "}}}*****************za******************************************
