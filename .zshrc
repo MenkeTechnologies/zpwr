@@ -184,7 +184,7 @@ updater (){
     zle .accept-line
 }
 
-gitfuncNoCheck() {
+gitFuncNoCheck() {
     emulate -LR zsh
 
     currentDir="$(pwd -P)"
@@ -229,7 +229,7 @@ gitfuncNoCheck() {
 
 }
 
-gitfunc () {
+gitFunc () {
     emulate -LR zsh
 
     currentDir="$(pwd -P)"
@@ -849,8 +849,8 @@ zle -N expand-aliases
 
 bindkey '\e^E' expand-aliases
 
-zle -N gitfunc
-zle -N gitfuncNoCheck
+zle -N gitFunc
+zle -N gitFuncNoCheck
 zle -N updater
 zle -N sub
 zle -N dbz
@@ -889,10 +889,10 @@ bindkey '\eOR' getrcWidget
 }
 
 
-bindkey -M viins '^F^S' gitfuncNoCheck
-bindkey -M vicmd '^F^S' gitfuncNoCheck
-bindkey -M viins '^S' gitfunc
-bindkey -M vicmd '^S' gitfunc
+bindkey -M viins '^F^S' gitFuncNoCheck
+bindkey -M vicmd '^F^S' gitFuncNoCheck
+bindkey -M viins '^S' gitFunc
+bindkey -M vicmd '^S' gitFunc
 bindkey '^N' sudo-command-line
 bindkey -M viins '\e^T' transpose-words
 bindkey -M vicmd '\e^T' transpose-words

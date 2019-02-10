@@ -419,7 +419,7 @@ xx(){
     trap QUIT
 }
 
-urlsafe(){
+urlSafe(){
     cat | base64 | tr '+/=' '._-'
 }
 
@@ -447,7 +447,7 @@ j(){
     done
 }
 
-scnew(){
+scNew(){
     [[ -z "$1" ]] && echo "no arg..." >&2 && return 1
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
@@ -824,7 +824,7 @@ hd(){
     printf "\e[0m"
 }
 
-pstreeMonitor(){
+psTreeMonitor(){
     bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
 }
 
@@ -1072,25 +1072,25 @@ rename(){
     done
 }
 
-torip(){
+torIP(){
     ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
     whois $ip
     echo $ip
 }
 
-mycurl(){
+myCurl(){
     \curl -fsSL -A "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 | sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|C)/d"
 }
 
 
-perlremovespaces(){
+perlRemoveSpaces(){
     for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
         perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
     done
 }
 
-pirun(){
+piRun(){
     trap 'DONE=true' QUIT
     local DONE
     DONE=false
@@ -1303,7 +1303,7 @@ fz(){
     }
 }
 
-figletfonts(){
+figletFonts(){
 
     [[ "$(uname)" == Darwin ]] && {
         FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
