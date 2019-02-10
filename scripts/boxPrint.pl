@@ -26,7 +26,7 @@ if ($help == 1) {
 if ($full == 0 ) {
     $width=80;
 } else {
-    $width = `stty size | awk '{print \$2}'`;
+    $width = `tput cols`;
 
     if ($width % 2 == 1) {
         $width-=1;
