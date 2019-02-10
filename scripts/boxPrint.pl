@@ -12,7 +12,28 @@ use warnings;
 use feature 'say';
 use POSIX;
 
-my $width = 80;
+use Getopt::Long;
+my $full = 0;
+my $help=0;
+my $width=0;
+GetOptions ('help|h'=>\$help, 'full|f' => \$full);
+
+if ($help == 1) {
+    say STDERR "Use --full or -f to center box across width of terminal";
+    exit 1;
+}
+
+if ($full == 0 ) {
+    $width=80;
+} else {
+    $width = `tput cols`;
+    if ($width % 2 == 1) {
+        $width-=1;
+    } else {
+        $width-=2;
+    }
+}
+
 my $str = '';
 my $boxColor = "\x1b[0;32;1m";
 my $textColor="\x1b[0;34;4m";
