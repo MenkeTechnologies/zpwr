@@ -983,7 +983,11 @@ o(){
         *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
     esac
 
-    $open_cmd "$@"
+    if [[ -z "$1" ]]; then
+        $open_cmd .
+    else
+        $open_cmd "$@"
+    fi
 
 }
 
