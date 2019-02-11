@@ -1599,6 +1599,10 @@ noPonyBanner(){
     eval "$NOPONY_BANNER_CMD"
 }
 
+revealRecurse(){
+    for i in **/*(/); do ( builtin cd $i && reveal 2>/dev/null); done
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Initialize Login
@@ -1870,11 +1874,13 @@ fzf_setup(){
 
 fzf_setup
 
+# echo $; <tab>
 _fzf_complete_echo() {
   _fzf_complete '-m' "$@" < <(
       declare -xp | sed 's@=.*@@' | sed 's@.* @@'
     )
 }
+# alias ;<tab>
 _fzf_complete_alias() {
   _fzf_complete '-m' "$@" < <(
       alias | sed 's@=.*@@'
@@ -2006,8 +2012,4 @@ alias numcmd='print $#commands'
 unalias ag &> /dev/null
 
 export KEYTIMEOUT=1
-
-revealRecurse(){
-    for i in **/*(/); do ( builtin cd $i && reveal 2>/dev/null); done
-}
 #}}}***********************************************************
