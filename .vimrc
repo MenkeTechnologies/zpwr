@@ -624,7 +624,7 @@ endfunction
 
 "}}}***********************************************************
 
-"{{{                    MARK:Blacklists
+"{{{                    MARK:Blacklists for indentation
 "**************************************************************
 let blacklist=['md', 'zsh','sh','hs', 'pl']
 
@@ -641,7 +641,6 @@ augroup indentGroup
     endif
 augroup end
 
-
 "}}}***********************************************************
 
 "{{{                    MARK:Quoter Mappings
@@ -657,7 +656,6 @@ vnoremap <silent> <leader>` :call InsertQuoteVisualMode("back")<CR>
 vnoremap <silent> <leader>[ :call InsertQuoteVisualMode("bracket")<CR>
 vnoremap <silent> <leader>{ :call InsertQuoteVisualMode("curlybracket")<CR>
 vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
-
 
 "}}}***********************************************************
 
@@ -738,7 +736,7 @@ noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
 map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
-function CompleteLine()
+function CompleteStatement()
     let SemiColon=['java','pl','c','cpp','js']
     let doubleSemiColon=['ml']
     let exeFileType=expand('%:e')
@@ -757,7 +755,7 @@ function CompleteLine()
     endif
 endfunction
 
-autocmd VimEnter * call CompleteLine()
+autocmd VimEnter * call CompleteStatement()
 
 "}}}***********************************************************
 
@@ -805,9 +803,6 @@ autocmd VimEnter * nunmap S
 
 nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat()<CR>
 
-vnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
-nnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
-
 "vnoremap <silent> y y`>
 "nnoremap <silent> gp p`]
 vnoremap Y y`>j
@@ -817,18 +812,47 @@ nnoremap Y yy`>
 
 "{{{                    MARK:C-D mappings
 "**************************************************************
+vnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
+nnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
+
 nnoremap <silent> <C-D>d :update<CR>
 vnoremap <silent> <C-D>d :<C-C>:update<CR>
 inoremap <silent> <C-D>d <C-[>:update<CR>a
 
 nnoremap <silent> <C-D>v :w!<CR>:call TmuxRepeatGeneric()<CR>
 inoremap <silent> <C-D>v <C-[>:w!<CR>:call TmuxRepeatGeneric()<CR>a
-inoremap <silent> <C-D>g <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
+inoremap <silent> <C-D>r <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 nnoremap <silent> <C-D>g :silent !open -t %:p:h<CR>:redraw!<CR>
 
-nnoremap <silent> <C-D>s :update<CR>:SyntasticCheck<CR>
-vnoremap <silent> <C-D>s :<C-C>:update<CR>:SyntasticCheck<CR>
-inoremap <silent> <C-D>s <C-[>:update<CR>:SyntasticCheck<CR>a
+nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
+vnoremap <silent> <C-D>y :<C-C>:update<CR>:SyntasticCheck<CR>
+inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
+
+"insert mode keybindings for fzf-vim
+inoremap <silent> <C-D>f <C-O>:Files<CR>
+inoremap <silent> <C-D>c <C-O>:Colors<CR>
+inoremap <silent> <C-D>g <C-O>:Commits<CR>
+inoremap <silent> <C-D>b <C-O>:Buffers<CR>
+inoremap <silent> <C-D>a <C-O>:Ag<CR>
+inoremap <silent> <C-D>l <C-O>:Lines<CR>
+inoremap <silent> <C-D>m <C-O>:Marks<CR>
+inoremap <silent> <C-D>w <C-O>:Windows<CR>
+inoremap <silent> <C-D>n <C-O>:Snippets<CR>
+inoremap <silent> <C-D>h <C-O>:History:<CR>
+inoremap <silent> <C-D>s <C-O>:History/<CR>
+
+"normal mode keybindings for fzf-vim
+nnoremap <silent> <C-D>f :Files<CR>
+nnoremap <silent> <C-D>c :Colors<CR>
+nnoremap <silent> <C-D>g :Commits<CR>
+nnoremap <silent> <C-D>a :Ag<CR>
+nnoremap <silent> <C-D>l :Lines<CR>
+nnoremap <silent> <C-D>b :Buffers<CR>
+nnoremap <silent> <C-D>m :Marks<CR>
+nnoremap <silent> <C-D>w :Windows<CR>
+nnoremap <silent> <C-D>n :Snippets<CR>
+nnoremap <silent> <C-D>h :History:<CR>
+nnoremap <silent> <C-D>s :History/<CR>
 
 nmap [[ ?{<CR>w99[{
 nmap ][ /}<CR>b99]}
@@ -848,6 +872,7 @@ autocmd filetype * call AutoCorrect()
 
 autocmd BufReadPre,FileReadPre *.[chy] set cindent
 autocmd BufRead * setlocal foldmethod=marker
+"open folds on startup
 autocmd BufRead * normal zR
 autocmd FileType java let b:dispatch = 'javac %'
 
@@ -875,9 +900,9 @@ autocmd BufNewFile * exe "normal! G" | startinsert!
 execute pathogen#infect()
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
+"powerline-status pip package installs to different locations of different OS
 let os = substitute(system('uname'), "\n", "", "")
 
-"powerline-status pip package installs to different locations of different OS
 if os == "Darwin"
     "if has('python3')
     "command! -nargs=1 Py py3 <args>
@@ -931,7 +956,7 @@ elseif os == "Linux"
 
 endif
 
-"gf and :find will find file automatically in these locations
+"gf and :find will find files automatically in these locations
 set path+=~/Desktop
 set path+=~/Documents/shellScripts
 
@@ -990,32 +1015,8 @@ command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options'
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'bottom':'50%'}))
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap("with_preview", {"options": '--delimiter : --nth 4.. --preview'}))
 
-
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { pygmentize -g {} | nl -b a; } || stat {}'"}))
 
-inoremap <silent> <C-D>f <C-O>:Files<CR>
-inoremap <silent> <C-D>c <C-O>:Colors<CR>
-inoremap <silent> <C-D>g <C-O>:Commits<CR>
-inoremap <silent> <C-D>b <C-O>:Buffers<CR>
-inoremap <silent> <C-D>a <C-O>:Ag<CR>
-inoremap <silent> <C-D>l <C-O>:Lines<CR>
-inoremap <silent> <C-D>m <C-O>:Marks<CR>
-inoremap <silent> <C-D>w <C-O>:Windows<CR>
-inoremap <silent> <C-D>h <C-O>:History:<CR>
-inoremap <silent> <C-D>/ <C-O>:History/<CR>
-inoremap <silent> <C-D>s <C-O>:Snippets<CR>
-
-nnoremap <silent> <C-D>f :Files<CR>
-nnoremap <silent> <C-D>c :Colors<CR>
-nnoremap <silent> <C-D>g :Commits<CR>
-nnoremap <silent> <C-D>a :Ag<CR>
-nnoremap <silent> <C-D>l :Lines<CR>
-nnoremap <silent> <C-D>b :Buffers<CR>
-nnoremap <silent> <C-D>m :Marks<CR>
-nnoremap <silent> <C-D>w :Windows<CR>
-nnoremap <silent> <C-D>h :History:<CR>
-nnoremap <silent> <C-D>s :Snippets<CR>
-nnoremap <silent> <C-D>/ :History/<CR>
 
 "}}}*****************za******************************************
