@@ -811,8 +811,6 @@ bindkey -M vicmd '^V^V' fzf-cd-widget
 #completion trigger plus tab, defaults to ~~
 export FZF_COMPLETION_TRIGGER=';'
 
-#bindkey '^F^A' fzf-completion
-
 zle -N changeQuotes
 zle -N alternateQuotes
 zle -N clipboard
@@ -820,9 +818,11 @@ zle -N clipboard
 bindkey -M viins '^Y' changeQuotes
 bindkey -M vicmd '^Y' changeQuotes
 
+#unbind for later use
 bindkey -M viins -r '^V'
 bindkey -M vicmd -r '^V'
 
+#unbind for later use
 bindkey -M viins -r '^F'
 bindkey -M vicmd -r '^F'
 
@@ -870,6 +870,7 @@ bindkey '\eOP' updater
 #F2 key
 bindkey '\eOQ' sub
 
+#F3 key
 bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
