@@ -27,7 +27,7 @@ filetype plugin indent on
 
 ""{{{                    MARK:Settings
 ""**************************************************************
-"backslash replaced by comma
+"backslash replaced by space for leader keybindings
 let mapleader = "\<SPACE>"
 
 set nocompatible              " be iMproved, required

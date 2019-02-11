@@ -1,6 +1,7 @@
 #{{{                    MARK:Global Fxn
 exists(){
-    type "$1" >/dev/null 2>&1 #alternative is command -v
+    #alternative is command -v
+    type "$1" >/dev/null 2>&1
 }
 
 #}}}***********************************************************
@@ -12,7 +13,9 @@ export TMUX_REMOTE_PREFIX=b
 PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
 export PI_ARRAY
 export DELIMITER_CHAR='%'
+#bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
+#zsh xtrace
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
 export GITHUB_ACCOUNT='MenkeTechnologies'
@@ -146,10 +149,10 @@ alias l="clearList"
 alias t="cd /"
 alias ca='cat -n'
 alias sa='sudo cat -n'
-[[ -d "$PYSCRIPTS" ]] && alias py="cd $PYSCRIPTS"
+test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
-[[ -d "$HOME/Desktop" ]] && alias d="cd \$HOME/Desktop"
+test -d "$HOME/Desktop" && alias d="cd \$HOME/Desktop"
 if [[ -d "/var/www/html" ]];then
     alias we="cd /var/www/html"
 elif [[ -d "/usr/local/var/www" ]];then
@@ -817,8 +820,6 @@ hd(){
     test -z "$user" && echo "bad user $user" >&2 && return 1
 
     out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$repo")"
-
-
 
     printf "\e[1m"
     [[ -z "$out" ]] && echo "Successful deletion of $repo" \
