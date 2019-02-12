@@ -1383,7 +1383,6 @@ globalAliasesInit(){
 
     if [[ "$(uname)" == Darwin ]]; then
         alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
-        alias ge="exe 'nz';nz"
     else
         alias -g ${__GLOBAL_ALIAS_PREFIX}v= '| xclip -selection clipboard'
     fi
@@ -1421,7 +1420,6 @@ supernatural-space() {
     __CORRECT_WORDS[for]="fro rfo rof fr ofr"
     __CORRECT_WORDS[found]="ofund fuond foudn"
     __CORRECT_WORDS[function]="fxn func fn"
-    __CORRECT_WORDS[get]="ge"
     __CORRECT_WORDS[go]="og"
     __CORRECT_WORDS[here]="ehre"
     __CORRECT_WORDS[high]="hgih hihg ihgh hi"
