@@ -1161,7 +1161,7 @@ digs(){
             }
             prettyPrint "CURL: $url"
             exists http && {
-                httpie "$url"
+                ge "$url"
             } || curl -vvv -k -fsSL "$url"
             exec 2>/dev/tty
         done | less -MN
@@ -1264,7 +1264,7 @@ c(){
     fi
 }
 
-exists http && httpie(){
+exists http && ge(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's#[^/]*//\([^@]*@\)\?\([^:/]*.*\)#\2#')"
