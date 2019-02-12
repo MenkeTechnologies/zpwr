@@ -808,6 +808,12 @@ nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat()<CR>
 vnoremap Y y`>j
 nnoremap Y yy`>
 
+fun! GetRef()
+    let mystr = trim(getline('.'))
+    echom "Copied " . mystr
+    let @* = expand('%:p').': '.line('.').' '.trim(getline('.'))
+endfun
+
 "}}}***********************************************************
 
 "{{{                    MARK:C-D mappings
@@ -840,6 +846,7 @@ inoremap <silent> <C-D>w <C-O>:Windows<CR>
 inoremap <silent> <C-D>n <C-O>:Snippets<CR>
 inoremap <silent> <C-D>h <C-O>:History:<CR>
 inoremap <silent> <C-D>s <C-O>:History/<CR>
+inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
 
 "normal mode keybindings for fzf-vim
 nnoremap <silent> <C-D>f :Files<CR>
@@ -853,6 +860,7 @@ nnoremap <silent> <C-D>w :Windows<CR>
 nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>h :History:<CR>
 nnoremap <silent> <C-D>s :History/<CR>
+nnoremap <silent> <C-D>p :call GetRef()<CR>
 
 nmap [[ ?{<CR>w99[{
 nmap ][ /}<CR>b99]}
@@ -883,6 +891,7 @@ fun! SetDiffColors()
     highlight DiffChange cterm=bold ctermfg=white ctermbg=DarkBlue
     highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
+
 
 autocmd FilterWritePre * call SetDiffColors()
 
