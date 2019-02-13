@@ -26,9 +26,15 @@ Some interactivity is required near end of installer for postfix, wireshark and 
 
 Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Control-D to return to installer script.
 
-```export GITHUB_ACCOUNT='MenkeTechnologies'```
-Change line 18 in ~/.shell_aliases_functions.sh to match your GitHub account name to enable various functionality with your account like openMyGH, hc and hd shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line.
+Change line 18 in ~/.shell_aliases_functions.sh
 
+```export GITHUB_ACCOUNT='MenkeTechnologies'```
+
+to match your GitHub account name to enable various functionality with your account like openMyGH, hc and hd shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line.
+
+There is a shell function called `getrc` that will pull down latest changes from this repository.
+
+Always looking for contributors.
 
 # Running on a MacbookPro
 ![Alt text](/tmuxfinal1.png?raw=true)
@@ -37,8 +43,4 @@ Change line 18 in ~/.shell_aliases_functions.sh to match your GitHub account nam
 # Running on the Raspberry Pi 3
 ![Alt text](/tmuxfinal3.png?raw=true)
 ![Alt text](/tmuxfinal4.png?raw=true)
-
-Includes my iTerm colors profile and the background image.
-
-
 
