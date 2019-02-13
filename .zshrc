@@ -1405,7 +1405,7 @@ supernatural-space() {
     __CORRECT_WORDS[by_the_way]="btw"
     __CORRECT_WORDS[block]="blokc bolck lbock"
     __CORRECT_WORDS[capture]="catpure catprue caputre"
-    __CORRECT_WORDS[change]="cahnge changen"
+    __CORRECT_WORDS[change]="cahnge chnage changen"
     __CORRECT_WORDS[client]="cleint"
     __CORRECT_WORDS[click]="clikc"
     __CORRECT_WORDS[custom]="custmo cusotm"
