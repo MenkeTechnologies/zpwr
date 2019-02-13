@@ -808,10 +808,14 @@ nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat()<CR>
 vnoremap Y y`>j
 nnoremap Y yy`>
 
+function! Strip(input_string)
+    return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
+endfunction
+
 fun! GetRef()
-    let mystr = trim(getline('.'))
+    let mystr = Strip(getline('.'))
     echom "Copied " . mystr
-    let @* = expand('%:p').': '.line('.').' '.trim(getline('.'))
+    let @* = expand('%:p').': '.line('.').' '.Strip(getline('.'))
 endfun
 
 "}}}***********************************************************
