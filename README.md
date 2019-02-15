@@ -427,7 +427,7 @@ Always looking for contributors.
 - `bindkey -R -M viins "^\\\\"-"~" self-insert`
 - `bindkey -M viins "^?" vi-backward-delete-char`
 - `bindkey -R -M viins "\M-^@"-"\M-^?" self-insert`
-# `Vim Keybindings Insert Mode`
+# Vim Keybindings Insert Mode (:imap)
 - `i  <S-BS>       @<Plug>delimitMateS-BS`
 - `	Last set from ~/.vim/bundle/delimitmate/plugin/delimitMate.vim line 339`
 - `i  <Plug>delimitMateJumpMany *@<SNR>25_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>"`
@@ -717,7 +717,7 @@ Always looking for contributors.
 - `i  <C-\>       * <Esc>+`
 - `	Last set from ~/.vimrc line 752`
 - ``
-# Vim Keybindings Normal Mode
+# Vim Keybindings Normal Mode (:nmap)
 - `n  m           *@:call <SNR>84__m_key_override()<CR>`
 - `	Last set from ~/.vim/bundle/vim-markology/plugin/markology.vim line 89`
 - `   m*          *@:MarkologyLineHighlightToggle<CR>`
@@ -2038,7 +2038,7 @@ Always looking for contributors.
 - `	Last set from ~/.vim/bundle/vim-markology/plugin/markology.vim line 64`
 - `   í           *@:MarkologyNextLocalMarkPos<CR>`
 - `	Last set from ~/.vim/bundle/vim-markology/plugin/markology.vim line 77`
-# Vim Keybindings Visual Mode
+# Vim Keybindings Visual Mode (:vmap)
 - `v  <C-B>       * "*y`>`
 - `	Last set from ~/.vimrc line 236`
 - `v  <C-D>y      * :<C-C>:update<CR>:SyntasticCheck<CR>`
@@ -2873,7 +2873,7 @@ Always looking for contributors.
 - `	Last set from ~/.vimrc line 687`
 - `v  <RightMouse> * "*y`>`
 - `	Last set from ~/.vimrc line 285`
-# Vim Keybindings Command Colon Mode
+# Vim Keybindings Command Colon Mode (:cmap)
 - `c  <C-R><C-G>  &@<SNR>131_fnameescape(fugitive#Object(@%))`
 - `	Last set from ~/.vim/bundle/vim-fugitive/autoload/fugitive.vim line 152`
 - `!  <F35>         <M-BS>`
