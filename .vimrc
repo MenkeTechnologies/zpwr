@@ -4,7 +4,6 @@
 if &compatible
     set nocompatible               " Be iMproved
 endif
-
 """" Required:
 "set runtimepath+=~/.vim/bundle/neobundle.vim/
 
@@ -1004,7 +1003,6 @@ let g:fzf_action = {
 
 "default fzf location and size
 let g:fzf_layout = { 'down': '~50%' }
-
 
 "use vim colorscheme colors
 let g:fzf_colors =

@@ -67,25 +67,10 @@ echo "$PATH" | grep -iq shellScripts || {
 #{{{                           MARK:HOMES
 #**********************************************************************
     [[ "$(uname)" == Darwin ]] && {
-        exists jenv && {
-            export PATH="/Users/wizard/.jenv/shims:${PATH}"
-            export JENV_SHELL=zsh
-            export JENV_LOADED=1
-            unset JAVA_HOME
-            source '/usr/local/Cellar/jenv/0.5.1/libexec/libexec/../completions/jenv.zsh'
-            jenv rehash 2>/dev/null
-            jenv() {
-                typeset command
-                command="$1"
-                (("$#" > 0 )) && shift
-                case "$command" in
-                enable-plugin|rehash|shell|shell-options)
-                    eval `jenv "sh-$command" "$@"`;;
-                *)
-                    command jenv "$command" "$@";;
-                esac
-            }
-    }
+        if exists jenv;then
+            eval "$(jenv init -)"
+            test -z "$JAVA_HOME" && jenv enable-plugin export
+        fi
         export HOMEBREW_HOME='/usr/local/Cellar'
         export HOMEBREW_OPT_HOME='/usr/local/opt'
         export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
