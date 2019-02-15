@@ -1975,6 +1975,7 @@ if [[ "$(uname)" == Linux ]]; then
         esac
         logg "searching for $key in $out"
         echo "$out" | grep -q "$key" && mobile=false
+
         command rm ~/temp$$
         if [[ $mobile == "false" ]]; then
             logg "not mobile"
