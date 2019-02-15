@@ -230,9 +230,22 @@ showDeps(){
     proceed
 }
 
+files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftoprc .shell_aliases_functions.sh)
+
+backup(){
+    backupdir="$HOME/.$USER.rc.bak"
+    test -d "$backupdir" || mkdir -p "$backupdir"
+    for file in ${files[@]} ; do
+       cp "$HOME/$file" "$backupdir"
+    done
+}
+
 warnOverwrite(){
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .ideavimrc, .iftoprc, .shell_aliases_functions.sh in $HOME"
+    prettyPrint "These files if they exist will be backed to $HOME/.$USER.rc.bak"
     proceed
+    backup
+
 }
 warnSudo(){
     prettyPrint "It is highly recommended to run 'sudo visudo' to allow noninteractive install.  This allows running sudo without a password.  The following line would be added to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:ALL"
