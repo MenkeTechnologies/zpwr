@@ -300,16 +300,38 @@ Always looking for contributors.
 - `bind-key    -T root         M-Left            select-pane -L`
 - `bind-key    -T root         M-Right           select-pane -R`
 # Zsh Vim Normal Mode keybindings (bindkey -M vicmd -L)
+- `bindkey -a "^B" clipboard`
 - `bindkey -a "^D" list-choices`
-- `bindkey -a "^G" list-expand`
+- `bindkey -a "^F^D" intoFzf`
+- `bindkey -a "^F^F" fzf-file-widget`
+- `bindkey -a "^F^G" intoFzfAg`
+- `bindkey -a "^F^L" list-choices`
+- `bindkey -a "^F^S" gitFuncNoCheck`
+- `bindkey -a "^G" what-cursor-position`
 - `bindkey -a "^H" vi-backward-char`
-- `bindkey -a "^J" accept-line`
+- `bindkey -a "^J" learn`
+- `bindkey -a "^K" alternateQuotes`
 - `bindkey -a "^L" clear-screen`
 - `bindkey -a "^M" accept-line`
 - `bindkey -a "^N" down-history`
-- `bindkey -a "^P" up-history`
+- `bindkey -a "^O" edit-command-line`
+- `bindkey -a "^P" EOLorNextTabStop`
+- `bindkey -a "^Q" lastWordDouble`
 - `bindkey -a "^R" redo`
+- `bindkey -a "^S" gitFunc`
+- `bindkey -a "^T" transpose-chars`
+- `bindkey -a "^V^V" fzf-cd-widget`
+- `bindkey -a "^V^Z" fzf-history-widget`
+- `bindkey -a "^Y" changeQuotes`
+- `bindkey -a "^Z" undo`
 - `bindkey -a "^[" beep`
+- `bindkey -a "^[^D" capitalize-word`
+- `bindkey -a "^[^L" down-case-word`
+- `bindkey -a "^[^O" runner`
+- `bindkey -a "^[^P" updater`
+- `bindkey -a "^[^T" transpose-words`
+- `bindkey -a "^[^U" up-case-word`
+- `bindkey -a "^[ " sshRegain`
 - `bindkey -a "^[OA" up-line-or-history`
 - `bindkey -a "^[OB" down-line-or-history`
 - `bindkey -a "^[OC" vi-forward-char`
@@ -319,6 +341,7 @@ Always looking for contributors.
 - `bindkey -a "^[[B" down-line-or-history`
 - `bindkey -a "^[[C" vi-forward-char`
 - `bindkey -a "^[[D" vi-backward-char`
+- `bindkey -a "^]" basicSedSub`
 - `bindkey -a " " vi-forward-char`
 - `bindkey -a "\"" vi-set-buffer`
 - `bindkey -a "#" pound-insert`
@@ -344,7 +367,7 @@ Always looking for contributors.
 - `bindkey -a "D" vi-kill-eol`
 - `bindkey -a "E" vi-forward-blank-word-end`
 - `bindkey -a "F" vi-find-prev-char`
-- `bindkey -a "G" vi-fetch-history`
+- `bindkey -a "G" end-of-buffer-or-history`
 - `bindkey -a "I" vi-insert-bol`
 - `bindkey -a "J" vi-join`
 - `bindkey -a "N" vi-rev-repeat-search`
@@ -396,36 +419,99 @@ Always looking for contributors.
 - `bindkey -a "~" vi-swap-case`
 - `bindkey -a "^?" vi-backward-char`
 # Zsh Vim Insert Mode keybindings (bindkey -M viins -L)
-- `bindkey -R -M viins "^A"-"^C" self-insert`
+- `bindkey -M viins "^@" terminate-space`
+- `bindkey -M viins "^A" beginning-of-line`
+- `bindkey -M viins "^B" clipboard`
+- `bindkey -M viins "^C" self-insert`
 - `bindkey -M viins "^D" list-choices`
-- `bindkey -R -M viins "^E"-"^F" self-insert`
-- `bindkey -M viins "^G" list-expand`
+- `bindkey -M viins "^E" end-of-line`
+- `bindkey -M viins "^F^D" intoFzf`
+- `bindkey -M viins "^F^F" fzf-file-widget`
+- `bindkey -M viins "^F^G" intoFzfAg`
+- `bindkey -M viins "^F^L" list-choices`
+- `bindkey -M viins "^F^S" gitFuncNoCheck`
+- `bindkey -M viins "^G" what-cursor-position`
 - `bindkey -M viins "^H" vi-backward-delete-char`
-- `bindkey -M viins "^I" expand-or-complete`
-- `bindkey -M viins "^J" accept-line`
-- `bindkey -M viins "^K" self-insert`
+- `bindkey -M viins "^I" fzf-completion`
+- `bindkey -M viins "^J" learn`
+- `bindkey -M viins "^K" alternateQuotes`
 - `bindkey -M viins "^L" clear-screen`
 - `bindkey -M viins "^M" accept-line`
-- `bindkey -R -M viins "^N"-"^P" self-insert`
-- `bindkey -M viins "^Q" vi-quoted-insert`
-- `bindkey -M viins "^R" redisplay`
-- `bindkey -R -M viins "^S"-"^T" self-insert`
+- `bindkey -M viins "^N" sudo-command-line`
+- `bindkey -M viins "^O" edit-command-line`
+- `bindkey -M viins "^P" EOLorNextTabStop`
+- `bindkey -M viins "^Q" lastWordDouble`
+- `bindkey -M viins "^R" redo`
+- `bindkey -M viins "^S" gitFunc`
+- `bindkey -M viins "^T" transpose-chars`
 - `bindkey -M viins "^U" vi-kill-line`
-- `bindkey -M viins "^V" vi-quoted-insert`
+- `bindkey -M viins "^V^V" fzf-cd-widget`
+- `bindkey -M viins "^V^Z" fzf-history-widget`
 - `bindkey -M viins "^W" vi-backward-kill-word`
-- `bindkey -R -M viins "^Y"-"^Z" self-insert`
+- `bindkey -M viins "^X^R" _read_comp`
+- `bindkey -M viins "^X?" _complete_debug`
+- `bindkey -M viins "^XC" _correct_filename`
+- `bindkey -M viins "^Xa" _expand_alias`
+- `bindkey -M viins "^Xc" _correct_word`
+- `bindkey -M viins "^Xd" _list_expansions`
+- `bindkey -M viins "^Xe" _expand_word`
+- `bindkey -M viins "^Xh" _complete_help`
+- `bindkey -M viins "^Xm" _most_recent_file`
+- `bindkey -M viins "^Xn" _next_tags`
+- `bindkey -M viins "^Xt" _complete_tag`
+- `bindkey -M viins "^X~" _bash_list-choices`
+- `bindkey -M viins "^Y" changeQuotes`
+- `bindkey -M viins "^Z" undo`
 - `bindkey -M viins "^[" vi-cmd-mode`
-- `bindkey -M viins "^[OA" up-line-or-history`
-- `bindkey -M viins "^[OB" down-line-or-history`
+- `bindkey -M viins "^[^D" capitalize-word`
+- `bindkey -M viins "^[^E" expand-aliases`
+- `bindkey -M viins "^[^F" sub`
+- `bindkey -M viins "^[^L" down-case-word`
+- `bindkey -M viins "^[^M" self-insert-unmeta`
+- `bindkey -M viins "^[^O" runner`
+- `bindkey -M viins "^[^P" updater`
+- `bindkey -M viins "^[^T" transpose-words`
+- `bindkey -M viins "^[^U" up-case-word`
+- `bindkey -M viins "^[ " sshRegain`
+- `bindkey -M viins "^[," _history-complete-newer`
+- `bindkey -M viins "^[/" _history-complete-older`
+- `bindkey -M viins "^[OA" history-substring-search-up`
+- `bindkey -M viins "^[OB" history-substring-search-down`
 - `bindkey -M viins "^[OC" vi-forward-char`
 - `bindkey -M viins "^[OD" vi-backward-char`
+- `bindkey -M viins "^[OP" updater`
+- `bindkey -M viins "^[OQ" sub`
+- `bindkey -M viins "^[OR" getrcWidget`
+- `bindkey -M viins "^[[1;2D" sub`
+- `bindkey -M viins "^[[1;5A" gitfunc`
+- `bindkey -M viins "^[[1;5B" updater`
+- `bindkey -M viins "^[[1;5C" tutsUpdate`
+- `bindkey -M viins "^[[1;5D" dbz`
 - `bindkey -M viins "^[[200~" bracketed-paste`
+- `bindkey -M viins "^[[5~" clipboard`
 - `bindkey -M viins "^[[A" up-line-or-history`
 - `bindkey -M viins "^[[B" down-line-or-history`
 - `bindkey -M viins "^[[C" vi-forward-char`
 - `bindkey -M viins "^[[D" vi-backward-char`
-- `bindkey -R -M viins "^\\\\"-"~" self-insert`
-- `bindkey -M viins "^?" vi-backward-delete-char`
+- `bindkey -M viins "^[~" _bash_complete-word`
+- `bindkey -M viins "^\\\\" self-insert`
+- `bindkey -M viins "^]" basicSedSub`
+- `bindkey -R -M viins "^\^"-"^_" self-insert`
+- `bindkey -M viins " " supernatural-space`
+- `bindkey -M viins "!" self-insert`
+- `bindkey -M viins "\"" surround`
+- `bindkey -R -M viins "#"-"&" self-insert`
+- `bindkey -R -M viins "'"-"(" surround`
+- `bindkey -R -M viins ")"-"-" self-insert`
+- `bindkey -M viins "." rationalize-dot`
+- `bindkey -R -M viins "/"-"Z" self-insert`
+- `bindkey -M viins "[" surround`
+- `bindkey -R -M viins "\\\\"-"_" self-insert`
+- `bindkey -M viins "\`" surround`
+- `bindkey -R -M viins "a"-"z" self-insert`
+- `bindkey -M viins "{" surround`
+- `bindkey -R -M viins "|"-"~" self-insert`
+- `bindkey -M viins "^?" deleteMatching`
 - `bindkey -R -M viins "\M-^@"-"\M-^?" self-insert`
 # Vim Keybindings Insert Mode (:imap)
 - `i  <S-BS>       @<Plug>delimitMateS-BS`
