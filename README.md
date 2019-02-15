@@ -329,7 +329,7 @@ Always looking for contributors.
 - `bindkey -M menuselect "^[[D" backward-char`
 - `bindkey -M menuselect "/" history-incremental-search-forward`
 - `bindkey -M menuselect "?" history-incremental-search-backward`
-# Zsh Vim Visual Mode keybindings (bindkey -M menuselect -L)
+# Zsh Vim Visual Mode keybindings (bindkey -M visual -L)
 - `bindkey -M visual "^[" deactivate-region`
 - `bindkey -M visual "^[OA" up-line`
 - `bindkey -M visual "^[OB" down-line`
@@ -399,68 +399,68 @@ Always looking for contributors.
 - `bindkey -M visual "x" vi-delete`
 - `bindkey -M visual "~" vi-oper-swap-case`
 # Zsh Vim Operator Mode keybindings (bindkey -M viopp -L)
-- `"^[" vi-cmd-mode`
-- `"^[OA" up-line`
-- `"^[OB" down-line`
-- `"^[[A" up-line`
-- `"^[[B" down-line`
-- `"-" vi-up-line-or-history`
-- `"a\"" select-quoted`
-- `"a'" select-quoted`
-- `"a(" select-bracketed`
-- `"a)" select-bracketed`
-- `"a+" select-quoted`
-- `"a," select-quoted`
-- `"a-" select-quoted`
-- `"a." select-quoted`
-- `"a/" select-quoted`
-- `"a:" select-quoted`
-- `"a;" select-quoted`
-- `"a<" select-bracketed`
-- `"a=" select-quoted`
-- `"a>" select-bracketed`
-- `"a@" select-quoted`
-- `"aB" select-bracketed`
-- `"aW" select-a-blank-word`
-- `"a[" select-bracketed`
-- `"a\\\\" select-quoted`
-- `"a]" select-bracketed`
-- `"a\`" select-quoted`
-- `"aa" select-a-shell-word`
-- `"ab" select-bracketed`
-- `"aw" select-a-word`
-- `"a{" select-bracketed`
-- `"a|" select-quoted`
-- `"a}" select-bracketed`
-- `"i\"" select-quoted`
-- `"i'" select-quoted`
-- `"i(" select-bracketed`
-- `"i)" select-bracketed`
-- `"i+" select-quoted`
-- `"i," select-quoted`
-- `"i-" select-quoted`
-- `"i." select-quoted`
-- `"i/" select-quoted`
-- `"i:" select-quoted`
-- `"i;" select-quoted`
-- `"i<" select-bracketed`
-- `"i=" select-quoted`
-- `"i>" select-bracketed`
-- `"i@" select-quoted`
-- `"iB" select-bracketed`
-- `"iW" select-in-blank-word`
-- `"i[" select-bracketed`
-- `"i\\\\" select-quoted`
-- `"i]" select-bracketed`
-- `"i\`" select-quoted`
-- `"ia" select-in-shell-word`
-- `"ib" select-bracketed`
-- `"iw" select-in-word`
-- `"i{" select-bracketed`
-- `"i|" select-quoted`
-- `"i}" select-bracketed`
-- `"j" down-line`
-- `"k" up-line`
+- `bindkey -M viopp "^[" vi-cmd-mode`
+- `bindkey -M viopp "^[OA" up-line`
+- `bindkey -M viopp "^[OB" down-line`
+- `bindkey -M viopp "^[[A" up-line`
+- `bindkey -M viopp "^[[B" down-line`
+- `bindkey -M viopp "-" vi-up-line-or-history`
+- `bindkey -M viopp "a\"" select-quoted`
+- `bindkey -M viopp "a'" select-quoted`
+- `bindkey -M viopp "a(" select-bracketed`
+- `bindkey -M viopp "a)" select-bracketed`
+- `bindkey -M viopp "a+" select-quoted`
+- `bindkey -M viopp "a," select-quoted`
+- `bindkey -M viopp "a-" select-quoted`
+- `bindkey -M viopp "a." select-quoted`
+- `bindkey -M viopp "a/" select-quoted`
+- `bindkey -M viopp "a:" select-quoted`
+- `bindkey -M viopp "a;" select-quoted`
+- `bindkey -M viopp "a<" select-bracketed`
+- `bindkey -M viopp "a=" select-quoted`
+- `bindkey -M viopp "a>" select-bracketed`
+- `bindkey -M viopp "a@" select-quoted`
+- `bindkey -M viopp "aB" select-bracketed`
+- `bindkey -M viopp "aW" select-a-blank-word`
+- `bindkey -M viopp "a[" select-bracketed`
+- `bindkey -M viopp "a\\\\" select-quoted`
+- `bindkey -M viopp "a]" select-bracketed`
+- `bindkey -M viopp "a\`" select-quoted`
+- `bindkey -M viopp "aa" select-a-shell-word`
+- `bindkey -M viopp "ab" select-bracketed`
+- `bindkey -M viopp "aw" select-a-word`
+- `bindkey -M viopp "a{" select-bracketed`
+- `bindkey -M viopp "a|" select-quoted`
+- `bindkey -M viopp "a}" select-bracketed`
+- `bindkey -M viopp "i\"" select-quoted`
+- `bindkey -M viopp "i'" select-quoted`
+- `bindkey -M viopp "i(" select-bracketed`
+- `bindkey -M viopp "i)" select-bracketed`
+- `bindkey -M viopp "i+" select-quoted`
+- `bindkey -M viopp "i," select-quoted`
+- `bindkey -M viopp "i-" select-quoted`
+- `bindkey -M viopp "i." select-quoted`
+- `bindkey -M viopp "i/" select-quoted`
+- `bindkey -M viopp "i:" select-quoted`
+- `bindkey -M viopp "i;" select-quoted`
+- `bindkey -M viopp "i<" select-bracketed`
+- `bindkey -M viopp "i=" select-quoted`
+- `bindkey -M viopp "i>" select-bracketed`
+- `bindkey -M viopp "i@" select-quoted`
+- `bindkey -M viopp "iB" select-bracketed`
+- `bindkey -M viopp "iW" select-in-blank-word`
+- `bindkey -M viopp "i[" select-bracketed`
+- `bindkey -M viopp "i\\\\" select-quoted`
+- `bindkey -M viopp "i]" select-bracketed`
+- `bindkey -M viopp "i\`" select-quoted`
+- `bindkey -M viopp "ia" select-in-shell-word`
+- `bindkey -M viopp "ib" select-bracketed`
+- `bindkey -M viopp "iw" select-in-word`
+- `bindkey -M viopp "i{" select-bracketed`
+- `bindkey -M viopp "i|" select-quoted`
+- `bindkey -M viopp "i}" select-bracketed`
+- `bindkey -M viopp "j" down-line`
+- `bindkey -M viopp "k" up-line`
 # Zsh Vim Normal Mode keybindings (bindkey -M vicmd -L)
 - `bindkey -a "^B" clipboard`
 - `bindkey -a "^D" list-choices`
