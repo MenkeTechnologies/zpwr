@@ -230,7 +230,9 @@ showDeps(){
     proceed
 }
 
-files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftoprc .shell_aliases_functions.sh)
+files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .shell_aliases_functions.sh conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .powerlevel9kconfig.sh .my.cnf motd.sh)
+dirs=(Documents/shellScripts .config/htop .config/powerline/themes/tmux)
+
 
 backupdir="$HOME/.$USER.rc.bak.$(date +'%m.%d.%Y')"
 
@@ -239,11 +241,21 @@ backup(){
     for file in ${files[@]} ; do
        test -f "$HOME/$file" && cp "$HOME/$file" "$backupdir"
     done
+    for dir in ${dirs[@]} ; do
+       test -d "$HOME/$dir" && cp -R "$HOME/$dir" "$backupdir"
+    done
 }
 
 warnOverwrite(){
-    prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .ideavimrc, .iftoprc, .shell_aliases_functions.sh in $HOME"
+    prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.conf, .shell_aliases_functions.sh in $HOME"
     prettyPrint "These files if they exist will be backed to $backupdir"
+    prettyPrintStdin <<EOF
+The following directories if they exist will be backed to $backupdir: 
+$HOME/${dirs[0]}, 
+$HOME/${dirs[1]}, 
+$HOME/${dirs[2]} 
+
+EOF
     proceed
     backup
 
