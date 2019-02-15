@@ -232,8 +232,9 @@ showDeps(){
 
 files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftoprc .shell_aliases_functions.sh)
 
+backupdir="$HOME/.$USER.rc.bak.$(date +'%m.%d.%Y')"
+
 backup(){
-    backupdir="$HOME/.$USER.rc.bak.$(date +'%m.%d.%Y')"
     test -d "$backupdir" || mkdir -p "$backupdir"
     for file in ${files[@]} ; do
        test -f "$HOME/$file" && cp "$HOME/$file" "$backupdir"
@@ -242,7 +243,7 @@ backup(){
 
 warnOverwrite(){
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .vimrc, .ideavimrc, .iftoprc, .shell_aliases_functions.sh in $HOME"
-    prettyPrint "These files if they exist will be backed to $HOME/.$USER.rc.bak"
+    prettyPrint "These files if they exist will be backed to $backupdir"
     proceed
     backup
 
