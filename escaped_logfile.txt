@@ -280,3 +280,882 @@ To reinstall 1.0.2, run `brew reinstall httpie`
 ///////////////////  [0;34;4m33>>> Installing erlang[0;32;1m  //////////////////
 ////////////////////////////////////////////////////////////////
 [0m
+888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////  [0;34;4m3>>> The following directories Documents/shellScripts[0;32;1m  ///////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////  [0;34;4m3>>> The following directories if they exist will b  [0;32;1m////////////
+////////////  [0;34;4me backed to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//////////  [0;34;4m3>>> The following directories if they exist will be ba  [0;32;1m//////////
+//////////  [0;34;4mcked to /Users/wizard/.wizard.rc.bak.02.14.2019Document  [0;32;1m//////////
+//////////  [0;34;4ms/shellScripts.config/htop.config/powerline/themes/tmux  [0;32;1m//////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+///  [0;34;4m3>>> The following directories if they exist will be backed to /Users/  [0;32;1m///
+///  [0;34;4mwizard/.wizard.rc.bak.02.14.2019/Users/wizard/Documents/shellScripts/U  [0;32;1m///
+///  [0;34;4msers/wizard/Documents/shellScripts/Users/wizard/Documents/shellScripts  [0;32;1m///
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+///  [0;34;4m3>>> The following directories if they exist will be backed to /Users/  [0;32;1m///
+///  [0;34;4mwizard/.wizard.rc.bak.02.14.2019/Users/wizard/Documents/shellScripts,/  [0;32;1m///
+///  [0;34;4mUsers/wizard/Documents/shellScripts,/Users/wizard/Documents/shellScrip  [0;32;1m///
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//  [0;34;4m3>>> The following directories if they exist will be backed to /Users/w  [0;32;1m//
+//  [0;34;4mizard/.wizard.rc.bak.02.14.2019/Users/wizard/Documents/shellScripts, /U  [0;32;1m//
+//  [0;34;4msers/wizard/Documents/shellScripts, /Users/wizard/Documents/shellScript  [0;32;1m//
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+///////////  [0;34;4m3>>> The following directories if they exist will be b  [0;32;1m///////////
+///////////  [0;34;4macked to /Users/wizard/.wizard.rc.bak.02.14.2019: /Use  [0;32;1m///////////
+///////////  [0;34;4mrs/wizard/Documents/shellScripts, /Users/wizard/Docume  [0;32;1m///////////
+///////////  [0;34;4mnts/shellScripts, /Users/wizard/Documents/shellScripts  [0;32;1m///////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//  [0;34;4m3>>> The following directories if they exist will be backed to /Users/w  [0;32;1m//
+//  [0;34;4mizard/.wizard.rc.bak.02.14.2019: /Users/wizard/Documents/shellScripts,   [0;32;1m//
+//  [0;34;4m/Users/wizard/.config/htop, /Users/wizard/.config/powerline/themes/tmux  [0;32;1m//
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> [0;32;1m////////////////////////////////////////////////////////////////////////////////
+///////////  [0;34;4m4>>> It is highly recommended to run 'sudo visudo' to   [0;32;1m///////////
+///////////  [0;34;4mallow noninteractive install. This allows running sudo  [0;32;1m///////////
+///////////  [0;34;4m without a password. The following line would be added  [0;32;1m///////////
+///////////  [0;34;4m to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:A  [0;32;1m///////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//  [0;34;4m3>>> The following directories if they exist will be backed to /Users/w  [0;32;1m//
+//  [0;34;4mizard/.wizard.rc.bak.02.14.2019: /Users/wizard/Documents/shellScripts,   [0;32;1m//
+//  [0;34;4m/Users/wizard/.config/htop, /Users/wizard/.config/powerline/themes/tmux  [0;32;1m//
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/profile1549976629: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/profile1549729780: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/profile1548619554: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/profile1549049016: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/bashrc1547613237: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/profile1549727704: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/bashrc1549728835: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/bashrc1549976629: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/bashrc1549727704: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/profile1549728835: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/bashrc1548619554: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/bashrc1549049016: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/profile1547613237: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/rcBackups/bashrc1549729780: Permission denied
+cp: symlink: docs/automatic_start.md: File exists
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-continuum/.git/objects/50/87f98bb5cd3338e2c63c95ccc87af6a66fe4fe: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-continuum/.git/objects/4e/2279688d8a577ed14f42c4e8af1acb58100a57: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-continuum/.git/objects/pack/pack-15ba38b0981c186f3c72085c3194319a5eecc767.pack: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-continuum/.git/objects/pack/pack-15ba38b0981c186f3c72085c3194319a5eecc767.idx: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-continuum/.git/objects/2f/e9bcf4d9b3b255109aca4072b80c5af33b25bf: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-continuum/.git/objects/88/cd9c32958c9e2249b7ef1ec6ec02a4d905fa00: Permission denied
+cp: symlink: ../lib/tmux-test/tests/run_tests_in_isolation: File exists
+cp: symlink: ../../lib/tmux-test/tests/helpers/helpers.sh: File exists
+cp: symlink: lib/tmux-test/run_tests: File exists
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/66/d46ba17eb3e1409d89a8f971931f91562fbc8b: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/50/36c32816b499b43b73506e7d7270053f0093ed: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/6f/dfc2f388b710cc561278758c817fbc9da66878: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/6f/eae65a836c76b0b48a24959a59ff4040d09f16: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/94/36957e69a433d34575112cba80f273a41f4953: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/5f/57ed867f4e6f1e64d1dfd6883e6cdc4b9fa1d8: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/9d/c3f8c639cb8b1d868002a037b7edbf39f3dd12: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/b5/99be109aecb6626fe99edf544951a5cb214996: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/ad/1cb448b608a25b3355ac56f4e9c20d1844d8ea: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/ad/a4fa15ed78e9f513f7b441e9c6e55e4fc8211f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/d7/55797aeb869a150df1e02f5b6a40d8806a903f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/df/37d96323ee8f7d9cb881dd2b401921329c2bea: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/b4/bf7dd7471aa1c0ce4642e17c00ccb8c2bb6afd: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/ae/1141ddb1286614d502245afc6dd6f9e1cc2cc4: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/e5/cbe54c7526e8b00cec4652f760d4b8cdb8fece: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/fc/f887d4d5323d30ec31824c5d5450c7c23cb57e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/c1/c3f62b3c8b4d0b06089a8456f1d4028aad1d7e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/4e/cbb1881febc1058588d024e2933fa72747afeb: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/pack/pack-250af6c9e900f158a84ec3bbc5f2aba47c0b037d.pack: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/pack/pack-250af6c9e900f158a84ec3bbc5f2aba47c0b037d.idx: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/89/4e7c8282117ac5d5fc24ff60136b8751bef61e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/89/3936678399d810d5c216c7346f03be90cc4454: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/8f/3f8d7cb9334da85350e5fcf87c40d96532679d: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/8a/a999c591a49460c4e1a854682f1efcfaf70792: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/8a/8ea124c95bb83584c07ac864769e68c44c3c92: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/21/fed7e1b20be3b86620c67d4d6f7f9dab7ba2f3: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/4d/2f06b39f9dc9a43346a16b5ca20cfc8b32f324: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/5d/8b02f732f286ba91a971c7930a7af64fa1dfad: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/5d/5272b37e0002723dae11eaeadeaf533e5f579a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/65/641351999d2f8bf62bebcf20681eadee4bd91f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/54/4426cdd193bebe9f12f1f49482940233fbc1b9: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/01/4039e823d187fd69efaad94a03eee7ba0cd486: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/01/33c7a96a7570c1295c3ac1816fdd1d545384a9: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/06/8007643a83a20b4aabb8bd431e00ea0b935e2a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/99/5d0a7968c76d46215d9d464ff7cfa3c73ecc42: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/d3/bc4eb1e858966ac571e69f3a037ce59926aefc: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/dc/65ecd952169d228a39ca90d210fb3ed4a6c438: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/b6/919db5131d07f0fd0032c80c577cd2c50acf53: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/b0/20b2481e9365d5ac09f22033f2bb01a86c0f2e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/c3/ffe89e525a4692d9fa53235bbce1280d1d8311: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/c4/5397451e03678e28729a546f3ad796e5f88497: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/c5/db1c0ac65473bdbcf2c53153b61d1002c58615: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/c2/5237eaa05cb7dcbdc421fd8c25537f75a507c1: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/e9/6548420caf3d0a4a26dc2858cf6b0929866bad: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/e9/9f1977b69e2dabf41fd130f665c1d2bf67780f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/cb/4e7a3b814667bc7eb60bc39928575e921681d3: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/e0/c5bfd2db74715a81e4617ec9dc901e0d924fda: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/41/04af3e88250c6202c48317beb59e99bccf2046: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/83/3541825ef0018edc06c3dbb66b8b12f3b70c8d: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/77/3b4daa247b99319d8aae5ec48a192f75e5148c: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/8c/2d6a77576faebb3dbb3abfff01b5ef94c4da1b: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/71/b93407f26de27238c3d71cd1153e16a87b6a0e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-resurrect/.git/objects/8b/504d4b066faa0940376d38892c33dd1e06eae1: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/61/e8293452083f41b1cf633be503e8abf0c494ba: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/59/d3351efa7bd2c14358886bfb1bd42485ba8b99: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/0c/5211d849aff0b26093ed45b55d971e1b63ae18: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/6f/f25106204f73d138f55f0d9044f071310759fe: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/35/09802ab1150312596f3bbb05b79d44f6ea70a6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/3c/c0ee0ddf075343264f16db579ee4d67cf19607: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/94/06fe62a6409cdcf5d01e7ce67168039221d905: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/0e/48a847f0ac8d3a91c3a549f66737273ba7a158: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/34/f7125ae46e5123bedad03e08027332d1186186: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/34/be63727b90c0966b80b9b6c20b51c7a0c1bd6a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/5a/797b49845585c04491aea4d61a3bde8954a9e0: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/5f/64949043dbfdf94e24c309acbf562fc66fd65a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/a3/d24228b02ae04b385ab2379b42e2592f824b63: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/b2/1320550f8f9ed3f0aa6549e00286201e4c2495: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/ad/492f326fd4bb7acb88aed8b7dcbd221d5825a7: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/a2/0607bcfc7544f20e5132212cb79000dffa3d0d: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/ae/7dfab117b93b4db3c3ce039893e826e9990b2f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/d8/1adfc779f4455daab86d708aba582e839260d4: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/f4/b30bff2b2ed372276d3a01c66722c8c8e3e844: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/c7/5ceb408a4d0bf0a6de81fe251adbcc149ee1fc: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/c7/cd10b4b47723c31e2e622fbd3a3dbf8494d6b4: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/fc/af6da6182a1924a6b6c93385e75d4645922b2f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/7d/294c45a00222f3f0ab74559fab4efb5750cfd8: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/42/25ff035613435b58af0ef78b3f0f32f0d4dbe3: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/89/60e68bdbf9f7a5fe7aa949174cf69dad94e8d7: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/1f/681ad20b10a2f2167e261446d5b7da6f7fc357: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/87/f2fdfdd6bbd1b0bc8f12c425c9e17a81e8b0c4: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/80/272ae47adb1a8be61e9494cbc155616fbbf8ff: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/19/a05691fb19ced11b34f7fd91aba82229c90322: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/26/ad196dffe5621c4c0fffd40cf31374618db4f5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/86/ea3cb781c0404e488888dce6beeb87a287a4e9: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/86/dbe8f8dd080786a1f2f74b2b00b4cd869feff2: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/44/8fc656a13383826249d1a8ea808da5c606d3c7: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/44/ee50dda7f1ab45a64bc0ba4893773339d567c5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/43/30a510b73a31bd8a1a35b1a74ec07617831775: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/88/80f9c9c43cd57443e0272334d17fda9991f369: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/88/b94da2148aab09a3bd3ee6e325b1dea16b6640: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/6b/9ce5dc4c547bb227e478e33b33890b0eac1633: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/5d/037642e7c871ee9b5edeafed2303086d4c6952: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/96/9c3d4589f38f38e0a9da34a2b29960b42e1651: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/98/da78e01ad0a84677dcf069312539f81ebd5b19: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/08/990de662a848bf1786258e046c26ba54b9b142: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/6d/a17cf87b2d6dfb7954b12bcad48fb7c23b778b: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/6c/87d65733e1e9057ec31167f9f2aa3591945777: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/0f/28497a450c9157ebbc8d9cc5f4df6d18d62fc6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/bf/747155d532d4745f830340cbad793aaa0feeae: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/b6/4828f8585c4189a26dbf87d2e9ec1362251e0e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/b6/41598455001511ae6160832a92573416ae32c6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/aa/c87763061faed6cf97ee33f0efcafaf7209aaa: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/b7/6d9706afdca30c54b07deaee2d9b0ef42dd536: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/b7/11dfbbf6cc47894d61dffc70b1ea3467ff3872: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/db/67181fcb1c0dd65e32f452b57c3bdab0cebe58: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/a8/a569c102c74248641e70730e27eb80388c92e7: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/a8/5e7971d81b7d49430b0b652cb89ad9ea8bc17e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/b0/9727808da8fd45c7d9724c9308cfb1596fd68a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/ef/ef8f4af0d2ae0b55eb1c44e7073e1462707145: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/c3/ac99f650e38e15e975225742f19abe93aba774: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/cd/c43e84f037edac41b95512b35e35d3241c66fd: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/e9/08ad6dec2d6f13b89902e5df4243a1536e13dd: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/70/d880b492b2f61e5304d3cce9bd1432c89cc8f9: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/4a/be617edcb784daf91c80d779101b87071427b5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/1d/d9b68ef0d59b8cf735ef9aef6aa09f39bec903: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/1d/a69bf44299710f31411aee363c30e2ebdd0402: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/78/d5dfe9712293783ded7fc3500a45a29672cac4: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/78/6b3e5d6ca81773dbf12dc363e6b8efa1afd839: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/8b/c5ff3247e0816313e0e65112562f44b2ec6472: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/13/9ee33181ea9eae37f6cc8730762af06e348279: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/7f/a21be119a20226c77704178269358871342653: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-prefix-highlight/.git/objects/8e/5290fff039374a1757e00465011aabdc49853b: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/50/ce2f0858736fb3d19cf793f060b8a72d2679d1: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/56/313d45cdfeeee98359b794e2cb99e72b0b500f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/67/fa931e8cba16d4c2ac320bd0ca9df3ca07625a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/60/17d69dc48a7d5744c217746f741f92b5e189f5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/d9/2e2e02137a15771163effbb6807a892a495cde: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/bb/2c702b1c9e2204923b5aa7b3c278729a47d483: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/bb/ec937097524d8dd20528dab2d461526a9be006: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/c0/93d29a715b4d7dc182eb26997e676bdb9bb99f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/fc/ed78e02cc09b46eb7f3952c64cea06ef5c4dbb: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/ca/1740c23c8eeba424e2f94586b9847303cc2c4f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/e4/01bb64131412f395bd22f3ea130d59e208db66: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/c6/a73eba6bfcde51edf57e1cc5fa12c4c7bd98d9: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/27/e751b8d9400303d7ba4e48d908acbf984b70a4: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/pack/pack-157910e3ac94bc804ad3835f579f7406dc2fc4cb.idx: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/pack/pack-157910e3ac94bc804ad3835f579f7406dc2fc4cb.pack: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/7d/ec49e575169b5c87d06d26b0fc27ef81de436e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/29/7f466302a1adbb7713b747ad0c63b15a0d68cf: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/74/b0ff7c92b32868d01d57a8d2afa3e6a494cc5f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/19/02177a949fc4c745d128344fdf07ffa148218f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/21/c3f77841e36e17a8943c88cff18970ebb48494: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/72/1987f4a50947492e810194281d12c7525c1006: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/07/42ef47521d3f419c60ab1961f7739669f2fac1: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/38/728fc1d59bdee5c3c54514d600fa6352435071: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/09/7065eb07be057f961166e5e2dc052d5a1858a5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/09/e4ddd726977bd5694cfcdd0b21eda0cc5f6bab: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/54/4e9e6e54ffe4da36639b61a3bcceb2ebf3640f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/98/4898f1ed7b9097ba87f09626e49347235341d3: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/98/71e92d8be062e1182670fd7e48f23a557e4918: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/30/bfd780061f1752d1133016f217a13add4d4e86: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/30/2a61e5d45705fe06062f6abf3ea10974a030a6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/5e/ff3282958d02634c52e2f1de06e0cc5ceb1154: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/55/9c43b5d5dd43762603b4f05b3d771599d78b65: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/64/f0a935c68cc747af042125d0ba01fa3e8e92af: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/90/648ef43aaf67de5e6ccb66d177df8de18edce1: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/90/5a872a9e5e06004e18d7f906d85782a74023e6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/d3/a87359ab48aa36703dfbf50565135b64c83c55: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/d4/58119c22f2f1f33c90c52672824b763691196d: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/a7/da6d6ddb18b0c1401fa8af5e4e5ae247075df3: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/b8/64d87ed78aa4497b7c17a017f7dc0e146ea025: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/a6/2a9452887bf629c18ec25c7eedcc1aa8bcd976: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/c4/1154ecd9849e018fe642e1f4ce218b77e724f2: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/cc/4b3ac0d9b6cb3c25d6f611eba7d8314daf6be1: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/f7/38fe896e43bc9d1a0474d9d3db90e0562a44f0: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/f1/1333e78865bbd0fa49c91ed0e74c2135f9580a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/e7/37bb7a8c197a2f9468fd759cde5b5033ac457c: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/e7/5dcaaf2fc97f149accaa9a6dd236d8988c094b: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/cb/a7f2c04f0a44f11aa7cffe9f1730dfe45ec0a1: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/f8/e17f50a3da0c2f96de21496e76a04f6220a527: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/f8/55b93c660d1059e5c408047acfbe6ec08f2c10: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/46/1cce7f2d1bdb1221e94ad8058111185691f19f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/48/fc9c68d17d54041a1343736d01b6ddd21eae88: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-yank/.git/objects/84/64dad60099c59863d8fde9f9577478be000a7c: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-sensible/.git/objects/pack/pack-5fcfaca11139512adb4815126621a5d344564806.idx: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-sensible/.git/objects/pack/pack-5fcfaca11139512adb4815126621a5d344564806.pack: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/9b/e9fd19f1d0abf30658b842771d09e0761164cf: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/35/ee8a7744b8bcd470b1f87022de6c190969b94c: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/0e/46b92aba3938d391c21738ab39b7c0ad4fcf2f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/60/06e608af512b2f1cfd27a312b264c17c576689: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/a4/03ca3b67f880fc3ef3f585bae2779932570cf5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/df/4a018fbd66f68b5daf5f968d020e56352baf74: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/df/df13f9ec11727feed6e44009fdc91b207d1278: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/d6/41672d9ad0b342534846b1b23ddb7f45900539: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/e5/1a3772b5e312900ea416740e14195df7cf4c22: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/e4/17995b4184857c165d9091beef65b8ef45cf94: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/ed/77c2188a14c332fb14fd44c17f333875c9f12a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/4e/a4d4ebe8e8c0d019b7e479ed72ccee9caadc26: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/20/6ded75d844915b49f388905421598b5fc2943a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/pack/pack-ea287065569a3c0ea9ade95eb16a3cfcbc7da9f9.idx: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/pack/pack-ea287065569a3c0ea9ade95eb16a3cfcbc7da9f9.pack: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/42/bb2bf48bef881be504278cf5156371b542cf81: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/44/f8e91e1b3ba93f4da64415810a7d00a27a28b9: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/2a/b1d9101b33f3162505aaa7f99ac32631ac4371: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/6d/4087069238c9ef5ef32228cab848f204843cae: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/01/28e36fbe4298692fa755bfa584bd8d905f932a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/39/7390d90601075a3f6c5dc0a35dbb63c9a997ec: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/bf/a14acdd1ba7965c3facf053016aa70b180a0f4: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/a7/57cc5f9de0ac6a89383bfada65b3e32f10663a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/e8/666484db721813830089d955c6fd5a1b168a48: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/cb/d1b559ecbbfd01f1ba6af0c6d06912c98b3da5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/ce/c275ec52fd79b37aee65322d22644a1358e8fc: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/2c/4a2dfd655c13b4e15d693e2c2dba529b1d1c48: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/79/43d71d4f61a9fb4d1942b588dfa72911d3b8c7: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/83/4a6ff91c91eeb6f4c1dc15731c2ff34561a0d9: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/4a/89616e1220b4ff569b7908108da4ae562592fa: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/85/ec0a05be5b8a71cc7e9eec1e50612f4f50cf3c: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tpm/.git/objects/71/890836c98024b5ecfa92b1e189cfbeb21a91b0: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/50/c92897de3ade5d1fcc544691d434ac44c50c34: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/69/fba2f81adde71e0d8f5c023484250f31c3297e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/5a/3d2351198e13525d902cf62861163d10409934: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/b5/515569b1b4744e1b57b02b893acff7be292a05: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/ed/bf14e6cc9e6097f404b6f2c103b1a166dd8db5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/c6/0c41c8261cf4d0d042e46bb73724db38cc4465: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/pack/pack-a15fddfd0c883be50a7dbb15c9559d7397aed3b9.idx: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/pack/pack-a15fddfd0c883be50a7dbb15c9559d7397aed3b9.pack: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/42/d1626df9dedf68d706665647e2e59429a09eec: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/5e/b2683bcd5e1a2565cc6fe2b45feb58c34dc5fa: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/6c/de3298e334ef475646b691ca9f800f90297602: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/f9/15e2d5054fb2897d2b40632b2473638acf01a5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/70/982ccbe9000bf727e53965dd42f51c5830bc93: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/8c/b3cce426abdb468608236db433563a99329b83: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.tmux/plugins/tmux-battery/.git/objects/40/3afc0f97219feec05c61aa0a1fa715dc1c6d96: Permission denied
+cp: symlink: tmux_resurrect_2018-08-12T13:57:07.txt: File exists
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/61/84a0fcfd126d38a61a6dbf59f149690440a80c: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/9b/d76d1c6251cd346ca4231fac825b2176e3c1e0: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/6a/efd66e6acea24c9baefc2fe6a6a90561179f67: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/3d/14090a384a9ba5927562bbf257914e87d6ebe6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/3d/f2ef99fe7ea11715cdee602dbc461e7b778db5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/0e/2cf0db684ea0fd051184111a7388e4fc3ad0c3: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/9c/f24c043d4704effa49e78436d0c54975a1fe0e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/a3/c9466fedaf9b1b1aebb14de3f8d4d54ad7571f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/ac/bfb85b9932340d817707043541ca5a96d31dd2: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/bd/d0d0a05e0f8bb4a2ea97fa6ff4c4f4c40260b6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/d6/f059ea303d7878f8cbb4e3ff30813c1717e8aa: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/e5/ababd5400ea2a5581f856150bf2dd58eba1ce5: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/eb/dcacb6d37ffdad318da179f47dfed036bb7ee6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/c7/7aa8715043c83c7dfbfebe8dba728c6dcd474e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/c0/0ed84777b17511258f1e2aebc587253ee6492d: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/ca/1a6902d3b71bddac5b5d06a9cbd46d2270d530: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/pack/pack-a95eb717a8faf913ccf843a76b55e38769bf723a.pack: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/pack/pack-a95eb717a8faf913ccf843a76b55e38769bf723a.idx: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/45/636deda21ed351e63853c5c8462f942b18b2fa: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/73/e063f84dcbafe4996ef379d57a0103541890c6: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/80/53e70563ec104630eab23c52885d4d4cb869e7: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/7b/53761614d01443f3ae5be9960c1442b870a0b2: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/10/f53c398785887fd14dfb9e700f2d5b94b2a5ef: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/07/e6ee19de18031606bc32d898f84ef7f31d1dae: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/07/7108a1e53a5331184086dd77889b0f43f18c7a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/6e/6d3e054d6973aea3c3c26c0c547c88cae76c3a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/09/8b63b60429792ca57fefaaacfe26b377462e4f: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/91/ea0590870958ed8a50d55fdc92c314070d63bf: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/54/ae8ce14c5a4295bab363afb09f01b97f942166: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/55/dbafdaec503d5a1233a00a9783ee082c89f652: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/55/61e149c7b4776f1dd66fffd2ba1050ab25c289: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/64/98535be05079a78e76a4dad3ef99c0d9ba394a: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/dd/0bc935eb2bc8a2889501fd01e1b5fd6ed111b8: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/dc/fbf626a101f07e7aa23eba0b1f6b667acd8f38: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/a9/efc2cae704949825e31bc8351934def3acb6cb: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/af/f6b19cfd4f9a9f35e7b0a8e9b9b3c53b5d3ceb: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/e1/b75fffb27add4e34b00cf5c4579eb76c60767c: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/f7/7d4d5212687db14ccf2c45368f891cf9b1936e: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/83/58f5e77203c22cfe796ccc441dc68e5382da97: Permission denied
+cp: /Users/wizard/.wizard.rc.bak.02.14.2019/shellScripts/customTerminalInstaller/.git/objects/4a/d5b7609da140edc8baca3d00446c3c257348e6: Permission denied
+cp: symlink: wizard@codelabs.32942: File exists
+cp: symlink: wizard@codelabs.32942: File exists
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+///////////  [0;34;4m4>>> It is highly recommended to run 'sudo visudo' to   [0;32;1m///////////
+///////////  [0;34;4mallow noninteractive install. This allows running sudo  [0;32;1m///////////
+///////////  [0;34;4m without a password. The following line would be added  [0;32;1m///////////
+///////////  [0;34;4m to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:A  [0;32;1m///////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//  [0;34;4m3>>> The following directories if they exist will be backed to /Users/w  [0;32;1m//
+//  [0;34;4mizard/.wizard.rc.bak.02.14.2019: /Users/wizard/Documents/shellScripts,   [0;32;1m//
+//  [0;34;4m/Users/wizard/.config/htop, /Users/wizard/.config/powerline/themes/tmux  [0;32;1m//
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> [0;32;1m////////////////////////////////////////////////////////////////////////////////
+///////////  [0;34;4m4>>> It is highly recommended to run 'sudo visudo' to   [0;32;1m///////////
+///////////  [0;34;4mallow noninteractive install. This allows running sudo  [0;32;1m///////////
+///////////  [0;34;4m without a password. The following line would be added  [0;32;1m///////////
+///////////  [0;34;4m to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:A  [0;32;1m///////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//  [0;34;4m3>>> The following directories if they exist will be backed to /Users/w  [0;32;1m//
+//  [0;34;4mizard/.wizard.rc.bak.02.14.2019: /Users/wizard/Documents/shellScripts,   [0;32;1m//
+//  [0;34;4m/Users/wizard/.config/htop, /Users/wizard/.config/powerline/themes/tmux  [0;32;1m//
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> say: invalid option -- R
+Usage: say [-v voice] [-o out] [-f in | message]
+say: invalid option -- R
+Usage: say [-v voice] [-o out] [-f in | message]
+say: invalid option -- R
+Usage: say [-v voice] [-o out] [-f in | message]
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+///////////  [0;34;4m4>>> It is highly recommended to run 'sudo visudo' to   [0;32;1m///////////
+///////////  [0;34;4mallow noninteractive install. This allows running sudo  [0;32;1m///////////
+///////////  [0;34;4m without a password. The following line would be added  [0;32;1m///////////
+///////////  [0;34;4m to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:A  [0;32;1m///////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//  [0;34;4m3>>> The following directories if they exist will be backed to /Users/w  [0;32;1m//
+//  [0;34;4mizard/.wizard.rc.bak.02.14.2019: /Users/wizard/Documents/shellScripts,   [0;32;1m//
+//  [0;34;4m/Users/wizard/.config/htop, /Users/wizard/.config/powerline/themes/tmux  [0;32;1m//
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//  [0;34;4m3>>> The following directories if they exist will be backed to /Users/w  [0;32;1m//
+//  [0;34;4mizard/.wizard.rc.bak.02.14.2019: /Users/wizard/Documents/shellScripts,   [0;32;1m//
+//  [0;34;4m/Users/wizard/.config/htop, /Users/wizard/.config/powerline/themes/tmux  [0;32;1m//
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 888b     d888                888         88888888888             888
+8888b   d8888                888             888                 888
+88888b.d88888                888             888                 888
+888Y88888P888 .d88b. 88888b. 888  888 .d88b. 888  .d88b.  .d8888b88888b
+888 Y888P 888d8P  Y8b888 "88b888 .88Pd8P  Y8b888 d8P  Y8bd88P"   888 "88b
+888  Y8P  88888888888888  888888888K 88888888888 88888888888     888  888
+888   "   888Y8b.    888  888888 "88bY8b.    888 Y8b.    Y88b.   888  888
+888       888 "Y8888 888  888888  888 "Y8888 888  "Y8888  "Y8888P888  888
+
+
+
+                888                d8b
+                888                Y8P
+                888
+88888b.  .d88b. 888 .d88b.  .d88b. 888 .d88b. .d8888b
+888 "88bd88""88b888d88""88bd88P"88b888d8P  Y8b88K
+888  888888  888888888  888888  88888888888888"Y8888b.
+888  888Y88..88P888Y88..88PY88b 888888Y8b.         X88
+888  888 "Y88P" 888 "Y88P"  "Y88888888 "Y8888  88888P'
+                                888
+                           Y8b d88P
+                            "Y88P"
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+/////////////  [0;34;4m1>>> The following will be overwritten: .zshrc, .  [0;32;1m/////////////
+/////////////  [0;34;4mtmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.c  [0;32;1m/////////////
+/////////////  [0;34;4monf, .shell_aliases_functions.sh in /Users/wizard  [0;32;1m/////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+////////////////  [0;34;4m2>>> These files if they exist will be backe  [0;32;1m////////////////
+////////////////  [0;34;4md to /Users/wizard/.wizard.rc.bak.02.14.2019  [0;32;1m////////////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+//  [0;34;4m3>>> The following directories if they exist will be backed to /Users/w  [0;32;1m//
+//  [0;34;4mizard/.wizard.rc.bak.02.14.2019: /Users/wizard/Documents/shellScripts,   [0;32;1m//
+//  [0;34;4m/Users/wizard/.config/htop, /Users/wizard/.config/powerline/themes/tmux  [0;32;1m//
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> cp -R Documents/shellScripts /Users/wizard/.wizard.rc.bak.02.14.2019
+cp -R .config/htop /Users/wizard/.wizard.rc.bak.02.14.2019
+cp -R .config/powerline/themes/tmux /Users/wizard/.wizard.rc.bak.02.14.2019
+[0;32;1m////////////////////////////////////////////////////////////////////////////////
+///////////  [0;34;4m4>>> It is highly recommended to run 'sudo visudo' to   [0;32;1m///////////
+///////////  [0;34;4mallow noninteractive install. This allows running sudo  [0;32;1m///////////
+///////////  [0;34;4m without a password. The following line would be added  [0;32;1m///////////
+///////////  [0;34;4m to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:A  [0;32;1m///////////
+////////////////////////////////////////////////////////////////////////////////
+[0m
+Proceed?(y/n) >>> 
