@@ -1411,7 +1411,7 @@ supernatural-space() {
     __CORRECT_WORDS[custom]="custmo cusotm"
     __CORRECT_WORDS[declare]="delcare declaer"
     __CORRECT_WORDS[default]="defalut deafult"
-    __CORRECT_WORDS[directory]="direcotry direcorty directroy"
+    __CORRECT_WORDS[directory]="dir idr direcotry direcorty directroy"
     __CORRECT_WORDS[drag]="darg"
     __CORRECT_WORDS[echo]="ehco ceho ecoh eco"
     __CORRECT_WORDS[expansion]="exp"
