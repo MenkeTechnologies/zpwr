@@ -1463,6 +1463,7 @@ supernatural-space() {
     __CORRECT_WORDS[then]="tehn"
     __CORRECT_WORDS[true]="treu ture"
     __CORRECT_WORDS[to]="ot"
+    __CORRECT_WORDS[tomorrow]="tmr"
     __CORRECT_WORDS[under]="uner udner uder"
     __CORRECT_WORDS[using]="suing usnig"
     __CORRECT_WORDS[usually]="usu"

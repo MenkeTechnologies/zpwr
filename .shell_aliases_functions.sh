@@ -199,6 +199,7 @@ alias glz='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgree
 alias glzz='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p --all'
 alias gacp='git add . && git commit -m "" && git push'
 alias gac='git add . && git commit -m '
+alias gbv='git branch -a -vv'
 alias allRebase='git rebase -i $(git rev-list --max-parents=0 HEAD)'
 
 if [[ "$(uname)" == "Darwin" ]]; then
