@@ -236,7 +236,7 @@ backup(){
     backupdir="$HOME/.$USER.rc.bak"
     test -d "$backupdir" || mkdir -p "$backupdir"
     for file in ${files[@]} ; do
-       cp "$HOME/$file" "$backupdir"
+       test -f "$HOME/$file" && cp "$HOME/$file" "$backupdir"
     done
 }
 
