@@ -1393,6 +1393,7 @@ globalAliasesInit
 supernatural-space() {
     local __CORRECT_WORDS
     declare -A __CORRECT_WORDS
+    __CORRECT_WORDS[about]="aobut"
     __CORRECT_WORDS[alternate]="alternaet alterntae"
     __CORRECT_WORDS[also]="laso alos"
     __CORRECT_WORDS[and]="adn nad"
