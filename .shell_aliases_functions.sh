@@ -1010,6 +1010,7 @@ openMyGH(){
 
     $open_cmd "https://github.com/$GITHUB_ACCOUNT"
 }
+eval "alias $GITHUB_ACCOUNT=openMyGH"
 
 getrc(){
     REPO_NAME="customTerminalInstaller"
