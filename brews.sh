@@ -6,6 +6,7 @@ brew install algol68g
 brew install alpine
 brew install amap
 brew install ant
+brew install aom
 brew install apr
 brew install apr-util
 brew install argon2
@@ -95,6 +96,7 @@ brew install geoip
 brew install gettext
 brew install gforth
 brew install ghc
+brew install giflib
 brew install gifsicle
 brew install git
 brew install glassfish
@@ -108,6 +110,7 @@ brew install gnutls
 brew install go
 brew install gobject-introspection
 brew install gperftools
+brew install gpgme
 brew install gradle
 brew install grails
 brew install graphicsmagick
@@ -147,16 +150,20 @@ brew install isl
 brew install jansson
 brew install jasper
 brew install jemalloc
+brew install jenv
 brew install jetty
 brew install jnettop
 brew install jpeg
+brew install jq
 brew install jvmtop
 brew install kotlin
 brew install lame
 brew install leiningen
+brew install leptonica
 brew install libao
 brew install libass
 brew install libassuan
+brew install libbluray
 brew install libcaca
 brew install libcroco
 brew install libcuefile
@@ -182,6 +189,7 @@ brew install libmodplug
 brew install libmpc
 brew install libmpdclient
 brew install libnet
+brew install libnfs
 brew install libogg
 brew install libpng
 brew install libpq
@@ -196,6 +204,7 @@ brew install libsmi
 brew install libsndfile
 brew install libsodium
 brew install libsoup
+brew install libsoxr
 brew install libssh
 brew install libssh2
 brew install libtasn1
@@ -211,6 +220,7 @@ brew install libxml2
 brew install libyaml
 brew install libzip
 brew install links
+brew install little-cms2
 brew install llvm@6
 brew install lolcat
 brew install lua
@@ -255,12 +265,15 @@ brew install node
 brew install npth
 brew install numpy
 brew install nvm
+brew install nyancat
 brew install ocaml
 brew install ocamlbuild
+brew install oniguruma
 brew install opam
 brew install openblas
 brew install opencore-amr
 brew install openexr
+brew install openjpeg
 brew install openldap
 brew install openssl
 brew install openssl@1.1
@@ -303,6 +316,7 @@ brew install redis
 brew install rlwrap
 brew install rsync
 brew install rtmpdump
+brew install rubberband
 brew install ruby
 brew install rust
 brew install rustup-init
@@ -340,6 +354,7 @@ brew install tbb
 brew install tcl-tk
 brew install tcptraceroute
 brew install telnet
+brew install tesseract
 brew install texinfo
 brew install the_silver_searcher
 brew install theora
