@@ -89,7 +89,7 @@ plugins=(zsh-more-completions fzf-zsh zsh-completions \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
     postgres redis-cli colorize sudo z rsync docker sublime \
-    vundle rust cargo meteor gulp grunt glassfish)
+    vundle rust cargo meteor gulp grunt glassfish tig)
 
 PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print \$8}")"
 
@@ -1445,6 +1445,7 @@ supernatural-space() {
     __CORRECT_WORDS[name]="anme naem"
     __CORRECT_WORDS[network]="newtork entwork ntework"
     __CORRECT_WORDS[parameter]="parm"
+    __CORRECT_WORDS[perl]="prel"
     __CORRECT_WORDS[please]="plase plz"
     __CORRECT_WORDS[point]="opint ponit"
     __CORRECT_WORDS[print]="pirnt pritn rpint prnit"
