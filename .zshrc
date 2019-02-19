@@ -141,15 +141,15 @@ _alias_file="$HOME/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
-export MYBANNER=ponies
+test -z $MYBANNER && export MYBANNER=ponies
 export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
 #}}}***********************************************************
 
 #{{{                    MARK:Global Vars for Global Aliases
 #**************************************************************
-__GLOBAL_ALIAS_PREFIX=j
-__TS=__________
+test -z $__GLOBAL_ALIAS_PREFIX && export __GLOBAL_ALIAS_PREFIX=j
+test -z $__TS && export __TS=__________
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Fxns
@@ -1932,6 +1932,11 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
   "
+#}}}***********************************************************
+
+#{{{                    MARK:Source Tokens
+#**************************************************************
+[[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 #}}}***********************************************************
 
 #{{{                    MARK:override default FTP completion
