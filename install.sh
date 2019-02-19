@@ -402,12 +402,14 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
 
     exists exa || {
         exists cargo || curl https://sh.rustup.rs -sSf | sh
+        rustup update
         prettyPrint "Installing Bat with Cargo"
         cargo install bat
     }
 
     exists exa || {
         exists cargo || curl https://sh.rustup.rs -sSf | sh
+        rustup update
         prettyPrint "Installing Exa with Cargo"
         cargo install exa
     }
