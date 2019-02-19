@@ -13,22 +13,36 @@ use strict;
 open my $less, "|-","less -MNFX" or die $!;
 
 use Env '@PATH';
+my $exe_bat = 'bat';
+my $exe_bat_exists = grep -x "$_/$exe_bat", @PATH;
+
 my $exe = 'pygmentize';
 my $exe_exists = grep -x "$_/$exe", @PATH;
 
-my $opts = $ENV{PYGMENTIZE_OPTS};
+my $colorizer= $ENV{COLORIZER};
 my $PYGMENTIZE_COLOR = $ENV{PYGMENTIZE_COLOR};
-$opts =~ s/(\$\w+)/$1/eeg;
+#expand $var
+$PYGMENTIZE_COLOR=~ s/(\$\w+)/$1/eeg;
 
 select $less;
 for (@ARGV) {
     if (! -d $_) {
         if (`file $_` =~ /text/) {
-            if ($exe_exists) {
-                print "\x1b[4;1m$_\x1b[0m\n".`$opts "$_"`."\n";
+            if ($colorizer=~ "pygmentize") {
+                if ($exe_exists) {
+                    print "\x1b[4;1m$_\x1b[0m\n".`$colorizer $_ | cat -n`."\n";
+                } else {
+                    print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
+                }
             } else {
-                print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
+                if ($exe_bat_exists) {
+                    print "\x1b[4;1m$_\x1b[0m\n".`$colorizer $_`."\n";
+                } else {
+                    print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
+                }
+            
             }
+
         }
     }
 }
