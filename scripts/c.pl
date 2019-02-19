@@ -25,7 +25,7 @@ for (@ARGV) {
     if (! -d $_) {
         if (`file $_` =~ /text/) {
             if ($exe_exists) {
-                print "\x1b[4;1m$_\x1b[0m\n".`pygmentize $opts "$_" | cat -n`."\n";
+                print "\x1b[4;1m$_\x1b[0m\n".`$opts "$_" | cat -n`."\n";
             } else {
                 print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
             }

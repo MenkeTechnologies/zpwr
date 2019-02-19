@@ -10,7 +10,6 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="simonoff"
 
 ZSH_DISABLE_COMPFIX=true
 #colors for common commands
@@ -1709,9 +1708,14 @@ export HISTSIZE=10000000
 #set right prompt string during continuation
 RPS2='+%N:%i:%^'
 export PS3=$'\e[1;34m-->>>> \e[0m'
+MYPROMPT=POWERLEVEL
 
-test -s "$HOME/.powerlevel9kconfig.sh" && \
-    source "$HOME/.powerlevel9kconfig.sh"
+if [[ $MYPROMPT == POWERLEVEL ]]; then
+    test -s "$HOME/.powerlevel9kconfig.sh" && \
+        source "$HOME/.powerlevel9kconfig.sh"
+else
+    ZSH_THEME="simonoff"
+fi
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
@@ -1796,7 +1800,10 @@ colortest(){
 export ROUGIFY_THEME="github"
 #default value for pygmentize theme
 export PYGMENTIZE_COLOR="emacs"
-export PYGMENTIZE_OPTS="-f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
+export PYGMENTIZE_OPTS="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
+export BAT_THEME="GitHub"
+export PYGMENTIZE_OPTS="bat --paging never --color always"
+
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
@@ -1805,11 +1812,11 @@ fzf_setup(){
 
     alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
-        "[[ -f {} ]] && pygmentize '"$PYGMENTIZE_OPTS$__TS"' {} \
+        "[[ -f {} ]] && '"$PYGMENTIZE_OPTS$__TS"' {} \
         2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
-        "[[ -f {} ]] && pygmentize '"$PYGMENTIZE_OPTS"' {} \
+        "[[ -f {} ]] && '"$PYGMENTIZE_OPTS"' {} \
         2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
@@ -1818,13 +1825,13 @@ fzf_setup(){
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"[[ -f {} ]] && { print -r {} | command egrep \
         '\.[jw]ar\$' && jar tf {} ; } \
-        || { pygmentize $PYGMENTIZE_OPTS {} 2>/dev/null | \
+        || { $PYGMENTIZE_OPTS {} 2>/dev/null | \
         cat -n; rc=$ps; }; [[ \$rc = 0 ]] || \
         stat {} | fold -80 | head -500\""
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
             --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
-            '\.[jw]ar\$' && jar tf {} ; } || { pygmentize $PYGMENTIZE_OPTS {} \
+            '\.[jw]ar\$' && jar tf {} ; } || { $PYGMENTIZE_OPTS {} \
             2>/dev/null || {
                     [[ -e {} ]] && stat {} | fold -80 | \
                     head -500 || {
@@ -1851,7 +1858,7 @@ fzf_setup(){
     else
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
             --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
-            '\.[jw]ar\$' && jar tf {} ; } || { pygmentize $PYGMENTIZE_OPTS {} \
+            '\.[jw]ar\$' && jar tf {} ; } || { $PYGMENTIZE_OPTS {} \
             2>/dev/null || {
                     [[ -e {} ]] && stat {} | fold -80 | \
                     head -500 || {

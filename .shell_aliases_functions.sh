@@ -1230,7 +1230,7 @@ c(){
                                 if (( $# > 1)); then
                                     printf "\x1b[34;1;4m$file\x1b[0m\n"
                                 fi
-                                eval "pygmentize $PYGMENTIZE_OPTS $file" | nl -b a
+                                eval "$PYGMENTIZE_OPTS $file" | nl -b a
                             fi
                         done
                 } || cat -n "$@"
@@ -1244,7 +1244,7 @@ c(){
                             if (( $# > 1)); then
                                 printf "\x1b[34;1;4m$file\x1b[0m\n"
                             fi
-                            eval "pygmentize $PYGMENTIZE_OPTS $file" | nl -b a
+                            eval "$PYGMENTIZE_OPTS $file" | nl -b a
                         fi
                 done
             } || cat -n "$@"
@@ -1288,10 +1288,10 @@ exists http && ge(){
 
 fz(){
     test -z "$1" && {
-        command ag '^.*$' --color| fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && pygmentize '"$PYGMENTIZE_OPTS"' $(cut -d: -f1 <<< {}) \
+        command ag '^.*$' --color| fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$PYGMENTIZE_OPTS"' $(cut -d: -f1 <<< {}) \
             2>/dev/null | cat -n | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | cut -d ':' -f1 | perl -pe 's@\n@ @'
     } || {
-        command ag '^.*$' --color| fzf --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && pygmentize '"$PYGMENTIZE_OPTS"' $(cut -d: -f1 <<< {}) \
+        command ag '^.*$' --color| fzf --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$PYGMENTIZE_OPTS"' $(cut -d: -f1 <<< {}) \
             2>/dev/null | cat -n | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | perl -pe 's@^(.*?):(\d+):(.*)@+$2 $1@'
 
     }
