@@ -400,11 +400,13 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
         prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
     fi
 
-    exists exa || {
+    exists bat || {
         exists cargo || curl https://sh.rustup.rs -sSf | sh
         rustup update
-        prettyPrint "Installing Bat with Cargo"
+        prettyPrint "Installing Bat (cat replacement) with Cargo"
         cargo install bat
+        prettyPrint "Installing Fd (find replacement) with Cargo"
+        cargo install fd
     }
 
     exists exa || {
