@@ -663,7 +663,7 @@ cd(){
     builtin cd "$@" && clearList
 }
 
-contribCount(){
+contribcount(){
     lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
     if (( $lineCount > 10 )); then
@@ -754,7 +754,7 @@ replacer(){
     }
 }
 
-createGIF(){
+creategif(){
     outFile=out.gif
     res=600x400
 
@@ -817,7 +817,7 @@ hd(){
     printf "\e[0m"
 }
 
-psTreeMonitor(){
+pstreemonitor(){
     bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
 }
 
@@ -1005,7 +1005,7 @@ reveal() {
 }
 
 
-openMyGH(){
+openmygh(){
     open_cmd="$(getOpenCommand)" || return 1
 
     $open_cmd "https://github.com/$GITHUB_ACCOUNT"
@@ -1066,25 +1066,25 @@ rename(){
     done
 }
 
-torIP(){
+torip(){
     ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
     whois $ip
     echo $ip
 }
 
-myCurl(){
+mycurl(){
     \curl -fsSL -A "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 | sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|C)/d"
 }
 
 
-perlRemoveSpaces(){
+perlremovespaces(){
     for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
         perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
     done
 }
 
-piRun(){
+pirun(){
     trap 'DONE=true' QUIT
     local DONE
     DONE=false
@@ -1297,7 +1297,7 @@ fz(){
     }
 }
 
-figletFonts(){
+figletfonts(){
 
     [[ "$(uname)" == Darwin ]] && {
         FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
@@ -1337,14 +1337,14 @@ figletFonts(){
     fi
 }
 
-pygmentColors(){
+pygmentcolors(){
     dir="$(python3 -m pip show pygments | grep Location | awk '{print $2}')"
     for i in "$dir/pygments/styles/"* ; do
         echo "$i"
     done
 }
 
-detachAll(){
+detachall(){
     tmux list-clients | tr -d : | perl -ane '`tmux detach-client -t $F[0]`'
 }
 
