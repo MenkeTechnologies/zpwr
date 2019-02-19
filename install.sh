@@ -406,7 +406,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
         prettyPrint "Installing Bat (cat replacement) with Cargo"
         cargo install bat
         prettyPrint "Installing Fd (find replacement) with Cargo"
-        cargo install fd
+        cargo install fd-find
     }
 
     exists exa || {
