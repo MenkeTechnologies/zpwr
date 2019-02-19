@@ -323,7 +323,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     exists cargo || {
         prettyPrint "Installing rustup"
-        curl https://sh.rustup.rs -sSf | sh
+        curl https://sh.rustup.rs -sSf | sh -s -- -y
     }
 
 
@@ -406,7 +406,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     fi
 
     exists bat || {
-        exists cargo || curl https://sh.rustup.rs -sSf | sh
+        exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
         rustup update
         prettyPrint "Installing Bat (cat replacement) with Cargo"
         cargo install bat
@@ -415,7 +415,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     }
 
     exists exa || {
-        exists cargo || curl https://sh.rustup.rs -sSf | sh
+        exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
         rustup update
         prettyPrint "Installing Exa with Cargo"
         cargo install exa
