@@ -1803,7 +1803,7 @@ test -z $COLORIZER && export COLORIZER=bat
 if [[ $COLORIZER=bat ]]; then
     if exists bat;then
         export BAT_THEME="GitHub"
-        export PYGMENTIZE_OPTS='bat --paging never --color always --style="grid,changes,header"'
+        export PYGMENTIZE_OPTS='bat --paging never --color always --style="numbers,grid,changes,header"'
     else
         export PYGMENTIZE_OPTS="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
     fi
@@ -1824,7 +1824,7 @@ fzf_setup(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
         "[[ -f {} ]] && '"$PYGMENTIZE_OPTS"' {} \
-        2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
+        2>/dev/null || stat {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
@@ -1832,8 +1832,8 @@ fzf_setup(){
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"[[ -f {} ]] && { print -r {} | command egrep \
         '\.[jw]ar\$' && jar tf {} ; } \
-        || { $PYGMENTIZE_OPTS {} 2>/dev/null | \
-        cat -n; rc=$ps; }; [[ \$rc = 0 ]] || \
+        || { $PYGMENTIZE_OPTS {} 2>/dev/null \
+        ; rc=$ps; }; [[ \$rc = 0 ]] || \
         stat {} | fold -80 | head -500\""
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
