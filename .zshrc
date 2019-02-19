@@ -1796,11 +1796,9 @@ colortest(){
 
 #{{{                    MARK:FZF
 #**************************************************************
-#default value for rougify theme
-export ROUGIFY_THEME="github"
 #default value for pygmentize theme
-export PYGMENTIZE_COLOR="emacs"
-export COLORIZER=bat
+test -z $PYGMENTIZE_COLOR && export PYGMENTIZE_COLOR="emacs"
+test -z $COLORIZER && export COLORIZER=bat
 
 if [[ $COLORIZER=bat ]]; then
     if exists bat;then
@@ -1930,8 +1928,7 @@ local green="64"
 # Solarized Dark color scheme for fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
-  "
+    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow"
 #}}}***********************************************************
 
 #{{{                    MARK:Source Tokens
