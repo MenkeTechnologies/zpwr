@@ -1801,8 +1801,10 @@ export ROUGIFY_THEME="github"
 #default value for pygmentize theme
 export PYGMENTIZE_COLOR="emacs"
 export PYGMENTIZE_OPTS="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
-export BAT_THEME="GitHub"
-export PYGMENTIZE_OPTS='bat --paging never --color always --style="grid,changes,header"'
+exists bat && {
+    export BAT_THEME="GitHub"
+    export PYGMENTIZE_OPTS='bat --paging never --color always --style="grid,changes,header"'
+}
 
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
