@@ -1453,7 +1453,7 @@ supernatural-space() {
     __CORRECT_WORDS[radius]="radisu raduis"
     __CORRECT_WORDS[range]="rnage arnge"
     __CORRECT_WORDS[runnning]="runnign"
-    __CORRECT_WORDS[shell_script]="sh"
+    __CORRECT_WORDS[shell_script]="she"
     __CORRECT_WORDS[single]="signle"
     __CORRECT_WORDS[some]="soem som seom"
     __CORRECT_WORDS[spelling]="spellign spelilng"
@@ -1800,11 +1800,18 @@ colortest(){
 export ROUGIFY_THEME="github"
 #default value for pygmentize theme
 export PYGMENTIZE_COLOR="emacs"
-export PYGMENTIZE_OPTS="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
-exists bat && {
-    export BAT_THEME="GitHub"
-    export PYGMENTIZE_OPTS='bat --paging never --color always --style="grid,changes,header"'
-}
+export COLORIZER=bat
+
+if [[ $COLORIZER=bat ]]; then
+    if exists bat;then
+        export BAT_THEME="GitHub"
+        export PYGMENTIZE_OPTS='bat --paging never --color always --style="grid,changes,header"'
+    else
+        export PYGMENTIZE_OPTS="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
+    fi
+else
+    export PYGMENTIZE_OPTS="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
+fi
 
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
