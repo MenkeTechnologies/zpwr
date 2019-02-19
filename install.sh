@@ -71,7 +71,7 @@ EOF
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(tig httpie hexedit cargo boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
+dependencies_ary=(tig httpie hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping atop ctags texinfo lsof \
@@ -320,6 +320,11 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "Installing meteor"
     curl https://install.meteor.com/ | sh
+
+    exists cargo || {
+        prettyPrint "Installing rustup"
+        curl https://sh.rustup.rs -sSf | sh
+    }
 
 
     # system sed breaks extended regex
