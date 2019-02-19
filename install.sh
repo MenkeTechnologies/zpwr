@@ -18,7 +18,7 @@ OS_TYPE="$(uname -s)"
 INSTALLER_DIR="$(pwd -P)"
 
 
-export COLUMNS=$(tput cols)
+export COLUMNS="$(tput cols)"
 source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
 
 logfile="$INSTALLER_DIR/escaped_logfile.txt"
@@ -752,6 +752,9 @@ cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$HOME"
 
 prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
+
+prettyPrint "Final refreshing of dependencies"
+refresh
 
 #}}}***********************************************************
 
