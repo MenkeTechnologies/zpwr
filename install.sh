@@ -405,18 +405,18 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
 
     exists bat || {
         exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-        rustup update
+        "$HOME/.cargo/bin/rustup" update
         prettyPrint "Installing Bat (cat replacement) with Cargo"
-        cargo install bat
+        "$HOME/.cargo/bin/cargo" install bat
         prettyPrint "Installing Fd (find replacement) with Cargo"
-        cargo install fd-find
+        "$HOME/.cargo/bin/cargo" install fd-find
     }
 
     exists exa || {
         exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
         rustup update
         prettyPrint "Installing Exa with Cargo"
-        cargo install exa
+        "$HOME/.cargo/bin/cargo" install exa
     }
 
 else
@@ -448,6 +448,21 @@ else
 
             upgrade "$distroFamily"
         fi
+        exists bat || {
+            exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+            "$HOME/.cargo/bin/rustup" update
+            prettyPrint "Installing Bat (cat replacement) with Cargo"
+            "$HOME/.cargo/bin/cargo" install bat
+            prettyPrint "Installing Fd (find replacement) with Cargo"
+            "$HOME/.cargo/bin/cargo" install fd-find
+        }
+
+        exists exa || {
+            exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+            rustup update
+            prettyPrint "Installing Exa with Cargo"
+            "$HOME/.cargo/bin/cargo" install exa
+        }
 
         prettyPrint "Installing Powerline fonts"
         if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
