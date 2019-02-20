@@ -1836,16 +1836,16 @@ fzf_setup(){
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
             --reverse --border --height 100%"
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview \"[[ -f {} ]] && { print -r {} | command egrep \
-        '\.[jw]ar\$' && jar tf {} ; } \
-        || { $COLORIZER_FZF 2>/dev/null \
-        ; rc=$ps; }; [[ \$rc = 0 ]] || \
-        stat {} | fold -80 | head -500\""
+        --preview \"if [[ -f {} ]]; then if print -r {} | command \
+            egrep -iq '\.[jw]ar\$';then jar tf {}; elif print -r {} | \
+            command egrep -iq '\.zip\$';then unzip -l {}; else \
+        $COLORIZER_FZF 2>/dev/null; rc=$ps;[[ \$rc = 0 ]] || { stat {} | fold -80 | head -500; }; fi; else \
+        stat {} | fold -80 | head -500; fi\""
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-            --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
-            '\.[jw]ar\$' && jar tf {} ; } || { $COLORIZER_FZF \
-            2>/dev/null || {
+            --preview  \"if [[ -f {} ]]; then if print -r {} | command egrep -iq '\.[jw]ar\$';then jar tf {};elif print -r {} | \
+              egrep -iq '\.zip\$';then unzip -l {};else \
+              $COLORIZER_FZF 2>/dev/null || {
                     [[ -e {} ]] && stat {} | fold -80 | \
                     head -500 || {
                         source ~/.shell_aliases_functions.sh
@@ -1866,8 +1866,8 @@ fzf_setup(){
                             }
                         } | cowsay | ponysay
             }
-            }
-        }\""
+            }; fi;
+        fi\""
     else
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
             --preview  \"[[ -f {} ]] && { print -r {} | command egrep \
