@@ -322,6 +322,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     exists cargo || {
         prettyPrint "Installing rustup"
         curl https://sh.rustup.rs -sSf | sh -s -- -y
+        prettyPrint "Updating rustup"
+        rustup update
     }
 
 
@@ -404,7 +406,9 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     fi
 
     exists bat || {
+        prettyPrint "Installing Rustup if cargo does not exist"
         exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+        prettyPrint "Updating rustup"
         "$HOME/.cargo/bin/rustup" update
         prettyPrint "Installing Bat (cat replacement) with Cargo"
         "$HOME/.cargo/bin/cargo" install bat
@@ -413,8 +417,10 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     }
 
     exists exa || {
+        prettyPrint "Installing rustup if cargo does not exist"
         exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-        rustup update
+        prettyPrint "Updating rustup"
+        "$HOME/.cargo/bin/rustup" update
         prettyPrint "Installing Exa with Cargo"
         "$HOME/.cargo/bin/cargo" install exa
     }
@@ -449,6 +455,7 @@ else
             upgrade "$distroFamily"
         fi
         exists bat || {
+            prettyPrint "Installing rustup if cargo does not exist"
             exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
             "$HOME/.cargo/bin/rustup" update
             prettyPrint "Installing Bat (cat replacement) with Cargo"
@@ -458,8 +465,10 @@ else
         }
 
         exists exa || {
+            prettyPrint "Installing rustup if cargo does not exist"
             exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-            rustup update
+            prettyPrint "Updating rustup"
+            "$HOME/.cargo/bin/rustup" update
             prettyPrint "Installing Exa with Cargo"
             "$HOME/.cargo/bin/cargo" install exa
         }
