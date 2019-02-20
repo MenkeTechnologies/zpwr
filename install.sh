@@ -275,8 +275,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Checking Dependencies for Mac..."
     addDependenciesMac
     distroName=Mac
-
-
+    distroFamily=mac
     showDeps
 
     exists "brew" || {
@@ -300,7 +299,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         sleep 1
         
         prettyPrint "Updating repos"
-        refresh mac
+        refresh "$distroFamily"
         brew cask install java
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
