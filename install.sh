@@ -776,7 +776,7 @@ prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
 
 prettyPrint "Final refreshing of dependencies"
-refresh
+refresh "$distroFamily"
 
 #}}}***********************************************************
 
