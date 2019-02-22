@@ -669,6 +669,7 @@ prettyPrint "Copying all Shell Scripts to $HOME/Documents"
 cp "$INSTALLER_DIR/scripts/"*.sh "$INSTALLER_DIR/scripts/"*.pl "$HOME/Documents/shellScripts"
 cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
 
+cd "$INSTALLER_DIR"
 prettyPrint "Installing ponysay from source"
 git clone https://github.com/erkin/ponysay.git && {
 cd ponysay && sudo ./setup.py --freedom=partial install && \
