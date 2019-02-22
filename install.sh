@@ -536,7 +536,7 @@ cd "$INSTALLER_DIR"
 cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 case "$distroName" in
-    (*suse*|ubuntu|debian|linuxmint|raspbian)
+    (*suse*|ubuntu|debian|linuxmint|raspbian|mac)
         needSudo=yes
         ;;
     (fedora)
@@ -703,6 +703,7 @@ if [[ "$(uname)" == Darwin ]]; then
     prettyPrint "Try again for ponysay and lolcat on mac"
     exists ponysay || brew install ponysay
     exists lolcat || sudo gem install lolcat
+    exists rougify || sudo gem install rougify
 fi
 
 prettyPrint "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
