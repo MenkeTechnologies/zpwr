@@ -1487,7 +1487,7 @@ supernatural-space() {
         badWords=("${(z)__CORRECT_WORDS[$key]}")
         for misspelling in $badWords[@];do
             if [[ $mywords[-1] == $misspelling ]]; then
-                LBUFFER="$(print -r -- "$LBUFFER" | sed -E \
+                LBUFFER="$(print -r -- "$LBUFFER" | perl -pE \
                     "s@\\b$misspelling\\b\$@${key:gs/_/ /}@g")"
                 finished=true
                 CURSOR=$#LBUFFER
