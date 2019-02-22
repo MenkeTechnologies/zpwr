@@ -212,19 +212,19 @@ gitFuncNoCheck() {
     }
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0;34m"
-	gitCommitAndPush "$BUFFER" && {
+	if gitCommitAndPush "$BUFFER";then
 		print -sr "$BUFFER"
 		zle .kill-whole-line
 		printf "\x1b[0m"
 		zle .redisplay
-	} || {
+    else
 		printf "\x1b[0;1;31m"
 		print -sr "$BUFFER"
 		printf "BLACKLISTED: $(pwd -P)" >&2
 		BUFFER=""
 		printf "\x1b[0m"
 		zle .accept-line
-	}
+    fi
 
 }
 
