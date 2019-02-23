@@ -169,8 +169,7 @@ if [[ $skip != true ]]; then
 
     exists npm && {
         prettyPrint "Updating NPM packages"
-        for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
-        do
+        for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4);do
             npm install -g "$package"
         done
         prettyPrint "Updating NPM itself"
@@ -244,7 +243,7 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
     fi
 
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
-    #avoid sending commmands from stdin into ssh, better to use string after ssh
+    #avoid sending commmands from stdin into ssh, better to send stdin script into bash
     ssh -x "$hostname" bash < "$SCRIPTS/rpiSoftwareUpdater.sh"
 }
 
@@ -254,18 +253,18 @@ for pi in "${PI_ARRAY[@]}"; do
 done
 
 exists brew && {
-    brew tap | grep cask-upgrade 1>/dev/null 2>&1 && {
+    if brew tap | grep cask-upgrade 1>/dev/null 2>&1;then
         # we have brew cu
         prettyPrint "Updating Homebrew Casks!"
         brew cu -ay --cleanup
-    } || {
+    else
         # we don't have brew cu
         prettyPrint "Installing brew-cask-upgrade"
         brew tap buo/cask-upgrade
         brew update
         prettyPrint "Updating Homebrew Casks!"
         brew cu -ay --cleanup
-    }
+    fi
 }
 prettyPrint "Updating Vundle Plugins"
 
