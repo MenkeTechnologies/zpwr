@@ -8,8 +8,8 @@
 #}}}***********************************************************
 
 BASE_DIR="$HOME/forkedRepos"
-CONFIG_DIR="$HOME/forkedRepos/customTerminalInstaller"
-ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
+CONFIG_DIR="$HOME/forkedRepos/$REPO_NAME"
+ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZH_COMP_REPO_NAME"
 
 [[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && return 1
 [[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && return 1

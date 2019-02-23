@@ -9,7 +9,7 @@
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
-installerDir="$HOME/Documents/shellScripts/customTerminalInstaller"
+installerDir="$HOME/Documents/shellScripts/$REPO_NAME"
 SCRIPTS="$HOME/Documents/shellScripts"
 
 prettyPrint(){
