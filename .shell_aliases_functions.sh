@@ -19,6 +19,8 @@ export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
 export GITHUB_ACCOUNT='MenkeTechnologies'
+export REPO_NAME="customTerminalInstaller"
+export ZSH_COMP_REPO_NAME="zsh-more-completions"
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
 export SCRIPTS="$HOME/Documents/shellScripts"
@@ -1013,7 +1015,6 @@ openmygh(){
 eval "alias $GITHUB_ACCOUNT=openMyGH"
 
 getrc(){
-    REPO_NAME="customTerminalInstaller"
     if [[ $(uname) == Darwin ]]; then
         exists dialog && {
             dialog --inputbox 'Are you sure you want to run getrc on this Apple device?(y/n)' 8 40 2> /tmp/temp$$
@@ -1221,10 +1222,11 @@ exists pssh && pir(){
     }
 
 c(){
+    colorizer=bat
     if [[ ! -p /dev/stdout ]];then
         {
-            exists ccat && {
-                echo | ccat &>/dev/null && {
+            exists $colorizer && {
+                echo | $colorizer &>/dev/null && {
                     for file in "$@";do
                             if [[ ! -d "$file" && -s "$file" ]]; then
                                 if (( $# > 1)); then
@@ -1237,8 +1239,8 @@ c(){
             } || cat -n "$@"
         } | less -FXS
     else
-        exists ccat && {
-            echo | ccat &>/dev/null && {
+        exists $colorizer && {
+            echo | $colorizer &>/dev/null && {
                 for file in "$@";do
                         if [[ ! -d "$file" && -s "$file" ]]; then
                             if (( $# > 1)); then

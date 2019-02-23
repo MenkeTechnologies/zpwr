@@ -220,7 +220,8 @@ gitFuncNoCheck() {
     else
 		printf "\x1b[0;1;31m"
 		print -sr "$BUFFER"
-		printf "BLACKLISTED: $(pwd -P)" >&2
+	d
+    printf "BLACKLISTED: $(pwd -P)" >&2
 		BUFFER=""
 		printf "\x1b[0m"
 		zle .accept-line
