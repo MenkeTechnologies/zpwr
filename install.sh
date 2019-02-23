@@ -135,7 +135,7 @@ update(){
         elif [[ $2 == freebsd ]];then
             sudo pkg install -y "$1"
         else
-            prettyPrint "Error at install with $2." >&2
+            prettyPrint "Error at install of $1 on $2." >&2
         fi
     }
 }
@@ -156,7 +156,7 @@ upgrade(){
         elif [[ $1 == freebsd ]];then
             sudo pkg upgrade -y
         else
-            prettyPrint "Error with upgrade with $2." >&2
+            prettyPrint "Error with upgrade with $1." >&2
         fi
 }
 
@@ -175,7 +175,7 @@ refresh(){
         elif [[ $1 == redhat ]];then
             sudo yum update -y
         else
-            prettyPrint "Error with refresh with $2." >&2
+            prettyPrint "Error with refresh with $1." >&2
         fi
 
 }
