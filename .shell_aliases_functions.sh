@@ -1395,23 +1395,6 @@ del(){
     echo "delete from $SCHEMA_NAME.$TABLE_NAME order by id desc limit $count" | mysql
 }
 
-echo $0 | grep -q bash || {
-    learn(){
-        if [[ ! -z "$BUFFER" ]]; then
-            local mywords
-            mywords=("${(z)BUFFER}")
-            [[ $mywords[1] == le ]] && return 1
-            BUFFER="le '${BUFFER//'/\''}'"
-            zle .accept-line
-        else
-            return 1
-        fi
-    }
-    zle -N learn
-    bindkey -M viins '^J' learn
-    bindkey -M vicmd '^J' learn
-}
-
 #}}}***********************************************************
 
 #{{{                    MARK:Source Tokens

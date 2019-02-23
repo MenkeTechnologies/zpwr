@@ -220,8 +220,7 @@ gitFuncNoCheck() {
     else
 		printf "\x1b[0;1;31m"
 		print -sr "$BUFFER"
-	d
-    printf "BLACKLISTED: $(pwd -P)" >&2
+		printf "BLACKLISTED: $(pwd -P)" >&2
 		BUFFER=""
 		printf "\x1b[0m"
 		zle .accept-line
@@ -2042,4 +2041,20 @@ alias numcmd='print $#commands'
 unalias ag &> /dev/null
 
 export KEYTIMEOUT=1
+
+learn(){
+    if [[ ! -z "$BUFFER" ]]; then
+        local mywords
+        mywords=("${(z)BUFFER}")
+        [[ $mywords[1] == le ]] && return 1
+        BUFFER="le '${BUFFER//'/''}'"
+        zle .accept-line
+    else
+        return 1
+    fi
+}
+zle -N learn
+bindkey -M viins '^J' learn
+bindkey -M vicmd '^J' learn
+
 #}}}***********************************************************
