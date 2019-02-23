@@ -2047,7 +2047,7 @@ learn(){
         local mywords
         mywords=("${(z)BUFFER}")
         [[ $mywords[1] == le ]] && return 1
-        BUFFER="le '${BUFFER//'/''}'"
+        BUFFER="le '${BUFFER//'/\''}'"
         zle .accept-line
     else
         return 1
