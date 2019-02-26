@@ -10,6 +10,14 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+MYPROMPT=POWERLEVEL
+
+if [[ $MYPROMPT == POWERLEVEL ]]; then
+    test -s "$HOME/.powerlevel9kconfig.sh" && \
+        source "$HOME/.powerlevel9kconfig.sh"
+else
+    ZSH_THEME="simonoff"
+fi
 
 ZSH_DISABLE_COMPFIX=true
 #colors for common commands
@@ -1708,14 +1716,6 @@ export HISTSIZE=10000000
 #set right prompt string during continuation
 RPS2='+%N:%i:%^'
 export PS3=$'\e[1;34m-->>>> \e[0m'
-MYPROMPT=POWERLEVEL
-
-if [[ $MYPROMPT == POWERLEVEL ]]; then
-    test -s "$HOME/.powerlevel9kconfig.sh" && \
-        source "$HOME/.powerlevel9kconfig.sh"
-else
-    ZSH_THEME="simonoff"
-fi
 
 #if this is a mac or linux
 [[ "$(uname)" == "Darwin" ]] && {
