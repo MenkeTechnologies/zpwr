@@ -12,11 +12,13 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 MYPROMPT=POWERLEVEL
 
+[[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
+
 if [[ $MYPROMPT == POWERLEVEL ]]; then
     test -s "$HOME/.powerlevel9kconfig.sh" && \
         source "$HOME/.powerlevel9kconfig.sh"
 else
-    ZSH_THEME="simonoff"
+    test -z $ZSH_THEME && ZSH_THEME="simonoff"
 fi
 
 ZSH_DISABLE_COMPFIX=true
