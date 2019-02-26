@@ -766,6 +766,15 @@ clearLine() {
     BUFFER=
 }
 
+deleteLastWord(){
+    mywords=("${(z)BUFFER}")
+    if (( $#mywords > 1  )); then
+        BUFFER=${mywords[1,-2]}" "
+    else
+        BUFFER=
+    fi
+}
+
 zle -N surround
 zle -N deleteMatching
 zle -N updater
@@ -774,12 +783,14 @@ zle -N intoFzf
 zle -N intoFzfAg
 zle -N getrcWidget
 zle -N clearLine
+zle -N deleteLastWord
 
 
 #vim mode is default
 bindkey -v
 
 bindkey -M viins "^U" clearLine
+bindkey -M viins "^W" deleteLastWord
 
 bindkey -M viins "\e^O" runner
 bindkey -M vicmd "\e^O" runner
