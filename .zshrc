@@ -761,6 +761,10 @@ intoFzfAg(){
 
     CURSOR=$#BUFFER
 }
+clearLine() {
+    zle .kill-whole-line
+    BUFFER=
+}
 
 zle -N surround
 zle -N deleteMatching
@@ -769,17 +773,19 @@ zle -N runner
 zle -N intoFzf
 zle -N intoFzfAg
 zle -N getrcWidget
+zle -N clearLine
 
 
 #vim mode is default
 bindkey -v
+
+bindkey -M viins "^U" clearLine
 
 bindkey -M viins "\e^O" runner
 bindkey -M vicmd "\e^O" runner
 
 bindkey -M viins "\e^P" updater
 bindkey -M vicmd "\e^P" updater
-
 
 bindkey -M viins '"' surround
 bindkey -M viins "'" surround
@@ -993,7 +999,9 @@ precmd(){
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
-    RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
+    if [[ $MYPROMPT != POWERLEVEL ]]; then
+        RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
+    fi
 }
 
 [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && \
@@ -1123,12 +1131,14 @@ bindkey -M vicmd '^P' EOLorNextTabStop
 bindkey -M vicmd G end-of-buffer-or-history
 
 # RPROMPT shows vim modes (insert vs normal)
-zle-keymap-select() {
-    RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
-    [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
-    () { return $__prompt_status }
-    zle reset-prompt
-}
+if [[ $MYPROMPT != POWERLEVEL ]]; then
+    zle-keymap-select() {
+        RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
+        [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
+        () { return $__prompt_status }
+        zle reset-prompt
+    }
+fi
 
 zle -N zle-keymap-select
 
