@@ -63,11 +63,10 @@ cp "$HOME/.vimrc" "$tutorialDir/vim"
 prettyPrint "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
 cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
-cp -R "$HOME/.tmux/"* "$tutorialDir/.tmux"
+cp -R "$HOME/.tmux/"* "$tutorialDir/tmux/.tmux"
 
 prettyPrint "Copying shell_aliases_functions"
 cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
-cp "$HOME/.rpitokens.sh" "$tutorialDir/aliases"
 
 prettyPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
@@ -97,8 +96,7 @@ echo > "$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
 cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
-prettyPrint "Copying iterm Colors"
-cp "$HOME/iterm-jm-colors.itermcolors" "$tutorialDir"
+prettyPrint "Copying powerlevel config"
 cp "$HOME/.powerlevel9kconfig.sh" "$tutorialDir"
 
 #prettyPrint "Copying vim plugins"
