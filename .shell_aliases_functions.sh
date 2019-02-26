@@ -394,12 +394,20 @@ s(){
 }
 
 logg(){
-    [[ -z "$1" ]] && echo "need arg" >&2 && return 1
-    {
-    printf "\n_____________$(date)____"
-    printf "%s " "$@"
-    printf "\n"
-    } >> "$LOGFILE"
+
+    if [[ -p /dev/stdin ]]; then
+        {
+            printf "\n_____________$(date)____"
+            cat
+            printf "\n"
+        } >> "$LOGFILE"
+else
+        {
+            printf "\n_____________$(date)____"
+            printf "%s " "$@"
+            printf "\n"
+        } >> "$LOGFILE"
+    fi
 }
 
 xx(){
