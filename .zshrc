@@ -1387,6 +1387,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}wc='| wc -l'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
     alias -g ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"" && git push"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}co="\"\\x1b[38;5;${__TS}m${__TS}\\x1b[0m\""
 
     alias -g ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
         '$__TS'
