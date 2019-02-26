@@ -1828,42 +1828,48 @@ fzf_setup(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
         "[[ -f {} ]] && '"$COLORIZER_FZF$__TS"'  \
-        2>/dev/null | cat -n || stat {} | fold -80 | head -500")"'
+        2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
         "[[ -f {} ]] && '"$COLORIZER_FZF"' \
-        2>/dev/null || stat {} | fold -80 | head -500")"'
+        2>/dev/null || stat -- {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
             --reverse --border --height 100%"
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview \"if [[ -f {} ]]; then if print -r {} | command \
-            egrep -iq '\.[jw]ar\$';then jar tf {}; elif print -r {} | \
-            command egrep -iq '\.zip\$';then unzip -l {}; else \
-        $COLORIZER_FZF 2>/dev/null; rc=$ps;[[ \$rc = 0 ]] || { stat {} | fold -80 | head -500; }; fi; else \
+        --preview \"if [[ -f {} ]]; then if print -r -- {} | command \
+            egrep -iq '\.[jw]ar\$';then jar tf {}; \
+            elif print -r -- {} | \
+            command egrep -iq '\.zip\$';then unzip -l -- {}; else \
+        $COLORIZER_FZF 2>/dev/null; rc=$ps;[[ \$rc = 0 ]] || { stat -- {} | fold -80 | head -500; }; fi; else \
         stat {} | fold -80 | head -500; fi\""
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-            --preview  \"if [[ -f {} ]];then if print -r {} | command egrep -iq '\.[jw]ar\$';then jar tf {};elif print -r {} | \
+            --preview  \"if [[ -f {} ]];then if print -r -- {} \
+                | command egrep -iq '\.[jw]ar\$';then \
+                    jar tf {};elif print -r -- {} | \
               egrep -iq '\.zip\$';then unzip -l {};else \
               $COLORIZER_FZF 2>/dev/null; fi; else \
-                    [[ -e {} ]] && stat {} | fold -80 | \
+                    [[ -e {} ]] && stat -- {} | fold -80 | \
                     head -500 || {
                         source ~/.shell_aliases_functions.sh
                         {
-                            print -r {} \
+                            print -r -- {} \
                                 | command egrep '(\d{1,3}\.){3}\d\
                                 {1,3}' && {
-                                whois {} | command egrep -q 'No (match\
-                                |whois)' && dig {} || whois {}
+                                whois -- {} | command \
+                                egrep -q 'No (match\
+                                |whois)' && dig -- {} || whois -- {}
                             } || {
-                                cat ~/.common_aliases | grep \
-                                {}= || set | grep -a {} | grep -v \
-                                    ZSH_EXEC || alias | grep -a {}\
-                                    || {
-                                whois {} | command egrep -q 'No (match\
-                                |whois)' && dig {} || whois {}
+                                cat ~/.common_aliases | grep -- \
+                                {}= || set | command grep -a -- {} \
+                                    | command grep -v -- \
+                                    ZSH_EXEC || alias \
+                                    | command grep -a -- {}\
+                                    || { whois -- {} | \
+                                    command egrep -q 'No (match\
+                                |whois)' && dig -- {} || whois -- {}
                                 }
                             }
                         } | cowsay | ponysay
@@ -1871,25 +1877,30 @@ fzf_setup(){
         fi\""
     else
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-            --preview  \"if [[ -f {} ]];then if print -r {} | command egrep -iq '\.[jw]ar\$';then jar tf {};elif print -r {} | \
+            --preview  \"if [[ -f {} ]];then if print -r -- {} \
+                | command egrep -iq '\.[jw]ar\$';then \
+                    jar tf {};elif print -r -- {} | \
               egrep -iq '\.zip\$';then unzip -l {};else \
               $COLORIZER_FZF 2>/dev/null; fi; else \
-                    [[ -e {} ]] && stat {} | fold -80 | \
+                    [[ -e {} ]] && stat -- {} | fold -80 | \
                     head -500 || {
                         source ~/.shell_aliases_functions.sh
                         {
-                            print -r {} \
+                            print -r -- {} \
                                 | command egrep '(\d{1,3}\.){3}\d\
                                 {1,3}' && {
-                                whois {} | command egrep -q 'No (match\
-                                |whois)' && dig {} || whois {}
+                                whois -- {} | command \
+                                egrep -q 'No (match\
+                                |whois)' && dig -- {} || whois -- {}
                             } || {
-                                cat ~/.common_aliases | grep \
-                                {}= || set | grep -a {} | grep -v \
-                                    ZSH_EXEC || alias | grep -a {}\
-                                    || {
-                                whois {} | command egrep -q 'No (match\
-                                |whois)' && dig {} || whois {}
+                                cat ~/.common_aliases | grep -- \
+                                {}= || set | command grep -a -- {} \
+                                    | command grep -v -- \
+                                    ZSH_EXEC || alias \
+                                    | command grep -a -- {}\
+                                    || { whois -- {} | \
+                                    command egrep -q 'No (match\
+                                |whois)' && dig -- {} || whois -- {}
                                 }
                             }
                         }
