@@ -790,7 +790,10 @@ zle -N deleteLastWord
 bindkey -v
 
 bindkey -M viins "^U" clearLine
+bindkey -M vicmd "^U" clearLine
+
 bindkey -M viins "^W" deleteLastWord
+bindkey -M vicmd "^W" deleteLastWord
 
 bindkey -M viins "\e^O" runner
 bindkey -M vicmd "\e^O" runner
