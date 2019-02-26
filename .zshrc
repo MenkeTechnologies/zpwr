@@ -376,6 +376,12 @@ expand-aliases() {
     #set -x
     if (( $CURSOR != $#BUFFER )); then
         zle _expand_alias
+        lenToFirstTS=${#BUFFER%%$__TS*}
+        if (( $lenToFirstTS < ${#BUFFER} )); then
+            __EXPAND=false
+            CURSOR=$lenToFirstTS
+            RBUFFER=${RBUFFER:$#__TS}
+        fi
     elif [[ $LBUFFER[-1] == " " ]]; then
         BUFFER="${BUFFER:0:-1}"
         zle _expand_alias
@@ -767,7 +773,7 @@ clearLine() {
 }
 
 deleteLastWord(){
-    mywords=("${(z)BUFFER}")
+    mywords=(${(z)BUFFER})
     if (( $#mywords > 1  )); then
         BUFFER=${mywords[1,-2]}" "
     else
@@ -792,7 +798,6 @@ bindkey -v
 bindkey -M viins "^U" clearLine
 bindkey -M vicmd "^U" clearLine
 
-bindkey -M viins "^W" deleteLastWord
 bindkey -M vicmd "^W" deleteLastWord
 
 bindkey -M viins "\e^O" runner
@@ -1387,7 +1392,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}wc='| wc -l'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
     alias -g ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"" && git push"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}co="\"\\x1b[38;5;${__TS}m${__TS}\\x1b[0m\""
+    alias -g ${__GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${__TS}m${__TS}\\x1b[0m"
 
     alias -g ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
         '$__TS'
