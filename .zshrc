@@ -375,12 +375,16 @@ expand-aliases() {
     __EXPAND=true
     #set -x
     if (( $CURSOR != $#BUFFER )); then
-        zle _expand_alias
-        lenToFirstTS=${#BUFFER%%$__TS*}
-        if (( $lenToFirstTS < ${#BUFFER} )); then
-            __EXPAND=false
-            CURSOR=$lenToFirstTS
-            RBUFFER=${RBUFFER:$#__TS}
+        if alias -g | grep -q "^$1";then
+            zle _expand_alias
+            lenToFirstTS=${#BUFFER%%$__TS*}
+            if (( $lenToFirstTS < ${#BUFFER} )); then
+                __EXPAND=false
+                CURSOR=$lenToFirstTS
+                RBUFFER=${RBUFFER:$#__TS}
+            fi
+        else
+            zle _expand_alias
         fi
     elif [[ $LBUFFER[-1] == " " ]]; then
         BUFFER="${BUFFER:0:-1}"
