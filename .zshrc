@@ -1879,12 +1879,11 @@ fzf_setup(){
                     head -500 || {
                         source ~/.shell_aliases_functions.sh
                         {
-                            print -r -- {} \
-                                | command egrep '(\d{1,3}\.){3}\d\
-                                {1,3}' && {
+                            print -r -- {} | command egrep \
+                   '\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d' && {
                                 whois -- {} | command \
-                                egrep -q 'No (match\
-                                |whois)' && dig -- {} || whois -- {}
+                                egrep -q 'No (match|whois)' \
+                                && dig {} || whois -- {}
                             } || {
                                 cat ~/.common_aliases | grep -- \
                                 {}= || set | command grep -a -- {} \
@@ -1892,8 +1891,9 @@ fzf_setup(){
                                     ZSH_EXEC || alias \
                                     | command grep -a -- {}\
                                     || { whois -- {} | \
-                                    command egrep -q 'No (match\
-                                |whois)' && dig -- {} || whois -- {}
+                                    command egrep -q \
+                                    'No (match|whois)' && dig {} \
+                                    || whois -- {}
                                 }
                             }
                         } | cowsay | ponysay
@@ -1910,12 +1910,11 @@ fzf_setup(){
                     head -500 || {
                         source ~/.shell_aliases_functions.sh
                         {
-                            print -r -- {} \
-                                | command egrep '(\d{1,3}\.){3}\d\
-                                {1,3}' && {
+                            print -r -- {} | command egrep \
+                   '\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d' && {
                                 whois -- {} | command \
-                                egrep -q 'No (match\
-                                |whois)' && dig -- {} || whois -- {}
+                                egrep -q 'No (match|whois)' \
+                                && dig {} || whois -- {}
                             } || {
                                 cat ~/.common_aliases | grep -- \
                                 {}= || set | command grep -a -- {} \
@@ -1923,8 +1922,9 @@ fzf_setup(){
                                     ZSH_EXEC || alias \
                                     | command grep -a -- {}\
                                     || { whois -- {} | \
-                                    command egrep -q 'No (match\
-                                |whois)' && dig -- {} || whois -- {}
+                                    command egrep -q \
+                                    'No (match|whois)' && dig {} \
+                                    || whois -- {}
                                 }
                             }
                         }
