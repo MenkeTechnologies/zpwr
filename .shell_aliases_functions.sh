@@ -388,6 +388,12 @@ r(){
             vim "$1" -c "hardcopy > $tempFile" -c quitall; ps2pdf "$tempFile" "${1%%.*}".pdf ; rm "$tempFile"
         }
     }
+    restartpoll(){
+        sudo cp "$HOME/forkedRepos/$REPO_NAME/poll.service" /etc/systemd/system
+        sudo systemctl daemon-reload
+        sudo systemctl restart poll.service
+    }
+
 }
 s(){
     [[ -z "$1" ]] && subl . || command s "$@"
