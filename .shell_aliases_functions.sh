@@ -392,6 +392,7 @@ r(){
         sudo cp "$HOME/forkedRepos/$REPO_NAME/poll.service" /etc/systemd/system
         sudo systemctl daemon-reload
         sudo systemctl restart poll.service
+        sudo journalctl -f
     }
 
 }
