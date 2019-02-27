@@ -424,7 +424,7 @@ xx(){
     trap QUIT
 }
 
-urlSafe(){
+url_safe(){
     cat | base64 | tr '+/=' '._-'
 }
 
@@ -452,7 +452,7 @@ j(){
     done
 }
 
-scNew(){
+scnew(){
     [[ -z "$1" ]] && echo "no arg..." >&2 && return 1
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"

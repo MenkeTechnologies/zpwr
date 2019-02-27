@@ -15,10 +15,13 @@ MYPROMPT=POWERLEVEL
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 
 if [[ $MYPROMPT == POWERLEVEL ]]; then
-    test -s "$HOME/.powerlevel9kconfig.sh" && \
+    if test -s "$HOME/.powerlevel9kconfig.sh";then
         source "$HOME/.powerlevel9kconfig.sh"
+    else
+        ZSH_THEME=simonoff
+    fi
 else
-    test -z $ZSH_THEME && ZSH_THEME="simonoff"
+    [[ ! -z $MYPROMPT ]] && ZSH_THEME=$MYPROMPT || ZSH_THEME=simonoff
 fi
 
 ZSH_DISABLE_COMPFIX=true
@@ -2103,5 +2106,14 @@ learn(){
 zle -N learn
 bindkey -M viins '^J' learn
 bindkey -M vicmd '^J' learn
+
+zshrcsearch(){
+    if [[ -z "$1" ]]; then
+        zsh -ilvx -c false |& less
+    else
+        zsh -ilvx -c false |& ag --color --numbers -C 5 -i "$@" |& less
+    fi
+
+}
 
 #}}}***********************************************************
