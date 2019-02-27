@@ -1427,7 +1427,6 @@ globalAliasesInit(){
         '$__TS'
     done'
 
-
     if [[ "$(uname)" == Darwin ]]; then
         alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
     else
@@ -2114,7 +2113,6 @@ zshrcsearch(){
     else
         zsh -ilvx -c false |& ag --color --numbers -C 5 -i "$@" |& less
     fi
-
 }
 
 #}}}***********************************************************
