@@ -388,6 +388,7 @@ r(){
             vim "$1" -c "hardcopy > $tempFile" -c quitall; ps2pdf "$tempFile" "${1%%.*}".pdf ; rm "$tempFile"
         }
     }
+
     restartpoll(){
         perl -i -pe "s@pi@$USER@g" "$HOME/forkedRepos/$REPO_NAME/poll.service"
         sudo cp "$HOME/forkedRepos/$REPO_NAME/poll.service" /etc/systemd/system
@@ -396,8 +397,8 @@ r(){
         sudo systemctl --no-pager -l status poll.service
         sudo journalctl -f
     }
-
 }
+
 s(){
     [[ -z "$1" ]] && subl . || command s "$@"
 }
