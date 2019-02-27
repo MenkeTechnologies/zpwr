@@ -62,6 +62,7 @@ while true; do
         fi
     }
 
+    echo "git poll in $(pwd)"
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
@@ -71,6 +72,7 @@ while true; do
     fi
 
     cd "$ZSH_COMP_DIR" || { echo "$(date) Directory $ZSH_COMP_DIR does not exist" >&2 && exit 1; }
+    echo "git poll in $(pwd)"
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
