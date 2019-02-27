@@ -1371,6 +1371,7 @@ zstyle ':completion:*' ignored-patterns '*.'
 #{{{                    MARK:Global Aliases
 #**************************************************************
 globalAliasesInit(){
+    alias -g ${__GLOBAL_ALIAS_PREFIX}a="|& \\egrep -v '\bag\b' |& \\ag --color -i"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
     alias -g ${__GLOBAL_ALIAS_PREFIX}bb='&>> "$LOGFILE'"$__TS"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
