@@ -11,8 +11,8 @@ BASE_DIR="$HOME/forkedRepos"
 CONFIG_DIR="$HOME/forkedRepos/$REPO_NAME"
 ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
 
-[[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && return 1
-[[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && return 1
+[[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && exit 1
+[[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && exit 1
 
 gitters(){
     git reset --hard origin/master
@@ -62,7 +62,7 @@ while true; do
         fi
     }
 
-    echo "git poll in $(pwd)"
+    echo "$(date) git poll in $(pwd)" >&2
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
@@ -72,12 +72,12 @@ while true; do
     fi
 
     cd "$ZSH_COMP_DIR" || { echo "$(date) Directory $ZSH_COMP_DIR does not exist" >&2 && exit 1; }
-    echo "git poll in $(pwd)"
+    echo "$(date) git poll in $(pwd)" >&2
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
     if [[ -n "$output" ]] ; then
-        echo "$(date) We have change to $(git remote -v)"
+        echo "$(date) We have change to $(git remote -v)" >&2
         gitters
         refreshers
     fi
