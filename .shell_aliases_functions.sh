@@ -389,6 +389,7 @@ r(){
         }
     }
     restartpoll(){
+        perl -i -pe "s@pi@$USER@/g" "$HOME/forkedRepos/$REPO_NAME/poll.service"
         sudo cp "$HOME/forkedRepos/$REPO_NAME/poll.service" /etc/systemd/system
         sudo systemctl daemon-reload
         sudo systemctl restart poll.service
