@@ -1367,7 +1367,7 @@ pygmentcolors(){
     done
 }
 
-detachall(){
+da(){
     tmux list-clients | tr -d : | perl -ane '`tmux detach-client -t $F[0]`'
 }
 
