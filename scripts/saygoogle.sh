@@ -6,6 +6,6 @@
 ##### Purpose: bash script to
 ##### Notes: use google's text to speech service
 #}}}***********************************************************
-local IFS=+
+IFS=+
 /usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols \
 "http://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&q=$*&tl=en"
