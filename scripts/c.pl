@@ -10,7 +10,7 @@
 use warnings;
 use strict;
 
-open my $less, "|-","less -MNFX" or die $!;
+open my $less, "|-","less" or die $!;
 
 use Env '@PATH';
 my $exe_bat = 'bat';
