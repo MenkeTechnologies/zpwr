@@ -43,7 +43,7 @@ export RED="\e[31m"
 export RESET="\e[0m"
 export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
-export LESS="-M -N -R -K -S"
+export LESS="-M -N -R -K -F -X -S"
 export PSQL_EDITOR='vim -c "setf sql"'
 export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a'
 
@@ -1259,7 +1259,7 @@ c(){
                         done
                 } || cat -n "$@"
             } || cat -n "$@"
-        } | less -FXS
+        } | less
     else
         exists $colorizer && {
             echo | $colorizer &>/dev/null && {
