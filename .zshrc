@@ -775,8 +775,7 @@ intoFzfAg(){
     CURSOR=$#BUFFER
 }
 clearLine() {
-    zle .kill-whole-line
-    BUFFER=
+    LBUFFER=
 }
 
 deleteLastWord(){
