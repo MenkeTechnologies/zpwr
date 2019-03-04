@@ -1141,35 +1141,37 @@ digs(){
             prettyPrint "HOST: $noproto"
             out="$(host "$noproto")"
             echo "$out"
-            echo "$out" | command grep -q 'address' && {
+            if echo "$out" | command grep -q 'address';then 
                 #regular domain name
                 ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
                 if [[ ${noproto: -1} == "." ]]; then
                     noproto="${noproto:0:-1}"
                 fi
+                prettyPrint "DIG: $ip"
+                dig -x "$ip"
                 primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
                 out="$(whois "$primary")"
-                echo "$out" | grep -q 'No match' && {
+                if echo "$out" | grep -q 'No match';then
                     prettyPrint "WHOIS: $ip"
                     whois "$ip"
-                } || {
+                else
                     prettyPrint "WHOIS: $primary"
                     echo "$out"
                     prettyPrint "WHOIS: $ip"
                     whois "$ip"
-                }
-            } || {
+                fi
+            else
                 out="$(whois "$noproto")"
-                echo "$out" | grep -q 'No match' && {
+                if echo "$out" | grep -q 'No match';then
                     prettyPrint "WHOIS: $ip"
                     whois "$ip"
-                } || {
+                else
                     prettyPrint "WHOIS: $noproto"
                     echo "$out"
                     prettyPrint "WHOIS: $ip"
                     whois "$ip"
-                }
-            }
+                fi
+            fi
             prettyPrint "CURL: $url"
             exists http && {
                 ge "$url"
