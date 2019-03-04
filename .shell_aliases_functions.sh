@@ -1038,15 +1038,15 @@ eval "alias $GITHUB_ACCOUNT=openMyGH"
 
 getrc(){
     if [[ $(uname) == Darwin ]]; then
-        exists dialog && {
+        if exists dialog;then
             dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> /tmp/temp$$
             clear
             REPLY="$(cat /tmp/temp$$)"
             rm /tmp/temp$$
-        } || {
-            printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>>"
+        else
+            printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> "
             read
-        }
+        fi
         [[ $REPLY != "y" ]] && clearList && return 0
     fi
     cd "$HOME"
