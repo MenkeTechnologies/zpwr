@@ -1039,12 +1039,12 @@ eval "alias $GITHUB_ACCOUNT=openMyGH"
 getrc(){
     if [[ $(uname) == Darwin ]]; then
         exists dialog && {
-            dialog --inputbox 'Are you sure you want to run getrc on this Apple device?(y/n)' 8 40 2> /tmp/temp$$
+            dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> /tmp/temp$$
             clear
             REPLY="$(cat /tmp/temp$$)"
             rm /tmp/temp$$
         } || {
-            printf "Are you sure?(y/n) >>> "
+            printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>>"
             read
         }
         [[ $REPLY != "y" ]] && clearList && return 0
