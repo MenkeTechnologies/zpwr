@@ -762,9 +762,9 @@ intoFzf(){
 }
 
 fzvim(){
-    \grep '^>' ~/.viminfo | cut -c3- | sed 's@~@'"$HOME"'@'| \
-        perl -lne'print if -f' | \
-        fzf -m --border --prompt='-->>> ' --preview '[[ -f {} ]] && '"$COLORIZER"' {} '"$COLORIZER_NL"' 2>/dev/null || stat {} | fold -80 | head -500' \
+    \grep '^>' ~/.viminfo | cut -c3- | \
+        perl -lne'print if -f glob("$_")' | \
+            fzf -m --border --prompt='-->>> ' --preview '$file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' \
         | perl -pe 's@^(.*)$@"$1"@;s@\s+@ @g'
 }
 vimFzf(){
