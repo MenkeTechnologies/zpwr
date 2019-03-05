@@ -762,13 +762,14 @@ intoFzf(){
 }
 
 fzvim(){
-    \grep '^>' ~/.viminfo | cut -c3- | sed 's@~@'"$HOME"'@'| fzf -m --border --prompt='-->>> ' --preview '[[ -f {} ]] && '"$COLORIZER"' {} '"$COLORIZER_NL"' 2>/dev/null || stat {} | fold -80 | head -500' \
+    \grep '^>' ~/.viminfo | cut -c3- | sed 's@~@'"$HOME"'@'| \
+        perl -lne'if($.==1){$first=$_;}elsif($.==2){print $_; print $first}else{print $_}' | \
+        fzf -m --border --prompt='-->>> ' --preview '[[ -f {} ]] && '"$COLORIZER"' {} '"$COLORIZER_NL"' 2>/dev/null || stat {} | fold -80 | head -500' \
         | perl -pe 's@^(.*)$@"$1"@;s@\s+@ @g'
 }
 vimFzf(){
     zle .kill-whole-line
     LBUFFER="vim $(fzvim)"
-    zle .accept-line
 }
 
 intoFzfAg(){
