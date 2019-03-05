@@ -771,10 +771,18 @@ fzvim(){
 vimFzf(){
     zle .kill-whole-line
     LBUFFER="vim $(fzvim)"
+    mywords=("${(z)BUFFER}")
+    if (( $#mywords == 1 )); then
+        zle .kill-whole-line
+    fi
 }
 vimFzfSudo(){
     zle .kill-whole-line
     LBUFFER="sudo vim $(fzvim)"
+    mywords=("${(z)BUFFER}")
+    if (( $#mywords == 2 )); then
+        zle .kill-whole-line
+    fi
 }
 
 intoFzfAg(){
