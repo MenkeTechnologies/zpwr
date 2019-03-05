@@ -171,7 +171,7 @@ refresh(){
         elif [[ $1 == arch ]];then
             sudo pacman -Syy
         elif [[ $1 == freebsd ]];then
-            sudo pkg update -y
+            sudo pkg update
         elif [[ $1 == redhat ]];then
             sudo yum update -y
         else
