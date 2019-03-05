@@ -22,7 +22,7 @@ prettyPrint(){
 #**************************************************************
 prettyPrint "Copying scripts to custom Installer Repo"
 rm -rf "$SCRIPTS/customTerminalInstaller/scripts/"*
-cp "$SCRIPTS"/*.{sh,pl,py} "$installerDir/scripts"
+cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts"
 cp -R "$SCRIPTS/macOnly" "$installerDir/scripts"
 cp "$HOME/.vimrc" "$installerDir"
 cp "$HOME/.tmux.conf" "$installerDir"
@@ -71,7 +71,7 @@ cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
 prettyPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/"*
-cp "$SCRIPTS"/*.sh "$SCRIPTS/"*.pl "$tutorialDir/shell"
+cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
 cp -R "$SCRIPTS/macOnly" "$tutorialDir/shell"
 cp -R "$HOME/.vim/Ultisnips" "$tutorialDir"
 #README="$tutorialDir/shell/README.md"
@@ -147,7 +147,8 @@ rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -P "$websiteDir/downloads/scripts"
 fi
-cp "$SCRIPTS/"*.sh "$SCRIPTS/"*.pl "$websiteDir/downloads/scripts"
+
+cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$wesbsiteDir/downloads/scripts"
 cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
