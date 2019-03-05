@@ -273,6 +273,6 @@ if [[ $end != true ]]; then
 fi
 
 #decolorize prompt
-echo -e "Done\e[0m"
+printf "Done\n\x1b[0m"
 
 exists clearList && clearList
