@@ -763,9 +763,10 @@ intoFzf(){
 
 fzvim(){
     \grep '^>' ~/.viminfo | cut -c3- | \
-        perl -lne'print if -f glob("$_")' | \
-            fzf -m --border --prompt='-->>> ' --preview 'file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' \
-            | perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g'
+        perl -lne '$f=$_;$_=~s/~/$ENV{HOME}/;print $f if -f' | \
+        fzf -m --border --prompt='-->>> ' \
+        --preview 'file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' | \
+            perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g'
 }
 vimFzf(){
     zle .kill-whole-line
