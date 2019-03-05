@@ -771,6 +771,10 @@ vimFzf(){
     zle .kill-whole-line
     LBUFFER="vim $(fzvim)"
 }
+vimFzfSudo(){
+    zle .kill-whole-line
+    LBUFFER="sudo vim $(fzvim)"
+}
 
 intoFzfAg(){
     mywords=("${(z)BUFFER}")
@@ -805,6 +809,7 @@ zle -N runner
 zle -N intoFzf
 zle -N intoFzfAg
 zle -N vimFzf
+zle -N vimFzfSudo
 zle -N getrcWidget
 zle -N clearLine
 zle -N deleteLastWord
@@ -851,6 +856,9 @@ bindkey -M vicmd '^F^D' intoFzf
 
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
+
+bindkey -M viins '^V^B' vimFzfSudo
+bindkey -M vicmd '^V^B' vimFzfSudo
 
 bindkey -M viins '^V^V' vimFzf
 bindkey -M vicmd '^V^V' vimFzf
