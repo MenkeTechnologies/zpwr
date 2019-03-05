@@ -90,6 +90,9 @@ set clipboard=autoselect
 
 "show trailing spaces and tabs
 set list listchars=tab:\ \ ,trail:·
+
+"customize .viminfo
+set viminfo='1000,<50,s10,h
 ""}}}***********************************************************
 
 "{{{                    MARK:Vundle
@@ -1028,6 +1031,5 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { pygmentize -g {} | nl -b a; } || stat {}'"}))
-
 
 "}}}*****************za******************************************
