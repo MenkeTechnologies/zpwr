@@ -43,7 +43,6 @@ Always looking for contributors.
 # Running on the Raspberry Pi 3
 ![Alt text](/tmuxfinal3.png?raw=true)
 ![Alt text](/tmuxfinal4.png?raw=true)
-
 # Tmux keybindings (tmux lsk)
 - ```bind-key    -T copy-mode    C-Space           send-keys -X begin-selection```
 - ```bind-key    -T copy-mode    C-a               send-keys -X start-of-line```
@@ -690,9 +689,7 @@ Always looking for contributors.
 - ```bindkey -M viopp "i}" select-bracketed```
 - ```bindkey -M viopp "j" down-line```
 - ```bindkey -M viopp "k" up-line```
-# Vim Keybindings Insert Mode (:imap)
-- ```[?1000h[?2004h[?1049h[?1h=[?2004h[1;86r[?12h[?12l[22;2t[22;1t[27m[29m[m[H[2J[86;1H[?1000l[?2004l[23;2t[23;1t[22;2t[22;1t[23;2t[23;1t[?2004l[?1l>[?1049l```
-
+# Vim Keybindings Insert Mode
 - ```i  <S-BS>       @<Plug>delimitMateS-BS```
 - ```i  <BS>         @<Plug>delimitMateBS```
 - ```i  <Plug>delimitMateJumpMany *@<SNR>25_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>"```
@@ -829,9 +826,8 @@ Always looking for contributors.
 - ```i  <C-Y>u        <Plug>(emmet-update-tag)```
 - ```i  <C-Y>;        <Plug>(emmet-expand-word)```
 - ```i  <C-Y>,        <Plug>(emmet-expand-abbr)```
-- ```i  <C-Z>       * <Esc>:suspend<CR># Vim Keybindings Normal Mode (:nmap)```
-- ```[?1000h[?2004h[?1049h[?1h=[?2004h[1;86r[?12h[?12l[22;2t[22;1t[27m[29m[m[38;5;146m[48;5;237m[H[2J[86;1H[?1000l[?2004l[23;2t[23;1t[22;2t[22;1t[23;2t[23;1t[?2004l[?1l>[?1049l```
-
+- ```i  <C-Z>       * <Esc>:suspend<CR>```
+# Vim Keybindings Normal Mode
 - ```n  <C-C>       * :wq!<CR>:qa!<CR>```
 - ```n  <C-D>p      * :call GetRef()<CR>```
 - ```n  <C-D>s      * :History/<CR>```
@@ -1454,9 +1450,8 @@ Always looking for contributors.
 - ```n  <C-Down>    * :<C-U>call GoToNextMarker("{{{",0)<CR>```
 - ```n  <End>       * G```
 - ```n  <Home>      * gg```
-- ```n  <Plug>RepeatEx * @: :call repeat#set("\<Plug>RepeatEx")<CR># Vim Keybindings Visual Mode (:vmap)```
-- ```[?1000h[?2004h[?1049h[?1h=[?2004h[1;86r[?12h[?12l[22;2t[22;1t[27m[29m[m[H[2J[86;1H[?1000l[?2004l[23;2t[23;1t[22;2t[22;1t[23;2t[23;1t[?2004l[?1l>[?1049l```
-
+- ```n  <Plug>RepeatEx * @: :call repeat#set("\<Plug>RepeatEx")<CR>```
+# Vim Keybindings Visual Mode
 - ```v  <C-B>       * "*y`>```
 - ```v  <C-D>y      * :<C-C>:update<CR>:SyntasticCheck<CR>```
 - ```v  <C-D>d      * :<C-C>:update<CR>```
@@ -1873,9 +1868,8 @@ Always looking for contributors.
 - ```v  <C-Down>    * :m '> + <CR> gv```
 - ```v  <C-Left>    * <gv```
 - ```v  <C-Right>   * >gv```
-- ```v  <RightMouse> * "*y`># Vim Keybindings Command Colon Mode (:cmap)```
-- ```[?1000h[?2004h[?1049h[?1h=[?2004h[1;86r[?12h[?12l[22;2t[22;1t[27m[29m[m[30m[47m[H[2J[86;1H[?1000l[?2004l[23;2t[23;1t[22;2t[22;1t[23;2t[23;1t[?2004l[?1l>[?1049l```
-
+- ```v  <RightMouse> * "*y`>```
+# Vim Keybindings Command Colon Mode
 - ```!  <F35>         <M-BS>```
 - ```!  <F34>         <M-BS>```
 - ```!  <F33>         ð```
