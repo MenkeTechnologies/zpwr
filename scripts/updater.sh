@@ -109,7 +109,7 @@ if [[ $skip != true ]]; then
         width=80
         perl -le "print '_'x$width" | lolcat
         if [[ "$MYBANNER" == ponies ]]; then
-            echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
+            exists catme && exists cowsay && exists shelobsay && echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
         fi
         perl -le "print '_'x$width" | lolcat
     }
