@@ -30,18 +30,28 @@
     echo "# Zsh Vim Operator Mode keybindings (bindkey -M viopp -L)"
     bindkey -M viopp -L
 
-    echo "# Vim Keybindings Insert Mode (:imap)"
-    #vim -c imap -c quitall
-    echo "# Vim Keybindings Normal Mode (:nmap)"
-    #vim -c nmap
+    printf "# Vim Keybindings Insert Mode (:imap)"
+    vim -e -c 'redir > temp1 | silent imap | redir END | quitall'
+    cat temp1
+    echo
+
+    printf "# Vim Keybindings Normal Mode (:nmap)"
+    vim -e -c 'redir > temp2 | silent nmap | redir END | quitall'
+    cat temp2
+    echo
         
-    echo "# Vim Keybindings Visual Mode (:vmap)"
-    #vim -c vmap
+    printf "# Vim Keybindings Visual Mode (:vmap)"
+    vim -e -c 'redir > temp3 | silent vmap | redir END | quitall'
+    cat temp3
+    echo
 
-    echo "# Vim Keybindings Command Colon Mode (:cmap)"
-    #vim -c cmap
+    printf "# Vim Keybindings Command Colon Mode (:cmap)"
+    vim -e -c 'redir > temp4 | silent cmap | redir END | quitall'
+    cat temp4
+    echo
 
-} > temp$$
+    command rm temp{1..4}
 
-sed -E 's@^([^#].*)$@- ```\1```@g' temp$$
+} | perl -ne 'print if /\S+/' > temp$$
+    perl -pe 's@^([^#].*)$@- ```$1```@g' temp$$ | perl -pe 's@(.*) \(:.map\).*@$1@'
 command rm temp$$
