@@ -137,6 +137,11 @@ dotdir="$websiteDir/downloads/dotfiles"
 [[ ! -d "$dotdir" ]] && mkdir -p "$dotdir"
 
 prettyPrint "Copying config files to websiteDir"
+cp "$HOME/.vimrc" "$dotdir/.."
+cp "$HOME/.tmux.conf" "$dotdir/.."
+cp "$HOME/.shell_aliases_functions.sh" "$dotdir/.."
+cp "$HOME/.zshrc" "$dotdir/.."
+
 cp "$HOME/.vimrc" "$dotdir"
 cp "$HOME/.tmux.conf" "$dotdir"
 cp "$HOME/.shell_aliases_functions.sh" "$dotdir"
@@ -145,7 +150,7 @@ cp "$HOME/.zshrc" "$dotdir"
 prettyPrint "Copying scripts to $websiteDir"
 rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
-    mkdir -P "$websiteDir/downloads/scripts"
+    mkdir -p "$websiteDir/downloads/scripts"
 fi
 
 cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$websiteDir/downloads/scripts"
