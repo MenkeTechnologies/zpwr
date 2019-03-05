@@ -761,6 +761,16 @@ intoFzf(){
     zle .accept-line
 }
 
+fzvim(){
+    \grep '^>' ~/.viminfo | cut -c3- | sed 's@~@'"$HOME"'@'| fzf -m --border --prompt='-->>> ' --preview '[[ -f {} ]] && '"$COLORIZER"' {} '"$COLORIZER_NL"' 2>/dev/null || stat {} | fold -80 | head -500' \
+        | perl -pe 's@^(.*)$@"$1"@;s@\s+@ @g'
+}
+vimFzf(){
+    zle .kill-whole-line
+    LBUFFER="vim $(fzvim)"
+    zle .accept-line
+}
+
 intoFzfAg(){
     mywords=("${(z)BUFFER}")
 
@@ -793,6 +803,7 @@ zle -N updater
 zle -N runner
 zle -N intoFzf
 zle -N intoFzfAg
+zle -N vimFzf
 zle -N getrcWidget
 zle -N clearLine
 zle -N deleteLastWord
@@ -840,14 +851,17 @@ bindkey -M vicmd '^F^D' intoFzf
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
 
+bindkey -M viins '^V^V' vimFzf
+bindkey -M vicmd '^V^V' vimFzf
+
 bindkey -M viins '^Q' lastWordDouble
 bindkey -M vicmd '^Q' lastWordDouble
 
 bindkey -M viins '^V^Z' fzf-history-widget
 bindkey -M vicmd '^V^Z' fzf-history-widget
 
-bindkey -M viins '^V^V' fzf-cd-widget
-bindkey -M vicmd '^V^V' fzf-cd-widget
+bindkey -M viins '^V^F' fzf-cd-widget
+bindkey -M vicmd '^V^F' fzf-cd-widget
 #completion trigger plus tab, defaults to ~~
 export FZF_COMPLETION_TRIGGER=';'
 
