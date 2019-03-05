@@ -763,7 +763,7 @@ intoFzf(){
 
 fzvim(){
     \grep '^>' ~/.viminfo | cut -c3- | sed 's@~@'"$HOME"'@'| \
-        perl -lne'if($.==1){$first=$_;}elsif($.==2){print $_; print $first}else{print $_}' | \
+        perl -lne'if($.==1){$first=$_;}elsif($.==2){print $_ if -f;  print $first if -f $first}else{print $_ if -f}' | \
         fzf -m --border --prompt='-->>> ' --preview '[[ -f {} ]] && '"$COLORIZER"' {} '"$COLORIZER_NL"' 2>/dev/null || stat {} | fold -80 | head -500' \
         | perl -pe 's@^(.*)$@"$1"@;s@\s+@ @g'
 }
