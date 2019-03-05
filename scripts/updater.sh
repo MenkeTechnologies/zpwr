@@ -115,7 +115,7 @@ if [[ $skip != true ]]; then
     }
 
     OS_TYPE="$(uname -s)"
-    if [[ "$OS_TYPE" == mac ]]; then
+    if [[ "$OS_TYPE" == Darwin ]]; then
         needSudo=no
     elif [[ "$OS_TYPE" == Linux ]];then
         distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
