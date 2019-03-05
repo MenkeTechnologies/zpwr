@@ -1949,6 +1949,16 @@ fzf_setup(){
 fzf_setup
 
 # echo $; <tab>
+_fzf_complete_mvim() {
+  _fzf_complete '-m' "$@" < <(
+     \grep '^>' ~/.viminfo|cut -c3-|sed 's@~@'"$HOME"'@'
+    )
+}
+_fzf_complete_vim() {
+  _fzf_complete '-m' "$@" < <(
+     \grep '^>' ~/.viminfo|cut -c3-|sed 's@~@'"$HOME"'@'
+    )
+}
 _fzf_complete_echo() {
   _fzf_complete '-m' "$@" < <(
       declare -xp | sed 's@=.*@@' | sed 's@.* @@'
