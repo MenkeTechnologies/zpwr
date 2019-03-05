@@ -113,22 +113,50 @@ if [[ $skip != true ]]; then
         fi
         perl -le "print '_'x$width" | lolcat
     }
+
+    OS_TYPE="$(uname -s)"
+    if [[ "$OS_TYPE" == mac ]]; then
+        needSudo=no
+    elif [[ "$OS_TYPE" == Linux ]];then
+        distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
+        case "$distroName" in
+        (fedora|debian|centos)
+            needSudo=yes
+            ;;
+        (*)
+            needSudo=no
+            ;;
+        esac
+    else
+        needSudo=yes
+    fi
+
+
     #python 3.6
     exists pip3 && {
         prettyPrint "Updating Python3.6 Packages"
         #pip lists outdated programs and get first column with awk
         #store in outdated
-        outdated=$(pip3 list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+        outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
         #install outdated pip modules
         #split on space
-        for i in $outdated; do
-            pip3 install --upgrade -- "$i" #&> /dev/null
-        done
+        if [[ "$needSudo" == yes ]]; then
+            for i in $outdated; do
+                sudo python3 -m pip install --upgrade -- "$i" #&> /dev/null
+            done
+            prettyPrint "Updating Pip3"
+            #update pip itself
+            sudo python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+        else
+            for i in $outdated; do
+                python3 -m pip install --upgrade -- "$i" #&> /dev/null
+            done
+            prettyPrint "Updating Pip3"
+            #update pip itself
+            python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+        fi
 
-        prettyPrint "Updating Pip3"
-        #update pip itself
-        pip3 install --upgrade pip setuptools wheel #&> /dev/null
     }
 
     #python 2.7 (non system)
@@ -136,17 +164,23 @@ if [[ $skip != true ]]; then
         prettyPrint "Updating Python2.7 Packages"
         #pip lists outdated programs and get first column with awk
         #store in outdated
-        outdated=$(pip2 list --outdated --format=columns | sed -n '3,$p'| awk '{print $1}')
+        outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p'| awk '{print $1}')
 
-        #install outdated pip modules
-        #split on space
-        for i in $outdated; do
-            pip2 install --upgrade -- "$i" #&> /dev/null
-        done
-
-        #update pip itself
-        prettyPrint "Updating Pip2"
-        pip2 install --upgrade pip setuptools wheel #&> /dev/null
+        if [[ "$needSudo" == yes ]]; then
+            for i in $outdated; do
+                sudo python2 -m pip install --upgrade -- "$i" #&> /dev/null
+            done
+            prettyPrint "Updating Pip2"
+            #update pip itself
+            sudo python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+        else
+            for i in $outdated; do
+                python2 -m pip install --upgrade -- "$i" #&> /dev/null
+            done
+            prettyPrint "Updating Pip2"
+            #update pip itself
+            python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+        fi
     }
 
     exists /usr/local/bin/ruby && {
