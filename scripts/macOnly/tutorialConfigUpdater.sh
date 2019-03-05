@@ -148,7 +148,7 @@ if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -P "$websiteDir/downloads/scripts"
 fi
 
-cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$wesbsiteDir/downloads/scripts"
+cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$websiteDir/downloads/scripts"
 cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
