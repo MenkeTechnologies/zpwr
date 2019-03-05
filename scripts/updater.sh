@@ -275,4 +275,4 @@ fi
 #decolorize prompt
 echo -e "Done\e[0m"
 
-clearList
+exists clearList && clearList
