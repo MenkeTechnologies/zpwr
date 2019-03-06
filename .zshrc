@@ -2080,7 +2080,15 @@ _cl(){
         'files:filenames:_files'
 }
 
+_myz(){
+    _alternative \
+        '_z:z dirs:('"$(_z |& awk '{print $2}')"')' \
+        'files:filenames:_files'
+}
+
 compdef _cl clearList
+
+compdef _myz z
 
 # Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
