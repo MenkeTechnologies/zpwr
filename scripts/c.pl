@@ -27,16 +27,16 @@ $PYGMENTIZE_COLOR=~ s/(\$\w+)/$1/eeg;
 select $less;
 for (@ARGV) {
     if (! -d $_) {
-        if (`file $_` =~ /text/) {
+        if (`file "$_"` =~ /text/) {
             if ($colorizer=~ "pygmentize") {
                 if ($exe_exists) {
-                    print "\x1b[4;1m$_\x1b[0m\n".`$colorizer $_ | cat -n`."\n";
+                    print "\x1b[4;1m$_\x1b[0m\n".`$colorizer "$_" | cat -n`."\n";
                 } else {
                     print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
                 }
             } else {
                 if ($exe_bat_exists) {
-                    print "\x1b[4;1m$_\x1b[0m\n".`$colorizer $_`."\n";
+                    print "\x1b[4;1m$_\x1b[0m\n".`$colorizer "$_"`."\n";
                 } else {
                     print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
                 }

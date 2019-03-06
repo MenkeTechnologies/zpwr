@@ -1256,7 +1256,7 @@ c(){
                                 if (( $# > 1)); then
                                     printf "\x1b[34;1;4m$file\x1b[0m\n"
                                 fi
-                                eval "$COLORIZER $file $COLORIZER_NL"
+                                eval "$COLORIZER \"$file\" $COLORIZER_NL"
                             fi
                         done
                 } || cat -n "$@"
@@ -1270,7 +1270,7 @@ c(){
                             if (( $# > 1)); then
                                 printf "\x1b[34;1;4m$file\x1b[0m\n"
                             fi
-                            eval "$COLORIZER $file $COLORIZER_NL"
+                            eval "$COLORIZER \"$file\" $COLORIZER_NL"
                         fi
                 done
             } || cat -n "$@"
