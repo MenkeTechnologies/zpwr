@@ -373,7 +373,27 @@ dbz() {
     zle .accept-line
 }
 
+myexpandalias(){
+    firstword="$1"
+    lastword="$2"
+    if [[ "$__EXPAND_SECOND_POSITION" == true ]]; then
+        if ! alias -r -- $lastword| command egrep -q '(grc|_z|cd|hub)';then
+            __EXPAND=true
+            line="$(alias -r -- $lastword | awk -F= '{print $2}')"
+            #get rid of single quotes
+            line=${line:1:-1}
+            if [[ ! -z $line ]] && \
+                echo "$firstword" | grep -qE '(sudo)';then
+                print "$line" | fgrep "'" || {
+                    LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$line@")"
+                }
+            fi
+        fi
+    fi
+}
+
 __EXPAND=true
+__EXPAND_SECOND_POSITION=true
 expand-aliases() {
     __EXPAND=true
     #set -x
@@ -1590,6 +1610,7 @@ supernatural-space() {
                 }
             }
     else
+        firstWord=${mywords[1]}
 		lastWord=${mywords[-1]}
         #DNS lookups
         if [[ ! -f "$lastWord" ]]; then
@@ -1620,18 +1641,22 @@ supernatural-space() {
         else
             #its a file
         fi
-
         {
-            alias -g | grep -q "^$lastWord" || {
+            if alias -r | grep -q "^$lastWord";then
+                #regular alias expansion
+                if (( $#mywords == 2 )); then
+                    myexpandalias "$firstWord" "$lastWord"
+                fi
+            elif alias -g | grep -q "^$lastWord";then
                 #global alias expansion
                 [[ $CURSOR == $#BUFFER ]] && \
                 [[ $LBUFFER[-1] != '"' ]] && \
                 zle expand-word
-            }
-        } &> /dev/null
-        expand-aliases "$lastWord"
-    fi
+                expand-aliases "$lastWord"
+            fi
+        } &> "$LOGFILE"
 
+    fi
 
     zle expand-history
 
