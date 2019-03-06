@@ -804,6 +804,8 @@ vimFzfSudo(){
     mywords=("${(z)BUFFER}")
     if (( $#mywords == 2 )); then
         zle .kill-whole-line
+    else
+        zle .accept-line
     fi
 }
 
