@@ -794,6 +794,8 @@ vimFzf(){
     mywords=("${(z)BUFFER}")
     if (( $#mywords == 1 )); then
         zle .kill-whole-line
+    else
+        zle .accept-line
     fi
 }
 vimFzfSudo(){
