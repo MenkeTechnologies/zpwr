@@ -373,7 +373,7 @@ dbz() {
     zle .accept-line
 }
 
-myexpandalias(){
+expandRegularAlias(){
     firstWord="$1"
     lastWord="$2"
     if [[ "$__EXPAND_SECOND_POSITION" == true ]]; then
@@ -393,7 +393,7 @@ myexpandalias(){
 
 __EXPAND=true
 __EXPAND_SECOND_POSITION=true
-expand-aliases() {
+expandGlobalAliases() {
     __EXPAND=true
     #set -x
     if (( $CURSOR != $#BUFFER )); then
@@ -409,6 +409,7 @@ expand-aliases() {
             zle _expand_alias
         fi
     elif [[ $LBUFFER[-1] == " " ]]; then
+        #special case from menuselect
         BUFFER="${BUFFER:0:-1}"
         zle _expand_alias
         #BUFFER="$BUFFER "
@@ -424,7 +425,7 @@ expand-aliases() {
         #CURSOR=$#BUFFER
     else
             alias -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
-                #dont expand first word if \,' or "
+                #dont expandGlobalAirst word if \,' or "
                 #[[ -z alias -g -- $LBUFFER) ]] && {
                 true && {
                     #[[ ${LBUFFER:0:1} != '\' ]] && \
@@ -446,7 +447,7 @@ expand-aliases() {
                         #&& CURSOR=$#BUFFER
                         alias -g | grep -q "^$1" || {
                             [[ $LBUFFER[-1] != '"' ]] && \
-                            zle expand-word
+                            zle expandGlobalAliases
                         }
                     } &> /dev/null
                 }
@@ -940,9 +941,9 @@ bindkey -M viins '\e[5~' clipboard
 bindkey -M viins '^B' clipboard
 bindkey -M vicmd '^B' clipboard
 
-zle -N expand-aliases
+zle -N expandGlobalAliases
 
-bindkey '\e^E' expand-aliases
+bindkey '\e^E' expandGlobalAliases
 
 zle -N gitFunc
 zle -N gitFuncNoCheck
@@ -1606,17 +1607,19 @@ set +x
 
     if (( $#mywords == 1 )); then
         [[ ${LBUFFER:0:1} != '=' ]] && {
-            alias -r -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
+            if alias -r -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)';then
+                __EXPAND=true
+            else
                 #dont expand first word if \,' or "
                     #[[ -z $(alias -g -- $LBUFFER) ]] && {
                     true && {
                         [[ ${LBUFFER:0:1} != '\' ]] && \
                         [[ ${LBUFFER:0:1} != "'" ]] && \
                         [[ ${LBUFFER:0:1} != '"' ]] && \
-                        { expand-aliases "$LBUFFER"; }
+                        { expandGlobalAliases "$LBUFFER"; }
                     }
-                }
-            }
+            fi
+        }
     else
         firstWord=${mywords[1]}
 		lastWord=${mywords[-1]}
@@ -1654,7 +1657,7 @@ set +x
                 #regular alias expansion
                 if (( $#mywords == 2 )); then
                     if echo "$firstWord" | grep -qE '(sudo)';then
-                        myexpandalias "$firstWord" "$lastWord"
+                        expandRegularAlias "$firstWord" "$lastWord"
                     fi
                 fi
             elif alias -g | awk -F= '{print $1}' | \grep -q -- "^$lastWord\$";then
@@ -1662,7 +1665,7 @@ set +x
                 [[ $CURSOR == $#BUFFER ]] && \
                 [[ $LBUFFER[-1] != '"' ]] && \
                 zle expand-word
-                expand-aliases "$lastWord"
+                expandGlobalAliases "$lastWord"
             fi
         } &> "$LOGFILE"
 
