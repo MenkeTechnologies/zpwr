@@ -1655,6 +1655,7 @@ set +x
         else
             #its a file
         fi
+        zle _expand_alias
         {
             if alias -r | awk -F= '{print $1}'| \grep -q -- "^$lastWord\$";then
                 #regular alias expansion
