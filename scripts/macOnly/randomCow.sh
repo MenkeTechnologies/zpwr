@@ -10,22 +10,32 @@
 (( $# == 0 )) && echo "need an arg " >&2 && exit 1
 
 COWSAY_DIR=/usr/local/lib/node_modules/cowsay/cows
+
 width=$1
 FILTER="$2"
 
-for file in $(find "$COWSAY_DIR" -iname "*.cow"); do
-    ary+=( $file )
-done
+if [[ -d "$COWSAY_DIR" ]]; then
+    for file in $(find "$COWSAY_DIR" -iname "*.cow"); do
+        ary+=( $file )
+    done
 
-rangePossibleIndices=${#ary[*]}
+    rangePossibleIndices=${#ary[*]}
 
-randIndex=$(($RANDOM % $rangePossibleIndices))
-font=${ary[$randIndex]}
+    randIndex=$(($RANDOM % $rangePossibleIndices))
+    font=${ary[$randIndex]}
 
-if (( $# == 1 )); then
-    cat | cowsay -f "$font" -W$width
-elif (( $# == 2 ));then
-    cat | cowsay -f "$font" -W$width | "$FILTER"
+    if (( $# == 1 )); then
+        cat | cowsay -f "$font" -W$width
+    elif (( $# == 2 ));then
+        cat | cowsay -f "$font" -W$width | "$FILTER"
+    fi
+else
+    if (( $# == 1 )); then
+        cat | cowsay -W$width
+    elif (( $# == 2 ));then
+        cat | cowsay -W$width | "$FILTER"
+    fi
+
 
 fi
 
