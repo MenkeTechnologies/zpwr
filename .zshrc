@@ -1298,6 +1298,9 @@ setopt cbases
 
 #any failing command in pipeline fails entire pipeline
 setopt pipefail
+
+# increase max size for directory stack
+export DIRSTACKSIZE=20
 #}}}***********************************************************
 
 #{{{                    MARK:AutoCompletions
