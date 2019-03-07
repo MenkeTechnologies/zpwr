@@ -2082,7 +2082,7 @@ _cl(){
 
 _myz(){
     _alternative \
-        '_z:z dirs:('"$(_z |& awk '{print $2}')"')' \
+        'dirs:command:(('"$(_z |& awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
         'files:filenames:_files'
 }
 
