@@ -373,7 +373,8 @@ dbz() {
     zle .accept-line
 }
 
-expandRegularAlias(){
+__EXPAND_SECOND_POSITION=true
+expandRegularAliasAfterKeyword(){
     firstWord="$1"
     lastWord="$2"
     if [[ "$__EXPAND_SECOND_POSITION" == true ]]; then
@@ -383,6 +384,9 @@ expandRegularAlias(){
                 #get rid of single quotes
                 if [[ ! -z $line ]];then
                     line=${line:1:-1}
+                    [[ ${lastWord:0:1} != '\' ]] && \
+                    [[ ${lastWord:0:1} != "'" ]] && \
+                    [[ ${lastWord:0:1} != '"' ]] && \
                     print "$line" | fgrep "'" || {
                         LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastWord\$@$line@")"
                     }
@@ -392,7 +396,6 @@ expandRegularAlias(){
 }
 
 __EXPAND=true
-__EXPAND_SECOND_POSITION=true
 expandGlobalAliases() {
     __EXPAND=true
     #set -x
@@ -1657,7 +1660,7 @@ set +x
                 #regular alias expansion
                 if (( $#mywords == 2 )); then
                     if echo "$firstWord" | grep -qE '(sudo)';then
-                        expandRegularAlias "$firstWord" "$lastWord"
+                        expandRegularAliasAfterKeyword "$firstWord" "$lastWord"
                     fi
                 fi
             elif alias -g | awk -F= '{print $1}' | \grep -q -- "^$lastWord\$";then
