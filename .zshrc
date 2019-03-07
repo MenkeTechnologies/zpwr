@@ -381,9 +381,9 @@ myexpandalias(){
             __EXPAND=true
             line="$(alias -r -- $lastword | awk -F= '{print $2}')"
             #get rid of single quotes
-            line=${line:1:-1}
             if [[ ! -z $line ]] && \
                 echo "$firstword" | grep -qE '(sudo)';then
+                line=${line:1:-1}
                 print "$line" | fgrep "'" || {
                     LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$line@")"
                 }
@@ -1503,6 +1503,7 @@ supernatural-space() {
     __CORRECT_WORDS[and]="adn nad"
     __CORRECT_WORDS[are]="aer rea"
     __CORRECT_WORDS[array]="ary arr"
+    __CORRECT_WORDS[automatically]="auto"
     __CORRECT_WORDS[back]="bkac bakc abck"
     __CORRECT_WORDS[bad]="bda abd"
     __CORRECT_WORDS[based]="baesd absed"
