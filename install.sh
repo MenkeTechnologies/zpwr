@@ -17,7 +17,7 @@ INSTALLER_DIR="$(pwd -P)"
 
 
 export COLUMNS="$(tput cols)"
-source common.sh || { echo "Must be in customTerminalInstaller directory" >&2 && exit 1; }
+source common.sh || { echo "Must be in customTerminalInstaller directory" >&2; exit 1; }
 
 logfile="$INSTALLER_DIR/escaped_logfile.txt"
 
@@ -486,7 +486,7 @@ else
             prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
         fi
     else
-        prettyPrint "Your OS $OS_TYPE is unsupported!" >&2 && exit 1
+        prettyPrint "Your OS $OS_TYPE is unsupported!" >&2; exit 1
     fi
 
 fi
@@ -783,7 +783,7 @@ refresh "$distroFamily"
 
 #{{{                    MARK:Final
 #**************************************************************
-cd "$INSTALLER_DIR/.." || { echo "what happened to $INSTALLER_DIR ?" >&2 && exit 1; }
+cd "$INSTALLER_DIR/.." || { echo "what happened to $INSTALLER_DIR ?" >&2; exit 1; }
 
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
 
