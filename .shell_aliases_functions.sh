@@ -604,13 +604,8 @@ clearList() {
                 } || {
                     #path matching, not exe
                     prettyPrint "$arg"
-                    if [[ ! -d "$arg" ]]; then
-                        eval "$ls_command \"$arg\"" \
-                            || return 1
-                    else
-                        eval "$ls_command -d \"$arg\"" \
-                            || return 1
-                    fi
+                    eval "$ls_command -d \"$arg\"" \
+                            || { echo; continue; }
                     echo
                     prettyPrint "FILE TYPE:"
                     file "$arg"
