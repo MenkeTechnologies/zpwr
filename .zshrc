@@ -2084,7 +2084,7 @@ _cl(){
         'builtins:builtins:('"$(enable) $(disable)"')' \
         'functions:functions:('"echo ${(k)functions}"')' \
         'commands:commands:('"echo ${(k)commands}"')' \
-        'files:filenames:_files'
+        'files:filenames:_path_files -g "* .*"'
 }
 
 _myz(){
