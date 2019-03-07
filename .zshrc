@@ -374,20 +374,19 @@ dbz() {
 }
 
 myexpandalias(){
-    firstword="$1"
-    lastword="$2"
+    firstWord="$1"
+    lastWord="$2"
     if [[ "$__EXPAND_SECOND_POSITION" == true ]]; then
-        if ! alias -r -- $lastword| command egrep -q '(grc|_z|cd|hub)';then
-            __EXPAND=true
-            line="$(alias -r -- $lastword | awk -F= '{print $2}')"
-            #get rid of single quotes
-            if [[ ! -z $line ]] && \
-                echo "$firstword" | grep -qE '(sudo)';then
-                line=${line:1:-1}
-                print "$line" | fgrep "'" || {
-                    LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$line@")"
-                }
-            fi
+        if ! alias -r -- $lastWord | command egrep -q '(grc|_z|cd|hub)';then
+                __EXPAND=true
+                line="$(alias -r -- $lastWord | awk -F= '{print $2}')"
+                #get rid of single quotes
+                if [[ ! -z $line ]];then
+                    line=${line:1:-1}
+                    print "$line" | fgrep "'" || {
+                        LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastWord\$@$line@")"
+                    }
+                fi
         fi
     fi
 }
@@ -398,7 +397,7 @@ expand-aliases() {
     __EXPAND=true
     #set -x
     if (( $CURSOR != $#BUFFER )); then
-        if alias -g | grep -q "^$1";then
+        if alias -g | awk -F= '{print $1}' | fgrep -q -- "$1";then
             zle _expand_alias
             lenToFirstTS=${#BUFFER%%$__TS*}
             if (( $lenToFirstTS < ${#BUFFER} )); then
@@ -1495,6 +1494,7 @@ globalAliasesInit(){
 globalAliasesInit
 
 supernatural-space() {
+set +x
     local __CORRECT_WORDS
     declare -A __CORRECT_WORDS
     __CORRECT_WORDS[about]="aobut"
@@ -1606,7 +1606,7 @@ supernatural-space() {
 
     if (( $#mywords == 1 )); then
         [[ ${LBUFFER:0:1} != '=' ]] && {
-            alias -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
+            alias -r -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
                 #dont expand first word if \,' or "
                     #[[ -z $(alias -g -- $LBUFFER) ]] && {
                     true && {
@@ -1650,12 +1650,14 @@ supernatural-space() {
             #its a file
         fi
         {
-            if alias -r | grep -q "^$lastWord";then
+            if alias -r | awk -F= '{print $1}'| \grep -q -- "^$lastWord\$";then
                 #regular alias expansion
                 if (( $#mywords == 2 )); then
-                    myexpandalias "$firstWord" "$lastWord"
+                    if echo "$firstWord" | grep -qE '(sudo)';then
+                        myexpandalias "$firstWord" "$lastWord"
+                    fi
                 fi
-            elif alias -g | grep -q "^$lastWord";then
+            elif alias -g | awk -F= '{print $1}' | \grep -q -- "^$lastWord\$";then
                 #global alias expansion
                 [[ $CURSOR == $#BUFFER ]] && \
                 [[ $LBUFFER[-1] != '"' ]] && \
@@ -1671,6 +1673,7 @@ supernatural-space() {
     if [[ $__EXPAND == true ]];then
         zle self-insert
     fi
+    set +x
 }
 
 terminate-space(){
