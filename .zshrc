@@ -450,7 +450,7 @@ expandGlobalAliases() {
                         #&& CURSOR=$#BUFFER
                         alias -g | grep -q "^$1" || {
                             [[ $LBUFFER[-1] != '"' ]] && \
-                            zle expandGlobalAliases
+                            zle _expand_alias
                         }
                     } &> /dev/null
                 }
@@ -1674,8 +1674,10 @@ set +x
 
     fi
 
-    zle expand-history
+    #expand globs and parameters
+    zle expand-word
 
+    #insert the space char
     if [[ $__EXPAND == true ]];then
         zle self-insert
     fi
