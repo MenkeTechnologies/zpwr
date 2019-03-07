@@ -25,9 +25,9 @@ if [[ -d "$COWSAY_DIR" ]]; then
     font=${ary[$randIndex]}
 
     if (( $# == 1 )); then
-        cat | cowsay -f "$font" -W$width
+        cat | /usr/local/lib/node_modules/cowsay/cli.js -f "$font" -W$width
     elif (( $# == 2 ));then
-        cat | cowsay -f "$font" -W$width | "$FILTER"
+        cat | /usr/local/lib/node_modules/cowsay/cli.js -f "$font" -W$width | "$FILTER"
     fi
 else
     if (( $# == 1 )); then
