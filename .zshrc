@@ -1949,18 +1949,26 @@ fzf_setup(){
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
             --reverse --border --height 100%"
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview \"if [[ -f {} ]]; then if print -r -- {} | command \
+        --preview \"if [[ -f {} ]]; then \
+            if print -r -- {} | command \
             egrep -iq '\.[jw]ar\$';then jar tf {}; \
             elif print -r -- {} | \
-            command egrep -iq '\.zip\$';then unzip -l -- {}; else \
+            command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {};
+            elif print -r -- {} | \
+            command egrep -iq '\.zip\$';then unzip -l -- {};
+            else \
         $COLORIZER_FZF 2>/dev/null; rc=$ps;[[ \$rc = 0 ]] || { stat -- {} | fold -80 | head -500; }; fi; else \
         stat {} | fold -80 | head -500; fi\""
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-            --preview  \"if [[ -f {} ]];then if print -r -- {} \
-                | command egrep -iq '\.[jw]ar\$';then \
-                    jar tf {};elif print -r -- {} | \
-              egrep -iq '\.zip\$';then unzip -l {};else \
+            --preview  \"if [[ -f {} ]];then \
+                if print -r -- {} | command \
+                egrep -iq '\.[jw]ar\$';then jar tf {}; \
+                elif print -r -- {} | \
+                command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {};
+                elif print -r -- {} | \
+                command egrep -iq '\.zip\$';then unzip -l -- {};
+                else \
               $COLORIZER_FZF 2>/dev/null; fi; else \
                     [[ -e {} ]] && stat -- {} | fold -80 | \
                     head -500 || {
@@ -1988,10 +1996,14 @@ fzf_setup(){
         fi\""
     else
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-            --preview  \"if [[ -f {} ]];then if print -r -- {} \
-                | command egrep -iq '\.[jw]ar\$';then \
-                    jar tf {};elif print -r -- {} | \
-              egrep -iq '\.zip\$';then unzip -l {};else \
+            --preview  \"if [[ -f {} ]];then \
+                if print -r -- {} | command \
+                egrep -iq '\.[jw]ar\$';then jar tf {}; \
+                elif print -r -- {} | \
+                command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {};
+                elif print -r -- {} | \
+                command egrep -iq '\.zip\$';then unzip -l -- {};
+                else \
               $COLORIZER_FZF 2>/dev/null; fi; else \
                     [[ -e {} ]] && stat -- {} | fold -80 | \
                     head -500 || {
