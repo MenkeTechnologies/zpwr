@@ -160,6 +160,11 @@ echo $SHELL | grep -q zsh && {
     alias 13='cd -13'
     alias 14='cd -14'
     alias 15='cd -15'
+    alias 16='cd -16'
+    alias 17='cd -17'
+    alias 18='cd -18'
+    alias 19='cd -19'
+    alias 19='cd -19'
 }
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
