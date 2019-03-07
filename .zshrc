@@ -2083,12 +2083,17 @@ _cl(){
 _myz(){
     _alternative \
         'dirs:command:(('"$(_z |& awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
-        'files:directory:_files -/'
+        'files:directory:_path_files -g ".*(/) *(/)"'
+}
+_f(){
+    arguments=('1:directory:_path_files -g ".*(/) *(/)"')
+    _arguments -s $arguments
 }
 
-compdef _cl clearList
 
+compdef _cl clearList
 compdef _myz z
+compdef _f f
 
 # Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
