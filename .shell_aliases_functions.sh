@@ -164,7 +164,6 @@ echo $SHELL | grep -q zsh && {
     alias 17='cd -17'
     alias 18='cd -18'
     alias 19='cd -19'
-    alias 19='cd -19'
 }
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
@@ -530,9 +529,9 @@ clearList() {
         exists exa && ls_command="$EXA_COMMAND" || {
             exists grc && {
                 ls_command="grc -c $HOME/conf.gls \
-                gls -iFlhA --color=always"
+                gls -iFlhAd --color=always"
             } || {
-                ls_command="ls -iFlhAO"
+                ls_command="ls -iFlhAOd"
             }
         }
         lib_command="otool -L"
@@ -558,8 +557,8 @@ clearList() {
         
     fi
         if [[ -n "$1" ]]; then
-            for command in "$@"; do
-                exists $command &&  {
+            for arg in "$@"; do
+                exists $arg &&  {
                     #exe matching
                     while read loc;do
                         lf="$(echo $loc|cut -d' ' -f3-10)"
@@ -593,21 +592,24 @@ clearList() {
                             echo
                             echo
                         }
-                    done < <(type -a "$command" | sort | uniq)
+                    done < <(type -a "$arg" | sort | uniq)
                 } || {
                     #path matching, not exe
-                    eval "$ls_command \"$command\"" \
-                        || return 1
+                    prettyPrint "$arg"
+                    if [[ ! -d "$arg" ]]; then
+                        eval "$ls_command \"$arg\"" \
+                            || return 1
+                    else
+                        eval "$ls_command -d \"$arg\"" \
+                            || return 1
+                    fi
                     echo
-                    prettyPrint "$command"
-                    eval "$ls_command -d \"$command\"" \
-                        || return 1
                     prettyPrint "FILE TYPE:"
-                    file "$command"
+                    file "$arg"
                     prettyPrint "SIZE:"
-                    du -sh "$command"
+                    du -sh "$arg"
                     prettyPrint "STATS:"
-                    stat "$command"
+                    stat "$arg"
                     #for readibility
                     echo
                     echo
