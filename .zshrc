@@ -2083,7 +2083,7 @@ _cl(){
 _myz(){
     _alternative \
         'dirs:command:(('"$(_z |& awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
-        'files:filenames:_files'
+        'files:directory:_files -/'
 }
 
 compdef _cl clearList
