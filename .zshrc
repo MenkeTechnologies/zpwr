@@ -414,7 +414,6 @@ expandGlobalAliases() {
     elif [[ $LBUFFER[-1] == " " ]]; then
         #special case from menuselect
         BUFFER="${BUFFER:0:-1}"
-        zle _expand_alias
         #BUFFER="$BUFFER "
         #old="${LBUFFER[1,-2]}"
         #unset 'functions[_expand-aliases]'

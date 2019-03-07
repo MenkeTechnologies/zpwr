@@ -1266,7 +1266,19 @@ c(){
                                 if (( $# > 1)); then
                                     printf "\x1b[34;1;4m$file\x1b[0m\n"
                                 fi
-                                eval "$COLORIZER \"$file\" $COLORIZER_NL"
+                               case "$file" in
+                            *.tgz|*.tar|*.tar.gz)
+                            eval "tar tf \"$file\" | $COLORIZER $COLORIZER_NL"
+                                ;;
+                            *.zip)
+                            eval "unzip -l \"$file\" | $COLORIZER $COLORIZER_NL"
+                            ;;
+                            *.jar)
+                            eval "jar tf \"$file\" | $COLORIZER $COLORIZER_NL"
+                                ;;
+                            *)
+                            eval "$COLORIZER \"$file\" $COLORIZER_NL"
+                               esac 
                             fi
                         done
                 } || cat -n "$@"
@@ -1280,7 +1292,19 @@ c(){
                             if (( $# > 1)); then
                                 printf "\x1b[34;1;4m$file\x1b[0m\n"
                             fi
+                               case "$file" in
+                            *.tgz|*.tar|*.tar.gz)
+                            eval "tar tf \"$file\" | $COLORIZER $COLORIZER_NL"
+                                ;;
+                            *.zip)
+                            eval "unzip -l \"$file\" | $COLORIZER $COLORIZER_NL"
+                            ;;
+                            *.jar)
+                            eval "jar tf \"$file\" | $COLORIZER $COLORIZER_NL"
+                                ;;
+                            *)
                             eval "$COLORIZER \"$file\" $COLORIZER_NL"
+                               esac 
                         fi
                 done
             } || cat -n "$@"
