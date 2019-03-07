@@ -1,7 +1,15 @@
 #{{{                    MARK:Global Fxn
-exists(){
-    #alternative is command -v
-    type "$1" >/dev/null 2>&1
+echo $SHELL | grep -q zsh && {
+    exists(){
+        #alternative is command -v
+        type "$1" 2>/dev/null | command grep -qv "suffix alias"
+    }
+
+} || {
+    exists(){
+        #alternative is command -v
+        type "$1" >/dev/null 2>&1
+    }
 }
 
 #}}}***********************************************************
