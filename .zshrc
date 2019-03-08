@@ -1553,44 +1553,46 @@ set +x
     #returns last word including quotes
     firstword=${mywords[1]}
     lastword=${mywords[-1]}
-    if echo "$lastword" | \fgrep -q '"'; then
-        #expand on last word of "string"
-        lastword=${lastword:gs/\"//}
-        ary=(${(z)lastword})
-        lastword=$ary[-1]
-    fi
     logg "first word = '$firstword'"
     logg "last word = '$lastword'"
 
     #dont expand =word because that is zle expand-word
     if [[ ${lastword:0:1} != '=' ]] && (( $#lastword > 0 ));then
-            if alias -r -- $lastword | \
-                command egrep -qv '(grc|_z|cd|hub)';then
-                #regular alias expansion
-                logg regular
-                if (( $#mywords == 2 )); then
-                    if [[ $__EXPAND_SECOND_POSITION == true ]]; then
-                        if echo "$firstword" | grep -qE '(sudo)';then
-                            res="$(alias -r $lastword | cut -d= -f2-)"
-                            res=${(Q)res}
-                    LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
-                        fi
+        if alias -r -- $lastword | \
+            command egrep -qv '(grc|_z|cd|hub)';then
+            #regular alias expansion
+            logg "regular=>'$lastword'"
+            if (( $#mywords == 2 )); then
+                if [[ $__EXPAND_SECOND_POSITION == true ]]; then
+                    if echo "$firstword" | grep -qE '(sudo)';then
+                        res="$(alias -r $lastword | cut -d= -f2-)"
+                        res=${(Q)res}
+                LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
                     fi
-                elif (( $#mywords == 1 )); then
-                    res="$(alias -r $lastword | cut -d= -f2-)"
-                    res=${(Q)res}
-                    #extra \s for menuselect spacebar
-                    if [[ ${LBUFFER: -1} == " " ]]; then
-                        LBUFFER="${LBUFFER:0:-1}"
-                    fi
-                    zle _expand_alias
                 fi
-                __EXPAND=true
-            elif alias -g -- $lastword &>/dev/null;then
+            elif (( $#mywords == 1 )); then
+                res="$(alias -r $lastword | cut -d= -f2-)"
+                res=${(Q)res}
+                #extra \s for menuselect spacebar
+                if [[ ${LBUFFER: -1} == " " ]]; then
+                    LBUFFER="${LBUFFER:0:-1}"
+                fi
+                zle _expand_alias
+            fi
+            __EXPAND=true
+        else
+            if echo "$lastword" | \fgrep -q '"'; then
+                #expand on last word of "string"
+                lastword=${lastword:gs/\"//}
+                ary=(${(z)lastword})
+                lastword=$ary[-1]
+            fi
+            if alias -g -- $lastword | grep -q "." &>/dev/null;then
                 #global alias expansion
-                logg global
+                logg "global=>'$lastword'"
                 expandGlobalAliases "$lastword"
             fi
+        fi
         if [[ ! -f "$lastword" ]]; then
             :
             #DNS lookups
