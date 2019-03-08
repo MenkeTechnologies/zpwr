@@ -1607,6 +1607,12 @@ set +x
         [[ $finished == true ]] && break
     done
 
+    left=${LBUFFER##*;}
+    right=${RBUFFER%%;*}
+    partitioned="$left$right"
+    mywords=("${(z)partitioned}")
+    logg "partion ==== $partitioned"
+
     if (( $#mywords == 1 )); then
         [[ ${LBUFFER:0:1} != '=' ]] && {
             if alias -r -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)';then
@@ -1623,6 +1629,7 @@ set +x
             fi
         }
     else
+        #partition from start of line to semicolon to end of line
         firstWord=${mywords[1]}
 		lastWord=${mywords[-1]}
         #DNS lookups
