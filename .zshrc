@@ -1588,17 +1588,13 @@ set +x
                     if [[ $__EXPAND_SECOND_POSITION == true ]]; then
                         if echo "$firstword" | grep -qE '(sudo)';then
                             res="$(alias -r $lastword | cut -d= -f2-)"
-                            if [[ ${res:0:1} == "'" ]]; then
-                                res=${(Q)res}
-                            fi
+                            res=${(Q)res}
                     LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
                         fi
                     fi
                 elif (( $#mywords == 1 )); then
                     res="$(alias -r $lastword | cut -d= -f2-)"
-                    if [[ ${res:0:1} == "'" ]]; then
-                        res=${(Q)res}
-                    fi
+                    res=${(Q)res}
                     #extra \s for menuselect spacebar
                     if [[ ${LBUFFER: -1} == " " ]]; then
                         LBUFFER="${LBUFFER:0:-1}"
