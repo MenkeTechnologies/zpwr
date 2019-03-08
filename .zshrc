@@ -377,7 +377,7 @@ dbz() {
 expandGlobalAliases() {
     lastword="$1"
     #expand alias
-    res=${(Q)${(qqq)galiases[$lastword]:gs@\\@\\\\@}}
+    res=${(Q)${(qqq)galiases[$lastword]:gs@\\@\\\\@}:gs@$@\\$@}
     LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
     zle _expand_alias
     lenToFirstTS=${#BUFFER%%$__TS*}
