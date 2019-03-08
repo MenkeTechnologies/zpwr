@@ -11,6 +11,7 @@ export ZSH=$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 MYPROMPT=POWERLEVEL
+__EXPAND_SECOND_POSITION=true
 
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 
@@ -373,28 +374,6 @@ dbz() {
     zle .accept-line
 }
 
-__EXPAND_SECOND_POSITION=true
-expandRegularAliasAfterKeyword(){
-    firstWord="$1"
-    lastWord="$2"
-    if [[ "$__EXPAND_SECOND_POSITION" == true ]]; then
-        if ! alias -r -- $lastWord | command egrep -q '(grc|_z|cd|hub)';then
-                __EXPAND=true
-                line="$(alias -r -- $lastWord | awk -F= '{print $2}')"
-                #get rid of single quotes
-                if [[ ! -z $line ]];then
-                    line=${line:1:-1}
-                    [[ ${lastWord:0:1} != '\' ]] && \
-                    [[ ${lastWord:0:1} != "'" ]] && \
-                    [[ ${lastWord:0:1} != '"' ]] && \
-                    print "$line" | fgrep "'" || {
-                        LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastWord\$@$line@")"
-                    }
-                fi
-        fi
-    fi
-}
-
 __EXPAND=true
 expandGlobalAliases() {
     __EXPAND=true
@@ -411,28 +390,8 @@ expandGlobalAliases() {
         else
             zle _expand_alias
         fi
-    elif [[ $LBUFFER[-1] == " " ]]; then
-        #special case from menuselect
-        BUFFER="${BUFFER:0:-1}"
-        #BUFFER="$BUFFER "
-        #old="${LBUFFER[1,-2]}"
-        #unset 'functions[_expand-aliases]'
-        #functions[_expand-aliases]=$BUFFER
-        #(($+functions[_expand-aliases])) && \
-        #BUFFER=${functions[_expand-aliases]#$'\t'} && \
-        #mywords=("${(z)BUFFER}")
-        #if [[ $mywords[1] == "$old" ]]; then
-        #    BUFFER="\\$BUFFER"
-        #fi
-        #CURSOR=$#BUFFER
     else
             alias -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)' || {
-                #dont expandGlobalAirst word if \,' or "
-                #[[ -z alias -g -- $LBUFFER) ]] && {
-                true && {
-                    #[[ ${LBUFFER:0:1} != '\' ]] && \
-                    #[[ ${LBUFFER:0:1} != "'" ]] && \
-                    #[[ ${LBUFFER:0:1} != '"' ]] && \
                     {
                         zle _expand_alias
                         lenToFirstTS=${#BUFFER%%$__TS*}
@@ -442,17 +401,11 @@ expandGlobalAliases() {
                             RBUFFER=${RBUFFER:$#__TS}
                         fi
                      
-                        #unset 'functions[_expand-aliases]'
-                        #functions[_expand-aliases]=$BUFFER
-                        #(($+functions[_expand-aliases])) &&
-                #BUFFER=${functions[_expand-aliases]#$'\t'} \
-                        #&& CURSOR=$#BUFFER
                         alias -g | grep -q "^$1" || {
                             [[ $LBUFFER[-1] != '"' ]] && \
                             zle _expand_alias
                         }
                     } &> /dev/null
-                }
             }
 
     fi
@@ -1607,33 +1560,60 @@ set +x
         [[ $finished == true ]] && break
     done
 
+    #get content bt ;;
     left=${LBUFFER##*;}
     right=${RBUFFER%%;*}
     partitioned="$left$right"
     mywords=("${(z)partitioned}")
-    logg "partion ==== $partitioned"
+    logg "partition == '${mywords[@]}'"
+    #returns last word including quotes
+    firstword=${mywords[1]}
+    lastword=${mywords[-1]}
+    if echo "$lastword" | \fgrep -q '"'; then
+        #expand on last word of "string"
+        lastword=${lastword:gs/\"//}
+        ary=(${(z)lastword})
+        lastword=$ary[-1]
+    fi
+    logg "first word = '$firstword'"
+    logg "last word = '$lastword'"
 
-    if (( $#mywords == 1 )); then
-        [[ ${LBUFFER:0:1} != '=' ]] && {
-            if alias -r -- $LBUFFER | command egrep -q '(grc|_z|cd|hub)';then
+    #dont expand =word because that is zle expand-word
+    if [[ ${lastword:0:1} != '=' ]] && (( $#lastword > 0 ));then
+            if alias -r -- $lastword | \
+                command egrep -qv '(grc|_z|cd|hub)';then
+                #regular alias expansion
+                logg regular
+                if (( $#mywords == 2 )); then
+                    if [[ $__EXPAND_SECOND_POSITION == true ]]; then
+                        if echo "$firstword" | grep -qE '(sudo)';then
+                            res="$(alias -r $lastword | cut -d= -f2-)"
+                            if [[ ${res:0:1} == "'" ]]; then
+                                res=${(Q)res}
+                            fi
+                    LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+                        fi
+                    fi
+                elif (( $#mywords == 1 )); then
+                    res="$(alias -r $lastword | cut -d= -f2-)"
+                    if [[ ${res:0:1} == "'" ]]; then
+                        res=${(Q)res}
+                    fi
+                    #extra \s for menuselect spacebar
+                    if [[ ${LBUFFER: -1} == " " ]]; then
+                        LBUFFER="${LBUFFER:0:-1}"
+                    fi
+                    zle _expand_alias
+                fi
                 __EXPAND=true
-            else
-                #dont expand first word if \,' or "
-                    #[[ -z $(alias -g -- $LBUFFER) ]] && {
-                    true && {
-                        [[ ${LBUFFER:0:1} != '\' ]] && \
-                        [[ ${LBUFFER:0:1} != "'" ]] && \
-                        [[ ${LBUFFER:0:1} != '"' ]] && \
-                        { expandGlobalAliases "$LBUFFER"; }
-                    }
+            elif alias -g -- $lastword &>/dev/null;then
+                #global alias expansion
+                logg global
+                #expandGlobalAliases "$lastword"
             fi
-        }
-    else
-        #partition from start of line to semicolon to end of line
-        firstWord=${mywords[1]}
-		lastWord=${mywords[-1]}
-        #DNS lookups
-        if [[ ! -f "$lastWord" ]]; then
+        if [[ ! -f "$lastword" ]]; then
+            :
+            #DNS lookups
             #type -a "$lastWord" &> /dev/null || {
                 #print -r -- $lastWord | grep -qE \
                 #'^([a-z0-9]+(-[a-z0-9]+)*\.)+[a-z]{2,}\.?$'\
@@ -1657,31 +1637,12 @@ set +x
                     #}
                 #}
             #}
-           :
         else
             #its a file
         fi
-        zle _expand_alias
-        {
-            if alias -r | awk -F= '{print $1}'| \grep -q -- "^$lastWord\$";then
-                #regular alias expansion
-                if (( $#mywords == 2 )); then
-                    if echo "$firstWord" | grep -qE '(sudo)';then
-                        expandRegularAliasAfterKeyword "$firstWord" "$lastWord"
-                    fi
-                fi
-            elif alias -g | awk -F= '{print $1}' | \grep -q -- "^$lastWord\$";then
-                #global alias expansion
-                [[ $CURSOR == $#BUFFER ]] && \
-                [[ $LBUFFER[-1] != '"' ]] && \
-                zle expand-word
-                expandGlobalAliases "$lastWord"
-            fi
-        } &> "$LOGFILE"
-
     fi
 
-    #expand globs and parameters
+    #expand globs and parameters and =
     zle expand-word
 
     #insert the space char
