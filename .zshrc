@@ -1553,6 +1553,7 @@ set +x
     lastword=${mywords[-1]}
     logg "first word = '$firstword'"
     logg "last word = '$lastword'"
+    __ALIAS=false
 
     #dont expand =word because that is zle expand-word
     if [[ ${lastword:0:1} != '=' ]] && (( $#lastword > 0 ));then
@@ -1578,6 +1579,7 @@ set +x
                 zle _expand_alias
             fi
             __EXPAND=true
+            __ALIAS=true
         else
             if echo "$lastword" | \fgrep -q '"'; then
                 #expand on last word of "string"
@@ -1589,7 +1591,12 @@ set +x
                 #global alias expansion
                 logg "global=>'$lastword'"
                 expandGlobalAliases "$lastword"
+                __ALIAS=true
             fi
+        fi
+
+        if [[ $__ALIAS != true ]]; then
+            zle expand-word
         fi
         if [[ ! -f "$lastword" ]]; then
             :
@@ -1623,7 +1630,6 @@ set +x
     fi
 
     #expand globs and parameters and =
-    zle expand-word
 
     #insert the space char
     if [[ $__EXPAND == true ]];then
