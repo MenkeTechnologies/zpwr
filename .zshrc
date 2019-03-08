@@ -376,14 +376,14 @@ dbz() {
 
 expandGlobalAliases() {
     lastword="$1"
-    res="$(alias -g $lastword | cut -d= -f2-)"
+    res="${galiases[$lastword]}"
     #special cases before stripping down one level of quoting
-    res="${res//\x1b/\\x1b}"
-    res="${res//\\e/\\e}"
-    res="${res//\\b/\\b}"
-    res="${res//\\/\\\\}"
-    res=${(Q)res}
-    LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+    #res="${res//\x1b/\\x1b}"
+    #res="${res//\\e/\\e}"
+    #res="${res//\\b/\\b}"
+    #res="${res//\\/\\\\}"
+    #LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+    zle _expand_alias
     lenToFirstTS=${#BUFFER%%$__TS*}
     if (( $lenToFirstTS < ${#BUFFER} )); then
         __EXPAND=false
