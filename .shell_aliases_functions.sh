@@ -1012,6 +1012,7 @@ getOpenCommand(){
     echo "$open_cmd"
 }
 
+unalias o &>/dev/null
 o(){
     open_cmd="$(getOpenCommand)" || return 1
 
