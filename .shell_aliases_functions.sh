@@ -2,7 +2,7 @@
 echo $SHELL | grep -q zsh && {
     exists(){
         #alternative is command -v
-        type "$1" 2>/dev/null | command grep -qv "suffix alias"
+        type "$1" &>/dev/null || return 1 && type "$1" 2>/dev/null | command grep -qv "suffix alias" 2>/dev/null
     }
 
 } || {
