@@ -378,8 +378,9 @@ expandGlobalAliases() {
     lastword="$1"
     #expand alias
     res=${(Q)${(qqq)galiases[$lastword]:gs@\\@\\\\@}:gs@$@\\$@}
-    res=${res:gs|@|\\@|}
+    res=${res:gs|@|::::|}
     LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+    LBUFFER=${LBUFFER:gs|::::|@|}
     zle _expand_alias
     lenToFirstTS=${#BUFFER%%$__TS*}
     if (( $lenToFirstTS < ${#BUFFER} )); then
