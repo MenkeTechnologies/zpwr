@@ -2077,10 +2077,16 @@ _f(){
     _arguments -s $arguments
 }
 
+_c(){
+    arguments=('*:files:_path_files -g "*(^/)"')
+    _arguments -s $arguments
+}
+
 
 compdef _cl clearList
 compdef _myz z
 compdef _f f
+compdef _c c
 
 # Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
