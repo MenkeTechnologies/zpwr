@@ -1547,8 +1547,10 @@ set +x
     #get content bt ;;
     left=${LBUFFER##*;}
     right=${RBUFFER%%;*}
-    partitioned="$left$right"
-    mywords=("${(z)partitioned}")
+    left=${left##*|}
+    right=${right%%|*}
+    #only care about words left of cursor
+    mywords=("${(z)left}")
     #logg "partition == '${mywords[@]}'"
     #returns last word including quotes
     firstword=${mywords[1]}
@@ -1562,7 +1564,7 @@ set +x
         if alias -r -- $lastword | \
             command egrep -qv '(grc|_z|cd|hub)';then
             #regular alias expansion
-            logg "regular=>'$lastword'"
+            #logg "regular=>'$lastword'"
             if (( $#mywords == 2 )); then
                 if [[ $__EXPAND_SECOND_POSITION == true ]]; then
                     if echo "$firstword" | grep -qE '(sudo)';then
@@ -1591,7 +1593,7 @@ set +x
             fi
             if alias -g -- $lastword | grep -q "." &>/dev/null;then
                 #global alias expansion
-                logg "global=>'$lastword'"
+                #logg "global=>'$lastword'"
                 expandGlobalAliases "$lastword"
                 __ALIAS=true
             fi
