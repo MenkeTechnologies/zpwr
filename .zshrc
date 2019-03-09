@@ -380,7 +380,7 @@ expandGlobalAliases() {
     res=${(Q)${(qqq)galiases[$lastword]:gs@\\@\\\\@}:gs@$@\\$@}
     res=${res:gs|@|::::|}
     LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
-    LBUFFER=${LBUFFER:gs|::::|@|}
+    LBUFFER=${LBUFFER:gs|::::|@|/lo}
     zle _expand_alias
     lenToFirstTS=${#BUFFER%%$__TS*}
     if (( $lenToFirstTS < ${#BUFFER} )); then
@@ -1548,12 +1548,12 @@ set +x
     right=${RBUFFER%%;*}
     partitioned="$left$right"
     mywords=("${(z)partitioned}")
-    logg "partition == '${mywords[@]}'"
+    #logg "partition == '${mywords[@]}'"
     #returns last word including quotes
     firstword=${mywords[1]}
     lastword=${mywords[-1]}
-    logg "first word = '$firstword'"
-    logg "last word = '$lastword'"
+    #logg "first word = '$firstword'"
+    #logg "last word = '$lastword'"
     __ALIAS=false
 
     #dont expand =word because that is zle expand-word
