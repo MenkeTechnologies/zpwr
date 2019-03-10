@@ -237,6 +237,9 @@ vnoremap > >gv
 
 "copy to system clipboard and move cursor to end of selection
 vnoremap <C-B> "*y`>
+"copy to tmux clipboard
+vnoremap <silent><leader>b :w !tmux set-buffer "$(cat)"<CR><CR>
+noremap <silent><leader>sudo :w !sudo tee % &>/dev/null<CR><CR><CR>
 
 "indenting and focus line at center of editor
 inoremap <silent> <C-L> <ESC>mbgg=G`bzza
