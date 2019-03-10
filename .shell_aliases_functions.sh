@@ -1461,6 +1461,7 @@ se(){
      
     else
         arg="$1"
+        # escaping for perl $ and @ sigils
         argdollar=${arg//$/\\$}
         arg=${argdollar//@/\\@}
         echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | cat -n | perl -E 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$arg"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';

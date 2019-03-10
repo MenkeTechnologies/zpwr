@@ -1334,8 +1334,6 @@ zstyle ':completion:*:*:kill:*:processes' list-colors \
 # list of completers to use
 zstyle ':completion:*' completer _expand _complete _ignored _approximate _correct
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
-# match uppercase from lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages, blue text with red punctuation
