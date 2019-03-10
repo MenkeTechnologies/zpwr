@@ -1643,7 +1643,7 @@ set +x
                 if [[ $__EXPAND_SECOND_POSITION == true ]]; then
                     if echo "$firstword" | grep -qE '(sudo)';then
                         res="$(alias -r $lastword | cut -d= -f2-)"
-                        res=${(Q)res}
+                        res=${(Q)res:gs@$@\\$@}
                 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
                     fi
                 fi
@@ -1656,7 +1656,7 @@ set +x
                     LBUFFER="${LBUFFER:0:-1}"
                 fi
                 res="$(alias -r $lastword | cut -d= -f2-)"
-                res=${(Q)res}
+                res=${(Q)res:gs@$@\\$@}
                 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
             fi
             __EXPAND=true
