@@ -55,7 +55,11 @@
 #'8888c. .+ .888888P`   
  #"88888%   `   ^"F     
    #"YP'                
+
 #
+# https://github.com/MenkeTechnologies
+# 
+
 #{{{                    MARK:Exports
 #**************************************************************
 export LC_ALL="en_US.UTF-8"
