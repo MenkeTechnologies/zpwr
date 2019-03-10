@@ -781,7 +781,7 @@ intoFzf(){
 }
 
 lsoffzf(){
-    LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | tr '[:space:]' ' ')"
+    LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"
 }
 
 fzvim(){
