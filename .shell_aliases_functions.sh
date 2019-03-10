@@ -13,6 +13,11 @@
                                           #J88"  
                                           #@%    
                                         #:"      
+
+#
+# https://github.com/MenkeTechnologies
+#
+
 #{{{                    MARK:Global Fxn
 echo $SHELL | grep -q zsh && {
     exists(){
