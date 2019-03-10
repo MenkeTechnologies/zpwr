@@ -1644,20 +1644,22 @@ set +x
                     if echo "$firstword" | grep -qE '(sudo)';then
                         res="$(alias -r $lastword | cut -d= -f2-)"
                         res=${(Q)res:gs@$@\\$@}
+                        res=${res:gs|@|::::|}
                 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+                LBUFFER=${LBUFFER:gs|::::|@|}
                     fi
                 fi
             elif (( $#mywords == 1 )); then
                 #regular alias expansion
-                res="$(alias -r $lastword | cut -d= -f2-)"
-                res=${(Q)res}
                 #remove space from menuselect spacebar
                 if [[ ${LBUFFER: -1} == " " ]]; then
                     LBUFFER="${LBUFFER:0:-1}"
                 fi
                 res="$(alias -r $lastword | cut -d= -f2-)"
                 res=${(Q)res:gs@$@\\$@}
+                res=${res:gs|@|::::|}
                 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+                LBUFFER=${LBUFFER:gs|::::|@|}
             fi
             __EXPAND=true
             __ALIAS=true
