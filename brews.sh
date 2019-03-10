@@ -1,5 +1,6 @@
 brew install aalib
 brew install ack
+brew install activemq
 brew install adns
 brew install akka
 brew install algol68g
@@ -21,6 +22,7 @@ brew install aview
 brew install bash
 brew install bash-completion
 brew install bash-snippets
+brew install bat
 brew install bdw-gc
 brew install bison
 brew install bmon
@@ -35,6 +37,7 @@ brew install camlp4
 brew install cassandra
 brew install ccrypt
 brew install ccze
+brew install cheat
 brew install chkrootkit
 brew install chmlib
 brew install clingo
@@ -71,6 +74,7 @@ brew install expat
 brew install faac
 brew install faad2
 brew install fasd
+brew install fd
 brew install ffmpeg
 brew install fftw
 brew install figlet
@@ -134,6 +138,7 @@ brew install heroku
 brew install heroku-node
 brew install hexedit
 brew install hicolor-icon-theme
+brew install html2text
 brew install htop
 brew install httpd
 brew install httpie
@@ -143,6 +148,7 @@ brew install hydra
 brew install icu4c
 brew install ifstat
 brew install ilmbase
+brew install imagemagick@6
 brew install imap-uw
 brew install iperf
 brew install iperf3
@@ -167,6 +173,7 @@ brew install libbluray
 brew install libcaca
 brew install libcroco
 brew install libcuefile
+brew install libde265
 brew install libelf
 brew install libepoxy
 brew install libev
@@ -176,6 +183,7 @@ brew install libftdi0
 brew install libgcrypt
 brew install libgpg-error
 brew install libgtop
+brew install libheif
 brew install libiconv
 brew install libid3tag
 brew install libidn
@@ -191,6 +199,7 @@ brew install libmpdclient
 brew install libnet
 brew install libnfs
 brew install libogg
+brew install libomp
 brew install libpng
 brew install libpq
 brew install libpsl
@@ -297,6 +306,7 @@ brew install pinentry
 brew install pipes-sh
 brew install pixman
 brew install pkg-config
+brew install pokemonsay
 brew install ponysay
 brew install portaudio
 brew install portmidi
@@ -310,6 +320,7 @@ brew install python
 brew install python@2
 brew install qt
 brew install r
+brew install ranger
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis
@@ -357,6 +368,7 @@ brew install telnet
 brew install tesseract
 brew install texinfo
 brew install the_silver_searcher
+brew install thefuck
 brew install theora
 brew install tidy-html5
 brew install tig
@@ -370,6 +382,7 @@ brew install tor
 brew install torsocks
 brew install tree
 brew install two-lame
+brew install unbound
 brew install unixodbc
 brew install unrar
 brew install urlview
@@ -395,4 +408,5 @@ brew install yasm
 brew install zlib
 brew install zplug
 brew install zsh
+brew install zsh-lovers
 brew install zzz
