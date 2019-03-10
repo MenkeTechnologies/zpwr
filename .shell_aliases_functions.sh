@@ -1126,10 +1126,14 @@ torip(){
     echo $ip
 }
 
+toriprenew() {
+    printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' \
+    | nc 127.0.0.1 9051
+}
+
 mycurl(){
     \curl -fsSL -A "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 | sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|C)/d"
 }
-
 
 perlremovespaces(){
     for file;do

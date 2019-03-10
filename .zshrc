@@ -780,6 +780,10 @@ intoFzf(){
     zle .accept-line
 }
 
+lsoffzf(){
+    LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | tr '[:space:]' ' ')"
+}
+
 fzvim(){
     \grep '^>' ~/.viminfo | cut -c3- | \
         perl -lne '$f=$_;$_=~s/~/$ENV{HOME}/;print $f if -f' | \
@@ -845,6 +849,7 @@ zle -N vimFzfSudo
 zle -N getrcWidget
 zle -N clearLine
 zle -N deleteLastWord
+zle -N lsoffzf
 
 
 #vim mode is default
@@ -885,6 +890,9 @@ bindkey -M vicmd '^F^F' fzf-file-widget
 
 bindkey -M viins '^F^D' intoFzf
 bindkey -M vicmd '^F^D' intoFzf
+
+bindkey -M viins '^F^H' lsoffzf
+bindkey -M vicmd '^F^H' lsoffzf
 
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
@@ -1395,7 +1403,8 @@ zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
 #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
 zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
 #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
-#
+zstyle ':completion:*:killall:*' command 'ps -o command'
+
 zstyle ':completion:*' list-separator '<<)(>>'
 COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 
@@ -2060,6 +2069,13 @@ fzf_setup(){
 }
 
 fzf_setup
+
+# killall ;<tab>
+_fzf_complete_killall() {
+  _fzf_complete '-m' "$@" < <(
+    \ps -e -o command
+    )
+}
 
 # mvim ;<tab>
 _fzf_complete_mvim() {
