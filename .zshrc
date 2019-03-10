@@ -877,6 +877,8 @@ bindkey -M vicmd '\e^U' up-case-word
 bindkey -M viins '\e[5~' clipboard
 bindkey -M viins '^B' clipboard
 bindkey -M vicmd '^B' clipboard
+#shift tab
+bindkey -M viins '\e[Z' clipboard
 
 zle -N expandGlobalAliases
 
@@ -1549,6 +1551,8 @@ set +x
     right=${RBUFFER%%;*}
     left=${left##*|}
     right=${right%%|*}
+    left=${left##*&&}
+    right=${right%%&&*}
     #only care about words left of cursor
     mywords=("${(z)left}")
     #logg "partition == '${mywords[@]}'"
@@ -1558,6 +1562,7 @@ set +x
     #logg "first word = '$firstword'"
     #logg "last word = '$lastword'"
     __ALIAS=false
+    #set -x
 
     #dont expand =word because that is zle expand-word
     if [[ ${lastword:0:1} != '=' ]] && (( $#lastword > 0 ));then
@@ -1580,7 +1585,9 @@ set +x
                 if [[ ${LBUFFER: -1} == " " ]]; then
                     LBUFFER="${LBUFFER:0:-1}"
                 fi
-                zle _expand_alias
+                res="$(alias -r $lastword | cut -d= -f2-)"
+                res=${(Q)res}
+                LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
             fi
             __EXPAND=true
             __ALIAS=true
