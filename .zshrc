@@ -1275,6 +1275,8 @@ setopt multios # perform implicit tees or cats when multiple redirections are at
 
 #dot files included in regular globs
 setopt glob_dots
+#include dot files in _files
+_comp_options+=(globdots)
 
 # no glob in all globs then error
 setopt csh_null_glob
