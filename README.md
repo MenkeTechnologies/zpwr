@@ -240,6 +240,7 @@ Always looking for contributors.
 - ```bind-key    -T prefix       S                 set-window-option synchronize-panes```
 - ```bind-key    -T prefix       T                 source-file /Users/wizard/.tmux/config-files```
 - ```bind-key    -T prefix       U                 run-shell /Users/wizard/.tmux/plugins/tpm/bindings/update_plugins```
+- ```bind-key    -T prefix       Y                 split-window -v -c "#{pane_current_path}" ; select-pane -l ; kill-pane```
 - ```bind-key    -T prefix       [                 copy-mode```
 - ```bind-key    -T prefix       \                 split-window -h -c "#{pane_current_path}"```
 - ```bind-key    -T prefix       ]                 paste-buffer```
@@ -346,7 +347,7 @@ Always looking for contributors.
 - ```bindkey -M viins "^Z" undo```
 - ```bindkey -M viins "^[" vi-cmd-mode```
 - ```bindkey -M viins "^[^D" capitalize-word```
-- ```bindkey -M viins "^[^E" expand-aliases```
+- ```bindkey -M viins "^[^E" expandGlobalAliases```
 - ```bindkey -M viins "^[^F" sub```
 - ```bindkey -M viins "^[^L" down-case-word```
 - ```bindkey -M viins "^[^M" self-insert-unmeta```
@@ -375,6 +376,7 @@ Always looking for contributors.
 - ```bindkey -M viins "^[[B" down-line-or-history```
 - ```bindkey -M viins "^[[C" vi-forward-char```
 - ```bindkey -M viins "^[[D" vi-backward-char```
+- ```bindkey -M viins "^[[Z" clipboard```
 - ```bindkey -M viins "^[~" _bash_complete-word```
 - ```bindkey -M viins "^\\\\" self-insert```
 - ```bindkey -M viins "^]" basicSedSub```
@@ -913,6 +915,7 @@ Always looking for contributors.
 - ```n  <Space>e    * :q!<CR>```
 - ```n  <Space>c    * :wq!<CR>```
 - ```n  <Space>q    * :qa!<CR>```
+- ```   <Space>sudo * :w !sudo tee % &>/dev/null<CR><CR><CR>```
 - ```   <Space>=    * 4+```
 - ```   <Space>-    * 4-```
 - ```nox(           * repmo#SelfKey('(', ')')```
@@ -1499,6 +1502,8 @@ Always looking for contributors.
 - ```v  <Space>`    * :call InsertQuoteVisualMode("back")<CR>```
 - ```v  <Space>'    * :call InsertQuoteVisualMode("single")<CR<CR>```
 - ```v  <Space>"    * :call InsertQuoteVisualMode("double")<CR>```
+- ```   <Space>sudo * :w !sudo tee % &>/dev/null<CR><CR><CR>```
+- ```v  <Space>b    * :w !tmux set-buffer "$(cat)"<CR><CR>```
 - ```   <Space>=    * 4+```
 - ```   <Space>-    * 4-```
 - ```nox(           * repmo#SelfKey('(', ')')```
