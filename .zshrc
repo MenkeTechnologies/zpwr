@@ -1630,9 +1630,9 @@ set +x
     if [[ ${lastword:0:1} != '=' ]] && (( $#lastword > 0 ));then
         if alias -r -- $lastword | \
             command egrep -qv '(grc|_z|cd|hub)';then
-            #regular alias expansion
             #logg "regular=>'$lastword'"
             if (( $#mywords == 2 )); then
+                #regular alias expansion after sudo
                 if [[ $__EXPAND_SECOND_POSITION == true ]]; then
                     if echo "$firstword" | grep -qE '(sudo)';then
                         res="$(alias -r $lastword | cut -d= -f2-)"
@@ -1641,9 +1641,10 @@ set +x
                     fi
                 fi
             elif (( $#mywords == 1 )); then
+                #regular alias expansion
                 res="$(alias -r $lastword | cut -d= -f2-)"
                 res=${(Q)res}
-                #extra \s for menuselect spacebar
+                #remove space from menuselect spacebar
                 if [[ ${LBUFFER: -1} == " " ]]; then
                     LBUFFER="${LBUFFER:0:-1}"
                 fi
@@ -1655,7 +1656,7 @@ set +x
             __ALIAS=true
         else
             if echo "$lastword" | \fgrep -q '"'; then
-                #expand on last word of "string"
+                #expand on last word of "string" for global aliases only
                 lastword=${lastword:gs/\"//}
                 ary=(${(z)lastword})
                 lastword=$ary[-1]
@@ -1669,6 +1670,7 @@ set +x
         fi
 
         if [[ $__ALIAS != true ]]; then
+            #expand globs and parameters and =
             zle expand-word
         fi
         if [[ ! -f "$lastword" ]]; then
@@ -1702,10 +1704,8 @@ set +x
         fi
     fi
 
-    #expand globs and parameters and =
-
-    #insert the space char
     if [[ $__EXPAND == true ]];then
+        #insert the space char
         zle self-insert
     fi
     set +x
@@ -2236,6 +2236,7 @@ fi
 alias numcmd='print $#commands'
 unalias ag &> /dev/null
 
+#stop delay when entering normal mode
 export KEYTIMEOUT=1
 
 learn(){
