@@ -1676,10 +1676,6 @@ set +x
             fi
         fi
 
-        if [[ $__ALIAS != true ]]; then
-            #expand globs and parameters and =
-            zle expand-word
-        fi
         if [[ ! -f "$lastword" ]]; then
             :
             #DNS lookups
@@ -1709,6 +1705,10 @@ set +x
         else
             #its a file
         fi
+    fi
+    if [[ $__ALIAS != true ]]; then
+        #expand globs and parameters and =
+        zle expand-word
     fi
 
     if [[ $__EXPAND == true ]];then
