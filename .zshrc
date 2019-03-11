@@ -436,13 +436,14 @@ dbz() {
     zle .accept-line
 }
 
+subForAtSign=:::::---::::---:::::---
 expandGlobalAliases() {
     lastword="$1"
     #expand alias
     res=${(Q)${(qqq)galiases[$lastword]:gs@\\@\\\\@}:gs@$@\\$@}
-    res=${res:gs|@|::::|}
+    res=${res//@/$subForAtSign}
     LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
-    LBUFFER=${LBUFFER:gs|::::|@|}
+    LBUFFER=${LBUFFER//$subForAtSign/@}
     LBUFFER=${LBUFFER:gs|\\\\|\\|}
     zle _expand_alias
     lenToFirstTS=${#BUFFER%%$__TS*}
@@ -1275,8 +1276,6 @@ setopt multios # perform implicit tees or cats when multiple redirections are at
 
 #dot files included in regular globs
 setopt glob_dots
-#include dot files in _files
-_comp_options+=(globdots)
 
 # no glob in all globs then error
 setopt csh_null_glob
@@ -1646,9 +1645,9 @@ set +x
                     if echo "$firstword" | grep -qE '(sudo)';then
                         res="$(alias -r $lastword | cut -d= -f2-)"
                         res=${(Q)res:gs@$@\\$@}
-                        res=${res:gs|@|::::|}
+                        res=${res:gs|@|$subForAtSign|}
                 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
-                LBUFFER=${LBUFFER:gs|::::|@|}
+                LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                     fi
                 fi
             elif (( $#mywords == 1 )); then
@@ -1659,9 +1658,9 @@ set +x
                 fi
                 res="$(alias -r $lastword | cut -d= -f2-)"
                 res=${(Q)res:gs@$@\\$@}
-                res=${res:gs|@|::::|}
+                res=${res:gs|@|$subForAtSign|}
                 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
-                LBUFFER=${LBUFFER:gs|::::|@|}
+                LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
             fi
             __EXPAND=true
             __ALIAS=true
