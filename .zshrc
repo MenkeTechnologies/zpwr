@@ -69,11 +69,15 @@ export LC_ALL="en_US.UTF-8"
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
+# Global Environment Variables for MenkeTechnologies
+MYPROMPT=POWERLEVEL
+EXPAND_SECOND_POSITION=true
+SURROUND=true
+CUSTOM_COLORS=true
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-MYPROMPT=POWERLEVEL
-__EXPAND_SECOND_POSITION=true
 
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 
@@ -639,9 +643,6 @@ clipboard(){
 }
 
 #automatically add closing punct
-
-SURROUND=true
-
 surround(){
     if [[ $SURROUND == true ]]; then
         next=$((CURSOR+1))
@@ -707,7 +708,7 @@ surround(){
         esac
         zle .vi-forward-char
     else
-        zle self-insert
+        zle .self-insert
 
     fi
 }
@@ -1336,17 +1337,38 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
-# Make the list prompt friendly
-zstyle ':completion:*' list-prompt \
-    $'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%M%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
+if [[ $CUSTOM_COLORS == true ]]; then
+    # Make the list prompt friendly
+    zstyle ':completion:*' list-prompt \
+        $'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%M%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
 
-# Make the selection prompt friendly when there are a lot of choices
-zstyle ':completion:*' select-prompt \
-    $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[37;44m%p\e[0;1;31m>>-\e[0m'
+    # Make the selection prompt friendly when there are a lot of choices
+    zstyle ':completion:*' select-prompt \
+        $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[37;44m%p\e[0;1;31m>>-\e[0m'
 
-# Add simple colors to kill
-zstyle ':completion:*:*:kill:*:processes' list-colors \
-    '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+    # Add simple colors to kill
+    zstyle ':completion:*:*:kill:*:processes' list-colors \
+        '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+    zstyle ':completion:*' format \
+        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+
+    zstyle ':completion:*:descriptions' format \
+        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+
+    zstyle ':completion:*:corrections' format \
+        $'\e[1;31m-<<\e[0;34m%d (errors: %e)\e[1;31m>>-\e[0m'
+
+    zstyle ':completion:*:messages' format \
+        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+
+    zstyle ':completion:*:explanations' format \
+        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+
+    zstyle ':completion:*:warnings' format \
+        $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
+fi
+zstyle ':completion:*' auto-description 'Specify: %d'
+
 # list of completers to use
 zstyle ':completion:*' completer _expand _complete _ignored _approximate _correct
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
@@ -1354,24 +1376,6 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages, blue text with red punctuation
 zstyle ':completion:*' verbose yes
-zstyle ':completion:*' format \
-    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
-
-zstyle ':completion:*:descriptions' format \
-    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
-
-zstyle ':completion:*:corrections' format \
-    $'\e[1;31m-<<\e[0;34m%d (errors: %e)\e[1;31m>>-\e[0m'
-
-zstyle ':completion:*:messages' format \
-    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
-
-zstyle ':completion:*:explanations' format \
-    $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
-
-zstyle ':completion:*:warnings' format \
-    $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
-zstyle ':completion:*' auto-description 'Specify: %d'
 
 # don't complete duplicates for these commands
 zstyle ':completion::*:(git-add|git-rm|less|rm|vi|vim|v):*' ignore-line true
@@ -1397,35 +1401,36 @@ if (( $#h > 0 )); then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-zstyle ':completion:*' list-colors 'ma=37;1;4;44'
+if [[ $CUSTOM_COLORS == true ]]; then
 
-#main option for menu selection colors
-zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
-zstyle ':completion:*:executables' list-colors '=(#b)(*)=1;30=1;37;44'
-zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=37;43'
-zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
-zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
-zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=1;37;42;4'
-zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
-zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
-#zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
-zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
-#zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+    zstyle ':completion:*' list-colors 'ma=37;1;4;44'
+    #main option for menu selection colors
+    zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
+    zstyle ':completion:*:executables' list-colors '=(#b)(*)=1;30=1;37;44'
+    zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=37;43'
+    zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
+    zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
+    zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=1;37;42;4'
+    zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
+    zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
+    #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
+    zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
+    #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
+    zstyle ':completion:*' list-separator '<<)(>>'
+    COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
+
+    zstyle -e ':completion:*:local-directories' list-colors "$COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:*:f:*:*' list-colors "$COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:globbed-files' list-colors "$COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:argument-rest:*' list-colors "$COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:all-files' list-colors "$COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:files' list-colors "$COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:directories' list-colors "$COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
+
+    zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,@3-]#)*=1;32=1;31=34=1;31=34'
+fi
 zstyle ':completion:*:killall:*' command 'ps -o command'
-
-zstyle ':completion:*' list-separator '<<)(>>'
-COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-
-zstyle -e ':completion:*:local-directories' list-colors "$COMMON_ZSTYLE_OPTS"
-zstyle -e ':completion:*:*:f:*:*' list-colors "$COMMON_ZSTYLE_OPTS"
-zstyle -e ':completion:*:globbed-files' list-colors "$COMMON_ZSTYLE_OPTS"
-zstyle -e ':completion:*:argument-rest:*' list-colors "$COMMON_ZSTYLE_OPTS"
-zstyle -e ':completion:*:all-files' list-colors "$COMMON_ZSTYLE_OPTS"
-zstyle -e ':completion:*:files' list-colors "$COMMON_ZSTYLE_OPTS"
-zstyle -e ':completion:*:directories' list-colors "$COMMON_ZSTYLE_OPTS"
-zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
-
-zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,@3-]#)*=1;32=1;31=34=1;31=34'
 
 # use tag names as menu select separators
 zstyle ':completion:*' group-name ''
@@ -1648,7 +1653,7 @@ set +x
             #logg "regular=>'$lastword'"
             if (( $#mywords == 2 )); then
                 #regular alias expansion after sudo
-                if [[ $__EXPAND_SECOND_POSITION == true ]]; then
+                if [[ $EXPAND_SECOND_POSITION == true ]]; then
                     if echo "$firstword" | grep -qE '(sudo)';then
                         res="$(alias -r $lastword | cut -d= -f2-)"
                         res=${(Q)res:gs@$@\\$@}
