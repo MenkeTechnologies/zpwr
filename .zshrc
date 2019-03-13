@@ -2179,7 +2179,7 @@ _cl(){
         'reserved-words:reserved word:compadd -Qk reswords' \
         'functions:shell function:compadd -Qk functions' \
         'files:filenames:_path_files -g "* .*"' \
-        'commands:commands:('"${(k)commands:gs@[@\\[@}"')'
+        'commands:commands:compadd -Qk commands'
         #need to escape [ for g[ in PATH
 }
 
