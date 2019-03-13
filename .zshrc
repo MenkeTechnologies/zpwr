@@ -1679,6 +1679,9 @@ set +x
             __EXPAND=true
             __ALIAS=true
         else
+            if [[ ${LBUFFER: -1} == " " ]]; then
+                LBUFFER="${LBUFFER:0:-1}"
+            fi
             if echo "$lastword" | \fgrep -q '"'; then
                 #expand on last word of "string" for global aliases only
                 lastword=${lastword:gs/\"//}
