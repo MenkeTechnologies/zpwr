@@ -1412,6 +1412,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
     zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=34;42;4'
     zstyle ':completion:*:suffix-aliases' list-colors '=(#b)(*)=1;30=1;34;41;4'
+    zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
     zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
     #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
@@ -2160,6 +2161,8 @@ _comps[csh]=_tcsh
 _cl(){
     _alternative \
         'aliases:aliases:('"echo ${(k)aliases}"')' \
+        'global-aliases:global aliases:('"echo ${(k)galiases}"')' \
+        'suffix-aliases:suffix aliases:('"echo ${(k)saliases}"')' \
         'builtins:builtins:('"$(enable) $(disable)"')' \
         'functions:functions:('"echo ${(k)functions}"')' \
         'commands:commands:('"echo ${(k)commands}"')' \
