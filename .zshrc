@@ -2159,13 +2159,15 @@ _comps[tcsh]=_tcsh
 _comps[csh]=_tcsh
 
 _cl(){
+    local global_aliases
+    global_aliases=(${(q)${(k)galiases}})
     _alternative \
-        'aliases:aliases:('"echo ${(k)aliases}"')' \
-        'global-aliases:global aliases:('"echo ${(k)galiases}"')' \
+        'global-aliases:global aliases:('"${global_aliases}"')' \
+        'commands:commands:('"${(k)commands:gs@[@\\[@}"')' \
+        'aliases:aliases:('"${(k)aliases}"')' \
         'suffix-aliases:suffix aliases:('"echo ${(k)saliases}"')' \
         'builtins:builtins:('"$(enable) $(disable)"')' \
-        'functions:functions:('"echo ${(k)functions}"')' \
-        'commands:commands:('"echo ${(k)commands}"')' \
+        'functions:functions:('"${(k)functions}"')' \
         'files:filenames:_path_files -g "* .*"'
 }
 
