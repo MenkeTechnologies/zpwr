@@ -1415,6 +1415,8 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
     zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
+    zstyle ':completion:*:formulae' list-colors '=(#b)(*)=1;30=1;36;44'
+    zstyle ':completion:*:common-commands' list-colors '=(#b)(*)=1;30=1;31;46'
     #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
     zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
     #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
