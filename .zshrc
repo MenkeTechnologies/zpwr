@@ -2176,16 +2176,16 @@ _cl(){
 
 _myz(){
     _alternative \
-        'dirs:command:(('"$(_z |& awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
+        'aliases:command:(('"$(_z |& awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
         'files:directory:_path_files -g ".*(/) *(/)"'
 }
 _f(){
-    arguments=('1:directory:_path_files -g ".*(/) *(/)"')
+    arguments=('1:files:_path_files -g ".*(/) *(/)"')
     _arguments -s $arguments
 }
 
 _c(){
-    arguments=('*:files:_path_files -g "*(^/)"')
+    arguments=('*:files:_path_files -g "*(^/) .*(^/)"')
     _arguments -s $arguments
 }
 
