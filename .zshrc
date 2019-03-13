@@ -2166,12 +2166,12 @@ _cl(){
     global_aliases=(${(q)${(k)galiases}})
     _alternative \
         'global-aliases:global aliases:('"${global_aliases}"')' \
-        'commands:commands:('"${(k)commands:gs@[@\\[@}"')' \
-        'aliases:aliases:('"${(k)aliases}"')' \
         'suffix-aliases:suffix aliases:('"echo ${(k)saliases}"')' \
+        'aliases:aliases:('"${(k)aliases}"')' \
         'builtins:builtins:('"$(enable) $(disable)"')' \
         'functions:functions:('"${(k)functions}"')' \
-        'files:filenames:_path_files -g "* .*"'
+        'files:filenames:_path_files -g "* .*"' \
+        'commands:commands:('"${(k)commands:gs@[@\\[@}"')'
 }
 
 _myz(){
