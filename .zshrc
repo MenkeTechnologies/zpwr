@@ -2158,7 +2158,7 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 #}}}***********************************************************
 
-#{{{                    MARK:override default FTP completion
+#{{{                    MARK:Custom Compsys Functions
 #**************************************************************
 _comps[ftp]=_ftp
 _comps[traceroute]=_traceroute
@@ -2173,10 +2173,11 @@ _cl(){
     global_aliases=(${(q)${(k)galiases}})
     _alternative \
         'global-aliases:global aliases:('"${global_aliases}"')' \
-        'suffix-aliases:suffix aliases:('"echo ${(k)saliases}"')' \
-        'aliases:aliases:('"${(k)aliases}"')' \
-        'builtins:builtins:('"$(enable) $(disable)"')' \
-        'functions:functions:('"${(k)functions}"')' \
+        'suffix-aliases:suffix alias:_suffix_alias_files' \
+        'aliases:alias:compadd -Qk aliases' \
+        'builtins:builtin command:compadd -Qk builtins' \
+        'reserved-words:reserved word:compadd -Qk reswords' \
+        'functions:shell function:compadd -Qk functions' \
         'files:filenames:_path_files -g "* .*"' \
         'commands:commands:('"${(k)commands:gs@[@\\[@}"')'
         #need to escape [ for g[ in PATH
@@ -2203,9 +2204,60 @@ compdef _myz z
 compdef _f f
 compdef _c c
 
-# Example usage: zmv -W '*.pl' '*.perl'
-autoload zmv
-alias mmv='noglob zmv -W'
+#redefine global zsh completion function called at first parameter
+#adding global aliases and files
+_command_names(){
+    # The option `-e' if given as the first argument says that we should
+    # complete only external commands and executable files. This and a
+    # `-' as the first argument is then removed from the arguments.
+
+    local args defs ffilt
+
+    zstyle -t ":completion:${curcontext}:commands" rehash && rehash
+
+    zstyle -t ":completion:${curcontext}:functions" prefix-needed && \
+    [[ $PREFIX != [_.]* ]] && \
+    ffilt='[(I)[^_.]*]'
+
+    defs=(
+        'commands:external command:_path_commands'
+    )
+
+    [[ -n "$path[(r).]" || $PREFIX = */* ]] &&
+        defs+=( 'executables:executable file:_files -g \*\(-\*\)' )
+
+    if [[ "$1" = -e ]]; then
+    shift
+    else
+    [[ "$1" = - ]] && shift
+
+    defs=( "$defs[@]"
+        'global-aliases:global alias:compadd -Qk galiases'
+        'aliases:alias:compadd -Qk aliases'
+        "functions:shell function:compadd -k 'functions$ffilt'"
+        'builtins:builtin command:compadd -Qk builtins'
+        'suffix-aliases:suffix alias:_suffix_alias_files'
+        'reserved-words:reserved word:compadd -Qk reswords'
+        'jobs:: _jobs -t'
+        'parameters:: _parameters -g "^*(readonly|association)*" -qS= -r "\n\t\- =[+"'
+        'parameters:: _parameters -g "*association*~*readonly*" -qS\[ -r "\n\t\- =[+"'
+        'files:files:_files'
+    )
+    fi
+
+    args=( "$@" )
+
+    local -a cmdpath
+    if zstyle -a ":completion:${curcontext}" command-path cmdpath &&
+    [[ $#cmdpath -gt 0 ]]
+    then
+    local -a +h path
+    local -A +h commands
+    path=( $cmdpath )
+    fi
+    _alternative -O args "$defs[@]"
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
@@ -2309,60 +2361,8 @@ zshrcsearch(){
 }
 export CHEATCOLORS=true
 
-#redefine global zsh completion function called at first parameter
-#adding global aliases and files
-_command_names(){
-    # The option `-e' if given as the first argument says that we should
-    # complete only external commands and executable files. This and a
-    # `-' as the first argument is then removed from the arguments.
-
-    local args defs ffilt
-
-    zstyle -t ":completion:${curcontext}:commands" rehash && rehash
-
-    zstyle -t ":completion:${curcontext}:functions" prefix-needed && \
-    [[ $PREFIX != [_.]* ]] && \
-    ffilt='[(I)[^_.]*]'
-
-    defs=(
-        'commands:external command:_path_commands'
-    )
-
-    [[ -n "$path[(r).]" || $PREFIX = */* ]] &&
-        defs+=( 'executables:executable file:_files -g \*\(-\*\)' )
-
-    if [[ "$1" = -e ]]; then
-    shift
-    else
-    [[ "$1" = - ]] && shift
-
-    defs=( "$defs[@]"
-        'global-aliases:global alias:compadd -Qk galiases'
-        'aliases:alias:compadd -Qk aliases'
-        "functions:shell function:compadd -k 'functions$ffilt'"
-        'builtins:builtin command:compadd -Qk builtins'
-        'suffix-aliases:suffix alias:_suffix_alias_files'
-        'reserved-words:reserved word:compadd -Qk reswords'
-        'jobs:: _jobs -t'
-        'parameters:: _parameters -g "^*(readonly|association)*" -qS= -r "\n\t\- =[+"'
-        'parameters:: _parameters -g "*association*~*readonly*" -qS\[ -r "\n\t\- =[+"'
-        'files:files:_files'
-    )
-    fi
-
-    args=( "$@" )
-
-    local -a cmdpath
-    if zstyle -a ":completion:${curcontext}" command-path cmdpath &&
-    [[ $#cmdpath -gt 0 ]]
-    then
-    local -a +h path
-    local -A +h commands
-    path=( $cmdpath )
-    fi
-    _alternative -O args "$defs[@]"
-}
-autoload _command_names
-
+# Example usage: zmv -W '*.pl' '*.perl'
+autoload zmv
+alias mmv='noglob zmv -W'
 
 #}}}***********************************************************
