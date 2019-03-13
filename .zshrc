@@ -2172,6 +2172,7 @@ _cl(){
         'functions:functions:('"${(k)functions}"')' \
         'files:filenames:_path_files -g "* .*"' \
         'commands:commands:('"${(k)commands:gs@[@\\[@}"')'
+        #need to escape [ for g[ in PATH
 }
 
 _myz(){
