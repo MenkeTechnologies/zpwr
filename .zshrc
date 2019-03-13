@@ -449,7 +449,6 @@ expandGlobalAliases() {
     LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
     LBUFFER=${LBUFFER//$subForAtSign/@}
     LBUFFER=${LBUFFER:gs|\\\\|\\|}
-    zle _expand_alias
     lenToFirstTS=${#BUFFER%%$__TS*}
     if (( $lenToFirstTS < ${#BUFFER} )); then
         CURSOR=$lenToFirstTS
@@ -1474,7 +1473,7 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}oo='&>> "$LOGFILE'"$__TS"'"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say $__TS'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}pf="perl -e 'print \`$__TS \"\$_\"\`for<*>'"
+    alias ${__GLOBAL_ALIAS_PREFIX}pf="perl -e 'print \`$__TS \"\$_\"\`for<*>'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
     alias -g ${__GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$__TS@$__TS@g'"
     #default value tabstops
@@ -1487,31 +1486,31 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}uu="| awk '{$__TS}' | uniq -c | sort -rn | head -10"
     alias -g ${__GLOBAL_ALIAS_PREFIX}wc='| wc -l'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"" && git push"
+    alias ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"" && git push"
     alias -g ${__GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${__TS}m${__TS}\\x1b[0m"
 
-    alias -g ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
+    alias ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
         '$__TS'
     fi'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}iee='if [[ '$__TS' ]];then
+    alias ${__GLOBAL_ALIAS_PREFIX}iee='if [[ '$__TS' ]];then
         '$__TS'
     elif [[ '$__TS' ]];then
         '$__TS'
     else
         '$__TS'
     fi'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}ie='if [[ '$__TS' ]];then
+    alias ${__GLOBAL_ALIAS_PREFIX}ie='if [[ '$__TS' ]];then
         '$__TS'
     else
         '$__TS'
     fi'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}wr='while read line;do
+    alias ${__GLOBAL_ALIAS_PREFIX}wr='while read line;do
         '$__TS'
     done < '$__TS''
-    alias -g ${__GLOBAL_ALIAS_PREFIX}w='while [[ true'$__TS' ]];do
+    alias ${__GLOBAL_ALIAS_PREFIX}w='while [[ true'$__TS' ]];do
         '$__TS'
     done'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}fe='for i in '$__TS';do
+    alias ${__GLOBAL_ALIAS_PREFIX}fe='for i in '$__TS';do
         '$__TS'
     done'
 
@@ -1664,11 +1663,19 @@ set +x
                 #regular alias expansion after sudo
                 if [[ $EXPAND_SECOND_POSITION == true ]]; then
                     if echo "$firstword" | grep -qE '(sudo)';then
-                        res="$(alias -r $lastword | cut -d= -f2-)"
+                        res="$(alias -r $lastword | cut -d= -f2 | cut -d\$ -f2)"
                         res=${(Q)res:gs@$@\\$@}
                         res=${res:gs|@|$subForAtSign|}
-                LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
-                LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
+LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
+                        lenToFirstTS=${#BUFFER%%$__TS*}
+                        if (( $lenToFirstTS < ${#BUFFER} )); then
+                            CURSOR=$lenToFirstTS
+                            RBUFFER=${RBUFFER:$#__TS}
+                            __EXPAND=false
+                        else
+                            __EXPAND=true
+                        fi
                     fi
                 fi
             elif (( $#mywords == 1 )); then
@@ -1677,13 +1684,20 @@ set +x
                 if [[ ${LBUFFER: -1} == " " ]]; then
                     LBUFFER="${LBUFFER:0:-1}"
                 fi
-                res="$(alias -r $lastword | cut -d= -f2-)"
+                res="$(alias -r $lastword | cut -d= -f2 | cut -d\$ -f2)"
                 res=${(Q)res:gs@$@\\$@}
                 res=${res:gs|@|$subForAtSign|}
-                LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
-                LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
+LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
+                lenToFirstTS=${#BUFFER%%$__TS*}
+                if (( $lenToFirstTS < ${#BUFFER} )); then
+                    CURSOR=$lenToFirstTS
+                    RBUFFER=${RBUFFER:$#__TS}
+                    __EXPAND=false
+                else
+                    __EXPAND=true
+                fi
             fi
-            __EXPAND=true
             __ALIAS=true
         else
             if [[ ${LBUFFER: -1} == " " ]]; then
