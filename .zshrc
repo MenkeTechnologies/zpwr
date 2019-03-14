@@ -1687,7 +1687,11 @@ LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                 res="$(alias -r $lastword | cut -d= -f2- | cut -d\$ -f2)"
                 res=${(Q)res:gs@$@\\$@}
                 res=${res:gs|@|$subForAtSign|}
+                if [[ ${${(z)res}[1]} == "$lastword" ]];then
+LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@\\\\$res@")"
+                else
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+                fi
 LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                 lenToFirstTS=${#BUFFER%%$__TS*}
                 if (( $lenToFirstTS < ${#BUFFER} )); then
