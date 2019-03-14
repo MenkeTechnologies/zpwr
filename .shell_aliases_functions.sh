@@ -1244,9 +1244,11 @@ www(){
 }
 
 ff(){
-    for (( i = 0; i < 10;i++ )); do
-        eval "$@"
-    done
+    if [[ ! -d "$1" && ! -f "$1" ]]; then
+        for (( i = 0; i < 10;i++ )); do
+            eval "$@"
+        done
+    fi
 }
 
 fff(){
