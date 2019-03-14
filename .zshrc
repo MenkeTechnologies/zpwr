@@ -1489,28 +1489,28 @@ globalAliasesInit(){
     alias ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"" && git push"
     alias -g ${__GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${__TS}m${__TS}\\x1b[0m"
 
-    alias ${__GLOBAL_ALIAS_PREFIX}i='if [[ '$__TS' ]];then
+    alias i='if [[ '$__TS' ]];then
         '$__TS'
     fi'
-    alias ${__GLOBAL_ALIAS_PREFIX}iee='if [[ '$__TS' ]];then
+    alias iee='if [[ '$__TS' ]];then
         '$__TS'
     elif [[ '$__TS' ]];then
         '$__TS'
     else
         '$__TS'
     fi'
-    alias ${__GLOBAL_ALIAS_PREFIX}ie='if [[ '$__TS' ]];then
+    alias ie='if [[ '$__TS' ]];then
         '$__TS'
     else
         '$__TS'
     fi'
-    alias ${__GLOBAL_ALIAS_PREFIX}wr='while read line;do
+    alias wr='while read line;do
         '$__TS'
     done < '$__TS''
-    alias ${__GLOBAL_ALIAS_PREFIX}w='while [[ true'$__TS' ]];do
+    alias wt='while [[ true'$__TS' ]];do
         '$__TS'
     done'
-    alias ${__GLOBAL_ALIAS_PREFIX}fe='for i in '$__TS';do
+    alias fe='for i in '$__TS';do
         '$__TS'
     done'
 
@@ -1663,7 +1663,7 @@ set +x
                 #regular alias expansion after sudo
                 if [[ $EXPAND_SECOND_POSITION == true ]]; then
                     if echo "$firstword" | grep -qE '(sudo)';then
-                        res="$(alias -r $lastword | cut -d= -f2 | cut -d\$ -f2)"
+                        res="$(alias -r $lastword | cut -d= -f2- | cut -d\$ -f2)"
                         res=${(Q)res:gs@$@\\$@}
                         res=${res:gs|@|$subForAtSign|}
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
@@ -1684,7 +1684,7 @@ LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                 if [[ ${LBUFFER: -1} == " " ]]; then
                     LBUFFER="${LBUFFER:0:-1}"
                 fi
-                res="$(alias -r $lastword | cut -d= -f2 | cut -d\$ -f2)"
+                res="$(alias -r $lastword | cut -d= -f2- | cut -d\$ -f2)"
                 res=${(Q)res:gs@$@\\$@}
                 res=${res:gs|@|$subForAtSign|}
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
