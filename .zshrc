@@ -1663,7 +1663,9 @@ set +x
                 #regular alias expansion after sudo
                 if [[ $EXPAND_SECOND_POSITION == true ]]; then
                     if echo "$firstword" | grep -qE '(sudo)';then
-                        res="$(alias -r $lastword | cut -d= -f2- | cut -d\$ -f2)"
+                        res="$(alias -r $lastword | cut -d= -f2-)"
+                        #deal with ansi quotes $'
+                        [[ $res[1] == \$ ]] && res=${res:1}
                         res=${(Q)res:gs@$@\\$@}
                         res=${res:gs|@|$subForAtSign|}
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
@@ -1684,7 +1686,9 @@ LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                 if [[ ${LBUFFER: -1} == " " ]]; then
                     LBUFFER="${LBUFFER:0:-1}"
                 fi
-                res="$(alias -r $lastword | cut -d= -f2- | cut -d\$ -f2)"
+                res="$(alias -r $lastword | cut -d= -f2-)"
+                #deal with ansi quotes $'
+                [[ $res[1] == \$ ]] && res=${res:1}
                 res=${(Q)res:gs@$@\\$@}
                 res=${res:gs|@|$subForAtSign|}
                 if [[ ${${(z)res}[1]} == "$lastword" ]];then
@@ -2267,11 +2271,11 @@ _command_names(){
 
     local -a cmdpath
     if zstyle -a ":completion:${curcontext}" command-path cmdpath &&
-    [[ $#cmdpath -gt 0 ]]
+        [[ $#cmdpath -gt 0 ]]
     then
-    local -a +h path
-    local -A +h commands
-    path=( $cmdpath )
+        local -a +h path
+        local -A +h commands
+        path=( $cmdpath )
     fi
     _alternative -O args "$defs[@]"
 }
