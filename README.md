@@ -12,6 +12,8 @@ This repo is my own version of Hashrocket's Dotmatrix repo.  This allows one to 
 - debian
 - arch
 - mint
+- zorin
+- parrot OS
 - WSL
 - SUSE
 
