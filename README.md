@@ -26,6 +26,10 @@ Some interactivity is required near end of installer for postfix, wireshark and 
 
 Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Control-D to return to installer script.
 
+You need to change the Terminal font to support the Powerline triangles and other special characters in the PowerLevel 9k font.
+
+The installer installs Hack Nerd Font on the Mac with Homebrerw and Powerline Symbols on Linux.
+
 Change line 18 in ~/.shell_aliases_functions.sh
 
 ```export GITHUB_ACCOUNT='MenkeTechnologies'```
