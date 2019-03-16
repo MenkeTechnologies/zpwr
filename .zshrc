@@ -1636,11 +1636,13 @@ set +x
 
     __EXPAND=true
 
-    #get content bt ;;
+    #get content bt ; and ;
     left=${LBUFFER##*;}
     right=${RBUFFER%%;*}
+    #get content bt | and |
     left=${left##*|}
     right=${right%%|*}
+    #get content bt && and &&
     left=${left##*&&}
     right=${right%%&&*}
     #only care about words left of cursor
@@ -1653,6 +1655,7 @@ set +x
     #logg "last word = '$lastword'"
     __ALIAS=false
     #set -x
+    
 
     #dont expand =word because that is zle expand-word
     if [[ ${lastword:0:1} != '=' ]] && (( $#lastword > 0 ));then
@@ -2202,7 +2205,7 @@ _cl(){
         'functions:shell function:compadd -Qk functions' \
         'files:filenames:_path_files -g "* .*"' \
         'commands:commands:compadd -Qk commands'
-        #need to escape [ for g[ in PATH
+        #need to escape [ for g[ in PATH, compadd -Q does this
 }
 
 _myz(){
