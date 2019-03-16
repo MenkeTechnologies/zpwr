@@ -370,7 +370,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     warnSudo
 
     case $distroName in
-        (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin)
+        (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
             distroFamily=debian
             prettyPrint "Fetching Dependencies for $distroName with the Advanced Package Manager..."
             refresh "$distroFamily"

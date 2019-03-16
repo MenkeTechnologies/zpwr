@@ -42,7 +42,7 @@ else
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
     case "$distroName" in
-        (debian|ubuntu|elementary|raspbian|kali|zorin)
+        (debian|ubuntu|elementary|raspbian|kali|zorin|parrot)
             distro=debian
             ;;
         (centos|fedora|rhel)
