@@ -45,12 +45,12 @@ for command abs in ${(kv)commands}; do
        $abs --help < /dev/null |& help2comp.py $command > "$comp_dir"/_$command &
        sleep 0.25
        echo "killing $abs at $!"
-       kill $!
+       sudo kill -9 $!
        if [[ ! -s "$comp_dir/_$command" ]]; then
             $abs -h < /dev/null |& help2comp.py $command > "$comp_dir"/_$command &
             sleep 0.25
             echo "killing $abs at $!"
-            kill $!
+            sudo kill -9 $!
             if [[ ! -s "$comp_dir/_$command" ]]; then
                 command rm "$comp_dir/_$command"
             fi
