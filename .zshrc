@@ -184,7 +184,7 @@ elif [[ "$(uname)" == "Linux" ]];then
     distroName="$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)"
 
     case $distroName in
-        (debian|raspbian|kali)
+        (debian|raspbian|kali|parrot|zorin)
             plugins+=(debian)
             ;;
         (ubuntu|linuxmint|elementary)
