@@ -1014,7 +1014,9 @@ bindkey -M viins '^T' transpose-chars
 bindkey -M vicmd '^T' transpose-chars
 
 bindkey -M viins '^A' beginning-of-line
+bindkey -M vicmd '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
+bindkey -M vicmd '^E' end-of-line
 
 # env var to show dots does not work with vim mode
 bindkey '^I' expand-or-complete-with-dots
