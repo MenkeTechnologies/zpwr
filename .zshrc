@@ -1696,7 +1696,8 @@ LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                 [[ $res[1] == \$ ]] && res=${res:1}
                 res=${(Q)res:gs@$@\\$@}
                 res=${res:gs|@|$subForAtSign|}
-                if [[ ${${(Az)res}[1]} == "$lastword" ]];then
+                words=(${(z)res})
+                if [[ ${words[1]} == "$lastword" ]];then
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@\\\\$res@")"
                 else
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
