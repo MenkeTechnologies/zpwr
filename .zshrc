@@ -1674,8 +1674,9 @@ set +x
                         res=${(Q)res}
                         res=${res:gs@\\@\\\\@}
                         res=${res:gs@\$@\\\$@}
-                        res=${res:gs|@|\\@|}
+                        res=${res:gs|@|$subForAtSign|}
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+                        LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                         lenToFirstTS=${#BUFFER%%$__TS*}
                         if (( $lenToFirstTS < ${#BUFFER} )); then
                             CURSOR=$lenToFirstTS
@@ -1698,13 +1699,14 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
                 res=${(Q)res}
                 res=${res:gs@\\@\\\\@}
                 res=${res:gs@\$@\\\$@}
-                res=${res:gs|@|\\@|}
+                res=${res:gs|@|$subForAtSign|}
                 words=(${(z)res})
                 if [[ ${words[1]} == "$lastword" ]];then
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@\\\\$res@")"
                 else
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
                 fi
+                LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                 lenToFirstTS=${#BUFFER%%$__TS*}
                 if (( $lenToFirstTS < ${#BUFFER} )); then
                     CURSOR=$lenToFirstTS
