@@ -1673,6 +1673,7 @@ set +x
                         [[ $res[1] == \$ ]] && res=${res:1}
                         res=${(Q)res}
                         res=${res:gs@\\@\\\\@}
+                        res=${res:gs@\\\\n@\\n@}
                         res=${res:gs@\$@\\\$@}
                         res=${res:gs|@|$subForAtSign|}
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
@@ -1698,6 +1699,7 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
                 [[ $res[1] == \$ ]] && res=${res:1}
                 res=${(Q)res}
                 res=${res:gs@\\@\\\\@}
+                res=${res:gs@\\\\n@\\n@}
                 res=${res:gs@\$@\\\$@}
                 res=${res:gs|@|$subForAtSign|}
                 words=(${(z)res})
