@@ -1638,25 +1638,40 @@ set +x
 
     __EXPAND=true
 
-    #get content bt ; and ;
-    left=${LBUFFER##*;}
-    right=${RBUFFER%%;*}
-    #get content bt | and |
-    left=${left##*|}
-    right=${right%%|*}
-    #get content bt && and &&
-    left=${left##*&&}
-    right=${right%%&&*}
-    #only care about words left of cursor
-    mywords=("${(z)left}")
-    #logg "partition == '${mywords[@]}'"
-    #returns last word including quotes
+    #loop through words to get first and last words in partition
+    mywordsleft=(${(z)LBUFFER})
+    mywordsright=(${(z)RBUFFER})
+    mywordsall=(${(z)BUFFER})
+    firstIndex=0
+    lastIndex=0
+    for (( i = $#mywordsleft; i >= 0; i-- )); do
+        case $mywordsleft[$i] in
+            \; | \| | '||' | '&&')
+                firstIndex=$((i+1))
+                break
+                ;;
+            *)
+                ;;
+        esac
+    done
+    for (( i = 0; i < $#mywordsright; i++ )); do
+        case $mywordsright[$i] in
+            \; | \| | '||' | '&&') lastIndex=$((i-1))
+                break
+                ;;
+            *)
+                ;;
+        esac
+    done
+
+    ((lastIndex+=$#mywordsleft))
+    mywords=($mywordsall[$firstIndex,$lastIndex])
+    #logg "partition = '$mywords'"
     firstword=${mywords[1]}
     lastword=${mywords[-1]}
     #logg "first word = '$firstword'"
     #logg "last word = '$lastword'"
     __ALIAS=false
-    #set -x
     
 
     #dont expand =word because that is zle expand-word
