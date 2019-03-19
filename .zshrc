@@ -1665,13 +1665,13 @@ set +x
     done
 
     ((lastIndex+=$#mywordsleft))
-    mywords=($mywordsall[$firstIndex,$#mywordsleft])
+    mywords_lbuffer=($mywordsall[$firstIndex,$#mywordsleft])
     mywords_partition=($mywordsall[$firstIndex,$lastIndex])
-    #logg "partition = '$mywords'"
-    firstword=${mywords[1]}
-    lastword_lbuffer=${mywords[-1]}
+    #logg "partition = '$mywords_lbuffer'"
+    firstword_partition=${mywords_lbuffer[1]}
+    lastword_lbuffer=${mywords_lbuffer[-1]}
     lastword_partition=${mywords_partition[-1]}
-    #logg "first word = '$firstword'"
+    #logg "first word = '$firstword_partition'"
     #logg "last word = '$lastword_lbuffer'"
     __ALIAS=false
     
@@ -1681,10 +1681,10 @@ set +x
         if alias -r -- $lastword_lbuffer | \
             command egrep -qv '(grc|_z|cd|hub)';then
             #logg "regular=>'$lastword_lbuffer'"
-            if (( $#mywords == 2 )); then
+            if (( $#mywords_lbuffer == 2 )); then
                 #regular alias expansion after sudo
                 if [[ $EXPAND_SECOND_POSITION == true ]]; then
-                    if echo "$firstword" | grep -qE '(sudo)';then
+                    if echo "$firstword_partition" | grep -qE '(sudo)';then
                         res="$(alias -r $lastword_lbuffer | cut -d= -f2-)"
                         #deal with ansi quotes $'
                         [[ $res[1] == \$ ]] && res=${res:1}
@@ -1705,7 +1705,7 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@$res@")"
                         fi
                     fi
                 fi
-            elif (( $#mywords == 1 )); then
+            elif (( $#mywords_lbuffer == 1 )); then
                 #regular alias expansion
                 #remove space from menuselect spacebar
                 if [[ ${LBUFFER: -1} == " " ]]; then
