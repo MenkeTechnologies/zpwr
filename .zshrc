@@ -442,11 +442,11 @@ dbz() {
 
 subForAtSign=:::::---::::---:::::---
 expandGlobalAliases() {
-    lastword="$1"
+    lastword_lbuffer="$1"
     #expand alias
-    res=${(Q)${(qqq)galiases[$lastword]:gs@\\@\\\\@}:gs@$@\\$@}
+    res=${(Q)${(qqq)galiases[$lastword_lbuffer]:gs@\\@\\\\@}:gs@$@\\$@}
     res=${res//@/$subForAtSign}
-    LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+    LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@$res@")"
     LBUFFER=${LBUFFER//$subForAtSign/@}
     LBUFFER=${LBUFFER:gs|\\\\|\\|}
     lenToFirstTS=${#BUFFER%%$__TS*}
@@ -1669,23 +1669,23 @@ set +x
     mywords_partition=($mywordsall[$firstIndex,$lastIndex])
     #logg "partition = '$mywords'"
     firstword=${mywords[1]}
-    lastword=${mywords[-1]}
+    lastword_lbuffer=${mywords[-1]}
     lastword_partition=${mywords_partition[-1]}
     #logg "first word = '$firstword'"
-    #logg "last word = '$lastword'"
+    #logg "last word = '$lastword_lbuffer'"
     __ALIAS=false
     
 
     #dont expand =word because that is zle expand-word
-    if [[ ${lastword:0:1} != '=' ]] && (( $#lastword > 0 ));then
-        if alias -r -- $lastword | \
+    if [[ ${lastword_lbuffer:0:1} != '=' ]] && (( $#lastword_lbuffer > 0 ));then
+        if alias -r -- $lastword_lbuffer | \
             command egrep -qv '(grc|_z|cd|hub)';then
-            #logg "regular=>'$lastword'"
+            #logg "regular=>'$lastword_lbuffer'"
             if (( $#mywords == 2 )); then
                 #regular alias expansion after sudo
                 if [[ $EXPAND_SECOND_POSITION == true ]]; then
                     if echo "$firstword" | grep -qE '(sudo)';then
-                        res="$(alias -r $lastword | cut -d= -f2-)"
+                        res="$(alias -r $lastword_lbuffer | cut -d= -f2-)"
                         #deal with ansi quotes $'
                         [[ $res[1] == \$ ]] && res=${res:1}
                         res=${(Q)res}
@@ -1693,7 +1693,7 @@ set +x
                         res=${res:gs@\\\\n@\\n@}
                         res=${res:gs@\$@\\\$@}
                         res=${res:gs|@|$subForAtSign|}
-LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@$res@")"
                         LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                         lenToFirstTS=${#BUFFER%%$__TS*}
                         if (( $lenToFirstTS < ${#BUFFER} )); then
@@ -1711,7 +1711,7 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
                 if [[ ${LBUFFER: -1} == " " ]]; then
                     LBUFFER="${LBUFFER:0:-1}"
                 fi
-                res="$(alias -r $lastword | cut -d= -f2-)"
+                res="$(alias -r $lastword_lbuffer | cut -d= -f2-)"
                 #deal with ansi quotes $'
                 [[ $res[1] == \$ ]] && res=${res:1}
                 res=${(Q)res}
@@ -1720,10 +1720,10 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
                 res=${res:gs@\$@\\\$@}
                 res=${res:gs|@|$subForAtSign|}
                 words=(${(z)res})
-                if [[ ${words[1]} == "$lastword" ]];then
-LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@\\\\$res@")"
+                if [[ ${words[1]} == "$lastword_lbuffer" ]];then
+LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@\\\\$res@")"
                 else
-LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
+LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@$res@")"
                 fi
                 LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
                 lenToFirstTS=${#BUFFER%%$__TS*}
@@ -1740,21 +1740,21 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword\$@$res@")"
             if [[ ${LBUFFER: -1} == " " ]]; then
                 LBUFFER="${LBUFFER:0:-1}"
             fi
-            if echo "$lastword" | \fgrep -q '"'; then
+            if echo "$lastword_lbuffer" | \fgrep -q '"'; then
                 #expand on last word of "string" for global aliases only
-                lastword=${lastword:gs/\"//}
-                ary=(${(z)lastword})
-                lastword=$ary[-1]
+                lastword_lbuffer=${lastword_lbuffer:gs/\"//}
+                ary=(${(z)lastword_lbuffer})
+                lastword_lbuffer=$ary[-1]
             fi
-            if alias -g -- $lastword | grep -q "." &>/dev/null;then
+            if alias -g -- $lastword_lbuffer | grep -q "." &>/dev/null;then
                 #global alias expansion
-                #logg "global=>'$lastword'"
-                expandGlobalAliases "$lastword"
+                #logg "global=>'$lastword_lbuffer'"
+                expandGlobalAliases "$lastword_lbuffer"
                 __ALIAS=true
             fi
         fi
 
-        if [[ ! -f "$lastword" ]]; then
+        if [[ ! -f "$lastword_lbuffer" ]]; then
             :
             #DNS lookups
             #type -a "$lastWord" &> /dev/null || {
