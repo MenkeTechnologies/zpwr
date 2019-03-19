@@ -1665,10 +1665,12 @@ set +x
     done
 
     ((lastIndex+=$#mywordsleft))
-    mywords=($mywordsall[$firstIndex,$lastIndex])
+    mywords=($mywordsall[$firstIndex,$#mywordsleft])
+    mywords_partition=($mywordsall[$firstIndex,$lastIndex])
     #logg "partition = '$mywords'"
     firstword=${mywords[1]}
     lastword=${mywords[-1]}
+    lastword_partition=${mywords_partition[-1]}
     #logg "first word = '$firstword'"
     #logg "last word = '$lastword'"
     __ALIAS=false
