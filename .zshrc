@@ -1737,6 +1737,7 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@$res@")"
             fi
             __ALIAS=true
         else
+            #remove space from menuselect spacebar
             if [[ ${LBUFFER: -1} == " " ]]; then
                 LBUFFER="${LBUFFER:0:-1}"
             fi
@@ -1785,7 +1786,7 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@$res@")"
         fi
     fi
     if [[ $__ALIAS != true ]]; then
-        #expand globs and parameters and =
+        #expand globs, parameters and =
         zle expand-word
     fi
 
