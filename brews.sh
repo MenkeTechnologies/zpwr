@@ -279,6 +279,7 @@ brew install ocaml
 brew install ocamlbuild
 brew install oniguruma
 brew install opam
+brew install open-mpi
 brew install openblas
 brew install opencore-amr
 brew install openexr
@@ -314,6 +315,7 @@ brew install postgresql
 brew install pssh
 brew install pstree
 brew install pv
+brew install py2cairo
 brew install py3cairo
 brew install pygobject3
 brew install python
