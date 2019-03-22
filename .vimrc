@@ -1054,4 +1054,7 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { pygmentize -g {} | nl -b a; } || stat {}'"}))
 
+"git gutter update time
+set updatetime=100
+
 "}}}*****************za******************************************
