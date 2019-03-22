@@ -40,6 +40,8 @@ to match your GitHub account name to enable various functionality with your acco
 
 There is a shell function called `getrc` that will pull down latest changes from this repository.
 
+The default Tmux prefix key is C-X on a Mac so I can control inner tmux sessions separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
+
 Always looking for contributors.
 
 # Running on a MacbookPro
