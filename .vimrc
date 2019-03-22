@@ -660,7 +660,7 @@ augroup indentGroup
     if index(blacklist, currentFileEnding) < 0
         let filename=expand('%:p:t')
         if filename != '.zshrc'
-            autocmd CursorHoldI * :call Indent()
+            "autocmd CursorHoldI * :call Indent()
         endif
     endif
 augroup end
