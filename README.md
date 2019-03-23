@@ -60,6 +60,7 @@ Always looking for contributors.
 # Running on the Raspberry Pi 3
 ![Alt text](/tmuxfinal3.png?raw=true)
 ![Alt text](/tmuxfinal4.png?raw=true)
+
 # Tmux keybindings (tmux lsk)
 - ```bind-key    -T copy-mode    C-Space           send-keys -X begin-selection```
 - ```bind-key    -T copy-mode    C-a               send-keys -X start-of-line```
@@ -326,6 +327,7 @@ Always looking for contributors.
 - ```bindkey -M viins "^F^D" intoFzf```
 - ```bindkey -M viins "^F^F" fzf-file-widget```
 - ```bindkey -M viins "^F^G" intoFzfAg```
+- ```bindkey -M viins "^F^H" lsoffzf```
 - ```bindkey -M viins "^F^L" list-choices```
 - ```bindkey -M viins "^F^S" gitFuncNoCheck```
 - ```bindkey -M viins "^G" what-cursor-position```
@@ -415,11 +417,14 @@ Always looking for contributors.
 - ```bindkey -M viins "^?" deleteMatching```
 - ```bindkey -R -M viins "\M-^@"-"\M-^?" self-insert```
 # Zsh Vim Normal Mode keybindings (bindkey -M vicmd -L)
+- ```bindkey -a "^A" beginning-of-line```
 - ```bindkey -a "^B" clipboard```
 - ```bindkey -a "^D" list-choices```
+- ```bindkey -a "^E" end-of-line```
 - ```bindkey -a "^F^D" intoFzf```
 - ```bindkey -a "^F^F" fzf-file-widget```
 - ```bindkey -a "^F^G" intoFzfAg```
+- ```bindkey -a "^F^H" lsoffzf```
 - ```bindkey -a "^F^L" list-choices```
 - ```bindkey -a "^F^S" gitFuncNoCheck```
 - ```bindkey -a "^G" what-cursor-position```
@@ -723,8 +728,8 @@ Always looking for contributors.
 - ```i  `            @<Plug>delimitMate````
 - ```i  {            @<Plug>delimitMate{```
 - ```i  }            @<Plug>delimitMate}```
-- ```i  <Plug>ISurround * <C-R>=<SNR>107_insert(1)<CR>```
-- ```i  <Plug>Isurround * <C-R>=<SNR>107_insert()<CR>```
+- ```i  <Plug>ISurround * <C-R>=<SNR>110_insert(1)<CR>```
+- ```i  <Plug>Isurround * <C-R>=<SNR>110_insert()<CR>```
 - ```i  <Plug>(sexp_insert_backspace) * sexp#backspace_insertion()```
 - ```i  <Plug>(sexp_insert_double_quote) * sexp#quote_insertion('"')```
 - ```i  <Plug>(sexp_insert_closing_curly) * sexp#closing_insertion('}')```
@@ -805,6 +810,7 @@ Always looking for contributors.
 - ```i  <C-B>       * getline('.')=~'^\s*$'&&col('.')>strlen(getline('.'))?"0\<C-D>\<Esc>kJs":"\<Left>"```
 - ```i  <C-C>       * <Esc>:wq!<CR>:qa!<CR>```
 - ```i  <C-D>       * col('.')>strlen(getline('.'))?"\<C-D>":"\<Del>"```
+- ```i  <C-D><C-D>  * <C-O>:GitGutterUndoHunk<CR>```
 - ```i  <C-D>p      * <C-O>:call GetRef()<CR>```
 - ```i  <C-D>s      * <C-O>:History/<CR>```
 - ```i  <C-D>h      * <C-O>:History:<CR>```
@@ -848,6 +854,7 @@ Always looking for contributors.
 - ```i  <C-Z>       * <Esc>:suspend<CR>```
 # Vim Keybindings Normal Mode
 - ```n  <C-C>       * :wq!<CR>:qa!<CR>```
+- ```   <C-D><C-D>  * :GitGutterUndoHunk<CR>```
 - ```n  <C-D>p      * :call GetRef()<CR>```
 - ```n  <C-D>s      * :History/<CR>```
 - ```n  <C-D>h      * :History:<CR>```
@@ -943,14 +950,14 @@ Always looking for contributors.
 - ```nox-           * repmo#SelfKey('-', '+')```
 - ```n  .             <Plug>(RepeatDot)```
 - ```nox;             repmo#LastKey('<Plug>Sneak_;')```
-- ```n  <p          & :call <SNR>108_putline(']p', 'Below')<CR><']```
-- ```n  <P          & :call <SNR>108_putline('[p', 'Above')<CR><']```
-- ```n  =p          & :call <SNR>108_putline(']p', 'Below')<CR>=']```
-- ```n  =P          & :call <SNR>108_putline('[p', 'Above')<CR>=']```
+- ```n  <p          & :call <SNR>111_putline(']p', 'Below')<CR><']```
+- ```n  <P          & :call <SNR>111_putline('[p', 'Above')<CR><']```
+- ```n  =p          & :call <SNR>111_putline(']p', 'Below')<CR>=']```
+- ```n  =P          & :call <SNR>111_putline('[p', 'Above')<CR>=']```
 - ```n  =op         * <Nop>```
-- ```n  =o            <SNR>108_legacy_option_map(nr2char(getchar()))```
-- ```n  >p          & :call <SNR>108_putline(']p', 'Below')<CR>>']```
-- ```n  >P          & :call <SNR>108_putline('[p', 'Above')<CR>>']```
+- ```n  =o            <SNR>111_legacy_option_map(nr2char(getchar()))```
+- ```n  >p          & :call <SNR>111_putline(']p', 'Below')<CR>>']```
+- ```n  >P          & :call <SNR>111_putline('[p', 'Above')<CR>>']```
 - ```n  @:            <Plug>RepeatEx```
 - ```   B           * repmo#SelfKey('b', 'w')```
 - ```noxE           * repmo#SelfKey('E', 'gE')```
@@ -968,23 +975,23 @@ Always looking for contributors.
 - ```n  [y            <Plug>unimpaired_string_encode```
 - ```n  [P            <Plug>unimpairedPutAbove```
 - ```n  [p            <Plug>unimpairedPutAbove```
-- ```n  [op         & :call <SNR>108_setup_paste()<CR>O```
+- ```n  [op         & :call <SNR>111_setup_paste()<CR>O```
 - ```n  [o+         & :set cursorline cursorcolumn<CR>```
 - ```n  [ox         & :set cursorline cursorcolumn<CR>```
 - ```n  [ov         & :set virtualedit+=all<CR>```
-- ```n  [ow         & :setlocal wrap<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [os         & :setlocal spell<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [or         & :setlocal relativenumber<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [on         & :setlocal number<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [ol         & :setlocal list<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [oi         & :set ignorecase<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [oh         & :set hlsearch<C-R>=<SNR>108_statusbump()<CR><CR>```
+- ```n  [ow         & :setlocal wrap<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [os         & :setlocal spell<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [or         & :setlocal relativenumber<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [on         & :setlocal number<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [ol         & :setlocal list<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [oi         & :set ignorecase<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [oh         & :set hlsearch<C-R>=<SNR>111_statusbump()<CR><CR>```
 - ```n  [od         & :diffthis<CR>```
-- ```n  [o|         & :setlocal cursorcolumn<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [ou         & :setlocal cursorcolumn<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [o_         & :setlocal cursorline<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [o-         & :setlocal cursorline<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  [oc         & :setlocal cursorline<C-R>=<SNR>108_statusbump()<CR><CR>```
+- ```n  [o|         & :setlocal cursorcolumn<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [ou         & :setlocal cursorcolumn<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [o_         & :setlocal cursorline<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [o-         & :setlocal cursorline<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  [oc         & :setlocal cursorline<C-R>=<SNR>111_statusbump()<CR><CR>```
 - ```n  [ob         & :set background=light<CR>```
 - ```n  [e            <Plug>unimpairedMoveUp```
 - ```n  [<Space>      <Plug>unimpairedBlankUp```
@@ -1015,23 +1022,23 @@ Always looking for contributors.
 - ```n  ]y            <Plug>unimpaired_string_decode```
 - ```n  ]P            <Plug>unimpairedPutBelow```
 - ```n  ]p            <Plug>unimpairedPutBelow```
-- ```n  ]op         & :call <SNR>108_setup_paste()<CR>o```
+- ```n  ]op         & :call <SNR>111_setup_paste()<CR>o```
 - ```n  ]o+         & :set nocursorline nocursorcolumn<CR>```
 - ```n  ]ox         & :set nocursorline nocursorcolumn<CR>```
 - ```n  ]ov         & :set virtualedit-=all<CR>```
-- ```n  ]ow         & :setlocal nowrap<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]os         & :setlocal nospell<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]or         & :setlocal norelativenumber<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]on         & :setlocal nonumber<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]ol         & :setlocal nolist<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]oi         & :set noignorecase<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]oh         & :set nohlsearch<C-R>=<SNR>108_statusbump()<CR><CR>```
+- ```n  ]ow         & :setlocal nowrap<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]os         & :setlocal nospell<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]or         & :setlocal norelativenumber<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]on         & :setlocal nonumber<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]ol         & :setlocal nolist<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]oi         & :set noignorecase<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]oh         & :set nohlsearch<C-R>=<SNR>111_statusbump()<CR><CR>```
 - ```n  ]od         & :diffoff<CR>```
-- ```n  ]o|         & :setlocal nocursorcolumn<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]ou         & :setlocal nocursorcolumn<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]o_         & :setlocal nocursorline<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]o-         & :setlocal nocursorline<C-R>=<SNR>108_statusbump()<CR><CR>```
-- ```n  ]oc         & :setlocal nocursorline<C-R>=<SNR>108_statusbump()<CR><CR>```
+- ```n  ]o|         & :setlocal nocursorcolumn<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]ou         & :setlocal nocursorcolumn<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]o_         & :setlocal nocursorline<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]o-         & :setlocal nocursorline<C-R>=<SNR>111_statusbump()<CR><CR>```
+- ```n  ]oc         & :setlocal nocursorline<C-R>=<SNR>111_statusbump()<CR><CR>```
 - ```n  ]ob         & :set background=dark<CR>```
 - ```n  ]e            <Plug>unimpairedMoveDown```
 - ```n  ]<Space>      <Plug>unimpairedBlankDown```
@@ -1055,7 +1062,7 @@ Always looking for contributors.
 - ```nox]m          * repmo#SelfKey(']m', '[m')```
 - ```noxb             <Plug>CamelCaseMotion_b```
 - ```n  cop         * <Nop>```
-- ```n  co            <SNR>108_legacy_option_map(nr2char(getchar()))```
+- ```n  co            <SNR>111_legacy_option_map(nr2char(getchar()))```
 - ```n  cS            <Plug>CSurround```
 - ```n  cs            <Plug>Csurround```
 - ```n  ds            <Plug>Dsurround```
@@ -1082,23 +1089,23 @@ Always looking for contributors.
 - ```noxt             repmo#ZapKey('<Plug>Sneak_t')```
 - ```n  u             <Plug>(RepeatUndo)```
 - ```noxw             <Plug>CamelCaseMotion_w```
-- ```n  yop         & :call <SNR>108_setup_paste()<CR>0C```
-- ```n  yo+         & :set <C-R>=<SNR>108_cursor_options()<CR><CR>```
-- ```n  yox         & :set <C-R>=<SNR>108_cursor_options()<CR><CR>```
+- ```n  yop         & :call <SNR>111_setup_paste()<CR>0C```
+- ```n  yo+         & :set <C-R>=<SNR>111_cursor_options()<CR><CR>```
+- ```n  yox         & :set <C-R>=<SNR>111_cursor_options()<CR><CR>```
 - ```n  yov         & :set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR>```
-- ```n  yow         & :setlocal <C-R>=<SNR>108_toggle("wrap")<CR><CR>```
-- ```n  yos         & :setlocal <C-R>=<SNR>108_toggle("spell")<CR><CR>```
-- ```n  yor         & :setlocal <C-R>=<SNR>108_toggle("relativenumber")<CR><CR>```
-- ```n  yon         & :setlocal <C-R>=<SNR>108_toggle("number")<CR><CR>```
-- ```n  yol         & :setlocal <C-R>=<SNR>108_toggle("list")<CR><CR>```
-- ```n  yoi         & :set <C-R>=<SNR>108_toggle("ignorecase")<CR><CR>```
-- ```n  yoh         & :set <C-R>=<SNR>108_toggle("hlsearch")<CR><CR>```
+- ```n  yow         & :setlocal <C-R>=<SNR>111_toggle("wrap")<CR><CR>```
+- ```n  yos         & :setlocal <C-R>=<SNR>111_toggle("spell")<CR><CR>```
+- ```n  yor         & :setlocal <C-R>=<SNR>111_toggle("relativenumber")<CR><CR>```
+- ```n  yon         & :setlocal <C-R>=<SNR>111_toggle("number")<CR><CR>```
+- ```n  yol         & :setlocal <C-R>=<SNR>111_toggle("list")<CR><CR>```
+- ```n  yoi         & :set <C-R>=<SNR>111_toggle("ignorecase")<CR><CR>```
+- ```n  yoh         & :set <C-R>=<SNR>111_toggle("hlsearch")<CR><CR>```
 - ```n  yod         & :<C-R>=&diff ? "diffoff" : "diffthis"<CR><CR>```
-- ```n  yo|         & :setlocal <C-R>=<SNR>108_toggle("cursorcolumn")<CR><CR>```
-- ```n  you         & :setlocal <C-R>=<SNR>108_toggle("cursorcolumn")<CR><CR>```
-- ```n  yo_         & :setlocal <C-R>=<SNR>108_toggle("cursorline")<CR><CR>```
-- ```n  yo-         & :setlocal <C-R>=<SNR>108_toggle("cursorline")<CR><CR>```
-- ```n  yoc         & :setlocal <C-R>=<SNR>108_toggle("cursorline")<CR><CR>```
+- ```n  yo|         & :setlocal <C-R>=<SNR>111_toggle("cursorcolumn")<CR><CR>```
+- ```n  you         & :setlocal <C-R>=<SNR>111_toggle("cursorcolumn")<CR><CR>```
+- ```n  yo_         & :setlocal <C-R>=<SNR>111_toggle("cursorline")<CR><CR>```
+- ```n  yo-         & :setlocal <C-R>=<SNR>111_toggle("cursorline")<CR><CR>```
+- ```n  yoc         & :setlocal <C-R>=<SNR>111_toggle("cursorline")<CR><CR>```
 - ```n  yob         & :set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR>```
 - ```n  ySS           <Plug>YSsurround```
 - ```n  ySs           <Plug>YSsurround```
@@ -1110,31 +1117,31 @@ Always looking for contributors.
 - ```n  <Plug>NetrwBrowseX * :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<CR>```
 - ```n  <Plug>(wildfire-quick-select) * :<C-U>call wildfire#QuickSelect(['ip', 'i)', 'i]', 'i}', 'i''', 'i"', 'it'])<CR>```
 - ```n  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Start(v:count1, ['ip', 'i)', 'i]', 'i}', 'i''', 'i"', 'it'])<CR>```
-- ```n  <Plug>unimpaired_line_xml_decode * <SNR>108_TransformSetup("xml_decode")."_"```
-- ```n  <Plug>unimpaired_xml_decode * <SNR>108_TransformSetup("xml_decode")```
-- ```n  <Plug>unimpaired_line_xml_encode * <SNR>108_TransformSetup("xml_encode")."_"```
-- ```n  <Plug>unimpaired_xml_encode * <SNR>108_TransformSetup("xml_encode")```
-- ```n  <Plug>unimpaired_line_url_decode * <SNR>108_TransformSetup("url_decode")."_"```
-- ```n  <Plug>unimpaired_url_decode * <SNR>108_TransformSetup("url_decode")```
-- ```n  <Plug>unimpaired_line_url_encode * <SNR>108_TransformSetup("url_encode")."_"```
-- ```n  <Plug>unimpaired_url_encode * <SNR>108_TransformSetup("url_encode")```
-- ```n  <Plug>unimpaired_line_string_decode * <SNR>108_TransformSetup("string_decode")."_"```
-- ```n  <Plug>unimpaired_string_decode * <SNR>108_TransformSetup("string_decode")```
-- ```n  <Plug>unimpaired_line_string_encode * <SNR>108_TransformSetup("string_encode")."_"```
-- ```n  <Plug>unimpaired_string_encode * <SNR>108_TransformSetup("string_encode")```
-- ```n  <Plug>unimpairedPutBelow * :call <SNR>108_putline(']p', 'Below')<CR>```
-- ```n  <Plug>unimpairedPutAbove * :call <SNR>108_putline('[p', 'Above')<CR>```
-- ```n  <Plug>unimpairedPaste * :call <SNR>108_setup_paste()<CR>```
-- ```   <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>108_MoveSelectionDown(v:count1)<CR>```
-- ```   <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>108_MoveSelectionUp(v:count1)<CR>```
-- ```n  <Plug>unimpairedMoveDown * :<C-U>call <SNR>108_Move('+',v:count1,'Down')<CR>```
-- ```n  <Plug>unimpairedMoveUp * :<C-U>call <SNR>108_Move('--',v:count1,'Up')<CR>```
-- ```n  <Plug>unimpairedBlankDown * :<C-U>call <SNR>108_BlankDown(v:count1)<CR>```
-- ```n  <Plug>unimpairedBlankUp * :<C-U>call <SNR>108_BlankUp(v:count1)<CR>```
-- ```n  <Plug>unimpairedContextNext * :call <SNR>108_Context(0)<CR>```
-- ```n  <Plug>unimpairedContextPrevious * :call <SNR>108_Context(1)<CR>```
-- ```n  <Plug>unimpairedDirectoryPrevious * :<C-U>edit <C-R>=<SNR>108_fnameescape(fnamemodify(<SNR>108_FileByOffset(-v:count1), ':.'))<CR><CR>```
-- ```n  <Plug>unimpairedDirectoryNext * :<C-U>edit <C-R>=<SNR>108_fnameescape(fnamemodify(<SNR>108_FileByOffset(v:count1), ':.'))<CR><CR>```
+- ```n  <Plug>unimpaired_line_xml_decode * <SNR>111_TransformSetup("xml_decode")."_"```
+- ```n  <Plug>unimpaired_xml_decode * <SNR>111_TransformSetup("xml_decode")```
+- ```n  <Plug>unimpaired_line_xml_encode * <SNR>111_TransformSetup("xml_encode")."_"```
+- ```n  <Plug>unimpaired_xml_encode * <SNR>111_TransformSetup("xml_encode")```
+- ```n  <Plug>unimpaired_line_url_decode * <SNR>111_TransformSetup("url_decode")."_"```
+- ```n  <Plug>unimpaired_url_decode * <SNR>111_TransformSetup("url_decode")```
+- ```n  <Plug>unimpaired_line_url_encode * <SNR>111_TransformSetup("url_encode")."_"```
+- ```n  <Plug>unimpaired_url_encode * <SNR>111_TransformSetup("url_encode")```
+- ```n  <Plug>unimpaired_line_string_decode * <SNR>111_TransformSetup("string_decode")."_"```
+- ```n  <Plug>unimpaired_string_decode * <SNR>111_TransformSetup("string_decode")```
+- ```n  <Plug>unimpaired_line_string_encode * <SNR>111_TransformSetup("string_encode")."_"```
+- ```n  <Plug>unimpaired_string_encode * <SNR>111_TransformSetup("string_encode")```
+- ```n  <Plug>unimpairedPutBelow * :call <SNR>111_putline(']p', 'Below')<CR>```
+- ```n  <Plug>unimpairedPutAbove * :call <SNR>111_putline('[p', 'Above')<CR>```
+- ```n  <Plug>unimpairedPaste * :call <SNR>111_setup_paste()<CR>```
+- ```   <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>111_MoveSelectionDown(v:count1)<CR>```
+- ```   <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>111_MoveSelectionUp(v:count1)<CR>```
+- ```n  <Plug>unimpairedMoveDown * :<C-U>call <SNR>111_Move('+',v:count1,'Down')<CR>```
+- ```n  <Plug>unimpairedMoveUp * :<C-U>call <SNR>111_Move('--',v:count1,'Up')<CR>```
+- ```n  <Plug>unimpairedBlankDown * :<C-U>call <SNR>111_BlankDown(v:count1)<CR>```
+- ```n  <Plug>unimpairedBlankUp * :<C-U>call <SNR>111_BlankUp(v:count1)<CR>```
+- ```n  <Plug>unimpairedContextNext * :call <SNR>111_Context(0)<CR>```
+- ```n  <Plug>unimpairedContextPrevious * :call <SNR>111_Context(1)<CR>```
+- ```n  <Plug>unimpairedDirectoryPrevious * :<C-U>edit <C-R>=<SNR>111_fnameescape(fnamemodify(<SNR>111_FileByOffset(-v:count1), ':.'))<CR><CR>```
+- ```n  <Plug>unimpairedDirectoryNext * :<C-U>edit <C-R>=<SNR>111_fnameescape(fnamemodify(<SNR>111_FileByOffset(v:count1), ':.'))<CR><CR>```
 - ```n  <Plug>unimpairedTPNext * :<C-U>exe "p".(v:count ? v:count : "")."tnext"<CR>```
 - ```n  <Plug>unimpairedTPPrevious * :<C-U>exe "p".(v:count ? v:count : "")."tprevious"<CR>```
 - ```n  <Plug>unimpairedTLast * :<C-U>exe "".(v:count ? v:count : "")."tlast"<CR>```
@@ -1161,13 +1168,13 @@ Always looking for contributors.
 - ```n  <Plug>unimpairedAFirst * :<C-U>exe "".(v:count ? v:count : "")."first"<CR>```
 - ```n  <Plug>unimpairedANext * :<C-U>exe "".(v:count ? v:count : "")."next"<CR>```
 - ```n  <Plug>unimpairedAPrevious * :<C-U>exe "".(v:count ? v:count : "")."previous"<CR>```
-- ```n  <Plug>YSurround * <SNR>107_opfunc2('setup')```
-- ```n  <Plug>Ysurround * <SNR>107_opfunc('setup')```
-- ```n  <Plug>YSsurround * <SNR>107_opfunc2('setup').'_'```
-- ```n  <Plug>Yssurround * '^'.v:count1.<SNR>107_opfunc('setup').'g_'```
-- ```n  <Plug>CSurround * :<C-U>call <SNR>107_changesurround(1)<CR>```
-- ```n  <Plug>Csurround * :<C-U>call <SNR>107_changesurround()<CR>```
-- ```n  <Plug>Dsurround * :<C-U>call <SNR>107_dosurround(<SNR>107_inputtarget())<CR>```
+- ```n  <Plug>YSurround * <SNR>110_opfunc2('setup')```
+- ```n  <Plug>Ysurround * <SNR>110_opfunc('setup')```
+- ```n  <Plug>YSsurround * <SNR>110_opfunc2('setup').'_'```
+- ```n  <Plug>Yssurround * '^'.v:count1.<SNR>110_opfunc('setup').'g_'```
+- ```n  <Plug>CSurround * :<C-U>call <SNR>110_changesurround(1)<CR>```
+- ```n  <Plug>Csurround * :<C-U>call <SNR>110_changesurround()<CR>```
+- ```n  <Plug>Dsurround * :<C-U>call <SNR>110_dosurround(<SNR>110_inputtarget())<CR>```
 - ```n  <Plug>SurroundRepeat * .```
 - ```n  <Plug>(startify-open-buffers) * :<C-U>call startify#open_buffers()<CR>```
 - ```n  <Plug>SneakPrevious   <Plug>Sneak_,```
@@ -1182,38 +1189,38 @@ Always looking for contributors.
 - ```n  <Plug>Sneak_t * :<C-U>call sneak#wrap('', 1, 0, 0, 0)<CR>```
 - ```n  <Plug>Sneak_F * :<C-U>call sneak#wrap('', 1, 1, 1, 0)<CR>```
 - ```n  <Plug>Sneak_f * :<C-U>call sneak#wrap('', 1, 0, 1, 0)<CR>```
-- ```n  <Plug>Sneak_, * :<C-U>call <SNR>104_rpt('', 1)<CR>```
-- ```n  <Plug>Sneak_; * :<C-U>call <SNR>104_rpt('', 0)<CR>```
+- ```n  <Plug>Sneak_, * :<C-U>call <SNR>107_rpt('', 1)<CR>```
+- ```n  <Plug>Sneak_; * :<C-U>call <SNR>107_rpt('', 0)<CR>```
 - ```n  <Plug>Sneak_S * :<C-U>call sneak#wrap('', 2, 1, 2, 1)<CR>```
 - ```n  <Plug>Sneak_s * :<C-U>call sneak#wrap('', 2, 0, 2, 1)<CR>```
-- ```n  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 1) | call <SNR>101_repeat_set("\<Plug>(sexp_capture_next_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_capture_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 1) | call <SNR>101_repeat_set("\<Plug>(sexp_capture_prev_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_emit_tail_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 0) | call <SNR>101_repeat_set("\<Plug>(sexp_emit_tail_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_emit_head_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 0) | call <SNR>101_repeat_set("\<Plug>(sexp_emit_head_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_swap_element_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 0) | call <SNR>101_repeat_set("\<Plug>(sexp_swap_element_forward)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_swap_element_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 0) | call <SNR>101_repeat_set("\<Plug>(sexp_swap_element_backward)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_swap_list_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 1) | call <SNR>101_repeat_set("\<Plug>(sexp_swap_list_forward)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_swap_list_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 1) | call <SNR>101_repeat_set("\<Plug>(sexp_swap_list_backward)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_splice_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#splice_list(b:sexp_count) | call <SNR>101_repeat_set("\<Plug>(sexp_splice_list)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_convolute) * :<C-U>let b:sexp_count = v:count | call sexp#convolute(b:sexp_count, 'n') | call <SNR>101_repeat_set("\<Plug>(sexp_convolute)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_raise_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_element', 'n', 1) | call <SNR>101_repeat_set("\<Plug>(sexp_raise_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_raise_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_list', 'n', 0, 0) | call <SNR>101_repeat_set("\<Plug>(sexp_raise_list)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_insert_at_list_tail) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(1) | call <SNR>101_repeat_set("\<Plug>(sexp_insert_at_list_tail)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_insert_at_list_head) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(0) | call <SNR>101_repeat_set("\<Plug>(sexp_insert_at_list_head)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_curly_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_curly_tail_wrap_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_curly_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_curly_head_wrap_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_square_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_square_tail_wrap_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_square_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_square_head_wrap_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_round_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_round_tail_wrap_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_round_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_round_head_wrap_element)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_curly_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_curly_tail_wrap_list)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_curly_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_curly_head_wrap_list)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_square_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_square_tail_wrap_list)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_square_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_square_head_wrap_list)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_round_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_round_tail_wrap_list)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_round_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>101_repeat_set("\<Plug>(sexp_round_head_wrap_list)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_indent_top) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(1, b:sexp_count) | call <SNR>101_repeat_set("\<Plug>(sexp_indent_top)", b:sexp_count)<CR>```
-- ```n  <Plug>(sexp_indent) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(0, b:sexp_count) | call <SNR>101_repeat_set("\<Plug>(sexp_indent)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 1) | call <SNR>104_repeat_set("\<Plug>(sexp_capture_next_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_capture_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 1) | call <SNR>104_repeat_set("\<Plug>(sexp_capture_prev_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_emit_tail_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 0) | call <SNR>104_repeat_set("\<Plug>(sexp_emit_tail_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_emit_head_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 0) | call <SNR>104_repeat_set("\<Plug>(sexp_emit_head_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_swap_element_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 0) | call <SNR>104_repeat_set("\<Plug>(sexp_swap_element_forward)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_swap_element_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 0) | call <SNR>104_repeat_set("\<Plug>(sexp_swap_element_backward)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_swap_list_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 1) | call <SNR>104_repeat_set("\<Plug>(sexp_swap_list_forward)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_swap_list_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 1) | call <SNR>104_repeat_set("\<Plug>(sexp_swap_list_backward)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_splice_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#splice_list(b:sexp_count) | call <SNR>104_repeat_set("\<Plug>(sexp_splice_list)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_convolute) * :<C-U>let b:sexp_count = v:count | call sexp#convolute(b:sexp_count, 'n') | call <SNR>104_repeat_set("\<Plug>(sexp_convolute)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_raise_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_element', 'n', 1) | call <SNR>104_repeat_set("\<Plug>(sexp_raise_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_raise_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_list', 'n', 0, 0) | call <SNR>104_repeat_set("\<Plug>(sexp_raise_list)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_insert_at_list_tail) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(1) | call <SNR>104_repeat_set("\<Plug>(sexp_insert_at_list_tail)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_insert_at_list_head) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(0) | call <SNR>104_repeat_set("\<Plug>(sexp_insert_at_list_head)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_curly_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_curly_tail_wrap_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_curly_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_curly_head_wrap_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_square_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_square_tail_wrap_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_square_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_square_head_wrap_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_round_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_round_tail_wrap_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_round_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_round_head_wrap_element)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_curly_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_curly_tail_wrap_list)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_curly_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_curly_head_wrap_list)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_square_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_square_tail_wrap_list)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_square_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_square_head_wrap_list)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_round_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_round_tail_wrap_list)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_round_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>104_repeat_set("\<Plug>(sexp_round_head_wrap_list)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_indent_top) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(1, b:sexp_count) | call <SNR>104_repeat_set("\<Plug>(sexp_indent_top)", b:sexp_count)<CR>```
+- ```n  <Plug>(sexp_indent) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(0, b:sexp_count) | call <SNR>104_repeat_set("\<Plug>(sexp_indent)", b:sexp_count)<CR>```
 - ```n  <Plug>(sexp_select_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#select_adjacent_element', 'n', 1)<CR>```
 - ```n  <Plug>(sexp_select_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#select_adjacent_element', 'n', 0)<CR>```
 - ```n  <Plug>(sexp_move_to_next_top_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#move_to_adjacent_element('n', b:sexp_count, 1, 0, 1)<CR>```
@@ -1260,6 +1267,11 @@ Always looking for contributors.
 - ```n  <Plug>MarkologyDisable * :MarkologyDisable<CR>```
 - ```n  <Plug>MarkologyEnable * :MarkologyEnable<CR>```
 - ```n  <Plug>LOTRToggle * :LOTRToggle<CR>```
+- ```n  <Plug>GitGutterPreviewHunk * :GitGutterPreviewHunk<CR>```
+- ```n  <Plug>GitGutterUndoHunk * :GitGutterUndoHunk<CR>```
+- ```n  <Plug>GitGutterStageHunk * :GitGutterStageHunk<CR>```
+- ```n  <Plug>GitGutterPrevHunk * &diff ? '[c' : ":\<C-U>execute v:count1 . 'GitGutterPrevHunk'\<CR>"```
+- ```n  <Plug>GitGutterNextHunk * &diff ? ']c' : ":\<C-U>execute v:count1 . 'GitGutterNextHunk'\<CR>"```
 - ```   <Plug>(easymotion-prefix)N   <Plug>(easymotion-N)```
 - ```   <Plug>(easymotion-prefix)n   <Plug>(easymotion-n)```
 - ```   <Plug>(easymotion-prefix)k   <Plug>(easymotion-k)```
@@ -1473,6 +1485,7 @@ Always looking for contributors.
 - ```n  <Plug>RepeatEx * @: :call repeat#set("\<Plug>RepeatEx")<CR>```
 # Vim Keybindings Visual Mode
 - ```v  <C-B>       * "*y`>```
+- ```   <C-D><C-D>  * :GitGutterUndoHunk<CR>```
 - ```v  <C-D>y      * :<C-C>:update<CR>:SyntasticCheck<CR>```
 - ```v  <C-D>d      * :<C-C>:update<CR>```
 - ```v  <C-D>/      * :call NERDComment("x","Toggle")<CR>`>```
@@ -1576,16 +1589,16 @@ Always looking for contributors.
 - ```v  <Plug>NetrwBrowseXVis * :<C-U>call netrw#BrowseXVis()<CR>```
 - ```v  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Fuel(v:count1)<CR>```
 - ```v  <Plug>(wildfire-water) * :<C-U>call wildfire#Water(v:count1)<CR>```
-- ```x  <Plug>unimpaired_xml_decode * <SNR>108_TransformSetup("xml_decode")```
-- ```x  <Plug>unimpaired_xml_encode * <SNR>108_TransformSetup("xml_encode")```
-- ```x  <Plug>unimpaired_url_decode * <SNR>108_TransformSetup("url_decode")```
-- ```x  <Plug>unimpaired_url_encode * <SNR>108_TransformSetup("url_encode")```
-- ```x  <Plug>unimpaired_string_decode * <SNR>108_TransformSetup("string_decode")```
-- ```x  <Plug>unimpaired_string_encode * <SNR>108_TransformSetup("string_encode")```
-- ```   <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>108_MoveSelectionDown(v:count1)<CR>```
-- ```   <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>108_MoveSelectionUp(v:count1)<CR>```
-- ```v  <Plug>VgSurround * :<C-U>call <SNR>107_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR>```
-- ```v  <Plug>VSurround * :<C-U>call <SNR>107_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>```
+- ```x  <Plug>unimpaired_xml_decode * <SNR>111_TransformSetup("xml_decode")```
+- ```x  <Plug>unimpaired_xml_encode * <SNR>111_TransformSetup("xml_encode")```
+- ```x  <Plug>unimpaired_url_decode * <SNR>111_TransformSetup("url_decode")```
+- ```x  <Plug>unimpaired_url_encode * <SNR>111_TransformSetup("url_encode")```
+- ```x  <Plug>unimpaired_string_decode * <SNR>111_TransformSetup("string_decode")```
+- ```x  <Plug>unimpaired_string_encode * <SNR>111_TransformSetup("string_encode")```
+- ```   <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>111_MoveSelectionDown(v:count1)<CR>```
+- ```   <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>111_MoveSelectionUp(v:count1)<CR>```
+- ```v  <Plug>VgSurround * :<C-U>call <SNR>110_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR>```
+- ```v  <Plug>VSurround * :<C-U>call <SNR>110_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR>```
 - ```x  <Plug>SneakPrevious   <Plug>Sneak_,```
 - ```x  <Plug>SneakNext   <Plug>Sneak_;```
 - ```x  <Plug>(SneakStreakBackward)   <Plug>SneakLabel_S```
@@ -1600,8 +1613,8 @@ Always looking for contributors.
 - ```x  <Plug>Sneak_t * :<C-U>call sneak#wrap(visualmode(), 1, 0, 0, 0)<CR>```
 - ```x  <Plug>Sneak_F * :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 0)<CR>```
 - ```x  <Plug>Sneak_f * :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 0)<CR>```
-- ```x  <Plug>Sneak_, * :<C-U>call <SNR>104_rpt(visualmode(), 1)<CR>```
-- ```x  <Plug>Sneak_; * :<C-U>call <SNR>104_rpt(visualmode(), 0)<CR>```
+- ```x  <Plug>Sneak_, * :<C-U>call <SNR>107_rpt(visualmode(), 1)<CR>```
+- ```x  <Plug>Sneak_; * :<C-U>call <SNR>107_rpt(visualmode(), 0)<CR>```
 - ```x  <Plug>Sneak_S * :<C-U>call sneak#wrap(visualmode(), 2, 1, 2, 1)<CR>```
 - ```x  <Plug>Sneak_s * :<C-U>call sneak#wrap(visualmode(), 2, 0, 2, 1)<CR>```
 - ```x  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'v', 1, 1)<CR>```
@@ -1659,6 +1672,8 @@ Always looking for contributors.
 - ```   <F31>         ä```
 - ```x  <Plug>RefactorExtractType * :call lh#refactor#extract_type(1,lh#ui#input("Name for the type to extract: "))<CR>```
 - ```x  <Plug>RefactorExtractVariable * :call lh#refactor#extract_variable(1,lh#ui#input("Name for the variable to extract: ", lh#refactor#default_varname()))<CR>```
+- ```x  <Plug>GitGutterTextObjectOuterVisual * :<C-U>call gitgutter#hunk#text_object(0)<CR>```
+- ```x  <Plug>GitGutterTextObjectInnerVisual * :<C-U>call gitgutter#hunk#text_object(1)<CR>```
 - ```   <Plug>(easymotion-prefix)N   <Plug>(easymotion-N)```
 - ```   <Plug>(easymotion-prefix)n   <Plug>(easymotion-n)```
 - ```   <Plug>(easymotion-prefix)k   <Plug>(easymotion-k)```
@@ -1907,5 +1922,7 @@ Always looking for contributors.
 - ```c  <C-B>       * <Left>```
 - ```c  <C-D>       * getcmdpos()>strlen(getcmdline())?"\<C-D>":"\<Del>"```
 - ```c  <C-F>       * getcmdpos()>strlen(getcmdline())?&cedit:"\<Right>"```
-- ```c  <C-T>       * <SNR>96_transpose()```
+- ```c  <C-T>       * <SNR>99_transpose()```
+- ```c  <C-U>       * <SNR>99_ctrl_u()```
 - ```c  <C-X><C-A>  * <C-A>```
+- ```c  <C-Y>       * <C-R>-```
