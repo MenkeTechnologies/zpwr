@@ -80,11 +80,14 @@ set encoding=utf8
 set showmatch
 set showmode
 set hlsearch
+"search performed for each keypress
 set incsearch
 set mouse=a
 set shiftwidth=4 "indent set to four spaces
 set expandtab
+"wrap lines
 set linebreak
+"line wrap indicator
 set showbreak=--> 
 set number
 set backupdir=~/tmp
@@ -889,6 +892,12 @@ nnoremap <silent> <C-D>h :History:<CR>
 nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>p :call GetRef()<CR>
 
+"gutter update time for git utter and markology plugins 
+set updatetime=100
+
+inoremap <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
+noremap <C-D><C-D> :GitGutterUndoHunk<CR>
+
 nmap [[ ?{<CR>w99[{
 nmap ][ /}<CR>b99]}
 nmap ]] j0[[%/{<CR>
@@ -1053,10 +1062,5 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { pygmentize -g {} | nl -b a; } || stat {}'"}))
 
-"gutter update time for git utter and markology plugins 
-set updatetime=100
-
-inoremap <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
-noremap <C-D><C-D> :GitGutterUndoHunk<CR>
 
 "}}}*****************za******************************************
