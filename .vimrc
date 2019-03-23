@@ -1054,7 +1054,7 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && { pygmentize -g {} | nl -b a; } || stat {}'"}))
 
 "gutter update time for git utter and markology plugins 
-set updatetime=900
+set updatetime=100
 
 inoremap <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
 noremap <C-D><C-D> :GitGutterUndoHunk<CR>
