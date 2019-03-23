@@ -1555,6 +1555,7 @@ set +x
     __CORRECT_WORDS[docker]="dokcer"
     __CORRECT_WORDS[drag]="darg"
     __CORRECT_WORDS[echo]="ehco ceho ecoh eco"
+    __CORRECT_WORDS[exit]="eixt"
     __CORRECT_WORDS[expansion]="exp"
     __CORRECT_WORDS[file]="feil fiel"
     __CORRECT_WORDS[finger]="fingre finegr figner"
