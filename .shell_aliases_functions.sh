@@ -1300,7 +1300,7 @@ c(){
                             *.zip)
                             eval "unzip -l \"$file\" | $COLORIZER $COLORIZER_NL"
                             ;;
-                            *.jar|*.war)
+                            *.[jw]ar)
                             eval "jar tf \"$file\" | $COLORIZER $COLORIZER_NL"
                                 ;;
                             *)
@@ -1326,7 +1326,7 @@ c(){
                             *.zip)
                             eval "unzip -l \"$file\" | $COLORIZER $COLORIZER_NL"
                             ;;
-                            *.jar)
+                            *.[jw]ar)
                             eval "jar tf \"$file\" | $COLORIZER $COLORIZER_NL"
                                 ;;
                             *)
