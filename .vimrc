@@ -1,55 +1,54 @@
-                         .....     .      ...     ..      ..     
-                       .d88888Neu. 'L   x*8888x.:*8888: -"888:   
-     ...     ..        F""""*8888888F  X   48888X `8888H  8888   
-  :~""888h.:^"888:    *      `"*88*"  X8x.  8888X  8888X  !888>  
- 8X   `8888X  8888>    -....    ue=:. X8888 X8888  88888   "*8%- 
-X888n. 8888X  ?888>           :88N  ` '*888!X8888> X8888  xH8>   
-'88888 8888X   ?**h.          9888L     `?8 `8888  X888X X888>   
-  `*88 8888~ x88x.     uzu.   `8888L    -^  '888"  X888  8888>   
- ..<"  88*`  88888X  ,""888i   ?8888     dx '88~x. !88~  8888>   
-    ..XC.    `*8888k 4  9888L   %888>  .8888Xf.888x:!    X888X.: 
-  :888888H.    `%88> '  '8888   '88%  :""888":~"888"     `888*"  
- <  `"888888:    X"       "*8Nu.z*"       "~'    "~        ""    
-       %888888x.-`                                               
-         ""**""                                                  
-                                                                 
+                         ".....     .      ...     ..      ..     
+                       ".d88888neu. 'l   x*8888x.:*8888: -"888:   
+     "...     ..        f""""*8888888f  x   48888x `8888h  8888   
+  ":~""888h.:^"888:    *      `"*88*"  x8x.  8888x  8888x  !888>  
+ "8x   `8888x  8888>    -....    ue=:. x8888 x8888  88888   "*8%- 
+"x888n. 8888x  ?888>           :88n  ` '*888!x8888> x8888  xh8>   
+"'88888 8888x   ?**h.          9888l     `?8 `8888  x888x x888>   
+  "`*88 8888~ x88x.     uzu.   `8888l    -^  '888"  x888  8888>   
+ "..<"  88*`  88888x  ,""888i   ?8888     dx '88~x. !88~  8888>   
+    "..xc.    `*8888k 4  9888l   %888>  .8888xf.888x:!    x888x.: 
+  ":888888h.    `%88> '  '8888   '88%  :""888":~"888"     `888*"  
+ "<  `"888888:    x"       "*8nu.z*"       "~'    "~        ""    
+       "%888888x.-`                                               
+         """**""                                                  
 "
-" https://github.com/MenkeTechnologies
+" https://github.com/menketechnologies
 "
 
-"{{{                    MARK:NeoBundle
+"{{{                    mark:neobundle
 "**************************************************************
-"NeoBundle Scripts-----------------------------
+"neobundle scripts-----------------------------
 if &compatible
-    set nocompatible               " Be iMproved
+    set nocompatible               " be improved
 endif
-"""" Required:
+"""" required:
 "set runtimepath+=~/.vim/bundle/neobundle.vim/
 
-" Required:
+" required:
 "call neobundle#begin(expand('~/.vim/bundle'))
 
-" Let NeoBundle manage NeoBundle
-" Required:
-"NeoBundleFetch 'Shougo/neobundle.vim'
+" let neobundle manage neobundle
+" required:
+"neobundlefetch 'shougo/neobundle.vim'
 
-"NeoBundle 'tiagofumo/vim-nerdtree-syntax-highlight'
+"neobundle 'tiagofumo/vim-nerdtree-syntax-highlight'
 
-" Required:
+" required:
 "call neobundle#end()
 
-" Required:
+" required:
 filetype plugin indent on
 
 "}}}***********************************************************
 
-""{{{                    MARK:Settings
+""{{{                    mark:settings
 ""**************************************************************
 "backslash replaced by space for leader keybindings
-let mapleader = "\<SPACE>"
+let mapleader = "\<space>"
 
-set nocompatible              " be iMproved, required
-"for YouCompleteMe doc window to open at bottom
+set nocompatible              " be improved, required
+"for youcompleteme doc window to open at bottom
 set splitright
 set noswapfile
 set nowritebackup
@@ -1056,5 +1055,8 @@ command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options
 
 "gutter update time for git utter and markology plugins 
 set updatetime=100
+
+inoremap <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
+noremap <C-D><C-D> :GitGutterUndoHunk<CR>
 
 "}}}*****************za******************************************
