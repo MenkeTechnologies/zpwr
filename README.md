@@ -28,9 +28,13 @@ Some interactivity is required near end of installer for postfix, wireshark and 
 
 Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Control-D to return to installer script.
 
+## Font
+
 You need to change the Terminal font to support the Powerline triangles and other special characters in the PowerLevel 9k font.
 
 The installer installs Hack Nerd Font on the Mac with Homebrerw and Powerline Symbols on Linux.
+
+## GITHUB_ACCOUNT variable
 
 Change line 18 in ~/.shell_aliases_functions.sh
 
@@ -38,9 +42,14 @@ Change line 18 in ~/.shell_aliases_functions.sh
 
 to match your GitHub account name to enable various functionality with your account like openMyGH, hc and hd shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line.
 
+## getrc function
+
 There is a shell function called `getrc` that will pull down latest changes from this repository.
 
+## Tmux prefix
+
 The default Tmux prefix key is C-X on a Mac so I can control inner tmux sessions separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
+The Tmux prefix on Linux is the deffault C-B.
 
 Always looking for contributors.
 
