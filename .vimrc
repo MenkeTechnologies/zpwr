@@ -841,7 +841,7 @@ endfunction
 fun! GetRef()
     let mystr = Strip(getline('.'))
     echom "Copied " . mystr
-    let @* = expand('%:p').': '.line('.').' '.Strip(getline('.'))
+    let @* = expand('%:p').': '.line('.').' '.mystr
 endfun
 
 "}}}***********************************************************
@@ -877,6 +877,7 @@ inoremap <silent> <C-D>n <C-O>:Snippets<CR>
 inoremap <silent> <C-D>h <C-O>:History:<CR>
 inoremap <silent> <C-D>s <C-O>:History/<CR>
 inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
+inoremap <silent> <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
 
 "normal mode keybindings for fzf-vim
 nnoremap <silent> <C-D>f :Files<CR>
@@ -891,12 +892,11 @@ nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>h :History:<CR>
 nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>p :call GetRef()<CR>
+noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 
 "gutter update time for git utter and markology plugins 
 set updatetime=100
 
-inoremap <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
-noremap <C-D><C-D> :GitGutterUndoHunk<CR>
 
 nmap [[ ?{<CR>w99[{
 nmap ][ /}<CR>b99]}
