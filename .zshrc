@@ -2235,11 +2235,6 @@ _cl(){
         #need to escape [ for g[ in PATH, compadd -Q does this
 }
 
-_myz(){
-    _alternative \
-        'aliases:command:(('"$(_z |& awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
-        'files:directory:_path_files -g ".*(/) *(/)"'
-}
 _f(){
     arguments=('1:files:_path_files -g ".*(/) *(/)"')
     _arguments -s $arguments
@@ -2252,7 +2247,6 @@ _c(){
 
 
 compdef _cl clearList
-compdef _myz z
 compdef _f f
 compdef _c c
 
