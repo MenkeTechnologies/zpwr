@@ -838,11 +838,11 @@ function! Strip(input_string)
     return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
 endfunction
 
-fun! GetRef()
+function! GetRef()
     let mystr = Strip(getline('.'))
     echom "Copied " . mystr
     let @* = expand('%:p').': '.line('.').' '.mystr
-endfun
+endfunction
 
 "}}}***********************************************************
 
