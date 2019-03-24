@@ -1,32 +1,31 @@
 snippet shebang "shebang line"
 #!/usr/bin/env ${1:bash}
 endsnippet
+
 snippet pr "printf default"
 printf "%$1\n" $2
 endsnippet
+
 snippet ie "if else"
 if [[ $1 ]]; then
-${2::}
+	${2::}
 else
-${3::}
+	${3::}
 fi
 endsnippet
+
 snippet iee "if elif else"
 if [[ $1 ]]; then
-${2::}
+	${2::}
 elif [[ $3 ]]; then
-${4::}
+	${4::}
 else
-${5::}
+	${5::}
 fi
 endsnippet
+
 snippet ff "for loop shell"
 for (( i = 0; i < $1; i++ )); do
-$2
+	$2
 done
 endsnippet
-
-snippet l "log"
-printf "\n_____________$(date)____$1_____________\n\n" >> "$LOGFILE"
-endsnippet
-
