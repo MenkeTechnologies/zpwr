@@ -1666,7 +1666,7 @@ set +x
     done
 
     ((lastIndex+=$#mywordsleft))
-    mywords_lbuffer=($mywordsall[$firstIndex,$#mywordsleft])
+    mywords_lbuffer=($mywordsleft[$firstIndex,$#mywordsleft])
     mywords_partition=($mywordsall[$firstIndex,$lastIndex])
     #logg "partition = '$mywords_lbuffer'"
     firstword_partition=${mywords_lbuffer[1]}
