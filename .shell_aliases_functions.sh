@@ -689,6 +689,7 @@ f(){
         cd "$1"
     else
         test -z "$1" && cd - && return 0
+        echo "$1" | \egrep '\-[0-9]+' && cd "$1" && return 0
         base="$(dirname "$1")"
         while [[ "$base" != / ]]; do
             test -d "$base" && cd "$base"&& return 0
