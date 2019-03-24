@@ -2223,9 +2223,8 @@ _comps[csh]=_tcsh
 
 _cl(){
     local global_aliases
-    global_aliases=(${(q)${(k)galiases}})
     _alternative \
-        'global-aliases:global aliases:('"${global_aliases}"')' \
+        'global-aliases:global alias:compadd -Qk galiases' \
         'suffix-aliases:suffix alias:_suffix_alias_files' \
         'aliases:alias:compadd -Qk aliases' \
         'builtins:builtin command:compadd -Qk builtins' \
@@ -2237,8 +2236,9 @@ _cl(){
 }
 
 _f(){
-    arguments=('1:files:_path_files -g ".*(/) *(/)"')
-    _arguments -s $arguments
+    _alternative \
+    'files:directory:_path_files -g ".*(/) *(/)"' \
+    'directory-stack:directory stack:_directory_stack' \
 }
 
 _c(){
