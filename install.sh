@@ -559,7 +559,7 @@ cd "$INSTALLER_DIR"
 cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 case "$distroName" in
-    (*suse*|ubuntu|debian|linuxmint|raspbian|mac)
+    (*suse*|ubuntu|debian|linuxmint|raspbian|Mac)
         needSudo=yes
         ;;
     (fedora)
