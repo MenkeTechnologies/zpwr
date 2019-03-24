@@ -763,7 +763,7 @@ map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
 function CompleteStatement()
-    let SemiColon=['java','pl','c','cpp','js']
+    let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js']
     let doubleSemiColon=['ml']
     let exeFileType=expand('%:e')
     if index(SemiColon, exeFileType) >= 0
