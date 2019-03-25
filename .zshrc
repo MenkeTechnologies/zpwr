@@ -1575,6 +1575,7 @@ set +x
     __CORRECT_WORDS[mount]="mounr mounf"
     __CORRECT_WORDS[namespace]="namepsace naemspace naempsace"
     __CORRECT_WORDS[night]="nite"
+    __CORRECT_WORDS[number]="numbre numebr nr"
     __CORRECT_WORDS[not]="nto tno"
     __CORRECT_WORDS[of]="fo"
     __CORRECT_WORDS[or]="ro"
