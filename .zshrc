@@ -546,10 +546,11 @@ alternateQuotes(){
 basicSedSub(){
     emulate -LR zsh
     print -r "$BUFFER" | command egrep -q '\w+' || {
-        printf "\x1b[1;31m"
-        zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
-        printf "\x1b[0m"
-        return 1
+        zle up-line-or-history
+        #printf "\x1b[1;31m"
+        #zle -R  "Extended Regex Sed Substitution: Empty buffer." && read -k 1
+        #printf "\x1b[0m"
+        #return 1
     }
 
     printf "\x1b[1;34m"
@@ -1568,6 +1569,7 @@ set +x
     __CORRECT_WORDS[images]="iamges"
     __CORRECT_WORDS[is]="si ise"
     __CORRECT_WORDS[inside]="insdie isndie inisde isnide sindie"
+    __CORRECT_WORDS[instead]="insaed instaed"
     __CORRECT_WORDS[just]="jsut jutsi just"
     __CORRECT_WORDS[like]="liek"
     __CORRECT_WORDS[location]="locaiton lcoation"
