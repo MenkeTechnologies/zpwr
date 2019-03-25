@@ -1403,6 +1403,9 @@ if (( $#h > 0 )); then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
+#do not ascii sort for z completion
+zstyle ':completion:*:z:*' sort false
+
 if [[ $CUSTOM_COLORS == true ]]; then
 
     zstyle ':completion:*' list-colors 'ma=37;1;4;44'
@@ -1417,6 +1420,8 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
     zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
+
+    zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
     if [[ "$(uname)" == Darwin ]]; then
         #homebrew tags
         zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
