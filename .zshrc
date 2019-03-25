@@ -1419,6 +1419,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
     if [[ "$(uname)" == Darwin ]]; then
         #homebrew tags
+        zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
         zstyle ':completion:*:formulae' list-colors '=(#b)(*)=1;30=1;36;44'
         zstyle ':completion:*:common-commands' list-colors '=(#b)(*)=1;30=1;37;45'
         zstyle ':completion:*:all-commands' list-colors '=(#b)(*)=1;30=1;37;42'
