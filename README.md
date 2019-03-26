@@ -1,6 +1,11 @@
 # customTerminalInstaller
 
-This repo is my own version of Hashrocket's Dotmatrix repo.  This allows one to install a custom terminal environment with Powerline for Vim, Tmux,oh-my-zsh with the Agnosterzak theme, iftop, htop, glances, mtr and much more.  
+This repo started out as my own version of Hashrocket's Dotmatrix repo and it then grew.
+It allows one to install an extremely powerful custom terminal environment based on oh-my-zsh.
+It includes Powerline Status for Vim and Tmux, oh-my-zsh with the Powerlevel 9k theme, fzf, iftop-color, htop, glances, mtr, over 6k zsh command completions and much more.
+There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
+There are also dependencies written in rust, ruby, python and C.
+
 # Supported Operating Systems:
 - macOS
 - raspbian
