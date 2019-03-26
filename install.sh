@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
-#####   Author: JACOBMENKE
-#####   Date: Wed May 31 22:54:32 EDT 2017
-#####   Purpose: bash script for custom terminal setup
+#####   Author: JACOBMENKE #####   Date: Wed May 31 22:54:32 EDT 2017 #####   Purpose: bash script for custom terminal setup
 #####   Notes: goal - work on mac and linux esp RPi
 #####   Notes: this script should a one liner installer
 #}}}***********************************************************
