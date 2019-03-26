@@ -17,7 +17,6 @@ This repo is my own version of Hashrocket's Dotmatrix repo.  This allows one to 
 - WSL
 - SUSE
 
-
 # Installation Instructions
 
 ```sh
@@ -53,6 +52,9 @@ The Tmux prefix on Linux is the deffault C-B.
 
 Always looking for contributors.
 
+## Vim Plugins
+There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` will reset all changes in buffer which will then be autosaved.
+
 # Running on a MacbookPro
 ![Alt text](/tmuxfinal1.png?raw=true)
 ![Alt text](/tmuxfinal22.png?raw=true)
@@ -60,7 +62,6 @@ Always looking for contributors.
 # Running on the Raspberry Pi 3
 ![Alt text](/tmuxfinal3.png?raw=true)
 ![Alt text](/tmuxfinal4.png?raw=true)
-
 
 # Tmux keybindings (tmux lsk)
 - ```bind-key    -T copy-mode    C-Space           send-keys -X begin-selection```
