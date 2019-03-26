@@ -70,10 +70,8 @@ There is a shell function called `getrc` that will pull down latest changes from
 
 ## Tmux prefix
 
-The default Tmux prefix key is C-X on a Mac so I can control inner tmux sessions on Linux (prefix is C-D) separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
-The Tmux prefix on Linux is the deffault C-B.
-
-Always looking for contributors.
+The default Tmux prefix key is C-X on a Mac so I can control inner tmux sessions on Linux (prefix is C-B) separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
+The Tmux prefix on Linux is the default C-B.
 
 ## Vim Plugins
 There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
@@ -95,6 +93,9 @@ export CUSTOM_COLORS=true
 export MYBANNER=ponies
 export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 ```
+
+## Contributing
+I am always looking for contributors.
 
 # Running on a MacbookPro
 ![Alt text](/tmuxfinal1.png?raw=true)
