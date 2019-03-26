@@ -168,7 +168,8 @@ plugins=(zsh-more-completions fzf-zsh zsh-completions \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
     postgres redis-cli colorize sudo z rsync docker sublime \
-    vundle rust cargo meteor gulp grunt glassfish tig fd)
+    vundle rust cargo meteor gulp grunt glassfish tig fd \
+    colored-man-pages)
 
 PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print \$8}")"
 
