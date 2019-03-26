@@ -4,7 +4,21 @@ This repo started out as my own version of Hashrocket's Dotmatrix repo and it th
 
 It allows one to install an extremely powerful custom terminal environment based on oh-my-zsh.
 
-It includes Powerline Status for Vim and Tmux, oh-my-zsh with the Powerlevel 9k theme, fzf, iftop-color, htop, glances, mtr, over 6k zsh command completions and much more.
+It includes:
+- oh-my-zsh customized
+- Powerlevel 9k customized
+- tmux 2.1
+- vim 8.0 with nearly 70 plugins
+- youcompleteme
+- ultisnips
+- supertab
+- pathogen
+- iftop-color
+- glances
+- mtr
+- lolcat
+- htop
+- powerline for vim and tmux
 
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
 There are also dependencies written in rust, ruby, python and C.
@@ -66,6 +80,21 @@ There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vi
 
 ## Tmux Main Window
 The main window show in the screenshots is started by Prefix-D in an empty tmux window.
+
+## Personal Code
+Startup shell files will source ~/.tokens.sh so you can put your additional code there which not will not be overridden with `getrc`
+
+## Environmennt Variables
+You can set these environment variables in your .tokens.sh to customize the behavior of the terminal setup.
+```sh
+# Global Environment Variables for MenkeTechnologies
+MYPROMPT=POWERLEVEL
+EXPAND_SECOND_POSITION=true
+SURROUND=true
+CUSTOM_COLORS=true
+export MYBANNER=ponies
+export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
+```
 
 # Running on a MacbookPro
 ![Alt text](/tmuxfinal1.png?raw=true)
