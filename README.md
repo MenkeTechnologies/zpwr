@@ -1,8 +1,11 @@
-# customTerminalInstaller
+# World's Most Advanced UNIX Terminal Environment
 
 This repo started out as my own version of Hashrocket's Dotmatrix repo and it then grew.
+
 It allows one to install an extremely powerful custom terminal environment based on oh-my-zsh.
+
 It includes Powerline Status for Vim and Tmux, oh-my-zsh with the Powerlevel 9k theme, fzf, iftop-color, htop, glances, mtr, over 6k zsh command completions and much more.
+
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
 There are also dependencies written in rust, ruby, python and C.
 
