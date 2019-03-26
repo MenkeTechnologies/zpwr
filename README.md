@@ -31,7 +31,8 @@ Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Contr
 
 You need to change the Terminal font to support the Powerline triangles and other special characters in the PowerLevel 9k font.
 
-The installer installs Hack Nerd Font on the Mac with Homebrerw and Powerline Symbols on Linux.
+The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
+documentation for details on how to change the font.
 
 ## GITHUB_ACCOUNT variable
 
