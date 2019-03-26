@@ -81,8 +81,8 @@ There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vi
 ## Tmux Main Window
 The main window show in the screenshots is started by Prefix-D in an empty tmux window.
 
-## Personal Code
-Startup shell files will source ~/.tokens.sh so you can put your additional code there which not will not be overridden with `getrc`
+## Personal Config
+Startup shell files will source ~/.tokens.sh so you can put your additional code there which will not be overridden with `getrc`
 
 ## Environment Variables
 You can set these environment variables in your .tokens.sh to customize the behavior of the terminal setup.
