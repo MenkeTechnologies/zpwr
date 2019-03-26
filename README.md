@@ -23,7 +23,7 @@ It includes:
 - powerline for vim and tmux
 
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
-There are also dependencies written in rust, ruby, python and C.
+There are also dependencies written in rust (exa,bat,fd-find), ruby(lolcat) and python(powerline-status,ponysay,mycli,pgcli,glances,pygments,bpython)
 
 # Supported Operating Systems:
 - macOS
