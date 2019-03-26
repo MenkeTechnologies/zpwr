@@ -4,7 +4,7 @@
 
 This repo started out as my own version of Hashrocket's Dotmatrix repo and it then grew.
 
-It allows one to install an extremely powerful custom terminal environment based on oh-my-zsh.
+It allows one to install an extremely powerful custom terminal environment based on [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
 It includes:
 - oh-my-zsh customized
