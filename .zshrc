@@ -1499,7 +1499,8 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}uu="| awk '{$__TS}' | uniq -c | sort -rn | head -10"
     alias -g ${__GLOBAL_ALIAS_PREFIX}wc='| wc -l'
     alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
-    alias ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"" && git push"
+    alias ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"""
+    alias ${__GLOBAL_ALIAS_PREFIX}gp="git add . && git commit -m \""$__TS\"" && git push"
     alias -g ${__GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${__TS}m${__TS}\\x1b[0m"
 
     alias i='if [[ '$__TS' ]];then
