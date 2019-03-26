@@ -53,10 +53,10 @@ The Tmux prefix on Linux is the deffault C-B.
 Always looking for contributors.
 
 ## Vim Plugins
-There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` will reset all changes in buffer which will then be autosaved.
+There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Tmux Main Window
-The main window show in the screenshots is started by <Prefix> D in an empty tmux window.
+The main window show in the screenshots is started by Prefix-D in an empty tmux window.
 
 # Running on a MacbookPro
 ![Alt text](/tmuxfinal1.png?raw=true)
