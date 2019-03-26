@@ -798,15 +798,19 @@ fzvim(){
         perl -lne '$f=$_;$_=~s/~/$ENV{HOME}/;print $f if -f' | \
         fzf -m --border --prompt='-->>> ' \
         --preview 'file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' | \
-            perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g'
+            perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 vimFzf(){
     zle .kill-whole-line
-    LBUFFER="vim $(fzvim)"
-    mywords=("${(z)BUFFER}")
+    BUFFER="vim $(fzvim)"
+    mywords=(${(z)BUFFER})
     if (( $#mywords == 1 )); then
         zle .kill-whole-line
     else
+        firstdir=${mywords[2]:h}
+        #logg "words='$mywords[2]'=>'$firstdir'"
+        #:h takes aways last "
+        BUFFER="cd $firstdir\"; $BUFFER"
         zle .accept-line
     fi
 }
