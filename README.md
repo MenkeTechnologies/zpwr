@@ -84,14 +84,14 @@ The main window show in the screenshots is started by Prefix-D in an empty tmux 
 ## Personal Code
 Startup shell files will source ~/.tokens.sh so you can put your additional code there which not will not be overridden with `getrc`
 
-## Environmennt Variables
+## Environment Variables
 You can set these environment variables in your .tokens.sh to customize the behavior of the terminal setup.
 ```sh
 # Global Environment Variables for MenkeTechnologies
-MYPROMPT=POWERLEVEL
-EXPAND_SECOND_POSITION=true
-SURROUND=true
-CUSTOM_COLORS=true
+export MYPROMPT=POWERLEVEL
+export EXPAND_SECOND_POSITION=true
+export SURROUND=true
+export CUSTOM_COLORS=true
 export MYBANNER=ponies
 export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 ```
