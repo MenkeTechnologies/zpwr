@@ -785,7 +785,7 @@ getrcWidget(){
     BUFFER="getrc"
     zle .accept-line
 }
-    
+
 intoFzf(){
     LBUFFER="$LBUFFER |& fzf -m --border --ansi"
     zle .accept-line
@@ -2422,6 +2422,7 @@ zshrcsearch(){
         zsh -ilvx -c false |& ag --color --numbers -C 5 -i "$@" |& less
     fi
 }
+
 export CHEATCOLORS=true
 
 # Example usage: zmv -W '*.pl' '*.perl'
