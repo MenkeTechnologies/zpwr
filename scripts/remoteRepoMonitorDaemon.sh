@@ -14,15 +14,22 @@ ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
 [[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && exit 1
 [[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && exit 1
 
-gitters(){
+gittersmaster(){
     git reset --hard origin/master
     git checkout -B master origin/master
     git pull --force
     git reset --hard origin/master
 }
 
+gittersdev(){
+    git reset --hard origin/dev
+    git checkout -B master origin/dev
+    git pull --force
+    git reset --hard origin/dev
+}
+
 main(){
-    gitters
+    gittersdev
     cp .shell_aliases_functions.sh "$HOME"
     cp .zshrc "$HOME"
     cp .vimrc "$HOME"
@@ -64,7 +71,7 @@ while true; do
 
     echo "$(date) git poll in $(pwd)" >&2
     git fetch origin
-    output=$(git log HEAD..origin/master --oneline)
+    output=$(git log HEAD..origin/dev --oneline)
 
     if [[ -n "$output" ]] ; then
         echo "$(date) We have change to $(git remote -v)"
@@ -78,7 +85,7 @@ while true; do
 
     if [[ -n "$output" ]] ; then
         echo "$(date) We have change to $(git remote -v)" >&2
-        gitters
+        gittersmaster
         refreshers
     fi
 
