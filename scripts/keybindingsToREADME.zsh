@@ -3,8 +3,8 @@
 #**************************************************************
 ##### Author: WIZARD
 ##### Date: Tue Mar  5 11:26:41 EST 2019
-##### Purpose: bash script to
-##### Notes:
+##### Purpose: zsh script to gen the keybindings for README
+##### Notes: 
 #}}}***********************************************************
 
 
@@ -54,6 +54,7 @@
 
 } | perl -ne 'print if /\S+/' > temp$$
 
+#do not know why have to create tempfile here
 perl -pe 's@^([^#].*)$@- ```$1```@g' temp$$ | perl -pe 's@(.*) \(:.map\).*@$1@'
 
 command rm temp$$
