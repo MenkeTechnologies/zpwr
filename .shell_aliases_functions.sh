@@ -1069,6 +1069,12 @@ openmygh(){
 eval "alias $GITHUB_ACCOUNT=openMyGH"
 
 getrc(){
+    if [[ -z "$1" ]]; then
+        branch=master
+    else
+        branch="$1"
+    fi
+
     if [[ $(uname) == Darwin ]]; then
         if exists dialog;then
             dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> /tmp/temp$$
@@ -1082,8 +1088,7 @@ getrc(){
         [[ $REPLY != "y" ]] && clearList && return 0
     fi
     cd "$HOME"
-    git clone \
-        "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
+    git clone -b "$branch" "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
     cd "$REPO_NAME"
     cp .shell_aliases_functions.sh "$HOME"
     cp .zshrc "$HOME"
@@ -1105,6 +1110,10 @@ getrc(){
     rm -rf "$REPO_NAME"
     test -n "$TERM" && exec "$SHELL"
 
+}
+
+getrcdev(){
+    getrc dev
 }
 
 rename(){
