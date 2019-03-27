@@ -23,7 +23,7 @@ gittersmaster(){
 
 gittersdev(){
     git reset --hard origin/dev
-    git checkout -B master origin/dev
+    git checkout -B dev origin/dev
     git pull --force
     git reset --hard origin/dev
 }
