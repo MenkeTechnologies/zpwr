@@ -1427,9 +1427,9 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
 
-    zstyle ':completion:*:manuals.4' list-colors '=(#b)(*)=1;30=37;43'
-    zstyle ':completion:*:manuals.5' list-colors '=(#b)(*)=1;30=1;4;37;45'
-    zstyle ':completion:*:manuals.n' list-colors '=(#b)(*)=1;30=1;34;43;4'
+    zstyle ':completion:*:manuals.4' list-colors '=(#b)(*)=1;30=37;46'
+    zstyle ':completion:*:manuals.n' list-colors '=(#b)(*)=1;30=1;4;37;45'
+    zstyle ':completion:*:manuals.5' list-colors '=(#b)(*)=1;30=1;34;43;4'
     zstyle ':completion:*:manuals.6' list-colors '=(#b)(*)=1;30=1;37;41'
     zstyle ':completion:*:manuals.7' list-colors '=(#b)(*)=1;30=34;42;4'
     zstyle ':completion:*:manuals.8' list-colors '=(#b)(*)=1;30=1;34;41;4'
