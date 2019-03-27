@@ -785,6 +785,7 @@ getrcWidget(){
     BUFFER="getrc"
     zle .accept-line
 }
+    
 intoFzf(){
     LBUFFER="$LBUFFER |& fzf -m --border --ansi"
     zle .accept-line
