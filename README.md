@@ -23,7 +23,8 @@ It includes:
 - powerline for vim and tmux
 
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
-There are also dependencies written in rust (exa,bat,fd-find), ruby(lolcat) and python(powerline-status,ponysay,mycli,pgcli,glances,pygments,bpython)
+
+There are also dependencies written in rust (exa, bat, fd-find), ruby(lolcat) and python(powerline-status, ponysay, mycli, pgcli, glances, pygments, bpython)
 
 # Supported Operating Systems:
 - macOS
@@ -82,7 +83,7 @@ There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vi
 The main window show in the screenshots is started by Prefix-D in an empty tmux window.
 
 ## Personal Config
-Startup shell files will source ~/.tokens.sh so you can put your additional code there which will not be overridden with `getrc`
+Startup shell files will source ~/.tokens.sh so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
 
 ## Environment Variables
 You can set these environment variables in your .tokens.sh to customize the behavior of the terminal setup.
