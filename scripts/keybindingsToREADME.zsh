@@ -53,5 +53,7 @@
     command rm temp{1..4}
 
 } | perl -ne 'print if /\S+/' > temp$$
-    perl -pe 's@^([^#].*)$@- ```$1```@g' temp$$ | perl -pe 's@(.*) \(:.map\).*@$1@'
+
+perl -pe 's@^([^#].*)$@- ```$1```@g' temp$$ | perl -pe 's@(.*) \(:.map\).*@$1@'
+
 command rm temp$$
