@@ -20,8 +20,11 @@ prettyPrint(){
 
 #{{{ MARK:installer
 #**************************************************************
+cd "$installerDir" || exit 1
+git checkout dev
+
 prettyPrint "Copying scripts to custom Installer Repo"
-rm -rf "$SCRIPTS/customTerminalInstaller/scripts/"*
+rm -rf "$installerDir/scripts/"*
 cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts"
 cp -R "$SCRIPTS/macOnly" "$installerDir/scripts"
 cp "$HOME/.vimrc" "$installerDir"
@@ -44,13 +47,12 @@ bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerD
 prettyPrint "Updating zsh plugins list"
 bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* > "$installerDir/.zshplugins"
 
-cd "$installerDir" || exit 1
 git add .
 git commit -m "$commitMessage"
 prettyPrint "Status"
 git status
 prettyPrint "Pushing..."
-git push
+git push origin dev
 #}}}***********************************************************
 
 #{{{ MARK:tutorialDir
