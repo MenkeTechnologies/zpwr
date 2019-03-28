@@ -1594,7 +1594,6 @@ set +x
     __CORRECT_WORDS[declare]="delcare declaer"
     __CORRECT_WORDS[default]="defalut deafult"
     __CORRECT_WORDS[directory]="dir idr direcotry direcorty directroy"
-    __CORRECT_WORDS[directories]="dirs"
     __CORRECT_WORDS[docker]="dokcer"
     __CORRECT_WORDS[drag]="darg"
     __CORRECT_WORDS[echo]="ehco eho ceho ecoh eco"
