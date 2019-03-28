@@ -1345,6 +1345,10 @@ if ((date >= (zcompdate + 7) ));then
 else
 # use .zcompdump
     compinit -C -u
+    if [[ ${+_comps[z]} == 0 ]]; then
+        logg 'regenerating ~/.zcompdump'
+        compinit -u
+    fi
 fi
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
