@@ -1331,8 +1331,16 @@ export DIRSTACKSIZE=20
 
 #{{{                    MARK:AutoCompletions
 #**************************************************************
+autoload -Uz compinit
+updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+if [[ $(date +'%j') != $updated_at ]]; then
 # avoid insecure warning message with -u
-autoload -U compinit && compinit -u
+# reload comps
+  compinit -u
+else
+# use .zcompdump
+  compinit -C
+fi
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
 
