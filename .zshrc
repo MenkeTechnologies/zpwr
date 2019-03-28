@@ -1332,15 +1332,18 @@ export DIRSTACKSIZE=20
 #{{{                    MARK:AutoCompletions
 #**************************************************************
 autoload -Uz compinit
+
 zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
 date=$(date +'%j')
+
 if ((date >= (zcompdate + 7) ));then
 # avoid insecure warning message with -u
 # reload comps if file is stale for 1 week
-  compinit -u
+    logg 'regenerating ~/.zcompdump'
+    compinit -u
 else
 # use .zcompdump
-  compinit -C
+    compinit -C
 fi
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
