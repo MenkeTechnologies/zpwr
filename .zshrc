@@ -1332,10 +1332,11 @@ export DIRSTACKSIZE=20
 #{{{                    MARK:AutoCompletions
 #**************************************************************
 autoload -Uz compinit
-updated_at=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
-if [[ $(date +'%j') != $updated_at ]]; then
+zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+date=$(date +'%j')
+if ((date >= (zcompdate + 7) ));then
 # avoid insecure warning message with -u
-# reload comps
+# reload comps if file is stale for 1 week
   compinit -u
 else
 # use .zcompdump
