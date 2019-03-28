@@ -1348,7 +1348,6 @@ else
     if [[ ${+_comps[z]} == 0 ]]; then
         logg 'regenerating ~/.zcompdump'
         compinit -u
-        zcompile $ZSH_COMPDUMP
     fi
 fi
 # allow scrolling pager through completion list
