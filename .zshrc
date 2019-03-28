@@ -1838,6 +1838,8 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@$res@")"
     if [[ $__EXPAND == true ]];then
         #insert the space char
         zle self-insert
+    else
+        exists _zsh_highlight && _zsh_highlight
     fi
     set +x
 }
