@@ -1346,7 +1346,7 @@ else
 # use .zcompdump
     compinit -C -u
     if [[ ${+_comps[z]} == 0 ]]; then
-        logg 'regenerating ~/.zcompdump'
+        logg 'regenerating ~/.zcompdump due to failed compinit'
         compinit -u
     fi
 fi
