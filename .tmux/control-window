@@ -13,7 +13,9 @@ if-shell "uname | grep -q Darwin" 'send-keys "storageShower.sh 8 1" C-m' 'send-k
 selectp -t right # select the new, second (1) pane
 splitw -v -p 20 
 
-if-shell "uname | grep -q Darwin" 'send-keys "sudo /usr/local/sbin/iftop -f \"not port mdns and not port ssdp and not port llmnr and not port upnp-discovery\" -c $HOME/.iftop.conf" C-m' 'send-keys "sudo /usr/local/sbin/iftop -c $HOME/.iftop.conf" C-M'
+if-shell "uname | grep -q Darwin" \
+        'send-keys "sudo /usr/local/sbin/iftop -f \"not port mdns and not port ssdp and not port llmnr and not port upnp-discovery\" -c \"$HOME/.iftop.conf\" || sudo iftop -f \"not port mdns and not port ssdp and not port llmnr and not port upnp-discovery\" -c $HOME/.iftop.conf C-m' \
+        'send-keys "sudo /usr/local/sbin/iftop -c $HOME/.iftop.conf || sudo iftop -c  \"$HOME/.iftop.conf\"" C-M'
 selectp -t right # select top right pane
 splitw -h -p 40
 selectp -t left# select top right pane
