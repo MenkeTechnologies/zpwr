@@ -33,7 +33,8 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - git blacklisted directories
 - zle quote swappers
 - zsh, tmux and vim keybindings to copy to clipboard
-- shell function to pull down latest code changes from this repo
+- getrc shell function to pull down latest code changes from this repo
+- c shell function wrapper around bat that works with text, jars, tgz and zips
 - 100+ bash and perl scripts
 
 ## Dependencies
