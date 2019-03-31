@@ -1052,9 +1052,12 @@ my-accept-line () {
             __WILL_CLEAR=true
         }
     done
+    #sudo =iftop fails so expand word first
+    zle expand-word
     mywords=("${(z)BUFFER}")
 
     if [[ ${mywords[1]} == 'sudo' ]]; then
+    set -x
         cmd=${mywords[2]}
         out="$(alias -- $cmd)"
         echo "$out" | command grep -q -E "grc" && {
@@ -1087,6 +1090,7 @@ my-accept-line () {
         fi
     }
 
+set +x
     zle .accept-line
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
