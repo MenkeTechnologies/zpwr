@@ -152,25 +152,6 @@ ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 
-autoload -Uz compinit
-
-zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
-date=$(date +'%j')
-
-if ((date >= (zcompdate + 7) ));then
-# avoid insecure warning message with -u
-# reload comps if file is stale for 1 week
-    logg 'regenerating ~/.zcompdump'
-    compinit -u
-    zcompile $ZSH_COMPDUMP
-else
-# use .zcompdump
-    compinit -C -u
-    if [[ ${+_comps[z]} == 0 ]]; then
-        logg 'regenerating ~/.zcompdump due to failed compinit'
-        compinit -u
-    fi
-fi
 #}}}***********************************************************
 
 #{{{                    MARK:Plugins
@@ -1350,6 +1331,25 @@ export DIRSTACKSIZE=20
 
 #{{{                    MARK:AutoCompletions
 #**************************************************************
+autoload -Uz compinit
+
+zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
+date=$(date +'%j')
+
+if ((date >= (zcompdate + 7) ));then
+# avoid insecure warning message with -u
+# reload comps if file is stale for 1 week
+    logg 'regenerating ~/.zcompdump'
+    compinit -u
+    zcompile $ZSH_COMPDUMP
+else
+# use .zcompdump
+    compinit -C -u
+    if [[ ${+_comps[z]} == 0 ]]; then
+        logg 'regenerating ~/.zcompdump due to failed compinit'
+        compinit -u
+    fi
+fi
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
 
