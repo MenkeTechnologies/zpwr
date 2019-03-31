@@ -30,10 +30,12 @@ My innovations include
 - color-coded sections of zsh completion for commands
 - color-coded sections of zsh completion for man pages
 - insert matching quotes, brackets and parentheses
-- custom keybinding to open files most recently edited based on viminfo
+- custom keybinding to open files most recently edited based on viminfo and placed into fzf
 - keybinding to run current code file open in vim in tmux pane to right
 - 5.7k zsh completions
-- new tmux keybindings to kill panes
+- new tmux keybindings
+- zsh keybindings to fzf search file names and preview contents with bat in right pane
+- zsh completion for z command bases on .z database
 
 
 There are also dependencies written in rust (exa, bat, fd-find), ruby(lolcat) and python(powerline-status, ponysay, mycli, pgcli, glances, pygments, bpython)
