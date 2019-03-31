@@ -434,6 +434,13 @@ r(){
         sudo journalctl -f
     }
 }
+cloneToForked(){
+    branch=master
+    (
+        builtin cd "$HOME/forkedRepos"
+        git clone -b "$branch" "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
+    )
+}
 
 s(){
     [[ -z "$1" ]] && subl . || command s "$@"
