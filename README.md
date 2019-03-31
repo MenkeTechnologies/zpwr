@@ -23,6 +23,18 @@ It includes:
 - powerline for vim and tmux
 
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
+My innovations include
+- spelling correction
+- snippets with tabstops that expand of spacebar
+- expanding aliases and global aliases from zsh menu selection
+- color-coded sections of zsh completion for commands
+- color-coded sections of zsh completion for man pages
+- insert matching quotes, brackets and parentheses
+- custom keybinding to open files most recently edited based on viminfo
+- keybinding to run current code file open in vim in tmux pane to right
+- 5.7k zsh completions
+- new tmux keybindings to kill panes
+
 
 There are also dependencies written in rust (exa, bat, fd-find), ruby(lolcat) and python(powerline-status, ponysay, mycli, pgcli, glances, pygments, bpython)
 
