@@ -437,7 +437,11 @@ r(){
 cloneToForked(){
     branch=master
     (
-        builtin cd "$HOME/forkedRepos"
+        if [[ -z "$!" ]]; then
+            builtin cd "$HOME/forkedRepos" || return 1
+        else
+            builtin cd "$@" || return 1
+        fi
         git clone -b "$branch" "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
     )
 }
