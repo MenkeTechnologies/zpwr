@@ -34,9 +34,22 @@ My innovations include
 - keybinding to run current code file open in vim in tmux pane to right
 - 5.7k zsh completions
 - new tmux keybindings
-- zsh keybindings to fzf search file names and preview contents with bat in right pane
+- zsh keybindings to fzf search file names and preview file contents with bat in right pane
+- zsh keybindings to fzf search file contents and preview surrounding file contents with bat in right pane
 - zsh completion for z command bases on .z database
-
+- keybindings to save to mysql learning database and to search from it
+- oh my zsh plugins bases on OS
+- custom banner commands when new shell is launched
+- zle sed subs on current command line
+- vim text objects on command line
+- software updater scripts on 24 hour loop
+- colorized side diffs on zsh keybinding before git push
+- zsh keybindings to git add, commit and push with commit message from current command line
+- git blacklisted directories
+- zle quote swappers
+- zsh, tmux and vim keybindings to copy to clipboard
+- shell function to pull down latest code changes from this repo
+- 100+ bash and perl scripts
 
 There are also dependencies written in rust (exa, bat, fd-find), ruby(lolcat) and python(powerline-status, ponysay, mycli, pgcli, glances, pygments, bpython)
 
