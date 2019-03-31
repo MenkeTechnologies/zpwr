@@ -1492,6 +1492,10 @@ del(){
     echo "delete from $SCHEMA_NAME.$TABLE_NAME order by id desc limit $count" | mysql
 }
 
+gitBranchSwitchRebasePush(){
+    git branch -a | head -2 | perl -ane 'if ($F[0] eq "*"){$cur=$F[1]}else{$alt=$F[0]};$cmd="git checkout $alt; git rebase $cur;git push" if $.==2; print $cmd; `$cmd`'
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Global Alias
