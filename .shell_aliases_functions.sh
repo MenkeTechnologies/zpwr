@@ -1493,7 +1493,7 @@ del(){
 }
 
 gitBranchSwitchRebasePush(){
-    git branch -a | head -2 | perl -ane 'if ($F[0] eq "*"){$cur=$F[1]}else{$alt=$F[0]};$cmd="git checkout $alt; git rebase $cur;git push" if $.==2; print $cmd; `$cmd`'
+    git branch -a | head -2 | perl -ane 'if ($F[0] eq "*"){$cur=$F[1]}else{$alt=$F[0]};if ($. == 2){$cmd="git checkout $alt; git rebase $cur;git push;";print "$cmd\n"; `$cmd`}'
 }
 
 #}}}***********************************************************
