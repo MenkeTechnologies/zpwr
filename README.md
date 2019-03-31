@@ -59,6 +59,12 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - ponysay
 - mycli
 - pygments
+- rust
+- python
+- ruby
+- zsh
+- perl
+- bash
 
 # Supported Operating Systems:
 - macOS
