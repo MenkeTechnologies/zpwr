@@ -6,25 +6,9 @@ This repo started out as my own version of Hashrocket's Dotmatrix repo and it th
 
 It allows one to install an extremely powerful custom terminal environment based on [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
-## Dependencies
-- oh-my-zsh customized
-- Powerlevel 9k customized
-- tmux 2.1
-- vim 8.0 with nearly 70 plugins
-- youcompleteme
-- ultisnips
-- supertab
-- pathogen
-- iftop-color
-- glances
-- mtr
-- lolcat
-- htop
-- powerline for vim and tmux
-
-## Innovations
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
 
+## Innovations
 - spelling correction and abbreviaton expansion on the command line
 - snippets with tabstops that expand with spacebar
 - expanding aliases and global aliases from zsh menu selection
@@ -52,7 +36,28 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - shell function to pull down latest code changes from this repo
 - 100+ bash and perl scripts
 
-There are also dependencies written in rust (exa, bat, fd-find), ruby(lolcat) and python(powerline-status, ponysay, mycli, pgcli, glances, pygments, bpython)
+## Dependencies
+- oh-my-zsh
+- Powerlevel9k zsh prompt
+- tmux 2.1
+- vim 8.0 with nearly 70 plugins
+- youcompleteme
+- ultisnips
+- supertab
+- pathogen
+- iftop-color
+- glances
+- mtr
+- lolcat
+- htop
+- powerline for vim and tmux
+- exa
+- bat
+- fd-find
+- lolcat
+- ponysay
+- mycli
+- pygments
 
 # Supported Operating Systems:
 - macOS
