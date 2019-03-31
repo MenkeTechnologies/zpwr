@@ -6,7 +6,7 @@ This repo started out as my own version of Hashrocket's Dotmatrix repo and it th
 
 It allows one to install an extremely powerful custom terminal environment based on [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
-It includes:
+## Dependencies
 - oh-my-zsh customized
 - Powerlevel 9k customized
 - tmux 2.1
@@ -23,7 +23,8 @@ It includes:
 - powerline for vim and tmux
 
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
-My innovations include
+
+# Innovations
 - spelling correction
 - snippets with tabstops that expand of spacebar
 - expanding aliases and global aliases from zsh menu selection
