@@ -22,9 +22,9 @@ It allows one to install an extremely powerful custom terminal environment based
 - htop
 - powerline for vim and tmux
 
+## Innovations
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
 
-# Innovations
 - spelling correction
 - snippets with tabstops that expand of spacebar
 - expanding aliases and global aliases from zsh menu selection
