@@ -36,6 +36,8 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - getrc shell function to pull down latest code changes from this repo
 - c shell function wrapper around bat that works with text, jars, tgz and zips
 - 100+ bash and perl scripts
+- clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
+- clearList zsh completion
 
 ## Dependencies
 - oh-my-zsh
