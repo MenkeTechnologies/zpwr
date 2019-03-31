@@ -1057,7 +1057,6 @@ my-accept-line () {
     mywords=("${(z)BUFFER}")
 
     if [[ ${mywords[1]} == 'sudo' ]]; then
-    set -x
         cmd=${mywords[2]}
         out="$(alias -- $cmd)"
         echo "$out" | command grep -q -E "grc" && {
