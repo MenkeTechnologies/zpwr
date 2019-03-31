@@ -824,6 +824,10 @@ vimFzfSudo(){
     if (( $#mywords == 2 )); then
         zle .kill-whole-line
     else
+        firstdir=${mywords[3]:h}
+        #logg "words='$mywords[2]'=>'$firstdir'"
+        #:h takes aways last "
+        BUFFER="cd $firstdir\"; $BUFFER; ll"
         zle .accept-line
     fi
 }
