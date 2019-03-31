@@ -1572,7 +1572,7 @@ globalAliasesInit(){
     if [[ "$(uname)" == Darwin ]]; then
         alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
     else
-        alias -g ${__GLOBAL_ALIAS_PREFIX}v= '| xclip -selection clipboard'
+        alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
     fi
 }
 
