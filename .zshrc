@@ -1331,7 +1331,7 @@ setopt rc_expand_param
 setopt cbases
 
 #any failing command in pipeline fails entire pipeline
-setopt pipefail
+setopt pipefail 2>/dev/null
 
 # increase max size for directory stack
 export DIRSTACKSIZE=20
