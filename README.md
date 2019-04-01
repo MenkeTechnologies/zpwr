@@ -57,7 +57,6 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - exa
 - bat
 - fd-find
-- lolcat
 - ponysay
 - mycli
 - pygments
