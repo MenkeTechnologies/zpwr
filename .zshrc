@@ -1052,12 +1052,13 @@ my-accept-line () {
             __WILL_CLEAR=true
         }
     done
-    #sudo =iftop fails so expand word first
-    zle expand-word
     mywords=("${(z)BUFFER}")
 
     if [[ ${mywords[1]} == 'sudo' ]]; then
         cmd=${mywords[2]}
+
+        #sudo =iftop fails so remove =
+        cmd=${cmd#=}
         out="$(alias -- $cmd)"
         echo "$out" | command grep -q -E "grc" && {
             cmdlet="$(eval echo "${out#*=}")"
@@ -2296,12 +2297,12 @@ _cl(){
 
 _f(){
     _alternative \
-    'files:directory:_path_files -g ".*(/) *(/)"' \
+    'files:directory:_path_files -g "*(D/)"' \
     'directory-stack:directory stack:_directory_stack' \
 }
 
 _c(){
-    arguments=('*:files:_path_files -g "*(^/) .*(^/)"')
+    arguments=('*:files:_path_files -g "*(D^/) *(D/l+2)"')
     _arguments -s $arguments
 }
 
