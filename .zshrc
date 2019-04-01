@@ -223,8 +223,8 @@ _alias_file="$HOME/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
-test -z $MYBANNER && export MYBANNER=ponies
-export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
+test -z $MYBANNER && export MYBANNER=default
+export DEFAULT_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
 #}}}***********************************************************
 
@@ -1898,7 +1898,7 @@ bannerLolcat(){
     ---------------------- lolcat
 }
 noPonyBanner(){
-    eval "$NOPONY_BANNER_CMD"
+    eval "$DEFAULT_BANNER"
 }
 
 revealRecurse(){
