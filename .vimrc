@@ -794,27 +794,41 @@ function TmuxRepeat()
     let supportedTypes=['sh','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
     let exeFileType=expand('%:e')
 
-    if has("gui_running")
-        if index(supportedTypes, exeFileType) >= 0
-            silent! exec "!tmux send-keys -t vimmers:1. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
-            redraw!
+    let tmux=$TMUX
+    
+
+    if !empty(tmux)
+        let pane_count=Strip(system("tmux list-panes | wc -l"))
+
+        if pane_count > 1
+            if has("gui_running")
+                if index(supportedTypes, exeFileType) >= 0
+                    silent! exec "!tmux send-keys -t vimmers:1. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+                    redraw!
+                else
+                    silent! exec "!tmux send-keys -t vimmer:1. C-c up C-m"
+                    echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
+                    redraw!
+                endif
+            else
+                if index(supportedTypes, exeFileType) >= 0
+                    silent! exec "!tmux send-keys -t right C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+                    redraw!
+                else
+                    silent! exec "!tmux send-keys -t right C-c up C-m"
+                    echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
+                    redraw!
+                endif
+            endif
+            exe "normal! zz"
         else
-            silent! exec "!tmux send-keys -t vimmer:1. C-c up C-m"
-            echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
-            redraw!
+            echom "No tmux panes to right ".pane_count."... use v C-V for visual block"
         endif
     else
-        if index(supportedTypes, exeFileType) >= 0
-            silent! exec "!tmux send-keys -t right C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
-            redraw!
-        else
-            silent! exec "!tmux send-keys -t right C-c up C-m"
-            echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
-            redraw!
-        endif
-
+        echom "Not in tmux... use v C-V for visual block"
     endif
-    exe "normal! zz"
+
+
 endfunction
 
 function TmuxRepeatGeneric()
