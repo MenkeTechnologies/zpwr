@@ -85,7 +85,7 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 # Installation Instructions
 
 ```sh
-git clone https://github.com/MenkeTechnologies/customTerminalInstaller.git && cd customTerminalInstaller && ./install.sh
+git clone https://github.com/MenkeTechnologies/zpwr.git && cd zpwr && ./install.sh
 ```
 
 Some interactivity is required near end of installer for postfix, wireshark and snort installs.

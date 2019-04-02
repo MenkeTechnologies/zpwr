@@ -7,7 +7,7 @@ Type=simple
 User=pi
 Group=pi
 Environment="SCRIPTS=/home/pi/Documents/shellScripts"
-Environment="REPO_NAME=customTerminalInstaller"
+Environment="REPO_NAME=zpwr"
 Environment="ZSH_COMP_REPO_NAME=zsh-more-completions"
 ExecStart=/usr/bin/env bash /home/pi/Documents/shellScripts/remoteRepoMonitorDaemon.sh
 ExecStop=/usr/bin/env pkill remote
