@@ -429,7 +429,7 @@ r(){
         if [[ $UID != 0 ]]; then
             perl -i -pe "s@pi@$USER@g" "$src_dir/poll.service"
         else
-            perl -i -pe "s@/home/pi@$USER@g" "$src_dir/poll.service"
+            perl -i -pe "s@pi@$USER@g;s@/home/root@/root@;" "$src_dir/poll.service"
         fi
         sudo cp "$HOME/forkedRepos/$REPO_NAME/poll.service" /etc/systemd/system
         sudo systemctl daemon-reload
