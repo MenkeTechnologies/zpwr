@@ -4,7 +4,7 @@
 ##### Author: JACOBMENKE
 ##### Date: Mon Jul 10 11:59:28 EDT 2017
 ##### Purpose:  script to update multiple Github repos
-##### Notes:TutorialFiles, PersonalWebsite, customTerminalInstaller
+##### Notes:TutorialFiles, PersonalWebsite, zpwr
 #}}}***********************************************************
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
