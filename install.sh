@@ -531,8 +531,8 @@ prettyPrint "Common Installer Section"
 vimV="$(vim --version | head -1 | awk '{print $5}')"
 res=$(echo "$vimV >= 8.0" | bc)
 
-[[ $res == 0 ]] && {
-    prettyPrint "Vim Version less than 8.0! Installing Vim from Source."
+if [[ $res == 0 ]] || vim --version 2>&1 | grep -q '\-python3';then
+    prettyPrint "Vim Version less than 8.0 or without python! Installing Vim from Source."
     git clone https://github.com/vim/vim.git vim-master
     cd "vim-master" && {
         ./configure --with-features=huge \
