@@ -1730,8 +1730,8 @@ set +x
     lastword_lbuffer=${mywords_lbuffer[-1]}
     lastword_lbuffer=${${(z)${mywords_lbuffer//\"/}}[-1]}
     lastword_partition=${mywords_partition[-1]}
-    logg "first word = '$firstword_partition'"
-    logg "last word = '$lastword_lbuffer'"
+    #logg "first word = '$firstword_partition'"
+    #logg "last word = '$lastword_lbuffer'"
     __ALIAS=false
     
 
