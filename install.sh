@@ -529,9 +529,8 @@ fi
 prettyPrint "Common Installer Section"
 
 vimV="$(vim --version | head -1 | awk '{print $5}')"
-res=$(echo "$vimV >= 8.0" | bc)
 
-if [[ $res == 0 ]] || vim --version 2>&1 | grep -q '\-python3';then
+if echo "$vimV >= 8.0" | bc || vim --version 2>&1 | grep -q '\-python3';then
     prettyPrint "Vim Version less than 8.0 or without python! Installing Vim from Source."
     git clone https://github.com/vim/vim.git vim-master
     cd "vim-master" && {
@@ -548,7 +547,7 @@ if [[ $res == 0 ]] || vim --version 2>&1 | grep -q '\-python3';then
             make
             sudo make install
     }
-}
+fi
 
 
 prettyPrint "Installing Pathogen"
