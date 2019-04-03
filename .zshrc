@@ -2299,7 +2299,7 @@ _cl(){
 
 _f(){
     _alternative \
-    'files:directory:_path_files -g "*(D/)"' \
+    'files:directory:_path_files -g "*(-D/)"' \
     'directory-stack:directory stack:_directory_stack' \
 }
 
