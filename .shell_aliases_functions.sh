@@ -441,7 +441,7 @@ r(){
 cloneToForked(){
     branch=master
     (
-        if [[ -z "$!" ]]; then
+        if [[ -z "$1" ]]; then
             builtin cd "$HOME/forkedRepos" || return 1
         else
             builtin cd "$@" || return 1
