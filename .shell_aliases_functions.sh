@@ -1474,7 +1474,11 @@ export TABLE_NAME=LearningCollection
 
 le(){
     test -z "$1" && return 1
-    echo "insert into $SCHEMA_NAME.$TABLE_NAME (category, learning, dateAdded) values ('programming', '""$*""', now())" | mysql 2>> "$LOGFILE"
+    category="programming"
+    if [[ -n "$2" ]]; then
+        category="$2"
+    fi
+    echo "insert into $SCHEMA_NAME.$TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$*""', now())" | mysql 2>> "$LOGFILE"
 }
 
 
