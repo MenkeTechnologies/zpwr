@@ -1478,7 +1478,7 @@ le(){
     if [[ -n "$2" ]]; then
         category="$2"
     fi
-    echo "insert into $SCHEMA_NAME.$TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$*""', now())" | mysql 2>> "$LOGFILE"
+    echo "insert into $SCHEMA_NAME.$TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$1""', now())" | mysql 2>> "$LOGFILE"
 }
 
 
