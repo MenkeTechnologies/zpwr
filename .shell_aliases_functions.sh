@@ -1510,7 +1510,8 @@ se(){
 }
 
 createLearningCollection(){
-    if ! echo "select * from information_schema.tables" | mysql | \grep --color=always -q Learning;then
+    if ! echo "select * from information_schema.tables" | mysql -u root -p | \grep --color=always -q "$TABLE_NAME";then
+       echo  "create schema $SCHEMA_NAME if not exists" | mysql -u root -p
 
         echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))' | mysql -u root -D "$SCHEMA_NAME" -p
     fi
