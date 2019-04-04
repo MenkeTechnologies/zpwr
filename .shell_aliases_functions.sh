@@ -1509,6 +1509,13 @@ se(){
     fi
 }
 
+createLearningCollection(){
+    if ! echo "select * from information_schema.tables" | mysql | \grep --color=always -q Learning;then
+
+        echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))' | mysql -u root -D "$SCHEMA_NAME" -p
+    fi
+}
+
 del(){
 
     [[ -z "$1" ]] && count=1 || count="$1"
