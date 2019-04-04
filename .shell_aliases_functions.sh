@@ -1515,13 +1515,14 @@ se(){
 
 createLearningCollection(){
     alternatingPrettyPrint "Creating$DELIMITER_CHAR $SCHEMA_NAME.$TABLE_NAME$DELIMITER_CHAR with$DELIMITER_CHAR MySQL$DELIMITER_CHAR"
-    if [[ -z "$1" ]]; then
-        if ! echo "select * from information_schema.tables" | mysql -u root -p | \grep --color=always -q "$TABLE_NAME";then
+    if [[ -n "$1" ]]; then
+        #use first arg as mysql password
+        if ! echo "select * from information_schema.tables" | mysql -u root -p "$1" | \grep --color=always -q "$TABLE_NAME";then
             echo  "create schema $SCHEMA_NAME if not exists"
-            echo  "create schema $SCHEMA_NAME if not exists" | mysql -u root -p
+            echo  "create schema $SCHEMA_NAME if not exists" | mysql -u root -p "$1"
 
             echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))'
-            echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))' | mysql -u root -D "$SCHEMA_NAME" -p
+            echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))' | mysql -u root -D "$SCHEMA_NAME" -p "$1"
         else
             echo "$SCHEMA_NAME.$TABLE_NAME already exists" >&2
         fi
