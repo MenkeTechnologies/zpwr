@@ -1510,7 +1510,7 @@ se(){
 }
 
 createLearningCollection(){
-    prettyPrint "Creating$DELIMITER_CHAR $SCHEMA_NAME.$TABLE_NAME$DELIMITER_CHAR"
+    alternatingPrettyPrint "Creating$DELIMITER_CHAR $SCHEMA_NAME.$TABLE_NAME$DELIMITER_CHAR"
     if [[ -z "$1" ]]; then
         if ! echo "select * from information_schema.tables" | mysql -u root -p | \grep --color=always -q "$TABLE_NAME";then
         echo  "create schema $SCHEMA_NAME if not exists" | mysql -u root -p
