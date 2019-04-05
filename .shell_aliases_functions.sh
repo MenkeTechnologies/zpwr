@@ -1192,17 +1192,18 @@ pirun(){
 }
 
 digs(){
-    local OPTIND opt exe quiet
-    while getopts "q" opt;do
+    local OPTIND opt exe secret
+    while getopts "s" opt 2>/dev/null;do
         case $opt in
-            q)quiet=true;;
+            s)secret=true;;
+            *) echo "bad opt" >&2; return 1
         esac
     done
     shift $(($OPTIND-1))
 
     [[ -z "$1" ]] && echo "need an arg" >&2 && return 1
 
-    if [[ -n "$quiet" ]]; then
+    if [[ -n "$secret" ]]; then
         exists proxychains && exe=proxychains
         exists proxychains4 && {
             echo $SHELL | grep -q zsh && \
@@ -1210,12 +1211,24 @@ digs(){
                 exe="proxychains4 -q"
         }
 
+        if [[ -z "$exe" ]]; then
+            echo "cannot proceed without proxychains" >&2; return 1
+        fi
+
+        exists grc && colo=grc || { colo=; \
+        echo "No grc colorizer no defaulting to no colors"; }
+
         if exists dig;then
             for url in "$@"; do
                 noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
                 exec 2>&1
                 prettyPrint "DIG: $noport"
-                $exe dig +trace "$noport" | grcat conf.dig
+                if [[ -n "$colo" ]]; then
+                    $exe dig +trace "$noport" | grcat conf.dig
+                else
+                    $exe dig +trace "$noport"
+                fi
+
                 noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
                 prettyPrint "HOST: $noproto"
                 out="$($exe host "$noproto")"
@@ -1228,28 +1241,54 @@ digs(){
                         noproto="${noproto:0:-1}"
                     fi
                     prettyPrint "DIG: $ip"
-                    $exe dig -x "$ip" | grcat conf.dig
+                    if [[ -n "$colo" ]]; then
+                        $exe dig -x "$ip" | grcat conf.dig
+                    else
+                        $exe dig -x "$ip"
+                    fi
+
                     primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
                     out="$($exe whois "$primary")"
                     if echo "$out" | grep -q 'No match';then
                         prettyPrint "WHOIS: $ip"
-                        $exe whois "$ip" | grcat conf.whois
+                        if [[ -n "$colo" ]]; then
+                            $exe whois "$ip" | grcat conf.whois
+                        else
+                            $exe whois "$ip"
+                        fi
                     else
                         prettyPrint "WHOIS: $primary"
-                        echo "$out" | grcat conf.whois
-                        prettyPrint "WHOIS: $ip"
-                        $exe whois "$ip" | grcat conf.whois
+                        if [[ -n "$colo" ]]; then
+                            echo "$out" | grcat conf.whois
+                            prettyPrint "WHOIS: $ip"
+                            $exe whois "$ip" | grcat conf.whois
+                        else
+                            echo "$out"
+                            prettyPrint "WHOIS: $ip"
+                            $exe whois "$ip"
+                        fi
                     fi
                 else
                     out="$($exe whois "$noproto")"
                     if echo "$out" | grep -q 'No match';then
                         prettyPrint "WHOIS: $ip"
-                        $exe whois "$ip" | grcat conf.whois
+                        if [[ -n "$colo" ]]; then
+                            $exe whois "$ip" | grcat conf.whois
+                        else
+                            $exe whois "$ip"
+                        fi
                     else
                         prettyPrint "WHOIS: $noproto"
-                        echo "$out" | grcat conf.whois
-                        prettyPrint "WHOIS: $ip"
-                        $exe whois "$ip" | grcat conf.whois
+
+                        if [[ -n "$colo" ]]; then
+                            echo "$out" | grcat conf.whois
+                            prettyPrint "WHOIS: $ip"
+                            $exe whois "$ip" | grcat conf.whois
+                        else
+                            echo "$out"
+                            prettyPrint "WHOIS: $ip"
+                            $exe whois "$ip"
+                        fi
                     fi
                 fi
                 if exists http;then 
@@ -1262,7 +1301,11 @@ digs(){
                     echo
                     echo
                     prettyPrint "TRACEROUTE: $url"
-                    $exe traceroute "$url" | grcat conf.traceroute
+                    if [[ -n "$colo" ]]; then
+                        $exe traceroute "$url" | grcat conf.traceroute
+                    else
+                        $exe traceroute "$url"
+                    fi
                 exec 2>/dev/tty
             done | less -MN
         else
