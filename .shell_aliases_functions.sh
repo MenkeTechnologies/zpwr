@@ -1206,6 +1206,8 @@ digs(){
                 exe="proxychains4 -q"
         } 
     else
+
+        #grcat or in ~ for dig,whois,
         echo $SHELL | grep -q zsh && \
             colo=(grc --colour=on) || \
             colo="grc --colour=on "
@@ -1260,6 +1262,10 @@ digs(){
                 prettyPrint "CURL: $url"
                 $colo $exe curl -vvv -k -fsSL "$url"
             fi
+                echo
+                echo
+                prettyPrint "TRACEROUTE: $url"
+                $colo $exe traceroute "$url"
             exec 2>/dev/tty
         done | less -MN
     else
