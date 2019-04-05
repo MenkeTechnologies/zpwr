@@ -1529,7 +1529,8 @@ globalAliasesInit(){
     alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}oo='&>> "$LOGFILE'"$__TS"'"'
     alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say $__TS'"
-    alias ${__GLOBAL_ALIAS_PREFIX}pf="perl -e 'print \`$__TS \"\$_\"\`for<*>'"
+    alias ${__GLOBAL_ALIAS_PREFIX}pg="perl -e 'print \`$__TS \"\$_\"\`for<*>'"
+        alias ${__GLOBAL_ALIAS_PREFIX}pf="perl -e 'print \`$__TS\`for($__TS)'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
     alias -g ${__GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$__TS@$__TS@g'"
     #default value tabstops
@@ -1784,7 +1785,7 @@ LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@\\\\$res@
                 else
 LBUFFER="$(print -r -- "$LBUFFER" | perl -pE "s@\\b$lastword_lbuffer\$@$res@")"
                 fi
-                LBUFFER=${LBUFFER:gs|$subForAtSign|@|}
+                LBUFFER=${LBUFFER//$subForAtSign/@}
                 lenToFirstTS=${#BUFFER%%$__TS*}
                 if (( $lenToFirstTS < ${#BUFFER} )); then
                     CURSOR=$lenToFirstTS
