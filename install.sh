@@ -103,7 +103,7 @@ dependencies_ary=(tig httpie hexedit boxes tal iperf vim tmux chkrootkit wget co
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary+=(atop tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
+    dependencies_ary+=(proxychains atop tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace python-pip)
 }
@@ -137,7 +137,7 @@ addDependenciesFreeBSD(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=(s-search bat git ag automake autoconf exa fortune node the_silver_searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=(proxychains-ng s-search bat git ag automake autoconf exa fortune node the_silver_searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
