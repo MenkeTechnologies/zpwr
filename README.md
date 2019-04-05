@@ -23,7 +23,7 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - zsh keybindings to fzf search file contents and preview surrounding file contents with bat in right pane
 - zsh completion for z command bases on .z database
 - keybindings to save to mysql learning database and to search from it
-- oh my zsh plugins bases on OS
+- oh my zsh plugins loading based on OS
 - custom banner commands when new shell is launched
 - zle sed subs on current command line
 - vim text objects on command line
