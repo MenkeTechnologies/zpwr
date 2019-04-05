@@ -126,8 +126,10 @@ echo "$PATH" | grep -iq shellScripts || {
     export PATH="$HOME/.cargo/bin:$PATH"
     exists exa && {
         alias exa="$EXA_COMMAND"
-        export LS_COLORS="fi=38:di=32;1:ex=31;1"
-        export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"
+        if [[ $CUSTOM_COLORS = true ]]; then
+            export LS_COLORS="fi=38:di=32;1:ex=31;1"
+            export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"
+        fi
     }
 
 #}}}***********************************************************
@@ -1198,78 +1200,137 @@ digs(){
     done
     shift $(($OPTIND-1))
 
+    [[ -z "$1" ]] && echo "need an arg" >&2 && return 1
+
     if [[ -n "$quiet" ]]; then
         exists proxychains && exe=proxychains
         exists proxychains4 && {
             echo $SHELL | grep -q zsh && \
                 exe=(proxychains4 -q) || \
                 exe="proxychains4 -q"
-        } 
+        }
+
+        if exists dig;then
+            for url in "$@"; do
+                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
+                exec 2>&1
+                prettyPrint "DIG: $noport"
+                $exe dig +trace "$noport" | grcat conf.dig
+                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
+                prettyPrint "HOST: $noproto"
+                out="$($exe host "$noproto")"
+                exists lolcat && echo "$out" | \
+                    lolcat -f || echo "$out"
+                if echo "$out" | command grep -q 'address';then 
+                    #regular domain name
+                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
+                    if [[ ${noproto: -1} == "." ]]; then
+                        noproto="${noproto:0:-1}"
+                    fi
+                    prettyPrint "DIG: $ip"
+                    $exe dig -x "$ip" | grcat conf.dig
+                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
+                    out="$($exe whois "$primary")"
+                    if echo "$out" | grep -q 'No match';then
+                        prettyPrint "WHOIS: $ip"
+                        $exe whois "$ip" | grcat conf.whois
+                    else
+                        prettyPrint "WHOIS: $primary"
+                        echo "$out" | grcat conf.whois
+                        prettyPrint "WHOIS: $ip"
+                        $exe whois "$ip" | grcat conf.whois
+                    fi
+                else
+                    out="$($exe whois "$noproto")"
+                    if echo "$out" | grep -q 'No match';then
+                        prettyPrint "WHOIS: $ip"
+                        $exe whois "$ip" | grcat conf.whois
+                    else
+                        prettyPrint "WHOIS: $noproto"
+                        echo "$out" | grcat conf.whois
+                        prettyPrint "WHOIS: $ip"
+                        $exe whois "$ip" | grcat conf.whois
+                    fi
+                fi
+                if exists http;then 
+                    prettyPrint "HTTPIE: $url"
+                    $exe http -v --follow --pretty=all "$url"
+                else
+                    prettyPrint "CURL: $url"
+                    $exe curl -vvv -k -fsSL "$url"
+                fi
+                    echo
+                    echo
+                    prettyPrint "TRACEROUTE: $url"
+                    $exe traceroute "$url" | grcat conf.traceroute
+                exec 2>/dev/tty
+            done | less -MN
+        else
+            echo "you need dig" >&2
+        fi
     else
 
-        #grcat or in ~ for dig,whois,
         echo $SHELL | grep -q zsh && \
             colo=(grc --colour=on) || \
             colo="grc --colour=on "
-    fi
 
-    [[ -z "$1" ]] && echo "need args" >&2 && return 1
-   if exists dig;then
-        for url in "$@"; do
-            noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
-            exec 2>&1
-            prettyPrint "DIG: $noport"
-            $colo $exe dig +trace "$noport"
-            noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
-            prettyPrint "HOST: $noproto"
-            out="$($colo $exe host "$noproto")"
-            exists lolcat && echo "$out" | lolcat -f || echo "$out"
-            if echo "$out" | command grep -q 'address';then 
-                #regular domain name
-                ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
-                if [[ ${noproto: -1} == "." ]]; then
-                    noproto="${noproto:0:-1}"
-                fi
-                prettyPrint "DIG: $ip"
-                $colo $exe dig -x "$ip"
-                primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
-                out="$($colo $exe whois "$primary")"
-                if echo "$out" | grep -q 'No match';then
-                    prettyPrint "WHOIS: $ip"
-                    $colo $exe whois "$ip"
+        if exists dig;then
+            for url in "$@"; do
+                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
+                exec 2>&1
+                prettyPrint "DIG: $noport"
+                $colo $exe dig +trace "$noport"
+                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
+                prettyPrint "HOST: $noproto"
+                out="$($colo $exe host "$noproto")"
+                exists lolcat && echo "$out" | lolcat -f || echo "$out"
+                if echo "$out" | command grep -q 'address';then 
+                    #regular domain name
+                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
+                    if [[ ${noproto: -1} == "." ]]; then
+                        noproto="${noproto:0:-1}"
+                    fi
+                    prettyPrint "DIG: $ip"
+                    $colo $exe dig -x "$ip"
+                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
+                    out="$($colo $exe whois "$primary")"
+                    if echo "$out" | grep -q 'No match';then
+                        prettyPrint "WHOIS: $ip"
+                        $colo $exe whois "$ip"
+                    else
+                        prettyPrint "WHOIS: $primary"
+                        echo "$out"
+                        prettyPrint "WHOIS: $ip"
+                        $colo $exe whois "$ip"
+                    fi
                 else
-                    prettyPrint "WHOIS: $primary"
-                    echo "$out"
-                    prettyPrint "WHOIS: $ip"
-                    $colo $exe whois "$ip"
+                    out="$($colo $exe whois "$noproto")"
+                    if echo "$out" | grep -q 'No match';then
+                        prettyPrint "WHOIS: $ip"
+                        $colo $exe whois "$ip"
+                    else
+                        prettyPrint "WHOIS: $noproto"
+                        echo "$out"
+                        prettyPrint "WHOIS: $ip"
+                        $colo $exe whois "$ip"
+                    fi
                 fi
-            else
-                out="$($colo $exe whois "$noproto")"
-                if echo "$out" | grep -q 'No match';then
-                    prettyPrint "WHOIS: $ip"
-                    $colo $exe whois "$ip"
+                if exists http;then 
+                    prettyPrint "HTTPIE: $url"
+                    $exe http -v --follow --pretty=all "$url"
                 else
-                    prettyPrint "WHOIS: $noproto"
-                    echo "$out"
-                    prettyPrint "WHOIS: $ip"
-                    $colo $exe whois "$ip"
+                    prettyPrint "CURL: $url"
+                    $colo $exe curl -vvv -k -fsSL "$url"
                 fi
-            fi
-            if exists http;then 
-                prettyPrint "HTTPIE: $url"
-                $exe http -v --follow --pretty=all "$url"
-            else
-                prettyPrint "CURL: $url"
-                $colo $exe curl -vvv -k -fsSL "$url"
-            fi
-                echo
-                echo
-                prettyPrint "TRACEROUTE: $url"
-                $colo $exe traceroute "$url"
-            exec 2>/dev/tty
-        done | less -MN
-    else
-        echo "you need dig" >&2
+                    echo
+                    echo
+                    prettyPrint "TRACEROUTE: $url"
+                    $colo $exe traceroute "$url"
+                exec 2>/dev/tty
+            done | less -MN
+        else
+            echo "you need dig" >&2
+        fi
     fi
 }
 
