@@ -155,7 +155,7 @@ exists c.pl && {
 alias dirs='dirs -v'
 alias lo="tail -n 100 -F $LOGFILE"
 alias va='cd /var'
-alias plr='rlwrap perl -dE1'
+exists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
 alias cpan='rlwrap cpan'
 alias nz='exec zsh'
 alias ll="clearList"
