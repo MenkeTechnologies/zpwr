@@ -1,4 +1,4 @@
-set show-mode-in-prompt on
+#set show-mode-in-prompt on
 set editing-mode vi
 
 #$if mode=vi

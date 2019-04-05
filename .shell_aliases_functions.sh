@@ -1190,16 +1190,35 @@ pirun(){
 }
 
 digs(){
+    local OPTIND opt exe quiet
+    while getopts "q" opt;do
+        case $opt in
+            q)quiet=true;;
+        esac
+    done
+    shift $(($OPTIND-1))
+
+    if [[ -n "$quiet" ]]; then
+        exists proxychains && exe=proxychains
+        exists proxychains4 && {
+            echo $SHELL | grep -q zsh && \
+                exe=(proxychains4 -q) || \
+                exe="proxychains4 -q"
+        } 
+    else
+        exe=""
+    fi
+
     [[ -z "$1" ]] && echo "need args" >&2 && return 1
     exists dig && {
         for url in "$@"; do
             noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
             exec 2>&1
             prettyPrint "DIG: $noport"
-            dig +trace "$noport"
+            $exe dig +trace "$noport"
             noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
             prettyPrint "HOST: $noproto"
-            out="$(host "$noproto")"
+            out="$($exe host "$noproto")"
             echo "$out"
             if echo "$out" | command grep -q 'address';then 
                 #regular domain name
@@ -1208,34 +1227,34 @@ digs(){
                     noproto="${noproto:0:-1}"
                 fi
                 prettyPrint "DIG: $ip"
-                dig -x "$ip"
+                $exe dig -x "$ip"
                 primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
-                out="$(whois "$primary")"
+                out="$($exe whois "$primary")"
                 if echo "$out" | grep -q 'No match';then
                     prettyPrint "WHOIS: $ip"
-                    whois "$ip"
+                    $exe whois "$ip"
                 else
                     prettyPrint "WHOIS: $primary"
                     echo "$out"
                     prettyPrint "WHOIS: $ip"
-                    whois "$ip"
+                    $exe whois "$ip"
                 fi
             else
-                out="$(whois "$noproto")"
+                out="$($exe whois "$noproto")"
                 if echo "$out" | grep -q 'No match';then
                     prettyPrint "WHOIS: $ip"
-                    whois "$ip"
+                    $exe whois "$ip"
                 else
                     prettyPrint "WHOIS: $noproto"
                     echo "$out"
                     prettyPrint "WHOIS: $ip"
-                    whois "$ip"
+                    $exe whois "$ip"
                 fi
             fi
             prettyPrint "CURL: $url"
             exists http && {
-                ge "$url"
-            } || curl -vvv -k -fsSL "$url"
+                    $exe http -v --follow "$url"
+            } || $exe curl -vvv -k -fsSL "$url"
             exec 2>/dev/tty
         done | less -MN
     } || echo "you need dig" >&2
