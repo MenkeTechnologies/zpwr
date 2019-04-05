@@ -1206,7 +1206,9 @@ digs(){
                 exe="proxychains4 -q"
         } 
     else
-        exe=""
+        echo $SHELL | grep -q zsh && \
+            exe=(grc --colour=on) || \
+            exe="grc --colour=on "
     fi
 
     [[ -z "$1" ]] && echo "need args" >&2 && return 1
@@ -1251,10 +1253,13 @@ digs(){
                     $exe whois "$ip"
                 fi
             fi
-            prettyPrint "CURL: $url"
-            exists http && {
-                    $exe http -v --follow "$url"
-            } || $exe curl -vvv -k -fsSL "$url"
+            if exists http;then 
+                prettyPrint "HTTPIE: $url"
+                $exe http -v --follow "$url"
+            else
+                prettyPrint "CURL: $url"
+                $exe curl -vvv -k -fsSL "$url"
+            fi
             exec 2>/dev/tty
         done | less -MN
     } || echo "you need dig" >&2
