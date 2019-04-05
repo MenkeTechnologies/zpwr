@@ -1234,6 +1234,7 @@ digs(){
                 out="$($exe host "$noproto")"
                 exists lolcat && echo "$out" | \
                     lolcat -f || echo "$out"
+                echo
                 if echo "$out" | command grep -q 'address';then 
                     #regular domain name
                     ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
@@ -1260,10 +1261,12 @@ digs(){
                         prettyPrint "WHOIS: $primary"
                         if [[ -n "$colo" ]]; then
                             echo "$out" | grcat conf.whois
+                            echo
                             prettyPrint "WHOIS: $ip"
                             $exe whois "$ip" | grcat conf.whois
                         else
                             echo "$out"
+                            echo
                             prettyPrint "WHOIS: $ip"
                             $exe whois "$ip"
                         fi
@@ -1327,6 +1330,8 @@ digs(){
                 prettyPrint "HOST: $noproto"
                 out="$($colo $exe host "$noproto")"
                 exists lolcat && echo "$out" | lolcat -f || echo "$out"
+                echo
+                echo
                 if echo "$out" | command grep -q 'address';then 
                     #regular domain name
                     ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
