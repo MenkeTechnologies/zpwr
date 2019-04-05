@@ -26,6 +26,7 @@ if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
     traceroute \
     traceroute6 \
     wdiff \
+    whois \
   );
 
   # Set alias for available commands.
