@@ -13,42 +13,42 @@ echo "$0" | grep -q pip_install.sh && source common.sh
 if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "Upgrading pip"
-    pip install --upgrade pip
+    python2 -m pip install --upgrade pip
     prettyPrint "Installing psutil for Python Glances"
-    pip install psutil 
+    python2 -m pip install psutil 
     prettyPrint "Installing Python Glances"
-    pip install glances
+    python2 -m pip install glances
     prettyPrint "Installing Virtualenv"
-    pip3 install virtualenv
+    python3 -m pip install virtualenv
 
     prettyPrint "Installing Powerline..."
 
-    pip install powerline-status
+    python2 -m pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
 
-    pip install powerline-mem-segment
+    python2 -m pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
-    pip install pydf
+    python2 -m pip install pydf
 
     prettyPrint "Installing MyCLI"
-    pip install mycli
+    python2 -m pip install mycli
 
     prettyPrint "Installing PGCLI"
-    pip install pgcli
+    python2 -m pip install pgcli
 
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
-        pip install --upgrade youtube_dl
+        python2 -m pip install --upgrade youtube_dl
     }
 
     exists pip3 && {
         prettyPrint "Installing bpython for python3"
-        sudo pip3 install bpython
+        sudo python3 -m pip install bpython
 
         prettyPrint "Installing pygments for python3"
-        sudo pip3 install pygments
+        sudo python3 -m pip install pygments
     }
 elif [[ "$OS_TYPE" == "Linux" ]];then
     if [[ "$distroFamily" == redhat ]]; then
@@ -62,96 +62,99 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
     fi
 
     prettyPrint "Upgrading pip"
-    sudo pip install --upgrade pip
+    sudo python2 -m pip install --upgrade pip
     prettyPrint "Installing psutil for Python Glances"
-    sudo pip install psutil 
+    sudo python2 -m pip install psutil 
 
     prettyPrint "Installing setuptools"
-    sudo pip install setuptools
+    sudo python2 -m pip install setuptools
 
     prettyPrint "Installing Python Glances"
-    sudo pip install glances
+    sudo python2 -m pip install glances
     prettyPrint "Installing Powerline..."
 
-    exists pip2 && sudo pip2 install powerline-status || sudo pip install powerline-status
-    exists pip2 && sudo pip2 install powerline-mem-segment || sudo pip install powerline-mem-segment
+    exists pip2 && sudo pip2 install powerline-status || sudo python2 -m pip install powerline-status
+    exists pip2 && sudo pip2 install powerline-mem-segment || sudo python2 -m pip install powerline-mem-segment
     
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
     [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-    sudo pip install powerline-mem-segment
+    sudo python2 -m pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
-    sudo pip install pydf
+    sudo python2 -m pip install pydf
 
     prettyPrint "Installing MyCLI"
-    sudo pip install mycli
+    sudo python2 -m pip install mycli
 
     prettyPrint "Installing Speedtest"
-    sudo pip install speedtest-cli
+    sudo python2 -m pip install speedtest-cli
 
     prettyPrint "Installing PGCLI"
-    sudo pip install pgcli
+    sudo python2 -m pip install pgcli
 
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
-        sudo pip install --upgrade youtube_dl
+        sudo python2 -m pip install --upgrade youtube_dl
     }
 
     exists pip3 && {
         prettyPrint "Installing bpython for python3"
-        sudo pip3 install bpython
+        sudo python3 -m pip install bpython
+
+        prettyPrint "Installing httpie for python3"
+        sudo python3 -m pip install httpie
 
         prettyPrint "Installing pygments for python3"
-        sudo pip3 install pygments
+        sudo python3 -m pip install pygments
     }
 else
     if [[ "$OS_TYPE" == "FreeBSD" ]]; then
         sudo python3 -m pip
-        sudo python3 -m pip install --upgrade
+        sudo python3 -m python2 -m pip install --upgrade
 
         prettyPrint "Upgrading pip"
-        sudo pip3 install --upgrade pip
+        sudo python3 -m pip install --upgrade pip
         prettyPrint "Installing psutil for Python Glances"
-        sudo pip3 install psutil
+        sudo python3 -m pip install psutil
 
         prettyPrint "Installing setuptools"
-        sudo pip3 install setuptools
+        sudo python3 -m pip install setuptools
 
         prettyPrint "Installing Python Glances"
-        sudo pip3 install glances
+        sudo python3 -m pip install glances
         prettyPrint "Installing Powerline..."
 
-        exists pip2 && sudo pip2 install powerline-status || sudo pip install powerline-status
-        exists pip2 && sudo pip2 install powerline-mem-segment || sudo pip install powerline-mem-segment
+        exists pip2 && sudo pip2 install powerline-status || sudo python2 -m pip install powerline-status
+        exists pip2 && sudo pip2 install powerline-mem-segment || sudo python2 -m pip install powerline-mem-segment
         
         prettyPrint "Installing Tmux Powerline"
 
         tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
         [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-        sudo pip3 install powerline-mem-segment
+        sudo python3 -m pip install powerline-mem-segment
         prettyPrint "Installing PyDf"
-        sudo pip3 install pydf
+        sudo python3 -m pip install pydf
 
         prettyPrint "Installing MyCLI"
-        sudo pip3 install mycli
+        sudo python3 -m pip install mycli
 
         prettyPrint "Installing Speedtest"
-        sudo pip3 install speedtest-cli
+        sudo python3 -m pip install speedtest-cli
 
         prettyPrint "Installing PGCLI"
-        sudo pip3 install pgcli
+        sudo python3 -m pip install pgcli
 
         exists youtube_dl || {
             prettyPrint "Installing youtube-dl"
-            sudo pip3 install youtube_dl
+            sudo python3 -m pip install youtube_dl
         }
         exists pip3 && {
             prettyPrint "Installing bpython for python3"
-            sudo pip3 install bpython
+            sudo python3 -m pip install bpython
 
             prettyPrint "Installing pygments for python3"
-            sudo pip3 install pygments
+            sudo python3 -m pip install pygments
         }
     fi
 fi

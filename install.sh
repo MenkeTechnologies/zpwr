@@ -90,7 +90,7 @@ EOF
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(tig httpie hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
+dependencies_ary=(tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
     screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
@@ -137,7 +137,7 @@ addDependenciesFreeBSD(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=(proxychains-ng s-search bat git ag automake autoconf exa fortune node the_silver_searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=(httpie proxychains-ng s-search bat git ag automake autoconf exa fortune node the_silver_searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
