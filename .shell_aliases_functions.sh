@@ -1218,7 +1218,7 @@ digs(){
         exists grc && colo=grc || { colo=; \
         echo "No grc colorizer no defaulting to no colors"; }
 
-        if [[ -n $colo && ! -f "$HOME/conf.whois" ]]; then
+        if [[ -n $colo ]] && [[ ! -f "$HOME/conf.whois" ]]; then
             echo "cannot proceed without $HOME/conf.whois for grc" >&2; return 1
         fi
 
