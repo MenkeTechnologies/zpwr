@@ -453,7 +453,14 @@ cloneToForked(){
 }
 
 s(){
-    [[ -z "$1" ]] && subl . || command s "$@"
+
+    exists subl && cmd=subl || cmd=="$(getOpenCommand)"
+    exists s && sec_cmd='s' || sec_cmd="$cmd"
+    if [[ $sec_cmd=s ]]; then
+        [[ -z "$1" ]] && $cmd . || command s "$@"
+    else
+        [[ -z "$1" ]] && $cmd . || $sec_cmd "$@"
+    fi
 }
 
 logg(){
