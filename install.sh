@@ -744,11 +744,11 @@ else
 fi
 prettyPrint "Copying grc config files"
 cp "$INSTALLER_DIR/grc.zsh" "$HOME"
-
 cp "$INSTALLER_DIR/conf.gls" "$HOME"
 cp "$INSTALLER_DIR/conf.df" "$HOME"
 cp "$INSTALLER_DIR/conf.ifconfig" "$HOME"
 cp "$INSTALLER_DIR/conf.mount" "$HOME"
+cp "$INSTALLER_DIR/conf.whois" "$HOME"
 
 
 prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap."
