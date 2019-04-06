@@ -43,7 +43,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         python2 -m pip install --upgrade youtube_dl
     }
 
-    exists pip3 && {
+    python3 -c 'import pip' && {
         prettyPrint "Installing bpython for python3"
         sudo python3 -m pip install bpython
 
@@ -73,8 +73,8 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
     sudo python2 -m pip install glances
     prettyPrint "Installing Powerline..."
 
-    exists pip2 && sudo pip2 install powerline-status || sudo python2 -m pip install powerline-status
-    exists pip2 && sudo pip2 install powerline-mem-segment || sudo python2 -m pip install powerline-mem-segment
+    python2 -c 'import pip' && sudo pip2 install powerline-status || sudo python2 -m pip install powerline-status
+    python2 -c 'import pip' && sudo pip2 install powerline-mem-segment || sudo python2 -m pip install powerline-mem-segment
     
     prettyPrint "Installing Tmux Powerline"
 
@@ -149,7 +149,7 @@ else
             prettyPrint "Installing youtube-dl"
             sudo python3 -m pip install youtube_dl
         }
-        exists pip3 && {
+        python3 -c 'import pip' && {
             prettyPrint "Installing bpython for python3"
             sudo python3 -m pip install bpython
 
