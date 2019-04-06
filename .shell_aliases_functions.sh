@@ -1202,6 +1202,16 @@ digs(){
     shift $(($OPTIND-1))
 
     [[ -z "$1" ]] && echo "need an arg" >&2 && return 1
+    exists grc && colo=grc || { 
+        colo=
+        echo "No grc colorizer no defaulting to no colors"
+    }
+
+
+    if [[ -n $colo ]] && [[ ! -f "$HOME/conf.whois" ]]; then
+        echo "cannot proceed without $HOME/conf.whois for grc" >&2
+        return 1
+    fi
 
     if [[ -n "$secret" ]]; then
         exists proxychains && exe=proxychains
@@ -1215,12 +1225,6 @@ digs(){
             echo "cannot proceed without proxychains" >&2; return 1
         fi
 
-        exists grc && colo=grc || { colo=; \
-        echo "No grc colorizer no defaulting to no colors"; }
-
-        if [[ -n $colo ]] && [[ ! -f "$HOME/conf.whois" ]]; then
-            echo "cannot proceed without $HOME/conf.whois for grc" >&2; return 1
-        fi
 
         if exists dig;then
             for url in "$@"; do
