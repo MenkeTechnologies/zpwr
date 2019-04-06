@@ -40,58 +40,58 @@ alternatingPrettyPrint(){
 }
 
 alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-outdated=$(pip2 list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
 if [[ "$(uname)" == Darwin ]]; then
     #install outdated pip modules
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-        pip2 install --upgrade -- "$i" #&> /dev/null
+        python2 -m pip install --upgrade -- "$i" #&> /dev/null
     done
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     #update pip itself
-    pip2 install --upgrade pip setuptools wheel #&> /dev/null
+    python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-    outdated=$(pip3 list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+    outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
     #install outdated pip modules
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-        pip3 install --upgrade -- "$i" #&> /dev/null
+        python3 -m pip install --upgrade -- "$i" #&> /dev/null
     done
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     #update pip itself
-    pip3 install --upgrade pip setuptools wheel #&> /dev/null
+    python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
 else
     alternatingPrettyPrint "Updating with ${DELIMITER_CHAR}sudo${DELIMITER_CHAR}"
     #install outdated pip modules
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-        sudo pip2 install --upgrade -- "$i" #&> /dev/null
+        sudo python2 -m pip install --upgrade -- "$i" #&> /dev/null
     done
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     #update pip itself
-    sudo pip2 install --upgrade pip setuptools wheel #&> /dev/null
+    sudo python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} Packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-    outdated=$(pip3 list --outdated | sed -n '3,$p' | awk '{print $1}')
+    outdated=$(python3 -m pip list --outdated | sed -n '3,$p' | awk '{print $1}')
 
     #install outdated pip modules
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-        sudo pip3 install --upgrade -- "$i" #&> /dev/null
+        sudo python3 -m pip install --upgrade -- "$i" #&> /dev/null
     done
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     #update pip itself
-    sudo pip3 install --upgrade pip setuptools wheel #&> /dev/null
+    sudo python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
 fi
 
