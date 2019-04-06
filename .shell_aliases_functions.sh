@@ -1218,6 +1218,10 @@ digs(){
         exists grc && colo=grc || { colo=; \
         echo "No grc colorizer no defaulting to no colors"; }
 
+        if [[ $colo =grc && ! -f "$HOME/conf.whois" ]]; then
+            echo "cannot proceed without $HOME/conf.whois for grc" >&2; return 1
+        fi
+
         if exists dig;then
             for url in "$@"; do
                 noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
