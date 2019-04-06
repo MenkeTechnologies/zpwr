@@ -1253,17 +1253,17 @@ digs(){
                     if echo "$out" | grep -q 'No match';then
                         prettyPrint "WHOIS: $ip"
                         if [[ -n "$colo" ]]; then
-                            $exe whois "$ip" | grcat conf.whois
+                            $exe whois "$ip" | grcat -c "$HOME/conf.whois"
                         else
                             $exe whois "$ip"
                         fi
                     else
                         prettyPrint "WHOIS: $primary"
                         if [[ -n "$colo" ]]; then
-                            echo "$out" | grcat conf.whois
+                            echo "$out" | grcat -c "$HOME/conf.whois"
                             echo
                             prettyPrint "WHOIS: $ip"
-                            $exe whois "$ip" | grcat conf.whois
+                            $exe whois "$ip" | grcat -c "$HOME/conf.whois"
                         else
                             echo "$out"
                             echo
@@ -1276,7 +1276,7 @@ digs(){
                     if echo "$out" | grep -q 'No match';then
                         prettyPrint "WHOIS: $ip"
                         if [[ -n "$colo" ]]; then
-                            $exe whois "$ip" | grcat conf.whois
+                            $exe whois "$ip" | grcat -c "$HOME/conf.whois"
                         else
                             $exe whois "$ip"
                         fi
@@ -1284,9 +1284,9 @@ digs(){
                         prettyPrint "WHOIS: $noproto"
 
                         if [[ -n "$colo" ]]; then
-                            echo "$out" | grcat conf.whois
+                            echo "$out" | grcat -c "$HOME/conf.whois"
                             prettyPrint "WHOIS: $ip"
-                            $exe whois "$ip" | grcat conf.whois
+                            $exe whois "$ip" | grcat -c "$HOME/conf.whois"
                         else
                             echo "$out"
                             prettyPrint "WHOIS: $ip"
@@ -1341,26 +1341,26 @@ digs(){
                     prettyPrint "DIG: $ip"
                     $colo $exe dig -x "$ip"
                     primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
-                    out="$($colo $exe whois "$primary")"
+                    out="$($exe whois "$primary")"
                     if echo "$out" | grep -q 'No match';then
                         prettyPrint "WHOIS: $ip"
-                        $colo $exe whois "$ip"
+                        $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
                         prettyPrint "WHOIS: $primary"
-                        echo "$out"
+                        echo "$out" | grcat -c "$HOME/conf.whois"
                         prettyPrint "WHOIS: $ip"
-                        $colo $exe whois "$ip"
+                        $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     fi
                 else
                     out="$($colo $exe whois "$noproto")"
                     if echo "$out" | grep -q 'No match';then
                         prettyPrint "WHOIS: $ip"
-                        $colo $exe whois "$ip"
+                        $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
                         prettyPrint "WHOIS: $noproto"
-                        echo "$out"
+                        echo "$out" | grcat -c "$HOME/conf.whois"
                         prettyPrint "WHOIS: $ip"
-                        $colo $exe whois "$ip"
+                        $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     fi
                 fi
                 if exists http;then 
