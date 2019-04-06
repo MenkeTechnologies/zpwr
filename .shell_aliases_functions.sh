@@ -455,7 +455,7 @@ cloneToForked(){
 s(){
 
     exists subl && cmd=subl || cmd="$(getOpenCommand)"
-    exists s && sec_cmd='s' || sec_cmd="$cmd"
+    type -a s | grep -qv function && sec_cmd='s' || sec_cmd="$cmd"
     if [[ $sec_cmd=s ]]; then
         [[ -z "$1" ]] && $cmd . || command s "$@"
     else
