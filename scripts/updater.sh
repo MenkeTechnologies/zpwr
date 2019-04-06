@@ -133,7 +133,7 @@ if [[ $skip != true ]]; then
 
 
     #python 3.6
-    exists pip3 && {
+    python3 -c 'import pip' && {
         prettyPrint "Updating Python3.6 Packages"
         #pip lists outdated programs and get first column with awk
         #store in outdated
@@ -160,7 +160,7 @@ if [[ $skip != true ]]; then
     }
 
     #python 2.7 (non system)
-    exists pip2 && {
+    python2 -c 'import pip' && {
         prettyPrint "Updating Python2.7 Packages"
         #pip lists outdated programs and get first column with awk
         #store in outdated
