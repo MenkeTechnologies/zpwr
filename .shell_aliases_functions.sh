@@ -1318,11 +1318,11 @@ digs(){
                 fi
                     echo
                     echo
-                    prettyPrint "TRACEROUTE: $url"
+                    prettyPrint "TRACEROUTE: $noproto"
                     if [[ -n "$colo" ]]; then
-                        $exe traceroute "$url" | grcat conf.traceroute
+                        $exe traceroute "$noproto" | grcat conf.traceroute
                     else
-                        $exe traceroute "$url"
+                        $exe traceroute "$noproto"
                     fi
                 exec 2>/dev/tty
             done | less -MN
@@ -1387,8 +1387,8 @@ digs(){
                 fi
                     echo
                     echo
-                    prettyPrint "TRACEROUTE: $url"
-                    $colo $exe traceroute "$url"
+                    prettyPrint "TRACEROUTE: $noproto"
+                    $colo $exe traceroute "$noproto"
                 exec 2>/dev/tty
             done | less -MN
         else
