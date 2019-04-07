@@ -343,7 +343,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         prettyPrint "Installing rustup"
         curl https://sh.rustup.rs -sSf | sh -s -- -y
         prettyPrint "Updating rustup"
-        rustup update
+        $HOME/.cargo/bin/rustup update
     }
 
 
