@@ -155,6 +155,7 @@ exists c.pl && {
     alias ppp='c.pl *'
 }
 alias dirs='dirs -v'
+alias pc='proxychains'
 alias lo="tail -n 100 -F $LOGFILE"
 alias va='cd /var'
 exists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
