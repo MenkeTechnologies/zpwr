@@ -156,7 +156,7 @@ exists c.pl && {
 }
 alias dirs='dirs -v'
 exists proxychains && alias pc='proxychains'
-exists proxychains4 && alias pc='proxychains4'
+exists proxychains4 && alias pc='proxychains'
 alias lo="tail -n 100 -F $LOGFILE"
 alias va='cd /var'
 exists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
@@ -1466,7 +1466,7 @@ exists pssh && pir(){
     }
 
 c(){
-    colorizer=bat
+    local colorizer=bat
     if [[ ! -p /dev/stdout ]];then
         {
             exists $colorizer && {
@@ -1484,7 +1484,8 @@ c(){
                             eval "unzip -l \"$file\" | $COLORIZER $COLORIZER_NL"
                             ;;
                             *.[jw]ar)
-                            eval "jar tf \"$file\" | $COLORIZER $COLORIZER_NL"
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l java"
+                            eval "jar tf \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *)
                             eval "$COLORIZER \"$file\" $COLORIZER_NL"
@@ -1510,7 +1511,8 @@ c(){
                             eval "unzip -l \"$file\" | $COLORIZER $COLORIZER_NL"
                             ;;
                             *.[jw]ar)
-                            eval "jar tf \"$file\" | $COLORIZER $COLORIZER_NL"
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l java"
+                            eval "jar tf \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *)
                             eval "$COLORIZER \"$file\" $COLORIZER_NL"
