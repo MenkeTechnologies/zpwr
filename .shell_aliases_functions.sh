@@ -1507,6 +1507,7 @@ c(){
                             *.rpm)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "rpm -qi \"$file\" | $colorizer $COLORIZER_NL"
+                            ;;
                             *.deb)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "dpkg -I \"$file\" | $colorizer $COLORIZER_NL"
