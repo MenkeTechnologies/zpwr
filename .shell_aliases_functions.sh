@@ -1486,10 +1486,12 @@ c(){
                             eval "dpkg -I \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.tgz|*.tar|*.tar.gz)
-                            eval "tar tf \"$file\" | $COLORIZER $COLORIZER_NL"
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
+                            eval "tar tf \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.zip)
-                            eval "unzip -l \"$file\" | $COLORIZER $COLORIZER_NL"
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
+                            eval "unzip -l \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.[jw]ar)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l java"
@@ -1521,10 +1523,12 @@ c(){
                             eval "dpkg -I \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.tgz|*.tar|*.tar.gz)
-                            eval "tar tf \"$file\" | $COLORIZER $COLORIZER_NL"
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
+                            eval "tar tf \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.zip)
-                            eval "unzip -l \"$file\" | $COLORIZER $COLORIZER_NL"
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
+                            eval "unzip -l \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.[jw]ar)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l java"
