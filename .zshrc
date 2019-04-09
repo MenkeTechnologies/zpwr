@@ -2102,6 +2102,7 @@ if [[ $COLORIZER == bat ]]; then
     if exists bat;then
         export BAT_THEME="GitHub"
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
+        export COLORIZER_FZF_C='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l c'
         export COLORIZER_FZF_SH='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l sh'
         export COLORIZER_FZF_JAVA='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l java'
         export COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
@@ -2144,9 +2145,9 @@ fzf_setup(){
             elif print -r -- {} | \
             command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
             elif print -r -- {} | \
-            command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {};
+            command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
             elif print -r -- {} | \
-            command egrep -iq '\.zip\$';then unzip -l -- {};
+            command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
             else \
         $COLORIZER_FZF 2>/dev/null; rc=$ps;[[ \$rc = 0 ]] || { stat -- {} | fold -80 | head -500; }; fi; else \
         stat {} | fold -80 | head -500; fi\""
@@ -2160,9 +2161,9 @@ fzf_setup(){
                 elif print -r -- {} | \
                 command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
-                command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {};
+                command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
                 elif print -r -- {} | \
-                command egrep -iq '\.zip\$';then unzip -l -- {};
+                command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
                 else \
               $COLORIZER_FZF 2>/dev/null; fi; else \
                     [[ -e {} ]] && stat -- {} | fold -80 | \
