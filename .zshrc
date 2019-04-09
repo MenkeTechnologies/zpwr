@@ -2102,6 +2102,7 @@ if [[ $COLORIZER == bat ]]; then
     if exists bat;then
         export BAT_THEME="GitHub"
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
+        export COLORIZER_FZF_SH='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l sh'
         export COLORIZER_FZF_JAVA='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l java'
         export COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
         export COLORIZER_NL=''
@@ -2150,6 +2151,10 @@ fzf_setup(){
             --preview  \"if [[ -f {} ]];then \
                 if print -r -- {} | command \
                 egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
+                elif print -r -- {} | \
+                command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
+                elif print -r -- {} | \
+                command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
                 command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {};
                 elif print -r -- {} | \
