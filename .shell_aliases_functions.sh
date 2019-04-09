@@ -1472,11 +1472,19 @@ c(){
             exists $colorizer && {
                 echo | $colorizer &>/dev/null && {
                     for file in "$@";do
-                            if [[ ! -d "$file" && -s "$file" ]]; then
-                                if (( $# > 1)); then
-                                    printf "\x1b[34;1;4m$file\x1b[0m\n"
-                                fi
-                               case "$file" in
+                        if [[ ! -d "$file" && -s "$file" ]]; then
+                            if (( $# > 1)); then
+                                printf "\x1b[34;1;4m$file\x1b[0m\n"
+                            fi
+                        case "$file" in
+                            *.rpm)
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
+                            eval "rpm -qi \"$file\" | $colorizer $COLORIZER_NL"
+                            ;;
+                            *.deb)
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
+                            eval "dpkg -I \"$file\" | $colorizer $COLORIZER_NL"
+                                ;;
                             *.tgz|*.tar|*.tar.gz)
                             eval "tar tf \"$file\" | $COLORIZER $COLORIZER_NL"
                                 ;;
@@ -1499,11 +1507,11 @@ c(){
         exists $colorizer && {
             echo | $colorizer &>/dev/null && {
                 for file in "$@";do
-                        if [[ ! -d "$file" && -s "$file" ]]; then
-                            if (( $# > 1)); then
-                                printf "\x1b[34;1;4m$file\x1b[0m\n"
-                            fi
-                            case "$file" in
+                    if [[ ! -d "$file" && -s "$file" ]]; then
+                        if (( $# > 1)); then
+                            printf "\x1b[34;1;4m$file\x1b[0m\n"
+                        fi
+                        case "$file" in
                             *.rpm)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "rpm -qi \"$file\" | $colorizer $COLORIZER_NL"
