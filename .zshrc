@@ -2104,6 +2104,7 @@ if [[ $COLORIZER == bat ]]; then
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
         export COLORIZER_FZF_C='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l c'
         export COLORIZER_FZF_SH='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l sh'
+        export COLORIZER_FZF_YAML='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l yaml'
         export COLORIZER_FZF_JAVA='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l java'
         export COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
         export COLORIZER_NL=''
@@ -2140,6 +2141,8 @@ fzf_setup(){
         --preview \"if [[ -f {} ]]; then \
             if print -r -- {} | command \
             egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
+        elif print -r -- {} | \
+                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
             elif print -r -- {} | \
             command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
             elif print -r -- {} | \
@@ -2156,6 +2159,8 @@ fzf_setup(){
             --preview  \"if [[ -f {} ]];then \
                 if print -r -- {} | command \
                 egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
+                elif print -r -- {} | \
+                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
                 elif print -r -- {} | \
                 command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
@@ -2194,11 +2199,17 @@ fzf_setup(){
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
             --preview  \"if [[ -f {} ]];then \
                 if print -r -- {} | command \
-                egrep -iq '\.[jw]ar\$';then jar tf {}; \
+                egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
                 elif print -r -- {} | \
-                command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {};
+                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
                 elif print -r -- {} | \
-                command egrep -iq '\.zip\$';then unzip -l -- {};
+                command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
+                elif print -r -- {} | \
+                command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
+                elif print -r -- {} | \
+                command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
+                elif print -r -- {} | \
+                command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
                 else \
               $COLORIZER_FZF 2>/dev/null; fi; else \
                     [[ -e {} ]] && stat -- {} | fold -80 | \
