@@ -1485,6 +1485,10 @@ c(){
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "dpkg -I \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
+                            *.gz|*.gzip)
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
+                            eval "gzip -c -d \"$file\" | $colorizer $COLORIZER_NL"
+                            ;;
                             *.tgz|*.tar|*.tar.gz)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
                             eval "tar tf \"$file\" | $colorizer $COLORIZER_NL"
