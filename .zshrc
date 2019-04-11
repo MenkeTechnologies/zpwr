@@ -2141,14 +2141,14 @@ fzf_setup(){
         --preview \"if [[ -f {} ]]; then \
             if print -r -- {} | command \
             egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
-        elif print -r -- {} | \
-                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
             elif print -r -- {} | \
             command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
             elif print -r -- {} | \
             command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
             elif print -r -- {} | \
             command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
+            elif print -r -- {} | \
+                command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
             elif print -r -- {} | \
             command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
             else \
@@ -2160,13 +2160,13 @@ fzf_setup(){
                 if print -r -- {} | command \
                 egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
                 elif print -r -- {} | \
-                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
                 command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
                 command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
                 command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
+                elif print -r -- {} | \
+                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
                 elif print -r -- {} | \
                 command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
                 else \
@@ -2201,13 +2201,13 @@ fzf_setup(){
                 if print -r -- {} | command \
                 egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
                 elif print -r -- {} | \
-                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
                 command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
                 command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
                 command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
+                elif print -r -- {} | \
+                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
                 elif print -r -- {} | \
                 command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
                 else \
