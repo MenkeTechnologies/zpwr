@@ -1313,7 +1313,7 @@ digs(){
                 fi
                 if exists http;then 
                     prettyPrint "HTTPIE: $url"
-                    $exe http -v --follow --pretty=all "$url"
+                    http --proxy socks5:127.0.0.1 -v --follow --pretty=all "$url"
                 else
                     prettyPrint "CURL: $url"
                     $exe curl -vvv -k -fsSL "$url"
