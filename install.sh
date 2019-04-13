@@ -222,7 +222,7 @@ usage(){
 #  Handle command line arguments
 #-----------------------------------------------------------------------
 
-while getopts ":hv" opt
+while getopts ":hvs" opt
 do
   case $opt in
 
