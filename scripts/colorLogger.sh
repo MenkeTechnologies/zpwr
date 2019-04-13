@@ -48,7 +48,7 @@ else
         (centos|fedora|rhel)
             distro=redhat
             ;;
-        (opensuse|suse|opensuse-tumbleweed)
+        (opensuse*|suse*)
             distro=suse
             ;;
     esac
