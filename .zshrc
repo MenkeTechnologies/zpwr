@@ -2421,7 +2421,7 @@ if [[ "$(uname)" == Linux ]]; then
                 out="$(tail /var/log/messages)"
                 ;;
             (*suse*)
-                out="$(journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
+                out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
                 key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
                 ;;
             (fedora)
