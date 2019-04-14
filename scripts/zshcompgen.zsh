@@ -40,8 +40,8 @@ exists help2comp.py || {
 test ! -d "$comp_dir" && command mkdir -p "$comp_dir"
 
 for command abs in ${(kv)commands}; do
-    if [[ ${+_comps[$command]} == 0 ]]; then
-        boxesPrint $command | lolcat
+    if (( ${+_comps[$command]} == 0 ));then
+       boxesPrint $command | lolcat
        $abs --help < /dev/null |& help2comp.py $command > "$comp_dir"/_$command &
        sleep 0.25
        echo "killing $abs at $!"
