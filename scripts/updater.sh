@@ -255,6 +255,7 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
     # -x option to disable x11 forwarding
     hostname="$(echo "$1" | awk -F: '{print $1}')"
     manager="$(echo "$1" | awk -F: '{print $2}')"
+    prettyPrint "Updating $hostname with $manager"
 
     if [[ "$manager" == "apt" ]]; then
         ssh -x "$hostname" 'yes | sudo apt-get update
