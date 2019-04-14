@@ -74,7 +74,11 @@ else
         fi
     elif [[ "$distro" == suse ]]; then
         prettyPrint "Color logging for $distroName"
-        sudo journalctl -f | ccze
+        if [[ "$weHaveCCZE" == yes ]]; then
+            sudo journalctl -f | ccze
+        else
+            sudo journalctl -f
+        fi
     else
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
         if [[ "$weHaveCCZE" == yes ]]; then
