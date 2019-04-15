@@ -12,12 +12,12 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - spelling correction and abbreviation expansion on the command line
 - snippets with tabstops that expand with spacebar
 - expanding aliases and global aliases from zsh menu selection
-- color-coded sections of zsh completion for commands
-- color-coded sections of zsh completion for man pages
+- color-coded sections of zsh menu completion for commands
+- color-coded sections of zsh menu completion for man pages
 - insert matching quotes, brackets and parentheses
-- custom keybinding to open files most recently edited based on viminfo and placed into fzf
+- custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching
 - keybinding to run current code file open in vim in tmux pane to right
-- 5.7k zsh completions
+- 6.4k zsh completions
 - new tmux keybindings
 - zsh keybindings to fzf search file names and preview file contents with bat in right pane
 - zsh keybindings to fzf search file contents and preview surrounding file contents with bat in right pane
