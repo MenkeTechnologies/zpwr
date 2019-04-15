@@ -73,10 +73,11 @@ else
             sudo "$tailVersion" -F /var/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} /var/**/*.err "$HOME"/**/*.log
         fi
     elif [[ "$distro" == suse ]]; then
-        prettyPrint "Color logging for $distroName"
         if [[ "$weHaveCCZE" == yes ]]; then
+            prettyPrint "Color logging for $distroName"
             sudo journalctl -f | ccze
         else
+            prettyPrint "Decolorized logging for $distroName"
             sudo journalctl -f
         fi
     else
