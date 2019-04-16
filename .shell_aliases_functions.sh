@@ -74,7 +74,6 @@ export UMASK=077
 export LESS="-M -N -R -K -F -X -S"
 export PSQL_EDITOR='vim -c "setf sql"'
 export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a'
-
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
@@ -1090,9 +1089,15 @@ reveal() {
 openmygh(){
     open_cmd="$(getOpenCommand)" || return 1
 
-    $open_cmd "https://github.com/$GITHUB_ACCOUNT"
+    if [[ -n "$1" ]]; then
+        $open_cmd "https://github.com/$1"
+    else
+        $open_cmd "https://github.com/$GITHUB_ACCOUNT"
+    fi
+
 }
-eval "alias $GITHUB_ACCOUNT=openMyGH"
+eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
+eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
 
 getrc(){
     if [[ -z "$1" ]]; then
