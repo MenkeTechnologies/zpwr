@@ -766,8 +766,8 @@ function CompleteStatement()
     let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js', 'rs']
     let doubleSemiColon=['ml']
     let exeFileType=expand('%:e')
-    let length=len(getline('.'))
-    let lastchar = getline('.')[length-1]
+    let length=len(Strip(getline('.')))
+    let lastchar = Strip(getline('.'))[length-1]
     exe "normal! $"
     if index(SemiColon, exeFileType) >= 0
         if lastchar == '{' || lastchar == ';'
@@ -790,19 +790,19 @@ function CompleteStatementNormal()
     let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js', 'rs']
     let doubleSemiColon=['ml']
     let exeFileType=expand('%:e')
-    let length=len(getline('.'))
-    let lastchar = getline('.')[length-1]
+    let length=len(Strip(getline('.')))
+    let lastchar = Strip(getline('.'))[length-1]
     exe "normal! $"
 
     if index(SemiColon, exeFileType) >= 0
         if lastchar == '{' || lastchar == ';'
             call feedkeys("o")
         else
-            call feedkeys(";\<CR>")
+            call feedkeys("A;\<CR>")
         endif
     elseif index(doubleSemiColon, exeFileType) >= 0
         if lastchar != ';'
-            call feedkeys(";;\<CR>")
+            call feedkeys("A;;\<CR>")
         else
             call feedkeys("o")
         endif
