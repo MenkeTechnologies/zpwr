@@ -770,10 +770,10 @@ function CompleteStatement()
     let lastchar = getline('.')[length-1]
     exe "normal! $"
     if index(SemiColon, exeFileType) >= 0
-        if lastchar != ';'
-            call feedkeys(";\<CR>")
-        else
+        if lastchar == '{' || lastchar == ';'
             call feedkeys("\<CR>")
+        else
+            call feedkeys(";\<CR>")
         endif
     elseif index(doubleSemiColon, exeFileType) >= 0
         if lastchar != ';'
@@ -795,10 +795,10 @@ function CompleteStatementNormal()
     exe "normal! $"
 
     if index(SemiColon, exeFileType) >= 0
-        if lastchar != ';'
-            call feedkeys(";\<CR>")
-        else
+        if lastchar == '{' || lastchar == ';'
             call feedkeys("o")
+        else
+            call feedkeys(";\<CR>")
         endif
     elseif index(doubleSemiColon, exeFileType) >= 0
         if lastchar != ';'
