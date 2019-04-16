@@ -763,25 +763,60 @@ map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
 function CompleteStatement()
-    let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js']
+    let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js', 'rs']
     let doubleSemiColon=['ml']
     let exeFileType=expand('%:e')
+    let length=len(getline('.'))
+    let lastchar = getline('.')[length-1]
+    exe "normal! $"
     if index(SemiColon, exeFileType) >= 0
-        inoremap <C-Space> <C-O>$;<Enter>
-        inoremap <C-\> <ESC>+
-        nnoremap <C-\> +
+        if lastchar != ';'
+            call feedkeys(";\<CR>")
+        else
+            call feedkeys("\<CR>")
+        endif
     elseif index(doubleSemiColon, exeFileType) >= 0
-        inoremap <C-Space> <C-O>$;;<Enter>
-        inoremap <C-\> <ESC>+
-        nnoremap <C-\> +
+        if lastchar != ';'
+            call feedkeys(";;\<CR>")
+        else
+            call feedkeys("\<CR>")
+        endif
     else
-        inoremap <C-Space> <C-O>$<Enter>
-        inoremap <C-\> <ESC>+
-        nnoremap <C-\> +
+        call feedkeys("\<CR>")
     endif
 endfunction
 
-autocmd VimEnter * call CompleteStatement()
+function CompleteStatementNormal()
+    let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js', 'rs']
+    let doubleSemiColon=['ml']
+    let exeFileType=expand('%:e')
+    let length=len(getline('.'))
+    let lastchar = getline('.')[length-1]
+    exe "normal! $"
+
+    if index(SemiColon, exeFileType) >= 0
+        if lastchar != ';'
+            call feedkeys(";\<CR>")
+        else
+            call feedkeys("o")
+        endif
+    elseif index(doubleSemiColon, exeFileType) >= 0
+        if lastchar != ';'
+            call feedkeys(";;\<CR>")
+        else
+            call feedkeys("o")
+        endif
+    else
+        call feedkeys("o")
+    endif
+endfunction
+
+inoremap <C-\> <ESC>+
+nnoremap <C-\> +
+
+autocmd VimEnter * inoremap <silent> <C-Space> <C-o>:call CompleteStatement()<CR>
+
+autocmd VimEnter * nnoremap <silent> <NUL> :call CompleteStatementNormal()<CR>
 
 "}}}***********************************************************
 
