@@ -268,15 +268,15 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
         sudo zypper --non-interactive update
         sudo zypper --non-interactive dist-upgrade
         sudo zypper --non-interactive clean -a'
-        ssh -x "$hostname" bash < "$SCRIPTS/pipUpdater.sh"
     elif [[ "$manager" == dnf ]]; then
         ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'
-        ssh -x "$hostname"  bash < "$SCRIPTS/pipUpdater.sh"
     else
         :
     fi
 
+    #update python packages
+    ssh -x "$hostname"  bash < "$SCRIPTS/pipUpdater.sh"
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to send stdin script into bash
     ssh -x "$hostname" bash < "$SCRIPTS/rpiSoftwareUpdater.sh"
