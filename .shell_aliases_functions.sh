@@ -38,9 +38,9 @@ echo $SHELL | grep -q zsh && {
 #**************************************************************
 export TMUX_PREFIX=x
 export TMUX_REMOTE_PREFIX=b
-PI_ARRAY=(r1:apt r2:apt r3:dnf r4:zypper)
-export PI_ARRAY
+[[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 export DELIMITER_CHAR='%'
+
 #bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 #zsh xtrace
