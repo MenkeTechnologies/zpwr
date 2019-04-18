@@ -1472,6 +1472,10 @@ exists pssh && pir(){
 
 c(){
     local colorizer=bat
+    local rpm_cmd
+    local deb_cmd
+    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="file"
+    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="file"
     if [[ ! -p /dev/stdout ]];then
         {
             exists $colorizer && {
@@ -1484,11 +1488,11 @@ c(){
                         case "$file" in
                             *.rpm)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
-                            eval "rpm -qi \"$file\" | $colorizer $COLORIZER_NL"
+                            eval "$rpm_cmd \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.deb)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
-                            eval "dpkg -I \"$file\" | $colorizer $COLORIZER_NL"
+                            eval "$deb_cmd \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.gz|*.gzip)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"

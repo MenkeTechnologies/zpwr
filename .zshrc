@@ -2137,14 +2137,19 @@ fzf_setup(){
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
             --reverse --border --height 100%"
+    local rpm_cmd
+    local deb_cmd
+    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="file"
+    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="file"
+
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"if [[ -f {} ]]; then \
             if print -r -- {} | command \
             egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
             elif print -r -- {} | \
-            command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
+            command egrep -iq '\.deb\$';then $deb_cmd {} | $COLORIZER_FZF_SH; \
             elif print -r -- {} | \
-            command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
+            command egrep -iq '\.rpm\$';then $rpm_cmd {} | $COLORIZER_FZF_SH; \
             elif print -r -- {} | \
             command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
             elif print -r -- {} | \
@@ -2160,9 +2165,9 @@ fzf_setup(){
                 if print -r -- {} | command \
                 egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
                 elif print -r -- {} | \
-                command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
+                command egrep -iq '\.deb\$';then $deb_cmd {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
-                command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
+                command egrep -iq '\.rpm\$';then $rpm_cmd {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
                 command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
                 elif print -r -- {} | \
