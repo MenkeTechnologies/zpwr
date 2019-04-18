@@ -2206,9 +2206,9 @@ fzf_setup(){
                 if print -r -- {} | command \
                 egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
                 elif print -r -- {} | \
-                command egrep -iq '\.deb\$';then dpkg -I {} | $COLORIZER_FZF_SH; \
+                command egrep -iq '\.deb\$';then $deb_cmd {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
-                command egrep -iq '\.rpm\$';then rpm -qi {} | $COLORIZER_FZF_SH; \
+                command egrep -iq '\.rpm\$';then $rpm_cmd {} | $COLORIZER_FZF_SH; \
                 elif print -r -- {} | \
                 command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
                 elif print -r -- {} | \
