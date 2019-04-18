@@ -1474,8 +1474,8 @@ c(){
     local colorizer=bat
     local rpm_cmd
     local deb_cmd
-    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="file"
-    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="file"
+    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
+    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
     if [[ ! -p /dev/stdout ]];then
         {
             exists $colorizer && {

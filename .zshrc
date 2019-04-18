@@ -2139,8 +2139,8 @@ fzf_setup(){
             --reverse --border --height 100%"
     local rpm_cmd
     local deb_cmd
-    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="file"
-    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="file"
+    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
+    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"if [[ -f {} ]]; then \
