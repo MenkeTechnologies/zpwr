@@ -5,8 +5,10 @@ unixorn/warhol.plugin.zsh
 zsh-users/zsh-autosuggestions
 lukechilds/zsh-better-npm-completion
 zsh-users/zsh-completions
+MenkeTechnologies/zsh-expand
 MenkeTechnologies/zsh-more-completions
 MenkeTechnologies/zsh-nginx
+MenkeTechnologies/zsh-surround
 zsh-users/zsh-syntax-highlighting
 MenkeTechnologies/zsh-very-colorful-manuals
 MenkeTechnologies/zsh-xcode-completions
