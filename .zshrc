@@ -163,7 +163,7 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions \
-    fzf-zsh zsh-completions zsh-sed-sub \
+    fzf-zsh zsh-completions zsh-sed-sub zsh-git-acp \
     zsh-syntax-highlighting zsh-autosuggestions \
     history-substring-search ruby gem rake rails yarn ng \
     coffee node npm perl cpanm git github gradle ant mvn \
@@ -266,137 +266,7 @@ updater (){
     zle .accept-line
 }
 
-gitFuncNoCheck() {
-    emulate -LR zsh
 
-    currentDir="$(pwd -P)"
-    for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
-       [[ "$currentDir" == "$dir" ]] && return 1
-    done
-
-    git status &> /dev/null || {
-        printf "\x1b[0;1;31m"
-        print -sr "$BUFFER"
-        printf "NOT GIT DIR: $(pwd -P)" >&2
-        printf "\x1b[0m"
-        zle .kill-whole-line
-        zle .accept-line-and-down-history
-        return 0
-    }
-
-    print -r -- "$BUFFER" | grep -q -E '\S' || {
-        printf "\x1b[0;1;31m"
-        print -sr "$BUFFER"
-        printf "No commit message." >&2
-        printf "\x1b[0m"
-        zle .kill-whole-line
-        zle .accept-line-and-down-history
-        return 0
-    }
-    #leaky simonoff theme so reset ANSI escape sequences
-    printf "\x1b[0;34m"
-	if gitCommitAndPush "$BUFFER";then
-		print -sr "$BUFFER"
-		zle .kill-whole-line
-		printf "\x1b[0m"
-		zle .redisplay
-    else
-		printf "\x1b[0;1;31m"
-		print -sr "$BUFFER"
-		printf "BLACKLISTED: $(pwd -P)" >&2
-		BUFFER=""
-		printf "\x1b[0m"
-		zle .accept-line
-    fi
-
-}
-
-gitFunc () {
-    emulate -LR zsh
-
-    currentDir="$(pwd -P)"
-    for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
-        if [[ "$currentDir" == "$dir" ]]; then
-            printf "\x1b[0;1;31m"
-            print -sr "$BUFFER"
-            echo
-            printf "BLACKLISTED: $(pwd -P)" >&2
-            BUFFER=""
-            printf "\x1b[0m"
-            zle .accept-line
-            return 1
-        fi
-    done
-
-    git status &> /dev/null || {
-        printf "\x1b[0;1;31m"
-        print -sr "$BUFFER"
-        printf "NOT GIT DIR: $(pwd -P)" >&2
-        printf "\x1b[0m"
-        zle .kill-whole-line
-        zle .accept-line-and-down-history
-        return 0
-    }
-
-    print -r -- "$BUFFER" | grep -q -E '\S' || {
-        printf "\x1b[0;1;31m"
-        print -sr "$BUFFER"
-        printf "No commit message." >&2
-        printf "\x1b[0m"
-        zle .kill-whole-line
-        zle .accept-line-and-down-history
-        return 0
-    }
-    #leaky simonoff theme so reset ANSI escape sequences
-	git add .
-
-	git status | grep -q "nothing to commit" && {
-        printf "\x1b[0;1;31m"
-        print -sr "$BUFFER"
-        echo
-        printf "Nothing to commit" >&2
-        echo
-        BUFFER=""
-        printf "\x1b[0m"
-        zle .accept-line
-        return 0
-	}
-
-    local __old="$LESS"
-    unset LESS
-    gitSdiffColorizer.pl | less -R
-    export LESS="$__old"
-    echo
-    printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
-    if echo "$SHELL" | grep -q zsh ; then
-        read -k 1
-    else
-        read -n 1
-    fi
-
-    if [[ "$REPLY" == 'y' ]]; then
-        printf "\x1b[34m"
-        gitCommitAndPush "$BUFFER" && {
-            print -sr "$BUFFER"
-            zle .kill-whole-line
-            printf "\x1b[0m"
-            zle .redisplay
-        } || {
-            printf "\x1b[0;1;31m"
-            print -sr "$BUFFER"
-            printf "BLACKLISTED: $(pwd -P)" >&2
-            BUFFER=""
-            printf "\x1b[0m"
-            zle .accept-line
-        }
-    else
-            print -sr "$BUFFER"
-            echo
-            zle .kill-whole-line
-            printf "\x1b[0m"
-            zle .redisplay
-    fi
-}
 
 tutsUpdate() {
     commitMessage="$BUFFER"
@@ -754,8 +624,6 @@ bindkey -M vicmd '^B' clipboard
 #shift tab
 bindkey -M viins '\e[Z' clipboard
 
-zle -N gitFunc
-zle -N gitFuncNoCheck
 zle -N updater
 zle -N sub
 zle -N dbz
@@ -795,10 +663,6 @@ bindkey '\eOR' getrcWidget
 }
 
 
-bindkey -M viins '^F^S' gitFuncNoCheck
-bindkey -M vicmd '^F^S' gitFuncNoCheck
-bindkey -M viins '^S' gitFunc
-bindkey -M vicmd '^S' gitFunc
 bindkey '^N' sudo-command-line
 bindkey -M viins '\e^T' transpose-words
 bindkey -M vicmd '\e^T' transpose-words
