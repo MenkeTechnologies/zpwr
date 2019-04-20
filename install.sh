@@ -330,7 +330,9 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         
         prettyPrint "Updating repos"
         refresh "$distroFamily"
+        prettyPrint "Installing java"
         brew cask install java
+        prettyPrint "Checking for curl before rustup install"
         exists curl || update curl mac
         cargoinstall
         for prog in "${dependencies_ary[@]}"; do
@@ -404,6 +406,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
         prettyPrint "Now The Main Course..."
         sleep 1
         exists curl || update curl "$distroFamily"
+        prettyPrint "Checking for curl before rustup install"
         cargoinstall
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
@@ -446,7 +449,7 @@ else
         if [[ $skip != true ]]; then
             prettyPrint "Now The Main Course..."
             sleep 1
-
+            prettyPrint "Checking for curl before rustup install"
             exists curl || update curl "$distroFamily"
             cargoinstall
             for prog in "${dependencies_ary[@]}"; do
