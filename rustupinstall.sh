@@ -44,8 +44,12 @@ exists exa || {
     "$HOME/.cargo/bin/cargo" install exa
 }
 
+
 prettyPrint "Installing YouCompleteMe"
-mkdir -p "$HOME/.vim/bundle/YouCompleteMe"
+mkdir -p "$HOME/.vim/bundle"
+
+cd "$HOME/.vim/bundle" || {echo "no .vim/bundle dir" >&2;exit1;}
+git clone https://github.com/Valloric/YouCompleteMe.git
 cd "$HOME/.vim/bundle/YouCompleteMe" && {
     git submodule update --init --recursive
     #need greater than 3GB RAM for compiling
