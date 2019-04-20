@@ -91,7 +91,7 @@ EOF
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop cmake bpython sl mutt \
+dependencies_ary=(cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \
     screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
@@ -104,8 +104,8 @@ dependencies_ary=(tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cm
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary+=(traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
-    lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf build-essential afpfs-ng \
+    dependencies_ary+=(build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
+    lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf afpfs-ng \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace python-pip)
 }
 addDependenciesArch(){
@@ -113,15 +113,17 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary+=(makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel mysql-devel libevent-devel postgresql-devel fortune python3-devel python-devel ruby-devel openssl-devel net-tools-deprecated \
+    dependencies_ary=(python3-devel python-devel ${dependencies_ary[@]})
+    dependencies_ary+=(makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel mysql-devel libevent-devel postgresql-devel fortune ruby-devel openssl-devel net-tools-deprecated \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel) 
-
 }
 
 addDependenciesDebian(){
-    dependencies_ary+=(bc npm lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs gcc \
-    ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
-    libperl-dev libpq-dev libpcap-dev fortunes python3-dev python-dev ruby-dev \
+    dependencies_ary=(python3-dev python-dev ${dependencies_ary[@]})
+    dependencies_ary+=(gcc bc npm lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs \
+    ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
+    libxpm-dev libxt-dev \
+    libperl-dev libpq-dev libpcap-dev fortunes ruby-dev \
     python3-pip libffi-dev libssl-dev grc automake whatweb)
 
 }
@@ -130,7 +132,8 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary+=('fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel python-devel python3-devel curses-devel automake the_silver_searcher gcc-c++ kernel-devel postgresql-devel)
+    dependencies_ary=(python3-devel python-devel ${dependencies_ary[@]})
+    dependencies_ary+=(gcc-c++ 'fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel python-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
 }
 
 addDependenciesFreeBSD(){
@@ -138,7 +141,8 @@ addDependenciesFreeBSD(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=(httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary=(macvim ${dependencies_ary[@]})
+    dependencies_ary+=(httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher fswatch zzz ghc lua python3 python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
