@@ -44,6 +44,10 @@ main(){
         rm -f "$SCRIPTS/"*
     fi
     cp -f scripts/* "$SCRIPTS"
+    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
+    for dir in "$COMPLETION_DIR/"*;do
+        test -d "$dir" && git -C "$dir" pull
+    done
     refreshers
 }
 
