@@ -405,8 +405,8 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
         sleep 1
-        exists curl || update curl "$distroFamily"
         prettyPrint "Checking for curl before rustup install"
+        exists curl || update curl "$distroFamily"
         cargoinstall
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
