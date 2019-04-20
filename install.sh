@@ -373,24 +373,20 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
         (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
             distroFamily=debian
             prettyPrint "Fetching Dependencies for $distroName with the Advanced Package Manager..."
-            refresh "$distroFamily"
             addDependenciesDebian
             ;;
         (arch)
             distroFamily=arch
             prettyPrint "Fetching Dependencies for $distroName with zypper"
-            refresh "$distroFamily"
             addDependenciesArch
             ;;
         (*suse*)
             distroFamily=suse
-            refresh "$distroFamily"
             prettyPrint "Fetching Dependencies for $distroName with zypper"
             addDependenciesSuse
             ;;
         (centos|fedora|rhel)
             distroFamily=redhat
-            refresh "$distroFamily"
             prettyPrint "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
             addDependenciesRedHat
             ;;
@@ -401,6 +397,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     esac
 
     showDeps
+    refresh "$distroFamily"
 
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
@@ -439,10 +436,10 @@ else
 
 
         prettyPrint "Fetching Dependencies for $distroName with pkg"
-        refresh "$distroFamily"
         addDependenciesFreeBSD
         
         showDeps
+        refresh "$distroFamily"
 
         if [[ $skip != true ]]; then
             prettyPrint "Now The Main Course..."
