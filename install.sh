@@ -290,8 +290,16 @@ warnSudo(){
 
 }
 
+ycminstall(){
+    prettyPrint "Installing YouCompleteMe in background"
+    test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
+    bash ycm_install.sh &> "$logfileCargoYCM" &
+    YCM_PID=$!
+    trap 'kill $YCM_PID 2>/dev/null;echo bye;exit' INT
+}
+
 cargoinstall(){
-    prettyPrint "Installing YouCompleteMe for vim and rustup for exa, fd and bat in background"
+    prettyPrint "Installing rustup for exa, fd and bat in background"
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
     bash rustupinstall.sh &> "$logfileCargoYCM" &
     CARGO_PID=$!
@@ -517,6 +525,8 @@ fi
 prettyPrint "Installing Pathogen"
 #install pathogen
 mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
+
+prettyPrint "Installing YouCompleteme in background"
 
 prettyPrint "Installing Vim Plugins"
 cd "$INSTALLER_DIR"
@@ -770,6 +780,7 @@ test -f "$escapeRemover" && \
 #rm -rf "$INSTALLER_DIR"
 prettyPrint "Waiting for cargo installer to finish"
 wait $CARGO_PID
+wait $YCM_PID
 prettyPrint "Done!!!!!!"
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
