@@ -292,6 +292,7 @@ warnSudo(){
 
 ycminstall(){
     prettyPrint "Installing YouCompleteMe in background"
+    cd "$INSTALLER_DIR"
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
     bash ycm_install.sh &> "$logfileCargoYCM" &
     YCM_PID=$!
