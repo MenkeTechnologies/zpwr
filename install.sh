@@ -527,6 +527,7 @@ prettyPrint "Installing Pathogen"
 mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
 
 prettyPrint "Installing YouCompleteme in background"
+ycminstall
 
 prettyPrint "Installing Vim Plugins"
 cd "$INSTALLER_DIR"
