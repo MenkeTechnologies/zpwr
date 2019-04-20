@@ -1135,8 +1135,10 @@ getrc(){
     cp -f scripts/* "$SCRIPTS"
     cd ..
 
-    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins/zsh-more-completions"
-    test -d "$COMPLETION_DIR" && git -C "$COMPLETION_DIR" pull
+    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
+    for dir in "$COMPLETION_DIR/"*;do
+        test -d "$dir" && git -C "$dir" pull
+    done
 
     rm -rf "$REPO_NAME"
     test -n "$TERM" && exec "$SHELL"
