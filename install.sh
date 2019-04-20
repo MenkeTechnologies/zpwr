@@ -287,7 +287,7 @@ warnSudo(){
 }
 
 cargoinstall(){
-    prettyPrint "Installing rustup for exa, fd and bat in background"
+    prettyPrint "Installing YouCompleteMe for vim and rustup for exa, fd and bat in background"
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
     bash rustupinstall.sh &> "$logfile_cargo" &
     CARGO_PID=$!
