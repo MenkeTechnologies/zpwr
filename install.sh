@@ -764,13 +764,14 @@ test -f "$escapeRemover" && \
     "$escapeRemover" "$logfile" > "$INSTALLER_DIR/log.txt"
 
 #rm -rf "$INSTALLER_DIR"
+prettyPrint "Waiting for cargo installer to finish"
+wait $CARGO_PID
 prettyPrint "Done!!!!!!"
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
 export SHELL="$(which zsh)"
 export SCRIPTS="$HOME/Documents/shellScripts"
 
-wait $CARGO_PID
 zsh -c 'tmux new-session -d -s main'
 tmux send-keys -t "main" 'tmux source-file "$HOME/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
 tmux attach -t main
