@@ -37,3 +37,11 @@ exists exa || {
     "$HOME/.cargo/bin/cargo" install exa
 }
 
+prettyPrint "Installing YouCompleteMe"
+mkdir -p "$HOME/.vim/bundle/YouCompleteMe"
+cd "$HOME/.vim/bundle/YouCompleteMe" && {
+    git submodule update --init --recursive
+    #need greater than 3GB RAM for compiling
+    YCM_CORES=1 ./install.py --clang-completer
+}
+

@@ -556,22 +556,6 @@ prettyPrint "Installing .ideavimrc"
 cp "$INSTALLER_DIR/.ideavimrc" "$HOME"
 #}}}***********************************************************
 
-#{{{                    MARK:Vim Plugs
-#**************************************************************
-################################################################################
-## YouCompleteMe
-################################################################################
-
-prettyPrint "Installing YouCompleteMe"
-cd "$HOME/.vim/bundle/YouCompleteMe" && {
-    git submodule update --init --recursive
-    #need greater than 3GB RAM for compiling
-    YCM_CORES=1 ./install.py --clang-completer
-}
-
-#}}}***********************************************************
-
-
 #{{{                    MARK:Tmux
 #**************************************************************
 
