@@ -18,6 +18,7 @@ export COLUMNS="$(tput cols)"
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 
 logfile="$INSTALLER_DIR/escaped_logfile.txt"
+logfile_cargo="$INSTALLER_DIR/cargo_logfile.txt"
 
 clear
 # replicate stdout and sterr to logfile
@@ -137,7 +138,7 @@ addDependenciesFreeBSD(){
 }
 
 addDependenciesMac(){
-    dependencies_ary+=(httpie proxychains-ng s-search bat git ag automake autoconf exa fortune node the_silver_searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=(httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher fswatch zzz ghc lua python3 python macvim readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
@@ -285,6 +286,13 @@ warnSudo(){
 
 }
 
+cargoinstall(){
+    prettyPrint "Installing rustup for exa, fd and bat"
+    bash rustupinstall.sh & &> $cargo_logfile
+    CARGO_PID=$!
+    trap 'kill $CARGO_PID 2>/dev/null;echo bye;exit' INT
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Mac
@@ -298,6 +306,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     distroName=Mac
     distroFamily=mac
     showDeps
+    cargoinstall
 
     exists "brew" || {
         #install homebrew
@@ -338,14 +347,6 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "Installing meteor"
     curl https://install.meteor.com/ | sh
-
-    exists cargo || {
-        prettyPrint "Installing rustup"
-        curl https://sh.rustup.rs -sSf | sh -s -- -y
-        prettyPrint "Updating rustup"
-        $HOME/.cargo/bin/rustup update
-    }
-
 
     # system sed breaks extended regex
     ln -s /usr/local/bin/gsed /usr/local/bin/sed
@@ -399,6 +400,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     esac
 
     showDeps
+    cargoinstall
 
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
@@ -425,35 +427,6 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
         prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
     fi
 
-    exists bat || {
-        prettyPrint "Installing Rustup if cargo does not exist"
-        exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-        prettyPrint "Updating rustup"
-        "$HOME/.cargo/bin/rustup" update
-        prettyPrint "Installing Bat (cat replacement) with Cargo"
-        "$HOME/.cargo/bin/cargo" install bat
-        prettyPrint "Installing Fd (find replacement) with Cargo"
-        "$HOME/.cargo/bin/cargo" install fd-find
-    }
-
-    exists fd-find || {
-        prettyPrint "Installing rustup if cargo does not exist"
-        exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-        prettyPrint "Updating rustup"
-        "$HOME/.cargo/bin/rustup" update
-        prettyPrint "Installing Fd (find replacement) with Cargo"
-        "$HOME/.cargo/bin/cargo" install fd-find
-    }
-
-    exists exa || {
-        prettyPrint "Installing rustup if cargo does not exist"
-        exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-        prettyPrint "Updating rustup"
-        "$HOME/.cargo/bin/rustup" update
-        prettyPrint "Installing Exa with Cargo"
-        "$HOME/.cargo/bin/cargo" install exa
-    }
-
 else
     #unix
     if [[ "$OS_TYPE" == FreeBSD ]]; then
@@ -469,6 +442,7 @@ else
         addDependenciesFreeBSD
         
         showDeps
+        cargoinstall
 
         if [[ $skip != true ]]; then
             prettyPrint "Now The Main Course..."
@@ -483,24 +457,6 @@ else
 
             upgrade "$distroFamily"
         fi
-        exists bat || {
-            prettyPrint "Installing rustup if cargo does not exist"
-            exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-            "$HOME/.cargo/bin/rustup" update
-            prettyPrint "Installing Bat (cat replacement) with Cargo"
-            "$HOME/.cargo/bin/cargo" install bat
-            prettyPrint "Installing Fd (find replacement) with Cargo"
-            "$HOME/.cargo/bin/cargo" install fd-find
-        }
-
-        exists exa || {
-            prettyPrint "Installing rustup if cargo does not exist"
-            exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-            prettyPrint "Updating rustup"
-            "$HOME/.cargo/bin/rustup" update
-            prettyPrint "Installing Exa with Cargo"
-            "$HOME/.cargo/bin/cargo" install exa
-        }
 
         prettyPrint "Installing Powerline fonts"
         if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
