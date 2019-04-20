@@ -18,7 +18,7 @@ export COLUMNS="$(tput cols)"
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 
 logfile="$INSTALLER_DIR/escaped_logfile.txt"
-logfile_cargo="$INSTALLER_DIR/cargo_logfile.txt"
+logfileCargoYCM="$INSTALLER_DIR/cargoYCM_logfile.txt"
 
 clear
 # replicate stdout and sterr to logfile
@@ -289,7 +289,7 @@ warnSudo(){
 cargoinstall(){
     prettyPrint "Installing YouCompleteMe for vim and rustup for exa, fd and bat in background"
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
-    bash rustupinstall.sh &> "$logfile_cargo" &
+    bash rustupinstall.sh &> "$logfileCargoYCM" &
     CARGO_PID=$!
     trap 'kill $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
