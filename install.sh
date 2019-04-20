@@ -122,7 +122,7 @@ addDependenciesDebian(){
     dependencies_ary+=(bc npm lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs gcc \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev libxpm-dev libxt-dev \
     libperl-dev libpq-dev libpcap-dev fortunes python3-dev python-dev ruby-dev \
-    python3-pip curl libffi-dev libssl-dev grc automake whatweb)
+    python3-pip libffi-dev libssl-dev grc automake whatweb)
 
 }
 
@@ -331,6 +331,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         prettyPrint "Updating repos"
         refresh "$distroFamily"
         brew cask install java
+        exists curl || update curl mac
+        cargoinstall
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
             update "$prog" mac
@@ -339,7 +341,6 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         prettyPrint "Upgrading packages"
         upgrade mac
     fi
-    cargoinstall
 
     prettyPrint "Tapping Homebrew fonts"
     brew tap homebrew/cask-fonts
@@ -402,6 +403,8 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
         sleep 1
+        exists curl || update curl "$distroFamily"
+        cargoinstall
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
             update "$prog" "$distroFamily"
@@ -409,7 +412,6 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
         prettyPrint "Upgrading $distroFamily"
         upgrade "$distroFamily"
     fi
-    cargoinstall
 
     prettyPrint "Installing Powerline fonts"
     if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
@@ -445,6 +447,8 @@ else
             prettyPrint "Now The Main Course..."
             sleep 1
 
+            exists curl || update curl "$distroFamily"
+            cargoinstall
             for prog in "${dependencies_ary[@]}"; do
                 prettyPrint "Installing $prog"
                 update "$prog" "$distroFamily"
@@ -454,7 +458,6 @@ else
 
             upgrade "$distroFamily"
         fi
-        cargoinstall
 
         prettyPrint "Installing Powerline fonts"
         if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
