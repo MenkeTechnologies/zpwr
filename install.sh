@@ -287,7 +287,7 @@ warnSudo(){
 }
 
 cargoinstall(){
-    prettyPrint "Installing rustup for exa, fd and bat"
+    prettyPrint "Installing rustup for exa, fd and bat in background"
     bash rustupinstall.sh & &> $logfile_cargo
     CARGO_PID=$!
     trap 'kill $CARGO_PID 2>/dev/null;echo bye;exit' INT
