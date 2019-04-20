@@ -6,7 +6,6 @@
 ##### Purpose: bash script to install bat,fd and exa
 ##### Notes:
 #}}}***********************************************************
-. 
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 
 exists bat || {
