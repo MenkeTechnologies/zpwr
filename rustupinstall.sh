@@ -8,6 +8,13 @@
 #}}}***********************************************************
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 
+while true; do
+    if exists curl;then
+        break
+    fi
+    sleep 5
+done
+
 exists bat || {
     prettyPrint "Installing Rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
