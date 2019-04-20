@@ -306,7 +306,6 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     distroName=Mac
     distroFamily=mac
     showDeps
-    cargoinstall
 
     exists "brew" || {
         #install homebrew
@@ -339,6 +338,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         prettyPrint "Upgrading packages"
         upgrade mac
     fi
+    cargoinstall
 
     prettyPrint "Tapping Homebrew fonts"
     brew tap homebrew/cask-fonts
@@ -400,7 +400,6 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
     esac
 
     showDeps
-    cargoinstall
 
     if [[ $skip != true ]]; then
         prettyPrint "Now The Main Course..."
@@ -412,6 +411,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
         prettyPrint "Upgrading $distroFamily"
         upgrade "$distroFamily"
     fi
+    cargoinstall
 
     prettyPrint "Installing Powerline fonts"
     if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
@@ -442,7 +442,6 @@ else
         addDependenciesFreeBSD
         
         showDeps
-        cargoinstall
 
         if [[ $skip != true ]]; then
             prettyPrint "Now The Main Course..."
@@ -457,6 +456,7 @@ else
 
             upgrade "$distroFamily"
         fi
+        cargoinstall
 
         prettyPrint "Installing Powerline fonts"
         if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
