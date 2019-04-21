@@ -293,7 +293,7 @@ pluginsinstall(){
     prettyPrint "Installing vim and tmux plugins in background"
     cd "$INSTALLER_DIR"
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in zpwr base directory?" >&2; exit 1; }
-    bash plugins_install.sh &>> "$logfileCargoYCM" &
+    bash plugins_install.sh >> 2>&1 "$logfileCargoYCM" &
     PLUGIN_PID=$!
     trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
@@ -302,7 +302,7 @@ ycminstall(){
     prettyPrint "Installing YouCompleteMe in background"
     cd "$INSTALLER_DIR"
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
-    bash ycm_install.sh &>> "$logfileCargoYCM" &
+    bash ycm_install.sh >> 2>&1 "$logfileCargoYCM" &
     YCM_PID=$!
     trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
@@ -310,7 +310,7 @@ ycminstall(){
 cargoinstall(){
     prettyPrint "Installing rustup for exa, fd and bat in background"
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
-    bash rustupinstall.sh "$distroName" &>> "$logfileCargoYCM" &
+    bash rustupinstall.sh "$distroName" >> 2>&1 "$logfileCargoYCM" &
     CARGO_PID=$!
     trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
