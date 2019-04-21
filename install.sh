@@ -290,26 +290,27 @@ warnSudo(){
 }
 
 pluginsinstall(){
-    prettyPrint "Installing vim and tmux plugins in background"
     cd "$INSTALLER_DIR"
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in zpwr base directory?" >&2; exit 1; }
     bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
     PLUGIN_PID=$!
+    prettyPrint "Installing vim and tmux plugins in background @ $PLUGIN_PID"
 }
 
 ycminstall(){
-    prettyPrint "Installing YouCompleteMe in background"
     cd "$INSTALLER_DIR"
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
     bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
     YCM_PID=$!
+    prettyPrint "Installing YouCompleteMe in background @ $YCM_PID"
 }
 
 cargoinstall(){
-    prettyPrint "Installing rustup for exa, fd and bat in background"
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
     bash rustupinstall.sh >> "$logfileCargoYCM" 2>&1 &
     CARGO_PID=$!
+    echo $CARGO_PID
+    prettyPrint "Installing rustup for exa, fd and bat in background @ $CARGO_PID"
 }
 
 trap 'echo kill $YCM_PID $PLUGIN_PID $CARGO_PID; kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT TERM HUP QUIT
