@@ -296,15 +296,15 @@ ycminstall(){
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
     bash ycm_install.sh &> "$logfileCargoYCM" &
     YCM_PID=$!
-    trap 'kill $YCM_PID 2>/dev/null;echo bye;exit' INT
+    trap 'kill $YCM_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
 
 cargoinstall(){
     prettyPrint "Installing rustup for exa, fd and bat in background"
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
-    bash rustupinstall.sh &> "$logfileCargoYCM" &
+    bash rustupinstall.sh "$distroName" &> "$logfileCargoYCM" &
     CARGO_PID=$!
-    trap 'kill $CARGO_PID 2>/dev/null;echo bye;exit' INT
+    trap 'kill $YCM_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
 
 #}}}***********************************************************
@@ -522,61 +522,12 @@ if echo "$vimV >= 8.0" | bc | grep -q 1 || vim --version 2>&1 | grep -q '\-pytho
     }
 fi
 
-
-prettyPrint "Installing Pathogen"
-#install pathogen
-mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
-
-prettyPrint "Installing YouCompleteme in background"
-ycminstall
-
-prettyPrint "Installing Vim Plugins"
-cd "$INSTALLER_DIR"
-source  "$INSTALLER_DIR/vim_plugins_install.sh"
-cd "$INSTALLER_DIR"
-source "$INSTALLER_DIR/pip_install.sh"
-
-prettyPrint "Installing Ultisnips snippets"
-cd "$INSTALLER_DIR"
-cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
-
-case "$distroName" in
-    (*suse*|ubuntu|debian|linuxmint|raspbian|Mac)
-        needSudo=yes
-        ;;
-    (fedora)
-        needSudo=no
-        ;;
-    (*)
-        needSudo=no
-        ;;
-esac
-
-if [[ "$needSudo" == yes ]]; then
-    prettyPrint "Installing Ruby gem lolcat"
-    sudo gem install lolcat
-    prettyPrint "Installing Ruby gem rouge"
-    sudo gem install rouge
-else
-    prettyPrint "Installing Ruby gem lolcat"
-     gem install lolcat
-    prettyPrint "Installing Ruby gem rouge"
-     gem install rouge
-fi
-
-prettyPrint "Running Vundle"
-#run vundle install for ultisnips, supertab
-vim -c PluginInstall -c qall
-
-prettyPrint "Installing .vimrc"
-cp "$INSTALLER_DIR/.vimrc" "$HOME"
-
-prettyPrint "Installing .ideavimrc"
-cp "$INSTALLER_DIR/.ideavimrc" "$HOME"
 #}}}***********************************************************
 
 #{{{                    MARK:Tmux
 #**************************************************************
+prettyPrint "Installing YouCompleteme in background"
+ycminstall
 
 #custom settings for tmux powerline
 tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
