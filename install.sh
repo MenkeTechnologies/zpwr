@@ -599,37 +599,11 @@ cd "$HOME/forkedRepos" && {
     }
 }
 
-
-cd "$INSTALLER_DIR"
-prettyPrint "Installing ponysay from source"
-git clone https://github.com/erkin/ponysay.git && {
-cd ponysay && sudo ./setup.py --freedom=partial install && \
-    cd .. && sudo rm -rf ponysay
-}
-
-prettyPrint "Installing Pipes.sh from source"
-git clone https://github.com/pipeseroni/pipes.sh.git
-cd pipes.sh && {
-    sudo make install
-    cd ..
-    rm -rf pipes.sh
-}
-
-prettyPrint "Installing htoprc file...."
-htopDIR="$HOME/.config/htop"
-if [[ ! -f "$htopDIR/htoprc" ]]; then
-    if [[ ! -d "$htopDIR" ]]; then
-        mkdir -p "$htopDIR"
-    fi
-    mv "$INSTALLER_DIR/htoprc" "$htopDIR"
-fi
-
 exists grc || {
     git clone https://github.com/garabik/grc.git
     cd grc
     sudo bash install.sh
 }
-
 
 if [[ "$(uname)" == Darwin ]]; then
     prettyPrint "Try again for ponysay and lolcat on mac"
@@ -644,6 +618,13 @@ if [[ "$(uname)" == Darwin ]]; then
 else
     GRC_DIR=/usr/share/grc
 fi
+cd "$INSTALLER_DIR"
+prettyPrint "Installing ponysay from source"
+git clone https://github.com/erkin/ponysay.git && {
+cd ponysay && sudo ./setup.py --freedom=partial install && \
+    cd .. && sudo rm -rf ponysay
+}
+
 
 prettyPrint "Installing mylg"
 go get github.com/mehrdadrad/mylg
@@ -677,10 +658,6 @@ prettyPrint "Installing oh-my-zsh..."
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
 cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
-
-#add aliases and functions
-prettyPrint "Adding common shell aliases for Bash and Zsh"
-cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
 
 prettyPrint "Installing .zshrc"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
