@@ -295,7 +295,6 @@ pluginsinstall(){
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in zpwr base directory?" >&2; exit 1; }
     bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
     PLUGIN_PID=$!
-    trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
 
 ycminstall(){
@@ -304,7 +303,6 @@ ycminstall(){
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
     bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
     YCM_PID=$!
-    trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
 
 cargoinstall(){
@@ -312,8 +310,9 @@ cargoinstall(){
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
     bash rustupinstall.sh >> "$logfileCargoYCM" 2>&1 &
     CARGO_PID=$!
-    trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
+
+trap 'echo kill $YCM_PID $PLUGIN_PID $CARGO_PID; kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT TERM HUP QUIT
 
 #}}}***********************************************************
 
