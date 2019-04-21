@@ -7,7 +7,6 @@
 #####   Notes: 
 #}}}***********************************************************
 
-
 if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins" ]]; then
     mkdir -p "$HOME/.oh-my-zsh/custom/plugins"
 fi
