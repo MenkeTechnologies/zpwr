@@ -290,13 +290,22 @@ warnSudo(){
 
 }
 
+pluginsinstall(){
+    prettyPrint "Installing vim and tmux plugins in background"
+    cd "$INSTALLER_DIR"
+    test -f plugins_install.sh || { echo "Where is plugins_install.sh in zpwr base directory?" >&2; exit 1; }
+    bash plugins_install.sh &> "$logfileCargoYCM" &
+    PLUGIN_PID=$!
+    trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
+}
+
 ycminstall(){
     prettyPrint "Installing YouCompleteMe in background"
     cd "$INSTALLER_DIR"
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
     bash ycm_install.sh &> "$logfileCargoYCM" &
     YCM_PID=$!
-    trap 'kill $YCM_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
+    trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
 
 cargoinstall(){
@@ -304,7 +313,7 @@ cargoinstall(){
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
     bash rustupinstall.sh "$distroName" &> "$logfileCargoYCM" &
     CARGO_PID=$!
-    trap 'kill $YCM_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
+    trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
 
 #}}}***********************************************************
@@ -348,6 +357,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         prettyPrint "Checking for curl before rustup install"
         exists curl || update curl mac
         cargoinstall
+        pluginsinstall
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
             update "$prog" mac
@@ -421,6 +431,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
         prettyPrint "Checking for curl before rustup install"
         exists curl || update curl "$distroFamily"
         cargoinstall
+        pluginsinstall
         for prog in "${dependencies_ary[@]}"; do
             prettyPrint "Installing $prog"
             update "$prog" "$distroFamily"
@@ -465,6 +476,7 @@ else
             prettyPrint "Checking for curl before rustup install"
             exists curl || update curl "$distroFamily"
             cargoinstall
+            pluginsinstall
             for prog in "${dependencies_ary[@]}"; do
                 prettyPrint "Installing $prog"
                 update "$prog" "$distroFamily"
@@ -528,44 +540,6 @@ fi
 #**************************************************************
 prettyPrint "Installing YouCompleteme in background"
 ycminstall
-
-#custom settings for tmux powerline
-tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
-[[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-
-prettyPrint "Installing Tmux Powerline Config"
-cat "$INSTALLER_DIR"/default.json > "$tmuxPowerlineDir/default.json"
-
-prettyPrint "Installing Tmux Plugin Manager"
-[[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p "$HOME/.tmux/plugins/tpm"
-
-git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
-
-prettyPrint "Copying tmux configuration file to home directory"
-cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
-
-prettyPrint "Installing Iftop config..."
-ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
-iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
-prettyPrint "IPv4: $ip and interface: $iface"
-echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
-
-cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
-
-prettyPrint "Installing Iftop colors to $HOME"
-cp "$INSTALLER_DIR/.iftopcolors" "$HOME"
-
-if [[ "$distroName" == raspbian ]]; then
-    prettyPrint "Installing custom motd for RPI..."
-    cp "$INSTALLER_DIR/motd.sh" "$HOME"
-fi
-
-prettyPrint "Installing Custom Tmux Commands"
-cp -R "$INSTALLER_DIR/.tmux" "$HOME"
-
-cd "$INSTALLER_DIR"
-prettyPrint "Installing Tmux plugins"
-. "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 #}}}***********************************************************
 
@@ -734,6 +708,7 @@ test -f "$escapeRemover" && \
 prettyPrint "Waiting for cargo installer to finish"
 wait $CARGO_PID
 wait $YCM_PID
+wait $PLUGIN_PID
 prettyPrint "Done!!!!!!"
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
