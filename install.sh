@@ -644,17 +644,6 @@ if [[ "$(uname)" == Darwin ]]; then
 else
     GRC_DIR=/usr/share/grc
 fi
-prettyPrint "Copying grc config files"
-cp "$INSTALLER_DIR/grc.zsh" "$HOME"
-cp "$INSTALLER_DIR/conf.gls" "$HOME"
-cp "$INSTALLER_DIR/conf.df" "$HOME"
-cp "$INSTALLER_DIR/conf.ifconfig" "$HOME"
-cp "$INSTALLER_DIR/conf.mount" "$HOME"
-cp "$INSTALLER_DIR/conf.whois" "$HOME"
-
-
-prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap."
-cp "$INSTALLER_DIR/.inputrc" "$HOME"
 
 prettyPrint "Installing mylg"
 go get github.com/mehrdadrad/mylg
@@ -700,6 +689,10 @@ prettyPrint "Installing Zsh plugins"
 cd "$INSTALLER_DIR"
 source "$INSTALLER_DIR/zsh_plugins_install.sh"
 
+prettyPrint "Running Vundle"
+#run vundle install for ultisnips, supertab
+vim -c PluginInstall -c qall
+
 prettyPrint "Installing Powerlevel9k"
 git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$HOME"
@@ -726,6 +719,7 @@ prettyPrint "Waiting for cargo installer to finish"
 wait $CARGO_PID
 wait $YCM_PID
 wait $PLUGIN_PID
+
 prettyPrint "Done!!!!!!"
 prettyPrint "Starting Tmux..."
 prettyPrint "Starting the matrix"
