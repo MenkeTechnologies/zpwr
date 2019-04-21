@@ -573,6 +573,14 @@ iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $
 prettyPrint "IPv4: $ip and interface: $iface"
 echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
+cd "$INSTALLER_DIR"
+prettyPrint "Installing Pipes.sh from source"
+git clone https://github.com/pipeseroni/pipes.sh.git
+cd pipes.sh && {
+    sudo make install
+    cd ..
+    rm -rf pipes.sh
+}
 
 #}}}***********************************************************
 

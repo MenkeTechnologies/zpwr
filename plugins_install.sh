@@ -97,15 +97,6 @@ prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap.
 cp "$INSTALLER_DIR/.inputrc" "$HOME"
 
 
-cd "$INSTALLER_DIR"
-prettyPrint "Installing Pipes.sh from source"
-git clone https://github.com/pipeseroni/pipes.sh.git
-cd pipes.sh && {
-    sudo make install
-    cd ..
-    rm -rf pipes.sh
-}
-
 prettyPrint "Installing htoprc file...."
 htopDIR="$HOME/.config/htop"
 if [[ ! -f "$htopDIR/htoprc" ]]; then
