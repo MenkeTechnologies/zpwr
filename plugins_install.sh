@@ -96,3 +96,26 @@ cp "$INSTALLER_DIR/conf.whois" "$HOME"
 prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap."
 cp "$INSTALLER_DIR/.inputrc" "$HOME"
 
+
+cd "$INSTALLER_DIR"
+prettyPrint "Installing Pipes.sh from source"
+git clone https://github.com/pipeseroni/pipes.sh.git
+cd pipes.sh && {
+    sudo make install
+    cd ..
+    rm -rf pipes.sh
+}
+
+prettyPrint "Installing htoprc file...."
+htopDIR="$HOME/.config/htop"
+if [[ ! -f "$htopDIR/htoprc" ]]; then
+    if [[ ! -d "$htopDIR" ]]; then
+        mkdir -p "$htopDIR"
+    fi
+    mv "$INSTALLER_DIR/htoprc" "$htopDIR"
+fi
+
+#add aliases and functions
+prettyPrint "Adding common shell aliases for Bash and Zsh"
+cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
+
