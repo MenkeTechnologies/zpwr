@@ -1,4 +1,5 @@
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
+
 INSTALLER_DIR="$(pwd -P)"
 OS_TYPE="$(uname -s)"
 
@@ -25,9 +26,6 @@ cd "$INSTALLER_DIR"
 cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 
-prettyPrint "Running Vundle"
-#run vundle install for ultisnips, supertab
-vim -c PluginInstall -c qall
 
 prettyPrint "Installing .vimrc"
 cp "$INSTALLER_DIR/.vimrc" "$HOME"
@@ -85,4 +83,16 @@ prettyPrint "Copying all Shell Scripts to $HOME/Documents"
 
 cp "$INSTALLER_DIR/scripts/"*.sh "$INSTALLER_DIR/scripts/"*.pl "$HOME/Documents/shellScripts"
 cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
+
+prettyPrint "Copying grc config files"
+cp "$INSTALLER_DIR/grc.zsh" "$HOME"
+cp "$INSTALLER_DIR/conf.gls" "$HOME"
+cp "$INSTALLER_DIR/conf.df" "$HOME"
+cp "$INSTALLER_DIR/conf.ifconfig" "$HOME"
+cp "$INSTALLER_DIR/conf.mount" "$HOME"
+cp "$INSTALLER_DIR/conf.whois" "$HOME"
+
+
+prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap."
+cp "$INSTALLER_DIR/.inputrc" "$HOME"
 
