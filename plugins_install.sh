@@ -19,36 +19,11 @@ mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/aut
 prettyPrint "Installing Vim Plugins"
 cd "$INSTALLER_DIR"
 source  "$INSTALLER_DIR/vim_plugins_install.sh"
-cd "$INSTALLER_DIR"
-source "$INSTALLER_DIR/pip_install.sh"
 
 prettyPrint "Installing Ultisnips snippets"
 cd "$INSTALLER_DIR"
 cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
-case "$distroName" in
-    (*suse*|ubuntu|debian|linuxmint|raspbian|Mac)
-        needSudo=yes
-        ;;
-    (fedora)
-        needSudo=no
-        ;;
-    (*)
-        needSudo=no
-        ;;
-esac
-
-if [[ "$needSudo" == yes ]]; then
-    prettyPrint "Installing Ruby gem lolcat"
-    sudo gem install lolcat
-    prettyPrint "Installing Ruby gem rouge"
-    sudo gem install rouge
-else
-    prettyPrint "Installing Ruby gem lolcat"
-     gem install lolcat
-    prettyPrint "Installing Ruby gem rouge"
-     gem install rouge
-fi
 
 prettyPrint "Running Vundle"
 #run vundle install for ultisnips, supertab
@@ -75,11 +50,6 @@ git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
 
-prettyPrint "Installing Iftop config..."
-ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
-iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
-prettyPrint "IPv4: $ip and interface: $iface"
-echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
 
@@ -97,4 +67,22 @@ cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 cd "$INSTALLER_DIR"
 prettyPrint "Installing Tmux plugins"
 . "$INSTALLER_DIR/tmux_plugins_install.sh"
+
+[[ ! -f "$HOME/.token.sh" ]] && touch "$HOME/.tokens.sh"
+
+prettyPrint "HushLogin to $HOME"
+[[ ! -f "$HOME/.hushlogin" ]] && touch "$HOME/.hushlogin"
+
+prettyPrint "Installing my.cnf to $HOME"
+[[ ! -f "$HOME/.my.cnf" ]] && touch "$HOME/.my.cnf"
+
+prettyPrint "Changing pager to cat for MySQL Clients such as MyCLI"
+echo "[client]" >> "$HOME/.my.cnf"
+echo "pager=cat" >> "$HOME/.my.cnf"
+
+prettyPrint "Copying all Shell Scripts to $HOME/Documents"
+[[ ! -d "$HOME/Documents/shellScripts" ]] && mkdir -p "$HOME/Documents/shellScripts"
+
+cp "$INSTALLER_DIR/scripts/"*.sh "$INSTALLER_DIR/scripts/"*.pl "$HOME/Documents/shellScripts"
+cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
 

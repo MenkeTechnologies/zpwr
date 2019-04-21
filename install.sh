@@ -294,7 +294,7 @@ pluginsinstall(){
     prettyPrint "Installing vim and tmux plugins in background"
     cd "$INSTALLER_DIR"
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in zpwr base directory?" >&2; exit 1; }
-    bash plugins_install.sh &> "$logfileCargoYCM" &
+    bash plugins_install.sh &>> "$logfileCargoYCM" &
     PLUGIN_PID=$!
     trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
@@ -303,7 +303,7 @@ ycminstall(){
     prettyPrint "Installing YouCompleteMe in background"
     cd "$INSTALLER_DIR"
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
-    bash ycm_install.sh &> "$logfileCargoYCM" &
+    bash ycm_install.sh &>> "$logfileCargoYCM" &
     YCM_PID=$!
     trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
@@ -311,7 +311,7 @@ ycminstall(){
 cargoinstall(){
     prettyPrint "Installing rustup for exa, fd and bat in background"
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
-    bash rustupinstall.sh "$distroName" &> "$logfileCargoYCM" &
+    bash rustupinstall.sh "$distroName" &>> "$logfileCargoYCM" &
     CARGO_PID=$!
     trap 'kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT
 }
@@ -541,6 +541,40 @@ fi
 prettyPrint "Installing YouCompleteme in background"
 ycminstall
 
+cd "$INSTALLER_DIR"
+source "$INSTALLER_DIR/pip_install.sh"
+
+case "$distroName" in
+    (*suse*|ubuntu|debian|linuxmint|raspbian|Mac)
+        needSudo=yes
+        ;;
+    (fedora)
+        needSudo=no
+        ;;
+    (*)
+        needSudo=no
+        ;;
+esac
+
+if [[ "$needSudo" == yes ]]; then
+    prettyPrint "Installing Ruby gem lolcat"
+    sudo gem install lolcat
+    prettyPrint "Installing Ruby gem rouge"
+    sudo gem install rouge
+else
+    prettyPrint "Installing Ruby gem lolcat"
+     gem install lolcat
+    prettyPrint "Installing Ruby gem rouge"
+     gem install rouge
+fi
+
+prettyPrint "Installing Iftop config..."
+ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
+iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
+prettyPrint "IPv4: $ip and interface: $iface"
+echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
+
+
 #}}}***********************************************************
 
 #{{{                    MARK:Utilities
@@ -565,23 +599,6 @@ cd "$HOME/forkedRepos" && {
     }
 }
 
-[[ ! -f "$HOME/.token.sh" ]] && touch "$HOME/.tokens.sh"
-
-prettyPrint "HushLogin to $HOME"
-[[ ! -f "$HOME/.hushlogin" ]] && touch "$HOME/.hushlogin"
-
-prettyPrint "Installing my.cnf to $HOME"
-[[ ! -f "$HOME/.my.cnf" ]] && touch "$HOME/.my.cnf"
-
-prettyPrint "Changing pager to cat for MySQL Clients such as MyCLI"
-echo "[client]" >> "$HOME/.my.cnf"
-echo "pager=cat" >> "$HOME/.my.cnf"
-
-prettyPrint "Copying all Shell Scripts to $HOME/Documents"
-[[ ! -d "$HOME/Documents/shellScripts" ]] && mkdir -p "$HOME/Documents/shellScripts"
-
-cp "$INSTALLER_DIR/scripts/"*.sh "$INSTALLER_DIR/scripts/"*.pl "$HOME/Documents/shellScripts"
-cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
 
 cd "$INSTALLER_DIR"
 prettyPrint "Installing ponysay from source"
