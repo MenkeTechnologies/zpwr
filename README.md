@@ -17,7 +17,7 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - insert matching quotes, brackets and parentheses
 - custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching
 - keybinding to run current code file open in vim in tmux pane to right
-- 6.4k zsh completions
+- 6.5k zsh completions
 - new tmux keybindings
 - zsh keybindings to fzf search file names and preview file contents with bat in right pane
 - zsh keybindings to fzf search file contents and preview surrounding file contents with bat in right pane
