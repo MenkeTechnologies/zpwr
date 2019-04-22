@@ -539,7 +539,6 @@ fi
 
 #{{{                    MARK:Tmux
 #**************************************************************
-prettyPrint "Installing YouCompleteme in background"
 ycminstall
 
 cd "$INSTALLER_DIR"
