@@ -88,6 +88,8 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 git clone https://github.com/MenkeTechnologies/zpwr.git && cd zpwr && ./install.sh
 ```
 
+The installer will confirm what will be installed and overwritten before executing.
+
 Some interactivity is required near end of installer for postfix, wireshark and snort installs.
 
 Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Control-D to return to installer script.
