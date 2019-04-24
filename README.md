@@ -120,7 +120,8 @@ The Tmux prefix on Linux is the default C-B.
 There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Tmux Main Window
-The main window show in the screenshots is started by Prefix-D in an empty tmux window.
+The main window show in the screenshots is started by Prefix-D in an empty tmux window.  This sources a tmux script named control-window.
+Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/control-window` or in the terminal with `tmux source-file ~/.tmux/control-window` in an empty tmux window.
 
 ## Personal Config
 Startup shell files will source ~/.tokens.sh so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
