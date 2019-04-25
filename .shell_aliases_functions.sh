@@ -424,7 +424,7 @@ r(){
         }
     }
 
-    estartpoll(){
+    restartpoll(){
         src_dir="$HOME/forkedRepos/$REPO_NAME"
         test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
         test -d "/etc/systemd/system" || { echo "/etc/systemd/system does not exists. Is systemd installed?" >&2 && return 1; }
