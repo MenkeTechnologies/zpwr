@@ -213,7 +213,6 @@ fi
 
 #{{{                    MARK:Sourcing
 #**************************************************************
-export PATH="/usr/local/bin:$PATH"
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
