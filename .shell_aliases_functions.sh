@@ -425,8 +425,8 @@ r(){
     }
 
     ssd() {
-        prettyPrint sudo systemctl stop "$1"
-        prettyPrint sudo systemctl disable "$1"
+        prettyPrint "sudo systemctl stop $1"
+        prettyPrint "sudo systemctl disable $1"
         sudo systemctl stop "$1"
         sudo systemctl disable "$1"
     }
