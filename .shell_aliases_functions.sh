@@ -424,6 +424,13 @@ r(){
         }
     }
 
+    ssd() {
+        echo sudo systemctl stop "$1"
+        echo sudo systemctl disable "$1"
+        sudo systemctl stop "$1"
+        sudo systemctl disable "$1"
+    }
+
     restartpoll(){
         src_dir="$HOME/forkedRepos/$REPO_NAME"
         test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
