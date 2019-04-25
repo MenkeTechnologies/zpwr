@@ -732,7 +732,7 @@ I am always looking for contributors.
 - ```bindkey -M visual "u" vi-down-case```
 - ```bindkey -M visual "x" vi-delete```
 - ```bindkey -M visual "~" vi-oper-swap-case```
-# Zsh Listscrol lMode keybindings (bindkey -M listscroll -L)
+# Zsh Listscroll Mode keybindings (bindkey -M listscroll -L)
 - ```bindkey -M listscroll "^I" complete-word```
 - ```bindkey -M listscroll "^J" accept-line```
 - ```bindkey -M listscroll "^M" accept-line```

@@ -24,7 +24,7 @@
     echo "# Zsh Vim Visual Mode keybindings (bindkey -M visual -L)"
     bindkey -M visual -L
 
-    echo "# Zsh Listscrol lMode keybindings (bindkey -M listscroll -L)"
+    echo "# Zsh Listscroll Mode keybindings (bindkey -M listscroll -L)"
     bindkey -M listscroll -L
 
     echo "# Zsh Vim Operator Mode keybindings (bindkey -M viopp -L)"
