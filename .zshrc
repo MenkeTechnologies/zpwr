@@ -1840,6 +1840,7 @@ learn(){
         return 1
     fi
 }
+
 zle -N learn
 bindkey -M viins '^J' learn
 bindkey -M vicmd '^J' learn
