@@ -14,13 +14,13 @@ brew cask install dash
 brew cask install datagrip
 brew cask install db-browser-for-sqlite
 brew cask install disk-inventory-x
+brew cask install docker
 brew cask install duet
 brew cask install eclipse-jee
 brew cask install electric-sheep
 brew cask install emacs
 brew cask install etcher
 brew cask install filezilla
-brew cask install firefox
 brew cask install font-codenewroman-nerd-font
 brew cask install font-fantasquesansmono-nerd-font
 brew cask install font-hack-nerd-font
@@ -45,12 +45,12 @@ brew cask install libreoffice
 brew cask install little-snitch
 brew cask install macs-fan-control
 brew cask install macvim
+brew cask install mattermost
 brew cask install multibit-hd
 brew cask install mysqlworkbench
 brew cask install netbeans
 brew cask install ngrok
 brew cask install onyx
-brew cask install opera
 brew cask install phpstorm
 brew cask install postico
 brew cask install postman
@@ -59,6 +59,7 @@ brew cask install pycharm
 brew cask install pycharm-ce
 brew cask install qt-creator
 brew cask install racket
+brew cask install rambox
 brew cask install rar
 brew cask install react-studio
 brew cask install rider
@@ -69,8 +70,8 @@ brew cask install rubymine
 brew cask install scenebuilder
 brew cask install skype
 brew cask install slack
-brew cask install sourcetree
 brew cask install spotify
+brew cask install station
 brew cask install sublime-text
 brew cask install switchresx
 brew cask install sysex-librarian
