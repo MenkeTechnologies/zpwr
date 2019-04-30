@@ -74,6 +74,7 @@ MYPROMPT=POWERLEVEL
 EXPAND_SECOND_POSITION=true
 SURROUND=true
 CUSTOM_COLORS=true
+TMUX_AUTO_ATTACH=true
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -1765,59 +1766,61 @@ alias -s txt='vim'
 #{{{                    MARK:SSH Public Key ID
 #**************************************************************
 
-if [[ "$(uname)" == Linux ]]; then
-    [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]] && {
-        mobile=true
-        cat ~/.ssh/authorized_keys | command grep "$GITHUB_ACCOUNT" > ~/temp$$
+if [[ $TMUX_AUTO_ATTACH == true ]]; then
+    if [[ "$(uname)" == Linux ]]; then
+        [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]] && {
+            mobile=true
+            cat ~/.ssh/authorized_keys | command grep "$GITHUB_ACCOUNT" > ~/temp$$
 
-        case $distroName in
-            (debian|raspbian|kali|ubuntu)
-                out="$(command grep -a 'Accepted publickey' /var/log/auth.log | tail -1)"
-                key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
-                ;;
-            (centos|rhel)
-                out="$(tail /var/log/messages)"
-                ;;
-            (*suse*)
-                out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
-                key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
-                ;;
-            (fedora)
-                out="$(sudo cat /var/log/secure | command grep 'Accepted publickey' | tail -1)"
-                key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
-                ;;
-            (*) :
-                ;;
-        esac
-        logg "searching for $key in $out"
-        echo "$out" | grep -q "$key" && mobile=false
+            case $distroName in
+                (debian|raspbian|kali|ubuntu)
+                    out="$(command grep -a 'Accepted publickey' /var/log/auth.log | tail -1)"
+                    key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
+                    ;;
+                (centos|rhel)
+                    out="$(tail /var/log/messages)"
+                    ;;
+                (*suse*)
+                    out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
+                    key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
+                    ;;
+                (fedora)
+                    out="$(sudo cat /var/log/secure | command grep 'Accepted publickey' | tail -1)"
+                    key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
+                    ;;
+                (*) :
+                    ;;
+            esac
+            logg "searching for $key in $out"
+            echo "$out" | grep -q "$key" && mobile=false
 
-        command rm ~/temp$$
-        if [[ $mobile == "false" ]]; then
-            logg "not mobile"
-            num_con="$(command ps -ef | command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
-            logg "num cons is $num_con"
-            if (( $num_con == 1 )); then
-                logg "no tmux clients"
-                {
-                    tmux ls && {
-                        tmux attach
-                        logg "attaching to existing"
-                    } || {
-                        tmux new-session \; \
-                        source-file ~/.tmux/control-window
-                        logg "creating new session"
-                    }
-                } &> /dev/null
+            command rm ~/temp$$
+            if [[ $mobile == "false" ]]; then
+                logg "not mobile"
+                num_con="$(command ps -ef | command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
+                logg "num cons is $num_con"
+                if (( $num_con == 1 )); then
+                    logg "no tmux clients"
+                    {
+                        tmux ls && {
+                            tmux attach
+                            logg "attaching to existing"
+                        } || {
+                            tmux new-session \; \
+                            source-file ~/.tmux/control-window
+                            logg "creating new session"
+                        }
+                    } &> /dev/null
+                else
+                    tmux attach
+                    logg "clients so NO"
+                fi
             else
-                tmux attach
-                logg "clients so NO"
+                logg "mobile so NO"
             fi
-        else
-            logg "mobile so NO"
-        fi
-    }
+        }
 
+    fi
 fi
 #}}}***********************************************************
 
