@@ -35,6 +35,7 @@ brew install cabal-install
 brew install cairo
 brew install camlp4
 brew install cassandra
+brew install catimg
 brew install ccrypt
 brew install ccze
 brew install cheat
@@ -312,6 +313,7 @@ brew install ponysay
 brew install portaudio
 brew install portmidi
 brew install postgresql
+brew install proxychains-ng
 brew install pssh
 brew install pstree
 brew install pv
@@ -368,6 +370,7 @@ brew install tcl-tk
 brew install tcptraceroute
 brew install telnet
 brew install tesseract
+brew install texi2html
 brew install texinfo
 brew install the_silver_searcher
 brew install thefuck
