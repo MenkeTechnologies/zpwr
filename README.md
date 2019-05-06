@@ -8,7 +8,7 @@ It allows one to install an extremely powerful custom terminal environment based
 
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
 
-## Innovations
+## Features
 - spelling correction and abbreviation expansion on the command line
 - snippets with tabstops that expand with spacebar
 - expanding aliases and global aliases from zsh menu selection
