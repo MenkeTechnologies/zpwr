@@ -1,10 +1,10 @@
 # ZPWR => World's Most Advanced UNIX Terminal Environment
 
-![Alt text](https://jakobmenke.com/img/tmuxfinal1.png?raw=true)
+![Alt text](http://jakobmenke.com/img/tmuxfinal1.png?raw=true)
 
 This repo started out as my own version of Hashrocket's Dotmatrix repo and it then grew.
 
-It allows one to install an extremely powerful custom terminal environment based on [oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+It allows one to install an extremely powerful custom terminal environment based on [oh-my-zsh](http://github.com/robbyrussell/oh-my-zsh)
 
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
 
@@ -85,7 +85,7 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 # Installation Instructions
 
 ```sh
-git clone https://github.com/MenkeTechnologies/zpwr.git && cd zpwr && ./install.sh
+git clone http://github.com/MenkeTechnologies/zpwr.git && cd zpwr && ./install.sh
 ```
 
 The installer will confirm what will be installed and overwritten before executing.
@@ -144,11 +144,11 @@ export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostna
 I am always looking for contributors.
 
 # Running on a MacbookPro
-![Alt text](https://jakobmenke.com/img/tmuxfinal22.png?raw=true)
-![Alt text](https://jakobmenke.com/img/tmuxfinal5.png?raw=true)
+![Alt text](http://jakobmenke.com/img/tmuxfinal22.png?raw=true)
+![Alt text](http://jakobmenke.com/img/tmuxfinal5.png?raw=true)
 # Running on the Raspberry Pi 3
-![Alt text](https://jakobmenke.com/img/tmuxfinal3.png?raw=true)
-![Alt text](https://jakobmenke.com/img/tmuxfinal4.png?raw=true)
+![Alt text](http://jakobmenke.com/img/tmuxfinal3.png?raw=true)
+![Alt text](http://jakobmenke.com/img/tmuxfinal4.png?raw=true)
 
 ## Keybindings generated with `source keybindingsToREADME.zsh`
 
