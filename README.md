@@ -1,6 +1,6 @@
 # ZPWR => World's Most Advanced UNIX Terminal Environment
 
-![Alt text](/tmuxfinal1.png?raw=true)
+![Alt text](https://jakobmenke.com/img/tmuxfinal1.png?raw=true)
 
 This repo started out as my own version of Hashrocket's Dotmatrix repo and it then grew.
 
@@ -144,11 +144,11 @@ export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostna
 I am always looking for contributors.
 
 # Running on a MacbookPro
-![Alt text](/tmuxfinal22.png?raw=true)
-![Alt text](/tmuxfinal5.png?raw=true)
+![Alt text](https://jakobmenke.com/img/tmuxfinal22.png?raw=true)
+![Alt text](https://jakobmenke.com/img/tmuxfinal5.png?raw=true)
 # Running on the Raspberry Pi 3
-![Alt text](/tmuxfinal3.png?raw=true)
-![Alt text](/tmuxfinal4.png?raw=true)
+![Alt text](https://jakobmenke.com/img/tmuxfinal3.png?raw=true)
+![Alt text](https://jakobmenke.com/img/tmuxfinal4.png?raw=true)
 
 ## Keybindings generated with `source keybindingsToREADME.zsh`
 
