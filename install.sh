@@ -639,6 +639,9 @@ go get github.com/mehrdadrad/mylg
 cd "$HOME/go/src/github.com/mehrdadrad/mylg/"
 go build mylg.go
 
+prettyPrint "Installing gotop"
+go get github.com/cjbassi/gotop
+
 test -f /usr/local/sbin/iftop || {
     prettyPrint "No iftop so installing"
     update iftop "$distroFamily"
