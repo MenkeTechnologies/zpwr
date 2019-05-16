@@ -81,10 +81,11 @@ gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
 prettyPrint "Updating OhMyZsh Themes"
 gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
-exists cargo && {
+cargo_bin="$HOME/.cargo/bin/cargo"
+exists "$cargo_bin" && {
     prettyPrint "Updating cargo packages"
-    cargo install cargo-update 2>/dev/null
-    cargo install-update -a
+    "$cargo_bin" install cargo-update 2>/dev/null
+    "$cargo_bin" install-update -a
 }
 
 prettyPrint "Updating Vundle Plugins"
