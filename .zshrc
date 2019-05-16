@@ -1864,4 +1864,9 @@ export CHEATCOLORS=true
 autoload zmv
 alias mmv='noglob zmv -W'
 
+if exists jenv;then
+    export PATH="$HOME/.jenv/shims:$PATH"
+fi
+
+
 #}}}***********************************************************

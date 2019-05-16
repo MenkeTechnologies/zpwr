@@ -210,6 +210,17 @@ if [[ $skip != true ]]; then
         npm install -g npm
     }
 
+    exists rustup && {
+        prettyPrint "Updating rustup"
+        rustup update
+    }
+
+    exists cargo && {
+        prettyPrint "Updating cargo packages"
+        cargo install cargo-update 2>/dev/null
+        cargo install-update -a
+    }
+
     exists yarn && {
         prettyPrint "Updating yarn packages"
         yarn global upgrade
