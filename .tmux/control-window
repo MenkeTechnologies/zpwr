@@ -9,7 +9,7 @@ send-keys "bash $SCRIPTS/colorLogger.sh" C-m
 splitw -v -p 30 # split it into two horizontal halves
 selectp -t 2
 
-if-shell "uname | grep -q Darwin" 'send-keys "storageShower.sh 8 1" C-m' 'send-keys "sudo gotop -p" C-M'
+if-shell "uname | grep -q Darwin" 'send-keys "storageShower.sh 8 1" C-m' 'send-keys "gotop -p" C-M'
 selectp -t right # select the new, second (1) pane
 splitw -v -p 20 
 
