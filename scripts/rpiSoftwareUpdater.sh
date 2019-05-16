@@ -81,6 +81,12 @@ gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
 prettyPrint "Updating OhMyZsh Themes"
 gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
+exists cargo && {
+    prettyPrint "Updating cargo packages"
+    cargo install cargo-update 2>/dev/null
+    cargo install-update -a
+}
+
 prettyPrint "Updating Vundle Plugins"
 #vim -c VundleUpdate -c quitall
 
