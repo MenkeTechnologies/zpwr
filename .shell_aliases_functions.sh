@@ -99,6 +99,7 @@ echo "$PATH" | grep -iq shellScripts || {
         if exists jenv;then
             eval "$(jenv init -)"
             test -z "$JAVA_HOME" && jenv enable-plugin export &>/dev/null
+
         fi
         export HOMEBREW_HOME='/usr/local/Cellar'
         export HOMEBREW_OPT_HOME='/usr/local/opt'

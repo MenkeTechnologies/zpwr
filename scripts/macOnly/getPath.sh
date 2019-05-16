@@ -19,9 +19,9 @@ if [[ "$1" =~ ^[/~]+.*$ ]]; then
 else
     #this is a relative path
     #show the path, PWD is environment variable in BASH
-    echo $PWD/"$1"
+    echo "$PWD/$1"
 
     #alternatively, to print to stdout and pipe into pbcopy
     #printf \'$PWD/"$1"\' | tee /dev/tty | pbcopy
-    printf \'$PWD/"$1"\'| pbcopy
+    printf "\'$PWD/$1\'" | pbcopy
 fi
