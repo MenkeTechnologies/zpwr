@@ -15,7 +15,6 @@ while true; do
     fi
     sleep 5
 done
-
 exists bat || {
     prettyPrint "Installing Rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
@@ -44,5 +43,13 @@ exists exa || {
     prettyPrint "Installing Exa with Cargo"
     "$HOME/.cargo/bin/cargo" install exa
 }
+
+
+prettyPrint "Installing Rustup if cargo does not exist"
+exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+prettyPrint "Updating rustup"
+"$HOME/.cargo/bin/rustup" update
+prettyPrint "Installing cargo-update with Cargo"
+"$HOME/.cargo/bin/cargo" install cargo-update
 
 
