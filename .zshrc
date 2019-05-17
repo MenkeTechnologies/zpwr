@@ -1690,7 +1690,7 @@ _f(){
 }
 
 _c(){
-    arguments=('*:files:_path_files -g "*(D^/) *(D/l+2)"')
+    arguments=('*:files:_path_files -g "*(D^/) *(DF)"')
     _arguments -s $arguments
 }
 
