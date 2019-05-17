@@ -121,7 +121,7 @@ addDependenciesSuse(){
 
 addDependenciesDebian(){
     dependencies_ary=(python3-dev python-dev ${dependencies_ary[@]})
-    dependencies_ary+=(gcc bc npm lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs \
+    dependencies_ary+=(mysql-server gcc bc npm lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
     libxpm-dev libxt-dev \
     libperl-dev libpq-dev libpcap-dev fortunes ruby-dev \
