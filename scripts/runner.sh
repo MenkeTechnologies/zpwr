@@ -77,6 +77,8 @@ case "$fileToBeExecuted" in
         ;;
     *.java ) executeTheFile java "$fileToBeExecuted"
         ;;
+    *.cr) executeTheFile crystal "$fileToBeExecuted"
+        ;;
     *.lua ) executeTheFile lua "$fileToBeExecuted"
         ;;
     *.groovy ) executeTheFile groovy "$fileToBeExecuted"
