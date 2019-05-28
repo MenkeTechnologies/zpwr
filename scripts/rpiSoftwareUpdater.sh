@@ -87,6 +87,12 @@ exists "$cargo_bin" && {
     "$cargo_bin" install cargo-update 2>/dev/null
     "$cargo_bin" install-update -a
 }
+rustup_bin="$HOME/.cargo/bin/rustup"
+exists "$rustup_bin" && {
+    prettyPrint "Updating rustup"
+    "$rustup_bin" update
+}
+
 
 prettyPrint "Updating Vundle Plugins"
 #vim -c VundleUpdate -c quitall
