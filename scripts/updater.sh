@@ -123,11 +123,10 @@ if [[ $skip != true ]]; then
             installDir=$(python3 -m pip show "$i" | \perl -ne 'print $1 if /^Location: (.*)/')
             if [[ ! -w "$installDir" ]]; then
                 needSudo=yes
-                break
             else
                 needSudo=no
-                break
             fi
+            break
         done
 
         prettyPrint "sudo needed: $needSudo for pip3 at $installDir"
@@ -159,11 +158,10 @@ if [[ $skip != true ]]; then
             installDir=$(python2 -m pip show "$i" | \perl -ne 'print $1 if /^Location: (.*)/')
             if [[ ! -w "$installDir" ]]; then
                 needSudo=yes
-                break
             else
                 needSudo=no
-                break
             fi
+            break
         done
 
         prettyPrint "sudo needed: $needSudo for pip2 at $installDir"
