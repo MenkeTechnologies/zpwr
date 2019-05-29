@@ -114,33 +114,22 @@ if [[ $skip != true ]]; then
         perl -le "print '_'x$width" | lolcat
     }
 
-    OS_TYPE="$(uname -s)"
-    if [[ "$OS_TYPE" == Darwin ]]; then
-        needSudo=no
-    elif [[ "$OS_TYPE" == Linux ]];then
-        distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
-        case "$distroName" in
-        (fedora|debian|centos)
-            needSudo=yes
-            ;;
-        (*)
-            needSudo=no
-            ;;
-        esac
-    else
-        needSudo=yes
-    fi
-
-
     #python 3.6
     python3 -c 'import pip' && {
         prettyPrint "Updating Python3.6 Packages"
-        #pip lists outdated programs and get first column with awk
-        #store in outdated
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
-        #install outdated pip modules
-        #split on space
+        for i in $outdated; do
+            installDir=$(python3 -m pip show "$i" | \perl -ne 'print $1 if /^Location: (.*)/')
+            if [[ ! -w "$installDir" ]]; then
+                needSudo=yes
+                break
+            else
+                needSudo=no
+                break
+            fi
+        done
+
         if [[ "$needSudo" == yes ]]; then
             for i in $outdated; do
                 sudo python3 -m pip install --upgrade -- "$i" #&> /dev/null
@@ -162,9 +151,18 @@ if [[ $skip != true ]]; then
     #python 2.7 (non system)
     python2 -c 'import pip' && {
         prettyPrint "Updating Python2.7 Packages"
-        #pip lists outdated programs and get first column with awk
-        #store in outdated
-        outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p'| awk '{print $1}')
+        outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+
+        for i in $outdated; do
+            installDir=$(python2 -m pip show "$i" | \perl -ne 'print $1 if /^Location: (.*)/')
+            if [[ ! -w "$installDir" ]]; then
+                needSudo=yes
+                break
+            else
+                needSudo=no
+                break
+            fi
+        done
 
         if [[ "$needSudo" == yes ]]; then
             for i in $outdated; do
