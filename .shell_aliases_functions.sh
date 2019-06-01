@@ -765,6 +765,19 @@ contribcount(){
     fi
 }
 
+linecontribcount(){
+    lines="$(git ls-files | xargs -I {} git blame {} | cut -d '(' -f2 2>/dev/null | perl -pe 's@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s.*$@$1@' | sort | uniq -c | sort -rn)"
+    lineCount="$(echo $lines | wc -l)"
+    if (( $lineCount > 10 )); then
+        echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+            alternatingPrettyPrint | less -r
+    else
+        echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+            alternatingPrettyPrint
+    fi
+
+}
+
 gsdc(){
     git status &> /dev/null || {
         printf "\x1b[0;1;31m"
