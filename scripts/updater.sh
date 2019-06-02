@@ -129,7 +129,9 @@ if [[ $skip != true ]]; then
             break
         done
 
-        prettyPrint "sudo needed: $needSudo for pip3 at $installDir"
+        if [[ -n "$needSudo" ]]; then
+            prettyPrint "sudo needed: $needSudo for pip3 at $installDir"
+        fi
 
         if [[ "$needSudo" == yes ]]; then
             for i in $outdated; do
@@ -152,6 +154,7 @@ if [[ $skip != true ]]; then
     #python 2.7 (non system)
     python2 -c 'import pip' && {
         prettyPrint "Updating Python2.7 Packages"
+        unset needSudo
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
         for i in $outdated; do
@@ -164,7 +167,9 @@ if [[ $skip != true ]]; then
             break
         done
 
-        prettyPrint "sudo needed: $needSudo for pip2 at $installDir"
+        if [[ -n "$needSudo" ]]; then
+            prettyPrint "sudo needed: $needSudo for pip2 at $installDir"
+        fi
 
         if [[ "$needSudo" == yes ]]; then
             for i in $outdated; do
