@@ -171,7 +171,8 @@ plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions \
     history-substring-search ruby gem rake rails yarn ng \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
-    postgres redis-cli colorize sudo z rsync docker sublime \
+    postgres redis-cli colorize sudo z rsync docker \
+    docker-compose sublime \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
