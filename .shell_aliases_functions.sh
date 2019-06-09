@@ -436,8 +436,8 @@ r(){
 
     ssu() {
         for prog in "$@"; do
-            prettyPrint "sudo systemctl stop $prog"
-            prettyPrint "sudo systemctl disable $prog"
+            prettyPrint "sudo systemctl start $prog"
+            prettyPrint "sudo systemctl enable $prog"
             sudo systemctl start "$prog"
             sudo systemctl enable "$prog"
         done
