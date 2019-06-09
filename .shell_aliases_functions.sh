@@ -434,6 +434,15 @@ r(){
         done
     }
 
+    ssu() {
+        for prog in "$@"; do
+            prettyPrint "sudo systemctl stop $prog"
+            prettyPrint "sudo systemctl disable $prog"
+            sudo systemctl start "$prog"
+            sudo systemctl enable "$prog"
+        done
+    }
+
     restartpoll(){
         src_dir="$HOME/forkedRepos/$REPO_NAME"
         test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
