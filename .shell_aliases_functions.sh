@@ -230,6 +230,7 @@ alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
 alias gpf='git push --force'
+alias bk='git clean -df && git reset --hard HEAD'
 alias glf='git pull --force'
 alias gla='git log --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p '
 alias glaa='git log --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p --all'
@@ -437,7 +438,7 @@ r(){
     ssu() {
         for prog in "$@"; do
             prettyPrint "sudo systemctl start $prog"
-            prettyPrint "sudo systemctl enable $prog"
+            prettyPrint "sudo systemctl eable $prog"
             sudo systemctl start "$prog"
             sudo systemctl enable "$prog"
         done
