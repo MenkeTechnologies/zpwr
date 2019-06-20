@@ -745,6 +745,7 @@ f(){
         echo "Not a valid file or directory." >&2 && return 1
     fi
 }
+alias fh='f !$'
 
 execpy(){
     script="$1"
@@ -1131,6 +1132,7 @@ openmygh(){
     fi
 
 }
+alias gh=openmygh
 eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
 eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
 
