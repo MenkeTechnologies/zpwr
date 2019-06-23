@@ -20,6 +20,7 @@ Houl/repmo-vim
 ervandew/supertab
 vim-syntastic/syntastic
 vim-scripts/tagexplorer.vim
+wellle/targets.vim
 tomtom/tlib_vim
 tomtom/ttags_vim
 SirVer/ultisnips
