@@ -1871,4 +1871,4 @@ fi
 
 #}}}***********************************************************
 
-eval $(thefuck --alias)
+exists thefuck && eval $(thefuck --alias)
