@@ -33,4 +33,6 @@ imap <C-e> <C-o>A
 "
 set surround
 set multiple-cursors
-nnoremap <space> :action ReformatCode<CR>
+nnoremap <CR> :action ReformatCode<CR>
+
+
