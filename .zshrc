@@ -75,6 +75,7 @@ EXPAND_SECOND_POSITION=true
 SURROUND=true
 CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
+start=$(date +%s)
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -217,7 +218,6 @@ fi
 
 #{{{                    MARK:Sourcing
 #**************************************************************
-start=$(date +%s)
 autoload -Uz compinit
 
 source $ZSH/oh-my-zsh.sh
