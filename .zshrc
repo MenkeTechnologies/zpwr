@@ -217,6 +217,9 @@ fi
 
 #{{{                    MARK:Sourcing
 #**************************************************************
+start=$(date +%s)
+autoload -Uz compinit
+
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
@@ -987,8 +990,6 @@ export DIRSTACKSIZE=20
 
 #{{{                    MARK:AutoCompletions
 #**************************************************************
-start=$(date +%s)
-autoload -Uz compinit
 
 zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
 date=$(date +'%j')
@@ -1002,14 +1003,13 @@ if ((date >= (zcompdate + 7) ));then
 else
 # use .zcompdump
     compinit -C -u
-    logg 'using ~/.zcompdump'
     if [[ ${+_comps[z]} == 0 ]]; then
         logg 'regenerating ~/.zcompdump due to failed compinit'
         compinit -u
+    else
+        logg 'using cached ~/.zcompdump'
     fi
 fi
-end=$(date +%s)
-logg "compinit took $((end - start)) seconds"
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
 
@@ -1876,3 +1876,6 @@ fi
 #}}}***********************************************************
 
 exists thefuck && eval $(thefuck --alias)
+
+end=$(date +%s)
+logg "zsh startup took $((end - start)) seconds"
