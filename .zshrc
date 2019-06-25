@@ -987,6 +987,7 @@ export DIRSTACKSIZE=20
 
 #{{{                    MARK:AutoCompletions
 #**************************************************************
+start=$(date +%s)
 autoload -Uz compinit
 
 zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
@@ -1001,11 +1002,14 @@ if ((date >= (zcompdate + 7) ));then
 else
 # use .zcompdump
     compinit -C -u
+    logg 'using ~/.zcompdump'
     if [[ ${+_comps[z]} == 0 ]]; then
         logg 'regenerating ~/.zcompdump due to failed compinit'
         compinit -u
     fi
 fi
+end=$(date +%s)
+logg "compinit took $((end - start)) seconds"
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
 
