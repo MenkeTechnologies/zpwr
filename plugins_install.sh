@@ -81,7 +81,7 @@ echo "pager=cat" >> "$HOME/.my.cnf"
 prettyPrint "Copying all Shell Scripts to $HOME/Documents"
 [[ ! -d "$HOME/Documents/shellScripts" ]] && mkdir -p "$HOME/Documents/shellScripts"
 
-cp "$INSTALLER_DIR/scripts/"*.sh "$INSTALLER_DIR/scripts/"*.pl "$HOME/Documents/shellScripts"
+cp "$INSTALLER_DIR/scripts/"*.{sh,pl,py,zsh} "$HOME/Documents/shellScripts"
 cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
 
 prettyPrint "Copying grc config files"
