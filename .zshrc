@@ -1876,6 +1876,7 @@ fi
 #}}}***********************************************************
 
 exists thefuck && eval $(thefuck --alias)
+exists kubectl && source <(kubectl completion zsh)
 
 end=$(date +%s)
 logg "zsh startup took $((end - start)) seconds"
