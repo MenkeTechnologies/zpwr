@@ -173,7 +173,7 @@ plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
     postgres redis-cli colorize sudo z rsync docker \
-    docker-compose sublime \
+    docker-compose sublime kubectl \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
