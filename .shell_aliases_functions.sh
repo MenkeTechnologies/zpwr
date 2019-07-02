@@ -1748,7 +1748,7 @@ se(){
                 paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
             else
             paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
-            fi | egrep --color=always -i "$2"
+            fi | \egrep --color=always -i -- "$2"
         fi
         command rm ~/temp1-$$ ~/temp2-$$
     fi
