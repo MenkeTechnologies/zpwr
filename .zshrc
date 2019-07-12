@@ -1061,6 +1061,8 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages, blue text with red punctuation
 zstyle ':completion:*' verbose yes
+# command descriptions
+zstyle ':completion:*' extra-verbose yes
 
 # don't complete duplicates for these commands
 zstyle ':completion::*:(git-add|git-rm|less|rm|vi|vim|v):*' ignore-line true

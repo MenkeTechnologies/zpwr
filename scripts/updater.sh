@@ -208,11 +208,25 @@ if [[ $skip != true ]]; then
 
     exists npm && {
         prettyPrint "Updating NPM packages"
-        for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4);do
-            npm install -g "$package"
-        done
-        prettyPrint "Updating NPM itself"
-        npm install -g npm
+            installDir=$(npm root -g | head -n 1)
+            if [[ ! -w "$installDir" ]]; then
+                needSudo=yes
+            else
+                needSudo=no
+            fi
+            for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4);do
+                if [[ $needSudo == yes ]]; then
+                    sudo npm install -g "$package"
+                else
+                    npm install -g "$package"
+                fi
+            done
+            prettyPrint "Updating NPM itself"
+            if [[ $needSudo == yes ]]; then
+                sudo npm install -g npm
+            else
+                npm install -g npm
+            fi
     }
 
     exists rustup && {
