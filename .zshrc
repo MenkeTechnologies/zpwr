@@ -1060,7 +1060,7 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages, blue text with red punctuation
-zstyle ':completion:*' verbose yes
+# zstyle ':completion:*' verbose yes
 # command descriptions
 zstyle ':completion:*' extra-verbose yes
 
