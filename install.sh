@@ -92,7 +92,7 @@ EOF
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \
+dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \
     screenfetch ccze htop figlet zsh docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
