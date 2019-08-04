@@ -825,12 +825,26 @@ autocmd VimEnter * nnoremap <silent> <NUL> :call CompleteStatementNormal()<CR>
 set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
-function TmuxRepeat()
+function TmuxRepeat(type)
     let supportedTypes=['sh','cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
     let exeFileType=expand('%:e')
+    let $VIMHOME = $HOME."/.vim"
+
+    if a:type == "visual"
+        silent !mkdir $VIMHOME/.temp > /dev/null 2>&1
+        let fileName=$VIMHOME."/.temp/.tempfile.".exeFileType
+          try
+            let a_save = @a
+            silent! normal! gv"ay
+            call writefile(split(@a, "\n"), fileName)
+        finally
+            let @a = a_save
+        endtry
+    else
+        let fileName=fnameescape(expand("%:p"))
+    endif
 
     let tmux=$TMUX
-    
 
     if !empty(tmux)
         let pane_count=Strip(system("tmux list-panes | wc -l"))
@@ -838,7 +852,7 @@ function TmuxRepeat()
         if pane_count > 1
             if has("gui_running")
                 if index(supportedTypes, exeFileType) >= 0
-                    silent! exec "!tmux send-keys -t vimmers:1. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+                    silent! exec "!tmux send-keys -t vimmers:1. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
                     silent! exec "!tmux send-keys -t vimmer:1. C-c up C-m"
@@ -847,7 +861,7 @@ function TmuxRepeat()
                 endif
             else
                 if index(supportedTypes, exeFileType) >= 0
-                    silent! exec "!tmux send-keys -t right C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fnameescape(expand('%:p'))." '\"' C-m"
+                    silent! exec "!tmux send-keys -t right C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
                     silent! exec "!tmux send-keys -t right C-c up C-m"
@@ -863,7 +877,6 @@ function TmuxRepeat()
         echom "Not in tmux... use v C-V for visual block"
     endif
 
-
 endfunction
 
 function TmuxRepeatGeneric()
@@ -873,10 +886,11 @@ function TmuxRepeatGeneric()
 endfunction
 
 " reassing readline plugin mapping
-autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat()<CR>a
+autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<CR>a
 autocmd VimEnter * nunmap S
 
-nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat()<CR>
+vnoremap <silent> <C-E> :call TmuxRepeat("visual")<CR>
+nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat("file")<CR>
 
 "vnoremap <silent> y y`>
 "nnoremap <silent> gp p`]
