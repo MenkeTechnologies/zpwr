@@ -885,8 +885,8 @@ function TmuxRepeatGeneric()
     exe "normal! zz"
 endfunction
 
-" reassing readline plugin mapping
 autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<CR>a
+"reassign readline plugin mapping
 autocmd VimEnter * nunmap S
 
 vnoremap <silent> <C-E> <ESC>:call TmuxRepeat("visual")<CR>gv
@@ -941,6 +941,7 @@ inoremap <silent> <C-D>h <C-O>:History:<CR>
 inoremap <silent> <C-D>s <C-O>:History/<CR>
 inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
 inoremap <silent> <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
+inoremap <silent> <C-D>q <C-O>:SaveSession!<CR><TAB>
 
 "normal mode keybindings for fzf-vim
 nnoremap <silent> <C-D>f :Files<CR>
@@ -956,6 +957,7 @@ nnoremap <silent> <C-D>h :History:<CR>
 nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>p :call GetRef()<CR>
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
+nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
 
 "gutter update time for git utter and markology plugins 
 set updatetime=100
