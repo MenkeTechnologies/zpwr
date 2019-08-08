@@ -830,23 +830,23 @@ function TmuxRepeat(type)
     let exeFileType=expand('%:e')
     let $VIMHOME = $HOME."/.vim"
 
-    if a:type == "visual"
-        silent !mkdir $VIMHOME/.temp > /dev/null 2>&1
-        let fileName=$VIMHOME."/.temp/.tempfile.".exeFileType
-          try
-            let a_save = @a
-            silent! normal! gv"ay
-            call writefile(split(@a, "\n"), fileName)
-        finally
-            let @a = a_save
-        endtry
-    else
-        let fileName=fnameescape(expand("%:p"))
-    endif
-
     let tmux=$TMUX
 
     if !empty(tmux)
+        if a:type == "visual"
+            silent !mkdir $VIMHOME/.temp > /dev/null 2>&1
+            let fileName=$VIMHOME."/.temp/.tempfile.".exeFileType
+            try
+                let a_save = @a
+                silent! normal! gv"ay
+                call writefile(split(@a, "\n"), fileName)
+            finally
+                let @a = a_save
+            endtry
+        else
+            let fileName=fnameescape(expand("%:p"))
+        endif
+
         let pane_count=Strip(system("tmux list-panes | wc -l"))
 
         if pane_count > 1
@@ -889,7 +889,7 @@ endfunction
 autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<CR>a
 autocmd VimEnter * nunmap S
 
-vnoremap <silent> <C-E> :call TmuxRepeat("visual")<CR>
+vnoremap <silent> <C-E> <ESC>:call TmuxRepeat("visual")<CR>gv
 nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat("file")<CR>
 
 "vnoremap <silent> y y`>
