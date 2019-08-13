@@ -19,7 +19,16 @@
 #
 
 #{{{                    MARK:Global Fxn
-echo $SHELL | grep -q zsh && {
+
+isZsh(){
+    if \ps -ef | tr -s ' ' | cut -d' ' -f3,9 | \grep --color=always $$ | grep -q zsh;then
+        return 0
+    else
+        return 1
+    fi
+}
+
+isZsh && {
     exists(){
         #alternative is command -v
         type "$1" &>/dev/null || return 1 && type "$1" 2>/dev/null | command grep -qv "suffix alias" 2>/dev/null
@@ -829,7 +838,7 @@ gsdc(){
         return 0
     else
         printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
-        if echo "$SHELL" | command grep -q zsh ; then
+        if isZsh; then
             read -k 1
         else
             read -n 1
@@ -1792,6 +1801,26 @@ del(){
 gitCheckoutRebasePush(){
     git branch -a | head -2 | perl -ane 'if ($F[0] eq "*"){$cur=$F[1]}else{$alt=$F[0]};if ($. == 2){$cmd="git checkout $alt; git rebase $cur;git push;";print "$cmd\n"; `$cmd`}'
 }
+
+declare -A _tempAry
+
+jsonToArray(){
+    local json="$(cat)"
+    while IFS="=" read -r key value;do
+        _tempAry[$key]=$value
+    done < <(echo "$json" | jq -r "to_entries|map(\"\(.key)=\(.value)\")|.[]")
+
+        
+    if isZsh;then
+        printf '%s=%s\n' "${(@kv)_tempAry}"
+    else
+        for key in "${!_tempAry[@]}";do
+            echo "$key=${_tempAry[$key]}"
+        done
+    fi
+    set +x
+}
+
 
 #}}}***********************************************************
 
