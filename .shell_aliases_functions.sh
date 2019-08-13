@@ -1821,6 +1821,22 @@ jsonToArray(){
     set +x
 }
 
+arrayToJson(){
+
+
+    if isZsh; then
+        ary="$1"
+        printf '%s\n%s\n' "${(kv)${(P)ary}[@]}" | \
+        jq -Rn '[inputs | { (.): input}] | add'
+    else
+        ary="$1"
+        for key in "${!${!ary}[@]}"; do
+            printf "%s\n" "$key"
+            printf "%s\n" "${aaname[$key]}"
+        done | jq -Rn '[inputs | { (.): input}] | add'
+    fi
+
+}
 
 #}}}***********************************************************
 
