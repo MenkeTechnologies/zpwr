@@ -831,9 +831,10 @@ function TmuxRepeat(type)
     let $VIMHOME = $HOME."/.vim"
 
     let tmux=$TMUX
+    let a_save = ""
 
     if !empty(tmux)
-        if a:type == "visual"
+        if a:type == "visual" || a:type == "repl"
             silent !mkdir $VIMHOME/.temp > /dev/null 2>&1
             let fileName=$VIMHOME."/.temp/.tempfile.".exeFileType
             try
@@ -842,15 +843,25 @@ function TmuxRepeat(type)
                 call writefile(split(@a, "\n"), fileName)
             finally
                 let @a = a_save
+                if a:type == "repl"
+                    silent! exec "!tmux load-buffer -b buffer0099 ".fileName
+                endif
             endtry
         else
             let fileName=fnameescape(expand("%:p"))
         endif
 
+
         let pane_count=Strip(system("tmux list-panes | wc -l"))
 
         if pane_count > 1
             if has("gui_running")
+                if a:type == "repl"
+                    silent! exec "!tmux paste-buffer -b buffer0099 -t vimmers:1. "
+                    redraw!
+                    return 0
+                endif
+
                 if index(supportedTypes, exeFileType) >= 0
                     silent! exec "!tmux send-keys -t vimmers:1. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
@@ -860,6 +871,11 @@ function TmuxRepeat(type)
                     redraw!
                 endif
             else
+                if a:type == "repl"
+                    silent! exec "!tmux paste-buffer -b buffer0099 -t right"
+                    redraw!
+                    return 0
+                endif
                 if index(supportedTypes, exeFileType) >= 0
                     silent! exec "!tmux send-keys -t right C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
@@ -889,7 +905,8 @@ autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<
 "reassign readline plugin mapping
 autocmd VimEnter * nunmap S
 
-vnoremap <silent> <C-E> <ESC>:call TmuxRepeat("visual")<CR>gv
+vnoremap <silent> <C-E><C-R> <ESC>:call TmuxRepeat("visual")<CR>gv
+vnoremap <silent> <C-E><C-E> <ESC>:call TmuxRepeat("repl")<CR>gv
 nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat("file")<CR>
 
 "vnoremap <silent> y y`>
