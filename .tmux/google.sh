@@ -6,7 +6,9 @@
 ##### Purpose: bash script to
 ##### Notes:
 #}}}***********************************************************
-    OS="$(uname -s)"
+
+OS="$(uname -s)"
+if [[ -z "$1" ]]; then
     case "$OS" in
         Darwin*)    
         out="$(pbpaste | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
@@ -15,6 +17,16 @@
         out="$(xclip -o -sel clip | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
         ;;
     esac
+else
+    case "$OS" in
+        Darwin*)    
+        out="$(pbpaste)"
+        ;;
+        *)          
+        out="$(xclip -o -sel clip), safe="")')"
+        ;;
+    esac
+fi
 
 getOpenCommand(){
     OS="$(uname -s)"
@@ -30,8 +42,10 @@ getOpenCommand(){
 
 cmd="$(getOpenCommand)"
 
+echo "logging $cmd to $out " >> ~/updaterlog.txt
 if [[ "$1" == url ]]; then
-    "$cmd" "$out"
+    echo "logging url $cmd to $out " >> ~/updaterlog.txt
+    eval "$cmd $out"
 else
     "$cmd" "https://google.com/search?q=$out"
 fi
