@@ -21,7 +21,7 @@
 #{{{                    MARK:Global Fxn
 
 isZsh(){
-    if \ps -ef | tr -s ' ' | cut -d' ' -f3,9 | \grep --color=always $$ | grep -q zsh;then
+    if \ps -ef | \tr -s ' ' | \cut -d' ' -f3,9 | \grep --color=always $$ | \grep -q zsh;then
         return 0
     else
         return 1
