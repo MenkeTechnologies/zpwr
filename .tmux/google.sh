@@ -44,7 +44,7 @@ cmd="$(getOpenCommand)"
 
 if [[ "$1" == url ]]; then
     echo "logging DIRECT URL $cmd to $out " >> "$LOGFILE"
-    eval "$cmd $out"
+    "$cmd" "$out"
 else
     echo "logging google search $cmd to $out " >> "$LOGFILE"
     "$cmd" "https://google.com/search?q=$out"
