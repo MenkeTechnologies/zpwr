@@ -16,3 +16,9 @@ if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " 
 bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t="
 
 bind-key C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
+
+bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
+bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
+
+bind -T copy-mode-vi MouseDown3Pane send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh"
+
