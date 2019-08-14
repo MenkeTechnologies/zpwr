@@ -22,5 +22,7 @@ bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -i -f -selection
 unbind -T copy-mode-vi Enter
 bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh"
 
+bind -T copy-mode-vi m send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh"
+
 bind -T copy-mode-vi MouseDown3Pane send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh"
 
