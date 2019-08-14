@@ -7,6 +7,7 @@ bind-key -T copy-mode-vi y send-keys -X copy-pipe "reattach-to-user-namespace pb
 
 unbind -T copy-mode-vi Enter
 bind-key -T copy-mode-vi Enter send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy"
+bind-key -T copy-mode-vi MouseDown3Pane send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.tmux/google.sh"
 
 
 source '/usr/local/lib/python2.7/site-packages/powerline/bindings/tmux/powerline.conf' 
