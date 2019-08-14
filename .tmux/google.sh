@@ -35,18 +35,18 @@ getOpenCommand(){
         Darwin*)    open_cmd=open;;
         CYGWIN*)    open_cmd=cygstart;;
         MINGW*)     open_cmd=start;;
-        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
+        *)          echo "Your OS: $OS is unsupported..." &>> "$LOGFILE" && return 2;;
     esac
     echo "$open_cmd"
 }
 
 cmd="$(getOpenCommand)"
 
-echo "logging $cmd to $out " >> ~/updaterlog.txt
 if [[ "$1" == url ]]; then
-    echo "logging url $cmd to $out " >> ~/updaterlog.txt
+    echo "logging DIRECT URL $cmd to $out " >> "$LOGFILE"
     eval "$cmd $out"
 else
+    echo "logging google search $cmd to $out " >> "$LOGFILE"
     "$cmd" "https://google.com/search?q=$out"
 fi
 
