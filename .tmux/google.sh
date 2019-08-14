@@ -6,8 +6,30 @@
 ##### Purpose: bash script to
 ##### Notes:
 #}}}***********************************************************
-out="$(pbpaste | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+    OS="$(uname -s)"
+    case "$OS" in
+        Darwin*)    
+        out="$(pbpaste | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+        ;;
+        *)          
+        out="$(xclip -o -sel clip | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+        ;;
+    esac
 
-open "https://google.com/search?q=$out"
+getOpenCommand(){
+    OS="$(uname -s)"
+    case "$OS" in
+        Linux*)     open_cmd=xdg-open;;
+        Darwin*)    open_cmd=open;;
+        CYGWIN*)    open_cmd=cygstart;;
+        MINGW*)     open_cmd=start;;
+        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
+    esac
+    echo "$open_cmd"
+}
+
+cmd="$(getOpenCommand)"
+
+"$cmd" "https://google.com/search?q=$out"
 
 
