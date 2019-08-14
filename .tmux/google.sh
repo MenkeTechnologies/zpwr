@@ -30,6 +30,11 @@ getOpenCommand(){
 
 cmd="$(getOpenCommand)"
 
-"$cmd" "https://google.com/search?q=$out"
+if [[ "$1" == url ]]; then
+    "$cmd" "$out"
+else
+    "$cmd" "https://google.com/search?q=$out"
+fi
+
 
 
