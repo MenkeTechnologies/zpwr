@@ -7,6 +7,8 @@
 ##### Notes:
 #}}}***********************************************************
 
+exec 1>> "$LOGFILE" 2>&1
+
 OS="$(uname -s)"
 if [[ -z "$1" ]]; then
     case "$OS" in
@@ -35,7 +37,7 @@ getOpenCommand(){
         Darwin*)    open_cmd=open;;
         CYGWIN*)    open_cmd=cygstart;;
         MINGW*)     open_cmd=start;;
-        *)          echo "Your OS: $OS is unsupported..." &>> "$LOGFILE" && return 2;;
+        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
     esac
     echo "$open_cmd"
 }
@@ -43,13 +45,13 @@ getOpenCommand(){
 cmd="$(getOpenCommand)"
 
 if [[ "$1" == open ]]; then
-    echo "DIRECT open $cmd to $out " &>> "$LOGFILE"
+    echo "DIRECT open $cmd to $out "
     "$cmd" "$out"
 elif [[ "$1" == google ]];then
-    echo "google search $cmd to $out " &>> "$LOGFILE"
+    echo "google search $cmd to $out "
     "$cmd" "https://google.com/search?q=$out"
 else
-    echo "unsupport subcommand $1 to $out " >&2 &>> "$LOGFILE"
+    echo "unsupport subcommand $1 to $out "
 fi
 
 
