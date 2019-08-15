@@ -43,10 +43,10 @@ getOpenCommand(){
 cmd="$(getOpenCommand)"
 
 if [[ "$1" == url ]]; then
-    echo "logging DIRECT URL $cmd to $out " >> "$LOGFILE"
+    echo "DIRECT open $cmd to $out " >> "$LOGFILE"
     "$cmd" "$out"
-else
-    echo "logging google search $cmd to $out " >> "$LOGFILE"
+elif [[ "$1" == google ]];then
+    echo "google search $cmd to $out " >> "$LOGFILE"
     "$cmd" "https://google.com/search?q=$out"
 fi
 
