@@ -49,7 +49,7 @@ elif [[ "$1" == google ]];then
     echo "google search $cmd to $out " &>> "$LOGFILE"
     "$cmd" "https://google.com/search?q=$out"
 else
-    echo "unsupport subcommand $cmd to $out " >&2 &>> "$LOGFILE"
+    echo "unsupport subcommand $1 to $out " >&2 &>> "$LOGFILE"
 fi
 
 
