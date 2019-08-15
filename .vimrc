@@ -290,7 +290,7 @@ nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
 inoremap <silent> <C-D><C-T> <C-O>:call TransposeWords()<CR>
 
 "move to next word and capitalize
-nnoremap <ESC><C-C> wvU
+nnoremap <ESC><-C> wvU
 
 "Insert mode mappings:
 "inoremap <C-C> <C-O>w<C-O>vU
