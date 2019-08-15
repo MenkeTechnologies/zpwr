@@ -30,6 +30,9 @@ cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 prettyPrint "Installing .vimrc"
 cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
+prettyPrint "Installing minimal .minvimrc"
+cp "$INSTALLER_DIR/.minvimrc" "$HOME"
+
 prettyPrint "Installing .ideavimrc"
 cp "$INSTALLER_DIR/.ideavimrc" "$HOME"
 
