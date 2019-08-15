@@ -33,6 +33,7 @@ main(){
     cp .shell_aliases_functions.sh "$HOME"
     cp .zshrc "$HOME"
     cp .vimrc "$HOME"
+    cp .minvimrc "$HOME"
     cp .tmux.conf "$HOME"
     cp conf.gls "$HOME"
     cp conf.df "$HOME"
