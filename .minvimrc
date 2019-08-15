@@ -1,3 +1,73 @@
+let mapleader = "\<space>"
+
+set nocompatible              " be improved, required
+"for youcompleteme doc window to open at bottom
+set splitright
+set noswapfile
+set nowritebackup
+set ruler
+set autoread
+set ignorecase
+set smartcase
+set tabstop=4
+"snap to nearest tabstop
+set shiftround
+set cindent
+set ttyfast
+"60 ms wait for next key in mappings
+"set timeoutlen=300
+"using powerline status bar instead
+"set statusline+=%F
+"set statusline+=%=
+"set statusline+=Row:\%l
+"set statusline+=/
+"set statusline+=%L
+"set statusline+=\
+"set statusline+=Col:\ %c
+"status bar always shown
+set laststatus=2
+set wrapscan
+set t_Co=256
+set backspace=2
+set encoding=utf8
+set showmatch
+set showmode
+set hlsearch
+"search performed for each keypress
+set incsearch
+set mouse=a
+set shiftwidth=4 "indent set to four spaces
+set expandtab
+"wrap lines
+set linebreak
+"line wrap indicator
+set showbreak=-->
+set number
+set backupdir=~/tmp
+set wildmenu "tab completion in command mode cycles through menu
+set wildignorecase "globbing is case insensitive
+syntax on
+set grepprg=ag
+
+"visual selection automatically into system clipboard
+set guioptions+=a
+set guifont=Hack\ Nerd\ Font:h14
+"start browsing in current dir
+set browsedir=current
+"reduce enter key after message alerts
+set shortmess=a
+
+"show the leader
+set showcmd
+"visual mode automatically copies to system clipboard
+set clipboard=autoselect
+
+"show trailing spaces and tabs
+set list listchars=tab:\ \ ,trail:·
+
+"customize .viminfo
+set viminfo='1000,<50,s10,h
+
 "faster movements, used in all modes
 noremap <c-j> 4j
 noremap <c-k> 4k
