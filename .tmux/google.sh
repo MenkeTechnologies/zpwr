@@ -42,12 +42,14 @@ getOpenCommand(){
 
 cmd="$(getOpenCommand)"
 
-if [[ "$1" == url ]]; then
-    echo "DIRECT open $cmd to $out " >> "$LOGFILE"
+if [[ "$1" == open ]]; then
+    echo "DIRECT open $cmd to $out " &>> "$LOGFILE"
     "$cmd" "$out"
 elif [[ "$1" == google ]];then
-    echo "google search $cmd to $out " >> "$LOGFILE"
+    echo "google search $cmd to $out " &>> "$LOGFILE"
     "$cmd" "https://google.com/search?q=$out"
+else
+    echo "unsupport subcommand $cmd to $out " >&2 &>> "$LOGFILE"
 fi
 
 

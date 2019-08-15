@@ -27,4 +27,4 @@ bind -T copy-mode-vi z send-keys -X copy-pipe "xclip -i -f -selection primary | 
 
 bind -T copy-mode-vi MouseDown3Pane send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh google"
 
-bind -T copy-mode-vi x send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh url"
+bind -T copy-mode-vi x send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh open"

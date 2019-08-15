@@ -9,7 +9,7 @@ unbind -T copy-mode-vi Enter
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
 
 
-bind-key -T copy-mode-vi x send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.tmux/google.sh url"
+bind-key -T copy-mode-vi x send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.tmux/google.sh open"
 
 bind-key -T copy-mode-vi MouseDown3Pane send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.tmux/google.sh google"
 
