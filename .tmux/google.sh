@@ -51,7 +51,7 @@ elif [[ "$1" == google ]];then
     echo "google search $cmd to $out "
     "$cmd" "https://google.com/search?q=$out"
 else
-    echo "unsupport subcommand $1 to $out "
+    echo "unsupport subcommand $1 to $out " >&2
 fi
 
 
