@@ -1,0 +1,58 @@
+"faster movements, used in all modes
+noremap <c-j> 4j
+noremap <c-k> 4k
+noremap <c-h> 4h
+noremap <c-l> 4l
+noremap <leader>- 4-
+noremap <leader>= 4+
+
+"reselect after indenting
+vnoremap < <gv
+vnoremap > >gv
+
+"copy to system clipboard and move cursor to end of selection
+vnoremap <C-B> "*y`>
+"copy to tmux clipboard
+vnoremap <silent><leader>b :w !tmux set-buffer "$(cat)"<CR><CR>
+noremap <silent><leader>sudo :w !sudo tee % &>/dev/null<CR><CR><CR>
+
+"Ctrl-C exits like in shell
+nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
+"vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
+inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
+
+nnoremap <silent> <C-F> :q!<CR>
+vnoremap <silent> <C-F> :<C-C>:q!<CR>
+
+autocmd VimEnter * inoremap <silent> <C-F> <C-[>:q!<CR>
+autocmd VimEnter * set background=dark
+" dont hide json quotes
+autocmd VimEnter * set conceallevel=0
+inoremap <silent> <C-Z> <C-[>:suspend<CR>
+
+vnoremap <RightMouse> "*y`>
+inoremap <Home> <C-[>ggi
+inoremap <End> <C-[>Gi
+nnoremap <Home> gg
+nnoremap <End> G
+
+"comment out
+inoremap <silent> <C-B> <ESC>I//<ESC>ji
+inoremap <silent> <C-B><C-N> <ESC>^2xji
+
+"nnoremap <silent> <C-I> :SaveSession<CR>
+"vnoremap <silent> <C-I> :<C-C>:SaveSession<CR>
+"inoremap <silent> <C-I> <C-[>:SaveSession<CR>a
+
+nnoremap <silent> <leader>q :qa!<CR>
+nnoremap <silent> <leader>c :wq!<CR>
+nnoremap <silent> <leader>e :q!<CR>
+nnoremap <silent> <leader>w :w!<CR>
+"vertical split
+nnoremap <silent> <leader>s :vs<CR>
+"horizontal split
+nnoremap <silent> <leader>h :sp<CR>
+nnoremap <silent> <leader>t :tabnew<CR>
+
+onoremap <silent> i# ?#<CR>jV/#<CR>kc
+

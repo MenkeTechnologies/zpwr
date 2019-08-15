@@ -28,6 +28,7 @@ rm -rf "$installerDir/scripts/"*
 cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts"
 cp -R "$SCRIPTS/macOnly" "$installerDir/scripts"
 cp "$HOME/.vimrc" "$installerDir"
+cp "$HOME/.minvimrc" "$installerDir"
 cp "$HOME/.tmux.conf" "$installerDir"
 cp -R "$HOME/.tmux/"* "$installerDir/.tmux"
 cp "$HOME/.shell_aliases_functions.sh" "$installerDir"
@@ -62,6 +63,8 @@ prettyPrint "Copying zshrc"
 cp "$HOME/.zshrc" "$tutorialDir/zsh"
 prettyPrint "Copying vimrc"
 cp "$HOME/.vimrc" "$tutorialDir/vim"
+prettyPrint "Copying minimal minvimrc"
+cp "$HOME/.minvimmrc" "$tutorialDir/vim"
 
 prettyPrint "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
