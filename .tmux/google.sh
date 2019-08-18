@@ -7,12 +7,12 @@
 ##### Notes:
 #}}}***********************************************************
 
-LOGIFLE="$HOME/updaterlog.txt"
+LOGFILE="$HOME/updaterlog.txt"
 
 exec 1>> "$LOGFILE" 2>&1
 
 OS="$(uname -s)"
-if [[ -z "$1" ]]; then
+if [[ "$1" == "google" ]]; then
     case "$OS" in
         Darwin*)    
         out="$(pbpaste | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
@@ -27,7 +27,7 @@ else
         out="$(pbpaste)"
         ;;
         *)          
-        out="$(xclip -o -sel clip), safe="")')"
+        out="$(xclip -o -sel clip)"
         ;;
     esac
 fi
