@@ -1719,10 +1719,12 @@ export TABLE_NAME=LearningCollection
 le(){
     test -z "$1" && return 1
     category="programming"
+    learning="$(printf "$1" | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"
+
     if [[ -n "$2" ]]; then
         category="$2"
     fi
-    echo "insert into $SCHEMA_NAME.$TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$1""', now())" | mysql 2>> "$LOGFILE"
+    echo "insert into $SCHEMA_NAME.$TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$learning""', now())" | mysql 2>> "$LOGFILE"
 }
 
 

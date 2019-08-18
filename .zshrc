@@ -1843,10 +1843,9 @@ export KEYTIMEOUT=1
 
 learn(){
     if [[ ! -z "$BUFFER" ]]; then
-        local mywords
-        mywords=("${(z)BUFFER}")
         [[ $mywords[1] == le ]] && return 1
-        BUFFER="le '${BUFFER//'/\''}'"
+        learning="$(printf "${BUFFER}" | tr '\n' ' '| tr -s ' ' | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"
+        BUFFER="le '${learning//'/\''}'"
         zle .accept-line
     else
         return 1
