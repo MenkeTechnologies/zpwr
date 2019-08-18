@@ -1720,7 +1720,7 @@ export TABLE_NAME=LearningCollection
 le(){
     test -z "$1" && return 1
     category="programming"
-    learning="$(printf "$1" | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"
+    learning="$(printf '%s' "$1" | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"
 
     if [[ -n "$2" ]]; then
         category="$2"
