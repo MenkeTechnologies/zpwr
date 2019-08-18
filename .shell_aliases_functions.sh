@@ -105,7 +105,7 @@ echo "$PATH" | grep -iq shellScripts || {
 
 #{{{                           MARK:HOMES
 #**********************************************************************
-    [[ "$(uname)" == Darwin ]] && {
+    if [[ "$(uname)" == Darwin ]];then
         if exists jenv;then
             eval "$(jenv init -)"
             test -z "$JAVA_HOME" && jenv enable-plugin export &>/dev/null
@@ -125,9 +125,9 @@ echo "$PATH" | grep -iq shellScripts || {
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
         export EDITOR='mvim -v'
-    } || {
+    else
         export EDITOR='vim'
-    }
+    fi
 #**************************************************************
 #}}}
 
