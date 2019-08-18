@@ -7,6 +7,8 @@
 ##### Notes:
 #}}}***********************************************************
 
+LOGIFLE="$HOME/updaterlog.txt"
+
 exec 1>> "$LOGFILE" 2>&1
 
 OS="$(uname -s)"
@@ -45,13 +47,13 @@ getOpenCommand(){
 cmd="$(getOpenCommand)"
 
 if [[ "$1" == open ]]; then
-    echo "DIRECT open $cmd to $out "
+    echo "DIRECT open '$cmd' to '$out'"
     "$cmd" "$out"
 elif [[ "$1" == google ]];then
-    echo "google search $cmd to $out "
+    echo "google search '$cmd' to '$out'"
     "$cmd" "https://google.com/search?q=$out"
 else
-    echo "unsupport subcommand $1 to $out " >&2
+    echo "unsupport subcommand '$1' to '$out'" >&2
 fi
 
 
