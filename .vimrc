@@ -905,7 +905,7 @@ autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<
 "reassign readline plugin mapping
 autocmd VimEnter * nunmap S
 
-vnoremap <silent> <C-E><C-R> <ESC>:call TmuxRepeat("visual")<CR>gv
+vnoremap <silent> <C-E><C-F> <ESC>:call TmuxRepeat("visual")<CR>gv
 vnoremap <silent> <C-E><C-E> <ESC>:call TmuxRepeat("repl")<CR>gv
 nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat("file")<CR>
 
