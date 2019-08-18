@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-LOGFILE="$HOME/updaterlog.txt"
+test -z "$LOGFILE" && LOGFILE="$HOME/updaterlog.txt"
 
 exec 1>> "$LOGFILE" 2>&1
 
