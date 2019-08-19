@@ -1843,6 +1843,7 @@ export KEYTIMEOUT=1
 
 learn(){
     if [[ ! -z "$BUFFER" ]]; then
+        mywords=("${(z)BUFFER}")
         [[ $mywords[1] == le ]] && return 1
         learning="$(printf '%s' "${BUFFER}" | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@' | tr '\n' ' '| sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"
         BUFFER="le '${learning//'/\''}'"
