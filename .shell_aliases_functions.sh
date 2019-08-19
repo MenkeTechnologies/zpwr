@@ -455,6 +455,25 @@ r(){
         done
     }
 
+    restartlearn(){
+        src_dir="$HOME/forkedRepos/$REPO_NAME"
+        test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
+        test -d "/etc/systemd/system" || { echo "/etc/systemd/system does not exists. Is systemd installed?" >&2 && return 1; }
+        git -C "$src_dir" pull
+        group=$(id -gn)
+        if [[ $UID != 0 ]]; then
+            perl -i -pe "s@pi@$USER@g" "$src_dir/learn.service"
+            perl -i -pe "s@^Group=.*@Group=$group@g" "$src_dir/learn.service"
+        else
+            perl -i -pe "s@pi@$USER@g;s@/home/root@/root@;" "$src_dir/learn.service"
+        fi
+        sudo cp "$HOME/forkedRepos/$REPO_NAME/learn.service" /etc/systemd/system
+        sudo systemctl daemon-reload
+        sudo systemctl restart learn.service
+        sudo systemctl --no-pager -l status learn.service
+        sudo journalctl -f
+    }
+
     restartpoll(){
         src_dir="$HOME/forkedRepos/$REPO_NAME"
         test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
