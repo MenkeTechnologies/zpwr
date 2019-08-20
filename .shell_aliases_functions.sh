@@ -473,7 +473,7 @@ r(){
         else
             perl -i -pe "s@pi@$USER@g;s@/home/root@/root@;" "$service_path"
         fi
-        sudo cp "$path" /etc/systemd/system
+        sudo cp "$service_path" /etc/systemd/system
         sudo systemctl daemon-reload
         sudo systemctl restart $service.service
         sudo systemctl --no-pager -l status $service.service
