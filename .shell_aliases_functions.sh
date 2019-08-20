@@ -458,20 +458,20 @@ r(){
     restart(){
         service="$1"
         src_dir="$HOME/forkedRepos/$REPO_NAME"
-        local path="$src_dir/$service.service"
+        local service_path="$src_dir/$service.service"
         test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
-        test -f "$path" || { echo "$path does not exists so falling back to $1." >&2 && path="$1"; }
+        test -f "$service_path" || { echo "$service_path does not exists so falling back to $1." >&2 && service_path="$1"; }
 
-        test -f "$path" || { echo "$path does not exists so exiting." >&2 && return 1; }
+        test -f "$service_path" || { echo "$service_path does not exists so exiting." >&2 && return 1; }
 
         test -d "/etc/systemd/system" || { echo "/etc/systemd/system does not exists. Is systemd installed?" >&2 && return 1; }
         git -C "$src_dir" pull
         group=$(id -gn)
         if [[ $UID != 0 ]]; then
-            perl -i -pe "s@pi@$USER@g" "$path"
-            perl -i -pe "s@^Group=.*@Group=$group@g" "$path"
+            perl -i -pe "s@pi@$USER@g" "$service_path"
+            perl -i -pe "s@^Group=.*@Group=$group@g" "$service_path"
         else
-            perl -i -pe "s@pi@$USER@g;s@/home/root@/root@;" "$path"
+            perl -i -pe "s@pi@$USER@g;s@/home/root@/root@;" "$service_path"
         fi
         sudo cp "$path" /etc/systemd/system
         sudo systemctl daemon-reload
