@@ -458,7 +458,7 @@ r(){
     restart(){
         service="$1"
         src_dir="$HOME/forkedRepos/$REPO_NAME"
-        local path="$src_dir/$service"
+        local path="$src_dir/$service.service"
         test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
         test -f "$path" || { echo "$path does not exists so falling back to $1." >&2 && path="$1"; }
 
@@ -468,12 +468,12 @@ r(){
         git -C "$src_dir" pull
         group=$(id -gn)
         if [[ $UID != 0 ]]; then
-            perl -i -pe "s@pi@$USER@g" "$path.service"
-            perl -i -pe "s@^Group=.*@Group=$group@g" "$path.service"
+            perl -i -pe "s@pi@$USER@g" "$path"
+            perl -i -pe "s@^Group=.*@Group=$group@g" "$path"
         else
-            perl -i -pe "s@pi@$USER@g;s@/home/root@/root@;" "$path.service"
+            perl -i -pe "s@pi@$USER@g;s@/home/root@/root@;" "$path"
         fi
-        sudo cp "$HOME/forkedRepos/$REPO_NAME/$service.service" /etc/systemd/system
+        sudo cp "$path" /etc/systemd/system
         sudo systemctl daemon-reload
         sudo systemctl restart $service.service
         sudo systemctl --no-pager -l status $service.service
