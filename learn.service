@@ -11,7 +11,7 @@ Environment="REPO_NAME=zpwr"
 Environment="ZSH_COMP_REPO_NAME=zsh-more-completions"
 ExecStart=/usr/bin/env java -Dspring.profiles.active=sr5 -jar /home/pi/learn.jar
 ExecStop=/usr/bin/env kill $MAINPID
-StandardOutput=Append:/home/pi/updaterlog.txt
+StandardOutput=append:/home/pi/updaterlog.txt
 StandarError=append:/home/pi/updaterlog.txt
 
 [Install]
