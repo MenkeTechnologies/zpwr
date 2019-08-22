@@ -9,8 +9,9 @@ Group=pi
 Environment="SCRIPTS=/home/pi/Documents/shellScripts"
 Environment="REPO_NAME=zpwr"
 Environment="ZSH_COMP_REPO_NAME=zsh-more-completions"
-ExecStart=/usr/bin/env java -Dspring.profiles.active=sr5 -jar /home/pi/learn.jar >> /home/pi/updaterlog.txt
+ExecStart=/usr/bin/env java -Dspring.profiles.active=sr5 -jar /home/pi/learn.jar
 ExecStop=/usr/bin/env kill $MAINPID
+StandardOutput = file:/home/pi/updaterlog.txt
 
 [Install]
 WantedBy=multi-user.target
