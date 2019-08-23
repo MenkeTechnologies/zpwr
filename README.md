@@ -141,7 +141,7 @@ Line 169:`plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
 ## Running script from vim in tmux right pane is supported for these languages
 let supportedTypes=['sh','cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
 
-File ending of currently edited file in vim determines the interpreter used by the bash script `runner.sh`
+File ending of currently edited file in vim determines the interpreter used by the bash script `~/Documents/shellScripts/runner.sh`
 
 
 ## Tmux Main Window
