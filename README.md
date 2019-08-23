@@ -35,12 +35,15 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - zsh, tmux and vim keybindings to copy to clipboard
 - getrc shell function to pull down latest code changes from this repo
 - shell function named c that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips
-- 100+ bash and perl scripts
+- 100+ bash, perl, zsh and pyton scripts
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - clearList zsh completion
+- search google from tmux mouse drag selection (copy-mode)
+- open URLs and files from tmux mouse drag selection (copy-mode)
 
 ## Dependencies
 - oh-my-zsh
+- zsh
 - Powerlevel9k zsh prompt
 - tmux 2.1
 - vim 8.0 with nearly 70 plugins
@@ -62,7 +65,6 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - rust
 - python
 - ruby
-- zsh
 - perl
 - bash
 
@@ -79,7 +81,7 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - mint
 - zorin
 - parrot OS
-- WSL
+- WSL ubuntu/kali/suse/leap/fedora
 - SUSE
 
 # Installation Instructions
