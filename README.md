@@ -128,7 +128,7 @@ Run `clearList getrc` to see the code for this function.
 
 ## Tmux prefix
 
-The default Tmux prefix key is C-x on a Mac so I can control inner tmux sessions on Linux (prefix is C-b) separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
+The default tmux prefix key is C-x on a Mac so I can control inner tmux sessions on Linux (prefix is C-b) separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
 The Tmux prefix on Linux is the default C-b.
 
 ## Vim Plugins
