@@ -2,7 +2,7 @@
 
 ![Alt text](http://jakobmenke.com/img/tmuxfinal1.png?raw=true)
 
-This repo started out as my own version of Hashrocket's Dotmatrix repo and it then grew.
+This repo started out as my own version of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) repo and it then grew.
 
 It allows one to install an extremely powerful custom terminal environment based on [oh-my-zsh](http://github.com/robbyrussell/oh-my-zsh)
 
