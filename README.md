@@ -6,7 +6,7 @@ This repo started out as my own version of Hashrocket's Dotmatrix repo and it th
 
 It allows one to install an extremely powerful custom terminal environment based on [oh-my-zsh](http://github.com/robbyrussell/oh-my-zsh)
 
-There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
+There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
 
 ## Features
 - spelling correction, abbreviation expansion and automatic capitalization on the command line
