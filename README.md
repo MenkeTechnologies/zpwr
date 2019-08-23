@@ -141,7 +141,7 @@ C-Space (Control-Space) will bypass all expansion of globbing, aliases and words
 ## Running script from vim in tmux right pane is supported for these languages
 `~/.vimrc:829 let supportedTypes=['sh','cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']`
 
-File ending of currently edited file in vim determines the interpreter used by the bash script `~/Documents/shellScripts/runner.sh`
+File ending of currently edited file in vim determines the interpreter used by the bash script `$SCRIPTS/runner.sh` which defaults to `~/Documents/shellScripts/runner.sh`
 
 
 ## Tmux Main Window
