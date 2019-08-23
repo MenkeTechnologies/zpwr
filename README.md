@@ -55,7 +55,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zsh
 - Powerlevel9k zsh prompt
 - tmux 2.1
-- vim 8.0 with nearly 70 plugins
+- vim 8.0 with over 70 plugins
 - youcompleteme
 - ultisnips
 - supertab
@@ -130,7 +130,11 @@ The default Tmux prefix key is C-X on a Mac so I can control inner tmux sessions
 The Tmux prefix on Linux is the default C-B.
 
 ## Vim Plugins
-There are 67 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
+There are 74 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
+
+## Running script from vim in tmux right pane is supported for these languages
+let supportedTypes=['sh','cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
+
 
 ## Tmux Main Window
 The main window show in the screenshots is started by Prefix-D in an empty tmux window.  This sources a tmux script named control-window.
