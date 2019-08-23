@@ -149,10 +149,10 @@ The main window show in the screenshots is started by Prefix-D in an empty tmux 
 Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/control-window` or in the terminal with `tmux source-file ~/.tmux/control-window` in an empty tmux window.
 
 ## Personal Config
-Startup shell files will source ~/.tokens.sh so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
+Startup shell files will source ``~/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
 
 ## Environment Variables
-You can set these environment variables in your .tokens.sh to customize the behavior of the terminal setup.
+You can set these environment variables in your `~.tokens.sh` to customize the behavior of the terminal setup.
 ```sh
 # Global Environment Variables for MenkeTechnologies
 export MYPROMPT=POWERLEVEL
@@ -165,6 +165,9 @@ export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostna
 
 ## Contributing
 I am always looking for contributors.
+
+## Warnings
+Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionality because vim and tmux configurationss depend on these scipts for advanced features
 
 # Running on a MacbookPro
 ![Alt text](http://jakobmenke.com/img/tmuxfinal22.png?raw=true)
