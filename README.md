@@ -9,21 +9,30 @@ It allows one to install an extremely powerful custom terminal environment based
 There is a significant amount of custom zsh, bash and perl code that I wrote to support very advanced functionality that I desired.
 
 ## Features
-- spelling correction and abbreviation expansion on the command line
-- snippets with tabstops that expand with spacebar
-- expanding aliases and global aliases from zsh menu selection
-- color-coded sections of zsh menu completion for commands
+- spelling correction, abbreviation expansion and automatic capitalization on the command line
+- snippets with tabstops that expand with spacebar and advance to next stop with ^P
+- expanding regular aliases and global aliases from zsh menu selection and in vim insert mode
+- color-coded sections of zsh menu completion for commands, aliases, functions and builtins
 - color-coded sections of zsh menu completion for man pages
+- custom styling for tag grouping in menu selection
+- tag grouping for man pages
+- colorized man pages
 - insert matching quotes, brackets and parentheses
 - custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching
 - keybinding to run current code file open in vim in tmux pane to right
+- keybinding to run current vim selection in tmux pane to right as standalone script
+- keybinding to run current vim selection in tmux pane to right in REPL
 - 10k zsh completions
-- new tmux keybindings
-- zsh keybindings to fzf search file names and preview file contents with bat in right pane
-- zsh keybindings to fzf search file contents and preview surrounding file contents with bat in right pane
+- ergonomic, recursive tmux keybindings
+- zsh keybindings to fzf search file names and syntax highlighted, numbered file preview
+- zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview
+- zsh keybindings to fzf search of most recent files opened in vim with syntax highlighted, numbered preview pane
+- zsh keybindings to fzf search of network process with lsof return PIDs
 - zsh completion for z command bases on .z database
 - keybindings to save to mysql learning database and to search from it
+- keybinding formats newlines and spaces before saving to mysql learning database
 - oh my zsh plugins loading based on OS
+- tmux keybindings based on OS
 - custom banner commands when new shell is launched
 - zle sed subs on current command line
 - vim text objects on command line
@@ -37,7 +46,7 @@ There is a significant amount of custom zsh, bash and perl code that I wrote to 
 - shell function named c that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips
 - 100+ bash, perl, zsh and pyton scripts
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
-- clearList zsh completion
+- color coded, tag grouped clearList zsh completion
 - search google from tmux mouse drag selection (copy-mode)
 - open URLs and files from tmux mouse drag selection (copy-mode)
 
