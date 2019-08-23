@@ -132,6 +132,11 @@ The Tmux prefix on Linux is the default C-B.
 ## Vim Plugins
 There are 74 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
+## Bypassing expansion on space
+^Space (Control-Space) will bypass all expansion of globbing, aliases and words in zsh.  Expansion can be disabled entirely by removing zsh-expand from plugins array in ~/.zshrc Line 169
+`plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
+
+
 ## Running script from vim in tmux right pane is supported for these languages
 let supportedTypes=['sh','cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
 
