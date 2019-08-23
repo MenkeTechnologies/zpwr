@@ -10,7 +10,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 
 ## Features
 - spelling correction, abbreviation expansion and automatic capitalization on the command line
-- snippets with tabstops that expand with spacebar and advance to next stop with C-P
+- snippets with tabstops that expand with spacebar and advance to next stop with C-p
 - expanding regular aliases and global aliases from zsh menu selection and in vim insert mode
 - color-coded sections of zsh menu completion for commands, aliases, functions and builtins
 - color-coded sections of zsh menu completion for man pages
@@ -126,8 +126,8 @@ Run `clearList getrc` to see the code for this function.
 
 ## Tmux prefix
 
-The default Tmux prefix key is C-X on a Mac so I can control inner tmux sessions on Linux (prefix is C-B) separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
-The Tmux prefix on Linux is the default C-B.
+The default Tmux prefix key is C-x on a Mac so I can control inner tmux sessions on Linux (prefix is C-b) separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
+The Tmux prefix on Linux is the default C-b.
 
 ## Vim Plugins
 There are 74 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
