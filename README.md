@@ -10,7 +10,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 
 ## Features
 - spelling correction, abbreviation expansion and automatic capitalization on the command line
-- snippets with tabstops that expand with spacebar and advance to next stop with ^P
+- snippets with tabstops that expand with spacebar and advance to next stop with C-P
 - expanding regular aliases and global aliases from zsh menu selection and in vim insert mode
 - color-coded sections of zsh menu completion for commands, aliases, functions and builtins
 - color-coded sections of zsh menu completion for man pages
@@ -133,7 +133,7 @@ The Tmux prefix on Linux is the default C-B.
 There are 74 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Bypassing expansion on space
-^Space (Control-Space) will bypass all expansion of globbing, aliases and words in zsh.  Expansion can be disabled entirely by removing zsh-expand from plugins array in ~/.zshrc
+C-Space (Control-Space) will bypass all expansion of globbing, aliases and words in zsh.  Expansion can be disabled entirely by removing zsh-expand from plugins array in ~/.zshrc
 
 169:`plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
 
