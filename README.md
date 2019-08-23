@@ -118,7 +118,7 @@ Change line 18 in ~/.shell_aliases_functions.sh
 
 ```export GITHUB_ACCOUNT='MenkeTechnologies'```
 
-to match your GitHub account name to enable various functionality with your account like openMyGH, hc and hd shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line.
+to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
 
 ## getrc function
 There is a shell function called `getrc` that will pull down latest changes from this repository and ovewrite .zshrc, .vimrc, .shell_aliases_functions.sh and .tmux.conf
