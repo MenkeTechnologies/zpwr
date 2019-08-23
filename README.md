@@ -178,7 +178,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 ![Alt text](http://jakobmenke.com/img/tmuxfinal3.png?raw=true)
 ![Alt text](http://jakobmenke.com/img/tmuxfinal4.png?raw=true)
 # Running on the Rock64
-![Alt text](http://jakobmenke.com/img/tmuxfinal5.jpg)
+![Final 5](http://jakobmenke.com/img/tmuxfinal5.jpg?raw=true)
 
 ## Keybindings generated with `source keybindingsToREADME.zsh`
 
