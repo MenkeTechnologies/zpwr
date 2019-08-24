@@ -1,4 +1,4 @@
-      #..                   .x+=:.               
+      #\..                   .x+=:.               
 #. uW8"                    z`    ^%    .uef^"    
 #`t888                        .   <k :d88E       
  #8888   .         u        .@8Ned8" `888E       
@@ -21,7 +21,7 @@
 #{{{                    MARK:Global Fxn
 
 isZsh(){
-    if \ps -ef | \tr -s ' ' | \cut -d' ' -f3,9 | \grep --color=always $$ | \grep -q zsh;then
+    if \ps -ef | \tr -s ' ' | \cut -d' ' -f3,9 | command grep --color=always $$ | command grep -q zsh;then
         return 0
     else
         return 1
@@ -88,7 +88,7 @@ export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a'
 
 #{{{                    MARK:ENV Var
 #**************************************************************
-echo "$PATH" | grep -iq shellScripts || {
+echo "$PATH" | command grep -iq shellScripts || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
 
@@ -196,7 +196,7 @@ exists spotify && {
     alias pe='spotify prev'
     alias spa='spotify pause'
 }
-echo $SHELL | grep -q zsh && {
+echo $SHELL | command grep -q zsh && {
     alias 10='cd -10'
     alias 11='cd -11'
     alias 12='cd -12'
@@ -219,10 +219,10 @@ alias deleteTab="sed '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper="tr 'a-z' 'A-Z'"
 #over aliases
-pwd | grep -q --color=always / 2>/dev/null && {
+pwd | command grep -q --color=always / 2>/dev/null && {
     alias grep="grep --color=always"
 }
-pwd | egrep -q --color=always / 2>/dev/null && {
+pwd | command egrep -q --color=always / 2>/dev/null && {
     alias egrep="egrep --color=always"
 }
 alias tree='tree -afC'
@@ -344,7 +344,7 @@ alias ,,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias ipa="command ifconfig | command grep 'inet\s' | grep -v 127 | awk '{print \$2}' | sed 's@addr:@@' | head -1"
+alias ipa="command ifconfig | command grep 'inet\s' | command grep -v 127 | awk '{print \$2}' | sed 's@addr:@@' | head -1"
 alias pgrep='pgrep -l'
 #**********************************************************************
 #                           MARK:SHELL SCRIPTS
@@ -496,7 +496,7 @@ cloneToForked(){
 s(){
 
     exists subl && cmd=subl || cmd="$(getOpenCommand)"
-    type -a s | grep -qv function && sec_cmd=s || sec_cmd="$cmd"
+    type -a s | command grep -qv function && sec_cmd=s || sec_cmd="$cmd"
     if [[ $sec_cmd == s ]]; then
         [[ -z "$1" ]] && $cmd . || command s "$@"
     else
@@ -754,7 +754,7 @@ f(){
         cd "$1"
     else
         test -z "$1" && cd - && return 0
-        echo "$1" | \egrep '\-[0-9]+' && cd "$1" && return 0
+        echo "$1" | command egrep '\-[0-9]+' && cd "$1" && return 0
         base="$(dirname "$1")"
         while [[ "$base" != / ]]; do
             test -d "$base" && cd "$base"&& return 0
@@ -1290,7 +1290,7 @@ digs(){
     if [[ -n "$secret" ]]; then
         exists proxychains && exe=proxychains
         exists proxychains4 && {
-            echo $SHELL | grep -q zsh && \
+           isZsh &&
                 exe=(proxychains4 -q) || \
                 exe="proxychains4 -q"
         }
@@ -1332,7 +1332,7 @@ digs(){
 
                     primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
                     out="$($exe whois "$primary")"
-                    if echo "$out" | grep -q 'No match';then
+                    if echo "$out" | command grep -q 'No match';then
                         prettyPrint "WHOIS: $ip"
                         if [[ -n "$colo" ]]; then
                             $exe whois "$ip" | grcat "$HOME/conf.whois"
@@ -1355,7 +1355,7 @@ digs(){
                     fi
                 else
                     out="$($exe whois "$noproto")"
-                    if echo "$out" | grep -q 'No match';then
+                    if echo "$out" | command grep -q 'No match';then
                         prettyPrint "WHOIS: $ip"
                         if [[ -n "$colo" ]]; then
                             $exe whois "$ip" | grcat "$HOME/conf.whois"
@@ -1398,7 +1398,7 @@ digs(){
         fi
     else
 
-        echo $SHELL | grep -q zsh && \
+        echo $SHELL | command grep -q zsh && \
             colo=(grc --colour=on) || \
             colo="grc --colour=on "
 
@@ -1547,39 +1547,39 @@ c(){
                             fi
                         case "$file" in
                             *.rpm)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "$rpm_cmd \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.deb)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "$deb_cmd \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.bz2|*.bzip2)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l yaml"
                             eval "bzip2 -c -d \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.bz|*.bzip)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l yaml"
                             eval "bzip -c -d \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.xz|*.xzip)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l yaml"
                             eval "xz -c -d \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.gz|*.gzip)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l yaml"
                             eval "gzip -c -d \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.tgz|*.tar|*.tar.gz)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l c"
                             eval "tar tf \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.zip)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l c"
                             eval "unzip -l \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.[jw]ar)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l java"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l java"
                             eval "jar tf \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *)
@@ -1600,23 +1600,23 @@ c(){
                         fi
                         case "$file" in
                             *.rpm)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "rpm -qi \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.deb)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "dpkg -I \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.tgz|*.tar|*.tar.gz)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l c"
                             eval "tar tf \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *.zip)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l c"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l c"
                             eval "unzip -l \"$file\" | $colorizer $COLORIZER_NL"
                             ;;
                             *.[jw]ar)
-                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l java"
+                                echo $COLORIZER | command grep -qw bat && colorizer="$COLORIZER -l java"
                             eval "jar tf \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
                             *)
@@ -1633,21 +1633,21 @@ exists http && ge(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's#[^/]*//\([^@]*@\)\?\([^:/]*.*\)#\2#')"
-    echo $1 | grep -q https && proto=https|| proto=http
+    echo $1 | command grep -q https && proto=https|| proto=http
     shift
 
     if [[ -d "$styles_dir" ]]; then
         declare -a file_ary
         for file in "$styles_dir"/* ; do
             file=${file##*/}
-            echo "$file" | grep -q -E "init|pycache" || \
+            echo "$file" | command grep -q -E "init|pycache" || \
                 file_ary+=("${file%.*}")
         done
         len=${#file_ary}
         randscript="print int(rand()*$len)"
         rand=$(echo "$randscript" | perl)
         logg $rand
-        echo $SHELL | grep -q zsh && ((rand++))
+        isZsh && ((rand++))
 
         for (( i = 0; i < $len; i++ )); do
             random_color=${file_ary[$i]}
@@ -1713,7 +1713,7 @@ figletfonts(){
 }
 
 pygmentcolors(){
-    dir="$(python3 -m pip show pygments | grep Location | awk '{print $2}')"
+    dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"
     for i in "$dir/pygments/styles/"* ; do
         echo "$i"
     done
@@ -1781,7 +1781,7 @@ se(){
                 paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
             else
             paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
-            fi | \egrep --color=always -i -- "$2"
+            fi | command egrep --color=always -i -- "$2"
         fi
         command rm ~/temp1-$$ ~/temp2-$$
     fi
@@ -1792,7 +1792,7 @@ createLearningCollection(){
     alternatingPrettyPrint "Creating$DELIMITER_CHAR $SCHEMA_NAME.$TABLE_NAME$DELIMITER_CHAR with$DELIMITER_CHAR MySQL$DELIMITER_CHAR"
     if [[ -n "$1" ]]; then
         #use first arg as mysql password
-        if ! echo "select * from information_schema.tables" | mysql -u root -p "$1" | \grep --color=always -q "$TABLE_NAME";then
+        if ! echo "select * from information_schema.tables" | mysql -u root -p "$1" | command grep --color=always -q "$TABLE_NAME";then
             echo  "create schema $SCHEMA_NAME if not exists"
             echo  "create schema $SCHEMA_NAME if not exists" | mysql -u root -p "$1"
 
@@ -1803,7 +1803,7 @@ createLearningCollection(){
         fi
     else
         #use my.cnf
-        if ! echo "select * from information_schema.tables" | mysql | \grep --color=always -q "$TABLE_NAME";then
+        if ! echo "select * from information_schema.tables" | mysql | command grep --color=always -q "$TABLE_NAME";then
             echo  "create schema if not exists $SCHEMA_NAME"
             echo  "create schema if not exists $SCHEMA_NAME" | mysql
 
