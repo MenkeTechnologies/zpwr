@@ -292,7 +292,7 @@ tutsUpdate() {
 }
 
 sshRegain() {
-    echo "$(command ps -ef)" |  grep -q 'ssh ' && {
+    echo "$(command ps -ef)" | command  grep -q 'ssh ' && {
         if [[ "$BUFFER" != "" ]]; then
             print -sr "$BUFFER"
             local __NEW_BUFFER="exe \"$BUFFER\""
@@ -306,7 +306,7 @@ sshRegain() {
         fi
     } || {
         zle .kill-whole-line
-        echo "$(command ps -ef)" | grep -q 'tmux ' && {
+        echo "$(command ps -ef)" | command grep -q 'tmux ' && {
             BUFFER=tmm
         } || BUFFER=tmm_full
         zle .accept-line
@@ -469,7 +469,7 @@ lsoffzf(){
 }
 
 fzvim(){
-    \grep '^>' ~/.viminfo | cut -c3- | \
+    command grep '^>' ~/.viminfo | cut -c3- | \
         perl -lne '$f=$_;$_=~s/~/$ENV{HOME}/;print $f if -f' | \
         fzf -m -e --no-sort --border --prompt='-->>> ' \
         --preview 'file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' | \
@@ -507,7 +507,7 @@ vimFzfSudo(){
 intoFzfAg(){
     mywords=("${(z)BUFFER}")
 
-    if echo ${mywords[1]} | grep -q vim; then
+    if echo ${mywords[1]} | command grep -q vim; then
         BUFFER="$BUFFER $(fz vim)"
     else
         BUFFER="$BUFFER $(fz)"
@@ -1167,13 +1167,13 @@ zstyle ':completion:*' ignored-patterns '*.'
 #{{{                    MARK:Global Aliases
 #**************************************************************
 globalAliasesInit(){
-    alias -g ${__GLOBAL_ALIAS_PREFIX}a="|& \\egrep -v '\bag\b' |& \\ag --color -i"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}a="|& command egrep -v '\bag\b' |& \\ag --color -i"
     alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}bb='&>> "$LOGFILE'"$__TS"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | \grep -v grep | \grep --color=always $__pid; unset __pid;'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}bb='&>> "$LOGFILE'"$__TS"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
     alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
     alias -g ${__GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}e="|& \\egrep -v '\begrep\b' |& \\egrep --color=always -i"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}e="|& command egrep -v '\begrep\b' |& command egrep --color=always -i"
     alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
     alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -rMN'
     alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
@@ -1485,7 +1485,7 @@ fi
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
-    echo "$SHELL" | grep -q "zsh" && ps='$pipestatus[1]' || \
+    isZsh && ps='$pipestatus[1]' || \
         ps='${PIPESTATUS[0]}'
 
     alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
@@ -1638,13 +1638,13 @@ _fzf_complete_killall() {
 # mvim ;<tab>
 _fzf_complete_mvim() {
   _fzf_complete '-m' "$@" < <(
-     \grep '^>' ~/.viminfo|cut -c3-|sed 's@~@'"$HOME"'@'
+     command grep '^>' ~/.viminfo|cut -c3-|sed 's@~@'"$HOME"'@'
     )
 }
 # vim ;<tab>
 _fzf_complete_vim() {
   _fzf_complete '-m' "$@" < <(
-     \grep '^>' ~/.viminfo|cut -c3-|sed 's@~@'"$HOME"'@'
+     command grep '^>' ~/.viminfo|cut -c3-|sed 's@~@'"$HOME"'@'
     )
 }
 # echo $;<tab>
