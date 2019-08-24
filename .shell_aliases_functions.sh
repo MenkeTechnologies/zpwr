@@ -1154,7 +1154,18 @@ alias gh=openmygh
 eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
 eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
 eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$REPO_NAME'"
-alias zp="cd $SCRIPTS/$REPO_NAME"
+zp(){
+    dirsc="$SCRIPTS/$REPO_NAME"
+    forked="$HOME/forkedRepos/$REPO_NAME"
+
+    if [[ -d "$dirsc" ]]; then
+        cd "$dirsc"
+    elif [[ -d "$forked" ]]; then
+        cd "$forked"
+    else
+        echo "$dirsc and $forked do not exist" >&2
+    fi
+}
 
 getrc(){
     if [[ -z "$1" ]]; then
