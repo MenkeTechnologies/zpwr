@@ -1393,6 +1393,9 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 } || {
     :
 }
+if [[ -d "$FORKED_DIR" ]]; then
+    : ~FORKED_DIR
+fi
 if [[ -d "$SCRIPTS" ]]; then
     : ~SCRIPTS
 fi
