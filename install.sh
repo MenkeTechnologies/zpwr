@@ -682,7 +682,7 @@ prettyPrint "Running Vundle"
 vim -c PluginInstall -c qall
 
 prettyPrint "Installing Powerlevel9k"
-git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+git clone https://github.com/MenkeTechnologies/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$HOME"
 
 prettyPrint "Installing fzf"
