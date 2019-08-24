@@ -61,6 +61,7 @@ export ZSH_COMP_REPO_NAME="zsh-more-completions"
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
 export SCRIPTS="$HOME/Documents/shellScripts"
+export FORKED_DIR="$HOME/forkedRepos"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export D="$HOME/Desktop"
@@ -457,7 +458,7 @@ r(){
 
     restart(){
         service="$1"
-        src_dir="$HOME/forkedRepos/$REPO_NAME"
+        src_dir="$FORKED_DIR/$REPO_NAME"
         local service_path="$src_dir/$service.service"
         test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
         test -f "$service_path" || { echo "$service_path does not exists so falling back to $1." >&2 && service_path="$1"; }
@@ -485,7 +486,7 @@ cloneToForked(){
     branch=master
     (
         if [[ -z "$1" ]]; then
-            builtin cd "$HOME/forkedRepos" || return 1
+            builtin cd "$FORKED_DIR" || return 1
         else
             builtin cd "$@" || return 1
         fi
@@ -1153,11 +1154,15 @@ openmygh(){
 alias gh=openmygh
 eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
 eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
-eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$REPO_NAME'"
+if [[ -d "$SCRIPTS/$REPO_NAME" ]]; then
+    eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$REPO_NAME'"
+elif [[ -d "$FORKED_DIR/$REPO_NAME" ]];then
+    eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$FORKED_DIR/$REPO_NAME'"
+fi
 zp(){
     local dirsrc forked
     dirsc="$SCRIPTS/$REPO_NAME"
-    forked="$HOME/forkedRepos/$REPO_NAME"
+    forked="$FORKED_DIR/$REPO_NAME"
 
     if [[ -d "$dirsc" ]]; then
         cd "$dirsc"
