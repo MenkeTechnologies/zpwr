@@ -1505,6 +1505,7 @@ fzf_setup(){
     exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
     exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
+    export FZF_CTRL_T_COMMAND='find * | ag -v ".git/"'
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
         --preview \"if [[ -f {} ]]; then \
             if print -r -- {} | command \
