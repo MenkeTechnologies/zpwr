@@ -653,7 +653,7 @@ bindkey '\eOQ' sub
 bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
-[[ "$(uname)" == Darwin ]] && {
+if [[ "$(uname)" == Darwin ]];then
     echo "$PARENT_PROCESS" | command egrep -q 'login|tmux' && {
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
@@ -666,7 +666,7 @@ bindkey '\eOR' getrcWidget
         bindkey '\e[5C' tutsUpdate
         bindkey '\e[5D' dbz
     }
-}
+fi
 
 
 bindkey '^N' sudo-command-line
