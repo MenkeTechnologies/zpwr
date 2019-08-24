@@ -1153,6 +1153,7 @@ openmygh(){
 alias gh=openmygh
 eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
 eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
+eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$REPO_NAME'"
 
 getrc(){
     if [[ -z "$1" ]]; then
@@ -1663,10 +1664,10 @@ exists http && ge(){
 
 fz(){
     if test -z "$1";then
-        command ag '^.*$' --ignore git --color * | fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"' \
+        command ag '^.*$' --hidden --ignore .git --color | fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"' \
         2>/dev/null | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | cut -d ':' -f1 | perl -pe 's@^(.*)\n$@"$1" @'
     else
-        command ag '^.*$' --ignore git --color * | fzf --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"'\
+        command ag '^.*$' --hidden --ignore .git --color | fzf --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"'\
             2>/dev/null | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | perl -pe 's@^(.*?):(\d+):(.*)@+$2 "$1"@'
     fi
 }
