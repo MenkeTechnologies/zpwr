@@ -1518,6 +1518,12 @@ fzf_setup(){
             elif print -r -- {} | \
                 command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
             elif print -r -- {} | \
+                command egrep -iq '\.(bzip|bz)\$';then bzip -c -d {} | $COLORIZER_FZF_YAML; \
+            elif print -r -- {} | \
+                command egrep -iq '\.(bzip2|bz2)\$';then bzip2 -c -d {} | $COLORIZER_FZF_YAML; \
+            elif print -r -- {} | \
+                command egrep -iq '\.(xzip|xz)\$';then xz -c -d {} | $COLORIZER_FZF_YAML; \
+            elif print -r -- {} | \
             command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
             else \
         $COLORIZER_FZF 2>/dev/null; rc=$ps;[[ \$rc = 0 ]] || { stat -- {} | fold -80 | head -500; }; fi; else \
