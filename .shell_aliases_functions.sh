@@ -1154,6 +1154,7 @@ alias gh=openmygh
 eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
 eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
 eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$REPO_NAME'"
+alias zp="cd $SCRIPTS/$REPO_NAME"
 
 getrc(){
     if [[ -z "$1" ]]; then
