@@ -1155,6 +1155,7 @@ eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
 eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
 eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$REPO_NAME'"
 zp(){
+    local dirsrc forked
     dirsc="$SCRIPTS/$REPO_NAME"
     forked="$HOME/forkedRepos/$REPO_NAME"
 
