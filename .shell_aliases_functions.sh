@@ -1553,6 +1553,18 @@ c(){
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l sh"
                             eval "$deb_cmd \"$file\" | $colorizer $COLORIZER_NL"
                                 ;;
+                            *.bz2|*.bzip2)
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
+                            eval "bzip2 -c -d \"$file\" | $colorizer $COLORIZER_NL"
+                            ;;
+                            *.bz|*.bzip)
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
+                            eval "bzip -c -d \"$file\" | $colorizer $COLORIZER_NL"
+                            ;;
+                            *.xz|*.xzip)
+                                echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
+                            eval "xz -c -d \"$file\" | $colorizer $COLORIZER_NL"
+                            ;;
                             *.gz|*.gzip)
                                 echo $COLORIZER | grep -qw bat && colorizer="$COLORIZER -l yaml"
                             eval "gzip -c -d \"$file\" | $colorizer $COLORIZER_NL"
