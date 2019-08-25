@@ -676,7 +676,7 @@ clearList() {
                             echo "$loc" | command grep -q \
                                 "function" && {
                                 type -f "$(echo "$loc" | \
-                                awk '{print $1}')" | cat -n
+                                awk '{print $1}')" | nl -v 0
                             }
                             echo "$loc" | command grep -q \
                                 "alias" && {
@@ -1128,16 +1128,24 @@ o(){
 reveal() {
     open_cmd="$(getOpenCommand)" || return 1
 
-    git rev-parse --git-dir &>/dev/null || { echo "Not a git directory" >&2 && return 1; }
+    if [[ -z "$1" ]]; then
+        if ! command git rev-parse --git-dir 2> /dev/null 1>&2;then
+            "$open_cmd" "https://github.com/$GITHUB_ACCOUNT?tab=repositories"
+            return 0
+        fi
+    fi
 
-    command git remote -v | command grep "$1" | command grep 'heroku' | command grep fetch | command grep -o -E ':.*' | \
-    cut -c 19- | command awk '{print $1}' | command sed 's@.git$@@' | \
-    command xargs -I {} "$open_cmd" https://dashboard.heroku.com/apps/{} https://{}.herokuapp.com
+    argValues="$*";
+    command git remote -v | command grep -E "$(echo ${argValues/ /|})" | command grep 'heroku' | command grep fetch | command grep -o -E ':.*' | \
+        cut -c 19- | command awk '{print $1}' | command sed 's@.git$@@' | \
+        command xargs -I {} "$open_cmd" https://dashboard.heroku.com/apps/{} https://{}.herokuapp.com
 
-  {
-    command git remote -v | command grep "$1" | command grep '@'  | command grep -o -E '@.*' | cut -c 2-
-    command git remote -v | command grep "$1" | command grep '//' | command grep -o -E ':.*' | cut -c 4- | command grep -v 'heroku'
-  } | command grep fetch | command sed 's@:/\\@@g' | command awk '{print $1}' | sed 's@.git$@@' | command xargs -I {} "$open_cmd" https://www.{}
+    {
+        command git remote -v | command grep -E "$(echo ${argValues/ /|})" | command grep '@'  | command grep -o -E '@.*' | cut -c 2-
+        command git remote -v | command grep -E "$(echo ${argValues/ /|})" | command grep '//' | command grep -o -E ':.*' | cut -c 4- | command grep -v 'heroku'
+    } | command grep fetch | command sed 's@:@\/@g' | command awk '{print $1}' | sed 's@.git@@' | command xargs -I {} "$open_cmd" https://www.{}
+    set +x
+
 }
 
 
