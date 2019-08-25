@@ -880,6 +880,8 @@ EOLorNextTabStop(){
     else
         if [[ $BUFFER[-1] = ";" ]]; then
             BUFFER+=" "
+        else
+            BUFFER+=" "
         fi
         CURSOR=$#BUFFER
         zle vi-insert
