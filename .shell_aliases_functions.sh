@@ -1136,7 +1136,7 @@ reveal() {
     else
         if ! command git rev-parse --git-dir 2> /dev/null 1>&2;then
             for dir in "$@" ; do
-               builtin cd "$dir" && reveal && builtin cd ..
+                ( builtin cd "$dir" && reveal; )
             done
             return 0
         fi
