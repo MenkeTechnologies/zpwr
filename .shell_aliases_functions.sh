@@ -1779,7 +1779,7 @@ se(){
         if [[ "$CUSTOM_COLORS" = true ]]; then
             echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | nl -b a -n rz | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
         else
-            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | nl -b a -n rn
+            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | nl -b a -n rz
         fi
      
     else
