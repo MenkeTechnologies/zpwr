@@ -1167,6 +1167,11 @@ if [[ -d "$SCRIPTS/$REPO_NAME" ]]; then
 elif [[ -d "$FORKED_DIR/$REPO_NAME" ]];then
     eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$FORKED_DIR/$REPO_NAME'"
 fi
+
+if [[ -d "$FORKED_DIR" ]]; then
+    alias fp="cd $FORKED_DIR"
+fi
+
 zp(){
     local dirsrc forked
     dirsc="$SCRIPTS/$REPO_NAME"
