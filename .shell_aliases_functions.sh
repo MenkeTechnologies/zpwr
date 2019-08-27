@@ -922,20 +922,20 @@ hc(){
 }
 
 hd(){
-    [[ -n "$1" ]] && repo="$1" && user="$(echo "$GITHUB_ACCOUNT")" || {
-		line="$(git remote -v 2>/dev/null | sed 1q)" && {
-            echo "$line" | command grep -q 'git@' && {
+    [[ -n "$1" ]] && repo="$1" && user="$GITHUB_ACCOUNT" || {
+		if line="$(git remote -v 2>/dev/null | sed 1q)";then
+            if echo "$line" | command grep -q 'git@';then
                 #ssh
-        
                 user="$(echo $line | awk -F':' '{print $2}' | awk -F'/' '{print $1}')"
                 repo="$(echo $line | awk -F'/' '{print $2}' | awk '{print $1}')"
-            } || {
+            else
                 #http
                 user="$(echo $line | awk -F'/' '{print $4}')"
                 repo="$(echo $line | awk -F'/' '{print $5}' | awk '{print $1}')"
-            }
-		}
+            fi
+        fi
 	}
+
     user="$(echo "$user" | tr 'A-Z' 'a-z')"
 
     test -z "$repo" && echo "bad repo $repo" >&2 && return 1
@@ -944,11 +944,13 @@ hd(){
     out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$repo")"
 
     printf "\e[1m"
-    [[ -z "$out" ]] && echo "Successful deletion of $repo" \
-        || {
+
+    if [[ -z "$out" ]];then
+        echo "Successful deletion of $repo"
+    else
         echo "Error in deletion of $repo"
         echo "$out"
-    }
+    fi
     printf "\e[0m"
 }
 
@@ -1136,6 +1138,7 @@ openmygh(){
 
 }
 alias gh=openmygh
+
 eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
 eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
 if [[ -d "$SCRIPTS/$REPO_NAME" ]]; then
