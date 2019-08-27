@@ -1380,9 +1380,12 @@ export HISTSIZE=10000000
 RPS2='+%N:%i:%^'
 export PS3=$'\e[1;34m-->>>> \e[0m'
 
+#}}}***********************************************************
+
+#{{{                    MARK:ENV VARS IN ZSH PROMPT %~
+#**************************************************************
 #if this is a mac or linux
-[[ "$(uname)" == "Darwin" ]] && {
-    #make these env vars show up in prompt as %~
+if [[ "$(uname)" == "Darwin" ]];then
     if [[ -d "$WCC" ]]; then
         : ~WCC
     fi
@@ -1392,15 +1395,16 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
     if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
         : ~HOMEBREW_HOME_FORMULAE
     fi
-} || {
-    :
-}
+fi
+
 if [[ -d "$FORKED_DIR" ]]; then
     : ~FORKED_DIR
 fi
+
 if [[ -d "$SCRIPTS" ]]; then
     : ~SCRIPTS
 fi
+
 if [[ -d "$ZPWR" ]]; then
     : ~ZPWR
 fi
@@ -1408,6 +1412,7 @@ fi
 if [[ -d "$D" ]]; then
     : ~D
 fi
+
 if [[ -d "$DL" ]]; then
     : ~DL
 fi
