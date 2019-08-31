@@ -70,7 +70,6 @@ export DL="$HOME/Downloads"
 export XAUTHORITY="$HOME/.Xauthority"
 export TERMINAL_APP="Terminal.app"
 export TERM="xterm-256color"
-export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
 export YARN_HOME="$HOME/.config/yarn"
 export NODE_HOME="/usr/local/lib/node_modules"
 export PERL5LIB="$HOME/perl5/lib/perl5"
@@ -94,6 +93,7 @@ echo "$PATH" | command grep -iq shellScripts || {
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
 
     [[ "$(uname)" == Darwin ]] && {
+        export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$PATH"
     } || {
@@ -559,7 +559,7 @@ cgh(){
 }
 
 upload(){
-    \curl -vvv -fsSL -F file=@"$1" http://"$2"
+    command curl -vvv -fsSL -F file=@"$1" http://"$2"
 }
 
 jd(){
