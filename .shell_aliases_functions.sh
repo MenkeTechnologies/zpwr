@@ -630,6 +630,13 @@ allRemotes(){
     done < <(git remote)
 }
 
+about(){
+
+    if [[ -f "$SCRIPTS/about.sh" ]]; then
+        bash "$SCRIPTS/about.sh"
+    fi
+}
+
 clearList() {
     if [[ "$(uname)" == "Darwin" ]]; then
         exists exa && ls_command="$EXA_COMMAND" || {
