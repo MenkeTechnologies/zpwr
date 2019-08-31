@@ -1726,7 +1726,7 @@ _fzf_complete_alias() {
 }
 # z ;<tab>
 _fzf_complete_z() {
-  _fzf_complete '--header="z descending rank"' "$@" < <(
+  _fzf_complete '--ansi' "$@" < <(
     _z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
         | perl -pe 's/$ENV{HOME}/~/'
     )
