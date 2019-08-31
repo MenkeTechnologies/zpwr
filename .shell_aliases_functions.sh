@@ -451,20 +451,20 @@ r(){
     }
 
     ssd() {
-        for prog in "$@"; do
-            prettyPrint "sudo systemctl stop $prog"
-            prettyPrint "sudo systemctl disable $prog"
-            sudo systemctl stop "$prog"
-            sudo systemctl disable "$prog"
+        for service in "$@"; do
+            prettyPrint "sudo systemctl stop $service"
+            prettyPrint "sudo systemctl disable $service"
+            sudo systemctl stop "$service"
+            sudo systemctl disable "$service"
         done
     }
 
     ssu() {
-        for prog in "$@"; do
-            prettyPrint "sudo systemctl start $prog"
-            prettyPrint "sudo systemctl eable $prog"
-            sudo systemctl start "$prog"
-            sudo systemctl enable "$prog"
+        for service in "$@"; do
+            prettyPrint "sudo systemctl start $service"
+            prettyPrint "sudo systemctl eable $service"
+            sudo systemctl start "$service"
+            sudo systemctl enable "$service"
         done
     }
 
