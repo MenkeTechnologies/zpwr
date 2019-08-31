@@ -1430,6 +1430,10 @@ if [[ -d "$YARN_HOME" ]]; then
     : ~YARN_HOME
 fi
 
+if [[ -d "$PERL5LIB" ]]; then
+    : ~PERL5LIB
+fi
+
 if [[ -d "$NODE_HOME" ]]; then
     : ~NODE_HOME
 fi
