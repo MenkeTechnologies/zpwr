@@ -501,6 +501,7 @@ fzfZList(){
 zFZF(){
     zle .kill-whole-line
     BUFFER="z $(fzfZList)"
+    mywords=(${(z)BUFFER})
     if (( $#mywords == 1 )); then
         zle .kill-whole-line
     else
