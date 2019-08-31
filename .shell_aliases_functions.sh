@@ -1163,7 +1163,7 @@ if [[ -d "$FORKED_DIR" ]]; then
     alias fp="cd $FORKED_DIR"
 fi
 
-zp(p){
+zpp(){
     local dirsrc forked
     dirsc="$SCRIPTS/$REPO_NAME"
     forked="$FORKED_DIR/$REPO_NAME"
