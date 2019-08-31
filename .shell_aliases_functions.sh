@@ -197,7 +197,7 @@ exists spotify && {
     alias pe='spotify prev'
     alias spa='spotify pause'
 }
-echo $SHELL | command grep -q zsh && {
+isZsh && {
     alias 10='cd -10'
     alias 11='cd -11'
     alias 12='cd -12'
@@ -1420,7 +1420,7 @@ digs(){
         fi
     else
 
-        echo $SHELL | command grep -q zsh && \
+        isZsh && \
             colo=(grc --colour=on) || \
             colo="grc --colour=on "
 
