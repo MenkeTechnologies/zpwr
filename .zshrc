@@ -1724,6 +1724,13 @@ _fzf_complete_alias() {
       alias | sed 's@=.*@@'
     )
 }
+# z ;<tab>
+_fzf_complete_z() {
+  _fzf_complete '--header="z descending rank"' "$@" < <(
+    _z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
+        | perl -pe 's/$ENV{HOME}/~/'
+    )
+}
 
 test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \
     && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh"
