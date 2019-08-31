@@ -301,7 +301,10 @@ else
     test -d "$HOME/.local/share/Trash" && \
         alias tra='cd $HOME/.local/share/Trash'
     if [[ "$(uname)" == Linux ]]; then
-        alias api="sudo apt-get install -y"
+        exists apt && {
+            alias api="sudo apt install -y"
+            alias apa="sudo apt update && sudo apt upgrade -y;sudo apt autoremove -y; sudo apt autoclean"
+        }
         alias ipt="sudo iptables --line-numbers -L"
         test -z "$distroName" && {
             distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
