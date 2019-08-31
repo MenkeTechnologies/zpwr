@@ -1163,6 +1163,19 @@ if [[ -d "$FORKED_DIR" ]]; then
     alias fp="cd $FORKED_DIR"
 fi
 
+zp(p){
+    local dirsrc forked
+    dirsc="$SCRIPTS/$REPO_NAME"
+    forked="$FORKED_DIR/$REPO_NAME"
+
+    if [[ -d "$dirsc" ]]; then
+        cd "$dirsc"; gitCheckoutRebasePush
+    elif [[ -d "$forked" ]]; then
+        cd "$forked"; gitCheckoutRebasePush
+    else
+        echo "$dirsc and $forked do not exist" >&2
+    fi
+}
 zp(){
     local dirsrc forked
     dirsc="$SCRIPTS/$REPO_NAME"
