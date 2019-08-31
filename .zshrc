@@ -596,8 +596,8 @@ bindkey -M vicmd '^F^H' lsoffzf
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
 
-bindkey -M viins '^V^B' vimFzfSudo
-bindkey -M vicmd '^V^B' vimFzfSudo
+bindkey -M viins '^V^N' vimFzfSudo
+bindkey -M vicmd '^V^N' vimFzfSudo
 
 bindkey -M viins '^V^S' zFZF
 bindkey -M vicmd '^V^S' zFZF
