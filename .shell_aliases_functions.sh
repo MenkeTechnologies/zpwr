@@ -634,7 +634,7 @@ about(){
     old="$LESS"
     unset LESS
     if [[ -f "$SCRIPTS/about.sh" ]]; then
-        bash "$SCRIPTS/about.sh" | less -RFX
+        bash "$SCRIPTS/about.sh" | less -rFX
     fi
     export LESS="$old"
 }
