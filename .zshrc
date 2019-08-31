@@ -1410,6 +1410,30 @@ if [[ -d "$ZPWR" ]]; then
     : ~ZPWR
 fi
 
+if [[ -d "$PYSCRIPTS" ]]; then
+    : ~PYSCRIPTS
+fi
+
+if [[ -d "$PYEXECUTABLES" ]]; then
+    : ~PYEXECUTABLES
+fi
+
+if [[ -d "$DOC" ]]; then
+    : ~DOC
+fi
+
+if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
+    : ~HOMEBREW_HOME_FORMULAE
+fi
+
+if [[ -d "$YARN_HOME" ]]; then
+    : ~YARN_HOME
+fi
+
+if [[ -d "$NODE_HOME" ]]; then
+    : ~NODE_HOME
+fi
+
 if [[ -d "$D" ]]; then
     : ~D
 fi
