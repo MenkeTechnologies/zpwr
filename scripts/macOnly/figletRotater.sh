@@ -8,10 +8,13 @@ TEXT_TO_DISPLAY="$1"
 FILTER="$2"
 
 for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
-    [[ -z "$FILTER" ]] && figlet -f "$file" \
-        < <(echo "$TEXT_TO_DISPLAY") \
-        || figlet -f "$file" < <(echo "$TEXT_TO_DISPLAY") \
-        | "$FILTER"
+    if [[ -z "$FILTER" ]];then
+        figlet -f "$file" < <(echo "$TEXT_TO_DISPLAY")
+    else
+         figlet -f "$file" < <(echo "$TEXT_TO_DISPLAY") | "$FILTER"
+    fi
+    echo "$file"
+
     sleep 1
 done
 

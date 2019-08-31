@@ -120,7 +120,7 @@ send-keys -t 24 'clear;nslookup' C-m
 send-keys -t 25 'clear;mongo' C-m
 send-keys -t 26 'clear;irb' C-m
 send-keys -t 27 'clear;scala' C-m
-send-keys -t 28 'clear;racket' C-m
+send-keys -t 28 'clear;utop' C-m
 send-keys -t 29 'clear;iex' C-m
 send-keys -t 30 'clear;bc' C-m
 send-keys -t 31 'clear;gforth' C-m
