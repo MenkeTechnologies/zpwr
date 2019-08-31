@@ -13,7 +13,7 @@ allRemotes(){
         git remote show "$REPLY"
     done < <(git remote)
 }
-
+banner(){
 if [[ -d "$ZPWR" ]]; then
     if cd "$ZPWR";then
         version="$(git describe --tags $(git rev-list --tags --max-count=1))"
@@ -99,3 +99,8 @@ printf "\x1b[4m"
 #fi
 
 printf "\x1b[0m"
+}
+
+
+
+banner
