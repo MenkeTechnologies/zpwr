@@ -304,6 +304,7 @@ else
         exists apt && {
             alias api="sudo apt install -y"
             alias apa="sudo apt update && sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean"
+            alias apz="sudo apt update && sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean; u8"
         }
         alias ipt="sudo iptables --line-numbers -L"
         test -z "$distroName" && {
