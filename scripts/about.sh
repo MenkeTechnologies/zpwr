@@ -40,13 +40,12 @@ printf "\x1b[35m"
 printf "\x1b[1m"
 cat<<EOF
                                 $version
-    
 EOF
 
 printf "\x1b[0m"
 printf "\x1b[34m"
 cat<<\EOF
-                    
+
                            eeeee  e    e
                            8   8  8    8
                            8eee8e 8eeee8
