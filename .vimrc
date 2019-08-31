@@ -978,7 +978,7 @@ noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
 nnoremap <silent> <C-D>a :ALEToggle<CR>
 
-"gutter update time for git utter and markology plugins 
+"gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins 
 set updatetime=100
 
 

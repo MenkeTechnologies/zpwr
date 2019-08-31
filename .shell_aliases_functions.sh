@@ -1867,8 +1867,6 @@ jsonToArray(){
 }
 
 arrayToJson(){
-
-
     if isZsh; then
         ary="$1"
         printf '%s\n%s\n' "${(kv)${(P)ary}[@]}" | \
