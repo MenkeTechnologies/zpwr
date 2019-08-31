@@ -489,6 +489,24 @@ vimFzf(){
         zle .accept-line
     fi
 }
+
+fzfZList(){
+        _z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
+            | perl -pe 's/$ENV{HOME}/~/' | \
+        fzf -e --no-sort --border --prompt='-->>> ' \
+        --preview 'file="$(eval echo {})"; stat "$file" | fold -80 | head -500' | \
+            perl -pe 's@^([~]*)([^~].*)$@"$ENV{HOME}$2"@;s@\s+@ @g;'
+}
+
+zFZF(){
+    zle .kill-whole-line
+    BUFFER="z $(fzfZList)"
+    if (( $#mywords == 1 )); then
+        zle .kill-whole-line
+    else
+        zle .accept-line
+    fi
+}
 vimFzfSudo(){
     zle .kill-whole-line
     LBUFFER="sudo vim $(fzvim)"
@@ -536,6 +554,7 @@ zle -N intoFzf
 zle -N intoFzfAg
 zle -N vimFzf
 zle -N vimFzfSudo
+zle -N zFZF
 zle -N getrcWidget
 zle -N clearLine
 zle -N deleteLastWord
@@ -579,6 +598,9 @@ bindkey -M vicmd '^F^G' intoFzfAg
 
 bindkey -M viins '^V^S' vimFzfSudo
 bindkey -M vicmd '^V^S' vimFzfSudo
+
+bindkey -M viins '^V^S' zFZF
+bindkey -M vicmd '^V^S' zFZF
 
 bindkey -M viins '^V^V' vimFzf
 bindkey -M vicmd '^V^V' vimFzf
