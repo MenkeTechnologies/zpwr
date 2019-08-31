@@ -303,7 +303,7 @@ else
     if [[ "$(uname)" == Linux ]]; then
         exists apt && {
             alias api="sudo apt install -y"
-            alias apa="sudo apt update && sudo apt dist-upgrade -y;sudo apt autoremove -y; sudo apt autoclean"
+            alias apa="sudo apt update && sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean"
         }
         alias ipt="sudo iptables --line-numbers -L"
         test -z "$distroName" && {
