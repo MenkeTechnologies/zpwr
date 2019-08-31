@@ -17,7 +17,7 @@ banner(){
 if [[ -d "$ZPWR" ]]; then
     if cd "$ZPWR";then
         version="$(git describe --tags $(git rev-list --tags --max-count=1)| perl -pe 's@[\t ]@@')"
-        info="$(git tag -n9 "$version" | perl -pe 's@[\t ]+@ @')"
+        info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"
         fetch="$(git remote -v | head -n 1 | perl -pe 's@[\t ]+@    @')"
         push="$(git remote -v | tail -n 1 | perl -pe 's@[\t ]+@    @')"
     fi
