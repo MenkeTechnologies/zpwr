@@ -294,6 +294,10 @@ if [[ "$(uname)" == "Darwin" ]]; then
         alias vm='mvim -v -u ~/.minvimrc'
         alias sv='sudo mvim -v'
     }
+
+    exists brew && {
+        alias apz="brew update && brew outdated && brew upgrade && brew cleanup; brew cu -ay; u8"
+    }
 else
     #Linux or Unix
     alias ip="grc -c $HOME/conf.ifconfig ip"
