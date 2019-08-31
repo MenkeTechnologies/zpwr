@@ -476,8 +476,9 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -M viins "^S" gitFuncNoCheck```
 - ```bindkey -M viins "^T" transpose-chars```
 - ```bindkey -M viins "^U" clearLine```
+- ```bindkey -M viins "^V^B" vimFzfSudo```
 - ```bindkey -M viins "^V^F" fzf-cd-widget```
-- ```bindkey -M viins "^V^S" vimFzfSudo```
+- ```bindkey -M viins "^V^S" zFZF```
 - ```bindkey -M viins "^V^V" vimFzf```
 - ```bindkey -M viins "^V^Z" fzf-history-widget```
 - ```bindkey -M viins "^W" vi-backward-kill-word```
@@ -572,8 +573,9 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -a "^S" gitFuncNoCheck```
 - ```bindkey -a "^T" transpose-chars```
 - ```bindkey -a "^U" clearLine```
+- ```bindkey -a "^V^B" vimFzfSudo```
 - ```bindkey -a "^V^F" fzf-cd-widget```
-- ```bindkey -a "^V^S" vimFzfSudo```
+- ```bindkey -a "^V^S" zFZF```
 - ```bindkey -a "^V^V" vimFzf```
 - ```bindkey -a "^V^Z" fzf-history-widget```
 - ```bindkey -a "^W" deleteLastWord```
