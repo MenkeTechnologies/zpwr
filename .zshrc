@@ -496,7 +496,7 @@ fzfZList(){
             | perl -pe 's/$ENV{HOME}/~/' | \
         fzf -e --no-sort --border --prompt='-->>> ' \
         --preview 'file="$(eval echo {})"; stat "$file" | fold -80 | head -500' | \
-            perl -pe 's@^([~]*)([^~].*)$@"$ENV{HOME}$2"@;s@\s+@ @g;'
+            perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }
 
 zFZF(){
