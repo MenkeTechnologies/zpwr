@@ -562,7 +562,6 @@ zle -N intoFzf
 zle -N intoFzfAg
 zle -N vimFzf
 zle -N vimFzfSudo
-zle -N zFZF
 zle -N getrcWidget
 zle -N clearLine
 zle -N deleteLastWord
@@ -607,8 +606,11 @@ bindkey -M vicmd '^F^G' intoFzfAg
 bindkey -M viins '^V^N' vimFzfSudo
 bindkey -M vicmd '^V^N' vimFzfSudo
 
-bindkey -M viins '^V^S' zFZF
-bindkey -M vicmd '^V^S' zFZF
+exists z && {
+    zle -N zFZF
+    bindkey -M viins '^V^S' zFZF
+    bindkey -M vicmd '^V^S' zFZF
+}
 
 bindkey -M viins '^V^V' vimFzf
 bindkey -M vicmd '^V^V' vimFzf
