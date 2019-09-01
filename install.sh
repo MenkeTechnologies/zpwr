@@ -138,7 +138,7 @@ addDependenciesRedHat(){
 }
 
 addDependenciesFreeBSD(){
-    dependencies_ary+=(vim python3 gnome3 devel/ruby-gems)
+    dependencies_ary+=(the_silver_searcher vim python3 gnome3 devel/ruby-gems)
 }
 
 addDependenciesMac(){
