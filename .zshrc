@@ -544,7 +544,7 @@ clearLine() {
 
 refreshCache(){
     rm -f "$HOME/.zcompdump"*
-    compinit
+    compinit -u
 }
 
 deleteLastWord(){
