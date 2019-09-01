@@ -166,13 +166,14 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(gh_reveal zsh-expand zsh-surround zsh-nginx zsh-more-completions \
+plugins=(gh_reveal zsh-z zsh-expand zsh-surround \
+    zsh-nginx zsh-more-completions \
     fzf-zsh zsh-completions zsh-sed-sub zsh-git-acp \
     zsh-syntax-highlighting zsh-autosuggestions \
     history-substring-search ruby gem rake rails yarn ng \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
-    postgres redis-cli colorize sudo z rsync docker \
+    postgres redis-cli colorize sudo rsync docker \
     docker-compose sublime kubectl \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
@@ -491,7 +492,7 @@ vimFzf(){
 }
 
 fzfZList(){
-        _z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
+        z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
             | perl -pe 's/$ENV{HOME}/~/' | \
         fzf -e --no-sort --border --prompt='-->>> ' \
         --preview 'file="$(eval echo {})"; stat "$file" | fold -80 | head -500' | \
@@ -536,8 +537,14 @@ intoFzfAg(){
 
     CURSOR=$#BUFFER
 }
+
 clearLine() {
     LBUFFER=
+}
+
+refreshCache(){
+    rm -f "$HOME/.zcompdump"*
+    compinit
 }
 
 deleteLastWord(){
