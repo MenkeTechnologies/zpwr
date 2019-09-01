@@ -1218,6 +1218,12 @@ getrc(){
         fi
         [[ $REPLY != "y" ]] && clearList && return 0
     fi
+
+    if [[ -d "$ZPWR" ]]; then
+        cd "$ZPWR"
+        git pull
+    fi
+
     cd "$HOME"
     git clone -b "$branch" "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
     cd "$REPO_NAME"
