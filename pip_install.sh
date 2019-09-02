@@ -38,6 +38,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Installing PGCLI"
     python2 -m pip install pgcli
 
+
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
         python2 -m pip install --upgrade youtube_dl
@@ -49,6 +50,12 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
         prettyPrint "Installing pygments for python3"
         sudo python3 -m pip install pygments
+
+        prettyPrint "Installing yapf"
+        sudo python3 -m pip install yapf
+
+        prettyPrint "Installing vim-vint"
+        sudo python3 -m pip install vim-vint
     }
 elif [[ "$OS_TYPE" == "Linux" ]];then
     if [[ "$distroFamily" == redhat ]]; then
@@ -107,6 +114,12 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
 
         prettyPrint "Installing pygments for python3"
         sudo python3 -m pip install pygments
+
+        prettyPrint "Installing yapf"
+        sudo python3 -m pip install yapf
+
+        prettyPrint "Installing vim-vint"
+        sudo python3 -m pip install vim-vint
     }
 else
     if [[ "$OS_TYPE" == "FreeBSD" ]]; then
@@ -155,6 +168,12 @@ else
 
             prettyPrint "Installing pygments for python3"
             sudo python3 -m pip install pygments
+
+            prettyPrint "Installing vim-vint"
+            sudo python3 -m pip install vim-vint
+
+            prettyPrint "Installing yapf"
+            sudo python3 -m pip install yapf
         }
     fi
 fi

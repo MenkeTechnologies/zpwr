@@ -97,7 +97,7 @@ dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootki
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
     whois weechat gradle ant maven telnet tree mc ocaml groovy slurm \
-    bmon ruby parallel pssh) 
+    bmon ruby parallel pssh shfmt)
 
 #}}}***********************************************************
 
