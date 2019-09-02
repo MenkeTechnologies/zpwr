@@ -840,6 +840,54 @@ contribcount(){
     fi
 }
 
+
+totallines(){
+
+    if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
+        printf "\x1b[0;1;31m"
+        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        printf "\x1b[0m"
+        return 1
+    fi
+    temp="$HOME/.temp$$"
+    prettyPrint "starting total line count..."
+    {
+   
+    while read; do
+        filter=false
+        for arg in "$@"; do
+           if echo "$REPLY" | grep -q "$arg"; then
+               filter=true
+               break
+           fi 
+        done
+
+        if [[ $filter = false ]]; then
+            cat "$REPLY"
+        fi
+    done < <(git ls-files) 2>/dev/null
+
+    } > "$temp"
+
+    if ! test -f "$temp"; then
+        printf "\x1b[0;1;31m"
+        printf "where is $temp\n" >&2
+        printf "\x1b[0m"
+        return 1
+    fi
+
+    prettyPrint "Total Line Count"
+    lineCount="$(cat "$temp" | wc -l)"
+    if (( $lineCount > 10 )); then
+        echo "$lineCount" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+            alternatingPrettyPrint | less -r
+    else
+        echo "$lineCount" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+            alternatingPrettyPrint
+    fi
+    command rm "$temp"
+}
+
 linecontribcount(){
 
     if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
@@ -859,7 +907,7 @@ linecontribcount(){
 
     } | sort | uniq -c | sort -r > "$temp"
 
-    if ! -f "$temp"; then
+    if ! test -f "$temp"; then
         printf "\x1b[0;1;31m"
         printf "where is $temp\n" >&2
         printf "\x1b[0m"
