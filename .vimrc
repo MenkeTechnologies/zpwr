@@ -949,6 +949,7 @@ inoremap <silent> <C-D>c <C-O>:Colors<CR>
 inoremap <silent> <C-D>g <C-O>:Commits<CR>
 inoremap <silent> <C-D>b <C-O>:Buffers<CR>
 inoremap <silent> <C-D>a <C-O>:Ag<CR>
+inoremap <silent> <C-D>j <C-O>:Agg<CR>
 inoremap <silent> <C-D>l <C-O>:Lines<CR>
 inoremap <silent> <C-D>m <C-O>:Marks<CR>
 inoremap <silent> <C-D>w <C-O>:Windows<CR>
@@ -965,6 +966,7 @@ nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <C-D>g :Commits<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
+nnoremap <silent> <C-D>j :Agg<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 nnoremap <silent> <C-D>b :Buffers<CR>
 nnoremap <silent> <C-D>m :Marks<CR>
