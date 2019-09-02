@@ -13,8 +13,7 @@ nproc=10
 # NAME: usage
 # DESCRIPTION: Display usage information.
 #===============================================================================
-function usage ()
-{
+usage(){
     echo "Usage : $0 [options] [--]
     Default number of spawned processes is $nproc.
     Change this with -n option.
