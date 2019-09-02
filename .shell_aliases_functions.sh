@@ -80,9 +80,9 @@ export PERL5LIB="$HOME/perl5/lib/perl5"
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
 export HISTSIZE=50000
 export HISTTIMEFORMAT=' %F %T _ '
-export BLUE="\e[37;44m"
-export RED="\e[31m"
-export RESET="\e[0m"
+export BLUE="\x1b[37;44m"
+export RED="\x1b[31m"
+export RESET="\x1b[0m"
 export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
 export LESS="-M -N -R -K -F -X"
@@ -96,13 +96,13 @@ echo "$PATH" | command grep -iq shellScripts || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
 
-    [[ "$(uname)" == Darwin ]] && {
+    if [[ "$(uname)" == Darwin ]]; then
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$PATH"
-    } || {
+    else
         export PATH="$PATH:/usr/games"
-    }
+    fi
 
     exists yarn && export PATH="$(yarn global bin):$PATH"
 
@@ -139,13 +139,13 @@ echo "$PATH" | command grep -iq shellScripts || {
 #{{{                    MARK:Rust
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
-    exists exa && {
+    if exists exa; then
         alias exa="$EXA_COMMAND"
         if [[ $CUSTOM_COLORS = true ]]; then
             export LS_COLORS="fi=38:di=32;1:ex=31;1"
             export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"
         fi
-    }
+    fi
 
 #}}}***********************************************************
 
@@ -153,8 +153,9 @@ echo "$PATH" | command grep -iq shellScripts || {
 #**************************************************************
     export GOPATH="$HOME/go"
 
-    test -s "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" \
-        && source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
+    test -s \
+    "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" && \
+    source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
 }
 #}}}
 
@@ -291,7 +292,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     exists gls && \
         alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' \
         || alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
-    exists mvim && { 
+    exists mvim && {
         alias v='mvim -v'
         alias vi='mvim -v'
         alias vim='mvim -v'
@@ -323,8 +324,7 @@ else
             distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
         }
         case $distroName in
-            (raspbian)
-                source "$HOME/.rpitokens.sh"
+            (raspbian) source "$HOME/.rpitokens.sh"
                 ;;
             (ubuntu|debian|kali|linuxmint) :
                 ;;
@@ -338,7 +338,7 @@ else
         esac
     fi
 
-    exists vim && { 
+    exists vim && {
         alias v=vim
         alias vi=vim
         alias vm='vim -u ~/.minvimrc'
@@ -349,8 +349,8 @@ alias tclsh="rlwrap tclsh"
 alias logs="tail -f /var/log/**/*.log | ccze"
 alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
-alias tmm="python3 $PYSCRIPTS/ssh_starter.py" 
-alias tmm_full="python3 $PYSCRIPTS/complete_ssh_starter.py" 
+alias tmm="python3 $PYSCRIPTS/ssh_starter.py"
+alias tmm_full="python3 $PYSCRIPTS/complete_ssh_starter.py"
 alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 
@@ -418,7 +418,7 @@ r(){
     fi
 }
 
-[[ "$(uname)" == "Darwin" ]] && {
+if [[ "$(uname)" == "Darwin" ]]; then
 
     exe(){
         python3 "$PYSCRIPTS/ssh_runner.py" "$@"
@@ -443,14 +443,18 @@ r(){
 
     scriptToPDF(){
         tempFile=__test.ps
-        vim "$1" -c "hardcopy > $tempFile" -c quitall; cat "$tempFile" | open -fa Preview; rm "$tempFile"
+        vim "$1" -c "hardcopy > $tempFile" -c quitall
+        cat "$tempFile" | open -fa Preview
+        rm "$tempFile"
     }
 
-} || {
+else
     exists ps2pdf && {
         scriptToPDF(){
             tempFile=__test.ps
-            vim "$1" -c "hardcopy > $tempFile" -c quitall; ps2pdf "$tempFile" "${1%%.*}".pdf ; rm "$tempFile"
+            vim "$1" -c "hardcopy > $tempFile" -c quitall
+            ps2pdf "$tempFile" "${1%%.*}".pdf
+            rm "$tempFile"
         }
     }
 
@@ -476,12 +480,16 @@ r(){
         service="$1"
         src_dir="$FORKED_DIR/$REPO_NAME"
         local service_path="$src_dir/$service.service"
-        test -d "$src_dir" || { echo "$src_dir does not exists." >&2 && return 1; }
-        test -f "$service_path" || { echo "$service_path does not exists so falling back to $1." >&2 && service_path="$1"; }
+        test -d "$src_dir" || \
+            { echo "$src_dir does not exists." >&2 && return 1; }
+        test -f "$service_path" || \
+            { echo "$service_path does not exists so falling back to $1." >&2 && service_path="$1"; }
 
-        test -f "$service_path" || { echo "$service_path does not exists so exiting." >&2 && return 1; }
+        test -f "$service_path" || \
+            { echo "$service_path does not exists so exiting." >&2 && return 1; }
 
-        test -d "/etc/systemd/system" || { echo "/etc/systemd/system does not exists. Is systemd installed?" >&2 && return 1; }
+        test -d "/etc/systemd/system" || \
+            { echo "/etc/systemd/system does not exists. Is systemd installed?" >&2 && return 1; }
         git -C "$src_dir" pull
         group=$(id -gn)
         if [[ $UID != 0 ]]; then
@@ -497,7 +505,8 @@ r(){
         sudo journalctl -f
     }
 
-}
+fi
+
 cloneToForked(){
     branch=master
     (
@@ -515,9 +524,9 @@ s(){
     exists subl && cmd=subl || cmd="$(getOpenCommand)"
     type -a s | command grep -qv function && sec_cmd=s || sec_cmd="$cmd"
     if [[ $sec_cmd == s ]]; then
-        [[ -z "$1" ]] && $cmd . || command s "$@"
+        test -z "$1" && $cmd . || command s "$@"
     else
-        [[ -z "$1" ]] && $cmd . || $sec_cmd "$@"
+        test -z "$1" && $cmd . || $sec_cmd "$@"
     fi
 }
 
@@ -529,7 +538,7 @@ logg(){
             printf "\n"
         } >> "$LOGFILE"
     else
-        [[ -z "$1" ]] && echo "need arg" >&2 && return 1
+        test -z "$1" && echo "need arg" >&2 && return 1
         {
             printf "\n_____________$(date)____"
             printf "%s " "$@"
@@ -541,7 +550,7 @@ logg(){
 xx(){
     local counter cmd DONE
     cmd="$1"
-    [[ -z "$2" ]] && counter=100 || counter="$2"
+    test -z "$2" && counter=100 || counter="$2"
 
     trap 'DONE=true' QUIT
     DONE=false
@@ -559,7 +568,7 @@ url_safe(){
 cgh(){
     [[ -z "$1" ]] && user="$GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/$user" | \
-        command grep -E '[0-9] contributions' | sed 1q | tr -s ' '
+    command grep -E '[0-9] contributions' | sed 1q | tr -s ' '
 }
 
 upload(){
@@ -581,7 +590,7 @@ j(){
 }
 
 scnew(){
-    [[ -z "$1" ]] && echo "no arg..." >&2 && return 1
+    test -z "$1" && echo "no arg..." >&2 && return 1
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
@@ -611,7 +620,7 @@ b(){
 
     for cmd; do
         test -z $sleepTime && {
-            ( eval "$cmd" & ) 
+            ( eval "$cmd" & )
             p $(echo "$cmd" | awk '{print $1}')
         } || {
             ( eval "sleep $sleepTime && $cmd" & )
@@ -658,8 +667,7 @@ clearList() {
 
         exists exa && ls_command="$EXA_COMMAND" || {
             exists grc && {
-                ls_command="grc -c $HOME/conf.gls \
-                ls -iFlhA --color=always"
+        ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"
             } || {
                 ls_command="ls -iFhlA"
             }
@@ -667,8 +675,7 @@ clearList() {
         lib_command="ldd"
     else
         exists grc && {
-                ls_command="grc -c $HOME/conf.gls \
-                ls -iFlhA"
+                ls_command="grc -c $HOME/conf.gls ls -iFlhA"
             } || {
                 ls_command="ls -iFhlA"
             }
@@ -677,11 +684,11 @@ clearList() {
     fi
         if [[ -n "$1" ]]; then
             for arg in "$@"; do
-                exists $arg &&  {
+                if exists $arg; then
                     #exe matching
                     while read loc;do
                         lf="$(echo $loc|cut -d' ' -f3-10)"
-                        [[ -f "$lf" ]] && {
+                        if [[ -f "$lf" ]]; then
                             prettyPrint "$lf" && \
                             eval "$ls_command" $lf \
                             && prettyPrint "FILE TYPE:" && \
@@ -696,7 +703,7 @@ clearList() {
                             man -wa "$(basename $lf)"
                             echo
                             echo
-                        } || {
+                        else
                             echo "$loc"
                             echo "$loc" | command grep -q \
                                 "function" && {
@@ -710,9 +717,9 @@ clearList() {
                             }
                             echo
                             echo
-                        }
+                        fi
                     done < <(type -a "$arg" | sort | uniq)
-                } || {
+                else
                     #path matching, not exe
                     prettyPrint "$arg"
                     eval "$ls_command -d \"$arg\"" \
@@ -727,7 +734,7 @@ clearList() {
                     #for readibility
                     echo
                     echo
-                }
+                fi
             done
         else
             clear && eval "$ls_command"
@@ -738,15 +745,19 @@ listNoClear () {
     exists exa && eval "$EXA_COMMAND" && return 0
 
     if [[ "$(uname)" == "Darwin" ]]; then
-        exists grc && {
+        if exists grc; then
             grc -c "$HOME/conf.gls" gls \
             -iFlhA --color=always
-        } || ls -iFlhAO
+        else
+            ls -iFlhAO
+        fi
     else
-        exists grc && {
+        if exists grc; then
             grc -c "$HOME/conf.gls" \
             ls -iFlhA --color=always
-        } || ls -ifhla
+        else
+            ls -ifhla
+        fi
     fi
 }
 
@@ -799,7 +810,7 @@ execpy(){
 }
 
 search(){
-    [[ -z $2 ]] && command grep -iRnC 5 "$1" * || \
+    test -z $2 && command grep -iRnC 5 "$1" * || \
         command grep -iRnC 5 "$1" "$2"
 }
 
@@ -891,7 +902,7 @@ gitCommitAndPush(){
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
        if [[ "$currentDir" == "$dir" ]]; then
            return 1
-       fi 
+       fi
     done
 
     echo
@@ -905,13 +916,13 @@ replacer(){
     orig="$1"
     replace="$2"
     shift 2
-    test -n "$3" && {
+    if test -n "$3"; then
         for file in "$@" ; do
             sed -i'' "s@$orig@$replace@g" "$file"
         done
-    } || {
+    else
         cat | sed "s@$orig@$replace@g"
-    }
+    fi
 }
 
 creategif(){
@@ -929,8 +940,8 @@ creategif(){
 }
 
 hc(){
-    [[ -z "$1" ]] && reponame="$(basename "$(pwd)")" \
-        || reponame="$1"
+    test -z "$1" && reponame="$(basename "$(pwd)")" || \
+        reponame="$1"
     printf "\e[1m"
     old_dir="$(pwd)"
     test -n "$1" && cd "$reponame"
@@ -947,7 +958,7 @@ hc(){
 }
 
 hd(){
-    [[ -n "$1" ]] && repo="$1" && user="$GITHUB_ACCOUNT" || {
+    test -n "$1" && repo="$1" && user="$GITHUB_ACCOUNT" || {
 		if line="$(git remote -v 2>/dev/null | sed 1q)";then
             if echo "$line" | command grep -q 'git@';then
                 #ssh
@@ -980,15 +991,26 @@ hd(){
 }
 
 pstreemonitor(){
-    bash $SCRIPTS/myWatchNoBlink.sh "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
+    bash $SCRIPTS/myWatchNoBlink.sh \
+    "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
 }
 
 return2(){
-    exec 2> /dev/tty
+    if isZsh; then
+        exec 2> /dev/tty
+    else
+        echo "only for zsh" >&2
+        return 1
+    fi
 }
 
 color2(){
-    exec 2> >(redText.sh)
+    if isZsh; then
+        exec 2> >(redText.sh)
+    else
+        echo "only for zsh" >&2
+        return 1
+    fi
 }
 
 escapeRemove(){
@@ -1030,9 +1052,7 @@ alternatingPrettyPrint(){
             }
         $counter++;
         }; print "\x1b[0m"'
-
     fi
-
 }
 
 tac(){
@@ -1115,16 +1135,18 @@ jetbrainsWorkspaceEdit(){
     prettyPrint "MONITORING WORKSPACE..."
     perl -E 'say "_"x100'
     while true; do
-        command grep -q '<component name="RunManager" selected=' \
-            .idea/workspace.xml && {
+        if command grep -q '<component name="RunManager" selected=' \
+            .idea/workspace.xml; then
             perl -E 'say "_"x100' | lolcat
             figletRandomFontOnce.sh "MATCH ENJOY>>>>" \
             | ponysay -W 120
             perl -E 'say "_"x100' | lolcat
             sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
 
-    } || echo "No Match Yet" >&2
-    sleep 1
+        else
+            echo "No Match Yet" >&2
+            sleep 1
+        fi
     done
 }
 
@@ -1135,7 +1157,8 @@ getOpenCommand(){
         Darwin*)    open_cmd=open;;
         CYGWIN*)    open_cmd=cygstart;;
         MINGW*)     open_cmd=start;;
-        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
+        *)          echo "Your OS: $OS is unsupported..." >&2
+                    return 2;;
     esac
     echo "$open_cmd"
 }
@@ -1220,7 +1243,11 @@ getrc(){
             printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> "
             read
         fi
-        [[ $REPLY != "y" ]] && clearList && return 0
+
+        if [[ $REPLY != "y" ]]; then
+            clearList
+            return 0
+        fi
     fi
 
     if [[ -d "$ZPWR" ]]; then
@@ -1265,7 +1292,7 @@ rename(){
     search="$1"
     shift
     for file in "$@"; do
-        [[ -d "$file" ]] && continue
+        test -d "$file" && continue
         out=$(echo "$file" | sed -n "$search"p \
             |  wc -l | tr -d ' ')
         if (( $out != 0 )); then
@@ -1282,12 +1309,13 @@ torip(){
 }
 
 toriprenew() {
-    printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' \
-    | nc 127.0.0.1 9051
+    printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' | \
+        nc 127.0.0.1 9051
 }
 
 mycurl(){
-    \curl -fsSL -A "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 | sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|C)/d"
+    \curl -fsSL -A "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 | \
+    \sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|C)/d"
 }
 
 perlremovespaces(){
@@ -1329,12 +1357,14 @@ digs(){
     done
     shift $(($OPTIND-1))
 
-    [[ -z "$1" ]] && echo "need an arg" >&2 && return 1
-    exists grc && colo=grc || { 
+    if [[ -z "$1" ]]; then
+        echo "need an arg" >&2
+        return 1
+    fi
+    exists grc && colo=grc || {
         colo=
         echo "No grc colorizer no defaulting to no colors"
     }
-
 
     if [[ -n $colo ]] && [[ ! -f "$HOME/conf.whois" ]]; then
         echo "cannot proceed without $HOME/conf.whois for grc" >&2
@@ -1368,8 +1398,11 @@ digs(){
                 noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
                 prettyPrint "HOST: $noproto"
                 out="$($exe host "$noproto")"
-                exists lolcat && echo "$out" | \
-                    lolcat -f || echo "$out"
+                if exists lolcat; then
+                    echo "$out" | lolcat -f
+                else
+                    echo "$out"
+                fi
                 echo
                 if echo "$out" | command grep -q 'address';then 
                     #regular domain name
@@ -1430,7 +1463,7 @@ digs(){
                         fi
                     fi
                 fi
-                if exists http;then 
+                if exists http; then
                     prettyPrint "HTTPIE: $url"
                     torify http -v --follow --pretty=all "$url"
                 else
@@ -1452,11 +1485,9 @@ digs(){
         fi
     else
 
-        isZsh && \
-            colo=(grc --colour=on) || \
-            colo="grc --colour=on "
+        isZsh && colo=(grc --colour=on) || colo="grc --colour=on "
 
-        if exists dig;then
+        if exists dig; then
             for url in "$@"; do
                 noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
                 exec 2>&1
@@ -1465,7 +1496,11 @@ digs(){
                 noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
                 prettyPrint "HOST: $noproto"
                 out="$($colo $exe host "$noproto")"
-                exists lolcat && echo "$out" | lolcat -f || echo "$out"
+                if exists lolcat; then
+                    echo "$out" | lolcat -f
+                else
+                    echo "$out"
+                fi
                 echo
                 echo
                 if echo "$out" | command grep -q 'address';then 
@@ -1489,7 +1524,7 @@ digs(){
                     fi
                 else
                     out="$($colo $exe whois "$noproto")"
-                    if echo "$out" | grep -q 'No match';then
+                    if echo "$out" | grep -q 'No match'; then
                         prettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
@@ -1499,7 +1534,7 @@ digs(){
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     fi
                 fi
-                if exists http;then 
+                if exists http; then
                     prettyPrint "HTTPIE: $url"
                     $exe http -v --follow --pretty=all "$url"
                 else
@@ -1521,13 +1556,13 @@ digs(){
 to(){
     file="$HOME/.config/powerline/themes/tmux/default.json"
     [[ ! -f "$file" ]] && echo "no tmux config" >&2 && return 1
-    cat "$file" | grep -q "external_ip" && {
+    if cat "$file" | grep -q "external_ip"; then
         perl -pi -E 's@^.*external_ip.*$@@' "$file"
         printf "Removing External IP\n"
-    } || {
+    else
         perl -0pi -E 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
         printf "Adding External IP\n"
-    }
+    fi
 }
 
 ww(){
@@ -1578,11 +1613,12 @@ pre(){
 }
 
 exists pssh && pir(){
-        [[ -s "$HOME/hosts.txt" ]] || {\
-            echo "you need hosts.txt in your homedir" >&2 && \
-            return 1; }
-            pssh --inline-stdout --timeout 90 -h "$HOME"/hosts.txt "$@"
-    }
+    if test -s "$HOME/hosts.txt"; then
+        echo "you need hosts.txt in your homedir" >&2
+        return 1
+    fi
+    pssh --inline-stdout --timeout 90 -h "$HOME"/hosts.txt "$@"
+}
 
 c(){
     local colorizer=bat
@@ -1728,11 +1764,11 @@ fz(){
 
 figletfonts(){
 
-    [[ "$(uname)" == Darwin ]] && {
+    if [[ "$(uname)" == Darwin ]]; then
         FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
-    } || {
+    else
         FIGLET_DIR="/usr/share/figlet"
-    }
+    fi
 
     if [[ ! -d "$FIGLET_DIR" ]]; then
         echo "Can not find $FIGLET_DIR" >&2 && return 1
@@ -1775,16 +1811,19 @@ pygmentcolors(){
 
 alias da=detachall
 detachall(){
-    tmux list-clients | tr -d : | perl -ane '`tmux detach-client -t $F[0]`'
+    tmux list-clients | tr -d : | \
+        perl -ane '`tmux detach-client -t $F[0]`'
 }
 
 
 scripts(){
-    ( {
-        gvim -S ~/.vim/sessions/gvim.vim &> /dev/null
-        sleep 2
-        open -a Terminal.app
-    } &>/dev/null & )
+    (
+        {
+            gvim -S ~/.vim/sessions/gvim.vim &> /dev/null
+            sleep 2
+            open -a Terminal.app
+        } &>/dev/null &
+    )
 }
 
 export SCHEMA_NAME=root
