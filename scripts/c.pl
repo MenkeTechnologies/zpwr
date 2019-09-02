@@ -10,37 +10,42 @@
 use warnings;
 use strict;
 
-open my $less, "|-","less" or die $!;
+open my $less, "|-", "less" or die $!;
 
 use Env '@PATH';
-my $exe_bat = 'bat';
+my $exe_bat        = 'bat';
 my $exe_bat_exists = grep -x "$_/$exe_bat", @PATH;
 
-my $exe = 'pygmentize';
+my $exe        = 'pygmentize';
 my $exe_exists = grep -x "$_/$exe", @PATH;
 
-my $colorizer= $ENV{COLORIZER};
+my $colorizer        = $ENV{COLORIZER};
 my $PYGMENTIZE_COLOR = $ENV{PYGMENTIZE_COLOR};
+
 #expand $var
-$PYGMENTIZE_COLOR=~ s/(\$\w+)/$1/eeg;
+$PYGMENTIZE_COLOR =~ s/(\$\w+)/$1/eeg;
 
 select $less;
 for (@ARGV) {
-    if (! -d $_) {
-        if (`file "$_"` =~ /text/) {
-            if ($colorizer=~ "pygmentize") {
+    if ( !-d $_ ) {
+        if ( `file "$_"` =~ /text/ ) {
+            if ( $colorizer =~ "pygmentize" ) {
                 if ($exe_exists) {
-                    print "\x1b[4;1m$_\x1b[0m\n".`$colorizer "$_" | cat -n`."\n";
-                } else {
-                    print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
+                    print "\x1b[4;1m$_\x1b[0m\n"
+                      . `$colorizer "$_" | cat -n` . "\n";
                 }
-            } else {
+                else {
+                    print "\x1b[4;1m$_\x1b[0m\n" . `cat -n "$_"` . "\n";
+                }
+            }
+            else {
                 if ($exe_bat_exists) {
-                    print "\x1b[4;1m$_\x1b[0m\n".`$colorizer "$_"`."\n";
-                } else {
-                    print "\x1b[4;1m$_\x1b[0m\n".`cat -n "$_"`."\n";
+                    print "\x1b[4;1m$_\x1b[0m\n" . `$colorizer "$_"` . "\n";
                 }
-            
+                else {
+                    print "\x1b[4;1m$_\x1b[0m\n" . `cat -n "$_"` . "\n";
+                }
+
             }
 
         }
@@ -48,6 +53,4 @@ for (@ARGV) {
 }
 
 close $less;
-
-
 
