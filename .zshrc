@@ -69,13 +69,16 @@ export LC_ALL="en_US.UTF-8"
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-# Global Environment Variables for MenkeTechnologies
+# Global Environment Variables for ZPWR by MenkeTechnologies
+# see README.md
 MYPROMPT=POWERLEVEL
 EXPAND_SECOND_POSITION=true
 SURROUND=true
 CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
-start=$(date +%s)
+
+#profiling startup
+startTimestamp=$(date +%s)
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -90,7 +93,7 @@ if [[ $MYPROMPT == POWERLEVEL ]]; then
         ZSH_THEME=simonoff
     fi
 else
-    [[ ! -z $MYPROMPT ]] && ZSH_THEME=$MYPROMPT || ZSH_THEME=simonoff
+    test ! -z $MYPROMPT && ZSH_THEME=$MYPROMPT || ZSH_THEME=simonoff
 fi
 
 ZSH_DISABLE_COMPFIX=true
@@ -144,7 +147,7 @@ hg_prompt_info(){}
 # User configuration
 
 # Compilation flags
-# export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch x86_64"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -226,7 +229,7 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-#has all my aliases and functions
+#has all aliases and functions common to bourne like shells
 _alias_file="$HOME/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
@@ -249,7 +252,6 @@ sub (){
     zle .kill-whole-line
     BUFFER="suc"
     zle .accept-line
-
 }
 
 lastWordDouble(){
@@ -273,8 +275,6 @@ updater (){
     zle .accept-line
 }
 
-
-
 tutsUpdate() {
     commitMessage="$BUFFER"
     if [[ ! -z "$commitMessage" ]]; then
@@ -293,7 +293,7 @@ tutsUpdate() {
 }
 
 sshRegain() {
-    echo "$(command ps -ef)" | command  grep -q 'ssh ' && {
+    if echo "$(command ps -ef)" | command  grep -q 'ssh '; then
         if [[ "$BUFFER" != "" ]]; then
             print -sr "$BUFFER"
             local __NEW_BUFFER="exe \"$BUFFER\""
@@ -305,13 +305,15 @@ sshRegain() {
         else
             return 1
         fi
-    } || {
+    else
         zle .kill-whole-line
-        echo "$(command ps -ef)" | command grep -q 'tmux ' && {
+        if echo "$(command ps -ef)" | command grep -q 'tmux '; then
             BUFFER=tmm
-        } || BUFFER=tmm_full
+        else
+            BUFFER=tmm_full
+        fi
         zle .accept-line
-    }
+    fi
 }
 
 dbz() {
@@ -409,7 +411,7 @@ alternateQuotes(){
 clipboard(){
     [[ -z "$BUFFER" ]] && return 1
 
-    [[ "$(uname)" == Darwin ]] && {
+    if [[ "$(uname)" == Darwin ]]; then
         print -sr "$BUFFER"
         print -rn "$BUFFER" | pbcopy
         echo
@@ -418,23 +420,23 @@ clipboard(){
         print  "\"\x1b[0;34m to System Clipboard!"
         echo
         zle .redisplay
-    }  || {
-        type xclip &> /dev/null && {
-        print -sr "$BUFFER"
-        print -n "$BUFFER" | xclip -selection c -i
-        echo
-        print -n "\x1b[0;34mCopied \x1b[1m\""
-        print -nr "$BUFFER"
-        print  "\"\x1b[0;34m to System Clipboard!"
-        echo
-        zle .redisplay
-        } || {
+    else
+        if type xclip &> /dev/null; then
+            print -sr "$BUFFER"
+            print -n "$BUFFER" | xclip -selection c -i
             echo
-            printf  "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
+            print -n "\x1b[0;34mCopied \x1b[1m\""
+            print -nr "$BUFFER"
+            print  "\"\x1b[0;34m to System Clipboard!"
             echo
             zle .redisplay
-        }
-    }
+        else
+            echo
+            printf "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
+            echo
+            zle .redisplay
+        fi
+    fi
 }
 
 runner() {
@@ -474,7 +476,7 @@ fzvim(){
         perl -lne '$f=$_;$_=~s/~/$ENV{HOME}/;print $f if -f' | \
         fzf -m -e --no-sort --border --prompt='-->>> ' \
         --preview 'file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' | \
-            perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 vimFzf(){
     zle .kill-whole-line
@@ -486,17 +488,17 @@ vimFzf(){
         firstdir=${mywords[2]:h}
         #logg "words='$mywords[2]'=>'$firstdir'"
         #:h takes aways last "
-        BUFFER="cd $firstdir\"; $BUFFER; ll"
+        BUFFER="cd $firstdir\"; $BUFFER; clearList"
         zle .accept-line
     fi
 }
 
 fzfZList(){
-        z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
-            | perl -pe 's/$ENV{HOME}/~/' | \
-        fzf -e --no-sort --border --prompt='-->>> ' \
-        --preview 'file="$(eval echo {})"; stat "$file" | fold -80 | head -500' | \
-            perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
+    z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
+        | perl -pe 's/$ENV{HOME}/~/' | \
+    fzf -e --no-sort --border --prompt='-->>> ' \
+    --preview 'file="$(eval echo {})"; stat "$file" | fold -80 | head -500' | \
+        perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }
 
 zFZF(){
@@ -519,7 +521,7 @@ vimFzfSudo(){
         firstdir=${mywords[3]:h}
         #logg "words='$mywords[2]'=>'$firstdir'"
         #:h takes aways last "
-        BUFFER="cd $firstdir\"; $BUFFER; ll"
+        BUFFER="cd $firstdir\"; $BUFFER; clearList"
         zle .accept-line
     fi
 }
@@ -567,8 +569,7 @@ zle -N clearLine
 zle -N deleteLastWord
 zle -N lsoffzf
 
-
-#vim mode is default
+#vim mode for zle
 bindkey -v
 
 bindkey -M viins "^U" clearLine
@@ -686,18 +687,18 @@ bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
 if [[ "$(uname)" == Darwin ]];then
-    echo "$PARENT_PROCESS" | command egrep -q 'login|tmux' && {
+    if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
         bindkey '\e[1;5B' updater
         bindkey '\e[1;5C' tutsUpdate
         bindkey '\e[1;5D' dbz
-    } || {
+    else
         bindkey '\e[5A' gitfunc
         bindkey '\e[5B' updater
         bindkey '\e[5C' tutsUpdate
         bindkey '\e[5D' dbz
-    }
+    fi
 fi
 
 
@@ -730,9 +731,9 @@ my-accept-line () {
 
     for command in ${commandsThatModifyFiles[@]}; do
         regex="^sudo $command .*\$|^$command .*\$"
-        echo "$BUFFER" | command grep -q -E "$regex" && {
+        if echo "$BUFFER" | command grep -q -E "$regex"; then
             __WILL_CLEAR=true
-        }
+        fi
     done
     mywords=("${(z)BUFFER}")
 
@@ -742,7 +743,7 @@ my-accept-line () {
         #sudo =iftop fails so remove =
         cmd=${cmd#=}
         out="$(alias -- $cmd)"
-        echo "$out" | command grep -q -E "grc" && {
+        if echo "$out" | command grep -q -E "grc"; then
             cmdlet="$(eval echo "${out#*=}")"
             print -srn "$BUFFER"
             BUFFER="sudo $cmdlet $mywords[3,$]"
@@ -751,10 +752,10 @@ my-accept-line () {
             BUFFER=""
             zle .accept-line
             return 0
-        }
+        fi
     fi
 
-    [[ -z "$__GLOBAL_ALIAS_PREFIX" ]] && {
+    if [[ -z "$__GLOBAL_ALIAS_PREFIX" ]]; then
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             aliases="$(cat $HOME/.common_aliases)"
@@ -770,7 +771,7 @@ my-accept-line () {
                     BUFFER="$line $mywords[2,$]"
             fi
         fi
-    }
+    fi
 
 set +x
     zle .accept-line
@@ -814,7 +815,6 @@ rationalize-dot (){
     fi
 }
 
-
 zle -N rationalize-dot
 zle -N downTen
 bindkey -M viins . rationalize-dot
@@ -825,22 +825,20 @@ bindkey -M listscroll f complete-word
 bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
-[[ "$(uname)" == Darwin ]] && {
-    PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print}" \
-    | tr -s ' ' | cut -d ' ' -f9-)"
-    echo "$PARENT_PROCESS" | command egrep -q 'login|tmux' && {
+if [[ "$(uname)" == Darwin ]]; then
+    PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print}" | tr -s ' ' | cut -d ' ' -f9-)"
+    if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
         bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
         bindkey -M menuselect '\e[1;5C' vi-end-of-line
-    } || {
+    else
         bindkey -M menuselect '\e[5A' vi-backward-word
         bindkey -M menuselect '\e[5B' vi-forward-word
         bindkey -M menuselect '\e[5D' vi-beginning-of-line
         bindkey -M menuselect '\e[5C' vi-end-of-line
-    }
-} || {
-
+    fi
+else
     if [[ "$distroName" == raspbian ]]; then
         #bindkey -M menuselect '\eOA' vi-backward-word
         #bindkey -M menuselect '\eOB' vi-forward-word
@@ -853,7 +851,7 @@ bindkey -M menuselect '^f' accept-and-infer-next-history
         bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
         bindkey -M menuselect '\e[1;5C' vi-end-of-line
     fi
-}
+fi
 
 #bind function arrow keys in menuselect mode
 bindkey -M menuselect '\e[5~' vi-backward-word
@@ -918,7 +916,6 @@ EOLorNextTabStop(){
         CURSOR=$#BUFFER
         zle vi-insert
     fi
-
 }
 
 zle -N EOLorNextTabStop
@@ -1024,14 +1021,13 @@ export DIRSTACKSIZE=20
 
 #{{{                    MARK:AutoCompletions
 #**************************************************************
-
 zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
 date=$(date +'%j')
 
 if ((date >= (zcompdate + 7) ));then
 # avoid insecure warning message with -u
 # reload comps if file is stale for 1 week
-    logg 'regenerating ~/.zcompdump'
+    logg 'regenerating stale ~/.zcompdump'
     compinit -u
     zcompile $ZSH_COMPDUMP
 else
@@ -1086,6 +1082,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:warnings' format \
         $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
 fi
+
 zstyle ':completion:*' auto-description 'Specify: %d'
 
 # list of completers to use
@@ -1094,8 +1091,8 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # formatting and messages, blue text with red punctuation
-# zstyle ':completion:*' verbose yes
-# command descriptions
+
+# show command descriptions if available
 zstyle ':completion:*' extra-verbose yes
 
 # don't complete duplicates for these commands
@@ -1290,13 +1287,13 @@ bindkey -M isearch '^A' beginning-of-line
 #
 
 banner(){
-    bash "$fig" "$(hostname)" \
-    | ponysay -W 100
+    bash "$fig" "$(hostname)" | \
+    ponysay -W 100
 }
 bannerLolcat(){
-    bash "$fig" "$(hostname)" \
-    | ponysay -W 100 \
-    | splitReg.sh -- \
+    bash "$fig" "$(hostname)" | \
+    ponysay -W 100 | \
+    splitReg.sh -- \
     ---------------------- lolcat
 }
 noPonyBanner(){
@@ -1304,14 +1301,16 @@ noPonyBanner(){
 }
 
 revealRecurse(){
-    for i in **/*(/); do ( builtin cd $i && reveal 2>/dev/null); done
+    for i in **/*(/); do 
+        ( builtin cd $i && reveal 2>/dev/null; )
+    done
 }
 
 #}}}***********************************************************
 #
 #{{{                    MARK:Source Tokens
 #**************************************************************
-[[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
+test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
 #}}}***********************************************************
 
 #{{{                    MARK:Initialize Login
@@ -1322,9 +1321,9 @@ if [[ "$(uname)" = Darwin ]]; then
          #builtin cd "$D" && clear
         clear
         fig="$SCRIPTS/macOnly/figletRandomFontOnce.sh"
-        type figlet > /dev/null 2>&1 && {
+        if type figlet > /dev/null 2>&1; then
             printf "\e[1m"
-            [[ -f "$fig" ]] && {
+            if [[ -f "$fig" ]]; then
                 if [[ "$MYBANNER" == ponies ]]; then
                     if [[ -f "$SCRIPTS/splitReg.sh" ]];then
                         bannerLolcat
@@ -1334,8 +1333,8 @@ if [[ "$(uname)" = Darwin ]]; then
                 else
                     noPonyBanner
                 fi
-            }
-        }
+            fi
+        fi
         printf "\e[0m"
         listNoClear
     else
@@ -1349,9 +1348,11 @@ else
             case $distroName in
                 (raspbian)
                     builtin cd "$D"
-                    type ponysay 1>/dev/null 2>&1 && {
+                    if type ponysay 1>/dev/null 2>&1; then
                         bash "$HOME/motd.sh" | ponysay -W 120
-                    } || bash "$HOME/motd.sh"
+                    else
+                        bash "$HOME/motd.sh"
+                    fi
                     ;;
                 (ubuntu|debian|kali|linuxmint)
                     builtin cd "$D"
@@ -1400,14 +1401,13 @@ else
     fi
 fi
 
-#standard error colorization
+#stderr colorization filter
 #color2
 
 #change history file size
 export SAVEHIST=10000000
 #change history size in memory
 export HISTSIZE=10000000
-
 
 #set right prompt string during continuation
 RPS2='+%N:%i:%^'
@@ -1477,6 +1477,7 @@ fi
 if [[ -d "$DL" ]]; then
     : ~DL
 fi
+
 #}}}***********************************************************
 
 #{{{                    MARK:OPAM env
@@ -1706,20 +1707,20 @@ fzf_setup
 # killall ;<tab>
 _fzf_complete_killall() {
   _fzf_complete '-m' "$@" < <(
-    \ps -e -o command
+    command ps -e -o command
     )
 }
 
 # mvim ;<tab>
 _fzf_complete_mvim() {
   _fzf_complete '-m' "$@" < <(
-     command grep '^>' ~/.viminfo|cut -c3-|sed 's@~@'"$HOME"'@'
+     command grep '^>' ~/.viminfo | cut -c3- |sed 's@~@'"$HOME"'@'
     )
 }
 # vim ;<tab>
 _fzf_complete_vim() {
   _fzf_complete '-m' "$@" < <(
-     command grep '^>' ~/.viminfo|cut -c3-|sed 's@~@'"$HOME"'@'
+     command grep '^>' ~/.viminfo | cut -c3- |sed 's@~@'"$HOME"'@'
     )
 }
 # echo $;<tab>
@@ -1737,13 +1738,14 @@ _fzf_complete_alias() {
 # z ;<tab>
 _fzf_complete_z() {
   _fzf_complete '--ansi' "$@" < <(
-    _z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
+    z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
         | perl -pe 's/$ENV{HOME}/~/'
     )
 }
 
 test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \
     && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh"
+
 local base03="234"
 local base02="235"
 local base01="240"
@@ -1760,6 +1762,7 @@ local violet="61"
 local blue="33"
 local cyan="37"
 local green="64"
+
 # Solarized Dark color scheme for fzf
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
@@ -1873,12 +1876,12 @@ unset GROOVY_HOME # when set this messes up classpath
 alias -s txt='vim'
 #}}}***********************************************************
 
-#{{{                    MARK:SSH Public Key ID
+#{{fi
 #**************************************************************
 
 if [[ $TMUX_AUTO_ATTACH == true ]]; then
     if [[ "$(uname)" == Linux ]]; then
-        [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]] && {
+        if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
             mobile=true
             cat ~/.ssh/authorized_keys | command grep "$GITHUB_ACCOUNT" > ~/temp$$
 
@@ -1912,14 +1915,14 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
                 if (( $num_con == 1 )); then
                     logg "no tmux clients"
                     {
-                        tmux ls && {
+                        if tmux ls; then
                             tmux attach
                             logg "attaching to existing"
-                        } || {
+                        else 
                             tmux new-session \; \
                             source-file ~/.tmux/control-window
                             logg "creating new session"
-                        }
+                        fi
                     } &> /dev/null
                 else
                     tmux attach
@@ -1928,7 +1931,7 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
             else
                 logg "mobile so NO"
             fi
-        }
+        fi
 
     fi
 fi
@@ -1981,5 +1984,5 @@ fi
 exists thefuck && eval $(thefuck --alias)
 exists kubectl && source <(kubectl completion zsh)
 
-end=$(date +%s)
-logg "zsh startup took $((end - start)) seconds"
+endTimestamp=$(date +%s)
+logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
