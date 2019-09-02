@@ -19,14 +19,13 @@ sub printD{
     say "\x{1215}" x $width;
 }
 
-$widthHalf = $width / 4;
+my $widthHalf = $width / 4;
 
 sub printDate{
     say "\x{1215}" x $width;
     print " " x $widthHalf;
     print "$date";
     say "\x{1215}" x $width;
-
 }
 
 printD;

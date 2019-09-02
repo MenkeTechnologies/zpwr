@@ -16,17 +16,18 @@ bash S2 &
 s2_pid="$!"
 
 {
-bash S4
-#once s4 is done, s4 echoed to temp file
-echo s4 >> temp."`whoami`"
+    bash S4
+    #once s4 is done, s4 echoed to temp file
+    echo s4 >> temp."`whoami`"
 } &
 s4_pid="$!"
 
 {
-bash S5
-#once s5 is done, s5 echoed to temp file
-echo s5 >> temp."`whoami`"
+    bash S5
+    #once s5 is done, s5 echoed to temp file
+    echo s5 >> temp."`whoami`"
 } &
+
 s5_pid="$!"
 
 {
@@ -46,10 +47,11 @@ s5_pid="$!"
 s10_pid="$!"
 
 {
-bash S8
-wait "$!"
-bash s9
+    bash S8
+    wait "$!"
+    bash s9
 } &
+
 s8_pid="$!"
 
 #block for s1 and s2
@@ -61,4 +63,3 @@ s3_pid="$!"
 wait $s3_pid $s4_pid $s5_pid
 bash S6 &
 s6_pid="$!"
-

@@ -13,7 +13,7 @@ trap 'fortuneQuote=$(fortune)' 3
 declare -a ary
 
 for file in $(cowsay -l); do
-    ary+=( $file )
+    ary+=( "$file" )
 done
 rangePossibleIndices=${#ary[*]}
 
@@ -21,10 +21,10 @@ while true; do
     tput civis
     fortuneQuote="$(fortune)"
     if [[ "$1" ]]; then
-        fortuneQuote="$(figlet -f $1 \"$fortuneQuote\")"
+        fortuneQuote="$(figlet -f "$1" \"$fortuneQuote\")"
     fi
     clear
-    randIndex=$(($RANDOM % $rangePossibleIndices))
+    randIndex=$(( RANDOM % rangePossibleIndices ))
     view=${ary[$randIndex]}
 
     if [[ "$2" ]]; then

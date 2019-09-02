@@ -10,25 +10,25 @@
 dir_watching="$1"
 while read -d "" event; do
 
-	fileName=`basename $event`
-	watchingFile=`basename $2`
+    fileName=$(basename $event)
+    watchingFile=$(basename $2)
 
 	#ignored the intermediate files that are changing
-	if [[ $fileName == $watchingFile ]]; then
+	if [[ $fileName == "$watchingFile" ]]; then
 		#grab error output
-		output="$(rustc $2 2>&1)" && {
+		if output="$(rustc $2 2>&1)"; then
 			#if successful compilation get compiled file name
 			compiled=${fileName%*.rs}
 			#clear screen to maintain
 		    clear
 		    #execute compiled file and then delete it
-		    ./$compiled && rm $compiled
-		} || {
+		    ./"$compiled" && rm "$compiled"
+        else
 			#we have and error in compilation so show the error
 		    clear
 			# echo "match @ $fileName"
 		    echo "$output"
-		}
+        fi
 
 	else
 		:

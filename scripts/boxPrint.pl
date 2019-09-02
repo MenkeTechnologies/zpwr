@@ -31,9 +31,7 @@ if ($full == 0 ) {
         if (defined $ENV{'COLUMNS'}) {
             $width= $ENV{'COLUMNS'}
         }
-        
     }
-
 
     if ($width % 2 == 1) {
         $width-=1;
@@ -58,7 +56,6 @@ if (scalar @ARGV > 0) {
         chomp $_;
         $ ~= s@\s+@ @g;
         $str .= $_;
-
     }
 }
 

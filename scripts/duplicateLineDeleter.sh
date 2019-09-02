@@ -22,7 +22,7 @@ EOM
 (( $# < 1 )) && usage >&2 && exit 1
 
 if [[ ! -d "$backup_dir" ]]; then
-	mkdir $backup_dir
+	mkdir "$backup_dir"
 fi
 
 for file; do
@@ -30,5 +30,3 @@ for file; do
 	contents=$(cat -s "$file")
 	echo "$contents" > "$file"
 done
-
-#sed -e 1d -e 3d -e 5d -e 10d
