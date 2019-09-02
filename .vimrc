@@ -47,7 +47,6 @@ filetype plugin indent on
 "backslash replaced by space for leader keybindings
 let mapleader = "\<space>"
 
-set nocompatible              " be improved, required
 "for youcompleteme doc window to open at bottom
 set splitright
 set noswapfile
