@@ -834,8 +834,18 @@ contribcount(){
 }
 
 linecontribcount(){
-    lines="$(git ls-files | xargs -I {} git blame {} 2>/dev/null | cut -d '(' -f2 2>/dev/null | perl -pe 's@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s+\d+:\d+.*\).*$@$1@' | sort | uniq -c | sort -r)"
-    lineCount="$(echo $lines | wc -l)"
+
+    prettyPrint "starting line contrib count..."
+    {
+   
+    while read; do
+        git blame "$REPLY" | cut -d '(' -f2 | \
+        perl -pe 's@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s+\d+:\d+.*\).*$@$1@'
+    done < <(git ls-files) 2>/dev/null
+
+    } | sort | uniq -c | sort -r > ~/.temp$$
+
+    lineCount="$(wc -l ~/.temp$$)"
     if (( $lineCount > 10 )); then
         echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint | less -r
@@ -843,6 +853,8 @@ linecontribcount(){
         echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint
     fi
+
+    command rm ~/.temp$$
 
 }
 
