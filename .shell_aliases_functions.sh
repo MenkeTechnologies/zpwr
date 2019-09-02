@@ -21,17 +21,20 @@
 #{{{                    MARK:Global Fxn
 
 isZsh(){
-    if \ps -ef | \tr -s ' ' | \cut -d' ' -f3,9 | command grep --color=always $$ | command grep -q zsh;then
+    if \ps -ef | \tr -s ' ' | \cut -d' ' -f3,9 \
+        | command grep --color=always $$ | command grep -q zsh; then
         return 0
     else
         return 1
     fi
 }
 
-if isZsh;then
+if isZsh; then
     exists(){
         #alternative is command -v
-        type "$1" &>/dev/null || return 1 && type "$1" 2>/dev/null | command grep -qv "suffix alias" 2>/dev/null
+        type "$1" &>/dev/null || return 1 && \
+        type "$1" 2>/dev/null | \
+        command grep -qv "suffix alias" 2>/dev/null
     }
 
 else
@@ -45,9 +48,10 @@ fi
 
 #{{{                    MARK:Global Vars
 #**************************************************************
+#tmux prefix on outer session
 export TMUX_PREFIX=x
 export TMUX_REMOTE_PREFIX=b
-[[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
+test -f "$HOME/.tokens.sh"  && source "$HOME/.tokens.sh"
 export DELIMITER_CHAR='%'
 
 #bash xtrace
