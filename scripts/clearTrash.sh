@@ -15,7 +15,7 @@ else
     distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
 
     case $distroName in
-        Raspbian ) rm -rf $HOME/.local/share/Trash/files/*
+        Raspbian ) rm -rf "$HOME/.local/share/Trash/files/"*
             ;;
         * )
             printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2

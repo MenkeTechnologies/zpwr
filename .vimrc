@@ -960,6 +960,8 @@ inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
 inoremap <silent> <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
 inoremap <silent> <C-D>q <C-O>:SaveSession!<CR><TAB>
 inoremap <silent> <C-D>o <C-O>:ALEToggle<CR>
+inoremap <silent> <C-D>i <C-O>:ALEInfo<CR>
+inoremap <silent> <C-D>k <C-O>:ALEFix<CR>
 
 "normal mode keybindings for fzf-vim
 nnoremap <silent> <C-D>f :Files<CR>
@@ -978,6 +980,8 @@ nnoremap <silent> <C-D>p :call GetRef()<CR>
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
 nnoremap <silent> <C-D>o :ALEToggle<CR>
+nnoremap <silent> <C-D>i :ALEInfo<CR>
+nnoremap <silent> <C-D>k :ALEFix<CR>
 
 "gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins 
 set updatetime=100
@@ -1033,7 +1037,7 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 "powerline-status pip package installs to different locations of different OS
 let os = substitute(system('uname'), "\n", "", "")
 
-if os == "Darwin"
+if os == 'Darwin'
     "if has('python3')
     "command! -nargs=1 Py py3 <args>
     "set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
@@ -1137,6 +1141,12 @@ let g:fzf_colors =
             \ 'marker':  ['fg', 'Keyword'],
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
+
+let g:ale_linters = {'perl': ['perl', 'perlcritic']}
+let g:ale_perl_perlcritic_showrules = 1
+let g:ale_set_balloons = 1
+let g:ale_completion_enabled = 1
+let g:ale_fixers = {'sh': ['shfmt'], 'perl': ['perltidy'], 'py': ['yapf']}
 
 "give :Ag preview window with first line of matched file matches fzf input
 command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))

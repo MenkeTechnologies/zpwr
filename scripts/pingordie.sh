@@ -26,25 +26,26 @@ restart_wlan0() {
     ifup --force wlan0
     sleep 60
     host_status=$(fping $gateway_ip)
-    echo "$host_status" | grep -iq alive || {
+    if echo "$host_status" | grep -iq alive; then
         echo "$(date) Network failed...rebooting"
         sudo reboot
-    }
+    fi
 }
 
-while (( $network_check_tries < $network_check_threshold )); do
+while (( network_check_tries < network_check_threshold )); do
 
     host_status=$(fping $gateway_ip)
 
     (( network_check_tries++ ))
-    
-    echo "$host_status" | grep -iq alive && {
-        echo "$(date) Network is working correctly" && exit 0
-    } || {
+
+    if echo "$host_status" | grep -iq alive; then
+        echo "$(date) Network is working correctly"
+        exit 0
+    else
         echo "$(date) Network is down, failed check number $network_check_tries of $network_check_threshold"
-    }
-    
-    (($network_check_tries >= $network_check_threshold)) && restart_wlan0
+    fi
+
+    (( network_check_tries >= network_check_threshold)) && restart_wlan0
 
     sleep 5
 done

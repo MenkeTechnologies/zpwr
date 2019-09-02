@@ -56,8 +56,7 @@ showHidden(){
 #valid options
 optstring=shta
 
-while getopts $optstring opt
-do
+while getopts $optstring op; do
     case $opt in
         h) usage ; exit;;
         #set boolean for sorted

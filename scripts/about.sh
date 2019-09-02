@@ -91,7 +91,6 @@ cat<<EOF
 EOF
 
 printf "\x1b[0m"
-printf "\x1b[0m"
 printf "\x1b[35m"
 printf "\x1b[4m"
 

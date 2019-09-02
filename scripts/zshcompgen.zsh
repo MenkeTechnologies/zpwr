@@ -59,7 +59,6 @@ for command abs in ${(kv)commands}; do
        echo
        echo "_____completion for $command exists_____"
        echo
-       
     fi
 
 done

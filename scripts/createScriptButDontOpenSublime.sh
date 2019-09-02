@@ -13,7 +13,6 @@ executableScriptsProcessing(){
 	#add hr	echo "#created by JAKOBMENKE --> `date` " >> "$newfile"
 	#and open file
 	openTextEditor
-
 }
 
 openTextEditor(){
@@ -25,7 +24,7 @@ openTextEditor(){
 
 createTheFile(){
 	#create newfile
-	> "$newfile"
+	touch "$newfile"
 
 	#echo shebang line into newfile
 	case "$1" in
