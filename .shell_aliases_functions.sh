@@ -822,6 +822,11 @@ cd(){
 }
 
 contribcount(){
+    if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
+        printf "\x1b[0;1;31m"
+        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        printf "\x1b[0m"
+    fi
     lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
     if (( $lineCount > 10 )); then
@@ -835,6 +840,11 @@ contribcount(){
 
 linecontribcount(){
 
+    if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
+        printf "\x1b[0;1;31m"
+        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        printf "\x1b[0m"
+    fi
     prettyPrint "starting line contrib count..."
     {
    
@@ -859,12 +869,11 @@ linecontribcount(){
 }
 
 gsdc(){
-    git status &> /dev/null || {
+    if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
         printf "\x1b[0;1;31m"
         printf "NOT GIT DIR: $(pwd -P)\n" >&2
         printf "\x1b[0m"
-        return 1
-    }
+    fi
 
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
@@ -910,6 +919,12 @@ gsdc(){
 }
 
 gitCommitAndPush(){
+    git status &> /dev/null || {
+        printf "\x1b[0;1;31m"
+        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        printf "\x1b[0m"
+        return 1
+    }
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
        if [[ "$currentDir" == "$dir" ]]; then
