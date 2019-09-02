@@ -840,6 +840,9 @@ contribcount(){
     fi
 }
 
+isbinary() {
+  LC_MESSAGES=C grep -Hm1 '^' < "${1-$REPLY}" | grep -q '^Binary'
+}
 
 totallines(){
 
@@ -854,6 +857,7 @@ totallines(){
     {
    
     while read; do
+        isbinary "$REPLY" && continue
         filter=false
         for arg in "$@"; do
            if echo "$REPLY" | grep -q "$arg"; then
@@ -901,8 +905,18 @@ linecontribcount(){
     {
    
     while read; do
-        git blame "$REPLY" | cut -d '(' -f2 | \
-        perl -pe 's@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s+\d+:\d+.*\).*$@$1@'
+        isbinary "$REPLY" && continue
+        filter=false
+        for arg in "$@"; do
+           if echo "$REPLY" | grep -q "$arg"; then
+               filter=true
+               break
+           fi 
+       done
+        if [[ $filter = false ]]; then
+    git blame "$REPLY" | cut -d '(' -f2 | \
+    perl -pe 's@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s+\d+:\d+.*\).*$@$1@'
+        fi
     done < <(git ls-files) 2>/dev/null
 
     } | sort | uniq -c | sort -r > "$temp"
