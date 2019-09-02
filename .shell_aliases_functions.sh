@@ -830,6 +830,7 @@ contribcount(){
     fi
     lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
+    prettyPrint "Contribution Count"
     if (( $lineCount > 10 )); then
         echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint | less -r
@@ -847,6 +848,7 @@ linecontribcount(){
         printf "\x1b[0m"
         return 1
     fi
+    temp="$HOME/.temp$$"
     prettyPrint "starting line contrib count..."
     {
    
@@ -855,18 +857,25 @@ linecontribcount(){
         perl -pe 's@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s+\d+:\d+.*\).*$@$1@'
     done < <(git ls-files) 2>/dev/null
 
-    } | sort | uniq -c | sort -r > ~/.temp$$
+    } | sort | uniq -c | sort -r > "$temp"
 
-    lineCount="$(wc -l ~/.temp$$)"
-    if (( $lineCount > 10 )); then
-        echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
-            alternatingPrettyPrint | less -r
-    else
-        echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
-            alternatingPrettyPrint
+    if ! -f "$temp"; then
+        printf "\x1b[0;1;31m"
+        printf "where is $temp\n" >&2
+        printf "\x1b[0m"
+        return 1
     fi
 
-    command rm ~/.temp$$
+    prettyPrint "Line Contribution Count"
+    lineCount="$(cat "$temp" | wc -l)"
+    if (( $lineCount > 10 )); then
+        cat "$temp" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+            alternatingPrettyPrint | less -r
+    else
+        cat "$temp" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+            alternatingPrettyPrint
+    fi
+    command rm "$temp"
 
 }
 
