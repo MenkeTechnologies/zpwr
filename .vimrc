@@ -1142,6 +1142,9 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 
+set ballooneval
+set balloonevalterm
+
 let g:ale_linters = {'perl': ['perl', 'perlcritic']}
 let g:ale_perl_perlcritic_showrules = 1
 let g:ale_set_balloons = 1
