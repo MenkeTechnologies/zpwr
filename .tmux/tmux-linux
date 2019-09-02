@@ -18,13 +18,13 @@ bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pan
 bind-key C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
 
 unbind -T copy-mode-vi Enter
-bind -T copy-mode-vi y send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard"
+bind-key -T copy-mode-vi y send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard"
 
-bind -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
 
-bind -T copy-mode-vi m send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh google"
+bind-key -T copy-mode-vi m send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh google"
 
-bind -T copy-mode-vi s send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh google"
+bind-key -T copy-mode-vi s send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh google"
 
 bind -T copy-mode-vi z send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh google"
 
