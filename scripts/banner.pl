@@ -4,8 +4,8 @@ use utf8;
 use feature 'say';
 
 my $width = 80;
-my $date =`date`;
-my $str=<<'EOM';
+my $date  = `date`;
+my $str   = <<'EOM';
                    .-, .--. ,-. .-..---. ,---.             ,---.  .-. .-.,-. .-.,---.
                    | |/ /\ \| |/ // .-. )| .-.\   |\    /| | .-'  |  \| || |/ / | .-'
                    | / /__\ \ | / | | |(_) |-' \  |(\  / | | `-.  |   | || | /  | `-.
@@ -15,13 +15,13 @@ my $str=<<'EOM';
                    (_)      (_)   (_)   (__)      '-'  '-'(__)   (__)    (_)   (__)
 EOM
 
-sub printD{
+sub printD {
     say "\x{1215}" x $width;
 }
 
 my $widthHalf = $width / 4;
 
-sub printDate{
+sub printDate {
     say "\x{1215}" x $width;
     print " " x $widthHalf;
     print "$date";
@@ -29,6 +29,7 @@ sub printDate{
 }
 
 printD;
+
 #print $str;
 print `bash figletRandomFontOnce.sh MenkeTechnologies`;
 printD;
