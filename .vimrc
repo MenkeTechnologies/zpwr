@@ -958,7 +958,7 @@ inoremap <silent> <C-D>s <C-O>:History/<CR>
 inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
 inoremap <silent> <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
 inoremap <silent> <C-D>q <C-O>:SaveSession!<CR><TAB>
-inoremap <silent> <C-D>a <C-O>:ALEToggle<CR>
+inoremap <silent> <C-D>o <C-O>:ALEToggle<CR>
 
 "normal mode keybindings for fzf-vim
 nnoremap <silent> <C-D>f :Files<CR>
@@ -975,7 +975,7 @@ nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>p :call GetRef()<CR>
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
-nnoremap <silent> <C-D>a :ALEToggle<CR>
+nnoremap <silent> <C-D>o :ALEToggle<CR>
 
 "gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins 
 set updatetime=100
