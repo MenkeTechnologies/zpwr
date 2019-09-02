@@ -826,6 +826,7 @@ contribcount(){
         printf "\x1b[0;1;31m"
         printf "NOT GIT DIR: $(pwd -P)\n" >&2
         printf "\x1b[0m"
+        return 1
     fi
     lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
@@ -844,6 +845,7 @@ linecontribcount(){
         printf "\x1b[0;1;31m"
         printf "NOT GIT DIR: $(pwd -P)\n" >&2
         printf "\x1b[0m"
+        return 1
     fi
     prettyPrint "starting line contrib count..."
     {
@@ -873,6 +875,7 @@ gsdc(){
         printf "\x1b[0;1;31m"
         printf "NOT GIT DIR: $(pwd -P)\n" >&2
         printf "\x1b[0m"
+        return 1
     fi
 
     currentDir="$(pwd -P)"
