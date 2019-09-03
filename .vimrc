@@ -1151,6 +1151,8 @@ let g:ale_set_balloons = 1
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {'ruby': ['rubocop'], 'sh': ['shfmt'], 'perl': ['perltidy'], 'python': ['yapf']}
 
+let g:ale_perl_perlcritic_options = '--brutal'
+
 "give :Ag preview window with first line of matched file matches fzf input
 command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
 

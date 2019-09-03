@@ -11,4 +11,3 @@ while read f; do
         echo "keeping $f"
     fi
 done < <(git status -u | command grep _ | perl -pe 's@\s@@')
-

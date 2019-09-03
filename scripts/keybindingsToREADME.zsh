@@ -4,9 +4,8 @@
 ##### Author: WIZARD
 ##### Date: Tue Mar  5 11:26:41 EST 2019
 ##### Purpose: zsh script to gen the keybindings for README
-##### Notes: 
+##### Notes:
 #}}}***********************************************************
-
 
 {
     echo "# Tmux keybindings (tmux lsk)"
@@ -20,7 +19,7 @@
 
     echo "# Zsh Menuselect Mode keybindings (bindkey -M menuselect -L)"
     bindkey -M menuselect -L
-    
+
     echo "# Zsh Vim Visual Mode keybindings (bindkey -M visual -L)"
     bindkey -M visual -L
 
@@ -39,7 +38,7 @@
     vim -e -c 'redir > temp2 | silent nmap | redir END | quitall'
     cat temp2
     echo
-        
+
     printf "# Vim Keybindings Visual Mode (:vmap)"
     vim -e -c 'redir > temp3 | silent vmap | redir END | quitall'
     cat temp3
@@ -52,7 +51,7 @@
 
     command rm temp{1..4}
 
-} | perl -ne 'print if /\S+/' > temp$$
+} | perl -ne 'print if /\S+/' >temp$$
 
 #do not know why have to create tempfile here
 perl -pe 's@^([^#].*)$@- ```$1```@g' temp$$ | perl -pe 's@(.*) \(:.map\).*@$1@'
