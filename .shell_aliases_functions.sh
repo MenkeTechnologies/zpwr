@@ -1377,7 +1377,7 @@ getrc(){
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*;do
         printf "$dir: "
-        test -d "$dir" && git -C "$dir" pull
+        test -d "$dir" && ( cd "$dir" && git pull; )
     done
 
     rm -rf "$REPO_NAME"
