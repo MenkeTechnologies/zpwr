@@ -4,18 +4,18 @@ import sys
 
 
 class CodeFile:
-    def __init__(self, filename, dir, contents):
+    def __init__(self, filename, directory, contents):
         self.filename = filename
-        self.dir = dir
+        self.directory = directory
         self.contents = contents
 
 
 def spring_routine(package, name):
-    dir = "src/main/java/" + package.replace(".", "/")
-    check_dir_exists(dir)
+    directory = "src/main/java/" + package.replace(".", "/")
+    check_dir_exists(directory)
 
     spring_files = []
-    modelFile = f'{name}.java'
+    model_file = f'{name}.java'
     model = f'''package {package}.domain;
 
 import javax.persistence.Column;
@@ -30,7 +30,7 @@ public class {name} {{
 
 }}
 '''
-    spring_files.append(CodeFile(modelFile, f"{dir}/domain", model))
+    spring_files.append(CodeFile(model_file, f"{directory}/domain", model))
     repoFile = f'{name}Repository.java'
     repo = f'''package {package}.repository;
 
@@ -38,10 +38,10 @@ import {package}.domain.{name};
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface {name}Repository extends JpaRepository<{name}, Long> {{
-    
+
 }}
 '''
-    spring_files.append(CodeFile(repoFile, f"{dir}/repository", repo))
+    spring_files.append(CodeFile(repoFile, f"{directory}/repository", repo))
     resourceFile = f'{name}Controller.java'
     resource = f'''package {package}.controller;
 
@@ -65,23 +65,23 @@ public class {name}Controller {{
 
 }}
 '''
-    spring_files.append(CodeFile(resourceFile, f"{dir}/controller", resource))
+    spring_files.append(CodeFile(resourceFile, f"{directory}/controller", resource))
     for file in spring_files:
-        if not os.path.exists(file.dir):
-            os.mkdir(file.dir)
+        if not os.path.exists(file.directory):
+            os.mkdir(file.directory)
 
-        if os.path.exists(f"{file.dir}/{file.filename}"):
+        if os.path.exists(f"{file.directory}/{file.filename}"):
             sys.stderr.write(f"file {file.filename} already exists...\n")
             return
-        with open(f"{file.dir}/{file.filename}", "w") as f:
+        with open(f"{file.directory}/{file.filename}", "w") as f:
             f.write(file.contents)
 
 
 def react_routine(name):
-    dir = "src/components"
-    check_dir_exists(dir)
+    directory = "src/components"
+    check_dir_exists(directory)
 
-    modelFile = f'{name}.js'
+    model_file = f'{name}.js'
     model = f"""import React from 'react';
 export default class {name} extends React.Component {{
     render() {{
@@ -93,25 +93,25 @@ export default class {name} extends React.Component {{
     }}
 }}
 """
-    file = CodeFile(modelFile, dir, model)
+    file = CodeFile(model_file, directory, model)
 
-    if not os.path.exists(file.dir):
-        os.mkdir(file.dir)
+    if not os.path.exists(file.directory):
+        os.mkdir(file.directory)
 
-    if os.path.exists(f"{file.dir}/{file.filename}"):
+    if os.path.exists(f"{file.directory}/{file.filename}"):
         sys.stderr.write(f"file {file.filename} already exists...\n")
         return
-    with open(f"{file.dir}/{file.filename}", "w") as f:
+    with open(f"{file.directory}/{file.filename}", "w") as f:
         f.write(file.contents)
 
 
-def check_dir_exists(dir):
-    if not os.path.exists(dir):
-        print(f"\n_____________{dir} must exist_____________\n")
-        print(f"create {dir}?")
+def check_dir_exists(directory):
+    if not os.path.exists(directory):
+        print(f"\n_____________{directory} must exist_____________\n")
+        print(f"create {directory}?")
         ans = input()
         if ans == "y":
-            os.makedirs(dir)
+            os.makedirs(directory)
         else:
             exit(1)
 
