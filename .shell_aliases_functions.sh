@@ -1963,7 +1963,7 @@ se(){
         # escaping for perl $ and @ sigils
         argdollar=${arg//$/\\$}
         arg=${argdollar//@/\\@}
-        echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | nl -b a -n rz | perl -E 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$arg"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+        echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$arg"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
         if [[ -z "$2" ]]; then
             if [[ "$CUSTOM_COLORS" = true ]]; then
                 paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'

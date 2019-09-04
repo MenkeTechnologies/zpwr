@@ -897,7 +897,7 @@ endfunction
 function TmuxRepeatGeneric()
     silent! exec "!tmux send-keys -t right C-c ' clear' C-m up up C-m"
     redraw!
-    exe "normal! zz"
+    exe 'normal! zz'
 endfunction
 
 autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<CR>a
@@ -919,7 +919,7 @@ endfunction
 
 function! GetRef()
     let mystr = Strip(getline('.'))
-    echom "Copied " . mystr
+    echom 'Copied ' . mystr
     let @* = expand('%:p').': '.line('.').' '.mystr
 endfunction
 
