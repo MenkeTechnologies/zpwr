@@ -9,7 +9,7 @@
 
 export DELIMITER_CHAR='%'
 
-alternatingPrettyPrint(){
+alternatingPrettyPrint() {
     counter=0
 
     if [[ -z $1 ]]; then
@@ -33,7 +33,7 @@ alternatingPrettyPrint(){
                  print "\x1b[1;4;34m$arg\x1b[0m"
             }
         $counter++;
-        }; print "\x1b[0m"' <<< "$@"
+        }; print "\x1b[0m"' <<<"$@"
 
     fi
 
@@ -94,4 +94,3 @@ else
     #update pip itself
     sudo python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
 fi
-

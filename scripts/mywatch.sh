@@ -9,27 +9,32 @@
 
 trap "tput cnorm; exit" INT TERM QUIT
 
-usage(){
+usage() {
 
     cat <<EOM
     usage:
     -h	help
     -d 	display date
 EOM
-exit 1
+    exit 1
 }
 
 optstring=dh
-while getopts $optstring opt
-do
+while getopts $optstring opt; do
     case $opt in
-        h) usage >&2; break;;
-        d)dateflag=true;break;;
-        *) usage >&2;;
+    h)
+        usage >&2
+        break
+        ;;
+    d)
+        dateflag=true
+        break
+        ;;
+    *) usage >&2 ;;
     esac
 done
 
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 if [[ -z "$1" ]]; then
     echo "nee<F5>d an arg" >&2
@@ -54,7 +59,7 @@ while true; do
     if [[ $dateflag == true ]]; then
         echo "$output"
         echo
-        printf "\e[1m`date`\e[0m"
+        printf "\e[1m$(date)\e[0m"
     else
         echo -n "$output"
     fi

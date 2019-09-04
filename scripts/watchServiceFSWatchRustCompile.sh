@@ -13,26 +13,26 @@ while read -d "" event; do
     fileName=$(basename $event)
     watchingFile=$(basename $2)
 
-	#ignored the intermediate files that are changing
-	if [[ $fileName == "$watchingFile" ]]; then
-		#grab error output
-		if output="$(rustc $2 2>&1)"; then
-			#if successful compilation get compiled file name
-			compiled=${fileName%*.rs}
-			#clear screen to maintain
-		    clear
-		    #execute compiled file and then delete it
-		    ./"$compiled" && rm "$compiled"
+    #ignored the intermediate files that are changing
+    if [[ $fileName == "$watchingFile" ]]; then
+        #grab error output
+        if output="$(rustc $2 2>&1)"; then
+            #if successful compilation get compiled file name
+            compiled=${fileName%*.rs}
+            #clear screen to maintain
+            clear
+            #execute compiled file and then delete it
+            ./"$compiled" && rm "$compiled"
         else
-			#we have and error in compilation so show the error
-		    clear
-			# echo "match @ $fileName"
-		    echo "$output"
+            #we have and error in compilation so show the error
+            clear
+            # echo "match @ $fileName"
+            echo "$output"
         fi
 
-	else
-		:
-		# echo "no match @ $fileName"
-	fi
+    else
+        :
+        # echo "no match @ $fileName"
+    fi
 
-done < <(fswatch -r -0 -E "$dir_watching" -e "/\.." )
+done < <(fswatch -r -0 -E "$dir_watching" -e "/\..")

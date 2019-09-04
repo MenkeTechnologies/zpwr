@@ -9,8 +9,7 @@
 
 trap 'rm "$file"' INT
 
-function usage ()
-{
+function usage() {
     echo -e "\e[34mUsage : $0 [options] [--]
 
     Options:
@@ -28,33 +27,41 @@ __ScriptVersion=1.0.0
 
 level=1
 
-while getopts "hvil:" opt
-do
-  case $opt in
+while getopts "hvil:" opt; do
+    case $opt in
 
-    h|help )  usage; exit 0   ;;
+    h | help)
+        usage
+        exit 0
+        ;;
 
-    v|version )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+    v | version)
+        echo "$0 -- Version $__ScriptVersion"
+        exit 0
+        ;;
 
-    i|inverse ) inverse=true ;;
+    i | inverse) inverse=true ;;
 
-    l|level) level=$OPTARG ;;
+    l | level) level=$OPTARG ;;
 
-    * ) echo -e "\n  Option does not exist : $OPTARG\n"
-          usage; exit 1 ;;
+    *)
+        echo -e "\n  Option does not exist : $OPTARG\n"
+        usage
+        exit 1
+        ;;
 
-  esac # --- end of case ---
+    esac # --- end of case ---
 done
-shift $(($OPTIND-1))
+shift $(($OPTIND - 1))
 
-(( $# < 2 )) && echo "Need a regex and filter.." >&2 && exit 1
+(($# < 2)) && echo "Need a regex and filter.." >&2 && exit 1
 
 regex="$1"
 filter="$2"
 
 file=/tmp/temp$$
-cat > "$file"
-output=`cat /tmp/temp$$`
+cat >"$file"
+output=$(cat /tmp/temp$$)
 delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
 
 [[ $delim != 0 ]] && {

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-    
+
 #{{{ MARK:Header
 #**************************************************************
 ##### Author: JACOBMENKE
@@ -29,20 +29,28 @@ usage() {
 # Handle command line arguments
 #-----------------------------------------------------------------------
 
-while getopts ":hvse" opt
-do
+while getopts ":hvse" opt; do
     case $opt in
 
-        h|help ) usage; exit 0   ;;
-        s|skip ) skip=true ;;
-        e|end ) end=true ;;
-        v|version ) echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
-        * ) echo -e "\n Option does not exist : $OPTARG\n"
-            usage; exit 1 ;;
+    h | help)
+        usage
+        exit 0
+        ;;
+    s | skip) skip=true ;;
+    e | end) end=true ;;
+    v | version)
+        echo "$0 -- Version $__ScriptVersion"
+        exit 0
+        ;;
+    *)
+        echo -e "\n Option does not exist : $OPTARG\n"
+        usage
+        exit 1
+        ;;
 
-        esac # --- end of case ---
+    esac # --- end of case ---
 done
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 # clear screen
 if [[ "$MYBANNER" == ponies ]]; then
@@ -50,13 +58,13 @@ if [[ "$MYBANNER" == ponies ]]; then
 fi
 clear
 
-prettyPrint(){
+prettyPrint() {
     printf "\e[1;4m"
     printf "$1"
     printf "\n\e[0m"
 }
 
-alternatingPrettyPrint(){
+alternatingPrettyPrint() {
 
     if [[ -z "$1" ]]; then
         cat | perl -F"$DELIMITER_CHAR" -anE '
@@ -79,15 +87,15 @@ alternatingPrettyPrint(){
             } else {
             print "\x1b[1;4;34m$arg\x1b[0m"
         }
-        }; print "\x1b[0m"' <<< "$@"
+        }; print "\x1b[0m"' <<<"$@"
     fi
 }
 
-exists(){
+exists() {
     type "$1" >/dev/null 2>&1
 }
 
-gitRepoUpdater(){
+gitRepoUpdater() {
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then
@@ -197,7 +205,7 @@ if [[ $skip != true ]]; then
 
     exists brew && {
         prettyPrint "Updating Homebrew Packages"
-        brew update #&> /dev/null
+        brew update  #&> /dev/null
         brew upgrade #&> /dev/null
         #remove brew cache
         rm -rf "$(brew --cache)"
@@ -208,25 +216,25 @@ if [[ $skip != true ]]; then
 
     exists npm && {
         prettyPrint "Updating NPM packages"
-            installDir=$(npm root -g | head -n 1)
-            if [[ ! -w "$installDir" ]]; then
-                needSudo=yes
-            else
-                needSudo=no
-            fi
-            for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4);do
-                if [[ $needSudo == yes ]]; then
-                    sudo npm install -g "$package"
-                else
-                    npm install -g "$package"
-                fi
-            done
-            prettyPrint "Updating NPM itself"
+        installDir=$(npm root -g | head -n 1)
+        if [[ ! -w "$installDir" ]]; then
+            needSudo=yes
+        else
+            needSudo=no
+        fi
+        for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4); do
             if [[ $needSudo == yes ]]; then
-                sudo npm install -g npm
+                sudo npm install -g "$package"
             else
-                npm install -g npm
+                npm install -g "$package"
             fi
+        done
+        prettyPrint "Updating NPM itself"
+        if [[ $needSudo == yes ]]; then
+            sudo npm install -g npm
+        else
+            npm install -g npm
+        fi
     }
 
     exists rustup && {
@@ -251,7 +259,7 @@ if [[ $skip != true ]]; then
         prettyPrint "Updating Perl Packages"
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
         if [[ -n "$perlOutdated" ]]; then
-            echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2> /dev/null
+            echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2>/dev/null
         fi
     }
 
@@ -279,7 +287,7 @@ if [[ $skip != true ]]; then
 fi
 
 #first argument is user@host and port number configured in .ssh/config
-updatePI(){ #-t to force pseudoterminal allocation for interactive programs on remote host
+updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote host
     #pipe yes into programs that require confirmation
     #alternatively apt-get has -y option
     # -x option to disable x11 forwarding
@@ -306,10 +314,10 @@ updatePI(){ #-t to force pseudoterminal allocation for interactive programs on r
     fi
 
     #update python packages
-    ssh -x "$hostname"  bash < "$SCRIPTS/pipUpdater.sh"
+    ssh -x "$hostname" bash <"$SCRIPTS/pipUpdater.sh"
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to send stdin script into bash
-    ssh -x "$hostname" bash < "$SCRIPTS/rpiSoftwareUpdater.sh"
+    ssh -x "$hostname" bash <"$SCRIPTS/rpiSoftwareUpdater.sh"
 }
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for
@@ -318,7 +326,7 @@ for pi in "${PI_ARRAY[@]}"; do
 done
 
 exists brew && {
-    if brew tap | grep cask-upgrade 1>/dev/null 2>&1;then
+    if brew tap | grep cask-upgrade 1>/dev/null 2>&1; then
         # we have brew cu
         prettyPrint "Updating Homebrew Casks!"
         brew cu -ay --cleanup

@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-executableScriptsProcessing(){
+executableScriptsProcessing() {
     # then make it executable
     chmod 700 "$newfile"
     #add header that can be extracted with grep ^#:
@@ -16,16 +16,17 @@ executableScriptsProcessing(){
 
 }
 
-openTextEditor(){
+openTextEditor() {
     open -t "$newfile"
     #run python3 script with pyautogi commands for keyboard shortcuts
     python3 "$HOME/PycharmProjects/fromShell/textEditorTwoColumns.py"
 }
 
-addHeader(){
+addHeader() {
     #first arg is the interpreter
     #second arg is the absolute path to file
-    firstString="$(cat<<EOM
+    firstString="$(
+        cat <<EOM
 #!/usr/bin/env $1
 #{{{ MARK:Header
 #**************************************************************
@@ -35,28 +36,31 @@ addHeader(){
 ##### Notes:
 #}}}***********************************************************
 EOM
-)"
+    )"
 
-echo "$firstString" > "$2"
-echo >> "$2"
+    echo "$firstString" >"$2"
+    echo >>"$2"
 
-executableScriptsProcessing
+    executableScriptsProcessing
 
 }
 
-createTheFile(){
+createTheFile() {
     #create newfile
     touch "$newfile"
 
     #echo shebang line into newfile
     case "$1" in
-        .sh ) addHeader bash "$newfile" ;;
-        .pl ) addHeader perl "$newfile" ;;
-        .rb ) addHeader ruby "$newfile" ;;
-        .py ) addHeader python "$newfile" ;;
-        #if .txt or some other file ending then just open the file, no processing
-        #exit so do not call executableScriptsProcessing
-        * 	) open -t "$newfile"; exit;;
+    .sh) addHeader bash "$newfile" ;;
+    .pl) addHeader perl "$newfile" ;;
+    .rb) addHeader ruby "$newfile" ;;
+    .py) addHeader python "$newfile" ;;
+    #if .txt or some other file ending then just open the file, no processing
+    #exit so do not call executableScriptsProcessing
+    *)
+        open -t "$newfile"
+        exit
+        ;;
     esac
 
     executableScriptsProcessing

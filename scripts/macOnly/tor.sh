@@ -6,7 +6,7 @@
 ##### Purpose: bash script to use tor network
 ##### Notes:
 #}}}***********************************************************
-prettyPrint (){
+prettyPrint() {
     printf "\e[4;1m$1\e[0m\n"
 }
 
@@ -17,13 +17,16 @@ INTERFACE=Wi-Fi
 
 ##keep sudo alive
 #while true; do
-    #sudo -n true
-    #sleep 60
-    #kill -0 "$$"
-    #exit
+#sudo -n true
+#sleep 60
+#kill -0 "$$"
+#exit
 #done 2>/dev/null &
 
-type spoof &> /dev/null || { printf "you need spoof!. Exiting." >&2; exit; }
+type spoof &>/dev/null || {
+    printf "you need spoof!. Exiting." >&2
+    exit
+}
 
 function disable_proxy() {
     kill $!

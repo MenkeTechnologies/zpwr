@@ -22,7 +22,7 @@ trap "tput cnorm; clear; ls -G -FlhAO; exit" INT
 trap 'font=${ary[$randIndex]}' 3
 
 for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
-    ary+=( $file )
+    ary+=($file)
 done
 
 rangePossibleIndices=${#ary[*]}
@@ -31,7 +31,7 @@ while true; do
     tput civis
     randIndex=$(($RANDOM % $rangePossibleIndices))
     font=${ary[$randIndex]}
-    echo "$(date) random font is $font" >> "$LOGFILE"
+    echo "$(date) random font is $font" >>"$LOGFILE"
     Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
 
     if [[ -n "$FILTER" ]]; then

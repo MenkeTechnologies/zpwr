@@ -13,7 +13,7 @@ while read -d "" event; do
     echo "The event was $event"
 
     # initial run
-    if [[ $first_iteration = true ]]; then
+    if [[ $first_iteration == true ]]; then
         first_iteration=false
         {
             echo
@@ -41,4 +41,4 @@ while read -d "" event; do
 
     fi
 
-done < <(fswatch -r -0 -E "$dir_watched" -e "/\.." )
+done < <(fswatch -r -0 -E "$dir_watched" -e "/\..")

@@ -9,7 +9,7 @@
 
 trap "tput cnorm; exit" INT TERM QUIT
 
-usage(){
+usage() {
 
     cat <<EOM
     usage:
@@ -17,21 +17,30 @@ usage(){
     -d 	display date
     -l <lines> limit output to certain number of lines
 EOM
-exit 1
+    exit 1
 }
 
 optstring=dhl:
-while getopts $optstring opt
-do
+while getopts $optstring opt; do
     case $opt in
-        h) usage >&2; break;;
-        d) dateflag=true;break;;
-        l) limitFlag=true; num=$OPTARG; break;;
-        *) usage >&2;;
+    h)
+        usage >&2
+        break
+        ;;
+    d)
+        dateflag=true
+        break
+        ;;
+    l)
+        limitFlag=true
+        num=$OPTARG
+        break
+        ;;
+    *) usage >&2 ;;
     esac
 done
 
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
 if [[ -z "$1" ]]; then
     echo "need an arg" >&2
@@ -49,7 +58,7 @@ clear
 tput civis
 
 while true; do
-    script -c ls &> /dev/null && {
+    script -c ls &>/dev/null && {
         output="$(script -q /dev/null -c "$1" | tr -d '\r' | cat)"
     } || {
         output="$(script -q /dev/null $1 | tr -d '\r' | cat)"
@@ -59,13 +68,13 @@ while true; do
     if [[ $dateflag == true ]]; then
         echo "$output"
         echo
-        printf "\e[1m`date`\e[0m"
+        printf "\e[1m$(date)\e[0m"
     else
-    if [[ $limitFlag == true ]]; then
-        echo -en "$output" | head -n $num
-    else
-        echo -en "$output"
-    fi
+        if [[ $limitFlag == true ]]; then
+            echo -en "$output" | head -n $num
+        else
+            echo -en "$output"
+        fi
     fi
     sleep $time
 done

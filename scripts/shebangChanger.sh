@@ -28,7 +28,7 @@
 # \/__\:\ \ \:\/:/  /     \:\/:/  /     \:\  \
 # \:\__\ \::/  /       \::/  /       \:\__\
 # \/__/ \/__/         \/__/         \/__/
-usage(){
+usage() {
     #here doc for printing multiline
     cat <<\endofmessage
     usage:
@@ -38,16 +38,16 @@ endofmessage
     printf "\e[0m"
 }
 
-(( $# < 2 )) && usage >&2 && exit 1
+(($# < 2)) && usage >&2 && exit 1
 
 executableProgram=$1
 path="#!/usr/bin/env $executableProgram"
 shift
 
-addContents(){
+addContents() {
     printf "\e[1;4m Adding shebang : $path to $file\e[0m\n"
-    echo "$path" > "$file"
-    echo "$tail" >> "$file"
+    echo "$path" >"$file"
+    echo "$tail" >>"$file"
     chmod u+x "$file"
 }
 
@@ -59,19 +59,19 @@ for file; do
 
         if [[ $line =~ ^\#! ]]; then
             found=true
-            break;
+            break
         fi
 
         if [[ $line =~ ^\# ]]; then
             found=false
-            break;
+            break
         fi
 
         if [[ $line =~ ^[a-zA-Z]+ ]]; then
             found=false
-            break;
+            break
         fi
-    done < $file
+    done <$file
 
     if [[ $found == true ]]; then
         #doesn't work on rpi

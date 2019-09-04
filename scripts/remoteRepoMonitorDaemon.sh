@@ -14,21 +14,21 @@ ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
 [[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && exit 1
 [[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && exit 1
 
-gittersmaster(){
+gittersmaster() {
     git reset --hard origin/master
     git checkout -B master origin/master
     git pull --force
     git reset --hard origin/master
 }
 
-gittersdev(){
+gittersdev() {
     git reset --hard origin/dev
     git checkout -B dev origin/dev
     git pull --force
     git reset --hard origin/dev
 }
 
-main(){
+main() {
     gittersdev
     cp .shell_aliases_functions.sh "$HOME"
     cp .zshrc "$HOME"
@@ -46,14 +46,14 @@ main(){
     fi
     cp -f scripts/* "$SCRIPTS"
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
-    for dir in "$COMPLETION_DIR/"*;do
+    for dir in "$COMPLETION_DIR/"*; do
         printf "$dir: "
         test -d "$dir" && git -C "$dir" pull
     done
     refreshers
 }
 
-refreshers(){
+refreshers() {
     #create new zsh in right pane
     #space for safety as C-c tends to cut off first character
     tmux send-keys -t right C-c C-c C-c " tmux source-file ~/.tmux.conf; nz" C-m
@@ -79,7 +79,7 @@ while true; do
     git fetch origin
     output=$(git log HEAD..origin/dev --oneline)
 
-    if [[ -n "$output" ]] ; then
+    if [[ -n "$output" ]]; then
         echo "$(date) We have change to $(git remote -v)"
         main
     fi
@@ -89,7 +89,7 @@ while true; do
     git fetch origin
     output=$(git log HEAD..origin/master --oneline)
 
-    if [[ -n "$output" ]] ; then
+    if [[ -n "$output" ]]; then
         echo "$(date) We have change to $(git remote -v)" >&2
         gittersmaster
         refreshers
@@ -98,4 +98,3 @@ while true; do
     sleep 10
 
 done
-

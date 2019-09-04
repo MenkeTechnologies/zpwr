@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-(( "$#" == 0 )) && echo "Need one argument." && exit 1
+(("$#" == 0)) && echo "Need one argument." && exit 1
 
 messageToSpeak=""
 for i in "$*"; do

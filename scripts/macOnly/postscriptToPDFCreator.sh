@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-for file in "$@" ; do
+for file in "$@"; do
     newfile=${file%.*}
     vim -c 'hardcopy > '"$newfile.ps" -c quitall "$file"
 done

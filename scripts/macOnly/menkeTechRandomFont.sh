@@ -22,7 +22,7 @@ trap "tput cnorm; clear; ls -G -FlhAO; exit" INT
 trap 'font=${ary[$randIndex]}' 3
 
 for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
-    ary+=( $file )
+    ary+=($file)
 done
 
 rangePossibleIndices=${#ary[*]}

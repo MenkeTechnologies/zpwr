@@ -6,4 +6,4 @@
 ##### Purpose: bash script to pipe vnc through ssh tunnel
 ##### Notes:
 #}}}***********************************************************
- ssh -C -L 5902:localhost:5901 r1
+ssh -C -L 5902:localhost:5901 r1
