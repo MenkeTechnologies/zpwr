@@ -10,4 +10,4 @@
 SCRIPTS="/Users/jacobmenke/Documents/shellScripts"
 LOGFILE="/Users/jacobmenke/updaterlog.txt"
 
-( cat "$SCRIPTS/updater.sh" | bash -l 2>&1 | tee "$LOGFILE" | mutt -s \"Log from `date`\" jamenk@email.wm.edu 2>"$LOGFILE" &)
+(cat "$SCRIPTS/updater.sh" | bash -l 2>&1 | tee "$LOGFILE" | mutt -s \"Log from $(date)\" jamenk@email.wm.edu 2>"$LOGFILE" &)

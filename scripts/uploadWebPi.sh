@@ -22,9 +22,9 @@ printf "${BLUE}"
 total=$#
 count=0
 for i in "$@"; do
-	scp -r -P $RPI_PORT "$i" "$address" 2>/dev/null
+    scp -r -P $RPI_PORT "$i" "$address" 2>/dev/null
     ((count++))
-    if (( count == total )); then
+    if ((count == total)); then
         link="http://$MY_IP:$RPI_HTML_PORT/$i"
         echo "Download at $link" | figletRandomFontOnce.sh | ponysay | splitReg.sh -- --------- lolcat
         printf "$link" | pbcopy
@@ -37,6 +37,6 @@ printf "$BLUEDone\n${RESET}"
 
 #if just uploading to website one html file
 if [[ "$#" == 1 && "$1" =~ .*.html ]]; then
-	open "http://$MY_IP:2/$1"
-	#open -a "Sublime Text"
+    open "http://$MY_IP:2/$1"
+    #open -a "Sublime Text"
 fi

@@ -10,20 +10,20 @@
 #no complaining about no glob results for * from zsh
 #setopt null_glob
 
-prettyPrint(){
+prettyPrint() {
     printf "\e[1;4m"
     printf "$1"
     printf "\n\e[0m"
 }
 
-exists(){
+exists() {
     type "$1" >/dev/null 2>&1
 }
 export DELIMITER_CHAR='%'
 
-alternatingPrettyPrint(){
+alternatingPrettyPrint() {
     counter=0
-:
+    :
     if [[ -z $1 ]]; then
         cat | perl -F"$DELIMITER_CHAR" -anE '
         my $counter=0;
@@ -45,12 +45,12 @@ alternatingPrettyPrint(){
                  print "\x1b[1;4;34m$arg\x1b[0m"
             }
         $counter++;
-        }; print "\x1b[0m"' <<< "$@"
+        }; print "\x1b[0m"' <<<"$@"
 
     fi
 }
 
-gitRepoUpdater(){
+gitRepoUpdater() {
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then
@@ -93,7 +93,6 @@ exists "$rustup_bin" && {
     "$rustup_bin" update
 }
 
-
 prettyPrint "Updating Vundle Plugins"
 #vim -c VundleUpdate -c quitall
 
@@ -102,11 +101,9 @@ sudo gem update
 
 exists npm && {
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}NPM${DELIMITER_CHAR} packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-    for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4)
-    do
+    for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4); do
         sudo npm install -g "$package"
     done
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}NPM${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
     sudo npm install -g npm
 }
-

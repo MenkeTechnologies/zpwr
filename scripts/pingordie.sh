@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-type fping > /dev/null 2>&1 || {
+type fping >/dev/null 2>&1 || {
     echo "$(date) no fping"
     exit 1
 }
@@ -32,11 +32,11 @@ restart_wlan0() {
     fi
 }
 
-while (( network_check_tries < network_check_threshold )); do
+while ((network_check_tries < network_check_threshold)); do
 
     host_status=$(fping $gateway_ip)
 
-    (( network_check_tries++ ))
+    ((network_check_tries++))
 
     if echo "$host_status" | grep -iq alive; then
         echo "$(date) Network is working correctly"
@@ -45,7 +45,7 @@ while (( network_check_tries < network_check_threshold )); do
         echo "$(date) Network is down, failed check number $network_check_tries of $network_check_threshold"
     fi
 
-    (( network_check_tries >= network_check_threshold)) && restart_wlan0
+    ((network_check_tries >= network_check_threshold)) && restart_wlan0
 
     sleep 5
 done

@@ -13,8 +13,7 @@ __ScriptVersion="version"
 # NAME: usage
 # DESCRIPTION: Display usage information.
 #===============================================================================
-function usage ()
-{
+function usage() {
     echo "Usage : $0 [options] lineCount RefreshTime(sec)
 
     Options:
@@ -27,22 +26,30 @@ function usage ()
 # Handle command line arguments
 #-----------------------------------------------------------------------
 
-while getopts ":hv" opt
-do
-  case $opt in
+while getopts ":hv" opt; do
+    case $opt in
 
-    h|help ) usage; exit 0   ;;
+    h | help)
+        usage
+        exit 0
+        ;;
 
-    v|version ) echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+    v | version)
+        echo "$0 -- Version $__ScriptVersion"
+        exit 0
+        ;;
 
-    * ) echo -e "\n Option does not exist : $OPTARG\n"
-          usage; exit 1 ;;
+    *)
+        echo -e "\n Option does not exist : $OPTARG\n"
+        usage
+        exit 1
+        ;;
 
-  esac # --- end of case ---
+    esac # --- end of case ---
 done
-shift $(($OPTIND-1))
+shift $(($OPTIND - 1))
 
-if (( $# > 1)); then
+if (($# > 1)); then
     num="$1"
     shift
     bash "$SCRIPTS/myWatchMaintainEscapes.sh" -l "$num" "grc -c $HOME/conf.df --colour=auto df -H" "$@"

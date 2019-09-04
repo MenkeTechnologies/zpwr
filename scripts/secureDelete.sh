@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 #{{{ MARK:Header
 #**************************************************************
@@ -8,19 +7,19 @@
 ##### Notes:
 #}}}***********************************************************
 
-passes=7 # Number of file-shredding passes.
+passes=7     # Number of file-shredding passes.
 # Increasing this slows script execution,
 #+ especially on large target files.
-blocksize=1 # I/O with /dev/urandom requires unit block size,
+blocksize=1  # I/O with /dev/urandom requires unit block size,
 #+ otherwise you get weird results.
 e_badargs=70 # Various error exit codes.
 e_not_found=71
 e_changed_mind=72
 
-displayProgress(){
+displayProgress() {
 
-    local arr=( '|' '\' '-' '/' )
-    local revarr=( '|' '/' '-' '\')
+    local arr=('|' '\' '-' '/')
+    local revarr=('|' '/' '-' '\')
 
     while true; do
         for i in {0..1}; do
@@ -39,7 +38,7 @@ displayProgress(){
 
 }
 
-startCursor(){
+startCursor() {
     #cursor is invisible
     tput civis
     #bold text
@@ -50,7 +49,7 @@ startCursor(){
     progress_pid=$!
 }
 
-killCursor(){
+killCursor() {
     #kill cursor with PID store in startCursor
     kill $progress_pid
     #discard error message
@@ -63,36 +62,37 @@ killCursor(){
 trap 'killCursor; echo; exit' INT
 
 if [[ -z "$1" ]]; then
-    echo "Usage: `basename $0` filename"
+    echo "Usage: $(basename $0) filename"
     exit $e_badargs
 fi
 
 for i in "$@"; do
     file="$i"
 
-    if [[ ! -e "$file" ]]
-    then
+    if [[ ! -e "$file" ]]; then
         echo "File \"$file\" not found."
         exit $e_not_found
     fi
 
-    printf "Are you sure you want to blot out \"$file\" (y/n)? ";
+    printf "Are you sure you want to blot out \"$file\" (y/n)? "
     startCursor
     read -n1 answer
     #newline
     echo
     case "$answer" in
-        [nN]) echo "Bye"
-            killCursor
-            exit $e_changed_mind;;
-        *) echo "Blotting out file \"$file\".";;
+    [nN])
+        echo "Bye"
+        killCursor
+        exit $e_changed_mind
+        ;;
+    *) echo "Blotting out file \"$file\"." ;;
     esac
 
     flength=$(ls -l "$file" | awk '{print $5}') # Field 5 is file length.
     pass_count=1
     chmod u+w "$file" # Allow overwriting/deleting the file.
 
-    while (("$pass_count" < "$passes"));do
+    while (("$pass_count" < "$passes")); do
         echo "Pass #$pass_count"
         sync # Flush buffers.
         dd if=/dev/urandom of="$file" bs=$blocksize count=$flength
@@ -106,9 +106,10 @@ for i in "$@"; do
     done
 
     rm -f "$file" # Finally, delete scrambled and shredded file.
-    sync # Flush buffers a final time.
+    sync          # Flush buffers a final time.
 
-    echo "File \"$file\" blotted out and deleted."; echo
+    echo "File \"$file\" blotted out and deleted."
+    echo
 
 done
 sleep 1

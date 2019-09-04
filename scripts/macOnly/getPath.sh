@@ -15,7 +15,7 @@ if [[ "$1" =~ ^[/~]+.*$ ]]; then
     echo "$1"
     #alternatively, to print to stdout and pipe into pbcopy
     #printf \'$PWD/"$1"\' | tee /dev/tty | pbcopy
-    printf \'"$1"\'| pbcopy
+    printf \'"$1"\' | pbcopy
 else
     #this is a relative path
     #show the path, PWD is environment variable in BASH

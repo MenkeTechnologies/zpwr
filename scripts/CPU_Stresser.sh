@@ -13,7 +13,7 @@ nproc=10
 # NAME: usage
 # DESCRIPTION: Display usage information.
 #===============================================================================
-usage(){
+usage() {
     echo "Usage : $0 [options] [--]
     Default number of spawned processes is $nproc.
     Change this with -n option.
@@ -26,17 +26,17 @@ usage(){
 
 } # ---------- end of function usage  ----------
 
-prettyPrint(){
+prettyPrint() {
     printf "\e[1;4m"
     printf "$1"
     printf "\n\e[0m"
 }
 
-exists(){
+exists() {
     type "$1" >/dev/null 2>&1
 }
 
-alternatingPrettyPrint(){
+alternatingPrettyPrint() {
     counter=0
 
     if [[ -z $1 ]]; then
@@ -60,7 +60,7 @@ alternatingPrettyPrint(){
                  print "\x1b[1;4;34m$_\x1b[0m"
             }
         $counter++;
-        }; print "\x1b[0m"' <<< "$@"
+        }; print "\x1b[0m"' <<<"$@"
 
     fi
 
@@ -70,43 +70,51 @@ alternatingPrettyPrint(){
 # Handle command line arguments
 #-----------------------------------------------------------------------
 
-while getopts "n:dhv" opt
-do
-  case $opt in
+while getopts "n:dhv" opt; do
+    case $opt in
 
-    h|help ) usage; exit 0   ;;
+    h | help)
+        usage
+        exit 0
+        ;;
 
-    v|version ) echo "$0  -- Version $__ScriptVersion"; exit 0   ;;
+    v | version)
+        echo "$0  -- Version $__ScriptVersion"
+        exit 0
+        ;;
 
-    d|detach ) detach=true ;;
+    d | detach) detach=true ;;
 
-    n|nproc ) nproc=$OPTARG ;;
+    n | nproc) nproc=$OPTARG ;;
 
-    * ) echo -e "\n Option does not exist : $OPTARG\n"
-          usage; exit 1 ;;
+    *)
+        echo -e "\n Option does not exist : $OPTARG\n"
+        usage
+        exit 1
+        ;;
 
-  esac # --- end of case ---
+    esac # --- end of case ---
 done
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
-killpids(){
+killpids() {
     echo "${1:1}" | perl -ae '`kill $_`for@F'
     exit 0
 }
 
 if [[ "$detach" == true ]]; then
     alternatingPrettyPrint "Spawning $DELIMITER_CHAR${nproc}$DELIMITER_CHAR processes in background."
-    for (( i = 0; i < nproc; i++ )); do
+    for ((i = 0; i < nproc; i++)); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
-        ( yes &> /dev/null &)
+        (yes &>/dev/null &)
     done
 else
     alternatingPrettyPrint "Spawning $DELIMITER_CHAR${nproc}$DELIMITER_CHAR processes interactively."
-    for (( i = 0; i < nproc; i++ )); do
+    for ((i = 0; i < nproc; i++)); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
-        yes &> /dev/null &
+        yes &>/dev/null &
         pids="$pids $!"
     done
 
@@ -117,4 +125,3 @@ else
     wait $!
 
 fi
-

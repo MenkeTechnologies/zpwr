@@ -14,4 +14,3 @@ RESET='\e[0m'
 while read; do
     echo "$REPLY" | sed 's@.*@_______ & ______@' | boldText.sh | blueText.sh
 done
-

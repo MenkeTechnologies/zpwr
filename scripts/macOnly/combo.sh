@@ -28,9 +28,9 @@ echo "$o" | {
     echo
     perl -E 'say "perl"' | "$randomFigletFontScript"
     echo
-    cat /etc/passwd | perl -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>@g'| fold -w 50 | "$randomCowsayCowScript" 100
+    cat /etc/passwd | perl -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>@g' | fold -w 50 | "$randomCowsayCowScript" 100
 } | sed 's@.@&@g' | {
-    cat > /dev/stdout
+    cat >/dev/stdout
     echo "SCRIPTING" | "$randomFigletFontScript"
     {
         python -c 'print("tommy"*30)'
@@ -46,4 +46,3 @@ echo "$o" | {
     echo "puts \"$o\"" | tclsh | fold -w 7 | "$randomFigletFontScript"
 
 } | fold -w 70 | "$randomCowsayCowScript" 100 | ponysay -W 100 | splitReg.sh -- ------ lolcat
-

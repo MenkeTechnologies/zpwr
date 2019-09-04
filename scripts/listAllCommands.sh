@@ -17,12 +17,12 @@ IFS=:
 #loop through PATh
 for path in $PATH; do
 
-	#use while read loop with process substitution < <() to add
-	#each command in each path to array
-	#as IFS=: and for loop depends on IFS
-	while read command; do
-		arr+=("$command")
-	done < <(ls -c1 $path)
+    #use while read loop with process substitution < <() to add
+    #each command in each path to array
+    #as IFS=: and for loop depends on IFS
+    while read command; do
+        arr+=("$command")
+    done < <(ls -c1 $path)
 
 done
 
@@ -35,10 +35,10 @@ echo
 read -n1
 
 if [[ "$REPLY" == "y" ]]; then
-	for i in ${arr[*]}; do
-	echo -e "$i"
-#sort the array (-f ignore case) and get rid of duplicates and use less pager
-done | sort -f | uniq | less
+    for i in ${arr[*]}; do
+        echo -e "$i"
+        #sort the array (-f ignore case) and get rid of duplicates and use less pager
+    done | sort -f | uniq | less
 fi
 #newline
 echo

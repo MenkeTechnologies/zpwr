@@ -6,4 +6,4 @@
 ##### Purpose: bash script to pipe vnc through ssh to RPi2
 ##### Notes:
 #}}}***********************************************************
- ssh -C -L 5903:localhost:5901 r2
+ssh -C -L 5903:localhost:5901 r2

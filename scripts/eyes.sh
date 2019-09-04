@@ -13,7 +13,7 @@ trap 'fortuneQuote=$(fortune)' 3
 declare -a ary
 
 for file in $(cowsay -l); do
-    ary+=( "$file" )
+    ary+=("$file")
 done
 rangePossibleIndices=${#ary[*]}
 
@@ -24,7 +24,7 @@ while true; do
         fortuneQuote="$(figlet -f "$1" \"$fortuneQuote\")"
     fi
     clear
-    randIndex=$(( RANDOM % rangePossibleIndices ))
+    randIndex=$((RANDOM % rangePossibleIndices))
     view=${ary[$randIndex]}
 
     if [[ "$2" ]]; then

@@ -17,9 +17,9 @@ echo "$o" | {
     echo
     perl -E 'say "perl"' | figlet -f cosmic
     echo
-    cat /etc/passwd | perl -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>g'| cowsay -f eyes
+    cat /etc/passwd | perl -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>g' | cowsay -f eyes
 } | sed 's@.@&@g' | {
-    cat > /dev/stdout
+    cat >/dev/stdout
     python -c 'print("tommy"*30)'
     python -c 'print("tommy"*30)'
     x="$(python -c 'print("trina"*5)')"
@@ -32,4 +32,3 @@ echo "$o" | {
     echo "puts \"$o\"" | tclsh | fold -w 7 | figlet -f rozzo
 
 } | fold -w 70 | cowsay -f dragon -W 100 | ponysay -W 100 | splitReg.sh -- ------ lolcat
-

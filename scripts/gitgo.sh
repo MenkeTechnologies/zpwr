@@ -33,42 +33,45 @@
 ############### functions ##############
 ##########################################
 
-myPrettyPrint(){
+myPrettyPrint() {
     #print white text 37m on blue background 44m
     printf "\e[37;44m"
     printf "$1"
     printf "\e[0m\n"
 }
-initializeGitDirectory(){
-        #there is no .git directory
+initializeGitDirectory() {
+    #there is no .git directory
     if [[ ! -d ".git" ]]; then
         myPrettyPrint "Do you want to initialize this diqrectory with Git?"
         #read one character
         read -n1
         echo
         case "$REPLY" in
-            #if yes then create .git and call getReqmoteDetails
-            [yY] ) git init; getRemoteDetails ;;
-            #exit if command executed by accident for example
-            *) exit 1
-    esac
-else
-    if [[ -z "$(git remote)" ]]; then
-        #there is a .git directory but no setup for remote so call getRemoteDetails
-        getRemoteDetails
+        #if yes then create .git and call getReqmoteDetails
+        [yY])
+            git init
+            getRemoteDetails
+            ;;
+        #exit if command executed by accident for example
+        *) exit 1 ;;
+        esac
     else
-        #there is a .git directory and there is setup for remote so exit
-        myPrettyPrint "Already initialized."
-        exit 1
+        if [[ -z "$(git remote)" ]]; then
+            #there is a .git directory but no setup for remote so call getRemoteDetails
+            getRemoteDetails
+        else
+            #there is a .git directory and there is setup for remote so exit
+            myPrettyPrint "Already initialized."
+            exit 1
+
+        fi
 
     fi
-
-fi
 }
 
 #create remote repository on Github
 
-getRemoteDetails(){
+getRemoteDetails() {
 
     #if function was called with no arguments
     if [[ -z "$1" ]]; then
@@ -96,17 +99,17 @@ getRemoteDetails(){
     #concat url from variables
     local URL="https://github.com/$GITHUB_ACCOUNT/$REPO_NAME_TO_CREATE"
     #add the remote repository
-    git remote add "$ORGIN_NAME" "$URL" 2> /dev/null
+    git remote add "$ORGIN_NAME" "$URL" 2>/dev/null
     getInitialCommit
 }
 
-getInitialCommit(){
+getInitialCommit() {
     myPrettyPrint "What is your commit message?"
     read commitMessage
     commitTheDirectory "$commitMessage"
 }
 
-usage(){
+usage() {
     #myPrettyPrint format
     printf "\e[37;44m"
     #if argument passed in then print it
@@ -121,14 +124,14 @@ usage(){
     -p 	<COMMIT_MESSAGE> push to Repo
     -c 	init Repo
 EOM
-printf "\e[0m"
-exit 1
+    printf "\e[0m"
+    exit 1
 }
 
-gitPull(){
+gitPull() {
     #if .git directory exists and remote repository established
     if [[ -d ".git" && "$(git remote)" ]]; then
-        local PULL_URL="$(git remote -v | \
+        local PULL_URL="$(git remote -v |
             awk '{print $2}' | tail -1 | tr -d ' ')"
         git pull "$PULL_URL"
     else
@@ -138,7 +141,7 @@ gitPull(){
 
 }
 
-gitPush(){
+gitPush() {
     #check for argument
     if [[ -z "$1" ]]; then
         usage "Need a commit message."
@@ -153,7 +156,7 @@ gitPush(){
     fi
 }
 
-commitTheDirectory(){
+commitTheDirectory() {
     #commitMessage is first argument
     local commitMessage="$1"
     local origin="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
@@ -177,14 +180,25 @@ commitTheDirectory(){
 #{{{ MARK:GETOPTS
 #**************************************************************
 optstring=p:hcl
-while getopts $optstring opt
-do
+while getopts $optstring opt; do
     case $opt in
-        h) usage >&2; break;;
-        c) initializeGitDirectory;break;;
-        l) gitPull;break;;
-        p) gitPush "$OPTARG";break;;
-        *) usage >&2;;
+    h)
+        usage >&2
+        break
+        ;;
+    c)
+        initializeGitDirectory
+        break
+        ;;
+    l)
+        gitPull
+        break
+        ;;
+    p)
+        gitPush "$OPTARG"
+        break
+        ;;
+    *) usage >&2 ;;
     esac
 done
 
@@ -194,10 +208,9 @@ done
 #if no options and 1 argument then commit with 1 argument
 #gitPush function checks for presence of .git directory
 if [[ $OPTIND == 1 ]]; then
-    if [[ -z "$1" ]];then
+    if [[ -z "$1" ]]; then
         gitPush "default-commit"
     else
         gitPush "$1"
     fi
 fi
-

@@ -11,7 +11,7 @@ sortedCommand=gsort
 
 type "$sortedCommand" >/dev/null 2>&1 || sortedCommand=sort
 # set -x
-usage(){
+usage() {
     #here doc for printing multiline
     cat <<EOM >&2
     usage:
@@ -19,22 +19,22 @@ usage(){
     -s 	summarize
     -a 	show hidden files
 EOM
-printf "\e[0m"
+    printf "\e[0m"
 }
 
 #show file sizes of all files in pwd
 #checking for presence of sorted flag which is
 #set in getopts
-dontSummarizeSizes(){
+dontSummarizeSizes() {
     [[ -n $sorted ]] && du -sh * | $sortedCommand -h || du -sh *
 }
 
 #show just summarize size
-summarizeSizes(){
-    du -sh `pwd`
+summarizeSizes() {
+    du -sh $(pwd)
 }
 
-showHidden(){
+showHidden() {
     #checking for presence of sorted flag which is
     #set in getopts
     if [[ $sorted ]]; then
@@ -58,14 +58,20 @@ optstring=shta
 
 while getopts $optstring op; do
     case $opt in
-        h) usage ; exit;;
-        #set boolean for sorted
-        s) sorted=true;;
-        #set boolean for showing hidden files
-        a) showHiddenBool=true;;
-        #set boolean for showing just summary
-        t) summarizeSizesBool=true;;
-        *) usage; exit;;
+    h)
+        usage
+        exit
+        ;;
+    #set boolean for sorted
+    s) sorted=true ;;
+    #set boolean for showing hidden files
+    a) showHiddenBool=true ;;
+    #set boolean for showing just summary
+    t) summarizeSizesBool=true ;;
+    *)
+        usage
+        exit
+        ;;
     esac
 done
 

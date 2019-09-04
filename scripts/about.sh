@@ -6,26 +6,26 @@
 ##### Purpose: bash script to document
 ##### Notes:
 #}}}***********************************************************
-allRemotes(){
+allRemotes() {
     while read; do
         printf "\x1b[1;34m$REPLY"
         printf "\x1b[0m\x0a"
         git remote show "$REPLY"
     done < <(git remote)
 }
-banner(){
-if [[ -d "$ZPWR" ]]; then
-    if cd "$ZPWR";then
-        version="$(git describe --tags $(git rev-list --tags --max-count=1)| perl -pe 's@[\t ]@@')"
-        info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"
-        fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"
-        push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\t ]+@    @')"
+banner() {
+    if [[ -d "$ZPWR" ]]; then
+        if cd "$ZPWR"; then
+            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"
+            info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"
+            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"
+            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\t ]+@    @')"
+        fi
     fi
-fi
 
-printf "\x1b[32m"
-echo
-cat<<\EOF
+    printf "\x1b[32m"
+    echo
+    cat <<\EOF
               :::::::::::::::::: :::       :::::::::::: 
                   :+: :+:    :+::+:       :+::+:    :+: 
                 +:+  +:+    +:++:+       +:++:+    +:+  
@@ -34,18 +34,18 @@ cat<<\EOF
           #+#     #+#        #+#+# #+#+# #+#    #+#     
         ############         ###   ###  ###    ###      
 EOF
-echo
+    echo
 
-printf "\x1b[0m"
-printf "\x1b[35m"
-printf "\x1b[1m"
-cat<<EOF
+    printf "\x1b[0m"
+    printf "\x1b[35m"
+    printf "\x1b[1m"
+    cat <<EOF
                       $info
 EOF
 
-printf "\x1b[0m"
-printf "\x1b[34m"
-cat<<\EOF
+    printf "\x1b[0m"
+    printf "\x1b[34m"
+    cat <<\EOF
 
                         eeeee  e    e
                         8   8  8    8
@@ -54,10 +54,10 @@ cat<<\EOF
                         8eee8   88
 EOF
 
-printf "\x1b[0m"
-printf "\x1b[33m"
-echo
-cat<<\EOF
+    printf "\x1b[0m"
+    printf "\x1b[33m"
+    echo
+    cat <<\EOF
             ___ ___    ___  ____   __  _    ___  
            |   T   T  /  _]|    \ |  l/ ]  /  _]
            | _   _ | /  [_ |  _  Y|  ' /  /  [_ 
@@ -80,32 +80,30 @@ cat<<\EOF
         l     !|     |l     !|     | j  l |     T\    |
          \___/ l_____j \___/ l___,_j|____jl_____j \___j
 EOF
-echo
-printf "\x1b[0m"
-printf "\x1b[35m"
-printf "\x1b[1m"
-cat<<EOF
+    echo
+    printf "\x1b[0m"
+    printf "\x1b[35m"
+    printf "\x1b[1m"
+    cat <<EOF
    $fetch
    $push
     
 EOF
 
-printf "\x1b[0m"
-printf "\x1b[35m"
-printf "\x1b[4m"
+    printf "\x1b[0m"
+    printf "\x1b[35m"
+    printf "\x1b[4m"
 
-#if [[ -d "$ZPWR" ]]; then
+    #if [[ -d "$ZPWR" ]]; then
     #if cd "$ZPWR";then
     #{
-        #allRemotes
-    #} | perl -pe 's@(.*)@\x1b[31m$1@' 
+    #allRemotes
+    #} | perl -pe 's@(.*)@\x1b[31m$1@'
 
     #fi
-#fi
+    #fi
 
-printf "\x1b[0m"
+    printf "\x1b[0m"
 }
-
-
 
 banner

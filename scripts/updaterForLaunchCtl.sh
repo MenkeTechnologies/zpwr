@@ -7,4 +7,4 @@
 ##### Notes:
 #}}}***********************************************************
 
-bash "$HOME/Documents/shellScripts/updater.sh" > "$HOME/updaterlog.txt" 2>&1
+bash "$HOME/Documents/shellScripts/updater.sh" >"$HOME/updaterlog.txt" 2>&1

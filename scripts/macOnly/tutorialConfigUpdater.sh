@@ -12,7 +12,7 @@ websiteDir="$HOME/WebstormProjects/PersonalWebsite"
 installerDir="$HOME/Documents/shellScripts/$REPO_NAME"
 SCRIPTS="$HOME/Documents/shellScripts"
 
-prettyPrint(){
+prettyPrint() {
     printf "\x1b[1;4m$1\n\x1b[0m"
 }
 
@@ -45,9 +45,9 @@ cp "$HOME/.gitignore_global" "$installerDir"
 cp -R "$HOME/.vim/Ultisnips" "$installerDir"
 
 prettyPrint "Updating vim plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$installerDir/.vimbundle"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$installerDir/.vimbundle"
 prettyPrint "Updating zsh plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* > "$installerDir/.zshplugins"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* >"$installerDir/.zshplugins"
 
 git add .
 git commit -m "$commitMessage"
@@ -96,9 +96,9 @@ prettyPrint "Copying vis ncmpcpp mpd"
 cp -R "$HOME/.config/vis" "$tutorialDir/ncmpcpp-mpd-vis"
 
 prettyPrint "Emptying mpd log"
-echo > "$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
+echo >"$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
 
-echo > "$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
+echo >"$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
 cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
@@ -114,16 +114,16 @@ cd "$tutorialDir" || exit 1
 #prettyPrint "Removing .git dirs..."
 
 #while read -r file; do
-    #if [[ -d "$file" ]]; then
-        #if [[ "$file" = .*\.git.* ]]; then
-            #sudo rm -rf "$file"
-        #else
-            #:
-        #fi
-    #fi
+#if [[ -d "$file" ]]; then
+#if [[ "$file" = .*\.git.* ]]; then
+#sudo rm -rf "$file"
+#else
+#:
+#fi
+#fi
 #done < <(find ./vim)
 
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* > "$tutorialDir/vim/.vimbundle"
+bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$tutorialDir/vim/.vimbundle"
 
 prettyPrint "Updating Tutorial Files Repo"
 git add .
@@ -174,4 +174,3 @@ git status
 prettyPrint "Pushing..."
 git push
 #}}}***********************************************************
-

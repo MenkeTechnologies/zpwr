@@ -18,14 +18,14 @@ s2_pid="$!"
 {
     bash S4
     #once s4 is done, s4 echoed to temp file
-    echo s4 >> temp."`whoami`"
+    echo s4 >>temp."$(whoami)"
 } &
 s4_pid="$!"
 
 {
     bash S5
     #once s5 is done, s5 echoed to temp file
-    echo s5 >> temp."`whoami`"
+    echo s5 >>temp."$(whoami)"
 } &
 
 s5_pid="$!"
@@ -34,8 +34,8 @@ s5_pid="$!"
     while true; do
         #if s4 and s5 echoed to file then we can
         #run s10
-        if [[ $(wc -l temp."$(whoami)" \
-            | tr -d ' ') == 2 ]]; then
+        if [[ $(wc -l temp."$(whoami)" |
+            tr -d ' ') == 2 ]]; then
             bash S10 &
             wait "$!"
             bash S11 &
