@@ -11,7 +11,6 @@ import sys
 import re
 from string import Template
 
-
 URL = 'http://github.com/RobSis/zsh-completion-generator'
 STRIP_CHARS = " \t\n,="
 
@@ -38,7 +37,9 @@ def cut_option(line):
     """
     # TODO: dare to make it regex-free?
     newline = line.strip(STRIP_CHARS)
-    opt = re.findall(r'^(-[a-zA-Z0-9\-]+(?:[\[\ =][^\-\ ][a-zA-Z\<\>\[\|\:\]\-\_\?#]*\]?)?)', line)
+    opt = re.findall(
+        r'^(-[a-zA-Z0-9\-]+(?:[\[\ =][^\-\ ][a-zA-Z\<\>\[\|\:\]\-\_\?#]*\]?)?)',
+        line)
     if len(opt) > 0:
         newline = line.replace(opt[0], "", 1).strip(STRIP_CHARS)
         # return without parameter
@@ -104,10 +105,12 @@ def generate_argument_list(options):
         model['style'] = ""
         if len(opts) > 2:
             model['opts'] = ",".join(opts[:-1])
-            argument_list.append(Template(ARGUMENT_TEMPLATE).safe_substitute(model))
+            argument_list.append(
+                Template(ARGUMENT_TEMPLATE).safe_substitute(model))
         elif len(opts) == 2:
             model['opt'] = opts[0]
-            argument_list.append(Template(SINGLE_ARGUMENT_TEMPLATE).safe_substitute(model))
+            argument_list.append(
+                Template(SINGLE_ARGUMENT_TEMPLATE).safe_substitute(model))
         else:
             pass
 
@@ -118,7 +121,11 @@ def generate_completion_function(options, program_name):
     """
     Generate completion function from the template.
     """
-    model = {'program_name': program_name, 'argument_list': generate_argument_list(options), 'url': URL}
+    model = {
+        'program_name': program_name,
+        'argument_list': generate_argument_list(options),
+        'url': URL
+    }
     return Template(COMPLETE_FUNCTION_TEMPLATE).safe_substitute(model).strip()
 
 
