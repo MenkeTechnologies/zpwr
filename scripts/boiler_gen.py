@@ -65,7 +65,8 @@ public class {name}Controller {{
 
 }}
 '''
-    spring_files.append(CodeFile(resourceFile, f"{directory}/controller", resource))
+    spring_files.append(
+        CodeFile(resourceFile, f"{directory}/controller", resource))
     for file in spring_files:
         if not os.path.exists(file.directory):
             os.mkdir(file.directory)
@@ -142,14 +143,16 @@ def gen_files_spring(start):
         spring_routine(package, name)
 
 
-frameworks = [
-    {"spring": ["spring", "s", "spr", "sp"]},
-    {"react": ["react", "r", "re", "rea"]}
-]
+frameworks = [{
+    "spring": ["spring", "s", "spr", "sp"]
+}, {
+    "react": ["react", "r", "re", "rea"]
+}]
+
 
 def get_frame_work(user_framework):
     for frame in frameworks:
-        for key,value in frame.items():
+        for key, value in frame.items():
             for abbrev in value:
                 if user_framework == abbrev:
                     return key
