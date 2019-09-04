@@ -490,7 +490,7 @@ else
 
         test -d "/etc/systemd/system" || \
             { echo "/etc/systemd/system does not exists. Is systemd installed?" >&2 && return 1; }
-        git -C "$src_dir" pull
+            ( cd "$src_dir" && git pull; )
         group=$(id -gn)
         if [[ $UID != 0 ]]; then
             perl -i -pe "s@pi@$USER@g" "$service_path"
