@@ -13,35 +13,35 @@ echo "$0" | grep -q pip_install.sh && source common.sh
 if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "Upgrading pip"
-    python2 -m pip install --upgrade pip
+    python3 -m pip install --upgrade pip
     prettyPrint "Installing psutil for Python Glances"
-    python2 -m pip install psutil 
+    python3 -m pip install psutil 
     prettyPrint "Installing Python Glances"
-    python2 -m pip install glances
+    python3 -m pip install glances
     prettyPrint "Installing Virtualenv"
     python3 -m pip install virtualenv
 
     prettyPrint "Installing Powerline..."
 
-    python2 -m pip install powerline-status
+    python3 -m pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
 
-    python2 -m pip install powerline-mem-segment
+    python3 -m pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
-    python2 -m pip install pydf
+    python3 -m pip install pydf
 
     prettyPrint "Installing MyCLI"
-    python2 -m pip install mycli
+    python3 -m pip install mycli
 
     prettyPrint "Installing PGCLI"
-    python2 -m pip install pgcli
+    python3 -m pip install pgcli
 
 
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
-        python2 -m pip install --upgrade youtube_dl
+        python3 -m pip install --upgrade youtube_dl
     }
 
     python3 -c 'import pip' && {
@@ -69,40 +69,40 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
     fi
 
     prettyPrint "Upgrading pip"
-    sudo python2 -m pip install --upgrade pip
+    sudo python3 -m pip install --upgrade pip
     prettyPrint "Installing psutil for Python Glances"
-    sudo python2 -m pip install psutil 
+    sudo python3 -m pip install psutil 
 
     prettyPrint "Installing setuptools"
-    sudo python2 -m pip install setuptools
+    sudo python3 -m pip install setuptools
 
     prettyPrint "Installing Python Glances"
-    sudo python2 -m pip install glances
+    sudo python3 -m pip install glances
     prettyPrint "Installing Powerline..."
 
-    python2 -c 'import pip' && sudo pip2 install powerline-status || sudo python2 -m pip install powerline-status
-    python2 -c 'import pip' && sudo pip2 install powerline-mem-segment || sudo python2 -m pip install powerline-mem-segment
+    python3 -c 'import pip' && sudo pip3 install powerline-status || sudo python3 -m pip install powerline-status
+    python3 -c 'import pip' && sudo pip3 install powerline-mem-segment || sudo python3 -m pip install powerline-mem-segment
     
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
     [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-    sudo python2 -m pip install powerline-mem-segment
+    sudo python3 -m pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
-    sudo python2 -m pip install pydf
+    sudo python3 -m pip install pydf
 
     prettyPrint "Installing MyCLI"
-    sudo python2 -m pip install mycli
+    sudo python3 -m pip install mycli
 
     prettyPrint "Installing Speedtest"
-    sudo python2 -m pip install speedtest-cli
+    sudo python3 -m pip install speedtest-cli
 
     prettyPrint "Installing PGCLI"
-    sudo python2 -m pip install pgcli
+    sudo python3 -m pip install pgcli
 
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
-        sudo python2 -m pip install --upgrade youtube_dl
+        sudo python3 -m pip install --upgrade youtube_dl
     }
 
     python3 -c 'import pip' && {
@@ -124,7 +124,7 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
 else
     if [[ "$OS_TYPE" == "FreeBSD" ]]; then
         sudo python3 -m pip
-        sudo python3 -m python2 -m pip install --upgrade
+        sudo python3 -m python3 -m pip install --upgrade
 
         prettyPrint "Upgrading pip"
         sudo python3 -m pip install --upgrade pip
@@ -138,8 +138,8 @@ else
         sudo python3 -m pip install glances
         prettyPrint "Installing Powerline..."
 
-        python2 -c 'import pip' && sudo pip2 install powerline-status || sudo python2 -m pip install powerline-status
-        python2 -c 'import pip' && sudo pip2 install powerline-mem-segment || sudo python2 -m pip install powerline-mem-segment
+        python3 -c 'import pip' && sudo pip3 install powerline-status || sudo python3 -m pip install powerline-status
+        python3 -c 'import pip' && sudo pip3 install powerline-mem-segment || sudo python3 -m pip install powerline-mem-segment
         
         prettyPrint "Installing Tmux Powerline"
 

@@ -107,20 +107,20 @@ dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootki
 addDependenciesLinux(){
     dependencies_ary+=(build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf afpfs-ng \
-    samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace python-pip)
+    samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace)
 }
 addDependenciesArch(){
     dependencies_ary+=(linux-headers net-tools) 
 }
 
 addDependenciesSuse(){
-    dependencies_ary=(python3-devel python-devel ${dependencies_ary[@]})
+    dependencies_ary=(python3-devel ${dependencies_ary[@]})
     dependencies_ary+=(makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel mysql-devel libevent-devel postgresql-devel fortune ruby-devel openssl-devel net-tools-deprecated \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel) 
 }
 
 addDependenciesDebian(){
-    dependencies_ary=(python3-dev python-dev ${dependencies_ary[@]})
+    dependencies_ary=(python3-dev ${dependencies_ary[@]})
     dependencies_ary+=(mysql-server gcc bc npm lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
     libxpm-dev libxt-dev \
@@ -133,8 +133,8 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary=(python3-devel python-devel ${dependencies_ary[@]})
-    dependencies_ary+=(gcc-c++ 'fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel python-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
+    dependencies_ary=(python3-devel ${dependencies_ary[@]})
+    dependencies_ary+=(gcc-c++ 'fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
 }
 
 addDependenciesFreeBSD(){
@@ -143,7 +143,7 @@ addDependenciesFreeBSD(){
 
 addDependenciesMac(){
     dependencies_ary=(macvim ${dependencies_ary[@]})
-    dependencies_ary+=(httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher fswatch zzz ghc lua python3 python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=(httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher fswatch zzz ghc lua python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
