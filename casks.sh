@@ -1,5 +1,6 @@
 brew cask install adafruit-arduino
 brew cask install adobe-acrobat-reader
+brew cask install adoptopenjdk8
 brew cask install alfred
 brew cask install android-platform-tools
 brew cask install android-studio
@@ -21,11 +22,13 @@ brew cask install electric-sheep
 brew cask install emacs
 brew cask install etcher
 brew cask install filezilla
+brew cask install firefox
 brew cask install font-codenewroman-nerd-font
 brew cask install font-fantasquesansmono-nerd-font
 brew cask install font-hack-nerd-font
 brew cask install font-inconsolata-nerd-font
 brew cask install font-sourcecodepro-nerd-font
+brew cask install franz
 brew cask install geekbench
 brew cask install genymotion
 brew cask install gimp
@@ -33,6 +36,7 @@ brew cask install goland
 brew cask install google-chrome
 brew cask install hex-fiend
 brew cask install intellij-idea
+brew cask install intellij-idea-ce
 brew cask install iterm2
 brew cask install java
 brew cask install java6
@@ -51,6 +55,7 @@ brew cask install mysqlworkbench
 brew cask install netbeans
 brew cask install ngrok
 brew cask install onyx
+brew cask install opera
 brew cask install phpstorm
 brew cask install postico
 brew cask install postman
@@ -59,7 +64,6 @@ brew cask install pycharm
 brew cask install pycharm-ce
 brew cask install qt-creator
 brew cask install racket
-brew cask install rambox
 brew cask install rar
 brew cask install react-studio
 brew cask install rider

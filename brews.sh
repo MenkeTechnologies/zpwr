@@ -8,6 +8,7 @@ brew install alpine
 brew install amap
 brew install ant
 brew install aom
+brew install apache-spark
 brew install apr
 brew install apr-util
 brew install argon2
@@ -29,6 +30,7 @@ brew install bmon
 brew install boost
 brew install boxes
 brew install brotli
+brew install browserpass
 brew install bsdmake
 brew install c-ares
 brew install cabal-install
@@ -57,6 +59,7 @@ brew install cscope
 brew install ctags
 brew install ctop
 brew install cunit
+brew install curl
 brew install curl-openssl
 brew install cython
 brew install dart
@@ -108,6 +111,7 @@ brew install glassfish
 brew install glib
 brew install glib-networking
 brew install gmp
+brew install gnu-getopt
 brew install gnu-prolog
 brew install gnu-sed
 brew install gnupg
@@ -163,6 +167,7 @@ brew install jnettop
 brew install jpeg
 brew install jq
 brew install jvmtop
+brew install kafka
 brew install kotlin
 brew install lame
 brew install leiningen
@@ -199,6 +204,7 @@ brew install libmpc
 brew install libmpdclient
 brew install libnet
 brew install libnfs
+brew install libnice
 brew install libogg
 brew install libomp
 brew install libpng
@@ -231,23 +237,27 @@ brew install libyaml
 brew install libzip
 brew install links
 brew install little-cms2
+brew install llvm
 brew install llvm@6
 brew install lolcat
 brew install lua
 brew install lua@5.1
 brew install luajit
+brew install lzo
 brew install mad
 brew install mailutils
 brew install makedepend
 brew install man2html
 brew install maven
 brew install mercurial
+brew install meson
 brew install midnight-commander
 brew install minicom
 brew install mit-scheme
 brew install mksh
 brew install mongodb
 brew install mono
+brew install moreutils
 brew install mp3blaster
 brew install mpc
 brew install mpd
@@ -268,6 +278,7 @@ brew install netpbm
 brew install nettle
 brew install nghttp2
 brew install nginx
+brew install ninja
 brew install ninvaders
 brew install nmap
 brew install nnn
@@ -295,7 +306,7 @@ brew install p11-kit
 brew install p7zip
 brew install pandoc
 brew install pango
-brew install parallel
+brew install pass
 brew install pcre
 brew install pcre2
 brew install peco
@@ -305,6 +316,7 @@ brew install pgcli
 brew install php
 brew install pidof
 brew install pinentry
+brew install pinentry-mac
 brew install pipes-sh
 brew install pixman
 brew install pkg-config
@@ -322,6 +334,7 @@ brew install py3cairo
 brew install pygobject3
 brew install python
 brew install python@2
+brew install qrencode
 brew install qt
 brew install r
 brew install ranger
@@ -348,7 +361,9 @@ brew install sdl2_ttf
 brew install sdl_image
 brew install sdl_mixer
 brew install sdl_ttf
+brew install shared-mime-info
 brew install shellcheck
+brew install shfmt
 brew install sl
 brew install slurm
 brew install smpeg
@@ -356,12 +371,14 @@ brew install snappy
 brew install sntop
 brew install sox
 brew install spaceinvaders-go
+brew install spark
 brew install speedtest-cli
 brew install speex
 brew install sphinx-doc
 brew install springboot
 brew install sqlite
 brew install srm
+brew install srtp
 brew install swig
 brew install taglib
 brew install tal
@@ -411,6 +428,7 @@ brew install xvid
 brew install xz
 brew install yasm
 brew install zlib
+brew install zookeeper
 brew install zplug
 brew install zsh
 brew install zsh-lovers
