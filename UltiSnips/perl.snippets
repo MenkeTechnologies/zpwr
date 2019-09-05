@@ -1,0 +1,54 @@
+snippet se "print to stderr"
+say STDERR "${1:msg}";
+endsnippet
+
+snippet s "print to stdout"
+say STDOUT '__________$1__________ = ',"${1:msg}";
+endsnippet
+
+snippet sa "print to stdout"
+say STDOUT "${1:msg}";
+endsnippet
+
+snippet ie "if else"
+if (${1}) {
+	${2}
+}
+else {
+	${0}
+}
+endsnippet
+
+snippet iee "if elsif else"
+if (${1}) {
+	${2}
+}
+elsif (${3}) {
+	${4}
+}
+else {
+	${0}
+}
+endsnippet
+
+snippet ieee "if elsif elsif else"
+if (${1}) {
+	${2}
+}
+elsif (${3}) {
+	${4}
+}
+elsif (${5}) {
+	${6}
+}
+else {
+	${0}
+}
+endsnippet
+
+snippet fe "foreach implicit param"
+for (@${1:array}) {
+	${2}
+}
+endsnippet
+

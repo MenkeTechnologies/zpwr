@@ -1153,6 +1153,11 @@ let g:ale_fixers = {'ruby': ['rubocop'], 'sh': ['shfmt'], 'perl': ['perltidy'], 
 
 let g:ale_perl_perlcritic_options = '--brutal'
 
+let g:snips_author='MenkeTechnologies'
+let g:snips_email='jmenke@wccnet.edu'
+let g:snips_github='MenkeTechnologies'
+
+
 "give :Ag preview window with first line of matched file matches fzf input
 command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
 

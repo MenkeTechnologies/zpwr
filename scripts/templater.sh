@@ -23,6 +23,7 @@ addHeader() {
 #{{{ MARK:Header
 #**************************************************************
 ##### Author: $(whoami | tr 'a-z' 'A-Z')
+##### GitHub: https://github.com/$GITHUB_ACCOUNT
 ##### Date: $(date)
 ##### Purpose: $1 script to
 ##### Notes:
