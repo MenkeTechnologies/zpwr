@@ -634,6 +634,7 @@ cd ponysay && sudo ./setup.py --freedom=partial install && \
 }
 
 
+export GOPATH="$HOME/go"
 prettyPrint "Installing mylg"
 go get github.com/mehrdadrad/mylg
 cd "$HOME/go/src/github.com/mehrdadrad/mylg/"
