@@ -1,9 +1,9 @@
-snippet shebang "shebang line"
-#!/usr/bin/env ${1:bash}
-endsnippet
-
 snippet pr "printf default"
 printf "%$1\n" $2
+endsnippet
+
+snippet p "printf default"
+printf '______$1_____ = '"'$1' \n"
 endsnippet
 
 snippet ie "if else"
@@ -11,6 +11,18 @@ if [[ $1 ]]; then
 	${2::}
 else
 	${3::}
+fi
+endsnippet
+
+snippet ieee "if elif elif else"
+if [[ $1 ]]; then
+	${2::}
+elif [[ $3 ]]; then
+	${4::}
+elif [[ $5 ]]; then
+	${6::}
+else
+	${7::}
 fi
 endsnippet
 

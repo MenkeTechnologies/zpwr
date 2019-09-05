@@ -1,5 +1,9 @@
-snippet sig "My Signature" b
-#created by `whoami | tr 'a-z' 'A-Z'''''` at `date`
+snippet shebang "shebang line"
+#!/usr/bin/env ${1:bash}
+endsnippet
+
+snippet sig "My Signature"
+#created by `g:snips_author` at `date`
 endsnippet
 
 snippet mypy "all the env vars"
@@ -51,10 +55,11 @@ snippet temp "default header"
 #!/usr/bin/env $1
 #{{{                    MARK:Header
 #**************************************************************
-#####   Author: `whoami | tr 'a-z' 'A-Z'`
-#####   Date: `date`
-#####   Purpose: $1 script to $2 
-#####   Notes: 
+##### Author: `g:snips_author`
+##### GitHub: https://github.com/`g:snips_github`
+##### Date: `date`
+##### Purpose: $1 script to $2 
+##### Notes: 
 #}}}***********************************************************
 endsnippet
 
