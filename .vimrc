@@ -1078,15 +1078,15 @@ elseif os == "Linux"
         map <ESC>[1;5B <C-Down>
         map <ESC>[1;5C <C-Right>
         map <ESC>[1;5D <C-Left>
-        set  rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
-    elseif distro == "fedora"
-        set  rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
+        set  runtimepath+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
+    elseif distro == 'fedora'
+        set  runtimepath+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
         map <ESC>[A <C-Up>
         map <ESC>[B <C-Down>
         map <ESC>[C <C-Right>
         map <ESC>[D <C-Left>
     else
-        set  rtp+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
+        set  runtimepath+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
         "map <ESC>[A <C-Up>
         "map <ESC>[B <C-Down>
         "map <ESC>[C <C-Right>
@@ -1165,9 +1165,9 @@ function! MyBalloonExpr()
 endfunction
 
 set mouse=a
-set ttymouse=sgr
 set balloonexpr=MyBalloonExpr()
 set balloondelay=300
+set ttymouse=sgr
 set ballooneval
 set balloonevalterm
 
@@ -1204,11 +1204,10 @@ xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
-" nfig
-"
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 
+" Open pane to left
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 inoremap <expr> <c-x><c-l> fzf#vim#complete#line({'left': '15%'})
 
