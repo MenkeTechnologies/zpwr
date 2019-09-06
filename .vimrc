@@ -37,8 +37,6 @@ endif
 " required:
 "call neobundle#end()
 
-" required:
-filetype plugin indent on
 
 "}}}***********************************************************
 
@@ -92,7 +90,6 @@ set number
 set backupdir=~/tmp
 set wildmenu "tab completion in command mode cycles through menu
 set wildignorecase "globbing is case insensitive
-syntax on
 set grepprg=ag
 
 "visual selection automatically into system clipboard
@@ -171,9 +168,11 @@ let g:auto_save_events = ["InsertLeave", "TextChanged", "TextChangedI"]
 
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
+
 let g:UltiSnipsExpandTrigger           = '<tab>'
 let g:UltiSnipsJumpForwardTrigger      = '<tab>'
 let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
+
 let g:ycm_key_list_select_completion   = ['<C-n>']
 let g:ycm_key_list_previous_completion = ['<C-p>']
 let g:ycm_min_num_of_chars_for_completion = 1
@@ -947,6 +946,7 @@ inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
 inoremap <silent> <C-D>f <C-O>:Files<CR>
 inoremap <silent> <C-D>c <C-O>:Colors<CR>
 inoremap <silent> <C-D>g <C-O>:Commits<CR>
+inoremap <silent> <C-D>d <C-O>:Commands<CR>
 inoremap <silent> <C-D>b <C-O>:Buffers<CR>
 inoremap <silent> <C-D>a <C-O>:Ag<CR>
 inoremap <silent> <C-D>j <C-O>:Agg<CR>
@@ -954,7 +954,8 @@ inoremap <silent> <C-D>l <C-O>:Lines<CR>
 inoremap <silent> <C-D>m <C-O>:Marks<CR>
 inoremap <silent> <C-D>w <C-O>:Windows<CR>
 inoremap <silent> <C-D>n <C-O>:Snippets<CR>
-inoremap <silent> <C-D>h <C-O>:History:<CR>
+inoremap <silent> <C-D>u <C-O>:History:<CR>
+inoremap <silent> <C-D>h <C-O>:History<CR>
 inoremap <silent> <C-D>s <C-O>:History/<CR>
 inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
 inoremap <silent> <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
@@ -966,6 +967,7 @@ inoremap <silent> <C-D>k <C-O>:ALEFix<CR>
 "normal mode keybindings for fzf-vim
 nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
+nnoremap <silent> <C-D>d :Commands<CR>
 nnoremap <silent> <C-D>g :Commits<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <C-D>j :Agg<CR>
@@ -974,7 +976,8 @@ nnoremap <silent> <C-D>b :Buffers<CR>
 nnoremap <silent> <C-D>m :Marks<CR>
 nnoremap <silent> <C-D>w :Windows<CR>
 nnoremap <silent> <C-D>n :Snippets<CR>
-nnoremap <silent> <C-D>h :History:<CR>
+nnoremap <silent> <C-D>h :History<CR>
+nnoremap <silent> <C-D>u :History:<CR>
 nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>p :call GetRef()<CR>
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
@@ -1032,6 +1035,8 @@ autocmd BufNewFile * exe "normal! G" | startinsert!
 "**************************************************************
 "load all pathogen plugins
 execute pathogen#infect()
+syntax on
+filetype plugin indent on
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "powerline-status pip package installs to different locations of different OS
@@ -1164,8 +1169,22 @@ command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options'
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'bottom':'50%'}))
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap("with_preview", {"options": '--delimiter : --nth 4.. --preview'}))
 
+"give :History preview window
+command! -bang -nargs=* History call fzf#vim#history({'options': "--preview 'x={}; x=$(echo $x | perl -pe 's@~@".$HOME."@'); test -f $x && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $x || stat $x'"})
+
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" {} || stat {}'"}))
 
+" Mapping selecting mappings
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+
+inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
+inoremap <expr> <c-x><c-l> fzf#vim#complete#line({'left': '15%'})
 
 "}}}*****************za******************************************
