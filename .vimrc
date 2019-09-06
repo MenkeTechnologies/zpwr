@@ -1147,6 +1147,27 @@ let g:fzf_colors =
             \ 'spinner': ['fg', 'Label'],
             \ 'header':  ['fg', 'Comment'] }
 
+let s:timer = -1
+
+function! s:BalloonShow(...)
+  let s:message =
+          \ 'Cursor is at line ' . v:beval_lnum .
+          \', column ' . v:beval_col .
+          \ ' of file ' .  bufname(v:beval_bufnr) .
+          \ ' on word "' . v:beval_text . '"'
+  call c(s:message)
+endfunction
+
+function! MyBalloonExpr()
+  call timer_stop( s:timer )
+  let s:timer = timer_start(100, function('s:BalloonShow'))
+  return ''
+endfunction
+
+set mouse=a
+set ttymouse=sgr
+set balloonexpr=MyBalloonExpr()
+set balloondelay=300
 set ballooneval
 set balloonevalterm
 
@@ -1170,10 +1191,12 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap("with_preview", {"options": '--delimiter : --nth 4.. --preview'}))
 
 "give :History preview window
-command! -bang -nargs=* History call fzf#vim#history({'options': "--preview 'x={}; x=$(echo $x | perl -pe 's@~@".$HOME."@'); test -f $x && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $x || stat $x'"})
+command! -bang -nargs=* History call fzf#vim#history({'options': "--preview 'file={}; file=$(echo $file | sed 's@~@".$HOME."@'); test -f $file && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $file || stat $file'"})
 
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" {} || stat {}'"}))
+
+command! -bang -nargs=* Imap call fzf#vim#maps('i')
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -1181,6 +1204,8 @@ xmap <leader><tab> <plug>(fzf-maps-x)
 omap <leader><tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
+" nfig
+"
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 
