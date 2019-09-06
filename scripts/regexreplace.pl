@@ -1,4 +1,5 @@
-#!/usr/bin/env perl
+
+
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
@@ -25,6 +26,7 @@ if ( $help == 1 ) {
     say STDERR "Use --regex or --replacement to specify strings.";
     exit 1;
 }
+
 
 sub addToAry {
     if ( -d $_[0] ) {

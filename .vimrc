@@ -927,64 +927,68 @@ endfunction
 vnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
 nnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
 
-nnoremap <silent> <C-D>d :update<CR>
-vnoremap <silent> <C-D>d :<C-C>:update<CR>
-inoremap <silent> <C-D>d <C-[>:update<CR>a
-
-nnoremap <silent> <C-D>v :w!<CR>:call TmuxRepeatGeneric()<CR>
-inoremap <silent> <C-D>v <C-[>:w!<CR>:call TmuxRepeatGeneric()<CR>a
-inoremap <silent> <C-D>r <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
-nnoremap <silent> <C-D>g :silent !open -t %:p:h<CR>:redraw!<CR>
-
-nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
 vnoremap <silent> <C-D>y :<C-C>:update<CR>:SyntasticCheck<CR>
-inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
+vnoremap <silent> <C-D>d :<C-C>:update<CR>
 
 "insert mode keybindings for fzf-vim
-inoremap <silent> <C-D>f <C-O>:Files<CR>
-inoremap <silent> <C-D>c <C-O>:Colors<CR>
-inoremap <silent> <C-D>g <C-O>:Commits!<CR>
-inoremap <silent> <C-D>d <C-O>:Commands<CR>
-inoremap <silent> <C-D>b <C-O>:Buffers<CR>
+inoremap <silent> <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
+
 inoremap <silent> <C-D>a <C-O>:Ag<CR>
+inoremap <silent> <C-D>b <C-O>:Buffers<CR>
+inoremap <silent> <C-D>c <C-O>:Colors<CR>
+inoremap <silent> <C-D>d <C-O>:Commands<CR>
+inoremap <silent> <C-D>e <C-O>:ALEInfo<CR>
+inoremap <silent> <C-D>f <C-O>:Files<CR>
+inoremap <silent> <C-D>g <C-O>:Commits!<CR>
+inoremap <silent> <C-D>h <C-O>:History<CR>
+inoremap <silent> <C-D>i <C-O>:Imap<CR>
 inoremap <silent> <C-D>j <C-O>:Agg<CR>
 inoremap <silent> <C-D>l <C-O>:Lines<CR>
-inoremap <silent> <C-D>m <C-O>:Marks<CR>
-inoremap <silent> <C-D>w <C-O>:Windows<CR>
-inoremap <silent> <C-D>n <C-O>:Snippets<CR>
-inoremap <silent> <C-D>u <C-O>:History:<CR>
-inoremap <silent> <C-D>h <C-O>:History<CR>
-inoremap <silent> <C-D>s <C-O>:History/<CR>
-inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
-inoremap <silent> <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
-inoremap <silent> <C-D>q <C-O>:SaveSession!<CR><TAB>
-inoremap <silent> <C-D>o <C-O>:ALEToggle<CR>
-inoremap <silent> <C-D>i <C-O>:ALEInfo<CR>
 inoremap <silent> <C-D>k <C-O>:ALEFix<CR>
+inoremap <silent> <C-D>m <C-O>:Map<CR>
+inoremap <silent> <C-D>n <C-O>:Snippets<CR>
+inoremap <silent> <C-D>s <C-O>:History/<CR>
+inoremap <silent> <C-D>u <C-O>:History:<CR>
+inoremap <silent> <C-D>o <C-O>:ALEToggle<CR>
+inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
+inoremap <silent> <C-D>q <C-O>:SaveSession!<CR><TAB>
+inoremap <silent> <C-D>r <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 inoremap <silent> <C-D>t <C-O>:Tags<CR>
+inoremap <silent> <C-D>v <C-[>:w!<CR>:call TmuxRepeatGeneric()<CR>a
+inoremap <silent> <C-D>w <C-O>:update<CR>
+inoremap <silent> <C-D>x <C-O>:Marks<CR>
+inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
+inoremap <silent> <C-D>z <ESC>:TlistAddFiles * <CR> :TlistToggle<CR>i
 
 "normal mode keybindings for fzf-vim
-nnoremap <silent> <C-D>f :Files<CR>
+noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
+
+nnoremap <silent> <C-D>a :Ag<CR>
+nnoremap <silent> <C-D>b :Buffers<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
+nnoremap <silent> <C-D>e :ALEInfo<CR>
+nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <C-D>g :Commits!<CR>
-nnoremap <silent> <C-D>a :Ag<CR>
-nnoremap <silent> <C-D>j :Agg<CR>
-nnoremap <silent> <C-D>l :Lines<CR>
-nnoremap <silent> <C-D>b :Buffers<CR>
-nnoremap <silent> <C-D>m :Marks<CR>
-nnoremap <silent> <C-D>w :Windows<CR>
-nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>h :History<CR>
-nnoremap <silent> <C-D>u :History:<CR>
-nnoremap <silent> <C-D>s :History/<CR>
-nnoremap <silent> <C-D>p :call GetRef()<CR>
-noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
-nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
-nnoremap <silent> <C-D>o :ALEToggle<CR>
-nnoremap <silent> <C-D>i :ALEInfo<CR>
+nnoremap <silent> <C-D>i :Imap<CR>
+nnoremap <silent> <C-D>j :Agg<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
+nnoremap <silent> <C-D>l :Lines<CR>
+nnoremap <silent> <C-D>m :Map<CR>
+nnoremap <silent> <C-D>n :Snippets<CR>
+nnoremap <silent> <C-D>o :ALEToggle<CR>
+nnoremap <silent> <C-D>p :call GetRef()<CR>
+nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
+nnoremap <silent> <C-D>r :silent !open -t %:p:h<CR>:redraw!<CR>
+nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>t :Tags<CR>
+nnoremap <silent> <C-D>u :History:<CR>
+nnoremap <silent> <C-D>v :w!<CR>:call TmuxRepeatGeneric()<CR>
+nnoremap <silent> <C-D>w :update<CR>
+nnoremap <silent> <C-D>x :Marks<CR>
+nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
+nnoremap <silent> <C-D>z :TlistAddFiles *<CR>:TlistToggle<CR>
 
 "gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
 set updatetime=100
