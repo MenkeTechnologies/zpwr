@@ -2040,6 +2040,11 @@ jsonToArray(){
     set +x
 }
 
+regenBindings(){
+    bash "$SCRIPTS/keybindingsToFZFVim.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$HOME/vimKeybindings.txt"
+    zsh -l "$SCRIPTS/keybindingsToFZF.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$HOME/keybindings.txt"
+}
+
 arrayToJson(){
     if isZsh; then
         ary="$1"
