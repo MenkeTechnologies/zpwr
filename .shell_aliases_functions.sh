@@ -282,7 +282,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias pg='cd $HOME/PycharmProjects'
     alias cg='cd $HOME/ClionProjects'
     alias wg='cd $HOME/WebstormProjects'
-    alias rg='cd $HOME/RubymineProjects'
+    alias mg='cd $HOME/RubymineProjects'
     alias asg='cd $HOME/AndroidStudioProjects'
     alias xg='cd $HOME/Documents/xcode'
     alias ap='cd /Applications'
