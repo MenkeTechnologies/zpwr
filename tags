@@ -1,0 +1,658 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BASE_DIR	remoteRepoMonitorDaemon.sh	/^BASE_DIR="$HOME\/forkedRepos"$/;"	v
+BLUE	blueText.sh	/^BLUE='\\e[37;44m'$/;"	v
+BLUE	blueUpperText.sh	/^BLUE='\\e[37;44m'$/;"	v
+BLUE	boldText.sh	/^BLUE='\\e[37;44m'$/;"	v
+BLUE	coolFormatter.sh	/^BLUE='\\e[37;44m'$/;"	v
+CMD	myWatchNoBlink.sh	/^        CMD="$@"$/;"	v
+CMD	myWatchNoBlinkColorized.sh	/^        CMD="$@"$/;"	v
+CMDNAME	mantozshcomp.py	/^CMDNAME = ""$/;"	v
+COLS	myWatchNoBlink.sh	/^        COLS=$(tput cols)$/;"	v
+COLS	myWatchNoBlinkColorized.sh	/^        COLS=$(tput cols)$/;"	v
+COMPLETION_DIR	remoteRepoMonitorDaemon.sh	/^    COMPLETION_DIR="$HOME\/.oh-my-zsh\/custom\/plugins"$/;"	v
+CONFIG_DIR	remoteRepoMonitorDaemon.sh	/^CONFIG_DIR="$HOME\/forkedRepos\/$REPO_NAME"$/;"	v
+COWSAY_DIR	macOnly/randomCow.sh	/^COWSAY_DIR=\/usr\/local\/lib\/node_modules\/cowsay\/cows$/;"	v
+CR	batchRename.sh	/^    local CR="\\r"$/;"	v
+CR	openAll.sh	/^    local CR="\\r"$/;"	v
+CodeFile	boiler_gen.py	/^class CodeFile:$/;"	c
+DIR	macOnly/rsyncr.sh	/^localDIR="$1"$/;"	v
+Deroffer	mantozshcomp.py	/^class Deroffer:$/;"	c
+ECHO	oldCounter.sh	/^        ECHO="true"$/;"	v
+FIGLET_DIR	macOnly/figletRandomFont.sh	/^    FIGLET_DIR="\/usr\/local\/Cellar\/figlet\/2.2.5\/share\/figlet\/fonts"$/;"	v
+FIGLET_DIR	macOnly/figletRandomFont.sh	/^    FIGLET_DIR="\/usr\/share\/figlet"$/;"	v
+FIGLET_DIR	macOnly/figletRandomFontOnce.sh	/^    FIGLET_DIR="\/usr\/local\/Cellar\/figlet\/2.2.5\/share\/figlet\/fonts"$/;"	v
+FIGLET_DIR	macOnly/figletRandomFontOnce.sh	/^    FIGLET_DIR="\/usr\/share\/figlet"$/;"	v
+FIGLET_DIR	macOnly/figletRotater.sh	/^    FIGLET_DIR="\/usr\/local\/Cellar\/figlet\/2.2.5\/share\/figlet\/fonts"$/;"	v
+FIGLET_DIR	macOnly/figletRotater.sh	/^    FIGLET_DIR="\/usr\/share\/figlet"$/;"	v
+FIGLET_DIR	macOnly/menkeTechRandomFont.sh	/^    FIGLET_DIR="\/usr\/local\/Cellar\/figlet\/2.2.5\/share\/figlet\/fonts"$/;"	v
+FIGLET_DIR	macOnly/menkeTechRandomFont.sh	/^    FIGLET_DIR="\/usr\/share\/figlet"$/;"	v
+FILTER	macOnly/figletRandomFont.sh	/^FILTER="$2"$/;"	v
+FILTER	macOnly/figletRandomFontOnce.sh	/^FILTER="$2"$/;"	v
+FILTER	macOnly/figletRotater.sh	/^FILTER="$2"$/;"	v
+FILTER	macOnly/menkeTechRandomFont.sh	/^FILTER="$1"$/;"	v
+FILTER	macOnly/randomCow.sh	/^FILTER="$2"$/;"	v
+IFS	listAllCommands.sh	/^IFS=:$/;"	v
+IFS	saygoogle.sh	/^IFS=+$/;"	v
+IFS	sortedArrayCounter.sh	/^        IFS="$oldifs"$/;"	v
+IFS	sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v
+IFS	sortedArrayCounter.sh	/^IFS=:$/;"	v
+INTERFACE	macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v
+LOGFILE	updaterEmail.sh	/^LOGFILE="\/Users\/jacobmenke\/updaterlog.txt"$/;"	v
+ManParser	mantozshcomp.py	/^class ManParser(object):$/;"	c
+ORGIN_NAME	gitgo.sh	/^    local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"$/;"	v
+OS	test.sh	/^OS="$(uname -s)"$/;"	v
+Output	macOnly/figletRandomFont.sh	/^    Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"$/;"	v
+PARSER_INFO	mantozshcomp.py	/^PARSER_INFO = {}$/;"	v
+PATH	macOnly/tmuxer.sh	/^PATH="\/usr\/local\/bin:$PATH"$/;"	v
+PULL_URL	gitgo.sh	/^        local PULL_URL="$(git remote -v |$/;"	v
+RED	redText.sh	/^RED='\\e[31;1m'$/;"	v
+REPO_NAME	gitgo.sh	/^        local REPO_NAME="$(git remote -v | awk '{print $2}' | tail -1 | tr -d ' ')"$/;"	v
+REPO_NAME_TO_CREATE	gitgo.sh	/^        local REPO_NAME_TO_CREATE="$1"$/;"	v
+RESET	blueText.sh	/^RESET='\\e[0m'$/;"	v
+RESET	blueUpperText.sh	/^RESET='\\e[0m'$/;"	v
+RESET	boldText.sh	/^RESET='\\e[0m'$/;"	v
+RESET	coolFormatter.sh	/^RESET='\\e[0m'$/;"	v
+RESET	redText.sh	/^RESET='\\e[0m'$/;"	v
+ROWS	myWatchNoBlink.sh	/^        ROWS=$(tput lines)$/;"	v
+ROWS	myWatchNoBlinkColorized.sh	/^        ROWS=$(tput lines)$/;"	v
+SCRIPTS	macOnly/tutorialConfigUpdater.sh	/^SCRIPTS="$HOME\/Documents\/shellScripts"$/;"	v
+SCRIPTS	printHeader.sh	/^    SCRIPTS="$HOME\/Documents\/shellScripts"$/;"	v
+SCRIPTS	updaterEmail.sh	/^SCRIPTS="\/Users\/jacobmenke\/Documents\/shellScripts"$/;"	v
+TEXT_TO_DISPLAY	macOnly/figletRandomFont.sh	/^TEXT_TO_DISPLAY="$1"$/;"	v
+TEXT_TO_DISPLAY	macOnly/figletRandomFontOnce.sh	/^TEXT_TO_DISPLAY="$1"$/;"	v
+TEXT_TO_DISPLAY	macOnly/figletRotater.sh	/^TEXT_TO_DISPLAY="$1"$/;"	v
+TEXT_TO_DISPLAY	macOnly/menkeTechRandomFont.sh	/^TEXT_TO_DISPLAY="Menke Technologies"$/;"	v
+Template	help2comp.py	/^from string import Template$/;"	i
+Type1ManParser	mantozshcomp.py	/^class Type1ManParser(ManParser):$/;"	c
+Type2ManParser	mantozshcomp.py	/^class Type2ManParser(ManParser):$/;"	c
+Type3ManParser	mantozshcomp.py	/^class Type3ManParser(ManParser):$/;"	c
+Type4ManParser	mantozshcomp.py	/^class Type4ManParser(ManParser):$/;"	c
+TypeDarwinManParser	mantozshcomp.py	/^class TypeDarwinManParser(ManParser):$/;"	c
+TypeDeroffManParser	mantozshcomp.py	/^class TypeDeroffManParser(ManParser):$/;"	c
+URL	gitgo.sh	/^    local URL="https:\/\/github.com\/$GITHUB_ACCOUNT\/$REPO_NAME_TO_CREATE"$/;"	v
+URL	help2comp.py	/^URL = 'http:\/\/github.com\/RobSis\/zsh-completion-generator'$/;"	v
+ZSH_COMP_DIR	remoteRepoMonitorDaemon.sh	/^ZSH_COMP_DIR="$HOME\/.oh-my-zsh\/custom\/plugins\/$ZSH_COMP_REPO_NAME"$/;"	v
+__ScriptVersion	CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v
+__ScriptVersion	macOnly/splitReg.sh	/^__ScriptVersion=1.0.0$/;"	v
+__ScriptVersion	powerTo.sh	/^__ScriptVersion="1.0.0"$/;"	v
+__ScriptVersion	splitReg.sh	/^__ScriptVersion=1.0.0$/;"	v
+__ScriptVersion	storageShower.sh	/^__ScriptVersion="version"$/;"	v
+__ScriptVersion	tgzLocalInstaller.sh	/^__ScriptVersion="1.0.0"$/;"	v
+__ScriptVersion	updater.sh	/^__ScriptVersion="1.0.0"$/;"	v
+__init__	boiler_gen.py	/^    def __init__(self, filename, directory, contents):$/;"	m	class:CodeFile
+__init__	mantozshcomp.py	/^    def __init__(self):$/;"	m	class:Deroffer
+_escape	help2comp.py	/^def _escape(line):$/;"	f
+active	powerTo.sh	/^active=$(tmux list-panes | grep active | cut -c1)$/;"	v
+addContents	shebangChanger.sh	/^addContents() {$/;"	f
+addHeader	createTextFile.sh	/^addHeader() {$/;"	f
+addHeader	templater.sh	/^addHeader() {$/;"	f
+addToAry	regexreplace.pl	/^sub addToAry {$/;"	s
+add_diagnostic	mantozshcomp.py	/^def add_diagnostic(dgn, msg_verbosity=VERY_VERBOSE):$/;"	f
+address	uploadWebDS.sh	/^address="jacobmenke@$MY_IP:\/var\/services\/web"$/;"	v
+address	uploadWebPi.sh	/^address="pi@$MY_IP:\/var\/www\/html"$/;"	v
+allRemotes	about.sh	/^allRemotes() {$/;"	f
+already_output_completions	mantozshcomp.py	/^already_output_completions = {}$/;"	v
+alternatingPrettyPrint	CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
+alternatingPrettyPrint	pipUpdater.sh	/^alternatingPrettyPrint() {$/;"	f
+alternatingPrettyPrint	rpiSoftwareUpdater.sh	/^alternatingPrettyPrint() {$/;"	f
+alternatingPrettyPrint	updater.sh	/^alternatingPrettyPrint() {$/;"	f
+amPm	timeConverter.sh	/^    amPm="PM"$/;"	v
+amPm	timeConverter.sh	/^amPm="AM"$/;"	v
+arr	listAllCommands.sh	/^arr=()$/;"	v
+arr	picture_finder.sh	/^    local arr=('|' '\\' '-' '\/')$/;"	v
+arr	secureDelete.sh	/^    local arr=('|' '\\' '-' '\/')$/;"	v
+arr	sortedArrayCounter.sh	/^arr=()$/;"	v
+backup_dir	duplicateLineDeleter.sh	/^backup_dir=$scripts_dir\/rcBackups$/;"	v
+backup_dir	indenterAndDuplicateLineDeleter.sh	/^backup_dir=$scripts_dir\/rcBackups$/;"	v
+banner	about.sh	/^banner() {$/;"	f
+blocksize	secureDelete.sh	/^blocksize=1  # I\/O with \/dev\/urandom requires unit block size,$/;"	v
+boldflag	myWatchNoBlink.sh	/^        boldflag=true$/;"	v
+boldflag	myWatchNoBlinkColorized.sh	/^        boldflag=true$/;"	v
+boxesChar	manzshcompgen.zsh	/^    boxesChar='\/'$/;"	v
+boxesChar	zshcompgen.zsh	/^    boxesChar='\/'$/;"	v
+boxesPrint	manzshcompgen.zsh	/^boxesPrint(){$/;"	f
+boxesPrint	zshcompgen.zsh	/^boxesPrint(){$/;"	f
+built_command	mantozshcomp.py	/^def built_command(options, description, arg):$/;"	f
+built_command_output	mantozshcomp.py	/^built_command_output = []$/;"	v
+bz2	mantozshcomp.py	/^import bz2$/;"	i
+cargo_bin	rpiSoftwareUpdater.sh	/^cargo_bin="$HOME\/.cargo\/bin\/cargo"$/;"	v
+chars	batchRename.sh	/^    local chars=1                   # number of characters to display$/;"	v
+chars	openAll.sh	/^    local chars=1                   # number of characters to display$/;"	v
+checkForExistence	batchRename.sh	/^checkForExistence() {$/;"	f
+check_dir_exists	boiler_gen.py	/^def check_dir_exists(directory):$/;"	f
+cleanup_autogenerated_completions_in_directory	mantozshcomp.py	/^def cleanup_autogenerated_completions_in_directory(dir):$/;"	f
+cleanup_autogenerated_file	mantozshcomp.py	/^def cleanup_autogenerated_file(path):$/;"	f
+clearline	batchRename.sh	/^    local clearline="\\e[K"          # clear to end of line (ANSI terminal)$/;"	v
+clearline	openAll.sh	/^    local clearline="\\e[K"          # clear to end of line (ANSI terminal)$/;"	v
+cmd	delete_dups.zsh	/^    cmd="$(echo $f | cut -c2-)"$/;"	v
+codecs	mantozshcomp.py	/^import codecs$/;"	i
+cols	picture_finder.sh	/^cols=$(tput cols)$/;"	v
+command	macOnly/commandToColors.sh	/^command="$@"$/;"	v
+command	runner.sh	/^    command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | sed -n '4,$p'"$/;"	v
+commandList	oldCounter.sh	/^        commandList="$i\\n$commandList"$/;"	v
+commandList	oldCounter.sh	/^commandList=""$/;"	v
+commands	oldCounter.sh	/^            commands="$f $commands"$/;"	v
+commands	oldCounter.sh	/^commands=""$/;"	v
+comment	mantozshcomp.py	/^    def comment(self):$/;"	m	class:Deroffer
+commitMessage	gitgo.sh	/^    local commitMessage="$1"$/;"	v
+commitTheDirectory	gitgo.sh	/^commitTheDirectory() {$/;"	f
+comp_dir	manzshcompgen.zsh	/^comp_dir="comp_dir"$/;"	v
+comp_dir	zshcompgen.zsh	/^comp_dir="comp_dir"$/;"	v
+compileExecuteTheFile	runner.sh	/^compileExecuteTheFile() {$/;"	f
+compile_and_search	mantozshcomp.py	/^def compile_and_search(regex, input):$/;"	f
+compiled	watchServiceFSWatchRustCompile.sh	/^            compiled=${fileName%*.rs}$/;"	v
+concat	myWatchNoBlinkColorized.sh	/^            concat="$(java parser $LINE)"$/;"	v
+condputs	mantozshcomp.py	/^    def condputs(self, str):$/;"	m	class:Deroffer
+condputs_tr	mantozshcomp.py	/^    def condputs_tr(self, str):$/;"	m	class:Deroffer
+contents	duplicateLineDeleter.sh	/^    contents=$(cat -s "$file")$/;"	v
+contents	indenterAndDuplicateLineDeleter.sh	/^    contents=$(cat -s "$file")$/;"	v
+convertFiles	batchRename.sh	/^convertFiles() {$/;"	f
+could_be_description	mantozshcomp.py	/^    def could_be_description(self, line):$/;"	m	class:TypeDeroffManParser
+count	uploadWebPi.sh	/^count=0$/;"	v
+count_argument_dashes	mantozshcomp.py	/^    def count_argument_dashes(self, line):$/;"	m	class:TypeDarwinManParser
+counter	CPU_Stresser.sh	/^    counter=0$/;"	v
+counter	pipUpdater.sh	/^    counter=0$/;"	v
+counter	rpiSoftwareUpdater.sh	/^    counter=0$/;"	v
+createTemplate	templater.sh	/^createTemplate() {$/;"	f
+createTheFile	createScriptButDontOpenSublime.sh	/^createTheFile() {$/;"	f
+createTheFile	createTextFile.sh	/^createTheFile() {$/;"	f
+cut_option	help2comp.py	/^def cut_option(line):$/;"	f
+dateflag	myWatchMaintainEscapes.sh	/^        dateflag=true$/;"	v
+dateflag	mywatch.sh	/^        dateflag=true$/;"	v
+default_recipent	textmessage.sh	/^    default_recipent="555111333"$/;"	v
+delay	batchRename.sh	/^    local delay=.1                  # time in seconds between characters$/;"	v
+delay	openAll.sh	/^    local delay=.1                  # time in seconds between characters$/;"	v
+delim	batchRename.sh	/^delim=_$/;"	v
+delim	macOnly/splitReg.sh	/^delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)$/;"	v
+delim	splitReg.sh	/^delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)$/;"	v
+deroff	mantozshcomp.py	/^    def deroff(self, str):$/;"	m	class:Deroffer
+deroff_files	mantozshcomp.py	/^def deroff_files(files):$/;"	f
+destinationFile	picture_finder.sh	/^    destinationFile=$destinationDirectory\/${picture##*\/}$/;"	v
+diagnostic_indent	mantozshcomp.py	/^diagnostic_indent = 0$/;"	v
+diagnostic_output	mantozshcomp.py	/^diagnostic_output = []$/;"	v
+digit	mantozshcomp.py	/^    def digit(self, idx):$/;"	m	class:Deroffer
+dir	oldCounter.sh	/^    dir=$(echo $PATH | cut -d: -f$i)$/;"	v
+dir	runner.sh	/^        dir="$(dirname "$2")"$/;"	v
+dir	runner.sh	/^    dir="$(dirname "$2")"$/;"	v
+dirNum	oldCounter.sh	/^dirNum=$(expr $(echo $PATH | tr -cd : | wc -c) + 1)$/;"	v
+dir_to_search	openAll.sh	/^    dir_to_search="$2"$/;"	v
+dir_to_search	openAll.sh	/^dir_to_search="$(pwd)"$/;"	v
+dir_watched	fsWatchLongRunning.sh	/^dir_watched="$1"$/;"	v
+dir_watching	watchServiceFSWatchGit.sh	/^dir_watching="$1"$/;"	v
+dir_watching	watchServiceFSWatchLS-ALH.sh	/^dir_watching="$1"$/;"	v
+dir_watching	watchServiceFSWatchPiDesktop.sh	/^dir_watching="$1"$/;"	v
+dir_watching	watchServiceFSWatchPiWeb.sh	/^dir_watching="$1"$/;"	v
+dir_watching	watchServiceFSWatchRustCompile.sh	/^dir_watching="$1"$/;"	v
+directory_name	tgzLocalInstaller.sh	/^        directory_name="${1%.tar.gz}"$/;"	v
+directory_name	tgzLocalInstaller.sh	/^        directory_name="${1%.tgz}"$/;"	v
+disable_proxy	macOnly/tor.sh	/^function disable_proxy() {$/;"	f
+displayProgress	batchRename.sh	/^displayProgress() {$/;"	f
+displayProgress	picture_finder.sh	/^displayProgress() {$/;"	f
+displayProgress	secureDelete.sh	/^displayProgress() {$/;"	f
+displayProgressIndicator	openAll.sh	/^displayProgressIndicator() {$/;"	f
+distro	colorLogger.sh	/^        distro=debian$/;"	v
+distro	colorLogger.sh	/^        distro=redhat$/;"	v
+distro	colorLogger.sh	/^        distro=suse$/;"	v
+distroName	clearTrash.sh	/^    distroName="$(grep '^ID=' \/etc\/os-release | cut -d= -f2 | tr -d \\")"$/;"	v
+distroName	colorLogger.sh	/^    distroName="$(grep '^ID=' \/etc\/os-release | cut -d= -f2 | tr -d \\")"$/;"	v
+distroName	logs.sh	/^    distroName=$(lsb_release -a | head -1 | awk '{print $3}')$/;"	v
+do_line	mantozshcomp.py	/^    def do_line(self):$/;"	m	class:Deroffer
+do_tbl	mantozshcomp.py	/^    def do_tbl(self):$/;"	m	class:Deroffer
+dontSummarizeSizes	directoryContentsSize.sh	/^dontSummarizeSizes() {$/;"	f
+dotdir	macOnly/tutorialConfigUpdater.sh	/^dotdir="$websiteDir\/downloads\/dotfiles"$/;"	v
+e_badargs	secureDelete.sh	/^e_badargs=70 # Various error exit codes.$/;"	v
+e_changed_mind	secureDelete.sh	/^e_changed_mind=72$/;"	v
+e_not_found	secureDelete.sh	/^e_not_found=71$/;"	v
+ed	myWatchNoBlink.sh	/^    ed=$(tput ed)$/;"	v
+ed	myWatchNoBlinkColorized.sh	/^    ed=$(tput ed)$/;"	v
+el	myWatchNoBlink.sh	/^    el=$(tput el)$/;"	v
+el	myWatchNoBlinkColorized.sh	/^    el=$(tput el)$/;"	v
+enclosing_dir	rpiSoftwareUpdater.sh	/^    enclosing_dir="$1"$/;"	v
+enclosing_dir	updater.sh	/^    enclosing_dir="$1"$/;"	v
+encrypt_program	encrypt.sh	/^    encrypt_program=zip$/;"	v
+encrypt_program	encrypt.sh	/^encrypt_program=ccrypt$/;"	v
+ending	picture_finder.sh	/^    ending=${destinationFile##*.}$/;"	v
+errno	mantozshcomp.py	/^import errno$/;"	i
+esc	mantozshcomp.py	/^    def esc(self):$/;"	m	class:Deroffer
+esc_char	mantozshcomp.py	/^    def esc_char(self):$/;"	m	class:Deroffer
+esc_char_backslash	mantozshcomp.py	/^    def esc_char_backslash(self):$/;"	m	class:Deroffer
+executableProgram	shebangChanger.sh	/^executableProgram=$1$/;"	v
+executableScriptsProcessing	createScriptButDontOpenSublime.sh	/^executableScriptsProcessing() {$/;"	f
+executableScriptsProcessing	createTextFile.sh	/^executableScriptsProcessing() {$/;"	f
+executableScriptsProcessing	runner.sh	/^executableScriptsProcessing() {$/;"	f
+executableScriptsProcessing	templater.sh	/^executableScriptsProcessing() {$/;"	f
+executeFileFirstArgIsCommand	runner.sh	/^executeFileFirstArgIsCommand() {$/;"	f
+executeTheFile	runner.sh	/^executeTheFile() {$/;"	f
+exists	CPU_Stresser.sh	/^exists() {$/;"	f
+exists	fzfPreviewOptsCommon.sh	/^    exists(){$/;"	f
+exists	manzshcompgen.zsh	/^exists(){$/;"	f
+exists	rpiSoftwareUpdater.sh	/^exists() {$/;"	f
+exists	updater.sh	/^exists() {$/;"	f
+exists	zshcompgen.zsh	/^exists(){$/;"	f
+fallback	mantozshcomp.py	/^    def fallback(self, options_section):$/;"	m	class:Type1ManParser
+fallback2	mantozshcomp.py	/^    def fallback2(self, options_section):$/;"	m	class:Type1ManParser
+family_phone_numbers	textmessage.sh	/^    family_phone_numbers=("$member_1")$/;"	v
+fetch	about.sh	/^            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\\t ]+@    @')"$/;"	v
+file	boiler_gen.py	/^    file = CodeFile(model_file, directory, model)$/;"	v
+file	inotifyWatchLogAndEmailIfNAS.sh	/^file="$1"$/;"	v
+file	macOnly/splitReg.sh	/^file=\/tmp\/temp$\$$/;"	v
+file	openAll.sh	/^    file="$(echo $file | tr '[:upper:]' '[:lower:]')"$/;"	v
+file	runner.sh	/^        file="$(basename "$2")"$/;"	v
+file	runner.sh	/^    file="$(basename "$2")"$/;"	v
+file	secureDelete.sh	/^    file="$i"$/;"	v
+file	splitReg.sh	/^file=\/tmp\/temp$\$$/;"	v
+fileName	watchServiceFSWatchRustCompile.sh	/^    fileName=$(basename $event)$/;"	v
+fileString	openAll.sh	/^fileString=""$/;"	v
+fileToBeExecuted	runner.sh	/^fileToBeExecuted="$1"$/;"	v
+fileToBeExecuted	templater.sh	/^fileToBeExecuted="$1"$/;"	v
+file_is_overwritable	mantozshcomp.py	/^def file_is_overwritable(path):$/;"	f
+files	backupBashConfig.sh	/^files=("$my_home_dir\/.bashrc" "$my_home_dir\/.bash_profile" "$my_home_dir\/.profile" '\/etc\/bashrc' '\/etc\/profile')$/;"	v
+files	backupBashConfig.sh~	/^files=("$my_home_dir\/.bashrc" "$my_home_dir\/.bash_profile" "$my_home_dir\/.profile" '\/etc\/bashrc' '\/etc\/profile')$/;"	v
+filesArray	openAll.sh	/^filesArray=()$/;"	v
+filter	macOnly/splitReg.sh	/^filter="$2"$/;"	v
+filter	splitReg.sh	/^filter="$2"$/;"	v
+findTotal	oldCounter.sh	/^findTotal() {$/;"	f
+first	batchRename.sh	/^        local first=$(echo ${file%%$delim*})$/;"	v
+firstFile	sync.sh	/^    firstFile="${firstFile}\/"$/;"	v
+firstFile	sync.sh	/^firstFile="$1"$/;"	v
+firstString	createTextFile.sh	/^    firstString="$($/;"	v
+first_iteration	fsWatchLongRunning.sh	/^        first_iteration=false$/;"	v
+first_iteration	fsWatchLongRunning.sh	/^first_iteration=true$/;"	v
+fish_escape_single_quote	mantozshcomp.py	/^def fish_escape_single_quote(str):$/;"	f
+flength	secureDelete.sh	/^    flength=$(ls -l "$file" | awk '{print $5}') # Field 5 is file length.$/;"	v
+flush_diagnostics	mantozshcomp.py	/^def flush_diagnostics(where):$/;"	f
+flush_output	mantozshcomp.py	/^    def flush_output(self, where):$/;"	m	class:Deroffer
+font	macOnly/figletRandomFont.sh	/^    font=${ary[$randIndex]}$/;"	v
+font	macOnly/figletRandomFontOnce.sh	/^font=${ary[$randIndex]}$/;"	v
+font	macOnly/menkeTechRandomFont.sh	/^    font=${ary[$randIndex]}$/;"	v
+font	macOnly/randomCow.sh	/^    font=${ary[$randIndex]}$/;"	v
+font	mantozshcomp.py	/^    def font(self):$/;"	m	class:Deroffer
+font2	mantozshcomp.py	/^    def font2(self):$/;"	m	class:Deroffer
+fortuneQuote	eyes.sh	/^        fortuneQuote="$(figlet -f "$1" \\"$fortuneQuote\\")"$/;"	v
+fortuneQuote	eyes.sh	/^    fortuneQuote="$(fortune)"$/;"	v
+found	shebangChanger.sh	/^            found=false$/;"	v
+found	shebangChanger.sh	/^            found=true$/;"	v
+found	shebangChanger.sh	/^    found=false$/;"	v
+frameworks	boiler_gen.py	/^frameworks = [{$/;"	v
+g_fish_safe_chars	mantozshcomp.py	/^g_fish_safe_chars = frozenset(string.ascii_letters + string.digits +$/;"	v
+g_macro_dict	mantozshcomp.py	/^    g_macro_dict = False$/;"	v	class:Deroffer
+g_re_esc_char	mantozshcomp.py	/^    g_re_esc_char = re.compile($/;"	v	class:Deroffer
+g_re_font	mantozshcomp.py	/^    g_re_font = re.compile($/;"	v	class:Deroffer
+g_re_newline_collapse	mantozshcomp.py	/^    g_re_newline_collapse = re.compile(r"\\n{3,}")$/;"	v	class:Deroffer
+g_re_not_backslash_or_whitespace	mantozshcomp.py	/^    g_re_not_backslash_or_whitespace = re.compile($/;"	v	class:Deroffer
+g_re_number	mantozshcomp.py	/^    g_re_number = re.compile(r"[+-]?\\d+")  # equivalent to the number() method$/;"	v	class:Deroffer
+g_re_word	mantozshcomp.py	/^    g_re_word = re.compile(r"[a-zA-Z_]+")  # equivalent to the word() method$/;"	v	class:Deroffer
+g_specs	mantozshcomp.py	/^    g_specs = {$/;"	v	class:Deroffer
+g_specs_specletter	mantozshcomp.py	/^    g_specs_specletter = {$/;"	v	class:Deroffer
+gateway_ip	pingordie.sh	/^gateway_ip='8.8.8.8'$/;"	v
+gen_files_react	boiler_gen.py	/^def gen_files_react(start):$/;"	f
+gen_files_spring	boiler_gen.py	/^def gen_files_spring(start):$/;"	f
+generate_argument_list	help2comp.py	/^def generate_argument_list(options):$/;"	f
+generate_completion_function	help2comp.py	/^def generate_completion_function(options, program_name):$/;"	f
+getInitialCommit	gitgo.sh	/^getInitialCommit() {$/;"	f
+getRemoteDetails	gitgo.sh	/^getRemoteDetails() {$/;"	f
+get_arg	mantozshcomp.py	/^    def get_arg(self, optionName):$/;"	m	class:ManParser
+get_frame_work	boiler_gen.py	/^def get_frame_work(user_framework):$/;"	f
+get_output	mantozshcomp.py	/^    def get_output(self):$/;"	m	class:Deroffer
+get_paths_from_man_locations	mantozshcomp.py	/^def get_paths_from_man_locations():$/;"	f
+getopt	mantozshcomp.py	/^import getopt$/;"	i
+gitPull	gitgo.sh	/^gitPull() {$/;"	f
+gitPush	gitgo.sh	/^gitPush() {$/;"	f
+gitRepoUpdater	rpiSoftwareUpdater.sh	/^gitRepoUpdater() {$/;"	f
+gitRepoUpdater	updater.sh	/^gitRepoUpdater() {$/;"	f
+gittersdev	remoteRepoMonitorDaemon.sh	/^gittersdev() {$/;"	f
+gittersmaster	remoteRepoMonitorDaemon.sh	/^gittersmaster() {$/;"	f
+groff_replace_escapes	mantozshcomp.py	/^    def groff_replace_escapes(self, line):$/;"	m	class:TypeDarwinManParser
+gzip	mantozshcomp.py	/^import gzip$/;"	i
+headerSTRING	templater.sh	/^    headerSTRING=$($/;"	v
+home	myWatchNoBlink.sh	/^    home=$(tput cup 0 0)$/;"	v
+home	myWatchNoBlinkColorized.sh	/^    home=$(tput cup 0 0)$/;"	v
+home_dir	duplicateLineDeleter.sh	/^home_dir=$HOME$/;"	v
+home_dir	indenterAndDuplicateLineDeleter.sh	/^home_dir=$HOME$/;"	v
+host	macOnly/rsyncr.sh	/^host="r"$/;"	v
+host_status	pingordie.sh	/^    host_status=$(fping $gateway_ip)$/;"	v
+hostname	updater.sh	/^    hostname="$(echo "$1" | awk -F: '{print $1}')"$/;"	v
+hour	timeConverter.sh	/^    hour=$((hour - 12))$/;"	v
+hour	timeConverter.sh	/^hour=$(date | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f1)$/;"	v
+info	about.sh	/^            info="$(git tag -l -n9 "$version" | perl -pe 's@[\\t ]+@ @')"$/;"	v
+initializeGitDirectory	gitgo.sh	/^initializeGitDirectory() {$/;"	f
+install	tgzLocalInstaller.sh	/^install() {$/;"	f
+installDir	updater.sh	/^            installDir=$(python2 -m pip show "$i" | \\perl -ne 'print $1 if \/^Location: (.*)\/')$/;"	v
+installDir	updater.sh	/^            installDir=$(python3 -m pip show "$i" | \\perl -ne 'print $1 if \/^Location: (.*)\/')$/;"	v
+installDir	updater.sh	/^        installDir=$(npm root -g | head -n 1)$/;"	v
+installerDir	macOnly/tutorialConfigUpdater.sh	/^installerDir="$HOME\/Documents\/shellScripts\/$REPO_NAME"$/;"	v
+isZsh	fzfPreviewOptsCommon.sh	/^isZsh(){$/;"	f
+is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:ManParser
+is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:Type1ManParser
+is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:Type2ManParser
+is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:Type3ManParser
+is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:Type4ManParser
+is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:TypeDarwinManParser
+is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:TypeDeroffManParser
+is_option	mantozshcomp.py	/^    def is_option(self, line):$/;"	m	class:TypeDarwinManParser
+is_option	mantozshcomp.py	/^    def is_option(self, line):$/;"	m	class:TypeDeroffManParser
+is_white	mantozshcomp.py	/^    def is_white(self, idx):$/;"	m	class:Deroffer
+killCursor	batchRename.sh	/^killCursor() {$/;"	f
+killCursor	openAll.sh	/^killCursor() {$/;"	f
+killCursor	picture_finder.sh	/^killCursor() {$/;"	f
+killCursor	secureDelete.sh	/^killCursor() {$/;"	f
+killpids	CPU_Stresser.sh	/^killpids() {$/;"	f
+last	batchRename.sh	/^        local last=$(echo ${file##*_})$/;"	v
+lcline	openAll.sh	/^    lcline="$(echo $line | tr '[:upper:]' '[:lower:]')"$/;"	v
+leavePresentPaneAloneFlag	powerTo.sh	/^leavePresentPaneAloneFlag=false$/;"	v
+len	manzshcompgen.zsh	/^    len=${#1}$/;"	v
+len	zshcompgen.zsh	/^    len=${#1}$/;"	v
+letter	mantozshcomp.py	/^    def letter(self, idx):$/;"	m	class:Deroffer
+level	macOnly/splitReg.sh	/^level=1$/;"	v
+level	splitReg.sh	/^level=1$/;"	v
+limitFlag	myWatchMaintainEscapes.sh	/^        limitFlag=true$/;"	v
+line	gitRemoteRepoInformation.sh	/^                line="$(git remote -v 2>\/dev\/null | sed 1q)" && {$/;"	v
+lineCounter	shebangChanger.sh	/^    lineCounter=1$/;"	v
+link	uploadWebPi.sh	/^        link="http:\/\/$MY_IP:$RPI_HTML_PORT\/$i"$/;"	v
+lossy_unicode	mantozshcomp.py	/^def lossy_unicode(s):$/;"	f
+lzma	mantozshcomp.py	/^        from backports import lzma$/;"	i
+lzma	mantozshcomp.py	/^        import lzma$/;"	i
+lzma_available	mantozshcomp.py	/^    lzma_available = False$/;"	v
+lzma_available	mantozshcomp.py	/^lzma_available = True$/;"	v
+macro_Nm	mantozshcomp.py	/^    def macro_Nm(self):$/;"	m	class:Deroffer
+macro_bl_vl	mantozshcomp.py	/^    def macro_bl_vl(self):$/;"	m	class:Deroffer
+macro_bv	mantozshcomp.py	/^    def macro_bv(self):$/;"	m	class:Deroffer
+macro_close_bracket	mantozshcomp.py	/^    def macro_close_bracket(self):$/;"	m	class:Deroffer
+macro_de	mantozshcomp.py	/^    def macro_de(self):$/;"	m	class:Deroffer
+macro_ds	mantozshcomp.py	/^    def macro_ds(self):$/;"	m	class:Deroffer
+macro_en	mantozshcomp.py	/^    def macro_en(self):$/;"	m	class:Deroffer
+macro_eq	mantozshcomp.py	/^    def macro_eq(self):$/;"	m	class:Deroffer
+macro_i_ir	mantozshcomp.py	/^    def macro_i_ir(self):$/;"	m	class:Deroffer
+macro_le	mantozshcomp.py	/^    def macro_le(self):$/;"	m	class:Deroffer
+macro_lp_pp	mantozshcomp.py	/^    def macro_lp_pp(self):$/;"	m	class:Deroffer
+macro_other	mantozshcomp.py	/^    def macro_other(self):$/;"	m	class:Deroffer
+macro_pe	mantozshcomp.py	/^    def macro_pe(self):$/;"	m	class:Deroffer
+macro_ps	mantozshcomp.py	/^    def macro_ps(self):$/;"	m	class:Deroffer
+macro_r1	mantozshcomp.py	/^    def macro_r1(self):$/;"	m	class:Deroffer
+macro_r2	mantozshcomp.py	/^    def macro_r2(self):$/;"	m	class:Deroffer
+macro_sh	mantozshcomp.py	/^    def macro_sh(self):$/;"	m	class:Deroffer
+macro_so_nx	mantozshcomp.py	/^    def macro_so_nx(self):$/;"	m	class:Deroffer
+macro_sp	mantozshcomp.py	/^    def macro_sp(self):$/;"	m	class:Deroffer
+macro_ss_ip	mantozshcomp.py	/^    def macro_ss_ip(self):$/;"	m	class:Deroffer
+macro_t_and	mantozshcomp.py	/^    def macro_t_and(self):$/;"	m	class:Deroffer
+macro_te	mantozshcomp.py	/^    def macro_te(self):$/;"	m	class:Deroffer
+macro_tr	mantozshcomp.py	/^    def macro_tr(self):$/;"	m	class:Deroffer
+macro_ts	mantozshcomp.py	/^    def macro_ts(self):$/;"	m	class:Deroffer
+main	remoteRepoMonitorDaemon.sh	/^main() {$/;"	f
+manager	updater.sh	/^    manager="$(echo "$1" | awk -F: '{print $2}')"$/;"	v
+master	dsDownloader.sh	/^master="jacobmenke"$/;"	v
+master	rpiDownloader.sh	/^master="jacobmenke"$/;"	v
+member_1	textmessage.sh	/^    member_1="5551113333"$/;"	v
+messageToSpeak	macOnly/say.sh	/^messageToSpeak=""$/;"	v
+min_args	boiler_gen.py	/^    min_args = 3$/;"	v
+min_args_check	boiler_gen.py	/^def min_args_check(min_args):$/;"	f
+minute	timeConverter.sh	/^minute=$(date | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f2)$/;"	v
+minutes_to_sleep	autoUpdater.sh	/^minutes_to_sleep=10$/;"	v
+myPrettyPrint	gitgo.sh	/^myPrettyPrint() {$/;"	f
+my_backup_dir	backupBashConfig.sh	/^my_backup_dir="$my_scripts_dir\/rcBackups"$/;"	v
+my_backup_dir	backupBashConfig.sh~	/^my_backup_dir="$my_scripts_dir\/rcBackups"$/;"	v
+my_home_dir	backupBashConfig.sh	/^my_home_dir="$HOME"$/;"	v
+my_home_dir	backupBashConfig.sh~	/^my_home_dir="$HOME"$/;"	v
+my_scripts_dir	backupBashConfig.sh	/^my_scripts_dir="$SCRIPTS"$/;"	v
+my_scripts_dir	backupBashConfig.sh~	/^my_scripts_dir="$SCRIPTS"$/;"	v
+needSudo	updater.sh	/^                needSudo=no$/;"	v
+needSudo	updater.sh	/^                needSudo=yes$/;"	v
+needSudo	updater.sh	/^            needSudo=no$/;"	v
+needSudo	updater.sh	/^            needSudo=yes$/;"	v
+network_check_threshold	pingordie.sh	/^network_check_threshold=5$/;"	v
+network_check_tries	pingordie.sh	/^network_check_tries=0$/;"	v
+newfile	batchRename.sh	/^        local newfile="$first$number.$endFileEnding"$/;"	v
+newfile	createScriptButDontOpenSublime.sh	/^    newfile="$newfile.txt"$/;"	v
+newfile	createScriptButDontOpenSublime.sh	/^newfile="$1"$/;"	v
+newfile	createTextFile.sh	/^    newfile="$newfile".txt$/;"	v
+newfile	createTextFile.sh	/^newfile="$1"$/;"	v
+newfile	macOnly/postscriptToPDFCreator.sh	/^    newfile=${file%.*}$/;"	v
+newtime	autoUpdater.sh	/^        newtime=$(date +"%s")$/;"	v
+nextdate	autoUpdater.sh	/^    nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)$/;"	v
+nproc	CPU_Stresser.sh	/^nproc=10$/;"	v
+num	myWatchMaintainEscapes.sh	/^        num=$OPTARG$/;"	v
+num	powerTo.sh	/^        num=realNum$/;"	v
+num	powerTo.sh	/^    num=$1$/;"	v
+num	powerTo.sh	/^    num=realNum$/;"	v
+num	storageShower.sh	/^    num="$1"$/;"	v
+number	batchRename.sh	/^        local number=$((10#$number))$/;"	v
+number	batchRename.sh	/^        local number=$(echo ${last%%.*})$/;"	v
+number	mantozshcomp.py	/^    def number(self):$/;"	m	class:Deroffer
+numreq	mantozshcomp.py	/^    def numreq(self):$/;"	m	class:Deroffer
+o	macOnly/combo.sh	/^    o="$(cat)"$/;"	v
+o	macOnly/combo.sh	/^    o="$(hostname)"$/;"	v
+o	sixLangDisplayer.sh	/^o="$(cat)"$/;"	v
+olddate	autoUpdater.sh	/^    olddate="$(date +'%Y-%m-%d %H:%M:%S')"$/;"	v
+oldifs	sortedArrayCounter.sh	/^oldifs="$IFS"$/;"	v
+oldtime	autoUpdater.sh	/^    oldtime=$(date +"%s")$/;"	v
+openTextEditor	createScriptButDontOpenSublime.sh	/^openTextEditor() {$/;"	f
+openTextEditor	createTextFile.sh	/^openTextEditor() {$/;"	f
+options	help2comp.py	/^        options = parse_options(sys.stdin.readlines())$/;"	v
+optstring	directoryContentsSize.sh	/^optstring=shta$/;"	v
+optstring	gitgo.sh	/^optstring=p:hcl$/;"	v
+optstring	myWatchMaintainEscapes.sh	/^optstring=dhl:$/;"	v
+optstring	myWatchNoBlink.sh	/^optstring=bh$/;"	v
+optstring	myWatchNoBlinkColorized.sh	/^optstring=bh$/;"	v
+optstring	mywatch.sh	/^optstring=dh$/;"	v
+origin	gitgo.sh	/^    local origin="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"$/;"	v
+os	boiler_gen.py	/^import os$/;"	i
+os	mantozshcomp.py	/^    import subprocess, os$/;"	i
+os	mantozshcomp.py	/^import os.path$/;"	i
+out	inotifyWatchLogAndEmailIfNAS.sh	/^        out=$(tail -1 "$file" | grep "nas")$/;"	v
+out	macOnly/commandToColors.sh	/^out="$(eval $command)"$/;"	v
+outdated	pipUpdater.sh	/^    outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')$/;"	v
+outdated	pipUpdater.sh	/^    outdated=$(python3 -m pip list --outdated | sed -n '3,$p' | awk '{print $1}')$/;"	v
+outdated	pipUpdater.sh	/^outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')$/;"	v
+outdated	updater.sh	/^        outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')$/;"	v
+outdated	updater.sh	/^        outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')$/;"	v
+output	macOnly/figletRandomFontOnce.sh	/^    output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"$/;"	v
+output	macOnly/menkeTechRandomFont.sh	/^    output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"$/;"	v
+output	macOnly/splitReg.sh	/^output=$(cat \/tmp\/temp$$)$/;"	v
+output	myWatchMaintainEscapes.sh	/^        output="$(script -q \/dev\/null $1 | tr -d '\\r' | cat)"$/;"	v
+output	myWatchMaintainEscapes.sh	/^        output="$(script -q \/dev\/null -c "$1" | tr -d '\\r' | cat)"$/;"	v
+output	mywatch.sh	/^    output=$(eval "$1")$/;"	v
+output	remoteRepoMonitorDaemon.sh	/^    output=$(git log HEAD..origin\/dev --oneline)$/;"	v
+output	remoteRepoMonitorDaemon.sh	/^    output=$(git log HEAD..origin\/master --oneline)$/;"	v
+output	splitReg.sh	/^output=$(cat \/tmp\/temp$$)$/;"	v
+outputDir	dsDownloader.sh	/^outputDir="Desktop"$/;"	v
+outputDir	rpiDownloader.sh	/^outputDir="Desktop"$/;"	v
+output_complete_command	mantozshcomp.py	/^def output_complete_command(cmdname, args, description, output_list, argument):$/;"	f
+parse_and_output_man_pages	mantozshcomp.py	/^def parse_and_output_man_pages(paths, output_directory, show_progress):$/;"	f
+parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:ManParser
+parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:Type1ManParser
+parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:Type2ManParser
+parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:Type3ManParser
+parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:Type4ManParser
+parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:TypeDarwinManParser
+parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:TypeDeroffManParser
+parse_manpage_at_path	mantozshcomp.py	/^def parse_manpage_at_path(manpage_path, output_directory):$/;"	f
+parse_options	help2comp.py	/^def parse_options(help_text):$/;"	f
+pass_count	secureDelete.sh	/^    pass_count=1$/;"	v
+passes	secureDelete.sh	/^passes=7     # Number of file-shredding passes.$/;"	v
+path	mantozshcomp.py	/^import os.path$/;"	i
+path	shebangChanger.sh	/^path="#!\/usr\/bin\/env $executableProgram"$/;"	v
+perlOutdated	updater.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v
+perlscript	autoUpdater.sh	/^    perlscript=$($/;"	v
+pid	fsWatchLongRunning.sh	/^            pid=$!$/;"	v
+pid	fsWatchLongRunning.sh	/^        pid=$!$/;"	v
+pids	CPU_Stresser.sh	/^        pids="$pids $!"$/;"	v
+pipe	readFIFO.sh	/^pipe=$HOME\/Desktop\/testpipe$/;"	v
+pipe	readFIFO.sh	/^pipe=\/tmp\/testpipe$/;"	v
+prch	mantozshcomp.py	/^    def prch(self, idx):$/;"	m	class:Deroffer
+prettyPrint	CPU_Stresser.sh	/^prettyPrint() {$/;"	f
+prettyPrint	colorLogger.sh	/^prettyPrint() {$/;"	f
+prettyPrint	macOnly/resetWIFI.sh	/^prettyPrint() {$/;"	f
+prettyPrint	macOnly/tor.sh	/^prettyPrint() {$/;"	f
+prettyPrint	macOnly/tutorialConfigUpdater.sh	/^prettyPrint() {$/;"	f
+prettyPrint	rpiSoftwareUpdater.sh	/^prettyPrint() {$/;"	f
+prettyPrint	textmessage.sh	/^prettyPrint() {$/;"	f
+prettyPrint	updater.sh	/^prettyPrint() {$/;"	f
+printD	banner.pl	/^sub printD {$/;"	s
+printDate	banner.pl	/^sub printDate {$/;"	s
+progress_pid	batchRename.sh	/^    progress_pid=$!$/;"	v
+progress_pid	openAll.sh	/^    progress_pid=$!$/;"	v
+progress_pid	picture_finder.sh	/^    progress_pid=$!$/;"	v
+progress_pid	secureDelete.sh	/^    progress_pid=$!$/;"	v
+prompt	batchRename.sh	/^    local prompt="press any key..." # user prompt$/;"	v
+prompt	openAll.sh	/^    local prompt="press any key..." # user prompt$/;"	v
+purpose	headerSummarizer.sh	/^    purpose="$(sed -n 6p "$file")"$/;"	v
+push	about.sh	/^            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\\t ]+@    @')"$/;"	v
+putchar	mantozshcomp.py	/^    def putchar(self, c):$/;"	m	class:Deroffer
+quoted_arg	mantozshcomp.py	/^    def quoted_arg(self):$/;"	m	class:Deroffer
+randIndex	eyes.sh	/^    randIndex=$((RANDOM % rangePossibleIndices))$/;"	v
+randIndex	macOnly/figletRandomFont.sh	/^    randIndex=$(($RANDOM % $rangePossibleIndices))$/;"	v
+randIndex	macOnly/figletRandomFontOnce.sh	/^randIndex=$(($RANDOM % $rangePossibleIndices))$/;"	v
+randIndex	macOnly/menkeTechRandomFont.sh	/^    randIndex=$(($RANDOM % $rangePossibleIndices))$/;"	v
+randIndex	macOnly/randomCow.sh	/^    randIndex=$(($RANDOM % $rangePossibleIndices))$/;"	v
+randomCowsayCowScript	macOnly/combo.sh	/^randomCowsayCowScript="$SCRIPTS\/macOnly\/randomCow.sh"$/;"	v
+randomFigletFontScript	macOnly/combo.sh	/^randomFigletFontScript="$SCRIPTS\/macOnly\/figletRandomFontOnce.sh"$/;"	v
+rangePossibleIndices	eyes.sh	/^rangePossibleIndices=${#ary[*]}$/;"	v
+rangePossibleIndices	macOnly/figletRandomFont.sh	/^rangePossibleIndices=${#ary[*]}$/;"	v
+rangePossibleIndices	macOnly/figletRandomFontOnce.sh	/^rangePossibleIndices=${#ary[*]}$/;"	v
+rangePossibleIndices	macOnly/menkeTechRandomFont.sh	/^rangePossibleIndices=${#ary[*]}$/;"	v
+rangePossibleIndices	macOnly/randomCow.sh	/^    rangePossibleIndices=${#ary[*]}$/;"	v
+re	help2comp.py	/^import re$/;"	i
+re	mantozshcomp.py	/^import re$/;"	i
+react_routine	boiler_gen.py	/^def react_routine(name):$/;"	f
+realNum	powerTo.sh	/^realNum=$(tmux list-panes | wc -l)$/;"	v
+refreshers	remoteRepoMonitorDaemon.sh	/^refreshers() {$/;"	f
+regex	macOnly/splitReg.sh	/^regex="$1"$/;"	v
+regex	splitReg.sh	/^regex="$1"$/;"	v
+remoteDIR	macOnly/rsyncr.sh	/^remoteDIR="$2"$/;"	v
+removeSpaces	minifySpaces.pl	/^sub removeSpaces {$/;"	s
+remove_groff_formatting	mantozshcomp.py	/^def remove_groff_formatting(data):$/;"	f
+replaceSpecialCharsInArgument	mantozshcomp.py	/^    def replaceSpecialCharsInArgument(self, string):$/;"	m	class:ManParser
+repo	gitRemoteRepoInformation.sh	/^                        repo="$(echo $line | awk -F'\/' '{print $2}' | awk '{print $1}')"$/;"	v
+repo	gitRemoteRepoInformation.sh	/^                        repo="$(echo $line | awk -F'\/' '{print $5}' | awk '{print $1}')"$/;"	v
+repoFile	boiler_gen.py	/^    repoFile = f'{name}Repository.java'$/;"	v
+request_or_macro	mantozshcomp.py	/^    def request_or_macro(self):$/;"	m	class:Deroffer
+request_or_macro2	mantozshcomp.py	/^    def request_or_macro2(self):$/;"	m	class:Deroffer
+resourceFile	boiler_gen.py	/^    resourceFile = f'{name}Controller.java'$/;"	v
+restart_wlan0	pingordie.sh	/^restart_wlan0() {$/;"	f
+revarr	picture_finder.sh	/^    local revarr=('|' '\/' '-' '\\')$/;"	v
+revarr	secureDelete.sh	/^    local revarr=('|' '\/' '-' '\\')$/;"	v
+rustup_bin	rpiSoftwareUpdater.sh	/^rustup_bin="$HOME\/.cargo\/bin\/rustup"$/;"	v
+s10_pid	backgroundMastery.sh	/^s10_pid="$!"$/;"	v
+s1_pid	backgroundMastery.sh	/^s1_pid="$!"$/;"	v
+s2_pid	backgroundMastery.sh	/^s2_pid="$!"$/;"	v
+s3_pid	backgroundMastery.sh	/^s3_pid="$!"$/;"	v
+s4_pid	backgroundMastery.sh	/^s4_pid="$!"$/;"	v
+s5_pid	backgroundMastery.sh	/^s5_pid="$!"$/;"	v
+s6_pid	backgroundMastery.sh	/^s6_pid="$!"$/;"	v
+s8_pid	backgroundMastery.sh	/^s8_pid="$!"$/;"	v
+script_to_run	watchServiceFSWatchPiDesktop.sh	/^script_to_run="$SCRIPTS\/upLoadPi.sh"$/;"	v
+script_to_run	watchServiceFSWatchPiWeb.sh	/^script_to_run=$SCRIPTS\/uploadWebPi.sh$/;"	v
+scripts_dir	duplicateLineDeleter.sh	/^scripts_dir=$SCRIPTS$/;"	v
+scripts_dir	indenterAndDuplicateLineDeleter.sh	/^scripts_dir=$SCRIPTS$/;"	v
+showHidden	directoryContentsSize.sh	/^showHidden() {$/;"	f
+sidelen	manzshcompgen.zsh	/^    sidelen=$(( ($sidelen + 2 -1) \/ 2))$/;"	v
+sidelen	manzshcompgen.zsh	/^    sidelen=$(($width - $len - $spacerlen * 2))$/;"	v
+sidelen	zshcompgen.zsh	/^    sidelen=$(( ($sidelen + 2 -1) \/ 2))$/;"	v
+sidelen	zshcompgen.zsh	/^    sidelen=$(($width - $len - $spacerlen * 2))$/;"	v
+sidelen2	manzshcompgen.zsh	/^    sidelen2=$sidelen$/;"	v
+sidelen2	zshcompgen.zsh	/^    sidelen2=$sidelen$/;"	v
+size	mantozshcomp.py	/^    def size(self):$/;"	m	class:Deroffer
+skip_char	mantozshcomp.py	/^    def skip_char(self, amt=1):$/;"	m	class:Deroffer
+skip_leading_whitespace	mantozshcomp.py	/^    def skip_leading_whitespace(self):$/;"	m	class:Deroffer
+sorted	sortedArrayCounter.sh	/^sorted=($(sort -f <<<"${arr[*]}"))$/;"	v
+sorted	sortedArrayCounter.sh	/^sorted=($(uniq <<<"${sorted[*]}"))$/;"	v
+sortedCommand	directoryContentsSize.sh	/^sortedCommand=gsort$/;"	v
+spaceChar	manzshcompgen.zsh	/^    spaceChar=' '$/;"	v
+spaceChar	zshcompgen.zsh	/^    spaceChar=' '$/;"	v
+spacerlen	manzshcompgen.zsh	/^    spacerlen=2$/;"	v
+spacerlen	zshcompgen.zsh	/^    spacerlen=2$/;"	v
+spec	mantozshcomp.py	/^    def spec(self):$/;"	m	class:Deroffer
+spinner	batchRename.sh	/^        spinner="$temp${spinner%"$temp"}" # and add it to the end$/;"	v
+spinner	batchRename.sh	/^    local spinner="\\|\/-"            # spinner$/;"	v
+spinner	openAll.sh	/^        spinner=$temp${spinner%"$temp"} # and add it to the end$/;"	v
+spinner	openAll.sh	/^    local spinner="\\|\/-"            # spinner$/;"	v
+splitTrim	mantozshcomp.py	/^def splitTrim(arg, comps, dash):$/;"	f
+spring_routine	boiler_gen.py	/^def spring_routine(package, name):$/;"	f
+startCursor	batchRename.sh	/^startCursor() {$/;"	f
+startCursor	openAll.sh	/^startCursor() {$/;"	f
+startCursor	picture_finder.sh	/^startCursor() {$/;"	f
+startCursor	secureDelete.sh	/^startCursor() {$/;"	f
+str_at	mantozshcomp.py	/^    def str_at(self, idx):$/;"	m	class:Deroffer
+str_eq	mantozshcomp.py	/^    def str_eq(offset, other, len):$/;"	m	class:Deroffer
+string	mantozshcomp.py	/^import string$/;"	i
+string	openAll.sh	/^    string=""$/;"	v
+subprocess	mantozshcomp.py	/^    import subprocess, os$/;"	i
+sum	listAllCommands.sh	/^sum=0$/;"	v
+sum	sortedArrayCounter.sh	/^sum=0$/;"	v
+summarizeSizes	directoryContentsSize.sh	/^summarizeSizes() {$/;"	f
+sys	boiler_gen.py	/^import sys$/;"	i
+sys	help2comp.py	/^import sys$/;"	i
+sys	mantozshcomp.py	/^import sys$/;"	i
+tail	shebangChanger.sh	/^        tail=$(cat "$file")$/;"	v
+tail	shebangChanger.sh	/^        tail=$(sed -n "$lineCounter,$"p "$file")$/;"	v
+tailVersion	colorLogger.sh	/^tailVersion=tail$/;"	v
+tarbellDirectory	tgzLocalInstaller.sh	/^tarbellDirectory="$1"$/;"	v
+temp	batchRename.sh	/^        local temp=${spinner#?}           # remove first character from $spinner$/;"	v
+temp	openAll.sh	/^        local temp=${spinner#?}         # remove first character from $spinner$/;"	v
+text	mantozshcomp.py	/^    def text(self):$/;"	m	class:Deroffer
+text_arg	mantozshcomp.py	/^    def text_arg(self):$/;"	m	class:Deroffer
+text_arg2	mantozshcomp.py	/^    def text_arg2(self):$/;"	m	class:Deroffer
+time	myWatchMaintainEscapes.sh	/^    time="$2"$/;"	v
+time	myWatchMaintainEscapes.sh	/^    time=1$/;"	v
+time	mywatch.sh	/^    time="$2"$/;"	v
+time	mywatch.sh	/^    time=1$/;"	v
+timeToSleep	myWatchNoBlink.sh	/^    timeToSleep=$2$/;"	v
+timeToSleep	myWatchNoBlink.sh	/^    timeToSleep=0.5$/;"	v
+timeToSleep	myWatchNoBlinkColorized.sh	/^    timeToSleep=$2$/;"	v
+timeToSleep	myWatchNoBlinkColorized.sh	/^    timeToSleep=0.5$/;"	v
+timediff	autoUpdater.sh	/^        timediff=$((newtime - oldtime))$/;"	v
+total	oldCounter.sh	/^    total=$(expr $(ls -F $1 | grep ".*[*@]" | wc -l) + $total)$/;"	v
+total	oldCounter.sh	/^total=0$/;"	v
+total	uploadWebPi.sh	/^total=$#$/;"	v
+traceback	mantozshcomp.py	/^import traceback$/;"	i
+transferFile	transfer.sh	/^transferFile="$1"$/;"	v
+trim_groff	mantozshcomp.py	/^    def trim_groff(self, line):$/;"	m	class:TypeDarwinManParser
+tutorialDir	macOnly/tutorialConfigUpdater.sh	/^tutorialDir="$HOME\/Documents\/tutorialsRepo"$/;"	v
+unquote_double_quotes	mantozshcomp.py	/^def unquote_double_quotes(data):$/;"	f
+unquote_single_quotes	mantozshcomp.py	/^def unquote_single_quotes(data):$/;"	f
+updatePI	updater.sh	/^updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote host$/;"	f
+usage	CPU_Stresser.sh	/^usage() {$/;"	f
+usage	directoryContentsSize.sh	/^usage() {$/;"	f
+usage	duplicateLineDeleter.sh	/^usage() {$/;"	f
+usage	gitgo.sh	/^usage() {$/;"	f
+usage	indenterAndDuplicateLineDeleter.sh	/^usage() {$/;"	f
+usage	macOnly/splitReg.sh	/^function usage() {$/;"	f
+usage	mantozshcomp.py	/^def usage(script_name):$/;"	f
+usage	myWatchMaintainEscapes.sh	/^usage() {$/;"	f
+usage	myWatchNoBlink.sh	/^usage() {$/;"	f
+usage	myWatchNoBlinkColorized.sh	/^usage() {$/;"	f
+usage	mywatch.sh	/^usage() {$/;"	f
+usage	powerTo.sh	/^function usage() {$/;"	f
+usage	shebangChanger.sh	/^usage() {$/;"	f
+usage	splitReg.sh	/^function usage() {$/;"	f
+usage	storageShower.sh	/^function usage() {$/;"	f
+usage	tgzLocalInstaller.sh	/^function usage() {$/;"	f
+usage	updater.sh	/^usage() {$/;"	f
+user	gitRemoteRepoInformation.sh	/^                        user="$(echo $line | awk -F':' '{print $2}' | awk -F'\/' '{print $1}')"$/;"	v
+user	gitRemoteRepoInformation.sh	/^                        user="$(echo $line | awk -F'\/' '{print $4}')"$/;"	v
+user_framework	boiler_gen.py	/^user_framework = sys.argv[1]$/;"	v
+valid_framework	boiler_gen.py	/^valid_framework = get_frame_work(user_framework)$/;"	v
+var	mantozshcomp.py	/^    def var(self):$/;"	m	class:Deroffer
+version	about.sh	/^            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\\t ]@@')"$/;"	v
+view	eyes.sh	/^    view=${ary[$randIndex]}$/;"	v
+w	uploadWebPi.sh	/^w=80$/;"	v
+watchCommand	myWatchNoBlink.sh	/^watchCommand() {$/;"	f
+watchCommand	myWatchNoBlinkColorized.sh	/^watchCommand() {$/;"	f
+watchingFile	watchServiceFSWatchRustCompile.sh	/^    watchingFile=$(basename $2)$/;"	v
+weHaveCCZE	colorLogger.sh	/^weHaveCCZE=no$/;"	v
+websiteDir	macOnly/tutorialConfigUpdater.sh	/^websiteDir="$HOME\/WebstormProjects\/PersonalWebsite"$/;"	v
+width	macOnly/randomCow.sh	/^width=$1$/;"	v
+width	manzshcompgen.zsh	/^    width=70$/;"	v
+width	updater.sh	/^        width=80$/;"	v
+width	zshcompgen.zsh	/^    width=70$/;"	v
+word	mantozshcomp.py	/^    def word(self):$/;"	m	class:Deroffer
+x	macOnly/combo.sh	/^    x="$(python -c 'print("trina"*5)')"$/;"	v
+x	macOnly/combo.sh	/^    x=$(date | cut -c1-10)$/;"	v
+x	sixLangDisplayer.sh	/^    x="$(python -c 'print("trina"*5)')"$/;"	v
+x	sixLangDisplayer.sh	/^    x=$(date | cut -c1-10)$/;"	v
+x	test.sh	/^x=1$/;"	v
