@@ -55,8 +55,8 @@ snippet temp "default header"
 #!/usr/bin/env $1
 #{{{                    MARK:Header
 #**************************************************************
-##### Author: `!v g:snips_author`
-##### GitHub: https://github.com/`!v g:snips_github`
+##### Author: `echo $GITHUB_ACCOUNT`
+##### GitHub: `echo $GITHUB_URL`
 ##### Date: `date`
 ##### Purpose: $1 script to $2 
 ##### Notes: 
