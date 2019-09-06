@@ -1,17 +1,17 @@
-                         ".....     .      ...     ..      ..     
-                       ".d88888neu. 'l   x*8888x.:*8888: -"888:   
-     "...     ..        f""""*8888888f  x   48888x `8888h  8888   
-  ":~""888h.:^"888:    *      `"*88*"  x8x.  8888x  8888x  !888>  
- "8x   `8888x  8888>    -....    ue=:. x8888 x8888  88888   "*8%- 
-"x888n. 8888x  ?888>           :88n  ` '*888!x8888> x8888  xh8>   
-"'88888 8888x   ?**h.          9888l     `?8 `8888  x888x x888>   
-  "`*88 8888~ x88x.     uzu.   `8888l    -^  '888"  x888  8888>   
- "..<"  88*`  88888x  ,""888i   ?8888     dx '88~x. !88~  8888>   
-    "..xc.    `*8888k 4  9888l   %888>  .8888xf.888x:!    x888x.: 
-  ":888888h.    `%88> '  '8888   '88%  :""888":~"888"     `888*"  
- "<  `"888888:    x"       "*8nu.z*"       "~'    "~        ""    
-       "%888888x.-`                                               
-         """**""                                                  
+                         ".....     .      ...     ..      ..
+                       ".d88888neu. 'l   x*8888x.:*8888: -"888:
+     "...     ..        f""""*8888888f  x   48888x `8888h  8888
+  ":~""888h.:^"888:    *      `"*88*"  x8x.  8888x  8888x  !888>
+ "8x   `8888x  8888>    -....    ue=:. x8888 x8888  88888   "*8%-
+"x888n. 8888x  ?888>           :88n  ` '*888!x8888> x8888  xh8>
+"'88888 8888x   ?**h.          9888l     `?8 `8888  x888x x888>
+  "`*88 8888~ x88x.     uzu.   `8888l    -^  '888"  x888  8888>
+ "..<"  88*`  88888x  ,""888i   ?8888     dx '88~x. !88~  8888>
+    "..xc.    `*8888k 4  9888l   %888>  .8888xf.888x:!    x888x.:
+  ":888888h.    `%88> '  '8888   '88%  :""888":~"888"     `888*"
+ "<  `"888888:    x"       "*8nu.z*"       "~'    "~        ""
+       "%888888x.-`
+         """**""
 "
 " https://github.com/menketechnologies
 "
@@ -66,7 +66,7 @@ set ttyfast
 "set statusline+=Row:\%l
 "set statusline+=/
 "set statusline+=%L
-"set statusline+=\  
+"set statusline+=\
 "set statusline+=Col:\ %c
 "status bar always shown
 set laststatus=2
@@ -85,7 +85,7 @@ set expandtab
 "wrap lines
 set linebreak
 "line wrap indicator
-set showbreak=--> 
+set showbreak=-->
 set number
 set backupdir=~/tmp
 set wildmenu "tab completion in command mode cycles through menu
@@ -602,10 +602,10 @@ function Quoter(type)
             call ReplaceBracket("[","]", "(",")")
             echo "Replace [[]] with (())"
         elseif (lineToPunct=~ '\v.*\)\).*')
-            call ReplaceBracketToSingle("(",")","[","]") 
+            call ReplaceBracketToSingle("(",")","[","]")
             echo "Replace (()) with []"
         else
-            call ReplaceBracketToDouble("[","]","[","]") 
+            call ReplaceBracketToDouble("[","]","[","]")
             echo "Replace [] with [[]]"
         endif
         let g:COUNTER=g:COUNTER +1
@@ -708,7 +708,7 @@ map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
 map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 "map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
 
-"for moving selection up and down, displacing other text 
+"for moving selection up and down, displacing other text
 vnoremap <C-Right> >gv
 vnoremap <C-Left> <gv
 
@@ -986,7 +986,7 @@ nnoremap <silent> <C-D>o :ALEToggle<CR>
 nnoremap <silent> <C-D>i :ALEInfo<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
 
-"gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins 
+"gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
 set updatetime=100
 
 
@@ -1190,11 +1190,15 @@ command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options'
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'bottom':'50%'}))
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap("with_preview", {"options": '--delimiter : --nth 4.. --preview'}))
 
+let fzfStrOrig="--preview 'file={}; file=$(echo $file | sed 's@~@".$HOME."@'); test -f $file && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $file || stat $file'"
+
+let fzfStrFinal="--preview '".system("bash $SCRIPTS/fzfPreviewOptsCtrlT.sh")."'"
+
 "give :History preview window
-command! -bang -nargs=* History call fzf#vim#history({'options': "--preview 'file={}; file=$(echo $file | sed 's@~@".$HOME."@'); test -f $file && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $file || stat $file'"})
+command! -bang -nargs=* History call fzf#vim#history({'options': fzfStrFinal})
 
 "give :Files preview window
-command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': "--preview 'test -f {} && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" {} || stat {}'"}))
+command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': fzfStrFinal}))
 
 command! -bang -nargs=* Imap call fzf#vim#maps('i')
 
