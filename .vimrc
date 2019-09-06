@@ -1183,7 +1183,7 @@ let g:snips_author='MenkeTechnologies'
 let g:snips_email='jmenke@wccnet.edu'
 let g:snips_github='MenkeTechnologies'
 
-command! -bang Colors call fzf#vim#colors({'left': '8%', 'options': '--reverse' }, <bang>0)
+command! -bang Colors call fzf#vim#colors({'left': '20', 'options': '--reverse' }, <bang>0)
 
 "give :Ag preview window with first line of matched file matches fzf input
 command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
@@ -1219,7 +1219,7 @@ inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
   \ 'prefix': '^.*$',
   \ 'source': 'rg -n ^ --color always',
   \ 'options': '--ansi --delimiter : --nth 3..',
-  \ 'left': '40%',
+  \ 'left': '60',
   \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 
 
