@@ -1555,6 +1555,7 @@ if [[ $COLORIZER == bat ]]; then
     fi
 else
     export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
+    export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
     export COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
         export COLORIZER_NL=' | cat -n'
 fi
