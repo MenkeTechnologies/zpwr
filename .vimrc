@@ -19,9 +19,7 @@
 "{{{                    mark:neobundle
 "**************************************************************
 "neobundle scripts-----------------------------
-if &compatible
-    set nocompatible               " be improved
-endif
+set nocompatible               " be improved
 """" required:
 "set runtimepath+=~/.vim/bundle/neobundle.vim/
 
