@@ -945,7 +945,7 @@ inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
 "insert mode keybindings for fzf-vim
 inoremap <silent> <C-D>f <C-O>:Files<CR>
 inoremap <silent> <C-D>c <C-O>:Colors<CR>
-inoremap <silent> <C-D>g <C-O>:Commits<CR>
+inoremap <silent> <C-D>g <C-O>:Commits!<CR>
 inoremap <silent> <C-D>d <C-O>:Commands<CR>
 inoremap <silent> <C-D>b <C-O>:Buffers<CR>
 inoremap <silent> <C-D>a <C-O>:Ag<CR>
@@ -968,7 +968,7 @@ inoremap <silent> <C-D>k <C-O>:ALEFix<CR>
 nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
-nnoremap <silent> <C-D>g :Commits<CR>
+nnoremap <silent> <C-D>g :Commits!<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <C-D>j :Agg<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
