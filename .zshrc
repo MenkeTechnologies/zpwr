@@ -1557,10 +1557,10 @@ else
     export COLORIZER_NL=' | cat -n'
 fi
 
-export COLORIZER_FZF_C="$COLORIZER_FZF_FILE -l c"
-export COLORIZER_FZF_SH="$COLORIZER_FZF_FILE -l sh"
-export COLORIZER_FZF_YAML="$COLORIZER_FZF_FILE -l yaml"
-export COLORIZER_FZF_JAVA="$COLORIZER_FZF_FILE -l java"
+export COLORIZER_FZF_C="$COLORIZER -l c"
+export COLORIZER_FZF_SH="$COLORIZER  -l sh"
+export COLORIZER_FZF_YAML="$COLORIZER -l yaml"
+export COLORIZER_FZF_JAVA="$COLORIZER -l java"
 
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
