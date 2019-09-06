@@ -10,25 +10,27 @@
 use feature 'say';
 
 sub removeSpaces {
-    if (-d $_[0]) {
-        for (glob("$_[0]/* $_[0]/.[!.]*")){
+    if ( -d $_[0] ) {
+        for ( glob("$_[0]/* $_[0]/.[!.]*") ) {
             removeSpaces($_);
         }
-    } else {
+    }
+    else {
         say "working on $_[0]";
-        my $tmp=$_[0].".bak";
-        rename($_[0], $tmp);
-        open($in, "<$tmp");
-        open($out, ">$_[0]");
+        my $tmp = $_[0] . ".bak";
+        rename( $_[0], $tmp );
+        open( $in,  "<$tmp" );
+        open( $out, ">$_[0]" );
         while (<$in>) {
             $_ =~ s@\s+$@\n@g;
             $_ =~ s@\x20@ @g;
             $_ =~ s@^\s*\n$@@;
+
             #$_ =~ s@(\S)[\x20]{2,}@$1\x20@;
             $_ =~ s@\x09$@    @g;
             print $out $_;
         }
-        
+
         unlink($tmp);
         close($in);
         close($out);
