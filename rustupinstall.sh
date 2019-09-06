@@ -44,6 +44,15 @@ exists exa || {
     "$HOME/.cargo/bin/cargo" install exa
 }
 
+exists ripgrep || {
+    prettyPrint "Installing rustup if cargo does not exist"
+    exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+    prettyPrint "Updating rustup"
+    "$HOME/.cargo/bin/rustup" update
+    prettyPrint "Installing ripgrep with Cargo"
+    "$HOME/.cargo/bin/cargo" install ripgrep
+}
+
 
 prettyPrint "Installing Rustup if cargo does not exist"
 exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y

@@ -143,7 +143,7 @@ addDependenciesFreeBSD(){
 
 addDependenciesMac(){
     dependencies_ary=(macvim ${dependencies_ary[@]})
-    dependencies_ary+=(httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher fswatch zzz ghc lua python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=(ripgrep httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher fswatch zzz ghc lua python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
