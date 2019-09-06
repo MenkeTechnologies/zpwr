@@ -1167,7 +1167,7 @@ endfunction
 set mouse=a
 set balloonexpr=MyBalloonExpr()
 set balloondelay=300
-set ttymouse=sgr
+set ttymouse=xterm2
 set ballooneval
 set balloonevalterm
 
