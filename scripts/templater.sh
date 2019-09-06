@@ -22,8 +22,8 @@ addHeader() {
 #!/usr/bin/env $1
 #{{{ MARK:Header
 #**************************************************************
-##### Author: $(whoami | tr 'a-z' 'A-Z')
-##### GitHub: https://github.com/$GITHUB_ACCOUNT
+##### Author: $GITHUB_ACCOUNT
+##### GitHub: $GITHUB_URL
 ##### Date: $(date)
 ##### Purpose: $1 script to
 ##### Notes:
