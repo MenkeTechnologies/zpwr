@@ -1371,6 +1371,7 @@ getrc(){
     cp conf.ifconfig "$HOME"
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
+    cp Ultisnips/* "$HOME/.vim/Ultisnips"
     cp -R .tmux/* "$HOME/.tmux"
     cp -f scripts/* "$SCRIPTS"
     cd ..
