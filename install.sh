@@ -562,9 +562,9 @@ if [[ "$needSudo" == yes ]]; then
     sudo gem install rouge
 else
     prettyPrint "Installing Ruby gem lolcat"
-     gem install lolcat
+    gem install lolcat
     prettyPrint "Installing Ruby gem rouge"
-     gem install rouge
+    gem install rouge
 fi
 
 prettyPrint "Installing Iftop config..."
@@ -674,7 +674,7 @@ prettyPrint "Installing .zshrc"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
 prettyPrint "Installing Zsh plugins"
-builtin cd "$INSTALLER_DIR"
+builtin cd "$INSTALLER_DIR" || { echo "where is $INSTALLER_DIR" >&2; exit 1; }
 source "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Running Vundle"
