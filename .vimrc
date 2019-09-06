@@ -959,6 +959,8 @@ inoremap <silent> <C-D>w <C-O>:update<CR>
 inoremap <silent> <C-D>x <C-O>:Marks<CR>
 inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
 inoremap <silent> <C-D>z <ESC>:TlistAddFiles * <CR> :TlistToggle<CR>i
+inoremap <silent> <C-D>. <C-O>:Locate /<CR>
+inoremap <silent> <C-D>, <C-O>:FZFMaps<CR>
 
 "normal mode keybindings for fzf-vim
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
@@ -989,6 +991,8 @@ nnoremap <silent> <C-D>w :update<CR>
 nnoremap <silent> <C-D>x :Marks<CR>
 nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
 nnoremap <silent> <C-D>z :TlistAddFiles *<CR>:TlistToggle<CR>
+nnoremap <silent> <C-D>. :Locate /<CR>
+nnoremap <silent> <C-D>, :FZFMaps<CR>
 
 "gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
 set updatetime=100
@@ -1194,6 +1198,12 @@ command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options'
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'bottom':'50%'}))
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap("with_preview", {"options": '--delimiter : --nth 4.. --preview'}))
+
+command! FZFMaps call fzf#run({
+            \  'source':  "cat ".$HOME."/vimKeybindings.txt",
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
 
 let fzfStrOrig="--preview 'file={}; file=$(echo $file | sed 's@~@".$HOME."@'); test -f $file && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $file || stat $file'"
 
