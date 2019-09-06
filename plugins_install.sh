@@ -18,11 +18,11 @@ prettyPrint "Installing Pathogen"
 mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
 
 prettyPrint "Installing Vim Plugins"
-cd "$INSTALLER_DIR"
+builtin cd "$INSTALLER_DIR"
 source  "$INSTALLER_DIR/vim_plugins_install.sh"
 
 prettyPrint "Installing Ultisnips snippets"
-cd "$INSTALLER_DIR"
+builtin cd "$INSTALLER_DIR"
 cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 
@@ -65,7 +65,7 @@ fi
 prettyPrint "Installing Custom Tmux Commands"
 cp -R "$INSTALLER_DIR/.tmux" "$HOME"
 
-cd "$INSTALLER_DIR"
+builtin cd "$INSTALLER_DIR"
 prettyPrint "Installing Tmux plugins"
 . "$INSTALLER_DIR/tmux_plugins_install.sh"
 

@@ -105,7 +105,7 @@ dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootki
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary+=(llvm build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
+    dependencies_ary+=(libclang1 llvm build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf afpfs-ng \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace)
 }
@@ -292,7 +292,7 @@ warnSudo(){
 }
 
 pluginsinstall(){
-    cd "$INSTALLER_DIR"
+    builtin cd "$INSTALLER_DIR"
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in zpwr base directory?" >&2; exit 1; }
     bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
     PLUGIN_PID=$!
@@ -300,7 +300,7 @@ pluginsinstall(){
 }
 
 ycminstall(){
-    cd "$INSTALLER_DIR"
+    builtin cd "$INSTALLER_DIR"
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
     bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
     YCM_PID=$!
@@ -467,7 +467,6 @@ else
 
         prettyPrint "Fetching Dependencies for $distroName with pkg"
         addDependenciesFreeBSD
-        
         showDeps
         refresh "$distroFamily"
 
@@ -519,7 +518,7 @@ vimV="$(vim --version | head -1 | awk '{print $5}')"
 if echo "$vimV >= 8.0" | bc | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
     prettyPrint "Vim Version less than 8.0 or without python! Installing Vim from Source."
     git clone https://github.com/vim/vim.git vim-master
-    cd "vim-master" && {
+    builtin cd "vim-master" && {
         ./configure --with-features=huge \
             --enable-multibyte \
             --enable-rubyinterp=yes \
@@ -541,7 +540,7 @@ fi
 #**************************************************************
 ycminstall
 
-cd "$INSTALLER_DIR"
+builtin cd "$INSTALLER_DIR"
 source "$INSTALLER_DIR/pip_install.sh"
 
 case "$distroName" in
@@ -574,12 +573,12 @@ iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $
 prettyPrint "IPv4: $ip and interface: $iface"
 echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
 
-cd "$INSTALLER_DIR"
+builtin cd "$INSTALLER_DIR"
 prettyPrint "Installing Pipes.sh from source"
 git clone https://github.com/pipeseroni/pipes.sh.git
-cd pipes.sh && {
+builtin cd pipes.sh && {
     sudo make install
-    cd ..
+    builtin cd ..
     rm -rf pipes.sh
 }
 
@@ -589,18 +588,18 @@ cd pipes.sh && {
 #**************************************************************
 prettyPrint "Installing IFTOP-color by MenkeTechnologies"
 
-cd "$INSTALLER_DIR"
+builtin cd "$INSTALLER_DIR"
 automake --version 2>&1 | grep -q '16' || {
     wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
     tar xvfz automake-1.16.tar.gz
-    cd automake-1.16 && ./configure && make && sudo make install
+    builtin cd automake-1.16 && ./configure && make && sudo make install
     make clean
 }
 
 [[ ! -d "$HOME/forkedRepos" ]] && mkdir "$HOME/forkedRepos"
-cd "$HOME/forkedRepos" && {
+builtin cd "$HOME/forkedRepos" && {
     git clone https://github.com/MenkeTechnologies/iftopcolor
-    cd iftopcolor && {
+    builtin cd iftopcolor && {
         aclocal
         automake --add-missing
         ./configure && make && sudo make install
@@ -609,7 +608,7 @@ cd "$HOME/forkedRepos" && {
 
 exists grc || {
     git clone https://github.com/garabik/grc.git
-    cd grc
+    builtin cd grc
     sudo bash install.sh
 }
 
@@ -629,8 +628,8 @@ fi
 cd "$INSTALLER_DIR"
 prettyPrint "Installing ponysay from source"
 git clone https://github.com/erkin/ponysay.git && {
-cd ponysay && sudo ./setup.py --freedom=partial install && \
-    cd .. && sudo rm -rf ponysay
+builtin cd ponysay && sudo ./setup.py --freedom=partial install && \
+    builtin cd .. && sudo rm -rf ponysay
 }
 
 
@@ -675,7 +674,7 @@ prettyPrint "Installing .zshrc"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
 prettyPrint "Installing Zsh plugins"
-cd "$INSTALLER_DIR"
+builtin cd "$INSTALLER_DIR"
 source "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Running Vundle"
@@ -696,7 +695,7 @@ refresh "$distroFamily"
 
 #{{{                    MARK:Final
 #**************************************************************
-cd "$INSTALLER_DIR/.." || { echo "what happened to $INSTALLER_DIR ?" >&2; exit 1; }
+builtin cd "$INSTALLER_DIR/.." || { echo "what happened to $INSTALLER_DIR ?" >&2; exit 1; }
 
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
 

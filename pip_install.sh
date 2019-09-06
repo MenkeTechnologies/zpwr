@@ -60,7 +60,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 elif [[ "$OS_TYPE" == "Linux" ]];then
     if [[ "$distroFamily" == redhat ]]; then
         prettyPrint "Installing grc for RedHat"
-        git clone https://github.com/garabik/grc.git && cd grc && sudo bash install.sh
+        git clone https://github.com/garabik/grc.git && builtin cd grc && sudo bash install.sh
     fi
 
     if [[ "$distroName" == centos ]]; then

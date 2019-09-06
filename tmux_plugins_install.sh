@@ -18,7 +18,7 @@ fi
 
 INSTALLER_DIR="$(pwd)"
 
-cd "$HOME/.tmux/plugins" && {
+builtin cd "$HOME/.tmux/plugins" && {
 while read repo; do
     installGitHubPlugin "$repo"
 done < "$INSTALLER_DIR/.tmuxplugins"
