@@ -1542,10 +1542,6 @@ if [[ $COLORIZER == bat ]]; then
         export BAT_THEME="GitHub"
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
         export COLORIZER_FZF_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'
-        export COLORIZER_FZF_C='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l c'
-        export COLORIZER_FZF_SH='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l sh'
-        export COLORIZER_FZF_YAML='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l yaml'
-        export COLORIZER_FZF_JAVA='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l java'
         export COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
         export COLORIZER_NL=''
     else
@@ -1560,6 +1556,11 @@ else
     export COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
     export COLORIZER_NL=' | cat -n'
 fi
+
+export COLORIZER_FZF_C="$COLORIZER_FZF_FILE -l c"
+export COLORIZER_FZF_SH="$COLORIZER_FZF_FILE -l sh"
+export COLORIZER_FZF_YAML="$COLORIZER_FZF_FILE -l yaml"
+export COLORIZER_FZF_JAVA="$COLORIZER_FZF_FILE -l java"
 
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
