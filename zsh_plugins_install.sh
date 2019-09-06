@@ -18,7 +18,7 @@ installOhMyZshPlugin(){
     git clone "https://github.com/$1.git" 
 }
 
-cd "$HOME/.oh-my-zsh/custom/plugins" && {
+builtin cd "$HOME/.oh-my-zsh/custom/plugins" && {
     while read repo; do
         installOhMyZshPlugin "$repo"
     done < "$INSTALLER_DIR/.zshplugins"
