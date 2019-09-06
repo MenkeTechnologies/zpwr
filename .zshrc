@@ -1541,6 +1541,7 @@ if [[ $COLORIZER == bat ]]; then
     if exists bat;then
         export BAT_THEME="GitHub"
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
+        export COLORIZER_FZF_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'
         export COLORIZER_FZF_C='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l c'
         export COLORIZER_FZF_SH='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l sh'
         export COLORIZER_FZF_YAML='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l yaml'
@@ -1561,8 +1562,6 @@ fi
 fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
-    isZsh && ps='$pipestatus[1]' || \
-        ps='${PIPESTATUS[0]}'
 
     alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
         --border '"$__COMMON_FZF_ELEMENTS"' --preview \
@@ -1583,122 +1582,13 @@ fzf_setup(){
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview \"if [[ -f {} ]]; then \
-            if print -r -- {} | command \
-            egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
-            elif print -r -- {} | \
-            command egrep -iq '\.deb\$';then $deb_cmd {} | $COLORIZER_FZF_SH; \
-            elif print -r -- {} | \
-            command egrep -iq '\.rpm\$';then $rpm_cmd {} | $COLORIZER_FZF_SH; \
-            elif print -r -- {} | \
-            command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
-            elif print -r -- {} | \
-                command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
-            elif print -r -- {} | \
-                command egrep -iq '\.(bzip|bz)\$';then bzip -c -d {} | $COLORIZER_FZF_YAML; \
-            elif print -r -- {} | \
-                command egrep -iq '\.(bzip2|bz2)\$';then bzip2 -c -d {} | $COLORIZER_FZF_YAML; \
-            elif print -r -- {} | \
-                command egrep -iq '\.(xzip|xz)\$';then xz -c -d {} | $COLORIZER_FZF_YAML; \
-            elif print -r -- {} | \
-            command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
-            else \
-        $COLORIZER_FZF 2>/dev/null; rc=$ps;[[ \$rc = 0 ]] || { stat -- {} | fold -80 | head -500; }; fi; else \
-        stat {} | fold -80 | head -500; fi\""
+        --preview '"$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")"'"
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-            --preview  \"if [[ -f {} ]];then \
-                if print -r -- {} | command \
-                egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
-                elif print -r -- {} | \
-                command egrep -iq '\.deb\$';then $deb_cmd {} | $COLORIZER_FZF_SH; \
-                elif print -r -- {} | \
-                command egrep -iq '\.rpm\$';then $rpm_cmd {} | $COLORIZER_FZF_SH; \
-                elif print -r -- {} | \
-                command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
-                elif print -r -- {} | \
-                    command egrep -iq '\.(bzip|bz)\$';then bzip -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
-                    command egrep -iq '\.(bzip2|bz2)\$';then bzip2 -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
-                    command egrep -iq '\.(xzip|xz)\$';then xz -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
-                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
-                command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
-                else \
-              $COLORIZER_FZF 2>/dev/null; fi; else \
-                    [[ -e {} ]] && stat -- {} | fold -80 | \
-                    head -500 || {
-                        source ~/.shell_aliases_functions.sh
-                        {
-                            print -r -- {} | command egrep \
-                   '\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d' && {
-                                whois -- {} | command \
-                                egrep -q 'No (match|whois)' \
-                                && dig {} || whois -- {}
-                            } || {
-                                cat ~/.common_aliases | grep -- \
-                                {}= || set | command grep -a -- {} \
-                                    | command grep -v -- \
-                                    ZSH_EXEC || alias \
-                                    | command grep -a -- {}\
-                                    || { whois -- {} | \
-                                    command egrep -q \
-                                    'No (match|whois)' && dig {} \
-                                    || whois -- {}
-                                }
-                            }
-                        } | cowsay | ponysay
-            };
-        fi\""
+        --preview '"$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")"'"
     else
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-            --preview  \"if [[ -f {} ]];then \
-                if print -r -- {} | command \
-                egrep -iq '\.[jw]ar\$';then jar tf {} | $COLORIZER_FZF_JAVA; \
-                elif print -r -- {} | \
-                command egrep -iq '\.deb\$';then $deb_cmd {} | $COLORIZER_FZF_SH; \
-                elif print -r -- {} | \
-                command egrep -iq '\.rpm\$';then $rpm_cmd {} | $COLORIZER_FZF_SH; \
-                elif print -r -- {} | \
-                command egrep -iq '\.(tgz|tar|tar\.gz)\$';then tar tf {} | $COLORIZER_FZF_C; \
-                elif print -r -- {} | \
-                    command egrep -iq '\.(bzip|bz)\$';then bzip -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
-                    command egrep -iq '\.(bzip2|bz2)\$';then bzip2 -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
-                    command egrep -iq '\.(xzip|xz)\$';then xz -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
-                    command egrep -iq '\.(gzip|gz)\$';then gzip -c -d {} | $COLORIZER_FZF_YAML; \
-                elif print -r -- {} | \
-                command egrep -iq '\.zip\$';then unzip -l -- {} | $COLORIZER_FZF_C;
-                else \
-              $COLORIZER_FZF 2>/dev/null; fi; else \
-                    [[ -e {} ]] && stat -- {} | fold -80 | \
-                    head -500 || {
-                        source ~/.shell_aliases_functions.sh
-                        {
-                            print -r -- {} | command egrep \
-                   '\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d' && {
-                                whois -- {} | command \
-                                egrep -q 'No (match|whois)' \
-                                && dig {} || whois -- {}
-                            } || {
-                                cat ~/.common_aliases | grep -- \
-                                {}= || set | command grep -a -- {} \
-                                    | command grep -v -- \
-                                    ZSH_EXEC || alias \
-                                    | command grep -a -- {}\
-                                    || { whois -- {} | \
-                                    command egrep -q \
-                                    'No (match|whois)' && dig {} \
-                                    || whois -- {}
-                                }
-                            }
-                        }
-            };
-        fi\""
+        --preview '"$(bash "$SCRIPTS/fzfPreviewOpts.sh")"'"
     fi
 }
 
