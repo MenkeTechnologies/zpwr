@@ -1,4 +1,4 @@
-source ~/powerline/bindings/tmux/powerline.confjk
+source ~/powerline/bindings/tmux/powerline.conf
 
 bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t="
 
