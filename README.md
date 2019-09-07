@@ -482,6 +482,9 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -M viins "^V^S" zFZF```
 - ```bindkey -M viins "^V^V" vimFzf```
 - ```bindkey -M viins "^V^Z" fzf-history-widget```
+- ```bindkey -M viins "^V," fzfVimKeybind```
+- ```bindkey -M viins "^V." locateFzf```
+- ```bindkey -M viins "^V/" fzfAllKeybind```
 - ```bindkey -M viins "^W" vi-backward-kill-word```
 - ```bindkey -M viins "^X^R" _read_comp```
 - ```bindkey -M viins "^X?" _complete_debug```
@@ -579,6 +582,9 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -a "^V^S" zFZF```
 - ```bindkey -a "^V^V" vimFzf```
 - ```bindkey -a "^V^Z" fzf-history-widget```
+- ```bindkey -a "^V," fzfVimKeybind```
+- ```bindkey -a "^V." locateFzf```
+- ```bindkey -a "^V/" fzfAllKeybind```
 - ```bindkey -a "^W" deleteLastWord```
 - ```bindkey -a "^Y" changeQuotes```
 - ```bindkey -a "^Z" undo```
@@ -948,6 +954,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```i  <C-B>       * getline('.')=~'^\s*$'&&col('.')>strlen(getline('.'))?"0\<C-D>\<Esc>kJs":"\<Left>"```
 - ```i  <C-C>       * <Esc>:wq!<CR>:qa!<CR>```
 - ```i  <C-D>       * col('.')>strlen(getline('.'))?"\<C-D>":"\<Del>"```
+- ```i  <C-D>,      * <C-O>:FZFMaps<CR>```
+- ```i  <C-D>.      * <C-O>:Locate /<CR>```
 - ```i  <C-D>z      * <Esc>:TlistAddFiles * <CR> :TlistToggle<CR>i```
 - ```i  <C-D>y      * <Esc>:update<CR>:SyntasticCheck<CR>a```
 - ```i  <C-D>x      * <C-O>:Marks<CR>```
@@ -1014,6 +1022,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```n  [c           @<Plug>(GitGutterPrevHunk)```
 - ```n  ]c           @<Plug>(GitGutterNextHunk)```
 - ```n  <C-C>       * :wq!<CR>:qa!<CR>```
+- ```n  <C-D>,      * :FZFMaps<CR>```
+- ```n  <C-D>.      * :Locate /<CR>```
 - ```n  <C-D>z      * :TlistAddFiles *<CR>:TlistToggle<CR>```
 - ```n  <C-D>y      * :update<CR>:SyntasticCheck<CR>```
 - ```n  <C-D>x      * :Marks<CR>```
