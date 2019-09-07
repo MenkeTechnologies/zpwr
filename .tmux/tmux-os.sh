@@ -12,10 +12,16 @@ if uname | grep -q Darwin; then
     tmux source-file "$HOME/.tmux/tmux-mac"
 elif uname | grep -q Linux; then
     pyv=$(python3 --version)
-    if echo "$pyv" | greq -q 3.7; then
-        tmux source-file "$HOME/.tmux/tmux-linux-37"
+    if echo "$pyv" | greq -q 3.4; then
+        tmux source-file "$HOME/.tmux/tmux-linux-34"
+    elif echo "$pyv" | greq -q 3.5; then
+        tmux source-file "$HOME/.tmux/tmux-linux-35"
+    fi
     elif echo "$pyv" | greq -q 3.6; then
         tmux source-file "$HOME/.tmux/tmux-linux-36"
+    fi
+    elif echo "$pyv" | greq -q 3.7; then
+        tmux source-file "$HOME/.tmux/tmux-linux-37"
     fi
 fi
 
