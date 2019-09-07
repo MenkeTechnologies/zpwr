@@ -4,7 +4,7 @@ if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " 
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = parrot ]' 'source /usr/local/lib/python3.7/dist-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = ubuntu ]' 'source /usr/local/lib/python3.7/dist-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = elementary ]' 'source /usr/local/lib/python3.7/dist-packages/powerline/bindings/tmux/powerline.conf'
-if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = fedora ]' 'source /usr/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf'
+if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = fedora ]' 'source /usr/local/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = centos ]' 'source /usr/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = opensuse-leap ]' 'source /usr/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf'
 if-shell -b '[ $(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | tr -d " ") = opensuse ]' 'source /usr/lib/python3.7/site-packages/powerline/bindings/tmux/powerline.conf'
