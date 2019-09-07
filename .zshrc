@@ -574,7 +574,15 @@ fzfVimKeybind(){
 }
 
 locateFzf(){
-    find / | fzf
+    local found
+    found="$(find / 2>/dev/null | fzf)"
+    clear
+    if [[ -d "$found" ]]; then
+        BUFFER="cd \"$found\""
+    else
+        BUFFER="c \"$found\""
+    fi
+    zle .accept-line
 }
 
 zle -N updater
