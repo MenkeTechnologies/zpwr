@@ -98,6 +98,7 @@ TypeDarwinManParser	mantozshcomp.py	/^class TypeDarwinManParser(ManParser):$/;"	
 TypeDeroffManParser	mantozshcomp.py	/^class TypeDeroffManParser(ManParser):$/;"	c
 URL	gitgo.sh	/^    local URL="https:\/\/github.com\/$GITHUB_ACCOUNT\/$REPO_NAME_TO_CREATE"$/;"	v
 URL	help2comp.py	/^URL = 'http:\/\/github.com\/RobSis\/zsh-completion-generator'$/;"	v
+YCM_CORES	ycm_install.sh	/^    YCM_CORES=1 python3 install.py --clang-completer$/;"	v
 YCM_PID	install.sh	/^    YCM_PID=$!$/;"	v
 ZSH_COMP_DIR	remoteRepoMonitorDaemon.sh	/^ZSH_COMP_DIR="$HOME\/.oh-my-zsh\/custom\/plugins\/$ZSH_COMP_REPO_NAME"$/;"	v
 __ScriptVersion	CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v

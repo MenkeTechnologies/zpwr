@@ -17,7 +17,7 @@ git clone https://github.com/Valloric/YouCompleteMe.git
 builtin cd "$HOME/.vim/bundle/YouCompleteMe" && {
     git submodule update --init --recursive
     #need greater than 3GB RAM for compiling
-    YCM_CORES=1 ./install.py --clang-completer
+    YCM_CORES=1 python3 install.py --clang-completer
 }
 
 
