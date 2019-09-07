@@ -41,7 +41,7 @@ EOF
     printf "\x1b[35m"
     printf "\x1b[1m"
     cat <<EOF
-                      $info
+                   $info
 EOF
 
     printf "\x1b[0m"
@@ -89,7 +89,7 @@ EOF
    $fetch
    $push
 
-                $lastcommit
+            $lastcommit
     
 EOF
 
