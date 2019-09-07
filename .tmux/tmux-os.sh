@@ -16,10 +16,8 @@ elif uname | grep -q Linux; then
         tmux source-file "$HOME/.tmux/tmux-linux-34"
     elif echo "$pyv" | grep -q 3.5; then
         tmux source-file "$HOME/.tmux/tmux-linux-35"
-    fi
     elif echo "$pyv" | grep -q 3.6; then
         tmux source-file "$HOME/.tmux/tmux-linux-36"
-    fi
     elif echo "$pyv" | grep -q 3.7; then
         tmux source-file "$HOME/.tmux/tmux-linux-37"
     fi
