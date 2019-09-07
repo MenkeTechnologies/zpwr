@@ -30,22 +30,22 @@
     bindkey -M viopp -L
 
     printf "# Vim Keybindings Insert Mode (:imap)"
-    vim -e -c 'redir > ~/.temp1 | silent imap | redir END | quitall'
+    vim -e -c 'redir! > ~/.temp1 | silent imap | redir END | quitall'
     cat ~/.temp1
     echo
 
     printf "# Vim Keybindings Normal Mode (:nmap)"
-    vim -e -c 'redir > ~/.temp2 | silent nmap | redir END | quitall'
+    vim -e -c 'redir! > ~/.temp2 | silent nmap | redir END | quitall'
     cat ~/.temp2
     echo
 
     printf "# Vim Keybindings Visual Mode (:vmap)"
-    vim -e -c 'redir > ~/.temp3 | silent vmap | redir END | quitall'
+    vim -e -c 'redir! > ~/.temp3 | silent vmap | redir END | quitall'
     cat ~/.temp3
     echo
 
     printf "# Vim Keybindings Command Colon Mode (:cmap)"
-    vim -e -c 'redir > ~/.temp4 | silent cmap | redir END | quitall'
+    vim -e -c 'redir! > ~/.temp4 | silent cmap | redir END | quitall'
     cat ~/.temp4
     echo
 
