@@ -73,6 +73,9 @@ export D="$HOME/Desktop"
 export DOC="$HOME/Documents"
 export DL="$HOME/Downloads"
 export XAUTHORITY="$HOME/.Xauthority"
+export VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
+export ALL_KEYBINDINGS="$HOME/keybindings.txt"
+
 export TERMINAL_APP="Terminal.app"
 export TERM="xterm-256color"
 export YARN_HOME="$HOME/.config/yarn"
@@ -2041,8 +2044,8 @@ jsonToArray(){
 }
 
 regenBindings(){
-    bash "$SCRIPTS/keybindingsToFZFVim.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$HOME/vimKeybindings.txt"
-    zsh -il "$SCRIPTS/keybindingsToFZF.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$HOME/keybindings.txt"
+    bash "$SCRIPTS/keybindingsToFZFVim.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$VIM_KEYBINDINGS"
+    zsh -il "$SCRIPTS/keybindingsToFZF.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$ALL_KEYBINDINGS"
 }
 
 arrayToJson(){
