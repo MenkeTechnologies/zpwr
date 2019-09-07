@@ -1481,6 +1481,10 @@ if [[ -d "$PYEXECUTABLES" ]]; then
     : ~PYEXECUTABLES
 fi
 
+if [[ -d "$TMUX_HOME" ]]; then
+    : ~TMUX_HOME
+fi
+
 if [[ -d "$DOC" ]]; then
     : ~DOC
 fi
