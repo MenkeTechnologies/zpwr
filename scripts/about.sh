@@ -20,6 +20,7 @@ banner() {
             info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"
             fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"
             push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\t ]+@    @')"
+            lastcommit="$(git log --oneline -n 1)"
         fi
     fi
 
@@ -87,6 +88,8 @@ EOF
     cat <<EOF
    $fetch
    $push
+
+                $lastcommit
     
 EOF
 
