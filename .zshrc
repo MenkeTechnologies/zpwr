@@ -573,7 +573,8 @@ fzfVimKeybind(){
     cat "$VIM_KEYBINDINGS" | fzf
 }
 getFound(){
-    eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS"
+    eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" | \
+        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
 locateFzf(){
@@ -588,9 +589,9 @@ locateFzf(){
         fi
 
         if [[ -d "$found" ]]; then
-            BUFFER="cd \"$found\""
+            BUFFER="cd $found"
         else
-            BUFFER="c \"$found\""
+            BUFFER="c $found"
         fi
         zle .accept-line
     else
