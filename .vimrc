@@ -1200,7 +1200,7 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap("with_preview", {"options": '--delimiter : --nth 4.. --preview'}))
 
 command! FZFMaps call fzf#run({
-            \  'source':  "cat ".$HOME."/vimKeybindings.txt",
+\  'source':  "cat ".$VIM_KEYBINDINGS,
 \  'sink':    'e',
 \  'options': '-m -x +s',
 \  'down':    '40%'})
