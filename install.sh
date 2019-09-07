@@ -337,6 +337,11 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     }
 
+    exists "brew" || {
+        prettyPrint "Need Homebrew"
+        exit 1
+    }
+
     prettyPrint "We have Homebrew..."
 
     brew ls python > /dev/null 2>&1
