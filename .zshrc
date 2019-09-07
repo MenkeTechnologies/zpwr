@@ -573,7 +573,7 @@ fzfVimKeybind(){
     cat "$VIM_KEYBINDINGS" | fzf
 }
 getFound(){
-    eval "find / 2>/dev/null | fzf $FZF_CTRL_T_OPTS"
+    eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS"
 }
 
 locateFzf(){
