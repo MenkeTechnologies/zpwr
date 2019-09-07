@@ -2004,8 +2004,16 @@ arrayToJson(){
 
 }
 
+needSudo(){
+    if [[ ! -w "$1" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 updatePowerlineLink(){
-    dir="$(python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
+    dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
     prettyPrint "linking $dir to $HOME/powerline"
     ln -s "$dir" "$HOME/powerline"
 }
