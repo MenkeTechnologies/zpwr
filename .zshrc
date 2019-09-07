@@ -558,6 +558,14 @@ deleteLastWord(){
     fi
 }
 
+fzfVimKeybind(){
+    cat "$VIM_KEYBINDINGS" | fzf
+}
+
+locateFzf(){
+    find / | fzf
+}
+
 zle -N updater
 zle -N runner
 zle -N intoFzf
@@ -568,6 +576,8 @@ zle -N getrcWidget
 zle -N clearLine
 zle -N deleteLastWord
 zle -N lsoffzf
+zle -N fzfVimKeybind
+zle -N locateFzf
 
 #vim mode for zle
 bindkey -v
@@ -603,6 +613,12 @@ bindkey -M vicmd '^F^H' lsoffzf
 
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
+
+bindkey -M viins '^V.' locateFzf
+bindkey -M vicmd '^V.' locateFzf
+
+bindkey -M viins '^V,' fzfVimKeybind
+bindkey -M vicmd '^V,' fzfVimKeybind
 
 bindkey -M viins '^V^N' vimFzfSudo
 bindkey -M vicmd '^V^N' vimFzfSudo
