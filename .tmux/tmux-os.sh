@@ -9,8 +9,10 @@
 #}}}***********************************************************
 
 logg(){
-    echo "$(date) $1 " >> ~/updaterlog.txt
+    echo "$(date) $1 "
 }
+exec 2>> ~/updaterlog.txt
+exec 1>> ~/updaterlog.txt
 set -x
 if uname | grep -q Darwin; then
     tmux source-file "$HOME/.tmux/tmux-mac"
@@ -35,5 +37,6 @@ elif uname | grep -q Linux; then
         logg "done 37"
         exit 0
     fi
+    exit 0
 fi
 
