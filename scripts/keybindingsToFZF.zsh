@@ -15,13 +15,13 @@
     bindkey -M visual -L
     bindkey -M listscroll -L
     bindkey -M viopp -L
-    vim -e -c 'redir > ~/.temp1 | silent imap | redir END | quitall'
+    vim -e -c 'redir! > ~/.temp1 | silent imap | redir END | quitall'
     cat ~/.temp1
-    vim -e -c 'redir > ~/.temp2 | silent nmap | redir END | quitall'
+    vim -e -c 'redir! > ~/.temp2 | silent nmap | redir END | quitall'
     cat ~/.temp2
-    vim -e -c 'redir > ~/.temp3 | silent vmap | redir END | quitall'
+    vim -e -c 'redir! > ~/.temp3 | silent vmap | redir END | quitall'
     cat ~/.temp3
-    vim -e -c 'redir > ~/.temp4 | silent cmap | redir END | quitall'
+    vim -e -c 'redir! > ~/.temp4 | silent cmap | redir END | quitall'
     cat ~/.temp4
     command rm ~/.temp{1..4}
 
