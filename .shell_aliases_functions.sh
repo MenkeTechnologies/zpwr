@@ -1985,7 +1985,7 @@ jsonToArray(){
 
 regenBindings(){
     bash "$SCRIPTS/keybindingsToFZFVim.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$VIM_KEYBINDINGS"
-    zsh -il "$SCRIPTS/keybindingsToFZF.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$ALL_KEYBINDINGS"
+    isZsh && source "$SCRIPTS/keybindingsToFZF.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$ALL_KEYBINDINGS"
 }
 
 arrayToJson(){

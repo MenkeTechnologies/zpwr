@@ -9,11 +9,13 @@ BLUE	blueText.sh	/^BLUE='\\e[37;44m'$/;"	v
 BLUE	blueUpperText.sh	/^BLUE='\\e[37;44m'$/;"	v
 BLUE	boldText.sh	/^BLUE='\\e[37;44m'$/;"	v
 BLUE	coolFormatter.sh	/^BLUE='\\e[37;44m'$/;"	v
+BUFFER	.shell_aliases_functions.sh	/^        BUFFER=""$/;"	v
 CMD	myWatchNoBlink.sh	/^        CMD="$@"$/;"	v
 CMD	myWatchNoBlinkColorized.sh	/^        CMD="$@"$/;"	v
 CMDNAME	mantozshcomp.py	/^CMDNAME = ""$/;"	v
 COLS	myWatchNoBlink.sh	/^        COLS=$(tput cols)$/;"	v
 COLS	myWatchNoBlinkColorized.sh	/^        COLS=$(tput cols)$/;"	v
+COMPLETION_DIR	.shell_aliases_functions.sh	/^    COMPLETION_DIR="$HOME\/.oh-my-zsh\/custom\/plugins"$/;"	v
 COMPLETION_DIR	remoteRepoMonitorDaemon.sh	/^    COMPLETION_DIR="$HOME\/.oh-my-zsh\/custom\/plugins"$/;"	v
 CONFIG_DIR	remoteRepoMonitorDaemon.sh	/^CONFIG_DIR="$HOME\/forkedRepos\/$REPO_NAME"$/;"	v
 COWSAY_DIR	macOnly/randomCow.sh	/^COWSAY_DIR=\/usr\/local\/lib\/node_modules\/cowsay\/cows$/;"	v
@@ -21,8 +23,11 @@ CR	batchRename.sh	/^    local CR="\\r"$/;"	v
 CR	openAll.sh	/^    local CR="\\r"$/;"	v
 CodeFile	boiler_gen.py	/^class CodeFile:$/;"	c
 DIR	macOnly/rsyncr.sh	/^localDIR="$1"$/;"	v
+DONE	.shell_aliases_functions.sh	/^    DONE=false$/;"	v
 Deroffer	mantozshcomp.py	/^class Deroffer:$/;"	c
 ECHO	oldCounter.sh	/^        ECHO="true"$/;"	v
+FIGLET_DIR	.shell_aliases_functions.sh	/^        FIGLET_DIR="\/usr\/local\/Cellar\/figlet\/2.2.5\/share\/figlet\/fonts"$/;"	v
+FIGLET_DIR	.shell_aliases_functions.sh	/^        FIGLET_DIR="\/usr\/share\/figlet"$/;"	v
 FIGLET_DIR	macOnly/figletRandomFont.sh	/^    FIGLET_DIR="\/usr\/local\/Cellar\/figlet\/2.2.5\/share\/figlet\/fonts"$/;"	v
 FIGLET_DIR	macOnly/figletRandomFont.sh	/^    FIGLET_DIR="\/usr\/share\/figlet"$/;"	v
 FIGLET_DIR	macOnly/figletRandomFontOnce.sh	/^    FIGLET_DIR="\/usr\/local\/Cellar\/figlet\/2.2.5\/share\/figlet\/fonts"$/;"	v
@@ -42,15 +47,18 @@ IFS	sortedArrayCounter.sh	/^        IFS="$oldifs"$/;"	v
 IFS	sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v
 IFS	sortedArrayCounter.sh	/^IFS=:$/;"	v
 INTERFACE	macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v
+LC_MESSAGES	.shell_aliases_functions.sh	/^  LC_MESSAGES=C grep -Hm1 '^' < "${1-$REPLY}" | grep -q '^Binary'$/;"	v
 LOGFILE	updaterEmail.sh	/^LOGFILE="\/Users\/jacobmenke\/updaterlog.txt"$/;"	v
 ManParser	mantozshcomp.py	/^class ManParser(object):$/;"	c
 ORGIN_NAME	gitgo.sh	/^    local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"$/;"	v
+OS	.shell_aliases_functions.sh	/^    OS="$(uname -s)"$/;"	v
 OS	test.sh	/^OS="$(uname -s)"$/;"	v
 Output	macOnly/figletRandomFont.sh	/^    Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"$/;"	v
 PARSER_INFO	mantozshcomp.py	/^PARSER_INFO = {}$/;"	v
 PATH	macOnly/tmuxer.sh	/^PATH="\/usr\/local\/bin:$PATH"$/;"	v
 PULL_URL	gitgo.sh	/^        local PULL_URL="$(git remote -v |$/;"	v
 RED	redText.sh	/^RED='\\e[31;1m'$/;"	v
+REPLY	.shell_aliases_functions.sh	/^            REPLY="$(cat \/tmp\/temp$$)"$/;"	v
 REPO_NAME	gitgo.sh	/^        local REPO_NAME="$(git remote -v | awk '{print $2}' | tail -1 | tr -d ' ')"$/;"	v
 REPO_NAME_TO_CREATE	gitgo.sh	/^        local REPO_NAME_TO_CREATE="$1"$/;"	v
 RESET	blueText.sh	/^RESET='\\e[0m'$/;"	v
@@ -87,6 +95,7 @@ __ScriptVersion	updater.sh	/^__ScriptVersion="1.0.0"$/;"	v
 __init__	boiler_gen.py	/^    def __init__(self, filename, directory, contents):$/;"	m	class:CodeFile
 __init__	mantozshcomp.py	/^    def __init__(self):$/;"	m	class:Deroffer
 _escape	help2comp.py	/^def _escape(line):$/;"	f
+about	.shell_aliases_functions.sh	/^about(){$/;"	f
 active	powerTo.sh	/^active=$(tmux list-panes | grep active | cut -c1)$/;"	v
 addContents	shebangChanger.sh	/^addContents() {$/;"	f
 addHeader	createTextFile.sh	/^addHeader() {$/;"	f
@@ -95,42 +104,71 @@ addToAry	regexreplace.pl	/^sub addToAry {$/;"	s
 add_diagnostic	mantozshcomp.py	/^def add_diagnostic(dgn, msg_verbosity=VERY_VERBOSE):$/;"	f
 address	uploadWebDS.sh	/^address="jacobmenke@$MY_IP:\/var\/services\/web"$/;"	v
 address	uploadWebPi.sh	/^address="pi@$MY_IP:\/var\/www\/html"$/;"	v
+allRemotes	.shell_aliases_functions.sh	/^allRemotes(){$/;"	f
 allRemotes	about.sh	/^allRemotes() {$/;"	f
 already_output_completions	mantozshcomp.py	/^already_output_completions = {}$/;"	v
+alternatingPrettyPrint	.shell_aliases_functions.sh	/^alternatingPrettyPrint(){$/;"	f
 alternatingPrettyPrint	CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	pipUpdater.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	rpiSoftwareUpdater.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	updater.sh	/^alternatingPrettyPrint() {$/;"	f
 amPm	timeConverter.sh	/^    amPm="PM"$/;"	v
 amPm	timeConverter.sh	/^amPm="AM"$/;"	v
+animate	.shell_aliases_functions.sh	/^animate(){$/;"	f
+arg	.shell_aliases_functions.sh	/^        arg="$1"$/;"	v
+arg	.shell_aliases_functions.sh	/^        arg=${argdollar\/\/@\/\\\\@}$/;"	v
+argdollar	.shell_aliases_functions.sh	/^        argdollar=${arg\/\/$\/\\\\$}$/;"	v
 arr	listAllCommands.sh	/^arr=()$/;"	v
 arr	picture_finder.sh	/^    local arr=('|' '\\' '-' '\/')$/;"	v
 arr	secureDelete.sh	/^    local arr=('|' '\\' '-' '\/')$/;"	v
 arr	sortedArrayCounter.sh	/^arr=()$/;"	v
+arrayToJson	.shell_aliases_functions.sh	/^arrayToJson(){$/;"	f
+ary	.shell_aliases_functions.sh	/^        ary="$1"$/;"	v
+b	.shell_aliases_functions.sh	/^b(){$/;"	f
+backup	.shell_aliases_functions.sh	/^backup(){$/;"	f
 backup_dir	duplicateLineDeleter.sh	/^backup_dir=$scripts_dir\/rcBackups$/;"	v
 backup_dir	indenterAndDuplicateLineDeleter.sh	/^backup_dir=$scripts_dir\/rcBackups$/;"	v
 banner	about.sh	/^banner() {$/;"	f
+base	.shell_aliases_functions.sh	/^            base="$(dirname "$base")"$/;"	v
+base	.shell_aliases_functions.sh	/^        base="$(dirname "$1")"$/;"	v
+blocksToSize	.shell_aliases_functions.sh	/^blocksToSize(){$/;"	f
 blocksize	secureDelete.sh	/^blocksize=1  # I\/O with \/dev\/urandom requires unit block size,$/;"	v
+bold	.shell_aliases_functions.sh	/^    bold=$(tput bold || tput md)$/;"	v
 boldflag	myWatchNoBlink.sh	/^        boldflag=true$/;"	v
 boldflag	myWatchNoBlinkColorized.sh	/^        boldflag=true$/;"	v
 boxesChar	manzshcompgen.zsh	/^    boxesChar='\/'$/;"	v
 boxesChar	zshcompgen.zsh	/^    boxesChar='\/'$/;"	v
 boxesPrint	manzshcompgen.zsh	/^boxesPrint(){$/;"	f
 boxesPrint	zshcompgen.zsh	/^boxesPrint(){$/;"	f
+branch	.shell_aliases_functions.sh	/^        branch="$1"$/;"	v
+branch	.shell_aliases_functions.sh	/^        branch=master$/;"	v
+branch	.shell_aliases_functions.sh	/^    branch=master$/;"	v
 built_command	mantozshcomp.py	/^def built_command(options, description, arg):$/;"	f
 built_command_output	mantozshcomp.py	/^built_command_output = []$/;"	v
+bytes	.shell_aliases_functions.sh	/^    local bytes=$(( input * 512 ))$/;"	v
 bz2	mantozshcomp.py	/^import bz2$/;"	i
+c	.shell_aliases_functions.sh	/^c(){$/;"	f
 cargo_bin	rpiSoftwareUpdater.sh	/^cargo_bin="$HOME\/.cargo\/bin\/cargo"$/;"	v
+category	.shell_aliases_functions.sh	/^        category="$2"$/;"	v
+category	.shell_aliases_functions.sh	/^    category="programming"$/;"	v
+cd	.shell_aliases_functions.sh	/^cd(){$/;"	f
+cgh	.shell_aliases_functions.sh	/^cgh(){$/;"	f
 chars	batchRename.sh	/^    local chars=1                   # number of characters to display$/;"	v
 chars	openAll.sh	/^    local chars=1                   # number of characters to display$/;"	v
 checkForExistence	batchRename.sh	/^checkForExistence() {$/;"	f
 check_dir_exists	boiler_gen.py	/^def check_dir_exists(directory):$/;"	f
 cleanup_autogenerated_completions_in_directory	mantozshcomp.py	/^def cleanup_autogenerated_completions_in_directory(dir):$/;"	f
 cleanup_autogenerated_file	mantozshcomp.py	/^def cleanup_autogenerated_file(path):$/;"	f
+clearList	.shell_aliases_functions.sh	/^clearList() {$/;"	f
 clearline	batchRename.sh	/^    local clearline="\\e[K"          # clear to end of line (ANSI terminal)$/;"	v
 clearline	openAll.sh	/^    local clearline="\\e[K"          # clear to end of line (ANSI terminal)$/;"	v
+cloneToForked	.shell_aliases_functions.sh	/^cloneToForked(){$/;"	f
+cmd	.shell_aliases_functions.sh	/^    cmd="$1"$/;"	v
 cmd	delete_dups.zsh	/^    cmd="$(echo $f | cut -c2-)"$/;"	v
 codecs	mantozshcomp.py	/^import codecs$/;"	i
+colo	.shell_aliases_functions.sh	/^        colo=$/;"	v
+color2	.shell_aliases_functions.sh	/^color2(){$/;"	f
+colorizer	.shell_aliases_functions.sh	/^    local colorizer=bat$/;"	v
 cols	picture_finder.sh	/^cols=$(tput cols)$/;"	v
 command	macOnly/commandToColors.sh	/^command="$@"$/;"	v
 command	runner.sh	/^    command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | sed -n '4,$p'"$/;"	v
@@ -151,20 +189,28 @@ condputs	mantozshcomp.py	/^    def condputs(self, str):$/;"	m	class:Deroffer
 condputs_tr	mantozshcomp.py	/^    def condputs_tr(self, str):$/;"	m	class:Deroffer
 contents	duplicateLineDeleter.sh	/^    contents=$(cat -s "$file")$/;"	v
 contents	indenterAndDuplicateLineDeleter.sh	/^    contents=$(cat -s "$file")$/;"	v
+contribcount	.shell_aliases_functions.sh	/^contribcount(){$/;"	f
 convertFiles	batchRename.sh	/^convertFiles() {$/;"	f
 could_be_description	mantozshcomp.py	/^    def could_be_description(self, line):$/;"	m	class:TypeDeroffManParser
 count	uploadWebPi.sh	/^count=0$/;"	v
 count_argument_dashes	mantozshcomp.py	/^    def count_argument_dashes(self, line):$/;"	m	class:TypeDarwinManParser
+counter	.shell_aliases_functions.sh	/^    counter=0$/;"	v
 counter	CPU_Stresser.sh	/^    counter=0$/;"	v
 counter	pipUpdater.sh	/^    counter=0$/;"	v
 counter	rpiSoftwareUpdater.sh	/^    counter=0$/;"	v
+createLearningCollection	.shell_aliases_functions.sh	/^createLearningCollection(){$/;"	f
 createTemplate	templater.sh	/^createTemplate() {$/;"	f
 createTheFile	createScriptButDontOpenSublime.sh	/^createTheFile() {$/;"	f
 createTheFile	createTextFile.sh	/^createTheFile() {$/;"	f
+creategif	.shell_aliases_functions.sh	/^creategif(){$/;"	f
+currentDir	.shell_aliases_functions.sh	/^    currentDir="$(pwd -P)"$/;"	v
 cut_option	help2comp.py	/^def cut_option(line):$/;"	f
 dateflag	myWatchMaintainEscapes.sh	/^        dateflag=true$/;"	v
 dateflag	mywatch.sh	/^        dateflag=true$/;"	v
+db	.shell_aliases_functions.sh	/^    db(){$/;"	f
+db2	.shell_aliases_functions.sh	/^    db2(){$/;"	f
 default_recipent	textmessage.sh	/^    default_recipent="555111333"$/;"	v
+del	.shell_aliases_functions.sh	/^del(){$/;"	f
 delay	batchRename.sh	/^    local delay=.1                  # time in seconds between characters$/;"	v
 delay	openAll.sh	/^    local delay=.1                  # time in seconds between characters$/;"	v
 delim	batchRename.sh	/^delim=_$/;"	v
@@ -173,13 +219,18 @@ delim	splitReg.sh	/^delim=$(echo "$output" | grep -n -- "$regex" | tail -$level 
 deroff	mantozshcomp.py	/^    def deroff(self, str):$/;"	m	class:Deroffer
 deroff_files	mantozshcomp.py	/^def deroff_files(files):$/;"	f
 destinationFile	picture_finder.sh	/^    destinationFile=$destinationDirectory\/${picture##*\/}$/;"	v
+detachall	.shell_aliases_functions.sh	/^detachall(){$/;"	f
 diagnostic_indent	mantozshcomp.py	/^diagnostic_indent = 0$/;"	v
 diagnostic_output	mantozshcomp.py	/^diagnostic_output = []$/;"	v
 digit	mantozshcomp.py	/^    def digit(self, idx):$/;"	m	class:Deroffer
+digs	.shell_aliases_functions.sh	/^digs(){$/;"	f
+dir	.shell_aliases_functions.sh	/^    dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"$/;"	v
+dir	.shell_aliases_functions.sh	/^    dir="$1"$/;"	v
 dir	oldCounter.sh	/^    dir=$(echo $PATH | cut -d: -f$i)$/;"	v
 dir	runner.sh	/^        dir="$(dirname "$2")"$/;"	v
 dir	runner.sh	/^    dir="$(dirname "$2")"$/;"	v
 dirNum	oldCounter.sh	/^dirNum=$(expr $(echo $PATH | tr -cd : | wc -c) + 1)$/;"	v
+dir_name	.shell_aliases_functions.sh	/^    dir_name=${git_name%.*}$/;"	v
 dir_to_search	openAll.sh	/^    dir_to_search="$2"$/;"	v
 dir_to_search	openAll.sh	/^dir_to_search="$(pwd)"$/;"	v
 dir_watched	fsWatchLongRunning.sh	/^dir_watched="$1"$/;"	v
@@ -190,6 +241,8 @@ dir_watching	watchServiceFSWatchPiWeb.sh	/^dir_watching="$1"$/;"	v
 dir_watching	watchServiceFSWatchRustCompile.sh	/^dir_watching="$1"$/;"	v
 directory_name	tgzLocalInstaller.sh	/^        directory_name="${1%.tar.gz}"$/;"	v
 directory_name	tgzLocalInstaller.sh	/^        directory_name="${1%.tgz}"$/;"	v
+dirname	.shell_aliases_functions.sh	/^        dirname="$(dirname $file)"$/;"	v
+dirsc	.shell_aliases_functions.sh	/^    dirsc="$SCRIPTS\/$REPO_NAME"$/;"	v
 disable_proxy	macOnly/tor.sh	/^function disable_proxy() {$/;"	f
 displayProgress	batchRename.sh	/^displayProgress() {$/;"	f
 displayProgress	picture_finder.sh	/^displayProgress() {$/;"	f
@@ -198,6 +251,7 @@ displayProgressIndicator	openAll.sh	/^displayProgressIndicator() {$/;"	f
 distro	colorLogger.sh	/^        distro=debian$/;"	v
 distro	colorLogger.sh	/^        distro=redhat$/;"	v
 distro	colorLogger.sh	/^        distro=suse$/;"	v
+distroName	.shell_aliases_functions.sh	/^            distroName=$(command grep "^ID=" \/etc\/os-release | cut -d= -f2 | tr -d \\" | head -n 1)$/;"	v
 distroName	clearTrash.sh	/^    distroName="$(grep '^ID=' \/etc\/os-release | cut -d= -f2 | tr -d \\")"$/;"	v
 distroName	colorLogger.sh	/^    distroName="$(grep '^ID=' \/etc\/os-release | cut -d= -f2 | tr -d \\")"$/;"	v
 distroName	logs.sh	/^    distroName=$(lsb_release -a | head -1 | awk '{print $3}')$/;"	v
@@ -221,6 +275,11 @@ errno	mantozshcomp.py	/^import errno$/;"	i
 esc	mantozshcomp.py	/^    def esc(self):$/;"	m	class:Deroffer
 esc_char	mantozshcomp.py	/^    def esc_char(self):$/;"	m	class:Deroffer
 esc_char_backslash	mantozshcomp.py	/^    def esc_char_backslash(self):$/;"	m	class:Deroffer
+escapeRemove	.shell_aliases_functions.sh	/^escapeRemove(){$/;"	f
+exe	.shell_aliases_functions.sh	/^                exe="proxychains4 -q"$/;"	v
+exe	.shell_aliases_functions.sh	/^                exe=(proxychains4 -q) || \\$/;"	v
+exe	.shell_aliases_functions.sh	/^    exe(){$/;"	f
+execpy	.shell_aliases_functions.sh	/^execpy(){$/;"	f
 executableProgram	shebangChanger.sh	/^executableProgram=$1$/;"	v
 executableScriptsProcessing	createScriptButDontOpenSublime.sh	/^executableScriptsProcessing() {$/;"	f
 executableScriptsProcessing	createTextFile.sh	/^executableScriptsProcessing() {$/;"	f
@@ -228,16 +287,23 @@ executableScriptsProcessing	runner.sh	/^executableScriptsProcessing() {$/;"	f
 executableScriptsProcessing	templater.sh	/^executableScriptsProcessing() {$/;"	f
 executeFileFirstArgIsCommand	runner.sh	/^executeFileFirstArgIsCommand() {$/;"	f
 executeTheFile	runner.sh	/^executeTheFile() {$/;"	f
+exists	.shell_aliases_functions.sh	/^    exists(){$/;"	f
 exists	CPU_Stresser.sh	/^exists() {$/;"	f
 exists	fzfPreviewOptsCommon.sh	/^    exists(){$/;"	f
 exists	manzshcompgen.zsh	/^exists(){$/;"	f
 exists	rpiSoftwareUpdater.sh	/^exists() {$/;"	f
 exists	updater.sh	/^exists() {$/;"	f
 exists	zshcompgen.zsh	/^exists(){$/;"	f
+f	.shell_aliases_functions.sh	/^f(){$/;"	f
 fallback	mantozshcomp.py	/^    def fallback(self, options_section):$/;"	m	class:Type1ManParser
 fallback2	mantozshcomp.py	/^    def fallback2(self, options_section):$/;"	m	class:Type1ManParser
 family_phone_numbers	textmessage.sh	/^    family_phone_numbers=("$member_1")$/;"	v
 fetch	about.sh	/^            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\\t ]+@    @')"$/;"	v
+ff	.shell_aliases_functions.sh	/^ff(){$/;"	f
+fff	.shell_aliases_functions.sh	/^fff(){$/;"	f
+figletfonts	.shell_aliases_functions.sh	/^figletfonts(){$/;"	f
+file	.shell_aliases_functions.sh	/^            file=${file##*\/}$/;"	v
+file	.shell_aliases_functions.sh	/^    file="$HOME\/.config\/powerline\/themes\/tmux\/default.json"$/;"	v
 file	boiler_gen.py	/^    file = CodeFile(model_file, directory, model)$/;"	v
 file	inotifyWatchLogAndEmailIfNAS.sh	/^file="$1"$/;"	v
 file	macOnly/splitReg.sh	/^file=\/tmp\/temp$\$$/;"	v
@@ -254,6 +320,8 @@ file_is_overwritable	mantozshcomp.py	/^def file_is_overwritable(path):$/;"	f
 files	backupBashConfig.sh	/^files=("$my_home_dir\/.bashrc" "$my_home_dir\/.bash_profile" "$my_home_dir\/.profile" '\/etc\/bashrc' '\/etc\/profile')$/;"	v
 files	backupBashConfig.sh~	/^files=("$my_home_dir\/.bashrc" "$my_home_dir\/.bash_profile" "$my_home_dir\/.profile" '\/etc\/bashrc' '\/etc\/profile')$/;"	v
 filesArray	openAll.sh	/^filesArray=()$/;"	v
+filter	.shell_aliases_functions.sh	/^               filter=true$/;"	v
+filter	.shell_aliases_functions.sh	/^        filter=false$/;"	v
 filter	macOnly/splitReg.sh	/^filter="$2"$/;"	v
 filter	splitReg.sh	/^filter="$2"$/;"	v
 findTotal	oldCounter.sh	/^findTotal() {$/;"	f
@@ -273,12 +341,14 @@ font	macOnly/menkeTechRandomFont.sh	/^    font=${ary[$randIndex]}$/;"	v
 font	macOnly/randomCow.sh	/^    font=${ary[$randIndex]}$/;"	v
 font	mantozshcomp.py	/^    def font(self):$/;"	m	class:Deroffer
 font2	mantozshcomp.py	/^    def font2(self):$/;"	m	class:Deroffer
+forked	.shell_aliases_functions.sh	/^    forked="$FORKED_DIR\/$REPO_NAME"$/;"	v
 fortuneQuote	eyes.sh	/^        fortuneQuote="$(figlet -f "$1" \\"$fortuneQuote\\")"$/;"	v
 fortuneQuote	eyes.sh	/^    fortuneQuote="$(fortune)"$/;"	v
 found	shebangChanger.sh	/^            found=false$/;"	v
 found	shebangChanger.sh	/^            found=true$/;"	v
 found	shebangChanger.sh	/^    found=false$/;"	v
 frameworks	boiler_gen.py	/^frameworks = [{$/;"	v
+fz	.shell_aliases_functions.sh	/^fz(){$/;"	f
 g_fish_safe_chars	mantozshcomp.py	/^g_fish_safe_chars = frozenset(string.ascii_letters + string.digits +$/;"	v
 g_macro_dict	mantozshcomp.py	/^    g_macro_dict = False$/;"	v	class:Deroffer
 g_re_esc_char	mantozshcomp.py	/^    g_re_esc_char = re.compile($/;"	v	class:Deroffer
@@ -290,25 +360,36 @@ g_re_word	mantozshcomp.py	/^    g_re_word = re.compile(r"[a-zA-Z_]+")  # equival
 g_specs	mantozshcomp.py	/^    g_specs = {$/;"	v	class:Deroffer
 g_specs_specletter	mantozshcomp.py	/^    g_specs_specletter = {$/;"	v	class:Deroffer
 gateway_ip	pingordie.sh	/^gateway_ip='8.8.8.8'$/;"	v
+gcl	.shell_aliases_functions.sh	/^gcl() {$/;"	f
 gen_files_react	boiler_gen.py	/^def gen_files_react(start):$/;"	f
 gen_files_spring	boiler_gen.py	/^def gen_files_spring(start):$/;"	f
 generate_argument_list	help2comp.py	/^def generate_argument_list(options):$/;"	f
 generate_completion_function	help2comp.py	/^def generate_completion_function(options, program_name):$/;"	f
 getInitialCommit	gitgo.sh	/^getInitialCommit() {$/;"	f
+getOpenCommand	.shell_aliases_functions.sh	/^getOpenCommand(){$/;"	f
 getRemoteDetails	gitgo.sh	/^getRemoteDetails() {$/;"	f
 get_arg	mantozshcomp.py	/^    def get_arg(self, optionName):$/;"	m	class:ManParser
 get_frame_work	boiler_gen.py	/^def get_frame_work(user_framework):$/;"	f
 get_output	mantozshcomp.py	/^    def get_output(self):$/;"	m	class:Deroffer
 get_paths_from_man_locations	mantozshcomp.py	/^def get_paths_from_man_locations():$/;"	f
 getopt	mantozshcomp.py	/^import getopt$/;"	i
+getrc	.shell_aliases_functions.sh	/^getrc(){$/;"	f
+getrcdev	.shell_aliases_functions.sh	/^getrcdev(){$/;"	f
+gitCheckoutRebasePush	.shell_aliases_functions.sh	/^gitCheckoutRebasePush(){$/;"	f
+gitCommitAndPush	.shell_aliases_functions.sh	/^gitCommitAndPush(){$/;"	f
 gitPull	gitgo.sh	/^gitPull() {$/;"	f
 gitPush	gitgo.sh	/^gitPush() {$/;"	f
 gitRepoUpdater	rpiSoftwareUpdater.sh	/^gitRepoUpdater() {$/;"	f
 gitRepoUpdater	updater.sh	/^gitRepoUpdater() {$/;"	f
+git_name	.shell_aliases_functions.sh	/^    git_name="${1##*\/}"$/;"	v
 gittersdev	remoteRepoMonitorDaemon.sh	/^gittersdev() {$/;"	f
 gittersmaster	remoteRepoMonitorDaemon.sh	/^gittersmaster() {$/;"	f
 groff_replace_escapes	mantozshcomp.py	/^    def groff_replace_escapes(self, line):$/;"	m	class:TypeDarwinManParser
+group	.shell_aliases_functions.sh	/^        group=$(id -gn)$/;"	v
+gsdc	.shell_aliases_functions.sh	/^gsdc(){$/;"	f
 gzip	mantozshcomp.py	/^import gzip$/;"	i
+hc	.shell_aliases_functions.sh	/^hc(){$/;"	f
+hd	.shell_aliases_functions.sh	/^hd(){$/;"	f
 headerSTRING	templater.sh	/^    headerSTRING=$($/;"	v
 home	myWatchNoBlink.sh	/^    home=$(tput cup 0 0)$/;"	v
 home	myWatchNoBlinkColorized.sh	/^    home=$(tput cup 0 0)$/;"	v
@@ -319,13 +400,18 @@ host_status	pingordie.sh	/^    host_status=$(fping $gateway_ip)$/;"	v
 hostname	updater.sh	/^    hostname="$(echo "$1" | awk -F: '{print $1}')"$/;"	v
 hour	timeConverter.sh	/^    hour=$((hour - 12))$/;"	v
 hour	timeConverter.sh	/^hour=$(date | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f1)$/;"	v
+humanReadable	.shell_aliases_functions.sh	/^humanReadable(){$/;"	f
 info	about.sh	/^            info="$(git tag -l -n9 "$version" | perl -pe 's@[\\t ]+@ @')"$/;"	v
 initializeGitDirectory	gitgo.sh	/^initializeGitDirectory() {$/;"	f
+ino	.shell_aliases_functions.sh	/^ino(){$/;"	f
 install	tgzLocalInstaller.sh	/^install() {$/;"	f
 installDir	updater.sh	/^            installDir=$(python2 -m pip show "$i" | \\perl -ne 'print $1 if \/^Location: (.*)\/')$/;"	v
 installDir	updater.sh	/^            installDir=$(python3 -m pip show "$i" | \\perl -ne 'print $1 if \/^Location: (.*)\/')$/;"	v
 installDir	updater.sh	/^        installDir=$(npm root -g | head -n 1)$/;"	v
 installerDir	macOnly/tutorialConfigUpdater.sh	/^installerDir="$HOME\/Documents\/shellScripts\/$REPO_NAME"$/;"	v
+ip	.shell_aliases_functions.sh	/^                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"$/;"	v
+ip	.shell_aliases_functions.sh	/^    ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)$/;"	v
+isZsh	.shell_aliases_functions.sh	/^isZsh(){$/;"	f
 isZsh	fzfPreviewOptsCommon.sh	/^isZsh(){$/;"	f
 is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:ManParser
 is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:Type1ManParser
@@ -337,6 +423,12 @@ is_my_type	mantozshcomp.py	/^    def is_my_type(self, manpage):$/;"	m	class:Type
 is_option	mantozshcomp.py	/^    def is_option(self, line):$/;"	m	class:TypeDarwinManParser
 is_option	mantozshcomp.py	/^    def is_option(self, line):$/;"	m	class:TypeDeroffManParser
 is_white	mantozshcomp.py	/^    def is_white(self, idx):$/;"	m	class:Deroffer
+isbinary	.shell_aliases_functions.sh	/^isbinary() {$/;"	f
+j	.shell_aliases_functions.sh	/^j(){$/;"	f
+jd	.shell_aliases_functions.sh	/^jd(){$/;"	f
+jetbrainsWorkspaceEdit	.shell_aliases_functions.sh	/^jetbrainsWorkspaceEdit(){$/;"	f
+json	.shell_aliases_functions.sh	/^    local json="$(cat)"$/;"	v
+jsonToArray	.shell_aliases_functions.sh	/^jsonToArray(){$/;"	f
 killCursor	batchRename.sh	/^killCursor() {$/;"	f
 killCursor	openAll.sh	/^killCursor() {$/;"	f
 killCursor	picture_finder.sh	/^killCursor() {$/;"	f
@@ -344,17 +436,34 @@ killCursor	secureDelete.sh	/^killCursor() {$/;"	f
 killpids	CPU_Stresser.sh	/^killpids() {$/;"	f
 last	batchRename.sh	/^        local last=$(echo ${file##*_})$/;"	v
 lcline	openAll.sh	/^    lcline="$(echo $line | tr '[:upper:]' '[:lower:]')"$/;"	v
+le	.shell_aliases_functions.sh	/^le(){$/;"	f
+learning	.shell_aliases_functions.sh	/^    learning="$(printf '%s' "$1" | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"$/;"	v
 leavePresentPaneAloneFlag	powerTo.sh	/^leavePresentPaneAloneFlag=false$/;"	v
+len	.shell_aliases_functions.sh	/^        len=${#file_ary}$/;"	v
 len	manzshcompgen.zsh	/^    len=${#1}$/;"	v
 len	zshcompgen.zsh	/^    len=${#1}$/;"	v
 letter	mantozshcomp.py	/^    def letter(self, idx):$/;"	m	class:Deroffer
 level	macOnly/splitReg.sh	/^level=1$/;"	v
 level	splitReg.sh	/^level=1$/;"	v
+lf	.shell_aliases_functions.sh	/^                        lf="$(echo $loc|cut -d' ' -f3-10)"$/;"	v
+lib_command	.shell_aliases_functions.sh	/^        lib_command="ldd"$/;"	v
+lib_command	.shell_aliases_functions.sh	/^        lib_command="otool -L"$/;"	v
 limitFlag	myWatchMaintainEscapes.sh	/^        limitFlag=true$/;"	v
 line	gitRemoteRepoInformation.sh	/^                line="$(git remote -v 2>\/dev\/null | sed 1q)" && {$/;"	v
+lineCount	.shell_aliases_functions.sh	/^    lineCount="$(cat "$temp" | wc -l)"$/;"	v
+lineCount	.shell_aliases_functions.sh	/^    lineCount="$(echo $lines | wc -l)"$/;"	v
 lineCounter	shebangChanger.sh	/^    lineCounter=1$/;"	v
+linecontribcount	.shell_aliases_functions.sh	/^linecontribcount(){$/;"	f
+lines	.shell_aliases_functions.sh	/^    lines="$(git status > \/dev\/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"$/;"	v
 link	uploadWebPi.sh	/^        link="http:\/\/$MY_IP:$RPI_HTML_PORT\/$i"$/;"	v
+listNoClear	.shell_aliases_functions.sh	/^listNoClear () {$/;"	f
+logg	.shell_aliases_functions.sh	/^logg(){$/;"	f
 lossy_unicode	mantozshcomp.py	/^def lossy_unicode(s):$/;"	f
+ls_command	.shell_aliases_functions.sh	/^                ls_command="grc -c $HOME\/conf.gls \\$/;"	v
+ls_command	.shell_aliases_functions.sh	/^                ls_command="grc -c $HOME\/conf.gls ls -iFlhA"$/;"	v
+ls_command	.shell_aliases_functions.sh	/^                ls_command="ls -iFhlA"$/;"	v
+ls_command	.shell_aliases_functions.sh	/^                ls_command="ls -iFlhAOd"$/;"	v
+ls_command	.shell_aliases_functions.sh	/^        ls_command="grc -c $HOME\/conf.gls ls -iFlhA --color=always"$/;"	v
 lzma	mantozshcomp.py	/^        from backports import lzma$/;"	i
 lzma	mantozshcomp.py	/^        import lzma$/;"	i
 lzma_available	mantozshcomp.py	/^    lzma_available = False$/;"	v
@@ -393,6 +502,7 @@ min_args	boiler_gen.py	/^    min_args = 3$/;"	v
 min_args_check	boiler_gen.py	/^def min_args_check(min_args):$/;"	f
 minute	timeConverter.sh	/^minute=$(date | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f2)$/;"	v
 minutes_to_sleep	autoUpdater.sh	/^minutes_to_sleep=10$/;"	v
+msg	.shell_aliases_functions.sh	/^        msg="$2"$/;"	v
 myPrettyPrint	gitgo.sh	/^myPrettyPrint() {$/;"	f
 my_backup_dir	backupBashConfig.sh	/^my_backup_dir="$my_scripts_dir\/rcBackups"$/;"	v
 my_backup_dir	backupBashConfig.sh~	/^my_backup_dir="$my_scripts_dir\/rcBackups"$/;"	v
@@ -400,12 +510,14 @@ my_home_dir	backupBashConfig.sh	/^my_home_dir="$HOME"$/;"	v
 my_home_dir	backupBashConfig.sh~	/^my_home_dir="$HOME"$/;"	v
 my_scripts_dir	backupBashConfig.sh	/^my_scripts_dir="$SCRIPTS"$/;"	v
 my_scripts_dir	backupBashConfig.sh~	/^my_scripts_dir="$SCRIPTS"$/;"	v
+mycurl	.shell_aliases_functions.sh	/^mycurl(){$/;"	f
 needSudo	updater.sh	/^                needSudo=no$/;"	v
 needSudo	updater.sh	/^                needSudo=yes$/;"	v
 needSudo	updater.sh	/^            needSudo=no$/;"	v
 needSudo	updater.sh	/^            needSudo=yes$/;"	v
 network_check_threshold	pingordie.sh	/^network_check_threshold=5$/;"	v
 network_check_tries	pingordie.sh	/^network_check_tries=0$/;"	v
+newfile	.shell_aliases_functions.sh	/^    newfile="$1".$(date +%Y%m%d.%H.%M.bak)$/;"	v
 newfile	batchRename.sh	/^        local newfile="$first$number.$endFileEnding"$/;"	v
 newfile	createScriptButDontOpenSublime.sh	/^    newfile="$newfile.txt"$/;"	v
 newfile	createScriptButDontOpenSublime.sh	/^newfile="$1"$/;"	v
@@ -414,7 +526,12 @@ newfile	createTextFile.sh	/^newfile="$1"$/;"	v
 newfile	macOnly/postscriptToPDFCreator.sh	/^    newfile=${file%.*}$/;"	v
 newtime	autoUpdater.sh	/^        newtime=$(date +"%s")$/;"	v
 nextdate	autoUpdater.sh	/^    nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)$/;"	v
+nn	.shell_aliases_functions.sh	/^    nn(){$/;"	f
+noport	.shell_aliases_functions.sh	/^                noport="$(echo "$url" | sed -E 's@(.*\\.[^\/]+)(\/.*)$@\\1@' | sed -E 's@:[0-9]{1,4}$@@')"$/;"	v
+noproto	.shell_aliases_functions.sh	/^                        noproto="${noproto:0:-1}"$/;"	v
+noproto	.shell_aliases_functions.sh	/^                noproto="$(echo "$noport" | sed -E 's@https:\/\/|http:\/\/@@')"$/;"	v
 nproc	CPU_Stresser.sh	/^nproc=10$/;"	v
+num	.shell_aliases_functions.sh	/^    num=$1$/;"	v
 num	myWatchMaintainEscapes.sh	/^        num=$OPTARG$/;"	v
 num	powerTo.sh	/^        num=realNum$/;"	v
 num	powerTo.sh	/^    num=$1$/;"	v
@@ -424,14 +541,19 @@ number	batchRename.sh	/^        local number=$((10#$number))$/;"	v
 number	batchRename.sh	/^        local number=$(echo ${last%%.*})$/;"	v
 number	mantozshcomp.py	/^    def number(self):$/;"	m	class:Deroffer
 numreq	mantozshcomp.py	/^    def numreq(self):$/;"	m	class:Deroffer
+o	.shell_aliases_functions.sh	/^o(){$/;"	f
 o	macOnly/combo.sh	/^    o="$(cat)"$/;"	v
 o	macOnly/combo.sh	/^    o="$(hostname)"$/;"	v
 o	sixLangDisplayer.sh	/^o="$(cat)"$/;"	v
+old	.shell_aliases_functions.sh	/^    old="$LESS"$/;"	v
+old_dir	.shell_aliases_functions.sh	/^    old_dir="$(pwd)"$/;"	v
 olddate	autoUpdater.sh	/^    olddate="$(date +'%Y-%m-%d %H:%M:%S')"$/;"	v
 oldifs	sortedArrayCounter.sh	/^oldifs="$IFS"$/;"	v
 oldtime	autoUpdater.sh	/^    oldtime=$(date +"%s")$/;"	v
 openTextEditor	createScriptButDontOpenSublime.sh	/^openTextEditor() {$/;"	f
 openTextEditor	createTextFile.sh	/^openTextEditor() {$/;"	f
+open_cmd	.shell_aliases_functions.sh	/^    open_cmd="$(getOpenCommand)" || return 1$/;"	v
+openmygh	.shell_aliases_functions.sh	/^openmygh(){$/;"	f
 options	help2comp.py	/^        options = parse_options(sys.stdin.readlines())$/;"	v
 optstring	directoryContentsSize.sh	/^optstring=shta$/;"	v
 optstring	gitgo.sh	/^optstring=p:hcl$/;"	v
@@ -439,12 +561,24 @@ optstring	myWatchMaintainEscapes.sh	/^optstring=dhl:$/;"	v
 optstring	myWatchNoBlink.sh	/^optstring=bh$/;"	v
 optstring	myWatchNoBlinkColorized.sh	/^optstring=bh$/;"	v
 optstring	mywatch.sh	/^optstring=dh$/;"	v
+orig	.shell_aliases_functions.sh	/^    orig="$1"$/;"	v
 origin	gitgo.sh	/^    local origin="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"$/;"	v
 os	boiler_gen.py	/^import os$/;"	i
 os	mantozshcomp.py	/^    import subprocess, os$/;"	i
 os	mantozshcomp.py	/^import os.path$/;"	i
+out	.shell_aliases_functions.sh	/^                    out="$($colo $exe whois "$noproto")"$/;"	v
+out	.shell_aliases_functions.sh	/^                    out="$($exe whois "$noproto")"$/;"	v
+out	.shell_aliases_functions.sh	/^                    out="$($exe whois "$primary")"$/;"	v
+out	.shell_aliases_functions.sh	/^                out="$($colo $exe host "$noproto")"$/;"	v
+out	.shell_aliases_functions.sh	/^                out="$($exe host "$noproto")"$/;"	v
+out	.shell_aliases_functions.sh	/^        out="$(ps -ef)"$/;"	v
+out	.shell_aliases_functions.sh	/^        out="$(ps aux)"$/;"	v
+out	.shell_aliases_functions.sh	/^        out=$(echo "$file" | sed -n "$search"p \\$/;"	v
+out	.shell_aliases_functions.sh	/^    out="$(curl -u "$user" -X DELETE "https:\/\/api.github.com\/repos\/$user\/$repo")"$/;"	v
+out	.shell_aliases_functions.sh	/^    out="$(eval "$@")"$/;"	v
 out	inotifyWatchLogAndEmailIfNAS.sh	/^        out=$(tail -1 "$file" | grep "nas")$/;"	v
 out	macOnly/commandToColors.sh	/^out="$(eval $command)"$/;"	v
+outFile	.shell_aliases_functions.sh	/^    outFile=out.gif$/;"	v
 outdated	pipUpdater.sh	/^    outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')$/;"	v
 outdated	pipUpdater.sh	/^    outdated=$(python3 -m pip list --outdated | sed -n '3,$p' | awk '{print $1}')$/;"	v
 outdated	pipUpdater.sh	/^outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')$/;"	v
@@ -462,6 +596,7 @@ output	splitReg.sh	/^output=$(cat \/tmp\/temp$$)$/;"	v
 outputDir	dsDownloader.sh	/^outputDir="Desktop"$/;"	v
 outputDir	rpiDownloader.sh	/^outputDir="Desktop"$/;"	v
 output_complete_command	mantozshcomp.py	/^def output_complete_command(cmdname, args, description, output_list, argument):$/;"	f
+p	.shell_aliases_functions.sh	/^p(){$/;"	f
 parse_and_output_man_pages	mantozshcomp.py	/^def parse_and_output_man_pages(paths, output_directory, show_progress):$/;"	f
 parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:ManParser
 parse_man_page	mantozshcomp.py	/^    def parse_man_page(self, manpage):$/;"	m	class:Type1ManParser
@@ -477,13 +612,21 @@ passes	secureDelete.sh	/^passes=7     # Number of file-shredding passes.$/;"	v
 path	mantozshcomp.py	/^import os.path$/;"	i
 path	shebangChanger.sh	/^path="#!\/usr\/bin\/env $executableProgram"$/;"	v
 perlOutdated	updater.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v
+perlremovespaces	.shell_aliases_functions.sh	/^perlremovespaces(){$/;"	f
 perlscript	autoUpdater.sh	/^    perlscript=$($/;"	v
+picounter	.shell_aliases_functions.sh	/^    picounter=1$/;"	v
 pid	fsWatchLongRunning.sh	/^            pid=$!$/;"	v
 pid	fsWatchLongRunning.sh	/^        pid=$!$/;"	v
 pids	CPU_Stresser.sh	/^        pids="$pids $!"$/;"	v
 pipe	readFIFO.sh	/^pipe=$HOME\/Desktop\/testpipe$/;"	v
 pipe	readFIFO.sh	/^pipe=\/tmp\/testpipe$/;"	v
+pirun	.shell_aliases_functions.sh	/^pirun(){$/;"	f
+post	.shell_aliases_functions.sh	/^post(){$/;"	f
+postfix	.shell_aliases_functions.sh	/^    postfix="$1"$/;"	v
 prch	mantozshcomp.py	/^    def prch(self, idx):$/;"	m	class:Deroffer
+pre	.shell_aliases_functions.sh	/^pre(){$/;"	f
+prefix	.shell_aliases_functions.sh	/^    prefix="$1"$/;"	v
+prettyPrint	.shell_aliases_functions.sh	/^prettyPrint(){$/;"	f
 prettyPrint	CPU_Stresser.sh	/^prettyPrint() {$/;"	f
 prettyPrint	colorLogger.sh	/^prettyPrint() {$/;"	f
 prettyPrint	macOnly/resetWIFI.sh	/^prettyPrint() {$/;"	f
@@ -492,6 +635,7 @@ prettyPrint	macOnly/tutorialConfigUpdater.sh	/^prettyPrint() {$/;"	f
 prettyPrint	rpiSoftwareUpdater.sh	/^prettyPrint() {$/;"	f
 prettyPrint	textmessage.sh	/^prettyPrint() {$/;"	f
 prettyPrint	updater.sh	/^prettyPrint() {$/;"	f
+primary	.shell_aliases_functions.sh	/^                    primary="$(echo "$noproto" | sed -E 's@^(.*)\\.([^.]+)\\.([^.]+)$@\\2.\\3@')"$/;"	v
 printD	banner.pl	/^sub printD {$/;"	s
 printDate	banner.pl	/^sub printDate {$/;"	s
 progress_pid	batchRename.sh	/^    progress_pid=$!$/;"	v
@@ -500,10 +644,14 @@ progress_pid	picture_finder.sh	/^    progress_pid=$!$/;"	v
 progress_pid	secureDelete.sh	/^    progress_pid=$!$/;"	v
 prompt	batchRename.sh	/^    local prompt="press any key..." # user prompt$/;"	v
 prompt	openAll.sh	/^    local prompt="press any key..." # user prompt$/;"	v
+pstreemonitor	.shell_aliases_functions.sh	/^pstreemonitor(){$/;"	f
 purpose	headerSummarizer.sh	/^    purpose="$(sed -n 6p "$file")"$/;"	v
 push	about.sh	/^            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\\t ]+@    @')"$/;"	v
 putchar	mantozshcomp.py	/^    def putchar(self, c):$/;"	m	class:Deroffer
+pygmentcolors	.shell_aliases_functions.sh	/^pygmentcolors(){$/;"	f
 quoted_arg	mantozshcomp.py	/^    def quoted_arg(self):$/;"	m	class:Deroffer
+r	.shell_aliases_functions.sh	/^r(){$/;"	f
+rand	.shell_aliases_functions.sh	/^        rand=$(echo "$randscript" | perl)$/;"	v
 randIndex	eyes.sh	/^    randIndex=$((RANDOM % rangePossibleIndices))$/;"	v
 randIndex	macOnly/figletRandomFont.sh	/^    randIndex=$(($RANDOM % $rangePossibleIndices))$/;"	v
 randIndex	macOnly/figletRandomFontOnce.sh	/^randIndex=$(($RANDOM % $rangePossibleIndices))$/;"	v
@@ -511,6 +659,8 @@ randIndex	macOnly/menkeTechRandomFont.sh	/^    randIndex=$(($RANDOM % $rangePoss
 randIndex	macOnly/randomCow.sh	/^    randIndex=$(($RANDOM % $rangePossibleIndices))$/;"	v
 randomCowsayCowScript	macOnly/combo.sh	/^randomCowsayCowScript="$SCRIPTS\/macOnly\/randomCow.sh"$/;"	v
 randomFigletFontScript	macOnly/combo.sh	/^randomFigletFontScript="$SCRIPTS\/macOnly\/figletRandomFontOnce.sh"$/;"	v
+random_color	.shell_aliases_functions.sh	/^            random_color=${file_ary[$i]}$/;"	v
+randscript	.shell_aliases_functions.sh	/^        randscript="print int(rand()*$len)"$/;"	v
 rangePossibleIndices	eyes.sh	/^rangePossibleIndices=${#ary[*]}$/;"	v
 rangePossibleIndices	macOnly/figletRandomFont.sh	/^rangePossibleIndices=${#ary[*]}$/;"	v
 rangePossibleIndices	macOnly/figletRandomFontOnce.sh	/^rangePossibleIndices=${#ary[*]}$/;"	v
@@ -520,23 +670,38 @@ re	help2comp.py	/^import re$/;"	i
 re	mantozshcomp.py	/^import re$/;"	i
 react_routine	boiler_gen.py	/^def react_routine(name):$/;"	f
 realNum	powerTo.sh	/^realNum=$(tmux list-panes | wc -l)$/;"	v
+red	.shell_aliases_functions.sh	/^    red=$(tput setaf 1)$/;"	v
 refreshers	remoteRepoMonitorDaemon.sh	/^refreshers() {$/;"	f
+regenBindings	.shell_aliases_functions.sh	/^regenBindings(){$/;"	f
 regex	macOnly/splitReg.sh	/^regex="$1"$/;"	v
 regex	splitReg.sh	/^regex="$1"$/;"	v
 remoteDIR	macOnly/rsyncr.sh	/^remoteDIR="$2"$/;"	v
 removeSpaces	minifySpaces.pl	/^sub removeSpaces {$/;"	s
 remove_groff_formatting	mantozshcomp.py	/^def remove_groff_formatting(data):$/;"	f
+rename	.shell_aliases_functions.sh	/^rename(){$/;"	f
+replace	.shell_aliases_functions.sh	/^    replace="$2"$/;"	v
 replaceSpecialCharsInArgument	mantozshcomp.py	/^    def replaceSpecialCharsInArgument(self, string):$/;"	m	class:ManParser
+replacer	.shell_aliases_functions.sh	/^replacer(){$/;"	f
+repo	.shell_aliases_functions.sh	/^                repo="$(echo $line | awk -F'\/' '{print $2}' | awk '{print $1}')"$/;"	v
+repo	.shell_aliases_functions.sh	/^                repo="$(echo $line | awk -F'\/' '{print $5}' | awk '{print $1}')"$/;"	v
 repo	gitRemoteRepoInformation.sh	/^                        repo="$(echo $line | awk -F'\/' '{print $2}' | awk '{print $1}')"$/;"	v
 repo	gitRemoteRepoInformation.sh	/^                        repo="$(echo $line | awk -F'\/' '{print $5}' | awk '{print $1}')"$/;"	v
 repoFile	boiler_gen.py	/^    repoFile = f'{name}Repository.java'$/;"	v
+reponame	.shell_aliases_functions.sh	/^        reponame="$1"$/;"	v
 request_or_macro	mantozshcomp.py	/^    def request_or_macro(self):$/;"	m	class:Deroffer
 request_or_macro2	mantozshcomp.py	/^    def request_or_macro2(self):$/;"	m	class:Deroffer
+res	.shell_aliases_functions.sh	/^    res=600x400$/;"	v
 resourceFile	boiler_gen.py	/^    resourceFile = f'{name}Controller.java'$/;"	v
+restart	.shell_aliases_functions.sh	/^    restart(){$/;"	f
 restart_wlan0	pingordie.sh	/^restart_wlan0() {$/;"	f
+return2	.shell_aliases_functions.sh	/^return2(){$/;"	f
 revarr	picture_finder.sh	/^    local revarr=('|' '\/' '-' '\\')$/;"	v
 revarr	secureDelete.sh	/^    local revarr=('|' '\/' '-' '\\')$/;"	v
+rm	.shell_aliases_functions.sh	/^rm(){$/;"	f
 rustup_bin	rpiSoftwareUpdater.sh	/^rustup_bin="$HOME\/.cargo\/bin\/rustup"$/;"	v
+s	.shell_aliases_functions.sh	/^        s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"$/;"	v
+s	.shell_aliases_functions.sh	/^        s=substr(s,1,4)$/;"	v
+s	.shell_aliases_functions.sh	/^s(){$/;"	f
 s10_pid	backgroundMastery.sh	/^s10_pid="$!"$/;"	v
 s1_pid	backgroundMastery.sh	/^s1_pid="$!"$/;"	v
 s2_pid	backgroundMastery.sh	/^s2_pid="$!"$/;"	v
@@ -545,10 +710,21 @@ s4_pid	backgroundMastery.sh	/^s4_pid="$!"$/;"	v
 s5_pid	backgroundMastery.sh	/^s5_pid="$!"$/;"	v
 s6_pid	backgroundMastery.sh	/^s6_pid="$!"$/;"	v
 s8_pid	backgroundMastery.sh	/^s8_pid="$!"$/;"	v
+scnew	.shell_aliases_functions.sh	/^scnew(){$/;"	f
+script	.shell_aliases_functions.sh	/^    script="$1"$/;"	v
+scriptToPDF	.shell_aliases_functions.sh	/^        scriptToPDF(){$/;"	f
+scriptToPDF	.shell_aliases_functions.sh	/^    scriptToPDF(){$/;"	f
 script_to_run	watchServiceFSWatchPiDesktop.sh	/^script_to_run="$SCRIPTS\/upLoadPi.sh"$/;"	v
 script_to_run	watchServiceFSWatchPiWeb.sh	/^script_to_run=$SCRIPTS\/uploadWebPi.sh$/;"	v
+scripts	.shell_aliases_functions.sh	/^scripts(){$/;"	f
 scripts_dir	duplicateLineDeleter.sh	/^scripts_dir=$SCRIPTS$/;"	v
 scripts_dir	indenterAndDuplicateLineDeleter.sh	/^scripts_dir=$SCRIPTS$/;"	v
+se	.shell_aliases_functions.sh	/^se(){$/;"	f
+search	.shell_aliases_functions.sh	/^    search="$1"$/;"	v
+search	.shell_aliases_functions.sh	/^search(){$/;"	f
+see	.shell_aliases_functions.sh	/^see(){$/;"	f
+service	.shell_aliases_functions.sh	/^        service="$1"$/;"	v
+service_path	.shell_aliases_functions.sh	/^        local service_path="$src_dir\/$service.service"$/;"	v
 showHidden	directoryContentsSize.sh	/^showHidden() {$/;"	f
 sidelen	manzshcompgen.zsh	/^    sidelen=$(( ($sidelen + 2 -1) \/ 2))$/;"	v
 sidelen	manzshcompgen.zsh	/^    sidelen=$(($width - $len - $spacerlen * 2))$/;"	v
@@ -559,6 +735,7 @@ sidelen2	zshcompgen.zsh	/^    sidelen2=$sidelen$/;"	v
 size	mantozshcomp.py	/^    def size(self):$/;"	m	class:Deroffer
 skip_char	mantozshcomp.py	/^    def skip_char(self, amt=1):$/;"	m	class:Deroffer
 skip_leading_whitespace	mantozshcomp.py	/^    def skip_leading_whitespace(self):$/;"	m	class:Deroffer
+sleepTime	.shell_aliases_functions.sh	/^        sleepTime=$2$/;"	v
 sorted	sortedArrayCounter.sh	/^sorted=($(sort -f <<<"${arr[*]}"))$/;"	v
 sorted	sortedArrayCounter.sh	/^sorted=($(uniq <<<"${sorted[*]}"))$/;"	v
 sortedCommand	directoryContentsSize.sh	/^sortedCommand=gsort$/;"	v
@@ -573,6 +750,9 @@ spinner	openAll.sh	/^        spinner=$temp${spinner%"$temp"} # and add it to the
 spinner	openAll.sh	/^    local spinner="\\|\/-"            # spinner$/;"	v
 splitTrim	mantozshcomp.py	/^def splitTrim(arg, comps, dash):$/;"	f
 spring_routine	boiler_gen.py	/^def spring_routine(package, name):$/;"	f
+src_dir	.shell_aliases_functions.sh	/^        src_dir="$FORKED_DIR\/$REPO_NAME"$/;"	v
+ssd	.shell_aliases_functions.sh	/^    ssd() {$/;"	f
+ssu	.shell_aliases_functions.sh	/^    ssu() {$/;"	f
 startCursor	batchRename.sh	/^startCursor() {$/;"	f
 startCursor	openAll.sh	/^startCursor() {$/;"	f
 startCursor	picture_finder.sh	/^startCursor() {$/;"	f
@@ -581,22 +761,29 @@ str_at	mantozshcomp.py	/^    def str_at(self, idx):$/;"	m	class:Deroffer
 str_eq	mantozshcomp.py	/^    def str_eq(offset, other, len):$/;"	m	class:Deroffer
 string	mantozshcomp.py	/^import string$/;"	i
 string	openAll.sh	/^    string=""$/;"	v
+styles_dir	.shell_aliases_functions.sh	/^    styles_dir='\/usr\/local\/opt\/httpie\/libexec\/lib\/python3.7\/site-packages\/pygments\/styles\/'$/;"	v
 subprocess	mantozshcomp.py	/^    import subprocess, os$/;"	i
+suc	.shell_aliases_functions.sh	/^suc(){$/;"	f
 sum	listAllCommands.sh	/^sum=0$/;"	v
 sum	sortedArrayCounter.sh	/^sum=0$/;"	v
 summarizeSizes	directoryContentsSize.sh	/^summarizeSizes() {$/;"	f
 sys	boiler_gen.py	/^import sys$/;"	i
 sys	help2comp.py	/^import sys$/;"	i
 sys	mantozshcomp.py	/^import sys$/;"	i
+tac	.shell_aliases_functions.sh	/^tac(){$/;"	f
 tail	shebangChanger.sh	/^        tail=$(cat "$file")$/;"	v
 tail	shebangChanger.sh	/^        tail=$(sed -n "$lineCounter,$"p "$file")$/;"	v
 tailVersion	colorLogger.sh	/^tailVersion=tail$/;"	v
 tarbellDirectory	tgzLocalInstaller.sh	/^tarbellDirectory="$1"$/;"	v
+temp	.shell_aliases_functions.sh	/^    temp="$HOME\/.temp$$"$/;"	v
 temp	batchRename.sh	/^        local temp=${spinner#?}           # remove first character from $spinner$/;"	v
 temp	openAll.sh	/^        local temp=${spinner#?}         # remove first character from $spinner$/;"	v
+tempFile	.shell_aliases_functions.sh	/^            tempFile=__test.ps$/;"	v
+tempFile	.shell_aliases_functions.sh	/^        tempFile=__test.ps$/;"	v
 text	mantozshcomp.py	/^    def text(self):$/;"	m	class:Deroffer
 text_arg	mantozshcomp.py	/^    def text_arg(self):$/;"	m	class:Deroffer
 text_arg2	mantozshcomp.py	/^    def text_arg2(self):$/;"	m	class:Deroffer
+time	.shell_aliases_functions.sh	/^    time=$1$/;"	v
 time	myWatchMaintainEscapes.sh	/^    time="$2"$/;"	v
 time	myWatchMaintainEscapes.sh	/^    time=1$/;"	v
 time	mywatch.sh	/^    time="$2"$/;"	v
@@ -606,9 +793,14 @@ timeToSleep	myWatchNoBlink.sh	/^    timeToSleep=0.5$/;"	v
 timeToSleep	myWatchNoBlinkColorized.sh	/^    timeToSleep=$2$/;"	v
 timeToSleep	myWatchNoBlinkColorized.sh	/^    timeToSleep=0.5$/;"	v
 timediff	autoUpdater.sh	/^        timediff=$((newtime - oldtime))$/;"	v
+title	.shell_aliases_functions.sh	/^        title="$1"$/;"	v
+to	.shell_aliases_functions.sh	/^to(){$/;"	f
+torip	.shell_aliases_functions.sh	/^torip(){$/;"	f
+toriprenew	.shell_aliases_functions.sh	/^toriprenew() {$/;"	f
 total	oldCounter.sh	/^    total=$(expr $(ls -F $1 | grep ".*[*@]" | wc -l) + $total)$/;"	v
 total	oldCounter.sh	/^total=0$/;"	v
 total	uploadWebPi.sh	/^total=$#$/;"	v
+totallines	.shell_aliases_functions.sh	/^totallines(){$/;"	f
 traceback	mantozshcomp.py	/^import traceback$/;"	i
 transferFile	transfer.sh	/^transferFile="$1"$/;"	v
 trim_groff	mantozshcomp.py	/^    def trim_groff(self, line):$/;"	m	class:TypeDarwinManParser
@@ -616,6 +808,9 @@ tutorialDir	macOnly/tutorialConfigUpdater.sh	/^tutorialDir="$HOME\/Documents\/tu
 unquote_double_quotes	mantozshcomp.py	/^def unquote_double_quotes(data):$/;"	f
 unquote_single_quotes	mantozshcomp.py	/^def unquote_single_quotes(data):$/;"	f
 updatePI	updater.sh	/^updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote host$/;"	f
+upload	.shell_aliases_functions.sh	/^upload(){$/;"	f
+url	.shell_aliases_functions.sh	/^    url="$(echo $1 | sed 's#[^\/]*\/\/\\([^@]*@\\)\\?\\([^:\/]*.*\\)#\\2#')"$/;"	v
+url_safe	.shell_aliases_functions.sh	/^url_safe(){$/;"	f
 usage	CPU_Stresser.sh	/^usage() {$/;"	f
 usage	directoryContentsSize.sh	/^usage() {$/;"	f
 usage	duplicateLineDeleter.sh	/^usage() {$/;"	f
@@ -633,6 +828,9 @@ usage	splitReg.sh	/^function usage() {$/;"	f
 usage	storageShower.sh	/^function usage() {$/;"	f
 usage	tgzLocalInstaller.sh	/^function usage() {$/;"	f
 usage	updater.sh	/^usage() {$/;"	f
+user	.shell_aliases_functions.sh	/^                user="$(echo $line | awk -F':' '{print $2}' | awk -F'\/' '{print $1}')"$/;"	v
+user	.shell_aliases_functions.sh	/^                user="$(echo $line | awk -F'\/' '{print $4}')"$/;"	v
+user	.shell_aliases_functions.sh	/^    user="$(echo "$user" | tr 'A-Z' 'a-z')"$/;"	v
 user	gitRemoteRepoInformation.sh	/^                        user="$(echo $line | awk -F':' '{print $2}' | awk -F'\/' '{print $1}')"$/;"	v
 user	gitRemoteRepoInformation.sh	/^                        user="$(echo $line | awk -F'\/' '{print $4}')"$/;"	v
 user_framework	boiler_gen.py	/^user_framework = sys.argv[1]$/;"	v
@@ -651,8 +849,14 @@ width	manzshcompgen.zsh	/^    width=70$/;"	v
 width	updater.sh	/^        width=80$/;"	v
 width	zshcompgen.zsh	/^    width=70$/;"	v
 word	mantozshcomp.py	/^    def word(self):$/;"	m	class:Deroffer
+ww	.shell_aliases_functions.sh	/^ww(){$/;"	f
+www	.shell_aliases_functions.sh	/^www(){$/;"	f
 x	macOnly/combo.sh	/^    x="$(python -c 'print("trina"*5)')"$/;"	v
 x	macOnly/combo.sh	/^    x=$(date | cut -c1-10)$/;"	v
 x	sixLangDisplayer.sh	/^    x="$(python -c 'print("trina"*5)')"$/;"	v
 x	sixLangDisplayer.sh	/^    x=$(date | cut -c1-10)$/;"	v
 x	test.sh	/^x=1$/;"	v
+xf	.shell_aliases_functions.sh	/^        xf=(s==" B  ") ? "%d" : "%.2f"$/;"	v
+xx	.shell_aliases_functions.sh	/^xx(){$/;"	f
+zp	.shell_aliases_functions.sh	/^zp(){$/;"	f
+zpz	.shell_aliases_functions.sh	/^zpz(){$/;"	f
