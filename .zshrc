@@ -572,17 +572,37 @@ fzfVimKeybind(){
     fi
     cat "$VIM_KEYBINDINGS" | fzf
 }
+getFound(){
+    eval "find / 2>/dev/null | fzf $FZF_CTRL_T_OPTS"
+}
 
 locateFzf(){
     local found
-    found="$(eval "find / 2>/dev/null | fzf $FZF_CTRL_T_OPTS")"
-    clear
-    if [[ -d "$found" ]]; then
-        BUFFER="cd \"$found\""
+    mywords=(${(z)BUFFER})
+    if (( $#mywords == 0 )); then
+        found="$(getFound)"
+
+        if [[ -z "$found" ]]; then
+            zle .kill-whole-line
+            return 0
+        fi
+
+        if [[ -d "$found" ]]; then
+            BUFFER="cd \"$found\""
+        else
+            BUFFER="c \"$found\""
+        fi
+        zle .accept-line
     else
-        BUFFER="c \"$found\""
+        found="$(getFound)"
+
+        if [[ ! -z "$found" ]]; then
+            BUFFER="$BUFFER $found"
+            zle .accept-line
+            return 0
+        fi
+        return 0
     fi
-    zle .accept-line
 }
 
 zle -N updater
