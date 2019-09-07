@@ -2005,7 +2005,7 @@ arrayToJson(){
 }
 
 updatePowerlineLink(){
-    dir=$(python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')
+    dir="$(python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
     prettyPrint "linking $dir to $HOME/powerline"
     ln -s "$dir" "$HOME/powerline"
 }
