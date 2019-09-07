@@ -575,7 +575,7 @@ fzfVimKeybind(){
 
 locateFzf(){
     local found
-    found="$(find / 2>/dev/null | fzf)"
+    found="$(eval "find / 2>/dev/null | fzf $FZF_CTRL_T_OPTS")"
     clear
     if [[ -d "$found" ]]; then
         BUFFER="cd \"$found\""
