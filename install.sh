@@ -720,7 +720,17 @@ export SHELL="$(which zsh)"
 export SCRIPTS="$HOME/Documents/shellScripts"
 dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
 prettyPrint "linking $dir to ~/.tmux/powerline"
-ln -sf "$dir" ~"/.tmux/powerline"
+
+if [[ ! -d "$HOME.tmux" ]]; then
+    prettyPrint "~/.tmux does not exist"
+fi
+
+if [[ ! -d "$dir" ]]; then
+    prettyPrint "$dir does not exist"
+fi
+
+echo ln -sf "$dir" "$HOME/.tmux/powerline"
+ln -sf "$dir" "$HOME/.tmux/powerline"
 
 zsh -c 'tmux new-session -d -s main'
 tmux send-keys -t "main" 'tmux source-file "$HOME/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
