@@ -1763,7 +1763,11 @@ _c(){
 }
 
 _ssd(){
-    arguments=('*:systemd services:('"$(systemctl list-unit-files -at service | perl -lane 'print $F[0] if /service/')"')')
+    arguments=('*:systemd services:('"$(systemctl list-units -at service | perl -pe 's@[\xe2\x97\x8f]@@g' | perl -lane 'print $F[0] if /service/ and /running/')"')')
+    _arguments -s $arguments
+}
+_ssu(){
+    arguments=('*:systemd services:('"$(systemctl list-units -at service | perl -pe 's@[\xe2\x97\x8f]@@g' | perl -lane 'print $F[0] if /service/ and ! /running/')"')')
     _arguments -s $arguments
 }
 
@@ -1772,7 +1776,7 @@ compdef _cl clearList
 compdef _f f
 compdef _c c
 compdef _ssd ssd
-compdef _ssd ssu
+compdef _ssu ssu
 
 #redefine global zsh completion function called at first parameter
 #adding global aliases and files
