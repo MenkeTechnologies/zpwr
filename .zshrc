@@ -1772,7 +1772,7 @@ compdef _cl clearList
 compdef _f f
 compdef _c c
 compdef _ssd ssd
-compdef _ssu ssu
+compdef _ssd ssu
 
 #redefine global zsh completion function called at first parameter
 #adding global aliases and files
