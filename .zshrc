@@ -1763,11 +1763,11 @@ _c(){
 }
 
 _ssd(){
-    arguments=('*:systemd services:('"$(systemctl list-units -at service | perl -pe 's@[\xe2\x97\x8f]@@g' | perl -lane 'print $F[0] if /service/ and /running/')"')')
+    arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -pe 's@[\xe2\x97\x8f]@@g' | perl -lane 'print $F[0] if /service/ and /running/')"')')
     _arguments -s $arguments
 }
 _ssu(){
-    arguments=('*:systemd services:('"$(systemctl list-units -at service | perl -pe 's@[\xe2\x97\x8f]@@g' | perl -lane 'print $F[0] if /service/ and ! /running/')"')')
+    arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -pe 's@[\xe2\x97\x8f]@@g' | perl -lane 'print $F[0] if /service/ and ! /running/')"')')
     _arguments -s $arguments
 }
 
