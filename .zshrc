@@ -1763,7 +1763,7 @@ _c(){
 }
 
 _ssd(){
-    arguments=('*:systemd services:('"$(systemctl list-unit-files -at service | perl -lane 'print $F[0] if /service/')"'))')
+    arguments=('*:systemd services:('"$(systemctl list-unit-files -at service | perl -lane 'print $F[0] if /service/')"')')
     _arguments -s $arguments
 }
 
