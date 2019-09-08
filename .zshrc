@@ -545,6 +545,7 @@ clearLine() {
 }
 
 regenZshCompCache(){
+    prettyPrint "regen zsh compsys cache"
     rm -f "$HOME/.zcompdump"*
     compinit -u
 }

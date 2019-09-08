@@ -1976,6 +1976,7 @@ jsonToArray(){
 }
 
 regenAllKeybindingsCache(){
+    prettyPrint "regen all keybindings cache"
     bash "$SCRIPTS/keybindingsToFZFVim.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$VIM_KEYBINDINGS"
     isZsh && source "$SCRIPTS/keybindingsToFZF.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$ALL_KEYBINDINGS"
 }
