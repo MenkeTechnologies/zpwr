@@ -549,6 +549,11 @@ regenZshCompCache(){
     compinit -u
 }
 
+regenAll(){
+    regenZshCompCache
+    regenAllKeybindingsCache
+}
+
 deleteLastWord(){
     mywords=(${(z)BUFFER})
     if (( $#mywords > 1  )); then
