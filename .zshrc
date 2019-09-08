@@ -544,7 +544,7 @@ clearLine() {
     LBUFFER=
 }
 
-refreshCache(){
+regenZshCompCache(){
     rm -f "$HOME/.zcompdump"*
     compinit -u
 }
