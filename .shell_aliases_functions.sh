@@ -1975,7 +1975,7 @@ jsonToArray(){
     set +x
 }
 
-regenKeybindingsCache(){
+regenAllKeybindingsCache(){
     bash "$SCRIPTS/keybindingsToFZFVim.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$VIM_KEYBINDINGS"
     isZsh && source "$SCRIPTS/keybindingsToFZF.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$ALL_KEYBINDINGS"
 }
