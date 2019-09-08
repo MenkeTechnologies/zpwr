@@ -1994,6 +1994,10 @@ arrayToJson(){
 
 }
 
+loginCount(){
+    perl -e 'print `last -f "$_"`for</var/log/wtmp*>' | perl -lane 'print $F[0] if /\S+/ && !/wtmp/' | sort | uniq -c | sort -rn
+}
+
 needSudo(){
     if [[ ! -w "$1" ]]; then
         return 0
