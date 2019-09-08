@@ -606,6 +606,17 @@ locateFzf(){
     fi
 }
 
+fzfCommits(){
+    if isGitDir; then 
+        BUFFER="vim -v -c Commits! -c quitall"
+        zle .accept-line
+    else
+        zle .kill-whole-line 
+        return 1
+    fi
+}
+
+zle -N fzfCommits
 zle -N updater
 zle -N runner
 zle -N intoFzf
@@ -622,6 +633,9 @@ zle -N locateFzf
 
 #vim mode for zle
 bindkey -v
+
+bindkey -M viins "^Vc" fzfCommits
+bindkey -M vicmd "^Vc" fzfCommits
 
 bindkey -M viins "^U" clearLine
 bindkey -M vicmd "^U" clearLine
