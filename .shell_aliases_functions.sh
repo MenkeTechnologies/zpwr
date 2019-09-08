@@ -475,7 +475,7 @@ else
     ssu() {
         for service in "$@"; do
             prettyPrint "sudo systemctl start $service"
-            prettyPrint "sudo systemctl eable $service"
+            prettyPrint "sudo systemctl enable $service"
             sudo systemctl start "$service"
             sudo systemctl enable "$service"
         done
