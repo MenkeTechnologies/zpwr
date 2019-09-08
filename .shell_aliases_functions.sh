@@ -320,6 +320,7 @@ else
             alias apa="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean"
             alias apz="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean; u8"
         elif exists yum;then
+            alias api="sudo yum install -y"
             alias apa="sudo yum check-update; sudo yum upgrade -y "
             alias apz="sudo yum check-update; sudo yum upgrade -y; u8"
         fi
