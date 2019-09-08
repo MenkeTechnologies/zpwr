@@ -607,11 +607,14 @@ locateFzf(){
 }
 
 fzfCommits(){
-    if isGitDir; then 
+    BUFFER=""
+    zle .kill-whole-line
+    if isGitDir; then
         BUFFER="vim -v -c Commits! -c quitall"
         zle .accept-line
     else
-        zle .kill-whole-line 
+        zle .kill-whole-line
+        zle .accept-line
         return 1
     fi
 }
