@@ -1762,10 +1762,17 @@ _c(){
     _arguments -s $arguments
 }
 
+_ssd(){
+    arguments=('*:systemd services:('"$(systemctl list-unit-files -at service | perl -lane 'print $F[0] if /service/')"'))')
+    _arguments -s $arguments
+}
+
 
 compdef _cl clearList
 compdef _f f
 compdef _c c
+compdef _ssd ssd
+compdef _ssu ssu
 
 #redefine global zsh completion function called at first parameter
 #adding global aliases and files
