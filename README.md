@@ -485,6 +485,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -M viins "^V," fzfVimKeybind```
 - ```bindkey -M viins "^V." locateFzf```
 - ```bindkey -M viins "^V/" fzfAllKeybind```
+- ```bindkey -M viins "^Vc" fzfCommits```
 - ```bindkey -M viins "^W" vi-backward-kill-word```
 - ```bindkey -M viins "^X^R" _read_comp```
 - ```bindkey -M viins "^X?" _complete_debug```
@@ -585,6 +586,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -a "^V," fzfVimKeybind```
 - ```bindkey -a "^V." locateFzf```
 - ```bindkey -a "^V/" fzfAllKeybind```
+- ```bindkey -a "^Vc" fzfCommits```
 - ```bindkey -a "^W" deleteLastWord```
 - ```bindkey -a "^Y" changeQuotes```
 - ```bindkey -a "^Z" undo```
