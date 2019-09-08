@@ -1641,11 +1641,11 @@ fzf_setup(){
     exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
-    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview '"$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")"'"
+    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
     if [[ "$MYBANNER" == ponies ]]; then
-        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '"$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")"'"
+        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")'"
     else
-        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '"$(bash "$SCRIPTS/fzfPreviewOpts.sh")"'"
+        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOpts.sh")'"
     fi
 }
 
