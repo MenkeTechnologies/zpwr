@@ -1630,32 +1630,22 @@ fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
 
-    alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse \
-        --border '"$__COMMON_FZF_ELEMENTS"' --preview \
-        "[[ -f {} ]] && '"$COLORIZER_FZF$__TS"'  \
-        2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse \
-        --border '"$__COMMON_FZF_ELEMENTS"' --preview \
-        "[[ -f {} ]] && '"$COLORIZER_FZF"' \
-        2>/dev/null || stat -- {} | fold -80 | head -500")"'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$__TS"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF"' 2>/dev/null || stat -- {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
-    export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS \
-            --reverse --border --height 100%"
+    export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS --reverse --border --height 100%"
     local rpm_cmd
     local deb_cmd
     exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
     exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
-    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview '"$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")"'"
+    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview '"$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")"'"
     if [[ "$MYBANNER" == ponies ]]; then
-        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview '"$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")"'"
+        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '"$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")"'"
     else
-        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS \
-        --preview '"$(bash "$SCRIPTS/fzfPreviewOpts.sh")"'"
+        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '"$(bash "$SCRIPTS/fzfPreviewOpts.sh")"'"
     fi
 }
 
