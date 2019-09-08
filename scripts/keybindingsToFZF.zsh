@@ -15,6 +15,7 @@
     bindkey -M visual -L
     bindkey -M listscroll -L
     bindkey -M viopp -L
+    alias -L
     vim -e -c 'redir! > ~/.temp1 | silent imap | redir END | quitall'
     cat ~/.temp1
     vim -e -c 'redir! > ~/.temp2 | silent nmap | redir END | quitall'
