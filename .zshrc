@@ -553,6 +553,7 @@ regenZshCompCache(){
 regenAll(){
     regenZshCompCache
     regenAllKeybindingsCache
+    regenPowerlineLink
 }
 
 deleteLastWord(){
