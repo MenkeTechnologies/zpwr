@@ -567,14 +567,14 @@ deleteLastWord(){
 fzfAllKeybind(){
     if [[ ! -s "$ALL_KEYBINDINGS" ]]; then
         logg "regenerating $ALL_KEYBINDINGS"
-        regenBindings
+        regenAllKeybindingsCache
     fi
     cat "$ALL_KEYBINDINGS" | fzf
 }
 fzfVimKeybind(){
     if [[ ! -s "$VIM_KEYBINDINGS" ]]; then
         logg "regenerating $VIM_KEYBINDINGS"
-        regenBindings
+        regenAllKeybindingsCache
     fi
     cat "$VIM_KEYBINDINGS" | fzf
 }
