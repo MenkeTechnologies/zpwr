@@ -2012,6 +2012,7 @@ regenPowerlineLink(){
     dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
     prettyPrint "linking $dir to $TMUX_HOME/powerline"
     ln -sf "$dir" "$TMUX_HOME/powerline"
+    command tmux source-file "$HOME/.tmux.conf"
 }
 
 
