@@ -924,8 +924,8 @@ endfunction
 
 "{{{                    MARK:C-D mappings
 "**************************************************************
-vnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
-nnoremap <silent> <C-D>/ :call NERDComment("x","Toggle")<CR>`>
+vnoremap <silent> <C-D>, :call NERDComment("x","Toggle")<CR>`>
+nnoremap <silent> <C-D>, :call NERDComment("x","Toggle")<CR>`>
 
 vnoremap <silent> <C-D>y :<C-C>:update<CR>:SyntasticCheck<CR>
 vnoremap <silent> <C-D>d :<C-C>:update<CR>
@@ -959,8 +959,8 @@ inoremap <silent> <C-D>w <C-O>:update<CR>
 inoremap <silent> <C-D>x <C-O>:Marks<CR>
 inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
 inoremap <silent> <C-D>z <ESC>:TlistAddFiles * <CR> :TlistToggle<CR>i
-inoremap <silent> <C-D>. <C-O>:Locate /<CR>
-inoremap <silent> <C-D>, <C-O>:FZFMaps<CR>
+inoremap <silent> <C-D>/ <C-O>:Locate /<CR>
+inoremap <silent> <C-D>. <C-O>:FZFMaps<CR>
 
 "normal mode keybindings for fzf-vim
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
@@ -991,8 +991,8 @@ nnoremap <silent> <C-D>w :update<CR>
 nnoremap <silent> <C-D>x :Marks<CR>
 nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
 nnoremap <silent> <C-D>z :TlistAddFiles *<CR>:TlistToggle<CR>
-nnoremap <silent> <C-D>. :Locate /<CR>
-nnoremap <silent> <C-D>, :FZFMaps<CR>
+nnoremap <silent> <C-D>/ :Locate /<CR>
+nnoremap <silent> <C-D>. :FZFMaps<CR>
 
 "gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
 set updatetime=100
