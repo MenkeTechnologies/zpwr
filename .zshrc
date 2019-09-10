@@ -679,11 +679,11 @@ bindkey -M vicmd '^F^H' lsoffzf
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
 
-bindkey -M viins '^V.' locateFzf
-bindkey -M vicmd '^V.' locateFzf
+bindkey -M viins '^V/' locateFzf
+bindkey -M vicmd '^V/' locateFzf
 
-bindkey -M viins '^V/' fzfAllKeybind
-bindkey -M vicmd '^V/' fzfAllKeybind
+bindkey -M viins '^V.' fzfAllKeybind
+bindkey -M vicmd '^V.' fzfAllKeybind
 
 bindkey -M viins '^V,' fzfVimKeybind
 bindkey -M vicmd '^V,' fzfVimKeybind
