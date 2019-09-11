@@ -483,8 +483,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -M viins "^V^V" vimFzf```
 - ```bindkey -M viins "^V^Z" fzf-history-widget```
 - ```bindkey -M viins "^V," fzfVimKeybind```
-- ```bindkey -M viins "^V." locateFzf```
-- ```bindkey -M viins "^V/" fzfAllKeybind```
+- ```bindkey -M viins "^V." fzfAllKeybind```
+- ```bindkey -M viins "^V/" locateFzf```
 - ```bindkey -M viins "^Vc" fzfCommits```
 - ```bindkey -M viins "^W" vi-backward-kill-word```
 - ```bindkey -M viins "^X^R" _read_comp```
@@ -584,8 +584,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -a "^V^V" vimFzf```
 - ```bindkey -a "^V^Z" fzf-history-widget```
 - ```bindkey -a "^V," fzfVimKeybind```
-- ```bindkey -a "^V." locateFzf```
-- ```bindkey -a "^V/" fzfAllKeybind```
+- ```bindkey -a "^V." fzfAllKeybind```
+- ```bindkey -a "^V/" locateFzf```
 - ```bindkey -a "^Vc" fzfCommits```
 - ```bindkey -a "^W" deleteLastWord```
 - ```bindkey -a "^Y" changeQuotes```
@@ -956,8 +956,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```i  <C-B>       * getline('.')=~'^\s*$'&&col('.')>strlen(getline('.'))?"0\<C-D>\<Esc>kJs":"\<Left>"```
 - ```i  <C-C>       * <Esc>:wq!<CR>:qa!<CR>```
 - ```i  <C-D>       * col('.')>strlen(getline('.'))?"\<C-D>":"\<Del>"```
-- ```i  <C-D>,      * <C-O>:FZFMaps<CR>```
-- ```i  <C-D>.      * <C-O>:Locate /<CR>```
+- ```i  <C-D>.      * <C-O>:FZFMaps<CR>```
+- ```i  <C-D>/      * <C-O>:Locate /<CR>```
 - ```i  <C-D>z      * <Esc>:TlistAddFiles * <CR> :TlistToggle<CR>i```
 - ```i  <C-D>y      * <Esc>:update<CR>:SyntasticCheck<CR>a```
 - ```i  <C-D>x      * <C-O>:Marks<CR>```
@@ -1024,8 +1024,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```n  [c           @<Plug>(GitGutterPrevHunk)```
 - ```n  ]c           @<Plug>(GitGutterNextHunk)```
 - ```n  <C-C>       * :wq!<CR>:qa!<CR>```
-- ```n  <C-D>,      * :FZFMaps<CR>```
-- ```n  <C-D>.      * :Locate /<CR>```
+- ```n  <C-D>.      * :FZFMaps<CR>```
+- ```n  <C-D>/      * :Locate /<CR>```
 - ```n  <C-D>z      * :TlistAddFiles *<CR>:TlistToggle<CR>```
 - ```n  <C-D>y      * :update<CR>:SyntasticCheck<CR>```
 - ```n  <C-D>x      * :Marks<CR>```
@@ -1053,7 +1053,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```n  <C-D>b      * :Buffers<CR>```
 - ```n  <C-D>a      * :Ag<CR>```
 - ```   <C-D><C-D>  * :GitGutterUndoHunk<CR>```
-- ```n  <C-D>/      * :call NERDComment("x","Toggle")<CR>`>```
+- ```n  <C-D>,      * :call NERDComment("x","Toggle")<CR>`>```
 - ```n  <C-F>       * :q!<CR>```
 - ```n  <C-G>       * :call multiple_cursors#new("n", 1)<CR>```
 - ```nox<C-H>       * 4h```
@@ -1687,7 +1687,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```   <C-D><C-D>  * :GitGutterUndoHunk<CR>```
 - ```v  <C-D>d      * :<C-C>:update<CR>```
 - ```v  <C-D>y      * :<C-C>:update<CR>:SyntasticCheck<CR>```
-- ```v  <C-D>/      * :call NERDComment("x","Toggle")<CR>`>```
+- ```v  <C-D>,      * :call NERDComment("x","Toggle")<CR>`>```
 - ```v  <C-E><C-E>  * <Esc>:call TmuxRepeat("repl")<CR>gv```
 - ```v  <C-E><C-F>  * <Esc>:call TmuxRepeat("visual")<CR>gv```
 - ```v  <C-F>       * :<C-C>:q!<CR>```
