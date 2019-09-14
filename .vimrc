@@ -943,17 +943,18 @@ inoremap <silent> <C-D>g <C-O>:Commits!<CR>
 inoremap <silent> <C-D>h <C-O>:History<CR>
 inoremap <silent> <C-D>i <C-O>:Imap<CR>
 inoremap <silent> <C-D>j <C-O>:Agg<CR>
-inoremap <silent> <C-D>l <C-O>:Lines<CR>
 inoremap <silent> <C-D>k <C-O>:ALEFix<CR>
+inoremap <silent> <C-D>l <C-O>:Lines<CR>
 inoremap <silent> <C-D>m <C-O>:Map<CR>
 inoremap <silent> <C-D>n <C-O>:Snippets<CR>
-inoremap <silent> <C-D>s <C-O>:History/<CR>
-inoremap <silent> <C-D>u <C-O>:History:<CR>
 inoremap <silent> <C-D>o <C-O>:ALEToggle<CR>
 inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
 inoremap <silent> <C-D>q <C-O>:SaveSession!<CR><TAB>
-inoremap <silent> <C-D>r <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
+inoremap <silent> <C-D>rq <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
+inoremap <silent> <C-D>rr <Esc>:Rg<CR>
+inoremap <silent> <C-D>s <C-O>:History/<CR>
 inoremap <silent> <C-D>t <C-O>:Tags<CR>
+inoremap <silent> <C-D>u <C-O>:History:<CR>
 inoremap <silent> <C-D>v <C-[>:w!<CR>:call TmuxRepeatGeneric()<CR>a
 inoremap <silent> <C-D>w <C-O>:update<CR>
 inoremap <silent> <C-D>x <C-O>:Marks<CR>
@@ -982,7 +983,8 @@ nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>o :ALEToggle<CR>
 nnoremap <silent> <C-D>p :call GetRef()<CR>
 nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
-nnoremap <silent> <C-D>r :silent !open -t %:p:h<CR>:redraw!<CR>
+nnoremap <silent> <C-D>rq :silent !open -t %:p:h<CR>:redraw!<CR>
+nnoremap <silent> <C-D>rr :Rg<CR>
 nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>t :Tags<CR>
 nnoremap <silent> <C-D>u :History:<CR>
@@ -1194,7 +1196,13 @@ let g:snips_github='MenkeTechnologies'
 command! -bang Colors call fzf#vim#colors({'left': '20', 'options': '--reverse' }, <bang>0)
 
 "give :Ag preview window with first line of matched file matches fzf input
-command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, fzf#wrap('ag',  {'options': "--delimiter : --nth 4.. --preview 'bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $(cut -d: -f1 <<< {}) | nl -b a | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'"}))
+command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, {'options': "--delimiter : --nth 4.. --preview 'bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $(cut -d: -f1 <<< {}) | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'", 'bottom': '50%'}, <bang>0)
+
+command! -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>),
+  \   1,
+  \   fzf#vim#with_preview('right:50%'))
 
 command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'options': '--delimiter : --nth 4..', 'bottom':'50%'}))
 "command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#wrap("with_preview", {"options": '--delimiter : --nth 4.. --preview'}))
