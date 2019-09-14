@@ -963,17 +963,18 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```i  <C-D>x      * <C-O>:Marks<CR>```
 - ```i  <C-D>w      * <C-O>:update<CR>```
 - ```i  <C-D>v      * <Esc>:w!<CR>:call TmuxRepeatGeneric()<CR>a```
+- ```i  <C-D>u      * <C-O>:History:<CR>```
 - ```i  <C-D>t      * <C-O>:Tags<CR>```
-- ```i  <C-D>r      * <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a```
+- ```i  <C-D>s      * <C-O>:History/<CR>```
+- ```i  <C-D>rr     * <Esc>:Rg<CR>```
+- ```i  <C-D>rq     * <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a```
 - ```i  <C-D>q      * <C-O>:SaveSession!<CR><Tab>```
 - ```i  <C-D>p      * <C-O>:call GetRef()<CR>```
 - ```i  <C-D>o      * <C-O>:ALEToggle<CR>```
-- ```i  <C-D>u      * <C-O>:History:<CR>```
-- ```i  <C-D>s      * <C-O>:History/<CR>```
 - ```i  <C-D>n      * <C-O>:Snippets<CR>```
 - ```i  <C-D>m      * <C-O>:Map<CR>```
-- ```i  <C-D>k      * <C-O>:ALEFix<CR>```
 - ```i  <C-D>l      * <C-O>:Lines<CR>```
+- ```i  <C-D>k      * <C-O>:ALEFix<CR>```
 - ```i  <C-D>j      * <C-O>:Agg<CR>```
 - ```i  <C-D>i      * <C-O>:Imap<CR>```
 - ```i  <C-D>h      * <C-O>:History<CR>```
@@ -1034,7 +1035,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```n  <C-D>u      * :History:<CR>```
 - ```n  <C-D>t      * :Tags<CR>```
 - ```n  <C-D>s      * :History/<CR>```
-- ```n  <C-D>r      * :silent !open -t %:p:h<CR>:redraw!<CR>```
+- ```n  <C-D>rr     * :Rg<CR>```
+- ```n  <C-D>rq     * :silent !open -t %:p:h<CR>:redraw!<CR>```
 - ```n  <C-D>q      * :SaveSession!<CR><Tab>```
 - ```n  <C-D>p      * :call GetRef()<CR>```
 - ```n  <C-D>o      * :ALEToggle<CR>```
@@ -1629,6 +1631,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```n  <Plug>CamelCaseMotion_e * :<C-U>call camelcasemotion#Motion('e',v:count1,'n')<CR>```
 - ```n  <Plug>CamelCaseMotion_b * :<C-U>call camelcasemotion#Motion('b',v:count1,'n')<CR>```
 - ```n  <Plug>CamelCaseMotion_w * :<C-U>call camelcasemotion#Motion('w',v:count1,'n')<CR>```
+- ```n  <Plug>(ale_rename) * :ALERename<CR>```
 - ```n  <Plug>(ale_documentation) * :ALEDocumentation<CR>```
 - ```n  <Plug>(ale_hover) * :ALEHover<CR>```
 - ```n  <Plug>(ale_find_references) * :ALEFindReferences<CR>```
