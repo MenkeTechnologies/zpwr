@@ -1,5 +1,3 @@
-source ~/.tmux/powerline/bindings/tmux/powerline.conf
-
 bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t="
 
 bind-key C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"
