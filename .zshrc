@@ -613,6 +613,10 @@ locateFzf(){
     fi
 }
 
+commit(){
+    vim -v -c Commits!
+}
+
 fzfCommits(){
     BUFFER=""
     zle .kill-whole-line
