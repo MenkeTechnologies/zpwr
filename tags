@@ -848,6 +848,9 @@ timeToSleep	myWatchNoBlinkColorized.sh	/^    timeToSleep=$2$/;"	v
 timeToSleep	myWatchNoBlinkColorized.sh	/^    timeToSleep=0.5$/;"	v
 timediff	autoUpdater.sh	/^        timediff=$((newtime - oldtime))$/;"	v
 title	.shell_aliases_functions.sh	/^        title="$1"$/;"	v
+tmuxPowerlineDir	pip_install.sh	/^        tmuxPowerlineDir="$HOME\/.config\/powerline\/themes\/tmux"$/;"	v
+tmuxPowerlineDir	pip_install.sh	/^    tmuxPowerlineDir="$HOME\/.config\/powerline\/themes\/tmux"$/;"	v
+tmuxPowerlineDir	pip_install.sh	/^    tmuxPowerlineDir=$HOME\/.config\/powerline\/themes\/tmux$/;"	v
 to	.shell_aliases_functions.sh	/^to(){$/;"	f
 torip	.shell_aliases_functions.sh	/^torip(){$/;"	f
 toriprenew	.shell_aliases_functions.sh	/^toriprenew() {$/;"	f
