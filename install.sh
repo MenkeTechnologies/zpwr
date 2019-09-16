@@ -728,10 +728,18 @@ fi
 
 if [[ ! -d "$dir" ]]; then
     prettyPrint "$dir does not exist"
+else
+    if needSudo "dir"; then
+        prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
+        sudo ln -sf "$dir" "$TMUX_HOME/powerline"
+    else
+        prettyPrint "linking $dir to $TMUX_HOME/powerline"
+        ln -sf "$dir" "$TMUX_HOME/powerline"
+    fi
 fi
 
-echo ln -sf "$dir" "$HOME/.tmux/powerline"
-ln -sf "$dir" "$HOME/.tmux/powerline"
+command tmux source-file "$HOME/.tmux.conf"
+
 
 zsh -c 'tmux new-session -d -s main'
 tmux send-keys -t "main" 'tmux source-file "$HOME/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m

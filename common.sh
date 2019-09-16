@@ -32,6 +32,14 @@ exists(){
     #printf "\n"
 #}
 
+needSudo(){
+    if [[ ! -w "$1" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 proceed(){
     printf "Proceed?(y/n) >>> "
     read
