@@ -70,6 +70,10 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
 
     prettyPrint "Upgrading pip"
     sudo python3 -m pip install --upgrade pip
+
+    prettyPrint "Installing powerline mem segment"
+    sudo python3 -m pip install powerline-mem-segment
+
     prettyPrint "Installing psutil for Python Glances"
     sudo python3 -m pip install psutil 
 
