@@ -2012,9 +2012,11 @@ regenPowerlineLink(){
     dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
     if needSudo "dir"; then
         prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
+        echo sudo ln -sf "$dir" "$HOME/.tmux/powerline"
         sudo ln -sf "$dir" "$TMUX_HOME/powerline"
     else
         prettyPrint "linking $dir to $TMUX_HOME/powerline"
+        echo ln -sf "$dir" "$HOME/.tmux/powerline"
         ln -sf "$dir" "$TMUX_HOME/powerline"
     fi
     command tmux source-file "$HOME/.tmux.conf"
