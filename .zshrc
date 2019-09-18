@@ -1794,8 +1794,35 @@ subcommands_ary=($(cat "$SCRIPTS/zpwr.sh" | perl -ne 'print "$1\\:\"$2\" " if /^
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
 
 _zpwr(){
-    _alternative "$subcommands_str" \
-    'directory-stack:directory stack:_directory_stack'
+  local arguments
+  arguments=(
+  '--help[show this help message and exit]: :->noargs'
+  '--shell[enter shell repl]: :->noargs'
+  '1:zpwr subcommand:->verb'
+    '*::args to zpwr:->args'
+)
+
+_arguments -s -C : $arguments && return 0
+
+if [[ CURRENT -ge 1 ]]; then
+    case $state in
+        noargs)
+             _message "nothing to complete"
+             ;;
+        verb)
+        _alternative "$subcommands_str"
+            ;;
+        args)
+        _alternative \
+        'files:files:_files' \
+        'directory-stack:directory stack:_directory_stack' \
+        ;;
+
+    esac
+
+    return
+fi
+
 }
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
