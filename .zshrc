@@ -1789,6 +1789,13 @@ _ssu(){
     _arguments -s $arguments
 }
 
+
+subcommands_ary=($(cat "$SCRIPTS/zpwr.sh" | perl -ne 'print "$1 " if /^\s*([a-zA-z]+)\s*\).*$/'))
+
+_zpwr(){
+    _alternative 'commands:sub commands:('${subcommands_ary[@]}')' \
+    'directory-stack:directory stack:_directory_stack'
+}
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
 compdef _cl clearList
@@ -1796,6 +1803,7 @@ compdef _f f
 compdef _c c
 compdef _ssd ssd
 compdef _ssu ssu
+compdef _zpwr zpwr
 
 #redefine global zsh completion function called at first parameter
 #adding global aliases and files
