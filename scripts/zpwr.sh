@@ -11,6 +11,14 @@
 verb="$1"
 shift
 case $verb in
+    trc) cmd="trc" #tmux.conf vim session
+        ;;
+    brc) cmd="brc" #shell aliases file vim session
+        ;;
+    vrc) cmd="vrc" #vimrc vim session
+        ;;
+    zrc) cmd="zrc" #zshrc vim session
+        ;;
     color2) cmd="color2" #turn on stderr filter
         ;;
     return2) cmd="return2" #turn off stderr filter
@@ -33,6 +41,8 @@ case $verb in
         ;;
     detach) cmd="detachall" #detach from all tmux sessions
         ;;
+    install) cmd="inst" #run configure, make and make install
+        ;;
     digs) cmd="digs" #run series on networking commands on arg
         ;;
     ff) cmd="ff" #run 10 times for command
@@ -45,7 +55,15 @@ case $verb in
         ;;
     hd) cmd="hd" #delete remote github repo
         ;;
+    taillog) cmd="lo" #tail -F $LOGFILE
+        ;;
+    log) cmd="logg" #write to $LOGFILE
+        ;;
     getrc) cmd="getrc" #update zpwr configs
+        ;;
+    search) cmd="clearList" #search command type with args
+        ;;
+    clearlist) cmd="clearList" #clear and list the files with no args
         ;;
     clone) cmd="gcl" #clone and cd to arg
         ;;
@@ -53,7 +71,15 @@ case $verb in
         ;;
     opencommand) cmd="getOpenCommand" #get the command to open with system
         ;;
+    makefile) cmd="j" #make a dir tree with file at end
+        ;;
+    makedir) cmd="jd" #make a dir tree
+        ;;
     open) cmd="o" #open with system
+        ;;
+    background) cmd="b" #run arg in background
+        ;;
+    ps) cmd="p" #ps -ef | grep arg
         ;;
     pi) cmd="pi" #ping all LAN devices
         ;;
@@ -67,6 +93,12 @@ case $verb in
         ;;
     contribcount) cmd="contribcount" #count of git contribs grouped by author
         ;;
+    scripts) cmd="sc" #cd to scripts directory
+        ;;
+    scriptToPDF) cmd="scriptToPDF" #convert script to PDF
+        ;;
+    cloneToForked) cmd="cloneToForked" #clone $REPO_NAME to $FORKED_DIR
+        ;;
     reveal) cmd="reveal" #show remote repo in browser
         ;;
     killmux) cmd="tmux kill-server" #kill tmux server
@@ -78,6 +110,8 @@ case $verb in
     fp) cmd="fp" #cd to ~/forkedRepos
         ;;
     zp) cmd="zp" #cd to $REPO_NAME
+        ;;
+    zshsearch) cmd="zshrcsearch" #search zshrc for arg
         ;;
     zpz) cmd="zpz" #cd to $REPO_NAME and git co, rebase and push
         ;;
