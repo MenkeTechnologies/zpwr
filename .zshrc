@@ -1790,10 +1790,11 @@ _ssu(){
 }
 
 
-subcommands_ary=($(cat "$SCRIPTS/zpwr.sh" | perl -ne 'print "$1 " if /^\s*([a-zA-z]+)\s*\).*$/'))
+subcommands_ary=($(cat "$SCRIPTS/zpwr.sh" | perl -ne 'print "$1\\:\"$2\" " if /^\s*([a-zA-z]+)\s*\).*#(.*)$/'))
+subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
 
 _zpwr(){
-    _alternative 'commands:sub commands:('${subcommands_ary[@]}')' \
+    _alternative "$subcommands_str" \
     'directory-stack:directory stack:_directory_stack'
 }
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
