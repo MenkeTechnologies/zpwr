@@ -189,6 +189,7 @@ alias l="clearList"
 alias t="cd /"
 alias ca='cat -n'
 alias sa='sudo cat -n'
+alias ra='sudo rm -rf'
 alias gil='vim .git/info/exclude'
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
