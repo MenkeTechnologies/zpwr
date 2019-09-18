@@ -1285,8 +1285,14 @@ openmygh(){
 }
 alias gh=openmygh
 
-eval "alias $GITHUB_ACCOUNT='openmygh $GITHUB_ACCOUNT'"
-eval "alias $REPO_NAME='openmygh $GITHUB_ACCOUNT/$REPO_NAME'"
+eval "alias $GITHUB_ACCOUNT=NAME='openmygh $GITHUB_ACCOUNT'"
+zpwr(){
+    if test -z $1;then
+        openmygh $GITHUB_ACCOUNT/$REPO_NAME
+    else
+        . zpwr.sh $@
+    fi
+}
 if [[ -d "$SCRIPTS/$REPO_NAME" ]]; then
     eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$REPO_NAME'"
 elif [[ -d "$FORKED_DIR/$REPO_NAME" ]];then
