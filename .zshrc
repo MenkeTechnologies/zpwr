@@ -1789,6 +1789,7 @@ _ssu(){
     _arguments -s $arguments
 }
 
+zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
 compdef _cl clearList
 compdef _f f
