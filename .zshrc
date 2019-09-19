@@ -1358,6 +1358,10 @@ globalAliasesInit(){
         '$__TS'
     done'
 
+    alias fori="for (( i = 0; i < $__TS; i++ )); do
+        $__TS
+    done"
+
     if [[ "$(uname)" == Darwin ]]; then
         alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
     else
