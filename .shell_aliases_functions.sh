@@ -858,7 +858,7 @@ contribCount(){
 }
 
 isBinary() {
-  LC_MESSAGES=C grep -Hm1 '^' < "${1-$REPLY}" | grep -q '^Binary'
+  LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -q '^Binary'
 }
 
 totalLines(){
