@@ -33,7 +33,7 @@ case $verb in
         ;;
     regenzsh ) cmd="regenZshCompCache" #regenZshCompCache at ~/.zcompdump-hostname
         ;;
-    updateall) cmd="apz" #update all
+    updatedeps) cmd="apz" #update all dependencies
         ;;
     start) cmd="tmm_full" #start all tabs
         ;;
@@ -59,7 +59,7 @@ case $verb in
         ;;
     log) cmd="logg" #write to $LOGFILE
         ;;
-    getrc) cmd="getrc" #update zpwr configs
+    update) cmd="getrc" #update zpwr custom configs
         ;;
     search) cmd="clearList" #search command type with args
         ;;
@@ -127,7 +127,7 @@ else
         eval "$cmd"
     else
         prettyPrint "Exec subcommand '$cmd'"
-        $cmd "$@"
+        ${(z)cmd} $@
     fi
 fi
 
