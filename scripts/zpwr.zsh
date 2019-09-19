@@ -91,7 +91,11 @@ case $verb in
         ;;
     pygmentcolors) cmd="pygmentcolors" #show all pygment colors
         ;;
-    contribcount) cmd="contribcount" #count of git contribs grouped by author
+    totallines) cmd="totallines" #count of total line count of git files
+        ;;
+    linecontribcount) cmd="linecontribcount" #count of lines contributed by author
+        ;;
+    contribcount) cmd="contribcount" #count of git contribs by author
         ;;
     scripts) cmd="sc" #cd to scripts directory
         ;;
