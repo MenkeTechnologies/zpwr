@@ -1225,6 +1225,14 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
 
+    #git commit colors
+    zstyle ':completion:*:*:commits' list-colors '=(#b)(*)=1;37;45'
+    zstyle ':completion:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
+    zstyle ':completion:*:commit-tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
+    zstyle ':completion:*:heads-local' list-colors '=(#b)(*)=1;30=1;34;43;4'
+    zstyle ':completion:*:heads-remote' list-colors '=(#b)(*)=1;30=1;37;46'
+    zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;37;43'
+
      #separate colors for sections of manual pages
     zstyle ':completion:*:manuals.1' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:manuals.2' list-colors '=(#b)(*)=1;30=1;37;42'
