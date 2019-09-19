@@ -568,7 +568,7 @@ xx(){
     trap QUIT
 }
 
-url_safe(){
+urlSafe(){
     cat | base64 | tr '+/=' '._-'
 }
 
@@ -838,7 +838,7 @@ isGitDir(){
     return 0
 }
 
-contribcount(){
+contribCount(){
 
     isGitDir || return 1
 
@@ -854,11 +854,11 @@ contribcount(){
     fi
 }
 
-isbinary() {
+isBinary() {
   LC_MESSAGES=C grep -Hm1 '^' < "${1-$REPLY}" | grep -q '^Binary'
 }
 
-totallines(){
+totalLines(){
 
     isGitDir || return 1
 
@@ -902,7 +902,7 @@ totallines(){
     command rm "$temp"
 }
 
-linecontribcount(){
+lineContribCount(){
 
     isGitDir || return 1
 
