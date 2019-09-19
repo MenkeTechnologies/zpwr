@@ -15,7 +15,7 @@ cat<<EOF
     $COLORIZER_FZF_FILE 2>/dev/null;
     fi
 else
-    stat -- \$file | fold -80 | head -500; 
+    "$SCRIPTS/clearList.sh" -- \$file | fold -80 | head -500; 
 fi
 
 EOF

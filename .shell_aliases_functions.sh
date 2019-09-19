@@ -92,7 +92,7 @@ export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
 export LESS="-M -N -R -K -F -X"
 export PSQL_EDITOR='vim -c "setf sql"'
-export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a'
+export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
@@ -661,91 +661,94 @@ about(){
 
 clearList() {
     if [[ "$(uname)" == "Darwin" ]]; then
-        exists exa && ls_command="$EXA_COMMAND" || {
-            exists grc && {
-                ls_command="grc -c $HOME/conf.gls \
-                gls -iFlhAd --color=always"
-            } || {
+        if exists exa;then
+            ls_command="$EXA_COMMAND"
+        else
+            if exists grc; then
+                ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"
+            else
                 ls_command="ls -iFlhAOd"
-            }
-        }
+            fi
+        fi
         lib_command="otool -L"
     elif [[ "$(uname)" == Linux ]];then
 
-        exists exa && ls_command="$EXA_COMMAND" || {
-            exists grc && {
-        ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"
-            } || {
-                ls_command="ls -iFhlA"
-            }
-        }
+        if exists exa;then
+            ls_command="$EXA_COMMAND"
+        else
+            if exists grc; then
+                ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"
+            else
+                ls_command="ls -iFlhA"
+            fi
+        fi
         lib_command="ldd"
     else
-        exists grc && {
-                ls_command="grc -c $HOME/conf.gls ls -iFlhA"
-            } || {
-                ls_command="ls -iFhlA"
-            }
-        lib_command="ldd"
-        
-    fi
-        if [[ -n "$1" ]]; then
-            for arg in "$@"; do
-                if exists $arg; then
-                    #exe matching
-                    while read loc;do
-                        lf="$(echo $loc|cut -d' ' -f3-10)"
-                        if [[ -f "$lf" ]]; then
-                            prettyPrint "$lf" && \
-                            eval "$ls_command" $lf \
-                            && prettyPrint "FILE TYPE:" && \
-                            eval "file $lf" && \
-                            prettyPrint "DEPENDENT ON:" && \
-                            eval "$lib_command $lf"
-                            prettyPrint "SIZE:"
-                            du -sh "$lf"
-                            prettyPrint "STATS:"
-                            stat "$lf"
-                            prettyPrint "MAN:"
-                            man -wa "$(basename $lf)"
-                            echo
-                            echo
-                        else
-                            echo "$loc"
-                            echo "$loc" | command grep -q \
-                                "function" && {
-                                type -f "$(echo "$loc" | \
-                                awk '{print $1}')" | nl -v 0
-                            }
-                            echo "$loc" | command grep -q \
-                                "alias" && {
-                                alias "$(echo "$loc" \
-                                | awk '{print $1}')"
-                            }
-                            echo
-                            echo
-                        fi
-                    done < <(type -a "$arg" | sort | uniq)
-                else
-                    #path matching, not exe
-                    prettyPrint "$arg"
-                    eval "$ls_command -d \"$arg\"" \
-                            || { echo; continue; }
-                    echo
-                    prettyPrint "FILE TYPE:"
-                    file "$arg"
-                    prettyPrint "SIZE:"
-                    du -sh "$arg"
-                    prettyPrint "STATS:"
-                    stat "$arg"
-                    #for readibility
-                    echo
-                    echo
-                fi
-            done
+        if exists grc;then
+            ls_command="grc -c $HOME/conf.gls ls -iFlhA"
         else
-            clear && eval "$ls_command"
+            ls_command="ls -iFhlA"
         fi
+        lib_command="ldd"
+    fi
+
+    if [[ -n "$1" ]]; then
+        for arg in "$@"; do
+            if exists $arg; then
+                #exe matching
+                while read loc;do
+                    lf="$(echo $loc|cut -d' ' -f3-10)"
+                    if [[ -f "$lf" ]]; then
+                        prettyPrint "$lf" && \
+                        eval "$ls_command" $lf \
+                        && prettyPrint "FILE TYPE:" && \
+                        eval "file $lf" && \
+                        prettyPrint "DEPENDENT ON:" && \
+                        eval "$lib_command $lf"
+                        prettyPrint "SIZE:"
+                        du -sh "$lf"
+                        prettyPrint "STATS:"
+                        stat "$lf"
+                        prettyPrint "MAN:"
+                        man -wa "$(basename $lf)"
+                        echo
+                        echo
+                    else
+                        echo "$loc"
+                        echo "$loc" | command grep -q \
+                            "function" && {
+                            type -f "$(echo "$loc" | \
+                            awk '{print $1}')" | nl -v 0
+                        }
+                        echo "$loc" | command grep -q \
+                            "alias" && {
+                            alias "$(echo "$loc" \
+                            | awk '{print $1}')"
+                        }
+                        echo
+                        echo
+                    fi
+                done < <(type -a "$arg" | sort | uniq)
+            else
+                #path matching, not exe
+                prettyPrint "$arg"
+                eval "$ls_command -d \"$arg\"" \
+                        || { echo; continue; }
+                echo
+                prettyPrint "FILE TYPE:"
+                file "$arg"
+                prettyPrint "SIZE:"
+                du -sh "$arg"
+                prettyPrint "STATS:"
+                stat "$arg"
+                #for readibility
+                echo
+                echo
+            fi
+        done
+    else
+        clear && eval "$ls_command"
+    fi
 }
 
 listNoClear () {
