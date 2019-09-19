@@ -1225,7 +1225,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
 
-    #separate colors for sections of manual pages
+     #separate colors for sections of manual pages
     zstyle ':completion:*:manuals.1' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:manuals.2' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:manuals.3' list-colors '=(#b)(*)=1;30=1;37;43'
@@ -1239,6 +1239,19 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:manuals.0p' list-colors '=(#b)(*)=1;30=37;46'
     zstyle ':completion:*:manuals.1p' list-colors '=(#b)(*)=1;30=37;46'
     zstyle ':completion:*:manuals.3p' list-colors '=(#b)(*)=1;30=37;46'
+
+   #separate colors for git commans types
+    zstyle ':completion:*:main-porcelain-commands' list-colors '=(#b)(*)=1;30=1;36;44'
+    zstyle ':completion:*:user-commands' list-colors '=(#b)(*)=1;30=1;37;42'
+    zstyle ':completion:*:third-party-commands' list-colors '=(#b)(*)=1;30=1;37;43'
+    zstyle ':completion:*:ancillary-manipulator-commands' list-colors '=(#b)(*)=1;30=37;46'
+    zstyle ':completion:*:ancillary-interrogator-commands' list-colors '=(#b)(*)=1;30=1;34;43;4'
+    zstyle ':completion:*:interaction-commands' list-colors '=(#b)(*)=1;30=1;37;41'
+    zstyle ':completion:*:plumbing-manipulator-commands' list-colors '=(#b)(*)=1;30=34;42;4'
+    zstyle ':completion:*:plumbing-interrogator-commands' list-colors '=(#b)(*)=1;30=1;34;41;4'
+    zstyle ':completion:*:plumbing-sync-commands' list-colors '=(#b)(*)=1;30=1;36;44'
+    zstyle ':completion:*:plumbing-sync-helper-commands' list-colors '=(#b)(*)=1;30=1;4;37;45'
+    zstyle ':completion:*:plumbing-internal-helper-commands' list-colors '=(#b)(*)=1;30=37;46'
 
     zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
     if [[ "$(uname)" == Darwin ]]; then

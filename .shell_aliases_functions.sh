@@ -1118,10 +1118,14 @@ escapeRemove(){
 }
 
 prettyPrint(){
-    [[ -n "$1" ]] && printf "\e[1m$1\e[0m\n" || {
+    if [[ -n "$1" ]];then 
+        printf "\x1b[1m"
+        printf "%s " "$@"
+        printf "\x1b[0m\n"
+    else
         echo "Need one arg" >&2
         return 1
-    }
+    fi
 }
 
 alternatingPrettyPrint(){
