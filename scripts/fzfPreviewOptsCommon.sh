@@ -5,7 +5,7 @@
 ##### GitHub: 
 ##### Date: Thu Sep  5 22:34:56 EDT 2019
 ##### Purpose: bash script to
-##### Notes:
+##### Notes: no single quotes
 #}}}***********************************************************
 
 isZsh(){
@@ -51,4 +51,3 @@ if test -f \$file;then
     elif print -r -- \$file | command egrep -iq "\\.(gzip|gz)\$";then gzip -c -d \$file | $COLORIZER_FZF_YAML;
     else
 EOF
-
