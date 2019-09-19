@@ -15,7 +15,7 @@ cat<<EOF
     fi
 else
     if test -e {}; then
-        stat -- {} | fold -80 | head -500;
+        "$SCRIPTS/clearList.sh" -- {} | fold -80 | head -500;
     else
         source ~/.shell_aliases_functions.sh;
         {
