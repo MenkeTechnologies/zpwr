@@ -55,15 +55,25 @@ case $verb in
         ;;
     hd) cmd="hd" #delete remote github repo
         ;;
+    web) cmd="we" #cd to web dir
+        ;;
+    gitignore) cmd="gil" #vim ~/.git/info/exclude
+        ;;
     taillog) cmd="lo" #tail -F $LOGFILE
         ;;
     log) cmd="logg" #write to $LOGFILE
         ;;
     update) cmd="getrc" #update zpwr custom configs
         ;;
-    search) cmd="clearList" #search command type with args
+    search) cmd="s" #search google for args
+        ;;
+    info) cmd="clearList" #get info on command type with args
+        ;;
+    list) cmd="listNoClear" #list the files with no args
         ;;
     clearlist) cmd="clearList" #clear and list the files with no args
+        ;;
+    learn) cmd="learn" #save learning to $SCHEMA_NAME.$TABLE_NAME
         ;;
     clone) cmd="gcl" #clone and cd to arg
         ;;
@@ -87,15 +97,37 @@ case $verb in
         ;;
     pre) cmd="pre" #prefix all output
         ;;
+    banner) cmd="about" #show $REPO_NAME banner
+        ;;
+    gitremotes) cmd="allRemotes" #list all git remotes
+        ;;
+    urlsafe) cmd="urlSafe" #base64 encode
+        ;;
+    upload) cmd="upload" #upload with curl
+        ;;
     post) cmd="post" #postfix all output
         ;;
     pygmentcolors) cmd="pygmentcolors" #show all pygment colors
         ;;
-    totallines) cmd="totallines" #count of total line count of git files
+    commit) cmd="gitCommitAndPush" #commit and push with arg message
         ;;
-    linecontribcount) cmd="linecontribcount" #count of lines contributed by author
+    colorsdiff) cmd="gsdc" #colorized side diff
         ;;
-    contribcount) cmd="contribcount" #count of git contribs by author
+    prettyprint) cmd="prettyPrint" #pretty print with color
+        ;;
+    altprettyprint) cmd="alternatingPrettyPrint" #pretty with alternating color
+        ;;
+    totallines) cmd="totalLines" #count of total line count of git files
+        ;;
+    linecontribcount) cmd="lineContribCount" #count of lines contributed by author
+        ;;
+    logincount) cmd="loginCount" #count of logins by user
+        ;;
+    ghcontribcount) cmd="cgh" #count of github contribs in last year
+        ;;
+    contribcount) cmd="contribCount" #count of git contribs by author
+        ;;
+    cd) cmd="f" #cd to directory arg
         ;;
     scripts) cmd="sc" #cd to scripts directory
         ;;
