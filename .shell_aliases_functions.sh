@@ -1290,7 +1290,7 @@ zpwr(){
     if test -z $1;then
         openmygh $GITHUB_ACCOUNT/$REPO_NAME
     else
-        . zpwr.sh $@
+        . zpwr.zsh "$@"
     fi
 }
 if [[ -d "$SCRIPTS/$REPO_NAME" ]]; then

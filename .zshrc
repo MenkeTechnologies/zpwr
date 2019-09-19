@@ -1790,7 +1790,7 @@ _ssu(){
 }
 
 
-subcommands_ary=($(cat "$SCRIPTS/zpwr.sh" | perl -ne 'print "$1\\:\"$2\" " if /^\s*([a-zA-z]+)\s*\).*#(.*)$/'))
+subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if /^\s*([a-zA-z]+)\s*\).*#(.*)$/'))
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
 
 _zpwr(){
