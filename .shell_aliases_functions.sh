@@ -1256,16 +1256,22 @@ jetbrainsWorkspaceEdit(){
 }
 
 getOpenCommand(){
-    OS="$(uname -s)"
-    case "$OS" in
-        Linux*)     open_cmd=xdg-open;;
-        Darwin*)    open_cmd=open;;
-        CYGWIN*)    open_cmd=cygstart;;
-        MINGW*)     open_cmd=start;;
-        *)          echo "Your OS: $OS is unsupported..." >&2
-                    return 2;;
+    local open_cmd
+    OSTYPE="$(uname -s | tr 'A-Z' 'a-z')"
+
+    case "$OSTYPE" in
+    darwin*)  open_cmd='open' ;;
+    cygwin*)  open_cmd='cygstart' ;;
+    linux*)   [[ "$(uname -r)" != *icrosoft* ]] && open_cmd='nohup xdg-open' || {
+                open_cmd='cmd.exe /c start ""'
+                } ;;
+    msys*)    open_cmd='start ""' ;;
+    *)        echo "Platform $OSTYPE not supported"
+                return 1
+                ;;
     esac
     echo "$open_cmd"
+
 }
 
 unalias o &>/dev/null
