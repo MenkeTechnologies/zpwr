@@ -531,10 +531,18 @@ s(){
 
     exists subl && cmd=subl || cmd="$(getOpenCommand)"
     type -a s | command grep -qv function && sec_cmd=s || sec_cmd="$cmd"
-    if [[ $sec_cmd == s ]]; then
-        test -z "$1" && $cmd . || command s "$@"
+    if isZsh; then
+        if [[ $sec_cmd == s ]]; then
+            test -z "$1" && ${(z)cmd} . || command s "$@"
+        else
+            test -z "$1" && ${(z)cmd} . || $sec_cmd "$@"
+        fi
     else
-        test -z "$1" && $cmd . || $sec_cmd "$@"
+        if [[ $sec_cmd == s ]]; then
+            test -z "$1" && $cmd . || command s "$@"
+        else
+            test -z "$1" && $cmd . || $sec_cmd "$@"
+        fi
     fi
 }
 
