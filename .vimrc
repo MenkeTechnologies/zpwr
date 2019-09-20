@@ -118,7 +118,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
 Plugin 'TerryMa/vim-multiple-cursors'
 Plugin 'luochen1990/rainbow'
 Plugin 'craigemery/vim-autotag'
