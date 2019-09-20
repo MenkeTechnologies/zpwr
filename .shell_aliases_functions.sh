@@ -1278,10 +1278,18 @@ unalias o &>/dev/null
 o(){
     open_cmd="$(getOpenCommand)" || return 1
 
-    if [[ -z "$1" ]]; then
-        $open_cmd .
+    if isZsh; then
+        if [[ -z "$1" ]]; then
+            ${(z)open_cmd} .
+        else
+            ${(z)open_cmd} "$@"
+        fi
     else
-        $open_cmd "$@"
+        if [[ -z "$1" ]]; then
+            $open_cmd .
+        else
+            $open_cmd "$@"
+        fi
     fi
 
 }
@@ -1289,10 +1297,18 @@ o(){
 openmygh(){
     open_cmd="$(getOpenCommand)" || return 1
 
-    if [[ -n "$1" ]]; then
-        $open_cmd "https://github.com/$1"
+    if isZsh; then
+        if [[ -n "$1" ]]; then
+            ${(z)open_cmd} "https://github.com/$1"
+        else
+            ${(z)open_cmd} "https://github.com/$GITHUB_ACCOUNT"
+        fi
     else
-        $open_cmd "https://github.com/$GITHUB_ACCOUNT"
+        if [[ -n "$1" ]]; then
+            ${open_cmd} "https://github.com/$1"
+        else
+            ${open_cmd} "https://github.com/$GITHUB_ACCOUNT"
+        fi
     fi
 
 }
