@@ -1838,13 +1838,16 @@ if [[ CURRENT -ge 1 ]]; then
         _alternative "$subcommands_str"
             ;;
         args)
-            if [[ $words[1] == "search" ]]; then
+            case $words[1] in
+                info | clearlist)
                 _cl
-            else
+                    ;;
+                *)
                 _alternative \
                 'files:files:_files' \
                 'directory-stack:directory stack:_directory_stack'
-            fi
+                    ;;
+            esac
         ;;
 
     esac
