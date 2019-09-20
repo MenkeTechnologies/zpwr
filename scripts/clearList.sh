@@ -76,7 +76,7 @@ clearList() {
                         prettyPrint "STATS:"
                         stat "$lf"
                         prettyPrint "MAN:"
-                        man -wa "$(basename $lf)"
+                        man -wa "$(basename $lf)" 2>/dev/null
                         echo
                         echo
                     else
