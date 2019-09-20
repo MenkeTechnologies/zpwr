@@ -21,8 +21,9 @@
 #{{{                    MARK:Global Fxn
 
 isZsh(){
-    if \ps -ef | \tr -s ' ' | \cut -d' ' -f3,9 \
-        | command grep --color=always $$ | command grep -q zsh; then
+    if command ps -ef | tr -s ' ' | \
+        perl -lane 'print $_ if $F[1] =~ /'$$'/' \
+        | command grep -q zsh; then
         return 0
     else
         return 1
