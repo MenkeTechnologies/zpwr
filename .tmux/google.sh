@@ -14,7 +14,7 @@ exec 1>> "$LOGFILE" 2>&1
 OSTYPE="$(uname -s | tr 'A-Z' 'a-z')"
 
 if [[ "$1" == "google" ]]; then
-    case "$OS_TYPE" in
+    case "$OSTYPE" in
         darwin*)
             out="$(pbpaste | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
             ;;
@@ -36,7 +36,7 @@ if [[ "$1" == "google" ]]; then
             ;;
     esac
 else
-    case "$OS_TYPE" in
+    case "$OSTYPE" in
         darwin*)
             out="$(pbpaste)"
             ;;
