@@ -1656,7 +1656,7 @@ export COLORIZER=bat
 
 if [[ $COLORIZER == bat ]]; then
     if exists bat;then
-        export BAT_THEME="GitHub"
+        export BAT_THEME="OneHalfLight"
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
         export COLORIZER_FZF_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'
         export COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
