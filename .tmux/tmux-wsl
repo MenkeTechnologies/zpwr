@@ -1,0 +1,18 @@
+bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t="
+
+bind-key C-v run "tmux set-buffer \"$(clip.exe)\"; tmux paste-buffer"
+
+unbind -T copy-mode-vi Enter
+bind-key -T copy-mode-vi y send-keys -X copy-pipe "clip.exe"
+
+bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "clip.exe"
+
+bind-key -T copy-mode-vi m send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh google"
+
+bind-key -T copy-mode-vi s send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh google"
+
+bind -T copy-mode-vi z send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh google"
+
+bind -T copy-mode-vi MouseDown3Pane send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh google"
+
+bind -T copy-mode-vi x send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh open"
