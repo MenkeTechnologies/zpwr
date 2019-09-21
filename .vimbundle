@@ -1,7 +1,7 @@
 lrvick/Conque-Shell
 MenkeTechnologies/VimColorSchemes
 VundleVim/Vundle.vim
-Valloric/YouCompleteMe
+ycm-core/YouCompleteMe
 mileszs/ack.vim
 w0rp/ale
 vim-scripts/camelcasemotion

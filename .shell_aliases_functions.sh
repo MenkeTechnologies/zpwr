@@ -422,7 +422,7 @@ r(){
         for (( i = 0; i < $1; i++ )); do
             cdstr+="../"
         done
-        cd "$cdstr"
+        cd "$cdstr" || return 1
     fi
 }
 
