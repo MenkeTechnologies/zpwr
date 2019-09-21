@@ -50,7 +50,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - color coded, tag grouped clearList zsh completion
 - search google from tmux mouse drag selection (copy-mode)
 - open URLs and files from tmux mouse drag selection (copy-mode)
-- zpwr subcommands with zsh completion zpwr <tab>
+- zpwr subcommands with zsh completion `zpwr <tab>`
 
 ## Dependencies
 - oh-my-zsh
