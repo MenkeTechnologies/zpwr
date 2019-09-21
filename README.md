@@ -80,6 +80,8 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - cargo-update
 - go
 - fzf
+- gotop
+- mylg
 - python3
 - powerline-status for vim and tmux
 - grc
