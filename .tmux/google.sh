@@ -11,37 +11,59 @@ test -z "$LOGFILE" && LOGFILE="$HOME/updaterlog.txt"
 
 exec 1>> "$LOGFILE" 2>&1
 
-OS="$(uname -s)"
+OSTYPE="$(uname -s | tr 'A-Z' 'a-z')"
+
 if [[ "$1" == "google" ]]; then
-    case "$OS" in
-        Darwin*)    
-        out="$(pbpaste | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
-        ;;
-        *)          
-        out="$(xclip -o -sel clip | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
-        ;;
+    case "$OS_TYPE" in
+        darwin*)
+            out="$(pbpaste | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            ;;
+        linux*)
+            if [[ "$(uname -r)" != *icrosoft* ]];then
+                out="$(xclip -o -sel clip | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            else
+                out="$(paste.exe | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            fi
+            ;;
     esac
 else
-    case "$OS" in
-        Darwin*)    
-        out="$(pbpaste)"
-        ;;
-        *)          
-        out="$(xclip -o -sel clip)"
-        ;;
+    case "$OS_TYPE" in
+        darwin*)
+            out="$(pbpaste)"
+            ;;
+        linux*)
+            if [[ "$(uname -r)" != *icrosoft* ]];then
+                out="$(xclip -o -sel clip)"
+            else
+                out="$(paste.exe)"
+            fi
+            ;;
+        *)
+            out="$(xclip -o -sel clip)"
+            ;;
     esac
 fi
 
 getOpenCommand(){
-    OS="$(uname -s)"
-    case "$OS" in
-        Linux*)     open_cmd=xdg-open;;
-        Darwin*)    open_cmd=open;;
-        CYGWIN*)    open_cmd=cygstart;;
-        MINGW*)     open_cmd=start;;
-        *)          echo "Your OS: $OS is unsupported..." >&2 && return 2;;
+    local open_cmd
+
+    case "$OSTYPE" in
+        darwin*)  open_cmd='open' ;;
+        cygwin*)  open_cmd='cygstart' ;;
+        linux*)
+            if [[ "$(uname -r)" != *icrosoft* ]];then
+                open_cmd='nohup xdg-open'
+            else
+                open_cmd='cmd.exe /c start ""'
+            fi
+            ;;
+        msys*)    open_cmd='start ""' ;;
+        *)        echo "Platform $OSTYPE not supported"
+            return 1
+            ;;
     esac
     echo "$open_cmd"
+
 }
 
 cmd="$(getOpenCommand)"
