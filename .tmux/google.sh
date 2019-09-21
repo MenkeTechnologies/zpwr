@@ -25,6 +25,15 @@ if [[ "$1" == "google" ]]; then
                 out="$(paste.exe | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
             fi
             ;;
+        cygwin*)
+            out="$(paste.exe | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            ;;
+        msys*)
+            out="$(paste.exe | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            ;;
+        *)
+            out="$(xclip -o -sel clip | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            ;;
     esac
 else
     case "$OS_TYPE" in
@@ -37,6 +46,12 @@ else
             else
                 out="$(paste.exe)"
             fi
+            ;;
+        cygwin*)
+            out="$(paste.exe)"
+            ;;
+        msys*)
+            out="$(paste.exe)"
             ;;
         *)
             out="$(xclip -o -sel clip)"
