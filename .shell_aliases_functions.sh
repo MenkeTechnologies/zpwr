@@ -1269,18 +1269,22 @@ getOpenCommand(){
     OSTYPE="$(uname -s | tr 'A-Z' 'a-z')"
 
     case "$OSTYPE" in
-    darwin*)  open_cmd='open' ;;
-    cygwin*)  open_cmd='cygstart' ;;
-    linux*)   [[ "$(uname -r)" != *icrosoft* ]] && open_cmd='nohup xdg-open' || {
+        darwin*)  open_cmd='open' ;;
+        cygwin*)  open_cmd='cygstart' ;;
+        linux*)
+            if [[ "$(uname -r)" != *icrosoft* ]];then
+                open_cmd='nohup xdg-open'
+            else
                 open_cmd='cmd.exe /c start ""'
-                } ;;
-    msys*)    open_cmd='start ""' ;;
-    *)        echo "Platform $OSTYPE not supported"
-                return 1
-                ;;
+            fi
+        ;;
+        msys*)    open_cmd='start ""' ;;
+        *)        echo "Platform $OSTYPE not supported"
+                    return 1
+                    ;;
     esac
-    echo "$open_cmd"
 
+    echo "$open_cmd"
 }
 
 unalias o &>/dev/null
