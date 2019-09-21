@@ -53,29 +53,35 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zpwr subcommands with zsh completion `zpwr <tab>`
 - centralized FZF preview pane customization
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
-- systemd service, poll.service, that polls github and download latest zpwr code
-- systemd service, learn.service. that runs learning collection API
+- poll.service = systemd service that polls github and download latest zpwr code
+- learn.service = systemd service that runs learning collection API
 
 ## Dependencies
-- oh-my-zsh
+- oh-my-zsh with 63 standard plugins and 16 custom plugins
 - zsh
-- Powerlevel9k zsh prompt
-- tmux 2.1
-- vim 8.1 with over 70 plugins
+- Powerlevel9k zsh prompt with ~dirs
+- tmux
+- vim 8.1 with over 74 plugins and python3 support
 - youcompleteme
 - ultisnips
 - supertab
 - pathogen
+- vundle
 - iftop-color
 - mtr
 - htop
-- powerline for vim and tmux
+- ccze
 - rust/cargo
+- rustup
 - exa
 - bat
 - fd-find
+- ripgrep
 - cargo-update
-- python
+- go
+- fzf
+- python3
+- powerline-status for vim and tmux
 - mycli
 - pgcli
 - pygments
