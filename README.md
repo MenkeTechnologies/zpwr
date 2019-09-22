@@ -88,6 +88,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - grc
 - mycli
 - pgcli
+- ponysay
 - pygments
 - perl
 - bash
