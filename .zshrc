@@ -1103,6 +1103,9 @@ setopt cbases
 #any failing command in pipeline fails entire pipeline
 setopt pipefail 2>/dev/null
 
+#search PATH for zsh <script>
+setopt pathscript
+
 # increase max size for directory stack
 export DIRSTACKSIZE=20
 #}}}***********************************************************
@@ -1139,6 +1142,9 @@ zstyle ':completion:*' squeeze-slashes true
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+
+#separate files and dirs in _files completion
+#zstyle ':completion:*' file-patterns '%p(^-/):globbed-files' '^(-/):directories' '*:all-files'
 
 if [[ $CUSTOM_COLORS == true ]]; then
     # Make the list prompt friendly
