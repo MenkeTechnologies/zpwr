@@ -9,10 +9,11 @@
 #}}}***********************************************************
 
 export GOPATH="$HOME/go"
+
 prettyPrint "Installing mylg"
 go get github.com/mehrdadrad/mylg
-cd "$HOME/go/src/github.com/mehrdadrad/mylg/"
-go build mylg.go
+
+( cd "$GOPATH/src/github.com/mehrdadrad/mylg/" && go build mylg.go; )
 
 prettyPrint "Installing gotop"
 go get github.com/cjbassi/gotop
