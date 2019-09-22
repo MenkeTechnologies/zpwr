@@ -147,6 +147,8 @@ case $verb in
         ;;
     zp) cmd="zp" #cd to $REPO_NAME
         ;;
+    recompile) cmd="recompile" #recompile all cache comps
+        ;;
     zshsearch) cmd="zshrcsearch" #search zshrc for arg
         ;;
     zpz) cmd="zpz" #cd to $REPO_NAME and git co, rebase and push

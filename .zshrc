@@ -1110,7 +1110,7 @@ setopt pathscript
 export DIRSTACKSIZE=20
 #}}}***********************************************************
 
-#{{{                    MARK:AutoCompletions
+#{{{                    MARK:Completions
 #**************************************************************
 zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
 date=$(date +'%j')
@@ -1937,9 +1937,9 @@ unset GROOVY_HOME # when set this messes up classpath
 alias -s txt='vim'
 #}}}***********************************************************
 
-#{{fi
-#**************************************************************
 
+#{{{                    MARK:Auto attach tmux
+#**************************************************************
 if [[ $TMUX_AUTO_ATTACH == true ]]; then
     if [[ "$(uname)" == Linux ]]; then
         if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
@@ -2000,6 +2000,22 @@ fi
 
 #{{{                    MARK:Misc
 #**************************************************************
+
+recompile(){
+	autoload -U zrecompile
+	[ -f ~/.zshrc ] && zrecompile -p ~/.zshrc
+	[ -f ~/.zlogout ] && zrecompile -p ~/.zlogout
+	[ -f ~/.zlogin ] && zrecompile -p ~/.zlogin
+	[ -f ~/.zcompdump ] && zrecompile -p ~/.zcompdump
+	[ -f /etc/profile ] && zrecompile -p /etc/profile
+	[ -f /etc/profile.env ] && zrecompile -p /etc/profile.env
+	for a in $fpath
+	do
+		[ -d $a ] && zrecompile -p $a.zwc $a/*
+	done
+}
+
+
 alias numcmd='print $#commands'
 unalias ag &> /dev/null
 
@@ -2040,10 +2056,11 @@ if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
 
-#}}}***********************************************************
-
 exists thefuck && eval $(thefuck --alias)
 exists kubectl && source <(kubectl completion zsh)
+
+
+#}}}***********************************************************
 
 endTimestamp=$(date +%s)
 logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
