@@ -21,7 +21,7 @@
 #{{{                    MARK:Global Fxn
 
 isZsh(){
-    if command ps -ef | tr -s ' ' | \
+    if command ps | tr -s ' ' | \
         perl -lane 'print $_ if $F[1] =~ /'$$'/' \
         | command grep -q zsh; then
         return 0
