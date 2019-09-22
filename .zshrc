@@ -1112,24 +1112,24 @@ export DIRSTACKSIZE=20
 
 #{{{                    MARK:Completions
 #**************************************************************
-zcompdate=$(date +'%j' -r ~/.zcompdump 2>/dev/null || stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)
-date=$(date +'%j')
 
-if ((date >= (zcompdate + 7) ));then
-# avoid insecure warning message with -u
 # reload comps if file is stale for 1 week
-    logg 'regenerating stale ~/.zcompdump'
+for dump in ~/.zcompdump(N.mh+168); do
+    logg 'regenerating stale $dump'
+    # avoid insecure warning message with -u
     compinit -u
     zcompile $ZSH_COMPDUMP
-else
+    break
+done
+
 # use .zcompdump
-    compinit -C -u
-    if [[ ${+_comps[z]} == 0 ]]; then
-        logg 'regenerating ~/.zcompdump due to failed compinit'
-        compinit -u
-    else
-        logg 'using cached ~/.zcompdump'
-    fi
+compinit -C -u
+
+if [[ ${+_comps[z]} == 0 ]]; then
+    logg 'regenerating ~/.zcompdump due to failed compinit'
+    compinit -u
+else
+    logg 'using cached ~/.zcompdump'
 fi
 # allow scrolling pager through completion list
 zmodload -i zsh/complist
