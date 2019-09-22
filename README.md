@@ -81,6 +81,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - go
 - fzf
 - gotop
+- lolcat
 - mylg
 - python3
 - powerline-status for vim and tmux
@@ -88,8 +89,6 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - mycli
 - pgcli
 - pygments
-- ruby
-- lolcat
 - perl
 - bash
 

@@ -561,14 +561,6 @@ case "$distroName" in
         ;;
 esac
 
-if [[ "$needSudo" == yes ]]; then
-    prettyPrint "Sudo installing Ruby gem rouge"
-    sudo gem install rouge
-else
-    prettyPrint "Installing Ruby gem rouge"
-    gem install rouge
-fi
-
 prettyPrint "Installing Iftop config..."
 ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
 iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
