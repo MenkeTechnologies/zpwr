@@ -634,18 +634,9 @@ builtin cd ponysay && sudo ./setup.py --freedom=partial install && \
     builtin cd .. && sudo rm -rf ponysay
 }
 
-
-export GOPATH="$HOME/go"
-prettyPrint "Installing mylg"
-go get github.com/mehrdadrad/mylg
-cd "$HOME/go/src/github.com/mehrdadrad/mylg/"
-go build mylg.go
-
-prettyPrint "Installing gotop"
-go get github.com/cjbassi/gotop
-
-prettyPrint "Installing lolcat in go"
-go get github.com/MenkeTechnologies/lolcat
+prettyPrint "Installing Go deps"
+builtin cd "$INSTALLER_DIR" || { echo "where is $INSTALLER_DIR" >&2; exit 1; }
+source "$INSTALLER_DIR/go_install.sh"
 
 test -f /usr/local/sbin/iftop || {
     prettyPrint "No iftop so installing"
