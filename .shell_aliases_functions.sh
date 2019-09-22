@@ -2070,27 +2070,39 @@ regenPowerlineLink(){
 }
 
 goclean() {
- local pkg=$1;
- shift || return 1
- local ost
- local cnt
- local scr
+    if [[ -z "$1" ]]; then
+        echo "need package name" >&2
+        return 1
+    fi
+    local pkg=$1;
+    shift
+    local ost
+    local cnt
 
- # Clean removes object files from package source directories (ignore error)
- go clean -i $pkg &>/dev/null
 
- # Set local variables
- [[ "$(uname -m)" == "x86_64" ]] && ost="$(uname)"
- ost="${ost,,}_amd64" && cnt="${pkg//[^\/]}"
+    # Set local variables
+    if [[ "$(uname -m)" == "x86_64" ]];then 
+        ost="$(uname | tr A-Z a-z)_amd64"
+    fi
 
- # Delete the source directory and compiled package directory(ies)
- if (("${#cnt}" == "2")); then
-  rm -rf "${GOPATH%%:*}/src/${pkg%/*}"
-  rm -rf "${GOPATH%%:*}/pkg/${ost}/${pkg%/*}"
- elif (("${#cnt}" > "2")); then
-  rm -rf "${GOPATH%%:*}/src/${pkg%/*/*}"
-  rm -rf "${GOPATH%%:*}/pkg/${ost}/${pkg%/*/*}"
- fi
+    # Delete the source directory and compiled package directory(ies)
+    local src_dir="$GOPATH/src/$pkg"
+    local bin_dir="$GOPATH/pkg/$ost/$pkg"
+
+    if [[ ! -d "$src_dir" ]]; then
+        echo "$src_dir from $pkg does not exist" >&2
+        return 1
+    fi
+    if [[ ! -d "$bin_dir" ]]; then
+        echo "$bin_dirfrom $pkg does not exist" >&2
+    fi
+    # Clean removes object files from package source directories (ignore error)
+    go clean -i $pkg 2>/dev/null
+
+    echo rm -rf "$src_dir"
+    echo rm -rf "$bin_dir"
+    rm -rf "$src_dir"
+    rm -rf "$bin_dir"
 
 }
 
