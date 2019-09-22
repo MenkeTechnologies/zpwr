@@ -9,9 +9,7 @@
 #}}}***********************************************************
 
 isZsh(){
-    if command ps | tr -s ' ' | \
-        perl -lane 'print $_ if $F[1] =~ /'$$'/' \
-        | command grep -q zsh; then
+    if command ps -p $$ | command grep -q zsh; then
         return 0
     else
         return 1
