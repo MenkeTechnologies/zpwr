@@ -58,20 +58,13 @@ set cindent
 set ttyfast
 "60 ms wait for next key in mappings
 "set timeoutlen=300
-"using powerline status bar instead
-"set statusline+=%F
-"set statusline+=%=
-"set statusline+=Row:\%l
-"set statusline+=/
-"set statusline+=%L
-"set statusline+=\
-"set statusline+=Col:\ %c
 "status bar always shown
 set laststatus=2
 set wrapscan
 set t_Co=256
 set backspace=2
 set encoding=utf8
+"jump to matching brace
 set showmatch
 set showmode
 set hlsearch
@@ -82,7 +75,7 @@ set shiftwidth=4 "indent set to four spaces
 set expandtab
 "wrap lines
 set linebreak
-"line wrap indicator
+"long line soft wrap indicator
 set showbreak=-->
 set number
 set backupdir=~/tmp
@@ -98,7 +91,7 @@ set browsedir=current
 "reduce enter key after message alerts
 set shortmess=a
 
-"show the leader
+"show the leader key when pressed
 set showcmd
 "visual mode automatically copies to system clipboard
 set clipboard=autoselect
