@@ -562,13 +562,9 @@ case "$distroName" in
 esac
 
 if [[ "$needSudo" == yes ]]; then
-    prettyPrint "Installing Ruby gem lolcat"
-    sudo gem install lolcat
-    prettyPrint "Installing Ruby gem rouge"
+    prettyPrint "Sudo installing Ruby gem rouge"
     sudo gem install rouge
 else
-    prettyPrint "Installing Ruby gem lolcat"
-    gem install lolcat
     prettyPrint "Installing Ruby gem rouge"
     gem install rouge
 fi
@@ -647,6 +643,9 @@ go build mylg.go
 
 prettyPrint "Installing gotop"
 go get github.com/cjbassi/gotop
+
+prettyPrint "Installing lolcat in go"
+go get github.com/MenkeTechnologies/lolcat
 
 test -f /usr/local/sbin/iftop || {
     prettyPrint "No iftop so installing"

@@ -78,7 +78,7 @@ CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
 
 #profiling startup
-zmodload zsh/zprof
+#zmodload zsh/zprof
 startTimestamp=$(date +%s)
 
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -2069,4 +2069,4 @@ exists kubectl && source <(kubectl completion zsh)
 
 endTimestamp=$(date +%s)
 logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
-zprof
+#zprof
