@@ -193,7 +193,7 @@ elif [[ "$(uname)" == "Linux" ]];then
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
-    distroName=$(perl -lne 'do{print s/"//,$1;exit0}if/^ID=(.*)/')
+    distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
     case $distroName in
         (debian|raspbian|kali|parrot|zorin)
@@ -1725,19 +1725,19 @@ _fzf_complete_killall() {
 # mvim ;<tab>
 _fzf_complete_mvim() {
   _fzf_complete '-m' "$@" < <(
-     command grep '^>' ~/.viminfo | cut -c3- |sed 's@~@'"$HOME"'@'
+    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if/^>.(.*)/' ~/.viminfo
     )
 }
 # vim ;<tab>
 _fzf_complete_vim() {
   _fzf_complete '-m' "$@" < <(
-     command grep '^>' ~/.viminfo | cut -c3- |sed 's@~@'"$HOME"'@'
+    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if/^>.(.*)/' ~/.viminfo
     )
 }
 # echo $;<tab>
 _fzf_complete_echo() {
   _fzf_complete '-m' "$@" < <(
-      declare -xp | sed 's@=.*@@' | sed 's@.* @@'
+      declare -xp | perl -pe '$_=~s@export\s(.*)(=.*)@$1@'
     )
 }
 # alias ;<tab>
@@ -1749,8 +1749,7 @@ _fzf_complete_alias() {
 # z ;<tab>
 _fzf_complete_z() {
   _fzf_complete '--ansi' "$@" < <(
-    z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
-        | perl -pe 's/$ENV{HOME}/~/'
+    z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if /\d+\.*\d+\s*(.*)/}'
     )
 }
 
@@ -2031,7 +2030,7 @@ learn(){
     if [[ ! -z "$BUFFER" ]]; then
         mywords=("${(z)BUFFER}")
         [[ $mywords[1] == le ]] && return 1
-        learning="$(printf '%s' "${BUFFER}" | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@' | tr '\n' ' '| sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"
+        learning="$(print ${BUFFER} | perl -pe 's@^\s*(.*)\s*$@$1@;s@\n@ @;s@^\s*(.*)\s*$@$1@')"
         BUFFER="le '${learning//'/\''}'"
         zle .accept-line
     else
