@@ -397,7 +397,8 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 elif [[ "$OS_TYPE" == "Linux" ]]; then
 
     addDependenciesLinux
-    distroName=$(perl -lne 'do{print s/"//,$1;exit0}if/^ID=(.*)/')
+    distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
+
 
     warnOverwrite
     warnSudo
