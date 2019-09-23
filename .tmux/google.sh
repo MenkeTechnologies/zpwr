@@ -16,23 +16,23 @@ OSTYPE="$(uname -s | tr 'A-Z' 'a-z')"
 if [[ "$1" == "google" ]]; then
     case "$OSTYPE" in
         darwin*)
-            out="$(pbpaste | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            out="$(pbpaste | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
-                out="$(xclip -o -sel clip | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+                out="$(xclip -o -sel clip | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             else
-                out="$(paste.exe | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+                out="$(paste.exe| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             fi
             ;;
         cygwin*)
-            out="$(paste.exe | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            out="$(paste.exe| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
         msys*)
-            out="$(paste.exe | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            out="$(paste.exe| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
         *)
-            out="$(xclip -o -sel clip | python -c 'from urllib import quote; print quote(raw_input(), safe="")')"
+            out="$(xclip -o -sel clip | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
     esac
 else
@@ -85,10 +85,10 @@ cmd="$(getOpenCommand)"
 
 if [[ "$1" == open ]]; then
     echo "DIRECT open '$cmd' to '$out'"
-    "$cmd" "$out"
+    $cmd "$out"
 elif [[ "$1" == google ]];then
     echo "google search '$cmd' to '$out'"
-    "$cmd" "https://google.com/search?q=$out"
+    $cmd "https://google.com/search?q=$out"
 else
     echo "unsupport subcommand '$1' to '$out'" >&2
 fi
