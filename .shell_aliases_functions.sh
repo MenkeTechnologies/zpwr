@@ -367,7 +367,7 @@ alias ,,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit(0)} if /inet\\s/ and !/127/'"
+alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit0} if /inet\\s/ and !/127/'"
 
 alias pgrep='pgrep -l'
 #**********************************************************************
@@ -583,7 +583,7 @@ urlSafe(){
 cgh(){
     [[ -z "$1" ]] && user="$GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/$user" | \
-    command grep -E '[0-9] contributions' | sed 1q | tr -s ' '
+    command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
 }
 
 upload(){
