@@ -21,11 +21,7 @@
 #{{{                    MARK:Global Fxn
 
 isZsh(){
-    if command ps -p $$ | command grep -q zsh; then
-        return 0
-    else
-        return 1
-    fi
+    perl -e 'exit(1) if ! grep {/zsh/} `ps -p '$$'`'
 }
 
 if isZsh; then
