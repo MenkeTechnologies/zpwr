@@ -327,7 +327,7 @@ else
     
         alias ipt="sudo iptables --line-numbers -L"
         test -z "$distroName" && {
-            distroName=$(command grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
+            distroName=$(perl -lne 'do{print s/"//,$1;exit0}if/^ID=(.*)/')
         }
         case $distroName in
             (raspbian) source "$HOME/.rpitokens.sh"
@@ -705,7 +705,7 @@ clearList() {
             if exists $arg; then
                 #exe matching
                 while read loc;do
-                    lf="$(echo $loc|cut -d' ' -f3-10)"
+                    lf="$(echo $loc | cut -d' ' -f3-10)"
                     if [[ -f "$lf" ]]; then
                         prettyPrint "$lf" && \
                         eval "$ls_command" $lf \
@@ -725,13 +725,12 @@ clearList() {
                         echo "$loc"
                         echo "$loc" | command grep -q \
                             "function" && {
-                            type -f "$(echo "$loc" | \
-                            awk '{print $1}')" | nl -v 0
+                            type -f \
+                        "$(echo "$loc" | awk '{print $1}')" | nl -v 0
                         }
                         echo "$loc" | command grep -q \
                             "alias" && {
-                            alias "$(echo "$loc" \
-                            | awk '{print $1}')"
+                            alias "$(echo "$loc" | awk '{print $1}')"
                         }
                         echo
                         echo
@@ -931,8 +930,8 @@ lineContribCount(){
            fi 
        done
         if [[ $filter = false ]]; then
-    git blame "$REPLY" | cut -d '(' -f2 | \
-    perl -pe 's@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s+\d+:\d+.*\).*$@$1@'
+    git blame "$REPLY" | \
+        perl -F'(' -pe '$_=~s@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s+\d+:\d+.*\).*$@$1@, $F[1]'
         fi
     done < <(git ls-files) 2>/dev/null
 
