@@ -367,7 +367,8 @@ alias ,,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
-alias ipa="command ifconfig | command grep 'inet\s' | command grep -v 127 | awk '{print \$2}' | sed 's@addr:@@' | head -1"
+alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit(0)} if /inet\\s/ and !/127/'"
+
 alias pgrep='pgrep -l'
 #**********************************************************************
 #                           MARK:SHELL SCRIPTS
