@@ -22,14 +22,14 @@ if [[ "$1" == "google" ]]; then
             if [[ "$(uname -r)" != *icrosoft* ]];then
                 out="$(xclip -o -sel clip | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             else
-                out="$(paste.exe| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+                out="$(powershell.exe -c 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             fi
             ;;
         cygwin*)
-            out="$(paste.exe| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            out="$(powershell.exe -c 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
         msys*)
-            out="$(paste.exe| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            out="$(powershell.exe -c 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
         *)
             out="$(xclip -o -sel clip | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
