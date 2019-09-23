@@ -39,7 +39,8 @@ if [[ "$(uname)" == Darwin ]]; then
     fi
 else
     #linux
-    distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
+    distroName=$(perl -lne 'do{print s/"//,$1;exit0}if/^ID=(.*)/')
+
 
     case "$distroName" in
     debian | ubuntu | elementary | raspbian | kali | zorin | parrot)

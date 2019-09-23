@@ -6,7 +6,8 @@ OS_TYPE="$(uname -s)"
 if [[ "$OS_TYPE" == "Darwin" ]]; then
     distroName=Mac
 elif [[ "$OS_TYPE" == "Linux" ]]; then
-    distroName=$(grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \" | head -n 1)
+    distroName=$(perl -lne 'do{print s/"//,$1;exit0}if/^ID=(.*)/')
+
 else
     if [[ "$OS_TYPE" == FreeBSD ]]; then
         distroName=FreeBSD

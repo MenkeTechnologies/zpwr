@@ -13,7 +13,8 @@ if [[ $(uname) == Darwin ]]; then
     tail -f /var/log/**/*.log /var/log/**/*.out | lolcat
 else
     #linux
-    distroName=$(lsb_release -a | head -1 | awk '{print $3}')
+    distroName=$(perl -lne 'do{print s/"//,$1;exit0}if/^ID=(.*)/')
+
 
     if [[ $distroName == Raspbian ]]; then
         tail -f /var/log/**/*.log /var/log/{dmesg,wtmp,debug,lastlog,messages} /var/log/**/*.err | lolcat

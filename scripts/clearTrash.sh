@@ -12,7 +12,8 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #works for RPi
 
-    distroName="$(grep '^ID=' /etc/os-release | cut -d= -f2 | tr -d \")"
+    distroName=$(perl -lne 'do{print s/"//,$1;exit0}if/^ID=(.*)/')
+
 
     case $distroName in
     Raspbian)
