@@ -1705,7 +1705,7 @@ to(){
         perl -i -pe 's@^.*external_ip.*$@@' "$file"
         printf "Removing External IP\n"
     else
-        perl -0 - -pe 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
+        perl -0 -i -pe 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
         printf "Adding External IP\n"
     fi
 }
