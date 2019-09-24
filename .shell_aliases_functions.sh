@@ -2106,6 +2106,38 @@ goclean() {
 
 }
 
+timer() {
+    local count=100
+    if exists gdate;then
+        cmd=gdate
+    else
+        cmd=date
+    fi
+
+    total=0
+    totstart=$($cmd +%s)
+    for local_command in "$@" ; do
+        echo "eval $local_command"
+        for i in {1..$count} ; do
+            start=$($cmd +%s%N)
+            eval "$local_command"
+            #echo $(eval "$1")
+            end=$($cmd +%s%N)
+            runtime=$(((end-start)/1000000.0))
+            ((total += runtime))
+        done
+        avg=$((runtime/(count *1.0)))
+        prettyPrint "$local_command took $runtime ms for $count rounds" >> ~/.temp$$
+        echo
+    done
+    cat ~/.temp$$
+    totend=$($cmd +%s)
+    tot=$((totend-totstart))
+    prettyPrint "total seconds at $tot s."
+    command rm ~/.temp$$
+
+}
+
 
 #}}}***********************************************************
 
