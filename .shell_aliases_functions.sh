@@ -856,10 +856,10 @@ contribCount(){
     lineCount="$(echo $lines | wc -l)"
     prettyPrint "Contribution Count"
     if (( $lineCount > 10 )); then
-        echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint | less -r
     else
-        echo "$lines" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint
     fi
 }
@@ -1702,10 +1702,10 @@ to(){
     file="$HOME/.config/powerline/themes/tmux/default.json"
     [[ ! -f "$file" ]] && echo "no tmux config" >&2 && return 1
     if cat "$file" | grep -q "external_ip"; then
-        perl -pi -E 's@^.*external_ip.*$@@' "$file"
+        perl -i -pe 's@^.*external_ip.*$@@' "$file"
         printf "Removing External IP\n"
     else
-        perl -0pi -E 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
+        perl -0 - -pe 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
         printf "Adding External IP\n"
     fi
 }
@@ -1807,7 +1807,7 @@ c(){
 exists http && ge(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
-    url="$(echo $1 | sed 's#[^/]*//\([^@]*@\)\?\([^:/]*.*\)#\2#')"
+    url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"
     echo $1 | command grep -q https && proto=https|| proto=http
     shift
 
