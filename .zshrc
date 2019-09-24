@@ -473,7 +473,7 @@ lsoffzf(){
 }
 
 fzvim(){
-        perl -lne 'do{($_=$1)=~s@~@/$ENV{HOME}@;print if -f}if/^>.(.*)/' ~/.viminfo | \
+    perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if/^>.(.*)/' ~/.viminfo | \
         fzf -m -e --no-sort --border --prompt='-->>> ' \
         --preview 'file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' | \
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
@@ -494,8 +494,7 @@ vimFzf(){
 }
 
 fzfZList(){
-    z -l |& perl -ne 'print reverse <>' | awk '{print $2}' \
-        | perl -pe 's/$ENV{HOME}/~/' | \
+        z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if /\d+\.*\d+\s*(.*)/}' | \
     fzf -e --no-sort --border --prompt='-->>> ' \
     --preview 'file="$(eval echo {})"; stat "$file" | fold -80 | head -500' | \
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
