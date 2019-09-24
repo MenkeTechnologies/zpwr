@@ -473,8 +473,7 @@ lsoffzf(){
 }
 
 fzvim(){
-    command grep '^>' ~/.viminfo | cut -c3- | \
-        perl -lne '$f=$_;$_=~s/~/$ENV{HOME}/;print $f if -f' | \
+        perl -lne 'do{($_=$1)=~s@~@/$ENV{HOME}@;print if -f}if/^>.(.*)/' ~/.viminfo | \
         fzf -m -e --no-sort --border --prompt='-->>> ' \
         --preview 'file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' | \
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
