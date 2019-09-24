@@ -182,7 +182,7 @@ plugins=(gh_reveal zsh-z zsh-expand zsh-surround \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
-PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print \$8}")"
+PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if /^\d+.*/')"
 
 if [[ "$(uname)" == "Darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
@@ -193,7 +193,7 @@ elif [[ "$(uname)" == "Linux" ]];then
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
-    distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
+    distroName=$(perl -lne 'do{($_=$1)=~s@"@@;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
     case $distroName in
         (debian|raspbian|kali|parrot|zorin)
@@ -578,6 +578,7 @@ fzfVimKeybind(){
     fi
     cat "$VIM_KEYBINDINGS" | fzf
 }
+
 getFound(){
     eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" | \
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
@@ -846,8 +847,7 @@ my-accept-line () {
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             aliases="$(cat $HOME/.common_aliases)"
-            line="$(print -r $aliases | grep "^$mywords[1]=.*")"
-            line="$(print -r $line | awk -F= '{print $2}')"
+            line="$(print -r $aliases | perl -ne 'print $1 if /'$mywords[1]'=(.*)/')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
@@ -913,7 +913,6 @@ bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
 if [[ "$(uname)" == Darwin ]]; then
-    PARENT_PROCESS="$(command ps -ef | awk "\$2 == $PPID{print}" | tr -s ' ' | cut -d ' ' -f9-)"
     if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
