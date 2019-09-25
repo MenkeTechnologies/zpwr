@@ -474,8 +474,7 @@ lsoffzf(){
 
 fzvim(){
     perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if/^>.(.*)/' ~/.viminfo | \
-        fzf -m -e --no-sort --border --prompt='-->>> ' \
-        --preview 'file="$(eval echo {})"; [[ -f "$file" ]] && '"$COLORIZER"' "$file" '"$COLORIZER_NL"' 2>/dev/null || stat "$file" | fold -80 | head -500' | \
+    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" | \
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 vimFzf(){
