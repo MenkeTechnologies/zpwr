@@ -495,8 +495,7 @@ vimFzf(){
 
 fzfZList(){
         z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if /\d+\.*\d+\s*(.*)/}' | \
-    fzf -e --no-sort --border --prompt='-->>> ' \
-    --preview 'file="$(eval echo {})"; stat "$file" | fold -80 | head -500' | \
+    eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS" | \
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }
 
@@ -1691,8 +1690,6 @@ fzf_setup(){
     local __COMMON_FZF_ELEMENTS
     __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
 
-    alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$__TS"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}f=' "$(fzf --reverse --border '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF"' 2>/dev/null || stat -- {} | fold -80 | head -500")"'
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
     export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS --reverse --border --height 100%"
@@ -1708,6 +1705,10 @@ fzf_setup(){
     else
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOpts.sh")'"
     fi
+
+    alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$__TS"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
+    alias -g ${__GLOBAL_ALIAS_PREFIX}f=" \$(fzf $FZF_CTRL_T_OPTS)"
+    alias -g ${__GLOBAL_ALIAS_PREFIX}z=" | fzf $FZF_CTRL_T_OPTS "
 }
 
 fzf_setup
