@@ -1271,7 +1271,7 @@ getOpenCommand(){
         cygwin*)  open_cmd='cygstart' ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
-                open_cmd='nohup xdg-open'
+                open_cmd='nohup xdg-open 1>/dev/null 2>&1'
             else
                 open_cmd='cmd.exe /c start ""'
             fi
