@@ -534,7 +534,7 @@ s(){
         if [[ $sec_cmd == s ]]; then
             test -z "$1" && ${(z)cmd} . || command s "$@"
         else
-            test -z "$1" && ${(z)cmd} . || $sec_cmd "$@"
+            test -z "$1" && ${(z)cmd} . || ${(z)sec_cmd} "$@"
         fi
     else
         if [[ $sec_cmd == s ]]; then
