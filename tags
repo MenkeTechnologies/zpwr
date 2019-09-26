@@ -53,6 +53,8 @@ IFS	saygoogle.sh	/^IFS=+$/;"	v
 IFS	sortedArrayCounter.sh	/^        IFS="$oldifs"$/;"	v
 IFS	sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v
 IFS	sortedArrayCounter.sh	/^IFS=:$/;"	v
+INSTALLER_DIR	common.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
+INSTALLER_DIR	go_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	plugins_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INTERFACE	macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v
@@ -60,6 +62,7 @@ LOGFILE	updaterEmail.sh	/^LOGFILE="\/Users\/jacobmenke\/updaterlog.txt"$/;"	v
 ManParser	mantozshcomp.py	/^class ManParser(object):$/;"	c
 ORGIN_NAME	gitgo.sh	/^    local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"$/;"	v
 OS	test.sh	/^OS="$(uname -s)"$/;"	v
+OS_TYPE	common.sh	/^OS_TYPE="$(uname -s)"$/;"	v
 OS_TYPE	install.sh	/^OS_TYPE="$(uname -s)"$/;"	v
 OS_TYPE	plugins_install.sh	/^OS_TYPE="$(uname -s)"$/;"	v
 Output	macOnly/figletRandomFont.sh	/^    Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"$/;"	v
@@ -124,6 +127,7 @@ address	uploadWebPi.sh	/^address="pi@$MY_IP:\/var\/www\/html"$/;"	v
 allRemotes	about.sh	/^allRemotes() {$/;"	f
 already_output_completions	mantozshcomp.py	/^already_output_completions = {}$/;"	v
 alternatingPrettyPrint	CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
+alternatingPrettyPrint	common.sh	/^alternatingPrettyPrint(){$/;"	f
 alternatingPrettyPrint	pipUpdater.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	rpiSoftwareUpdater.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	updater.sh	/^alternatingPrettyPrint() {$/;"	f
@@ -186,6 +190,7 @@ could_be_description	mantozshcomp.py	/^    def could_be_description(self, line):
 count	uploadWebPi.sh	/^count=0$/;"	v
 count_argument_dashes	mantozshcomp.py	/^    def count_argument_dashes(self, line):$/;"	m	class:TypeDarwinManParser
 counter	CPU_Stresser.sh	/^    counter=0$/;"	v
+counter	common.sh	/^    counter=0$/;"	v
 counter	pipUpdater.sh	/^    counter=0$/;"	v
 counter	rpiSoftwareUpdater.sh	/^    counter=0$/;"	v
 createTemplate	templater.sh	/^createTemplate() {$/;"	f
@@ -280,6 +285,7 @@ executeFileFirstArgIsCommand	runner.sh	/^executeFileFirstArgIsCommand() {$/;"	f
 executeTheFile	runner.sh	/^executeTheFile() {$/;"	f
 exists	CPU_Stresser.sh	/^exists() {$/;"	f
 exists	clearList.sh	/^exists(){$/;"	f
+exists	common.sh	/^exists(){$/;"	f
 exists	fzfPreviewOptsCommon.sh	/^    exists(){$/;"	f
 exists	manzshcompgen.zsh	/^exists(){$/;"	f
 exists	rpiSoftwareUpdater.sh	/^exists() {$/;"	f
@@ -378,6 +384,7 @@ install	tgzLocalInstaller.sh	/^install() {$/;"	f
 installDir	updater.sh	/^            installDir=$(python2 -m pip show "$i" | \\perl -ne 'print $1 if \/^Location: (.*)\/')$/;"	v
 installDir	updater.sh	/^            installDir=$(python3 -m pip show "$i" | \\perl -ne 'print $1 if \/^Location: (.*)\/')$/;"	v
 installDir	updater.sh	/^        installDir=$(npm root -g | head -n 1)$/;"	v
+install_counter	install.sh	/^install_counter=0$/;"	v
 installerDir	macOnly/tutorialConfigUpdater.sh	/^installerDir="$HOME\/Documents\/shellScripts\/$REPO_NAME"$/;"	v
 ip	install.sh	/^ip=$(ifconfig | grep "inet\\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')$/;"	v
 isZsh	fzfPreviewOptsCommon.sh	/^isZsh(){$/;"	f
@@ -464,6 +471,7 @@ myPrettyPrint	gitgo.sh	/^myPrettyPrint() {$/;"	f
 my_backup_dir	backupBashConfig.sh	/^my_backup_dir="$my_scripts_dir\/rcBackups"$/;"	v
 my_home_dir	backupBashConfig.sh	/^my_home_dir="$HOME"$/;"	v
 my_scripts_dir	backupBashConfig.sh	/^my_scripts_dir="$SCRIPTS"$/;"	v
+needSudo	common.sh	/^needSudo(){$/;"	f
 needSudo	install.sh	/^        needSudo=no$/;"	v
 needSudo	install.sh	/^        needSudo=yes$/;"	v
 needSudo	updater.sh	/^                needSudo=no$/;"	v
@@ -543,6 +551,7 @@ passes	secureDelete.sh	/^passes=7     # Number of file-shredding passes.$/;"	v
 path	mantozshcomp.py	/^import os.path$/;"	i
 path	shebangChanger.sh	/^path="#!\/usr\/bin\/env $executableProgram"$/;"	v
 perlOutdated	updater.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v
+perlfile	common.sh	/^    perlfile="$INSTALLER_DIR\/scripts\/boxPrint.pl"$/;"	v
 perlscript	autoUpdater.sh	/^    perlscript=$($/;"	v
 pid	fsWatchLongRunning.sh	/^            pid=$!$/;"	v
 pid	fsWatchLongRunning.sh	/^        pid=$!$/;"	v
@@ -554,14 +563,17 @@ prch	mantozshcomp.py	/^    def prch(self, idx):$/;"	m	class:Deroffer
 prettyPrint	CPU_Stresser.sh	/^prettyPrint() {$/;"	f
 prettyPrint	clearList.sh	/^prettyPrint(){$/;"	f
 prettyPrint	colorLogger.sh	/^prettyPrint() {$/;"	f
+prettyPrint	common.sh	/^prettyPrint(){$/;"	f
 prettyPrint	macOnly/resetWIFI.sh	/^prettyPrint() {$/;"	f
 prettyPrint	macOnly/tor.sh	/^prettyPrint() {$/;"	f
 prettyPrint	macOnly/tutorialConfigUpdater.sh	/^prettyPrint() {$/;"	f
 prettyPrint	rpiSoftwareUpdater.sh	/^prettyPrint() {$/;"	f
 prettyPrint	textmessage.sh	/^prettyPrint() {$/;"	f
 prettyPrint	updater.sh	/^prettyPrint() {$/;"	f
+prettyPrintStdin	common.sh	/^prettyPrintStdin(){$/;"	f
 printD	banner.pl	/^sub printD {$/;"	s
 printDate	banner.pl	/^sub printDate {$/;"	s
+proceed	common.sh	/^proceed(){$/;"	f
 progress_pid	batchRename.sh	/^    progress_pid=$!$/;"	v
 progress_pid	openAll.sh	/^    progress_pid=$!$/;"	v
 progress_pid	picture_finder.sh	/^    progress_pid=$!$/;"	v
@@ -683,6 +695,8 @@ total	uploadWebPi.sh	/^total=$#$/;"	v
 traceback	mantozshcomp.py	/^import traceback$/;"	i
 transferFile	transfer.sh	/^transferFile="$1"$/;"	v
 trim_groff	mantozshcomp.py	/^    def trim_groff(self, line):$/;"	m	class:TypeDarwinManParser
+turnOffDebugging	common.sh	/^turnOffDebugging(){$/;"	f
+turnOnDebugging	common.sh	/^turnOnDebugging(){$/;"	f
 tutorialDir	macOnly/tutorialConfigUpdater.sh	/^tutorialDir="$HOME\/Documents\/tutorialsRepo"$/;"	v
 unquote_double_quotes	mantozshcomp.py	/^def unquote_double_quotes(data):$/;"	f
 unquote_single_quotes	mantozshcomp.py	/^def unquote_single_quotes(data):$/;"	f

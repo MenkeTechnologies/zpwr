@@ -8,9 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 INSTALLER_DIR="$(pwd -P)"
-
 
 export GOPATH="$HOME/go"
 

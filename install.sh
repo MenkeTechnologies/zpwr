@@ -15,6 +15,8 @@ OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
+install_counter=0
+
 export COLUMNS="$(tput cols)"
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 
