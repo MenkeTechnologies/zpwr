@@ -53,8 +53,6 @@ proceed(){
     esac
 }
 
-install_counter=0
-
 prettyPrintStdin(){
     perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
