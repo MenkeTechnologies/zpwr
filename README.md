@@ -415,7 +415,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bind-key    -T prefix       o                 select-pane -t :.+```
 - ```bind-key -r -T prefix       p                 previous-window```
 - ```bind-key    -T prefix       q                 display-panes -d 5000```
-- ```bind-key    -T prefix       r                 source-file /Users/wizard/.tmux.conf ; display-message Reloaded!```
+- ```bind-key    -T prefix       r                 source-file /Users/wizard/.tmux.conf ; display-message "Tmux Reloaded!"```
 - ```bind-key    -T prefix       s                 choose-tree -Zs```
 - ```bind-key    -T prefix       t                 clock-mode```
 - ```bind-key    -T prefix       w                 choose-tree -Z```
