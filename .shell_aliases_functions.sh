@@ -533,13 +533,13 @@ s(){
     if isZsh; then
         if [[ $sec_cmd == s ]]; then
             {
-                test -z "$1" && ${(z)cmd} . || command s "$@"
+                test -z "$1" && ${=cmd} . || command s "$@"
             } &>/dev/null
         else
             {
             out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             url="https://google.com/search?q=$out"
-                ${(z)sec_cmd} $url
+                ${=sec_cmd} $url
             } &>/dev/null
         fi
     else
@@ -1299,9 +1299,9 @@ o(){
 
     if isZsh; then
         if [[ -z "$1" ]]; then
-            ${(z)open_cmd} . &> /dev/null
+            ${=open_cmd} . &> /dev/null
         else
-            ${(z)open_cmd} "$@" &> /dev/null
+            ${=open_cmd} "$@" &> /dev/null
         fi
     else
         if [[ -z "$1" ]]; then
@@ -1318,9 +1318,9 @@ openmygh(){
 
     if isZsh; then
         if [[ -n "$1" ]]; then
-            ${(z)open_cmd} "https://github.com/$1"
+            ${=open_cmd} "https://github.com/$1"
         else
-            ${(z)open_cmd} "https://github.com/$GITHUB_ACCOUNT"
+            ${=open_cmd} "https://github.com/$GITHUB_ACCOUNT"
         fi
     else
         if [[ -n "$1" ]]; then
