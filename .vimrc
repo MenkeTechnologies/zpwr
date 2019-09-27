@@ -1208,7 +1208,7 @@ command! FZFMaps call fzf#run({
 
 let fzfStrOrig="--preview 'file={}; file=$(echo $file | sed 's@~@".$HOME."@'); test -f $file && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $file || stat $file'"
 
-let fzfStrFinal="--preview '".system("bash $SCRIPTS/fzfPreviewOptsCtrlT.sh")."'"
+let fzfStrFinal=$FZF_CTRL_T_OPTS
 
 "give :History preview window
 command! -bang -nargs=* History call fzf#vim#history({'options': fzfStrFinal})
