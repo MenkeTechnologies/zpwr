@@ -537,14 +537,18 @@ s(){
             } &>/dev/null
         else
             {
-                test -z "$1" && ${(z)cmd} . || ${(z)sec_cmd} "$@"
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            url="https://google.com/search?q=$out"
+                ${(z)sec_ccmd} $out
             } &>/dev/null
         fi
     else
         if [[ $sec_cmd == s ]]; then
             test -z "$1" && $cmd . || command s "$@"
         else
-            test -z "$1" && $cmd . || $sec_cmd "$@"
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            url="https://google.com/search?q=$out"
+            $sec_cmd $url
         fi
     fi
 }
