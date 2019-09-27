@@ -940,7 +940,7 @@ lineContribCount(){
         isbinary "$REPLY" && continue
         filter=false
         for arg in "$@"; do
-           if echo "$REPLY" | grep -q "$arg"; then
+           if echo "$REPLY" | command grep -q "$arg"; then
                filter=true
                break
            fi 
@@ -963,10 +963,10 @@ lineContribCount(){
     prettyPrint "Line Contribution Count"
     lineCount="$(cat "$temp" | wc -l)"
     if (( $lineCount > 10 )); then
-        cat "$temp" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        cat "$temp" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint | less -r
     else
-        cat "$temp" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        cat "$temp" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint
     fi
     command rm "$temp"
