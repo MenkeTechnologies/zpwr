@@ -65,7 +65,7 @@ case $verb in
         ;;
     update) cmd="getrc" #update zpwr custom configs
         ;;
-    updateall) cmd="getrc;apz" #update zpwr custom configs and deps
+    updateall) cmd="apz;getrc" #update zpwr custom configs and deps
         ;;
     search) cmd="s" #search google for args
         ;;
