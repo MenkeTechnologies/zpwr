@@ -539,7 +539,7 @@ s(){
             {
             out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             url="https://google.com/search?q=$out"
-                ${(z)sec_ccmd} $out
+                ${(z)sec_cmd} $out
             } &>/dev/null
         fi
     else
