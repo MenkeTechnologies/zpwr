@@ -532,9 +532,13 @@ s(){
     type -a s | command grep -qv function && sec_cmd=s || sec_cmd="$cmd"
     if isZsh; then
         if [[ $sec_cmd == s ]]; then
-            test -z "$1" && ${(z)cmd} . || command s "$@"
+            {
+                test -z "$1" && ${(z)cmd} . || command s "$@"
+            } &>/dev/null
         else
-            test -z "$1" && ${(z)cmd} . || ${(z)sec_cmd} "$@"
+            {
+                test -z "$1" && ${(z)cmd} . || ${(z)sec_cmd} "$@"
+            } &>/dev/null
         fi
     else
         if [[ $sec_cmd == s ]]; then
@@ -1271,7 +1275,7 @@ getOpenCommand(){
         cygwin*)  open_cmd='cygstart' ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
-                open_cmd='nohup xdg-open 1>/dev/null 2>&1'
+                open_cmd='nohup xdg-open'
             else
                 open_cmd='cmd.exe /c start ""'
             fi
@@ -1291,9 +1295,9 @@ o(){
 
     if isZsh; then
         if [[ -z "$1" ]]; then
-            ${(z)open_cmd} .
+            ${(z)open_cmd} . &> /dev/null
         else
-            ${(z)open_cmd} "$@"
+            ${(z)open_cmd} "$@" &> /dev/null
         fi
     else
         if [[ -z "$1" ]]; then
