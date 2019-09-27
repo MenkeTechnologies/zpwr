@@ -162,12 +162,14 @@ esac
 if [[ "$cmd" == "bad$$" ]]; then
     prettyPrint "Unknown subcommand: '$verb'"
 else
-    if alias $cmd 1>/dev/null 2>&1;then
-        prettyPrint "Eval subcommand '$cmd'"
-        eval "$cmd"
-    else
-        prettyPrint "Exec subcommand '$cmd'"
-        ${(z)cmd} $@
-    fi
+    for exp in ${(s%;%)cmd}; do
+        if alias $cmd 1>/dev/null 2>&1;then
+            prettyPrint "Eval subcommand '$cmd'"
+            eval "$cmd"
+        else
+            prettyPrint "Exec subcommand '$cmd'"
+            ${=cmd} $@
+        fi
+    done
 fi
 
