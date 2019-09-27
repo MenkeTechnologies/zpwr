@@ -163,12 +163,12 @@ if [[ "$cmd" == "bad$$" ]]; then
     prettyPrint "Unknown subcommand: '$verb'"
 else
     for exp in ${(s%;%)cmd}; do
-        if alias $cmd 1>/dev/null 2>&1;then
-            prettyPrint "Eval subcommand '$cmd'"
-            eval "$cmd"
+        if alias $exp 1>/dev/null 2>&1;then
+            prettyPrint "Eval subcommand '$exp'"
+            eval "$exp"
         else
-            prettyPrint "Exec subcommand '$cmd'"
-            ${=cmd} $@
+            prettyPrint "Exec subcommand '$exp'"
+            ${=exp} $@
         fi
     done
 fi
