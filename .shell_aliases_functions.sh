@@ -528,8 +528,16 @@ cloneToForked(){
 
 s(){
 
-    exists subl && cmd=subl || cmd="$(getOpenCommand)"
-    type -a s | command grep -qv function && sec_cmd=s || sec_cmd="$cmd"
+    if exists subl; then
+        cmd=subl
+    else
+        cmd="$(getOpenCommand)"
+    fi
+    if type -a s | command grep -qv function; then
+        sec_cmd=s
+    else
+        sec_cmd="$(getOpenCommand)"
+    fi
     if isZsh; then
         if [[ $sec_cmd == s ]]; then
             {
