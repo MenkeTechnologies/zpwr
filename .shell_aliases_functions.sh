@@ -946,7 +946,7 @@ lineContribCount(){
            fi 
        done
         if [[ $filter = false ]]; then
-            git blame "$REPLY" | perl -lne 'do{($_=$1)=~s@^\s+|\s+$@@g; $_=~s@\s+@ @g;print} if/^[0-9a-f]+\s\((.*)\s\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s.*\d\)\s.*$/'
+            git blame "$REPLY" | perl -lne 'do{($_=$1)=~s@^\s+|\s+$@@g; $_=~s@\s+@ @g;print} if/^[0-9a-f^]+\s\((.*)\s\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s.*\d\)\s.*$/'
         fi
     done < <(git ls-files) 2>/dev/null
 
