@@ -57,18 +57,17 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - learn.service = systemd service that runs learning collection API
 
 ## Dependencies
-- oh-my-zsh with 63 standard plugins and 16 custom plugins
+- oh-my-zsh with 63 plugins of which 16 are custom
 - zsh
 - Powerlevel9k zsh prompt with ~dirs
 - tmux
-- vim 8.1 with over 74 plugins and python3 support
+- vim 8.1 with 74 plugins and python3 support
 - youcompleteme
 - ultisnips
 - supertab
 - pathogen
 - vundle
 - iftop-color
-- mtr
 - htop
 - ccze
 - rust/cargo
