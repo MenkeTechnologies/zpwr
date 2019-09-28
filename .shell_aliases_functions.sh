@@ -946,12 +946,11 @@ lineContribCount(){
            fi 
        done
         if [[ $filter = false ]]; then
-    git blame "$REPLY" | \
-        perl -F'(' -pe '$_=~s@^(.*\S)\s+\d{4}-\d{2}-\d{2}\s+\d+:\d+.*\).*$@$1@, $F[1]'
+            git blame "$REPLY" | perl -lne 'print $1 if/^[0-9a-f]+\s\((.*)\s\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s.*\d\)\s.*$/'
         fi
     done < <(git ls-files) 2>/dev/null
 
-    } | sort | uniq -c | sort -r > "$temp"
+    } > "$temp"
 
     if ! test -f "$temp"; then
         printf "\x1b[0;1;31m"
@@ -963,10 +962,12 @@ lineContribCount(){
     prettyPrint "Line Contribution Count"
     lineCount="$(cat "$temp" | wc -l)"
     if (( $lineCount > 10 )); then
-        cat "$temp" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        cat "$temp" | sort | uniq -c | sort -r | \
+        perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint | less -r
     else
-        cat "$temp" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        cat "$temp" | sort | uniq -c | sort -r | \
+        perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
             alternatingPrettyPrint
     fi
     command rm "$temp"
