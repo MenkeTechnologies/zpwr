@@ -1254,6 +1254,10 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:manuals.1p' list-colors '=(#b)(*)=1;30=37;46'
     zstyle ':completion:*:manuals.3p' list-colors '=(#b)(*)=1;30=37;46'
 
+    #pgrep and kill
+    zstyle ':completion:*:processes' list-colors '=(#b)(*)=1;30=1;36;44'
+    zstyle ':completion:*:processes-names' list-colors '=(#b)(*)=1;30=1;37;43'
+
    #separate colors for git commans types
     zstyle ':completion:*:main-porcelain-commands' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:user-commands' list-colors '=(#b)(*)=1;30=1;37;42'
