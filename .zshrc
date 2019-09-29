@@ -583,7 +583,7 @@ getFound(){
 }
 
 locateFzf(){
-    local found
+    local found firstArg
     mywords=(${(z)BUFFER})
     if (( $#mywords == 0 )); then
         found="$(getFound)"
@@ -592,9 +592,9 @@ locateFzf(){
             zle .kill-whole-line
             return 0
         fi
-
-        if [[ -d "$found" ]]; then
-            BUFFER="cd $found"
+        firstArg="${${(Az)found}[1]//\"/}"
+        if [[ -d "$firstArg" ]]; then
+            BUFFER="cd $firstArg; c $found"
         else
             BUFFER="c $found"
         fi
