@@ -22,8 +22,6 @@ exists bat || {
     "$HOME/.cargo/bin/rustup" update
     prettyPrint "Installing Bat (cat replacement) with Cargo"
     "$HOME/.cargo/bin/cargo" install bat
-    prettyPrint "Installing Fd (find replacement) with Cargo"
-    "$HOME/.cargo/bin/cargo" install fd-find
 }
 
 exists fd-find || {
@@ -60,5 +58,3 @@ prettyPrint "Updating rustup"
 "$HOME/.cargo/bin/rustup" update
 prettyPrint "Installing cargo-update with Cargo"
 "$HOME/.cargo/bin/cargo" install cargo-update
-
-

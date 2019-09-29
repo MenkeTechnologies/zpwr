@@ -57,6 +57,7 @@ INSTALLER_DIR	common.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	go_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	plugins_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
+INSTALLER_DIR	rustupinstall.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INTERFACE	macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v
 LOGFILE	updaterEmail.sh	/^LOGFILE="\/Users\/jacobmenke\/updaterlog.txt"$/;"	v
 ManParser	mantozshcomp.py	/^class ManParser(object):$/;"	c
