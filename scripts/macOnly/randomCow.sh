@@ -9,31 +9,19 @@
 
 (($# == 0)) && echo "need an arg " >&2 && exit 1
 
-COWSAY_DIR=/usr/local/lib/node_modules/cowsay/cows
+declare -a COW_FILES
+COW_FILES=($(cowsay -l | perl -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))
 
 width=$1
 FILTER="$2"
 
-if [[ -d "$COWSAY_DIR" ]]; then
-    for file in $(find "$COWSAY_DIR" -iname "*.cow"); do
-        ary+=($file)
-    done
+rangePossibleIndices=${#COW_FILES[@]}
 
-    rangePossibleIndices=${#ary[*]}
+randIndex=$((RANDOM % rangePossibleIndices))
+font=${COW_FILES[$randIndex]}
 
-    randIndex=$(($RANDOM % $rangePossibleIndices))
-    font=${ary[$randIndex]}
-
-    if (($# == 1)); then
-        cat | /usr/local/lib/node_modules/cowsay/cli.js -f "$font" -W$width
-    elif (($# == 2)); then
-        cat | /usr/local/lib/node_modules/cowsay/cli.js -f "$font" -W$width | "$FILTER"
-    fi
-else
-    if (($# == 1)); then
-        cat | cowsay -W$width
-    elif (($# == 2)); then
-        cat | cowsay -W$width | "$FILTER"
-    fi
-
+if (($# == 1)); then
+    cat | cowsay -f "$font" -W$width
+elif (($# == 2)); then
+    cat | cowsay -f "$font" -W$width | "$FILTER"
 fi
