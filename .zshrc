@@ -1801,15 +1801,27 @@ _cl(){
         #need to escape [ for g[ in PATH, compadd -Q does this
 }
 
+_p(){
+    _alternative \
+    'process-names:processes:_pgrep' \
+    'processes:pids:_pids'
+}
+
+local zcmd
+exists zshz && zcmd=zshz || zcmd=_z
+
 _f(){
+    local cmd
     _alternative \
     'files:directory:_path_files -g "*(-D/)"' \
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -ne 'print reverse <>' | awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
     'directory-stack:directory stack:_directory_stack' \
 }
 
 _c(){
-    arguments=('*:files:_path_files -g "*(D^/) *(DF)"')
-    _arguments -s $arguments
+    _alternative \
+    'files:files:_path_files -g "*(D^/) *(DF)"' \
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -ne 'print reverse <>' | awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
 }
 
 _ssd(){
@@ -1868,6 +1880,7 @@ zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 compdef _cl clearList
 compdef _f f
 compdef _c c
+compdef _p p
 compdef _ssd ssd
 compdef _ssu ssu
 compdef _zpwr zpwr

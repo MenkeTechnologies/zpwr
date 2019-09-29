@@ -190,6 +190,7 @@ alias ca='cat -n'
 alias sa='sudo cat -n'
 alias ra='sudo rm -rf'
 alias gil='vim .git/info/exclude'
+alias glu='git pull upstream'
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
