@@ -2027,7 +2027,7 @@ learn(){
     if [[ ! -z "$BUFFER" ]]; then
         mywords=("${(z)BUFFER}")
         [[ "${mywords[1]}" == le ]] && return 1
-    learning="$(print "$BUFFER" | perl -pe 's@\n@ @;s@^\s+|\s+$@@g')"
+    learning="$(print "$BUFFER" | perl -pe 's@\n@ @g;s@^\s+|\s+$@@g')"
         BUFFER="le '${learning//'/\''}'"
         zle .accept-line
     else
