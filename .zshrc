@@ -2026,8 +2026,8 @@ export KEYTIMEOUT=1
 learn(){
     if [[ ! -z "$BUFFER" ]]; then
         mywords=("${(z)BUFFER}")
-        [[ $mywords[1] == le ]] && return 1
-        learning="$(print ${BUFFER} | perl -pe 's@^\s*(.*)\s*$@$1@;s@\n@ @;s@^\s*(.*)\s*$@$1@')"
+        [[ "${mywords[1]}" == le ]] && return 1
+    learning="$(print "$BUFFER" | perl -pe 's@\n@ @;s@^\s+|\s+$@@g')"
         BUFFER="le '${learning//'/\''}'"
         zle .accept-line
     else
