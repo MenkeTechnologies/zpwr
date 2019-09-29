@@ -1793,7 +1793,7 @@ c(){
             exists $colorizer && {
                 echo | $colorizer &>/dev/null && {
                     for file in "$@";do
-                        if [[ ! -d "$file" && -s "$file" ]]; then
+                        if [[ -s "$file" ]]; then
                             if (( $# > 1)); then
                                 printf "\x1b[34;1;4m$file\x1b[0m\n"
                             fi
@@ -1808,7 +1808,7 @@ c(){
         exists $colorizer && {
             echo | $colorizer &>/dev/null && {
                 for file in "$@";do
-                    if [[ ! -d "$file" && -s "$file" ]]; then
+                    if [[ -s "$file" ]]; then
                         if (( $# > 1)); then
                             printf "\x1b[34;1;4m$file\x1b[0m\n"
                         fi
