@@ -933,7 +933,7 @@ inoremap <silent> <C-D>d <C-O>:Commands<CR>
 inoremap <silent> <C-D>e <C-O>:ALEInfo<CR>
 inoremap <silent> <C-D>f <C-O>:Files<CR>
 inoremap <silent> <C-D>g <C-O>:Commits!<CR>
-inoremap <silent> <C-D>h <C-O>:History<CR>
+inoremap <silent> <C-D>h <C-O>:HistoryFiles<CR>
 inoremap <silent> <C-D>i <C-O>:Imap<CR>
 inoremap <silent> <C-D>j <C-O>:Agg<CR>
 inoremap <silent> <C-D>k <C-O>:ALEFix<CR>
@@ -966,7 +966,7 @@ nnoremap <silent> <C-D>d :Commands<CR>
 nnoremap <silent> <C-D>e :ALEInfo<CR>
 nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <C-D>g :Commits!<CR>
-nnoremap <silent> <C-D>h :History<CR>
+nnoremap <silent> <C-D>h :HistoryFiles<CR>
 nnoremap <silent> <C-D>i :Imap<CR>
 nnoremap <silent> <C-D>j :Agg<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
@@ -1211,7 +1211,7 @@ let fzfStrOrig="--preview 'file={}; file=$(echo $file | sed 's@~@".$HOME."@'); t
 let fzfStrFinal=$FZF_CTRL_T_OPTS
 
 "give :History preview window
-command! -bang -nargs=* History call fzf#vim#history({'options': fzfStrFinal})
+command! -bang -nargs=* HistoryFiles call fzf#vim#history({'options': fzfStrFinal})
 
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': fzfStrFinal}))
