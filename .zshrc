@@ -1818,14 +1818,14 @@ _f(){
     local cmd
     _alternative \
     'files:directory:_path_files -g "*(-D/)"' \
-    'zdir:z ranked directories:(('"$($zcmd -l |& perl -ne 'print reverse <>' | awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
     'directory-stack:directory stack:_directory_stack' \
 }
 
 _c(){
     _alternative \
     'files:files:_path_files -g "*(D^/) *(DF)"' \
-    'zdir:z ranked directories:(('"$($zcmd -l |& perl -ne 'print reverse <>' | awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
 }
 
 _ssd(){
