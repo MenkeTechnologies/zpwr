@@ -17,7 +17,6 @@ isZsh(){
 }
 
 
-
 if isZsh; then
     exists(){
         #alternative is command -v
@@ -37,6 +36,15 @@ fi
 exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
 exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
+os="$(uname -s)"
+if echo "$os" | grep -iq darwin; then
+    nmcmd="nm"
+elif echo "$os" | grep -iq linux; then
+    nmcmd="nm -D"
+else
+    nmcmd="nm"
+fi
+
 
 cat<<EOF
 test -z \$file && file=\$(echo {} | sed "s@^~@$HOME@");
@@ -50,5 +58,9 @@ if test -f \$file;then
     elif print -r -- \$file | command egrep -iq "\\.(bzip2|bz2)\$";then bzip2 -c -d \$file | $COLORIZER_FZF_YAML;
     elif print -r -- \$file | command egrep -iq "\\.(xzip|xz)\$";then xz -c -d \$file | $COLORIZER_FZF_YAML;
     elif print -r -- \$file | command egrep -iq "\\.(gzip|gz)\$";then gzip -c -d \$file | $COLORIZER_FZF_YAML;
+    elif print -r -- \$file | command egrep -iq "\\.(so|dylib).*\$";then
+        "$SCRIPTS/clearList.sh" -- \$file | fold -80 | head -500; 
+            test -x \$file && $nmcmd \$file | $COLORIZER_FZF_YAML
+            xxd \$file | $COLORIZER_FZF_YAML
     else
 EOF
