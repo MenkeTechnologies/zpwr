@@ -60,7 +60,7 @@ if test -f \$file;then
     elif print -r -- \$file | command egrep -iq "\\.(gzip|gz)\$";then gzip -c -d \$file | $COLORIZER_FZF_YAML;
     elif print -r -- \$file | command egrep -iq "\\.(so|dylib).*\$";then
         "$SCRIPTS/clearList.sh" -- \$file | fold -80 | head -500; 
-            test -x \$file && $nmcmd \$file | $COLORIZER_FZF_YAML
+            $nmcmd \$file | $COLORIZER_FZF_YAML
             xxd \$file | $COLORIZER_FZF_YAML
     else
 EOF
