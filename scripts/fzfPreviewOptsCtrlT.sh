@@ -13,7 +13,7 @@ isZsh && ps='$pipestatus[1]' || ps='${PIPESTATUS[0]}'
 
 cat<<EOF
         if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
-            "$SCRIPTS/clearList.sh" -- \$file | fold -80 | head -500;
+            "$SCRIPTS/clearList.sh" -- \$file | fold -80 | head -500; 
             test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
             xxd \$file | $COLORIZER_FZF_YAML
         else
