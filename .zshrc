@@ -472,6 +472,27 @@ lsoffzf(){
     LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"
 }
 
+
+#new envar for fzf search
+#cache autoload +X functions,aliases, builtins,reswords into file
+# mod FZF_DEFAULT_OPTS for funcs read from cache file
+clearListFZF(){
+    {
+        print -l ${(k)functions}
+        print -l ${(v)commands}
+        print -l ${(k)aliases}
+        print -l ${(k)galiases}
+        print -l ${(k)builtins}
+        print -l ${(k)reswords}
+        ls -d *
+    } | \
+    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS"
+}
+
+#man page (zman) viewer into fzf with right preview pane grep -C 5
+#coompdef zman _man
+# try on zshall
+
 fzvim(){
     perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if/^>.(.*)/' ~/.viminfo | \
     eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" | \
@@ -496,6 +517,11 @@ fzfZList(){
         z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if /\d+\.*\d+\s*(.*)/}' | \
     eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS" | \
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
+}
+
+fzfMan(){
+   FZF_MAN_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfMan.sh" "$1")'"
+    man "$1" | col -b | eval "fzf --no-sort -m $FZF_MAN_OPTS"
 }
 
 zFZF(){
@@ -1296,7 +1322,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle -e ':completion:*:directories' list-colors "$COMMON_ZSTYLE_OPTS"
     zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
 
-    zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,@3-]#)*=1;32=1;31=34=1;31=34'
+    zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,:?@#-]##) #([<)(>]#) #([a-zA-Z0-9+?.,@3-]#)*=1;32=1;31=34=1;31=34'
 fi
 zstyle ':completion:*:killall:*' command 'ps -o command'
 
@@ -1704,6 +1730,7 @@ fzf_setup(){
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
+
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")'"
     else
@@ -1720,7 +1747,7 @@ fzf_setup
 # killall ;<tab>
 _fzf_complete_killall() {
   _fzf_complete '-m' "$@" < <(
-    command ps -e -o command
+    command ps -e -o command | sed -n '2,$p'
     )
 }
 
@@ -1752,6 +1779,21 @@ _fzf_complete_alias() {
 _fzf_complete_z() {
   _fzf_complete '--ansi' "$@" < <(
     z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if /\d+\.*\d+\s*(.*)/}'
+    )
+}
+
+# clearList ;<tab>
+_fzf_complete_clearList() {
+  _fzf_complete '-m' "$@" < <(
+       {
+        print -l ${(k)functions}
+        print -l ${(v)commands}
+        print -l ${(k)aliases}
+        print -l ${(k)galiases}
+        print -l ${(k)builtins}
+        print -l ${(k)reswords}
+        ls -d *
+        }
     )
 }
 
