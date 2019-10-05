@@ -23,6 +23,8 @@ case $verb in
         ;;
     return2) cmd="return2" #turn off stderr filter
         ;;
+    man) cmd="fm" #fzf through man pages
+        ;;
     backup) cmd="backup" #backup files
         ;;
     regen) cmd="regenAll" #regen all caches
@@ -150,6 +152,8 @@ case $verb in
     zp) cmd="zp" #cd to $REPO_NAME
         ;;
     recompile) cmd="recompile" #recompile all cache comps
+        ;;
+    envsearch) cmd="fzfEnv" #search all aliases, parameters, builtins, keywords and functions
         ;;
     zshsearch) cmd="zshrcsearch" #search zshrc for arg
         ;;
