@@ -12,7 +12,6 @@ cmd="$1"
 log=/Users/wizard/updaterlog.txt
 cat<<EOF
 line=\$(echo {} | perl -lane "do{\\\$_=~s@^\\\s+|\\\s+\\\$@@g;print}");
-echo "we got _\${line}_" >> $log
 if test -z \$line; then
     man $1 | col -b | nl -b a
 else

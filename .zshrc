@@ -182,7 +182,7 @@ plugins=(gh_reveal zsh-z zsh-expand zsh-surround \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
-PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if /^\s*\d+.*/')"
+PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 
 if [[ "$(uname)" == "Darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
@@ -193,7 +193,7 @@ elif [[ "$(uname)" == "Linux" ]];then
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
         && plugins+=(tmux)
     plugins+=(systemd)
-    distroName=$(perl -lne 'do{($_=$1)=~s@"@@;print;exit0}if/^ID=(.*)/' /etc/os-release)
+    distroName=$(perl -lne 'do{($_=$1)=~s@"@@;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 
     case $distroName in
         (debian|raspbian|kali|parrot|zorin)
@@ -494,7 +494,7 @@ clearListFZF(){
 # try on zshall
 
 fzvim(){
-    perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if/^>.(.*)/' ~/.viminfo | \
+    perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' ~/.viminfo | \
     eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" | \
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
@@ -514,12 +514,12 @@ vimFzf(){
 }
 
 fzfZList(){
-        z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if /\d+\.*\d+\s*(.*)/}' | \
+        z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if m{\d+\.*\d+\s*(.*)}}' | \
     eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS" | \
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }
 
-fzfMan(){
+fm(){
    FZF_MAN_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfMan.sh" "$1")'"
     man "$1" | col -b | eval "fzf --no-sort -m $FZF_MAN_OPTS"
 }
@@ -573,10 +573,18 @@ regenZshCompCache(){
     compinit -u
 }
 
+export ALL_ENV="$HOME/allEnv"
+
+regenSearchEnv(){
+    logg "regenerating all env into $ALL_ENV"
+    source "$SCRIPTS/zshRegenSearchableEnv.zsh" "$ALL_ENV"
+}
+
 regenAll(){
     regenZshCompCache
     regenAllKeybindingsCache
     regenPowerlineLink
+    regenSearchEnv
 }
 
 deleteLastWord(){
@@ -588,6 +596,23 @@ deleteLastWord(){
     fi
 }
 
+export FZF_ENV_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
+
+fzfEnv(){
+    if [[ ! -s "${ALL_ENV}Key.txt" ]]; then
+        logg "regenerating keys for $ALL_ENV"
+        regenSearchEnv
+    fi
+    if [[ ! -s "${ALL_ENV}Value.txt" ]]; then
+        logg "regenerating values for $ALL_ENV"
+        regenSearchEnv
+    fi
+
+    cat "${ALL_ENV}Key.txt" | awk '{print $2}' | \
+    eval "fzf -m --border $FZF_ENV_OPTS"
+
+}
+
 fzfAllKeybind(){
     if [[ ! -s "$ALL_KEYBINDINGS" ]]; then
         logg "regenerating $ALL_KEYBINDINGS"
@@ -595,6 +620,7 @@ fzfAllKeybind(){
     fi
     cat "$ALL_KEYBINDINGS" | fzf
 }
+
 fzfVimKeybind(){
     if [[ ! -s "$VIM_KEYBINDINGS" ]]; then
         logg "regenerating $VIM_KEYBINDINGS"
@@ -871,7 +897,7 @@ my-accept-line () {
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             aliases="$(cat $HOME/.common_aliases)"
-            line="$(print -r $aliases | perl -ne 'print $1 if /'$mywords[1]'=(.*)/')"
+            line="$(print -r $aliases | perl -ne 'print $1 if m{'$mywords[1]'=(.*)}')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
@@ -1754,13 +1780,13 @@ _fzf_complete_killall() {
 # mvim ;<tab>
 _fzf_complete_mvim() {
   _fzf_complete '-m' "$@" < <(
-    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if/^>.(.*)/' ~/.viminfo
+    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
     )
 }
 # vim ;<tab>
 _fzf_complete_vim() {
   _fzf_complete '-m' "$@" < <(
-    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if/^>.(.*)/' ~/.viminfo
+    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
     )
 }
 # echo $;<tab>
@@ -1778,7 +1804,7 @@ _fzf_complete_alias() {
 # z ;<tab>
 _fzf_complete_z() {
   _fzf_complete '--ansi' "$@" < <(
-    z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if /\d+\.*\d+\s*(.*)/}'
+    z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if m{\d+\.*\d+\s*(.*)}}'
     )
 }
 
@@ -1861,14 +1887,14 @@ _f(){
     local cmd
     _alternative \
     'files:directory:_path_files -g "*(-D/)"' \
-    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
     'directory-stack:directory stack:_directory_stack' \
 }
 
 _c(){
     _alternative \
     'files:files:_path_files -g "*(D^/) *(DF)"' \
-    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
 }
 
 _ssd(){
@@ -1881,7 +1907,7 @@ _ssu(){
 }
 
 
-subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if /^\s*([a-zA-z]+)\s*\).*#(.*)$/'))
+subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
 
 _zpwr(){
@@ -1931,6 +1957,7 @@ compdef _p p
 compdef _ssd ssd
 compdef _ssu ssu
 compdef _zpwr zpwr
+compdef _man fm
 
 #redefine global zsh completion function called at first parameter
 #adding global aliases and files
