@@ -576,7 +576,7 @@ regenZshCompCache(){
 export ALL_ENV="$HOME/allEnv"
 
 regenSearchEnv(){
-    logg "regenerating all env into $ALL_ENV"
+    prettyPrint "regenerating all env into $ALL_ENV"
     source "$SCRIPTS/zshRegenSearchableEnv.zsh" "$ALL_ENV"
 }
 
