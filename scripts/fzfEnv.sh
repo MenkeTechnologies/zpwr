@@ -32,8 +32,6 @@ else
     }
 fi
 
-log=/Users/wizard/updaterlog.txt
-
 cat<<EOF
 line={};
 cmdType=\$(grep -F "\$line" ${ALL_ENV}Key.txt | awk "{print \\\$1; exit}")
