@@ -496,10 +496,11 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -M viins "^V^S" zFZF```
 - ```bindkey -M viins "^V^V" vimFzf```
 - ```bindkey -M viins "^V^Z" fzf-history-widget```
-- ```bindkey -M viins "^V," fzfVimKeybind```
+- ```bindkey -M viins "^V," fzfEnv```
 - ```bindkey -M viins "^V." fzfAllKeybind```
 - ```bindkey -M viins "^V/" locateFzf```
 - ```bindkey -M viins "^Vc" fzfCommits```
+- ```bindkey -M viins "^Vk" fzfVimKeybind```
 - ```bindkey -M viins "^W" vi-backward-kill-word```
 - ```bindkey -M viins "^X^R" _read_comp```
 - ```bindkey -M viins "^X?" _complete_debug```
@@ -597,7 +598,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -a "^V^S" zFZF```
 - ```bindkey -a "^V^V" vimFzf```
 - ```bindkey -a "^V^Z" fzf-history-widget```
-- ```bindkey -a "^V," fzfVimKeybind```
+- ```bindkey -a "^V," fzfEnv```
 - ```bindkey -a "^V." fzfAllKeybind```
 - ```bindkey -a "^V/" locateFzf```
 - ```bindkey -a "^Vc" fzfCommits```
@@ -991,7 +992,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```i  <C-D>k      * <C-O>:ALEFix<CR>```
 - ```i  <C-D>j      * <C-O>:Agg<CR>```
 - ```i  <C-D>i      * <C-O>:Imap<CR>```
-- ```i  <C-D>h      * <C-O>:History<CR>```
+- ```i  <C-D>h      * <C-O>:HistoryFiles<CR>```
 - ```i  <C-D>g      * <C-O>:Commits!<CR>```
 - ```i  <C-D>f      * <C-O>:Files<CR>```
 - ```i  <C-D>e      * <C-O>:ALEInfo<CR>```
@@ -1060,7 +1061,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```n  <C-D>k      * :ALEFix<CR>```
 - ```n  <C-D>j      * :Agg<CR>```
 - ```n  <C-D>i      * :Imap<CR>```
-- ```n  <C-D>h      * :History<CR>```
+- ```n  <C-D>h      * :HistoryFiles<CR>```
 - ```n  <C-D>g      * :Commits!<CR>```
 - ```n  <C-D>f      * :Files<CR>```
 - ```n  <C-D>e      * :ALEInfo<CR>```
