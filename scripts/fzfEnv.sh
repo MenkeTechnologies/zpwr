@@ -54,19 +54,20 @@ case \$cmdType in
         ;;
 esac
 
+    echo "file is _\${file}_" >> $LOGFILE
 {
 case \$cmdType in
     alias)
-        command grep -a "alias \$file" "${ALL_ENV}Value.txt"
+        command grep -Fa "alias \$file" "${ALL_ENV}Value.txt"
         ;;
     param)
-        command grep -a "export \$file" "${ALL_ENV}Value.txt"
+        command grep -Fa "export \$file" "${ALL_ENV}Value.txt"
         ;;
     builtin)
-        command grep -a "\$file.*shell builtin" "${ALL_ENV}Value.txt"
+        command grep -Fa "\$file" | grep -F "shell builtin" "${ALL_ENV}Value.txt"
         ;;
     resword)
-        command grep -a "\$file.*reserved word" "${ALL_ENV}Value.txt"
+        command grep -Fa "\$file" | grep -F "reserved word" "${ALL_ENV}Value.txt"
         ;;
     command)
         if test -f \$file;then
@@ -82,6 +83,8 @@ case \$cmdType in
         fi
         ;;
     func)
+        file=\$(echo \$file | sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
+        echo "after escaping regex chars file is _\${file}_" >> $LOGFILE
         command sed -n "/^\${file} () {/,/^}\$/p" "${ALL_ENV}Value.txt" | fold -80
         ;;
 esac

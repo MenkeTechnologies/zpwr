@@ -900,7 +900,7 @@ my-accept-line () {
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             aliases="$(cat $HOME/.common_aliases)"
-            line="$(print -r $aliases | perl -ne 'print $1 if m{'$mywords[1]'=(.*)}')"
+            line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
             if [[ -z $line ]];then
                 #fxn
                 BUFFER="\\$mywords"
