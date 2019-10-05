@@ -596,7 +596,6 @@ deleteLastWord(){
     fi
 }
 
-export FZF_ENV_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
 
 fzfEnv(){
     if [[ ! -s "${ALL_ENV}Key.txt" ]]; then
@@ -1760,6 +1759,7 @@ fzf_setup(){
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
+    export FZF_ENV_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
 
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")'"
