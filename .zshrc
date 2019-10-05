@@ -694,6 +694,7 @@ zle -N lsoffzf
 zle -N fzfVimKeybind
 zle -N fzfAllKeybind
 zle -N locateFzf
+zle -N fzfEnv
 
 #vim mode for zle
 bindkey -v
@@ -739,8 +740,11 @@ bindkey -M vicmd '^V/' locateFzf
 bindkey -M viins '^V.' fzfAllKeybind
 bindkey -M vicmd '^V.' fzfAllKeybind
 
-bindkey -M viins '^V,' fzfVimKeybind
-bindkey -M vicmd '^V,' fzfVimKeybind
+bindkey -M viins '^Vk' fzfVimKeybind
+bindkey -M viins '^Vk' fzfVimKeybind
+
+bindkey -M viins '^V,' fzfEnv
+bindkey -M vicmd '^V,' fzfEnv
 
 bindkey -M viins '^V^N' vimFzfSudo
 bindkey -M vicmd '^V^N' vimFzfSudo
@@ -1810,17 +1814,7 @@ _fzf_complete_z() {
 
 # clearList ;<tab>
 _fzf_complete_clearList() {
-  _fzf_complete '-m' "$@" < <(
-       {
-        print -l ${(k)functions}
-        print -l ${(v)commands}
-        print -l ${(k)aliases}
-        print -l ${(k)galiases}
-        print -l ${(k)builtins}
-        print -l ${(k)reswords}
-        ls -d *
-        }
-    )
+    fzfEnv
 }
 
 test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \
