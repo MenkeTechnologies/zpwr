@@ -57,16 +57,16 @@ esac
 {
 case \$cmdType in
     alias)
-        command grep "alias \$file" "${ALL_ENV}Value.txt"
+        command grep -a "alias \$file" "${ALL_ENV}Value.txt"
         ;;
     param)
-        command grep "export \$file" "${ALL_ENV}Value.txt"
+        command grep -a "export \$file" "${ALL_ENV}Value.txt"
         ;;
     builtin)
-        command grep "\$file.*shell builtin" "${ALL_ENV}Value.txt"
+        command grep -a "\$file.*shell builtin" "${ALL_ENV}Value.txt"
         ;;
     resword)
-        command grep "\$file.*reserved word" "${ALL_ENV}Value.txt"
+        command grep -a "\$file.*reserved word" "${ALL_ENV}Value.txt"
         ;;
     command)
         if test -f \$file;then
