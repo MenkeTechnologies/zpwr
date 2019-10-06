@@ -34,8 +34,11 @@ fi
 
 cat<<EOF
 line={};
-cmdType=\$(grep -F "\$line" ${ALL_ENV}Key.txt | awk "{print \\\$1; exit}")
-file=\$(grep -F "\$line" ${ALL_ENV}Key.txt | awk "{print \\\$2; exit}")
+line=\$(echo \$line| sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
+cmdType=\$(grep -m1 " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$1}")
+file=\$(grep -m1 " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$2}")
+
+echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $LOGFILE
 
 case \$cmdType in
     command)
@@ -54,20 +57,19 @@ case \$cmdType in
         ;;
 esac
 
-    echo "file is _\${file}_" >> $LOGFILE
 {
 case \$cmdType in
     alias)
-        command grep -Fa "alias \$file" "${ALL_ENV}Value.txt"
+        command grep -m1 -Fa "alias \$file" "${ALL_ENV}Value.txt"
         ;;
     param)
-        command grep -Fa "export \$file" "${ALL_ENV}Value.txt"
+        command grep -m1 -Fa "export \$file" "${ALL_ENV}Value.txt"
         ;;
     builtin)
-        command grep -Fa "\$file" | grep -F "shell builtin" "${ALL_ENV}Value.txt"
+        command grep -m1 -Fa "\$file" | grep -F "shell builtin" "${ALL_ENV}Value.txt"
         ;;
     resword)
-        command grep -Fa "\$file" | grep -F "reserved word" "${ALL_ENV}Value.txt"
+        command grep -m1 -Fa "\$file" | grep -F "reserved word" "${ALL_ENV}Value.txt"
         ;;
     command)
         if test -f \$file;then
