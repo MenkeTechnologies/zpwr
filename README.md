@@ -45,7 +45,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zsh, tmux and vim keybindings to copy to clipboard
 - getrc shell function to pull down latest code changes from this repo
 - shell function named c that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips
-- 100+ bash, perl, zsh and pyton scripts
+- 100+ bash, perl, zsh and python scripts
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color coded, tag grouped clearList zsh completion
 - search google from tmux mouse drag selection (copy-mode)
