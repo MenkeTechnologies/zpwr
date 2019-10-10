@@ -953,7 +953,7 @@ inoremap <silent> <C-D>w <C-O>:update<CR>
 inoremap <silent> <C-D>x <C-O>:Marks<CR>
 inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
 inoremap <silent> <C-D>z <ESC>:TlistAddFiles * <CR> :TlistToggle<CR>i
-inoremap <silent> <C-D>/ <C-O>:Locate /<CR>
+inoremap <silent> <C-D>/ <C-O>:LocateAll<CR>
 inoremap <silent> <C-D>. <C-O>:FZFMaps<CR>
 
 "normal mode keybindings for fzf-vim
@@ -986,7 +986,7 @@ nnoremap <silent> <C-D>w :update<CR>
 nnoremap <silent> <C-D>x :Marks<CR>
 nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
 nnoremap <silent> <C-D>z :TlistAddFiles *<CR>:TlistToggle<CR>
-nnoremap <silent> <C-D>/ :Locate /<CR>
+nnoremap <silent> <C-D>/ :LocateAll<CR>
 nnoremap <silent> <C-D>. :FZFMaps<CR>
 
 "gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
@@ -1215,6 +1215,9 @@ command! -bang -nargs=* HistoryFiles call fzf#vim#history({'options': fzfStrFina
 
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': fzfStrFinal}))
+
+
+command! -bang -nargs=* LocateAll call fzf#vim#locate('/', {'options': fzfStrFinal})
 
 command! -bang -nargs=* Imap call fzf#vim#maps('i')
 
