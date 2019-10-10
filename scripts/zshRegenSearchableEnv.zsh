@@ -56,7 +56,7 @@
     done
 
     for k v in ${(kv)functions}; do
-        autoload +X $k
+        autoload +X -z -- $k
     done
 
     declare -f
