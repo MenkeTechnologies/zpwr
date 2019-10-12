@@ -1,4 +1,4 @@
-#!/usr/bin/env bzsh
+#!/usr/bin/env zsh
 #{{{ MARK:Header
 #**************************************************************
 ##### Author: JACOBMENKE
@@ -57,6 +57,7 @@
 
     for k v in ${(kv)functions}; do
         autoload +X -z -- $k
+        type -a $k
     done
 
     declare -f
