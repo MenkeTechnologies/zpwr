@@ -87,7 +87,7 @@ case \$cmdType in
     func)
         file=\$(echo \$file | sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
         echo "after escaping regex chars file is _\${file}_" >> $LOGFILE
-        command grep -m1 -Fa "\$file is a shell function" "${ALL_ENV}Value.txt"
+        command grep -m1 -a "^\$file is a shell function" "${ALL_ENV}Value.txt"
         command sed -n "/^\${file} () {/,/^}\$/p" "${ALL_ENV}Value.txt" | fold -80
         ;;
 esac
