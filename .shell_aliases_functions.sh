@@ -166,8 +166,7 @@ echo "$PATH" | command grep -iq shellScripts || {
 #{{{                          MARK:ALIASES
 #**********************************************************************
 #portable aliases
-unalias rm &>/dev/null
-rm(){
+function rm(){
     command rm -v "$@"
 }
 exists c.pl && {
