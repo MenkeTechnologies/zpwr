@@ -2135,6 +2135,7 @@ export CHEATCOLORS=true
 # Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
 alias mmv='noglob zmv -W'
+autoload zargs
 
 if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
