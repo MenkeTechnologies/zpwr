@@ -705,8 +705,8 @@ export SCRIPTS="$HOME/Documents/shellScripts"
 dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
 prettyPrint "linking $dir to ~/.tmux/powerline"
 
-if [[ ! -d "$HOME.tmux" ]]; then
-    prettyPrint "~/.tmux does not exist"
+if [[ ! -d "$HOME/.tmux" ]]; then
+    prettyPrint "$HOME/.tmux does not exist"
 fi
 
 if [[ ! -d "$dir" ]]; then
