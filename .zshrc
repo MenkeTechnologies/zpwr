@@ -2137,6 +2137,17 @@ autoload zmv
 alias mmv='noglob zmv -W'
 autoload zargs
 
+zar(){
+    if [[ -z "$2" ]]; then
+        echo need two args, escaped glob and cmd with {}
+    fi
+    first="$1"
+    shift
+
+    echo eval "zargs -i{} -- '$first' -- '$*'"
+    eval "zargs -i{} -- $first -- $*"
+}
+
 if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
