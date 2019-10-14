@@ -35,8 +35,8 @@ fi
 cat<<EOF
 line={};
 line=\$(echo \$line| sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
-cmdType=\$(grep -m1 " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$1}")
-file=\$(grep -m1 " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$2}")
+cmdType=\$(grep -m1 -a " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$1}")
+file=\$(grep -m1 -a " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$2}")
 
 echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $LOGFILE
 
