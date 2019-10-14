@@ -614,7 +614,7 @@ jd(){
     done
 }
 
-j(){
+function j(){
     for file;do
         dirname="$(dirname $file)"
         [[ "$dirname" != . ]] && command mkdir -p "$dirname"
