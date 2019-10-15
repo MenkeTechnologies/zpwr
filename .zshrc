@@ -1316,7 +1316,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:heads-local' list-colors '=(#b)(*)=1;30=1;34;43;4'
     zstyle ':completion:*:heads-remote' list-colors '=(#b)(*)=1;30=1;37;46'
     zstyle ':completion:*:modified-files' list-colors '=(#b)(*)=1;30=1;37;42'
-    zstyle ':completion:*:recent-branches' list-colors '=(#b)(*)=1;30=1;37;48'
+    zstyle ':completion:*:recent-branches' list-colors '=(#b)(*)=1;30=1;37;44'
     zstyle ':completion:*:remote-branch-names-noprefix' list-colors '=(#b)(*)=1;30=1;33;46'
 
     zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;37;43'
