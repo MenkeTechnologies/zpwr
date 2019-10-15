@@ -491,7 +491,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -M viins "^S" gitFuncNoCheck```
 - ```bindkey -M viins "^T" transpose-chars```
 - ```bindkey -M viins "^U" clearLine```
-- ```bindkey -M viins "^V^F" fzf-cd-widget```
+- ```bindkey -M viins "^V^F" fasdFZF```
+- ```bindkey -M viins "^V^G" fzf-cd-widget```
 - ```bindkey -M viins "^V^N" vimFzfSudo```
 - ```bindkey -M viins "^V^S" zFZF```
 - ```bindkey -M viins "^V^V" vimFzf```
@@ -533,6 +534,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -M viins "^[OB" history-substring-search-down```
 - ```bindkey -M viins "^[OC" vi-forward-char```
 - ```bindkey -M viins "^[OD" vi-backward-char```
+- ```bindkey -M viins "^[OF" end-of-line```
+- ```bindkey -M viins "^[OH" beginning-of-line```
 - ```bindkey -M viins "^[OP" updater```
 - ```bindkey -M viins "^[OQ" sub```
 - ```bindkey -M viins "^[OR" getrcWidget```
@@ -542,6 +545,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -M viins "^[[1;5C" tutsUpdate```
 - ```bindkey -M viins "^[[1;5D" dbz```
 - ```bindkey -M viins "^[[200~" bracketed-paste```
+- ```bindkey -M viins "^[[3~" delete-char```
 - ```bindkey -M viins "^[[5~" clipboard```
 - ```bindkey -M viins "^[[A" up-line-or-history```
 - ```bindkey -M viins "^[[B" down-line-or-history```
@@ -593,7 +597,8 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```bindkey -a "^S" gitFuncNoCheck```
 - ```bindkey -a "^T" transpose-chars```
 - ```bindkey -a "^U" clearLine```
-- ```bindkey -a "^V^F" fzf-cd-widget```
+- ```bindkey -a "^V^F" fasdFZF```
+- ```bindkey -a "^V^G" fzf-cd-widget```
 - ```bindkey -a "^V^N" vimFzfSudo```
 - ```bindkey -a "^V^S" zFZF```
 - ```bindkey -a "^V^V" vimFzf```
@@ -972,7 +977,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```i  <C-C>       * <Esc>:wq!<CR>:qa!<CR>```
 - ```i  <C-D>       * col('.')>strlen(getline('.'))?"\<C-D>":"\<Del>"```
 - ```i  <C-D>.      * <C-O>:FZFMaps<CR>```
-- ```i  <C-D>/      * <C-O>:Locate /<CR>```
+- ```i  <C-D>/      * <C-O>:LocateAll<CR>```
 - ```i  <C-D>z      * <Esc>:TlistAddFiles * <CR> :TlistToggle<CR>i```
 - ```i  <C-D>y      * <Esc>:update<CR>:SyntasticCheck<CR>a```
 - ```i  <C-D>x      * <C-O>:Marks<CR>```
@@ -1041,7 +1046,7 @@ Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionali
 - ```n  ]c           @<Plug>(GitGutterNextHunk)```
 - ```n  <C-C>       * :wq!<CR>:qa!<CR>```
 - ```n  <C-D>.      * :FZFMaps<CR>```
-- ```n  <C-D>/      * :Locate /<CR>```
+- ```n  <C-D>/      * :LocateAll<CR>```
 - ```n  <C-D>z      * :TlistAddFiles *<CR>:TlistToggle<CR>```
 - ```n  <C-D>y      * :update<CR>:SyntasticCheck<CR>```
 - ```n  <C-D>x      * :Marks<CR>```
