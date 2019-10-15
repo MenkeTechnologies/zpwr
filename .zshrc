@@ -514,9 +514,15 @@ vimFzf(){
 }
 
 fzfZList(){
-        z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if m{\d+\.*\d+\s*(.*)}}' | \
+    z -l |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' | \
     eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS" | \
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
+}
+
+fasdFList(){
+    fasd -f |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' | \
+    eval "fzf -m --no-sort --border $FZF_CTRL_T_OPTS" | \
+        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
 fm(){
@@ -530,6 +536,16 @@ zFZF(){
     mywords=(${(z)BUFFER})
     if (( $#mywords == 1 )); then
         zle .kill-whole-line
+    else
+        zle .accept-line
+    fi
+}
+
+fasdFZF(){
+    BUFFER="$BUFFER $(fasdFList)"
+    mywords=(${(z)BUFFER})
+    if (( $#mywords == 1 )); then
+        :
     else
         zle .accept-line
     fi
@@ -694,6 +710,7 @@ zle -N fzfVimKeybind
 zle -N fzfAllKeybind
 zle -N locateFzf
 zle -N fzfEnv
+zle -N fasdFZF
 
 #vim mode for zle
 bindkey -v
@@ -748,6 +765,11 @@ bindkey -M vicmd '^V,' fzfEnv
 bindkey -M viins '^V^N' vimFzfSudo
 bindkey -M vicmd '^V^N' vimFzfSudo
 
+exists fasd && {
+    bindkey -M viins '^V^F' fasdFZF
+    bindkey -M vicmd '^V^F' fasdFZF
+}
+
 exists z && {
     zle -N zFZF
     bindkey -M viins '^V^S' zFZF
@@ -763,8 +785,9 @@ bindkey -M vicmd '^Q' lastWordDouble
 bindkey -M viins '^V^Z' fzf-history-widget
 bindkey -M vicmd '^V^Z' fzf-history-widget
 
-bindkey -M viins '^V^F' fzf-cd-widget
-bindkey -M vicmd '^V^F' fzf-cd-widget
+bindkey -M viins '^V^G' fzf-cd-widget
+bindkey -M vicmd '^V^G' fzf-cd-widget
+
 #completion trigger plus tab, defaults to ~~
 export FZF_COMPLETION_TRIGGER=';'
 
@@ -1328,6 +1351,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:plumbing-internal-helper-commands' list-colors '=(#b)(*)=1;30=37;46'
 
     zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
+    zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
     if [[ "$(uname)" == Darwin ]]; then
         #homebrew tags
         zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
@@ -1879,10 +1903,19 @@ exists zshz && zcmd=zshz || zcmd=_z
 
 _f(){
     local cmd
-    _alternative \
-    'files:directory:_path_files -g "*(-D/)"' \
-    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
-    'directory-stack:directory stack:_directory_stack' \
+    if exists fasd;then
+        _alternative \
+        'files:directory:_path_files -g "*(-D/)"' \
+        'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
+        'fasd:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
+        'directory-stack:directory stack:_directory_stack'
+    else
+        _alternative \
+        'files:directory:_path_files -g "*(-D/)"' \
+        'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
+    'directory-stack:directory stack:_directory_stack'
+    fi
+
 }
 
 _c(){
