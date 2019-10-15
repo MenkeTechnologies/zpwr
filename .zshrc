@@ -1352,6 +1352,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
 
     zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
+    zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
     if [[ "$(uname)" == Darwin ]]; then
         #homebrew tags
         zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
@@ -1923,11 +1924,12 @@ _c(){
     _alternative \
     'files:files:_path_files -g "*(D^/) *(DF)"' \
     'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
+        'fasd-file:fasd ranked files:(('"$(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
         'fasd:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))'
     else
     _alternative \
     'files:files:_path_files -g "*(D^/) *(DF)"' \
-    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))'
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' 
     fi
 }
 
