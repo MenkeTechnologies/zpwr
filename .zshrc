@@ -2179,7 +2179,7 @@ autoload zmv
 alias mmv='noglob zmv -W'
 autoload zargs
 
-zar(){
+function zarg(){
     if [[ -z "$2" ]]; then
         echo need two args, escaped glob and cmd with {}
     fi
