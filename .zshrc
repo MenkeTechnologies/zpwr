@@ -1919,9 +1919,16 @@ _f(){
 }
 
 _c(){
+    if exists fasd;then
     _alternative \
     'files:files:_path_files -g "*(D^/) *(DF)"' \
     'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
+        'fasd:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))'
+    else
+    _alternative \
+    'files:files:_path_files -g "*(D^/) *(DF)"' \
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))'
+    fi
 }
 
 _ssd(){
