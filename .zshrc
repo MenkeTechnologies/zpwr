@@ -1180,6 +1180,9 @@ setopt pipefail 2>/dev/null
 #search PATH for zsh <script>
 setopt pathscript
 
+#more compact menu completion
+setopt list_packed
+
 # increase max size for directory stack
 export DIRSTACKSIZE=20
 #}}}***********************************************************
