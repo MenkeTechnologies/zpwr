@@ -1260,6 +1260,12 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+zstyle ':completion:*' group-order options argument-rest globbed-files files fasd-file fasd
+
+function isOpt() {
+
+    return 1
+}
 # formatting and messages, blue text with red punctuation
 
 # show command descriptions if available
@@ -1366,6 +1372,9 @@ if [[ $CUSTOM_COLORS == true ]]; then
 
     #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
     zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
+
+    zstyle ':completion:*:*:tmux' list-colors '=(#b)(*)=1;37;45'
+    zstyle ':completion:*:*:lastline' list-colors '=(#b)(*)=1;37;44'
     #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
     zstyle ':completion:*' list-separator '<<)(>>'
     COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
@@ -2013,20 +2022,25 @@ _tmux_pane_words() {
     [[ "$TMUX_PANE" = "$i" ]] && continue
     w+=( ${(u)=$(_tmux_capture_pane -t $i)} )
   done
-  _wanted aliases expl 'words from all tmux panes' compadd -a w
+  _wanted tmux expl 'words from all tmux panes' compadd -a w
 }
 
 _complete_plus_last_command_args() {
+    _wanted lastline expl 'last args' compadd -a last_command_array
+}
 
+_megacomplete(){
     local expl
     local -a last_command_array
 
     num=$((HISTCMD-1))
     last_command=$history[$num]
     last_command_array=(${(u)=last_command} ${(Q)last_command:Q} "${(Q)=last_command:Q}" "'${(Q)last_command:Q}'")
+
     \_complete
+
     if (( $#last_command_array > 0 )); then
-        _wanted commands expl 'last args' compadd -a last_command_array
+        _complete_plus_last_command_args
     fi
     if [[ -n "$TMUX_PANE" ]]; then
         _tmux_pane_words
@@ -2034,7 +2048,7 @@ _complete_plus_last_command_args() {
 }
 
 # list of completers to use
-zstyle ':completion:*' completer _expand _complete_plus_last_command_args _ignored _approximate _correct _tmux_pane_words
+zstyle ':completion:*' completer _expand _megacomplete _ignored _approximate _correct _tmux_pane_words
 
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
