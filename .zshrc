@@ -2007,6 +2007,7 @@ _tmux_pane_words() {
   # https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
   _tmux_capture_pane() {
     tmux capture-pane -J -p -S -100 $@ |
+        col -b |
       # Remove "^C".
       sed 's@\^C\S*@ @g' |
       # copy lines and split words
@@ -2049,8 +2050,10 @@ _megacomplete(){
     if (( $#last_command_array > 0 )); then
         _complete_plus_last_command_args
     fi
-    if [[ -n "$TMUX_PANE" ]]; then
-        _tmux_pane_words
+    if (( $#words > 1 )); then
+        if [[ -n "$TMUX_PANE" ]]; then
+            _tmux_pane_words
+        fi
     fi
 }
 
