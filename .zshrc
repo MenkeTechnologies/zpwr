@@ -2026,7 +2026,9 @@ _complete_plus_last_command_args() {
     last_command=$history[$num]
     last_command_array=(${(u)=last_command})
     \_complete
-    _wanted commands expl 'last args' compadd -a last_command_array
+    if (( $#last_command_array > 0 )); then
+        _wanted commands expl 'last args' compadd -a last_command_array
+    fi
     if [[ -n "$TMUX_PANE" ]]; then
         _tmux_pane_words
     fi
