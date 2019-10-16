@@ -1257,8 +1257,6 @@ fi
 
 zstyle ':completion:*' auto-description 'Specify: %d'
 
-# list of completers to use
-zstyle ':completion:*' completer _expand _complete _ignored _approximate _correct
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -1308,6 +1306,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
     zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
+    zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
 
     #git commit colors
     zstyle ':completion:*:*:commits' list-colors '=(#b)(*)=1;37;45'
@@ -1988,6 +1987,54 @@ if [[ CURRENT -ge 1 ]]; then
 fi
 
 }
+
+_tmux_pane_words() {
+  local expl
+  local -a w
+
+  # Based on vim-tmuxcomplete's splitwords function.
+  # https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
+  _tmux_capture_pane() {
+    tmux capture-pane -J -p -S -100 $@ |
+      # Remove "^C".
+      sed 's/\^C\S*/ /g' |
+      # copy lines and split words
+      sed -e 'p;s/[^a-zA-Z0-9_]/ /g' |
+      # split on spaces
+      tr -s '[:space:]' '\n' |
+      # remove surrounding non-word characters
+      =grep -o "\w.*\w"
+  }
+  # Capture current pane first.
+  w=( ${(u)=$(_tmux_capture_pane)} )
+  echo $w > /tmp/w1
+  local i
+  for i in $(tmux list-panes -F '#D'); do
+    # Skip current pane (handled before).
+    [[ "$TMUX_PANE" = "$i" ]] && continue
+    w+=( ${(u)=$(_tmux_capture_pane -t $i)} )
+  done
+  _wanted aliases expl 'words from current tmux pane' compadd -a w
+}
+
+_complete_plus_last_command_args() {
+
+    local expl
+    local -a last_command_array
+
+    num=$((HISTCMD-1))
+    last_command=$history[$num]
+    last_command_array=(${(u)=last_command})
+    \_complete
+    _wanted commands expl 'last args' compadd -a last_command_array
+    if [[ -n "$TMUX_PANE" ]]; then
+        _tmux_pane_words
+    fi
+}
+
+# list of completers to use
+zstyle ':completion:*' completer _expand _complete_plus_last_command_args _ignored _approximate _correct _tmux_pane_words
+
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
 compdef _cl clearList
