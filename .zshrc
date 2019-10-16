@@ -1260,7 +1260,7 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-zstyle ':completion:*' group-order options argument-rest globbed-files files fasd-file fasd
+zstyle ':completion:*' group-order commands options argument-rest globbed-files files fasd-file fasd
 zstyle ':completion:*:*:z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd
 
 function isOpt() {
