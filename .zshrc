@@ -1376,7 +1376,8 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
 
     zstyle ':completion:*:*:tmux' list-colors '=(#b)(*)=1;37;45'
-    zstyle ':completion:*:*:lastline' list-colors '=(#b)(*)=1;37;44'
+    zstyle ':completion:*:*:last-ten' list-colors '=(#b)(*)=1;33;45'
+    zstyle ':completion:*:*:last-line' list-colors '=(#b)(*)=1;37;44'
     #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
     zstyle ':completion:*' list-separator '<<)(>>'
     COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
@@ -2030,11 +2031,11 @@ _tmux_pane_words() {
 
 declare -a last_ten
 function _complete_hist(){
-    last_ten=( ${(f)"$(fc -l | perl -lane 'print "@F[1..$#F]"')"} )
-    _wanted tmux expl 'last commands' compadd -Qa last_ten
+    last_ten=( ${(f)"$(fc -l 200 | perl -lane 'print "@F[1..$#F]"')"} )
+    _wanted last-ten expl 'last commands' compadd -Qa last_ten
 }
 _complete_plus_last_command_args() {
-    _wanted lastline expl 'last args' compadd -Qa last_command_array
+    _wanted last-line expl 'last args' compadd -Qa last_command_array
 }
 
 _megacomplete(){
