@@ -1997,24 +1997,23 @@ _tmux_pane_words() {
   _tmux_capture_pane() {
     tmux capture-pane -J -p -S -100 $@ |
       # Remove "^C".
-      sed 's/\^C\S*/ /g' |
+      sed 's@\^C\S*@ @g' |
       # copy lines and split words
-      sed -e 'p;s/[^a-zA-Z0-9_]/ /g' |
+      sed 'p;s@^a-zA-Z0-9_]@ @g' |
       # split on spaces
       tr -s '[:space:]' '\n' |
       # remove surrounding non-word characters
-      =grep -o "\w.*\w"
+      command grep -o "\w.*\w"
   }
   # Capture current pane first.
   w=( ${(u)=$(_tmux_capture_pane)} )
-  echo $w > /tmp/w1
-  local i
+
   for i in $(tmux list-panes -F '#D'); do
     # Skip current pane (handled before).
     [[ "$TMUX_PANE" = "$i" ]] && continue
     w+=( ${(u)=$(_tmux_capture_pane -t $i)} )
   done
-  _wanted aliases expl 'words from current tmux pane' compadd -a w
+  _wanted aliases expl 'words from all tmux panes' compadd -a w
 }
 
 _complete_plus_last_command_args() {
@@ -2024,7 +2023,7 @@ _complete_plus_last_command_args() {
 
     num=$((HISTCMD-1))
     last_command=$history[$num]
-    last_command_array=(${(u)=last_command})
+    last_command_array=(${(u)=last_command} ${(Q)last_command:Q} "${(Q)=last_command:Q}" "'${(Q)last_command:Q}'")
     \_complete
     if (( $#last_command_array > 0 )); then
         _wanted commands expl 'last args' compadd -a last_command_array
