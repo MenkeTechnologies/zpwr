@@ -1261,6 +1261,7 @@ zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 zstyle ':completion:*' group-order options argument-rest globbed-files files fasd-file fasd
+zstyle ':completion:*:*:z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd
 
 function isOpt() {
 
@@ -1325,6 +1326,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:remote-branch-names-noprefix' list-colors '=(#b)(*)=1;30=1;33;46'
 
     zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;37;43'
+    zstyle ':completion:*:prefixes' list-colors '=(#b)(*)=1;30=1;37;43'
 
      #separate colors for sections of manual pages
     zstyle ':completion:*:manuals.1' list-colors '=(#b)(*)=1;30=1;36;44'
