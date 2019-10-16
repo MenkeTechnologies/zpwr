@@ -2016,7 +2016,8 @@ _tmux_pane_words() {
       # split on spaces
       tr -s '[:space:]' '\n' |
       # remove surrounding non-word characters
-      command grep -o "\w.*\w"
+      command grep -o -E "[a-zA-Z0-9.]+[a-zA-z_0-9.-]{4,}" |
+          command grep -v -E '(\.\.+|^[0-9MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)'
   }
   # Capture current pane first.
   w=( ${(u)=$(_tmux_capture_pane)} )
