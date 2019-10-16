@@ -2019,7 +2019,7 @@ _tmux_pane_words() {
       # split on spaces
       tr -s '[:space:]' '\n' |
       # remove surrounding non-word characters
-      command grep -o -E "[a-zA-Z0-9.]+[a-ZA-z_0-9.-]{2}[a-zA-Z0-9.-]+" |
+      command grep -o -E "[a-zA-Z0-9.]+[a-zA-Z_0-9.-]{2}[a-zA-Z0-9.-]+" |
           command grep -v -E '(\.\.+|^[0-9MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)'
   }
   # Capture current pane first.
