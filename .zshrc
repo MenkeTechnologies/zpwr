@@ -2035,6 +2035,11 @@ _megacomplete(){
     local expl
     local -a last_command_array
 
+    if [[ $words[1] == z ]]; then
+        \_complete
+        return
+    fi
+
     num=$((HISTCMD-1))
     last_command=$history[$num]
     last_command_array=(${(u)=last_command} ${(Q)last_command:Q} "${(Q)=last_command:Q}" "'${(Q)last_command:Q}'")
@@ -2050,8 +2055,8 @@ _megacomplete(){
 }
 
 # list of completers to use
-zstyle ':completion:*' completer _expand _megacomplete _ignored _approximate _correct _tmux_pane_words
-
+zstyle ':completion:*' completer _expand _megacomplete _ignored _approximate _correct
+zstyle ':completion:*:*:z:*:*' completer _expand _complete _ignored _approximate _correct
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
 compdef _cl clearList
