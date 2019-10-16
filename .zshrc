@@ -2028,8 +2028,13 @@ _tmux_pane_words() {
   _wanted tmux expl 'words from all tmux panes' compadd -a w
 }
 
+declare -a last_ten
+function _complete_hist(){
+    last_ten=( ${(f)"$(fc -l | perl -lane 'print "@F[1..$#F]"')"} )
+    _wanted tmux expl 'last commands' compadd -Qa last_ten
+}
 _complete_plus_last_command_args() {
-    _wanted lastline expl 'last args' compadd -a last_command_array
+    _wanted lastline expl 'last args' compadd -Qa last_command_array
 }
 
 _megacomplete(){
@@ -2054,6 +2059,8 @@ _megacomplete(){
         if [[ -n "$TMUX_PANE" ]]; then
             _tmux_pane_words
         fi
+    else
+        _complete_hist
     fi
 }
 
