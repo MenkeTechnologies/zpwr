@@ -2051,29 +2051,22 @@ _megacomplete(){
     local cmd
     cmd=$words[1]
 
-    if [[ $cmd == z ]]; then
-        \_complete
-        return
-    fi
-
     num=$((HISTCMD-1))
     last_command=$history[$num]
     last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
 
-    \_complete
-
     if (( $#last_command_array > 0 )); then
         _complete_plus_last_command_args
     fi
-    if (( $#words > 1 )); then
-        if [[ -n "$TMUX_PANE" ]]; then
-            if (($+whitelist_tmux_completion[$cmd])); then
-                _tmux_pane_words
-            fi
+    if [[ -n "$TMUX_PANE" ]]; then
+        if (($+whitelist_tmux_completion[$cmd])); then
+            _tmux_pane_words
         fi
-    else
-        _complete_hist
     fi
+
+    _complete_hist
+
+    \_complete || return 1
 }
 
 # list of completers to use
