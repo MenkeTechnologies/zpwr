@@ -2042,11 +2042,16 @@ _complete_plus_last_command_args() {
     _wanted last-line expl 'last args' compadd -Qa last_command_array
 }
 
+local -A whitelist_tmux_completion
+whitelist_tmux_completion=(ping 1 dig 2 digs 3 host 4 mtr 5 traceroute 6)
+
 _megacomplete(){
     local expl
     local -a last_command_array
+    local cmd
+    cmd=$words[1]
 
-    if [[ $words[1] == z ]]; then
+    if [[ $cmd == z ]]; then
         \_complete
         return
     fi
@@ -2062,7 +2067,9 @@ _megacomplete(){
     fi
     if (( $#words > 1 )); then
         if [[ -n "$TMUX_PANE" ]]; then
-            _tmux_pane_words
+            if (($+whitelist_tmux_completion[$cmd])); then
+                _tmux_pane_words
+            fi
         fi
     else
         _complete_hist
@@ -2071,7 +2078,6 @@ _megacomplete(){
 
 # list of completers to use
 zstyle ':completion:*' completer _expand _megacomplete _ignored _approximate _correct
-zstyle ':completion:*:*:z:*:*' completer _expand _complete _ignored _approximate _correct
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
 compdef _cl clearList
