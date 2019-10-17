@@ -2053,7 +2053,7 @@ _megacomplete(){
 
     num=$((HISTCMD-1))
     last_command=$history[$num]
-    last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "'${last_command}'")
+    last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
 
     \_complete
 
