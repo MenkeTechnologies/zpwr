@@ -2064,7 +2064,9 @@ _megacomplete(){
         fi
     fi
 
-    _complete_hist
+    if (( $CURRENT == 1 )); then
+        _complete_hist
+    fi
 
     \_complete || return 1
 }
