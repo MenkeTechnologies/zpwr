@@ -31,8 +31,8 @@ isZsh(){
 if isZsh; then
     exists(){
         #alternative is command -v
-        type "$1" &>/dev/null || return 1 && \
-        type "$1" 2>/dev/null | \
+        type "$1" &>/dev/null || return 1 &&
+        type "$1" 2>/dev/null |
         command grep -qv "suffix alias" 2>/dev/null
     }
 
@@ -117,7 +117,8 @@ echo "$PATH" | command grep -iq shellScripts || {
     if [[ "$(uname)" == Darwin ]];then
         if exists jenv;then
             eval "$(jenv init -)"
-            test -z "$JAVA_HOME" && jenv enable-plugin export &>/dev/null
+            test -z "$JAVA_HOME" && 
+                jenv enable-plugin export &>/dev/null
 
         fi
         export HOMEBREW_HOME='/usr/local/Cellar'
@@ -158,7 +159,7 @@ echo "$PATH" | command grep -iq shellScripts || {
     export GOPATH="$HOME/go"
 
     test -s \
-    "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" && \
+    "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" &&
     source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
 }
 #}}}
@@ -232,12 +233,12 @@ alias deleteTab="sed '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper="tr 'a-z' 'A-Z'"
 #over aliases
-pwd | command grep -q --color=always / 2>/dev/null && {
+if pwd | command grep -q --color=always / 2>/dev/null; then
     alias grep="grep --color=always"
-}
-pwd | command egrep -q --color=always / 2>/dev/null && {
+fi
+if pwd | command egrep -q --color=always / 2>/dev/null; then
     alias egrep="egrep --color=always"
-}
+fi
 alias tree='tree -afC'
 alias ta="tmux attach-session"
 alias tn="tmux new-session"
@@ -296,9 +297,9 @@ if [[ "$(uname)" == "Darwin" ]]; then
     alias tra='cd $HOME/.Trash'
     alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
     alias bl='brew link --force --overwrite'
-    exists gls && \
-        alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' \
-        || alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
+    exists gls &&
+     alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
+     alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
     exists mvim && {
         alias v='mvim -v'
         alias vi='mvim -v'
@@ -314,7 +315,7 @@ else
     #Linux or Unix
     alias ip="grc -c $HOME/conf.ifconfig ip"
     alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
-    test -d "$HOME/.local/share/Trash" && \
+    test -d "$HOME/.local/share/Trash" &&
         alias tra='cd $HOME/.local/share/Trash'
     if [[ "$(uname)" == Linux ]]; then
         if exists apt;then
@@ -435,11 +436,12 @@ if [[ "$(uname)" == "Darwin" ]]; then
 
     nn(){
         [[ -z "$2" ]] && echo \
-            "Title is \$1 and message is \$2..." \
-            >&2 && return 1
+            "Title is \$1 and message is \$2..." >&2 && 
+            return 1
         title="$1"
         msg="$2"
-        echo "display notification \"$msg\" with title \"$title\"" | osascript 
+        echo "display notification \"$msg\" with title \"$title\"" |
+            osascript
     }
 
     db(){
@@ -489,15 +491,15 @@ else
         service="$1"
         src_dir="$FORKED_DIR/$REPO_NAME"
         local service_path="$src_dir/$service.service"
-        test -d "$src_dir" || \
+        test -d "$src_dir" ||
             { echo "$src_dir does not exists." >&2 && return 1; }
-        test -f "$service_path" || \
+        test -f "$service_path" ||
             { echo "$service_path does not exists so falling back to $1." >&2 && service_path="$1"; }
 
-        test -f "$service_path" || \
+        test -f "$service_path" ||
             { echo "$service_path does not exists so exiting." >&2 && return 1; }
 
-        test -d "/etc/systemd/system" || \
+        test -d "/etc/systemd/system" ||
             { echo "/etc/systemd/system does not exists. Is systemd installed?" >&2 && return 1; }
             ( cd "$src_dir" && git pull; )
         group=$(id -gn)
@@ -524,7 +526,8 @@ cloneToForked(){
         else
             builtin cd "$@" || return 1
         fi
-        git clone -b "$branch" "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
+        git clone -b "$branch" \
+            "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
     )
 }
 
@@ -600,7 +603,7 @@ urlSafe(){
 
 cgh(){
     [[ -z "$1" ]] && user="$GITHUB_ACCOUNT" || user="$1"
-    curl -s "https://github.com/$user" | \
+    curl -s "https://github.com/$user" |
     command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
 }
 
@@ -639,8 +642,9 @@ p(){
 
     for cmd; do
         prettyPrint "SEARCH TERM: $cmd"
-        echo "$out" | command fgrep --color=always -a -i -- "$cmd" \
-            || echo "Nothing found for $cmd."
+        echo "$out" | 
+            command fgrep --color=always -a -i -- "$cmd" || 
+            echo "Nothing found for $cmd."
         echo
     done
 }
@@ -725,11 +729,11 @@ clearList() {
                 while read loc;do
                     lf="$(echo $loc | cut -d' ' -f3-10)"
                     if [[ -f "$lf" ]]; then
-                        prettyPrint "$lf" && \
-                        eval "$ls_command" $lf \
-                        && prettyPrint "FILE TYPE:" && \
-                        eval "file $lf" && \
-                        prettyPrint "DEPENDENT ON:" && \
+                        prettyPrint "$lf" &&
+                        eval "$ls_command" $lf && 
+                        prettyPrint "FILE TYPE:" &&
+                        eval "file $lf" &&
+                        prettyPrint "DEPENDENT ON:" &&
                         eval "$lib_command $lf"
                         prettyPrint "SIZE:"
                         du -sh "$lf"
@@ -741,13 +745,12 @@ clearList() {
                         echo
                     else
                         echo "$loc"
-                        echo "$loc" | command grep -q \
-                            "function" && {
-                            type -f \
+                        echo "$loc" | command grep -q "function" && 
+                        { type -f \
                         "$(echo "$loc" | awk '{print $1}')" | nl -v 0
                         }
-                        echo "$loc" | command grep -q \
-                            "alias" && {
+                        echo "$loc" | command grep -q "alias" && 
+                        {
                             alias "$(echo "$loc" | awk '{print $1}')"
                         }
                         echo
@@ -757,8 +760,8 @@ clearList() {
             else
                 #path matching, not exe
                 prettyPrint "$arg"
-                eval "$ls_command -d \"$arg\"" \
-                        || { echo; continue; }
+                eval "$ls_command -d \"$arg\"" || 
+                    { echo; continue; }
                 echo
                 prettyPrint "FILE TYPE:"
                 file "$arg"
@@ -845,7 +848,7 @@ execpy(){
 }
 
 search(){
-    test -z $2 && command grep -iRnC 5 "$1" * || \
+    test -z $2 && command grep -iRnC 5 "$1" * ||
         command grep -iRnC 5 "$1" "$2"
 }
 
@@ -874,10 +877,10 @@ contribCount(){
     lineCount="$(echo $lines | wc -l)"
     prettyPrint "Contribution Count"
     if (( $lineCount > 10 )); then
-        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
-        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
 }
@@ -921,10 +924,12 @@ totalLines(){
     prettyPrint "Total Line Count"
     lineCount="$(cat "$temp" | wc -l)"
     if (( $lineCount > 10 )); then
-        echo "$lineCount" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        echo "$lineCount" | 
+            perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
-        echo "$lineCount" | perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        echo "$lineCount" | 
+            perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
     command rm "$temp"
@@ -964,12 +969,12 @@ lineContribCount(){
     prettyPrint "Line Contribution Count"
     lineCount="$(cat "$temp" | wc -l)"
     if (( $lineCount > 10 )); then
-        cat "$temp" | sort | uniq -c | sort -r | \
-        perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        cat "$temp" | sort | uniq -c | sort -r |
+        perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
-        cat "$temp" | sort | uniq -c | sort -r | \
-        perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" | \
+        cat "$temp" | sort | uniq -c | sort -r |
+        perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
     command rm "$temp"
@@ -1062,12 +1067,11 @@ creategif(){
 
     test -n "$3" && outFile="$3"	
 
-    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - \
-        | gifsicle --optimize=3 --delay=3 > "$outFile" 
-}
+    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - |
+        gifsicle --optimize=3 --delay=3 > "$outFile" }
 
 hc(){
-    test -z "$1" && reponame="$(basename "$(pwd)")" || \
+    test -z "$1" && reponame="$(basename "$(pwd)")" ||
         reponame="$1"
     printf "\e[1m"
     old_dir="$(pwd)"
@@ -1089,12 +1093,15 @@ hd(){
 		if line="$(git remote -v 2>/dev/null | sed 1q)";then
             if echo "$line" | command grep -q 'git@';then
                 #ssh
-                user="$(echo $line | awk -F':' '{print $2}' | awk -F'/' '{print $1}')"
-                repo="$(echo $line | awk -F'/' '{print $2}' | awk '{print $1}')"
+                user="$(echo $line | awk -F':' '{print $2}' |
+                    awk -F'/' '{print $1}')"
+                repo="$(echo $line | awk -F'/' '{print $2}' |
+                    awk '{print $1}')"
             else
                 #http
                 user="$(echo $line | awk -F'/' '{print $4}')"
-                repo="$(echo $line | awk -F'/' '{print $5}' | awk '{print $1}')"
+                repo="$(echo $line | awk -F'/' '{print $5}' |
+                    awk '{print $1}')"
             fi
         fi
 	}
@@ -1209,7 +1216,7 @@ gcl() {
 
 ino(){
     dir="$1"
-    command mkdir "$dir" && cd "$dir" && \
+    command mkdir "$dir" && cd "$dir" &&
         platformio init --ide clion --board uno
     {
         cat <<\EOF
@@ -1457,8 +1464,7 @@ rename(){
     shift
     for file in "$@"; do
         test -d "$file" && continue
-        out=$(echo "$file" | sed -n "$search"p \
-            |  wc -l | tr -d ' ')
+        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
         if (( $out != 0 )); then
             #statements
             mv "$file" "$(echo "$file" | sed -E "$search")"
@@ -1473,13 +1479,15 @@ torip(){
 }
 
 toriprenew() {
-    printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' | \
+    printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' |
         nc 127.0.0.1 9051
 }
 
 mycurl(){
-    \curl -fsSL -A "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 | \
-    \sed "/^*/d" | sed -E "s@(<|>) @@g" | sed -E "/^(\{|\}| ) (\[|C)/d"
+    command curl -fsSL -A \
+    "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 |
+    command sed "/^*/d" | sed -E "s@(<|>) @@g" | 
+    sed -E "/^(\{|\}| ) (\[|C)/d"
 }
 
 perlremovespaces(){
@@ -1539,7 +1547,7 @@ digs(){
         exists proxychains && exe=proxychains
         exists proxychains4 && {
            isZsh &&
-                exe=(proxychains4 -q) || \
+                exe=(proxychains4 -q) ||
                 exe="proxychains4 -q"
         }
 
@@ -1799,7 +1807,7 @@ c(){
                             if (( $# > 1)); then
                                 printf "\x1b[34;1;4m$file\x1b[0m\n"
                             fi
-                            bash fzfPreviewOptsCtrlT.sh | \
+                            bash fzfPreviewOptsCtrlT.sh |
                             sed "s@{}@$file@" | zsh
                         fi
                     done
@@ -1814,7 +1822,7 @@ c(){
                         if (( $# > 1)); then
                             printf "\x1b[34;1;4m$file\x1b[0m\n"
                         fi
-                        bash fzfPreviewOptsCtrlT.sh | \
+                        bash fzfPreviewOptsCtrlT.sh |
                         sed "s@{}@$file@" | zsh
                     fi
                 done
@@ -1834,7 +1842,7 @@ exists http && ge(){
         declare -a file_ary
         for file in "$styles_dir"/* ; do
             file=${file##*/}
-            echo "$file" | command grep -q -E "init|pycache" || \
+            echo "$file" | command grep -q -E "init|pycache" ||
                 file_ary+=("${file%.*}")
         done
         len=${#file_ary}
@@ -1849,10 +1857,13 @@ exists http && ge(){
                 break
             fi
         done
-        logg http -v --follow --style=$random_color GET $proto://$url --pretty=all "$@"
-        http -v --follow --style=$random_color GET $proto://$url --pretty=all "$@"
+        logg http -v --follow --style=$random_color GET \
+            $proto://$url --pretty=all "$@"
+        http -v --follow --style=$random_color GET \
+            $proto://$url --pretty=all "$@"
     else
-        http -v --follow --style=autumn GET $proto://$url --pretty=colors "$@"
+        http -v --follow --style=autumn GET \
+            $proto://$url --pretty=colors "$@"
     fi 2>&1 | less
 }
 
@@ -1915,7 +1926,7 @@ pygmentcolors(){
 
 alias da=detachall
 detachall(){
-    tmux list-clients | tr -d : | \
+    tmux list-clients | tr -d : |
         perl -ane '`tmux detach-client -t $F[0]`'
 }
 
@@ -1956,9 +1967,11 @@ see(){
 se(){
     if test -z "$1"; then
         if [[ "$CUSTOM_COLORS" = true ]]; then
-            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | nl -b a -n rz | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
+            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" |
+        mysql 2>> $LOGFILE | nl -b a -n rz | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
         else
-            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | nl -b a -n rz
+            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" |
+            mysql 2>> $LOGFILE | nl -b a -n rz
         fi
      
     else
@@ -2043,14 +2056,18 @@ jsonToArray(){
 
 regenAllKeybindingsCache(){
     prettyPrint "regen all keybindings cache"
-    bash "$SCRIPTS/keybindingsToFZFVim.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$VIM_KEYBINDINGS"
-    isZsh && source "$SCRIPTS/keybindingsToFZF.zsh" | escapeRemover.pl | perl -ne 'print if /\S/' > "$ALL_KEYBINDINGS"
+    bash "$SCRIPTS/keybindingsToFZFVim.zsh" |
+    escapeRemover.pl |
+    perl -ne 'print if /\S/' > "$VIM_KEYBINDINGS"
+    isZsh && source "$SCRIPTS/keybindingsToFZF.zsh" |
+        escapeRemover.pl |
+        perl -ne 'print if /\S/' > "$ALL_KEYBINDINGS"
 }
 
 arrayToJson(){
     if isZsh; then
         ary="$1"
-        printf '%s\n%s\n' "${(kv)${(P)ary}[@]}" | \
+        printf '%s\n%s\n' "${(kv)${(P)ary}[@]}" |
         jq -Rn '[inputs | { (.): input}] | add'
     else
         ary="$1"
@@ -2063,7 +2080,9 @@ arrayToJson(){
 }
 
 loginCount(){
-    perl -e 'print `last -f "$_"`for</var/log/wtmp*>' | perl -lane 'print $F[0] if /\S+/ && !/wtmp/' | sort | uniq -c | sort -rn
+    perl -e 'print `last -f "$_"`for</var/log/wtmp*>' |
+        perl -lane 'print $F[0] if /\S+/ && !/wtmp/' |
+        sort | uniq -c | sort -rn
 }
 
 needSudo(){
