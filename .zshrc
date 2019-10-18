@@ -1213,7 +1213,7 @@ zmodload -i zsh/complist
 #dont include pwd after ../
 zstyle ':completion:*' ignore-parents parent pwd
 
-# remove slash if argument is a directory
+# remov slash if argument is a directory
 zstyle ':completion:*' squeeze-slashes true
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
@@ -1323,8 +1323,10 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:modified-files' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:recent-branches' list-colors '=(#b)(*)=1;30=1;37;44'
     zstyle ':completion:*:remote-branch-names-noprefix' list-colors '=(#b)(*)=1;30=1;33;46'
-
+    zstyle ':completion:*:blobs-and-trees-in-treeish' list-colors '=(#b)(*)=1;30=1;34;43'
+    zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;34;43'
     zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;37;43'
+    zstyle ':completion:*:*(git|git-checkout):*:files' list-colors '=(#b)(*)=1;30=1;32;43'
     zstyle ':completion:*:prefixes' list-colors '=(#b)(*)=1;30=1;37;43'
 
      #separate colors for sections of manual pages
