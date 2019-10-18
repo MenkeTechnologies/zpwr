@@ -1258,7 +1258,7 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts fasd-file fasd zdir tmux last-line last-ten
+zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts fasd-file fasd zdir tmux contexts last-line last-ten
 
 zstyle ':completion:*:*:z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
 
@@ -2044,20 +2044,18 @@ local -A whitelist_tmux_completion
 whitelist_tmux_completion=(ping 1 dig 2 digs 3 host 4 mtr 5 traceroute 6)
 
 _megacomplete(){
-    local expl
     local -a last_command_array
-    local cmd
+    local expl cmd ret
     cmd=$words[1]
 
     num=$((HISTCMD-1))
     last_command=$history[$num]
     last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
 
-    if (( $#last_command_array > 0 )); then
-        _complete_plus_last_command_args
-    fi
+    \_complete && ret=0 || ret=1
+
     if [[ -n "$TMUX_PANE" ]]; then
-        if (($+whitelist_tmux_completion[$cmd])); then
+        if (( $+whitelist_tmux_completion[$cmd] )); then
             _tmux_pane_words
         fi
     fi
@@ -2066,7 +2064,11 @@ _megacomplete(){
         _complete_hist
     fi
 
-    \_complete || return 1
+    if (( $#last_command_array > 0 )); then
+        _complete_plus_last_command_args
+    fi
+
+    return $ret
 }
 
 # list of completers to use
