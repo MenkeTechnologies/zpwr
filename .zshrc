@@ -187,11 +187,11 @@ PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if
 if [[ "$(uname)" == "Darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
-        && plugins+=(tmux)
+    echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
+        plugins+=(tmux)
 elif [[ "$(uname)" == "Linux" ]];then
-    echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' \
-        && plugins+=(tmux)
+    echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
+        plugins+=(tmux)
     plugins+=(systemd)
     distroName=$(perl -lne 'do{($_=$1)=~s@"@@;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 
@@ -331,16 +331,14 @@ changeQuotes(){
         __OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
     elif (( $__COUNTER % 8 == 1 )); then
-        if [[ "$(print -r "$__OLDBUFFER" \
-            | tr -d "'\"\`" )" \
+        if [[ "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
             != "$(print -r "$BUFFER" | tr -d "'" )" ]]; then
             __COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\'/\"}
     elif (( $__COUNTER % 8 == 2 )); then
-        if [[ "$(print -r "$__OLDBUFFER" | tr -d \
-            "'\"\`" )" != \
+        if [[ "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" != \
             "$(print -r "$BUFFER" | tr -d "\"" )" ]]; then
             __COUNTER=0
             return 1
@@ -349,16 +347,13 @@ changeQuotes(){
     elif (( $__COUNTER % 8 == 3 )); then
         if [[ \
             "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(print -r "$BUFFER" | tr -d "\`" )" ]]; \
-        then
-            __COUNTER=0
+            != "$(print -r "$BUFFER" | tr -d "\`" )" ]]; then __COUNTER=0
             return 1
         fi
         _SEMI_OLDBUFFER="$BUFFER"
         BUFFER="\"${BUFFER}\""
     elif (( $__COUNTER % 8 == 4 )); then
-        if [[ "$(print -r "$_SEMI_OLDBUFFER" \
-            | tr -d "'\"\`" )" != \
+        if [[ "$(print -r "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != \
             "$(print -r "$BUFFER" | tr -d "\`\"" )" ]]; then
             __COUNTER=0
             return 1
@@ -495,7 +490,7 @@ clearListFZF(){
 
 fzvim(){
     perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' ~/.viminfo | \
-    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" | \
+    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 vimFzf(){
@@ -514,14 +509,14 @@ vimFzf(){
 }
 
 fzfZList(){
-    z -l |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' | \
-    eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS" | \
+    z -l |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
+    eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }
 
 fasdFList(){
-    fasd -f |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' | \
-    eval "fzf -m --no-sort --border $FZF_CTRL_T_OPTS" | \
+    fasd -f |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
+    eval "fzf -m --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
@@ -623,7 +618,7 @@ fzfEnv(){
         regenSearchEnv
     fi
 
-    cat "${ALL_ENV}Key.txt" | awk '{print $2}' | \
+    cat "${ALL_ENV}Key.txt" | awk '{print $2}' |
     eval "fzf -m --border $FZF_ENV_OPTS"
 
 }
@@ -645,7 +640,7 @@ fzfVimKeybind(){
 }
 
 getFound(){
-    eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" | \
+    eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
@@ -930,7 +925,7 @@ my-accept-line () {
             else
                 #non global alias
                 print "$line" | fgrep "'" && \
-                    BUFFER="${line:1:-1} $mywords[2,$]" || \
+                    BUFFER="${line:1:-1} $mywords[2,$]" ||
                     BUFFER="$line $mywords[2,$]"
             fi
         fi
@@ -955,9 +950,9 @@ precmd(){
             __WILL_CLEAR=false
         fi
     }
-    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && \
-        export DISPLAY=$(cat ~/.display.txt) \
-        || echo $DISPLAY > ~/.display.txt
+    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] &&
+        export DISPLAY=$(cat ~/.display.txt) ||
+        echo $DISPLAY > ~/.display.txt
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
@@ -966,8 +961,8 @@ precmd(){
     fi
 }
 
-[[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] && \
-    export DISPLAY=$(cat ~/.display.txt) || \
+[[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] &&
+    export DISPLAY=$(cat ~/.display.txt) ||
     echo $DISPLAY > ~/.display.txt
 
 rationalize-dot (){
@@ -1510,12 +1505,12 @@ bindkey -M isearch '^A' beginning-of-line
 #
 
 banner(){
-    bash "$fig" "$(hostname)" | \
+    bash "$fig" "$(hostname)" |
     ponysay -W 100
 }
 bannerLolcat(){
-    bash "$fig" "$(hostname)" | \
-    ponysay -W 100 | \
+    bash "$fig" "$(hostname)" |
+    ponysay -W 100 |
     splitReg.sh -- \
     ---------------------- lolcat
 }
@@ -1579,18 +1574,18 @@ else
                     ;;
                 (ubuntu|debian|kali|linuxmint)
                     builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 \
-                        | splitReg.sh -- ------------- lolcat
+                    figlet -f block "$(whoami)" | ponysay -W 120 |
+                        splitReg.sh -- ------------- lolcat
                     ;;
                 (fedora|centos|rhel)
                     builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 \
-                        | splitReg.sh -- ------------- lolcat
+                    figlet -f block "$(whoami)" | ponysay -W 120 |
+                        splitReg.sh -- ------------- lolcat
                     ;;
                 (*suse*)
                     builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 \
-                        | splitReg.sh -- ------------- lolcat
+                    figlet -f block "$(whoami)" | ponysay -W 120 |
+                        splitReg.sh -- ------------- lolcat
                     ;;
                 (*) :
                     ;;
@@ -2096,8 +2091,8 @@ _command_names(){
 
     zstyle -t ":completion:${curcontext}:commands" rehash && rehash
 
-    zstyle -t ":completion:${curcontext}:functions" prefix-needed && \
-    [[ $PREFIX != [_.]* ]] && \
+    zstyle -t ":completion:${curcontext}:functions" prefix-needed &&
+    [[ $PREFIX != [_.]* ]] &&
     ffilt='[(I)[^_.]*]'
 
     defs=(
@@ -2158,7 +2153,8 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
     if [[ "$(uname)" == Linux ]]; then
         if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
             mobile=true
-            cat ~/.ssh/authorized_keys | command grep "$GITHUB_ACCOUNT" > ~/temp$$
+            cat ~/.ssh/authorized_keys |
+                command grep "$GITHUB_ACCOUNT" > ~/temp$$
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu)
@@ -2185,7 +2181,7 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
             command rm ~/temp$$
             if [[ $mobile == "false" ]]; then
                 logg "not mobile"
-                num_con="$(command ps -ef | command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
+                num_con="$(command ps -ef |command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
                 logg "num cons is $num_con"
                 if (( $num_con == 1 )); then
                     logg "no tmux clients"

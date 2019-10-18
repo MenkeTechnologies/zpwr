@@ -1068,7 +1068,8 @@ creategif(){
     test -n "$3" && outFile="$3"	
 
     ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - |
-        gifsicle --optimize=3 --delay=3 > "$outFile" }
+    gifsicle --optimize=3 --delay=3 > "$outFile"
+}
 
 hc(){
     test -z "$1" && reponame="$(basename "$(pwd)")" ||
