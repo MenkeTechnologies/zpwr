@@ -1213,7 +1213,7 @@ zmodload -i zsh/complist
 #dont include pwd after ../
 zstyle ':completion:*' ignore-parents parent pwd
 
-# remov slash if argument is a directory
+# remove slash if argument is a directory
 zstyle ':completion:*' squeeze-slashes true
 # Enable completion caching, use rehash to clear
 zstyle ':completion::complete:*' use-cache on
