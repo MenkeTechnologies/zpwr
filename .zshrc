@@ -2251,13 +2251,19 @@ learn(){
 }
 
 redo(){
-    num="$1"
-    id=$(echo "select id from root.LearningCollection order by dateAdded" | mysql | perl -ne "print if \$. == $num")
-    item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
-    item=${item//\'/\\\'\'}
+    local tmp
+    tmp="$HOME/.temp$$"
+    echo > "$tmp"
+    for num in $@; do
+        id=$(echo "select id from root.LearningCollection order by dateAdded" | mysql | perl -ne "print if \$. == $num")
+        item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
+        item=${item//\'/\\\'\'}
 
-    print -rz \
-    "echo 'update $SCHEMA_NAME.$TABLE_NAME set learning = ""''"$item"''"" where id=$id' | mysql"
+        echo "echo 'update $SCHEMA_NAME.$TABLE_NAME set learning = ""''"$item"''"" where id=$id' | mysql"
+    done >> "$tmp"
+
+    print -rz "$(cat "$tmp")"
+    command rm "$tmp"
 }
 
 
