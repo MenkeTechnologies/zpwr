@@ -59,9 +59,14 @@
 #
 # https://github.com/MenkeTechnologies
 # 
+#
+#profiling startup
+#zmodload zsh/zprof
+startTimestamp=$(date +%s)
 
 #{{{                    MARK:Exports
 #**************************************************************
+
 export LC_ALL="en_US.UTF-8"
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -76,10 +81,6 @@ EXPAND_SECOND_POSITION=true
 SURROUND=true
 CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
-
-#profiling startup
-#zmodload zsh/zprof
-startTimestamp=$(date +%s)
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -468,9 +469,8 @@ lsoffzf(){
 }
 
 
-#new envar for fzf search
-#cache autoload +X functions,aliases, builtins,reswords into file
-# mod FZF_DEFAULT_OPTS for funcs read from cache file
+# cache autoload +X functions,aliases, builtins,reswords into file
+# search with fzf
 clearListFZF(){
     {
         print -l ${(k)functions}
@@ -483,10 +483,6 @@ clearListFZF(){
     } | \
     eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS"
 }
-
-#man page (zman) viewer into fzf with right preview pane grep -C 5
-#coompdef zman _man
-# try on zshall
 
 fzvim(){
     perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' ~/.viminfo | \
@@ -1234,6 +1230,8 @@ if [[ $CUSTOM_COLORS == true ]]; then
     # Add simple colors to kill
     zstyle ':completion:*:*:kill:*:processes' list-colors \
         '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
+
+    # formatting and messages, blue text with red punctuation
     zstyle ':completion:*' format \
         $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
 
@@ -1261,12 +1259,6 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts commits heads commit-tags heads-local heads-remote recent-branches commit-tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tmux contexts last-ten
 
 zstyle ':completion:*:*:z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
-
-function isOpt() {
-
-    return 1
-}
-# formatting and messages, blue text with red punctuation
 
 # show command descriptions if available
 zstyle ':completion:*' extra-verbose yes
