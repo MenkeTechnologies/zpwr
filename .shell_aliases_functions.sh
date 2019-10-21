@@ -1959,16 +1959,16 @@ le(){
 
 see(){
     if test -z "$1"; then
-        echo "select dateAdded,learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | cat -n
+        echo "select id, dateAdded,learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n
     else
-        echo "select dateAdded, learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> $LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
+        echo "select id, dateAdded, learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
     fi
 }
 
 se(){
     if test -z "$1"; then
         if [[ "$CUSTOM_COLORS" = true ]]; then
-            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" |
+            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" |
         mysql 2>> $LOGFILE | nl -b a -n rz | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
         else
             echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" |
@@ -1980,7 +1980,7 @@ se(){
         # escaping for perl $ and @ sigils
         argdollar=${arg//$/\\$}
         arg=${argdollar//@/\\@}
-        echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$arg"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+        echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$arg"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
         if [[ -z "$2" ]]; then
             if [[ "$CUSTOM_COLORS" = true ]]; then
                 paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
