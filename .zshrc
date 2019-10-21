@@ -2250,6 +2250,20 @@ learn(){
     fi
 }
 
+rsql(){
+    printf ""> "$TEMPFILESQL"
+    for num in $@; do
+        id=$(echo "select id from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
+        item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
+        item=${item//\'/\\\'}
+
+        echo "update $SCHEMA_NAME.$TABLE_NAME set learning = '$item' where id=$id"
+    done >> "$TEMPFILESQL"
+
+    vim "$TEMPFILESQL"
+    cat "$TEMPFILESQL" | mysql
+    command rm "$TEMPFILESQL"
+}
 redo(){
     echo > "$TEMPFILE"
     for num in $@; do
