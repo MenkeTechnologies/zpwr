@@ -74,8 +74,11 @@ export DL="$HOME/Downloads"
 export XAUTHORITY="$HOME/.Xauthority"
 export VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
 export ALL_KEYBINDINGS="$HOME/keybindings.txt"
-export TEMPFILE="/tmp/.temp$$-1$USER"
-export TEMPFILE2="/tmp/.temp$$-2$USER"
+if [[ ! -d "/tmp/$REPO_NAME" ]]; then
+    mkdir -p "/tmp/$REPO_NAME"
+fi
+export TEMPFILE="/tmp/$REPO_NAME/.temp$$-1$USER"
+export TEMPFILE2="/tmp/$REPO_NAME/.temp$$-2$USER"
 
 export TERMINAL_APP="Terminal.app"
 export TERM="xterm-256color"

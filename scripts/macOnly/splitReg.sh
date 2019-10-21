@@ -59,9 +59,12 @@ shift $(($OPTIND - 1))
 regex="$1"
 filter="$2"
 
-file=/tmp/temp$$
-cat >"$file"
-output=$(cat /tmp/temp$$)
+if [[ -z "$TEMPFILE" ]]; then
+    TEMPFILE="/tmp/temp$$"
+fi
+file="$TEMPFILE"
+cat > "$file"
+output=$(cat $file)
 delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
 
 [[ $delim != 0 ]] && {

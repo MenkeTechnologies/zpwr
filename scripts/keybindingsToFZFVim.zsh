@@ -7,6 +7,9 @@
 ##### Notes:
 #}}}***********************************************************
 
+if [[ -z "$TEMPFILE" ]]; then
+    TEMPFILE="/tmp/.temp$$"
+fi
 {
     vim -e -c 'redir! > ~/.temp1 | silent imap | redir END | quitall'
     cat ~/.temp1
@@ -18,10 +21,10 @@
     cat ~/.temp4
     command rm ~/.temp{1..4}
 
-} | perl -ne 'print if /\S+/' > ~/.temp$$
+} | perl -ne 'print if /\S+/' > "$TEMPFILE"
 
 #do not know why have to create tempfile here
-perl -pe 's@^([^#].*)$@$1@g' ~/.temp$$ | perl -pe 's@(.*) \(:.map\).*@$1@'
+perl -pe 's@^([^#].*)$@$1@g' "$TEMPFILE" | perl -pe 's@(.*) \(:.map\).*@$1@'
 
-command rm ~/.temp$$
+command rm "$TEMPFILE"
 
