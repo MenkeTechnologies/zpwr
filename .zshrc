@@ -2158,23 +2158,23 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
         if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
             mobile=true
             cat ~/.ssh/authorized_keys |
-                command grep "$GITHUB_ACCOUNT" > ~/temp$$
+                command grep "$GITHUB_ACCOUNT" > "$TEMPFILE"
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu)
                     out="$(command grep -a 'Accepted publickey' /var/log/auth.log | tail -1)"
-                    key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}')"
+                    key="$(ssh-keygen -l -f "$TEMPFILE" | awk '{print $2}')"
                     ;;
                 (centos|rhel)
                     out="$(tail /var/log/messages)"
                     ;;
                 (*suse*)
                     out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
+                    key="$(ssh-keygen -l -f "$TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
                     ;;
                 (fedora)
                     out="$(sudo cat /var/log/secure | command grep 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f ~/temp$$ | awk '{print $2}' | awk -F: '{print $2}')"
+                    key="$(ssh-keygen -l -f "$TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
                     ;;
                 (*) :
                     ;;
@@ -2182,7 +2182,7 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
             logg "searching for $key in $out"
             echo "$out" | grep -q "$key" && mobile=false
 
-            command rm ~/temp$$
+            command rm "$TEMPFILE"
             if [[ $mobile == "false" ]]; then
                 logg "not mobile"
                 num_con="$(command ps -ef |command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
@@ -2251,19 +2251,17 @@ learn(){
 }
 
 redo(){
-    local tmp
-    tmp="$HOME/.temp$$"
-    echo > "$tmp"
+    echo > "$TEMPFILE"
     for num in $@; do
-        id=$(echo "select id from root.LearningCollection order by dateAdded" | mysql | perl -ne "print if \$. == $num")
+        id=$(echo "select id from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
         item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
         item=${item//\'/\\\'\'}
 
         echo "echo 'update $SCHEMA_NAME.$TABLE_NAME set learning = ""''"$item"''"" where id=$id' | mysql"
-    done >> "$tmp"
+    done >> "$TEMPFILE"
 
-    print -rz "$(cat "$tmp")"
-    command rm "$tmp"
+    print -rz "$(cat "$TEMPFILE")"
+    command rm "$TEMPFILE"
 }
 
 

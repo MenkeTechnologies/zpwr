@@ -74,6 +74,8 @@ export DL="$HOME/Downloads"
 export XAUTHORITY="$HOME/.Xauthority"
 export VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
 export ALL_KEYBINDINGS="$HOME/keybindings.txt"
+export TEMPFILE="/tmp/.temp$$-1$USER"
+export TEMPFILE2="/tmp/.temp$$-2$USER"
 
 export TERMINAL_APP="Terminal.app"
 export TERM="xterm-256color"
@@ -453,7 +455,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
     }
 
     scriptToPDF(){
-        tempFile=__test.ps
+        tempFile="$HOME/__test.ps"
         vim "$1" -c "hardcopy > $tempFile" -c quitall
         cat "$tempFile" | open -fa Preview
         rm "$tempFile"
@@ -462,7 +464,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     exists ps2pdf && {
         scriptToPDF(){
-            tempFile=__test.ps
+            tempFile="$HOME/__test.ps"
             vim "$1" -c "hardcopy > $tempFile" -c quitall
             ps2pdf "$tempFile" "${1%%.*}".pdf
             rm "$tempFile"
@@ -893,7 +895,6 @@ totalLines(){
 
     isGitDir || return 1
 
-    temp="$HOME/.temp$$"
     prettyPrint "starting total line count..."
     {
    
@@ -912,17 +913,17 @@ totalLines(){
         fi
     done < <(git ls-files) 2>/dev/null
 
-    } > "$temp"
+    } > "$TEMPFILE"
 
-    if ! test -f "$temp"; then
+    if ! test -f "$TEMPFILE"; then
         printf "\x1b[0;1;31m"
-        printf "where is $temp\n" >&2
+        printf "where is $TEMPFILE\n" >&2
         printf "\x1b[0m"
         return 1
     fi
 
     prettyPrint "Total Line Count"
-    lineCount="$(cat "$temp" | wc -l)"
+    lineCount="$(cat "$TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
         echo "$lineCount" | 
             perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
@@ -932,14 +933,13 @@ totalLines(){
             perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
-    command rm "$temp"
+    command rm "$TEMPFILE"
 }
 
 lineContribCount(){
 
     isGitDir || return 1
 
-    temp="$HOME/.temp$$"
     prettyPrint "starting line contrib count..."
     {
    
@@ -957,27 +957,27 @@ lineContribCount(){
         fi
     done < <(git ls-files) 2>/dev/null
 
-    } > "$temp"
+    } > "$TEMPFILE"
 
-    if ! test -f "$temp"; then
+    if ! test -f "$TEMPFILE"; then
         printf "\x1b[0;1;31m"
-        printf "where is $temp\n" >&2
+        printf "where is $TEMPFILE\n" >&2
         printf "\x1b[0m"
         return 1
     fi
 
     prettyPrint "Line Contribution Count"
-    lineCount="$(cat "$temp" | wc -l)"
+    lineCount="$(cat "$TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
-        cat "$temp" | sort | uniq -c | sort -r |
+        cat "$TEMPFILE" | sort | uniq -c | sort -r |
         perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
-        cat "$temp" | sort | uniq -c | sort -r |
+        cat "$TEMPFILE" | sort | uniq -c | sort -r |
         perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
-    command rm "$temp"
+    command rm "$TEMPFILE"
 
 }
 
@@ -1406,10 +1406,10 @@ getrc(){
 
     if [[ $(uname) == Darwin ]]; then
         if exists dialog;then
-            dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> /tmp/temp$$
+            dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$TEMPFILE"
             clear
-            REPLY="$(cat /tmp/temp$$)"
-            rm /tmp/temp$$
+            REPLY="$(cat "$TEMPFILE")"
+            command rm "$TEMPFILE"
         else
             printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> "
             read
@@ -1980,21 +1980,21 @@ se(){
         # escaping for perl $ and @ sigils
         argdollar=${arg//$/\\$}
         arg=${argdollar//@/\\@}
-        echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$HOME/temp1-$$'"; open $fh2, ">>", "'$HOME/temp2-$$'";while (<>){my @F = split;if (grep /'"$arg"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+        echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$TEMPFILE'"; open $fh2, ">>", "'$TEMPFILE2'";while (<>){my @F = split;if (grep /'"$arg"'/i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
         if [[ -z "$2" ]]; then
             if [[ "$CUSTOM_COLORS" = true ]]; then
-                paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
+                paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
             else
-            paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
+            paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
             fi
         else
             if [[ "$CUSTOM_COLORS" = true ]]; then
-                paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
+                paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
             else
-            paste -- ~/temp1-$$ <(cat -- ~/temp2-$$ | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
+            paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
             fi | command egrep --color=always -i -- "$2"
         fi
-        command rm ~/temp1-$$ ~/temp2-$$
+        command rm $TEMPFILE $TEMPFILE2
     fi
 
 }
@@ -2166,14 +2166,14 @@ timer() {
             ((total += runtime))
         done
         avg=$((runtime/(count *1.0)))
-        prettyPrint "$local_command took $runtime ms for $count rounds" >> ~/.temp$$
+        prettyPrint "$local_command took $runtime ms for $count rounds" >> "$TEMPFILE"
         echo
     done
-    cat ~/.temp$$
+    cat "$TEMPFILE"
     totend=$($cmd +%s)
     tot=$((totend-totstart))
     prettyPrint "total seconds at $tot s."
-    command rm ~/.temp$$
+    command rm "$TEMPFILE"
 
 }
 
