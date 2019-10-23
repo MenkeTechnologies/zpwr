@@ -1951,16 +1951,20 @@ _ssu(){
 }
 
     declare -A learn_ary
-    declare -a my_keys
-    declare -a my_values
-    eval "learn_ary=( $(echo "select learning from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -e '@a=();$c=0;do{chomp;push(@ary,++$c." $c:".quotemeta($_))}for<>;$c=0;do{print "$_ " if $c++ < 1000}for reverse @ary') )"
-    my_keys=(${(Onk)learn_ary})
-    my_values=(${(Onv)learn_ary})
+    declare -a learn_keys
+    declare -a learn_values
 _se(){
-    _describe -t zdir 'my learning' my_values my_keys
+    eval "learn_ary=( $(echo "select learning from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -e '@a=();$c=0;do{chomp;push(@ary,++$c." $c:".quotemeta($_))}for<>;$c=0;do{print "$_ " if $c++ < 1000}for reverse @ary') )"
+
+    #reverse numeric sort
+    learn_keys=(${(Onk)learn_ary})
+    #reverse numeric sort
+    learn_values=(${(Onv)learn_ary})
+    _describe -t zdir 'my learning' learn_values learn_keys
 }
 
-
+#to allow reverse numeric sort
+zstyle ':completion:*:*:(se|redo|rsql):*:*' sort false
 
 subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
@@ -2077,6 +2081,8 @@ _megacomplete(){
 # list of completers to use
 zstyle ':completion:*' completer _expand _megacomplete _ignored _approximate _correct
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
+
+
 
 compdef _se se redo rsql
 compdef _cl clearList
