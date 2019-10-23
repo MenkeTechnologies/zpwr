@@ -1915,14 +1915,14 @@ _f(){
     if exists fasd;then
         _alternative \
         'files:directory:_path_files -g "*(-D/)"' \
-        'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
-        'fasd:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
+        'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
+        'fasd-file:fasd ranked files:(('"$(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
         'directory-stack:directory stack:_directory_stack'
     else
         _alternative \
         'files:directory:_path_files -g "*(-D/)"' \
-        'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
-    'directory-stack:directory stack:_directory_stack'
+        'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
+        'directory-stack:directory stack:_directory_stack'
     fi
 
 }
@@ -1931,24 +1931,35 @@ _c(){
     if exists fasd;then
     _alternative \
     'files:files:_path_files -g "*(D^/) *(DF)"' \
-    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
-        'fasd-file:fasd ranked files:(('"$(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
-        'fasd:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))'
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
+    'fasd-file:fasd ranked files:(('"$(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
+    'fasd:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))'
     else
     _alternative \
     'files:files:_path_files -g "*(D^/) *(DF)"' \
-    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:\"$1\" "if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' 
+    'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' 
     fi
 }
 
 _ssd(){
-    arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print}if/service/ and/running/')"')')
+    arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and/running/')"')')
     _arguments -s $arguments
 }
 _ssu(){
-    arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print}if/service/ and!/running/')"')')
+    arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')
     _arguments -s $arguments
 }
+
+    declare -A learn_ary
+    declare -a my_keys
+    declare -a my_values
+    eval "learn_ary=( $(echo "select learning from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -e '@a=();$c=0;do{chomp;push(@ary,++$c." $c:".quotemeta($_))}for<>;$c=0;do{print "$_ " if $c++ < 1000}for reverse @ary') )"
+    my_keys=(${(Onk)learn_ary})
+    my_values=(${(Onv)learn_ary})
+_se(){
+    _describe -t zdir 'my learning' my_values my_keys
+}
+
 
 
 subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
@@ -2067,6 +2078,7 @@ _megacomplete(){
 zstyle ':completion:*' completer _expand _megacomplete _ignored _approximate _correct
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
+compdef _se se redo rsql
 compdef _cl clearList
 compdef _f f
 compdef _c c
