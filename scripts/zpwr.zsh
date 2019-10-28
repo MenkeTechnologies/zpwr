@@ -37,7 +37,7 @@ case $verb in
         ;;
     updatedeps) cmd="apz" #update all dependencies
         ;;
-    start) cmd="tmm_notabs" #start all tabs
+    start) cmd="tmm_notabs" #start with no tabs
         ;;
     starttabs) cmd="tmm_full" #start all tabs
         ;;
