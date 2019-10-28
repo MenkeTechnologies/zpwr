@@ -37,7 +37,9 @@ case $verb in
         ;;
     updatedeps) cmd="apz" #update all dependencies
         ;;
-    start) cmd="tmm_full" #start all tabs
+    start) cmd="tmm_notabs" #start all tabs
+        ;;
+    starttabs) cmd="tmm_full" #start all tabs
         ;;
     attach) cmd="tmux attach-session" #attach to tmux session
         ;;
