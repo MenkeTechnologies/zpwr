@@ -365,6 +365,7 @@ alias logs="tail -f /var/log/**/*.log | ccze"
 alias matr="cmatrix -C blue -abs"
 alias tm="python3 $PYSCRIPTS/tmux_starter.py"
 alias tmm="python3 $PYSCRIPTS/ssh_starter.py"
+alias tmm_notabs="python3 $PYSCRIPTS/complete_ssh_starter.py;"
 alias tmm_full="python3 $PYSCRIPTS/tabs.py;python3 $PYSCRIPTS/complete_ssh_starter.py;"
 alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
