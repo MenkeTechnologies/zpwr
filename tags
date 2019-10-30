@@ -8,9 +8,8 @@
 --enable-luainterp	install.sh	/^            --enable-luainterp=yes \\$/;"	v
 --enable-perlinterp	install.sh	/^            --enable-perlinterp=yes \\$/;"	v
 --enable-python3interp	install.sh	/^            --enable-python3interp=yes \\$/;"	v
---enable-pythoninterp	install.sh	/^            --enable-pythoninterp=yes \\$/;"	v
+--enable-pythoninterp	install.sh	/^            --enable-pythoninterp=no \\$/;"	v
 --enable-rubyinterp	install.sh	/^            --enable-rubyinterp=yes \\$/;"	v
---with-python-config-dir	install.sh	/^            --with-python-config-dir=\/usr\/lib\/python2.7\/config \\$/;"	v
 --with-python3-config-dir	install.sh	/^            --with-python3-config-dir=\/usr\/lib\/python3.5\/config \\$/;"	v
 BASE_DIR	remoteRepoMonitorDaemon.sh	/^BASE_DIR="$HOME\/forkedRepos"$/;"	v
 BLUE	blueText.sh	/^BLUE='\\e[37;44m'$/;"	v
