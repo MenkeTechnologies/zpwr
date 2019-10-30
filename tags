@@ -4,13 +4,13 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
---enable-gui	vim_install.sh	/^            --enable-gui=gtk2 --enable-cscope --prefix=\/usr$/;"	v
---enable-luainterp	vim_install.sh	/^            --enable-luainterp=yes \\$/;"	v
---enable-perlinterp	vim_install.sh	/^            --enable-perlinterp=yes \\$/;"	v
---enable-python3interp	vim_install.sh	/^            --enable-python3interp=yes \\$/;"	v
---enable-pythoninterp	vim_install.sh	/^            --enable-pythoninterp=no \\$/;"	v
---enable-rubyinterp	vim_install.sh	/^            --enable-rubyinterp=yes \\$/;"	v
---with-python3-config-dir	vim_install.sh	/^            --with-python3-config-dir=\/usr\/lib\/python3.5\/config \\$/;"	v
+--enable-gui	vim_install.sh	/^        --enable-gui=gtk2 --enable-cscope --prefix=\/usr$/;"	v
+--enable-luainterp	vim_install.sh	/^        --enable-luainterp=yes \\$/;"	v
+--enable-perlinterp	vim_install.sh	/^        --enable-perlinterp=yes \\$/;"	v
+--enable-python3interp	vim_install.sh	/^        --enable-python3interp=yes \\$/;"	v
+--enable-pythoninterp	vim_install.sh	/^        --enable-pythoninterp=no \\$/;"	v
+--enable-rubyinterp	vim_install.sh	/^        --enable-rubyinterp=yes \\$/;"	v
+--with-python3-config-dir	vim_install.sh	/^        --with-python3-config-dir=\/usr\/lib\/python3.5\/config \\$/;"	v
 BASE_DIR	remoteRepoMonitorDaemon.sh	/^BASE_DIR="$HOME\/forkedRepos"$/;"	v
 BLUE	blueText.sh	/^BLUE='\\e[37;44m'$/;"	v
 BLUE	blueUpperText.sh	/^BLUE='\\e[37;44m'$/;"	v
@@ -729,7 +729,7 @@ var	mantozshcomp.py	/^    def var(self):$/;"	m	class:Deroffer
 verb	zpwr.zsh	/^verb="$1"$/;"	v
 version	about.sh	/^            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\\t ]@@')"$/;"	v
 view	eyes.sh	/^    view=${ary[$randIndex]}$/;"	v
-vimV	vim_install.sh	/^vimV="$(vim --version | head -1 | awk '{print $5}')"$/;"	v
+vimV	install.sh	/^vimV="$(vim --version | head -1 | awk '{print $5}')"$/;"	v
 w	uploadWebPi.sh	/^w=80$/;"	v
 warnOverwrite	install.sh	/^warnOverwrite(){$/;"	f
 warnSudo	install.sh	/^warnSudo(){$/;"	f
