@@ -1092,7 +1092,7 @@ elseif os == "Linux"
     endif
 
 endif
-set  rtp+=~/powerline/bindings/vim/
+set  rtp+=~/.tmux/powerline/bindings/vim/
 
 "gf and :find will find files automatically in these locations
 set path+=~/Desktop
