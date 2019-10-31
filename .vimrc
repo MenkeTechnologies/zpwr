@@ -1065,13 +1065,11 @@ elseif os == "Linux"
     let distro = substitute(system('grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \"'), "\n", "", "")
 
     if distro == "ubuntu"
-        set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
         map <ESC>[A <C-Up>
         map <ESC>[B <C-Down>
         map <ESC>[C <C-Right>
         map <ESC>[D <C-Left>
     elseif distro == "raspbian"
-        set  rtp+=/usr/local/lib/python2.7/dist-packages/powerline/bindings/vim/
         map <ESC>[A <C-Up>
         map <ESC>[B <C-Down>
         map <ESC>[C <C-Right>
@@ -1081,15 +1079,12 @@ elseif os == "Linux"
         map <ESC>[1;5B <C-Down>
         map <ESC>[1;5C <C-Right>
         map <ESC>[1;5D <C-Left>
-        set  runtimepath+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
     elseif distro == 'fedora'
-        set  runtimepath+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
         map <ESC>[A <C-Up>
         map <ESC>[B <C-Down>
         map <ESC>[C <C-Right>
         map <ESC>[D <C-Left>
     else
-        set  runtimepath+=/usr/lib/python2.7/site-packages/powerline/bindings/vim/
         "map <ESC>[A <C-Up>
         "map <ESC>[B <C-Down>
         "map <ESC>[C <C-Right>
@@ -1097,6 +1092,7 @@ elseif os == "Linux"
     endif
 
 endif
+set  rtp+=~/powerline/bindings/vim/
 
 "gf and :find will find files automatically in these locations
 set path+=~/Desktop
