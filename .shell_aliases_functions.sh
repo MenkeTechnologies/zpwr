@@ -2184,6 +2184,27 @@ timer() {
 }
 
 
+changeGitEmail(){
+    if [[ -z "$2" ]]; then
+        echo "need two args" >&2 && return 1
+    fi
+
+    if ! isGitDir; then
+        echo "not a git dir" >&2 && return 1
+    fi
+
+    oldEmail="$1"
+    newEmail="$2"
+
+    git filter-branch --commit-filter '
+    if [ "$GIT_AUTHOR_EMAIL" = "'$oldEmail'" ]; then
+        GIT_AUTHOR_EMAIL="'$newEmail'"; git commit-tree "$@";
+    else
+        git commit-tree "$@";
+    fi' HEAD
+}
+
+
 #}}}***********************************************************
 
 #{{{                    MARK:Global Alias
