@@ -1380,6 +1380,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:*:tmux' list-colors '=(#b)(*)=1;37;45'
     zstyle ':completion:*:*:last-ten' list-colors '=(#b)(*)=1;33;45'
     zstyle ':completion:*:*:last-line' list-colors '=(#b)(*)=1;37;44'
+    zstyle ':completion:*:*:last-clip' list-colors '=(#b)(*)=1;37;45'
     #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
     zstyle ':completion:*' list-separator '<<)(>>'
     COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
@@ -2080,8 +2081,8 @@ _complete_clipboard(){
             ;;
     esac
 
-    clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "( ${clipboard_str}; )" "{ ${clipboard_str}; }" "\$(${clipboard_str})" "\"\$(${clipboard_str})"\" "'${clipboard_str}'")
-    _wanted last-line expl 'clipboard args' compadd -Qa clipboard_array
+    clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "'${clipboard_str}'")
+    _wanted last-clip expl 'clipboard args' compadd -Qa clipboard_array
 }
 
 local -A whitelist_tmux_completion
