@@ -15,6 +15,9 @@
 [alias]
     last = log -1 HEAD
 	unstage = reset HEAD --
+	untrack = rm --cached
+	track = add -N
+	stage = add
 	visual = !gitk
 
 [color "diff-highlight"]
