@@ -1256,7 +1256,7 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts commits heads commit-tags heads-local heads-remote recent-branches commit-tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tmux contexts last-ten
+zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tmux contexts last-ten
 
 zstyle ':completion:*:*:z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
 
@@ -1310,13 +1310,21 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:*:commits' list-colors '=(#b)(*)=1;37;45'
     zstyle ':completion:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
     zstyle ':completion:*:commit-tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
+    zstyle ':completion:*:cached-files' list-colors '=(#b)(*)=1;30=1;34;41;4'
+    zstyle ':completion:*:files' list-colors '=(#b)(*)=1;30=1;34;41;4'
+    zstyle ':completion:*:blobs' list-colors '=(#b)(*)=1;30=1;34;41;4'
+    zstyle ':completion:*:blob-objects' list-colors '=(#b)(*)=1;30=1;34;41;4'
+    zstyle ':completion:*:trees' list-colors '=(#b)(*)=1;30=1;34;41;4'
+
+    zstyle ':completion:*:tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
+
     zstyle ':completion:*:heads-local' list-colors '=(#b)(*)=1;30=1;34;43;4'
     zstyle ':completion:*:heads-remote' list-colors '=(#b)(*)=1;30=1;37;46'
     zstyle ':completion:*:modified-files' list-colors '=(#b)(*)=1;30=1;37;42'
+    zstyle ':completion:*:revisions' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:recent-branches' list-colors '=(#b)(*)=1;30=1;37;44'
     zstyle ':completion:*:remote-branch-names-noprefix' list-colors '=(#b)(*)=1;30=1;33;46'
     zstyle ':completion:*:blobs-and-trees-in-treeish' list-colors '=(#b)(*)=1;30=1;34;43'
-    zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;34;43'
     zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;37;43'
     zstyle ':completion:*:*(git|git-checkout):*:files' list-colors '=(#b)(*)=1;30=1;32;43'
     zstyle ':completion:*:prefixes' list-colors '=(#b)(*)=1;30=1;37;43'
