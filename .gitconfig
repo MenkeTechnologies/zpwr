@@ -7,12 +7,15 @@
     excludesfile = /.gitignore_global
     autocrlf = input
     pager = diff-so-fancy | less --tabs=4 -RFX
+    commentchar = |
 
 [color]
     ui = true
 
 [alias]
     last = log -1 HEAD
+	unstage = reset HEAD --
+	visual = !gitk
 
 [color "diff-highlight"]
     oldNormal = red bold
@@ -30,4 +33,7 @@
     whitespace = red reverse
 
 [diff]
+    tool = vimdiff
+
+[merge]
     tool = vimdiff
