@@ -103,6 +103,7 @@ ZSH_DISABLE_COMPFIX=true
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 export SHELL="$(which zsh)"
+export OS_TYPE="$(uname -s | perl -pe '$_=lc')"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -185,12 +186,12 @@ plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround \
 
 PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 
-if [[ "$(uname)" == "Darwin" ]];then
+if [[ "$OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
         plugins+=(tmux)
-elif [[ "$(uname)" == "Linux" ]];then
+elif [[ "$OS_TYPE" == "linux" ]];then
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
         plugins+=(tmux)
     plugins+=(systemd)
@@ -408,7 +409,7 @@ alternateQuotes(){
 clipboard(){
     [[ -z "$BUFFER" ]] && return 1
 
-    if [[ "$(uname)" == Darwin ]]; then
+    if [[ "$OS_TYPE" == darwin ]]; then
         print -sr "$BUFFER"
         print -rn "$BUFFER" | pbcopy
         echo
@@ -841,7 +842,7 @@ bindkey '\eOQ' sub
 bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
-if [[ "$(uname)" == Darwin ]];then
+if [[ "$OS_TYPE" == darwin ]];then
     if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
@@ -979,7 +980,7 @@ bindkey -M listscroll f complete-word
 bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
-if [[ "$(uname)" == Darwin ]]; then
+if [[ "$OS_TYPE" == darwin ]]; then
     if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
@@ -1365,7 +1366,7 @@ if [[ $CUSTOM_COLORS == true ]]; then
     zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
-    if [[ "$(uname)" == Darwin ]]; then
+    if [[ "$OS_TYPE" == darwin ]]; then
         #homebrew tags
         zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
         zstyle ':completion:*:formulae' list-colors '=(#b)(*)=1;30=1;36;44'
@@ -1477,7 +1478,7 @@ globalAliasesInit(){
         $__TS
     done"
 
-    if [[ "$(uname)" == Darwin ]]; then
+    if [[ "$OS_TYPE" == darwin ]]; then
         alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
     else
         alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
@@ -1536,7 +1537,7 @@ test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
 #{{{                    MARK:Initialize Login
 #**************************************************************
 #go to desktop if not root
-if [[ "$(uname)" = Darwin ]]; then
+if [[ "$OS_TYPE" == darwin ]]; then
     if [[ "$UID" != "0" ]]; then
          #builtin cd "$D" && clear
         clear
@@ -1638,7 +1639,7 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
 #**************************************************************
 #if this is a mac or linux
-if [[ "$(uname)" == "Darwin" ]];then
+if [[ "$OS_TYPE" == "darwin" ]];then
     if [[ -d "$WCC" ]]; then
         : ~WCC
     fi
@@ -2055,6 +2056,34 @@ _complete_plus_last_command_args() {
     _wanted last-line expl 'last args' compadd -Qa last_command_array
 }
 
+_complete_clipboard(){
+
+    case "$OS_TYPE" in
+        darwin*)
+            clipboard_str="$(pbpaste)"
+            ;;
+        linux*)
+            if [[ "$(uname -r)" != *icrosoft* ]];then
+                clipboard_str="$(xclip -o -sel clip)"
+            else
+                clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
+            fi
+            ;;
+        cygwin*)
+                clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
+            ;;
+        msys*)
+                clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
+            ;;
+        *)
+            clipboard_str="$(xclip -o -sel clip)"
+            ;;
+    esac
+
+    clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "( ${clipboard_str}; )" "{ ${clipboard_str}; }" "\$(${clipboard_str})" "\"\$(${clipboard_str})"\" "'${clipboard_str}'")
+    _wanted last-line expl 'clipboard args' compadd -Qa clipboard_array
+}
+
 local -A whitelist_tmux_completion
 whitelist_tmux_completion=(ping 1 dig 2 digs 3 host 4 mtr 5 traceroute 6)
 
@@ -2082,6 +2111,8 @@ _megacomplete(){
     if (( $#last_command_array > 0 )); then
         _complete_plus_last_command_args
     fi
+
+    _complete_clipboard
 
     return $ret
 }

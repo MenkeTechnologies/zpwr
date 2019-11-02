@@ -43,6 +43,10 @@ else
     }
 fi
 
+if [[ -z "$OS_TYPE" ]]; then
+    export OS_TYPE="$(uname -s | perl -pe '$_=lc')"
+
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:Global Vars
@@ -106,7 +110,7 @@ echo "$PATH" | command grep -iq shellScripts || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
 
-    if [[ "$(uname)" == Darwin ]]; then
+    if [[ "$OS_TYPE" == darwin ]]; then
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$PATH"
@@ -120,7 +124,7 @@ echo "$PATH" | command grep -iq shellScripts || {
 
 #{{{                           MARK:HOMES
 #**********************************************************************
-    if [[ "$(uname)" == Darwin ]];then
+    if [[ "$OS_TYPE" == darwin ]];then
         if exists jenv;then
             eval "$(jenv init -)"
             test -z "$JAVA_HOME" && 
@@ -273,7 +277,7 @@ alias gac='git add . && git commit -m '
 alias gbv='git branch -a -vv'
 alias allRebase='git rebase -i $(git rev-list --max-parents=0 HEAD)'
 
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$OS_TYPE" == darwin ]]; then
     #Darwin specific aliases
     alias p_refresh="pio -f -c clion init --ide clion "
     alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
@@ -436,7 +440,7 @@ r(){
     fi
 }
 
-if [[ "$(uname)" == "Darwin" ]]; then
+if [[ "$OS_TYPE" == darwin ]]; then
 
     exe(){
         python3 "$PYSCRIPTS/ssh_runner.py" "$@"
@@ -640,7 +644,7 @@ scnew(){
 }
 
 p(){
-    if [[ "$(uname)" == Linux || "$(uname)" == Darwin ]]; then
+    if [[ "$OS_TYPE" == linux || "$OS_TYPE" == darwin ]]; then
         [[ -z $1 ]] && ps -ef && return 0
         out="$(ps -ef)"
     else
@@ -698,7 +702,7 @@ about(){
 }
 
 clearList() {
-    if [[ "$(uname)" == "Darwin" ]]; then
+    if [[ "$OS_TYPE" == darwin ]]; then
         if exists exa;then
             ls_command="$EXA_COMMAND"
         else
@@ -709,7 +713,7 @@ clearList() {
             fi
         fi
         lib_command="otool -L"
-    elif [[ "$(uname)" == Linux ]];then
+    elif [[ "$OS_TYPE" == linux ]];then
 
         if exists exa;then
             ls_command="$EXA_COMMAND"
@@ -790,7 +794,7 @@ clearList() {
 listNoClear () {
     exists exa && eval "$EXA_COMMAND" && return 0
 
-    if [[ "$(uname)" == "Darwin" ]]; then
+    if [[ "$OS_TYPE" == darwin ]]; then
         if exists grc; then
             grc -c "$HOME/conf.gls" gls \
             -iFlhA --color=always
@@ -1297,9 +1301,8 @@ jetbrainsWorkspaceEdit(){
 
 getOpenCommand(){
     local open_cmd
-    OSTYPE="$(uname -s | tr 'A-Z' 'a-z')"
 
-    case "$OSTYPE" in
+    case "$OS_TYPE" in
         darwin*)  open_cmd='open' ;;
         cygwin*)  open_cmd='cygstart' ;;
         linux*)
@@ -1310,7 +1313,7 @@ getOpenCommand(){
             fi
         ;;
         msys*)    open_cmd='start ""' ;;
-        *)        echo "Platform $OSTYPE not supported"
+        *)        echo "Platform $OS_TYPE not supported"
                     return 1
                     ;;
     esac
@@ -1410,7 +1413,7 @@ getrc(){
         branch="$1"
     fi
 
-    if [[ $(uname) == Darwin ]]; then
+    if [[ $OS_TYPE == darwin ]]; then
         if exists dialog;then
             dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$TEMPFILE"
             clear
@@ -1886,7 +1889,7 @@ fz(){
 
 figletfonts(){
 
-    if [[ "$(uname)" == Darwin ]]; then
+    if [[ "$OS_TYPE" == darwin ]]; then
         FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
     else
         FIGLET_DIR="/usr/share/figlet"
