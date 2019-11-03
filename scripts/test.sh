@@ -28,6 +28,13 @@ if [[ -z "$WIZARD" ]]; then
     echo "we are 2019-01-11 Jan 11, 2019 2019-01-11 13:33"
 
 fi
+echo cool
+echo cool
+echo cool
+echo cool
+echo cool
+echo cool
+echo cool
 
 x=1
 
@@ -39,7 +46,6 @@ else
     ####
     # adsfjajdsfj #
     ####
-
     echo "the dtae is 2019-01-11"
 fi
 

@@ -822,7 +822,7 @@ function TmuxRepeat(type)
     let tmux=$TMUX
     let a_save = ""
 
-    if !empty(tmux)
+    if !empty(tmux) || has("gui_running")
         if a:type == "visual" || a:type == "repl"
             silent !mkdir $VIMHOME/.temp > /dev/null 2>&1
             let fileName=$VIMHOME."/.temp/.tempfile.".exeFileType
@@ -843,8 +843,14 @@ function TmuxRepeat(type)
 
         let pane_count=Strip(system("tmux list-panes | wc -l"))
 
-        if pane_count > 1
+        if pane_count > 1 || has("gui_running")
             if has("gui_running")
+                let output =  system("tmux list-sessions | command grep vimmers")
+                if v:shell_error != 0
+                    echom "No Vimmers tmux session!"
+                    return 0
+                endif
+
                 if a:type == "repl"
                     silent! exec "!tmux paste-buffer -b buffer0099 -t vimmers:1. "
                     redraw!
@@ -852,7 +858,7 @@ function TmuxRepeat(type)
                 endif
 
                 if index(supportedTypes, exeFileType) >= 0
-                    silent! exec "!tmux send-keys -t vimmers:1. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
+                    silent! exec "!tmux send-keys -t vimmers:0. C-c ' bash \"$SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
                     silent! exec "!tmux send-keys -t vimmer:1. C-c up C-m"
