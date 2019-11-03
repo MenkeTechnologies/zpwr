@@ -852,7 +852,7 @@ function TmuxRepeat(type)
                 endif
 
                 if a:type == "repl"
-                    silent! exec "!tmux paste-buffer -b buffer0099 -t vimmers:1. "
+                    silent! exec "!tmux paste-buffer -b buffer0099 -t vimmers:0. "
                     redraw!
                     return 0
                 endif
