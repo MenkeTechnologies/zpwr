@@ -32,9 +32,6 @@ echo cool
 echo cool
 echo cool
 echo cool
-echo cool
-echo cool
-echo cool
 
 x=1
 
