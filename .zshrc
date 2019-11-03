@@ -2081,8 +2081,10 @@ _complete_clipboard(){
             ;;
     esac
 
+    if [[ -n "$clipboard_str" ]]; then
     clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "'${clipboard_str}'")
     _wanted last-clip expl 'clipboard args' compadd -Qa clipboard_array
+    fi
 }
 
 local -A whitelist_tmux_completion
