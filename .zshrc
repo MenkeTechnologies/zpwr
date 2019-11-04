@@ -2059,6 +2059,7 @@ _complete_plus_last_command_args() {
 
 _complete_clipboard(){
 
+    local clipboard_str
     case "$OS_TYPE" in
         darwin*)
             clipboard_str="$(pbpaste)"
