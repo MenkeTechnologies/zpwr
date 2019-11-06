@@ -16,7 +16,12 @@ cat<<EOF
             test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
             xxd \$file | $COLORIZER_FZF_YAML
         else
-            $COLORIZER_FZF_FILE 2>/dev/null;
+            extension=\${file##*.};
+            if [[ -z "\$extension" ]]; then
+                $COLORIZER_FZF_FILE_DEFAULT 2>/dev/null;
+            else
+                $COLORIZER_FZF_FILE 2>/dev/null;
+            fi
         fi
     fi
 else
