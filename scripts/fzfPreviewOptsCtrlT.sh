@@ -18,11 +18,11 @@ cat<<EOF
             xxd \$file | $COLORIZER_FZF_YAML
         else
             case \$file in
-                *.*)
-                    $COLORIZER_FZF_FILE 2>/dev/null;
-                    ;;
                 *.txt)
                     $COLORIZER_FZF_FILE_TEXT 2>/dev/null;
+                    ;;
+                *.*)
+                    $COLORIZER_FZF_FILE 2>/dev/null;
                     ;;
                 *)
                     $COLORIZER_FZF_FILE_DEFAULT 2>/dev/null;
