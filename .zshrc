@@ -409,31 +409,21 @@ alternateQuotes(){
 clipboard(){
     [[ -z "$BUFFER" ]] && return 1
 
-    if [[ "$OS_TYPE" == darwin ]]; then
-        print -sr "$BUFFER"
-        print -rn "$BUFFER" | pbcopy
-        echo
-        print -n "\x1b[0;34mCopied \x1b[1m\""
-        print -rn "$BUFFER"
-        print  "\"\x1b[0;34m to System Clipboard!"
-        echo
-        zle .redisplay
-    else
-        if type xclip &> /dev/null; then
+    clipcmd=$(getCopyCommand)
+    if [[ -n $clipcmd ]]; then
             print -sr "$BUFFER"
-            print -n "$BUFFER" | xclip -selection c -i
+            print -rn "$BUFFER" | pbcopy
             echo
             print -n "\x1b[0;34mCopied \x1b[1m\""
-            print -nr "$BUFFER"
+            print -rn "$BUFFER"
             print  "\"\x1b[0;34m to System Clipboard!"
             echo
             zle .redisplay
-        else
-            echo
-            printf "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
-            echo
-            zle .redisplay
-        fi
+    else
+        echo
+        printf "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
+        echo
+        zle .redisplay
     fi
 }
 

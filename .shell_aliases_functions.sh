@@ -1300,6 +1300,34 @@ jetbrainsWorkspaceEdit(){
     done
 }
 
+getCopyCommand(){
+    local copy_cmd
+
+    case "$OS_TYPE" in
+        darwin*)  
+            copy_cmd='pbcopy' ;;
+        cygwin*)
+            copy_cmd='clip.exe' ;;
+        linux*)
+            if [[ "$(uname -r)" != *icrosoft* ]];then
+                copy_cmd='xclip -i -sel clip'
+            else
+                copy_cmd='clip.exe'
+            fi
+            ;;
+        msys*)
+            copy_cmd='clip.exe'
+            ;;
+        *)        
+            echo "Platform $OS_TYPE not supported"
+            return 1
+            ;;
+    esac
+
+    echo "$copy_cmd"
+}
+
+
 getOpenCommand(){
     local open_cmd
 
