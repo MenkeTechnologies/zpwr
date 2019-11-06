@@ -1,18 +1,18 @@
-      #\..                   .x+=:.               
-#. uW8"                    z`    ^%    .uef^"    
-#`t888                        .   <k :d88E       
- #8888   .         u        .@8Ned8" `888E       
- #9888.z88N     us888u.   .@^%8888"   888E .z8k  
- #9888  888E .@88 "8888" x88:  `)8b.  888E~?888L 
- #9888  888E 9888  9888  8888N=*8888  888E  888E 
- #9888  888E 9888  9888   %8"    R88  888E  888E 
- #9888  888E 9888  9888    @8Wou 9%   888E  888E 
-#.8888  888" 9888  9888  .888888P`    888E  888E 
- #`%888*%"   "888*""888" `   ^"F     m888N= 888> 
-    #"`       ^Y"   ^Y'               `Y"   888  
-                                          #J88"  
-                                          #@%    
-                                        #:"      
+      #\..                   .x+=:.
+#. uW8"                    z`    ^%    .uef^"
+#`t888                        .   <k :d88E
+ #8888   .         u        .@8Ned8" `888E
+ #9888.z88N     us888u.   .@^%8888"   888E .z8k
+ #9888  888E .@88 "8888" x88:  `)8b.  888E~?888L
+ #9888  888E 9888  9888  8888N=*8888  888E  888E
+ #9888  888E 9888  9888   %8"    R88  888E  888E
+ #9888  888E 9888  9888    @8Wou 9%   888E  888E
+#.8888  888" 9888  9888  .888888P`    888E  888E
+ #`%888*%"   "888*""888" `   ^"F     m888N= 888>
+    #"`       ^Y"   ^Y'               `Y"   888
+                                          #J88"
+                                          #@%
+                                        #:"
 
 #
 # https://github.com/MenkeTechnologies
@@ -128,7 +128,7 @@ echo "$PATH" | command grep -iq shellScripts || {
     if [[ "$OS_TYPE" == darwin ]];then
         if exists jenv;then
             eval "$(jenv init -)"
-            test -z "$JAVA_HOME" && 
+            test -z "$JAVA_HOME" &&
                 jenv enable-plugin export &>/dev/null
 
         fi
@@ -294,7 +294,7 @@ if [[ "$OS_TYPE" == darwin ]]; then
     alias q="qlmanage -p &>/dev/null"
     #keep remote tty sessions alive by stopping sleep
     #sudo pmset -c ttyskeepawake 1
-    alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $SCRIPTS/sshTunnelVnc.sh" 
+    alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $SCRIPTS/sshTunnelVnc.sh"
     alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $SCRIPTS/sshTunnelVnc2.sh"
     alias rtsync="$HOME/Documents/shellScripts/macOnly/rsyncr.sh"
     alias ig='cd $HOME/IdeaProjects'
@@ -339,7 +339,7 @@ else
             alias apa="sudo yum check-update; sudo yum upgrade -y "
             alias apz="sudo yum check-update; sudo yum upgrade -y; u8"
         fi
-    
+
         alias ipt="sudo iptables --line-numbers -L"
         test -z "$distroName" && {
             distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
@@ -449,7 +449,7 @@ if [[ "$OS_TYPE" == darwin ]]; then
 
     nn(){
         [[ -z "$2" ]] && echo \
-            "Title is \$1 and message is \$2..." >&2 && 
+            "Title is \$1 and message is \$2..." >&2 &&
             return 1
         title="$1"
         msg="$2"
@@ -655,8 +655,8 @@ p(){
 
     for cmd; do
         prettyPrint "SEARCH TERM: $cmd"
-        echo "$out" | 
-            command fgrep --color=always -a -i -- "$cmd" || 
+        echo "$out" |
+            command fgrep --color=always -a -i -- "$cmd" ||
             echo "Nothing found for $cmd."
         echo
     done
@@ -743,7 +743,7 @@ clearList() {
                     lf="$(echo $loc | cut -d' ' -f3-10)"
                     if [[ -f "$lf" ]]; then
                         prettyPrint "$lf" &&
-                        eval "$ls_command" $lf && 
+                        eval "$ls_command" $lf &&
                         prettyPrint "FILE TYPE:" &&
                         eval "file $lf" &&
                         prettyPrint "DEPENDENT ON:" &&
@@ -758,11 +758,11 @@ clearList() {
                         echo
                     else
                         echo "$loc"
-                        echo "$loc" | command grep -q "function" && 
+                        echo "$loc" | command grep -q "function" &&
                         { type -f \
                         "$(echo "$loc" | awk '{print $1}')" | nl -v 0
                         }
-                        echo "$loc" | command grep -q "alias" && 
+                        echo "$loc" | command grep -q "alias" &&
                         {
                             alias "$(echo "$loc" | awk '{print $1}')"
                         }
@@ -773,7 +773,7 @@ clearList() {
             else
                 #path matching, not exe
                 prettyPrint "$arg"
-                eval "$ls_command -d \"$arg\"" || 
+                eval "$ls_command -d \"$arg\"" ||
                     { echo; continue; }
                 echo
                 prettyPrint "FILE TYPE:"
@@ -908,7 +908,7 @@ totalLines(){
 
     prettyPrint "starting total line count..."
     {
-   
+
     while read; do
         isbinary "$REPLY" && continue
         filter=false
@@ -916,7 +916,7 @@ totalLines(){
            if echo "$REPLY" | grep -q "$arg"; then
                filter=true
                break
-           fi 
+           fi
         done
 
         if [[ $filter = false ]]; then
@@ -936,11 +936,11 @@ totalLines(){
     prettyPrint "Total Line Count"
     lineCount="$(cat "$TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
-        echo "$lineCount" | 
+        echo "$lineCount" |
             perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
-        echo "$lineCount" | 
+        echo "$lineCount" |
             perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
@@ -953,7 +953,7 @@ lineContribCount(){
 
     prettyPrint "starting line contrib count..."
     {
-   
+
     while read; do
         isbinary "$REPLY" && continue
         filter=false
@@ -961,7 +961,7 @@ lineContribCount(){
            if echo "$REPLY" | command grep -q "$arg"; then
                filter=true
                break
-           fi 
+           fi
        done
         if [[ $filter = false ]]; then
             git blame "$REPLY" | perl -lne 'do{($_=$1)=~s@^\s+|\s+$@@g; $_=~s@\s+@ @g;print} if m{^[0-9a-f^]+\s\((.*)\s\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s.*\d\)\s.*$}'
@@ -1004,7 +1004,7 @@ gsdc(){
             echo
             printf "\x1b[0m"
             return 1
-        fi 
+        fi
     done
 
 	git status | command grep -q "nothing to commit" && {
@@ -1076,7 +1076,7 @@ creategif(){
 
     test -n "$2" && res="$2"
 
-    test -n "$3" && outFile="$3"	
+    test -n "$3" && outFile="$3"
 
     ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - |
     gifsicle --optimize=3 --delay=3 > "$outFile"
@@ -1166,7 +1166,7 @@ escapeRemove(){
 }
 
 prettyPrint(){
-    if [[ -n "$1" ]];then 
+    if [[ -n "$1" ]];then
         printf "\x1b[1m"
         printf "%s " "$@"
         printf "\x1b[0m\n"
@@ -1300,14 +1300,44 @@ jetbrainsWorkspaceEdit(){
     done
 }
 
+getPasteCommand(){
+    local paste_cmd
+
+    case "$OS_TYPE" in
+        darwin*)
+            paste_cmd='pbpaste'
+            ;;
+        cygwin*)
+            paste_cmd="powershell.exe -c 'Get-Clipboard'"
+            ;;
+        linux*)
+            if [[ "$(uname -r)" != *icrosoft* ]];then
+                paste_cmd='xclip -o -sel clip'
+            else
+                paste_cmd="powershell.exe -c 'Get-Clipboard'"
+            fi
+            ;;
+        msys*)
+            paste_cmd="powershell.exe -c 'Get-Clipboard'"
+            ;;
+        *)
+            echo "Platform $OS_TYPE not supported"
+            return 1
+            ;;
+    esac
+
+    echo "$copy_cmd"
+}
 getCopyCommand(){
     local copy_cmd
 
     case "$OS_TYPE" in
-        darwin*)  
-            copy_cmd='pbcopy' ;;
+        darwin*)
+            copy_cmd='pbcopy'
+            ;;
         cygwin*)
-            copy_cmd='clip.exe' ;;
+            copy_cmd='clip.exe'
+            ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
                 copy_cmd='xclip -i -sel clip'
@@ -1318,7 +1348,7 @@ getCopyCommand(){
         msys*)
             copy_cmd='clip.exe'
             ;;
-        *)        
+        *)
             echo "Platform $OS_TYPE not supported"
             return 1
             ;;
@@ -1332,16 +1362,19 @@ getOpenCommand(){
     local open_cmd
 
     case "$OS_TYPE" in
-        darwin*)  open_cmd='open' ;;
-        cygwin*)  open_cmd='cygstart' ;;
+        darwin*)  open_cmd='open'
+          ;;
+        cygwin*)  open_cmd='cygstart'
+          ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
                 open_cmd='nohup xdg-open'
             else
                 open_cmd='cmd.exe /c start ""'
             fi
-        ;;
-        msys*)    open_cmd='start ""' ;;
+            ;;
+        msys*)    open_cmd='start ""'
+            ;;
         *)        echo "Platform $OS_TYPE not supported"
                     return 1
                     ;;
@@ -1525,7 +1558,7 @@ toriprenew() {
 mycurl(){
     command curl -fsSL -A \
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 |
-    command sed "/^*/d" | sed -E "s@(<|>) @@g" | 
+    command sed "/^*/d" | sed -E "s@(<|>) @@g" |
     sed -E "/^(\{|\}| ) (\[|C)/d"
 }
 
@@ -1615,7 +1648,7 @@ digs(){
                     echo "$out"
                 fi
                 echo
-                if echo "$out" | command grep -q 'address';then 
+                if echo "$out" | command grep -q 'address';then
                     #regular domain name
                     ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
                     if [[ ${noproto: -1} == "." ]]; then
@@ -1714,7 +1747,7 @@ digs(){
                 fi
                 echo
                 echo
-                if echo "$out" | command grep -q 'address';then 
+                if echo "$out" | command grep -q 'address';then
                     #regular domain name
                     ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
                     if [[ ${noproto: -1} == "." ]]; then
@@ -2012,7 +2045,7 @@ se(){
             echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" |
             mysql 2>> $LOGFILE | nl -b a -n rz
         fi
-     
+
     else
         arg="$1"
         # escaping for perl $ and @ sigils
@@ -2082,7 +2115,7 @@ jsonToArray(){
         _tempAry[$key]=$value
     done < <(echo "$json" | jq -r "to_entries|map(\"\(.key)=\(.value)\")|.[]")
 
-        
+
     if isZsh;then
         printf '%s=%s\n' "${(@kv)_tempAry}"
     else
@@ -2158,7 +2191,7 @@ goclean() {
 
 
     # Set local variables
-    if [[ "$(uname -m)" == "x86_64" ]];then 
+    if [[ "$(uname -m)" == "x86_64" ]];then
         ost="$(uname | tr A-Z a-z)_amd64"
     fi
 
