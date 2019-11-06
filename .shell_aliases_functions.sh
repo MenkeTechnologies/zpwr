@@ -2089,12 +2089,18 @@ regenPowerlineLink(){
     dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
     if needSudo "dir"; then
         prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
-        echo sudo ln -sf "$dir" "$TMUX_HOME/powerline"
-        sudo ln -sf "$dir" "$TMUX_HOME"
+        echo sudo ln -sf "$dir" "$TMUX_HOME"
+        (
+            builtin cd "$HOME"
+            sudo ln -sf "$dir" "$TMUX_HOME"
+        )
     else
         prettyPrint "linking $dir to $TMUX_HOME/powerline"
         echo ln -sf "$dir" "$TMUX_HOME/powerline"
-        ln -sf "$dir" "$TMUX_HOME"
+        (
+            builtin cd "$HOME"
+            ln -sf "$dir" "$TMUX_HOME"
+        )
     fi
     command tmux source-file "$HOME/.tmux.conf"
 }
