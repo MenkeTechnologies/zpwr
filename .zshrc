@@ -412,7 +412,7 @@ clipboard(){
     clipcmd=$(getCopyCommand)
     if [[ -n $clipcmd ]]; then
             print -sr "$BUFFER"
-            print -rn "$BUFFER" | pbcopy
+            print -rn "$BUFFER" | ${=clipcmd}
             echo
             print -n "\x1b[0;34mCopied \x1b[1m\""
             print -rn "$BUFFER"
