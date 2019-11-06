@@ -1569,7 +1569,7 @@ else
         if [[ $MYBANNER == ponies ]]; then
             case $distroName in
                 (raspbian)
-                    builtin cd "$D"
+                    test -d "$D" && builtin cd "$D"
                     if type ponysay 1>/dev/null 2>&1; then
                         bash "$HOME/motd.sh" | ponysay -W 120
                     else
@@ -1577,17 +1577,17 @@ else
                     fi
                     ;;
                 (ubuntu|debian|kali|linuxmint)
-                    builtin cd "$D"
+                    test -d "$D" && builtin cd "$D"
                     figlet -f block "$(whoami)" | ponysay -W 120 |
                         splitReg.sh -- ------------- lolcat
                     ;;
                 (fedora|centos|rhel)
-                    builtin cd "$D"
+                    test -d "$D" && builtin cd "$D"
                     figlet -f block "$(whoami)" | ponysay -W 120 |
                         splitReg.sh -- ------------- lolcat
                     ;;
                 (*suse*)
-                    builtin cd "$D"
+                    test -d "$D" && builtin cd "$D"
                     figlet -f block "$(whoami)" | ponysay -W 120 |
                         splitReg.sh -- ------------- lolcat
                     ;;
@@ -1597,19 +1597,19 @@ else
         else
             case $distroName in
                 (raspbian)
-                    builtin cd "$D"
+                    test -d "$D" && builtin cd "$D"
                     bash "$HOME/motd.sh"
                     ;;
                 (ubuntu|debian|kali|linuxmint)
-                    builtin cd "$D"
+                    test -d "$D" && builtin cd "$D"
                     noPonyBanner
                     ;;
                 (fedora|centos|rhel)
-                    builtin cd "$D"
+                    test -d "$D" && builtin cd "$D"
                     noPonyBanner
                     ;;
                 (*suse*)
-                    builtin cd "$D"
+                    test -d "$D" && builtin cd "$D"
                     noPonyBanner
                     ;;
                 (*) :
