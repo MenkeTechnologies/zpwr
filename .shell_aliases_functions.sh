@@ -1326,7 +1326,7 @@ getPasteCommand(){
             ;;
     esac
 
-    echo "$copy_cmd"
+    echo "$paste_cmd"
 }
 getCopyCommand(){
     local copy_cmd
