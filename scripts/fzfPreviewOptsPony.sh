@@ -16,12 +16,14 @@ cat<<EOF
             test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
             xxd \$file | $COLORIZER_FZF_YAML
         else
-            extension="\${\$file##*.}"
-            if [[ -z "\$extension" ]]; then
-                $COLORIZER_FZF_FILE -l ASP 2>/dev/null;
-            else
+            case \$file in
+                *.*)
                 $COLORIZER_FZF_FILE 2>/dev/null;
-            fi
+                    ;;
+            *)
+                $COLORIZER_FZF_FILE_DEFAULT 2>/dev/null;
+                    ;;
+            esac
 
         fi
     fi
