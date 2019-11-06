@@ -1062,7 +1062,6 @@ if os == 'Darwin'
     "set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
     "endif
 
-    set rtp+=/usr/local/lib/python2.7/site-packages/powerline/bindings/vim
     map <ESC>[1;5A <C-Up>
     map <ESC>[1;5B <C-Down>
     map <ESC>[1;5C <C-Right>
