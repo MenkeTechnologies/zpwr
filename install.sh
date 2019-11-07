@@ -108,18 +108,20 @@ dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootki
 
 addDependenciesLinux(){
     dependencies_ary=(pkg-config libclang1 llvm ${dependencies_ary[@]})
-    dependencies_ary+=(build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
+    dependencies_ary+=(build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets \
+        php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf afpfs-ng \
     samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace)
 }
 addDependenciesArch(){
-    dependencies_ary+=(linux-headers net-tools) 
+    dependencies_ary+=(linux-headers net-tools)
 }
 
 addDependenciesSuse(){
     dependencies_ary=(python3-devel ${dependencies_ary[@]})
-    dependencies_ary+=(makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel mysql-devel libevent-devel postgresql-devel fortune ruby-devel openssl-devel net-tools-deprecated \
-        python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel) 
+    dependencies_ary+=(makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel \
+        mysql-devel libevent-devel postgresql-devel fortune ruby-devel openssl-devel net-tools-deprecated \
+        python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel)
 }
 
 addDependenciesDebian(){
@@ -137,7 +139,8 @@ addDependenciesRedHat(){
         sudo yum install -y epel-release
     fi
     dependencies_ary=(python3-devel ${dependencies_ary[@]})
-    dependencies_ary+=(gcc-c++ 'fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server python36-tools ncurses-devel libpcap-devel openssl-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
+    dependencies_ary+=(gcc-c++ 'fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
+        python36-tools ncurses-devel libpcap-devel openssl-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
 }
 
 addDependenciesFreeBSD(){
@@ -146,7 +149,8 @@ addDependenciesFreeBSD(){
 
 addDependenciesMac(){
     dependencies_ary=(macvim ${dependencies_ary[@]})
-    dependencies_ary+=(ripgrep httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher fswatch zzz ghc lua python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
+    dependencies_ary+=(ripgrep httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher \
+        fswatch zzz ghc lua python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
 
 update(){
@@ -211,12 +215,8 @@ refresh(){
 }
 
 
-__ScriptVersion="1.0.0"
+__ScriptVersion="1.0.1"
 
-#===  FUNCTION  ================================================================
-#         NAME:  usage
-#  DESCRIPTION:  Display usage information.
-#===============================================================================
 usage(){
     echo "Usage :  $0 [options] [--]
 
@@ -225,11 +225,7 @@ usage(){
     -s|skip       Skip main section
     -v|version    Display script version"
 
-}    # ----------  end of function usage  ----------
-
-#-----------------------------------------------------------------------
-#  Handle command line arguments
-#-----------------------------------------------------------------------
+}
 
 while getopts ":hvs" opt
 do
@@ -250,15 +246,16 @@ shift $(($OPTIND-1))
 
 showDeps(){
     {
-        printf "Installing ${#dependencies_ary[@]} packages on $distroName: " 
+        printf "Installing ${#dependencies_ary[@]} packages on $distroName: "
         for dep in "${dependencies_ary[@]}" ; do
                 printf "$dep "
-        done 
+        done
     } | prettyPrintStdin
     proceed
 }
 
-files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .shell_aliases_functions.sh conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .powerlevel9kconfig.sh .my.cnf motd.sh)
+files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .shell_aliases_functions.sh \
+    conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .powerlevel9kconfig.sh .my.cnf motd.sh)
 dirs=(Documents/shellScripts .config/htop .config/powerline/themes/tmux)
 
 
@@ -288,6 +285,7 @@ EOF
     backup
 
 }
+
 warnSudo(){
     prettyPrint "It is highly recommended to run 'sudo visudo' to allow noninteractive install.  This allows running sudo without a password.  The following line would be added to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:ALL"
     proceed
