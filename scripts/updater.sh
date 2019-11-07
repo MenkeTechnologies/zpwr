@@ -299,8 +299,8 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
         ssh -x "$hostname" '
         yes | sudo apt update
         yes | sudo apt dist-upgrade
-        yes | sudo apt autoremove
-        yes | sudo apt autoclean'
+        yes | sudo apt-get autoremove
+        yes | sudo apt-get autoclean'
     elif [[ "$manager" == zypper ]]; then
         ssh -x "$hostname" 'sudo zypper --non-interactive refresh
         sudo zypper --non-interactive update
