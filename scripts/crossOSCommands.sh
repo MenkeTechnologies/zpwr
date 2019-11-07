@@ -1,3 +1,16 @@
+#!/usr/bin/env bash
+#{{{ MARK:Header
+#**************************************************************
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:10:25 EDT 2017
+##### Purpose: bash script to contain open, copy and paste commands
+##### Notes:
+#}}}***********************************************************
+
+if [[ -z "$OS_TYPE" ]]; then
+    export OS_TYPE="$(uname -s | perl -pe '$_=lc')"
+
+fi
 
 getOpenCommand(){
     local open_cmd
