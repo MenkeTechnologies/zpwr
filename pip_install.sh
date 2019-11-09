@@ -10,6 +10,7 @@
 #not called from main
 echo "$0" | grep -q pip_install.sh && source common.sh
 
+
 if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     prettyPrint "Upgrading pip"
@@ -25,6 +26,9 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
     python3 -m pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
+
+    prettyPrint "Installing neovim python lib"
+    python3 -m pip install pynvim
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
 
@@ -95,6 +99,9 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
     prettyPrint "Installing PyDf"
     sudo python3 -m pip install pydf
 
+    prettyPrint "Installing neovim python lib"
+    sudo python3 -m pip install pynvim
+
     prettyPrint "Installing MyCLI"
     sudo python3 -m pip install mycli
 
@@ -158,6 +165,9 @@ else
 
         prettyPrint "Installing Speedtest"
         sudo python3 -m pip install speedtest-cli
+
+        prettyPrint "Installing neovim python lib"
+        sudo python3 -m pip install pynvim
 
         prettyPrint "Installing PGCLI"
         sudo python3 -m pip install pgcli
