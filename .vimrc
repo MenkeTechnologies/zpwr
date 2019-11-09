@@ -94,7 +94,9 @@ set shortmess=a
 "show the leader key when pressed
 set showcmd
 "visual mode automatically copies to system clipboard
-set clipboard=autoselect
+if ! has('nvim')
+    set clipboard=autoselect
+endif
 
 "show trailing spaces and tabs
 set list listchars=tab:\ \ ,trail:·
@@ -116,6 +118,11 @@ Plugin 'TerryMa/vim-multiple-cursors'
 Plugin 'luochen1990/rainbow'
 Plugin 'craigemery/vim-autotag'
 Plugin 'beloglazov/vim-online-thesaurus'
+
+if has("nvim")
+    Plugin 'vim-airline/vim-airline'
+    Plugin 'vim-airline/vim-airline-themes'
+endif
 
 let g:indentLine_setColors = 1
 
@@ -1097,7 +1104,9 @@ elseif os == "Linux"
     endif
 
 endif
-set  rtp+=~/.tmux/powerline/bindings/vim/
+if ! has("nvim")
+    set rtp+=~/.tmux/powerline/bindings/vim/
+endif
 
 "gf and :find will find files automatically in these locations
 set path+=~/Desktop
@@ -1169,11 +1178,13 @@ function! MyBalloonExpr()
 endfunction
 
 set mouse=a
-set balloonexpr=MyBalloonExpr()
-set balloondelay=300
-set ttymouse=xterm2
-set ballooneval
-set balloonevalterm
+if ! has('nvim')
+    set balloonexpr=MyBalloonExpr()
+    set balloondelay=300
+    set ttymouse=xterm2
+    set ballooneval
+    set balloonevalterm
+endif
 
 let g:ale_linters = {'perl': ['perl', 'perlcritic']}
 let g:ale_perl_perlcritic_showrules = 1
@@ -1248,5 +1259,25 @@ inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
   \ 'left': '60',
   \ 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }}))
 
+" air-line
+let g:airline_powerline_fonts = 1
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 
 "}}}*****************za******************************************
