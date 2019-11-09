@@ -1280,4 +1280,17 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
+function! AppendToFile(file, lines)
+    call writefile(a:lines, a:file, 'a')
+endfunction
+
+if has("nvim")
+    let viminfo = $HOME.'/.nviminfo'
+    let curFile = expand("%:~")
+    if curFile != ''
+        let curFile = '> '.curFile
+        call AppendToFile(viminfo,[curFile])
+    endif
+endif
+
 "}}}*****************za******************************************

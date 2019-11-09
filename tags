@@ -573,7 +573,9 @@ prettyPrint	textmessage.sh	/^prettyPrint() {$/;"	f
 prettyPrint	updater.sh	/^prettyPrint() {$/;"	f
 prettyPrintStdin	common.sh	/^prettyPrintStdin(){$/;"	f
 printD	banner.pl	/^sub printD {$/;"	s
+printD	scripts/banner.pl	/^sub printD {$/;"	s
 printDate	banner.pl	/^sub printDate {$/;"	s
+printDate	scripts/banner.pl	/^sub printDate {$/;"	s
 proceed	common.sh	/^proceed(){$/;"	f
 progress_pid	batchRename.sh	/^    progress_pid=$!$/;"	v
 progress_pid	openAll.sh	/^    progress_pid=$!$/;"	v
