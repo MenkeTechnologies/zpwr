@@ -45,7 +45,6 @@ fi
 
 if [[ -z "$OS_TYPE" ]]; then
     export OS_TYPE="$(uname -s | perl -pe '$_=lc')"
-
 fi
 #}}}***********************************************************
 
@@ -276,7 +275,7 @@ alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
 alias gpf='git push --force'
 alias gdh='git diff -w HEAD'
-alias bk='git clean -dff && git reset --hard HEAD'
+alias bk='git clean -dff && git reset --hard HEAD && git clean -dff'
 alias glf='git pull --force'
 alias gla='git log --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p '
 alias glaa='git log --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p --all'
@@ -2190,9 +2189,7 @@ timer() {
     tot=$((totend-totstart))
     prettyPrint "total seconds at $tot s."
     command rm "$TEMPFILE"
-
 }
-
 
 changeGitEmail(){
     if [[ -z "$2" ]]; then
