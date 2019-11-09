@@ -529,6 +529,14 @@ if echo "$vimV >= 8.0" | bc | grep -q 1 || vim --version 2>&1 | grep -q '\-pytho
     source "vim_install.sh"
 fi
 
+exists nvim || {
+    builtin cd "$INSTALLER_DIR"
+    git clone https://github.com/neovim/neovim.git
+    cd neovim
+    make CMAKE_BUILD_TYPE=RelWithDebInfo
+    sudo make install
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Tmux
