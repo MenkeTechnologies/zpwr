@@ -16,8 +16,15 @@ MINGW*) open_cmd=start ;;
 esac
 
 if [[ -z $WIZARD ]]; then
-
     echo "tommy was her elol 2019-01-11"
+fi
+
+if [[ -z "$WIZARD" ]]; then
+    echo tommy
+fi
+
+if [[ -z "" ]]; then
+    echo "tooommy was here lolcats and we are cool so we not go back"
 fi
 
 if [[ -z "$WIZARD" ]]; then
@@ -27,9 +34,24 @@ if [[ -z "$WIZARD" ]]; then
 
     echo "we are 2019-01-11 Jan 11, 2019 2019-01-11 13:33"
     echo "the date is 2019-11-03 02:09"
+    ##############
+    #  dljcksjc  #
+    ##############
+
+    echo box 
+    ####
+    # adfkasdfkjjaksdfjlakdsfj #
+    ####
+
+    echo bbbox
 
 fi
 
+echo cool
+echo cool
+echo cool
+echo cool
+echo cool
 echo cool
 echo cool
 echo cool
