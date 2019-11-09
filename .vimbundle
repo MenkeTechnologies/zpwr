@@ -26,6 +26,8 @@ tomtom/ttags_vim
 SirVer/ultisnips
 mbbill/undotree
 tsukkee/unite-tag
+vim-airline/vim-airline
+vim-airline/vim-airline-themes
 haya14busa/vim-asterisk
 907th/vim-auto-save
 MenkeTechnologies/vim-autocorrect
