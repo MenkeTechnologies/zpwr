@@ -1279,6 +1279,7 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
+let g:airline#extensions#tabline#enabled = 1
 
 function! AppendToFile(file, lines)
     call writefile(a:lines, a:file, 'a')
