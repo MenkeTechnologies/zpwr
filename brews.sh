@@ -40,7 +40,6 @@ brew install cassandra
 brew install catimg
 brew install ccrypt
 brew install ccze
-brew install cheat
 brew install chkrootkit
 brew install chmlib
 brew install clingo
@@ -77,7 +76,6 @@ brew install exa
 brew install expat
 brew install faac
 brew install faad2
-brew install fasd
 brew install fd
 brew install ffmpeg
 brew install fftw
@@ -97,6 +95,7 @@ brew install fswatch
 brew install gawk
 brew install gcc
 brew install gd
+brew install gdb
 brew install gdbm
 brew install gdk-pixbuf
 brew install geckodriver
@@ -149,12 +148,14 @@ brew install httpd
 brew install httpie
 brew install httrack
 brew install hub
+brew install hwloc
 brew install hydra
 brew install icu4c
 brew install ifstat
 brew install ilmbase
 brew install imagemagick@6
 brew install imap-uw
+brew install imlib2
 brew install iperf
 brew install iperf3
 brew install isl
@@ -224,14 +225,18 @@ brew install libsoxr
 brew install libssh
 brew install libssh2
 brew install libtasn1
+brew install libtermkey
 brew install libtiff
 brew install libtool
 brew install libunistring
 brew install libupnp
 brew install libusb
 brew install libusb-compat
+brew install libuv
+brew install libvidstab
 brew install libvorbis
 brew install libvpx
+brew install libvterm
 brew install libxml2
 brew install libyaml
 brew install libzip
@@ -239,10 +244,11 @@ brew install links
 brew install little-cms2
 brew install llvm
 brew install llvm@6
-brew install lolcat
+brew install llvm@8
 brew install lua
 brew install lua@5.1
 brew install luajit
+brew install lz4
 brew install lzo
 brew install mad
 brew install mailutils
@@ -263,6 +269,7 @@ brew install mpc
 brew install mpd
 brew install mpfr
 brew install mplayer
+brew install msgpack
 brew install mtr
 brew install musepack
 brew install mutt
@@ -274,6 +281,7 @@ brew install nasm
 brew install ncdu
 brew install ncmpcpp
 brew install ncurses
+brew install neovim
 brew install netpbm
 brew install nettle
 brew install nghttp2
@@ -299,6 +307,7 @@ brew install openjpeg
 brew install openldap
 brew install openssl
 brew install openssl@1.1
+brew install openvpn
 brew install opus
 brew install opusfile
 brew install orc
@@ -319,6 +328,7 @@ brew install pinentry
 brew install pinentry-mac
 brew install pipes-sh
 brew install pixman
+brew install pkcs11-helper
 brew install pkg-config
 brew install pokemonsay
 brew install ponysay
@@ -341,6 +351,7 @@ brew install ranger
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis
+brew install ripgrep
 brew install rlwrap
 brew install rsync
 brew install rtmpdump
@@ -405,6 +416,7 @@ brew install torsocks
 brew install tree
 brew install two-lame
 brew install unbound
+brew install unibilium
 brew install unixodbc
 brew install unrar
 brew install urlview
