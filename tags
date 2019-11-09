@@ -498,6 +498,7 @@ number	batchRename.sh	/^        local number=$((10#$number))$/;"	v
 number	batchRename.sh	/^        local number=$(echo ${last%%.*})$/;"	v
 number	mantozshcomp.py	/^    def number(self):$/;"	m	class:Deroffer
 numreq	mantozshcomp.py	/^    def numreq(self):$/;"	m	class:Deroffer
+nvimDir	plugins_install.sh	/^nvimDir="$HOME\/.config\/nvim"$/;"	v
 o	macOnly/combo.sh	/^    o="$(cat)"$/;"	v
 o	macOnly/combo.sh	/^    o="$(hostname)"$/;"	v
 o	sixLangDisplayer.sh	/^o="$(cat)"$/;"	v
