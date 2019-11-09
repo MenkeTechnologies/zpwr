@@ -153,7 +153,9 @@ echo "$PATH" | command grep -iq shellScripts || {
             exists mvim && export EDITOR='mvim' || export EDITOR='vim'
         fi
     else
-        export EDITOR='vim'
+        if [[ $USE_NEOVIM == true ]]; then
+            exists nvim && export EDITOR='nvim' || export EDITOR='vim'
+        fi
     fi
 #**************************************************************
 #}}}
@@ -328,7 +330,6 @@ if [[ "$OS_TYPE" == darwin ]]; then
             alias vm='mvim -v -u ~/.minvimrc'
             alias sv='sudo mvim -v'
         fi
-
     }
     exists nvim && {
         if [[ $USE_NEOVIM == true ]]; then
@@ -379,11 +380,21 @@ else
         esac
     fi
 
-    exists vim && {
-        alias v=vim
-        alias vi=vim
-        alias vm='vim -u ~/.minvimrc'
-        alias sv='sudo vim'
+    exists nvim && {
+        if [[ $USE_NEOVIM == true ]]; then
+            alias v='nvim'
+            alias vi='nvim'
+            alias vim='nvim'
+            alias vm='nvim -u ~/.minvimrc'
+            alias sv='sudo nvim'
+        else
+            exists vim && {
+                alias v=vim
+                alias vi=vim
+                alias vm='vim -u ~/.minvimrc'
+                alias sv='sudo vim'
+            }
+        fi
     }
 fi
 alias tclsh="rlwrap tclsh"
