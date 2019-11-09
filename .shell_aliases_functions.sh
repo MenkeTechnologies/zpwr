@@ -104,6 +104,7 @@ export UMASK=077
 export LESS="-M -N -R -K -F -X"
 export PSQL_EDITOR='vim -c "setf sql"'
 export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
+export USE_NEOVIM=true
 #}}}***********************************************************
 
 #{{{                    MARK:ENV Var
@@ -147,7 +148,11 @@ echo "$PATH" | command grep -iq shellScripts || {
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
-        export EDITOR='mvim -v'
+        if [[ $USE_NEOVIM == true ]]; then
+            export EDITOR='nvim'
+        else
+            export EDITOR='mvim -v'
+        fi
     else
         export EDITOR='vim'
     fi
@@ -317,11 +322,23 @@ if [[ "$OS_TYPE" == darwin ]]; then
      alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
      alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
     exists mvim && {
-        alias v='mvim -v'
-        alias vi='mvim -v'
-        alias vim='mvim -v'
-        alias vm='mvim -v -u ~/.minvimrc'
-        alias sv='sudo mvim -v'
+        if [[ $USE_NEOVIM != true ]]; then
+            alias v='mvim -v'
+            alias vi='mvim -v'
+            alias vim='mvim -v'
+            alias vm='mvim -v -u ~/.minvimrc'
+            alias sv='sudo mvim -v'
+        fi
+
+    }
+    exists nvim && {
+        if [[ $USE_NEOVIM == true ]]; then
+            alias v='nvim'
+            alias vi='nvim'
+            alias vim='nvim'
+            alias vm='nvim -u ~/.minvimrc'
+            alias sv='sudo nvim'
+        fi
     }
 
     exists brew && {
