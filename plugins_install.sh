@@ -38,6 +38,12 @@ cp "$INSTALLER_DIR/.minvimrc" "$HOME"
 prettyPrint "Installing .ideavimrc"
 cp "$INSTALLER_DIR/.ideavimrc" "$HOME"
 
+nvimDir="$HOME/.config/nvim"
+[[ ! -d "$nvimDir" ]] && mkdir -p "$nvimDir"
+
+prettyPrint "Installing neovim config"
+cp "$INSTALLER_DIR"/init.vim "$nvimDir"
+
 #custom settings for tmux powerline
 tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
 [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
