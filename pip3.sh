@@ -1,5 +1,3 @@
-pip3 install Package
-pip3 install ---------------------------------------
 pip3 install -
 pip3 install -andas
 pip3 install alabaster
