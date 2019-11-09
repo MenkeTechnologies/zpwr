@@ -107,7 +107,7 @@ dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootki
 #**************************************************************
 
 addDependenciesLinux(){
-    dependencies_ary=(pkg-config libclang1 llvm ${dependencies_ary[@]})
+    dependencies_ary=(neovim pkg-config libclang1 llvm ${dependencies_ary[@]})
     dependencies_ary+=(build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets \
         php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
     lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf afpfs-ng \
@@ -148,7 +148,7 @@ addDependenciesFreeBSD(){
 }
 
 addDependenciesMac(){
-    dependencies_ary=(macvim ${dependencies_ary[@]})
+    dependencies_ary=(neovim macvim ${dependencies_ary[@]})
     dependencies_ary+=(ripgrep httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher \
         fswatch zzz ghc lua python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
