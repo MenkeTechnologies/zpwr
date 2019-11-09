@@ -1284,13 +1284,17 @@ function! AppendToFile(file, lines)
     call writefile(a:lines, a:file, 'a')
 endfunction
 
+function! WriteToNVimInfo()
+        let viminfo = $HOME.'/.nviminfo'
+        let curFile = expand("%:~")
+        if curFile != ''
+            let curFile = '> '.curFile
+            call AppendToFile(viminfo,[curFile])
+        endif
+endfunction
+
 if has("nvim")
-    let viminfo = $HOME.'/.nviminfo'
-    let curFile = expand("%:~")
-    if curFile != ''
-        let curFile = '> '.curFile
-        call AppendToFile(viminfo,[curFile])
-    endif
+    autocmd bufenter * call WriteToNVimInfo()
 endif
 
 "}}}*****************za******************************************
