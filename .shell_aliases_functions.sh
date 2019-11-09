@@ -1352,7 +1352,7 @@ o(){
 }
 
 openmygh(){
-    open_cmd="OPEN_CMD" || return 1
+    open_cmd="$OPEN_CMD" || return 1
 
     if isZsh; then
         if [[ -n "$1" ]]; then
