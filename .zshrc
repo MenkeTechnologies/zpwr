@@ -60,8 +60,6 @@
 # https://github.com/MenkeTechnologies
 #
 #
-#profiling startup
-#zmodload zsh/zprof
 startTimestamp=$(date +%s)
 
 #{{{                    MARK:Exports
@@ -81,6 +79,11 @@ EXPAND_SECOND_POSITION=true
 SURROUND=true
 CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
+PROFILING=false
+if [[ $PROFILING == true ]]; then
+    #profiling startup
+    zmodload zsh/zprof
+fi
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -2380,4 +2383,6 @@ exists kubectl && source <(kubectl completion zsh)
 
 endTimestamp=$(date +%s)
 logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
-#zprof
+if [[ $PROFILING == true ]]; then
+    zprof
+fi
