@@ -4,7 +4,7 @@
 
 [core]
     editor = vim
-    excludesfile = /.gitignore_global
+    excludesfile = ~/.gitignore_global
     autocrlf = input
     pager = diff-so-fancy | less --tabs=4 -RFX
     commentchar = |
@@ -34,9 +34,14 @@
     old = red bold
     new = green bold
     whitespace = red reverse
-
 [diff]
     tool = vimdiff
 
 [merge]
     tool = vimdiff
+
+[pull]
+	rebase = true
+
+[help]
+	autocorrect = 1
