@@ -59,5 +59,6 @@ honza/vim-snippets
 mhinz/vim-startify
 tpope/vim-surround
 tpope/vim-unimpaired
+lervag/vimtex
 benmills/vimux
 gcmt/wildfire.vim
