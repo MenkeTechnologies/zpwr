@@ -214,6 +214,8 @@ alias gpom='git push origin master:master'
 alias gpum='git push upstream master:master'
 alias gpum='git push upstream master:master'
 alias gj='git pull --rebase --autostash -v'
+alias gs="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS "
+
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
