@@ -1479,6 +1479,10 @@ globalAliasesInit(){
         $__TS
     done"
 
+    alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $__TS | stdinSdiffColorizer.pl 80"
+
+
+
     if [[ "$OS_TYPE" == darwin ]]; then
         alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
     else
