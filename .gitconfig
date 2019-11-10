@@ -40,6 +40,9 @@
 [merge]
     tool = vimdiff
 
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED
+
 [pull]
 	rebase = true
 
