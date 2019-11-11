@@ -529,6 +529,10 @@ if echo "$vimV >= 8.0" | bc | grep -q 1 || vim --version 2>&1 | grep -q '\-pytho
     source "vim_install.sh"
 fi
 
+exists diff-so-fancy || {
+    sudo npm i -g diff-so-fancy
+}
+
 exists nvim || {
     builtin cd "$INSTALLER_DIR"
     source "neovim_install.sh"
