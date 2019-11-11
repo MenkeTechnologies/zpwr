@@ -342,7 +342,11 @@ exists brew && {
 prettyPrint "Updating Vundle Plugins"
 
 if [[ $end != true ]]; then
-    vim -c VundleUpdate -c quitall
+    if [[ $USE_NEOVIM == true ]]; then
+        nvim -c VundleUpdate -c quitall
+    else
+        vim -c VundleUpdate -c quitall
+    fi
 fi
 
 #decolorize prompt
