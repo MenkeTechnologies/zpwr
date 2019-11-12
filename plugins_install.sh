@@ -6,7 +6,7 @@ OS_TYPE="$(uname -s)"
 if [[ "$OS_TYPE" == "Darwin" ]]; then
     distroName=Mac
 elif [[ "$OS_TYPE" == "Linux" ]]; then
-        distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
+        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
 
 else

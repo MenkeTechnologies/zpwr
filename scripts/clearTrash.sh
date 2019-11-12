@@ -12,7 +12,7 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #works for RPi
 
-        distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
+        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
 
 

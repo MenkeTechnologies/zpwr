@@ -249,10 +249,10 @@ distroFamily	install.sh	/^    distroFamily=mac$/;"	v
 distroName	clearTrash.sh	/^    distroName="$(grep '^ID=' \/etc\/os-release | cut -d= -f2 | tr -d \\")"$/;"	v
 distroName	colorLogger.sh	/^    distroName="$(grep '^ID=' \/etc\/os-release | cut -d= -f2 | tr -d \\")"$/;"	v
 distroName	install.sh	/^        distroName=FreeBSD$/;"	v
-distroName	install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
 distroName	install.sh	/^    distroName=Mac$/;"	v
 distroName	logs.sh	/^    distroName=$(lsb_release -a | head -1 | awk '{print $3}')$/;"	v
-distroName	plugins_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	plugins_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
 distroName	plugins_install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	plugins_install.sh	/^    distroName=Mac$/;"	v
 do_line	mantozshcomp.py	/^    def do_line(self):$/;"	m	class:Deroffer
