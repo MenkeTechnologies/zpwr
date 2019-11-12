@@ -87,7 +87,6 @@ export TEMPFILE2="/tmp/$REPO_NAME/.temp$$-2$USER"
 export TEMPFILESQL="/tmp/$REPO_NAME/.temp$$-2$USER.sql"
 
 export TERMINAL_APP="Terminal.app"
-export TERM="xterm-256color"
 export YARN_HOME="$HOME/.config/yarn"
 export TMUX_HOME="$HOME/.tmux"
 export NODE_HOME="/usr/local/lib/node_modules"
