@@ -139,7 +139,7 @@ addDependenciesRedHat(){
         sudo yum install -y epel-release
     fi
     dependencies_ary=(python3-devel clang llvm llvm-devel ${dependencies_ary[@]})
-    dependencies_ary+=(gcc-c++ 'fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
+    dependencies_ary+=(gcc-c++ 'fortune-mod.*' mariadb-server clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
         python36-tools ncurses-devel libpcap-devel openssl-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
 }
 
