@@ -199,7 +199,7 @@ elif [[ "$OS_TYPE" == "linux" ]];then
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
         plugins+=(tmux)
     plugins+=(systemd)
-    distroName=$(perl -lne 'do{($_=$1)=~s@"@@;print;exit0}if m{^ID=(.*)}' /etc/os-release)
+    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 
     case $distroName in
         (debian|raspbian|kali|parrot|zorin)
