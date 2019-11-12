@@ -30,6 +30,9 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
     prettyPrint "Installing neovim python lib"
     python3 -m pip install pynvim
 
+    prettyPrint "Installing neovim remote"
+    python3 -m pip install neovim-remote
+
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
 
     python3 -m pip install powerline-mem-segment
@@ -102,6 +105,9 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
     prettyPrint "Installing neovim python lib"
     sudo python3 -m pip install pynvim
 
+    prettyPrint "Installing neovim remote"
+    sudo python3 -m pip install neovim-remote
+
     prettyPrint "Installing MyCLI"
     sudo python3 -m pip install mycli
 
@@ -168,6 +174,9 @@ else
 
         prettyPrint "Installing neovim python lib"
         sudo python3 -m pip install pynvim
+
+        prettyPrint "Installing neovim remote"
+        sudo python3 -m pip install neovim-remote
 
         prettyPrint "Installing PGCLI"
         sudo python3 -m pip install pgcli

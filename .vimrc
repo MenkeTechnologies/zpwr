@@ -1305,5 +1305,6 @@ endif
 
   "disable python2
   let g:loaded_python_provider = 0
+  let g:vimtex_compiler_progname = 'nvr'
 
 "}}}*****************za******************************************
