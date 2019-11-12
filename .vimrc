@@ -1303,4 +1303,7 @@ endif
   endif
   au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 
+  "disable python2
+  let g:loaded_python_provider = 0
+
 "}}}*****************za******************************************
