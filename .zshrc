@@ -80,6 +80,7 @@ SURROUND=true
 CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
 PROFILING=false
+EXA_EXTENDED=true
 if [[ $PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
