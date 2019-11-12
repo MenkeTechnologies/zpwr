@@ -102,7 +102,12 @@ export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
 export LESS="-M -N -R -K -F -X"
 export PSQL_EDITOR='vim -c "setf sql"'
-export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
+if [[ $EXA_EXTENDED == true ]]; then
+    export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
+else
+    export EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
+fi
+
 export USE_NEOVIM=true
 #}}}***********************************************************
 
