@@ -538,6 +538,9 @@ exists nvim || {
     source "neovim_install.sh"
 }
 
+prettyPrint "installing neovim nodejs lib"
+sudo npm i -g neovim
+
 #}}}***********************************************************
 
 #{{{                    MARK:Tmux
