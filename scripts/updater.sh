@@ -343,7 +343,11 @@ prettyPrint "Updating Vundle Plugins"
 
 if [[ $end != true ]]; then
     if [[ $USE_NEOVIM == true ]]; then
-        nvim -c VundleUpdate -c quitall
+        if exists nvim; then
+            nvim -c VundleUpdate -c quitall
+        else
+            vim -c VundleUpdate -c quitall
+        fi
     else
         vim -c VundleUpdate -c quitall
     fi
