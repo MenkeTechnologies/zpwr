@@ -118,8 +118,8 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary=(python3-devel ${dependencies_ary[@]})
-    dependencies_ary+=(gcc-c++ llvm llvm-devel makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel \
+    dependencies_ary=(python3-devel llvm llvm-devel ${dependencies_ary[@]})
+    dependencies_ary+=(gcc-c++ makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel \
         mysql-devel libevent-devel postgresql-devel fortune ruby-devel openssl-devel net-tools-deprecated \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel)
 }
@@ -138,8 +138,8 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary=(python3-devel ${dependencies_ary[@]})
-    dependencies_ary+=(llvm llvm-devel gcc-c++ 'fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
+    dependencies_ary=(python3-devel clang llvm llvm-devel ${dependencies_ary[@]})
+    dependencies_ary+=(gcc-c++ 'fortune-mod.*' clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
         python36-tools ncurses-devel libpcap-devel openssl-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
 }
 

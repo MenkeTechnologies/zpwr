@@ -208,7 +208,8 @@ delim	splitReg.sh	/^delim=$(echo "$output" | grep -n -- "$regex" | tail -$level 
 dependencies_ary	install.sh	/^    dependencies_ary=(neovim macvim ${dependencies_ary[@]})$/;"	v
 dependencies_ary	install.sh	/^    dependencies_ary=(neovim pkg-config libclang1 llvm ${dependencies_ary[@]})$/;"	v
 dependencies_ary	install.sh	/^    dependencies_ary=(python3-dev ${dependencies_ary[@]})$/;"	v
-dependencies_ary	install.sh	/^    dependencies_ary=(python3-devel ${dependencies_ary[@]})$/;"	v
+dependencies_ary	install.sh	/^    dependencies_ary=(python3-devel clang llvm llvm-devel ${dependencies_ary[@]})$/;"	v
+dependencies_ary	install.sh	/^    dependencies_ary=(python3-devel llvm llvm-devel ${dependencies_ary[@]})$/;"	v
 dependencies_ary	install.sh	/^dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \\$/;"	v
 deroff	mantozshcomp.py	/^    def deroff(self, str):$/;"	m	class:Deroffer
 deroff_files	mantozshcomp.py	/^def deroff_files(files):$/;"	f
