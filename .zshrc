@@ -81,7 +81,6 @@ CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
 PROFILING=false
 EXA_EXTENDED=true
-exists bat && export BAT_THEME="OneHalfLight"
 if [[ $PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
@@ -243,6 +242,8 @@ test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
 test -z $MYBANNER && export MYBANNER=default
+exists bat && export BAT_THEME="OneHalfLight"
+
 export DEFAULT_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
 #}}}***********************************************************
