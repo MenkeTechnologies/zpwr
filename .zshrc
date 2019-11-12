@@ -81,6 +81,7 @@ CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
 PROFILING=false
 EXA_EXTENDED=true
+exists bat && export BAT_THEME="OneHalfLight"
 if [[ $PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
@@ -1773,7 +1774,6 @@ export COLORIZER=bat
 
 if [[ $COLORIZER == bat ]]; then
     if exists bat;then
-        export BAT_THEME="OneHalfLight"
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
         export COLORIZER_FZF_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
         export COLORIZER_FZF_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
