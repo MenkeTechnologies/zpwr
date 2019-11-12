@@ -2280,6 +2280,7 @@ fi
 #**************************************************************
 
 recompile(){
+    local dir
 	autoload -U zrecompile
 	[ -f ~/.zshrc ] && zrecompile -p ~/.zshrc
 	[ -f ~/.zlogout ] && zrecompile -p ~/.zlogout
@@ -2287,9 +2288,9 @@ recompile(){
 	[ -f ~/.zcompdump ] && zrecompile -p ~/.zcompdump
 	[ -f /etc/profile ] && zrecompile -p /etc/profile
 	[ -f /etc/profile.env ] && zrecompile -p /etc/profile.env
-	for a in $fpath
-	do
-		[ -d $a ] && zrecompile -p $a.zwc $a/*
+
+	for dir in $fpath; do
+		[[ -d $dir ]] && zrecompile -p $dir.zwc $dir/*
 	done
 }
 
