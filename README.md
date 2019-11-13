@@ -23,7 +23,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - keybinding to run current vim selection in tmux pane to right as standalone script
 - keybinding to run current vim selection in tmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files
-- 10k zsh completions
+- 10.2k zsh completions
 - ergonomic, recursive tmux keybindings
 - zsh keybindings to fzf search file names and syntax highlighted, numbered file preview
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview
@@ -61,7 +61,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zsh
 - Powerlevel9k zsh prompt with ~dirs
 - tmux
-- vim 8.1 with 74 plugins and python3 support
+- neovim with 74 plugins and python3/node support
 - youcompleteme
 - ultisnips
 - supertab
@@ -83,7 +83,8 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - lolcat
 - mylg
 - python3
-- powerline-status for vim and tmux
+- powerline-status for tmux
+- vim-airline status bar
 - grc
 - mycli
 - pgcli
