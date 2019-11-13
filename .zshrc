@@ -79,8 +79,9 @@ EXPAND_SECOND_POSITION=true
 SURROUND=true
 CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
-PROFILING=false
 EXA_EXTENDED=true
+PROFILING=false
+
 if [[ $PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
@@ -92,6 +93,10 @@ fi
 
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 
+[[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
+source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
+
+
 if [[ $MYPROMPT == POWERLEVEL ]]; then
     if test -s "$HOME/.powerlevel9kconfig.sh";then
         source "$HOME/.powerlevel9kconfig.sh"
@@ -101,6 +106,7 @@ if [[ $MYPROMPT == POWERLEVEL ]]; then
 else
     test ! -z $MYPROMPT && ZSH_THEME=$MYPROMPT || ZSH_THEME=simonoff
 fi
+
 
 ZSH_DISABLE_COMPFIX=true
 #colors for common commands
