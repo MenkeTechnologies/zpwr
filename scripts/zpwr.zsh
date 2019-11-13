@@ -55,9 +55,9 @@ case $verb in
         ;;
     figletfonts) cmd="figletfonts" #show all figlet fonts
         ;;
-    hc) cmd="hc" #create remote github repo
+    hubcreate) cmd="hc" #create remote github repo
         ;;
-    hd) cmd="hd" #delete remote github repo
+    hubdelete) cmd="hd" #delete remote github repo
         ;;
     web) cmd="we" #cd to web dir
         ;;
@@ -78,6 +78,8 @@ case $verb in
     list) cmd="listNoClear" #list the files with no args
         ;;
     clearlist) cmd="clearList" #clear and list the files with no args
+        ;;
+    learnsearch) cmd="se" #search for learning in $SCHEMA_NAME.$TABLE_NAME
         ;;
     learn) cmd="learn" #save learning to $SCHEMA_NAME.$TABLE_NAME
         ;;
@@ -154,6 +156,12 @@ case $verb in
     zp) cmd="zp" #cd to $REPO_NAME
         ;;
     recompile) cmd="recompile" #recompile all cache comps
+        ;;
+    drivesearch) cmd="locateFzf" #search drive for file
+        ;;
+    vimsearch) cmd="fzfVimKeybind" #search vim keybindings
+        ;;
+    allsearch) cmd="fzfAllKeybind" #search all keybindings
         ;;
     envsearch) cmd="fzfEnv" #search all aliases, parameters, builtins, keywords and functions
         ;;
