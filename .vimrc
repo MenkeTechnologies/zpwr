@@ -1287,7 +1287,7 @@ endfunction
 
 function! WriteToNVimInfo()
         let viminfo = $HOME.'/.nviminfo'
-        let curFile = expand("%:~")
+        let curFile = expand("%:p:~")
         if curFile != ''
             let curFile = '> '.curFile
             call AppendToFile(viminfo,[curFile])
