@@ -95,7 +95,7 @@ EOF
 # 16) powerline-mem-segment
 
 dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \
-    screenfetch ccze htop figlet zsh docker erlang elixir links \
+    screenfetch ccze htop figlet zsh docker.io docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
     whois weechat gradle ant maven telnet tree mc ocaml groovy slurm \
