@@ -384,7 +384,7 @@ if [[ "$OS_TYPE" == darwin ]]; then
             alias vi='nvim'
             alias vim='nvim'
             alias vm='nvim -u ~/.minvimrc'
-            alias sv='sudo nvim'
+            alias sv='sudo -E nvim'
         fi
     }
 
@@ -433,13 +433,13 @@ else
             alias vi='nvim'
             alias vim='nvim'
             alias vm='nvim -u ~/.minvimrc'
-            alias sv='sudo nvim'
+            alias sv='sudo -E nvim'
         else
             exists vim && {
                 alias v=vim
                 alias vi=vim
                 alias vm='vim -u ~/.minvimrc'
-                alias sv='sudo vim'
+                alias sv='sudo -E vim'
             }
         fi
     }
