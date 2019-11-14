@@ -579,6 +579,11 @@ else
         done
     }
 
+    restartZabbixAgent(){
+        sudo systemctl restart zabbix-agent &&
+            sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
+    }
+
     restart(){
         service="$1"
         src_dir="$FORKED_DIR/$REPO_NAME"
