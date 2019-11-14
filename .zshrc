@@ -968,7 +968,8 @@ precmd(){
         #export DISPLAY=$(cat ~/.display.txt) ||
         :
     else
-        echo $DISPLAY > ~/.display.txt
+        :
+        #echo $DISPLAY > ~/.display.txt
     fi
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
@@ -982,7 +983,8 @@ if [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]]; then
     #export DISPLAY=$(cat ~/.display.txt) ||
     :
     else
-        echo $DISPLAY > ~/.display.txt
+        :
+        #echo $DISPLAY > ~/.display.txt
     fi
 
 rationalize-dot (){
