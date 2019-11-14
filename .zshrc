@@ -2231,7 +2231,7 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
                 command grep "$GITHUB_ACCOUNT" > "$TEMPFILE"
 
             case $distroName in
-                (debian|raspbian|kali|ubuntu)
+                (debian|raspbian|kali|ubuntu|parrot)
                     out="$(command grep -a 'Accepted publickey' /var/log/auth.log | tail -1)"
                     key="$(ssh-keygen -l -f "$TEMPFILE" | awk '{print $2}')"
                     ;;
