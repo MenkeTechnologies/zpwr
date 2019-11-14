@@ -2232,7 +2232,7 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu|parrot)
-                    out="$(sudo \grep -a 'Accepted publickey' /var/log/auth.log | tail -1)"
+                    out="$(sudo \grep -a 'Accepted publickey for' /var/log/auth.log | tail -1)"
                     key="$(ssh-keygen -l -f "$TEMPFILE" | awk '{print $2}')"
                     ;;
                 (centos|rhel)
