@@ -563,11 +563,11 @@ vimFzfSudo(){
         LBUFFER="sudo -E vim $(fzvim)"
     fi
     mywords=("${(z)BUFFER}")
-    if (( $#mywords == 2 )); then
+    if (( $#mywords == 3 )); then
         zle .kill-whole-line
     else
-        firstdir=${mywords[3]:h}
-        #logg "words='$mywords[2]'=>'$firstdir'"
+        firstdir=${mywords[4]:h}
+        #logg "words='$mywords[4]'=>'$firstdir'"
         #:h takes aways last "
         BUFFER="cd $firstdir\"; $BUFFER; clearList"
         zle .accept-line
