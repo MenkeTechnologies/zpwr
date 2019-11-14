@@ -556,7 +556,12 @@ fasdFZF(){
 }
 vimFzfSudo(){
     zle .kill-whole-line
-    LBUFFER="sudo vim $(fzvim)"
+
+    if [[ $USE_NEOVIM == true ]]; then
+        LBUFFER="sudo -E nvim $(fzvim)"
+    else
+        LBUFFER="sudo -E vim $(fzvim)"
+    fi
     mywords=("${(z)BUFFER}")
     if (( $#mywords == 2 )); then
         zle .kill-whole-line
