@@ -1592,7 +1592,7 @@ else
                         bash "$HOME/motd.sh"
                     fi
                     ;;
-                (ubuntu|debian|kali|linuxmint)
+                (ubuntu|debian|kali|linuxmint|parrot)
                     test -d "$D" && builtin cd "$D"
                     figlet -f block "$(whoami)" | ponysay -W 120 |
                         splitReg.sh -- ------------- lolcat
@@ -1616,7 +1616,7 @@ else
                     test -d "$D" && builtin cd "$D"
                     bash "$HOME/motd.sh"
                     ;;
-                (ubuntu|debian|kali|linuxmint)
+                (ubuntu|debian|kali|linuxmint|parrot)
                     test -d "$D" && builtin cd "$D"
                     noPonyBanner
                     ;;
