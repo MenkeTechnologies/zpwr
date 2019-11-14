@@ -964,9 +964,12 @@ precmd(){
             __WILL_CLEAR=false
         fi
     }
-    [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] &&
-        export DISPLAY=$(cat ~/.display.txt) ||
+    if [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]]; then
+        #export DISPLAY=$(cat ~/.display.txt) ||
+        :
+    else
         echo $DISPLAY > ~/.display.txt
+    fi
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
@@ -975,9 +978,12 @@ precmd(){
     fi
 }
 
-[[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]] &&
-    export DISPLAY=$(cat ~/.display.txt) ||
-    echo $DISPLAY > ~/.display.txt
+if [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]]; then
+    #export DISPLAY=$(cat ~/.display.txt) ||
+    :
+    else
+        echo $DISPLAY > ~/.display.txt
+    fi
 
 rationalize-dot (){
     if [[ $LBUFFER = *.. ]]; then
