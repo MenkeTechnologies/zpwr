@@ -581,11 +581,15 @@ else
 
     restartZabbixAgent(){
         if exists ccze; then
-        sudo systemctl restart zabbix-agent &&
-            sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log | ccze
+        sudo systemctl restart zabbix-agent
+        sudo systemctl status zabbix-agent
+        journalctl -n 100 --no-pager
+        sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log | ccze
         else
-        sudo systemctl restart zabbix-agent &&
-            sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
+        sudo systemctl restart zabbix-agent
+        sudo systemctl status zabbix-agent
+        journalctl -n 100 --no-pager
+        sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
         fi
     }
 
