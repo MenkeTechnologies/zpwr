@@ -2091,7 +2091,7 @@ _complete_clipboard(){
 
     local clipboard_str
     if [[ -n $PASTE_CMD ]]; then
-        clipboard_str="$(${=PASTE_CMD})"
+        clipboard_str="$(${=PASTE_CMD} 2>/dev/null)"
     else
         case "$OS_TYPE" in
             darwin*)
