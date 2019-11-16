@@ -16,17 +16,7 @@ cat<<EOF
             test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
             xxd \$file | $COLORIZER_FZF_YAML
         else
-            case \$file in
-                *.txt)
-                    $COLORIZER_FZF_FILE_TEXT 2>/dev/null;
-                    ;;
-                *.*)
-                    $COLORIZER_FZF_FILE 2>/dev/null;
-                    ;;
-                *)
-                    $COLORIZER_FZF_FILE_DEFAULT 2>/dev/null;
-                    ;;
-            esac
+            $casestr
         fi
     fi
 else
