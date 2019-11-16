@@ -2090,27 +2090,31 @@ _complete_plus_last_command_args() {
 _complete_clipboard(){
 
     local clipboard_str
-    case "$OS_TYPE" in
-        darwin*)
-            clipboard_str="$(pbpaste)"
-            ;;
-        linux*)
-            if [[ "$(uname -r)" != *icrosoft* ]];then
-                clipboard_str="$(xclip -o -sel clip)"
-            else
-                clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
-            fi
-            ;;
-        cygwin*)
-                clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
-            ;;
-        msys*)
-                clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
-            ;;
-        *)
-            clipboard_str="$(xclip -o -sel clip)"
-            ;;
-    esac
+    if [[ -n $PASTE_CMD ]]; then
+        clipboard_str="$(${=PASTE_CMD})"
+    else
+        case "$OS_TYPE" in
+            darwin*)
+                clipboard_str="$(pbpaste)"
+                ;;
+            linux*)
+                if [[ "$(uname -r)" != *icrosoft* ]];then
+                    clipboard_str="$(xclip -o -sel clip 2>/dev/null)"
+                else
+                    clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
+                fi
+                ;;
+            cygwin*)
+                    clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
+                ;;
+            msys*)
+                    clipboard_str="$(powershell.exe -c 'Get-Clipboard')"
+                ;;
+            *)
+                clipboard_str="$(xclip -o -sel clip 2>/dev/null)"
+                ;;
+        esac
+    fi
 
     if [[ -n "$clipboard_str" ]]; then
     clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "'${clipboard_str}'")

@@ -49,7 +49,7 @@ getPasteCommand(){
             ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
-                paste_cmd='xclip -o -sel clip'
+                paste_cmd='xclip -o -sel clip 2>/dev/null'
             else
                 paste_cmd="powershell.exe -c 'Get-Clipboard'"
             fi
