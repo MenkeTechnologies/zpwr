@@ -1,11 +1,11 @@
-selectp -t 0 # select the first (0) pane 
+selectp -t 0 # select the first (0) pane
 splitw -h -p 50 # split it into two vertical halves
-selectp -t 0 # select the first (0) pane 
+selectp -t 0 # select the first (0) pane
 splitw -v -p 50 # split it into two horizontal halves
 selectp -t 0 # select the top left pane
-send-keys "sudo htop" C-m 
-selectp -t 1 # select the middle pane 
-send-keys "bash $SCRIPTS/colorLogger.sh" C-m
+send-keys "sudo htop" C-m
+selectp -t 1 # select the middle pane
+send-keys "sudo bash $HOME/Document/shellScripts/colorLogger.sh" C-m
 splitw -v -p 30 # split it into two horizontal halves
 selectp -t 2
 
