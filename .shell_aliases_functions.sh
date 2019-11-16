@@ -1653,7 +1653,7 @@ digs(){
                 prettyPrint "HOST: $noproto"
                 out="$($exe host "$noproto")"
                 if exists lolcat; then
-                    echo "$out" | lolcat -f
+                    echo "$out" | lolcat
                 else
                     echo "$out"
                 fi
@@ -1751,7 +1751,7 @@ digs(){
                 prettyPrint "HOST: $noproto"
                 out="$($colo $exe host "$noproto")"
                 if exists lolcat; then
-                    echo "$out" | lolcat -f
+                    echo "$out" | lolcat
                 else
                     echo "$out"
                 fi
