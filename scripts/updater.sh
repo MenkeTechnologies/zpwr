@@ -113,14 +113,30 @@ gitRepoUpdater() {
 [[ -z "$SCRIPTS" ]] && SCRIPTS="$HOME/Documents/shellScripts"
 
 if [[ $skip != true ]]; then
-    [[ -f "$SCRIPTS/printHeader.sh" ]] && {
+    if [[ -f "$SCRIPTS/printHeader.sh" ]]; then
         width=80
         perl -le "print '_'x$width" | lolcat
         if [[ "$MYBANNER" == ponies ]]; then
             exists catme && exists cowsay && exists shelobsay && echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
         fi
         perl -le "print '_'x$width" | lolcat
-    }
+    fi
+
+    prettyPrint "Updating Tmux Plugins"
+    gitRepoUpdater "$HOME/.tmux/plugins"
+
+    prettyPrint "Updating Pathogen Plugins"
+    #update pathogen plugins
+    gitRepoUpdater "$HOME/.vim/bundle"
+
+    prettyPrint "Updating OhMyZsh"
+    cd "$HOME/.oh-my-zsh/tools" && bash "$HOME/.oh-my-zsh/tools/upgrade.sh"
+
+    prettyPrint "Updating OhMyZsh Plugins"
+    gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
+
+    prettyPrint "Updating OhMyZsh Themes"
+    gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
     #python 3.6
     python3 -c 'import pip' && {
@@ -268,22 +284,6 @@ if [[ $skip != true ]]; then
         pio update
         pio upgrade
     }
-
-    prettyPrint "Updating Tmux Plugins"
-    gitRepoUpdater "$HOME/.tmux/plugins"
-
-    prettyPrint "Updating Pathogen Plugins"
-    #update pathogen plugins
-    gitRepoUpdater "$HOME/.vim/bundle"
-
-    prettyPrint "Updating OhMyZsh"
-    cd "$HOME/.oh-my-zsh/tools" && bash "$HOME/.oh-my-zsh/tools/upgrade.sh"
-
-    prettyPrint "Updating OhMyZsh Plugins"
-    gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
-
-    prettyPrint "Updating OhMyZsh Themes"
-    gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 fi
 
 #first argument is user@host and port number configured in .ssh/config
