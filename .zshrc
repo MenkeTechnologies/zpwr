@@ -2287,7 +2287,7 @@ if [[ $TMUX_AUTO_ATTACH == true ]]; then
                         fi
                     } &> /dev/null
                 else
-                    tmux attach
+                    command tmux attach
                     logg "clients so NO"
                 fi
             else
