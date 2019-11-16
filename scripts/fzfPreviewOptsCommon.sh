@@ -46,7 +46,8 @@ else
 fi
 
 casestr=$(cat<<EOF
-            case \$file in
+            base=\$(basename \$file)
+            case \$base in
                 *.txt)
                     $COLORIZER_FZF_FILE_TEXT 2>/dev/null;
                     ;;
