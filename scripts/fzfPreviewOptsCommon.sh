@@ -45,6 +45,25 @@ else
     nmcmd="nm"
 fi
 
+casestr=$(cat<<EOF
+            case \$file in
+                *.txt)
+                    $COLORIZER_FZF_FILE_TEXT 2>/dev/null;
+                    ;;
+                [!.]*.*)
+                    $COLORIZER_FZF_FILE 2>/dev/null;
+                    ;;
+                .*.*)
+                    $COLORIZER_FZF_FILE 2>/dev/null;
+                    ;;
+                *)
+                    $COLORIZER_FZF_FILE_DEFAULT 2>/dev/null;
+                    ;;
+            esac
+
+EOF
+    )
+
 
 cat<<EOF
 test -z \$file && file=\$(echo {} | sed "s@^~@$HOME@");
