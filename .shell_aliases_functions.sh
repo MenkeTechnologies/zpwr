@@ -580,11 +580,15 @@ else
     }
 
     tailufw(){
+        size=100
+        if [[ -n $1 ]]; then
+            size=$1
+        fi
         if exists ccze; then
-            sudo tail -n 10000 -F /var/log/{syslog,messages} |
+            sudo tail -n $size -F /var/log/{syslog,messages} |
                 command grep -i ufw | ccze
         else
-            sudo tail -n 10000 -F /var/log/{syslog,messages} |
+            sudo tail -n $size -F /var/log/{syslog,messages} |
                 command grep -i ufw
         fi
     }
