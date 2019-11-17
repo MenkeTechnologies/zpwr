@@ -579,6 +579,15 @@ else
         done
     }
 
+    tailUFW(){
+        if exists ccze; then
+            sudo tail -n 10000 -F /var/log/{syslog,messages} |
+                command grep -i ufw | ccze
+        else
+            sudo tail -n 10000 -F /var/log/{syslog,messages} |
+                command grep -i ufw
+        fi
+    }
     restartZabbixAgent(){
         if exists ccze; then
         sudo systemctl restart zabbix-agent
