@@ -594,19 +594,6 @@ else
         fi
     }
 
-    tailOVPN(){
-        size=100
-        if [[ -n $1 ]]; then
-            size=$1
-        fi
-        if exists ccze; then
-            sudo tail -n $size -F /var/log/openvpn/*.log |
-                ccze
-        else
-            sudo tail -n $size -F /var/log/openvpn/*.log |
-        fi
-    }
-
     restartZabbixAgent(){
         if exists ccze; then
         sudo systemctl restart zabbix-agent
