@@ -1504,6 +1504,8 @@ globalAliasesInit(){
         $__TS
     done"
 
+    alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$__TS) master$__TS FETCH_HEAD | less"
+
     alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $__TS | stdinSdiffColorizer.pl 80"
 
 
