@@ -20,10 +20,10 @@ network_check_threshold=5
 
 restart_wlan0() {
     echo "$(date) Network was not working for the previous $network_check_tries checks."
-    echo "Restarting wlan0"
-    ifdown wlan0
+    echo "Restarting br0"
+    ifdown br0
     sleep 5
-    ifup --force wlan0
+    ifup --force br0
     sleep 60
     host_status=$(fping $gateway_ip)
     if ! echo "$host_status" | grep -iq alive; then
