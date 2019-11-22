@@ -1,0 +1,43 @@
+{:log
+ [{:path [],
+   :lib org.clojure/clojure,
+   :coord {:mvn/version "1.10.1"},
+   :use-coord {:mvn/version "1.10.1"},
+   :coord-id {:mvn/version "1.10.1"},
+   :include true,
+   :reason :new-top-dep}
+  {:path [org.clojure/clojure],
+   :lib org.clojure/spec.alpha,
+   :coord {:mvn/version "0.2.176"},
+   :use-coord {:mvn/version "0.2.176"},
+   :coord-id {:mvn/version "0.2.176"},
+   :include true,
+   :reason :new-dep}
+  {:path [org.clojure/clojure],
+   :lib org.clojure/core.specs.alpha,
+   :coord {:mvn/version "0.2.44"},
+   :use-coord {:mvn/version "0.2.44"},
+   :coord-id {:mvn/version "0.2.44"},
+   :include true,
+   :reason :new-dep}],
+ :vmap
+ {org.clojure/clojure
+  {:versions
+   {{:mvn/version "1.10.1"}
+    {:mvn/version "1.10.1", :deps/manifest :mvn}},
+   :paths {{:mvn/version "1.10.1"} #{[]}},
+   :select {:mvn/version "1.10.1"},
+   :top true},
+  org.clojure/spec.alpha
+  {:versions
+   {{:mvn/version "0.2.176"}
+    {:mvn/version "0.2.176", :deps/manifest :mvn}},
+   :paths {{:mvn/version "0.2.176"} #{[org.clojure/clojure]}},
+   :select {:mvn/version "0.2.176"}},
+  org.clojure/core.specs.alpha
+  {:versions
+   {{:mvn/version "0.2.44"}
+    {:mvn/version "0.2.44", :deps/manifest :mvn}},
+   :paths {{:mvn/version "0.2.44"} #{[org.clojure/clojure]}},
+   :select {:mvn/version "0.2.44"}}},
+ :exclusions nil}
