@@ -5,9 +5,14 @@ After=docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
+User=pi
+Group=pi
 WorkingDirectory=/home/pi/docker
-ExecStart=/usr/bin/env docker-compose -f /home/pi/docker/zabbix-docker/docker-compose_v3_ubuntu_pgsql_latest.yaml -f /home/pi/docker/docker-elk/docker-compose.yml up -d
-ExecStop=/usr/bin/env docker-compose -f /home/pi/docker/zabbix-docker/docker-compose_v3_ubuntu_pgsql_latest.yaml -f /home/pi/docker/docker-elk/docker-compose.yml down
+Environment="SCRIPTS=/home/pi/Documents/shellScripts"
+Environment="HOME=/home/pi"
+ExecStart=/usr/bin/env bash /home/pi/Documents/shellScripts/startContainers.sh
+ExecStart=/usr/bin/env bash /home/pi/Documents/shellScripts/stopContainers.sh
+
 
 [Install]
 WantedBy=multi-user.target
