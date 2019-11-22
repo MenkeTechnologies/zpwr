@@ -8,5 +8,5 @@
 ##### Notes:
 #}}}***********************************************************
 
-sudo docker-compose -f $HOME/docker/zabbix-docker/docker-compose_v3_ubuntu_pgsql_latest.yaml up -d
-sudo docker-compose -f $HOME/docker/docker-elk/docker-compose.yml up -d
+sudo docker-compose -f $HOME/docker/zabbix-docker/docker-compose_v3_ubuntu_pgsql_latest.yaml down
+sudo docker-compose -f $HOME/docker/docker-elk/docker-compose.yml down
