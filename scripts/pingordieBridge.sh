@@ -31,6 +31,7 @@ restart_wlan0() {
         sudo dmesg
         sudo journalctl --no-pager -n 100
         sudo ifconfig -a
+        sudo bash /etc/openvpn/server/down.sh
         sudo reboot
     fi
 }
