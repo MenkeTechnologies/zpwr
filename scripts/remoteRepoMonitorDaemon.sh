@@ -48,7 +48,7 @@ main() {
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*; do
         printf "$dir: "
-        test -d "$dir" && git -C "$dir" pull
+        test -d "$dir" && ( builtin cd "$dir" && git pull; )
     done
     refreshers
 }

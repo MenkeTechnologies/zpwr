@@ -58,7 +58,7 @@ gitRepoUpdater() {
             if [[ -d "$generic_git_repo_plugin" ]]; then
                 if [[ -d "$generic_git_repo_plugin"/.git ]]; then
                     printf "%s: " "$(basename "$generic_git_repo_plugin")"
-                    git -C "$generic_git_repo_plugin" pull
+                    ( builtin cd "$generic_git_repo_plugin" && git pull; )
                 fi
             fi
         done
