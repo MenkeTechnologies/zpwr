@@ -59,11 +59,11 @@
 #
 # https://github.com/MenkeTechnologies
 #
-#
-startTimestamp=$(date +%s)
 
 #{{{                    MARK:Exports
 #**************************************************************
+
+startTimestamp=$(date +%s)
 
 export LC_ALL="en_US.UTF-8"
 # If you come from bash you might have to change your $PATH.
@@ -1918,7 +1918,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow"
 #}}}***********************************************************
 
-
 #{{{                    MARK:Custom Compsys Functions
 #**************************************************************
 _comps[ftp]=_ftp
@@ -2420,10 +2419,10 @@ exists thefuck && eval $(thefuck --alias)
 exists kubectl && source <(kubectl completion zsh)
 
 
-#}}}***********************************************************
-
 endTimestamp=$(date +%s)
 logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
 if [[ $PROFILING == true ]]; then
     zprof
 fi
+
+#}}}***********************************************************
