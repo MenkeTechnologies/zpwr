@@ -45,10 +45,10 @@ while ((network_check_tries < network_check_threshold)); do
     ((network_check_tries++))
 
     if echo "$host_status" | grep -iq alive; then
-        echo "$(date) Bridged network is working correctly"
+        echo "$(date) Bridged VPN NIC is working correctly"
         exit 0
     else
-        echo "$(date) Bridged Network is down, failed check number $network_check_tries of $network_check_threshold"
+        echo "$(date) Bridged VPN NIC is down, failed check number $network_check_tries of $network_check_threshold"
     fi
 
     ((network_check_tries >= network_check_threshold)) && restart_br0
