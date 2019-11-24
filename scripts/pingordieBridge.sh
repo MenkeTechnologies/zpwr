@@ -28,7 +28,7 @@ restart_wlan0() {
     host_status=$(fping $gateway_ip)
     if ! echo "$host_status" | grep -iq alive; then
         echo "$(date) Network failed...rebooting"
-        sudo dmesg
+        sudo dmesg -T
         sudo journalctl --no-pager -n 100
         sudo ifconfig -a
         sudo bash /etc/openvpn/server/down.sh
