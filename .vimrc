@@ -89,7 +89,16 @@ set guifont=Hack\ Nerd\ Font:h14
 "start browsing in current dir
 set browsedir=current
 "reduce enter key after message alerts
-set shortmess=a
+set shortmess=aIcFT
+
+"left gutter fold col
+set foldcolumn=2
+
+"2 lines for :cmd window
+set cmdheight=2
+
+"including tags in ^N completion
+set complete+=]
 
 "show the leader key when pressed
 set showcmd
