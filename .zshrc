@@ -1210,7 +1210,7 @@ export DIRSTACKSIZE=20
 # reload comps if file is stale for 1 week
 regencp=false
 for dump in ~/.zcompdump(N.mh+168); do
-    logg 'regenerating stale $dump'
+    logg "regenerating stale $dump"
     # avoid insecure warning message with -u
     compinit -u
     zcompile $ZSH_COMPDUMP
