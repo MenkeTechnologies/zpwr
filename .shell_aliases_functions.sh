@@ -689,15 +689,15 @@ s(){
 logg(){
     if [[ -p /dev/stdin ]]; then
         {
-            printf "\n_____________$(date)____"
+            printf "\n_____________$(date)____ _'"
             cat
-            printf "\n"
+            printf "'_ \n"
         } >> "$LOGFILE"
     else
         test -z "$1" && echo "need arg" >&2 && return 1
         {
-            printf "\n_____________$(date)____"
-            printf "%s " "$@"
+            printf "\n_____________$(date)____ "
+            printf "_'%s'_ " "$@"
             printf "\n"
         } >> "$LOGFILE"
     fi
@@ -1881,7 +1881,7 @@ pre(){
 }
 
 exists pssh && pir(){
-    if test -s "$HOME/hosts.txt"; then
+    if ! test -s "$HOME/hosts.txt"; then
         echo "you need hosts.txt in your homedir" >&2
         return 1
     fi

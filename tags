@@ -135,6 +135,7 @@ address	uploadWebDS.sh	/^address="jacobmenke@$MY_IP:\/var\/services\/web"$/;"	v
 address	uploadWebPi.sh	/^address="pi@$MY_IP:\/var\/www\/html"$/;"	v
 allRemotes	.shell_aliases_functions.sh	/^allRemotes(){$/;"	f
 allRemotes	about.sh	/^allRemotes() {$/;"	f
+allRemotes	scripts/about.sh	/^allRemotes() {$/;"	f
 already_output_completions	mantozshcomp.py	/^already_output_completions = {}$/;"	v
 alternatingPrettyPrint	.shell_aliases_functions.sh	/^alternatingPrettyPrint(){$/;"	f
 alternatingPrettyPrint	CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
@@ -162,6 +163,7 @@ backup_dir	duplicateLineDeleter.sh	/^backup_dir=$scripts_dir\/rcBackups$/;"	v
 backup_dir	indenterAndDuplicateLineDeleter.sh	/^backup_dir=$scripts_dir\/rcBackups$/;"	v
 backupdir	install.sh	/^backupdir="$HOME\/.$USER.rc.bak.$(date +'%m.%d.%Y')"$/;"	v
 banner	about.sh	/^banner() {$/;"	f
+banner	scripts/about.sh	/^banner() {$/;"	f
 base	.shell_aliases_functions.sh	/^            base="$(dirname "$base")"$/;"	v
 base	.shell_aliases_functions.sh	/^        base="$(dirname "$1")"$/;"	v
 bin_dir	.shell_aliases_functions.sh	/^    local bin_dir="$GOPATH\/pkg\/$ost\/$pkg"$/;"	v
@@ -367,6 +369,7 @@ fallback	mantozshcomp.py	/^    def fallback(self, options_section):$/;"	m	class:
 fallback2	mantozshcomp.py	/^    def fallback2(self, options_section):$/;"	m	class:Type1ManParser
 family_phone_numbers	textmessage.sh	/^    family_phone_numbers=("$member_1")$/;"	v
 fetch	about.sh	/^            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\\t ]+@    @')"$/;"	v
+fetch	scripts/about.sh	/^            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\\t ]+@    @')"$/;"	v
 ff	.shell_aliases_functions.sh	/^ff(){$/;"	f
 fff	.shell_aliases_functions.sh	/^fff(){$/;"	f
 figletfonts	.shell_aliases_functions.sh	/^figletfonts(){$/;"	f
@@ -472,6 +475,7 @@ htopDIR	plugins_install.sh	/^htopDIR="$HOME\/.config\/htop"$/;"	v
 humanReadable	.shell_aliases_functions.sh	/^humanReadable(){$/;"	f
 iface	install.sh	/^iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")$/;"	v
 info	about.sh	/^            info="$(git tag -l -n9 "$version" | perl -pe 's@[\\t ]+@ @')"$/;"	v
+info	scripts/about.sh	/^            info="$(git tag -l -n9 "$version" | perl -pe 's@[\\t ]+@ @')"$/;"	v
 initializeGitDirectory	gitgo.sh	/^initializeGitDirectory() {$/;"	f
 ino	.shell_aliases_functions.sh	/^ino(){$/;"	f
 install	tgzLocalInstaller.sh	/^install() {$/;"	f
@@ -509,6 +513,7 @@ killCursor	secureDelete.sh	/^killCursor() {$/;"	f
 killpids	CPU_Stresser.sh	/^killpids() {$/;"	f
 last	batchRename.sh	/^        local last=$(echo ${file##*_})$/;"	v
 lastcommit	about.sh	/^            lastcommit="$(git log --oneline -n 1)"$/;"	v
+lastcommit	scripts/about.sh	/^            lastcommit="$(git log --oneline -n 1)"$/;"	v
 lcline	openAll.sh	/^    lcline="$(echo $line | tr '[:upper:]' '[:lower:]')"$/;"	v
 le	.shell_aliases_functions.sh	/^le(){$/;"	f
 learning	.shell_aliases_functions.sh	/^    learning="$(printf '%s' "$1" | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"$/;"	v
@@ -751,6 +756,7 @@ prompt	openAll.sh	/^    local prompt="press any key..." # user prompt$/;"	v
 pstreemonitor	.shell_aliases_functions.sh	/^pstreemonitor(){$/;"	f
 purpose	headerSummarizer.sh	/^    purpose="$(sed -n 6p "$file")"$/;"	v
 push	about.sh	/^            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\\t ]+@    @')"$/;"	v
+push	scripts/about.sh	/^            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\\t ]+@    @')"$/;"	v
 putchar	mantozshcomp.py	/^    def putchar(self, c):$/;"	m	class:Deroffer
 pygmentcolors	.shell_aliases_functions.sh	/^pygmentcolors(){$/;"	f
 quoted_arg	mantozshcomp.py	/^    def quoted_arg(self):$/;"	m	class:Deroffer
@@ -964,6 +970,7 @@ valid_framework	boiler_gen.py	/^valid_framework = get_frame_work(user_framework)
 var	mantozshcomp.py	/^    def var(self):$/;"	m	class:Deroffer
 verb	zpwr.zsh	/^verb="$1"$/;"	v
 version	about.sh	/^            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\\t ]@@')"$/;"	v
+version	scripts/about.sh	/^            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\\t ]@@')"$/;"	v
 view	eyes.sh	/^    view=${ary[$randIndex]}$/;"	v
 vimV	install.sh	/^vimV="$(vim --version | head -1 | awk '{print $5}')"$/;"	v
 w	uploadWebPi.sh	/^w=80$/;"	v

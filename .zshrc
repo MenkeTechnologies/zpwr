@@ -2144,10 +2144,6 @@ _megacomplete(){
     local expl cmd ret
     cmd=$words[1]
 
-    num=$((HISTCMD-1))
-    last_command=$history[$num]
-    last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
-
     \_complete && ret=0 || ret=1
 
     if [[ -n "$TMUX_PANE" ]]; then
@@ -2160,11 +2156,16 @@ _megacomplete(){
         _complete_hist
     fi
 
-    if (( $#last_command_array > 0 )); then
-        _complete_plus_last_command_args
-    fi
+    if (( $#words >= 2 )) && echo $words[-1] | perl -ne 'exit 1 if ! m{\S}'; then
+        num=$((HISTCMD-1))
+        last_command=$history[$num]
+        last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
+        if (( $#last_command_array > 0 )); then
+            _complete_plus_last_command_args
+        fi
 
-    _complete_clipboard
+        _complete_clipboard
+    fi
 
     return $ret
 }
