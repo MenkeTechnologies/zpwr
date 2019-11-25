@@ -714,6 +714,7 @@ inoremap <F7> <ESC>:TTags<CR>
 map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
 map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 "map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
+noremap <silent> <leader>z nea
 
 "for moving selection up and down, displacing other text
 vnoremap <C-Right> >gv

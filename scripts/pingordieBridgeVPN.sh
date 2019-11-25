@@ -20,9 +20,11 @@ network_check_threshold=5
 
 restart_br0() {
     echo "$(date) Network was not working for the previous $network_check_tries checks."
+    sudo brctl showstp br0
     echo "Restarting br0"
     sudo bash /etc/openvpn/server/down.sh
     sleep 5
+    echo "Restarting ovpn"
     sudo sytemctl restart ovpn
     sleep 60
     host_status=$(fping $gateway_ip)
