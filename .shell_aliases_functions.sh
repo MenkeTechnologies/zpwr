@@ -1522,6 +1522,24 @@ zp(){
     fi
 }
 
+copyConf(){
+    cp .shell_aliases_functions.sh "$HOME"
+    cp .zshrc "$HOME"
+    cp .vimrc "$HOME"
+    cp .minvimrc "$HOME"
+    cp .tmux.conf "$HOME"
+    cp conf.gls "$HOME"
+    cp conf.df "$HOME"
+    cp .powerlevel9kconfig.sh "$HOME"
+    cp conf.ifconfig "$HOME"
+    cp grc.zsh "$HOME"
+    cp .inputrc "$HOME"
+    cp Ultisnips/* "$HOME/.vim/Ultisnips"
+    cp -R .tmux/* "$HOME/.tmux"
+    cp -f scripts/* "$SCRIPTS"
+
+}
+
 getrc(){
     if [[ -z "$1" ]]; then
         branch=master
@@ -1554,20 +1572,7 @@ getrc(){
     cd "$HOME"
     git clone -b "$branch" "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
     cd "$REPO_NAME"
-    cp .shell_aliases_functions.sh "$HOME"
-    cp .zshrc "$HOME"
-    cp .vimrc "$HOME"
-    cp .minvimrc "$HOME"
-    cp .tmux.conf "$HOME"
-    cp conf.gls "$HOME"
-    cp conf.df "$HOME"
-    cp .powerlevel9kconfig.sh "$HOME"
-    cp conf.ifconfig "$HOME"
-    cp grc.zsh "$HOME"
-    cp .inputrc "$HOME"
-    cp Ultisnips/* "$HOME/.vim/Ultisnips"
-    cp -R .tmux/* "$HOME/.tmux"
-    cp -f scripts/* "$SCRIPTS"
+    copyConf
     cd ..
 
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
