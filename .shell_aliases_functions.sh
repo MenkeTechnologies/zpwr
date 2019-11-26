@@ -687,24 +687,27 @@ s(){
 }
 
 logg(){
-    under='1b[0;34m'
-    quote='1b[0;35m'
+    local under quote date msg
+    under='\x1b[0;34m'
+    quote='\x1b[0;35m'
+    date='\x1b[0;37;42m'
+    msg='\x1b[0;37;43m'
 
     if [[ $CUSTOM_COLORS == true ]]; then
         if [[ -p /dev/stdin ]]; then
             {
-                printf "\n\x${under}_____________\x1b[0;37;42m$(date)\x1b[0m\x${under}____ "
-                printf "_\x${quote}'\x1b[0;37;43m"
+                printf "\n${under}_____________$date$(date)\x1b[0m${under}____ "
+                printf "_${quote}'$msg"
                 cat
-                printf "\x1b[0m\x${quote}'\x${under}_"
+                printf "\x1b[0m$quote'${under}_"
                 printf "\x1b[0m"
                 printf "\n"
             } >> "$LOGFILE"
         else
             test -z "$1" && echo "need arg" >&2 && return 1
             {
-                printf "\n\x${under}_____________\x1b[0;37;42m$(date)\x1b[0m\x${under}____ "
-                printf "_\x${quote}'\x1b[0;37;43m%b\x1b[0m\x${quote}'\x${under}_" "$*"
+                printf "\n${under}_____________$date$(date)\x1b[0m${under}____ "
+                printf "_$quote'$msg%b\x1b[0m$quote'${under}_" "$*"
                 printf "\x1b[0m"
                 printf "\n"
             } >> "$LOGFILE"
