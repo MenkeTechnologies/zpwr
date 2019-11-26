@@ -203,7 +203,7 @@ exists c.pl && {
 alias dirs='dirs -v'
 exists proxychains && alias pc='proxychains'
 exists proxychains4 && alias pc='proxychains'
-alias lo="tail -n 100 -F $LOGFILE"
+alias lo="tail -n 1000 -F $LOGFILE"
 alias va='cd /var'
 exists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
 alias cpan='rlwrap cpan'
