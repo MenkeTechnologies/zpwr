@@ -163,8 +163,8 @@ cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$websiteDir/downloads/scripts" 2>/dev/null
 cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
-tar cvfz MenkeTechnologiesShellScripts.tgz scripts
-tar cvfz dotfiles.tgz dotfiles
+tar cfz MenkeTechnologiesShellScripts.tgz scripts
+tar cfz dotfiles.tgz dotfiles
 cd ..
 
 git add .
