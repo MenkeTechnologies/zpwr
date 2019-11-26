@@ -8,7 +8,7 @@
 #}}}***********************************************************
 minutes_to_sleep=10
 while true; do
-    echo "$(date) Updating Software" >>"$LOGFILE"
+    logg "Updating Software"
     oldtime=$(date +"%s")
     olddate="$(date +'%Y-%m-%d %H:%M:%S')"
     unset PERL5LIB
@@ -24,7 +24,7 @@ EOF
         sleep $((minutes_to_sleep * 60))
         newtime=$(date +"%s")
         timediff=$((newtime - oldtime))
-        echo "$(date): Time diff $timediff. Next update at $nextdate." >>"$LOGFILE"
+        logg "Time diff $timediff. Next update at $nextdate."
         ((timediff > $((3600 * 24)))) && break
     done
 done
