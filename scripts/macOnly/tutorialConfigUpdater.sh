@@ -25,12 +25,12 @@ git checkout dev
 
 prettyPrint "Copying scripts to custom Installer Repo"
 rm -rf "$installerDir/scripts/"*
-cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts"
+cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts" 2>/dev/null
 cp -R "$SCRIPTS/macOnly" "$installerDir/scripts"
 cp "$HOME/.vimrc" "$installerDir"
 cp "$HOME/.minvimrc" "$installerDir"
 cp "$HOME/.tmux.conf" "$installerDir"
-cp -R "$HOME/.tmux/"* "$installerDir/.tmux"
+cp -R "$HOME/.tmux/"* "$installerDir/.tmux" 2>/dev/null
 cp "$HOME/.shell_aliases_functions.sh" "$installerDir"
 cp "$HOME/.zshrc" "$installerDir"
 cp "$HOME/conf.gls" "$installerDir"
@@ -64,12 +64,12 @@ cp "$HOME/.zshrc" "$tutorialDir/zsh"
 prettyPrint "Copying vimrc"
 cp "$HOME/.vimrc" "$tutorialDir/vim"
 prettyPrint "Copying minimal minvimrc"
-cp "$HOME/.minvimmrc" "$tutorialDir/vim"
+cp "$HOME/.minvimrc" "$tutorialDir/vim"
 
 prettyPrint "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
 cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
-cp -R "$HOME/.tmux/"* "$tutorialDir/tmux/.tmux"
+cp -R "$HOME/.tmux/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
 prettyPrint "Copying shell_aliases_functions"
 cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
@@ -159,7 +159,7 @@ if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -p "$websiteDir/downloads/scripts"
 fi
 
-cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$websiteDir/downloads/scripts"
+cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$websiteDir/downloads/scripts" 2>/dev/null
 cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
