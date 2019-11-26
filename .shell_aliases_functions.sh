@@ -687,20 +687,45 @@ s(){
 }
 
 logg(){
-    if [[ -p /dev/stdin ]]; then
-        {
-            printf "\n_____________$(date)____ _'"
-            cat
-            printf "'_ \n"
-        } >> "$LOGFILE"
+    under='1b[0;34m'
+    quote='1b[0;35m'
+
+    if [[ $CUSTOM_COLORS == true ]]; then
+        if [[ -p /dev/stdin ]]; then
+            {
+                printf "\n\x${under}_____________\x1b[0;37;42m$(date)\x1b[0m\x${under}____ "
+                printf "_\x${quote}'\x1b[0;37;43m"
+                cat
+                printf "\x1b[0m\x${quote}'\x${under}_"
+                printf "\n"
+            } >> "$LOGFILE"
+        else
+            test -z "$1" && echo "need arg" >&2 && return 1
+            {
+                printf "\n\x${under}_____________\x1b[0;37;42m$(date)\x1b[0m\x${under}____ "
+                printf "_\x${quote}'\x1b[0;37;43m%b\x1b[0m\x${quote}'\x${under}_" "$*"
+                printf "\n"
+            } >> "$LOGFILE"
+        fi
     else
-        test -z "$1" && echo "need arg" >&2 && return 1
-        {
-            printf "\n_____________$(date)____ "
-            printf "_'%s'_ " "$@"
-            printf "\n"
-        } >> "$LOGFILE"
+
+    if [[ -p /dev/stdin ]]; then
+            {
+                printf "\n_____________$(date)____ _'"
+                cat
+                printf "'_ \n"
+            } >> "$LOGFILE"
+        else
+            test -z "$1" && echo "need arg" >&2 && return 1
+            {
+                printf "\n_____________$(date)____ "
+                printf "_'%s'_ " "$@"
+                printf "\n"
+            } >> "$LOGFILE"
+        fi
+
     fi
+
 }
 
 xx(){
