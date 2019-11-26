@@ -697,6 +697,7 @@ logg(){
                 printf "_\x${quote}'\x1b[0;37;43m"
                 cat
                 printf "\x1b[0m\x${quote}'\x${under}_"
+                printf "\x1b[0m"
                 printf "\n"
             } >> "$LOGFILE"
         else
@@ -704,6 +705,7 @@ logg(){
             {
                 printf "\n\x${under}_____________\x1b[0;37;42m$(date)\x1b[0m\x${under}____ "
                 printf "_\x${quote}'\x1b[0;37;43m%b\x1b[0m\x${quote}'\x${under}_" "$*"
+                printf "\x1b[0m"
                 printf "\n"
             } >> "$LOGFILE"
         fi
