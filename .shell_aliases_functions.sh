@@ -1534,7 +1534,7 @@ copyConf(){
     cp conf.ifconfig "$HOME"
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
-    cp Ultisnips/* "$HOME/.vim/Ultisnips"
+    cp UltiSnips/* "$HOME/.vim/UltiSnips"
     cp -R .tmux/* "$HOME/.tmux"
     cp -f scripts/* "$SCRIPTS"
 
