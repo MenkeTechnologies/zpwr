@@ -18,4 +18,4 @@ if-shell "uname | grep -q Darwin" \
         'send-keys "sudo /usr/local/sbin/iftop -c \"$HOME/.iftop.conf\" || sudo iftop -c  \"$HOME/.iftop.conf\"" C-M'
 selectp -t right # select top right pane
 splitw -h -p 40
-selectp -t left# select top right pane
+selectp -t left # select top right pane
