@@ -11,6 +11,29 @@
 #######################################################################
 #                                setup                                #
 #######################################################################
+isZsh(){
+    if command ps -p $$ | command grep -q zsh; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if isZsh; then
+    exists(){
+        #alternative is command -v
+        type "$1" &>/dev/null || return 1 &&
+        type "$1" 2>/dev/null |
+        command grep -qv "suffix alias" 2>/dev/null
+    }
+
+else
+    exists(){
+        #alternative is command -v
+        type "$1" >/dev/null 2>&1
+    }
+fi
+
 
 size=100
 if [[ -n $1 ]]; then
@@ -27,15 +50,16 @@ fi
 
 trap 'kill $pid' INT QUIT
 
-
 svc=(ufw ovpn zabbix-agent)
 
-if [[ $restart=yes ]]; then
+if [[ $restart == yes ]]; then
 
     for s in ${svc[@]} ; do
-        sudo systemctl restart $s
-        sudo systemctl --no-pager status $s
-        sudo journalctl -n 100 --no-pager
+        if exists $s; then
+            sudo systemctl restart $s
+            sudo systemctl --no-pager status $s
+            sudo journalctl -n 100 --no-pager
+        fi
 
     done
 
