@@ -1,5 +1,7 @@
 pip3 install -
 pip3 install -andas
+pip3 install -nicorn
+pip3 install -unicorn
 pip3 install alabaster
 pip3 install aniso8601
 pip3 install appnope
@@ -41,6 +43,7 @@ pip3 install Flask-PyMongo
 pip3 install Flask-RESTful
 pip3 install gpg
 pip3 install greenlet
+pip3 install gunicorn
 pip3 install h5py
 pip3 install halo
 pip3 install html5lib
@@ -73,6 +76,7 @@ pip3 install MarkupSafe
 pip3 install matplotlib
 pip3 install mccabe
 pip3 install mdv
+pip3 install mercurial
 pip3 install meson
 pip3 install mistune
 pip3 install more-itertools
@@ -83,6 +87,8 @@ pip3 install mycli
 pip3 install mysqlclient
 pip3 install nbconvert
 pip3 install nbformat
+pip3 install neovim
+pip3 install neovim-remote
 pip3 install notebook
 pip3 install numpy
 pip3 install olefile
@@ -289,6 +295,7 @@ pip3 install urllib3
 pip3 install virtualenv
 pip3 install wcwidth
 pip3 install webencodings
+pip3 install websockets
 pip3 install Werkzeug
 pip3 install wheel
 pip3 install widgetsnbextension
