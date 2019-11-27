@@ -159,14 +159,14 @@ if [[ $skip != true ]]; then
 
         if [[ "$needSudo" == yes ]]; then
             for i in $outdated; do
-                sudo python3 -m pip install --upgrade -- "$i" #&> /dev/null
+                sudo python3 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
             done
             prettyPrint "Updating Pip3"
             #update pip itself
             sudo python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
         else
             for i in $outdated; do
-                python3 -m pip install --upgrade -- "$i" #&> /dev/null
+                python3 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
             done
             prettyPrint "Updating Pip3"
             #update pip itself
