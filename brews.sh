@@ -103,6 +103,7 @@ brew install geoip
 brew install gettext
 brew install gforth
 brew install ghc
+brew install ghostscript
 brew install giflib
 brew install gifsicle
 brew install git
@@ -127,6 +128,7 @@ brew install graphviz
 brew install grc
 brew install greed
 brew install grep
+brew install groonga
 brew install groovy
 brew install gsasl
 brew install gsettings-desktop-schemas
@@ -254,7 +256,10 @@ brew install mad
 brew install mailutils
 brew install makedepend
 brew install man2html
+brew install mariadb
 brew install maven
+brew install mecab
+brew install mecab-ipadic
 brew install mercurial
 brew install meson
 brew install midnight-commander
@@ -335,6 +340,7 @@ brew install ponysay
 brew install portaudio
 brew install portmidi
 brew install postgresql
+brew install protobuf@3.7
 brew install proxychains-ng
 brew install pssh
 brew install pstree
