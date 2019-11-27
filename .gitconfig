@@ -45,6 +45,7 @@
 
 [pull]
 	rebase = true
-
 [help]
 	autocorrect = 1
+[status]
+    submodulesummary = 1
