@@ -19,6 +19,10 @@
 	track = add -N
 	stage = add
 	visual = !gitk
+    sdiff = !git diff && git submodule foreach 'git diff'
+	spush = push --recurse-submodules=on-demand
+	supdate = submodule update --remote --merge
+
 
 [color "diff-highlight"]
     oldNormal = red bold
