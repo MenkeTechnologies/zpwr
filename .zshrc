@@ -2318,6 +2318,7 @@ fi
 #**************************************************************
 
 recompile(){
+    prettyPrint "recompiling all configs to .zwc for speed"
     local dir
 	autoload -U zrecompile
 	[ -f ~/.zshrc ] && zrecompile -p ~/.zshrc
