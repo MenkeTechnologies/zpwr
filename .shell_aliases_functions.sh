@@ -1186,7 +1186,7 @@ gitCommitAndPush(){
     done
 
     echo
-    git pull
+    git pull --no-rebase
     git add .
     git commit -m "$1"
     git push
