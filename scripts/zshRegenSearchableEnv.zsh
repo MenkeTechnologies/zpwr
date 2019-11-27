@@ -44,20 +44,20 @@
     alias -L
 
     for k v in ${(kv)builtins}; do
-        type -a $k
+        type -a -- $k
     done
 
     for k v in ${(kv)reswords}; do
-        type -a $reswords
+        type -a -- $reswords
     done
 
     for k v in ${(kv)commands}; do
-        print -l $v
+        print -l -- $v
     done
 
     for k v in ${(kv)functions}; do
         autoload +X -z -- $k
-        type -a $k
+        type -a -- $k
     done
 
     declare -f
