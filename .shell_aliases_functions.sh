@@ -31,15 +31,15 @@ isZsh(){
 if isZsh; then
     exists(){
         #alternative is command -v
-        type "$1" &>/dev/null || return 1 &&
-        type "$1" 2>/dev/null |
+        type -- "$1" &>/dev/null || return 1 &&
+        type -- "$1" 2>/dev/null |
         command grep -qv "suffix alias" 2>/dev/null
     }
 
 else
     exists(){
         #alternative is command -v
-        type "$1" >/dev/null 2>&1
+        type -- "$1" >/dev/null 2>&1
     }
 fi
 
@@ -53,7 +53,7 @@ fi
 #tmux prefix on outer session
 export TMUX_PREFIX=x
 export TMUX_REMOTE_PREFIX=b
-test -f "$HOME/.tokens.sh"  && source "$HOME/.tokens.sh"
+test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
 export DELIMITER_CHAR='%'
 
 #bash xtrace

@@ -2171,7 +2171,7 @@ _megacomplete(){
 }
 
 # list of completers to use
-zstyle ':completion:*' completer _expand _megacomplete _ignored _approximate _correct
+zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
 
