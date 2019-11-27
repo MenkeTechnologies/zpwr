@@ -47,7 +47,7 @@ if [[ "$(uname)" == Darwin ]]; then
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-        python2 -m pip install --upgrade -- "$i" #&> /dev/null
+        python2 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
     done
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
@@ -61,7 +61,7 @@ if [[ "$(uname)" == Darwin ]]; then
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-        python3 -m pip install --upgrade -- "$i" #&> /dev/null
+        python3 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
     done
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
@@ -73,7 +73,7 @@ else
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-        sudo python2 -m pip install --upgrade -- "$i" #&> /dev/null
+        sudo python2 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
     done
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip2${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
@@ -87,7 +87,7 @@ else
     #split on space
     for i in $outdated; do
         alternatingPrettyPrint "Updating ${DELIMITER_CHAR}$i${DELIMITER_CHAR} with ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
-        sudo python3 -m pip install --upgrade -- "$i" #&> /dev/null
+        sudo python3 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
     done
 
     alternatingPrettyPrint "Updating ${DELIMITER_CHAR}Pip3${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
