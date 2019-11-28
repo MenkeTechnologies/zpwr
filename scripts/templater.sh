@@ -49,6 +49,9 @@ createTemplate() {
 fileToBeExecuted="$1"
 
 case "$fileToBeExecuted" in
+*.zsh)
+    createTemplate zsh "$fileToBeExecuted"
+    ;;
 *.sh)
     createTemplate bash "$fileToBeExecuted"
     ;;
