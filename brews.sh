@@ -23,6 +23,7 @@ brew install aview
 brew install bash
 brew install bash-completion
 brew install bash-snippets
+brew install bashdb
 brew install bat
 brew install bdw-gc
 brew install bison
@@ -450,4 +451,5 @@ brew install zookeeper
 brew install zplug
 brew install zsh
 brew install zsh-lovers
+brew install zshdb
 brew install zzz
