@@ -10,6 +10,8 @@
 #not called from main
 echo "$0" | grep -q pip_install.sh && source common.sh
 
+prettyPrint "installing gdb dashboard"
+wget -P ~ https://git.io/.gdbinit
 
 if [[ "$OS_TYPE" == "Darwin" ]]; then
 
