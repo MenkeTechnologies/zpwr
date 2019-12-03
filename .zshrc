@@ -73,16 +73,18 @@ export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
 
 # Global Environment Variables for ZPWR by MenkeTechnologies
+# More Environment Variables in ~/.shell_aliases_functions.sh at top
 # see README.md
-MYPROMPT=POWERLEVEL
-EXPAND_SECOND_POSITION=true
-SURROUND=true
-CUSTOM_COLORS=true
-TMUX_AUTO_ATTACH=true
-EXA_EXTENDED=true
-PROFILING=false
-GLOBAL_DEBUG=false
-GLOBAL_TRACE=false
+export MYPROMPT=POWERLEVEL
+export EXPAND_SECOND_POSITION=true
+export SURROUND=true
+export CUSTOM_COLORS=true
+export TMUX_AUTO_ATTACH=true
+export EXA_EXTENDED=true
+export PROFILING=false
+export GLOBAL_DEBUG=false
+export GLOBAL_TRACE=false
+export USE_NEOVIM=true
 
 if [[ $PROFILING == true ]]; then
     #profiling startup
