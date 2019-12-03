@@ -82,6 +82,7 @@ TMUX_AUTO_ATTACH=true
 EXA_EXTENDED=true
 PROFILING=false
 GLOBAL_DEBUG=false
+GLOBAL_TRACE=false
 
 if [[ $PROFILING == true ]]; then
     #profiling startup
