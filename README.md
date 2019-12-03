@@ -186,7 +186,7 @@ export PROFILING=false
 export ZPWR_DEBUG=false
 export ZPWR_TRACE=false
 export USE_NEOVIM=true
-
+export ZPWR_LEARN=true
 ```
 
 ## Contributing
