@@ -48,7 +48,7 @@ if [[ -z "$OS_TYPE" ]]; then
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:Global Vars
+#{{{                    MARK:Env Vars
 #**************************************************************
 #tmux prefix on outer session
 export TMUX_PREFIX=x
@@ -110,10 +110,9 @@ else
     export EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
 fi
 
-export USE_NEOVIM=true
 #}}}***********************************************************
 
-#{{{                    MARK:ENV Var
+#{{{                    MARK:PATH
 #**************************************************************
 echo "$PATH" | command grep -iq shellScripts || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
@@ -167,7 +166,7 @@ echo "$PATH" | command grep -iq shellScripts || {
 #**************************************************************
 #}}}
 
-#{{{                    MARK:Rust
+#{{{                    MARK:Rust Config
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
     if exists exa; then
