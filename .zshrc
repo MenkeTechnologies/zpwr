@@ -86,6 +86,7 @@ export PROFILING=false
 export ZPWR_DEBUG=false
 export ZPWR_TRACE=false
 export USE_NEOVIM=true
+export ZPWR_LEARN=true
 
 if [[ $PROFILING == true ]]; then
     #profiling startup
@@ -2345,52 +2346,55 @@ unalias ag &> /dev/null
 #stop delay when entering normal mode
 export KEYTIMEOUT=1
 
-learn(){
-    if [[ ! -z "$BUFFER" ]]; then
-        mywords=("${(z)BUFFER}")
-        [[ "${mywords[1]}" == le ]] && return 1
+if [[ $ZPWR_LEARN != false ]]; then
+    learn(){
+        if [[ ! -z "$BUFFER" ]]; then
+            mywords=("${(z)BUFFER}")
+            [[ "${mywords[1]}" == le ]] && return 1
 
-    learning="$(print "$BUFFER" | perl -pe 's@\x0a@\x20@' | perl -pe 's@^\x20+|\x20+$@@g;s@\x20+@\x20@g')"
+        learning="$(print "$BUFFER" | perl -pe 's@\x0a@\x20@' | perl -pe 's@^\x20+|\x20+$@@g;s@\x20+@\x20@g')"
 
-        BUFFER="le '${learning//'/\''}'"
-        zle .accept-line
-    else
-        return 1
-    fi
-}
+            BUFFER="le '${learning//'/\''}'"
+            zle .accept-line
+        else
+            return 1
+        fi
+    }
 
-rsql(){
-    printf ""> "$TEMPFILESQL"
-    for num in $@; do
-        id=$(echo "select id from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
-        item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
-        item=${item//\'/\\\'}
+    rsql(){
+        printf ""> "$TEMPFILESQL"
+        for num in $@; do
+            id=$(echo "select id from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
+            item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
+            item=${item//\'/\\\'}
 
-        echo "update $SCHEMA_NAME.$TABLE_NAME set learning = '$item' where id=$id"
-    done >> "$TEMPFILESQL"
+            echo "update $SCHEMA_NAME.$TABLE_NAME set learning = '$item' where id=$id"
+        done >> "$TEMPFILESQL"
 
-    vim "$TEMPFILESQL"
-    cat "$TEMPFILESQL" | mysql
-    command rm "$TEMPFILESQL"
-}
-redo(){
-    echo > "$TEMPFILE"
-    for num in $@; do
-        id=$(echo "select id from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
-        item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
-        item=${item//\'/\\\'\'}
+        vim "$TEMPFILESQL"
+        cat "$TEMPFILESQL" | mysql
+        command rm "$TEMPFILESQL"
+    }
+    redo(){
+        echo > "$TEMPFILE"
+        for num in $@; do
+            id=$(echo "select id from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
+            item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
+            item=${item//\'/\\\'\'}
 
-        echo "echo 'update $SCHEMA_NAME.$TABLE_NAME set learning = ""''"$item"''"" where id=$id' | mysql"
-    done >> "$TEMPFILE"
+            echo "echo 'update $SCHEMA_NAME.$TABLE_NAME set learning = ""''"$item"''"" where id=$id' | mysql"
+        done >> "$TEMPFILE"
 
-    print -rz "$(cat "$TEMPFILE")"
-    command rm "$TEMPFILE"
-}
+        print -rz "$(cat "$TEMPFILE")"
+        command rm "$TEMPFILE"
+    }
 
 
-zle -N learn
-bindkey -M viins '^J' learn
-bindkey -M vicmd '^J' learn
+    zle -N learn
+    bindkey -M viins '^J' learn
+    bindkey -M vicmd '^J' learn
+
+fi
 
 zshrcsearch(){
     if [[ -z "$1" ]]; then
