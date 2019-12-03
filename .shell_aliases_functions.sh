@@ -277,18 +277,6 @@ alias curl='curl -fsSL'
 alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
-alias gpf='git push --force'
-alias gdh='git diff -w HEAD'
-alias bk='git clean -dff && git reset --hard HEAD && git clean -dff'
-alias glf='git pull --force'
-alias gla='git log --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p '
-alias glaa='git log --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p --all'
-alias glz='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p'
-alias glzz='git log --graph --pretty="%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset" --stat -p --all'
-alias gacp='git add . && git commit -m "" && git push'
-alias gac='git add . && git commit -m '
-alias gbv='git branch -a -vv'
-alias allRebase='git rebase -i $(git rev-list --max-parents=0 HEAD)'
 
 if [[ "$OS_TYPE" == darwin ]]; then
     #Darwin specific aliases
