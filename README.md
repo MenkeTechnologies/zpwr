@@ -172,13 +172,21 @@ Startup shell files will source `~/.tokens.sh` so you can put your additional co
 ## Environment Variables
 You can set these environment variables in your `~.tokens.sh` to customize the behavior of the terminal setup.
 ```sh
-# Global Environment Variables for MenkeTechnologies
+# Global Environment Variables for ZPWR by MenkeTechnologies
+# More Environment Variables in ~/.shell_aliases_functions.sh at top
+# see README.md
 export MYPROMPT=POWERLEVEL
-export EXPAND_SECOND_POSITION=true
-export SURROUND=true
-export CUSTOM_COLORS=true
-export MYBANNER=ponies
-export NOPONY_BANNER_CMD="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
+export ZPWR_EXPAND=true
+export ZPWR_EXPAND_SECOND_POSITION=true
+export ZPWR_SURROUND=true
+export ZPWR_COLORS=true
+export ZPWR_AUTO_ATTACH=true
+export EXA_EXTENDED=true
+export PROFILING=false
+export ZPWR_DEBUG=false
+export ZPWR_TRACE=false
+export USE_NEOVIM=true
+
 ```
 
 ## Contributing
