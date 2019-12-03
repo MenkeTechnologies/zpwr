@@ -60,18 +60,13 @@
 # https://github.com/MenkeTechnologies
 #
 
+#{{{                    MARK:start timestamp
+#**************************************************************
+startTimestamp=$(date +%s)
+#}}}***********************************************************
+
 #{{{                    MARK:Exports
 #**************************************************************
-
-startTimestamp=$(date +%s)
-
-export LC_ALL="en_US.UTF-8"
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
 # see README.md
@@ -88,20 +83,19 @@ export ZPWR_TRACE=false
 export USE_NEOVIM=true
 export ZPWR_LEARN=true
 
+# non zpwr env vars
+export LC_ALL="en_US.UTF-8"
+export ZSH=$HOME/.oh-my-zsh
+
 if [[ $PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
 fi
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-
 [[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
 
 [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
 source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
-
 
 if [[ $MYPROMPT == POWERLEVEL ]]; then
     if test -s "$HOME/.powerlevel9kconfig.sh";then
@@ -115,6 +109,7 @@ fi
 
 
 ZSH_DISABLE_COMPFIX=true
+
 #colors for common commands
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
