@@ -81,6 +81,7 @@ CUSTOM_COLORS=true
 TMUX_AUTO_ATTACH=true
 EXA_EXTENDED=true
 PROFILING=false
+GLOBAL_DEBUG=false
 
 if [[ $PROFILING == true ]]; then
     #profiling startup
