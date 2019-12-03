@@ -76,14 +76,15 @@ export ZSH=$HOME/.oh-my-zsh
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
 # see README.md
 export MYPROMPT=POWERLEVEL
-export EXPAND_SECOND_POSITION=true
-export SURROUND=true
-export CUSTOM_COLORS=true
-export TMUX_AUTO_ATTACH=true
+export ZPWR_EXPAND=true
+export ZPWR_EXPAND_SECOND_POSITION=true
+export ZPWR_SURROUND=true
+export ZPWR_COLORS=true
+export ZPWR_AUTO_ATTACH=true
 export EXA_EXTENDED=true
 export PROFILING=false
-export GLOBAL_DEBUG=false
-export GLOBAL_TRACE=false
+export ZPWR_DEBUG=false
+export ZPWR_TRACE=false
 export USE_NEOVIM=true
 
 if [[ $PROFILING == true ]]; then
@@ -1248,7 +1249,7 @@ zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 #separate files and dirs in _files completion
 #zstyle ':completion:*' file-patterns '%p(^-/):globbed-files' '^(-/):directories' '*:all-files'
 
-if [[ $CUSTOM_COLORS == true ]]; then
+if [[ $ZPWR_COLORS == true ]]; then
     # Make the list prompt friendly
     zstyle ':completion:*' list-prompt \
         $'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%M%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
@@ -1320,7 +1321,7 @@ fi
 #do not ascii sort for z completion
 zstyle ':completion:*:z:*' sort false
 
-if [[ $CUSTOM_COLORS == true ]]; then
+if [[ $ZPWR_COLORS == true ]]; then
 
     zstyle ':completion:*' list-colors 'ma=37;1;4;44'
     #main option for menu selection colors
@@ -2259,7 +2260,7 @@ alias -s txt='vim'
 
 #{{{                    MARK:Auto attach tmux
 #**************************************************************
-if [[ $TMUX_AUTO_ATTACH == true ]]; then
+if [[ $ZPWR_AUTO_ATTACH == true ]]; then
     if [[ "$(uname)" == Linux ]]; then
         if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
             mobile=true

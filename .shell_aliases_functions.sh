@@ -171,7 +171,7 @@ echo "$PATH" | command grep -iq shellScripts || {
     export PATH="$HOME/.cargo/bin:$PATH"
     if exists exa; then
         alias exa="$EXA_COMMAND"
-        if [[ $CUSTOM_COLORS = true ]]; then
+        if [[ $ZPWR_COLORS = true ]]; then
             export LS_COLORS="fi=38:di=32;1:ex=31;1"
             export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"
         fi
@@ -636,7 +636,7 @@ logg(){
     date='\x1b[0;37;42m'
     msg='\x1b[0;37;43m'
 
-    if [[ $CUSTOM_COLORS == true ]]; then
+    if [[ $ZPWR_COLORS == true ]]; then
         if [[ -p /dev/stdin ]]; then
             {
                 printf "\n${under}_____________$date$(date)\x1b[0m${under}____ "
@@ -2040,7 +2040,7 @@ see(){
 
 se(){
     if test -z "$1"; then
-        if [[ "$CUSTOM_COLORS" = true ]]; then
+        if [[ "$ZPWR_COLORS" = true ]]; then
             echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" |
         mysql 2>> $LOGFILE | nl -b a -n rz | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
         else
@@ -2055,13 +2055,13 @@ se(){
         arg=${argdollar//@/\\@}
         echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$TEMPFILE'"; open $fh2, ">>", "'$TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
         if [[ -z "$2" ]]; then
-            if [[ "$CUSTOM_COLORS" = true ]]; then
+            if [[ "$ZPWR_COLORS" = true ]]; then
                 paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
             else
             paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
             fi
         else
-            if [[ "$CUSTOM_COLORS" = true ]]; then
+            if [[ "$ZPWR_COLORS" = true ]]; then
                 paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
             else
             paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
