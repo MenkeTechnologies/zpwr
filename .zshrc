@@ -1899,7 +1899,11 @@ _fzf_complete_clearList() {
 #git ;<tab>
 _fzf_complete_git() {
     FZF_COMPLETION_OPTS=$FZF_GIT_OPTS _fzf_complete '-m' "$@" < <(
+        git branch -a --format='%(refname:short)'
+        echo HEAD
         git rev-list HEAD
+        git tag
+        git ls-files
     )
 }
 
