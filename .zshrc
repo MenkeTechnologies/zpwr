@@ -635,8 +635,8 @@ fzfEnv(){
 
     cat "${ALL_ENV}Key.txt" | awk '{print $2}' |
     eval "fzf -m --border $FZF_ENV_OPTS"
-
 }
+
 
 fzfAllKeybind(){
     if [[ ! -s "$ALL_KEYBINDINGS" ]]; then
@@ -1836,6 +1836,7 @@ fzf_setup(){
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
     export FZF_ENV_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
+    export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh")'"
 
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")'"
@@ -1890,7 +1891,16 @@ _fzf_complete_z() {
 
 # clearList ;<tab>
 _fzf_complete_clearList() {
-    fzfEnv
+    FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(
+        cat "${ALL_ENV}Key.txt" | awk '{print $2}'
+    ) 
+}
+
+#git ;<tab>
+_fzf_complete_git() {
+    FZF_COMPLETION_OPTS=$FZF_GIT_OPTS _fzf_complete '-m' "$@" < <(
+        git rev-list HEAD
+    )
 }
 
 test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \
