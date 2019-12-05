@@ -7,15 +7,15 @@
 ##### Notes:
 #}}}***********************************************************
 
-if [[ -z "$OS_TYPE" ]]; then
-    export OS_TYPE="$(uname -s | perl -pe '$_=lc')"
+if [[ -z "$ZPWR_OS_TYPE" ]]; then
+    export ZPWR_OS_TYPE="$(uname -s | perl -pe '$_=lc')"
 
 fi
 
 getOpenCommand(){
     local open_cmd
 
-    case "$OS_TYPE" in
+    case "$ZPWR_OS_TYPE" in
         darwin*)  open_cmd='open'
           ;;
         cygwin*)  open_cmd='cygstart'
@@ -29,7 +29,7 @@ getOpenCommand(){
             ;;
         msys*)    open_cmd='start ""'
             ;;
-        *)        echo "Platform $OS_TYPE not supported"
+        *)        echo "Platform $ZPWR_OS_TYPE not supported"
                     return 1
                     ;;
     esac
@@ -40,7 +40,7 @@ getOpenCommand(){
 getPasteCommand(){
     local paste_cmd
 
-    case "$OS_TYPE" in
+    case "$ZPWR_OS_TYPE" in
         darwin*)
             paste_cmd='pbpaste'
             ;;
@@ -58,7 +58,7 @@ getPasteCommand(){
             paste_cmd="powershell.exe -c 'Get-Clipboard'"
             ;;
         *)
-            echo "Platform $OS_TYPE not supported"
+            echo "Platform $ZPWR_OS_TYPE not supported"
             return 1
             ;;
     esac
@@ -69,7 +69,7 @@ getPasteCommand(){
 getCopyCommand(){
     local copy_cmd
 
-    case "$OS_TYPE" in
+    case "$ZPWR_OS_TYPE" in
         darwin*)
             copy_cmd='pbcopy'
             ;;
@@ -87,7 +87,7 @@ getCopyCommand(){
             copy_cmd='clip.exe'
             ;;
         *)
-            echo "Platform $OS_TYPE not supported"
+            echo "Platform $ZPWR_OS_TYPE not supported"
             return 1
             ;;
     esac

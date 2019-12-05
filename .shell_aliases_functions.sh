@@ -54,21 +54,29 @@ fi
 export TMUX_PREFIX=x
 export TMUX_REMOTE_PREFIX=b
 test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
-export ZPWR_DELIMITER_CHAR='%'
-
 #bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 #zsh xtrace
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
-export GITHUB_ACCOUNT='MenkeTechnologies'
-export GITHUB_URL="https://github.com/$GITHUB_ACCOUNT"
-export REPO_NAME="zpwr"
-export ZSH_COMP_REPO_NAME="zsh-more-completions"
+
+export ZPWR_DELIMITER_CHAR='%'
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
+export ZPWR_REPO_NAME="zpwr"
+export ZPWR_COMPLETION_DIR="zsh-more-completions"
+export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
+export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
+if [[ ! -d "/tmp/$ZPWR_REPO_NAME" ]]; then
+    mkdir -p "/tmp/$ZPWR_REPO_NAME"
+fi
+export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
+export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
+export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
+
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
 export SCRIPTS="$HOME/Documents/shellScripts"
-
 source "$SCRIPTS/crossOSCommands.sh"
 export FORKED_DIR="$HOME/forkedRepos"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
@@ -77,15 +85,6 @@ export D="$HOME/Desktop"
 export DOC="$HOME/Documents"
 export DL="$HOME/Downloads"
 export XAUTHORITY="$HOME/.Xauthority"
-export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
-export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
-if [[ ! -d "/tmp/$REPO_NAME" ]]; then
-    mkdir -p "/tmp/$REPO_NAME"
-fi
-export ZPWR_TEMPFILE="/tmp/$REPO_NAME/.temp$$-1$USER"
-export ZPWR_TEMPFILE2="/tmp/$REPO_NAME/.temp$$-2$USER"
-export ZPWR_TEMPFILE_SQL="/tmp/$REPO_NAME/.temp$$-2$USER.sql"
-
 export TERMINAL_APP="Terminal.app"
 export YARN_HOME="$HOME/.config/yarn"
 export TMUX_HOME="$HOME/.tmux"
@@ -153,13 +152,13 @@ echo "$PATH" | command grep -iq shellScripts || {
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
-        if [[ $USE_NEOVIM == true ]]; then
+        if [[ $ZPWR_USE_NEOVIM == true ]]; then
             exists nvim && export EDITOR='nvim' || export EDITOR='vim'
         else
             exists mvim && export EDITOR='mvim' || export EDITOR='vim'
         fi
     else
-        if [[ $USE_NEOVIM == true ]]; then
+        if [[ $ZPWR_USE_NEOVIM == true ]]; then
             exists nvim && export EDITOR='nvim' || export EDITOR='vim'
         fi
     fi
@@ -312,7 +311,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
      alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
      alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
     exists mvim && {
-        if [[ $USE_NEOVIM != true ]]; then
+        if [[ $ZPWR_USE_NEOVIM != true ]]; then
             alias v='mvim -v'
             alias vi='mvim -v'
             alias vim='mvim -v'
@@ -321,7 +320,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         fi
     }
     exists nvim && {
-        if [[ $USE_NEOVIM == true ]]; then
+        if [[ $ZPWR_USE_NEOVIM == true ]]; then
             alias v='nvim'
             alias vi='nvim'
             alias vim='nvim'
@@ -370,7 +369,7 @@ else
     fi
 
     exists nvim && {
-        if [[ $USE_NEOVIM == true ]]; then
+        if [[ $ZPWR_USE_NEOVIM == true ]]; then
             alias v='nvim'
             alias vi='nvim'
             alias vim='nvim'
@@ -552,7 +551,7 @@ else
 
     restart(){
         service="$1"
-        src_dir="$FORKED_DIR/$REPO_NAME"
+        src_dir="$FORKED_DIR/$ZPWR_REPO_NAME"
         local service_path="$src_dir/$service.service"
         test -d "$src_dir" ||
             { echo "$src_dir does not exists." >&2 && return 1; }
@@ -590,7 +589,7 @@ cloneToForked(){
             builtin cd "$@" || return 1
         fi
         git clone -b "$branch" \
-            "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
+            "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
     )
 }
 
@@ -695,7 +694,7 @@ urlSafe(){
 }
 
 cgh(){
-    [[ -z "$1" ]] && user="$GITHUB_ACCOUNT" || user="$1"
+    [[ -z "$1" ]] && user="$ZPWR_GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/$user" |
     command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
 }
@@ -1174,7 +1173,7 @@ hc(){
     git init
     hub create "$reponame"
     echo "# $reponame" > README.md
-    echo "# created by $GITHUB_ACCOUNT" >> README.md
+    echo "# created by $ZPWR_GITHUB_ACCOUNT" >> README.md
     git add .
     git commit -m "first commit"
     git push --set-upstream origin master
@@ -1183,7 +1182,7 @@ hc(){
 }
 
 hd(){
-    test -n "$1" && repo="$1" && user="$GITHUB_ACCOUNT" || {
+    test -n "$1" && repo="$1" && user="$ZPWR_GITHUB_ACCOUNT" || {
 		if line="$(git remote -v 2>/dev/null | sed 1q)";then
             if echo "$line" | command grep -q 'git@';then
                 #ssh
@@ -1409,31 +1408,31 @@ openmygh(){
         if [[ -n "$1" ]]; then
             ${=open_cmd} "https://github.com/$1"
         else
-            ${=open_cmd} "https://github.com/$GITHUB_ACCOUNT"
+            ${=open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT"
         fi
     else
         if [[ -n "$1" ]]; then
             ${open_cmd} "https://github.com/$1"
         else
-            ${open_cmd} "https://github.com/$GITHUB_ACCOUNT"
+            ${open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT"
         fi
     fi
 
 }
 alias gh=openmygh
 
-eval "alias $GITHUB_ACCOUNT=NAME='openmygh $GITHUB_ACCOUNT'"
+eval "alias $ZPWR_GITHUB_ACCOUNT=NAME='openmygh $ZPWR_GITHUB_ACCOUNT'"
 zpwr(){
     if test -z $1;then
-        openmygh $GITHUB_ACCOUNT/$REPO_NAME
+        openmygh $ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME
     else
         . zpwr.zsh "$@"
     fi
 }
-if [[ -d "$SCRIPTS/$REPO_NAME" ]]; then
-    eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$REPO_NAME'"
-elif [[ -d "$FORKED_DIR/$REPO_NAME" ]];then
-    eval "export $(echo $REPO_NAME | perl -pe '$_=uc')='$FORKED_DIR/$REPO_NAME'"
+if [[ -d "$SCRIPTS/$ZPWR_REPO_NAME" ]]; then
+    eval "export $(echo $ZPWR_REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$ZPWR_REPO_NAME'"
+elif [[ -d "$FORKED_DIR/$ZPWR_REPO_NAME" ]];then
+    eval "export $(echo $ZPWR_REPO_NAME | perl -pe '$_=uc')='$FORKED_DIR/$ZPWR_REPO_NAME'"
 fi
 
 if [[ -d "$FORKED_DIR" ]]; then
@@ -1442,8 +1441,8 @@ fi
 
 zpz(){
     local dirsrc forked
-    dirsc="$SCRIPTS/$REPO_NAME"
-    forked="$FORKED_DIR/$REPO_NAME"
+    dirsc="$SCRIPTS/$ZPWR_REPO_NAME"
+    forked="$FORKED_DIR/$ZPWR_REPO_NAME"
 
     if [[ -d "$dirsc" ]]; then
         cd "$dirsc"; gitCheckoutRebasePush
@@ -1455,8 +1454,8 @@ zpz(){
 }
 zp(){
     local dirsrc forked
-    dirsc="$SCRIPTS/$REPO_NAME"
-    forked="$FORKED_DIR/$REPO_NAME"
+    dirsc="$SCRIPTS/$ZPWR_REPO_NAME"
+    forked="$FORKED_DIR/$ZPWR_REPO_NAME"
 
     if [[ -d "$dirsc" ]]; then
         cd "$dirsc"
@@ -1515,8 +1514,8 @@ getrc(){
     fi
 
     cd "$HOME"
-    git clone -b "$branch" "https://github.com/$GITHUB_ACCOUNT/$REPO_NAME.git"
-    cd "$REPO_NAME"
+    git clone -b "$branch" "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
+    cd "$ZPWR_REPO_NAME"
     copyConf
     cd ..
 
@@ -1526,7 +1525,7 @@ getrc(){
         test -d "$dir" && ( builtin cd "$dir" && git pull; )
     done
 
-    rm -rf "$REPO_NAME"
+    rm -rf "$ZPWR_REPO_NAME"
     test -n "$TERM" && exec "$SHELL"
 
 }
