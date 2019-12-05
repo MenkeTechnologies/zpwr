@@ -77,14 +77,14 @@ export D="$HOME/Desktop"
 export DOC="$HOME/Documents"
 export DL="$HOME/Downloads"
 export XAUTHORITY="$HOME/.Xauthority"
-export VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
-export ALL_KEYBINDINGS="$HOME/keybindings.txt"
+export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
+export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
 if [[ ! -d "/tmp/$REPO_NAME" ]]; then
     mkdir -p "/tmp/$REPO_NAME"
 fi
-export TEMPFILE="/tmp/$REPO_NAME/.temp$$-1$USER"
-export TEMPFILE2="/tmp/$REPO_NAME/.temp$$-2$USER"
-export TEMPFILESQL="/tmp/$REPO_NAME/.temp$$-2$USER.sql"
+export ZPWR_TEMPFILE="/tmp/$REPO_NAME/.temp$$-1$USER"
+export ZPWR_TEMPFILE2="/tmp/$REPO_NAME/.temp$$-2$USER"
+export ZPWR_TEMPFILE_SQL="/tmp/$REPO_NAME/.temp$$-2$USER.sql"
 
 export TERMINAL_APP="Terminal.app"
 export YARN_HOME="$HOME/.config/yarn"
@@ -105,9 +105,9 @@ if [[ -z "$TMUX" ]]; then
     export TERM="xterm-256color"
 fi
 if [[ $ZPWR_EXA_EXTENDED == true ]]; then
-    export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
 else
-    export EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
 fi
 
 #}}}***********************************************************
@@ -170,7 +170,7 @@ echo "$PATH" | command grep -iq shellScripts || {
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
     if exists exa; then
-        alias exa="$EXA_COMMAND"
+        alias exa="$ZPWR_EXA_COMMAND"
         if [[ $ZPWR_COLORS = true ]]; then
             export LS_COLORS="fi=38:di=32;1:ex=31;1"
             export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"
@@ -785,7 +785,7 @@ about(){
 clearList() {
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists exa;then
-            ls_command="$EXA_COMMAND"
+            ls_command="$ZPWR_EXA_COMMAND"
         else
             if exists grc; then
                 ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"
@@ -797,7 +797,7 @@ clearList() {
     elif [[ "$ZPWR_OS_TYPE" == linux ]];then
 
         if exists exa;then
-            ls_command="$EXA_COMMAND"
+            ls_command="$ZPWR_EXA_COMMAND"
         else
             if exists grc; then
                 ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"
@@ -873,7 +873,7 @@ clearList() {
 }
 
 listNoClear () {
-    exists exa && eval "$EXA_COMMAND" && return 0
+    exists exa && eval "$ZPWR_EXA_COMMAND" && return 0
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists grc; then
@@ -1006,17 +1006,17 @@ totalLines(){
         fi
     done < <(git ls-files) 2>/dev/null
 
-    } > "$TEMPFILE"
+    } > "$ZPWR_TEMPFILE"
 
-    if ! test -f "$TEMPFILE"; then
+    if ! test -f "$ZPWR_TEMPFILE"; then
         printf "\x1b[0;1;31m"
-        printf "where is $TEMPFILE\n" >&2
+        printf "where is $ZPWR_TEMPFILE\n" >&2
         printf "\x1b[0m"
         return 1
     fi
 
     prettyPrint "Total Line Count"
-    lineCount="$(cat "$TEMPFILE" | wc -l)"
+    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
         echo "$lineCount" |
             perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
@@ -1026,7 +1026,7 @@ totalLines(){
             perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
-    command rm "$TEMPFILE"
+    command rm "$ZPWR_TEMPFILE"
 }
 
 lineContribCount(){
@@ -1050,27 +1050,27 @@ lineContribCount(){
         fi
     done < <(git ls-files) 2>/dev/null
 
-    } > "$TEMPFILE"
+    } > "$ZPWR_TEMPFILE"
 
-    if ! test -f "$TEMPFILE"; then
+    if ! test -f "$ZPWR_TEMPFILE"; then
         printf "\x1b[0;1;31m"
-        printf "where is $TEMPFILE\n" >&2
+        printf "where is $ZPWR_TEMPFILE\n" >&2
         printf "\x1b[0m"
         return 1
     fi
 
     prettyPrint "Line Contribution Count"
-    lineCount="$(cat "$TEMPFILE" | wc -l)"
+    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
-        cat "$TEMPFILE" | sort | uniq -c | sort -r |
+        cat "$ZPWR_TEMPFILE" | sort | uniq -c | sort -r |
         perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
-        cat "$TEMPFILE" | sort | uniq -c | sort -r |
+        cat "$ZPWR_TEMPFILE" | sort | uniq -c | sort -r |
         perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
-    command rm "$TEMPFILE"
+    command rm "$ZPWR_TEMPFILE"
 
 }
 
@@ -1494,10 +1494,10 @@ getrc(){
 
     if [[ $ZPWR_OS_TYPE == darwin ]]; then
         if exists dialog;then
-            dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$TEMPFILE"
+            dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$ZPWR_TEMPFILE"
             clear
-            REPLY="$(cat "$TEMPFILE")"
-            command rm "$TEMPFILE"
+            REPLY="$(cat "$ZPWR_TEMPFILE")"
+            command rm "$ZPWR_TEMPFILE"
         else
             printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> "
             read
@@ -2056,21 +2056,21 @@ if [[ $ZPWR_LEARN != false ]]; then
             # escaping for perl $ and @ sigils
             argdollar=${arg//$/\\$}
             arg=${argdollar//@/\\@}
-            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$TEMPFILE'"; open $fh2, ">>", "'$TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
             if [[ -z "$2" ]]; then
                 if [[ "$ZPWR_COLORS" = true ]]; then
-                    paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
+                    paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
                 else
-                paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
+                paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
                 fi
             else
                 if [[ "$ZPWR_COLORS" = true ]]; then
-                    paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
+                    paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
                 else
-                paste -- $TEMPFILE <(cat -- $TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
+                paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
                 fi | command egrep --color=always -i -- "$2"
             fi
-            command rm $TEMPFILE $TEMPFILE2
+            command rm $ZPWR_TEMPFILE $ZPWR_TEMPFILE2
         fi
 
     }
@@ -2165,10 +2165,10 @@ regenAllKeybindingsCache(){
     prettyPrint "regen all keybindings cache"
     bash "$SCRIPTS/keybindingsToFZFVim.zsh" |
     escapeRemover.pl |
-    perl -ne 'print if /\S/' > "$VIM_KEYBINDINGS"
+    perl -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"
     isZsh && source "$SCRIPTS/keybindingsToFZF.zsh" |
         escapeRemover.pl |
-        perl -ne 'print if /\S/' > "$ALL_KEYBINDINGS"
+        perl -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
 }
 
 
@@ -2250,14 +2250,14 @@ timer() {
             ((total += runtime))
         done
         avg=$((runtime/(count *1.0)))
-        prettyPrint "$local_command took $runtime ms for $count rounds" >> "$TEMPFILE"
+        prettyPrint "$local_command took $runtime ms for $count rounds" >> "$ZPWR_TEMPFILE"
         echo
     done
-    cat "$TEMPFILE"
+    cat "$ZPWR_TEMPFILE"
     totend=$($cmd +%s)
     tot=$((totend-totstart))
     prettyPrint "total seconds at $tot s."
-    command rm "$TEMPFILE"
+    command rm "$ZPWR_TEMPFILE"
 }
 
 changeGitEmail(){
@@ -2285,6 +2285,6 @@ changeGitEmail(){
 
 #{{{                    MARK:Global Alias
 #**************************************************************
-alias exa="$EXA_COMMAND"
+alias exa="$ZPWR_EXA_COMMAND"
 exists hexedit && alias he='hexedit -l 16'
 #}}}***********************************************************
