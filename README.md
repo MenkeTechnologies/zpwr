@@ -155,6 +155,13 @@ C-Space (Control-Space) will bypass all expansion of globbing, aliases and words
 
 `~/.zshrc:169 plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
 
+Alternatively, change these env vars to false in `~/.tokens.sh`.  The first controls all expansion while the second controls expansion in second position.
+
+```sh
+export ZPWR_EXPAND=true
+export ZPWR_EXPAND_SECOND_POSITION=true
+
+```
 
 ## Running script from vim in tmux right pane is supported for these languages
 `~/.vimrc:829 let supportedTypes=['sh','cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']`
