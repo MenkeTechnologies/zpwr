@@ -1836,7 +1836,6 @@ fzf_setup(){
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
     export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
     export FZF_ENV_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
-    export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh")'"
 
     if [[ "$MYBANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")'"
@@ -1898,13 +1897,20 @@ _fzf_complete_clearList() {
 
 #git ;<tab>
 _fzf_complete_git() {
-    FZF_COMPLETION_OPTS=$FZF_GIT_OPTS _fzf_complete '-m' "$@" < <(
-        git rev-list HEAD
-        echo HEAD
-        git branch -a --format='%(refname:short)'
-        git tag
-        git ls-files
-    )
+    local last
+    last=${${(Az)@}[-1]}
+    if git rev-parse $last &>/dev/null; then
+        export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" $last)'"
+    else
+        export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
+    fi
+    FZF_COMPLETION_OPTS=$FZF_GIT_OPTS _fzf_complete ' -m' "$@" < <(
+        git log --format=%H:%s
+        git for-each-ref | perl -lane '$_="$F[0]:$F[2]";print if ! m{^\s*$}'
+    ) 
+}
+_fzf_complete_git_post() {
+   perl -F: -lape '$_=$F[0]'
 }
 
 test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \

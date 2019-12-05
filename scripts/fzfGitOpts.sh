@@ -10,6 +10,9 @@
 
 #source "$SCRIPTS/fzfPreviewOptsCommon.sh"
 
+ref=$1
+
 cat<<EOF
-    git diff --stat -p --color=always {}
+    sha=\$(echo {} | cut -d: -f1)
+    git diff --stat -p --color=always $1 \$sha
 EOF
