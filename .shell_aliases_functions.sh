@@ -951,15 +951,17 @@ cd(){
     #don't want to recursively call this function
     builtin cd "$@" && clearList
 }
-
 isGitDir(){
+    command git rev-parse --git-dir 2> /dev/null 1>&2
+}
+
+isGitDirMessage(){
     if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
         printf "\x1b[0;1;31m"
         printf "NOT GIT DIR: $(pwd -P)\n" >&2
         printf "\x1b[0m"
         return 1
     fi
-    return 0
 }
 
 contribCount(){
