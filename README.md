@@ -130,7 +130,7 @@ documentation for details on how to change the font.
 
 ## ZPWR_GITHUB_ACCOUNT variable
 
-Change at top off `~/.shell_aliases_functions.sh`
+Change at top of `~/.shell_aliases_functions.sh`
 
 ```sh
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
@@ -151,7 +151,7 @@ The Tmux prefix on Linux is the default C-b.
 There are 74 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Bypassing expansion on space
-C-Space (Control-Space) will bypass all expansion of globbing, aliases and words in zsh.  Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`
+C-Space (Control-Space or actually ^@ terminall escape code) will bypass all expansion of globbing, aliases and words.  Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`
 
 `~/.zshrc:169 plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
 
