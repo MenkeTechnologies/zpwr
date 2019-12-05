@@ -1899,14 +1899,15 @@ _fzf_complete_clearList() {
 _fzf_complete_git() {
     local last
     last=${${(Az)@}[-1]}
-    if git rev-parse $last &>/dev/null; then
+    logg $last
+    if git cat-file -t -- $last &>/dev/null; then
         export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" $last)'"
     else
         export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
     fi
     FZF_COMPLETION_OPTS=$FZF_GIT_OPTS _fzf_complete ' -m' "$@" < <(
-        git log --format=%H:%s
-        git for-each-ref | perl -lane '$_="$F[0]:$F[2]";print if ! m{^\s*$}'
+        git log --format=%h:%s
+        git for-each-ref | perl -lane '$_=substr($F[0],0,7).":$F[2]";print if ! m{^\s*$}'
     ) 
 }
 _fzf_complete_git_post() {
