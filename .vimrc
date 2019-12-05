@@ -284,6 +284,8 @@ endfunction
 
 "Transpose Chars Like Emacs
 nnoremap <silent> <C-T> xp
+nnoremap <Leader>g :%s/\<<C-r><C-w>\>//g<Left><Left>
+
 inoremap <c-t> i<bs><c-o>:silent! undojoin \| normal! xp<cr>
 
 "allow dot to repeat @:

@@ -76,18 +76,19 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 export ZPWR_SURROUND=true
 export ZPWR_COLORS=true
 export ZPWR_AUTO_ATTACH=true
-export EXA_EXTENDED=true
-export PROFILING=false
+export ZPWR_EXA_EXTENDED=true
+export ZPWR_PROFILING=false
 export ZPWR_DEBUG=false
 export ZPWR_TRACE=false
 export USE_NEOVIM=true
 export ZPWR_LEARN=true
+export ZPWR_COMMIT_COLOR='37;45'
 
 # non zpwr env vars
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
 
-if [[ $PROFILING == true ]]; then
+if [[ $ZPWR_PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
 fi
@@ -114,7 +115,7 @@ ZSH_DISABLE_COMPFIX=true
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 export SHELL="$(which zsh)"
-export OS_TYPE="$(uname -s | perl -pe '$_=lc')"
+export ZPWR_OS_TYPE="$(uname -s | perl -pe '$_=lc')"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -197,12 +198,12 @@ plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround \
 
 PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 
-if [[ "$OS_TYPE" == "darwin" ]];then
+if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
         plugins+=(tmux)
-elif [[ "$OS_TYPE" == "linux" ]];then
+elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
     echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
         plugins+=(tmux)
     plugins+=(systemd)
@@ -248,17 +249,17 @@ _alias_file="$HOME/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
-test -z $MYBANNER && export MYBANNER=default
+test -z $ZPWR_BANNER && export ZPWR_BANNER=default
 exists bat && export BAT_THEME="OneHalfLight"
 
-export DEFAULT_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
+export ZPWR_DEFAULT_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
 #}}}***********************************************************
 
 #{{{                    MARK:Global Vars for Global Aliases
 #**************************************************************
-test -z $__GLOBAL_ALIAS_PREFIX && export __GLOBAL_ALIAS_PREFIX=j
-test -z $__TS && export __TS=__________
+test -z $ZPWR_GLOBAL_ALIAS_PREFIX && export ZPWR_GLOBAL_ALIAS_PREFIX=j
+test -z $ZPWR_TABSTOP && export ZPWR_TABSTOP=__________
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Fxns
@@ -338,80 +339,80 @@ dbz() {
     zle .accept-line
 }
 
-__COUNTER=0
+ZPWR_COUNTER=0
 
 changeQuotes(){
 
-    if (( $__COUNTER % 8 == 0 )); then
+    if (( $ZPWR_COUNTER % 8 == 0 )); then
         __OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
-    elif (( $__COUNTER % 8 == 1 )); then
+    elif (( $ZPWR_COUNTER % 8 == 1 )); then
         if [[ "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
             != "$(print -r "$BUFFER" | tr -d "'" )" ]]; then
-            __COUNTER=0
+            ZPWR_COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\'/\"}
-    elif (( $__COUNTER % 8 == 2 )); then
+    elif (( $ZPWR_COUNTER % 8 == 2 )); then
         if [[ "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" != \
             "$(print -r "$BUFFER" | tr -d "\"" )" ]]; then
-            __COUNTER=0
+            ZPWR_COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\"/\`}
-    elif (( $__COUNTER % 8 == 3 )); then
+    elif (( $ZPWR_COUNTER % 8 == 3 )); then
         if [[ \
             "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(print -r "$BUFFER" | tr -d "\`" )" ]]; then __COUNTER=0
+            != "$(print -r "$BUFFER" | tr -d "\`" )" ]]; then ZPWR_COUNTER=0
             return 1
         fi
         _SEMI_OLDBUFFER="$BUFFER"
         BUFFER="\"${BUFFER}\""
-    elif (( $__COUNTER % 8 == 4 )); then
+    elif (( $ZPWR_COUNTER % 8 == 4 )); then
         if [[ "$(print -r "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != \
             "$(print -r "$BUFFER" | tr -d "\`\"" )" ]]; then
-            __COUNTER=0
+            ZPWR_COUNTER=0
             return 1
         fi
         #semi has no quotes
         _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
         BUFFER="\$(${_SEMI_OLDBUFFER})"
-    elif (( $__COUNTER % 8 == 5 )); then
+    elif (( $ZPWR_COUNTER % 8 == 5 )); then
         #only diff should be $()
         if (( ${#BUFFER} < 4 )); then
-            __COUNTER=0
+            ZPWR_COUNTER=0
             return 1
             #statements
         fi
         if [[ "$_SEMI_OLDBUFFER" != \
             "$(print -r "${BUFFER:2:-1}" )" ]]; then
-            __COUNTER=0
+            ZPWR_COUNTER=0
             return 1
         fi
         BUFFER="\"${BUFFER}\""
-    elif (( $__COUNTER % 8 == 6 )); then
+    elif (( $ZPWR_COUNTER % 8 == 6 )); then
         if (( ${#BUFFER} < 6 )); then
-            __COUNTER=0
+            ZPWR_COUNTER=0
             return 1
             #statements
         fi
         if [[ "${_SEMI_OLDBUFFER}" != \
             "${BUFFER:3:-2}" ]]; then
-            __COUNTER=0
+            ZPWR_COUNTER=0
             return 1
         fi
         # back to no quotes
         BUFFER="$_SEMI_OLDBUFFER"
     else
         if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER}" ]]; then
-            __COUNTER=0
+            ZPWR_COUNTER=0
             return 1
         fi
         #back to original
         BUFFER="${__OLDBUFFER}"
     fi
 
-    let __COUNTER++
+    ((ZPWR_COUNTER++))
 }
 
 alternateQuotes(){
@@ -531,7 +532,7 @@ fasdFList(){
 }
 
 fm(){
-   FZF_MAN_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfMan.sh" "$1")'"
+   FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfMan.sh" "$1")'"
     man "$1" | col -b | eval "fzf --no-sort -m $FZF_MAN_OPTS"
 }
 
@@ -860,7 +861,7 @@ bindkey '\eOQ' sub
 bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
-if [[ "$OS_TYPE" == darwin ]];then
+if [[ "$ZPWR_OS_TYPE" == darwin ]];then
     if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
@@ -896,7 +897,7 @@ bindkey '^I' expand-or-complete-with-dots
 
 my-accept-line () {
 
-    __WILL_CLEAR=false
+    ZPWR_WILL_CLEAR=false
 
     #do we want to clear the screen and run ls after we exec the current line?
     local commandsThatModifyFiles regex mywords line
@@ -906,7 +907,7 @@ my-accept-line () {
     for command in ${commandsThatModifyFiles[@]}; do
         regex="^sudo $command .*\$|^$command .*\$"
         if echo "$BUFFER" | command grep -q -E "$regex"; then
-            __WILL_CLEAR=true
+            ZPWR_WILL_CLEAR=true
         fi
     done
     mywords=("${(z)BUFFER}")
@@ -929,7 +930,7 @@ my-accept-line () {
         fi
     fi
 
-    if [[ -z "$__GLOBAL_ALIAS_PREFIX" ]]; then
+    if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ ! -z $(alias -g $mywords[1]) ]];then
             aliases="$(cat $HOME/.common_aliases)"
@@ -956,13 +957,13 @@ zle -N accept-line my-accept-line
 
 precmd(){
     (( $? == 0)) && {
-        if [[ "$__WILL_CLEAR" == true ]]; then
+        if [[ "$ZPWR_WILL_CLEAR" == true ]]; then
             clear
             listNoClear
-            # to prevent __WILL_CLEAR staying true when
+            # to prevent ZPWR_WILL_CLEAR staying true when
             # called from zle widgets and not from
             # pressing enter key
-            __WILL_CLEAR=false
+            ZPWR_WILL_CLEAR=false
         fi
     }
     if [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]]; then
@@ -1006,7 +1007,7 @@ bindkey -M listscroll f complete-word
 bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
-if [[ "$OS_TYPE" == darwin ]]; then
+if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
@@ -1083,10 +1084,10 @@ if (( $version > 5.2 )); then
 fi
 
 EOLorNextTabStop(){
-    lenToFirstTS=${#BUFFER%%$__TS*}
+    lenToFirstTS=${#BUFFER%%$ZPWR_TABSTOP*}
     if (( $lenToFirstTS < ${#BUFFER} )); then
         CURSOR=$lenToFirstTS
-        RBUFFER=${RBUFFER:$#__TS}
+        RBUFFER=${RBUFFER:$#ZPWR_TABSTOP}
     else
         if [[ $BUFFER[-1] = ";" ]]; then
             BUFFER+=" "
@@ -1334,7 +1335,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
 
     #git commit colors
-    zstyle ':completion:*:*:commits' list-colors '=(#b)(*)=1;37;45'
+    zstyle ':completion:*:*:commits' list-colors '=(#b)(*)=1;'$ZPWR_COMMIT_COLOR
     zstyle ':completion:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
     zstyle ':completion:*:commit-tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
     zstyle ':completion:*:cached-files' list-colors '=(#b)(*)=1;30=1;34;41;4'
@@ -1392,7 +1393,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
-    if [[ "$OS_TYPE" == darwin ]]; then
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         #homebrew tags
         zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
         zstyle ':completion:*:formulae' list-colors '=(#b)(*)=1;30=1;36;44'
@@ -1442,79 +1443,79 @@ zstyle ':completion:*' ignored-patterns '*.'
 #{{{                    MARK:Global Aliases
 #**************************************************************
 globalAliasesInit(){
-    alias -g ${__GLOBAL_ALIAS_PREFIX}a="|& command egrep -v '\bag\b' |& \\ag --color -i"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}bb='&>> "$LOGFILE'"$__TS"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}e="|& command egrep -v '\begrep\b' |& command egrep --color=always -i"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$__TS} {printf \"%s$__TS\\n\", \$1} END {$__TS}'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}l='| less -rMN'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}n="2> /dev/null"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}nn="> /dev/null 2>&1"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}oo='&>> "$LOGFILE'"$__TS"'"'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say $__TS'"
-    alias ${__GLOBAL_ALIAS_PREFIX}pg="perl -e 'print \`$__TS \"\$_\"\`for<*>'"
-        alias ${__GLOBAL_ALIAS_PREFIX}pf="perl -e 'print \`$__TS\`for($__TS)'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}r="| sort"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$__TS@$__TS@g'"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command egrep -v '\bag\b' |& \\ag --color -i"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}e="|& command egrep -v '\begrep\b' |& command egrep --color=always -i"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}l='| less -rMN'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}n="2> /dev/null"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}nn="> /dev/null 2>&1"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}oo='&>> "$LOGFILE'"$ZPWR_TABSTOP"'"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say $ZPWR_TABSTOP'"
+    alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="perl -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="perl -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}r="| sort"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
     #default value tabstops
-    alias -g ${__GLOBAL_ALIAS_PREFIX}see="| sed -E 's@.*$__TS@$__TS@g'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}seee="| sed -E 's@.$__TS@(&)$__TS@g'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}sp="| sed -n '$__TS,\$p'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}t="| tr '$__TS' '$__TS'"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}ta="| tail"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}uu="| awk '{$__TS}' | uniq -c | sort -rn | head -10"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}wc='| wc -l'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
-    alias ${__GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$__TS\"""
-    alias ${__GLOBAL_ALIAS_PREFIX}gp="git add . && git commit -m \""$__TS\"" && git push"
-    alias ${__GLOBAL_ALIAS_PREFIX}grp="git reset --soft $__TS && git add . && git commit -m \""$__TS\"" && git push -f origin $__TS"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${__TS}m${__TS}\\x1b[0m"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}see="| sed -E 's@.*$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}seee="| sed -E 's@.$ZPWR_TABSTOP@(&)$ZPWR_TABSTOP@g'"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}sp="| sed -n '$ZPWR_TABSTOP,\$p'"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}t="| tr '$ZPWR_TABSTOP' '$ZPWR_TABSTOP'"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ta="| tail"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}uu="| awk '{$ZPWR_TABSTOP}' | uniq -c | sort -rn | head -10"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}wc='| wc -l'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
+    alias ${ZPWR_GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$ZPWR_TABSTOP\"""
+    alias ${ZPWR_GLOBAL_ALIAS_PREFIX}gp="git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push"
+    alias ${ZPWR_GLOBAL_ALIAS_PREFIX}grp="git reset --soft $ZPWR_TABSTOP && git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push -f origin $ZPWR_TABSTOP"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${ZPWR_TABSTOP}m${ZPWR_TABSTOP}\\x1b[0m"
 
-    alias i='if [[ '$__TS' ]];then
-        '$__TS'
+    alias i='if [[ '$ZPWR_TABSTOP' ]];then
+        '$ZPWR_TABSTOP'
     fi'
-    alias iee='if [[ '$__TS' ]];then
-        '$__TS'
-    elif [[ '$__TS' ]];then
-        '$__TS'
+    alias iee='if [[ '$ZPWR_TABSTOP' ]];then
+        '$ZPWR_TABSTOP'
+    elif [[ '$ZPWR_TABSTOP' ]];then
+        '$ZPWR_TABSTOP'
     else
-        '$__TS'
+        '$ZPWR_TABSTOP'
     fi'
-    alias ie='if [[ '$__TS' ]];then
-        '$__TS'
+    alias ie='if [[ '$ZPWR_TABSTOP' ]];then
+        '$ZPWR_TABSTOP'
     else
-        '$__TS'
+        '$ZPWR_TABSTOP'
     fi'
     alias wr='while read line;do
-        '$__TS'
-    done < '$__TS''
-    alias wt='while [[ true'$__TS' ]];do
-        '$__TS'
+        '$ZPWR_TABSTOP'
+    done < '$ZPWR_TABSTOP''
+    alias wt='while [[ true'$ZPWR_TABSTOP' ]];do
+        '$ZPWR_TABSTOP'
     done'
-    alias fe='for i in '$__TS';do
-        '$__TS'
+    alias fe='for i in '$ZPWR_TABSTOP';do
+        '$ZPWR_TABSTOP'
     done'
 
-    alias fori="for (( i = 0; i < $__TS; i++ )); do
-        $__TS
+    alias fori="for (( i = 0; i < $ZPWR_TABSTOP; i++ )); do
+        $ZPWR_TABSTOP
     done"
 
-    alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$__TS) master$__TS FETCH_HEAD | less"
+    alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) master$ZPWR_TABSTOP FETCH_HEAD | less"
 
-    alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $__TS | stdinSdiffColorizer.pl 80"
+    alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
 
 
-    if [[ "$OS_TYPE" == darwin ]]; then
-        alias -g ${__GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
     else
-        alias -g ${__GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
     fi
 }
 
@@ -1551,7 +1552,7 @@ bannerLolcat(){
     ---------------------- lolcat
 }
 noPonyBanner(){
-    eval "$DEFAULT_BANNER"
+    eval "$ZPWR_DEFAULT_BANNER"
 }
 
 revealRecurse(){
@@ -1570,7 +1571,7 @@ test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
 #{{{                    MARK:Initialize Login
 #**************************************************************
 #go to desktop if not root
-if [[ "$OS_TYPE" == darwin ]]; then
+if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     if [[ "$UID" != "0" ]]; then
          #builtin cd "$D" && clear
         clear
@@ -1578,7 +1579,7 @@ if [[ "$OS_TYPE" == darwin ]]; then
         if type figlet > /dev/null 2>&1; then
             printf "\e[1m"
             if [[ -f "$fig" ]]; then
-                if [[ "$MYBANNER" == ponies ]]; then
+                if [[ "$ZPWR_BANNER" == ponies ]]; then
                     if [[ -f "$SCRIPTS/splitReg.sh" ]];then
                         bannerLolcat
                     else
@@ -1598,7 +1599,7 @@ if [[ "$OS_TYPE" == darwin ]]; then
 else
     if [[ "$UID" != "0" ]]; then
         clear
-        if [[ $MYBANNER == ponies ]]; then
+        if [[ $ZPWR_BANNER == ponies ]]; then
             case $distroName in
                 (raspbian)
                     test -d "$D" && builtin cd "$D"
@@ -1672,7 +1673,7 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
 #**************************************************************
 #if this is a mac or linux
-if [[ "$OS_TYPE" == "darwin" ]];then
+if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     if [[ -d "$WCC" ]]; then
         : ~WCC
     fi
@@ -1793,59 +1794,65 @@ colortest(){
 #**************************************************************
 #default value for pygmentize theme
 export PYGMENTIZE_COLOR="emacs"
-export COLORIZER=bat
+export ZPWR_COLORIZER=bat
 
-if [[ $COLORIZER == bat ]]; then
+if [[ $ZPWR_COLORIZER == bat ]]; then
     if exists bat;then
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
         export COLORIZER_FZF_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
         export COLORIZER_FZF_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
         export COLORIZER_FZF_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'
-        export COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
+        export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
         export COLORIZER_NL=''
     else
         export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
         export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-        export COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
+        export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
         export COLORIZER_NL=' | cat -n'
     fi
 else
     export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
     export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-    export COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
+    export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
     export COLORIZER_NL=' | cat -n'
 fi
 
-export COLORIZER_FZF_C="$COLORIZER -l c"
-export COLORIZER_FZF_SH="$COLORIZER  -l sh"
-export COLORIZER_FZF_YAML="$COLORIZER -l yaml"
-export COLORIZER_FZF_JAVA="$COLORIZER -l java"
+export COLORIZER_FZF_C="$ZPWR_COLORIZER -l c"
+export COLORIZER_FZF_SH="$ZPWR_COLORIZER  -l sh"
+export COLORIZER_FZF_YAML="$ZPWR_COLORIZER -l yaml"
+export COLORIZER_FZF_JAVA="$ZPWR_COLORIZER -l java"
+export FZF_DRACULA="--color=dark
+--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
+--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
+export FZF_JELLY="--color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
+--color info:150,prompt:110,spinner:150,pointer:167,marker:174"
+
 
 fzf_setup(){
-    local __COMMON_FZF_ELEMENTS
-    __COMMON_FZF_ELEMENTS="--prompt='-->>> '"
+    export ZPWR_COMMON_FZF_ELEM
+    ZPWR_COMMON_FZF_ELEM="--prompt='-->>> '"
 
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
-    export FZF_DEFAULT_OPTS="$__COMMON_FZF_ELEMENTS --reverse --border --height 100%"
+    export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%"
     local rpm_cmd
     local deb_cmd
     exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
     exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
-    export FZF_CTRL_T_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
-    export FZF_ENV_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
+    export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
+    export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
 
-    if [[ "$MYBANNER" == ponies ]]; then
-        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")'"
+    if [[ "$ZPWR_BANNER" == ponies ]]; then
+        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")'"
     else
-        export FZF_COMPLETION_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfPreviewOpts.sh")'"
+        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOpts.sh")'"
     fi
 
-    alias -g ${__GLOBAL_ALIAS_PREFIX}ff=' "$(fzf '"$__COMMON_FZF_ELEMENTS"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$__TS"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
-    alias -g ${__GLOBAL_ALIAS_PREFIX}f=" \$(fzf $FZF_CTRL_T_OPTS)"
-    alias -g ${__GLOBAL_ALIAS_PREFIX}z=" | fzf $FZF_CTRL_T_OPTS "
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff=' "$(fzf '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f=" \$(fzf $FZF_CTRL_T_OPTS)"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z=" | fzf $FZF_CTRL_T_OPTS "
 }
 
 fzf_setup
@@ -1895,11 +1902,8 @@ _fzf_complete_clearList() {
     ) 
 }
 
-export DRACULA_FZF="--color=dark
---color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
---color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
-
-#git ;<tab>
+#git diff ;<tab>
+#git diff SHA-1 ;<tab>
 _fzf_complete_git() {
 
     if ! isGitDir; then
@@ -1909,13 +1913,15 @@ _fzf_complete_git() {
     last=${${(Az)@}[-1]}
     logg $last
     if git cat-file -t -- $last &>/dev/null; then
-        export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" $last)'"
+        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" $last)'"
     else
-        export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
+        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
     fi
-    FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" _fzf_complete "-m $DRACULA_FZF" "$@" < <(
+    FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" _fzf_complete "-m $FZF_DRACULA --ansi" "$@" < <(
+        printf "\x1b[${ZPWR_COMMIT_COLOR}m"
         git log --format='%h %s'
         git for-each-ref | perl -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
+        printf "\x1b[0m"
     ) 
 }
 _fzf_complete_git_post() {
@@ -2137,7 +2143,7 @@ _complete_clipboard(){
     if [[ -n $PASTE_CMD ]]; then
         clipboard_str="$(${=PASTE_CMD} 2>/dev/null)"
     else
-        case "$OS_TYPE" in
+        case "$ZPWR_OS_TYPE" in
             darwin*)
                 clipboard_str="$(pbpaste)"
                 ;;
@@ -2456,7 +2462,7 @@ exists kubectl && source <(kubectl completion zsh)
 
 endTimestamp=$(date +%s)
 logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
-if [[ $PROFILING == true ]]; then
+if [[ $ZPWR_PROFILING == true ]]; then
     zprof
 fi
 

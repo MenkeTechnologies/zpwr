@@ -43,8 +43,8 @@ else
     }
 fi
 
-if [[ -z "$OS_TYPE" ]]; then
-    export OS_TYPE="$(uname -s | perl -pe '$_=lc')"
+if [[ -z "$ZPWR_OS_TYPE" ]]; then
+    export ZPWR_OS_TYPE="$(uname -s | perl -pe '$_=lc')"
 fi
 #}}}***********************************************************
 
@@ -54,7 +54,7 @@ fi
 export TMUX_PREFIX=x
 export TMUX_REMOTE_PREFIX=b
 test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
-export DELIMITER_CHAR='%'
+export ZPWR_DELIMITER_CHAR='%'
 
 #bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
@@ -104,7 +104,7 @@ export PSQL_EDITOR='vim -c "setf sql"'
 if [[ -z "$TMUX" ]]; then
     export TERM="xterm-256color"
 fi
-if [[ $EXA_EXTENDED == true ]]; then
+if [[ $ZPWR_EXA_EXTENDED == true ]]; then
     export EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
 else
     export EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
@@ -118,7 +118,7 @@ echo "$PATH" | command grep -iq shellScripts || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
 
-    if [[ "$OS_TYPE" == darwin ]]; then
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
@@ -133,7 +133,7 @@ echo "$PATH" | command grep -iq shellScripts || {
 
 #{{{                           MARK:HOMES
 #**********************************************************************
-    if [[ "$OS_TYPE" == darwin ]];then
+    if [[ "$ZPWR_OS_TYPE" == darwin ]];then
         if exists jenv;then
             eval "$(jenv init -)"
             test -z "$JAVA_HOME" &&
@@ -277,7 +277,7 @@ alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
 
-if [[ "$OS_TYPE" == darwin ]]; then
+if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     #Darwin specific aliases
     alias p_refresh="pio -f -c clion init --ide clion "
     alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
@@ -462,7 +462,7 @@ r(){
     fi
 }
 
-if [[ "$OS_TYPE" == darwin ]]; then
+if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
     exe(){
         python3 "$PYSCRIPTS/ssh_runner.py" "$@"
@@ -725,7 +725,7 @@ scnew(){
 }
 
 p(){
-    if [[ "$OS_TYPE" == linux || "$OS_TYPE" == darwin ]]; then
+    if [[ "$ZPWR_OS_TYPE" == linux || "$ZPWR_OS_TYPE" == darwin ]]; then
         [[ -z $1 ]] && ps -ef && return 0
         out="$(ps -ef)"
     else
@@ -783,7 +783,7 @@ about(){
 }
 
 clearList() {
-    if [[ "$OS_TYPE" == darwin ]]; then
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists exa;then
             ls_command="$EXA_COMMAND"
         else
@@ -794,7 +794,7 @@ clearList() {
             fi
         fi
         lib_command="otool -L"
-    elif [[ "$OS_TYPE" == linux ]];then
+    elif [[ "$ZPWR_OS_TYPE" == linux ]];then
 
         if exists exa;then
             ls_command="$EXA_COMMAND"
@@ -875,7 +875,7 @@ clearList() {
 listNoClear () {
     exists exa && eval "$EXA_COMMAND" && return 0
 
-    if [[ "$OS_TYPE" == darwin ]]; then
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists grc; then
             grc -c "$HOME/conf.gls" gls \
             -iFlhA --color=always
@@ -972,10 +972,10 @@ contribCount(){
     lineCount="$(echo $lines | wc -l)"
     prettyPrint "Contribution Count"
     if (( $lineCount > 10 )); then
-        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
+        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
-        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
+        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
 }
@@ -1019,11 +1019,11 @@ totalLines(){
     lineCount="$(cat "$TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
         echo "$lineCount" |
-            perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
+            perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
         echo "$lineCount" |
-            perl -panE 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
+            perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
     command rm "$TEMPFILE"
@@ -1063,11 +1063,11 @@ lineContribCount(){
     lineCount="$(cat "$TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
         cat "$TEMPFILE" | sort | uniq -c | sort -r |
-        perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
+        perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint | less -r
     else
         cat "$TEMPFILE" | sort | uniq -c | sort -r |
-        perl -pane 's@(\d) (\D)(.*)$@\1'" $DELIMITER_CHAR"'\2\3'"$DELIMITER_CHAR@" |
+        perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
     command rm "$TEMPFILE"
@@ -1263,7 +1263,7 @@ alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
-        cat | perl -F"$DELIMITER_CHAR" -anE '
+        cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){
@@ -1274,7 +1274,7 @@ alternatingPrettyPrint(){
         $counter++;
         };print "\x1b[0m"'
     else
-        echo "$@" | perl -F"$DELIMITER_CHAR" -anE '
+        echo "$@" | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){
@@ -1492,7 +1492,7 @@ getrc(){
         branch="$1"
     fi
 
-    if [[ $OS_TYPE == darwin ]]; then
+    if [[ $ZPWR_OS_TYPE == darwin ]]; then
         if exists dialog;then
             dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$TEMPFILE"
             clear
@@ -1955,7 +1955,7 @@ fz(){
 
 figletfonts(){
 
-    if [[ "$OS_TYPE" == darwin ]]; then
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
     else
         FIGLET_DIR="/usr/share/figlet"
@@ -1971,17 +1971,17 @@ figletfonts(){
         ary+=${file##*/}
     done
 
-    if [[ "$MYBANNER" == ponies ]]; then
+    if [[ "$ZPWR_BANNER" == ponies ]]; then
         exists ponysay || { echo "you need ponysay" >&2 && return 1; }
     fi
     exists lolcat || { echo "you need lolca" >&2 && return 1; }
     exists splitReg.sh || { echo "you need splitReg.sh" >&2 && return 1; }
     exists tput || { echo "you need tput" >&2 && return 1; }
 
-    alternatingPrettyPrint "${DELIMITER_CHAR}F${DELIMITER_CHAR}iglet ${DELIMITER_CHAR}F${DELIMITER_CHAR}onts ${DELIMITER_CHAR}A${DELIMITER_CHAR}re:"
+    alternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}iglet ${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}onts ${ZPWR_DELIMITER_CHAR}A${ZPWR_DELIMITER_CHAR}re:"
 
 
-    if [[ "$MYBANNER" == ponies ]]; then
+    if [[ "$ZPWR_BANNER" == ponies ]]; then
         for font in ${ary[@]} ; do
             printf "${font%.*} "
         done | ponysay -W $(tput cols) | splitReg.sh -- ---------------------- lolcat
@@ -2076,7 +2076,7 @@ if [[ $ZPWR_LEARN != false ]]; then
     }
 
     createLearningCollection(){
-        alternatingPrettyPrint "Creating$DELIMITER_CHAR $SCHEMA_NAME.$TABLE_NAME$DELIMITER_CHAR with$DELIMITER_CHAR MySQL$DELIMITER_CHAR"
+        alternatingPrettyPrint "Creating$ZPWR_DELIMITER_CHAR $SCHEMA_NAME.$TABLE_NAME$ZPWR_DELIMITER_CHAR with$ZPWR_DELIMITER_CHAR MySQL$ZPWR_DELIMITER_CHAR"
         if [[ -n "$1" ]]; then
             #use first arg as mysql password
             if ! echo "select * from information_schema.tables" | mysql -u root -p "$1" | command grep --color=always -q "$TABLE_NAME";then
