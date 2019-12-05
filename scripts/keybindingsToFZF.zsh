@@ -7,8 +7,8 @@
 ##### Notes:
 #}}}***********************************************************
 
-if [[ -z "$TEMPFILE" ]]; then
-    TEMPFILE="/tmp/.temp$$"
+if [[ -z "$ZPWR_TEMPFILE" ]]; then
+    ZPWR_TEMPFILE="/tmp/.temp$$"
 fi
 
 {
@@ -30,10 +30,10 @@ fi
     cat ~/.temp4
     command rm ~/.temp{1..4}
 
-} | perl -ne 'print if /\S+/' > "$TEMPFILE"
+} | perl -ne 'print if /\S+/' > "$ZPWR_TEMPFILE"
 
 #do not know why have to create tempfile here
-perl -pe 's@^([^#].*)$@$1@g' "$TEMPFILE" | perl -pe 's@(.*) \(:.map\).*@$1@'
+perl -pe 's@^([^#].*)$@$1@g' "$ZPWR_TEMPFILE" | perl -pe 's@(.*) \(:.map\).*@$1@'
 
-command rm "$TEMPFILE"
+command rm "$ZPWR_TEMPFILE"
 

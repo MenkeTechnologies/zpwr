@@ -59,7 +59,7 @@ shift $(($OPTIND - 1))
 regex="$1"
 filter="$2"
 
-file="$TEMPFILE"
+file="$ZPWR_TEMPFILE"
 cat > "$file"
 output=$(cat $file)
 delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
