@@ -249,7 +249,7 @@ _alias_file="$HOME/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
-test -z $ZPWR_BANNER && export ZPWR_BANNER=default
+test -z $ZPWR_BANNER && export ZPWR_BANNER=ponies
 exists bat && export BAT_THEME="OneHalfLight"
 
 export ZPWR_DEFAULT_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
@@ -640,19 +640,19 @@ fzfEnv(){
 
 
 fzfAllKeybind(){
-    if [[ ! -s "$ALL_KEYBINDINGS" ]]; then
-        logg "regenerating $ALL_KEYBINDINGS"
+    if [[ ! -s "$ZPWR_ALL_KEYBINDINGS" ]]; then
+        logg "regenerating $ZPWR_ALL_KEYBINDINGS"
         regenAllKeybindingsCache
     fi
-    cat "$ALL_KEYBINDINGS" | fzf
+    cat "$ZPWR_ALL_KEYBINDINGS" | fzf
 }
 
 fzfVimKeybind(){
-    if [[ ! -s "$VIM_KEYBINDINGS" ]]; then
-        logg "regenerating $VIM_KEYBINDINGS"
+    if [[ ! -s "$ZPWR_VIM_KEYBINDINGS" ]]; then
+        logg "regenerating $ZPWR_VIM_KEYBINDINGS"
         regenAllKeybindingsCache
     fi
-    cat "$VIM_KEYBINDINGS" | fzf
+    cat "$ZPWR_VIM_KEYBINDINGS" | fzf
 }
 
 getFound(){
@@ -2296,23 +2296,23 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
         if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
             mobile=true
             cat ~/.ssh/authorized_keys |
-                command grep "$GITHUB_ACCOUNT" > "$TEMPFILE"
+                command grep "$GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu|parrot)
                     out="$(sudo \grep -a 'Accepted publickey for' /var/log/auth.log* | grep -v sudo | tail -1)"
-                    key="$(ssh-keygen -l -f "$TEMPFILE" | awk '{print $2}')"
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
                     ;;
                 (centos|rhel)
                     out="$(tail /var/log/messages)"
                     ;;
                 (*suse*)
                     out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f "$TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
                     ;;
                 (fedora)
                     out="$(sudo cat /var/log/secure | command grep 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f "$TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
                     ;;
                 (*) :
                     ;;
@@ -2320,7 +2320,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
             logg "searching for $key in $out"
             echo "$out" | grep -q "$key" && mobile=false
 
-            command rm "$TEMPFILE"
+            command rm "$ZPWR_TEMPFILE"
             if [[ $mobile == "false" ]]; then
                 logg "not mobile"
                 num_con="$(command ps -ef |command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
@@ -2392,31 +2392,31 @@ if [[ $ZPWR_LEARN != false ]]; then
     }
 
     rsql(){
-        printf ""> "$TEMPFILESQL"
+        printf ""> "$ZPWR_TEMPFILE_SQL"
         for num in $@; do
             id=$(echo "select id from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
             item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
             item=${item//\'/\\\'}
 
             echo "update $SCHEMA_NAME.$TABLE_NAME set learning = '$item' where id=$id"
-        done >> "$TEMPFILESQL"
+        done >> "$ZPWR_TEMPFILE_SQL"
 
-        vim "$TEMPFILESQL"
-        cat "$TEMPFILESQL" | mysql
-        command rm "$TEMPFILESQL"
+        vim "$ZPWR_TEMPFILE_SQL"
+        cat "$ZPWR_TEMPFILE_SQL" | mysql
+        command rm "$ZPWR_TEMPFILE_SQL"
     }
     redo(){
-        echo > "$TEMPFILE"
+        echo > "$ZPWR_TEMPFILE"
         for num in $@; do
             id=$(echo "select id from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
             item=$(echo "select learning from $SCHEMA_NAME.$TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
             item=${item//\'/\\\'\'}
 
             echo "echo 'update $SCHEMA_NAME.$TABLE_NAME set learning = ""''"$item"''"" where id=$id' | mysql"
-        done >> "$TEMPFILE"
+        done >> "$ZPWR_TEMPFILE"
 
-        print -rz "$(cat "$TEMPFILE")"
-        command rm "$TEMPFILE"
+        print -rz "$(cat "$ZPWR_TEMPFILE")"
+        command rm "$ZPWR_TEMPFILE"
     }
 
 
