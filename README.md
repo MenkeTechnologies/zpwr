@@ -128,12 +128,12 @@ You need to change the Terminal font to support the Powerline triangles and othe
 The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
 documentation for details on how to change the font.
 
-## GITHUB_ACCOUNT variable
+## ZPWR_GITHUB_ACCOUNT variable
 
-Change line 18 in `~/.shell_aliases_functions.sh`
+Change at top off `~/.shell_aliases_functions.sh`
 
 ```sh
-export GITHUB_ACCOUNT='MenkeTechnologies'
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 ```
 
 to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
