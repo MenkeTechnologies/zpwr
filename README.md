@@ -175,18 +175,19 @@ You can set these environment variables in your `~.tokens.sh` to customize the b
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
 # see README.md
-export MYPROMPT=POWERLEVEL
+export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
 export ZPWR_EXPAND_SECOND_POSITION=true
 export ZPWR_SURROUND=true
 export ZPWR_COLORS=true
 export ZPWR_AUTO_ATTACH=true
-export EXA_EXTENDED=true
-export PROFILING=false
+export ZPWR_EXA_EXTENDED=true
+export ZPWR_PROFILING=false
 export ZPWR_DEBUG=false
 export ZPWR_TRACE=false
-export USE_NEOVIM=true
+export ZPWR_USE_NEOVIM=true
 export ZPWR_LEARN=true
+export ZPWR_COMMIT_STYLE='1;37;45'
 ```
 
 ## Contributing
