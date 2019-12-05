@@ -151,7 +151,7 @@ The Tmux prefix on Linux is the default C-b.
 There are 74 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Bypassing expansion on space
-C-Space (Control-Space or actually ^@ terminall escape code) will bypass all expansion of globbing, aliases and words.  Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`
+C-Space (Control-Space or actually ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.  Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`
 
 `~/.zshrc:169 plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
 
@@ -164,7 +164,11 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 ```
 
 ## Running script from vim in tmux right pane is supported for these languages
-`~/.vimrc:829 let supportedTypes=['sh','cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']`
+```vim
+    let supportedTypes=['sh','zsh', 'cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
+
+```
+> ~/.vimrc
 
 File ending of currently edited file in vim determines the interpreter used by the bash script `$SCRIPTS/runner.sh` which defaults to `~/Documents/shellScripts/runner.sh`
 

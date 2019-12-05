@@ -57,6 +57,9 @@ clear
 fileToBeExecuted="$1"
 
 case "$fileToBeExecuted" in
+*.zsh)
+    executeTheFile zsh "$fileToBeExecuted"
+    ;;
 *.sh)
     executeTheFile bash "$fileToBeExecuted"
     ;;

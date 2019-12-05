@@ -836,7 +836,7 @@ set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
 function TmuxRepeat(type)
-    let supportedTypes=['sh','cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
+    let supportedTypes=['sh','zsh', 'cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
     let exeFileType=expand('%:e')
     let $VIMHOME = $HOME."/.vim"
 
