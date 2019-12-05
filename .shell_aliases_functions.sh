@@ -2017,8 +2017,8 @@ scripts(){
 }
 
 if [[ $ZPWR_LEARN != false ]]; then
-    export SCHEMA_NAME=root
-    export TABLE_NAME=LearningCollection
+    export ZPWR_SCHEMA_NAME=root
+    export ZPWR_TABLE_NAME=LearningCollection
 
     le(){
         test -z "$1" && return 1
@@ -2028,25 +2028,25 @@ if [[ $ZPWR_LEARN != false ]]; then
         if [[ -n "$2" ]]; then
             category="$2"
         fi
-        echo "insert into $SCHEMA_NAME.$TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$learning""', now())" | mysql 2>> "$LOGFILE"
+        echo "insert into $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$learning""', now())" | mysql 2>> "$LOGFILE"
     }
 
 
     see(){
         if test -z "$1"; then
-            echo "select id, dateAdded,learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n
+            echo "select id, dateAdded,learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n
         else
-            echo "select id, dateAdded, learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
+            echo "select id, dateAdded, learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
         fi
     }
 
     se(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
-                echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" |
+                echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
             mysql 2>> $LOGFILE | nl -b a -n rz | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
             else
-                echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME" |
+                echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME" |
                 mysql 2>> $LOGFILE | nl -b a -n rz
             fi
 
@@ -2055,7 +2055,7 @@ if [[ $ZPWR_LEARN != false ]]; then
             # escaping for perl $ and @ sigils
             argdollar=${arg//$/\\$}
             arg=${argdollar//@/\\@}
-            echo "select learning,category from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+            echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
             if [[ -z "$2" ]]; then
                 if [[ "$ZPWR_COLORS" = true ]]; then
                     paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
@@ -2075,28 +2075,28 @@ if [[ $ZPWR_LEARN != false ]]; then
     }
 
     createLearningCollection(){
-        alternatingPrettyPrint "Creating$ZPWR_DELIMITER_CHAR $SCHEMA_NAME.$TABLE_NAME$ZPWR_DELIMITER_CHAR with$ZPWR_DELIMITER_CHAR MySQL$ZPWR_DELIMITER_CHAR"
+        alternatingPrettyPrint "Creating$ZPWR_DELIMITER_CHAR $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME$ZPWR_DELIMITER_CHAR with$ZPWR_DELIMITER_CHAR MySQL$ZPWR_DELIMITER_CHAR"
         if [[ -n "$1" ]]; then
             #use first arg as mysql password
-            if ! echo "select * from information_schema.tables" | mysql -u root -p "$1" | command grep --color=always -q "$TABLE_NAME";then
-                echo  "create schema $SCHEMA_NAME if not exists"
-                echo  "create schema $SCHEMA_NAME if not exists" | mysql -u root -p "$1"
+            if ! echo "select * from information_schema.tables" | mysql -u root -p "$1" | command grep --color=always -q "$ZPWR_TABLE_NAME";then
+                echo  "create schema $ZPWR_SCHEMA_NAME if not exists"
+                echo  "create schema $ZPWR_SCHEMA_NAME if not exists" | mysql -u root -p "$1"
 
-                echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))'
-                echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))' | mysql -u root -D "$SCHEMA_NAME" -p "$1"
+                echo 'CREATE TABLE `'"$ZPWR_TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$ZPWR_TABLE_NAME"'learning_index` (`learning`))'
+                echo 'CREATE TABLE `'"$ZPWR_TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$ZPWR_TABLE_NAME"'learning_index` (`learning`))' | mysql -u root -D "$ZPWR_SCHEMA_NAME" -p "$1"
             else
-                echo "$SCHEMA_NAME.$TABLE_NAME already exists" >&2
+                echo "$ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME already exists" >&2
             fi
         else
             #use my.cnf
-            if ! echo "select * from information_schema.tables" | mysql | command grep --color=always -q "$TABLE_NAME";then
-                echo  "create schema if not exists $SCHEMA_NAME"
-                echo  "create schema if not exists $SCHEMA_NAME" | mysql
+            if ! echo "select * from information_schema.tables" | mysql | command grep --color=always -q "$ZPWR_TABLE_NAME";then
+                echo  "create schema if not exists $ZPWR_SCHEMA_NAME"
+                echo  "create schema if not exists $ZPWR_SCHEMA_NAME" | mysql
 
-                echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))'
-                echo 'CREATE TABLE `'"$TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$TABLE_NAME"'learning_index` (`learning`))' | mysql -D "$SCHEMA_NAME"
+                echo 'CREATE TABLE `'"$ZPWR_TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$ZPWR_TABLE_NAME"'learning_index` (`learning`))'
+                echo 'CREATE TABLE `'"$ZPWR_TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$ZPWR_TABLE_NAME"'learning_index` (`learning`))' | mysql -D "$ZPWR_SCHEMA_NAME"
             else
-                echo "$SCHEMA_NAME.$TABLE_NAME already exists" >&2
+                echo "$ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME already exists" >&2
             fi
         fi
     }
@@ -2104,7 +2104,7 @@ if [[ $ZPWR_LEARN != false ]]; then
     del(){
 
         [[ -z "$1" ]] && count=1 || count="$1"
-        echo "delete from $SCHEMA_NAME.$TABLE_NAME order by id desc limit $count" | mysql
+        echo "delete from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by id desc limit $count" | mysql
     }
 fi
 
