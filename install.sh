@@ -245,6 +245,7 @@ done
 shift $(($OPTIND-1))
 
 showDeps(){
+    bash "$INSTALLER_DIR/scripts/about.sh" 2>/dev/null
     {
         printf "Installing ${#dependencies_ary[@]} packages on $distroName: "
         for dep in "${dependencies_ary[@]}" ; do
