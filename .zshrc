@@ -1897,6 +1897,10 @@ _fzf_complete_clearList() {
 
 #git ;<tab>
 _fzf_complete_git() {
+
+    if ! isGitDir; then
+        return 1
+    fi
     local last
     last=${${(Az)@}[-1]}
     logg $last
@@ -1906,12 +1910,12 @@ _fzf_complete_git() {
         export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
     fi
     FZF_COMPLETION_OPTS=$FZF_GIT_OPTS _fzf_complete ' -m' "$@" < <(
-        git log --format=%h:%s
-        git for-each-ref | perl -lane '$_=substr($F[0],0,7).":$F[2]";print if ! m{^\s*$}'
+        git log --format='%h %s'
+        git for-each-ref | perl -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
     ) 
 }
 _fzf_complete_git_post() {
-   perl -F: -lape '$_=$F[0]'
+    cut -d ' ' -f1
 }
 
 test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \

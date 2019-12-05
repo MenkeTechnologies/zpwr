@@ -13,7 +13,7 @@
 ref=$1
 
 cat<<EOF
-    sha=\$(echo {} | cut -d: -f1)
+    sha=\$(echo {} | cut -d" " -f1)
     printf "\x1b[1;4;37;44m%s\x1b[0m\n" "git diff --stat -p --color=always $1 \$sha"
     git diff --stat -p --color=always $1 \$sha
 EOF
