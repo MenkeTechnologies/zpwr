@@ -1895,6 +1895,10 @@ _fzf_complete_clearList() {
     ) 
 }
 
+export DRACULA_FZF="--color=dark
+--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
+--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
+
 #git ;<tab>
 _fzf_complete_git() {
 
@@ -1909,7 +1913,7 @@ _fzf_complete_git() {
     else
         export FZF_GIT_OPTS="$__COMMON_FZF_ELEMENTS --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
     fi
-    FZF_COMPLETION_OPTS=$FZF_GIT_OPTS _fzf_complete ' -m' "$@" < <(
+    FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" _fzf_complete "-m $DRACULA_FZF" "$@" < <(
         git log --format='%h %s'
         git for-each-ref | perl -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
     ) 
