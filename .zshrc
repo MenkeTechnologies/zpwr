@@ -70,7 +70,7 @@ startTimestamp=$(date +%s)
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
 # see README.md
-export MYPROMPT=POWERLEVEL
+export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
 export ZPWR_EXPAND_SECOND_POSITION=true
 export ZPWR_SURROUND=true
@@ -80,9 +80,9 @@ export ZPWR_EXA_EXTENDED=true
 export ZPWR_PROFILING=false
 export ZPWR_DEBUG=false
 export ZPWR_TRACE=false
-export USE_NEOVIM=true
+export ZPWR_USE_NEOVIM=true
 export ZPWR_LEARN=true
-export ZPWR_COMMIT_COLOR='37;45'
+export ZPWR_COMMIT_STYLE='1;37;45'
 
 # non zpwr env vars
 export LC_ALL="en_US.UTF-8"
@@ -98,14 +98,14 @@ fi
 [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
 source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
 
-if [[ $MYPROMPT == POWERLEVEL ]]; then
+if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
     if test -s "$HOME/.powerlevel9kconfig.sh";then
         source "$HOME/.powerlevel9kconfig.sh"
     else
         ZSH_THEME=simonoff
     fi
 else
-    test ! -z $MYPROMPT && ZSH_THEME=$MYPROMPT || ZSH_THEME=simonoff
+    test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=simonoff
 fi
 
 
@@ -196,15 +196,15 @@ plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
-PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
+ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
+    echo "$ZPWR_PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
         plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
-    echo "$PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
+    echo "$ZPWR_PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
         plugins+=(tmux)
     plugins+=(systemd)
     distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
@@ -491,7 +491,7 @@ clearListFZF(){
 
 fzvim(){
     local file
-    if [[ $USE_NEOVIM == true ]]; then
+    if [[ $ZPWR_USE_NEOVIM == true ]]; then
         file="$HOME/.nviminfo"
         test -e "$file" || touch "$file"
         perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file" | \
@@ -559,7 +559,7 @@ fasdFZF(){
 vimFzfSudo(){
     zle .kill-whole-line
 
-    if [[ $USE_NEOVIM == true ]]; then
+    if [[ $ZPWR_USE_NEOVIM == true ]]; then
         LBUFFER="sudo -E nvim $(fzvim)"
     else
         LBUFFER="sudo -E vim $(fzvim)"
@@ -862,7 +862,7 @@ bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
 if [[ "$ZPWR_OS_TYPE" == darwin ]];then
-    if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
+    if echo "$ZPWR_PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
         bindkey '\e[1;5B' updater
@@ -976,7 +976,7 @@ precmd(){
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
-    if [[ $MYPROMPT != POWERLEVEL ]]; then
+    if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
         RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
     fi
 }
@@ -1008,7 +1008,7 @@ bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    if echo "$PARENT_PROCESS" | command egrep -q 'login|tmux'; then
+    if echo "$ZPWR_PARENT_PROCESS" | command egrep -q 'login|tmux'; then
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
         bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
@@ -1109,7 +1109,7 @@ bindkey -M vicmd '^P' EOLorNextTabStop
 bindkey -M vicmd G end-of-buffer-or-history
 
 # RPROMPT shows vim modes (insert vs normal)
-if [[ $MYPROMPT != POWERLEVEL ]]; then
+if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
     zle-keymap-select() {
         RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
         [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
@@ -1335,7 +1335,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
 
     #git commit colors
-    zstyle ':completion:*:*:commits' list-colors '=(#b)(*)=1;'$ZPWR_COMMIT_COLOR
+    zstyle ':completion:*:*:commits' list-colors '=(#b)(*)='$ZPWR_COMMIT_STYLE
     zstyle ':completion:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
     zstyle ':completion:*:commit-tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
     zstyle ':completion:*:cached-files' list-colors '=(#b)(*)=1;30=1;34;41;4'
@@ -1918,7 +1918,7 @@ _fzf_complete_git() {
         export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
     fi
     FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" _fzf_complete "-m $FZF_DRACULA --ansi" "$@" < <(
-        printf "\x1b[${ZPWR_COMMIT_COLOR}m"
+        printf "\x1b[${ZPWR_COMMIT_STYLE}m"
         git log --format='%h %s'
         git for-each-ref | perl -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
         printf "\x1b[0m"
@@ -2296,7 +2296,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
         if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
             mobile=true
             cat ~/.ssh/authorized_keys |
-                command grep "$GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
+                command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu|parrot)
