@@ -59,10 +59,10 @@ shift $(($OPTIND - 1))
 regex="$1"
 filter="$2"
 
-if [[ -z "$TEMPFILE" ]]; then
-    TEMPFILE="/tmp/temp$$"
+if [[ -z "$ZPWR_TEMPFILE" ]]; then
+    ZPWR_TEMPFILE="/tmp/temp$$"
 fi
-file="$TEMPFILE"
+file="$ZPWR_TEMPFILE"
 cat > "$file"
 output=$(cat $file)
 delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
