@@ -95,7 +95,7 @@ set shortmess=aIcFT
 set foldcolumn=2
 
 "2 lines for :cmd window
-set cmdheight=2
+set cmdheight=1
 
 "including tags in ^N completion
 set complete+=]
