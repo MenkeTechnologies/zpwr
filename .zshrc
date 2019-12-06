@@ -1876,21 +1876,44 @@ _fzf_complete_vim() {
     perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
     )
 }
+# nvim ;<tab>
+_fzf_complete_nvim() {
+  _fzf_complete '-m' "$@" < <(
+    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
+    )
+}
+# printf ;<tab>
+_fzf_complete_printf() {
+  _fzf_complete '-m' "$@" < <(
+      declare -xp | perl -pe '$_=~s@export\s(.*)(=.*)@$1@'
+    )
+}
+
+_fzf_complete_printf_post() {
+    perl -pe '$_="\$$_" if ! m{^\$.*}'
+}
+
 # echo $;<tab>
 _fzf_complete_echo() {
   _fzf_complete '-m' "$@" < <(
       declare -xp | perl -pe '$_=~s@export\s(.*)(=.*)@$1@'
     )
 }
+
+_fzf_complete_echo_post() {
+    perl -pe '$_="\$$_" if ! m{^\$.*}'
+}
+
 # alias ;<tab>
 _fzf_complete_alias() {
   _fzf_complete '-m' "$@" < <(
       alias | sed 's@=.*@@'
     )
 }
+
 # z ;<tab>
 _fzf_complete_z() {
-  _fzf_complete '--ansi' "$@" < <(
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
     z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if m{\d+\.*\d+\s*(.*)}}'
     )
 }
@@ -1899,7 +1922,7 @@ _fzf_complete_z() {
 _fzf_complete_clearList() {
     FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(
         cat "${ALL_ENV}Key.txt" | awk '{print $2}'
-    ) 
+    )
 }
 
 #git diff ;<tab>
