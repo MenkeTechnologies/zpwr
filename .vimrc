@@ -697,6 +697,7 @@ vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
 "{{{                    MARK:Plugin Mappings
 "**************************************************************
 nnoremap <silent> <leader>n :n<CR>
+nnoremap <silent> <leader>p :prev<CR>
 inoremap <F8> <ESC>:%s@@@g<Left><Left><Left>
 nnoremap <F8> :%s@@@g<Left><Left><Left>
 nnoremap <F1> :NERDTreeToggle<CR>
