@@ -1946,11 +1946,10 @@ _fzf_complete_git() {
     if ! isGitDir; then
         return 1
     fi
-    local last
-    last=${${(Az)@}[-1]}
-    logg $last
-    if git cat-file -t -- $last &>/dev/null; then
-        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" $last)'"
+    local lastWord
+    lastWord=${${(Az)@}[-1]}
+    if git cat-file -t -- $lastWord &>/dev/null; then
+        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" $lastWord)'"
     else
         export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
     fi

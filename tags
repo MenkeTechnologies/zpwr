@@ -110,6 +110,7 @@ __ScriptVersion	CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v
 __ScriptVersion	install.sh	/^__ScriptVersion="1.0.1"$/;"	v
 __ScriptVersion	macOnly/splitReg.sh	/^__ScriptVersion=1.0.0$/;"	v
 __ScriptVersion	powerTo.sh	/^__ScriptVersion="1.0.0"$/;"	v
+__ScriptVersion	scripts/CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v
 __ScriptVersion	splitReg.sh	/^__ScriptVersion=1.0.0$/;"	v
 __ScriptVersion	storageShower.sh	/^__ScriptVersion="version"$/;"	v
 __ScriptVersion	tgzLocalInstaller.sh	/^__ScriptVersion="1.0.0"$/;"	v
@@ -142,6 +143,7 @@ alternatingPrettyPrint	CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	common.sh	/^alternatingPrettyPrint(){$/;"	f
 alternatingPrettyPrint	pipUpdater.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	rpiSoftwareUpdater.sh	/^alternatingPrettyPrint() {$/;"	f
+alternatingPrettyPrint	scripts/CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	updater.sh	/^alternatingPrettyPrint() {$/;"	f
 amPm	timeConverter.sh	/^    amPm="PM"$/;"	v
 amPm	timeConverter.sh	/^amPm="AM"$/;"	v
@@ -243,6 +245,7 @@ counter	CPU_Stresser.sh	/^    counter=0$/;"	v
 counter	common.sh	/^    counter=0$/;"	v
 counter	pipUpdater.sh	/^    counter=0$/;"	v
 counter	rpiSoftwareUpdater.sh	/^    counter=0$/;"	v
+counter	scripts/CPU_Stresser.sh	/^    counter=0$/;"	v
 createLearningCollection	.shell_aliases_functions.sh	/^createLearningCollection(){$/;"	f
 createTemplate	templater.sh	/^createTemplate() {$/;"	f
 createTheFile	createScriptButDontOpenSublime.sh	/^createTheFile() {$/;"	f
@@ -362,6 +365,7 @@ exists	common.sh	/^exists(){$/;"	f
 exists	fzfPreviewOptsCommon.sh	/^    exists(){$/;"	f
 exists	manzshcompgen.zsh	/^exists(){$/;"	f
 exists	rpiSoftwareUpdater.sh	/^exists() {$/;"	f
+exists	scripts/CPU_Stresser.sh	/^exists() {$/;"	f
 exists	updater.sh	/^exists() {$/;"	f
 exists	zshcompgen.zsh	/^exists(){$/;"	f
 f	.shell_aliases_functions.sh	/^f(){$/;"	f
@@ -511,6 +515,7 @@ killCursor	openAll.sh	/^killCursor() {$/;"	f
 killCursor	picture_finder.sh	/^killCursor() {$/;"	f
 killCursor	secureDelete.sh	/^killCursor() {$/;"	f
 killpids	CPU_Stresser.sh	/^killpids() {$/;"	f
+killpids	scripts/CPU_Stresser.sh	/^killpids() {$/;"	f
 last	batchRename.sh	/^        local last=$(echo ${file##*_})$/;"	v
 lastcommit	about.sh	/^            lastcommit="$(git log --oneline -n 1)"$/;"	v
 lastcommit	scripts/about.sh	/^            lastcommit="$(git log --oneline -n 1)"$/;"	v
@@ -627,6 +632,7 @@ noport	.shell_aliases_functions.sh	/^                noport="$(echo "$url" | sed
 noproto	.shell_aliases_functions.sh	/^                        noproto="${noproto:0:-1}"$/;"	v
 noproto	.shell_aliases_functions.sh	/^                noproto="$(echo "$noport" | sed -E 's@https:\/\/|http:\/\/@@')"$/;"	v
 nproc	CPU_Stresser.sh	/^nproc=10$/;"	v
+nproc	scripts/CPU_Stresser.sh	/^nproc=10$/;"	v
 num	.shell_aliases_functions.sh	/^    num=$1$/;"	v
 num	myWatchMaintainEscapes.sh	/^        num=$OPTARG$/;"	v
 num	powerTo.sh	/^        num=realNum$/;"	v
@@ -719,6 +725,7 @@ picounter	.shell_aliases_functions.sh	/^    picounter=1$/;"	v
 pid	fsWatchLongRunning.sh	/^            pid=$!$/;"	v
 pid	fsWatchLongRunning.sh	/^        pid=$!$/;"	v
 pids	CPU_Stresser.sh	/^        pids="$pids $!"$/;"	v
+pids	scripts/CPU_Stresser.sh	/^        pids="$pids $!"$/;"	v
 pipe	readFIFO.sh	/^pipe=$HOME\/Desktop\/testpipe$/;"	v
 pipe	readFIFO.sh	/^pipe=\/tmp\/testpipe$/;"	v
 pirun	.shell_aliases_functions.sh	/^pirun(){$/;"	f
@@ -738,6 +745,7 @@ prettyPrint	macOnly/resetWIFI.sh	/^prettyPrint() {$/;"	f
 prettyPrint	macOnly/tor.sh	/^prettyPrint() {$/;"	f
 prettyPrint	macOnly/tutorialConfigUpdater.sh	/^prettyPrint() {$/;"	f
 prettyPrint	rpiSoftwareUpdater.sh	/^prettyPrint() {$/;"	f
+prettyPrint	scripts/CPU_Stresser.sh	/^prettyPrint() {$/;"	f
 prettyPrint	textmessage.sh	/^prettyPrint() {$/;"	f
 prettyPrint	updater.sh	/^prettyPrint() {$/;"	f
 prettyPrintStdin	common.sh	/^prettyPrintStdin(){$/;"	f
@@ -955,6 +963,7 @@ usage	myWatchNoBlink.sh	/^usage() {$/;"	f
 usage	myWatchNoBlinkColorized.sh	/^usage() {$/;"	f
 usage	mywatch.sh	/^usage() {$/;"	f
 usage	powerTo.sh	/^function usage() {$/;"	f
+usage	scripts/CPU_Stresser.sh	/^usage() {$/;"	f
 usage	shebangChanger.sh	/^usage() {$/;"	f
 usage	splitReg.sh	/^function usage() {$/;"	f
 usage	storageShower.sh	/^function usage() {$/;"	f
