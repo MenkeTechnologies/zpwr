@@ -1913,7 +1913,7 @@ _fzf_complete_alias() {
 
 # c ;<tab>
 _fzf_complete_c() {
-  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '-m' "$@" < <(
     find . -type f |& perl -lpe '$_=~s@$ENV{HOME}@~@'
     )
 }
