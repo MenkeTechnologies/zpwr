@@ -1911,6 +1911,12 @@ _fzf_complete_alias() {
     )
 }
 
+# f ;<tab>
+_fzf_complete_f() {
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
+    print -l **/*(/) |& perl -lpe '$_=~s@$ENV{HOME}@~@'
+    )
+}
 # z ;<tab>
 _fzf_complete_z() {
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
