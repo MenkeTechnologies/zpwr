@@ -2081,7 +2081,7 @@ _ssu(){
     declare -a learn_keys
     declare -a learn_values
 _se(){
-    eval "learn_ary=( $(echo "select learning from $SCHEMA_NAME.$TABLE_NAME order by dateAdded" | mysql | perl -e '@a=();$c=0;do{chomp;push(@ary,++$c." $c:".quotemeta($_))}for<>;$c=0;do{print "$_ " if $c++ < 1000}for reverse @ary') )"
+    eval "learn_ary=( $(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -e '@a=();$c=0;do{chomp;push(@ary,++$c." $c:".quotemeta($_))}for<>;$c=0;do{print "$_ " if $c++ < 1000}for reverse @ary') )"
 
     #reverse numeric sort
     learn_keys=(${(Onk)learn_ary})
