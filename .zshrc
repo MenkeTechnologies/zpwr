@@ -1911,12 +1911,20 @@ _fzf_complete_alias() {
     )
 }
 
+# c ;<tab>
+_fzf_complete_c() {
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
+    find . -type f |& perl -lpe '$_=~s@$ENV{HOME}@~@'
+    )
+}
+
 # f ;<tab>
 _fzf_complete_f() {
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
-    print -l **/*(/) |& perl -lpe '$_=~s@$ENV{HOME}@~@'
+  find . -type d |& perl -lpe '$_=~s@$ENV{HOME}@~@'
     )
 }
+
 # z ;<tab>
 _fzf_complete_z() {
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
