@@ -2090,7 +2090,8 @@ _se(){
     _describe -t zdir 'my learning' learn_ary
 }
 
-#to allow reverse numeric sort
+# to allow reverse numeric sort and numeric sort
+# as opposed to lexicographic sort
 zstyle ':completion:*:*:(se|redo|rsql|z|r):*:*' sort false
 
 subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
@@ -2262,7 +2263,7 @@ compdef _cl clearList
 compdef _f f
 compdef _c c
 compdef _p p
-compdef _r r rrr
+compdef _r r
 compdef _ssd ssd
 compdef _ssu ssu
 compdef _zpwr zpwr
