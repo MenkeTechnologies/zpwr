@@ -11,10 +11,11 @@ test -z "$LOGFILE" && LOGFILE="$HOME/updaterlog.txt"
 
 exec 1>> "$LOGFILE" 2>&1
 
-OSTYPE="$(uname -s | tr 'A-Z' 'a-z')"
+ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+
 
 if [[ "$1" == "google" ]]; then
-    case "$OSTYPE" in
+    case "$ZPWR_OS_TYPE" in
         darwin*)
             out="$(pbpaste | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
@@ -36,7 +37,7 @@ if [[ "$1" == "google" ]]; then
             ;;
     esac
 else
-    case "$OSTYPE" in
+    case "$ZPWR_OS_TYPE" in
         darwin*)
             out="$(pbpaste)"
             ;;
@@ -62,7 +63,7 @@ fi
 getOpenCommand(){
     local open_cmd
 
-    case "$OSTYPE" in
+    case "$ZPWR_OS_TYPE" in
         darwin*)  open_cmd='open' ;;
         cygwin*)  open_cmd='cygstart' ;;
         linux*)
@@ -73,7 +74,7 @@ getOpenCommand(){
             fi
             ;;
         msys*)    open_cmd='start ""' ;;
-        *)        echo "Platform $OSTYPE not supported"
+        *)        echo "Platform $ZPWR_OS_TYPE not supported"
             return 1
             ;;
     esac
