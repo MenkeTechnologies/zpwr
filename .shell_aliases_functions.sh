@@ -1512,9 +1512,9 @@ getrc(){
         cd "$ZPWR"
         git pull
     fi
-    bash "$SCRIPTS/about.sh"
 
-    cd "$HOME"
+    builtin cd "$HOME"
+    bash "$SCRIPTS/about.sh"
     git clone -b "$branch" "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
     cd "$ZPWR_REPO_NAME"
     copyConf
