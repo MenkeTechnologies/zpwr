@@ -2084,17 +2084,10 @@ _ssu(){
     _arguments -s $arguments
 }
 
-    declare -A learn_ary
-    declare -a learn_keys
-    declare -a learn_values
 _se(){
-    eval "learn_ary=( $(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -e '@a=();$c=0;do{chomp;push(@ary,++$c." $c:".quotemeta($_))}for<>;$c=0;do{print "$_ " if $c++ < 1000}for reverse @ary') )"
+    eval "learn_ary=( $(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -e '@a=();$c=0;do{chomp;push(@ary,++$c.":".quotemeta($_))}for<>;$c=0;do{print "$_ " if $c++ < 1000}for reverse @ary') )"
 
-    #reverse numeric sort
-    learn_keys=(${(Onk)learn_ary})
-    #reverse numeric sort
-    learn_values=(${(Onv)learn_ary})
-    _describe -t zdir 'my learning' learn_values learn_keys
+    _describe -t zdir 'my learning' learn_ary
 }
 
 #to allow reverse numeric sort
