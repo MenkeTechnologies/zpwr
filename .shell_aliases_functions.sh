@@ -1526,7 +1526,7 @@ getrc(){
     done
 
     rm -rf "$ZPWR_REPO_NAME"
-    bash "$SCRIPT/about.sh"
+    bash "$SCRIPTS/about.sh"
     
     test -n "$TERM" && exec "$SHELL"
 
