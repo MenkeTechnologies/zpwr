@@ -13,7 +13,7 @@ echo "$0" | grep -q pip_install.sh && source common.sh
 prettyPrint "installing gdb dashboard"
 wget -P ~ https://git.io/.gdbinit
 
-if [[ "$OS_TYPE" == "Darwin" ]]; then
+if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 
     prettyPrint "Upgrading pip"
     python3 -m pip install --upgrade pip
@@ -66,7 +66,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
         prettyPrint "Installing vim-vint"
         sudo python3 -m pip install vim-vint
     }
-elif [[ "$OS_TYPE" == "Linux" ]];then
+elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
     if [[ "$distroFamily" == redhat ]]; then
         prettyPrint "Installing grc for RedHat"
         git clone https://github.com/garabik/grc.git && builtin cd grc && sudo bash install.sh
@@ -141,7 +141,7 @@ elif [[ "$OS_TYPE" == "Linux" ]];then
         sudo python3 -m pip install vim-vint
     }
 else
-    if [[ "$OS_TYPE" == "FreeBSD" ]]; then
+    if [[ "$ZPWR_OS_TYPE" == "freebsd" ]]; then
         sudo python3 -m pip
         sudo python3 -m python3 -m pip install --upgrade
 

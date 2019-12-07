@@ -7,9 +7,8 @@
 #####   Notes: 
 #}}}***********************************************************
 
+ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 
-
-OS_TYPE="$(uname -s)"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
