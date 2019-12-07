@@ -2059,6 +2059,39 @@ if [[ $ZPWR_LEARN != false ]]; then
     se(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
+                echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
+            mysql 2>> $LOGFILE | nl -b a -n rn | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
+            else
+                echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME" |
+                mysql 2>> $LOGFILE | nl -b a -n rn
+            fi
+
+        else
+            arg="$1"
+            # escaping for perl $ and @ sigils
+            argdollar=${arg//$/\\$}
+            arg=${argdollar//@/\\@}
+            echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+            if [[ -z "$2" ]]; then
+                if [[ "$ZPWR_COLORS" = true ]]; then
+                    paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
+                else
+                paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
+                fi
+            else
+                if [[ "$ZPWR_COLORS" = true ]]; then
+                    paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
+                else
+                paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
+                fi | command egrep --color=always -i -- "$2"
+            fi
+            command rm $ZPWR_TEMPFILE $ZPWR_TEMPFILE2
+        fi
+
+    }
+    seee(){
+        if test -z "$1"; then
+            if [[ "$ZPWR_COLORS" = true ]]; then
                 echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
             mysql 2>> $LOGFILE | nl -b a -n rn | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
             else
