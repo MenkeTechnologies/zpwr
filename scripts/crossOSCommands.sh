@@ -8,8 +8,7 @@
 #}}}***********************************************************
 
 if [[ -z "$ZPWR_OS_TYPE" ]]; then
-    export ZPWR_OS_TYPE="$(uname -s | perl -pe '$_=lc')"
-
+    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 fi
 
 getOpenCommand(){
@@ -95,9 +94,9 @@ getCopyCommand(){
     echo "$copy_cmd"
 }
 
-export OPEN_CMD="$(getOpenCommand)"
-export COPY_CMD="$(getCopyCommand)"
-export PASTE_CMD="$(getPasteCommand)"
+export ZPWR_OPEN_CMD="$(getOpenCommand)"
+export ZPWR_COPY_CMD="$(getCopyCommand)"
+export ZPWR_PASTE_CMD="$(getPasteCommand)"
 
 
 

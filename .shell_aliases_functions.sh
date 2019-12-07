@@ -599,12 +599,12 @@ s(){
     if exists subl; then
         cmd=subl
     else
-        cmd="$OPEN_CMD"
+        cmd="$ZPWR_OPEN_CMD"
     fi
     if type -a s | command grep -qv function; then
         sec_cmd=s
     else
-        sec_cmd="$OPEN_CMD"
+        sec_cmd="$ZPWR_OPEN_CMD"
     fi
     if isZsh; then
         if [[ $sec_cmd == s ]]; then
@@ -1384,7 +1384,7 @@ jetbrainsWorkspaceEdit(){
 
 unalias o &>/dev/null
 o(){
-    open_cmd="$OPEN_CMD" || return 1
+    open_cmd="$ZPWR_OPEN_CMD" || return 1
 
     if isZsh; then
         if [[ -z "$1" ]]; then
@@ -1403,7 +1403,7 @@ o(){
 }
 
 openmygh(){
-    open_cmd="$OPEN_CMD" || return 1
+    open_cmd="$ZPWR_OPEN_CMD" || return 1
 
     if isZsh; then
         if [[ -n "$1" ]]; then

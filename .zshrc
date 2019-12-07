@@ -420,7 +420,7 @@ alternateQuotes(){
 clipboard(){
     [[ -z "$BUFFER" ]] && return 1
 
-    clipcmd=$COPY_CMD
+    clipcmd=$ZPWR_COPY_CMD
     if [[ -n $clipcmd ]]; then
             print -sr "$BUFFER"
             print -rn "$BUFFER" | ${=clipcmd}
@@ -2175,8 +2175,8 @@ _complete_plus_last_command_args() {
 _complete_clipboard(){
 
     local clipboard_str
-    if [[ -n $PASTE_CMD ]]; then
-        clipboard_str="$(${=PASTE_CMD} 2>/dev/null)"
+    if [[ -n $ZPWR_PASTE_CMD ]]; then
+        clipboard_str="$(${=ZPWR_PASTE_CMD} 2>/dev/null)"
     else
         case "$ZPWR_OS_TYPE" in
             darwin*)
