@@ -2043,6 +2043,14 @@ if [[ $ZPWR_LEARN != false ]]; then
         fi
     }
 
+    ser(){
+        local num=100
+        if [[ -n "$1" ]]; then
+            num=$1
+        fi
+
+        se | shuf -n $num
+    }
     se(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
