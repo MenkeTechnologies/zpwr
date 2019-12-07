@@ -1510,7 +1510,7 @@ getrc(){
 
     if [[ -d "$ZPWR" ]]; then
         builtin cd "$ZPWR"
-        git pull
+        logg $(git pull 2>&1)
     fi
 
     builtin cd "$HOME"
