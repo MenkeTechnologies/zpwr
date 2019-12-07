@@ -1512,6 +1512,7 @@ getrc(){
         cd "$ZPWR"
         git pull
     fi
+    bash "$SCRIPTS/about.sh"
 
     cd "$HOME"
     git clone -b "$branch" "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
@@ -1526,7 +1527,6 @@ getrc(){
     done
 
     rm -rf "$ZPWR_REPO_NAME"
-    bash "$SCRIPTS/about.sh"
     
     test -n "$TERM" && exec "$SHELL"
 
