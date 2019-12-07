@@ -1315,9 +1315,6 @@ if (( $#h > 0 )); then
     zstyle ':completion:*:slogin:*' hosts $h
 fi
 
-#do not ascii sort for z completion
-zstyle ':completion:*:z:*' sort false
-
 if [[ $ZPWR_COLORS == true ]]; then
 
     zstyle ':completion:*' list-colors 'ma=37;1;4;44'
@@ -2101,7 +2098,7 @@ _se(){
 }
 
 #to allow reverse numeric sort
-zstyle ':completion:*:*:(se|redo|rsql|r):*:*' sort false
+zstyle ':completion:*:*:(se|redo|rsql|z|r):*:*' sort false
 
 subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
@@ -2254,15 +2251,10 @@ _megacomplete(){
 }
 
 _r(){
-    local rdirs
-    rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $c:".quotemeta($s)." "};print ++$c." $c:/"'))
+    #rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $c:".quotemeta($s)." "};print ++$c." $c:/"'))
+    rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)." "};print ++$c.":/"'))
 
-    #reverse numeric sort
-    r_keys=(${(onk)rdirs})
-    #reverse numeric sort
-    r_values=(${(knv)rdirs})
-
-    _describe -t zdir 'rdirs' r_keys r_values
+    _describe -t zdir 'rdirs' rdirs
 
 }
 
