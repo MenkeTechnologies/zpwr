@@ -1934,9 +1934,46 @@ _fzf_complete_r() {
   dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $s\n";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $s\n"};print ++$c." /"'
     )
 }
+
 _fzf_complete_r_post() {
     cut -d ' ' -f1
 }
+
+# rsql ;<tab>
+_fzf_complete_rsql() {
+  FZF_COMPLETION_OPTS= _fzf_complete '-m --ansi' "$@" < <(
+        se | tac
+    )
+}
+
+_fzf_complete_rsql_post() {
+    awk '{print $1}'
+}
+
+# se ;<tab>
+_fzf_complete_se() {
+  FZF_COMPLETION_OPTS= _fzf_complete '-m --ansi' "$@" < <(
+        se | tac
+    )
+}
+
+_fzf_complete_se_post() {
+    awk '{print $2}'
+}
+
+# redo ;<tab>
+_fzf_complete_redo() {
+  FZF_COMPLETION_OPTS= _fzf_complete '-m --ansi' "$@" < <(
+        se | tac
+    )
+}
+
+_fzf_complete_redo_post() {
+    awk '{print $1}'
+}
+
+
+
 # clearList ;<tab>
 _fzf_complete_clearList() {
     FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(

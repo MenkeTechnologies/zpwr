@@ -2051,14 +2051,19 @@ if [[ $ZPWR_LEARN != false ]]; then
 
         se | shuf -n $num
     }
+
+    sef(){
+        se | tac | fzf --ansi
+    }
+
     se(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
                 echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
-            mysql 2>> $LOGFILE | nl -b a -n rz | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
+            mysql 2>> $LOGFILE | nl -b a -n rn | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
             else
                 echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME" |
-                mysql 2>> $LOGFILE | nl -b a -n rz
+                mysql 2>> $LOGFILE | nl -b a -n rn
             fi
 
         else
