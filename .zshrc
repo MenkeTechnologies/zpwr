@@ -2259,7 +2259,7 @@ compdef _cl clearList
 compdef _f f
 compdef _c c
 compdef _p p
-compdef _r 
+compdef _r r
 compdef _ssd ssd
 compdef _ssu ssu
 compdef _zpwr zpwr
