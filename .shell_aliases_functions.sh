@@ -1509,16 +1509,16 @@ getrc(){
     fi
 
     if [[ -d "$ZPWR" ]]; then
-        cd "$ZPWR"
+        builtin cd "$ZPWR"
         git pull
     fi
 
     builtin cd "$HOME"
     bash "$SCRIPTS/about.sh"
     git clone -b "$branch" "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
-    cd "$ZPWR_REPO_NAME"
+    builtin cd "$ZPWR_REPO_NAME"
     copyConf
-    cd ..
+    builtin cd ..
 
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*;do
@@ -1526,7 +1526,7 @@ getrc(){
         test -d "$dir" && ( builtin cd "$dir" && git pull; )
     done
 
-    rm -rf "$ZPWR_REPO_NAME"
+    command rm -rf "$ZPWR_REPO_NAME"
     
     test -n "$TERM" && exec "$SHELL"
 
