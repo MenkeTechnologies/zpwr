@@ -1937,7 +1937,7 @@ _fzf_complete_z() {
 _fzf_complete_r() {
     local dir
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS_2 _fzf_complete '--ansi' "$@" < <(
-  dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $s\n";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $s\n"};print ++$c." /"'
+  dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $s\n";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $s\n"};print ++$c." /"'
     )
 }
 _fzf_complete_r_post() {
@@ -2255,7 +2255,7 @@ _megacomplete(){
 
 _r(){
     local rdirs
-    rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $c:".quotemeta($s)." ";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $c:".quotemeta($s)." "};print ++$c." $c:/"'))
+    rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $c:".quotemeta($s)." "};print ++$c." $c:/"'))
 
     #reverse numeric sort
     r_keys=(${(onk)rdirs})
