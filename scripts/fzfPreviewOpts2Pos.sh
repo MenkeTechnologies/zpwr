@@ -8,7 +8,7 @@
 ##### Notes: no single quotes allowed
 #}}}***********************************************************
 
-source "$SCRIPTS/fzfPreviewOptsCommon2.sh"
+source "$SCRIPTS/fzfPreviewOptsCommon2Pos.sh"
 isZsh && ps='$pipestatus[1]' || ps='${PIPESTATUS[0]}'
 
 cat<<EOF

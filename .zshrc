@@ -1842,7 +1842,7 @@ fzf_setup(){
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
     export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
-    export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOptsSecondPos.sh")'"
+    export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOpts2Pos.sh")'"
     export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
 
     if [[ "$ZPWR_BANNER" == ponies ]]; then
@@ -1937,7 +1937,7 @@ _fzf_complete_z() {
 _fzf_complete_r() {
     local dir
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS_2 _fzf_complete '--ansi' "$@" < <(
-  dirname $(pwd) | perl -we '$s=<>;chomp $s;$c=1;print "$c $s\n";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c;print($s eq "" ? " /\n" : " $s\n")};print ++$c." /"'
+  dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $s\n";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $s\n"};print ++$c." /"'
     )
 }
 _fzf_complete_r_post() {
