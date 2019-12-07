@@ -2035,7 +2035,7 @@ if [[ $ZPWR_LEARN != false ]]; then
     }
 
 
-    see(){
+    seee(){
         if test -z "$1"; then
             echo "select id, dateAdded,learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n
         else
@@ -2089,7 +2089,7 @@ if [[ $ZPWR_LEARN != false ]]; then
         fi
 
     }
-    seee(){
+    see(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
                 echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
