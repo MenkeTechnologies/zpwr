@@ -11,7 +11,8 @@
 #{{{                    MARK:Setup
 #**************************************************************
 
-OS_TYPE="$(uname -s)"
+ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
@@ -323,7 +324,7 @@ trap 'echo kill $YCM_PID $PLUGIN_PID $CARGO_PID; kill $YCM_PID $PLUGIN_PID $CARG
 
 #{{{                    MARK:Mac
 #**************************************************************
-if [[ "$OS_TYPE" == "Darwin" ]]; then
+if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     warnOverwrite
     warnSudo
 
@@ -395,7 +396,7 @@ if [[ "$OS_TYPE" == "Darwin" ]]; then
 
 #{{{                    MARK:Linux
 #**************************************************************
-elif [[ "$OS_TYPE" == "Linux" ]]; then
+elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
 
     addDependenciesLinux
     distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
@@ -465,7 +466,7 @@ elif [[ "$OS_TYPE" == "Linux" ]]; then
 
 else
     #unix
-    if [[ "$OS_TYPE" == FreeBSD ]]; then
+    if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
         distroFamily=freebsd
         distroName=FreeBSD
 
@@ -509,7 +510,7 @@ else
             prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
         fi
     else
-        prettyPrint "Your OS $OS_TYPE is unsupported!" >&2; exit 1
+        prettyPrint "Your OS $ZPWR_OS_TYPE is unsupported!" >&2; exit 1
     fi
 
 fi
@@ -634,7 +635,7 @@ test -f /usr/local/sbin/iftop || {
     prettyPrint "No iftop so installing"
     update iftop "$distroFamily"
 }
-if [[ "$OS_TYPE" != Darwin ]]; then
+if [[ "$ZPWR_OS_TYPE" != darwin ]]; then
     prettyPrint "Installing snort"
     update snort "$distroFamily"
     prettyPrint "Installing logwatch"

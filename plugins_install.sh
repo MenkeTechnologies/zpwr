@@ -1,16 +1,17 @@
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 
 INSTALLER_DIR="$(pwd -P)"
-OS_TYPE="$(uname -s)"
+ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 
-if [[ "$OS_TYPE" == "Darwin" ]]; then
+
+if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     distroName=Mac
-elif [[ "$OS_TYPE" == "Linux" ]]; then
+elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
         distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
 
 else
-    if [[ "$OS_TYPE" == FreeBSD ]]; then
+    if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
         distroName=FreeBSD
     fi
 fi

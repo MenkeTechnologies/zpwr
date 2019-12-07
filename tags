@@ -69,9 +69,6 @@ LOGFILE	updaterEmail.sh	/^LOGFILE="\/Users\/jacobmenke\/updaterlog.txt"$/;"	v
 ManParser	mantozshcomp.py	/^class ManParser(object):$/;"	c
 ORGIN_NAME	gitgo.sh	/^    local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"$/;"	v
 OS	test.sh	/^OS="$(uname -s)"$/;"	v
-OS_TYPE	common.sh	/^OS_TYPE="$(uname -s)"$/;"	v
-OS_TYPE	install.sh	/^OS_TYPE="$(uname -s)"$/;"	v
-OS_TYPE	plugins_install.sh	/^OS_TYPE="$(uname -s)"$/;"	v
 Output	macOnly/figletRandomFont.sh	/^    Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"$/;"	v
 PARSER_INFO	mantozshcomp.py	/^PARSER_INFO = {}$/;"	v
 PATH	macOnly/tmuxer.sh	/^PATH="\/usr\/local\/bin:$PATH"$/;"	v
@@ -105,6 +102,9 @@ TypeDeroffManParser	mantozshcomp.py	/^class TypeDeroffManParser(ManParser):$/;"	
 URL	gitgo.sh	/^    local URL="https:\/\/github.com\/$GITHUB_ACCOUNT\/$REPO_NAME_TO_CREATE"$/;"	v
 URL	help2comp.py	/^URL = 'http:\/\/github.com\/RobSis\/zsh-completion-generator'$/;"	v
 YCM_PID	install.sh	/^    YCM_PID=$!$/;"	v
+ZPWR_OS_TYPE	common.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
+ZPWR_OS_TYPE	install.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
+ZPWR_OS_TYPE	plugins_install.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
 ZSH_COMP_DIR	remoteRepoMonitorDaemon.sh	/^ZSH_COMP_DIR="$HOME\/.oh-my-zsh\/custom\/plugins\/$ZSH_COMP_REPO_NAME"$/;"	v
 __ScriptVersion	CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v
 __ScriptVersion	install.sh	/^__ScriptVersion="1.0.1"$/;"	v
