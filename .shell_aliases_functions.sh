@@ -44,7 +44,8 @@ else
 fi
 
 if [[ -z "$ZPWR_OS_TYPE" ]]; then
-    export ZPWR_OS_TYPE="$(uname -s | perl -pe '$_=lc')"
+    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+
 fi
 #}}}***********************************************************
 

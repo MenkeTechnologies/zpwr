@@ -83,6 +83,10 @@ export ZPWR_TRACE=false
 export ZPWR_USE_NEOVIM=true
 export ZPWR_LEARN=true
 export ZPWR_COMMIT_STYLE='1;37;45'
+export ZPWR_GLOBAL_ALIAS_PREFIX=j
+export ZPWR_TABSTOP=__________
+export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+#}}}***********************************************************
 
 # non zpwr env vars
 export LC_ALL="en_US.UTF-8"
@@ -115,7 +119,6 @@ ZSH_DISABLE_COMPFIX=true
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 export SHELL="$(which zsh)"
-export ZPWR_OS_TYPE="$(uname -s | perl -pe '$_=lc')"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -254,12 +257,6 @@ exists bat && export BAT_THEME="OneHalfLight"
 
 export ZPWR_DEFAULT_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
-#}}}***********************************************************
-
-#{{{                    MARK:Global Vars for Global Aliases
-#**************************************************************
-test -z $ZPWR_GLOBAL_ALIAS_PREFIX && export ZPWR_GLOBAL_ALIAS_PREFIX=j
-test -z $ZPWR_TABSTOP && export ZPWR_TABSTOP=__________
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Fxns
@@ -2104,7 +2101,7 @@ _zpwr(){
   '--shell[enter shell repl]: :->noargs'
   '1:zpwr subcommand:->verb'
     '*::args to zpwr:->args'
-)
+    )
 
 _arguments -s -C : $arguments && return 0
 
@@ -2245,7 +2242,6 @@ _megacomplete(){
 }
 
 _r(){
-    #rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $c:".quotemeta($s)." "};print ++$c." $c:/"'))
     rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)." "};print ++$c.":/"'))
 
     _describe -t zdir 'rdirs' rdirs
@@ -2263,7 +2259,7 @@ compdef _cl clearList
 compdef _f f
 compdef _c c
 compdef _p p
-compdef _r r
+compdef _r 
 compdef _ssd ssd
 compdef _ssu ssu
 compdef _zpwr zpwr
