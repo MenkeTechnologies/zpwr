@@ -342,7 +342,7 @@ exists brew && {
 prettyPrint "Updating Vundle Plugins"
 
 if [[ $end != true ]]; then
-    if [[ $USE_NEOVIM == true ]]; then
+    if [[ $ZPWR_USE_NEOVIM == true ]]; then
         if exists nvim; then
             nvim -c VundleUpdate -c quitall
         else
