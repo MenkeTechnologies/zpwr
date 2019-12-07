@@ -420,7 +420,7 @@ alternateQuotes(){
 clipboard(){
     [[ -z "$BUFFER" ]] && return 1
 
-    clipcmd=$ZPWR_COPY_CMD
+    local clipcmd=$ZPWR_COPY_CMD
     if [[ -n $clipcmd ]]; then
             print -sr "$BUFFER"
             print -rn "$BUFFER" | ${=clipcmd}
