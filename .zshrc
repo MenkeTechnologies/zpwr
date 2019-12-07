@@ -2101,7 +2101,7 @@ _se(){
 }
 
 #to allow reverse numeric sort
-zstyle ':completion:*:*:(se|redo|rsql):*:*' sort false
+zstyle ':completion:*:*:(se|redo|rsql|r):*:*' sort false
 
 subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
@@ -2253,6 +2253,19 @@ _megacomplete(){
     return $ret
 }
 
+_r(){
+    local rdirs
+    rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $c:".quotemeta($s)." ";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $c:".quotemeta($s)." "};print ++$c." $c:/"'))
+
+    #reverse numeric sort
+    r_keys=(${(onk)rdirs})
+    #reverse numeric sort
+    r_values=(${(knv)rdirs})
+
+    _describe -t zdir 'rdirs' r_keys r_values
+
+}
+
 # list of completers to use
 zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
@@ -2264,6 +2277,7 @@ compdef _cl clearList
 compdef _f f
 compdef _c c
 compdef _p p
+compdef _r r rrr
 compdef _ssd ssd
 compdef _ssu ssu
 compdef _zpwr zpwr
