@@ -2089,7 +2089,7 @@ if [[ $ZPWR_LEARN != false ]]; then
         fi
 
     }
-    quiz(){
+    qu(){
         ser | fzf -m --ansi
     }
 
