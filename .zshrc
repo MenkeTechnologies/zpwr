@@ -86,6 +86,8 @@ export ZPWR_COMMIT_STYLE='1;37;45'
 export ZPWR_GLOBAL_ALIAS_PREFIX=j
 export ZPWR_TABSTOP=__________
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+#set to 0 or greater to activate sending to tmux pane of this number
+export ZPWR_SEND_KEYS_PANE=-1
 #}}}***********************************************************
 
 # non zpwr env vars
@@ -587,7 +589,28 @@ intoFzfAg(){
     CURSOR=$#BUFFER
 }
 
+keySender(){
+    if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
+        #tmux send-keys -t learn:0.0 $1
+        tmux send-keys -t $ZPWR_SEND_KEYS_PANE "C-u" "$BUFFER"
+    fi
+}
+
+keyClear(){
+    if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
+        tmux send-keys -t $ZPWR_SEND_KEYS_PANE "C-u"
+    fi
+}
+
+function self-insert() {
+  zle .self-insert
+  keySender $KEYS
+}
+
+zle -N self-insert
+
 clearLine() {
+    keyClear
     LBUFFER=
 }
 
@@ -703,6 +726,16 @@ fzfCommits(){
     fi
 }
 
+interceptSurround(){
+    surround
+    keySender
+}
+
+interceptDelete(){
+    deleteMatching
+    keySender
+}
+
 zle -N fzfCommits
 zle -N updater
 zle -N runner
@@ -719,9 +752,19 @@ zle -N fzfAllKeybind
 zle -N locateFzf
 zle -N fzfEnv
 zle -N fasdFZF
+zle -N interceptDelete
+zle -N interceptSurround
 
 #vim mode for zle
 bindkey -v
+
+bindkey -M viins "^?" interceptDelete
+bindkey -M viins '"' interceptSurround
+bindkey -M viins "'" interceptSurround
+bindkey -M viins '`' interceptSurround
+bindkey -M viins "(" interceptSurround
+bindkey -M viins "[" interceptSurround
+bindkey -M viins "{" interceptSurround
 
 bindkey -M viins "^Vc" fzfCommits
 bindkey -M vicmd "^Vc" fzfCommits
@@ -895,6 +938,7 @@ bindkey '^I' expand-or-complete-with-dots
 my-accept-line () {
 
     ZPWR_WILL_CLEAR=false
+    keyClear
 
     #do we want to clear the screen and run ls after we exec the current line?
     local commandsThatModifyFiles regex mywords line
@@ -2465,6 +2509,7 @@ if [[ $ZPWR_LEARN != false ]]; then
         learning="$(print -- "$BUFFER" | perl -pe 's@\x0a@\x20@' | perl -pe 's@^\x20+|\x20+$@@g;s@\x20+@\x20@g')"
 
             BUFFER="le '${learning//'/\''}'"
+            keyClear
             zle .accept-line
         else
             return 1
