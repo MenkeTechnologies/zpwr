@@ -2089,6 +2089,10 @@ if [[ $ZPWR_LEARN != false ]]; then
         fi
 
     }
+    quiz(){
+        ser | fzf -m --ansi
+    }
+
     see(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
