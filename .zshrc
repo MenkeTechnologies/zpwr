@@ -602,17 +602,18 @@ keySender(){
     fi
 }
 
-stop(){
+stopSend(){
     ZPWR_SEND_KEYS_PANE=-1
     command rm $ZPWR_LOCK_FILE
 }
 
-start(){
+startSend(){
     ZPWR_SEND_KEYS_PANE=$1
+    pid=$(tmux list-panes -F '#{pane_active} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$ZPWR_SEND_KEYS_PANE'}')
     if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
         mkdir -p $ZPWR_HIDDEN_DIR
     fi
-    echo $2 > $ZPWR_LOCK_FILE
+    echo $pid > $ZPWR_LOCK_FILE
 }
 
 keyClear(){
