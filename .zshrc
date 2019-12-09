@@ -608,6 +608,10 @@ stopSend(){
 }
 
 startSend(){
+    if [[ -z "$1" ]]; then
+        echo "need arg: <pane>" >&2
+        return 1
+    fi
     ZPWR_SEND_KEYS_PANE=$1
     pid=$(tmux list-panes -F '#{pane_active} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$ZPWR_SEND_KEYS_PANE'}')
     if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
