@@ -86,6 +86,8 @@ export ZPWR_COMMIT_STYLE='1;37;45'
 export ZPWR_GLOBAL_ALIAS_PREFIX=j
 export ZPWR_TABSTOP=__________
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
 #set to 0 or greater to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
 #}}}***********************************************************
@@ -93,6 +95,10 @@ export ZPWR_SEND_KEYS_PANE=-1
 # non zpwr env vars
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
+
+if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
+    mkdir -p $ZPWR_HIDDEN_DIR
+fi
 
 if [[ $ZPWR_PROFILING == true ]]; then
     #profiling startup
@@ -594,6 +600,19 @@ keySender(){
         #tmux send-keys -t learn:0.0 $1
         tmux send-keys -t $ZPWR_SEND_KEYS_PANE "C-u" "$BUFFER"
     fi
+}
+
+stop(){
+    ZPWR_SEND_KEYS_PANE=-1
+    command rm $ZPWR_LOCK_FILE
+}
+
+start(){
+    ZPWR_SEND_KEYS_PANE=$1
+    if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
+        mkdir -p $ZPWR_HIDDEN_DIR
+    fi
+    echo $2 > $ZPWR_LOCK_FILE
 }
 
 keyClear(){
