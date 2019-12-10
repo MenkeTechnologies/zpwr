@@ -90,6 +90,7 @@ export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
 export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
 #set to 0 or greater to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
+export ZPWR_SEND_KEYS_FULL=false
 #}}}***********************************************************
 
 # non zpwr env vars
@@ -596,33 +597,48 @@ intoFzfAg(){
 }
 
 keySender(){
-    if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
+    if (( $ZPWR_SEND_KEYS_PANE != -1 )); then
         #tmux send-keys -t learn:0.0 $1
-        tmux send-keys -t $ZPWR_SEND_KEYS_PANE "C-u" "$BUFFER"
+        for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+            tmux send-keys -t $pane "C-u" "$BUFFER" #&>/dev/null
+        done
     fi
 }
 
 stopSend(){
     ZPWR_SEND_KEYS_PANE=-1
-    command rm $ZPWR_LOCK_FILE
+    ZPWR_SEND_KEYS_FULL=false
+    command rm $ZPWR_LOCK_FILE &>/dev/null
 }
 
+startSendFull(){
+    ZPWR_SEND_KEYS_FULL=true
+    startSend "$@"
+}
 startSend(){
     if [[ -z "$1" ]]; then
         echo "need arg: <pane>" >&2
         return 1
     fi
     ZPWR_SEND_KEYS_PANE=$1
-    pid=$(tmux list-panes -F '#{pane_active} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$ZPWR_SEND_KEYS_PANE'}')
+
     if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
         mkdir -p $ZPWR_HIDDEN_DIR
     fi
-    echo $pid > $ZPWR_LOCK_FILE
+
+    echo > $ZPWR_LOCK_FILE
+
+    for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+        pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$pane'}')
+        echo $pid >> $ZPWR_LOCK_FILE
+    done
 }
 
 keyClear(){
     if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
-        tmux send-keys -t $ZPWR_SEND_KEYS_PANE "C-u"
+    for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+        tmux send-keys -t $pane "C-u"
+    done
     fi
 }
 
@@ -962,7 +978,19 @@ bindkey '^I' expand-or-complete-with-dots
 my-accept-line () {
 
     ZPWR_WILL_CLEAR=false
-    keyClear
+    if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
+        keyClear
+    else
+        if ! echo $BUFFER | grep -q stopSend; then
+            for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+                tmux send-keys -t $pane "C-m"
+            done
+        else
+            for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+                tmux send-keys -t $pane "C-u"
+            done
+        fi
+    fi
 
     #do we want to clear the screen and run ls after we exec the current line?
     local commandsThatModifyFiles regex mywords line
@@ -2533,7 +2561,9 @@ if [[ $ZPWR_LEARN != false ]]; then
         learning="$(print -- "$BUFFER" | perl -pe 's@\x0a@\x20@' | perl -pe 's@^\x20+|\x20+$@@g;s@\x20+@\x20@g')"
 
             BUFFER="le '${learning//'/\''}'"
+        if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
             keyClear
+        fi
             zle .accept-line
         else
             return 1
