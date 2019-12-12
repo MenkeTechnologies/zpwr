@@ -69,6 +69,7 @@ startTimestamp=$(date +%s)
 #**************************************************************
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
+# override in ~/.token.sh
 # see README.md
 export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
@@ -83,6 +84,7 @@ export ZPWR_TRACE=false
 export ZPWR_USE_NEOVIM=true
 export ZPWR_LEARN=true
 export ZPWR_COMMIT_STYLE='1;37;45'
+export ZPWR_BAT_THEME="GitHub"
 export ZPWR_GLOBAL_ALIAS_PREFIX=j
 export ZPWR_TABSTOP=__________
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
@@ -262,7 +264,7 @@ test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
 test -z $ZPWR_BANNER && export ZPWR_BANNER=ponies
-exists bat && export BAT_THEME="OneHalfLight"
+exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
 export ZPWR_DEFAULT_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
