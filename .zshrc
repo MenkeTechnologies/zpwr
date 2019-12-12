@@ -90,9 +90,18 @@ export ZPWR_TABSTOP=__________
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
 export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
-#set to 0 or greater to activate sending to tmux pane of this number
+export ZPWR_DELIMITER_CHAR='%'
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
+export ZPWR_REPO_NAME="zpwr"
+export ZPWR_COMPLETION_DIR="zsh-more-completions"
+export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
+export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
+# set to comma separated list of pane numbers
+# to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
+
 #}}}***********************************************************
 
 # non zpwr env vars
@@ -254,7 +263,6 @@ fi
 autoload -Uz compinit
 
 source $ZSH/oh-my-zsh.sh
-
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
