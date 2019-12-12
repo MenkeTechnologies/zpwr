@@ -52,6 +52,22 @@ fi
 #{{{                    MARK:Env Vars
 #**************************************************************
 #tmux prefix on outer session
+if [[ ! -d "$TMPDIR" ]]; then
+    if [[ ! -d "/tmp/$ZPWR_REPO_NAME" ]]; then
+        mkdir -p "/tmp/$ZPWR_REPO_NAME"
+    fi
+    export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
+    export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
+    export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
+else
+    if [[ ! -d "$TMPDIR/$ZPWR_REPO_NAME" ]]; then
+        mkdir -p "$TMPDIR/$ZPWR_REPO_NAME"
+    fi
+    export ZPWR_TEMPFILE="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-1$USER"
+    export ZPWR_TEMPFILE2="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER"
+    export ZPWR_TEMPFILE_SQL="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
+fi
+
 export TMUX_PREFIX=x
 export TMUX_REMOTE_PREFIX=b
 test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
