@@ -1587,6 +1587,15 @@ globalAliasesInit(){
     else
         '$ZPWR_TABSTOP'
     fi'
+    alias ieee='if [[ '$ZPWR_TABSTOP' ]];then
+        '$ZPWR_TABSTOP'
+    elif [[ '$ZPWR_TABSTOP' ]];then
+        '$ZPWR_TABSTOP'
+    elif [[ '$ZPWR_TABSTOP' ]];then
+        '$ZPWR_TABSTOP'
+    else
+        '$ZPWR_TABSTOP'
+    fi'
     alias ie='if [[ '$ZPWR_TABSTOP' ]];then
         '$ZPWR_TABSTOP'
     else
