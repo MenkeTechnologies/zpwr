@@ -10,6 +10,18 @@
 if [[ -z "$ZPWR_TEMPFILE" ]]; then
     ZPWR_TEMPFILE="/tmp/.temp$$"
 fi
+if [[ -z "$ZPWR_TEMPFILE1" ]]; then
+    ZPWR_TEMPFILE1="/tmp/.temp$$-1"
+fi
+if [[ -z "$ZPWR_TEMPFILE2" ]]; then
+    ZPWR_TEMPFILE2="/tmp/.temp$$-2"
+fi
+if [[ -z "$ZPWR_TEMPFILE3" ]]; then
+    ZPWR_TEMPFILE3="/tmp/.temp$$-3"
+fi
+if [[ -z "$ZPWR_TEMPFILE4" ]]; then
+    ZPWR_TEMPFILE4="/tmp/.temp$$-4"
+fi
 
 {
     tmux lsk
@@ -20,15 +32,18 @@ fi
     bindkey -M listscroll -L
     bindkey -M viopp -L
     alias -L
-    vim -e -c 'redir! > ~/.temp1 | silent imap | redir END | quitall'
-    cat ~/.temp1
-    vim -e -c 'redir! > ~/.temp2 | silent nmap | redir END | quitall'
-    cat ~/.temp2
-    vim -e -c 'redir! > ~/.temp3 | silent vmap | redir END | quitall'
-    cat ~/.temp3
-    vim -e -c 'redir! > ~/.temp4 | silent cmap | redir END | quitall'
-    cat ~/.temp4
-    command rm ~/.temp{1..4}
+    vim -e -c 'redir! > '$ZPWR_TEMPFILE1' | silent imap | redir END | quitall'
+    cat "$ZPWR_TEMPFILE1"
+    vim -e -c 'redir! > '$ZPWR_TEMPFILE2' | silent nmap | redir END | quitall'
+    cat "$ZPWR_TEMPFILE2"
+    vim -e -c 'redir! > '$ZPWR_TEMPFILE3' | silent vmap | redir END | quitall'
+    cat "$ZPWR_TEMPFILE3"
+    vim -e -c 'redir! > '$ZPWR_TEMPFILE4' | silent cmap | redir END | quitall'
+    cat "$ZPWR_TEMPFILE4"
+    command rm "$ZPWR_TEMPFILE1"
+    command rm "$ZPWR_TEMPFILE2"
+    command rm "$ZPWR_TEMPFILE3"
+    command rm "$ZPWR_TEMPFILE4"
 
 } | perl -ne 'print if /\S+/' > "$ZPWR_TEMPFILE"
 

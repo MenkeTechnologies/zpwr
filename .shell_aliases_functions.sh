@@ -56,15 +56,21 @@ if [[ ! -d "$TMPDIR" ]]; then
     if [[ ! -d "/tmp/$ZPWR_REPO_NAME" ]]; then
         mkdir -p "/tmp/$ZPWR_REPO_NAME"
     fi
-    export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
+    export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-$USER"
+    export ZPWR_TEMPFILE1="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
     export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
+    export ZPWR_TEMPFILE3="/tmp/$ZPWR_REPO_NAME/.temp$$-3$USER"
+    export ZPWR_TEMPFILE4="/tmp/$ZPWR_REPO_NAME/.temp$$-4$USER"
     export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
 else
     if [[ ! -d "$TMPDIR/$ZPWR_REPO_NAME" ]]; then
         mkdir -p "$TMPDIR/$ZPWR_REPO_NAME"
     fi
-    export ZPWR_TEMPFILE="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-1$USER"
+    export ZPWR_TEMPFILE="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-$USER"
+    export ZPWR_TEMPFILE1="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-1$USER"
     export ZPWR_TEMPFILE2="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER"
+    export ZPWR_TEMPFILE3="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-3$USER"
+    export ZPWR_TEMPFILE4="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-4$USER"
     export ZPWR_TEMPFILE_SQL="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
 fi
 
