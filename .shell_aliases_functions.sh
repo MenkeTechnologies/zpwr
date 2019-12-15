@@ -90,13 +90,6 @@ export ZPWR_REPO_NAME="zpwr"
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
 export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
 export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
-if [[ ! -d "/tmp/$ZPWR_REPO_NAME" ]]; then
-    mkdir -p "/tmp/$ZPWR_REPO_NAME"
-fi
-export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
-export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
-export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
-
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
 export SCRIPTS="$HOME/Documents/shellScripts"
