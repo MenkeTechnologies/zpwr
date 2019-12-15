@@ -122,7 +122,6 @@ export RESET="\x1b[0m"
 export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
 export LESS="-M -N -R -K -F -X"
-export PSQL_EDITOR='vim -c "setf sql"'
 if [[ -z "$TMUX" ]]; then
     export TERM="xterm-256color"
 fi
@@ -176,13 +175,35 @@ echo "$PATH" | command grep -iq shellScripts || {
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
         if [[ $ZPWR_USE_NEOVIM == true ]]; then
-            exists nvim && export EDITOR='nvim' || export EDITOR='vim'
+            if exists nvim; then
+                export EDITOR='nvim'
+                export PSQL_EDITOR='nvim -c "setf sql"'
+            else
+                export EDITOR='vim'
+                export PSQL_EDITOR='vim -c "setf sql"'
+            fi
         else
-            exists mvim && export EDITOR='mvim' || export EDITOR='vim'
+            if exists mvim; then
+                export EDITOR='mvim'
+                export PSQL_EDITOR='mvim -v -c "setf sql"'
+            else
+                export EDITOR='vim'
+                export PSQL_EDITOR='vim -c "setf sql"'
+            fi
         fi
     else
+            say $ZPWR_OS_TYPE
         if [[ $ZPWR_USE_NEOVIM == true ]]; then
-            exists nvim && export EDITOR='nvim' || export EDITOR='vim'
+            if exists nvim; then
+                export EDITOR='nvim'
+                export PSQL_EDITOR='nvim -c "setf sql"'
+            else
+                export EDITOR='vim'
+                export PSQL_EDITOR='vim -c "setf sql"'
+            fi
+        else
+            export EDITOR='vim'
+            export PSQL_EDITOR='vim -c "setf sql"'
         fi
     fi
 #**************************************************************
