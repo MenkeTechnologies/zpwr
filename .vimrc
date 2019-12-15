@@ -773,6 +773,8 @@ noremap <expr> l repmo#SelfKey('l', 'h')|sunmap l
 map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
+" similar to complete current statement in many IDEs
+" where the keybindings moves caret to next line adding semicolon as needed
 function CompleteStatement()
     let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js', 'rs']
     let doubleSemiColon=['ml']
@@ -922,8 +924,11 @@ autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<
 "reassign readline plugin mapping
 autocmd VimEnter * nunmap S
 
+" exec visual selection from scrathc
 vnoremap <silent> <C-E><C-F> <ESC>:call TmuxRepeat("visual")<CR>gv
+" exec visual selection by pasting into REPL
 vnoremap <silent> <C-E><C-E> <ESC>:call TmuxRepeat("repl")<CR>gv
+" exec file from scratch
 nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat("file")<CR>
 
 "vnoremap <silent> y y`>
@@ -1056,12 +1061,12 @@ endfun
 
 autocmd FilterWritePre * call SetDiffColors()
 
-autocmd BufNewFile *.sh silent! exe "!templater.sh %:p" | e
-autocmd BufNewFile *.zsh silent! exe "!templater.sh %:p" | e
-autocmd BufNewFile *.rb silent! exe "!templater.sh %:p" | e
-autocmd BufNewFile *.py silent! exe "!templater.sh %:p" | e
-autocmd BufNewFile *.pl silent! exe "!templater.sh %:p" | e
-autocmd BufNewFile * exe "normal! G" | startinsert!
+autocmd BufNewFile *.sh silent! exe '!templater.sh %:p' | e
+autocmd BufNewFile *.zsh silent! exe '!templater.sh %:p' | e
+autocmd BufNewFile *.rb silent! exe '!templater.sh %:p' | e
+autocmd BufNewFile *.py silent! exe '!templater.sh %:p' | e
+autocmd BufNewFile *.pl silent! exe '!templater.sh %:p' | e
+autocmd BufNewFile * exe 'normal! G' | startinsert!
 
 "}}}***********************************************************
 
@@ -1074,7 +1079,7 @@ filetype plugin indent on
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "powerline-status pip package installs to different locations of different OS
-let os = substitute(system('uname'), "\n", "", "")
+let os = substitute(system('uname'), '\n', '', '')
 
 if os == 'Darwin'
     "if has('python3')
@@ -1091,20 +1096,20 @@ if os == 'Darwin'
     map <ESC>[1;5B <C-Down>
     map <ESC>[1;5C <C-Right>
     map <ESC>[1;5D <C-Left>
-elseif os == "Linux"
-    let distro = substitute(system('grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \"'), "\n", "", "")
+elseif os == 'Linux'
+    let distro = substitute(system('grep "^ID=" /etc/os-release | cut -d= -f2 | tr -d \"'), '\n', '', '')
 
-    if distro == "ubuntu"
+    if distro == 'ubuntu'
         map <ESC>[A <C-Up>
         map <ESC>[B <C-Down>
         map <ESC>[C <C-Right>
         map <ESC>[D <C-Left>
-    elseif distro == "raspbian"
+    elseif distro == 'raspbian'
         map <ESC>[A <C-Up>
         map <ESC>[B <C-Down>
         map <ESC>[C <C-Right>
         map <ESC>[D <C-Left>
-    elseif distro == "opensuse"
+    elseif distro == 'opensuse'
         map <ESC>[1;5A <C-Up>
         map <ESC>[1;5B <C-Down>
         map <ESC>[1;5C <C-Right>
@@ -1122,8 +1127,8 @@ elseif os == "Linux"
     endif
 
 endif
-if ! has("nvim")
-    set rtp+=~/.tmux/powerline/bindings/vim/
+if ! has('nvim')
+    set runtimepath+=~/.tmux/powerline/bindings/vim/
 endif
 
 "gf and :find will find files automatically in these locations
@@ -1253,21 +1258,24 @@ command! -bang -nargs=* HistoryFiles call fzf#vim#history({'options': fzfStrFina
 "give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': fzfStrFinal}))
 
-
+" complete all files on /
 command! -bang -nargs=* LocateAll call fzf#vim#locate('/', {'options': fzfStrFinal})
 
+" :Imap = shows all insert mode mappings
 command! -bang -nargs=* Imap call fzf#vim#maps('i')
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
+" visual
 xmap <leader><tab> <plug>(fzf-maps-x)
+" operating pending
 omap <leader><tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-d><c-f> <plug>(fzf-complete-path)
+imap <c-d><c-j> <plug>(fzf-complete-file-ag)
 
-" Open pane to left
+" Open pane to left for dictionary completion
 inoremap <expr> <c-x><c-k> fzf#vim#complete#word({'left': '15%'})
 
 inoremap <expr> <c-x><c-l> fzf#vim#complete(fzf#wrap({
@@ -1316,13 +1324,15 @@ if has("nvim")
     autocmd bufenter * call WriteToNVimInfo()
 endif
 
-  if !exists('g:ycm_semantic_triggers')
+if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
-  endif
-  au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+endif
 
-  "disable python2
-  let g:loaded_python_provider = 0
-  let g:vimtex_compiler_progname = 'nvr'
+" enable vimtex completion options in YCM
+au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+
+"disable python2 for neovim
+let g:loaded_python_provider = 0
+let g:vimtex_compiler_progname = 'nvr'
 
 "}}}*****************za******************************************
