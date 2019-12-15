@@ -224,10 +224,10 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$ZPWR_PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
+    echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim' &&
         plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
-    echo "$ZPWR_PARENT_PROCESS" | command egrep -iq 'login|tmux|vim' &&
+    echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim' &&
         plugins+=(tmux)
     plugins+=(systemd)
     distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
@@ -952,7 +952,7 @@ bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
 if [[ "$ZPWR_OS_TYPE" == darwin ]];then
-    if echo "$ZPWR_PARENT_PROCESS" | command egrep -q 'login|tmux'; then
+    if echo "$ZPWR_PARENT_PROCESS" | command grep -q -E 'login|tmux'; then
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
         bindkey '\e[1;5B' updater
@@ -1043,7 +1043,7 @@ my-accept-line () {
                 BUFFER="\\$mywords"
             else
                 #non global alias
-                print "$line" | fgrep "'" && \
+                print "$line" | grep -F "'" && \
                     BUFFER="${line:1:-1} $mywords[2,$]" ||
                     BUFFER="$line $mywords[2,$]"
             fi
@@ -1111,7 +1111,7 @@ bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    if echo "$ZPWR_PARENT_PROCESS" | command egrep -q 'login|tmux'; then
+    if echo "$ZPWR_PARENT_PROCESS" | command grep -q -E 'login|tmux'; then
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
         bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
@@ -1543,13 +1543,13 @@ zstyle ':completion:*' ignored-patterns '*.'
 #{{{                    MARK:Global Aliases
 #**************************************************************
 globalAliasesInit(){
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command egrep -v '\bag\b' |& \\ag --color -i"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command grep -v -E '\bag\b' |& \\ag --color -i"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}e="|& command egrep -v '\begrep\b' |& command egrep --color=always -i"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}e="|& command grep -v -E '\bgrep\b' |& command grep --color=always -i -E"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}l='| less -rMN'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
