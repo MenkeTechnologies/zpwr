@@ -21,7 +21,7 @@
 #{{{                    MARK:Global Fxn
 
 isZsh(){
-    if command ps -p $$ | command grep -q zsh; then
+    if command ps -p $$ | command grep -qs zsh; then
         return 0
     else
         return 1
@@ -33,7 +33,7 @@ if isZsh; then
         #alternative is command -v
         type -- "$1" &>/dev/null || return 1 &&
         type -- "$1" 2>/dev/null |
-        command grep -qv "suffix alias" 2>/dev/null
+        command grep -sqv "suffix alias" 2>/dev/null
     }
 
 else
@@ -128,7 +128,7 @@ fi
 
 #{{{                    MARK:PATH
 #**************************************************************
-echo "$PATH" | command grep -iq shellScripts || {
+echo "$PATH" | command grep -isq shellScripts || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
     export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
 
@@ -291,10 +291,10 @@ alias deleteTab="sed '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper="tr 'a-z' 'A-Z'"
 #over aliases
-if pwd | command grep -q --color=always / 2>/dev/null; then
+if pwd | command grep -sq --color=always / 2>/dev/null; then
     alias grep="grep --color=always"
 fi
-if pwd | command egrep -q --color=always / 2>/dev/null; then
+if pwd | command egrep -sq --color=always / 2>/dev/null; then
     alias egrep="egrep --color=always"
 fi
 alias tree='tree -afC'
@@ -637,7 +637,7 @@ s(){
     else
         cmd="$ZPWR_OPEN_CMD"
     fi
-    if type -a s | command grep -qv function; then
+    if type -a s | command grep -sqv function; then
         sec_cmd=s
     else
         sec_cmd="$ZPWR_OPEN_CMD"
@@ -772,7 +772,7 @@ p(){
     for cmd; do
         prettyPrint "SEARCH TERM: $cmd"
         echo "$out" |
-            command fgrep --color=always -a -i -- "$cmd" ||
+            command grep --color=always -a -i -F -- "$cmd" ||
             echo "Nothing found for $cmd."
         echo
     done
@@ -874,11 +874,11 @@ clearList() {
                         echo
                     else
                         echo "$loc"
-                        echo "$loc" | command grep -q "function" &&
+                        echo "$loc" | command grep -sq "function" &&
                         { type -f \
                         "$(echo "$loc" | awk '{print $1}')" | nl -v 0
                         }
-                        echo "$loc" | command grep -q "alias" &&
+                        echo "$loc" | command grep -sq "alias" &&
                         {
                             alias "$(echo "$loc" | awk '{print $1}')"
                         }
@@ -958,7 +958,7 @@ f(){
         cd "$1"
     else
         test -z "$1" && cd - && return 0
-        echo "$1" | command egrep '\-[0-9]+' && cd "$1" && return 0
+        echo "$1" | command grep -E '\-[0-9]+' && cd "$1" && return 0
         base="$(dirname "$1")"
         while [[ "$base" != / ]]; do
             test -d "$base" && cd "$base"&& return 0
@@ -1017,7 +1017,7 @@ contribCount(){
 }
 
 isBinary() {
-  LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -q '^Binary'
+  LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -sq '^Binary'
 }
 
 totalLines(){
@@ -1031,7 +1031,7 @@ totalLines(){
         isbinary "$REPLY" && continue
         filter=false
         for arg in "$@"; do
-           if echo "$REPLY" | grep -q "$arg"; then
+           if echo "$REPLY" | grep -sq "$arg"; then
                filter=true
                break
            fi
@@ -1125,7 +1125,7 @@ gsdc(){
         fi
     done
 
-	git status | command grep -q "nothing to commit" && {
+	git status | command grep -sq "nothing to commit" && {
         printf "\x1b[0;1;31m"
         printf "Nothing has changed." >&2
         echo
@@ -1221,7 +1221,7 @@ hc(){
 hd(){
     test -n "$1" && repo="$1" && user="$ZPWR_GITHUB_ACCOUNT" || {
 		if line="$(git remote -v 2>/dev/null | sed 1q)";then
-            if echo "$line" | command grep -q 'git@';then
+            if echo "$line" | command grep -sq 'git@';then
                 #ssh
                 user="$(echo $line | awk -F':' '{print $2}' |
                     awk -F'/' '{print $1}')"
@@ -1690,7 +1690,7 @@ digs(){
                     echo "$out"
                 fi
                 echo
-                if echo "$out" | command grep -q 'address';then
+                if echo "$out" | command grep -sq 'address';then
                     #regular domain name
                     ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
                     if [[ ${noproto: -1} == "." ]]; then
@@ -1705,7 +1705,7 @@ digs(){
 
                     primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
                     out="$($exe whois "$primary")"
-                    if echo "$out" | command grep -q 'No match';then
+                    if echo "$out" | command grep -sq 'No match';then
                         prettyPrint "WHOIS: $ip"
                         if [[ -n "$colo" ]]; then
                             $exe whois "$ip" | grcat "$HOME/conf.whois"
@@ -1728,7 +1728,7 @@ digs(){
                     fi
                 else
                     out="$($exe whois "$noproto")"
-                    if echo "$out" | command grep -q 'No match';then
+                    if echo "$out" | command grep -sq 'No match';then
                         prettyPrint "WHOIS: $ip"
                         if [[ -n "$colo" ]]; then
                             $exe whois "$ip" | grcat "$HOME/conf.whois"
@@ -1789,7 +1789,7 @@ digs(){
                 fi
                 echo
                 echo
-                if echo "$out" | command grep -q 'address';then
+                if echo "$out" | command grep -sq 'address';then
                     #regular domain name
                     ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
                     if [[ ${noproto: -1} == "." ]]; then
@@ -1799,7 +1799,7 @@ digs(){
                     $colo $exe dig -x "$ip"
                     primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
                     out="$($exe whois "$primary")"
-                    if echo "$out" | grep -q 'No match';then
+                    if echo "$out" | grep -sq 'No match';then
                         prettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
@@ -1810,7 +1810,7 @@ digs(){
                     fi
                 else
                     out="$($colo $exe whois "$noproto")"
-                    if echo "$out" | grep -q 'No match'; then
+                    if echo "$out" | grep -sq 'No match'; then
                         prettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
@@ -1842,7 +1842,7 @@ digs(){
 to(){
     file="$HOME/.config/powerline/themes/tmux/default.json"
     [[ ! -f "$file" ]] && echo "no tmux config" >&2 && return 1
-    if cat "$file" | grep -q "external_ip"; then
+    if cat "$file" | grep -sq "external_ip"; then
         perl -i -pe 's@^.*external_ip.*$@@' "$file"
         printf "Removing External IP\n"
     else
@@ -1949,14 +1949,14 @@ exists http && ge(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"
-    echo $1 | command grep -q https && proto=https|| proto=http
+    echo $1 | command grep -sq https && proto=https|| proto=http
     shift
 
     if [[ -d "$styles_dir" ]]; then
         declare -a file_ary
         for file in "$styles_dir"/* ; do
             file=${file##*/}
-            echo "$file" | command grep -q -E "init|pycache" ||
+            echo "$file" | command grep -sq -E "init|pycache" ||
                 file_ary+=("${file%.*}")
         done
         len=${#file_ary}
@@ -2119,7 +2119,7 @@ if [[ $ZPWR_LEARN != false ]]; then
                     paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
                 else
                 paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
-                fi | command egrep --color=always -i -- "$2"
+                fi | command grep --color=always -i -E -- "$2"
             fi
             command rm $ZPWR_TEMPFILE $ZPWR_TEMPFILE2
         fi
@@ -2156,7 +2156,7 @@ if [[ $ZPWR_LEARN != false ]]; then
                     paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
                 else
                 paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@$1 $2@g'
-                fi | command egrep --color=always -i -- "$2"
+                fi | command grep --color=always -i -E -- "$2"
             fi
             command rm $ZPWR_TEMPFILE $ZPWR_TEMPFILE2
         fi
