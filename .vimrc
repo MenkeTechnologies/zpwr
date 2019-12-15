@@ -931,10 +931,12 @@ nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat("file")<CR>
 vnoremap Y y`>j
 nnoremap Y yy`>
 
+" leading and trailing whitespace
 function! Strip(input_string)
     return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
 endfunction
 
+" copy current file:lineno line to system clipboard
 function! GetRef()
     let mystr = Strip(getline('.'))
     echom 'Copied ' . mystr
