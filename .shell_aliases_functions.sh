@@ -185,7 +185,6 @@ echo "$PATH" | command grep -isq shellScripts || {
             fi
         fi
     else
-            say $ZPWR_OS_TYPE
         if [[ $ZPWR_USE_NEOVIM == true ]]; then
             if exists nvim; then
                 export EDITOR='nvim'
