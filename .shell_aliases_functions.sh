@@ -42,38 +42,49 @@ else
         type -- "$1" >/dev/null 2>&1
     }
 fi
-
-if [[ -z "$ZPWR_OS_TYPE" ]]; then
-    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
-
-fi
-#}}}***********************************************************
-
-#{{{                    MARK:Env Vars
+#{{{                    MARK:ZPWR ENV VARS
 #**************************************************************
+test -z "$ZPWR_OS_TYPE" && export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+test -z "$ZPWR_DELIMITER_CHAR" && export ZPWR_DELIMITER_CHAR='%'
+test -z "$ZPWR_GITHUB_ACCOUNT" && export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+test -z "$ZPWR_GITHUB_URL" && export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
+test -z "$ZPWR_REPO_NAME" && export ZPWR_REPO_NAME="zpwr"
+test -z "$ZPWR_COMPLETION_DIR" && export ZPWR_COMPLETION_DIR="zsh-more-completions"
+test -z "$ZPWR_VIM_KEYBINDINGS" && export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
+test -z "$ZPWR_ALL_KEYBINDINGS" && export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
+test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
+test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
+test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
+test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
+
 #tmux prefix on outer session
 if [[ ! -d "$TMPDIR" ]]; then
     if [[ ! -d "/tmp/$ZPWR_REPO_NAME" ]]; then
         mkdir -p "/tmp/$ZPWR_REPO_NAME"
     fi
-    export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-$USER"
-    export ZPWR_TEMPFILE1="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
-    export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
-    export ZPWR_TEMPFILE3="/tmp/$ZPWR_REPO_NAME/.temp$$-3$USER"
-    export ZPWR_TEMPFILE4="/tmp/$ZPWR_REPO_NAME/.temp$$-4$USER"
-    export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
+    test -z "$ZPWR_TEMPFILE" && export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-$USER"
+    test -z "$ZPWR_TEMPFILE1" && export ZPWR_TEMPFILE1="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
+    test -z "$ZPWR_TEMPFILE2" && export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
+    test -z "$ZPWR_TEMPFILE3" && export ZPWR_TEMPFILE3="/tmp/$ZPWR_REPO_NAME/.temp$$-3$USER"
+    test -z "$ZPWR_TEMPFILE4" && export ZPWR_TEMPFILE4="/tmp/$ZPWR_REPO_NAME/.temp$$-4$USER"
+    test -z "$ZPWR_TEMPFILE_SQL" && export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
 else
     if [[ ! -d "$TMPDIR/$ZPWR_REPO_NAME" ]]; then
         mkdir -p "$TMPDIR/$ZPWR_REPO_NAME"
     fi
-    export ZPWR_TEMPFILE="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-$USER"
-    export ZPWR_TEMPFILE1="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-1$USER"
-    export ZPWR_TEMPFILE2="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER"
-    export ZPWR_TEMPFILE3="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-3$USER"
-    export ZPWR_TEMPFILE4="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-4$USER"
-    export ZPWR_TEMPFILE_SQL="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
+    test -z "$ZPWR_TEMPFILE" && export ZPWR_TEMPFILE="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-$USER"
+    test -z "$ZPWR_TEMPFILE1" && export ZPWR_TEMPFILE1="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-1$USER"
+    test -z "$ZPWR_TEMPFILE2" && export ZPWR_TEMPFILE2="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER"
+    test -z "$ZPWR_TEMPFILE3" && export ZPWR_TEMPFILE3="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-3$USER"
+    test -z "$ZPWR_TEMPFILE4" && export ZPWR_TEMPFILE4="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-4$USER"
+    test -z "$ZPWR_TEMPFILE_SQL" && export ZPWR_TEMPFILE_SQL="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
 fi
+#}}}***********************************************************
 
+#}}}***********************************************************
+
+#{{{                    MARK:Env Vars
+#**************************************************************
 export TMUX_PREFIX=x
 export TMUX_REMOTE_PREFIX=b
 test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
@@ -82,14 +93,6 @@ export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${
 #zsh xtrace
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
-
-export ZPWR_DELIMITER_CHAR='%'
-export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
-export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
-export ZPWR_REPO_NAME="zpwr"
-export ZPWR_COMPLETION_DIR="zsh-more-completions"
-export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
-export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
 export SCRIPTS="$HOME/Documents/shellScripts"
@@ -665,27 +668,22 @@ s(){
 }
 
 logg(){
-    local under quote date msg
-    under='\x1b[0;34m'
-    quote='\x1b[0;35m'
-    date='\x1b[0;37;42m'
-    msg='\x1b[0;37;43m'
 
     if [[ $ZPWR_COLORS == true ]]; then
         if [[ -p /dev/stdin ]]; then
             {
-                printf "\n${under}_____________$date$(date)\x1b[0m${under}____ "
-                printf "_${quote}'$msg"
+                printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
+                printf "_${ZPWR_LOG_QUOTE_COLOR}'$ZPWR_LOG_MSG_COLOR"
                 cat
-                printf "\x1b[0m$quote'${under}_"
+                printf "\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_"
                 printf "\x1b[0m"
                 printf "\n"
             } >> "$LOGFILE"
         else
             test -z "$1" && echo "need arg" >&2 && return 1
             {
-                printf "\n${under}_____________$date$(date)\x1b[0m${under}____ "
-                printf "_$quote'$msg%b\x1b[0m$quote'${under}_" "$*"
+                printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
+                printf "_$ZPWR_LOG_QUOTE_COLOR'$ZPWR_LOG_MSG_COLOR%b\x1b[0m$quote'${ZPWR_LOG_UNDER_COLOR}_" "$*"
                 printf "\x1b[0m"
                 printf "\n"
             } >> "$LOGFILE"
@@ -704,15 +702,18 @@ logg(){
                 printf "\n_____________$(date)____ "
                 printf "_'%s'_ " "$@"
                 printf "\n"
+                
             } >> "$LOGFILE"
         fi
 
+        
     fi
 
 }
 
 xx(){
     local counter cmd DONE
+    
     cmd="$1"
     test -z "$2" && counter=100 || counter="$2"
 
@@ -726,6 +727,7 @@ xx(){
 }
 
 urlSafe(){
+    
     cat | base64 | tr '+/=' '._-'
 }
 
