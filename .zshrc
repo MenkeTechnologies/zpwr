@@ -2525,7 +2525,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                     {
                         out="$(tmux ls 2>&1)"
                         logg "tmux ls = $out"
-                        if [[ $? == 0]]; then
+                        if [[ $? == 0 ]]; then
                             tmux attach
                             logg "attaching to existing"
                         else
