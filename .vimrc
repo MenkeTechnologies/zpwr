@@ -69,11 +69,14 @@ set encoding=utf8
 "jump to matching brace
 set showmatch
 set showmode
+" highlight matches in / and ?
 set hlsearch
 "search performed for each keypress
 set incsearch
+" mouse scroling and clicking
 set mouse=a
-set shiftwidth=4 "indent set to four spaces
+">> and << indent set to four spaces
+set shiftwidth=4 
 set expandtab
 "wrap lines
 set linebreak
@@ -126,7 +129,7 @@ set viminfo='1000,<50,s10,h
 "**************************************************************
 filetype off                  " required
 " set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
@@ -173,14 +176,18 @@ Plugin 'SirVer/ultisnips'
 Plugin 'ervandew/supertab'
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-"Sublime Like Minimap
+" Sublime Like Minimap
 Plugin 'severin-lemaignan/vim-minimap'
 
 Plugin '907th/vim-auto-save'
-let g:auto_save = 1  " enable AutoSave on Vim startup
-let g:auto_save_silent = 1  " do not display the auto-save notification
+" enable AutoSave on Vim startup
+let g:auto_save = 1
+" do not display the auto-save notification
+let g:auto_save_silent = 1
+" when to autosave
 let g:auto_save_events = ["InsertLeave", "TextChanged", "TextChangedI"]
 
+" tab cycles forward through completion
 let g:SuperTabDefaultCompletionType    = '<C-n>'
 let g:SuperTabCrMapping                = 0
 
@@ -190,8 +197,10 @@ let g:UltiSnipsJumpBackwardTrigger     = '<s-tab>'
 
 let g:ycm_key_list_select_completion   = ['<C-n>']
 let g:ycm_key_list_previous_completion = ['<C-p>']
+" show YCM completion after 1 character
 let g:ycm_min_num_of_chars_for_completion = 1
 
+" YCM completion in all files
 let g:ycm_filetype_whitelist = { '*': 1 }
 let g:ycm_filetype_blacklist = { '*': 0}
 
@@ -199,6 +208,7 @@ let g:ycm_server_keep_logfiles = 1
 let g:ycm_server_log_level = 'debug'
 let g:ycm_complete_in_comments=1
 
+" only manual saving of vim sessions
 let g:session_autosave = 'no'
 
 set statusline+=%#warningmsg#
