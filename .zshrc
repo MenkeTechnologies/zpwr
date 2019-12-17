@@ -2517,15 +2517,15 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
 
             command rm "$ZPWR_TEMPFILE"
             if [[ $mobile == "false" ]]; then
-                logg "not mobile"
+                logg "found $key so desktop"
                 num_con="$(command ps -ef |command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
-                logg "num cons is $num_con"
+                logg "num connections: $num_con"
                 if (( $num_con == 1 )); then
                     logg "no tmux clients"
                     {
                         out="$(tmux ls 2>&1)"
                         ret=$?
-                        logg "tmux ls = $out"
+                        logg "tmux ls = ret: $ret, out: $out"
                         if [[ $ret == 0 ]]; then
                             logg "attaching to existing"
                             tmux attach
