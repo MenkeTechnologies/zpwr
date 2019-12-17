@@ -97,6 +97,17 @@ export ZPWR_REPO_NAME="zpwr"
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
 export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
 export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
+export ZPWR_DELIMITER_CHAR='%'
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
+export ZPWR_REPO_NAME="zpwr"
+export ZPWR_COMPLETION_DIR="zsh-more-completions"
+export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
+export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
+export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
+export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
+export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
+export ZPWR_LOG_MSG_COLOR='\x1b[0;36;42m'
 # set to comma separated list of pane numbers
 # to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
