@@ -51,6 +51,7 @@ set ruler
 set autoread
 set ignorecase
 set smartcase
+"tab is 4 spaces
 set tabstop=4
 "snap to nearest tabstop
 set shiftround
@@ -60,6 +61,7 @@ set ttyfast
 "set timeoutlen=300
 "status bar always shown
 set laststatus=2
+"/ and ? wrap around EOF
 set wrapscan
 set t_Co=256
 set backspace=2
@@ -77,33 +79,39 @@ set expandtab
 set linebreak
 "long line soft wrap indicator
 set showbreak=-->
+"show line numbers
 set number
 set backupdir=~/tmp
-set wildmenu "tab completion in command mode cycles through menu
-set wildignorecase "globbing is case insensitive
+"tab completion in command mode cycles through menu
+set wildmenu
+"globbing is case insensitive
+set wildignorecase
+
 set grepprg=ag
 
 "visual selection automatically into system clipboard
 set guioptions+=a
+"font sizee 14 for Hack Nerd Font (powerine symbols)
 set guifont=Hack\ Nerd\ Font:h14
 "start browsing in current dir
 set browsedir=current
 "reduce enter key after message alerts
 set shortmess=aIcFT
 
-"left gutter fold col
+"left gutter fold column
 set foldcolumn=2
 
-"2 lines for :cmd window
+"1 lines for :cmd window
 set cmdheight=1
 
 "including tags in ^N completion
 set complete+=]
 
-"show the leader key when pressed
+"show the leader/prefix/number key when pressed
 set showcmd
-"visual mode automatically copies to system clipboard
+
 if ! has('nvim')
+    "visual mode automatically copies to system clipboard
     set clipboard=autoselect
 endif
 
@@ -215,6 +223,7 @@ let g:netrw_liststyle=3
 
 highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=194 ctermfg=NONE
+
 let g:bookmark_highlight_lines = 0
 
 "let g:slime_target = "tmux"
@@ -257,7 +266,7 @@ noremap <c-l> 4l
 noremap <leader>- 4-
 noremap <leader>= 4+
 
-"reselect after indenting
+"reselect visual mode last region after indenting
 vnoremap < <gv
 vnoremap > >gv
 
@@ -265,6 +274,7 @@ vnoremap > >gv
 vnoremap <C-B> "*y`>
 "copy to tmux clipboard
 vnoremap <silent><leader>b :w !tmux set-buffer "$(cat)"<CR><CR>
+"for when forgot to do sudo vim <file> and file is readonly
 noremap <silent><leader>sudo :w !sudo tee % &>/dev/null<CR><CR><CR>
 
 "indenting and focus line at center of editor
@@ -284,19 +294,21 @@ endfunction
 
 "Transpose Chars Like Emacs
 nnoremap <silent> <C-T> xp
-nnoremap <Leader>g :%s/\<<C-r><C-w>\>//g<Left><Left>
-nnoremap <Leader>r :%s/\<<C-r><C-w>\>/<C-r><C-W>/g<Left><Left>
 
+"Transpose Words Like Emacs
+nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
+inoremap <silent> <C-D><C-T> <C-O>:call TransposeWords()<CR>
+
+"rename word under caret
+nnoremap <Leader>g :%s/\<<C-r><C-w>\>//g<Left><Left>
+"rename word under caret with cursor at end of replacement word
+nnoremap <Leader>r :%s/\<<C-r><C-w>\>/<C-r><C-W>/g<Left><Left>
 
 inoremap <c-t> i<bs><c-o>:silent! undojoin \| normal! xp<cr>
 
 "allow dot to repeat @:
 nnoremap <silent><Plug>RepeatEx @: :call repeat#set("\<Plug>RepeatEx")<CR>
 nmap @: <Plug>RepeatEx
-
-"Transpose Words Like Emacs
-nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
-inoremap <silent> <C-D><C-T> <C-O>:call TransposeWords()<CR>
 
 "move to next word and capitalize
 nnoremap <ESC><C-C> wvU
