@@ -7,7 +7,6 @@ bind-key -T copy-mode-vi y send-keys -X copy-pipe "xclip -i -f -selection primar
 
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "xclip -i -f -selection primary | xclip -i -selection clipboard"
 
-bind-key -T copy-mode-vi m send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh google"
 
 bind-key -T copy-mode-vi s send-keys -X copy-pipe "xclip -i -f -selection primary | xclip -i -selection clipboard" \; run-shell "bash ~/.tmux/google.sh google"
 
