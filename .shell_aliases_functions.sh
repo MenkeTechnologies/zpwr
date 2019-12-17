@@ -52,10 +52,11 @@ test -z "$ZPWR_REPO_NAME" && export ZPWR_REPO_NAME="zpwr"
 test -z "$ZPWR_COMPLETION_DIR" && export ZPWR_COMPLETION_DIR="zsh-more-completions"
 test -z "$ZPWR_VIM_KEYBINDINGS" && export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
 test -z "$ZPWR_ALL_KEYBINDINGS" && export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
-test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
+test -z "$ZPWR_LOG_UNDER_COLOR" && export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
 test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
+
 
 #tmux prefix on outer session
 if [[ ! -d "$TMPDIR" ]]; then
