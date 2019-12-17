@@ -1502,6 +1502,7 @@ zp(){
     fi
 }
 
+# copy over latest configuration files from $ZPWR_REPO_NAME
 copyConf(){
     cp .shell_aliases_functions.sh "$HOME"
     cp .zshrc "$HOME"
@@ -1520,6 +1521,7 @@ copyConf(){
 
 }
 
+# pull down latest configuration files from $ZPWR_REPO_NAME
 getrc(){
     if [[ -z "$1" ]]; then
         branch=master
@@ -2366,7 +2368,6 @@ changeGitEmail(){
         git commit-tree "$@";
     fi' HEAD
 }
-
 
 #}}}***********************************************************
 
