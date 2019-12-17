@@ -2523,12 +2523,12 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                 if (( $num_con == 1 )); then
                     logg "no tmux clients"
                     {
-                        out="$(tmux ls)"
-                        if [[ $? == 0 ]]; then
+                        out="$(tmux ls 2>&1)"
+                        logg "tmux ls = $out"
+                        if [[ $? == 0]]; then
                             tmux attach
                             logg "attaching to existing"
                         else
-                            logg "tmux ls = $out"
                             tmux new-session \; \
                             source-file ~/.tmux/control-window
                             logg "creating new session"
