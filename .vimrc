@@ -57,8 +57,8 @@ set tabstop=4
 set shiftround
 set cindent
 set ttyfast
-"60 ms wait for next key in mappings
-"set timeoutlen=300
+"200 ms wait for next key in mappings
+set timeoutlen=200
 "status bar always shown
 set laststatus=2
 "/ and ? wrap around EOF
@@ -359,9 +359,9 @@ nnoremap <silent> <leader>c :wq!<CR>
 nnoremap <silent> <leader>e :q!<CR>
 nnoremap <silent> <leader>w :w!<CR>
 "vertical split
-nnoremap <silent> <leader>s :vs<CR>
+nnoremap <silent> <leader>v :vsplit<CR>
 "horizontal split
-nnoremap <silent> <leader>h :sp<CR>
+nnoremap <silent> <leader>s :split<CR>
 nnoremap <silent> <leader>t :tabnew<CR>
 
 onoremap <silent> i# ?#<CR>jV/#<CR>kc
@@ -1029,6 +1029,7 @@ nnoremap <silent> <C-D>j :Agg<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 nnoremap <silent> <C-D>m :Map<CR>
+nnoremap <silent> <leader>m :Map<CR>
 nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>o :ALEToggle<CR>
 nnoremap <silent> <C-D>p :call GetRef()<CR>
