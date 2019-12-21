@@ -2283,9 +2283,11 @@ regenAllGitRepos(){
         done < <(sudo find / -name .git -type d -prune 2>/dev/null)
 
     }> "$ZPWR_ALL_GIT_DIRS"
-    #removing system read only mounted dirs on macOS
-    perl -i -pe 's@/Volumes/Data@@' "$ZPWR_ALL_GIT_DIRS"
-    perl -i -pe 's@/System/@/@' "$ZPWR_ALL_GIT_DIRS"
+    # removing system read only mounted dirs on macOS
+    if [[ $ZPWR_OS_TYPE == darwin ]]; then
+        perl -i -pe 's@^/Volumes/Data@@' "$ZPWR_ALL_GIT_DIRS"
+        perl -i -pe 's@^/System/@/@' "$ZPWR_ALL_GIT_DIRS"
+    fi
 }
 
 searchDirtyGitRepos(){
