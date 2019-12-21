@@ -7,12 +7,33 @@
 ##### Notes:
 #}}}***********************************************************
 
+getOpenCommand(){
+    local open_cmd
+
+    case "$ZPWR_OS_TYPE" in
+        darwin*)  open_cmd='open' ;;
+        cygwin*)  open_cmd='cygstart' ;;
+        linux*)
+            if [[ "$(uname -r)" != *icrosoft* ]];then
+                open_cmd='nohup xdg-open'
+            else
+                open_cmd='cmd.exe /c start ""'
+            fi
+            ;;
+        msys*)    open_cmd='start ""' ;;
+        *)        echo "Platform $ZPWR_OS_TYPE not supported"
+            return 1
+            ;;
+    esac
+    echo "$open_cmd"
+
+}
+
 test -z "$LOGFILE" && LOGFILE="$HOME/updaterlog.txt"
 
 exec 1>> "$LOGFILE" 2>&1
 
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
-
 
 if [[ "$1" == "google" ]]; then
     case "$ZPWR_OS_TYPE" in
@@ -60,38 +81,21 @@ else
     esac
 fi
 
-getOpenCommand(){
-    local open_cmd
-
-    case "$ZPWR_OS_TYPE" in
-        darwin*)  open_cmd='open' ;;
-        cygwin*)  open_cmd='cygstart' ;;
-        linux*)
-            if [[ "$(uname -r)" != *icrosoft* ]];then
-                open_cmd='nohup xdg-open'
-            else
-                open_cmd='cmd.exe /c start ""'
-            fi
-            ;;
-        msys*)    open_cmd='start ""' ;;
-        *)        echo "Platform $ZPWR_OS_TYPE not supported"
-            return 1
-            ;;
-    esac
-    echo "$open_cmd"
-
-}
-
 cmd="$(getOpenCommand)"
 
 if [[ "$1" == open ]]; then
+    dir="$(tmux display-message -p -F "#{pane_current_path}" -t0)"
+    echo "pane dir is '$dir'"
     echo "DIRECT open '$cmd' to '$out'"
-    $cmd "$out"
+    if ! $cmd "$out";then
+        echo "failback open '$cmd' to '$dir/$out'"
+        $cmd "$dir/$out"
+    fi
 elif [[ "$1" == google ]];then
     echo "google search '$cmd' to '$out'"
     $cmd "https://google.com/search?q=$out"
 else
-    echo "unsupport subcommand '$1' to '$out'" >&2
+    echo "unsupported subcommand '$1' to '$out'" >&2
 fi
 
 
