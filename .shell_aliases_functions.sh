@@ -63,22 +63,22 @@ if [[ ! -d "$TMPDIR" ]]; then
     if [[ ! -d "/tmp/$ZPWR_REPO_NAME" ]]; then
         mkdir -p "/tmp/$ZPWR_REPO_NAME"
     fi
-    test -z "$ZPWR_TEMPFILE" && export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-$USER"
-    test -z "$ZPWR_TEMPFILE1" && export ZPWR_TEMPFILE1="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
-    test -z "$ZPWR_TEMPFILE2" && export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
-    test -z "$ZPWR_TEMPFILE3" && export ZPWR_TEMPFILE3="/tmp/$ZPWR_REPO_NAME/.temp$$-3$USER"
-    test -z "$ZPWR_TEMPFILE4" && export ZPWR_TEMPFILE4="/tmp/$ZPWR_REPO_NAME/.temp$$-4$USER"
-    test -z "$ZPWR_TEMPFILE_SQL" && export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
+    export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-$USER"
+    export ZPWR_TEMPFILE1="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
+    export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
+    export ZPWR_TEMPFILE3="/tmp/$ZPWR_REPO_NAME/.temp$$-3$USER"
+    export ZPWR_TEMPFILE4="/tmp/$ZPWR_REPO_NAME/.temp$$-4$USER"
+    export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
 else
     if [[ ! -d "$TMPDIR/$ZPWR_REPO_NAME" ]]; then
         mkdir -p "$TMPDIR/$ZPWR_REPO_NAME"
     fi
-    test -z "$ZPWR_TEMPFILE" && export ZPWR_TEMPFILE="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-$USER"
-    test -z "$ZPWR_TEMPFILE1" && export ZPWR_TEMPFILE1="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-1$USER"
-    test -z "$ZPWR_TEMPFILE2" && export ZPWR_TEMPFILE2="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER"
-    test -z "$ZPWR_TEMPFILE3" && export ZPWR_TEMPFILE3="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-3$USER"
-    test -z "$ZPWR_TEMPFILE4" && export ZPWR_TEMPFILE4="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-4$USER"
-    test -z "$ZPWR_TEMPFILE_SQL" && export ZPWR_TEMPFILE_SQL="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
+    export ZPWR_TEMPFILE="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-$USER"
+    export ZPWR_TEMPFILE1="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-1$USER"
+    export ZPWR_TEMPFILE2="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER"
+    export ZPWR_TEMPFILE3="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-3$USER"
+    export ZPWR_TEMPFILE4="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-4$USER"
+    export ZPWR_TEMPFILE_SQL="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
 fi
 #}}}***********************************************************
 
