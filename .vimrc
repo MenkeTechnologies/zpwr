@@ -58,7 +58,7 @@ set shiftround
 set cindent
 set ttyfast
 "200 ms wait for next key in mappings
-set timeoutlen=200
+set timeoutlen=500
 "status bar always shown
 set laststatus=2
 "/ and ? wrap around EOF
