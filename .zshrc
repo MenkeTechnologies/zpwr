@@ -1588,6 +1588,9 @@ globalAliasesInit(){
     alias ${ZPWR_GLOBAL_ALIAS_PREFIX}grp="git reset --soft $ZPWR_TABSTOP && git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push -f origin $ZPWR_TABSTOP"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${ZPWR_TABSTOP}m${ZPWR_TABSTOP}\\x1b[0m"
 
+    alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
+
+
     alias i='if [[ '$ZPWR_TABSTOP' ]];then
         '$ZPWR_TABSTOP'
     fi'

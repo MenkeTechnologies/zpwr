@@ -425,7 +425,7 @@ nnoremap <silent> <C-Up> :<C-U>call GoToNextMarker("{{{",1)<CR>
 
 "{{{                    MARK:Quoting Fxns
 "**************************************************************
-function InsertEOLVar(toInsert, front, back)
+function! InsertEOLVar(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! F".a:front
     exe "normal! i".a:toInsert
@@ -435,7 +435,7 @@ function InsertEOLVar(toInsert, front, back)
     exe "silent! normal! `b"
 endfunction
 
-function InsertEquals(toInsert, front, back)
+function! InsertEquals(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! T".a:front
     exe "normal! i".a:toInsert
@@ -445,7 +445,7 @@ function InsertEquals(toInsert, front, back)
     exe "silent! normal! `b"
 endfunction
 
-function InsertVar(toInsert, front, back)
+function! InsertVar(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! F".a:front
     exe "normal! i".a:toInsert
@@ -453,7 +453,7 @@ function InsertVar(toInsert, front, back)
     exe "normal! i".a:toInsert
     exe "normal! `b"
 endfunction
-function InsertVarPunct(toInsert, front, back)
+function! InsertVarPunct(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! F".a:front
     exe "normal! i".a:toInsert
@@ -462,7 +462,7 @@ function InsertVarPunct(toInsert, front, back)
     exe "normal! `b"
 endfunction
 
-function InsertBackTick(toInsert, front, back)
+function! InsertBackTick(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! f".a:back
     exe "normal! a".a:toInsert
@@ -472,7 +472,7 @@ function InsertBackTick(toInsert, front, back)
     exe "normal! `b"
 endfunction
 
-function InsertMatchingPunct(toInsert, front)
+function! InsertMatchingPunct(toInsert, front)
     exe "normal! lmb"
     exe "normal! F".a:front
     exe "normal! i".a:toInsert
@@ -481,7 +481,7 @@ function InsertMatchingPunct(toInsert, front)
     exe "normal! `b"
 endfunction
 
-function Insert(toInsert, front, back)
+function! Insert(toInsert, front, back)
     exe "normal! lmb"
     exe "normal! f".a:back
     exe "normal! a".a:toInsert
@@ -490,7 +490,7 @@ function Insert(toInsert, front, back)
     exe "normal! `b"
 endfunction
 
-function ReplaceBracket(open,close, openR, closeR)
+function! ReplaceBracket(open,close, openR, closeR)
     exe "normal! mb"
     exe "normal! F".a:open
     exe "normal! hxx"
@@ -501,7 +501,7 @@ function ReplaceBracket(open,close, openR, closeR)
     exe "normal! `b"
 endfunction
 
-function ReplaceBracketToDouble(open,close, openR, closeR)
+function! ReplaceBracketToDouble(open,close, openR, closeR)
     exe "normal! mb"
     exe "normal! F".a:open
     exe "normal! x"
@@ -512,7 +512,7 @@ function ReplaceBracketToDouble(open,close, openR, closeR)
     exe "normal! `bl"
 endfunction
 
-function ReplaceBracketToSingle(open,close, openR, closeR)
+function! ReplaceBracketToSingle(open,close, openR, closeR)
     exe "normal! mb"
     exe "normal! F".a:open
     exe "normal! hxx"
@@ -524,7 +524,7 @@ function ReplaceBracketToSingle(open,close, openR, closeR)
 endfunction
 
 
-function InsertQuoteVisualMode(type)
+function! InsertQuoteVisualMode(type)
     let sym=1
 
     if a:type == "single"
@@ -584,7 +584,7 @@ endfunction
 
 let g:COUNTER=0
 
-function Quoter(type)
+function! Quoter(type)
     let line=getline('.')
     let wordCursor=expand("<cword>")
     let charCursor=nr2char(strgetchar(getline('.')[col('.') - 1:], 0))
@@ -797,7 +797,7 @@ map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
 " similar to complete current statement in many IDEs
 " where the keybindings moves caret to next line adding semicolon as needed
-function CompleteStatement()
+function! CompleteStatement()
     let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js', 'rs']
     let doubleSemiColon=['ml']
     let exeFileType=expand('%:e')
@@ -821,7 +821,7 @@ function CompleteStatement()
     endif
 endfunction
 
-function CompleteStatementNormal()
+function! CompleteStatementNormal()
     let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js', 'rs']
     let doubleSemiColon=['ml']
     let exeFileType=expand('%:e')
@@ -860,7 +860,7 @@ autocmd VimEnter * nnoremap <silent> <NUL> :call CompleteStatementNormal()<CR>
 set pastetoggle=<F9>
 
 " Repeat last command in the next tmux pane.
-function TmuxRepeat(type)
+function! TmuxRepeat(type)
     let supportedTypes=['sh','zsh', 'cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
     let exeFileType=expand('%:e')
     let $VIMHOME = $HOME."/.vim"
@@ -936,7 +936,7 @@ function TmuxRepeat(type)
 
 endfunction
 
-function TmuxRepeatGeneric()
+function! TmuxRepeatGeneric()
     silent! exec "!tmux send-keys -t right C-c ' clear' C-m up up C-m"
     redraw!
     exe 'normal! zz'
@@ -958,7 +958,7 @@ nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat("file")<CR>
 vnoremap Y y`>j
 nnoremap Y yy`>
 
-" leading and trailing whitespace
+" trim leading and trailing whitespace
 function! Strip(input_string)
     return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
 endfunction
