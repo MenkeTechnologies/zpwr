@@ -13,7 +13,6 @@ bind-key -T copy-mode-vi x send-keys -X  copy-pipe "reattach-to-user-namespace p
 
 bind-key -T copy-mode-vi MouseDown3Pane send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.tmux/google.sh google"
 
-
 bind-key -T copy-mode-vi s send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.tmux/google.sh google"
 bind-key -T copy-mode-vi z send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.tmux/google.sh google"
 
