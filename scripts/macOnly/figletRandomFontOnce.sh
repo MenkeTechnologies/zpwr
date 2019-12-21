@@ -16,9 +16,11 @@
 TEXT_TO_DISPLAY="$1"
 FILTER="$2"
 
-for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
-    ary+=($file)
 done
+while read; do
+    ary+=($REPLY)
+done < <(find "$FIGLET_DIR" -iname "*.flf" 2>/dev/null)
+
 
 rangePossibleIndices=${#ary[*]}
 
