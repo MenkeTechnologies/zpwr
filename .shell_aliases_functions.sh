@@ -56,6 +56,8 @@ test -z "$ZPWR_LOG_UNDER_COLOR" && export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
 test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
+test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
+
 
 
 #tmux prefix on outer session
@@ -987,7 +989,10 @@ cd(){
     #builtin is necessary here to distinguish
     #bt function name and builtin cd command
     #don't want to recursively call this function
-    builtin cd "$@" && clearList
+    builtin cd "$@"
+    if [[ $ZPWR_CD_AUTO_LS == true ]]; then
+        clearList
+    fi
 }
 isGitDir(){
     command git rev-parse --git-dir 2> /dev/null 1>&2
