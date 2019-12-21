@@ -2292,10 +2292,14 @@ searchDirtyGitRepos(){
             builtin cd "$REPLY"
             if ! git diff-index --quiet HEAD -- 2>/dev/null;then
                 echo "$REPLY"
+            elif [[ ! -z "$(git ls-files --exclude-standard --others
+)" ]];then
+                echo "$REPLY"
             fi
         done < "$ZPWR_ALL_GIT_DIRS"
     } |
-        fzf --preview 'cd {} && git status -s' |
+        fzf --preview 'printf "\x1b[1;4;37;44m%s\x1b[0m\n" "git -C {} status; git diff --stat -p --color=always HEAD";
+cd {} && git status -s && git diff --stat -p --color=always HEAD' |
         perl -ne 'print "cd $_"'
     }
 
@@ -2312,7 +2316,8 @@ searchAllGitRepos(){
 
     goThere(){
     cat "$ZPWR_ALL_GIT_DIRS" |
-        fzf --preview 'cd {} && git status' |
+        fzf --preview 'printf "\x1b[1;4;37;44m%s\x1b[0m\n" "git -C {} status; git diff --stat -p --color=always HEAD";
+cd {} && git status && git diff --stat -p --color=always HEAD' |
         perl -ne 'print "cd $_"'
 
     }
