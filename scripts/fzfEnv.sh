@@ -41,7 +41,7 @@ file=\$(grep -m1 -a " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$2}")
 echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $LOGFILE
 
 case \$cmdType in
-    command)
+    (command)
         if test -f \$file;then
             if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
                 "$SCRIPTS/clearList.sh" -- \$file| fold -80 | head -500
@@ -59,19 +59,19 @@ esac
 
 {
 case \$cmdType in
-    alias)
+    (alias)
         command grep -m1 -Fa "alias \$file" "${ALL_ENV}Value.txt"
         ;;
-    param)
+    (param)
         command grep -m1 -Fa "export \$file" "${ALL_ENV}Value.txt"
         ;;
-    builtin)
+    (builtin)
         command grep -m1 -Fa "\$file" | grep -F "shell builtin" "${ALL_ENV}Value.txt"
         ;;
-    resword)
+    (resword)
         command grep -m1 -Fa "\$file" | grep -F "reserved word" "${ALL_ENV}Value.txt"
         ;;
-    command)
+    (command)
         if test -f \$file;then
             if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
                 "$SCRIPTS/clearList.sh" -- \$file| fold -80 | head -500
@@ -84,7 +84,7 @@ case \$cmdType in
             "$SCRIPTS/clearList.sh" -- \$file | fold -80
         fi
         ;;
-    func)
+    (func)
         file=\$(echo \$file | sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
         echo "after escaping regex chars file is _\${file}_" >> $LOGFILE
         command grep -m1 -a "^\$file is a shell function" "${ALL_ENV}Value.txt"
