@@ -2275,6 +2275,15 @@ searchGitCommon(){
     eval "$out"
 }
 
+regenAllGitRepos(){
+        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
+    {
+        while read; do
+            dirname $REPLY
+        done < <(sudo find / -name .git -type d -prune 2>/dev/null)
+
+    }> "$ZPWR_ALL_GIT_DIRS"
+}
 
 searchDirtyGitRepos(){
     goThere(){
@@ -2292,20 +2301,14 @@ searchDirtyGitRepos(){
 
     shouldRegen="$1"
     if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
-    {
-        while read; do
-            dirname $REPLY
-        done < <(sudo find / -name .git -type d -prune 2>/dev/null)
-
-    } > "$ZPWR_ALL_GIT_DIRS"
+        regenAllGitRepos
     fi
 
     searchGitCommon
 
 }
 
-regenAllGitRepos(){
+searchAllGitRepos(){
 
     goThere(){
     cat "$ZPWR_ALL_GIT_DIRS" |
@@ -2316,13 +2319,7 @@ regenAllGitRepos(){
 
     shouldRegen="$1"
     if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
-    {
-        while read; do
-            dirname $REPLY
-        done < <(sudo find / -name .git -type d -prune 2>/dev/null)
-
-    }> "$ZPWR_ALL_GIT_DIRS"
+        regenAllGitRepos
     fi
 
     searchGitCommon
