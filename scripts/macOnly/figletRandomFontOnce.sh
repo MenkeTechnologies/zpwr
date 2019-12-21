@@ -16,7 +16,6 @@
 TEXT_TO_DISPLAY="$1"
 FILTER="$2"
 
-done
 while read; do
     ary+=($REPLY)
 done < <(find "$FIGLET_DIR" -iname "*.flf" 2>/dev/null)
