@@ -695,6 +695,7 @@ regenAll(){
     regenAllKeybindingsCache
     regenPowerlineLink
     regenSearchEnv
+    regenAllGitRepos regen
 }
 
 deleteLastWord(){
