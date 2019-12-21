@@ -2269,29 +2269,26 @@ regenAllKeybindingsCache(){
         perl -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
 }
 
-regenAllGitRepos(){
+searchGitCommon(){
+    out="$(goThere)"
+    echo "$out"
+    eval "$out"
+}
 
-    shouldRegen="$1"
-    if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
-    {
-        while read; do
-            dirname $REPLY
-        done < <(sudo find / -name .git -type d -prune)
 
-    } > "$ZPWR_ALL_GIT_DIRS"
-    fi
+searchDirtyGitRepos(){
+    goThere(){
     {
         while read; do
             builtin cd "$REPLY"
-            if ! git diff-index --quiet HEAD --;then
+            if ! git diff-index --quiet HEAD -- 2>/dev/null;then
                 echo "$REPLY"
             fi
         done < "$ZPWR_ALL_GIT_DIRS"
-    } | fzf --preview 'cd {} && git status -s'
-}
-
-searchModifiedGitRepos(){
+    } |
+        fzf --preview 'cd {} && git status -s' |
+        perl -ne 'print "cd $_"'
+    }
 
     shouldRegen="$1"
     if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
@@ -2299,11 +2296,36 @@ searchModifiedGitRepos(){
     {
         while read; do
             dirname $REPLY
-        done < <(sudo find / -name .git -type d -prune)
+        done < <(sudo find / -name .git -type d -prune 2>/dev/null)
+
+    } > "$ZPWR_ALL_GIT_DIRS"
+    fi
+
+    searchGitCommon
+
+}
+
+regenAllGitRepos(){
+
+    goThere(){
+    cat "$ZPWR_ALL_GIT_DIRS" |
+        fzf --preview 'cd {} && git status' |
+        perl -ne 'print "cd $_"'
+
+    }
+
+    shouldRegen="$1"
+    if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
+    {
+        while read; do
+            dirname $REPLY
+        done < <(sudo find / -name .git -type d -prune 2>/dev/null)
 
     }> "$ZPWR_ALL_GIT_DIRS"
     fi
-    cat "$ZPWR_ALL_GIT_DIRS" | fzf --preview 'cd {} && git status -s'
+
+    searchGitCommon
 }
 
 regenPowerlineLink(){
