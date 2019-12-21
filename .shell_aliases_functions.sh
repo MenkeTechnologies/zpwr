@@ -57,6 +57,7 @@ test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
 test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
+export ZPWR_ALL_GIT_DIRS="$HOME/.allGitDirs.txt"
 
 
 
@@ -2268,6 +2269,42 @@ regenAllKeybindingsCache(){
         perl -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
 }
 
+regenAllGitRepos(){
+
+    shouldRegen="$1"
+    if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
+    {
+        while read; do
+            dirname $REPLY
+        done < <(sudo find / -name .git -type d -prune)
+
+    }> "$ZPWR_ALL_KEYBINDINGS"
+    fi
+    {
+        while read; do
+            builtin cd "$REPLY"
+            if ! git diff-index --quiet HEAD --;then
+                echo "$REPLY"
+            fi
+        done < "$ZPWR_ALL_GIT_DIRS"
+    } | fzf --preview 'cd {} && git status -s'
+}
+
+searchModifiedGitRepos(){
+
+    shouldRegen="$1"
+    if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
+    {
+        while read; do
+            dirname $REPLY
+        done < <(sudo find / -name .git -type d -prune)
+
+    }> "$ZPWR_ALL_GIT_DIRS"
+    fi
+    cat "$ZPWR_ALL_GIT_DIRS" | fzf --preview 'cd {} && git status -s'
+}
 
 regenPowerlineLink(){
     dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
@@ -2376,6 +2413,8 @@ changeGitEmail(){
         git commit-tree "$@";
     fi' HEAD
 }
+
+
 
 #}}}***********************************************************
 
