@@ -29,8 +29,7 @@ else
                 whois -- {} | command egrep -q "No (match|whois)" && dig {} || whois -- {};
             else
                 cat ~/.common_aliases | grep -- {}= || set | command grep -a -- {} | command grep -v -- ZSH_EXEC || alias | command grep -a -- {} || { whois -- {} | command egrep -q "No (match|whois)" && dig {} || whois -- {}; }
-            fi
-        }
+            }
     fi
 
 fi
