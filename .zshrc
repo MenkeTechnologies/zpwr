@@ -108,6 +108,8 @@ export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
 export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
+export ZPWR_CD_AUTO_LS=true
+
 # set to comma separated list of pane numbers
 # to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
