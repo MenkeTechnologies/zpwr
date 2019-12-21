@@ -2279,7 +2279,7 @@ regenAllGitRepos(){
             dirname $REPLY
         done < <(sudo find / -name .git -type d -prune)
 
-    }> "$ZPWR_ALL_KEYBINDINGS"
+    } > "$ZPWR_ALL_GIT_DIRS"
     fi
     {
         while read; do
