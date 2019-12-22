@@ -24,6 +24,11 @@ source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 logfile="$INSTALLER_DIR/escaped_logfile.txt"
 logfileCargoYCM="$INSTALLER_DIR/cargoYCM_logfile.txt"
 
+export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
+    mkdir -p $ZPWR_HIDDEN_DIR
+fi
+
 clear
 # replicate stdout and sterr to logfile
 exec > >(tee -a "$logfile")
@@ -256,8 +261,8 @@ showDeps(){
     proceed
 }
 
-files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .shell_aliases_functions.sh \
-    conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .powerlevel9kconfig.sh .my.cnf motd.sh)
+files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell_aliases_functions.sh \
+    conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .zpwr/.powerlevel9kconfig.sh .my.cnf motd.sh)
 dirs=(Documents/shellScripts .config/htop .config/powerline/themes/tmux)
 
 
@@ -672,7 +677,7 @@ vim -c PluginInstall -c qall
 
 prettyPrint "Installing Powerlevel9k"
 git clone https://github.com/MenkeTechnologies/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$HOME"
+cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$ZPWR_HIDDEN_DIR"
 
 prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin

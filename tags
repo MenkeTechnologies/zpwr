@@ -393,7 +393,7 @@ fileToBeExecuted	runner.sh	/^fileToBeExecuted="$1"$/;"	v
 fileToBeExecuted	templater.sh	/^fileToBeExecuted="$1"$/;"	v
 file_is_overwritable	mantozshcomp.py	/^def file_is_overwritable(path):$/;"	f
 files	backupBashConfig.sh	/^files=("$my_home_dir\/.bashrc" "$my_home_dir\/.bash_profile" "$my_home_dir\/.profile" '\/etc\/bashrc' '\/etc\/profile')$/;"	v
-files	install.sh	/^files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .shell_aliases_functions.sh \\$/;"	v
+files	install.sh	/^files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr\/.shell_aliases_functions.sh \\$/;"	v
 filesArray	openAll.sh	/^filesArray=()$/;"	v
 filter	.shell_aliases_functions.sh	/^               filter=true$/;"	v
 filter	.shell_aliases_functions.sh	/^        filter=false$/;"	v
