@@ -1909,11 +1909,11 @@ pre(){
 }
 
 exists pssh && pir(){
-    if ! test -s "$HOME/hosts.txt"; then
-        echo "you need hosts.txt in your homedir" >&2
+    if ! test -s "$ZPWR_HIDDEN_DIR/hosts.txt"; then
+        echo "you need hosts.txt in your $ZPWR_HIDDEN_DIR" >&2
         return 1
     fi
-    pssh --inline-stdout --timeout 90 -h "$HOME"/hosts.txt "$@"
+    pssh --inline-stdout --timeout 90 -h "$ZPWR_HIDDEN_DIR/hosts.txt" "$@"
 }
 
 c(){
