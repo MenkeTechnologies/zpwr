@@ -26,7 +26,7 @@ rangePossibleIndices=${#ary[*]}
 randIndex=$(($RANDOM % $rangePossibleIndices))
 font=${ary[$randIndex]}
 
-echo "$(date) random font is $font" >>"$LOGFILE"
+echo "$(date) random font is $font" >>"$ZPWR_LOGFILE"
 
 if (($# == 0)); then
     cat | figlet -f "$font" | lolcat

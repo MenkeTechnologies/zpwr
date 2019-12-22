@@ -31,7 +31,7 @@ while true; do
     tput civis
     randIndex=$(($RANDOM % $rangePossibleIndices))
     font=${ary[$randIndex]}
-    echo "$(date) random font is $font" >>"$LOGFILE"
+    echo "$(date) random font is $font" >>"$ZPWR_LOGFILE"
     Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
 
     if [[ -n "$FILTER" ]]; then

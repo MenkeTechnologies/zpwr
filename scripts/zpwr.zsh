@@ -55,6 +55,8 @@ case $verb in
         ;;
     figletfonts) cmd="figletfonts" #show all figlet fonts
         ;;
+    home) cmd="cd $ZPWR_HIDDEN_DIR" #go to zpwr ZPWR_HIDDEN_DIR
+        ;;
     hubcreate) cmd="hc" #create remote github repo
         ;;
     hubdelete) cmd="hd" #delete remote github repo

@@ -29,7 +29,7 @@ else
             #pass stdin from fxn directly into mutt as body
             if [[ -p /dev/stdin ]]; then
                 prettyPrint "Texting default recipient..."
-                mutt -s "$1" "$default_recipient@txt.att.net" <&0 2>$LOGFILE
+                mutt -s "$1" "$default_recipient@txt.att.net" <&0 2>$ZPWR_LOGFILE
             else
                 prettyPrint "Need stdin for the body of the message if you want to text to me." >&2
                 exit 1
@@ -42,7 +42,7 @@ else
                 if [[ "$2" == "family" ]]; then
                     for person in "${family_phone_numbers[@]}"; do
                         prettyPrint "${names_from_phone_numbers[$person]} ..."
-                        mutt -s "$1" "$person"@txt.att.net <&0 2>$LOGFILE
+                        mutt -s "$1" "$person"@txt.att.net <&0 2>$ZPWR_LOGFILE
                     done
                 else
                     #loop through indices which are phone numbers of associative array
@@ -50,13 +50,13 @@ else
                         #checking for name in the associative array based on number key
                         if [[ "$2" == ${names_from_phone_numbers[$number]} ]]; then
                             prettyPrint "${names_from_phone_numbers[$number]}..."
-                            mutt -s "$1" "$number@txt.att.net" <&0 2>$LOGFILE
+                            mutt -s "$1" "$number@txt.att.net" <&0 2>$ZPWR_LOGFILE
                             exit 0
                         fi
                         #checking for number in keys of associative array
                         if [[ "$2" == "$number" ]]; then
                             prettyPrint "${names_from_phone_numbers[$number]}..."
-                            mutt -s "$1" "$2"@txt.att.net <&0 2>$LOGFILE
+                            mutt -s "$1" "$2"@txt.att.net <&0 2>$ZPWR_LOGFILE
                             exit 0
                         fi
 
@@ -69,7 +69,7 @@ else
                         else
                             prettyPrint "Texting '$2'..."
                         fi
-                        mutt -s "$1" "$2"@txt.att.net <&0 2>$LOGFILE
+                        mutt -s "$1" "$2"@txt.att.net <&0 2>$ZPWR_LOGFILE
                         exit 0
                     else
                         prettyPrint "Couldn't find name '$2'...Need number..." >&2
@@ -79,7 +79,7 @@ else
             else
                 #no stdin
                 prettyPrint "Texting default recipient..."
-                mutt -s "$1" $default_recipient@txt.att.net <<<"$2" 2>$LOGFILE
+                mutt -s "$1" $default_recipient@txt.att.net <<<"$2" 2>$ZPWR_LOGFILE
             fi
 
         fi
@@ -89,7 +89,7 @@ else
         if [[ "$3" == "family" ]]; then
             for person in ${family_phone_numbers[@]}; do
                 prettyPrint "${names_from_phone_numbers[$person]} ..."
-                mutt -s "$1" "$person@txt.att.net" <<<"$2" 2>$LOGFILE
+                mutt -s "$1" "$person@txt.att.net" <<<"$2" 2>$ZPWR_LOGFILE
             done
         else
             #third arg is phone number
@@ -98,14 +98,14 @@ else
                 #third argument is a string name
                 if [[ "$3" == ${names_from_phone_numbers[$number]} ]]; then
                     prettyPrint "${names_from_phone_numbers[$number]}..."
-                    mutt -s "$1" "$number@txt.att.net" <<<"$2" 2>$LOGFILE
+                    mutt -s "$1" "$number@txt.att.net" <<<"$2" 2>$ZPWR_LOGFILE
                     exit 0
 
                 fi
                 #third argument is a number
                 if [[ "$3" == $number ]]; then
                     prettyPrint "${names_from_phone_numbers[$number]}..."
-                    mutt -s "$1" "$3@txt.att.net" <<<"$2" 2>$LOGFILE
+                    mutt -s "$1" "$3@txt.att.net" <<<"$2" 2>$ZPWR_LOGFILE
                     exit 0
                 fi
             done
@@ -117,7 +117,7 @@ else
                     prettyPrint "Texting $3..."
                 fi
 
-                mutt -s "$1" "$3@txt.att.net" <<<"$2" 2>$LOGFILE
+                mutt -s "$1" "$3@txt.att.net" <<<"$2" 2>$ZPWR_LOGFILE
                 exit 0
             else
                 prettyPrint "Couldn't find name '$3'...Need number..." >&2
