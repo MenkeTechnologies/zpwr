@@ -232,6 +232,7 @@ plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
+
 ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
@@ -2245,6 +2246,7 @@ _ssd(){
     arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and/running/')"')')
     _arguments -s $arguments
 }
+
 _ssu(){
     arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')
     _arguments -s $arguments
@@ -2685,5 +2687,7 @@ logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
 if [[ $ZPWR_PROFILING == true ]]; then
     zprof
 fi
+
+alias z="zshz 2>&1"
 
 #}}}***********************************************************
