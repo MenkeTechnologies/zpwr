@@ -266,7 +266,7 @@ files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell
 dirs=(Documents/shellScripts .config/htop .config/powerline/themes/tmux)
 
 
-backupdir="$HOME/.$USER.rc.bak.$(date +'%m.%d.%Y')"
+backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
 backup(){
     test -d "$backupdir" || mkdir -p "$backupdir"
