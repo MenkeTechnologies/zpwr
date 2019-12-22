@@ -2287,8 +2287,7 @@ regenAllGitRepos(){
     }> "$ZPWR_ALL_GIT_DIRS"
     # removing system read only mounted dirs on macOS
     if [[ $ZPWR_OS_TYPE == darwin ]]; then
-        perl -i -pe 's@^/Volumes/Data@@' "$ZPWR_ALL_GIT_DIRS"
-        perl -i -pe 's@^/System/@/@' "$ZPWR_ALL_GIT_DIRS"
+        perl -i -pe 's@^/System/Volumes/Data@@' "$ZPWR_ALL_GIT_DIRS"
     fi
 }
 
@@ -2296,7 +2295,7 @@ searchDirtyGitRepos(){
     goThere(){
     {
         while read; do
-            builtin cd "$REPLY"
+            builtin cd "$REPLY" 2>/dev/null || continue
             if ! git diff-index --quiet HEAD -- 2>/dev/null;then
                 echo "$REPLY"
             elif [[ ! -z "$(git ls-files --exclude-standard --others 2>/dev/null)" ]];then
@@ -2323,7 +2322,7 @@ searchAllGitRepos(){
     goThere(){
     cat "$ZPWR_ALL_GIT_DIRS" |
         fzf --preview 'printf "\x1b[1;4;37;44m%s\x1b[0m\n" "git -C {} status; git diff --stat -p --color=always HEAD";
-cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/null' |
+builtin cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/null' |
         perl -ne 'print "cd $_"'
 
     }
