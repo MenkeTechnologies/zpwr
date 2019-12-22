@@ -95,8 +95,8 @@ export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
 export ZPWR_REPO_NAME="zpwr"
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
-export ZPWR_VIM_KEYBINDINGS="$HOME/vimKeybindings.txt"
-export ZPWR_ALL_KEYBINDINGS="$HOME/keybindings.txt"
+export ZPWR_VIM_KEYBINDINGS="$ZPWR_HIDDEN_DIR/vimKeybindings.txt"
+export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR/keybindings.txt"
 export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
@@ -109,6 +109,7 @@ export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 export ZPWR_CD_AUTO_LS=true
+export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
 
 # set to comma separated list of pane numbers
 # to activate sending to tmux pane of this number
@@ -684,11 +685,9 @@ regenZshCompCache(){
     compinit -u
 }
 
-export ALL_ENV="$HOME/allEnv"
-
 regenSearchEnv(){
-    prettyPrint "regenerating all env into ${ALL_ENV}{Key,Value}.txt"
-    source "$SCRIPTS/zshRegenSearchableEnv.zsh" "$ALL_ENV"
+    prettyPrint "regenerating all env into ${ZPWR_ENV}{Key,Value}.txt"
+    source "$SCRIPTS/zshRegenSearchableEnv.zsh" "$ZPWR_ENV"
 }
 
 regenAll(){
@@ -2688,6 +2687,7 @@ if [[ $ZPWR_PROFILING == true ]]; then
     zprof
 fi
 
+#force alias z to zshz not zypper on suse
 alias z="zshz 2>&1"
 
 #}}}***********************************************************
