@@ -66,17 +66,17 @@ clearList() {
                     lf="$(echo $loc|cut -d' ' -f3-10)"
                     if [[ -f "$lf" ]]; then
                         prettyPrint "$lf" && \
-                        eval "$ls_command" $lf \
+                        eval "$ls_command" -- $lf \
                         && prettyPrint "FILE TYPE:" && \
-                        eval "file $lf" && \
+                        eval "file -- $lf" && \
                         prettyPrint "DEPENDENT ON:" && \
-                        eval "$lib_command $lf"
+                        eval "$lib_command -- $lf"
                         prettyPrint "SIZE:"
-                        du -sh "$lf"
+                        du -sh -- "$lf"
                         prettyPrint "STATS:"
-                        stat "$lf"
+                        stat -- "$lf"
                         prettyPrint "MAN:"
-                        man -wa "$(basename $lf)" 2>/dev/null
+                        man -wa "$(basename -- $lf)" 2>/dev/null
                         echo
                         echo
                     else
@@ -84,29 +84,29 @@ clearList() {
                         echo "$loc" | command grep -q \
                             "function" && {
                             type -f "$(echo "$loc" | \
-                            awk '{print $1}')" | nl -v 0
+                            awk '{print $1}')" 2>/dev/null | nl -v 0
                         }
                         echo "$loc" | command grep -q \
                             "alias" && {
-                            alias "$(echo "$loc" \
+                            alias -- "$(echo "$loc" \
                             | awk '{print $1}')"
                         }
                         echo
                         echo
                     fi
-                done < <(type -a "$arg" | sort | uniq)
+                done < <(type -a "$arg" 2>/dev/null | sort | uniq)
             else
                 #path matching, not exe
                 prettyPrint "$arg"
-                eval "$ls_command -d \"$arg\"" \
+                eval "$ls_command -d -- \"$arg\"" \
                         || { echo; continue; }
                 echo
                 prettyPrint "FILE TYPE:"
-                file "$arg"
+                file -- "$arg"
                 prettyPrint "SIZE:"
-                du -sh "$arg"
+                du -sh -- "$arg"
                 prettyPrint "STATS:"
-                stat "$arg"
+                stat -- "$arg"
                 #for readibility
                 echo
                 echo
