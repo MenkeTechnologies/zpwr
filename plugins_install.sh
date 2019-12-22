@@ -2,6 +2,10 @@ source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 
 INSTALLER_DIR="$(pwd -P)"
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
+    mkdir -p $ZPWR_HIDDEN_DIR
+fi
 
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
@@ -78,7 +82,7 @@ builtin cd "$INSTALLER_DIR"
 prettyPrint "Installing Tmux plugins"
 . "$INSTALLER_DIR/tmux_plugins_install.sh"
 
-[[ ! -f "$HOME/.token.sh" ]] && touch "$HOME/.tokens.sh"
+[[ ! -f "$ZPWR_HIDDEN_DIR/.tokens.sh" ]] && touch "$ZPWR_HIDDEN_DIR/.tokens.sh"
 
 prettyPrint "HushLogin to $HOME"
 [[ ! -f "$HOME/.hushlogin" ]] && touch "$HOME/.hushlogin"
@@ -120,5 +124,5 @@ fi
 
 #add aliases and functions
 prettyPrint "Adding common shell aliases for Bash and Zsh"
-cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$HOME"
+cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$ZPWR_HIDDEN_DIR"
 
