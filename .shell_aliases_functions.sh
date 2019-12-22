@@ -58,9 +58,13 @@ test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
 test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
 export ZPWR_ALL_GIT_DIRS="$ZPWR_HIDDEN_DIR/zpwrGitDirs.txt"
+export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/updaterlog.txt"
 
-
-
+if [[ $ZPWR_EXA_EXTENDED == true ]]; then
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
+else
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
+fi
 #tmux prefix on outer session
 if [[ ! -d "$TMPDIR" ]]; then
     if [[ ! -d "/tmp/$ZPWR_REPO_NAME" ]]; then
@@ -119,16 +123,10 @@ export HISTTIMEFORMAT=' %F %T _ '
 export BLUE="\x1b[37;44m"
 export RED="\x1b[31m"
 export RESET="\x1b[0m"
-export LOGFILE="$HOME/updaterlog.txt"
 export UMASK=077
 export LESS="-M -N -R -K -F -X"
 if [[ -z "$TMUX" ]]; then
     export TERM="xterm-256color"
-fi
-if [[ $ZPWR_EXA_EXTENDED == true ]]; then
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
-else
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
 fi
 
 #}}}***********************************************************
@@ -244,7 +242,7 @@ exists c.pl && {
 alias dirs='dirs -v'
 exists proxychains && alias pc='proxychains'
 exists proxychains4 && alias pc='proxychains'
-alias lo="tail -n 1000 -F $LOGFILE"
+alias lo="tail -n 1000 -F $ZPWR_LOGFILE"
 alias va='cd /var'
 exists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
 alias cpan='rlwrap cpan'
@@ -682,7 +680,7 @@ logg(){
                 printf "\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_"
                 printf "\x1b[0m"
                 printf "\n"
-            } >> "$LOGFILE"
+            } >> "$ZPWR_LOGFILE"
         else
             test -z "$1" && echo "need arg" >&2 && return 1
             {
@@ -690,7 +688,7 @@ logg(){
                 printf "_$ZPWR_LOG_QUOTE_COLOR'$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_" "$*"
                 printf "\x1b[0m"
                 printf "\n"
-            } >> "$LOGFILE"
+            } >> "$ZPWR_LOGFILE"
         fi
     else
 
@@ -699,7 +697,7 @@ logg(){
                 printf "\n_____________$(date)____ _'"
                 cat
                 printf "'_ \n"
-            } >> "$LOGFILE"
+            } >> "$ZPWR_LOGFILE"
         else
             test -z "$1" && echo "need arg" >&2 && return 1
             {
@@ -707,7 +705,7 @@ logg(){
                 printf "_'%s'_ " "$@"
                 printf "\n"
                 
-            } >> "$LOGFILE"
+            } >> "$ZPWR_LOGFILE"
         fi
 
         
@@ -1515,14 +1513,14 @@ zp(){
 
 # copy over latest configuration files from $ZPWR_REPO_NAME
 copyConf(){
-    cp .shell_aliases_functions.sh "$HOME"
+    cp .shell_aliases_functions.sh "$HOME/.zpwr"
     cp .zshrc "$HOME"
     cp .vimrc "$HOME"
     cp .minvimrc "$HOME"
     cp .tmux.conf "$HOME"
     cp conf.gls "$HOME"
     cp conf.df "$HOME"
-    cp .powerlevel9kconfig.sh "$HOME"
+    cp .powerlevel9kconfig.sh "$HOME/.zpwr"
     cp conf.ifconfig "$HOME"
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
@@ -2079,15 +2077,15 @@ if [[ $ZPWR_LEARN != false ]]; then
         if [[ -n "$2" ]]; then
             category="$2"
         fi
-        echo "insert into $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$learning""', now())" | mysql 2>> "$LOGFILE"
+        echo "insert into $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME (category, learning, dateAdded) values ('"$category"', '""$learning""', now())" | mysql 2>> "$ZPWR_LOGFILE"
     }
 
 
     seee(){
         if test -z "$1"; then
-            echo "select id, dateAdded,learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n
+            echo "select id, dateAdded,learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> $ZPWR_LOGFILE | cat -n
         else
-            echo "select id, dateAdded, learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> $LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
+            echo "select id, dateAdded, learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> $ZPWR_LOGFILE | cat -n | perl -lanE 'print "$F[0])\t@F[1..$#F]" if (grep /'"$1"'/i, "@F[1..$#F]")' | ag -i -- "$1"
         fi
     }
 
@@ -2108,10 +2106,10 @@ if [[ $ZPWR_LEARN != false ]]; then
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
                 echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
-                    mysql 2>> $LOGFILE | nl -b a -n rn -s ' <<)(>> '| perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
+                    mysql 2>> $ZPWR_LOGFILE | nl -b a -n rn -s ' <<)(>> '| perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
             else
                 echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME" |
-                mysql 2>> $LOGFILE | nl -b a -n rn -s ' <<)(>> '
+                mysql 2>> $ZPWR_LOGFILE | nl -b a -n rn -s ' <<)(>> '
             fi
 
         else
@@ -2119,7 +2117,7 @@ if [[ $ZPWR_LEARN != false ]]; then
             # escaping for perl $ and @ sigils
             argdollar=${arg//$/\\$}
             arg=${argdollar//@/\\@}
-            echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz -s ' <<)(>> '| perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+            echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> "$ZPWR_LOGFILE" | nl -b a -n rz -s ' <<)(>> '| perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
             if [[ -z "$2" ]]; then
                 if [[ "$ZPWR_COLORS" = true ]]; then
                     paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
@@ -2145,10 +2143,10 @@ if [[ $ZPWR_LEARN != false ]]; then
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
                 echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
-            mysql 2>> $LOGFILE | nl -b a -n rn | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
+            mysql 2>> $ZPWR_LOGFILE | nl -b a -n rn | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
             else
                 echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME" |
-                mysql 2>> $LOGFILE | nl -b a -n rn
+                mysql 2>> $ZPWR_LOGFILE | nl -b a -n rn
             fi
 
         else
@@ -2156,7 +2154,7 @@ if [[ $ZPWR_LEARN != false ]]; then
             # escaping for perl $ and @ sigils
             argdollar=${arg//$/\\$}
             arg=${argdollar//@/\\@}
-            echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+            echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> "$ZPWR_LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
             if [[ -z "$2" ]]; then
                 if [[ "$ZPWR_COLORS" = true ]]; then
                     paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'

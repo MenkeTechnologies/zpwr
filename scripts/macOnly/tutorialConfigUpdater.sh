@@ -31,7 +31,7 @@ cp "$HOME/.vimrc" "$installerDir"
 cp "$HOME/.minvimrc" "$installerDir"
 cp "$HOME/.tmux.conf" "$installerDir"
 cp -R "$HOME/.tmux/"* "$installerDir/.tmux" 2>/dev/null
-cp "$HOME/.shell_aliases_functions.sh" "$installerDir"
+cp "$HOME/.zpwr/.shell_aliases_functions.sh" "$installerDir"
 cp "$HOME/.zshrc" "$installerDir"
 cp "$HOME/conf.gls" "$installerDir"
 cp "$HOME/conf.df" "$installerDir"
@@ -40,7 +40,7 @@ cp "$HOME/conf.whois" "$installerDir"
 cp "$HOME/.ideavimrc" "$installerDir"
 cp "$HOME/.inputrc" "$installerDir"
 cp "$HOME/grc.zsh" "$installerDir"
-cp "$HOME/.powerlevel9kconfig.sh" "$installerDir"
+cp "$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh" "$installerDir"
 cp "$HOME/.gitignore_global" "$installerDir"
 cp -R "$HOME/.vim/Ultisnips" "$installerDir"
 
@@ -72,7 +72,7 @@ cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$HOME/.tmux/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
 prettyPrint "Copying shell_aliases_functions"
-cp "$HOME/.shell_aliases_functions.sh" "$tutorialDir/aliases"
+cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$tutorialDir/aliases"
 
 prettyPrint "Copying shellScripts"
 #clear out old scripts, dbl quotes escape asterisk
@@ -103,7 +103,7 @@ cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
 prettyPrint "Copying powerlevel config"
-cp "$HOME/.powerlevel9kconfig.sh" "$tutorialDir"
+cp "$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh" "$tutorialDir"
 
 #prettyPrint "Copying vim plugins"
 
@@ -145,12 +145,12 @@ dotdir="$websiteDir/downloads/dotfiles"
 prettyPrint "Copying config files to websiteDir"
 cp "$HOME/.vimrc" "$dotdir/.."
 cp "$HOME/.tmux.conf" "$dotdir/.."
-cp "$HOME/.shell_aliases_functions.sh" "$dotdir/.."
+cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$dotdir/.."
 cp "$HOME/.zshrc" "$dotdir/.."
 
 cp "$HOME/.vimrc" "$dotdir"
 cp "$HOME/.tmux.conf" "$dotdir"
-cp "$HOME/.shell_aliases_functions.sh" "$dotdir"
+cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$dotdir"
 cp "$HOME/.zshrc" "$dotdir"
 
 prettyPrint "Copying scripts to $websiteDir"

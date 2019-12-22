@@ -69,7 +69,7 @@ startTimestamp=$(date +%s)
 #**************************************************************
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
-# override in ~/.token.sh
+# override in ~/.zpwr/.tokens.sh
 # see README.md
 export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
@@ -110,7 +110,7 @@ export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 export ZPWR_CD_AUTO_LS=true
 export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
-
+export ZPWR_PROMPT_FILE="$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh"
 # set to comma separated list of pane numbers
 # to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
@@ -131,14 +131,14 @@ if [[ $ZPWR_PROFILING == true ]]; then
     zmodload zsh/zprof
 fi
 
-[[ -f "$HOME/.tokens.sh" ]] && source "$HOME/.tokens.sh"
+[[ -f "$ZPWR_HIDDEN_DIR/.tokens.sh" ]] && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
 
 [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
 source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
 
 if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
-    if test -s "$HOME/.powerlevel9kconfig.sh";then
-        source "$HOME/.powerlevel9kconfig.sh"
+    if test -s "$ZPWR_PROMPT_FILE";then
+        source "$ZPWR_PROMPT_FILE"
     else
         ZSH_THEME=simonoff
     fi
@@ -282,7 +282,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 #has all aliases and functions common to bourne like shells
-_alias_file="$HOME/.shell_aliases_functions.sh"
+_alias_file="$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$HOME/.common_aliases"
 
@@ -319,7 +319,7 @@ updater (){
     zle .kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
-    BUFFER="( cat $SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $EMAIL 2>$LOGFILE &)"
+    BUFFER="( cat $SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $EMAIL 2>$ZPWR_LOGFILE &)"
     zle .accept-line
 }
 
@@ -331,7 +331,7 @@ tutsUpdate() {
             zle .accept-line
         else
             zle .kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$LOGFILE\" 2>&1 & )"
+            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$ZPWR_LOGFILE\" 2>&1 & )"
             zle .accept-line
         fi
     else
@@ -1559,18 +1559,18 @@ zstyle ':completion:*' ignored-patterns '*.'
 globalAliasesInit(){
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command grep -v -E '\bag\b' |& \\ag --color -i"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$ZPWR_LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}e="|& command grep -v -E '\bgrep\b' |& command grep --color=always -i -E"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}l='| less -rMN'
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}lo='"$LOGFILE"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}lo='"$ZPWR_LOGFILE"'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}n="2> /dev/null"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}nn="> /dev/null 2>&1"
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}o='&>> "$LOGFILE"'
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}oo='&>> "$LOGFILE'"$ZPWR_TABSTOP"'"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}o='&>> "$ZPWR_LOGFILE"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}oo='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'"'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| perl -lanE 'say $ZPWR_TABSTOP'"
     alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="perl -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="perl -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
@@ -2616,7 +2616,7 @@ if [[ $ZPWR_LEARN != false ]]; then
         printf ""> "$ZPWR_TEMPFILE_SQL"
         for num in $@; do
             id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
-            item=$(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
+            item=$(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME where id=$id" | mysql 2>> $ZPWR_LOGFILE | tail -n 1)
             item=${item//\'/\\\'}
 
             echo "update $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME set learning = '$item' where id=$id"
@@ -2630,7 +2630,7 @@ if [[ $ZPWR_LEARN != false ]]; then
         echo > "$ZPWR_TEMPFILE"
         for num in $@; do
             id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
-            item=$(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME where id=$id" | mysql 2>> $LOGFILE | tail -n 1)
+            item=$(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME where id=$id" | mysql 2>> $ZPWR_LOGFILE | tail -n 1)
             item=${item//\'/\\\'\'}
 
             echo "echo 'update $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME set learning = ""''"$item"''"" where id=$id' | mysql"
