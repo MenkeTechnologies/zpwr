@@ -70,7 +70,7 @@ clearList() {
                         && prettyPrint "FILE TYPE:" && \
                         eval "file -- $lf" && \
                         prettyPrint "DEPENDENT ON:" && \
-                        eval "$lib_command -- $lf"
+                        eval "$lib_command $lf"
                         prettyPrint "SIZE:"
                         du -sh -- "$lf"
                         prettyPrint "STATS:"
