@@ -163,7 +163,7 @@ backup	.shell_aliases_functions.sh	/^backup(){$/;"	f
 backup	install.sh	/^backup(){$/;"	f
 backup_dir	duplicateLineDeleter.sh	/^backup_dir=$scripts_dir\/rcBackups$/;"	v
 backup_dir	indenterAndDuplicateLineDeleter.sh	/^backup_dir=$scripts_dir\/rcBackups$/;"	v
-backupdir	install.sh	/^backupdir="$HOME\/.$USER.rc.bak.$(date +'%m.%d.%Y')"$/;"	v
+backupdir	install.sh	/^backupdir="$ZPWR_HIDDEN_DIR\/$USER.rc.bak.$(date +'%m.%d.%Y')"$/;"	v
 banner	about.sh	/^banner() {$/;"	f
 banner	scripts/about.sh	/^banner() {$/;"	f
 base	.shell_aliases_functions.sh	/^            base="$(dirname "$base")"$/;"	v
