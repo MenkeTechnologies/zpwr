@@ -57,7 +57,7 @@ test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
 test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
-export ZPWR_ALL_GIT_DIRS="$HOME/.allGitDirs.txt"
+export ZPWR_ALL_GIT_DIRS="$ZPWR_HIDDEN_DIR/zpwrGitDirs.txt"
 
 
 
@@ -2108,10 +2108,10 @@ if [[ $ZPWR_LEARN != false ]]; then
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
                 echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
-            mysql 2>> $LOGFILE | nl -b a -n rn | perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
+                    mysql 2>> $LOGFILE | nl -b a -n rn -s ' <<)(>> '| perl -pe 's@(\s*)(\d+)\s+(.*)@$1\x1b[35m$2\x1b[0m \x1b[32m$3\x1b[0m@g'
             else
                 echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME" |
-                mysql 2>> $LOGFILE | nl -b a -n rn
+                mysql 2>> $LOGFILE | nl -b a -n rn -s ' <<)(>> '
             fi
 
         else
@@ -2119,7 +2119,7 @@ if [[ $ZPWR_LEARN != false ]]; then
             # escaping for perl $ and @ sigils
             argdollar=${arg//$/\\$}
             arg=${argdollar//@/\\@}
-            echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz | perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
+            echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> "$LOGFILE" | nl -b a -n rz -s ' <<)(>> '| perl -E 'open $fh, ">>", "'$ZPWR_TEMPFILE'"; open $fh2, ">>", "'$ZPWR_TEMPFILE2'";while (<>){my @F = split;if (grep m{'"$arg"'}i, "@F[1..$#F]"){say $fh "$F[0]   "; say $fh2 "@F[1..$#F]";}}';
             if [[ -z "$2" ]]; then
                 if [[ "$ZPWR_COLORS" = true ]]; then
                     paste -- $ZPWR_TEMPFILE <(cat -- $ZPWR_TEMPFILE2 | ag -i --color -- "$1") | perl -pe 's@\s*(\d+)\s+(.*)@\x1b[0;35m$1\x1b[0m \x1b[0;32m$2\x1b[0m@g' | perl -pe 's@\x1b\[0m@\x1b\[0;1;34m@g'
