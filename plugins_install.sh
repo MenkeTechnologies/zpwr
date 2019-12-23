@@ -95,10 +95,10 @@ echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
 prettyPrint "Copying all Shell Scripts to $HOME/Documents"
-[[ ! -d "$HOME/Documents/shellScripts" ]] && mkdir -p "$HOME/Documents/shellScripts"
+[[ ! -d "$HOME/.zpwr/scripts" ]] && mkdir -p "$HOME/.zpwr/scripts"
 
-cp "$INSTALLER_DIR/scripts/"*.{sh,pl,py,zsh} "$HOME/Documents/shellScripts"
-cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/Documents/shellScripts"
+cp "$INSTALLER_DIR/scripts/"*.{sh,pl,py,zsh} "$HOME/.zpwr/scripts"
+cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/.zpwr/scripts"
 
 prettyPrint "Copying grc config files"
 cp "$INSTALLER_DIR/grc.zsh" "$HOME"

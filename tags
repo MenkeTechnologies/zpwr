@@ -298,7 +298,7 @@ dir_watching	watchServiceFSWatchRustCompile.sh	/^dir_watching="$1"$/;"	v
 directory_name	tgzLocalInstaller.sh	/^        directory_name="${1%.tar.gz}"$/;"	v
 directory_name	tgzLocalInstaller.sh	/^        directory_name="${1%.tgz}"$/;"	v
 dirname	.shell_aliases_functions.sh	/^        dirname="$(dirname $file)"$/;"	v
-dirs	install.sh	/^dirs=(Documents\/shellScripts .config\/htop .config\/powerline\/themes\/tmux)$/;"	v
+dirs	install.sh	/^dirs=(.zpwr\/scripts .config\/htop .config\/powerline\/themes\/tmux)$/;"	v
 dirsc	.shell_aliases_functions.sh	/^    dirsc="$SCRIPTS\/$REPO_NAME"$/;"	v
 disable_proxy	macOnly/tor.sh	/^function disable_proxy() {$/;"	f
 displayProgress	batchRename.sh	/^displayProgress() {$/;"	f
