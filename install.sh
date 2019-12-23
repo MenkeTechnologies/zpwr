@@ -263,7 +263,7 @@ showDeps(){
 
 files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell_aliases_functions.sh \
     conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .zpwr/.powerlevel9kconfig.sh .my.cnf motd.sh)
-dirs=(Documents/shellScripts .config/htop .config/powerline/themes/tmux)
+dirs=(.zpwr/scripts .config/htop .config/powerline/themes/tmux)
 
 
 backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
