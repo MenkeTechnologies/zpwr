@@ -84,7 +84,7 @@ fi
 cmd="$(getOpenCommand)"
 
 if [[ "$1" == open ]]; then
-    dir="$(tmux display-message -p -F "#{pane_current_path}" -t0)"
+    dir="$(cat $HOME/.zpwr/.tmux/pane_pwd)"
     echo "pane dir is '$dir'"
     echo "DIRECT open '$cmd' to '$out'"
     if ! $cmd "$out";then
