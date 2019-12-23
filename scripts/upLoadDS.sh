@@ -16,4 +16,4 @@ for i in "$@"; do
 done
 python -c "print('_'*100)" | lolcat
 
-printf "Done\n${RESET}"
+printf "Done\n${ZPWR_RESET}"

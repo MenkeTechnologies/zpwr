@@ -15,4 +15,4 @@ for i in "$@"; do
     #if not using reverse port forwarding then ip address must be hardcoded
     #scp -r "$i" $(whoami)@192.168.0.105:~/"$outputDir"
 done
-printf "Done${RESET}\n"
+printf "Done${ZPWR_RESET}\n"
