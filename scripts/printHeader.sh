@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 if [[ -z "$SCRIPTS" ]]; then
-    SCRIPTS="$HOME/Documents/shellScripts"
+    SCRIPTS="$HOME/.zpwr/scripts"
 fi
 
 perl -X "$SCRIPTS/banner.pl"

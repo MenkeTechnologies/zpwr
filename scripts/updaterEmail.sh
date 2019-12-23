@@ -8,6 +8,6 @@
 #}}}***********************************************************
 
 SCRIPTS="$HOME/Documents/shellScripts"
-ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/updaterlog.txt"
+ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/zpwrLog.txt"
 
 (cat "$SCRIPTS/updater.sh" | bash -l 2>&1 | tee "$ZPWR_LOGFILE" | mutt -s \"Log from $(date)\" jamenk@email.wm.edu 2>"$ZPWR_LOGFILE" &)

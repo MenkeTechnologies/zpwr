@@ -110,7 +110,7 @@ gitRepoUpdater() {
     fi
 }
 
-[[ -z "$SCRIPTS" ]] && SCRIPTS="$HOME/Documents/shellScripts"
+[[ -z "$SCRIPTS" ]] && SCRIPTS="$HOME/.zpwr/scripts"
 
 if [[ $skip != true ]]; then
     if [[ -f "$SCRIPTS/printHeader.sh" ]]; then
