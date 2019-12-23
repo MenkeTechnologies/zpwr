@@ -78,8 +78,12 @@ set shortmess=a
 
 "show the leader
 set showcmd
-"visual mode automatically copies to system clipboard
-set clipboard=autoselect
+
+if ! has('nvim')
+    "visual mode automatically copies to system clipboard
+    set clipboard=autoselect
+endif
+
 
 "show trailing spaces and tabs
 set list listchars=tab:\ \ ,trail:·
