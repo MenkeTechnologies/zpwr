@@ -116,6 +116,7 @@ export ZPWR_CHAR_LOGO="<<)(>>"
 # to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
+export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
 
 #}}}***********************************************************
 
@@ -524,7 +525,6 @@ clearListFZF(){
 fzvim(){
     local file
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        file="$HOME/.nviminfo"
         test -e "$file" || touch "$file"
         perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file" | \
     eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
