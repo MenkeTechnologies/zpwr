@@ -15,5 +15,5 @@ bind -T copy-mode-vi z send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.z
 
 bind -T copy-mode-vi MouseDown3Pane send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.zpwr/.tmux/google.sh google"
 
-bind -T copy-mode-vi x send-keys -X copy-pipe "clip.exe" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell 'tmux display-message -p -F "#{pane_current_path}" > ~/.zpwr/.tmux/pane_pwd' \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh open"
+bind -T copy-mode-vi x send-keys -X copy-pipe "clip.exe" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell 'tmux display-message -p -F "#{pane_current_path}" > ~/.zpwr/.tmux/pane_pwd' \; run-shell "bash ~/.zpwr/.tmux/google.sh open"
 
