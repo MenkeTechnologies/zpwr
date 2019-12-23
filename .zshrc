@@ -115,7 +115,7 @@ export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
 # and the separator for function se()
 export ZPWR_CHAR_LOGO="<<)(>>"
 # set to comma separated list of pane numbers
-# to activate sending to tmux pane of this number
+# to activate sending to tmux pane f this number
 export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
