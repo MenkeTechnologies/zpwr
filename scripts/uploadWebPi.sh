@@ -31,9 +31,9 @@ for i in "$@"; do
     fi
 done
 
-#decolrize prompt with RESET environment variable
+#decolrize prompt with ZPWR_RESET environment variable
 perl -le "print'_'x $w" | lolcat
-printf "$ZPWR_BLUEDone\n${RESET}"
+printf "$ZPWR_BLUEDone\n${ZPWR_RESET}"
 
 #if just uploading to website one html file
 if [[ "$#" == 1 && "$1" =~ .*.html ]]; then
