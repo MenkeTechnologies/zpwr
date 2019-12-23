@@ -109,6 +109,7 @@ export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 export ZPWR_CD_AUTO_LS=true
 export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
 export ZPWR_PROMPT_FILE="$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh"
+export ZPWR_CHAR_LOGO="<<)(>>"
 # set to comma separated list of pane numbers
 # to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
@@ -1521,7 +1522,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:*:last-line' list-colors '=(#b)(*)=1;37;44'
     zstyle ':completion:*:*:last-clip' list-colors '=(#b)(*)=1;37;45'
     #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
-    zstyle ':completion:*' list-separator '<<)(>>'
+    zstyle ':completion:*' list-separator "$ZPWR_CHAR_LOGO"
     COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 
     zstyle -e ':completion:*:local-directories' list-colors "$COMMON_ZSTYLE_OPTS"
