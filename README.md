@@ -123,7 +123,7 @@ Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Contr
 
 ## Install Destination
 
-Most zpwr custom configs will be installed to .zpwr.  Exceptions are ~/.zshrc, ~/.vimrc, ~/.tmux.conf, ~/grc.zsh.
+Most zpwr custom configs will be installed to ~/.zpwr.  This is the ZPWR_HIDDEN_DIR environment var.  Exceptions are ~/.zshrc, ~/.vimrc, ~/.tmux.conf, ~/grc.zsh which are installed to home dir.
 Your old configs for these files will be found in ~/.zpwr/username.rc.bak.date after install.  Exact directory name is generated as shown.
 ```sh
 backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
