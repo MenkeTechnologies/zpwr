@@ -100,7 +100,7 @@ EOF
 # 15) powerline
 # 16) powerline-mem-segment
 
-dependencies_ary=(moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \
+dependencies_ary=(openssl moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \
     screenfetch ccze htop figlet zsh docker.io docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
@@ -124,14 +124,14 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary=(python3-devel llvm llvm-devel ${dependencies_ary[@]})
+    dependencies_ary=(python3-devel llvm llvm-devel openssl-devel ${dependencies_ary[@]})
     dependencies_ary+=(gcc-c++ makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel \
-        mysql-devel libevent-devel postgresql-devel fortune ruby-devel openssl-devel net-tools-deprecated \
+        mysql-devel libevent-devel postgresql-devel fortune ruby-devel net-tools-deprecated \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel)
 }
 
 addDependenciesDebian(){
-    dependencies_ary=(python3-dev ${dependencies_ary[@]})
+    dependencies_ary=(python3-dev libssl-dev ${dependencies_ary[@]})
     dependencies_ary+=(mysql-server gcc bc npm lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs \
     ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
     libxpm-dev libxt-dev \
@@ -144,9 +144,9 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary=(python3-devel clang llvm llvm-devel ${dependencies_ary[@]})
+    dependencies_ary=(python3-devel clang llvm llvm-devel openssl-devel ${dependencies_ary[@]})
     dependencies_ary+=(gcc-c++ 'fortune-mod.*' mariadb-server clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
-        python36-tools ncurses-devel libpcap-devel openssl-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
+        python36-tools ncurses-devel libpcap-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
 }
 
 addDependenciesFreeBSD(){
