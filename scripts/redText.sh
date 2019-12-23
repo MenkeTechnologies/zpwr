@@ -7,10 +7,10 @@
 ##### Notes:
 #}}}***********************************************************
 #escape sequences
-RED='\e[31;1m'
+ZPWR_RED='\e[31;1m'
 RESET='\e[0m'
 
 #loop through stdin and add escape sequences at head and tail of each line
 while read; do
-    echo -e "${RED}$REPLY${RESET}"
+    echo -e "${ZPWR_RED}$REPLY${RESET}"
 done

@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 #escape sequences
-BLUE='\e[37;44m'
+ZPWR_BLUE='\e[37;44m'
 RESET='\e[0m'
 
 #loop through stdin and add escape sequences at head and tail of each line
