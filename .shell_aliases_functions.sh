@@ -44,6 +44,7 @@ else
 fi
 #{{{                    MARK:ZPWR ENV VARS
 #**************************************************************
+test -z "$ZPWR_HIDDEN_DIR" && export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
 test -z "$ZPWR_OS_TYPE" && export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 test -z "$ZPWR_DELIMITER_CHAR" && export ZPWR_DELIMITER_CHAR='%'
 test -z "$ZPWR_GITHUB_ACCOUNT" && export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
@@ -2260,10 +2261,11 @@ needSudo(){
 }
 
 regenAllKeybindingsCache(){
-    prettyPrint "regen all keybindings cache"
+    prettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
     bash "$SCRIPTS/keybindingsToFZFVim.zsh" |
     escapeRemover.pl |
     perl -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"
+
     isZsh && source "$SCRIPTS/keybindingsToFZF.zsh" |
         escapeRemover.pl |
         perl -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
