@@ -58,6 +58,7 @@ test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
 test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
+test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
 export ZPWR_ALL_GIT_DIRS="$ZPWR_HIDDEN_DIR/zpwrGitDirs.txt"
 export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/zpwrLog.txt"
 
@@ -104,7 +105,6 @@ export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
-export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
 source "$ZPWR_SCRIPTS/crossOSCommands.sh"
 export FORKED_DIR="$HOME/forkedRepos"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
