@@ -109,6 +109,8 @@ export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 export ZPWR_CD_AUTO_LS=true
 export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
 export ZPWR_PROMPT_FILE="$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh"
+# this the separator in compsys option completions (ls -<tab>)
+# and the separator for function se()
 export ZPWR_CHAR_LOGO="<<)(>>"
 # set to comma separated list of pane numbers
 # to activate sending to tmux pane of this number
