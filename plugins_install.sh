@@ -79,7 +79,7 @@ if [[ "$distroName" == raspbian ]]; then
 fi
 
 prettyPrint "Installing Custom Tmux Commands"
-cp -R "$INSTALLER_DIR/.tmux" "$HOME"
+cp -R "$INSTALLER_DIR/.tmux" "$ZPWR_HIDDEN_DIR"
 
 builtin cd "$INSTALLER_DIR"
 prettyPrint "Installing Tmux plugins"
