@@ -41,7 +41,7 @@ prettyPrint "Installing .vimrc"
 cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
 prettyPrint "Installing minimal .minvimrc"
-cp "$INSTALLER_DIR/.minvimrc" "$HOME"
+cp "$INSTALLER_DIR/.minvimrc" "$HOME/.zpwr"
 
 prettyPrint "Installing .ideavimrc"
 cp "$INSTALLER_DIR/.ideavimrc" "$HOME"
