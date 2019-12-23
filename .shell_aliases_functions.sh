@@ -95,9 +95,9 @@ fi
 
 #{{{                    MARK:Env Vars
 #**************************************************************
-export TMUX_PREFIX=x
-export TMUX_REMOTE_PREFIX=b
-test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
+export ZPWR_TMUX_PREFIX=x
+export ZPWR_TMUX_REMOTE_PREFIX=b
+test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
 #bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 #zsh xtrace
@@ -109,9 +109,9 @@ source "$ZPWR_SCRIPTS/crossOSCommands.sh"
 export FORKED_DIR="$HOME/forkedRepos"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
-export D="$HOME/Desktop"
-export DOC="$HOME/Documents"
-export DL="$HOME/Downloads"
+export ZPWR_D="$HOME/Desktop"
+export ZPWR_DOC="$HOME/Documents"
+export ZPWR_DL="$HOME/Downloads"
 export XAUTHORITY="$HOME/.Xauthority"
 export TERMINAL_APP="Terminal.app"
 export YARN_HOME="$HOME/.config/yarn"
@@ -121,9 +121,9 @@ export PERL5LIB="$HOME/perl5/lib/perl5"
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
 export HISTSIZE=50000
 export HISTTIMEFORMAT=' %F %T _ '
-export BLUE="\x1b[37;44m"
-export RED="\x1b[31m"
-export RESET="\x1b[0m"
+export ZPWR_BLUE="\x1b[37;44m"
+export ZPWR_RED="\x1b[31m"
+export ZPWR_RESET="\x1b[0m"
 export UMASK=077
 export LESS="-M -N -R -K -F -X"
 if [[ -z "$TMUX" ]]; then
@@ -259,7 +259,7 @@ alias ra='sudo rm -rf'
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
-test -d "$HOME/Desktop" && alias d="cd \$HOME/Desktop"
+test -d "$ZPWR_D" && alias d="cd $ZPWR_D"
 if [[ -d "/var/www/html" ]];then
     alias we="cd /var/www/html"
 elif [[ -d "/usr/local/var/www" ]];then
@@ -327,9 +327,6 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias tip="top -o +command"
     alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
     alias bsaver="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
-    alias n="open $HOME/mnt/ds/JAKENAS/softwareTutorials"
-    alias cps='cd $WCC'
-    alias emu='cd $SD/emu'
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
     #keep remote tty sessions alive by stopping sleep
@@ -455,14 +452,12 @@ alias ct="bash $ZPWR_SCRIPTS/createTextFile.sh"
 alias u="bash $ZPWR_SCRIPTS/upLoadPi.sh"
 alias u2="bash $ZPWR_SCRIPTS/upLoadPi2.sh"
 alias pw="bash $ZPWR_SCRIPTS/uploadWebPi.sh"
-alias ud="bash $ZPWR_SCRIPTS/upLoadDS.sh"
-alias uweb="bash $ZPWR_SCRIPTS/uploadWebDS.sh"
 alias sy="bash $ZPWR_SCRIPTS/sync.sh"
 alias sf="bash $ZPWR_SCRIPTS/directoryContentsSize.sh"
 alias sc='cd $ZPWR_SCRIPTS'
 alias bluef='source $ZPWR_SCRIPTS/blueText.sh'
-alias dl='cd $HOME/Downloads'
-alias docu='cd $HOME/Documents'
+alias dl="cd $ZPWR_DL"
+alias docu="cd $ZPWR_DOC"
 alias mus='cd $HOME/Music'
 alias jobs="jobs -l"
 alias u8="bash $ZPWR_SCRIPTS/updater.sh"

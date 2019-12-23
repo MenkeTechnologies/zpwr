@@ -1805,12 +1805,6 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 #**************************************************************
 #if this is a mac or linux
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
-    if [[ -d "$WCC" ]]; then
-        : ~WCC
-    fi
-    if [[ -d "$SD" ]]; then
-        : ~SD
-    fi
     if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
         : ~HOMEBREW_HOME_FORMULAE
     fi
@@ -1840,8 +1834,8 @@ if [[ -d "$TMUX_HOME" ]]; then
     : ~TMUX_HOME
 fi
 
-if [[ -d "$DOC" ]]; then
-    : ~DOC
+if [[ -d "$ZPWR_DOC" ]]; then
+    : ~ZPWR_DOC
 fi
 
 if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
@@ -1860,12 +1854,12 @@ if [[ -d "$NODE_HOME" ]]; then
     : ~NODE_HOME
 fi
 
-if [[ -d "$D" ]]; then
-    : ~D
+if [[ -d "$ZPWR_D" ]]; then
+    : ~ZPWR_D
 fi
 
-if [[ -d "$DL" ]]; then
-    : ~DL
+if [[ -d "$ZPWR_DL" ]]; then
+    : ~ZPWR_DL
 fi
 
 #}}}***********************************************************

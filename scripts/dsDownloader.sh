@@ -9,7 +9,7 @@
 
 outputDir="Desktop"
 master="jacobmenke"
-printf "${BLUE}Downloading $*\n"
+printf "${ZPWR_BLUE}Downloading $*\n"
 for i in "$@"; do
     scp -P2234 -r "$i" "$master"'@localhost:$HOME/'"$outputDir"
     #if not using reverse port forwarding then ip address must be hardcoded
