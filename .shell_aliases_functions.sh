@@ -357,7 +357,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
             alias v='mvim -v'
             alias vi='mvim -v'
             alias vim='mvim -v'
-            alias vm='mvim -v -u ~/.minvimrc'
+            alias vm="mvim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
             alias sv='sudo mvim -v'
         fi
     }
@@ -366,7 +366,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
             alias v='nvim'
             alias vi='nvim'
             alias vim='nvim'
-            alias vm='nvim -u ~/.minvimrc'
+            alias vm="nvim -u $ZPWR_HIDDEN_DIR/.minvimrc"
             alias sv='sudo -E nvim'
         fi
     }
