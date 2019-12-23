@@ -177,7 +177,7 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 ```
 > ~/.vimrc
 
-File ending of currently edited file in vim determines the interpreter used by the bash script `$SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
+File ending of currently edited file in vim determines the interpreter used by the bash script `$ZPWR_SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
 
 
 ## Tmux Main Window
@@ -257,7 +257,7 @@ export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
 I am always looking for contributors.
 
 ## Warnings
-Moving the scripts from `$SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features
+Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features
 
 # Running on a MacbookPro
 ![Alt text](http://jakobmenke.com/img/tmuxfinal22.png?raw=true)
