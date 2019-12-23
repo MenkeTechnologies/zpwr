@@ -292,7 +292,7 @@ alias -r > "$ZPWR_HIDDEN_DIR/.common_aliases"
 test -z $ZPWR_BANNER && export ZPWR_BANNER=ponies
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
-export ZPWR_DEFAULT_BANNER="bash $SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
+export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
 #}}}***********************************************************
 
@@ -322,7 +322,7 @@ updater (){
     zle .kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
-    BUFFER="( cat $SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $EMAIL 2>$ZPWR_LOGFILE &)"
+    BUFFER="( cat $ZPWR_SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $EMAIL 2>$ZPWR_LOGFILE &)"
     zle .accept-line
 }
 
@@ -566,7 +566,7 @@ fasdFList(){
 }
 
 fm(){
-   FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfMan.sh" "$1")'"
+   FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfMan.sh" "$1")'"
     man "$1" | col -b | eval "fzf --no-sort -m $FZF_MAN_OPTS"
 }
 
@@ -690,7 +690,7 @@ regenZshCompCache(){
 
 regenSearchEnv(){
     prettyPrint "regenerating all env into ${ZPWR_ENV}{Key,Value}.txt"
-    source "$SCRIPTS/zshRegenSearchableEnv.zsh" "$ZPWR_ENV"
+    source "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh" "$ZPWR_ENV"
 }
 
 regenAll(){
@@ -1000,7 +1000,7 @@ bindkey '^I' expand-or-complete-with-dots
 
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
-#exec 2> >("$SCRIPTS"/redText.sh)
+#exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
 
 my-accept-line () {
 
@@ -1704,12 +1704,12 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     if [[ "$UID" != "0" ]]; then
          #builtin cd "$D" && clear
         clear
-        fig="$SCRIPTS/macOnly/figletRandomFontOnce.sh"
+        fig="$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh"
         if type figlet > /dev/null 2>&1; then
             printf "\e[1m"
             if [[ -f "$fig" ]]; then
                 if [[ "$ZPWR_BANNER" == ponies ]]; then
-                    if [[ -f "$SCRIPTS/splitReg.sh" ]];then
+                    if [[ -f "$ZPWR_SCRIPTS/splitReg.sh" ]];then
                         bannerLolcat
                     else
                         banner
@@ -1818,8 +1818,8 @@ if [[ -d "$FORKED_DIR" ]]; then
     : ~FORKED_DIR
 fi
 
-if [[ -d "$SCRIPTS" ]]; then
-    : ~SCRIPTS
+if [[ -d "$ZPWR_SCRIPTS" ]]; then
+    : ~ZPWR_SCRIPTS
 fi
 
 if [[ -d "$ZPWR" ]]; then
@@ -1970,14 +1970,14 @@ fzf_setup(){
     exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
-    export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
-    export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOpts2Pos.sh")'"
-    export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfEnv.sh")'"
+    export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
+    export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"
+    export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
 
     if [[ "$ZPWR_BANNER" == ponies ]]; then
-        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOptsPony.sh")'"
+        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"
     else
-        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfPreviewOpts.sh")'"
+        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"
     fi
 
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff=' "$(fzf '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
@@ -2112,7 +2112,7 @@ _fzf_complete_redo_post() {
 # clearList ;<tab>
 _fzf_complete_clearList() {
     FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(
-        cat "${ALL_ENV}Key.txt" | awk '{print $2}'
+        cat "${ZPWR_ENV}Key.txt" | awk '{print $2}'
     )
 }
 
@@ -2126,9 +2126,9 @@ _fzf_complete_git() {
     local lastWord
     lastWord=${${(Az)@}[-1]}
     if git cat-file -t -- $lastWord &>/dev/null; then
-        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" $lastWord)'"
+        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitOpts.sh" $lastWord)'"
     else
-        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$SCRIPTS/fzfGitOpts.sh" HEAD)'"
+        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitOpts.sh" HEAD)'"
     fi
     FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" _fzf_complete "-m $FZF_DRACULA --ansi" "$@" < <(
         printf "\x1b[${ZPWR_COMMIT_STYLE}m"
@@ -2264,7 +2264,7 @@ _se(){
 # as opposed to lexicographic sort
 zstyle ':completion:*:*:(se|redo|rsql|z|r):*:*' sort false
 
-subcommands_ary=($(cat "$SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
+subcommands_ary=($(cat "$ZPWR_SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
 
 _zpwr(){

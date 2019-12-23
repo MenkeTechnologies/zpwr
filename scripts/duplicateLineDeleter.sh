@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 home_dir=$HOME
-scripts_dir=$SCRIPTS
+scripts_dir=$ZPWR_SCRIPTS
 backup_dir=$scripts_dir/rcBackups
 
 usage() {

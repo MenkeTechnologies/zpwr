@@ -11,7 +11,7 @@
 #in quotes to account for spaces in directory name
 dir_watching="$1"
 
-script_to_run="$SCRIPTS/upLoadPi.sh"
+script_to_run="$ZPWR_SCRIPTS/upLoadPi.sh"
 
 #delimiter is \0 null character
 while read -d "" event; do
