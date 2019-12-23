@@ -29,9 +29,9 @@ getOpenCommand(){
 
 }
 
-test -z "$LOGFILE" && LOGFILE="$HOME/.zpwr/zpwrLog.txt"
+test -z "$ZPWR_LOGFILE" && ZPWR_LOGFILE="$HOME/.zpwr/zpwrLog.txt"
 
-exec 1>> "$LOGFILE" 2>&1
+exec 1>> "$ZPWR_LOGFILE" 2>&1
 
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 
