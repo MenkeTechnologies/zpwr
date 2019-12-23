@@ -30,21 +30,21 @@ gittersdev() {
 
 main() {
     gittersdev
-    cp .shell_aliases_functions.sh "$HOME"
+    cp .shell_aliases_functions.sh "$HOME/.zpwr"
     cp .zshrc "$HOME"
     cp .vimrc "$HOME"
-    cp .minvimrc "$HOME"
+    cp .minvimrc "$HOME/.zpwr"
     cp .tmux.conf "$HOME"
     cp conf.gls "$HOME"
     cp conf.df "$HOME"
     cp conf.ifconfig "$HOME"
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
-    cp -R .tmux/* "$HOME/.tmux"
+    cp -R .tmux/* "$HOME/.zpwr/.tmux"
     if [[ -n "$SCRIPTS" ]]; then
         rm -f "$SCRIPTS/"*
+        cp -f scripts/* "$SCRIPTS"
     fi
-    cp -f scripts/* "$SCRIPTS"
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*; do
         printf "$dir: "
