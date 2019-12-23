@@ -33,6 +33,9 @@ builtin cd "$INSTALLER_DIR"
 cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 
+prettyPrint "Installing .powerlevel9k"
+cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$HOME/.zpwr"
+
 
 prettyPrint "Installing .vimrc"
 cp "$INSTALLER_DIR/.vimrc" "$HOME"
