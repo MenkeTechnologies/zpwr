@@ -201,6 +201,7 @@ You can set these environment variables in your `~/.zpwr/.tokens.sh` to customiz
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
+# override in ~/.zpwr/.tokens.sh
 # see README.md
 export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
@@ -215,6 +216,38 @@ export ZPWR_TRACE=false
 export ZPWR_USE_NEOVIM=true
 export ZPWR_LEARN=true
 export ZPWR_COMMIT_STYLE='1;37;45'
+export ZPWR_BAT_THEME="GitHub"
+export ZPWR_GLOBAL_ALIAS_PREFIX=j
+export ZPWR_TABSTOP=__________
+export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
+export ZPWR_DELIMITER_CHAR='%'
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
+export ZPWR_REPO_NAME="zpwr"
+export ZPWR_COMPLETION_DIR="zsh-more-completions"
+export ZPWR_VIM_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrVimKeybindings.txt"
+export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrAllKeybindings.txt"
+export ZPWR_DELIMITER_CHAR='%'
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
+export ZPWR_REPO_NAME="zpwr"
+export ZPWR_COMPLETION_DIR="zsh-more-completions"
+export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
+export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
+export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
+export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
+export ZPWR_CD_AUTO_LS=true
+export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
+export ZPWR_PROMPT_FILE="$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh"
+# this the separator in compsys option completions (ls -<tab>)
+# and the separator for function se()
+export ZPWR_CHAR_LOGO="<<)(>>"
+# set to comma separated list of pane numbers
+# to activate sending to tmux pane of this number
+export ZPWR_SEND_KEYS_PANE=-1
+export ZPWR_SEND_KEYS_FULL=false
 ```
 
 ## Contributing
