@@ -135,6 +135,7 @@ Then remove the zpwr dir as shown.
 ```sh
 rm -rf ~/.zpwr
 ```
+This will not uninstall packages installed by system package manager, pip modules, gems, vim plugins, tmux plugins and zsh plugins.
 
 ## Font
 
