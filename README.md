@@ -144,19 +144,9 @@ You need to change the Terminal font to support the Powerline triangles and othe
 The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
 documentation for details on how to change the font.
 
-## ZPWR_GITHUB_ACCOUNT variable
-
-Change at top of `~/.zpwr/.shell_aliases_functions.sh`
-
-```sh
-export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
-```
-
-to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
-
 ## getrc function
 There is a shell function called `getrc` that will pull down latest changes from this repository and ovewrite `~/.zshrc`, `~/.vimrc`, `~/.shell_aliases_functions.sh` and `~.tmux.conf`
-Run `clearList getrc` to see the code for this function.
+Run `clearList getrc` to see the body of this function.
 
 ## Tmux prefix
 
@@ -195,6 +185,16 @@ Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/contr
 
 ## Personal Config
 Startup shell files will source `~/.zpwr/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
+
+## ZPWR_GITHUB_ACCOUNT variable
+
+Change at top of `~/.zshrc` or better in `~/.zpwr/.tokens.sh`
+
+```sh
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+```
+
+to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
 
 ## Environment Variables
 These are environment variables set in `~/.zshrc` which you can ovverride in your `~/.zpwr/.tokens.sh` to customize the behavior of the terminal setup.
