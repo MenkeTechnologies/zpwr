@@ -130,7 +130,7 @@ documentation for details on how to change the font.
 
 ## ZPWR_GITHUB_ACCOUNT variable
 
-Change at top of `~/.shell_aliases_functions.sh`
+Change at top of `~/.zpwr/.shell_aliases_functions.sh`
 
 ```sh
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
@@ -170,7 +170,7 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 ```
 > ~/.vimrc
 
-File ending of currently edited file in vim determines the interpreter used by the bash script `$SCRIPTS/runner.sh` which defaults to `~/Documents/shellScripts/runner.sh`
+File ending of currently edited file in vim determines the interpreter used by the bash script `$SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
 
 
 ## Tmux Main Window
