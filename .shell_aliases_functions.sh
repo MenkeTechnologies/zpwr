@@ -1517,7 +1517,7 @@ copyConf(){
     cp .shell_aliases_functions.sh "$HOME/.zpwr"
     cp .zshrc "$HOME"
     cp .vimrc "$HOME"
-    cp .minvimrc "$HOME"
+    cp .minvimrc "$HOME/.zpwr"
     cp .tmux.conf "$HOME"
     cp conf.gls "$HOME"
     cp conf.df "$HOME"
