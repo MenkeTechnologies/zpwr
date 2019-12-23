@@ -23,7 +23,7 @@ prettyPrint() {
 cd "$installerDir" || exit 1
 git checkout dev
 
-prettyPrint "Copying scripts to custom Installer Repo"
+prettyPrint "Copying scripts to custom Installer Repo $installerDir"
 rm -rf "$installerDir/scripts/"*
 cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts" 2>/dev/null
 cp -R "$SCRIPTS/macOnly" "$installerDir/scripts"
@@ -71,7 +71,7 @@ rm -rf "$tutorialDir/tmux/"*
 cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$HOME/.tmux/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
-prettyPrint "Copying shell_aliases_functions"
+prettyPrint "Copying shell_aliases_functions to $tutorialDir"
 cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$tutorialDir/aliases"
 
 prettyPrint "Copying shell scripts"
