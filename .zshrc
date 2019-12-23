@@ -116,6 +116,7 @@ export ZPWR_CHAR_LOGO="<<)(>>"
 # to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
+# when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
 
 #}}}***********************************************************
