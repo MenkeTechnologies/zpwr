@@ -6,7 +6,7 @@ After=network.target
 Type=simple
 User=pi
 Group=pi
-Environment="SCRIPTS=/home/pi/Documents/shellScripts"
+Environment="SCRIPTS=/home/pi/.zpwr/scripts"
 Environment="REPO_NAME=zpwr"
 Environment="ZSH_COMP_REPO_NAME=zsh-more-completions"
 ExecStart=/usr/bin/env java -Dspring.profiles.active=sr5 -jar /home/pi/learn.jar
