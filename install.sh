@@ -677,7 +677,6 @@ vim -c PluginInstall -c qall
 
 prettyPrint "Installing Powerlevel9k"
 git clone https://github.com/MenkeTechnologies/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
-cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$ZPWR_HIDDEN_DIR"
 
 prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
