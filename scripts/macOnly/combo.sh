@@ -15,8 +15,8 @@ fi
 if [[ -z "$o" ]]; then
     o="$(hostname)"
 fi
-randomFigletFontScript="$SCRIPTS/macOnly/figletRandomFontOnce.sh"
-randomCowsayCowScript="$SCRIPTS/macOnly/randomCow.sh"
+randomFigletFontScript="$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh"
+randomCowsayCowScript="$ZPWR_SCRIPTS/macOnly/randomCow.sh"
 
 echo "$o" | {
     catme
