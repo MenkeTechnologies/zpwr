@@ -10,7 +10,7 @@
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
 installerDir="$ZPWR_HIDDEN_DIR/scripts/$ZPWR_REPO_NAME"
-SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
+ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
 
 prettyPrint() {
     printf "\x1b[1;4m$1\n\x1b[0m"
@@ -25,8 +25,8 @@ git checkout dev
 
 prettyPrint "Copying scripts to custom Installer Repo $installerDir"
 rm -rf "$installerDir/scripts/"*
-cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts" 2>/dev/null
-cp -R "$SCRIPTS/macOnly" "$installerDir/scripts"
+cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts" 2>/dev/null
+cp -R "$ZPWR_SCRIPTS/macOnly" "$installerDir/scripts"
 cp "$HOME/.vimrc" "$installerDir"
 cp "$HOME/.zpwr/.minvimrc" "$installerDir"
 cp "$HOME/.tmux.conf" "$installerDir"
@@ -45,9 +45,9 @@ cp "$HOME/.gitignore_global" "$installerDir"
 cp -R "$HOME/.vim/Ultisnips" "$installerDir"
 
 prettyPrint "Updating vim plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$installerDir/.vimbundle"
+bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$installerDir/.vimbundle"
 prettyPrint "Updating zsh plugins list"
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* >"$installerDir/.zshplugins"
+bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* >"$installerDir/.zshplugins"
 
 git add .
 git commit -m "$commitMessage"
@@ -77,17 +77,17 @@ cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$tutorialDir/aliases"
 prettyPrint "Copying shell scripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/"*
-cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
-cp -R "$SCRIPTS/macOnly" "$tutorialDir/shell"
+cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
+cp -R "$ZPWR_SCRIPTS/macOnly" "$tutorialDir/shell"
 cp -R "$HOME/.vim/Ultisnips" "$tutorialDir"
 #README="$tutorialDir/shell/README.md"
 #echo "# Mac and Linux Scripts" > "$README"
-#bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"*.sh >> "$README"
+#bash "$ZPWR_SCRIPTS/headerSummarizer.sh" "$ZPWR_SCRIPTS/"*.sh >> "$README"
 #echo "# Mac Only Scripts" >> "$README"
-#bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"macOnly/*.sh >> "$README"
+#bash "$ZPWR_SCRIPTS/headerSummarizer.sh" "$ZPWR_SCRIPTS/"macOnly/*.sh >> "$README"
 
 prettyPrint "Copying tags file"
-cp "$SCRIPTS/tags" "$tutorialDir/shell"
+cp "$ZPWR_SCRIPTS/tags" "$tutorialDir/shell"
 
 prettyPrint "Copying $HOME/.ctags"
 cp "$HOME/.ctags" "$tutorialDir/ctags"
@@ -123,7 +123,7 @@ cd "$tutorialDir" || exit 1
 #fi
 #done < <(find ./vim)
 
-bash "$SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$tutorialDir/vim/.vimbundle"
+bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$tutorialDir/vim/.vimbundle"
 
 prettyPrint "Updating Tutorial Files Repo"
 git add .
@@ -159,8 +159,8 @@ if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -p "$websiteDir/downloads/scripts"
 fi
 
-cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$websiteDir/downloads/scripts" 2>/dev/null
-cp -R "$SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
+cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$websiteDir/downloads/scripts" 2>/dev/null
+cp -R "$ZPWR_SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
 cd "$websiteDir/downloads" || exit 1
 tar cfz MenkeTechnologiesShellScripts.tgz scripts
