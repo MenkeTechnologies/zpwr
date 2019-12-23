@@ -1526,7 +1526,7 @@ copyConf(){
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
     cp UltiSnips/* "$HOME/.vim/UltiSnips"
-    cp -R .tmux/* "$HOME/.tmux"
+    cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux"
     cp -f scripts/* "$SCRIPTS"
 
 }
