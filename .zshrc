@@ -282,7 +282,7 @@ source $ZSH/oh-my-zsh.sh
 #has all aliases and functions common to bourne like shells
 _alias_file="$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
-alias -r > "$HOME/.common_aliases"
+alias -r > "$ZPWR_HIDDEN_DIR/.common_aliases"
 
 test -z $ZPWR_BANNER && export ZPWR_BANNER=ponies
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
@@ -1048,7 +1048,7 @@ my-accept-line () {
     if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ ! -z $(alias -g $mywords[1]) ]];then
-            aliases="$(cat $HOME/.common_aliases)"
+            aliases="$(cat $ZPWR_HIDDEN_DIR/.common_aliases)"
             line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
             if [[ -z $line ]];then
                 #fxn
