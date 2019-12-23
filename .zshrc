@@ -709,16 +709,16 @@ deleteLastWord(){
 
 
 fzfEnv(){
-    if [[ ! -s "${ALL_ENV}Key.txt" ]]; then
-        logg "regenerating keys for $ALL_ENV"
+    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
+        logg "regenerating keys for $ZPWR_ENV"
         regenSearchEnv
     fi
-    if [[ ! -s "${ALL_ENV}Value.txt" ]]; then
-        logg "regenerating values for $ALL_ENV"
+    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
+        logg "regenerating values for $ZPWR_ENV"
         regenSearchEnv
     fi
 
-    cat "${ALL_ENV}Key.txt" | awk '{print $2}' |
+    cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
     eval "fzf -m --border $FZF_ENV_OPTS"
 }
 
