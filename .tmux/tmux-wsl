@@ -7,12 +7,12 @@ bind-key -T copy-mode-vi y send-keys -X copy-pipe "clip.exe"
 
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "clip.exe"
 
-bind-key -T copy-mode-vi m send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh google"
+bind-key -T copy-mode-vi m send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.zpwr/.tmux/google.sh google"
 
-bind-key -T copy-mode-vi s send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh google"
+bind-key -T copy-mode-vi s send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.zpwr/.tmux/google.sh google"
 
-bind -T copy-mode-vi z send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh google"
+bind -T copy-mode-vi z send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.zpwr/.tmux/google.sh google"
 
-bind -T copy-mode-vi MouseDown3Pane send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh google"
+bind -T copy-mode-vi MouseDown3Pane send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.zpwr/.tmux/google.sh google"
 
-bind -T copy-mode-vi x send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.tmux/google.sh open"
+bind -T copy-mode-vi x send-keys -X copy-pipe "clip.exe" \; run-shell "bash ~/.zpwr/.tmux/google.sh open"
