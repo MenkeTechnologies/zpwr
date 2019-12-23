@@ -130,7 +130,7 @@ backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 ```
 
 ## Uninstall
-Copy all configs from backup dir mentioned above.
+Copy all configs from backup dir mentioned above to home directory overwriting the ones installed by zpwr, most importantly the zshrc, vimrc and tmux.conf.
 Then remove the zpwr dir as shown.
 ```sh
 rm -rf ~/.zpwr
