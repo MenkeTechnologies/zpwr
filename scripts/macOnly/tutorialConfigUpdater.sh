@@ -9,8 +9,8 @@
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
-installerDir="$HOME/Documents/shellScripts/$ZPWR_REPO_NAME"
-SCRIPTS="$HOME/Documents/shellScripts"
+installerDir="$ZPWR_HIDDEN_DIR/scripts/$ZPWR_REPO_NAME"
+SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
 
 prettyPrint() {
     printf "\x1b[1;4m$1\n\x1b[0m"
@@ -74,7 +74,7 @@ cp -R "$HOME/.tmux/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 prettyPrint "Copying shell_aliases_functions"
 cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$tutorialDir/aliases"
 
-prettyPrint "Copying shellScripts"
+prettyPrint "Copying shell scripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/"*
 cp "$SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
@@ -87,7 +87,7 @@ cp -R "$HOME/.vim/Ultisnips" "$tutorialDir"
 #bash "$SCRIPTS/headerSummarizer.sh" "$SCRIPTS/"macOnly/*.sh >> "$README"
 
 prettyPrint "Copying tags file"
-cp "$HOME/Documents/shellScripts/tags" "$tutorialDir/shell"
+cp "$SCRIPTS/tags" "$tutorialDir/shell"
 
 prettyPrint "Copying $HOME/.ctags"
 cp "$HOME/.ctags" "$tutorialDir/ctags"
