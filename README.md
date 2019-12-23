@@ -198,7 +198,7 @@ export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
 
 ## Environment Variables
-These are environment variables set in `~/.zshrc` which you can ovverride in your `~/.zpwr/.tokens.sh` to customize the behavior of the terminal setup.
+These are environment variables set in `~/.zshrc` which you can override in your `~/.zpwr/.tokens.sh` to customize the behavior of the terminal setup.
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
@@ -249,6 +249,8 @@ export ZPWR_CHAR_LOGO="<<)(>>"
 # to activate sending to tmux pane of this number
 export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
+# when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
+export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
 ```
 
 ## Contributing
