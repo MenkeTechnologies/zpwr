@@ -121,6 +121,21 @@ Some interactivity is required near end of installer for postfix, wireshark and 
 
 Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Control-D to return to installer script.
 
+## Install Destination
+
+Most zpwr custom configs will be installed to .zpwr.  Exceptions are ~/.zshrc, ~/.vimrc, ~/.tmux.conf, ~/grc.zsh.
+Your old configs for these files will be found in ~/.zpwr/username.rc.bak.date after install.  Exact directory name is generated as shown.
+```sh
+backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
+```
+
+## Uninstall
+Copy all configs from backup dir mentioned above.
+Then remove the zpwr dir as shown.
+```sh
+rm -rf ~/.zpwr
+```
+
 ## Font
 
 You need to change the Terminal font to support the Powerline triangles and other special characters in the PowerLevel 9k font.
@@ -155,7 +170,7 @@ C-Space (Control-Space or actually ^@ terminal escape code) will bypass all expa
 
 `~/.zshrc:169 plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
 
-Alternatively, change these env vars to false in `~/.tokens.sh`.  The first controls all expansion while the second controls expansion in second position.
+Alternatively, change these env vars to false in `~/.zpwr/.tokens.sh`.  The first controls all expansion while the second controls expansion in second position.
 
 ```sh
 export ZPWR_EXPAND=true
@@ -178,10 +193,10 @@ The main window show in the screenshots is started by Prefix-D in an empty tmux 
 Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/control-window` or in the terminal with `tmux source-file ~/.tmux/control-window` in an empty tmux window.
 
 ## Personal Config
-Startup shell files will source `~/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
+Startup shell files will source `~/.zpwr/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
 
 ## Environment Variables
-You can set these environment variables in your `~.tokens.sh` to customize the behavior of the terminal setup.
+You can set these environment variables in your `~/.zpwr/.tokens.sh` to customize the behavior of the terminal setup.
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
