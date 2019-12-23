@@ -197,7 +197,7 @@ Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/contr
 Startup shell files will source `~/.zpwr/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
 
 ## Environment Variables
-You can set these environment variables in your `~/.zpwr/.tokens.sh` to customize the behavior of the terminal setup.
+These are environment variables set in `~/.zshrc` which you can ovverride in your `~/.zpwr/.tokens.sh` to customize the behavior of the terminal setup.
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.shell_aliases_functions.sh at top
@@ -254,7 +254,7 @@ export ZPWR_SEND_KEYS_FULL=false
 I am always looking for contributors.
 
 ## Warnings
-Moving the scripts from `$SCRIPTS` and `~/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features
+Moving the scripts from `$SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features
 
 # Running on a MacbookPro
 ![Alt text](http://jakobmenke.com/img/tmuxfinal22.png?raw=true)
