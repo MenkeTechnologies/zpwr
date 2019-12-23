@@ -8,7 +8,7 @@ RemainAfterExit=yes
 User=pi
 Group=pi
 WorkingDirectory=/home/pi/docker
-Environment="SCRIPTS=/home/pi/.zpwr/scripts"
+Environment="ZPWR_SCRIPTS=/home/pi/.zpwr/scripts"
 Environment="HOME=/home/pi"
 ExecStart=/usr/bin/env bash /home/pi/.zpwr/scripts/startContainers.sh
 ExecStart=/usr/bin/env bash /home/pi/.zpwr/scripts/stopContainers.sh
