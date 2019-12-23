@@ -58,7 +58,7 @@ test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
 test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
 export ZPWR_ALL_GIT_DIRS="$ZPWR_HIDDEN_DIR/zpwrGitDirs.txt"
-export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/updaterlog.txt"
+export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/zpwrLog.txt"
 
 if [[ $ZPWR_EXA_EXTENDED == true ]]; then
     export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
