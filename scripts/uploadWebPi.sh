@@ -11,7 +11,7 @@
 address="pi@$MY_IP:/var/www/html"
 
 printf "${BLUE}"
-printf "Uploading $* to $address\n" | "$SCRIPTS/macOnly/combo.sh"
+printf "Uploading $* to $address\n" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
 
 #loop through all arguments and upload with scp recursively to pi server
 

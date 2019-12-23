@@ -8,4 +8,4 @@
 #}}}***********************************************************
 
 clear
-bash "$SCRIPTS/genericDisplayer.sh" 'iostat -d | lolcat'
+bash "$ZPWR_SCRIPTS/genericDisplayer.sh" 'iostat -d | lolcat'

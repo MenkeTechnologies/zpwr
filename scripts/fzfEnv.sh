@@ -35,8 +35,8 @@ fi
 cat<<EOF
 line={};
 line=\$(echo \$line| sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
-cmdType=\$(grep -m1 -a " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$1}")
-file=\$(grep -m1 -a " \$line\$" ${ALL_ENV}Key.txt | awk "{print \\\$2}")
+cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
+file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
 
 echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
 
@@ -44,14 +44,14 @@ case \$cmdType in
     (command)
         if test -f \$file;then
             if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
-                "$SCRIPTS/clearList.sh" -- \$file| fold -80 | head -500
+                "$ZPWR_SCRIPTS/clearList.sh" -- \$file| fold -80 | head -500
                 test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
                 xxd \$file | $COLORIZER_FZF_YAML
             else
                 $COLORIZER_FZF_FILE 2>/dev/null
             fi
         else
-            "$SCRIPTS/clearList.sh" -- \$file | fold -80
+            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | fold -80
         fi
         return 0
         ;;
@@ -60,37 +60,37 @@ esac
 {
 case \$cmdType in
     (alias)
-        command grep -m1 -Fa "alias \$file" "${ALL_ENV}Value.txt"
+        command grep -m1 -Fa "alias \$file" "${ZPWR_ENV}Value.txt"
         ;;
     (param)
-        command grep -m1 -Fa "export \$file" "${ALL_ENV}Value.txt"
+        command grep -m1 -Fa "export \$file" "${ZPWR_ENV}Value.txt"
         ;;
     (builtin)
-        command grep -m1 -Fa "\$file" | grep -F "shell builtin" "${ALL_ENV}Value.txt"
+        command grep -m1 -Fa "\$file" | grep -F "shell builtin" "${ZPWR_ENV}Value.txt"
         ;;
     (resword)
-        command grep -m1 -Fa "\$file" | grep -F "reserved word" "${ALL_ENV}Value.txt"
+        command grep -m1 -Fa "\$file" | grep -F "reserved word" "${ZPWR_ENV}Value.txt"
         ;;
     (command)
         if test -f \$file;then
             if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
-                "$SCRIPTS/clearList.sh" -- \$file| fold -80 | head -500
+                "$ZPWR_SCRIPTS/clearList.sh" -- \$file| fold -80 | head -500
                 test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
                 xxd \$file | $COLORIZER_FZF_YAML
             else
                 $COLORIZER_FZF_FILE 2>/dev/null
             fi
         else
-            "$SCRIPTS/clearList.sh" -- \$file | fold -80
+            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | fold -80
         fi
         ;;
     (func)
         file=\$(echo \$file | sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
         echo "after escaping regex chars file is _\${file}_" >> $ZPWR_LOGFILE
-        command grep -m1 -a "^\$file is a shell function" "${ALL_ENV}Value.txt"
-        command sed -n "/^\${file} () {/,/^}\$/p" "${ALL_ENV}Value.txt" | fold -80
+        command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV}Value.txt"
+        command sed -n "/^\${file} () {/,/^}\$/p" "${ZPWR_ENV}Value.txt" | fold -80
         ;;
 esac
-} | cowsay | ponysay | "$SCRIPTS/splitReg.sh" -- ---------- lolcat
+} | cowsay | ponysay | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
 
 EOF

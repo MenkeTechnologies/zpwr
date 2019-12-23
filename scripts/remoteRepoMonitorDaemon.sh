@@ -41,9 +41,9 @@ main() {
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
     cp -R .tmux/* "$HOME/.zpwr/.tmux"
-    if [[ -n "$SCRIPTS" ]]; then
-        rm -f "$SCRIPTS/"*
-        cp -f scripts/* "$SCRIPTS"
+    if [[ -n "$ZPWR_SCRIPTS" ]]; then
+        rm -f "$ZPWR_SCRIPTS/"*
+        cp -f scripts/* "$ZPWR_SCRIPTS"
     fi
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*; do

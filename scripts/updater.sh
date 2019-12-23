@@ -110,14 +110,14 @@ gitRepoUpdater() {
     fi
 }
 
-[[ -z "$SCRIPTS" ]] && SCRIPTS="$HOME/.zpwr/scripts"
+[[ -z "$ZPWR_SCRIPTS" ]] && ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
 
 if [[ $skip != true ]]; then
-    if [[ -f "$SCRIPTS/printHeader.sh" ]]; then
+    if [[ -f "$ZPWR_SCRIPTS/printHeader.sh" ]]; then
         width=80
         perl -le "print '_'x$width" | lolcat
         if [[ "$MYBANNER" == ponies ]]; then
-            exists catme && exists cowsay && exists shelobsay && echo "UPDATER" | "$SCRIPTS/macOnly/combo.sh"
+            exists catme && exists cowsay && exists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
         fi
         perl -le "print '_'x$width" | lolcat
     fi
@@ -314,10 +314,10 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
     fi
 
     #update python packages
-    ssh -x "$hostname" bash <"$SCRIPTS/pipUpdater.sh"
+    ssh -x "$hostname" bash <"$ZPWR_SCRIPTS/pipUpdater.sh"
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to send stdin script into bash
-    ssh -x "$hostname" bash <"$SCRIPTS/rpiSoftwareUpdater.sh"
+    ssh -x "$hostname" bash <"$ZPWR_SCRIPTS/rpiSoftwareUpdater.sh"
 }
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for

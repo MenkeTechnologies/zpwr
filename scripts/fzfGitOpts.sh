@@ -8,7 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-#source "$SCRIPTS/fzfPreviewOptsCommon.sh"
+#source "$ZPWR_SCRIPTS/fzfPreviewOptsCommon.sh"
 
 ref=$1
 

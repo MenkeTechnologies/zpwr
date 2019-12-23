@@ -11,4 +11,4 @@ clear
 ls -FlhA
 
 #be sure to source this script
-# for example, alias f='source $SCRIPTS/goForward.sh'
+# for example, alias f='source $ZPWR_SCRIPTS/goForward.sh'

@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 my_home_dir="$HOME"
-my_scripts_dir="$SCRIPTS"
+my_scripts_dir="$ZPWR_SCRIPTS"
 my_backup_dir="$my_scripts_dir/rcBackups"
 
 if [[ ! -d "$my_backup_dir" ]]; then

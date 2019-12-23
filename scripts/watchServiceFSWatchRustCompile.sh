@@ -6,7 +6,7 @@
 ##### Purpose: bash script to compile rust file on file change
 ##### Notes:
 #}}}***********************************************************
-#example usage = bash "$SCRIPTS/watchServiceFSWatchRustCompile.sh" . "untitled.rs"
+#example usage = bash "$ZPWR_SCRIPTS/watchServiceFSWatchRustCompile.sh" . "untitled.rs"
 dir_watching="$1"
 while read -d "" event; do
 

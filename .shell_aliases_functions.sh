@@ -104,8 +104,8 @@ export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
-export SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
-source "$SCRIPTS/crossOSCommands.sh"
+export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
+source "$ZPWR_SCRIPTS/crossOSCommands.sh"
 export FORKED_DIR="$HOME/forkedRepos"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
@@ -136,12 +136,12 @@ fi
 #**************************************************************
 echo "$PATH" | command grep -isq shellScripts || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
-    export PATH="$PYEXECUTABLES:$SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
+    export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
-        export PATH="$SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
+        export PATH="$ZPWR_SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
         export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$PATH"
     else
         export PATH="$PATH:/usr/games"
@@ -288,7 +288,7 @@ isZsh && {
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
-alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh; source $ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh; bash $SCRIPTS/backupBashConfig.sh 2> /dev/null"
+alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh; source $ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupBashConfig.sh 2> /dev/null"
 alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 #}}}***********************************************************
@@ -334,8 +334,8 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias q="qlmanage -p &>/dev/null"
     #keep remote tty sessions alive by stopping sleep
     #sudo pmset -c ttyskeepawake 1
-    alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $SCRIPTS/sshTunnelVnc.sh"
-    alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $SCRIPTS/sshTunnelVnc2.sh"
+    alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
+    alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
     alias rtsync="$HOME/Documents/shellScripts/macOnly/rsyncr.sh"
     alias ig='cd $HOME/IdeaProjects'
     alias pg='cd $HOME/PycharmProjects'
@@ -347,7 +347,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias ap='cd /Applications'
     alias sudoedit='sudo $EDITOR'
     alias tra='cd $HOME/.Trash'
-    alias co="bash $SCRIPTS/macOnly/commandToColors.sh"
+    alias co="bash $ZPWR_SCRIPTS/macOnly/commandToColors.sh"
     alias bl='brew link --force --overwrite'
     exists gls &&
      alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
@@ -435,10 +435,10 @@ alias tm="python3 $PYSCRIPTS/tmux_starter.py"
 alias tmm="python3 $PYSCRIPTS/ssh_starter.py"
 alias tmm_notabs="python3 $PYSCRIPTS/complete_ssh_starter.py;"
 alias tmm_full="python3 $PYSCRIPTS/tabs.py;python3 $PYSCRIPTS/complete_ssh_starter.py;"
-alias inst="bash $SCRIPTS/tgzLocalInstaller.sh"
+alias inst="bash $ZPWR_SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 
-#                           MARK:PYTHON SCRIPTS
+#                           MARK:PYTHON ZPWR_SCRIPTS
 #**********************************************************************
 alias mapit="execpy mapIt.py"
 alias ,,="execpy amazonSearch.py"
@@ -449,31 +449,31 @@ alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit0} i
 
 alias pgrep='pgrep -l'
 #**********************************************************************
-#                           MARK:SHELL SCRIPTS
+#                           MARK:SHELL ZPWR_SCRIPTS
 #**********************************************************************
-alias ct="bash $SCRIPTS/createTextFile.sh"
-alias u="bash $SCRIPTS/upLoadPi.sh"
-alias u2="bash $SCRIPTS/upLoadPi2.sh"
-alias pw="bash $SCRIPTS/uploadWebPi.sh"
-alias ud="bash $SCRIPTS/upLoadDS.sh"
-alias uweb="bash $SCRIPTS/uploadWebDS.sh"
-alias sy="bash $SCRIPTS/sync.sh"
-alias sf="bash $SCRIPTS/directoryContentsSize.sh"
-alias sc='cd $SCRIPTS'
-alias bluef='source $SCRIPTS/blueText.sh'
+alias ct="bash $ZPWR_SCRIPTS/createTextFile.sh"
+alias u="bash $ZPWR_SCRIPTS/upLoadPi.sh"
+alias u2="bash $ZPWR_SCRIPTS/upLoadPi2.sh"
+alias pw="bash $ZPWR_SCRIPTS/uploadWebPi.sh"
+alias ud="bash $ZPWR_SCRIPTS/upLoadDS.sh"
+alias uweb="bash $ZPWR_SCRIPTS/uploadWebDS.sh"
+alias sy="bash $ZPWR_SCRIPTS/sync.sh"
+alias sf="bash $ZPWR_SCRIPTS/directoryContentsSize.sh"
+alias sc='cd $ZPWR_SCRIPTS'
+alias bluef='source $ZPWR_SCRIPTS/blueText.sh'
 alias dl='cd $HOME/Downloads'
 alias docu='cd $HOME/Documents'
 alias mus='cd $HOME/Music'
 alias jobs="jobs -l"
-alias u8="bash $SCRIPTS/updater.sh"
+alias u8="bash $ZPWR_SCRIPTS/updater.sh"
 alias sd="clear;ssh d "
-alias gitgo='$SCRIPTS/gitgo.sh'
-alias watchGit='bash $SCRIPTS/watchServiceFSWatchGit.sh'
-alias watchPiWeb='bash $SCRIPTS/watchServiceFSWatchPiWeb.sh'
+alias gitgo='$ZPWR_SCRIPTS/gitgo.sh'
+alias watchGit='bash $ZPWR_SCRIPTS/watchServiceFSWatchGit.sh'
+alias watchPiWeb='bash $ZPWR_SCRIPTS/watchServiceFSWatchPiWeb.sh'
 alias cl=clear
 alias mkdir='mkdir -pv'
 #**********************************************************************
-#                           MARK:REMOTE SHELLS SCRIPTS
+#                           MARK:REMOTE SHELLS ZPWR_SCRIPTS
 #**********************************************************************
 exists tput && {
     bold=$(tput bold || tput md)
@@ -800,8 +800,8 @@ b(){
 }
 
 suc(){
-    subl "$SCRIPTS"
-    f "$SCRIPTS"
+    subl "$ZPWR_SCRIPTS"
+    f "$ZPWR_SCRIPTS"
     python3 "$PYSCRIPTS/textEditorTwoColumns.py"
 }
 
@@ -816,8 +816,8 @@ allRemotes(){
 about(){
     old="$LESS"
     unset LESS
-    if [[ -f "$SCRIPTS/about.sh" ]]; then
-        bash "$SCRIPTS/about.sh" | less -rFX
+    if [[ -f "$ZPWR_SCRIPTS/about.sh" ]]; then
+        bash "$ZPWR_SCRIPTS/about.sh" | less -rFX
     fi
     export LESS="$old"
 }
@@ -935,7 +935,7 @@ listNoClear () {
 }
 
 animate(){
-    bash "$SCRIPTS/animation"
+    bash "$ZPWR_SCRIPTS/animation"
 }
 
 blocksToSize(){
@@ -1264,7 +1264,7 @@ hd(){
 }
 
 pstreemonitor(){
-    bash $SCRIPTS/myWatchNoBlink.sh \
+    bash $ZPWR_SCRIPTS/myWatchNoBlink.sh \
     "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
 }
 
@@ -1475,8 +1475,8 @@ zpwr(){
         . zpwr.zsh "$@"
     fi
 }
-if [[ -d "$SCRIPTS/$ZPWR_REPO_NAME" ]]; then
-    eval "export $(echo $ZPWR_REPO_NAME | perl -pe '$_=uc')='$SCRIPTS/$ZPWR_REPO_NAME'"
+if [[ -d "$ZPWR_SCRIPTS/$ZPWR_REPO_NAME" ]]; then
+    eval "export $(echo $ZPWR_REPO_NAME | perl -pe '$_=uc')='$ZPWR_SCRIPTS/$ZPWR_REPO_NAME'"
 elif [[ -d "$FORKED_DIR/$ZPWR_REPO_NAME" ]];then
     eval "export $(echo $ZPWR_REPO_NAME | perl -pe '$_=uc')='$FORKED_DIR/$ZPWR_REPO_NAME'"
 fi
@@ -1487,7 +1487,7 @@ fi
 
 zpz(){
     local dirsrc forked
-    dirsc="$SCRIPTS/$ZPWR_REPO_NAME"
+    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
 
     if [[ -d "$dirsc" ]]; then
@@ -1500,7 +1500,7 @@ zpz(){
 }
 zp(){
     local dirsrc forked
-    dirsc="$SCRIPTS/$ZPWR_REPO_NAME"
+    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
 
     if [[ -d "$dirsc" ]]; then
@@ -1527,7 +1527,7 @@ copyConf(){
     cp .inputrc "$HOME"
     cp UltiSnips/* "$HOME/.vim/UltiSnips"
     cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux"
-    cp -f scripts/* "$SCRIPTS"
+    cp -f scripts/* "$ZPWR_SCRIPTS"
 
 }
 
@@ -1562,7 +1562,7 @@ getrc(){
     fi
 
     builtin cd "$HOME"
-    bash "$SCRIPTS/about.sh"
+    bash "$ZPWR_SCRIPTS/about.sh"
     git clone -b "$branch" "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
     builtin cd "$ZPWR_REPO_NAME"
     copyConf
@@ -2262,11 +2262,11 @@ needSudo(){
 
 regenAllKeybindingsCache(){
     prettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
-    bash "$SCRIPTS/keybindingsToFZFVim.zsh" |
+    bash "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
     escapeRemover.pl |
     perl -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"
 
-    isZsh && source "$SCRIPTS/keybindingsToFZF.zsh" |
+    isZsh && source "$ZPWR_SCRIPTS/keybindingsToFZF.zsh" |
         escapeRemover.pl |
         perl -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
 }
