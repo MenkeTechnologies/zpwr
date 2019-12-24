@@ -126,6 +126,8 @@ export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 # logg function message color
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
+# run ls after rm and other modifying commands such as touch automatically
+export ZPWR_RM_AUTO_LS=true
 # run ls after cd automatically
 export ZPWR_CD_AUTO_LS=true
 # cache file for all zpwr env lookups
@@ -1105,8 +1107,10 @@ zle -N accept-line my-accept-line
 precmd(){
     (( $? == 0)) && {
         if [[ "$ZPWR_WILL_CLEAR" == true ]]; then
-            clear
-            listNoClear
+            if [[ $ZPWR_RM_AUTO_LS == true ]]; then
+                clear
+                listNoClear
+            fi
             # to prevent ZPWR_WILL_CLEAR staying true when
             # called from zle widgets and not from
             # pressing enter key
