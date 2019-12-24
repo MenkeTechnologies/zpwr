@@ -65,7 +65,7 @@
 startTimestamp=$(date +%s)
 #}}}***********************************************************
 
-#{{{                    MARK:Exports
+#{{{                    MARK:ZPWR Exports
 #**************************************************************
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file
@@ -150,10 +150,10 @@ export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
-
 #}}}***********************************************************
 
-# non zpwr env vars
+#{{{                    MARK:non ZPWR Exports
+#**************************************************************
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
 
