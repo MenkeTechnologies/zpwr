@@ -259,6 +259,8 @@ export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 # logg function message color
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
+# run ls after rm and other modifying commands such as touch automatically
+export ZPWR_RM_AUTO_LS=true
 # run ls after cd automatically
 export ZPWR_CD_AUTO_LS=true
 # cache file for all zpwr env lookups
