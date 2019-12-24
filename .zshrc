@@ -72,42 +72,65 @@ startTimestamp=$(date +%s)
 # override in ~/.zpwr/.tokens.sh
 # see README.md
 export ZPWR_PROMPT=POWERLEVEL
+# aliases expand in first position
 export ZPWR_EXPAND=true
+# aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
+# typing leading quote, paren, bracket inserts trailing after caret
 export ZPWR_SURROUND=true
+# output is more colorful
 export ZPWR_COLORS=true
+# linux OS auto attach to tmux sessions
 export ZPWR_AUTO_ATTACH=true
+# exa command invoked from clearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
+# uses the zprof function to profile startup
 export ZPWR_PROFILING=false
+# turns on debugging logs using logg function
 export ZPWR_DEBUG=false
+# turns on set -x
 export ZPWR_TRACE=false
+# use nvim not vim
 export ZPWR_USE_NEOVIM=true
 export ZPWR_LEARN=true
+# ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
+# bat (syntax highlighting) theme
 export ZPWR_BAT_THEME="GitHub"
+# the char that prefixes global aliases like je<space>
 export ZPWR_GLOBAL_ALIAS_PREFIX=j
+# the string that marks a tabstop when expanding aliases
+# move to next tabstop with ^P
 export ZPWR_TABSTOP=__________
+# the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+# the base dir for zpwr configs
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+# the path to a lock file (semaphore) for zpwr
 export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
+# for alternating pretty printer
 export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
 export ZPWR_REPO_NAME="zpwr"
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
+# the path for vim keybindings cache
 export ZPWR_VIM_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrVimKeybindings.txt"
+# the path for all keybindings cache
 export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrAllKeybindings.txt"
-export ZPWR_DELIMITER_CHAR='%'
-export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
-export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
-export ZPWR_REPO_NAME="zpwr"
-export ZPWR_COMPLETION_DIR="zsh-more-completions"
+# logg function underscore color
 export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
+# logg function quote color
 export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
+# logg function timestamp color
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
+# logg function message color
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
+# run ls after cd automatically
 export ZPWR_CD_AUTO_LS=true
+# cache file for all zpwr env lookups
 export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
+# forked powerlevel9k config file for PROMPT
 export ZPWR_PROMPT_FILE="$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
 export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
@@ -117,6 +140,8 @@ export ZPWR_CHAR_LOGO="<<)(>>"
 # set to comma separated list of pane numbers
 # to activate sending to tmux pane f this number
 export ZPWR_SEND_KEYS_PANE=-1
+# when true sends every char to synced panes
+# when false does not send enter and Control to synced panes
 export ZPWR_SEND_KEYS_FULL=false
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
