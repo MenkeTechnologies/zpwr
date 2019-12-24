@@ -71,6 +71,7 @@ startTimestamp=$(date +%s)
 # More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file
 # override in ~/.zpwr/.tokens.sh
 # see README.md
+# set to POWERLEVEL to use the powerlevel9k prompt
 export ZPWR_PROMPT=POWERLEVEL
 # aliases expand in first position
 export ZPWR_EXPAND=true
@@ -92,6 +93,7 @@ export ZPWR_DEBUG=false
 export ZPWR_TRACE=false
 # use nvim not vim
 export ZPWR_USE_NEOVIM=true
+#whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
 # ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
@@ -113,6 +115,7 @@ export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
 export ZPWR_REPO_NAME="zpwr"
+# the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
 # the path for vim keybindings cache
 export ZPWR_VIM_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrVimKeybindings.txt"
