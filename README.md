@@ -201,7 +201,7 @@ to match your GitHub account name to enable various functionality with your acco
 These are environment variables set in `~/.zshrc` which you can override in your `~/.zpwr/.tokens.sh` to customize the behavior of the terminal setup.
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
-# More Environment Variables in ~/.shell_aliases_functions.sh at top
+# More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file
 # override in ~/.zpwr/.tokens.sh
 # see README.md
 export ZPWR_PROMPT=POWERLEVEL
