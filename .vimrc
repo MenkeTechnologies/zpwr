@@ -870,7 +870,7 @@ function! TmuxRepeat(type)
     if !empty(tmux) || has("gui_running")
         if a:type == "visual" || a:type == "repl"
             silent !mkdir $VIMHOME/.temp > /dev/null 2>&1
-            let fileName=$VIMHOME."/.temp/.tempfile.".exeFileType
+            let fileName=$ZPWR_HIDDEN_DIR_TEMP."/.vimTempFile.".exeFileType
             try
                 let a_save = @a
                 silent! normal! gv"ay
