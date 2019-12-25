@@ -68,7 +68,6 @@ LC_MESSAGES	.shell_aliases_functions.sh	/^  LC_MESSAGES=C command grep -Hm1 '^' 
 LOGFILE	updaterEmail.sh	/^LOGFILE="\/Users\/jacobmenke\/updaterlog.txt"$/;"	v
 ManParser	mantozshcomp.py	/^class ManParser(object):$/;"	c
 ORGIN_NAME	gitgo.sh	/^    local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"$/;"	v
-OS	test.sh	/^OS="$(uname -s)"$/;"	v
 Output	macOnly/figletRandomFont.sh	/^    Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"$/;"	v
 PARSER_INFO	mantozshcomp.py	/^PARSER_INFO = {}$/;"	v
 PATH	macOnly/tmuxer.sh	/^PATH="\/usr\/local\/bin:$PATH"$/;"	v
@@ -1001,7 +1000,6 @@ x	macOnly/combo.sh	/^    x="$(python -c 'print("trina"*5)')"$/;"	v
 x	macOnly/combo.sh	/^    x=$(date | cut -c1-10)$/;"	v
 x	sixLangDisplayer.sh	/^    x="$(python -c 'print("trina"*5)')"$/;"	v
 x	sixLangDisplayer.sh	/^    x=$(date | cut -c1-10)$/;"	v
-x	test.sh	/^x=1$/;"	v
 xf	.shell_aliases_functions.sh	/^        xf=(s==" B  ") ? "%d" : "%.2f"$/;"	v
 xx	.shell_aliases_functions.sh	/^xx(){$/;"	f
 ycminstall	install.sh	/^ycminstall(){$/;"	f
