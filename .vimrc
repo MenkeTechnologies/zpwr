@@ -1021,10 +1021,12 @@ nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
 nnoremap <silent> <C-D>e :ALEInfo<CR>
 nnoremap <silent> <C-D>f :Files<CR>
+nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <C-D>g :Commits!<CR>
 nnoremap <silent> <C-D>h :HistoryFiles<CR>
 nnoremap <silent> <C-D>i :Imap<CR>
 nnoremap <silent> <C-D>j :Agg<CR>
+nnoremap <silent> <leader>a :Ag<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 nnoremap <silent> <C-D>m :Map<CR>
