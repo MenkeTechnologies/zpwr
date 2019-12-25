@@ -2446,7 +2446,6 @@ _r(){
     rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)." "};print ++$c.":/"'))
 
     _describe -t zdir 'rdirs' rdirs
-
 }
 
 # list of completers to use
