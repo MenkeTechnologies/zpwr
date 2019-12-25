@@ -28,6 +28,10 @@ export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR
 fi
+export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
+if [[ ! -d $ZPWR_HIDDEN_DIR_TEMP ]]; then
+    mkdir -p $ZPWR_HIDDEN_DIR_TEMP
+fi
 
 clear
 # replicate stdout and sterr to logfile
