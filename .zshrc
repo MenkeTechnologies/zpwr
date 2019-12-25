@@ -108,6 +108,8 @@ export ZPWR_TABSTOP=__________
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 # the base dir for zpwr configs
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+# the base dir for zpwr temp
+export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
 # the path to a lock file (semaphore) for zpwr
 export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
 # for alternating pretty printer
