@@ -35,7 +35,6 @@ set nocompatible               " be improved
 " required:
 "call neobundle#end()
 
-
 "}}}***********************************************************
 
 ""{{{                    mark:settings
