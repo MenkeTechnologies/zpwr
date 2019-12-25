@@ -731,7 +731,7 @@ command tmux source-file "$HOME/.tmux.conf"
 
 
 zsh -c 'tmux new-session -d -s main'
-tmux send-keys -t "main" 'tmux source-file "$HOME/.zpwr/tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
+tmux send-keys -t "main" 'tmux source-file "$HOME/.zpwr/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
 tmux attach -t main
 
 #}}}***********************************************************
