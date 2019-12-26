@@ -64,33 +64,23 @@ test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
 export ZPWR_ALL_GIT_DIRS="$ZPWR_HIDDEN_DIR/zpwrGitDirs.txt"
 export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/zpwrLog.txt"
 
+test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
+
 if [[ $ZPWR_EXA_EXTENDED == true ]]; then
     export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
 else
     export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
 fi
 #tmux prefix on outer session
-if [[ ! -d "$TMPDIR" ]]; then
-    if [[ ! -d "/tmp/$ZPWR_REPO_NAME" ]]; then
-        mkdir -p "/tmp/$ZPWR_REPO_NAME"
-    fi
-    export ZPWR_TEMPFILE="/tmp/$ZPWR_REPO_NAME/.temp$$-$USER"
-    export ZPWR_TEMPFILE1="/tmp/$ZPWR_REPO_NAME/.temp$$-1$USER"
-    export ZPWR_TEMPFILE2="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER"
-    export ZPWR_TEMPFILE3="/tmp/$ZPWR_REPO_NAME/.temp$$-3$USER"
-    export ZPWR_TEMPFILE4="/tmp/$ZPWR_REPO_NAME/.temp$$-4$USER"
-    export ZPWR_TEMPFILE_SQL="/tmp/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
-else
-    if [[ ! -d "$TMPDIR/$ZPWR_REPO_NAME" ]]; then
-        mkdir -p "$TMPDIR/$ZPWR_REPO_NAME"
-    fi
-    export ZPWR_TEMPFILE="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-$USER"
-    export ZPWR_TEMPFILE1="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-1$USER"
-    export ZPWR_TEMPFILE2="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER"
-    export ZPWR_TEMPFILE3="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-3$USER"
-    export ZPWR_TEMPFILE4="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-4$USER"
-    export ZPWR_TEMPFILE_SQL="$TMPDIR/$ZPWR_REPO_NAME/.temp$$-2$USER.sql"
+if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
+    mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
 fi
+export ZPWR_TEMPFILE="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-$USER"
+export ZPWR_TEMPFILE1="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-1$USER"
+export ZPWR_TEMPFILE2="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER"
+export ZPWR_TEMPFILE3="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-3$USER"
+export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"
+export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
 #}}}***********************************************************
 
 #{{{                    MARK:Env Vars
