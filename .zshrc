@@ -77,6 +77,8 @@ export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
+# auto select first item of menuselect
+export ZPWR_AUTO_SELECT=true
 # typing leading quote, paren, bracket inserts trailing after caret
 export ZPWR_SURROUND=true
 # output is more colorful
@@ -729,6 +731,7 @@ regenSearchEnv(){
 
 regenAll(){
     regenZshCompCache
+    regenTags
     regenAllKeybindingsCache
     regenPowerlineLink
     regenSearchEnv
@@ -1340,8 +1343,10 @@ setopt nocaseglob
 # filename completion after =
 setopt magic_equal_subst
 
-#auto select first item of menu completion
-setopt menu_complete
+if [[ $ZPWR_AUTO_SELECT == true ]]; then
+    #auto select first item of menu completion
+    setopt menu_complete
+fi
 
 #array expandsion include prefix
 setopt rc_expand_param
