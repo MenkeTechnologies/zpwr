@@ -2257,9 +2257,12 @@ needSudo(){
 regenTags(){
 
     prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags"
-    cd "$ZPWR_SCRIPTS"
+    (
+    builtin cd "$ZPWR_SCRIPTS"
+    command rm tags
     ctags --language-force=sh "$HOME/.zshrc" "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh"
-    ctags * macOnly/*
+    ctags --append * macOnly/*
+    )
 
 }
 
