@@ -16,15 +16,15 @@ if [[ -z "$ZPWR_TEMPFILE" ]]; then
     ZPWR_TEMPFILE="/tmp/.temp$$"
 fi
 {
-    $cmd -e -c 'redir! > ~/.temp1 | silent imap | redir END | quitall'
-    cat ~/.temp1
-    $cmd -e -c 'redir! > ~/.temp2 | silent nmap | redir END | quitall'
-    cat ~/.temp2
-    $cmd -e -c 'redir! > ~/.temp3 | silent vmap | redir END | quitall'
-    cat ~/.temp3
-    $cmd -e -c 'redir! > ~/.temp4 | silent cmap | redir END | quitall'
-    cat ~/.temp4
-    command rm ~/.temp{1..4}
+    $cmd -e -c 'redir! > ~/.zpwr/.temp/.temp1 | silent imap | redir END | quitall'
+    cat ~/.zpwr/.temp/.temp1
+    $cmd -e -c 'redir! > ~/.zpwr/.temp/.temp2 | silent nmap | redir END | quitall'
+    cat ~/.zpwr/.temp/.temp2
+    $cmd -e -c 'redir! > ~/.zpwr/.temp/.temp3 | silent vmap | redir END | quitall'
+    cat ~/.zpwr/.temp/.temp3
+    $cmd -e -c 'redir! > ~/.zpwr/.temp/.temp4 | silent cmap | redir END | quitall'
+    cat ~/.zpwr/.temp/.temp4
+    command rm ~/.zpwr/.temp/.temp{1..4}
 
 } | perl -ne 'print if /\S+/' > "$ZPWR_TEMPFILE"
 
