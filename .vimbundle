@@ -19,6 +19,7 @@ luochen1990/rainbow
 Houl/repmo-vim
 ervandew/supertab
 vim-syntastic/syntastic
+godlygeek/tabular
 vim-scripts/tagexplorer.vim
 wellle/targets.vim
 tomtom/tlib_vim
