@@ -61,7 +61,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zsh
 - Powerlevel9k zsh prompt with ~dirs
 - tmux
-- neovim with 74 plugins and python3/node support
+- neovim with 75 plugins and python3/node support
 - youcompleteme
 - ultisnips
 - supertab
