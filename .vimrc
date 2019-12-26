@@ -122,6 +122,9 @@ set list listchars=tab:\ \ ,trail:·
 
 "customize .viminfo
 set viminfo='1000,<50,s10,h
+
+"show vertical line at 80 chars width
+set colorcolumn=80
 ""}}}***********************************************************
 
 "{{{                    MARK:Vundle
