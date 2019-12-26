@@ -795,7 +795,7 @@ map <expr> j repmo#Key('gj', 'gk')|sunmap j
 map <expr> k repmo#Key('gk', 'gj')|sunmap k
 
 " similar to complete current statement in many IDEs
-" where the keybindings moves caret to next line adding semicolon as needed
+" where the keybinding moves caret to next line adding semicolon as needed to complete the statement
 function! CompleteStatement()
     let SemiColon=['java','pl','c','h', 'hpp', 'cpp','js', 'rs']
     let doubleSemiColon=['ml']
@@ -858,12 +858,15 @@ autocmd VimEnter * nnoremap <silent> <NUL> :call CompleteStatementNormal()<CR>
 "**************************************************************
 set pastetoggle=<F9>
 
-" Repeat last command in the next tmux pane.
+" Execute the current file in tmux pane to right when type=file
+" Execute the visual selection in tmux pane to right when type=visual
+" Send the visual selection REPL in tmux pane to right when type=repl
 function! TmuxRepeat(type)
     let supportedTypes=['sh','zsh', 'cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
     let exeFileType=expand('%:e')
     let $VIMHOME = $HOME."/.vim"
 
+    "non empty when tmux server is running
     let tmux=$TMUX
     let a_save = ""
 
@@ -885,9 +888,7 @@ function! TmuxRepeat(type)
             let fileName=fnameescape(expand("%:p"))
         endif
 
-
         let pane_count=Strip(system("tmux list-panes | wc -l"))
-
         if pane_count > 1 || has("gui_running")
             if has("gui_running")
                 let output =  system("tmux list-sessions | command grep vimmers")
@@ -895,7 +896,6 @@ function! TmuxRepeat(type)
                     echom "No Vimmers tmux session!"
                     return 0
                 endif
-
                 if a:type == "repl"
                     silent! exec "!tmux paste-buffer -b buffer0099 -t vimmers:0. "
                     redraw!
