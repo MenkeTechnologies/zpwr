@@ -210,6 +210,8 @@ export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
+# auto select first item of menuselect
+export ZPWR_AUTO_SELECT=true
 # typing leading quote, paren, bracket inserts trailing after caret
 export ZPWR_SURROUND=true
 # output is more colorful
