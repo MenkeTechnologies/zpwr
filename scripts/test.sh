@@ -22,12 +22,3 @@ echo 2019-11-10
 echo 2019-11-10
 echo 2019-11-10
 
-
-if [[ adskfjasdlkfj ]]; then
-    sdlkjfasklfdakjf
-fi
-
-
-if [[ $ZPWR_TMUX_REMOTE_PREFIX  ]]; then
-    #statements
-fi
