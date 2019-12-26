@@ -2256,7 +2256,7 @@ needSudo(){
 
 regenTags(){
 
-    prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags"
+    prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME"
     (
     builtin cd "$ZPWR_SCRIPTS"
     command rm tags
