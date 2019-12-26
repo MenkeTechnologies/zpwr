@@ -2262,6 +2262,7 @@ regenTags(){
     command rm tags
     ctags --language-force=sh "$HOME/.zshrc" "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh"
     ctags --append * macOnly/*
+    command cp tags "$HOME"
     )
 
 }
