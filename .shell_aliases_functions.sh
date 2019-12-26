@@ -1512,6 +1512,7 @@ copyConf(){
     cp UltiSnips/* "$HOME/.vim/UltiSnips"
     cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux"
     cp -f scripts/* "$ZPWR_SCRIPTS"
+    cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
 
 }
 
