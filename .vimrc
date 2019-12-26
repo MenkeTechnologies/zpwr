@@ -1021,6 +1021,7 @@ noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <leader>aa :Ag<CR>
 nnoremap <silent> <C-D>b :Buffers<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <leader>co :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
