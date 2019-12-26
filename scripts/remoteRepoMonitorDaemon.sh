@@ -44,6 +44,8 @@ main() {
     if [[ -n "$ZPWR_SCRIPTS" ]]; then
         rm -f "$ZPWR_SCRIPTS/"*
         cp -f scripts/* "$ZPWR_SCRIPTS"
+        cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
+
     fi
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*; do
