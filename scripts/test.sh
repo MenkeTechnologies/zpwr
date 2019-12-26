@@ -27,3 +27,7 @@ if [[ adskfjasdlkfj ]]; then
     sdlkjfasklfdakjf
 fi
 
+
+if [[ $ZPWR_TMUX_REMOTE_PREFIX  ]]; then
+    #statements
+fi

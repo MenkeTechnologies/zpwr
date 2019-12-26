@@ -2254,6 +2254,15 @@ needSudo(){
     fi
 }
 
+regenTags(){
+
+    prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags"
+    cd "$ZPWR_SCRIPTS"
+    ctags --language-force=sh "$HOME/.zshrc" "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh"
+    ctags * macOnly/*
+
+}
+
 regenAllKeybindingsCache(){
     prettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
     bash "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
