@@ -1016,8 +1016,10 @@ inoremap <silent> <C-D>. <C-O>:FZFMaps<CR>
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 
 nnoremap <silent> <C-D>a :Ag<CR>
+nnoremap <silent> <leader>aa :Ag<CR>
 nnoremap <silent> <C-D>b :Buffers<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
+nnoremap <silent> <leader>co :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
 nnoremap <silent> <C-D>e :ALEInfo<CR>
 nnoremap <silent> <C-D>f :Files<CR>
@@ -1026,7 +1028,7 @@ nnoremap <silent> <C-D>g :Commits!<CR>
 nnoremap <silent> <C-D>h :HistoryFiles<CR>
 nnoremap <silent> <C-D>i :Imap<CR>
 nnoremap <silent> <C-D>j :Agg<CR>
-nnoremap <silent> <leader>a :Ag<CR>
+nnoremap <silent> <leader>ag :Agg<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 nnoremap <silent> <C-D>m :Map<CR>
@@ -1037,6 +1039,7 @@ nnoremap <silent> <C-D>p :call GetRef()<CR>
 nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
 nnoremap <silent> <C-D>rq :silent !open -t %:p:h<CR>:redraw!<CR>
 nnoremap <silent> <C-D>rr :Rg<CR>
+nnoremap <silent> <leader>rg :Rg<CR>
 nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>t :Tags<CR>
 nnoremap <silent> <C-D>u :History:<CR>

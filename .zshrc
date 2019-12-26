@@ -1857,6 +1857,14 @@ if [[ -d "$ZPWR_SCRIPTS" ]]; then
     : ~ZPWR_SCRIPTS
 fi
 
+if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
+    : ~ZPWR_HIDDEN_DIR_TEMP
+fi
+
+if [[ -d "$ZPWR_HIDDEN_DIR" ]]; then
+    : ~ZPWR_HIDDEN_DIR
+fi
+
 if [[ -d "$ZPWR" ]]; then
     : ~ZPWR
 fi
