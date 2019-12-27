@@ -1069,7 +1069,7 @@ nmap [] k$][%?}<CR>]}]]}]]
 "{{{                    MARK:autocmd
 "**************************************************************
 
-autocmd filetype text set tags+=~/tags
+autocmd filetype * set tags+=~/tags
 autocmd filetype * call AutoCorrect()
 "uncomment following if you want just want autocorrection in text and markdown files
 "autocmd filetype text call AutoCorrect()
