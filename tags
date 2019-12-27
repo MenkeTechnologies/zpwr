@@ -156,6 +156,7 @@ IFS	saygoogle.sh	/^IFS=+$/;"	v	language:Sh
 IFS	sortedArrayCounter.sh	/^        IFS="$oldifs"$/;"	v	language:Sh
 IFS	sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v	language:Sh
 IFS	sortedArrayCounter.sh	/^IFS=:$/;"	v	language:Sh
+INSTALLER_DIR	plugins_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INTERFACE	macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v	language:Sh
 KEYTIMEOUT	/Users/wizard/.zshrc	/^export KEYTIMEOUT=1$/;"	v	language:Sh
 LBUFFER	/Users/wizard/.zshrc	/^        LBUFFER="sudo -E nvim $(fzvim)"$/;"	v	language:Sh
@@ -272,6 +273,7 @@ ZPWR_GITHUB_ACCOUNT	/Users/wizard/.zshrc	/^export ZPWR_GITHUB_ACCOUNT='MenkeTech
 ZPWR_GITHUB_URL	/Users/wizard/.zshrc	/^export ZPWR_GITHUB_URL="https:\/\/github.com\/$ZPWR_GITHUB_ACCOUNT"$/;"	v	language:Sh
 ZPWR_GLOBAL_ALIAS_PREFIX	/Users/wizard/.zshrc	/^export ZPWR_GLOBAL_ALIAS_PREFIX=j$/;"	v	language:Sh
 ZPWR_HIDDEN_DIR	/Users/wizard/.zshrc	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr"$/;"	v	language:Sh
+ZPWR_HIDDEN_DIR	plugins_install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr"$/;"	v
 ZPWR_HIDDEN_DIR_TEMP	/Users/wizard/.zshrc	/^export ZPWR_HIDDEN_DIR_TEMP="$HOME\/.zpwr\/.temp"$/;"	v	language:Sh
 ZPWR_LEARN	/Users/wizard/.zshrc	/^export ZPWR_LEARN=true$/;"	v	language:Sh
 ZPWR_LOCK_FILE	/Users/wizard/.zshrc	/^export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR\/.lock"$/;"	v	language:Sh
@@ -285,6 +287,7 @@ ZPWR_NVIMINFO	/Users/wizard/.zshrc	/^export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR\/.nv
 ZPWR_OPEN_CMD	crossOSCommands.sh	/^export ZPWR_OPEN_CMD="$(getOpenCommand)"$/;"	v	language:Sh
 ZPWR_OS_TYPE	/Users/wizard/.zshrc	/^export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v	language:Sh
 ZPWR_OS_TYPE	crossOSCommands.sh	/^    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v	language:Sh
+ZPWR_OS_TYPE	plugins_install.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
 ZPWR_PARENT_PROCESS	/Users/wizard/.zshrc	/^ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\\s*\\d+.*}')"$/;"	v	language:Sh
 ZPWR_PASTE_CMD	crossOSCommands.sh	/^export ZPWR_PASTE_CMD="$(getPasteCommand)"$/;"	v	language:Sh
 ZPWR_PROFILING	/Users/wizard/.zshrc	/^export ZPWR_PROFILING=false$/;"	v	language:Sh
@@ -635,6 +638,9 @@ distroName	/Users/wizard/.zshrc	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g
 distroName	clearTrash.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	colorLogger.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	logs.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
+distroName	plugins_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	plugins_install.sh	/^        distroName=FreeBSD$/;"	v
+distroName	plugins_install.sh	/^    distroName=Mac$/;"	v
 do_line	mantozshcomp.py	/^    def do_line(self):$/;"	m	language:Python	class:Deroffer
 do_tbl	mantozshcomp.py	/^    def do_tbl(self):$/;"	m	language:Python	class:Deroffer
 dontSummarizeSizes	directoryContentsSize.sh	/^dontSummarizeSizes() {$/;"	f	language:Sh
@@ -841,6 +847,7 @@ hostname	updater.sh	/^    hostname="$(echo "$1" | awk -F: '{print $1}')"$/;"	v	l
 hostname	updaterNoPip.sh	/^    hostname="$(echo "$1" | awk -F: '{print $1}')"$/;"	v	language:Sh
 hour	timeConverter.sh	/^    hour=$((hour - 12))$/;"	v	language:Sh
 hour	timeConverter.sh	/^hour=$(date | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f1)$/;"	v	language:Sh
+htopDIR	plugins_install.sh	/^htopDIR="$HOME\/.config\/htop"$/;"	v
 humanReadable	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^humanReadable(){$/;"	f	language:Sh
 id	/Users/wizard/.zshrc	/^            id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \\$. == $num")$/;"	v	language:Sh
 info	about.sh	/^            info="$(git tag -l -n9 "$version" | perl -pe 's@[\\t ]+@ @')"$/;"	v	language:Sh
@@ -1053,6 +1060,7 @@ number	batchRename.sh	/^        local number=$((10#$number))$/;"	v	language:Sh
 number	batchRename.sh	/^        local number=$(echo ${last%%.*})$/;"	v	language:Sh
 number	mantozshcomp.py	/^    def number(self):$/;"	m	language:Python	class:Deroffer
 numreq	mantozshcomp.py	/^    def numreq(self):$/;"	m	language:Python	class:Deroffer
+nvimDir	plugins_install.sh	/^nvimDir="$HOME\/.config\/nvim"$/;"	v
 o	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^o(){$/;"	f	language:Sh
 o	macOnly/combo.sh	/^    o="$(cat)"$/;"	v	language:Sh
 o	macOnly/combo.sh	/^    o="$(hostname)"$/;"	v	language:Sh
@@ -1395,6 +1403,7 @@ timeToSleep	myWatchNoBlinkColorized.sh	/^    timeToSleep=0.5$/;"	v	language:Sh
 timediff	autoUpdater.sh	/^        timediff=$((newtime - oldtime))$/;"	v	language:Sh
 timer	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^timer() {$/;"	f	language:Sh
 title	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        title="$1"$/;"	v	language:Sh
+tmuxPowerlineDir	plugins_install.sh	/^tmuxPowerlineDir="$HOME\/.config\/powerline\/themes\/tmux"$/;"	v
 to	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^to(){$/;"	f	language:Sh
 torip	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^torip(){$/;"	f	language:Sh
 toriprenew	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^toriprenew() {$/;"	f	language:Sh
