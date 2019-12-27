@@ -948,12 +948,18 @@ autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<
 "reassign readline plugin mapping
 autocmd VimEnter * nunmap S
 
-" exec visual selection from scrathc
-vnoremap <silent> <C-E><C-F> <ESC>:call TmuxRepeat("visual")<CR>gv
-" exec visual selection by pasting into REPL
-vnoremap <silent> <C-E><C-E> <ESC>:call TmuxRepeat("repl")<CR>gv
+
+let shouldMapV = $ZPWR_MAP_C_V_VIM_NORMAL
+if shouldMapV == 'true'
+    " exec file from scratch
+    nnoremap <silent> <C-v> :w!<CR>:call TmuxRepeat("file")<CR>
+endif
 " exec file from scratch
-nnoremap <silent> <C-V> :w!<CR>:call TmuxRepeat("file")<CR>
+nnoremap <silent> <leader>vj :w!<CR>:call TmuxRepeat("file")<CR>
+" exec visual selection from scrathc
+vnoremap <silent> <leader>vk <ESC>:call TmuxRepeat("visual")<CR>gv
+" exec visual selection by pasting into REPL
+vnoremap <silent> <leader>vl <ESC>:call TmuxRepeat("repl")<CR>gv
 
 "vnoremap <silent> y y`>
 "nnoremap <silent> gp p`]
