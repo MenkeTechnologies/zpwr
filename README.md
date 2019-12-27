@@ -187,6 +187,9 @@ Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/contr
 ## Personal Config
 Startup shell files will source `~/.zpwr/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
 
+Running `zpwr regen` will regenerate all cache files in .zpwr and create a ctags file named tags and place that in you home directory.
+YCM will source this file while providing completion so tab completion on all zpwr env vars should work.
+
 ## ZPWR_GITHUB_ACCOUNT variable
 
 Change at top of `~/.zshrc` or better in `~/.zpwr/.tokens.sh`
