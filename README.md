@@ -155,7 +155,7 @@ The default tmux prefix key is C-x on a Mac so I can control inner tmux sessions
 The Tmux prefix on Linux is the default C-b.
 
 ## Vim Plugins
-There are 74 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
+There are 75 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Bypassing expansion on space
 C-Space (Control-Space or actually ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.  Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`
