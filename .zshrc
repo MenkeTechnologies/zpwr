@@ -154,6 +154,8 @@ export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
+#when true vim normal mode C-V mapped to exec current file in right tmux pane
+export ZPWR_MAP_C_V_VIM_NORMAL=false
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
