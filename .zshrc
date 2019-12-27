@@ -584,7 +584,7 @@ vimFzf(){
         firstdir=${mywords[2]:h}
         #logg "words='$mywords[2]'=>'$firstdir'"
         #:h takes aways last "
-        BUFFER="cd $firstdir\"; $BUFFER; clearList"
+        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList"
         zle .accept-line
     fi
 }
