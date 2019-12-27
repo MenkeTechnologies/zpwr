@@ -2250,7 +2250,7 @@ regenTags(){
     prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
     (
     builtin cd "$ZPWR_SCRIPTS"
-    command rm tags
+    command rm tags 2>/dev/null
     ctags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh"
     ctags --append --fields=+l * macOnly/*
     command cp tags "$HOME"

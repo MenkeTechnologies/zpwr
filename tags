@@ -354,6 +354,7 @@ __OLDBUFFER	/Users/wizard/.zshrc	/^        __OLDBUFFER="${BUFFER}"$/;"	v	languag
 __ScriptVersion	CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v	language:Sh
 __ScriptVersion	macOnly/splitReg.sh	/^__ScriptVersion=1.0.0$/;"	v	language:Sh
 __ScriptVersion	powerTo.sh	/^__ScriptVersion="1.0.0"$/;"	v	language:Sh
+__ScriptVersion	scripts/CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v
 __ScriptVersion	splitReg.sh	/^__ScriptVersion=1.0.0$/;"	v	language:Sh
 __ScriptVersion	storageShower.sh	/^__ScriptVersion="version"$/;"	v	language:Sh
 __ScriptVersion	tgzLocalInstaller.sh	/^__ScriptVersion="1.0.0"$/;"	v	language:Sh
@@ -420,6 +421,7 @@ alternatingPrettyPrint	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^alterna
 alternatingPrettyPrint	CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	pipUpdater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	rpiSoftwareUpdater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
+alternatingPrettyPrint	scripts/CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
 alternatingPrettyPrint	updater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	updaterNoPip.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 amPm	timeConverter.sh	/^    amPm="PM"$/;"	v	language:Sh
@@ -568,6 +570,7 @@ counter	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    counter=0$/;"	v	la
 counter	CPU_Stresser.sh	/^    counter=0$/;"	v	language:Sh
 counter	pipUpdater.sh	/^    counter=0$/;"	v	language:Sh
 counter	rpiSoftwareUpdater.sh	/^    counter=0$/;"	v	language:Sh
+counter	scripts/CPU_Stresser.sh	/^    counter=0$/;"	v
 createLearningCollection	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    createLearningCollection(){$/;"	f	language:Sh
 createTemplate	templater.sh	/^createTemplate() {$/;"	f	language:Sh
 createTheFile	createScriptButDontOpenSublime.sh	/^createTheFile() {$/;"	f	language:Sh
@@ -688,6 +691,7 @@ exists	fzfPreviewOptsCommon.sh	/^    exists(){$/;"	f	language:Sh
 exists	fzfPreviewOptsCommon2Pos.sh	/^    exists(){$/;"	f	language:Sh
 exists	manzshcompgen.zsh	/^exists(){$/;"	f	language:Sh
 exists	rpiSoftwareUpdater.sh	/^exists() {$/;"	f	language:Sh
+exists	scripts/CPU_Stresser.sh	/^exists() {$/;"	f
 exists	tailZOU.sh	/^    exists(){$/;"	f	language:Sh
 exists	updater.sh	/^exists() {$/;"	f	language:Sh
 exists	updaterNoPip.sh	/^exists() {$/;"	f	language:Sh
@@ -889,6 +893,7 @@ killCursor	openAll.sh	/^killCursor() {$/;"	f	language:Sh
 killCursor	picture_finder.sh	/^killCursor() {$/;"	f	language:Sh
 killCursor	secureDelete.sh	/^killCursor() {$/;"	f	language:Sh
 killpids	CPU_Stresser.sh	/^killpids() {$/;"	f	language:Sh
+killpids	scripts/CPU_Stresser.sh	/^killpids() {$/;"	f
 last	batchRename.sh	/^        local last=$(echo ${file##*_})$/;"	v	language:Sh
 lastWord	/Users/wizard/.zshrc	/^    lastWord=${${(Az)@}[-1]}$/;"	v	language:Sh
 lastWordDouble	/Users/wizard/.zshrc	/^lastWordDouble(){$/;"	f	language:Sh
@@ -1033,6 +1038,7 @@ noport	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                noport=
 noproto	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                        noproto="${noproto:0:-1}"$/;"	v	language:Sh
 noproto	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                noproto="$(echo "$noport" | sed -E 's@https:\/\/|http:\/\/@@')"$/;"	v	language:Sh
 nproc	CPU_Stresser.sh	/^nproc=10$/;"	v	language:Sh
+nproc	scripts/CPU_Stresser.sh	/^nproc=10$/;"	v
 num	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^            num=$1$/;"	v	language:Sh
 num	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        local num=100$/;"	v	language:Sh
 num	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    num=$1$/;"	v	language:Sh
@@ -1149,6 +1155,7 @@ pid	tailZOU.sh	/^        pid=$!$/;"	v	language:Sh
 pid	tailZOU.sh	/^    pid=$!$/;"	v	language:Sh
 pids	CPU_Stresser.sh	/^        pids="$pids $!"$/;"	v	language:Sh
 pids	fdswap.sh	/^pids=$*$/;"	v	language:Sh
+pids	scripts/CPU_Stresser.sh	/^        pids="$pids $!"$/;"	v
 pipe	readFIFO.sh	/^pipe=$HOME\/Desktop\/testpipe$/;"	v	language:Sh
 pipe	readFIFO.sh	/^pipe=\/tmp\/testpipe$/;"	v	language:Sh
 pirun	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^pirun(){$/;"	f	language:Sh
@@ -1168,6 +1175,7 @@ prettyPrint	macOnly/resetWIFI.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	macOnly/tor.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	macOnly/tutorialConfigUpdater.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	rpiSoftwareUpdater.sh	/^prettyPrint() {$/;"	f	language:Sh
+prettyPrint	scripts/CPU_Stresser.sh	/^prettyPrint() {$/;"	f
 prettyPrint	textmessage.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	updater.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	updaterNoPip.sh	/^prettyPrint() {$/;"	f	language:Sh
@@ -1427,6 +1435,7 @@ usage	myWatchNoBlink.sh	/^usage() {$/;"	f	language:Sh
 usage	myWatchNoBlinkColorized.sh	/^usage() {$/;"	f	language:Sh
 usage	mywatch.sh	/^usage() {$/;"	f	language:Sh
 usage	powerTo.sh	/^function usage() {$/;"	f	language:Sh
+usage	scripts/CPU_Stresser.sh	/^usage() {$/;"	f
 usage	shebangChanger.sh	/^usage() {$/;"	f	language:Sh
 usage	splitReg.sh	/^function usage() {$/;"	f	language:Sh
 usage	storageShower.sh	/^function usage() {$/;"	f	language:Sh
