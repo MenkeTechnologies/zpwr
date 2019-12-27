@@ -1006,6 +1006,7 @@ inoremap <silent> <C-D>rq <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 inoremap <silent> <C-D>rr <Esc>:Rg<CR>
 inoremap <silent> <C-D>s <C-O>:History/<CR>
 inoremap <silent> <C-D>t <C-O>:Tags<CR>
+inoremap <silent> <C-D>] <C-W>}<CR>
 inoremap <silent> <C-D>u <C-O>:History:<CR>
 inoremap <silent> <C-D>v <C-[>:w!<CR>:call TmuxRepeatGeneric()<CR>a
 inoremap <silent> <C-D>w <C-O>:update<CR>
@@ -1046,6 +1047,9 @@ nnoremap <silent> <C-D>rr :Rg<CR>
 nnoremap <silent> <leader>rg :Rg<CR>
 nnoremap <silent> <C-D>s :History/<CR>
 nnoremap <silent> <C-D>t :Tags<CR>
+nnoremap <silent> <C-D>] <C-W>}<CR>
+nnoremap <silent> <leader>] <C-W>}<CR>
+nnoremap <silent> <leader>ta :Tags<CR>
 nnoremap <silent> <C-D>u :History:<CR>
 nnoremap <silent> <C-D>v :w!<CR>:call TmuxRepeatGeneric()<CR>
 nnoremap <silent> <C-D>w :update<CR>
