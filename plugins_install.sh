@@ -68,7 +68,13 @@ prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
 
 
+prettyPrint "Copying iftop.conf to home directory"
 cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
+
+if [[ ! -f "$HOME/.ctags" ]]; then
+    prettyPrint "Copying .ctags to home directory"
+    cp "$INSTALLER_DIR/.ctags" "$HOME"
+fi
 
 prettyPrint "Installing Iftop colors to $HOME"
 cp "$INSTALLER_DIR/.iftopcolors" "$HOME"

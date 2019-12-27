@@ -1514,6 +1514,11 @@ copyConf(){
     cp -f scripts/* "$ZPWR_SCRIPTS"
     cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
 
+    if [[ ! -f "$HOME/.ctags" ]]; then
+        prettyPrint "Copying .ctags to home directory"
+        cp ".ctags" "$HOME"
+    fi
+
 }
 
 # pull down latest configuration files from $ZPWR_REPO_NAME
