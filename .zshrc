@@ -2695,9 +2695,11 @@ fi
 
 zshrcsearch(){
     if [[ -z "$1" ]]; then
-        zsh -ilvx -c false |& less
+        zsh -ilvx -c false &> $ZPWR_TEMPFILE4
+        less $ZPWR_TEMPFILE4
     else
-        zsh -ilvx -c false |& ag --color --numbers -C 5 -i "$@" |& less
+        zsh -ilvx -c false &> $ZPWR_TEMPFILE4
+        ag --color --numbers -C 5 -i "$@" $ZPWR_TEMPFILE4 | less
     fi
 }
 
