@@ -749,10 +749,12 @@ test -f "$escapeRemover" && \
     "$escapeRemover" "$logfile" > "$INSTALLER_DIR/log.txt"
 
 #rm -rf "$INSTALLER_DIR"
-prettyPrint "Waiting for cargo installer to finish"
-wait $CARGO_PID
-wait $YCM_PID
-wait $PLUGIN_PID
+if [[ $justConfig != true ]] && [[ $skip != true ]]; then
+    prettyPrint "Waiting for cargo installer to finish"
+    wait $CARGO_PID
+    wait $YCM_PID
+    wait $PLUGIN_PID
+fi
 
 prettyPrint "Done!!!!!!"
 prettyPrint "Starting Tmux..."
