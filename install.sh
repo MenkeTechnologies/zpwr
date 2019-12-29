@@ -739,7 +739,7 @@ fi
 
 #}}}***********************************************************
 
-#{{{                    MARK:Final
+#{{{                    MARK:Final sym links
 #**************************************************************
 builtin cd "$INSTALLER_DIR/.." || { echo "what happened to $INSTALLER_DIR ?" >&2; exit 1; }
 
@@ -781,12 +781,14 @@ else
         ln -sf "$dir" "$TMUX_HOME/powerline"
     fi
 fi
+#}}}***********************************************************
 
-command tmux source-file "$HOME/.tmux.conf"
-
-
-zsh -c 'tmux new-session -d -s main'
-tmux send-keys -t "main" 'tmux source-file "$HOME/.zpwr/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
-tmux attach -t main
-
+#{{{                    MARK:start tmux
+#**************************************************************
+if [[ $justConfig != true ]] && [[ $skip != true ]]; then
+    command tmux source-file "$HOME/.tmux.conf"
+    zsh -c 'tmux new-session -d -s main'
+    tmux send-keys -t "main" 'tmux source-file "$HOME/.zpwr/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
+    tmux attach -t main
+fi
 #}}}***********************************************************
