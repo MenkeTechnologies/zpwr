@@ -1059,6 +1059,7 @@ nnoremap <silent> <C-D>m :Map<CR>
 nnoremap <silent> <leader>m :Map<CR>
 nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>o :ALEToggle<CR>
+nnoremap <silent> <leader>o :ALEToggle<CR>
 nnoremap <silent> <C-D>p :call GetRef()<CR>
 nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
 nnoremap <silent> <C-D>rq :silent !open -t %:p:h<CR>:redraw!<CR>
