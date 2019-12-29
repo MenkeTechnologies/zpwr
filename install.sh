@@ -732,8 +732,10 @@ git clone https://github.com/MenkeTechnologies/powerlevel9k.git ~/.oh-my-zsh/cus
 prettyPrint "Installing fzf"
 "$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
 
-prettyPrint "Final refreshing of dependencies"
-refresh "$distroFamily"
+if [[ $justConfig != true ]]; then
+    prettyPrint "Final refreshing of dependencies"
+    refresh "$distroFamily"
+fi
 
 #}}}***********************************************************
 
