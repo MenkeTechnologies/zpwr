@@ -337,7 +337,7 @@ do
 
         s|skip     )  skip=true ;;
 
-        c|skip     )  justConfig=true ;;
+        c|config     )  justConfig=true ;;
 
         * )  echo -e "\n  Option does not exist : $OPTARG\n"
             usage; exit 1   ;;
@@ -346,7 +346,15 @@ do
     done
     shift $(($OPTIND-1))
 
-    trap 'echo kill $YCM_PID $PLUGIN_PID $CARGO_PID; kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT TERM HUP QUIT
+trap 'echo kill $YCM_PID $PLUGIN_PID $CARGO_PID; kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT TERM HUP QUIT
+
+if [[ $justConfig == true ]]; then
+    prettyPrint "Installing just configs"
+fi
+
+if [[ $skip == true ]]; then
+    prettyPrint "Skipping dependencies section"
+fi
 
 #}}}***********************************************************
 
