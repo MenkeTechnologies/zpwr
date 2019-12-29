@@ -861,6 +861,19 @@ autocmd VimEnter * nnoremap <silent> <NUL> :call CompleteStatementNormal()<CR>
 "**************************************************************
 set pastetoggle=<F9>
 
+
+function! TmuxRun(...)
+    let str = join(a:000, ' ')
+    echom str
+    if has("gui_running")
+        silent! exec "!tmux send-keys -t vimmers:0. C-c '".str."' C-m"
+    else
+        silent! exec "!tmux send-keys -t right C-c '".str."' C-m"
+    endif
+endfunction
+
+command! -bang -nargs=* TRun call TmuxRun(<q-args>)
+
 " Execute the current file in tmux pane to right when type=file
 " Execute the visual selection in tmux pane to right when type=visual
 " Send the visual selection REPL in tmux pane to right when type=repl
