@@ -756,9 +756,12 @@ if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     wait $PLUGIN_PID
 fi
 
-prettyPrint "Done!!!!!!"
-prettyPrint "Starting Tmux..."
-prettyPrint "Starting the matrix"
+if [[ $justConfig != true ]] && [[ $skip != true ]]; then
+    prettyPrint "Done!!!!!!"
+    prettyPrint "Starting Tmux..."
+    prettyPrint "Starting the matrix"
+fi
+
 export SHELL="$(which zsh)"
 export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
 dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
