@@ -14,58 +14,55 @@ prettyPrint "installing gdb dashboard"
 wget -P ~ https://git.io/.gdbinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
-
     prettyPrint "Upgrading pip"
-    python3 -m pip install --upgrade pip
+    sudo python3 -m pip install --upgrade pip
     prettyPrint "Installing psutil for Python Glances"
-    python3 -m pip install psutil 
+    sudo python3 -m pip install psutil 
     prettyPrint "Installing Python Glances"
-    python3 -m pip install glances
+    sudo python3 -m pip install glances
     prettyPrint "Installing Virtualenv"
-    python3 -m pip install virtualenv
+    sudo python3 -m pip install virtualenv
 
     prettyPrint "Installing Powerline..."
 
-    python3 -m pip install powerline-status
+    sudo python3 -m pip install powerline-status
     prettyPrint "Installing Tmux Powerline"
 
     prettyPrint "Installing neovim python lib"
-    python3 -m pip install pynvim
+    sudo python3 -m pip install pynvim
 
     prettyPrint "Installing neovim remote"
-    python3 -m pip install neovim-remote
+    sudo python3 -m pip install neovim-remote
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
 
-    python3 -m pip install powerline-mem-segment
+    sudo python3 -m pip install powerline-mem-segment
     prettyPrint "Installing PyDf"
-    python3 -m pip install pydf
+    sudo python3 -m pip install pydf
 
     prettyPrint "Installing MyCLI"
-    python3 -m pip install mycli
+    sudo python3 -m pip install mycli
 
     prettyPrint "Installing PGCLI"
-    python3 -m pip install pgcli
+    sudo python3 -m pip install pgcli
 
 
     exists youtube_dl || {
         prettyPrint "Installing youtube-dl"
-        python3 -m pip install --upgrade youtube_dl
+        sudo python3 -m pip install --upgrade youtube_dl
     }
 
-    python3 -c 'import pip' && {
-        prettyPrint "Installing bpython for python3"
-        sudo python3 -m pip install bpython
+    prettyPrint "Installing bpython for python3"
+    sudo python3 -m pip install bpython
 
-        prettyPrint "Installing pygments for python3"
-        sudo python3 -m pip install pygments
+    prettyPrint "Installing pygments for python3"
+    sudo python3 -m pip install pygments
 
-        prettyPrint "Installing yapf"
-        sudo python3 -m pip install yapf
+    prettyPrint "Installing yapf"
+    sudo python3 -m pip install yapf
 
-        prettyPrint "Installing vim-vint"
-        sudo python3 -m pip install vim-vint
-    }
+    prettyPrint "Installing vim-vint"
+    sudo python3 -m pip install vim-vint
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
     if [[ "$distroFamily" == redhat ]]; then
         prettyPrint "Installing grc for RedHat"
@@ -124,22 +121,20 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         sudo python3 -m pip install --upgrade youtube_dl
     }
 
-    python3 -c 'import pip' && {
-        prettyPrint "Installing bpython for python3"
-        sudo python3 -m pip install bpython
+    prettyPrint "Installing bpython for python3"
+    sudo python3 -m pip install bpython
 
-        prettyPrint "Installing httpie for python3"
-        sudo python3 -m pip install httpie
+    prettyPrint "Installing httpie for python3"
+    sudo python3 -m pip install httpie
 
-        prettyPrint "Installing pygments for python3"
-        sudo python3 -m pip install pygments
+    prettyPrint "Installing pygments for python3"
+    sudo python3 -m pip install pygments
 
-        prettyPrint "Installing yapf"
-        sudo python3 -m pip install yapf
+    prettyPrint "Installing yapf"
+    sudo python3 -m pip install yapf
 
-        prettyPrint "Installing vim-vint"
-        sudo python3 -m pip install vim-vint
-    }
+    prettyPrint "Installing vim-vint"
+    sudo python3 -m pip install vim-vint
 else
     if [[ "$ZPWR_OS_TYPE" == "freebsd" ]]; then
         sudo python3 -m pip
@@ -187,19 +182,17 @@ else
             prettyPrint "Installing youtube-dl"
             sudo python3 -m pip install youtube_dl
         }
-        python3 -c 'import pip' && {
-            prettyPrint "Installing bpython for python3"
-            sudo python3 -m pip install bpython
+        prettyPrint "Installing bpython for python3"
+        sudo python3 -m pip install bpython
 
-            prettyPrint "Installing pygments for python3"
-            sudo python3 -m pip install pygments
+        prettyPrint "Installing pygments for python3"
+        sudo python3 -m pip install pygments
 
-            prettyPrint "Installing vim-vint"
-            sudo python3 -m pip install vim-vint
+        prettyPrint "Installing vim-vint"
+        sudo python3 -m pip install vim-vint
 
-            prettyPrint "Installing yapf"
-            sudo python3 -m pip install yapf
-        }
+        prettyPrint "Installing yapf"
+        sudo python3 -m pip install yapf
     fi
 fi
 prettyPrint "Done With Python Packages"
