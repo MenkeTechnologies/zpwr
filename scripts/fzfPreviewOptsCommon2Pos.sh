@@ -52,7 +52,7 @@ casestr=$(cat<<EOF
                 (*.txt)
                     $COLORIZER_FZF_FILE_TEXT 2>/dev/null;
                     ;;
-                [!.]*.*)
+                ([!.]*.*)
                     $COLORIZER_FZF_FILE 2>/dev/null;
                     ;;
                 (.*.*)
