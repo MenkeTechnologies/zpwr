@@ -2340,7 +2340,7 @@ builtin cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/nul
 
 regenPowerlineLink(){
     dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
-    if needSudo "dir"; then
+    if needSudo "$dir"; then
         prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
         echo sudo ln -sf "$dir" "$TMUX_HOME"
         (
