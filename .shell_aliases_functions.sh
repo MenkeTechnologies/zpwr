@@ -1922,8 +1922,13 @@ c(){
                             if (( $# > 1)); then
                                 printf "\x1b[34;1;4m$file\x1b[0m\n"
                             fi
-                            bash fzfPreviewOptsCtrlT.sh |
-                            sed "s@{}@$file@" | zsh
+                            if [[ -r "$file" ]]; then
+                                bash fzfPreviewOptsCtrlT.sh |
+                                sed "s@{}@$file@" | zsh
+                            else
+                                bash fzfPreviewOptsCtrlT.sh |
+                                sed "s@{}@$file@" | sudo zsh
+                            fi
                         fi
                     done
                 } || cat -n "$@"
@@ -1937,8 +1942,13 @@ c(){
                         if (( $# > 1)); then
                             printf "\x1b[34;1;4m$file\x1b[0m\n"
                         fi
-                        bash fzfPreviewOptsCtrlT.sh |
-                        sed "s@{}@$file@" | zsh
+                        if [[ -r "$file" ]]; then
+                            bash fzfPreviewOptsCtrlT.sh |
+                            sed "s@{}@$file@" | zsh
+                        else
+                            bash fzfPreviewOptsCtrlT.sh |
+                            sed "s@{}@$file@" | sudo zsh
+                        fi
                     fi
                 done
             } || cat -n "$@"
