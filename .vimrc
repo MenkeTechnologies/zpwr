@@ -973,14 +973,14 @@ function! ExtractMethod() range
         '>
         exe "normal! o}\<Esc>"
         exe "normal! o".l:name. "\<Esc>kvi{>"
-        call feedkeys("va{ok")
+        call feedkeys("va{V")
     elseif l:exeFileType == 'pl'
         '<
         exe "normal! Osub " . l:name ."(){\<Esc>"
         '>
         exe "normal! o}\<Esc>"
-        exe "normal! o".l:name. "()\<Esc>kvi{>"
-        call feedkeys("va{ok")
+        exe "normal! o".l:name. "();\<Esc>kvi{>"
+        call feedkeys("va{V")
     elseif l:exeFileType == 'py'
         '<
         exe "normal! Odef " . l:name ."():\<Esc>"
