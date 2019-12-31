@@ -1079,6 +1079,10 @@ nnoremap <silent> <C-D>z :TlistAddFiles *<CR>:TlistToggle<CR>
 nnoremap <silent> <C-D>/ :LocateAll<CR>
 nnoremap <silent> <C-D>. :FZFMaps<CR>
 
+"similar to tmux <prefix> - and <prefix> | to split panes
+nnoremap <silent> <C-W>- :split<CR>
+nnoremap <silent> <C-W>\ :vsplit<CR>
+
 "gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
 set updatetime=100
 
