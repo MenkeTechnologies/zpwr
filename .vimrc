@@ -971,24 +971,22 @@ function! ExtractMethod() range
         '<
         exe "normal! Ofunction " . l:name ."(){\<Esc>"
         '>
-        exe "normal! o}\<Esc>vi{>\<Esc>]}"
-        exe "normal! o".l:name. ""
-        call feedkeys("A")
+        exe "normal! o}\<Esc>"
+        exe "normal! o".l:name. "\<Esc>kvi{>"
+        call feedkeys("va{ok")
     elseif l:exeFileType == 'pl'
         '<
         exe "normal! Osub " . l:name ."(){\<Esc>"
         '>
-        exe "normal! o}\<Esc>vi{>\<Esc>]}"
-        exe "normal! o".l:name. ""
-        call feedkeys("A")
-
+        exe "normal! o}\<Esc>"
+        exe "normal! o".l:name. "()\<Esc>kvi{>"
+        call feedkeys("va{ok")
     elseif l:exeFileType == 'py'
         '<
         exe "normal! Odef " . l:name ."():\<Esc>"
         '>
         exe "normal! o\<Esc>vi{>\<Esc>"
         exe "normal! o".l:name. ""
-        call feedkeys("A")
     elseif index(supportedTypes, exeFileType) < 0
         echom "Unknown Filetype '".exeFileType. "'."
     endif
