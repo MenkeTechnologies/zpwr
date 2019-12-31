@@ -962,6 +962,39 @@ autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<
 autocmd VimEnter * nunmap S
 
 
+vmap <leader>em :call ExtractMethod()<CR>
+function! ExtractMethod() range
+    let l:supportedTypes=['sh','zsh', 'pl', 'py']
+    let l:name = inputdialog("Extract method:")
+    let l:exeFileType=expand('%:e')
+    if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
+        '<
+        exe "normal! Ofunction " . l:name ."(){\<Esc>"
+        '>
+        exe "normal! o}\<Esc>vi{>\<Esc>]}"
+        exe "normal! o".l:name. ""
+        call feedkeys("A")
+    elseif l:exeFileType == 'pl'
+        '<
+        exe "normal! Osub " . l:name ."(){\<Esc>"
+        '>
+        exe "normal! o}\<Esc>vi{>\<Esc>]}"
+        exe "normal! o".l:name. ""
+        call feedkeys("A")
+
+    elseif l:exeFileType == 'py'
+        '<
+        exe "normal! Odef " . l:name ."():\<Esc>"
+        '>
+        exe "normal! o\<Esc>vi{>\<Esc>"
+        exe "normal! o".l:name. ""
+        call feedkeys("A")
+    elseif index(supportedTypes, exeFileType) < 0
+        echom "Unknown Filetype '".exeFileType. "'."
+    endif
+endfunction
+
+
 let shouldMapV = $ZPWR_MAP_C_V_VIM_NORMAL
 if shouldMapV == 'true'
     " exec file from scratch
