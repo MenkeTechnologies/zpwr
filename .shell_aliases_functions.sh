@@ -1926,6 +1926,8 @@ c(){
                                 bash fzfPreviewOptsCtrlT.sh |
                                 sed "s@{}@$file@" | zsh
                             else
+                    #preserve the PATH env var
+                    #with /etc/sudoers having Defaults secure_path
                                 bash fzfPreviewOptsCtrlT.sh |
                                 sed "s@{}@$file@" |
                                 sudo -E env "PATH=$PATH" zsh
@@ -1947,6 +1949,8 @@ c(){
                             bash fzfPreviewOptsCtrlT.sh |
                             sed "s@{}@$file@" | zsh
                         else
+                    #preserve the PATH env var
+                    #with /etc/sudoers having Defaults secure_path
                             bash fzfPreviewOptsCtrlT.sh |
                             sed "s@{}@$file@" |
                             sudo -E env "PATH=$PATH" zsh
