@@ -42,6 +42,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - custom ZPWR banner when `getrc`, `zpwr banner` and `install.sh` run
 - zle sed subs on current command line
 - vim text objects on command line
+- vim extract method for shell, perl and python scripts
 - software updater script, `source autoUpdater.h`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push
 - zsh keybindings to git add, commit and push with commit message from current command line
