@@ -39,7 +39,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - oh my zsh plugins loading based on OS
 - tmux keybindings based on OS
 - custom banner commands when new shell is launched
-- custom ZPWR banner when `getrc` and `zpwr banner` run
+- custom ZPWR banner when `getrc`, `zpwr banner` and `install.sh` run
 - zle sed subs on current command line
 - vim text objects on command line
 - software updater script, `source autoUpdater.h`,  on 24 hour loop
@@ -52,13 +52,15 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - shell function, c, that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips
 - shell function, c, uses same shell code to generate output that default FZF preview pane does
 - shell function, c, auto runs sudo when file is not readable
+- shell function, r, that cds to any of parent directories with zsh completion
 - 100+ bash, perl, zsh and python scripts
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color coded, tag grouped clearList zsh completion
-- search google from tmux mouse drag selection (copy-mode)
-- open URLs and files from tmux mouse drag selection (copy-mode)
-- zpwr subcommands with zsh completion `zpwr <tab>`
+- search google from tmux mouse drag selection (tmux's copy-mode-vi)
+- open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
+- zpwr subcommands covering most of ZPWR functions with zsh completion `zpwr <tab>`
 - centralized FZF preview pane customization
+- many centralized environment variables in ZPWR namespace to control functionality
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
