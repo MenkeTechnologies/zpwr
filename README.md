@@ -32,7 +32,9 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - fzf searching of all git directories on computer
 - fzf searching of all dirty git directories on computer
 - zsh completion for z command bases on .z database
-- keybindings to save to mysql learning database and to search from it
+- keybindings to save to mysql learning table
+- functions to search from mysql learning table
+- functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table
 - keybinding formats newlines and spaces before saving to mysql learning database
 - oh my zsh plugins loading based on OS
 - tmux keybindings based on OS
@@ -179,12 +181,18 @@ There are 76 vim plugins installed.  One of which is vim-autosave which autosave
 C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.
 Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`.
 
-`~/.zshrc:169 plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
+> ~/.zshrc:265
+```sh
+plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround
+```
 
 Alternatively, change these env vars to false in `~/.zpwr/.tokens.sh`.  The first controls all expansion in any position.
 The second variable controls expansion in second position.  For example with sudo/zpwr/env in the first position and the alias to expand in the second position on the command line.
+> ~/.zshrc:77
 ```sh
+# aliases expand in first position
 export ZPWR_EXPAND=true
+# aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
 ```
 
@@ -195,11 +203,10 @@ if echo "$firstword_partition" | command grep -qE '(sudo|zpwr|env)';then
 ```
 
 ## Running script from vim in tmux right pane is supported for these languages
+> ~/.vimrc
 ```vim
     let supportedTypes=['sh','zsh', 'cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
-
 ```
-> ~/.vimrc
 
 File ending of currently edited file in vim determines the interpreter used by the bash script `$ZPWR_SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
 
@@ -215,13 +222,10 @@ Running `zpwr regen` will regenerate all cache files in `~/.zpwr` and create a c
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
 
 ## ZPWR_GITHUB_ACCOUNT variable
-
-Change at top of `~/.zshrc` or better in `~/.zpwr/.tokens.sh`
-
+Change in `~/.zpwr/.tokens.sh`
 ```sh
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 ```
-
 to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
 
 ## Environment Variables
