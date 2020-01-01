@@ -156,7 +156,7 @@ documentation for details on how to change the font.
 There is a shell function called `getrc` that will update ZPWR by cloning the latest changes from this repository.
 It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc`, `~/.shell_aliases_functions.sh`, `~.tmux.conf`.
 `copyConf` will also overwrite all scripts in `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and some other configs in home directory.
-Run `clearList getrc copyConf` to see the bodies of these function to see the exact details.
+Run `clearList getrc copyConf` to see the bodies of these function.
 
 ## Tmux prefix
 The default tmux prefix key is C-x (control-x) on macOS so one can control inner tmux sessions on Linux/UNIX (prefix is C-b) separately.
@@ -164,19 +164,26 @@ To invoke C-x in the shell press the keybinding twice.
 The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed and dehighlight when prefix is deactivated.
 
 ## Vim Plugins
-There are 76 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
+There are 76 vim plugins installed.  One of which is vim-autosave which autosaves all edits thus making `:w` unnecessary.
+`:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Bypassing expansion on space
-C-Space (Control-Space or actually ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.  Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`
+C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.
+Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`.
 
 `~/.zshrc:169 plugins=(zsh-expand zsh-surround zsh-nginx zsh-more-completions`
 
-Alternatively, change these env vars to false in `~/.zpwr/.tokens.sh`.  The first controls all expansion while the second controls expansion in second position.
-
+Alternatively, change these env vars to false in `~/.zpwr/.tokens.sh`.  The first controls all expansion in any position.
+The second variable controls expansion in second position.  For example with sudo/zpwr/env in the first position and the alias to expand in the second position on the command line.
 ```sh
 export ZPWR_EXPAND=true
 export ZPWR_EXPAND_SECOND_POSITION=true
+```
 
+The relevant code is the zsh-expand plugin for expansion at the second position.
+> ~/.oh-my-zsh/custom/plugins/zsh-expand/zsh-expand.plugin.zsh: 368
+```sh
+if echo "$firstword_partition" | command grep -qE '(sudo|zpwr|env)';then
 ```
 
 ## Running script from vim in tmux right pane is supported for these languages
