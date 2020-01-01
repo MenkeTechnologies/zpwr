@@ -1927,7 +1927,8 @@ c(){
                                 sed "s@{}@$file@" | zsh
                             else
                                 bash fzfPreviewOptsCtrlT.sh |
-                                sed "s@{}@$file@" | sudo -E zsh
+                                sed "s@{}@$file@" |
+                                sudo -E env "PATH=$PATH" zsh
                             fi
                         fi
                     done
@@ -1947,7 +1948,8 @@ c(){
                             sed "s@{}@$file@" | zsh
                         else
                             bash fzfPreviewOptsCtrlT.sh |
-                            sed "s@{}@$file@" | sudo -E zsh
+                            sed "s@{}@$file@" |
+                            sudo -E env "PATH=$PATH" zsh
                         fi
                     fi
                 done
