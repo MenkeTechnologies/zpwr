@@ -2,13 +2,13 @@
 
 ![Alt text](http://jakobmenke.com/img/tmuxfinal1.png?raw=true)
 
-This repo started out as my own version of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) repo and it then grew.
+This project started out as my own version of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) repo and it then grew.
 
-It allows one to install an extremely powerful custom terminal environment based on [oh-my-zsh](http://github.com/robbyrussell/oh-my-zsh)
+It is an extremely powerful custom terminal environment bilt on top of [oh-my-zsh](http://github.com/robbyrussell/oh-my-zsh).
 
 There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
 
-## Features
+## ZPWR Features
 - spelling correction, abbreviation expansion and automatic capitalization on the command line
 - snippets with tabstops that expand with spacebar and advance to next stop with C-p
 - expanding regular aliases and global aliases from zsh menu selection and in vim insert mode
@@ -16,7 +16,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - color-coded sections of zsh menu completion for man pages
 - custom styling for tag grouping in menu selection
 - tag grouping for man pages
-- colorized man pages
+- colorized man pages color grouped by sections
 - insert matching quotes, brackets and parentheses
 - custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching
 - keybinding to run current code file open in vim in tmux pane to right
@@ -29,22 +29,27 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview
 - zsh keybindings to fzf search of most recent files opened in vim with syntax highlighted, numbered preview pane
 - zsh keybindings to fzf search of network process with lsof return PIDs
+- fzf searching of all git directories on computer
+- fzf searching of all dirty git directories on computer
 - zsh completion for z command bases on .z database
 - keybindings to save to mysql learning database and to search from it
 - keybinding formats newlines and spaces before saving to mysql learning database
 - oh my zsh plugins loading based on OS
 - tmux keybindings based on OS
 - custom banner commands when new shell is launched
+- custom ZPWR banner when `getrc` and `zpwr banner` run
 - zle sed subs on current command line
 - vim text objects on command line
-- software updater scripts on 24 hour loop
+- software updater script, `source autoUpdater.h`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push
 - zsh keybindings to git add, commit and push with commit message from current command line
 - git blacklisted directories
 - zle quote swappers
 - zsh, tmux and vim keybindings to copy to clipboard
 - getrc shell function to pull down latest code changes from this repo
-- shell function named c that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips
+- shell function, c, that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips
+- shell function, c, uses same shell code to generate output that default FZF preview pane does
+- shell function, c, auto runs sudo when file is not readable
 - 100+ bash, perl, zsh and python scripts
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color coded, tag grouped clearList zsh completion
@@ -56,12 +61,12 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
 
-## Dependencies
+## ZPwR Dependencies
 - oh-my-zsh with 63 plugins of which 16 are custom
 - zsh
 - Powerlevel9k zsh prompt with ~dirs
 - tmux
-- neovim with 75 plugins and python3/node support
+- neovim with 76 plugins and python3/node support
 - youcompleteme
 - ultisnips
 - supertab
@@ -155,7 +160,7 @@ The default tmux prefix key is C-x on a Mac so I can control inner tmux sessions
 The Tmux prefix on Linux is the default C-b.
 
 ## Vim Plugins
-There are 75 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
+There are 76 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Bypassing expansion on space
 C-Space (Control-Space or actually ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.  Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`
