@@ -125,7 +125,15 @@ The installer will confirm what will be installed and overwritten before executi
 
 Some interactivity is required near end of installer for postfix, wireshark and snort installs.
 
-Once you reach the oh-my-zsh prompt, type ```sh logout```, ```sh exit``` or type Control-D to return to installer script.
+Once you reach the oh-my-zsh prompt, type 
+```sh
+logout
+```
+or
+```sh
+exit
+```
+or type C-d (Control-d) to return to installer script.
 
 ## Install Destination
 
