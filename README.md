@@ -60,6 +60,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
+- restart function that launches poll and learn by enabling and starting in systemd
 
 ## ZPwR Dependencies
 - oh-my-zsh with 63 plugins of which 16 are custom
@@ -124,7 +125,7 @@ The installer will confirm what will be installed and overwritten before executi
 
 Some interactivity is required near end of installer for postfix, wireshark and snort installs.
 
-Once you reach the oh-my-zsh prompt, type ```logout```, ```exit``` or type Control-D to return to installer script.
+Once you reach the oh-my-zsh prompt, type ```sh logout```, ```sh exit``` or type Control-D to return to installer script.
 
 ## Install Destination
 
@@ -135,13 +136,14 @@ backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 ```
 
 ## Uninstall
-Copy all configs from backup dir mentioned above to home directory overwriting the ones installed by zpwr, most importantly the zshrc, vimrc and tmux.conf.
+Copy all configs from backup dir mentioned above to home directory overwriting the ones installed by zpwr, most importantly the `.zshrc`, `.vimrc` and `.tmux.conf`.
 Then remove the zpwr dir as shown.
 ```sh
 rm -rf ~/.zpwr
 ```
 This will not uninstall packages installed by system package manager, pip modules, gems, vim plugins, tmux plugins and zsh plugins.
-Then if desired you can uninstall oh-my-zsh with `uninstall_oh_my_zsh`.  Make sure the `~/.zshrc` is your original version.
+You must remove this manuallly is desired.
+If desired you can also uninstall oh-my-zsh with ```sh uninstall_oh_my_zsh```.  Make sure the `~/.zshrc` is your original version.
 
 ## Font
 
@@ -150,14 +152,16 @@ You need to change the Terminal font to support the Powerline triangles and othe
 The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
 documentation for details on how to change the font.
 
-## getrc function
-There is a shell function called `getrc` that will pull down latest changes from this repository and ovewrite `~/.zshrc`, `~/.vimrc`, `~/.shell_aliases_functions.sh` and `~.tmux.conf`
-Run `clearList getrc` to see the body of this function.
+## getrc and copyConf functions
+There is a shell function called `getrc` that will update ZPWR by cloning the latest changes from this repository.
+It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc`, `~/.shell_aliases_functions.sh`, `~.tmux.conf`.
+`copyConf` will also overwrite all scripts in `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and some other configs in home directory.
+Run `clearList getrc copyConf` to see the bodies of these function to see the exact details.
 
 ## Tmux prefix
-
-The default tmux prefix key is C-x on a Mac so I can control inner tmux sessions on Linux (prefix is C-b) separately.  The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed.
-The Tmux prefix on Linux is the default C-b.
+The default tmux prefix key is C-x (control-x) on macOS so one can control inner tmux sessions on Linux/UNIX (prefix is C-b) separately.
+To invoke C-x in the shell press the keybinding twice.
+The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed and dehighlight when prefix is deactivated.
 
 ## Vim Plugins
 There are 76 vim plugins installed.  One of which is vim-autosave.  `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
