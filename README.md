@@ -61,6 +61,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zpwr subcommands covering most of ZPWR functions with zsh completion `zpwr <tab>`
 - centralized FZF preview pane customization
 - many centralized environment variables in ZPWR namespace to control functionality
+- centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
