@@ -144,7 +144,7 @@ export ZPWR_PROMPT_FILE="$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
 export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
 # this the description separator in compsys option completions (ls -<tab>)
-# and the separator for function se() between row numer and learning
+# and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
 # set to comma separated list of pane numbers
 # to activate sending to numbered tmux panes
