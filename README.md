@@ -61,7 +61,8 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
 - zpwr subcommands covering most of ZPWR functions with zsh completion `zpwr <tab>`
 - centralized FZF preview pane customization
-- many centralized environment variables in ZPWR namespace to control functionality
+- centralized environment variables in ZPWR namespace to control functionality
+- environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
 - centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - poll.service = systemd service that polls github and download latest zpwr code
