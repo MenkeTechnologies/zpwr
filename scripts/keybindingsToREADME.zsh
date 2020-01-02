@@ -58,7 +58,7 @@ fi
 } | escapeRemover.pl | perl -ne 'print if m{\S+}' > "$ZPWR_TEMPFILE"
 
 #do not know why have to create tempfile here
-perl -pe 's@^([^#].*)$@- ```$1```@g' "$ZPWR_TEMPFILE" | perl -pe 's@(.*) \(:.map\).*@$1@'
+perl -pe 's@^([^#].*)$@- ``` $1 ```@g' "$ZPWR_TEMPFILE" | perl -pe 's@(.*) \(:.map\).*@$1@'
 
 #cat "$ZPWR_TEMPFILE"
 
