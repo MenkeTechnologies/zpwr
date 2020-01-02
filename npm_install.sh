@@ -16,7 +16,7 @@ function installNpm(){
     update "npm" "$distroFamily"
     prettyPrint "install nodejs"
     update "nodejs" "$distroFamily"
-    prettyPrint "install buid-essential"
+    prettyPrint "install build-essential"
     update "build-essential" "$distroFamily"
 }
 
