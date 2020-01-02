@@ -42,8 +42,8 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - custom ZPWR banner when `getrc`, `zpwr banner` and `install.sh` run
 - zle sed subs on current command line
 - vim text objects on command line
-- vim extract method for shell, perl and python scripts
-- vim extract variable for shell, perl and python scripts
+- vim extract method for shell, perl and python scripts (gv to select extracted)
+- vim extract variable for shell, perl and python scripts (gv to select extracted)
 - software updater script, `source autoUpdater.h`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push
 - zsh keybindings to git add, commit and push with commit message from current command line
@@ -70,7 +70,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - learn.service = systemd service that runs learning collection API
 - restart function that launches poll and learn by enabling and starting in systemd
 
-## ZPwR Dependencies
+## ZPWR Dependencies
 - oh-my-zsh with 63 plugins of which 16 are custom
 - zsh
 - Powerlevel9k zsh prompt with ~dirs
