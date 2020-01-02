@@ -19,6 +19,67 @@ exists(){
     type "$1" >/dev/null 2>&1
 }
 
+update(){
+    exists "$1" || {
+
+        if [[ $2 == mac ]]; then
+            brew install "$1"
+        elif [[ $2 == debian ]];then
+            sudo apt-get install -y "$1"
+        elif [[ $2 == suse ]];then
+            sudo zypper --non-interactive install "$1"
+        elif [[ $2 == arch ]];then
+            sudo pacman -S --noconfirm "$1"
+        elif [[ $2 == redhat ]];then
+            sudo yum install -y "$1"
+        elif [[ $2 == freebsd ]];then
+            sudo pkg install -y "$1"
+        else
+            prettyPrint "Error at install of $1 on $2." >&2
+        fi
+    }
+}
+
+upgrade(){
+    if [[ $1 == mac ]]; then
+        brew update
+        brew upgrade
+    elif [[ $1 == debian ]];then
+        sudo apt-get update -y
+        sudo apt-get upgrade -y
+    elif [[ $1 == suse ]];then
+        sudo zypper --non-interactive update
+    elif [[ $1 == arch ]];then
+        sudo pacman -Suy
+    elif [[ $1 == redhat ]];then
+        sudo yum upgrade -y
+    elif [[ $1 == freebsd ]];then
+        sudo pkg upgrade -y
+    else
+        prettyPrint "Error with upgrade with $1." >&2
+    fi
+}
+
+refresh(){
+    if [[ $1 == mac ]]; then
+        brew update
+    elif [[ $1 == debian ]];then
+        sudo apt-get update -y
+        sudo apt-get autoremove -y
+    elif [[ $1 == suse ]];then
+        sudo zypper refresh
+    elif [[ $1 == arch ]];then
+        sudo pacman -Syy
+    elif [[ $1 == freebsd ]];then
+        sudo pkg update
+    elif [[ $1 == redhat ]];then
+        sudo yum update -y
+    else
+        prettyPrint "Error with refresh with $1." >&2
+    fi
+
+}
+
 #prettyPrint(){
     #(( install_counter++ ))
     #printf "\x1b[32;1m"

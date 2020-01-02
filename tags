@@ -87,6 +87,7 @@ CURSOR	/Users/wizard/.zshrc	/^        CURSOR=$#BUFFER$/;"	v	language:Sh
 CURSOR	/Users/wizard/.zshrc	/^        CURSOR=$lenToFirstTS$/;"	v	language:Sh
 CURSOR	/Users/wizard/.zshrc	/^    CURSOR=$#BUFFER$/;"	v	language:Sh
 CodeFile	boiler_gen.py	/^class CodeFile:$/;"	c	language:Python
+DELIMITER_CHAR	common.sh	/^export DELIMITER_CHAR='%'$/;"	v
 DELIMITER_CHAR	pipUpdater.sh	/^export DELIMITER_CHAR='%'$/;"	v	language:Sh
 DELIMITER_CHAR	rpiSoftwareUpdater.sh	/^export DELIMITER_CHAR='%'$/;"	v	language:Sh
 DIR	macOnly/rsyncr.sh	/^localDIR="$1"$/;"	v	language:Sh
@@ -160,6 +161,7 @@ IFS	saygoogle.sh	/^IFS=+$/;"	v	language:Sh
 IFS	sortedArrayCounter.sh	/^        IFS="$oldifs"$/;"	v	language:Sh
 IFS	sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v	language:Sh
 IFS	sortedArrayCounter.sh	/^IFS=:$/;"	v	language:Sh
+INSTALLER_DIR	common.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	plugins_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INTERFACE	macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v	language:Sh
@@ -296,6 +298,7 @@ ZPWR_LOG_UNDER_COLOR	/Users/wizard/.zshrc	/^export ZPWR_LOG_UNDER_COLOR='\\x1b[0
 ZPWR_NVIMINFO	/Users/wizard/.zshrc	/^export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR\/.nviminfo"$/;"	v	language:Sh
 ZPWR_OPEN_CMD	crossOSCommands.sh	/^export ZPWR_OPEN_CMD="$(getOpenCommand)"$/;"	v	language:Sh
 ZPWR_OS_TYPE	/Users/wizard/.zshrc	/^export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v	language:Sh
+ZPWR_OS_TYPE	common.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
 ZPWR_OS_TYPE	crossOSCommands.sh	/^    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v	language:Sh
 ZPWR_OS_TYPE	install.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
 ZPWR_OS_TYPE	plugins_install.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
@@ -442,6 +445,7 @@ already_output_completions	mantozshcomp.py	/^already_output_completions = {}$/;"
 alternateQuotes	/Users/wizard/.zshrc	/^alternateQuotes(){$/;"	f	language:Sh
 alternatingPrettyPrint	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^alternatingPrettyPrint(){$/;"	f	language:Sh
 alternatingPrettyPrint	CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
+alternatingPrettyPrint	common.sh	/^alternatingPrettyPrint(){$/;"	f
 alternatingPrettyPrint	pipUpdater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	rpiSoftwareUpdater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	scripts/CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
@@ -594,6 +598,7 @@ count	uploadWebPi.sh	/^count=0$/;"	v	language:Sh
 count_argument_dashes	mantozshcomp.py	/^    def count_argument_dashes(self, line):$/;"	m	language:Python	class:TypeDarwinManParser
 counter	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    counter=0$/;"	v	language:Sh
 counter	CPU_Stresser.sh	/^    counter=0$/;"	v	language:Sh
+counter	common.sh	/^    counter=0$/;"	v
 counter	pipUpdater.sh	/^    counter=0$/;"	v	language:Sh
 counter	rpiSoftwareUpdater.sh	/^    counter=0$/;"	v	language:Sh
 counter	scripts/CPU_Stresser.sh	/^    counter=0$/;"	v
@@ -670,6 +675,12 @@ distroFamily	install.sh	/^                distroFamily=redhat$/;"	v
 distroFamily	install.sh	/^                distroFamily=suse$/;"	v
 distroFamily	install.sh	/^        distroFamily=freebsd$/;"	v
 distroFamily	install.sh	/^        distroFamily=mac$/;"	v
+distroFamily	npm_install.sh	/^                distroFamily=arch$/;"	v
+distroFamily	npm_install.sh	/^                distroFamily=debian$/;"	v
+distroFamily	npm_install.sh	/^                distroFamily=redhat$/;"	v
+distroFamily	npm_install.sh	/^                distroFamily=suse$/;"	v
+distroFamily	npm_install.sh	/^        distroFamily=freebsd$/;"	v
+distroFamily	npm_install.sh	/^        distroFamily=mac$/;"	v
 distroName	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^            distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	/Users/wizard/.zshrc	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' \/etc\/os-release)$/;"	v	language:Sh
 distroName	clearTrash.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
@@ -678,6 +689,9 @@ distroName	install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	install.sh	/^        distroName=Mac$/;"	v
 distroName	install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
 distroName	logs.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
+distroName	npm_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	npm_install.sh	/^        distroName=FreeBSD$/;"	v
+distroName	npm_install.sh	/^        distroName=Mac$/;"	v
 distroName	plugins_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
 distroName	plugins_install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	plugins_install.sh	/^    distroName=Mac$/;"	v
@@ -733,6 +747,7 @@ executeTheFile	runner.sh	/^executeTheFile() {$/;"	f	language:Sh
 exists	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    exists(){$/;"	f	language:Sh
 exists	CPU_Stresser.sh	/^exists() {$/;"	f	language:Sh
 exists	clearList.sh	/^exists(){$/;"	f	language:Sh
+exists	common.sh	/^exists(){$/;"	f
 exists	fzfEnv.sh	/^    exists(){$/;"	f	language:Sh
 exists	fzfPreviewOptsCommon.sh	/^    exists(){$/;"	f	language:Sh
 exists	fzfPreviewOptsCommon2Pos.sh	/^    exists(){$/;"	f	language:Sh
@@ -1059,6 +1074,7 @@ mywords	/Users/wizard/.zshrc	/^            mywords=("${(z)BUFFER}")$/;"	v	langua
 mywords	/Users/wizard/.zshrc	/^    mywords=("${(z)BUFFER}")$/;"	v	language:Sh
 mywords	/Users/wizard/.zshrc	/^    mywords=(${(z)BUFFER})$/;"	v	language:Sh
 needSudo	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^needSudo(){$/;"	f	language:Sh
+needSudo	common.sh	/^needSudo(){$/;"	f
 needSudo	install.sh	/^        needSudo=no$/;"	v
 needSudo	install.sh	/^        needSudo=yes$/;"	v
 needSudo	updater.sh	/^                needSudo=no$/;"	v	language:Sh
@@ -1202,6 +1218,7 @@ path	mantozshcomp.py	/^import os.path$/;"	i	language:Python
 path	shebangChanger.sh	/^path="#!\/usr\/bin\/env $executableProgram"$/;"	v	language:Sh
 perlOutdated	updater.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v	language:Sh
 perlOutdated	updaterNoPip.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v	language:Sh
+perlfile	common.sh	/^    perlfile="$INSTALLER_DIR\/scripts\/boxPrint.pl"$/;"	v
 perlremovespaces	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^perlremovespaces(){$/;"	f	language:Sh
 perlscript	autoUpdater.sh	/^    perlscript=$($/;"	v	language:Sh
 picounter	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    picounter=1$/;"	v	language:Sh
@@ -1229,6 +1246,7 @@ prettyPrint	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^prettyPrint(){$/;"
 prettyPrint	CPU_Stresser.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	clearList.sh	/^prettyPrint(){$/;"	f	language:Sh
 prettyPrint	colorLogger.sh	/^prettyPrint() {$/;"	f	language:Sh
+prettyPrint	common.sh	/^prettyPrint(){$/;"	f
 prettyPrint	macOnly/resetWIFI.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	macOnly/tor.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	macOnly/tutorialConfigUpdater.sh	/^prettyPrint() {$/;"	f	language:Sh
@@ -1237,9 +1255,11 @@ prettyPrint	scripts/CPU_Stresser.sh	/^prettyPrint() {$/;"	f
 prettyPrint	textmessage.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	updater.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	updaterNoPip.sh	/^prettyPrint() {$/;"	f	language:Sh
+prettyPrintStdin	common.sh	/^prettyPrintStdin(){$/;"	f
 primary	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                    primary="$(echo "$noproto" | sed -E 's@^(.*)\\.([^.]+)\\.([^.]+)$@\\2.\\3@')"$/;"	v	language:Sh
 printD	banner.pl	/^sub printD {$/;"	s	language:Perl
 printDate	banner.pl	/^sub printDate {$/;"	s	language:Perl
+proceed	common.sh	/^proceed(){$/;"	f
 progress_pid	batchRename.sh	/^    progress_pid=$!$/;"	v	language:Sh
 progress_pid	openAll.sh	/^    progress_pid=$!$/;"	v	language:Sh
 progress_pid	picture_finder.sh	/^    progress_pid=$!$/;"	v	language:Sh
@@ -1279,7 +1299,7 @@ red	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    red=$(tput setaf 1)$/;
 red	/Users/wizard/.zshrc	/^local red="160"$/;"	v	language:Sh
 redo	/Users/wizard/.zshrc	/^    redo(){$/;"	f	language:Sh
 ref	fzfGitOpts.sh	/^ref=$1$/;"	v	language:Sh
-refresh	install.sh	/^refresh(){$/;"	f
+refresh	common.sh	/^refresh(){$/;"	f
 refreshers	remoteRepoMonitorDaemon.sh	/^refreshers() {$/;"	f	language:Sh
 regenAll	/Users/wizard/.zshrc	/^regenAll(){$/;"	f	language:Sh
 regenAllGitRepos	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^regenAllGitRepos(){$/;"	f	language:Sh
@@ -1473,17 +1493,19 @@ totstart	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    totstart=$($cmd +
 traceback	mantozshcomp.py	/^import traceback$/;"	i	language:Python
 transferFile	transfer.sh	/^transferFile="$1"$/;"	v	language:Sh
 trim_groff	mantozshcomp.py	/^    def trim_groff(self, line):$/;"	m	language:Python	class:TypeDarwinManParser
+turnOffDebugging	common.sh	/^turnOffDebugging(){$/;"	f
+turnOnDebugging	common.sh	/^turnOnDebugging(){$/;"	f
 tutorialDir	macOnly/tutorialConfigUpdater.sh	/^tutorialDir="$HOME\/Documents\/tutorialsRepo"$/;"	v	language:Sh
 tutsUpdate	/Users/wizard/.zshrc	/^tutsUpdate() {$/;"	f	language:Sh
 unquote_double_quotes	mantozshcomp.py	/^def unquote_double_quotes(data):$/;"	f	language:Python
 unquote_single_quotes	mantozshcomp.py	/^def unquote_single_quotes(data):$/;"	f	language:Python
-update	install.sh	/^update(){$/;"	f
+update	common.sh	/^update(){$/;"	f
 updatePI	updatePi.sh	/^updatePI() {$/;"	f	language:Sh
 updatePI	updater.sh	/^updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote host$/;"	f	language:Sh
 updatePI	updaterNoPip.sh	/^updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote host$/;"	f	language:Sh
 updater	/Users/wizard/.zshrc	/^updater (){$/;"	f	language:Sh
 updater	/Users/wizard/.zshrc	/^updater() {$/;"	f	language:Sh
-upgrade	install.sh	/^upgrade(){$/;"	f
+upgrade	common.sh	/^upgrade(){$/;"	f
 upload	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^upload(){$/;"	f	language:Sh
 url	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^            url="https:\/\/google.com\/search?q=$out"$/;"	v	language:Sh
 url	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    url="$(echo $1 | sed 's@[^\/]*\/\/\\([^@]*@\\)\\?\\([^:\/]*.*\\)@\\2@')"$/;"	v	language:Sh
