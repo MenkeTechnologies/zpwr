@@ -336,7 +336,6 @@ ZPWR_TEMPFILE	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    export ZPWR_
 ZPWR_TEMPFILE	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    export ZPWR_TEMPFILE="\/tmp\/$ZPWR_REPO_NAME\/.temp$$-$USER"$/;"	v	language:Sh
 ZPWR_TEMPFILE	keybindingsToFZF.zsh	/^    ZPWR_TEMPFILE="\/tmp\/.temp$$"$/;"	v	language:Sh
 ZPWR_TEMPFILE	keybindingsToFZFVim.zsh	/^    ZPWR_TEMPFILE="\/tmp\/.temp$$"$/;"	v	language:Sh
-ZPWR_TEMPFILE	keybindingsToREADME.zsh	/^    ZPWR_TEMPFILE="\/tmp\/.temp$$"$/;"	v	language:Sh
 ZPWR_TEMPFILE	macOnly/splitReg.sh	/^    ZPWR_TEMPFILE="\/tmp\/temp$$"$/;"	v	language:Sh
 ZPWR_TEMPFILE1	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    export ZPWR_TEMPFILE1="$TMPDIR\/$ZPWR_REPO_NAME\/.temp$$-1$USER"$/;"	v	language:Sh
 ZPWR_TEMPFILE1	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    export ZPWR_TEMPFILE1="\/tmp\/$ZPWR_REPO_NAME\/.temp$$-1$USER"$/;"	v	language:Sh
