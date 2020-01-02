@@ -12,7 +12,9 @@ source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 function installNpm(){
     prettyPrint "curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-    prettyPrint "install nodesj"
+    prettyPrint "install npm"
+    update "npm" "$distroFamily"
+    prettyPrint "install nodejs"
     update "nodejs" "$distroFamily"
     prettyPrint "install buid-essential"
     update "build-essential" "$distroFamily"
