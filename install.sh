@@ -310,63 +310,66 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         distroFamily=mac
         showDeps
 
-        exists "brew" || {
+        if exists "brew"; then
             #install homebrew
-                    prettyPrint "Installing HomeBrew..."
-                    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-                }
+            prettyPrint "Installing HomeBrew..."
+            /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        fi
 
-            exists "brew" || {
-                prettyPrint "Need Homebrew"
-                            exit 1
-                        }
+        if ! exists "brew"; then
+            prettyPrint "Need Homebrew"
+            exit 1
+        fi
 
-                    prettyPrint "We have Homebrew..."
+        prettyPrint "We have Homebrew..."
 
-                    brew ls python > /dev/null 2>&1
-                    if [[ $? == 1 ]]; then
-                        brew install python
-                        brew install pip
-                    fi
+        brew ls python > /dev/null 2>&1
+        if [[ $? == 1 ]]; then
+            brew install python
+            brew install pip
+        fi
 
-                    prettyPrint "We have Python..."
+        prettyPrint "We have Python..."
 
-                    if [[ $skip != true ]]; then
-                        prettyPrint "Now The Main Course..."
-                        sleep 1
+        if [[ $skip != true ]]; then
+            prettyPrint "Now The Main Course..."
+            sleep 1
 
-                        prettyPrint "Updating repos"
-                        refresh "$distroFamily"
-                        prettyPrint "Installing java"
-                        brew cask install java
-                        prettyPrint "Checking for curl before rustup install"
-                        exists curl || update curl mac
-                        cargoinstall
-                        pluginsinstall
-                        for prog in "${dependencies_ary[@]}"; do
-                            prettyPrint "Installing $prog"
-                            update "$prog" mac
-                        done
+            prettyPrint "Updating repos"
+            refresh "$distroFamily"
+            prettyPrint "Installing java"
+            brew cask install java
+            prettyPrint "Checking for curl before rustup install"
+            exists curl || update curl mac
+            cargoinstall
+            pluginsinstall
+            for prog in "${dependencies_ary[@]}"; do
+                prettyPrint "Installing $prog"
+                update "$prog" mac
+            done
 
-                        prettyPrint "Upgrading packages"
-                        upgrade mac
-                    fi
+            prettyPrint "Upgrading packages"
+            upgrade mac
+        fi
 
-                    prettyPrint "Tapping Homebrew fonts"
-                    brew tap homebrew/cask-fonts
-                    prettyPrint "Installing hack nerd font"
-                    brew cask install font-hack-nerd-font
+        prettyPrint "Tapping Homebrew fonts"
+        brew tap homebrew/cask-fonts
+        prettyPrint "Installing hack nerd font"
+        brew cask install font-hack-nerd-font
 
-                    prettyPrint "Installing meteor"
-                    curl https://install.meteor.com/ | sh
+        prettyPrint "Installing meteor"
+        curl https://install.meteor.com/ | sh
+
+        prettyPrint "PostInstalling nodejs"
+        brew postinstall node
 
         # system sed breaks extended regex
         ln -s /usr/local/bin/gsed /usr/local/bin/sed
 
-        test -f '/usr/local/share/zsh/site-functions/_git' && {
+        if test -f '/usr/local/share/zsh/site-functions/_git'; then
             prettyPrint "Removing homebrew installed git zsh completion at /usr/local/share/zsh/site-functions/_git because conflicts with zsh's git completion"
-                    rm '/usr/local/share/zsh/site-functions/_git'
-                }
+            rm '/usr/local/share/zsh/site-functions/_git'
+        fi
 
     fi
 
