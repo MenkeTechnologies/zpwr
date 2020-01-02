@@ -521,6 +521,9 @@ if [[ $justConfig != true ]]; then
         source "neovim_install.sh"
     }
 
+    builtin cd "$INSTALLER_DIR"
+    source "npm_install.sh"
+
 fi
 
 #}}}***********************************************************
