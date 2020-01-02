@@ -148,7 +148,7 @@ addDependenciesSuse(){
 
 addDependenciesDebian(){
     dependencies_ary=(python3-dev libssl-dev ${dependencies_ary[@]})
-    dependencies_ary+=(mysql-server gcc bc npm lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev nodejs \
+    dependencies_ary+=(mysql-server gcc bc lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
         ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
         libxpm-dev libxt-dev \
         libperl-dev libpq-dev libpcap-dev fortunes ruby-dev \
@@ -173,69 +173,7 @@ addDependenciesMac(){
     dependencies_ary=(neovim macvim ${dependencies_ary[@]})
     dependencies_ary+=(ripgrep httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher \
         fswatch zzz ghc lua python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
-    }
-
-update(){
-    exists "$1" || {
-
-        if [[ $2 == mac ]]; then
-            brew install "$1"
-        elif [[ $2 == debian ]];then
-            sudo apt-get install -y "$1"
-        elif [[ $2 == suse ]];then
-            sudo zypper --non-interactive install "$1"
-        elif [[ $2 == arch ]];then
-            sudo pacman -S --noconfirm "$1"
-        elif [[ $2 == redhat ]];then
-            sudo yum install -y "$1"
-        elif [[ $2 == freebsd ]];then
-            sudo pkg install -y "$1"
-        else
-            prettyPrint "Error at install of $1 on $2." >&2
-        fi
-    }
 }
-
-upgrade(){
-    if [[ $1 == mac ]]; then
-        brew update
-        brew upgrade
-    elif [[ $1 == debian ]];then
-        sudo apt-get update -y
-        sudo apt-get upgrade -y
-    elif [[ $1 == suse ]];then
-        sudo zypper --non-interactive update
-    elif [[ $1 == arch ]];then
-        sudo pacman -Suy
-    elif [[ $1 == redhat ]];then
-        sudo yum upgrade -y
-    elif [[ $1 == freebsd ]];then
-        sudo pkg upgrade -y
-    else
-        prettyPrint "Error with upgrade with $1." >&2
-    fi
-}
-
-refresh(){
-    if [[ $1 == mac ]]; then
-        brew update
-    elif [[ $1 == debian ]];then
-        sudo apt-get update -y
-        sudo apt-get autoremove -y
-    elif [[ $1 == suse ]];then
-        sudo zypper refresh
-    elif [[ $1 == arch ]];then
-        sudo pacman -Syy
-    elif [[ $1 == freebsd ]];then
-        sudo pkg update
-    elif [[ $1 == redhat ]];then
-        sudo yum update -y
-    else
-        prettyPrint "Error with refresh with $1." >&2
-    fi
-
-}
-
 
 __ScriptVersion="1.0.1"
 
@@ -245,6 +183,7 @@ usage(){
     Options:
     -h|help       Display this message
     -s|skip       Skip main section
+    -c|conf       Copy just configs
     -v|version    Display script version"
 
 }
@@ -577,17 +516,10 @@ if [[ $justConfig != true ]]; then
         source "vim_install.sh"
     fi
 
-    exists diff-so-fancy || {
-        sudo npm i -g diff-so-fancy
-    }
-
     exists nvim || {
         builtin cd "$INSTALLER_DIR"
         source "neovim_install.sh"
     }
-
-    prettyPrint "installing neovim nodejs lib"
-    sudo npm i -g neovim
 
 fi
 
