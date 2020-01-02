@@ -961,26 +961,86 @@ autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<
 "reassign readline plugin mapping
 autocmd VimEnter * nunmap S
 
+function! GetFirstCodeLineHash()
+        " read current file
+        let l:file = readfile(expand("%:p"))
+        let l:lineCounter = 0
+        for l:line in l:file
+            let l:match = matchstr(l:line, '^\s*#.*')
+            let l:lineCounter = l:lineCounter + 1
+            if(empty(l:match))
+                break
+            endif
+        endfor
+        "echom 'first non comment line'.l:lineCounter
+        return l:lineCounter -1
+endfunction
 
-vmap <leader>em :call ExtractMethod()<CR>
+function! ExtractVariable()
+    let l:wordUnderCursor = expand("<cword>")
+    let l:name = inputdialog("Extract variable to replace ".wordUnderCursor.":")
+
+    let l:supportedTypes=['sh','zsh', 'pl', 'py']
+    let l:exeFileType=expand('%:e')
+    if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
+        let l:line=GetFirstCodeLineHash()
+        exe "normal mz"
+        exe '%s@\<'.l:wordUnderCursor.'\>@$'.l:name."@g"
+        exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
+        exe "normal! `z"
+
+    elseif l:exeFileType == 'pl'
+        let l:line=GetFirstCodeLineHash()
+        exe "normal mz"
+        exe '%s@\<'.l:wordUnderCursor.'\>@$'.l:name."@g"
+        exe "normal! ".(l:line+1)."GOmy $".l:name."=".l:wordUnderCursor.";"
+        exe "normal! `zzz"
+
+    elseif l:exeFileType == 'py'
+        let l:line=GetFirstCodeLineHash()
+        exe "normal mz"
+        exe '%s@\<'.l:wordUnderCursor.'\>@'.l:name."@g"
+        exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
+        exe "normal! `z"
+
+    elseif index(supportedTypes, exeFileType) < 0
+        echom "Unknown Filetype '".exeFileType. "'."
+    endif
+
+
+endfunction
+
 function! ExtractMethod() range
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:name = inputdialog("Extract method:")
     let l:exeFileType=expand('%:e')
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
+        let l:line=GetFirstCodeLineHash()
+        '>
+        exe 'normal! o'.l:name
+        mark z
+        silent! exe a:firstline.','.a:lastline.'move'.l:line
+
         '<
         exe "normal! Ofunction " . l:name ."(){\<Esc>"
         '>
-        exe "normal! o}\<Esc>"
-        exe "normal! o".l:name. "\<Esc>kvi{>"
-        call feedkeys("va{V")
+        exe "normal! o}\<CR>\<Esc>k"
+        exe "normal! vi{="
+        exe "normal! `z$zz"
     elseif l:exeFileType == 'pl'
+        let l:line=GetFirstCodeLineHash()
+        '>
+        exe 'normal! o'.l:name.'();'
+        mark z
+        silent! exe a:firstline.','.a:lastline.'move'.l:line
+
         '<
         exe "normal! Osub " . l:name ."(){\<Esc>"
         '>
-        exe "normal! o}\<Esc>"
-        exe "normal! o".l:name. "();\<Esc>kvi{>"
-        call feedkeys("va{V")
+        exe "normal! o}\<CR>\<Esc>k"
+        exe "normal! vi{="
+        exe "normal! `z$zz"
+
     elseif l:exeFileType == 'py'
         '<
         exe "normal! Odef " . l:name ."():\<Esc>"
@@ -992,6 +1052,8 @@ function! ExtractMethod() range
     endif
 endfunction
 
+vmap <leader>em :call ExtractMethod()<CR>
+nmap <leader>ev :call ExtractVariable()<CR>
 
 let shouldMapV = $ZPWR_MAP_C_V_VIM_NORMAL
 if shouldMapV == 'true'
