@@ -722,7 +722,7 @@ clearLine() {
 
 regenZshCompCache(){
     prettyPrint "regen zsh compsys cache"
-    rm -f "$HOME/.zcompdump"*
+    command rm -fv "$HOME/.zcompdump"* 2>/dev/null
     compinit -u
 }
 
