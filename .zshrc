@@ -1165,6 +1165,8 @@ bindkey -M viins . rationalize-dot
 bindkey -M listscroll q send-break
 bindkey -M listscroll f complete-word
 
+#bbind shift tab to reverse menucomplete, opposite of tab
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
