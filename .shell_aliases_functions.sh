@@ -123,15 +123,16 @@ fi
 
 #{{{                    MARK:PATH
 #**************************************************************
-echo "$PATH" | command grep -isq shellScripts || {
+echo "$PATH" | command grep -isq $ZPWR_SCRIPTS || {
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts/"
+
     export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/sbin:$PATH"
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
-        export PATH="$ZPWR_SCRIPTS/macOnly:$HOME/.tokenScripts:$PATH:$HOME/.platformio/penv/bin"
-        export PATH="$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$PATH"
+        export PATH="$ZPWR_SCRIPTS/macOnly:/usr/local/bin:$PATH:
+        $HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$PATH:$HOME/.platformio/penv/bin"
     else
         export PATH="$PATH:/usr/games"
     fi
