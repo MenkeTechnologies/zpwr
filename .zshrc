@@ -2699,7 +2699,7 @@ zshrcsearch(){
         less $ZPWR_TEMPFILE4
     else
         zsh -ilvx -c false &> $ZPWR_TEMPFILE4
-        ag --color --numbers -C 5 -i "$@" $ZPWR_TEMPFILE4 | less
+        ag --color --numbers -C 5 -i -- "$@" $ZPWR_TEMPFILE4 | less
     fi
 }
 
