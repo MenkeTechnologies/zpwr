@@ -1,6 +1,5 @@
                          ".....     .      ...     ..      ..
-                       ".d88888neu. 'l   x*8888x.:*8888: -"888:
-     "...     ..        f""""*8888888f  x   48888x `8888h  8888
+                       ".d88888neu. 'l   x*8888x.:*8888: -"888: ...     ..        f""""*8888888f  x   48888x `8888h  8888
   ":~""888h.:^"888:    *      `"*88*"  x8x.  8888x  8888x  !888>
  "8x   `8888x  8888>    -....    ue=:. x8888 x8888  88888   "*8%-
 "x888n. 8888x  ?888>           :88n  ` '*888!x8888> x8888  xh8>
@@ -1134,7 +1133,7 @@ inoremap <silent> <C-D>. <C-O>:FZFMaps<CR>
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 
 nnoremap <silent> <C-D>a :Ag<CR>
-nnoremap <silent> <leader>aa :Ag<CR>
+nnoremap <silent> <leader>ag :Ag<CR>
 nnoremap <silent> <C-D>b :Buffers<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
@@ -1147,7 +1146,7 @@ nnoremap <silent> <C-D>g :Commits!<CR>
 nnoremap <silent> <C-D>h :HistoryFiles<CR>
 nnoremap <silent> <C-D>i :Imap<CR>
 nnoremap <silent> <C-D>j :Agg<CR>
-nnoremap <silent> <leader>ag :Agg<CR>
+nnoremap <silent> <leader>aa :Agg<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 nnoremap <silent> <C-D>m :Map<CR>
@@ -1172,6 +1171,7 @@ nnoremap <silent> <C-D>x :Marks<CR>
 nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
 nnoremap <silent> <C-D>z :TlistAddFiles *<CR>:TlistToggle<CR>
 nnoremap <silent> <C-D>/ :LocateAll<CR>
+nnoremap <silent> <leader>/ :LocateAll<CR>
 nnoremap <silent> <C-D>. :FZFMaps<CR>
 
 "similar to tmux <prefix> - and <prefix> | to split panes
@@ -1466,12 +1466,12 @@ function! AppendToFile(file, lines)
 endfunction
 
 function! WriteToNVimInfo()
-        let viminfo = $HOME.'/.zpwr/.nviminfo'
-        let curFile = expand("%:p:~")
-        if curFile != ''
-            let curFile = '> '.curFile
-            call AppendToFile(viminfo,[curFile])
-        endif
+    let viminfo = $HOME.'/.zpwr/.nviminfo'
+    let curFile = expand("%:p:~")
+    if curFile != ''
+        let curFile = '> '.curFile
+        call AppendToFile(viminfo,[curFile])
+    endif
 endfunction
 
 if has("nvim")
@@ -1489,4 +1489,4 @@ au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 let g:loaded_python_provider = 0
 let g:vimtex_compiler_progname = 'nvr'
 
-"}}}*****************za******************************************
+"}}}***********************************************************
