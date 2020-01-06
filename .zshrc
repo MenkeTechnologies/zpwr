@@ -1374,27 +1374,30 @@ export DIRSTACKSIZE=20
 #{{{                    MARK:Completions
 #**************************************************************
 
-# reload comps if file is stale for 1 week
-regencp=false
+local recachedCompsys
+recachedCompsys=false
+# reload compsys cache if file is stale for 1 week
 for dump in ~/.zcompdump(N.mh+168); do
-    logg "regenerating stale $dump"
+    logg "regenerating stale $dump older than 1 week"
     # avoid insecure warning message with -u
     compinit -u
-    zcompile $ZSH_COMPDUMP
-    regencp=true
+    #compile the compsys cache file for speed
+    #zcompile $ZSH_COMPDUMP
+    recachedCompsys=true
     break
 done
 
-if [[ $regencp = false ]]; then
-    # use ~/.zcompdump
+if [[ $recachedCompsys == false ]]; then
+    # use cached ~/.zcompdump
     compinit -C -u
 fi
 
 if [[ ${+_comps[z]} == 0 ]]; then
-    logg 'regenerating ~/.zcompdump due to failed compinit'
+#compsys completion for z was not found when it should have been
+    logg 'regenerating ~/.zcompdump due to failed cached compinit for z'
     compinit -u
 else
-    logg 'using cached ~/.zcompdump'
+    logg 'used cached ~/.zcompdump'
 fi
 # allow scrolling pager through completion list
 zmodload -i zsh/complist

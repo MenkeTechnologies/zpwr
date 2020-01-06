@@ -48,6 +48,7 @@ set noswapfile
 set nowritebackup
 set ruler
 set autoread
+"searches are case insensitive
 set ignorecase
 set smartcase
 "tab is 4 spaces
