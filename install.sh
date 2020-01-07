@@ -183,7 +183,7 @@ usage(){
     Options:
     -h|help       Display this message
     -s|skip       Skip main section
-    -c|conf       Copy just configs
+    -c|config       Copy just configs
     -v|version    Display script version"
 
 }
@@ -266,6 +266,8 @@ cargoinstall(){
 #{{{                    MARK:Getopts
 #**************************************************************
 
+skip=false
+justConfig=false
 while getopts ":hvsc" opt
 do
     case $opt in
