@@ -951,6 +951,7 @@ jd	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^jd(){$/;"	f	language:Sh
 jetbrainsWorkspaceEdit	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^jetbrainsWorkspaceEdit(){$/;"	f	language:Sh
 json	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    local json="$(cat)"$/;"	v	language:Sh
 jsonToArray	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^jsonToArray(){$/;"	f	language:Sh
+justConfig	install.sh	/^justConfig=false$/;"	v
 key	/Users/wizard/.zshrc	/^                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"$/;"	v	language:Sh
 key	/Users/wizard/.zshrc	/^                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"$/;"	v	language:Sh
 keyClear	/Users/wizard/.zshrc	/^keyClear(){$/;"	f	language:Sh
@@ -1399,6 +1400,7 @@ size	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        size=100$/;"	v	la
 size	mantozshcomp.py	/^    def size(self):$/;"	m	language:Python	class:Deroffer
 size	tailZOU.sh	/^    size=$1$/;"	v	language:Sh
 size	tailZOU.sh	/^size=100$/;"	v	language:Sh
+skip	install.sh	/^skip=false$/;"	v
 skip_char	mantozshcomp.py	/^    def skip_char(self, amt=1):$/;"	m	language:Python	class:Deroffer
 skip_leading_whitespace	mantozshcomp.py	/^    def skip_leading_whitespace(self):$/;"	m	language:Python	class:Deroffer
 sleepTime	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        sleepTime=$2$/;"	v	language:Sh
