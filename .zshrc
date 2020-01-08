@@ -88,7 +88,7 @@ export ZPWR_AUTO_ATTACH=true
 # exa command invoked from clearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # uses the zprof function to profile startup
-export ZPWR_PROFILING=false
+export ZPWR_PROFILING=alse
 # turns on debugging logs using logg function
 export ZPWR_DEBUG=false
 # turns on set -x
@@ -2666,7 +2666,10 @@ if [[ $ZPWR_LEARN != false ]]; then
     rsql(){
         printf ""> "$ZPWR_TEMPFILE_SQL"
         for num in $@; do
-            id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
+            id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == quotemeta('$num')")
+            if [[ -z $id ]]; then
+               continue
+            fi
             item=$(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME where id=$id" | mysql 2>> $ZPWR_LOGFILE | tail -n 1)
             item=${item//\'/\\\'}
 
@@ -2680,7 +2683,10 @@ if [[ $ZPWR_LEARN != false ]]; then
     redo(){
         echo > "$ZPWR_TEMPFILE"
         for num in $@; do
-            id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == $num")
+            id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == quotemeta('$num')")
+            if [[ -z $id ]]; then
+               continue
+            fi
             item=$(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME where id=$id" | mysql 2>> $ZPWR_LOGFILE | tail -n 1)
             item=${item//\'/\\\'\'}
 
