@@ -1783,9 +1783,9 @@ else
                 (raspbian)
                     test -d "$D" && builtin cd "$D"
                     if type ponysay 1>/dev/null 2>&1; then
-                        bash "$HOME/motd.sh" | ponysay -W 120
+                        bash "$ZPWR_HIDDEN_DIR/motd.sh" | ponysay -W 120
                     else
-                        bash "$HOME/motd.sh"
+                        bash "$ZPWR_HIDDEN_DIR/motd.sh"
                     fi
                     ;;
                 (ubuntu|debian|kali|linuxmint|parrot)
@@ -1810,7 +1810,7 @@ else
             case $distroName in
                 (raspbian)
                     test -d "$D" && builtin cd "$D"
-                    bash "$HOME/motd.sh"
+                    bash "$ZPWR_HIDDEN_DIR/motd.sh"
                     ;;
                 (ubuntu|debian|kali|linuxmint|parrot)
                     test -d "$D" && builtin cd "$D"
