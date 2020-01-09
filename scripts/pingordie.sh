@@ -7,7 +7,10 @@
 ##### Notes:
 #}}}***********************************************************
 
+PATH="$PATH:/sbin/usr/sbin"
+
 type fping >/dev/null 2>&1 || {
+    echo "$PATH"
     echo "$(date) no fping"
     exit 1
 }
