@@ -1127,12 +1127,12 @@ precmd(){
             ZPWR_WILL_CLEAR=false
         fi
     }
-    if [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]]; then
-        #export DISPLAY=$(cat ~/.display.txt) ||
+    if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_HIDDEN_DIR/.display.txt ]]; then
+        #export DISPLAY=$(cat $ZPWR_HIDDEN_DIR/.display.txt) ||
         :
     else
         :
-        #echo $DISPLAY > ~/.display.txt
+        #echo $DISPLAY > $ZPWR_HIDDEN_DIR/.display.txt
     fi
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
@@ -1142,12 +1142,12 @@ precmd(){
     fi
 }
 
-if [[ ! -z "$TMUX" ]] && [[ -f ~/.display.txt ]]; then
-    #export DISPLAY=$(cat ~/.display.txt) ||
+if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_HIDDEN_DIR/.display.txt ]]; then
+    #export DISPLAY=$(cat $ZPWR_HIDDEN_DIR/.display.txt) ||
     :
     else
         :
-        #echo $DISPLAY > ~/.display.txt
+        #echo $DISPLAY > $ZPWR_HIDDEN_DIR/.display.txt
     fi
 
 rationalize-dot (){
