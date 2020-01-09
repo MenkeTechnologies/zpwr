@@ -243,7 +243,7 @@ alias l="clearList"
 alias t="cd /"
 alias ca='cat -n'
 alias sa='sudo cat -n'
-alias ra='sudo rm -rf'
+alias ra='sudo rm -rf --'
 
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
