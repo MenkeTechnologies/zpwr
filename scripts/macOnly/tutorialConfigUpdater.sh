@@ -86,11 +86,11 @@ cp -R "$HOME/.vim/Ultisnips" "$tutorialDir"
 #echo "# Mac Only Scripts" >> "$README"
 #bash "$ZPWR_SCRIPTS/headerSummarizer.sh" "$ZPWR_SCRIPTS/"macOnly/*.sh >> "$README"
 
-prettyPrint "Copying tags file"
-cp "$ZPWR_SCRIPTS/tags" "$tutorialDir/shell"
+#prettyPrint "Copying tags file"
+#cp "$ZPWR_SCRIPTS/tags" "$tutorialDir/shell"
 
-prettyPrint "Copying $HOME/.ctags"
-cp "$HOME/.ctags" "$tutorialDir/ctags"
+#prettyPrint "Copying $HOME/.ctags"
+#cp "$HOME/.ctags" "$tutorialDir/ctags"
 
 prettyPrint "Copying vis ncmpcpp mpd"
 cp -R "$HOME/.config/vis" "$tutorialDir/ncmpcpp-mpd-vis"
