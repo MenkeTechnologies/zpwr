@@ -1556,6 +1556,8 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:plumbing-internal-helper-commands' list-colors '=(#b)(*)=1;30=37;46'
 
     zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
+
+    zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then

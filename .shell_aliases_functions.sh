@@ -382,7 +382,12 @@ else
             distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
         }
         case $distroName in
-            (raspbian) source "$HOME/.rpitokens.sh"
+            (raspbian) 
+                if [[ -f "$ZPWR_HIDDEN_DIR/.rpitokens.sh" ]]; then
+                    source "$ZPWR_HIDDEN_DIR/.rpitokens.sh"
+                elif [[ -f "$HOME/.rpitokens.sh" ]]; then
+                        source "$HOME/.rpitokens.sh"
+                fi
                 ;;
             (ubuntu|debian|kali|linuxmint) :
                 ;;
