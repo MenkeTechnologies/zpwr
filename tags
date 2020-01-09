@@ -674,7 +674,6 @@ distroFamily	install.sh	/^                distroFamily=redhat$/;"	v
 distroFamily	install.sh	/^                distroFamily=suse$/;"	v
 distroFamily	install.sh	/^        distroFamily=freebsd$/;"	v
 distroFamily	install.sh	/^        distroFamily=mac$/;"	v
-distroFamily	npm_install.sh	/^            distroFamily=arch$/;"	v
 distroFamily	npm_install.sh	/^            distroFamily=debian$/;"	v
 distroFamily	npm_install.sh	/^            distroFamily=redhat$/;"	v
 distroFamily	npm_install.sh	/^            distroFamily=suse$/;"	v
@@ -915,7 +914,8 @@ installDir	updater.sh	/^            installDir=$(python2 -m pip show "$i" | \\pe
 installDir	updater.sh	/^            installDir=$(python3 -m pip show "$i" | \\perl -ne 'print $1 if \/^Location: (.*)\/')$/;"	v	language:Sh
 installDir	updater.sh	/^        installDir=$(npm root -g | head -n 1)$/;"	v	language:Sh
 installDir	updaterNoPip.sh	/^        installDir=$(npm root -g | head -n 1)$/;"	v	language:Sh
-installNpm	npm_install.sh	/^function installNpm(){$/;"	f
+installNpmDeb	npm_install.sh	/^function installNpmDeb(){$/;"	f
+installNpmRpm	npm_install.sh	/^function installNpmRpm(){$/;"	f
 install_counter	install.sh	/^install_counter=0$/;"	v
 installerDir	macOnly/tutorialConfigUpdater.sh	/^installerDir="$ZPWR_HIDDEN_DIR\/scripts\/$ZPWR_REPO_NAME"$/;"	v	language:Sh
 interceptDelete	/Users/wizard/.zshrc	/^interceptDelete(){$/;"	f	language:Sh

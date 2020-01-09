@@ -9,7 +9,18 @@
 #}}}***********************************************************
 
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
-function installNpm(){
+
+function installNpmRpm(){
+    prettyPrint "curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -"
+    curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -
+    prettyPrint "install npm"
+    update "npm" "$distroFamily"
+    prettyPrint "install nodejs"
+    update "nodejs" "$distroFamily"
+    prettyPrint "install build-essential"
+    update "build-essential" "$distroFamily"
+}
+function installNpmDeb(){
     prettyPrint "curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
     prettyPrint "install npm"
@@ -28,27 +39,26 @@ elif [[ "$ZPWR_OS_TYPE" == linux ]];then
     case $distroName in
         (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
             distroFamily=debian
-            ;;
-        (arch)
-            distroFamily=arch
+        installNpmDeb
             ;;
         (*suse*)
             distroFamily=suse
+            installNpmRpm
             ;;
         (centos|fedora|rhel)
             distroFamily=redhat
+            installNpmRpm
             ;;
         (*)
             prettyPrint "Your distroFamily $distroName is unsupported!" >&2
             exit 1
             ;;
     esac
-    installNpm
 else
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
         distroFamily=freebsd
         distroName=FreeBSD
-        installNpm
+        installNpmDeb
     else
         prettyPrint "Your distroFamily $distroName is unsupported!" >&2
     fi
