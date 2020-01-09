@@ -5,7 +5,7 @@
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Wed Sep 18 15:53:09 EDT 2019
 ##### Purpose: bash script to run zpwr subcommands
-##### Notes:
+##### Notes: escape $ in comments for perl subs
 #}}}***********************************************************
 
 verb="$1"
@@ -61,7 +61,7 @@ case $verb in
         ;;
     figletfonts) cmd="figletfonts" #show all figlet fonts
         ;;
-    home) cmd="cd $ZPWR_HIDDEN_DIR" #go to zpwr ZPWR_HIDDEN_DIR
+    home) cmd="cd $ZPWR_HIDDEN_DIR" #go to zpwr \$ZPWR_HIDDEN_DIR
         ;;
     hubcreate) cmd="hc" #create remote github repo
         ;;
@@ -71,9 +71,9 @@ case $verb in
         ;;
     gitignore) cmd="gil" #vim ~/.git/info/exclude
         ;;
-    taillog) cmd="lo" #tail -F $LOGFILE
+    taillog) cmd="lo" #tail -F \$LOGFILE
         ;;
-    log) cmd="logg" #write to $LOGFILE
+    log) cmd="logg" #write to \$LOGFILE
         ;;
     update) cmd="getrc" #update zpwr custom configs
         ;;
@@ -87,9 +87,9 @@ case $verb in
         ;;
     clearlist) cmd="clearList" #clear and list the files with no args
         ;;
-    learnsearch) cmd="se" #search for learning in $SCHEMA_NAME.$TABLE_NAME
+    learnsearch) cmd="se" #search for learning in \$SCHEMA_NAME.\$TABLE_NAME
         ;;
-    learn) cmd="learn" #save learning to $SCHEMA_NAME.$TABLE_NAME
+    learn) cmd="learn" #save learning to \$SCHEMA_NAME.\$TABLE_NAME
         ;;
     clone) cmd="gcl" #clone and cd to arg
         ;;
@@ -161,9 +161,11 @@ case $verb in
         ;;
     fp) cmd="fp" #cd to ~/forkedRepos
         ;;
-    zp) cmd="zp" #cd to $REPO_NAME
+    zp) cmd="zp" #cd to \$REPO_NAME
         ;;
     recompile) cmd="recompile" #recompile all cache comps
+        ;;
+    grep) cmd="fz" #grep through pwd with ag into fzf
         ;;
     drivesearch) cmd="locateFzf" #search drive for file
         ;;
@@ -175,7 +177,7 @@ case $verb in
         ;;
     zshsearch) cmd="zshrcsearch" #search zshrc for arg
         ;;
-    zpz) cmd="zpz" #cd to $REPO_NAME and git co, rebase and push
+    zpz) cmd="zpz" #cd to \$REPO_NAME and git co, rebase and push
         ;;
     *) cmd="bad$$"
         ;;
