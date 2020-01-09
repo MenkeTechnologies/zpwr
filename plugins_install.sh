@@ -81,7 +81,7 @@ cp "$INSTALLER_DIR/.iftopcolors" "$HOME"
 
 if [[ "$distroName" == raspbian ]]; then
     prettyPrint "Installing custom motd for RPI..."
-    cp "$INSTALLER_DIR/motd.sh" "$HOME"
+    cp "$INSTALLER_DIR/motd.sh" "$HOME/.zpwr"
 fi
 
 prettyPrint "Installing Custom Tmux Commands"
