@@ -402,6 +402,7 @@ __ScriptVersion	/Users/wizard/.zpwr/scripts/storageShower.sh	/^__ScriptVersion="
 __ScriptVersion	/Users/wizard/.zpwr/scripts/tgzLocalInstaller.sh	/^__ScriptVersion="1.0.0"$/;"	v	language:Sh
 __ScriptVersion	/Users/wizard/.zpwr/scripts/updater.sh	/^__ScriptVersion="1.0.0"$/;"	v	language:Sh
 __ScriptVersion	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^__ScriptVersion="1.0.0"$/;"	v	language:Sh
+__ScriptVersion	scripts/CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v
 __init__	/Users/wizard/.zpwr/scripts/boiler_gen.py	/^    def __init__(self, filename, directory, contents):$/;"	m	language:Python	class:CodeFile
 __init__	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def __init__(self):$/;"	m	language:Python	class:Deroffer
 _alias_file	/Users/wizard/.zshrc	/^_alias_file="$ZPWR_HIDDEN_DIR\/.shell_aliases_functions.sh"$/;"	v	language:Sh
@@ -465,6 +466,7 @@ alternatingPrettyPrint	/Users/wizard/.zpwr/scripts/pipUpdater.sh	/^alternatingPr
 alternatingPrettyPrint	/Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	/Users/wizard/.zpwr/scripts/updater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
+alternatingPrettyPrint	scripts/CPU_Stresser.sh	/^alternatingPrettyPrint() {$/;"	f
 amPm	/Users/wizard/.zpwr/scripts/timeConverter.sh	/^    amPm="PM"$/;"	v	language:Sh
 amPm	/Users/wizard/.zpwr/scripts/timeConverter.sh	/^amPm="AM"$/;"	v	language:Sh
 amps	/Users/wizard/.zpwr/.powerlevel9kconfig.sh	/^    amps="$(ioreg -rc AppleSmartBattery | grep CurrentCapacity | awk '{printf "%s mAh\\n", $3}')"$/;"	v	language:Sh
@@ -612,6 +614,7 @@ counter	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    counter=0$/;"	v	la
 counter	/Users/wizard/.zpwr/scripts/CPU_Stresser.sh	/^    counter=0$/;"	v	language:Sh
 counter	/Users/wizard/.zpwr/scripts/pipUpdater.sh	/^    counter=0$/;"	v	language:Sh
 counter	/Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh	/^    counter=0$/;"	v	language:Sh
+counter	scripts/CPU_Stresser.sh	/^    counter=0$/;"	v
 createLearningCollection	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    createLearningCollection(){$/;"	f	language:Sh
 createTemplate	/Users/wizard/.zpwr/scripts/templater.sh	/^createTemplate() {$/;"	f	language:Sh
 createTheFile	/Users/wizard/.zpwr/scripts/createScriptButDontOpenSublime.sh	/^createTheFile() {$/;"	f	language:Sh
@@ -736,6 +739,7 @@ exists	/Users/wizard/.zpwr/scripts/tailZOU.sh	/^    exists(){$/;"	f	language:Sh
 exists	/Users/wizard/.zpwr/scripts/updater.sh	/^exists() {$/;"	f	language:Sh
 exists	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^exists() {$/;"	f	language:Sh
 exists	/Users/wizard/.zpwr/scripts/zshcompgen.zsh	/^exists(){$/;"	f	language:Sh
+exists	scripts/CPU_Stresser.sh	/^exists() {$/;"	f
 expandAliasAccept	/Users/wizard/.zshrc	/^expandAliasAccept(){$/;"	f	language:Sh
 f	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^f(){$/;"	f	language:Sh
 fallback	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def fallback(self, options_section):$/;"	m	language:Python	class:Type1ManParser
@@ -933,6 +937,7 @@ killCursor	/Users/wizard/.zpwr/scripts/openAll.sh	/^killCursor() {$/;"	f	languag
 killCursor	/Users/wizard/.zpwr/scripts/picture_finder.sh	/^killCursor() {$/;"	f	language:Sh
 killCursor	/Users/wizard/.zpwr/scripts/secureDelete.sh	/^killCursor() {$/;"	f	language:Sh
 killpids	/Users/wizard/.zpwr/scripts/CPU_Stresser.sh	/^killpids() {$/;"	f	language:Sh
+killpids	scripts/CPU_Stresser.sh	/^killpids() {$/;"	f
 last	/Users/wizard/.zpwr/scripts/batchRename.sh	/^        local last=$(echo ${file##*_})$/;"	v	language:Sh
 lastWord	/Users/wizard/.zshrc	/^    lastWord=${${(Az)@}[-1]}$/;"	v	language:Sh
 lastWordDouble	/Users/wizard/.zshrc	/^lastWordDouble(){$/;"	f	language:Sh
@@ -1078,6 +1083,7 @@ noport	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                noport=
 noproto	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                        noproto="${noproto:0:-1}"$/;"	v	language:Sh
 noproto	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                noproto="$(echo "$noport" | sed -E 's@https:\/\/|http:\/\/@@')"$/;"	v	language:Sh
 nproc	/Users/wizard/.zpwr/scripts/CPU_Stresser.sh	/^nproc=10$/;"	v	language:Sh
+nproc	scripts/CPU_Stresser.sh	/^nproc=10$/;"	v
 num	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^            num=$1$/;"	v	language:Sh
 num	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        local num=100$/;"	v	language:Sh
 num	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    num=$1$/;"	v	language:Sh
@@ -1194,6 +1200,7 @@ pid	/Users/wizard/.zpwr/scripts/tailZOU.sh	/^    pid=$!$/;"	v	language:Sh
 pid	/Users/wizard/.zshrc	/^        pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$pane'}')$/;"	v	language:Sh
 pids	/Users/wizard/.zpwr/scripts/CPU_Stresser.sh	/^        pids="$pids $!"$/;"	v	language:Sh
 pids	/Users/wizard/.zpwr/scripts/fdswap.sh	/^pids=$*$/;"	v	language:Sh
+pids	scripts/CPU_Stresser.sh	/^        pids="$pids $!"$/;"	v
 pipe	/Users/wizard/.zpwr/scripts/readFIFO.sh	/^pipe=$HOME\/Desktop\/testpipe$/;"	v	language:Sh
 pipe	/Users/wizard/.zpwr/scripts/readFIFO.sh	/^pipe=\/tmp\/testpipe$/;"	v	language:Sh
 pirun	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^pirun(){$/;"	f	language:Sh
@@ -1216,6 +1223,7 @@ prettyPrint	/Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh	/^prettyPrint() {$
 prettyPrint	/Users/wizard/.zpwr/scripts/textmessage.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	/Users/wizard/.zpwr/scripts/updater.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^prettyPrint() {$/;"	f	language:Sh
+prettyPrint	scripts/CPU_Stresser.sh	/^prettyPrint() {$/;"	f
 primary	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                    primary="$(echo "$noproto" | sed -E 's@^(.*)\\.([^.]+)\\.([^.]+)$@\\2.\\3@')"$/;"	v	language:Sh
 printD	/Users/wizard/.zpwr/scripts/banner.pl	/^sub printD {$/;"	s	language:Perl
 printDate	/Users/wizard/.zpwr/scripts/banner.pl	/^sub printDate {$/;"	s	language:Perl
@@ -1478,6 +1486,7 @@ usage	/Users/wizard/.zpwr/scripts/storageShower.sh	/^function usage() {$/;"	f	la
 usage	/Users/wizard/.zpwr/scripts/tgzLocalInstaller.sh	/^function usage() {$/;"	f	language:Sh
 usage	/Users/wizard/.zpwr/scripts/updater.sh	/^usage() {$/;"	f	language:Sh
 usage	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^usage() {$/;"	f	language:Sh
+usage	scripts/CPU_Stresser.sh	/^usage() {$/;"	f
 user	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                user="$(echo $line | awk -F':' '{print $2}' |$/;"	v	language:Sh
 user	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                user="$(echo $line | awk -F'\/' '{print $4}')"$/;"	v	language:Sh
 user	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    user="$(echo "$user" | tr 'A-Z' 'a-z')"$/;"	v	language:Sh
