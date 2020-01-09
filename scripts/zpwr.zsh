@@ -33,6 +33,12 @@ case $verb in
         ;;
     regenpowerline ) cmd="regenPowerlineLink" #regenPowerlineLink
         ;;
+    regengit) cmd="regenAllGitRepos" #regen list of all git repos to ~/.zpwr/zpwrGitDirs.txt
+        ;;
+    regentags) cmd="regenTags" #regen ctags files to ~ and ~/.zpwr/scripts
+        ;;
+    regenenv) cmd="regenSearchEnv" #regen search env too ~/.zpwr/zpwrEnvKey/Value.txt
+        ;;
     regenzsh ) cmd="regenZshCompCache" #regenZshCompCache at ~/.zcompdump-hostname
         ;;
     updatedeps) cmd="apz" #update all dependencies
