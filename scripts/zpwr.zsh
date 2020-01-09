@@ -29,15 +29,15 @@ case $verb in
         ;;
     regen) cmd="regenAll" #regen all caches
         ;;
-    regenkeybindings) cmd="regenAllKeybindingsCache" #regenAllKeybindingsCache
+    regenkeybindings) cmd="regenAllKeybindingsCache" #regen all keybindings cache to ~/.zpwr/zpwr{All,Vim}Keybindings.txt
         ;;
-    regenpowerline ) cmd="regenPowerlineLink" #regenPowerlineLink
+    regenpowerline ) cmd="regenPowerlineLink" #regen powerline sym link to ~/.tmux/powerline
         ;;
     regengit) cmd="regenAllGitRepos" #regen list of all git repos to ~/.zpwr/zpwrGitDirs.txt
         ;;
     regentags) cmd="regenTags" #regen ctags files to ~ and ~/.zpwr/scripts
         ;;
-    regenenv) cmd="regenSearchEnv" #regen search env too ~/.zpwr/zpwrEnvKey/Value.txt
+    regenenv) cmd="regenSearchEnv" #regen search env to ~/.zpwr/zpwrEnv{Key,Value}.txt
         ;;
     regenzsh ) cmd="regenZshCompCache" #regenZshCompCache at ~/.zcompdump-hostname
         ;;
