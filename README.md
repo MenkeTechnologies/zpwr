@@ -23,7 +23,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - keybinding to run current vim selection in tmux pane to right as standalone script
 - keybinding to run current vim selection in tmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files
-- 10.3k zsh completions
+- 10.5k zsh completions
 - ergonomic, recursive tmux keybindings
 - zsh keybindings to fzf search file names and syntax highlighted, numbered file preview
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview
