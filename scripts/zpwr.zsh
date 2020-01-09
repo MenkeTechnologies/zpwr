@@ -149,7 +149,7 @@ case $verb in
         ;;
     scriptToPDF) cmd="scriptToPDF" #convert script to PDF
         ;;
-    cloneToForked) cmd="cloneToForked" #clone $ZPWR_REPO_NAME to $FORKED_DIR
+    cloneToForked) cmd="cloneToForked" #clone \$ZPWR_REPO_NAME to \$FORKED_DIR
         ;;
     reveal) cmd="reveal" #show remote repo in browser
         ;;
@@ -161,7 +161,7 @@ case $verb in
         ;;
     fp) cmd="fp" #cd to ~/forkedRepos
         ;;
-    zp) cmd="zp" #cd to \$REPO_NAME
+    zp) cmd="zp" #cd to \$ZPWR_REPO_NAME
         ;;
     recompile) cmd="recompile" #recompile all cache comps
         ;;
