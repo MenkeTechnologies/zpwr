@@ -39,7 +39,7 @@ case $verb in
         ;;
     regenenv) cmd="regenSearchEnv" #regen search env to ~/.zpwr/zpwrEnv{Key,Value}.txt
         ;;
-    regenzsh ) cmd="regenZshCompCache" #regenZshCompCache at ~/.zcompdump-hostname
+    regenzsh ) cmd="regenZshCompCache" #regen compsys cache to ~/.zcompdump
         ;;
     updatedeps) cmd="apz" #update all dependencies
         ;;
@@ -71,9 +71,9 @@ case $verb in
         ;;
     gitignore) cmd="gil" #vim ~/.git/info/exclude
         ;;
-    taillog) cmd="lo" #tail -F \$LOGFILE
+    taillog) cmd="lo" #tail -F \$ZPWR_LOGFILE
         ;;
-    log) cmd="logg" #write to \$LOGFILE
+    log) cmd="logg" #write to \$ZPWR_LOGFILE
         ;;
     update) cmd="getrc" #update zpwr custom configs
         ;;
@@ -87,9 +87,9 @@ case $verb in
         ;;
     clearlist) cmd="clearList" #clear and list the files with no args
         ;;
-    learnsearch) cmd="se" #search for learning in \$SCHEMA_NAME.\$TABLE_NAME
+    learnsearch) cmd="se" #search for learning in \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
         ;;
-    learn) cmd="learn" #save learning to \$SCHEMA_NAME.\$TABLE_NAME
+    learn) cmd="learn" #save learning to \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
         ;;
     clone) cmd="gcl" #clone and cd to arg
         ;;
@@ -113,7 +113,7 @@ case $verb in
         ;;
     pre) cmd="pre" #prefix all output
         ;;
-    banner) cmd="about" #show $REPO_NAME banner
+    banner) cmd="about" #show $ZPWR_REPO_NAME banner
         ;;
     gitremotes) cmd="allRemotes" #list all git remotes
         ;;
@@ -149,7 +149,7 @@ case $verb in
         ;;
     scriptToPDF) cmd="scriptToPDF" #convert script to PDF
         ;;
-    cloneToForked) cmd="cloneToForked" #clone $REPO_NAME to $FORKED_DIR
+    cloneToForked) cmd="cloneToForked" #clone $ZPWR_REPO_NAME to $FORKED_DIR
         ;;
     reveal) cmd="reveal" #show remote repo in browser
         ;;
@@ -177,7 +177,7 @@ case $verb in
         ;;
     zshsearch) cmd="zshrcsearch" #search zshrc for arg
         ;;
-    zpz) cmd="zpz" #cd to \$REPO_NAME and git co, rebase and push
+    zpz) cmd="zpz" #cd to \$ZPWR_REPO_NAME and git co, rebase and push
         ;;
     *) cmd="bad$$"
         ;;
