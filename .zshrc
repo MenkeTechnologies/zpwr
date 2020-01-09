@@ -1744,7 +1744,7 @@ revealRecurse(){
 #
 #{{{                    MARK:Source Tokens
 #**************************************************************
-test -f "$HOME/.tokens.sh" && source "$HOME/.tokens.sh"
+test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
 #}}}***********************************************************
 
 #{{{                    MARK:Initialize Login
