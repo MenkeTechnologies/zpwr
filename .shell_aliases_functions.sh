@@ -53,8 +53,8 @@ test -z "$ZPWR_GITHUB_ACCOUNT" && export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 test -z "$ZPWR_GITHUB_URL" && export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
 test -z "$ZPWR_REPO_NAME" && export ZPWR_REPO_NAME="zpwr"
 test -z "$ZPWR_COMPLETION_DIR" && export ZPWR_COMPLETION_DIR="zsh-more-completions"
-test -z "$ZPWR_VIM_KEYBINDINGS" && export ZPWR_VIM_KEYBINDINGS="$ZPWR_HIDDEN_DIR/vimKeybindings.txt"
-test -z "$ZPWR_ALL_KEYBINDINGS" && export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR/keybindings.txt"
+test -z "$ZPWR_VIM_KEYBINDINGS" && export ZPWR_VIM_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrVimKeybindings.txt"
+test -z "$ZPWR_ALL_KEYBINDINGS" && export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrKeybindings.txt"
 test -z "$ZPWR_LOG_UNDER_COLOR" && export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
 test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
@@ -1456,7 +1456,8 @@ openmygh(){
 }
 alias gh=openmygh
 
-eval "alias $ZPWR_GITHUB_ACCOUNT=NAME='openmygh $ZPWR_GITHUB_ACCOUNT'"
+eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
+
 zpwr(){
     if test -z $1;then
         openmygh $ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME
@@ -1464,10 +1465,11 @@ zpwr(){
         . zpwr.zsh "$@"
     fi
 }
+
 if [[ -d "$ZPWR_SCRIPTS/$ZPWR_REPO_NAME" ]]; then
-    eval "export $(echo $ZPWR_REPO_NAME | perl -pe '$_=uc')='$ZPWR_SCRIPTS/$ZPWR_REPO_NAME'"
+    export ZPWR_REPO="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
 elif [[ -d "$FORKED_DIR/$ZPWR_REPO_NAME" ]];then
-    eval "export $(echo $ZPWR_REPO_NAME | perl -pe '$_=uc')='$FORKED_DIR/$ZPWR_REPO_NAME'"
+    export ZPWR_REPO="$FORKED_DIR/$ZPWR_REPO_NAME"
 fi
 
 if [[ -d "$FORKED_DIR" ]]; then
@@ -1475,7 +1477,7 @@ if [[ -d "$FORKED_DIR" ]]; then
 fi
 
 zpz(){
-    local dirsrc forked
+    local dirsc forked
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
 
@@ -1488,7 +1490,7 @@ zpz(){
     fi
 }
 zp(){
-    local dirsrc forked
+    local dirsc forked
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
 
