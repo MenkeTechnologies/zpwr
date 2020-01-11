@@ -258,7 +258,7 @@ export ZPWR_AUTO_ATTACH=true
 # exa command invoked from clearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # uses the zprof function to profile startup
-export ZPWR_PROFILING=false
+export ZPWR_PROFILING=alse
 # turns on debugging logs using logg function
 export ZPWR_DEBUG=false
 # turns on set -x
@@ -280,6 +280,10 @@ export ZPWR_TABSTOP=__________
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 # the base dir for zpwr configs
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+export ZPWR="$ZPWR_HIDDEN_DIR"
+export ZPWR_TMUX="$ZPWR_HIDDEN_DIR/.tmux"
+# the base dir for zpwr temp
+export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
 # the path to a lock file (semaphore) for zpwr
 export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
 # for alternating pretty printer
