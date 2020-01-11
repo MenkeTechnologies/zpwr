@@ -989,10 +989,9 @@ function! s:getVisualSelection()
     return join(lines, "\n")
 endfunction
 
-
 function! ExtractVariableVisual() range
     let l:wordUnderCursor = s:getVisualSelection()
-    let l:name = inputdialog("Extract variable to replace visual '".wordUnderCursor."':")
+    let l:name = inputdialog("Extract variable to replace visual __".wordUnderCursor."__:")
     
     if l:name== ''
        return 0
@@ -1033,7 +1032,7 @@ endfunction
 
 function! ExtractVariable()
     let l:wordUnderCursor = expand("<cword>")
-    let l:name = inputdialog("Extract variable to replace '".wordUnderCursor."':")
+    let l:name = inputdialog("Extract variable to replace __".wordUnderCursor."__:")
     
     if l:name== ''
        return 0 
@@ -1042,7 +1041,7 @@ function! ExtractVariable()
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:exeFileType=expand('%:e')
     let l:regex=fnameescape(l:wordUnderCursor)
-    echom '%sno@'.l:regex.'@$'.l:name."@g"
+    echom '%s@\<'.l:regex.'\>@$'.l:name."@g"
 
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         let l:line=GetFirstCodeLineHash()
