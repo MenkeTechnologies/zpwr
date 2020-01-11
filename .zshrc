@@ -1859,6 +1859,11 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     fi
 fi
 
+if [[ -d "$ZSH" ]]; then
+    #oh-my-zsh sets this
+    : ~ZSH
+fi
+
 if [[ -d "$FORKED_DIR" ]]; then
     : ~FORKED_DIR
 fi
