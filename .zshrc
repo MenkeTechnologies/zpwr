@@ -1756,10 +1756,9 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     if [[ "$UID" != "0" ]]; then
          #builtin cd "$D" && clear
         clear
-        fig="$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh"
         if type figlet > /dev/null 2>&1; then
             printf "\e[1m"
-            if [[ -f "$fig" ]]; then
+            if [[ -f "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" ]]; then
                 if [[ "$ZPWR_BANNER" == ponies ]]; then
                     if [[ -f "$ZPWR_SCRIPTS/splitReg.sh" ]];then
                         bannerLolcat
