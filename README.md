@@ -55,7 +55,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - shell function, c, uses same shell code to generate output that default FZF preview pane does
 - shell function, c, auto runs sudo when file is not readable
 - shell function, r, that cds to any of parent directories with zsh completion
-- 100+ bash, perl, zsh and python scripts
+- 150+ bash, perl, zsh and python scripts
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color coded, tag grouped clearList zsh completion
 - search google from tmux mouse drag selection (tmux's copy-mode-vi)
