@@ -976,16 +976,37 @@ function! GetFirstCodeLineHash()
         return l:lineCounter -1
 endfunction
 
-function! ExtractVariable()
-    let l:wordUnderCursor = expand("<cword>")
-    let l:name = inputdialog("Extract variable to replace ".wordUnderCursor.":")
+function! s:getVisualSelection()
+    " Why is this not a built-in Vim script function?!
+    let [line_start, column_start] = getpos("'<")[1:2]
+    let [line_end, column_end] = getpos("'>")[1:2]
+    let lines = getline(line_start, line_end)
+    if len(lines) == 0
+        return ''
+    endif
+    let lines[-1] = lines[-1][: column_end - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][column_start - 1:]
+    return join(lines, "\n")
+endfunction
+
+
+function! ExtractVariableVisual() range
+    let l:wordUnderCursor = s:getVisualSelection()
+    let l:name = inputdialog("Extract variable to replace visual '".wordUnderCursor."':")
+    
+    if l:name== ''
+       return 0
+    endif
 
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:exeFileType=expand('%:e')
+    let l:regex=escape(l:wordUnderCursor, '/\')
+    echom '%sno@'.l:regex.'@$'.l:name."@g"
+
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         let l:line=GetFirstCodeLineHash()
         exe "normal mz"
-        exe '%s@\<'.l:wordUnderCursor.'\>@$'.l:name."@g"
+        exe '%sno@'.l:regex.'@$'.l:name."@g"
         exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
         exe "normal! V\<Esc>"
         exe "normal! `z"
@@ -993,7 +1014,7 @@ function! ExtractVariable()
     elseif l:exeFileType == 'pl'
         let l:line=GetFirstCodeLineHash()
         exe "normal mz"
-        exe '%s@\<'.l:wordUnderCursor.'\>@$'.l:name."@g"
+        exe '%sno@'.l:regex.'@$'.l:name."@g"
         exe "normal! ".(l:line+1)."GOmy $".l:name."=".l:wordUnderCursor.";"
         exe "normal! V\<Esc>"
         exe "normal! `zzz"
@@ -1001,7 +1022,48 @@ function! ExtractVariable()
     elseif l:exeFileType == 'py'
         let l:line=GetFirstCodeLineHash()
         exe "normal mz"
-        exe '%s@\<'.l:wordUnderCursor.'\>@'.l:name."@g"
+        exe '%sno@'.l:regex.'@'.l:name."@g"
+        exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
+        exe "normal! `z"
+
+    elseif index(supportedTypes, exeFileType) < 0
+        echom "Unknown Filetype '".exeFileType. "'."
+    endif
+endfunction
+
+function! ExtractVariable()
+    let l:wordUnderCursor = expand("<cword>")
+    let l:name = inputdialog("Extract variable to replace '".wordUnderCursor."':")
+    
+    if l:name== ''
+       return 0 
+    endif
+
+    let l:supportedTypes=['sh','zsh', 'pl', 'py']
+    let l:exeFileType=expand('%:e')
+    let l:regex=fnameescape(l:wordUnderCursor)
+    echom '%sno@'.l:regex.'@$'.l:name."@g"
+
+    if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
+        let l:line=GetFirstCodeLineHash()
+        exe "normal mz"
+        exe '%s@\<'.l:regex.'\>@$'.l:name."@g"
+        exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
+        exe "normal! V\<Esc>"
+        exe "normal! `z"
+
+    elseif l:exeFileType == 'pl'
+        let l:line=GetFirstCodeLineHash()
+        exe "normal mz"
+        exe '%s@\<'.l:regex.'\>@$'.l:name."@g"
+        exe "normal! ".(l:line+1)."GOmy $".l:name."=".l:wordUnderCursor.";"
+        exe "normal! V\<Esc>"
+        exe "normal! `zzz"
+
+    elseif l:exeFileType == 'py'
+        let l:line=GetFirstCodeLineHash()
+        exe "normal mz"
+        exe '%s@\<'.l:regex.'\>@'.l:name."@g"
         exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
         exe "normal! `z"
 
@@ -1054,8 +1116,9 @@ function! ExtractMethod() range
     endif
 endfunction
 
-vmap <leader>em :call ExtractMethod()<CR>
+xmap <leader>em :call ExtractMethod()<CR>
 nmap <leader>ev :call ExtractVariable()<CR>
+xmap <leader>ev :call ExtractVariableVisual()<CR>
 
 let shouldMapV = $ZPWR_MAP_C_V_VIM_NORMAL
 if shouldMapV == 'true'

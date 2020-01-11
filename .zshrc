@@ -77,6 +77,8 @@ export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
+# aliases expand after spelling correction
+export ZPWR_CORRECT_EXPAND=true
 # auto select first item of menuselect
 export ZPWR_AUTO_SELECT=true
 # typing leading quote, paren, bracket inserts trailing after caret
