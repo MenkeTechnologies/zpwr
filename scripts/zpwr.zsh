@@ -145,6 +145,8 @@ case $verb in
         ;;
     cd) cmd="f" #cd to directory arg
         ;;
+    scriptcount) cmd="scriptCount" #total number of scripts in \$ZPWR_SCRIPTS
+        ;;
     scripts) cmd="sc" #cd to scripts directory
         ;;
     scriptToPDF) cmd="scriptToPDF" #convert script to PDF

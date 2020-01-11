@@ -468,6 +468,7 @@ exists tput && {
     bold=$(tput bold || tput md)
     red=$(tput setaf 1)
 }
+
 exists idea && {
     alias ic="idea create"
     alias il="idea list"
