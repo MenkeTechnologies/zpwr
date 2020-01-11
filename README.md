@@ -145,7 +145,7 @@ or type C-d (Control-d) to return to installer script.
 
 ## Install Destination
 
-Most zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR_HIDDEN_DIR` environment var.  Exceptions are `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/grc.zsh` which are installed to home dir.
+Most zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR` and `ZPWR_HIDDEN_DIR` environment variables.  Exceptions are `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/grc.zsh` which are installed to home dir.
 Your old configs for these files will be found in a directory name approximately `~/.zpwr/username.rc.bak.date` after install.  Exact directory name is generated as shown.
 ```sh
 backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
@@ -162,14 +162,13 @@ You must remove these manually if desired.
 If desired you can also uninstall oh-my-zsh with ```uninstall_oh_my_zsh```.  Make sure the `~/.zshrc` is your original version.
 
 ## Font
-
-You need to change the Terminal font to support the Powerline triangles and other special characters in the PowerLevel 9k font.
+You need to change the Terminal font to support the Powerline triangles and other special characters in the Powerlevel9k PROMPT.
 
 The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
 documentation for details on how to change the font.
 
 ## getrc and copyConf functions
-There is a shell function called `getrc` that will update ZPWR by cloning the latest changes from this repository.
+There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by cloning the latest changes from this repository.
 It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc`, `~/.shell_aliases_functions.sh`, `~.tmux.conf`.
 `copyConf` will also overwrite all scripts in `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and some other configs in home directory.
 Run `clearList getrc copyConf` to see the bodies of these function.
@@ -216,7 +215,6 @@ if echo "$firstword_partition" | command grep -qE '(sudo|zpwr|env)';then
 
 File ending of currently edited file in vim determines the interpreter used by the bash script `$ZPWR_SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
 
-
 ## Tmux Main Window
 The main window show in the screenshots is started by Prefix-D in an empty tmux window.  This sources a tmux script named control-window.
 Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/control-window` or in the terminal with `tmux source-file ~/.tmux/control-window` in an empty tmux window.
@@ -226,6 +224,9 @@ Startup shell files will source `~/.zpwr/.tokens.sh` so you can put your additio
 
 Running `zpwr regen` will regenerate all cache files in `~/.zpwr` and create a ctags file named `~/tags` in your home directory.
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
+
+## zpwr verbs
+Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands just invoke other shell functions.
 
 ## ZPWR_GITHUB_ACCOUNT variable
 Change in `~/.zpwr/.tokens.sh`
