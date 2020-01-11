@@ -50,7 +50,6 @@ set ruler
 set autoread
 "searches are case insensitive
 set ignorecase
-set smartcase
 "tab is 4 spaces
 set tabstop=4
 "snap to nearest tabstop
