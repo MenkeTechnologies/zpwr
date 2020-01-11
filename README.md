@@ -158,7 +158,7 @@ Then remove the zpwr dir as shown.
 rm -rf ~/.zpwr
 ```
 This will not uninstall packages installed by system package manager, pip modules, gems, vim plugins, tmux plugins and zsh plugins.
-You must remove this manuallly is desired.
+You must remove these manually if desired.
 If desired you can also uninstall oh-my-zsh with ```uninstall_oh_my_zsh```.  Make sure the `~/.zshrc` is your original version.
 
 ## Font
