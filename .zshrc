@@ -1730,11 +1730,11 @@ bindkey -M isearch '^A' beginning-of-line
 #
 
 banner(){
-    bash "$fig" "$(hostname)" |
+    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
     ponysay -W 100
 }
 bannerLolcat(){
-    bash "$fig" "$(hostname)" |
+    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
     ponysay -W 100 |
     splitReg.sh -- \
     ---------------------- lolcat
