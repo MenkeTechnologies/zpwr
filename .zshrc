@@ -345,6 +345,13 @@ sub (){
     zle .accept-line
 }
 
+scriptCount(){
+    command ls \
+        "$ZPWR_SCRIPTS/"*.{sh,zsh,pl,py} \
+        "$ZPWR_SCRIPTS/macOnly/"*.{sh,zsh,pl,py} |
+        wc -l
+}
+
 lastWordDouble(){
     mywords=("${(z)BUFFER}")
     if [[ $BUFFER[-1] == " " ]]; then
