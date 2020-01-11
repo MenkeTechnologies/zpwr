@@ -110,6 +110,8 @@ export ZPWR_TABSTOP=__________
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 # the base dir for zpwr configs
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+export ZPWR="$ZPWR_HIDDEN_DIR"
+export ZPWR_TMUX="$ZPWR_HIDDEN_DIR/.tmux"
 # the base dir for zpwr temp
 export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
 # the path to a lock file (semaphore) for zpwr
@@ -1867,15 +1869,27 @@ if [[ -d "$ZPWR_SCRIPTS" ]]; then
 fi
 
 if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-    : ~ZPWR_HIDDEN_DIR_TEMP
+    #shorten to prevail over absolute path in print -p %~
+    #must be <= .zpwr/temp
+    hash -d ZPWR_TEMP="$ZPWR_HIDDEN_DIR_TEMP"
 fi
 
 if [[ -d "$ZPWR_HIDDEN_DIR" ]]; then
-    : ~ZPWR_HIDDEN_DIR
+    #shorten to prevail over absolute path in print -p %~
+    #must be <= .zpwr
+    hash -d ZPWR="$ZPWR_HIDDEN_DIR"
+fi
+
+if [[ -d "$ZPWR_TMUX" ]]; then
+    hash -d ZPWR_TMUX="$ZPWR_TMUX"
+fi
+
+if [[ -d "$ZPWR_REPO" ]]; then
+    hash -d ZPWR_REPO="$ZPWR_REPO"
 fi
 
 if [[ -d "$ZPWR" ]]; then
-    : ~ZPWR
+    hash -d ZPWR="$ZPWR"
 fi
 
 if [[ -d "$PYSCRIPTS" ]]; then
@@ -1887,7 +1901,9 @@ if [[ -d "$PYEXECUTABLES" ]]; then
 fi
 
 if [[ -d "$TMUX_HOME" ]]; then
-    : ~TMUX_HOME
+    #shorten to prevail over absolute path in print -p %~
+    #must be <= .tmux
+    hash -d TMUXH="$TMUX_HOME"
 fi
 
 if [[ -d "$ZPWR_DOC" ]]; then
