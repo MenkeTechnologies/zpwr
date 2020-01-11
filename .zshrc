@@ -88,7 +88,7 @@ export ZPWR_AUTO_ATTACH=true
 # exa command invoked from clearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # uses the zprof function to profile startup
-export ZPWR_PROFILING=alse
+export ZPWR_PROFILING=false
 # turns on debugging logs using logg function
 export ZPWR_DEBUG=false
 # turns on set -x
