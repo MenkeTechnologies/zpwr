@@ -1002,6 +1002,7 @@ function! ExtractVariableVisual() range
     let l:regex=escape(l:wordUnderCursor, '/\')
     echom '%sno@'.l:regex.'@$'.l:name."@g"
 
+    exe "normal `<"
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         let l:line=GetFirstCodeLineHash()
         exe "normal mz"
