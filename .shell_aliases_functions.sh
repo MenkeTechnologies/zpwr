@@ -500,9 +500,10 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     }
 
     nn(){
-        [[ -z "$2" ]] && echo \
-            "Title is \$1 and message is \$2..." >&2 &&
+        if [[ -z "$2" ]];then
+            loggErr "Title is \$1 and message is \$2..." &&
             return 1
+        fi
         title="$1"
         msg="$2"
         echo "display notification \"$msg\" with title \"$title\"" |
@@ -586,15 +587,15 @@ else
         src_dir="$FORKED_DIR/$ZPWR_REPO_NAME"
         local service_path="$src_dir/$service.service"
         test -d "$src_dir" ||
-            { echo "$src_dir does not exists." >&2 && return 1; }
+            { loggErr "$src_dir does not exists." && return 1; }
         test -f "$service_path" ||
-            { echo "$service_path does not exists so falling back to $1." >&2 && service_path="$1"; }
+            { loggErr "$service_path does not exists so falling back to $1." && service_path="$1"; }
 
         test -f "$service_path" ||
-            { echo "$service_path does not exists so exiting." >&2 && return 1; }
+            { loggErr "$service_path does not exists so exiting." && return 1; }
 
         test -d "/etc/systemd/system" ||
-            { echo "/etc/systemd/system does not exists. Is systemd installed?" >&2 && return 1; }
+            { loggErr "/etc/systemd/system does not exists. Is systemd installed?" && return 1; }
             ( cd "$src_dir" && git pull; )
         group=$(id -gn)
         if [[ $UID != 0 ]]; then
@@ -659,6 +660,15 @@ s(){
         fi
     fi
 }
+loggErr(){
+    test -z "$1" && echo "need arg" >&2 && return 1
+    {
+        printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
+        printf "_$ZPWR_LOG_QUOTE_COLOR'$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_" "$*"
+        printf "\x1b[0m"
+        printf "\n"
+    } >&2
+}
 
 logg(){
 
@@ -673,7 +683,7 @@ logg(){
                 printf "\n"
             } >> "$ZPWR_LOGFILE"
         else
-            test -z "$1" && echo "need arg" >&2 && return 1
+            test -z "$1" && loggErr "need arg" && return 1
             {
                 printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
                 printf "_$ZPWR_LOG_QUOTE_COLOR'$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_" "$*"
@@ -690,7 +700,7 @@ logg(){
                 printf "'_ \n"
             } >> "$ZPWR_LOGFILE"
         else
-            test -z "$1" && echo "need arg" >&2 && return 1
+            test -z "$1" && loggErr "need arg" && return 1
             {
                 printf "\n_____________$(date)____ "
                 printf "_'%s'_ " "$@"
@@ -749,7 +759,7 @@ function j(){
 }
 
 scnew(){
-    test -z "$1" && echo "no arg..." >&2 && return 1
+    test -z "$1" && loggErr echo "no arg..." && return 1
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
@@ -960,7 +970,7 @@ f(){
             test -d "$base" && cd "$base"&& return 0
             base="$(dirname "$base")"
         done
-        echo "Not a valid file or directory." >&2 && return 1
+        loggErr "Not a valid file or directory." && return 1
     fi
 }
 alias fh='f !$'
@@ -993,7 +1003,7 @@ isGitDir(){
 isGitDirMessage(){
     if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
         printf "\x1b[0;1;31m"
-        printf "NOT GIT DIR: $(pwd -P)\n" >&2
+        loggErr "NOT GIT DIR: $(pwd -P)"
         printf "\x1b[0m"
         return 1
     fi
@@ -1045,7 +1055,7 @@ totalLines(){
 
     if ! test -f "$ZPWR_TEMPFILE"; then
         printf "\x1b[0;1;31m"
-        printf "where is $ZPWR_TEMPFILE\n" >&2
+        loggErr "where is $ZPWR_TEMPFILE" 
         printf "\x1b[0m"
         return 1
     fi
@@ -1089,7 +1099,7 @@ lineContribCount(){
 
     if ! test -f "$ZPWR_TEMPFILE"; then
         printf "\x1b[0;1;31m"
-        printf "where is $ZPWR_TEMPFILE\n" >&2
+        loggErr "where is $ZPWR_TEMPFILE"
         printf "\x1b[0m"
         return 1
     fi
@@ -1117,8 +1127,7 @@ gsdc(){
         if [[ "$currentDir" == "$dir" ]]; then
             printf "\x1b[0;1;31m"
             print -sr "$BUFFER"
-            printf "BLACKLISTED: $(pwd -P)" >&2
-            echo
+            loggErr "BLACKLISTED: $(pwd -P)"
             printf "\x1b[0m"
             return 1
         fi
@@ -1126,7 +1135,7 @@ gsdc(){
 
 	git status | command grep -sq "nothing to commit" && {
         printf "\x1b[0;1;31m"
-        printf "Nothing has changed." >&2
+        loggErr "Nothing has changed."
         echo
         BUFFER=""
         printf "\x1b[0m"
@@ -1189,7 +1198,7 @@ creategif(){
     outFile=out.gif
     res=600x400
 
-    test -z "$1" && echo "One arg needed..." >&2 && return 1
+    test -z "$1" && loggErr "One arg needed..." && return 1
 
     test -n "$2" && res="$2"
 
@@ -1237,8 +1246,8 @@ hd(){
 
     user="$(echo "$user" | tr 'A-Z' 'a-z')"
 
-    test -z "$repo" && echo "bad repo $repo" >&2 && return 1
-    test -z "$user" && echo "bad user $user" >&2 && return 1
+    test -z "$repo" && loggErr "bad repo $repo" && return 1
+    test -z "$user" && loggErr "bad user $user" && return 1
 
     out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$repo")"
 
@@ -1262,7 +1271,7 @@ return2(){
     if isZsh; then
         exec 2> /dev/tty
     else
-        echo "only for zsh" >&2
+        loggErr "only for zsh"
         return 1
     fi
 }
@@ -1271,7 +1280,7 @@ color2(){
     if isZsh; then
         exec 2> >(redText.sh)
     else
-        echo "only for zsh" >&2
+        loggErr "only for zsh"
         return 1
     fi
 }
@@ -1288,7 +1297,7 @@ prettyPrint(){
         printf "%s " "$@"
         printf "\x1b[0m\n"
     else
-        echo "Need one arg" >&2
+        loggErr "Need one arg" 
         return 1
     fi
 }
@@ -1411,7 +1420,7 @@ jetbrainsWorkspaceEdit(){
             sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
 
         else
-            echo "No Match Yet" >&2
+            loggErr "No Match Yet" 
             sleep 1
         fi
     done
@@ -1487,7 +1496,7 @@ zpz(){
     elif [[ -d "$forked" ]]; then
         cd "$forked"; gitCheckoutRebasePush
     else
-        echo "$dirsc and $forked do not exist" >&2
+        loggErr "$dirsc and $forked do not exist"
     fi
 }
 zp(){
@@ -1500,7 +1509,7 @@ zp(){
     elif [[ -d "$forked" ]]; then
         cd "$forked"
     else
-        echo "$dirsc and $forked do not exist" >&2
+        loggErr "$dirsc and $forked do not exist"
     fi
 }
 
@@ -1647,13 +1656,13 @@ digs(){
     while getopts "s" opt 2>/dev/null;do
         case $opt in
             s)secret=true;;
-            *) echo "bad opt" >&2; return 1
+            *) loggErr "bad opt"; return 1
         esac
     done
     shift $(($OPTIND-1))
 
     if [[ -z "$1" ]]; then
-        echo "need an arg" >&2
+        loggErr "need an arg"
         return 1
     fi
     exists grc && colo=grc || {
@@ -1662,7 +1671,7 @@ digs(){
     }
 
     if [[ -n $colo ]] && [[ ! -f "$HOME/conf.whois" ]]; then
-        echo "cannot proceed without $HOME/conf.whois for grc" >&2
+        loggErr "cannot proceed without $HOME/conf.whois for grc"
         return 1
     fi
 
@@ -1675,7 +1684,7 @@ digs(){
         }
 
         if [[ -z "$exe" ]]; then
-            echo "cannot proceed without proxychains" >&2; return 1
+            loggErr "cannot proceed without proxychains" return 1
         fi
 
 
@@ -1776,7 +1785,7 @@ digs(){
                 exec 2>/dev/tty
             done | less -MN
         else
-            echo "you need dig" >&2
+            loggErr "you need dig"
         fi
     else
 
@@ -1843,14 +1852,14 @@ digs(){
                 exec 2>/dev/tty
             done | less -MN
         else
-            echo "you need dig" >&2
+            loggErr "you need dig"
         fi
     fi
 }
 
 to(){
     file="$HOME/.config/powerline/themes/tmux/default.json"
-    [[ ! -f "$file" ]] && echo "no tmux config" >&2 && return 1
+    [[ ! -f "$file" ]] && loggErr "no tmux config" && return 1
     if cat "$file" | grep -sq "external_ip"; then
         perl -i -pe 's@^.*external_ip.*$@@' "$file"
         printf "Removing External IP\n"
@@ -1892,7 +1901,7 @@ fff(){
 }
 
 post(){
-    test -z $2 && echo "need two args" >&2 && return 1
+    test -z $2 && loggErr "need two args" && return 1
     postfix="$1"
     shift
     out="$(eval "$@")"
@@ -1900,7 +1909,7 @@ post(){
 }
 
 pre(){
-    test -z $2 && echo "need two args" >&2 && return 1
+    test -z $2 && loggErr "need two args" && return 1
     prefix="$1"
     shift
     out="$(eval "$@")"
@@ -1909,7 +1918,7 @@ pre(){
 
 exists pssh && pir(){
     if ! test -s "$ZPWR_HIDDEN_DIR/hosts.txt"; then
-        echo "you need hosts.txt in your $ZPWR_HIDDEN_DIR" >&2
+        loggErr "you need hosts.txt in your $ZPWR_HIDDEN_DIR"
         return 1
     fi
     pssh --inline-stdout --timeout 90 -h "$ZPWR_HIDDEN_DIR/hosts.txt" "$@"
@@ -2025,7 +2034,7 @@ figletfonts(){
     fi
 
     if [[ ! -d "$FIGLET_DIR" ]]; then
-        echo "Can not find $FIGLET_DIR" >&2 && return 1
+        loggErr "Can not find $FIGLET_DIR" && return 1
     fi
 
     declare -a ary
@@ -2035,11 +2044,11 @@ figletfonts(){
     done
 
     if [[ "$ZPWR_BANNER" == ponies ]]; then
-        exists ponysay || { echo "you need ponysay" >&2 && return 1; }
+        exists ponysay || { loggErr "you need ponysay" && return 1; }
     fi
-    exists lolcat || { echo "you need lolca" >&2 && return 1; }
-    exists splitReg.sh || { echo "you need splitReg.sh" >&2 && return 1; }
-    exists tput || { echo "you need tput" >&2 && return 1; }
+    exists lolcat || { loggErr "you need lolcat" && return 1; }
+    exists splitReg.sh || { loggErr "you need splitReg.sh" && return 1; }
+    exists tput || { loggErr "you need tput" && return 1; }
 
     alternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}iglet ${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}onts ${ZPWR_DELIMITER_CHAR}A${ZPWR_DELIMITER_CHAR}re:"
 
@@ -2199,7 +2208,7 @@ if [[ $ZPWR_LEARN != false ]]; then
                 echo 'CREATE TABLE `'"$ZPWR_TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$ZPWR_TABLE_NAME"'learning_index` (`learning`))'
                 echo 'CREATE TABLE `'"$ZPWR_TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$ZPWR_TABLE_NAME"'learning_index` (`learning`))' | mysql -u root -D "$ZPWR_SCHEMA_NAME" -p "$1"
             else
-                echo "$ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME already exists" >&2
+                loggErr "$ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME already exists"
             fi
         else
             #use my.cnf
@@ -2210,7 +2219,7 @@ if [[ $ZPWR_LEARN != false ]]; then
                 echo 'CREATE TABLE `'"$ZPWR_TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$ZPWR_TABLE_NAME"'learning_index` (`learning`))'
                 echo 'CREATE TABLE `'"$ZPWR_TABLE_NAME"'` ( `category` varchar(20) DEFAULT NULL, `learning` varchar(200) DEFAULT NULL,`dateAdded` datetime DEFAULT NULL, `id` int(11) NOT NULL AUTO_INCREMENT,  PRIMARY KEY (`id`), KEY `'"$ZPWR_TABLE_NAME"'learning_index` (`learning`))' | mysql -D "$ZPWR_SCHEMA_NAME"
             else
-                echo "$ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME already exists" >&2
+                loggErr "$ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME already exists"
             fi
         fi
     }
@@ -2385,7 +2394,7 @@ regenPowerlineLink(){
 
 goclean() {
     if [[ -z "$1" ]]; then
-        echo "need package name" >&2
+        loggErr "need package name"
         return 1
     fi
     local pkg=$1;
@@ -2404,11 +2413,11 @@ goclean() {
     local bin_dir="$GOPATH/pkg/$ost/$pkg"
 
     if [[ ! -d "$src_dir" ]]; then
-        echo "$src_dir from $pkg does not exist" >&2
+        loggErr "$src_dir from $pkg does not exist"
         return 1
     fi
     if [[ ! -d "$bin_dir" ]]; then
-        echo "$bin_dirfrom $pkg does not exist" >&2
+        loggErr "$bin_dirfrom $pkg does not exist"
     fi
     # Clean removes object files from package source directories (ignore error)
     go clean -i $pkg 2>/dev/null
@@ -2419,6 +2428,22 @@ goclean() {
     rm -rf "$bin_dir"
 
 }
+
+
+commits(){
+    if isGitDir; then
+        if [[ $EDITOR = nvim ]];then
+            nvim -c Commits!
+        elif [[ $EDITOR == mvim ]];then
+            mvim -v -c Commits!
+        else
+            vim -c Commits!
+        fi
+    else
+        loggErr "not a git dir" && return 1
+    fi
+}
+
 
 timer() {
     local count=100
@@ -2455,11 +2480,11 @@ timer() {
 
 changeGitEmail(){
     if [[ -z "$2" ]]; then
-        echo "need two args" >&2 && return 1
+        loggErr "need two args" && return 1
     fi
 
     if ! isGitDir; then
-        echo "not a git dir" >&2 && return 1
+        loggErr "not a git dir" && return 1
     fi
 
     oldEmail="$1"
