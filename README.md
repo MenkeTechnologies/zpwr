@@ -9,21 +9,23 @@ It is an extremely powerful custom terminal environment built on top of [oh-my-z
 There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
 
 ## ZPWR Features
-- spelling correction, abbreviation expansion and automatic capitalization on the command line
-- snippets with tabstops that expand with spacebar and advance to next stop with C-p
-- expanding regular aliases and global aliases from zsh menu selection and in vim insert mode
+- spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-more-completions)
+- snippets with tabstops that expand with spacebar and advance to next stop with C-p [zsh-expand](https://github.com/MenkeTechnologies/zsh-more-completions)
+- expanding regular aliases and global aliases from zsh menu selection and in vim insert mode [zsh-expand](https://github.com/MenkeTechnologies/zsh-more-completions)
 - color-coded sections of zsh menu completion for commands, aliases, functions and builtins
 - color-coded sections of zsh menu completion for man pages
+- color-coded sections of zsh menu completion  for git subcommands
+- color-coded sections of zsh menu completion for git objects
 - custom styling for tag grouping in menu selection
-- tag grouping for man pages
+- tag grouping for man pages by section
 - colorized man pages color grouped by sections
-- insert matching quotes, brackets and parentheses
-- custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching
+- insert matching quotes, brackets and parentheses like most IDEs [zsh-surround](https://github.com/MenkeTechnologies/zsh-more-completions)
+- custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching (fzVim)
 - keybinding to run current code file open in vim in tmux pane to right
 - keybinding to run current vim selection in tmux pane to right as standalone script
 - keybinding to run current vim selection in tmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files
-- 10.5k zsh completions
+- 10.5k zsh tab completions [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - ergonomic, recursive tmux keybindings
 - zsh keybindings to fzf search file names and syntax highlighted, numbered file preview
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview
@@ -35,7 +37,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - keybindings to save to mysql learning table
 - functions to search from mysql learning table
 - functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table
-- keybinding formats newlines and spaces before saving to mysql learning database
+- zle keybinding formats newlines and spaces before saving to mysql learning database
 - oh my zsh plugins loading based on OS
 - tmux keybindings based on OS
 - custom banner commands when new shell is launched
@@ -44,17 +46,18 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - vim text objects on command line
 - vim extract method for shell, perl and python scripts (gv to select extracted)
 - vim extract variable for shell, perl and python scripts (gv to select extracted)
+- vim extract variable from visual selection for shell, perl and python scripts (gv to select extracted)
 - software updater script, `source autoUpdater.h`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push
 - zsh keybindings to git add, commit and push with commit message from current command line
 - git blacklisted directories
 - zle quote swappers
 - zsh, tmux and vim keybindings to copy to clipboard
-- getrc shell function to pull down latest code changes from this repo
-- shell function, c, that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips
-- shell function, c, uses same shell code to generate output that default FZF preview pane does
-- shell function, c, auto runs sudo when file is not readable
-- shell function, r, that cds to any of parent directories with zsh completion
+- shell function to pull down latest code changes from this repo (getrc)
+- shell function that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips (c)
+- shell function uses same shell code to generate output that default FZF preview pane does (c)
+- shell function auto runs sudo when file is not readable (c)
+- shell function that cds to any of parent directories with zsh completion (r)
 - 150+ bash, perl, zsh and python scripts
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color coded, tag grouped clearList zsh completion
