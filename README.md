@@ -1135,6 +1135,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` i  <C-D>       * col('.')>strlen(getline('.'))?"\<C-D>":"\<Del>" ```
 - ``` i  <C-D><NL>     <Plug>(fzf-complete-file-ag) ```
 - ``` i  <C-D><C-F>    <Plug>(fzf-complete-path) ```
+- ``` i  <C-D>,      * <C-X><C-L> ```
 - ``` i  <C-D>.      * <C-O>:FZFMaps<CR> ```
 - ``` i  <C-D>/      * <C-O>:LocateAll<CR> ```
 - ``` i  <C-D>z      * <Esc>:TlistAddFiles * <CR> :TlistToggle<CR>i ```
@@ -2023,18 +2024,18 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` v  <Plug>(MatchitVisualForward) * :<C-U>call matchit#Match_wrapper('',1,'v')<CR>m'gv`` ```
 - ``` v  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Fuel(v:count1)<CR> ```
 - ``` v  <Plug>(wildfire-water) * :<C-U>call wildfire#Water(v:count1)<CR> ```
-- ``` x  <Plug>unimpaired_xml_decode * <SNR>159_TransformSetup("xml_decode") ```
-- ``` x  <Plug>unimpaired_xml_encode * <SNR>159_TransformSetup("xml_encode") ```
-- ``` x  <Plug>unimpaired_url_decode * <SNR>159_TransformSetup("url_decode") ```
-- ``` x  <Plug>unimpaired_url_encode * <SNR>159_TransformSetup("url_encode") ```
-- ``` x  <Plug>unimpaired_string_decode * <SNR>159_TransformSetup("string_decode") ```
-- ``` x  <Plug>unimpaired_string_encode * <SNR>159_TransformSetup("string_encode") ```
-- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>159_MoveSelectionDown(v:count1)<CR> ```
-- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>159_MoveSelectionUp(v:count1)<CR> ```
-- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>159_Context(0)<CR> ```
-- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>159_Context(1)<CR> ```
-- ``` v  <Plug>VgSurround * :<C-U>call <SNR>158_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
-- ``` v  <Plug>VSurround * :<C-U>call <SNR>158_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
+- ``` x  <Plug>unimpaired_xml_decode * <SNR>158_TransformSetup("xml_decode") ```
+- ``` x  <Plug>unimpaired_xml_encode * <SNR>158_TransformSetup("xml_encode") ```
+- ``` x  <Plug>unimpaired_url_decode * <SNR>158_TransformSetup("url_decode") ```
+- ``` x  <Plug>unimpaired_url_encode * <SNR>158_TransformSetup("url_encode") ```
+- ``` x  <Plug>unimpaired_string_decode * <SNR>158_TransformSetup("string_decode") ```
+- ``` x  <Plug>unimpaired_string_encode * <SNR>158_TransformSetup("string_encode") ```
+- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>158_MoveSelectionDown(v:count1)<CR> ```
+- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>158_MoveSelectionUp(v:count1)<CR> ```
+- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>158_Context(0)<CR> ```
+- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>158_Context(1)<CR> ```
+- ``` v  <Plug>VgSurround * :<C-U>call <SNR>157_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
+- ``` v  <Plug>VSurround * :<C-U>call <SNR>157_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
 - ``` x  <Plug>SneakPrevious   <Plug>Sneak_, ```
 - ``` x  <Plug>SneakNext   <Plug>Sneak_; ```
 - ``` x  <Plug>(SneakStreakBackward)   <Plug>SneakLabel_S ```
@@ -2049,8 +2050,8 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` x  <Plug>Sneak_t * :<C-U>call sneak#wrap(visualmode(), 1, 0, 0, 0)<CR> ```
 - ``` x  <Plug>Sneak_F * :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 0)<CR> ```
 - ``` x  <Plug>Sneak_f * :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 0)<CR> ```
-- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>156_rpt(visualmode(), 1)<CR> ```
-- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>156_rpt(visualmode(), 0)<CR> ```
+- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>155_rpt(visualmode(), 1)<CR> ```
+- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>155_rpt(visualmode(), 0)<CR> ```
 - ``` x  <Plug>Sneak_S * :<C-U>call sneak#wrap(visualmode(), 2, 1, 2, 1)<CR> ```
 - ``` x  <Plug>Sneak_s * :<C-U>call sneak#wrap(visualmode(), 2, 0, 2, 1)<CR> ```
 - ``` x  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'v', 1, 1)<CR> ```
@@ -2353,7 +2354,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` c  <C-D>       * getcmdpos()>strlen(getcmdline())?"\<C-D>":"\<Del>" ```
 - ``` c  <C-F>       * getcmdpos()>strlen(getcmdline())?&cedit:"\<Right>" ```
 - ``` c  <C-R><C-G>  & fnameescape(fugitive#Object(@%)) ```
-- ``` c  <C-T>       * <SNR>147_transpose() ```
-- ``` c  <C-U>       * <SNR>147_ctrl_u() ```
+- ``` c  <C-T>       * <SNR>148_transpose() ```
+- ``` c  <C-U>       * <SNR>148_ctrl_u() ```
 - ``` c  <C-X><C-A>  * <C-A> ```
 - ``` c  <C-Y>       * <C-R>- ```
