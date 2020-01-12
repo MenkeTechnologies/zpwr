@@ -40,7 +40,7 @@ alternatingPrettyPrint() {
     counter=0
 
     if [[ -z $1 ]]; then
-        cat | perl -F"$DELIMITER_CHAR" -ane '
+        cat | perl -F"$ZPWR_DELIMITER_CHAR" -ane '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){
@@ -51,7 +51,7 @@ alternatingPrettyPrint() {
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F"$DELIMITER_CHAR" -ane '
+        perl -F"$ZPWR_DELIMITER_CHAR" -ane '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){
@@ -103,14 +103,14 @@ killpids() {
 }
 
 if [[ "$detach" == true ]]; then
-    alternatingPrettyPrint "Spawning $DELIMITER_CHAR${nproc}$DELIMITER_CHAR processes in background."
+    alternatingPrettyPrint "Spawning $ZPWR_DELIMITER_CHAR${nproc}$ZPWR_DELIMITER_CHAR processes in background."
     for ((i = 0; i < nproc; i++)); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
         (yes &>/dev/null &)
     done
 else
-    alternatingPrettyPrint "Spawning $DELIMITER_CHAR${nproc}$DELIMITER_CHAR processes interactively."
+    alternatingPrettyPrint "Spawning $ZPWR_DELIMITER_CHAR${nproc}$ZPWR_DELIMITER_CHAR processes interactively."
     for ((i = 0; i < nproc; i++)); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
@@ -120,7 +120,7 @@ else
 
     trap 'killpids "$pids" 2>/dev/null' INT QUIT
 
-    alternatingPrettyPrint "${DELIMITER_CHAR}Ctrl-C$DELIMITER_CHAR to kill all spawned processes."
+    alternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}Ctrl-C$ZPWR_DELIMITER_CHAR to kill all spawned processes."
 
     wait $!
 
