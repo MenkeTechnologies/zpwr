@@ -56,8 +56,8 @@ set tabstop=4
 set shiftround
 set cindent
 set ttyfast
-"200 ms wait for next key in mappings
-set timeoutlen=500
+"1000 ms wait for next key in mappings
+set timeoutlen=1000
 "status bar always shown
 set laststatus=2
 "/ and ? wrap around EOF
@@ -357,7 +357,7 @@ inoremap <silent> <C-B><C-N> <ESC>^2xji
 "inoremap <silent> <C-I> <C-[>:SaveSession<CR>a
 
 nnoremap <silent> <leader>q :qa!<CR>
-nnoremap <silent> <leader>c :wq!<CR>
+nnoremap <silent> <leader>wq :wq!<CR>
 nnoremap <silent> <leader>e :q!<CR>
 nnoremap <silent> <leader>w :w!<CR>
 "vertical split
@@ -720,8 +720,27 @@ vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
 
 "{{{                    MARK:Plugin Mappings
 "**************************************************************
-nnoremap <silent> <leader>n :n<CR>
-nnoremap <silent> <leader>p :prev<CR>
+"quickfix window
+"conflicts with nerd commenter
+autocmd VimEnter * nnoremap <silent> <leader>cn :cnext<CR>
+autocmd VimEnter * nnoremap <silent> <leader>cp :cprev<CR>
+autocmd VimEnter * nnoremap <silent> <leader>cc :cclose<CR>
+autocmd VimEnter * nnoremap <silent> <leader>co :copen<CR>
+
+"location list window
+nnoremap <silent> <leader>ln :lnext<CR>
+nnoremap <silent> <leader>lp :lprev<CR>
+nnoremap <silent> <leader>lc :lclose<CR>
+nnoremap <silent> <leader>lo :lopen<CR>
+
+"args
+nnoremap <silent> <leader>an :next<CR>
+nnoremap <silent> <leader>ap :prev<CR>
+
+"buffers
+nnoremap <silent> <leader>n :bnext<CR>
+nnoremap <silent> <leader>p :bprev<CR>
+
 inoremap <F8> <ESC>:%s@@@g<Left><Left><Left>
 nnoremap <F8> :%s@@@g<Left><Left><Left>
 nnoremap <F1> :NERDTreeToggle<CR>
@@ -1215,7 +1234,6 @@ nnoremap <silent> <leader>ag :Ag<CR>
 nnoremap <silent> <C-D>b :Buffers<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
-nnoremap <silent> <leader>co :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
 nnoremap <silent> <C-D>e :ALEInfo<CR>
 nnoremap <silent> <C-D>f :Files<CR>
