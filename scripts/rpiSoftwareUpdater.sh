@@ -19,13 +19,13 @@ prettyPrint() {
 exists() {
     type "$1" >/dev/null 2>&1
 }
-export DELIMITER_CHAR='%'
+export ZPWR_DELIMITER_CHAR='%'
 
 alternatingPrettyPrint() {
     counter=0
     :
     if [[ -z $1 ]]; then
-        cat | perl -F"$DELIMITER_CHAR" -anE '
+        cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -36,7 +36,7 @@ alternatingPrettyPrint() {
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F"$DELIMITER_CHAR" -anE '
+        perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -96,14 +96,14 @@ exists "$rustup_bin" && {
 prettyPrint "Updating Vundle Plugins"
 #vim -c VundleUpdate -c quitall
 
-alternatingPrettyPrint "Updating Ruby ${DELIMITER_CHAR}Gems${DELIMITER_CHAR} for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
+alternatingPrettyPrint "Updating Ruby ${ZPWR_DELIMITER_CHAR}Gems${ZPWR_DELIMITER_CHAR} for ${ZPWR_DELIMITER_CHAR}$(whoami)${ZPWR_DELIMITER_CHAR} on ${ZPWR_DELIMITER_CHAR}$(hostname)${ZPWR_DELIMITER_CHAR}"
 sudo gem update
 
 exists npm && {
-    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}NPM${DELIMITER_CHAR} packages for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
+    alternatingPrettyPrint "Updating ${ZPWR_DELIMITER_CHAR}NPM${ZPWR_DELIMITER_CHAR} packages for ${ZPWR_DELIMITER_CHAR}$(whoami)${ZPWR_DELIMITER_CHAR} on${ZPWR_DELIMITER_CHAR}$(hostname)${ZPWR_DELIMITER_CHAR}"
     for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4); do
         sudo npm install -g "$package"
     done
-    alternatingPrettyPrint "Updating ${DELIMITER_CHAR}NPM${DELIMITER_CHAR} itself for ${DELIMITER_CHAR}$(whoami)${DELIMITER_CHAR} on ${DELIMITER_CHAR}$(hostname)${DELIMITER_CHAR}"
+    alternatingPrettyPrint "Updating ${ZPWR_DELIMITER_CHAR}NPM${ZPWR_DELIMITER_CHAR} itself for ${ZPWR_DELIMITER_CHAR}$(whoami)${ZPWR_DELIMITER_CHAR} on ${ZPWR_DELIMITER_CHAR}$(hostname)${ZPWR_DELIMITER_CHAR}"
     sudo npm install -g npm
 }

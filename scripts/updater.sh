@@ -67,7 +67,7 @@ prettyPrint() {
 alternatingPrettyPrint() {
 
     if [[ -z "$1" ]]; then
-        cat | perl -F"$DELIMITER_CHAR" -anE '
+        cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for my $arg (@F){
             if ($counter % 2 == 0){
@@ -78,7 +78,7 @@ alternatingPrettyPrint() {
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F"$DELIMITER_CHAR" -anE '
+        perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         $counter++;
         for my $arg (@F){
