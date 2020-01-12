@@ -14,12 +14,12 @@ allRemotes() {
     done < <(git remote)
 }
 banner() {
-    if [[ -d "$ZPWR" ]]; then
-        if cd "$ZPWR"; then
+    if [[ -d "$ZPWR_REPO" ]]; then
+        if cd "$ZPWR_REPO"; then
             version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"
             info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"
-            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"
-            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\t ]+@    @')"
+            fetch="$(git remote -v | grep ZPWR_REPO | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"
+            push="$(git remote -v | grep ZPWR_REPO | grep push | tail -n 1 | perl -pe 's@[\t ]+@    @')"
             lastcommit="$(git log --oneline -n 1)"
         fi
     fi
@@ -97,8 +97,8 @@ EOF
     printf "\x1b[35m"
     printf "\x1b[4m"
 
-    #if [[ -d "$ZPWR" ]]; then
-    #if cd "$ZPWR";then
+    #if [[ -d "$ZPWR_REPO" ]]; then
+    #if cd "$ZPWR_REPO";then
     #{
     #allRemotes
     #} | perl -pe 's@(.*)@\x1b[31m$1@'
