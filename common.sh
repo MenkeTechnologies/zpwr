@@ -12,7 +12,7 @@ ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
 
-export DELIMITER_CHAR='%'
+export ZPWR_DELIMITER_CHAR='%'
 
 
 exists(){
@@ -148,7 +148,7 @@ alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
-        cat | perl -F"$DELIMITER_CHAR" -anE '
+        cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){
@@ -159,7 +159,7 @@ alternatingPrettyPrint(){
         $counter++;
         };print "\x1b[0m"'
     else
-        perl -F"$DELIMITER_CHAR" -anE '
+        perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){
