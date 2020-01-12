@@ -28,6 +28,7 @@ tomtom/ttags_vim
 SirVer/ultisnips
 mbbill/undotree
 tsukkee/unite-tag
+tpope/vim-abolish
 vim-airline/vim-airline
 vim-airline/vim-airline-themes
 haya14busa/vim-asterisk
