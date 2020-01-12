@@ -740,6 +740,10 @@ inoremap <F6> <ESC>:SyntasticToggleMode<CR>
 nnoremap <F7> :TTags<CR>
 inoremap <F7> <ESC>:TTags<CR>
 
+"keep subtitution flags
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
 map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
 map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 "map <silent> <leader><leader>b <Plug>(easymotion-bd-b)

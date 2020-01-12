@@ -2437,9 +2437,11 @@ timer() {
             eval "$local_command"
             #echo $(eval "$1")
             end=$($cmd +%s%N)
+            #zsh supports decimals not bash
             runtime=$(((end-start)/1000000.0))
             ((total += runtime))
         done
+        #zsh supports decimals not bash
         avg=$((runtime/(count *1.0)))
         prettyPrint "$local_command took $runtime ms for $count rounds" >> "$ZPWR_TEMPFILE"
         echo
