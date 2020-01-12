@@ -660,10 +660,11 @@ s(){
         fi
     fi
 }
+
 loggErr(){
     test -z "$1" && echo "need arg" >&2 && return 1
     {
-        printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
+        printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ERROR: "
         printf "_$ZPWR_LOG_QUOTE_COLOR'$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_" "$*"
         printf "\x1b[0m"
         printf "\n"
@@ -2484,7 +2485,7 @@ changeGitEmail(){
     fi
 
     if ! isGitDir; then
-        loggErr "not a git dir" && return 1
+        loggErr "not a git dir"  && return 1
     fi
 
     oldEmail="$1"
