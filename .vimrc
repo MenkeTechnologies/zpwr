@@ -89,7 +89,10 @@ set wildmenu
 "globbing is case insensitive
 set wildignorecase
 
-set grepprg=ag
+"file:line:column:match
+set grepprg=ag\ --nogroup\ --column\ $*
+"file:line:column:match
+set grepformat=%f:%l:%c:%m
 
 "visual selection automatically into system clipboard
 set guioptions+=a
@@ -263,7 +266,6 @@ let g:multi_cursor_quit_key            = '<Esc>'
 call vundle#end()            " required
 
 filetype plugin indent on    " required
-filetype plugin on
 
 ""}}}***********************************************************
 
@@ -1225,6 +1227,7 @@ inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
 inoremap <silent> <C-D>z <ESC>:TlistAddFiles * <CR> :TlistToggle<CR>i
 inoremap <silent> <C-D>/ <C-O>:LocateAll<CR>
 inoremap <silent> <C-D>. <C-O>:FZFMaps<CR>
+inoremap <silent> <C-D>, <C-X><C-L>
 
 "normal mode keybindings for fzf-vim
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
@@ -1326,6 +1329,7 @@ autocmd BufNewFile * exe 'normal! G' | startinsert!
 execute pathogen#infect()
 syntax on
 filetype plugin indent on
+
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
 "powerline-status pip package installs to different locations of different OS
