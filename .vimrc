@@ -989,6 +989,28 @@ function! s:getVisualSelection()
     return join(lines, "\n")
 endfunction
 
+function! s:commonEV(lang, regex, name, wordUnderCursor)
+    let l:line=GetFirstCodeLineHash()
+    exe "normal mz"
+    exe '%sno@'.a:regex.'@$'.a:name."@g"
+    if match(a:wordUnderCursor, '"') >= 0 || match(a:wordUnderCursor, "'") >= 0
+        if a:lang == 'sh'
+            exe "normal! ".(l:line+1)."GO".a:name."=".a:wordUnderCursor
+        elseif a:lang == 'pl'
+            exe "normal! ".(l:line+1)."GOmy $".a:name."=".a:wordUnderCursor.";"
+
+        endif
+    else
+        if a:lang == 'sh'
+            exe "normal! ".(l:line+1)."GO".a:name.'="'.a:wordUnderCursor.'"'
+        elseif a:lang == 'pl'
+            exe "normal! ".(l:line+1)."GOmy $".a:name.'="'.a:wordUnderCursor.'";'
+        endif
+    endif
+    exe "normal! V\<Esc>"
+    exe "normal! `z"
+endfunction
+
 function! ExtractVariableVisual() range
     let l:wordUnderCursor = s:getVisualSelection()
     let l:name = inputdialog("Extract variable to replace visual __".wordUnderCursor."__:")
@@ -1000,25 +1022,13 @@ function! ExtractVariableVisual() range
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:exeFileType=expand('%:e')
     let l:regex=escape(l:wordUnderCursor, '/\')
-    echom '%sno@'.l:regex.'@$'.l:name."@g"
+    "echom '%sno@'.l:regex.'@$'.l:name."@g"
 
     exe "normal `<"
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
-        let l:line=GetFirstCodeLineHash()
-        exe "normal mz"
-        exe '%sno@'.l:regex.'@$'.l:name."@g"
-        exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
-        exe "normal! V\<Esc>"
-        exe "normal! `z"
-
+        call s:commonEV('sh', l:regex, l:name, l:wordUnderCursor)
     elseif l:exeFileType == 'pl'
-        let l:line=GetFirstCodeLineHash()
-        exe "normal mz"
-        exe '%sno@'.l:regex.'@$'.l:name."@g"
-        exe "normal! ".(l:line+1)."GOmy $".l:name."=".l:wordUnderCursor.";"
-        exe "normal! V\<Esc>"
-        exe "normal! `zzz"
-
+        call s:commonEV('pl', l:regex, l:name, l:wordUnderCursor)
     elseif l:exeFileType == 'py'
         let l:line=GetFirstCodeLineHash()
         exe "normal mz"
@@ -1042,7 +1052,7 @@ function! ExtractVariable()
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:exeFileType=expand('%:e')
     let l:regex=fnameescape(l:wordUnderCursor)
-    echom '%s@\<'.l:regex.'\>@$'.l:name."@g"
+    "echom '%s@\<'.l:regex.'\>@$'.l:name."@g"
 
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         let l:line=GetFirstCodeLineHash()
