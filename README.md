@@ -19,7 +19,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - custom styling for tag grouping in menu selection
 - tag grouping for man pages by section
 - colorized man pages color grouped by sections
-- insert matching quotes, brackets and parentheses like most IDEs [zsh-surround](https://github.com/MenkeTechnologies/zsh-more-completions)
+- insert matching quotes, brackets and parentheses like most IDEs [zsh-surround](https://github.com/MenkeTechnologies/zsh-surround)
 - custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching (fzVim)
 - keybinding to run current code file open in vim in tmux pane to right
 - keybinding to run current vim selection in tmux pane to right as standalone script
