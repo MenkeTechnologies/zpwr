@@ -9,9 +9,9 @@ It is an extremely powerful custom terminal environment built on top of [oh-my-z
 There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
 
 ## ZPWR Features
-- spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-more-completions)
-- snippets with tabstops that expand with spacebar and advance to next stop with C-p [zsh-expand](https://github.com/MenkeTechnologies/zsh-more-completions)
-- expanding regular aliases and global aliases from zsh menu selection and in vim insert mode [zsh-expand](https://github.com/MenkeTechnologies/zsh-more-completions)
+- spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
+- snippets with tabstops that expand with spacebar and advance to next stop with C-p [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
+- expanding regular aliases and global aliases from zsh menu selection and in vim insert mode [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - color-coded sections of zsh menu completion for commands, aliases, functions and builtins
 - color-coded sections of zsh menu completion for man pages
 - color-coded sections of zsh menu completion  for git subcommands
