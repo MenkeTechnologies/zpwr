@@ -125,6 +125,8 @@ case $verb in
         ;;
     pygmentcolors) cmd="pygmentcolors" #show all pygment colors
         ;;
+    commits) cmd="commits" #search git commits with fzf
+        ;;
     commit) cmd="gitCommitAndPush" #commit and push with arg message
         ;;
     colorsdiff) cmd="gsdc" #colorized side diff

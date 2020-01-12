@@ -379,7 +379,7 @@ tutsUpdate() {
     commitMessage="$BUFFER"
     if [[ ! -z "$commitMessage" ]]; then
         if [[ "$commitMessage" =~ ^\ +$ ]]; then
-            printf "No commit message\n" >&2
+            loggErr "No commit message"
             zle .accept-line
         else
             zle .kill-whole-line
@@ -387,7 +387,7 @@ tutsUpdate() {
             zle .accept-line
         fi
     else
-        printf "No commit message\n" >&2
+        loggErr "No commit message"
         zle .accept-line
     fi
 }
@@ -694,7 +694,7 @@ startSendFull(){
 }
 startSend(){
     if [[ -z "$1" ]]; then
-        echo "need arg: <pane>" >&2
+        loggErr "need arg: <pane>"
         return 1
     fi
     ZPWR_SEND_KEYS_PANE=$1
@@ -824,10 +824,6 @@ locateFzf(){
         fi
         return 0
     fi
-}
-
-commit(){
-    vim -v -c Commits!
 }
 
 fzfCommits(){
