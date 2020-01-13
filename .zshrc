@@ -2774,6 +2774,6 @@ if [[ $ZPWR_PROFILING == true ]]; then
 fi
 
 #force alias z to zshz not zypper on suse
-alias z="zshz 2>&1"
+alias z="$zcmd 2>&1"
 
 #}}}***********************************************************
