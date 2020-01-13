@@ -760,7 +760,7 @@ function j(){
 }
 
 scnew(){
-    test -z "$1" && loggErr echo "no arg..." && return 1
+    test -z "$1" && loggErr "no arg..." && return 1
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
