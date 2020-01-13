@@ -1925,58 +1925,46 @@ exists pssh && pir(){
     pssh --inline-stdout --timeout 90 -h "$ZPWR_HIDDEN_DIR/hosts.txt" "$@"
 }
 
-c(){
+function cCommon(){
     local colorizer=bat
     local rpm_cmd
     local deb_cmd
     exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
     exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
-    if [[ ! -p /dev/stdout ]];then
-        {
-            exists $colorizer && {
-                echo | $colorizer &>/dev/null && {
-                    for file in "$@";do
-                        if [[ -f "$file" ]]; then
-                            if (( $# > 1)); then
-                                printf "\x1b[34;1;4m$file\x1b[0m\n"
-                            fi
-                            if [[ -r "$file" ]]; then
-                                bash fzfPreviewOptsCtrlT.sh |
-                                sed "s@{}@$file@" | zsh
-                            else
-                    #preserve the PATH env var
-                    #with /etc/sudoers having Defaults secure_path
-                                bash fzfPreviewOptsCtrlT.sh |
-                                sed "s@{}@$file@" |
-                                sudo -E env "PATH=$PATH" zsh
-                            fi
-                        fi
-                    done
-                } || cat -n "$@"
-            } || cat -n "$@"
-        } | less
-    else
-        exists $colorizer && {
-            echo | $colorizer &>/dev/null && {
-                for file in "$@";do
-                    if [[ -f "$file" ]]; then
-                        if (( $# > 1)); then
-                            printf "\x1b[34;1;4m$file\x1b[0m\n"
-                        fi
-                        if [[ -r "$file" ]]; then
-                            bash fzfPreviewOptsCtrlT.sh |
+
+    if exists $colorizer;then
+        if echo | $colorizer &>/dev/null; then
+            for file in "$@";do
+                if [[ -f "$file" ]]; then
+                    if (( $# > 1)); then
+                        printf "\x1b[34;1;4m$file\x1b[0m\n"
+                    fi
+                    if [[ -r "$file" ]]; then
+                        bash fzfPreviewOptsCtrlT.sh |
                             sed "s@{}@$file@" | zsh
-                        else
+                    else
                     #preserve the PATH env var
                     #with /etc/sudoers having Defaults secure_path
-                            bash fzfPreviewOptsCtrlT.sh |
+                        bash fzfPreviewOptsCtrlT.sh |
                             sed "s@{}@$file@" |
                             sudo -E env "PATH=$PATH" zsh
-                        fi
                     fi
-                done
-            } || cat -n "$@"
-        } || cat -n "$@"
+                fi
+            done
+        else
+            cat -n "$@"
+        fi
+    else
+        cat -n "$@"
+    fi
+}
+
+function c(){
+
+    if [[ ! -p /dev/stdout ]];then
+        cCommon "$@" | less
+    else
+        cCommon "$@"
     fi
 }
 

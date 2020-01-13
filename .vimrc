@@ -143,11 +143,25 @@ Plugin 'TerryMa/vim-multiple-cursors'
 Plugin 'luochen1990/rainbow'
 Plugin 'craigemery/vim-autotag'
 Plugin 'beloglazov/vim-online-thesaurus'
+Plugin 'SirVer/ultisnips'
+Plugin 'ervandew/supertab'
+" Snippets are separated from the engine. Add this if you want them:
+Plugin 'honza/vim-snippets'
+" Sublime Like Minimap
+Plugin 'severin-lemaignan/vim-minimap'
+Plugin '907th/vim-auto-save'
 
 if has("nvim")
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
 endif
+
+" enable AutoSave on Vim startup
+let g:auto_save = 1
+" do not display the auto-save notification
+let g:auto_save_silent = 1
+" when to autosave
+let g:auto_save_events = ["InsertLeave", "TextChanged", "TextChangedI"]
 
 let g:indentLine_setColors = 1
 
@@ -175,22 +189,6 @@ let g:rainbow_conf = {
             \		'css': 0,
             \	}
             \}
-
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-Plugin 'ervandew/supertab'
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-" Sublime Like Minimap
-Plugin 'severin-lemaignan/vim-minimap'
-
-Plugin '907th/vim-auto-save'
-" enable AutoSave on Vim startup
-let g:auto_save = 1
-" do not display the auto-save notification
-let g:auto_save_silent = 1
-" when to autosave
-let g:auto_save_events = ["InsertLeave", "TextChanged", "TextChangedI"]
 
 " tab cycles forward through completion
 let g:SuperTabDefaultCompletionType    = '<C-n>'
