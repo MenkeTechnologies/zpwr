@@ -661,6 +661,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -M viins "^V^F" fasdFZF ```
 - ``` bindkey -M viins "^V^G" fzf-cd-widget ```
 - ``` bindkey -M viins "^V^N" vimFzfSudo ```
+- ``` bindkey -M viins "^V^R" history-search-multi-word ```
 - ``` bindkey -M viins "^V^S" zFZF ```
 - ``` bindkey -M viins "^V^V" vimFzf ```
 - ``` bindkey -M viins "^V^Z" fzf-history-widget ```
@@ -765,6 +766,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -a "^V^F" fasdFZF ```
 - ``` bindkey -a "^V^G" fzf-cd-widget ```
 - ``` bindkey -a "^V^N" vimFzfSudo ```
+- ``` bindkey -a "^V^R" history-search-multi-word ```
 - ``` bindkey -a "^V^S" zFZF ```
 - ``` bindkey -a "^V^V" vimFzf ```
 - ``` bindkey -a "^V^Z" fzf-history-widget ```
@@ -1140,7 +1142,8 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` i  <C-D>       * col('.')>strlen(getline('.'))?"\<C-D>":"\<Del>" ```
 - ``` i  <C-D><NL>     <Plug>(fzf-complete-file-ag) ```
 - ``` i  <C-D><C-F>    <Plug>(fzf-complete-path) ```
-- ``` i  <C-D>,      * <C-X><C-L> ```
+- ``` i  <C-D>,      * <C-X><C-O> ```
+- ``` i  <C-D>\      * <C-X><C-L> ```
 - ``` i  <C-D>.      * <C-O>:FZFMaps<CR> ```
 - ``` i  <C-D>/      * <C-O>:LocateAll<CR> ```
 - ``` i  <C-D>z      * <Esc>:TlistAddFiles * <CR> :TlistToggle<CR>i ```
@@ -1182,7 +1185,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` i  <C-S>         <Plug>Isurround ```
 - ``` i  <C-T>       * i<BS><C-O>:silent! undojoin | normal! xp<CR> ```
 - ``` i  <C-X><C-A>  * <C-A> ```
-- ``` i  <C-X>       * <C-R>=<SNR>34_ManualCompletionEnter()<CR> ```
+- ``` i  <C-X>       * <C-R>=<SNR>29_ManualCompletionEnter()<CR> ```
 - ``` i  <C-X><C-L>  * fzf#vim#complete(fzf#wrap({ 'prefix': '^.*$', 'source': 'rg -n ^ --color always', 'options': '--ansi --delimiter : --nth 3..', 'left': '60', 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }})) ```
 - ``` i  <C-X><C-K>  * fzf#vim#complete#word({'left': '15%'}) ```
 - ``` i  <C-Y>m        <Plug>(emmet-merge-lines) ```
@@ -2359,7 +2362,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` c  <C-D>       * getcmdpos()>strlen(getcmdline())?"\<C-D>":"\<Del>" ```
 - ``` c  <C-F>       * getcmdpos()>strlen(getcmdline())?&cedit:"\<Right>" ```
 - ``` c  <C-R><C-G>  & fnameescape(fugitive#Object(@%)) ```
-- ``` c  <C-T>       * <SNR>148_transpose() ```
-- ``` c  <C-U>       * <SNR>148_ctrl_u() ```
+- ``` c  <C-T>       * <SNR>147_transpose() ```
+- ``` c  <C-U>       * <SNR>147_ctrl_u() ```
 - ``` c  <C-X><C-A>  * <C-A> ```
 - ``` c  <C-Y>       * <C-R>- ```
