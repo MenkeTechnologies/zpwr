@@ -97,6 +97,8 @@ export ZPWR_DEBUG=false
 export ZPWR_TRACE=false
 # use nvim not vim
 export ZPWR_USE_NEOVIM=true
+# use mac vim over vim on darwin
+export ZPWR_PREFER_MVIM=true
 #whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
 # ANSI styling codes for git commits
