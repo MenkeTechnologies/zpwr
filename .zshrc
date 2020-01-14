@@ -257,7 +257,18 @@ export ARCHFLAGS="-arch x86_64"
 ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
+#}}}***********************************************************
 
+#{{{                    MARK:forgit https://github.com/wfxr/forgit
+#**************************************************************
+forgit_log=fglo
+forgit_diff=fgd
+forgit_add=fga
+forgit_reset_head=fgrh
+forgit_ignore=fgi
+forgit_restore=fgcf
+forgit_clean=fgclean
+forgit_stash_show=gfss
 #}}}***********************************************************
 
 #{{{                    MARK:Plugins
@@ -268,9 +279,9 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround \
+plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-autopair \
     zsh-nginx zsh-more-completions history-search-multi-word \
-    fzf-zsh zsh-completions zsh-sed-sub zsh-git-acp \
+    forgit fzf-zsh zsh-completions zsh-sed-sub zsh-git-acp \
     fast-syntax-highlighting zsh-autosuggestions \
     history-substring-search ruby gem rake rails yarn ng \
     coffee node npm perl cpanm git github gradle ant mvn \
@@ -842,12 +853,14 @@ fzfCommits(){
 }
 
 interceptSurround(){
-    surround
+    #surround
+    autopair-insert
     keySender
 }
 
 interceptDelete(){
-    deleteMatching
+    #deleteMatching
+    autopair-delete
     keySender
 }
 
