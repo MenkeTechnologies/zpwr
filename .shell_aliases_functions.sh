@@ -1010,11 +1010,48 @@ isGitDirMessage(){
     fi
 }
 
+contribCountDirs(){
+
+    if [[ -z "$2" ]]; then
+       loggErr "user is \$1 and dirs are \$@" 
+       return 1
+    fi
+
+    local dirOfDirs user curDir sum
+
+    user="$1"
+    shift
+    curDir="$(pwd)"
+    sum=0
+
+    printf "" > "$ZPWR_TEMPFILE1"
+
+    for dir in "$@"; do
+        if [[ -d "$dir" ]]; then
+            (
+            builtin cd "$dir"
+            isGitDir || continue
+
+            lines="$(git log --pretty="%an" | grep "$user")"
+            lineCount="$(echo $lines | wc -l)"
+            prettyPrint "Contribution Count at $dir is $lineCount"
+            echo $lineCount >> "$ZPWR_TEMPFILE1"
+        )
+        fi
+    done
+
+    while read; do
+       ((sum += $REPLY))
+    done < "$ZPWR_TEMPFILE1"
+    echo "Total contributions for ${ZPWR_DELIMITER_CHAR}$user${ZPWR_DELIMITER_CHAR} is ${ZPWR_DELIMITER_CHAR}$sum${ZPWR_DELIMITER_CHAR}." | alternatingPrettyPrint
+
+}
+
 contribCount(){
 
     isGitDir || return 1
 
-    lines="$(git status > /dev/null && git log --pretty="%an" | sort | uniq -c | sort -rn)"
+    lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
     prettyPrint "Contribution Count"
     if (( $lineCount > 10 )); then
