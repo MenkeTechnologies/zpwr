@@ -1225,7 +1225,8 @@ inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
 inoremap <silent> <C-D>z <ESC>:TlistAddFiles * <CR> :TlistToggle<CR>i
 inoremap <silent> <C-D>/ <C-O>:LocateAll<CR>
 inoremap <silent> <C-D>. <C-O>:FZFMaps<CR>
-inoremap <silent> <C-D>, <C-X><C-L>
+inoremap <silent> <C-D>\ <C-X><C-L>
+inoremap <silent> <C-D>, <C-X><C-O>
 
 "normal mode keybindings for fzf-vim
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
