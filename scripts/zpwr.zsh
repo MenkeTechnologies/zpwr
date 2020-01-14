@@ -145,7 +145,7 @@ case $verb in
         ;;
     contribcount) cmd="contribCount" #count of git contribs by author
         ;;
-    contribcountdirs) cmd="contribCountDirss" #count of git contribs by author for list of dirs
+    contribcountdirs) cmd="contribCountDirs" #count of git contribs by author for list of dirs
         ;;
     cd) cmd="f" #cd to directory arg
         ;;
