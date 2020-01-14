@@ -144,7 +144,7 @@ if [[ $skip != true ]]; then
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
         #get last package
-        last=$(python3 -m pip list | tail -1 | awk '{print $1}')
+        last=$(python3 -m pip list --format=columns | tail -1 | awk '{print $1}')
         installDir=$(python3 -m pip show "$last" | \perl -ne 'print $1 if /^Location: (.*)/')
         if [[ ! -w "$installDir" ]]; then
             needSudo=yes
@@ -181,7 +181,7 @@ if [[ $skip != true ]]; then
         prettyPrint "Updating Python2.7 Packages"
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
-        last=$(python2 -m pip list | tail -1 | awk '{print $1}')
+        last=$(python2 -m pip list --format=columns | tail -1 | awk '{print $1}')
         installDir=$(python2 -m pip show "$last" | \perl -ne 'print $1 if /^Location: (.*)/')
         if [[ ! -w "$installDir" ]]; then
             needSudo=yes
