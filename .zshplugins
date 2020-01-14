@@ -1,10 +1,13 @@
+ohmyzsh/ohmyzsh
 MenkeTechnologies/fasd-simple
 zdharma/fast-syntax-highlighting
+wfxr/forgit
 junegunn/fzf
 Treri/fzf-zsh
 MenkeTechnologies/gh_reveal
 zdharma/history-search-multi-word
 unixorn/warhol.plugin.zsh
+hlissner/zsh-autopair
 zsh-users/zsh-autosuggestions
 lukechilds/zsh-better-npm-completion
 zsh-users/zsh-completions
