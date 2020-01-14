@@ -1032,8 +1032,7 @@ contribCountDirs(){
             builtin cd "$dir"
             isGitDir || continue
 
-            lines="$(git log --pretty="%an" | grep -E "$user")"
-            lineCount="$(echo $lines | wc -l)"
+            lineCount="$(git log --pretty="%an" | grep -E "$user" | wc -l)"
             prettyPrint "Contribution Count for $user at $dir is $lineCount"
             echo $lineCount >> "$ZPWR_TEMPFILE1"
         )
