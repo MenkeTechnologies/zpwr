@@ -1013,7 +1013,7 @@ isGitDirMessage(){
 contribCountDirs(){
 
     if [[ -z "$2" ]]; then
-       loggErr "user is \$1 and dirs are \$@" 
+       loggErr "user regex is \$1 and dirs are \$@" 
        return 1
     fi
 
@@ -1032,9 +1032,9 @@ contribCountDirs(){
             builtin cd "$dir"
             isGitDir || continue
 
-            lines="$(git log --pretty="%an" | grep "$user")"
+            lines="$(git log --pretty="%an" | grep -E "$user")"
             lineCount="$(echo $lines | wc -l)"
-            prettyPrint "Contribution Count at $dir is $lineCount"
+            prettyPrint "Contribution Count for $user at $dir is $lineCount"
             echo $lineCount >> "$ZPWR_TEMPFILE1"
         )
         fi
