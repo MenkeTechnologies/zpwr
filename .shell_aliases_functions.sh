@@ -42,6 +42,26 @@ else
         type -- "$1" >/dev/null 2>&1
     }
 fi
+
+function chooseNvimVim(){
+    if [[ $ZPWR_USE_NEOVIM == true ]]; then
+        exists nvim && {
+            alias v='nvim'
+            alias vi='nvim'
+            alias vim='nvim'
+            alias vm="nvim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
+            alias sv='sudo -E nvim'
+        }
+    else
+        exists vim && {
+            alias v=vim
+            alias vi=vim
+            alias vm="vim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
+            alias sv='sudo -E vim'
+        }
+    fi
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:ZPWR ENV VARS
@@ -338,24 +358,21 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     exists gls &&
      alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
      alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
-    exists mvim && {
-        if [[ $ZPWR_USE_NEOVIM != true ]]; then
-            alias v='mvim -v'
-            alias vi='mvim -v'
-            alias vim='mvim -v'
-            alias vm="mvim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
-            alias sv='sudo mvim -v'
-        fi
-    }
-    exists nvim && {
-        if [[ $ZPWR_USE_NEOVIM == true ]]; then
-            alias v='nvim'
-            alias vi='nvim'
-            alias vim='nvim'
-            alias vm="nvim -u $ZPWR_HIDDEN_DIR/.minvimrc"
-            alias sv='sudo -E nvim'
-        fi
-    }
+
+    chooseNvimVim
+
+    #mvim overides vim if not using nvim
+    if [[ $ZPWR_PREFER_MVIM == true ]]; then
+        exists mvim && {
+            if [[ $ZPWR_USE_NEOVIM != true ]]; then
+                alias v='mvim -v'
+                alias vi='mvim -v'
+                alias vim='mvim -v'
+                alias vm="mvim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
+                alias sv='sudo mvim -v'
+            fi
+        }
+    fi
 
     exists brew && {
         alias apz="brew update && brew outdated && brew upgrade && brew cleanup; brew cu -ay; u8"
@@ -400,23 +417,7 @@ else
                 ;;
         esac
     fi
-
-    exists nvim && {
-        if [[ $ZPWR_USE_NEOVIM == true ]]; then
-            alias v='nvim'
-            alias vi='nvim'
-            alias vim='nvim'
-            alias vm="nvim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
-            alias sv='sudo -E nvim'
-        else
-            exists vim && {
-                alias v=vim
-                alias vi=vim
-                alias vm="vim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
-                alias sv='sudo -E vim'
-            }
-        fi
-    }
+    chooseNvimVim
 fi
 alias tclsh="rlwrap tclsh"
 alias logs="sudo tail -f /var/log/**/*.log | ccze"
