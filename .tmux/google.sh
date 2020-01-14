@@ -66,14 +66,14 @@ else
             if [[ "$(uname -r)" != *icrosoft* ]];then
                 out="$(xclip -o -sel clip)"
             else
-                out="$(paste.exe)"
+                out="$(powershell.exe -c 'Get-Clipboard')"
             fi
             ;;
         cygwin*)
-            out="$(paste.exe)"
+            out="$(powershell.exe -c 'Get-Clipboard')"
             ;;
         msys*)
-            out="$(paste.exe)"
+            out="$(powershell.exe -c 'Get-Clipboard')"
             ;;
         *)
             out="$(xclip -o -sel clip)"
