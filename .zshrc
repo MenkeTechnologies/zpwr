@@ -269,9 +269,9 @@ source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround \
-    zsh-nginx zsh-more-completions \
+    zsh-nginx zsh-more-completions history-search-multi-word \
     fzf-zsh zsh-completions zsh-sed-sub zsh-git-acp \
-    zsh-syntax-highlighting zsh-autosuggestions \
+    fast-syntax-highlighting zsh-autosuggestions \
     history-substring-search ruby gem rake rails yarn ng \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
@@ -931,6 +931,11 @@ bindkey -M vicmd '^V,' fzfEnv
 bindkey -M viins '^V^N' vimFzfSudo
 bindkey -M vicmd '^V^N' vimFzfSudo
 
+exists history-search-multi-word && {
+    bindkey -M viins '^V^R' history-search-multi-word
+    bindkey -M vicmd '^V^R' history-search-multi-word
+}
+
 exists fasd && {
     bindkey -M viins '^V^F' fasdFZF
     bindkey -M vicmd '^V^F' fasdFZF
@@ -1569,6 +1574,8 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
+    zstyle ':completion:*:*:*:*:vtags' list-colors '=(#b)(*)=1;37;45'
+
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         #homebrew tags
         zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
