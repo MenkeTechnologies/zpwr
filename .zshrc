@@ -279,7 +279,8 @@ forgit_stash_show=gfss
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-autopair \
+plugins=(jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
+    zsh-z zsh-expand zsh-autopair \
     zsh-nginx zsh-more-completions history-search-multi-word \
     forgit fzf-zsh zsh-completions zsh-sed-sub zsh-git-acp \
     fast-syntax-highlighting zsh-autosuggestions \
