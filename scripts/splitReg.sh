@@ -68,11 +68,11 @@ delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: 
 
     if [[ -z "$inverse" ]]; then
         sed -n "1,$delim"p "$file" | "$filter"
-        ((delim++))
+        ((++delim))
         sed -n "$delim,$"p "$file"
     else
         sed -n "1,$delim"p "$file"
-        ((delim++))
+        ((++delim))
         sed -n "$delim,$"p "$file" | "$filter"
     fi
 } || sed -n '1,$p' "$file"
