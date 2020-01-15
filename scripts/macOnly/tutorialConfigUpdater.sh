@@ -49,11 +49,11 @@ bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$instal
 prettyPrint "Updating zsh plugins list"
 printf "" > "$installerDir/.zshplugins"
 for dir in "$HOME/.oh-my-zsh/custom/plugins/"*; do
-    if basename $dir | grep -sq "example";then
+    if basename "$dir" | grep -sq "example";then
         continue;
     fi
         
-    bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" >>"$installerDir/.zshplugins"
+    bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$installerDir/.zshplugins"
 done
 
 git add .
