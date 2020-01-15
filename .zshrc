@@ -1719,8 +1719,12 @@ globalAliasesInit(){
 
     alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
-    alias zh="cd $ZPWR_HIDDEN_DIR"
-    alias zpl="cd $ZSH/custom/plugins"
+    if [[ -d "$ZPWR_HIDDEN_DIR" ]]; then
+        alias zh="cd $ZPWR_HIDDEN_DIR"
+    fi
+    if [[ -d "$ZSH/custom/plugins" ]]; then
+        alias zpl="cd $ZSH/custom/plugins"
+    fi
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
