@@ -55,7 +55,7 @@ for file; do
     lineCounter=1
     found=false
     while read line; do
-        let lineCounter++
+        ((++lineCounter))
 
         if [[ $line =~ ^\#! ]]; then
             found=true

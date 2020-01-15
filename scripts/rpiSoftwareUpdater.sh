@@ -33,7 +33,7 @@ alternatingPrettyPrint() {
             } else {
                  print "\x1b[1;4;34m$arg\x1b[0m"
             }
-        $counter++;
+        ++$counter;
         };print "\x1b[0m"'
     else
         perl -F"$ZPWR_DELIMITER_CHAR" -anE '
@@ -44,7 +44,7 @@ alternatingPrettyPrint() {
             } else {
                  print "\x1b[1;4;34m$arg\x1b[0m"
             }
-        $counter++;
+        ++$counter;
         }; print "\x1b[0m"' <<<"$@"
 
     fi
