@@ -6,6 +6,8 @@ junegunn/fzf
 Treri/fzf-zsh
 MenkeTechnologies/gh_reveal
 zdharma/history-search-multi-word
+jhipster/jhipster-oh-my-zsh-plugin
+MenkeTechnologies/jhipster-oh-my-zsh-plugin
 unixorn/warhol.plugin.zsh
 hlissner/zsh-autopair
 zsh-users/zsh-autosuggestions
