@@ -81,7 +81,7 @@ refresh(){
 }
 
 #prettyPrint(){
-    #(( install_counter++ ))
+    #(( ++install_counter ))
     #printf "\x1b[32;1m"
     #perl -le "print '#'x80"
     #printf "\x1b[34;4m"
@@ -116,7 +116,7 @@ proceed(){
 prettyPrintStdin(){
     perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
-    (( install_counter++ ))
+    (( ++install_counter ))
     {
         printf "$install_counter>>> $@\n"
         cat
@@ -127,7 +127,7 @@ prettyPrintStdin(){
 prettyPrint(){
     perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
-    (( install_counter++ ))
+    (( ++install_counter ))
     printf "$install_counter>>> $@\n" | "$perlfile" -f
     echo
 }
