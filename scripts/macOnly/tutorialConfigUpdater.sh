@@ -47,7 +47,14 @@ cp -R "$HOME/.vim/Ultisnips" "$installerDir"
 prettyPrint "Updating vim plugins list"
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$installerDir/.vimbundle"
 prettyPrint "Updating zsh plugins list"
-bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.oh-my-zsh/custom/plugins/"* >"$installerDir/.zshplugins"
+printf "" > "$installerDir/.zshplugins"
+for dir in "$HOME/.oh-my-zsh/custom/plugins/"*; do
+    if basename $dir | grep -sq "example";then
+        continue;
+    fi
+        
+    bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" >>"$installerDir/.zshplugins"
+done
 
 git add .
 git commit -m "$commitMessage"
