@@ -138,6 +138,79 @@ if [[ $skip != true ]]; then
     prettyPrint "Updating OhMyZsh Themes"
     gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
 
+    exists /usr/local/bin/ruby && {
+        prettyPrint "Updating Ruby Packages"
+        yes | /usr/local/bin/gem update --system
+        yes | /usr/local/bin/gem update
+        yes | /usr/local/bin/gem cleanup
+    }
+
+    exists brew && {
+        prettyPrint "Updating Homebrew Packages"
+        brew update  #&> /dev/null
+        brew upgrade #&> /dev/null
+        #remove brew cache
+        rm -rf "$(brew --cache)"
+        #remote old programs occupying disk sectors
+        brew cleanup
+        brew services cleanup
+    }
+
+    exists npm && {
+        prettyPrint "Updating NPM packages"
+        installDir=$(npm root -g | head -n 1)
+        if [[ ! -w "$installDir" ]]; then
+            needSudo=yes
+        else
+            needSudo=no
+        fi
+        for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4); do
+            if [[ $needSudo == yes ]]; then
+                sudo npm install -g "$package"
+            else
+                npm install -g "$package"
+            fi
+        done
+        prettyPrint "Updating NPM itself"
+        if [[ $needSudo == yes ]]; then
+            sudo npm install -g npm
+        else
+            npm install -g npm
+        fi
+    }
+
+    exists rustup && {
+        prettyPrint "Updating rustup"
+        rustup update
+    }
+
+    exists cargo && {
+        prettyPrint "Updating cargo packages"
+        cargo install cargo-update 2>/dev/null
+        cargo install-update -a
+    }
+
+    exists yarn && {
+        prettyPrint "Updating yarn packages"
+        yarn global upgrade
+        # prettyPrint "Updating yarn itself"
+        # npm install -g yarn
+    }
+
+    exists cpanm && {
+        prettyPrint "Updating Perl Packages"
+        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
+        if [[ -n "$perlOutdated" ]]; then
+            echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2>/dev/null
+        fi
+    }
+
+    exists pio && {
+        prettyPrint "Updating PlatformIO"
+        pio update
+        pio upgrade
+    }
+
     #python 3.6
     python3 -c 'import pip' && {
         prettyPrint "Updating Python3.6 Packages"
@@ -210,79 +283,6 @@ if [[ $skip != true ]]; then
             #update pip itself
             python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
         fi
-    }
-
-    exists /usr/local/bin/ruby && {
-        prettyPrint "Updating Ruby Packages"
-        yes | /usr/local/bin/gem update --system
-        yes | /usr/local/bin/gem update
-        yes | /usr/local/bin/gem cleanup
-    }
-
-    exists brew && {
-        prettyPrint "Updating Homebrew Packages"
-        brew update  #&> /dev/null
-        brew upgrade #&> /dev/null
-        #remove brew cache
-        rm -rf "$(brew --cache)"
-        #remote old programs occupying disk sectors
-        brew cleanup
-        brew services cleanup
-    }
-
-    exists npm && {
-        prettyPrint "Updating NPM packages"
-        installDir=$(npm root -g | head -n 1)
-        if [[ ! -w "$installDir" ]]; then
-            needSudo=yes
-        else
-            needSudo=no
-        fi
-        for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4); do
-            if [[ $needSudo == yes ]]; then
-                sudo npm install -g "$package"
-            else
-                npm install -g "$package"
-            fi
-        done
-        prettyPrint "Updating NPM itself"
-        if [[ $needSudo == yes ]]; then
-            sudo npm install -g npm
-        else
-            npm install -g npm
-        fi
-    }
-
-    exists rustup && {
-        prettyPrint "Updating rustup"
-        rustup update
-    }
-
-    exists cargo && {
-        prettyPrint "Updating cargo packages"
-        cargo install cargo-update 2>/dev/null
-        cargo install-update -a
-    }
-
-    exists yarn && {
-        prettyPrint "Updating yarn packages"
-        yarn global upgrade
-        # prettyPrint "Updating yarn itself"
-        # npm install -g yarn
-    }
-
-    exists cpanm && {
-        prettyPrint "Updating Perl Packages"
-        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
-        if [[ -n "$perlOutdated" ]]; then
-            echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2>/dev/null
-        fi
-    }
-
-    exists pio && {
-        prettyPrint "Updating PlatformIO"
-        pio update
-        pio upgrade
     }
 fi
 
