@@ -167,7 +167,7 @@ alternatingPrettyPrint(){
             } else {
                  print "\x1b[1;4;34m$_\x1b[0m"
             }
-        ++$counter+
+        ++$counter
         }; print "\x1b[0m"' <<< "$@"
 
     fi
