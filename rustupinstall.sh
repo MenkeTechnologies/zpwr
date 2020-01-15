@@ -24,7 +24,7 @@ exists bat || {
     "$HOME/.cargo/bin/cargo" install bat
 }
 
-exists fd-find || {
+exists fd || {
     prettyPrint "Installing rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
     prettyPrint "Updating rustup"
@@ -42,7 +42,7 @@ exists exa || {
     "$HOME/.cargo/bin/cargo" install exa
 }
 
-exists ripgrep || {
+exists rg || {
     prettyPrint "Installing rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
     prettyPrint "Updating rustup"

@@ -158,6 +158,7 @@ IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^        IFS="$oldifs"$/;
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v	language:Sh
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^IFS=:$/;"	v	language:Sh
 INSTALLER_DIR	common.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
+INSTALLER_DIR	rustupinstall.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INTERFACE	/Users/wizard/.zpwr/scripts/macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v	language:Sh
 KEYTIMEOUT	/Users/wizard/.zshrc	/^export KEYTIMEOUT=1$/;"	v	language:Sh
 LBUFFER	/Users/wizard/.zshrc	/^        LBUFFER="sudo -E nvim $(fzvim)"$/;"	v	language:Sh
