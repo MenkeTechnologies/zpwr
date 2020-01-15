@@ -268,7 +268,7 @@ forgit_reset_head=fgrh
 forgit_ignore=fgi
 forgit_restore=fgcf
 forgit_clean=fgclean
-forgit_stash_show=gfss
+forgit_stash_show=fgss
 #}}}***********************************************************
 
 #{{{                    MARK:Plugins
