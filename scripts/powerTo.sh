@@ -78,7 +78,7 @@ fi
 
 active=$(tmux list-panes | grep active | cut -c1)
 
-for ((i = 0; i < $num; i++)); do
+for ((i = 0; i < $num; ++i)); do
     if [[ $leavePresentPaneAloneFlag == true ]]; then
         if (($i == $active)); then
             continue
