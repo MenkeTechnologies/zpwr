@@ -855,13 +855,13 @@ fzfCommits(){
 
 interceptSurround(){
     #surround
-    autopair-insert
+    exists autopair-insert && autopair-insert
     keySender
 }
 
 interceptDelete(){
     #deleteMatching
-    autopair-delete
+    exists autopair-delete && autopair-delete
     keySender
 }
 
