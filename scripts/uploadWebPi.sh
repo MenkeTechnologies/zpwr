@@ -23,7 +23,7 @@ total=$#
 count=0
 for i in "$@"; do
     scp -r -P $RPI_PORT "$i" "$address" 2>/dev/null
-    ((count++))
+    ((++count))
     if ((count == total)); then
         link="http://$MY_IP:$RPI_HTML_PORT/$i"
         echo "Download at $link" | figletRandomFontOnce.sh | ponysay | splitReg.sh -- --------- lolcat
