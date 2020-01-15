@@ -1554,6 +1554,7 @@ zp(){
 # copy over latest configuration files from $ZPWR_REPO_NAME
 copyConf(){
     if [[ ! -f '.shell_aliases_functions.sh' ]]; then
+       loggErr "had to cd to $ZPWR_REPO"
        builtin cd "$ZPWR_REPO"
     fi
     cp .shell_aliases_functions.sh "$HOME/.zpwr"
