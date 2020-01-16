@@ -24,12 +24,12 @@ prettyPrint(){
     fi
 }
 
-EXA_COMMAND="command exa --git -il -F -H --extended --color-scale -g -a --colour=always"
+ZPWR_EXA_COMMAND="command exa --git -il -F -H --extended --color-scale -g -a --colour=always"
 
 clearList() {
-    if [[ "$(uname)" == "Darwin" ]]; then
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists exa;then
-            ls_command="$EXA_COMMAND"
+            ls_command="$ZPWR_EXA_COMMAND"
         else
             if exists grc; then
                 ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"
@@ -38,10 +38,10 @@ clearList() {
             fi
         fi
         lib_command="otool -L"
-    elif [[ "$(uname)" == Linux ]];then
+    elif [[ "$ZPWR_OS_TYPE" == linux ]];then
 
         if exists exa;then
-            ls_command="$EXA_COMMAND"
+            ls_command="$ZPWR_EXA_COMMAND"
         else
             if exists grc; then
                 ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"
@@ -58,39 +58,53 @@ clearList() {
         fi
         lib_command="ldd"
     fi
+
     if [[ -n "$1" ]]; then
         for arg in "$@"; do
+            prettyPrint "/--------------- $arg --------------/"
+            #perl boxPrint.pl "$arg"
+            echo
             if exists $arg; then
                 #exe matching
                 while read loc;do
-                    lf="$(echo $loc|cut -d' ' -f3-10)"
+                    lf="$(echo $loc | cut -d' ' -f3-10)"
+                    if [[ $(type "$arg") == "$loc" ]]; then
+                        rank="Primary"
+                    else
+                        rank="Secondary"
+                    fi
                     if [[ -f "$lf" ]]; then
-                        prettyPrint "$lf" && \
-                        eval "$ls_command" -- $lf \
-                        && prettyPrint "FILE TYPE:" && \
-                        eval "file -- $lf" && \
-                        prettyPrint "DEPENDENT ON:" && \
+                        prettyPrint "$lf" &&
+                        eval "$ls_command -- $lf" &&
+                        prettyPrint "FILE TYPE:" &&
+                        eval "file -- $lf" &&
+                        prettyPrint "DEPENDENT ON:" &&
                         eval "$lib_command $lf"
                         prettyPrint "SIZE:"
                         du -sh -- "$lf"
                         prettyPrint "STATS:"
                         stat -- "$lf"
                         prettyPrint "MAN:"
-                        man -wa "$(basename -- $lf)" 2>/dev/null
+                        man -wa "$(basename $lf)" 2>/dev/null
+                        prettyPrint "PRECEDENCE: "
+                        echo "$rank"
                         echo
                         echo
                     else
+                        prettyPrint "FILE TYPE:"
                         echo "$loc"
-                        echo "$loc" | command grep -q \
-                            "function" && {
-                            type -f "$(echo "$loc" | \
-                            awk '{print $1}')" 2>/dev/null | nl -v 0
+                        echo "$loc" | command grep -sq "function" &&
+                        {
+                            type -f -- \
+                "$(echo "$loc" | awk '{print $1}')" 2>/dev/null |
+                            nl -v 0
                         }
-                        echo "$loc" | command grep -q \
-                            "alias" && {
-                            alias -- "$(echo "$loc" \
-                            | awk '{print $1}')"
+                        echo "$loc" | command grep -sq "alias" &&
+                    {
+                alias -- "$(echo "$loc" | awk '{print $1}')"
                         }
+                        prettyPrint "PRECEDENCE: "
+                        echo "$rank"
                         echo
                         echo
                     fi
@@ -98,8 +112,8 @@ clearList() {
             else
                 #path matching, not exe
                 prettyPrint "$arg"
-                eval "$ls_command -d -- \"$arg\"" \
-                        || { echo; continue; }
+                eval "$ls_command -d -- \"$arg\"" ||
+                    { echo; continue; }
                 echo
                 prettyPrint "FILE TYPE:"
                 file -- "$arg"
@@ -116,6 +130,7 @@ clearList() {
         clear && eval "$ls_command"
     fi
 }
+
 
 clearList "$@"
 
