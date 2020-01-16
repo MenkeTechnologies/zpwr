@@ -884,8 +884,6 @@ clearList() {
                         stat -- "$lf"
                         prettyPrint "MAN:"
                         man -wa "$(basename $lf)" 2>/dev/null
-                        prettyPrint "PRECEDENCE: "
-                        echo "$rank"
                         if isZsh; then
                             out="$(hash | command grep "^$arg=")"
                             if [[ -n "$out" ]]; then
@@ -893,6 +891,8 @@ clearList() {
                                 echo "$(hash | command grep "^$arg=")"
                             fi
                         fi
+                        prettyPrint "PRECEDENCE: "
+                        echo "$rank"
                         echo
                         echo
                     else
