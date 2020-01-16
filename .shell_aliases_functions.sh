@@ -886,6 +886,13 @@ clearList() {
                         man -wa "$(basename $lf)" 2>/dev/null
                         prettyPrint "PRECEDENCE: "
                         echo "$rank"
+                        if isZsh; then
+                            out="$(hash | command grep "^$arg=")"
+                            if [[ -n "$out" ]]; then
+                                prettyPrint "HASH TABLE:"
+                                echo "$(hash | command grep "^$arg=")"
+                            fi
+                        fi
                         echo
                         echo
                     else
