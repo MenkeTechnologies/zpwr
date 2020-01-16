@@ -859,10 +859,18 @@ clearList() {
 
     if [[ -n "$1" ]]; then
         for arg in "$@"; do
+            prettyPrint "/--------------- $arg --------------/"
+            #perl boxPrint.pl "$arg"
+            echo
             if exists $arg; then
                 #exe matching
                 while read loc;do
                     lf="$(echo $loc | cut -d' ' -f3-10)"
+                    if [[ $(type "$arg") == "$loc" ]]; then
+                        rank="Primary"
+                    else
+                        rank="Secondary"
+                    fi
                     if [[ -f "$lf" ]]; then
                         prettyPrint "$lf" &&
                         eval "$ls_command -- $lf" &&
@@ -876,9 +884,12 @@ clearList() {
                         stat -- "$lf"
                         prettyPrint "MAN:"
                         man -wa "$(basename $lf)" 2>/dev/null
+                        prettyPrint "PRECEDENCE: "
+                        echo "$rank"
                         echo
                         echo
                     else
+                        prettyPrint "FILE TYPE:"
                         echo "$loc"
                         echo "$loc" | command grep -sq "function" &&
                         {
@@ -890,6 +901,8 @@ clearList() {
                     {
                 alias -- "$(echo "$loc" | awk '{print $1}')"
                         }
+                        prettyPrint "PRECEDENCE: "
+                        echo "$rank"
                         echo
                         echo
                     fi
