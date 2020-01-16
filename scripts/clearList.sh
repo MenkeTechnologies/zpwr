@@ -84,8 +84,18 @@ clearList() {
                         du -sh -- "$lf"
                         prettyPrint "STATS:"
                         stat -- "$lf"
-                        prettyPrint "MAN:"
-                        man -wa "$(basename $lf)" 2>/dev/null
+                        out=$(man -wa "$(basename $lf)" 2>/dev/null)
+                        if [[ -n "$out" ]]; then
+                            prettyPrint "MAN:"
+                            echo "$out"
+                        fi
+                        if isZsh; then
+                            out="$(hash | command grep "^$arg=")"
+                            if [[ -n "$out" ]]; then
+                                prettyPrint "HASH TABLE:"
+                                echo "$(hash | command grep "^$arg=")"
+                            fi
+                        fi
                         prettyPrint "PRECEDENCE: "
                         echo "$rank"
                         echo
@@ -99,7 +109,7 @@ clearList() {
                 "$(echo "$loc" | awk '{print $1}')" 2>/dev/null |
                             nl -v 0
                         }
-                        echo "$loc" | command grep -sq "alias" &&
+                        echo "$loc" | cmmand grep -sq "alias" &&
                     {
                 alias -- "$(echo "$loc" | awk '{print $1}')"
                         }

@@ -882,8 +882,11 @@ clearList() {
                         du -sh -- "$lf"
                         prettyPrint "STATS:"
                         stat -- "$lf"
-                        prettyPrint "MAN:"
-                        man -wa "$(basename $lf)" 2>/dev/null
+                        out=$(man -wa "$(basename $lf)" 2>/dev/null)
+                        if [[ -n "$out" ]]; then
+                            prettyPrint "MAN:"
+                            echo "$out"
+                        fi
                         if isZsh; then
                             out="$(hash | command grep "^$arg=")"
                             if [[ -n "$out" ]]; then
