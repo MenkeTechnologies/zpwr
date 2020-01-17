@@ -137,7 +137,7 @@ case $verb in
         ;;
     totallines) cmd="totalLines" #count of total line count of git files
         ;;
-    linecontribcount) cmd="lineContribCount" #count of lines contributed by author
+    contribcountlines) cmd="contribCountLines" #count of lines contributed by author
         ;;
     logincount) cmd="loginCount" #count of logins by user
         ;;

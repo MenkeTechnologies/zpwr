@@ -1135,7 +1135,7 @@ totalLines(){
     command rm "$ZPWR_TEMPFILE"
 }
 
-lineContribCount(){
+contribCountLines(){
 
     isGitDir || return 1
 
