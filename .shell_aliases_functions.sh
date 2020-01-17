@@ -1072,7 +1072,10 @@ contribCountDirs(){
 
 contribCount(){
 
-    isGitDir || return 1
+    if ! isGitDir; then
+       loggErr "not in a git dir." 
+       return 1
+    fi
 
     lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
