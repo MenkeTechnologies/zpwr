@@ -1137,7 +1137,10 @@ totalLines(){
 
 contribCountLines(){
 
-    isGitDir || return 1
+    if ! isGitDir; then
+       loggErr "not in a git dir." 
+       return 1
+    fi
 
     prettyPrint "starting line contrib count..."
     {
