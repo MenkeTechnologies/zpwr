@@ -1095,7 +1095,10 @@ isBinary() {
 
 totalLines(){
 
-    isGitDir || return 1
+    if ! isGitDir; then
+       loggErr "not in a git dir." 
+       return 1
+    fi
 
     prettyPrint "starting total line count..."
     {
@@ -1187,7 +1190,11 @@ contribCountLines(){
 }
 
 gsdc(){
-    isGitDir || return 1
+    if ! isGitDir; then
+       loggErr "not in a git dir." 
+       return 1
+    fi
+
 
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
@@ -1232,7 +1239,11 @@ gsdc(){
 }
 
 gitCommitAndPush(){
-    isGitDir || return 1
+    if ! isGitDir; then
+       loggErr "not in a git dir." 
+       return 1
+    fi
+
 
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
