@@ -109,7 +109,7 @@ clearList() {
                 "$(echo "$loc" | awk '{print $1}')" 2>/dev/null |
                             nl -v 0
                         }
-                        echo "$loc" | cmmand grep -sq "alias" &&
+                        echo "$loc" | command grep -sq "alias" &&
                     {
                 alias -- "$(echo "$loc" | awk '{print $1}')"
                         }
