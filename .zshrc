@@ -2804,4 +2804,13 @@ fi
 #force alias z to zshz not zypper on suse
 alias z="$zcmd 2>&1"
 
+
+zpwrAllUpdates(){
+   zpwr regen 
+   zpwr recompile
+   zpwr updatedeps
+   zpwr update
+}
+
+
 ####}}}***********************************************************
