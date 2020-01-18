@@ -1557,7 +1557,7 @@ zpwr(){
 if [[ -d "$ZPWR_SCRIPTS/$ZPWR_REPO_NAME" ]]; then
     export ZPWR_REPO="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
 elif [[ -d "$FORKED_DIR/$ZPWR_REPO_NAME" ]];then
-    export ZPWR_REPO=""
+    export ZPWR_REPO="$FORKED_DIR/$ZPWR_REPO_NAME"
 fi
 
 if [[ -d "$FORKED_DIR" ]]; then
@@ -1566,7 +1566,7 @@ fi
 
 zpz(){
     local dirsc forked
-    dirsc="$ZPWR_SCRIPTS/$PWR_REPO_NAME"
+    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
 
     if [[ -d "$dirsc" ]]; then
