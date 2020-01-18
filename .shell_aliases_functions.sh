@@ -1608,9 +1608,11 @@ copyConf(){
     cp conf.ifconfig "$HOME"
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
-    cp UltiSnips/* "$HOME/.vim/UltiSnips"
-    cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux"
-    cp -f scripts/* "$ZPWR_SCRIPTS" 2>/dev/null
+    if [[ -d "$HOME/.vim/Ultisnips" ]]; then
+        cp UltiSnips/* "$HOME/.vim/UltiSnips"
+    fi
+    cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux" 2>> "$ZPWR_LOGFILE"
+    cp -f scripts/* "$ZPWR_SCRIPTS"  2>> "$ZPWR_LOGFILE"
     cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
 
     if [[ ! -f "$HOME/.ctags" ]]; then
