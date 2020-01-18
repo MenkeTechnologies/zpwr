@@ -1529,9 +1529,9 @@ openmygh(){
 
     if isZsh; then
         if [[ -n "$1" ]]; then
-            ${=open_cmd} "https://github.com/$1" &> $ZPWR_LOGFILE"
+            ${=open_cmd} "https://github.com/$1" &> "$ZPWR_LOGFILE"
         else
-            ${=open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" &> $ZPWR_LOGFILE"
+            ${=open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" &> "$ZPWR_LOGFILE"
         fi
     else
         if [[ -n "$1" ]]; then
@@ -1548,7 +1548,7 @@ eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
 
 zpwr(){
     if test -z $1;then
-        openmygh $ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME
+        openmygh "$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME"
     else
         . zpwr.zsh "$@"
     fi
