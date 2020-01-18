@@ -162,6 +162,12 @@ export ZPWR_SEND_KEYS_FULL=false
 export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
 #when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
+#ponysay banner
+export ZPWR_INTRO_BANNER=ponies
+#alternate to ponysay
+export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
+#banner fille
+export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
@@ -345,10 +351,7 @@ _alias_file="$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$ZPWR_HIDDEN_DIR/.common_aliases"
 
-test -z $ZPWR_BANNER && export ZPWR_BANNER=ponies
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
-
-export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 
 #}}}***********************************************************
 
@@ -1792,7 +1795,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if type figlet > /dev/null 2>&1; then
             printf "\e[1m"
             if [[ -f "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" ]]; then
-                if [[ "$ZPWR_BANNER" == ponies ]]; then
+                if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
                     if [[ -f "$ZPWR_SCRIPTS/splitReg.sh" ]];then
                         bannerLolcat
                     else
@@ -1812,7 +1815,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 else
     if [[ "$UID" != "0" ]]; then
         clear
-        if [[ $ZPWR_BANNER == ponies ]]; then
+        if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
             case $distroName in
                 (raspbian)
                     test -d "$D" && builtin cd "$D"
@@ -2079,7 +2082,7 @@ fzf_setup(){
     export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"
     export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
 
-    if [[ "$ZPWR_BANNER" == ponies ]]; then
+    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"
     else
         export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"
@@ -2794,7 +2797,6 @@ fi
 exists thefuck && eval $(thefuck --alias)
 exists kubectl && source <(kubectl completion zsh)
 
-
 endTimestamp=$(date +%s)
 logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
 if [[ $ZPWR_PROFILING == true ]]; then
@@ -2811,8 +2813,8 @@ zpwrAllUpdates(){
     builtin cd "$ZPWR_REPO" &&
         git pull &&
         {
-            if [[ -f "$ZPWR_SCRIPTS/about.sh" ]]; then
-                bash "$ZPWR_SCRIPTS/about.sh"
+            if [[ -f "ZPWR_BANNER_SCRIPT" ]]; then
+                bash "ZPWR_BANNER_SCRIPT"
             fi
         } &&
         copyConf

@@ -53,7 +53,7 @@ done
 shift $((OPTIND - 1))
 
 # clear screen
-if [[ "$MYBANNER" == ponies ]]; then
+if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
     trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
 fi
 clear
@@ -116,7 +116,7 @@ if [[ $skip != true ]]; then
     if [[ -f "$ZPWR_SCRIPTS/printHeader.sh" ]]; then
         width=80
         perl -le "print '_'x$width" | lolcat
-        if [[ "$MYBANNER" == ponies ]]; then
+        if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
             exists catme && exists cowsay && exists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
         fi
         perl -le "print '_'x$width" | lolcat

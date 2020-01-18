@@ -818,8 +818,8 @@ allRemotes(){
 about(){
     old="$LESS"
     unset LESS
-    if [[ -f "$ZPWR_SCRIPTS/about.sh" ]]; then
-        bash "$ZPWR_SCRIPTS/about.sh" | less -rFX
+    if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
+        bash "$ZPWR_BANNER_SCRIPT" | less -rFX
     fi
     export LESS="$old"
 }
@@ -1653,7 +1653,7 @@ getrc(){
     fi
 
     builtin cd "$HOME"
-    bash "$ZPWR_SCRIPTS/about.sh"
+    bash "$ZPWR_BANNER_SCRIPT"
     git clone -b "$branch" "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
     builtin cd "$ZPWR_REPO_NAME"
     copyConf
