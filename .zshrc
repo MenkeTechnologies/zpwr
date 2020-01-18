@@ -2813,8 +2813,8 @@ zpwrAllUpdates(){
     builtin cd "$ZPWR_REPO" &&
         git pull &&
         {
-            if [[ -f "ZPWR_BANNER_SCRIPT" ]]; then
-                bash "ZPWR_BANNER_SCRIPT"
+            if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
+                bash "$ZPWR_BANNER_SCRIPT"
             fi
         } &&
         copyConf
