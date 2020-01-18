@@ -1510,15 +1510,15 @@ o(){
 
     if isZsh; then
         if [[ -z "$1" ]]; then
-            ${=open_cmd} . &> /dev/null
+            ${=open_cmd} . &> "$ZPWR_LOGFILE"
         else
-            ${=open_cmd} "$@" &> /dev/null
+            ${=open_cmd} "$@" &> "$ZPWR_LOGFILE"
         fi
     else
         if [[ -z "$1" ]]; then
-            $open_cmd .
+            $open_cmd . &>/dev/null
         else
-            $open_cmd "$@"
+            $open_cmd "$@" &>/dev/null
         fi
     fi
 
@@ -1529,15 +1529,15 @@ openmygh(){
 
     if isZsh; then
         if [[ -n "$1" ]]; then
-            ${=open_cmd} "https://github.com/$1"
+            ${=open_cmd} "https://github.com/$1" &> $ZPWR_LOGFILE"
         else
-            ${=open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT"
+            ${=open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" &> $ZPWR_LOGFILE"
         fi
     else
         if [[ -n "$1" ]]; then
-            ${open_cmd} "https://github.com/$1"
+            ${open_cmd} "https://github.com/$1" &>/dev/null
         else
-            ${open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT"
+            ${open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" &>/dev/null
         fi
     fi
 
