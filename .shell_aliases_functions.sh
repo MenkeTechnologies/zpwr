@@ -1557,7 +1557,7 @@ zpwr(){
 if [[ -d "$ZPWR_SCRIPTS/$ZPWR_REPO_NAME" ]]; then
     export ZPWR_REPO="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
 elif [[ -d "$FORKED_DIR/$ZPWR_REPO_NAME" ]];then
-    export ZPWR_REPO="$FORKED_DIR/$ZPWR_REPO_NAME"
+    export ZPWR_REPO=""
 fi
 
 if [[ -d "$FORKED_DIR" ]]; then
@@ -1566,7 +1566,7 @@ fi
 
 zpz(){
     local dirsc forked
-    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
+    dirsc="$ZPWR_SCRIPTS/$PWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
 
     if [[ -d "$dirsc" ]]; then
@@ -2115,7 +2115,7 @@ figletfonts(){
         ary+=${file##*/}
     done
 
-    if [[ "$ZPWR_BANNER" == ponies ]]; then
+    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
         exists ponysay || { loggErr "you need ponysay" && return 1; }
     fi
     exists lolcat || { loggErr "you need lolcat" && return 1; }
@@ -2125,7 +2125,7 @@ figletfonts(){
     alternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}iglet ${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}onts ${ZPWR_DELIMITER_CHAR}A${ZPWR_DELIMITER_CHAR}re:"
 
 
-    if [[ "$ZPWR_BANNER" == ponies ]]; then
+    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
         for font in ${ary[@]} ; do
             printf "${font%.*} "
         done | ponysay -W $(tput cols) | splitReg.sh -- ---------------------- lolcat
