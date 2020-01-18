@@ -41,8 +41,6 @@ case $verb in
         ;;
     regenzsh ) cmd="regenZshCompCache" #regen compsys cache to ~/.zcompdump
         ;;
-    updatedeps) cmd="apz" #update all dependencies
-        ;;
     start) cmd="tmm_notabs" #start with no tabs
         ;;
     starttabs) cmd="tmm_full" #start all tabs
@@ -77,7 +75,9 @@ case $verb in
         ;;
     update) cmd="getrc" #update zpwr custom configs
         ;;
-    updateall) cmd="apz;getrc" #update zpwr custom configs and deps
+    updatedeps) cmd="apz" #update all dependencies
+        ;;
+    updateall) cmd="zpwrAllUpdates" #update zpwr custom configs and deps
         ;;
     search) cmd="s" #search google for args
         ;;
