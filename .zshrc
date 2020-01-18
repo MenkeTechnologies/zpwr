@@ -2806,7 +2806,14 @@ alias z="$zcmd 2>&1"
 
 
 zpwrAllUpdates(){
-   zpwr regen 
+    (
+
+    builtin cd "$ZPWR_REPO" &&
+        git pull &&
+        zpwr banner &&
+        copyConf
+    )
+   zpwr regen
    zpwr recompile
    zpwr updatedeps
    zpwr update
