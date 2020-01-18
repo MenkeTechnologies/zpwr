@@ -162,11 +162,11 @@ export ZPWR_SEND_KEYS_FULL=false
 export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
 #when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
-#ponysay banner
+#ponysay banner when shell startup finishes
 export ZPWR_INTRO_BANNER=ponies
-#alternate to ponysay
+#alternate banner to ponysay
 export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
-#banner fille
+#zpwr banner file location
 export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 #}}}***********************************************************
 
