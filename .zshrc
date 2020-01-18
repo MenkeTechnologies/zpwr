@@ -2810,7 +2810,11 @@ zpwrAllUpdates(){
 
     builtin cd "$ZPWR_REPO" &&
         git pull &&
-        zpwr banner &&
+        {
+            if [[ -f "$ZPWR_SCRIPTS/about.sh" ]]; then
+                bash "$ZPWR_SCRIPTS/about.sh"
+            fi
+        } &&
         copyConf
     )
    zpwr regen
