@@ -1554,6 +1554,10 @@ zpwr(){
     fi
 }
 
+zp(){
+    zpwr "$@"
+}
+
 if [[ -d "$ZPWR_SCRIPTS/$ZPWR_REPO_NAME" ]]; then
     export ZPWR_REPO="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
 elif [[ -d "$FORKED_DIR/$ZPWR_REPO_NAME" ]];then
@@ -1577,7 +1581,7 @@ zpz(){
         loggErr "$dirsc and $forked do not exist"
     fi
 }
-zp(){
+zr(){
     local dirsc forked
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"

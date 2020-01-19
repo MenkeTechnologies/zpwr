@@ -2542,7 +2542,7 @@ compdef _p p
 compdef _r r
 compdef _ssd ssd
 compdef _ssu ssu
-compdef _zpwr zpwr
+compdef _zpwr zpwr zp
 compdef _man fm
 
 #redefine global zsh completion function called at first parameter
