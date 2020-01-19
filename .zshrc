@@ -62,7 +62,7 @@
 
 #{{{                    MARK:start timestamp
 #**************************************************************
-startTimestamp=$(date +%s)
+startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 #}}}***********************************************************
 
 #{{{                    MARK:ZPWR Exports
@@ -2797,8 +2797,9 @@ fi
 exists thefuck && eval $(thefuck --alias)
 exists kubectl && source <(kubectl completion zsh)
 
-endTimestamp=$(date +%s)
-logg "zsh startup took $((endTimestamp - startTimestamp)) seconds"
+endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
+startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
+logg "zsh startup took $startupTimeMs seconds"
 if [[ $ZPWR_PROFILING == true ]]; then
     zprof
 fi
