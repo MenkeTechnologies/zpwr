@@ -1555,7 +1555,11 @@ zpwr(){
 }
 
 zp(){
-    zpwr "$@"
+    if test -z $1;then
+        cd "$ZPWR_REPO"
+    else
+        zpwr "$@"
+    fi
 }
 
 if [[ -d "$ZPWR_SCRIPTS/$ZPWR_REPO_NAME" ]]; then
