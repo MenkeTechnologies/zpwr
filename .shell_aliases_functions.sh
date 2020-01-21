@@ -707,13 +707,17 @@ logg(){
                 printf "\n_____________$(date)____ "
                 printf "_'%s'_ " "$@"
                 printf "\n"
-                
             } >> "$ZPWR_LOGFILE"
         fi
 
-        
     fi
 
+}
+
+loggDebug(){
+    if [[ $ZPWR_DEBUG == true ]]; then
+       logg "$@" 
+    fi
 }
 
 xx(){
