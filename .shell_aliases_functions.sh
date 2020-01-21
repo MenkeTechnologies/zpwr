@@ -1966,12 +1966,20 @@ to(){
 }
 
 ww(){
+    if [[ -z "$1" ]]; then
+       loggErr "ww <cmd> to run <cmd> forever" 
+       return 1
+    fi
     while true; do
         eval "$@"
     done
 }
 
 www(){
+    if [[ -z "$2" ]]; then
+       loggErr "www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
+       return 1
+    fi
     time=$1
     shift
     while true; do
@@ -1981,6 +1989,10 @@ www(){
 }
 
 ff(){
+    if [[ -z "$1" ]]; then
+       loggErr "ff <cmd> to run <cmd> 10 times" 
+       return 1
+    fi
     if [[ ! -d "$1" && ! -f "$1" ]]; then
         for (( i = 0; i < 10;i++ )); do
             eval "$@"
@@ -1989,6 +2001,10 @@ ff(){
 }
 
 fff(){
+    if [[ -z "$2" ]]; then
+       loggErr "fff <iter> <cmd> to run <cmd> <iter> times" 
+       return 1
+    fi
     num=$1
     shift
     for (( i = 0; i < $num;i++ )); do
@@ -1997,7 +2013,10 @@ fff(){
 }
 
 post(){
-    test -z $2 && loggErr "need two args" && return 1
+    if [[ -z "$2" ]]; then
+        loggErr "need two args"
+        return 1
+    fi
     postfix="$1"
     shift
     out="$(eval "$@")"
@@ -2005,7 +2024,10 @@ post(){
 }
 
 pre(){
-    test -z $2 && loggErr "need two args" && return 1
+    if [[ -z "$2" ]]; then
+        loggErr "need two args"
+        return 1
+    fi
     prefix="$1"
     shift
     out="$(eval "$@")"
