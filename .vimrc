@@ -1386,7 +1386,7 @@ endif
 
 "gf and :find will find files automatically in these locations
 set path+=~/Desktop
-set path+=~/Documents/shellScripts
+set path+=~/.zpwr/scripts
 
 "default colorscheme
 colorscheme badwolf
