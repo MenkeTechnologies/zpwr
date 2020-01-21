@@ -751,6 +751,10 @@ cgh(){
 }
 
 upload(){
+    if [[ -z "$2" ]]; then
+        loggErr "upload <file> <URL>"
+        return 1
+    fi
     command curl -vvv -fsSL -F file=@"$1" http://"$2"
 }
 
@@ -1007,7 +1011,8 @@ f(){
             test -d "$base" && cd "$base"&& return 0
             base="$(dirname "$base")"
         done
-        loggErr "Not a valid file or directory." && return 1
+        loggErr "Not a valid file or directory."
+        return 1
     fi
 }
 alias fh='f !$'
@@ -1091,7 +1096,7 @@ contribCountDirs(){
 contribCount(){
 
     if ! isGitDir; then
-       loggErr "not in a git dir." 
+       loggErr "not in a git dir."
        return 1
     fi
 
@@ -1114,7 +1119,7 @@ isBinary() {
 totalLines(){
 
     if ! isGitDir; then
-       loggErr "not in a git dir." 
+       loggErr "not in a git dir."
        return 1
     fi
 
@@ -1162,7 +1167,7 @@ totalLines(){
 contribCountLines(){
 
     if ! isGitDir; then
-       loggErr "not in a git dir." 
+       loggErr "not in a git dir."
        return 1
     fi
 
@@ -1209,7 +1214,7 @@ contribCountLines(){
 
 gsdc(){
     if ! isGitDir; then
-       loggErr "not in a git dir." 
+       loggErr "not in a git dir."
        return 1
     fi
 
@@ -1258,7 +1263,7 @@ gsdc(){
 
 gitCommitAndPush(){
     if ! isGitDir; then
-       loggErr "not in a git dir." 
+       loggErr "not in a git dir."
        return 1
     fi
 
