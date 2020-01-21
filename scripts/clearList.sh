@@ -7,11 +7,28 @@
 ##### Purpose: bash script to
 ##### Notes:
 #}}}***********************************************************
-
-exists(){
-    #alternative is command -v
-    type "$1" >/dev/null 2>&1
+isZsh(){
+    if command ps -p $$ | command grep -qs zsh; then
+        return 0
+    else
+        return 1
+    fi
 }
+
+if isZsh; then
+    exists(){
+        #alternative is command -v
+        type -- "$1" &>/dev/null || return 1 &&
+        type -- "$1" 2>/dev/null |
+        command grep -sqv "suffix alias" 2>/dev/null
+    }
+
+else
+    exists(){
+        #alternative is command -v
+        type -- "$1" >/dev/null 2>&1
+    }
+fi
 
 prettyPrint(){
     if [[ -n "$1" ]];then
@@ -141,6 +158,9 @@ clearList() {
     fi
 }
 
+if [[ "$1" == "--" ]]; then
+    shift
+fi
 
 clearList "$@"
 

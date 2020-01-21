@@ -821,7 +821,7 @@ locateFzf(){
         found="$(getFound)"
 
         if [[ -z "$found" ]]; then
-            zle .kill-whole-line
+            zle .kill-whole-line 2>/dev/null
             return 0
         fi
         firstArg="${${(Az)found}[1]//\"/}"
@@ -836,7 +836,7 @@ locateFzf(){
 
         if [[ ! -z "$found" ]]; then
             BUFFER="$BUFFER $found"
-            zle .accept-line
+            zle .accept-line 2>/dev/null
             return 0
         fi
         return 0
