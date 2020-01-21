@@ -2528,6 +2528,19 @@ commits(){
     fi
 }
 
+vimAll(){
+    #echo vim "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
+    #"$ZPWR_HIDDEN_DIR/"*.{sh,py,zsh,pl} \
+    #"$ZPWR_HIDDEN_DIR/".minvimrc \
+    #"$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
+    #"$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
+    vim \
+    "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
+    "$ZPWR_HIDDEN_DIR/"*.{sh,py,zsh,pl} \
+    "$ZPWR_HIDDEN_DIR/"{.minvimrc} \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
+}
 
 timer() {
     local count=100

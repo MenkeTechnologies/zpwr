@@ -175,6 +175,8 @@ case $verb in
         ;;
     drivesearch) cmd="locateFzf" #search drive for file
         ;;
+    vimall) cmd="vimAll" #vim all zpwr files for :argdo
+        ;;
     vimsearch) cmd="fzfVimKeybind" #search vim keybindings
         ;;
     allsearch) cmd="fzfAllKeybind" #search all keybindings
