@@ -157,6 +157,8 @@ case $verb in
         ;;
     taillog) cmd="lo" #tail -F \$ZPWR_LOGFILE
         ;;
+    timer) cmd="timer" #timer one or more commands
+        ;;
     to) cmd="to" #toggle external ip
         ;;
     totallines) cmd="totalLines" #count of total line count of git files
