@@ -2154,13 +2154,21 @@ _fzf_complete_mvim() {
 # vim ;<tab>
 _fzf_complete_vim() {
   _fzf_complete '-m' "$@" < <(
-    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
+    local file
+    if [[ $ZPWR_USE_NEOVIM == true ]]; then
+        file="$ZPWR_NVIMINFO"
+        test -e "$file" || touch "$file"
+        perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file"
+    else
+        file="$HOME/.viminfo"
+    perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' "$file"
+    fi
     )
 }
 # nvim ;<tab>
 _fzf_complete_nvim() {
   _fzf_complete '-m' "$@" < <(
-    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
+        perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$ZPWR_NVIMINFO"
     )
 }
 # printf ;<tab>
