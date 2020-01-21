@@ -105,13 +105,15 @@ case $verb in
         ;;
     background) cmd="b" #run arg in background
         ;;
-    ps) cmd="p" #ps -ef | grep arg
-        ;;
     pi) cmd="pi" #ping all LAN devices
         ;;
     pir) cmd="pir" #run command on all devices
         ;;
+    plugins) cmd="zpl" #cd to ~/.oh-my-zsh/custom/plugins
+        ;;
     pre) cmd="pre" #prefix all output
+        ;;
+    ps) cmd="p" #ps -ef | grep arg
         ;;
     banner) cmd="about" #show $ZPWR_REPO_NAME banner
         ;;
