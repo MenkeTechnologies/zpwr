@@ -11,53 +11,69 @@
 verb="$1"
 shift
 case $verb in
-    trc) cmd="trc" #tmux.conf vim session
+    allsearch) cmd="fzfAllKeybind" #search all keybindings
         ;;
-    brc) cmd="brc" #shell aliases file vim session
-        ;;
-    vrc) cmd="vrc" #vimrc vim session
-        ;;
-    zrc) cmd="zrc" #zshrc vim session
-        ;;
-    color2) cmd="color2" #turn on stderr filter
-        ;;
-    return2) cmd="return2" #turn off stderr filter
-        ;;
-    man) cmd="fm" #fzf through man pages
-        ;;
-    backup) cmd="backup" #backup files
-        ;;
-    regen) cmd="regenAll" #regen all caches
-        ;;
-    regenkeybindings) cmd="regenAllKeybindingsCache" #regen all keybindings cache to ~/.zpwr/zpwr{All,Vim}Keybindings.txt
-        ;;
-    regenpowerline ) cmd="regenPowerlineLink" #regen powerline sym link to ~/.tmux/powerline
-        ;;
-    regengit) cmd="regenAllGitRepos" #regen list of all git repos to ~/.zpwr/zpwrGitDirs.txt
-        ;;
-    regentags) cmd="regenTags" #regen ctags files to ~ and ~/.zpwr/scripts
-        ;;
-    regenenv) cmd="regenSearchEnv" #regen search env to ~/.zpwr/zpwrEnv{Key,Value}.txt
-        ;;
-    regenzsh ) cmd="regenZshCompCache" #regen compsys cache to ~/.zcompdump
-        ;;
-    start) cmd="tmm_notabs" #start with no tabs
-        ;;
-    starttabs) cmd="tmm_full" #start all tabs
+    altprettyprint) cmd="alternatingPrettyPrint" #pretty with alternating color
         ;;
     attach) cmd="tmux attach-session" #attach to tmux session
         ;;
+    background) cmd="b" #run arg in background
+        ;;
+    backup) cmd="backup" #backup files
+        ;;
+    banner) cmd="about" #show $ZPWR_REPO_NAME banner
+        ;;
+    brc) cmd="brc" #shell aliases file vim session
+        ;;
+    cd) cmd="f" #cd to directory arg
+        ;;
+    clearlist) cmd="clearList" #clear and list the files with no args
+        ;;
+    clone) cmd="gcl" #clone and cd to arg
+        ;;
+    cloneToForked) cmd="cloneToForked" #clone \$ZPWR_REPO_NAME to \$FORKED_DIR
+        ;;
+    colorsdiff) cmd="gsdc" #colorized side diff
+        ;;
+    color2) cmd="color2" #turn on stderr filter
+        ;;
+    commit) cmd="gitCommitAndPush" #commit and push with arg message
+        ;;
+    commits) cmd="commits" #search git commits with fzf
+        ;;
+    contribcount) cmd="contribCount" #count of git contribs by author
+        ;;
+    contribcountdirs) cmd="contribCountDirs" #count of git contribs by author for list of dirs
+        ;;
+    contribcountlines) cmd="contribCountLines" #count of lines contributed by author
+        ;;
+    copycommand) cmd="getCopyCommand" #get the command to copy with system
+        ;;
     detach) cmd="detachall" #detach from all tmux sessions
         ;;
-    install) cmd="inst" #run configure, make and make install
-        ;;
     digs) cmd="digs" #run series on networking commands on arg
+        ;;
+    drivesearch) cmd="locateFzf" #search drive for file
+        ;;
+    envsearch) cmd="fzfEnv" #search all aliases, parameters, builtins, keywords and functions
+        ;;
+    figletfonts) cmd="figletfonts" #show all figlet fonts
         ;;
     ff) cmd="ff" #run 10 times for command
         ;;
     fff) cmd="fff" #run first arg times for command
         ;;
-    figletfonts) cmd="figletfonts" #show all figlet fonts
+    fp) cmd="fp" #cd to ~/forkedRepos
+        ;;
+    ghcontribcount) cmd="cgh" #count of github contribs in last year
+        ;;
+    github) cmd="openmygh" #open github.com profile
+        ;;
+    gitignore) cmd="gil" #vim ~/.git/info/exclude
+        ;;
+    gitremotes) cmd="allRemotes" #list all git remotes
+        ;;
+    grep) cmd="fz" #grep through pwd with ag into fzf
         ;;
     home) cmd="cd $ZPWR_HIDDEN_DIR" #go to zpwr \$ZPWR_HIDDEN_DIR
         ;;
@@ -65,45 +81,33 @@ case $verb in
         ;;
     hubdelete) cmd="hd" #delete remote github repo
         ;;
-    web) cmd="we" #cd to web dir
-        ;;
-    gitignore) cmd="gil" #vim ~/.git/info/exclude
-        ;;
-    taillog) cmd="lo" #tail -F \$ZPWR_LOGFILE
-        ;;
-    log) cmd="logg" #write to \$ZPWR_LOGFILE
-        ;;
-    update) cmd="getrc" #update zpwr custom configs
-        ;;
-    updatedeps) cmd="apz" #update all dependencies
-        ;;
-    updateall) cmd="zpwrAllUpdates" #update zpwr custom configs and deps
-        ;;
-    search) cmd="s" #search google for args
-        ;;
     info) cmd="clearList" #get info on command type with args
         ;;
-    list) cmd="listNoClear" #list the files with no args
+    install) cmd="inst" #run configure, make and make install
         ;;
-    clearlist) cmd="clearList" #clear and list the files with no args
-        ;;
-    learnsearch) cmd="se" #search for learning in \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
+    killmux) cmd="tmux kill-server" #kill tmux server
         ;;
     learn) cmd="learn" #save learning to \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
         ;;
-    clone) cmd="gcl" #clone and cd to arg
+    learnsearch) cmd="se" #search for learning in \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
         ;;
-    github) cmd="openmygh" #open github.com profile
+    list) cmd="listNoClear" #list the files with no args
         ;;
-    opencommand) cmd="getOpenCommand" #get the command to open with system
+    log) cmd="logg" #write to \$ZPWR_LOGFILE
         ;;
-    makefile) cmd="j" #make a dir tree with file at end
+    logincount) cmd="loginCount" #count of logins by user
         ;;
     makedir) cmd="jd" #make a dir tree
         ;;
+    makefile) cmd="j" #make a dir tree with file at end
+        ;;
+    man) cmd="fm" #fzf through man pages
+        ;;
     open) cmd="o" #open with system
         ;;
-    background) cmd="b" #run arg in background
+    opencommand) cmd="getOpenCommand" #get the command to open with system
+        ;;
+    pastecommand) cmd="getPasteCommand" #get the command to paste with system
         ;;
     pi) cmd="pi" #ping all LAN devices
         ;;
@@ -111,45 +115,33 @@ case $verb in
         ;;
     plugins) cmd="zpl" #cd to ~/.oh-my-zsh/custom/plugins
         ;;
+    post) cmd="post" #postfix all output
+        ;;
     pre) cmd="pre" #prefix all output
         ;;
     ps) cmd="p" #ps -ef | grep arg
         ;;
-    banner) cmd="about" #show $ZPWR_REPO_NAME banner
-        ;;
-    gitremotes) cmd="allRemotes" #list all git remotes
-        ;;
-    urlsafe) cmd="urlSafe" #base64 encode
-        ;;
-    upload) cmd="upload" #upload with curl
-        ;;
-    post) cmd="post" #postfix all output
-        ;;
     pygmentcolors) cmd="pygmentcolors" #show all pygment colors
         ;;
-    commits) cmd="commits" #search git commits with fzf
+    recompile) cmd="recompile" #recompile all cache comps
         ;;
-    commit) cmd="gitCommitAndPush" #commit and push with arg message
+    regen) cmd="regenAll" #regen all caches
         ;;
-    colorsdiff) cmd="gsdc" #colorized side diff
+    regenenv) cmd="regenSearchEnv" #regen search env to ~/.zpwr/zpwrEnv{Key,Value}.txt
         ;;
-    prettyprint) cmd="prettyPrint" #pretty print with color
+    regengit) cmd="regenAllGitRepos" #regen list of all git repos to ~/.zpwr/zpwrGitDirs.txt
         ;;
-    altprettyprint) cmd="alternatingPrettyPrint" #pretty with alternating color
+    regenkeybindings) cmd="regenAllKeybindingsCache" #regen all keybindings cache to ~/.zpwr/zpwr{All,Vim}Keybindings.txt
         ;;
-    totallines) cmd="totalLines" #count of total line count of git files
+    regenpowerline) cmd="regenPowerlineLink" #regen powerline sym link to ~/.tmux/powerline
         ;;
-    contribcountlines) cmd="contribCountLines" #count of lines contributed by author
+    regentags) cmd="regenTags" #regen ctags files to ~ and ~/.zpwr/scripts
         ;;
-    logincount) cmd="loginCount" #count of logins by user
+    regenzsh ) cmd="regenZshCompCache" #regen compsys cache to ~/.zcompdump
         ;;
-    ghcontribcount) cmd="cgh" #count of github contribs in last year
+    return2) cmd="return2" #turn off stderr filter
         ;;
-    contribcount) cmd="contribCount" #count of git contribs by author
-        ;;
-    contribcountdirs) cmd="contribCountDirs" #count of git contribs by author for list of dirs
-        ;;
-    cd) cmd="f" #cd to directory arg
+    reveal) cmd="reveal" #show remote repo in browser
         ;;
     scriptcount) cmd="scriptCount" #total number of scripts in \$ZPWR_SCRIPTS
         ;;
@@ -157,37 +149,49 @@ case $verb in
         ;;
     scriptToPDF) cmd="scriptToPDF" #convert script to PDF
         ;;
-    cloneToForked) cmd="cloneToForked" #clone \$ZPWR_REPO_NAME to \$FORKED_DIR
+    search) cmd="s" #search google for args
         ;;
-    reveal) cmd="reveal" #show remote repo in browser
+    start) cmd="tmm_notabs" #start with no tabs
         ;;
-    killmux) cmd="tmux kill-server" #kill tmux server
+    starttabs) cmd="tmm_full" #start all tabs
+        ;;
+    taillog) cmd="lo" #tail -F \$ZPWR_LOGFILE
         ;;
     to) cmd="to" #toggle external ip
         ;;
-    www) cmd="www" #run command and sleep first arg seconds
+    totallines) cmd="totalLines" #count of total line count of git files
         ;;
-    fp) cmd="fp" #cd to ~/forkedRepos
+    trc) cmd="trc" #tmux.conf vim session
         ;;
-    zp) cmd="zp" #cd to \$ZPWR_REPO_NAME
+    update) cmd="getrc" #update zpwr custom configs
         ;;
-    recompile) cmd="recompile" #recompile all cache comps
+    updateall) cmd="zpwrAllUpdates" #update zpwr custom configs and deps
         ;;
-    grep) cmd="fz" #grep through pwd with ag into fzf
+    updatedeps) cmd="apz" #update all dependencies
         ;;
-    drivesearch) cmd="locateFzf" #search drive for file
+    upload) cmd="upload" #upload with curl
+        ;;
+    urlsafe) cmd="urlSafe" #base64 encode
+        ;;
+    prettyprint) cmd="prettyPrint" #pretty print with color
         ;;
     vimall) cmd="vimAll" #vim all zpwr files for :argdo
         ;;
     vimsearch) cmd="fzfVimKeybind" #search vim keybindings
         ;;
-    allsearch) cmd="fzfAllKeybind" #search all keybindings
+    vrc) cmd="vrc" #vimrc vim session
         ;;
-    envsearch) cmd="fzfEnv" #search all aliases, parameters, builtins, keywords and functions
+    www) cmd="www" #run command and sleep first arg seconds
         ;;
-    zshsearch) cmd="zshrcsearch" #search zshrc for arg
+    web) cmd="we" #cd to web dir
+        ;;
+    zp) cmd="zp" #cd to \$ZPWR_REPO_NAME
         ;;
     zpz) cmd="zpz" #cd to \$ZPWR_REPO_NAME and git co, rebase and push
+        ;;
+    zrc) cmd="zrc" #zshrc vim session
+        ;;
+    zshsearch) cmd="zshrcsearch" #search zshrc for arg
         ;;
     *) cmd="bad$$"
         ;;
