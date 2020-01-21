@@ -59,9 +59,9 @@ case $verb in
         ;;
     figletfonts) cmd="figletfonts" #show all figlet fonts
         ;;
-    ff) cmd="ff" #run 10 times for command
+    for) cmd="fff" #run first arg times for command
         ;;
-    fff) cmd="fff" #run first arg times for command
+    for10) cmd="ff" #run 10 times for command
         ;;
     fp) cmd="fp" #cd to ~/forkedRepos
         ;;
@@ -183,7 +183,9 @@ case $verb in
         ;;
     vrc) cmd="vrc" #vimrc vim session
         ;;
-    www) cmd="www" #run command and sleep first arg seconds
+    whiletrue) cmd="ww" #run command forever
+        ;;
+    whilesleep) cmd="www" #run command and sleep first arg seconds
         ;;
     web) cmd="we" #cd to web dir
         ;;

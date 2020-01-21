@@ -2423,7 +2423,7 @@ _se(){
 # as opposed to lexicographic sort
 zstyle ':completion:*:*:(se|redo|rsql|z|r):*:*' sort false
 
-subcommands_ary=($(cat "$ZPWR_SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z]+)\s*\).*#(.*)$}'))
+subcommands_ary=($(cat "$ZPWR_SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z0-9_]+)\s*\).*#(.*)$}'))
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
 
 _zpwr(){
