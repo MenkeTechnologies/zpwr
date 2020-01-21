@@ -2435,33 +2435,31 @@ _zpwr(){
     '*::args to zpwr:->args'
     )
 
-_arguments -s -C : $arguments && return 0
+    _arguments -s -C : $arguments && return 0
 
-if [[ CURRENT -ge 1 ]]; then
-    case $state in
-        noargs)
-             _message "nothing to complete"
-             ;;
-        verb)
-        _alternative "$subcommands_str"
+    if [[ CURRENT -ge 1 ]]; then
+        case $state in
+            noargs)
+                _message "nothing to complete"
+                ;;
+            verb)
+            _alternative "$subcommands_str"
+                ;;
+            args)
+                case $words[1] in
+                    info | clearlist)
+                    _cl
+                        ;;
+                    *)
+                    _alternative \
+                    'files:files:_files' \
+                    'directory-stack:directory stack:_directory_stack'
+                        ;;
+                esac
             ;;
-        args)
-            case $words[1] in
-                info | clearlist)
-                _cl
-                    ;;
-                *)
-                _alternative \
-                'files:files:_files' \
-                'directory-stack:directory stack:_directory_stack'
-                    ;;
-            esac
-        ;;
-
-    esac
-
-    return
-fi
+        esac
+        return
+    fi
 
 }
 
@@ -2832,8 +2830,10 @@ autoload zargs
 
 function zarg(){
     if [[ -z "$2" ]]; then
-        echo need two args, escaped glob and cmd with {}
+        loggErr "need two args, escaped glob and cmd with {}"
+        return 1
     fi
+
     first="$1"
     shift
 
