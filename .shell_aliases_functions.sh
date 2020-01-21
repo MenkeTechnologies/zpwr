@@ -2618,6 +2618,10 @@ vimAll(){
 }
 
 timer() {
+    if [[ -z "$1" ]]; then
+        loggErr "timer <commands...>"
+        return 1
+    fi
     local count=100
     if exists gdate;then
         cmd=gdate
