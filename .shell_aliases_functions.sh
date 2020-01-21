@@ -529,6 +529,10 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 else
     exists ps2pdf && {
         scriptToPDF(){
+            if [[ -z "$1" ]]; then
+                loggErr "need an arg"
+                return 1
+            fi
             tempFile="$HOME/__test.ps"
             vim "$1" -c "hardcopy > $tempFile" -c quitall
             ps2pdf "$tempFile" "${1%%.*}".pdf
@@ -765,7 +769,11 @@ function j(){
 }
 
 scnew(){
-    test -z "$1" && loggErr "no arg..." && return 1
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an arg"
+        return 1
+    fi
 
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
@@ -1004,7 +1012,13 @@ f(){
 }
 alias fh='f !$'
 
-execpy(){
+execpy(){ 
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an arg"
+        return 1
+    fi
+
     script="$1"
     shift
     python3 "$PYSCRIPTS/$script" "$@"
@@ -1264,6 +1278,13 @@ gitCommitAndPush(){
 }
 
 replacer(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "need two args"
+        return 1
+    fi
+
+
     orig="$1"
     replace="$2"
     shift 2
@@ -1280,7 +1301,10 @@ creategif(){
     outFile=out.gif
     res=600x400
 
-    test -z "$1" && loggErr "One arg needed..." && return 1
+    if [[ -z "$1" ]]; then
+        loggErr "need an arg"
+        return 1
+    fi
 
     test -n "$2" && res="$2"
 
@@ -1418,6 +1442,12 @@ tac(){
 }
 
 backup(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an arg"
+        return 1
+    fi
+
     newfile="$1".$(date +%Y%m%d.%H.%M.bak)
     mv "$1" "$newfile"
     cp -pR "$newfile" "$1"
@@ -1428,6 +1458,11 @@ backup(){
 alias gcl >/dev/null 2>&1 && unalias gcl
 
 gcl() {
+    if [[ -z "$1" ]]; then
+        loggErr "need an arg"
+        return 1
+    fi
+
     git_name="${1##*/}"
     dir_name=${git_name%.*}
     git clone -v --progress --recursive "$1"
@@ -1435,6 +1470,12 @@ gcl() {
 }
 
 ino(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an arg"
+        return 1
+    fi
+
     dir="$1"
     command mkdir "$dir" && cd "$dir" &&
         platformio init --ide clion --board uno
@@ -1688,6 +1729,12 @@ getrcdev(){
 }
 
 rename(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an arg"
+        return 1
+    fi
+
     search="$1"
     shift
     for file in "$@"; do
@@ -1748,6 +1795,12 @@ pirun(){
 }
 
 digs(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an arg"
+        return 1
+    fi
+
     local OPTIND opt exe secret
     while getopts "s" opt 2>/dev/null;do
         case $opt in
@@ -1756,11 +1809,6 @@ digs(){
         esac
     done
     shift $(($OPTIND-1))
-
-    if [[ -z "$1" ]]; then
-        loggErr "need an arg"
-        return 1
-    fi
     exists grc && colo=grc || {
         colo=
         echo "No grc colorizer no defaulting to no colors"
