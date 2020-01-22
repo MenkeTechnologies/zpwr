@@ -21,7 +21,7 @@ python3 -c 'import pip' && {
 
     for package in $outdated; do
         #get last package
-        installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')
+        installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
         if [[ ! -w "$installDir" ]]; then
             needSudo=yes
         else
@@ -57,7 +57,7 @@ python2 -c 'import pip' && {
     prettyPrint "Updating Python2.7 Packages"
     outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     for package in $outdated; do
-        installDir=$(python2 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')
+        installDir=$(python2 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
         if [[ ! -w "$installDir" ]]; then
             needSudo=yes
         else
