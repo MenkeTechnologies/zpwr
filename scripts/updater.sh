@@ -210,80 +210,8 @@ if [[ $skip != true ]]; then
         pio update
         pio upgrade
     }
+    source "$ZPWR_SCRIPTS/updaterPip.sh"
 
-    #python 3.6
-    python3 -c 'import pip' && {
-        prettyPrint "Updating Python3.6 Packages"
-        outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
-
-        #get last package
-        last=$(python3 -m pip list --format=columns | tail -1 | awk '{print $1}')
-        installDir=$(python3 -m pip show "$last" | \perl -ne 'print $1 if /^Location: (.*)/')
-        if [[ ! -w "$installDir" ]]; then
-            needSudo=yes
-        else
-            needSudo=no
-        fi
-
-        if [[ -n "$needSudo" ]]; then
-            prettyPrint "sudo needed: $needSudo for pip3 at $installDir"
-        else
-            prettyPrint "no sudo needed: $needSudo for pip3 at $installDir"
-        fi
-
-        if [[ "$needSudo" == yes ]]; then
-            for i in $outdated; do
-                sudo python3 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
-            done
-            prettyPrint "Updating Pip3"
-            #update pip itself
-            sudo python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
-        else
-            for i in $outdated; do
-                python3 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
-            done
-            prettyPrint "Updating Pip3"
-            #update pip itself
-            python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
-        fi
-
-    }
-
-    #python 2.7 (non system)
-    python2 -c 'import pip' && {
-        prettyPrint "Updating Python2.7 Packages"
-        outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
-
-        last=$(python2 -m pip list --format=columns | tail -1 | awk '{print $1}')
-        installDir=$(python2 -m pip show "$last" | \perl -ne 'print $1 if /^Location: (.*)/')
-        if [[ ! -w "$installDir" ]]; then
-            needSudo=yes
-        else
-            needSudo=no
-        fi
-
-        if [[ -n "$needSudo" ]]; then
-            prettyPrint "sudo needed: $needSudo for pip2 at $installDir"
-        else
-            prettyPrint "no sudo needed: $needSudo for pip2 at $installDir"
-        fi
-
-        if [[ "$needSudo" == yes ]]; then
-            for i in $outdated; do
-                sudo python2 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
-            done
-            prettyPrint "Updating Pip2"
-            #update pip itself
-            sudo python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
-        else
-            for i in $outdated; do
-                python2 -m pip install --upgrade --ignore-installed -- "$i" #&> /dev/null
-            done
-            prettyPrint "Updating Pip2"
-            #update pip itself
-            python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
-        fi
-    }
 fi
 
 #first argument is user@host and port number configured in .ssh/config
@@ -314,7 +242,7 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
     fi
 
     #update python packages
-    ssh -x "$hostname" bash <"$ZPWR_SCRIPTS/pipUpdater.sh"
+    ssh -x "$hostname" bash <"$ZPWR_SCRIPTS/remotePipUpdater.sh"
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to send stdin script into bash
     ssh -x "$hostname" bash <"$ZPWR_SCRIPTS/rpiSoftwareUpdater.sh"
