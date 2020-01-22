@@ -7,6 +7,13 @@
 ##### Notes:
 #}}}***********************************************************
 
+prettyPrint() {
+    printf "\e[1;4m"
+    printf "$1"
+    printf "\n\e[0m"
+}
+
+
 #python 3.6
 python3 -c 'import pip' && {
     prettyPrint "Updating Python3.6 Packages"
