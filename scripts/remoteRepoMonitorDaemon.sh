@@ -45,7 +45,9 @@ main() {
         rm -f "$ZPWR_SCRIPTS/"*
         cp -f scripts/* "$ZPWR_SCRIPTS"
         cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
-
+    else
+        echo "$(date) How is ZPWR_SCRIPTS null?" >&2
+        env
     fi
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*; do
