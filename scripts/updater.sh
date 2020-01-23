@@ -54,7 +54,9 @@ shift $((OPTIND - 1))
 
 # clear screen
 if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-    trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
+    if type figletRandomFontOnce.sh 2>/dev/null 1>&2; then
+        trap 'echo bye | figletRandomFontOnce.sh| ponysay -Wn | splitReg.sh -- ------------------ lolcat ; exit 0' INT
+    fi
 fi
 clear
 
