@@ -73,6 +73,8 @@ case $verb in
         ;;
     gitignore) cmd="gil" #vim ~/.git/info/exclude
         ;;
+    gitlargest) cmd="largestGitFiles" #show largest files stored by git in descending order
+        ;;
     gitremotes) cmd="allRemotes" #list all git remotes
         ;;
     grep) cmd="fz" #grep through pwd with ag into fzf
@@ -88,8 +90,6 @@ case $verb in
     install) cmd="inst" #run configure, make and make install
         ;;
     killmux) cmd="tmux kill-server" #kill tmux server
-        ;;
-    largestgit) cmd="largestGitFiles" #show largest files stored by git in descending order
         ;;
     learn) cmd="learn" #save learning to \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
         ;;
