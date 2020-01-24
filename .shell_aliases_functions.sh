@@ -852,7 +852,17 @@ largestGitFiles(){
         size=$(printf $size | humanReadable)
         printf "%-70s %10s\n" $filename $size
     done < <(git rev-list --all --objects | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
+}
 
+clearGitCache(){
+    if ! isGitDir; then
+        loggErr "not a git dir"
+        return 1
+    fi
+
+    git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d &&
+    git reflog expire --expire=now --all &&
+    git gc --prune=now
 }
 
 about(){

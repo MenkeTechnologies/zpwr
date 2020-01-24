@@ -67,6 +67,8 @@ case $verb in
         ;;
     ghcontribcount) cmd="cgh" #count of github contribs in last year
         ;;
+    gitclearcache) cmd="clearGitCache" #clear old git refs and objects
+        ;;
     github) cmd="openmygh" #open github.com profile
         ;;
     gitignore) cmd="gil" #vim ~/.git/info/exclude
