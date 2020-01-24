@@ -851,7 +851,7 @@ largestGitFiles(){
         filename=$(echo $obj | command grep $sha)
         size=$(printf $size | humanReadable)
         printf "%-70s %10s\n" $filename $size
-    done < <(git rev-list --all --objects | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
+    done < <(echo $obj | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
 }
 
 clearGitCache(){
