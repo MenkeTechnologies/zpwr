@@ -341,6 +341,7 @@ brew install ponysay
 brew install portaudio
 brew install portmidi
 brew install postgresql
+brew install protobuf
 brew install protobuf@3.7
 brew install proxychains-ng
 brew install pssh
@@ -351,6 +352,7 @@ brew install py3cairo
 brew install pygobject3
 brew install python
 brew install python@2
+brew install python@3.8
 brew install qrencode
 brew install qt
 brew install r
