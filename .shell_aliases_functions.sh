@@ -47,7 +47,7 @@ function chooseNvimVim(){
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         exists nvim && {
             alias v='nvim'
-            alias vi='nvim'
+           alias vi='nvim'
             alias vim='nvim'
             alias vm="nvim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
             alias sv='sudo -E nvim'
@@ -830,6 +830,29 @@ allRemotes(){
         printf "\x1b[0m\x0a"
         git remote show "$REPLY"
     done < <(git remote)
+}
+
+largestGitFiles(){
+    if ! isGitDir; then
+        loggErr "not a git dir"
+        return 1
+    fi
+
+    if [[ -z $1 ]]; then
+       page=50 
+   else
+       page=$1
+    fi
+
+    prettyPrint "Top $page Largest Git Objects"
+    local obj
+    obj=$(git rev-list --all --objects)
+    while read -r sha type size; do
+        filename=$(echo $obj | command grep $sha)
+        size=$(printf $size | humanReadable)
+        printf "%-70s %10s\n" $filename $size
+    done < <(git rev-list --all --objects | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
+
 }
 
 about(){
@@ -2661,7 +2684,8 @@ changeGitEmail(){
     fi
 
     if ! isGitDir; then
-        loggErr "not a git dir"  && return 1
+        loggErr "not a git dir"
+        return 1
     fi
 
     oldEmail="$1"

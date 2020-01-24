@@ -87,6 +87,8 @@ case $verb in
         ;;
     killmux) cmd="tmux kill-server" #kill tmux server
         ;;
+    largestgit) cmd="largestGitFiles" #show largest files stored by git in descending order
+        ;;
     learn) cmd="learn" #save learning to \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
         ;;
     learnsearch) cmd="se" #search for learning in \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
