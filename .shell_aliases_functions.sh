@@ -860,8 +860,8 @@ clearGitCache(){
         return 1
     fi
 
-    git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d &&
-    git reflog expire --expire=now --all &&
+    git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d 2>/dev/null
+    git reflog expire --expire=now --all
     git gc --prune=now
 }
 
