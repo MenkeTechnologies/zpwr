@@ -589,6 +589,7 @@ else
 
     restart(){
         service="$1"
+        local src_dir
         src_dir="$FORKED_DIR/$ZPWR_REPO_NAME"
         local service_path="$src_dir/$service.service"
         test -d "$src_dir" ||
