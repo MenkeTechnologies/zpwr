@@ -1091,6 +1091,23 @@ isGitDirMessage(){
     fi
 }
 
+gil(){
+    if ! isGitDir; then
+       loggErr "not in a git dir."
+       return 1
+    fi
+
+    local file=".git/info/exclude"
+
+    if [[ ! -f "$file" ]]; then
+       loggErr "$file must exist"
+       return 1
+    fi
+
+    vim "$file"
+    
+}
+
 contribCountDirs(){
 
     if [[ -z "$2" ]]; then
