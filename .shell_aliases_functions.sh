@@ -1253,7 +1253,7 @@ gsdc(){
     fi
 
 
-    currentDir="$(pwd -P)"
+    local currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
         if [[ "$currentDir" == "$dir" ]]; then
             printf "\x1b[0;1;31m"

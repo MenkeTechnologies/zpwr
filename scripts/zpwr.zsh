@@ -41,16 +41,6 @@ case $verb in
         ;;
     color2) cmd="color2" #turn on stderr filter
         ;;
-    commit) cmd="gitCommitAndPush" #commit and push with arg message
-        ;;
-    commits) cmd="commits" #search git commits with fzf
-        ;;
-    contribcount) cmd="contribCount" #count of git contribs by author
-        ;;
-    contribcountdirs) cmd="contribCountDirs" #count of git contribs by author for list of dirs
-        ;;
-    contribcountlines) cmd="contribCountLines" #count of lines contributed by author
-        ;;
     copycommand) cmd="getCopyCommand" #get the command to copy with system
         ;;
     detach) cmd="detachall" #detach from all tmux sessions
@@ -58,6 +48,8 @@ case $verb in
     digs) cmd="digs" #run series on networking commands on arg
         ;;
     drivesearch) cmd="locateFzf" #search drive for file
+        ;;
+    exists) cmd="exists" #check if command is valid
         ;;
     envsearch) cmd="fzfEnv" #search all aliases, parameters, builtins, keywords and functions
         ;;
@@ -71,7 +63,19 @@ case $verb in
         ;;
     ghcontribcount) cmd="cgh" #count of github contribs in last year
         ;;
+    gitcommit) cmd="gitCommitAndPush" #commit and push with arg message
+        ;;
+    gitcommits) cmd="commits" #search git commits with fzf
+        ;;
+    gitcontribcount) cmd="contribCount" #count of git contribs by author
+        ;;
+    gitcontribcountdirs) cmd="contribCountDirs" #count of git contribs by author for list of dirs
+        ;;
+    gitcontribcountlines) cmd="contribCountLines" #count of lines contributed by author
+        ;;
     gitclearcache) cmd="clearGitCache" #clear old git refs and objects
+        ;;
+    gitdir) cmd="isGitDir" #check if pwd is git dir
         ;;
     github) cmd="openmygh" #open github.com profile
         ;;
@@ -80,6 +84,8 @@ case $verb in
     gitlargest) cmd="largestGitFiles" #show largest files stored by git in descending order
         ;;
     gitremotes) cmd="allRemotes" #list all git remotes
+        ;;
+    gittotallines) cmd="totalLines" #count of total line count of git files
         ;;
     grep) cmd="fz" #grep through pwd with ag into fzf
         ;;
@@ -174,8 +180,6 @@ case $verb in
     timer) cmd="timer" #timer one or more commands
         ;;
     to) cmd="to" #toggle external ip
-        ;;
-    totallines) cmd="totalLines" #count of total line count of git files
         ;;
     trc) cmd="trc" #tmux.conf vim session
         ;;
