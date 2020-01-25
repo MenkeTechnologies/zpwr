@@ -861,13 +861,13 @@ clearGitCommit(){
     fi
 
     if [[ -z "$1" ]]; then
-        loggErr "clearGitCache <msg>"
+        loggErr "clearGitCache <regex>"
         return 1
     fi
 
-    regex="$1"
+    regex="^$1\$"
 
-    prettyPrint "Removing all commits with $regex"
+    prettyPrint "Removing all commits with /$regex/"
 
     git filter-branch --commit-filter '
     if [ `git rev-list --all --grep "'"$regex"'" | grep -c "$GIT_COMMIT"` -gt 0 ]
