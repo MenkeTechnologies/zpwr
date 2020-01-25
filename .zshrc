@@ -184,7 +184,7 @@ if [[ $ZPWR_PROFILING == true ]]; then
     zmodload zsh/zprof
 fi
 
-[[ -f "$ZPWR_HIDDEN_DIR/.tokens.sh" ]] && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
+test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
 
 [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
 source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
@@ -338,7 +338,7 @@ else
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:Sourcing
+#{{{                    MARK:Sourcing alias file
 #**************************************************************
 autoload -Uz compinit
 
@@ -2878,4 +2878,10 @@ zpwrAllUpdates(){
 }
 
 
-####}}}***********************************************************
+###}}}***********************************************************
+
+#{{{                    MARK:Finish
+#**************************************************************
+#source .token.sh to override with user functions
+test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
+#}}}***********************************************************
