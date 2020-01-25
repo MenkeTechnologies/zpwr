@@ -27,6 +27,8 @@ case $verb in
         ;;
     cd) cmd="f" #cd to directory arg
         ;;
+    clearls) cmd="clearList" #clear and list the files with no args
+        ;;
     clearlist) cmd="clearList" #clear and list the files with no args
         ;;
     clone) cmd="gcl" #clone and cd to arg
@@ -79,6 +81,8 @@ case $verb in
         ;;
     grep) cmd="fz" #grep through pwd with ag into fzf
         ;;
+    hidden) cmd="cd $ZPWR_HIDDEN_DIR" #go to zpwr \$ZPWR_HIDDEN_DIR
+        ;;
     home) cmd="cd $ZPWR_HIDDEN_DIR" #go to zpwr \$ZPWR_HIDDEN_DIR
         ;;
     hubcreate) cmd="hc" #create remote github repo
@@ -94,6 +98,8 @@ case $verb in
     learn) cmd="learn" #save learning to \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
         ;;
     learnsearch) cmd="se" #search for learning in \$ZPWR_SCHEMA_NAME.\$ZPWR_TABLE_NAME
+        ;;
+    ls) cmd="listNoClear" #list the files with no args
         ;;
     list) cmd="listNoClear" #list the files with no args
         ;;
@@ -142,6 +148,8 @@ case $verb in
     regentags) cmd="regenTags" #regen ctags files to ~ and ~/.zpwr/scripts
         ;;
     regenzsh ) cmd="regenZshCompCache" #regen compsys cache to ~/.zcompdump
+        ;;
+    repo) cmd="zp" #cd to \$ZPWR_REPO_NAME
         ;;
     return2) cmd="return2" #turn off stderr filter
         ;;
