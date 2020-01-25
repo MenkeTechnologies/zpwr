@@ -51,6 +51,8 @@ case $verb in
         ;;
     exists) cmd="exists" #check if command is valid
         ;;
+    envvars) cmd="eval env | grep -i '^$ZPWR_REPO_NAME'" #list all ZPWR env vars
+        ;;
     envsearch) cmd="fzfEnv" #search all aliases, parameters, builtins, keywords and functions
         ;;
     figletfonts) cmd="figletfonts" #show all figlet fonts
