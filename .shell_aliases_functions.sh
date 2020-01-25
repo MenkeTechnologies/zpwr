@@ -854,6 +854,30 @@ largestGitFiles(){
     done < <(echo $obj | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
 }
 
+clearGitCommit(){
+    if ! isGitDir; then
+        loggErr "not a git dir"
+        return 1
+    fi
+
+    if [[ -z "$1" ]]; then
+        loggErr "clearGitCache <msg>"
+        return 1
+    fi
+
+    regex="$1"
+
+    prettyPrint "Removing all commits with $regex"
+
+    git filter-branch --commit-filter '
+    if [ `git rev-list --all --grep "'"$regex"'" | grep -c "$GIT_COMMIT"` -gt 0 ]
+    then
+        skip_commit "$@";
+    else
+        git commit-tree "$@";
+    fi'  HEAD
+}
+
 clearGitCache(){
     if ! isGitDir; then
         loggErr "not a git dir"

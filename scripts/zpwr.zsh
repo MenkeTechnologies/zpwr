@@ -75,6 +75,8 @@ case $verb in
         ;;
     gitcontribcountlines) cmd="contribCountLines" #count of lines contributed by author
         ;;
+    gitclearcommit) cmd="clearGitCommit" #remove matching git commits from history
+        ;;
     gitclearcache) cmd="clearGitCache" #clear old git refs and objects
         ;;
     gitdir) cmd="isGitDir" #check if pwd is git dir
