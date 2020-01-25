@@ -11,6 +11,8 @@
 verb="$1"
 shift
 case $verb in
+    about) cmd="about" #show $ZPWR_REPO_NAME banner
+        ;;
     allsearch) cmd="fzfAllKeybind" #search all keybindings
         ;;
     altprettyprint) cmd="alternatingPrettyPrint" #pretty with alternating color
@@ -190,6 +192,8 @@ case $verb in
     prettyprint) cmd="prettyPrint" #pretty print with color
         ;;
     vimall) cmd="vimAll" #vim all zpwr files for :argdo
+        ;;
+    vimrecent) cmd="eval $EDITOR \${(Q)\$(fzvim):s|~|$HOME|}" #choose most recent vim files
         ;;
     vimsearch) cmd="fzfVimKeybind" #search vim keybindings
         ;;
