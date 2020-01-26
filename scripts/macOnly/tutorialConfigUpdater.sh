@@ -9,8 +9,11 @@
 
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
-installerDir="$ZPWR_HIDDEN_DIR/scripts/$ZPWR_REPO_NAME"
-ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
+ZPWR_DIR="$ZPWR"
+ZPWR_DIR_INSTALL="$ZPWR/install"
+if [[ -z $ZPWR_SCRIPTS ]]; then
+    ZPWR_SCRIPTS="$ZPWR/scripts"
+fi
 
 prettyPrint() {
     printf "\x1b[1;4m$1\n\x1b[0m"
@@ -20,40 +23,41 @@ prettyPrint() {
 
 #{{{ MARK:installer
 #**************************************************************
-cd "$installerDir" || exit 1
+cd "$ZPWR_DIR" || exit 1
 git checkout dev
 
-prettyPrint "Copying scripts to custom Installer Repo $installerDir"
-rm -rf "$installerDir/scripts/"*
-cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$installerDir/scripts" 2>/dev/null
-cp -R "$ZPWR_SCRIPTS/macOnly" "$installerDir/scripts"
-cp "$HOME/.vimrc" "$installerDir"
-cp "$HOME/.zpwr/.minvimrc" "$installerDir"
-cp "$HOME/.tmux.conf" "$installerDir"
-cp -R "$HOME/.zpwr/.tmux/"* "$installerDir/.tmux" 2>/dev/null
-cp "$HOME/.zpwr/.shell_aliases_functions.sh" "$installerDir"
-cp "$HOME/.zshrc" "$installerDir"
-cp "$HOME/conf.gls" "$installerDir"
-cp "$HOME/conf.df" "$installerDir"
-cp "$HOME/conf.mount" "$installerDir"
-cp "$HOME/conf.whois" "$installerDir"
-cp "$HOME/.ideavimrc" "$installerDir"
-cp "$HOME/.inputrc" "$installerDir"
-cp "$HOME/grc.zsh" "$installerDir"
-cp "$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh" "$installerDir"
-cp "$HOME/.gitignore_global" "$installerDir"
-cp -R "$HOME/.vim/Ultisnips" "$installerDir"
+prettyPrint "Copying scripts to custom Installer Repo $ZPWR_DIR"
+#rm -rf "$ZPWR_DIR/scripts/"*
+#cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$ZPWR_DIR/scripts" 2>/dev/null
+#cp -R "$ZPWR_SCRIPTS/macOnly" "$ZPWR_DIR/scripts"
+#cp "$ZPWR/.powerlevel9kconfig.sh" "$ZPWR_DIR"
+#cp "$HOME/.zpwr/.minvimrc" "$ZPWR_DIR"
+#cp -R "$HOME/.zpwr/.tmux/"* "$ZPWR_DIR/.tmux" 2>/dev/null
+#cp "$HOME/.zpwr/.shell_aliases_functions.sh" "$ZPWR_DIR"
+
+cp "$HOME/.vimrc" "$ZPWR_DIR_INSTALL"
+cp "$HOME/.tmux.conf" "$ZPWR_DIR_INSTALL"
+cp "$HOME/.zshrc" "$ZPWR_DIR_INSTALL"
+cp "$HOME/conf.gls" "$ZPWR_DIR_INSTALL"
+cp "$HOME/conf.df" "$ZPWR_DIR_INSTALL"
+cp "$HOME/conf.mount" "$ZPWR_DIR_INSTALL"
+cp "$HOME/conf.whois" "$ZPWR_DIR_INSTALL"
+cp "$HOME/.ideavimrc" "$ZPWR_DIR_INSTALL"
+cp "$HOME/.inputrc" "$ZPWR_DIR_INSTALL"
+cp "$HOME/grc.zsh" "$ZPWR_DIR_INSTALL"
+cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
+cp -R "$HOME/.vim/Ultisnips" "$ZPWR_DIR_INSTALL"
 
 prettyPrint "Updating vim plugins list"
-bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$installerDir/.vimbundle"
+bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$ZPWR_DIR_INSTALL/.vimbundle"
 prettyPrint "Updating zsh plugins list"
-printf "" > "$installerDir/.zshplugins"
+printf "" > "$ZPWR_DIR_INSTALL/.zshplugins"
 for dir in "$HOME/.oh-my-zsh/custom/plugins/"*; do
     if basename "$dir" | grep -sq "example";then
         continue;
     fi
         
-    bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$installerDir/.zshplugins"
+    bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR/_INSTALL.zshplugins"
 done
 
 git add .
@@ -79,7 +83,7 @@ cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$HOME/.zpwr/.tmux/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
 prettyPrint "Copying shell_aliases_functions to $tutorialDir"
-cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$tutorialDir/aliases"
+cp "$ZPWR/.shell_aliases_functions.sh" "$tutorialDir/aliases"
 
 prettyPrint "Copying shell scripts"
 #clear out old scripts, dbl quotes escape asterisk
@@ -110,7 +114,7 @@ cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
 prettyPrint "Copying powerlevel config"
-cp "$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh" "$tutorialDir"
+cp "$ZPWR/.powerlevel9kconfig.sh" "$tutorialDir"
 
 #prettyPrint "Copying vim plugins"
 
@@ -152,12 +156,12 @@ dotdir="$websiteDir/downloads/dotfiles"
 prettyPrint "Copying config files to websiteDir"
 cp "$HOME/.vimrc" "$dotdir/.."
 cp "$HOME/.tmux.conf" "$dotdir/.."
-cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$dotdir/.."
+cp "$ZPWR/.shell_aliases_functions.sh" "$dotdir/.."
 cp "$HOME/.zshrc" "$dotdir/.."
 
 cp "$HOME/.vimrc" "$dotdir"
 cp "$HOME/.tmux.conf" "$dotdir"
-cp "$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh" "$dotdir"
+cp "$ZPWR/.shell_aliases_functions.sh" "$dotdir"
 cp "$HOME/.zshrc" "$dotdir"
 
 prettyPrint "Copying scripts to $websiteDir"

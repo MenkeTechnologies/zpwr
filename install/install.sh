@@ -19,16 +19,21 @@ install_counter=0
 #for the width of the install messages
 export COLUMNS="$(tput cols)"
 #source common functions
-source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
+if ! source common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
 logfile="$INSTALLER_DIR/escaped_logfile.txt"
 logfileCargoYCM="$INSTALLER_DIR/cargoYCM_logfile.txt"
+
 #the destination directory for zpwr specific installed files
-export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR
 fi
 #the destination directory for zpwr specific temp files
-export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 if [[ ! -d $ZPWR_HIDDEN_DIR_TEMP ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR_TEMP
 fi
