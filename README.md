@@ -129,7 +129,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 # Installation Instructions
 
 ```sh
-git clone http://github.com/MenkeTechnologies/zpwr.git && cd zpwr && ./install.sh
+git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh
 ```
 
 The installer will confirm what will be installed and overwritten before executing.
