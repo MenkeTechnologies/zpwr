@@ -210,26 +210,26 @@ files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell
     dirs=(.zpwr/scripts .config/htop .config/powerline/themes/tmux)
 
 
-    backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
+    BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
     backup(){
-        test -d "$backupdir" || mkdir -p "$backupdir"
+        test -d "$BACKUP_DIR" || mkdir -p "$BACKUP_DIR"
         for file in ${files[@]} ; do
-            test -f "$HOME/$file" && cp "$HOME/$file" "$backupdir"
+            test -f "$HOME/$file" && cp "$HOME/$file" "$BACKUP_DIR"
         done
         for dir in ${dirs[@]} ; do
-            test -d "$HOME/$dir" && cp -R "$HOME/$dir" "$backupdir"
+            test -d "$HOME/$dir" && cp -R "$HOME/$dir" "$BACKUP_DIR"
         done
     }
 
 warnOverwrite(){
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.conf, .shell_aliases_functions.sh in $HOME"
-    prettyPrint "These files if they exist will be backed to $backupdir"
+    prettyPrint "These files if they exist will be backed to $BACKUP_DIR"
     prettyPrintStdin <<EOF
-The following directories if they exist will be backed to $backupdir: 
-$HOME/${dirs[0]}, 
-$HOME/${dirs[1]}, 
-$HOME/${dirs[2]} 
+The following directories if they exist will be backed to $BACKUP_DIR: 
+$HOME/${dirs[0]},
+$HOME/${dirs[1]},
+$HOME/${dirs[2]}
 
 EOF
 proceed
@@ -245,7 +245,7 @@ warnSudo(){
 
 pluginsinstall(){
     builtin cd "$INSTALLER_DIR"
-    test -f plugins_install.sh || { echo "Where is plugins_install.sh in zpwr base directory?" >&2; exit 1; }
+    test -f plugins_install.sh || { echo "Where is plugins_install.sh in .zpwr/install directory?" >&2; exit 1; }
     bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
     PLUGIN_PID=$!
     prettyPrint "Installing vim and tmux plugins in background @ $PLUGIN_PID"
@@ -253,14 +253,14 @@ pluginsinstall(){
 
 ycminstall(){
     builtin cd "$INSTALLER_DIR"
-    test -f ycm_install.sh || { echo "Where is ycm_install.sh in zpwr base directory?" >&2; exit 1; }
+    test -f ycm_install.sh || { echo "Where is ycm_install.sh in .zpwr/install base directory?" >&2; exit 1; }
     bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
     YCM_PID=$!
     prettyPrint "Installing YouCompleteMe in background @ $YCM_PID"
 }
 
 cargoinstall(){
-    test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in zpwr base directory?" >&2; exit 1; }
+    test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in .zpwr/install base directory?" >&2; exit 1; }
     bash rustupinstall.sh >> "$logfileCargoYCM" 2>&1 &
     CARGO_PID=$!
     echo $CARGO_PID

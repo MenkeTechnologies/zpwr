@@ -1,10 +1,14 @@
-source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
+source common.sh || { echo "Must be in .zpwr/install directory" >&2; exit 1; }
 
 INSTALLER_DIR="$(pwd -P)"
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
-export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR
+fi
+
+if [[ -n $ZPWR ]]; then
+    export ZPWR="$HOME/.zpwr"
 fi
 
 
@@ -34,14 +38,14 @@ cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 
 prettyPrint "Installing .powerlevel9k"
-cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$HOME/.zpwr"
+cp "$INSTALLER_DIR/.powerlevel9kconfig.sh" "$ZPWR"
 
 
 prettyPrint "Installing .vimrc"
 cp "$INSTALLER_DIR/.vimrc" "$HOME"
 
 prettyPrint "Installing minimal .minvimrc"
-cp "$INSTALLER_DIR/.minvimrc" "$HOME/.zpwr"
+cp "$INSTALLER_DIR/.minvimrc" "$ZPWR"
 
 prettyPrint "Installing .ideavimrc"
 cp "$INSTALLER_DIR/.ideavimrc" "$HOME"
@@ -81,11 +85,11 @@ cp "$INSTALLER_DIR/.iftopcolors" "$HOME"
 
 if [[ "$distroName" == raspbian ]]; then
     prettyPrint "Installing custom motd for RPI..."
-    cp "$INSTALLER_DIR/motd.sh" "$HOME/.zpwr"
+    cp "$INSTALLER_DIR/motd.sh" "$ZPWR"
 fi
 
 prettyPrint "Installing Custom Tmux Commands"
-cp -R "$INSTALLER_DIR/.tmux" "$ZPWR_HIDDEN_DIR"
+cp -R "$INSTALLER_DIR/.tmux" "$ZPWR"
 
 builtin cd "$INSTALLER_DIR"
 prettyPrint "Installing Tmux plugins"
@@ -104,10 +108,10 @@ echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
 prettyPrint "Copying all Shell Scripts to $HOME/Documents"
-[[ ! -d "$HOME/.zpwr/scripts" ]] && mkdir -p "$HOME/.zpwr/scripts"
+[[ ! -d "$ZPWR/scripts" ]] && mkdir -p "$ZPWR/scripts"
 
-cp "$INSTALLER_DIR/scripts/"*.{sh,pl,py,zsh} "$HOME/.zpwr/scripts"
-cp -R "$INSTALLER_DIR/scripts/macOnly" "$HOME/.zpwr/scripts"
+cp "$INSTALLER_DIR/scripts/"*.{sh,pl,py,zsh} "$ZPWR/scripts"
+cp -R "$INSTALLER_DIR/scripts/macOnly" "$ZPWR/scripts"
 
 prettyPrint "Copying grc config files"
 cp "$INSTALLER_DIR/grc.zsh" "$HOME"
@@ -133,5 +137,5 @@ fi
 
 #add aliases and functions
 prettyPrint "Adding common shell aliases for Bash and Zsh"
-cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$ZPWR_HIDDEN_DIR"
+cp "$INSTALLER_DIR/.shell_aliases_functions.sh" "$ZPWR"
 
