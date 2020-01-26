@@ -2895,6 +2895,6 @@ function zpwrTags(){
 
 #{{{                    MARK:Finish
 #**************************************************************
-#source .token.sh to override with user functions
+#source .tokens.sh to override with user functions
 test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
 #}}}***********************************************************
