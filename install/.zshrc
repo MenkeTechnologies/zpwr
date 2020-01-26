@@ -113,8 +113,8 @@ export ZPWR_TABSTOP=__________
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 # the base dir for zpwr configs
-export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
-export ZPWR="$ZPWR_HIDDEN_DIR"
+export ZPWR="$HOME/.zpwr"
+export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_TMUX="$ZPWR_HIDDEN_DIR/.tmux"
 # the base dir for zpwr temp
 export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
@@ -146,9 +146,9 @@ export ZPWR_CD_AUTO_LS=true
 # cache file for all zpwr env lookups
 export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
 # forked powerlevel9k config file for PROMPT
-export ZPWR_PROMPT_FILE="$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh"
+export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
-export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
+export ZPWR_SCRIPTS="$ZPWR/scripts"
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
@@ -347,7 +347,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 #has all aliases and functions common to bourne like shells
-_alias_file="$ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh"
+_alias_file="$ZPWR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$ZPWR_HIDDEN_DIR/.common_aliases"
 
