@@ -1688,13 +1688,13 @@ zstyle ':completion:*' ignored-patterns '*.'
 #{{{                    MARK:Global Aliases
 #**************************************************************
 function globalAliasesInit(){
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command grep -v -E '\bag\b' |& \\ag --color -i"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command grep -v -E '\bag\b' |& \\ag --color -i --"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$ZPWR_LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}e="|& command grep -v -E '\bgrep\b' |& command grep --color=always -i -E"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}e="|& command grep -v -E '\bgrep\b' |& command grep --color=always -i -E --"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}l='| less -rMN'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}lo='"$ZPWR_LOGFILE"'

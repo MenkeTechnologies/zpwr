@@ -2356,6 +2356,8 @@ if [[ $ZPWR_LEARN != false ]]; then
         se | tac | fzf --ansi
     }
 
+    alias es=se
+
     function se(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
