@@ -69,7 +69,7 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 #**************************************************************
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file
-# override in ~/.zpwr/local/.tokens.sh
+# override in ~/.zpwr/local/.tokens.sh, ~/.zpwr/local is git ignored
 # see README.md
 # set to POWERLEVEL to use the powerlevel9k prompt
 export ZPWR_PROMPT=POWERLEVEL
@@ -117,7 +117,7 @@ export ZPWR="$HOME/.zpwr"
 export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_TMUX="$ZPWR_HIDDEN_DIR/.tmux"
 # the base dir for zpwr temp
-export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 # the path to a lock file (semaphore) for zpwr
 export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
 # for alternating pretty printer
