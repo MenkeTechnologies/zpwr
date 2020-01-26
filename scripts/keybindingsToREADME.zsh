@@ -34,26 +34,26 @@ fi
     bindkey -M viopp -L
 
     printf "# Vim Keybindings Insert Mode (:imap)"
-    vim -e -c 'redir! > ~/.zpwr/.temp/.temp1 | silent imap | redir END | quitall'
-    cat ~/.zpwr/.temp/.temp1
+    vim -e -c 'redir! > ~/.zpwr/local/.temp/.temp1 | silent imap | redir END | quitall'
+    cat ~/.zpwr/local/.temp/.temp1
     echo
 
     printf "# Vim Keybindings Normal Mode (:nmap)"
-    vim -e -c 'redir! > ~/.zpwr/.temp/.temp2 | silent nmap | redir END | quitall'
-    cat ~/.zpwr/.temp/.temp2
+    vim -e -c 'redir! > ~/.zpwr/local/.temp/.temp2 | silent nmap | redir END | quitall'
+    cat ~/.zpwr/local/.temp/.temp2
     echo
 
     printf "# Vim Keybindings Visual Mode (:vmap)"
-    vim -e -c 'redir! > ~/.zpwr/.temp/.temp3 | silent vmap | redir END | quitall'
-    cat ~/.zpwr/.temp/.temp3
+    vim -e -c 'redir! > ~/.zpwr/local/.temp/.temp3 | silent vmap | redir END | quitall'
+    cat ~/.zpwr/local/.temp/.temp3
     echo
 
     printf "# Vim Keybindings Command Colon Mode (:cmap)"
-    vim -e -c 'redir! > ~/.zpwr/.temp/.temp4 | silent cmap | redir END | quitall'
-    cat ~/.zpwr/.temp/.temp4
+    vim -e -c 'redir! > ~/.zpwr/local/.temp/.temp4 | silent cmap | redir END | quitall'
+    cat ~/.zpwr/local/.temp/.temp4
     echo
 
-    command rm ~/.zpwr/.temp/.temp{1..4}
+    command rm ~/.zpwr/local/.temp/.temp{1..4}
 
 } | escapeRemover.pl | perl -ne 'print if m{\S+}' > "$ZPWR_TEMPFILE"
 
