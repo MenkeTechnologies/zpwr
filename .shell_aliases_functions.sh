@@ -1691,15 +1691,13 @@ fi
 
 function zpz(){
     local dirsc forked
-    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
-    forked="$FORKED_DIR/$ZPWR_REPO_NAME"
+    dirsc="$ZPWR"
 
     if [[ -d "$dirsc" ]]; then
-        cd "$dirsc"; gitCheckoutRebasePush
-    elif [[ -d "$forked" ]]; then
-        cd "$forked"; gitCheckoutRebasePush
+        cd "$dirsc"
+        gitCheckoutRebasePush
     else
-        loggErr "$dirsc and $forked do not exist"
+        loggErr "$dirsc does not exist"
     fi
 }
 function zr(){
