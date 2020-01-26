@@ -47,16 +47,16 @@ function chooseNvimVim(){
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         exists nvim && {
             alias v='nvim'
-           alias vi='nvim'
+            alias vi='nvim'
             alias vim='nvim'
-            alias vm="nvim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
+            alias vm="nvim -v -u $ZPWR/.minvimrc"
             alias sv='sudo -E nvim'
         }
     else
         exists vim && {
             alias v=vim
             alias vi=vim
-            alias vm="vim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
+            alias vm="vim -v -u $ZPWR/.minvimrc"
             alias sv='sudo -E vim'
         }
     fi
@@ -66,7 +66,7 @@ function chooseNvimVim(){
 
 #{{{                    MARK:ZPWR ENV VARS
 #**************************************************************
-test -z "$ZPWR_HIDDEN_DIR" && export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
+test -z "$ZPWR_HIDDEN_DIR" && export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 test -z "$ZPWR_OS_TYPE" && export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 test -z "$ZPWR_DELIMITER_CHAR" && export ZPWR_DELIMITER_CHAR='%'
 test -z "$ZPWR_GITHUB_ACCOUNT" && export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
@@ -84,7 +84,7 @@ test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
 export ZPWR_ALL_GIT_DIRS="$ZPWR_HIDDEN_DIR/zpwrGitDirs.txt"
 export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/zpwrLog.txt"
 
-test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
+test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 
 if [[ $ZPWR_EXA_EXTENDED == true ]]; then
     export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
@@ -1683,11 +1683,7 @@ function zp(){
     fi
 }
 
-if [[ -d "$ZPWR_SCRIPTS/$ZPWR_REPO_NAME" ]]; then
-    export ZPWR_REPO="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
-elif [[ -d "$FORKED_DIR/$ZPWR_REPO_NAME" ]];then
-    export ZPWR_REPO="$FORKED_DIR/$ZPWR_REPO_NAME"
-fi
+export ZPWR_REPO="$HOME/.$ZPWR_REPO_NAME"
 
 if [[ -d "$FORKED_DIR" ]]; then
     alias fp="cd $FORKED_DIR"
