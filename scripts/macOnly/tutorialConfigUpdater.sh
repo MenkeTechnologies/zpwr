@@ -57,7 +57,7 @@ for dir in "$HOME/.oh-my-zsh/custom/plugins/"*; do
         continue;
     fi
         
-    bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR/_INSTALL.zshplugins"
+    bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR_INSTALL/.zshplugins"
 done
 
 git add .
