@@ -2729,9 +2729,34 @@ timer() {
     command rm "$ZPWR_TEMPFILE"
 }
 
-changeGitEmail(){
+changeGitCommitterEmail(){
     if [[ -z "$2" ]]; then
-        loggErr "need two args" && return 1
+        loggErr "need two args <oldEmail> <newEmail>"
+        return 1
+    fi
+
+    if ! isGitDir; then
+        loggErr "not a git dir"
+        return 1
+    fi
+
+    oldEmail="$1"
+    newEmail="$2"
+    
+    prettyPrint "change committer $oldEmail to $newEmail"
+
+    git filter-branch --commit-filter '
+    if [ "$GIT_COMMITTER_EMAIL" = "'$oldEmail'" ]; then
+        GIT_COMMITTER_EMAIL="'$newEmail'"; git commit-tree "$@";
+    else
+        git commit-tree "$@";
+    fi' HEAD
+}
+
+changeGitAuthorEmail(){
+    if [[ -z "$2" ]]; then
+        loggErr "need two args <oldEmail> <newEmail>"
+        return 1
     fi
 
     if ! isGitDir; then
@@ -2742,6 +2767,8 @@ changeGitEmail(){
     oldEmail="$1"
     newEmail="$2"
 
+    prettyPrint "change author $oldEmail to $newEmail"
+
     git filter-branch --commit-filter '
     if [ "$GIT_AUTHOR_EMAIL" = "'$oldEmail'" ]; then
         GIT_AUTHOR_EMAIL="'$newEmail'"; git commit-tree "$@";
@@ -2750,6 +2777,37 @@ changeGitEmail(){
     fi' HEAD
 }
 
+changeGitEmail(){
+
+
+    if [[ -z "$3" ]]; then
+        loggErr "need three args <oldEmail> <newName> <newEmail>"
+        return 1
+    fi
+
+    if ! isGitDir; then
+        loggErr "not a git dir"
+        return 1
+    fi
+
+
+    git filter-branch --env-filter '
+    OLD_EMAIL="'$1'"
+    CORRECT_NAME="'$2'"
+    CORRECT_EMAIL="'$3'"
+    if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
+    then
+        export GIT_COMMITTER_NAME="$CORRECT_NAME"
+        export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+    fi
+    if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
+    then
+        export GIT_AUTHOR_NAME="$CORRECT_NAME"
+        export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
+    fi
+    ' --tag-name-filter cat -- --branches --tags
+
+}
 
 
 #}}}***********************************************************

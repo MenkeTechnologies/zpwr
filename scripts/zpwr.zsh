@@ -65,6 +65,12 @@ case $verb in
         ;;
     ghcontribcount) cmd="cgh" #count of github contribs in last year
         ;;
+    gitemail) cmd="changeGitEmail" #change email with git filter-brancch
+        ;;
+    gitcemail) cmd="changeGitCommiterEmail" #change committer email with git filter-brancch
+        ;;
+    gitaemail) cmd="changeGitAuthorEmail" #change author email with git filter-brancch
+        ;;
     gitcommit) cmd="gitCommitAndPush" #commit and push with arg message
         ;;
     gitcommits) cmd="commits" #search git commits with fzf
