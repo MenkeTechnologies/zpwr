@@ -264,7 +264,7 @@ export ZPWR_AUTO_ATTACH=true
 # exa command invoked from clearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # uses the zprof function to profile startup
-export ZPWR_PROFILING=alse
+export ZPWR_PROFILING=false
 # turns on debugging logs using logg function
 export ZPWR_DEBUG=false
 # turns on set -x
@@ -287,11 +287,11 @@ export ZPWR_TABSTOP=__________
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 # the base dir for zpwr configs
-export ZPWR_HIDDEN_DIR="$HOME/.zpwr"
-export ZPWR="$ZPWR_HIDDEN_DIR"
+export ZPWR="$HOME/.zpwr"
+export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_TMUX="$ZPWR_HIDDEN_DIR/.tmux"
 # the base dir for zpwr temp
-export ZPWR_HIDDEN_DIR_TEMP="$HOME/.zpwr/.temp"
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 # the path to a lock file (semaphore) for zpwr
 export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
 # for alternating pretty printer
@@ -320,9 +320,9 @@ export ZPWR_CD_AUTO_LS=true
 # cache file for all zpwr env lookups
 export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
 # forked powerlevel9k config file for PROMPT
-export ZPWR_PROMPT_FILE="$ZPWR_HIDDEN_DIR/.powerlevel9kconfig.sh"
+export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
-export ZPWR_SCRIPTS="$ZPWR_HIDDEN_DIR/scripts"
+export ZPWR_SCRIPTS="$ZPWR/scripts"
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
