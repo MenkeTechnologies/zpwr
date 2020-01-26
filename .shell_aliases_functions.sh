@@ -2515,7 +2515,7 @@ function regenTags(){
     (
     builtin cd "$ZPWR_SCRIPTS"
     command rm tags 2>/dev/null
-    ctags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR_HIDDEN_DIR/".*.sh
+    ctags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR/".*.sh
     ctags --append --fields=+l "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS/macOnly/"*
     command cp tags "$HOME"
     )
