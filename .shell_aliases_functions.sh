@@ -29,7 +29,7 @@ isZsh(){
 }
 
 if isZsh; then
-    exists(){
+    function exists(){
         #alternative is command -v
         type -- "$1" &>/dev/null || return 1 &&
         type -- "$1" 2>/dev/null |
@@ -37,7 +37,7 @@ if isZsh; then
     }
 
 else
-    exists(){
+    function exists(){
         #alternative is command -v
         type -- "$1" >/dev/null 2>&1
     }
@@ -482,7 +482,7 @@ exists idea && {
 #{{{                    MARK:Shell functions
 #**************************************************************
 
-r(){
+function r(){
     local cdstr
     if [[ -z $1 ]]; then
         cd ..
@@ -496,11 +496,11 @@ r(){
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
-    exe(){
+    function exe(){
         python3 "$PYSCRIPTS/ssh_runner.py" "$@"
     }
 
-    nn(){
+    function nn(){
         if [[ -z "$2" ]];then
             loggErr "Title is \$1 and message is \$2..." &&
             return 1
@@ -511,15 +511,15 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
             osascript
     }
 
-    db(){
+    function db(){
         python3 "$PYSCRIPTS/loginDBChrome.py"
     }
 
-    db2(){
+    function db2(){
         python3 "$PYSCRIPTS/logIntoMyDB.py"
     }
 
-    scriptToPDF(){
+    function scriptToPDF(){
         tempFile="$HOME/__test.ps"
         vim "$1" -c "hardcopy > $tempFile" -c quitall
         cat "$tempFile" | open -fa Preview
@@ -528,7 +528,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
 else
     exists ps2pdf && {
-        scriptToPDF(){
+        function scriptToPDF(){
             if [[ -z "$1" ]]; then
                 loggErr "need an arg"
                 return 1
@@ -540,7 +540,7 @@ else
         }
     }
 
-    ssd() {
+    function ssd() {
         for service in "$@"; do
             prettyPrint "sudo systemctl stop $service"
             prettyPrint "sudo systemctl disable $service"
@@ -549,7 +549,7 @@ else
         done
     }
 
-    ssu() {
+    function ssu() {
         for service in "$@"; do
             prettyPrint "sudo systemctl start $service"
             prettyPrint "sudo systemctl enable $service"
@@ -559,7 +559,7 @@ else
     }
 
 
-    tailufw(){
+    function tailufw(){
         size=100
         if [[ -n $1 ]]; then
             size=$1
@@ -573,7 +573,7 @@ else
         fi
     }
 
-    restartZabbixAgent(){
+    function restartZabbixAgent(){
         if exists ccze; then
         sudo systemctl restart zabbix-agent
         sudo systemctl --no-pager status zabbix-agent
@@ -587,7 +587,7 @@ else
         fi
     }
 
-    restart(){
+    function restart(){
         service="$1"
         local src_dir
         src_dir="$FORKED_DIR/$ZPWR_REPO_NAME"
@@ -619,7 +619,7 @@ else
 
 fi
 
-cloneToForked(){
+function cloneToForked(){
     branch=master
     (
         if [[ -z "$1" ]]; then
@@ -632,7 +632,7 @@ cloneToForked(){
     )
 }
 
-s(){
+function s(){
 
     if exists subl; then
         cmd=subl
@@ -667,7 +667,7 @@ s(){
     fi
 }
 
-loggErr(){
+function loggErr(){
     test -z "$1" && loggErr "need arg" >&2 && return 1
     {
         printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ERROR: "
@@ -677,7 +677,7 @@ loggErr(){
     } >&2
 }
 
-logg(){
+function logg(){
 
     if [[ $ZPWR_COLORS == true ]]; then
         if [[ -p /dev/stdin ]]; then
@@ -719,13 +719,13 @@ logg(){
 
 }
 
-loggDebug(){
+function loggDebug(){
     if [[ $ZPWR_DEBUG == true ]]; then
        logg "$@" 
     fi
 }
 
-xx(){
+function xx(){
     local counter cmd DONE
     
     cmd="$1"
@@ -740,18 +740,17 @@ xx(){
     trap QUIT
 }
 
-urlSafe(){
-    
+function urlSafe(){
     cat | base64 | tr '+/=' '._-'
 }
 
-cgh(){
+function cgh(){
     [[ -z "$1" ]] && user="$ZPWR_GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/$user" |
     command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
 }
 
-upload(){
+function upload(){
     if [[ -z "$2" ]]; then
         loggErr "upload <file> <URL>"
         return 1
@@ -759,7 +758,7 @@ upload(){
     command curl -vvv -fsSL -F file=@"$1" http://"$2"
 }
 
-jd(){
+function jd(){
     for dir;do
         command mkdir -p "$dir"
     done
@@ -773,7 +772,7 @@ function j(){
     done
 }
 
-scnew(){
+function scnew(){
 
     if [[ -z "$1" ]]; then
         loggErr "need an arg"
@@ -783,7 +782,7 @@ scnew(){
     bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
 }
 
-p(){
+function p(){
     if [[ "$ZPWR_OS_TYPE" == linux || "$ZPWR_OS_TYPE" == darwin ]]; then
         [[ -z $1 ]] && ps -ef && return 0
         out="$(ps -ef)"
@@ -801,7 +800,7 @@ p(){
     done
 }
 
-b(){
+function b(){
     if [[ $1 == -s ]]; then
         sleepTime=$2
         shift 2
@@ -818,13 +817,13 @@ b(){
     done
 }
 
-suc(){
+function suc(){
     subl "$ZPWR_SCRIPTS"
     f "$ZPWR_SCRIPTS"
     python3 "$PYSCRIPTS/textEditorTwoColumns.py"
 }
 
-allRemotes(){
+function allRemotes(){
     while read; do
         printf "\x1b[1;34m$REPLY"
         printf "\x1b[0m\x0a"
@@ -832,7 +831,7 @@ allRemotes(){
     done < <(git remote)
 }
 
-largestGitFiles(){
+function largestGitFiles(){
     if ! isGitDir; then
         loggErr "not a git dir"
         return 1
@@ -854,7 +853,7 @@ largestGitFiles(){
     done < <(echo $obj | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
 }
 
-clearGitCommit(){
+function clearGitCommit(){
     if ! isGitDir; then
         loggErr "not a git dir"
         return 1
@@ -878,7 +877,7 @@ clearGitCommit(){
     fi'  HEAD
 }
 
-clearGitCache(){
+function clearGitCache(){
     if ! isGitDir; then
         loggErr "not a git dir"
         return 1
@@ -889,7 +888,7 @@ clearGitCache(){
     git gc --prune=now
 }
 
-about(){
+function about(){
     old="$LESS"
     unset LESS
     if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
@@ -898,7 +897,7 @@ about(){
     export LESS="$old"
 }
 
-clearList() {
+function clearList() {
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists exa;then
             ls_command="$ZPWR_EXA_COMMAND"
@@ -1013,7 +1012,7 @@ clearList() {
     fi
 }
 
-listNoClear () {
+function listNoClear () {
     exists exa && eval "$ZPWR_EXA_COMMAND" && return 0
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
@@ -1033,17 +1032,17 @@ listNoClear () {
     fi
 }
 
-animate(){
+function animate(){
     bash "$ZPWR_SCRIPTS/animation"
 }
 
-blocksToSize(){
+function blocksToSize(){
     read input
     local bytes=$(( input * 512 ))
     echo $bytes | humanreadable
 }
 
-humanReadable(){
+function humanReadable(){
     awk 'function human(x) {
         s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"
         while (x>=1024 && length(s)>1){
@@ -1056,7 +1055,7 @@ humanReadable(){
     {gsub(/^[0-9]+/, human($1));print}'
 }
 
-f(){
+function f(){
     if [[ -f "$1" ]]; then
         cd "$(dirname "$1")"
     elif [[ -d "$1" ]];then
@@ -1075,7 +1074,7 @@ f(){
 }
 alias fh='f !$'
 
-execpy(){ 
+function execpy(){
 
     if [[ -z "$1" ]]; then
         loggErr "need an arg"
@@ -1088,12 +1087,12 @@ execpy(){
 
 }
 
-search(){
+function search(){
     test -z $2 && command grep -iRnC 5 "$1" * ||
         command grep -iRnC 5 "$1" "$2"
 }
 
-cd(){
+function cd(){
     #builtin is necessary here to distinguish
     #bt function name and builtin cd command
     #don't want to recursively call this function
@@ -1102,11 +1101,11 @@ cd(){
         clearList
     fi
 }
-isGitDir(){
+function isGitDir(){
     command git rev-parse --git-dir 2> /dev/null 1>&2
 }
 
-isGitDirMessage(){
+function isGitDirMessage(){
     if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
         printf "\x1b[0;1;31m"
         loggErr "NOT GIT DIR: $(pwd -P)"
@@ -1115,7 +1114,7 @@ isGitDirMessage(){
     fi
 }
 
-gil(){
+function gil(){
     if ! isGitDir; then
        loggErr "not in a git dir."
        return 1
@@ -1132,7 +1131,7 @@ gil(){
     
 }
 
-contribCountDirs(){
+function contribCountDirs(){
 
     if [[ -z "$2" ]]; then
        loggErr "user regex is \$1 and dirs are \$@" 
@@ -1168,7 +1167,7 @@ contribCountDirs(){
 
 }
 
-contribCount(){
+function contribCount(){
 
     if ! isGitDir; then
        loggErr "not in a git dir."
@@ -1187,11 +1186,11 @@ contribCount(){
     fi
 }
 
-isBinary() {
+function isBinary() {
   LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -sq '^Binary'
 }
 
-totalLines(){
+function totalLines(){
 
     if ! isGitDir; then
        loggErr "not in a git dir."
@@ -1239,7 +1238,7 @@ totalLines(){
     command rm "$ZPWR_TEMPFILE"
 }
 
-contribCountLines(){
+function contribCountLines(){
 
     if ! isGitDir; then
        loggErr "not in a git dir."
@@ -1287,7 +1286,7 @@ contribCountLines(){
 
 }
 
-gsdc(){
+function gsdc(){
     if ! isGitDir; then
        loggErr "not in a git dir."
        return 1
@@ -1336,7 +1335,7 @@ gsdc(){
 
 }
 
-gitCommitAndPush(){
+function gitCommitAndPush(){
     if ! isGitDir; then
        loggErr "not in a git dir."
        return 1
@@ -1357,7 +1356,7 @@ gitCommitAndPush(){
     git push
 }
 
-replacer(){
+function replacer(){
 
     if [[ -z "$2" ]]; then
         loggErr "need two args"
@@ -1377,7 +1376,7 @@ replacer(){
     fi
 }
 
-creategif(){
+function creategif(){
     outFile=out.gif
     res=600x400
 
@@ -1394,7 +1393,7 @@ creategif(){
     gifsicle --optimize=3 --delay=3 > "$outFile"
 }
 
-hc(){
+function hc(){
     test -z "$1" && reponame="$(basename "$(pwd)")" ||
         reponame="$1"
     printf "\e[1m"
@@ -1412,7 +1411,7 @@ hc(){
     printf "\e[0m"
 }
 
-hd(){
+function hd(){
     test -n "$1" && repo="$1" && user="$ZPWR_GITHUB_ACCOUNT" || {
 		if line="$(git remote -v 2>/dev/null | sed 1q)";then
             if echo "$line" | command grep -sq 'git@';then
@@ -1448,12 +1447,12 @@ hd(){
     printf "\e[0m"
 }
 
-pstreemonitor(){
+function pstreemonitor(){
     bash $ZPWR_SCRIPTS/myWatchNoBlink.sh \
     "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
 }
 
-return2(){
+function return2(){
     if isZsh; then
         exec 2> /dev/tty
     else
@@ -1462,7 +1461,7 @@ return2(){
     fi
 }
 
-color2(){
+function color2(){
     if isZsh; then
         exec 2> >(redText.sh)
     else
@@ -1471,13 +1470,13 @@ color2(){
     fi
 }
 
-escapeRemove(){
+function escapeRemove(){
     while read; do
         echo "$REPLY" | sed -e 's@\e\[.\{1,5\}m@@g'
     done
 }
 
-prettyPrint(){
+function prettyPrint(){
     if [[ -n "$1" ]];then
         printf "\x1b[1m"
         printf "%s " "$@"
@@ -1488,7 +1487,7 @@ prettyPrint(){
     fi
 }
 
-alternatingPrettyPrint(){
+function alternatingPrettyPrint(){
     local counter
     counter=0
 
@@ -1517,11 +1516,11 @@ alternatingPrettyPrint(){
     fi
 }
 
-tac(){
+function tac(){
     sed '1!G;h;$!d' "$@"
 }
 
-backup(){
+function backup(){
 
     if [[ -z "$1" ]]; then
         loggErr "need an arg"
@@ -1535,9 +1534,7 @@ backup(){
         "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
 }
 
-alias gcl >/dev/null 2>&1 && unalias gcl
-
-gcl() {
+function gcl() {
     if [[ -z "$1" ]]; then
         loggErr "need an arg"
         return 1
@@ -1549,7 +1546,7 @@ gcl() {
     cd "$dir_name"
 }
 
-ino(){
+function ino(){
 
     if [[ -z "$1" ]]; then
         loggErr "need an arg"
@@ -1609,7 +1606,7 @@ EOF
 
 }
 
-jetbrainsWorkspaceEdit(){
+function jetbrainsWorkspaceEdit(){
     perl -E 'say "_"x100'
     prettyPrint "MONITORING WORKSPACE..."
     perl -E 'say "_"x100'
@@ -1629,8 +1626,7 @@ jetbrainsWorkspaceEdit(){
     done
 }
 
-unalias o &>/dev/null
-o(){
+function o(){
     open_cmd="$ZPWR_OPEN_CMD" || return 1
 
     if isZsh; then
@@ -1649,7 +1645,7 @@ o(){
 
 }
 
-openmygh(){
+function openmygh(){
     open_cmd="$ZPWR_OPEN_CMD" || return 1
 
     if isZsh; then
@@ -1671,7 +1667,7 @@ alias gh=openmygh
 
 eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
 
-zpwr(){
+function zpwr(){
     if test -z $1;then
         openmygh "$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME"
     else
@@ -1679,7 +1675,7 @@ zpwr(){
     fi
 }
 
-zp(){
+function zp(){
     if test -z $1;then
         cd "$ZPWR_REPO"
     else
@@ -1697,7 +1693,7 @@ if [[ -d "$FORKED_DIR" ]]; then
     alias fp="cd $FORKED_DIR"
 fi
 
-zpz(){
+function zpz(){
     local dirsc forked
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
@@ -1710,7 +1706,7 @@ zpz(){
         loggErr "$dirsc and $forked do not exist"
     fi
 }
-zr(){
+function zr(){
     local dirsc forked
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
@@ -1725,7 +1721,7 @@ zr(){
 }
 
 # copy over latest configuration files from $ZPWR_REPO_NAME
-copyConf(){
+function copyConf(){
     if [[ ! -f '.shell_aliases_functions.sh' ]]; then
        loggErr "had to cd to $ZPWR_REPO"
        builtin cd "$ZPWR_REPO"
@@ -1756,7 +1752,7 @@ copyConf(){
 }
 
 # pull down latest configuration files from $ZPWR_REPO_NAME
-getrc(){
+function getrc(){
     if [[ -z "$1" ]]; then
         branch=master
     else
@@ -1804,11 +1800,11 @@ getrc(){
 
 }
 
-getrcdev(){
+function getrcdev(){
     getrc dev
 }
 
-rename(){
+function rename(){
 
     if [[ -z "$1" ]]; then
         loggErr "need an arg"
@@ -1827,32 +1823,32 @@ rename(){
     done
 }
 
-torip(){
+function torip(){
     ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
     whois $ip
     echo $ip
 }
 
-toriprenew() {
+function toriprenew() {
     printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' |
         nc 127.0.0.1 9051
 }
 
-mycurl(){
+function mycurl(){
     command curl -fsSL -A \
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 |
     command sed "/^*/d" | sed -E "s@(<|>) @@g" |
     sed -E "/^(\{|\}| ) (\[|C)/d"
 }
 
-perlremovespaces(){
+function perlremovespaces(){
     for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
         perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
     done
 }
 
-pirun(){
+function pirun(){
     trap 'DONE=true' QUIT
     local DONE
     DONE=false
@@ -1874,7 +1870,7 @@ pirun(){
     trap QUIT
 }
 
-digs(){
+function digs(){
 
     if [[ -z "$1" ]]; then
         loggErr "need an arg"
@@ -2081,7 +2077,7 @@ digs(){
     fi
 }
 
-to(){
+function to(){
     file="$HOME/.config/powerline/themes/tmux/default.json"
     [[ ! -f "$file" ]] && loggErr "no tmux config" && return 1
     if cat "$file" | grep -sq "external_ip"; then
@@ -2093,7 +2089,7 @@ to(){
     fi
 }
 
-ww(){
+function ww(){
     if [[ -z "$1" ]]; then
        loggErr "ww <cmd> to run <cmd> forever" 
        return 1
@@ -2103,7 +2099,7 @@ ww(){
     done
 }
 
-www(){
+function www(){
     if [[ -z "$2" ]]; then
        loggErr "www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
        return 1
@@ -2116,7 +2112,7 @@ www(){
     done
 }
 
-ff(){
+function ff(){
     if [[ -z "$1" ]]; then
        loggErr "ff <cmd> to run <cmd> 10 times" 
        return 1
@@ -2128,7 +2124,7 @@ ff(){
     fi
 }
 
-fff(){
+function fff(){
     if [[ -z "$2" ]]; then
        loggErr "fff <iter> <cmd> to run <cmd> <iter> times" 
        return 1
@@ -2140,7 +2136,7 @@ fff(){
     done
 }
 
-post(){
+function post(){
     if [[ -z "$2" ]]; then
         loggErr "need two args"
         return 1
@@ -2151,7 +2147,7 @@ post(){
     echo "$out" | perl -lnE "say \"\$_ $postfix\""
 }
 
-pre(){
+function pre(){
     if [[ -z "$2" ]]; then
         loggErr "need two args"
         return 1
@@ -2162,7 +2158,7 @@ pre(){
     echo "$out" | perl -lnE "say \"$prefix \$_\""
 }
 
-exists pssh && pir(){
+exists pssh && function pir(){
     if ! test -s "$ZPWR_HIDDEN_DIR/hosts.txt"; then
         loggErr "you need hosts.txt in your $ZPWR_HIDDEN_DIR"
         return 1
@@ -2213,7 +2209,7 @@ function c(){
     fi
 }
 
-exists http && ge(){
+exists http && function ge(){
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"
@@ -2249,7 +2245,7 @@ exists http && ge(){
     fi 2>&1 | less
 }
 
-fz(){
+function fz(){
     if test -z "$1";then
         command ag '^.*$' --hidden --ignore .git --color 2>/dev/null | fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER_FZF"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"' \
         2>/dev/null | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | cut -d ':' -f1 | perl -pe 's@^(.*)\n$@"$1" @'
@@ -2259,7 +2255,7 @@ fz(){
     fi
 }
 
-figletfonts(){
+function figletfonts(){
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
@@ -2299,7 +2295,7 @@ figletfonts(){
     fi
 }
 
-pygmentcolors(){
+function pygmentcolors(){
     dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"
     for i in "$dir/pygments/styles/"* ; do
         echo "$i"
@@ -2307,13 +2303,13 @@ pygmentcolors(){
 }
 
 alias da=detachall
-detachall(){
+function detachall(){
     tmux list-clients | tr -d : |
         perl -ane '`tmux detach-client -t $F[0]`'
 }
 
 
-scripts(){
+function scripts(){
     (
         {
             gvim -S ~/.vim/sessions/gvim.vim &> /dev/null
@@ -2327,7 +2323,7 @@ if [[ $ZPWR_LEARN != false ]]; then
     export ZPWR_SCHEMA_NAME=root
     export ZPWR_TABLE_NAME=LearningCollection
 
-    le(){
+    function le(){
         test -z "$1" && return 1
         category="programming"
         learning="$(printf -- '%s' "$1" | sed 's@^[[:space:]]*@@;s@[[:space:]]*$@@')"
@@ -2339,7 +2335,7 @@ if [[ $ZPWR_LEARN != false ]]; then
     }
 
 
-    seee(){
+    function seee(){
         if test -z "$1"; then
             echo "select id, dateAdded,learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql 2>> $ZPWR_LOGFILE | cat -n
         else
@@ -2347,7 +2343,7 @@ if [[ $ZPWR_LEARN != false ]]; then
         fi
     }
 
-    ser(){
+    function ser(){
         local num=100
         if [[ -n "$1" ]]; then
             num=$1
@@ -2356,11 +2352,11 @@ if [[ $ZPWR_LEARN != false ]]; then
         se | shuf -n $num
     }
 
-    sef(){
+    function sef(){
         se | tac | fzf --ansi
     }
 
-    se(){
+    function se(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
                 echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
@@ -2393,11 +2389,11 @@ if [[ $ZPWR_LEARN != false ]]; then
         fi
 
     }
-    qu(){
+    function qu(){
         ser | fzf -m --ansi
     }
 
-    see(){
+    function see(){
         if test -z "$1"; then
             if [[ "$ZPWR_COLORS" = true ]]; then
                 echo "select learning,category from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" |
@@ -2431,7 +2427,7 @@ if [[ $ZPWR_LEARN != false ]]; then
 
     }
 
-    createLearningCollection(){
+    function createLearningCollection(){
         alternatingPrettyPrint "Creating$ZPWR_DELIMITER_CHAR $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME$ZPWR_DELIMITER_CHAR with$ZPWR_DELIMITER_CHAR MySQL$ZPWR_DELIMITER_CHAR"
         if [[ -n "$1" ]]; then
             #use first arg as mysql password
@@ -2465,13 +2461,13 @@ if [[ $ZPWR_LEARN != false ]]; then
     }
 fi
 
-gitCheckoutRebasePush(){
+function gitCheckoutRebasePush(){
     git branch -a | head -2 | perl -ane 'if ($F[0] eq "*"){$cur=$F[1]}else{$alt=$F[0]};if ($. == 2){$cmd="git checkout $alt; git rebase $cur;git push;";print "$cmd\n"; `$cmd`}'
 }
 
 declare -A _tempAry
 
-jsonToArray(){
+function jsonToArray(){
     local json="$(cat)"
     while IFS="=" read -r key value;do
         _tempAry[$key]=$value
@@ -2488,7 +2484,7 @@ jsonToArray(){
     set +x
 }
 
-arrayToJson(){
+function arrayToJson(){
     if isZsh; then
         ary="$1"
         printf '%s\n%s\n' "${(kv)${(P)ary}[@]}" |
@@ -2503,13 +2499,13 @@ arrayToJson(){
 
 }
 
-loginCount(){
+function loginCount(){
     perl -e 'print `last -f "$_"`for</var/log/wtmp*>' |
         perl -lane 'print $F[0] if /\S+/ && !/wtmp/' |
         sort | uniq -c | sort -rn
 }
 
-needSudo(){
+function needSudo(){
     if [[ ! -w "$1" ]]; then
         return 0
     else
@@ -2517,7 +2513,7 @@ needSudo(){
     fi
 }
 
-regenTags(){
+function regenTags(){
 
     prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
     (
@@ -2530,7 +2526,7 @@ regenTags(){
 
 }
 
-regenAllKeybindingsCache(){
+function regenAllKeybindingsCache(){
     prettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
     bash "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
     escapeRemover.pl |
@@ -2541,13 +2537,13 @@ regenAllKeybindingsCache(){
         perl -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
 }
 
-searchGitCommon(){
+function searchGitCommon(){
     out="$(goThere)"
     echo "$out"
     eval "$out"
 }
 
-regenAllGitRepos(){
+function regenAllGitRepos(){
         prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
     {
         while read; do
@@ -2562,7 +2558,7 @@ regenAllGitRepos(){
     sort "$ZPWR_TEMPFILE3" | uniq > "$ZPWR_ALL_GIT_DIRS"
 }
 
-searchDirtyGitRepos(){
+function searchDirtyGitRepos(){
     goThere(){
     {
         while read; do
@@ -2588,7 +2584,7 @@ cd {} && git status -s && git diff --stat -p --color=always HEAD 2>/dev/null' |
 
 }
 
-searchAllGitRepos(){
+function searchAllGitRepos(){
 
     goThere(){
     cat "$ZPWR_ALL_GIT_DIRS" |
@@ -2606,7 +2602,7 @@ builtin cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/nul
     searchGitCommon
 }
 
-regenPowerlineLink(){
+function regenPowerlineLink(){
     dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
     if needSudo "$dir"; then
         prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
@@ -2626,7 +2622,7 @@ regenPowerlineLink(){
     command tmux source-file "$HOME/.tmux.conf"
 }
 
-goclean() {
+function goclean() {
     if [[ -z "$1" ]]; then
         loggErr "need package name"
         return 1
@@ -2664,7 +2660,7 @@ goclean() {
 }
 
 
-commits(){
+function commits(){
     if isGitDir; then
         if [[ $EDITOR = nvim ]];then
             nvim -c Commits!
@@ -2678,7 +2674,7 @@ commits(){
     fi
 }
 
-vimAll(){
+function vimAll(){
     #echo vim "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
     #"$ZPWR_HIDDEN_DIR/"*.{sh,py,zsh,pl} \
     #"$ZPWR_HIDDEN_DIR/".minvimrc \
@@ -2692,7 +2688,7 @@ vimAll(){
     "$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
 }
 
-timer() {
+function timer() {
     if [[ -z "$1" ]]; then
         loggErr "timer <commands...>"
         return 1
@@ -2729,7 +2725,7 @@ timer() {
     command rm "$ZPWR_TEMPFILE"
 }
 
-changeGitCommitterEmail(){
+function changeGitCommitterEmail(){
     if [[ -z "$2" ]]; then
         loggErr "need two args <oldEmail> <newEmail>"
         return 1
@@ -2753,7 +2749,7 @@ changeGitCommitterEmail(){
     fi' HEAD
 }
 
-changeGitAuthorEmail(){
+function changeGitAuthorEmail(){
     if [[ -z "$2" ]]; then
         loggErr "need two args <oldEmail> <newEmail>"
         return 1
@@ -2777,8 +2773,7 @@ changeGitAuthorEmail(){
     fi' HEAD
 }
 
-changeGitEmail(){
-
+function changeGitEmail(){
 
     if [[ -z "$3" ]]; then
         loggErr "need three args <oldEmail> <newName> <newEmail>"
@@ -2789,7 +2784,6 @@ changeGitEmail(){
         loggErr "not a git dir"
         return 1
     fi
-
 
     git filter-branch --env-filter '
     OLD_EMAIL="'$1'"
