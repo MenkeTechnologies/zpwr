@@ -221,6 +221,10 @@ case $verb in
         ;;
     zp) cmd="zp" #cd to \$ZPWR_REPO_NAME
         ;;
+    zpwrverbs) cmd="ZPWRVerbs" #the subcommands for zpwr <tab>
+        ;;
+    zpwrverbscount) cmd="numZPWRVerbs" #number of choice for zpwr <tab>
+        ;;
     zpz) cmd="zpz" #cd to \$ZPWR_REPO_NAME and git co, rebase and push
         ;;
     zrc) cmd="zrc" #zshrc vim session

@@ -2879,6 +2879,13 @@ function zpwrAllUpdates(){
    zpwr update
 }
 
+function ZPWRVerbs(){
+    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+)'
+}
+function numZPWRVerbs(){
+    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+)' | wc -l
+}
+
 
 ###}}}***********************************************************
 
