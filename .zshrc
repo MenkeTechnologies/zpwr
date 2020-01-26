@@ -2734,15 +2734,16 @@ function recompile(){
     prettyPrint "recompiling all configs to .zwc for speed"
     local dir
 	autoload -U zrecompile
-	[ -f ~/.zshrc ] && zrecompile -p ~/.zshrc
-	[ -f ~/.zlogout ] && zrecompile -p ~/.zlogout
-	[ -f ~/.zlogin ] && zrecompile -p ~/.zlogin
-	[ -f ~/.zcompdump ] && zrecompile -p ~/.zcompdump
-	[ -f /etc/profile ] && zrecompile -p /etc/profile
-	[ -f /etc/profile.env ] && zrecompile -p /etc/profile.env
+	test -f ~/.zshrc && zrecompile -p ~/.zshrc
+	test -f ~/.zlogout && zrecompile -p ~/.zlogout
+	test -f ~/.zlogin && zrecompile -p ~/.zlogin
+	test -f ~/.zcompdump && zrecompile -p ~/.zcompdump
+	test -f /etc/profile && zrecompile -p /etc/profile
+	test -f /etc/zshrc && zrecompile -p /etc/zshrc
+	test -f /etc/profile.env && zrecompile -p /etc/profile.env
 
 	for dir in $fpath; do
-		[[ -d $dir ]] && zrecompile -p $dir.zwc $dir/*
+		test -d $dir && zrecompile -p $dir.zwc $dir/*
 	done
 }
 
