@@ -185,11 +185,15 @@ case $verb in
         ;;
     starttabs) cmd="tmm_full" #start all tabs
         ;;
+    tags) cmd="zpwrTags" #view zpwr tags
+        ;;
     taillog) cmd="lo" #tail -F \$ZPWR_LOGFILE
         ;;
     timer) cmd="timer" #timer one or more commands
         ;;
     to) cmd="to" #toggle external ip
+        ;;
+    toggle) cmd="to" #toggle external ip
         ;;
     trc) cmd="trc" #tmux.conf vim session
         ;;
@@ -204,6 +208,10 @@ case $verb in
     urlsafe) cmd="urlSafe" #base64 encode
         ;;
     prettyprint) cmd="prettyPrint" #pretty print with color
+        ;;
+    verbs) cmd="zpwrVerbs" #the subcommands for zpwr <tab>
+        ;;
+    verbscount) cmd="numZpwrVerbs" #number of choice for zpwr <tab>
         ;;
     vimall) cmd="vimAll" #vim all zpwr files for :argdo
         ;;
@@ -221,9 +229,7 @@ case $verb in
         ;;
     zp) cmd="zp" #cd to \$ZPWR_REPO_NAME
         ;;
-    zpwrverbs) cmd="ZPWRVerbs" #the subcommands for zpwr <tab>
-        ;;
-    zpwrverbscount) cmd="numZPWRVerbs" #number of choice for zpwr <tab>
+    zpwr) cmd="zp" #cd to \$ZPWR_REPO_NAME
         ;;
     zpz) cmd="zpz" #cd to \$ZPWR_REPO_NAME and git co, rebase and push
         ;;
