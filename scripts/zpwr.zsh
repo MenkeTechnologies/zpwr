@@ -101,7 +101,7 @@ case $verb in
         ;;
     hidden) cmd="cd $ZPWR_HIDDEN_DIR" #go to zpwr \$ZPWR_HIDDEN_DIR
         ;;
-    home) cmd="cd $ZPWR_HIDDEN_DIR" #go to zpwr \$ZPWR_HIDDEN_DIR
+    home) cmd="cd $ZPWR" #go to zpwr \$ZPWR
         ;;
     hubcreate) cmd="hc" #create remote github repo
         ;;
