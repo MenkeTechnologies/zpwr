@@ -1734,7 +1734,7 @@ function copyConf(){
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
     if [[ -d "$HOME/.vim/Ultisnips" ]]; then
-        cp UltiSnips/* "$HOME/.vim/UltiSnips"
+        cp install/UltiSnips/* "$HOME/.vim/UltiSnips"
     fi
     cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux" 2>> "$ZPWR_LOGFILE"
     cp -f scripts/* "$ZPWR_SCRIPTS"  2>> "$ZPWR_LOGFILE"
@@ -1742,7 +1742,7 @@ function copyConf(){
 
     if [[ ! -f "$HOME/.ctags" ]]; then
         prettyPrint "Copying .ctags to home directory"
-        cp ".ctags" "$HOME"
+        cp "install/.ctags" "$HOME"
     fi
 
 }
