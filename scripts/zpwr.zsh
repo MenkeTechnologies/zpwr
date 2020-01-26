@@ -67,7 +67,7 @@ case $verb in
         ;;
     gitemail) cmd="changeGitEmail" #change email with git filter-brancch
         ;;
-    gitcemail) cmd="changeGitCommiterEmail" #change committer email with git filter-brancch
+    gitcemail) cmd="changeGitCommitterEmail" #change committer email with git filter-brancch
         ;;
     gitaemail) cmd="changeGitAuthorEmail" #change author email with git filter-brancch
         ;;
