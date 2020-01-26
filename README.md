@@ -243,7 +243,7 @@ These are environment variables set in `~/.zshrc` which you can override in your
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file
-# override in ~/.zpwr/.tokens.sh
+# override in ~/.zpwr/local/.tokens.sh, ~/.zpwr/local is git ignored
 # see README.md
 # set to POWERLEVEL to use the powerlevel9k prompt
 export ZPWR_PROMPT=POWERLEVEL
