@@ -30,12 +30,12 @@ ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 escapeRemover="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
 
 if ! test -f "$escapeRemover"; then
-    echo "where is $escapeRemover.pl?" >&2
+    echo "where is $escapeRemover?" >&2
     exit 1
 fi
 
 if ! test -x "$escapeRemover"; then
-    echo "why $escapeRemover.pl not exe?" >&2
+    echo "why $escapeRemover not exe?" >&2
     exit 1
 fi
 
