@@ -24,8 +24,8 @@ if ! source common.sh; then
     exit 1
 fi
 
-logfile="$INSTALLER_DIR/escaped_logfile.txt"
-logfileCargoYCM="$INSTALLER_DIR/cargoYCM_logfile.txt"
+logfile="$INSTALLER_DIR/local/escaped_logfile.txt"
+logfileCargoYCM="$INSTALLER_DIR/local/cargoYCM_logfile.txt"
 
 #the destination directory for zpwr specific installed files
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
