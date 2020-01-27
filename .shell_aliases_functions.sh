@@ -590,7 +590,7 @@ else
     function restart(){
         service="$1"
         local src_dir
-        src_dir="$FORKED_DIR/$ZPWR_REPO_NAME"
+        src_dir="$ZPWR_INSTALL"
         local service_path="$src_dir/$service.service"
         test -d "$src_dir" ||
             { loggErr "$src_dir does not exists." && return 1; }
@@ -602,8 +602,19 @@ else
 
         test -d "/etc/systemd/system" ||
             { loggErr "/etc/systemd/system does not exists. Is systemd installed?" && return 1; }
-            ( cd "$src_dir" && git pull; )
+
+        ( cd "$src_dir" && git pull; )
         group=$(id -gn)
+
+        cp "$service_path" "$ZPWR_LOCAL"
+
+        service_path="$ZPWR_LOCAL/$service.service"
+
+        if ! test -f "$service_path"; then
+            loggErr "$service_path does not exists"
+            return 1
+        fi
+
         if [[ $UID != 0 ]]; then
             perl -i -pe "s@pi@$USER@g" "$service_path"
             perl -i -pe "s@^Group=.*@Group=$group@g" "$service_path"

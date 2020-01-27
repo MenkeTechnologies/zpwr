@@ -116,6 +116,7 @@ export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 export ZPWR="$HOME/.zpwr"
 export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_INSTALL="$ZPWR/install"
 export ZPWR_TMUX="$ZPWR/.tmux"
 # the base dir for zpwr temp
 export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
