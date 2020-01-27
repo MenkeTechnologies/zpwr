@@ -7,10 +7,22 @@
 ##### Notes:
 #}}}***********************************************************
 
+
 if [[ -z "$ZPWR_TEMPFILE" ]]; then
     ZPWR_TEMPFILE="/tmp/.temp$$"
 fi
-
+if [[ -z "$ZPWR_TEMPFILE1" ]]; then
+    ZPWR_TEMPFILE1="/tmp/.temp$$-1"
+fi
+if [[ -z "$ZPWR_TEMPFILE2" ]]; then
+    ZPWR_TEMPFILE2="/tmp/.temp$$-2"
+fi
+if [[ -z "$ZPWR_TEMPFILE3" ]]; then
+    ZPWR_TEMPFILE3="/tmp/.temp$$-3"
+fi
+if [[ -z "$ZPWR_TEMPFILE4" ]]; then
+    ZPWR_TEMPFILE4="/tmp/.temp$$-4"
+fi
 {
     echo "# Tmux keybindings (tmux lsk)"
     tmux lsk
@@ -34,32 +46,35 @@ fi
     bindkey -M viopp -L
 
     printf "# Vim Keybindings Insert Mode (:imap)"
-    vim -e -c 'redir! > ~/.zpwr/local/.temp/.temp1 | silent imap | redir END | quitall'
-    cat ~/.zpwr/local/.temp/.temp1
+    vim -e -c 'redir! > '$ZPWR_TEMPFILE1' | silent imap | redir END | quitall'
+    cat "$ZPWR_TEMPFILE1"
     echo
 
     printf "# Vim Keybindings Normal Mode (:nmap)"
-    vim -e -c 'redir! > ~/.zpwr/local/.temp/.temp2 | silent nmap | redir END | quitall'
-    cat ~/.zpwr/local/.temp/.temp2
+    vim -e -c 'redir! > '$ZPWR_TEMPFILE2' | silent nmap | redir END | quitall'
+    cat "$ZPWR_TEMPFILE2"
     echo
 
     printf "# Vim Keybindings Visual Mode (:vmap)"
-    vim -e -c 'redir! > ~/.zpwr/local/.temp/.temp3 | silent vmap | redir END | quitall'
-    cat ~/.zpwr/local/.temp/.temp3
+    vim -e -c 'redir! > '$ZPWR_TEMPFILE3' | silent vmap | redir END | quitall'
+    cat "$ZPWR_TEMPFILE3"
     echo
 
     printf "# Vim Keybindings Command Colon Mode (:cmap)"
-    vim -e -c 'redir! > ~/.zpwr/local/.temp/.temp4 | silent cmap | redir END | quitall'
-    cat ~/.zpwr/local/.temp/.temp4
+    vim -e -c 'redir! > '$ZPWR_TEMPFILE4' | silent cmap | redir END | quitall'
+    cat "$ZPWR_TEMPFILE4"
     echo
 
-    command rm ~/.zpwr/local/.temp/.temp{1..4}
 
 } | escapeRemover.pl | perl -ne 'print if m{\S+}' > "$ZPWR_TEMPFILE"
 
+
+command rm "$ZPWR_TEMPFILE1"
+command rm "$ZPWR_TEMPFILE2"
+command rm "$ZPWR_TEMPFILE3"
+command rm "$ZPWR_TEMPFILE4"
+
 #do not know why have to create tempfile here
 perl -pe 's@^([^#].*)$@- ``` $1 ```@g' "$ZPWR_TEMPFILE" | perl -pe 's@(.*) \(:.map\).*@$1@'
-
-#cat "$ZPWR_TEMPFILE"
 
 command rm "$ZPWR_TEMPFILE"
