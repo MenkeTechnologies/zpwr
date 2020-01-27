@@ -1166,6 +1166,7 @@ nmcmd	/Users/wizard/.zpwr/scripts/fzfPreviewOptsCommon2Pos.sh	/^    nmcmd="nm -D
 nmcmd	/Users/wizard/.zpwr/scripts/fzfPreviewOptsCommon2Pos.sh	/^    nmcmd="nm"$/;"	v	language:Sh
 nn	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    nn(){$/;"	f	language:Sh
 noPonyBanner	/Users/wizard/.zshrc	/^noPonyBanner(){$/;"	f	language:Sh
+noTmux	install.sh	/^noTmux=false$/;"	v
 node_exe	/Users/wizard/.zpwr/scripts/macOnly/randomCow.sh	/^node_exe="\/usr\/local\/lib\/node_modules\/cowsay\/cli.js"$/;"	v	language:Sh
 noport	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                noport="$(echo "$url" | sed -E 's@(.*\\.[^\/]+)(\/.*)$@\\1@' | sed -E 's@:[0-9]{1,4}$@@')"$/;"	v	language:Sh
 noproto	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                        noproto="${noproto:0:-1}"$/;"	v	language:Sh

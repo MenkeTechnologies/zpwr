@@ -319,7 +319,8 @@ cargoinstall(){
 
 skip=false
 justConfig=false
-while getopts ":hvsc" opt
+noTmux=false
+while getopts ":hnvsc" opt
 do
     case $opt in
 
@@ -328,6 +329,8 @@ do
         v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
 
         s|skip     )  skip=true ;;
+
+        n|notmux     )  noTmux=true ;;
 
         c|config     )  justConfig=true ;;
 
@@ -825,9 +828,11 @@ fi
 #{{{                    MARK:start tmux
 #**************************************************************
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
-    command tmux source-file "$HOME/.tmux.conf"
-    zsh -c 'tmux new-session -d -s main'
-    tmux send-keys -t "main" 'tmux source-file "$HOME/.zpwr/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
-    tmux attach -t main
+    if [[ $noTmux != true ]]
+        command tmux source-file "$HOME/.tmux.conf"
+        zsh -c 'tmux new-session -d -s main'
+        tmux send-keys -t "main" 'tmux source-file "$HOME/.zpwr/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
+        tmux attach -t main
+    fi
 fi
 #}}}***********************************************************
