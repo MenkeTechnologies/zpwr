@@ -763,6 +763,9 @@ inoremap <F7> <ESC>:TTags<CR>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
+nnoremap <leader>x :normal mzg&`zzz<CR>
+xnoremap <leader>x :normal mzg&`zzz<CR>
+
 nnoremap && :normal mzg&`zzz<CR>
 xnoremap && :normal mzg&`zzz<CR>
 
