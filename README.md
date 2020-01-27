@@ -290,7 +290,9 @@ export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
 export ZPWR_HIDDEN_DIR="$ZPWR/local"
-export ZPWR_TMUX="$ZPWR_HIDDEN_DIR/.tmux"
+export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_INSTALL="$ZPWR/install"
+export ZPWR_TMUX="$ZPWR/.tmux"
 # the base dir for zpwr temp
 export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 # the path to a lock file (semaphore) for zpwr
@@ -349,7 +351,7 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 I am always looking for contributors.
 
 ## Warnings
-Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features
+Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.
 
 # Running on a MacbookPro
 ![Alt text](http://jakobmenke.com/img/tmuxfinal22.png?raw=true)
@@ -492,7 +494,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bind-key    -T copy-mode-vi t                     command-prompt -1 -p "(jump to forward)" "send -X jump-to-forward \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi v                     send-keys -X begin-selection ```
 - ``` bind-key    -T copy-mode-vi w                     send-keys -X next-word ```
-- ``` bind-key    -T copy-mode-vi x                     send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell "tmux display-message -p -F \"#{pane_current_path}\" > ~/.zpwr/.tmux/pane_pwd" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh open" ```
+- ``` bind-key    -T copy-mode-vi x                     send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell "tmux display-message -p -F \"#{pane_current_path}\" > ~/.zpwr/.tmux/local/pane_pwd" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh open" ```
 - ``` bind-key    -T copy-mode-vi y                     send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" ```
 - ``` bind-key    -T copy-mode-vi z                     send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh google" ```
 - ``` bind-key    -T copy-mode-vi \{                    send-keys -X previous-paragraph ```
@@ -1350,6 +1352,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ```    <Space>=    * 4+ ```
 - ```    <Space>-    * 4- ```
 - ``` n  %             <Plug>(MatchitNormalForward) ```
+- ``` n  &&          * :normal mzg&`zzz<CR> ```
 - ``` n  &           * :&&<CR> ```
 - ``` nox(           * repmo#SelfKey('(', ')') ```
 - ``` nox)           * repmo#SelfKey(')', '(') ```
@@ -1969,6 +1972,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ```    <Space>=    * 4+ ```
 - ```    <Space>-    * 4- ```
 - ``` x  %             <Plug>(MatchitVisualForward) ```
+- ``` x  &&          * :normal mzg&`zzz<CR> ```
 - ``` x  &           * :&&<CR> ```
 - ``` nox(           * repmo#SelfKey('(', ')') ```
 - ``` nox)           * repmo#SelfKey(')', '(') ```
