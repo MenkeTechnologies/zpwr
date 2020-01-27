@@ -7,10 +7,22 @@
 #####   Notes: 
 #}}}***********************************************************
 
+if ! test -f install.sh; then
+    echo "install.sh ust be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+if ! test -f common.sh; then
+    echo "common.sh Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
+ZPWR_BASE_DIR="$INSTALLER_DIR/.."
+ZPWR_BASE_SCRIPTS="$INSTALLER_DIR/../scripts"
+ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR/local/installer"
 
 export ZPWR_DELIMITER_CHAR='%'
 
@@ -114,7 +126,7 @@ proceed(){
 }
 
 prettyPrintStdin(){
-    perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
+    perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++install_counter ))
     {
@@ -125,7 +137,7 @@ prettyPrintStdin(){
 }
 
 prettyPrint(){
-    perlfile="$INSTALLER_DIR/scripts/boxPrint.pl"
+    perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++install_counter ))
     printf "$install_counter>>> $@\n" | "$perlfile" -f
@@ -137,11 +149,12 @@ turnOffDebugging(){
     set +v
     exec 2> /dev/tty
 }
+
 turnOnDebugging(){
     set -x
     set -v
-    exec 2>> >(tee "$INSTALLER_DIR"/logfile.txt)
-    exec >> >(tee "$INSTALLER_DIR"/logfile.txt)
+    exec 2>> >(tee "$ZPWR_INSTALLER_OUTPUT/logfile.txt")
+    exec >> >(tee "$ZPWR_INSTALLER_OUTPUT/logfile.txt")
 }
 
 alternatingPrettyPrint(){

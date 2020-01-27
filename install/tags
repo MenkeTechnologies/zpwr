@@ -307,6 +307,10 @@ ZPWR_ALL_GIT_DIRS	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_
 ZPWR_ALL_KEYBINDINGS	/Users/wizard/.zshrc	/^export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR\/zpwrAllKeybindings.txt"$/;"	v	language:Sh
 ZPWR_AUTO_ATTACH	/Users/wizard/.zshrc	/^export ZPWR_AUTO_ATTACH=true$/;"	v	language:Sh
 ZPWR_AUTO_SELECT	/Users/wizard/.zshrc	/^export ZPWR_AUTO_SELECT=true$/;"	v	language:Sh
+ZPWR_BASE_DIR	common.sh	/^ZPWR_BASE_DIR="$INSTALLER_DIR\/.."$/;"	v
+ZPWR_BASE_DIR	install.sh	/^ZPWR_BASE_DIR="$INSTALLER_DIR\/.."$/;"	v
+ZPWR_BASE_SCRIPTS	common.sh	/^ZPWR_BASE_SCRIPTS="$INSTALLER_DIR\/..\/scripts"$/;"	v
+ZPWR_BASE_SCRIPTS	install.sh	/^ZPWR_BASE_SCRIPTS="$INSTALLER_DIR\/..\/scripts"$/;"	v
 ZPWR_BAT_THEME	/Users/wizard/.zshrc	/^export ZPWR_BAT_THEME="GitHub"$/;"	v	language:Sh
 ZPWR_BLUE	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_BLUE="\\x1b[37;44m"$/;"	v	language:Sh
 ZPWR_BLUE	/Users/wizard/.zpwr/scripts/blueText.sh	/^ZPWR_BLUE='\\e[37;44m'$/;"	v	language:Sh
@@ -347,6 +351,7 @@ ZPWR_HIDDEN_DIR	install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr\/local"$/;"	v
 ZPWR_HIDDEN_DIR	plugins_install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr\/local"$/;"	v
 ZPWR_HIDDEN_DIR_TEMP	/Users/wizard/.zshrc	/^export ZPWR_HIDDEN_DIR_TEMP="$HOME\/.zpwr\/.temp"$/;"	v	language:Sh
 ZPWR_HIDDEN_DIR_TEMP	install.sh	/^export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR\/.temp"$/;"	v
+ZPWR_INSTALLER_OUTPUT	common.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
 ZPWR_INSTALLER_OUTPUT	install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
 ZPWR_INSTALLER_OUTPUT	neovim_install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
 ZPWR_INSTALLER_OUTPUT	plugins_install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/..\/local\/installer"$/;"	v
@@ -1271,7 +1276,7 @@ path	/Users/wizard/.zpwr/scripts/shebangChanger.sh	/^path="#!\/usr\/bin\/env $ex
 path	/Users/wizard/.zshrc	/^        path=( $cmdpath )$/;"	v	language:Sh
 perlOutdated	/Users/wizard/.zpwr/scripts/updater.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v	language:Sh
 perlOutdated	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v	language:Sh
-perlfile	common.sh	/^    perlfile="$INSTALLER_DIR\/scripts\/boxPrint.pl"$/;"	v
+perlfile	common.sh	/^    perlfile="$ZPWR_BASE_SCRIPTS\/boxPrint.pl"$/;"	v
 perlremovespaces	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^perlremovespaces(){$/;"	f	language:Sh
 perlscript	/Users/wizard/.zpwr/scripts/autoUpdater.sh	/^    perlscript=$($/;"	v	language:Sh
 picounter	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    picounter=1$/;"	v	language:Sh

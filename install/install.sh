@@ -14,6 +14,9 @@
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
+ZPWR_BASE_DIR="$INSTALLER_DIR/.."
+ZPWR_BASE_SCRIPTS="$INSTALLER_DIR/../scripts"
+ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR/local/installer"
 #shows count of steps in installer
 install_counter=0
 #for the width of the install messages
@@ -23,8 +26,6 @@ if ! source common.sh; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
-
-ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR/local/installer"
 
 if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
     mkdir -p $ZPWR_INSTALLER_OUTPUT
