@@ -337,6 +337,7 @@ ZPWR_HIDDEN_DIR	install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr\/local"$/;"	v
 ZPWR_HIDDEN_DIR	plugins_install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr\/local"$/;"	v
 ZPWR_HIDDEN_DIR_TEMP	/Users/wizard/.zshrc	/^export ZPWR_HIDDEN_DIR_TEMP="$HOME\/.zpwr\/.temp"$/;"	v	language:Sh
 ZPWR_HIDDEN_DIR_TEMP	install.sh	/^export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR\/.temp"$/;"	v
+ZPWR_INSTALLER_OUTPUT	install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
 ZPWR_LEARN	/Users/wizard/.zshrc	/^export ZPWR_LEARN=true$/;"	v	language:Sh
 ZPWR_LOCK_FILE	/Users/wizard/.zshrc	/^export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR\/.lock"$/;"	v	language:Sh
 ZPWR_LOGFILE	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR\/zpwrLog.txt"$/;"	v	language:Sh
@@ -1040,8 +1041,8 @@ link	/Users/wizard/.zpwr/scripts/uploadWebPi.sh	/^        link="http:\/\/$MY_IP:
 listNoClear	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^listNoClear () {$/;"	f	language:Sh
 locateFzf	/Users/wizard/.zshrc	/^locateFzf(){$/;"	f	language:Sh
 log	/Users/wizard/.zpwr/scripts/fzfMan.sh	/^log=\/Users\/wizard\/updaterlog.txt$/;"	v	language:Sh
-logfile	install.sh	/^logfile="$INSTALLER_DIR\/local\/escaped_logfile.txt"$/;"	v
-logfileCargoYCM	install.sh	/^logfileCargoYCM="$INSTALLER_DIR\/local\/cargoYCM_logfile.txt"$/;"	v
+logfile	install.sh	/^logfile="$ZPWR_INSTALLER_OUTPUT\/escaped_logfile.txt"$/;"	v
+logfileCargoYCM	install.sh	/^logfileCargoYCM="$ZPWR_INSTALLER_OUTPUT\/cargoYCM_logfile.txt"$/;"	v
 logg	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^logg(){$/;"	f	language:Sh
 loginCount	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^loginCount(){$/;"	f	language:Sh
 lossy_unicode	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^def lossy_unicode(s):$/;"	f	language:Python

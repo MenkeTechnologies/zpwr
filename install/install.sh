@@ -24,14 +24,21 @@ if ! source common.sh; then
     exit 1
 fi
 
-logfile="$INSTALLER_DIR/local/escaped_logfile.txt"
-logfileCargoYCM="$INSTALLER_DIR/local/cargoYCM_logfile.txt"
+ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR/local/installer"
+
+if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
+    mkdir -p $ZPWR_INSTALLER_OUTPUT
+fi
+
+logfile="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
+logfileCargoYCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
 
 #the destination directory for zpwr specific installed files
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR
 fi
+
 #the destination directory for zpwr specific temp files
 export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 if [[ ! -d $ZPWR_HIDDEN_DIR_TEMP ]]; then
