@@ -175,6 +175,8 @@ INSTALLER_DIR	neovim_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	plugins_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	rustupinstall.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	vim_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
+INSTALL_VIM_SRC	install.sh	/^    INSTALL_VIM_SRC=true$/;"	v
+INSTALL_VIM_SRC	install.sh	/^INSTALL_VIM_SRC=false$/;"	v
 INTERFACE	/Users/wizard/.zpwr/scripts/macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v	language:Sh
 KEYTIMEOUT	/Users/wizard/.zshrc	/^export KEYTIMEOUT=1$/;"	v	language:Sh
 LBUFFER	/Users/wizard/.zshrc	/^        LBUFFER="sudo -E nvim $(fzvim)"$/;"	v	language:Sh
@@ -1602,7 +1604,7 @@ version	/Users/wizard/.zshrc	/^version="$(zsh --version | awk '{print $2}' | awk
 view	/Users/wizard/.zpwr/scripts/eyes.sh	/^    view=${ary[$randIndex]}$/;"	v	language:Sh
 vimFzf	/Users/wizard/.zshrc	/^vimFzf(){$/;"	f	language:Sh
 vimFzfSudo	/Users/wizard/.zshrc	/^vimFzfSudo(){$/;"	f	language:Sh
-vimV	install.sh	/^    vimV="$(vim --version | head -1 | awk '{print $5}')"$/;"	v
+vimV	install.sh	/^vimV="$(vim --version | head -n 1 | awk '{print $5}')"$/;"	v
 violet	/Users/wizard/.zshrc	/^local violet="61"$/;"	v	language:Sh
 w	/Users/wizard/.zpwr/scripts/uploadWebPi.sh	/^w=80$/;"	v	language:Sh
 w	/Users/wizard/.zshrc	/^  w=( ${(u)=$(_tmux_capture_pane)} )$/;"	v	language:Sh
