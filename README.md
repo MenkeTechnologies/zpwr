@@ -1326,6 +1326,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  <Space>ev     :call ExtractVariable()<CR> ```
 - ```    <Space><Space>e   <Plug>(easymotion-bd-e) ```
 - ```    <Space><Space>w   <Plug>(easymotion-bd-w) ```
+- ``` n  <Space>x    * :normal mzg&`zzz<CR> ```
 - ``` n  <Space>p    * :bprev<CR> ```
 - ``` n  <Space>n    * :bnext<CR> ```
 - ``` n  <Space>ap   * :prev<CR> ```
@@ -1960,6 +1961,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` x  <Space>em     :call ExtractMethod()<CR> ```
 - ```    <Space><Space>e   <Plug>(easymotion-bd-e) ```
 - ```    <Space><Space>w   <Plug>(easymotion-bd-w) ```
+- ``` x  <Space>x    * :normal mzg&`zzz<CR> ```
 - ``` v  <Space>(    * :call InsertQuoteVisualMode("paren")<CR> ```
 - ``` v  <Space>{    * :call InsertQuoteVisualMode("curlybracket")<CR> ```
 - ``` v  <Space>[    * :call InsertQuoteVisualMode("bracket")<CR> ```
