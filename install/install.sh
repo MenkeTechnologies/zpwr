@@ -25,6 +25,11 @@ ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 
+if [[ $ZPWR_INSTALLER_OUTPUT != "$HOME/.zpwr/local/installer" ]]; then
+    echo "$ZPWR_INSTALLER_OUTPUT Must be in ~/.zpwr/install directory" >&2
+    ZPWR_INSTALLER_OUTPUT="$HOME/.zpwr/local/installer"
+fi
+
 if [[ ! -d $ZPWR_BASE_SCRIPTS ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
