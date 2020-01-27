@@ -225,11 +225,11 @@ Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/contr
 ## Personal Config
 Startup shell files will source `~/.zpwr/local/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.
 
-Running `zpwr regen` will regenerate all cache files in `~/.zpwr` and create a ctags file named `~/tags` in your home directory.
+Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and create a ctags file named `~/tags` in your home directory.
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
 
 ## zpwr verbs
-Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands just invoke other shell functions.
+Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf.
 
 ## ZPWR_GITHUB_ACCOUNT variable
 Change in `~/.zpwr/local/.tokens.sh`
