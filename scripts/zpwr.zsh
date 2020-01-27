@@ -149,6 +149,8 @@ case $verb in
         ;;
     pre) cmd="pre" #prefix all output
         ;;
+    prettyprint) cmd="prettyPrint" #pretty print with color
+        ;;
     ps) cmd="p" #ps -ef | grep arg
         ;;
     pygmentcolors) cmd="pygmentcolors" #show all pygment colors
@@ -187,6 +189,10 @@ case $verb in
         ;;
     starttabs) cmd="tmm_full" #start all tabs
         ;;
+    subcommands) cmd="zpwrVerbs" #the subcommands for zpwr <tab>
+        ;;
+    subcommandscount) cmd="numZpwrVerbs" #number of choice for zpwr <tab>
+        ;;
     tags) cmd="zpwrTags" #view zpwr tags
         ;;
     taillog) cmd="lo" #tail -F \$ZPWR_LOGFILE
@@ -208,8 +214,6 @@ case $verb in
     upload) cmd="upload" #upload with curl
         ;;
     urlsafe) cmd="urlSafe" #base64 encode
-        ;;
-    prettyprint) cmd="prettyPrint" #pretty print with color
         ;;
     verbs) cmd="zpwrVerbs" #the subcommands for zpwr <tab>
         ;;
