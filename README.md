@@ -153,6 +153,7 @@ Your old configs for these files will be found in a directory name approximately
 ```sh
 backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 ```
+Installer artifacts such as log files and cloned repos go into `~/.zpwr/local/installer`.
 
 ## Uninstall
 Copy all configs from backup dir mentioned above to home directory overwriting the ones installed by zpwr, most importantly the `.zshrc`, `.vimrc` and `.tmux.conf`.
