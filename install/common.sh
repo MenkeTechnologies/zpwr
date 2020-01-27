@@ -21,9 +21,9 @@ fi
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 
 #resolve all symlinks
-INSTALLER_DIR="$(pwd -P)"
-ZPWR_BASE_DIR="$INSTALLER_DIR/.."
-ZPWR_BASE_SCRIPTS="$INSTALLER_DIR/../scripts"
+ZPWR_INSTALLER_DIR="$(pwd -P)"
+ZPWR_BASE_DIR="$ZPWR_INSTALLER_DIR/.."
+ZPWR_BASE_SCRIPTS="$ZPWR_INSTALLER_DIR/../scripts"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
 
 export ZPWR_DELIMITER_CHAR='%'

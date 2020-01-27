@@ -11,7 +11,7 @@ if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins" ]]; then
     mkdir -p "$HOME/.oh-my-zsh/custom/plugins"
 fi
 
-INSTALLER_DIR="$(pwd)"
+ZPWR_INSTALLER_DIR="$(pwd)"
 
 installOhMyZshPlugin(){
     echo "Installing zsh plugin $1."
@@ -21,5 +21,5 @@ installOhMyZshPlugin(){
 builtin cd "$HOME/.oh-my-zsh/custom/plugins" && {
     while read repo; do
         installOhMyZshPlugin "$repo"
-    done < "$INSTALLER_DIR/.zshplugins"
+    done < "$ZPWR_INSTALLER_DIR/.zshplugins"
 }

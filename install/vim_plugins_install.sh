@@ -16,13 +16,13 @@ if [[ ! -d "$HOME/.vim/bundle" ]]; then
     mkdir -p "$HOME/.vim/bundle"
 fi
 
-INSTALLER_DIR="$(pwd)"
+ZPWR_INSTALLER_DIR="$(pwd)"
 
 cd "$HOME/.vim/bundle" && {
     while read repo; do
         installVimPlugin "$repo"
-    done < "$INSTALLER_DIR/.vimbundle"
+    done < "$ZPWR_INSTALLER_DIR/.vimbundle"
 
     echo "Installing Taglist Plugin"
-    cp -R "$INSTALLER_DIR/taglist_46" .
+    cp -R "$ZPWR_INSTALLER_DIR/taglist_46" .
 }

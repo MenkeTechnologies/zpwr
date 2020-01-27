@@ -16,10 +16,10 @@ if [[ -d "$HOME/.tmux/plugins" ]]; then
     mkdir -p "$HOME/.tmux/plugins"
 fi
 
-INSTALLER_DIR="$(pwd)"
+ZPWR_INSTALLER_DIR="$(pwd)"
 
 builtin cd "$HOME/.tmux/plugins" && {
 while read repo; do
     installGitHubPlugin "$repo"
-done < "$INSTALLER_DIR/.tmuxplugins"
+done < "$ZPWR_INSTALLER_DIR/.tmuxplugins"
 }

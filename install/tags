@@ -151,6 +151,7 @@ FZF_JELLY	/Users/wizard/.zshrc	/^export FZF_JELLY="--color fg:-1,bg:-1,hl:230,fg
 FZF_MAN_OPTS	/Users/wizard/.zshrc	/^   FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS\/fzfMan.sh" "$1")'"$/;"	v	language:Sh
 GIT_AUTHOR_EMAIL	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        GIT_AUTHOR_EMAIL="'$newEmail'"; git commit-tree "$@";$/;"	v	language:Sh
 GOPATH	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    export GOPATH="$HOME\/go"$/;"	v	language:Sh
+GOPATH	go_install.sh	/^export GOPATH="$HOME\/go"$/;"	v
 GRC_DIR	install.sh	/^        GRC_DIR=\/usr\/local\/share\/grc$/;"	v
 GRC_DIR	install.sh	/^        GRC_DIR=\/usr\/share\/grc$/;"	v
 GROOVY_LIB	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        export GROOVY_LIB="$HOMEBREW_OPT_HOME\/groovy"$/;"	v	language:Sh
@@ -169,12 +170,6 @@ IFS	/Users/wizard/.zpwr/scripts/saygoogle.sh	/^IFS=+$/;"	v	language:Sh
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^        IFS="$oldifs"$/;"	v	language:Sh
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v	language:Sh
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^IFS=:$/;"	v	language:Sh
-INSTALLER_DIR	common.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
-INSTALLER_DIR	install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
-INSTALLER_DIR	neovim_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
-INSTALLER_DIR	plugins_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
-INSTALLER_DIR	rustupinstall.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
-INSTALLER_DIR	vim_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALL_VIM_SRC	install.sh	/^        INSTALL_VIM_SRC=true$/;"	v
 INSTALL_VIM_SRC	install.sh	/^INSTALL_VIM_SRC=false$/;"	v
 INTERFACE	/Users/wizard/.zpwr/scripts/macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v	language:Sh
@@ -309,9 +304,9 @@ ZPWR_ALL_GIT_DIRS	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_
 ZPWR_ALL_KEYBINDINGS	/Users/wizard/.zshrc	/^export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR\/zpwrAllKeybindings.txt"$/;"	v	language:Sh
 ZPWR_AUTO_ATTACH	/Users/wizard/.zshrc	/^export ZPWR_AUTO_ATTACH=true$/;"	v	language:Sh
 ZPWR_AUTO_SELECT	/Users/wizard/.zshrc	/^export ZPWR_AUTO_SELECT=true$/;"	v	language:Sh
-ZPWR_BASE_DIR	common.sh	/^ZPWR_BASE_DIR="$INSTALLER_DIR\/.."$/;"	v
-ZPWR_BASE_DIR	install.sh	/^ZPWR_BASE_DIR="$(dirname $INSTALLER_DIR)"$/;"	v
-ZPWR_BASE_SCRIPTS	common.sh	/^ZPWR_BASE_SCRIPTS="$INSTALLER_DIR\/..\/scripts"$/;"	v
+ZPWR_BASE_DIR	common.sh	/^ZPWR_BASE_DIR="$ZPWR_INSTALLER_DIR\/.."$/;"	v
+ZPWR_BASE_DIR	install.sh	/^ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"$/;"	v
+ZPWR_BASE_SCRIPTS	common.sh	/^ZPWR_BASE_SCRIPTS="$ZPWR_INSTALLER_DIR\/..\/scripts"$/;"	v
 ZPWR_BASE_SCRIPTS	install.sh	/^ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR\/scripts"$/;"	v
 ZPWR_BAT_THEME	/Users/wizard/.zshrc	/^export ZPWR_BAT_THEME="GitHub"$/;"	v	language:Sh
 ZPWR_BLUE	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_BLUE="\\x1b[37;44m"$/;"	v	language:Sh
@@ -353,12 +348,22 @@ ZPWR_HIDDEN_DIR	install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr\/local"$/;"	v
 ZPWR_HIDDEN_DIR	plugins_install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr\/local"$/;"	v
 ZPWR_HIDDEN_DIR_TEMP	/Users/wizard/.zshrc	/^export ZPWR_HIDDEN_DIR_TEMP="$HOME\/.zpwr\/.temp"$/;"	v	language:Sh
 ZPWR_HIDDEN_DIR_TEMP	install.sh	/^export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR\/.temp"$/;"	v
+ZPWR_INSTALLER_DIR	common.sh	/^ZPWR_INSTALLER_DIR="$(pwd -P)"$/;"	v
+ZPWR_INSTALLER_DIR	go_install.sh	/^ZPWR_INSTALLER_DIR="$(pwd -P)"$/;"	v
+ZPWR_INSTALLER_DIR	install.sh	/^ZPWR_INSTALLER_DIR="$(pwd -P)"$/;"	v
+ZPWR_INSTALLER_DIR	neovim_install.sh	/^ZPWR_INSTALLER_DIR="$(pwd -P)"$/;"	v
+ZPWR_INSTALLER_DIR	plugins_install.sh	/^ZPWR_INSTALLER_DIR="$(pwd -P)"$/;"	v
+ZPWR_INSTALLER_DIR	rustupinstall.sh	/^ZPWR_INSTALLER_DIR="$(pwd -P)"$/;"	v
+ZPWR_INSTALLER_DIR	tmux_plugins_install.sh	/^ZPWR_INSTALLER_DIR="$(pwd)"$/;"	v
+ZPWR_INSTALLER_DIR	vim_install.sh	/^ZPWR_INSTALLER_DIR="$(pwd -P)"$/;"	v
+ZPWR_INSTALLER_DIR	vim_plugins_install.sh	/^ZPWR_INSTALLER_DIR="$(pwd)"$/;"	v
+ZPWR_INSTALLER_DIR	zsh_plugins_install.sh	/^ZPWR_INSTALLER_DIR="$(pwd)"$/;"	v
 ZPWR_INSTALLER_LOCAL	install.sh	/^ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR\/local"$/;"	v
 ZPWR_INSTALLER_OUTPUT	common.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR\/local\/installer"$/;"	v
 ZPWR_INSTALLER_OUTPUT	install.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL\/installer"$/;"	v
-ZPWR_INSTALLER_OUTPUT	neovim_install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
-ZPWR_INSTALLER_OUTPUT	plugins_install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/..\/local\/installer"$/;"	v
-ZPWR_INSTALLER_OUTPUT	vim_install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
+ZPWR_INSTALLER_OUTPUT	neovim_install.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_DIR\/local\/installer"$/;"	v
+ZPWR_INSTALLER_OUTPUT	plugins_install.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_DIR\/..\/local\/installer"$/;"	v
+ZPWR_INSTALLER_OUTPUT	vim_install.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_DIR\/local\/installer"$/;"	v
 ZPWR_LEARN	/Users/wizard/.zshrc	/^export ZPWR_LEARN=true$/;"	v	language:Sh
 ZPWR_LOCK_FILE	/Users/wizard/.zshrc	/^export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR\/.lock"$/;"	v	language:Sh
 ZPWR_LOGFILE	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR\/zpwrLog.txt"$/;"	v	language:Sh
@@ -743,6 +748,11 @@ distroFamily	install.sh	/^                distroFamily=redhat$/;"	v
 distroFamily	install.sh	/^                distroFamily=suse$/;"	v
 distroFamily	install.sh	/^        distroFamily=freebsd$/;"	v
 distroFamily	install.sh	/^        distroFamily=mac$/;"	v
+distroFamily	npm_install.sh	/^            distroFamily=debian$/;"	v
+distroFamily	npm_install.sh	/^            distroFamily=redhat$/;"	v
+distroFamily	npm_install.sh	/^            distroFamily=suse$/;"	v
+distroFamily	npm_install.sh	/^        distroFamily=freebsd$/;"	v
+distroFamily	npm_install.sh	/^    distroFamily=mac$/;"	v
 distroName	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^            distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	/Users/wizard/.zpwr/scripts/clearTrash.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	/Users/wizard/.zpwr/scripts/colorLogger.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
@@ -751,6 +761,9 @@ distroName	/Users/wizard/.zshrc	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g
 distroName	install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	install.sh	/^        distroName=Mac$/;"	v
 distroName	install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	npm_install.sh	/^        distroName=FreeBSD$/;"	v
+distroName	npm_install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	npm_install.sh	/^    distroName=Mac$/;"	v
 distroName	plugins_install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	plugins_install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' \/etc\/os-release)$/;"	v
 distroName	plugins_install.sh	/^    distroName=Mac$/;"	v
@@ -779,7 +792,7 @@ esc	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def esc(self):$/;"	m	langu
 esc_char	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def esc_char(self):$/;"	m	language:Python	class:Deroffer
 esc_char_backslash	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def esc_char_backslash(self):$/;"	m	language:Python	class:Deroffer
 escapeRemove	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^escapeRemove(){$/;"	f	language:Sh
-escapeRemover	install.sh	/^escapeRemover="$INSTALLER_DIR\/scripts\/escapeRemover.pl"$/;"	v
+escapeRemover	install.sh	/^escapeRemover="$ZPWR_BASE_DIR\/scripts\/escapeRemover.pl"$/;"	v
 eth	/Users/wizard/.zpwr/scripts/bridgeDown.sh	/^eth="eth0"$/;"	v	language:Sh
 eth	/Users/wizard/.zpwr/scripts/bridgeUp.sh	/^eth="eth0"$/;"	v	language:Sh
 eth_broadcast	/Users/wizard/.zpwr/scripts/bridgeDown.sh	/^eth_broadcast="192.168.0.255"$/;"	v	language:Sh
@@ -975,6 +988,11 @@ installDir	/Users/wizard/.zpwr/scripts/updater.sh	/^            installDir=$(pyt
 installDir	/Users/wizard/.zpwr/scripts/updater.sh	/^            installDir=$(python3 -m pip show "$i" | \\perl -ne 'print $1 if \/^Location: (.*)\/')$/;"	v	language:Sh
 installDir	/Users/wizard/.zpwr/scripts/updater.sh	/^        installDir=$(npm root -g | head -n 1)$/;"	v	language:Sh
 installDir	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^        installDir=$(npm root -g | head -n 1)$/;"	v	language:Sh
+installGitHubPlugin	tmux_plugins_install.sh	/^installGitHubPlugin(){$/;"	f
+installNpmDeb	npm_install.sh	/^function installNpmDeb(){$/;"	f
+installNpmRpm	npm_install.sh	/^function installNpmRpm(){$/;"	f
+installOhMyZshPlugin	zsh_plugins_install.sh	/^installOhMyZshPlugin(){$/;"	f
+installVimPlugin	vim_plugins_install.sh	/^installVimPlugin(){$/;"	f
 install_counter	install.sh	/^install_counter=0$/;"	v
 installerDir	/Users/wizard/.zpwr/scripts/macOnly/tutorialConfigUpdater.sh	/^installerDir="$ZPWR_HIDDEN_DIR\/scripts\/$ZPWR_REPO_NAME"$/;"	v	language:Sh
 interceptDelete	/Users/wizard/.zshrc	/^interceptDelete(){$/;"	f	language:Sh

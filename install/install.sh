@@ -15,10 +15,10 @@ unset CDPATH
 #get operating system type
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 #resolve all symlinks
-INSTALLER_DIR="$(pwd -P)"
-ZPWR_BASE_DIR="$(dirname $INSTALLER_DIR)"
+ZPWR_INSTALLER_DIR="$(pwd -P)"
+ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"
 
-if [[ $ZPWR_BASE_DIR == "$INSTALLER_DIR" ]]; then
+if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALLER_DIR" ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
@@ -236,7 +236,7 @@ usage(){
 
 
 showDeps(){
-    bash "$INSTALLER_DIR/scripts/about.sh" 2>/dev/null
+    bash "$ZPWR_INSTALLER_DIR/scripts/about.sh" 2>/dev/null
     {
         printf "Installing ${#dependencies_ary[@]} packages on $distroName: "
         for dep in "${dependencies_ary[@]}" ; do
@@ -285,8 +285,8 @@ warnSudo(){
 }
 
 pluginsinstall(){
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in .zpwr/install directory?" >&2; exit 1; }
@@ -296,8 +296,8 @@ pluginsinstall(){
 }
 
 ycminstall(){
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in .zpwr/install base directory?" >&2; exit 1; }
@@ -571,29 +571,29 @@ if [[ $justConfig != true ]]; then
         #if neovim already installed, vim already points to neovim
         prettyPrint "Vim Version less than 8.0 or without python! Installing Vim from Source."
 
-        if ! builtin cd "$INSTALLER_DIR"; then
-            echo "where is $INSTALLER_DIR" >&2
+        if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+            echo "where is $ZPWR_INSTALLER_DIR" >&2
             exit 1
         fi
         source "vim_install.sh"
     fi
 
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
     exists nvim || {
         source "neovim_install.sh"
     }
 
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
     source "npm_install.sh"
 
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
 
@@ -606,15 +606,15 @@ fi
 if [[ $justConfig != true ]]; then
     ycminstall
 
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
 
-    source "$INSTALLER_DIR/pip_install.sh"
+    source "$ZPWR_INSTALLER_DIR/pip_install.sh"
 
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
     prettyPrint "Installing Pipes.sh from source"
@@ -645,7 +645,7 @@ iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $
 
 if [[ -n "$iface" ]]; then
     prettyPrint "IPv4: $ip and interface: $iface"
-    cp "$INSTALLER_DIR/install/.iftop.conf" "$HOME"
+    cp "$ZPWR_INSTALLER_DIR/install/.iftop.conf" "$HOME"
     echo "interface:$iface" >> "$HOME/.iftop.conf"
 fi
 
@@ -686,8 +686,8 @@ if [[ $justConfig != true ]]; then
         git clone https://github.com/garabik/grc.git
         builtin cd grc
         sudo bash install.sh
-        if ! builtin cd "$INSTALLER_DIR"; then
-            echo "where is $INSTALLER_DIR" >&2
+        if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+            echo "where is $ZPWR_INSTALLER_DIR" >&2
             exit 1
         fi
     fi
@@ -703,8 +703,8 @@ if [[ $justConfig != true ]]; then
     else
         GRC_DIR=/usr/share/grc
     fi
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
     prettyPrint "Installing ponysay from source"
@@ -714,11 +714,11 @@ if [[ $justConfig != true ]]; then
     }
 
     prettyPrint "Installing Go deps"
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
-    source "$INSTALLER_DIR/go_install.sh"
+    source "$ZPWR_INSTALLER_DIR/go_install.sh"
 
     test -f /usr/local/sbin/iftop || {
         prettyPrint "No iftop so installing"
@@ -747,17 +747,17 @@ prettyPrint "Installing oh-my-zsh..."
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
-cp "$INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
+cp "$ZPWR_INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
 
 prettyPrint "Installing .zshrc"
-cp "$INSTALLER_DIR/.zshrc" "$HOME"
+cp "$ZPWR_INSTALLER_DIR/.zshrc" "$HOME"
 
 prettyPrint "Installing Zsh plugins"
-if ! builtin cd "$INSTALLER_DIR"; then
-    echo "where is $INSTALLER_DIR" >&2
+if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+    echo "where is $ZPWR_INSTALLER_DIR" >&2
     exit 1
 fi
-source "$INSTALLER_DIR/zsh_plugins_install.sh"
+source "$ZPWR_INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Running Vundle"
 #run vundle install for ultisnips, supertab
@@ -778,17 +778,17 @@ fi
 
 #{{{                    MARK:Final sym links
 #**************************************************************
-if ! builtin cd "$INSTALLER_DIR"; then
-    echo "where is $INSTALLER_DIR" >&2
+if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+    echo "where is $ZPWR_INSTALLER_DIR" >&2
     exit 1
 fi
 
-escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
+escapeRemover="$ZPWR_BASE_DIR/scripts/escapeRemover.pl"
 
 test -f "$escapeRemover" && \
     "$escapeRemover" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
 
-#rm -rf "$INSTALLER_DIR"
+#rm -rf "$ZPWR_INSTALLER_DIR"
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     prettyPrint "Waiting for cargo installer to finish"
     wait $CARGO_PID
