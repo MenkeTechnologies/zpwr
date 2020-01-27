@@ -78,9 +78,8 @@ git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 prettyPrint "Copying tmux configuration file to home directory"
 cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
 
-
 prettyPrint "Copying iftop.conf to home directory"
-cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
+cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
 
 if [[ ! -f "$HOME/.ctags" ]]; then
     prettyPrint "Copying .ctags to home directory"

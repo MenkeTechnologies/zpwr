@@ -645,8 +645,8 @@ iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $
 
 if [[ -n "$iface" ]]; then
     prettyPrint "IPv4: $ip and interface: $iface"
-    cp "$INSTALLER_DIR/install/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
-    echo "interface:$iface" >> "$ZPWR_INSTALLER_OUTPUT/.iftop.conf"
+    cp "$INSTALLER_DIR/install/.iftop.conf" "$HOME"
+    echo "interface:$iface" >> "$HOME/.iftop.conf"
 fi
 
 
