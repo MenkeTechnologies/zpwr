@@ -603,7 +603,7 @@ else
         test -d "/etc/systemd/system" ||
             { loggErr "/etc/systemd/system does not exists. Is systemd installed?" && return 1; }
 
-        ( cd "$src_dir" && git pull; )
+        ( builtin cd "$src_dir" && git pull; )
         group=$(id -gn)
 
         cp "$service_path" "$ZPWR_LOCAL"
