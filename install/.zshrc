@@ -2917,6 +2917,8 @@ function zpwrTags(){
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
 
+alias tok="vim $ZPWR_LOCAL/.tokens.sh"
+
 ###}}}***********************************************************
 
 #{{{                    MARK:Finish
