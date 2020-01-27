@@ -7,6 +7,8 @@
 #####   Notes: 
 #}}}***********************************************************
 
+unset CDPATH
+
 if ! test -f install.sh; then
     echo "install.sh ust be in ~/.zpwr/install directory" >&2
     exit 1

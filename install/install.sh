@@ -10,6 +10,8 @@
 
 #{{{                    MARK:Env vars
 #**************************************************************
+unset CDPATH
+
 #get operating system type
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 #resolve all symlinks
