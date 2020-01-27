@@ -650,8 +650,8 @@ fi
 if [[ $justConfig != true ]]; then
     prettyPrint "Installing IFTOP-color by MenkeTechnologies"
 
-    if ! builtin cd "$INSTALLER_DIR"; then
-        echo "where is $INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
+        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
         exit 1
     fi
     automake --version 2>&1 | grep -q '16' || {
@@ -662,14 +662,14 @@ if [[ $justConfig != true ]]; then
         }
 
     [[ ! -d "$HOME/forkedRepos" ]] && mkdir "$HOME/forkedRepos"
-    builtin cd "$HOME/forkedRepos" && {
+    if builtin cd "$HOME/forkedRepos"; then
         git clone https://github.com/MenkeTechnologies/iftopcolor
-            builtin cd iftopcolor && {
-                aclocal
-                            automake --add-missing
-                            ./configure && make && sudo make install
-                        }
-                }
+        if builtin cd iftopcolor; then
+            aclocal
+            automake --add-missing
+            ./configure && make && sudo make install
+        fi
+    fi
 
     if ! exists grc; then
         if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
