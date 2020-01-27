@@ -29,7 +29,7 @@ getOpenCommand(){
 
 }
 
-test -z "$ZPWR_LOGFILE" && ZPWR_LOGFILE="$HOME/.zpwr/zpwrLog.txt"
+test -z "$ZPWR_LOGFILE" && ZPWR_LOGFILE="$HOME/.zpwr/local/zpwrLog.txt"
 
 exec 1>> "$ZPWR_LOGFILE" 2>&1
 
