@@ -529,19 +529,31 @@ if [[ $justConfig != true ]]; then
     if echo "$vimV >= 8.0" | bc | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
         prettyPrint "Vim Version less than 8.0 or without python! Installing Vim from Source."
 
-        builtin cd "$INSTALLER_DIR"
+        if ! builtin cd "$INSTALLER_DIR"; then
+            echo "where is $INSTALLER_DIR" >&2
+            exit 1
+        fi
         source "vim_install.sh"
     fi
 
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
     exists nvim || {
-        builtin cd "$INSTALLER_DIR"
         source "neovim_install.sh"
     }
 
-    builtin cd "$INSTALLER_DIR"
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
     source "npm_install.sh"
 
-    builtin cd "$INSTALLER_DIR"
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
 
 fi
 
@@ -552,9 +564,17 @@ fi
 if [[ $justConfig != true ]]; then
     ycminstall
 
-    builtin cd "$INSTALLER_DIR"
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
+
     source "$INSTALLER_DIR/pip_install.sh"
-    builtin cd "$INSTALLER_DIR"
+
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
     prettyPrint "Installing Pipes.sh from source"
     git clone https://github.com/pipeseroni/pipes.sh.git
     builtin cd pipes.sh && {
@@ -583,7 +603,8 @@ iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $
 
 if [[ -n "$iface" ]]; then
     prettyPrint "IPv4: $ip and interface: $iface"
-    echo "interface:$iface" >> "$INSTALLER_DIR/.iftop.conf"
+    cp "$INSTALLER_DIR/install/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
+    echo "interface:$iface" >> "$ZPWR_INSTALLER_OUTPUT/.iftop.conf"
 fi
 
 
@@ -594,7 +615,10 @@ fi
 if [[ $justConfig != true ]]; then
     prettyPrint "Installing IFTOP-color by MenkeTechnologies"
 
-    builtin cd "$INSTALLER_DIR"
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
     automake --version 2>&1 | grep -q '16' || {
         wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
             tar xvfz automake-1.16.tar.gz
@@ -612,32 +636,46 @@ if [[ $justConfig != true ]]; then
                         }
                 }
 
-    exists grc || {
+    if ! exists grc; then
+        if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
+            echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
+            exit 1
+        fi
         git clone https://github.com/garabik/grc.git
-                    builtin cd grc
-                    sudo bash install.sh
-                }
+        builtin cd grc
+        sudo bash install.sh
+        if ! builtin cd "$INSTALLER_DIR"; then
+            echo "where is $INSTALLER_DIR" >&2
+            exit 1
+        fi
+    fi
 
-            if [[ "$(uname)" == Darwin ]]; then
-                prettyPrint "Try again for ponysay and lolcat on mac"
-                exists ponysay || brew install ponysay
-            fi
+    if [[ "$(uname)" == Darwin ]]; then
+        prettyPrint "Try again for ponysay and lolcat on mac"
+        exists ponysay || brew install ponysay
+    fi
 
-            prettyPrint "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
-            if [[ "$(uname)" == Darwin ]]; then
-                GRC_DIR=/usr/local/share/grc
-            else
-                GRC_DIR=/usr/share/grc
-            fi
-            cd "$INSTALLER_DIR"
-            prettyPrint "Installing ponysay from source"
-            git clone https://github.com/erkin/ponysay.git && {
-                builtin cd ponysay && sudo ./setup.py --freedom=partial install && \
-                builtin cd .. && sudo rm -rf ponysay
-            }
+    prettyPrint "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
+    if [[ "$(uname)" == Darwin ]]; then
+        GRC_DIR=/usr/local/share/grc
+    else
+        GRC_DIR=/usr/share/grc
+    fi
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
+    prettyPrint "Installing ponysay from source"
+    git clone https://github.com/erkin/ponysay.git && {
+        builtin cd ponysay && sudo ./setup.py --freedom=partial install && \
+        builtin cd .. && sudo rm -rf ponysay
+    }
 
     prettyPrint "Installing Go deps"
-    builtin cd "$INSTALLER_DIR" || { echo "where is $INSTALLER_DIR" >&2; exit 1; }
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
     source "$INSTALLER_DIR/go_install.sh"
 
     test -f /usr/local/sbin/iftop || {
@@ -673,7 +711,10 @@ prettyPrint "Installing .zshrc"
 cp "$INSTALLER_DIR/.zshrc" "$HOME"
 
 prettyPrint "Installing Zsh plugins"
-builtin cd "$INSTALLER_DIR" || { echo "where is $INSTALLER_DIR" >&2; exit 1; }
+if ! builtin cd "$INSTALLER_DIR"; then
+    echo "where is $INSTALLER_DIR" >&2
+    exit 1
+fi
 source "$INSTALLER_DIR/zsh_plugins_install.sh"
 
 prettyPrint "Running Vundle"
@@ -695,12 +736,15 @@ fi
 
 #{{{                    MARK:Final sym links
 #**************************************************************
-builtin cd "$INSTALLER_DIR/.." || { echo "what happened to $INSTALLER_DIR ?" >&2; exit 1; }
+if ! builtin cd "$INSTALLER_DIR"; then
+    echo "where is $INSTALLER_DIR" >&2
+    exit 1
+fi
 
 escapeRemover="$INSTALLER_DIR/scripts/escapeRemover.pl"
 
 test -f "$escapeRemover" && \
-    "$escapeRemover" "$logfile" > "$INSTALLER_DIR/log.txt"
+    "$escapeRemover" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
 
 #rm -rf "$INSTALLER_DIR"
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then

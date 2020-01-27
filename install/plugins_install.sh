@@ -2,6 +2,8 @@ source common.sh || { echo "Must be in .zpwr/install directory" >&2; exit 1; }
 
 INSTALLER_DIR="$(pwd -P)"
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR/../local/installer"
+
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR
@@ -73,7 +75,7 @@ cp "$INSTALLER_DIR/.tmux.conf" "$HOME"
 
 
 prettyPrint "Copying iftop.conf to home directory"
-cp "$INSTALLER_DIR/.iftop.conf" "$HOME"
+cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
 
 if [[ ! -f "$HOME/.ctags" ]]; then
     prettyPrint "Copying .ctags to home directory"
