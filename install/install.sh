@@ -795,7 +795,7 @@ if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
     exit 1
 fi
 
-
+prettyPrint "Generating $ZPWR_INSTALLER_OUTPUT/log.txt with $escapeRemover from $logfile"
 "$escapeRemover" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
 
 #rm -rf "$ZPWR_INSTALLER_DIR"
