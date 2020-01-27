@@ -143,7 +143,7 @@ if [[ ! -f "$htopDIR/htoprc" ]]; then
     if [[ ! -d "$htopDIR" ]]; then
         mkdir -p "$htopDIR"
     fi
-    mv "$INSTALLER_DIR/htoprc" "$htopDIR"
+    cp "$INSTALLER_DIR/htoprc" "$htopDIR"
 fi
 
 #add aliases and functions
