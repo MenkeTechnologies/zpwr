@@ -115,7 +115,8 @@ export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
 export ZPWR_HIDDEN_DIR="$ZPWR/local"
-export ZPWR_TMUX="$ZPWR_HIDDEN_DIR/.tmux"
+export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_TMUX="$ZPWR/.tmux"
 # the base dir for zpwr temp
 export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 # the path to a lock file (semaphore) for zpwr
@@ -1965,6 +1966,9 @@ if [[ -d "$ZPWR_HIDDEN_DIR" ]]; then
     hash -d ZPWR="$ZPWR_HIDDEN_DIR"
 fi
 
+if [[ -d "$ZPWR_LOCAL" ]]; then
+    hash -d ZPWR_LOCAL="$ZPWR_LOCAL"
+fi
 if [[ -d "$ZPWR_TMUX" ]]; then
     hash -d ZPWR_TMUX="$ZPWR_TMUX"
 fi
