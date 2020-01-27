@@ -67,12 +67,13 @@ export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 if [[ ! -d $ZPWR_HIDDEN_DIR_TEMP ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR_TEMP
 fi
-vimV="$(vim --version | head -n 1 | awk '{print $5}')"
 
 INSTALL_VIM_SRC=false
 vimV="$(vim --version | head -n 1 | awk '{print $5}')"
-if test -n $vimV && echo "$vimV >= 8.0" | bc | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
-    INSTALL_VIM_SRC=true
+if [[ -n $vimV ]]; then
+    if echo "$vimV >= 8.0" | bc 2>/dev/null | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
+        INSTALL_VIM_SRC=true
+    fi
 fi
 #}}}***********************************************************
 
