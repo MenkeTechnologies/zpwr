@@ -792,7 +792,7 @@ esc	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def esc(self):$/;"	m	langu
 esc_char	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def esc_char(self):$/;"	m	language:Python	class:Deroffer
 esc_char_backslash	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def esc_char_backslash(self):$/;"	m	language:Python	class:Deroffer
 escapeRemove	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^escapeRemove(){$/;"	f	language:Sh
-escapeRemover	install.sh	/^escapeRemover="$ZPWR_BASE_DIR\/scripts\/escapeRemover.pl"$/;"	v
+escapeRemover	install.sh	/^escapeRemover="$ZPWR_BASE_SCRIPTS\/escapeRemover.pl"$/;"	v
 eth	/Users/wizard/.zpwr/scripts/bridgeDown.sh	/^eth="eth0"$/;"	v	language:Sh
 eth	/Users/wizard/.zpwr/scripts/bridgeUp.sh	/^eth="eth0"$/;"	v	language:Sh
 eth_broadcast	/Users/wizard/.zpwr/scripts/bridgeDown.sh	/^eth_broadcast="192.168.0.255"$/;"	v	language:Sh

@@ -27,6 +27,18 @@ ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 
+escapeRemover="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
+
+if ! test -f "$escapeRemover"; then
+    echo "where is $escapeRemover.pl?" >&2
+    exit 1
+fi
+
+if ! test -x "$escapeRemover"; then
+    echo "why $escapeRemover.pl not exe?" >&2
+    exit 1
+fi
+
 if [[ ! -d $ZPWR_BASE_SCRIPTS ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
@@ -783,10 +795,8 @@ if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
     exit 1
 fi
 
-escapeRemover="$ZPWR_BASE_DIR/scripts/escapeRemover.pl"
 
-test -f "$escapeRemover" && \
-    "$escapeRemover" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
+"$escapeRemover" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
 
 #rm -rf "$ZPWR_INSTALLER_DIR"
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
