@@ -1,4 +1,5 @@
 local/
+.tmux/local/
 scripts/tags
 scripts/rcBackups/
 .tokens.sh
