@@ -1166,7 +1166,9 @@ if shouldMapV == 'true'
 endif
 " exec file from scratch
 nnoremap <silent> <leader>vj :w!<CR>:call TmuxRepeat("file")<CR>
-" exec visual selection from scrathc
+
+vnoremap <silent> <leader>vj <ESC>:call TmuxRepeat("file")<CR>gv
+" exec visual selection from scratch
 vnoremap <silent> <leader>vk <ESC>:call TmuxRepeat("visual")<CR>gv
 " exec visual selection by pasting into REPL
 vnoremap <silent> <leader>vl <ESC>:call TmuxRepeat("repl")<CR>gv
