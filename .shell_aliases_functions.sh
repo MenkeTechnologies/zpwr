@@ -1775,13 +1775,9 @@ function getrc(){
         logg $(git pull 2>&1)
     fi
 
-    builtin cd "$HOME"
+    builtin cd "$ZPWR"
     bash "$ZPWR_BANNER_SCRIPT"
-    git clone -b "$branch" "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
-    builtin cd "$ZPWR_REPO_NAME"
-    git pull
     copyConf
-    builtin cd ..
 
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*;do
@@ -1789,8 +1785,6 @@ function getrc(){
         test -d "$dir" && ( builtin cd "$dir" && git pull; )
     done
 
-    command rm -rf "$ZPWR_REPO_NAME"
-    
     test -n "$TERM" && exec "$SHELL"
 
 }

@@ -171,8 +171,8 @@ The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Sym
 documentation for details on how to change the font.
 
 ## getrc and copyConf functions
-There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by cloning the latest changes from this repository.
-It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc` and `~.tmux.conf`.
+There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`.
+It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc` and `~.tmux.conf` in `$HOME`.
 `copyConf` will also overwrite all scripts in `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and some other configs in home directory.
 Run `clearList getrc copyConf` to see the bodies of these function.
 
