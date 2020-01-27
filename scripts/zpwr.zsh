@@ -201,6 +201,8 @@ case $verb in
         ;;
     to) cmd="to" #toggle external ip
         ;;
+    tokens) cmd="tok" #vim the .tokens.sh file
+        ;;
     toggle) cmd="to" #toggle external ip
         ;;
     trc) cmd="trc" #tmux.conf vim session
