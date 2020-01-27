@@ -17,6 +17,16 @@ INSTALLER_DIR="$(pwd -P)"
 ZPWR_BASE_DIR="$INSTALLER_DIR/.."
 ZPWR_BASE_SCRIPTS="$INSTALLER_DIR/../scripts"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
+
+if [[ ! -d $ZPWR_BASE_SCRIPTS ]]; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+if [[ ! -d $ZPWR_BASE_DIR ]]; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
 #shows count of steps in installer
 install_counter=0
 #for the width of the install messages
