@@ -7,8 +7,8 @@
 ##### Notes: watches 2 repos
 #}}}***********************************************************
 
-BASE_DIR="$HOME/forkedRepos"
-CONFIG_DIR="$HOME/forkedRepos/$REPO_NAME"
+BASE_DIR="$HOME/.zpwr"
+CONFIG_DIR="$HOME/.zpwr"
 ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
 
 [[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && exit 1
@@ -30,25 +30,25 @@ gittersdev() {
 
 main() {
     gittersdev
-    cp .shell_aliases_functions.sh "$HOME/.zpwr"
+    #cp .shell_aliases_functions.sh "$HOME/.zpwr"
     cp .zshrc "$HOME"
     cp .vimrc "$HOME"
-    cp .minvimrc "$HOME/.zpwr"
+    #cp .minvimrc "$HOME/.zpwr"
     cp .tmux.conf "$HOME"
     cp conf.gls "$HOME"
     cp conf.df "$HOME"
     cp conf.ifconfig "$HOME"
     cp grc.zsh "$HOME"
     cp .inputrc "$HOME"
-    cp -R .tmux/* "$HOME/.zpwr/.tmux"
-    if [[ -n "$ZPWR_SCRIPTS" ]]; then
-        rm -f "$ZPWR_SCRIPTS/"*
-        cp -f scripts/* "$ZPWR_SCRIPTS"
-        cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
-    else
-        echo "$(date) How is ZPWR_SCRIPTS null?" >&2
-        env
-    fi
+    #cp -R .tmux/* "$HOME/.zpwr/.tmux"
+    #if [[ -n "$ZPWR_SCRIPTS" ]]; then
+        #rm -f "$ZPWR_SCRIPTS/"*
+        #cp -f scripts/* "$ZPWR_SCRIPTS"
+        #cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
+    #else
+        #echo "$(date) How is ZPWR_SCRIPTS null?" >&2
+        #env
+    #fi
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*; do
         printf "$dir: "
