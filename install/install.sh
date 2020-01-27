@@ -829,7 +829,7 @@ fi
 #{{{                    MARK:start tmux
 #**************************************************************
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
-    if [[ $noTmux != true ]]
+    if [[ $noTmux != true ]];then
         command tmux source-file "$HOME/.tmux.conf"
         zsh -c 'tmux new-session -d -s main'
         tmux send-keys -t "main" 'tmux source-file "$HOME/.zpwr/.tmux/control-window"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
