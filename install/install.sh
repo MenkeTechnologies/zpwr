@@ -228,7 +228,8 @@ usage(){
     Options:
     -h|help       Display this message
     -s|skip       Skip main section
-    -c|config       Copy just configs
+    -c|config     Copy just configs
+    -n|notmux     Do not start tmux at end of installer
     -v|version    Display script version"
 
 }
