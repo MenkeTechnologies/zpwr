@@ -114,7 +114,7 @@ needSudo(){
 
 proceed(){
     printf "Proceed?(y/n) >>> "
-    read
+    read -n1
     case $REPLY in
         [yY][eE][sS]|[yY])
             :
