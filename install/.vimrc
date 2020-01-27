@@ -763,6 +763,9 @@ inoremap <F7> <ESC>:TTags<CR>
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
+nnoremap && :normal mzg&`zzz<CR>
+xnoremap && :normal mzg&`zzz<CR>
+
 map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
 map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 "map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
