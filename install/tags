@@ -743,8 +743,8 @@ distroName	/Users/wizard/.zshrc	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g
 distroName	install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	install.sh	/^        distroName=Mac$/;"	v
 distroName	install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
-distroName	plugins_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
 distroName	plugins_install.sh	/^        distroName=FreeBSD$/;"	v
+distroName	plugins_install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' \/etc\/os-release)$/;"	v
 distroName	plugins_install.sh	/^    distroName=Mac$/;"	v
 do_line	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def do_line(self):$/;"	m	language:Python	class:Deroffer
 do_tbl	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def do_tbl(self):$/;"	m	language:Python	class:Deroffer

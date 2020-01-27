@@ -3,8 +3,8 @@ source common.sh || { echo "Must be in .zpwr/install directory" >&2; exit 1; }
 INSTALLER_DIR="$(pwd -P)"
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR/../local/installer"
-
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
+
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR
 fi
@@ -17,9 +17,7 @@ fi
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     distroName=Mac
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
-        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
-
-
+    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 else
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
         distroName=FreeBSD
@@ -31,11 +29,18 @@ prettyPrint "Installing Pathogen"
 mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
 
 prettyPrint "Installing Vim Plugins"
-builtin cd "$INSTALLER_DIR"
+if ! builtin cd "$INSTALLER_DIR"; then
+    echo "where is $INSTALLER_DIR" >&2
+    exit 1
+fi
+
 source  "$INSTALLER_DIR/vim_plugins_install.sh"
 
 prettyPrint "Installing Ultisnips snippets"
-builtin cd "$INSTALLER_DIR"
+if ! builtin cd "$INSTALLER_DIR"; then
+    echo "where is $INSTALLER_DIR" >&2
+    exit 1
+fi
 cp -R "$INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 
@@ -93,9 +98,13 @@ fi
 prettyPrint "Installing Custom Tmux Commands"
 cp -R "$INSTALLER_DIR/.tmux" "$ZPWR"
 
-builtin cd "$INSTALLER_DIR"
+if ! builtin cd "$INSTALLER_DIR"; then
+    echo "where is $INSTALLER_DIR" >&2
+    exit 1
+fi
+
 prettyPrint "Installing Tmux plugins"
-. "$INSTALLER_DIR/tmux_plugins_install.sh"
+source "$INSTALLER_DIR/tmux_plugins_install.sh"
 
 [[ ! -f "$ZPWR_HIDDEN_DIR/.tokens.sh" ]] && touch "$ZPWR_HIDDEN_DIR/.tokens.sh"
 

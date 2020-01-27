@@ -251,7 +251,10 @@ warnSudo(){
 }
 
 pluginsinstall(){
-    builtin cd "$INSTALLER_DIR"
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in .zpwr/install directory?" >&2; exit 1; }
     bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
     PLUGIN_PID=$!
@@ -259,7 +262,10 @@ pluginsinstall(){
 }
 
 ycminstall(){
-    builtin cd "$INSTALLER_DIR"
+    if ! builtin cd "$INSTALLER_DIR"; then
+        echo "where is $INSTALLER_DIR" >&2
+        exit 1
+    fi
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in .zpwr/install base directory?" >&2; exit 1; }
     bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
     YCM_PID=$!
