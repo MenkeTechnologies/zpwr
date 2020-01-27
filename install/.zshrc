@@ -2892,6 +2892,10 @@ function numZpwrVerbs(){
     cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+)' | wc -l
 }
 
+function zpwrEnvVars(){
+    env | command grep -i "^$ZPWR_REPO_NAME" | fzf
+}
+
 function zpwrTags(){
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
