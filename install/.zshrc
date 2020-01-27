@@ -118,6 +118,7 @@ export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_LOCAL="$ZPWR/local"
 export ZPWR_INSTALL="$ZPWR/install"
 export ZPWR_TMUX="$ZPWR/.tmux"
+export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
 # the base dir for zpwr temp
 export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 # the path to a lock file (semaphore) for zpwr
@@ -177,8 +178,24 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
 
+if [[ ! -d $ZPWR ]]; then
+    mkdir -p $ZPWR
+fi
+
+if [[ ! -d $ZPWR_INSTALL ]]; then
+    mkdir -p $ZPWR_INSTALL
+fi
+
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR
+fi
+
+if [[ ! -d $ZPWR_TMUX_LOCAL ]]; then
+    mkdir -p $ZPWR_TMUX_LOCAL
+fi
+
+if [[ ! -d $ZPWR_LOCAL ]]; then
+    mkdir -p $ZPWR_LOCAL
 fi
 
 if [[ $ZPWR_PROFILING == true ]]; then
