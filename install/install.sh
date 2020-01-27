@@ -14,8 +14,14 @@
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 #resolve all symlinks
 INSTALLER_DIR="$(pwd -P)"
-ZPWR_BASE_DIR="$INSTALLER_DIR/.."
-ZPWR_BASE_SCRIPTS="$INSTALLER_DIR/../scripts"
+ZPWR_BASE_DIR="$(dirname $INSTALLER_DIR)"
+
+if [[ $ZPWR_BASE_DIR == "$INSTALLER_DIR" ]]; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 
@@ -44,7 +50,7 @@ if ! source common.sh; then
 fi
 
 if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
-    mkdir -pv $ZPWR_INSTALLER_OUTPUT
+    mkdir -p $ZPWR_INSTALLER_OUTPUT
 fi
 
 logfile="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
