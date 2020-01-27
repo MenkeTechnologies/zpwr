@@ -61,6 +61,8 @@ case $verb in
         ;;
     for10) cmd="ff" #run 10 times for command
         ;;
+    forked) cmd="fp" #cd to ~/forkedRepos
+        ;;
     fp) cmd="fp" #cd to ~/forkedRepos
         ;;
     ghcontribcount) cmd="cgh" #count of github contribs in last year
