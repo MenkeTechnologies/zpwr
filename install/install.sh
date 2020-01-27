@@ -541,6 +541,8 @@ if [[ $justConfig != true ]]; then
     builtin cd "$INSTALLER_DIR"
     source "npm_install.sh"
 
+    builtin cd "$INSTALLER_DIR"
+
 fi
 
 #}}}***********************************************************

@@ -6,6 +6,13 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 --color	/Users/wizard/.zshrc	/^--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f$/;"	v	language:Sh
 --color	/Users/wizard/.zshrc	/^--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"$/;"	v	language:Sh
+--enable-gui	vim_install.sh	/^        --enable-gui=gtk2 --enable-cscope --prefix=\/usr$/;"	v
+--enable-luainterp	vim_install.sh	/^        --enable-luainterp=yes \\$/;"	v
+--enable-perlinterp	vim_install.sh	/^        --enable-perlinterp=yes \\$/;"	v
+--enable-python3interp	vim_install.sh	/^        --enable-python3interp=yes \\$/;"	v
+--enable-pythoninterp	vim_install.sh	/^        --enable-pythoninterp=no \\$/;"	v
+--enable-rubyinterp	vim_install.sh	/^        --enable-rubyinterp=yes \\$/;"	v
+--with-python3-config-dir	vim_install.sh	/^        --with-python3-config-dir=\/usr\/lib\/python3.5\/config \\$/;"	v
 256colors	/Users/wizard/.zshrc	/^256colors(){$/;"	f	language:Sh
 ARCHFLAGS	/Users/wizard/.zshrc	/^export ARCHFLAGS="-arch x86_64"$/;"	v	language:Sh
 BACKUP_DIR	install.sh	/^    BACKUP_DIR="$ZPWR_HIDDEN_DIR\/$USER.rc.bak.$(date +'%m.%d.%Y')"$/;"	v
@@ -164,8 +171,10 @@ IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v	languag
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^IFS=:$/;"	v	language:Sh
 INSTALLER_DIR	common.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
+INSTALLER_DIR	neovim_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	plugins_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INSTALLER_DIR	rustupinstall.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
+INSTALLER_DIR	vim_install.sh	/^INSTALLER_DIR="$(pwd -P)"$/;"	v
 INTERFACE	/Users/wizard/.zpwr/scripts/macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v	language:Sh
 KEYTIMEOUT	/Users/wizard/.zshrc	/^export KEYTIMEOUT=1$/;"	v	language:Sh
 LBUFFER	/Users/wizard/.zshrc	/^        LBUFFER="sudo -E nvim $(fzvim)"$/;"	v	language:Sh
@@ -290,6 +299,7 @@ URL	/Users/wizard/.zpwr/scripts/gitgo.sh	/^    local URL="https:\/\/github.com\/
 URL	/Users/wizard/.zpwr/scripts/help2comp.py	/^URL = 'http:\/\/github.com\/RobSis\/zsh-completion-generator'$/;"	v	language:Python
 XAUTHORITY	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export XAUTHORITY="$HOME\/.Xauthority"$/;"	v	language:Sh
 YARN_HOME	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export YARN_HOME="$HOME\/.config\/yarn"$/;"	v	language:Sh
+YCM_CORES	ycm_install.sh	/^    YCM_CORES=1 python3 install.py --clang-completer$/;"	v
 YCM_PID	install.sh	/^    YCM_PID=$!$/;"	v
 ZLE_RPROMPT_INDENT	/Users/wizard/.zpwr/.powerlevel9kconfig.sh	/^ZLE_RPROMPT_INDENT=0$/;"	v	language:Sh
 ZPWR	plugins_install.sh	/^    export ZPWR="$HOME\/.zpwr"$/;"	v
@@ -338,6 +348,8 @@ ZPWR_HIDDEN_DIR	plugins_install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr\/local
 ZPWR_HIDDEN_DIR_TEMP	/Users/wizard/.zshrc	/^export ZPWR_HIDDEN_DIR_TEMP="$HOME\/.zpwr\/.temp"$/;"	v	language:Sh
 ZPWR_HIDDEN_DIR_TEMP	install.sh	/^export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR\/.temp"$/;"	v
 ZPWR_INSTALLER_OUTPUT	install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
+ZPWR_INSTALLER_OUTPUT	neovim_install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
+ZPWR_INSTALLER_OUTPUT	vim_install.sh	/^ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR\/local\/installer"$/;"	v
 ZPWR_LEARN	/Users/wizard/.zshrc	/^export ZPWR_LEARN=true$/;"	v	language:Sh
 ZPWR_LOCK_FILE	/Users/wizard/.zshrc	/^export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR\/.lock"$/;"	v	language:Sh
 ZPWR_LOGFILE	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR\/zpwrLog.txt"$/;"	v	language:Sh

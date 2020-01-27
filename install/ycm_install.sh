@@ -13,6 +13,7 @@ prettyPrint "Installing YouCompleteMe"
 mkdir -p "$HOME/.vim/bundle"
 
 builtin cd "$HOME/.vim/bundle" || { echo "no .vim/bundle dir" >&2; exit1; }
+
 git clone https://github.com/ycm-core/YouCompleteMe.git
 builtin cd "$HOME/.vim/bundle/YouCompleteMe" && {
     git submodule update --init --recursive

@@ -8,4 +8,20 @@
 ##### Notes:
 #}}}***********************************************************
 
+INSTALLER_DIR="$(pwd -P)"
+
+#source common functions
+if ! test -f common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+ZPWR_INSTALLER_OUTPUT="$INSTALLER_DIR/local/installer"
+
+if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
+    mkdir -p $ZPWR_INSTALLER_OUTPUT
+fi
+
+builtin cd "$ZPWR_INSTALLER_OUTPUT" || exit 1
+
 git clone https://github.com/neovim/neovim.git && cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install
