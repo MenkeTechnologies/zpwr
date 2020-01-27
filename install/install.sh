@@ -29,16 +29,6 @@ ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 
 escapeRemover="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
 
-if ! test -f "$escapeRemover"; then
-    echo "where is $escapeRemover?" >&2
-    exit 1
-fi
-
-if ! test -x "$escapeRemover"; then
-    echo "why $escapeRemover not exe?" >&2
-    exit 1
-fi
-
 if [[ ! -d $ZPWR_BASE_SCRIPTS ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
@@ -53,6 +43,17 @@ if [[ ! -d $ZPWR_INSTALLER_LOCAL ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
+
+if ! test -f "$escapeRemover"; then
+    echo "where is $escapeRemover?" >&2
+    exit 1
+fi
+
+if ! test -x "$escapeRemover"; then
+    echo "why $escapeRemover not exe?" >&2
+    exit 1
+fi
+
 #shows count of steps in installer
 install_counter=0
 #for the width of the install messages
