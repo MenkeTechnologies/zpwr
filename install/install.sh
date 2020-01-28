@@ -266,7 +266,7 @@ function goInstallerDir(){
         echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
     fi
 
-    if (( ret = 1 )); then
+    if (( ret == 1 )); then
         echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
@@ -281,7 +281,7 @@ function goInstallerOutputDir(){
         echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
     fi
 
-    if (( ret = 1 )); then
+    if (( ret == 1 )); then
         echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
         exit 1
     fi
