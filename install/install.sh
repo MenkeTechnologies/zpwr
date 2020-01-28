@@ -13,7 +13,7 @@
 unset CDPATH
 
 #get operating system type
-ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 #resolve all symlinks
 ZPWR_INSTALLER_DIR="$(pwd -P)"
 ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"

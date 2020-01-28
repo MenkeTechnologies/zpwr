@@ -18,7 +18,7 @@ if ! test -f common.sh; then
     exit 1
 fi
 
-ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 
 #resolve all symlinks
 ZPWR_INSTALLER_DIR="$(pwd -P)"

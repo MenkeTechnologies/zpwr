@@ -122,7 +122,7 @@ export ZPWR_GLOBAL_ALIAS_PREFIX=j
 # move to next tabstop with ^P
 export ZPWR_TABSTOP=__________
 # the OS of the host
-export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # for alternating pretty printer
 export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'

@@ -377,9 +377,9 @@ ZPWR_NVIMINFO	/Users/wizard/.zshrc	/^export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR\/.nv
 ZPWR_OPEN_CMD	/Users/wizard/.zpwr/scripts/crossOSCommands.sh	/^export ZPWR_OPEN_CMD="$(getOpenCommand)"$/;"	v	language:Sh
 ZPWR_OS_TYPE	/Users/wizard/.zpwr/scripts/crossOSCommands.sh	/^    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v	language:Sh
 ZPWR_OS_TYPE	/Users/wizard/.zshrc	/^export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v	language:Sh
-ZPWR_OS_TYPE	common.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
-ZPWR_OS_TYPE	install.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
-ZPWR_OS_TYPE	plugins_install.sh	/^ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v
+ZPWR_OS_TYPE	common.sh	/^ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"$/;"	v
+ZPWR_OS_TYPE	install.sh	/^ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"$/;"	v
+ZPWR_OS_TYPE	plugins_install.sh	/^ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"$/;"	v
 ZPWR_PARENT_PROCESS	/Users/wizard/.zshrc	/^ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\\s*\\d+.*}')"$/;"	v	language:Sh
 ZPWR_PASTE_CMD	/Users/wizard/.zpwr/scripts/crossOSCommands.sh	/^export ZPWR_PASTE_CMD="$(getPasteCommand)"$/;"	v	language:Sh
 ZPWR_PROFILING	/Users/wizard/.zshrc	/^export ZPWR_PROFILING=alse$/;"	v	language:Sh

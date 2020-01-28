@@ -1,7 +1,7 @@
 source common.sh || { echo "Must be in .zpwr/install directory" >&2; exit 1; }
 
 ZPWR_INSTALLER_DIR="$(pwd -P)"
-ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_DIR/../local/installer"
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 
