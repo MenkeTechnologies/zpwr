@@ -79,9 +79,9 @@ export ZPWR_INSTALL="$ZPWR/install"
 export ZPWR_TMUX="$ZPWR/.tmux"
 export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
 # the base dir for zpwr temp
-export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
 # the path to a lock file (semaphore) for zpwr
-export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
+export ZPWR_LOCK_FILE="$ZPWR_LOCAL/.lock"
 # set to POWERLEVEL to use the powerlevel9k prompt
 export ZPWR_PROMPT=POWERLEVEL
 # aliases expand in first position
@@ -131,9 +131,9 @@ export ZPWR_REPO_NAME="zpwr"
 # the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
 # the path for vim keybindings cache
-export ZPWR_VIM_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrVimKeybindings.txt"
+export ZPWR_VIM_KEYBINDINGS="$ZPWR_LOCAL/zpwrVimKeybindings.txt"
 # the path for all keybindings cache
-export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrAllKeybindings.txt"
+export ZPWR_ALL_KEYBINDINGS="$ZPWR_LOCAL/zpwrAllKeybindings.txt"
 # logg function underscore color
 export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
 # logg function quote color
@@ -147,7 +147,7 @@ export ZPWR_RM_AUTO_LS=true
 # run ls after cd automatically
 export ZPWR_CD_AUTO_LS=true
 # cache file for all zpwr env lookups
-export ZPWR_ENV="$ZPWR_HIDDEN_DIR/zpwrEnv"
+export ZPWR_ENV="$ZPWR_LOCAL/zpwrEnv"
 # forked powerlevel9k config file for PROMPT
 export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
@@ -162,7 +162,7 @@ export ZPWR_SEND_KEYS_PANE=-1
 # when false does not send enter and Control to synced panes
 export ZPWR_SEND_KEYS_FULL=false
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
-export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
+export ZPWR_NVIMINFO="$ZPWR_LOCAL/.nviminfo"
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
 # ponysay banner when shell startup finishes
