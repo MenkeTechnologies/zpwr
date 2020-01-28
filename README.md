@@ -69,6 +69,8 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
 - centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - user specific ZPWR files in `~/.zpwr/local` git ignored
+- installer specific ZPWR files in `~/.zpwr/install` git tracked
+- ZPWR installer ouput in `~/.zpwr/local/install` git ignored
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
