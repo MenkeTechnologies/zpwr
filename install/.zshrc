@@ -71,6 +71,17 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 # More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file
 # override in ~/.zpwr/local/.tokens.sh, ~/.zpwr/local is git ignored
 # see README.md
+# the base dir for zpwr configs
+export ZPWR="$HOME/.zpwr"
+export ZPWR_HIDDEN_DIR="$ZPWR/local"
+export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_INSTALL="$ZPWR/install"
+export ZPWR_TMUX="$ZPWR/.tmux"
+export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
+# the base dir for zpwr temp
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
+# the path to a lock file (semaphore) for zpwr
+export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
 # set to POWERLEVEL to use the powerlevel9k prompt
 export ZPWR_PROMPT=POWERLEVEL
 # aliases expand in first position
@@ -112,17 +123,6 @@ export ZPWR_GLOBAL_ALIAS_PREFIX=j
 export ZPWR_TABSTOP=__________
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
-# the base dir for zpwr configs
-export ZPWR="$HOME/.zpwr"
-export ZPWR_HIDDEN_DIR="$ZPWR/local"
-export ZPWR_LOCAL="$ZPWR/local"
-export ZPWR_INSTALL="$ZPWR/install"
-export ZPWR_TMUX="$ZPWR/.tmux"
-export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
-# the base dir for zpwr temp
-export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
-# the path to a lock file (semaphore) for zpwr
-export ZPWR_LOCK_FILE="$ZPWR_HIDDEN_DIR/.lock"
 # for alternating pretty printer
 export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
@@ -163,13 +163,13 @@ export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 export ZPWR_NVIMINFO="$ZPWR_HIDDEN_DIR/.nviminfo"
-#when true vim normal mode C-V mapped to exec current file in right tmux pane
+# when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
-#ponysay banner when shell startup finishes
+# ponysay banner when shell startup finishes
 export ZPWR_INTRO_BANNER=ponies
-#alternate banner to ponysay
+# alternate banner to ponysay
 export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
-#zpwr banner file location
+# zpwr banner file location
 export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 #}}}***********************************************************
 
