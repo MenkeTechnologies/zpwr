@@ -7,22 +7,32 @@
 #####   Notes: goal - work on mac and linux
 #####   Notes: this script should a one liner installer
 #}}}***********************************************************
+#{{{                    MARK:Env vars
+#**************************************************************
 function goInstallerDir(){
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+    local ret=0
+    builtin cd "$ZPWR_INSTALLER_DIR" || ret=1
+
+    if [[ "$(pwd)" != "$ZPWR_INSTALLER_DIR" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
+    fi
+
+    if (( ret = 1 )); then
         echo "where is $ZPWR_INSTALLER_DIR" >&2
         exit 1
     fi
 }
 
 
-
-#{{{                    MARK:Env vars
-#**************************************************************
 function goInstallerOuput(){
-    if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
-        if [[ "$PWD" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
-            echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
-        fi
+    local ret=0
+    builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
+
+    if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
+    fi
+
+    if (( ret = 1 )); then
         echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
         exit 1
     fi

@@ -13,6 +13,7 @@ if ! test -f install.sh; then
     echo "install.sh ust be in ~/.zpwr/install directory" >&2
     exit 1
 fi
+
 if ! test -f common.sh; then
     echo "common.sh Must be in ~/.zpwr/install directory" >&2
     exit 1

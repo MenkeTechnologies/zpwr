@@ -1422,6 +1422,7 @@ ret	/Users/wizard/.zshrc	/^                            ret=$?$/;"	v	language:Sh
 ret	/Users/wizard/.zshrc	/^                        ret=$?$/;"	v	language:Sh
 ret	/Users/wizard/.zshrc	/^            ret=0 || ret=1$/;"	v	language:Sh
 ret	/Users/wizard/.zshrc	/^        ret=0 || ret=1$/;"	v	language:Sh
+ret	install.sh	/^    local ret=0$/;"	v
 return2	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^return2(){$/;"	f	language:Sh
 revarr	/Users/wizard/.zpwr/scripts/picture_finder.sh	/^    local revarr=('|' '\/' '-' '\\')$/;"	v	language:Sh
 revarr	/Users/wizard/.zpwr/scripts/secureDelete.sh	/^    local revarr=('|' '\/' '-' '\\')$/;"	v	language:Sh
