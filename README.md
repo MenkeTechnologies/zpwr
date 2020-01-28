@@ -44,9 +44,9 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - custom ZPWR banner when `getrc`, `zpwr banner` and `install.sh` run
 - zle sed subs on current command line
 - vim text objects on command line
-- vim extract method for shell, perl and python scripts (gv to select extracted)
-- vim extract variable for shell, perl and python scripts (gv to select extracted)
-- vim extract variable from visual selection for shell, perl and python scripts (gv to select extracted)
+- vim extract method for shell, perl and python scripts (`gv` to select extracted)
+- vim extract variable for shell, perl and python scripts (`gv` to select extracted)
+- vim extract variable from visual selection for shell, perl and python scripts (`gv` to select extracted)
 - software updater script, `source autoUpdater.h`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push
 - zsh keybindings to git add, commit and push with commit message from current command line
@@ -64,21 +64,24 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - search google from tmux mouse drag selection (tmux's copy-mode-vi)
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
 - zpwr subcommands covering most of ZPWR functions with zsh completion `zpwr <tab>`
-- centralized FZF preview pane customization
+- centralized FZF preview pane customization with environment variables
 - centralized environment variables in ZPWR namespace to control functionality
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
 - centralized ZPWR files in `~/.zpwr` allowing easy uninstall
+- user specific ZPWR files in `~/.zpwr/local` git ignored
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
 - restart function that launches poll and learn by enabling and starting in systemd
 
 ## ZPWR Dependencies
-- oh-my-zsh with 63 plugins of which 16 are custom
 - zsh
-- Powerlevel9k zsh prompt with ~dirs
 - tmux
 - neovim with 76 plugins and python3/node support
+- perl
+- bash
+- oh-my-zsh with 63 plugins of which 16 are custom
+- forked powerlevel9k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
 - supertab
@@ -98,7 +101,6 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - fzf
 - gotop
 - lolcat
-- mylg
 - python3
 - powerline-status for tmux
 - vim-airline status bar
@@ -107,8 +109,6 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - pgcli
 - ponysay
 - pygments
-- perl
-- bash
 
 # Supported Operating Systems:
 - macOS
