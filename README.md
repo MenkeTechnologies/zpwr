@@ -175,9 +175,9 @@ documentation for details on how to change the font.
 
 ## getrc and copyConf functions
 There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`.
-It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc` and `~.tmux.conf` in `$HOME`.
+It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` in `$HOME`.
 `copyConf` will also overwrite all scripts in `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and some other configs in home directory.
-Run `clearList getrc copyConf` to see the bodies of these function.
+Run `clearList getrc copyConf` to see the bodies of these function for all overwritten files.
 
 ## Tmux prefix
 The default tmux prefix key is C-x (control-x) on macOS so one can control inner tmux sessions on Linux/UNIX (prefix is C-b) separately.
