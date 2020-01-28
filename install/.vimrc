@@ -1266,6 +1266,9 @@ nnoremap <silent> <C-D>rq :silent !open -t %:p:h<CR>:redraw!<CR>
 nnoremap <silent> <C-D>rr :Rg<CR>
 nnoremap <silent> <leader>rg :Rg<CR>
 nnoremap <silent> <C-D>s :History/<CR>
+nnoremap <silent> <leader>hh :History<CR>
+nnoremap <silent> <leader>h/ :History/<CR>
+nnoremap <silent> <leader>h: :History:<CR>
 nnoremap <silent> <C-D>t :Tags<CR>
 nnoremap <silent> <C-D>] <C-W>}<CR>
 nnoremap <silent> <leader>] <C-W>}<CR>
