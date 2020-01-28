@@ -950,6 +950,8 @@ git_name	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    git_name="${1##*\
 gittersdev	/Users/wizard/.zpwr/scripts/remoteRepoMonitorDaemon.sh	/^gittersdev() {$/;"	f	language:Sh
 gittersmaster	/Users/wizard/.zpwr/scripts/remoteRepoMonitorDaemon.sh	/^gittersmaster() {$/;"	f	language:Sh
 globalAliasesInit	/Users/wizard/.zshrc	/^globalAliasesInit(){$/;"	f	language:Sh
+goInstallerDir	install.sh	/^function goInstallerDir(){$/;"	f
+goInstallerOuput	install.sh	/^function goInstallerOuput(){$/;"	f
 goThere	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    goThere(){$/;"	f	language:Sh
 goclean	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^goclean() {$/;"	f	language:Sh
 green	/Users/wizard/.zshrc	/^local green="64"$/;"	v	language:Sh

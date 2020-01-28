@@ -7,9 +7,27 @@
 #####   Notes: goal - work on mac and linux
 #####   Notes: this script should a one liner installer
 #}}}***********************************************************
+function goInstallerDir(){
+    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
+        exit 1
+    fi
+}
+
+
 
 #{{{                    MARK:Env vars
 #**************************************************************
+function goInstallerOuput(){
+    if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
+        if [[ "$PWD" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
+            echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
+        fi
+        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
+        exit 1
+    fi
+}
+
 unset CDPATH
 
 #get operating system type
@@ -298,10 +316,7 @@ warnSudo(){
 }
 
 pluginsinstall(){
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
+    goInstallerDir
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in .zpwr/install directory?" >&2; exit 1; }
     bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
     PLUGIN_PID=$!
@@ -309,10 +324,7 @@ pluginsinstall(){
 }
 
 ycminstall(){
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
+    goInstallerDir
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in .zpwr/install base directory?" >&2; exit 1; }
     bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
     YCM_PID=$!
@@ -320,6 +332,7 @@ ycminstall(){
 }
 
 cargoinstall(){
+    goInstallerDir
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in .zpwr/install base directory?" >&2; exit 1; }
     bash rustupinstall.sh >> "$logfileCargoYCM" 2>&1 &
     CARGO_PID=$!
@@ -584,31 +597,20 @@ if [[ $justConfig != true ]]; then
         #if neovim already installed, vim already points to neovim
         prettyPrint "Vim Version less than 8.0 or without python! Installing Vim from Source."
 
-        if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-            echo "where is $ZPWR_INSTALLER_DIR" >&2
-            exit 1
-        fi
+        goInstallerDir
         source "vim_install.sh"
     fi
 
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
+    goInstallerDir
+
     exists nvim || {
         source "neovim_install.sh"
     }
 
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
+    goInstallerDir
     source "npm_install.sh"
 
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
+    goInstallerDir
 
 fi
 
@@ -619,17 +621,11 @@ fi
 if [[ $justConfig != true ]]; then
     ycminstall
 
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
+    goInstallerDir
 
-    source "$ZPWR_INSTALLER_DIR/pip_install.sh"
+    source "pip_install.sh"
 
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
+    goInstallerOuput
     prettyPrint "Installing Pipes.sh from source"
     git clone https://github.com/pipeseroni/pipes.sh.git
     builtin cd pipes.sh && {
@@ -670,10 +666,7 @@ fi
 if [[ $justConfig != true ]]; then
     prettyPrint "Installing IFTOP-color by MenkeTechnologies"
 
-    if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
-        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
-        exit 1
-    fi
+    goInstallerOuput
     automake --version 2>&1 | grep -q '16' || {
         wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
             tar xvfz automake-1.16.tar.gz
@@ -692,17 +685,12 @@ if [[ $justConfig != true ]]; then
     fi
 
     if ! exists grc; then
-        if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
-            echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
-            exit 1
-        fi
+        goInstallerOuput
         git clone https://github.com/garabik/grc.git
         builtin cd grc
         sudo bash install.sh
-        if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-            echo "where is $ZPWR_INSTALLER_DIR" >&2
-            exit 1
-        fi
+
+        goInstallerOuput
     fi
 
     if [[ "$(uname)" == Darwin ]]; then
@@ -716,10 +704,9 @@ if [[ $justConfig != true ]]; then
     else
         GRC_DIR=/usr/share/grc
     fi
-    if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
-        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
-        exit 1
-    fi
+
+    goInstallerOuput
+
     prettyPrint "Installing ponysay from source"
     git clone https://github.com/erkin/ponysay.git && {
         builtin cd ponysay && sudo ./setup.py --freedom=partial install && \
@@ -727,11 +714,10 @@ if [[ $justConfig != true ]]; then
     }
 
     prettyPrint "Installing Go deps"
-    if ! builtin cd "$ZPWR_INSTALL"; then
-        echo "where is $ZPWR_INSTALL" >&2
-        exit 1
-    fi
-    source "$ZPWR_INSTALLER_DIR/go_install.sh"
+
+    goInstallerDir
+
+    source "go_install.sh"
 
     test -f /usr/local/sbin/iftop || {
         prettyPrint "No iftop so installing"
@@ -766,11 +752,8 @@ prettyPrint "Installing .zshrc"
 cp "$ZPWR_INSTALLER_DIR/.zshrc" "$HOME"
 
 prettyPrint "Installing Zsh plugins"
-if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-    echo "where is $ZPWR_INSTALLER_DIR" >&2
-    exit 1
-fi
-source "$ZPWR_INSTALLER_DIR/zsh_plugins_install.sh"
+goInstallerDir
+source "zsh_plugins_install.sh"
 
 prettyPrint "Running Vundle"
 #run vundle install for ultisnips, supertab
@@ -791,10 +774,7 @@ fi
 
 #{{{                    MARK:Final sym links
 #**************************************************************
-if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-    echo "where is $ZPWR_INSTALLER_DIR" >&2
-    exit 1
-fi
+goInstallerDir
 
 prettyPrint "Generating $ZPWR_INSTALLER_OUTPUT/log.txt with $escapeRemover from $logfile"
 "$escapeRemover" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
