@@ -716,8 +716,8 @@ if [[ $justConfig != true ]]; then
     else
         GRC_DIR=/usr/share/grc
     fi
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
+        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
         exit 1
     fi
     prettyPrint "Installing ponysay from source"
@@ -727,8 +727,8 @@ if [[ $justConfig != true ]]; then
     }
 
     prettyPrint "Installing Go deps"
-    if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
+    if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
+        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
         exit 1
     fi
     source "$ZPWR_INSTALLER_DIR/go_install.sh"

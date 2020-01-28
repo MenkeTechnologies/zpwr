@@ -58,7 +58,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - shell function uses same shell code to generate output that default FZF preview pane does (c)
 - shell function auto runs sudo when file is not readable (c)
 - shell function that cds to any of parent directories with zsh completion (r)
-- 150+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS`
+- 150+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color coded, tag grouped clearList zsh completion
 - search google from tmux mouse drag selection (tmux's copy-mode-vi)
@@ -70,7 +70,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - user specific ZPWR files in `~/.zpwr/local` git ignored
 - installer specific ZPWR files in `~/.zpwr/install` git tracked
-- ZPWR installer ouput in `~/.zpwr/local/install` git ignored
+- ZPWR installer ouput in `~/.zpwr/local/installer` git ignored
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
