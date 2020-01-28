@@ -727,8 +727,8 @@ if [[ $justConfig != true ]]; then
     }
 
     prettyPrint "Installing Go deps"
-    if ! builtin cd "$ZPWR_INSTALLER_OUTPUT"; then
-        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
+    if ! builtin cd "$ZPWR_INSTALL"; then
+        echo "where is $ZPWR_INSTALL" >&2
         exit 1
     fi
     source "$ZPWR_INSTALLER_DIR/go_install.sh"
