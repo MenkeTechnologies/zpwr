@@ -698,11 +698,10 @@ if [[ $justConfig != true ]]; then
 
     if ! exists grc; then
         goInstallerOutputDir
+        prettyPrint "Installing grc from source to $(pwd)"
         git clone https://github.com/garabik/grc.git
         builtin cd grc
         sudo bash install.sh
-
-        goInstallerOutputDir
     fi
 
     if [[ "$(uname)" == Darwin ]]; then
