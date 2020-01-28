@@ -9,35 +9,6 @@
 #}}}***********************************************************
 #{{{                    MARK:Env vars
 #**************************************************************
-function goInstallerDir(){
-    local ret=0
-    builtin cd "$ZPWR_INSTALLER_DIR" || ret=1
-
-    if [[ "$(pwd)" != "$ZPWR_INSTALLER_DIR" ]]; then
-        echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
-    fi
-
-    if (( ret = 1 )); then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
-}
-
-
-function goInstallerOuput(){
-    local ret=0
-    builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
-
-    if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
-        echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
-    fi
-
-    if (( ret = 1 )); then
-        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
-        exit 1
-    fi
-}
-
 unset CDPATH
 
 #get operating system type
@@ -263,7 +234,7 @@ addDependenciesMac(){
 
 __ScriptVersion="1.0.1"
 
-usage(){
+function usage(){
     echo "Usage :  $0 [options] [--]
 
     Options:
@@ -276,7 +247,7 @@ usage(){
 }
 
 
-showDeps(){
+function showDeps(){
     bash "$ZPWR_INSTALLER_DIR/scripts/about.sh" 2>/dev/null
     {
         printf "Installing ${#dependencies_ary[@]} packages on $distroName: "
@@ -284,27 +255,58 @@ showDeps(){
             printf "$dep "
         done
     } | prettyPrintStdin
-proceed
+    proceed
 }
+
+function goInstallerDir(){
+    local ret=0
+    builtin cd "$ZPWR_INSTALLER_DIR" || ret=1
+
+    if [[ "$(pwd)" != "$ZPWR_INSTALLER_DIR" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
+    fi
+
+    if (( ret = 1 )); then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
+        exit 1
+    fi
+}
+
+
+function goInstallerOutputDir(){
+    local ret=0
+    builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
+
+    if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
+    fi
+
+    if (( ret = 1 )); then
+        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
+        exit 1
+    fi
+}
+
 
 files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell_aliases_functions.sh \
     conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .zpwr/.powerlevel9kconfig.sh .my.cnf motd.sh)
-    dirs=(.zpwr/scripts .config/htop .config/powerline/themes/tmux)
+
+dirs=(.zpwr/scripts .config/htop .config/powerline/themes/tmux)
 
 
-    BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
+BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
-    backup(){
-        test -d "$BACKUP_DIR" || mkdir -p "$BACKUP_DIR"
-        for file in ${files[@]} ; do
-            test -f "$HOME/$file" && cp "$HOME/$file" "$BACKUP_DIR"
-        done
-        for dir in ${dirs[@]} ; do
-            test -d "$HOME/$dir" && cp -R "$HOME/$dir" "$BACKUP_DIR"
-        done
-    }
+function backup(){
+    test -d "$BACKUP_DIR" || mkdir -p "$BACKUP_DIR"
+    for file in ${files[@]} ; do
+        test -f "$HOME/$file" && cp "$HOME/$file" "$BACKUP_DIR"
+    done
+    for dir in ${dirs[@]} ; do
+        test -d "$HOME/$dir" && cp -R "$HOME/$dir" "$BACKUP_DIR"
+    done
+}
 
-warnOverwrite(){
+function warnOverwrite(){
     prettyPrint "The following will be overwritten: .zshrc, .tmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.conf, .shell_aliases_functions.sh in $HOME"
     prettyPrint "These files if they exist will be backed to $BACKUP_DIR"
     prettyPrintStdin <<EOF
@@ -314,18 +316,18 @@ $HOME/${dirs[1]},
 $HOME/${dirs[2]}
 
 EOF
-proceed
-backup
+    proceed
+    backup
 
 }
 
-warnSudo(){
+function warnSudo(){
     prettyPrint "It is highly recommended to run 'sudo visudo' to allow noninteractive install.  This allows running sudo without a password.  The following line would be added to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:ALL"
     proceed
 
 }
 
-pluginsinstall(){
+function pluginsinstall(){
     goInstallerDir
     test -f plugins_install.sh || { echo "Where is plugins_install.sh in .zpwr/install directory?" >&2; exit 1; }
     bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
@@ -333,7 +335,7 @@ pluginsinstall(){
     prettyPrint "Installing vim and tmux plugins in background @ $PLUGIN_PID"
 }
 
-ycminstall(){
+function ycminstall(){
     goInstallerDir
     test -f ycm_install.sh || { echo "Where is ycm_install.sh in .zpwr/install base directory?" >&2; exit 1; }
     bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
@@ -341,7 +343,7 @@ ycminstall(){
     prettyPrint "Installing YouCompleteMe in background @ $YCM_PID"
 }
 
-cargoinstall(){
+function cargoinstall(){
     goInstallerDir
     test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in .zpwr/install base directory?" >&2; exit 1; }
     bash rustupinstall.sh >> "$logfileCargoYCM" 2>&1 &
@@ -635,7 +637,7 @@ if [[ $justConfig != true ]]; then
 
     source "pip_install.sh"
 
-    goInstallerOuput
+    goInstallerOutputDir
     prettyPrint "Installing Pipes.sh from source"
     git clone https://github.com/pipeseroni/pipes.sh.git
     builtin cd pipes.sh && {
@@ -676,7 +678,7 @@ fi
 if [[ $justConfig != true ]]; then
     prettyPrint "Installing IFTOP-color by MenkeTechnologies"
 
-    goInstallerOuput
+    goInstallerOutputDir
     automake --version 2>&1 | grep -q '16' || {
         wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
             tar xvfz automake-1.16.tar.gz
@@ -695,12 +697,12 @@ if [[ $justConfig != true ]]; then
     fi
 
     if ! exists grc; then
-        goInstallerOuput
+        goInstallerOutputDir
         git clone https://github.com/garabik/grc.git
         builtin cd grc
         sudo bash install.sh
 
-        goInstallerOuput
+        goInstallerOutputDir
     fi
 
     if [[ "$(uname)" == Darwin ]]; then
@@ -715,7 +717,7 @@ if [[ $justConfig != true ]]; then
         GRC_DIR=/usr/share/grc
     fi
 
-    goInstallerOuput
+    goInstallerOutputDir
 
     prettyPrint "Installing ponysay from source"
     git clone https://github.com/erkin/ponysay.git && {

@@ -30,11 +30,11 @@ ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
 export ZPWR_DELIMITER_CHAR='%'
 
 
-exists(){
+function exists(){
     type "$1" >/dev/null 2>&1
 }
 
-update(){
+function update(){
     exists "$1" || {
 
         if [[ $2 == mac ]]; then
@@ -55,7 +55,7 @@ update(){
     }
 }
 
-upgrade(){
+function upgrade(){
     if [[ $1 == mac ]]; then
         brew update
         brew upgrade
@@ -75,7 +75,7 @@ upgrade(){
     fi
 }
 
-refresh(){
+function refresh(){
     if [[ $1 == mac ]]; then
         brew update
     elif [[ $1 == debian ]];then
@@ -95,7 +95,7 @@ refresh(){
 
 }
 
-#prettyPrint(){
+#function prettyPrint(){
     #(( ++install_counter ))
     #printf "\x1b[32;1m"
     #perl -le "print '#'x80"
@@ -107,7 +107,7 @@ refresh(){
     #printf "\n"
 #}
 
-needSudo(){
+function needSudo(){
     if [[ ! -w "$1" ]]; then
         return 0
     else
@@ -115,7 +115,7 @@ needSudo(){
     fi
 }
 
-proceed(){
+function proceed(){
     printf "Proceed?(y/n) >>> "
     read -n1
     echo
@@ -129,7 +129,7 @@ proceed(){
     esac
 }
 
-prettyPrintStdin(){
+function prettyPrintStdin(){
     perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++install_counter ))
@@ -140,7 +140,7 @@ prettyPrintStdin(){
     echo
 }
 
-prettyPrint(){
+function prettyPrint(){
     perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++install_counter ))
@@ -148,20 +148,20 @@ prettyPrint(){
     echo
 }
 
-turnOffDebugging(){
+function turnOffDebugging(){
     set +x
     set +v
     exec 2> /dev/tty
 }
 
-turnOnDebugging(){
+function turnOnDebugging(){
     set -x
     set -v
     exec 2>> >(tee "$ZPWR_INSTALLER_OUTPUT/logfile.txt")
     exec >> >(tee "$ZPWR_INSTALLER_OUTPUT/logfile.txt")
 }
 
-alternatingPrettyPrint(){
+function alternatingPrettyPrint(){
     counter=0
 
     if [[ -z $1 ]]; then
