@@ -317,6 +317,9 @@ plugins=(jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
+if [[ $ZPWR_LEARN != false ]]; then
+    plugins+=(zsh-learn)
+fi
 
 ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 
@@ -2257,39 +2260,6 @@ function _fzf_complete_r_post() {
     cut -d ' ' -f1
 }
 
-# rsql ;<tab>
-function _fzf_complete_rsql() {
-  FZF_COMPLETION_OPTS= _fzf_complete '-m --ansi' "$@" < <(
-        se | tac
-    )
-}
-
-function _fzf_complete_rsql_post() {
-    awk '{print $1}'
-}
-
-# se ;<tab>
-function _fzf_complete_se() {
-  FZF_COMPLETION_OPTS= _fzf_complete '-m --ansi' "$@" < <(
-        se | tac
-    )
-}
-
-function _fzf_complete_se_post() {
-    awk '{print $2}'
-}
-
-# redo ;<tab>
-function _fzf_complete_redo() {
-  FZF_COMPLETION_OPTS= _fzf_complete '-m --ansi' "$@" < <(
-        se | tac
-    )
-}
-
-function _fzf_complete_redo_post() {
-    awk '{print $1}'
-}
-
 # clearList ;<tab>
 function _fzf_complete_clearList() {
     FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(
@@ -2434,16 +2404,6 @@ function _ssu(){
     arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')
     _arguments -s $arguments
 }
-
-function _se(){
-    eval "learn_ary=( $(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -e '@a=();$c=0;do{chomp;push(@ary,++$c.":".quotemeta($_))}for<>;$c=0;do{print "$_ " if $c++ < 1000}for reverse @ary') )"
-
-    _describe -t zdir 'my learning' learn_ary
-}
-
-# to allow reverse numeric sort and numeric sort
-# as opposed to lexicographic sort
-zstyle ':completion:*:*:(se|redo|rsql|z|r):*:*' sort false
 
 subcommands_ary=($(cat "$ZPWR_SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z0-9_]+)\s*\).*#(.*)$}'))
 subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
@@ -2775,65 +2735,6 @@ unalias ag &> /dev/null
 
 #stop delay when entering normal mode
 export KEYTIMEOUT=1
-
-if [[ $ZPWR_LEARN != false ]]; then
-    function learn(){
-        if [[ ! -z "$BUFFER" ]]; then
-            mywords=("${(z)BUFFER}")
-            [[ "${mywords[1]}" == le ]] && return 1
-
-        learning="$(print -- "$BUFFER" | perl -pe 's@\x0a@\x20@' | perl -pe 's@^\x20+|\x20+$@@g;s@\x20+@\x20@g')"
-
-            BUFFER="le '${learning//'/\''}'"
-        if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
-            keyClear
-        fi
-            zle .accept-line
-        else
-            return 1
-        fi
-    }
-
-    function rsql(){
-        printf ""> "$ZPWR_TEMPFILE_SQL"
-        for num in $@; do
-            id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == quotemeta('$num')")
-            if [[ -z $id ]]; then
-               continue
-            fi
-            item=$(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME where id=$id" | mysql 2>> $ZPWR_LOGFILE | tail -n 1)
-            item=${item//\'/\\\'}
-
-            echo "update $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME set learning = '$item' where id=$id"
-        done >> "$ZPWR_TEMPFILE_SQL"
-
-        vim "$ZPWR_TEMPFILE_SQL"
-        cat "$ZPWR_TEMPFILE_SQL" | mysql
-        command rm "$ZPWR_TEMPFILE_SQL"
-    }
-    function redo(){
-        echo > "$ZPWR_TEMPFILE"
-        for num in $@; do
-            id=$(echo "select id from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME order by dateAdded" | mysql | perl -ne "print if \$. == quotemeta('$num')")
-            if [[ -z $id ]]; then
-               continue
-            fi
-            item=$(echo "select learning from $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME where id=$id" | mysql 2>> $ZPWR_LOGFILE | tail -n 1)
-            item=${item//\'/\\\'\'}
-
-            echo "echo 'update $ZPWR_SCHEMA_NAME.$ZPWR_TABLE_NAME set learning = ""''"$item"''"" where id=$id' | mysql"
-        done >> "$ZPWR_TEMPFILE"
-
-        print -rz "$(cat "$ZPWR_TEMPFILE")"
-        command rm "$ZPWR_TEMPFILE"
-    }
-
-
-    zle -N learn
-    bindkey -M viins '^k' learn
-    bindkey -M vicmd '^k' learn
-
-fi
 
 zshrcsearch(){
     if [[ -z "$1" ]]; then

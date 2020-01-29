@@ -36,10 +36,12 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - integration of z frecency database into _files completion
 - integration of fasd frecency database into _files completion
 - zsh menucompletion for z command based on frecency z and fasd databases
-- keybindings to save to mysql learning table
-- functions to search from mysql learning table
-- functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table
-- zle keybinding formats newlines and spaces before saving to mysql learning database
+- keybindings to save to mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- functions to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- `redo <number...>` prints to prompt SQL update statements for learning items [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- `rsql <number...>` prints to vim SQL update statements for learning items that run once vim is quit [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- zle keybinding formats newlines and spaces before saving to mysql learning database [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - oh my zsh plugins loading based on OS
 - tmux keybindings and scripts based on OS
 - custom ZPWR banner with latest commit and tag when `getrc`, `zpwr banner` or `zpwr about` and `install.sh` run
