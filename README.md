@@ -183,9 +183,34 @@ documentation for details on how to change the font.
 
 ## getrc and copyConf functions
 There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`.
-It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` in `$HOME`.
-`copyConf` will also overwrite all scripts in `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and some other configs in home directory.
-Run `clearList getrc copyConf` to see the bodies of these functions for all overwritten files.
+It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` in `$HOME` and some other miscellaneous configuration files.
+> ~/.zpwr/.shell_aliases_functions.sh: copyConf
+```sh
+function copyConf(){
+    if [[ ! -f '.shell_aliases_functions.sh' ]]; then
+       loggErr "had to cd to $ZPWR_REPO"
+       builtin cd "$ZPWR_REPO"
+    fi
+    cp install/.zshrc "$HOME"
+    cp install/.vimrc "$HOME"
+    cp install/.tmux.conf "$HOME"
+    cp install/conf.gls "$HOME"
+    cp install/conf.df "$HOME"
+    cp install/conf.ifconfig "$HOME"
+    cp install/grc.zsh "$HOME"
+    cp install/.inputrc "$HOME"
+    if [[ -d "$HOME/.vim/Ultisnips" ]]; then
+        cp install/UltiSnips/* "$HOME/.vim/UltiSnips"
+    fi
+    cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux" 2>> "$ZPWR_LOGFILE"
+
+    if [[ ! -f "$HOME/.ctags" ]]; then
+        prettyPrint "Copying .ctags to home directory"
+        cp "install/.ctags" "$HOME"
+    fi
+
+}
+```
 
 ## Tmux prefix
 The default tmux prefix key is C-x (control-x) on macOS so one can control inner tmux sessions on Linux/UNIX (prefix is C-b) separately.
@@ -200,14 +225,14 @@ There are 76 vim plugins installed.  One of which is vim-autosave which autosave
 C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.
 Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`.
 
-> ~/.zshrc:265
+> ~/.zshrc
 ```sh
 plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround
 ```
 
 Alternatively, change these env vars to false in `~/.zpwr/local/.tokens.sh`.  The first controls all expansion in any position.
 The second variable controls expansion in second position.  For example with sudo/zpwr/env in the first position and the alias to expand in the second position on the command line.
-> ~/.zshrc:77
+> ~/.zshrc
 ```sh
 # aliases expand in first position
 export ZPWR_EXPAND=true
@@ -216,7 +241,7 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 ```
 
 The relevant code is the zsh-expand plugin for expansion at the second position.
-> ~/.oh-my-zsh/custom/plugins/zsh-expand/zsh-expand.plugin.zsh: 368
+> ~/.oh-my-zsh/custom/plugins/zsh-expand/zsh-expand.plugin.zsh
 ```sh
 if echo "$firstword_partition" | command grep -qE '(sudo|zpwr|env)';then
 ```

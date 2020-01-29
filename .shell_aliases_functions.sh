@@ -1731,14 +1731,11 @@ function copyConf(){
        loggErr "had to cd to $ZPWR_REPO"
        builtin cd "$ZPWR_REPO"
     fi
-    #cp .shell_aliases_functions.sh "$HOME/.zpwr"
     cp install/.zshrc "$HOME"
     cp install/.vimrc "$HOME"
-    #cp .minvimrc "$HOME/.zpwr"
     cp install/.tmux.conf "$HOME"
     cp install/conf.gls "$HOME"
     cp install/conf.df "$HOME"
-    #cp .powerlevel9kconfig.sh "$HOME/.zpwr"
     cp install/conf.ifconfig "$HOME"
     cp install/grc.zsh "$HOME"
     cp install/.inputrc "$HOME"
@@ -1746,8 +1743,6 @@ function copyConf(){
         cp install/UltiSnips/* "$HOME/.vim/UltiSnips"
     fi
     cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux" 2>> "$ZPWR_LOGFILE"
-    #cp -f scripts/* "$ZPWR_SCRIPTS"  2>> "$ZPWR_LOGFILE"
-    #cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
 
     if [[ ! -f "$HOME/.ctags" ]]; then
         prettyPrint "Copying .ctags to home directory"
