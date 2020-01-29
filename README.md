@@ -33,9 +33,9 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zsh keybindings to fzf search of network process with lsof return PIDs
 - fzf searching of all git directories on computer
 - fzf searching of all dirty git directories on computer
-- integration of z frecency database into _files completion
-- integration of fasd frecency database into _files completion
-- zsh menucompletion for z command based on frecency z and fasd databases
+- integration of [z](https://github.com/MenkeTechnologies/fasd-simple) frecency database into _files completion
+- integration of [fasd](https://github.com/MenkeTechnologies/fasd-simple) frecency database into _files completion
+- zsh menucompletion for [z](https://github.com/MenkeTechnologies/fasd-simple) command based on frecency [z](https://github.com/MenkeTechnologies/zsh-z) and [fasd](https://github.com/MenkeTechnologies/fasd-simple) databases
 - keybindings to save to mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - functions to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
