@@ -13,20 +13,20 @@ source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 function installNpmRpm(){
     prettyPrint "curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -"
     curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -
-    prettyPrint "install npm"
-    update "npm" "$distroFamily"
     prettyPrint "install nodejs"
     update "nodejs" "$distroFamily"
+    prettyPrint "install npm"
+    update "npm" "$distroFamily"
     prettyPrint "install build-essential"
     update "build-essential" "$distroFamily"
 }
 function installNpmDeb(){
     prettyPrint "curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-    prettyPrint "install npm"
-    update "npm" "$distroFamily"
     prettyPrint "install nodejs"
     update "nodejs" "$distroFamily"
+    prettyPrint "install npm"
+    update "npm" "$distroFamily"
     prettyPrint "install build-essential"
     update "build-essential" "$distroFamily"
 }
