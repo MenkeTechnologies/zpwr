@@ -87,10 +87,10 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 ## ZPWR Dependencies
 - zsh
 - tmux
-- neovim with 76 plugins and python3/node support
+- neovim with 82 plugins and python3/node support
 - perl
 - bash
-- oh-my-zsh with 63 plugins of which 16 are custom
+- oh-my-zsh with 68 plugins of which 25 are custom
 - forked powerlevel9k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
