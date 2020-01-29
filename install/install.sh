@@ -40,6 +40,11 @@ if [[ -n $vimV ]]; then
     fi
 fi
 
+#shows count of steps in installer
+install_counter=0
+#for the width of the install messages
+export COLUMNS="$(tput cols)"
+
 #}}}***********************************************************
 
 #{{{                    MARK:sanity
@@ -74,10 +79,6 @@ if ! test -x "$ESCAPE_REMOVER"; then
     exit 1
 fi
 
-#shows count of steps in installer
-install_counter=0
-#for the width of the install messages
-export COLUMNS="$(tput cols)"
 #source common functions
 if ! source common.sh; then
     echo "Must be in ~/.zpwr/install directory" >&2
