@@ -1742,7 +1742,6 @@ function copyConf(){
     if [[ -d "$HOME/.vim/Ultisnips" ]]; then
         cp install/UltiSnips/* "$HOME/.vim/UltiSnips"
     fi
-    cp -R .tmux/* "$ZPWR_HIDDEN_DIR/.tmux" 2>> "$ZPWR_LOGFILE"
 
     if [[ ! -f "$HOME/.ctags" ]]; then
         prettyPrint "Copying .ctags to home directory"
