@@ -74,7 +74,7 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
 export ZPWR_LOCAL="$ZPWR/local"
-export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_INSTALL="$ZPWR/install"
 export ZPWR_TMUX="$ZPWR/.tmux"
 export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
@@ -410,7 +410,7 @@ function updater (){
     zle .kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
-    BUFFER="( cat $ZPWR_SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $EMAIL 2>$ZPWR_LOGFILE &)"
+    BUFFER="( cat $ZPWR_SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"
     zle .accept-line
 }
 
