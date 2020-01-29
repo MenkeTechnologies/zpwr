@@ -10,6 +10,38 @@
 #not called from main
 echo "$0" | grep -q pip_install.sh && source common.sh
 
+if ! test -f common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+ZPWR_INSTALLER_DIR="$(pwd -P)"
+ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"
+
+if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALLER_DIR" ]]; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
+ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
+ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
+
+function goInstallerOutputDir(){
+    local ret=0
+    builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
+
+    if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
+    fi
+
+    if (( ret == 1 )); then
+        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
+        exit 1
+    fi
+}
+
+
 prettyPrint "installing gdb dashboard"
 wget -P ~ https://git.io/.gdbinit
 
@@ -65,6 +97,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     sudo python3 -m pip install vim-vint
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
     if [[ "$distroFamily" == redhat ]]; then
+        goInstallerOutputDir
         prettyPrint "Installing grc for RedHat"
         git clone https://github.com/garabik/grc.git && builtin cd grc && sudo bash install.sh
     fi
