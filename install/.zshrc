@@ -2564,9 +2564,6 @@ function _r(){
 zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
 zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
 
-
-
-compdef _se se redo rsql
 compdef _cl clearList
 compdef _f f
 compdef _c c
