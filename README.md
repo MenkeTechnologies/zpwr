@@ -20,10 +20,10 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - tag grouping for man pages by section
 - heavily colorized man pages color grouped by sections [zsh-very-colorful-manuals](https://github.com/MenkeTechnologies/zsh-very-colorful-manuals)
 - insert matching quotes, brackets and parentheses like most IDEs [zsh-surround](https://github.com/MenkeTechnologies/zsh-surround)
-- custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching (fzVim)
-- keybinding to run current code file open in vim in tmux pane to right
-- keybinding to run current vim selection in tmux pane to right as standalone script
-- keybinding to run current vim selection in tmux pane to right in REPL
+- custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching (fzvim)
+- vim keybindings (insert, normal and visual modes) to run current code file open in vim in tmux pane to right
+- vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
+- vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF*OPTS env vars
 - 10.5k zsh tab completions [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - ergonomic, recursive tmux keybindings for next and previous windows
@@ -81,7 +81,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
 - restart function that launches poll and learn by enabling and starting in systemd
-- central control of zpwr colorful output with ZPWR_COLORS
+- central control of zpwr colorful output with `ZPWR_COLORS`
 
 
 ## ZPWR Dependencies
