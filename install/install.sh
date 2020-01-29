@@ -7,6 +7,7 @@
 #####   Notes: goal - work on mac and linux
 #####   Notes: this script should a one liner installer
 #}}}***********************************************************
+
 #{{{                    MARK:Env vars
 #**************************************************************
 unset CDPATH
@@ -15,18 +16,38 @@ unset CDPATH
 ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 #resolve all symlinks
 ZPWR_INSTALLER_DIR="$(pwd -P)"
+#normally ~/.zpwr
 ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"
-
-if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALLER_DIR" ]]; then
-    echo "Must be in ~/.zpwr/install directory" >&2
-    exit 1
-fi
-
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 
-escapeRemover="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
+export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
+#the destination directory for zpwr specific temp files
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
+
+ESCAPE_REMOVER="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
+#the destination directory for zpwr specific installed files
+logfile="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
+logfileCargoYCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
+
+INSTALL_VIM_SRC=false
+
+vimV="$(vim --version | head -n 1 | awk '{print $5}')"
+if [[ -n $vimV ]]; then
+    if echo "$vimV >= 8.0" | bc 2>/dev/null | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
+        INSTALL_VIM_SRC=true
+    fi
+fi
+
+#}}}***********************************************************
+
+#{{{                    MARK:sanity
+#**************************************************************
+if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALLER_DIR" ]]; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
 
 if [[ ! -d $ZPWR_BASE_SCRIPTS ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
@@ -43,13 +64,13 @@ if [[ ! -d $ZPWR_INSTALLER_LOCAL ]]; then
     exit 1
 fi
 
-if ! test -f "$escapeRemover"; then
-    echo "where is $escapeRemover?" >&2
+if ! test -f "$ESCAPE_REMOVER"; then
+    echo "where is $ESCAPE_REMOVER?" >&2
     exit 1
 fi
 
-if ! test -x "$escapeRemover"; then
-    echo "why $escapeRemover not exe?" >&2
+if ! test -x "$ESCAPE_REMOVER"; then
+    echo "why $ESCAPE_REMOVER not exe?" >&2
     exit 1
 fi
 
@@ -62,32 +83,20 @@ if ! source common.sh; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
+#}}}***********************************************************
 
+#{{{                    MARK:mkdir if needed
+#**************************************************************
 if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
     mkdir -p $ZPWR_INSTALLER_OUTPUT
 fi
 
-logfile="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
-logfileCargoYCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
-
-#the destination directory for zpwr specific installed files
-export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR
 fi
 
-#the destination directory for zpwr specific temp files
-export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 if [[ ! -d $ZPWR_HIDDEN_DIR_TEMP ]]; then
     mkdir -p $ZPWR_HIDDEN_DIR_TEMP
-fi
-
-INSTALL_VIM_SRC=false
-vimV="$(vim --version | head -n 1 | awk '{print $5}')"
-if [[ -n $vimV ]]; then
-    if echo "$vimV >= 8.0" | bc 2>/dev/null | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
-        INSTALL_VIM_SRC=true
-    fi
 fi
 #}}}***********************************************************
 
@@ -151,7 +160,7 @@ EOF
 
 #}}}***********************************************************
 
-#{{{                    MARK:Setup functions
+#{{{                    MARK:Setup deps
 #**************************************************************
 #Dependencies
 # 1) neovim
@@ -179,11 +188,6 @@ dependencies_ary=(openssl moreutils cmake tig hexedit boxes tal iperf vim tmux c
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
     whois weechat gradle ant maven telnet tree mc ocaml groovy slurm \
     bmon ruby parallel pssh shfmt)
-
-#}}}***********************************************************
-
-#{{{                    MARK:Instaler Functions
-#**************************************************************
 
 addDependenciesLinux(){
     dependencies_ary=(neovim pkg-config libclang1 llvm ${dependencies_ary[@]})
@@ -231,7 +235,10 @@ addDependenciesMac(){
     dependencies_ary+=(ripgrep httpie proxychains-ng s-search git ag automake autoconf fortune node the_silver_searcher \
         fswatch zzz ghc lua python readline reattach-to-user-namespace speedtest-cli aalib ncmpcpp mpd ctop hub ncurses tomcat ninvaders kotlin grails go)
 }
+#}}}***********************************************************
 
+#{{{                    MARK:installer funcs
+#**************************************************************
 __ScriptVersion="1.0.1"
 
 function usage(){
@@ -257,36 +264,6 @@ function showDeps(){
     } | prettyPrintStdin
     proceed
 }
-
-function goInstallerDir(){
-    local ret=0
-    builtin cd "$ZPWR_INSTALLER_DIR" || ret=1
-
-    if [[ "$(pwd)" != "$ZPWR_INSTALLER_DIR" ]]; then
-        echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
-    fi
-
-    if (( ret == 1 )); then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
-        exit 1
-    fi
-}
-
-
-function goInstallerOutputDir(){
-    local ret=0
-    builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
-
-    if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
-        echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
-    fi
-
-    if (( ret == 1 )); then
-        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
-        exit 1
-    fi
-}
-
 
 files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell_aliases_functions.sh \
     conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .zpwr/.powerlevel9kconfig.sh .my.cnf motd.sh)
@@ -329,7 +306,7 @@ function warnSudo(){
 
 function pluginsinstall(){
     goInstallerDir
-    test -f plugins_install.sh || { echo "Where is plugins_install.sh in .zpwr/install directory?" >&2; exit 1; }
+    doesFileExist plugins_install.sh
     bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
     PLUGIN_PID=$!
     prettyPrint "Installing vim and tmux plugins in background @ $PLUGIN_PID"
@@ -337,7 +314,7 @@ function pluginsinstall(){
 
 function ycminstall(){
     goInstallerDir
-    test -f ycm_install.sh || { echo "Where is ycm_install.sh in .zpwr/install base directory?" >&2; exit 1; }
+    doesFileExist ycm_install.sh
     bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
     YCM_PID=$!
     prettyPrint "Installing YouCompleteMe in background @ $YCM_PID"
@@ -345,7 +322,7 @@ function ycminstall(){
 
 function cargoinstall(){
     goInstallerDir
-    test -f rustupinstall.sh || { echo "Where is rustupinstall.sh in .zpwr/install base directory?" >&2; exit 1; }
+    doesFileExist rustupinstall.sh
     bash rustupinstall.sh >> "$logfileCargoYCM" 2>&1 &
     CARGO_PID=$!
     echo $CARGO_PID
@@ -355,7 +332,6 @@ function cargoinstall(){
 
 #{{{                    MARK:Getopts
 #**************************************************************
-
 skip=false
 justConfig=false
 noTmux=false
@@ -610,17 +586,20 @@ if [[ $justConfig != true ]]; then
         prettyPrint "Vim Version less than 8.0 or without python! Installing Vim from Source."
 
         goInstallerDir
-        source "vim_install.sh"
+        doesFileExist vim_install.sh
+        source vim_install.sh
     fi
 
     goInstallerDir
 
     exists nvim || {
-        source "neovim_install.sh"
+        doesFileExist neovim_install.sh
+        source neovim_install.sh
     }
 
     goInstallerDir
-    source "npm_install.sh"
+    doesFileExist npm_install.sh
+    source npm_install.sh
 
     goInstallerDir
 
@@ -634,12 +613,16 @@ if [[ $justConfig != true ]]; then
     ycminstall
 
     goInstallerDir
+    doesFileExist pip_install.sh
 
-    source "pip_install.sh"
+    source pip_install.sh
 
     goInstallerOutputDir
+
     prettyPrint "Installing Pipes.sh from source"
+
     git clone https://github.com/pipeseroni/pipes.sh.git
+
     builtin cd pipes.sh && {
         sudo make install
             builtin cd ..
@@ -693,6 +676,8 @@ if [[ $justConfig != true ]]; then
             aclocal
             automake --add-missing
             ./configure && make && sudo make install
+        else
+            fail "could not cd to iftopcolor"
         fi
     fi
 
@@ -700,11 +685,14 @@ if [[ $justConfig != true ]]; then
         goInstallerOutputDir
         prettyPrint "Installing grc from source to $(pwd)"
         git clone https://github.com/garabik/grc.git
-        builtin cd grc
-        sudo bash install.sh
+        if builtin cd grc; then
+            sudo bash install.sh
+        else
+            fail "could not cd to grc"
+        fi
     fi
 
-    if [[ "$(uname)" == Darwin ]]; then
+    if [[ $ZPWR_OS_TYPE == darwin ]]; then
         prettyPrint "Try again for ponysay and lolcat on mac"
         exists ponysay || brew install ponysay
     fi
@@ -727,13 +715,15 @@ if [[ $justConfig != true ]]; then
     prettyPrint "Installing Go deps"
 
     goInstallerDir
+    doesFileExist go_install.sh
 
-    source "go_install.sh"
+    source go_install.sh
 
-    test -f /usr/local/sbin/iftop || {
+    if ! test -f /usr/local/sbin/iftop;then
         prettyPrint "No iftop so installing"
-                        update iftop "$distroFamily"
-                    }
+        update iftop "$distroFamily"
+    fi
+
     if [[ "$ZPWR_OS_TYPE" != darwin ]]; then
         prettyPrint "Installing snort"
         update snort "$distroFamily"
@@ -763,8 +753,11 @@ prettyPrint "Installing .zshrc"
 cp "$ZPWR_INSTALLER_DIR/.zshrc" "$HOME"
 
 prettyPrint "Installing Zsh plugins"
+
 goInstallerDir
-source "zsh_plugins_install.sh"
+doesFileExist zsh_install.sh
+
+source zsh_plugins_install.sh
 
 prettyPrint "Running Vundle"
 #run vundle install for ultisnips, supertab
@@ -787,8 +780,8 @@ fi
 #**************************************************************
 goInstallerDir
 
-prettyPrint "Generating $ZPWR_INSTALLER_OUTPUT/log.txt with $escapeRemover from $logfile"
-"$escapeRemover" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
+prettyPrint "Generating $ZPWR_INSTALLER_OUTPUT/log.txt with $ESCAPE_REMOVER from $logfile"
+"$ESCAPE_REMOVER" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
 
 #rm -rf "$ZPWR_INSTALLER_DIR"
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
@@ -806,7 +799,9 @@ fi
 
 export SHELL="$(which zsh)"
 export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
+
 dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
+
 prettyPrint "linking $dir to ~/.tmux/powerline"
 
 if [[ ! -d "$HOME/.tmux" ]]; then

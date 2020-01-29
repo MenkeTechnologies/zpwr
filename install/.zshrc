@@ -2902,7 +2902,7 @@ function zpwrAllUpdates(){
 }
 
 function zpwrVerbs(){
-    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+)' | fzf
+    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' | fzf
 }
 
 function numZpwrVerbs(){

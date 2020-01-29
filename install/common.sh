@@ -29,6 +29,46 @@ ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
 
 export ZPWR_DELIMITER_CHAR='%'
 
+function fail(){
+        echo "failure due to $1" >&2
+        exit 1
+}
+
+function doesFileExist(){
+    if [[ ! -f "$1" ]]; then
+        echo "where is the file $1?" >&2
+        exit 1
+    fi
+}
+
+function goInstallerDir(){
+    local ret=0
+    builtin cd "$ZPWR_INSTALLER_DIR" || ret=1
+
+    if [[ "$(pwd)" != "$ZPWR_INSTALLER_DIR" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
+    fi
+
+    if (( ret == 1 )); then
+        echo "where is $ZPWR_INSTALLER_DIR" >&2
+        exit 1
+    fi
+}
+
+
+function goInstallerOutputDir(){
+    local ret=0
+    builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
+
+    if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
+    fi
+
+    if (( ret == 1 )); then
+        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
+        exit 1
+    fi
+}
 
 function exists(){
     type "$1" >/dev/null 2>&1
