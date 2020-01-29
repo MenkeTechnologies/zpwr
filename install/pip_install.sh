@@ -96,6 +96,38 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     prettyPrint "Installing vim-vint"
     sudo python3 -m pip install vim-vint
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
+
+    if [[ -z $distroName ]]; then
+        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+
+        case $distroName in
+            (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
+                distroFamily=debian
+                prettyPrint "Fetching Dependencies for $distroName with the Advanced Package Manager..."
+                addDependenciesDebian
+                ;;
+            (arch)
+                distroFamily=arch
+                prettyPrint "Fetching Dependencies for $distroName with zypper"
+                addDependenciesArch
+                ;;
+            (*suse*)
+                distroFamily=suse
+                prettyPrint "Fetching Dependencies for $distroName with zypper"
+                addDependenciesSuse
+                ;;
+            (centos|fedora|rhel)
+                distroFamily=redhat
+                prettyPrint "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
+                addDependenciesRedHat
+                ;;
+            (*)
+                prettyPrint "Your distroFamily $distroName is unsupported!" >&2
+                exit 1
+                ;;
+        esac
+    fi
+
     if [[ "$distroFamily" == redhat ]]; then
         goInstallerOutputDir
         prettyPrint "Installing grc for RedHat"

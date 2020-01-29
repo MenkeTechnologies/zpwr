@@ -758,6 +758,10 @@ distroFamily	npm_install.sh	/^            distroFamily=redhat$/;"	v
 distroFamily	npm_install.sh	/^            distroFamily=suse$/;"	v
 distroFamily	npm_install.sh	/^        distroFamily=freebsd$/;"	v
 distroFamily	npm_install.sh	/^    distroFamily=mac$/;"	v
+distroFamily	pip_install.sh	/^                distroFamily=arch$/;"	v
+distroFamily	pip_install.sh	/^                distroFamily=debian$/;"	v
+distroFamily	pip_install.sh	/^                distroFamily=redhat$/;"	v
+distroFamily	pip_install.sh	/^                distroFamily=suse$/;"	v
 distroName	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^            distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	/Users/wizard/.zpwr/scripts/clearTrash.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	/Users/wizard/.zpwr/scripts/colorLogger.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
@@ -769,6 +773,7 @@ distroName	install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;
 distroName	npm_install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	npm_install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
 distroName	npm_install.sh	/^    distroName=Mac$/;"	v
+distroName	pip_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
 distroName	plugins_install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	plugins_install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' \/etc\/os-release)$/;"	v
 distroName	plugins_install.sh	/^    distroName=Mac$/;"	v
