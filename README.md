@@ -24,12 +24,12 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - keybinding to run current code file open in vim in tmux pane to right
 - keybinding to run current vim selection in tmux pane to right as standalone script
 - keybinding to run current vim selection in tmux pane to right in REPL
-- fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files
+- fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF*OPTS env vars
 - 10.5k zsh tab completions [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
-- ergonomic, recursive tmux keybindings
-- zsh keybindings to fzf search file names and syntax highlighted, numbered file preview
-- zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview
-- zsh keybindings to fzf search of most recent files opened in vim with syntax highlighted, numbered preview pane
+- ergonomic, recursive tmux keybindings for next and previous windows
+- zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygementize
+- zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygementize
+- zsh keybindings to fzf search of most recent files opened in vim with syntax highlighted, numbered preview pane from bat or pygementize
 - zsh keybindings to fzf search of network process with lsof return PIDs
 - fzf searching of all git directories on computer
 - fzf searching of all dirty git directories on computer
@@ -58,14 +58,14 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - shell function to pull down latest code changes from this repo (getrc)
 - shell function that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips (c)
 - shell function uses same shell code to generate output that default FZF preview pane does (c)
-- shell function auto runs sudo when file is not readable (c)
+- shell function automaticaly runs sudo when file is not readable (c)
 - shell function that cds to any of parent directories with zsh completion (r)
 - 150+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color coded, tag grouped clearList zsh completion
 - search google from tmux mouse drag selection (tmux's copy-mode-vi)
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
-- zpwr subcommands covering most of ZPWR functions with zsh completion `zpwr <tab>`
+- zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
 - zpwr subcommands count `zpwr verbscount`
 - zpwr subcommands into fzf `zpwr verbs`
 - centralized FZF preview pane customization with environment variables
@@ -79,6 +79,8 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
 - restart function that launches poll and learn by enabling and starting in systemd
+- central control of zpwr colorful output with ZPWR_COLORS
+
 
 ## ZPWR Dependencies
 - zsh
