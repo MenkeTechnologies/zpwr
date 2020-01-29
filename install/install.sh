@@ -756,7 +756,7 @@ cp "$ZPWR_INSTALLER_DIR/.zshrc" "$HOME"
 prettyPrint "Installing Zsh plugins"
 
 goInstallerDir
-doesFileExist zsh_install.sh
+doesFileExist zsh_plugins_install.sh
 
 source zsh_plugins_install.sh
 
