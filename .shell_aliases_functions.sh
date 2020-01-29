@@ -66,25 +66,25 @@ function chooseNvimVim(){
 
 #{{{                    MARK:ZPWR ENV VARS
 #**************************************************************
-test -z "$ZPWR_HIDDEN_DIR" && export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
+test -z "$ZPWR_LOCAL" && export ZPWR_LOCAL="$HOME/.zpwr/local"
 test -z "$ZPWR_OS_TYPE" && export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 test -z "$ZPWR_DELIMITER_CHAR" && export ZPWR_DELIMITER_CHAR='%'
 test -z "$ZPWR_GITHUB_ACCOUNT" && export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 test -z "$ZPWR_GITHUB_URL" && export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
 test -z "$ZPWR_REPO_NAME" && export ZPWR_REPO_NAME="zpwr"
 test -z "$ZPWR_COMPLETION_DIR" && export ZPWR_COMPLETION_DIR="zsh-more-completions"
-test -z "$ZPWR_VIM_KEYBINDINGS" && export ZPWR_VIM_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrVimKeybindings.txt"
-test -z "$ZPWR_ALL_KEYBINDINGS" && export ZPWR_ALL_KEYBINDINGS="$ZPWR_HIDDEN_DIR/zpwrKeybindings.txt"
+test -z "$ZPWR_VIM_KEYBINDINGS" && export ZPWR_VIM_KEYBINDINGS="$ZPWR_LOCAL/zpwrVimKeybindings.txt"
+test -z "$ZPWR_ALL_KEYBINDINGS" && export ZPWR_ALL_KEYBINDINGS="$ZPWR_LOCAL/zpwrKeybindings.txt"
 test -z "$ZPWR_LOG_UNDER_COLOR" && export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
 test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
 test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
 test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
 test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$ZPWR/scripts"
-export ZPWR_ALL_GIT_DIRS="$ZPWR_HIDDEN_DIR/zpwrGitDirs.txt"
-export ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/zpwrLog.txt"
+export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
+export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 
-test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
+test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
 
 if [[ $ZPWR_EXA_EXTENDED == true ]]; then
     export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
@@ -107,7 +107,7 @@ export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
 #**************************************************************
 export ZPWR_TMUX_PREFIX=x
 export ZPWR_TMUX_REMOTE_PREFIX=b
-test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
+test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh"
 #bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 #zsh xtrace
@@ -297,7 +297,7 @@ isZsh && {
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
-alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh; source $ZPWR_HIDDEN_DIR/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupBashConfig.sh 2> /dev/null"
+alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR_LOCAL/.shell_aliases_functions.sh; source $ZPWR_LOCAL/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupBashConfig.sh 2> /dev/null"
 alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 #}}}***********************************************************
@@ -368,7 +368,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
                 alias v='mvim -v'
                 alias vi='mvim -v'
                 alias vim='mvim -v'
-                alias vm="mvim -v -u $ZPWR_HIDDEN_DIR/.minvimrc"
+                alias vm="mvim -v -u $ZPWR_LOCAL/.minvimrc"
                 alias sv='sudo mvim -v'
             fi
         }
@@ -400,8 +400,8 @@ else
         }
         case $distroName in
             (raspbian) 
-                if [[ -f "$ZPWR_HIDDEN_DIR/.rpitokens.sh" ]]; then
-                    source "$ZPWR_HIDDEN_DIR/.rpitokens.sh"
+                if [[ -f "$ZPWR_LOCAL/.rpitokens.sh" ]]; then
+                    source "$ZPWR_LOCAL/.rpitokens.sh"
                 elif [[ -f "$HOME/.rpitokens.sh" ]]; then
                         source "$HOME/.rpitokens.sh"
                 fi
@@ -2153,11 +2153,11 @@ function pre(){
 }
 
 exists pssh && function pir(){
-    if ! test -s "$ZPWR_HIDDEN_DIR/hosts.txt"; then
-        loggErr "you need hosts.txt in your $ZPWR_HIDDEN_DIR"
+    if ! test -s "$ZPWR_LOCAL/hosts.txt"; then
+        loggErr "you need hosts.txt in your $ZPWR_LOCAL"
         return 1
     fi
-    pssh --inline-stdout --timeout 90 -h "$ZPWR_HIDDEN_DIR/hosts.txt" "$@"
+    pssh --inline-stdout --timeout 90 -h "$ZPWR_LOCAL/hosts.txt" "$@"
 }
 
 function cCommon(){
@@ -2533,14 +2533,14 @@ function commits(){
 
 function vimAll(){
     #echo vim "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
-    #"$ZPWR_HIDDEN_DIR/"*.{sh,py,zsh,pl} \
-    #"$ZPWR_HIDDEN_DIR/".minvimrc \
+    #"$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    #"$ZPWR_LOCAL/".minvimrc \
     #"$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     #"$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
     vim \
     "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
-    "$ZPWR_HIDDEN_DIR/"*.{sh,py,zsh,pl} \
-    "$ZPWR_HIDDEN_DIR/"{.minvimrc} \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_LOCAL/"{.minvimrc} \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
 }

@@ -73,7 +73,7 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 # see README.md
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
-export ZPWR_HIDDEN_DIR="$ZPWR/local"
+export ZPWR_LOCAL="$ZPWR/local"
 export ZPWR_LOCAL="$ZPWR/local"
 export ZPWR_INSTALL="$ZPWR/install"
 export ZPWR_TMUX="$ZPWR/.tmux"
@@ -186,8 +186,8 @@ if [[ ! -d $ZPWR_INSTALL ]]; then
     mkdir -p $ZPWR_INSTALL
 fi
 
-if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
-    mkdir -p $ZPWR_HIDDEN_DIR
+if [[ ! -d $ZPWR_LOCAL ]]; then
+    mkdir -p $ZPWR_LOCAL
 fi
 
 if [[ ! -d $ZPWR_TMUX_LOCAL ]]; then
@@ -203,7 +203,7 @@ if [[ $ZPWR_PROFILING == true ]]; then
     zmodload zsh/zprof
 fi
 
-test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
+test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh"
 
 [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
 source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
@@ -371,7 +371,7 @@ source $ZSH/oh-my-zsh.sh
 #has all aliases and functions common to bourne like shells
 _alias_file="$ZPWR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
-alias -r > "$ZPWR_HIDDEN_DIR/.common_aliases"
+alias -r > "$ZPWR_LOCAL/.common_aliases"
 
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
@@ -740,8 +740,8 @@ function startSend(){
     fi
     ZPWR_SEND_KEYS_PANE=$1
 
-    if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
-        mkdir -p $ZPWR_HIDDEN_DIR
+    if [[ ! -d $ZPWR_LOCAL ]]; then
+        mkdir -p $ZPWR_LOCAL
     fi
 
     echo > $ZPWR_LOCK_FILE
@@ -1147,7 +1147,7 @@ function my-accept-line () {
     if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ ! -z $(alias -g $mywords[1]) ]];then
-            aliases="$(cat $ZPWR_HIDDEN_DIR/.common_aliases)"
+            aliases="$(cat $ZPWR_LOCAL/.common_aliases)"
             line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
             if [[ -z $line ]];then
                 #fxn
@@ -1182,12 +1182,12 @@ function precmd(){
             ZPWR_WILL_CLEAR=false
         fi
     }
-    if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_HIDDEN_DIR/.display.txt ]]; then
-        #export DISPLAY=$(cat $ZPWR_HIDDEN_DIR/.display.txt) ||
+    if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
+        #export DISPLAY=$(cat $ZPWR_LOCAL/.display.txt) ||
         :
     else
         :
-        #echo $DISPLAY > $ZPWR_HIDDEN_DIR/.display.txt
+        #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
     fi
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
@@ -1197,12 +1197,12 @@ function precmd(){
     fi
 }
 
-if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_HIDDEN_DIR/.display.txt ]]; then
-    #export DISPLAY=$(cat $ZPWR_HIDDEN_DIR/.display.txt) ||
+if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
+    #export DISPLAY=$(cat $ZPWR_LOCAL/.display.txt) ||
     :
     else
         :
-        #echo $DISPLAY > $ZPWR_HIDDEN_DIR/.display.txt
+        #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
     fi
 
 function rationalize-dot (){
@@ -1789,8 +1789,8 @@ function globalAliasesInit(){
 
     alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
-    if [[ -d "$ZPWR_HIDDEN_DIR" ]]; then
-        alias zh="cd $ZPWR_HIDDEN_DIR"
+    if [[ -d "$ZPWR_LOCAL" ]]; then
+        alias zh="cd $ZPWR_LOCAL"
     fi
     if [[ -d "$ZSH/custom/plugins" ]]; then
         alias zpl="cd $ZSH/custom/plugins"
@@ -1849,7 +1849,7 @@ function revealRecurse(){
 #
 #{{{                    MARK:Source Tokens
 #**************************************************************
-test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
+test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh"
 #}}}***********************************************************
 
 #{{{                    MARK:Initialize Login
@@ -1981,10 +1981,10 @@ if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
     hash -d ZPWR_TEMP="$ZPWR_HIDDEN_DIR_TEMP"
 fi
 
-if [[ -d "$ZPWR_HIDDEN_DIR" ]]; then
+if [[ -d "$ZPWR_LOCAL" ]]; then
     #shorten to prevail over absolute path in print -p %~
     #must be <= .zpwr
-    hash -d ZPWR="$ZPWR_HIDDEN_DIR"
+    hash -d ZPWR="$ZPWR_LOCAL"
 fi
 
 if [[ -d "$ZPWR_LOCAL" ]]; then
@@ -2822,5 +2822,5 @@ alias tok="vim $ZPWR_LOCAL/.tokens.sh"
 #{{{                    MARK:Finish
 #**************************************************************
 #source .tokens.sh to override with user functions
-test -f "$ZPWR_HIDDEN_DIR/.tokens.sh" && source "$ZPWR_HIDDEN_DIR/.tokens.sh"
+test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh"
 #}}}***********************************************************

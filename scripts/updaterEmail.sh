@@ -8,6 +8,11 @@
 #}}}***********************************************************
 
 ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
-ZPWR_LOGFILE="$ZPWR_HIDDEN_DIR/zpwrLog.txt"
+ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 
-(cat "$ZPWR_SCRIPTS/updater.sh" | bash -l 2>&1 | tee "$ZPWR_LOGFILE" | mutt -s \"Log from $(date)\" jamenk@email.wm.edu 2>"$ZPWR_LOGFILE" &)
+if [[ -n $ZPWR_EMAIL ]]; then
+    (cat "$ZPWR_SCRIPTS/updater.sh" | bash -l 2>&1 | tee "$ZPWR_LOGFILE" | mutt -s \"Log from $(date)\" $ZPWR_EMAIL 2>"$ZPWR_LOGFILE" &)
+else
+    loggErr "cannot proceed without \$ZPWR_EMAIL"
+fi
+

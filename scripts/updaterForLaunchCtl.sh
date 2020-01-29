@@ -7,4 +7,4 @@
 ##### Notes:
 #}}}***********************************************************
 
-bash "$ZPWR_HIDDEN_DIR/scripts/updater.sh" >"$ZPWR_HIDDEN_DIR/zpwrLog.txt" 2>&1
+bash "$ZPWR_LOCAL/scripts/updater.sh" >"$ZPWR_LOCAL/zpwrLog.txt" 2>&1
