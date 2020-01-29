@@ -18,7 +18,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - color-coded sections of zsh menu completion for git objects
 - custom styling for tag grouping in menu selection
 - tag grouping for man pages by section
-- colorized man pages color grouped by sections
+- heavily colorized man pages color grouped by sections [zsh-very-colorful-manuals](https://github.com/MenkeTechnologies/zsh-very-colorful-manuals)
 - insert matching quotes, brackets and parentheses like most IDEs [zsh-surround](https://github.com/MenkeTechnologies/zsh-surround)
 - custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching (fzVim)
 - keybinding to run current code file open in vim in tmux pane to right
@@ -33,16 +33,18 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - zsh keybindings to fzf search of network process with lsof return PIDs
 - fzf searching of all git directories on computer
 - fzf searching of all dirty git directories on computer
-- zsh completion for z command bases on .z database
+- integration of z frecency database into _files completion
+- integration of fasd frecency database into _files completion
+- zsh menucompletion for z command based on frecency z and fasd databases
 - keybindings to save to mysql learning table
 - functions to search from mysql learning table
 - functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table
 - zle keybinding formats newlines and spaces before saving to mysql learning database
 - oh my zsh plugins loading based on OS
-- tmux keybindings based on OS
+- tmux keybindings and scripts based on OS
 - custom ZPWR banner with latest commit and tag when `getrc`, `zpwr banner` or `zpwr about` and `install.sh` run
 - custom banner commands when new shell is launched
-- zle sed subs on current command line
+- zle sed sub widget to replace globally on current command line
 - vim text objects on command line
 - vim extract method for shell, perl and python scripts (`gv` to select extracted)
 - vim extract variable for shell, perl and python scripts (`gv` to select extracted)
@@ -51,8 +53,8 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - zsh keybindings to git add, commit and push with commit message from current command line [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - git blacklisted directories [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
-- zle quote swappers
-- zsh, tmux and vim keybindings to copy to clipboard
+- zle quote swapper widget
+- zsh, tmux and vim keybindings to copy to system clipboard
 - shell function to pull down latest code changes from this repo (getrc)
 - shell function that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips (c)
 - shell function uses same shell code to generate output that default FZF preview pane does (c)
