@@ -49,14 +49,14 @@ function chooseNvimVim(){
             alias v='nvim'
             alias vi='nvim'
             alias vim='nvim'
-            alias vm="nvim -v -u $ZPWR/.minvimrc"
+            alias vm="nvim -u $ZPWR/.mininit.vim"
             alias sv='sudo -E nvim'
         }
     else
         exists vim && {
             alias v=vim
             alias vi=vim
-            alias vm="vim -v -u $ZPWR/.minvimrc"
+            alias vm="vim -u $ZPWR/.minvimrc"
             alias sv='sudo -E vim'
         }
     fi
@@ -361,7 +361,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
     chooseNvimVim
 
-    #mvim overides vim if not using nvim
+    # mvim overrides vim if not using nvim
     if [[ $ZPWR_PREFER_MVIM == true ]]; then
         exists mvim && {
             if [[ $ZPWR_USE_NEOVIM != true ]]; then

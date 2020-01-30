@@ -15,7 +15,11 @@
 "
 " https://github.com/menketechnologies
 "
-source $VIMRUNTIME/defaults.vim
+if has("nvim")
+    "source $VIM/sysinit.vim
+else
+    source $VIMRUNTIME/defaults.vim
+endif
 
 let mapleader = "\<space>"
 
