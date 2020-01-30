@@ -3,10 +3,13 @@
 #**************************************************************
 #####   Author: JACOBMENKE
 #####   Date: Sat Apr  7 02:19:29 EDT 2018
-#####   Purpose: bash script to 
+#####   Purpose: bash script to hold installer lib fns
 #####   Notes: 
 #}}}***********************************************************
 
+#{{{                    MARK:sanity
+#**************************************************************
+# do not want any surprises when relative cd to other dirs
 unset CDPATH
 
 if ! test -f install.sh; then
@@ -21,20 +24,23 @@ fi
 
 ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 
-#resolve all symlinks
+# resolve all symlinks
 ZPWR_INSTALLER_DIR="$(pwd -P)"
 ZPWR_BASE_DIR="$ZPWR_INSTALLER_DIR/.."
 ZPWR_BASE_SCRIPTS="$ZPWR_INSTALLER_DIR/../scripts"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
 
 export ZPWR_DELIMITER_CHAR='%'
+#}}}***********************************************************
 
+#{{{                    MARK:installer lib fns
+#**************************************************************
 function fail(){
         echo "failure due to $1" >&2
         exit 1
 }
 
-function doesFileExist(){
+function fileMustExist(){
     if [[ ! -f "$1" ]]; then
         echo "where is the file $1?" >&2
         exit 1
@@ -136,11 +142,11 @@ function refresh(){
 }
 
 #function prettyPrint(){
-    #(( ++install_counter ))
+    #(( ++INSTALL_COUNTER ))
     #printf "\x1b[32;1m"
     #perl -le "print '#'x80"
     #printf "\x1b[34;4m"
-    #printf "$install_counter>>> $1\n"
+    #printf "$INSTALL_COUNTER>>> $1\n"
     #printf "\x1b[0;32;1m"
     #perl -le "print '#'x80"
     #printf "\x1b[0m"
@@ -170,21 +176,21 @@ function proceed(){
 }
 
 function prettyPrintStdin(){
-    perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
+    local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
-    (( ++install_counter ))
+    (( ++INSTALL_COUNTER ))
     {
-        printf "$install_counter>>> $@\n"
+        printf "$INSTALL_COUNTER>>> $@\n"
         cat
     } | "$perlfile" -f
     echo
 }
 
 function prettyPrint(){
-    perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
+    local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
-    (( ++install_counter ))
-    printf "$install_counter>>> $@\n" | "$perlfile" -f
+    (( ++INSTALL_COUNTER ))
+    printf "$INSTALL_COUNTER>>> $@\n" | "$perlfile" -f
     echo
 }
 
@@ -231,3 +237,5 @@ function alternatingPrettyPrint(){
 
 }
 
+
+#}}}***********************************************************

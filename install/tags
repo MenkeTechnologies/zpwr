@@ -171,6 +171,7 @@ IFS	/Users/wizard/.zpwr/scripts/saygoogle.sh	/^IFS=+$/;"	v	language:Sh
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^        IFS="$oldifs"$/;"	v	language:Sh
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^IFS=$'\\n'$/;"	v	language:Sh
 IFS	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^IFS=:$/;"	v	language:Sh
+INSTALL_COUNTER	install.sh	/^INSTALL_COUNTER=0$/;"	v
 INSTALL_VIM_SRC	install.sh	/^        INSTALL_VIM_SRC=true$/;"	v
 INSTALL_VIM_SRC	install.sh	/^INSTALL_VIM_SRC=false$/;"	v
 INTERFACE	/Users/wizard/.zpwr/scripts/macOnly/tor.sh	/^INTERFACE=Wi-Fi$/;"	v	language:Sh
@@ -184,6 +185,8 @@ LC_ALL	/Users/wizard/.zshrc	/^export LC_ALL="en_US.UTF-8"$/;"	v	language:Sh
 LC_MESSAGES	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^  LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -sq '^Binary'$/;"	v	language:Sh
 LESS	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    export LESS="$old"$/;"	v	language:Sh
 LESS	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export LESS="-M -N -R -K -F -X"$/;"	v	language:Sh
+LOGFILE	install.sh	/^LOGFILE="$ZPWR_INSTALLER_OUTPUT\/escaped_logfile.txt"$/;"	v
+LOGFILE_CARGO_YCM	install.sh	/^LOGFILE_CARGO_YCM="$ZPWR_INSTALLER_OUTPUT\/cargoYCM_logfile.txt"$/;"	v
 LSCOLORS	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export LSCOLORS="ExFxBxDxCxegedabagacad"$/;"	v	language:Sh
 LS_COLORS	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^            export LS_COLORS="fi=38:di=32;1:ex=31;1"$/;"	v	language:Sh
 MANPATH	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        export MANPATH="$HOMEBREW_OPT_HOME\/erlang\/lib\/erlang\/man:$MANPATH"$/;"	v	language:Sh
@@ -295,6 +298,7 @@ TypeDeroffManParser	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^class TypeDero
 UMASK	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export UMASK=077$/;"	v	language:Sh
 URL	/Users/wizard/.zpwr/scripts/gitgo.sh	/^    local URL="https:\/\/github.com\/$GITHUB_ACCOUNT\/$REPO_NAME_TO_CREATE"$/;"	v	language:Sh
 URL	/Users/wizard/.zpwr/scripts/help2comp.py	/^URL = 'http:\/\/github.com\/RobSis\/zsh-completion-generator'$/;"	v	language:Python
+VERSION	install.sh	/^VERSION="2.0.0"$/;"	v
 XAUTHORITY	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export XAUTHORITY="$HOME\/.Xauthority"$/;"	v	language:Sh
 YARN_HOME	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export YARN_HOME="$HOME\/.config\/yarn"$/;"	v	language:Sh
 YCM_CORES	ycm_install.sh	/^    YCM_CORES=1 python3 install.py --clang-completer$/;"	v
@@ -456,7 +460,6 @@ __ScriptVersion	/Users/wizard/.zpwr/scripts/storageShower.sh	/^__ScriptVersion="
 __ScriptVersion	/Users/wizard/.zpwr/scripts/tgzLocalInstaller.sh	/^__ScriptVersion="1.0.0"$/;"	v	language:Sh
 __ScriptVersion	/Users/wizard/.zpwr/scripts/updater.sh	/^__ScriptVersion="1.0.0"$/;"	v	language:Sh
 __ScriptVersion	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^__ScriptVersion="1.0.0"$/;"	v	language:Sh
-__ScriptVersion	install.sh	/^__ScriptVersion="1.0.1"$/;"	v
 __ScriptVersion	scripts/CPU_Stresser.sh	/^__ScriptVersion="1.0.2"$/;"	v
 __init__	/Users/wizard/.zpwr/scripts/boiler_gen.py	/^    def __init__(self, filename, directory, contents):$/;"	m	language:Python	class:CodeFile
 __init__	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def __init__(self):$/;"	m	language:Python	class:Deroffer
@@ -780,7 +783,6 @@ distroName	plugins_install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;p
 distroName	plugins_install.sh	/^    distroName=Mac$/;"	v
 do_line	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def do_line(self):$/;"	m	language:Python	class:Deroffer
 do_tbl	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def do_tbl(self):$/;"	m	language:Python	class:Deroffer
-doesFileExist	common.sh	/^function doesFileExist(){$/;"	f
 dontSummarizeSizes	/Users/wizard/.zpwr/scripts/directoryContentsSize.sh	/^dontSummarizeSizes() {$/;"	f	language:Sh
 dotdir	/Users/wizard/.zpwr/scripts/macOnly/tutorialConfigUpdater.sh	/^dotdir="$websiteDir\/downloads\/dotfiles"$/;"	v	language:Sh
 dst	/Users/wizard/.zpwr/scripts/fdswap.sh	/^dst="$2"$/;"	v	language:Sh
@@ -869,6 +871,7 @@ file	/Users/wizard/.zpwr/scripts/secureDelete.sh	/^    file="$i"$/;"	v	language:
 file	/Users/wizard/.zpwr/scripts/splitReg.sh	/^file="$ZPWR_TEMPFILE"$/;"	v	language:Sh
 file	/Users/wizard/.zshrc	/^        file="$HOME\/.viminfo"$/;"	v	language:Sh
 file	/Users/wizard/.zshrc	/^        file="$ZPWR_NVIMINFO"$/;"	v	language:Sh
+fileMustExist	common.sh	/^function fileMustExist(){$/;"	f
 fileName	/Users/wizard/.zpwr/scripts/watchServiceFSWatchRustCompile.sh	/^    fileName=$(basename $event)$/;"	v	language:Sh
 fileString	/Users/wizard/.zpwr/scripts/openAll.sh	/^fileString=""$/;"	v	language:Sh
 fileToBeExecuted	/Users/wizard/.zpwr/scripts/runner.sh	/^fileToBeExecuted="$1"$/;"	v	language:Sh
@@ -1008,7 +1011,6 @@ installNpmDeb	npm_install.sh	/^function installNpmDeb(){$/;"	f
 installNpmRpm	npm_install.sh	/^function installNpmRpm(){$/;"	f
 installOhMyZshPlugin	zsh_plugins_install.sh	/^installOhMyZshPlugin(){$/;"	f
 installVimPlugin	vim_plugins_install.sh	/^installVimPlugin(){$/;"	f
-install_counter	install.sh	/^install_counter=0$/;"	v
 installerDir	/Users/wizard/.zpwr/scripts/macOnly/tutorialConfigUpdater.sh	/^installerDir="$ZPWR_HIDDEN_DIR\/scripts\/$ZPWR_REPO_NAME"$/;"	v	language:Sh
 interceptDelete	/Users/wizard/.zshrc	/^interceptDelete(){$/;"	f	language:Sh
 interceptSurround	/Users/wizard/.zshrc	/^interceptSurround(){$/;"	f	language:Sh
@@ -1095,8 +1097,6 @@ link	/Users/wizard/.zpwr/scripts/uploadWebPi.sh	/^        link="http:\/\/$MY_IP:
 listNoClear	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^listNoClear () {$/;"	f	language:Sh
 locateFzf	/Users/wizard/.zshrc	/^locateFzf(){$/;"	f	language:Sh
 log	/Users/wizard/.zpwr/scripts/fzfMan.sh	/^log=\/Users\/wizard\/updaterlog.txt$/;"	v	language:Sh
-logfile	install.sh	/^logfile="$ZPWR_INSTALLER_OUTPUT\/escaped_logfile.txt"$/;"	v
-logfileCargoYCM	install.sh	/^logfileCargoYCM="$ZPWR_INSTALLER_OUTPUT\/cargoYCM_logfile.txt"$/;"	v
 logg	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^logg(){$/;"	f	language:Sh
 loginCount	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^loginCount(){$/;"	f	language:Sh
 lossy_unicode	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^def lossy_unicode(s):$/;"	f	language:Python
@@ -1313,7 +1313,7 @@ path	/Users/wizard/.zpwr/scripts/shebangChanger.sh	/^path="#!\/usr\/bin\/env $ex
 path	/Users/wizard/.zshrc	/^        path=( $cmdpath )$/;"	v	language:Sh
 perlOutdated	/Users/wizard/.zpwr/scripts/updater.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v	language:Sh
 perlOutdated	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v	language:Sh
-perlfile	common.sh	/^    perlfile="$ZPWR_BASE_SCRIPTS\/boxPrint.pl"$/;"	v
+perlfile	common.sh	/^    local perlfile="$ZPWR_BASE_SCRIPTS\/boxPrint.pl"$/;"	v
 perlremovespaces	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^perlremovespaces(){$/;"	f	language:Sh
 perlscript	/Users/wizard/.zpwr/scripts/autoUpdater.sh	/^    perlscript=$($/;"	v	language:Sh
 picounter	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    picounter=1$/;"	v	language:Sh

@@ -10,26 +10,31 @@
 
 #{{{                    MARK:Env vars
 #**************************************************************
+# do not want any surprises when relative cd to other dirs
 unset CDPATH
 
-#get operating system type
+VERSION="2.0.0"
+# get operating system type
 ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
-#resolve all symlinks
+# resolve all symlinks
 ZPWR_INSTALLER_DIR="$(pwd -P)"
 #normally ~/.zpwr
 ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
+BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
-#the destination directory for zpwr specific temp files
+# the destination directory for zpwr specific temp files
 export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 
+export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
+
 ESCAPE_REMOVER="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
-#the destination directory for zpwr specific installed files
-logfile="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
-logfileCargoYCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
+# the destination directory for zpwr specific installed files
+LOGFILE="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
+LOGFILE_CARGO_YCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
 
 INSTALL_VIM_SRC=false
 
@@ -40,9 +45,10 @@ if [[ -n $vimV ]]; then
     fi
 fi
 
-#shows count of steps in installer
-install_counter=0
-#for the width of the install messages
+# shows count of steps in installer
+INSTALL_COUNTER=0
+
+# for the width of the install messages
 export COLUMNS="$(tput cols)"
 
 #}}}***********************************************************
@@ -79,7 +85,7 @@ if ! test -x "$ESCAPE_REMOVER"; then
     exit 1
 fi
 
-#source common functions
+# source common functions
 if ! source common.sh; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
@@ -101,11 +107,11 @@ if [[ ! -d $ZPWR_HIDDEN_DIR_TEMP ]]; then
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:Stream tee to logfile
+#{{{                    MARK:Stream tee to LOGFILE
 #**************************************************************
 clear
-# replicate stdout and sterr to logfile
-exec > >(tee -a "$logfile")
+# replicate stdout and sterr to LOGFILE
+exec > >(tee -a "$LOGFILE")
 exec 2>&1
 #}}}***********************************************************
 
@@ -163,10 +169,10 @@ EOF
 
 #{{{                    MARK:Setup deps
 #**************************************************************
-#Dependencies
+# Dependencies
 # 1) neovim
 # 2) tmux
-# 3) lolcat
+# 3) lolcat in go
 # 4) cmatrix
 # 5) htop
 # 6) cmake
@@ -240,7 +246,6 @@ addDependenciesMac(){
 
 #{{{                    MARK:installer funcs
 #**************************************************************
-__ScriptVersion="1.0.1"
 
 function usage(){
     echo "Usage :  $0 [options] [--]
@@ -270,9 +275,6 @@ files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell
     conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .zpwr/.powerlevel9kconfig.sh .my.cnf motd.sh)
 
 dirs=(.zpwr/scripts .config/htop .config/powerline/themes/tmux)
-
-
-BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
 function backup(){
     test -d "$BACKUP_DIR" || mkdir -p "$BACKUP_DIR"
@@ -307,24 +309,24 @@ function warnSudo(){
 
 function pluginsinstall(){
     goInstallerDir
-    doesFileExist plugins_install.sh
-    bash plugins_install.sh >> "$logfileCargoYCM" 2>&1 &
+    fileMustExist plugins_install.sh
+    bash plugins_install.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
     PLUGIN_PID=$!
     prettyPrint "Installing vim and tmux plugins in background @ $PLUGIN_PID"
 }
 
 function ycminstall(){
     goInstallerDir
-    doesFileExist ycm_install.sh
-    bash ycm_install.sh >> "$logfileCargoYCM" 2>&1 &
+    fileMustExist ycm_install.sh
+    bash ycm_install.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
     YCM_PID=$!
     prettyPrint "Installing YouCompleteMe in background @ $YCM_PID"
 }
 
 function cargoinstall(){
     goInstallerDir
-    doesFileExist rustupinstall.sh
-    bash rustupinstall.sh >> "$logfileCargoYCM" 2>&1 &
+    fileMustExist rustupinstall.sh
+    bash rustupinstall.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
     CARGO_PID=$!
     echo $CARGO_PID
     prettyPrint "Installing rustup for exa, fd and bat in background @ $CARGO_PID"
@@ -333,6 +335,7 @@ function cargoinstall(){
 
 #{{{                    MARK:Getopts
 #**************************************************************
+# opt flags
 skip=false
 justConfig=false
 noTmux=false
@@ -342,7 +345,7 @@ do
 
         h|help     )  usage; exit 0   ;;
 
-        v|version  )  echo "$0 -- Version $__ScriptVersion"; exit 0   ;;
+        v|version  )  echo "$0 -- Version $VERSION"; exit 0   ;;
 
         s|skip     )  skip=true ;;
 
@@ -369,7 +372,7 @@ fi
 
 #}}}***********************************************************
 
-#{{{                    MARK:Mac
+#{{{                    MARK:macOS
 #**************************************************************
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     warnOverwrite
@@ -383,7 +386,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         showDeps
 
         if exists "brew"; then
-            #install homebrew
+            # install homebrew
             prettyPrint "Installing HomeBrew..."
             /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
         fi
@@ -395,8 +398,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 
         prettyPrint "We have Homebrew..."
 
-        brew ls python > /dev/null 2>&1
-        if [[ $? == 1 ]]; then
+        if ! brew ls python > /dev/null 2>&1; then
             brew install python
             brew install pip
         fi
@@ -415,6 +417,8 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
             exists curl || update curl mac
             cargoinstall
             pluginsinstall
+
+            # main loop
             for prog in "${dependencies_ary[@]}"; do
                 prettyPrint "Installing $prog"
                 update "$prog" mac
@@ -444,16 +448,14 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         fi
 
     fi
-
 #}}}***********************************************************
 
-#{{{                    MARK:Linux
+#{{{                    MARK:Linux distros
 #**************************************************************
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
 
     addDependenciesLinux
     distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
-
 
     warnOverwrite
     warnSudo
@@ -496,6 +498,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
             exists curl || update curl "$distroFamily"
             cargoinstall
             pluginsinstall
+            # main loop
             for prog in "${dependencies_ary[@]}"; do
                 prettyPrint "Installing $prog"
                 update "$prog" "$distroFamily"
@@ -518,8 +521,10 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
             prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
         fi
     fi
+#}}}***********************************************************
 
-
+#{{{                    MARK:other unix
+#**************************************************************
 else
     #unix
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
@@ -542,6 +547,9 @@ else
                 exists curl || update curl "$distroFamily"
                 cargoinstall
                 pluginsinstall
+
+                # main loop
+
                 for prog in "${dependencies_ary[@]}"; do
                     prettyPrint "Installing $prog"
                     update "$prog" "$distroFamily"
@@ -566,15 +574,15 @@ else
                 prettyPrint "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
             fi
         else
-            prettyPrint "Your OS $ZPWR_OS_TYPE is unsupported!" >&2; exit 1
+            prettyPrint "Your OS $ZPWR_OS_TYPE is unsupported!" >&2
+            exit 1
         fi
 
     fi
 
-
 fi
-
 #}}}***********************************************************
+
 
 #{{{                    MARK:vim
 #**************************************************************
@@ -587,19 +595,19 @@ if [[ $justConfig != true ]]; then
         prettyPrint "Vim Version less than 8.0 or without python! Installing Vim from Source."
 
         goInstallerDir
-        doesFileExist vim_install.sh
+        fileMustExist vim_install.sh
         source vim_install.sh
     fi
 
     goInstallerDir
 
     exists nvim || {
-        doesFileExist neovim_install.sh
+        fileMustExist neovim_install.sh
         source neovim_install.sh
     }
 
     goInstallerDir
-    doesFileExist npm_install.sh
+    fileMustExist npm_install.sh
     source npm_install.sh
 
     goInstallerDir
@@ -614,7 +622,7 @@ if [[ $justConfig != true ]]; then
     ycminstall
 
     goInstallerDir
-    doesFileExist pip_install.sh
+    fileMustExist pip_install.sh
 
     source pip_install.sh
 
@@ -626,9 +634,7 @@ if [[ $justConfig != true ]]; then
 
     builtin cd pipes.sh && {
         sudo make install
-            builtin cd ..
-            rm -rf pipes.sh
-        }
+    }
 
 fi
 
@@ -716,14 +722,13 @@ if [[ $justConfig != true ]]; then
 
     prettyPrint "Installing ponysay from source"
     git clone https://github.com/erkin/ponysay.git && {
-        builtin cd ponysay && sudo ./setup.py --freedom=partial install && \
-        builtin cd .. && sudo rm -rf ponysay
+        builtin cd ponysay && sudo ./setup.py --freedom=partial install
     }
 
     prettyPrint "Installing Go deps"
 
     goInstallerDir
-    doesFileExist go_install.sh
+    fileMustExist go_install.sh
 
     source go_install.sh
 
@@ -763,7 +768,7 @@ cp "$ZPWR_INSTALLER_DIR/.zshrc" "$HOME"
 prettyPrint "Installing Zsh plugins"
 
 goInstallerDir
-doesFileExist zsh_plugins_install.sh
+fileMustExist zsh_plugins_install.sh
 
 source zsh_plugins_install.sh
 
@@ -788,10 +793,9 @@ fi
 #**************************************************************
 goInstallerDir
 
-prettyPrint "Generating $ZPWR_INSTALLER_OUTPUT/log.txt with $ESCAPE_REMOVER from $logfile"
-"$ESCAPE_REMOVER" "$logfile" > "$ZPWR_INSTALLER_OUTPUT/log.txt"
+prettyPrint "Generating $ZPWR_INSTALLER_OUTPUT/zpwr_log.txt with $ESCAPE_REMOVER from $LOGFILE"
+"$ESCAPE_REMOVER" "$LOGFILE" > "$ZPWR_INSTALLER_OUTPUT/zpwr_log.txt"
 
-#rm -rf "$ZPWR_INSTALLER_DIR"
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     prettyPrint "Waiting for cargo installer to finish"
     wait $CARGO_PID
@@ -805,8 +809,8 @@ if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     prettyPrint "Starting the matrix"
 fi
 
+# must have zsh at this point
 export SHELL="$(which zsh)"
-export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
 
 dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
 
