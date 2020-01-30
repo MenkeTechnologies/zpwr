@@ -18,11 +18,14 @@ fi
 
 ZPWR_INSTALLER_DIR="$(pwd)"
 
-cd "$HOME/.vim/bundle" && {
+if builtin cd "$HOME/.vim/bundle"; then
     while read repo; do
         installVimPlugin "$repo"
     done < "$ZPWR_INSTALLER_DIR/.vimbundle"
 
     echo "Installing Taglist Plugin"
     cp -R "$ZPWR_INSTALLER_DIR/taglist_46" .
-}
+else
+    echo "could not cd to $HOME/.vim/bundle" >&2
+    exit 1
+fi

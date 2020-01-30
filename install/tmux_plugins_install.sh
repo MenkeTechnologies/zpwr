@@ -18,8 +18,11 @@ fi
 
 ZPWR_INSTALLER_DIR="$(pwd)"
 
-builtin cd "$HOME/.tmux/plugins" && {
-while read repo; do
-    installGitHubPlugin "$repo"
-done < "$ZPWR_INSTALLER_DIR/.tmuxplugins"
-}
+if builtin cd "$HOME/.tmux/plugins"; then
+    while read repo; do
+        installGitHubPlugin "$repo"
+    done < "$ZPWR_INSTALLER_DIR/.tmuxplugins"
+else
+    echo "could not cd to $HOME/.tmux/plugins" >&2
+    exit 1
+fi

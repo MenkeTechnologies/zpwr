@@ -25,50 +25,38 @@ else
 fi
 
 prettyPrint "Installing Pathogen"
-#install pathogen
 mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
 
-prettyPrint "Installing Vim Plugins"
-if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-    echo "where is $ZPWR_INSTALLER_DIR" >&2
-    exit 1
-fi
-
-source  "$ZPWR_INSTALLER_DIR/vim_plugins_install.sh"
+goInstallerDir
+source  vim_plugins_install.sh
 
 prettyPrint "Installing Ultisnips snippets"
-if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-    echo "where is $ZPWR_INSTALLER_DIR" >&2
-    exit 1
-fi
+goInstallerDir
 cp -R "$ZPWR_INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 
-prettyPrint "Installing .powerlevel9k"
-cp "$ZPWR_INSTALLER_DIR/.powerlevel9kconfig.sh" "$ZPWR"
-
-
 prettyPrint "Installing .vimrc"
-cp "$ZPWR_INSTALLER_DIR/.vimrc" "$HOME"
-
-prettyPrint "Installing minimal .minvimrc"
-cp "$ZPWR_INSTALLER_DIR/.minvimrc" "$ZPWR"
+goInstallerDir
+cp .vimrc "$HOME"
 
 prettyPrint "Installing .ideavimrc"
-cp "$ZPWR_INSTALLER_DIR/.ideavimrc" "$HOME"
+goInstallerDir
+cp .ideavimrc "$HOME"
 
 nvimDir="$HOME/.config/nvim"
 [[ ! -d "$nvimDir" ]] && mkdir -p "$nvimDir"
 
 prettyPrint "Installing neovim config"
-cp "$ZPWR_INSTALLER_DIR"/init.vim "$nvimDir"
+goInstallerDir
+cp init.vim "$nvimDir"
 
 #custom settings for tmux powerline
 tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
 [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
 
 prettyPrint "Installing Tmux Powerline Config"
-cat "$ZPWR_INSTALLER_DIR"/default.json > "$tmuxPowerlineDir/default.json"
+goInstallerDir
+cat default.json > "$tmuxPowerlineDir/default.json"
 
 prettyPrint "Installing Tmux Plugin Manager"
 [[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p "$HOME/.tmux/plugins/tpm"
@@ -76,34 +64,25 @@ prettyPrint "Installing Tmux Plugin Manager"
 git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 
 prettyPrint "Copying tmux configuration file to home directory"
-cp "$ZPWR_INSTALLER_DIR/.tmux.conf" "$HOME"
+goInstallerDir
+cp .tmux.conf "$HOME"
 
 prettyPrint "Copying iftop.conf to home directory"
-cp "$ZPWR_INSTALLER_DIR/.iftop.conf" "$HOME"
+cp .iftop.conf "$HOME"
 
 if [[ ! -f "$HOME/.ctags" ]]; then
     prettyPrint "Copying .ctags to home directory"
-    cp "$ZPWR_INSTALLER_DIR/.ctags" "$HOME"
+    goInstallerDir
+    cp .ctags "$HOME"
 fi
 
 prettyPrint "Installing Iftop colors to $HOME"
-cp "$ZPWR_INSTALLER_DIR/.iftopcolors" "$HOME"
-
-if [[ "$distroName" == raspbian ]]; then
-    prettyPrint "Installing custom motd for RPI..."
-    cp "$ZPWR_INSTALLER_DIR/motd.sh" "$ZPWR"
-fi
-
-prettyPrint "Installing Custom Tmux Commands"
-cp -R "$ZPWR_INSTALLER_DIR/.tmux" "$ZPWR"
-
-if ! builtin cd "$ZPWR_INSTALLER_DIR"; then
-    echo "where is $ZPWR_INSTALLER_DIR" >&2
-    exit 1
-fi
+goInstallerDir
+cp .iftopcolors "$HOME"
 
 prettyPrint "Installing Tmux plugins"
-source "$ZPWR_INSTALLER_DIR/tmux_plugins_install.sh"
+goInstallerDir
+source "tmux_plugins_install.sh"
 
 [[ ! -f "$ZPWR_HIDDEN_DIR/.tokens.sh" ]] && touch "$ZPWR_HIDDEN_DIR/.tokens.sh"
 
@@ -117,35 +96,28 @@ prettyPrint "Changing pager to cat for MySQL Clients such as MyCLI"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
 
-prettyPrint "Copying all Shell Scripts to $HOME/Documents"
-[[ ! -d "$ZPWR/scripts" ]] && mkdir -p "$ZPWR/scripts"
-
-cp "$ZPWR_INSTALLER_DIR/scripts/"*.{sh,pl,py,zsh} "$ZPWR/scripts"
-cp -R "$ZPWR_INSTALLER_DIR/scripts/macOnly" "$ZPWR/scripts"
-
 prettyPrint "Copying grc config files"
-cp "$ZPWR_INSTALLER_DIR/grc.zsh" "$HOME"
-cp "$ZPWR_INSTALLER_DIR/conf.gls" "$HOME"
-cp "$ZPWR_INSTALLER_DIR/conf.df" "$HOME"
-cp "$ZPWR_INSTALLER_DIR/conf.ifconfig" "$HOME"
-cp "$ZPWR_INSTALLER_DIR/conf.mount" "$HOME"
-cp "$ZPWR_INSTALLER_DIR/conf.whois" "$HOME"
+goInstallerDir
+cp grc.zsh "$HOME"
+cp conf.gls "$HOME"
+cp conf.df"$HOME"
+cp conf.ifconfig "$HOME"
+cp conf.mount "$HOME"
+cp conf.whois "$HOME"
 
 
 prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap."
-cp "$ZPWR_INSTALLER_DIR/.inputrc" "$HOME"
+goInstallerDir
+cp .inputrc "$HOME"
 
 
 prettyPrint "Installing htoprc file...."
+goInstallerDir
+
 htopDIR="$HOME/.config/htop"
 if [[ ! -f "$htopDIR/htoprc" ]]; then
     if [[ ! -d "$htopDIR" ]]; then
         mkdir -p "$htopDIR"
     fi
-    cp "$ZPWR_INSTALLER_DIR/htoprc" "$htopDIR"
+    cp htoprc "$htopDIR"
 fi
-
-#add aliases and functions
-prettyPrint "Adding common shell aliases for Bash and Zsh"
-cp "$ZPWR_INSTALLER_DIR/.shell_aliases_functions.sh" "$ZPWR"
-

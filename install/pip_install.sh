@@ -7,7 +7,7 @@
 #####   Notes: 
 #}}}***********************************************************
 
-#not called from main
+# whether sourced or called directly
 echo "$0" | grep -q pip_install.sh && source common.sh
 
 if ! test -f common.sh; then
@@ -157,7 +157,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
     python3 -c 'import pip' && sudo pip3 install powerline-status || sudo python3 -m pip install powerline-status
     python3 -c 'import pip' && sudo pip3 install powerline-mem-segment || sudo python3 -m pip install powerline-mem-segment
-    
+
     prettyPrint "Installing Tmux Powerline"
 
     tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"

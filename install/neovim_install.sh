@@ -10,7 +10,7 @@
 
 ZPWR_INSTALLER_DIR="$(pwd -P)"
 
-#source common functions
+# verify in installer dir
 if ! test -f common.sh; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1

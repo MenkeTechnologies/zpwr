@@ -15,6 +15,7 @@ while true; do
     fi
     sleep 5
 done
+
 exists bat || {
     prettyPrint "Installing Rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y

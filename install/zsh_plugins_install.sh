@@ -18,8 +18,11 @@ installOhMyZshPlugin(){
     git clone "https://github.com/$1.git" 
 }
 
-builtin cd "$HOME/.oh-my-zsh/custom/plugins" && {
+if builtin cd "$HOME/.oh-my-zsh/custom/plugins"; then
     while read repo; do
         installOhMyZshPlugin "$repo"
     done < "$ZPWR_INSTALLER_DIR/.zshplugins"
-}
+else
+    echo "could not cd to $HOME/.vim/bundle/YouCompleteMe" >&2
+    exit 1
+fi
