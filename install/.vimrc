@@ -1207,7 +1207,7 @@ endfunction
 "{{{                    MARK:C-D mappings
 "**************************************************************
 vnoremap <silent> <C-D>, :call NERDComment("x","Toggle")<CR>`>
-nnoremap <silent> <C-D>, :call NERDComment("x","Toggle")<CR>`>
+"nnoremap <silent> <C-D>, :call NERDComment("x","Toggle")<CR>`>
 
 vnoremap <silent> <C-D>y :<C-C>:update<CR>:SyntasticCheck<CR>
 vnoremap <silent> <C-D>d :<C-C>:update<CR>
@@ -1244,9 +1244,10 @@ inoremap <silent> <C-D>x <C-O>:Marks<CR>
 inoremap <silent> <C-D>y <C-[>:update<CR>:SyntasticCheck<CR>a
 inoremap <silent> <C-D>z <ESC>:TlistAddFiles * <CR> :TlistToggle<CR>i
 inoremap <silent> <C-D>/ <C-O>:LocateAll<CR>
-inoremap <silent> <C-D>. <C-O>:FZFMaps<CR>
+inoremap <silent> <C-D>. <C-O>:FZFKeys<CR>
+inoremap <silent> <C-D>, <C-O>:FZFEnv<CR>
 inoremap <silent> <C-D>\ <C-X><C-L>
-inoremap <silent> <C-D>, <C-X><C-O>
+"inoremap <silent> <C-D>, <C-X><C-O>
 
 "normal mode keybindings for fzf-vim
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
@@ -1268,6 +1269,7 @@ nnoremap <silent> <C-D>i :Imap<CR>
 nnoremap <silent> <C-D>j :Agg<CR>
 nnoremap <silent> <leader>aa :Agg<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
+nnoremap <silent> <leader>ke :FZFKeys<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 nnoremap <silent> <C-D>m :Map<CR>
 nnoremap <silent> <leader>m :Map<CR>
@@ -1295,7 +1297,8 @@ nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
 nnoremap <silent> <C-D>z :TlistAddFiles *<CR>:TlistToggle<CR>
 nnoremap <silent> <C-D>/ :LocateAll<CR>
 nnoremap <silent> <leader>/ :LocateAll<CR>
-nnoremap <silent> <C-D>. :FZFMaps<CR>
+nnoremap <silent> <C-D>. :FZFKeys<CR>
+nnoremap <silent> <C-D>, :FZFEnv<CR>
 
 "similar to tmux <prefix> - and <prefix> | to split panes
 nnoremap <silent> <C-W>- :split<CR>
@@ -1522,6 +1525,12 @@ command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, fzf#vim#with_preview({'opti
 
 command! FZFMaps call fzf#run({
 \  'source':  "cat ".$ZPWR_VIM_KEYBINDINGS,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
+command! FZFKeys call fzf#run({
+\  'source':  "cat ".$ZPWR_ALL_KEYBINDINGS,
 \  'sink':    'e',
 \  'options': '-m -x +s',
 \  'down':    '40%'})
