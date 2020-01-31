@@ -23,13 +23,12 @@ ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
+export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
+export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
-export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 # the destination directory for zpwr specific temp files
 export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
-
-export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
 
 ESCAPE_REMOVER="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
 # the destination directory for zpwr specific installed files
