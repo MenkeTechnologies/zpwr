@@ -23,12 +23,12 @@ else
     if test -e {}; then
         "$ZPWR_SCRIPTS/clearList.sh" -- {} | fold -80 | head -500;
     else
-        source ~/.shell_aliases_functions.sh;
+        source $ZPWR/.shell_aliases_functions.sh;
         {
             if print -r -- {} | command egrep "\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d"; then
                 whois -- {} | command egrep -q "No (match|whois)" && dig {} || whois -- {};
             else
-                cat ~/.common_aliases | grep -- {}= || set | command grep -a -- {} | command grep -v -- ZSH_EXEC || alias | command grep -a -- {} || { whois -- {} | command egrep -q "No (match|whois)" && dig {} || whois -- {}; }
+                cat $ZPWR_LOCAL/.common_aliases | grep -- {}= || set | command grep -a -- {} | command grep -v -- ZSH_EXEC || alias | command grep -a -- {} || { whois -- {} | command egrep -q "No (match|whois)" && dig {} || whois -- {}; }
             }
     fi
 

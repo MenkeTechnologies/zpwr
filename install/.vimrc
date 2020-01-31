@@ -627,8 +627,6 @@ function! Quoter(type)
         "echo "matching index ]]".matchingIndexDblB
         "echo "matching index ]".matchingIndexB
         "echo "least index ]".least
-        "
-        "
 
         let lineToPunct=strpart(lineToEnd, 1,least)
         "echo "line to punct: ".lineToPunct
