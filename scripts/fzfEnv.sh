@@ -38,7 +38,7 @@ line=\$(echo \$line| sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
 
-echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
+#echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
 
 case \$cmdType in
     (command)
@@ -86,7 +86,7 @@ case \$cmdType in
         ;;
     (func)
         file=\$(echo \$file | sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
-        echo "after escaping regex chars file is _\${file}_" >> $ZPWR_LOGFILE
+        #echo "after escaping regex chars file is _\${file}_" >> $ZPWR_LOGFILE
         command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV}Value.txt"
         command sed -n "/^\${file} () {/,/^}\$/p" "${ZPWR_ENV}Value.txt" | fold -80
         ;;
