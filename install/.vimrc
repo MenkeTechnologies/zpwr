@@ -1052,6 +1052,10 @@ function! ExtractVariableVisual() range
     let l:exeFileType=expand('%:e')
     let l:regex=escape(l:wordUnderCursor, '/\')
     "echom '%sno@'.l:regex.'@$'.l:name."@g"
+    let l:filename=expand('%:t')
+    if l:filename == '.zshrc'
+        let l:exeFileType = 'zsh'
+    endif
 
     exe "normal `<"
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
@@ -1082,6 +1086,10 @@ function! ExtractVariable()
     let l:exeFileType=expand('%:e')
     let l:regex=fnameescape(l:wordUnderCursor)
     "echom '%s@\<'.l:regex.'\>@$'.l:name."@g"
+    let l:filename=expand('%:t')
+    if l:filename == '.zshrc'
+        let l:exeFileType = 'zsh'
+    endif
 
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         let l:line=GetFirstCodeLineHash()
@@ -1117,6 +1125,10 @@ function! ExtractMethod() range
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:name = inputdialog("Extract method:")
     let l:exeFileType=expand('%:e')
+    let l:filename=expand('%:t')
+    if l:filename == '.zshrc'
+        let l:exeFileType = 'zsh'
+    endif
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         let l:line=GetFirstCodeLineHash()
         '>
