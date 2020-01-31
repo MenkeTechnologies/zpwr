@@ -1259,6 +1259,7 @@ nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <leader>. :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
 nnoremap <silent> <C-D>e :ALEInfo<CR>
+nnoremap <silent> <leader>env :FZFEnv<CR>
 nnoremap <silent> <C-D>f :Files<CR>
 nnoremap <silent> <leader>f :Files<CR>
 nnoremap <silent> <C-D>g :Commits!<CR>
@@ -1523,6 +1524,12 @@ command! FZFMaps call fzf#run({
 \  'source':  "cat ".$ZPWR_VIM_KEYBINDINGS,
 \  'sink':    'e',
 \  'options': '-m -x +s',
+\  'down':    '40%'})
+
+command! FZFEnv call fzf#run({
+\  'source':  "cat ".$ZPWR_ENV."Key.txt | awk '{print $2}'",
+\  'sink':    'e',
+\  'options': $FZF_ENV_OPTS,
 \  'down':    '40%'})
 
 let fzfStrOrig="--preview 'file={}; file=$(echo $file | sed 's@~@".$HOME."@'); test -f $file && bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $file || stat $file'"
