@@ -83,8 +83,8 @@ getRemoteDetails() {
         local REPO_NAME_TO_CREATE="$1"
     fi
 
-    #use environment variable GITHUB_ACCOUNT to create remote repository from script
-    curl -u "$GITHUB_ACCOUNT" https://api.github.com/user/repos -d {\"name\":\"$REPO_NAME_TO_CREATE\"}
+    #use environment variable ZPWR_GITHUB_ACCOUNT to create remote repository from script
+    curl -u "$ZPWR_GITHUB_ACCOUNT" https://api.github.com/user/repos -d {\"name\":\"$REPO_NAME_TO_CREATE\"}
     #clear output from curl request
     clear
 
