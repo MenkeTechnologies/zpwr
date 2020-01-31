@@ -1228,7 +1228,7 @@ inoremap <silent> <C-D>j <C-O>:Agg<CR>
 inoremap <silent> <C-D>k <C-O>:ALEFix<CR>
 inoremap <silent> <C-D>l <C-O>:Lines<CR>
 inoremap <silent> <C-D>m <C-O>:Map<CR>
-inoremap <silent> <C-D>n <C-O>:Snippets<CR>
+"inoremap <silent> <C-D>n <C-O>:Snippets<CR>
 inoremap <silent> <C-D>o <C-O>:ALEToggle<CR>
 inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
 inoremap <silent> <C-D>q <C-O>:SaveSession!<CR><TAB>
@@ -1247,7 +1247,7 @@ inoremap <silent> <C-D>/ <C-O>:LocateAll<CR>
 inoremap <silent> <C-D>. <C-O>:FZFKeys<CR>
 inoremap <silent> <C-D>, <C-O>:FZFEnv<CR>
 inoremap <silent> <C-D>\ <C-X><C-L>
-"inoremap <silent> <C-D>, <C-X><C-O>
+inoremap <silent> <C-D>n <C-X><C-O>
 
 "normal mode keybindings for fzf-vim
 noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
