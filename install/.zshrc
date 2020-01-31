@@ -2212,7 +2212,7 @@ function _fzf_complete_printf_post() {
 # echo $;<tab>
 function _fzf_complete_echo() {
   _fzf_complete '-m' "$@" < <(
-      declare -xp | perl -pe '$_=~s@export\s(.*)(=.*)@$1@'
+      declare -x | perl -ne 'print "$1\n" if m{^([^=]+)=(\S+)}'
     )
 }
 
