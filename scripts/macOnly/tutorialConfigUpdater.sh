@@ -35,9 +35,6 @@ prettyPrint "Copying scripts to custom Installer Repo $ZPWR_DIR"
 #cp -R "$HOME/.zpwr/.tmux/"* "$ZPWR_DIR/.tmux" 2>/dev/null
 #cp "$HOME/.zpwr/.shell_aliases_functions.sh" "$ZPWR_DIR"
 
-cp "$HOME/.vimrc" "$ZPWR_DIR_INSTALL"
-cp "$HOME/.tmux.conf" "$ZPWR_DIR_INSTALL"
-cp "$HOME/.zshrc" "$ZPWR_DIR_INSTALL"
 cp "$HOME/conf.gls" "$ZPWR_DIR_INSTALL"
 cp "$HOME/conf.df" "$ZPWR_DIR_INSTALL"
 cp "$HOME/conf.mount" "$ZPWR_DIR_INSTALL"
@@ -71,15 +68,15 @@ git push origin dev
 #{{{ MARK:tutorialDir
 #**************************************************************
 prettyPrint "Copying zshrc"
-cp "$HOME/.zshrc" "$tutorialDir/zsh"
+cp "$ZPWR_DIR_INSTALL/.zshrc" "$tutorialDir/zsh"
 prettyPrint "Copying vimrc"
-cp "$HOME/.vimrc" "$tutorialDir/vim"
+cp "$ZPWR_DIR_INSTALL/.vimrc" "$tutorialDir/vim"
 prettyPrint "Copying minimal minvimrc"
 cp "$HOME/.zpwr/.minvimrc" "$tutorialDir/vim"
 
 prettyPrint "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
-cp "$HOME/.tmux.conf" "$tutorialDir/tmux"
+cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$HOME/.zpwr/.tmux/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
 prettyPrint "Copying shell_aliases_functions to $tutorialDir"
@@ -154,15 +151,15 @@ dotdir="$websiteDir/downloads/dotfiles"
 [[ ! -d "$dotdir" ]] && mkdir -p "$dotdir"
 
 prettyPrint "Copying config files to websiteDir"
-cp "$HOME/.vimrc" "$dotdir/.."
-cp "$HOME/.tmux.conf" "$dotdir/.."
+cp "$ZPWR_DIR_INSTALL/.vimrc" "$dotdir/.."
+cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir/.."
 cp "$ZPWR/.shell_aliases_functions.sh" "$dotdir/.."
-cp "$HOME/.zshrc" "$dotdir/.."
+cp "$ZPWR_DIR_INSTALL/.zshrc" "$dotdir/.."
 
-cp "$HOME/.vimrc" "$dotdir"
-cp "$HOME/.tmux.conf" "$dotdir"
+cp "$ZPWR_DIR_INSTALL/.vimrc" "$dotdir"
+cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir"
 cp "$ZPWR/.shell_aliases_functions.sh" "$dotdir"
-cp "$HOME/.zshrc" "$dotdir"
+cp "$ZPWR_DIR_INSTALL/.zshrc" "$dotdir"
 
 prettyPrint "Copying scripts to $websiteDir"
 rm -rf "$websiteDir/downloads/scripts/"*
