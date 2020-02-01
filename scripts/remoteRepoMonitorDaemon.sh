@@ -35,11 +35,11 @@ main() {
     #cp .vimrc "$HOME"
     #cp .minvimrc "$HOME/.zpwr"
     #cp .tmux.conf "$HOME"
-    cp conf.gls "$HOME"
-    cp conf.df "$HOME"
-    cp conf.ifconfig "$HOME"
-    cp grc.zsh "$HOME"
-    cp .inputrc "$HOME"
+    #cp conf.gls "$HOME"
+    #cp conf.df "$HOME"
+    #cp conf.ifconfig "$HOME"
+    #cp grc.zsh "$HOME"
+    #cp .inputrc "$HOME"
     #cp -R .tmux/* "$HOME/.zpwr/.tmux"
     #if [[ -n "$ZPWR_SCRIPTS" ]]; then
         #rm -f "$ZPWR_SCRIPTS/"*

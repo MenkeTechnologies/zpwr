@@ -166,14 +166,15 @@ backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 Installer artifacts such as log files and cloned repos go into `~/.zpwr/local/installer`.
 
 ## Uninstall
-Copy all configs from backup dir mentioned above to home directory overwriting the ones installed by zpwr, most importantly the `.zshrc`, `.vimrc` and `.tmux.conf`.
-Then remove the zpwr dir as shown.
+1. Run `unlinkConf` to unlink all zpwr config symlinks.
+2. Copy all configs from backup dir mentioned above to home directory overwriting the ones installed by zpwr, most importantly the `.zshrc`, `.vimrc` and `.tmux.conf`.
+3. Remove the zpwr dir as shown.
 ```sh
 rm -rf ~/.zpwr
 ```
 This will not uninstall packages installed by system package manager, pip modules, gems, vim plugins, tmux plugins and zsh plugins.
 You must remove these manually if desired.
-If desired you can also uninstall oh-my-zsh with ```uninstall_oh_my_zsh```.  Make sure the `~/.zshrc` is your original version.
+If desired you can also uninstall oh-my-zsh with ```uninstall_oh_my_zsh```.  Make sure `~/.zshrc` is your original version.
 
 ## Font
 You need to change the Terminal font to support the Powerline triangles and other special characters in the Powerlevel9k PROMPT.
