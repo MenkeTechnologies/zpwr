@@ -182,32 +182,31 @@ You need to change the Terminal font to support the Powerline triangles and othe
 The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
 documentation for details on how to change the font.
 
-## getrc and copyConf functions
+## getrc and linkConf functions
 There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`.
-It invokes `copyConf` which overwrites `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` in `$HOME` and some other miscellaneous configuration files.
-> ~/.zpwr/.shell_aliases_functions.sh: copyConf
+It invokes `linkConf` which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` in `$HOME` and some other miscellaneous configuration files.
+> ~/.zpwr/.shell_aliases_functions.sh: linkConf
 ```sh
-function copyConf(){
-    if [[ ! -f '.shell_aliases_functions.sh' ]]; then
-       loggErr "had to cd to $ZPWR_REPO"
-       builtin cd "$ZPWR_REPO"
-    fi
-    cp install/.zshrc "$HOME"
-    cp install/.vimrc "$HOME"
-    cp install/.tmux.conf "$HOME"
-    cp install/conf.gls "$HOME"
-    cp install/conf.df "$HOME"
-    cp install/conf.ifconfig "$HOME"
-    cp install/grc.zsh "$HOME"
-    cp install/.inputrc "$HOME"
-    if [[ -d "$HOME/.vim/Ultisnips" ]]; then
-        cp install/UltiSnips/* "$HOME/.vim/UltiSnips"
+# link over latest configuration files from $ZPWR_REPO_NAME
+function linkConf(){
+    (
+    if [[ ! -f "$HOME/.ctags" ]]; then
+        prettyPrint "Linking .ctags to home directory"
+        goInstallerDir
+        ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    if [[ ! -f "$HOME/.ctags" ]]; then
-        prettyPrint "Copying .ctags to home directory"
-        cp "install/.ctags" "$HOME"
-    fi
+    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
+
+    for file in ${symFiles[@]} ; do
+        prettyPrint "Installing $file to $HOME"
+        goInstallerDir
+        echo ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
+        ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
+    done
+
+    ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim/Ultisnips"
+    )
 
 }
 ```
