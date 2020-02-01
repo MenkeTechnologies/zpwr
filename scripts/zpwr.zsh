@@ -169,6 +169,8 @@ case $verb in
         ;;
     regenkeybindings) cmd="regenAllKeybindingsCache" #regen all keybindings cache to ~/.zpwr/zpwr{All,Vim}Keybindings.txt
         ;;
+    rmconfiglinks) cmd="unlinkConf" #remove sym links from \$ZPWR_INSTALL to \$HOME
+        ;;
     regenconfiglinks) cmd="regenConfigLinks" #regen sym links from \$ZPWR_INSTALL to \$HOME
         ;;
     regenpowerline) cmd="regenPowerlineLink" #regen powerline sym link to ~/.tmux/powerline
