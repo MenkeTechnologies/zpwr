@@ -2532,15 +2532,28 @@ function commits(){
 }
 
 function vimAll(){
-    #echo vim "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
-    #"$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    #"$ZPWR_LOCAL/".minvimrc \
-    #"$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    #"$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
+    vim \
+    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc} \
+    "$ZPWR/"*.{sh,py,zsh,pl} \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/tmux-"* \
+    "$ZPWR/"{.minvimrc,.mininit.vim} \
+    "$ZPWR_INSTALL/conf."* \
+    "$ZPWR_INSTALL/"*.sh \
+    "$ZPWR_INSTALL/"*.service \
+    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
+}
+
+function vimScripts(){
     vim \
     "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
+    "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_LOCAL/"{.minvimrc} \
+    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
 }

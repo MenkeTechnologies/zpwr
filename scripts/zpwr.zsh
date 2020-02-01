@@ -223,6 +223,8 @@ case $verb in
         ;;
     vimall) cmd="vimAll" #vim all zpwr files for :argdo
         ;;
+    vimscripts) cmd="vimScripts" #vim all zpwr scripts for :argdo
+        ;;
     vimrecent) cmd="eval $EDITOR \${(Q)\$(fzvim):s|~|$HOME|}" #choose most recent vim files
         ;;
     vimsearch) cmd="fzfVimKeybind" #search vim keybindings
