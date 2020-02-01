@@ -784,6 +784,7 @@ function regenSearchEnv(){
 }
 
 function regenAll(){
+    regenConfigLinks
     regenZshCompCache
     regenTags
     regenAllKeybindingsCache
@@ -2779,7 +2780,6 @@ fi
 
 #force alias z to zshz not zypper on suse
 alias z="$zcmd 2>&1"
-
 
 function zpwrAllUpdates(){
     (

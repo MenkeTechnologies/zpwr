@@ -761,8 +761,10 @@ sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/to
 #install custom theme based on agnosterzak
 cp "$ZPWR_INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
 
-prettyPrint "Installing .zshrc"
-cp "$ZPWR_INSTALLER_DIR/.zshrc" "$HOME"
+prettyPrint "Linking zshrc configuration file to home directory"
+goInstallerDir
+echo ln -sf $ZPWR_INSTALLER_DIR/.zshrc $HOME/.zshrc
+ln -sf $ZPWR_INSTALLER_DIR/.zshrc $HOME/.zshrc
 
 prettyPrint "Installing Zsh plugins"
 

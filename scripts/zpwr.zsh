@@ -165,6 +165,8 @@ case $verb in
         ;;
     regenkeybindings) cmd="regenAllKeybindingsCache" #regen all keybindings cache to ~/.zpwr/zpwr{All,Vim}Keybindings.txt
         ;;
+    regenconfiglinks) cmd="regenConfigLinks" #regen sym links from \$ZPWR_INSTALL to \$HOME
+        ;;
     regenpowerline) cmd="regenPowerlineLink" #regen powerline sym link to ~/.tmux/powerline
         ;;
     regentags) cmd="regenTags" #regen ctags files to ~ and ~/.zpwr/scripts

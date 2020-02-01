@@ -1731,9 +1731,9 @@ function copyConf(){
        loggErr "had to cd to $ZPWR_REPO"
        builtin cd "$ZPWR_REPO"
     fi
-    cp install/.zshrc "$HOME"
-    cp install/.vimrc "$HOME"
-    cp install/.tmux.conf "$HOME"
+    #cp install/.zshrc "$HOME"
+    #cp install/.vimrc "$HOME"
+    #cp install/.tmux.conf "$HOME"
     cp install/conf.gls "$HOME"
     cp install/conf.df "$HOME"
     cp install/conf.ifconfig "$HOME"
@@ -2457,6 +2457,16 @@ builtin cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/nul
     fi
 
     searchGitCommon
+}
+
+function regenConfigLinks(){
+    prettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
+    echo ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
+    ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
+    echo ln -sf $ZPWR_INSTALL/.vimrc $HOME/.vimrc
+    ln -sf $ZPWR_INSTALL/.vimrc $HOME/.vimrc
+    echo ln -sf $ZPWR_INSTALL/.tmux.conf $HOME/.tmux.conf
+    ln -sf $ZPWR_INSTALL/.tmux.conf $HOME/.tmux.conf
 }
 
 function regenPowerlineLink(){

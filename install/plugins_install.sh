@@ -35,9 +35,10 @@ goInstallerDir
 cp -R "$ZPWR_INSTALLER_DIR/UltiSnips" "$HOME/.vim"
 
 
-prettyPrint "Installing .vimrc"
+prettyPrint "Linking vimrc configuration file to home directory"
 goInstallerDir
-cp .vimrc "$HOME"
+echo ln -sf $ZPWR_INSTALLER_DIR/.vimrc $HOME/.vimrc
+ln -sf $ZPWR_INSTALLER_DIR/.vimrc $HOME/.vimrc
 
 prettyPrint "Installing .ideavimrc"
 goInstallerDir
@@ -63,9 +64,11 @@ prettyPrint "Installing Tmux Plugin Manager"
 
 git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 
-prettyPrint "Copying tmux configuration file to home directory"
+prettyPrint "Linking tmux configuration file to home directory"
 goInstallerDir
-cp .tmux.conf "$HOME"
+echo ln -sf $ZPWR_INSTALLER_DIR/.tmux.conf $HOME/.tmux.conf
+ln -sf $ZPWR_INSTALLER_DIR/.tmux.conf $HOME/.tmux.conf
+
 
 prettyPrint "Copying iftop.conf to home directory"
 cp .iftop.conf "$HOME"
