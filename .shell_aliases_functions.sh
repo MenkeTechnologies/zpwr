@@ -1725,6 +1725,20 @@ function zr(){
     fi
 }
 
+function goInstallerDir(){
+    local ret=0
+    builtin cd "$ZPWR_INSTALL" || ret=1
+
+    if [[ "$(pwd)" != "$ZPWR_INSTALL" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALL"
+    fi
+
+    if (( ret == 1 )); then
+        echo "where is $ZPWR_INSTALL" >&2
+        exit 1
+    fi
+}
+
 # link over latest configuration files from $ZPWR_REPO_NAME
 function unlinkConf(){
     (

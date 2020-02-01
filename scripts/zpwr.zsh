@@ -105,6 +105,10 @@ case $verb in
         ;;
     home) cmd="cd $ZPWR" #go to zpwr \$ZPWR
         ;;
+    homeinstall) cmd="cd $ZPWR_INSTALL" #go to zpwr \$ZPWR_INSTALL
+        ;;
+    homelocal) cmd="cd $ZPWR_LOCAL" #go to zpwr \$ZPWR_LOCAL
+        ;;
     hubcreate) cmd="hc" #create remote github repo
         ;;
     hubdelete) cmd="hd" #delete remote github repo

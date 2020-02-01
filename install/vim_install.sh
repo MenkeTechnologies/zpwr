@@ -8,7 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-ZPWR_INSTALLER_DIR="$(pwd -P)"
+ZPWR_INSTALL="$(pwd -P)"
 
 #source common functions
 if ! test -f common.sh; then
@@ -16,7 +16,7 @@ if ! test -f common.sh; then
     exit 1
 fi
 
-ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_DIR/local/installer"
+ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALL/local/installer"
 
 if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
     mkdir -p $ZPWR_INSTALLER_OUTPUT

@@ -25,9 +25,9 @@ fi
 ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 
 # resolve all symlinks
-ZPWR_INSTALLER_DIR="$(pwd -P)"
-ZPWR_BASE_DIR="$ZPWR_INSTALLER_DIR/.."
-ZPWR_BASE_SCRIPTS="$ZPWR_INSTALLER_DIR/../scripts"
+ZPWR_INSTALL="$(pwd -P)"
+ZPWR_BASE_DIR="$ZPWR_INSTALL/.."
+ZPWR_BASE_SCRIPTS="$ZPWR_INSTALL/../scripts"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
 
 export ZPWR_DELIMITER_CHAR='%'
@@ -49,14 +49,14 @@ function fileMustExist(){
 
 function goInstallerDir(){
     local ret=0
-    builtin cd "$ZPWR_INSTALLER_DIR" || ret=1
+    builtin cd "$ZPWR_INSTALL" || ret=1
 
-    if [[ "$(pwd)" != "$ZPWR_INSTALLER_DIR" ]]; then
-        echo "pwd $PWD is not $ZPWR_INSTALLER_DIR"
+    if [[ "$(pwd)" != "$ZPWR_INSTALL" ]]; then
+        echo "pwd $PWD is not $ZPWR_INSTALL"
     fi
 
     if (( ret == 1 )); then
-        echo "where is $ZPWR_INSTALLER_DIR" >&2
+        echo "where is $ZPWR_INSTALL" >&2
         exit 1
     fi
 }

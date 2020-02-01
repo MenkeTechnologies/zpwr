@@ -1,8 +1,8 @@
 source common.sh || { echo "Must be in .zpwr/install directory" >&2; exit 1; }
 
-ZPWR_INSTALLER_DIR="$(pwd -P)"
+ZPWR_INSTALL="$(pwd -P)"
 ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
-ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_DIR/../local/installer"
+ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALL/../local/installer"
 export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
 
 if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
@@ -32,14 +32,14 @@ source vim_plugins_install.sh
 
 prettyPrint "Installing Ultisnips snippets"
 goInstallerDir
-ln -sf $ZPWR_INSTALLER_DIR/Ultisnips $HOME/.vim/Ultisnips
+ln -sf $ZPWR_INSTALL/Ultisnips $HOME/.vim/Ultisnips
 
 nvimDir="$HOME/.config/nvim"
 [[ ! -d "$nvimDir" ]] && mkdir -p "$nvimDir"
 
 prettyPrint "Installing neovim config"
 goInstallerDir
-ln -sf $ZPWR_INSTALLER_DIR/init.vim "$nvimDir"
+ln -sf $ZPWR_INSTALL/init.vim "$nvimDir"
 
 #custom settings for tmux powerline
 tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
@@ -47,7 +47,7 @@ tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
 
 prettyPrint "Installing Tmux Powerline Config"
 goInstallerDir
-ln -sf $ZPWR_INSTALLER_DIR/default.json "$tmuxPowerlineDir/default.json"
+ln -sf $ZPWR_INSTALL/default.json "$tmuxPowerlineDir/default.json"
 
 prettyPrint "Installing Tmux Plugin Manager"
 [[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p "$HOME/.tmux/plugins/tpm"
@@ -57,8 +57,8 @@ git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 if [[ ! -f "$HOME/.ctags" ]]; then
     prettyPrint "Linking .ctags to home directory"
     goInstallerDir
-    echo ln -sf $ZPWR_INSTALLER_DIR/.ctags "$HOME/.ctags"
-    ln -sf $ZPWR_INSTALLER_DIR/.ctags "$HOME/.ctags"
+    echo ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
+    ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
 fi
 
 local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc)
@@ -66,8 +66,8 @@ local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifcon
 for file in ${symFiles[@]} ; do
     prettyPrint "Installing $file to $HOME"
     goInstallerDir
-    echo ln -sf $ZPWR_INSTALLER_DIR/$file "$HOME/$file"
-    ln -sf $ZPWR_INSTALLER_DIR/$file "$HOME/$file"
+    echo ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
+    ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
 done
 
 prettyPrint "Installing Tmux plugins"

@@ -17,9 +17,9 @@ VERSION="2.0.0"
 # get operating system type
 ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # resolve all symlinks
-ZPWR_INSTALLER_DIR="$(pwd -P)"
+ZPWR_INSTALL="$(pwd -P)"
 #normally ~/.zpwr
-ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"
+ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
@@ -54,7 +54,7 @@ export COLUMNS="$(tput cols)"
 
 #{{{                    MARK:sanity
 #**************************************************************
-if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALLER_DIR" ]]; then
+if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALL" ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
@@ -260,7 +260,7 @@ function usage(){
 
 
 function showDeps(){
-    bash "$ZPWR_INSTALLER_DIR/scripts/about.sh" 2>/dev/null
+    bash "$ZPWR_INSTALL/scripts/about.sh" 2>/dev/null
     {
         printf "Installing ${#dependencies_ary[@]} packages on $distroName: "
         for dep in "${dependencies_ary[@]}" ; do
@@ -657,11 +657,11 @@ if [[ -n "$iface" ]]; then
     prettyPrint "IPv4: $ip and interface: $iface"
     if [[ -f "$HOME/.iftop.conf" ]]; then
         if ! grep -E '^interface:\S+' "$HOME/.iftop.conf"; then
-            cp "$ZPWR_INSTALLER_DIR/install/.iftop.conf" "$HOME"
+            cp "$ZPWR_INSTALL/install/.iftop.conf" "$HOME"
             echo "interface:$iface" >> "$HOME/.iftop.conf"
         fi
     else
-            cp "$ZPWR_INSTALLER_DIR/install/.iftop.conf" "$HOME"
+            cp "$ZPWR_INSTALL/install/.iftop.conf" "$HOME"
             echo "interface:$iface" >> "$HOME/.iftop.conf"
     fi
 fi
@@ -759,12 +759,12 @@ prettyPrint "Installing oh-my-zsh..."
 #oh-my-zsh
 sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
 #install custom theme based on agnosterzak
-cp "$ZPWR_INSTALLER_DIR/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
+cp "$ZPWR_INSTALL/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
 
 prettyPrint "Linking zshrc configuration file to home directory"
 goInstallerDir
-echo ln -sf $ZPWR_INSTALLER_DIR/.zshrc $HOME/.zshrc
-ln -sf $ZPWR_INSTALLER_DIR/.zshrc $HOME/.zshrc
+echo ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
+ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 
 prettyPrint "Installing Zsh plugins"
 

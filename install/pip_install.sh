@@ -15,10 +15,10 @@ if ! test -f common.sh; then
     exit 1
 fi
 
-ZPWR_INSTALLER_DIR="$(pwd -P)"
-ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALLER_DIR)"
+ZPWR_INSTALL="$(pwd -P)"
+ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
 
-if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALLER_DIR" ]]; then
+if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALL" ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi

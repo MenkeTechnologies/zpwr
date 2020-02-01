@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
-ZPWR_INSTALLER_DIR="$(pwd -P)"
+ZPWR_INSTALL="$(pwd -P)"
 
 while true; do
     if exists curl;then
