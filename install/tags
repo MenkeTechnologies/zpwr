@@ -1543,7 +1543,7 @@ sum	/Users/wizard/.zpwr/scripts/listAllCommands.sh	/^sum=0$/;"	v	language:Sh
 sum	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^sum=0$/;"	v	language:Sh
 summarizeSizes	/Users/wizard/.zpwr/scripts/directoryContentsSize.sh	/^summarizeSizes() {$/;"	f	language:Sh
 svc	/Users/wizard/.zpwr/scripts/tailZOU.sh	/^svc=(ufw ovpn zabbix-agent)$/;"	v	language:Sh
-symFiles	plugins_install.sh	/^local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc)$/;"	v
+symFiles	plugins_install.sh	/^local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc)$/;"	v
 sys	/Users/wizard/.zpwr/scripts/boiler_gen.py	/^import sys$/;"	i	language:Python
 sys	/Users/wizard/.zpwr/scripts/help2comp.py	/^import sys$/;"	i	language:Python
 sys	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^import sys$/;"	i	language:Python

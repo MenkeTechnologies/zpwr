@@ -1747,7 +1747,7 @@ function unlinkConf(){
        builtin cd "$ZPWR_REPO"
     fi
 
-    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc .zshrc)
+    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
 
     for file in ${symFiles[@]} ; do
         prettyPrint "REMOVING $file to $HOME"
@@ -1769,7 +1769,7 @@ function linkConf(){
         ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc .zshrc)
+    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
 
     for file in ${symFiles[@]} ; do
         prettyPrint "Installing $file to $HOME"
