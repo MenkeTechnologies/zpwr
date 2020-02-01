@@ -1747,14 +1747,15 @@ function unlinkConf(){
        builtin cd "$ZPWR_REPO"
     fi
 
-    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc)
+    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc .zshrc)
 
     for file in ${symFiles[@]} ; do
-        prettyPrint "Installing $file to $HOME"
+        prettyPrint "REMOVING $file to $HOME"
         goInstallerDir
-        echo rm -f $ZPWR_INSTALL/$file
-        rm -f $ZPWR_INSTALL/$file
+        echo rm -f $HOME/$file
+        rm -f $HOME/$file
     done
+    rm -rf "$HOME/.vim/Ultisnips"
     )
 }
 
@@ -1762,17 +1763,13 @@ function unlinkConf(){
 # link over latest configuration files from $ZPWR_REPO_NAME
 function linkConf(){
     (
-    if [[ ! -f '.shell_aliases_functions.sh' ]]; then
-       loggErr "had to cd to $ZPWR_REPO"
-       builtin cd "$ZPWR_REPO"
-    fi
     if [[ ! -f "$HOME/.ctags" ]]; then
         prettyPrint "Linking .ctags to home directory"
         goInstallerDir
         ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc)
+    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc .zshrc)
 
     for file in ${symFiles[@]} ; do
         prettyPrint "Installing $file to $HOME"
@@ -1780,6 +1777,8 @@ function linkConf(){
         echo ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
         ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
     done
+
+    ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim/Ultisnips"
     )
 
 }
@@ -2495,12 +2494,7 @@ builtin cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/nul
 
 function regenConfigLinks(){
     prettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
-    echo ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
-    ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
-    echo ln -sf $ZPWR_INSTALL/.vimrc $HOME/.vimrc
-    ln -sf $ZPWR_INSTALL/.vimrc $HOME/.vimrc
-    echo ln -sf $ZPWR_INSTALL/.tmux.conf $HOME/.tmux.conf
-    ln -sf $ZPWR_INSTALL/.tmux.conf $HOME/.tmux.conf
+    linkConf
 }
 
 function regenPowerlineLink(){
