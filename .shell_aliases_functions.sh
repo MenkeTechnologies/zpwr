@@ -1725,8 +1725,8 @@ function zr(){
     fi
 }
 
-# copy over latest configuration files from $ZPWR_REPO_NAME
-function copyConf(){
+# link over latest configuration files from $ZPWR_REPO_NAME
+function linkConf(){
     if [[ ! -f '.shell_aliases_functions.sh' ]]; then
        loggErr "had to cd to $ZPWR_REPO"
        builtin cd "$ZPWR_REPO"
@@ -1734,19 +1734,34 @@ function copyConf(){
     #cp install/.zshrc "$HOME"
     #cp install/.vimrc "$HOME"
     #cp install/.tmux.conf "$HOME"
-    cp install/conf.gls "$HOME"
-    cp install/conf.df "$HOME"
-    cp install/conf.ifconfig "$HOME"
-    cp install/grc.zsh "$HOME"
-    cp install/.inputrc "$HOME"
-    if [[ -d "$HOME/.vim/Ultisnips" ]]; then
-        cp install/UltiSnips/* "$HOME/.vim/UltiSnips"
+    #cp install/conf.gls "$HOME"
+    #cp install/conf.df "$HOME"
+    #cp install/conf.ifconfig "$HOME"
+    #cp install/grc.zsh "$HOME"
+    #cp install/.inputrc "$HOME"
+    if [[ ! -f "$HOME/.ctags" ]]; then
+        prettyPrint "Linking .ctags to home directory"
+        goInstallerDir
+        ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    if [[ ! -f "$HOME/.ctags" ]]; then
-        prettyPrint "Copying .ctags to home directory"
-        cp "install/.ctags" "$HOME"
-    fi
+    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc)
+
+    for file in ${symFiles[@]} ; do
+        prettyPrint "Installing $file to $HOME"
+        goInstallerDir
+        echo ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
+        ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
+    done
+
+    #if [[ -d "$HOME/.vim/Ultisnips" ]]; then
+        #cp install/UltiSnips/* "$HOME/.vim/UltiSnips"
+    #fi
+
+    #if [[ ! -f "$HOME/.ctags" ]]; then
+        #prettyPrint "Copying .ctags to home directory"
+        #cp "install/.ctags" "$HOME"
+    #fi
 
 }
 
@@ -1782,7 +1797,7 @@ function getrc(){
 
     builtin cd "$ZPWR"
     bash "$ZPWR_BANNER_SCRIPT"
-    copyConf
+    linkConf
 
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$COMPLETION_DIR/"*;do

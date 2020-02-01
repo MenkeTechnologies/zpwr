@@ -28,28 +28,18 @@ prettyPrint "Installing Pathogen"
 mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/autoload/pathogen.vim" https://tpo.pe/pathogen.vim
 
 goInstallerDir
-source  vim_plugins_install.sh
+source vim_plugins_install.sh
 
 prettyPrint "Installing Ultisnips snippets"
 goInstallerDir
-cp -R "$ZPWR_INSTALLER_DIR/UltiSnips" "$HOME/.vim"
-
-
-prettyPrint "Linking vimrc configuration file to home directory"
-goInstallerDir
-echo ln -sf $ZPWR_INSTALLER_DIR/.vimrc $HOME/.vimrc
-ln -sf $ZPWR_INSTALLER_DIR/.vimrc $HOME/.vimrc
-
-prettyPrint "Installing .ideavimrc"
-goInstallerDir
-cp .ideavimrc "$HOME"
+ln -sf $ZPWR_INSTALLER_DIR/Ultisnips $HOME/.vim/Ultisnips
 
 nvimDir="$HOME/.config/nvim"
 [[ ! -d "$nvimDir" ]] && mkdir -p "$nvimDir"
 
 prettyPrint "Installing neovim config"
 goInstallerDir
-cp init.vim "$nvimDir"
+ln -sf $ZPWR_INSTALLER_DIR/init.vim "$nvimDir"
 
 #custom settings for tmux powerline
 tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
@@ -57,31 +47,28 @@ tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
 
 prettyPrint "Installing Tmux Powerline Config"
 goInstallerDir
-cat default.json > "$tmuxPowerlineDir/default.json"
+ln -sf $ZPWR_INSTALLER_DIR/default.json "$tmuxPowerlineDir/default.json"
 
 prettyPrint "Installing Tmux Plugin Manager"
 [[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p "$HOME/.tmux/plugins/tpm"
 
 git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 
-prettyPrint "Linking tmux configuration file to home directory"
-goInstallerDir
-echo ln -sf $ZPWR_INSTALLER_DIR/.tmux.conf $HOME/.tmux.conf
-ln -sf $ZPWR_INSTALLER_DIR/.tmux.conf $HOME/.tmux.conf
-
-
-prettyPrint "Copying iftop.conf to home directory"
-cp .iftop.conf "$HOME"
-
 if [[ ! -f "$HOME/.ctags" ]]; then
-    prettyPrint "Copying .ctags to home directory"
+    prettyPrint "Linking .ctags to home directory"
     goInstallerDir
-    cp .ctags "$HOME"
+    echo ln -sf $ZPWR_INSTALLER_DIR/.ctags "$HOME/.ctags"
+    ln -sf $ZPWR_INSTALLER_DIR/.ctags "$HOME/.ctags"
 fi
 
-prettyPrint "Installing Iftop colors to $HOME"
-goInstallerDir
-cp .iftopcolors "$HOME"
+local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftop.conf .iftopcolors .inputrc)
+
+for file in ${symFiles[@]} ; do
+    prettyPrint "Installing $file to $HOME"
+    goInstallerDir
+    echo ln -sf $ZPWR_INSTALLER_DIR/$file "$HOME/$file"
+    ln -sf $ZPWR_INSTALLER_DIR/$file "$HOME/$file"
+done
 
 prettyPrint "Installing Tmux plugins"
 goInstallerDir
@@ -98,21 +85,6 @@ prettyPrint "Installing my.cnf to $HOME"
 prettyPrint "Changing pager to cat for MySQL Clients such as MyCLI"
 echo "[client]" >> "$HOME/.my.cnf"
 echo "pager=cat" >> "$HOME/.my.cnf"
-
-prettyPrint "Copying grc config files"
-goInstallerDir
-cp grc.zsh "$HOME"
-cp conf.gls "$HOME"
-cp conf.df"$HOME"
-cp conf.ifconfig "$HOME"
-cp conf.mount "$HOME"
-cp conf.whois "$HOME"
-
-
-prettyPrint "Installing inputrc for REPLs using GNU readline library and rlwrap."
-goInstallerDir
-cp .inputrc "$HOME"
-
 
 prettyPrint "Installing htoprc file...."
 goInstallerDir

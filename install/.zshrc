@@ -2791,7 +2791,7 @@ function zpwrAllUpdates(){
                 bash "$ZPWR_BANNER_SCRIPT"
             fi
         } &&
-        copyConf
+        linkConf
     )
    zpwr regen
    zpwr recompile
