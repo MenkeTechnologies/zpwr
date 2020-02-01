@@ -1711,6 +1711,7 @@ function zpz(){
         loggErr "$dirsc does not exist"
     fi
 }
+
 function zr(){
     local dirsc forked
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
@@ -2710,7 +2711,6 @@ function changeGitEmail(){
     ' --tag-name-filter cat -- --branches --tags
 
 }
-
 
 #}}}***********************************************************
 
