@@ -1775,6 +1775,7 @@ function linkConf(){
         ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
     done
 
+    echo ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim/Ultisnips"
     ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim/Ultisnips"
     )
 
