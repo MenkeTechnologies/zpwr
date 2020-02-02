@@ -1743,10 +1743,6 @@ function goInstallerDir(){
 # link over latest configuration files from $ZPWR_REPO_NAME
 function unlinkConf(){
     (
-    if [[ ! -f '.shell_aliases_functions.sh' ]]; then
-       loggErr "had to cd to $ZPWR_REPO"
-       builtin cd "$ZPWR_REPO"
-    fi
 
     local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
 
