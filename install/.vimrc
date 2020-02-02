@@ -128,6 +128,9 @@ set viminfo='1000,<50,s10,h
 
 "show vertical line at 80 chars width
 set colorcolumn=80
+
+"gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
+set updatetime=100
 ""}}}***********************************************************
 
 "{{{                    MARK:Vundle
@@ -271,12 +274,19 @@ filetype plugin indent on    " required
 "**************************************************************
 
 "faster movements, used in all modes
-noremap <c-j> 4j
-noremap <c-k> 4k
-noremap <c-h> 4h
-noremap <c-l> 4l
-noremap <leader>- 4-
-noremap <leader>= 4+
+nnoremap <c-j> 4j
+vnoremap <c-j> 4j
+nnoremap <c-k> 4k
+vnoremap <c-k> 4k
+nnoremap <c-h> 4h
+vnoremap <c-h> 4h
+nnoremap <c-l> 4l
+vnoremap <c-l> 4l
+
+nnoremap <leader>- 4-
+vnoremap <leader>- 4-
+nnoremap <leader>= 4+
+vnoremap <leader>= 4+
 
 "reselect visual mode last region after indenting
 vnoremap < <gv
@@ -366,7 +376,10 @@ nnoremap <silent> <leader>v :vsplit<CR>
 nnoremap <silent> <leader>s :split<CR>
 nnoremap <silent> <leader>t :tabnew<CR>
 
-onoremap <silent> i# ?#<CR>jV/#<CR>kc
+
+onoremap i# :<c-u>execute "normal! ?^#\rjmy/#\rkmz:nohlsearch\r`yv`z"<cr>
+onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
 
 "#**************************************************************
 "}}}
@@ -1248,7 +1261,7 @@ inoremap <silent> <C-D>\ <C-X><C-L>
 inoremap <silent> <C-D>n <C-X><C-O>
 
 "normal mode keybindings for fzf-vim
-noremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
+nnoremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <leader>ag :Ag<CR>
@@ -1301,9 +1314,6 @@ nnoremap <silent> <C-D>, :FZFEnv<CR>
 "similar to tmux <prefix> - and <prefix> | to split panes
 nnoremap <silent> <C-W>- :split<CR>
 nnoremap <silent> <C-W>\ :vsplit<CR>
-
-"gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
-set updatetime=100
 
 
 nmap [[ ?{<CR>w99[{
