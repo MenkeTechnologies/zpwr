@@ -1752,7 +1752,7 @@ function unlinkConf(){
         echo rm -f $HOME/$file
         rm -f $HOME/$file
     done
-    rm -rf "$HOME/.vim/Ultisnips"
+    rm -rf "$HOME/.vim/UltiSnips"
     )
 }
 
@@ -1776,9 +1776,9 @@ function linkConf(){
         ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
     done
 
-    prettyPrint "Installing Ultinip to $HOME/.vim"
-    echo ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim"
-    ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim"
+    prettyPrint "Installing UltiSnips to $HOME/.vim/UltiSnips"
+    echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
+    ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
     )
 
 }
