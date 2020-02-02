@@ -1780,7 +1780,6 @@ function linkConf(){
     echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
     ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
     )
-
 }
 
 # pull down latest configuration files from $ZPWR_REPO_NAME

@@ -158,7 +158,7 @@ or type C-d (Control-d) to return to installer script.
 
 ## Install Destination
 
-Most zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR` environment variable.  Exceptions include `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/grc.zsh` which are installed to home dir.
+Most zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR` environment variable.  Exceptions include `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/grc.zsh` which are sym linked into home dir.
 Your old configs for these files will be found in a directory name approximately `~/.zpwr/local/username.rc.bak.date` after install.  Exact directory name is generated as shown.
 ```sh
 backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
@@ -167,7 +167,7 @@ Installer artifacts such as log files and cloned repos go into `~/.zpwr/local/in
 
 ## Uninstall
 1. Run `unlinkConf` to unlink all zpwr config symlinks.
-2. Copy all configs from backup dir mentioned above to home directory overwriting the ones installed by zpwr, most importantly the `.zshrc`, `.vimrc` and `.tmux.conf`.
+2. Copy all configs from backup dir mentioned above to home directory most importantly the `.zshrc`, `.vimrc` and `.tmux.conf`.
 3. Remove the zpwr dir as shown.
 ```sh
 rm -rf ~/.zpwr
@@ -189,6 +189,7 @@ It invokes `linkConf` which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` 
 ```sh
 # link over latest configuration files from $ZPWR_REPO_NAME
 function linkConf(){
+
     (
     if [[ ! -f "$HOME/.ctags" ]]; then
         prettyPrint "Linking .ctags to home directory"
@@ -205,9 +206,10 @@ function linkConf(){
         ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
     done
 
-    ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim/Ultisnips"
+    prettyPrint "Installing UltiSnips to $HOME/.vim/UltiSnips"
+    echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
+    ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
     )
-
 }
 ```
 
