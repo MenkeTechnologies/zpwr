@@ -1759,6 +1759,7 @@ function unlinkConf(){
 
 # link over latest configuration files from $ZPWR_REPO_NAME
 function linkConf(){
+
     (
     if [[ ! -f "$HOME/.ctags" ]]; then
         prettyPrint "Linking .ctags to home directory"
@@ -1775,8 +1776,9 @@ function linkConf(){
         ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
     done
 
-    echo ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim/Ultisnips"
-    ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim/Ultisnips"
+    prettyPrint "Installing Ultinip to $HOME/.vim"
+    echo ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim"
+    ln -sf $ZPWR_INSTALL/UltiSnips "$HOME/.vim"
     )
 
 }
