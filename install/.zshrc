@@ -2825,5 +2825,5 @@ alias tok="vim $ZPWR_LOCAL/.tokens.sh"
 #{{{                    MARK:Finish
 #**************************************************************
 #source .tokens.sh to override with user functions
-test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh"
+test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh" || touch "$ZPWR_LOCAL/.tokens.sh"
 #}}}***********************************************************
