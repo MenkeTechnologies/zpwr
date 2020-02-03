@@ -456,6 +456,7 @@ alias docu="cd $ZPWR_DOC"
 alias mus='cd $HOME/Music'
 alias jobs="jobs -l"
 alias u8="bash $ZPWR_SCRIPTS/updater.sh"
+alias u8r="bash -l $ZPWR_SCRIPTS/updater.sh -s"
 alias sd="clear;ssh d "
 alias gitgo='$ZPWR_SCRIPTS/gitgo.sh'
 alias watchGit='bash $ZPWR_SCRIPTS/watchServiceFSWatchGit.sh'
