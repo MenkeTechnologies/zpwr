@@ -57,6 +57,8 @@ case $verb in
         ;;
     figletfonts) cmd="figletfonts" #show all figlet fonts
         ;;
+    fordir) cmd="fordir" #run first arg in following dirs
+        ;;
     for) cmd="fff" #run first arg times for command
         ;;
     for10) cmd="ff" #run 10 times for command

@@ -2140,6 +2140,26 @@ function www(){
     done
 }
 
+function fordir(){
+    if [[ -z "$2" ]]; then
+       loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"
+       return 1
+    fi
+    cmd="$1"
+    if [[ -d "$cmd" || -f "$cmd" ]]; then
+       loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"
+       return 1
+    fi
+    shift
+    for dir in "$@"; do
+        if [[ -d "$dir" ]]; then
+            (
+                builtin cd "$dir" && prettyPrint "cd $dir && $cmd" && eval "$cmd"
+            )
+        fi
+    done
+}
+
 function ff(){
     if [[ -z "$1" ]]; then
        loggErr "ff <cmd> to run <cmd> 10 times" 
