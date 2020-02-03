@@ -39,16 +39,17 @@ python3 -c 'import pip' && {
         else
             python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         fi
-done
-if [[ -n "$needSudo" ]]; then
-    prettyPrint "Updating Pip3 with sudo"
-    #update pip itself
-    sudo python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
-else
-    prettyPrint "Updating Pip3"
-    #update pip itself
-    python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
-fi
+    done
+
+    if [[ -n "$needSudo" ]]; then
+        prettyPrint "Updating Pip3 with sudo"
+        #update pip itself
+        sudo python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+    else
+        prettyPrint "Updating Pip3"
+        #update pip itself
+        python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+    fi
 
 }
 
@@ -76,6 +77,7 @@ python2 -c 'import pip' && {
             python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         fi
     done
+
     if [[ -n "$needSudo" ]]; then
         prettyPrint "sudo needed: $needSudo for pip2 at $installDir"
         prettyPrint "Updating Pip2"
