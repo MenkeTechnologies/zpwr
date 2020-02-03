@@ -69,6 +69,10 @@ case $verb in
         ;;
     ghcontribcount) cmd="cgh" #count of github contribs in last year
         ;;
+    gitreposdirty) cmd="searchDirtyGitRepos" #search dirty \$ZPWR_ALL_GIT_DIRS in fzf
+        ;;
+    gitrepos) cmd="searchAllGitRepos" #search \$ZPWR_ALL_GIT_DIRS in fzf
+        ;;
     gitemail) cmd="changeGitEmail" #change email with git filter-brancch
         ;;
     gitcemail) cmd="changeGitCommitterEmail" #change committer email with git filter-brancch
