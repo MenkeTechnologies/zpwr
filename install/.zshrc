@@ -637,6 +637,9 @@ function vimFzf(){
         #logg "words='$mywords[2]'=>'$firstdir'"
         #:h takes aways last "
         BUFFER="builtin cd $firstdir\"; $BUFFER; clearList"
+        if isGitDir; then
+            BUFFER+=";git diff HEAD"
+        fi
         zle .accept-line
     fi
 }
