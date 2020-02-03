@@ -1882,7 +1882,8 @@ function pirun(){
     picounter=1
     for pi in "${PI_ARRAY[@]}" ; do
         [[ $DONE == true ]] && return 1
-        alternatingPrettyPrint "Executing %'$1'% on %$pi%"
+        alternatingPrettyPrint \
+        "Executing $ZPWR_DELIMITER_CHAR'$1'$ZPWR_DELIMITER_CHAR on $ZPWR_DELIMITER_CHAR$pi$ZPWR_DELIMITER_CHAR"
         if [[ -z $2 ]]; then
             ssh "${pi%:*}" "$1" 2>/dev/null
         else
