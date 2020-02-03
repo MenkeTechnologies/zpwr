@@ -127,6 +127,7 @@ export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
+#maybe z4ce
 export ZPWR_REPO_NAME="zpwr"
 # the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
@@ -1753,7 +1754,7 @@ function globalAliasesInit(){
     alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
 
 
-    alias zf="zpwr fordir '$ZPWR_TABSTOP' *"
+    alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
 
     alias i='if [[ '$ZPWR_TABSTOP' ]];then
         '$ZPWR_TABSTOP'

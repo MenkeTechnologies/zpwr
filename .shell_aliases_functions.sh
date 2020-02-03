@@ -2597,6 +2597,7 @@ function vimAll(){
     vim \
     "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
+    "$ZPWR/"*.md \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/tmux-"* \
