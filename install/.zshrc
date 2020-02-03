@@ -1755,6 +1755,7 @@ function globalAliasesInit(){
 
 
     alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
+    alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
     alias i='if [[ '$ZPWR_TABSTOP' ]];then
         '$ZPWR_TABSTOP'
