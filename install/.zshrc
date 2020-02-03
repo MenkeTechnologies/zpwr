@@ -1753,6 +1753,8 @@ function globalAliasesInit(){
     alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
 
 
+    alias zf="zpwr fordir '$ZPWR_TABSTOP' *"
+
     alias i='if [[ '$ZPWR_TABSTOP' ]];then
         '$ZPWR_TABSTOP'
     fi'
