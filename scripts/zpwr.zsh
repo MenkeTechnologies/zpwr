@@ -69,6 +69,10 @@ case $verb in
         ;;
     ghcontribcount) cmd="cgh" #count of github contribs in last year
         ;;
+    gitfordir) cmd="zpwrForAllGitDirs" #run cmd in all git dirs
+        ;;
+    gitupdatefordir) cmd="zpwrUpdateAllGitDirs" #run git updates in all git dirs
+        ;;
     gitreposdirty) cmd="searchDirtyGitRepos" #search dirty \$ZPWR_ALL_GIT_DIRS in fzf
         ;;
     gitrepos) cmd="searchAllGitRepos" #search \$ZPWR_ALL_GIT_DIRS in fzf

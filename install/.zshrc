@@ -1755,7 +1755,11 @@ function globalAliasesInit(){
 
 
     alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
+
+
     alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
+
+    alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
     alias i='if [[ '$ZPWR_TABSTOP' ]];then
         '$ZPWR_TABSTOP'
@@ -2809,6 +2813,23 @@ function zpwrAllUpdates(){
    zpwr updatedeps
    zpwr update
 }
+
+function zpwrForAllGitDirs(){
+    if [[ -z "$1" ]]; then
+        loggErr "zpwrForGitDir <cmd>"
+        return 1
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir $1 \
+        $(cat $ZPWR_ALL_GIT_DIRS)
+}
+function zpwrUpdateAllGitDirs(){
+
+    ${=ZPWR_REPO_NAME} fordir \
+    'git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache' \
+        $(cat $ZPWR_ALL_GIT_DIRS)
+}
+
 
 function zpwrVerbs(){
     cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' | fzf
