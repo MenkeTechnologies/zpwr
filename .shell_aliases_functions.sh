@@ -2143,6 +2143,21 @@ function www(){
     done
 }
 
+function fordirUpdate(){
+    if [[ -z "$1" ]]; then
+       loggErr "fordirUpdate <dirs> to run git update in each dir"
+       return 1
+    fi
+    cmd="git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache"
+    for dir in "$@"; do
+        if [[ -d "$dir" ]]; then
+            (
+                builtin cd "$dir" && isGitDir && prettyPrint "cd $dir && $cmd" && eval "$cmd"
+            )
+        fi
+    done
+}
+
 function fordir(){
     if [[ -z "$2" ]]; then
        loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"

@@ -2823,6 +2823,7 @@ function zpwrForAllGitDirs(){
     ${=ZPWR_REPO_NAME} fordir $1 \
         $(cat $ZPWR_ALL_GIT_DIRS)
 }
+
 function zpwrUpdateAllGitDirs(){
 
     ${=ZPWR_REPO_NAME} fordir \
