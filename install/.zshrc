@@ -1755,7 +1755,7 @@ function globalAliasesInit(){
 
 
     alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
-
+    alias zfg="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' *"
 
     alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
