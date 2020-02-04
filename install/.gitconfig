@@ -55,3 +55,6 @@
     submodulesummary = 1
 [interactive]
 	singlekey = yes
+[rerere]
+	enabled = yes
+
