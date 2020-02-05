@@ -300,8 +300,8 @@ isZsh && {
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
-alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR/.shell_aliases_functions.sh; source $ZPWR/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupBashConfig.sh 2> /dev/null"
-alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc; source ~/.zshrc"
+alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null"
+alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 #}}}***********************************************************
 alias deleteTab="sed '/^[\x20\x09]*$/d'"
