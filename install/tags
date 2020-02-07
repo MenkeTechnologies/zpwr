@@ -304,7 +304,9 @@ ZPWR_ALL_KEYBINDINGS	/Users/wizard/.zshrc	/^export ZPWR_ALL_KEYBINDINGS="$ZPWR_L
 ZPWR_AUTO_ATTACH	/Users/wizard/.zshrc	/^export ZPWR_AUTO_ATTACH=true$/;"	v	language:Sh
 ZPWR_AUTO_SELECT	/Users/wizard/.zshrc	/^export ZPWR_AUTO_SELECT=true$/;"	v	language:Sh
 ZPWR_BANNER_SCRIPT	/Users/wizard/.zshrc	/^export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS\/about.sh"$/;"	v	language:Sh
+ZPWR_BASE_DIR	common.sh	/^ZPWR_BASE_DIR="$ZPWR_INSTALL\/.."$/;"	v
 ZPWR_BASE_DIR	install.sh	/^ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"$/;"	v
+ZPWR_BASE_SCRIPTS	common.sh	/^ZPWR_BASE_SCRIPTS="$ZPWR_INSTALL\/..\/scripts"$/;"	v
 ZPWR_BASE_SCRIPTS	install.sh	/^ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR\/scripts"$/;"	v
 ZPWR_BAT_THEME	/Users/wizard/.zshrc	/^export ZPWR_BAT_THEME="GitHub"$/;"	v	language:Sh
 ZPWR_BLUE	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_BLUE="\\x1b[37;44m"$/;"	v	language:Sh
@@ -332,6 +334,7 @@ ZPWR_DEFAULT_BANNER	/Users/wizard/.zshrc	/^export ZPWR_DEFAULT_BANNER="bash $ZPW
 ZPWR_DELIMITER_CHAR	/Users/wizard/.zpwr/scripts/pipUpdater.sh	/^export ZPWR_DELIMITER_CHAR='%'$/;"	v	language:Sh
 ZPWR_DELIMITER_CHAR	/Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh	/^export ZPWR_DELIMITER_CHAR='%'$/;"	v	language:Sh
 ZPWR_DELIMITER_CHAR	/Users/wizard/.zshrc	/^export ZPWR_DELIMITER_CHAR='%'$/;"	v	language:Sh
+ZPWR_DELIMITER_CHAR	common.sh	/^export ZPWR_DELIMITER_CHAR='%'$/;"	v
 ZPWR_DIR	/Users/wizard/.zpwr/scripts/macOnly/tutorialConfigUpdater.sh	/^ZPWR_DIR="$ZPWR"$/;"	v	language:Sh
 ZPWR_DIR_INSTALL	/Users/wizard/.zpwr/scripts/macOnly/tutorialConfigUpdater.sh	/^ZPWR_DIR_INSTALL="$ZPWR\/install"$/;"	v	language:Sh
 ZPWR_DL	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^export ZPWR_DL="$HOME\/Downloads"$/;"	v	language:Sh
@@ -351,8 +354,10 @@ ZPWR_HIDDEN_DIR	install.sh	/^export ZPWR_HIDDEN_DIR="$HOME\/.zpwr\/local"$/;"	v
 ZPWR_HIDDEN_DIR_TEMP	/Users/wizard/.zshrc	/^export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL\/.temp"$/;"	v	language:Sh
 ZPWR_HIDDEN_DIR_TEMP	install.sh	/^export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR\/.temp"$/;"	v
 ZPWR_INSTALL	/Users/wizard/.zshrc	/^export ZPWR_INSTALL="$ZPWR\/install"$/;"	v	language:Sh
+ZPWR_INSTALL	common.sh	/^ZPWR_INSTALL="$(pwd -P)"$/;"	v
 ZPWR_INSTALL	install.sh	/^ZPWR_INSTALL="$(pwd -P)"$/;"	v
 ZPWR_INSTALLER_LOCAL	install.sh	/^ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR\/local"$/;"	v
+ZPWR_INSTALLER_OUTPUT	common.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR\/local\/installer"$/;"	v
 ZPWR_INSTALLER_OUTPUT	install.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL\/installer"$/;"	v
 ZPWR_INTRO_BANNER	/Users/wizard/.zshrc	/^export ZPWR_INTRO_BANNER=ponies$/;"	v	language:Sh
 ZPWR_LEARN	/Users/wizard/.zshrc	/^export ZPWR_LEARN=true$/;"	v	language:Sh
@@ -369,6 +374,7 @@ ZPWR_NVIMINFO	/Users/wizard/.zshrc	/^export ZPWR_NVIMINFO="$ZPWR_LOCAL\/.nviminf
 ZPWR_OPEN_CMD	/Users/wizard/.zpwr/scripts/crossOSCommands.sh	/^export ZPWR_OPEN_CMD="$(getOpenCommand)"$/;"	v	language:Sh
 ZPWR_OS_TYPE	/Users/wizard/.zpwr/scripts/crossOSCommands.sh	/^    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"$/;"	v	language:Sh
 ZPWR_OS_TYPE	/Users/wizard/.zshrc	/^export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"$/;"	v	language:Sh
+ZPWR_OS_TYPE	common.sh	/^ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"$/;"	v
 ZPWR_OS_TYPE	install.sh	/^ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"$/;"	v
 ZPWR_PARENT_PROCESS	/Users/wizard/.zshrc	/^ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\\s*\\d+.*}')"$/;"	v	language:Sh
 ZPWR_PASTE_CMD	/Users/wizard/.zpwr/scripts/crossOSCommands.sh	/^export ZPWR_PASTE_CMD="$(getPasteCommand)"$/;"	v	language:Sh
@@ -515,6 +521,7 @@ alternatingPrettyPrint	/Users/wizard/.zpwr/scripts/pipUpdater.sh	/^alternatingPr
 alternatingPrettyPrint	/Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	/Users/wizard/.zpwr/scripts/updater.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
 alternatingPrettyPrint	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^alternatingPrettyPrint() {$/;"	f	language:Sh
+alternatingPrettyPrint	common.sh	/^function alternatingPrettyPrint(){$/;"	f
 amPm	/Users/wizard/.zpwr/scripts/timeConverter.sh	/^    amPm="PM"$/;"	v	language:Sh
 amPm	/Users/wizard/.zpwr/scripts/timeConverter.sh	/^amPm="AM"$/;"	v	language:Sh
 amps	/Users/wizard/.zpwr/.powerlevel9kconfig.sh	/^    amps="$(ioreg -rc AppleSmartBattery | grep CurrentCapacity | awk '{printf "%s mAh\\n", $3}')"$/;"	v	language:Sh
@@ -674,6 +681,7 @@ counter	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    counter=0$/;"	v	la
 counter	/Users/wizard/.zpwr/scripts/CPU_Stresser.sh	/^    counter=0$/;"	v	language:Sh
 counter	/Users/wizard/.zpwr/scripts/pipUpdater.sh	/^    counter=0$/;"	v	language:Sh
 counter	/Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh	/^    counter=0$/;"	v	language:Sh
+counter	common.sh	/^    counter=0$/;"	v
 createTemplate	/Users/wizard/.zpwr/scripts/templater.sh	/^createTemplate() {$/;"	f	language:Sh
 createTheFile	/Users/wizard/.zpwr/scripts/createScriptButDontOpenSublime.sh	/^createTheFile() {$/;"	f	language:Sh
 createTheFile	/Users/wizard/.zpwr/scripts/createTextFile.sh	/^createTheFile() {$/;"	f	language:Sh
@@ -818,9 +826,11 @@ exists	/Users/wizard/.zpwr/scripts/tailZOU.sh	/^    exists(){$/;"	f	language:Sh
 exists	/Users/wizard/.zpwr/scripts/updater.sh	/^exists() {$/;"	f	language:Sh
 exists	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^exists() {$/;"	f	language:Sh
 exists	/Users/wizard/.zpwr/scripts/zshcompgen.zsh	/^exists(){$/;"	f	language:Sh
+exists	common.sh	/^function exists(){$/;"	f
 expandAliasAccept	/Users/wizard/.zshrc	/^function expandAliasAccept(){$/;"	f	language:Sh
 extend	/Users/wizard/.zpwr/scripts/motd.sh	/^function extend (){$/;"	f	language:Sh
 f	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function f(){$/;"	f	language:Sh
+fail	common.sh	/^function fail(){$/;"	f
 fallback	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def fallback(self, options_section):$/;"	m	language:Python	class:Type1ManParser
 fallback2	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def fallback2(self, options_section):$/;"	m	language:Python	class:Type1ManParser
 family_phone_numbers	/Users/wizard/.zpwr/scripts/textmessage.sh	/^    family_phone_numbers=("$member_1")$/;"	v	language:Sh
@@ -846,6 +856,7 @@ file	/Users/wizard/.zpwr/scripts/secureDelete.sh	/^    file="$i"$/;"	v	language:
 file	/Users/wizard/.zpwr/scripts/splitReg.sh	/^file="$ZPWR_TEMPFILE"$/;"	v	language:Sh
 file	/Users/wizard/.zshrc	/^        file="$HOME\/.viminfo"$/;"	v	language:Sh
 file	/Users/wizard/.zshrc	/^        file="$ZPWR_NVIMINFO"$/;"	v	language:Sh
+fileMustExist	common.sh	/^function fileMustExist(){$/;"	f
 fileName	/Users/wizard/.zpwr/scripts/watchServiceFSWatchRustCompile.sh	/^    fileName=$(basename $event)$/;"	v	language:Sh
 fileString	/Users/wizard/.zpwr/scripts/openAll.sh	/^fileString=""$/;"	v	language:Sh
 fileToBeExecuted	/Users/wizard/.zpwr/scripts/runner.sh	/^fileToBeExecuted="$1"$/;"	v	language:Sh
@@ -950,6 +961,8 @@ gittersdev	/Users/wizard/.zpwr/scripts/remoteRepoMonitorDaemon.sh	/^gittersdev()
 gittersmaster	/Users/wizard/.zpwr/scripts/remoteRepoMonitorDaemon.sh	/^gittersmaster() {$/;"	f	language:Sh
 globalAliasesInit	/Users/wizard/.zshrc	/^function globalAliasesInit(){$/;"	f	language:Sh
 goInstallerDir	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function goInstallerDir(){$/;"	f	language:Sh
+goInstallerDir	common.sh	/^function goInstallerDir(){$/;"	f
+goInstallerOutputDir	common.sh	/^function goInstallerOutputDir(){$/;"	f
 goThere	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    goThere(){$/;"	f	language:Sh
 goclean	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function goclean() {$/;"	f	language:Sh
 green	/Users/wizard/.zshrc	/^local green="64"$/;"	v	language:Sh
@@ -1182,6 +1195,7 @@ needSudo	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^            needSudo=no$/
 needSudo	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^            needSudo=yes$/;"	v	language:Sh
 needSudo	/Users/wizard/.zpwr/scripts/updaterPip.sh	/^            needSudo=no$/;"	v	language:Sh
 needSudo	/Users/wizard/.zpwr/scripts/updaterPip.sh	/^            needSudo=yes$/;"	v	language:Sh
+needSudo	common.sh	/^function needSudo(){$/;"	f
 needSudo	install.sh	/^        needSudo=no$/;"	v
 needSudo	install.sh	/^        needSudo=yes$/;"	v
 network_check_threshold	/Users/wizard/.zpwr/scripts/pingordie.sh	/^network_check_threshold=5$/;"	v	language:Sh
@@ -1324,6 +1338,7 @@ path	/Users/wizard/.zpwr/scripts/shebangChanger.sh	/^path="#!\/usr\/bin\/env $ex
 path	/Users/wizard/.zshrc	/^        path=( $cmdpath )$/;"	v	language:Sh
 perlOutdated	/Users/wizard/.zpwr/scripts/updater.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v	language:Sh
 perlOutdated	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")$/;"	v	language:Sh
+perlfile	common.sh	/^    local perlfile="$ZPWR_BASE_SCRIPTS\/boxPrint.pl"$/;"	v
 perlremovespaces	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function perlremovespaces(){$/;"	f	language:Sh
 perlscript	/Users/wizard/.zpwr/scripts/autoUpdater.sh	/^    perlscript=$($/;"	v	language:Sh
 picounter	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    picounter=1$/;"	v	language:Sh
@@ -1358,9 +1373,12 @@ prettyPrint	/Users/wizard/.zpwr/scripts/textmessage.sh	/^prettyPrint() {$/;"	f	l
 prettyPrint	/Users/wizard/.zpwr/scripts/updater.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^prettyPrint() {$/;"	f	language:Sh
 prettyPrint	/Users/wizard/.zpwr/scripts/updaterPip.sh	/^prettyPrint() {$/;"	f	language:Sh
+prettyPrint	common.sh	/^function prettyPrint(){$/;"	f
+prettyPrintStdin	common.sh	/^function prettyPrintStdin(){$/;"	f
 primary	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^                    primary="$(echo "$noproto" | sed -E 's@^(.*)\\.([^.]+)\\.([^.]+)$@\\2.\\3@')"$/;"	v	language:Sh
 printD	/Users/wizard/.zpwr/scripts/banner.pl	/^sub printD {$/;"	s	language:Perl
 printDate	/Users/wizard/.zpwr/scripts/banner.pl	/^sub printDate {$/;"	s	language:Perl
+proceed	common.sh	/^function proceed(){$/;"	f
 progress_pid	/Users/wizard/.zpwr/scripts/batchRename.sh	/^    progress_pid=$!$/;"	v	language:Sh
 progress_pid	/Users/wizard/.zpwr/scripts/openAll.sh	/^    progress_pid=$!$/;"	v	language:Sh
 progress_pid	/Users/wizard/.zpwr/scripts/picture_finder.sh	/^    progress_pid=$!$/;"	v	language:Sh
@@ -1405,6 +1423,7 @@ recompile	/Users/wizard/.zshrc	/^function recompile(){$/;"	f	language:Sh
 red	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    red=$(tput setaf 1)$/;"	v	language:Sh
 red	/Users/wizard/.zshrc	/^local red="160"$/;"	v	language:Sh
 ref	/Users/wizard/.zpwr/scripts/fzfGitOpts.sh	/^ref=$1$/;"	v	language:Sh
+refresh	common.sh	/^function refresh(){$/;"	f
 refreshers	/Users/wizard/.zpwr/scripts/remoteRepoMonitorDaemon.sh	/^refreshers() {$/;"	f	language:Sh
 regenAll	/Users/wizard/.zshrc	/^function regenAll(){$/;"	f	language:Sh
 regenAllGitRepos	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function regenAllGitRepos(){$/;"	f	language:Sh
@@ -1446,6 +1465,7 @@ ret	/Users/wizard/.zshrc	/^                            ret=$?$/;"	v	language:Sh
 ret	/Users/wizard/.zshrc	/^                        ret=$?$/;"	v	language:Sh
 ret	/Users/wizard/.zshrc	/^            ret=0 || ret=1$/;"	v	language:Sh
 ret	/Users/wizard/.zshrc	/^        ret=0 || ret=1$/;"	v	language:Sh
+ret	common.sh	/^    local ret=0$/;"	v
 return2	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function return2(){$/;"	f	language:Sh
 revarr	/Users/wizard/.zpwr/scripts/picture_finder.sh	/^    local revarr=('|' '\/' '-' '\\')$/;"	v	language:Sh
 revarr	/Users/wizard/.zpwr/scripts/secureDelete.sh	/^    local revarr=('|' '\/' '-' '\\')$/;"	v	language:Sh
@@ -1602,16 +1622,20 @@ totstart	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    totstart=$($cmd +
 traceback	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^import traceback$/;"	i	language:Python
 transferFile	/Users/wizard/.zpwr/scripts/transfer.sh	/^transferFile="$1"$/;"	v	language:Sh
 trim_groff	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def trim_groff(self, line):$/;"	m	language:Python	class:TypeDarwinManParser
+turnOffDebugging	common.sh	/^function turnOffDebugging(){$/;"	f
+turnOnDebugging	common.sh	/^function turnOnDebugging(){$/;"	f
 tutorialDir	/Users/wizard/.zpwr/scripts/macOnly/tutorialConfigUpdater.sh	/^tutorialDir="$HOME\/Documents\/tutorialsRepo"$/;"	v	language:Sh
 tutsUpdate	/Users/wizard/.zshrc	/^function tutsUpdate() {$/;"	f	language:Sh
 unlinkConf	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function unlinkConf(){$/;"	f	language:Sh
 unquote_double_quotes	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^def unquote_double_quotes(data):$/;"	f	language:Python
 unquote_single_quotes	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^def unquote_single_quotes(data):$/;"	f	language:Python
+update	common.sh	/^function update(){$/;"	f
 updatePI	/Users/wizard/.zpwr/scripts/updatePi.sh	/^updatePI() {$/;"	f	language:Sh
 updatePI	/Users/wizard/.zpwr/scripts/updater.sh	/^updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote host$/;"	f	language:Sh
 updatePI	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote host$/;"	f	language:Sh
 updater	/Users/wizard/.zshrc	/^function updater (){$/;"	f	language:Sh
 updater	/Users/wizard/.zshrc	/^function updater() {$/;"	f	language:Sh
+upgrade	common.sh	/^function upgrade(){$/;"	f
 upload	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function upload(){$/;"	f	language:Sh
 uptime	/Users/wizard/.zpwr/scripts/motd.sh	/^uptime="$(sec2time $(cut -d "." -f 1 \/proc\/uptime))"$/;"	v	language:Sh
 uptime	/Users/wizard/.zpwr/scripts/motd.sh	/^uptime="$uptime ($(date -d "@"$(grep btime \/proc\/stat | cut -d " " -f 2) +"%d-%m-%Y %H:%M:%S"))"$/;"	v	language:Sh
