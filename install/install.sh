@@ -654,7 +654,7 @@ ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@'
 iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
 
 if [[ -n "$iface" ]]; then
-    prettyPrint "IPv4: $ip and interface: $iface"
+    echo"IPv4: $ip and interface: $iface"
     if [[ -f "$HOME/.iftop.conf" ]]; then
         if ! grep -E '^interface:\S+' "$HOME/.iftop.conf"; then
             echo cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
@@ -671,7 +671,7 @@ if [[ -n "$iface" ]]; then
             cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
     fi
 else
-    prettyPrint "IPv4 Iface missing: $ip and interface: $iface"
+    echo"IPv4 Iface missing: $ip and interface: $iface"
     if [[ -f "$HOME/.iftop.conf" ]]; then
         if ! grep -E '^interface:\S+' "$HOME/.iftop.conf"; then
             echo cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
