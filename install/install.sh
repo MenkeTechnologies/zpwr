@@ -654,16 +654,20 @@ ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@'
 iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
 
 if [[ -n "$iface" ]]; then
-    echo"IPv4: $ip and interface: $iface"
+    echo "IPv4: $ip and interface: $iface"
     if [[ -f "$HOME/.iftop.conf" ]]; then
         if ! grep -E '^interface:\S+' "$HOME/.iftop.conf"; then
-            echo cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
-            cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
+            echo "no interface in $HOME/.iftop.conf"
+            echo cp "$HOME/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
+            cp "$HOME/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
             echo "interface:$iface" >> "$ZPWR_INSTALLER_OUTPUT/.iftop.conf"
             echo cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
             cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
+        else
+            echo "interface in $HOME/.iftop.conf. No mod"
         fi
     else
+            echo "no $HOME/.iftop.conf"
             echo cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
             cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
             echo "interface:$iface" >> "$ZPWR_INSTALLER_OUTPUT/.iftop.conf"
@@ -674,12 +678,12 @@ else
     echo"IPv4 Iface missing: $ip and interface: $iface"
     if [[ -f "$HOME/.iftop.conf" ]]; then
         if ! grep -E '^interface:\S+' "$HOME/.iftop.conf"; then
-            echo cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
-            cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
-            echo cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
-            cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
+            echo "no interface in $HOME/.iftop.conf. No mod"
+        else
+            echo "interface in $HOME/.iftop.conf. No mod"
         fi
     else
+            echo "no $HOME/.iftop.conf"
             echo cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
             cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
             echo cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
