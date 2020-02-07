@@ -430,7 +430,7 @@ else
                 ;;
         esac
     elif [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
-            alias api="sudo pkg install"
+            alias api="sudo pkg install -y"
             alias apa="yes | sudo pkg update; sudo pkg upgrade -y"
             alias apz="yes | sudo pkg update; sudo pkg upgrade -y;u8"
     else
