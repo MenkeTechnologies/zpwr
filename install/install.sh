@@ -657,12 +657,18 @@ if [[ -n "$iface" ]]; then
     prettyPrint "IPv4: $ip and interface: $iface"
     if [[ -f "$HOME/.iftop.conf" ]]; then
         if ! grep -E '^interface:\S+' "$HOME/.iftop.conf"; then
-            cp "$ZPWR_INSTALL/install/.iftop.conf" "$HOME"
-            echo "interface:$iface" >> "$HOME/.iftop.conf"
+            echo cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
+            cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
+            echo "interface:$iface" >> "$ZPWR_INSTALLER_OUTPUT/.iftop.conf"
+            echo cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
+            cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
         fi
     else
-            cp "$ZPWR_INSTALL/install/.iftop.conf" "$HOME"
-            echo "interface:$iface" >> "$HOME/.iftop.conf"
+            echo cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
+            cp "$ZPWR_INSTALL/.iftop.conf" "$ZPWR_INSTALLER_OUTPUT"
+            echo "interface:$iface" >> "$ZPWR_INSTALLER_OUTPUT/.iftop.conf"
+            echo cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
+            cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
     fi
 fi
 
