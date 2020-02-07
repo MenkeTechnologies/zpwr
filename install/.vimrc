@@ -47,7 +47,7 @@ set splitright
 set noswapfile
 set nowritebackup
 set ruler
-set noautoread
+set autoread
 "searches are case insensitive
 set ignorecase
 "tab is 4 spaces
@@ -1624,6 +1624,9 @@ endfunction
 if has("nvim")
     autocmd bufenter * call WriteToNVimInfo()
 endif
+
+"update the file with set autoread
+au CursorHold,CursorHoldI * checktime
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
