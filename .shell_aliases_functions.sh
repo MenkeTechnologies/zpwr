@@ -396,7 +396,7 @@ else
     alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
     test -d "$HOME/.local/share/Trash" &&
         alias tra='cd $HOME/.local/share/Trash'
-    if [[ "$($ZPWR_OS_TYPE)" == linux ]]; then
+    if [[ "$ZPWR_OS_TYPE" == linux ]]; then
         if exists apt;then
             alias api="sudo apt install -y"
             alias apa="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean"
