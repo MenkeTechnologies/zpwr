@@ -1803,8 +1803,14 @@ function globalAliasesInit(){
 
     alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
+    if [[ -d "$ZPWR_INSTALL" ]]; then
+        alias zi="cd $ZPWR_INSTALL"
+    fi
+    if [[ -d "$ZPWR_SCRIPTS" ]]; then
+        alias zs="cd $ZPWR_SCRIPTS"
+    fi
     if [[ -d "$ZPWR_LOCAL" ]]; then
-        alias zh="cd $ZPWR_LOCAL"
+        alias zl="cd $ZPWR_LOCAL"
     fi
     if [[ -d "$ZSH/custom/plugins" ]]; then
         alias zpl="cd $ZSH/custom/plugins"
