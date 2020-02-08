@@ -1084,6 +1084,7 @@ function f(){
     else
         test -z "$1" && cd - && return 0
         echo "$1" | command grep -E '\-[0-9]+' && cd "$1" && return 0
+        local base
         base="$(dirname "$1")"
         while [[ "$base" != / ]]; do
             test -d "$base" && cd "$base"&& return 0
@@ -1093,6 +1094,7 @@ function f(){
         return 1
     fi
 }
+
 alias fh='f !$'
 
 function execpy(){
