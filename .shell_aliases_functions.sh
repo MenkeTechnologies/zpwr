@@ -2513,6 +2513,9 @@ cd {} && git status -s && git diff --stat -p --color=always HEAD 2>/dev/null' |
     shouldRegen="$1"
     if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
         regenAllGitRepos
+    elif [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
+        regenAllGitRepos regen
     fi
 
     searchGitCommon
@@ -2532,6 +2535,9 @@ builtin cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/nul
     shouldRegen="$1"
     if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
         regenAllGitRepos
+    elif [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
+        regenAllGitRepos regen
     fi
 
     searchGitCommon

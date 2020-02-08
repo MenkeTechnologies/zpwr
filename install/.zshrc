@@ -2848,7 +2848,7 @@ function zpwrForAllGitDirs(){
 function zpwrUpdateAllGitDirs(){
 
     if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS first."
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
         regenAllGitRepos regen
     fi
 
