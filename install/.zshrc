@@ -1814,8 +1814,13 @@ function globalAliasesInit(){
     if [[ -d "$ZPWR" ]]; then
         alias zh="cd $ZPWR"
     fi
+
     if [[ -d "$ZPWR_TMUX" ]]; then
         alias zt="cd $ZPWR_TMUX"
+    fi
+
+    if [[ -d "$ZPWR_TMUX_LOCAL" ]]; then
+        alias ztl="cd $ZPWR_TMUX_LOCAL"
     fi
 
     if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
