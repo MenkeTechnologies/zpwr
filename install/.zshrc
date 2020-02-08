@@ -2836,11 +2836,21 @@ function zpwrForAllGitDirs(){
         return 1
     fi
 
+    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS first."
+        regenAllGitRepos regen
+    fi
+
     ${=ZPWR_REPO_NAME} fordir $1 \
         $(cat $ZPWR_ALL_GIT_DIRS)
 }
 
 function zpwrUpdateAllGitDirs(){
+
+    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS first."
+        regenAllGitRepos regen
+    fi
 
     ${=ZPWR_REPO_NAME} fordir \
     'git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache' \
