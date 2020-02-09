@@ -13,38 +13,44 @@ prettyPrint() {
     printf "\n\e[0m"
 }
 
-
 #python 3.6
 python3 -c 'import pip' && {
     prettyPrint "Updating Python3.6 Packages"
-    outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+    installDir=$(python3 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
+    if [[ ! -w "$installDir" ]]; then
+        needSudoBase=true
+    else
+        needSudoBase=false
+    fi
+    if [[ "$needSudoBase" == true ]]; then
+        outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+    else
+        outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+    fi
 
     for package in $outdated; do
         #get last package
         installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
         if [[ ! -w "$installDir" ]]; then
-            needSudo=yes
+            needSudo=true
         else
-            needSudo=no
+            needSudo=false
         fi
 
-        if [[ -n "$needSudo" ]]; then
+        if [[ "$needSudo" == true ]]; then
             prettyPrint "sudo needed: $needSudo for $package at $installDir"
+            sudo -E python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         else
-            prettyPrint "no sudo needed: $needSudo for $package at $installDir"
-        fi
-
-        if [[ "$needSudo" == yes ]]; then
-            sudo python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
-        else
+            prettyPrint "false sudo needed: $needSudo for $package at $installDir"
             python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         fi
+
     done
 
-    if [[ -n "$needSudo" ]]; then
+    if [[ "$needSudoBase" == true ]]; then
         prettyPrint "Updating Pip3 with sudo"
         #update pip itself
-        sudo python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+        sudo -E python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     else
         prettyPrint "Updating Pip3"
         #update pip itself
@@ -56,35 +62,45 @@ python3 -c 'import pip' && {
 #python 2.7 (non system)
 python2 -c 'import pip' && {
     prettyPrint "Updating Python2.7 Packages"
-    outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+
+    installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
+    if [[ ! -w "$installDir" ]]; then
+        needSudoBase=true
+    else
+        needSudoBase=false
+    fi
+
+    if [[ "$needSudoBase" == true ]]; then
+        outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+    else
+        outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+    fi
+
     for package in $outdated; do
         installDir=$(python2 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
         if [[ ! -w "$installDir" ]]; then
-            needSudo=yes
+            needSudo=true
         else
-            needSudo=no
+            needSudo=false
         fi
 
-        if [[ -n "$needSudo" ]]; then
+        if [[ "$needSudo" == true ]]; then
             prettyPrint "sudo needed: $needSudo for $package at $installDir"
+            sudo -E python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         else
-            prettyPrint "no sudo needed: $needSudo for $package at $installDir"
-        fi
-
-        if [[ "$needSudo" == yes ]]; then
-            sudo python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
-        else
+            prettyPrint "false sudo needed: $needSudo for $package at $installDir"
             python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         fi
+
     done
 
-    if [[ -n "$needSudo" ]]; then
+    if [[ "$needSudoBase" == true ]]; then
         prettyPrint "sudo needed: $needSudo for pip2 at $installDir"
         prettyPrint "Updating Pip2"
         #update pip itself
-        sudo python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+        sudo -E python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     else
-        prettyPrint "no sudo needed: $needSudo for pip2 at $installDir"
+        prettyPrint "false sudo needed: $needSudo for pip2 at $installDir"
         prettyPrint "Updating Pip2"
         #update pip itself
         python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
