@@ -60,9 +60,9 @@ gitRepoUpdater() {
                     printf "%s: " "$(basename "$generic_git_repo_plugin")"
                     (
                         builtin cd "$generic_git_repo_plugin" &&
-                            git fetch --all --prune &&
-                            git pull --all
-                        )
+                        git fetch --all --prune &&
+                        git pull --all
+                    )
                 fi
             fi
         done
