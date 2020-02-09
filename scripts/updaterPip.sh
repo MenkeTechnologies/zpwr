@@ -23,8 +23,10 @@ python3 -c 'import pip' && {
         needSudoBase=false
     fi
     if [[ "$needSudoBase" == true ]]; then
+        prettyPrint "Outdated Pip3 list with sudo: $needSudoBase"
         outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     else
+        prettyPrint "Outdated Pip3 list with no sudo: $needSudoBase"
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     fi
 
@@ -48,11 +50,11 @@ python3 -c 'import pip' && {
     done
 
     if [[ "$needSudoBase" == true ]]; then
-        prettyPrint "Updating Pip3 with sudo"
+        prettyPrint "Updating Pip3 with sudo needed: $needSudoBase"
         #update pip itself
         sudo -E python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     else
-        prettyPrint "Updating Pip3"
+        prettyPrint "Updating Pip3 needed: $needSudoBase"
         #update pip itself
         python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     fi
@@ -71,8 +73,10 @@ python2 -c 'import pip' && {
     fi
 
     if [[ "$needSudoBase" == true ]]; then
+        prettyPrint "Outdated Pip2 list with sudo: $needSudoBase"
         outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     else
+        prettyPrint "Outdated Pip2 list with no sudo: $needSudoBase"
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     fi
 
@@ -95,13 +99,11 @@ python2 -c 'import pip' && {
     done
 
     if [[ "$needSudoBase" == true ]]; then
-        prettyPrint "sudo needed: $needSudo for pip2 at $installDir"
-        prettyPrint "Updating Pip2"
+        prettyPrint "Updating Pip2 with sudo needed: $needSudoBase"
         #update pip itself
         sudo -E python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     else
-        prettyPrint "false sudo needed: $needSudo for pip2 at $installDir"
-        prettyPrint "Updating Pip2"
+        prettyPrint "Updating Pip2 with sudo needed: $needSudoBase"
         #update pip itself
         python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     fi
