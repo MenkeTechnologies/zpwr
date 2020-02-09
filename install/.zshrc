@@ -639,10 +639,7 @@ function vimFzf(){
         firstdir=${mywords[2]:h}
         #logg "words='$mywords[2]'=>'$firstdir'"
         #:h takes aways last "
-        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList"
-        if isGitDir; then
-            BUFFER+=";isGitDir && git diff HEAD"
-        fi
+        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
         zle .accept-line
     fi
 }
