@@ -641,7 +641,7 @@ function vimFzf(){
         #:h takes aways last "
         BUFFER="builtin cd $firstdir\"; $BUFFER; clearList"
         if isGitDir; then
-            BUFFER+=";git diff HEAD"
+            BUFFER+=";isGitDir && git diff HEAD"
         fi
         zle .accept-line
     fi
