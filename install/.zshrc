@@ -1758,6 +1758,8 @@ function globalAliasesInit(){
 
     alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
+    alias zu8='zpwr updateall'
+
     alias i='if [[ '$ZPWR_TABSTOP' ]];then
         '$ZPWR_TABSTOP'
     fi'
