@@ -29,6 +29,10 @@ case $verb in
         ;;
     cd) cmd="f" #cd to directory arg
         ;;
+    clearcache) cmd="clearCache" #clear all zpwr cache files
+        ;;
+    cleartemp) cmd="clearTemp" #clear all zpwr temp files
+        ;;
     clearls) cmd="clearList" #clear and list the files with no args
         ;;
     clearlist) cmd="clearList" #clear and list the files with no args

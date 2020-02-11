@@ -2454,6 +2454,28 @@ function needSudo(){
         return 1
     fi
 }
+function clearTemp(){
+
+    rm -f \
+        "$ZPWR_LOGFILE" \
+        "$ZPWR_TEMPFILE" \
+        "$ZPWR_TEMPFILE1" \
+        "$ZPWR_TEMPFILE2" \
+        "$ZPWR_TEMPFILE3" \
+        "$ZPWR_TEMPFILE4" \
+        "$ZPWR_TMUX_LOCAL"/*
+        "$ZPWR_HIDDEN_DIR_TEMP"/* \
+}
+
+function clearCache(){
+
+    clearTemp
+    rm -f \
+        "$ZPWR_VIM_KEYBINDINGS" \
+        "$ZPWR_ALL_KEYBINDINGS" \
+        "$ZPWR_ENV"/* \
+        "$ZPWR_ALL_GIT_DIRS"/*
+}
 
 function regenTags(){
 
