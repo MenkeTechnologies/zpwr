@@ -611,7 +611,8 @@ else
         service="$1"
         local src_dir
         src_dir="$ZPWR_INSTALL"
-        local service_path="$src_dir/$service.service"
+        local service_path
+        service_path="$src_dir/$service.service"
         test -d "$src_dir" ||
             { loggErr "$src_dir does not exists." && return 1; }
         test -f "$service_path" ||
@@ -1059,7 +1060,8 @@ function animate(){
 
 function blocksToSize(){
     read input
-    local bytes=$(( input * 512 ))
+    local bytes
+    bytes=$(( input * 512 ))
     echo $bytes | humanreadable
 }
 
@@ -1316,7 +1318,8 @@ function gsdc(){
     fi
 
 
-    local currentDir="$(pwd -P)"
+    local currentDir
+    currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
         if [[ "$currentDir" == "$dir" ]]; then
             printf "\x1b[0;1;31m"
@@ -1756,7 +1759,8 @@ function goInstallerDir(){
 function unlinkConf(){
     (
 
-    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
+    local -a symFiles
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
 
     for file in ${symFiles[@]} ; do
         prettyPrint "REMOVING $file to $HOME"
@@ -1779,7 +1783,8 @@ function linkConf(){
         ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
+    local -a symFiles
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
 
     for file in ${symFiles[@]} ; do
         prettyPrint "Installing $file to $HOME"
@@ -2575,7 +2580,8 @@ function goclean() {
         loggErr "need package name"
         return 1
     fi
-    local pkg=$1;
+    local pkg
+    pkg=$1;
     shift
     local ost
     local cnt
@@ -2587,8 +2593,10 @@ function goclean() {
     fi
 
     # Delete the source directory and compiled package directory(ies)
-    local src_dir="$GOPATH/src/$pkg"
-    local bin_dir="$GOPATH/pkg/$ost/$pkg"
+    local src_dir
+    src_dir="$GOPATH/src/$pkg"
+    local bin_dir
+    bin_dir="$GOPATH/pkg/$ost/$pkg"
 
     if [[ ! -d "$src_dir" ]]; then
         loggErr "$src_dir from $pkg does not exist"
@@ -2655,7 +2663,8 @@ function timer() {
         loggErr "timer <commands...>"
         return 1
     fi
-    local count=100
+    local count
+    count=100
     if exists gdate;then
         cmd=gdate
     else
