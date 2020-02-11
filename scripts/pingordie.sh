@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-PATH="$PATH:/sbin/usr/sbin"
+PATH="$PATH:/sbin:/usr/sbin"
 
 type fping >/dev/null 2>&1 || {
     echo "$PATH"
