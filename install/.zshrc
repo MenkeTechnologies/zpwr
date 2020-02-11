@@ -1751,14 +1751,14 @@ function globalAliasesInit(){
     alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
 
 
-    alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
-    alias zfg="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' *"
+    exists zf || alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
+    exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' *"
 
-    alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
+    exists zff || alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
-    alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
+    exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
-    alias zu8='zpwr updateall'
+    exists zu8 || alias zu8='zpwr updateall'
 
     alias i='if [[ '$ZPWR_TABSTOP' ]];then
         '$ZPWR_TABSTOP'
@@ -1803,35 +1803,35 @@ function globalAliasesInit(){
     alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
     if [[ -d "$ZPWR_INSTALL" ]]; then
-        alias zi="cd $ZPWR_INSTALL"
+        exists zi || alias zi="cd $ZPWR_INSTALL"
     fi
 
     if [[ -d "$ZPWR_SCRIPTS" ]]; then
-        alias zs="cd $ZPWR_SCRIPTS"
+        exists zs || alias zs="cd $ZPWR_SCRIPTS"
     fi
 
     if [[ -d "$ZPWR" ]]; then
-        alias zh="cd $ZPWR"
+        exists zh || alias zh="cd $ZPWR"
     fi
 
     if [[ -d "$ZPWR_TMUX" ]]; then
-        alias zt="cd $ZPWR_TMUX"
+        exists zt || alias zt="cd $ZPWR_TMUX"
     fi
 
     if [[ -d "$ZPWR_TMUX_LOCAL" ]]; then
-        alias ztl="cd $ZPWR_TMUX_LOCAL"
+        exists ztl || alias ztl="cd $ZPWR_TMUX_LOCAL"
     fi
 
     if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-        alias zlt="cd $ZPWR_HIDDEN_DIR_TEMP"
+        exists zlt || alias zlt="cd $ZPWR_HIDDEN_DIR_TEMP"
     fi
 
     if [[ -d "$ZPWR_LOCAL" ]]; then
-        alias zl="cd $ZPWR_LOCAL"
+        exists zl || alias zl="cd $ZPWR_LOCAL"
     fi
 
     if [[ -d "$ZSH/custom/plugins" ]]; then
-        alias zpl="cd $ZSH/custom/plugins"
+        exists zpl || alias zpl="cd $ZSH/custom/plugins"
     fi
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
