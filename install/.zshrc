@@ -1748,91 +1748,6 @@ function globalAliasesInit(){
     alias ${ZPWR_GLOBAL_ALIAS_PREFIX}grp="git reset --soft $ZPWR_TABSTOP && git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push -f origin $ZPWR_TABSTOP"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${ZPWR_TABSTOP}m${ZPWR_TABSTOP}\\x1b[0m"
 
-    alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
-
-
-    exists zf || alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
-    exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' *"
-
-    exists zff || alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
-
-    exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
-
-    exists zu8 || alias zu8='zpwr updateall'
-
-    alias i='if [[ '$ZPWR_TABSTOP' ]];then
-        '$ZPWR_TABSTOP'
-    fi'
-    alias iee='if [[ '$ZPWR_TABSTOP' ]];then
-        '$ZPWR_TABSTOP'
-    elif [[ '$ZPWR_TABSTOP' ]];then
-        '$ZPWR_TABSTOP'
-    else
-        '$ZPWR_TABSTOP'
-    fi'
-    alias ieee='if [[ '$ZPWR_TABSTOP' ]];then
-        '$ZPWR_TABSTOP'
-    elif [[ '$ZPWR_TABSTOP' ]];then
-        '$ZPWR_TABSTOP'
-    elif [[ '$ZPWR_TABSTOP' ]];then
-        '$ZPWR_TABSTOP'
-    else
-        '$ZPWR_TABSTOP'
-    fi'
-    alias ie='if [[ '$ZPWR_TABSTOP' ]];then
-        '$ZPWR_TABSTOP'
-    else
-        '$ZPWR_TABSTOP'
-    fi'
-    alias wr='while read line;do
-        '$ZPWR_TABSTOP'
-    done < '$ZPWR_TABSTOP''
-    alias wt='while [[ true'$ZPWR_TABSTOP' ]];do
-        '$ZPWR_TABSTOP'
-    done'
-    alias fe='for i in '$ZPWR_TABSTOP';do
-        '$ZPWR_TABSTOP'
-    done'
-
-    alias fori="for (( i = 0; i < $ZPWR_TABSTOP; i++ )); do
-        $ZPWR_TABSTOP
-    done"
-
-    alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) master$ZPWR_TABSTOP FETCH_HEAD | less"
-
-    alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
-
-    if [[ -d "$ZPWR_INSTALL" ]]; then
-        exists zi || alias zi="cd $ZPWR_INSTALL"
-    fi
-
-    if [[ -d "$ZPWR_SCRIPTS" ]]; then
-        exists zs || alias zs="cd $ZPWR_SCRIPTS"
-    fi
-
-    if [[ -d "$ZPWR" ]]; then
-        exists zh || alias zh="cd $ZPWR"
-    fi
-
-    if [[ -d "$ZPWR_TMUX" ]]; then
-        exists zt || alias zt="cd $ZPWR_TMUX"
-    fi
-
-    if [[ -d "$ZPWR_TMUX_LOCAL" ]]; then
-        exists ztl || alias ztl="cd $ZPWR_TMUX_LOCAL"
-    fi
-
-    if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-        exists zlt || alias zlt="cd $ZPWR_HIDDEN_DIR_TEMP"
-    fi
-
-    if [[ -d "$ZPWR_LOCAL" ]]; then
-        exists zl || alias zl="cd $ZPWR_LOCAL"
-    fi
-
-    if [[ -d "$ZSH/custom/plugins" ]]; then
-        exists zpl || alias zpl="cd $ZSH/custom/plugins"
-    fi
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
@@ -1842,9 +1757,103 @@ function globalAliasesInit(){
 }
 
 globalAliasesInit
+#}}}***********************************************************
 
-bindkey -M isearch '^A' beginning-of-line
+#{{{                    MARK:Regular Aliases
+#**************************************************************
+alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
 
+
+exists zf || alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
+exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' *"
+
+exists zff || alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
+
+exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
+
+exists zu8 || alias zu8='zpwr updateall'
+
+alias i='if [[ '$ZPWR_TABSTOP' ]];then
+    '$ZPWR_TABSTOP'
+fi'
+alias iee='if [[ '$ZPWR_TABSTOP' ]];then
+    '$ZPWR_TABSTOP'
+elif [[ '$ZPWR_TABSTOP' ]];then
+    '$ZPWR_TABSTOP'
+else
+    '$ZPWR_TABSTOP'
+fi'
+alias ieee='if [[ '$ZPWR_TABSTOP' ]];then
+    '$ZPWR_TABSTOP'
+elif [[ '$ZPWR_TABSTOP' ]];then
+    '$ZPWR_TABSTOP'
+elif [[ '$ZPWR_TABSTOP' ]];then
+    '$ZPWR_TABSTOP'
+else
+    '$ZPWR_TABSTOP'
+fi'
+alias ie='if [[ '$ZPWR_TABSTOP' ]];then
+    '$ZPWR_TABSTOP'
+else
+    '$ZPWR_TABSTOP'
+fi'
+alias wr='while read line;do
+    '$ZPWR_TABSTOP'
+done < '$ZPWR_TABSTOP''
+alias wt='while [[ true'$ZPWR_TABSTOP' ]];do
+    '$ZPWR_TABSTOP'
+done'
+alias fe='for i in '$ZPWR_TABSTOP';do
+    '$ZPWR_TABSTOP'
+done'
+
+alias fori="for (( i = 0; i < $ZPWR_TABSTOP; i++ )); do
+    $ZPWR_TABSTOP
+done"
+
+alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) master$ZPWR_TABSTOP FETCH_HEAD | less"
+
+alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
+
+if [[ -d "$ZPWR_INSTALL" ]]; then
+    exists zi || alias zi="cd $ZPWR_INSTALL"
+fi
+
+if [[ -d "$ZPWR_SCRIPTS" ]]; then
+    exists zs || alias zs="cd $ZPWR_SCRIPTS"
+fi
+
+if [[ -d "$ZPWR" ]]; then
+    exists zh || alias zh="cd $ZPWR"
+fi
+
+if [[ -d "$ZPWR_TMUX" ]]; then
+    exists zt || alias zt="cd $ZPWR_TMUX"
+fi
+
+if [[ -d "$ZPWR_TMUX_LOCAL" ]]; then
+    exists ztl || alias ztl="cd $ZPWR_TMUX_LOCAL"
+fi
+
+if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
+    exists zlt || alias zlt="cd $ZPWR_HIDDEN_DIR_TEMP"
+fi
+
+if [[ -d "$ZPWR_LOCAL" ]]; then
+    exists zl || alias zl="cd $ZPWR_LOCAL"
+fi
+
+if [[ -d "$ZSH/custom/plugins" ]]; then
+    exists zpl || alias zpl="cd $ZSH/custom/plugins"
+fi
+
+alias tok="vim $ZPWR_LOCAL/.tokens.sh"
+
+alias numcmd='print $#commands'
+#}}}***********************************************************
+
+#{{{                    MARK:zplug
+#**************************************************************
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
 #
@@ -1862,7 +1871,17 @@ bindkey -M isearch '^A' beginning-of-line
 ## Then, source plugins and add commands to $PATH
 #zplug load
 #
+#}}}***********************************************************
+#
+#{{{                    MARK:Source Tokens
+#**************************************************************
+test -f "$ZPWR_LOCAL/.tokens.sh" &&
+    source "$ZPWR_LOCAL/.tokens.sh" ||
+    touch "$ZPWR_LOCAL/.tokens.sh"
+#}}}***********************************************************
 
+#{{{                    MARK:Initialize Login
+#**************************************************************
 function banner(){
     bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
     ponysay -W 100
@@ -1877,23 +1896,6 @@ function noPonyBanner(){
     eval "$ZPWR_DEFAULT_BANNER"
 }
 
-function revealRecurse(){
-    for i in **/*(/); do
-        ( builtin cd $i && reveal 2>/dev/null; )
-    done
-}
-
-#}}}***********************************************************
-#
-#{{{                    MARK:Source Tokens
-#**************************************************************
-test -f "$ZPWR_LOCAL/.tokens.sh" &&
-    source "$ZPWR_LOCAL/.tokens.sh" ||
-    touch "$ZPWR_LOCAL/.tokens.sh"
-#}}}***********************************************************
-
-#{{{                    MARK:Initialize Login
-#**************************************************************
 #go to desktop if not root
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     if [[ "$UID" != "0" ]]; then
@@ -2766,8 +2768,6 @@ function recompile(){
 	done
 }
 
-
-alias numcmd='print $#commands'
 unalias ag &> /dev/null
 
 #stop delay when entering normal mode
@@ -2882,7 +2882,12 @@ function zpwrTags(){
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
 
-alias tok="vim $ZPWR_LOCAL/.tokens.sh"
+function revealRecurse(){
+    for i in **/*(/); do
+        ( builtin cd $i && reveal 2>/dev/null; )
+    done
+}
+
 
 ###}}}***********************************************************
 
@@ -2893,3 +2898,4 @@ test -f "$ZPWR_LOCAL/.tokens.sh" &&
     source "$ZPWR_LOCAL/.tokens.sh" ||
     touch "$ZPWR_LOCAL/.tokens.sh"
 #}}}***********************************************************
+#
