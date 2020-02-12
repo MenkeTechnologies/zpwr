@@ -2236,8 +2236,11 @@ function _fzf_complete_vim() {
 }
 # nvim ;<tab>
 function _fzf_complete_nvim() {
+    local file
+    file="$ZPWR_NVIMINFO"
+    test -e "$file" || touch "$file"
   _fzf_complete '-m' "$@" < <(
-        perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$ZPWR_NVIMINFO"
+        perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file"
     )
 }
 # printf ;<tab>
