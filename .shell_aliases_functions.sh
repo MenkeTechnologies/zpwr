@@ -290,7 +290,7 @@ fi
 
 exists fc && alias please='sudo $(fc -ln -1)'
 exists spotify && {
-    alias re='spotify replay'
+    alias rep='spotify replay'
     alias ne='spotify next'
     alias pe='spotify prev'
     alias spa='spotify pause'
