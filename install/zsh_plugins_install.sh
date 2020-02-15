@@ -7,11 +7,16 @@
 #####   Notes: 
 #}}}***********************************************************
 
+if ! test -f common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+source common.sh
+
 if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins" ]]; then
     mkdir -p "$HOME/.oh-my-zsh/custom/plugins"
 fi
-
-ZPWR_INSTALL="$(pwd)"
 
 installOhMyZshPlugin(){
     echo "Installing zsh plugin $1."

@@ -7,6 +7,13 @@
 #####   Notes: 
 #}}}***********************************************************
 
+if ! test -f common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+source common.sh
+
 installGitHubPlugin(){
     echo "Installing tmux plugin $1."
     git clone "https://github.com/$1.git" 
@@ -15,8 +22,6 @@ installGitHubPlugin(){
 if [[ -d "$HOME/.tmux/plugins" ]]; then
     mkdir -p "$HOME/.tmux/plugins"
 fi
-
-ZPWR_INSTALL="$(pwd)"
 
 if builtin cd "$HOME/.tmux/plugins"; then
     while read repo; do

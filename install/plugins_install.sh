@@ -1,18 +1,9 @@
-source common.sh || { echo "Must be in .zpwr/install directory" >&2; exit 1; }
-
-ZPWR_INSTALL="$(pwd -P)"
-ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
-ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALL/../local/installer"
-export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
-
-if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
-    mkdir -p $ZPWR_HIDDEN_DIR
+if ! test -f common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
 fi
 
-if [[ -n $ZPWR ]]; then
-    export ZPWR="$HOME/.zpwr"
-fi
-
+source common.sh
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     distroName=Mac

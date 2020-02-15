@@ -7,6 +7,13 @@
 #####   Notes: 
 #}}}***********************************************************
 
+if ! test -f common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+source common.sh
+
 installVimPlugin(){
     echo "Installing vim plugin $1."
     git clone "https://github.com/$1.git"
@@ -15,8 +22,6 @@ installVimPlugin(){
 if [[ ! -d "$HOME/.vim/bundle" ]]; then
     mkdir -p "$HOME/.vim/bundle"
 fi
-
-ZPWR_INSTALL="$(pwd)"
 
 if builtin cd "$HOME/.vim/bundle"; then
     while read repo; do

@@ -6,8 +6,13 @@
 ##### Purpose: bash script to install bat,fd and exa
 ##### Notes:
 #}}}***********************************************************
-source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
-ZPWR_INSTALL="$(pwd -P)"
+if ! test -f common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
+
+source common.sh
+
 
 while true; do
     if exists curl;then

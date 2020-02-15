@@ -7,9 +7,12 @@
 ##### Purpose: bash script to
 ##### Notes:
 #}}}***********************************************************
-source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
+if ! test -f common.sh; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
+fi
 
-ZPWR_INSTALL="$(pwd -P)"
+source common.sh
 
 export GOPATH="$HOME/go"
 

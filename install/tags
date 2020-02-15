@@ -6,6 +6,13 @@
 !_TAG_PROGRAM_VERSION	5.8	//
 --color	/Users/wizard/.zshrc	/^--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f$/;"	v	language:Sh
 --color	/Users/wizard/.zshrc	/^--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"$/;"	v	language:Sh
+--enable-gui	vim_install.sh	/^        --enable-gui=gtk2 --enable-cscope --prefix=\/usr$/;"	v
+--enable-luainterp	vim_install.sh	/^        --enable-luainterp=yes \\$/;"	v
+--enable-perlinterp	vim_install.sh	/^        --enable-perlinterp=yes \\$/;"	v
+--enable-python3interp	vim_install.sh	/^        --enable-python3interp=yes \\$/;"	v
+--enable-pythoninterp	vim_install.sh	/^        --enable-pythoninterp=no \\$/;"	v
+--enable-rubyinterp	vim_install.sh	/^        --enable-rubyinterp=yes \\$/;"	v
+--with-python3-config-dir	vim_install.sh	/^        --with-python3-config-dir=\/usr\/lib\/python3.5\/config \\$/;"	v
 256colors	/Users/wizard/.zshrc	/^function 256colors(){$/;"	f	language:Sh
 ARCHFLAGS	/Users/wizard/.zshrc	/^export ARCHFLAGS="-arch x86_64"$/;"	v	language:Sh
 BACKUP_DIR	install.sh	/^BACKUP_DIR="$ZPWR_HIDDEN_DIR\/$USER.rc.bak.$(date +'%m.%d.%Y')"$/;"	v
@@ -147,6 +154,7 @@ GIT_COMMITTER_EMAIL	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        GI
 GIT_COMMITTER_EMAIL	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"$/;"	v	language:Sh
 GIT_COMMITTER_NAME	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        export GIT_COMMITTER_NAME="$CORRECT_NAME"$/;"	v	language:Sh
 GOPATH	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    export GOPATH="$HOME\/go"$/;"	v	language:Sh
+GOPATH	go_install.sh	/^export GOPATH="$HOME\/go"$/;"	v
 GRC_DIR	install.sh	/^        GRC_DIR=\/usr\/local\/share\/grc$/;"	v
 GRC_DIR	install.sh	/^        GRC_DIR=\/usr\/share\/grc$/;"	v
 GROOVY_LIB	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        export GROOVY_LIB="$HOMEBREW_OPT_HOME\/groovy"$/;"	v	language:Sh
@@ -757,6 +765,11 @@ distroFamily	install.sh	/^                distroFamily=redhat$/;"	v
 distroFamily	install.sh	/^                distroFamily=suse$/;"	v
 distroFamily	install.sh	/^        distroFamily=freebsd$/;"	v
 distroFamily	install.sh	/^        distroFamily=mac$/;"	v
+distroFamily	npm_install.sh	/^            distroFamily=debian$/;"	v
+distroFamily	npm_install.sh	/^            distroFamily=redhat$/;"	v
+distroFamily	npm_install.sh	/^            distroFamily=suse$/;"	v
+distroFamily	npm_install.sh	/^        distroFamily=freebsd$/;"	v
+distroFamily	npm_install.sh	/^    distroFamily=mac$/;"	v
 distroFamily	pip_install.sh	/^                distroFamily=arch$/;"	v
 distroFamily	pip_install.sh	/^                distroFamily=debian$/;"	v
 distroFamily	pip_install.sh	/^                distroFamily=redhat$/;"	v
@@ -769,7 +782,13 @@ distroName	/Users/wizard/.zshrc	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g
 distroName	install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	install.sh	/^        distroName=Mac$/;"	v
 distroName	install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	npm_install.sh	/^        distroName=FreeBSD$/;"	v
+distroName	npm_install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	npm_install.sh	/^    distroName=Mac$/;"	v
 distroName	pip_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	plugins_install.sh	/^        distroName=FreeBSD$/;"	v
+distroName	plugins_install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' \/etc\/os-release)$/;"	v
+distroName	plugins_install.sh	/^    distroName=Mac$/;"	v
 do_line	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def do_line(self):$/;"	m	language:Python	class:Deroffer
 do_tbl	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def do_tbl(self):$/;"	m	language:Python	class:Deroffer
 dontSummarizeSizes	/Users/wizard/.zpwr/scripts/directoryContentsSize.sh	/^dontSummarizeSizes() {$/;"	f	language:Sh
@@ -1011,6 +1030,7 @@ hour	/Users/wizard/.zpwr/scripts/timeConverter.sh	/^    hour=$((hour - 12))$/;"	
 hour	/Users/wizard/.zpwr/scripts/timeConverter.sh	/^hour=$(date | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f1)$/;"	v	language:Sh
 hoursPlural	/Users/wizard/.zpwr/scripts/motd.sh	/^      hoursPlural=""$/;"	v	language:Sh
 hoursPlural	/Users/wizard/.zpwr/scripts/motd.sh	/^    local hoursPlural="s"$/;"	v	language:Sh
+htopDIR	plugins_install.sh	/^htopDIR="$HOME\/.config\/htop"$/;"	v
 humanReadable	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function humanReadable(){$/;"	f	language:Sh
 iface	install.sh	/^iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")$/;"	v
 info	/Users/wizard/.zpwr/scripts/about.sh	/^            info="$(git tag -l -n9 "$version" | perl -pe 's@[\\t ]+@ @')"$/;"	v	language:Sh
@@ -1022,6 +1042,11 @@ installDir	/Users/wizard/.zpwr/scripts/updater.sh	/^        installDir=$(npm roo
 installDir	/Users/wizard/.zpwr/scripts/updaterNoPip.sh	/^        installDir=$(npm root -g | head -n 1)$/;"	v	language:Sh
 installDir	/Users/wizard/.zpwr/scripts/updaterPip.sh	/^        installDir=$(python2 -m pip show "$package" | \\perl -ne 'print $1 if \/^Location: (.*)\/')"\/$package"$/;"	v	language:Sh
 installDir	/Users/wizard/.zpwr/scripts/updaterPip.sh	/^        installDir=$(python3 -m pip show "$package" | \\perl -ne 'print $1 if \/^Location: (.*)\/')"\/$package"$/;"	v	language:Sh
+installGitHubPlugin	tmux_plugins_install.sh	/^installGitHubPlugin(){$/;"	f
+installNpmDeb	npm_install.sh	/^function installNpmDeb(){$/;"	f
+installNpmRpm	npm_install.sh	/^function installNpmRpm(){$/;"	f
+installOhMyZshPlugin	zsh_plugins_install.sh	/^installOhMyZshPlugin(){$/;"	f
+installVimPlugin	vim_plugins_install.sh	/^installVimPlugin(){$/;"	f
 interceptDelete	/Users/wizard/.zshrc	/^function interceptDelete(){$/;"	f	language:Sh
 interceptSurround	/Users/wizard/.zshrc	/^function interceptSurround(){$/;"	f	language:Sh
 intoFzf	/Users/wizard/.zshrc	/^function intoFzf(){$/;"	f	language:Sh
@@ -1243,6 +1268,7 @@ number	/Users/wizard/.zpwr/scripts/batchRename.sh	/^        local number=$((10#$
 number	/Users/wizard/.zpwr/scripts/batchRename.sh	/^        local number=$(echo ${last%%.*})$/;"	v	language:Sh
 number	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def number(self):$/;"	m	language:Python	class:Deroffer
 numreq	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def numreq(self):$/;"	m	language:Python	class:Deroffer
+nvimDir	plugins_install.sh	/^nvimDir="$HOME\/.config\/nvim"$/;"	v
 o	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function o(){$/;"	f	language:Sh
 o	/Users/wizard/.zpwr/scripts/macOnly/combo.sh	/^    o="$(cat)"$/;"	v	language:Sh
 o	/Users/wizard/.zpwr/scripts/macOnly/combo.sh	/^    o="$(hostname)"$/;"	v	language:Sh
@@ -1582,6 +1608,7 @@ sum	/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh	/^sum=0$/;"	v	language:Sh
 summarizeSizes	/Users/wizard/.zpwr/scripts/directoryContentsSize.sh	/^summarizeSizes() {$/;"	f	language:Sh
 svc	/Users/wizard/.zpwr/scripts/tailZOU.sh	/^svc=(ufw ovpn zabbix-agent)$/;"	v	language:Sh
 symFiles	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)$/;"	v	language:Sh
+symFiles	plugins_install.sh	/^local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc)$/;"	v
 sys	/Users/wizard/.zpwr/scripts/boiler_gen.py	/^import sys$/;"	i	language:Python
 sys	/Users/wizard/.zpwr/scripts/help2comp.py	/^import sys$/;"	i	language:Python
 sys	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^import sys$/;"	i	language:Python
@@ -1615,6 +1642,7 @@ title	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        title="$1"$/;"	v
 tmuxPowerlineDir	pip_install.sh	/^        tmuxPowerlineDir="$HOME\/.config\/powerline\/themes\/tmux"$/;"	v
 tmuxPowerlineDir	pip_install.sh	/^    tmuxPowerlineDir="$HOME\/.config\/powerline\/themes\/tmux"$/;"	v
 tmuxPowerlineDir	pip_install.sh	/^    tmuxPowerlineDir=$HOME\/.config\/powerline\/themes\/tmux$/;"	v
+tmuxPowerlineDir	plugins_install.sh	/^tmuxPowerlineDir="$HOME\/.config\/powerline\/themes\/tmux"$/;"	v
 to	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function to(){$/;"	f	language:Sh
 torip	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function torip(){$/;"	f	language:Sh
 toriprenew	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function toriprenew() {$/;"	f	language:Sh
