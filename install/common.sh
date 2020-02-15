@@ -26,8 +26,8 @@ ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 
 # resolve all symlinks
 ZPWR_INSTALL="$(pwd -P)"
-ZPWR_BASE_DIR="$ZPWR_INSTALL/.."
-ZPWR_BASE_SCRIPTS="$ZPWR_INSTALL/../scripts"
+ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
+ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
 
 export ZPWR_DELIMITER_CHAR='%'
