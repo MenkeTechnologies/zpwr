@@ -8,21 +8,12 @@
 ##### Notes:
 #}}}***********************************************************
 
-# whether sourced or called directly
-echo "$0" | grep -q pip_install.sh && source common.sh
-
 if ! test -f common.sh; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
 
-ZPWR_INSTALL="$(pwd -P)"
-ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
-
-if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALL" ]]; then
-    echo "Must be in ~/.zpwr/install directory" >&2
-    exit 1
-fi
+source common.sh
 
 goInstallerOutputDir
 
