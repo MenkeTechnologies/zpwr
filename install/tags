@@ -708,10 +708,9 @@ delim	/Users/wizard/.zpwr/scripts/batchRename.sh	/^delim=_$/;"	v	language:Sh
 delim	/Users/wizard/.zpwr/scripts/macOnly/splitReg.sh	/^delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)$/;"	v	language:Sh
 delim	/Users/wizard/.zpwr/scripts/splitReg.sh	/^delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)$/;"	v	language:Sh
 dependencies_ary	install.sh	/^    dependencies_ary=(neovim macvim ${dependencies_ary[@]})$/;"	v
-dependencies_ary	install.sh	/^    dependencies_ary=(neovim pkg-config libclang1 llvm ${dependencies_ary[@]})$/;"	v
+dependencies_ary	install.sh	/^    dependencies_ary=(neovim pkg-config libclang1 clang llvm ${dependencies_ary[@]})$/;"	v
 dependencies_ary	install.sh	/^    dependencies_ary=(python3-dev libssl-dev ${dependencies_ary[@]})$/;"	v
-dependencies_ary	install.sh	/^    dependencies_ary=(python3-devel clang llvm llvm-devel openssl-devel ${dependencies_ary[@]})$/;"	v
-dependencies_ary	install.sh	/^    dependencies_ary=(python3-devel llvm llvm-devel openssl-devel ${dependencies_ary[@]})$/;"	v
+dependencies_ary	install.sh	/^    dependencies_ary=(python3-devel llvm-devel openssl-devel ${dependencies_ary[@]})$/;"	v
 dependencies_ary	install.sh	/^dependencies_ary=(openssl moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \\$/;"	v
 deroff	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def deroff(self, str):$/;"	m	language:Python	class:Deroffer
 deroff_files	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^def deroff_files(files):$/;"	f	language:Python

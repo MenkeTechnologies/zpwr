@@ -196,7 +196,7 @@ dependencies_ary=(openssl moreutils cmake tig hexedit boxes tal iperf vim tmux c
     bmon ruby parallel pssh shfmt)
 
 addDependenciesLinux(){
-    dependencies_ary=(neovim pkg-config libclang1 llvm ${dependencies_ary[@]})
+    dependencies_ary=(neovim pkg-config libclang1 clang llvm ${dependencies_ary[@]})
     dependencies_ary+=(build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets \
         php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
         lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf afpfs-ng \
@@ -207,7 +207,7 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary=(python3-devel llvm llvm-devel openssl-devel ${dependencies_ary[@]})
+    dependencies_ary=(python3-devel llvm-devel openssl-devel ${dependencies_ary[@]})
     dependencies_ary+=(gcc-c++ makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel \
         mysql-devel libevent-devel postgresql-devel fortune ruby-devel net-tools-deprecated \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel)
@@ -227,7 +227,7 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
-    dependencies_ary=(python3-devel clang llvm llvm-devel openssl-devel ${dependencies_ary[@]})
+    dependencies_ary=(python3-devel llvm-devel openssl-devel ${dependencies_ary[@]})
     dependencies_ary+=(gcc-c++ 'fortune-mod.*' mariadb-server clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
         python36-tools ncurses-devel libpcap-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
     }
