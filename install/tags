@@ -306,6 +306,8 @@ ZPWR_AUTO_SELECT	/Users/wizard/.zshrc	/^export ZPWR_AUTO_SELECT=true$/;"	v	langu
 ZPWR_BANNER_SCRIPT	/Users/wizard/.zshrc	/^export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS\/about.sh"$/;"	v	language:Sh
 ZPWR_BASE_DIR	common.sh	/^ZPWR_BASE_DIR="$ZPWR_INSTALL\/.."$/;"	v
 ZPWR_BASE_DIR	install.sh	/^ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"$/;"	v
+ZPWR_BASE_DIR	neovim_install.sh	/^ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"$/;"	v
+ZPWR_BASE_DIR	pip_install.sh	/^ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"$/;"	v
 ZPWR_BASE_SCRIPTS	common.sh	/^ZPWR_BASE_SCRIPTS="$ZPWR_INSTALL\/..\/scripts"$/;"	v
 ZPWR_BASE_SCRIPTS	install.sh	/^ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR\/scripts"$/;"	v
 ZPWR_BAT_THEME	/Users/wizard/.zshrc	/^export ZPWR_BAT_THEME="GitHub"$/;"	v	language:Sh
@@ -356,6 +358,8 @@ ZPWR_HIDDEN_DIR_TEMP	install.sh	/^export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR\
 ZPWR_INSTALL	/Users/wizard/.zshrc	/^export ZPWR_INSTALL="$ZPWR\/install"$/;"	v	language:Sh
 ZPWR_INSTALL	common.sh	/^ZPWR_INSTALL="$(pwd -P)"$/;"	v
 ZPWR_INSTALL	install.sh	/^ZPWR_INSTALL="$(pwd -P)"$/;"	v
+ZPWR_INSTALL	neovim_install.sh	/^ZPWR_INSTALL="$(pwd -P)"$/;"	v
+ZPWR_INSTALL	pip_install.sh	/^ZPWR_INSTALL="$(pwd -P)"$/;"	v
 ZPWR_INSTALLER_LOCAL	install.sh	/^ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR\/local"$/;"	v
 ZPWR_INSTALLER_OUTPUT	common.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR\/local\/installer"$/;"	v
 ZPWR_INSTALLER_OUTPUT	install.sh	/^ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL\/installer"$/;"	v
@@ -757,6 +761,10 @@ distroFamily	install.sh	/^                distroFamily=redhat$/;"	v
 distroFamily	install.sh	/^                distroFamily=suse$/;"	v
 distroFamily	install.sh	/^        distroFamily=freebsd$/;"	v
 distroFamily	install.sh	/^        distroFamily=mac$/;"	v
+distroFamily	pip_install.sh	/^                distroFamily=arch$/;"	v
+distroFamily	pip_install.sh	/^                distroFamily=debian$/;"	v
+distroFamily	pip_install.sh	/^                distroFamily=redhat$/;"	v
+distroFamily	pip_install.sh	/^                distroFamily=suse$/;"	v
 distroName	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^            distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	/Users/wizard/.zpwr/scripts/clearTrash.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
 distroName	/Users/wizard/.zpwr/scripts/colorLogger.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v	language:Sh
@@ -765,6 +773,7 @@ distroName	/Users/wizard/.zshrc	/^    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g
 distroName	install.sh	/^        distroName=FreeBSD$/;"	v
 distroName	install.sh	/^        distroName=Mac$/;"	v
 distroName	install.sh	/^    distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
+distroName	pip_install.sh	/^        distroName=$(perl -lne 'do{($_=$1)=~s\/"\/\/g;print;exit0}if\/^ID=(.*)\/' \/etc\/os-release)$/;"	v
 do_line	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def do_line(self):$/;"	m	language:Python	class:Deroffer
 do_tbl	/Users/wizard/.zpwr/scripts/mantozshcomp.py	/^    def do_tbl(self):$/;"	m	language:Python	class:Deroffer
 dontSummarizeSizes	/Users/wizard/.zpwr/scripts/directoryContentsSize.sh	/^dontSummarizeSizes() {$/;"	f	language:Sh
@@ -1607,6 +1616,9 @@ timeToSleep	/Users/wizard/.zpwr/scripts/myWatchNoBlinkColorized.sh	/^    timeToS
 timediff	/Users/wizard/.zpwr/scripts/autoUpdater.sh	/^        timediff=$((newtime - oldtime))$/;"	v	language:Sh
 timer	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function timer() {$/;"	f	language:Sh
 title	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^        title="$1"$/;"	v	language:Sh
+tmuxPowerlineDir	pip_install.sh	/^        tmuxPowerlineDir="$HOME\/.config\/powerline\/themes\/tmux"$/;"	v
+tmuxPowerlineDir	pip_install.sh	/^    tmuxPowerlineDir="$HOME\/.config\/powerline\/themes\/tmux"$/;"	v
+tmuxPowerlineDir	pip_install.sh	/^    tmuxPowerlineDir=$HOME\/.config\/powerline\/themes\/tmux$/;"	v
 to	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function to(){$/;"	f	language:Sh
 torip	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function torip(){$/;"	f	language:Sh
 toriprenew	/Users/wizard/.zpwr/.shell_aliases_functions.sh	/^function toriprenew() {$/;"	f	language:Sh

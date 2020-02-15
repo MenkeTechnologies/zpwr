@@ -22,25 +22,7 @@ if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALL" ]]; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
-
-ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
-ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
-ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
-
-function goInstallerOutputDir(){
-    local ret=0
-    builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
-
-    if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
-        echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
-    fi
-
-    if (( ret == 1 )); then
-        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
-        exit 1
-    fi
-}
-
+goInstallerOutputDir
 
 prettyPrint "installing gdb dashboard"
 wget -P ~ https://git.io/.gdbinit

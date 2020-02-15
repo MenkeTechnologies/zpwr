@@ -8,20 +8,22 @@
 ##### Notes:
 #}}}***********************************************************
 
-ZPWR_INSTALL="$(pwd -P)"
+# whether sourced or called directly
+echo "$0" | grep -q pip_install.sh && source common.sh
 
-# verify in installer dir
 if ! test -f common.sh; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
 
-ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALL/local/installer"
+ZPWR_INSTALL="$(pwd -P)"
+ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
 
-if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
-    mkdir -p $ZPWR_INSTALLER_OUTPUT
+if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALL" ]]; then
+    echo "Must be in ~/.zpwr/install directory" >&2
+    exit 1
 fi
 
-builtin cd "$ZPWR_INSTALLER_OUTPUT" || exit 1
+goInstallerOutputDir
 
 git clone https://github.com/neovim/neovim.git && cd neovim && make CMAKE_BUILD_TYPE=RelWithDebInfo && sudo make install
