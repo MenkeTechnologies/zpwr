@@ -405,6 +405,10 @@ else
             alias api="sudo yum install -y"
             alias apa="sudo yum check-update; sudo yum upgrade -y "
             alias apz="sudo yum check-update; sudo yum upgrade -y; u8"
+        elif exists zypper;then
+            alias api="sudo zypper install -y"
+            alias apa="sudo zypper update; sudo zypper dist-upgrade -y"
+            alias apz="sudo zypper update; sudo zypper dist-upgrade -y; u8"
         fi
 
         alias ipt="sudo iptables --line-numbers -L"
