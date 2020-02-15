@@ -397,7 +397,11 @@ else
     test -d "$HOME/.local/share/Trash" &&
         alias tra='cd $HOME/.local/share/Trash'
     if [[ "$ZPWR_OS_TYPE" == linux ]]; then
-        if exists apt;then
+        if exists zypper;then
+            alias api="sudo zypper install -y"
+            alias apa="sudo zypper update; sudo zypper dist-upgrade -y"
+            alias apz="sudo zypper update; sudo zypper dist-upgrade -y; u8"
+        elif exists apt;then
             alias api="sudo apt install -y"
             alias apa="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean"
             alias apz="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean; u8"
@@ -405,10 +409,6 @@ else
             alias api="sudo yum install -y"
             alias apa="sudo yum check-update; sudo yum upgrade -y "
             alias apz="sudo yum check-update; sudo yum upgrade -y; u8"
-        elif exists zypper;then
-            alias api="sudo zypper install -y"
-            alias apa="sudo zypper update; sudo zypper dist-upgrade -y"
-            alias apz="sudo zypper update; sudo zypper dist-upgrade -y; u8"
         fi
 
         alias ipt="sudo iptables --line-numbers -L"
