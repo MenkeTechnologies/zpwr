@@ -1552,8 +1552,11 @@ fi
 zstyle ':completion:*' auto-description 'Specify: %d'
 
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
+
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
+
+#using tag name as group name so ordering the groups by tag name here
 zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tmux contexts last-ten
 
 zstyle ':completion:*:*:z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
