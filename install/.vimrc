@@ -1562,8 +1562,6 @@ command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options
 " complete all files on /
 command! -bang -nargs=* LocateAll call fzf#vim#locate('/', {'options': fzfStrFinal})
 
-" :Imap = shows all insert mode mappings
-command! -bang -nargs=* Imap call fzf#vim#maps('i')
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
@@ -1571,6 +1569,15 @@ nmap <leader><tab> <plug>(fzf-maps-n)
 xmap <leader><tab> <plug>(fzf-maps-x)
 " operating pending
 omap <leader><tab> <plug>(fzf-maps-o)
+
+" :Imap = shows all insert mode mappings
+command! -bang -nargs=* Imaps call fzf#vim#maps('i')
+command! -bang -nargs=* Nmaps call fzf#vim#maps('n')
+command! -bang -nargs=* Omaps call fzf#vim#maps('o')
+command! -bang -nargs=* Vmaps call fzf#vim#maps('v')
+command! -bang -nargs=* Xmaps call fzf#vim#maps('x')
+command! -bang -nargs=* Smaps call fzf#vim#maps('s')
+command! -bang -nargs=* Cmaps call fzf#vim#maps('c')
 
 " Insert mode completion
 imap <c-d><c-f> <plug>(fzf-complete-path)
