@@ -203,7 +203,7 @@ addDependenciesLinux(){
         samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace)
     }
 addDependenciesArch(){
-    dependencies_ary+=(linux-headers net-tools)
+    dependencies_ary+=(go linux-headers net-tools)
 }
 
 addDependenciesSuse(){
