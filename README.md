@@ -130,6 +130,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - centos
 - debian
 - arch
+- manjaro
 - mint
 - zorin
 - parrot OS
