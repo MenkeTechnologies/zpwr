@@ -203,7 +203,7 @@ addDependenciesLinux(){
         samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace)
     }
 addDependenciesArch(){
-    dependencies_ary+=(autoconf make the_silver_searcher go linux-headers net-tools)
+    dependencies_ary+=(npm autoconf make the_silver_searcher go linux-headers net-tools)
 }
 
 addDependenciesSuse(){
@@ -227,6 +227,7 @@ addDependenciesRedHat(){
     if [[ "$distroName" == centos ]]; then
         sudo yum install -y epel-release
     fi
+
     dependencies_ary=(python3-devel llvm-devel openssl-devel ${dependencies_ary[@]})
     dependencies_ary+=(gcc-c++ 'fortune-mod.*' mariadb-server clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
         python36-tools ncurses-devel libpcap-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
