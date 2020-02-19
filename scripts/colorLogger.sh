@@ -53,7 +53,7 @@ else
     centos | fedora | rhel)
         distro=redhat
         ;;
-    opensuse* | suse*)
+    opensuse* | suse* | arch | manjaro*)
         distro=suse
         ;;
     esac
