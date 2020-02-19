@@ -2705,7 +2705,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                 (centos|rhel)
                     out="$(tail /var/log/messages)"
                     ;;
-                (*suse*)
+                (*suse*|arch|manjaro*)
                     out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
                     key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
                     ;;

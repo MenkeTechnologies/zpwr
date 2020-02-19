@@ -397,6 +397,10 @@ else
     test -d "$HOME/.local/share/Trash" &&
         alias tra='cd $HOME/.local/share/Trash'
     if [[ "$ZPWR_OS_TYPE" == linux ]]; then
+        if exists pacman;then
+            alias api="sudo pacman -Sy"
+            alias api="sudo pacman -Syyu"
+            alias api="sudo pacman -Syyu;u8"
         if exists zypper;then
             alias api="sudo zypper install -y"
             alias apa="sudo zypper update; sudo zypper dist-upgrade -y"
