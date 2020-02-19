@@ -25,7 +25,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF*OPTS env vars
-- 10.6k zsh tab completions [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
+- 11k zsh tab completions [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - ergonomic, recursive tmux keybindings for next and previous windows
 - zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygementize
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygementize
