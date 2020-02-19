@@ -58,7 +58,6 @@ elif [[ "$ZPWR_OS_TYPE" == linux ]];then
             ;;
         (*)
             prettyPrint "Your distroFamily $distroName is unsupported!" >&2
-            exit 1
             ;;
     esac
 else
@@ -70,7 +69,6 @@ else
         prettyPrint "Your distroFamily $distroName is unsupported!" >&2
     fi
 fi
-
 
 exists diff-so-fancy || {
     prettyPrint "npm installing diff-so-fancy"
