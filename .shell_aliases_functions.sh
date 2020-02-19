@@ -401,7 +401,7 @@ else
             alias api="sudo pacman -Sy --noconfirm"
             alias apa="sudo pacman -Syyu --noconfirm"
             alias apz="sudo pacman -Syyu --noconfirm;u8"
-        if exists zypper;then
+        elif exists zypper;then
             alias api="sudo zypper install -y"
             alias apa="sudo zypper update; sudo zypper dist-upgrade -y"
             alias apz="sudo zypper update; sudo zypper dist-upgrade -y; u8"
