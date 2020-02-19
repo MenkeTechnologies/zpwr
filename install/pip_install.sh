@@ -78,23 +78,15 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         case $distroName in
             (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
                 distroFamily=debian
-                prettyPrint "Fetching Dependencies for $distroName with the Advanced Package Manager..."
-                addDependenciesDebian
                 ;;
             (arch|manjaro*)
                 distroFamily=arch
-                prettyPrint "Fetching Dependencies for $distroName with pacman"
-                addDependenciesArch
                 ;;
             (*suse*)
                 distroFamily=suse
-                prettyPrint "Fetching Dependencies for $distroName with zypper"
-                addDependenciesSuse
                 ;;
             (centos|fedora|rhel)
                 distroFamily=redhat
-                prettyPrint "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
-                addDependenciesRedHat
                 ;;
             (*)
                 prettyPrint "Your distroFamily $distroName is unsupported!" >&2
