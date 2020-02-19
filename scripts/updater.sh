@@ -240,7 +240,10 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
         sudo zypper --non-interactive update
         sudo zypper --non-interactive dist-upgrade
         sudo zypper --non-interactive clean -a'
-    elif [[ "$manager" == dnf ]]; then
+    elif [[ "$manager" == pacman ]]; then
+        ssh -x "$hostname" 'sudo pacman -Syyu
+        sudo paccache --remove'
+     elif [[ "$manager" == dnf ]]; then
         ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'
     else
