@@ -2738,7 +2738,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                         else
                             logg "creating new session"
                             tmux new-session \; \
-                            source-file ~/.tmux/control-window
+                            source-file "$ZPWR_TMUX/control-window"
                         fi
                     } &> /dev/null
                 else
