@@ -2486,7 +2486,7 @@ function clearCache(){
             "$ZPWR_VIM_KEYBINDINGS" \
             "$ZPWR_ALL_KEYBINDINGS" \
             "$ZPWR_ALL_GIT_DIRS" \
-            "$ZPWR_ENV"* \
+            "$ZPWR_ENV"*
     } >> "$ZPWR_LOGFILE" 2>&1
 }
 
