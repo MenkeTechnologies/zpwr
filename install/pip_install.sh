@@ -81,9 +81,9 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
                 prettyPrint "Fetching Dependencies for $distroName with the Advanced Package Manager..."
                 addDependenciesDebian
                 ;;
-            (arch)
+            (arch|manjaro*)
                 distroFamily=arch
-                prettyPrint "Fetching Dependencies for $distroName with zypper"
+                prettyPrint "Fetching Dependencies for $distroName with pacman"
                 addDependenciesArch
                 ;;
             (*suse*)
