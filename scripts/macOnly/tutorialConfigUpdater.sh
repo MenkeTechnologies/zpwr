@@ -51,7 +51,10 @@ prettyPrint "Updating zsh plugins list"
 printf "" > "$ZPWR_DIR_INSTALL/.zshplugins"
 for dir in "$HOME/.oh-my-zsh/custom/plugins/"*; do
     if basename "$dir" | grep -sq "example";then
+        prettyPrint "not adding zsh plugin $dir"
         continue;
+    else
+        prettyPrint "adding zsh plugin $dir"
     fi
         
     bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR_INSTALL/.zshplugins"
