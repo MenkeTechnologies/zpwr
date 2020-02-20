@@ -54,3 +54,5 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+#zsh
+*.zwc
