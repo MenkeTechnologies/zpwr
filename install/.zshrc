@@ -2838,9 +2838,9 @@ function zpwrAllUpdates(){
         } &&
         linkConf
     )
+   zpwr updatedeps
    zpwr regen
    zpwr recompile
-   zpwr updatedeps
    zpwr update
 }
 
