@@ -56,3 +56,4 @@ DerivedData
 project.xcworkspace
 #zsh
 *.zwc
+*.zwc.old
