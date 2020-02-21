@@ -1947,7 +1947,7 @@ else
                     figlet -f block "$(whoami)" | ponysay -W 120 |
                         splitReg.sh -- ------------- lolcat
                     ;;
-                (*suse*)
+                (*suse*|arch|manjaro*)
                     test -d "$D" && builtin cd "$D"
                     figlet -f block "$(whoami)" | ponysay -W 120 |
                         splitReg.sh -- ------------- lolcat
@@ -1969,7 +1969,7 @@ else
                     test -d "$D" && builtin cd "$D"
                     noPonyBanner
                     ;;
-                (*suse*)
+                (*suse*|arch|manjaro*)
                     test -d "$D" && builtin cd "$D"
                     noPonyBanner
                     ;;
