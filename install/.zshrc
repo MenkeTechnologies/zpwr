@@ -347,6 +347,9 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         (centos|rhel)
             plugins+=(yum dnf)
             ;;
+        (arch|manjaro*)
+            plugins+=(archlinux)
+            ;;
         (*suse*)
             plugins+=(suse)
             ;;
