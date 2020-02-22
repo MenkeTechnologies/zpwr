@@ -316,9 +316,13 @@ plugins=(jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
     postgres redis-cli colorize sudo rsync docker \
-    docker-compose sublime kubectl \
+    docker-compose kubectl \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
+
+if exists subl; then
+    plugins+=(sublime)
+fi
 
 if [[ $ZPWR_LEARN != false ]]; then
     plugins+=(zsh-learn)
