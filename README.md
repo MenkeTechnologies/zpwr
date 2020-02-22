@@ -1189,9 +1189,10 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` i  <C-D>       * col('.')>strlen(getline('.'))?"\<C-D>":"\<Del>" ```
 - ``` i  <C-D><NL>     <Plug>(fzf-complete-file-ag) ```
 - ``` i  <C-D><C-F>    <Plug>(fzf-complete-path) ```
-- ``` i  <C-D>,      * <C-X><C-O> ```
+- ``` i  <C-D>n      * <C-X><C-O> ```
 - ``` i  <C-D>\      * <C-X><C-L> ```
-- ``` i  <C-D>.      * <C-O>:FZFMaps<CR> ```
+- ``` i  <C-D>,      * <C-O>:FZFEnv<CR> ```
+- ``` i  <C-D>.      * <C-O>:FZFKeys<CR> ```
 - ``` i  <C-D>/      * <C-O>:LocateAll<CR> ```
 - ``` i  <C-D>z      * <Esc>:TlistAddFiles * <CR> :TlistToggle<CR>i ```
 - ``` i  <C-D>y      * <Esc>:update<CR>:SyntasticCheck<CR>a ```
@@ -1207,7 +1208,6 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` i  <C-D>q      * <C-O>:SaveSession!<CR><Tab> ```
 - ``` i  <C-D>p      * <C-O>:call GetRef()<CR> ```
 - ``` i  <C-D>o      * <C-O>:ALEToggle<CR> ```
-- ``` i  <C-D>n      * <C-O>:Snippets<CR> ```
 - ``` i  <C-D>m      * <C-O>:Map<CR> ```
 - ``` i  <C-D>l      * <C-O>:Lines<CR> ```
 - ``` i  <C-D>k      * <C-O>:ALEFix<CR> ```
@@ -1259,7 +1259,8 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  [c           @<Plug>(GitGutterPrevHunk) ```
 - ``` n  ]c           @<Plug>(GitGutterNextHunk) ```
 - ``` n  <C-C>       * :wq!<CR>:qa!<CR> ```
-- ``` n  <C-D>.      * :FZFMaps<CR> ```
+- ``` n  <C-D>,      * :FZFEnv<CR> ```
+- ``` n  <C-D>.      * :FZFKeys<CR> ```
 - ``` n  <C-D>/      * :LocateAll<CR> ```
 - ``` n  <C-D>z      * :TlistAddFiles *<CR>:TlistToggle<CR> ```
 - ``` n  <C-D>y      * :update<CR>:SyntasticCheck<CR> ```
@@ -1289,14 +1290,13 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  <C-D>c      * :Colors<CR> ```
 - ``` n  <C-D>b      * :Buffers<CR> ```
 - ``` n  <C-D>a      * :Ag<CR> ```
-- ```    <C-D><C-D>  * :GitGutterUndoHunk<CR> ```
-- ``` n  <C-D>,      * :call NERDComment("x","Toggle")<CR>`> ```
+- ``` n  <C-D><C-D>  * :GitGutterUndoHunk<CR> ```
 - ``` n  <C-F>       * :q!<CR> ```
 - ``` n  <C-G>       * :call multiple_cursors#new("n", 1)<CR> ```
-- ``` nox<C-H>       * 4h ```
-- ```    <NL>        * 4j ```
-- ```    <C-K>       * 4k ```
-- ```    <C-L>       * 4l ```
+- ``` n  <C-H>       * 4h ```
+- ``` n  <NL>        * 4j ```
+- ``` n  <C-K>       * 4k ```
+- ``` n  <C-L>       * 4l ```
 - ```    <CR>          <Plug>(wildfire-fuel) ```
 - ```    <C-P>         <Plug>(ctrlp) ```
 - ``` n  <C-R>         <Plug>(RepeatRedo) ```
@@ -1353,11 +1353,17 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  <Space>/    * :LocateAll<CR> ```
 - ``` n  <Space>ta   * :Tags<CR> ```
 - ``` n  <Space>]    * <C-W>}<CR> ```
+- ``` n  <Space>h:   * :History:<CR> ```
+- ``` n  <Space>h/   * :History/<CR> ```
+- ``` n  <Space>hh   * :History<CR> ```
 - ``` n  <Space>rg   * :Rg<CR> ```
 - ``` n  <Space>o    * :ALEToggle<CR> ```
 - ``` n  <Space>m    * :Map<CR> ```
+- ``` n  <Space>ke   * :FZFKeys<CR> ```
 - ``` n  <Space>aa   * :Agg<CR> ```
 - ``` n  <Space>f    * :Files<CR> ```
+- ``` n  <Space>env  * :FZFEnv<CR> ```
+- ``` n  <Space>.    * :Colors<CR> ```
 - ``` n  <Space>b    * :Buffers<CR> ```
 - ``` n  <Space>ag   * :Ag<CR> ```
 - ``` n  <Space>vj   * :w!<CR>:call TmuxRepeat("file")<CR> ```
@@ -1388,8 +1394,8 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  <Space>r    * :%s/\C\<<C-R><C-W>\>/<C-R><C-W>/g<Left><Left> ```
 - ``` n  <Space>g    * :%s/\C\<<C-R><C-W>\>//g<Left><Left> ```
 - ```    <Space>sudo * :w !sudo tee % &>/dev/null<CR><CR><CR> ```
-- ```    <Space>=    * 4+ ```
-- ```    <Space>-    * 4- ```
+- ``` n  <Space>=    * 4+ ```
+- ``` n  <Space>-    * 4- ```
 - ``` n  %             <Plug>(MatchitNormalForward) ```
 - ``` n  &&          * :normal mzg&`zzz<CR> ```
 - ``` n  &           * :&&<CR> ```
@@ -1954,19 +1960,18 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` x  ac           @<Plug>(GitGutterTextObjectOuterVisual) ```
 - ``` x  ic           @<Plug>(GitGutterTextObjectInnerVisual) ```
 - ``` v  <C-B>       * "*y`> ```
-- ```    <C-D><C-D>  * :GitGutterUndoHunk<CR> ```
 - ``` v  <C-D>d      * :<C-C>:update<CR> ```
 - ``` v  <C-D>y      * :<C-C>:update<CR>:SyntasticCheck<CR> ```
 - ``` v  <C-D>,      * :call NERDComment("x","Toggle")<CR>`> ```
 - ``` v  <C-F>       * :<C-C>:q!<CR> ```
 - ``` x  <C-G>       * :<C-U>call multiple_cursors#new("v", 0)<CR> ```
 - ``` s  <C-H>       * <C-G>"_c ```
-- ``` nox<C-H>       * 4h ```
+- ``` x  <C-H>       * 4h ```
 - ``` x  <Tab>       * :call UltiSnips#SaveLastVisualSelection()<CR>gvs ```
 - ``` s  <Tab>       * <Esc>:call UltiSnips#ExpandSnippetOrJump()<CR> ```
-- ```    <NL>        * 4j ```
-- ```    <C-K>       * 4k ```
-- ```    <C-L>       * 4l ```
+- ``` v  <NL>        * 4j ```
+- ``` v  <C-K>       * 4k ```
+- ``` v  <C-L>       * 4l ```
 - ```    <CR>          <Plug>(wildfire-fuel) ```
 - ```    <C-P>         <Plug>(ctrlp) ```
 - ``` s  <C-R>       * <C-G>"_c<C-R> ```
@@ -1995,6 +2000,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` x  <Space><Tab>   <Plug>(fzf-maps-x) ```
 - ``` v  <Space>vl   * <Esc>:call TmuxRepeat("repl")<CR>gv ```
 - ``` v  <Space>vk   * <Esc>:call TmuxRepeat("visual")<CR>gv ```
+- ``` v  <Space>vj   * <Esc>:call TmuxRepeat("file")<CR>gv ```
 - ``` x  <Space>ev     :call ExtractVariableVisual()<CR> ```
 - ``` x  <Space>em     :call ExtractMethod()<CR> ```
 - ```    <Space><Space>e   <Plug>(easymotion-bd-e) ```
@@ -2009,8 +2015,8 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ```    <Space>z    * nea ```
 - ```    <Space>sudo * :w !sudo tee % &>/dev/null<CR><CR><CR> ```
 - ``` v  <Space>b    * :w !tmux set-buffer "$(cat)"<CR><CR> ```
-- ```    <Space>=    * 4+ ```
-- ```    <Space>-    * 4- ```
+- ``` v  <Space>=    * 4+ ```
+- ``` v  <Space>-    * 4- ```
 - ``` x  %             <Plug>(MatchitVisualForward) ```
 - ``` x  &&          * :normal mzg&`zzz<CR> ```
 - ``` x  &           * :&&<CR> ```
