@@ -399,8 +399,8 @@ else
     if [[ "$ZPWR_OS_TYPE" == linux ]]; then
         if exists pacman;then
             alias api="sudo pacman -Sy --noconfirm"
-            alias apa="sudo pacman -Syyu --noconfirm"
-            alias apz="sudo pacman -Syyu --noconfirm;u8"
+            alias apa="sudo pacman -Syyu --noconfirm --overwrite='*'"
+            alias apz="sudo pacman -Syyu --noconfirm --overwrite='*';u8"
         elif exists zypper;then
             alias api="sudo zypper install -y"
             alias apa="sudo zypper update; sudo zypper dist-upgrade -y"
