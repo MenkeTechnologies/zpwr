@@ -178,6 +178,10 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 #**************************************************************
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
+unalias ag &> /dev/null
+#stop delay when entering normal mode
+export KEYTIMEOUT=1
+export CHEATCOLORS=true
 
 if [[ ! -d $ZPWR ]]; then
     mkdir -p $ZPWR
@@ -320,12 +324,17 @@ plugins=(jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
+# exists not defined until source shell aliases file
 if type -- subl >/dev/null 2>&1; then
     plugins+=(sublime)
 fi
 
 if type -- kubectl >/dev/null 2>&1; then
     plugins+=(kubectl)
+fi
+
+if type -- bat >/dev/null 2>&1; then
+    export BAT_THEME="$ZPWR_BAT_THEME"
 fi
 
 if [[ $ZPWR_LEARN != false ]]; then
@@ -380,14 +389,11 @@ autoload -Uz compinit
 
 source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 #has all aliases and functions common to bourne like shells
 _alias_file="$ZPWR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$ZPWR_LOCAL/.common_aliases"
-
-exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
 #}}}***********************************************************
 
@@ -2785,11 +2791,6 @@ function recompile(){
 	done
 }
 
-unalias ag &> /dev/null
-
-#stop delay when entering normal mode
-export KEYTIMEOUT=1
-
 zshrcsearch(){
     if [[ -z "$1" ]]; then
         zsh -ilvx -c false &> $ZPWR_TEMPFILE4
@@ -2799,9 +2800,6 @@ zshrcsearch(){
         ag --color --numbers -C 5 -i -- "$@" $ZPWR_TEMPFILE4 | less
     fi
 }
-
-export CHEATCOLORS=true
-
 # Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
 alias mmv='noglob zmv -W'
@@ -2882,7 +2880,6 @@ function zpwrUpdateAllGitDirs(){
         $(cat $ZPWR_ALL_GIT_DIRS)
 }
 
-
 function zpwrVerbs(){
     cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' | fzf
 }
@@ -2904,7 +2901,6 @@ function revealRecurse(){
         ( builtin cd $i && reveal 2>/dev/null; )
     done
 }
-
 
 ###}}}***********************************************************
 
