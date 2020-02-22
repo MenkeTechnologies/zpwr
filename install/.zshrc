@@ -316,12 +316,16 @@ plugins=(jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
     postgres redis-cli colorize sudo rsync docker \
-    docker-compose kubectl \
+    docker-compose \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals)
 
-if exists subl; then
+if type -- subl >/dev/null 2>&1; then
     plugins+=(sublime)
+fi
+
+if type -- kubectl >/dev/null 2>&1; then
+    plugins+=(kubectl)
 fi
 
 if [[ $ZPWR_LEARN != false ]]; then
