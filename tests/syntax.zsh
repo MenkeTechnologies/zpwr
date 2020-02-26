@@ -13,14 +13,14 @@
     TEST_FILE=tests/testfile
 }
 
-@test 'zshrc exists' {
+@test 'install/zshrc exists' {
 	test -f install/.zshrc
     assert $? equals 0
 }
 
 @test 'scripts syntax check' {
-	zsh -n scripts/*.{sh,zsh}
-    assert $? equals 0
+	run zsh -n scripts/*.{sh,zsh}
+    assert $state equals 0
 }
 @test 'zshrc syntax check' {
 	zsh -n install/.zshrc
@@ -28,8 +28,8 @@
 }
 
 @test 'shell alias syntax check' {
-	zsh -n .shell_aliases_functions.sh
-    assert $? equals 0
+	run zsh -n .shell_aliases_functions.sh
+    assert $state equals 0
 }
 
 @test 'ZPWR_LOCAL' {
