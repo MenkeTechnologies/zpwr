@@ -1568,7 +1568,9 @@ function backup(){
         "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
 }
 
-unalias gcl >/dev/null 2>&1
+exists gcl && {
+    unalias gcl >/dev/null 2>&1
+}
 function gcl() {
     if [[ -z "$1" ]]; then
         loggErr "need an arg"

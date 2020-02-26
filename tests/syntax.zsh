@@ -9,8 +9,7 @@
 #}}}***********************************************************
 #
 @setup {
-    load ~/.zpwr/.shell_aliases_functions.sh
-    TEST_FILE=tests/testfile
+    load "test_lib.zsh"
 }
 
 @test 'install/zshrc exists' {
