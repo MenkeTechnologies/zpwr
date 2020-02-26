@@ -385,8 +385,18 @@ export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $
 export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 ```
 
+## Tests
+You can run all the unit tests via `zunit --verbose $ZPWR/tests/*.zsh` while in `~/.zpwr` directory
+
+There is also an alias `tru` for this
+```sh
+exists zunit && {
+    alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
+}
+```
+
 ## Contributing
-I am always looking for contributors.
+I am looking for contributors especially for expanding the zunit tests.
 
 ## Warnings
 Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.
