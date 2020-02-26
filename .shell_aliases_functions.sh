@@ -1571,9 +1571,10 @@ function backup(){
 exists gcl && {
     unalias gcl >/dev/null 2>&1
 }
+
 function gcl() {
     if [[ -z "$1" ]]; then
-        loggErr "need an arg"
+        loggErr "usage gcl <repo>"
         return 1
     fi
     local git_name
