@@ -127,6 +127,26 @@
     assert $? equals 0
 }
 
+@test 'www no args' {
+    run www
+    assert $state equals 1
+}
+
+@test 'ww no args' {
+    run ww
+    assert $state equals 1
+}
+
+@test 'fff no args' {
+    run fff
+    assert $state equals 1
+}
+
+@test 'ff no args' {
+    run ff
+    assert $state equals 1
+}
+
 @test 'gcl' {
     run gcl 
     assert $state equals 1
