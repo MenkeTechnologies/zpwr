@@ -2902,6 +2902,10 @@ function revealRecurse(){
     done
 }
 
+exists zunit && {
+    alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
+}
+
 ###}}}***********************************************************
 
 #{{{                    MARK:Finish

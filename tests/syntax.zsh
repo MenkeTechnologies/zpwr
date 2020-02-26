@@ -72,7 +72,7 @@
 }
 
 @test 'tac' {
-    run tac 'tests/$TEST_FILE'
+    run tac $TEST_FILE
     assert $? equals 0
 
     assert "$output" is_not_empty
