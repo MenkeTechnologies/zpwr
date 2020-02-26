@@ -1574,11 +1574,18 @@ function gcl() {
         loggErr "need an arg"
         return 1
     fi
+    local git_name
+    local dir_name
 
     git_name="${1##*/}"
     dir_name=${git_name%.*}
     git clone -v --progress --recursive "$1"
-    cd "$dir_name"
+    if [[ -d "$dir_name" ]]; then
+        cd "$dir_name"
+    else
+        loggErr "$dir_name failed to clone"
+        return 1
+    fi
 }
 
 function ino(){
