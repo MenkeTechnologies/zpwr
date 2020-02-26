@@ -14,3 +14,5 @@ if [[ ! -f $ALIAS_FILE ]]; then
 fi
 load $ALIAS_FILE
 TEST_FILE=tests/testfile
+TOKENS_FILE=local/.tokens.sh
+setopt nullglob

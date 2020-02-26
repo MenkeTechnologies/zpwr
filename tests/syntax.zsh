@@ -12,15 +12,77 @@
     load "test_lib.zsh"
 }
 
+@test '.powerlevel9kconfig.sh zsh syntax check' {
+	test -f .powerlevel9kconfig.sh
+	run zsh -n .powerlevel9kconfig.sh
+    assert $state equals 0
+}
+
+@test '.tmux/google.sh bash syntax check' {
+	test -f .tmux/google.sh
+	run bash -n .tmux/google.sh
+    assert $state equals 0
+}
+@test '.powerlevel9kconfig.sh bash syntax check' {
+	test -f .powerlevel9kconfig.sh
+	run bash -n .powerlevel9kconfig.sh
+    assert $state equals 0
+}
+
+@test 'local/.tokens.sh syntax check' {
+	test -f $TOKENS_FILE
+	run zsh -n $TOKENS_FILE
+    assert $state equals 0
+}
+
+@test 'local/.tokens.sh exists' {
+	test -f $TOKEN_FILE
+    assert $? equals 0
+}
+
 @test 'install/zshrc exists' {
 	test -f install/.zshrc
     assert $? equals 0
 }
 
-@test 'scripts syntax check' {
+@test 'scripts bash alias file syntax check' {
+	run bash -n .shell_aliases_functions.sh
+    assert $state equals 0
+}
+
+@test 'scripts vim vimrc syntax check' {
+    run vim -u NONE -c 'try | source install/.vimrc | catch | cq | endtry | q';
+    assert $state equals 0
+}
+@test 'scripts vim minvimrc syntax check' {
+    run vim -u NONE -c 'try | source .minvimrc | catch | cq | endtry | q';
+    assert $state equals 0
+}
+
+@test 'mac only scripts bash syntax check' {
+	for file in scripts/macOnly/*.sh;do
+        run bash -n $file
+        assert $state equals 0
+    done
+}
+
+@test 'mac only scripts zsh syntax check' {
+	for file in scripts/macOnly/*.{sh,zsh};do
+        run zsh -n $file
+        assert $state equals 0
+    done
+}
+
+@test 'scripts bash syntax check' {
+	run bash -n scripts/*.sh
+    assert $state equals 0
+}
+
+@test 'scripts zsh syntax check' {
 	run zsh -n scripts/*.{sh,zsh}
     assert $state equals 0
 }
+
 @test 'zshrc syntax check' {
 	zsh -n install/.zshrc
     assert $? equals 0

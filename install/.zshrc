@@ -74,6 +74,7 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
 export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_TEST="$ZPWR/tests"
 export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_INSTALL="$ZPWR/install"
 export ZPWR_TMUX="$ZPWR/.tmux"
@@ -286,7 +287,7 @@ export ARCHFLAGS="-arch x86_64"
 # For a full list of active aliases, run `alias`.
 #
 
-ZSH_AUTOSUGGEST_STRATEGY=match_prev_cmd
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 #}}}***********************************************************
@@ -1848,7 +1849,10 @@ if [[ -d "$ZPWR" ]]; then
 fi
 
 if [[ -d "$ZPWR_TMUX" ]]; then
-    exists zt || alias zt="cd $ZPWR_TMUX"
+    exists ztm || alias ztm="cd $ZPWR_TMUX"
+fi
+if [[ -d "$ZPWR_TMUX" ]]; then
+    exists zt || alias zt="cd $ZPWR_TEST"
 fi
 
 if [[ -d "$ZPWR_TMUX_LOCAL" ]]; then
@@ -1868,6 +1872,7 @@ if [[ -d "$ZSH/custom/plugins" ]]; then
 fi
 
 alias tok="vim $ZPWR_LOCAL/.tokens.sh"
+alias zpt="vim $ZPWR_TEST/*.{zsh,zunit}"
 
 alias numcmd='print $#commands'
 #}}}***********************************************************
