@@ -90,7 +90,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - neovim with 82 plugins and python3/node support
 - perl
 - bash
-- oh-my-zsh with 68 plugins of which 25 are custom
+- oh-my-zsh with 70 plugins of which 27 are custom
 - forked powerlevel9k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
