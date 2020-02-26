@@ -20,7 +20,7 @@
 
 @test 'py scripts syntax check' {
 	for file in scripts/*.py;do
-        run python -m py_compile $file
+        run python3 -c "import ast; ast.parse(open('$file').read())"
         assert $? equals 0
     done
 
