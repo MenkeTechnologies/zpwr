@@ -21,7 +21,7 @@
 @test 'perl scripts syntax check' {
 	for file in scripts/*.pl;do
         run perl -c $file
-        assert $? equals 0
+        assert $state equals 0
     done
 
 }

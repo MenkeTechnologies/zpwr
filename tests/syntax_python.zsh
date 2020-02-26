@@ -21,7 +21,7 @@
 @test 'py scripts syntax check' {
 	for file in scripts/*.py;do
         run python3 -c "import ast; ast.parse(open('$file').read())"
-        assert $? equals 0
+        assert $state equals 0
     done
 
 }
