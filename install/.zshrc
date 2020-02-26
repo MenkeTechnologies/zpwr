@@ -311,10 +311,10 @@ forgit_stash_show=fgss
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
+plugins=(revolver jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     zsh-z zsh-expand zsh-autopair \
     zsh-nginx zsh-more-completions history-search-multi-word \
-    forgit fzf-zsh zsh-completions zsh-sed-sub zsh-git-acp \
+    forgit fzf-zsh zsh-completions zsh-sed-sub \
     fast-syntax-highlighting zsh-autosuggestions \
     history-substring-search ruby gem rake rails yarn ng \
     coffee node npm perl cpanm git github gradle ant mvn \
@@ -322,7 +322,7 @@ plugins=(jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     postgres redis-cli colorize sudo rsync docker \
     docker-compose \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
-    zsh-very-colorful-manuals)
+    zsh-very-colorful-manuals zsh-git-acp)
 
 # exists not defined until source shell aliases file
 if type -- subl >/dev/null 2>&1; then
