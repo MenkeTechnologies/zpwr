@@ -40,9 +40,10 @@ jobs:
     script: skip
 before_script:
 - echo cloned to $TRAVIS_BUILD_DIR
-- pwd
+- ls -l
 - if [[ $(ls "$HOME/.zvm" | wc -l) -eq 0 ]]; then rm -rf "$HOME/.zvm"; fi
 - mkdir .bin
+- export ZPWR=$PWD
 - curl -L https://raw.githubusercontent.com/molovo/revolver/master/revolver > .bin/revolver
 - curl -L https://raw.githubusercontent.com/molovo/color/master/color.zsh > .bin/color
 - curl -L https://raw.githubusercontent.com/molovo/zvm/master/zvm > .bin/zvm
