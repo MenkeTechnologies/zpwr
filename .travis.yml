@@ -29,6 +29,7 @@ before_script:
 - export PATH="$PWD:$PATH"
 - echo $PATH
 - cd .. && pwd
+- tty
 script: "zunit --verbose tests/*.zsh"
 notifications:
   email: false

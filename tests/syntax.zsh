@@ -53,6 +53,8 @@
        skip "$- must be interactive term"
     fi
 
+    tty 2>/dev/null 1>&2 || skip 'not a tty'
+
     run vim -u NONE -c 'try | source install/.vimrc | catch | cq | endtry | q';
     assert $state equals 0
 }
