@@ -4,31 +4,22 @@ addons:
     - zsh
     - vim
     - python3
-    - ncurses-dev
-    - autoconf
-    - yodl
-    - man
 dist: trusty
 language: generic
 cache:
   apt: true
-  directories:
-  - "$HOME/.zvm"
 jobs:
   include:
   - stage: linux
     os: linux
-    env: ZVM_VERSION='5.3.1'
 before_script:
 - echo cloned to $TRAVIS_BUILD_DIR
 - ls -Al
-- if [[ $(ls "$HOME/.zvm" | wc -l) -eq 0 ]]; then rm -rf "$HOME/.zvm"; fi
 - mkdir .bin
 - export ZPWR=$PWD
 - curl -L https://raw.githubusercontent.com/molovo/revolver/master/revolver > .bin/revolver
 - curl -L https://raw.githubusercontent.com/molovo/color/master/color.zsh > .bin/color
-- curl -L https://raw.githubusercontent.com/molovo/zvm/master/zvm > .bin/zvm
-- chmod u+x .bin/{color,revolver,zvm}
+- chmod u+x .bin/{color,revolver}
 - export PATH="$HOME/.zvm/bin:$PWD/.bin:$PATH"
 - git clone https://github.com/MenkeTechnologies/zunit
 - cd zunit && pwd
