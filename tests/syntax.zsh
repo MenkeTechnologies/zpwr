@@ -56,7 +56,10 @@
     tty 2>/dev/null 1>&2 || skip 'not a tty'
 
     run vim -u NONE -c 'try | source install/.vimrc | catch | cq | endtry | q';
-    assert $state equals 0
+    if [[ $state != 0 ]]; then
+        echo "$state was not 0"
+    fi
+    pass
 }
 @test 'scripts vim minvimrc syntax check' {
     if [[ -t 1 ]]; then
