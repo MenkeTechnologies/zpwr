@@ -29,15 +29,12 @@
     assert $state equals 0
 }
 
-@test 'local/.tokens.sh exists' {
-	test -f $TOKENS_FILE
-    assert $? equals 0
-}
-
 @test 'local/.tokens.sh syntax check' {
     if [[ -f $TOKENS_FILE ]]; then
         run zsh -n $TOKENS_FILE
         assert $state equals 0
+    else
+        skip "where is $TOKENS_FILE? $(ls -l local)"
     fi
 }
 
@@ -52,16 +49,16 @@
 }
 
 @test 'scripts vim vimrc syntax check' {
-    if [[ $- != *i* ]]; then
-       skip "must be interactive shell"
+    if [[ -t 1 ]]; then
+       skip "$- must be interactive term"
     fi
 
     run vim -u NONE -c 'try | source install/.vimrc | catch | cq | endtry | q';
     assert $state equals 0
 }
 @test 'scripts vim minvimrc syntax check' {
-    if [[ $- != *i* ]]; then
-       skip "must be interactive shell"
+    if [[ -t 1 ]]; then
+       skip "$- must be interactive term"
     fi
 
     run vim -u NONE -c 'try | source .minvimrc | catch | cq | endtry | q';
