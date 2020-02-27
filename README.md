@@ -1,6 +1,9 @@
 # ZPWR => World's Most Advanced UNIX Terminal Environment
 
+[![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=master)](https://travis-ci.com/MenkeTechnologies/zpwr)
+
 ![Alt text](http://jakobmenke.com/img/tmuxfinal1.png?raw=true)
+
 
 This project started out as my own version of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) repo and it then grew.
 
