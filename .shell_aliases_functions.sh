@@ -117,7 +117,7 @@ export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
 #**************************************************************
 export ZPWR_TMUX_PREFIX=x
 export ZPWR_TMUX_REMOTE_PREFIX=b
-test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh"
+test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh" || touch "$ZPWR_LOCAL/.tokens.sh"
 #bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 #zsh xtrace
