@@ -5,8 +5,8 @@ addons:
     - vim
 dist: bionic
 branches:
-  except:
-      - master
+  only:
+  - dev
 python:
     - "3.8"
 language: generic
