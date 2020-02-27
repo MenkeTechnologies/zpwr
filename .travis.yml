@@ -2,7 +2,7 @@ addons:
   apt:
     packages:
     - zsh
-    - neovim
+    - vim
     - python3
     - ncurses-dev
     - autoconf
