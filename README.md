@@ -1,6 +1,6 @@
 # ZPWR => World's Most Advanced UNIX Terminal Environment
 
-[![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=master)](https://travis-ci.com/MenkeTechnologies/zpwr)
+[![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=dev)](https://travis-ci.com/MenkeTechnologies/zpwr)
 
 ![Alt text](http://jakobmenke.com/img/tmuxfinal1.png?raw=true)
 
