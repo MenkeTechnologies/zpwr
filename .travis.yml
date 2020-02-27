@@ -39,6 +39,8 @@ jobs:
   - stage: deploy
     script: skip
 before_script:
+- echo cloned to $TRAVIS_BUILD_DIR
+- pwd
 - if [[ $(ls "$HOME/.zvm" | wc -l) -eq 0 ]]; then rm -rf "$HOME/.zvm"; fi
 - mkdir .bin
 - curl -L https://raw.githubusercontent.com/molovo/revolver/master/revolver > .bin/revolver

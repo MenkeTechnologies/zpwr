@@ -8,7 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-ALIAS_FILE="$HOME/.zpwr/.shell_aliases_functions.sh"
+ALIAS_FILE="$PWD/.shell_aliases_functions.sh"
 if [[ ! -f $ALIAS_FILE ]]; then
     error "$ALIAS_FILE does not exist"
 fi
