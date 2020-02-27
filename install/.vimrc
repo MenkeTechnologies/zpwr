@@ -1361,7 +1361,13 @@ autocmd BufNewFile * exe 'normal! G' | startinsert!
 "{{{                    MARK:Ending
 "**************************************************************
 "load all pathogen plugins
-execute pathogen#infect()
+if filereadable(expand("~/.vim/autoload/pathogen.vim"))
+    runtime! autoload/pathogen.vim
+    if exists("g:loaded_pathogen")
+        silent! execute pathogen#infect()
+    endif
+endif
+
 syntax on
 filetype plugin indent on
 
