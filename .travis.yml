@@ -7,8 +7,6 @@ dist: bionic
 branches:
   only:
   - dev
-python:
-    - "3.8"
 language: generic
 cache:
   apt: true
@@ -16,6 +14,7 @@ jobs:
   include:
   - stage: linux
     os: linux
+    python: 3.8
 before_script:
 - echo cloned to $TRAVIS_BUILD_DIR
 - python3 --version
