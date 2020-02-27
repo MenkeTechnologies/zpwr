@@ -11,8 +11,9 @@ language: python
 python: 3.8
 os: linux
 before_script:
-- echo cloned to $TRAVIS_BUILD_DIR
 - python3 --version
+- git clone https://github.com/MenkeTechnologies/zpwr ~/.zpwr
+- cd ~/.zpwr
 - ls -Al
 - mkdir .bin
 - export ZPWR=$PWD
@@ -26,6 +27,7 @@ before_script:
 #- perl -i -pe 's@$@\nset -x;@ if $.==1' zunit
 #- head -n 2 zunit
 - export PATH="$PWD:$PATH"
+- echo $PATH
 - cd .. && pwd
 script: "zunit --verbose tests/*.zsh"
 notifications:
