@@ -19,8 +19,6 @@ jobs:
   - stage: linux
     os: linux
     env: ZVM_VERSION='5.3.1'
-  - stage: deploy
-    script: skip
 before_script:
 - echo cloned to $TRAVIS_BUILD_DIR
 - ls -Al
@@ -33,11 +31,10 @@ before_script:
 - chmod u+x .bin/{color,revolver,zvm}
 - export PATH="$HOME/.zvm/bin:$PWD/.bin:$PATH"
 - git clone https://github.com/MenkeTechnologies/zunit
-- cd zunit
-- zvm use ${ZVM_VERSION}
+- cd zunit && pwd
 - "./build.zsh"
 - export PATH="$PWD:$PATH"
-- cd ..
+- cd .. && pwd
 script: "zunit --verbose tests/*.zsh"
 notifications:
   email: false
