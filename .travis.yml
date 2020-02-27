@@ -24,6 +24,7 @@ before_script:
 - cd zunit && pwd
 - "./build.zsh"
 - perl -i -pe 's/zsh$/zsh -x/ if $.=1' zunit
+- head -n 1 zunit
 - export PATH="$PWD:$PATH"
 - cd .. && pwd
 script: "zunit --verbose tests/*.zsh"
