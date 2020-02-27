@@ -23,7 +23,7 @@ jobs:
     script: skip
 before_script:
 - echo cloned to $TRAVIS_BUILD_DIR
-- ls -l
+- ls -Al
 - if [[ $(ls "$HOME/.zvm" | wc -l) -eq 0 ]]; then rm -rf "$HOME/.zvm"; fi
 - mkdir .bin
 - export ZPWR=$PWD
