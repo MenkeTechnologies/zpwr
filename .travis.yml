@@ -3,8 +3,9 @@ addons:
     packages:
     - zsh
     - vim
-    - python3
-dist: trusty
+dist: bionic
+python:
+    - "3.8"
 language: generic
 cache:
   apt: true
