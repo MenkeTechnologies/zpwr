@@ -4,9 +4,6 @@ addons:
     - zsh
     - vim
 dist: bionic
-branches:
-  only:
-  - dev
 language: python
 python: 3.8
 os: linux
