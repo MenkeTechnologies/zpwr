@@ -18,25 +18,6 @@ jobs:
   include:
   - stage: linux
     os: linux
-    env: ZVM_VERSION='4.3.12'
-  - os: linux
-    env: ZVM_VERSION='4.3.17'
-  - os: linux
-    env: ZVM_VERSION='5.0.8'
-  - os: linux
-    env: ZVM_VERSION='5.1.1'
-  - os: linux
-    env: ZVM_VERSION='5.2'
-  - os: linux
-    env: ZVM_VERSION='5.3.1'
-  - stage: mac os
-    os: osx
-    env: ZVM_VERSION='5.0.8'
-  - os: osx
-    env: ZVM_VERSION='5.1.1'
-  - os: osx
-    env: ZVM_VERSION='5.2'
-  - os: osx
     env: ZVM_VERSION='5.3.1'
   - stage: deploy
     script: skip
