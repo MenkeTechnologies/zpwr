@@ -2,6 +2,8 @@ addons:
   apt:
     packages:
     - zsh
+    - neovim
+    - python3
     - ncurses-dev
     - autoconf
     - yodl
@@ -55,6 +57,6 @@ before_script:
 - "./build.zsh"
 - export PATH="$PWD:$PATH"
 - cd ..
-script: "zunit tests/*.zsh"
+script: "zunit --verbose tests/*.zsh"
 notifications:
   email: false
