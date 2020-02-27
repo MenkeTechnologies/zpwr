@@ -2829,5 +2829,6 @@ function changeGitEmail(){
 #**************************************************************
 alias exa="$ZPWR_EXA_COMMAND"
 exists hexedit && alias he='hexedit -l 16'
+return 0
 #}}}***********************************************************
 
