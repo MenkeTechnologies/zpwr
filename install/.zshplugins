@@ -20,6 +20,7 @@ MenkeTechnologies/zsh-nginx
 MenkeTechnologies/zsh-sed-sub
 MenkeTechnologies/zsh-surround
 zsh-users/zsh-syntax-highlighting
+denolfe/zsh-travis
 MenkeTechnologies/zsh-very-colorful-manuals
 MenkeTechnologies/zsh-xcode-completions
 MenkeTechnologies/zsh-z
