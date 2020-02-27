@@ -4,6 +4,9 @@ addons:
     - zsh
     - vim
 dist: bionic
+branches:
+  except:
+      - master
 python:
     - "3.8"
 language: generic
