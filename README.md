@@ -139,7 +139,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - WSL ubuntu/kali/suse/leap/fedora
 - SUSE
 
-# Installation Instructions
+# Full Installation Instructions
 
 ```sh
 git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh
@@ -158,6 +158,14 @@ or
 exit
 ```
 or type C-d (Control-d) to return to installer script.
+
+## Limited Install
+```sh
+git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh -c
+```
+This will install just config files not dependencies.
+
+You can then run each install script in `.zpwr/install` manually to install just vim plugins or cargo packages etc.
 
 ## Install Destination
 
