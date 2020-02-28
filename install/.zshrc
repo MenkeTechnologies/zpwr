@@ -2764,8 +2764,9 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                         fi
                     } &> /dev/null
                 else
-                    command tmux attach
                     logg "clients so NO"
+                    logg command tmux attach
+                    command tmux attach
                 fi
             else
                 logg "mobile so NO"
