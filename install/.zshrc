@@ -2751,11 +2751,14 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                         logg "tmux ls = ret: $ret, out: $out"
                         if [[ $ret == 0 ]]; then
                             logg "attaching to existing"
+                            logg command tmux attach
                             command tmux attach
                             ret=$?
                             logg "tmux attach = ret: $ret"
                         else
                             logg "creating new session"
+                            logg tmux new-session \; \
+                            source-file "$ZPWR_TMUX/control-window"
                             tmux new-session \; \
                             source-file "$ZPWR_TMUX/control-window"
                         fi
