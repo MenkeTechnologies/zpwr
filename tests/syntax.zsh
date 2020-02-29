@@ -84,6 +84,16 @@
     done
 }
 
+@test 'install scripts bash syntax check' {
+	run bash -n install/*.sh
+    assert $state equals 0
+}
+
+@test 'install scripts zsh syntax check' {
+	run zsh -n install/*.{sh,zsh}
+    assert $state equals 0
+}
+
 @test 'scripts bash syntax check' {
 	run bash -n scripts/*.sh
     assert $state equals 0

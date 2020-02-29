@@ -15,6 +15,10 @@ fi
 
 source common.sh
 
+if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
+    mkdir -p $ZPWR_INSTALLER_OUTPUT
+fi
+
 goInstallerOutputDir
 
 function installNpmRpm(){
