@@ -1431,6 +1431,7 @@ function creategif(){
 }
 
 function hc(){
+    local reponame old_dir
     test -z "$1" && reponame="$(basename "$(pwd)")" ||
         reponame="$1"
     printf "\e[1m"

@@ -331,7 +331,7 @@ if type -- subl >/dev/null 2>&1; then
 fi
 
 if type -- kubectl >/dev/null 2>&1; then
-    plugins+=(kubectl)
+    plugins+=(zsh-kubectl-aliases zsh-kubectl-completion)
 fi
 
 if type -- bat >/dev/null 2>&1; then
@@ -2829,7 +2829,6 @@ if exists jenv;then
 fi
 
 exists thefuck && eval $(thefuck --alias)
-exists kubectl && source <(kubectl completion zsh)
 
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))

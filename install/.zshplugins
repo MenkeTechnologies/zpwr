@@ -14,6 +14,8 @@ lukechilds/zsh-better-npm-completion
 zsh-users/zsh-completions
 MenkeTechnologies/zsh-expand
 MenkeTechnologies/zsh-git-acp
+MenkeTechnologies/zsh-kubectl-aliases
+nnao45/zsh-kubectl-completion
 MenkeTechnologies/zsh-learn
 MenkeTechnologies/zsh-more-completions
 MenkeTechnologies/zsh-nginx
