@@ -2,7 +2,7 @@
 
 ![Alt text](http://jakobmenke.com/img/tmuxfinal1.png?raw=true)
 
-#### Master [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=master)](https://travis-ci.com/MenkeTechnologies/zpwr) Dev [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=dev)](https://travis-ci.com/MenkeTechnologies/zpwr) [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologiesNaereen/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+#### Master [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=master)](https://travis-ci.com/MenkeTechnologies/zpwr) Dev [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=dev)](https://travis-ci.com/MenkeTechnologies/zpwr) Version [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) Commits [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) Contributors [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 
 
