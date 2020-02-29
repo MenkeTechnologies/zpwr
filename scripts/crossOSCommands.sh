@@ -44,17 +44,17 @@ getPasteCommand(){
             paste_cmd='pbpaste'
             ;;
         cygwin*)
-            paste_cmd="powershell.exe -c 'Get-Clipboard'"
+            paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"
             ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
                 paste_cmd='xclip -o -sel clip'
             else
-                paste_cmd="powershell.exe -c 'Get-Clipboard'"
+                paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"
             fi
             ;;
         msys*)
-            paste_cmd="powershell.exe -c 'Get-Clipboard'"
+            paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"
             ;;
         *)
             echo "Platform $ZPWR_OS_TYPE not supported"

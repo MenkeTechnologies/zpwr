@@ -45,14 +45,14 @@ if [[ "$1" == "google" ]]; then
             if [[ "$(uname -r)" != *icrosoft* ]];then
                 out="$(xclip -o -sel clip | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             else
-                out="$(powershell.exe -c 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+                out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             fi
             ;;
         cygwin*)
-            out="$(powershell.exe -c 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
         msys*)
-            out="$(powershell.exe -c 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             ;;
         *)
             out="$(xclip -o -sel clip | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
@@ -67,14 +67,14 @@ else
             if [[ "$(uname -r)" != *icrosoft* ]];then
                 out="$(xclip -o -sel clip)"
             else
-                out="$(powershell.exe -c 'Get-Clipboard')"
+                out="$(powershell.exe -noprofile -command 'Get-Clipboard')"
             fi
             ;;
         cygwin*)
-            out="$(powershell.exe -c 'Get-Clipboard')"
+            out="$(powershell.exe -noprofile -command 'Get-Clipboard')"
             ;;
         msys*)
-            out="$(powershell.exe -c 'Get-Clipboard')"
+            out="$(powershell.exe -noprofile -command 'Get-Clipboard')"
             ;;
         *)
             out="$(xclip -o -sel clip)"
