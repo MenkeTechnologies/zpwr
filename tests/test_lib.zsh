@@ -9,10 +9,14 @@
 #}}}***********************************************************
 
 ALIAS_FILE="$PWD/.shell_aliases_functions.sh"
+
 if [[ ! -f $ALIAS_FILE ]]; then
     error "$ALIAS_FILE does not exist"
 fi
+
 load $ALIAS_FILE
+
 TEST_FILE=tests/testfile
 TOKENS_FILE=local/.tokens.sh
+
 setopt nullglob

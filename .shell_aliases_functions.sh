@@ -315,7 +315,7 @@ alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 alias tok="vim $ZPWR_LOCAL/.tokens.sh"
 alias conf="vim $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_LOCAL/.tokens.sh $ZPWR/.minvimrc"
-alias zpt="vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml"
+alias zpt="vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml; cd $ZPWR_TEST;clearList"
 #}}}***********************************************************
 alias deleteTab="sed '/^[\x20\x09]*$/d'"
 alias ba="bash"

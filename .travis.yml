@@ -21,8 +21,6 @@ before_script:
 - git clone https://github.com/MenkeTechnologies/zunit
 - cd zunit && pwd
 - "./build.zsh"
-#- perl -i -pe 's@$@\nset -x;@ if $.==1' zunit
-#- head -n 2 zunit
 - export PATH="$PWD:$PATH"
 - echo $PATH
 - cd .. && pwd
