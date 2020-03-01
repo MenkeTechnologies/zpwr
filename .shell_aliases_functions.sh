@@ -313,9 +313,9 @@ alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
 alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null"
 alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
-alias tok="vim $ZPWR_LOCAL/.tokens.sh"
-alias conf="vim $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_LOCAL/.tokens.sh $ZPWR/.minvimrc"
-alias zpt="vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml; cd $ZPWR_TEST;clearList"
+alias tok="builtin cd $ZPWR; vim $ZPWR_LOCAL/.tokens.sh;clearList;isGitDir && git diff HEAD"
+alias conf="builtin cd $ZPWR; vim $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_LOCAL/.tokens.sh $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
+alias zpt="builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;clearList;isGitDir && git diff HEAD"
 #}}}***********************************************************
 alias deleteTab="sed '/^[\x20\x09]*$/d'"
 alias ba="bash"
@@ -2681,6 +2681,7 @@ function commits(){
 }
 
 function vimAll(){
+    builtin cd $ZPWR
     vim \
     "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
@@ -2695,6 +2696,7 @@ function vimAll(){
     "$ZPWR_INSTALL/UltiSnips/"*.snippets \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
+    clearList;isGitDir && git diff HEAD
 }
 
 function vimScripts(){
