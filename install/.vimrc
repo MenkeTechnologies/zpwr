@@ -115,6 +115,8 @@ set complete+=]
 "show the leader/prefix/number key when pressed
 set showcmd
 
+set completeopt=noinsert,noselect,menuone
+
 if ! has('nvim')
     "visual mode automatically copies to system clipboard
     set clipboard=autoselect
