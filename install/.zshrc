@@ -2640,7 +2640,8 @@ compdef _ssd ssd
 compdef _ssu ssu
 compdef _zpwr zpwr zp
 compdef _man fm
-compdef _kubectl kubectl
+exists _kubectl && compdef _kubectl kubectl
+exists _express && compdef _express express
 
 #redefine global zsh completion function called at first parameter
 #adding global aliases and files
