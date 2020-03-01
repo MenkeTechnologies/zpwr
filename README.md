@@ -231,8 +231,8 @@ The default tmux prefix key is C-x (control-x) on macOS so one can control inner
 To invoke C-x in the shell press the keybinding twice.
 The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed and dehighlight when prefix is deactivated.
 
-## Vim Plugins
-There are 76 vim plugins installed.  One of which is vim-autosave which autosaves all edits thus making `:w` unnecessary.
+## Autosaving Vim Plugins
+One of the vim plugin is vim-autosave which autosaves all edits thus making `:w` unnecessary.
 `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Bypassing expansion on space
