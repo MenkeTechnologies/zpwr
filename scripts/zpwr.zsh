@@ -45,6 +45,8 @@ case $verb in
         ;;
     color2) cmd="color2" #turn on stderr filter
         ;;
+    config) cmd="conf" #edit all zpwr configs
+        ;;
     copycommand) cmd="getCopyCommand" #get the command to copy with system
         ;;
     detach) cmd="detachall" #detach from all tmux sessions
@@ -221,6 +223,8 @@ case $verb in
         ;;
     taillog) cmd="lo" #tail -F \$ZPWR_LOGFILE
         ;;
+    tests) cmd="tru" #run all zpwr tests
+        ;;
     timer) cmd="timer" #timer one or more commands
         ;;
     to) cmd="to" #toggle external ip
@@ -247,11 +251,17 @@ case $verb in
         ;;
     vimall) cmd="vimAll" #vim all zpwr files for :argdo
         ;;
+    vimconfig) cmd="conf" #edit all zpwr configs
+        ;;
     vimscripts) cmd="vimScripts" #vim all zpwr scripts for :argdo
         ;;
     vimrecent) cmd="eval $EDITOR \${(Q)\$(fzvim):s|~|$HOME|}" #choose most recent vim files
         ;;
     vimsearch) cmd="fzfVimKeybind" #search vim keybindings
+        ;;
+    vimtests) cmd="zpt" #edit all zpwr tests
+        ;;
+    vimtokens) cmd="tok" #vim the .tokens.sh file
         ;;
     vrc) cmd="vrc" #vimrc vim session
         ;;
