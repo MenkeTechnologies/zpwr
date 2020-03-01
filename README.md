@@ -400,7 +400,7 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 ## Tests
 You can run all the unit tests via `zunit --verbose $ZPWR/tests/*.zsh` while in `~/.zpwr` directory
 
-There is also an alias `tru` for this
+There is also `zpwr tests` or the alias `tru` to run the tests.
 ```sh
 exists zunit && {
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
