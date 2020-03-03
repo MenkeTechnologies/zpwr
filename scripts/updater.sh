@@ -211,6 +211,20 @@ if [[ $skip != true ]]; then
         fi
     }
 
+    prettyPrint "Updating Vundle Plugins"
+
+    if [[ $end != true ]]; then
+        if [[ $ZPWR_USE_NEOVIM == true ]]; then
+            if exists nvim; then
+                nvim -c VundleUpdate -c quitall
+            else
+                vim -c VundleUpdate -c quitall
+            fi
+        else
+            vim -c VundleUpdate -c quitall
+        fi
+    fi
+
     exists pio && {
         prettyPrint "Updating PlatformIO"
         pio update
@@ -276,19 +290,6 @@ exists brew && {
         brew cu -ay --cleanup
     fi
 }
-prettyPrint "Updating Vundle Plugins"
-
-if [[ $end != true ]]; then
-    if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        if exists nvim; then
-            nvim -c VundleUpdate -c quitall
-        else
-            vim -c VundleUpdate -c quitall
-        fi
-    else
-        vim -c VundleUpdate -c quitall
-    fi
-fi
 
 #decolorize prompt
 printf "Done\n\x1b[0m"
