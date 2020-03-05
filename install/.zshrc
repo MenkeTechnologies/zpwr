@@ -317,7 +317,7 @@ plugins=(revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     zsh-nginx zsh-more-completions history-search-multi-word \
     forgit fzf-zsh zsh-completions zsh-sed-sub \
     fast-syntax-highlighting zsh-autosuggestions \
-    history-substring-search ruby gem rake rails yarn ng \
+    history-substring-search ruby gem rake yarn ng \
     coffee node npm perl cpanm git github gradle ant mvn \
     scala lein spring django pip pyenv python go man nmap \
     postgres redis-cli colorize sudo rsync docker \
@@ -328,6 +328,10 @@ plugins=(revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
 # exists not defined until source shell aliases file
 if type -- subl >/dev/null 2>&1; then
     plugins+=(sublime)
+fi
+
+if type -- rails >/dev/null 2>&1; then
+    plugins+=(rails)
 fi
 
 if type -- kubectl >/dev/null 2>&1; then
