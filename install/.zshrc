@@ -204,6 +204,14 @@ if [[ ! -d $ZPWR_LOCAL ]]; then
     mkdir -p $ZPWR_LOCAL
 fi
 
+function exists(){
+    #alternative is command -v
+    type -- "$1" &>/dev/null || return 1 &&
+    type -- "$1" 2>/dev/null |
+    command grep -sqv "suffix alias" 2>/dev/null
+}
+
+
 if [[ $ZPWR_PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
@@ -325,22 +333,13 @@ plugins=(revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals zsh-git-acp)
 
-# exists not defined until source shell aliases file
-if type -- subl >/dev/null 2>&1; then
-    plugins+=(sublime)
-fi
+exists subl && plugins+=(sublime)
 
-if type -- rails >/dev/null 2>&1; then
-    plugins+=(rails)
-fi
+exists rails && plugins+=(rails)
 
-if type -- kubectl >/dev/null 2>&1; then
-    plugins+=(zsh-kubectl-aliases zsh-kubectl-completion)
-fi
+exists kubectl && plugins+=(zsh-kubectl-aliases zsh-kubectl-completion)
 
-if type -- bat >/dev/null 2>&1; then
-    export BAT_THEME="$ZPWR_BAT_THEME"
-fi
+exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
 if [[ $ZPWR_LEARN != false ]]; then
     plugins+=(zsh-learn)
@@ -2794,9 +2793,9 @@ function recompile(){
 	test -f ~/.zlogout && zrecompile -p ~/.zlogout
 	test -f ~/.zlogin && zrecompile -p ~/.zlogin
 	test -f ~/.zcompdump && zrecompile -p ~/.zcompdump
-	test -f /etc/profile && zrecompile -p /etc/profile
-	test -f /etc/zshrc && zrecompile -p /etc/zshrc
-	test -f /etc/profile.env && zrecompile -p /etc/profile.env
+	test -f /etc/profile && sudo zrecompile -p /etc/profile
+	test -f /etc/zshrc && sudo zrecompile -p /etc/zshrc
+	test -f /etc/profile.env && sudo zrecompile -p /etc/profile.env
 
 	for dir in $fpath; do
 		test -d $dir && zrecompile -p $dir.zwc $dir/*

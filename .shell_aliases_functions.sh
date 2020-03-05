@@ -29,13 +29,15 @@ isZsh(){
 }
 
 if isZsh; then
-    function exists(){
-        #alternative is command -v
-        type -- "$1" &>/dev/null || return 1 &&
-        type -- "$1" 2>/dev/null |
-        command grep -sqv "suffix alias" 2>/dev/null
-    }
+    if ! type -- exists>/dev/null 2>&1; then
+        function exists(){
+            #alternative is command -v
+            type -- "$1" &>/dev/null || return 1 &&
+            type -- "$1" 2>/dev/null |
+            command grep -sqv "suffix alias" 2>/dev/null
+        }
 
+    fi
 else
     function exists(){
         #alternative is command -v
