@@ -2678,9 +2678,13 @@ function _command_names(){
     for k v in ${(kv)aliases}; do
         aliasesAry+=($k:"${(q)v}")
     done
+    local -a galiasesAry
+    for k v in ${(kv)galiases}; do
+        galiasesAry+=($k:"${(q)v}")
+    done
 
     defs=( "$defs[@]"
-        'global-aliases:global alias:compadd -Qk galiases'
+        'global-aliases:global alias:(('$galiasesAry'))'
         'aliases:alias:(('$aliasesAry'))'
         "functions:shell function:compadd -k 'functions$ffilt'"
         'builtins:builtin command:compadd -Qk builtins'
