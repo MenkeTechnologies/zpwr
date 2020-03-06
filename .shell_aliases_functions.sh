@@ -281,6 +281,10 @@ alias ca='cat -n'
 alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
 
+if exists docker; then
+    alias dk=docker
+fi
+
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
