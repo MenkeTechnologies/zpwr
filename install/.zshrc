@@ -2674,9 +2674,14 @@ function _command_names(){
     else
     [[ "$1" = - ]] && shift
 
+    local -a aliasesAry
+    for k v in ${(kv)aliases}; do
+        aliasesAry+=($k:"${(q)v}")
+    done
+
     defs=( "$defs[@]"
         'global-aliases:global alias:compadd -Qk galiases'
-        'aliases:alias:compadd -Qk aliases'
+        'aliases:alias:(('$aliasesAry'))'
         "functions:shell function:compadd -k 'functions$ffilt'"
         'builtins:builtin command:compadd -Qk builtins'
         'suffix-aliases:suffix alias:_suffix_alias_files'
