@@ -86,6 +86,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - learn.service = systemd service that runs learning collection API
 - restart function that launches poll and learn by enabling and starting in systemd
 - central control of zpwr colorful output with `ZPWR_COLORS`
+- zsh completion with descriptions for parameters, aliases and global aliases
 
 
 ## ZPWR Dependencies
