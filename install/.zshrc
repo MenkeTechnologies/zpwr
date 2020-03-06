@@ -2701,6 +2701,52 @@ function _command_names(){
     _alternative -O args "$defs[@]"
 }
 
+function _parameters() {
+    # function_body
+    # local expl pattern fakes faked tmp pfilt
+
+    if compset -P '*:'; then
+        _history_modifiers p
+        return
+    fi
+
+    pattern=(-g \*)
+    zparseopts -D -K -E g:=pattern
+
+    fakes=()
+    faked=()
+    if zstyle -a ":completion:${curcontext}:" fake-parameters tmp; then
+    for i in "$tmp[@]"; do
+        if [[ "$i" = *:* ]]; then
+        faked=( "$faked[@]" "$i" )
+        else
+        fakes=( "$fakes[@]" "$i" )
+        fi
+    done
+    fi
+
+    zstyle -t ":completion:${curcontext}:parameters" prefix-needed && \
+    [[ $PREFIX != [_.]* ]] && \
+    pfilt='[^_.]'
+
+    declare -a ary
+    local maxLen=50
+    for i in "${(@M)${(@k)parameters[(R)${pattern[2]}~*local*]}:#${~pfilt}*}"; do
+        ary+=($i:"${${(P)i}:0:100}")
+    done
+
+    for i in "$fakes[@]"; do
+        ary+=($i:"${(P)i:0:100}")
+    done
+
+    for i in "${(@)${(@M)faked:#${~pattern[2]}}%%:*}"; do
+        ary+=($i:"${(P)i:0:100}")
+    done
+
+    _describe -t parameters parameter ary
+
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
@@ -2926,4 +2972,4 @@ test -f "$ZPWR_LOCAL/.tokens.sh" &&
     source "$ZPWR_LOCAL/.tokens.sh" ||
     touch "$ZPWR_LOCAL/.tokens.sh"
 #}}}***********************************************************
-#
+
