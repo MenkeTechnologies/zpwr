@@ -93,7 +93,7 @@ test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
 test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
 test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
 test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$ZPWR/scripts"
-test -z "$ZPWR_SCRIPTS_MAC" && export ZPWR_SCRIPTS="$ZPWR_SCRIPTS/macOnly"
+test -z "$ZPWR_SCRIPTS_MAC" && export ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
 export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
 export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 
