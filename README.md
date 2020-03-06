@@ -297,8 +297,9 @@ These are environment variables set in `~/.zshrc` which you can override in your
 # see README.md
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
-export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_TEST="$ZPWR/tests"
+export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_INSTALL="$ZPWR/install"
 export ZPWR_TMUX="$ZPWR/.tmux"
 export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
@@ -351,6 +352,7 @@ export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
+#maybe z4ze
 export ZPWR_REPO_NAME="zpwr"
 # the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
@@ -376,6 +378,7 @@ export ZPWR_ENV="$ZPWR_LOCAL/zpwrEnv"
 export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
 export ZPWR_SCRIPTS="$ZPWR/scripts"
+export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
