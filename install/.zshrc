@@ -154,6 +154,7 @@ export ZPWR_ENV="$ZPWR_LOCAL/zpwrEnv"
 export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
 export ZPWR_SCRIPTS="$ZPWR/scripts"
+export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
