@@ -63,6 +63,9 @@ function chooseNvimVim(){
         }
     fi
 }
+function loggNotGit() {
+    loggErr "$(pwd) is not a git dir"
+}
 
 function loggErr(){
     test -z "$1" && loggErr "need arg" >&2 && return 1
@@ -873,7 +876,7 @@ function allRemotes(){
 
 function largestGitFiles(){
     if ! isGitDir; then
-        loggErr "not a git dir"
+        loggNotGit
         return 1
     fi
 
@@ -895,7 +898,7 @@ function largestGitFiles(){
 
 function clearGitCommit(){
     if ! isGitDir; then
-        loggErr "not a git dir"
+        loggNotGit
         return 1
     fi
 
@@ -919,7 +922,7 @@ function clearGitCommit(){
 
 function clearGitCache(){
     if ! isGitDir; then
-        loggErr "not a git dir"
+        loggNotGit
         return 1
     fi
 
@@ -2637,12 +2640,9 @@ function goclean() {
         loggErr "need package name"
         return 1
     fi
-    local pkg
+    local pkg ost cnt
     pkg=$1;
     shift
-    local ost
-    local cnt
-
 
     # Set local variables
     if [[ "$(uname -m)" == "x86_64" ]];then
@@ -2650,9 +2650,8 @@ function goclean() {
     fi
 
     # Delete the source directory and compiled package directory(ies)
-    local src_dir
+    local src_dir bin_dir
     src_dir="$GOPATH/src/$pkg"
-    local bin_dir
     bin_dir="$GOPATH/pkg/$ost/$pkg"
 
     if [[ ! -d "$src_dir" ]]; then
@@ -2683,7 +2682,8 @@ function commits(){
             vim -c Commits!
         fi
     else
-        loggErr "not a git dir" && return 1
+        loggNotGit
+        return 1
     fi
 }
 
@@ -2722,7 +2722,7 @@ function timer() {
         loggErr "timer <commands...>"
         return 1
     fi
-    local count
+    local count total totstart totend avg runtime
     count=100
     if exists gdate;then
         cmd=gdate
@@ -2762,7 +2762,7 @@ function changeGitCommitterEmail(){
     fi
 
     if ! isGitDir; then
-        loggErr "not a git dir"
+        loggNotGit
         return 1
     fi
 
@@ -2786,7 +2786,7 @@ function changeGitAuthorEmail(){
     fi
 
     if ! isGitDir; then
-        loggErr "not a git dir"
+        loggNotGit
         return 1
     fi
 
@@ -2811,7 +2811,7 @@ function changeGitEmail(){
     fi
 
     if ! isGitDir; then
-        loggErr "not a git dir"
+        loggNotGit
         return 1
     fi
 
