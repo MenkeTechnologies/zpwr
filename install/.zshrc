@@ -1616,7 +1616,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     #main option for menu selection colors
     zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
     zstyle ':completion:*:executables' list-colors '=(#b)(*)=1;30=1;37;44'
-    zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=37;43'
+    zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=1;32;45'
     zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
     zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
     zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=34;42;4'
