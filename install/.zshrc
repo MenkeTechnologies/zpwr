@@ -227,7 +227,11 @@ source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
 
 if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
     if test -s "$ZPWR_PROMPT_FILE";then
-        source "$ZPWR_PROMPT_FILE"
+        if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then
+            source "$ZPWR_PROMPT_FILE"
+        else
+            ZSH_THEME=simonoff
+        fi
     else
         ZSH_THEME=simonoff
     fi
