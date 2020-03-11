@@ -58,6 +58,7 @@ brew cask install netbeans
 brew cask install ngrok
 brew cask install onyx
 brew cask install opera
+brew cask install pandora
 brew cask install phpstorm
 brew cask install postico
 brew cask install postman
@@ -96,4 +97,5 @@ brew cask install wine-stable
 brew cask install wireshark
 brew cask install xld
 brew cask install xquartz
+brew cask install zeplin
 brew cask install zotero

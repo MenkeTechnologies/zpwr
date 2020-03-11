@@ -140,6 +140,7 @@ brew install gst-plugins-ugly
 brew install gstreamer
 brew install gtk+3
 brew install gts
+brew install hadoop
 brew install harfbuzz
 brew install heroku
 brew install heroku-node
@@ -173,6 +174,7 @@ brew install jq
 brew install jvmtop
 brew install kafka
 brew install kotlin
+brew install krb5
 brew install lame
 brew install leiningen
 brew install leptonica
@@ -309,6 +311,7 @@ brew install open-mpi
 brew install openblas
 brew install opencore-amr
 brew install openexr
+brew install openjdk
 brew install openjpeg
 brew install openldap
 brew install openssl
@@ -360,6 +363,7 @@ brew install ranger
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis
+brew install revolver
 brew install ripgrep
 brew install rlwrap
 brew install rsync
@@ -429,6 +433,7 @@ brew install unibilium
 brew install unixodbc
 brew install unrar
 brew install urlview
+brew install utf8proc
 brew install vala
 brew install valgrind
 brew install vim
