@@ -972,8 +972,8 @@ bindkey -M vicmd '^r' redo
 bindkey -M viins '^z' undo
 bindkey -M vicmd '^z' undo
 
-bindkey -M viins '^O^V' edit-command-line
-bindkey -M vicmd '^O^V' edit-command-line
+bindkey -M viins '^F^V' edit-command-line
+bindkey -M vicmd '^F^V' edit-command-line
 
 bindkey -M viins '^O' fzf-tab-complete
 bindkey -M vicmd '^O' fzf-tab-complete
