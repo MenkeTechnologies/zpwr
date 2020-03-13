@@ -62,6 +62,7 @@ honza/vim-snippets
 mhinz/vim-startify
 tpope/vim-surround
 tpope/vim-unimpaired
+Valodim/vim-zsh-completion
 lervag/vimtex
 benmills/vimux
 gcmt/wildfire.vim

@@ -115,7 +115,8 @@ set complete+=]
 "show the leader/prefix/number key when pressed
 set showcmd
 
-set completeopt=noinsert,noselect,menuone
+set completeopt=longest,noinsert,noselect,menuone
+set omnifunc=zsh_completion#Complete
 
 if ! has('nvim')
     "visual mode automatically copies to system clipboard
