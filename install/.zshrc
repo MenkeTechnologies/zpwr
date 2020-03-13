@@ -325,7 +325,7 @@ forgit_stash_show=fgss
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
+plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
     zsh-z zsh-expand zsh-autopair \
     zsh-nginx zsh-more-completions history-search-multi-word \
     forgit fzf-zsh zsh-completions zsh-sed-sub \
@@ -972,8 +972,11 @@ bindkey -M vicmd '^r' redo
 bindkey -M viins '^z' undo
 bindkey -M vicmd '^z' undo
 
-bindkey -M viins '^O' edit-command-line
-bindkey -M vicmd '^O' edit-command-line
+bindkey -M viins '^O^V' edit-command-line
+bindkey -M vicmd '^O^V' edit-command-line
+
+bindkey -M viins '^O' fzf-tab-complete
+bindkey -M vicmd '^O' fzf-tab-complete
 
 bindkey -M viins '^F^F' fzf-file-widget
 bindkey -M vicmd '^F^F' fzf-file-widget
@@ -2987,4 +2990,5 @@ test -f "$ZPWR_LOCAL/.tokens.sh" &&
     source "$ZPWR_LOCAL/.tokens.sh" ||
     touch "$ZPWR_LOCAL/.tokens.sh"
 #}}}***********************************************************
+
 

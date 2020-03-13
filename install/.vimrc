@@ -155,6 +155,7 @@ Plugin 'honza/vim-snippets'
 " Sublime Like Minimap
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin '907th/vim-auto-save'
+Plugin 'Valodim/vim-zsh-completion'
 
 if has("nvim")
     Plugin 'vim-airline/vim-airline'
