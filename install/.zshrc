@@ -1794,7 +1794,7 @@ globalAliasesInit
 #{{{                    MARK:Regular Aliases
 #**************************************************************
 alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
-
+alias gac='git add . && git commit -m "'$ZPWR_TABSTOP'"'
 
 exists zf || alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
 exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' *"
