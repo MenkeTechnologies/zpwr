@@ -1835,6 +1835,10 @@ done < '$ZPWR_TABSTOP''
 alias wt='while [[ true'$ZPWR_TABSTOP' ]];do
     '$ZPWR_TABSTOP'
 done'
+alias fkv='for k v in ${(kv)'$ZPWR_TABSTOP'[@]};do
+    '$ZPWR_TABSTOP'
+done'
+
 alias fe='for i in '$ZPWR_TABSTOP';do
     '$ZPWR_TABSTOP'
 done'
@@ -2850,10 +2854,11 @@ fi
 #{{{                    MARK:Misc
 #**************************************************************
 
+autoload -Uz zrecompile
+
 function recompile(){
     prettyPrint "recompiling all configs to .zwc for speed"
     local dir
-	autoload -U zrecompile
 	test -f ~/.zshrc && zrecompile -p ~/.zshrc
 	test -f ~/.zlogout && zrecompile -p ~/.zlogout
 	test -f ~/.zlogin && zrecompile -p ~/.zlogin
