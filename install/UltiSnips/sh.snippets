@@ -48,6 +48,12 @@ else
 fi
 endsnippet
 
+snippet fkv "for key value loop zsh"
+for k v in ${(kv)$1[@]};do
+	$2
+done
+endsnippet
+
 snippet ff "for loop shell"
 for (( i = 0; i < $1; i++ )); do
 	$2
