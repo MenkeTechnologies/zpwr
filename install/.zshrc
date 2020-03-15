@@ -122,6 +122,11 @@ export ZPWR_GLOBAL_ALIAS_PREFIX=j
 # the string that marks a tabstop when expanding aliases
 # move to next tabstop with ^P
 export ZPWR_TABSTOP=__________
+export ZPWR_TABSTOP_1=${ZPWR_TABSTOP}1${ZPWR_TABSTOP}
+export ZPWR_TABSTOP_2=${ZPWR_TABSTOP}2${ZPWR_TABSTOP}
+export ZPWR_TABSTOP_3=${ZPWR_TABSTOP}3${ZPWR_TABSTOP}
+export ZPWR_TABSTOP_4=${ZPWR_TABSTOP}4${ZPWR_TABSTOP}
+export ZPWR_TABSTOP_5=${ZPWR_TABSTOP}5${ZPWR_TABSTOP}
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # for alternating pretty printer
@@ -178,6 +183,8 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 
 #{{{                    MARK:non ZPWR Exports
 #**************************************************************
+declare -A ZPWR_VARS
+
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
 unalias ag &> /dev/null
@@ -783,9 +790,9 @@ function startSend(){
 
 function keyClear(){
     if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
-    for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-        tmux send-keys -t $pane "C-u"
-    done
+        for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+            tmux send-keys -t $pane "C-u"
+        done
     fi
 }
 
@@ -1805,6 +1812,17 @@ exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' 
 
 exists zu8 || alias zu8='zpwr updateall'
 
+function tabNum() {
+    echo ${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}
+}
+
+function tabNumCmd() {
+    num=$1
+    shift
+    args="$@"
+    echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}"
+}
+
 alias i='if [[ '$ZPWR_TABSTOP' ]];then
     '$ZPWR_TABSTOP'
 fi'
@@ -1846,6 +1864,8 @@ done'
 alias fori="for (( i = 0; i < $ZPWR_TABSTOP; i++ )); do
     $ZPWR_TABSTOP
 done"
+
+alias lg="logg $(tabNumCmd 1 tr a-zA-Z)=$ZPWR_TABSTOP_1"
 
 alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) master$ZPWR_TABSTOP FETCH_HEAD | less"
 
