@@ -122,11 +122,6 @@ export ZPWR_GLOBAL_ALIAS_PREFIX=j
 # the string that marks a tabstop when expanding aliases
 # move to next tabstop with ^P
 export ZPWR_TABSTOP=__________
-export ZPWR_TABSTOP_1=${ZPWR_TABSTOP}1${ZPWR_TABSTOP}
-export ZPWR_TABSTOP_2=${ZPWR_TABSTOP}2${ZPWR_TABSTOP}
-export ZPWR_TABSTOP_3=${ZPWR_TABSTOP}3${ZPWR_TABSTOP}
-export ZPWR_TABSTOP_4=${ZPWR_TABSTOP}4${ZPWR_TABSTOP}
-export ZPWR_TABSTOP_5=${ZPWR_TABSTOP}5${ZPWR_TABSTOP}
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # for alternating pretty printer
@@ -917,6 +912,12 @@ function fzfCommits(){
     fi
 }
 
+function asVar(){
+    region_highlight=("P0 20 fg=blue,bg=red")
+    BUFFER="=\"\$($BUFFER)\""
+    CURSOR=0
+}
+
 function interceptSurround(){
     #surround
     exists autopair-insert && autopair-insert
@@ -947,6 +948,7 @@ zle -N fzfEnv
 zle -N fasdFZF
 zle -N interceptDelete
 zle -N interceptSurround
+zle -N asVar
 
 #vim mode for zle
 bindkey -v
@@ -996,6 +998,9 @@ bindkey -M vicmd '^F^H' lsoffzf
 
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
+
+bindkey -M viins '^F^R' asVar
+bindkey -M vicmd '^F^R' asVar
 
 bindkey -M viins '^V/' locateFzf
 bindkey -M vicmd '^V/' locateFzf
@@ -1813,14 +1818,14 @@ exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' 
 exists zu8 || alias zu8='zpwr updateall'
 
 function tabNum() {
-    echo ${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}
+    echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
 
 function tabNumCmd() {
     num=$1
     shift
     args="$@"
-    echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}"
+    echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
 
 alias i='if [[ '$ZPWR_TABSTOP' ]];then
@@ -1865,7 +1870,7 @@ alias fori="for (( i = 0; i < $ZPWR_TABSTOP; i++ )); do
     $ZPWR_TABSTOP
 done"
 
-alias lg="logg $(tabNumCmd 1 tr a-zA-Z)=$ZPWR_TABSTOP_1"
+alias lg="logg $(tabNumCmd 1 tr a-zA-Z)=$(tabNumCmd 1 tr a-zA-Z)"
 
 alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) master$ZPWR_TABSTOP FETCH_HEAD | less"
 
