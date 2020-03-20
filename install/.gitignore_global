@@ -57,3 +57,5 @@ project.xcworkspace
 #zsh
 *.zwc
 *.zwc.old
+#logback
+*.log
