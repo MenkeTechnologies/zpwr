@@ -29,6 +29,7 @@ python3 -c 'import pip' && {
         #get last package
         needSudo=true
 
+        installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
         if [[ "$needSudo" == true ]]; then
             prettyPrint "sudo needed: $needSudo for $package at $installDir"
             sudo -E python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
@@ -66,6 +67,7 @@ python2 -c 'import pip' && {
 
     for package in $outdated; do
         needSudo=true
+        installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
 
         if [[ "$needSudo" == true ]]; then
             prettyPrint "sudo needed: $needSudo for $package at $installDir"
