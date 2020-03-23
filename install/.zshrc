@@ -2047,10 +2047,13 @@ fi
 #stderr colorization filter
 #color2
 
-#change history file size
-export SAVEHIST=10000000
 #change history size in memory
 export HISTSIZE=10000000
+HISTSIZE=999999999
+#change history file size
+SAVEHIST=$HISTSIZE
+HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"
+
 
 #set right prompt string during continuation
 RPS2='+%N:%i:%^'
