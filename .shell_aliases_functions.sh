@@ -2314,10 +2314,19 @@ function cCommon(){
 
 function c(){
 
-    if [[ ! -p /dev/stdout ]];then
-        cCommon "$@" | less
+    if [[ -p /dev/stdin ]]; then
+        cat > "$ZPWR_TEMPFILE"
+        if [[ -p /dev/stdout ]];then
+            cCommon "$ZPWR_TEMPFILE"
+        else
+            cCommon "$ZPWR_TEMPFILE" | less
+        fi
     else
-        cCommon "$@"
+        if [[ -p /dev/stdout ]];then
+            cCommon "$@"
+        else
+            cCommon "$@" | less
+        fi
     fi
 }
 
