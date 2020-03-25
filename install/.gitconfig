@@ -23,6 +23,7 @@
 	spush = push --recurse-submodules=on-demand
 	supdate = submodule update --remote --merge
     m4 = mergetool -t merge4
+    m3 = mergetool -t merge3
 
 [color "diff-highlight"]
 	oldNormal = red bold
@@ -41,6 +42,9 @@
 
 [diff]
 	tool = vimdiff
+
+[mergetool "merge3"]
+  cmd = nvim -f -d -c \"3wincmd w | wincmd J\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 
 [mergetool "merge4"]
   cmd = nvim -f -d -c \"4wincmd w | wincmd J\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" \"$MERGED\"
