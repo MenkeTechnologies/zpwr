@@ -1,16 +1,16 @@
 [user]
     email = 
     name = 
-
 [core]
     editor = nvim
-    excludesfile = ~/.gitignore_global
+	excludesfile = ~/.gitignore_global
     autocrlf = input
-    pager = diff-so-fancy | less --tabs=4 -RFX
-    commentchar = |
+	pager = diff-so-fancy | less --tabs=4 -RFX
+	commentchar = |
+	abbrev = 8
 
 [color]
-    ui = true
+	ui = true
 
 [alias]
     last = log -1 HEAD
@@ -19,42 +19,46 @@
 	track = add -N
 	stage = add
 	visual = !gitk
-    sdiff = !git diff && git submodule foreach 'git diff'
+	sdiff = !git diff && git submodule foreach 'git diff'
 	spush = push --recurse-submodules=on-demand
 	supdate = submodule update --remote --merge
-
+    m4 = mergetool -t merge4
 
 [color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = red bold 52
-    newNormal = green bold
-    newHighlight = green bold 22
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
 
 [color "diff"]
     plain = blue
     meta = cyan bold
-    frag = magenta bold
-    commit = magenta
-    old = red bold
-    new = green bold
-    whitespace = red reverse
-[diff]
-    tool = vimdiff
+	frag = magenta bold ul
+	commit = magenta
+	old = red bold
+	new = green bold
+	whitespace = red reverse
 
-[merge]
-    tool = vimdiff
+[diff]
+	tool = vimdiff
+
+[mergetool "merge4"]
+  cmd = nvim -f -d -c \"4wincmd w | wincmd J\" \"$LOCAL\" \"$BASE\" \"$REMOTE\" \"$MERGED\"
 
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED
+
+[merge]
+	tool = vimdiff
 
 [pull]
 	rebase = true
 [help]
 	autocorrect = 1
+
 [status]
-    submodulesummary = 1
+	submodulesummary = 1
 [interactive]
 	singlekey = yes
 [rerere]
 	enabled = yes
-
