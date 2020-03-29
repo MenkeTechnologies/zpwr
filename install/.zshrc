@@ -2397,7 +2397,7 @@ function _fzf_complete_git() {
         git log --format='%h %s'
         git for-each-ref | perl -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
         printf "\x1b[0m"
-    ) 
+    )
 }
 function _fzf_complete_git_post() {
     cut -d ' ' -f1

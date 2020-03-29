@@ -1658,15 +1658,26 @@ let g:vimtex_compiler_progname = 'nvr'
 
 " Highlight all instances of word under cursor, when idle.
 " Type z/ to toggle highlighting on/off.
+function! GoToLastSearch(char)
+    call feedkeys(a:char."\<UP>\<CR>")
+endfunction
+
+nnoremap n :call GoToLastSearch('/')<CR>
+nnoremap N :call GoToLastSearch('?')<CR>
+
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 function! AutoHighlightToggle()
   let @/ = ''
   if exists('#auto_highlight')
+    nunmap n
+    nunmap N
     autocmd! auto_highlight
     augroup! auto_highlight
     echom 'Highlight current word: off'
     return 0
   else
+    nnoremap n :call GoToLastSearch('/')<CR>
+    nnoremap N :call GoToLastSearch('?')<CR>
     augroup auto_highlight
       autocmd!
       autocmd CursorHold,CursorHoldI * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
