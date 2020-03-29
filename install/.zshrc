@@ -638,7 +638,7 @@ function clearListFZF(){
         print -l ${(k)builtins}
         print -l ${(k)reswords}
         ls -d *
-    } | \
+    } |
     eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS"
 }
 
@@ -647,12 +647,12 @@ function fzvim(){
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         file="$ZPWR_NVIMINFO"
         test -e "$file" || touch "$file"
-        perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file" | \
+        perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file" |
     eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
     else
         file="$HOME/.viminfo"
-    perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' "$file" | \
+    perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' "$file" |
     eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
     fi
@@ -2776,7 +2776,7 @@ function _parameters() {
     done
     fi
 
-    zstyle -t ":completion:${curcontext}:parameters" prefix-needed && \
+    zstyle -t ":completion:${curcontext}:parameters" prefix-needed &&
     [[ $PREFIX != [_.]* ]] && \
     pfilt='[^_.]'
 
@@ -3024,5 +3024,4 @@ test -f "$ZPWR_LOCAL/.tokens.sh" &&
     source "$ZPWR_LOCAL/.tokens.sh" ||
     touch "$ZPWR_LOCAL/.tokens.sh"
 #}}}***********************************************************
-
 

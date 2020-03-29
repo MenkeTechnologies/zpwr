@@ -1657,7 +1657,6 @@ let g:loaded_python_provider = 0
 let g:vimtex_compiler_progname = 'nvr'
 
 " Highlight all instances of word under cursor, when idle.
-" Useful when studying strange source code.
 " Type z/ to toggle highlighting on/off.
 nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
 function! AutoHighlightToggle()
@@ -1678,11 +1677,13 @@ function! AutoHighlightToggle()
   endif
 endfunction
 
+"highlight on hover activated automatically
 augroup auto_highlight
     autocmd!
     autocmd CursorHold,CursorHoldI * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
 augroup end
 
+"only for first bufenter, required to activate the highlight on hover
 autocmd BufEnter * if !exists('g:hl_activated') | let g:hl_activated = 1 | call feedkeys(":silent! set hls\<CR>") | endif
 
 "}}}***********************************************************
