@@ -133,7 +133,7 @@ set viminfo='1000,<50,s10,h
 set colorcolumn=80
 
 "gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
-set updatetime=100
+set updatetime=150
 ""}}}***********************************************************
 
 "{{{                    MARK:Vundle
