@@ -75,7 +75,7 @@ set incsearch
 " mouse scroling and clicking
 set mouse=a
 ">> and << indent set to four spaces
-set shiftwidth=4 
+set shiftwidth=4
 set expandtab
 "wrap lines
 set linebreak
@@ -158,7 +158,7 @@ Plugin 'severin-lemaignan/vim-minimap'
 Plugin '907th/vim-auto-save'
 Plugin 'Valodim/vim-zsh-completion'
 
-if has("nvim")
+if has('nvim')
     Plugin 'vim-airline/vim-airline'
     Plugin 'vim-airline/vim-airline-themes'
 endif
@@ -168,11 +168,12 @@ let g:auto_save = 1
 " do not display the auto-save notification
 let g:auto_save_silent = 1
 " when to autosave
-let g:auto_save_events = ["InsertLeave", "TextChanged", "TextChangedI"]
+let g:auto_save_events = ['InsertLeave', 'TextChanged', 'TextChangedI']
 
 let g:indentLine_setColors = 1
 
-let g:rainbow_active = 1 "0 if you want to enable it later via :RainbowToggle
+"0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 1
 
 let g:rainbow_conf = {
             \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -262,7 +263,7 @@ let g:NERDTreeDisablePatternMatchHighlight = 1
 "too slow with icons
 let g:webdevicons_enable_nerdtree=1
 
-"matches JetBrains IDE mappings
+"matches JetBrains IDE mappings on macOS
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_word_key      = '<C-g>'
 let g:multi_cursor_next_key  = '<C-g>'
@@ -315,7 +316,7 @@ function! TransposeWords()
     exec 'silent! :s/\(\%#\w\+\)\(\W\+\)\(\w\+\)/\3\2\1/'
     call setpos('.', l:pos)
     let l:_ = search('\(\%#\w\+\W\+\)\@<=\w\+')
-    normal el
+    normal! el
 endfunction
 
 "Transpose Chars Like Emacs
@@ -380,7 +381,6 @@ nnoremap <silent> <leader>v :vsplit<CR>
 nnoremap <silent> <leader>s :split<CR>
 nnoremap <silent> <leader>t :tabnew<CR>
 
-
 onoremap i# :<c-u>execute "normal! ?^#\rjmy/#\rkmz:nohlsearch\r`yv`z"<cr>
 onoremap ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
 onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
@@ -403,30 +403,30 @@ fun GoToNextMarker(searchTerm, backwardsSearch)
 
     while loopCounter < mycount
         if a:backwardsSearch == 0
-            silent! exe "/".a:searchTerm
+            silent! exe '/'.a:searchTerm
         else
-            silent! exe "?".a:searchTerm
-            silent! exe "?".a:searchTerm
+            silent! exe '?'.a:searchTerm
+            silent! exe '?'.a:searchTerm
         endif
         let loopCounter += 1
     endw
-    exe "normal jj^zz"
+    exe 'normal jj^zz'
     let &wrapscan = oldwrap
     unlet oldwrap
 endf
 
 "indent, get rid of pairs of new lines and move cursor to middle of screen
 function! IndentSqueeze()
-    silent! exe "normal! mbgg=G"
-    silent! exe "1,$!cat -s"
-    silent! exe "norl! `bzz"
+    silent! exe 'normal! mbgg=G'
+    silent! exe '1,$!cat -s'
+    silent! exe 'norl! `bzz'
     redraw!
 endfunction
 
 "indent and move cursor to middle of screen
 function! Indent()
-    exe ":normal mbgg=G"
-    exe ":normal `bzz"
+    exe ':normal mbgg=G'
+    exe ':normal `bzz'
 endfunction
 "**************************************************************
 "}}}
@@ -445,23 +445,23 @@ nnoremap <silent> <C-Up> :<C-U>call GoToNextMarker("{{{",1)<CR>
 "{{{                    MARK:Quoting Fxns
 "**************************************************************
 function! InsertEOLVar(toInsert, front, back)
-    exe "normal! lmb"
-    exe "normal! F".a:front
-    exe "normal! i".a:toInsert
+    exe 'normal! lmb'
+    exe 'normal! F'.a:front
+    exe 'normal! i'.a:toInsert
     "move to last char on line
-    exe "normal! g_"
-    exe "normal! a".a:toInsert
-    exe "silent! normal! `b"
+    exe 'normal! g_'
+    exe 'normal! a'.a:toInsert
+    exe 'silent! normal! `b'
 endfunction
 
 function! InsertEquals(toInsert, front, back)
-    exe "normal! lmb"
-    exe "normal! T".a:front
-    exe "normal! i".a:toInsert
+    exe 'normal! lmb'
+    exe 'normal! T'.a:front
+    exe 'normal! i'.a:toInsert
     "move to last char on line
-    exe "normal! g_"
-    exe "normal! a".a:toInsert
-    exe "silent! normal! `b"
+    exe 'normal! g_'
+    exe 'normal! a'.a:toInsert
+    exe 'silent! normal! `b'
 endfunction
 
 function! InsertVar(toInsert, front, back)
@@ -909,7 +909,7 @@ set pastetoggle=<F9>
 function! TmuxRun(...)
     let str = join(a:000, ' ')
     echom str
-    if has("gui_running")
+    if has('gui_running')
         silent! exec "!tmux send-keys -t vimmers:0. C-c '".str."' C-m"
     else
         silent! exec "!tmux send-keys -t right C-c '".str."' C-m"
@@ -1058,7 +1058,7 @@ endfunction
 function! ExtractVariableVisual() range
     let l:wordUnderCursor = s:getVisualSelection()
     let l:name = inputdialog("Extract variable to replace visual __".wordUnderCursor."__:")
-    
+
     if l:name== ''
        return 0
     endif
@@ -1097,9 +1097,9 @@ endfunction
 function! ExtractVariable()
     let l:wordUnderCursor = expand("<cword>")
     let l:name = inputdialog("Extract variable to replace __".wordUnderCursor."__:")
-    
+
     if l:name== ''
-       return 0 
+       return 0
     endif
 
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
