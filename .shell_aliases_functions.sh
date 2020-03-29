@@ -867,6 +867,11 @@ function suc(){
 }
 
 function allRemotes(){
+    if ! isGitDir; then
+        loggNotGit
+        return 1
+    fi
+
     while read; do
         printf "\x1b[1;34m$REPLY"
         printf "\x1b[0m\x0a"
