@@ -1084,8 +1084,13 @@ function! ExtractVariableVisual() range
         exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
         exe "normal! `z"
 
-    elseif index(supportedTypes, exeFileType) < 0
-        echom "Unknown Filetype '".exeFileType. "'."
+    elseif index(supportedTypes, l:exeFileType) < 0
+        echom " => Unknown Filetype '".l:exeFileType. "'."
+        if l:exeFileType == ''
+            echom " => Unknown Filetype for file '".l:filename. "'."
+        else
+            echom " => Unknown Filetype '".l:exeFileType. "'."
+        endif
     endif
 endfunction
 
@@ -1129,8 +1134,12 @@ function! ExtractVariable()
         exe "normal! ".(l:line+1)."GO".l:name."=".l:wordUnderCursor
         exe "normal! `z"
 
-    elseif index(supportedTypes, exeFileType) < 0
-        echom "Unknown Filetype '".exeFileType. "'."
+    elseif index(supportedTypes, l:exeFileType) < 0
+        if l:exeFileType == ''
+            echom " => Unknown Filetype for file '".l:filename. "'."
+        else
+            echom " => Unknown Filetype '".l:exeFileType. "'."
+        endif
     endif
 
 
@@ -1177,8 +1186,12 @@ function! ExtractMethod() range
         '>
         exe "normal! o\<Esc>vi{>\<Esc>"
         exe "normal! o".l:name. ""
-    elseif index(supportedTypes, exeFileType) < 0
-        echom "Unknown Filetype '".exeFileType. "'."
+    elseif index(supportedTypes, l:exeFileType) < 0
+        if l:exeFileType == ''
+            echom " => Unknown Filetype for file '".l:filename. "'."
+        else
+            echom " => Unknown Filetype '".l:exeFileType. "'."
+        endif
     endif
 endfunction
 
