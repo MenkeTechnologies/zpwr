@@ -1678,5 +1678,6 @@ function! AutoHighlightToggle()
   endif
 endfunction
 
-autocmd bufenter * call AutoHighlightToggle()
+autocmd BufEnter * call AutoHighlightToggle() | call feedkeys(":set hls\<CR>")
+
 "}}}***********************************************************
