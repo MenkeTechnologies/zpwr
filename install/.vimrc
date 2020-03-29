@@ -1678,6 +1678,11 @@ function! AutoHighlightToggle()
   endif
 endfunction
 
-autocmd BufEnter * call AutoHighlightToggle() | call feedkeys(":set hls\<CR>")
+augroup auto_highlight
+    autocmd!
+    autocmd CursorHold,CursorHoldI * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+augroup end
+
+autocmd BufEnter * if !exists('g:hl_activated') | let g:hl_activated = 1 | call feedkeys(":silent! set hls\<CR>") | endif
 
 "}}}***********************************************************
