@@ -55,6 +55,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - vim extract method for shell, perl and python scripts (`gv` to select extracted)
 - vim extract variable for shell, perl and python scripts (`gv` to select extracted)
 - vim extract variable from visual selection for shell, perl and python scripts (`gv` to select extracted)
+- vim autohighlight word under cursor after delay like most code editors
 - software updater script, `source autoUpdater.sh`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - zsh keybindings to git add, commit and push with commit message from current command line [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
