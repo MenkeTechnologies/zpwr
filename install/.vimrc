@@ -1643,7 +1643,7 @@ if has("nvim")
 endif
 
 "update the file with set autoread
-autocmd CursorHold,CursorHoldI * checktime
+autocmd CursorHold,CursorHoldI * if !bufexists("[Command Line]") | checktime | endif
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
