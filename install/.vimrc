@@ -1643,17 +1643,40 @@ if has("nvim")
 endif
 
 "update the file with set autoread
-au CursorHold,CursorHoldI * checktime
+autocmd CursorHold,CursorHoldI * checktime
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
 endif
 
 " enable vimtex completion options in YCM
-silent! au VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
+silent! autocmd VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 
 "disable python2 for neovim
 let g:loaded_python_provider = 0
 let g:vimtex_compiler_progname = 'nvr'
 
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+  let @/ = ''
+  if exists('#auto_highlight')
+    autocmd! auto_highlight
+    augroup! auto_highlight
+    echom 'Highlight current word: off'
+    return 0
+  else
+    augroup auto_highlight
+      autocmd!
+      autocmd CursorHold,CursorHoldI * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    set hls
+    echo 'Highlight current word: ON'
+    return 1
+  endif
+endfunction
+
+autocmd bufenter * call AutoHighlightToggle()
 "}}}***********************************************************
