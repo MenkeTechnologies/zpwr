@@ -157,6 +157,9 @@ Plugin 'honza/vim-snippets'
 Plugin 'severin-lemaignan/vim-minimap'
 Plugin '907th/vim-auto-save'
 Plugin 'Valodim/vim-zsh-completion'
+Plugin 'prabirshrestha/async.vim'
+Plugin 'prabirshrestha/asyncomplete.vim'
+Plugin 'wellle/tmux-complete.vim'
 
 if has('nvim')
     Plugin 'vim-airline/vim-airline'
@@ -1371,7 +1374,16 @@ autocmd BufNewFile *.zsh silent! exe '!templater.sh %:p' | e
 autocmd BufNewFile *.rb silent! exe '!templater.sh %:p' | e
 autocmd BufNewFile *.py silent! exe '!templater.sh %:p' | e
 autocmd BufNewFile *.pl silent! exe '!templater.sh %:p' | e
-autocmd BufNewFile * exe 'normal! G' | startinsert!
+
+function! SetHLSIns()
+"only for first bufenter, required to activate the highlight on hover
+    if !exists('g:hl_activated')
+        let g:hl_activated = 1
+        call feedkeys("\<ESC>:set hls\<CR>Gi")
+    endif
+endfunction
+
+autocmd BufNewFile * call SetHLSIns()
 
 "}}}***********************************************************
 
@@ -1707,7 +1719,28 @@ augroup auto_highlight
     autocmd CursorHold,CursorHoldI * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
 augroup end
 
+function! SetHLS()
 "only for first bufenter, required to activate the highlight on hover
-autocmd BufEnter * if !exists('g:hl_activated') | let g:hl_activated = 1 | call feedkeys(":silent! set hls\<CR>") | endif
+    if !exists('g:hl_activated')
+        let g:hl_activated = 1
+        call feedkeys(":set hls\<CR>")
+    endif
+endfunction
+
+autocmd BufEnter * call SetHLS()
+
+let g:tmuxcomplete#asyncomplete_source_options = {
+            \ 'name':      'tmuxcomplete',
+            \ 'whitelist': ['*'],
+            \ 'config': {
+            \     'splitmode':      'words',
+            \     'filter_prefix':   1,
+            \     'show_incomplete': 1,
+            \     'sort_candidates': 0,
+            \     'scrollback':      0,
+            \     'truncate':        0
+            \     }
+            \ }
+let g:tmuxcomplete#trigger = 'omnifunc'
 
 "}}}***********************************************************
