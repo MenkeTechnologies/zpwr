@@ -4,6 +4,8 @@ VundleVim/Vundle.vim
 ycm-core/YouCompleteMe
 mileszs/ack.vim
 w0rp/ale
+prabirshrestha/async.vim
+prabirshrestha/asyncomplete.vim
 vim-scripts/camelcasemotion
 sjl/clam.vim
 ctrlpvim/ctrlp.vim
@@ -24,6 +26,7 @@ godlygeek/tabular
 vim-scripts/tagexplorer.vim
 wellle/targets.vim
 tomtom/tlib_vim
+wellle/tmux-complete.vim
 tomtom/ttags_vim
 SirVer/ultisnips
 mbbill/undotree
