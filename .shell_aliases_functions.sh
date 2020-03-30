@@ -283,6 +283,7 @@ alias t="cd /"
 alias ca='cat -n'
 alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
+alias die='sudo kill -9 --'
 
 if exists docker; then
     alias dk=docker
