@@ -354,11 +354,14 @@ inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
 nnoremap <silent> <C-F> :q!<CR>
 vnoremap <silent> <C-F> :<C-C>:q!<CR>
 
-autocmd VimEnter * inoremap <silent> <C-F> <C-[>:q!<CR>
-autocmd VimEnter * set background=dark
-" dont hide json quotes
-autocmd VimEnter * set conceallevel=0
-inoremap <silent> <C-Z> <C-[>:suspend<CR>
+augroup background_group
+    autocmd!
+    autocmd VimEnter * inoremap <silent> <C-F> <C-[>:q!<CR>
+    autocmd VimEnter * set background=dark
+    " dont hide json quotes
+    autocmd VimEnter * set conceallevel=0
+    inoremap <silent> <C-Z> <C-[>:suspend<CR>
+augroup end
 
 vnoremap <RightMouse> "*y`>
 inoremap <Home> <C-[>ggi
@@ -468,138 +471,139 @@ function! InsertEquals(toInsert, front, back)
 endfunction
 
 function! InsertVar(toInsert, front, back)
-    exe "normal! lmb"
-    exe "normal! F".a:front
-    exe "normal! i".a:toInsert
-    exe "normal! f ".a:back
-    exe "normal! i".a:toInsert
-    exe "normal! `b"
+    exe 'normal! lmb'
+    exe 'normal! F'.a:front
+    exe 'normal! i'.a:toInsert
+    exe 'normal! f '.a:back
+    exe 'normal! i'.a:toInsert
+    exe 'normal! `b'
 endfunction
+
 function! InsertVarPunct(toInsert, front, back)
-    exe "normal! lmb"
-    exe "normal! F".a:front
-    exe "normal! i".a:toInsert
-    exe "normal! f".a:back
-    exe "normal! i".a:toInsert
-    exe "normal! `b"
+    exe 'normal! lmb'
+    exe 'normal! F'.a:front
+    exe 'normal! i'.a:toInsert
+    exe 'normal! f'.a:back
+    exe 'normal! i'.a:toInsert
+    exe 'normal! `b'
 endfunction
 
 function! InsertBackTick(toInsert, front, back)
-    exe "normal! lmb"
-    exe "normal! f".a:back
-    exe "normal! a".a:toInsert
-    exe "normal! F".a:front
-    exe "normal! F".a:front
-    exe "normal! i".a:toInsert
-    exe "normal! `b"
+    exe 'normal! lmb'
+    exe 'normal! f'.a:back
+    exe 'normal! a'.a:toInsert
+    exe 'normal! F'.a:front
+    exe 'normal! F'.a:front
+    exe 'normal! i'.a:toInsert
+    exe 'normal! `b'
 endfunction
 
 function! InsertMatchingPunct(toInsert, front)
-    exe "normal! lmb"
-    exe "normal! F".a:front
-    exe "normal! i".a:toInsert
-    exe "normal! ll%"
-    exe "normal! a".a:toInsert
-    exe "normal! `b"
+    exe 'normal! lmb'
+    exe 'normal! F'.a:front
+    exe 'normal! i'.a:toInsert
+    exe 'normal! ll%'
+    exe 'normal! a'.a:toInsert
+    exe 'normal! `b'
 endfunction
 
 function! Insert(toInsert, front, back)
-    exe "normal! lmb"
-    exe "normal! f".a:back
-    exe "normal! a".a:toInsert
-    exe "normal! F".a:front
-    exe "normal! i".a:toInsert
-    exe "normal! `b"
+    exe 'normal! lmb'
+    exe 'normal! f'.a:back
+    exe 'normal! a'.a:toInsert
+    exe 'normal! F'.a:front
+    exe 'normal! i'.a:toInsert
+    exe 'normal! `b'
 endfunction
 
 function! ReplaceBracket(open,close, openR, closeR)
-    exe "normal! mb"
-    exe "normal! F".a:open
-    exe "normal! hxx"
-    exe "normal! i".a:openR.a:openR
-    exe "normal! f".a:close
-    exe "normal! xx"
-    exe "normal! i".a:closeR.a:closeR
-    exe "normal! `b"
+    exe 'normal! mb'
+    exe 'normal! F'.a:open
+    exe 'normal! hxx'
+    exe 'normal! i'.a:openR.a:openR
+    exe 'normal! f'.a:close
+    exe 'normal! xx'
+    exe 'normal! i'.a:closeR.a:closeR
+    exe 'normal! `b'
 endfunction
 
 function! ReplaceBracketToDouble(open,close, openR, closeR)
-    exe "normal! mb"
-    exe "normal! F".a:open
-    exe "normal! x"
-    exe "normal! i".a:openR.a:openR
-    exe "normal! f".a:close
-    exe "normal! x"
-    exe "normal! i".a:closeR.a:closeR
-    exe "normal! `bl"
+    exe 'normal! mb'
+    exe 'normal! F'.a:open
+    exe 'normal! x'
+    exe 'normal! i'.a:openR.a:openR
+    exe 'normal! f'.a:close
+    exe 'normal! x'
+    exe 'normal! i'.a:closeR.a:closeR
+    exe 'normal! `bl'
 endfunction
 
 function! ReplaceBracketToSingle(open,close, openR, closeR)
-    exe "normal! mb"
-    exe "normal! F".a:open
-    exe "normal! hxx"
-    exe "normal! i".a:openR
-    exe "normal! f".a:close
-    exe "normal! xx"
-    exe "normal! i".a:closeR
-    exe "normal! `bh"
+    exe 'normal! mb'
+    exe 'normal! F'.a:open
+    exe 'normal! hxx'
+    exe 'normal! i'.a:openR
+    exe 'normal! f'.a:close
+    exe 'normal! xx'
+    exe 'normal! i'.a:closeR
+    exe 'normal! `bh'
 endfunction
 
 
 function! InsertQuoteVisualMode(type)
     let sym=1
 
-    if a:type == "single"
+    if a:type == 'single'
         let quote="'"
         "if matches echo .* L=echo R=last non space
-    elseif a:type == "double"
+    elseif a:type == 'double'
         let quote='"'
-    elseif a:type == "back"
-        let quote="`"
-    elseif a:type == "bracket"
-        let quoteL="["
-        let quoteR="]"
+    elseif a:type == 'back'
+        let quote='`'
+    elseif a:type == 'bracket'
+        let quoteL='['
+        let quoteR=']'
         let sym=0
-    elseif a:type == "curlybracket"
-        let quoteL="{"
-        let quoteR="}"
+    elseif a:type == 'curlybracket'
+        let quoteL='{'
+        let quoteR='}'
         let sym=0
-    elseif a:type == "paren"
-        let quoteL="("
-        let quoteR=")"
+    elseif a:type == 'paren'
+        let quoteL='('
+        let quoteR=')'
         let sym=0
     endif
 
     if sym == 1
-        exe "normal! `<"
+        exe 'normal! `<'
         let lineNumR=line('.')
-        exe "normal! i".quote
-        exe "normal! `>"
+        exe 'normal! i'.quote
+        exe 'normal! `>'
         let lineNumL=line('.')
 
         if lineNumL == lineNumR
-            exe "normal! la".quote
-            exe "normal! gv"
-            exe "normal! ll"
+            exe 'normal! la'.quote
+            exe 'normal! gv'
+            exe 'normal! ll'
         else
-            exe "normal! a".quote
-            exe "normal! gv"
-            exe "normal! l"
+            exe 'normal! a'.quote
+            exe 'normal! gv'
+            exe 'normal! l'
         endif
     else
-        exe "normal! `<"
+        exe 'normal! `<'
         let lineNumR=line('.')
-        exe "normal! i".quoteL
-        exe "normal! `>"
+        exe 'normal! i'.quoteL
+        exe 'normal! `>'
         let lineNumL=line('.')
         if lineNumL == lineNumR
-            exe "normal! la".quoteR
-            exe "normal! gv"
-            exe "normal! ll"
+            exe 'normal! la'.quoteR
+            exe 'normal! gv'
+            exe 'normal! ll'
         else
-            exe "normal! a".quoteR
-            exe "normal! gv"
-            exe "normal! l"
+            exe 'normal! a'.quoteR
+            exe 'normal! gv'
+            exe 'normal! l'
         endif
     endif
 endfunction
@@ -615,16 +619,16 @@ function! Quoter(type)
 
     echohl ErrorMsg
 
-    if a:type == "single"
+    if a:type == 'single'
         let quote="'"
         "if matches echo .* L=echo R=last non space
-    elseif a:type == "double"
+    elseif a:type == 'double'
         let quote='"'
-    elseif a:type == "back"
-        let quote="`"
+    elseif a:type == 'back'
+        let quote='`'
     endif
 
-    if a:type == "bracket"
+    if a:type == 'bracket'
         let lineToEnd=strpart(line, colIndex-1, col('$'))
         let matchingIndexParen=stridx(lineToEnd, '))')+1
         let matchingIndexDblB=stridx(lineToEnd, ']]')+1
@@ -652,14 +656,14 @@ function! Quoter(type)
         "echo "line to punct: ".lineToPunct
 
         if (lineToPunct=~ '\v.*\]\].*')
-            call ReplaceBracket("[","]", "(",")")
-            echo "Replace [[]] with (())"
+            call ReplaceBracket('[',']', '(',')')
+            echo 'Replace [[]] with (())'
         elseif (lineToPunct=~ '\v.*\)\).*')
-            call ReplaceBracketToSingle("(",")","[","]")
-            echo "Replace (()) with []"
+            call ReplaceBracketToSingle('(',')','[',']')
+            echo 'Replace (()) with []'
         else
-            call ReplaceBracketToDouble("[","]","[","]")
-            echo "Replace [] with [[]]"
+            call ReplaceBracketToDouble('[',']','[',']')
+            echo 'Replace [] with [[]]'
         endif
         let g:COUNTER=g:COUNTER +1
         return 0
@@ -669,30 +673,30 @@ function! Quoter(type)
 
     if (line =~ '\v^.*\$\(.*\).*$')
         call InsertMatchingPunct(quote, '$')
-        echo "$(command substitution)"
+        echo '$(command substitution)'
     elseif (line =~ '\v^.*\$\{.*\}.*$')
         call InsertMatchingPunct(quote, '$')
-        echo "${parameter substitution}"
+        echo '${parameter substitution}'
     elseif (line =~'\v\s*\S+\=\S+\s*$')
         call InsertEquals(quote, '=', '')
-        echo "var=value"
+        echo 'var=value'
     elseif (line =~ '\v.*`.*`.*')
         call InsertBackTick(quote, '`', '`')
-        echo "`command substitution`"
+        echo '`command substitution`'
     elseif (line =~ '\v.*\$(\S|\$|\!|\?|\/|\.|\"|`|\'')+\).*')
         call InsertVarPunct(quote, '$', ')')
-        echo "$var)"
+        echo '$var)'
     elseif (line =~ '\v.*\$(\S|\$|\!|\?|\/|\.|\"|`|\'')+\].*')
         call InsertVarPunct(quote, '$', ']')
-        echo "$var]"
+        echo '$var]'
     elseif (line =~ '\v.*\$(\S|\$|\!|\?|\/|\.|\"|`|\'')+\s.*')
         call InsertVar(quote, '$', '/\s')
-        echo "$var "
+        echo '$var '
     elseif (line =~ '\v.*\$(\S|\$|\!|\?|\/|\.|\"|\`|\'')+$')
         call InsertEOLVar(quote, '$', '')
-        echo "$varEOL"
+        echo '$varEOL'
     else
-        echo "Unknown Quoting Option:".line
+        echo 'Unknown Quoting Option:'.line
     endif
 
     echohl None
@@ -740,10 +744,13 @@ vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
 "**************************************************************
 "quickfix window
 "conflicts with nerd commenter
-autocmd VimEnter * nnoremap <silent> <leader>cn :cnext<CR>
-autocmd VimEnter * nnoremap <silent> <leader>cp :cprev<CR>
-autocmd VimEnter * nnoremap <silent> <leader>cc :cclose<CR>
-autocmd VimEnter * nnoremap <silent> <leader>co :copen<CR>
+augroup cwindow_group
+    autocmd!
+    autocmd VimEnter * nnoremap <silent> <leader>cn :cnext<CR>
+    autocmd VimEnter * nnoremap <silent> <leader>cp :cprev<CR>
+    autocmd VimEnter * nnoremap <silent> <leader>cc :cclose<CR>
+    autocmd VimEnter * nnoremap <silent> <leader>co :copen<CR>
+augroup end
 
 "location list window
 nnoremap <silent> <leader>ln :lnext<CR>
@@ -852,7 +859,7 @@ function! CompleteStatement()
     let exeFileType=expand('%:e')
     let length=len(Strip(getline('.')))
     let lastchar = Strip(getline('.'))[length-1]
-    exe "normal! $"
+    exe 'normal! $'
     if index(SemiColon, exeFileType) >= 0
         if lastchar == '{' || lastchar == ';' || lastchar == '(' || lastchar == '['
             call feedkeys("\<CR>")
@@ -880,7 +887,7 @@ function! CompleteStatementNormal()
 
     if index(SemiColon, exeFileType) >= 0
         if lastchar == '{' || lastchar == ';' || lastchar == '(' || lastchar == '['
-            call feedkeys("o")
+            call feedkeys('o')
         else
             call feedkeys("A;\<CR>")
         endif
@@ -888,26 +895,27 @@ function! CompleteStatementNormal()
         if lastchar != ';'
             call feedkeys("A;;\<CR>")
         else
-            call feedkeys("o")
+            call feedkeys('o')
         endif
     else
-        call feedkeys("o")
+        call feedkeys('o')
     endif
 endfunction
 
 inoremap <C-\> <ESC>+
 nnoremap <C-\> +
 
-autocmd VimEnter * inoremap <silent> <C-Space> <C-o>:call CompleteStatement()<CR>
-
-autocmd VimEnter * nnoremap <silent> <NUL> :call CompleteStatementNormal()<CR>
+augroup complete_group
+    autocmd!
+    autocmd VimEnter * inoremap <silent> <C-Space> <C-o>:call CompleteStatement()<CR>
+    autocmd VimEnter * nnoremap <silent> <NUL> :call CompleteStatementNormal()<CR>
+augroup end
 
 "}}}***********************************************************
 
 "{{{                    MARK:Remaps
 "**************************************************************
 set pastetoggle=<F9>
-
 
 function! TmuxRun(...)
     let str = join(a:000, ' ')
@@ -927,14 +935,14 @@ command! -bang -nargs=* TRun call TmuxRun(<q-args>)
 function! TmuxRepeat(type)
     let supportedTypes=['sh','zsh', 'cr','py','rb','pl', 'clj', 'tcl', 'vim', 'lisp', 'hs', 'ml', 'coffee', 'swift', 'lua', 'java', 'f90']
     let exeFileType=expand('%:e')
-    let $VIMHOME = $HOME."/.vim"
+    let $VIMHOME = $HOME.'/.vim'
 
     "non empty when tmux server is running
     let tmux=$TMUX
     let a_save = ""
 
-    if !empty(tmux) || has("gui_running")
-        if a:type == "visual" || a:type == "repl"
+    if !empty(tmux) || has('gui_running')
+        if a:type == 'visual' || a:type == 'repl'
             silent !mkdir $VIMHOME/.temp > /dev/null 2>&1
             let fileName=$ZPWR_HIDDEN_DIR_TEMP."/.vimTempFile.".exeFileType
             try
@@ -943,24 +951,24 @@ function! TmuxRepeat(type)
                 call writefile(split(@a, "\n"), fileName)
             finally
                 let @a = a_save
-                if a:type == "repl"
-                    silent! exec "!tmux load-buffer -b buffer0099 ".fileName
+                if a:type == 'repl'
+                    silent! exec '!tmux load-buffer -b buffer0099 '.fileName
                 endif
             endtry
         else
-            let fileName=fnameescape(expand("%:p"))
+            let fileName=fnameescape(expand('%:p'))
         endif
 
-        let pane_count=Strip(system("tmux list-panes | wc -l"))
-        if pane_count > 1 || has("gui_running")
-            if has("gui_running")
-                let output =  system("tmux list-sessions | command grep vimmers")
+        let pane_count=Strip(system('tmux list-panes | wc -l'))
+        if pane_count > 1 || has('gui_running')
+            if has('gui_running')
+                let output =  system('tmux list-sessions | command grep vimmers')
                 if v:shell_error != 0
-                    echom "No Vimmers tmux session!"
+                    echom 'No Vimmers tmux session!'
                     return 0
                 endif
-                if a:type == "repl"
-                    silent! exec "!tmux paste-buffer -b buffer0099 -t vimmers:0. "
+                if a:type == 'repl'
+                    silent! exec '!tmux paste-buffer -b buffer0099 -t vimmers:0. '
                     redraw!
                     return 0
                 endif
@@ -969,13 +977,13 @@ function! TmuxRepeat(type)
                     silent! exec "!tmux send-keys -t vimmers:0. C-c ' bash \"$ZPWR_SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
-                    silent! exec "!tmux send-keys -t vimmer:1. C-c up C-m"
+                    silent! exec '!tmux send-keys -t vimmer:1. C-c up C-m'
                     echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
                     redraw!
                 endif
             else
                 if a:type == "repl"
-                    silent! exec "!tmux paste-buffer -b buffer0099 -t right"
+                    silent! exec '!tmux paste-buffer -b buffer0099 -t right'
                     redraw!
                     return 0
                 endif
@@ -983,17 +991,17 @@ function! TmuxRepeat(type)
                     silent! exec "!tmux send-keys -t right C-c ' bash \"$ZPWR_SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
-                    silent! exec "!tmux send-keys -t right C-c up C-m"
+                    silent! exec '!tmux send-keys -t right C-c up C-m'
                     echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
                     redraw!
                 endif
             endif
             exe "normal! zz"
         else
-            echom "No tmux panes to right ".pane_count."... use v C-V for visual block"
+            echom 'No tmux panes to right '.pane_count.'... use v C-V for visual block'
         endif
     else
-        echom "Not in tmux... use v C-V for visual block"
+        echom 'Not in tmux... use v C-V for visual block'
     endif
 
 endfunction
@@ -1010,7 +1018,7 @@ autocmd VimEnter * nunmap S
 
 function! GetFirstCodeLineHash()
         " read current file
-        let l:file = readfile(expand("%:p"))
+        let l:file = readfile(expand('%:p'))
         let l:lineCounter = 0
         for l:line in l:file
             let l:match = matchstr(l:line, '^\s*#.*')
@@ -1039,28 +1047,28 @@ endfunction
 function! s:commonEV(lang, regex, name, wordUnderCursor)
     let l:line=GetFirstCodeLineHash()
     exe "normal mz"
-    exe '%sno@'.a:regex.'@$'.a:name."@g"
+    exe '%sno@'.a:regex.'@$'.a:name.'@g'
     if match(a:wordUnderCursor, '"') >= 0 || match(a:wordUnderCursor, "'") >= 0
         if a:lang == 'sh'
-            exe "normal! ".(l:line+1)."GO".a:name."=".a:wordUnderCursor
+            exe 'normal! '.(l:line+1).'GO'.a:name.'='.a:wordUnderCursor
         elseif a:lang == 'pl'
-            exe "normal! ".(l:line+1)."GOmy $".a:name."=".a:wordUnderCursor.";"
+            exe 'normal! '.(l:line+1).'GOmy $'.a:name.'='.a:wordUnderCursor.';'
 
         endif
     else
         if a:lang == 'sh'
-            exe "normal! ".(l:line+1)."GO".a:name.'="'.a:wordUnderCursor.'"'
+            exe 'normal! '.(l:line+1).'GO'.a:name.'="'.a:wordUnderCursor.'"'
         elseif a:lang == 'pl'
-            exe "normal! ".(l:line+1)."GOmy $".a:name.'="'.a:wordUnderCursor.'";'
+            exe 'normal! '.(l:line+1).'GOmy $'.a:name.'="'.a:wordUnderCursor.'";'
         endif
     endif
     exe "normal! V\<Esc>"
-    exe "normal! `z"
+    exe 'normal! `z'
 endfunction
 
 function! ExtractVariableVisual() range
     let l:wordUnderCursor = s:getVisualSelection()
-    let l:name = inputdialog("Extract variable to replace visual __".wordUnderCursor."__:")
+    let l:name = inputdialog('Extract variable to replace visual __'.wordUnderCursor.'__:')
 
     if l:name== ''
        return 0
@@ -1075,7 +1083,7 @@ function! ExtractVariableVisual() range
         let l:exeFileType = 'zsh'
     endif
 
-    exe "normal `<"
+    exe 'normal `<'
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         call s:commonEV('sh', l:regex, l:name, l:wordUnderCursor)
     elseif l:exeFileType == 'pl'
@@ -1150,7 +1158,7 @@ endfunction
 
 function! ExtractMethod() range
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
-    let l:name = inputdialog("Extract method:")
+    let l:name = inputdialog('Extract method:')
     let l:exeFileType=expand('%:e')
     let l:filename=expand('%:t')
     if l:filename == '.zshrc'
@@ -1164,11 +1172,11 @@ function! ExtractMethod() range
         silent! exe a:firstline.','.a:lastline.'move'.l:line
 
         '<
-        exe "normal! Ofunction " . l:name ."(){\<Esc>"
+        exe 'normal! Ofunction ' . l:name .'(){\<Esc>'
         '>
         exe "normal! o}\<CR>\<Esc>k"
         exe "normal! vi{=va{V\<Esc>"
-        exe "normal! `z$zz"
+        exe 'normal! `z$zz'
     elseif l:exeFileType == 'pl'
         let l:line=GetFirstCodeLineHash()
         '>
@@ -1177,18 +1185,18 @@ function! ExtractMethod() range
         silent! exe a:firstline.','.a:lastline.'move'.l:line
 
         '<
-        exe "normal! Osub " . l:name ."(){\<Esc>"
+        exe 'normal! Osub ' . l:name ."(){\<Esc>"
         '>
         exe "normal! o}\<CR>\<Esc>k"
         exe "normal! vi{=va{V\<Esc>"
-        exe "normal! `z$zz"
+        exe 'normal! `z$zz'
 
     elseif l:exeFileType == 'py'
         '<
-        exe "normal! Odef " . l:name ."():\<Esc>"
+        exe 'normal! Odef ' . l:name ."():\<Esc>"
         '>
         exe "normal! o\<Esc>vi{>\<Esc>"
-        exe "normal! o".l:name. ""
+        exe 'normal! o'.l:name. ''
     elseif index(supportedTypes, l:exeFileType) < 0
         if l:exeFileType == ''
             echom " => Unknown Filetype for file '".l:filename. "'."
@@ -1346,17 +1354,20 @@ nmap [] k$][%?}<CR>]}]]}]]
 "{{{                    MARK:autocmd
 "**************************************************************
 
-autocmd filetype * set tags+=~/tags
-autocmd filetype * call AutoCorrect()
-"uncomment following if you want just want autocorrection in text and markdown files
-"autocmd filetype text call AutoCorrect()
-"autocmd filetype markdown call AutoCorrect()
+augroup misc_group
+    autocmd!
+    autocmd filetype * set tags+=~/tags
+    autocmd filetype * call AutoCorrect()
+    "uncomment following if you want just want autocorrection in text and markdown files
+    "autocmd filetype text call AutoCorrect()
+    "autocmd filetype markdown call AutoCorrect()
 
-autocmd BufReadPre,FileReadPre *.[chy] set cindent
-autocmd BufRead * setlocal foldmethod=marker
-"open folds on startup
-autocmd BufRead * normal zR
-autocmd FileType java let b:dispatch = 'javac %'
+    autocmd BufReadPre,FileReadPre *.[chy] set cindent
+    autocmd BufRead * setlocal foldmethod=marker
+    "open folds on startup
+    autocmd BufRead * normal zR
+    autocmd FileType java let b:dispatch = 'javac %'
+augroup end
 
 "diffing colors
 fun! SetDiffColors()
@@ -1366,14 +1377,15 @@ fun! SetDiffColors()
     highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
 
-
-autocmd FilterWritePre * call SetDiffColors()
-
-autocmd BufNewFile *.sh silent! exe '!templater.sh %:p' | e
-autocmd BufNewFile *.zsh silent! exe '!templater.sh %:p' | e
-autocmd BufNewFile *.rb silent! exe '!templater.sh %:p' | e
-autocmd BufNewFile *.py silent! exe '!templater.sh %:p' | e
-autocmd BufNewFile *.pl silent! exe '!templater.sh %:p' | e
+augroup file_templates
+    autocmd!
+    autocmd FilterWritePre * call SetDiffColors()
+    autocmd BufNewFile *.sh silent! exe '!templater.sh %:p' | e
+    autocmd BufNewFile *.zsh silent! exe '!templater.sh %:p' | e
+    autocmd BufNewFile *.rb silent! exe '!templater.sh %:p' | e
+    autocmd BufNewFile *.py silent! exe '!templater.sh %:p' | e
+    autocmd BufNewFile *.pl silent! exe '!templater.sh %:p' | e
+augroup end
 
 function! SetHLSIns()
 "only for first bufenter, required to activate the highlight on hover
@@ -1390,9 +1402,9 @@ autocmd BufNewFile * call SetHLSIns()
 "{{{                    MARK:Ending
 "**************************************************************
 "load all pathogen plugins
-if filereadable(expand("~/.vim/autoload/pathogen.vim"))
+if filereadable(expand('~/.vim/autoload/pathogen.vim'))
     runtime! autoload/pathogen.vim
-    if exists("g:loaded_pathogen")
+    if exists('g:loaded_pathogen')
         silent! execute pathogen#infect()
     endif
 endif
@@ -1656,19 +1668,25 @@ endfunction
 
 function! WriteToNVimInfo()
     let viminfo = $ZPWR_LOCAL.'/.nviminfo'
-    let curFile = expand("%:p:~")
+    let curFile = expand('%:p:~')
     if curFile != ''
         let curFile = '> '.curFile
         call AppendToFile(viminfo,[curFile])
     endif
 endfunction
 
-if has("nvim")
-    autocmd bufenter * call WriteToNVimInfo()
+if has('nvim')
+    augroup nvim_group
+        autocmd!
+        autocmd bufenter * call WriteToNVimInfo()
+    augroup end
 endif
 
 "update the file with set autoread
-autocmd CursorHold,CursorHoldI * if !bufexists("[Command Line]") | checktime | endif
+augroup checktime_group
+      autocmd!
+    autocmd CursorHold,CursorHoldI * if !bufexists("[Command Line]") | checktime | endif
+augroup end
 
 if !exists('g:ycm_semantic_triggers')
     let g:ycm_semantic_triggers = {}
@@ -1705,7 +1723,7 @@ function! AutoHighlightToggle()
     nnoremap N :call GoToLastSearch('?')<CR>
     augroup auto_highlight
       autocmd!
-      autocmd CursorHold,CursorHoldI * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+      autocmd CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
     augroup end
     set hlsearch
     echo 'Highlight current word: ON'
@@ -1716,7 +1734,8 @@ endfunction
 "highlight on hover activated automatically
 augroup auto_highlight
     autocmd!
-    autocmd CursorHold,CursorHoldI * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    autocmd CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    autocmd BufEnter * call SetHLS()
 augroup end
 
 function! SetHLS()
@@ -1727,7 +1746,6 @@ function! SetHLS()
     endif
 endfunction
 
-autocmd BufEnter * call SetHLS()
 
 let g:tmuxcomplete#asyncomplete_source_options = {
             \ 'name':      'tmuxcomplete',
