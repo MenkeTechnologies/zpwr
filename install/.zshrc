@@ -179,6 +179,8 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 #{{{                    MARK:non ZPWR Exports
 #**************************************************************
 declare -A ZPWR_VARS
+declare -A ZPWR_VERBS
+source "$ZPWR_SCRIPTS/zpwr.zsh"
 
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
@@ -2535,8 +2537,10 @@ function _ssu(){
     _arguments -s $arguments
 }
 
-subcommands_ary=($(cat "$ZPWR_SCRIPTS/zpwr.zsh" | perl -ne 'print "$1\\:\"$2\" " if m{^\s*([a-zA-z0-9_]+)\s*\).*#(.*)$}'))
-subcommands_str="commands:sub commands:((${subcommands_ary[@]}))"
+declare -a subcommands_ary
+for k v in ${(kv)ZPWR_VERBS[@]};do
+    subcommands_ary+=("$k:$v")
+done
 
 function _zpwr(){
   local arguments
@@ -2555,7 +2559,7 @@ function _zpwr(){
                 _message "nothing to complete"
                 ;;
             verb)
-            _alternative "$subcommands_str"
+                _describe -t commands "zpwr verb" subcommands_ary
                 ;;
             args)
                 case $words[1] in
@@ -3007,13 +3011,22 @@ function zpwrUpdateAllGitDirs(){
 }
 
 function zpwrVerbs(){
-    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' |
-        fzf | perl -ne 'print "zpwr $1"if m{\s*(\S+)\)}'
+    local len sep k v i width
+    sep=" "
+    width=25
+    for k v in ${(kv)ZPWR_VERBS[@]};do
+        len=$#k
+        printf $k
+        spaces=$(( width - len ))
+        for (( i = 0; i < $spaces; ++i )); do
+           printf $sep
+        done
+        printf "$v\n"
+    done | fzf | perl -ne 'print "zpwr $1"if m{(\S+)\s+}'
 }
 
 function numZpwrVerbs(){
-    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' |
-    wc -l
+    echo $#ZPWR_VERBS
 }
 
 function zpwrEnvVars(){
