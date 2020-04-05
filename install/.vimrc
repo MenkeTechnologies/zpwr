@@ -1308,6 +1308,7 @@ nnoremap <silent> <C-D>i :Imap<CR>
 nnoremap <silent> <C-D>j :Agg<CR>
 nnoremap <silent> <leader>aa :Agg<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
+nnoremap <silent> <leader>, :FZFMaps<CR>
 nnoremap <silent> <leader>ke :FZFKeys<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
 nnoremap <silent> <C-D>m :Map<CR>
