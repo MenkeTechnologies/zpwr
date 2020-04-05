@@ -2688,11 +2688,11 @@ function goclean() {
 function commits(){
     if isGitDir; then
         if [[ $EDITOR = nvim ]];then
-            nvim -c Commits!
+            nvim -c 'Commits!'
         elif [[ $EDITOR == mvim ]];then
-            mvim -v -c Commits!
+            mvim -v -c 'Commits!'
         else
-            vim -c Commits!
+            vim -c 'Commits!'
         fi
     else
         loggNotGit
