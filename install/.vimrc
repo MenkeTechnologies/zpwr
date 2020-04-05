@@ -1127,7 +1127,7 @@ function! ExtractVariable()
         exe 'normal mz'
         exe '%s@\<'.l:regex.'\>@$'.l:name.'@g'
         exe 'normal! '.(l:line+1).'GO'.l:name.'='.l:wordUnderCursor
-        exe 'normal! V\<Esc>'
+        exe "normal! V\<Esc>"
         exe 'normal! `z'
 
     elseif l:exeFileType == 'pl'
@@ -1135,7 +1135,7 @@ function! ExtractVariable()
         exe 'normal mz'
         exe '%s@\<'.l:regex.'\>@$'.l:name.'@g'
         exe 'normal! '.(l:line+1).'GOmy $'.l:name.'='.l:wordUnderCursor.';'
-        exe 'normal! V\<Esc>'
+        exe "normal! V\<Esc>"
         exe 'normal! `zzz'
 
     elseif l:exeFileType == 'py'
@@ -1172,7 +1172,7 @@ function! ExtractMethod() range
         silent! exe a:firstline.','.a:lastline.'move'.l:line
 
         '<
-        exe 'normal! Ofunction ' . l:name .'(){\<Esc>'
+        exe 'normal! Ofunction ' . l:name ."(){\<Esc>"
         '>
         exe "normal! o}\<CR>\<Esc>k"
         exe "normal! vi{=va{V\<Esc>"
