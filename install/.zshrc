@@ -1874,6 +1874,8 @@ alias fe='for i in '$ZPWR_TABSTOP';do
     '$ZPWR_TABSTOP'
 done'
 
+alias gta="git tag -fam \"$ZPWR_TABSTOP\" $ZPWR_TABSTOP"
+
 alias fori="for (( i = 0; i < $ZPWR_TABSTOP; i++ )); do
     $ZPWR_TABSTOP
 done"
