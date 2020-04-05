@@ -2830,7 +2830,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu|parrot)
-                    out="$(sudo command grep -a 'Accepted publickey for' /var/log/auth.log* | grep -v sudo | tail -1)"
+                    out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -v sudo | tail -1)"
                     key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
                     ;;
                 (centos|rhel)
