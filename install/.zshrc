@@ -2990,7 +2990,8 @@ function zpwrUpdateAllGitDirs(){
 }
 
 function zpwrVerbs(){
-    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' | fzf | perl -ne 'print "zpwr $1"if m{\s*(\S+)\)}' | source /dev/stdin
+    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' | fzf | perl -ne 'print "zpwr $1"if m{\s*(\S+)\)}' > "$ZPWR_TEMPFILE4"
+    print -z "$(cat $ZPWR_TEMPFILE4)"
 }
 
 function numZpwrVerbs(){
