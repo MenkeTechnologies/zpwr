@@ -1735,6 +1735,10 @@ endfunction
 augroup auto_highlight
     autocmd!
     autocmd CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+augroup end
+
+augroup auto_set_hls
+    autocmd!
     autocmd BufEnter * call SetHLS()
 augroup end
 
