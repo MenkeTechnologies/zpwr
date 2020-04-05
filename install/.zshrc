@@ -3,7 +3,8 @@
  #X   48888X `8888H  8888                 u.    u.    !@88E
 #X8x.  8888X  8888X  !888>       .u     x@88k u@88c.  '888E   u
 #X8888 X8888  88888   "*8%-   ud8888.  ^"8888""8888"   888E u@8NL
-#'*888!X8888> X8888  xH8>   :888'8888.   8888  888R    888E`"88*" `?8 `8888  X888X X888>   d888 '88%"   8888  888R    888E .dN.
+#'*888!X8888> X8888  xH8>   :888'8888.   8888  888R    888E`"88*"
+#  `?8 `8888  X888X X888>   d888 '88%"   8888  888R    888E .dN.
   #-^  '888"  X888  8888>   8888.+"      8888  888R    888E~8888
    #dx '88~x. !88~  8888>   8888L        8888  888R    888E '888&
  #.8888Xf.888x:!    X888X.: '8888c. .+  "*88*" 8888"   888E  9888.
@@ -2370,7 +2371,8 @@ function _fzf_complete_z() {
 function _fzf_complete_r() {
     local dir
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS_2 _fzf_complete '--ansi' "$@" < <(
-  dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c $s\n";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $s\n"};print ++$c." /"'
+  dirname $(pwd) |
+    perl -e '$s=<>;chomp $s;$c=1;print "$c $s\n";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $s\n"};print ++$c." /"'
     )
 }
 
@@ -2399,7 +2401,8 @@ function _fzf_complete_git() {
     else
         export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitOpts.sh" HEAD)'"
     fi
-    FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" _fzf_complete "-m $FZF_DRACULA --ansi" "$@" < <(
+    FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" \
+        _fzf_complete "-m $FZF_DRACULA --ansi" "$@" < <(
         printf "\x1b[${ZPWR_COMMIT_STYLE}m"
         git log --format='%h %s'
         git for-each-ref | perl -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
@@ -2995,11 +2998,14 @@ function zpwrUpdateAllGitDirs(){
 }
 
 function zpwrVerbs(){
-    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' | fzf | perl -ne 'print "print -z zpwr $1"if m{\s*(\S+)\)}' | source /dev/stdin
+    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' |
+        fzf | perl -ne 'print "print -z zpwr $1"if m{\s*(\S+)\)}' |
+        source /dev/stdin
 }
 
 function numZpwrVerbs(){
-    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' | wc -l
+    cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' |
+    wc -l
 }
 
 function zpwrEnvVars(){
