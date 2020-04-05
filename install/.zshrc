@@ -3,8 +3,7 @@
  #X   48888X `8888H  8888                 u.    u.    !@88E
 #X8x.  8888X  8888X  !888>       .u     x@88k u@88c.  '888E   u
 #X8888 X8888  88888   "*8%-   ud8888.  ^"8888""8888"   888E u@8NL
-#'*888!X8888> X8888  xH8>   :888'8888.   8888  888R    888E`"88*"
-  #`?8 `8888  X888X X888>   d888 '88%"   8888  888R    888E .dN.
+#'*888!X8888> X8888  xH8>   :888'8888.   8888  888R    888E`"88*" `?8 `8888  X888X X888>   d888 '88%"   8888  888R    888E .dN.
   #-^  '888"  X888  8888>   8888.+"      8888  888R    888E~8888
    #dx '88~x. !88~  8888>   8888L        8888  888R    888E '888&
  #.8888Xf.888x:!    X888X.: '8888c. .+  "*88*" 8888"   888E  9888.
@@ -214,7 +213,6 @@ function exists(){
     command grep -sqv "suffix alias" 2>/dev/null
 }
 
-
 if [[ $ZPWR_PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
@@ -241,14 +239,16 @@ else
     test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=simonoff
 fi
 
-
 ZSH_DISABLE_COMPFIX=true
 
 #colors for common commands
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 export SHELL="$(which zsh)"
+#}}}***********************************************************
 
+#{{{                    MARK:OMZ env vars
+#**************************************************************
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -319,7 +319,7 @@ forgit_clean=fgclean
 forgit_stash_show=fgss
 #}}}***********************************************************
 
-#{{{                    MARK:Plugins
+#{{{                    MARK:OMZ Plugins
 #**************************************************************
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -405,12 +405,10 @@ source $ZSH/oh-my-zsh.sh
 _alias_file="$ZPWR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$ZPWR_LOCAL/.common_aliases"
-
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Fxns
 #**************************************************************
-
 function sub (){
     zle .kill-whole-line
     BUFFER="suc"
@@ -930,6 +928,13 @@ function interceptDelete(){
     keySender
 }
 
+function zpwrVerbsWidget(){
+    zle .kill-whole-line
+    BUFFER=zpwrVerbs
+    zle .accept-line
+    return 0
+}
+
 zle -N fzfCommits
 zle -N updater
 zle -N runner
@@ -949,6 +954,7 @@ zle -N fasdFZF
 zle -N interceptDelete
 zle -N interceptSurround
 zle -N asVar
+zle -N zpwrVerbsWidget
 
 #vim mode for zle
 bindkey -v
@@ -995,6 +1001,9 @@ bindkey -M vicmd '^F^D' intoFzf
 
 bindkey -M viins '^F^H' lsoffzf
 bindkey -M vicmd '^F^H' lsoffzf
+
+bindkey -M viins '^F^J' zpwrVerbsWidget
+bindkey -M vicmd '^F^J' zpwrVerbsWidget
 
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
@@ -1385,7 +1394,6 @@ zle -N zle-keymap-select
 
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
-
 #}}}***********************************************************
 
 #{{{                    MARK:Setopt Options
@@ -2058,7 +2066,6 @@ HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"
 #set right prompt string during continuation
 RPS2='+%N:%i:%^'
 export PS3=$'\e[1;34m-->>>> \e[0m'
-
 #}}}***********************************************************
 
 #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
@@ -2151,7 +2158,6 @@ fi
 if [[ -d "$ZPWR_DL" ]]; then
     : ~ZPWR_DL
 fi
-
 #}}}***********************************************************
 
 #{{{                    MARK:OPAM env
@@ -2202,7 +2208,6 @@ function 256colors(){
     fi
     printf "\n"
 }
-
 #}}}***********************************************************
 
 #{{{                    MARK:FZF
@@ -2797,7 +2802,6 @@ function _parameters() {
     _describe -t parameters parameter ary
 
 }
-
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
@@ -2882,7 +2886,6 @@ fi
 
 #{{{                    MARK:Misc
 #**************************************************************
-
 autoload -Uz zrecompile
 
 function recompile(){
@@ -3014,7 +3017,6 @@ function revealRecurse(){
 exists zunit && {
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
 }
-
 ###}}}***********************************************************
 
 #{{{                    MARK:Finish

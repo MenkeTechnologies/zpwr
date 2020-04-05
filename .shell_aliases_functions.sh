@@ -2683,9 +2683,7 @@ function goclean() {
     echo rm -rf "$bin_dir"
     rm -rf "$src_dir"
     rm -rf "$bin_dir"
-
 }
-
 
 function commits(){
     if isGitDir; then
@@ -2718,7 +2716,8 @@ function vimAll(){
     "$ZPWR_INSTALL/UltiSnips/"*.snippets \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
-    clearList;isGitDir && git diff HEAD
+    clearList
+    isGitDir && git diff HEAD
 }
 
 function vimScripts(){
@@ -2783,7 +2782,7 @@ function changeGitCommitterEmail(){
 
     oldEmail="$1"
     newEmail="$2"
-    
+
     prettyPrint "change committer $oldEmail to $newEmail"
 
     git filter-branch --commit-filter '
@@ -2847,7 +2846,6 @@ function changeGitEmail(){
     ' --tag-name-filter cat -- --branches --tags
 
 }
-
 #}}}***********************************************************
 
 #{{{                    MARK:Global Alias
