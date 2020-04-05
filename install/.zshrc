@@ -3014,14 +3014,14 @@ function zpwrVerbs(){
     local len sep k v i width
     sep=" "
     width=25
-    for k v in ${(kv)ZPWR_VERBS[@]};do
+    for k in ${(ko)ZPWR_VERBS[@]};do
         len=$#k
         printf $k
         spaces=$(( width - len ))
         for (( i = 0; i < $spaces; ++i )); do
            printf $sep
         done
-        printf "$v\n"
+        printf "${ZPWR_VERBS[$k]}\n"
     done | fzf | perl -ne 'print "zpwr $1"if m{(\S+)\s+}'
 }
 
