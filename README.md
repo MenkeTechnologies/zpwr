@@ -1399,6 +1399,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  <Space>o    * :ALEToggle<CR> ```
 - ``` n  <Space>m    * :Map<CR> ```
 - ``` n  <Space>ke   * :FZFKeys<CR> ```
+- ``` n  <Space>,    * :FZFMaps<CR> ```
 - ``` n  <Space>aa   * :Agg<CR> ```
 - ``` n  <Space>f    * :Files<CR> ```
 - ``` n  <Space>env  * :FZFEnv<CR> ```
