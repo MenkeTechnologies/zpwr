@@ -529,7 +529,7 @@ function r(){
     if [[ -z $1 ]]; then
         cd ..
     else
-        for (( i = 0; i < $1; i++ )); do
+        for (( i = 0; i < $1; ++i )); do
             cdstr+="../"
         done
         cd "$cdstr" || return 1
@@ -1256,7 +1256,7 @@ function totalLines(){
         isbinary "$REPLY" && continue
         filter=false
         for arg in "$@"; do
-           if echo "$REPLY" | grep -sq "$arg"; then
+           if echo "$REPLY" | command grep -sq "$arg"; then
                filter=true
                break
            fi
@@ -1554,7 +1554,7 @@ function alternatingPrettyPrint(){
             } else {
                  print "\x1b[1;4;34m$_\x1b[0m"
             }
-        $counter++;
+        ++$counter;
         };print "\x1b[0m"'
     else
         echo "$@" | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
@@ -1565,7 +1565,7 @@ function alternatingPrettyPrint(){
             } else {
                  print "\x1b[1;4;34m$_\x1b[0m"
             }
-        $counter++;
+        ++$counter;
         }; print "\x1b[0m"'
     fi
 }
@@ -1948,7 +1948,7 @@ function pirun(){
                 return
             fi
         fi
-        ((picounter++))
+        ((++picounter))
     done
     trap QUIT
 }
@@ -2120,7 +2120,7 @@ function digs(){
                     $colo $exe dig -x "$ip"
                     primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
                     out="$($exe whois "$primary")"
-                    if echo "$out" | grep -sq 'No match';then
+                    if echo "$out" | command grep -sq 'No match';then
                         prettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
@@ -2131,7 +2131,7 @@ function digs(){
                     fi
                 else
                     out="$($colo $exe whois "$noproto")"
-                    if echo "$out" | grep -sq 'No match'; then
+                    if echo "$out" | command grep -sq 'No match'; then
                         prettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
@@ -2236,7 +2236,7 @@ function ff(){
        return 1
     fi
     if [[ ! -d "$1" && ! -f "$1" ]]; then
-        for (( i = 0; i < 10;i++ )); do
+        for (( i = 0; i < 10;++i )); do
             eval "$@"
         done
     fi
@@ -2249,7 +2249,7 @@ function fff(){
     fi
     num=$1
     shift
-    for (( i = 0; i < $num;i++ )); do
+    for (( i = 0; i < $num;++i )); do
         eval "$@"
     done
 }
@@ -2354,9 +2354,9 @@ exists http && function ge(){
         randscript="print int(rand()*$len)"
         rand=$(echo "$randscript" | perl)
         logg $rand
-        isZsh && ((rand++))
+        isZsh && ((++rand))
 
-        for (( i = 0; i < $len; i++ )); do
+        for (( i = 0; i < $len; ++i )); do
             random_color=${file_ary[$i]}
             if (( $rand == $i)); then
                 break
@@ -2631,7 +2631,7 @@ function regenConfigLinks(){
 }
 
 function regenPowerlineLink(){
-    dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
+    dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"
     if needSudo "$dir"; then
         prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
         echo sudo ln -sfn "$dir" "$TMUX_HOME"

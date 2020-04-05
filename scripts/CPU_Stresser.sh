@@ -111,7 +111,7 @@ if [[ "$detach" == true ]]; then
     done
 else
     alternatingPrettyPrint "Spawning $ZPWR_DELIMITER_CHAR${nproc}$ZPWR_DELIMITER_CHAR processes interactively."
-    for ((i = 0; i < nproc; i++)); do
+    for ((i = 0; i < nproc; ++i)); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
         yes &>/dev/null &

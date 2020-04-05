@@ -42,7 +42,7 @@ while ((network_check_tries < network_check_threshold)); do
 
     host_status=$(fping $gateway_ip)
 
-    ((network_check_tries++))
+    ((++network_check_tries))
 
     if echo "$host_status" | grep -iq alive; then
         echo "$(date) WLAN Network is working correctly"

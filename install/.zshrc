@@ -564,7 +564,7 @@ function changeQuotes(){
         BUFFER="${__OLDBUFFER}"
     fi
 
-    ((ZPWR_COUNTER++))
+    ((++ZPWR_COUNTER))
 }
 
 function alternateQuotes(){
@@ -1157,7 +1157,7 @@ function my-accept-line () {
     if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
         keyClear
     else
-        if ! echo $BUFFER | grep -q stopSend; then
+        if ! echo $BUFFER | command grep -q stopSend; then
             for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
                 tmux send-keys -t $pane "C-m"
             done
@@ -1877,7 +1877,7 @@ done'
 
 alias gta="git tag -fam \"$ZPWR_TABSTOP\" $ZPWR_TABSTOP && git push -f origin --tags"
 
-alias fori="for (( i = 0; i < $ZPWR_TABSTOP; i++ )); do
+alias fori="for (( i = 0; i < $ZPWR_TABSTOP; ++i )); do
     $ZPWR_TABSTOP
 done"
 
@@ -2830,7 +2830,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu|parrot)
-                    out="$(sudo \grep -a 'Accepted publickey for' /var/log/auth.log* | grep -v sudo | tail -1)"
+                    out="$(sudo command grep -a 'Accepted publickey for' /var/log/auth.log* | grep -v sudo | tail -1)"
                     key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
                     ;;
                 (centos|rhel)

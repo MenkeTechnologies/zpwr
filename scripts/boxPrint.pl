@@ -84,7 +84,7 @@ if ( $proposedTextLength > $maxTextLength ) {
     print "$boxColor";
     say $boxesChar x $width;
 
-    for ( my $i = 0 ; $i < $lineCounter ; $i++ ) {
+    for ( my $i = 0 ; $i < $lineCounter ; ++$i ) {
 
         my $startIndex = $charactersPerLine * $i;
 
