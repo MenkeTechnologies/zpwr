@@ -929,11 +929,16 @@ function interceptDelete(){
     keySender
 }
 
+function zpwrVerbsWidgetAccept(){
+    zle .kill-whole-line
+    BUFFER="$(zpwrVerbs)"
+    zle .accept-line
+}
 function zpwrVerbsWidget(){
     zle .kill-whole-line
-    BUFFER=zpwrVerbs
-    zle .accept-line
-    return 0
+    BUFFER="$(zpwrVerbs) "
+    CURSOR=$#BUFFER
+    zle vi-insert
 }
 
 zle -N fzfCommits
@@ -956,6 +961,7 @@ zle -N interceptDelete
 zle -N interceptSurround
 zle -N asVar
 zle -N zpwrVerbsWidget
+zle -N zpwrVerbsWidgetAccept
 
 #vim mode for zle
 bindkey -v
@@ -1003,8 +1009,11 @@ bindkey -M vicmd '^F^D' intoFzf
 bindkey -M viins '^F^H' lsoffzf
 bindkey -M vicmd '^F^H' lsoffzf
 
-bindkey -M viins '^F^J' zpwrVerbsWidget
-bindkey -M vicmd '^F^J' zpwrVerbsWidget
+bindkey -M viins '^F^J' zpwrVerbsWidgetAccept
+bindkey -M vicmd '^F^J' zpwrVerbsWidgetAccept
+
+bindkey -M viins '^F^N' zpwrVerbsWidget
+bindkey -M vicmd '^F^N' zpwrVerbsWidget
 
 bindkey -M viins '^F^G' intoFzfAg
 bindkey -M vicmd '^F^G' intoFzfAg
@@ -2999,8 +3008,7 @@ function zpwrUpdateAllGitDirs(){
 
 function zpwrVerbs(){
     cat "$ZPWR_SCRIPTS/zpwr.zsh" |& command grep -i -E '[a-zA-Z_0-9]+\)' |
-        fzf | perl -ne 'print "print -z zpwr $1"if m{\s*(\S+)\)}' |
-        source /dev/stdin
+        fzf | perl -ne 'print "zpwr $1"if m{\s*(\S+)\)}'
 }
 
 function numZpwrVerbs(){

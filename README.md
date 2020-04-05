@@ -714,9 +714,10 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -M viins "^F^F" fzf-file-widget ```
 - ``` bindkey -M viins "^F^G" intoFzfAg ```
 - ``` bindkey -M viins "^F^H" lsoffzf ```
-- ``` bindkey -M viins "^F^J" zpwrVerbsWidget ```
+- ``` bindkey -M viins "^F^J" zpwrVerbsWidgetAccept ```
 - ``` bindkey -M viins "^F^K" alternateQuotes ```
 - ``` bindkey -M viins "^F^L" list-choices ```
+- ``` bindkey -M viins "^F^N" zpwrVerbsWidget ```
 - ``` bindkey -M viins "^F^R" asVar ```
 - ``` bindkey -M viins "^F^S" gitFunc ```
 - ``` bindkey -M viins "^F^V" edit-command-line ```
@@ -826,9 +827,10 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -a "^F^F" fzf-file-widget ```
 - ``` bindkey -a "^F^G" intoFzfAg ```
 - ``` bindkey -a "^F^H" lsoffzf ```
-- ``` bindkey -a "^F^J" zpwrVerbsWidget ```
+- ``` bindkey -a "^F^J" zpwrVerbsWidgetAccept ```
 - ``` bindkey -a "^F^K" alternateQuotes ```
 - ``` bindkey -a "^F^L" list-choices ```
+- ``` bindkey -a "^F^N" zpwrVerbsWidget ```
 - ``` bindkey -a "^F^R" asVar ```
 - ``` bindkey -a "^F^S" gitFunc ```
 - ``` bindkey -a "^F^V" edit-command-line ```
