@@ -2279,6 +2279,8 @@ function fzf_setup(){
     export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"
     export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
 
+    export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
+
     if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
         export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"
     else
@@ -3022,7 +3024,9 @@ function zpwrVerbs(){
            printf $sep
         done
         printf "${ZPWR_VERBS[$k]}\n"
-    done | fzf | perl -ne 'print "zpwr $1"if m{(\S+)\s+}'
+    done |
+        eval "fzf -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
+        perl -ne 'print "zpwr $1"if m{(\S+)\s+}'
 }
 
 function numZpwrVerbs(){
