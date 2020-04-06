@@ -130,7 +130,7 @@ ZPWR_VERBS[verbscount]='numZpwrVerbs=number of choice for zpwr <tab>'
 ZPWR_VERBS[vimall]='vimAll=vim all zpwr files for :argdo'
 ZPWR_VERBS[vimconfig]='conf=edit all zpwr configs'
 ZPWR_VERBS[vimscripts]='vimScripts=vim all zpwr scripts for :argdo'
-ZPWR_VERBS[vimrecent]='eval $EDITOR \${(Q)\$(fzvim):s|~|$HOME|}=choose most recent vim files'
+ZPWR_VERBS[vimrecent]='eval $EDITOR ${(Q)$(fzvim):s|~|$HOME|}=choose most recent vim files'
 ZPWR_VERBS[vimsearch]='fzfVimKeybind=search vim keybindings'
 ZPWR_VERBS[vimtests]='zpt=edit all zpwr tests'
 ZPWR_VERBS[vimtokens]='tok=vim the .tokens.sh file'
@@ -160,7 +160,7 @@ if [[ -n "$verb" ]]; then
                     eval "$exp"
                 else
                     prettyPrint "Exec subcommand '$exp'"
-                    ${=exp} $@
+                    eval $exp $@
                 fi
             done
             break
