@@ -3043,6 +3043,10 @@ function revealRecurse(){
     done
 }
 
+function evalTester(){
+    echo eval fordir ${(q)*}
+}
+
 exists zunit && {
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
 }

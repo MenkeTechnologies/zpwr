@@ -160,7 +160,7 @@ if [[ -n "$verb" ]]; then
                     eval "$exp"
                 else
                     prettyPrint "Exec subcommand '$exp'"
-                    eval $exp $@
+                    eval "$exp " ${(q)@}
                 fi
             done
             break
