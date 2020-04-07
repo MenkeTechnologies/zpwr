@@ -424,7 +424,8 @@ function scriptEdit(){
             return
         fi
         BUFFER="$EDITOR $BUFFER"
-        echo "builtin cd \"$ZPWR_SCRIPTS\"; $BUFFER; clearList;isGitDir && git diff HEAD" |
+        eval "builtin cd $ZPWR_SCRIPTS"
+        echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
         source /dev/stdin
 }
 
@@ -436,7 +437,8 @@ function vimRecent(){
     BUFFER="$EDITOR $BUFFER"
     mywords=(${(z)BUFFER})
     firstdir=${mywords[2]:h}
-    echo "builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD" |
+    eval "builtin cd $firstdir\""
+    echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
         source /dev/stdin
 }
 
