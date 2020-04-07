@@ -78,22 +78,31 @@ if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
         if [[ $ZPWR_DEBUG == true ]]; then
             echo sed -n "1,$demarcatingLineNum"p "$file" >> "$ZPWR_LOGFILE"
         fi
-        sed -n "1,$demarcatingLineNum"p "$file" | "$filter"
+
+        perl -ne "print if 1 .. $demarcatingLineNum" "$file" | "$filter"
+
         ((++demarcatingLineNum))
+
         if [[ $ZPWR_DEBUG == true ]]; then
             echo sed -n "$demarcatingLineNum,$"p "$file" >> "$ZPWR_LOGFILE"
         fi
-        sed -n "$demarcatingLineNum,$"p "$file"
+
+        perl -ne "print if $demarcatingLineNum .. eof" "$file"
+
     else
         if [[ $ZPWR_DEBUG == true ]]; then
             echo sed -n "$demarcatingLineNum,$"p "$file" >> "$ZPWR_LOGFILE"
         fi
-        sed -n "1,$demarcatingLineNum"p "$file"
+
+        perl -ne "print if 1 .. $demarcatingLineNum" "$file"
+
         ((++demarcatingLineNum))
+
         if [[ $ZPWR_DEBUG == true ]]; then
             echo sed -n "$demarcatingLineNum,$"p "$file" >> "$ZPWR_LOGFILE"
         fi
-        sed -n "$demarcatingLineNum,$"p "$file" | "$filter"
+
+        perl -ne "print if $demarcatingLineNum .. eof" "$file" | "$filter"
     fi
 else
     sed -n '1,$p' "$file"
