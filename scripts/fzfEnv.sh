@@ -34,7 +34,7 @@ fi
 
 cat<<EOF
 line={};
-line=\$(echo \$line| perl -pe "s@[]\\\[^\$.*/]@\\\\\\&@g")
+line=\$(echo \$line| perl -pe "s@[]\\\[^\$.*/]@quotemeta(\$&)@ge")
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
 
@@ -88,7 +88,7 @@ case \$cmdType in
         fi
         ;;
     (func)
-        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@\\\\\\&@g")
+        file=\$(echo \$file| perl -pe "s@[]\\\[^\$.*/]@quotemeta(\$&)@ge")
         if [[ \$ZPWR_DEBUG == true ]]; then
             echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
         fi
