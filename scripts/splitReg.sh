@@ -105,7 +105,7 @@ if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
         perl -ne "print if $demarcatingLineNum .. eof" "$file" | "$filter"
     fi
 else
-    sed -n '1,$p' "$file"
+    perl -ne "print if 1 .. eof" "$file"
 fi
 
 rm "$file"

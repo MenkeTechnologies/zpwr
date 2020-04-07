@@ -94,7 +94,7 @@ case \$cmdType in
             echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
         fi
         command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV}Value.txt"
-        command perl -ne "print if /^\${file} \\\(\\\) {/ .. /^}\\\$/" "${ZPWR_ENV}Value.txt" | fold -80
+        command perl -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV}Value.txt" | fold -80
         ;;
 esac
 } | ponysay -W 75 | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
