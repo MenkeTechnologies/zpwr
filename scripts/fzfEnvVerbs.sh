@@ -34,7 +34,7 @@ fi
 
 cat<<EOF
 line={};
-line=\$(echo \$line | perl -ne "do{@ary=split /\\\s+/,\\\$1;print \\\$ary[0]} if m{^\\\S+\\\s+([\\\s\\\S]+)=\\\S+}" | sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
+line=\$(echo \$line | perl -ne "do{@ary=split /\\\s+/,\\\$1;print \\\$ary[0]} if m{^\\\S+\\\s+([\\\s\\\S]+)=\\\S+}" | perl -pe "s@[]\\\[^\$.*/]@\\\\\\&@g")
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
 
@@ -88,12 +88,12 @@ case \$cmdType in
         fi
         ;;
     (func)
-        file=\$(echo \$file | sed "s@[]\\\[^\$.*/]@\\\\\\&@g")
+        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@\\\\\\&@g")
         if [[ \$ZPWR_DEBUG == true ]]; then
             echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
         fi
         command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV}Value.txt"
-        command sed -n "/^\${file} () {/,/^}\$/p" "${ZPWR_ENV}Value.txt" | fold -80
+        command perl -ne "print if /^\${file} \\\(\\\) {/ .. /^}\\\$/" "${ZPWR_ENV}Value.txt" | fold -80
         ;;
 esac
 } | ponysay -W 75 | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
