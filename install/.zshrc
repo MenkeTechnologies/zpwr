@@ -328,13 +328,13 @@ ZPWR_VERBS[forgitignore]='forgit::ignore=forgit fzf ignore'
 ZPWR_VERBS[forgitignoreclean]='forgit::ignore::clean=forgit fzf ignore clean'
 ZPWR_VERBS[forgitignoreget]='forgit::ignore::get=forgit fzf ignore get'
 ZPWR_VERBS[forgitignorelist]='forgit::ignore::list=forgit fzf ignore list'
-ZPWR_VERBS[forgitignoreupdate]='forgit::ignore:update=forgit fzf ignoreupdate'
+ZPWR_VERBS[forgitignoreupdate]='forgit::ignore::update=forgit fzf ignoreupdate'
 ZPWR_VERBS[forgitinfo]='forgit::info=forgit fzf info'
 ZPWR_VERBS[forgitlog]='forgit::log=forgit fzf log'
 ZPWR_VERBS[forgitreset]='forgit::reset::head=forgit fzf reset'
-ZPWR_VERBS[forgitrestore]='forgit:restore=forgit fzf restore'
+ZPWR_VERBS[forgitrestore]='forgit::restore=forgit fzf restore'
 ZPWR_VERBS[forgitstash]='forgit::stash::show=forgit fzf stash'
-ZPWR_VERBS[forgitwarn]='forgit:warn=forgit fzf warn'
+ZPWR_VERBS[forgitwarn]='forgit::warn=forgit fzf warn'
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ Plugins
