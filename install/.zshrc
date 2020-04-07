@@ -976,7 +976,7 @@ function zpwrVerbsWidgetAccept(){
 }
 function zpwrVerbsWidget(){
     zle .kill-whole-line
-    BUFFER="$(zpwrVerbs) "
+    BUFFER="$(zpwrVerbs)"
     loggDebug "$BUFFER"
     CURSOR=$#BUFFER
     zle vi-insert
@@ -3074,7 +3074,7 @@ function zpwrVerbs(){
         printf "${ZPWR_VERBS[$k]}\n"
     done |
         eval "fzf -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
-        perl -ne 'print "zpwr $1; "if m{^(\S+)\s+}'
+        perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
 }
 
 function numZpwrVerbs(){
