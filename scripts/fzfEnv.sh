@@ -31,12 +31,12 @@ else
         type "$1" >/dev/null 2>&1
     }
 fi
-
+# []\[^$.*/] = this regex matches any of ][^$.*/ characters
 # 3 backslashes \\ => \ after heredoc, \$ => $ after heredoc, \\\$ => \$ after heredoc
 # \$ needed bc inside double quotes when passed to perl
 cat<<EOF
 line={};
-line=\$(echo \$line| perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
+line=\$(echo \$line| perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
 
