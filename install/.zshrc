@@ -2750,6 +2750,13 @@ compdef _zpwr zpwr zp
 compdef _man fm
 compdef _tmux _zsh_tmux_plugin_run
 
+if [[ $ZPWR_LEARN != false ]]; then
+    compdef _se se see seee redo rsql re searchl searchle searchlee redosql
+    # to allow reverse numeric sort and numeric sort
+    # as opposed to lexicographic sort
+    zstyle ':completion:*:*:(se|see|seee|redo|rsql|re|searchl|searchle|searchlee|z|r):*:*' sort false
+fi
+
 exists _kubectl && compdef _kubectl kubectl
 exists _express && compdef _express express
 
