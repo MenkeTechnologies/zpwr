@@ -424,7 +424,9 @@ function scriptEdit(){
             return
         fi
         BUFFER="$EDITOR $BUFFER"
+        loggDebug "builtin cd $ZPWR_SCRIPTS"
         eval "builtin cd $ZPWR_SCRIPTS"
+        loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
         echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
         source /dev/stdin
 }
@@ -437,7 +439,9 @@ function vimRecent(){
     BUFFER="$EDITOR $BUFFER"
     mywords=(${(z)BUFFER})
     firstdir=${mywords[2]:h}
+    loggDebug "builtin cd $firstdir\""
     eval "builtin cd $firstdir\""
+    loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
     echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
         source /dev/stdin
 }
@@ -699,7 +703,7 @@ function vimFzf(){
         zle .kill-whole-line
     else
         firstdir=${mywords[2]:h}
-        #logg "words='$mywords[2]'=>'$firstdir'"
+        loggDebug "words='$mywords[2]'=>'$firstdir'"
         #:h takes aways last "
         BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
         zle .accept-line
@@ -870,11 +874,11 @@ function deleteLastWord(){
 
 function fzfEnv(){
     if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
-        logg "regenerating keys for $ZPWR_ENV"
+        loggDebug "regenerating keys for $ZPWR_ENV"
         regenSearchEnv
     fi
     if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
-        logg "regenerating values for $ZPWR_ENV"
+        loggDebug "regenerating values for $ZPWR_ENV"
         regenSearchEnv
     fi
 
@@ -885,7 +889,7 @@ function fzfEnv(){
 
 function fzfAllKeybind(){
     if [[ ! -s "$ZPWR_ALL_KEYBINDINGS" ]]; then
-        logg "regenerating $ZPWR_ALL_KEYBINDINGS"
+        loggDebug "regenerating $ZPWR_ALL_KEYBINDINGS"
         regenAllKeybindingsCache
     fi
     cat "$ZPWR_ALL_KEYBINDINGS" | fzf
@@ -893,7 +897,7 @@ function fzfAllKeybind(){
 
 function fzfVimKeybind(){
     if [[ ! -s "$ZPWR_VIM_KEYBINDINGS" ]]; then
-        logg "regenerating $ZPWR_VIM_KEYBINDINGS"
+        loggDebug "regenerating $ZPWR_VIM_KEYBINDINGS"
         regenAllKeybindingsCache
     fi
     cat "$ZPWR_VIM_KEYBINDINGS" | fzf
