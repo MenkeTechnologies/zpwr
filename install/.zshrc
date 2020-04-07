@@ -971,11 +971,13 @@ function interceptDelete(){
 function zpwrVerbsWidgetAccept(){
     zle .kill-whole-line
     BUFFER="$(zpwrVerbs)"
+    loggDebug "$BUFFER"
     zle .accept-line
 }
 function zpwrVerbsWidget(){
     zle .kill-whole-line
     BUFFER="$(zpwrVerbs) "
+    loggDebug "$BUFFER"
     CURSOR=$#BUFFER
     zle vi-insert
 }
@@ -3072,7 +3074,7 @@ function zpwrVerbs(){
         printf "${ZPWR_VERBS[$k]}\n"
     done |
         eval "fzf -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
-        perl -ne 'print "zpwr $1"if m{(\S+)\s+}'
+        perl -ne 'print "zpwr $1; "if m{^(\S+)\s+}'
 }
 
 function numZpwrVerbs(){
