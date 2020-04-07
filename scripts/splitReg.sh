@@ -65,21 +65,36 @@ filter="$2"
 file="$ZPWR_TEMPFILE"
 cat > "$file"
 output=$(cat $file)
-if [[ ZPWR_DEBUG == true ]]; then
-    demarcatingLineNum=$(echo "$output" | command grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
-fi
-echo '$demarcatingLineNum= '"$demarcatingLineNum" >> "$ZPWR_LOGFILE"
+demarcatingLineNum=$(echo "$output" | command grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
+
 
 if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
+    if [[ ZPWR_DEBUG == true ]]; then
+        echo 'non 0 => $demarcatingLineNum= '"$demarcatingLineNum" >> "$ZPWR_LOGFILE"
+    fi
 
     if [[ -z "$inverse" ]]; then
         sed -n "1,$demarcatingLineNum"p "$file" | "$filter"
+        if [[ ZPWR_DEBUG == true ]]; then
+            echo sed -n "1,$demarcatingLineNum"p "$file"
+        fi
         ((++demarcatingLineNum))
-        sed -n "$demarcatingLineNum,$"p "$file"
+        if [[ ZPWR_DEBUG == true ]]; then
+            sed -n "$demarcatingLineNum,$"p "$file"
+            echo sed -n "$demarcatingLineNum,$"p "$file"
+        fi
     else
         sed -n "1,$demarcatingLineNum"p "$file"
+        if [[ ZPWR_DEBUG == true ]]; then
+            sed -n "$demarcatingLineNum,$"p "$file"
+            echo sed -n "$demarcatingLineNum,$"p "$file"
+        fi
         ((++demarcatingLineNum))
         sed -n "$demarcatingLineNum,$"p "$file" | "$filter"
+        if [[ ZPWR_DEBUG == true ]]; then
+            sed -n "$demarcatingLineNum,$"p "$file"
+            echo sed -n "$demarcatingLineNum,$"p "$file"
+        fi
     fi
 else
     sed -n '1,$p' "$file"
