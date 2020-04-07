@@ -63,7 +63,7 @@ file="$ZPWR_TEMPFILE"
 cat > "$file"
 output=$(cat $file)
 demarcatingLineNum=$(echo "$output" | command grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
-loggDebug '$demarcatingLineNum= '"$demarcatingLineNum"
+echo '$demarcatingLineNum= '"$demarcatingLineNum" >> "$ZPWR_LOGFILE"
 
 if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
 
