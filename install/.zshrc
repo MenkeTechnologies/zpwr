@@ -445,6 +445,7 @@ function scriptEdit(){
         loggDebug "builtin cd $ZPWR_SCRIPTS"
         eval "builtin cd $ZPWR_SCRIPTS"
         loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
+        print -s "$BUFFER; clearList;isGitDir && git diff HEAD"
         echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
         source /dev/stdin
 }
@@ -460,6 +461,7 @@ function vimRecent(){
     loggDebug "builtin cd $firstdir\""
     eval "builtin cd $firstdir\""
     loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
+    print -s "$BUFFER; clearList;isGitDir && git diff HEAD"
     echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
         source /dev/stdin
 }
