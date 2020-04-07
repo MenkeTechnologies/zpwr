@@ -32,9 +32,11 @@ else
     }
 fi
 
+# 3 backslashes \\ => \ after heredoc, \$ => $ after heredoc, \\\$ => \$ after heredoc
+# \$ needed bc inside double quotes when passed to perl
 cat<<EOF
 line={};
-line=\$(echo \$line | perl -ne "do{@ary=split /\\\s+/,\\\$1;print \\\$ary[0]} if m{^\\\S+\\\s+([\\\s\\\S]+)=\\\S+}" | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\$&)@ge")
+line=\$(echo \$line | perl -ne "do{@ary=split /\\\s+/,\\\$1;print \\\$ary[0]} if m{^\\\S+\\\s+([\\\s\\\S]+)=\\\S+}" | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
 
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
@@ -89,7 +91,7 @@ case \$cmdType in
         fi
         ;;
     (func)
-        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\$&)@ge")
+        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
         if [[ \$ZPWR_DEBUG == true ]]; then
             echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
         fi
