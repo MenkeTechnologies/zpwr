@@ -62,20 +62,23 @@ filter="$2"
 file="$ZPWR_TEMPFILE"
 cat > "$file"
 output=$(cat $file)
-delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
+demarcatingLineNum=$(echo "$output" | command grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
+loggDebug '$demarcatingLineNum= '"$demarcatingLineNum"
 
-[[ $delim -ne 0 ]] && {
+if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
 
     if [[ -z "$inverse" ]]; then
-        sed -n "1,$delim"p "$file" | "$filter"
-        ((++delim))
-        sed -n "$delim,$"p "$file"
+        sed -n "1,$demarcatingLineNum"p "$file" | "$filter"
+        ((++demarcatingLineNum))
+        sed -n "$demarcatingLineNum,$"p "$file"
     else
-        sed -n "1,$delim"p "$file"
-        ((++delim))
-        sed -n "$delim,$"p "$file" | "$filter"
+        sed -n "1,$demarcatingLineNum"p "$file"
+        ((++demarcatingLineNum))
+        sed -n "$demarcatingLineNum,$"p "$file" | "$filter"
     fi
-} || sed -n '1,$p' "$file"
+else
+    sed -n '1,$p' "$file"
+fi
 
 rm "$file"
 
