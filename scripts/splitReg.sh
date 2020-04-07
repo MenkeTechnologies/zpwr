@@ -7,6 +7,9 @@
 ##### Notes:
 #}}}***********************************************************
 
+if [[ ZPWR_TRACE == true ]]; then
+    set -x
+fi
 trap 'rm "$file"' INT
 
 function usage() {
@@ -62,7 +65,9 @@ filter="$2"
 file="$ZPWR_TEMPFILE"
 cat > "$file"
 output=$(cat $file)
-demarcatingLineNum=$(echo "$output" | command grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
+if [[ ZPWR_DEBUG == true ]]; then
+    demarcatingLineNum=$(echo "$output" | command grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
+fi
 echo '$demarcatingLineNum= '"$demarcatingLineNum" >> "$ZPWR_LOGFILE"
 
 if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
@@ -86,3 +91,6 @@ rm "$file"
 
 #cat | tee >(sed -n "1,/$regex"p) >(sed -n "/$regex/,$p" | "$filter" ) >/dev/null
 #however possibly issues with ordering of output to screen
+if [[ ZPWR_TRACE == true ]]; then
+    set +x
+fi
