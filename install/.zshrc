@@ -335,6 +335,9 @@ ZPWR_VERBS[forgitreset]='forgit::reset::head=forgit fzf reset'
 ZPWR_VERBS[forgitrestore]='forgit::restore=forgit fzf restore'
 ZPWR_VERBS[forgitstash]='forgit::stash::show=forgit fzf stash'
 ZPWR_VERBS[forgitwarn]='forgit::warn=forgit fzf warn'
+ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
+ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
+
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ Plugins
@@ -731,6 +734,16 @@ function fzfZList(){
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }
 
+function fzfZListVerb(){
+    local dir
+    dir=$(fzfZList)
+    if [[ -z "$dir" ]]; then
+        return
+    fi
+    print -s "builtin cd $dir && clearList"
+    eval "builtin cd $dir && clearList"
+}
+
 function fasdFList(){
     fasd -f |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
     eval "fzf -m --no-sort --border $FZF_CTRL_T_OPTS" |
@@ -761,6 +774,16 @@ function fasdFZF(){
     else
         zle .accept-line
     fi
+}
+
+function fasdFListVerb(){
+    local file
+    file=$(fasdFList)
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -s "c $file"
+    eval "c $file"
 }
 
 function vimFzfSudo(){
@@ -989,6 +1012,7 @@ function zpwrVerbsWidgetAccept(){
     loggDebug "$BUFFER"
     zle .accept-line
 }
+
 function zpwrVerbsWidget(){
     zle .kill-whole-line
     BUFFER="$(zpwrVerbs)"
