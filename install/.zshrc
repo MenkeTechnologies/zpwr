@@ -418,6 +418,28 @@ function sub (){
     zle .accept-line
 }
 
+function scriptEdit(){
+        BUFFER="$(fzvimScript)"
+        if [[ -z "$BUFFER" ]]; then
+            return
+        fi
+        BUFFER="$EDITOR $BUFFER"
+        echo "builtin cd \"$ZPWR_SCRIPTS\"; $BUFFER; clearList;isGitDir && git diff HEAD" |
+        source /dev/stdin
+}
+
+function vimRecent(){
+    BUFFER="$(fzvim)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    BUFFER="$EDITOR $BUFFER"
+    mywords=(${(z)BUFFER})
+    firstdir=${mywords[2]:h}
+    echo "builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD" |
+        source /dev/stdin
+}
+
 function scriptCount(){
     command ls \
         "$ZPWR_SCRIPTS/"*.{sh,zsh,pl,py} \
@@ -658,9 +680,18 @@ function fzvim(){
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
     fi
 }
+function fzvimScript(){
+    command ls \
+        "$ZPWR_SCRIPTS/"*.{sh,zsh,pl,py} \
+        "$ZPWR_SCRIPTS/macOnly/"*.{sh,zsh,pl,py} |
+        perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
+    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
+        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+}
+
 function vimFzf(){
     zle .kill-whole-line
-    BUFFER="vim $(fzvim)"
+    BUFFER="$EDITOR $(fzvim)"
     mywords=(${(z)BUFFER})
     if (( $#mywords == 1 )); then
         zle .kill-whole-line
@@ -3013,6 +3044,15 @@ function zpwrUpdateAllGitDirs(){
 }
 
 function zpwrVerbs(){
+    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
+        logg "regenerating keys for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
+        logg "regenerating values for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+
     local len sep k v i width
     sep=" "
     width=25
