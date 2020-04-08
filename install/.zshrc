@@ -337,6 +337,8 @@ ZPWR_VERBS[forgitstash]='forgit::stash::show=forgit fzf stash'
 ZPWR_VERBS[forgitwarn]='forgit::warn=forgit fzf warn'
 ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
 ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
+ZPWR_VERBS[hist]='historyVerbAccept=exec history command'
+ZPWR_VERBS[histedit]='historyVerbEdit=edit history command'
 
 #}}}***********************************************************
 
@@ -445,7 +447,7 @@ function scriptEdit(){
         loggDebug "builtin cd $ZPWR_SCRIPTS"
         eval "builtin cd $ZPWR_SCRIPTS"
         loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
-        print -s "$BUFFER; clearList;isGitDir && git diff HEAD"
+        print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
         echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
         source /dev/stdin
 }
@@ -461,7 +463,7 @@ function vimRecent(){
     loggDebug "builtin cd $firstdir\""
     eval "builtin cd $firstdir\""
     loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
-    print -s "$BUFFER; clearList;isGitDir && git diff HEAD"
+    print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
     echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
         source /dev/stdin
 }
@@ -514,7 +516,7 @@ function tutsUpdate() {
 function sshRegain() {
     if echo "$(command ps -ef)" | command  grep -q 'ssh '; then
         if [[ "$BUFFER" != "" ]]; then
-            print -sr "$BUFFER"
+            print -sr -- "$BUFFER"
             local __NEW_BUFFER="exe \"$BUFFER\""
             echo
             eval "$__NEW_BUFFER"
@@ -627,7 +629,7 @@ function clipboard(){
 
     local clipcmd=$ZPWR_COPY_CMD
     if [[ -n $clipcmd ]]; then
-            print -sr "$BUFFER"
+            print -sr -- "$BUFFER"
             print -rn "$BUFFER" | ${=clipcmd}
             echo
             print -n "\x1b[0;34mCopied \x1b[1m\""
@@ -742,7 +744,7 @@ function fzfZListVerb(){
     if [[ -z "$dir" ]]; then
         return
     fi
-    print -s "builtin cd $dir && clearList"
+    print -s -- "builtin cd $dir && clearList"
     eval "builtin cd $dir && clearList"
 }
 
@@ -784,8 +786,35 @@ function fasdFListVerb(){
     if [[ -z "$file" ]]; then
         return
     fi
-    print -s "c $file"
+    print -s -- "c $file"
     eval "c $file"
+}
+
+historyVerbAccept(){
+    local num sel
+      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |
+    perl -lane 'print "@F[1..$#F]"')
+
+    if [ -n "$sel" ]; then
+        print -s -- "$sel"
+        eval "$sel"
+    else
+        return
+    fi
+}
+
+historyVerbEdit(){
+    local num sel
+      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |
+    perl -lane 'print "@F[1..$#F]"')
+
+    if [ -n "$sel" ]; then
+        print -z -- "$sel"
+    else
+        return
+    fi
 }
 
 function vimFzfSudo(){
@@ -1280,7 +1309,7 @@ function my-accept-line () {
         out="$(alias -- $cmd)"
         if echo "$out" | command grep -q -E "grc"; then
             cmdlet="$(eval echo "${out#*=}")"
-            print -srn "$BUFFER"
+            print -srn -- "$BUFFER"
             BUFFER="sudo $cmdlet $mywords[3,$]"
             echo
             eval "$BUFFER"
