@@ -628,7 +628,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bind-key -r -T prefix       J                     resize-pane -D 5 ```
 - ``` bind-key -r -T prefix       K                     resize-pane -U 5 ```
 - ``` bind-key -r -T prefix       L                     resize-pane -R 5 ```
-- ``` bind-key    -T prefix       M                     select-pane -M ```
+- ``` bind-key    -T prefix       M                     source-file /Users/wizard/.zpwr/.tmux/learn ```
 - ``` bind-key    -T prefix       O                     source-file /Users/wizard/.zpwr/.tmux/sixteen-panes ```
 - ``` bind-key    -T prefix       P                     paste-buffer ```
 - ``` bind-key    -T prefix       R                     source-file /Users/wizard/.zpwr/.tmux/thirtytwo-panes-repl ```
@@ -792,7 +792,10 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -M viins "^[[1;5B" updater ```
 - ``` bindkey -M viins "^[[1;5C" tutsUpdate ```
 - ``` bindkey -M viins "^[[1;5D" dbz ```
+- ``` bindkey -M viins "^[[1~" beginning-of-line ```
 - ``` bindkey -M viins "^[[200~" bracketed-paste ```
+- ``` bindkey -M viins "^[[3~" delete-char ```
+- ``` bindkey -M viins "^[[4~" end-of-line ```
 - ``` bindkey -M viins "^[[5~" clipboard ```
 - ``` bindkey -M viins "^[[A" up-line-or-history ```
 - ``` bindkey -M viins "^[[B" down-line-or-history ```
