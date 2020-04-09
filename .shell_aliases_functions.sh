@@ -208,7 +208,7 @@ echo "$PATH" | command grep -isq $ZPWR_SCRIPTS || {
             fi
         else
             if exists mvim; then
-                export EDITOR='mvim'
+                export EDITOR='mvim -v'
                 export PSQL_EDITOR='mvim -v -c "setf sql"'
             else
                 export EDITOR='vim'
@@ -2689,7 +2689,7 @@ function commits(){
     if isGitDir; then
         if [[ $EDITOR = nvim ]];then
             nvim -c 'call feedkeys(":Commits!\<CR>")'
-        elif [[ $EDITOR == mvim ]];then
+        elif [[ $EDITOR == 'mvim -v' ]];then
             mvim -v -c 'call feedkeys(":Commits!\<CR>")'
         else
             vim -c 'call feedkeys(":Commits!\<CR>")'

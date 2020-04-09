@@ -457,10 +457,11 @@ function vimRecent(){
     if [[ -z "$BUFFER" ]]; then
         return
     fi
-    BUFFER="$EDITOR $BUFFER"
     mywords=(${(z)BUFFER})
-    firstdir=${mywords[2]:h}
+    firstdir=${mywords[1]:h}
+    BUFFER="$EDITOR $BUFFER"
     loggDebug "builtin cd $firstdir\""
+    #:h takes aways last "
     eval "builtin cd $firstdir\""
     loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
     print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
@@ -719,13 +720,14 @@ function fzvimScript(){
 
 function vimFzf(){
     zle .kill-whole-line
-    BUFFER="$EDITOR $(fzvim)"
+    BUFFER="$(fzvim)"
     mywords=(${(z)BUFFER})
-    if (( $#mywords == 1 )); then
+    if (( $#mywords == 0 )); then
         zle .kill-whole-line
     else
-        firstdir=${mywords[2]:h}
-        loggDebug "words='$mywords[2]'=>'$firstdir'"
+        firstdir=${mywords[1]:h}
+        loggDebug "words='$mywords[1]'=>'$firstdir'"
+        BUFFER="$EDITOR $BUFFER"
         #:h takes aways last "
         BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
         zle .accept-line
