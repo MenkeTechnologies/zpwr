@@ -340,6 +340,11 @@ ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
 ZPWR_VERBS[hist]='historyVerbAccept=exec history command'
 ZPWR_VERBS[histedit]='historyVerbEdit=edit history command'
 
+ZPWR_VERBS[kill]='killPSVerbAccept=kill from ps output'
+ZPWR_VERBS[killedit]='killPSVerbEdit=edit kill from ps output'
+
+ZPWR_VERBS[lsof]='killLsofVerbAccept=kill from lsof output'
+ZPWR_VERBS[lsofedit]='killLsofVerbEdit=edit kill from lsof output'
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ Plugins
@@ -790,6 +795,28 @@ function fasdFListVerb(){
     fi
     print -s -- "c $file"
     eval "c $file"
+}
+
+function killPSVerbAccept(){
+    BUFFER="sudo kill -9 -- $(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+        print -s -- "$BUFFER"
+        eval "$BUFFER"
+}
+
+function killPSVerbEdit(){
+    BUFFER="sudo kill -9 -- $(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+        print -z -- "$BUFFER"
+}
+
+function killLsofVerbAccept(){
+    BUFFER="sudo kill -9 -- $(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+        print -s -- "$BUFFER"
+        eval "$BUFFER"
+}
+
+function killLsofVerbEdit(){
+    BUFFER="sudo kill -9 -- $(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+        print -z -- "$BUFFER"
 }
 
 historyVerbAccept(){
