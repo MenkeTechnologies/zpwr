@@ -798,25 +798,45 @@ function fasdFListVerb(){
 }
 
 function killPSVerbAccept(){
-    BUFFER="sudo kill -9 -- $(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+    sel="(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+    if [ -n "$sel" ]; then
+        BUFFER="sudo kill -9 -- $sel"
         print -s -- "$BUFFER"
         eval "$BUFFER"
+    else
+        return
+    fi
 }
 
 function killPSVerbEdit(){
-    BUFFER="sudo kill -9 -- $(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+    sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+    if [ -n "$sel" ]; then
+        BUFFER="sudo kill -9 -- $sel"
         print -z -- "$BUFFER"
+    else
+        return
+    fi
 }
 
 function killLsofVerbAccept(){
-    BUFFER="sudo kill -9 -- $(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+    sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+    if [ -n "$sel" ]; then
+        BUFFER="sudo kill -9 -- $sel"
         print -s -- "$BUFFER"
         eval "$BUFFER"
+    else
+        return
+    fi
 }
 
 function killLsofVerbEdit(){
-    BUFFER="sudo kill -9 -- $(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+    sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+    if [ -n "$sel" ]; then
+        BUFFER="sudo kill -9 -- $sel"
         print -z -- "$BUFFER"
+    else
+        return
+    fi
 }
 
 historyVerbAccept(){
