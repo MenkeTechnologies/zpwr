@@ -745,8 +745,8 @@ function fzfDirSearch(){
         \( -path '*/\\.*' -o -fstype 'sysfs' \
         -o -fstype 'devfs' -o -fstype 'devtmpfs' \
         -o -fstype 'proc' \) -prune -o -type d -print \
-        -o -type l -print 2> /dev/null |
-        eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS"
+        -o -type l -print 2> /dev/null | cut -c3- |
+        eval "fzf --border $FZF_CTRL_T_OPTS"
 }
 
 function fzfDirsearchVerb(){
