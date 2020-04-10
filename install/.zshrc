@@ -336,6 +336,7 @@ ZPWR_VERBS[forgitrestore]='forgit::restore=forgit fzf restore'
 ZPWR_VERBS[forgitstash]='forgit::stash::show=forgit fzf stash'
 ZPWR_VERBS[forgitwarn]='forgit::warn=forgit fzf warn'
 ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
+ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
 ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
 ZPWR_VERBS[hist]='historyVerbAccept=exec history command'
 ZPWR_VERBS[histedit]='historyVerbEdit=edit history command'
@@ -737,6 +738,25 @@ function vimFzf(){
         BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
         zle .accept-line
     fi
+}
+
+function fzfDirSearch(){
+    command find -L . -mindepth 1 \
+        \( -path '*/\\.*' -o -fstype 'sysfs' \
+        -o -fstype 'devfs' -o -fstype 'devtmpfs' \
+        -o -fstype 'proc' \) -prune -o -type d -print \
+        -o -type l -print 2> /dev/null |
+        eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS"
+}
+
+function fzfDirsearchVerb(){
+    local dir
+    dir=$(fzfDirSearch)
+    if [[ -z "$dir" ]]; then
+        return
+    fi
+    print -s -- "builtin cd $dir && clearList"
+    eval "builtin cd $dir && clearList"
 }
 
 function fzfZList(){
