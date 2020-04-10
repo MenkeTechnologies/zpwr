@@ -337,6 +337,10 @@ ZPWR_VERBS[forgitstash]='forgit::stash::show=forgit fzf stash'
 ZPWR_VERBS[forgitwarn]='forgit::warn=forgit fzf warn'
 ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
 ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
+
+ZPWR_VERBS[vimwordsearch]='fzfWordsearchVerb=vim a file in a sub dir by word'
+ZPWR_VERBS[vimwordsearchedit]='fzfWordsearchVerbEdit=edit vim a file in a sub dir by word'
+
 ZPWR_VERBS[vimfilesearch]='fzfFilesearchVerb=vim a file in a sub dir'
 ZPWR_VERBS[vimfilesearchedit]='fzfFilesearchVerbEdit=edit vim a file in a sub dir'
 ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
@@ -742,6 +746,27 @@ function vimFzf(){
     fi
 }
 
+function fzfWordsearchVerbEdit(){
+    local sel
+    sel=$(fz vim)
+    if [ -n "$sel" ]; then
+        BUFFER="$EDITOR $sel"
+        print -z -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+function fzfWordsearchVerb(){
+    local file
+    file=$(fz vim)
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -s -- "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+    eval "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+}
+
 function fzfFileSearch(){
     command find -L . -mindepth 1 \
         \( -path '*/\\.*' -o -fstype 'sysfs' \
@@ -941,7 +966,7 @@ function vimFzfSudo(){
 function intoFzfAg(){
     mywords=("${(z)BUFFER}")
 
-    if echo ${mywords[1]} | command grep -q vim; then
+    if echo ${mywords[1]} | command grep -sq vim; then
         BUFFER="$BUFFER $(fz vim)"
     else
         BUFFER="$BUFFER $(fz)"
