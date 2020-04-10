@@ -337,6 +337,8 @@ ZPWR_VERBS[forgitstash]='forgit::stash::show=forgit fzf stash'
 ZPWR_VERBS[forgitwarn]='forgit::warn=forgit fzf warn'
 ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
 ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
+ZPWR_VERBS[vimfilesearch]='fzfFilesearchVerb=vim a file in a sub dir'
+ZPWR_VERBS[vimfilesearchedit]='fzfFilesearchVerbEdit=edit vim a file in a sub dir'
 ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
 ZPWR_VERBS[hist]='historyVerbAccept=exec history command'
 ZPWR_VERBS[histedit]='historyVerbEdit=edit history command'
@@ -738,6 +740,36 @@ function vimFzf(){
         BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
         zle .accept-line
     fi
+}
+
+function fzfFileSearch(){
+    command find -L . -mindepth 1 \
+        \( -path '*/\\.*' -o -fstype 'sysfs' \
+        -o -fstype 'devfs' -o -fstype 'devtmpfs' \
+        -o -fstype 'proc' \) -prune -o -type f -print \
+        -o -type l -print 2> /dev/null | cut -c3- |
+        eval "fzf -m --border $FZF_CTRL_T_OPTS" | perl -pe 's@\x0a@\x20@g'
+}
+
+function fzfFilesearchVerbEdit(){
+    local sel
+    sel=$(fzfFileSearch)
+    if [ -n "$sel" ]; then
+        BUFFER="$EDITOR $sel"
+        print -z -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+function fzfFilesearchVerb(){
+    local file
+    file=$(fzfFileSearch)
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -s -- "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+    eval "$EDITOR $file; clearList; isGitDir && git diff HEAD"
 }
 
 function fzfDirSearch(){
