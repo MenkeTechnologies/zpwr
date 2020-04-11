@@ -29,7 +29,7 @@ font=${ary[$randIndex]}
 echo "$(date) random font is $font" >>"$ZPWR_LOGFILE"
 
 if (($# == 0)); then
-    cat | figlet -f "$font" | lolcat
+    cat | figlet -f "$font"
 else
     output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
 
