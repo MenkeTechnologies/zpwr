@@ -393,10 +393,10 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim' &&
+    echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim|alacritty' &&
         plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
-    echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim' &&
+    echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim|alacritty' &&
         plugins+=(tmux)
     plugins+=(systemd)
     distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
