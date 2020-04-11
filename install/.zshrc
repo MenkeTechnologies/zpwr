@@ -210,6 +210,7 @@ if [[ ! -d $ZPWR_LOCAL ]]; then
 fi
 
 function exists(){
+
     #alternative is command -v
     type -- "$1" &>/dev/null || return 1 &&
     type -- "$1" 2>/dev/null |
@@ -445,12 +446,14 @@ alias -r > "$ZPWR_LOCAL/.common_aliases"
 #{{{                    MARK:Custom Fxns
 #**************************************************************
 function sub (){
+
     zle .kill-whole-line
     BUFFER="suc"
     zle .accept-line
 }
 
 function scriptEdit(){
+
         BUFFER="$(fzvimScript)"
         if [[ -z "$BUFFER" ]]; then
             return
@@ -465,6 +468,7 @@ function scriptEdit(){
 }
 
 function vimRecent(){
+
     BUFFER="$(fzvim)"
     if [[ -z "$BUFFER" ]]; then
         return
@@ -489,6 +493,7 @@ function scriptCount(){
 }
 
 function lastWordDouble(){
+
     mywords=("${(z)BUFFER}")
     if [[ $BUFFER[-1] == " " ]]; then
         BUFFER="$BUFFER"$mywords[-1]
@@ -502,6 +507,7 @@ function lastWordDouble(){
 zle -N lastWordDouble
 
 function updater (){
+
     zle .kill-whole-line
     #bash -l options for creating login shell to run script
     #avoiding issues with rvm which only runs on login shell
@@ -510,6 +516,7 @@ function updater (){
 }
 
 function tutsUpdate() {
+
     commitMessage="$BUFFER"
     if [[ ! -z "$commitMessage" ]]; then
         if [[ "$commitMessage" =~ ^\ +$ ]]; then
@@ -527,6 +534,7 @@ function tutsUpdate() {
 }
 
 function sshRegain() {
+
     if echo "$(command ps -ef)" | command  grep -q 'ssh '; then
         if [[ "$BUFFER" != "" ]]; then
             print -sr -- "$BUFFER"
@@ -551,6 +559,7 @@ function sshRegain() {
 }
 
 function dbz() {
+
     zle .kill-whole-line
     BUFFER=db
     zle .accept-line
@@ -633,11 +642,13 @@ function changeQuotes(){
 }
 
 function alternateQuotes(){
+
     BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"
 }
 
 
 function clipboard(){
+
     [[ -z "$BUFFER" ]] && return 1
 
     local clipcmd=$ZPWR_COPY_CMD
@@ -670,26 +681,29 @@ function runner() {
 }
 
 function updater() {
+
     zle .kill-whole-line
     BUFFER=u8
     zle .accept-line
 }
 
 function getrcWidget(){
+
     zle .kill-whole-line
     BUFFER="getrc"
     zle .accept-line
 }
 
 function intoFzf(){
+
     LBUFFER="$LBUFFER |& fzf -m --border --ansi"
     zle .accept-line
 }
 
 function lsoffzf(){
+
     LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"
 }
-
 
 # cache autoload +X functions,aliases, builtins,reswords into file
 # search with fzf
@@ -707,6 +721,7 @@ function clearListFZF(){
 }
 
 function fzvim(){
+
     local file
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         file="$ZPWR_NVIMINFO"
@@ -721,7 +736,9 @@ function fzvim(){
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
     fi
 }
+
 function fzvimScript(){
+
     command ls \
         "$ZPWR_SCRIPTS/"*.{sh,zsh,pl,py} \
         "$ZPWR_SCRIPTS/macOnly/"*.{sh,zsh,pl,py} |
@@ -731,6 +748,7 @@ function fzvimScript(){
 }
 
 function vimFzf(){
+
     zle .kill-whole-line
     BUFFER="$(fzvim)"
     mywords=(${(z)BUFFER})
@@ -747,6 +765,7 @@ function vimFzf(){
 }
 
 function fzfWordsearchVerbEdit(){
+
     local sel
     sel=$(fz vim)
     if [ -n "$sel" ]; then
@@ -758,6 +777,7 @@ function fzfWordsearchVerbEdit(){
 }
 
 function fzfWordsearchVerb(){
+
     local file
     file=$(fz vim)
     if [[ -z "$file" ]]; then
@@ -768,6 +788,7 @@ function fzfWordsearchVerb(){
 }
 
 function fzfFileSearch(){
+
     command find -L . -mindepth 1 \
         \( -path '*/\\.*' -o -fstype 'sysfs' \
         -o -fstype 'devfs' -o -fstype 'devtmpfs' \
@@ -777,6 +798,7 @@ function fzfFileSearch(){
 }
 
 function fzfFilesearchVerbEdit(){
+
     local sel
     sel=$(fzfFileSearch)
     if [ -n "$sel" ]; then
@@ -788,6 +810,7 @@ function fzfFilesearchVerbEdit(){
 }
 
 function fzfFilesearchVerb(){
+
     local file
     file=$(fzfFileSearch)
     if [[ -z "$file" ]]; then
@@ -798,6 +821,7 @@ function fzfFilesearchVerb(){
 }
 
 function fzfDirSearch(){
+
     command find -L . -mindepth 1 \
         \( -path '*/\\.*' -o -fstype 'sysfs' \
         -o -fstype 'devfs' -o -fstype 'devtmpfs' \
@@ -807,6 +831,7 @@ function fzfDirSearch(){
 }
 
 function fzfDirsearchVerb(){
+
     local dir
     dir=$(fzfDirSearch)
     if [[ -z "$dir" ]]; then
@@ -817,12 +842,14 @@ function fzfDirsearchVerb(){
 }
 
 function fzfZList(){
+
     z -l |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
     eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }
 
 function fzfZListVerb(){
+
     local dir
     dir=$(fzfZList)
     if [[ -z "$dir" ]]; then
@@ -833,17 +860,20 @@ function fzfZListVerb(){
 }
 
 function fasdFList(){
+
     fasd -f |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
     eval "fzf -m --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
 function fm(){
+
    FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfMan.sh" "$1")'"
     man "$1" | col -b | eval "fzf --no-sort -m $FZF_MAN_OPTS"
 }
 
 function zFZF(){
+
     zle .kill-whole-line
     BUFFER="z $(fzfZList)"
     mywords=(${(z)BUFFER})
@@ -855,6 +885,7 @@ function zFZF(){
 }
 
 function fasdFZF(){
+
     BUFFER="$BUFFER $(fasdFList)"
     mywords=(${(z)BUFFER})
     if (( $#mywords == 1 )); then
@@ -865,6 +896,7 @@ function fasdFZF(){
 }
 
 function fasdFListVerb(){
+
     local file
     file=$(fasdFList)
     if [[ -z "$file" ]]; then
@@ -875,6 +907,7 @@ function fasdFListVerb(){
 }
 
 function killPSVerbAccept(){
+
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [ -n "$sel" ]; then
         BUFFER="sudo kill -9 -- $sel"
@@ -886,6 +919,7 @@ function killPSVerbAccept(){
 }
 
 function killPSVerbEdit(){
+
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [ -n "$sel" ]; then
         BUFFER="sudo kill -9 -- $sel"
@@ -896,6 +930,7 @@ function killPSVerbEdit(){
 }
 
 function killLsofVerbAccept(){
+
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [ -n "$sel" ]; then
         BUFFER="sudo kill -9 -- $sel"
@@ -907,6 +942,7 @@ function killLsofVerbAccept(){
 }
 
 function killLsofVerbEdit(){
+
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [ -n "$sel" ]; then
         BUFFER="sudo kill -9 -- $sel"
@@ -916,7 +952,8 @@ function killLsofVerbEdit(){
     fi
 }
 
-historyVerbAccept(){
+function historyVerbAccept(){
+
     local num sel
       sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |
@@ -930,7 +967,8 @@ historyVerbAccept(){
     fi
 }
 
-historyVerbEdit(){
+function historyVerbEdit(){
+
     local num sel
       sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |
@@ -944,6 +982,7 @@ historyVerbEdit(){
 }
 
 function vimFzfSudo(){
+
     zle .kill-whole-line
 
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
@@ -964,6 +1003,7 @@ function vimFzfSudo(){
 }
 
 function intoFzfAg(){
+
     mywords=("${(z)BUFFER}")
 
     if echo ${mywords[1]} | command grep -sq vim; then
@@ -978,6 +1018,7 @@ function intoFzfAg(){
 }
 
 function keySender(){
+
     if (( $ZPWR_SEND_KEYS_PANE != -1 )); then
         #tmux send-keys -t learn:0.0 $1
         for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
@@ -987,17 +1028,20 @@ function keySender(){
 }
 
 function stopSend(){
+
     ZPWR_SEND_KEYS_PANE=-1
     ZPWR_SEND_KEYS_FULL=false
     command rm $ZPWR_LOCK_FILE &>/dev/null
 }
 
 function startSendFull(){
+
     ZPWR_SEND_KEYS_FULL=true
     startSend "$@"
 }
 
 function startSend(){
+
     if [[ -z "$1" ]]; then
         loggErr "need arg: <pane>"
         return 1
@@ -1017,6 +1061,7 @@ function startSend(){
 }
 
 function keyClear(){
+
     if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
         for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
             tmux send-keys -t $pane "C-u"
@@ -1025,6 +1070,7 @@ function keyClear(){
 }
 
 function self-insert() {
+
   zle .self-insert
   keySender $KEYS
 }
@@ -1032,22 +1078,26 @@ function self-insert() {
 zle -N self-insert
 
 function clearLine() {
+
     keyClear
     LBUFFER=
 }
 
 function regenZshCompCache(){
+
     prettyPrint "regen zsh compsys cache"
     command rm -fv "$HOME/.zcompdump"* 2>/dev/null
     compinit -u
 }
 
 function regenSearchEnv(){
+
     prettyPrint "regenerating all env into ${ZPWR_ENV}{Key,Value}.txt"
     source "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh" "$ZPWR_ENV"
 }
 
 function regenAll(){
+
     regenConfigLinks
     regenZshCompCache
     regenTags
@@ -1058,6 +1108,7 @@ function regenAll(){
 }
 
 function deleteLastWord(){
+
     mywords=(${(z)BUFFER})
     if (( $#mywords > 1  )); then
         BUFFER=${mywords[1,-2]}" "
@@ -1068,6 +1119,7 @@ function deleteLastWord(){
 
 
 function fzfEnv(){
+
     if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
         loggDebug "regenerating keys for $ZPWR_ENV"
         regenSearchEnv
@@ -1083,6 +1135,7 @@ function fzfEnv(){
 
 
 function fzfAllKeybind(){
+
     if [[ ! -s "$ZPWR_ALL_KEYBINDINGS" ]]; then
         loggDebug "regenerating $ZPWR_ALL_KEYBINDINGS"
         regenAllKeybindingsCache
@@ -1091,6 +1144,7 @@ function fzfAllKeybind(){
 }
 
 function fzfVimKeybind(){
+
     if [[ ! -s "$ZPWR_VIM_KEYBINDINGS" ]]; then
         loggDebug "regenerating $ZPWR_VIM_KEYBINDINGS"
         regenAllKeybindingsCache
@@ -1099,11 +1153,13 @@ function fzfVimKeybind(){
 }
 
 function getFound(){
+
     eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
 function locateFzf(){
+
     local found firstArg
     mywords=(${(z)BUFFER})
     if (( $#mywords == 0 )); then
@@ -1133,6 +1189,7 @@ function locateFzf(){
 }
 
 function fzfCommits(){
+
     BUFFER=""
     zle .kill-whole-line
     if isGitDir; then
@@ -1146,24 +1203,28 @@ function fzfCommits(){
 }
 
 function asVar(){
+
     region_highlight=("P0 20 fg=blue,bg=red")
     BUFFER="=\"\$($BUFFER)\""
     CURSOR=0
 }
 
 function interceptSurround(){
+
     #surround
     exists autopair-insert && autopair-insert
     keySender
 }
 
 function interceptDelete(){
+
     #deleteMatching
     exists autopair-delete && autopair-delete
     keySender
 }
 
 function zpwrVerbsWidgetAccept(){
+
     zle .kill-whole-line
     BUFFER="$(zpwrVerbs)"
     loggDebug "$BUFFER"
@@ -1171,6 +1232,7 @@ function zpwrVerbsWidgetAccept(){
 }
 
 function zpwrVerbsWidget(){
+
     zle .kill-whole-line
     BUFFER="$(zpwrVerbs)"
     loggDebug "$BUFFER"
@@ -1462,7 +1524,7 @@ function my-accept-line () {
         fi
     fi
 
-set +x
+    set +x
     zle .accept-line
     #leaky simonoff theme so reset ANSI escape sequences
     printf "\x1b[0m"
@@ -1471,6 +1533,7 @@ set +x
 zle -N accept-line my-accept-line
 
 function precmd(){
+
     (( $? == 0)) && {
         if [[ "$ZPWR_WILL_CLEAR" == true ]]; then
             if [[ $ZPWR_RM_AUTO_LS == true ]]; then
@@ -1507,6 +1570,7 @@ if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
     fi
 
 function rationalize-dot (){
+
     if [[ $LBUFFER = *.. ]]; then
         LBUFFER+=/..
     else
@@ -1603,6 +1667,7 @@ if (( $version > 5.2 )); then
 fi
 
 function EOLorNextTabStop(){
+
     lenToFirstTS=${#BUFFER%%$ZPWR_TABSTOP*}
     if (( $lenToFirstTS < ${#BUFFER} )); then
         CURSOR=$lenToFirstTS
@@ -2013,6 +2078,7 @@ zstyle ':completion:*' ignored-patterns '*.'
 #{{{                    MARK:Global Aliases
 #**************************************************************
 function globalAliasesInit(){
+
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command grep -v -E '\bag\b' |& \\ag --color -i --"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$ZPWR_LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
@@ -2073,10 +2139,12 @@ exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' 
 exists zu8 || alias zu8='zpwr updateall'
 
 function tabNum() {
+    
     echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
 
 function tabNumCmd() {
+
     num=$1
     shift
     args="$@"
@@ -2203,16 +2271,19 @@ test -f "$ZPWR_LOCAL/.tokens.sh" &&
 #{{{                    MARK:Initialize Login
 #**************************************************************
 function banner(){
+
     bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
     ponysay -W 100
 }
 function bannerLolcat(){
+
     bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
     ponysay -W 100 |
     splitReg.sh -- \
     ---------------------- lolcat
 }
 function noPonyBanner(){
+
     eval "$ZPWR_DEFAULT_BANNER"
 }
 
@@ -2418,6 +2489,7 @@ source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
 #**************************************************************
 #print 2d array of colors
 function colortest(){
+
     for backgroundColor in ${(ko)bg}; do
         print -n "$bg[$backgroundColor]"
         printf '%s%-8s' $fg[black] black
@@ -2446,6 +2518,7 @@ function colortest(){
 
 
 function 256colors(){
+
     if [[ -z "$1" ]]; then
         for i in {0..255};do
             printf "\x1b[48;5;${i};37m    $i    "
@@ -2466,6 +2539,7 @@ export PYGMENTIZE_COLOR="emacs"
 export ZPWR_COLORIZER=bat
 
 if [[ $ZPWR_COLORIZER == bat ]]; then
+
     if exists bat;then
         export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
         export COLORIZER_FZF_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
@@ -2498,6 +2572,7 @@ export FZF_JELLY="--color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
 
 
 function fzf_setup(){
+
     export ZPWR_COMMON_FZF_ELEM
     ZPWR_COMMON_FZF_ELEM="--prompt='-->>> '"
 
@@ -2531,6 +2606,7 @@ fzf_setup
 
 # killall ;<tab>
 function _fzf_complete_killall() {
+
   _fzf_complete '-m' "$@" < <(
     command ps -e -o command | sed -n '2,$p'
     )
@@ -2544,6 +2620,7 @@ function _fzf_complete_mvim() {
 }
 # vim ;<tab>
 function _fzf_complete_vim() {
+
   _fzf_complete '-m' "$@" < <(
     local file
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
@@ -2558,6 +2635,7 @@ function _fzf_complete_vim() {
 }
 # nvim ;<tab>
 function _fzf_complete_nvim() {
+
     local file
     file="$ZPWR_NVIMINFO"
     test -e "$file" || touch "$file"
@@ -2567,28 +2645,33 @@ function _fzf_complete_nvim() {
 }
 # printf ;<tab>
 function _fzf_complete_printf() {
+
   _fzf_complete '-m' "$@" < <(
       declare -xp | perl -pe '$_=~s@export\s(.*)(=.*)@$1@'
     )
 }
 
 function _fzf_complete_printf_post() {
+
     perl -pe '$_="\$$_" if ! m{^\$.*}'
 }
 
 # echo $;<tab>
 function _fzf_complete_echo() {
+
   _fzf_complete '-m' "$@" < <(
       declare -x | perl -ne 'print "$1\n" if m{^([^=]+)=(\S+)}'
     )
 }
 
 function _fzf_complete_echo_post() {
+
     perl -pe '$_="\$$_" if ! m{^\$.*}'
 }
 
 # alias ;<tab>
 function _fzf_complete_alias() {
+
   _fzf_complete '-m' "$@" < <(
       alias | sed 's@=.*@@'
     )
@@ -2596,6 +2679,7 @@ function _fzf_complete_alias() {
 
 # c ;<tab>
 function _fzf_complete_c() {
+
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '-m' "$@" < <(
     find . -type f |& perl -lpe '$_=~s@$ENV{HOME}@~@'
     )
@@ -2603,6 +2687,7 @@ function _fzf_complete_c() {
 
 # f ;<tab>
 function _fzf_complete_f() {
+
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
   find . -type d |& perl -lpe '$_=~s@$ENV{HOME}@~@'
     )
@@ -2610,6 +2695,7 @@ function _fzf_complete_f() {
 
 # z ;<tab>
 function _fzf_complete_z() {
+
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
     z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if m{\d+\.*\d+\s*(.*)}}'
     )
@@ -2617,6 +2703,7 @@ function _fzf_complete_z() {
 
 # r ;<tab>
 function _fzf_complete_r() {
+
     local dir
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS_2 _fzf_complete '--ansi' "$@" < <(
   dirname $(pwd) |
@@ -2625,11 +2712,13 @@ function _fzf_complete_r() {
 }
 
 function _fzf_complete_r_post() {
+
     cut -d ' ' -f1
 }
 
 # clearList ;<tab>
 function _fzf_complete_clearList() {
+
     FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(
         cat "${ZPWR_ENV}Key.txt" | awk '{print $2}'
     )
@@ -2658,6 +2747,7 @@ function _fzf_complete_git() {
     )
 }
 function _fzf_complete_git_post() {
+
     cut -d ' ' -f1
 }
 
@@ -2698,6 +2788,7 @@ _comps[tcsh]=_tcsh
 _comps[csh]=_tcsh
 
 function _cl(){
+
     local global_aliases
     _alternative \
         'global-aliases:global alias:compadd -Qk galiases' \
@@ -2712,6 +2803,7 @@ function _cl(){
 }
 
 function _p(){
+
     _alternative \
     'process-names:processes:_pgrep' \
     'processes:pids:_pids'
@@ -2721,6 +2813,7 @@ local zcmd
 exists zshz && zcmd=zshz || zcmd=_z
 
 function _f(){
+
     local cmd
     if exists fasd;then
         _alternative 'files:directory:_path_files -g "*(-D/)"' &&
@@ -2745,6 +2838,7 @@ function _f(){
 }
 
 function _c(){
+
     if exists fasd;then
         _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' &&
         ret=0 || ret=1
@@ -2765,11 +2859,13 @@ function _c(){
 }
 
 function _ssd(){
+
     arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and/running/')"')')
     _arguments -s $arguments
 }
 
 function _ssu(){
+
     arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')
     _arguments -s $arguments
 }
@@ -2780,6 +2876,7 @@ for k v in ${(kv)ZPWR_VERBS[@]};do
 done
 
 function _zpwr(){
+
   local arguments
   arguments=(
   '--help[show this help message and exit]: :->noargs'
@@ -2817,6 +2914,7 @@ function _zpwr(){
 }
 
 function _tmux_pane_words() {
+
   local expl
   local -a w
 
@@ -2849,10 +2947,12 @@ function _tmux_pane_words() {
 declare -a last_ten
 
 function _complete_hist(){
+
     last_ten=( ${(f)"$(fc -l 200 | perl -lane 'print "@F[1..$#F]"')"} )
     _wanted last-ten expl 'last commands' compadd -Qa last_ten
 }
 function _complete_plus_last_command_args() {
+
     _wanted last-line expl 'last args' compadd -Qa last_command_array
 }
 
@@ -2895,6 +2995,7 @@ local -A whitelist_tmux_completion
 whitelist_tmux_completion=(ping 1 dig 2 digs 3 host 4 mtr 5 traceroute 6)
 
 function _megacomplete(){
+
     local -a last_command_array
     local expl cmd ret
     cmd=$words[1]
@@ -2926,6 +3027,7 @@ function _megacomplete(){
 }
 
 function _r(){
+
     rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)." "};print ++$c.":/"'))
 
     _describe -t zdir 'rdirs' rdirs
@@ -2959,6 +3061,7 @@ exists _express && compdef _express express
 #redefine global zsh completion function called at first parameter
 #adding global aliases and files
 function _command_names(){
+
     # The option `-e' if given as the first argument says that we should
     # complete only external commands and executable files. This and a
     # `-' as the first argument is then removed from the arguments.
@@ -3020,6 +3123,7 @@ function _command_names(){
 }
 
 function _parameters() {
+
     # function_body
     # local expl pattern fakes faked tmp pfilt
 
@@ -3079,8 +3183,11 @@ alias -s txt='vim'
 #{{{                    MARK:Auto attach tmux
 #**************************************************************
 if [[ $ZPWR_AUTO_ATTACH == true ]]; then
+
     if [[ "$(uname)" == Linux ]]; then
+
         if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
+
             mobile=true
             cat ~/.ssh/authorized_keys |
                 command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
@@ -3151,6 +3258,7 @@ fi
 autoload -Uz zrecompile
 
 function recompile(){
+
     prettyPrint "recompiling all configs to .zwc for speed"
     local dir
 	test -f ~/.zshrc && zrecompile -p ~/.zshrc
@@ -3166,7 +3274,7 @@ function recompile(){
 	done
 }
 
-zshrcsearch(){
+function zshrcsearch(){
     if [[ -z "$1" ]]; then
         zsh -ilvx -c false &> $ZPWR_TEMPFILE4
         less $ZPWR_TEMPFILE4
@@ -3181,6 +3289,7 @@ alias mmv='noglob zmv -W'
 autoload zargs
 
 function zarg(){
+
     if [[ -z "$2" ]]; then
         loggErr "need two args, escaped glob and cmd with {}"
         return 1
@@ -3228,6 +3337,7 @@ function zpwrAllUpdates(){
 }
 
 function zpwrForAllGitDirs(){
+
     if [[ -z "$1" ]]; then
         loggErr "zpwrForGitDir <cmd>"
         return 1
@@ -3255,6 +3365,7 @@ function zpwrUpdateAllGitDirs(){
 }
 
 function zpwrVerbs(){
+
     if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
         logg "regenerating keys for $ZPWR_ENV"
         regenSearchEnv
@@ -3281,24 +3392,29 @@ function zpwrVerbs(){
 }
 
 function numZpwrVerbs(){
+
     echo $#ZPWR_VERBS
 }
 
 function zpwrEnvVars(){
+
     env | command grep -i "^$ZPWR_REPO_NAME" | fzf
 }
 
 function zpwrTags(){
+
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
 
 function revealRecurse(){
+
     for i in **/*(/); do
         ( builtin cd $i && reveal 2>/dev/null; )
     done
 }
 
 function evalTester(){
+
     echo eval fordir ${(q)*}
 }
 

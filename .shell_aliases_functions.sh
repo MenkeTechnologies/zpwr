@@ -21,6 +21,7 @@
 #{{{                    MARK:Global Fxn
 #**************************************************************
 isZsh(){
+
     if command ps -p $$ | command grep -qs zsh; then
         return 0
     else
@@ -31,6 +32,7 @@ isZsh(){
 if isZsh; then
     if ! type -- exists>/dev/null 2>&1; then
         function exists(){
+
             #alternative is command -v
             type -- "$1" &>/dev/null || return 1 &&
             type -- "$1" 2>/dev/null |
@@ -40,12 +42,14 @@ if isZsh; then
     fi
 else
     function exists(){
+
         #alternative is command -v
         type -- "$1" >/dev/null 2>&1
     }
 fi
 
 function chooseNvimVim(){
+
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         exists nvim && {
             alias v='nvim'
@@ -64,10 +68,12 @@ function chooseNvimVim(){
     fi
 }
 function loggNotGit() {
+
     loggErr "$(pwd) is not a git dir"
 }
 
 function loggErr(){
+
     test -z "$1" && loggErr "need arg" >&2 && return 1
     {
         printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ERROR: "
@@ -525,6 +531,7 @@ exists idea && {
 #**************************************************************
 
 function r(){
+
     local cdstr
     if [[ -z $1 ]]; then
         cd ..
@@ -539,10 +546,12 @@ function r(){
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
     function exe(){
+
         python3 "$PYSCRIPTS/ssh_runner.py" "$@"
     }
 
     function nn(){
+
         if [[ -z "$2" ]];then
             loggErr "Title is \$1 and message is \$2..." &&
             return 1
@@ -554,14 +563,17 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     }
 
     function db(){
+
         python3 "$PYSCRIPTS/loginDBChrome.py"
     }
 
     function db2(){
+
         python3 "$PYSCRIPTS/logIntoMyDB.py"
     }
 
     function scriptToPDF(){
+
         tempFile="$HOME/__test.ps"
         vim "$1" -c "hardcopy > $tempFile" -c quitall
         cat "$tempFile" | open -fa Preview
@@ -571,6 +583,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 else
     exists ps2pdf && {
         function scriptToPDF(){
+
             if [[ -z "$1" ]]; then
                 loggErr "need an arg"
                 return 1
@@ -583,6 +596,7 @@ else
     }
 
     function ssd() {
+
         for service in "$@"; do
             prettyPrint "sudo systemctl stop $service"
             prettyPrint "sudo systemctl disable $service"
@@ -592,6 +606,7 @@ else
     }
 
     function ssu() {
+
         for service in "$@"; do
             prettyPrint "sudo systemctl start $service"
             prettyPrint "sudo systemctl enable $service"
@@ -602,6 +617,7 @@ else
 
 
     function tailufw(){
+
         size=100
         if [[ -n $1 ]]; then
             size=$1
@@ -616,35 +632,37 @@ else
     }
 
     function restartZabbixAgent(){
+
         if exists ccze; then
-        sudo systemctl restart zabbix-agent
-        sudo systemctl --no-pager status zabbix-agent
-        sudo journalctl -n 100 --no-pager
-        sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log | ccze
+    sudo systemctl restart zabbix-agent
+    sudo systemctl --no-pager status zabbix-agent
+    sudo journalctl -n 100 --no-pager
+    sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log | ccze
         else
-        sudo systemctl restart zabbix-agent
-        sudo systemctl --no-pager status zabbix-agent
-        sudo journalctl -n 100 --no-pager
-        sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
+    sudo systemctl restart zabbix-agent
+    sudo systemctl --no-pager status zabbix-agent
+    sudo journalctl -n 100 --no-pager
+    sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
         fi
     }
 
     function restart(){
+
         service="$1"
         local src_dir
         src_dir="$ZPWR_INSTALL"
         local service_path
         service_path="$src_dir/$service.service"
         test -d "$src_dir" ||
-            { loggErr "$src_dir does not exists." && return 1; }
+    { loggErr "$src_dir does not exists." && return 1; }
         test -f "$service_path" ||
-            { loggErr "$service_path does not exists so falling back to $1." && service_path="$1"; }
+    { loggErr "$service_path does not exists so falling back to $1." && service_path="$1"; }
 
         test -f "$service_path" ||
-            { loggErr "$service_path does not exists so exiting." && return 1; }
+    { loggErr "$service_path does not exists so exiting." && return 1; }
 
         test -d "/etc/systemd/system" ||
-            { loggErr "/etc/systemd/system does not exists. Is systemd installed?" && return 1; }
+    { loggErr "/etc/systemd/system does not exists. Is systemd installed?" && return 1; }
 
         ( builtin cd "$src_dir" && git pull; )
         group=$(id -gn)
@@ -674,6 +692,7 @@ else
 fi
 
 function cloneToForked(){
+
     branch=master
     (
         if [[ -z "$1" ]]; then
@@ -764,12 +783,14 @@ function logg(){
 }
 
 function loggDebug(){
+
     if [[ $ZPWR_DEBUG == true ]]; then
        logg "$@" 
     fi
 }
 
 function xx(){
+
     local counter cmd DONE
     
     cmd="$1"
@@ -785,16 +806,19 @@ function xx(){
 }
 
 function urlSafe(){
+    
     cat | base64 | tr '+/=' '._-'
 }
 
 function cgh(){
+
     [[ -z "$1" ]] && user="$ZPWR_GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/$user" |
     command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
 }
 
 function upload(){
+
     if [[ -z "$2" ]]; then
         loggErr "upload <file> <URL>"
         return 1
@@ -803,12 +827,14 @@ function upload(){
 }
 
 function jd(){
+
     for dir;do
         command mkdir -p "$dir"
     done
 }
 
 function j(){
+
     for file;do
         dirname="$(dirname $file)"
         [[ "$dirname" != . ]] && command mkdir -p "$dirname"
@@ -827,6 +853,7 @@ function scnew(){
 }
 
 function p(){
+
     if [[ "$ZPWR_OS_TYPE" == linux || "$ZPWR_OS_TYPE" == darwin ]]; then
         [[ -z $1 ]] && ps -ef && return 0
         out="$(ps -ef)"
@@ -845,6 +872,7 @@ function p(){
 }
 
 function b(){
+
     if [[ $1 == -s ]]; then
         sleepTime=$2
         shift 2
@@ -862,12 +890,14 @@ function b(){
 }
 
 function suc(){
+
     subl "$ZPWR_SCRIPTS"
     f "$ZPWR_SCRIPTS"
     python3 "$PYSCRIPTS/textEditorTwoColumns.py"
 }
 
 function allRemotes(){
+
     if ! isGitDir; then
         loggNotGit
         return 1
@@ -881,6 +911,7 @@ function allRemotes(){
 }
 
 function largestGitFiles(){
+
     if ! isGitDir; then
         loggNotGit
         return 1
@@ -903,6 +934,7 @@ function largestGitFiles(){
 }
 
 function clearGitCommit(){
+
     if ! isGitDir; then
         loggNotGit
         return 1
@@ -927,6 +959,7 @@ function clearGitCommit(){
 }
 
 function clearGitCache(){
+
     if ! isGitDir; then
         loggNotGit
         return 1
@@ -938,6 +971,7 @@ function clearGitCache(){
 }
 
 function about(){
+
     old="$LESS"
     unset LESS
     if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
@@ -947,6 +981,7 @@ function about(){
 }
 
 function clearList() {
+
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists exa;then
             ls_command="$ZPWR_EXA_COMMAND"
@@ -1062,6 +1097,7 @@ function clearList() {
 }
 
 function listNoClear () {
+
     exists exa && eval "$ZPWR_EXA_COMMAND" && return 0
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
@@ -1082,10 +1118,12 @@ function listNoClear () {
 }
 
 function animate(){
+
     bash "$ZPWR_SCRIPTS/animation"
 }
 
 function blocksToSize(){
+
     read input
     local bytes
     bytes=$(( input * 512 ))
@@ -1093,6 +1131,7 @@ function blocksToSize(){
 }
 
 function humanReadable(){
+
     awk 'function human(x) {
         s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"
         while (x>=1024 && length(s)>1){
@@ -1106,6 +1145,7 @@ function humanReadable(){
 }
 
 function f(){
+
     if [[ -f "$1" ]]; then
         cd "$(dirname "$1")"
     elif [[ -d "$1" ]];then
@@ -1140,11 +1180,13 @@ function execpy(){
 }
 
 function search(){
+
     test -z $2 && command grep -iRnC 5 "$1" * ||
         command grep -iRnC 5 "$1" "$2"
 }
 
 function cd(){
+
     #builtin is necessary here to distinguish
     #bt function name and builtin cd command
     #don't want to recursively call this function
@@ -1154,10 +1196,12 @@ function cd(){
     fi
 }
 function isGitDir(){
+
     command git rev-parse --git-dir 2> /dev/null 1>&2
 }
 
 function isGitDirMessage(){
+
     if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
         printf "\x1b[0;1;31m"
         loggErr "NOT GIT DIR: $(pwd -P)"
@@ -1167,6 +1211,7 @@ function isGitDirMessage(){
 }
 
 function gil(){
+
     if ! isGitDir; then
        loggErr "not in a git dir."
        return 1
@@ -1339,6 +1384,7 @@ function contribCountLines(){
 }
 
 function gsdc(){
+
     if ! isGitDir; then
        loggErr "not in a git dir."
        return 1
@@ -1389,6 +1435,7 @@ function gsdc(){
 }
 
 function gitCommitAndPush(){
+
     if ! isGitDir; then
        loggErr "not in a git dir."
        return 1
@@ -1430,6 +1477,7 @@ function replacer(){
 }
 
 function creategif(){
+
     outFile=out.gif
     res=600x400
 
@@ -1447,6 +1495,7 @@ function creategif(){
 }
 
 function hc(){
+
     local reponame old_dir
     test -z "$1" && reponame="$(basename "$(pwd)")" ||
         reponame="$1"
@@ -1466,6 +1515,7 @@ function hc(){
 }
 
 function hd(){
+
     test -n "$1" && repo="$1" && user="$ZPWR_GITHUB_ACCOUNT" || {
 		if line="$(git remote -v 2>/dev/null | sed 1q)";then
             if echo "$line" | command grep -sq 'git@';then
@@ -1502,11 +1552,13 @@ function hd(){
 }
 
 function pstreemonitor(){
+
     bash $ZPWR_SCRIPTS/myWatchNoBlink.sh \
     "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
 }
 
 function return2(){
+
     if isZsh; then
         exec 2> /dev/tty
     else
@@ -1516,6 +1568,7 @@ function return2(){
 }
 
 function color2(){
+
     if isZsh; then
         exec 2> >(redText.sh)
     else
@@ -1525,12 +1578,14 @@ function color2(){
 }
 
 function escapeRemove(){
+
     while read; do
         echo "$REPLY" | sed -e 's@\e\[.\{1,5\}m@@g'
     done
 }
 
 function prettyPrint(){
+
     if [[ -n "$1" ]];then
         printf "\x1b[1m"
         printf "%s " "$@"
@@ -1542,6 +1597,7 @@ function prettyPrint(){
 }
 
 function alternatingPrettyPrint(){
+
     local counter
     counter=0
 
@@ -1571,6 +1627,7 @@ function alternatingPrettyPrint(){
 }
 
 function tac(){
+
     sed '1!G;h;$!d' "$@"
 }
 
@@ -1593,6 +1650,7 @@ exists gcl && {
 }
 
 function gcl() {
+
     if [[ -z "$1" ]]; then
         loggErr "usage gcl <repo>"
         return 1
@@ -1672,6 +1730,7 @@ EOF
 }
 
 function jetbrainsWorkspaceEdit(){
+
     perl -E 'say "_"x100'
     prettyPrint "MONITORING WORKSPACE..."
     perl -E 'say "_"x100'
@@ -1692,6 +1751,7 @@ function jetbrainsWorkspaceEdit(){
 }
 
 function o(){
+
     open_cmd="$ZPWR_OPEN_CMD" || return 1
 
     if isZsh; then
@@ -1711,6 +1771,7 @@ function o(){
 }
 
 function openmygh(){
+
     open_cmd="$ZPWR_OPEN_CMD" || return 1
 
     if isZsh; then
@@ -1741,6 +1802,7 @@ function zpwr(){
 }
 
 function zp(){
+
     if test -z $1;then
         cd "$ZPWR_REPO"
     else
@@ -1755,6 +1817,7 @@ if [[ -d "$FORKED_DIR" ]]; then
 fi
 
 function zpz(){
+
     local dirsc forked
     dirsc="$ZPWR"
 
@@ -1767,6 +1830,7 @@ function zpz(){
 }
 
 function zr(){
+
     local dirsc forked
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"
@@ -1781,6 +1845,7 @@ function zr(){
 }
 
 function goInstallerDir(){
+
     local ret=0
     builtin cd "$ZPWR_INSTALL" || ret=1
 
@@ -1840,6 +1905,7 @@ function linkConf(){
 
 # pull down latest configuration files from $ZPWR_REPO_NAME
 function getrc(){
+
     if [[ -z "$1" ]]; then
         branch=master
     else
@@ -1883,6 +1949,7 @@ function getrc(){
 }
 
 function getrcdev(){
+
     getrc dev
 }
 
@@ -1906,17 +1973,20 @@ function rename(){
 }
 
 function torip(){
+
     ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
     whois $ip
     echo $ip
 }
 
 function toriprenew() {
+
     printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' |
         nc 127.0.0.1 9051
 }
 
 function mycurl(){
+
     command curl -fsSL -A \
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 |
     command sed "/^*/d" | sed -E "s@(<|>) @@g" |
@@ -1924,6 +1994,7 @@ function mycurl(){
 }
 
 function perlremovespaces(){
+
     for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
         perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
@@ -1931,6 +2002,7 @@ function perlremovespaces(){
 }
 
 function pirun(){
+
     trap 'DONE=true' QUIT
     local DONE
     DONE=false
@@ -2161,6 +2233,7 @@ function digs(){
 }
 
 function to(){
+
     file="$HOME/.config/powerline/themes/tmux/default.json"
     [[ ! -f "$file" ]] && loggErr "no tmux config" && return 1
     if cat "$file" | grep -sq "external_ip"; then
@@ -2173,6 +2246,7 @@ function to(){
 }
 
 function ww(){
+
     if [[ -z "$1" ]]; then
        loggErr "ww <cmd> to run <cmd> forever" 
        return 1
@@ -2183,6 +2257,7 @@ function ww(){
 }
 
 function www(){
+
     if [[ -z "$2" ]]; then
        loggErr "www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
        return 1
@@ -2196,6 +2271,7 @@ function www(){
 }
 
 function fordirUpdate(){
+
     if [[ -z "$1" ]]; then
        loggErr "fordirUpdate <dirs> to run git update in each dir"
        return 1
@@ -2211,6 +2287,7 @@ function fordirUpdate(){
 }
 
 function fordir(){
+
     if [[ -z "$2" ]]; then
        loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"
        return 1
@@ -2231,6 +2308,7 @@ function fordir(){
 }
 
 function ff(){
+
     if [[ -z "$1" ]]; then
        loggErr "ff <cmd> to run <cmd> 10 times" 
        return 1
@@ -2243,6 +2321,7 @@ function ff(){
 }
 
 function fff(){
+
     if [[ -z "$2" ]]; then
        loggErr "fff <iter> <cmd> to run <cmd> <iter> times" 
        return 1
@@ -2255,6 +2334,7 @@ function fff(){
 }
 
 function post(){
+
     if [[ -z "$2" ]]; then
         loggErr "need two args"
         return 1
@@ -2266,6 +2346,7 @@ function post(){
 }
 
 function pre(){
+
     if [[ -z "$2" ]]; then
         loggErr "need two args"
         return 1
@@ -2277,6 +2358,7 @@ function pre(){
 }
 
 exists pssh && function pir(){
+
     if ! test -s "$ZPWR_LOCAL/hosts.txt"; then
         loggErr "you need hosts.txt in your $ZPWR_LOCAL"
         return 1
@@ -2285,6 +2367,7 @@ exists pssh && function pir(){
 }
 
 function cCommon(){
+
     local colorizer=bat
     local rpm_cmd
     local deb_cmd
@@ -2337,6 +2420,7 @@ function c(){
 }
 
 exists http && function ge(){
+
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"
@@ -2373,12 +2457,16 @@ exists http && function ge(){
 }
 
 function fz(){
+
     if test -z "$1";then
         command ag '^.*$' --hidden --ignore .git --color 2>/dev/null | fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER_FZF"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"' \
         2>/dev/null | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | cut -d ':' -f1 | perl -pe 's@^(.*)\n$@"$1" @'
+
     else
+
         command ag '^.*$' --hidden --ignore .git --color 2>/dev/null | fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER_FZF"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"'\
             2>/dev/null | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | perl -pe 's@^(.*?):(\d+):(.*)@+$2 "$1"@;s@\n@ @g'
+
     fi
 }
 
@@ -2423,6 +2511,7 @@ function figletfonts(){
 }
 
 function pygmentcolors(){
+
     dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"
     for i in "$dir/pygments/styles/"* ; do
         echo "$i"
@@ -2437,6 +2526,7 @@ function detachall(){
 
 
 function scripts(){
+
     (
         {
             gvim -S ~/.vim/sessions/gvim.vim &> /dev/null
@@ -2452,12 +2542,14 @@ if [[ $ZPWR_LEARN != false ]]; then
 fi
 
 function gitCheckoutRebasePush(){
+
     git branch -a | head -2 | perl -ane 'if ($F[0] eq "*"){$cur=$F[1]}else{$alt=$F[0]};if ($. == 2){$cmd="git checkout $alt; git rebase $cur;git push;";print "$cmd\n"; `$cmd`}'
 }
 
 declare -A _tempAry
 
 function jsonToArray(){
+
     local json="$(cat)"
     while IFS="=" read -r key value;do
         _tempAry[$key]=$value
@@ -2475,6 +2567,7 @@ function jsonToArray(){
 }
 
 function arrayToJson(){
+
     if isZsh; then
         ary="$1"
         printf '%s\n%s\n' "${(kv)${(P)ary}[@]}" |
@@ -2490,18 +2583,21 @@ function arrayToJson(){
 }
 
 function loginCount(){
+
     perl -e 'print `last -f "$_"`for</var/log/wtmp*>' |
         perl -lane 'print $F[0] if /\S+/ && !/wtmp/' |
         sort | uniq -c | sort -rn
 }
 
 function needSudo(){
+
     if [[ ! -w "$1" ]]; then
         return 0
     else
         return 1
     fi
 }
+
 function clearTemp(){
 
     {
@@ -2544,6 +2640,7 @@ function regenTags(){
 }
 
 function regenAllKeybindingsCache(){
+
     prettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
     bash "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
     escapeRemover.pl |
@@ -2555,12 +2652,14 @@ function regenAllKeybindingsCache(){
 }
 
 function searchGitCommon(){
+
     out="$(goThere)"
     echo "$out"
     eval "$out"
 }
 
 function regenAllGitRepos(){
+
         prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
     {
         while read; do
@@ -2573,9 +2672,11 @@ function regenAllGitRepos(){
         perl -i -pe 's@^/System/Volumes/Data@@' "$ZPWR_TEMPFILE3"
     fi
     sort "$ZPWR_TEMPFILE3" | uniq > "$ZPWR_ALL_GIT_DIRS"
+
 }
 
 function searchDirtyGitRepos(){
+
     goThere(){
     {
         while read; do
@@ -2601,7 +2702,6 @@ cd {} && git status -s && git diff --stat -p --color=always HEAD 2>/dev/null' |
     fi
 
     searchGitCommon
-
 }
 
 function searchAllGitRepos(){
@@ -2626,11 +2726,13 @@ builtin cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/nul
 }
 
 function regenConfigLinks(){
+
     prettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
     linkConf
 }
 
 function regenPowerlineLink(){
+
     dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"
     if needSudo "$dir"; then
         prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
@@ -2651,6 +2753,7 @@ function regenPowerlineLink(){
 }
 
 function goclean() {
+
     if [[ -z "$1" ]]; then
         loggErr "need package name"
         return 1
@@ -2686,6 +2789,7 @@ function goclean() {
 }
 
 function commits(){
+
     if isGitDir; then
         if [[ $EDITOR = nvim ]];then
             nvim -c 'call feedkeys(":Commits!\<CR>")'
@@ -2701,6 +2805,7 @@ function commits(){
 }
 
 function vimAll(){
+
     builtin cd $ZPWR
     vim \
     "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc} \
@@ -2708,7 +2813,7 @@ function vimAll(){
     "$ZPWR/"*.md \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/tmux-"* \
+    "$ZPWR_TMUX/tmux-"* 
     "$ZPWR/"{.minvimrc,.mininit.vim} \
     "$ZPWR_INSTALL/conf."* \
     "$ZPWR_INSTALL/"*.sh \
@@ -2721,6 +2826,7 @@ function vimAll(){
 }
 
 function vimScripts(){
+
     vim \
     "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
@@ -2732,6 +2838,7 @@ function vimScripts(){
 }
 
 function timer() {
+
     if [[ -z "$1" ]]; then
         loggErr "timer <commands...>"
         return 1
@@ -2770,6 +2877,7 @@ function timer() {
 }
 
 function changeGitCommitterEmail(){
+
     if [[ -z "$2" ]]; then
         loggErr "need two args <oldEmail> <newEmail>"
         return 1
@@ -2794,6 +2902,7 @@ function changeGitCommitterEmail(){
 }
 
 function changeGitAuthorEmail(){
+
     if [[ -z "$2" ]]; then
         loggErr "need two args <oldEmail> <newEmail>"
         return 1
@@ -2844,7 +2953,6 @@ function changeGitEmail(){
         export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"
     fi
     ' --tag-name-filter cat -- --branches --tags
-
 }
 #}}}***********************************************************
 
