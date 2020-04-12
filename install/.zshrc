@@ -178,7 +178,9 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 
 #{{{                    MARK:non ZPWR Exports
 #**************************************************************
+#map to hold global data between scripts
 declare -A ZPWR_VARS
+#map to store each zpwr verb, key is the verbname, value is cmd=description
 declare -A ZPWR_VERBS
 source "$ZPWR_SCRIPTS/zpwr.zsh"
 
@@ -3393,6 +3395,7 @@ function zpwrVerbs(){
 
 function numZpwrVerbs(){
 
+    #the size of hashmap
     echo $#ZPWR_VERBS
 }
 
