@@ -837,8 +837,8 @@ function fzfDirsearchVerb(){
     if [[ -z "$dir" ]]; then
         return
     fi
-    print -s -- "builtin cd $dir && clearList"
-    eval "builtin cd $dir && clearList"
+    print -s -- "builtin cd \"$dir\" && clearList"
+    eval "builtin cd \"$dir\" && clearList"
 }
 
 function fzfZList(){
@@ -855,8 +855,8 @@ function fzfZListVerb(){
     if [[ -z "$dir" ]]; then
         return
     fi
-    print -s -- "builtin cd $dir && clearList"
-    eval "builtin cd $dir && clearList"
+    print -s -- "builtin cd \"$dir\" && clearList"
+    eval "builtin cd \"$dir\" && clearList"
 }
 
 function fasdFList(){
