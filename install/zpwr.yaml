@@ -5,7 +5,7 @@ colors:
     background: '0x000000'
     foreground: '0x00F787'
   cursor:
-    text: '0x4538A6'
+    text: '0x000000'
     cursor: '0x4538A6'
 
   # Normal colors

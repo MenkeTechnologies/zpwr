@@ -184,7 +184,7 @@ colors:
     background: '0x000000'
     foreground: '0x00F787'
   cursor:
-    text: '0x4538A6'
+    text: '0x000000'
     cursor: '0x4538A6'
 
   # Normal colors
@@ -193,9 +193,9 @@ colors:
     red:     '0x66AAF9'
     green:   '0x76F950'
     yellow:  '0xE73DD7'
-    blue:    '0x0026F5'
+    blue:    '0x1036F5'
     magenta: '0x9E32F5'
-    cyan:    '0x0025F5'
+    cyan:    '0x4025F5'
     white:   '0xd0d0d0'
 
   # Bright colors
