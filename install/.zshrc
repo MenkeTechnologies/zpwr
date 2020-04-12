@@ -794,7 +794,7 @@ function fzfFileSearch(){
         -o -fstype 'devfs' -o -fstype 'devtmpfs' \
         -o -fstype 'proc' \) -prune -o -type f -print \
         -o -type l -print 2> /dev/null | cut -c3- |
-        eval "fzf -m --border $FZF_CTRL_T_OPTS" | perl -pe 's@\x0a@\x20@g'
+        eval "fzf -m --border $FZF_CTRL_T_OPTS" | perl -ne 'chomp $_; print "\"$_\" "'
 }
 
 function fzfFilesearchVerbEdit(){
