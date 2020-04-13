@@ -183,6 +183,7 @@ colors:
   primary:
     background: '0x000000'
     foreground: '0x00F787'
+    bright_foreground: '0x76F952'
   cursor:
     text: '0x000000'
     cursor: '0x4538A6'
