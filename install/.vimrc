@@ -1810,6 +1810,7 @@ function! SetHLS()
     if !exists('g:hl_activated')
         let g:hl_activated = 1
         call feedkeys(":set hlsearch\<CR>")
+        call feedkeys(":hi ColorColumn guibg=#557799  guifg=white    gui=none ctermbg=6 ctermfg=15\<CR>")
     endif
 endfunction
 
@@ -1866,5 +1867,6 @@ endfunction
 "if has('nvim')
     "exe 'normal :UpdateRemotePlugins'
 "endif
+
 
 "}}}***********************************************************
