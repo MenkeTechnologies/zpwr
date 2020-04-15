@@ -469,6 +469,23 @@ function scriptEdit(){
         source /dev/stdin
 }
 
+function sudoVimRecent(){
+
+    BUFFER="$(fzvim)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    mywords=(${(z)BUFFER})
+    firstdir=${mywords[1]:h}
+    BUFFER="sudo $EDITOR $BUFFER"
+    loggDebug "builtin cd $firstdir\""
+    #:h takes aways last "
+    eval "builtin cd $firstdir\""
+    loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
+    print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
+    eval "$BUFFER; clearList;isGitDir && git diff HEAD"
+}
+
 function vimRecent(){
 
     BUFFER="$(fzvim)"
@@ -483,8 +500,7 @@ function vimRecent(){
     eval "builtin cd $firstdir\""
     loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
     print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
-    echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
-        source /dev/stdin
+    eval "$BUFFER; clearList;isGitDir && git diff HEAD"
 }
 
 function scriptCount(){
