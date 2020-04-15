@@ -2813,14 +2813,14 @@ function vimAll(){
     "$ZPWR/"*.md \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/tmux-"* 
+    "$ZPWR_TMUX/tmux-"* \
     "$ZPWR/"{.minvimrc,.mininit.vim} \
     "$ZPWR_INSTALL/conf."* \
     "$ZPWR_INSTALL/"*.sh \
     "$ZPWR_INSTALL/"*.service \
     "$ZPWR_INSTALL/UltiSnips/"*.snippets \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS/macOnly"*.{sh,py,zsh,pl}
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
     clearList
     isGitDir && git diff HEAD
 }
