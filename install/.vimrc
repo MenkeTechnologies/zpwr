@@ -1105,39 +1105,49 @@ function! ExtractVariableVisual() range
     endif
 endfunction
 
-function! s:commonFold()
+function! s:commonFold(char)
 
-let l:start = '#{{{                    MARK:'
-let l:sec   = '#**************************************************************'
-let l:end   = '#}}}***********************************************************'
+let l:start = a:char.'{{{                    MARK:'
+let l:sec   = a:char. '**************************************************************'
+let l:end   = a:char. '}}}***********************************************************'
 
     exe 'normal! `<'
-    exe 'normal! O'.l:start
+    exe 'normal! O'
+    exe 'normal! jO'.l:start
     exe 'normal! mz'
     exe 'normal! o'.l:sec
     exe 'normal! `>'
-    exe 'normal! o'.l:end
+    exe 'normal! o'
+    exe 'normal! ko'.l:end
     exe 'normal! `zzz'
+    call feedkeys('a')
 endfunction
 
 function! ExtractFoldMarker() range
     let l:wordUnderCursor = s:getVisualSelection()
 
+    let l:old=&formatoptions
+    set formatoptions-=o
 
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:exeFileType=expand('%:e')
 
     let l:filename=expand('%:t')
+    if l:filename == '.vimrc'
+        let l:exeFileType = 'vim'
+    endif
     if l:filename == '.zshrc'
         let l:exeFileType = 'zsh'
     endif
 
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
-        call s:commonFold()
+        call s:commonFold('#')
     elseif l:exeFileType == 'pl'
-        call s:commonFold()
+        call s:commonFold('#')
     elseif l:exeFileType == 'py'
-        call s:commonFold()
+        call s:commonFold('#')
+    elseif l:exeFileType == 'vim'
+        call s:commonFold('"')
     elseif index(supportedTypes, l:exeFileType) < 0
         echom " => Unknown Filetype '".l:exeFileType. "'."
         if l:exeFileType == ''
@@ -1146,6 +1156,8 @@ function! ExtractFoldMarker() range
             echom " => Unknown Filetype '".l:exeFileType. "'."
         endif
     endif
+
+   let &formatoptions=l:old
 endfunction
 
 function! ExtractVariable()
