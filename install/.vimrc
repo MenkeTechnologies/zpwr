@@ -1071,7 +1071,7 @@ function! ExtractVariableVisual() range
     let l:name = inputdialog('Extract variable to replace visual __'.wordUnderCursor.'__:')
 
     if l:name== ''
-       return 0
+       return 1
     endif
 
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
@@ -1083,18 +1083,61 @@ function! ExtractVariableVisual() range
         let l:exeFileType = 'zsh'
     endif
 
-    exe 'normal `<'
+    exe 'normal! `<'
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         call s:commonEV('sh', l:regex, l:name, l:wordUnderCursor)
     elseif l:exeFileType == 'pl'
         call s:commonEV('pl', l:regex, l:name, l:wordUnderCursor)
     elseif l:exeFileType == 'py'
         let l:line=GetFirstCodeLineHash()
-        exe 'normal mz'
+        exe 'normal! mz'
         exe '%sno@'.l:regex.'@'.l:name.'@g'
         exe 'normal! '.(l:line+1).'GO'.l:name.'='.l:wordUnderCursor
         exe 'normal! `z'
 
+    elseif index(supportedTypes, l:exeFileType) < 0
+        echom " => Unknown Filetype '".l:exeFileType. "'."
+        if l:exeFileType == ''
+            echom " => Unknown Filetype for file '".l:filename. "'."
+        else
+            echom " => Unknown Filetype '".l:exeFileType. "'."
+        endif
+    endif
+endfunction
+
+function! s:commonFold()
+
+let l:start = '#{{{                    MARK:'
+let l:sec   = '#**************************************************************'
+let l:end   = '#}}}***********************************************************'
+
+    exe 'normal! `<'
+    exe 'normal! O'.l:start
+    exe 'normal! mz'
+    exe 'normal! o'.l:sec
+    exe 'normal! `>'
+    exe 'normal! o'.l:end
+    exe 'normal! `zzz'
+endfunction
+
+function! ExtractFoldMarker() range
+    let l:wordUnderCursor = s:getVisualSelection()
+
+
+    let l:supportedTypes=['sh','zsh', 'pl', 'py']
+    let l:exeFileType=expand('%:e')
+
+    let l:filename=expand('%:t')
+    if l:filename == '.zshrc'
+        let l:exeFileType = 'zsh'
+    endif
+
+    if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
+        call s:commonFold()
+    elseif l:exeFileType == 'pl'
+        call s:commonFold()
+    elseif l:exeFileType == 'py'
+        call s:commonFold()
     elseif index(supportedTypes, l:exeFileType) < 0
         echom " => Unknown Filetype '".l:exeFileType. "'."
         if l:exeFileType == ''
@@ -1110,7 +1153,7 @@ function! ExtractVariable()
     let l:name = inputdialog('Extract variable to replace __'.wordUnderCursor.'__:')
 
     if l:name== ''
-       return 0
+       return 1
     endif
 
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
@@ -1159,11 +1202,17 @@ endfunction
 function! ExtractMethod() range
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:name = inputdialog('Extract method:')
+    if l:name== ''
+       return 1
+    endif
+
     let l:exeFileType=expand('%:e')
     let l:filename=expand('%:t')
     if l:filename == '.zshrc'
         let l:exeFileType = 'zsh'
     endif
+
+
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
         let l:line=GetFirstCodeLineHash()
         '>
@@ -1209,6 +1258,7 @@ endfunction
 xmap <leader>em :call ExtractMethod()<CR>
 nmap <leader>ev :call ExtractVariable()<CR>
 xmap <leader>ev :call ExtractVariableVisual()<CR>
+xmap <leader>ef :call ExtractFoldMarker()<CR>
 
 let shouldMapV = $ZPWR_MAP_C_V_VIM_NORMAL
 if shouldMapV == 'true'
