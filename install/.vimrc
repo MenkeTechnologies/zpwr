@@ -1767,3 +1767,42 @@ let g:tmuxcomplete#asyncomplete_source_options = {
 let g:tmuxcomplete#trigger = 'omnifunc'
 
 "}}}***********************************************************
+ 
+
+"{{{                    mark:deoplete/neosnippets
+"**************************************************************
+call deoplete#enable()
+
+"call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+
+function! SetDEO()
+
+    imap <expr><C-k> "\<Plug>(neosnippet_expand_or_jump)"
+    xmap <expr><C-k> "\<Plug>(neosnippet_expand_or_jump)"
+
+    imap <expr><TAB>
+    \ pumvisible() ?
+    \ ( neosnippet#expandable_or_jumpable() ?
+    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<C-n>") : "\<TAB>"
+
+    vmap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \ "\<Plug>(neosnippet_expand_or_jump)"
+                \: "\>"
+
+    smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+                \ "\<Plug>(neosnippet_expand_or_jump)"
+                \: "\<TAB>"
+
+endfunction
+
+
+"augroup setdeo
+    "autocmd!
+    "autocmd BufEnter * call SetDEO()
+"augroup end
+
+"if has('nvim')
+    "exe 'normal :UpdateRemotePlugins'
+"endif
+
+"}}}***********************************************************
