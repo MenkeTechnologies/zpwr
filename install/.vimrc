@@ -1834,11 +1834,11 @@ let g:tmuxcomplete#trigger = 'omnifunc'
 
 "{{{                    mark:deoplete/neosnippets
 "**************************************************************
-call deoplete#enable()
 
 "call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
 
 function! SetDEO()
+    call deoplete#enable()
 
     imap <expr><C-k> "\<Plug>(neosnippet_expand_or_jump)"
     xmap <expr><C-k> "\<Plug>(neosnippet_expand_or_jump)"
