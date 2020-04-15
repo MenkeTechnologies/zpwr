@@ -290,6 +290,8 @@ alias ca='cat -n'
 alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
 alias die='sudo kill -9 --'
+alias emacs='emacs -nw'
+alias em='emacs -nw'
 
 if exists docker; then
     alias dk=docker
