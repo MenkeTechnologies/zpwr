@@ -3212,7 +3212,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu|parrot)
-                    out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -v sudo | tail -1)"
+                    out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"
                     key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
                     ;;
                 (centos|rhel)
@@ -3223,19 +3223,19 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                     key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
                     ;;
                 (fedora)
-                    out="$(sudo cat /var/log/secure | command grep 'Accepted publickey' | tail -1)"
+                    out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"
                     key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
                     ;;
                 (*) :
                     ;;
             esac
             logg "searching for $key in $out"
-            echo "$out" | grep -q "$key" && mobile=false
+            echo "$out" | grep -aqs "$key" && mobile=false
 
             command rm "$ZPWR_TEMPFILE"
             if [[ $mobile == "false" ]]; then
                 logg "found $key so desktop"
-                num_con="$(command ps -ef |command grep 'sshd' | command grep pts | command grep -v grep | wc -l)"
+                num_con="$(command ps -ef |command grep -a 'sshd' | command -a grep pts | command grep -av grep | wc -l)"
                 logg "num connections: $num_con"
                 if (( $num_con == 1 )); then
                     logg "no tmux clients"
