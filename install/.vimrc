@@ -1123,13 +1123,26 @@ let l:end   = a:char. '}}}******************************************************
     call feedkeys('a')
 endfunction
 
+let s:fileTypeToComment = {
+            \ 'java': '//',
+            \ 'c': '//',
+            \ 'js': '//',
+            \ 'cpp': '//',
+            \ 'sh': '#',
+            \ 'zsh': '#',
+            \ 'py': '#',
+            \ 'pl': '#',
+            \ 'rb': '#',
+            \ 'vim': '"'
+            \  }
+
 function! ExtractFoldMarker() range
     let l:wordUnderCursor = s:getVisualSelection()
 
     let l:old=&formatoptions
     set formatoptions-=o
 
-    let l:supportedTypes=['sh','zsh', 'pl', 'py']
+    let l:supportedTypes=['sh','zsh', 'pl', 'py', 'rb']
     let l:exeFileType=expand('%:e')
 
     let l:filename=expand('%:t')
@@ -1140,14 +1153,10 @@ function! ExtractFoldMarker() range
         let l:exeFileType = 'zsh'
     endif
 
-    if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
-        call s:commonFold('#')
-    elseif l:exeFileType == 'pl'
-        call s:commonFold('#')
-    elseif l:exeFileType == 'py'
-        call s:commonFold('#')
-    elseif l:exeFileType == 'vim'
-        call s:commonFold('"')
+
+    if has_key(s:fileTypeToComment, l:exeFileType)
+        call s:commonFold(s:fileTypeToComment[l:exeFileType])
+
     elseif index(supportedTypes, l:exeFileType) < 0
         echom " => Unknown Filetype '".l:exeFileType. "'."
         if l:exeFileType == ''
