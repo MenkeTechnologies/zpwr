@@ -103,6 +103,7 @@ test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
 test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
 test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$ZPWR/scripts"
 test -z "$ZPWR_SCRIPTS_MAC" && export ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
+test -z "$ZPWR_EMACS" && export ZPWR_EMACS='command emacs -nw'
 export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
 export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 
@@ -123,6 +124,7 @@ export ZPWR_TEMPFILE2="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER"
 export ZPWR_TEMPFILE3="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-3$USER"
 export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"
 export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
+export ZPWR_="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
 #}}}***********************************************************
 
 #{{{                    MARK:Env Vars
@@ -2821,6 +2823,26 @@ function commits(){
     fi
 }
 
+function emacsAll(){
+
+    builtin cd $ZPWR
+    ${=ZPWR_EMACS} \
+    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc} \
+    "$ZPWR/"*.{sh,py,zsh,pl} \
+    "$ZPWR/"*.md \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/tmux-"* \
+    "$ZPWR/"{.minvimrc,.mininit.vim} \
+    "$ZPWR_INSTALL/conf."* \
+    "$ZPWR_INSTALL/"*.sh \
+    "$ZPWR_INSTALL/"*.service \
+    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
+    clearList
+    isGitDir && git diff HEAD
+}
 function vimAll(){
 
     builtin cd $ZPWR

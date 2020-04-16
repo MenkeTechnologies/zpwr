@@ -174,6 +174,8 @@ export ZPWR_INTRO_BANNER=ponies
 export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 # zpwr banner file location
 export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
+#
+export ZPWR_EMACS='command emacs -nw'
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
