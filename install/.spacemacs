@@ -77,6 +77,10 @@ values."
       (colors :variables
             colors-colorize-identifiers 'all
             colors-enable-nyan-cat-progress-bar t)
+      '(version-control :variables
+                version-control-diff-side 'left
+                version-control-diff-tool 'git-gutter+)
+
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -287,7 +291,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers nil
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -400,6 +404,7 @@ you should place your code here."
 
     (spacemacs/set-leader-keys (kbd ".") 'helm-themes)
 
+    (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
     ;;}}}***********************************************************
 
 
@@ -409,6 +414,10 @@ you should place your code here."
     (yas-reload-all)
 
     (add-hook 'prog-mode-hook 'highlight-symbol)
+
+    (setq display-line-numbers-width 4)
+    (setq display-line-numbers-type 'relative)
+    (global-display-line-numbers-mode)
     ;;}}}***********************************************************
 
 
@@ -422,7 +431,9 @@ you should place your code here."
     (require 'real-auto-save)
     (add-hook 'prog-mode-hook 'real-auto-save-mode)
     ;; in seconds
-    (setq real-auto-save-interval 1)
+    (setq real-auto-save-interval 0.2)
+    (real-auto-save-activate-advice)
+    (real-auto-save-mode)
     ;;}}}***********************************************************
 
 
