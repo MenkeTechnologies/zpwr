@@ -1864,6 +1864,7 @@ let g:tmuxcomplete#asyncomplete_source_options = {
             \ }
 let g:tmuxcomplete#trigger = 'omnifunc'
 
+set completefunc=zsh_completion#Complete
 "}}}***********************************************************
  
 

@@ -447,6 +447,9 @@ you should place your code here."
     (add-to-list 'company-backends 'company-plsense)
     (add-hook 'perl-mode-hook 'company-mode)
     (add-hook 'cperl-mode-hook 'company-mode)
+
+    (with-eval-after-load 'company
+    (company-ctags-auto-setup))
     ;;}}}***********************************************************
 
 
