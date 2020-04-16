@@ -336,6 +336,8 @@ alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 alias tok="builtin cd $ZPWR; vim $ZPWR_LOCAL/.tokens.sh;clearList;isGitDir && git diff HEAD"
 alias conf="builtin cd $ZPWR; vim $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_LOCAL/.tokens.sh $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
+alias etok="builtin cd $ZPWR; ${=ZPWR_EMACS} $ZPWR_LOCAL/.tokens.sh;clearList;isGitDir && git diff HEAD"
+alias econf="builtin cd $ZPWR; ${=ZPWR_EMACS} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_LOCAL/.tokens.sh $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
 alias zpt="builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;clearList;isGitDir && git diff HEAD"
 #}}}***********************************************************
 alias deleteTab="sed '/^[\x20\x09]*$/d'"
@@ -2823,7 +2825,7 @@ function commits(){
     fi
 }
 
-function emacEmacsConfig(){
+function emacsEmacsConfig(){
 
     builtin cd $ZPWR
     ${=ZPWR_EMACS} \
@@ -2863,6 +2865,7 @@ function emacsAll(){
     clearList
     isGitDir && git diff HEAD
 }
+
 function vimAll(){
 
     builtin cd $ZPWR
@@ -2882,6 +2885,18 @@ function vimAll(){
     "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
     clearList
     isGitDir && git diff HEAD
+}
+
+function emacsScripts(){
+
+    ${=ZPWR_EMACS} \
+    "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
+    "$ZPWR/"*.{sh,py,zsh,pl} \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
 }
 
 function vimScripts(){
