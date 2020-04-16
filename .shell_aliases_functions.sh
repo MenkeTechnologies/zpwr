@@ -1909,12 +1909,13 @@ function linkConf(){
     prettyPrint "Installing UltiSnips to $HOME/.vim/UltiSnips"
     echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
     ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
-    local snipDir="$HOME/.emacs.d/private/snippets"
+    local snipDir="$HOME/.emacs.d/private"
 
-    prettyPrint "Installing yasnippets to $snipDir"
-    echo ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir"
     if [[ -d "$snipDir" ]]; then
-        ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir"
+        prettyPrint "Installing yasnippets to $snipDir"
+        command rm -rf "$snipDir/snippets" 2>/dev/null
+        echo ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/snippets"
+        ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/snippets"
     fi
     )
 }
