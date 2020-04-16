@@ -402,6 +402,8 @@ you should place your code here."
 
     (define-key evil-normal-state-map (kbd "C-f") 'kill-emacs)
 
+    (define-key evil-insert-state-map (kbd "C-l") 'hippie-expand)
+
     (spacemacs/set-leader-keys (kbd ".") 'helm-themes)
 
     (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
