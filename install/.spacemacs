@@ -398,9 +398,11 @@ you should place your code here."
 
     ;;{{{                    MARK:emacs config
     ;;**************************************************************
-    (setq make-backup-files nil)
     ;; no #files#
+    (setq make-backup-files nil)
     (setq auto-save-default nil)
+    (setq create-lockfiles nil)
+
     ;;}}}***********************************************************
 
 
