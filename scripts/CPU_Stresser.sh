@@ -52,6 +52,7 @@ alternatingPrettyPrint() {
         };print "\x1b[0m"'
     else
         perl -F"$ZPWR_DELIMITER_CHAR" -ane '
+
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){

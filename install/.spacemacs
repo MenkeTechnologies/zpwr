@@ -167,7 +167,7 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(alect-dark dracula)
+   dotspacemacs-themes '(ujelly alect-dark dracula)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
@@ -528,6 +528,26 @@ you should place your code here."
     (company-ctags-auto-setup))
     (setq company-ctags-extra-tags-files '("$HOME/etags"))
     (setq company-ctags-fuzzy-match-p t)
+    (require 'whitespace)
+
+    (setq whitespace-display-mappings '((space-mark 32 [?·]) (tab-mark 32 [?·])))
+    (setq whitespace-style '(face trailing space-mark tab-mark))
+
+    (defun autoHighlight () (cond
+      ((eq evil-state 'normal)
+       (ignore-errors
+        (progn
+         (highlight-symbol-remove-all)
+         (let ((inhibit-message t))
+            (highlight-symbol)
+          )
+        )))))
+
+    (add-hook 'post-command-hook #'autoHighlight)
+
+    (setq-default indent-tabs-mode nil)
+    (setq-default tab-width 4)
+
     ;;}}}***********************************************************
 
 

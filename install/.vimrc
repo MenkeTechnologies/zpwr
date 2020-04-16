@@ -300,8 +300,6 @@ vnoremap <leader>= 4+
 vnoremap < <gv
 vnoremap > >gv
 
-"copy to system clipboard and move cursor to end of selection
-vnoremap <C-B> "*y`>
 "copy to tmux clipboard
 vnoremap <silent><leader>b :w !tmux set-buffer "$(cat)"<CR><CR>
 "for when forgot to do sudo vim <file> and file is readonly
@@ -1105,11 +1103,12 @@ function! ExtractVariableVisual() range
     endif
 endfunction
 
+
 function! s:commonFold(char)
 
-let l:start = a:char.'{{{                    MARK:'
-let l:sec   = a:char. '**************************************************************'
-let l:end   = a:char. '}}}***********************************************************'
+    let l:start = a:char.'{{{                    MARK:'
+    let l:sec   = a:char. '**************************************************************'
+    let l:end   = a:char. '}}}***********************************************************'
 
     exe 'normal! `<'
     exe 'normal! O'
@@ -1136,6 +1135,16 @@ let s:fileTypeToComment = {
             \ 'lisp': ';;',
             \ 'vim': '"'
             \  }
+
+function! CopyClip() range
+    let l:wordUnderCursor = s:getVisualSelection()
+    let l:len = len(split(l:wordUnderCursor, '\n'))
+    let l:stripped = Strip(l:wordUnderCursor)
+    echom 'copied '.l:len.' to system clipboard'
+    let @* = l:stripped
+endfunction
+"copy to system clipboard and move cursor to end of selection
+vnoremap <silent> <C-B> :call CopyClip()<CR>
 
 function! ExtractFoldMarker() range
     let l:wordUnderCursor = s:getVisualSelection()
