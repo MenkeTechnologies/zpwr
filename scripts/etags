@@ -1,0 +1,2181 @@
+
+/Users/wizard/.zshrc,30884
+startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')startTimestamp65,3063
+export ZPWR="$HOME/.zpwr"ZPWR75,3563
+export ZPWR_LOCAL="$ZPWR/local"ZPWR_LOCAL76,3589
+export ZPWR_TEST="$ZPWR/tests"ZPWR_TEST77,3621
+export ZPWR_HIDDEN_DIR="$ZPWR/local"ZPWR_HIDDEN_DIR78,3652
+export ZPWR_INSTALL="$ZPWR/install"ZPWR_INSTALL79,3689
+export ZPWR_TMUX="$ZPWR/.tmux"ZPWR_TMUX80,3725
+export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"ZPWR_TMUX_LOCAL81,3756
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"ZPWR_HIDDEN_DIR_TEMP83,3827
+export ZPWR_LOCK_FILE="$ZPWR_LOCAL/.lock"ZPWR_LOCK_FILE85,3922
+export ZPWR_PROMPT=POWERLEVELZPWR_PROMPT87,4015
+export ZPWR_EXPAND=trueZPWR_EXPAND89,4080
+export ZPWR_EXPAND_SECOND_POSITION=trueZPWR_EXPAND_SECOND_POSITION91,4151
+export ZPWR_CORRECT_EXPAND=trueZPWR_CORRECT_EXPAND93,4234
+export ZPWR_AUTO_SELECT=trueZPWR_AUTO_SELECT95,4305
+export ZPWR_SURROUND=trueZPWR_SURROUND97,4402
+export ZPWR_COLORS=trueZPWR_COLORS99,4454
+export ZPWR_AUTO_ATTACH=trueZPWR_AUTO_ATTACH101,4518
+export ZPWR_EXA_EXTENDED=trueZPWR_EXA_EXTENDED103,4610
+export ZPWR_PROFILING=falseZPWR_PROFILING105,4685
+export ZPWR_DEBUG=falseZPWR_DEBUG107,4759
+export ZPWR_TRACE=falseZPWR_TRACE109,4801
+export ZPWR_USE_NEOVIM=trueZPWR_USE_NEOVIM111,4844
+export ZPWR_PREFER_MVIM=trueZPWR_PREFER_MVIM113,4905
+export ZPWR_LEARN=trueZPWR_LEARN115,4986
+export ZPWR_COMMIT_STYLE='1;37;45'ZPWR_COMMIT_STYLE117,5046
+export ZPWR_BAT_THEME="GitHub"ZPWR_BAT_THEME119,5115
+export ZPWR_GLOBAL_ALIAS_PREFIX=jZPWR_GLOBAL_ALIAS_PREFIX121,5201
+export ZPWR_TABSTOP=__________ZPWR_TABSTOP124,5323
+export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"ZPWR_OS_TYPE126,5375
+export ZPWR_DELIMITER_CHAR='%'ZPWR_DELIMITER_CHAR128,5455
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'ZPWR_GITHUB_ACCOUNT129,5486
+export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"ZPWR_GITHUB_URL130,5533
+export ZPWR_REPO_NAME="zpwr"ZPWR_REPO_NAME132,5610
+export ZPWR_COMPLETION_DIR="zsh-more-completions"ZPWR_COMPLETION_DIR134,5688
+export ZPWR_VIM_KEYBINDINGS="$ZPWR_LOCAL/zpwrVimKeybindings.txt"ZPWR_VIM_KEYBINDINGS136,5775
+export ZPWR_ALL_KEYBINDINGS="$ZPWR_LOCAL/zpwrAllKeybindings.txt"ZPWR_ALL_KEYBINDINGS138,5877
+export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'ZPWR_LOG_UNDER_COLOR140,5975
+export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'ZPWR_LOG_QUOTE_COLOR142,6044
+export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'ZPWR_LOG_DATE_COLOR144,6117
+export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'ZPWR_LOG_MSG_COLOR146,6190
+export ZPWR_RM_AUTO_LS=trueZPWR_RM_AUTO_LS148,6307
+export ZPWR_CD_AUTO_LS=trueZPWR_CD_AUTO_LS150,6367
+export ZPWR_ENV="$ZPWR_LOCAL/zpwrEnv"ZPWR_ENV152,6433
+export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"ZPWR_PROMPT_FILE154,6516
+export ZPWR_SCRIPTS="$ZPWR/scripts"ZPWR_SCRIPTS156,6620
+export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"ZPWR_SCRIPTS_MAC157,6656
+export ZPWR_CHAR_LOGO="<<)(>>"ZPWR_CHAR_LOGO160,6849
+export ZPWR_SEND_KEYS_PANE=-1ZPWR_SEND_KEYS_PANE163,6971
+export ZPWR_SEND_KEYS_FULL=falseZPWR_SEND_KEYS_FULL166,7107
+export ZPWR_NVIMINFO="$ZPWR_LOCAL/.nviminfo"ZPWR_NVIMINFO168,7230
+export ZPWR_MAP_C_V_VIM_NORMAL=falseZPWR_MAP_C_V_VIM_NORMAL170,7354
+export ZPWR_INTRO_BANNER=poniesZPWR_INTRO_BANNER172,7436
+export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"ZPWR_DEFAULT_BANNER174,7498
+export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"ZPWR_BANNER_SCRIPT176,7618
+export ZPWR_EMACS='command emacs -nw'ZPWR_EMACS178,7671
+export LC_ALL="en_US.UTF-8"LC_ALL189,8077
+export ZSH=$HOME/.oh-my-zshZSH190,8105
+export KEYTIMEOUT=1KEYTIMEOUT193,8195
+export CHEATCOLORS=trueCHEATCOLORS194,8215
+function exists(){exists216,8547
+            ZSH_THEME=simonoffZSH_THEME241,9253
+        ZSH_THEME=simonoffZSH_THEME244,9304
+ZSH_DISABLE_COMPFIX=trueZSH_DISABLE_COMPFIX250,9422
+export SHELL="$(which zsh)"SHELL255,9527
+HYPHEN_INSENSITIVE="true"HYPHEN_INSENSITIVE265,9959
+DISABLE_UPDATE_PROMPT="true"DISABLE_UPDATE_PROMPT270,10087
+COMPLETION_WAITING_DOTS="true"COMPLETION_WAITING_DOTS285,10583
+DISABLE_UNTRACKED_FILES_DIRTY="true"DISABLE_UNTRACKED_FILES_DIRTY290,10794
+HIST_STAMPS="mm/dd/yyyy"HIST_STAMPS295,11026
+export SSH_KEY_PATH="~/.ssh/rsa_id"SSH_KEY_PATH298,11058
+hg_prompt_info(){}hg_prompt_info301,11124
+export ARCHFLAGS="-arch x86_64"ARCHFLAGS305,11185
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)ZSH_AUTOSUGGEST_STRATEGY313,11479
+forgit_log=fgloforgit_log320,11765
+forgit_diff=fgdforgit_diff321,11781
+forgit_add=fgaforgit_add322,11797
+forgit_reset_head=fgrhforgit_reset_head323,11812
+forgit_ignore=fgiforgit_ignore324,11835
+forgit_restore=fgcfforgit_restore325,11853
+forgit_clean=fgcleanforgit_clean326,11873
+forgit_stash_show=fgssforgit_stash_show327,11894
+plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \plugins370,14154
+ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"ZPWR_PARENT_PROCESS395,15040
+    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)distroName406,15568
+_alias_file="$ZPWR/.shell_aliases_functions.sh"_alias_file445,16534
+function sub (){sub452,16841
+    BUFFER="suc"BUFFER455,16884
+function scriptEdit(){scriptEdit459,16925
+        BUFFER="$(fzvimScript)"BUFFER461,16949
+        BUFFER="$EDITOR $BUFFER"BUFFER465,17047
+function sudoVimRecent(){sudoVimRecent474,17388
+    BUFFER="$(fzvim)"BUFFER476,17415
+    mywords=(${(z)BUFFER})mywords480,17491
+    firstdir=${mywords[1]:h}firstdir481,17518
+    BUFFER="sudo $EDITOR $BUFFER"BUFFER482,17547
+function vimRecent(){vimRecent491,17864
+    BUFFER="$(fzvim)"BUFFER493,17887
+    mywords=(${(z)BUFFER})mywords497,17963
+    firstdir=${mywords[1]:h}firstdir498,17990
+    BUFFER="$EDITOR $BUFFER"BUFFER499,18019
+function scriptCount(){scriptCount508,18331
+function lastWordDouble(){lastWordDouble515,18483
+    mywords=("${(z)BUFFER}")mywords517,18511
+        BUFFER="$BUFFER"$mywords[-1]BUFFER519,18578
+        CURSOR=$#BUFFERCURSOR520,18615
+        BUFFER="$BUFFER "$mywords[-1]BUFFER522,18648
+        CURSOR=$#BUFFERCURSOR523,18686
+function updater (){updater529,18743
+    BUFFER="( cat $ZPWR_SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"BUFFER534,18911
+function tutsUpdate() {tutsUpdate538,19108
+    commitMessage="$BUFFER"commitMessage540,19133
+            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$ZPWR_LOGFILE\" 2>&1 & )"BUFFER547,19366
+function sshRegain() {sshRegain556,19581
+            local __NEW_BUFFER="exe \"$BUFFER\""__NEW_BUFFER561,19743
+            BUFFER=""BUFFER564,19842
+            BUFFER=tmmBUFFER573,20065
+            BUFFER=tmm_fullBUFFER575,20101
+function dbz() {dbz581,20175
+    BUFFER=dbBUFFER584,20218
+ZPWR_COUNTER=0ZPWR_COUNTER588,20256
+function changeQuotes(){changeQuotes590,20272
+        __OLDBUFFER="${BUFFER}"__OLDBUFFER593,20340
+        BUFFER=${BUFFER//\"/\'}BUFFER594,20372
+            ZPWR_COUNTER=0ZPWR_COUNTER598,20571
+        BUFFER=${BUFFER//\'/\"}BUFFER601,20630
+            ZPWR_COUNTER=0ZPWR_COUNTER605,20830
+        BUFFER=${BUFFER//\"/\`}BUFFER608,20889
+        _SEMI_OLDBUFFER="$BUFFER"_SEMI_OLDBUFFER615,21150
+        BUFFER="\"${BUFFER}\""BUFFER616,21184
+            ZPWR_COUNTER=0ZPWR_COUNTER620,21389
+        _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}_SEMI_OLDBUFFER624,21476
+        BUFFER="\$(${_SEMI_OLDBUFFER})"BUFFER625,21524
+            ZPWR_COUNTER=0ZPWR_COUNTER629,21679
+            ZPWR_COUNTER=0ZPWR_COUNTER635,21853
+        BUFFER="\"${BUFFER}\""BUFFER638,21912
+            ZPWR_COUNTER=0ZPWR_COUNTER641,22025
+            ZPWR_COUNTER=0ZPWR_COUNTER647,22186
+        BUFFER="$_SEMI_OLDBUFFER"BUFFER651,22273
+            ZPWR_COUNTER=0ZPWR_COUNTER654,22375
+        BUFFER="${__OLDBUFFER}"BUFFER658,22460
+function alternateQuotes(){alternateQuotes664,22526
+    BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"BUFFER666,22555
+function clipboard(){clipboard670,22612
+    local clipcmd=$ZPWR_COPY_CMDclipcmd674,22671
+function runner() {runner692,23148
+        BUFFER=geBUFFER698,23260
+function updater() {updater703,23313
+    BUFFER=u8BUFFER706,23360
+function getrcWidget(){getrcWidget710,23398
+    BUFFER="getrc"BUFFER713,23448
+function intoFzf(){intoFzf717,23491
+    LBUFFER="$LBUFFER |& fzf -m --border --ansi"LBUFFER719,23512
+function lsoffzf(){lsoffzf723,23585
+    LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"LBUFFER725,23606
+function clearListFZF(){clearListFZF730,23804
+function fzvim(){fzvim743,24111
+        file="$ZPWR_NVIMINFO"file747,24189
+        file="$HOME/.viminfo"file753,24539
+function fzvimScript(){fzvimScript760,24787
+function vimFzf(){vimFzf770,25200
+    BUFFER="$(fzvim)"BUFFER773,25245
+    mywords=(${(z)BUFFER})mywords774,25267
+        firstdir=${mywords[1]:h}firstdir778,25366
+        BUFFER="$EDITOR $BUFFER"BUFFER780,25452
+        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"BUFFER782,25516
+function fzfWordsearchVerbEdit(){fzfWordsearchVerbEdit787,25637
+    sel=$(fz vim)sel790,25686
+        BUFFER="$EDITOR $sel"BUFFER792,25731
+function fzfWordsearchVerb(){fzfWordsearchVerb799,25825
+    file=$(fz vim)file802,25871
+function fzfFileSearch(){fzfFileSearch810,26078
+function fzfFilesearchVerbEdit(){fzfFilesearchVerbEdit820,26437
+    sel=$(fzfFileSearch)sel823,26486
+        BUFFER="$EDITOR $sel"BUFFER825,26538
+function fzfFilesearchVerb(){fzfFilesearchVerb832,26632
+    file=$(fzfFileSearch)file835,26678
+function fzfDirSearch(){fzfDirSearch843,26892
+function fzfDirsearchVerb(){fzfDirsearchVerb853,27208
+    dir=$(fzfDirSearch)dir856,27252
+function fzfZList(){fzfZList864,27425
+function fzfZListVerb(){fzfZListVerb871,27675
+    dir=$(fzfZList)dir874,27715
+function fasdFList(){fasdFList882,27884
+function fm(){fm889,28133
+   FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfMan.sh" "$1")'"FZF_MAN_OPTS891,28149
+function zFZF(){zFZF895,28305
+    BUFFER="z $(fzfZList)"BUFFER898,28348
+    mywords=(${(z)BUFFER})mywords899,28375
+function fasdFZF(){fasdFZF907,28509
+    BUFFER="$BUFFER $(fasdFList)"BUFFER909,28530
+    mywords=(${(z)BUFFER})mywords910,28564
+function fasdFListVerb(){fasdFListVerb918,28679
+    file=$(fasdFList)file921,28721
+function killPSVerbAccept(){killPSVerbAccept929,28843
+    sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel931,28873
+        BUFFER="sudo kill -9 -- $sel"BUFFER933,29169
+function killPSVerbEdit(){killPSVerbEdit941,29294
+    sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel943,29322
+        BUFFER="sudo kill -9 -- $sel"BUFFER945,29618
+function killLsofVerbAccept(){killLsofVerbAccept952,29720
+    sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel954,29752
+        BUFFER="sudo kill -9 -- $sel"BUFFER956,30046
+function killLsofVerbEdit(){killLsofVerbEdit964,30171
+    sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel966,30201
+        BUFFER="sudo kill -9 -- $sel"BUFFER968,30495
+function historyVerbAccept(){historyVerbAccept975,30597
+      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |sel978,30646
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |FZF_DEFAULT_OPTS979,30728
+function historyVerbEdit(){historyVerbEdit990,31026
+      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |sel993,31073
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |FZF_DEFAULT_OPTS994,31155
+function vimFzfSudo(){vimFzfSudo1004,31433
+        LBUFFER="sudo -E nvim $(fzvim)"LBUFFER1009,31527
+        LBUFFER="sudo -E vim $(fzvim)"LBUFFER1011,31576
+    mywords=("${(z)BUFFER}")mywords1013,31622
+        firstdir=${mywords[4]:h}firstdir1017,31723
+        BUFFER="cd $firstdir\"; $BUFFER; clearList"BUFFER1020,31836
+function intoFzfAg(){intoFzfAg1025,31923
+    mywords=("${(z)BUFFER}")mywords1027,31946
+        BUFFER="$BUFFER $(fz vim)"BUFFER1030,32031
+        BUFFER="$BUFFER $(fz)"BUFFER1032,32075
+    BUFFER=${BUFFER:s@  @ @}BUFFER1035,32114
+    CURSOR=$#BUFFERCURSOR1037,32144
+function keySender(){keySender1040,32167
+function stopSend(){stopSend1050,32424
+    ZPWR_SEND_KEYS_PANE=-1ZPWR_SEND_KEYS_PANE1052,32446
+    ZPWR_SEND_KEYS_FULL=falseZPWR_SEND_KEYS_FULL1053,32473
+function startSendFull(){startSendFull1057,32549
+    ZPWR_SEND_KEYS_FULL=trueZPWR_SEND_KEYS_FULL1059,32576
+function startSend(){startSend1063,32627
+    ZPWR_SEND_KEYS_PANE=$1ZPWR_SEND_KEYS_PANE1069,32736
+        pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$pane'}')pid1078,32921
+function keyClear(){keyClear1083,33082
+function self-insert() {self1092,33274
+function clearLine() {clearLine1100,33360
+    LBUFFER=LBUFFER1103,33397
+function regenZshCompCache(){regenZshCompCache1106,33413
+function regenSearchEnv(){regenSearchEnv1113,33556
+function regenAll(){regenAll1119,33723
+function deleteLastWord(){deleteLastWord1131,33922
+    mywords=(${(z)BUFFER})mywords1133,33950
+        BUFFER=${mywords[1,-2]}" "BUFFER1135,34011
+        BUFFER=BUFFER1137,34055
+function fzfEnv(){fzfEnv1142,34082
+function fzfAllKeybind(){fzfAllKeybind1158,34456
+function fzfVimKeybind(){fzfVimKeybind1167,34667
+function getFound(){getFound1176,34878
+function locateFzf(){locateFzf1182,35018
+    mywords=(${(z)BUFFER})mywords1185,35066
+        found="$(getFound)"found1187,35127
+        firstArg="${${(Az)found}[1]//\"/}"firstArg1193,35268
+            BUFFER="cd $firstArg; c $found"BUFFER1195,35349
+            BUFFER="c $found"BUFFER1197,35406
+        found="$(getFound)"found1201,35481
+            BUFFER="$BUFFER $found"BUFFER1204,35547
+function fzfCommits(){fzfCommits1212,35683
+    BUFFER=""BUFFER1214,35707
+        BUFFER="vim -v -c Commits! -c quitall"BUFFER1217,35768
+function asVar(){asVar1226,35930
+    region_highlight=("P0 20 fg=blue,bg=red")region_highlight1228,35949
+    BUFFER="=\"\$($BUFFER)\""BUFFER1229,35995
+    CURSOR=0CURSOR1230,36025
+function interceptSurround(){interceptSurround1233,36041
+function interceptDelete(){interceptDelete1240,36149
+function zpwrVerbsWidgetAccept(){zpwrVerbsWidgetAccept1247,36261
+    BUFFER="$(zpwrVerbs)"BUFFER1250,36321
+function zpwrVerbsWidget(){zpwrVerbsWidget1255,36395
+    BUFFER="$(zpwrVerbs)"BUFFER1258,36449
+    CURSOR=$#BUFFERCURSOR1260,36499
+export FZF_COMPLETION_TRIGGER=';'FZF_COMPLETION_TRIGGER1388,39354
+function my-accept-line () {my1483,41590
+    ZPWR_WILL_CLEAR=falseZPWR_WILL_CLEAR1485,41620
+    commandsThatModifyFiles=(unlink rm srm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)commandsThatModifyFiles1503,42199
+        regex="^sudo $command .*\$|^$command .*\$"regex1506,42395
+            ZPWR_WILL_CLEAR=trueZPWR_WILL_CLEAR1508,42508
+    mywords=("${(z)BUFFER}")mywords1511,42561
+        cmd=${mywords[2]}cmd1514,42634
+        cmd=${cmd#=}cmd1517,42700
+        out="$(alias -- $cmd)"out1518,42721
+            cmdlet="$(eval echo "${out#*=}")"cmdlet1520,42808
+            BUFFER="sudo $cmdlet $mywords[3,$]"BUFFER1522,42890
+            BUFFER=""BUFFER1525,42982
+            aliases="$(cat $ZPWR_LOCAL/.common_aliases)"aliases1534,43233
+            line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"line1535,43290
+                BUFFER="\\$mywords"BUFFER1538,43437
+                    BUFFER="${line:1:-1} $mywords[2,$]" ||BUFFER1542,43573
+                    BUFFER="$line $mywords[2,$]"BUFFER1543,43632
+function precmd(){precmd1556,43863
+            ZPWR_WILL_CLEAR=falseZPWR_WILL_CLEAR1567,44215
+        RPROMPT="%B%F{blue}$$ %b%F{blue}$-"RPROMPT1581,44626
+function rationalize-dot (){rationalize1593,44883
+function expandAliasAccept(){expandAliasAccept1655,47064
+version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"version1674,47534
+function EOLorNextTabStop(){EOLorNextTabStop1690,48044
+    lenToFirstTS=${#BUFFER%%$ZPWR_TABSTOP*}lenToFirstTS1692,48074
+        CURSOR=$lenToFirstTSCURSOR1694,48164
+        RBUFFER=${RBUFFER:$#ZPWR_TABSTOP}RBUFFER1695,48193
+        CURSOR=$#BUFFERCURSOR1702,48357
+    function zle-keymap-select() {zle1718,48777
+        RPROMPT="%B%F{blue}$$ %b%F{blue}$-"RPROMPT1719,48812
+export DIRSTACKSIZE=20DIRSTACKSIZE1855,52458
+recachedCompsys=falserecachedCompsys1862,52674
+    recachedCompsys=truerecachedCompsys1870,52975
+    h=(${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})h1964,56670
+    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})h1965,56742
+    COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'COMMON_ZSTYLE_OPTS2069,63050
+function globalAliasesInit(){globalAliasesInit2101,64565
+function tabNum() {tabNum2162,68513
+function tabNumCmd() {tabNumCmd2167,68600
+    num=$1num2169,68624
+    args="$@"args2171,68645
+function banner(){banner2294,71848
+function bannerLolcat(){bannerLolcat2299,71962
+function noPonyBanner(){noPonyBanner2306,72139
+export HISTSIZE=10000000HISTSIZE2400,75080
+HISTSIZE=999999999HISTSIZE2401,75105
+SAVEHIST=$HISTSIZESAVEHIST2403,75150
+HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"HISTFILE2404,75169
+RPS2='+%N:%i:%^'RPS22408,75260
+export PS3=$'\e[1;34m-->>>> \e[0m'PS32409,75277
+function colortest(){colortest2512,77473
+function 256colors(){256colors2541,78409
+export PYGMENTIZE_COLOR="emacs"PYGMENTIZE_COLOR2559,78873
+export ZPWR_COLORIZER=batZPWR_COLORIZER2560,78905
+        export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'COLORIZER_FZF2565,78994
+        export COLORIZER_FZF_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'COLORIZER_FZF_FILE_TEXT2566,79117
+        export COLORIZER_FZF_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'COLORIZER_FZF_FILE_DEFAULT2567,79262
+        export COLORIZER_FZF_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'COLORIZER_FZF_FILE2568,79410
+        export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'ZPWR_COLORIZER2569,79543
+        export COLORIZER_NL=''COLORIZER_NL2570,79664
+        export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"COLORIZER_FZF2572,79704
+        export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"COLORIZER_FZF_FILE2573,79804
+        export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"ZPWR_COLORIZER2574,79917
+        export COLORIZER_NL=' | cat -n'COLORIZER_NL2575,80006
+    export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"COLORIZER_FZF2578,80058
+    export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"COLORIZER_FZF_FILE2579,80154
+    export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"ZPWR_COLORIZER2580,80263
+    export COLORIZER_NL=' | cat -n'COLORIZER_NL2581,80348
+export COLORIZER_FZF_C="$ZPWR_COLORIZER -l c"COLORIZER_FZF_C2584,80388
+export COLORIZER_FZF_SH="$ZPWR_COLORIZER  -l sh"COLORIZER_FZF_SH2585,80434
+export COLORIZER_FZF_YAML="$ZPWR_COLORIZER -l yaml"COLORIZER_FZF_YAML2586,80483
+export COLORIZER_FZF_JAVA="$ZPWR_COLORIZER -l java"COLORIZER_FZF_JAVA2587,80535
+export FZF_DRACULA="--color=darkFZF_DRACULA2588,80587
+--color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f--color2589,80620
+--color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"--color2590,80677
+export FZF_JELLY="--color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229FZF_JELLY2591,80761
+function fzf_setup(){fzf_setup2595,80894
+    ZPWR_COMMON_FZF_ELEM="--prompt='-->>> '"ZPWR_COMMON_FZF_ELEM2598,80949
+    export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'FZF_DEFAULT_COMMAND2601,81032
+    export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%"FZF_DEFAULT_OPTS2602,81088
+    export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'FZF_CTRL_T_COMMAND2608,81319
+    export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsCtrlT.sh")'"FZF_CTRL_T_OPTS2609,81374
+    export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"FZF_CTRL_T_OPTS_22610,81484
+    export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"FZF_ENV_OPTS2611,81595
+    export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"FZF_ENV_OPTS_VERBS2613,81690
+        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"FZF_COMPLETION_OPTS2616,81846
+        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"FZF_COMPLETION_OPTS2618,81972
+function _fzf_complete_killall() {_fzf_complete_killall2629,82462
+function _fzf_complete_mvim() {_fzf_complete_mvim2637,82597
+function _fzf_complete_vim() {_fzf_complete_vim2643,82756
+        file="$ZPWR_NVIMINFO"file2648,82878
+        file="$HOME/.viminfo"file2652,83110
+function _fzf_complete_nvim() {_fzf_complete_nvim2658,83259
+    file="$ZPWR_NVIMINFO"file2661,83307
+function _fzf_complete_printf() {_fzf_complete_printf2668,83577
+function _fzf_complete_printf_post() {_fzf_complete_printf_post2675,83711
+function _fzf_complete_echo() {_fzf_complete_echo2681,83808
+function _fzf_complete_echo_post() {_fzf_complete_echo_post2688,83945
+function _fzf_complete_alias() {_fzf_complete_alias2694,84040
+function _fzf_complete_c() {_fzf_complete_c2702,84153
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '-m' "$@" < <(FZF_COMPLETION_OPTS2704,84183
+function _fzf_complete_f() {_fzf_complete_f2710,84325
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(FZF_COMPLETION_OPTS2712,84355
+function _fzf_complete_z() {_fzf_complete_z2718,84499
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(FZF_COMPLETION_OPTS2720,84529
+function _fzf_complete_r() {_fzf_complete_r2726,84721
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS_2 _fzf_complete '--ansi' "$@" < <(FZF_COMPLETION_OPTS2729,84765
+function _fzf_complete_r_post() {_fzf_complete_r_post2735,85019
+function _fzf_complete_clearList() {_fzf_complete_clearList2741,85095
+    FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(FZF_COMPLETION_OPTS2743,85133
+function _fzf_complete_git() {_fzf_complete_git2750,85301
+    lastWord=${${(Az)@}[-1]}lastWord2756,85400
+        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitOpts.sh" $lastWord)'"FZF_GIT_OPTS2758,85483
+        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitOpts.sh" HEAD)'"FZF_GIT_OPTS2760,85604
+    FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" \FZF_COMPLETION_OPTS2762,85718
+function _fzf_complete_git_post() {_fzf_complete_git_post2770,86017
+local base03="234"base032778,86219
+local base02="235"base022779,86238
+local base01="240"base012780,86257
+local base00="241"base002781,86276
+local base0="244"base02782,86295
+local base1="245"base12783,86313
+local base2="254"base22784,86331
+local base3="230"base32785,86349
+local yellow="136"yellow2786,86367
+local orange="166"orange2787,86386
+local red="160"red2788,86405
+local magenta="125"magenta2789,86421
+local violet="61"violet2790,86441
+local blue="33"blue2791,86459
+local cyan="37"cyan2792,86475
+local green="64"green2793,86491
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTSFZF_DEFAULT_OPTS2796,86547
+function _cl(){_cl2811,87070
+function _p(){_p2826,87642
+function _f(){_f2836,87794
+            ret=0 || ret=1ret2841,87914
+            ret=0 || ret=1ret2851,88491
+function _c(){_c2861,88841
+        ret=0 || ret=1ret2865,88949
+        ret=0 || ret=1ret2874,89609
+function _ssd(){_ssd2882,89889
+    arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and/running/')"')')arguments2884,89907
+function _ssu(){_ssu2888,90122
+    arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')arguments2890,90140
+function _zpwr(){_zpwr2899,90459
+  arguments=(arguments2902,90496
+function _tmux_pane_words() {_tmux_pane_words2937,91378
+  _tmux_capture_pane() {_tmux_capture_pane2944,91565
+  w=( ${(u)=$(_tmux_capture_pane)} )w2958,92063
+function _complete_hist(){_complete_hist2970,92365
+    last_ten=( ${(f)"$(fc -l 200 | perl -lane 'print "@F[1..$#F]"')"} )last_ten2972,92393
+function _complete_plus_last_command_args() {_complete_plus_last_command_args2975,92530
+function _complete_clipboard(){_complete_clipboard2980,92650
+        clipboard_str="$(${=ZPWR_PASTE_CMD} 2>/dev/null)"clipboard_str2984,92745
+                clipboard_str="$(pbpaste)"clipboard_str2988,92865
+                    clipboard_str="$(xclip -o -sel clip 2>/dev/null)"clipboard_str2992,93005
+                    clipboard_str="$(powershell.exe -c 'Get-Clipboard')"clipboard_str2994,93096
+                    clipboard_str="$(powershell.exe -c 'Get-Clipboard')"clipboard_str2998,93228
+                    clipboard_str="$(powershell.exe -c 'Get-Clipboard')"clipboard_str3001,93339
+                clipboard_str="$(xclip -o -sel clip 2>/dev/null)"clipboard_str3004,93446
+    clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "'${clipboard_str}'")clipboard_array3010,93591
+whitelist_tmux_completion=(ping 1 dig 2 digs 3 host 4 mtr 5 traceroute 6)whitelist_tmux_completion3016,93812
+function _megacomplete(){_megacomplete3018,93887
+    cmd=$words[1]cmd3022,93969
+        num=$((HISTCMD-1))num3037,94308
+        last_command=$history[$num]last_command3038,94335
+        last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")last_command_array3039,94371
+function _r(){_r3050,94732
+    rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)." "};print ++$c.":/"'))rdirs3052,94748
+function _command_names(){_command_names3084,95856
+    ffilt='[(I)[^_.]*]'ffilt3096,96292
+    defs=(defs3098,96317
+    defs=( "$defs[@]"defs3119,96787
+    args=( "$@" )args3133,97389
+        path=( $cmdpath )path3141,97591
+function _parameters() {_parameters3146,97663
+    pattern=(-g \*)pattern3156,97838
+    fakes=()fakes3159,97894
+    faked=()faked3160,97907
+        faked=( "$faked[@]" "$i" )faked3164,98053
+        fakes=( "$fakes[@]" "$i" )fakes3166,98101
+    pfilt='[^_.]'pfilt3173,98266
+    local maxLen=50maxLen3176,98304
+            mobile=truemobile3212,99404
+                    out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"out3218,99626
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"key3219,99750
+                    out="$(tail /var/log/messages)"out3222,99885
+                    out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"out3225,99999
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"key3226,100106
+                    out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"out3229,100259
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"key3230,100362
+                num_con="$(command ps -ef |command grep -a 'sshd' | command -a grep pts | command grep -av grep | wc -l)"num_con3241,100789
+                        out="$(tmux ls 2>&1)"out3246,101070
+                        ret=$?ret3247,101116
+                            ret=$?ret3253,101416
+function recompile(){recompile3281,102342
+function zshrcsearch(){zshrcsearch3298,102885
+function zarg(){zarg3312,103238
+    first="$1"first3319,103370
+    export PATH="$HOME/.jenv/shims:$PATH"PATH3327,103504
+endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')endTimestamp3332,103593
+startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))startupTimeMs3333,103657
+function zpwrAllUpdates(){zpwrAllUpdates3342,103887
+function zpwrForAllGitDirs(){zpwrForAllGitDirs3360,104197
+function zpwrUpdateAllGitDirs(){zpwrUpdateAllGitDirs3376,104533
+function zpwrVerbs(){zpwrVerbs3388,104909
+    sep=" "sep3400,105211
+    width=25width3401,105223
+        len=$#klen3403,105273
+        spaces=$(( width - len ))spaces3405,105307
+function numZpwrVerbs(){numZpwrVerbs3415,105652
+function zpwrEnvVars(){zpwrEnvVars3421,105728
+function zpwrTags(){zpwrTags3426,105807
+function revealRecurse(){revealRecurse3431,105867
+function evalTester(){evalTester3438,105980
+
+/Users/wizard/.zpwr/.powerlevel9kconfig.sh,4351
+ZSH_THEME="powerlevel9k/powerlevel9k"ZSH_THEME12,380
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir history ssh rbenv root_indicator status vcs)POWERLEVEL9K_LEFT_PROMPT_ELEMENTS14,494
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode command_execution_time dir_writable background_jobs custom_pid)POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS15,586
+POWERLEVEL9K_MODE='nerdfont-complete'POWERLEVEL9K_MODE17,695
+ZLE_RPROMPT_INDENT=0ZLE_RPROMPT_INDENT18,733
+POWERLEVEL9K_PROMPT_ON_NEWLINE=truePOWERLEVEL9K_PROMPT_ON_NEWLINE20,755
+POWERLEVEL9K_RPROMPT_ON_NEWLINE=truePOWERLEVEL9K_RPROMPT_ON_NEWLINE21,791
+POWERLEVEL9K_BACKGROUND_JOBS_VERBOSE=truePOWERLEVEL9K_BACKGROUND_JOBS_VERBOSE23,829
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=1POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD24,871
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION=3POWERLEVEL9K_COMMAND_EXECUTION_TIME_PRECISION25,919
+POWERLEVEL9K_TIME_BACKGROUND='green'POWERLEVEL9K_TIME_BACKGROUND26,967
+POWERLEVEL9K_HISTORY_BACKGROUND='235'POWERLEVEL9K_HISTORY_BACKGROUND27,1004
+POWERLEVEL9K_HISTORY_FOREGROUND='green'POWERLEVEL9K_HISTORY_FOREGROUND28,1042
+POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND='white'POWERLEVEL9K_CONTEXT_REMOTE_FOREGROUND29,1082
+POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND='235'POWERLEVEL9K_CONTEXT_REMOTE_BACKGROUND30,1129
+POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND='white'POWERLEVEL9K_CONTEXT_DEFAULT_FOREGROUND31,1174
+POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND='235'POWERLEVEL9K_CONTEXT_DEFAULT_BACKGROUND32,1222
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M:%S}"POWERLEVEL9K_TIME_FORMAT34,1269
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="\u256D \n"POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX36,1310
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="\u2570>%K{blue}%F{white} \Uf136 `tty` \uf168 %f%k%F{blue}%f "POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX37,1365
+POWERLEVEL9K_VCS_CLEAN_FOREGROUND='white'POWERLEVEL9K_VCS_CLEAN_FOREGROUND39,1474
+POWERLEVEL9K_VCS_CLEAN_BACKGROUND='yellow'POWERLEVEL9K_VCS_CLEAN_BACKGROUND40,1516
+POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='red'POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND41,1559
+POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='green'POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND42,1603
+POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='black'POWERLEVEL9K_VCS_MODIFIED_FOREGROUND43,1649
+POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='blue'POWERLEVEL9K_VCS_MODIFIED_BACKGROUND44,1694
+POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND='white'POWERLEVEL9K_VI_MODE_INSERT_FOREGROUND46,1739
+POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND='purple'POWERLEVEL9K_VI_MODE_INSERT_BACKGROUND47,1786
+POWERLEVEL9K_VI_MODE_VISUAL_FOREGROUND='white'POWERLEVEL9K_VI_MODE_VISUAL_FOREGROUND49,1835
+POWERLEVEL9K_VI_MODE_VISUAL_BACKGROUND='red'POWERLEVEL9K_VI_MODE_VISUAL_BACKGROUND50,1882
+POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND='white'POWERLEVEL9K_VI_MODE_NORMAL_FOREGROUND52,1928
+POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND='blue'POWERLEVEL9K_VI_MODE_NORMAL_BACKGROUND53,1975
+POWERLEVEL9K_DIR_HOME_FOREGROUND="red"POWERLEVEL9K_DIR_HOME_FOREGROUND56,2059
+POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="white"POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND57,2098
+POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"POWERLEVEL9K_DIR_DEFAULT_FOREGROUND58,2149
+POWERLEVEL9K_CUSTOM_PID='echo -e "\uf258 $$ \uf258  `date +%D` \uf168"'POWERLEVEL9K_CUSTOM_PID60,2194
+POWERLEVEL9K_CUSTOM_PID_BACKGROUND="green"POWERLEVEL9K_CUSTOM_PID_BACKGROUND61,2266
+POWERLEVEL9K_CUSTOM_PID_FOREGROUND="black"POWERLEVEL9K_CUSTOM_PID_FOREGROUND62,2309
+POWERLEVEL9K_CUSTOM_NEWLINE="print '\n'"POWERLEVEL9K_CUSTOM_NEWLINE64,2353
+POWERLEVEL9K_CUSTOM_NEWLINE_BACKGROUND="green"POWERLEVEL9K_CUSTOM_NEWLINE_BACKGROUND65,2394
+POWERLEVEL9K_CUSTOM_NEWLINE_FOREGROUND="white"POWERLEVEL9K_CUSTOM_NEWLINE_FOREGROUND66,2441
+POWERLEVEL9K_CUSTOM_TTY="tty"POWERLEVEL9K_CUSTOM_TTY68,2489
+POWERLEVEL9K_CUSTOM_TTY_BACKGROUND="blue"POWERLEVEL9K_CUSTOM_TTY_BACKGROUND69,2519
+POWERLEVEL9K_CUSTOM_TTY_FOREGROUND="white"POWERLEVEL9K_CUSTOM_TTY_FOREGROUND70,2561
+milliamps(){milliamps72,2605
+    amps="$(ioreg -rc AppleSmartBattery | grep CurrentCapacity | awk '{printf "%s mAh\n", $3}')"amps73,2618
+POWERLEVEL9K_CUSTOM_BATT="milliamps"POWERLEVEL9K_CUSTOM_BATT77,2745
+POWERLEVEL9K_CUSTOM_BATT_BACKGROUND="red"POWERLEVEL9K_CUSTOM_BATT_BACKGROUND78,2782
+POWERLEVEL9K_CUSTOM_BATT_FOREGROUND="black"POWERLEVEL9K_CUSTOM_BATT_FOREGROUND79,2824
+
+/Users/wizard/.zpwr/.shell_aliases_functions.sh,22510
+isZsh(){isZsh23,845
+        function exists(){exists34,1021
+    function exists(){exists44,1259
+function chooseNvimVim(){chooseNvimVim51,1365
+function loggNotGit() {loggNotGit70,1823
+function loggErr(){loggErr75,1889
+export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"ZPWR_ALL_GIT_DIRS107,3727
+export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"ZPWR_LOGFILE108,3782
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'ZPWR_EXA_COMMAND113,3955
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'ZPWR_EXA_COMMAND115,4065
+export ZPWR_TEMPFILE="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-$USER"ZPWR_TEMPFILE121,4276
+export ZPWR_TEMPFILE1="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-1$USER"ZPWR_TEMPFILE1122,4335
+export ZPWR_TEMPFILE2="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER"ZPWR_TEMPFILE2123,4396
+export ZPWR_TEMPFILE3="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-3$USER"ZPWR_TEMPFILE3124,4457
+export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"ZPWR_TEMPFILE4125,4518
+export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"ZPWR_TEMPFILE_SQL126,4579
+export ZPWR_="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"ZPWR_127,4647
+export ZPWR_TMUX_PREFIX=xZPWR_TMUX_PREFIX132,4870
+export ZPWR_TMUX_REMOTE_PREFIX=bZPWR_TMUX_REMOTE_PREFIX133,4896
+export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'PS4136,5044
+export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'PROMPT4138,5157
+export NMON='mndckt'NMON139,5204
+export CLICOLOR="YES"CLICOLOR140,5225
+export LSCOLORS="ExFxBxDxCxegedabagacad"LSCOLORS141,5247
+export FORKED_DIR="$HOME/forkedRepos"FORKED_DIR143,5330
+export PYEXECUTABLES="$HOME/Documents/pythonScripts"PYEXECUTABLES144,5368
+export PYSCRIPTS="$HOME/PycharmProjects/fromShell"PYSCRIPTS145,5421
+export ZPWR_D="$HOME/Desktop"ZPWR_D146,5472
+export ZPWR_DOC="$HOME/Documents"ZPWR_DOC147,5502
+export ZPWR_DL="$HOME/Downloads"ZPWR_DL148,5536
+export XAUTHORITY="$HOME/.Xauthority"XAUTHORITY149,5569
+export TERMINAL_APP="Terminal.app"TERMINAL_APP150,5607
+export YARN_HOME="$HOME/.config/yarn"YARN_HOME151,5642
+export TMUX_HOME="$HOME/.tmux"TMUX_HOME152,5680
+export NODE_HOME="/usr/local/lib/node_modules"NODE_HOME153,5711
+export PERL5LIB="$HOME/perl5/lib/perl5"PERL5LIB154,5758
+export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"NODE_PATH155,5798
+export HISTSIZE=50000HISTSIZE156,5876
+export HISTTIMEFORMAT=' %F %T _ 'HISTTIMEFORMAT157,5898
+export ZPWR_BLUE="\x1b[37;44m"ZPWR_BLUE158,5932
+export ZPWR_RED="\x1b[31m"ZPWR_RED159,5963
+export ZPWR_RESET="\x1b[0m"ZPWR_RESET160,5990
+export UMASK=077UMASK161,6018
+export LESS="-M -N -R -K -F -X"LESS162,6035
+    export TERM="xterm-256color"TERM164,6093
+    export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts"PATH171,6344
+    export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"PATH173,6439
+        export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"CPATH176,6668
+        export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"HOMEBREW_HOME_FORMULAE177,6755
+        export PATH="$ZPWR_SCRIPTS/macOnly:$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$HOME/.platformio/penv/bin"PATH178,6859
+        export PATH="$PATH:/usr/games"PATH180,7098
+        export HOMEBREW_HOME='/usr/local/Cellar'HOMEBREW_HOME196,7591
+        export HOMEBREW_OPT_HOME='/usr/local/opt'HOMEBREW_OPT_HOME197,7640
+        export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"GROOVY_LIB198,7690
+        export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"SCALA_HOME199,7744
+        export PERL_HOME="$HOMEBREW_OPT_HOME/perl"PERL_HOME200,7797
+        export HOMEBREW_DBHOME='/usr/local/var'HOMEBREW_DBHOME201,7848
+        export HOMEBREW_DB_CONF='/usr/local/etc'HOMEBREW_DB_CONF202,7896
+        export MANPATH=$HOME/perl5/man:$MANPATHMANPATH204,8000
+        export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"MANPATH205,8048
+        export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"TUTORIAL_FILES206,8123
+        export PIP3_HOME="/usr/local/lib/python3.7/site-packages"PIP3_HOME207,8185
+        export PIP_HOME="/usr/local/lib/python2.7/site-packages"PIP_HOME208,8251
+                export EDITOR='nvim'EDITOR211,8397
+                export PSQL_EDITOR='nvim -c "setf sql"'PSQL_EDITOR212,8434
+                export EDITOR='vim'EDITOR214,8507
+                export PSQL_EDITOR='vim -c "setf sql"'PSQL_EDITOR215,8543
+                export EDITOR='mvim -v'EDITOR219,8659
+                export PSQL_EDITOR='mvim -v -c "setf sql"'PSQL_EDITOR220,8699
+                export EDITOR='vim'EDITOR222,8775
+                export PSQL_EDITOR='vim -c "setf sql"'PSQL_EDITOR223,8811
+                export EDITOR='nvim'EDITOR229,8982
+                export PSQL_EDITOR='nvim -c "setf sql"'PSQL_EDITOR230,9019
+                export EDITOR='vim'EDITOR232,9092
+                export PSQL_EDITOR='vim -c "setf sql"'PSQL_EDITOR233,9128
+            export EDITOR='vim'EDITOR236,9211
+            export PSQL_EDITOR='vim -c "setf sql"'PSQL_EDITOR237,9243
+    export PATH="$HOME/.cargo/bin:$PATH"PATH245,9487
+            export LS_COLORS="fi=38:di=32;1:ex=31;1"LS_COLORS249,9633
+            export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"EXA_COLORS250,9686
+    export GOPATH="$HOME/go"GOPATH258,10128
+function rm(){rm269,10463
+            distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName446,17520
+    bold=$(tput bold || tput md)bold523,20637
+    red=$(tput setaf 1)red524,20670
+function r(){r539,21021
+    function exe(){exe554,21263
+    function nn(){nn559,21339
+        title="$1"title565,21481
+        msg="$2"msg566,21500
+    function db(){db571,21615
+    function db2(){db2576,21688
+    function scriptToPDF(){scriptToPDF581,21760
+        tempFile="$HOME/__test.ps"tempFile583,21789
+        function scriptToPDF(){scriptToPDF591,21979
+            tempFile="$HOME/__test.ps"tempFile597,22125
+    function ssd() {ssd604,22312
+    function ssu() {ssu614,22588
+    function tailufw(){tailufw625,22865
+        size=100size627,22890
+            size=$1size629,22936
+    function restartZabbixAgent(){restartZabbixAgent640,23232
+    function restart(){restart655,23721
+        service="$1"service657,23746
+        src_dir="$ZPWR_INSTALL"src_dir659,23789
+        service_path="$src_dir/$service.service"service_path661,23848
+        group=$(id -gn)group674,24401
+        service_path="$ZPWR_LOCAL/$service.service"service_path678,24468
+function cloneToForked(){cloneToForked700,25142
+    branch=masterbranch702,25169
+function s(){s714,25453
+        cmd=sublcmd717,25493
+        cmd="$ZPWR_OPEN_CMD"cmd719,25519
+        sec_cmd=ssec_cmd722,25607
+        sec_cmd="$ZPWR_OPEN_CMD"sec_cmd724,25634
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"out733,25857
+            url="https://google.com/search?q=$out"url734,25968
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"out742,26201
+            url="https://google.com/search?q=$out"url743,26312
+function logg(){logg749,26410
+function loggDebug(){loggDebug791,27810
+function xx(){xx798,27900
+    cmd="$1"cmd802,27948
+    DONE=falseDONE806,28036
+function urlSafe(){urlSafe814,28164
+function cgh(){cgh819,28226
+function upload(){upload826,28430
+function jd(){jd835,28596
+function j(){j842,28671
+        dirname="$(dirname $file)"dirname845,28702
+function scnew(){scnew851,28832
+function p(){p861,29015
+        out="$(ps -ef)"out865,29145
+        out="$(ps aux)"out868,29220
+function b(){b880,29460
+        sleepTime=$2sleepTime883,29503
+function suc(){suc898,29809
+function allRemotes(){allRemotes905,29925
+function largestGitFiles(){largestGitFiles919,30160
+       page=50 page927,30282
+       page=$1page929,30306
+    obj=$(git rev-list --all --objects)obj934,30391
+        filename=$(echo $obj | command grep $sha)filename936,30467
+        size=$(printf $size | humanReadable)size937,30517
+function clearGitCommit(){clearGitCommit942,30712
+    regex="^$1\$"regex954,30900
+function clearGitCache(){clearGitCache967,31186
+function about(){about979,31449
+    old="$LESS"old981,31468
+    export LESS="$old"LESS986,31597
+function clearList() {clearList989,31623
+            ls_command="$ZPWR_EXA_COMMAND"ls_command993,31719
+                ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"ls_command996,31807
+                ls_command="ls -iFlhAOd"ls_command998,31902
+        lib_command="otool -L"lib_command1001,31969
+            ls_command="$ZPWR_EXA_COMMAND"ls_command1005,32073
+                ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"ls_command1008,32161
+                ls_command="ls -iFlhA"ls_command1010,32254
+        lib_command="ldd"lib_command1013,32319
+            ls_command="grc -c $HOME/conf.gls ls -iFlhA"ls_command1016,32381
+            ls_command="ls -iFhlA"ls_command1018,32451
+        lib_command="ldd"lib_command1020,32497
+                    lf="$(echo $loc | cut -d' ' -f3-10)"lf1031,32801
+                        rank="Primary"rank1033,32918
+                        rank="Secondary"rank1035,32982
+                        out=$(man -wa "$(basename $lf)" 2>/dev/null)out1048,33556
+                            out="$(hash | command grep "^$arg=")"out1054,33827
+function listNoClear () {listNoClear1105,35637
+function animate(){animate1126,36084
+function blocksToSize(){blocksToSize1131,36143
+    bytes=$(( input * 512 ))bytes1135,36200
+function humanReadable(){humanReadable1139,36264
+        s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"s1142,36320
+        s=substr(s,1,4)s1146,36454
+        xf=(s==" B  ") ? "%d" : "%.2f"xf1147,36478
+function f(){f1153,36603
+        base="$(dirname "$1")"base1163,36857
+            base="$(dirname "$base")"base1166,36978
+function execpy(){execpy1175,37122
+    script="$1"script1182,37224
+function search(){search1188,37292
+function cd(){cd1194,37403
+function isGitDir(){isGitDir1204,37651
+function isGitDirMessage(){isGitDirMessage1209,37730
+function gil(){gil1219,37947
+    local file=".git/info/exclude"file1226,38047
+function contribCountDirs(){contribCountDirs1237,38197
+    user="$1"user1246,38368
+    curDir="$(pwd)"curDir1248,38392
+    sum=0sum1249,38412
+            lineCount="$(git log --pretty="%an" | grep -E "$user" | wc -l)"lineCount1259,38593
+function contribCount(){contribCount1273,39066
+    lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"lines1280,39175
+    lineCount="$(echo $lines | wc -l)"lineCount1281,39241
+function isBinary() {isBinary1292,39673
+  LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -sq '^Binary'LC_MESSAGES1293,39695
+function totalLines(){totalLines1296,39781
+        filter=falsefilter1308,39999
+               filter=truefilter1311,40108
+    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1331,40523
+function contribCountLines(){contribCountLines1344,40991
+        filter=falsefilter1356,41218
+               filter=truefilter1359,41326
+    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1378,41891
+function gsdc(){gsdc1392,42412
+    currentDir="$(pwd -P)"currentDir1401,42535
+        BUFFER=""BUFFER1416,42981
+function gitCommitAndPush(){gitCommitAndPush1443,43408
+    currentDir="$(pwd -P)"currentDir1451,43522
+function replacer(){replacer1465,43774
+    orig="$1"orig1473,43881
+    replace="$2"replace1474,43895
+function creategif(){creategif1485,44101
+    outFile=out.gifoutFile1487,44124
+    res=600x400res1488,44144
+function hc(){hc1503,44420
+        reponame="$1"reponame1507,44518
+    old_dir="$(pwd)"old_dir1509,44559
+function hd(){hd1523,44894
+                user="$(echo $line | awk -F':' '{print $2}' |user1529,45111
+                repo="$(echo $line | awk -F'/' '{print $2}' |repo1531,45218
+                user="$(echo $line | awk -F'/' '{print $4}')"user1535,45358
+                repo="$(echo $line | awk -F'/' '{print $5}' |repo1536,45420
+    user="$(echo "$user" | tr 'A-Z' 'a-z')"user1542,45551
+    out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$repo")"out1547,45717
+function pstreemonitor(){pstreemonitor1560,45992
+function return2(){return21566,46134
+function color2(){color21576,46266
+function escapeRemove(){escapeRemove1586,46402
+function prettyPrint(){prettyPrint1593,46511
+function alternatingPrettyPrint(){alternatingPrettyPrint1605,46708
+    counter=0counter1608,46762
+function tac(){tac1635,47428
+function backup(){backup1640,47473
+    newfile="$1".$(date +%Y%m%d.%H.%M.bak)newfile1647,47575
+function gcl() {gcl1658,47796
+    git_name="${1##*/}"git_name1667,47939
+    dir_name=${git_name%.*}dir_name1668,47963
+function ino(){ino1678,48173
+    dir="$1"dir1685,48272
+function jetbrainsWorkspaceEdit(){jetbrainsWorkspaceEdit1738,49244
+function o(){o1759,50346
+    open_cmd="$ZPWR_OPEN_CMD" || return 1open_cmd1761,50361
+function openmygh(){openmygh1779,50725
+    open_cmd="$ZPWR_OPEN_CMD" || return 1open_cmd1781,50747
+function zpwr(){zpwr1802,51320
+function zp(){zp1810,51459
+export ZPWR_REPO="$HOME/.$ZPWR_REPO_NAME"ZPWR_REPO1819,51559
+function zpz(){zpz1825,51668
+    dirsc="$ZPWR"dirsc1828,51708
+function zr(){zr1838,51867
+    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"dirsc1841,51906
+    forked="$FORKED_DIR/$ZPWR_REPO_NAME"forked1842,51948
+function goInstallerDir(){goInstallerDir1853,52165
+    local ret=0ret1855,52193
+function unlinkConf(){unlinkConf1869,52505
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1873,52557
+    local snipDir="$HOME/.emacs.d/private/snippets"snipDir1883,52909
+function linkConf(){linkConf1894,53098
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1904,53324
+    local snipDir="$HOME/.emacs.d/private"snipDir1916,53876
+function getrc(){getrc1928,54275
+        branch=masterbranch1931,54321
+        branch="$1"branch1933,54352
+            REPLY="$(cat "$ZPWR_TEMPFILE")"REPLY1940,54639
+    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"COMPLETION_DIR1962,55158
+function getrcdev(){getrcdev1972,55385
+function rename(){rename1977,55424
+    search="$1"search1984,55526
+        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')out1988,55613
+function torip(){torip1996,55822
+    ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)ip1998,55841
+function toriprenew() {toriprenew2003,55924
+function mycurl(){mycurl2009,56034
+function perlremovespaces(){perlremovespaces2017,56275
+function pirun(){pirun2025,56533
+    DONE=falseDONE2029,56593
+    picounter=1picounter2031,56628
+function digs(){digs2049,57137
+        colo=colo2065,57481
+                exe=(proxychains4 -q) ||exe2078,57844
+                exe="proxychains4 -q"exe2079,57885
+                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"noport2089,58105
+                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"noproto2098,58469
+                out="$($exe host "$noproto")"out2100,58590
+                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"ip2109,58915
+                        noproto="${noproto:0:-1}"noproto2111,59068
+                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"primary2120,59380
+                    out="$($exe whois "$primary")"out2121,59474
+                    out="$($exe whois "$noproto")"out2144,60493
+                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"noport2192,62310
+                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"noproto2196,62530
+                out="$($colo $exe host "$noproto")"out2198,62651
+                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"ip2208,63003
+                        noproto="${noproto:0:-1}"noproto2210,63156
+                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"primary2214,63316
+                    out="$($exe whois "$primary")"out2215,63410
+                    out="$($colo $exe whois "$noproto")"out2226,63953
+function to(){to2256,65077
+    file="$HOME/.config/powerline/themes/tmux/default.json"file2258,65093
+function ww(){ww2269,65541
+function www(){www2280,65704
+    time=$1time2286,65859
+function fordirUpdate(){fordirUpdate2294,65950
+    cmd="git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache"cmd2300,66093
+function fordir(){fordir2310,66419
+    cmd="$1"cmd2316,66551
+function ff(){ff2331,66891
+function fff(){fff2344,67133
+    num=$1num2350,67261
+function post(){post2357,67350
+    postfix="$1"postfix2363,67451
+    out="$(eval "$@")"out2365,67478
+function pre(){pre2369,67555
+    prefix="$1"prefix2375,67655
+    out="$(eval "$@")"out2377,67681
+function cCommon(){cCommon2390,67990
+    local colorizer=batcolorizer2392,68011
+function c(){c2425,69052
+    styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'styles_dir2445,69441
+    url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"url2447,69534
+            file=${file##*/}file2454,69782
+        len=${#file_ary}len2458,69930
+        randscript="print int(rand()*$len)"randscript2459,69955
+        rand=$(echo "$randscript" | perl)rand2460,69999
+            random_color=${file_ary[$i]}random_color2465,70132
+function fz(){fz2480,70584
+function figletfonts(){figletfonts2494,71476
+        FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR2497,71546
+        FIGLET_DIR="/usr/share/figlet"FIGLET_DIR2499,71626
+function pygmentcolors(){pygmentcolors2534,72717
+    dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"dir2536,72744
+function detachall(){detachall2543,72929
+function scripts(){scripts2549,73039
+    export ZPWR_SCHEMA_NAME=rootZPWR_SCHEMA_NAME2561,73256
+    export ZPWR_TABLE_NAME=LearningCollectionZPWR_TABLE_NAME2562,73289
+function gitCheckoutRebasePush(){gitCheckoutRebasePush2565,73339
+function jsonToArray(){jsonToArray2572,73575
+    local json="$(cat)"json2574,73600
+function arrayToJson(){arrayToJson2590,73961
+        ary="$1"ary2593,74005
+        ary="$1"ary2597,74129
+function loginCount(){loginCount2606,74329
+function needSudo(){needSudo2613,74501
+function clearTemp(){clearTemp2622,74605
+function clearCache(){clearCache2637,74963
+function regenEmacsTags(){regenEmacsTags2650,75231
+function regenTags(){regenTags2663,75613
+function regenAllKeybindingsCache(){regenAllKeybindingsCache2676,75956
+function searchGitCommon(){searchGitCommon2688,76379
+    out="$(goThere)"out2690,76408
+function regenAllGitRepos(){regenAllGitRepos2695,76464
+function searchDirtyGitRepos(){searchDirtyGitRepos2712,76953
+    goThere(){goThere2714,76986
+    shouldRegen="$1"shouldRegen2730,77603
+function searchAllGitRepos(){searchAllGitRepos2741,77901
+    goThere(){goThere2743,77932
+    shouldRegen="$1"shouldRegen2751,78223
+function regenConfigLinks(){regenConfigLinks2762,78521
+function regenPowerlineLink(){regenPowerlineLink2768,78641
+    dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"dir2770,78673
+function goclean() {goclean2789,79307
+    pkg=$1;pkg2796,79438
+        ost="$(uname | tr A-Z a-z)_amd64"ost2801,79531
+    src_dir="$GOPATH/src/$pkg"src_dir2806,79677
+    bin_dir="$GOPATH/pkg/$ost/$pkg"bin_dir2807,79708
+function commits(){commits2825,80164
+function emacsEmacsConfig(){emacsEmacsConfig2841,80532
+function vimEmacsConfig(){vimEmacsConfig2851,80728
+function emacsAll(){emacsAll2861,80911
+function vimAll(){vimAll2882,81498
+function emacsScripts(){emacsScripts2903,82072
+function vimScripts(){vimScripts2915,82392
+function timer() {timer2927,82699
+    count=100count2934,82858
+        cmd=gdatecmd2936,82897
+        cmd=datecmd2938,82924
+    total=0total2941,82949
+    totstart=$($cmd +%s)totstart2942,82961
+            start=$($cmd +%s%N)start2946,83090
+            end=$($cmd +%s%N)end2949,83187
+            runtime=$(((end-start)/1000000.0))runtime2951,83261
+        avg=$((runtime/(count *1.0)))avg2955,83394
+    totend=$($cmd +%s)totend2960,83571
+    tot=$((totend-totstart))tot2961,83594
+function changeGitCommitterEmail(){changeGitCommitterEmail2966,83701
+    oldEmail="$1"oldEmail2978,83912
+    newEmail="$2"newEmail2979,83930
+        GIT_COMMITTER_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_COMMITTER_EMAIL2985,84104
+function changeGitAuthorEmail(){changeGitAuthorEmail2991,84224
+    oldEmail="$1"oldEmail3003,84432
+    newEmail="$2"newEmail3004,84450
+        GIT_AUTHOR_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_AUTHOR_EMAIL3010,84618
+function changeGitEmail(){changeGitEmail3016,84735
+    OLD_EMAIL="'$1'"OLD_EMAIL3029,84986
+    CORRECT_NAME="'$2'"CORRECT_NAME3030,85007
+    CORRECT_EMAIL="'$3'"CORRECT_EMAIL3031,85031
+        export GIT_COMMITTER_NAME="$CORRECT_NAME"GIT_COMMITTER_NAME3034,85114
+        export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"GIT_COMMITTER_EMAIL3035,85164
+        export GIT_AUTHOR_NAME="$CORRECT_NAME"GIT_AUTHOR_NAME3039,85278
+        export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"GIT_AUTHOR_EMAIL3040,85325
+
+/Users/wizard/.zpwr/scripts/CPU_Stresser.sh,308
+__ScriptVersion="1.0.2"__ScriptVersion9,303
+nproc=10nproc10,327
+usage() {usage16,553
+prettyPrint() {prettyPrint29,907
+exists() {exists35,984
+alternatingPrettyPrint() {alternatingPrettyPrint39,1028
+    counter=0counter40,1055
+killpids() {killpids100,2319
+        pids="$pids $!"pids118,2995
+
+/Users/wizard/.zpwr/scripts/about.sh,559
+allRemotes() {allRemotes10,341
+banner() {banner17,498
+            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"version20,577
+            info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"info21,682
+            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"fetch22,755
+            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\t ]+@    @')"push23,857
+            lastcommit="$(git log --oneline -n 1)"lastcommit24,957
+
+/Users/wizard/.zpwr/scripts/archetypeShower.sh,0
+
+/Users/wizard/.zpwr/scripts/autoUpdater.sh,367
+minutes_to_sleep=10minutes_to_sleep9,273
+    oldtime=$(date +"%s")oldtime12,337
+    olddate="$(date +'%Y-%m-%d %H:%M:%S')"olddate13,363
+    perlscript=$(perlscript15,425
+    nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)nextdate21,598
+        newtime=$(date +"%s")newtime25,756
+        timediff=$((newtime - oldtime))timediff26,786
+
+/Users/wizard/.zpwr/scripts/backgroundMastery.sh,213
+s1_pid="$!"s1_pid14,424
+s2_pid="$!"s2_pid16,446
+s4_pid="$!"s4_pid23,553
+s5_pid="$!"s5_pid31,661
+s10_pid="$!"s10_pid47,972
+s8_pid="$!"s8_pid55,1031
+s3_pid="$!"s3_pid60,1096
+s6_pid="$!"s6_pid65,1162
+
+/Users/wizard/.zpwr/scripts/backupConfig.sh,177
+BACKUP_DIR="$ZPWR_SCRIPTS/rcBackups"BACKUP_DIR10,296
+files=("$HOME/.zshrc" "$HOME/.bashrc" "$ZPWR/.shell_aliases_functions.sh" "$HOME/.tmux.conf" "$HOME/.vimrc")files16,396
+
+/Users/wizard/.zpwr/scripts/banner.pl,60
+sub printD {printD18,716
+sub printDate {printDate24,790
+
+/Users/wizard/.zpwr/scripts/batchRename.sh,1139
+displayProgress() {displayProgress11,316
+    local spinner="\|/-"            # spinnerspinner12,336
+    local chars=1                   # number of characters to displaychars13,382
+    local delay=.1                  # time in seconds between charactersdelay14,452
+    local prompt="press any key..." # user promptprompt15,525
+    local clearline="\e[K"          # clear to end of line (ANSI terminal)clearline16,575
+    local CR="\r"CR17,650
+        local temp=${spinner#?}           # remove first character from $spinnertemp27,925
+        spinner="$temp${spinner%"$temp"}" # and add it to the endspinner28,1006
+startCursor() {startCursor33,1107
+    progress_pid=$!progress_pid37,1223
+killCursor() {killCursor41,1258
+convertFiles() {convertFiles47,1349
+        local first=$(echo ${file%%$delim*})first51,1481
+        local last=$(echo ${file##*_})last52,1526
+        local number=$(echo ${last%%.*})number53,1565
+        local number=$((10#$number))number55,1669
+        local newfile="$first$number.$endFileEnding"newfile57,1707
+checkForExistence() {checkForExistence68,1897
+delim=_delim81,2267
+
+/Users/wizard/.zpwr/scripts/blueText.sh,76
+ZPWR_BLUE='\e[37;44m'ZPWR_BLUE10,334
+ZPWR_RESET='\e[0m'ZPWR_RESET11,356
+
+/Users/wizard/.zpwr/scripts/blueUpperText.sh,76
+ZPWR_BLUE='\e[37;44m'ZPWR_BLUE10,348
+ZPWR_RESET='\e[0m'ZPWR_RESET11,370
+
+/Users/wizard/.zpwr/scripts/boiler_gen.py,904
+import osos2,23
+import syssys3,33
+class CodeFile:CodeFile6,46
+    def __init__(self, filename, directory, contents):__init__7,62
+def spring_routine(package, name):spring_routine13,220
+    repoFile = f'{name}Repository.java'repoFile34,718
+    resourceFile = f'{name}Controller.java'resourceFile45,1057
+def react_routine(name):react_routine81,2201
+    file = CodeFile(model_file, directory, model)file97,2516
+def check_dir_exists(directory):check_dir_exists109,2884
+user_framework = sys.argv[1]user_framework124,3264
+def min_args_check(min_args):min_args_check127,3295
+def gen_files_react(start):gen_files_react133,3439
+def gen_files_spring(start):gen_files_spring139,3588
+frameworks = [{frameworks146,3774
+def get_frame_work(user_framework):get_frame_work153,3884
+valid_framework = get_frame_work(user_framework)valid_framework161,4101
+    min_args = 3min_args168,4297
+
+/Users/wizard/.zpwr/scripts/boldText.sh,76
+ZPWR_BLUE='\e[37;44m'ZPWR_BLUE10,326
+ZPWR_RESET='\e[0m'ZPWR_RESET11,348
+
+/Users/wizard/.zpwr/scripts/boxPrint.pl,0
+
+/Users/wizard/.zpwr/scripts/bridgeDown.sh,276
+eth="eth0"eth17,697
+eth_ip="192.168.0.149"eth_ip18,708
+eth_netmask="255.255.255.0"eth_netmask19,731
+eth_broadcast="192.168.0.255"eth_broadcast20,759
+eth_gateway="192.168.0.1"eth_gateway21,789
+eth_mac="REPLACE"eth_mac22,815
+br="br0"br25,860
+tap="tap0"tap28,925
+
+/Users/wizard/.zpwr/scripts/bridgeUp.sh,276
+eth="eth0"eth17,684
+eth_ip="192.168.0.149"eth_ip18,695
+eth_netmask="255.255.255.0"eth_netmask19,718
+eth_broadcast="192.168.0.255"eth_broadcast20,746
+eth_gateway="192.168.0.1"eth_gateway21,776
+eth_mac="REPLACE"eth_mac22,802
+br="br0"br25,847
+tap="tap0"tap28,912
+
+/Users/wizard/.zpwr/scripts/c.pl,0
+
+/Users/wizard/.zpwr/scripts/clearList.sh,1304
+isZsh(){isZsh10,332
+    exists(){exists19,462
+    exists(){exists27,659
+prettyPrint(){prettyPrint33,755
+ZPWR_EXA_COMMAND="command exa --git -il -F -H --extended --color-scale -g -a --colour=always"ZPWR_EXA_COMMAND44,942
+clearList() {clearList46,1037
+            ls_command="$ZPWR_EXA_COMMAND"ls_command49,1123
+                ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"ls_command52,1211
+                ls_command="ls -iFlhAOd"ls_command54,1306
+        lib_command="otool -L"lib_command57,1373
+            ls_command="$ZPWR_EXA_COMMAND"ls_command61,1477
+                ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"ls_command64,1565
+                ls_command="ls -iFlhA"ls_command66,1658
+        lib_command="ldd"lib_command69,1723
+            ls_command="grc -c $HOME/conf.gls ls -iFlhA"ls_command72,1785
+            ls_command="ls -iFhlA"ls_command74,1855
+        lib_command="ldd"lib_command76,1901
+                    lf="$(echo $loc | cut -d' ' -f3-10)"lf87,2205
+                        rank="Primary"rank89,2322
+                        rank="Secondary"rank91,2386
+                        out=$(man -wa "$(basename $lf)" 2>/dev/null)out104,2960
+                            out="$(hash | command grep "^$arg=")"out110,3231
+
+/Users/wizard/.zpwr/scripts/clearTrash.sh,112
+        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName15,377
+
+/Users/wizard/.zpwr/scripts/colorLogger.sh,321
+prettyPrint() {prettyPrint10,302
+tailVersion=tailtailVersion20,494
+weHaveCCZE=noweHaveCCZE22,512
+    distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName47,1390
+        distro=debiandistro51,1576
+        distro=redhatdistro54,1637
+        distro=susedistro57,1711
+
+/Users/wizard/.zpwr/scripts/connectionShower.sh,0
+
+/Users/wizard/.zpwr/scripts/coolFormatter.sh,76
+ZPWR_BLUE='\e[37;44m'ZPWR_BLUE10,313
+ZPWR_RESET='\e[0m'ZPWR_RESET11,335
+
+/Users/wizard/.zpwr/scripts/createScriptButDontOpenSublime.sh,219
+executableScriptsProcessing() {executableScriptsProcessing10,311
+openTextEditor() {openTextEditor18,507
+createTheFile() {createTheFile25,709
+newfile="$1"newfile48,1411
+    newfile="$newfile.txt"newfile71,2070
+
+/Users/wizard/.zpwr/scripts/createTextFile.sh,290
+executableScriptsProcessing() {executableScriptsProcessing10,322
+openTextEditor() {openTextEditor19,485
+addHeader() {addHeader25,670
+    firstString="$(firstString28,763
+createTheFile() {createTheFile48,1161
+newfile="$1"newfile74,1789
+    newfile="$newfile".txtnewfile97,2448
+
+/Users/wizard/.zpwr/scripts/crossOSCommands.sh,1176
+    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"ZPWR_OS_TYPE11,347
+getOpenCommand(){getOpenCommand14,412
+                open_cmd='nohup xdg-open'open_cmd24,646
+                open_cmd='cmd.exe /c start ""'open_cmd26,705
+getPasteCommand(){getPasteCommand39,983
+            paste_cmd='pbpaste'paste_cmd44,1068
+            paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"paste_cmd47,1132
+                paste_cmd='xclip -o -sel clip'paste_cmd51,1292
+                paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"paste_cmd53,1356
+            paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"paste_cmd57,1480
+getCopyCommand(){getCopyCommand68,1708
+            copy_cmd='pbcopy'copy_cmd73,1791
+            copy_cmd='clip.exe'copy_cmd76,1853
+                copy_cmd='xclip -i -sel clip'copy_cmd80,1970
+                copy_cmd='clip.exe'copy_cmd82,2033
+            copy_cmd='clip.exe'copy_cmd86,2114
+export ZPWR_OPEN_CMD="$(getOpenCommand)"ZPWR_OPEN_CMD97,2298
+export ZPWR_COPY_CMD="$(getCopyCommand)"ZPWR_COPY_CMD98,2339
+export ZPWR_PASTE_CMD="$(getPasteCommand)"ZPWR_PASTE_CMD99,2380
+
+/Users/wizard/.zpwr/scripts/delete_dups.zsh,41
+    cmd="$(echo $f | cut -c2-)"cmd6,77
+
+/Users/wizard/.zpwr/scripts/directoryContentsSize.sh,220
+sortedCommand=gsortsortedCommand10,333
+usage() {usage14,423
+dontSummarizeSizes() {dontSummarizeSizes28,681
+summarizeSizes() {summarizeSizes33,798
+showHidden() {showHidden37,838
+optstring=shtaoptstring57,1370
+
+/Users/wizard/.zpwr/scripts/dsDownloader.sh,71
+outputDir="Desktop"outputDir10,307
+master="jacobmenke"master11,327
+
+/Users/wizard/.zpwr/scripts/duplicateLineDeleter.sh,198
+home_dir=$HOMEhome_dir10,315
+scripts_dir=$ZPWR_SCRIPTSscripts_dir11,330
+backup_dir=$scripts_dir/rcBackupsbackup_dir12,356
+usage() {usage14,391
+    contents=$(cat -s "$file")contents30,628
+
+/Users/wizard/.zpwr/scripts/encrypt.sh,93
+encrypt_program=ccryptencrypt_program10,290
+    encrypt_program=zipencrypt_program26,718
+
+/Users/wizard/.zpwr/scripts/escapeRemover.pl,0
+
+/Users/wizard/.zpwr/scripts/evilSkull.sh,0
+
+/Users/wizard/.zpwr/scripts/eyes.sh,295
+rangePossibleIndices=${#ary[*]}rangePossibleIndices18,444
+    fortuneQuote="$(fortune)"fortuneQuote22,507
+        fortuneQuote="$(figlet -f "$1" \"$fortuneQuote\")"fortuneQuote24,561
+    randIndex=$((RANDOM % rangePossibleIndices))randIndex27,637
+    view=${ary[$randIndex]}view28,686
+
+/Users/wizard/.zpwr/scripts/fdswap.sh,82
+usage(){usage11,333
+src="$1"src31,588
+dst="$2"dst32,597
+pids=$*pids35,618
+
+/Users/wizard/.zpwr/scripts/forever.sh,0
+
+/Users/wizard/.zpwr/scripts/fsWatchLongRunning.sh,189
+dir_watched="$1"dir_watched9,300
+first_iteration=truefirst_iteration10,317
+        first_iteration=falsefirst_iteration17,461
+        pid=$!pid26,757
+            pid=$!pid39,1222
+
+/Users/wizard/.zpwr/scripts/fzfEnv.sh,452
+isZsh(){isZsh11,358
+    exists(){exists21,488
+    exists(){exists29,682
+line={};line38,986
+line=\$(echo \$line| perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")line39,995
+cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")cmdType40,1066
+file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")file41,1143
+        file=\$(echo \$file| perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")file93,2849
+
+/Users/wizard/.zpwr/scripts/fzfEnvVerbs.sh,550
+isZsh(){isZsh11,358
+    exists(){exists21,488
+    exists(){exists29,682
+line={};line39,987
+line=\$(echo \$line | perl -ne "do{@ary=split /\\\s+/,\\\$1;print \\\$ary[0]} if m{^\\\S+\\\s+([\\\s\\\S]+)=\\\S+}" | perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")line40,996
+cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")cmdType42,1165
+file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")file43,1242
+        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")file95,2948
+
+/Users/wizard/.zpwr/scripts/fzfGitOpts.sh,65
+ref=$1ref13,382
+    sha=\$(echo {} | cut -d" " -f1)sha16,399
+
+/Users/wizard/.zpwr/scripts/fzfMan.sh,148
+cmd="$1"cmd11,333
+log=/Users/wizard/updaterlog.txtlog12,342
+line=\$(echo {} | perl -lane "do{\\\$_=~s@^\\\s+|\\\s+\\\$@@g;print}");line14,384
+
+/Users/wizard/.zpwr/scripts/fzfPreviewOpts.sh,0
+
+/Users/wizard/.zpwr/scripts/fzfPreviewOpts2Pos.sh,0
+
+/Users/wizard/.zpwr/scripts/fzfPreviewOptsCommon.sh,271
+isZsh(){isZsh11,350
+    exists(){exists21,480
+    exists(){exists29,674
+os="$(uname -s)"os39,870
+    nmcmd="nm"nmcmd41,925
+    nmcmd="nm -D"nmcmd43,979
+    nmcmd="nm"nmcmd45,1002
+casestr=$(cat<<EOFcasestr48,1021
+            base=\${file##*/}base49,1040
+
+/Users/wizard/.zpwr/scripts/fzfPreviewOptsCommon2Pos.sh,271
+isZsh(){isZsh11,350
+    exists(){exists21,480
+    exists(){exists29,674
+os="$(uname -s)"os39,870
+    nmcmd="nm"nmcmd41,925
+    nmcmd="nm -D"nmcmd43,979
+    nmcmd="nm"nmcmd45,1002
+casestr=$(cat<<EOFcasestr48,1021
+            base=\${file##*/}base49,1040
+
+/Users/wizard/.zpwr/scripts/fzfPreviewOptsCtrlT.sh,0
+
+/Users/wizard/.zpwr/scripts/fzfPreviewOptsPony.sh,0
+
+/Users/wizard/.zpwr/scripts/genericDisplayer.sh,0
+
+/Users/wizard/.zpwr/scripts/genericDisplayerLolcat.sh,0
+
+/Users/wizard/.zpwr/scripts/gitRemoteRepoInformation.sh,469
+                line="$(git remote -v 2>/dev/null | sed 1q)" && {line14,443
+                        user="$(echo $line | awk -F':' '{print $2}' | awk -F'/' '{print $1}')"user17,597
+                        repo="$(echo $line | awk -F'/' '{print $2}' | awk '{print $1}')"repo18,692
+                        user="$(echo $line | awk -F'/' '{print $4}')"user21,836
+                        repo="$(echo $line | awk -F'/' '{print $5}' | awk '{print $1}')"repo22,906
+
+/Users/wizard/.zpwr/scripts/gitSdiffColorizer.pl,0
+
+/Users/wizard/.zpwr/scripts/gitgo.sh,920
+myPrettyPrint() {myPrettyPrint36,1415
+initializeGitDirectory() {initializeGitDirectory42,1544
+getRemoteDetails() {getRemoteDetails74,2410
+        local REPO_NAME_TO_CREATE="$1"REPO_NAME_TO_CREATE83,2723
+    local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"ORGIN_NAME93,3164
+    local URL="https://github.com/$GITHUB_ACCOUNT/$REPO_NAME_TO_CREATE"URL100,3422
+getInitialCommit() {getInitialCommit106,3601
+usage() {usage112,3737
+gitPull() {gitPull131,4080
+        local PULL_URL="$(git remote -v |PULL_URL134,4204
+gitPush() {gitPush144,4413
+commitTheDirectory() {commitTheDirectory159,4765
+    local commitMessage="$1"commitMessage161,4825
+    local origin="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"origin162,4854
+        local REPO_NAME="$(git remote -v | awk '{print $2}' | tail -1 | tr -d ' ')"REPO_NAME168,5143
+optstring=p:hcloptstring182,5657
+
+/Users/wizard/.zpwr/scripts/goForward.sh,0
+
+/Users/wizard/.zpwr/scripts/grc.zsh,20
+  cmds=(cmds6,164
+
+/Users/wizard/.zpwr/scripts/headerSummarizer.sh,50
+    purpose="$(sed -n 6p "$file")"purpose11,325
+
+/Users/wizard/.zpwr/scripts/help2comp.py,517
+import syssys10,242
+import rere11,253
+from string import TemplateTemplate12,263
+URL = 'http://github.com/RobSis/zsh-completion-generator'URL14,292
+def cut_option(line):cut_option34,653
+def parse_options(help_text):parse_options51,1168
+def _escape(line):_escape83,2103
+def generate_argument_list(options):generate_argument_list92,2315
+def generate_completion_function(options, program_name):generate_completion_function120,3139
+        options = parse_options(sys.stdin.readlines())options134,3533
+
+/Users/wizard/.zpwr/scripts/indenterAndDuplicateLineDeleter.sh,198
+home_dir=$HOMEhome_dir10,311
+scripts_dir=$ZPWR_SCRIPTSscripts_dir11,326
+backup_dir=$scripts_dir/rcBackupsbackup_dir12,352
+usage() {usage14,387
+    contents=$(cat -s "$file")contents30,619
+
+/Users/wizard/.zpwr/scripts/info.sh,0
+
+/Users/wizard/.zpwr/scripts/inotifyWatchLogAndEmailIfNAS.sh,76
+file="$1"file9,167
+        out=$(tail -1 "$file" | grep "nas")out19,410
+
+/Users/wizard/.zpwr/scripts/iostatShower.sh,0
+
+/Users/wizard/.zpwr/scripts/keybindingsToFZF.zsh,286
+    ZPWR_TEMPFILE="/tmp/.temp$$"ZPWR_TEMPFILE11,335
+    ZPWR_TEMPFILE1="/tmp/.temp$$-1"ZPWR_TEMPFILE114,407
+    ZPWR_TEMPFILE2="/tmp/.temp$$-2"ZPWR_TEMPFILE217,482
+    ZPWR_TEMPFILE3="/tmp/.temp$$-3"ZPWR_TEMPFILE320,557
+    ZPWR_TEMPFILE4="/tmp/.temp$$-4"ZPWR_TEMPFILE423,632
+
+/Users/wizard/.zpwr/scripts/keybindingsToFZFVim.zsh,333
+    cmd=nvimcmd10,339
+    cmd=vimcmd12,357
+    ZPWR_TEMPFILE="/tmp/.temp$$"ZPWR_TEMPFILE16,408
+    ZPWR_TEMPFILE1="/tmp/.temp$$-1"ZPWR_TEMPFILE119,480
+    ZPWR_TEMPFILE2="/tmp/.temp$$-2"ZPWR_TEMPFILE222,555
+    ZPWR_TEMPFILE3="/tmp/.temp$$-3"ZPWR_TEMPFILE325,630
+    ZPWR_TEMPFILE4="/tmp/.temp$$-4"ZPWR_TEMPFILE428,705
+
+/Users/wizard/.zpwr/scripts/keybindingsToREADME.zsh,286
+    ZPWR_TEMPFILE="/tmp/.temp$$"ZPWR_TEMPFILE12,336
+    ZPWR_TEMPFILE1="/tmp/.temp$$-1"ZPWR_TEMPFILE115,408
+    ZPWR_TEMPFILE2="/tmp/.temp$$-2"ZPWR_TEMPFILE218,483
+    ZPWR_TEMPFILE3="/tmp/.temp$$-3"ZPWR_TEMPFILE321,558
+    ZPWR_TEMPFILE4="/tmp/.temp$$-4"ZPWR_TEMPFILE424,633
+
+/Users/wizard/.zpwr/scripts/lib.sh,905
+function fail(){fail18,674
+function fileMustExist(){fileMustExist23,746
+function goInstallerDir(){goInstallerDir30,867
+    local ret=0ret31,894
+function goInstallerOutputDir(){goInstallerOutputDir45,1147
+    local ret=0ret46,1180
+function exists(){exists59,1468
+function update(){update63,1520
+function upgrade(){upgrade84,2113
+function refresh(){refresh104,2632
+function needSudo(){needSudo136,3378
+function proceed(){proceed144,3481
+function prettyPrintStdin(){prettyPrintStdin158,3687
+    local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"perlfile159,3716
+function prettyPrint(){prettyPrint169,3962
+    local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"perlfile170,3986
+function turnOffDebugging(){turnOffDebugging177,4204
+function turnOnDebugging(){turnOnDebugging183,4279
+function alternatingPrettyPrint(){alternatingPrettyPrint190,4445
+    counter=0counter191,4480
+
+/Users/wizard/.zpwr/scripts/listAllCommands.sh,52
+sum=0sum11,323
+arr=()arr13,330
+IFS=:IFS15,404
+
+/Users/wizard/.zpwr/scripts/logs.sh,112
+        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName16,443
+
+/Users/wizard/.zpwr/scripts/mantozshcomp.py,7598
+import bz2bz217,1466
+import codecscodecs18,1477
+import errnoerrno19,1491
+import getoptgetopt20,1504
+import gzipgzip21,1518
+import os.pathos22,1530
+import os.pathpath22,1530
+import rere23,1545
+import stringstring24,1555
+import syssys25,1569
+import tracebacktraceback26,1580
+class Deroffer:Deroffer31,1634
+    g_specs_specletter = {g_specs_specletter33,1651
+    g_specs = {g_specs110,3313
+    g_re_word = re.compile(r"[a-zA-Z_]+")  # equivalent to the word() methodg_re_word288,7054
+    g_re_number = re.compile(r"[+-]?\d+")  # equivalent to the number() methodg_re_number289,7131
+    g_re_esc_char = re.compile(g_re_esc_char290,7210
+    g_re_not_backslash_or_whitespace = re.compile(g_re_not_backslash_or_whitespace298,7480
+    g_re_newline_collapse = re.compile(r"\n{3,}")g_re_newline_collapse302,7618
+    g_re_font = re.compile(g_re_font304,7669
+    g_macro_dict = Falseg_macro_dict314,8120
+    def __init__(self):__init__316,8146
+    def flush_output(self, where):flush_output392,10801
+    def get_output(self):get_output397,10926
+    def putchar(self, c):putchar402,11079
+    def condputs_tr(self, str):condputs_tr407,11233
+    def condputs(self, str):condputs414,11528
+    def str_at(self, idx):str_at421,11801
+    def skip_char(self, amt=1):skip_char424,11864
+    def skip_leading_whitespace(self):skip_leading_whitespace427,11927
+    def is_white(self, idx):is_white430,12000
+    def str_eq(offset, other, len):str_eq434,12148
+    def prch(self, idx):prch437,12243
+    def font(self):font442,12415
+    def font2(self):font2449,12588
+    def comment(self):comment466,13148
+    def numreq(self):numreq472,13334
+    def var(self):var485,13773
+    def size(self):size529,15293
+    def spec(self):spec538,15579
+    def esc(self):esc556,16199
+    def word(self):word574,16640
+    def text(self):text591,17091
+    def letter(self, idx):letter606,17537
+    def digit(self, idx):digit610,17675
+    def number(self):number614,17760
+    def esc_char_backslash(self):esc_char_backslash623,18001
+    def esc_char(self):esc_char641,18507
+    def quoted_arg(self):quoted_arg646,18653
+    def text_arg(self):text_arg658,19024
+    def text_arg2(self):text_arg2682,19955
+    def macro_sh(self):macro_sh698,20458
+    def macro_ss_ip(self):macro_ss_ip710,20828
+    def macro_i_ir(self):macro_i_ir714,20904
+    def macro_Nm(self):macro_Nm718,20965
+    def macro_close_bracket(self):macro_close_bracket725,21139
+    def macro_ps(self):macro_ps729,21223
+    def macro_pe(self):macro_pe735,21353
+    def macro_ts(self):macro_ts741,21484
+    def macro_t_and(self):macro_t_and747,21643
+    def macro_te(self):macro_te753,21804
+    def macro_eq(self):macro_eq759,21935
+    def macro_en(self):macro_en765,22065
+    def macro_r1(self):macro_r1771,22196
+    def macro_r2(self):macro_r2777,22329
+    def macro_de(self):macro_de783,22463
+    def macro_bl_vl(self):macro_bl_vl788,22557
+    def macro_bv(self):macro_bv794,22693
+    def macro_le(self):macro_le800,22862
+    def macro_lp_pp(self):macro_lp_pp806,22996
+    def macro_ds(self):macro_ds810,23072
+    def macro_so_nx(self):macro_so_nx823,23465
+    def macro_tr(self):macro_tr829,23702
+    def macro_sp(self):macro_sp849,24379
+    def macro_other(self):macro_other853,24452
+    def request_or_macro(self):request_or_macro857,24528
+    def request_or_macro2(self):request_or_macro2902,25817
+    def do_tbl(self):do_tbl1071,31363
+    def do_line(self):do_line1124,33208
+    def deroff(self, str):deroff1134,33444
+def deroff_files(files):deroff_files1143,33655
+lzma_available = Truelzma_available1160,34073
+        import lzmalzma1163,34109
+        from backports import lzmalzma1165,34153
+    lzma_available = Falselzma_available1167,34208
+CMDNAME = ""CMDNAME1170,34311
+PARSER_INFO = {}PARSER_INFO1173,34390
+built_command_output = []built_command_output1176,34463
+diagnostic_output = []diagnostic_output1179,34510
+diagnostic_indent = 0diagnostic_indent1180,34533
+def add_diagnostic(dgn, msg_verbosity=VERY_VERBOSE):add_diagnostic1190,34812
+def flush_diagnostics(where):flush_diagnostics1196,35030
+already_output_completions = {}already_output_completions1206,35384
+def compile_and_search(regex, input):compile_and_search1209,35418
+def unquote_double_quotes(data):unquote_double_quotes1215,35620
+def unquote_single_quotes(data):unquote_single_quotes1223,35804
+g_fish_safe_chars = frozenset(string.ascii_letters + string.digits +g_fish_safe_chars1233,36111
+def fish_escape_single_quote(str):fish_escape_single_quote1237,36225
+def lossy_unicode(s):lossy_unicode1251,36751
+def output_complete_command(cmdname, args, description, output_list, argument):output_complete_command1266,37090
+def splitTrim(arg, comps, dash):splitTrim1313,38545
+def built_command(options, description, arg):built_command1321,38714
+def remove_groff_formatting(data):remove_groff_formatting1404,41906
+class ManParser(object):ManParser1429,42699
+    def is_my_type(self, manpage):is_my_type1430,42724
+    def parse_man_page(self, manpage):parse_man_page1433,42781
+    def get_arg(self, optionName):get_arg1436,42842
+    def replaceSpecialCharsInArgument(self, string):replaceSpecialCharsInArgument1449,43355
+class Type1ManParser(ManParser):Type1ManParser1453,43459
+    def is_my_type(self, manpage):is_my_type1454,43492
+    def parse_man_page(self, manpage):parse_man_page1464,43800
+    def fallback(self, options_section):fallback1511,45800
+    def fallback2(self, options_section):fallback21542,47262
+class Type2ManParser(ManParser):Type2ManParser1581,48992
+    def is_my_type(self, manpage):is_my_type1582,49025
+    def parse_man_page(self, manpage):parse_man_page1591,49305
+class Type3ManParser(ManParser):Type3ManParser1633,51048
+    def is_my_type(self, manpage):is_my_type1634,51081
+    def parse_man_page(self, manpage):parse_man_page1643,51365
+class Type4ManParser(ManParser):Type4ManParser1683,53044
+    def is_my_type(self, manpage):is_my_type1684,53077
+    def parse_man_page(self, manpage):parse_man_page1693,53326
+class TypeDarwinManParser(ManParser):TypeDarwinManParser1735,55007
+    def is_my_type(self, manpage):is_my_type1736,55045
+    def trim_groff(self, line):trim_groff1741,55266
+    def count_argument_dashes(self, line):count_argument_dashes1755,55771
+    def groff_replace_escapes(self, line):groff_replace_escapes1768,56296
+    def is_option(self, line):is_option1774,56483
+    def parse_man_page(self, manpage):parse_man_page1777,56556
+class TypeDeroffManParser(ManParser):TypeDeroffManParser1840,58677
+    def is_my_type(self, manpage):is_my_type1841,58715
+    def is_option(self, line):is_option1844,58790
+    def could_be_description(self, line):could_be_description1847,58858
+    def parse_man_page(self, manpage):parse_man_page1850,58959
+def file_is_overwritable(path):file_is_overwritable1898,60483
+def cleanup_autogenerated_completions_in_directory(dir):cleanup_autogenerated_completions_in_directory1921,61068
+def cleanup_autogenerated_file(path):cleanup_autogenerated_file1934,61465
+def parse_manpage_at_path(manpage_path, output_directory):parse_manpage_at_path1942,61625
+def parse_and_output_man_pages(paths, output_directory, show_progress):parse_and_output_man_pages2091,66624
+def get_paths_from_man_locations():get_paths_from_man_locations2165,69410
+    import subprocess, ossubprocess2167,69515
+    import subprocess, osos2167,69515
+def usage(script_name):usage2215,71605
+
+/Users/wizard/.zpwr/scripts/manzshcompgen.zsh,402
+comp_dir="comp_dir"comp_dir10,309
+exists(){exists12,330
+boxesPrint(){boxesPrint16,400
+    width=70width17,414
+    len=${#1}len18,427
+    spacerlen=2spacerlen19,441
+    boxesChar='/'boxesChar20,457
+    spaceChar=' 'spaceChar21,475
+    sidelen=$(($width - $len - $spacerlen * 2))sidelen22,493
+    sidelen=$(( ($sidelen + 2 -1) / 2))sidelen24,551
+    sidelen2=$sidelensidelen225,591
+
+/Users/wizard/.zpwr/scripts/menkeTech.sh,0
+
+/Users/wizard/.zpwr/scripts/menkeTechLolcat.sh,0
+
+/Users/wizard/.zpwr/scripts/minifySpaces.pl,39
+sub removeSpaces {removeSpaces12,322
+
+/Users/wizard/.zpwr/scripts/motd.sh,4809
+function color (){color5,20
+function extend (){extend9,65
+  local str="$1"str10,85
+    str="$str "str13,154
+function center (){center19,218
+  local str="$1"str20,238
+    str=" $str"str24,357
+    str="$str "str29,450
+function sec2time (){sec2time36,527
+  local input=$1input37,549
+    local daysPlural="s"daysPlural48,759
+    local hoursPlural="s"hoursPlural49,784
+    local minsPlural="s"minsPlural50,810
+      daysPlural=""daysPlural53,869
+      hoursPlural=""hoursPlural57,931
+      minsPlural=""minsPlural61,993
+borderColor=35borderColor68,1115
+headerLeafColor=32headerLeafColor69,1130
+headerRaspberryColor=31headerRaspberryColor70,1149
+greetingsColor=36greetingsColor71,1173
+statsLabelColor=33statsLabelColor72,1191
+borderLine="━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"borderLine74,1211
+borderTopLine=$(color $borderColor "┏$borderLine┓")borderTopLine75,1459
+borderBottomLine=$(color $borderColor "┗$borderLine┛")borderBottomLine76,1515
+borderBar=$(color $borderColor "┃")borderBar77,1574
+borderEmptyLine="$borderBar                                                                              $borderBar"borderEmptyLine78,1612
+header="$borderTopLine\n$borderEmptyLine\n"header81,1739
+header="$header$borderBar$(color $headerLeafColor "          .~~.   .~~.                                                         ")$borderBar\n"header82,1783
+header="$header$borderBar$(color $headerLeafColor "         '. \ ' ' / .'                                                        ")$borderBar\n"header83,1928
+header="$header$borderBar$(color $headerRaspberryColor "          .~ .~~~..~.                      _                          _       ")$borderBar\n"header84,2073
+header="$header$borderBar$(color $headerRaspberryColor "         : .~.'~'.~. :     ___ ___ ___ ___| |_ ___ ___ ___ _ _    ___|_|      ")$borderBar\n"header85,2223
+header="$header$borderBar$(color $headerRaspberryColor "        ~ (   ) (   ) ~   |  _| .'|_ -| . | . | -_|  _|  _| | |  | . | |      ")$borderBar\n"header86,2373
+header="$header$borderBar$(color $headerRaspberryColor "       ( : '~'.~.'~' : )  |_| |__,|___|  _|___|___|_| |_| |_  |  |  _|_|      ")$borderBar\n"header87,2523
+header="$header$borderBar$(color $headerRaspberryColor "        ~ .~ (   ) ~. ~               |_|                 |___|  |_|          ")$borderBar\n"header88,2673
+header="$header$borderBar$(color $headerRaspberryColor "         (  : '~' :  )                                                        ")$borderBar\n"header89,2823
+header="$header$borderBar$(color $headerRaspberryColor "          '~ .~~~. ~'                                                         ")$borderBar\n"header90,2973
+header="$header$borderBar$(color $headerRaspberryColor "              '~'                                                             ")$borderBar"header91,3123
+me=$(whoami)me93,3272
+greetings="$borderBar$(color $greetingsColor "$(center "Welcome back, $me!")")$borderBar\n"greetings96,3298
+greetings="$greetings$borderBar$(color $greetingsColor "$(center "$(date +"%A, %d %B %Y, %T")")")$borderBar"greetings97,3390
+loginDate=$(date -u -d "$(last -2 | awk 'NR==2 {print $4,$5,$6,$7}')" +"%Y-%m-%dT%H:%M:%SZ" )loginDate102,3594
+  loginDate=$loginIPloginDate106,3732
+  loginIP=$loginFromloginIP107,3753
+  login="$(date -d $loginDate +"%A, %d %B %Y, %T") ($loginIP)"login111,3811
+  login="None"login114,3901
+label1="$(extend "$login")"label1117,3920
+label1="$borderBar  $(color $statsLabelColor "Last Login....:") $label1$borderBar"label1118,3948
+uptime="$(sec2time $(cut -d "." -f 1 /proc/uptime))"uptime120,4032
+uptime="$uptime ($(date -d "@"$(grep btime /proc/stat | cut -d " " -f 2) +"%d-%m-%Y %H:%M:%S"))"uptime121,4085
+label2="$(extend "$uptime")"label2123,4183
+label2="$borderBar  $(color $statsLabelColor "Uptime........:") $label2$borderBar"label2124,4212
+label3="$(extend "$(free -m | awk 'NR==2 { printf "Total: %sMB, Used: %sMB, Free: %sMB",$2,$3,$4; }')")"label3126,4296
+label3="$borderBar  $(color $statsLabelColor "Memory........:") $label3$borderBar"label3127,4401
+label4="$(extend "$(df -h ~ | awk 'NR==2 { printf "Total: %sB, Used: %sB, Free: %sB",$2,$3,$4; }')")"label4129,4485
+label4="$borderBar  $(color $statsLabelColor "Home space....:") $label4$borderBar"label4130,4587
+label5="$(extend "$(/opt/vc/bin/vcgencmd measure_temp | cut -c "6-9")ºC")"label5132,4671
+label5="$borderBar  $(color $statsLabelColor "Temperature...:") $label5$borderBar"label5133,4747
+stats="$label1\n$label2\n$label3\n$label4\n$label5"stats135,4831
+
+/Users/wizard/.zpwr/scripts/myWatchMaintainEscapes.sh,371
+usage() {usage12,350
+optstring=dhl:optstring23,492
+        dateflag=truedateflag31,614
+        limitFlag=truelimitFlag35,668
+        num=$OPTARGnum36,691
+    time=1time51,882
+    time="$2"time53,898
+        output="$(script -q /dev/null -c "$1" | tr -d '\r' | cat)"output62,984
+        output="$(script -q /dev/null $1 | tr -d '\r' | cat)"output64,1062
+
+/Users/wizard/.zpwr/scripts/myWatchNoBlink.sh,408
+usage() {usage15,423
+optstring=bhoptstring25,509
+        boldflag=trueboldflag33,629
+    timeToSleep=0.5timeToSleep48,820
+    timeToSleep=$2timeToSleep50,845
+watchCommand() {watchCommand58,930
+    home=$(tput cup 0 0)home59,947
+    ed=$(tput ed)ed61,1009
+    el=$(tput el)el63,1062
+        ROWS=$(tput lines)ROWS68,1197
+        COLS=$(tput cols)COLS69,1224
+        CMD="$@"CMD70,1250
+
+/Users/wizard/.zpwr/scripts/myWatchNoBlinkColorized.sh,464
+usage() {usage14,406
+optstring=bhoptstring24,488
+        boldflag=trueboldflag32,608
+    timeToSleep=0.5timeToSleep47,799
+    timeToSleep=$2timeToSleep49,824
+watchCommand() {watchCommand57,909
+    home=$(tput cup 0 0)home58,926
+    ed=$(tput ed)ed60,988
+    el=$(tput el)el62,1041
+        ROWS=$(tput lines)ROWS67,1176
+        COLS=$(tput cols)COLS68,1203
+        CMD="$@"CMD69,1229
+            concat="$(java parser $LINE)"concat72,1393
+
+/Users/wizard/.zpwr/scripts/mywatch.sh,178
+usage() {usage12,350
+optstring=dhoptstring22,437
+        dateflag=truedateflag30,557
+    time=1time45,754
+    time="$2"time47,770
+    output=$(eval "$1")output56,823
+
+/Users/wizard/.zpwr/scripts/odroidtemp.sh,0
+
+/Users/wizard/.zpwr/scripts/oldCounter.sh,448
+total=0total10,302
+commands=""commands11,310
+        ECHO="true"ECHO17,382
+findTotal() {findTotal37,696
+    total=$(expr $(ls -F $1 | grep ".*[*@]" | wc -l) + $total)total39,711
+            commands="$f $commands"commands45,838
+dirNum=$(expr $(echo $PATH | tr -cd : | wc -c) + 1)dirNum52,899
+    dir=$(echo $PATH | cut -d: -f$i)dir55,982
+commandList=""commandList69,1255
+        commandList="$i\n$commandList"commandList73,1324
+
+/Users/wizard/.zpwr/scripts/oldPipUpdater.sh,471
+export ZPWR_DELIMITER_CHAR='%'ZPWR_DELIMITER_CHAR10,269
+alternatingPrettyPrint() {alternatingPrettyPrint12,301
+    counter=0counter13,328
+outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated43,1225
+    outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated58,2310
+    outdated=$(python3 -m pip list --outdated | sed -n '3,$p' | awk '{print $1}')outdated84,4209
+
+/Users/wizard/.zpwr/scripts/openAll.sh,1081
+displayProgressIndicator() {displayProgressIndicator12,324
+    local spinner="\|/-"            # spinnerspinner13,353
+    local chars=1                   # number of characters to displaychars14,399
+    local delay=.1                  # time in seconds between charactersdelay15,469
+    local prompt="press any key..." # user promptprompt16,542
+    local clearline="\e[K"          # clear to end of line (ANSI terminal)clearline17,592
+    local CR="\r"CR18,667
+        local temp=${spinner#?}         # remove first character from $spinnertemp28,942
+        spinner=$temp${spinner%"$temp"} # and add it to the endspinner29,1021
+startCursor() {startCursor35,1119
+    progress_pid=$!progress_pid39,1244
+killCursor() {killCursor43,1279
+fileString=""fileString55,1548
+    file="$(echo $file | tr '[:upper:]' '[:lower:]')"file59,1633
+filesArray=()filesArray68,1813
+dir_to_search="$(pwd)"dir_to_search74,1957
+    dir_to_search="$2"dir_to_search77,2004
+    lcline="$(echo $line | tr '[:upper:]' '[:lower:]')"lcline83,2114
+    string=""string116,3133
+
+/Users/wizard/.zpwr/scripts/picture_finder.sh,403
+cols=$(tput cols)cols11,300
+startCursor() {startCursor15,341
+    progress_pid=$!progress_pid22,488
+killCursor() {killCursor25,511
+displayProgress() {displayProgress34,696
+    local arr=('|' '\' '-' '/')arr36,717
+    local revarr=('|' '/' '-' '\')revarr37,749
+    destinationFile=$destinationDirectory/${picture##*/}destinationFile78,1499
+    ending=${destinationFile##*.}ending80,1573
+
+/Users/wizard/.zpwr/scripts/pingordie.sh,337
+PATH="$PATH:/sbin:/usr/sbin"PATH10,271
+gateway_ip='8.8.8.8'gateway_ip18,392
+network_check_tries=0network_check_tries20,414
+network_check_threshold=5network_check_threshold22,437
+restart_wlan0() {restart_wlan024,464
+    host_status=$(fping $gateway_ip)host_status31,664
+    host_status=$(fping $gateway_ip)host_status43,983
+
+/Users/wizard/.zpwr/scripts/pingordieBridge.sh,293
+gateway_ip='8.8.8.8'gateway_ip15,345
+network_check_tries=0network_check_tries17,367
+network_check_threshold=5network_check_threshold19,390
+restart_br0() {restart_br021,417
+    host_status=$(fping $gateway_ip)host_status28,619
+    host_status=$(fping $gateway_ip)host_status42,1015
+
+/Users/wizard/.zpwr/scripts/pingordieBridgeVPN.sh,293
+gateway_ip='8.8.8.8'gateway_ip15,345
+network_check_tries=0network_check_tries17,367
+network_check_threshold=5network_check_threshold19,390
+restart_br0() {restart_br021,417
+    host_status=$(fping $gateway_ip)host_status30,700
+    host_status=$(fping $gateway_ip)host_status45,1140
+
+/Users/wizard/.zpwr/scripts/powerTo.sh,344
+__ScriptVersion="1.0.0"__ScriptVersion10,275
+function usage() {usage16,516
+leavePresentPaneAloneFlag=falseleavePresentPaneAloneFlag37,1055
+realNum=$(tmux list-panes | wc -l)realNum66,1551
+    num=$1num69,1608
+        num=realNumnum72,1680
+    num=realNumnum76,1722
+active=$(tmux list-panes | grep active | cut -c1)active79,1742
+
+/Users/wizard/.zpwr/scripts/printHeader.sh,59
+    ZPWR_SCRIPTS="$HOME/.zpwr/scripts"ZPWR_SCRIPTS11,332
+
+/Users/wizard/.zpwr/scripts/pydfShower.sh,0
+
+/Users/wizard/.zpwr/scripts/readFIFO.sh,71
+pipe=/tmp/testpipepipe10,295
+pipe=$HOME/Desktop/testpipepipe11,314
+
+/Users/wizard/.zpwr/scripts/redText.sh,73
+ZPWR_RED='\e[31;1m'ZPWR_RED10,308
+ZPWR_RESET='\e[0m'ZPWR_RESET11,328
+
+/Users/wizard/.zpwr/scripts/regexreplace.pl,31
+sub addToAry {addToAry31,666
+
+/Users/wizard/.zpwr/scripts/remoteRepoMonitorDaemon.sh,503
+BASE_DIR="$HOME/.zpwr"BASE_DIR10,329
+CONFIG_DIR="$HOME/.zpwr"CONFIG_DIR11,352
+ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"ZSH_COMP_DIR12,377
+gittersmaster() {gittersmaster17,578
+gittersdev() {gittersdev24,731
+main() {main31,869
+    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"COMPLETION_DIR52,1461
+refreshers() {refreshers60,1665
+    output=$(git log HEAD..origin/dev --oneline)output84,2397
+    output=$(git log HEAD..origin/master --oneline)output94,2721
+
+/Users/wizard/.zpwr/scripts/removeSpaces.sh,0
+
+/Users/wizard/.zpwr/scripts/rpiDownloader.sh,71
+outputDir="Desktop"outputDir10,307
+master="jacobmenke"master11,327
+
+/Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh,400
+prettyPrint() {prettyPrint13,380
+exists() {exists19,457
+export ZPWR_DELIMITER_CHAR='%'ZPWR_DELIMITER_CHAR22,500
+alternatingPrettyPrint() {alternatingPrettyPrint24,532
+    counter=0counter25,559
+gitRepoUpdater() {gitRepoUpdater53,1251
+    enclosing_dir="$1"enclosing_dir54,1270
+cargo_bin="$HOME/.cargo/bin/cargo"cargo_bin88,2304
+rustup_bin="$HOME/.cargo/bin/rustup"rustup_bin94,2493
+
+/Users/wizard/.zpwr/scripts/runner.sh,556
+executableScriptsProcessing() {executableScriptsProcessing10,303
+compileExecuteTheFile() {compileExecuteTheFile17,427
+    dir="$(dirname "$2")"dir21,524
+    file="$(basename "$2")"file22,550
+executeTheFile() {executeTheFile28,623
+        dir="$(dirname "$2")"dir32,775
+        file="$(basename "$2")"file33,805
+executeFileFirstArgIsCommand() {executeFileFirstArgIsCommand45,986
+fileToBeExecuted="$1"fileToBeExecuted57,1210
+    command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | sed -n '4,$p'"command76,1559
+
+/Users/wizard/.zpwr/scripts/saygoogle.sh,16
+IFS=+IFS9,302
+
+/Users/wizard/.zpwr/scripts/sdiffColorizer.pl,0
+
+/Users/wizard/.zpwr/scripts/secureDelete.sh,672
+passes=7     # Number of file-shredding passes.passes10,323
+blocksize=1  # I/O with /dev/urandom requires unit block size,blocksize13,450
+e_badargs=70 # Various error exit codes.e_badargs15,549
+e_not_found=71e_not_found16,590
+e_changed_mind=72e_changed_mind17,605
+displayProgress() {displayProgress19,624
+    local arr=('|' '\' '-' '/')arr21,645
+    local revarr=('|' '/' '-' '\')revarr22,677
+startCursor() {startCursor41,990
+    progress_pid=$!progress_pid49,1165
+killCursor() {killCursor52,1188
+    file="$i"file70,1597
+    flength=$(ls -l "$file" | awk '{print $5}') # Field 5 is file length.flength91,2008
+    pass_count=1pass_count92,2082
+
+/Users/wizard/.zpwr/scripts/shebangChanger.sh,445
+usage() {usage31,1434
+executableProgram=$1executableProgram43,1628
+path="#!/usr/bin/env $executableProgram"path44,1649
+addContents() {addContents47,1697
+    lineCounter=1lineCounter55,1864
+    found=falsefound56,1882
+            found=truefound61,1986
+            found=falsefound66,2075
+            found=falsefound71,2172
+        tail=$(sed -n "$lineCounter,$"p "$file")tail79,2349
+        tail=$(cat "$file")tail84,2461
+
+/Users/wizard/.zpwr/scripts/sixLangDisplayer.sh,105
+o="$(cat)"o9,273
+    x="$(python -c 'print("trina"*5)')"x25,805
+    x=$(date | cut -c1-10)x30,1083
+
+/Users/wizard/.zpwr/scripts/sortedArrayCounter.sh,231
+oldifs="$IFS"oldifs9,302
+IFS=:IFS11,317
+sum=0sum13,324
+arr=()arr15,331
+        IFS="$oldifs"IFS22,446
+IFS=$'\n'IFS31,548
+sorted=($(sort -f <<<"${arr[*]}"))sorted32,558
+sorted=($(uniq <<<"${sorted[*]}"))sorted33,593
+
+/Users/wizard/.zpwr/scripts/splitReg.sh,353
+function usage() {usage15,345
+__ScriptVersion=1.0.0__ScriptVersion29,771
+level=1level31,794
+regex="$1"regex62,1288
+filter="$2"filter63,1299
+file="$ZPWR_TEMPFILE"file65,1312
+output=$(cat $file)output67,1348
+demarcatingLineNum=$(echo "$output" | command grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)demarcatingLineNum68,1368
+
+/Users/wizard/.zpwr/scripts/sshTunnelVnc.sh,0
+
+/Users/wizard/.zpwr/scripts/sshTunnelVnc2.sh,0
+
+/Users/wizard/.zpwr/scripts/startContainers.sh,0
+
+/Users/wizard/.zpwr/scripts/stdinSdiffColorizer.pl,0
+
+/Users/wizard/.zpwr/scripts/stopContainers.sh,0
+
+/Users/wizard/.zpwr/scripts/storageShower.sh,106
+__ScriptVersion="version"__ScriptVersion10,274
+function usage() {usage16,517
+    num="$1"num53,1284
+
+/Users/wizard/.zpwr/scripts/sync.sh,78
+firstFile="$1"firstFile9,338
+    firstFile="${firstFile}/"firstFile17,615
+
+/Users/wizard/.zpwr/scripts/tailZOU.sh,323
+isZsh(){isZsh14,549
+    exists(){exists23,678
+    exists(){exists31,868
+size=100size38,962
+    size=$1size40,992
+    color=$2color44,1029
+    restart=$3restart48,1067
+svc=(ufw ovpn zabbix-agent)svc53,1113
+        pid=$!pid79,1776
+        pid=$!pid89,2033
+    pid=$!pid100,2280
+    pid=$!pid111,2505
+
+/Users/wizard/.zpwr/scripts/templater.sh,226
+executableScriptsProcessing() {executableScriptsProcessing10,298
+addHeader() {addHeader17,422
+    headerSTRING=$(headerSTRING20,515
+createTemplate() {createTemplate40,989
+fileToBeExecuted="$1"fileToBeExecuted49,1187
+
+/Users/wizard/.zpwr/scripts/test.sh,0
+
+/Users/wizard/.zpwr/scripts/textmessage.sh,201
+prettyPrint() {prettyPrint10,335
+    member_1="5551113333"member_118,518
+    default_recipent="555111333"default_recipent19,544
+    family_phone_numbers=("$member_1")family_phone_numbers21,578
+
+/Users/wizard/.zpwr/scripts/tgzLocalInstaller.sh,273
+__ScriptVersion="1.0.0"__ScriptVersion12,326
+function usage() {usage18,567
+tarbellDirectory="$1"tarbellDirectory57,1376
+install() {install59,1399
+        directory_name="${1%.tar.gz}"directory_name61,1450
+        directory_name="${1%.tgz}"directory_name63,1525
+
+/Users/wizard/.zpwr/scripts/timeConverter.sh,222
+hour=$(date | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f1)hour1,0
+minute=$(date | tr -s ' ' | cut -d ' ' -f4 | cut -d ':' -f2)minute2,59
+amPm="AM"amPm4,121
+    hour=$((hour - 12))hour6,157
+    amPm="PM"amPm7,181
+
+/Users/wizard/.zpwr/scripts/transfer.sh,38
+transferFile="$1"transferFile10,369
+
+/Users/wizard/.zpwr/scripts/upLoadDS.sh,0
+
+/Users/wizard/.zpwr/scripts/upLoadPi.sh,0
+
+/Users/wizard/.zpwr/scripts/upLoadPi2.sh,0
+
+/Users/wizard/.zpwr/scripts/updatePi.sh,161
+updatePI() {updatePI10,290
+    hostname="$(echo "$1" | awk -F: '{print $1}')"hostname17,599
+    manager="$(echo "$1" | awk -F: '{print $2}')"manager18,650
+
+/Users/wizard/.zpwr/scripts/updater.sh,786
+__ScriptVersion="1.0.0"__ScriptVersion11,332
+usage() {usage17,573
+prettyPrint() {prettyPrint63,1646
+alternatingPrettyPrint() {alternatingPrettyPrint69,1723
+exists() {exists96,2404
+gitRepoUpdater() {gitRepoUpdater100,2448
+    enclosing_dir="$1"enclosing_dir101,2467
+        width=80width123,3192
+        installDir=$(npm root -g | head -n 1)installDir167,4578
+            needSudo=yesneedSudo169,4666
+            needSudo=noneedSudo171,4704
+        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")perlOutdated208,5666
+updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote hostupdatePI238,6451
+    hostname="$(echo "$1" | awk -F: '{print $1}')"hostname242,6680
+    manager="$(echo "$1" | awk -F: '{print $2}')"manager243,6731
+
+/Users/wizard/.zpwr/scripts/updaterEmail.sh,114
+ZPWR_SCRIPTS="$HOME/.zpwr/scripts"ZPWR_SCRIPTS10,315
+ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"ZPWR_LOGFILE11,350
+
+/Users/wizard/.zpwr/scripts/updaterForLaunchCtl.sh,0
+
+/Users/wizard/.zpwr/scripts/updaterNoPip.sh,784
+__ScriptVersion="1.0.0"__ScriptVersion11,332
+usage() {usage17,573
+prettyPrint() {prettyPrint61,1576
+alternatingPrettyPrint() {alternatingPrettyPrint67,1653
+exists() {exists94,2334
+gitRepoUpdater() {gitRepoUpdater98,2378
+    enclosing_dir="$1"enclosing_dir99,2397
+        width=80width117,2997
+        installDir=$(npm root -g | head -n 1)installDir161,4383
+            needSudo=yesneedSudo163,4471
+            needSudo=noneedSudo165,4509
+        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")perlOutdated202,5471
+updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote hostupdatePI216,5856
+    hostname="$(echo "$1" | awk -F: '{print $1}')"hostname220,6085
+    manager="$(echo "$1" | awk -F: '{print $2}')"manager221,6136
+
+/Users/wizard/.zpwr/scripts/updaterPip.sh,1358
+prettyPrint() {prettyPrint10,285
+    installDir=$(python3 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir19,449
+        needSudoBase=trueneedSudoBase21,575
+        needSudoBase=falseneedSudoBase23,610
+        outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated27,753
+        outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated30,942
+        installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir35,1112
+            needSudo=trueneedSudo37,1262
+            needSudo=falseneedSudo39,1301
+    installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir68,2274
+        needSudoBase=trueneedSudoBase70,2400
+        needSudoBase=falseneedSudoBase72,2435
+        outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated77,2579
+        outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated80,2768
+        installDir=$(python2 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir84,2912
+            needSudo=trueneedSudo86,3062
+            needSudo=falseneedSudo88,3101
+
+/Users/wizard/.zpwr/scripts/updaterPipSudo.sh,928
+prettyPrint() {prettyPrint10,285
+    needSudoBase=trueneedSudoBase19,449
+        outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated22,580
+        outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated25,769
+        needSudo=trueneedSudo30,939
+        installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir32,962
+    needSudoBase=trueneedSudoBase58,2003
+        outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated62,2135
+        outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated65,2324
+        needSudo=trueneedSudo69,2468
+        installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir70,2490
+
+/Users/wizard/.zpwr/scripts/uploadWebDS.sh,61
+address="jacobmenke@$MY_IP:/var/services/web"address11,363
+
+/Users/wizard/.zpwr/scripts/uploadWebPi.sh,165
+address="pi@$MY_IP:/var/www/html"address11,356
+w=80w18,559
+total=$#total22,622
+count=0count23,631
+        link="http://$MY_IP:$RPI_HTML_PORT/$i"link28,757
+
+/Users/wizard/.zpwr/scripts/userRootRemover.sh,0
+
+/Users/wizard/.zpwr/scripts/watchServiceFSWatchGit.sh,38
+dir_watching="$1"dir_watching12,398
+
+/Users/wizard/.zpwr/scripts/watchServiceFSWatchLS-ALH.sh,37
+dir_watching="$1"dir_watching9,300
+
+/Users/wizard/.zpwr/scripts/watchServiceFSWatchPiDesktop.sh,101
+dir_watching="$1"dir_watching12,397
+script_to_run="$ZPWR_SCRIPTS/upLoadPi.sh"script_to_run14,416
+
+/Users/wizard/.zpwr/scripts/watchServiceFSWatchPiWeb.sh,102
+dir_watching="$1"dir_watching12,405
+script_to_run=$ZPWR_SCRIPTS/uploadWebPi.shscript_to_run14,424
+
+/Users/wizard/.zpwr/scripts/watchServiceFSWatchRustCompile.sh,192
+dir_watching="$1"dir_watching10,395
+    fileName=$(basename $event)fileName13,441
+    watchingFile=$(basename $2)watchingFile14,473
+            compiled=${fileName%*.rs}compiled21,740
+
+/Users/wizard/.zpwr/scripts/watchtree1.sh,0
+
+/Users/wizard/.zpwr/scripts/watchtree1Color.sh,0
+
+/Users/wizard/.zpwr/scripts/watchtree2.sh,0
+
+/Users/wizard/.zpwr/scripts/zpwr.zsh,131
+verb="$1"verb154,9163
+    found=falsefound158,9210
+            found=truefound162,9301
+            cmd=${v%%=*}cmd163,9324
+
+/Users/wizard/.zpwr/scripts/zshRegenSearchableEnv.zsh,0
+
+/Users/wizard/.zpwr/scripts/zshcompgen.zsh,402
+comp_dir="comp_dir"comp_dir10,309
+exists(){exists12,330
+boxesPrint(){boxesPrint16,400
+    width=70width17,414
+    len=${#1}len18,427
+    spacerlen=2spacerlen19,441
+    boxesChar='/'boxesChar20,457
+    spaceChar=' 'spaceChar21,475
+    sidelen=$(($width - $len - $spacerlen * 2))sidelen22,493
+    sidelen=$(( ($sidelen + 2 -1) / 2))sidelen24,551
+    sidelen2=$sidelensidelen225,591
+
+/Users/wizard/.zpwr/scripts/macOnly/PIORun.sh,0
+
+/Users/wizard/.zpwr/scripts/macOnly/combo.sh,358
+    o="$(cat)"o10,303
+    o="$(hostname)"o12,323
+    o="$(hostname)"o16,370
+randomFigletFontScript="$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh"randomFigletFontScript18,393
+randomCowsayCowScript="$ZPWR_SCRIPTS/macOnly/randomCow.sh"randomCowsayCowScript19,464
+    x="$(python -c 'print("trina"*5)')"x39,1187
+    x=$(date | cut -c1-10)x44,1486
+
+/Users/wizard/.zpwr/scripts/macOnly/commandToColors.sh,62
+command="$@"command10,275
+out="$(eval $command)"out11,288
+
+/Users/wizard/.zpwr/scripts/macOnly/figletLooper.sh,0
+
+/Users/wizard/.zpwr/scripts/macOnly/figletRandomFont.sh,446
+    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
+    FIGLET_DIR="/usr/share/figlet"FIGLET_DIR13,409
+TEXT_TO_DISPLAY="$1"TEXT_TO_DISPLAY16,447
+FILTER="$2"FILTER17,468
+rangePossibleIndices=${#ary[*]}rangePossibleIndices28,649
+    randIndex=$(($RANDOM % $rangePossibleIndices))randIndex32,712
+    font=${ary[$randIndex]}font33,763
+    Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"Output35,849
+
+/Users/wizard/.zpwr/scripts/macOnly/figletRandomFontOnce.sh,438
+    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
+    FIGLET_DIR="/usr/share/figlet"FIGLET_DIR13,409
+TEXT_TO_DISPLAY="$1"TEXT_TO_DISPLAY16,447
+FILTER="$2"FILTER17,468
+rangePossibleIndices=${#ary[*]}rangePossibleIndices24,572
+randIndex=$(($RANDOM % $rangePossibleIndices))randIndex26,605
+font=${ary[$randIndex]}font27,652
+    output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"output34,786
+
+/Users/wizard/.zpwr/scripts/macOnly/figletRotater.sh,203
+    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR3,52
+    FIGLET_DIR="/usr/share/figlet"FIGLET_DIR5,126
+TEXT_TO_DISPLAY="$1"TEXT_TO_DISPLAY7,163
+FILTER="$2"FILTER8,184
+
+/Users/wizard/.zpwr/scripts/macOnly/getPath.sh,0
+
+/Users/wizard/.zpwr/scripts/macOnly/gradleShadowJar.sh,0
+
+/Users/wizard/.zpwr/scripts/macOnly/istatsShower.sh,0
+
+/Users/wizard/.zpwr/scripts/macOnly/keyboardMaestro.sh,0
+
+/Users/wizard/.zpwr/scripts/macOnly/menkeTechRandomFont.sh,462
+    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
+    FIGLET_DIR="/usr/share/figlet"FIGLET_DIR13,409
+TEXT_TO_DISPLAY="Menke Technologies"TEXT_TO_DISPLAY16,447
+FILTER="$1"FILTER17,484
+rangePossibleIndices=${#ary[*]}rangePossibleIndices28,665
+    randIndex=$(($RANDOM % $rangePossibleIndices))randIndex32,728
+    font=${ary[$randIndex]}font33,779
+    output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"output34,807
+
+/Users/wizard/.zpwr/scripts/macOnly/postscriptToPDFCreator.sh,38
+    newfile=${file%.*}newfile11,296
+
+/Users/wizard/.zpwr/scripts/macOnly/randomCow.sh,720
+width=$1width14,375
+FILTER="$2"FILTER15,384
+node_exe="/usr/local/lib/node_modules/cowsay/cli.js"node_exe17,397
+    COW_FILES=($("$node_exe" -l | perl -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))COW_FILES20,481
+    rangePossibleIndices=${#COW_FILES[@]}rangePossibleIndices21,585
+    randIndex=$((RANDOM % rangePossibleIndices))randIndex23,628
+    font=${COW_FILES[$randIndex]}font24,677
+    COW_FILES=($(cowsay -l | perl -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))COW_FILES32,880
+    rangePossibleIndices=${#COW_FILES[@]}rangePossibleIndices34,980
+    randIndex=$((RANDOM % rangePossibleIndices))randIndex36,1023
+    font=${COW_FILES[$randIndex]}font37,1072
+
+/Users/wizard/.zpwr/scripts/macOnly/resetWIFI.sh,34
+prettyPrint() {prettyPrint9,290
+
+/Users/wizard/.zpwr/scripts/macOnly/rsyncr.sh,78
+localDIR="$1"DIR12,389
+remoteDIR="$2"remoteDIR13,403
+host="r"host14,418
+
+/Users/wizard/.zpwr/scripts/macOnly/say.sh,40
+messageToSpeak=""messageToSpeak12,354
+
+/Users/wizard/.zpwr/scripts/macOnly/splitReg.sh,373
+function usage() {usage12,298
+__ScriptVersion=1.0.0__ScriptVersion26,725
+level=1level28,748
+regex="$1"regex59,1243
+filter="$2"filter60,1254
+    ZPWR_TEMPFILE="/tmp/temp$$"ZPWR_TEMPFILE63,1302
+file="$ZPWR_TEMPFILE"file65,1337
+output=$(cat $file)output67,1373
+delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)delim68,1393
+
+/Users/wizard/.zpwr/scripts/macOnly/tmuxer.sh,40
+PATH="/usr/local/bin:$PATH"PATH10,271
+
+/Users/wizard/.zpwr/scripts/macOnly/tor.sh,115
+prettyPrint() {prettyPrint9,290
+INTERFACE=Wi-FiINTERFACE13,339
+function disable_proxy() {disable_proxy31,618
+
+/Users/wizard/.zpwr/scripts/macOnly/tutorialConfigUpdater.sh,367
+tutorialDir="$HOME/Documents/tutorialsRepo"tutorialDir10,336
+websiteDir="$HOME/WebstormProjects/PersonalWebsite"websiteDir11,380
+ZPWR_DIR="$ZPWR"ZPWR_DIR12,432
+ZPWR_DIR_INSTALL="$ZPWR/install"ZPWR_DIR_INSTALL13,449
+    ZPWR_SCRIPTS="$ZPWR/scripts"ZPWR_SCRIPTS15,514
+prettyPrint() {prettyPrint18,551
+dotdir="$websiteDir/downloads/dotfiles"dotdir152,4846
