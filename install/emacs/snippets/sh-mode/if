@@ -1,8 +1,7 @@
 # -*- mode: snippet -*-
 # name: if
-# key: i
+# key: ii
 # --
 if [[ $1 ]]; then
-	${2}
+    $0
 fi
-$0
