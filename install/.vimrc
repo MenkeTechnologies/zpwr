@@ -1676,6 +1676,28 @@ let fzfStrOrig="--preview 'file={}; file=$(echo $file | sed 's@~@".$HOME."@'); t
 
 let fzfStrFinal=$FZF_CTRL_T_OPTS
 
+function! FZFFuncsFun()
+    redir => cout
+    silent function
+    redir END
+    let list = split(cout, "\n")
+
+    call fzf#run({'source': list})
+endfunction
+
+function! FZFVarsFun()
+    redir => cout
+    silent let
+    redir END
+    let list = split(cout, "\n")
+
+    call fzf#run({'source': list})
+endfunction
+
+command! -bang -nargs=* FZFFuncs call FZFFuncsFun()
+command! -bang -nargs=* FZFVars call FZFVarsFun()
+
+
 "give :History preview window
 command! -bang -nargs=* HistoryFiles call fzf#vim#history({'options': fzfStrFinal})
 
