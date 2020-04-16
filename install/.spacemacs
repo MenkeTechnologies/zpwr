@@ -450,6 +450,7 @@ you should place your code here."
 
     (with-eval-after-load 'company
     (company-ctags-auto-setup))
+    (setq company-ctags-extra-tags-files '("$HOME/etags"))
     ;;}}}***********************************************************
 
 

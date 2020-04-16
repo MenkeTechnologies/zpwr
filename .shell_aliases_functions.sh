@@ -2647,6 +2647,19 @@ function clearCache(){
     } >> "$ZPWR_LOGFILE" 2>&1
 }
 
+function regenEmacsTags(){
+
+    prettyPrint "Regen emacs ctags to $ZPWR_SCRIPTS/etags and $HOME/etags"
+    (
+    builtin cd "$ZPWR_SCRIPTS"
+    command rm etags 2>/dev/null
+    ctags -e -f etags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR/".*.sh
+    ctags -e -f etags --append --fields=+l "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS/macOnly/"*
+    command cp etags "$HOME"
+    )
+
+}
+
 function regenTags(){
 
     prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
