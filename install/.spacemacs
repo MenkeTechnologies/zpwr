@@ -332,6 +332,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+    (setq vc-follow-symlinks t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -436,6 +437,7 @@ you should place your code here."
     (setq real-auto-save-interval 0.2)
     (real-auto-save-activate-advice)
     (real-auto-save-mode)
+
     ;;}}}***********************************************************
 
 
