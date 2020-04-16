@@ -332,6 +332,10 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+
+    ;;{{{                    MARK:company tab completion
+    ;;**************************************************************
    (use-package company
      :hook (init)
      :config (global-company-mode t)
@@ -359,6 +363,11 @@ you should place your code here."
 
     (setq company-minimum-prefix-length 1)
 
+    ;;}}}***********************************************************
+
+
+    ;;{{{                    MARK:keybindings
+        ;;**************************************************************
     (evil-define-motion up-four ()
      (evil-previous-visual-line 4)
      )
@@ -376,8 +385,22 @@ you should place your code here."
     (define-key evil-normal-state-map (kbd "C-k") 'up-four)
     (define-key evil-normal-state-map (kbd "C-h") 'right-four)
     (define-key evil-normal-state-map (kbd "C-l") 'left-four)
-    
+
+    ;;}}}***********************************************************
+
+
+
+    ;;{{{                    MARK:plugin config
+    ;;**************************************************************
     (yas-reload-all)
+    ;;}}}***********************************************************
+
+
+    ;;{{{                    MARK:emacs config
+    ;;**************************************************************
+    (setq make-backup-files nil)
+    ;;}}}***********************************************************
+
 
   )
 

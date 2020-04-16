@@ -1133,6 +1133,7 @@ let s:fileTypeToComment = {
             \ 'py': '#',
             \ 'pl': '#',
             \ 'rb': '#',
+            \ 'lisp': ';;',
             \ 'vim': '"'
             \  }
 
@@ -1148,6 +1149,9 @@ function! ExtractFoldMarker() range
     let l:filename=expand('%:t')
     if l:filename == '.vimrc'
         let l:exeFileType = 'vim'
+    endif
+    if l:filename == '.spacemacs'
+        let l:exeFileType = 'lisp'
     endif
     if l:filename == '.zshrc'
         let l:exeFileType = 'zsh'
