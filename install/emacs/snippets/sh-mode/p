@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name : printf
+# key: p
+# --
+printf '______$1_____ = '"'$1' \n"
+

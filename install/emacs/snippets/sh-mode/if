@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: if
+# key: i
+# --
+if [[ $1 ]]; then
+	${2}
+fi
+$0

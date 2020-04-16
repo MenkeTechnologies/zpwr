@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name:fkv
+# key: fkv
+# --
+for k v in ${(kv)$1[@]};do
+	$2
+done

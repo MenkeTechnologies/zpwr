@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: ifeee
+# key: ieee
+# --
+if [[ $1 ]]; then
+	${2:}
+elif [[ $3 ]]; then
+	${4:}
+elif [[ $5 ]]; then
+	${6:}
+else
+	${7:}
+fi
+$0

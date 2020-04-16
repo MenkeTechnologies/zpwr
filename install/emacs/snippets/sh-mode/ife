@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: ife
+# key: ie
+# --
+if [[ $1 ]]; then
+	${2:}
+else
+	${3:}
+fi
+$0

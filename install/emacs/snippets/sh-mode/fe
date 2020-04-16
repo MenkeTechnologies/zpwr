@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: for loop
+# key: fe
+# --
+for ${1:var} in ${2:stuff}; do
+    $0
+done
