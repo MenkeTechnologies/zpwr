@@ -2823,6 +2823,26 @@ function commits(){
     fi
 }
 
+function emacEmacsConfig(){
+
+    builtin cd $ZPWR
+    ${=ZPWR_EMACS} \
+    "$ZPWR_INSTALL/.spacemacs" \
+    "$ZPWR_INSTALL/emacs/snippets/*-mode/*
+    clearList
+    isGitDir && git diff HEAD
+}
+
+function vimEmacsConfig(){
+
+    builtin cd $ZPWR
+    vim \
+    "$ZPWR_INSTALL/.spacemacs" \
+    "$ZPWR_INSTALL/emacs/snippets/*-mode/*
+    clearList
+    isGitDir && git diff HEAD
+}
+
 function emacsAll(){
 
     builtin cd $ZPWR
