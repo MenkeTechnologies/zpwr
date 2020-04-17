@@ -657,7 +657,7 @@ you should place your code here."
     (setq highlight-indent-guides-character ?\|)
 
     (setq highlight-indent-guides-responsive 'top)
-    (setq highlight-indent-guides-delay 1)
+    (setq highlight-indent-guides-delay 0.3)
     (setq highlight-indent-guides-auto-enabled nil)
 
     (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")

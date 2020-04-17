@@ -1890,7 +1890,7 @@ function unlinkConf(){
     (
 
     local -a symFiles
-    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc)
 
     for file in ${symFiles[@]} ; do
         prettyPrint "REMOVING $file to $HOME"
@@ -1921,7 +1921,7 @@ function linkConf(){
     fi
 
     local -a symFiles
-    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc)
 
     for file in ${symFiles[@]} ; do
         prettyPrint "Installing $file to $HOME"
@@ -2669,14 +2669,15 @@ function clearCache(){
 
 function regenEmacsTags(){
 
-    prettyPrint "Regen emacs ctags to $ZPWR_SCRIPTS/etags and $HOME/etags"
+    prettyPrint "Regen GNU gtags to $HOME/GTAGS"
     (
     builtin cd "$HOME"
     command rm GPATH GRTAGS GTAGS 2>/dev/null
     for file in "$ZPWR_INSTALL/.zshrc" "$ZPWR/".*.sh "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS/macOnly/"*; do
-        echo "$file"
-    done | gtags --gtagslabel=pygments -f -
-    command cp GPATH GRTAGS GTAGS "$ZPWR_SCRIPTS" 2>/dev/null
+        if [[ -f "$file" ]]; then
+            echo "$file"
+        fi
+    done | gtags --accept-dotfiles --gtagslabel=pygments -f -
     )
 
 }
