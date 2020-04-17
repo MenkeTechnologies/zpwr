@@ -103,7 +103,7 @@ ZPWR_VERBS[regenkeybindings]='regenAllKeybindingsCache=regen all keybindings cac
 ZPWR_VERBS[rmconfiglinks]='unlinkConf=remove sym links from \$ZPWR_INSTALL to \$HOME'
 ZPWR_VERBS[regenconfiglinks]='regenConfigLinks=regen sym links from \$ZPWR_INSTALL to \$HOME'
 ZPWR_VERBS[regenpowerline]='regenPowerlineLink=regen powerline sym link to ~/.tmux/powerline'
-ZPWR_VERBS[regentags]='regenTags=regen ctags files to ~ and ~/.zpwr/scripts'
+ZPWR_VERBS[regentags]='regenGtagsCtags=regen gtags files to \$HOME'
 ZPWR_VERBS[regenzsh]='regenZshCompCache=regen compsys cache to ~/.zcompdump'
 ZPWR_VERBS[repo]='zp=cd to \$ZPWR_REPO_NAME'
 ZPWR_VERBS[return2]='return2=turn off stderr filter'
