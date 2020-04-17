@@ -415,6 +415,7 @@ you should place your code here."
     (define-key evil-normal-state-map (kbd "C-f") 'spacemacs/frame-killer)
 
     (define-key evil-insert-state-map (kbd "C-l") 'hippie-expand)
+    (define-key evil-insert-state-map (kbd "C-t") 'transpose-chars)
 
     (spacemacs/set-leader-keys (kbd ".") 'helm-themes)
 
@@ -590,17 +591,30 @@ you should place your code here."
 
     ;;{{{                    MARK:misc config
     ;;**************************************************************
-    (yas-reload-all)
     (real-auto-save-activate-advice)
     (real-auto-save-mode)
 
-    (add-to-list 'company-backends 'company-plsense)
-    (add-hook 'perl-mode-hook 'company-mode)
-    (add-hook 'cperl-mode-hook 'company-mode)
+    ;;(add-to-list 'company-backends 'company-plsense)
+    ;;(add-hook 'perl-mode-hook 'company-mode)
+    ;;(add-hook 'cperl-mode-hook 'company-mode)
 
     (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
 
     (persp-mode)
+
+    (setq persp-state-default-file "~/.persp.txt")
+    (add-hook 'kill-emacs-hook #'persp-state-save)
+
+    ;;(desktop-save-mode 1)
+
+    (yas-global-mode 1)
+
+    ;;(setq yas-snippet-dirs
+    ;;  '("~/.emacs.d/private/snippets"                 ;; personal snippets
+     ;;   "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
+     ;;   "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
+      ;;  ))
+
 
     ;;}}}***********************************************************
 
