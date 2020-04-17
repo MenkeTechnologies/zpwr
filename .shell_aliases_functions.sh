@@ -293,8 +293,7 @@ alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
 alias die='sudo kill -9 --'
 alias emacs='emacs -nw'
-alias em='emacs -nw'
-alias mac='source em-server.sh'
+alias me='source em-server.sh'
 
 if exists docker; then
     alias dk=docker
@@ -537,7 +536,7 @@ exists idea && {
 #{{{                    MARK:Shell functions
 #**************************************************************
 
-function ee(){
+function em(){
 
     if [[ -z "$1" ]]; then
         emacs .
