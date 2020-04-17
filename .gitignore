@@ -2,5 +2,6 @@ local/
 .tmux/local/
 .tmux/plugins/
 scripts/tags
+scripts/etags
 scripts/rcBackups/
 .tokens.sh
