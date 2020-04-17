@@ -417,6 +417,7 @@ you should place your code here."
     (define-key evil-normal-state-map (kbd "C-h") 'right-four)
     (define-key evil-normal-state-map (kbd "C-l") 'left-four)
 
+    (define-key evil-normal-state-map (kbd "C-d") 'spacemacs/vcs-revert-hunk)
     (define-key evil-normal-state-map (kbd "C-f") 'spacemacs/frame-killer)
 
     (define-key evil-insert-state-map (kbd "C-l") 'hippie-expand)
@@ -488,7 +489,7 @@ you should place your code here."
     ;;}}}***********************************************************
 
     (setq pcomplete-ignore-case t)
-    (setq company-dabbrev-downcase t)
+    (setq company-dabbrev-downcase nil)
     (setq company-dabbrev-code-ignore-case t)
 
     ;;{{{                    MARK:company tab completion
@@ -619,6 +620,13 @@ you should place your code here."
 
     (yas-global-mode 1)
 
+    (defadvice
+        spacemacs/vcs-revert-hunk
+     (around auto-confirm compile activate)
+      (cl-letf (((symbol-function 'yes-or-no-p) (lambda (&rest args) t))
+                ((symbol-function 'y-or-n-p) (lambda (&rest args) t)))
+        ad-do-it))
+
     ;;(setq yas-snippet-dirs
     ;;  '("~/.emacs.d/private/snippets"                 ;; personal snippets
      ;;   "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
@@ -634,7 +642,7 @@ you should place your code here."
     (setq highlight-indent-guides-character ?\|)
 
     (setq highlight-indent-guides-responsive 'top)
-    (setq highlight-indent-guides-delay 0)
+    (setq highlight-indent-guides-delay 1)
     (setq highlight-indent-guides-auto-enabled nil)
 
     (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
