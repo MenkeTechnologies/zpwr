@@ -2671,11 +2671,12 @@ function regenEmacsTags(){
 
     prettyPrint "Regen emacs ctags to $ZPWR_SCRIPTS/etags and $HOME/etags"
     (
-    builtin cd "$ZPWR_SCRIPTS"
-    command rm etags 2>/dev/null
-    ctags -e -f etags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR/".*.sh
-    ctags -e -f etags --append --fields=+l "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS/macOnly/"*
-    command cp etags "$HOME"
+    builtin cd "$HOME"
+    command rm GPATH GRTAGS GTAGS 2>/dev/null
+    for file in "$ZPWR_INSTALL/.zshrc" "$ZPWR/".*.sh "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS/macOnly/"*; do
+        echo "$file"
+    done | gtags --gtagslabel=pygments -f -
+    command cp GPATH GRTAGS GTAGS "$ZPWR_SCRIPTS" 2>/dev/null
     )
 
 }
