@@ -2682,7 +2682,7 @@ function regenEmacsTags(){
 
 }
 
-function regenTags(){
+function regenCTags(){
 
     prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
     (
