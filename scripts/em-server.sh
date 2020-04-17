@@ -8,19 +8,21 @@
 ##### Notes:
 #}}}***********************************************************
 out="$(command ps -e |& command grep -v -E '\bgrep\b')"
-if echo "$out" | command grep -qs 'emacs.*bg-daemon'; then
-    loggConsole "not starting emacs daemon"
+if echo "$out" | command grep -i -qs 'emacs.*bg-daemon'; then
+    loggConsolePrefix "not starting emacs daemon"
 else
-    loggConsole "starting emacs daemon"
-    command emacs -nw --daemon=instance1
+    loggConsolePrefix "starting emacs daemon"
+    echo "$out" | command grep -s 'emacs.*bg-daemon'
+    command emacs -nw --daemon=instance1 2>> "$ZPWR_LOGFILE" 1>&2
 fi
+
 # if there is a frame
-if emacsclient -n -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | command grep -sq t; then
+if emacsclient -n -s instance1 -e "(if (> (length (frame-list)) 1) 't)" 2> /dev/null | command grep -sq t; then
     #attach client
-    loggConsole "attach frame"
+    loggConsolePrefix "attach frame"
     command emacsclient -nw -s instance1 "$@"
 else
     #create frame and attach
-    loggConsole "create frame"
+    loggConsolePrefix "create frame"
     command emacsclient -nw -c -s instance1 "$@"
 fi

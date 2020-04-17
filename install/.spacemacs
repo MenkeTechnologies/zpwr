@@ -370,7 +370,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (advice-add 'message :before 'sh/ad-timestamp-message)
     ;;}}}***********************************************************
 
-
   )
 
 (defun dotspacemacs/user-config ()
@@ -380,7 +379,109 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+    ;;eager load deps
+    (require 'company)
+    (require 'yasnippet)
+    (require 'real-auto-save)
 
+
+    ;;{{{                    MARK:keybindings
+    ;;**************************************************************
+    (evil-define-motion up-four ()
+     (evil-previous-visual-line 4)
+     )
+    (evil-define-motion right-four ()
+     (evil-backward-char 4)
+     )
+    (evil-define-motion left-four ()
+     (evil-forward-char 4)
+     )
+    (evil-define-motion down-four ()
+     (evil-next-visual-line 4)
+     )
+
+    (define-key evil-visual-state-map (kbd "C-j") 'down-four)
+    (define-key evil-visual-state-map (kbd "C-k") 'up-four)
+    (define-key evil-visual-state-map (kbd "C-h") 'right-four)
+    (define-key evil-visual-state-map (kbd "C-l") 'left-four)
+
+    (define-key evil-normal-state-map (kbd "C-j") 'down-four)
+    (define-key evil-normal-state-map (kbd "C-k") 'up-four)
+    (define-key evil-normal-state-map (kbd "C-h") 'right-four)
+    (define-key evil-normal-state-map (kbd "C-l") 'left-four)
+
+    (define-key evil-normal-state-map (kbd "C-f") 'spacemacs/frame-killer)
+
+    (define-key evil-insert-state-map (kbd "C-l") 'hippie-expand)
+
+    (spacemacs/set-leader-keys (kbd ".") 'helm-themes)
+
+    (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
+
+    (spacemacs/set-leader-keys (kbd "al") 'spotify-next)
+
+    (spacemacs/set-leader-keys (kbd "aa") 'spotify-previous)
+    ;;}}}***********************************************************
+
+
+
+    ;;{{{                    MARK:plugin config
+    ;;**************************************************************
+
+    (setq display-line-numbers-width 4)
+    (setq display-line-numbers-type 'relative)
+    (global-display-line-numbers-mode)
+    ;;}}}***********************************************************
+
+
+    ;;{{{                    MARK:emacs config
+    ;;**************************************************************
+    ;; no #files#
+    (setq make-backup-files nil)
+    (setq auto-save-default nil)
+    (setq create-lockfiles nil)
+
+    (require 'real-auto-save)
+    (add-hook 'prog-mode-hook 'real-auto-save-mode)
+    ;; in seconds
+    (setq real-auto-save-interval 0.2)
+
+
+
+    (with-eval-after-load 'company
+    (company-ctags-auto-setup))
+    (setq company-ctags-extra-tags-files '("$HOME/etags"))
+    (setq company-ctags-fuzzy-match-p t)
+    (require 'whitespace)
+
+    (setq whitespace-display-mappings '((space-mark 32 [?·]) (tab-mark 32 [?·])))
+    (setq whitespace-style '(face trailing space-mark tab-mark))
+
+
+    (defun autoHighlight () (cond
+      ((eq evil-state 'normal)
+       (ignore-errors
+        (progn
+         (highlight-symbol-remove-all)
+         (let ((inhibit-message t))
+            (highlight-symbol)
+          )
+        )))))
+
+    (add-hook 'post-command-hook #'autoHighlight)
+
+    (setq-default indent-tabs-mode nil)
+    (setq-default tab-width 4)
+      (if (featurep 'ns)
+      (progn
+        (global-set-key (kbd "<mouse-4>") (kbd "<wheel-up>"))
+        (global-set-key (kbd "<mouse-5>") (kbd "<wheel-down>"))))
+
+    ;;}}}***********************************************************
+
+    (setq pcomplete-ignore-case t)
+    (setq company-dabbrev-downcase t)
+    (setq company-dabbrev-code-ignore-case t)
 
     ;;{{{                    MARK:company tab completion
     ;;**************************************************************
@@ -482,75 +583,12 @@ you should place your code here."
     (define-key yas-keymap (kbd "TAB") 'tab-complete-or-next-field)
     (define-key yas-keymap [(control tab)] 'yas-next-field)
     (define-key yas-keymap (kbd "C-g") 'abort-company-or-yas)
-
-    (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
-
     ;;}}}***********************************************************
 
 
-    ;;{{{                    MARK:keybindings
-        ;;**************************************************************
-    (evil-define-motion up-four ()
-     (evil-previous-visual-line 4)
-     )
-    (evil-define-motion right-four ()
-     (evil-backward-char 4)
-     )
-    (evil-define-motion left-four ()
-     (evil-forward-char 4)
-     )
-    (evil-define-motion down-four ()
-     (evil-next-visual-line 4)
-     )
-
-    (define-key evil-visual-state-map (kbd "C-j") 'down-four)
-    (define-key evil-visual-state-map (kbd "C-k") 'up-four)
-    (define-key evil-visual-state-map (kbd "C-h") 'right-four)
-    (define-key evil-visual-state-map (kbd "C-l") 'left-four)
-
-    (define-key evil-normal-state-map (kbd "C-j") 'down-four)
-    (define-key evil-normal-state-map (kbd "C-k") 'up-four)
-    (define-key evil-normal-state-map (kbd "C-h") 'right-four)
-    (define-key evil-normal-state-map (kbd "C-l") 'left-four)
-
-    (define-key evil-normal-state-map (kbd "C-f") 'kill-emacs)
-
-    (define-key evil-insert-state-map (kbd "C-l") 'hippie-expand)
-
-    (spacemacs/set-leader-keys (kbd ".") 'helm-themes)
-
-    (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
-
-    (spacemacs/set-leader-keys (kbd "al") 'spotify-next)
-
-    (spacemacs/set-leader-keys (kbd "aa") 'spotify-previous)
-    ;;}}}***********************************************************
-
-
-
-    ;;{{{                    MARK:plugin config
+    ;;{{{                    MARK:misc config
     ;;**************************************************************
     (yas-reload-all)
-
-    (add-hook 'prog-mode-hook 'highlight-symbol)
-
-    (setq display-line-numbers-width 4)
-    (setq display-line-numbers-type 'relative)
-    (global-display-line-numbers-mode)
-    ;;}}}***********************************************************
-
-
-    ;;{{{                    MARK:emacs config
-    ;;**************************************************************
-    ;; no #files#
-    (setq make-backup-files nil)
-    (setq auto-save-default nil)
-    (setq create-lockfiles nil)
-
-    (require 'real-auto-save)
-    (add-hook 'prog-mode-hook 'real-auto-save-mode)
-    ;; in seconds
-    (setq real-auto-save-interval 0.2)
     (real-auto-save-activate-advice)
     (real-auto-save-mode)
 
@@ -558,43 +596,10 @@ you should place your code here."
     (add-hook 'perl-mode-hook 'company-mode)
     (add-hook 'cperl-mode-hook 'company-mode)
 
-    (with-eval-after-load 'company
-    (company-ctags-auto-setup))
-    (setq company-ctags-extra-tags-files '("$HOME/etags"))
-    (setq company-ctags-fuzzy-match-p t)
-    (require 'whitespace)
-
-    (setq whitespace-display-mappings '((space-mark 32 [?·]) (tab-mark 32 [?·])))
-    (setq whitespace-style '(face trailing space-mark tab-mark))
-
-
-    (defun autoHighlight () (cond
-      ((eq evil-state 'normal)
-       (ignore-errors
-        (progn
-         (highlight-symbol-remove-all)
-         (let ((inhibit-message t))
-            (highlight-symbol)
-          )
-        )))))
-
-    (add-hook 'post-command-hook #'autoHighlight)
-
-    (setq-default indent-tabs-mode nil)
-    (setq-default tab-width 4)
-      (if (featurep 'ns)
-      (progn
-        (global-set-key (kbd "<mouse-4>") (kbd "<wheel-up>"))
-        (global-set-key (kbd "<mouse-5>") (kbd "<wheel-down>"))))
-
+    (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
     ;;}}}***********************************************************
 
-    (setq pcomplete-ignore-case t)
-    (setq company-dabbrev-downcase t)
-    (setq company-dabbrev-code-ignore-case t)
 
-
-    
   )
 
 
