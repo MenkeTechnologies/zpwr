@@ -105,7 +105,7 @@ exuberant-ctags|plugin-example|setting to use Exuberant Ctags plug-in parser:\
 	:langmap=HTML\:.htm.html:\
 	:langmap=Java\:.java:\
 	:langmap=JavaScript\:.js:\
-	:langmap=Lisp\:.cl.clisp.el.l.lisp.lsp:\
+	:langmap=Lisp\:.cl.clisp.el.l.lisp.lsp([._]spacemacs):\
 	:langmap=Lua\:.lua:\
 	:langmap=Make\:.mak.mk([Mm]akefile)(GNUmakefile):\
 	:langmap=MatLab\:.m:\
@@ -218,7 +218,7 @@ universal-ctags|setting to use Universal Ctags plug-in parser:\
 	:langmap=JavaScript\:.js.jsx:\
 	:langmap=JSON\:.json:\
 	:langmap=LdScript\:(*.lds.S)(ld.*).lds.scr.ld:\
-	:langmap=Lisp\:.cl.clisp.el.l.lisp.lsp:\
+	:langmap=Lisp\:.cl.clisp.el.l.lisp.lsp([._]spacemacs):\
 	:langmap=Lua\:.lua:\
 	:langmap=M4\:.m4.spt:\
 	:langmap=man\:.1.2.3.4.5.6.7.8.9:\
@@ -395,7 +395,7 @@ pygments-parser|Pygments plug-in parser:\
 	:langmap=Cfm\:.cfm.cfml.cfc:\
 	:langmap=Clojure\:.clj:\
 	:langmap=CoffeeScript\:.coffee:\
-	:langmap=Common-Lisp\:.cl.lisp.el:\
+	:langmap=Common-Lisp\:.cl.clisp.el.l.lisp.lsp([._]spacemacs):\
 	:langmap=Coq\:.v:\
 	:langmap=Croc\:.croc:\
 	:langmap=Csh\:.tcsh.csh:\
