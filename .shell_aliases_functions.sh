@@ -293,7 +293,8 @@ alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
 alias die='sudo kill -9 --'
 alias emacs='emacs -nw'
-alias em='source em-server.sh'
+alias em='emacs -nw'
+alias mac='source em-server.sh'
 
 if exists docker; then
     alias dk=docker
