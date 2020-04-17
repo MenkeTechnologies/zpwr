@@ -1120,8 +1120,8 @@ function regenAll(){
 
     regenConfigLinks
     regenZshCompCache
-    regenCTags
-    regenEmacsTags
+    regenCtags
+    regenGtagsCtags
     regenAllKeybindingsCache
     regenPowerlineLink
     regenSearchEnv

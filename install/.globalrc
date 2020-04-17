@@ -117,7 +117,7 @@ exuberant-ctags|plugin-example|setting to use Exuberant Ctags plug-in parser:\
 	:langmap=REXX\:.cmd.rexx.rx:\
 	:langmap=Ruby\:.rb.ruby:\
 	:langmap=Scheme\:.SCM.SM.sch.scheme.scm.sm:\
-	:langmap=Sh\:(.zshrc).sh.SH.bsh.bash.ksh.zsh:\
+	:langmap=Sh\:.zsh.sh.ksh.bash.ebuild.eclass(zshrc)([._]zshrc):\
 	:langmap=SLang\:.sl:\
 	:langmap=SML\:.sml.sig:\
 	:langmap=SQL\:.sql:\
@@ -126,7 +126,7 @@ exuberant-ctags|plugin-example|setting to use Exuberant Ctags plug-in parser:\
 	:langmap=Vera\:.vr.vri.vrh:\
 	:langmap=Verilog\:.v:\
 	:langmap=VHDL\:.vhdl.vhd:\
-	:langmap=Vim\:.vim:\
+	:langmap=Vim\:(vimrc)([._]vimrc)(gvimrc)([._]gvimrc).vim.vba:\
 	:langmap=YACC\:.y:\
 	:gtags_parser=Ant\:$ctagslib:\
 	:gtags_parser=Asm\:$ctagslib:\
@@ -247,7 +247,7 @@ universal-ctags|setting to use Universal Ctags plug-in parser:\
 	:langmap=Ruby\:.rb.ruby:\
 	:langmap=Rust\:.rs:\
 	:langmap=Scheme\:.SCM.SM.sch.scheme.scm.sm:\
-	:langmap=Sh\:(.zshrc).sh.SH.bsh.bash.ksh.zsh.ash:\
+	:langmap=Sh\:.zsh.sh.ksh.bash.ebuild.eclass(zshrc)([._]zshrc):\
 	:langmap=SLang\:.sl:\
 	:langmap=SML\:.sml.sig:\
 	:langmap=SQL\:.sql:\
@@ -380,7 +380,7 @@ pygments-parser|Pygments plug-in parser:\
 	:langmap=AutoIt\:.au3:\
 	:langmap=Awk\:.awk.gawk.mawk:\
 	:langmap=BUGS\:.bug:\
-	:langmap=Bash\:(.zshrc).zsh.sh.ksh.bash.ebuild.eclass:\
+	:langmap=Bash\:.zsh.sh.ksh.bash.ebuild.eclass(zshrc)([._]zshrc):\
 	:langmap=Bat\:.bat.cmd:\
 	:langmap=BlitzMax\:.bmx:\
 	:langmap=Boo\:.boo:\
@@ -516,7 +516,7 @@ pygments-parser|Pygments plug-in parser:\
 	:langmap=Velocity\:.vm.fhtml:\
 	:langmap=Verilog\:.v:\
 	:langmap=Vhdl\:.vhdl.vhd:\
-	:langmap=Vim\:.vim:\
+	:langmap=Vim\:(vimrc)([._]vimrc)(gvimrc)([._]gvimrc).vim.vba:\
 	:langmap=XBase\:.PRG.prg:\
 	:langmap=XQuery\:.xqy.xquery.xq.xql.xqm:\
 	:langmap=XSLT\:.xsl.xslt.xpl:\

@@ -2667,22 +2667,42 @@ function clearCache(){
     } >> "$ZPWR_LOGFILE" 2>&1
 }
 
-function regenEmacsTags(){
+function regenGtagsType(){
 
-    prettyPrint "Regen GNU gtags to $HOME/GTAGS"
+    if [[ -z $1 ]]; then
+        loggErr "regenGtagsType <type>"
+        return 1
+    fi
+
+    local type=$1
+
+    prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
     (
     builtin cd "$HOME"
     command rm GPATH GRTAGS GTAGS 2>/dev/null
-    for file in "$ZPWR_INSTALL/.zshrc" "$ZPWR/".*.sh "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS/macOnly/"*; do
+    for file in \
+        "$ZPWR_INSTALL/"* \
+        "$ZPWR/"* \
+        "$ZPWR_SCRIPTS"/* \
+        "$ZPWR_SCRIPTS/macOnly/"*; do
         if [[ -f "$file" ]]; then
             echo "$file"
         fi
-    done | gtags --accept-dotfiles --gtagslabel=pygments -f -
+    done | gtags --accept-dotfiles --gtagslabel=$type -f -
     )
 
 }
+function regenGtagsCtags(){
 
-function regenCTags(){
+    regenGtagsType ctags
+
+}
+function regenGtagsPygments(){
+
+    regenGtagsType pygments
+}
+
+function regenCtags(){
 
     prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
     (
