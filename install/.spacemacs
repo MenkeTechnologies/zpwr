@@ -100,6 +100,7 @@ values."
            highlight-indent-guides
            ctags-update
            company-plsense
+           noflet
            company-ctags
            company-ycm
            perspective
@@ -390,6 +391,7 @@ you should place your code here."
     (require 'real-auto-save)
     (require 'perspective)
     (require 'highlight-indent-guides)
+    (require 'noflet)
 
 
     ;;{{{                    MARK:keybindings
@@ -407,6 +409,20 @@ you should place your code here."
      (evil-next-visual-line 4)
      )
 
+    (defun zpwr/bypass-confirmation-all (function &rest args)
+        "Call FUNCTION with ARGS, bypassing all prompts.
+        This includes both `y-or-n-p' and `yes-or-no-p'."
+        (noflet
+            ((y-or-n-p    (prompt) t)
+            (yes-or-no-p (prompt) t))
+            (apply function args)))
+
+    (defun guh ()
+     (interactive)
+     (zpwr/bypass-confirmation-all #'spacemacs/vcs-revert-hunk)
+     (evil-scroll-line-to-center)
+    )
+
     (define-key evil-visual-state-map (kbd "C-j") 'down-four)
     (define-key evil-visual-state-map (kbd "C-k") 'up-four)
     (define-key evil-visual-state-map (kbd "C-h") 'right-four)
@@ -417,7 +433,7 @@ you should place your code here."
     (define-key evil-normal-state-map (kbd "C-h") 'right-four)
     (define-key evil-normal-state-map (kbd "C-l") 'left-four)
 
-    (define-key evil-normal-state-map (kbd "C-d") 'spacemacs/vcs-revert-hunk)
+    (define-key evil-normal-state-map (kbd "C-d") 'guh)
     (define-key evil-normal-state-map (kbd "C-f") 'spacemacs/frame-killer)
 
     (define-key evil-insert-state-map (kbd "C-l") 'hippie-expand)
@@ -620,12 +636,6 @@ you should place your code here."
 
     (yas-global-mode 1)
 
-    (defadvice
-        spacemacs/vcs-revert-hunk
-     (around auto-confirm compile activate)
-      (cl-letf (((symbol-function 'yes-or-no-p) (lambda (&rest args) t))
-                ((symbol-function 'y-or-n-p) (lambda (&rest args) t)))
-        ad-do-it))
 
     ;;(setq yas-snippet-dirs
     ;;  '("~/.emacs.d/private/snippets"                 ;; personal snippets
@@ -648,6 +658,10 @@ you should place your code here."
     (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
 
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
+    ;;always y or n
+    (defalias 'yes-or-no-p 'y-or-n-p)
+
     ;;}}}***********************************************************
 
 
