@@ -539,7 +539,7 @@ POWERLEVEL9K_CUSTOM_BATT="milliamps"POWERLEVEL9K_CUSTOM_BATT77,2745
 POWERLEVEL9K_CUSTOM_BATT_BACKGROUND="red"POWERLEVEL9K_CUSTOM_BATT_BACKGROUND78,2782
 POWERLEVEL9K_CUSTOM_BATT_FOREGROUND="black"POWERLEVEL9K_CUSTOM_BATT_FOREGROUND79,2824
 
-/Users/wizard/.zpwr/.shell_aliases_functions.sh,22618
+/Users/wizard/.zpwr/.shell_aliases_functions.sh,22648
 isZsh(){isZsh23,845
         function exists(){exists34,1021
     function exists(){exists44,1259
@@ -622,327 +622,328 @@ export LESS="-M -N -R -K -F -X"LESS162,6035
             export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"EXA_COLORS250,9686
     export GOPATH="$HOME/go"GOPATH258,10128
 function rm(){rm269,10463
-            distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName447,17552
-    bold=$(tput bold || tput md)bold524,20669
-    red=$(tput setaf 1)red525,20702
-function r(){r540,21053
-    function exe(){exe555,21295
-    function nn(){nn560,21371
-        title="$1"title566,21513
-        msg="$2"msg567,21532
-    function db(){db572,21647
-    function db2(){db2577,21720
-    function scriptToPDF(){scriptToPDF582,21792
-        tempFile="$HOME/__test.ps"tempFile584,21821
-        function scriptToPDF(){scriptToPDF592,22011
-            tempFile="$HOME/__test.ps"tempFile598,22157
-    function ssd() {ssd605,22344
-    function ssu() {ssu615,22620
-    function tailufw(){tailufw626,22897
-        size=100size628,22922
-            size=$1size630,22968
-    function restartZabbixAgent(){restartZabbixAgent641,23264
-    function restart(){restart656,23753
-        service="$1"service658,23778
-        src_dir="$ZPWR_INSTALL"src_dir660,23821
-        service_path="$src_dir/$service.service"service_path662,23880
-        group=$(id -gn)group675,24433
-        service_path="$ZPWR_LOCAL/$service.service"service_path679,24500
-function cloneToForked(){cloneToForked701,25174
-    branch=masterbranch703,25201
-function s(){s715,25485
-        cmd=sublcmd718,25525
-        cmd="$ZPWR_OPEN_CMD"cmd720,25551
-        sec_cmd=ssec_cmd723,25639
-        sec_cmd="$ZPWR_OPEN_CMD"sec_cmd725,25666
-            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"out734,25889
-            url="https://google.com/search?q=$out"url735,26000
-            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"out743,26233
-            url="https://google.com/search?q=$out"url744,26344
-function loggConsolePrefix(){loggConsolePrefix749,26441
-function loggConsole(){loggConsole754,26541
-function logg(){logg760,26604
-function loggDebug(){loggDebug802,28004
-function xx(){xx809,28094
-    cmd="$1"cmd813,28142
-    DONE=falseDONE817,28230
-function urlSafe(){urlSafe825,28358
-function cgh(){cgh830,28420
-function upload(){upload837,28624
-function jd(){jd846,28790
-function j(){j853,28865
-        dirname="$(dirname $file)"dirname856,28896
-function scnew(){scnew862,29026
-function p(){p872,29209
-        out="$(ps -ef)"out876,29339
-        out="$(ps aux)"out879,29414
-function b(){b891,29654
-        sleepTime=$2sleepTime894,29697
-function suc(){suc909,30003
-function allRemotes(){allRemotes916,30119
-function largestGitFiles(){largestGitFiles930,30354
-       page=50 page938,30476
-       page=$1page940,30500
-    obj=$(git rev-list --all --objects)obj945,30585
-        filename=$(echo $obj | command grep $sha)filename947,30661
-        size=$(printf $size | humanReadable)size948,30711
-function clearGitCommit(){clearGitCommit953,30906
-    regex="^$1\$"regex965,31094
-function clearGitCache(){clearGitCache978,31380
-function about(){about990,31643
-    old="$LESS"old992,31662
-    export LESS="$old"LESS997,31791
-function clearList() {clearList1000,31817
-            ls_command="$ZPWR_EXA_COMMAND"ls_command1004,31913
-                ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"ls_command1007,32001
-                ls_command="ls -iFlhAOd"ls_command1009,32096
-        lib_command="otool -L"lib_command1012,32163
-            ls_command="$ZPWR_EXA_COMMAND"ls_command1016,32267
-                ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"ls_command1019,32355
-                ls_command="ls -iFlhA"ls_command1021,32448
-        lib_command="ldd"lib_command1024,32513
-            ls_command="grc -c $HOME/conf.gls ls -iFlhA"ls_command1027,32575
-            ls_command="ls -iFhlA"ls_command1029,32645
-        lib_command="ldd"lib_command1031,32691
-                    lf="$(echo $loc | cut -d' ' -f3-10)"lf1042,32995
-                        rank="Primary"rank1044,33112
-                        rank="Secondary"rank1046,33176
-                        out=$(man -wa "$(basename $lf)" 2>/dev/null)out1059,33750
-                            out="$(hash | command grep "^$arg=")"out1065,34021
-function listNoClear () {listNoClear1116,35831
-function animate(){animate1137,36278
-function blocksToSize(){blocksToSize1142,36337
-    bytes=$(( input * 512 ))bytes1146,36394
-function humanReadable(){humanReadable1150,36458
-        s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"s1153,36514
-        s=substr(s,1,4)s1157,36648
-        xf=(s==" B  ") ? "%d" : "%.2f"xf1158,36672
-function f(){f1164,36797
-        base="$(dirname "$1")"base1174,37051
-            base="$(dirname "$base")"base1177,37172
-function execpy(){execpy1186,37316
-    script="$1"script1193,37418
-function search(){search1199,37486
-function cd(){cd1205,37597
-function isGitDir(){isGitDir1215,37845
-function isGitDirMessage(){isGitDirMessage1220,37924
-function gil(){gil1230,38141
-    local file=".git/info/exclude"file1237,38241
-function contribCountDirs(){contribCountDirs1248,38391
-    user="$1"user1257,38562
-    curDir="$(pwd)"curDir1259,38586
-    sum=0sum1260,38606
-            lineCount="$(git log --pretty="%an" | grep -E "$user" | wc -l)"lineCount1270,38787
-function contribCount(){contribCount1284,39260
-    lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"lines1291,39369
-    lineCount="$(echo $lines | wc -l)"lineCount1292,39435
-function isBinary() {isBinary1303,39867
-  LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -sq '^Binary'LC_MESSAGES1304,39889
-function totalLines(){totalLines1307,39975
-        filter=falsefilter1319,40193
-               filter=truefilter1322,40302
-    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1342,40717
-function contribCountLines(){contribCountLines1355,41185
-        filter=falsefilter1367,41412
-               filter=truefilter1370,41520
-    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1389,42085
-function gsdc(){gsdc1403,42606
-    currentDir="$(pwd -P)"currentDir1412,42729
-        BUFFER=""BUFFER1427,43175
-function gitCommitAndPush(){gitCommitAndPush1454,43602
-    currentDir="$(pwd -P)"currentDir1462,43716
-function replacer(){replacer1476,43968
-    orig="$1"orig1484,44075
-    replace="$2"replace1485,44089
-function creategif(){creategif1496,44295
-    outFile=out.gifoutFile1498,44318
-    res=600x400res1499,44338
-function hc(){hc1514,44614
-        reponame="$1"reponame1518,44712
-    old_dir="$(pwd)"old_dir1520,44753
-function hd(){hd1534,45088
-                user="$(echo $line | awk -F':' '{print $2}' |user1540,45305
-                repo="$(echo $line | awk -F'/' '{print $2}' |repo1542,45412
-                user="$(echo $line | awk -F'/' '{print $4}')"user1546,45552
-                repo="$(echo $line | awk -F'/' '{print $5}' |repo1547,45614
-    user="$(echo "$user" | tr 'A-Z' 'a-z')"user1553,45745
-    out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$repo")"out1558,45911
-function pstreemonitor(){pstreemonitor1571,46186
-function return2(){return21577,46328
-function color2(){color21587,46460
-function escapeRemove(){escapeRemove1597,46596
-function prettyPrint(){prettyPrint1604,46705
-function alternatingPrettyPrint(){alternatingPrettyPrint1616,46902
-    counter=0counter1619,46956
-function tac(){tac1646,47622
-function backup(){backup1651,47667
-    newfile="$1".$(date +%Y%m%d.%H.%M.bak)newfile1658,47769
-function gcl() {gcl1669,47990
-    git_name="${1##*/}"git_name1678,48133
-    dir_name=${git_name%.*}dir_name1679,48157
-function ino(){ino1689,48367
-    dir="$1"dir1696,48466
-function jetbrainsWorkspaceEdit(){jetbrainsWorkspaceEdit1749,49438
-function o(){o1770,50540
-    open_cmd="$ZPWR_OPEN_CMD" || return 1open_cmd1772,50555
-function openmygh(){openmygh1790,50919
-    open_cmd="$ZPWR_OPEN_CMD" || return 1open_cmd1792,50941
-function zpwr(){zpwr1813,51514
-function zp(){zp1821,51653
-export ZPWR_REPO="$HOME/.$ZPWR_REPO_NAME"ZPWR_REPO1830,51753
-function zpz(){zpz1836,51862
-    dirsc="$ZPWR"dirsc1839,51902
-function zr(){zr1849,52061
-    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"dirsc1852,52100
-    forked="$FORKED_DIR/$ZPWR_REPO_NAME"forked1853,52142
-function goInstallerDir(){goInstallerDir1864,52359
-    local ret=0ret1866,52387
-function unlinkConf(){unlinkConf1880,52699
-    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1884,52751
-    local snipDir="$HOME/.emacs.d/private/snippets"snipDir1894,53103
-function linkConf(){linkConf1905,53292
-    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1915,53518
-    local snipDir="$HOME/.emacs.d/private"snipDir1927,54070
-function getrc(){getrc1939,54469
-        branch=masterbranch1942,54515
-        branch="$1"branch1944,54546
-            REPLY="$(cat "$ZPWR_TEMPFILE")"REPLY1951,54833
-    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"COMPLETION_DIR1973,55352
-function getrcdev(){getrcdev1983,55579
-function rename(){rename1988,55618
-    search="$1"search1995,55720
-        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')out1999,55807
-function torip(){torip2007,56016
-    ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)ip2009,56035
-function toriprenew() {toriprenew2014,56118
-function mycurl(){mycurl2020,56228
-function perlremovespaces(){perlremovespaces2028,56469
-function pirun(){pirun2036,56727
-    DONE=falseDONE2040,56787
-    picounter=1picounter2042,56822
-function digs(){digs2060,57331
-        colo=colo2076,57675
-                exe=(proxychains4 -q) ||exe2089,58038
-                exe="proxychains4 -q"exe2090,58079
-                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"noport2100,58299
-                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"noproto2109,58663
-                out="$($exe host "$noproto")"out2111,58784
-                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"ip2120,59109
-                        noproto="${noproto:0:-1}"noproto2122,59262
-                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"primary2131,59574
-                    out="$($exe whois "$primary")"out2132,59668
-                    out="$($exe whois "$noproto")"out2155,60687
-                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"noport2203,62504
-                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"noproto2207,62724
-                out="$($colo $exe host "$noproto")"out2209,62845
-                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"ip2219,63197
-                        noproto="${noproto:0:-1}"noproto2221,63350
-                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"primary2225,63510
-                    out="$($exe whois "$primary")"out2226,63604
-                    out="$($colo $exe whois "$noproto")"out2237,64147
-function to(){to2267,65271
-    file="$HOME/.config/powerline/themes/tmux/default.json"file2269,65287
-function ww(){ww2280,65735
-function www(){www2291,65898
-    time=$1time2297,66053
-function fordirUpdate(){fordirUpdate2305,66144
-    cmd="git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache"cmd2311,66287
-function fordir(){fordir2321,66613
-    cmd="$1"cmd2327,66745
-function ff(){ff2342,67085
-function fff(){fff2355,67327
-    num=$1num2361,67455
-function post(){post2368,67544
-    postfix="$1"postfix2374,67645
-    out="$(eval "$@")"out2376,67672
-function pre(){pre2380,67749
-    prefix="$1"prefix2386,67849
-    out="$(eval "$@")"out2388,67875
-function cCommon(){cCommon2401,68184
-    local colorizer=batcolorizer2403,68205
-function c(){c2436,69246
-    styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'styles_dir2456,69635
-    url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"url2458,69728
-            file=${file##*/}file2465,69976
-        len=${#file_ary}len2469,70124
-        randscript="print int(rand()*$len)"randscript2470,70149
-        rand=$(echo "$randscript" | perl)rand2471,70193
-            random_color=${file_ary[$i]}random_color2476,70326
-function fz(){fz2491,70778
-function figletfonts(){figletfonts2505,71670
-        FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR2508,71740
-        FIGLET_DIR="/usr/share/figlet"FIGLET_DIR2510,71820
-function pygmentcolors(){pygmentcolors2545,72911
-    dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"dir2547,72938
-function detachall(){detachall2554,73123
-function scripts(){scripts2560,73233
-    export ZPWR_SCHEMA_NAME=rootZPWR_SCHEMA_NAME2572,73450
-    export ZPWR_TABLE_NAME=LearningCollectionZPWR_TABLE_NAME2573,73483
-function gitCheckoutRebasePush(){gitCheckoutRebasePush2576,73533
-function jsonToArray(){jsonToArray2583,73769
-    local json="$(cat)"json2585,73794
-function arrayToJson(){arrayToJson2601,74155
-        ary="$1"ary2604,74199
-        ary="$1"ary2608,74323
-function loginCount(){loginCount2617,74523
-function needSudo(){needSudo2624,74695
-function clearTemp(){clearTemp2633,74799
-function clearCache(){clearCache2648,75157
-function regenEmacsTags(){regenEmacsTags2661,75425
-function regenTags(){regenTags2674,75807
-function regenAllKeybindingsCache(){regenAllKeybindingsCache2687,76150
-function searchGitCommon(){searchGitCommon2699,76573
-    out="$(goThere)"out2701,76602
-function regenAllGitRepos(){regenAllGitRepos2706,76658
-function searchDirtyGitRepos(){searchDirtyGitRepos2723,77147
-    goThere(){goThere2725,77180
-    shouldRegen="$1"shouldRegen2741,77797
-function searchAllGitRepos(){searchAllGitRepos2752,78095
-    goThere(){goThere2754,78126
-    shouldRegen="$1"shouldRegen2762,78417
-function regenConfigLinks(){regenConfigLinks2773,78715
-function regenPowerlineLink(){regenPowerlineLink2779,78835
-    dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"dir2781,78867
-function goclean() {goclean2800,79501
-    pkg=$1;pkg2807,79632
-        ost="$(uname | tr A-Z a-z)_amd64"ost2812,79725
-    src_dir="$GOPATH/src/$pkg"src_dir2817,79871
-    bin_dir="$GOPATH/pkg/$ost/$pkg"bin_dir2818,79902
-function commits(){commits2836,80358
-function emacsEmacsConfig(){emacsEmacsConfig2852,80726
-function vimEmacsConfig(){vimEmacsConfig2862,80922
-function emacsAll(){emacsAll2872,81105
-function vimAll(){vimAll2893,81692
-function emacsScripts(){emacsScripts2914,82266
-function vimScripts(){vimScripts2926,82586
-function timer() {timer2938,82893
-    count=100count2945,83052
-        cmd=gdatecmd2947,83091
-        cmd=datecmd2949,83118
-    total=0total2952,83143
-    totstart=$($cmd +%s)totstart2953,83155
-            start=$($cmd +%s%N)start2957,83284
-            end=$($cmd +%s%N)end2960,83381
-            runtime=$(((end-start)/1000000.0))runtime2962,83455
-        avg=$((runtime/(count *1.0)))avg2966,83588
-    totend=$($cmd +%s)totend2971,83765
-    tot=$((totend-totstart))tot2972,83788
-function changeGitCommitterEmail(){changeGitCommitterEmail2977,83895
-    oldEmail="$1"oldEmail2989,84106
-    newEmail="$2"newEmail2990,84124
-        GIT_COMMITTER_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_COMMITTER_EMAIL2996,84298
-function changeGitAuthorEmail(){changeGitAuthorEmail3002,84418
-    oldEmail="$1"oldEmail3014,84626
-    newEmail="$2"newEmail3015,84644
-        GIT_AUTHOR_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_AUTHOR_EMAIL3021,84812
-function changeGitEmail(){changeGitEmail3027,84929
-    OLD_EMAIL="'$1'"OLD_EMAIL3040,85180
-    CORRECT_NAME="'$2'"CORRECT_NAME3041,85201
-    CORRECT_EMAIL="'$3'"CORRECT_EMAIL3042,85225
-        export GIT_COMMITTER_NAME="$CORRECT_NAME"GIT_COMMITTER_NAME3045,85308
-        export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"GIT_COMMITTER_EMAIL3046,85358
-        export GIT_AUTHOR_NAME="$CORRECT_NAME"GIT_AUTHOR_NAME3050,85472
-        export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"GIT_AUTHOR_EMAIL3051,85519
+            distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName446,17530
+    bold=$(tput bold || tput md)bold523,20647
+    red=$(tput setaf 1)red524,20680
+function em(){em539,21031
+function r(){r549,21129
+    function exe(){exe564,21371
+    function nn(){nn569,21447
+        title="$1"title575,21589
+        msg="$2"msg576,21608
+    function db(){db581,21723
+    function db2(){db2586,21796
+    function scriptToPDF(){scriptToPDF591,21868
+        tempFile="$HOME/__test.ps"tempFile593,21897
+        function scriptToPDF(){scriptToPDF601,22087
+            tempFile="$HOME/__test.ps"tempFile607,22233
+    function ssd() {ssd614,22420
+    function ssu() {ssu624,22696
+    function tailufw(){tailufw635,22973
+        size=100size637,22998
+            size=$1size639,23044
+    function restartZabbixAgent(){restartZabbixAgent650,23340
+    function restart(){restart665,23829
+        service="$1"service667,23854
+        src_dir="$ZPWR_INSTALL"src_dir669,23897
+        service_path="$src_dir/$service.service"service_path671,23956
+        group=$(id -gn)group684,24509
+        service_path="$ZPWR_LOCAL/$service.service"service_path688,24576
+function cloneToForked(){cloneToForked710,25250
+    branch=masterbranch712,25277
+function s(){s724,25561
+        cmd=sublcmd727,25601
+        cmd="$ZPWR_OPEN_CMD"cmd729,25627
+        sec_cmd=ssec_cmd732,25715
+        sec_cmd="$ZPWR_OPEN_CMD"sec_cmd734,25742
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"out743,25965
+            url="https://google.com/search?q=$out"url744,26076
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"out752,26309
+            url="https://google.com/search?q=$out"url753,26420
+function loggConsolePrefix(){loggConsolePrefix758,26517
+function loggConsole(){loggConsole763,26617
+function logg(){logg769,26680
+function loggDebug(){loggDebug811,28080
+function xx(){xx818,28170
+    cmd="$1"cmd822,28218
+    DONE=falseDONE826,28306
+function urlSafe(){urlSafe834,28434
+function cgh(){cgh839,28496
+function upload(){upload846,28700
+function jd(){jd855,28866
+function j(){j862,28941
+        dirname="$(dirname $file)"dirname865,28972
+function scnew(){scnew871,29102
+function p(){p881,29285
+        out="$(ps -ef)"out885,29415
+        out="$(ps aux)"out888,29490
+function b(){b900,29730
+        sleepTime=$2sleepTime903,29773
+function suc(){suc918,30079
+function allRemotes(){allRemotes925,30195
+function largestGitFiles(){largestGitFiles939,30430
+       page=50 page947,30552
+       page=$1page949,30576
+    obj=$(git rev-list --all --objects)obj954,30661
+        filename=$(echo $obj | command grep $sha)filename956,30737
+        size=$(printf $size | humanReadable)size957,30787
+function clearGitCommit(){clearGitCommit962,30982
+    regex="^$1\$"regex974,31170
+function clearGitCache(){clearGitCache987,31456
+function about(){about999,31719
+    old="$LESS"old1001,31738
+    export LESS="$old"LESS1006,31867
+function clearList() {clearList1009,31893
+            ls_command="$ZPWR_EXA_COMMAND"ls_command1013,31989
+                ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"ls_command1016,32077
+                ls_command="ls -iFlhAOd"ls_command1018,32172
+        lib_command="otool -L"lib_command1021,32239
+            ls_command="$ZPWR_EXA_COMMAND"ls_command1025,32343
+                ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"ls_command1028,32431
+                ls_command="ls -iFlhA"ls_command1030,32524
+        lib_command="ldd"lib_command1033,32589
+            ls_command="grc -c $HOME/conf.gls ls -iFlhA"ls_command1036,32651
+            ls_command="ls -iFhlA"ls_command1038,32721
+        lib_command="ldd"lib_command1040,32767
+                    lf="$(echo $loc | cut -d' ' -f3-10)"lf1051,33071
+                        rank="Primary"rank1053,33188
+                        rank="Secondary"rank1055,33252
+                        out=$(man -wa "$(basename $lf)" 2>/dev/null)out1068,33826
+                            out="$(hash | command grep "^$arg=")"out1074,34097
+function listNoClear () {listNoClear1125,35907
+function animate(){animate1146,36354
+function blocksToSize(){blocksToSize1151,36413
+    bytes=$(( input * 512 ))bytes1155,36470
+function humanReadable(){humanReadable1159,36534
+        s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"s1162,36590
+        s=substr(s,1,4)s1166,36724
+        xf=(s==" B  ") ? "%d" : "%.2f"xf1167,36748
+function f(){f1173,36873
+        base="$(dirname "$1")"base1183,37127
+            base="$(dirname "$base")"base1186,37248
+function execpy(){execpy1195,37392
+    script="$1"script1202,37494
+function search(){search1208,37562
+function cd(){cd1214,37673
+function isGitDir(){isGitDir1224,37921
+function isGitDirMessage(){isGitDirMessage1229,38000
+function gil(){gil1239,38217
+    local file=".git/info/exclude"file1246,38317
+function contribCountDirs(){contribCountDirs1257,38467
+    user="$1"user1266,38638
+    curDir="$(pwd)"curDir1268,38662
+    sum=0sum1269,38682
+            lineCount="$(git log --pretty="%an" | grep -E "$user" | wc -l)"lineCount1279,38863
+function contribCount(){contribCount1293,39336
+    lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"lines1300,39445
+    lineCount="$(echo $lines | wc -l)"lineCount1301,39511
+function isBinary() {isBinary1312,39943
+  LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -sq '^Binary'LC_MESSAGES1313,39965
+function totalLines(){totalLines1316,40051
+        filter=falsefilter1328,40269
+               filter=truefilter1331,40378
+    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1351,40793
+function contribCountLines(){contribCountLines1364,41261
+        filter=falsefilter1376,41488
+               filter=truefilter1379,41596
+    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1398,42161
+function gsdc(){gsdc1412,42682
+    currentDir="$(pwd -P)"currentDir1421,42805
+        BUFFER=""BUFFER1436,43251
+function gitCommitAndPush(){gitCommitAndPush1463,43678
+    currentDir="$(pwd -P)"currentDir1471,43792
+function replacer(){replacer1485,44044
+    orig="$1"orig1493,44151
+    replace="$2"replace1494,44165
+function creategif(){creategif1505,44371
+    outFile=out.gifoutFile1507,44394
+    res=600x400res1508,44414
+function hc(){hc1523,44690
+        reponame="$1"reponame1527,44788
+    old_dir="$(pwd)"old_dir1529,44829
+function hd(){hd1543,45164
+                user="$(echo $line | awk -F':' '{print $2}' |user1549,45381
+                repo="$(echo $line | awk -F'/' '{print $2}' |repo1551,45488
+                user="$(echo $line | awk -F'/' '{print $4}')"user1555,45628
+                repo="$(echo $line | awk -F'/' '{print $5}' |repo1556,45690
+    user="$(echo "$user" | tr 'A-Z' 'a-z')"user1562,45821
+    out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$repo")"out1567,45987
+function pstreemonitor(){pstreemonitor1580,46262
+function return2(){return21586,46404
+function color2(){color21596,46536
+function escapeRemove(){escapeRemove1606,46672
+function prettyPrint(){prettyPrint1613,46781
+function alternatingPrettyPrint(){alternatingPrettyPrint1625,46978
+    counter=0counter1628,47032
+function tac(){tac1655,47698
+function backup(){backup1660,47743
+    newfile="$1".$(date +%Y%m%d.%H.%M.bak)newfile1667,47845
+function gcl() {gcl1678,48066
+    git_name="${1##*/}"git_name1687,48209
+    dir_name=${git_name%.*}dir_name1688,48233
+function ino(){ino1698,48443
+    dir="$1"dir1705,48542
+function jetbrainsWorkspaceEdit(){jetbrainsWorkspaceEdit1758,49514
+function o(){o1779,50616
+    open_cmd="$ZPWR_OPEN_CMD" || return 1open_cmd1781,50631
+function openmygh(){openmygh1799,50995
+    open_cmd="$ZPWR_OPEN_CMD" || return 1open_cmd1801,51017
+function zpwr(){zpwr1822,51590
+function zp(){zp1830,51729
+export ZPWR_REPO="$HOME/.$ZPWR_REPO_NAME"ZPWR_REPO1839,51829
+function zpz(){zpz1845,51938
+    dirsc="$ZPWR"dirsc1848,51978
+function zr(){zr1858,52137
+    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"dirsc1861,52176
+    forked="$FORKED_DIR/$ZPWR_REPO_NAME"forked1862,52218
+function goInstallerDir(){goInstallerDir1873,52435
+    local ret=0ret1875,52463
+function unlinkConf(){unlinkConf1889,52775
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1893,52827
+    local snipDir="$HOME/.emacs.d/private/snippets"snipDir1903,53179
+function linkConf(){linkConf1914,53368
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1924,53594
+    local snipDir="$HOME/.emacs.d/private"snipDir1936,54146
+function getrc(){getrc1948,54545
+        branch=masterbranch1951,54591
+        branch="$1"branch1953,54622
+            REPLY="$(cat "$ZPWR_TEMPFILE")"REPLY1960,54909
+    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"COMPLETION_DIR1982,55428
+function getrcdev(){getrcdev1992,55655
+function rename(){rename1997,55694
+    search="$1"search2004,55796
+        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')out2008,55883
+function torip(){torip2016,56092
+    ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)ip2018,56111
+function toriprenew() {toriprenew2023,56194
+function mycurl(){mycurl2029,56304
+function perlremovespaces(){perlremovespaces2037,56545
+function pirun(){pirun2045,56803
+    DONE=falseDONE2049,56863
+    picounter=1picounter2051,56898
+function digs(){digs2069,57407
+        colo=colo2085,57751
+                exe=(proxychains4 -q) ||exe2098,58114
+                exe="proxychains4 -q"exe2099,58155
+                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"noport2109,58375
+                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"noproto2118,58739
+                out="$($exe host "$noproto")"out2120,58860
+                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"ip2129,59185
+                        noproto="${noproto:0:-1}"noproto2131,59338
+                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"primary2140,59650
+                    out="$($exe whois "$primary")"out2141,59744
+                    out="$($exe whois "$noproto")"out2164,60763
+                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"noport2212,62580
+                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"noproto2216,62800
+                out="$($colo $exe host "$noproto")"out2218,62921
+                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"ip2228,63273
+                        noproto="${noproto:0:-1}"noproto2230,63426
+                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"primary2234,63586
+                    out="$($exe whois "$primary")"out2235,63680
+                    out="$($colo $exe whois "$noproto")"out2246,64223
+function to(){to2276,65347
+    file="$HOME/.config/powerline/themes/tmux/default.json"file2278,65363
+function ww(){ww2289,65811
+function www(){www2300,65974
+    time=$1time2306,66129
+function fordirUpdate(){fordirUpdate2314,66220
+    cmd="git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache"cmd2320,66363
+function fordir(){fordir2330,66689
+    cmd="$1"cmd2336,66821
+function ff(){ff2351,67161
+function fff(){fff2364,67403
+    num=$1num2370,67531
+function post(){post2377,67620
+    postfix="$1"postfix2383,67721
+    out="$(eval "$@")"out2385,67748
+function pre(){pre2389,67825
+    prefix="$1"prefix2395,67925
+    out="$(eval "$@")"out2397,67951
+function cCommon(){cCommon2410,68260
+    local colorizer=batcolorizer2412,68281
+function c(){c2445,69322
+    styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'styles_dir2465,69711
+    url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"url2467,69804
+            file=${file##*/}file2474,70052
+        len=${#file_ary}len2478,70200
+        randscript="print int(rand()*$len)"randscript2479,70225
+        rand=$(echo "$randscript" | perl)rand2480,70269
+            random_color=${file_ary[$i]}random_color2485,70402
+function fz(){fz2500,70854
+function figletfonts(){figletfonts2514,71746
+        FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR2517,71816
+        FIGLET_DIR="/usr/share/figlet"FIGLET_DIR2519,71896
+function pygmentcolors(){pygmentcolors2554,72987
+    dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"dir2556,73014
+function detachall(){detachall2563,73199
+function scripts(){scripts2569,73309
+    export ZPWR_SCHEMA_NAME=rootZPWR_SCHEMA_NAME2581,73526
+    export ZPWR_TABLE_NAME=LearningCollectionZPWR_TABLE_NAME2582,73559
+function gitCheckoutRebasePush(){gitCheckoutRebasePush2585,73609
+function jsonToArray(){jsonToArray2592,73845
+    local json="$(cat)"json2594,73870
+function arrayToJson(){arrayToJson2610,74231
+        ary="$1"ary2613,74275
+        ary="$1"ary2617,74399
+function loginCount(){loginCount2626,74599
+function needSudo(){needSudo2633,74771
+function clearTemp(){clearTemp2642,74875
+function clearCache(){clearCache2657,75233
+function regenEmacsTags(){regenEmacsTags2670,75501
+function regenTags(){regenTags2683,75883
+function regenAllKeybindingsCache(){regenAllKeybindingsCache2696,76226
+function searchGitCommon(){searchGitCommon2708,76649
+    out="$(goThere)"out2710,76678
+function regenAllGitRepos(){regenAllGitRepos2715,76734
+function searchDirtyGitRepos(){searchDirtyGitRepos2732,77223
+    goThere(){goThere2734,77256
+    shouldRegen="$1"shouldRegen2750,77873
+function searchAllGitRepos(){searchAllGitRepos2761,78171
+    goThere(){goThere2763,78202
+    shouldRegen="$1"shouldRegen2771,78493
+function regenConfigLinks(){regenConfigLinks2782,78791
+function regenPowerlineLink(){regenPowerlineLink2788,78911
+    dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"dir2790,78943
+function goclean() {goclean2809,79577
+    pkg=$1;pkg2816,79708
+        ost="$(uname | tr A-Z a-z)_amd64"ost2821,79801
+    src_dir="$GOPATH/src/$pkg"src_dir2826,79947
+    bin_dir="$GOPATH/pkg/$ost/$pkg"bin_dir2827,79978
+function commits(){commits2845,80434
+function emacsEmacsConfig(){emacsEmacsConfig2861,80802
+function vimEmacsConfig(){vimEmacsConfig2871,80998
+function emacsAll(){emacsAll2881,81181
+function vimAll(){vimAll2902,81768
+function emacsScripts(){emacsScripts2923,82342
+function vimScripts(){vimScripts2935,82662
+function timer() {timer2947,82969
+    count=100count2954,83128
+        cmd=gdatecmd2956,83167
+        cmd=datecmd2958,83194
+    total=0total2961,83219
+    totstart=$($cmd +%s)totstart2962,83231
+            start=$($cmd +%s%N)start2966,83360
+            end=$($cmd +%s%N)end2969,83457
+            runtime=$(((end-start)/1000000.0))runtime2971,83531
+        avg=$((runtime/(count *1.0)))avg2975,83664
+    totend=$($cmd +%s)totend2980,83841
+    tot=$((totend-totstart))tot2981,83864
+function changeGitCommitterEmail(){changeGitCommitterEmail2986,83971
+    oldEmail="$1"oldEmail2998,84182
+    newEmail="$2"newEmail2999,84200
+        GIT_COMMITTER_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_COMMITTER_EMAIL3005,84374
+function changeGitAuthorEmail(){changeGitAuthorEmail3011,84494
+    oldEmail="$1"oldEmail3023,84702
+    newEmail="$2"newEmail3024,84720
+        GIT_AUTHOR_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_AUTHOR_EMAIL3030,84888
+function changeGitEmail(){changeGitEmail3036,85005
+    OLD_EMAIL="'$1'"OLD_EMAIL3049,85256
+    CORRECT_NAME="'$2'"CORRECT_NAME3050,85277
+    CORRECT_EMAIL="'$3'"CORRECT_EMAIL3051,85301
+        export GIT_COMMITTER_NAME="$CORRECT_NAME"GIT_COMMITTER_NAME3054,85384
+        export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"GIT_COMMITTER_EMAIL3055,85434
+        export GIT_AUTHOR_NAME="$CORRECT_NAME"GIT_AUTHOR_NAME3059,85548
+        export GIT_AUTHOR_EMAIL="$CORRECT_EMAIL"GIT_AUTHOR_EMAIL3060,85595
 
 /Users/wizard/.zpwr/scripts/CPU_Stresser.sh,308
 __ScriptVersion="1.0.2"__ScriptVersion9,303
