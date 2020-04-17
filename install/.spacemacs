@@ -49,7 +49,6 @@ values."
      javascript
      latex
      ruby
-     scala
      git
      python
      markdown
@@ -521,6 +520,10 @@ you should place your code here."
     (spacemacs/set-leader-keys (kbd ".") 'helm-themes)
 
     (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
+
+    (spacemacs/set-leader-keys (kbd "al") 'spotify-next)
+
+    (spacemacs/set-leader-keys (kbd "aa") 'spotify-previous)
     ;;}}}***********************************************************
 
 
@@ -586,6 +589,9 @@ you should place your code here."
 
     ;;}}}***********************************************************
 
+    (setq pcomplete-ignore-case t)
+    (setq company-dabbrev-downcase t)
+    (setq company-dabbrev-code-ignore-case t)
 
 
     
