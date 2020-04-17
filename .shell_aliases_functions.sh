@@ -355,7 +355,7 @@ alias tree='tree -afC'
 alias ta="tmux attach-session"
 alias tn="tmux new-session"
 alias h="cd /usr/local"
-alias et="cd /etc"
+alias e="cd /etc"
 alias ue="cd /usr/local/etc"
 alias de="cd /dev"
 alias a="cd $HOME"
@@ -537,7 +537,7 @@ exists idea && {
 #{{{                    MARK:Shell functions
 #**************************************************************
 
-function e(){
+function ee(){
 
     if [[ -z "$1" ]]; then
         emacs .
