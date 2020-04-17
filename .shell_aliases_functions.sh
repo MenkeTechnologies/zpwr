@@ -293,7 +293,7 @@ alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
 alias die='sudo kill -9 --'
 alias emacs='emacs -nw'
-alias em='emacs -nw'
+alias em='source em-server.sh'
 
 if exists docker; then
     alias dk=docker
@@ -744,6 +744,11 @@ function s(){
             $sec_cmd $url
         fi
     fi
+}
+function loggConsole(){
+    prettyPrint "$*"
+    logg "$*"
+
 }
 
 function logg(){
