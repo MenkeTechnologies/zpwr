@@ -577,8 +577,8 @@ you should place your code here."
         (yas-abort-snippet)
         (company-abort)))
 
-    (global-set-key [tab] 'tab-indent-or-complete)
-    (global-set-key (kbd "TAB") 'tab-indent-or-complete)
+    (define-key evil-insert-state-map [tab] 'tab-indent-or-complete)
+
     (global-set-key [(control return)] 'company-complete-common)
 
     (define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
@@ -591,6 +591,11 @@ you should place your code here."
     (define-key yas-keymap (kbd "TAB") 'tab-complete-or-next-field)
     (define-key yas-keymap [(control tab)] 'yas-next-field)
     (define-key yas-keymap (kbd "C-g") 'abort-company-or-yas)
+
+    ;;real tab
+    (define-key evil-normal-state-map (kbd "TAB") 'evil-jump-forward)
+    ;;^I
+    (define-key evil-normal-state-map [tab] 'evil-jump-forward)
     ;;}}}***********************************************************
 
 
