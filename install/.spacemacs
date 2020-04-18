@@ -231,7 +231,7 @@ values."
    dotspacemacs-display-default-layout nil
    ;; If non nil then the last auto saved layouts are resume automatically upon
    ;; start. (default nil)
-   dotspacemacs-auto-resume-layouts t 
+   dotspacemacs-auto-resume-layouts nil
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
@@ -770,7 +770,6 @@ you should place your code here."
     (define-key yas-keymap [(control tab)] 'yas-next-field)
     (define-key yas-keymap (kbd "C-g") 'abort-company-or-yas)
 
-    (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
 
     ;;real tab
     (define-key evil-normal-state-map (kbd "TAB") 'evil-jump-forward)
@@ -778,8 +777,14 @@ you should place your code here."
     (define-key evil-normal-state-map [tab] 'evil-jump-forward)
 
     ;;^J up and ^D already
-    (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
+    (define-key evil-insert-state-map (kbd "C-d") 'company-complete)
     (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
+
+    (define-key evil-insert-state-map (kbd "C-z") 'helm-swoop)
+    (define-key evil-normal-state-map (kbd "C-z") 'helm-swoop)
+
+    (define-key evil-insert-state-map (kbd "C-f") 'helm-multi-swoop-all)
+    (define-key evil-normal-state-map (kbd "C-f") 'helm-multi-swoop-all)
 
     (defvar company-mode/enable-yas t)
 
