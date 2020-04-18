@@ -495,7 +495,7 @@ you should place your code here."
 
     (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
 
-    (spacemacs/set-leader-keys (kbd "a.") 'spotify-play-pause)
+    (spacemacs/set-leader-keys (kbd "a.") 'spotify-playpause)
 
     (spacemacs/set-leader-keys (kbd "aa") 'spotify-next)
     (spacemacs/set-leader-keys (kbd "al") 'spotify-previous)
@@ -722,7 +722,7 @@ you should place your code here."
 
     (add-hook 'prog-mode-hook #'zpwr/compHook)
     (add-hook 'perl-mode-hook #'zpwr/perlHook)
-    (add-hook 'sh-mode-hook #'zpwr/shHook)
+     (add-hook 'sh-mode-hook #'zpwr/shHook)
 
     ;;}}}***********************************************************
 
