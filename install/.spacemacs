@@ -487,7 +487,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
         ;;**************************************************************
 
             (setq real-auto-save-interval 1)
-            (real-auto-save-activate-advice)
             (real-auto-save-mode)
             (message "real autosave init done")
         )
