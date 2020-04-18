@@ -675,6 +675,9 @@ you should place your code here."
         (setq-local company-dabbrev-downcase nil)
         (setq-local company-dabbrev-code-ignore-case t)
         (setq-local company-dabbrev-ignore-case t)
+        (global-set-key (kbd "C-SPC") 'company-complete)
+        (local-set-key (kbd "C-SPC") 'company-complete)
+        (message "company init done")
      )
 
     (add-hook 'prog-mode-hook #'zpwr/compHook)

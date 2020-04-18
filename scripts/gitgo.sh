@@ -47,7 +47,7 @@ initializeGitDirectory() {
         read -n1
         echo
         case "$REPLY" in
-        #if yes then create .git and call getReqmoteDetails
+        #if yes then create .git and call getRemoteDetails
         [yY])
             git init
             getRemoteDetails
