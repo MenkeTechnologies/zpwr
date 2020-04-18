@@ -449,18 +449,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (global-set-key (kbd "C-SPC") 'company-complete)
         (local-set-key (kbd "C-SPC") 'company-complete)
         (message "company init done")
-        ;; in seconds
-        ;;{{{                    MARK:auto save
-        ;;**************************************************************
-
-        (with-eval-after-load 'real-auto-save
-            (setq real-auto-save-interval 1)
-            (real-auto-save-activate-advice)
-            (real-auto-save-mode)
-            (message "real autosave init done")
-        ))
-        ;;}}}***********************************************************
      )
+    )
 
     (defun zpwr/shHook ()
       (setq company-backends-sh-mode '(
@@ -479,24 +469,33 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (message "shell init done")
         ))
     ;;}}}***********************************************************
-    (defun zpwr/indentHook ()
-        (with-eval-after-load 'highlight-indent-guides
+
+    (defun zpwr/HL ()
          (progn
             ;;{{{                    MARK:indent guides
             ;;**************************************************************
-            (setq highlight-indent-guides-method 'character)
-            (setq highlight-indent-guides-character ?\|)
-
-            (setq highlight-indent-guides-responsive 'top)
-            (setq highlight-indent-guides-delay 0.3)
-            (setq highlight-indent-guides-auto-enabled nil)
-
             (highlight-indent-guides-mode)
-            (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
             (message "highlight indent guides init done")
             ;;}}}***********************************************************
           )
+     )
+
+    (defun zpwr/AS ()
+         (progn
+        ;; in seconds
+        ;;{{{                    MARK:auto save
+        ;;**************************************************************
+
+            (setq real-auto-save-interval 1)
+            (real-auto-save-activate-advice)
+            (real-auto-save-mode)
+            (message "real autosave init done")
         )
+        ;;}}}***********************************************************
+    )
+
+    (defun zpwr/indentHook ()
+         (zpwr/HL)
     )
 
     (defun zpwr/perlHook ()
@@ -521,10 +520,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
 
-    (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
-    (add-hook 'prog-mode-hook 'zpwr/compHook)
-    (add-hook 'perl-mode-hook 'zpwr/perlHook)
-    (add-hook 'sh-mode-hook 'zpwr/shHook)
 
     ;;{{{                    MARK:auto hl
     ;;**************************************************************
@@ -540,12 +535,29 @@ before packages are loaded. If you are unsure, you should try in setting them in
           )
         ))))))
 
-    (add-hook 'post-command-hook 'zpwr/autoHighlight)
     ;;}}}***********************************************************
+
+
+    ;;{{{                    MARK:Hook bindings
+        ;;**************************************************************
+    (add-hook 'post-command-hook 'zpwr/autoHighlight)
+
+    (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
+
+    (add-hook 'spacemacs/startup-hook 'zpwr/compHook)
+
+    (add-hook 'prog-mode-hook 'zpwr/indentHook)
+
+    (add-hook 'prog-mode-hook 'zpwr/AS)
+
+    (add-hook 'perl-mode-hook 'zpwr/perlHook)
+
+    (add-hook 'sh-mode-hook 'zpwr/shHook)
 
     (add-hook 'kill-emacs-hook 'persp-state-save)
 
-    (add-hook 'prog-mode-hook 'zpwr/indentHook)
+    ;;}}}***********************************************************
+
 
     (message "end user-i")
 
@@ -561,13 +573,12 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
     (message "start user-c")
 
-    ;;{{{                    MARK:eager load
     ;;**************************************************************
     (require 'company)
     (require 'yasnippet)
     (require 'noflet)
-    (require 'company-shell)
-    (require 'whitespace)
+    (require 'highlight-indent-guides)
+    (require 'real-auto-save)
     ;;}}}***********************************************************
 
 
@@ -816,6 +827,13 @@ you should place your code here."
     (setq whitespace-display-mappings '((space-mark 32 [?·]) (tab-mark 32 [?·])))
     (setq whitespace-style '(face trailing space-mark tab-mark))
     (define-coding-system-alias 'UTF-8 'utf-8)
+    (setq highlight-indent-guides-method 'character)
+    (setq highlight-indent-guides-character ?\|)
+
+    (setq highlight-indent-guides-responsive 'top)
+    (setq highlight-indent-guides-delay 0.3)
+    (setq highlight-indent-guides-auto-enabled t)
+    (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
 
     (setq-default indent-tabs-mode nil)
     (setq-default tab-width 4)
@@ -823,8 +841,10 @@ you should place your code here."
     ;;always y or n
     (defalias 'yes-or-no-p 'y-or-n-p)
 
+    (setq real-auto-save-interval 1)
     ;;}}}***********************************************************
 
+    (zpwr/compHook)
     (message "end user-c")
 
   )
