@@ -508,6 +508,7 @@ key_bindings:
   - { key: E,        mods: Alt,     chars: "\x1be"                       }
   - { key: F,        mods: Alt,     chars: "\x1bf"                       }
   - { key: G,        mods: Alt,     chars: "\x1bg"                       }
+  - { key: V,        mods: Alt,     chars: "\x1bv"                       }
   - { key: 9,        mods: Alt,     chars: "\x1b9"                       }
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }

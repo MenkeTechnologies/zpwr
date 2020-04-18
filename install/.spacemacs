@@ -354,7 +354,6 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
     (setq vc-follow-symlinks t)
-    (define-coding-system-alias 'UTF-8 'utf-8)
 
     ;;{{{                    MARK:message buffer timestamps
     ;;**************************************************************
@@ -388,34 +387,20 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-    ;;eager load deps
+
+    ;;{{{                    MARK:eager load
+    ;;**************************************************************
     (require 'company)
     (require 'yasnippet)
-    (require 'real-auto-save)
     (require 'perspective)
     (require 'highlight-indent-guides)
     (require 'noflet)
     (require 'company-shell)
+    (require 'whitespace)
+    ;;}}}***********************************************************
 
-
-    ;;{{{                    MARK:keybindings
+    ;;{{{                    MARK:zpwr func
     ;;**************************************************************
-
-    (setq zpwr/inc 4)
-
-    (evil-define-motion zpwr/up-four ()
-     (evil-previous-visual-line (symbol-value 'zpwr/inc))
-     )
-    (evil-define-motion zpwr/right-four ()
-     (evil-backward-char (symbol-value 'zpwr/inc))
-     )
-    (evil-define-motion zpwr/left-four ()
-     (evil-forward-char (symbol-value 'zpwr/inc))
-     )
-    (evil-define-motion zpwr/down-four ()
-     (evil-next-visual-line (symbol-value 'zpwr/inc))
-     )
-
     (defun zpwr/bypass-confirmation-all (function &rest args)
         "Call FUNCTION with ARGS, bypassing all prompts.
         This includes both `y-or-n-p' and `yes-or-no-p'."
@@ -466,6 +451,27 @@ you should place your code here."
                 (message "graphics active")))
         (insert (shell-command-to-string (getenv "ZPWR_PASTE_CMD"))))
       )
+    ;;}}}***********************************************************
+
+
+    ;;{{{                    MARK:keybindings
+    ;;**************************************************************
+
+    (setq zpwr/inc 4)
+
+    (evil-define-motion zpwr/up-four ()
+     (evil-previous-visual-line (symbol-value 'zpwr/inc))
+     )
+    (evil-define-motion zpwr/right-four ()
+     (evil-backward-char (symbol-value 'zpwr/inc))
+     )
+    (evil-define-motion zpwr/left-four ()
+     (evil-forward-char (symbol-value 'zpwr/inc))
+     )
+    (evil-define-motion zpwr/down-four ()
+     (evil-next-visual-line (symbol-value 'zpwr/inc))
+     )
+
 
     (define-key evil-visual-state-map (kbd "C-j") 'zpwr/down-four)
     (define-key evil-visual-state-map (kbd "C-k") 'zpwr/up-four)
@@ -501,43 +507,34 @@ you should place your code here."
     (spacemacs/set-leader-keys (kbd "gc") 'magit-commit)
     (spacemacs/set-leader-keys (kbd "gp") 'magit-push)
 
+    (if (featurep 'ns)
+        (progn
+            (global-set-key (kbd "<mouse-4>") (kbd "<wheel-up>"))
+            (global-set-key (kbd "<mouse-5>") (kbd "<wheel-down>"))))
     ;;}}}***********************************************************
 
-
-    ;;{{{                    MARK:plugin config
+    ;;{{{                    MARK:line numbers
     ;;**************************************************************
 
     (setq display-line-numbers-width 4)
     (setq display-line-numbers-type t)
     (global-display-line-numbers-mode)
-
     ;;}}}***********************************************************
 
-
-    ;;{{{                    MARK:emacs config
+    ;;{{{                    MARK:auto save
     ;;**************************************************************
-    ;; no #files#
-    (setq make-backup-files nil)
-    (setq auto-save-default nil)
-    (setq create-lockfiles nil)
+    (with-eval-after-load 'real-auto-save
+     (progn
+        (add-hook 'prog-mode-hook 'real-auto-save-mode)
+        ;; in seconds
+        (setq real-auto-save-interval 1)
+        (real-auto-save-activate-advice)
+        (real-auto-save-mode)
+     ))
+    ;;}}}***********************************************************
 
-    (require 'real-auto-save)
-    (add-hook 'prog-mode-hook 'real-auto-save-mode)
-    ;; in seconds
-    (setq real-auto-save-interval 0.2)
-
-
-
-    (with-eval-after-load 'company
-    (company-ctags-auto-setup))
-    (setq company-ctags-extra-tags-files '("$HOME/etags"))
-    (setq company-ctags-fuzzy-match-p t)
-    (require 'whitespace)
-
-    (setq whitespace-display-mappings '((space-mark 32 [?·]) (tab-mark 32 [?·])))
-    (setq whitespace-style '(face trailing space-mark tab-mark))
-
-
+    ;;{{{                    MARK:auto hl
+        ;;**************************************************************
     (defun autoHighlight () (cond
       ((eq evil-state 'normal)
        (ignore-errors
@@ -549,22 +546,23 @@ you should place your code here."
         )))))
 
     (add-hook 'post-command-hook #'autoHighlight)
-
-    (setq-default indent-tabs-mode nil)
-    (setq-default tab-width 4)
-      (if (featurep 'ns)
-      (progn
-        (global-set-key (kbd "<mouse-4>") (kbd "<wheel-up>"))
-        (global-set-key (kbd "<mouse-5>") (kbd "<wheel-down>"))))
-
     ;;}}}***********************************************************
+
+
+
+    ;;{{{                    MARK:company tab completion
+    ;;**************************************************************
+
+    (with-eval-after-load 'company
+        (company-ctags-auto-setup)
+    )
+
+    (setq company-ctags-fuzzy-match-p t)
 
     (setq pcomplete-ignore-case t)
     (setq company-dabbrev-downcase nil)
     (setq company-dabbrev-code-ignore-case t)
 
-    ;;{{{                    MARK:company tab completion
-    ;;**************************************************************
    (use-package company
      :hook (init)
      :config (global-company-mode t)
@@ -674,31 +672,39 @@ you should place your code here."
     ;;^J up and ^D already
     (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
     (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
+
+
+    ;;}}}***********************************************************
+
+    ;;{{{                    MARK:helm
+    ;;**************************************************************
+    (with-eval-after-load 'helm
+     (progn
+        (define-key helm-map (kbd "C-n") 'helm-next-page)
+        (define-key helm-map (kbd "C-p") 'helm-previous-page)
+      )
+
+    )
     ;;}}}***********************************************************
 
 
-    ;;{{{                    MARK:misc config
+
+    ;;{{{                    MARK:yas config
     ;;**************************************************************
-    (real-auto-save-activate-advice)
-    (real-auto-save-mode)
-
-    (add-to-list 'company-backends 'company-plsense)
-
-    (persp-mode)
-
-    (setq persp-state-default-file "~/.persp.txt")
-    (add-hook 'kill-emacs-hook #'persp-state-save)
-
-    (persp-mode)
-
-    (setq persp-state-default-file "~/.persp.txt")
-    (add-hook 'kill-emacs-hook #'persp-state-save)
-
-    ;;(desktop-save-mode 1)
 
     (yas-global-mode 1)
 
     ;;}}}***********************************************************
+
+
+    ;;{{{                    MARK:persp config
+    ;;**************************************************************
+    (persp-mode)
+
+    (setq persp-state-default-file "~/.persp.txt")
+    (add-hook 'kill-emacs-hook #'persp-state-save)
+    ;;}}}***********************************************************
+
 
     ;;{{{                    MARK:Setup shell company backends
     ;;**************************************************************
@@ -728,6 +734,21 @@ you should place your code here."
     (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
 
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
+    ;;}}}***********************************************************
+
+    ;;{{{                    MARK:emacs config
+    ;;**************************************************************
+    ;; no #files#
+    (setq make-backup-files nil)
+    (setq auto-save-default nil)
+    (setq create-lockfiles nil)
+    (setq whitespace-display-mappings '((space-mark 32 [?·]) (tab-mark 32 [?·])))
+    (setq whitespace-style '(face trailing space-mark tab-mark))
+    (define-coding-system-alias 'UTF-8 'utf-8)
+
+    (setq-default indent-tabs-mode nil)
+    (setq-default tab-width 4)
 
     ;;always y or n
     (defalias 'yes-or-no-p 'y-or-n-p)
