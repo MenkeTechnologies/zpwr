@@ -495,9 +495,10 @@ you should place your code here."
 
     (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
 
-    (spacemacs/set-leader-keys (kbd "al") 'spotify-next)
+    (spacemacs/set-leader-keys (kbd "a.") 'spotify-play-pause)
 
-    (spacemacs/set-leader-keys (kbd "aa") 'spotify-previous)
+    (spacemacs/set-leader-keys (kbd "aa") 'spotify-next)
+    (spacemacs/set-leader-keys (kbd "al") 'spotify-previous)
 
     (spacemacs/set-leader-keys (kbd "wq") 'delete-window)
 
