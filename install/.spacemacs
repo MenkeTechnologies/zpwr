@@ -622,17 +622,17 @@ you should place your code here."
 
     (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
 
-    (spacemacs/set-leader-keys (kbd "a.") 'spotify-playpause)
+    (spacemacs/set-leader-keys (kbd "o.") 'spotify-playpause)
 
-    (spacemacs/set-leader-keys (kbd "aa") 'spotify-next)
-    (spacemacs/set-leader-keys (kbd "al") 'spotify-previous)
+    (spacemacs/set-leader-keys (kbd "oa") 'spotify-next)
+    (spacemacs/set-leader-keys (kbd "ol") 'spotify-previous)
 
     (spacemacs/set-leader-keys (kbd "wq") 'delete-window)
 
-    (spacemacs/set-leader-keys (kbd "zz") 'suspend-emacs)
+    (spacemacs/set-leader-keys (kbd "oz") 'suspend-emacs)
 
-    (spacemacs/set-leader-keys "o y" 'zpwr/copy-to-clipboard)
-    (spacemacs/set-leader-keys "o p" 'zpwr/paste-from-clipboard)
+    (spacemacs/set-leader-keys (kbd "oy") 'zpwr/copy-to-clipboard)
+    (spacemacs/set-leader-keys (kbd "op") 'zpwr/paste-from-clipboard)
 
     (defun zpwr/sb ()
      (interactive)
@@ -691,7 +691,7 @@ you should place your code here."
         ((((type x)) (:inherit company-tooltip-selection :weight bold))
          (t (:inherit company-tooltip-selection))))))
 
-    (setq company-minimum-prefix-length 0)
+    (setq company-minimum-prefix-length 1)
 
     (defun check-expansion ()
         (save-excursion
