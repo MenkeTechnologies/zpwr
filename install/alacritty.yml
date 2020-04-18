@@ -497,7 +497,17 @@ key_bindings:
   #- { key: W,      mods: Command,         action: Quit             }
   #- { key: F,      mods: Command|Control, action: ToggleFullscreen }
 
+  - { key: Space,    mods: Control, chars: "\x00"                        }
   - { key: 0,        mods: Alt,     chars: "\x1b0"                       }
+  - { key: 1,        mods: Alt,     chars: "\x1b1"                       }
+  - { key: 2,        mods: Alt,     chars: "\x1b2"                       }
+  - { key: A,        mods: Alt,     chars: "\x1ba"                       }
+  - { key: B,        mods: Alt,     chars: "\x1bb"                       }
+  - { key: C,        mods: Alt,     chars: "\x1bc"                       }
+  - { key: D,        mods: Alt,     chars: "\x1bd"                       }
+  - { key: E,        mods: Alt,     chars: "\x1be"                       }
+  - { key: F,        mods: Alt,     chars: "\x1bf"                       }
+  - { key: G,        mods: Alt,     chars: "\x1bg"                       }
   - { key: 9,        mods: Alt,     chars: "\x1b9"                       }
   - { key: Paste,                   action: Paste                            }
   - { key: Copy,                    action: Copy                             }
