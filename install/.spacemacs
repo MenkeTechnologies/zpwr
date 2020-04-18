@@ -508,7 +508,7 @@ you should place your code here."
     ;;**************************************************************
 
     (setq display-line-numbers-width 4)
-    (setq display-line-numbers-type 'relative)
+    (setq display-line-numbers-type t)
     (global-display-line-numbers-mode)
 
     ;;}}}***********************************************************
@@ -590,7 +590,7 @@ you should place your code here."
         ((((type x)) (:inherit company-tooltip-selection :weight bold))
          (t (:inherit company-tooltip-selection))))))
 
-    (setq company-minimum-prefix-length 1)
+    (setq company-minimum-prefix-length 0)
 
     (defun check-expansion ()
   (save-excursion
@@ -673,6 +673,7 @@ you should place your code here."
 
     ;;^J up and ^D already
     (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
+    (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
     ;;}}}***********************************************************
 
 
