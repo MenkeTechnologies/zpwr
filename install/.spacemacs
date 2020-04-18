@@ -353,6 +353,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
     (setq vc-follow-symlinks t)
+    (define-coding-system-alias 'UTF-8 'utf-8)
 
     ;;{{{                    MARK:message buffer timestamps
     ;;**************************************************************
@@ -540,7 +541,7 @@ you should place your code here."
         ((((type x)) (:inherit company-tooltip-selection :weight bold))
          (t (:inherit company-tooltip-selection))))))
 
-    (setq company-minimum-prefix-length 0)
+    (setq company-minimum-prefix-length 1)
 
     (defun check-expansion ()
   (save-excursion
