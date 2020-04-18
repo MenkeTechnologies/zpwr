@@ -393,6 +393,7 @@ you should place your code here."
     (require 'perspective)
     (require 'highlight-indent-guides)
     (require 'noflet)
+    (require 'company-shell)
 
 
     ;;{{{                    MARK:keybindings
@@ -452,7 +453,6 @@ you should place your code here."
 
     (spacemacs/set-leader-keys (kbd "zz") 'suspend-emacs)
     ;;}}}***********************************************************
-
 
 
     ;;{{{                    MARK:plugin config
@@ -614,10 +614,15 @@ you should place your code here."
     (define-key yas-keymap [(control tab)] 'yas-next-field)
     (define-key yas-keymap (kbd "C-g") 'abort-company-or-yas)
 
+    (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
+
     ;;real tab
     (define-key evil-normal-state-map (kbd "TAB") 'evil-jump-forward)
     ;;^I
     (define-key evil-normal-state-map [tab] 'evil-jump-forward)
+
+    ;;^J up and ^D already
+    (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
     ;;}}}***********************************************************
 
 
@@ -627,10 +632,11 @@ you should place your code here."
     (real-auto-save-mode)
 
     (add-to-list 'company-backends 'company-plsense)
-    (add-hook 'perl-mode-hook 'company-mode)
-    (add-hook 'cperl-mode-hook 'company-mode)
 
-    (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
+    (persp-mode)
+
+    (setq persp-state-default-file "~/.persp.txt")
+    (add-hook 'kill-emacs-hook #'persp-state-save)
 
     (persp-mode)
 
@@ -641,15 +647,23 @@ you should place your code here."
 
     (yas-global-mode 1)
 
-
-    ;;(setq yas-snippet-dirs
-    ;;  '("~/.emacs.d/private/snippets"                 ;; personal snippets
-     ;;   "/path/to/some/collection/"           ;; foo-mode and bar-mode snippet collection
-     ;;   "/path/to/yasnippet/yasmate/snippets" ;; the yasmate collection
-      ;;  ))
-
-
     ;;}}}***********************************************************
+
+    ;;{{{                    MARK:Setup shell company backends
+    ;;**************************************************************
+     (setq company-backends-sh-mode '(
+            (company-dabbrev-code
+            company-dabbrev
+            company-gtags
+            company-shell-env
+            company-files
+            company-shell
+            :with
+            company-yasnippet
+            company-keywords
+            )
+     ))
+     ;;}}}***********************************************************
 
     ;;{{{                    MARK:indent guides
     ;;**************************************************************
