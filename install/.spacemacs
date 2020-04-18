@@ -397,6 +397,7 @@ you should place your code here."
     (require 'noflet)
     (require 'company-shell)
     (require 'whitespace)
+    (require 'real-auto-save)
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:zpwr func
@@ -475,6 +476,7 @@ you should place your code here."
 
     (define-key evil-visual-state-map (kbd "C-j") 'zpwr/down-four)
     (define-key evil-visual-state-map (kbd "C-k") 'zpwr/up-four)
+
     (define-key evil-visual-state-map (kbd "C-h") 'zpwr/right-four)
     (define-key evil-visual-state-map (kbd "C-l") 'zpwr/left-four)
 
@@ -521,16 +523,6 @@ you should place your code here."
     (global-display-line-numbers-mode)
     ;;}}}***********************************************************
 
-    ;;{{{                    MARK:auto save
-    ;;**************************************************************
-    (with-eval-after-load 'real-auto-save
-     (progn
-        ;; in seconds
-        (setq real-auto-save-interval 1)
-        (real-auto-save-activate-advice)
-        (real-auto-save-mode)
-     ))
-    ;;}}}***********************************************************
 
     ;;{{{                    MARK:auto hl
         ;;**************************************************************
@@ -689,6 +681,16 @@ you should place your code here."
         (global-set-key (kbd "C-SPC") 'company-complete)
         (local-set-key (kbd "C-SPC") 'company-complete)
         (message "company init done")
+        ;; in seconds
+        ;;{{{                    MARK:auto save
+        ;;**************************************************************
+
+        (setq real-auto-save-interval 1)
+        (real-auto-save-activate-advice)
+        (real-auto-save-mode)
+        (message "real autosave init done")
+
+        ;;}}}***********************************************************
      )
 
     (defun zpwr/shHook ()
@@ -737,21 +739,6 @@ you should place your code here."
     ;;}}}***********************************************************
 
 
-    ;;{{{                    MARK:Setup shell company backends
-    ;;**************************************************************
-     (setq company-backends-sh-mode '(
-            (company-dabbrev-code
-            company-dabbrev
-            company-ctags
-            company-shell-env
-            company-files
-            company-shell
-            :with
-            company-yasnippet
-            company-keywords
-            )
-     ))
-     ;;}}}***********************************************************
 
     ;;{{{                    MARK:indent guides
     ;;**************************************************************
