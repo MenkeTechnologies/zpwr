@@ -693,10 +693,26 @@ you should place your code here."
         ;;}}}***********************************************************
      )
 
+    ;;{{{                    MARK:Setup shell company backends
+    ;;**************************************************************
+
     (defun zpwr/shHook ()
+      (setq-local company-backends-sh-mode '(
+                                       (company-dabbrev-code
+                                        company-dabbrev
+                                        company-ctags
+                                        company-shell-env
+                                        company-files
+                                        company-shell
+                                        :with
+                                        company-yasnippet
+                                        company-keywords
+                                        )
+                                       ))
      (progn
         (message "sh init done"))
     )
+    ;;}}}***********************************************************
 
     (defun zpwr/perlHook ()
      (progn
