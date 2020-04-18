@@ -93,6 +93,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(yasnippet yasnippet-snippets
            ag
+           helm-ag
            helm-rg
            company-ycmd
            real-auto-save
