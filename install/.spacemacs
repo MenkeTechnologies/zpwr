@@ -525,7 +525,6 @@ you should place your code here."
     ;;**************************************************************
     (with-eval-after-load 'real-auto-save
      (progn
-        (add-hook 'prog-mode-hook 'real-auto-save-mode)
         ;; in seconds
         (setq real-auto-save-interval 1)
         (real-auto-save-activate-advice)
@@ -557,11 +556,6 @@ you should place your code here."
         (company-ctags-auto-setup)
     )
 
-    (setq company-ctags-fuzzy-match-p t)
-
-    (setq pcomplete-ignore-case t)
-    (setq company-dabbrev-downcase nil)
-    (setq company-dabbrev-code-ignore-case t)
 
    (use-package company
      :hook (init)
@@ -591,61 +585,61 @@ you should place your code here."
     (setq company-minimum-prefix-length 0)
 
     (defun check-expansion ()
-  (save-excursion
-    (if (looking-at "\\_>") t
-      (backward-char 1)
-      (if (looking-at "\\.") t
-    (backward-char 1)
-    (if (looking-at "->") t nil)))))
+        (save-excursion
+        (if (looking-at "\\_>") t
+        (backward-char 1)
+        (if (looking-at "\\.") t
+        (backward-char 1)
+        (if (looking-at "->") t nil)))))
 
     (defun do-yas-expand ()
-    (let ((yas/fallback-behavior 'return-nil))
-        (yas/expand)))
+        (let ((yas/fallback-behavior 'return-nil))
+            (yas/expand)))
 
     (defun tab-indent-or-complete ()
-    (interactive)
-    (cond
-    ((minibufferp)
-        (minibuffer-complete))
-    (t
-        (indent-for-tab-command)
-        (if (or (not yas/minor-mode)
-            (null (do-yas-expand)))
-        (if (check-expansion)
-            (progn
-            (company-manual-begin)
-            (if (null company-candidates)
-            (progn
-                (company-abort)
-                (indent-for-tab-command)))))))))
+        (interactive)
+        (cond
+        ((minibufferp)
+            (minibuffer-complete))
+        (t
+            (indent-for-tab-command)
+            (if (or (not yas/minor-mode)
+                (null (do-yas-expand)))
+            (if (check-expansion)
+                (progn
+                (company-manual-begin)
+                (if (null company-candidates)
+                (progn
+                    (company-abort)
+                    (indent-for-tab-command)))))))))
 
     (defun tab-complete-or-next-field ()
-    (interactive)
-    (if (or (not yas/minor-mode)
-        (null (do-yas-expand)))
-        (if company-candidates
-        (company-complete-selection)
-        (if (check-expansion)
-        (progn
-            (company-manual-begin)
-            (if (null company-candidates)
+        (interactive)
+        (if (or (not yas/minor-mode)
+            (null (do-yas-expand)))
+            (if company-candidates
+            (company-complete-selection)
+            (if (check-expansion)
             (progn
-            (company-abort)
-            (yas-next-field))))
-        (yas-next-field)))))
+                (company-manual-begin)
+                (if (null company-candidates)
+                (progn
+                (company-abort)
+                (yas-next-field))))
+            (yas-next-field)))))
 
     (defun expand-snippet-or-complete-selection ()
-    (interactive)
-    (if (or (not yas/minor-mode)
-        (null (do-yas-expand))
-        (company-abort))
-        (company-complete-selection)))
+        (interactive)
+        (if (or (not yas/minor-mode)
+            (null (do-yas-expand))
+            (company-abort))
+            (company-complete-selection)))
 
     (defun abort-company-or-yas ()
-    (interactive)
-    (if (null company-candidates)
-        (yas-abort-snippet)
-        (company-abort)))
+        (interactive)
+        (if (null company-candidates)
+            (yas-abort-snippet)
+            (company-abort)))
 
     (define-key evil-insert-state-map [tab] 'tab-indent-or-complete)
 
@@ -673,6 +667,17 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
     (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 
+    (defun zpwr/compHook ()
+     (progn
+        (setq-local completion-ignore t))
+        (setq-local company-ctags-fuzzy-match-p t)
+        (setq-local pcomplete-ignore-case t)
+        (setq-local company-dabbrev-downcase nil)
+        (setq-local company-dabbrev-code-ignore-case t)
+        (setq-local company-dabbrev-ignore-case t)
+     )
+
+    (add-hook 'prog-mode-hook #'zpwr/compHook)
 
     ;;}}}***********************************************************
 
