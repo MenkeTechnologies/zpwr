@@ -1643,9 +1643,14 @@ bindkey -M menuselect '\e[5~' vi-backward-word
 bindkey -M menuselect '\e[6~' vi-forward-word
 bindkey -M menuselect '\e[1~' vi-beginning-of-line
 bindkey -M menuselect '\e[4~' vi-end-of-line
-#just like in vimrc
-bindkey -M menuselect '^K' vi-backward-word
-bindkey -M menuselect '^J' vi-forward-word
+
+# like helm
+bindkey -M menuselect '^J' down-history
+bindkey -M menuselect '^K' up-history
+
+bindkey -M menuselect '^P' vi-backward-word
+bindkey -M menuselect '^N' vi-forward-word
+
 bindkey -M menuselect '^H' vi-beginning-of-line
 bindkey -M menuselect '^L' vi-end-of-line
 #search through options
