@@ -2900,11 +2900,18 @@ function vimEmacsConfig(){
     isGitDir && git diff HEAD
 }
 
+function emacsZpwr(){
+
+    builtin cd $ZPWR
+    ${=ZPWR_EMACS} .
+    clearList
+    isGitDir && git diff HEAD
+}
 function emacsAll(){
 
     builtin cd $ZPWR
     ${=ZPWR_EMACS} \
-    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc} \
+    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR/"*.md \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
@@ -2925,7 +2932,7 @@ function vimAll(){
 
     builtin cd $ZPWR
     vim \
-    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc} \
+    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR/"*.md \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
