@@ -667,10 +667,21 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-e") 'company-complete)
     (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
 
+    (defvar company-mode/enable-yas t)
+
+    (defun company-mode/backend-with-yas (backend)
+        (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+            backend
+            (append (if (consp backend) backend (list backend))
+                '(:with company-yasnippet))))
+
+    (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+
     (defun zpwr/compHook ()
      (progn
-        (setq-local completion-ignore t))
+        (setq-local completion-ignore-case t))
         (setq-local company-ctags-fuzzy-match-p t)
+        (setq-local company-ctags-ignore-case t)
         (setq-local pcomplete-ignore-case t)
         (setq-local company-dabbrev-downcase nil)
         (setq-local company-dabbrev-code-ignore-case t)
@@ -680,7 +691,19 @@ you should place your code here."
         (message "company init done")
      )
 
+    (defun zpwr/shHook ()
+     (progn
+        (message "sh init done"))
+    )
+
+    (defun zpwr/perlHook ()
+     (progn
+        (message "perl init done"))
+    )
+
     (add-hook 'prog-mode-hook #'zpwr/compHook)
+    (add-hook 'perl-mode-hook #'zpwr/perlHook)
+    (add-hook 'sh-mode-hook #'zpwr/shHook)
 
     ;;}}}***********************************************************
 
@@ -719,7 +742,7 @@ you should place your code here."
      (setq company-backends-sh-mode '(
             (company-dabbrev-code
             company-dabbrev
-            company-gtags
+            company-ctags
             company-shell-env
             company-files
             company-shell
