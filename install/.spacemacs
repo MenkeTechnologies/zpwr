@@ -378,28 +378,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (advice-add 'message :before 'sh/ad-timestamp-message)
     ;;}}}***********************************************************
 
-  )
-
-(defun dotspacemacs/user-config ()
-  "Configuration function for user code.
-This function is called at the very end of Spacemacs initialization after
-layers configuration.
-This is the place where most of your configurations should be done. Unless it is
-explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
-
-    ;;{{{                    MARK:eager load
-    ;;**************************************************************
-    (require 'company)
-    (require 'yasnippet)
-    (require 'perspective)
-    (require 'highlight-indent-guides)
-    (require 'noflet)
-    (require 'company-shell)
-    (require 'whitespace)
-    (require 'real-auto-save)
-    ;;}}}***********************************************************
-
     ;;{{{                    MARK:zpwr func
     ;;**************************************************************
     (defun zpwr/bypass-confirmation-all (function &rest args)
@@ -453,6 +431,127 @@ you should place your code here."
         (insert (shell-command-to-string (getenv "ZPWR_PASTE_CMD"))))
       )
     ;;}}}***********************************************************
+
+
+    ;;{{{                    MARK:Setup shell company backends
+    ;;**************************************************************
+
+    (defun zpwr/compHook ()
+     (progn
+        (setq-local completion-ignore-case t))
+        (setq-local company-ctags-fuzzy-match-p t)
+        (setq-local company-ctags-ignore-case t)
+        (setq-local pcomplete-ignore-case t)
+        (setq-local company-dabbrev-downcase nil)
+        (setq-local company-dabbrev-code-ignore-case t)
+        (setq-local company-dabbrev-ignore-case t)
+        (global-set-key (kbd "C-SPC") 'company-complete)
+        (local-set-key (kbd "C-SPC") 'company-complete)
+        (message "company init done")
+        ;; in seconds
+        ;;{{{                    MARK:auto save
+        ;;**************************************************************
+
+        (setq real-auto-save-interval 1)
+        (real-auto-save-activate-advice)
+        (real-auto-save-mode)
+        (message "real autosave init done")
+
+        ;;}}}***********************************************************
+     )
+
+    (defun zpwr/shHook ()
+      (setq-local company-backends-sh-mode '(
+                                       (company-dabbrev-code
+                                        company-dabbrev
+                                        company-ctags
+                                        company-shell-env
+                                        company-files
+                                        company-shell
+                                        :with
+                                        company-yasnippet
+                                        company-keywords
+                                        )
+                                       ))
+     (progn
+        (message "sh init done"))
+    )
+    ;;}}}***********************************************************
+
+    (defun zpwr/perlHook ()
+     (progn
+        (message "perl init done"))
+    )
+
+  (defun zpwr/reload ()
+
+    (interactive)
+    (progn
+      (zpwr/shHook)
+      (zpwr/compHook)
+      )
+    )
+
+  (defun my-ielm-mode-defaults ()
+    (turn-on-eldoc-mode))
+
+  (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
+
+  (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
+
+    (with-eval-after-load 'company
+     (progn
+        (add-hook 'prog-mode-hook #'zpwr/compHook)
+        (add-hook 'perl-mode-hook #'zpwr/perlHook)
+        (add-hook 'sh-mode-hook #'zpwr/shHook)
+      )
+    )
+
+    ;;{{{                    MARK:auto hl
+    ;;**************************************************************
+    (defun autoHighlight () (cond
+      ((eq evil-state 'normal)
+       (ignore-errors
+        (progn
+         (highlight-symbol-remove-all)
+         (let ((inhibit-message t))
+            (highlight-symbol)
+          )
+        )))))
+
+    (add-hook 'post-command-hook #'autoHighlight)
+    ;;}}}***********************************************************
+
+    (with-eval-after-load 'persp
+        (add-hook 'kill-emacs-hook #'persp-state-save)
+    )
+
+    (with-eval-after-load 'highlight-indent-guides
+        (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+
+)
+
+
+(defun dotspacemacs/user-config ()
+  "Configuration function for user code.
+This function is called at the very end of Spacemacs initialization after
+layers configuration.
+This is the place where most of your configurations should be done. Unless it is
+explicitly specified that a variable should be set before a package is loaded,
+you should place your code here."
+
+    ;;{{{                    MARK:eager load
+    ;;**************************************************************
+    (require 'company)
+    (require 'yasnippet)
+    (require 'perspective)
+    (require 'highlight-indent-guides)
+    (require 'noflet)
+    (require 'company-shell)
+    (require 'whitespace)
+    (require 'real-auto-save)
+    ;;}}}***********************************************************
+
 
 
     ;;{{{                    MARK:keybindings
@@ -525,30 +624,12 @@ you should place your code here."
     ;;}}}***********************************************************
 
 
-    ;;{{{                    MARK:auto hl
-        ;;**************************************************************
-    (defun autoHighlight () (cond
-      ((eq evil-state 'normal)
-       (ignore-errors
-        (progn
-         (highlight-symbol-remove-all)
-         (let ((inhibit-message t))
-            (highlight-symbol)
-          )
-        )))))
-
-    (add-hook 'post-command-hook #'autoHighlight)
-    ;;}}}***********************************************************
-
-
-
     ;;{{{                    MARK:company tab completion
     ;;**************************************************************
 
     (with-eval-after-load 'company
         (company-ctags-auto-setup)
     )
-
 
    (use-package company
      :hook (init)
@@ -670,75 +751,6 @@ you should place your code here."
 
     (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
-    (defun zpwr/compHook ()
-     (progn
-        (setq-local completion-ignore-case t))
-        (setq-local company-ctags-fuzzy-match-p t)
-        (setq-local company-ctags-ignore-case t)
-        (setq-local pcomplete-ignore-case t)
-        (setq-local company-dabbrev-downcase nil)
-        (setq-local company-dabbrev-code-ignore-case t)
-        (setq-local company-dabbrev-ignore-case t)
-        (global-set-key (kbd "C-SPC") 'company-complete)
-        (local-set-key (kbd "C-SPC") 'company-complete)
-        (message "company init done")
-        ;; in seconds
-        ;;{{{                    MARK:auto save
-        ;;**************************************************************
-
-        (setq real-auto-save-interval 1)
-        (real-auto-save-activate-advice)
-        (real-auto-save-mode)
-        (message "real autosave init done")
-
-        ;;}}}***********************************************************
-     )
-
-    ;;{{{                    MARK:Setup shell company backends
-    ;;**************************************************************
-
-    (defun zpwr/shHook ()
-      (setq-local company-backends-sh-mode '(
-                                       (company-dabbrev-code
-                                        company-dabbrev
-                                        company-ctags
-                                        company-shell-env
-                                        company-files
-                                        company-shell
-                                        :with
-                                        company-yasnippet
-                                        company-keywords
-                                        )
-                                       ))
-     (progn
-        (message "sh init done"))
-    )
-    ;;}}}***********************************************************
-
-    (defun zpwr/perlHook ()
-     (progn
-        (message "perl init done"))
-    )
-
-  (defun zpwr/reload ()
-
-    (interactive)
-    (progn
-      (zpwr/shHook)
-      (zpwr/compHook)
-      )
-    )
-
-  (defun my-ielm-mode-defaults ()
-    (turn-on-eldoc-mode))
-
-  (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
-
-  (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
-
-    (add-hook 'prog-mode-hook #'zpwr/compHook)
-    (add-hook 'perl-mode-hook #'zpwr/perlHook)
-     (add-hook 'sh-mode-hook #'zpwr/shHook)
 
     ;;}}}***********************************************************
 
@@ -754,7 +766,6 @@ you should place your code here."
     ;;}}}***********************************************************
 
 
-
     ;;{{{                    MARK:yas config
     ;;**************************************************************
 
@@ -765,10 +776,11 @@ you should place your code here."
 
     ;;{{{                    MARK:persp config
     ;;**************************************************************
-    (persp-mode)
 
+    (persp-mode)
     (setq persp-state-default-file "~/.persp.txt")
-    (add-hook 'kill-emacs-hook #'persp-state-save)
+
+
     ;;}}}***********************************************************
 
 
@@ -784,7 +796,6 @@ you should place your code here."
 
     (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
 
-    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
 
     ;;}}}***********************************************************
 
