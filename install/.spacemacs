@@ -720,6 +720,14 @@ you should place your code here."
         (message "perl init done"))
     )
 
+  (defun zpwr/reload ()
+    (interactive)
+    (progn
+      (zpwr/shHook)
+      (zpwr/compHook)
+      )
+    )
+
     (add-hook 'prog-mode-hook #'zpwr/compHook)
     (add-hook 'perl-mode-hook #'zpwr/perlHook)
      (add-hook 'sh-mode-hook #'zpwr/shHook)
@@ -794,7 +802,7 @@ you should place your code here."
   )
 
 
-;; Do not write anything past this comment. This is where Emacs will
+;; DO not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
