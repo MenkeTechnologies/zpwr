@@ -634,6 +634,13 @@ you should place your code here."
     (spacemacs/set-leader-keys "o y" 'zpwr/copy-to-clipboard)
     (spacemacs/set-leader-keys "o p" 'zpwr/paste-from-clipboard)
 
+    (defun zpwr/sb ()
+     (interactive)
+        (switch-to-buffer-other-window "*Messages*")
+     )
+
+    (spacemacs/set-leader-keys (kbd "mm") 'zpwr/sb)
+
     (spacemacs/set-leader-keys (kbd "gc") 'magit-commit)
     (spacemacs/set-leader-keys (kbd "gp") 'magit-push)
 
