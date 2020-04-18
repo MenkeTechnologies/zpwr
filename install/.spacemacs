@@ -513,10 +513,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
       )
     )
 
-  (defun my-ielm-mode-defaults ()
-    (turn-on-eldoc-mode))
+    (defun my-ielm-mode-defaults ()
+    (progn
+        (turn-on-eldoc-mode)
+        (message "hooked eldoc")
+        ))
 
-  (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
+    (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
 
     (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
     (add-hook 'prog-mode-hook 'zpwr/compHook)
@@ -525,7 +528,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;{{{                    MARK:auto hl
     ;;**************************************************************
-    (defun zpwr/autoHighlight ()
+   (defun zpwr/autoHighlight ()
     (with-eval-after-load 'highlight-symbol
      (cond
       ((eq evil-state 'normal)
@@ -562,12 +565,9 @@ you should place your code here."
     ;;**************************************************************
     (require 'company)
     (require 'yasnippet)
-    (require 'perspective)
-    (require 'highlight-indent-guides)
     (require 'noflet)
     (require 'company-shell)
     (require 'whitespace)
-    (require 'real-auto-save)
     ;;}}}***********************************************************
 
 
@@ -795,8 +795,11 @@ you should place your code here."
     ;;{{{                    MARK:persp config
     ;;**************************************************************
 
-    (persp-mode)
-    (setq persp-state-default-file "~/.persp.txt")
+    (with-eval-after-load 'perspective
+     (progn
+        (persp-mode)
+        (setq persp-state-default-file "~/.persp.txt")
+      ))
 
 
     ;;}}}***********************************************************
