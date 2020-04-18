@@ -639,7 +639,7 @@ you should place your code here."
         (switch-to-buffer-other-window "*Messages*")
      )
 
-    (spacemacs/set-leader-keys (kbd "mm") 'zpwr/sb)
+    (spacemacs/set-leader-keys (kbd "om") 'zpwr/sb)
 
     (spacemacs/set-leader-keys (kbd "gc") 'magit-commit)
     (spacemacs/set-leader-keys (kbd "gp") 'magit-push)
