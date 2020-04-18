@@ -353,6 +353,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+    (message "start user-i")
     (setq vc-follow-symlinks t)
 
     ;;{{{                    MARK:message buffer timestamps
@@ -438,7 +439,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     (defun zpwr/compHook ()
      (progn
-        (setq-local completion-ignore-case t))
+        (setq-local completion-ignore-case t)
         (setq-local company-ctags-fuzzy-match-p t)
         (setq-local company-ctags-ignore-case t)
         (setq-local pcomplete-ignore-case t)
@@ -452,16 +453,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
         ;;{{{                    MARK:auto save
         ;;**************************************************************
 
-        (setq real-auto-save-interval 1)
-        (real-auto-save-activate-advice)
-        (real-auto-save-mode)
-        (message "real autosave init done")
-
+        (with-eval-after-load 'real-auto-save
+            (setq real-auto-save-interval 1)
+            (real-auto-save-activate-advice)
+            (real-auto-save-mode)
+            (message "real autosave init done")
+        ))
         ;;}}}***********************************************************
      )
 
     (defun zpwr/shHook ()
-      (setq-local company-backends-sh-mode '(
+      (setq company-backends-sh-mode '(
                                        (company-dabbrev-code
                                         company-dabbrev
                                         company-ctags
@@ -474,14 +476,33 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                         )
                                        ))
      (progn
-        (message "sh init done"))
-    )
+        (message "shell init done")
+        ))
     ;;}}}***********************************************************
+    (defun zpwr/indentHook ()
+        (with-eval-after-load 'highlight-indent-guides
+         (progn
+            ;;{{{                    MARK:indent guides
+            ;;**************************************************************
+            (setq highlight-indent-guides-method 'character)
+            (setq highlight-indent-guides-character ?\|)
+
+            (setq highlight-indent-guides-responsive 'top)
+            (setq highlight-indent-guides-delay 0.3)
+            (setq highlight-indent-guides-auto-enabled nil)
+
+            (highlight-indent-guides-mode)
+            (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
+            (message "highlight indent guides init done")
+            ;;}}}***********************************************************
+          )
+        )
+    )
 
     (defun zpwr/perlHook ()
      (progn
-        (message "perl init done"))
-    )
+        (message "perl init done")
+     ))
 
   (defun zpwr/reload ()
 
@@ -497,19 +518,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
   (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
 
-  (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
-
-    (with-eval-after-load 'company
-     (progn
-        (add-hook 'prog-mode-hook #'zpwr/compHook)
-        (add-hook 'perl-mode-hook #'zpwr/perlHook)
-        (add-hook 'sh-mode-hook #'zpwr/shHook)
-      )
-    )
+    (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
+    (add-hook 'prog-mode-hook 'zpwr/compHook)
+    (add-hook 'perl-mode-hook 'zpwr/perlHook)
+    (add-hook 'sh-mode-hook 'zpwr/shHook)
 
     ;;{{{                    MARK:auto hl
     ;;**************************************************************
-    (defun autoHighlight () (cond
+    (defun zpwr/autoHighlight ()
+    (with-eval-after-load 'highlight-symbol
+     (cond
       ((eq evil-state 'normal)
        (ignore-errors
         (progn
@@ -517,17 +535,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
          (let ((inhibit-message t))
             (highlight-symbol)
           )
-        )))))
+        ))))))
 
-    (add-hook 'post-command-hook #'autoHighlight)
+    (add-hook 'post-command-hook 'zpwr/autoHighlight)
     ;;}}}***********************************************************
 
-    (with-eval-after-load 'persp
-        (add-hook 'kill-emacs-hook #'persp-state-save)
-    )
+    (add-hook 'kill-emacs-hook 'persp-state-save)
 
-    (with-eval-after-load 'highlight-indent-guides
-        (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
+    (add-hook 'prog-mode-hook 'zpwr/indentHook)
+
+    (message "end user-i")
 
 )
 
@@ -539,6 +556,7 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+    (message "start user-c")
 
     ;;{{{                    MARK:eager load
     ;;**************************************************************
@@ -785,19 +803,6 @@ you should place your code here."
 
 
 
-    ;;{{{                    MARK:indent guides
-    ;;**************************************************************
-    (setq highlight-indent-guides-method 'character)
-    (setq highlight-indent-guides-character ?\|)
-
-    (setq highlight-indent-guides-responsive 'top)
-    (setq highlight-indent-guides-delay 0.3)
-    (setq highlight-indent-guides-auto-enabled nil)
-
-    (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
-
-
-    ;;}}}***********************************************************
 
     ;;{{{                    MARK:emacs config
     ;;**************************************************************
@@ -817,6 +822,7 @@ you should place your code here."
 
     ;;}}}***********************************************************
 
+    (message "end user-c")
 
   )
 
