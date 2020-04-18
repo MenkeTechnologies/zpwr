@@ -498,6 +498,9 @@ you should place your code here."
     (spacemacs/set-leader-keys "o y" 'zpwr/copy-to-clipboard)
     (spacemacs/set-leader-keys "o p" 'zpwr/paste-from-clipboard)
 
+    (spacemacs/set-leader-keys (kbd "gc") 'magit-commit)
+    (spacemacs/set-leader-keys (kbd "gp") 'magit-push)
+
     ;;}}}***********************************************************
 
 
