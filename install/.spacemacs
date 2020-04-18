@@ -721,12 +721,20 @@ you should place your code here."
     )
 
   (defun zpwr/reload ()
+
     (interactive)
     (progn
       (zpwr/shHook)
       (zpwr/compHook)
       )
     )
+
+  (defun my-ielm-mode-defaults ()
+    (turn-on-eldoc-mode))
+
+  (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
+
+  (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
 
     (add-hook 'prog-mode-hook #'zpwr/compHook)
     (add-hook 'perl-mode-hook #'zpwr/perlHook)
