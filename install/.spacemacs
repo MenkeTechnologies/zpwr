@@ -399,17 +399,20 @@ you should place your code here."
 
     ;;{{{                    MARK:keybindings
     ;;**************************************************************
-    (evil-define-motion up-four ()
-     (evil-previous-visual-line 4)
+
+    (setq zpwr/inc 4)
+
+    (evil-define-motion zpwr/up-four ()
+     (evil-previous-visual-line (symbol-value 'zpwr/inc))
      )
-    (evil-define-motion right-four ()
-     (evil-backward-char 4)
+    (evil-define-motion zpwr/right-four ()
+     (evil-backward-char (symbol-value 'zpwr/inc))
      )
-    (evil-define-motion left-four ()
-     (evil-forward-char 4)
+    (evil-define-motion zpwr/left-four ()
+     (evil-forward-char (symbol-value 'zpwr/inc))
      )
-    (evil-define-motion down-four ()
-     (evil-next-visual-line 4)
+    (evil-define-motion zpwr/down-four ()
+     (evil-next-visual-line (symbol-value 'zpwr/inc))
      )
 
     (defun zpwr/bypass-confirmation-all (function &rest args)
@@ -420,23 +423,60 @@ you should place your code here."
             (yes-or-no-p (prompt) t))
             (apply function args)))
 
-    (defun guh ()
+    (defun zpwr/insert-file-name ()
+        "Insert the full path file name into the current buffer."
+        (interactive)
+        (insert (buffer-file-name (window-buffer (minibuffer-selected-window)))))
+    (defun zpwr/get-file-name ()
+        "Insert the full path file name into the echo area."
+        (interactive)
+        (message (buffer-file-name (window-buffer (minibuffer-selected-window)))))
+
+    (defun zpwr/undohunk ()
+      "Reset the git hunk"
      (interactive)
      (zpwr/bypass-confirmation-all #'spacemacs/vcs-revert-hunk)
      (evil-scroll-line-to-center)
     )
 
-    (define-key evil-visual-state-map (kbd "C-j") 'down-four)
-    (define-key evil-visual-state-map (kbd "C-k") 'up-four)
-    (define-key evil-visual-state-map (kbd "C-h") 'right-four)
-    (define-key evil-visual-state-map (kbd "C-l") 'left-four)
+    (defun zpwr/copy-to-clipboard ()
+      "Copies selection to system clipboard."
+      (interactive)
+      (if (display-graphic-p)
+          (progn
+            (message "Yanked region to clipboard!")
+            (call-interactively 'clipboard-kill-ring-save)
+            )
+        (if (region-active-p)
+            (progn
+              (shell-command-on-region (region-beginning) (region-end) (getenv "ZPWR_COPY_CMD"))
+              (message "Yanked region to clipboard!")
+              (deactivate-mark))
+          (message "No region active; can't yank to clipboard!")))
+      )
 
-    (define-key evil-normal-state-map (kbd "C-j") 'down-four)
-    (define-key evil-normal-state-map (kbd "C-k") 'up-four)
-    (define-key evil-normal-state-map (kbd "C-h") 'right-four)
-    (define-key evil-normal-state-map (kbd "C-l") 'left-four)
+    (defun zpwr/paste-from-clipboard ()
+      "Pastes from system clipboard."
+      (interactive)
+      (progn
+        (if (display-graphic-p)
+            (progn
+                (clipboard-yank)
+                (message "graphics active")))
+        (insert (shell-command-to-string (getenv "ZPWR_PASTE_CMD"))))
+      )
 
-    (define-key evil-normal-state-map (kbd "C-d") 'guh)
+    (define-key evil-visual-state-map (kbd "C-j") 'zpwr/down-four)
+    (define-key evil-visual-state-map (kbd "C-k") 'zpwr/up-four)
+    (define-key evil-visual-state-map (kbd "C-h") 'zpwr/right-four)
+    (define-key evil-visual-state-map (kbd "C-l") 'zpwr/left-four)
+
+    (define-key evil-normal-state-map (kbd "C-j") 'zpwr/down-four)
+    (define-key evil-normal-state-map (kbd "C-k") 'zpwr/up-four)
+    (define-key evil-normal-state-map (kbd "C-h") 'zpwr/right-four)
+    (define-key evil-normal-state-map (kbd "C-l") 'zpwr/left-four)
+
+    (define-key evil-normal-state-map (kbd "C-d") 'zpwr/undohunk)
     (define-key evil-normal-state-map (kbd "C-f") 'spacemacs/frame-killer)
 
     (define-key evil-insert-state-map (kbd "C-l") 'hippie-expand)
@@ -453,6 +493,10 @@ you should place your code here."
     (spacemacs/set-leader-keys (kbd "wq") 'delete-window)
 
     (spacemacs/set-leader-keys (kbd "zz") 'suspend-emacs)
+
+    (spacemacs/set-leader-keys "o y" 'zpwr/copy-to-clipboard)
+    (spacemacs/set-leader-keys "o p" 'zpwr/paste-from-clipboard)
+
     ;;}}}***********************************************************
 
 
