@@ -1184,6 +1184,8 @@ function deleteLastWord(){
 
 function fzfEnv(){
 
+    local sel
+
     if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
         loggDebug "regenerating keys for $ZPWR_ENV"
         regenSearchEnv
@@ -1193,8 +1195,12 @@ function fzfEnv(){
         regenSearchEnv
     fi
 
-    cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
-    eval "fzf -m --border $FZF_ENV_OPTS"
+    sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
+        eval "fzf -m --border $FZF_ENV_OPTS")
+    BUFFER="$BUFFER$sel"
+    CURSOR="$#BUFFER"
+
+    zle reset-prompt
 }
 
 
@@ -1224,31 +1230,32 @@ function getFound(){
 
 function locateFzf(){
 
-    local found firstArg
+    local firstArg sel
+
     mywords=(${(z)BUFFER})
     if (( $#mywords == 0 )); then
-        found="$(getFound)"
+        sel="$(getFound)"
 
-        if [[ -z "$found" ]]; then
+        if [[ -z "$sel" ]]; then
             zle .kill-whole-line 2>/dev/null
             return 0
         fi
-        firstArg="${${(Az)found}[1]//\"/}"
+        firstArg="${${(Az)sel}[1]//\"/}"
         if [[ -d "$firstArg" ]]; then
-            BUFFER="cd $firstArg; c $found"
+            BUFFER="cd $firstArg; c $sel"
         else
-            BUFFER="c $found"
+            BUFFER="c $sel"
         fi
         zle .accept-line
     else
-        found="$(getFound)"
+        sel="$(getFound)"
 
-        if [[ ! -z "$found" ]]; then
-            BUFFER="$BUFFER $found"
+        if [[ ! -z "$sel" ]]; then
+            BUFFER="$BUFFER $sel"
             zle .accept-line 2>/dev/null
-            return 0
+        else
+            zle reset-prompt
         fi
-        return 0
     fi
 }
 
