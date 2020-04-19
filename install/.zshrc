@@ -1196,7 +1196,7 @@ function fzfEnv(){
     fi
 
     sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
-        eval "fzf -m --border $FZF_ENV_OPTS")
+        eval "fzf -m --border $FZF_ENV_OPTS" | perl -pe 's@\n@ @g')
     BUFFER="$BUFFER$sel"
     CURSOR="$#BUFFER"
 
