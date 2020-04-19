@@ -793,7 +793,7 @@ function fzfWordsearchVerbEdit(){
     sel=$(fz vim)
     if [[ -n "$sel" ]]; then
         BUFFER="$EDITOR $sel"
-        print -z -- "$BUFFER"
+        print -rz -- "$BUFFER"
     else
         return
     fi
@@ -806,7 +806,7 @@ function fzfWordsearchVerb(){
     if [[ -z "$file" ]]; then
         return
     fi
-    print -s -- "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+    print -sr -- "$EDITOR $file; clearList; isGitDir && git diff HEAD"
     eval "$EDITOR $file; clearList; isGitDir && git diff HEAD"
 }
 
@@ -826,7 +826,7 @@ function fzfFilesearchVerbEdit(){
     sel=$(fzfFileSearch)
     if [[ -n "$sel" ]]; then
         BUFFER="$EDITOR $sel"
-        print -z -- "$BUFFER"
+        print -rz -- "$BUFFER"
     else
         return
     fi
@@ -839,7 +839,7 @@ function fzfFilesearchVerb(){
     if [[ -z "$file" ]]; then
         return
     fi
-    print -s -- "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+    print -sr -- "$EDITOR $file; clearList; isGitDir && git diff HEAD"
     eval "$EDITOR $file; clearList; isGitDir && git diff HEAD"
 }
 
@@ -860,7 +860,7 @@ function fzfDirsearchVerb(){
     if [[ -z "$dir" ]]; then
         return
     fi
-    print -s -- "builtin cd \"$dir\" && clearList"
+    print -rs -- "builtin cd \"$dir\" && clearList"
     eval "builtin cd \"$dir\" && clearList"
 }
 
@@ -878,7 +878,7 @@ function fzfZListVerb(){
     if [[ -z "$dir" ]]; then
         return
     fi
-    print -s -- "builtin cd \"$dir\" && clearList"
+    print -sr -- "builtin cd \"$dir\" && clearList"
     eval "builtin cd \"$dir\" && clearList"
 }
 
@@ -925,7 +925,7 @@ function fasdFListVerb(){
     if [[ -z "$file" ]]; then
         return
     fi
-    print -s -- "c $file"
+    print -sr -- "c $file"
     eval "c $file"
 }
 
@@ -934,7 +934,7 @@ function killPSVerbAccept(){
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
-        print -s -- "$BUFFER"
+        print -sr -- "$BUFFER"
         eval "$BUFFER"
     else
         return
@@ -946,7 +946,7 @@ function killPSVerbEdit(){
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
-        print -z -- "$BUFFER"
+        print -rz -- "$BUFFER"
     else
         return
     fi
@@ -957,7 +957,7 @@ function killLsofVerbAccept(){
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
-        print -s -- "$BUFFER"
+        print -rs -- "$BUFFER"
         eval "$BUFFER"
     else
         return
@@ -969,7 +969,7 @@ function killLsofVerbEdit(){
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
-        print -z -- "$BUFFER"
+        print -rz -- "$BUFFER"
     else
         return
     fi
@@ -992,7 +992,7 @@ function fzfEnvVerbAccept(){
         eval "fzf -m --border $FZF_ENV_OPTS")
 
     if [[ -n "$sel" ]]; then
-        print -s -- "$sel"
+        print -sr -- "$sel"
         eval "$sel"
     else
         return
@@ -1015,7 +1015,7 @@ function fzfEnvVerbEdit(){
         eval "fzf -m --border $FZF_ENV_OPTS")
 
     if [[ -n "$sel" ]]; then
-        print -z -- "$sel"
+        print -zr -- "$sel"
     else
         return
     fi
@@ -1038,7 +1038,7 @@ function historyVerbEdit(){
     perl -lane 'print "@F[1..$#F]"')
 
     if [[ -n "$sel" ]]; then
-        print -z -- "$sel"
+        print -zr -- "$sel"
     else
         return
     fi
@@ -1242,7 +1242,7 @@ function locateFzfEditNoZLE(){
     fi
 
     if [[ -n "$sel" ]]; then
-        print -z -- "$BUFFER"
+        print -zr -- "$BUFFER"
     else
         return
     fi
@@ -1262,7 +1262,7 @@ function locateFzfNoZLE(){
     fi
 
     if [[ -n "$sel" ]]; then
-        print -s -- "$BUFFER"
+        print -sr -- "$BUFFER"
         eval "$BUFFER"
     else
         return
@@ -1293,7 +1293,7 @@ function locateFzfEdit(){
 
         if [[ ! -z "$sel" ]]; then
             #trim and squeeze
-            BUFFER=$(echo "$BUFFER $sel" | awk '{$1=$1};1')
+            BUFFER=$(print -r -- "$BUFFER $sel" | awk '{$1=$1};1')
             CURSOR="$#BUFFER"
             zle reset-prompt
         else
@@ -1325,7 +1325,7 @@ function locateFzf(){
         sel="$(getFound)"
 
         if [[ ! -z "$sel" ]]; then
-            BUFFER=$(echo "$BUFFER $sel" | awk '{$1=$1};1')
+            BUFFER=$(print -r -- "$BUFFER $sel" | awk '{$1=$1};1')
             CURSOR="$#BUFFER"
             zle .accept-line 2>/dev/null
         else
