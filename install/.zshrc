@@ -357,6 +357,9 @@ ZPWR_VERBS[killedit]='killPSVerbEdit=edit kill from ps output'
 
 ZPWR_VERBS[lsof]='killLsofVerbAccept=kill from lsof output'
 ZPWR_VERBS[lsofedit]='killLsofVerbEdit=edit kill from lsof output'
+
+ZPWR_VERBS[envaccept]='fzfEnvVerbAccept=accept from fzf env'
+ZPWR_VERBS[envedit]='fzfEnvVerbEdit=edit from fzf env'
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ Plugins
@@ -788,7 +791,7 @@ function fzfWordsearchVerbEdit(){
 
     local sel
     sel=$(fz vim)
-    if [ -n "$sel" ]; then
+    if [[ -n "$sel" ]]; then
         BUFFER="$EDITOR $sel"
         print -z -- "$BUFFER"
     else
@@ -821,7 +824,7 @@ function fzfFilesearchVerbEdit(){
 
     local sel
     sel=$(fzfFileSearch)
-    if [ -n "$sel" ]; then
+    if [[ -n "$sel" ]]; then
         BUFFER="$EDITOR $sel"
         print -z -- "$BUFFER"
     else
@@ -929,7 +932,7 @@ function fasdFListVerb(){
 function killPSVerbAccept(){
 
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
-    if [ -n "$sel" ]; then
+    if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -s -- "$BUFFER"
         eval "$BUFFER"
@@ -941,7 +944,7 @@ function killPSVerbAccept(){
 function killPSVerbEdit(){
 
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
-    if [ -n "$sel" ]; then
+    if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -z -- "$BUFFER"
     else
@@ -952,7 +955,7 @@ function killPSVerbEdit(){
 function killLsofVerbAccept(){
 
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
-    if [ -n "$sel" ]; then
+    if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -s -- "$BUFFER"
         eval "$BUFFER"
@@ -964,9 +967,55 @@ function killLsofVerbAccept(){
 function killLsofVerbEdit(){
 
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
-    if [ -n "$sel" ]; then
+    if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -z -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+
+function fzfEnvVerbAccept(){
+
+    local num sel
+    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
+        loggDebug "regenerating keys for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
+        loggDebug "regenerating values for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+
+    sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
+        eval "fzf -m --border $FZF_ENV_OPTS")
+
+    if [[ -n "$sel" ]]; then
+        print -s -- "$sel"
+        eval "$sel"
+    else
+        return
+    fi
+}
+
+function fzfEnvVerbEdit(){
+
+    local num sel
+    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
+        loggDebug "regenerating keys for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
+        loggDebug "regenerating values for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+
+    sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
+        eval "fzf -m --border $FZF_ENV_OPTS")
+
+    if [[ -n "$sel" ]]; then
+        print -z -- "$sel"
     else
         return
     fi
@@ -979,12 +1028,6 @@ function historyVerbAccept(){
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |
     perl -lane 'print "@F[1..$#F]"')
 
-    if [ -n "$sel" ]; then
-        print -s -- "$sel"
-        eval "$sel"
-    else
-        return
-    fi
 }
 
 function historyVerbEdit(){
@@ -994,7 +1037,7 @@ function historyVerbEdit(){
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |
     perl -lane 'print "@F[1..$#F]"')
 
-    if [ -n "$sel" ]; then
+    if [[ -n "$sel" ]]; then
         print -z -- "$sel"
     else
         return
