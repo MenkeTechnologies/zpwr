@@ -73,7 +73,7 @@ values."
       colors
       (auto-completion :variables
             auto-completion-return-key-behavior 'complete
-            auto-completion-idle-delay 0.1
+            auto-completion-idle-delay 3
             auto-completion-tab-key-behavior 'cycle
             auto-completion-enable-help-tooltip t
             auto-completion-enable-snippets-in-popup t
@@ -354,7 +354,13 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
     (message "start user-i")
+
     (setq vc-follow-symlinks t)
+    ;;{{{                    MARK:zpwr vars
+    ;;**************************************************************
+    (setq zpwr/inc 4)
+    (setq zpwr/as-interval 1)
+    ;;}}}***********************************************************
 
     ;;{{{                    MARK:message buffer timestamps
     ;;**************************************************************
@@ -481,11 +487,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     (defun zpwr/AS ()
          (progn
-        ;; in seconds
         ;;{{{                    MARK:auto save
         ;;**************************************************************
 
-            (setq real-auto-save-interval 1)
+           ;; in seconds
+            (setq real-auto-save-interval (symbol-value 'zpwr/as-interval))
             (real-auto-save-mode)
             (message "real autosave init done")
         )
@@ -583,8 +589,6 @@ you should place your code here."
 
     ;;{{{                    MARK:keybindings
     ;;**************************************************************
-
-    (setq zpwr/inc 4)
 
     (evil-define-motion zpwr/up-four ()
      (evil-previous-visual-line (symbol-value 'zpwr/inc))
@@ -846,7 +850,7 @@ you should place your code here."
     (setq highlight-indent-guides-character ?\|)
 
     (setq highlight-indent-guides-responsive 'top)
-    (setq highlight-indent-guides-delay 0.3)
+    (setq highlight-indent-guides-delay 0.5)
     (setq highlight-indent-guides-auto-enabled t)
     (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
 
