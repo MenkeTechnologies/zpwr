@@ -459,10 +459,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                         company-ctags
                                         company-shell-env
                                         company-files
-                                        company-shell
+                                        company-keywords
                                         :with
                                         company-yasnippet
-                                        company-keywords
                                         )
                                        ))
      (progn
