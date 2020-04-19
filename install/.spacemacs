@@ -3,6 +3,8 @@
 ;; It must be stored in your home directory.
 ;; vim: set syntax=lisp:
 
+;;{{{                    MARK:layers
+;;**************************************************************
 (defun dotspacemacs/layers ()
   "Configuration Layers declaration.
 You should not put any user code in this function besides modifying the variable
@@ -87,6 +89,7 @@ values."
                 version-control-diff-tool 'git-gutter+)
 
      )
+
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
@@ -124,7 +127,10 @@ values."
    ;; them if they become unused. `all' installs *all* packages supported by
    ;; Spacemacs and never uninstall them. (default is `used-only')
    dotspacemacs-install-packages 'used-only))
+;;}}}***********************************************************
 
+;;{{{                    MARK:spacemacs init
+;;**************************************************************
 (defun dotspacemacs/init ()
   "Initialization function.
 This function is called at the very startup of Spacemacs initialization
@@ -348,7 +354,10 @@ values."
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
    ))
+   ;;}}}***********************************************************
 
+;;{{{                    MARK:user init
+;;**************************************************************
 (defun dotspacemacs/user-init ()
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init', before layer configuration
@@ -559,16 +568,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
     )
     ;;}}}***********************************************************
 
+    ;;{{{                    MARK:indent guides
+    ;;**************************************************************
     (defun zpwr/HL ()
          (progn
-            ;;{{{                    MARK:indent guides
-            ;;**************************************************************
             (highlight-indent-guides-mode)
             (message "highlight indent guides init done")
-            ;;}}}***********************************************************
           )
      )
+    ;;}}}***********************************************************
 
+
+    ;;{{{                    MARK:programming
+    ;;**************************************************************
     (defun zpwr/progSetup()
          (progn
             (set-display-table-slot standard-display-table 'wrap ?\ )
@@ -578,22 +590,25 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
             (message "user init done")
         )
-        ;;}}}***********************************************************
     )
+    ;;}}}***********************************************************
 
+    ;;{{{                    MARK:auto save
+    ;;**************************************************************
     (defun zpwr/AS ()
          (progn
-        ;;{{{                    MARK:auto save
-        ;;**************************************************************
 
            ;; in seconds
             (setq real-auto-save-interval (symbol-value 'zpwr/as-interval))
             (real-auto-save-mode)
             (message "real autosave init done")
         )
-        ;;}}}***********************************************************
     )
+    ;;}}}***********************************************************
 
+
+    ;;{{{                    MARK:hook wrappers
+    ;;**************************************************************
     (defun zpwr/indentHook ()
          (zpwr/HL)
     )
@@ -613,12 +628,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
     )
 
     (defun my-ielm-mode-defaults ()
-    (progn
+        (progn
         (turn-on-eldoc-mode)
         (message "hooked eldoc")
         ))
 
     (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
+    ;;}}}***********************************************************
 
 
     ;;{{{                    MARK:auto hl
@@ -660,11 +676,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;}}}***********************************************************
 
-
     (message "end user-i")
 
 )
+;;}}}***********************************************************
 
+;;{{{                    MARK:userConfig
+;;**************************************************************
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -970,14 +988,18 @@ you should place your code here."
         ;;**************************************************************
     (zpwr/compHook)
 
-    (message "end user-c")
+    (setq origami-fold-style 'triple-braces)
+
 
     ;;}}}***********************************************************
 
+    (message "end user-c")
 
   )
+;;}}}***********************************************************
 
-
+;;{{{                    MARK:spacemacs modified
+;;**************************************************************
 ;; DO not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
 (custom-set-variables
@@ -1002,3 +1024,12 @@ you should place your code here."
  '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
  '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
  '(company-tooltip-selection ((t (:inherit popup-menu-selection-face)))))
+
+
+
+
+
+
+
+;;}}}***********************************************************
+
