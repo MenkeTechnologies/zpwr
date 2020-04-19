@@ -362,7 +362,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:zpwr vars
     ;;**************************************************************
     (setq zpwr/inc 4)
-    (setq zpwr/as-interval 1)
+    (setq zpwr/as-interval 0.3)
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:message buffer timestamps
@@ -398,14 +398,23 @@ before packages are loaded. If you are unsure, you should try in setting them in
             (yes-or-no-p (prompt) t))
             (apply function args)))
 
+    (defun zpwr/get-file-name ()
+        "Get the full path file name into the echo area."
+        (buffer-file-name (window-buffer (minibuffer-selected-window)))
+    )
+
     (defun zpwr/insert-file-name ()
         "Insert the full path file name into the current buffer."
         (interactive)
-        (insert (buffer-file-name (window-buffer (minibuffer-selected-window)))))
-    (defun zpwr/get-file-name ()
-        "Insert the full path file name into the echo area."
+        (insert (zpwr/get-file-name))
+     )
+
+
+    (defun zpwr/print-file-name ()
+        "Print the full path file name into the echo area."
         (interactive)
-        (message (buffer-file-name (window-buffer (minibuffer-selected-window)))))
+        (message (zpwr/get-file-name))
+    )
 
     (defun zpwr/undohunk ()
       "Reset the git hunk"
@@ -440,6 +449,31 @@ before packages are loaded. If you are unsure, you should try in setting them in
                 (message "graphics active")))
         (insert (shell-command-to-string (getenv "ZPWR_PASTE_CMD"))))
       )
+
+    (defun zpwr/inhibit-sentinel-messages (fun &rest args)
+    "Inhibit messages in all sentinels started by fun."
+    (cl-letf* ((old-set-process-sentinel (symbol-function 'set-process-sentinel))
+         ((symbol-function 'set-process-sentinel)
+          (lambda (process sentinel)
+        (funcall
+         old-set-process-sentinel
+         process
+         `(lambda (&rest args)
+            (let ((inhibit-message t))
+              (apply (quote ,sentinel) args)))))))
+        (apply fun args)))
+
+    (defun zpwr/runner  ()
+     (interactive)
+      (let ( (cmd (concat "tmux send-keys -t right C-c '" "bash " (getenv "ZPWR_SCRIPTS") "/runner.sh " (zpwr/get-file-name) "' C-m")) )
+           ;;(message (concat "tmux runner => " (symbol-value 'cmd)))
+             (save-window-excursion
+              (zpwr/inhibit-sentinel-messages #'async-shell-command
+                (symbol-value 'cmd))
+           )
+      )
+    )
+
     ;;}}}***********************************************************
 
 
@@ -487,6 +521,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
             ;;}}}***********************************************************
           )
      )
+
+    (defun zpwr/progSetup()
+         (progn
+            (set-display-table-slot standard-display-table 'wrap ?\ )
+            (visual-line-mode)
+            (message "user init done")
+        )
+        ;;}}}***********************************************************
+    )
 
     (defun zpwr/AS ()
          (progn
@@ -556,6 +599,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (add-hook 'prog-mode-hook 'zpwr/indentHook)
 
     (add-hook 'prog-mode-hook 'zpwr/AS)
+    
+    (add-hook 'prog-mode-hook 'zpwr/progSetup)
 
     (add-hook 'perl-mode-hook 'zpwr/perlHook)
 
@@ -620,6 +665,9 @@ you should place your code here."
 
     (define-key evil-normal-state-map (kbd "C-d") #'zpwr/undohunk)
     (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
+
+    (define-key evil-insert-state-map (kbd "C-v") #'zpwr/runner)
+    (define-key evil-normal-state-map (kbd "C-v") #'zpwr/runner)
 
     (define-key evil-insert-state-map (kbd "C-l") #'hippie-expand)
     (define-key evil-insert-state-map (kbd "C-t") #'transpose-chars)
@@ -862,12 +910,22 @@ you should place your code here."
 
     ;;always y or n
     (defalias 'yes-or-no-p 'y-or-n-p)
-
-    (setq real-auto-save-interval 1)
     ;;}}}***********************************************************
 
+
+    ;;{{{                    MARK:emamux config
+    ;;**************************************************************
+    (setq emamux:default-orientation 'horizonal)
+    ;;}}}***********************************************************
+
+    ;;{{{                    MARK:final
+        ;;**************************************************************
     (zpwr/compHook)
+
     (message "end user-c")
+
+    ;;}}}***********************************************************
+
 
   )
 
