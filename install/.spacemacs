@@ -358,7 +358,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
     (message "start user-i")
 
+    
+    ;;{{{                    mark:init vars
+    ;;**************************************************************
     (setq vc-follow-symlinks t)
+    ;;}}}**************************************************************
+    
     ;;{{{                    MARK:zpwr vars
     ;;**************************************************************
     (setq zpwr/inc 4)
@@ -367,13 +372,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;{{{                    MARK:message buffer timestamps
     ;;**************************************************************
-    (defun sh/current-time-microseconds ()
+    (defun zpwr/current-time-microseconds ()
     "Return the current time formatted to include microseconds."
         (let* ((nowtime (current-time))
             (now-ms (nth 2 nowtime)))
         (concat (format-time-string "[%Y-%m-%dT%T" nowtime) (format ".%d]" now-ms))))
 
-    (defun sh/ad-timestamp-message (FORMAT-STRING &rest args)
+    (defun zpwr/add-timestamp-message (FORMAT-STRING &rest args)
         "Advice to run before `message' that prepends a timestamp to each message."
 
         (unless (string-equal FORMAT-STRING "%s%s")
@@ -383,9 +388,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
                 (goto-char (point-max))
                 (if (not (bolp))
                 (newline))
-                (insert (sh/current-time-microseconds) " ")))))
+                (insert (zpwr/current-time-microseconds) " ")))))
 
-    (advice-add 'message :before 'sh/ad-timestamp-message)
+    (advice-add 'message :before 'zpwr/add-timestamp-message)
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:zpwr func
@@ -395,12 +400,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
         "Surround region with comment section block."
         (interactive "sMARK: ")
 
+        ;;{{{                    mark:getCommentChar
+        ;;**************************************************************
         (cond
          ((derived-mode-p 'zsh-mode 'sh-mode 'python-mode 'perl-mode 'cperl-mode 'ruby-mode 'yaml-mode 'awk-mode) (setq comment "#"))
          ((derived-mode-p 'java-mode 'js-jsx-mode 'js2-mode 'c-mode 'c++-mode) (setq comment "//"))
          ((derived-mode-p 'inferior-emacs-lisp-mode 'emacs-lisp-mode 'lisp-mode) (setq comment ";;"))
          ((derived-mode-p 'vimrc-mode) (setq comment "\""))
         )
+        ;;}}}**************************************************************
 
         (progn
             (setq sec (concat comment "{{{                    mark:" section "\n"))
@@ -515,7 +523,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;}}}***********************************************************
 
-
     ;;{{{                    MARK:Setup shell company backends
     ;;**************************************************************
 
@@ -548,7 +555,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                        ))
      (progn
         (message "shell init done")
-        ))
+        )
+    )
     ;;}}}***********************************************************
 
     (defun zpwr/HL ()
@@ -657,7 +665,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
 )
 
-
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
 This function is called at the very end of Spacemacs initialization after
@@ -667,15 +674,16 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
     (message "start user-c")
 
-    ;;**************************************************************
+    
+  ;;{{{                    mark:eager loads
+  ;;**************************************************************    
     (require 'company)
     (require 'yasnippet)
     (require 'noflet)
     (require 'highlight-indent-guides)
     (require 'real-auto-save)
-    ;;}}}***********************************************************
-
-
+  ;;}}}**************************************************************    
+    
 
     ;;{{{                    MARK:keybindings
     ;;**************************************************************
@@ -925,11 +933,7 @@ you should place your code here."
         (persp-mode)
         (setq persp-state-default-file "~/.persp.txt")
       ))
-
-
     ;;}}}***********************************************************
-
-
 
 
     ;;{{{                    MARK:emacs config
