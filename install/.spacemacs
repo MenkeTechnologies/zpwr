@@ -421,7 +421,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
             )
         (if (region-active-p)
             (progn
-              (shell-command-on-region (region-beginning) (region-end) (getenv "ZPWR_COPY_CMD"))
+              (shell-command-on-region (region-beginning) (region-end) (concat "perl -0pe 's@^\\s+@@;s@\\s+$@@' | " (getenv "ZPWR_COPY_CMD")))
               (message "Yanked region to clipboard!")
               (deactivate-mark))
           (message "No region active; can't yank to clipboard!")))
