@@ -91,10 +91,12 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(yasnippet yasnippet-snippets
+   dotspacemacs-additional-packages '(
+          yasnippet yasnippet-snippets
            ag
            helm-ag
            helm-rg
+           emamux
            company-ycmd
            real-auto-save
            fzf highlight-symbol
@@ -108,7 +110,8 @@ values."
            perspective
            (company-quickhelp :location (recipe :fetcher github :repo "ahungry/company-quickhelp"))
            popup
-           plsense)
+           plsense
+           )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -604,53 +607,53 @@ you should place your code here."
      )
 
 
-    (define-key evil-visual-state-map (kbd "C-j") 'zpwr/down-four)
-    (define-key evil-visual-state-map (kbd "C-k") 'zpwr/up-four)
+    (define-key evil-visual-state-map (kbd "C-j") #'zpwr/down-four)
+    (define-key evil-visual-state-map (kbd "C-k") #'zpwr/up-four)
 
-    (define-key evil-visual-state-map (kbd "C-h") 'zpwr/right-four)
-    (define-key evil-visual-state-map (kbd "C-l") 'zpwr/left-four)
+    (define-key evil-visual-state-map (kbd "C-h") #'zpwr/right-four)
+    (define-key evil-visual-state-map (kbd "C-l") #'zpwr/left-four)
 
-    (define-key evil-normal-state-map (kbd "C-j") 'zpwr/down-four)
-    (define-key evil-normal-state-map (kbd "C-k") 'zpwr/up-four)
-    (define-key evil-normal-state-map (kbd "C-h") 'zpwr/right-four)
-    (define-key evil-normal-state-map (kbd "C-l") 'zpwr/left-four)
+    (define-key evil-normal-state-map (kbd "C-j") #'zpwr/down-four)
+    (define-key evil-normal-state-map (kbd "C-k") #'zpwr/up-four)
+    (define-key evil-normal-state-map (kbd "C-h") #'zpwr/right-four)
+    (define-key evil-normal-state-map (kbd "C-l") #'zpwr/left-four)
 
-    (define-key evil-normal-state-map (kbd "C-d") 'zpwr/undohunk)
-    (define-key evil-normal-state-map (kbd "C-f") 'spacemacs/frame-killer)
+    (define-key evil-normal-state-map (kbd "C-d") #'zpwr/undohunk)
+    (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
 
-    (define-key evil-insert-state-map (kbd "C-l") 'hippie-expand)
-    (define-key evil-insert-state-map (kbd "C-t") 'transpose-chars)
+    (define-key evil-insert-state-map (kbd "C-l") #'hippie-expand)
+    (define-key evil-insert-state-map (kbd "C-t") #'transpose-chars)
 
     ;; like gj
-    (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+    (define-key evil-normal-state-map (kbd "j") #'evil-next-visual-line)
     ;; like gk
-    (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line)
+    (define-key evil-normal-state-map (kbd "k") #'evil-previous-visual-line)
 
-    (spacemacs/set-leader-keys (kbd ".") 'helm-themes)
+    (spacemacs/set-leader-keys (kbd ".") #'helm-themes)
 
-    (spacemacs/set-leader-keys (kbd ",") 'dotspacemacs/sync-configuration-layers)
+    (spacemacs/set-leader-keys (kbd ",") #'dotspacemacs/sync-configuration-layers)
 
-    (spacemacs/set-leader-keys (kbd "o.") 'spotify-playpause)
+    (spacemacs/set-leader-keys (kbd "o.") #'spotify-playpause)
 
-    (spacemacs/set-leader-keys (kbd "oa") 'spotify-next)
-    (spacemacs/set-leader-keys (kbd "ol") 'spotify-previous)
+    (spacemacs/set-leader-keys (kbd "oa") #'spotify-next)
+    (spacemacs/set-leader-keys (kbd "ol") #'spotify-previous)
 
-    (spacemacs/set-leader-keys (kbd "wq") 'delete-window)
+    (spacemacs/set-leader-keys (kbd "wq") #'delete-window)
 
-    (spacemacs/set-leader-keys (kbd "oz") 'suspend-emacs)
+    (spacemacs/set-leader-keys (kbd "oz") #'suspend-emacs)
 
-    (spacemacs/set-leader-keys (kbd "oy") 'zpwr/copy-to-clipboard)
-    (spacemacs/set-leader-keys (kbd "op") 'zpwr/paste-from-clipboard)
+    (spacemacs/set-leader-keys (kbd "oy") #'zpwr/copy-to-clipboard)
+    (spacemacs/set-leader-keys (kbd "op") #'zpwr/paste-from-clipboard)
 
     (defun zpwr/sb ()
      (interactive)
         (switch-to-buffer-other-window "*Messages*")
      )
 
-    (spacemacs/set-leader-keys (kbd "om") 'zpwr/sb)
+    (spacemacs/set-leader-keys (kbd "om") #'zpwr/sb)
 
-    (spacemacs/set-leader-keys (kbd "gc") 'magit-commit)
-    (spacemacs/set-leader-keys (kbd "gp") 'magit-push)
+    (spacemacs/set-leader-keys (kbd "oc") #'magit-commit)
+    (spacemacs/set-leader-keys (kbd "op") #'magit-push)
 
     (if (featurep 'ns)
         (progn
@@ -710,7 +713,7 @@ you should place your code here."
         (if (looking-at "->") t nil)))))
 
     (defun do-yas-expand ()
-        (let ((yas/fallback-behavior 'return-nil))
+        (let ((yas/fallback-behavior #'return-nil))
             (yas/expand)))
 
     (defun tab-indent-or-complete ()
@@ -758,36 +761,36 @@ you should place your code here."
             (yas-abort-snippet)
             (company-abort)))
 
-    (define-key evil-insert-state-map [tab] 'tab-indent-or-complete)
+    (define-key evil-insert-state-map [tab] #'tab-indent-or-complete)
 
-    (global-set-key [(control return)] 'company-complete-common)
+    (global-set-key [(control return)] #'company-complete-common)
 
-    (define-key company-active-map [tab] 'expand-snippet-or-complete-selection)
-    (define-key company-active-map (kbd "TAB") 'expand-snippet-or-complete-selection)
+    (define-key company-active-map [tab] #'expand-snippet-or-complete-selection)
+    (define-key company-active-map (kbd "TAB") #'expand-snippet-or-complete-selection)
 
     (define-key yas-minor-mode-map [tab] nil)
     (define-key yas-minor-mode-map (kbd "TAB") nil)
 
-    (define-key yas-keymap [tab] 'tab-complete-or-next-field)
-    (define-key yas-keymap (kbd "TAB") 'tab-complete-or-next-field)
-    (define-key yas-keymap [(control tab)] 'yas-next-field)
-    (define-key yas-keymap (kbd "C-g") 'abort-company-or-yas)
+    (define-key yas-keymap [tab] #'tab-complete-or-next-field)
+    (define-key yas-keymap (kbd "TAB") #'tab-complete-or-next-field)
+    (define-key yas-keymap [(control tab)] #'yas-next-field)
+    (define-key yas-keymap (kbd "C-g") #'abort-company-or-yas)
 
 
     ;;real tab
-    (define-key evil-normal-state-map (kbd "TAB") 'evil-jump-forward)
+    (define-key evil-normal-state-map (kbd "TAB") #'evil-jump-forward)
     ;;^I
-    (define-key evil-normal-state-map [tab] 'evil-jump-forward)
+    (define-key evil-normal-state-map [tab] #'evil-jump-forward)
 
     ;;^J up and ^D already
-    (define-key evil-insert-state-map (kbd "C-d") 'company-complete)
-    (define-key evil-insert-state-map (kbd "C-SPC") 'company-complete)
+    (define-key evil-insert-state-map (kbd "C-d") #'company-complete)
+    (define-key evil-insert-state-map (kbd "C-SPC") #'company-complete)
 
-    (define-key evil-insert-state-map (kbd "C-z") 'helm-swoop)
-    (define-key evil-normal-state-map (kbd "C-z") 'helm-swoop)
+    (define-key evil-insert-state-map (kbd "C-z") #'helm-swoop)
+    (define-key evil-normal-state-map (kbd "C-z") #'helm-swoop)
 
-    (define-key evil-insert-state-map (kbd "C-f") 'helm-multi-swoop-all)
-    (define-key evil-normal-state-map (kbd "C-f") 'helm-multi-swoop-all)
+    (define-key evil-insert-state-map (kbd "C-f") #'helm-multi-swoop-all)
+    (define-key evil-normal-state-map (kbd "C-f") #'helm-multi-swoop-all)
 
     (defvar company-mode/enable-yas t)
 
@@ -806,8 +809,8 @@ you should place your code here."
     ;;**************************************************************
     (with-eval-after-load 'helm
      (progn
-        (define-key helm-map (kbd "C-n") 'helm-next-page)
-        (define-key helm-map (kbd "C-p") 'helm-previous-page)
+        (define-key helm-map (kbd "C-n") #'helm-next-page)
+        (define-key helm-map (kbd "C-p") #'helm-previous-page)
       )
 
     )
@@ -878,7 +881,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (evil helm origami evil-collection annalist highlight-indent-guides helm-rg perspective workgroups web-beautify scala-mode sbt-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake noflet minitest livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern company-auctex coffee-mode chruby bundler inf-ruby auctex-latexmk auctex company-quickhelp company-shell ctags-update company-ycm ycm company-ctags plsense company-plsense org-projectile org-category-capture org-present org-pomodoro org-mime org-download htmlize gnuplot highlight-symbol web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data go-guru go-eldoc company-go go-mode powershell fzf real-auto-save flycheck-ycmd company-ycmd ycmd request-deferred deferred yasnippet-snippets darkburn-theme-theme cyberpunk-theme-theme spotify helm-spotify-plus multi zenburn-theme zen-and-art-theme yaml-mode xterm-color white-sand-theme vimrc-mode underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme slack emojify circe oauth2 websocket shell-pop seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme multi-term monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme magit-gh-pulls madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme insert-shebang inkpot-theme heroku-theme hemisu-theme helm-gtags hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gmail-message-mode ham-mode html-to-markdown github-search github-clone github-browse-file gist gh marshal logito pcache ht ggtags gandalf-theme flymd flatui-theme flatland-theme fish-mode fasd farmhouse-theme exotica-theme espresso-theme eshell-z eshell-prompt-extras esh-help edit-server dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme dactyl-mode cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alert log4e gntp alect-themes afternoon-theme mmm-mode markdown-toc markdown-mode gh-md yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic smeargle rainbow-mode rainbow-identifiers orgit magit-gitflow magit-popup helm-gitignore helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flycheck-pos-tip pos-tip flycheck evil-magit magit undo-tree git-commit with-editor transient diff-hl company-statistics company color-identifiers-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (emamux evil helm origami evil-collection annalist highlight-indent-guides helm-rg perspective workgroups web-beautify scala-mode sbt-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake noflet minitest livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern company-auctex coffee-mode chruby bundler inf-ruby auctex-latexmk auctex company-quickhelp company-shell ctags-update company-ycm ycm company-ctags plsense company-plsense org-projectile org-category-capture org-present org-pomodoro org-mime org-download htmlize gnuplot highlight-symbol web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data go-guru go-eldoc company-go go-mode powershell fzf real-auto-save flycheck-ycmd company-ycmd ycmd request-deferred deferred yasnippet-snippets darkburn-theme-theme cyberpunk-theme-theme spotify helm-spotify-plus multi zenburn-theme zen-and-art-theme yaml-mode xterm-color white-sand-theme vimrc-mode underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme slack emojify circe oauth2 websocket shell-pop seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme multi-term monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme magit-gh-pulls madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme insert-shebang inkpot-theme heroku-theme hemisu-theme helm-gtags hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gmail-message-mode ham-mode html-to-markdown github-search github-clone github-browse-file gist gh marshal logito pcache ht ggtags gandalf-theme flymd flatui-theme flatland-theme fish-mode fasd farmhouse-theme exotica-theme espresso-theme eshell-z eshell-prompt-extras esh-help edit-server dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme dactyl-mode cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alert log4e gntp alect-themes afternoon-theme mmm-mode markdown-toc markdown-mode gh-md yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic smeargle rainbow-mode rainbow-identifiers orgit magit-gitflow magit-popup helm-gitignore helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flycheck-pos-tip pos-tip flycheck evil-magit magit undo-tree git-commit with-editor transient diff-hl company-statistics company color-identifiers-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
