@@ -1228,6 +1228,80 @@ function getFound(){
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
+function locateFzfEditNoZLE(){
+
+    local firstArg sel
+
+    sel="$(getFound)"
+
+    firstArg="${${(Az)sel}[1]//\"/}"
+    if [[ -d "$firstArg" ]]; then
+        BUFFER="cd $firstArg; c $sel"
+    else
+        BUFFER="c $sel"
+    fi
+
+    if [[ -n "$sel" ]]; then
+        print -z -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+function locateFzfNoZLE(){
+
+    local firstArg sel
+
+    sel="$(getFound)"
+
+    firstArg="${${(Az)sel}[1]//\"/}"
+    if [[ -d "$firstArg" ]]; then
+        BUFFER="cd $firstArg; c $sel"
+    else
+        BUFFER="c $sel"
+    fi
+
+    if [[ -n "$sel" ]]; then
+        print -s -- "$BUFFER"
+        eval "$BUFFER"
+    else
+        return
+    fi
+}
+
+function locateFzfEdit(){
+
+    local firstArg sel
+
+    mywords=(${(z)BUFFER})
+    if (( $#mywords == 0 )); then
+        sel="$(getFound)"
+
+        if [[ -z "$sel" ]]; then
+            zle .kill-whole-line 2>/dev/null
+            return 0
+        fi
+        firstArg="${${(Az)sel}[1]//\"/}"
+        if [[ -d "$firstArg" ]]; then
+            BUFFER="cd $firstArg; c $sel"
+        else
+            BUFFER="c $sel"
+        fi
+        zle .accept-line
+    else
+        sel="$(getFound)"
+
+        if [[ ! -z "$sel" ]]; then
+            #trim and squeeze
+            BUFFER=$(echo "$BUFFER $sel" | awk '{$1=$1};1')
+            CURSOR="$#BUFFER"
+            zle reset-prompt
+        else
+            zle reset-prompt
+        fi
+    fi
+}
+
 function locateFzf(){
 
     local firstArg sel
@@ -1251,7 +1325,8 @@ function locateFzf(){
         sel="$(getFound)"
 
         if [[ ! -z "$sel" ]]; then
-            BUFFER="$BUFFER $sel"
+            BUFFER=$(echo "$BUFFER $sel" | awk '{$1=$1};1')
+            CURSOR="$#BUFFER"
             zle .accept-line 2>/dev/null
         else
             zle reset-prompt
@@ -1325,6 +1400,7 @@ zle -N lsoffzf
 zle -N fzfVimKeybind
 zle -N fzfAllKeybind
 zle -N locateFzf
+zle -N locateFzfEdit
 zle -N fzfEnv
 zle -N fasdFZF
 zle -N interceptDelete
@@ -1391,8 +1467,11 @@ bindkey -M vicmd '^F^G' intoFzfAg
 bindkey -M viins '^F^R' asVar
 bindkey -M vicmd '^F^R' asVar
 
-bindkey -M viins '^V/' locateFzf
-bindkey -M vicmd '^V/' locateFzf
+bindkey -M viins '^V//' locateFzf
+bindkey -M vicmd '^V//' locateFzf
+
+bindkey -M viins '^V/.' locateFzfEdit
+bindkey -M vicmd '^V/.' locateFzfEdit
 
 bindkey -M viins '^V.' fzfAllKeybind
 bindkey -M vicmd '^V.' fzfAllKeybind
