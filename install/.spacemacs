@@ -398,7 +398,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     (defun zpwr/extract-fold (section)
         "Surround region with comment section block."
-        (interactive "sMARK: ")
+        (interactive "sThe Section Header: ")
 
         ;;{{{                    mark:getCommentChar
         ;;**************************************************************
@@ -411,7 +411,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         ;;}}}**************************************************************
 
         (progn
-            (setq sec (concat comment "{{{                    mark:" section "\n"))
+            (setq sec (concat comment "{{{                    MARK:" section "\n"))
             (setq start (concat comment "**************************************************************"))
             (setq end (concat comment "}}}**************************************************************"))
             (evil-goto-mark-line ?<)
