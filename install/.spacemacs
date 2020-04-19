@@ -390,6 +390,45 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;{{{                    MARK:zpwr func
     ;;**************************************************************
+
+    (defun zpwr/extract-fold (section)
+        "Surround region with comment section block."
+        (interactive "sMARK: ")
+
+        (cond
+         ((derived-mode-p 'zsh-mode 'sh-mode 'python-mode 'perl-mode 'cperl-mode 'ruby-mode 'yaml-mode 'awk-mode) (setq comment "#"))
+         ((derived-mode-p 'java-mode 'js-jsx-mode 'js2-mode 'c-mode 'c++-mode) (setq comment "//"))
+         ((derived-mode-p 'inferior-emacs-lisp-mode 'emacs-lisp-mode 'lisp-mode) (setq comment ";;"))
+         ((derived-mode-p 'vimrc-mode) (setq comment "\""))
+        )
+
+        (progn
+            (setq sec (concat comment "{{{                    mark:" section "\n"))
+            (setq start (concat comment "**************************************************************"))
+            (setq end (concat comment "}}}**************************************************************"))
+            (evil-goto-mark-line ?<)
+            (evil-open-above 1)
+            (evil-open-above 1)
+            (evil-next-line)
+            (insert sec)
+            (insert start)
+            (evil-goto-mark-line ?>)
+            (evil-open-below 1)
+            (evil-open-below 1)
+            (evil-previous-line)
+            (insert end)
+            (evil-goto-mark-line ?<)
+            (evil-next-line)
+            (evil-next-line)
+            (evil-next-line)
+            (evil-first-non-blank)
+            (evil-scroll-line-to-center (line-number-at-pos))
+            (evil-force-normal-state)
+            (message "done")
+        )
+     )
+
+
     (defun zpwr/bypass-confirmation-all (function &rest args)
         "Call FUNCTION with ARGS, bypassing all prompts.
         This includes both `y-or-n-p' and `yes-or-no-p'."
@@ -526,6 +565,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
          (progn
             (set-display-table-slot standard-display-table 'wrap ?\ )
             (visual-line-mode)
+            ;;(evil-visual-mark-mode)
+            ;;(setq evil-visual-mark-exclude-marks nil)
+
             (message "user init done")
         )
         ;;}}}***********************************************************
@@ -677,9 +719,11 @@ you should place your code here."
     ;; like gk
     (define-key evil-normal-state-map (kbd "k") #'evil-previous-visual-line)
 
-    (spacemacs/set-leader-keys (kbd ".") #'helm-themes)
+    (spacemacs/set-leader-keys (kbd "of") #'zpwr/extract-fold)
 
-    (spacemacs/set-leader-keys (kbd ",") #'dotspacemacs/sync-configuration-layers)
+    (spacemacs/set-leader-keys (kbd "o.") #'helm-themes)
+
+    (spacemacs/set-leader-keys (kbd "o,") #'dotspacemacs/sync-configuration-layers)
 
     (spacemacs/set-leader-keys (kbd "o.") #'spotify-playpause)
 

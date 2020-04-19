@@ -2,6 +2,6 @@
 # name:fkv
 # key: fkv
 # --
-for k v in ${(kv)$1[@]};do
+for k v in \${(kv)$1[@]};do
 	$0
 done
