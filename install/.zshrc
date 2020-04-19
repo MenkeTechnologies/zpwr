@@ -3372,7 +3372,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
             command rm "$ZPWR_TEMPFILE"
             if [[ $mobile == "false" ]]; then
                 logg "found $key so desktop"
-                num_con="$(command ps -ef |command grep -a 'sshd' | command -a grep pts | command grep -av grep | wc -l)"
+                num_con="$(command ps -ef |command grep -a 'sshd' | command grep -a pts | command grep -av grep | wc -l)"
                 logg "num connections: $num_con"
                 if (( $num_con == 1 )); then
                     logg "no tmux clients"
