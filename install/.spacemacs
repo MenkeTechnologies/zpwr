@@ -537,6 +537,45 @@ before packages are loaded. If you are unsure, you should try in setting them in
       )
     )
 
+    (defun zpwr/complete-current-statement ()
+     "Complete the current statement based on lalguage"
+     (interactive)
+     (progn
+        (cond
+         ((derived-mode-p 'zsh-mode 'sh-mode 'python-mode 'ruby-mode 'yaml-mode 'vimc-mode) (setq toInsertChar ""))
+         ((derived-mode-p 'java-mode 'js-jsx-mode 'js2-mode 'perl-mode 'cperl-mode 'c-mode 'c++-mode 'awk-mode) (setq toInsertChar ";"))
+         ((derived-mode-p 'inferior-emacs-lisp-mode 'emacs-lisp-mode 'lisp-mode) (setq toInsertChar ")"))
+         (t (setq toInsertChar ""))
+        )
+
+        (setq lastChar (substring (string-trim (buffer-substring-no-properties (line-beginning-position) (line-end-position))) -1))
+
+        (message (concat "last char-> '" lastChar "'"))
+
+        (cond
+         ((and (string= toInsertChar ";")(string= lastChar "{"))
+          (setq toInsertChar "")
+          )
+         ((string= lastChar ";") (setq toInsertChar ""))
+        )
+
+        (message (concat "toInsertChar-> '" toInsertChar "'"))
+
+
+        (if (not (string= toInsertChar ""))
+          (progn
+            (evil-append-line 1)
+            (insert toInsertChar)
+           )
+        )
+
+        (evil-open-below 1)
+        (evil-insert-state)
+
+      )
+
+    )
+
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:Setup shell company backends
@@ -594,6 +633,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
             (visual-line-mode)
             ;;(evil-visual-mark-mode)
             ;;(setq evil-visual-mark-exclude-marks nil)
+            (local-set-key (kbd "C-@") 'zpwr/complete-current-statement)
 
             (message "user init done")
         )
@@ -707,6 +747,7 @@ you should place your code here."
     (require 'noflet)
     (require 'highlight-indent-guides)
     (require 'real-auto-save)
+    (require 'subr-x)
   ;;}}}**************************************************************    
     
 
