@@ -193,7 +193,7 @@ dependencies_ary=(openssl moreutils cmake tig hexedit boxes tal iperf vim tmux c
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
     whois weechat gradle ant maven telnet tree mc ocaml groovy slurm \
-    bmon ruby parallel pssh shfmt)
+    bmon ruby parallel pssh shfmt global)
 
 addDependenciesLinux(){
     dependencies_ary=(neovim pkg-config libclang1 clang llvm ${dependencies_ary[@]})
