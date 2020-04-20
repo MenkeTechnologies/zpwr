@@ -934,6 +934,7 @@ you should place your code here."
     ;;**************************************************************
     (with-eval-after-load 'helm
      (progn
+        (define-key helm-map (kbd "C-u") #'backward-kill-sentence)
         (define-key helm-map (kbd "C-n") #'helm-next-page)
         (define-key helm-map (kbd "C-p") #'helm-previous-page)
       )
