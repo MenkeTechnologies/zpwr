@@ -158,6 +158,8 @@ export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
+# prompt for all fzf
+export ZPWR_FZF_LOGO="<<)ZPWR(>>"
 # set to comma separated list of pane numbers
 # to activate sending to numbered tmux panes
 export ZPWR_SEND_KEYS_PANE=-1
@@ -174,7 +176,7 @@ export ZPWR_INTRO_BANNER=ponies
 export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 # zpwr banner file location
 export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
-#
+# the emacs command
 export ZPWR_EMACS='command emacs -nw'
 #}}}***********************************************************
 
@@ -2729,7 +2731,7 @@ export FZF_JELLY="--color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
 function fzf_setup(){
 
     export ZPWR_COMMON_FZF_ELEM
-    ZPWR_COMMON_FZF_ELEM="--prompt='-->>> ' --bind=ctrl-n:page-down,ctrl-p:page-up"
+    ZPWR_COMMON_FZF_ELEM="--prompt='$ZPWR_FZF_LOGO ' --bind=ctrl-n:page-down,ctrl-p:page-up"
 
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'

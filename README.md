@@ -384,6 +384,8 @@ export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
+# prompt for all fzf
+export ZPWR_FZF_LOGO="<<)ZPWR(>>"
 # set to comma separated list of pane numbers
 # to activate sending to numbered tmux panes
 export ZPWR_SEND_KEYS_PANE=-1
@@ -400,6 +402,8 @@ export ZPWR_INTRO_BANNER=ponies
 export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
 # zpwr banner file location
 export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
+# the emacs command
+export ZPWR_EMACS='command emacs -nw'
 ```
 
 ## Tests
