@@ -2729,7 +2729,7 @@ export FZF_JELLY="--color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
 function fzf_setup(){
 
     export ZPWR_COMMON_FZF_ELEM
-    ZPWR_COMMON_FZF_ELEM="--prompt='-->>> '"
+    ZPWR_COMMON_FZF_ELEM="--prompt='-->>> ' --bind=ctrl-n:page-down,ctrl-p:page-up"
 
     #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
