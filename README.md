@@ -145,7 +145,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 
 ## ZPWR Extras Not Installed
 - Jetbrains .ideamvimrc
-- Jetbrains setings JAR
+- Jetbrains settings JAR
 - Jetbrains JVM Options idea.vmoptions
 - Spacmacs Config with 430+ packages in .spacemacs
 - Emacs Yasnippets
