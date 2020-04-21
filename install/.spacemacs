@@ -386,7 +386,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:zpwr vars
     ;;**************************************************************
     (setq zpwr/inc 4)
-    (setq zpwr/as-interval 0.3)
+    (setq zpwr/as-interval 0.9)
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:message buffer timestamps
