@@ -808,6 +808,7 @@ you should place your code here."
 
     (spacemacs/set-leader-keys (kbd "os") #'spotify-next)
     (spacemacs/set-leader-keys (kbd "oa") #'helm-projectile-ag)
+    (spacemacs/set-leader-keys (kbd "ot") #'helm-gtags-select)
 
     (spacemacs/set-leader-keys (kbd "wq") #'delete-window)
 
@@ -1054,16 +1055,36 @@ you should place your code here."
         :config
         (global-evil-surround-mode 1))
 
+
+    ;;{{{                    MARK:evil snipe
+    ;;**************************************************************
     (evil-snipe-override-mode 1)
     (evil-snipe-mode +1)
     (setq evil-snipe-scope 'whole-buffer)
     (setq evil-snipe-repeat-scope 'whole-buffer)
+    ;;}}}***********************************************************
+
 
     ;; Treat CamelCase as separate words everywhere
     (spacemacs/toggle-camel-case-motion-globally-on)
+
+
+    ;;{{{                    MARK:auto file preview from hem
+    ;;**************************************************************
     (helm-file-preview-mode 1)
     (setq helm-file-preview-only-when-line-numbers nil)
     (setq helm-file-preview-preview-only t)
+    ;;}}}***********************************************************
+
+
+
+    ;;{{{                    MARK:enable helm gtags
+    ;;**************************************************************
+    (helm-gtags-mode)
+    (setq helm-allow-mouse t)
+    ;;}}}***********************************************************
+
+
 
 
   )
