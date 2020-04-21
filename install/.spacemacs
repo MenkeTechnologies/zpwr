@@ -1040,10 +1040,11 @@ you should place your code here."
 
     (setq origami-fold-style 'triple-braces)
 
-
     ;;}}}***********************************************************
 
-    (message "end user-c")
+    ;;(spacemacs/toggle-automatic-symbol-highlight)
+    (ignore-errors (highlight-symbol-mode))
+
 
   )
 ;;}}}***********************************************************
