@@ -1057,24 +1057,8 @@ you should place your code here."
     (setq evil-snipe-scope 'whole-buffer)
     (setq evil-snipe-repeat-scope 'whole-buffer)
 
-
     ;; Treat CamelCase as separate words everywhere
-    (global-subword-mode 1)
-    (ignore-errors
-        (progn
-            (define-category ?U "Uppercase")
-            (define-category ?u "Lowercase")
-            (modify-category-entry (cons ?A ?Z) ?U)
-            (modify-category-entry (cons ?a ?z) ?u)
-            (make-variable-buffer-local 'evil-cjk-word-separating-categories)
-            (add-hook 'subword-mode-hook
-            (lambda ()
-                (if subword-mode
-                    (push '(?u . ?U) evil-cjk-word-separating-categories)
-                (setq evil-cjk-word-separating-categories
-                        (default-value 'evil-cjk-word-separating-categories)))))
-        )
-    )
+    (spacemacs/toggle-camel-case-motion-globally-on)
 
   )
 ;;}}}***********************************************************
