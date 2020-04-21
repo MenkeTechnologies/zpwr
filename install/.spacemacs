@@ -73,7 +73,7 @@ values."
      ycmd
      html
      osx
-      org
+     org
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
@@ -92,7 +92,7 @@ values."
       (colors :variables
             colors-colorize-identifiers 'all
             colors-enable-nyan-cat-progress-bar t)
-      '(version-control :variables
+      (version-control :variables
                 version-control-diff-side 'left
                 version-control-diff-tool 'git-gutter+)
 

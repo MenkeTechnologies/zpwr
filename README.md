@@ -147,7 +147,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - Jetbrains .ideamvimrc
 - Jetbrains setings JAR
 - Jetbrains JVM Options idea.vmoptions
-- Spacmacs Config with 430+ packkages in .spacemacs
+- Spacmacs Config with 430+ packages in .spacemacs
 - Emacs Yasnippets
 - Alacritty Main Config
 - Alacritty Color Theme
