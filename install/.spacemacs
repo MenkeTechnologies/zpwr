@@ -417,6 +417,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:zpwr func
     ;;**************************************************************
 
+        (defun zpwr/undo-all ()
+            "Undo all edits."
+            (interactive)
+            (when (listp pending-undo-list)
+                (undo))
+            (while (listp pending-undo-list)
+                (undo-more 1))
+            (message "Buffer was completely undone"))
+
+
     (defun zpwr/extract-fold (section)
         "Surround region with comment section block."
         (interactive "sThe Section Header: ")
@@ -775,6 +785,8 @@ you should place your code here."
 
     (define-key evil-visual-state-map (kbd "C-j") #'zpwr/down-four)
     (define-key evil-visual-state-map (kbd "C-k") #'zpwr/up-four)
+
+    (evil-ex-define-cmd "u0" 'zpwr/undo-all)
 
     (define-key evil-visual-state-map (kbd "C-h") #'zpwr/right-four)
     (define-key evil-visual-state-map (kbd "C-l") #'zpwr/left-four)
