@@ -569,8 +569,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
            )
         )
 
-        (evil-open-below 1)
+        (end-of-line)
         (evil-insert-state)
+        (newline-and-indent)
 
       )
 
