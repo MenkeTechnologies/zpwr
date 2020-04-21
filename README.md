@@ -143,6 +143,17 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - WSL ubuntu/kali/suse/leap/fedora
 - SUSE
 
+## ZPWR Extras Not Installed
+- Jetbrains .ideamvimrc
+- Jetbrains setings JAR
+- Jetbrains JVM Options idea.vmoptions
+- Spacmacs Config with 430+ packkages in .spacemacs
+- Emacs Yasnippets
+- Alacritty Main Config
+- Alacritty Color Theme
+- macOS Terminal Color Theme
+- gtags from zpwr and .globalrc
+
 # Full Installation Instructions
 
 ```sh
