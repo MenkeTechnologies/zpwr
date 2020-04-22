@@ -843,8 +843,9 @@ you should place your code here."
     (spacemacs/set-leader-keys (kbd "o,") #'dotspacemacs/sync-configuration-layers)
 
     (spacemacs/set-leader-keys (kbd "o/") #'spotify-playpause)
+    (spacemacs/set-leader-keys (kbd "os") #'engine/search-google)
 
-    (spacemacs/set-leader-keys (kbd "os") #'spotify-next)
+    (spacemacs/set-leader-keys (kbd "ox") #'spotify-next)
     (spacemacs/set-leader-keys (kbd "ol") #'spotify-previous)
 
     (spacemacs/set-leader-keys (kbd "oa") #'helm-projectile-ag)
