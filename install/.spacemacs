@@ -109,6 +109,12 @@ values."
            helm-ag
            helm-rg
            helm-file-preview
+           helm-git-grep
+           helm-git
+           helm-git-files
+           helm-google
+           helm-fuzzy
+           helm-z
            evil-snipe
            evil-surround
            evil-collection
@@ -417,14 +423,21 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:zpwr func
     ;;**************************************************************
 
-        (defun zpwr/undo-all ()
-            "Undo all edits."
-            (interactive)
-            (when (listp pending-undo-list)
-                (undo))
-            (while (listp pending-undo-list)
-                (undo-more 1))
-            (message "Buffer was completely undone"))
+    (defun zpwr/sb ()
+     "Switch to *Messages* Buffer"
+     (interactive)
+        (switch-to-buffer-other-window "*Messages*")
+     )
+
+
+    (defun zpwr/undo-all ()
+        "Undo all edits."
+        (interactive)
+        (when (listp pending-undo-list)
+            (undo))
+        (while (listp pending-undo-list)
+            (undo-more 1))
+        (message "Buffer was completely undone"))
 
 
     (defun zpwr/extract-fold (section)
@@ -542,6 +555,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (apply fun args)))
 
     (defun zpwr/runner  ()
+     "Run current buffer in tmux pane to right"
      (interactive)
       (let ( (cmd (concat "tmux send-keys -t right C-c '" "bash " (getenv "ZPWR_SCRIPTS") "/runner.sh " (zpwr/get-file-name) "' C-m")) )
            ;;(message (concat "tmux runner => " (symbol-value 'cmd)))
@@ -553,7 +567,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     )
 
     (defun zpwr/complete-current-statement ()
-     "Complete the current statement based on lalguage"
+     "Complete the current statement based on language"
      (interactive)
      (progn
         (cond
@@ -598,6 +612,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;**************************************************************
 
     (defun zpwr/compHook ()
+     "Company completion hook"
      (progn
         (setq-local completion-ignore-case t)
         (setq-local company-ctags-fuzzy-match-p t)
@@ -613,6 +628,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     )
 
     (defun zpwr/shHook ()
+     "Company completion shell script hook"
       (setq company-backends-sh-mode '(
                                        (company-dabbrev-code
                                         company-dabbrev
@@ -625,7 +641,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                         )
                                        ))
      (progn
-        (message "shell init done")
+        ;;(message "shell init done")
         )
     )
     ;;}}}***********************************************************
@@ -633,9 +649,10 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:indent guides
     ;;**************************************************************
     (defun zpwr/HL ()
+     "Auto highlight hook"
          (progn
             (highlight-indent-guides-mode)
-            (message "highlight indent guides init done")
+            ;;(message "highlight indent guides init done")
           )
      )
     ;;}}}***********************************************************
@@ -644,6 +661,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:programming
     ;;**************************************************************
     (defun zpwr/progSetup()
+     "Programming setup hook"
          (progn
             (set-display-table-slot standard-display-table 'wrap ?\ )
             (visual-line-mode)
@@ -651,7 +669,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
             ;;(setq evil-visual-mark-exclude-marks nil)
             (local-set-key (kbd "C-@") 'zpwr/complete-current-statement)
 
-            (message "user init done")
+            ;;(message "user init done")
         )
     )
     ;;}}}***********************************************************
@@ -659,6 +677,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:auto save
     ;;**************************************************************
     (defun zpwr/AS ()
+     "Auto save setup hook"
          (progn
 
            ;; in seconds
@@ -673,15 +692,18 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:hook wrappers
     ;;**************************************************************
     (defun zpwr/indentHook ()
+     "Indent setup hook"
          (zpwr/HL)
     )
 
     (defun zpwr/perlHook ()
+     "Perl Programming setup hook"
      (progn
         (message "perl init done")
      ))
 
   (defun zpwr/reload ()
+     "Reload Programming setup"
 
     (interactive)
     (progn
@@ -690,19 +712,21 @@ before packages are loaded. If you are unsure, you should try in setting them in
       )
     )
 
-    (defun my-ielm-mode-defaults ()
+    (defun zpwr/ielm-mode-defaults ()
+     "IELM setup hook"
         (progn
         (turn-on-eldoc-mode)
         (message "hooked eldoc")
         ))
 
-    (setq my-ielm-mode-hook 'my-ielm-mode-defaults)
+    (setq my-ielm-mode-hook 'zpwr/ielm-mode-defaults)
     ;;}}}***********************************************************
 
 
     ;;{{{                    MARK:auto hl
     ;;**************************************************************
    (defun zpwr/autoHighlight ()
+     "Auto highlight setup hook"
     (with-eval-after-load 'highlight-symbol
      (cond
       ((eq evil-state 'normal)
@@ -828,11 +852,6 @@ you should place your code here."
 
     (spacemacs/set-leader-keys (kbd "oy") #'zpwr/copy-to-clipboard)
     (spacemacs/set-leader-keys (kbd "op") #'zpwr/paste-from-clipboard)
-
-    (defun zpwr/sb ()
-     (interactive)
-        (switch-to-buffer-other-window "*Messages*")
-     )
 
     (spacemacs/set-leader-keys (kbd "om") #'zpwr/sb)
 
@@ -1196,7 +1215,7 @@ static char *gnus-pointer[] = {
     ("#fb4933" "#d65d0e" "#d79921" "#747400" "#b9b340" "#14676b" "#689d6a" "#d3869b" "#b16286")))
  '(package-selected-packages
    (quote
-    (helm-file-preview evil-snipe tide typescript-mode engine-mode dockerfile-mode docker tablist docker-tramp reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl disaster company-c-headers cmake-mode clang-format sql-indent toml-mode racer flycheck-rust cargo rust-mode emamux evil helm origami evil-collection annalist highlight-indent-guides helm-rg perspective workgroups web-beautify scala-mode sbt-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake noflet minitest livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern company-auctex coffee-mode chruby bundler inf-ruby auctex-latexmk auctex company-quickhelp company-shell ctags-update company-ycm ycm company-ctags plsense company-plsense org-projectile org-category-capture org-present org-pomodoro org-mime org-download htmlize gnuplot highlight-symbol web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data go-guru go-eldoc company-go go-mode powershell fzf real-auto-save flycheck-ycmd company-ycmd ycmd request-deferred deferred yasnippet-snippets darkburn-theme-theme cyberpunk-theme-theme spotify helm-spotify-plus multi zenburn-theme zen-and-art-theme yaml-mode xterm-color white-sand-theme vimrc-mode underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme slack emojify circe oauth2 websocket shell-pop seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme multi-term monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme magit-gh-pulls madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme insert-shebang inkpot-theme heroku-theme hemisu-theme helm-gtags hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gmail-message-mode ham-mode html-to-markdown github-search github-clone github-browse-file gist gh marshal logito pcache ht ggtags gandalf-theme flymd flatui-theme flatland-theme fish-mode fasd farmhouse-theme exotica-theme espresso-theme eshell-z eshell-prompt-extras esh-help edit-server dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme dactyl-mode cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alert log4e gntp alect-themes afternoon-theme mmm-mode markdown-toc markdown-mode gh-md yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic smeargle rainbow-mode rainbow-identifiers orgit magit-gitflow magit-popup helm-gitignore helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flycheck-pos-tip pos-tip flycheck evil-magit magit undo-tree git-commit with-editor transient diff-hl company-statistics company color-identifiers-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+    (helm-z helm-google helm-git-grep helm-git-files helm-git helm-fuzzy helm-file-preview evil-snipe tide typescript-mode engine-mode dockerfile-mode docker tablist docker-tramp reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl disaster company-c-headers cmake-mode clang-format sql-indent toml-mode racer flycheck-rust cargo rust-mode emamux evil helm origami evil-collection annalist highlight-indent-guides helm-rg perspective workgroups web-beautify scala-mode sbt-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe rbenv rake noflet minitest livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern tern company-auctex coffee-mode chruby bundler inf-ruby auctex-latexmk auctex company-quickhelp company-shell ctags-update company-ycm ycm company-ctags plsense company-plsense org-projectile org-category-capture org-present org-pomodoro org-mime org-download htmlize gnuplot highlight-symbol web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data go-guru go-eldoc company-go go-mode powershell fzf real-auto-save flycheck-ycmd company-ycmd ycmd request-deferred deferred yasnippet-snippets darkburn-theme-theme cyberpunk-theme-theme spotify helm-spotify-plus multi zenburn-theme zen-and-art-theme yaml-mode xterm-color white-sand-theme vimrc-mode underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme slack emojify circe oauth2 websocket shell-pop seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme multi-term monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme magit-gh-pulls madhat2r-theme lush-theme light-soap-theme jbeans-theme jazz-theme ir-black-theme insert-shebang inkpot-theme heroku-theme hemisu-theme helm-gtags hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gmail-message-mode ham-mode html-to-markdown github-search github-clone github-browse-file gist gh marshal logito pcache ht ggtags gandalf-theme flymd flatui-theme flatland-theme fish-mode fasd farmhouse-theme exotica-theme espresso-theme eshell-z eshell-prompt-extras esh-help edit-server dracula-theme django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme dactyl-mode cyberpunk-theme color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alert log4e gntp alect-themes afternoon-theme mmm-mode markdown-toc markdown-mode gh-md yapfify pyvenv pytest pyenv-mode py-isort pip-requirements live-py-mode hy-mode dash-functional helm-pydoc cython-mode company-anaconda anaconda-mode pythonic smeargle rainbow-mode rainbow-identifiers orgit magit-gitflow magit-popup helm-gitignore helm-company helm-c-yasnippet gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flycheck-pos-tip pos-tip flycheck evil-magit magit undo-tree git-commit with-editor transient diff-hl company-statistics company color-identifiers-mode auto-yasnippet yasnippet ac-ispell auto-complete ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
  '(pos-tip-background-color "#32302f")
  '(pos-tip-foreground-color "#bdae93")
  '(smartrep-mode-line-active-bg (solarized-color-blend "#98971a" "#32302f" 0.2))
