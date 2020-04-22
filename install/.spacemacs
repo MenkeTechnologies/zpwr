@@ -131,7 +131,7 @@ values."
            company-ycm
            perspective
            (company-quickhelp :location (recipe :fetcher github :repo "ahungry/company-quickhelp"))
-           (helm-fasd :location (recipe :fetcher github :repo "ajsalminen/helm-fasd"))
+           (helm-fasd :location (recipe :fetcher github :repo "MenkeTechnologies/helm-fasd"))
            popup
            plsense
            )
@@ -845,12 +845,19 @@ you should place your code here."
     (spacemacs/set-leader-keys (kbd "o/") #'spotify-playpause)
 
     (spacemacs/set-leader-keys (kbd "os") #'spotify-next)
+    (spacemacs/set-leader-keys (kbd "ol") #'spotify-previous)
+
     (spacemacs/set-leader-keys (kbd "oa") #'helm-projectile-ag)
     (spacemacs/set-leader-keys (kbd "ot") #'helm-gtags-select)
 
     (spacemacs/set-leader-keys (kbd "wq") #'delete-window)
 
-    (spacemacs/set-leader-keys (kbd "oz") #'suspend-emacs)
+    (spacemacs/set-leader-keys (kbd "og") #'helm-fd)
+    (spacemacs/set-leader-keys (kbd "ov") #'helm-fasd)
+
+    (spacemacs/set-leader-keys (kbd "oz") #'helm-z)
+
+    (spacemacs/set-leader-keys (kbd "od") #'suspend-emacs)
 
     (spacemacs/set-leader-keys (kbd "oy") #'zpwr/copy-to-clipboard)
     (spacemacs/set-leader-keys (kbd "op") #'zpwr/paste-from-clipboard)
