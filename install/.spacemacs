@@ -104,7 +104,8 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-           realgud realgud-pry realgud-maxima
+           realgud
+           realgud-pry
            yasnippet
            yasnippet-snippets
            ag
@@ -610,6 +611,28 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     )
 
+    ;;}}}***********************************************************
+
+    ;;{{{                    MARK:tokens
+    ;;**************************************************************
+    (when (load "~/.emacs.d/private/.tokens.el" t)
+        (message "loaded private tokens")
+        (setq erc-interpret-mirc-color t)
+
+        (if (boundp 'irc-gitter-nick)
+         (progn
+            (setq erc-autojoin-channels-alist '(("gitter.im" "#syl20bnr/spacemacs")))
+            (defun zpwr/gitter-spacemacs ()
+             "Connect to Spacemacs Gitter"
+                (interactive)
+                (progn
+                    (erc-tls :server "irc.gitter.im" :port "6697" :nick irc-gitter-nick :full-name irc-gitter-name :password irc-gitter-pwd)
+                )
+            )
+            (spacemacs/set-leader-keys (kbd "ais") #'zpwr/gitter-spacemacs)
+          )
+         )
+     )
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:Setup shell company backends
@@ -1129,8 +1152,6 @@ you should place your code here."
     ;;}}}***********************************************************
 
 
-
-
   )
 ;;}}}***********************************************************
 
@@ -1202,7 +1223,7 @@ static char *gnus-pointer[] = {
 \"###########.######\" };")) t)
  '(helm-source-names-using-follow
    (quote
-    ("Key translations Starting With C-x:" "Function key map translations Starting With C-x:" "Global Bindings Starting With C-x:" "`undo-tree-mode' Minor Mode Bindings Starting With C-x:" "`evil-search-highlight-persist' Minor Mode Bindings Starting With C-x:" "`helm--minor-mode' Minor Mode Bindings Starting With C-x:" "`winum-mode' Minor Mode Bindings Starting With C-x:" "elisp-slime-nav-describe-elisp-thing-at-point" "HELM available REPLs" "Customize Face" "rgrep" "describe-variable" "describe-theme" "describe-package" "configuration-layer/describe-package" "Major Mode Bindings:" "Toggles" "Dotfile" "Packages" "Layers" "Spacemacs Documentation" "Minor modes" "package-install" "Yasnippet" "find-function" "Imenu" "completion-at-point" "ielm-change-working-buffer" "Selection Theme" "Buffers" "Find tag from here" "Select Tag" "`winum-mode' Minor Mode Bindings:" "`evil-snipe-local-mode' Minor Mode Bindings:" "`evil-snipe-override-local-mode' Minor Mode Bindings:" "`hs-minor-mode' Minor Mode Bindings:" "`ido-mode' Minor Mode Bindings:" "`flycheck-mode' Minor Mode Bindings:" "`persp-mode' Minor Mode Bindings:" "`eyebrowse-mode' Minor Mode Bindings:" "`evil-surround-mode' Minor Mode Bindings:" "Key translations:" "Global Bindings:" "Function key map translations:" "Input decoding map translations:" "`evil-motion-state-local-minor-mode' Minor Mode Bindings:" "`spacemacs-sh-mode-map-active' Minor Mode Bindings:" "`evil-normal-state-minor-mode' Minor Mode Bindings:" "`evil-normal-state-local-minor-mode' Minor Mode Bindings:" "describe-function" "describe-keymap" "Classes" "Emacs Commands" "Faces" "Generic functions" "Functions" "Variables" "Commands" "Emacs Commands history")))
+    ("describe-function" "describe-variable" "Key translations Starting With C-x:" "Function key map translations Starting With C-x:" "Global Bindings Starting With C-x:" "`undo-tree-mode' Minor Mode Bindings Starting With C-x:" "`evil-search-highlight-persist' Minor Mode Bindings Starting With C-x:" "`helm--minor-mode' Minor Mode Bindings Starting With C-x:" "`winum-mode' Minor Mode Bindings Starting With C-x:" "elisp-slime-nav-describe-elisp-thing-at-point" "HELM available REPLs" "Customize Face" "rgrep" "describe-theme" "describe-package" "configuration-layer/describe-package" "Major Mode Bindings:" "Toggles" "Dotfile" "Packages" "Layers" "Spacemacs Documentation" "Minor modes" "package-install" "Yasnippet" "find-function" "Imenu" "completion-at-point" "ielm-change-working-buffer" "Selection Theme" "Buffers" "Find tag from here" "Select Tag" "`winum-mode' Minor Mode Bindings:" "`evil-snipe-local-mode' Minor Mode Bindings:" "`evil-snipe-override-local-mode' Minor Mode Bindings:" "`hs-minor-mode' Minor Mode Bindings:" "`ido-mode' Minor Mode Bindings:" "`flycheck-mode' Minor Mode Bindings:" "`persp-mode' Minor Mode Bindings:" "`eyebrowse-mode' Minor Mode Bindings:" "`evil-surround-mode' Minor Mode Bindings:" "Key translations:" "Global Bindings:" "Function key map translations:" "Input decoding map translations:" "`evil-motion-state-local-minor-mode' Minor Mode Bindings:" "`spacemacs-sh-mode-map-active' Minor Mode Bindings:" "`evil-normal-state-minor-mode' Minor Mode Bindings:" "`evil-normal-state-local-minor-mode' Minor Mode Bindings:" "describe-keymap" "Classes" "Emacs Commands" "Faces" "Generic functions" "Functions" "Variables" "Commands" "Emacs Commands history")))
  '(highlight-changes-colors (quote ("#d3869b" "#b16286")))
  '(highlight-symbol-colors
    (quote
