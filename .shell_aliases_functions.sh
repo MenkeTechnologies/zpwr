@@ -124,7 +124,7 @@ export ZPWR_TEMPFILE2="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER"
 export ZPWR_TEMPFILE3="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-3$USER"
 export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"
 export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
-export ZPWR_="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
+export Z_DATA="$HOME/.z"
 #}}}***********************************************************
 
 #{{{                    MARK:Env Vars
