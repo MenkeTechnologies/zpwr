@@ -428,11 +428,22 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:zpwr func
     ;;**************************************************************
 
-    (defun zpwr/sb ()
+    (defun zpwr/show-messages ()
      "Switch to *Messages* Buffer"
      (interactive)
-        (switch-to-buffer-other-window "*Messages*")
-     )
+     (cond
+      ((string= (buffer-name) "*Messages*") 
+       (progn
+            (spacemacs/toggle-maximize-buffer)
+            (delete-window)
+        ))
+      (t
+       (progn
+            (switch-to-buffer-other-window "*Messages*")
+            (spacemacs/toggle-maximize-buffer)
+        ))
+       )
+    )
 
 
     (defun zpwr/undo-all ()
@@ -888,7 +899,10 @@ you should place your code here."
     (spacemacs/set-leader-keys (kbd "oy") #'zpwr/copy-to-clipboard)
     (spacemacs/set-leader-keys (kbd "op") #'zpwr/paste-from-clipboard)
 
-    (spacemacs/set-leader-keys (kbd "om") #'zpwr/sb)
+    (spacemacs/set-leader-keys (kbd "om") #'zpwr/show-messages)
+
+    (define-key evil-insert-state-map (kbd "C-p") #'zpwr/show-messages)
+    (define-key evil-normal-state-map (kbd "C-p") #'zpwr/show-messages)
 
     (spacemacs/set-leader-keys (kbd "oc") #'magit-commit)
     (spacemacs/set-leader-keys (kbd "op") #'magit-push)
