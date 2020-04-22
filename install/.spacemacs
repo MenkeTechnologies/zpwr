@@ -1171,7 +1171,7 @@ static char *note[] = {
 \"######....\",
 \"#######..#\" };")))
  '(evil-want-Y-yank-to-eol nil)
- '(gnus-logo-colors (quote ("#2fdbde" "#c0c0c0")))
+ '(gnus-logo-colors (quote ("#2fdbde" "#c0c0c0")) t)
  '(gnus-mode-line-image-cache
    (quote
     (image :type xpm :ascent center :data "/* XPM */
@@ -1194,10 +1194,10 @@ static char *gnus-pointer[] = {
 \"######..###.######\",
 \"###....####.######\",
 \"###..######.######\",
-\"###########.######\" };")))
+\"###########.######\" };")) t)
  '(helm-source-names-using-follow
    (quote
-    ("package-install" "Yasnippet" "find-function" "Imenu" "completion-at-point" "ielm-change-working-buffer" "Selection Theme" "Buffers" "Find tag from here" "Select Tag" "`winum-mode' Minor Mode Bindings:" "`evil-snipe-local-mode' Minor Mode Bindings:" "`evil-snipe-override-local-mode' Minor Mode Bindings:" "`hs-minor-mode' Minor Mode Bindings:" "`ido-mode' Minor Mode Bindings:" "`flycheck-mode' Minor Mode Bindings:" "`persp-mode' Minor Mode Bindings:" "`eyebrowse-mode' Minor Mode Bindings:" "`evil-surround-mode' Minor Mode Bindings:" "Key translations:" "Global Bindings:" "Function key map translations:" "Input decoding map translations:" "`evil-motion-state-local-minor-mode' Minor Mode Bindings:" "`spacemacs-sh-mode-map-active' Minor Mode Bindings:" "`evil-normal-state-minor-mode' Minor Mode Bindings:" "`evil-normal-state-local-minor-mode' Minor Mode Bindings:" "Major Mode Bindings:" "describe-variable" "describe-theme" "describe-package" "describe-function" "describe-keymap" "Classes" "Emacs Commands" "Faces" "Generic functions" "Functions" "Variables" "Commands" "Emacs Commands history")))
+    ("describe-theme" "describe-package" "configuration-layer/describe-package" "Major Mode Bindings:" "Toggles" "Dotfile" "Packages" "Layers" "Spacemacs Documentation" "Minor modes" "package-install" "Yasnippet" "find-function" "Imenu" "completion-at-point" "ielm-change-working-buffer" "Selection Theme" "Buffers" "Find tag from here" "Select Tag" "`winum-mode' Minor Mode Bindings:" "`evil-snipe-local-mode' Minor Mode Bindings:" "`evil-snipe-override-local-mode' Minor Mode Bindings:" "`hs-minor-mode' Minor Mode Bindings:" "`ido-mode' Minor Mode Bindings:" "`flycheck-mode' Minor Mode Bindings:" "`persp-mode' Minor Mode Bindings:" "`eyebrowse-mode' Minor Mode Bindings:" "`evil-surround-mode' Minor Mode Bindings:" "Key translations:" "Global Bindings:" "Function key map translations:" "Input decoding map translations:" "`evil-motion-state-local-minor-mode' Minor Mode Bindings:" "`spacemacs-sh-mode-map-active' Minor Mode Bindings:" "`evil-normal-state-minor-mode' Minor Mode Bindings:" "`evil-normal-state-local-minor-mode' Minor Mode Bindings:" "describe-variable" "describe-function" "describe-keymap" "Classes" "Emacs Commands" "Faces" "Generic functions" "Functions" "Variables" "Commands" "Emacs Commands history")))
  '(highlight-changes-colors (quote ("#d3869b" "#b16286")))
  '(highlight-symbol-colors
    (quote
