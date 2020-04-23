@@ -400,6 +400,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;**************************************************************
     (setq zpwr/inc 4)
     (setq zpwr/as-interval 0.9)
+    (setq zpwr-snippets-dir
+     "~/.emacs.d/private/snippets/zpwr-snippets")
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:message buffer timestamps
@@ -864,6 +866,7 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-v") #'zpwr/runner)
     (define-key evil-normal-state-map (kbd "C-v") #'zpwr/runner)
 
+    (define-key evil-insert-state-map (kbd "C-o") #'helm-company)
     (define-key evil-insert-state-map (kbd "C-l") #'hippie-expand)
     (define-key evil-insert-state-map (kbd "C-t") #'transpose-chars)
 
@@ -1157,7 +1160,6 @@ you should place your code here."
     ;;}}}***********************************************************
 
 
-
     ;;{{{                    MARK:enable helm gtags
     ;;**************************************************************
     (helm-gtags-mode)
@@ -1165,6 +1167,16 @@ you should place your code here."
     (setq helm-follow-mode-persistent t)
     ;;}}}***********************************************************
 
+
+    ;;{{{                    MARK:yasnippets
+    ;;**************************************************************
+    (add-to-list 'yas-snippet-dirs
+     'zpwr-snippets-dir
+     )
+    (yas-reload-all)
+    ;;}}}***********************************************************
+
+    (message "end user-c")
 
   )
 ;;}}}***********************************************************
