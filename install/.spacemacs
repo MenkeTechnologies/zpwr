@@ -401,7 +401,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq zpwr/inc 4)
     (setq zpwr/as-interval 0.9)
     (setq zpwr-snippets-dir
-     "~/.emacs.d/private/snippets/zpwr-snippets")
+     "~/.emacs.d/private/snippets/zpwr-snippets"
+     )
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:message buffer timestamps
@@ -886,7 +887,10 @@ you should place your code here."
     (spacemacs/set-leader-keys (kbd "ol") #'spotify-previous)
 
     (spacemacs/set-leader-keys (kbd "oa") #'helm-projectile-ag)
-    (spacemacs/set-leader-keys (kbd "ot") #'helm-gtags-select)
+    (spacemacs/set-leader-keys (kbd "oq") #'helm-gtags-select)
+
+    (spacemacs/set-leader-keys (kbd "oti") #'highlight-indent-guides-mode)
+    (spacemacs/set-leader-keys (kbd "oth") #'highlight-symbol-mode)
 
     (spacemacs/set-leader-keys (kbd "wq") #'delete-window)
 
@@ -1071,14 +1075,6 @@ you should place your code here."
     ;;}}}***********************************************************
 
 
-    ;;{{{                    MARK:yas config
-    ;;**************************************************************
-
-    (yas-global-mode 1)
-
-    ;;}}}***********************************************************
-
-
     ;;{{{                    MARK:persp config
     ;;**************************************************************
 
@@ -1168,11 +1164,15 @@ you should place your code here."
 
     ;;{{{                    MARK:yasnippets
     ;;**************************************************************
+    (yas-global-mode 1)
+
     (add-to-list 'yas-snippet-dirs
      'zpwr-snippets-dir
      )
     (yas-reload-all)
     ;;}}}***********************************************************
+
+
 
     (message "end user-c")
 
