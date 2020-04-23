@@ -436,13 +436,11 @@ before packages are loaded. If you are unsure, you should try in setting them in
      (cond
       ((string= (buffer-name) "*Messages*") 
        (progn
-            (spacemacs/toggle-maximize-buffer)
-            (delete-window)
+            (spacemacs/alternate-buffer)
         ))
       (t
        (progn
-            (switch-to-buffer-other-window "*Messages*")
-            (spacemacs/toggle-maximize-buffer)
+            (switch-to-buffer "*Messages*")
         ))
        )
     )
