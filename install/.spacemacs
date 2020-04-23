@@ -585,7 +585,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (insert (shell-command-to-string (getenv "ZPWR_PASTE_CMD"))))
       )
 
-    (defun zpwr/inhibit-sentinel-messages (fun &rest args)
+    (defun zpwr/inhibit-sentinel-messages-echo-area (fun &rest args)
     "Inhibit messages in all sentinels started by fun."
     (cl-letf* ((old-set-process-sentinel (symbol-function 'set-process-sentinel))
          ((symbol-function 'set-process-sentinel)
@@ -595,6 +595,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
          process
          `(lambda (&rest args)
             (let ((inhibit-message t))
+              (apply (quote ,sentinel) args)))))))
+        (apply fun args)))
+
+    (defun zpwr/inhibit-sentinel-messages-buffer (fun &rest args)
+    "Inhibit messages in all sentinels started by fun."
+    (cl-letf* ((old-set-process-sentinel (symbol-function 'set-process-sentinel))
+         ((symbol-function 'set-process-sentinel)
+          (lambda (process sentinel)
+        (funcall
+         old-set-process-sentinel
+         process
+         `(lambda (&rest args)
+            (cl-letf (((symbol-function 'message) #'ignore))
               (apply (quote ,sentinel) args)))))))
         (apply fun args)))
 
@@ -797,12 +810,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
      (cond
       ((eq evil-state 'normal)
        (ignore-errors
-        (progn
-         (highlight-symbol-remove-all)
-         (let ((inhibit-message t))
-            (highlight-symbol)
-          )
-        ))))))
+        (let ((message-log-max nil))
+             (progn
+                (highlight-symbol-remove-all)
+                (highlight-symbol)
+              )
+         )
+        )))))
 
     ;;}}}***********************************************************
 
