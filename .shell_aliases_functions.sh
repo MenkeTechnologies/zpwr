@@ -293,7 +293,7 @@ alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
 alias die='sudo kill -9 --'
 alias emacs='emacs -nw'
-alias ee='emacsclient -nw -c'
+alias ee='emacsclient -c -a ""'
 alias me='source em-server.sh'
 
 if exists docker; then
@@ -3082,7 +3082,8 @@ function changeGitEmail(){
     if [ "$GIT_COMMITTER_EMAIL" = "$OLD_EMAIL" ]
     then
         export GIT_COMMITTER_NAME="$CORRECT_NAME"
-        export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
+
+export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
     fi
     if [ "$GIT_AUTHOR_EMAIL" = "$OLD_EMAIL" ]
     then
