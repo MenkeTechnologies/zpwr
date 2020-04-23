@@ -537,9 +537,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (interactive)
         (let ((win (selected-window)))
           (progn
-            ;;(message (concat "window => " (format "%s" win)))
-            (spacemacs/evil-smart-doc-lookup)
-            (select-window win)
+            (message (concat "window => " (format "%s" win)))
+            (ignore-errors
+              (progn
+                (spacemacs/evil-smart-doc-lookup)
+                (if (string= (buffer-name (window-buffer)) "*Help*")
+                    (select-window win)
+                    (message (concat "not help => " (buffer-name (window-buffer))))
+                )
+              )
+            )
           )
       )
     )
@@ -875,6 +882,8 @@ you should place your code here."
 
     (define-key evil-visual-state-map (kbd "C-h") #'zpwr/right-four)
     (define-key evil-visual-state-map (kbd "C-l") #'zpwr/left-four)
+
+    (define-key evil-visual-state-map (kbd "C-b") #'zpwr/copy-to-clipboard)
 
    ;; displace lines up and down 
     (define-key evil-visual-state-map "J"
