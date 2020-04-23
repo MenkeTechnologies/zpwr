@@ -598,7 +598,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (cond
          ((derived-mode-p 'zsh-mode 'sh-mode 'python-mode 'ruby-mode 'yaml-mode 'vimc-mode) (setq toInsertChar ""))
          ((derived-mode-p 'java-mode 'js-jsx-mode 'js2-mode 'perl-mode 'cperl-mode 'c-mode 'c++-mode 'awk-mode) (setq toInsertChar ";"))
-         ((derived-mode-p 'inferior-emacs-lisp-mode 'emacs-lisp-mode 'lisp-mode) (setq toInsertChar ")"))
+         ((derived-mode-p 'inferior-emacs-lisp-mode 'emacs-lisp-mode 'lisp-mode) (setq toInsertChar ""))
          (t (setq toInsertChar ""))
         )
 
