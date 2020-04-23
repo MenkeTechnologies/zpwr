@@ -1900,7 +1900,7 @@ function unlinkConf(){
     done
     rm -rf "$HOME/.vim/UltiSnips"
 
-    local snipDir="$HOME/.emacs.d/private/snippets"
+    local snipDir="$HOME/.emacs.d/private/snippets/zpwr-snippets"
 
     if [[ -d "$snipDir" ]]; then
        rm -rf "$snipDir"
@@ -1933,13 +1933,13 @@ function linkConf(){
     prettyPrint "Installing UltiSnips to $HOME/.vim/UltiSnips"
     echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
     ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
-    local snipDir="$HOME/.emacs.d/private"
+    local snipDir="$HOME/.emacs.d/private/snippets"
 
     if [[ -d "$snipDir" ]]; then
         prettyPrint "Installing yasnippets to $snipDir"
-        command rm -rf "$snipDir/snippets" 2>/dev/null
-        echo ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/snippets"
-        ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/snippets"
+        command rm -rf "$snipDir/zpwr-snippets" 2>/dev/null
+        echo ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
+        ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
     fi
     )
 }
