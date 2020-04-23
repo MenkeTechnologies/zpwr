@@ -617,7 +617,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
       (let ( (cmd (concat "tmux send-keys -t right C-c '" "bash " (getenv "ZPWR_SCRIPTS") "/runner.sh " (zpwr/get-file-name) "' C-m")) )
            ;;(message (concat "tmux runner => " (symbol-value 'cmd)))
              (save-window-excursion
-              (zpwr/inhibit-sentinel-messages #'async-shell-command
+              (zpwr/inhibit-sentinel-messages-echo-area #'async-shell-command
                 (symbol-value 'cmd))
            )
       )
@@ -810,7 +810,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
      (cond
       ((eq evil-state 'normal)
        (ignore-errors
-        (let ((message-log-max nil))
+        (let ((message-log-max nil) (inhibit-message t))
              (progn
                 (highlight-symbol-remove-all)
                 (highlight-symbol)
