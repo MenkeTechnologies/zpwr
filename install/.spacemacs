@@ -775,6 +775,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
             ;;(evil-visual-mark-mode)
             ;;(setq evil-visual-mark-exclude-marks nil)
             (local-set-key (kbd "C-@") 'zpwr/complete-current-statement)
+            (local-set-key evil-normal-state-map (kbd "K") #'zpwr/doc-and-back)
 
             ;;(message "user init done")
         )
@@ -927,11 +928,9 @@ you should place your code here."
 
     (define-key evil-visual-state-map (kbd "C-b") #'zpwr/copy-to-clipboard)
 
-   ;; displace lines up and down 
-    (define-key evil-visual-state-map "J"
-      (concat ":m '>+1" (kbd "RET") "gv=gv"))
-    (define-key evil-visual-state-map "K"
-      (concat ":m '<-2" (kbd "RET") "gv=gv"))
+    ;; displace lines up and down
+    (define-key evil-visual-state-map "J" (concat ":m '>+1" (kbd "RET") "gv=gv"))
+    (define-key evil-visual-state-map "K" (concat ":m '<-2" (kbd "RET") "gv=gv"))
 
     (define-key evil-normal-state-map (kbd "C-j") #'zpwr/down-four)
     (define-key evil-normal-state-map (kbd "C-k") #'zpwr/up-four)
