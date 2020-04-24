@@ -965,6 +965,8 @@ you should place your code here."
     (spacemacs/set-leader-keys (kbd "oc") #'magit-commit)
     (spacemacs/set-leader-keys (kbd "op") #'magit-push)
 
+    (spacemacs/set-leader-keys (kbd "oe") #'eval-expression)
+
     (if (featurep 'ns)
         (progn
             (global-set-key (kbd "<mouse-4>") (kbd "<wheel-up>"))
