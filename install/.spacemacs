@@ -1261,10 +1261,14 @@ you should place your code here."
         '(
             ("\\*Messages"
 				  (display-buffer-reuse-window display-buffer-same-window))
+            ("\\*shell"
+				  (display-buffer-reuse-window display-buffer-in-side-window)
+				  (side . right)
+				  (window-width . 0.4))
             ("\\*Help"
 				  (display-buffer-reuse-window display-buffer-in-side-window)
 				  (side . right)
-				  (window-width . 70))
+				  (window-width . 0.4))
         ))
     (yas-reload-all)
     ;;}}}***********************************************************
