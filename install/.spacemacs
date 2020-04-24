@@ -1256,6 +1256,18 @@ you should place your code here."
     (add-to-list 'yas-snippet-dirs
      'zpwr-snippets-dir
      )
+
+    (defvar parameters
+        '(window-parameters . ((no-other-window . t)
+                        (no-delete-other-windows . t))))
+
+    (setq display-buffer-alist
+    `(
+        ("\\*Help\\*" display-buffer-in-side-window
+            (side . right) (window-width . 70) (window-height . fit-window-to-buffer)
+            (preserve-size . (nil . t)) ,parameters)
+        )
+    )
     (yas-reload-all)
     ;;}}}***********************************************************
     (message "end user-c")
