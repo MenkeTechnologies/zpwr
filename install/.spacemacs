@@ -188,9 +188,9 @@ values."
    ;; with `:variables' keyword (similar to layers). Check the editing styles
    ;; section of the documentation for details on available variables.
    ;; (default 'vim)
-   dotspacemacs-editing-style '(vim
-                                :vim-style-retain-visual-state-on-shift	t
-                                :vim-style-visual-feedback	t
+   dotspacemacs-editing-style '("vim" :variables
+                                vim-style-retain-visual-state-on-shift	t
+                                vim-style-visual-feedback	t
                               )
    ;; If non nil output loading progress in `*Messages*' buffer. (default nil)
    dotspacemacs-verbose-loading nil
