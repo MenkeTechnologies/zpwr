@@ -398,6 +398,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
     (message "start user-i")
 
+    (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+    (setq evil-want-keybinding nil)
     
     ;;{{{                    mark:init vars
     ;;**************************************************************
@@ -910,11 +912,6 @@ you should place your code here."
     (define-key evil-normal-state-map (kbd "C-h") #'zpwr/right-four)
     (define-key evil-normal-state-map (kbd "C-l") #'zpwr/left-four)
 
-    (global-set-key (kbd "C-j") #'zpwr/down-four)
-    (global-set-key (kbd "C-k") #'zpwr/up-four)
-    (global-set-key (kbd "C-h") #'zpwr/right-four)
-    (global-set-key (kbd "C-l") #'zpwr/left-four)
-
     (define-key evil-normal-state-map (kbd "K") #'zpwr/doc-and-back)
 
     (define-key evil-normal-state-map (kbd "C-d") #'zpwr/undohunk)
@@ -1106,9 +1103,6 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-z") #'helm-swoop)
     (define-key evil-normal-state-map (kbd "C-z") #'helm-swoop)
 
-    (global-set-key (kbd "C-z") #'helm-swoop)
-    (global-set-key (kbd "C-z") #'helm-swoop)
-
     (define-key evil-insert-state-map (kbd "C-f") #'helm-multi-swoop-all)
     (define-key evil-normal-state-map (kbd "C-f") #'helm-multi-swoop-all)
 
@@ -1235,6 +1229,11 @@ you should place your code here."
      )
     (yas-reload-all)
     ;;}}}***********************************************************
+
+    (require 'evil)
+    (when (require 'evil-collection nil t)
+    (evil-collection-init))
+
 
 
 
