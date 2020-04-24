@@ -1257,17 +1257,15 @@ you should place your code here."
      'zpwr-snippets-dir
      )
 
-    (defvar parameters
-        '(window-parameters . ((no-other-window . t)
-                        (no-delete-other-windows . t))))
-
     (setq display-buffer-alist
-    `(
-        ("\\*Help\\*" display-buffer-in-side-window
-            (side . right) (window-width . 70) (window-height . fit-window-to-buffer)
-            (preserve-size . (nil . t)) ,parameters)
-        )
-    )
+        '(
+            ("\\*Messages"
+				  (display-buffer-reuse-window display-buffer-same-window))
+            ("\\*Help"
+				  (display-buffer-reuse-window display-buffer-in-side-window)
+				  (side . right)
+				  (window-width . 70))
+        ))
     (yas-reload-all)
     ;;}}}***********************************************************
     (message "end user-c")
