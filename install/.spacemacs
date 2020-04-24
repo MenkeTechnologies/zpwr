@@ -665,6 +665,32 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     )
 
+
+    (defun zpwr/kill-other-buffers ()
+        "Kill all other buffers."
+        (interactive)
+        (mapc
+            (lambda (buf)
+                (let ((name (buffer-name buf)))
+                    (cond
+                        ((eq ?\s (aref name 0)) nil)
+                        ((eq buf (current-buffer)) nil)
+                        ((string= name "*Messages*") nil)
+                        (t
+                            (progn
+                             (ignore-errors
+                                (kill-buffer buf)
+                              )
+                                ;;(print (concat "killing =>" name))
+                            )
+                        )
+                    )
+                )
+            )
+            (buffer-list)
+       )
+    )
+
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:tokens
@@ -1075,6 +1101,11 @@ you should place your code here."
             (yas-abort-snippet)
             (company-abort)))
 
+
+    (require 'evil)
+    (when (require 'evil-collection nil t)
+        (evil-collection-init))
+
     (define-key evil-insert-state-map [tab] #'tab-indent-or-complete)
 
     (global-set-key [(control return)] #'company-complete-common)
@@ -1089,7 +1120,6 @@ you should place your code here."
     (define-key yas-keymap (kbd "TAB") #'tab-complete-or-next-field)
     (define-key yas-keymap [(control tab)] #'yas-next-field)
     (define-key yas-keymap (kbd "C-g") #'abort-company-or-yas)
-
 
     ;;real tab
     (define-key evil-normal-state-map (kbd "TAB") #'evil-jump-forward)
@@ -1229,14 +1259,6 @@ you should place your code here."
      )
     (yas-reload-all)
     ;;}}}***********************************************************
-
-    (require 'evil)
-    (when (require 'evil-collection nil t)
-    (evil-collection-init))
-
-
-
-
     (message "end user-c")
 
   )
