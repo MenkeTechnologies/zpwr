@@ -812,6 +812,18 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     )
 
+    (defun zpwr/evilNormalStateSetup()
+     "Programming setup hook"
+         (progn
+            (define-key evil-normal-state-local-map (kbd "C-j") #'zpwr/down-four)
+            (define-key evil-normal-state-local-map (kbd "C-k") #'zpwr/up-four)
+            (define-key evil-normal-state-local-map (kbd "C-h") #'zpwr/right-four)
+            (define-key evil-normal-state-local-map (kbd "C-l") #'zpwr/left-four)
+            (define-key evil-normal-state-local-map (kbd "C-z") #'helm-swoop)
+            ;;(message "evil normal setup done")
+        )
+
+    )
     (defun zpwr/progSetup()
      "Programming setup hook"
          (progn
@@ -969,6 +981,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (add-hook 'elisp-slime-nav-mode-hook 'zpwr/slimeSetup)
 
     (add-hook 'evil-evilified-state-entry-hook 'zpwr/evilifiedHook)
+
+    (add-hook 'evil-normal-state-entry-hook 'zpwr/evilNormalStateSetup)
 
     ;;}}}***********************************************************
 
