@@ -768,15 +768,29 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;{{{                    MARK:programming
     ;;**************************************************************
+    (defun zpwr/slimeSetup()
+     "slime setup hook"
+         (progn
+            (message "slime hook")
+        )
+    )
+
+    (defun zpwr/visualMarkSetup()
+        "Visual mark Setup"
+        ;;(evil-visual-mark-mode)
+        ;;(setq evil-visual-mark-exclude-marks nil)
+
+    )
+
     (defun zpwr/progSetup()
      "Programming setup hook"
          (progn
             (set-display-table-slot standard-display-table 'wrap ?\ )
             (visual-line-mode)
-            ;;(evil-visual-mark-mode)
-            ;;(setq evil-visual-mark-exclude-marks nil)
 
-            ;;(message "user init done")
+            (define-key evil-slime-nav-mode-map (kbd "K") #'zpwr/doc-and-back)
+
+            (message "prog setup done")
         )
     )
     ;;}}}***********************************************************
@@ -869,6 +883,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     (add-hook 'kill-emacs-hook 'persp-state-save)
 
+    (add-hook 'slime-nav-mode-hook 'zpwr/slimeSetup)
+
     ;;}}}***********************************************************
 
     (message "end user-i")
@@ -939,8 +955,6 @@ you should place your code here."
     (define-key evil-normal-state-map (kbd "C-h") #'zpwr/right-four)
     (define-key evil-normal-state-map (kbd "C-l") #'zpwr/left-four)
 
-    (define-key evil-normal-state-map (kbd "K") #'zpwr/doc-and-back)
-
     (define-key evil-normal-state-map (kbd "C-d") #'zpwr/undohunk)
 
     (define-key evil-insert-state-map (kbd "C-v") #'zpwr/runner)
@@ -961,6 +975,8 @@ you should place your code here."
 
     (define-key evil-insert-state-map (kbd "C-f") #'spacemacs/frame-killer)
     (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
+
+    (define-key evil-normal-state-map (kbd "K") #'zpwr/doc-and-back)
 
     ;; like gj
     (define-key evil-normal-state-map (kbd "j") #'evil-next-visual-line)
