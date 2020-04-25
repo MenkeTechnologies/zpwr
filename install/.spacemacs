@@ -788,7 +788,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
             (set-display-table-slot standard-display-table 'wrap ?\ )
             (visual-line-mode)
 
-            (define-key evil-slime-nav-mode-map (kbd "K") #'zpwr/doc-and-back)
+            (ignore-errors
+                (define-key evil-slime-nav-mode-map (kbd "K") #'zpwr/doc-and-back)
+             )
 
             (message "prog setup done")
         )
@@ -812,6 +814,17 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;{{{                    MARK:hook wrappers
     ;;**************************************************************
+    (defun zpwr/evilifiedHook ()
+     "Evilified setup hook"
+     (progn
+        (message "evilified hook")
+        (define-key evil-evilified-state-map (kbd "C-j") #'zpwr/down-four)
+        (define-key evil-evilified-state-map (kbd "C-k") #'zpwr/up-four)
+        (define-key evil-evilified-state-map (kbd "C-h") #'zpwr/right-four)
+        (define-key evil-evilified-state-map (kbd "C-l") #'zpwr/left-four)
+        (define-key evil-evilified-state-map (kbd "C-z") #'helm-swoop)
+      )
+    )
     (defun zpwr/indentHook ()
      "Indent setup hook"
          (zpwr/HL)
@@ -884,6 +897,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (add-hook 'kill-emacs-hook 'persp-state-save)
 
     (add-hook 'slime-nav-mode-hook 'zpwr/slimeSetup)
+
+    (add-hook 'evil-evilified-state-entry-hook 'zpwr/evilifiedHook)
 
     ;;}}}***********************************************************
 
@@ -972,6 +987,8 @@ you should place your code here."
 
     (define-key evil-insert-state-map (kbd "C-z") #'helm-swoop)
     (define-key evil-normal-state-map (kbd "C-z") #'helm-swoop)
+
+    (bind-key* "<C-z>" #'helm-swoop)
 
     (define-key evil-insert-state-map (kbd "C-f") #'spacemacs/frame-killer)
     (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
