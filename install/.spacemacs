@@ -556,30 +556,24 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (message (zpwr/get-file-name))
     )
 
-    (defun zpwr/slime-doc-and-back ()
-        "Get doc but keep focus"
-        (interactive)
-        (let ((win (selected-window)))
-            ;;(;message (concat "window => " (format "%s" win)))
-              (progn
-                (elisp-slime-nav-describe-elisp-thing-at-point (elisp-slime-nav--read-symbol-at-point))
-                (if (string= (buffer-name (window-buffer)) "*Help*")
-                    (select-window win)
-                    ;;(message (concat "not help => " (buffer-name (window-buffer))))
-                )
-              )
-        )
-      )
-
-    (defun zpwr/evil-doc-and-back ()
+    (defun zpwr/doc-no-focus ()
       "Get doc but keep focus"
       (interactive)
         (let ((win (selected-window)))
           (progn
+
+            (cond
+                (   (derived-mode-p 'inferior-emacs-lisp-mode 'emacs-lisp-mode 'lisp-mode)
+                    (elisp-slime-nav-describe-elisp-thing-at-point (elisp-slime-nav--read-symbol-at-point))
+                )
+                (   t
+                    (spacemacs/evil-smart-doc-lookup)
+                )
+            )
+
             ;;(;message (concat "window => " (format "%s" win)))
             (ignore-errors
               (progn
-                (spacemacs/evil-smart-doc-lookup)
                 (if (string= (buffer-name (window-buffer)) "*Help*")
                     (select-window win)
                     ;;(message (concat "not help => " (buffer-name (window-buffer))))
@@ -799,7 +793,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (defun zpwr/lispSetup()
      "lisp setup hook"
          (progn
-            (define-key evil-normal-state-map (kbd "K") #'zpwr/slime-doc-and-back)
+            (define-key evil-normal-state-map (kbd "K") #'zpwr/doc-no-focus)
             (message "lisp hook")
         )
     )
@@ -823,6 +817,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
          (progn
             (set-display-table-slot standard-display-table 'wrap ?\ )
             (visual-line-mode)
+            (define-key evil-normal-state-local-map (kbd "K") #'zpwr/doc-no-focus)
             (message "prog setup done")
         )
     )
@@ -1069,7 +1064,7 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-f") #'spacemacs/frame-killer)
     (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
 
-    (define-key evil-normal-state-map (kbd "K") #'zpwr/evil-doc-and-back)
+    (define-key evil-normal-state-map (kbd "K") #'zpwr/doc-no-focus)
 
     ;; like gj
     (define-key evil-normal-state-map (kbd "j") #'evil-next-visual-line)
@@ -1400,13 +1395,22 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (define-word zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum white-sand-theme which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme toml-mode toc-org tide tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme sql-indent spotify spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode slack shell-pop seti-theme scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reverse-theme reveal-in-osx-finder restart-emacs rebecca-theme realgud-pry real-auto-save rbenv rake rainbow-mode rainbow-identifiers rainbow-delimiters railscasts-theme racer pyvenv pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme powershell popwin plsense planet-theme pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme perspective persp-mode pbcopy paradox osx-trash osx-dictionary origami orgit organic-green-theme org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noflet noctilux-theme neotree naquadah-theme mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minitest minimal-theme material-theme markdown-toc majapahit-theme magit-gitflow magit-gh-pulls madhat2r-theme macrostep lush-theme lorem-ipsum livid-mode live-py-mode linum-relative link-hint light-soap-theme launchctl js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme insert-shebang inkpot-theme indent-guide hy-mode hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers highlight-indentation highlight-indent-guides heroku-theme hemisu-theme helm-z helm-themes helm-swoop helm-spotify-plus helm-rg helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-google helm-gitignore helm-git-grep helm-git-files helm-git helm-fuzzy helm-flx helm-file-preview helm-fd helm-fasd helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio go-guru go-eldoc gnuplot gmail-message-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md ggtags gandalf-theme fzf fuzzy flymd flycheck-ycmd flycheck-rust flycheck-pos-tip flx-ido flatui-theme flatland-theme fish-mode fill-column-indicator fasd farmhouse-theme fancy-battery eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-snipe evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-collection evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks engine-mode emmet-mode emamux elisp-slime-nav edit-server dumb-jump dracula-theme doom-themes dockerfile-mode docker django-theme disaster diminish diff-hl darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme dactyl-mode cython-mode cyberpunk-theme ctags-update company-ycmd company-ycm company-web company-tern company-statistics company-shell company-quickhelp company-plsense company-go company-ctags company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode coffee-mode cmake-mode clues-theme clean-aindent-mode clang-format chruby cherry-blossom-theme cargo busybee-theme bundler bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile auctex-latexmk apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent ag afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+    (define-word zenburn-theme zen-and-art-theme yasnippet-snippets yapfify yaml-mode xterm-color ws-butler winum white-sand-theme which-key web-mode web-beautify volatile-highlights vimrc-mode vi-tilde-fringe uuidgen use-package underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme toml-mode toc-org tide tao-theme tangotango-theme tango-plus-theme tango-2-theme tagedit sunny-day-theme sublime-themes subatomic256-theme subatomic-theme sql-indent spotify spaceline-all-the-icons spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme smeargle slim-mode slack shell-pop seti-theme scss-mode sass-mode rvm ruby-tools ruby-test-mode rubocop rspec-mode robe reverse-theme reveal-in-osx-finder restart-emacs rebecca-theme realgud-pry real-auto-save rbenv rake rainbow-mode rainbow-identifiers rainbow-delimiters railscasts-theme racer pyvenv pytest pyenv-mode py-isort purple-haze-theme pug-mode professional-theme powershell popwin plsense planet-theme pip-requirements phoenix-dark-pink-theme phoenix-dark-mono-theme perspective persp-mode pbcopy paradox osx-trash osx-dictionary origami orgit organic-green-theme org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noflet noctilux-theme neotree naquadah-theme mustang-theme multi-term move-text monokai-theme monochrome-theme molokai-theme moe-theme mmm-mode minitest minimal-theme material-theme markdown-toc majapahit-theme magit-gitflow magit-gh-pulls madhat2r-theme macrostep lush-theme lorem-ipsum livid-mode live-py-mode linum-relative link-hint light-soap-theme launchctl js2-refactor js-doc jbeans-theme jazz-theme ir-black-theme insert-shebang inkpot-theme indent-guide hy-mode hungry-delete htmlize hl-todo highlight-symbol highlight-parentheses highlight-numbers highlight-indentation highlight-indent-guides heroku-theme hemisu-theme helm-z helm-themes helm-swoop helm-spotify-plus helm-rg helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-google helm-gitignore helm-git-grep helm-git-files helm-git helm-fuzzy helm-flx helm-file-preview helm-fd helm-fasd helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme google-translate golden-ratio go-guru go-eldoc gnuplot gmail-message-mode github-search github-clone github-browse-file gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gist gh-md ggtags gandalf-theme fzf fuzzy flymd flycheck-ycmd flycheck-rust flycheck-pos-tip flx-ido flatui-theme flatland-theme fish-mode fill-column-indicator fasd farmhouse-theme fancy-battery eyebrowse expand-region exotica-theme exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-snipe evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-collection evil-args evil-anzu eval-sexp-fu espresso-theme eshell-z eshell-prompt-extras esh-help erc-yt erc-view-log erc-terminal-notifier erc-social-graph erc-image erc-hl-nicks engine-mode emmet-mode emamux elisp-slime-nav edit-server dumb-jump dracula-theme doom-themes dockerfile-mode docker django-theme disaster diminish diff-hl darktooth-theme darkokai-theme darkmine-theme darkburn-theme dakrone-theme dactyl-mode cython-mode cyberpunk-theme ctags-update company-ycmd company-ycm company-web company-tern company-statistics company-shell company-quickhelp company-plsense company-go company-ctags company-c-headers company-auctex company-anaconda column-enforce-mode color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized color-identifiers-mode coffee-mode cmake-mode clues-theme clean-aindent-mode clang-format chruby cherry-blossom-theme cargo busybee-theme bundler bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme auto-yasnippet auto-highlight-symbol auto-compile auctex-latexmk apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes aggressive-indent ag afternoon-theme adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:background nil))))
+ '(company-preview ((t (:foreground "darkgray" :underline t))))
+ '(company-preview-common ((t (:inherit company-preview :weight bold))))
+ '(company-scrollbar-bg ((t (:inherit popup-scroll-bar-background-face))))
+ '(company-scrollbar-fg ((t (:inherit popup-scroll-bar-foreground-face))))
+ '(company-tooltip ((t (:inherit popup-face))))
+ '(company-tooltip-common ((((type x)) (:inherit company-tooltip :weight bold)) (t (:inherit company-tooltip))))
+ '(company-tooltip-common-selection ((((type x)) (:inherit company-tooltip-selection :weight bold)) (t (:inherit company-tooltip-selection))))
+ '(company-tooltip-selection ((t (:inherit popup-menu-selection-face)))))
 
 
 
