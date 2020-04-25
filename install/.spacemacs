@@ -398,14 +398,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
     (message "start user-i")
 
-    (setq evil-want-integration t) ;; This is optional since it's already set to t by default.
+    
+    ;;{{{                    MARK:evil-collection init
+    ;;**************************************************************
+    ;; This is optional since it's already set to t by default.
+    (setq evil-want-integration t)
     (setq evil-want-keybinding nil)
+    ;;}}}**************************************************************
     
     ;;{{{                    mark:init vars
     ;;**************************************************************
     (setq vc-follow-symlinks t)
     ;;}}}**************************************************************
-    
+
     ;;{{{                    MARK:zpwr vars
     ;;**************************************************************
     (setq zpwr/inc 4)
@@ -1257,6 +1262,7 @@ you should place your code here."
     (defvar company-mode/enable-yas t)
 
     (defun company-mode/backend-with-yas (backend)
+      "add :with company-yasnippet to every company backend"
         (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
             backend
             (append (if (consp backend) backend (list backend))
