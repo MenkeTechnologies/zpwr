@@ -736,20 +736,21 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     (defun zpwr/shHook ()
      "Company completion shell script hook"
-      (setq company-backends-sh-mode '(
-                                       (company-dabbrev-code
-                                        company-dabbrev
-                                        company-ctags
-                                        company-shell-env
-                                        company-files
-                                        company-keywords
-                                        :with
-                                        company-yasnippet
-                                        )
-                                       ))
      (progn
-        ;;(message "shell init done")
-        )
+        (setq company-backends-sh-mode
+         '(
+             (company-dabbrev-code
+                company-dabbrev
+                company-ctags
+                company-shell-env
+                company-files
+                company-keywords
+                :with
+                company-yasnippet)
+           )
+         )
+        (message "shell init done")
+      )
     )
     ;;}}}***********************************************************
 
@@ -774,8 +775,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
             (visual-line-mode)
             ;;(evil-visual-mark-mode)
             ;;(setq evil-visual-mark-exclude-marks nil)
-            (local-set-key (kbd "C-@") 'zpwr/complete-current-statement)
-            (local-set-key evil-normal-state-map (kbd "K") #'zpwr/doc-and-back)
 
             ;;(message "user init done")
         )
@@ -950,6 +949,8 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-o") #'helm-company)
     (define-key evil-insert-state-map (kbd "C-l") #'hippie-expand)
     (define-key evil-insert-state-map (kbd "C-t") #'transpose-chars)
+
+    (define-key evil-insert-state-map (kbd "C-@") 'zpwr/complete-current-statement)
 
     ;;^J up and ^D already
     (define-key evil-insert-state-map (kbd "C-d") #'company-complete)
@@ -1255,6 +1256,11 @@ you should place your code here."
      'zpwr-snippets-dir
      )
 
+    (yas-reload-all)
+    ;;}}}***********************************************************
+
+    ;;{{{                    MARK:display theses buffer in special windows
+    ;;**************************************************************
     (setq display-buffer-alist
         '(
             ("\\*Messages"
@@ -1268,7 +1274,6 @@ you should place your code here."
 				  (side . right)
 				  (window-width . 0.4))
         ))
-    (yas-reload-all)
     ;;}}}***********************************************************
     (message "end user-c")
 
