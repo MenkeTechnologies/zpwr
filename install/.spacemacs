@@ -848,7 +848,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (define-key evil-evilified-state-map (kbd "C-k") #'zpwr/up-four)
         (define-key evil-evilified-state-map (kbd "C-h") #'zpwr/right-four)
         (define-key evil-evilified-state-map (kbd "C-l") #'zpwr/left-four)
-        (define-key evil-evilified-state-map (kbd "C-z") #'helm-swoop)
+        (define-key evil-evilified-state-local-map (kbd "C-z") #'helm-swoop)
       )
     )
 
@@ -910,13 +910,15 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (defvar zpwr-map
         (let ((zpwrmap (make-sparse-keymap)))
                 (define-key zpwrmap (kbd "C-z") #'helm-swoop)
+                (define-key zpwrmap (kbd "C-c f") #'helm-swoop)
         zpwrmap)
     )
 
     (define-minor-mode zpwr-mode
         "zpwr minor mode"
-            :lighter " zpwr"
+            :lighter " ⓩ"
             :init-value t
+            :global t
             :keymap zpwr-map
     )
 
@@ -927,9 +929,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (defun zpwr/keys-have-priority (_file)
     "Try to ensure that my keybindings retain priority over other minor modes.
     Called via the `after-load-functions' special hook."
-        (unless (eq (caar minor-mode-map-alist) 'zpwr-mode)
-            (progn
-                (message "zpwr to front of minor mode alist")
+        (progn
+            ;;(message "zpwr to front of minor mode alist")
+            (unless (eq (caar minor-mode-map-alist) 'zpwr-mode)
                 (let ((mykeys (assq 'zpwr-mode minor-mode-map-alist)))
                     (assq-delete-all 'zpwr-mode minor-mode-map-alist)
                     (add-to-list 'minor-mode-map-alist mykeys)
@@ -942,8 +944,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;;{{{                    MARK:Hook bindings
     ;;**************************************************************
 
-    ;;(add-hook 'prog-mode 'zpwr/keys-have-priority)
-    (add-hook 'prog-mode-hook 'zpwr-mode)
+    (add-hook 'after-load-functions 'zpwr/keys-have-priority)
 
     (add-hook 'post-command-hook 'zpwr/autoHighlight)
 
@@ -1361,6 +1362,10 @@ you should place your code here."
      )
 
     (yas-reload-all)
+
+
+    (zpwr-mode)
+
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:display theses buffer in special windows
