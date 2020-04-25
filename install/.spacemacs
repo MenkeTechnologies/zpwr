@@ -415,6 +415,28 @@ before packages are loaded. If you are unsure, you should try in setting them in
      )
     ;;}}}***********************************************************
 
+    ;;{{{                    MARK:tokens
+    ;;**************************************************************
+    (when (load "~/.emacs.d/private/.tokens.el" t)
+        (message "loaded private tokens")
+        (setq erc-interpret-mirc-color t)
+
+        (if (boundp 'irc-gitter-nick)
+         (progn
+            (setq erc-autojoin-channels-alist '(("gitter.im" "#syl20bnr/spacemacs")))
+            (defun zpwr/gitter-spacemacs ()
+             "Connect to Spacemacs Gitter"
+                (interactive)
+                (progn
+                    (erc-tls :server "irc.gitter.im" :port "6697" :nick irc-gitter-nick :full-name irc-gitter-name :password irc-gitter-pwd)
+                )
+            )
+            (spacemacs/set-leader-keys (kbd "ais") #'zpwr/gitter-spacemacs)
+          )
+         )
+     )
+    ;;}}}***********************************************************
+
     ;;{{{                    MARK:message buffer timestamps
     ;;**************************************************************
     (defun zpwr/current-time-microseconds ()
@@ -534,7 +556,22 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (message (zpwr/get-file-name))
     )
 
-    (defun zpwr/doc-and-back ()
+    (defun zpwr/slime-doc-and-back ()
+        "Get doc but keep focus"
+        (interactive)
+        (let ((win (selected-window)))
+            ;;(;message (concat "window => " (format "%s" win)))
+              (progn
+                (elisp-slime-nav-describe-elisp-thing-at-point (elisp-slime-nav--read-symbol-at-point))
+                (if (string= (buffer-name (window-buffer)) "*Help*")
+                    (select-window win)
+                    ;;(message (concat "not help => " (buffer-name (window-buffer))))
+                )
+              )
+        )
+      )
+
+    (defun zpwr/evil-doc-and-back ()
       "Get doc but keep focus"
       (interactive)
         (let ((win (selected-window)))
@@ -705,27 +742,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;}}}***********************************************************
 
-    ;;{{{                    MARK:tokens
-    ;;**************************************************************
-    (when (load "~/.emacs.d/private/.tokens.el" t)
-        (message "loaded private tokens")
-        (setq erc-interpret-mirc-color t)
-
-        (if (boundp 'irc-gitter-nick)
-         (progn
-            (setq erc-autojoin-channels-alist '(("gitter.im" "#syl20bnr/spacemacs")))
-            (defun zpwr/gitter-spacemacs ()
-             "Connect to Spacemacs Gitter"
-                (interactive)
-                (progn
-                    (erc-tls :server "irc.gitter.im" :port "6697" :nick irc-gitter-nick :full-name irc-gitter-name :password irc-gitter-pwd)
-                )
-            )
-            (spacemacs/set-leader-keys (kbd "ais") #'zpwr/gitter-spacemacs)
-          )
-         )
-     )
-    ;;}}}***********************************************************
 
     ;;{{{                    MARK:Setup shell company backends
     ;;**************************************************************
@@ -783,6 +799,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (defun zpwr/lispSetup()
      "lisp setup hook"
          (progn
+            (define-key evil-normal-state-map (kbd "K") #'zpwr/slime-doc-and-back)
             (message "lisp hook")
         )
     )
@@ -806,7 +823,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
          (progn
             (set-display-table-slot standard-display-table 'wrap ?\ )
             (visual-line-mode)
-            (define-key evil-normal-state-local-map (kbd "K") #'zpwr/doc-and-back)
             (message "prog setup done")
         )
     )
@@ -840,6 +856,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (define-key evil-evilified-state-map (kbd "C-z") #'helm-swoop)
       )
     )
+
     (defun zpwr/indentHook ()
      "Indent setup hook"
          (zpwr/HL)
@@ -890,9 +907,49 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;}}}***********************************************************
 
+    (defun insert-foo ()
+        (interactive)
+        (insert "foo")
+    )
+
+    (defvar zpwr-map
+        (let ((zpwrmap (make-sparse-keymap)))
+                (define-key zpwrmap (kbd "C-z") #'helm-swoop)
+        zpwrmap)
+    )
+
+    (define-minor-mode zpwr-mode
+        "zpwr minor mode"
+            :lighter " zpwr"
+            :init-value t
+            :keymap zpwr-map
+    )
+
+    ;;(define-globalized-minor-mode prog-mode zpwr-mode zpwr-mode)
+    ;;(add-to-list 'emulation-mode-map-alists `((zpwr-mode . zpwr-map)))
+
+
+    (defun zpwr/keys-have-priority (_file)
+    "Try to ensure that my keybindings retain priority over other minor modes.
+    Called via the `after-load-functions' special hook."
+        (unless (eq (caar minor-mode-map-alist) 'zpwr-mode)
+            (progn
+                (message "zpwr to front of minor mode alist")
+                (let ((mykeys (assq 'zpwr-mode minor-mode-map-alist)))
+                    (assq-delete-all 'zpwr-mode minor-mode-map-alist)
+                    (add-to-list 'minor-mode-map-alist mykeys)
+                )
+            )
+        )
+    )
+
 
     ;;{{{                    MARK:Hook bindings
-        ;;**************************************************************
+    ;;**************************************************************
+
+    ;;(add-hook 'prog-mode 'zpwr/keys-have-priority)
+    (add-hook 'prog-mode-hook 'zpwr-mode)
+
     (add-hook 'post-command-hook 'zpwr/autoHighlight)
 
     (add-hook 'ielm-mode-hook (lambda () (run-hooks 'my-ielm-mode-hook)))
@@ -935,8 +992,6 @@ explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
     (message "start user-c")
 
-    
-    
   ;;{{{                    mark:eager loads
   ;;**************************************************************    
     (require 'company)
@@ -945,13 +1000,12 @@ you should place your code here."
     (require 'highlight-indent-guides)
     (require 'real-auto-save)
     (require 'subr-x)
+    (require 'evil)
   ;;}}}**************************************************************    
-
 
     ;;{{{                    MARK:Evil collection
     ;;**************************************************************
-    (require 'evil)
-        (when (require 'evil-collection nil t)
+    (when (require 'evil-collection nil t)
         (evil-collection-init))
     ;;}}}***********************************************************
 
@@ -1015,7 +1069,8 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-f") #'spacemacs/frame-killer)
     (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
 
-    (define-key evil-normal-state-map (kbd "K") #'zpwr/doc-and-back)
+    (define-key evil-normal-state-map (kbd "K") #'zpwr/evil-doc-and-back)
+
     ;; like gj
     (define-key evil-normal-state-map (kbd "j") #'evil-next-visual-line)
     ;; like gk
