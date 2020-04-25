@@ -273,7 +273,7 @@ values."
    ;; Size (in MB) above which spacemacs will prompt to open the large file
    ;; literally to avoid performance issues. Opening a file literally means that
    ;; no major mode or minor modes are active. (default is 1)
-   dotspacemacs-large-file-size 1
+   dotspacemacs-large-file-size 20
    ;; Location where to auto-save files. Possible values are `original' to
    ;; auto-save the file in-place, `cache' to auto-save the file to another
    ;; file stored in the cache directory and `nil' to disable auto-saving.
@@ -749,7 +749,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                 company-yasnippet)
            )
          )
-        (message "shell init done")
+        ;;(message "shell init done")
       )
     )
     ;;}}}***********************************************************
