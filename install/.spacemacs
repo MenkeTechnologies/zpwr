@@ -917,6 +917,9 @@ you should place your code here."
      (evil-next-visual-line (symbol-value 'zpwr/inc))
      )
 
+    (require 'evil)
+    (when (require 'evil-collection nil t)
+        (evil-collection-init))
 
     (define-key evil-visual-state-map (kbd "C-j") #'zpwr/down-four)
     (define-key evil-visual-state-map (kbd "C-k") #'zpwr/up-four)
@@ -940,7 +943,6 @@ you should place your code here."
     (define-key evil-normal-state-map (kbd "K") #'zpwr/doc-and-back)
 
     (define-key evil-normal-state-map (kbd "C-d") #'zpwr/undohunk)
-    (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
 
     (define-key evil-insert-state-map (kbd "C-v") #'zpwr/runner)
     (define-key evil-normal-state-map (kbd "C-v") #'zpwr/runner)
@@ -948,6 +950,16 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-o") #'helm-company)
     (define-key evil-insert-state-map (kbd "C-l") #'hippie-expand)
     (define-key evil-insert-state-map (kbd "C-t") #'transpose-chars)
+
+    ;;^J up and ^D already
+    (define-key evil-insert-state-map (kbd "C-d") #'company-complete)
+    (define-key evil-insert-state-map (kbd "C-SPC") #'company-complete)
+
+    (define-key evil-insert-state-map (kbd "C-z") #'helm-swoop)
+    (define-key evil-normal-state-map (kbd "C-z") #'helm-swoop)
+
+    (define-key evil-insert-state-map (kbd "C-f") #'spacemacs/frame-killer)
+    (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
 
     ;; like gj
     (define-key evil-normal-state-map (kbd "j") #'evil-next-visual-line)
@@ -1100,11 +1112,6 @@ you should place your code here."
             (yas-abort-snippet)
             (company-abort)))
 
-
-    (require 'evil)
-    (when (require 'evil-collection nil t)
-        (evil-collection-init))
-
     (define-key evil-insert-state-map [tab] #'tab-indent-or-complete)
 
     (global-set-key [(control return)] #'company-complete-common)
@@ -1125,15 +1132,6 @@ you should place your code here."
     ;;^I
     (define-key evil-normal-state-map [tab] #'evil-jump-forward)
 
-    ;;^J up and ^D already
-    (define-key evil-insert-state-map (kbd "C-d") #'company-complete)
-    (define-key evil-insert-state-map (kbd "C-SPC") #'company-complete)
-
-    (define-key evil-insert-state-map (kbd "C-z") #'helm-swoop)
-    (define-key evil-normal-state-map (kbd "C-z") #'helm-swoop)
-
-    (define-key evil-insert-state-map (kbd "C-f") #'helm-multi-swoop-all)
-    (define-key evil-normal-state-map (kbd "C-f") #'helm-multi-swoop-all)
 
 
     (defvar company-mode/enable-yas t)
