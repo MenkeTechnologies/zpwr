@@ -292,9 +292,12 @@ alias ca='cat -n'
 alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
 alias die='sudo kill -9 --'
-alias emacs='emacs -nw'
-alias ee='emacsclient -c -nw -a ""'
-alias me='source em-server.sh'
+
+if exists emacs; then
+    alias emacs='emacs -nw'
+    alias ee='emacsclient -c -nw -a ""'
+    alias me='source em-server.sh'
+fi
 
 if exists docker; then
     alias dk=docker
@@ -303,7 +306,9 @@ fi
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
+
 test -d "$ZPWR_D" && alias d="cd $ZPWR_D"
+
 if [[ -d "/var/www/html" ]];then
     alias we="cd /var/www/html"
 elif [[ -d "/usr/local/var/www" ]];then
@@ -317,7 +322,7 @@ exists spotify && {
     alias pe='spotify prev'
     alias spa='spotify pause'
 }
-isZsh && {
+if isZsh; then
     alias 10='cd -10'
     alias 11='cd -11'
     alias 12='cd -12'
@@ -328,7 +333,8 @@ isZsh && {
     alias 17='cd -17'
     alias 18='cd -18'
     alias 19='cd -19'
-}
+fi
+
 #{{{                    MARK:ALIASES for editing config files
 #**************************************************************
 alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
