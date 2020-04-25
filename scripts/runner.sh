@@ -72,6 +72,9 @@ case "$fileToBeExecuted" in
 *.coffee)
     executeTheFile coffee "$fileToBeExecuted"
     ;;
+*.el)
+    executeFileFirstArgIsCommand "emacs --batch --eval '(load-file \"$fileToBeExecuted\")'" "$fileToBeExecuted"
+    ;;
 *.vim)
     command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | sed -n '4,$p'"
     executeFileFirstArgIsCommand "$command" "$fileToBeExecuted"
