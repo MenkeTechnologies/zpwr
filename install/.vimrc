@@ -801,6 +801,9 @@ noremap <silent> <leader>z nea
 vnoremap <C-Right> >gv
 vnoremap <C-Left> <gv
 
+vnoremap J :m '> + <CR> gv
+vnoremap K :m '< -- <CR> gv
+
 vnoremap <C-Down> :m '> + <CR> gv
 vnoremap <C-Up> :m '< -- <CR> gv
 
