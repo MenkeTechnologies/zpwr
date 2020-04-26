@@ -1085,6 +1085,9 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-f") #'spacemacs/frame-killer)
     (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
 
+    (define-key evil-normal-state-map (kbd "[c") #'spacemacs/vcs-previous-hunk)
+    (define-key evil-normal-state-map (kbd "]c") #'spacemacs/vcs-next-hunk)
+
     (define-key evil-normal-state-map (kbd "K") #'zpwr/doc-no-focus)
 
     ;; like gj
