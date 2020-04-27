@@ -2510,13 +2510,13 @@ function agIntoFzf(){
         command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
         eval "fzf $FZF_AG_OPTS" |
         cut -d ':' -f1 |
-        perl -pe 's@^(.*)\n$@"$1" @'
+        perl -pe 's@^(.*)\n$@"'"$PWD/"'$1" @'
 
     else
 
         command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
         eval "fzf $FZF_AG_OPTS" |
-        perl -pe 's@^(.*?):(\d+):(.*)@+$2 "$1"@;s@\n@ @g'
+        perl -pe 's@^(.*?):(\d+):(.*)@+$2 "'"$PWD/"'$1"@;s@\n@ @g'
 
     fi
 }
