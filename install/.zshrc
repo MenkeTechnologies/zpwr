@@ -3559,7 +3559,15 @@ function zpwrEnvVars(){
     env | command grep -i "^$ZPWR_REPO_NAME" | fzf
 }
 
-function zpwrTags(){
+function zpwrGtags(){
+
+    (
+        builtin cd "$HOME"
+        global -x '.*' | fzf
+    )
+}
+
+function zpwrCtags(){
 
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
