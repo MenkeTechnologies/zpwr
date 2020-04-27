@@ -345,8 +345,10 @@ ZPWR_VERBS[forgitwarn]='forgit::warn=forgit fzf warn'
 ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
 ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
 
-ZPWR_VERBS[vimwordsearch]='fzfWordsearchVerb=vim a file in a sub dir by word'
-ZPWR_VERBS[vimwordsearchedit]='fzfWordsearchVerbEdit=edit vim a file in a sub dir by word'
+ZPWR_VERBS[emacswordsearch]='emacsFzfWordsearchVerb=emacs a file in a sub dir by word'
+ZPWR_VERBS[emacswordsearchedit]='emacsFzfWordsearchVerbEdit=edit emacs a file in a sub dir by word'
+ZPWR_VERBS[vimwordsearch]='vimFzfWordsearchVerb=vim a file in a sub dir by word'
+ZPWR_VERBS[vimwordsearchedit]='vimFzfWordsearchVerbEdit=edit vim a file in a sub dir by word'
 
 ZPWR_VERBS[emacsfilesearch]='emacsFzfFilesearchVerb=emacs a file in a sub dir'
 ZPWR_VERBS[emacsfilesearchedit]='emacsFzfFilesearchVerbEdit=edit emacs a file in a sub dir'
@@ -813,10 +815,12 @@ function vimFzf(){
 
 function fzfWordsearchVerbEdit(){
 
+    local editor
+    editor="$1"
     local sel
     sel=$(fz vim)
     if [[ -n "$sel" ]]; then
-        BUFFER="$EDITOR $sel"
+        BUFFER="$editor $sel"
         print -rz -- "$BUFFER"
     else
         return
@@ -825,13 +829,33 @@ function fzfWordsearchVerbEdit(){
 
 function fzfWordsearchVerb(){
 
+    local editor
+    editor="$1"
     local file
     file=$(fz vim)
     if [[ -z "$file" ]]; then
         return
     fi
-    print -sr -- "$EDITOR $file; clearList; isGitDir && git diff HEAD"
-    eval "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+    print -sr -- "$editor $file; clearList; isGitDir && git diff HEAD"
+    eval "$editor $file; clearList; isGitDir && git diff HEAD"
+}
+
+function emacsFzfWordsearchVerbEdit(){
+
+    fzfWordsearchVerbEdit "$ZPWR_EMACS"
+}
+
+function emacsFzfWordsearchVerb(){
+    fzfWordsearchVerb "$ZPWR_EMACS"
+}
+
+function vimFzfWordsearchVerbEdit(){
+
+    fzfWordsearchVerbEdit "$EDITOR"
+}
+
+function vimFzfWordsearchVerb(){
+    fzfWordsearchVerb "$EDITOR"
 }
 
 function fzfFileSearch(){
@@ -844,50 +868,52 @@ function fzfFileSearch(){
         eval "fzf -m --border $FZF_CTRL_T_OPTS" | perl -ne 'chomp $_; print "\"$_\" "'
 }
 
-function emacsFzfFilesearchVerbEdit(){
+function fzfFilesearchVerbEdit(){
 
+    local editor
+    editor="$1"
     local sel
     sel=$(fzfFileSearch)
     if [[ -n "$sel" ]]; then
-        BUFFER="$ZPWR_EMACS $sel"
+        BUFFER="$editor $sel"
         print -rz -- "$BUFFER"
     else
         return
     fi
+}
+
+function fzfFilesearchVerb(){
+    local editor
+    editor="$1"
+
+    local file
+    file=$(fzfFileSearch)
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -sr -- "$editor $file; clearList; isGitDir && git diff HEAD"
+    eval "$editor $file; clearList; isGitDir && git diff HEAD"
+}
+
+function emacsFzfFilesearchVerbEdit(){
+
+    fzfFilesearchVerbEdit "$ZPWR_EMACS"
 }
 
 function emacsFzfFilesearchVerb(){
 
-    local file
-    file=$(fzfFileSearch)
-    if [[ -z "$file" ]]; then
-        return
-    fi
-    print -sr -- "$ZPWR_EMACS $file; clearList; isGitDir && git diff HEAD"
-    eval "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+    fzfFilesearchVerb "$ZPWR_EMACS"
+
 }
 
 function vimFzfFilesearchVerbEdit(){
 
-    local sel
-    sel=$(fzfFileSearch)
-    if [[ -n "$sel" ]]; then
-        BUFFER="$EDITOR $sel"
-        print -rz -- "$BUFFER"
-    else
-        return
-    fi
+    fzfFilesearchVerbEdit "$EDITOR"
 }
 
 function vimFzfFilesearchVerb(){
 
-    local file
-    file=$(fzfFileSearch)
-    if [[ -z "$file" ]]; then
-        return
-    fi
-    print -sr -- "$EDITOR $file; clearList; isGitDir && git diff HEAD"
-    eval "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+    fzfFilesearchVerb "$EDITOR"
 }
 
 function fzfDirSearch(){
