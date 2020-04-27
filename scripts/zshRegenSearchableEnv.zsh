@@ -8,59 +8,53 @@
 #}}}***********************************************************
 #
 
-{
-    for k v in ${(kv)parameters}; do
-        print -l "param $k"
-    done
+for k v in ${(kv)parameters}; do
+    print -l "param $k"
+done > "${1}Key.txt"
 
-    for k v in ${(kv)aliases}; do
-        print -l "alias $k"
-    done
+for k v in ${(kv)aliases}; do
+    print -l "alias $k"
+done >> "${1}Key.txt"
 
-    for k v in ${(kv)builtins}; do
-        print -l "builtin $k"
-    done
+for k v in ${(kv)builtins}; do
+    print -l "builtin $k"
+done >> "${1}Key.txt"
 
-    for k v in ${(kv)reswords}; do
-        print -l "resword $k"
-    done
+for k v in ${(kv)reswords}; do
+    print -l "resword $k"
+done >> "${1}Key.txt"
 
-    for k v in ${(kv)commands}; do
-        print -l "command $v"
-    done
+for k v in ${(kv)commands}; do
+    print -l "command $v"
+done >> "${1}Key.txt"
 
-    for k v in ${(kv)functions}; do
-        print -l "func $k"
-    done
+for k v in ${(kv)functions}; do
+    print -l "func $k"
+done >> "${1}Key.txt"
 
-} > "${1}Key.txt"
+for k v in ${(kv)parameters}; do
+    print -l "export $k=${(P)k}"
+done > "${1}Value.txt"
 
-{
+alias -L \
+    >> "${1}Value.txt"
 
-    for k v in ${(kv)parameters}; do
-        print -l "export $k=${(P)k}"
-    done
+for k v in ${(kv)builtins}; do
+    type -a -- $k
+done >> "${1}Value.txt"
 
-    alias -L
+for k v in ${(kv)reswords}; do
+    type -a -- $reswords
+done >> "${1}Value.txt"
 
-    for k v in ${(kv)builtins}; do
-        type -a -- $k
-    done
+for k v in ${(kv)commands}; do
+    print -l -- $v
+done >> "${1}Value.txt"
 
-    for k v in ${(kv)reswords}; do
-        type -a -- $reswords
-    done
+for k v in ${(kv)functions}; do
+    autoload +X -z -- $k
+    type -a -- $k
+done >> "${1}Value.txt"
 
-    for k v in ${(kv)commands}; do
-        print -l -- $v
-    done
-
-    for k v in ${(kv)functions}; do
-        autoload +X -z -- $k
-        type -a -- $k
-    done
-
-    declare -f
-
-
-} > "${1}Value.txt"
+declare -f \
+    >> "${1}Value.txt"
