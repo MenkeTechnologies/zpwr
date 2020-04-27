@@ -2473,7 +2473,7 @@ alias numcmd='print $#commands'
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
 #
-#zplug "changyuheng/agIntoFzf", defer:1
+#zplug "changyuheng/fz", defer:1
 #zplug "rupa/z", use:z.sh
 #
 ## Install plugins if there are plugins that have not been installed
