@@ -2507,11 +2507,16 @@ exists http && function ge(){
 function agIntoFzf(){
 
     if test -z "$1";then
-        command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null | fzf "$FZF_AG_OPTS" | cut -d ':' -f1 | perl -pe 's@^(.*)\n$@"$1" @'
+        command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
+        eval "fzf $FZF_AG_OPTS" |
+        cut -d ':' -f1 |
+        perl -pe 's@^(.*)\n$@"$1" @'
 
     else
 
-        command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null | fzf "$FZF_AG_OPTS" | perl -pe 's@^(.*?):(\d+):(.*)@+$2 "$1"@;s@\n@ @g'
+        command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
+        eval "fzf $FZF_AG_OPTS" |
+        perl -pe 's@^(.*?):(\d+):(.*)@+$2 "$1"@;s@\n@ @g'
 
     fi
 }

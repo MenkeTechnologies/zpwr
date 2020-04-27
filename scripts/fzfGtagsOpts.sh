@@ -69,8 +69,8 @@ BAT_OFFSET=3
 START_OFFSET=20
 cat<<EOF
 
-test -z \$file && file=\$(cut -d: -f1 <<< {} | sed "s@^~@$HOME@");
-lineNum=\$(cut -d: -f2 <<< {});
+test -z \$file && file=\$(tr -s " " <<< {} | cut -d" " -f3 | sed "s@^~@$HOME@");
+lineNum=\$(tr -s " " <<< {} | cut -d" " -f2);
 lineNum=\$((lineNum + $BAT_OFFSET))
 startNum=\$((lineNum - $START_OFFSET))
 if (( startNum < 1)); then

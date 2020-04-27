@@ -2819,6 +2819,8 @@ function fzf_setup(){
 
     export FZF_AG_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter : --nth 3.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfAgOpts.sh")'"
 
+    export FZF_GTAGS_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter ' ' --nth 1.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfGtagsOpts.sh")'"
+
     export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
 
     if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
@@ -3632,24 +3634,63 @@ function zpwrEnvVars(){
     env | command grep -i "^$ZPWR_REPO_NAME" | fzf
 }
 
-function emacsZpwrGtags(){
+function gtagsIntoFzf(){
 
     (
         builtin cd "$HOME"
-        global -x '.*' | fzf
+        global -x '.*' |
+        eval "fzf $FZF_GTAGS_OPTS" |
+        perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "$3"@;s@\n@ @g'
     )
+}
+
+function getGtagsEdit(){
+
+    local editor
+    editor="$1"
+    local sel
+    sel=$(gtagsIntoFzf vim)
+    if [[ -n "$sel" ]]; then
+        BUFFER="$editor $sel"
+        print -rz -- "$BUFFER"
+    else
+        return
+    fi
+
+}
+
+function getGtags(){
+
+    local editor
+    editor="$1"
+    local file
+    file=$(gtagsIntoFzf vim)
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -sr -- "$editor $file; clearList; isGitDir && git diff HEAD"
+    eval "$editor $file; clearList; isGitDir && git diff HEAD"
+}
+
+function emacsZpwrGtags(){
+    getGtags "$ZPWR_EMACS"
+}
+
+function vimZpwrGtags(){
+    getGtags "$EDITOR"
+}
+
+function emacsZpwrGtagsEdit(){
+    getGtagsEdit "$ZPWR_EMACS"
+}
+
+function vimZpwrGtagsEdit(){
+    getGtagsEdit "$EDITOR"
 }
 
 function emacsZpwrCtags(){
 
     cat "$ZPWR_SCRIPTS/tags" | fzf
-}
-function vimZpwrGtags(){
-
-    (
-        builtin cd "$HOME"
-        global -x '.*' | fzf
-    )
 }
 
 function vimZpwrCtags(){
