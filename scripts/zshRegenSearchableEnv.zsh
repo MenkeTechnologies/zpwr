@@ -51,10 +51,11 @@ for k v in ${(kv)commands}; do
     print -l -- $v
 done >> "${1}Value.txt"
 
+echo "start gen functions"
 for k v in ${(kv)functions}; do
     autoload +X -z -- $k
-    type -a -- $k
-done >> "${1}Value.txt"
+    type -a -- $k >> "${1}Value.txt"
+done
 
 declare -f \
     >> "${1}Value.txt"
