@@ -2504,16 +2504,14 @@ exists http && function ge(){
     fi 2>&1 | less
 }
 
-function fz(){
+function agIntoFzf(){
 
     if test -z "$1";then
-        command ag '^.*$' --hidden --ignore .git --color 2>/dev/null | fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER_FZF"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"' \
-        2>/dev/null | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | cut -d ':' -f1 | perl -pe 's@^(.*)\n$@"$1" @'
+        command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null | fzf "$FZF_AG_OPTS" | cut -d ':' -f1 | perl -pe 's@^(.*)\n$@"$1" @'
 
     else
 
-        command ag '^.*$' --hidden --ignore .git --color 2>/dev/null | fzf -m --delimiter : --nth 3.. --reverse --border --prompt='-->>> ' --preview '[[ -f $(cut -d: -f1 <<< {}) ]] && '"$COLORIZER_FZF"' $(cut -d: -f1 <<< {}) '"$COLORIZER_NL"'\
-            2>/dev/null | sed -n "$(cut -d: -f2 <<< {}),\$p" || stat $(cut -d: -f1 <<< {}) | fold -80 | head -500' --ansi | perl -pe 's@^(.*?):(\d+):(.*)@+$2 "$1"@;s@\n@ @g'
+        command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null | fzf "$FZF_AG_OPTS" | perl -pe 's@^(.*?):(\d+):(.*)@+$2 "$1"@;s@\n@ @g'
 
     fi
 }

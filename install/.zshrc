@@ -818,7 +818,7 @@ function fzfWordsearchVerbEdit(){
     local editor
     editor="$1"
     local sel
-    sel=$(fz vim)
+    sel=$(agIntoFzf vim)
     if [[ -n "$sel" ]]; then
         BUFFER="$editor $sel"
         print -rz -- "$BUFFER"
@@ -832,7 +832,7 @@ function fzfWordsearchVerb(){
     local editor
     editor="$1"
     local file
-    file=$(fz vim)
+    file=$(agIntoFzf vim)
     if [[ -z "$file" ]]; then
         return
     fi
@@ -1143,9 +1143,9 @@ function intoFzfAg(){
     mywords=("${(z)BUFFER}")
 
     if echo ${mywords[1]} | command grep -sq vim; then
-        BUFFER="$BUFFER $(fz vim)"
+        BUFFER="$BUFFER $(agIntoFzf vim)"
     else
-        BUFFER="$BUFFER $(fz)"
+        BUFFER="$BUFFER $(agIntoFzf)"
     fi
 
     BUFFER=${BUFFER:s@  @ @}
@@ -2473,7 +2473,7 @@ alias numcmd='print $#commands'
 #export ZPLUG_HOME=/usr/local/opt/zplug
 #source $ZPLUG_HOME/init.zsh
 #
-#zplug "changyuheng/fz", defer:1
+#zplug "changyuheng/agIntoFzf", defer:1
 #zplug "rupa/z", use:z.sh
 #
 ## Install plugins if there are plugins that have not been installed
@@ -2816,6 +2816,8 @@ function fzf_setup(){
     export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
     export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"
     export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
+
+    export FZF_AG_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter : --nth 3.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfAgOpts.sh")'"
 
     export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
 
@@ -3630,7 +3632,7 @@ function zpwrEnvVars(){
     env | command grep -i "^$ZPWR_REPO_NAME" | fzf
 }
 
-function zpwrGtags(){
+function emacsZpwrGtags(){
 
     (
         builtin cd "$HOME"
@@ -3638,7 +3640,19 @@ function zpwrGtags(){
     )
 }
 
-function zpwrCtags(){
+function emacsZpwrCtags(){
+
+    cat "$ZPWR_SCRIPTS/tags" | fzf
+}
+function vimZpwrGtags(){
+
+    (
+        builtin cd "$HOME"
+        global -x '.*' | fzf
+    )
+}
+
+function vimZpwrCtags(){
 
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
