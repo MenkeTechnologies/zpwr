@@ -348,8 +348,10 @@ ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
 ZPWR_VERBS[vimwordsearch]='fzfWordsearchVerb=vim a file in a sub dir by word'
 ZPWR_VERBS[vimwordsearchedit]='fzfWordsearchVerbEdit=edit vim a file in a sub dir by word'
 
-ZPWR_VERBS[vimfilesearch]='fzfFilesearchVerb=vim a file in a sub dir'
-ZPWR_VERBS[vimfilesearchedit]='fzfFilesearchVerbEdit=edit vim a file in a sub dir'
+ZPWR_VERBS[emacsfilesearch]='emacsFzfFilesearchVerb=emacs a file in a sub dir'
+ZPWR_VERBS[emacsfilesearchedit]='emacsFzfFilesearchVerbEdit=edit emacs a file in a sub dir'
+ZPWR_VERBS[vimfilesearch]='vimFzfFilesearchVerb=vim a file in a sub dir'
+ZPWR_VERBS[vimfilesearchedit]='vimFzfFilesearchVerbEdit=edit vim a file in a sub dir'
 ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
 ZPWR_VERBS[hist]='historyVerbAccept=exec history command'
 ZPWR_VERBS[histedit]='historyVerbEdit=edit history command'
@@ -842,7 +844,30 @@ function fzfFileSearch(){
         eval "fzf -m --border $FZF_CTRL_T_OPTS" | perl -ne 'chomp $_; print "\"$_\" "'
 }
 
-function fzfFilesearchVerbEdit(){
+function emacsFzfFilesearchVerbEdit(){
+
+    local sel
+    sel=$(fzfFileSearch)
+    if [[ -n "$sel" ]]; then
+        BUFFER="$ZPWR_EMACS $sel"
+        print -rz -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+function emacsFzfFilesearchVerb(){
+
+    local file
+    file=$(fzfFileSearch)
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -sr -- "$ZPWR_EMACS $file; clearList; isGitDir && git diff HEAD"
+    eval "$EDITOR $file; clearList; isGitDir && git diff HEAD"
+}
+
+function vimFzfFilesearchVerbEdit(){
 
     local sel
     sel=$(fzfFileSearch)
@@ -854,7 +879,7 @@ function fzfFilesearchVerbEdit(){
     fi
 }
 
-function fzfFilesearchVerb(){
+function vimFzfFilesearchVerb(){
 
     local file
     file=$(fzfFileSearch)
