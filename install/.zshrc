@@ -817,14 +817,21 @@ function fzfWordsearchVerbEdit(){
 
     local editor
     editor="$1"
-    local sel
-    sel=$(agIntoFzf vim)
-    if [[ -n "$sel" ]]; then
-        BUFFER="$editor $sel"
-        print -rz -- "$BUFFER"
+    local file
+    BUFFER=$(agIntoFzf vim)
+    if [[ -n "$BUFFER" ]]; then
+        mywords=(${(z)BUFFER})
+        firstdir=${mywords[2]:h}
+        loggDebug "builtin cd $firstdir\""
+        #:h takes aways last "
+        BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
+        loggDebug "$BUFFER"
+
+    print -zr -- "$BUFFER"
     else
         return
     fi
+
 }
 
 function fzfWordsearchVerb(){
@@ -832,12 +839,19 @@ function fzfWordsearchVerb(){
     local editor
     editor="$1"
     local file
-    file=$(agIntoFzf vim)
-    if [[ -z "$file" ]]; then
+    BUFFER=$(agIntoFzf vim)
+    if [[ -z "$BUFFER" ]]; then
         return
     fi
-    print -sr -- "$editor $file; clearList; isGitDir && git diff HEAD"
-    eval "$editor $file; clearList; isGitDir && git diff HEAD"
+    mywords=(${(z)BUFFER})
+    firstdir=${mywords[2]:h}
+    loggDebug "builtin cd $firstdir\""
+    #:h takes aways last "
+    BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+
+    print -sr -- "$BUFFER"
+    eval "$BUFFER"
 }
 
 function emacsFzfWordsearchVerbEdit(){
@@ -3649,11 +3663,16 @@ function getGtagsEdit(){
 
     local editor
     editor="$1"
-    local sel
-    sel=$(gtagsIntoFzf vim)
-    if [[ -n "$sel" ]]; then
-        BUFFER="$editor $sel"
-        print -rz -- "$BUFFER"
+    local file
+    BUFFER=$(gtagsIntoFzf)
+    if [[ -n "$BUFFER" ]]; then
+        mywords=(${(z)BUFFER})
+        firstdir=${mywords[2]:h}
+        loggDebug "builtin cd $firstdir\""
+        #:h takes aways last "
+        BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
+        loggDebug "$BUFFER"
+        print -zr -- "$BUFFER"
     else
         return
     fi
@@ -3665,13 +3684,21 @@ function getGtags(){
     local editor
     editor="$1"
     local file
-    file=$(gtagsIntoFzf vim)
-    if [[ -z "$file" ]]; then
+    BUFFER=$(gtagsIntoFzf)
+    if [[ -z "$BUFFER" ]]; then
         return
     fi
-    print -sr -- "$editor $file; clearList; isGitDir && git diff HEAD"
-    eval "$editor $file; clearList; isGitDir && git diff HEAD"
+    mywords=(${(z)BUFFER})
+    firstdir=${mywords[2]:h}
+    loggDebug "builtin cd $firstdir\""
+    #:h takes aways last "
+    BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+
+    print -sr -- "$BUFFER"
+    eval "$BUFFER"
 }
+
 
 function emacsZpwrGtags(){
     getGtags "$ZPWR_EMACS"
