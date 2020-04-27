@@ -3636,11 +3636,12 @@ function zpwrEnvVars(){
 
 function gtagsIntoFzf(){
 
+    #gtags referenced to $HOME
     (
         builtin cd "$HOME"
         global -x '.*' |
         eval "fzf $FZF_GTAGS_OPTS" |
-        perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "$3"@;s@\n@ @g'
+    perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "'"$HOME/"'$3"@;s@\n@ @g'
     )
 }
 
