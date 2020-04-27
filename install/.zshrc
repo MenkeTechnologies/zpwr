@@ -2819,7 +2819,7 @@ function fzf_setup(){
 
     export FZF_AG_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter : --nth 3.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfAgOpts.sh")'"
 
-    export FZF_GTAGS_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter ' ' --nth 1.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfGtagsOpts.sh")'"
+    export FZF_GTAGS_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter ' ' --nth 1 --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfGtagsOpts.sh")'"
 
     export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
 

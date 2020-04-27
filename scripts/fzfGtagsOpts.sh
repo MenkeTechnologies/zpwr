@@ -103,5 +103,5 @@ cat<<EOF
             $casestr
         fi
     fi
-fi | perl -ne "if (\$lineNum .. \$lineNum){s@\\\x1b\\\[[0-9;]m@@g;s@(.*)@\\\x1b[1;4;7;32;42m\\\$1 <<<\\\x1b[0m@;print} elsif (\$startNum .. eof) {print;}"
+fi | perl -ne "if (\$lineNum .. \$lineNum){s@\\\x1b\\\[[0-9;]m@@g;s@(.*)@\\\x1b[1;4;7;32;42m\\\$1\\\x1b[0m@;print} elsif (\$startNum .. eof) {print;}"
 EOF
