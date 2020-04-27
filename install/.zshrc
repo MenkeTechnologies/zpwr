@@ -476,7 +476,10 @@ function scriptEdit(){
         source /dev/stdin
 }
 
-function sudoVimRecent(){
+
+function sudoEditorRecent(){
+    local editor
+    editor="$1"
 
     BUFFER="$(fzvim)"
     if [[ -z "$BUFFER" ]]; then
@@ -484,7 +487,7 @@ function sudoVimRecent(){
     fi
     mywords=(${(z)BUFFER})
     firstdir=${mywords[1]:h}
-    BUFFER="sudo $EDITOR $BUFFER"
+    BUFFER="sudo $editor $BUFFER"
     loggDebug "builtin cd $firstdir\""
     #:h takes aways last "
     eval "builtin cd $firstdir\""
@@ -493,7 +496,9 @@ function sudoVimRecent(){
     eval "$BUFFER; clearList;isGitDir && git diff HEAD"
 }
 
-function vimRecent(){
+function editorRecent(){
+    local editor
+    editor="$1"
 
     BUFFER="$(fzvim)"
     if [[ -z "$BUFFER" ]]; then
@@ -501,13 +506,28 @@ function vimRecent(){
     fi
     mywords=(${(z)BUFFER})
     firstdir=${mywords[1]:h}
-    BUFFER="$EDITOR $BUFFER"
+    BUFFER="$editor $BUFFER"
     loggDebug "builtin cd $firstdir\""
     #:h takes aways last "
     eval "builtin cd $firstdir\""
     loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
     print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
     eval "$BUFFER; clearList;isGitDir && git diff HEAD"
+}
+
+function sudoEmacsRecent(){
+    sudoEditorRecent "$ZPWR_EMACS"
+}
+
+function emacsRecent(){
+    editorRecent "$ZPWR_EMACS"
+}
+function sudoVimRecent(){
+    sudoEditorRecent "$EDITOR"
+}
+
+function vimRecent(){
+    editorRecent "$EDITOR"
 }
 
 function scriptCount(){
