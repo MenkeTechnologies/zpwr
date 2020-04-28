@@ -1381,6 +1381,11 @@ function fzfVimKeybind(){
     cat "$ZPWR_VIM_KEYBINDINGS" | fzf
 }
 
+function getLocate(){
+
+    eval "locate / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" |
+        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+}
 function getFound(){
 
     eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" |
@@ -1388,6 +1393,46 @@ function getFound(){
 }
 
 function locateFzfEditNoZLE(){
+
+    local firstArg sel
+
+    sel="$(getLocate)"
+
+    firstArg="${${(Az)sel}[1]//\"/}"
+    if [[ -d "$firstArg" ]]; then
+        BUFFER="cd $firstArg; c $sel"
+    else
+        BUFFER="c $sel"
+    fi
+
+    if [[ -n "$sel" ]]; then
+        print -zr -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+function locateFzfNoZLE(){
+
+    local firstArg sel
+
+    sel="$(getLocate)"
+
+    firstArg="${${(Az)sel}[1]//\"/}"
+    if [[ -d "$firstArg" ]]; then
+        BUFFER="cd $firstArg; c $sel"
+    else
+        BUFFER="c $sel"
+    fi
+
+    if [[ -n "$sel" ]]; then
+        print -sr -- "$BUFFER"
+        eval "$BUFFER"
+    else
+        return
+    fi
+}
+function findFzfEditNoZLE(){
 
     local firstArg sel
 
@@ -1407,7 +1452,7 @@ function locateFzfEditNoZLE(){
     fi
 }
 
-function locateFzfNoZLE(){
+function findFzfNoZLE(){
 
     local firstArg sel
 
