@@ -474,25 +474,13 @@ function emacsAllEdit(){
         BUFFER="$ZPWR_EMACS $BUFFER"
         loggDebug "builtin cd $ZPWR"
         eval "builtin cd $ZPWR"
-        loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
-        print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
-        echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
-        source /dev/stdin
-}
-function vimAllEdit(){
 
-        BUFFER="$(fzvimAll)"
-        if [[ -z "$BUFFER" ]]; then
-            return
-        fi
-        BUFFER="$EDITOR $BUFFER"
-        loggDebug "builtin cd $ZPWR"
-        eval "builtin cd $ZPWR"
-        loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
-        print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
-        echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
-        source /dev/stdin
+        BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+        loggDebug "$BUFFER"
+        print -s -- "$BUFFER"
+        eval "$BUFFER"
 }
+
 function emacsScriptEdit(){
 
         BUFFER="$(fzvimScript)"
@@ -502,11 +490,29 @@ function emacsScriptEdit(){
         BUFFER="$ZPWR_EMACS $BUFFER"
         loggDebug "builtin cd $ZPWR_SCRIPTS"
         eval "builtin cd $ZPWR_SCRIPTS"
-        loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
-        print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
-        echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
-        source /dev/stdin
+
+        BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+        loggDebug "$BUFFER"
+        print -s -- "$BUFFER"
+        eval "$BUFFER"
 }
+
+function vimAllEdit(){
+
+        BUFFER="$(fzvimAll)"
+        if [[ -z "$BUFFER" ]]; then
+            return
+        fi
+        BUFFER="$EDITOR $BUFFER"
+        loggDebug "builtin cd $ZPWR"
+        eval "builtin cd $ZPWR"
+
+        BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+        loggDebug "$BUFFER"
+        print -s -- "$BUFFER"
+        eval "$BUFFER"
+}
+
 function vimScriptEdit(){
 
         BUFFER="$(fzvimScript)"
@@ -516,12 +522,12 @@ function vimScriptEdit(){
         BUFFER="$EDITOR $BUFFER"
         loggDebug "builtin cd $ZPWR_SCRIPTS"
         eval "builtin cd $ZPWR_SCRIPTS"
-        loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
-        print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
-        echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
-        source /dev/stdin
-}
 
+        BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+        loggDebug "$BUFFER"
+        print -s -- "$BUFFER"
+        eval "$BUFFER"
+}
 
 function sudoEditorRecent(){
     local editor
