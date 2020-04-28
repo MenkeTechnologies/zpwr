@@ -465,7 +465,49 @@ function sub (){
     zle .accept-line
 }
 
-function scriptEdit(){
+function emacsAllEdit(){
+
+        BUFFER="$(fzvimAll)"
+        if [[ -z "$BUFFER" ]]; then
+            return
+        fi
+        BUFFER="$ZPWR_EMACS $BUFFER"
+        loggDebug "builtin cd $ZPWR"
+        eval "builtin cd $ZPWR"
+        loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
+        print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
+        echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
+        source /dev/stdin
+}
+function vimAllEdit(){
+
+        BUFFER="$(fzvimAll)"
+        if [[ -z "$BUFFER" ]]; then
+            return
+        fi
+        BUFFER="$EDITOR $BUFFER"
+        loggDebug "builtin cd $ZPWR"
+        eval "builtin cd $ZPWR"
+        loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
+        print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
+        echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
+        source /dev/stdin
+}
+function emacsScriptEdit(){
+
+        BUFFER="$(fzvimScript)"
+        if [[ -z "$BUFFER" ]]; then
+            return
+        fi
+        BUFFER="$ZPWR_EMACS $BUFFER"
+        loggDebug "builtin cd $ZPWR_SCRIPTS"
+        eval "builtin cd $ZPWR_SCRIPTS"
+        loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
+        print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
+        echo "$BUFFER; clearList;isGitDir && git diff HEAD" |
+        source /dev/stdin
+}
+function vimScriptEdit(){
 
         BUFFER="$(fzvimScript)"
         if [[ -z "$BUFFER" ]]; then
@@ -786,11 +828,35 @@ function fzvim(){
     fi
 }
 
+function fzvimAll(){
+
+    command ls \
+    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
+    "$ZPWR/"*.{sh,py,zsh,pl} \
+    "$ZPWR/"*.md \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/tmux-"* \
+    "$ZPWR/"{.minvimrc,.mininit.vim} \
+    "$ZPWR_INSTALL/conf."* \
+    "$ZPWR_INSTALL/"*.sh \
+    "$ZPWR_INSTALL/"*.service \
+    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} |
+        perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
+    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
+        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+}
 function fzvimScript(){
 
     command ls \
-        "$ZPWR_SCRIPTS/"*.{sh,zsh,pl,py} \
-        "$ZPWR_SCRIPTS/macOnly/"*.{sh,zsh,pl,py} |
+    "$ZPWR/"*.{sh,py,zsh,pl} \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} |
         perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
     eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'

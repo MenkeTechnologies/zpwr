@@ -2962,7 +2962,6 @@ function vimAll(){
 function emacsScripts(){
 
     ${=ZPWR_EMACS} \
-    "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
@@ -2974,7 +2973,6 @@ function emacsScripts(){
 function vimScripts(){
 
     vim \
-    "$HOME/"{.zshrc,.tmux.conf,grc.zsh,.vimrc} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
