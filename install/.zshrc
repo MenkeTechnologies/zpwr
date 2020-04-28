@@ -1394,15 +1394,16 @@ function getFound(){
 
 function locateFzfEditNoZLE(){
 
-    local firstArg sel
+    local firstArg sel editor
+    editor="$1"
 
     sel="$(getLocate)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
     if [[ -d "$firstArg" ]]; then
-        BUFFER="cd $firstArg; c $sel"
+        BUFFER="cd $firstArg;$editor $sel"
     else
-        BUFFER="c $sel"
+        BUFFER="$editor $sel"
     fi
 
     if [[ -n "$sel" ]]; then
@@ -1414,15 +1415,16 @@ function locateFzfEditNoZLE(){
 
 function locateFzfNoZLE(){
 
-    local firstArg sel
+    local firstArg sel editor
+    editor="$1"
 
     sel="$(getLocate)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
     if [[ -d "$firstArg" ]]; then
-        BUFFER="cd $firstArg; c $sel"
+        BUFFER="cd $firstArg;$editor $sel"
     else
-        BUFFER="c $sel"
+        BUFFER="$editor $sel"
     fi
 
     if [[ -n "$sel" ]]; then
@@ -1432,17 +1434,42 @@ function locateFzfNoZLE(){
         return
     fi
 }
+
+function locateFzfEditNoZLEC(){
+    locateFzfEditNoZLE "c"
+}
+
+function locateFzfNoZLEC(){
+    locateFzfNoZLE "c"
+}
+function locateFzfEditNoZLEVim(){
+    locateFzfEditNoZLE "$EDITOR"
+}
+
+function locateFzfNoZLEVim(){
+    locateFzfNoZLE "$EDITOR"
+}
+
+function locateFzfEditNoZLEEmacs(){
+    locateFzfEditNoZLE "$ZPWR_EMACS"
+}
+
+function locateFzfNoZLEEmacs(){
+    locateFzfNoZLE "$ZPWR_EMACS"
+}
+
 function findFzfEditNoZLE(){
 
-    local firstArg sel
+    local firstArg sel editor
+    editor="$1"
 
     sel="$(getFound)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
     if [[ -d "$firstArg" ]]; then
-        BUFFER="cd $firstArg; c $sel"
+        BUFFER="cd $firstArg;$editor $sel"
     else
-        BUFFER="c $sel"
+        BUFFER="$editor $sel"
     fi
 
     if [[ -n "$sel" ]]; then
@@ -1454,15 +1481,16 @@ function findFzfEditNoZLE(){
 
 function findFzfNoZLE(){
 
-    local firstArg sel
+    local firstArg sel editor
+    editor="$1"
 
     sel="$(getFound)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
     if [[ -d "$firstArg" ]]; then
-        BUFFER="cd $firstArg; c $sel"
+        BUFFER="cd $firstArg;$editor $sel"
     else
-        BUFFER="c $sel"
+        BUFFER="$editor $sel"
     fi
 
     if [[ -n "$sel" ]]; then
@@ -1471,6 +1499,30 @@ function findFzfNoZLE(){
     else
         return
     fi
+}
+
+function findFzfEditNoZLEC(){
+    findFzfEditNoZLE "c"
+}
+
+function findFzfNoZLEC(){
+    findFzfNoZLE "c"
+}
+
+function findFzfEditNoZLEVim(){
+    findFzfEditNoZLE "$EDITOR"
+}
+
+function findFzfNoZLEVim(){
+    findFzfNoZLE "$EDITOR"
+}
+
+function findFzfEditNoZLEEmacs(){
+    findFzfEditNoZLE "$ZPWR_EMACS"
+}
+
+function findFzfNoZLEEmacs(){
+    findFzfNoZLE "$ZPWR_EMACS"
 }
 
 function locateFzfEdit(){
