@@ -206,7 +206,8 @@ if [[ $skip != true ]]; then
 
     exists emacs && {
         if [[ -f "$HOME/.emacs.d/init.el" ]]; then
-            emacs --batch -l ~/.emacs.d/init.el --eval="(configuration-layer/update-packages t)"
+            prettyPrint "Updating spacemacs packages"
+            emacs --batch -l "$HOME/.emacs.d/init.el" --eval="(configuration-layer/update-packages t)"
         fi
     }
 
