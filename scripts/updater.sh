@@ -203,6 +203,13 @@ if [[ $skip != true ]]; then
         # npm install -g yarn
     }
 
+
+    exists emacs && {
+        if [[ -f "$HOME/.emacs.d/init.el" ]]; then
+            emacs --batch -l ~/.emacs.d/init.el --eval="(configuration-layer/update-packages t)"
+        fi
+    }
+
     exists cpanm && {
         prettyPrint "Updating Perl Packages"
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
