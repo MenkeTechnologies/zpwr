@@ -223,7 +223,8 @@ function linkConf(){
         ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    local symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc)
+    local -a symFiles
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc)
 
     for file in ${symFiles[@]} ; do
         prettyPrint "Installing $file to $HOME"
@@ -235,6 +236,14 @@ function linkConf(){
     prettyPrint "Installing UltiSnips to $HOME/.vim/UltiSnips"
     echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
     ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
+    local snipDir="$HOME/.emacs.d/private/snippets"
+
+    if [[ -d "$snipDir" ]]; then
+        prettyPrint "Installing yasnippets to $snipDir"
+        command rm -rf "$snipDir/zpwr-snippets" 2>/dev/null
+        echo ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
+        ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
+    fi
     )
 }
 ```
