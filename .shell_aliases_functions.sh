@@ -1912,7 +1912,7 @@ function unlinkConf(){
 
     for file in ${symFiles[@]} ; do
         if [[ -h "$HOME/$file" ]]; then
-            prettyPrint "REMOVING $file to $HOME"
+            prettyPrint "REMOVING $HOME/$file"
             goInstallerDir
             echo rm -f $HOME/$file
             rm -f -- $HOME/$file
@@ -3093,6 +3093,7 @@ function zpwrUninstall() {
         "$HOME/.tmux" \
         "$FORKED_DIR" \
         "$ZSH" \
+        "$HOME/.zshrc.pre"* \
         "$HOME/.zcompdump"*
     prettyPrintNoNewline "are you sure? y/n > "
     read
@@ -3110,6 +3111,7 @@ function zpwrUninstall() {
             "$HOME/.tmux" \
             "$FORKED_DIR" \
             "$ZSH" \
+            "$HOME/.zshrc.pre"* \
             "$HOME/.zcompdump"*
     else
         prettyPrint "Abort uninstall"
