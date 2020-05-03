@@ -192,6 +192,11 @@ backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 Installer artifacts such as log files and cloned repos go into `~/.zpwr/local/installer`.
 
 ## Uninstall
+
+Run `zpwr uninstall`.  This will ask for confirmation before moving backups dirs to $HOME, unlinking all configs from $HOME and deleting all config dirs.
+
+OR
+
 1. Run `unlinkConf` to unlink all zpwr config symlinks.
 2. Copy all configs from backup dir mentioned above to home directory most importantly the `.zshrc`, `.vimrc` and `.tmux.conf`.
 3. Remove the zpwr dir as shown.
