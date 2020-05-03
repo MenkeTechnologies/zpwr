@@ -15,6 +15,7 @@ ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
 [[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && exit 1
 
 gittersmaster() {
+    git fetch -f --all --prune --tags
     git reset --hard origin/master
     git checkout -B master origin/master
     git pull --force
@@ -22,6 +23,7 @@ gittersmaster() {
 }
 
 gittersdev() {
+    git fetch -f --all --prune --tags
     git reset --hard origin/dev
     git checkout -B dev origin/dev
     git pull --force
