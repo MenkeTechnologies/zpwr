@@ -1617,6 +1617,17 @@ function escapeRemove(){
     done
 }
 
+function prettyPrintNoNewline(){
+
+    if [[ -n "$1" ]];then
+        printf "\x1b[1m"
+        printf "%s " "$@"
+        printf "\x1b[0m"
+    else
+        loggErr "Need one arg" 
+        return 1
+    fi
+}
 function prettyPrint(){
 
     if [[ -n "$1" ]];then
@@ -3068,6 +3079,33 @@ function changeGitAuthorEmail(){
     else
         git commit-tree "$@";
     fi' HEAD
+}
+
+function zpwrUninstall() {
+    echo sudo rm -rf -- \
+        "$ZPWR" \
+        "$HOME/.tmux" \
+        "$HOME/.vim" \
+        "$HOME/.tmux" \
+        "$FORKED_DIR" \
+        "$ZSH" \
+        "$HOME/.zcompdump"*
+    prettyPrintNoNewline "are you sure? y/n > "
+    read
+    if [[ $REPLY == y ]]; then
+        prettyPrint "Uninstall!"
+        unlinkConf
+        sudo rm -rf -- \
+            "$ZPWR" \
+            "$HOME/.tmux" \
+            "$HOME/.vim" \
+            "$HOME/.tmux" \
+            "$FORKED_DIR" \
+            "$ZSH" \
+            "$HOME/.zcompdump"*
+    else
+        prettyPrint "Abort uninstall"
+    fi
 }
 
 function changeGitEmail(){
