@@ -118,15 +118,16 @@ gitRepoUpdater() {
 
 [[ -z "$ZPWR_SCRIPTS" ]] && ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
 
-if [[ $skip != true ]]; then
-    if [[ -f "$ZPWR_SCRIPTS/printHeader.sh" ]]; then
-        width=80
-        perl -le "print '_'x$width" | lolcat
-        if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-            exists catme && exists cowsay && exists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
-        fi
-        perl -le "print '_'x$width" | lolcat
+if [[ -f "$ZPWR_SCRIPTS/printHeader.sh" ]]; then
+    width=80
+    perl -le "print '_'x$width" | lolcat
+    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
+        exists catme && exists cowsay && exists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
     fi
+    perl -le "print '_'x$width" | lolcat
+fi
+
+if [[ $skip != true ]]; then
 
     prettyPrint "Updating Tmux Plugins"
     gitRepoUpdater "$HOME/.tmux/plugins"
