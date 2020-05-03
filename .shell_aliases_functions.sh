@@ -1908,13 +1908,17 @@ function unlinkConf(){
     (
 
     local -a symFiles
-    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc)
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc .ctags)
 
     for file in ${symFiles[@]} ; do
-        prettyPrint "REMOVING $file to $HOME"
-        goInstallerDir
-        echo rm -f $HOME/$file
-        rm -f $HOME/$file
+        if [[ -h "$file" ]]; then
+            prettyPrint "REMOVING $file to $HOME"
+            goInstallerDir
+            echo rm -f $HOME/$file
+            rm -f $HOME/$file
+        else
+            prettyPrint "not REMOVING $file because not symlink"
+        fi
     done
     rm -rf "$HOME/.vim/UltiSnips"
 
