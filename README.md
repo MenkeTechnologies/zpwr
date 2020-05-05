@@ -431,6 +431,8 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 export ZPWR_EMACS='command emacs -nw'
 # the marker found color in bat output into fzf from ag search
 export ZPWR_MARKER_COLOR="0;1;4;37;44m"
+# whether to search interactively in menuselect
+export ZPWR_INTERATIVE_MENU_SELECT=true
 ```
 
 ## Tests

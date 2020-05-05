@@ -180,6 +180,8 @@ export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 export ZPWR_EMACS='command emacs -nw'
 # the marker found color in bat output into fzf from ag search
 export ZPWR_MARKER_COLOR="0;1;4;37;44m"
+# whether to search interactively in menuselect
+export ZPWR_INTERATIVE_MENU_SELECT=true
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
@@ -2037,7 +2039,12 @@ bindkey -M menuselect '\e[4~' vi-end-of-line
 
 # like helm
 
-bindkey -M menuselect '^I' vi-forward-char
+if [[ $ZPWR_INTERATIVE_MENU_SELECT == true ]]; then
+    bindkey -M menuselect '^I' vi-forward-char
+    bindkey -M menuselect '^?' undo
+else
+    :
+fi
 bindkey -M menuselect '^J' down-history
 bindkey -M menuselect '^K' up-history
 
@@ -2052,7 +2059,6 @@ bindkey -M menuselect '?' history-incremental-search-backward
 
 #for interactive menuselect
 bindkey -M menuselect '^V' vi-insert
-bindkey -M menuselect '^?' undo
 
 function expandAliasAccept(){
     zle _expand_alias
@@ -3592,7 +3598,11 @@ function _parameters() {
 
 }
 
-zstyle ':completion:*:*:*:*:*' menu select=0 interactive
+if [[ $ZPWR_INTERATIVE_MENU_SELECT == true ]]; then
+    zstyle ':completion:*:*:*:*:*' menu select=0 interactive
+else
+    zstyle ':completion:*:*:*:*:*' menu select=0
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
