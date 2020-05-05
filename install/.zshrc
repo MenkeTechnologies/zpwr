@@ -257,6 +257,10 @@ ZSH_DISABLE_COMPFIX=true
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 export SHELL="$(which zsh)"
+
+# fish like menu select search
+zmodload -i zsh/complist
+setopt menucomplete
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ env vars
@@ -2032,6 +2036,8 @@ bindkey -M menuselect '\e[1~' vi-beginning-of-line
 bindkey -M menuselect '\e[4~' vi-end-of-line
 
 # like helm
+
+bindkey -M menuselect '^I' vi-forward-char
 bindkey -M menuselect '^J' down-history
 bindkey -M menuselect '^K' up-history
 
@@ -2044,9 +2050,9 @@ bindkey -M menuselect '^L' vi-forward-char
 bindkey -M menuselect '/' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
 
-#for interacctive menuselect
+#for interactive menuselect
 bindkey -M menuselect '^V' vi-insert
-bindkey -M menuselect '^U' undo
+bindkey -M menuselect '^?' undo
 
 function expandAliasAccept(){
     zle _expand_alias
@@ -2279,8 +2285,6 @@ if [[ ${+_comps[z]} == 0 ]]; then
 else
     logg 'used cached ~/.zcompdump'
 fi
-# allow scrolling pager through completion list
-zmodload -i zsh/complist
 
 #dont include pwd after ../
 zstyle ':completion:*' ignore-parents parent pwd
@@ -2328,8 +2332,6 @@ if [[ $ZPWR_COLORS == true ]]; then
 fi
 
 zstyle ':completion:*' auto-description 'Specify: %d'
-
-zstyle ':completion:*' menu select=1 _complete _ignored _approximate _correct
 
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
@@ -3589,6 +3591,8 @@ function _parameters() {
     _describe -t parameters parameter ary
 
 }
+
+zstyle ':completion:*:*:*:*:*' menu select=0 interactive
 #}}}***********************************************************
 
 #{{{                    MARK:Groovy
