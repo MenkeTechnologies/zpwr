@@ -2038,11 +2038,15 @@ bindkey -M menuselect '^K' up-history
 bindkey -M menuselect '^P' vi-backward-word
 bindkey -M menuselect '^N' vi-forward-word
 
-bindkey -M menuselect '^H' vi-beginning-of-line
-bindkey -M menuselect '^L' vi-end-of-line
+bindkey -M menuselect '^H' vi-backward-char
+bindkey -M menuselect '^L' vi-forward-char
 #search through options
 bindkey -M menuselect '/' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
+
+#for interacctive menuselect
+bindkey -M menuselect '^V' vi-insert
+bindkey -M menuselect '^U' undo
 
 function expandAliasAccept(){
     zle _expand_alias
