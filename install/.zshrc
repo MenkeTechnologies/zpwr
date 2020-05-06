@@ -2054,7 +2054,7 @@ bindkey -M menuselect '^N' vi-forward-word
 bindkey -M menuselect '^H' vi-backward-char
 bindkey -M menuselect '^L' vi-forward-char
 #search through options
-bindkey -M menuselect '/' history-incremental-search-forward
+bindkey -M menuselect '|' history-incremental-search-forward
 bindkey -M menuselect '?' history-incremental-search-backward
 
 #for interactive menuselect
