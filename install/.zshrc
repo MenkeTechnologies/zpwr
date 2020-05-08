@@ -227,7 +227,7 @@ test -f "$ZPWR_LOCAL/.tokens.sh" &&
     source "$ZPWR_LOCAL/.tokens.sh" ||
     touch "$ZPWR_LOCAL/.tokens.sh"
 
-export HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"
+export HISTFILE="$HOME/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history"
 
 function exists(){
 
@@ -441,7 +441,7 @@ fi
 #**************************************************************
 autoload -Uz compinit
 
-export ZSH_COMPDUMP="$HOME/.zcompdump"
+export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
 
 source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
