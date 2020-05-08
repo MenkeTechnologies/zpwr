@@ -2043,10 +2043,11 @@ if [[ $ZPWR_INTERATIVE_MENU_SELECT == true ]]; then
     bindkey -M menuselect '^I' vi-forward-char
     bindkey -M menuselect '^?' undo
     bindkey -M menuselect '.' self-insert
-    bindkey -M menuselect '|' history-incremental-search-forward
 else
-    bindkey -M menuselect '/' history-incremental-search-forward
+    :
 fi
+
+bindkey -M menuselect '|' history-incremental-search-forward
 
 bindkey -M menuselect '^J' down-history
 bindkey -M menuselect '^K' up-history
