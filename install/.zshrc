@@ -1317,7 +1317,7 @@ function regenZshCompCache(){
 
     prettyPrint "regen zsh compsys cache"
     command rm -fv "$HOME/.zcompdump"* 2>/dev/null
-    compinit -u
+    compinit -u -d "$ZSH_COMPDUMP"
     addOMZAttrib
 }
 
@@ -3697,7 +3697,7 @@ function recompile(){
 	test -f ~/.zshrc && zrecompile -p ~/.zshrc
 	test -f ~/.zlogout && zrecompile -p ~/.zlogout
 	test -f ~/.zlogin && zrecompile -p ~/.zlogin
-	test -f ~/.zcompdump && zrecompile -p ~/.zcompdump
+	test -f "$ZSH_COMPDUMP" && zrecompile "$ZSH_COMPDUMP"
 	test -f /etc/profile && sudo zrecompile -p /etc/profile
 	test -f /etc/zshrc && sudo zrecompile -p /etc/zshrc
 	test -f /etc/profile.env && sudo zrecompile -p /etc/profile.env

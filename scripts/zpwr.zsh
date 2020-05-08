@@ -147,7 +147,7 @@ ZPWR_VERBS[regenconfiglinks]='regenConfigLinks=regen sym links from \$ZPWR_INSTA
 ZPWR_VERBS[regenpowerline]='regenPowerlineLink=regen powerline sym link to \$HOME/.tmux/powerline'
 ZPWR_VERBS[regengtags]='regenGtagsCtags=regen gtags files to \$HOME'
 ZPWR_VERBS[regenctags]='regenCtags=regen ctags files to \$HOME'
-ZPWR_VERBS[regenzsh]='regenZshCompCache=regen compsys cache to ~/.zcompdump'
+ZPWR_VERBS[regenzsh]='regenZshCompCache=regen compsys cache to \$ZSH_COMPDUMP'
 ZPWR_VERBS[repo]='zp=cd to \$ZPWR_REPO_NAME'
 ZPWR_VERBS[return2]='return2=turn off stderr filter'
 ZPWR_VERBS[reveal]='reveal=show remote repo in browser'
