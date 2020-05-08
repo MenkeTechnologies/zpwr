@@ -1316,9 +1316,11 @@ function clearLine() {
 function regenZshCompCache(){
 
     prettyPrint "regen zsh compsys cache"
-    command rm -fv "$HOME/.zcompdump"* 2>/dev/null
+    local lines
+    lines="$(command "grep #omz" "$ZSH_COMPDUMP")"
+    command rm -fv "$ZSH_COMPDUMP"* 2>/dev/null
     compinit -u -d "$ZSH_COMPDUMP"
-    addOMZAttrib
+    echo "$lines" >> "$ZSH_COMPDUMP"
 }
 
 function regenSearchEnv(){
@@ -2274,14 +2276,15 @@ function addOMZAttrib() {
     echo "\n$zcompdump_metadata" | tee -a "$ZSH_COMPDUMP" &>/dev/null
 }
 
-local recachedCompsys
+local recachedCompsys liness
 recachedCompsys=false
 # reload compsys cache if file is stale for 1 week
-for dump in ~/.zcompdump(N.mh+168); do
+for dump in ~/.zcompdump*(N.mh+168); do
     logg "regenerating stale '$dump' older than 1 week"
     # avoid insecure warning message with -u
+    lines="$(command "grep #omz" "$ZSH_COMPDUMP")"
     compinit -u -d "$ZSH_COMPDUMP"
-    addOMZAttrib
+    echo "$lines" >> "$ZSH_COMPDUMP"
     #zcompile $ZSH_COMPDUMP
     recachedCompsys=true
     break
@@ -2291,8 +2294,9 @@ if [[ ${+_comps[z]} == 0 ]]; then
     #compsys completion for z was not found when it should have been
     logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
     logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
+    lines="$(command "grep #omz" "$ZSH_COMPDUMP")"
     compinit -u -d "$ZSH_COMPDUMP"
-    addOMZAttrib
+    echo "$lines" >> "$ZSH_COMPDUMP"
     #zcompile $ZSH_COMPDUMP
 else
     logg "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
