@@ -3718,13 +3718,6 @@ fi
 
 exists thefuck && eval $(thefuck --alias)
 
-endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
-startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
-logg "zsh startup took $startupTimeMs seconds"
-if [[ $ZPWR_PROFILING == true ]]; then
-    zprof
-fi
-
 #force alias z to zshz not zypper on suse
 alias z="$zcmd 2>&1"
 
@@ -3913,5 +3906,13 @@ exists zunit && {
 test -f "$ZPWR_LOCAL/.tokens.sh" &&
     source "$ZPWR_LOCAL/.tokens.sh" ||
     touch "$ZPWR_LOCAL/.tokens.sh"
+
+endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
+startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
+logg "zsh startup took $startupTimeMs seconds"
+if [[ $ZPWR_PROFILING == true ]]; then
+    zprof
+fi
+
 #}}}***********************************************************
 
