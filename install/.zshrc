@@ -976,6 +976,18 @@ function fzfFilesearchVerbEdit(){
     fi
 }
 
+function zpwrZstyle() {
+    sel=$(zstyle -L | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m)
+
+    if [[ -n "$sel" ]]; then
+        BUFFER="$editor $sel"
+        print -rz -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+
 function fzfFilesearchVerb(){
     local editor
     editor="$1"

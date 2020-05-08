@@ -174,6 +174,7 @@ ZPWR_VERBS[zpwr]='zp=cd to \$ZPWR_REPO_NAME'
 ZPWR_VERBS[zpz]='zpz=cd to \$ZPWR_REPO_NAME and git co, rebase and push'
 ZPWR_VERBS[zrc]='zrc=zshrc vim session'
 ZPWR_VERBS[zshsearch]='zshrcsearch=search zshrc for arg'
+ZPWR_VERBS[zstyle]='zpwrZstyle=fuzzy search zstyle'
 
 verb="$1"
 

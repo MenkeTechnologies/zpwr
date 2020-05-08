@@ -54,6 +54,12 @@ for k v in ${(kv)$1[@]};do
 done
 endsnippet
 
+snippet fun "function"
+function $1() {
+    ${2::}
+}
+endsnippet
+
 snippet ff "for loop shell"
 for (( i = 0; i < $1; ++i )); do
 	$2
