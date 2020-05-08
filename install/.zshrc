@@ -2292,12 +2292,13 @@ done
 if [[ ${+_comps[z]} == 0 ]]; then
     #compsys completion for z was not found when it should have been
     logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
-    logg "_comps size: '$#_comps' fpath: '$fpath'"
+    logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
     compinit -u -d "$ZSH_COMPDUMP"
     addOMZAttrib
     #zcompile $ZSH_COMPDUMP
 else
     logg "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
+    logg "_comps size: '$#_comps' fpath length: '$#fpath'"
 fi
 
 #dont include pwd after ../
