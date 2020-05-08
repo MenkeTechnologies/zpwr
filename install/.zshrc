@@ -192,6 +192,7 @@ declare -A ZPWR_VARS
 declare -A ZPWR_VERBS
 source "$ZPWR_SCRIPTS/zpwr.zsh"
 
+export HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
 unalias ag &> /dev/null
@@ -335,45 +336,6 @@ forgit_ignore=fgi
 forgit_restore=fgcf
 forgit_clean=fgclean
 forgit_stash_show=fgss
-
-ZPWR_VERBS[forgitadd]='forgit::add=forgit fzf add'
-ZPWR_VERBS[forgitclean]='forgit::clean=forgit fzf clean'
-ZPWR_VERBS[forgitdiff]='forgit::diff=forgit fzf diff'
-ZPWR_VERBS[forgitignore]='forgit::ignore=forgit fzf ignore'
-ZPWR_VERBS[forgitignoreclean]='forgit::ignore::clean=forgit fzf ignore clean'
-ZPWR_VERBS[forgitignoreget]='forgit::ignore::get=forgit fzf ignore get'
-ZPWR_VERBS[forgitignorelist]='forgit::ignore::list=forgit fzf ignore list'
-ZPWR_VERBS[forgitignoreupdate]='forgit::ignore::update=forgit fzf ignoreupdate'
-ZPWR_VERBS[forgitinfo]='forgit::info=forgit fzf info'
-ZPWR_VERBS[forgitlog]='forgit::log=forgit fzf log'
-ZPWR_VERBS[forgitreset]='forgit::reset::head=forgit fzf reset'
-ZPWR_VERBS[forgitrestore]='forgit::restore=forgit fzf restore'
-ZPWR_VERBS[forgitstash]='forgit::stash::show=forgit fzf stash'
-ZPWR_VERBS[forgitwarn]='forgit::warn=forgit fzf warn'
-ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
-ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
-
-ZPWR_VERBS[emacswordsearch]='emacsFzfWordsearchVerb=emacs a file in a sub dir by word'
-ZPWR_VERBS[emacswordsearchedit]='emacsFzfWordsearchVerbEdit=edit emacs a file in a sub dir by word'
-ZPWR_VERBS[vimwordsearch]='vimFzfWordsearchVerb=vim a file in a sub dir by word'
-ZPWR_VERBS[vimwordsearchedit]='vimFzfWordsearchVerbEdit=edit vim a file in a sub dir by word'
-
-ZPWR_VERBS[emacsfilesearch]='emacsFzfFilesearchVerb=emacs a file in a sub dir'
-ZPWR_VERBS[emacsfilesearchedit]='emacsFzfFilesearchVerbEdit=edit emacs a file in a sub dir'
-ZPWR_VERBS[vimfilesearch]='vimFzfFilesearchVerb=vim a file in a sub dir'
-ZPWR_VERBS[vimfilesearchedit]='vimFzfFilesearchVerbEdit=edit vim a file in a sub dir'
-ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
-ZPWR_VERBS[hist]='historyVerbAccept=exec history command'
-ZPWR_VERBS[histedit]='historyVerbEdit=edit history command'
-
-ZPWR_VERBS[kill]='killPSVerbAccept=kill from ps output'
-ZPWR_VERBS[killedit]='killPSVerbEdit=edit kill from ps output'
-
-ZPWR_VERBS[lsof]='killLsofVerbAccept=kill from lsof output'
-ZPWR_VERBS[lsofedit]='killLsofVerbEdit=edit kill from lsof output'
-
-ZPWR_VERBS[envaccept]='fzfEnvVerbAccept=accept from fzf env'
-ZPWR_VERBS[envedit]='fzfEnvVerbEdit=edit from fzf env'
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ Plugins
@@ -2815,17 +2777,15 @@ fi
 #stderr colorization filter
 #color2
 
-#change history size in memory
-export HISTSIZE=10000000
-HISTSIZE=999999999
-#change history file size
-SAVEHIST=$HISTSIZE
-HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"
-
-
 #set right prompt string during continuation
 RPS2='+%N:%i:%^'
 export PS3=$'\e[1;34m-->>>> \e[0m'
+#change OMZ history size in memory
+export HISTSIZE=10000000
+HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+#change OMZ history file size
+
 #}}}***********************************************************
 
 #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
