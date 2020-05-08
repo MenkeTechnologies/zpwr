@@ -77,7 +77,7 @@ function loggErr(){
     test -z "$1" && loggErr "need arg" >&2 && return 1
     {
         printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ERROR: "
-        printf "_$ZPWR_LOG_QUOTE_COLOR'$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_" "$*"
+        printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
         printf "\x1b[0m"
         printf "\n"
     } >&2
@@ -104,8 +104,8 @@ test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
 test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$ZPWR/scripts"
 test -z "$ZPWR_SCRIPTS_MAC" && export ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
 test -z "$ZPWR_EMACS" && export ZPWR_EMACS='command emacs -nw'
-export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
-export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
+test -z "$ZPWR_ALL_GIT_DIRS" && export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
+test -z "$ZPWR_LOGFILE" && export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 
 test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
 
@@ -187,12 +187,6 @@ echo "$PATH" | command grep -isq $ZPWR_SCRIPTS || {
 #{{{                           MARK:HOMES
 #**********************************************************************
     if [[ "$ZPWR_OS_TYPE" == darwin ]];then
-        if exists jenv;then
-            eval "$(jenv init -)"
-            test -z "$JAVA_HOME" &&
-                jenv enable-plugin export &>/dev/null
-
-        fi
         export HOMEBREW_HOME='/usr/local/Cellar'
         export HOMEBREW_OPT_HOME='/usr/local/opt'
         export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
@@ -552,7 +546,14 @@ function em(){
     fi
 
 }
-
+function loadJenv() {
+    if exists jenv;then
+    eval "$(jenv init -)"
+    test -z "$JAVA_HOME" &&
+        jenv enable-plugin export &>/dev/null
+    fi
+    jenv "$@"
+}
 function r(){
 
     local cdstr
@@ -779,9 +780,9 @@ function logg(){
         if [[ -p /dev/stdin ]]; then
             {
                 printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
-                printf "_${ZPWR_LOG_QUOTE_COLOR}'$ZPWR_LOG_MSG_COLOR"
+                printf "_${ZPWR_LOG_QUOTE_COLOR}$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR"
                 cat
-                printf "\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_"
+                printf "\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_"
                 printf "\x1b[0m"
                 printf "\n"
             } >> "$ZPWR_LOGFILE"
@@ -789,7 +790,7 @@ function logg(){
             test -z "$1" && loggErr "need arg" && return 1
             {
                 printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
-                printf "_$ZPWR_LOG_QUOTE_COLOR'$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR'${ZPWR_LOG_UNDER_COLOR}_" "$*"
+                printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
                 printf "\x1b[0m"
                 printf "\n"
             } >> "$ZPWR_LOGFILE"

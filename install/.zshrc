@@ -158,6 +158,10 @@ export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
+# char to separate log messages
+export ZPWR_QUOTE_START_CHAR="<<("
+# char to separate log messages
+export ZPWR_QUOTE_END_CHAR=")>>"
 # prompt for all fzf
 export ZPWR_FZF_LOGO="<<)ZPWR(>>"
 # set to comma separated list of pane numbers
@@ -182,6 +186,10 @@ export ZPWR_EMACS='command emacs -nw'
 export ZPWR_MARKER_COLOR="0;1;4;37;44m"
 # whether to search interactively in menuselect
 export ZPWR_INTERATIVE_MENU_SELECT=true
+# list of git dirs
+export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
+# log file
+export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
@@ -359,6 +367,25 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal 
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals zsh-git-acp)
 
+# OMZ does not add nested comp dirs to fpath so do it here, asssume src
+for plug in ${plugins[@]}; do
+    if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
+        #null glob - no error
+        for dir in "$ZSH/custom/plugins/$plug/"*src(N); do
+            if [[ -d "$dir" ]]; then
+                if [[ -z ${fpath[(r)$dir]} ]];then
+                    if echo $dir | grep -qs "override"; then
+                        fpath=($dir $fpath)
+                    else
+                        fpath=($fpath $dir)
+                    fi
+                    #echo "add $dir to $fpath" >> "$ZPWR_LOGFILE"
+                fi
+            fi
+        done
+    fi
+done
+
 exists subl && plugins+=(sublime)
 
 exists rails && plugins+=(rails)
@@ -416,6 +443,8 @@ fi
 #{{{                    MARK:Sourcing alias file
 #**************************************************************
 autoload -Uz compinit
+
+export ZSH_COMPDUMP="$HOME/.zcompdump"
 
 source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
@@ -2242,31 +2271,33 @@ export DIRSTACKSIZE=20
 
 #{{{                    MARK:Completions
 #**************************************************************
+function addOMZAttrib() {
+    zcompdump_metadata="#omz revision: $(builtin cd -q "$ZSH"; git rev-parse HEAD 2>/dev/null)\n#omz fpath: $fpath"
+    echo "\n$zcompdump_metadata" | tee -a "$ZSH_COMPDUMP" &>/dev/null
+}
 
 local recachedCompsys
 recachedCompsys=false
 # reload compsys cache if file is stale for 1 week
 for dump in ~/.zcompdump(N.mh+168); do
-    logg "regenerating stale $dump older than 1 week"
+    logg "regenerating stale '$dump' older than 1 week"
     # avoid insecure warning message with -u
-    compinit -u
-    #compile the compsys cache file for speed
+    compinit -u -d "$ZSH_COMPDUMP"
+    addOMZAttrib
     #zcompile $ZSH_COMPDUMP
     recachedCompsys=true
     break
 done
 
-if [[ $recachedCompsys == false ]]; then
-    # use cached ~/.zcompdump
-    compinit -C -u
-fi
-
 if [[ ${+_comps[z]} == 0 ]]; then
-#compsys completion for z was not found when it should have been
-    logg 'regenerating ~/.zcompdump due to failed cached compinit for z'
-    compinit -u
+    #compsys completion for z was not found when it should have been
+    logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
+    logg "_comps size: '$#_comps' fpath: '$fpath'"
+    compinit -u -d "$ZSH_COMPDUMP"
+    addOMZAttrib
+    #zcompile $ZSH_COMPDUMP
 else
-    logg 'used cached ~/.zcompdump'
+    logg "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
 fi
 
 #dont include pwd after ../
@@ -2541,7 +2572,6 @@ exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' 
 exists zu8 || alias zu8='zpwr updateall'
 
 function tabNum() {
-    
     echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
 
@@ -2678,7 +2708,6 @@ function banner(){
     ponysay -W 100
 }
 function bannerLolcat(){
-
     bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
     ponysay -W 100 |
     splitReg.sh -- \
@@ -2971,42 +3000,37 @@ export FZF_JELLY="--color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
 --color info:150,prompt:110,spinner:150,pointer:167,marker:174"
 
 
-function fzf_setup(){
+export ZPWR_COMMON_FZF_ELEM
+ZPWR_COMMON_FZF_ELEM="--prompt='$ZPWR_FZF_LOGO ' --bind=ctrl-n:page-down,ctrl-p:page-up"
 
-    export ZPWR_COMMON_FZF_ELEM
-    ZPWR_COMMON_FZF_ELEM="--prompt='$ZPWR_FZF_LOGO ' --bind=ctrl-n:page-down,ctrl-p:page-up"
+#to include dirs files in search
+export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
+export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%"
+local rpm_cmd
+local deb_cmd
+exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
+exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
-    #to include dirs files in search
-    export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
-    export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%"
-    local rpm_cmd
-    local deb_cmd
-    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
-    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
+export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
+export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
+export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"
+export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
 
-    export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
-    export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
-    export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"
-    export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
+export FZF_AG_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter : --nth 3.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfAgOpts.sh")'"
 
-    export FZF_AG_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter : --nth 3.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfAgOpts.sh")'"
+export FZF_GTAGS_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter ' ' --nth 1 --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfGtagsOpts.sh")'"
 
-    export FZF_GTAGS_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter ' ' --nth 1 --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfGtagsOpts.sh")'"
+export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
 
-    export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
+if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
+    export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"
+else
+    export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"
+fi
 
-    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"
-    else
-        export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"
-    fi
-
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff=' "$(fzf '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f=" \$(fzf $FZF_CTRL_T_OPTS)"
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z=" | fzf $FZF_CTRL_T_OPTS "
-}
-
-fzf_setup
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff=' "$(fzf '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f=" \$(fzf $FZF_CTRL_T_OPTS)"
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z=" | fzf $FZF_CTRL_T_OPTS "
 
 # killall ;<tab>
 function _fzf_complete_killall() {
