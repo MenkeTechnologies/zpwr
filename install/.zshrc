@@ -1318,6 +1318,7 @@ function regenZshCompCache(){
     prettyPrint "regen zsh compsys cache"
     command rm -fv "$HOME/.zcompdump"* 2>/dev/null
     compinit -u
+    addOMZAttrib
 }
 
 function regenSearchEnv(){
