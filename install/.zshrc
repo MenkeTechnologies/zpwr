@@ -1333,6 +1333,7 @@ function regenAll(){
 
     regenConfigLinks
     regenZshCompCache
+    regenHistory
     regenCtags
     regenGtagsCtags
     regenAllKeybindingsCache
@@ -3920,6 +3921,17 @@ function revealRecurse(){
 function evalTester(){
 
     echo eval fordir ${(q)*}
+}
+
+function regenHistory() {
+    prettyPrint "Regen $HISTFILE"
+    (
+        builtin cd "$HOME"
+        command mv "$HISTFILE" .zsh_history_bad
+        command strings .zsh_history_bad > "$HISTFILE"
+        builtin fc -R ."$HISTFILE"
+        command rm -rf .zsh_history_bad
+    )
 }
 
 exists zunit && {
