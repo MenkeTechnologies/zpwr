@@ -200,7 +200,6 @@ declare -A ZPWR_VARS
 declare -A ZPWR_VERBS
 source "$ZPWR_SCRIPTS/zpwr.zsh"
 
-export HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
 unalias ag &> /dev/null
@@ -216,10 +215,6 @@ if [[ ! -d $ZPWR_INSTALL ]]; then
     mkdir -p $ZPWR_INSTALL
 fi
 
-if [[ ! -d $ZPWR_LOCAL ]]; then
-    mkdir -p $ZPWR_LOCAL
-fi
-
 if [[ ! -d $ZPWR_TMUX_LOCAL ]]; then
     mkdir -p $ZPWR_TMUX_LOCAL
 fi
@@ -227,6 +222,12 @@ fi
 if [[ ! -d $ZPWR_LOCAL ]]; then
     mkdir -p $ZPWR_LOCAL
 fi
+
+test -f "$ZPWR_LOCAL/.tokens.sh" &&
+    source "$ZPWR_LOCAL/.tokens.sh" ||
+    touch "$ZPWR_LOCAL/.tokens.sh"
+
+export HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"
 
 function exists(){
 
@@ -240,10 +241,6 @@ if [[ $ZPWR_PROFILING == true ]]; then
     #profiling startup
     zmodload zsh/zprof
 fi
-
-test -f "$ZPWR_LOCAL/.tokens.sh" &&
-    source "$ZPWR_LOCAL/.tokens.sh" ||
-    touch "$ZPWR_LOCAL/.tokens.sh"
 
 [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
 source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
