@@ -2494,8 +2494,8 @@ zstyle ':completion:*' group-name ''
 # divide man pages by sections
 zstyle ':completion:*:manuals' separate-sections true
 
-# Ignore completion functions for commands you don't have
-zstyle ':completion:*:functions' ignored-patterns '_*'
+# Ignore compsys completion functions
+#zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # ignore .. as completion option
 zstyle ':completion:*' ignored-patterns '*..'
@@ -3467,7 +3467,7 @@ function _r(){
 
 # list of completers to use
 zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
-zstyle ':completion:*:*:clearList:*:functions' ignored-patterns
+#zstyle ':completion:*:*:*:*:functions' ignored-patterns
 
 compdef _cl clearList
 compdef _f f
