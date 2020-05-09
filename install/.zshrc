@@ -298,7 +298,7 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal 
     postgres redis-cli colorize sudo rsync docker \
     docker-compose \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
-    zsh-very-colorful-manuals zsh-git-acp)
+    zsh-very-colorful-manuals zsh-git-acp tmux)
 
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
@@ -412,11 +412,11 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
     #determine if this terminal was started in IDE
-    echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim|alacritty' &&
-        plugins+=(tmux)
+    #echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim|alacritty' &&
+        #plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
-    echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim|alacritty' &&
-        plugins+=(tmux)
+    #echo "$ZPWR_PARENT_PROCESS" | command grep -iq -E 'login|tmux|vim|alacritty' &&
+        #plugins+=(tmux)
     plugins+=(systemd)
     distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 
@@ -455,7 +455,9 @@ autoload -Uz compinit
 
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
 
+echo "pre: $fpath" >> "$ZPWR_LOGFILE"
 source $ZSH/oh-my-zsh.sh
+echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
 # You may need to manually set your language environment
 
 #has all aliases and functions common to bourne like shells
