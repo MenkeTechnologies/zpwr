@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ifn
+# key: in
+# --
+if [[ ! $1 ]]; then
+    $0
+fi

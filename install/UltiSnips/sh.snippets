@@ -18,12 +18,33 @@ snippet p "printf default"
 printf "______'"'$1'"'_____ = ""'$1' \n"
 endsnippet
 
+snippet ine "if not else"
+if [[ ! $1 ]]; then
+	${2::}
+else
+	${3::}
+fi
+endsnippet
+
 snippet ie "if else"
 if [[ $1 ]]; then
 	${2::}
 else
 	${3::}
 fi
+endsnippet
+
+snippet ineee "if not elif elif else"
+if [[ ! $1 ]]; then
+	${2::}
+elif [[ $3 ]]; then
+	${4::}
+elif [[ $5 ]]; then
+	${6::}
+else
+	${7::}
+fi
+
 endsnippet
 
 snippet ieee "if elif elif else"
@@ -35,6 +56,16 @@ elif [[ $5 ]]; then
 	${6::}
 else
 	${7::}
+fi
+endsnippet
+
+snippet inee "if not elif else"
+if [[ ! $1 ]]; then
+	${2::}
+elif [[ $3 ]]; then
+	${4::}
+else
+	${5::}
 fi
 endsnippet
 
@@ -64,4 +95,10 @@ snippet ff "for loop shell"
 for (( i = 0; i < $1; ++i )); do
 	$2
 done
+endsnippet
+
+snippet ifn "if not"
+if [[ ! ${1:condition} ]]; then
+    $2
+fi
 endsnippet
