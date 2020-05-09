@@ -1873,6 +1873,22 @@ bindkey -M vicmd '^E' end-of-line
 # env var to show dots does not work with vim mode
 bindkey '^I' expand-or-complete-with-dots
 
+bindkey '^X^R' _read_comp
+bindkey '^X?' _complete_debug
+bindkey '^XC' _correct_filename
+bindkey '^Xa' _expand_alias
+bindkey '^Xc' _correct_word
+bindkey '^Xd' _list_expansions
+bindkey '^Xe' _expand_word
+bindkey '^Xh' _complete_help
+bindkey '^Xm' _most_recent_file
+bindkey '^Xn' _next_tags
+bindkey '^Xt' _complete_tag
+bindkey '^X~' _bash_list-choices
+bindkey '^[,' _history-complete-newer
+bindkey '^[/' _history-complete-older
+bindkey '^[~' _bash_complete-word
+
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
 #exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
@@ -3470,6 +3486,7 @@ zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _co
 #zstyle ':completion:*:*:*:*:functions' ignored-patterns
 
 compdef _cl clearList
+compdef _git-clone gcl
 compdef _f f
 compdef _c c
 compdef _p p

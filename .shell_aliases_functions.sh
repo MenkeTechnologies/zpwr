@@ -1708,9 +1708,10 @@ function gcl() {
     local git_name
     local dir_name
 
-    git_name="${1##*/}"
+    last_arg=${@: -1}
+    git_name="${last_arg##*/}"
     dir_name=${git_name%.*}
-    git clone -v --progress --recursive "$1"
+    git clone -v --progress --recursive "$@"
     if [[ -d "$dir_name" ]]; then
         cd "$dir_name"
     else
