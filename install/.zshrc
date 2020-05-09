@@ -74,6 +74,8 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
 export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_TOKEN_PRE="$ZPWR/local/.tokens.sh"
+export ZPWR_TOKEN_POST="$ZPWR/local/.tokens-post.sh"
 export ZPWR_TEST="$ZPWR/tests"
 export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_INSTALL="$ZPWR/install"
@@ -206,27 +208,6 @@ unalias ag &> /dev/null
 #stop delay when entering normal mode
 export KEYTIMEOUT=1
 export CHEATCOLORS=true
-
-if [[ ! -d $ZPWR ]]; then
-    mkdir -p $ZPWR
-fi
-
-if [[ ! -d $ZPWR_INSTALL ]]; then
-    mkdir -p $ZPWR_INSTALL
-fi
-
-if [[ ! -d $ZPWR_TMUX_LOCAL ]]; then
-    mkdir -p $ZPWR_TMUX_LOCAL
-fi
-
-if [[ ! -d $ZPWR_LOCAL ]]; then
-    mkdir -p $ZPWR_LOCAL
-fi
-
-test -f "$ZPWR_LOCAL/.tokens.sh" &&
-    source "$ZPWR_LOCAL/.tokens.sh" ||
-    touch "$ZPWR_LOCAL/.tokens.sh"
-
 export HISTFILE="$HOME/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history"
 
 function exists(){
@@ -236,40 +217,10 @@ function exists(){
     type -- "$1" 2>/dev/null |
     command grep -sqv "suffix alias" 2>/dev/null
 }
-
-if [[ $ZPWR_PROFILING == true ]]; then
-    #profiling startup
-    zmodload zsh/zprof
-fi
-
-[[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
-source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
-
-if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
-    if test -s "$ZPWR_PROMPT_FILE";then
-        if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then
-            source "$ZPWR_PROMPT_FILE"
-        else
-            ZSH_THEME=simonoff
-        fi
-    else
-        ZSH_THEME=simonoff
-    fi
-else
-    test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=simonoff
-fi
-
-ZSH_DISABLE_COMPFIX=true
-
-#colors for common commands
-test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
-
 export SHELL="$(which zsh)"
 
-# fish like menu select search
-zmodload -i zsh/complist
-setopt menucomplete
 #}}}***********************************************************
+
 
 #{{{                    MARK:OMZ env vars
 #**************************************************************
@@ -328,23 +279,8 @@ export ARCHFLAGS="-arch x86_64"
 
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
 
-source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
-#}}}***********************************************************
+ZSH_DISABLE_COMPFIX=true
 
-#{{{                    MARK:forgit https://github.com/wfxr/forgit
-#**************************************************************
-forgit_log=fglo
-forgit_diff=fgd
-forgit_add=fga
-forgit_reset_head=fgrh
-forgit_ignore=fgi
-forgit_restore=fgcf
-forgit_clean=fgclean
-forgit_stash_show=fgss
-#}}}***********************************************************
-
-#{{{                    MARK:OMZ Plugins
-#**************************************************************
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -363,6 +299,82 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal 
     docker-compose \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals zsh-git-acp)
+
+
+source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
+#}}}***********************************************************
+
+#{{{                    MARK:forgit https://github.com/wfxr/forgit
+#**************************************************************
+forgit_log=fglo
+forgit_diff=fgd
+forgit_add=fga
+forgit_reset_head=fgrh
+forgit_ignore=fgi
+forgit_restore=fgcf
+forgit_clean=fgclean
+forgit_stash_show=fgss
+#}}}***********************************************************
+
+
+#{{{                    MARK:source tokens
+#**************************************************************
+test -f "$ZPWR_TOKEN_PRE" &&
+    source "$ZPWR_TOKEN_PRE" ||
+    touch "$ZPWR_TOKEN_PRE"
+#}}}***********************************************************
+
+
+#{{{                    MARK:post token
+#**************************************************************
+if [[ ! -d $ZPWR ]]; then
+    mkdir -p $ZPWR
+fi
+
+if [[ ! -d $ZPWR_INSTALL ]]; then
+    mkdir -p $ZPWR_INSTALL
+fi
+
+if [[ ! -d $ZPWR_TMUX_LOCAL ]]; then
+    mkdir -p $ZPWR_TMUX_LOCAL
+fi
+
+if [[ ! -d $ZPWR_LOCAL ]]; then
+    mkdir -p $ZPWR_LOCAL
+fi
+
+if [[ $ZPWR_PROFILING == true ]]; then
+    #profiling startup
+    zmodload zsh/zprof
+fi
+
+[[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
+source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
+
+if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
+    if test -s "$ZPWR_PROMPT_FILE";then
+        if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then
+            source "$ZPWR_PROMPT_FILE"
+        else
+            ZSH_THEME=simonoff
+        fi
+    else
+        ZSH_THEME=simonoff
+    fi
+else
+    test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=simonoff
+fi
+
+#colors for common commands
+test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
+
+# fish like menu select search
+zmodload -i zsh/complist
+setopt menucomplete
+#}}}***********************************************************
+
+#{{{                    MARK:OMZ Plugins
+#**************************************************************
 
 # OMZ does not add nested comp dirs to fpath so do it here, asssume src
 for plug in ${plugins[@]}; do
@@ -2715,12 +2727,6 @@ alias numcmd='print $#commands'
 #
 #}}}***********************************************************
 #
-#{{{                    MARK:Source Tokens
-#**************************************************************
-test -f "$ZPWR_LOCAL/.tokens.sh" &&
-    source "$ZPWR_LOCAL/.tokens.sh" ||
-    touch "$ZPWR_LOCAL/.tokens.sh"
-#}}}***********************************************************
 
 #{{{                    MARK:Initialize Login
 #**************************************************************
@@ -2735,6 +2741,7 @@ function bannerLolcat(){
     splitReg.sh -- \
     ---------------------- lolcat
 }
+
 function noPonyBanner(){
 
     eval "$ZPWR_DEFAULT_BANNER"
@@ -3965,9 +3972,9 @@ exists zunit && {
 #{{{                    MARK:Finish
 #**************************************************************
 #source .tokens.sh to override with user functions
-test -f "$ZPWR_LOCAL/.tokens.sh" &&
-    source "$ZPWR_LOCAL/.tokens.sh" ||
-    touch "$ZPWR_LOCAL/.tokens.sh"
+test -f "$ZPWR_TOKEN_POST" &&
+    source "$ZPWR_TOKEN_POST" ||
+    touch "$ZPWR_TOKEN_POST"
 
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))

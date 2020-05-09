@@ -131,7 +131,7 @@ export Z_DATA="$HOME/.z"
 #**************************************************************
 export ZPWR_TMUX_PREFIX=x
 export ZPWR_TMUX_REMOTE_PREFIX=b
-test -f "$ZPWR_LOCAL/.tokens.sh" && source "$ZPWR_LOCAL/.tokens.sh" || touch "$ZPWR_LOCAL/.tokens.sh"
+test -f "$ZPWR_TOKEN_PRE" && source "$ZPWR_TOKEN_PRE" || touch "$ZPWR_TOKEN_PRE"
 #bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 #zsh xtrace
@@ -335,10 +335,10 @@ alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
 alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null"
 alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
-alias tok="builtin cd $ZPWR; vim $ZPWR_LOCAL/.tokens.sh;clearList;isGitDir && git diff HEAD"
-alias conf="builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR/.tmux.conf $ZPWR/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_LOCAL/.tokens.sh $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
-alias etok="builtin cd $ZPWR; ${ZPWR_EMACS} $ZPWR_LOCAL/.tokens.sh;clearList;isGitDir && git diff HEAD"
-alias econf="builtin cd $ZPWR; ${ZPWR_EMACS} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_LOCAL/.tokens.sh $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
+alias tok="builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
+alias conf="builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR/.tmux.conf $ZPWR/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_TOKEN_PRE $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
+alias etok="builtin cd $ZPWR; ${ZPWR_EMACS} $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
+alias econf="builtin cd $ZPWR; ${ZPWR_EMACS} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_TOKEN_PRE $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
 alias zpt="builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;clearList;isGitDir && git diff HEAD"
 #}}}***********************************************************
 alias deleteTab="sed '/^[\x20\x09]*$/d'"
