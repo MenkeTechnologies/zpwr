@@ -1317,7 +1317,7 @@ function regenZshCompCache(){
 
     prettyPrint "regen zsh compsys cache"
     local lines
-    lines="$(command "grep #omz" "$ZSH_COMPDUMP")"
+    lines="$(command grep "#omz" "$ZSH_COMPDUMP")"
     command rm -fv "$ZSH_COMPDUMP"* 2>/dev/null
     compinit -u -d "$ZSH_COMPDUMP"
     echo "$lines" >> "$ZSH_COMPDUMP"
@@ -2283,7 +2283,7 @@ recachedCompsys=false
 for dump in ~/.zcompdump*(N.mh+168); do
     logg "regenerating stale '$dump' older than 1 week"
     # avoid insecure warning message with -u
-    lines="$(command "grep #omz" "$ZSH_COMPDUMP")"
+    lines="$(command grep "#omz" "$ZSH_COMPDUMP")"
     compinit -u -d "$ZSH_COMPDUMP"
     echo "$lines" >> "$ZSH_COMPDUMP"
     #zcompile $ZSH_COMPDUMP
@@ -2295,7 +2295,7 @@ if [[ ${+_comps[z]} == 0 ]]; then
     #compsys completion for z was not found when it should have been
     logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
     logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
-    lines="$(command "grep #omz" "$ZSH_COMPDUMP")"
+    lines="$(command grep "#omz" "$ZSH_COMPDUMP")"
     compinit -u -d "$ZSH_COMPDUMP"
     echo "$lines" >> "$ZSH_COMPDUMP"
     #zcompile $ZSH_COMPDUMP
