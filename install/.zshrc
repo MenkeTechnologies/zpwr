@@ -1318,7 +1318,8 @@ function regenZshCompCache(){
     prettyPrint "regen zsh compsys cache"
     local lines
     lines="$(command grep "#omz" "$ZSH_COMPDUMP")"
-    command rm -fv "$ZSH_COMPDUMP"* 2>/dev/null
+    echo command rm -fv "$ZSH_COMPDUMP"*(DN)
+    command rm -fv "$ZSH_COMPDUMP"*(DN)
     compinit -u -d "$ZSH_COMPDUMP"
     echo "$lines" >> "$ZSH_COMPDUMP"
 }
@@ -3726,7 +3727,11 @@ function recompile(){
 	test -f /etc/profile.env && sudo zrecompile -p /etc/profile.env
 
 	for dir in $fpath; do
-		test -d $dir && zrecompile -p $dir.zwc $dir/*
+		if test -d $dir;then
+            files=( $dir/*(N) )
+            (($#files)) &&
+            zrecompile -p $dir.zwc $files
+        fi
 	done
 }
 
