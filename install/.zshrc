@@ -1339,6 +1339,7 @@ function regenAll(){
     regenAllKeybindingsCache
     regenPowerlineLink
     regenSearchEnv
+    recompile
     regenAllGitRepos regen
 }
 
@@ -3719,7 +3720,7 @@ function recompile(){
 	test -f ~/.zshrc && zrecompile -p ~/.zshrc
 	test -f ~/.zlogout && zrecompile -p ~/.zlogout
 	test -f ~/.zlogin && zrecompile -p ~/.zlogin
-	test -f "$ZSH_COMPDUMP" && zrecompile "$ZSH_COMPDUMP"
+	test -f "$ZSH_COMPDUMP" && zrecompile -p "$ZSH_COMPDUMP"
 	test -f /etc/profile && sudo zrecompile -p /etc/profile
 	test -f /etc/zshrc && sudo zrecompile -p /etc/zshrc
 	test -f /etc/profile.env && sudo zrecompile -p /etc/profile.env
