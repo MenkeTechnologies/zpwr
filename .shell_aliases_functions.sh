@@ -548,12 +548,17 @@ function em(){
 }
 function loadJenv() {
     if exists jenv;then
-    eval "$(jenv init -)"
-    test -z "$JAVA_HOME" &&
+        eval "$(jenv init -)"
         jenv enable-plugin export &>/dev/null
+        prettyPrint "jenv loaded"
+        if [[ -n "$1" ]]; then
+            jenv "$@"
+        fi
+    else
+        loggErr "No jenv"
     fi
-    jenv "$@"
 }
+
 function r(){
 
     local cdstr
