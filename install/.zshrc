@@ -74,8 +74,8 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
 export ZPWR_LOCAL="$ZPWR/local"
-export ZPWR_TOKEN_PRE="$ZPWR/local/.tokens.sh"
-export ZPWR_TOKEN_POST="$ZPWR/local/.tokens-post.sh"
+export ZPWR_TOKEN_PRE="$ZPWR_LOCAL/.tokens.sh"
+export ZPWR_TOKEN_POST="$ZPWR_LOCAL/.tokens-post.sh"
 export ZPWR_TEST="$ZPWR/tests"
 export ZPWR_HIDDEN_DIR="$ZPWR/local"
 export ZPWR_INSTALL="$ZPWR/install"
@@ -179,7 +179,7 @@ export ZPWR_MAP_C_V_VIM_NORMAL=false
 # ponysay banner when shell startup finishes
 export ZPWR_INTRO_BANNER=ponies
 # alternate banner to ponysay
-export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh $(hostname)"
+export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS_MAC/figletRandomFontOnce.sh $(hostname)"
 # zpwr banner file location
 export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 # the emacs command

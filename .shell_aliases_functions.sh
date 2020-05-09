@@ -106,6 +106,7 @@ test -z "$ZPWR_SCRIPTS_MAC" && export ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
 test -z "$ZPWR_EMACS" && export ZPWR_EMACS='command emacs -nw'
 test -z "$ZPWR_ALL_GIT_DIRS" && export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
 test -z "$ZPWR_LOGFILE" && export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
+test -z "$ZPWR_TOKEN_PRE" && export ZPWR_TOKEN_PRE="$ZPWR_LOCAL/.tokens.sh"
 
 test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
 
