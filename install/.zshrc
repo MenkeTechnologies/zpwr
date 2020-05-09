@@ -449,17 +449,22 @@ else
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:Sourcing alias file
+#{{{                    MARK:Sourcing OMZ and alias file
 #**************************************************************
 autoload -Uz compinit
 
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
 
-echo "pre: $fpath" >> "$ZPWR_LOGFILE"
-source $ZSH/oh-my-zsh.sh
-echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
-# You may need to manually set your language environment
+if [[ $ZPWR_DEBUG == true ]]; then
+    echo "pre: $fpath" >> "$ZPWR_LOGFILE"
+fi
 
+source $ZSH/oh-my-zsh.sh
+
+if [[ $ZPWR_DEBUG == true ]]; then
+    echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
+fi
+# You may need to manually set your language environment
 #has all aliases and functions common to bourne like shells
 _alias_file="$ZPWR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
