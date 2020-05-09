@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: ifee
+# name: if elif else
 # key: iee
 # --
 if [[ $1 ]]; then

@@ -2277,7 +2277,7 @@ function addOMZAttrib() {
     echo "\n$zcompdump_metadata" | tee -a "$ZSH_COMPDUMP" &>/dev/null
 }
 
-local recachedCompsys liness
+local recachedCompsys lines
 recachedCompsys=false
 # reload compsys cache if file is stale for 1 week
 for dump in ~/.zcompdump*(N.mh+168); do

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
-# name: ifn
-# key: in
+# name: if not
+# key: ifn
 # --
 if [[ ! $1 ]]; then
     $0
