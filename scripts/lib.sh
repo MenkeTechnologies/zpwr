@@ -258,7 +258,7 @@ function proceed(){
 }
 
 function prettyPrintStdin(){
-    local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
+    local perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
     {
@@ -269,7 +269,7 @@ function prettyPrintStdin(){
 }
 
 function prettyPrint(){
-    local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"
+    local perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
     printf "$INSTALL_COUNTER>>> $@\n" | "$perlfile" -f
