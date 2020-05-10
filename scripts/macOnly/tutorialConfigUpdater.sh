@@ -45,6 +45,9 @@ prettyPrint "Copying scripts to custom Installer Repo $ZPWR_DIR"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 #cp -R "$HOME/.vim/Ultisnips" "$ZPWR_DIR_INSTALL"
 
+prettyPrint "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
+echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
+    "$tutorialDir"
 cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$ZPWR_DIR_INSTALL_GTAGS"
 
@@ -80,6 +83,9 @@ cp "$ZPWR_DIR_INSTALL/.vimrc" "$tutorialDir/vim"
 prettyPrint "Copying minimal minvimrc"
 cp "$HOME/.zpwr/.minvimrc" "$tutorialDir/vim"
 
+prettyPrint "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
+echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
+    "$tutorialDir"
 cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 
