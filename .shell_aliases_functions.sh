@@ -176,7 +176,7 @@ echo "$PATH" | command grep -isq $ZPWR_SCRIPTS || {
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
-        export PATH="$ZPWR_SCRIPTS/macOnly:$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$HOME/.platformio/penv/bin"
+        export PATH="$ZPWR_SCRIPTS_MAC:$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$HOME/.platformio/penv/bin"
     else
         export PATH="$PATH:/usr/games"
     fi
@@ -383,7 +383,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     #sudo pmset -c ttyskeepawake 1
     alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
     alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
-    alias rtsync="$HOME/Documents/shellScripts/macOnly/rsyncr.sh"
+    alias rtsync="$ZPWR_SCRIPTS_MAC/rsyncr.sh"
     alias ig='cd $HOME/IdeaProjects'
     alias pg='cd $HOME/PycharmProjects'
     alias cg='cd $HOME/ClionProjects'
@@ -394,7 +394,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias ap='cd /Applications'
     alias sudoedit='sudo $EDITOR'
     alias tra='cd $HOME/.Trash'
-    alias co="bash $ZPWR_SCRIPTS/macOnly/commandToColors.sh"
+    alias co="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
     alias bl='brew link --force --overwrite'
     exists gls &&
      alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
@@ -889,7 +889,7 @@ function scnew(){
         return 1
     fi
 
-    bash '$HOME/Documents/shellScripts/createScriptButDontOpenSublime.sh' "$1"
+    bash "$ZPWR_SCRIPTS/createScriptButDontOpenSublime.sh" "$1"
 }
 
 function p(){
@@ -2720,7 +2720,7 @@ function regenGtagsType(){
             "$ZPWR_INSTALL/"* \
             "$ZPWR/"* \
             "$ZPWR_SCRIPTS"/* \
-            "$ZPWR_SCRIPTS/macOnly/"*; do
+            "$ZPWR_SCRIPTS_MAC/"*; do
             if [[ -f "$file" ]]; then
                 echo "$file"
             fi
@@ -2748,7 +2748,7 @@ function regenCtags(){
     builtin cd "$ZPWR_SCRIPTS"
     command rm tags 2>/dev/null
     ctags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR/".*.sh
-    ctags --append --fields=+l "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS/macOnly/"*
+    ctags --append --fields=+l "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS_MAC/"*
     command cp tags "$HOME"
     )
 
