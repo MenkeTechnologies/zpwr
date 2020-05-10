@@ -1736,8 +1736,8 @@ command! -bang -nargs=* Imaps call fzf#vim#maps('i')
 command! -bang -nargs=* Nmaps call fzf#vim#maps('n')
 command! -bang -nargs=* Omaps call fzf#vim#maps('o')
 command! -bang -nargs=* Vmaps call fzf#vim#maps('v')
-command! -bang -nargs=* Xmaps call fzf#vim#maps('x')
 command! -bang -nargs=* Smaps call fzf#vim#maps('s')
+command! -bang -nargs=* Xmaps call fzf#vim#maps('x')
 command! -bang -nargs=* Cmaps call fzf#vim#maps('c')
 
 " Insert mode completion
