@@ -47,6 +47,8 @@ logg "Copying scripts to custom Installer Repo $ZPWR_DIR"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 #cp -R "$HOME/.vim/Ultisnips" "$ZPWR_DIR_INSTALL"
 
+type=ctags
+
 if exists gtags; then
     logg "Regen GNU gtags to $HOME/GTAGS with $type parser"
     (
