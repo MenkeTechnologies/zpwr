@@ -22,10 +22,6 @@ fi
 
 source "$ZPWR_SCRIPTS/lib.sh"
 
-logg() {
-    printf "\x1b[1;4m$1\n\x1b[0m"
-}
-
 [[ -n "$1" ]] && commitMessage="$1" || commitMessage="update"
 
 #{{{ MARK:installer
