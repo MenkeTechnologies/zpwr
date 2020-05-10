@@ -3103,11 +3103,11 @@ function zpwrUninstall() {
         "$HOME/.tmux" \
         "$FORKED_DIR" \
         "$ZSH" \
-        "$HOME/.zpwr"*(DN) \
-        "$HOME/.zshrc"*(DN) \
+        "$HOME/.zpwr"* \
+        "$HOME/.zshrc"* \
         "$HOME/.zshrc.pre"* \
-        "$ZSH_COMPDUMP"*(DN) \
-        "$HOME/.zcompdump"*(DN)
+        "$ZSH_COMPDUMP"* \
+        "$HOME/.zcompdump"*
     prettyPrintNoNewline "are you sure? y/n > "
     read
     if [[ $REPLY == y ]]; then
@@ -3124,11 +3124,11 @@ function zpwrUninstall() {
         "$HOME/.tmux" \
         "$FORKED_DIR" \
         "$ZSH" \
-        "$HOME/.zpwr"*(DN) \
-        "$HOME/.zshrc"*(DN) \
+        "$HOME/.zpwr"* \
+        "$HOME/.zshrc"* \
         "$HOME/.zshrc.pre"* \
-        "$ZSH_COMPDUMP"*(DN) \
-        "$HOME/.zcompdump"*(DN)
+        "$ZSH_COMPDUMP"* \
+        "$HOME/.zcompdump"*
     else
         prettyPrint "Abort uninstall"
     fi
