@@ -783,7 +783,7 @@ fi
 #**************************************************************
 prettyPrint "Installing oh-my-zsh..."
 #oh-my-zsh
-sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 #install custom theme based on agnosterzak
 cp "$ZPWR_INSTALL/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
 
