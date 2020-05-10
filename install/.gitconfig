@@ -66,3 +66,6 @@
 	singlekey = yes
 [rerere]
 	enabled = yes
+
+[rebase]
+	autoStash = true
