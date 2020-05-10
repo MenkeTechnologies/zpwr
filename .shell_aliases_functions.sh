@@ -769,11 +769,13 @@ function s(){
         fi
     fi
 }
+
 function loggConsolePrefix(){
     prettyPrint "$ZPWR_CHAR_LOGO $*"
     logg "$ZPWR_CHAR_LOGO $*"
 
 }
+
 function loggConsole(){
     prettyPrint "$*"
     logg "$*"

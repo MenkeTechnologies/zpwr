@@ -16,6 +16,12 @@ if [[ -z $ZPWR_SCRIPTS ]]; then
     ZPWR_SCRIPTS="$ZPWR/scripts"
 fi
 
+if [[ -z $ZPWR_SCRIPTS_MAC ]]; then
+    ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
+fi
+
+source "$ZPWR_SCRIPTS/lib.sh"
+
 prettyPrint() {
     printf "\x1b[1;4m$1\n\x1b[0m"
 }
@@ -60,12 +66,11 @@ if exists gtags; then
         fi
     done | gtags --accept-dotfiles --gtagslabel=$type -f -
 
-    printf "gtags size: "
-    global -x ".*" | wc -l
+    logg "gtags size: $(global -x ".*" | wc -l)"
 
     )
 else
-    echo "gtags does not exist" >&2
+    loggErr "gtags does not exist"
 fi
 
 prettyPrint "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}

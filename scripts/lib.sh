@@ -15,6 +15,84 @@ unset CDPATH
 
 #{{{                    MARK:installer lib fns
 #**************************************************************
+
+function loggNotGit() {
+
+    loggErr "$(pwd) is not a git dir"
+}
+
+function loggErr(){
+
+    test -z "$1" && loggErr "need arg" >&2 && return 1
+    {
+        printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ERROR: "
+        printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
+        printf "\x1b[0m"
+        printf "\n"
+    } >&2
+}
+
+function loggConsolePrefix(){
+    prettyPrint "$ZPWR_CHAR_LOGO $*"
+    logg "$ZPWR_CHAR_LOGO $*"
+
+}
+
+function loggConsole(){
+    prettyPrint "$*"
+    logg "$*"
+
+}
+
+function logg(){
+
+    if [[ $ZPWR_COLORS == true ]]; then
+        if [[ -p /dev/stdin ]]; then
+            {
+                printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
+                printf "_${ZPWR_LOG_QUOTE_COLOR}$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR"
+                cat
+                printf "\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_"
+                printf "\x1b[0m"
+                printf "\n"
+            } >> "$ZPWR_LOGFILE"
+        else
+            test -z "$1" && loggErr "need arg" && return 1
+            {
+                printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
+                printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
+                printf "\x1b[0m"
+                printf "\n"
+            } >> "$ZPWR_LOGFILE"
+        fi
+    else
+
+    if [[ -p /dev/stdin ]]; then
+            {
+                printf "\n_____________$(date)____ _'"
+                cat
+                printf "'_ \n"
+            } >> "$ZPWR_LOGFILE"
+        else
+            test -z "$1" && loggErr "need arg" && return 1
+            {
+                printf "\n_____________$(date)____ "
+                printf "_'%s'_ " "$@"
+                printf "\n"
+            } >> "$ZPWR_LOGFILE"
+        fi
+
+    fi
+
+}
+
+function loggDebug(){
+
+    if [[ $ZPWR_DEBUG == true ]]; then
+       logg "$@" 
+    fi
+}
+
 function fail(){
         echo "failure due to $1" >&2
         exit 1
