@@ -7,6 +7,8 @@
 ##### Notes:TutorialFiles, PersonalWebsite, zpwr
 #}}}***********************************************************
 
+shopt -s dotglob
+
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
 ZPWR_DIR="$ZPWR"
