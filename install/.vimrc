@@ -1564,7 +1564,7 @@ set path+=~/Desktop
 set path+=~/.zpwr/scripts
 
 "default colorscheme
-silent! colorscheme badwolf
+silent! colorscheme zpwrmarklar
 
 "personal common mispellings
 iabbrev tth the
