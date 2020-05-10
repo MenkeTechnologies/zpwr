@@ -22,7 +22,7 @@ fi
 
 source "$ZPWR_SCRIPTS/lib.sh"
 
-prettyPrint() {
+logg() {
     printf "\x1b[1;4m$1\n\x1b[0m"
 }
 
@@ -33,7 +33,7 @@ prettyPrint() {
 cd "$ZPWR_DIR" || exit 1
 git checkout dev
 
-prettyPrint "Copying scripts to custom Installer Repo $ZPWR_DIR"
+logg "Copying scripts to custom Installer Repo $ZPWR_DIR"
 #rm -rf "$ZPWR_DIR/scripts/"*
 #cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$ZPWR_DIR/scripts" 2>/dev/null
 #cp -R "$ZPWR_SCRIPTS/macOnly" "$ZPWR_DIR/scripts"
@@ -52,7 +52,7 @@ cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 #cp -R "$HOME/.vim/Ultisnips" "$ZPWR_DIR_INSTALL"
 
 if exists gtags; then
-    prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
+    logg "Regen GNU gtags to $HOME/GTAGS with $type parser"
     (
     builtin cd "$HOME"
     command rm GPATH GRTAGS GTAGS 2>/dev/null
@@ -73,22 +73,22 @@ else
     loggErr "gtags does not exist"
 fi
 
-prettyPrint "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
+logg "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$ZPWR_DIR_INSTALL_GTAGS"
 
-prettyPrint "Updating vim plugins list"
+logg "Updating vim plugins list"
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$ZPWR_DIR_INSTALL/.vimbundle"
-prettyPrint "Updating zsh plugins list"
+logg "Updating zsh plugins list"
 printf "" > "$ZPWR_DIR_INSTALL/.zshplugins"
 for dir in "$HOME/.oh-my-zsh/custom/plugins/"*; do
     if basename "$dir" | grep -sq "example";then
-        prettyPrint "not adding zsh plugin $dir"
+        logg "not adding zsh plugin $dir"
         continue;
     else
-        prettyPrint "adding zsh plugin $dir"
+        logg "adding zsh plugin $dir"
     fi
         
     bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR_INSTALL/.zshplugins"
@@ -96,36 +96,36 @@ done
 
 git add .
 git commit -m "$commitMessage"
-prettyPrint "Status"
+logg "Status"
 git status
-prettyPrint "Pushing..."
+logg "Pushing..."
 git push origin dev
 #}}}***********************************************************
 
 #{{{ MARK:tutorialDir
 #**************************************************************
-prettyPrint "Copying zshrc"
+logg "Copying zshrc"
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$tutorialDir/zsh"
-prettyPrint "Copying vimrc"
+logg "Copying vimrc"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$tutorialDir/vim"
-prettyPrint "Copying minimal minvimrc"
+logg "Copying minimal minvimrc"
 cp "$HOME/.zpwr/.minvimrc" "$tutorialDir/vim"
 
-prettyPrint "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
+logg "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 
-prettyPrint "Copying tmux.conf"
+logg "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$HOME/.zpwr/.tmux/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
-prettyPrint "Copying shell_aliases_functions to $tutorialDir"
+logg "Copying shell_aliases_functions to $tutorialDir"
 cp "$ZPWR/.shell_aliases_functions.sh" "$tutorialDir/aliases"
 
-prettyPrint "Copying shell scripts"
+logg "Copying shell scripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/"*
 cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
@@ -137,32 +137,32 @@ cp -R "$HOME/.vim/Ultisnips" "$tutorialDir"
 #echo "# Mac Only Scripts" >> "$README"
 #bash "$ZPWR_SCRIPTS/headerSummarizer.sh" "$ZPWR_SCRIPTS/"macOnly/*.sh >> "$README"
 
-#prettyPrint "Copying tags file"
+#logg "Copying tags file"
 #cp "$ZPWR_SCRIPTS/tags" "$tutorialDir/shell"
 
-#prettyPrint "Copying $HOME/.ctags"
+#logg "Copying $HOME/.ctags"
 #cp "$HOME/.ctags" "$tutorialDir/ctags"
 
-prettyPrint "Copying vis ncmpcpp mpd"
+logg "Copying vis ncmpcpp mpd"
 cp -R "$HOME/.config/vis" "$tutorialDir/ncmpcpp-mpd-vis"
 
-prettyPrint "Emptying mpd log"
+logg "Emptying mpd log"
 echo >"$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
 
 echo >"$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
 cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
-prettyPrint "Copying powerlevel config"
+logg "Copying powerlevel config"
 cp "$ZPWR/.powerlevel9kconfig.sh" "$tutorialDir"
 
-#prettyPrint "Copying vim plugins"
+#logg "Copying vim plugins"
 
 #sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
 cd "$tutorialDir" || exit 1
 
-#prettyPrint "Removing .git dirs..."
+#logg "Removing .git dirs..."
 
 #while read -r file; do
 #if [[ -d "$file" ]]; then
@@ -176,12 +176,12 @@ cd "$tutorialDir" || exit 1
 
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$tutorialDir/vim/.vimbundle"
 
-prettyPrint "Updating Tutorial Files Repo"
+logg "Updating Tutorial Files Repo"
 git add .
 git commit -m "$commitMessage"
-prettyPrint "Status..."
+logg "Status..."
 git status
-prettyPrint "Pushing..."
+logg "Pushing..."
 git push
 
 #}}}***********************************************************
@@ -193,7 +193,7 @@ dotdir="$websiteDir/downloads/dotfiles"
 
 [[ ! -d "$dotdir" ]] && mkdir -p "$dotdir"
 
-prettyPrint "Copying config files to websiteDir"
+logg "Copying config files to websiteDir"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$dotdir/.."
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir/.."
 cp "$ZPWR/.shell_aliases_functions.sh" "$dotdir/.."
@@ -204,7 +204,7 @@ cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir"
 cp "$ZPWR/.shell_aliases_functions.sh" "$dotdir"
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$dotdir"
 
-prettyPrint "Copying scripts to $websiteDir"
+logg "Copying scripts to $websiteDir"
 rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -p "$websiteDir/downloads/scripts"
@@ -220,8 +220,8 @@ cd ..
 
 git add .
 git commit -m "$commitMessage"
-prettyPrint "Status..."
+logg "Status..."
 git status
-prettyPrint "Pushing..."
+logg "Pushing..."
 git push
 #}}}***********************************************************
