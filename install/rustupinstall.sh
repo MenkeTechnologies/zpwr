@@ -22,45 +22,45 @@ while true; do
 done
 
 exists bat || {
-    prettyPrint "Installing Rustup if cargo does not exist"
+    prettyPrintBox "Installing Rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    prettyPrint "Updating rustup"
+    prettyPrintBox "Updating rustup"
     "$HOME/.cargo/bin/rustup" update
-    prettyPrint "Installing Bat (cat replacement) with Cargo"
+    prettyPrintBox "Installing Bat (cat replacement) with Cargo"
     "$HOME/.cargo/bin/cargo" install bat
 }
 
 exists fd || {
-    prettyPrint "Installing rustup if cargo does not exist"
+    prettyPrintBox "Installing rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    prettyPrint "Updating rustup"
+    prettyPrintBox "Updating rustup"
     "$HOME/.cargo/bin/rustup" update
-    prettyPrint "Installing Fd (find replacement) with Cargo"
+    prettyPrintBox "Installing Fd (find replacement) with Cargo"
     "$HOME/.cargo/bin/cargo" install fd-find
 }
 
 exists exa || {
-    prettyPrint "Installing rustup if cargo does not exist"
+    prettyPrintBox "Installing rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    prettyPrint "Updating rustup"
+    prettyPrintBox "Updating rustup"
     "$HOME/.cargo/bin/rustup" update
-    prettyPrint "Installing Exa with Cargo"
+    prettyPrintBox "Installing Exa with Cargo"
     "$HOME/.cargo/bin/cargo" install exa
 }
 
 exists rg || {
-    prettyPrint "Installing rustup if cargo does not exist"
+    prettyPrintBox "Installing rustup if cargo does not exist"
     exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    prettyPrint "Updating rustup"
+    prettyPrintBox "Updating rustup"
     "$HOME/.cargo/bin/rustup" update
-    prettyPrint "Installing ripgrep with Cargo"
+    prettyPrintBox "Installing ripgrep with Cargo"
     "$HOME/.cargo/bin/cargo" install ripgrep
 }
 
 
-prettyPrint "Installing Rustup if cargo does not exist"
+prettyPrintBox "Installing Rustup if cargo does not exist"
 exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-prettyPrint "Updating rustup"
+prettyPrintBox "Updating rustup"
 "$HOME/.cargo/bin/rustup" update
-prettyPrint "Installing cargo-update with Cargo"
+prettyPrintBox "Installing cargo-update with Cargo"
 "$HOME/.cargo/bin/cargo" install cargo-update

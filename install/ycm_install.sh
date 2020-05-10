@@ -9,7 +9,7 @@
 
 source common.sh || { echo "Must be in zpwr directory" >&2; exit 1; }
 
-prettyPrint "Installing YouCompleteMe"
+prettyPrintBox "Installing YouCompleteMe"
 mkdir -p "$HOME/.vim/bundle"
 
 if ! builtin cd "$HOME/.vim/bundle"; then

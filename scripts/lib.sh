@@ -257,7 +257,13 @@ function proceed(){
     esac
 }
 
-function prettyPrintStdin(){
+prettyPrint() {
+    printf "\e[1;4m"
+    printf "$1"
+    printf "\n\e[0m"
+}
+
+function prettyPrintBoxStdin(){
     local perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
@@ -268,7 +274,7 @@ function prettyPrintStdin(){
     echo
 }
 
-function prettyPrint(){
+function prettyPrintBox(){
     local perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))

@@ -6,10 +6,11 @@
 ##### Purpose: bash script to use tor network
 ##### Notes:
 #}}}***********************************************************
-prettyPrint() {
-    printf "\e[4;1m$1\e[0m\n"
-}
 
+source "$ZPWR_SCRIPTS/lib.sh" || {
+    echo "cannot access lib.sh" >&2
+    exit 1
+}
 INTERFACE=Wi-Fi
 
 #commented out sections not necessary if sudo is not requiring passwd
@@ -23,8 +24,8 @@ INTERFACE=Wi-Fi
 #exit
 #done 2>/dev/null &
 
-type spoof &>/dev/null || {
-    printf "you need spoof!. Exiting." >&2
+exists spoof || {
+    loggErr "you need spoof!. Exiting."
     exit
 }
 

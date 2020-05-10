@@ -22,23 +22,23 @@ fi
 goInstallerOutputDir
 
 function installNpmRpm(){
-    prettyPrint "curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -"
+    prettyPrintBox "curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -"
     curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -
-    prettyPrint "install nodejs"
+    prettyPrintBox "install nodejs"
     update "nodejs" "$distroFamily"
-    prettyPrint "install npm"
+    prettyPrintBox "install npm"
     update "npm" "$distroFamily"
-    prettyPrint "install build-essential"
+    prettyPrintBox "install build-essential"
     update "build-essential" "$distroFamily"
 }
 function installNpmDeb(){
-    prettyPrint "curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -"
+    prettyPrintBox "curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
-    prettyPrint "install nodejs"
+    prettyPrintBox "install nodejs"
     update "nodejs" "$distroFamily"
-    prettyPrint "install npm"
+    prettyPrintBox "install npm"
     update "npm" "$distroFamily"
-    prettyPrint "install build-essential"
+    prettyPrintBox "install build-essential"
     update "build-essential" "$distroFamily"
 }
 
@@ -61,7 +61,7 @@ elif [[ "$ZPWR_OS_TYPE" == linux ]];then
             installNpmRpm
             ;;
         (*)
-            prettyPrint "Your distroFamily $distroName is unsupported!" >&2
+            prettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
             ;;
     esac
 else
@@ -70,14 +70,14 @@ else
         distroName=FreeBSD
         installNpmDeb
     else
-        prettyPrint "Your distroFamily $distroName is unsupported!" >&2
+        prettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
     fi
 fi
 
 exists diff-so-fancy || {
-    prettyPrint "npm installing diff-so-fancy"
+    prettyPrintBox "npm installing diff-so-fancy"
     sudo npm i -g diff-so-fancy
 }
-prettyPrint "installing neovim nodejs lib"
+prettyPrintBox "installing neovim nodejs lib"
 sudo npm i -g neovim
 
