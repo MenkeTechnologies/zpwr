@@ -2711,20 +2711,24 @@ function regenGtagsType(){
 
     local type=$1
 
-    prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
-    (
-    builtin cd "$HOME"
-    command rm GPATH GRTAGS GTAGS 2>/dev/null
-    for file in \
-        "$ZPWR_INSTALL/"* \
-        "$ZPWR/"* \
-        "$ZPWR_SCRIPTS"/* \
-        "$ZPWR_SCRIPTS/macOnly/"*; do
-        if [[ -f "$file" ]]; then
-            echo "$file"
-        fi
-    done | gtags --accept-dotfiles --gtagslabel=$type -f -
-    )
+    if exists gtags; then
+        prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
+        (
+        builtin cd "$HOME"
+        command rm GPATH GRTAGS GTAGS 2>/dev/null
+        for file in \
+            "$ZPWR_INSTALL/"* \
+            "$ZPWR/"* \
+            "$ZPWR_SCRIPTS"/* \
+            "$ZPWR_SCRIPTS/macOnly/"*; do
+            if [[ -f "$file" ]]; then
+                echo "$file"
+            fi
+        done | gtags --accept-dotfiles --gtagslabel=$type -f -
+        )
+    else
+        loggErr "gtags does not exist"
+    fi
 
 }
 function regenGtagsCtags(){
