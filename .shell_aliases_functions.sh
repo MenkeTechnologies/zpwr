@@ -2727,6 +2727,11 @@ function regenGtagsType(){
                 echo "$file"
             fi
         done | gtags --accept-dotfiles --gtagslabel=$type -f -
+        if [[ ! -s GTAGS ]]; then
+            loggErr "forced to copy back gtags because empty"
+            echo command cp "$ZPWR_INSTALL/g-tags/"{GPATH,GRTAGS,GTAGS} "$HOME"
+            command cp "$ZPWR_INSTALL/g-tags/"{GPATH,GRTAGS,GTAGS} "$HOME"
+        fi
         )
     else
         loggErr "gtags does not exist"
