@@ -10,63 +10,9 @@
 #no complaining about no glob results for * from zsh
 #setopt null_glob
 
-prettyPrint() {
-    printf "\e[1;4m"
-    printf "$1"
-    printf "\n\e[0m"
-}
-
-exists() {
-    type "$1" >/dev/null 2>&1
-}
-export ZPWR_DELIMITER_CHAR='%'
-
-alternatingPrettyPrint() {
-    counter=0
-    :
-    if [[ -z $1 ]]; then
-        cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
-        my $counter=0;
-        for my $arg (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
-            }
-        ++$counter;
-        };print "\x1b[0m"'
-    else
-        perl -F"$ZPWR_DELIMITER_CHAR" -anE '
-        my $counter=0;
-        for my $arg (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$arg\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$arg\x1b[0m"
-            }
-        ++$counter;
-        }; print "\x1b[0m"' <<<"$@"
-
-    fi
-}
-
-gitRepoUpdater() {
-    enclosing_dir="$1"
-
-    if [[ -d "$enclosing_dir" ]]; then
-        for generic_git_repo_plugin in "$enclosing_dir/"*; do
-            if [[ -d "$generic_git_repo_plugin" ]]; then
-                if [[ -d "$generic_git_repo_plugin"/.git ]]; then
-                    printf "%s: " "$(basename "$generic_git_repo_plugin")"
-                    (
-                        builtin cd "$generic_git_repo_plugin" &&
-                        git fetch --all --prune &&
-                        git pull --all
-                    )
-                fi
-            fi
-        done
-    fi
+source "$ZPWR_SCRIPTS/lib.sh" || {
+    echo "cannot access lib.sh" >&2
+    exit 1
 }
 
 prettyPrint "Updating Tmux Plugins"

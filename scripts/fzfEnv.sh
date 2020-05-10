@@ -8,29 +8,11 @@
 ##### Notes: no single quotes allowed
 #}}}***********************************************************
 
-isZsh(){
-    if command ps -p $$ | command grep -q zsh; then
-        return 0
-    else
-        return 1
-    fi
+source "$ZPWR_SCRIPTS/lib.sh" || {
+    echo "cannot access lib.sh" >&2
+    exit 1
 }
 
-
-if isZsh; then
-    exists(){
-        #alternative is command -v
-        type "$1" &>/dev/null || return 1 && \
-        type "$1" 2>/dev/null | \
-        command grep -qv "suffix alias" 2>/dev/null
-    }
-
-else
-    exists(){
-        #alternative is command -v
-        type "$1" >/dev/null 2>&1
-    }
-fi
 # []\[^$.*/] = this regex matches any of ][^$.*/ characters
 # 3 backslashes \\ => \ after heredoc, \$ => $ after heredoc, \\\$ => \$ after heredoc
 # \$ needed bc inside double quotes when passed to perl

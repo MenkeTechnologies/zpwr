@@ -7,31 +7,10 @@
 ##### Purpose: bash script to
 ##### Notes: no single quotes
 #}}}***********************************************************
-
-isZsh(){
-    if command ps -p $$ | command grep -q zsh; then
-        return 0
-    else
-        return 1
-    fi
+source "$ZPWR_SCRIPTS/lib.sh" || {
+    echo "cannot access lib.sh" >&2
+    exit 1
 }
-
-
-if isZsh; then
-    exists(){
-        #alternative is command -v
-        type "$1" &>/dev/null || return 1 && \
-        type "$1" 2>/dev/null | \
-        command grep -qv "suffix alias" 2>/dev/null
-    }
-
-else
-    exists(){
-        #alternative is command -v
-        type "$1" >/dev/null 2>&1
-    }
-fi
-
 
 exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
 exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"

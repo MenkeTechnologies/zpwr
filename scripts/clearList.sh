@@ -7,38 +7,10 @@
 ##### Purpose: bash script to
 ##### Notes:
 #}}}***********************************************************
-isZsh(){
-    if command ps -p $$ | command grep -qs zsh; then
-        return 0
-    else
-        return 1
-    fi
-}
 
-if isZsh; then
-    exists(){
-        #alternative is command -v
-        type -- "$1" &>/dev/null || return 1 &&
-        type -- "$1" 2>/dev/null |
-        command grep -sqv "suffix alias" 2>/dev/null
-    }
-
-else
-    exists(){
-        #alternative is command -v
-        type -- "$1" >/dev/null 2>&1
-    }
-fi
-
-prettyPrint(){
-    if [[ -n "$1" ]];then
-        printf "\x1b[1m"
-        printf "%s " "$@"
-        printf "\x1b[0m\n"
-    else
-        echo "Need one arg" >&2
-        return 1
-    fi
+source "$ZPWR_SCRIPTS/lib.sh" || {
+    echo "cannot access lib.sh" >&2
+    exit 1
 }
 
 ZPWR_EXA_COMMAND="command exa --git -il -F -H --extended --color-scale -g -a --colour=always"

@@ -134,9 +134,33 @@ function goInstallerOutputDir(){
     fi
 }
 
-function exists(){
-    type "$1" >/dev/null 2>&1
+isZsh(){
+
+    if command ps -p $$ | command grep -qs zsh; then
+        return 0
+    else
+        return 1
+    fi
 }
+
+if isZsh; then
+    if ! type -- exists>/dev/null 2>&1; then
+        function exists(){
+
+            #alternative is command -v
+            type -- "$1" &>/dev/null || return 1 &&
+            type -- "$1" 2>/dev/null |
+            command grep -sqv "suffix alias" 2>/dev/null
+        }
+
+    fi
+else
+    function exists(){
+
+        #alternative is command -v
+        type -- "$1" >/dev/null 2>&1
+    }
+fi
 
 function update(){
     exists "$1" || {
@@ -293,6 +317,25 @@ function alternatingPrettyPrint(){
 
     fi
 
+}
+
+gitRepoUpdater() {
+    enclosing_dir="$1"
+
+    if [[ -d "$enclosing_dir" ]]; then
+        for generic_git_repo_plugin in "$enclosing_dir/"*; do
+            if [[ -d "$generic_git_repo_plugin" ]]; then
+                if [[ -d "$generic_git_repo_plugin"/.git ]]; then
+                    printf "%s: " "$(basename "$generic_git_repo_plugin")"
+                    (
+                        builtin cd "$generic_git_repo_plugin" &&
+                        git fetch --all --prune &&
+                        git pull --all
+                    )
+                fi
+            fi
+        done
+    fi
 }
 
 
