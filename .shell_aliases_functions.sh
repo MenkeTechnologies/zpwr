@@ -3106,7 +3106,7 @@ function zpwrUninstall() {
         "$HOME/.zpwr"*(DN) \
         "$HOME/.zshrc"*(DN) \
         "$HOME/.zshrc.pre"* \
-        "$ZSH_COMPDUMP"*(DN)
+        "$ZSH_COMPDUMP"*(DN) \
         "$HOME/.zcompdump"*(DN)
     prettyPrintNoNewline "are you sure? y/n > "
     read
@@ -3127,7 +3127,7 @@ function zpwrUninstall() {
         "$HOME/.zpwr"*(DN) \
         "$HOME/.zshrc"*(DN) \
         "$HOME/.zshrc.pre"* \
-        "$ZSH_COMPDUMP"*(DN)
+        "$ZSH_COMPDUMP"*(DN) \
         "$HOME/.zcompdump"*(DN)
     else
         prettyPrint "Abort uninstall"
