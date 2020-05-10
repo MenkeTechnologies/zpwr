@@ -281,7 +281,7 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
 
 ZSH_DISABLE_COMPFIX=true
 
-export MAGIC_ENTER_GIT_COMMAND="clearList; git status -u ."
+export MAGIC_ENTER_GIT_COMMAND="clearList; git status -u .; git diff HEAD"
 export MAGIC_ENTER_OTHER_COMMAND="clearList"
 
 # Would you like to use another custom folder than $ZSH/custom?
