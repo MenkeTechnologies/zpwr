@@ -45,6 +45,22 @@ prettyPrint "Copying scripts to custom Installer Repo $ZPWR_DIR"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 #cp -R "$HOME/.vim/Ultisnips" "$ZPWR_DIR_INSTALL"
 
+
+prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
+(
+    builtin cd "$HOME"
+    command rm GPATH GRTAGS GTAGS 2>/dev/null
+    for file in \
+        "$ZPWR_INSTALL/"* \
+        "$ZPWR/"* \
+        "$ZPWR_SCRIPTS"/* \
+        "$ZPWR_SCRIPTS/macOnly/"*; do
+        if [[ -f "$file" ]]; then
+            echo "$file"
+        fi
+    done | gtags --accept-dotfiles --gtagslabel=ctags -f -
+)
+
 prettyPrint "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
