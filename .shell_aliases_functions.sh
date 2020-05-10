@@ -3103,8 +3103,11 @@ function zpwrUninstall() {
         "$HOME/.tmux" \
         "$FORKED_DIR" \
         "$ZSH" \
+        "$HOME/.zpwr"*(DN) \
+        "$HOME/.zshrc"*(DN) \
         "$HOME/.zshrc.pre"* \
-        "$HOME/.zcompdump"*
+        "$ZSH_COMPDUMP"*(DN)
+        "$HOME/.zcompdump"*(DN)
     prettyPrintNoNewline "are you sure? y/n > "
     read
     if [[ $REPLY == y ]]; then
@@ -3114,15 +3117,18 @@ function zpwrUninstall() {
             
         done
         unlinkConf
-        sudo rm -rf -- \
-            "$ZPWR" \
-            "$HOME/.tmux" \
-            "$HOME/.vim" \
-            "$HOME/.tmux" \
-            "$FORKED_DIR" \
-            "$ZSH" \
-            "$HOME/.zshrc.pre"* \
-            "$HOME/.zcompdump"*
+    sudo rm -rf -- \
+        "$ZPWR" \
+        "$HOME/.tmux" \
+        "$HOME/.vim" \
+        "$HOME/.tmux" \
+        "$FORKED_DIR" \
+        "$ZSH" \
+        "$HOME/.zpwr"*(DN) \
+        "$HOME/.zshrc"*(DN) \
+        "$HOME/.zshrc.pre"* \
+        "$ZSH_COMPDUMP"*(DN)
+        "$HOME/.zcompdump"*(DN)
     else
         prettyPrint "Abort uninstall"
     fi
