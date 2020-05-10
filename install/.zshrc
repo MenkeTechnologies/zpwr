@@ -281,6 +281,9 @@ ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
 
 ZSH_DISABLE_COMPFIX=true
 
+export MAGIC_ENTER_GIT_COMMAND="clearList; git status -u ."
+export MAGIC_ENTER_OTHER_COMMAND="clearList"
+
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
@@ -298,7 +301,7 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal 
     postgres redis-cli colorize sudo rsync docker \
     docker-compose \
     vundle rust cargo meteor gulp grunt glassfish tig fd \
-    zsh-very-colorful-manuals zsh-git-acp tmux)
+    zsh-very-colorful-manuals zsh-git-acp tmux magic-enter)
 
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
