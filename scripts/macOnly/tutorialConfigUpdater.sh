@@ -11,6 +11,7 @@ tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
 ZPWR_DIR="$ZPWR"
 ZPWR_DIR_INSTALL="$ZPWR/install"
+ZPWR_DIR_INSTALL_GTAGS="$ZPWR/install/g-tags"
 if [[ -z $ZPWR_SCRIPTS ]]; then
     ZPWR_SCRIPTS="$ZPWR/scripts"
 fi
@@ -41,9 +42,11 @@ prettyPrint "Copying scripts to custom Installer Repo $ZPWR_DIR"
 #cp "$HOME/conf.whois" "$ZPWR_DIR_INSTALL"
 #cp "$HOME/.ideavimrc" "$ZPWR_DIR_INSTALL"
 #cp "$HOME/.inputrc" "$ZPWR_DIR_INSTALL"
-#cp "$HOME/grc.zsh" "$ZPWR_DIR_INSTALL"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 #cp -R "$HOME/.vim/Ultisnips" "$ZPWR_DIR_INSTALL"
+
+cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
+    "$ZPWR_DIR_INSTALL_GTAGS"
 
 prettyPrint "Updating vim plugins list"
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$ZPWR_DIR_INSTALL/.vimbundle"
@@ -76,6 +79,9 @@ prettyPrint "Copying vimrc"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$tutorialDir/vim"
 prettyPrint "Copying minimal minvimrc"
 cp "$HOME/.zpwr/.minvimrc" "$tutorialDir/vim"
+
+cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
+    "$tutorialDir"
 
 prettyPrint "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
