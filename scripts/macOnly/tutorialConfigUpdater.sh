@@ -45,6 +45,7 @@ prettyPrint "Copying scripts to custom Installer Repo $ZPWR_DIR"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 #cp -R "$HOME/.vim/Ultisnips" "$ZPWR_DIR_INSTALL"
 
+type=ctags
 
 prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
 (
@@ -58,7 +59,7 @@ prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
         if [[ -f "$file" ]]; then
             echo "$file"
         fi
-    done | gtags --accept-dotfiles --gtagslabel=ctags -f -
+    done | gtags --accept-dotfiles --gtagslabel=$type -f -
 )
 
 prettyPrint "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
