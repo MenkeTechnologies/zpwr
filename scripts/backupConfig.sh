@@ -13,7 +13,7 @@ if [[ ! -d "$BACKUP_DIR" ]]; then
     mkdir "$BACKUP_DIR"
 fi
 
-files=("$HOME/.zshrc" "$HOME/.bashrc" "$ZPWR/.shell_aliases_functions.sh" "$HOME/.tmux.conf" "$HOME/.vimrc")
+files=("$HOME/.zshrc" "$HOME/.bashrc" "$ZPWR/.shell_aliases_functions.sh" "$HOME/.tmux.conf" "$HOME/.vimrc" "$HISTFILE")
 
 for file in "${files[@]}"; do
     cp "$file" "$BACKUP_DIR/${file##*/}""$(date +%s)"
