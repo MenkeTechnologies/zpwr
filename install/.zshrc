@@ -3813,9 +3813,10 @@ function recompile(){
 	for dir in $fpath; do
 		if test -d $dir;then
             files=( $dir/*(N) )
-            (($#files)) &&
-            zrecompile -p $dir.zwc $files 2>dev/null ||
-            sudo zsh -c "autoload zrecompile; zrecompile -p $dir.zwc $files"
+            if (($#files)); then
+                zrecompile -p $dir.zwc $files 2> /dev/null ||
+                sudo zsh -c "autoload zrecompile; zrecompile -p $dir.zwc $files"
+            fi
         fi
 	done
 }
