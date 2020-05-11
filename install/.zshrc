@@ -3745,7 +3745,7 @@ function uncompile(){
         /etc/profile.env
         )
 
-    prettyPrint "recompiling all configs to .zwc for speed"
+    prettyPrint "deleting all compiled configs"
 
     for file in ${files[@]}; do
         if [[ -f "$file.zwc" ]]; then
