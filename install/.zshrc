@@ -3735,9 +3735,9 @@ function recompile(){
 
     prettyPrint "recompiling all configs to .zwc for speed"
     local dir
-	test -f ~/.zshrc && zrecompile -p ~/.zshrc
-	test -f ~/.zlogout && zrecompile -p ~/.zlogout
-	test -f ~/.zlogin && zrecompile -p ~/.zlogin
+	test -f "$HOME/.zshrc" && zrecompile -p "$HOME/.zshrc"
+	test -f "$HOME/.zlogout" && zrecompile -p "$HOME/.zlogout"
+	test -f "$HOME/.zlogin" && zrecompile -p "$HOME/.zlogin"
 	test -f "$ZSH_COMPDUMP" && zrecompile -p "$ZSH_COMPDUMP"
 	test -f /etc/profile && sudo zrecompile -p /etc/profile
 	test -f /etc/zshrc && sudo zrecompile -p /etc/zshrc
