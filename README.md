@@ -213,12 +213,15 @@ You need to change the Terminal font to support the Powerline triangles and othe
 The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
 documentation for details on how to change the font.
 
-## getrc and linkConf functions
+## Updating
+`zpwr updateall` which update all zpwr config and dependencies.  `zpwr update` will update just zpwr configs.
+
+### getrc and linkConf functions
 There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`.
 It invokes `linkConf` which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` in `$HOME` and some other miscellaneous configuration files.
 > ~/.zpwr/.shell_aliases_functions.sh: linkConf
 ```sh
-# link over latest configuration files from $ZPWR_REPO_NAME
+### link over latest configuration files from $ZPWR_REPO_NAME
 function linkConf(){
 
     (
