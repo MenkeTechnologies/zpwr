@@ -267,7 +267,7 @@ One of the vim plugin is vim-autosave which autosaves all edits thus making `:w`
 
 ## Bypassing expansion on space
 C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.
-Expansion can be disabled entirely by removing zsh-expand from plugins array in `~/.zshrc`.
+Expansion can be disabled entirely by removing [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) from plugins array in `~/.zshrc`.
 
 > ~/.zshrc
 ```sh
@@ -284,7 +284,7 @@ export ZPWR_EXPAND=true
 export ZPWR_EXPAND_SECOND_POSITION=true
 ```
 
-The relevant code is the zsh-expand plugin for expansion at the second position.
+The relevant code is the [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) plugin for expansion at the second position.
 > ~/.oh-my-zsh/custom/plugins/zsh-expand/zsh-expand.plugin.zsh
 ```sh
 if echo "$firstword_partition" | command grep -qE '(sudo|zpwr|env)';then
