@@ -20,33 +20,10 @@
 
 #{{{                    MARK:Global Fxn
 #**************************************************************
-isZsh(){
-
-    if command ps -p $$ | command grep -qs zsh; then
-        return 0
-    else
-        return 1
-    fi
+source "$ZPWR_SCRIPTS/lib.sh" || {
+    echo "where is $ZPWR_SCRIPTS/lib.sh" >&2
+    return 1
 }
-
-if isZsh; then
-    if ! type -- exists>/dev/null 2>&1; then
-        function exists(){
-
-            #alternative is command -v
-            type -- "$1" &>/dev/null || return 1 &&
-            type -- "$1" 2>/dev/null |
-            command grep -sqv "suffix alias" 2>/dev/null
-        }
-
-    fi
-else
-    function exists(){
-
-        #alternative is command -v
-        type -- "$1" >/dev/null 2>&1
-    }
-fi
 
 function chooseNvimVim(){
 
@@ -66,21 +43,6 @@ function chooseNvimVim(){
             alias sv='sudo -E vim'
         }
     fi
-}
-function loggNotGit() {
-
-    loggErr "$(pwd) is not a git dir"
-}
-
-function loggErr(){
-
-    test -z "$1" && loggErr "need arg" >&2 && return 1
-    {
-        printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ERROR: "
-        printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
-        printf "\x1b[0m"
-        printf "\n"
-    } >&2
 }
 
 #}}}***********************************************************
@@ -767,67 +729,6 @@ function s(){
             url="https://google.com/search?q=$out"
             $sec_cmd $url
         fi
-    fi
-}
-
-function loggConsolePrefix(){
-    prettyPrint "$ZPWR_CHAR_LOGO $*"
-    logg "$ZPWR_CHAR_LOGO $*"
-
-}
-
-function loggConsole(){
-    prettyPrint "$*"
-    logg "$*"
-
-}
-
-function logg(){
-
-    if [[ $ZPWR_COLORS == true ]]; then
-        if [[ -p /dev/stdin ]]; then
-            {
-                printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
-                printf "_${ZPWR_LOG_QUOTE_COLOR}$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR"
-                cat
-                printf "\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_"
-                printf "\x1b[0m"
-                printf "\n"
-            } >> "$ZPWR_LOGFILE"
-        else
-            test -z "$1" && loggErr "need arg" && return 1
-            {
-                printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
-                printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
-                printf "\x1b[0m"
-                printf "\n"
-            } >> "$ZPWR_LOGFILE"
-        fi
-    else
-
-    if [[ -p /dev/stdin ]]; then
-            {
-                printf "\n_____________$(date)____ _'"
-                cat
-                printf "'_ \n"
-            } >> "$ZPWR_LOGFILE"
-        else
-            test -z "$1" && loggErr "need arg" && return 1
-            {
-                printf "\n_____________$(date)____ "
-                printf "_'%s'_ " "$@"
-                printf "\n"
-            } >> "$ZPWR_LOGFILE"
-        fi
-
-    fi
-
-}
-
-function loggDebug(){
-
-    if [[ $ZPWR_DEBUG == true ]]; then
-       logg "$@" 
     fi
 }
 
