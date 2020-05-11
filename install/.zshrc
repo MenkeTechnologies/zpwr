@@ -3727,19 +3727,80 @@ fi
 #**************************************************************
 autoload -Uz zrecompile
 
-function recompile(){
+function uncompile(){
+    local dir files sudoFiles
+
+    files=(
+        "$HOME/.zshrc"
+        "$HOME/.zlogout"
+        "$HOME/.zlogin"
+        "$ZSH_COMPDUMP"
+        "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR_SCRIPTS/lib.sh"
+    )
+
+    sudoFiles=(
+        /etc/profile
+        /etc/zshrc
+        /etc/profile.env
+        )
 
     prettyPrint "recompiling all configs to .zwc for speed"
-    local dir
-	test -f "$HOME/.zshrc" && zrecompile -p "$HOME/.zshrc"
-	test -f "$HOME/.zlogout" && zrecompile -p "$HOME/.zlogout"
-	test -f "$HOME/.zlogin" && zrecompile -p "$HOME/.zlogin"
-	test -f "$ZSH_COMPDUMP" && zrecompile -p "$ZSH_COMPDUMP"
-	test -f "$ZPWR/.shell_aliases_functions.sh" && zrecompile -p "$ZPWR/.shell_aliases_functions.sh"
-	test -f "$ZPWR_SCRIPTS/lib.sh" && zrecompile -p "$ZPWR_SCRIPTS/lib.sh"
-	test -f /etc/profile && sudo zrecompile -p /etc/profile
-	test -f /etc/zshrc && sudo zrecompile -p /etc/zshrc
-	test -f /etc/profile.env && sudo zrecompile -p /etc/profile.env
+
+    for file in ${files[@]}; do
+        if [[ -f "$file.zwc" ]]; then
+            rm "$file.zwc"
+        elif [[ -f "$file.zwc.old" ]]; then
+            rm "$file.zwc.old"
+        fi
+    done
+
+    for file in ${sudoFiles[@]}; do
+        if [[ -f "$file.zwc" ]]; then
+            sudo rm "$file.zwc"
+        elif [[ -f "$file.zwc.old" ]]; then
+            sudo rm "$file.zwc.old"
+        fi
+    done
+
+	for dir in $fpath; do
+		if test -d $dir;then
+            if [[ -f "$dir.zwc" ]]; then
+                rm -rf "$dir.zwc"
+            fi
+        fi
+	done
+}
+function recompile(){
+    local dir files sudoFiles
+
+    files=(
+        "$HOME/.zshrc"
+        "$HOME/.zlogout"
+        "$HOME/.zlogin"
+        "$ZSH_COMPDUMP"
+        "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR_SCRIPTS/lib.sh"
+    )
+
+    sudoFiles=(
+        /etc/profile
+        /etc/zshrc
+        /etc/profile.env
+        )
+
+    prettyPrint "recompiling all configs to .zwc for speed"
+
+    for file in ${files[@]}; do
+        if [[ -f "$file" ]]; then
+            zrecompile -p "$file"
+        fi
+    done
+    for file in ${sudoFiles[@]}; do
+        if [[ -f "$file" ]]; then
+            zrecompile -p "$file"
+        fi
+    done
 
 	for dir in $fpath; do
 		if test -d $dir;then
