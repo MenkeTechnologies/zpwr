@@ -1359,6 +1359,7 @@ function regenAll(){
     regenAllKeybindingsCache
     regenPowerlineLink
     regenSearchEnv
+    uncompile
     recompile
     regenAllGitRepos regen
 }
