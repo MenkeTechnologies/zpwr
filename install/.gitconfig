@@ -1,6 +1,7 @@
 [user]
     email = 
     name = 
+
 [core]
     editor = nvim
 	excludesfile = ~/.gitignore_global
@@ -57,13 +58,16 @@
 
 [pull]
 	rebase = true
+
 [help]
 	autocorrect = 1
 
 [status]
 	submodulesummary = 1
+
 [interactive]
 	singlekey = yes
+    
 [rerere]
 	enabled = yes
 
