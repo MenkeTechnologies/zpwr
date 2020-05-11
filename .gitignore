@@ -11,3 +11,4 @@ tags
 etags
 ETAGS
 *.zwc
+*.zwc.old
