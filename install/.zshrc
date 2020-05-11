@@ -3772,7 +3772,8 @@ function uncompile(){
 		if test -d $dir;then
             if [[ -f "$dir.zwc" ]]; then
                 echo rm -rf "$dir.zwc"
-                rm -rf "$dir.zwc"
+                rm -rf "$dir.zwc" ||
+                sudo rm -rf "$dir.zwc"
             fi
         fi
 	done
@@ -3805,7 +3806,7 @@ function recompile(){
     done
     for file in ${sudoFiles[@]}; do
         if [[ -f "$file" ]]; then
-            zrecompile -p "$file"
+            sudo zrecompile -p "$file"
         fi
     done
 
@@ -3813,7 +3814,8 @@ function recompile(){
 		if test -d $dir;then
             files=( $dir/*(N) )
             (($#files)) &&
-            zrecompile -p $dir.zwc $files
+            zrecompile -p $dir.zwc $files ||
+            sudo zrecompile -p $dir.zwc $files
         fi
 	done
 }
