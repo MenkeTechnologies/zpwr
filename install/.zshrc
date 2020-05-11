@@ -379,7 +379,7 @@ setopt menucomplete
 #{{{                    MARK:OMZ Plugins
 #**************************************************************
 
-# OMZ does not add nested comp dirs to fpath so do it here, asssume src
+# OMZ does not add nested comp dirs to fpath so do it here, assume src
 for plug in ${plugins[@]}; do
     if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
         #null glob - no error
