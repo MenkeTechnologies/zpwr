@@ -3749,16 +3749,20 @@ function uncompile(){
 
     for file in ${files[@]}; do
         if [[ -f "$file.zwc" ]]; then
-            rm "$file.zwc"
+            echo rm -f "$file.zwc"
+            rm -f "$file.zwc"
         elif [[ -f "$file.zwc.old" ]]; then
-            rm "$file.zwc.old"
+            echo rm -f "$file.zwc.old"
+            rm -f "$file.zwc.old"
         fi
     done
 
     for file in ${sudoFiles[@]}; do
         if [[ -f "$file.zwc" ]]; then
+            echo sudo rm "$file.zwc"
             sudo rm "$file.zwc"
         elif [[ -f "$file.zwc.old" ]]; then
+            echo sudo rm "$file.zwc.old"
             sudo rm "$file.zwc.old"
         fi
     done
@@ -3766,11 +3770,13 @@ function uncompile(){
 	for dir in $fpath; do
 		if test -d $dir;then
             if [[ -f "$dir.zwc" ]]; then
+                echo rm -rf "$dir.zwc"
                 rm -rf "$dir.zwc"
             fi
         fi
 	done
 }
+
 function recompile(){
     local dir files sudoFiles
 
