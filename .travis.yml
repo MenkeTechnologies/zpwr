@@ -14,6 +14,7 @@ before_script:
 - ls -Al
 - mkdir .bin
 - export ZPWR=$PWD
+- export ZPWR_SCRIPTS="$ZPWR/scripts"
 - curl -L https://raw.githubusercontent.com/molovo/revolver/master/revolver > .bin/revolver
 - curl -L https://raw.githubusercontent.com/molovo/color/master/color.zsh > .bin/color
 - chmod u+x .bin/{color,revolver}
