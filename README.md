@@ -214,7 +214,7 @@ The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Sym
 documentation for details on how to change the font.
 
 ## Updating
-`zpwr updateall` which update all zpwr config and dependencies.  `zpwr update` will update just zpwr configs.
+`zpwr updateall` updates all zpwr config and dependencies.  `zpwr update` updates just zpwr configs.
 
 ### getrc and linkConf functions
 There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`.
