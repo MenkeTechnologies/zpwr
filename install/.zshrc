@@ -289,7 +289,8 @@ export MAGIC_ENTER_OTHER_COMMAND="clearList"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \
+plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin \
+    fasd-simple gh_reveal zsh-travis \
     zsh-z zsh-expand zsh-autopair \
     zsh-nginx zsh-more-completions history-search-multi-word \
     forgit fzf-zsh zsh-completions zsh-sed-sub \
