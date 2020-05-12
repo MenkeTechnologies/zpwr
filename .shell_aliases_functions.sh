@@ -1787,8 +1787,8 @@ function zpz(){
 function zr(){
 
     local dirsc forked
-    dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"
-    forked="$FORKED_DIR/$ZPWR_REPO_NAME"
+    dirsc="$ZPWR_SCRIPTS"
+    forked="$FORKED_DIR"
 
     if [[ -d "$dirsc" ]]; then
         cd "$dirsc"

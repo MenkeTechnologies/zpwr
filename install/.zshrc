@@ -2691,6 +2691,7 @@ fi
 if [[ -d "$ZPWR_TMUX" ]]; then
     exists ztm || alias ztm="cd $ZPWR_TMUX"
 fi
+
 if [[ -d "$ZPWR_TMUX" ]]; then
     exists zt || alias zt="cd $ZPWR_TEST"
 fi
