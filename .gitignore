@@ -1,7 +1,6 @@
 local/
 .tmux/local/
 .tmux/plugins/
-scripts/rcBackups/
 .tokens.sh
 GTAGS
 GRTAGS

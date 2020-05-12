@@ -2707,6 +2707,7 @@ fi
 
 if [[ -d "$ZPWR_LOCAL" ]]; then
     exists zl || alias zl="cd $ZPWR_LOCAL"
+    exists zlr || alias zlr="cd $ZPWR_LOCAL/rcBackups"
 fi
 
 if [[ -d "$ZSH/custom/plugins" ]]; then

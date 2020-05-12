@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-BACKUP_DIR="$ZPWR_SCRIPTS/rcBackups"
+BACKUP_DIR="$ZPWR_LOCAL/rcBackups"
 
 if [[ ! -d "$BACKUP_DIR" ]]; then
     mkdir "$BACKUP_DIR"
