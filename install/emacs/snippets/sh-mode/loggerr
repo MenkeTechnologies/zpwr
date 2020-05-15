@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: logg error
+# key: loe
+# --
+loggErr "______'"'$1'"'_____ = ""'$1'"

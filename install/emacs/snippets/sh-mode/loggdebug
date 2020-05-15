@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: logg debug
+# key: lod
+# --
+loggDebug "______'"'$1'"'_____ = ""'$1'"
