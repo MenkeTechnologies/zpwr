@@ -7,12 +7,10 @@
 ##### Notes:
 #}}}***********************************************************
 
-prettyPrint() {
-    printf "\e[1;4m"
-    printf "$1"
-    printf "\n\e[0m"
+source "$ZPWR_SCRIPTS/lib.sh" || {
+    echo "cannot access lib.sh" >&2
+    exit 1
 }
-
 #python 3.6
 python3 -c 'import pip' && {
     prettyPrint "Updating Python3.6 Packages"
@@ -53,7 +51,7 @@ python3 -c 'import pip' && {
 }
 
 #python 2.7 (non system)
-python2 -c 'import pip' && {
+exists python2 && python2 -c 'import pip' && {
     prettyPrint "Updating Python2.7 Packages"
     needSudoBase=true
 
