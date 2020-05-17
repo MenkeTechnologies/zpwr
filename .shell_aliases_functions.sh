@@ -1028,12 +1028,23 @@ function clearList() {
                     prettyPrint "STATS:"
                     stat -- "$arg"
                 else
-                    out=$(set | command grep "^$arg=")
+                    out=$(declare -m "$arg")
+
                     if [[ -n $out ]]; then
-                        prettyPrint "ENV:"
+                        prettyPrint "DATA TYPE:"
+                        print -rl -- ${(t)arg}
+                        prettyPrint "VALUE:"
                         echo $out
                     else
-                        loggErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
+                        out2=$(set | command grep "^$arg=")
+                        if [[ -n $out2 ]]; then
+                            prettyPrint "DATA TYPE:"
+                            print -rl -- ${(t)arg}
+                            prettyPrint "ENV:"
+                            echo $out2
+                        else
+                            loggErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
+                        fi
                     fi
                 fi
                 #for readibility
