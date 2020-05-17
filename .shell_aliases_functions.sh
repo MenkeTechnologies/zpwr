@@ -925,6 +925,8 @@ function about(){
 
 function clearList() {
 
+    local FOUND out out2
+
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists exa;then
             ls_command="$ZPWR_EXA_COMMAND"
@@ -959,10 +961,12 @@ function clearList() {
 
     if [[ -n "$1" ]]; then
         for arg in "$@"; do
+            FOUND=false
             prettyPrint "/--------------- $arg --------------/"
             #perl boxPrint.pl "$arg"
             echo
             if exists $arg; then
+                FOUND=true
                 #exe matching
                 while read loc;do
                     lf="$(echo $loc | cut -d' ' -f3-10)"
@@ -1017,39 +1021,48 @@ function clearList() {
                         echo
                     fi
                 done < <(type -a "$arg" 2>/dev/null | sort | uniq)
-            else
-                #path matching, not exe
-                if eval "$ls_command -d -- \"$arg\"" 2>/dev/null; then
-                    prettyPrint "$arg"
-                    prettyPrint "FILE TYPE:"
-                    file -- "$arg"
-                    prettyPrint "SIZE:"
-                    du -sh -- "$arg"
-                    prettyPrint "STATS:"
-                    stat -- "$arg"
-                else
-                    out=$(declare -m "$arg")
-
-                    if [[ -n $out ]]; then
-                        prettyPrint "DATA TYPE:"
-                        print -rl -- ${(tP)arg}
-                        prettyPrint "VALUE:"
-                        echo $out
-                    else
-                        out2=$(set | command grep "^$arg=")
-                        if [[ -n $out2 ]]; then
-                            prettyPrint "DATA TYPE:"
-                            print -rl -- ${(tP)arg}
-                            prettyPrint "ENV:"
-                            echo $out2
-                        else
-                            loggErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
-                        fi
-                    fi
-                fi
+            fi
+            #path matching, not exe
+            if eval "$ls_command -d -- \"$arg\"" 2>/dev/null; then
+                FOUND=true
+                prettyPrint "$arg"
+                prettyPrint "FILE TYPE:"
+                file -- "$arg"
+                prettyPrint "SIZE:"
+                du -sh -- "$arg"
+                prettyPrint "STATS:"
+                stat -- "$arg"
                 #for readibility
                 echo
                 echo
+            else
+                out=$(declare -m "$arg")
+
+                if [[ -n $out ]]; then
+                    FOUND=true
+                    prettyPrint "DATA TYPE:"
+                    print -rl -- ${(tP)arg}
+                    prettyPrint "VALUE:"
+                    echo $out
+                    #for readibility
+                    echo
+                    echo
+                else
+                    out2=$(set | command grep "^$arg=")
+                    if [[ -n $out2 ]]; then
+                        FOUND=true
+                        prettyPrint "DATA TYPE:"
+                        print -rl -- ${(tP)arg}
+                        prettyPrint "ENV:"
+                        echo $out2
+                        #for readibility
+                        echo
+                        echo
+                    fi
+                fi
+            fi
+            if [[ $FOUND == false ]]; then
+                loggErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
             fi
         done
     else
