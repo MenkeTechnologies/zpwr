@@ -301,7 +301,7 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin \
     scala lein spring django pip pyenv python go man nmap \
     postgres redis-cli colorize sudo rsync docker \
     docker-compose \
-    vundle rust cargo meteor gulp grunt glassfish tig fd \
+    vundle rust rustup cargo meteor gulp grunt glassfish tig fd \
     zsh-very-colorful-manuals zsh-git-acp tmux magic-enter)
 
 
