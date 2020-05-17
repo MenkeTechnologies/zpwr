@@ -110,16 +110,34 @@ clearList() {
                 done < <(type -a "$arg" 2>/dev/null | sort | uniq)
             else
                 #path matching, not exe
-                prettyPrint "$arg"
-                eval "$ls_command -d -- \"$arg\"" ||
-                    { echo; continue; }
-                echo
-                prettyPrint "FILE TYPE:"
-                file -- "$arg"
-                prettyPrint "SIZE:"
-                du -sh -- "$arg"
-                prettyPrint "STATS:"
-                stat -- "$arg"
+                if eval "$ls_command -d -- \"$arg\"" 2>/dev/null; then
+                    prettyPrint "$arg"
+                    prettyPrint "FILE TYPE:"
+                    file -- "$arg"
+                    prettyPrint "SIZE:"
+                    du -sh -- "$arg"
+                    prettyPrint "STATS:"
+                    stat -- "$arg"
+                else
+                    out=$(declare -m "$arg")
+
+                    if [[ -n $out ]]; then
+                        prettyPrint "DATA TYPE:"
+                        print -rl -- ${(t)arg}
+                        prettyPrint "VALUE:"
+                        echo $out
+                    else
+                        out2=$(set | command grep "^$arg=")
+                        if [[ -n $out2 ]]; then
+                            prettyPrint "DATA TYPE:"
+                            print -rl -- ${(t)arg}
+                            prettyPrint "ENV:"
+                            echo $out2
+                        else
+                            loggErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
+                        fi
+                    fi
+                fi
                 #for readibility
                 echo
                 echo
