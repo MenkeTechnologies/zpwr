@@ -223,10 +223,10 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
     fi
 
     #update python packages
-    ssh -x "$hostname" bash <"$ZPWR_SCRIPTS/updaterPip.sh"
+    ssh -x "$hostname" bash < <(cat "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS/updaterPip.sh")
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to send stdin script into bash
-    ssh -x "$hostname" bash <"$ZPWR_SCRIPTS/rpiSoftwareUpdater.sh"
+    ssh -x "$hostname" bash < <(cat "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS/rpiSoftwareUpdater.sh")
 }
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for

@@ -10,11 +10,6 @@
 #no complaining about no glob results for * from zsh
 #setopt null_glob
 
-source "$ZPWR_SCRIPTS/lib.sh" || {
-    echo "cannot access lib.sh" >&2
-    exit 1
-}
-
 prettyPrint "Updating Tmux Plugins"
 gitRepoUpdater "$HOME/.tmux/plugins"
 

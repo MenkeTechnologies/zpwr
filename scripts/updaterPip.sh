@@ -7,10 +7,6 @@
 ##### Notes:
 #}}}***********************************************************
 
-source "$ZPWR_SCRIPTS/lib.sh" || {
-    echo "cannot access lib.sh" >&2
-    exit 1
-}
 #python 3.6
 python3 -c 'import pip' && {
     prettyPrint "Updating Python3.6 Packages"
