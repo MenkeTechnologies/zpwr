@@ -1032,14 +1032,14 @@ function clearList() {
 
                     if [[ -n $out ]]; then
                         prettyPrint "DATA TYPE:"
-                        print -rl -- ${(t)arg}
+                        print -rl -- ${(tP)arg}
                         prettyPrint "VALUE:"
                         echo $out
                     else
                         out2=$(set | command grep "^$arg=")
                         if [[ -n $out2 ]]; then
                             prettyPrint "DATA TYPE:"
-                            print -rl -- ${(t)arg}
+                            print -rl -- ${(tP)arg}
                             prettyPrint "ENV:"
                             echo $out2
                         else
