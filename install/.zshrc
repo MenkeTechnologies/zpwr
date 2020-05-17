@@ -3645,90 +3645,7 @@ else
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:Groovy
-#**************************************************************
-unset GROOVY_HOME # when set this messes up classpath
-#}}}***********************************************************
-
-#{{{                    MARK:Suffix aliases
-#**************************************************************
-alias -s txt='vim'
-#}}}***********************************************************
-
-#{{{                    MARK:Auto attach tmux
-#**************************************************************
-if [[ $ZPWR_AUTO_ATTACH == true ]]; then
-
-    if [[ "$(uname)" == Linux ]]; then
-
-        if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
-
-            mobile=true
-            cat ~/.ssh/authorized_keys |
-                command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
-
-            case $distroName in
-                (debian|raspbian|kali|ubuntu|parrot)
-                    out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
-                    ;;
-                (centos|rhel)
-                    out="$(tail /var/log/messages)"
-                    ;;
-                (*suse*|arch|manjaro*)
-                    out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
-                    ;;
-                (fedora)
-                    out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
-                    ;;
-                (*) :
-                    ;;
-            esac
-            logg "searching for $key in $out"
-            echo "$out" | grep -aqs "$key" && mobile=false
-
-            command rm "$ZPWR_TEMPFILE"
-            if [[ $mobile == "false" ]]; then
-                logg "found $key so desktop"
-                num_con="$(command ps -ef |command grep -a 'sshd' | command grep -a pts | command grep -av grep | wc -l)"
-                logg "num connections: $num_con"
-                if (( $num_con == 1 )); then
-                    logg "no tmux clients"
-                    {
-                        out="$(tmux ls 2>&1)"
-                        ret=$?
-                        logg "tmux ls = ret: $ret, out: $out"
-                        if [[ $ret == 0 ]]; then
-                            logg "attaching to existing"
-                            logg command tmux attach
-                            command tmux attach
-                            ret=$?
-                            logg "tmux attach = ret: $ret"
-                        else
-                            logg "creating new session"
-                            logg tmux new-session \; \
-                            source-file "$ZPWR_TMUX/control-window"
-                            tmux new-session \; \
-                            source-file "$ZPWR_TMUX/control-window"
-                        fi
-                    } &> /dev/null
-                else
-                    logg "clients so NO"
-                    logg command tmux attach
-                    command tmux attach
-                fi
-            else
-                logg "mobile so NO"
-            fi
-        fi
-
-    fi
-fi
-#}}}***********************************************************
-
-#{{{                    MARK:Misc
+#{{{                    MARK:Zpwr verbs
 #**************************************************************
 autoload -Uz zrecompile
 
@@ -3834,10 +3751,6 @@ function zshrcsearch(){
         ag --color --numbers -C 5 -i -- "$@" $ZPWR_TEMPFILE4 | less
     fi
 }
-# Example usage: zmv -W '*.pl' '*.perl'
-autoload zmv
-alias mmv='noglob zmv -W'
-autoload zargs
 
 function zarg(){
 
@@ -3856,11 +3769,6 @@ function zarg(){
 if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
-
-exists thefuck && eval $(thefuck --alias)
-
-#force alias z to zshz not zypper on suse
-alias z="$zcmd 2>&1"
 
 function zpwrAllUpdates(){
     (
@@ -4046,11 +3954,108 @@ function regenHistory() {
         command rm -rf .zsh_history_bad
     )
 }
+#}}}***********************************************************
+
+#{{{                    MARK:Suffix aliases
+#**************************************************************
+alias -s txt='vim'
+#}}}***********************************************************
+
+#{{{                    MARK:Auto attach tmux
+#**************************************************************
+if [[ $ZPWR_AUTO_ATTACH == true ]]; then
+
+    if [[ "$(uname)" == Linux ]]; then
+
+        if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
+
+            mobile=true
+            cat ~/.ssh/authorized_keys |
+                command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
+
+            case $distroName in
+                (debian|raspbian|kali|ubuntu|parrot)
+                    out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
+                    ;;
+                (centos|rhel)
+                    out="$(tail /var/log/messages)"
+                    ;;
+                (*suse*|arch|manjaro*)
+                    out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
+                    ;;
+                (fedora)
+                    out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"
+                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
+                    ;;
+                (*) :
+                    ;;
+            esac
+            logg "searching for $key in $out"
+            echo "$out" | grep -aqs "$key" && mobile=false
+
+            command rm "$ZPWR_TEMPFILE"
+            if [[ $mobile == "false" ]]; then
+                logg "found $key so desktop"
+                num_con="$(command ps -ef |command grep -a 'sshd' | command grep -a pts | command grep -av grep | wc -l)"
+                logg "num connections: $num_con"
+                if (( $num_con == 1 )); then
+                    logg "no tmux clients"
+                    {
+                        out="$(tmux ls 2>&1)"
+                        ret=$?
+                        logg "tmux ls = ret: $ret, out: $out"
+                        if [[ $ret == 0 ]]; then
+                            logg "attaching to existing"
+                            logg command tmux attach
+                            command tmux attach
+                            ret=$?
+                            logg "tmux attach = ret: $ret"
+                        else
+                            logg "creating new session"
+                            logg tmux new-session \; \
+                            source-file "$ZPWR_TMUX/control-window"
+                            tmux new-session \; \
+                            source-file "$ZPWR_TMUX/control-window"
+                        fi
+                    } &> /dev/null
+                else
+                    logg "clients so NO"
+                    logg command tmux attach
+                    command tmux attach
+                fi
+            else
+                logg "mobile so NO"
+            fi
+        fi
+
+    fi
+fi
+#}}}***********************************************************
+
+#{{{                    MARK:Misc
+#**************************************************************
 
 exists zunit && {
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
 }
+
+# Example usage: zmv -W '*.pl' '*.perl'
+autoload zmv
+alias mmv='noglob zmv -W'
+
+exists thefuck && eval $(thefuck --alias)
+
+#force alias z to zshz not zypper on suse
+alias z="$zcmd 2>&1"
+autoload zargs
 ###}}}***********************************************************
+
+#{{{                    MARK:Groovy
+#**************************************************************
+unset GROOVY_HOME # when set this messes up classpath
+#}}}***********************************************************
 
 #{{{                    MARK:Finish
 #**************************************************************
@@ -4062,8 +4067,8 @@ test -f "$ZPWR_TOKEN_POST" &&
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
 logg "zsh startup took $startupTimeMs seconds"
+
 if [[ $ZPWR_PROFILING == true ]]; then
     zprof
 fi
-
 #}}}***********************************************************
