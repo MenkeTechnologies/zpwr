@@ -22,7 +22,13 @@ if [[ -z $ZPWR_SCRIPTS_MAC ]]; then
     ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
 fi
 
-source "$ZPWR_SCRIPTS/lib.sh"
+if ! type -- "exists" >/dev/null 2>&1;then
+    test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
+    source "$ZPWR_SCRIPTS/lib.sh" || {
+        echo "cannot access lib.sh" >&2
+        exit 1
+    }
+fi
 
 [[ -n "$1" ]] && commitMessage="$1" || commitMessage="update"
 

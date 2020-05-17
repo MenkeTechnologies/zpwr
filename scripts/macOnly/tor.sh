@@ -7,10 +7,13 @@
 ##### Notes:
 #}}}***********************************************************
 
-source "$ZPWR_SCRIPTS/lib.sh" || {
-    echo "cannot access lib.sh" >&2
-    exit 1
-}
+if ! type -- "exists" >/dev/null 2>&1;then
+    test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
+    source "$ZPWR_SCRIPTS/lib.sh" || {
+        echo "cannot access lib.sh" >&2
+        exit 1
+    }
+fi
 INTERFACE=Wi-Fi
 
 #commented out sections not necessary if sudo is not requiring passwd
