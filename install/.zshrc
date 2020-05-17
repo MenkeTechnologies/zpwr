@@ -3265,6 +3265,7 @@ function _cl(){
         'builtins:builtin command:compadd -Qk builtins' \
         'reserved-words:reserved word:compadd -Qk reswords' \
         'functions:shell function:compadd -Qk functions' \
+        'parameters:parameters:_parameters' \
         'files:filenames:_path_files -g "* .*"' \
         'commands:commands:compadd -Qk commands'
         #need to escape [ for g[ in PATH, compadd -Q does this
