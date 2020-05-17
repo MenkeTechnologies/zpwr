@@ -6,10 +6,13 @@
 ##### Purpose: bash script to facilitate text messaging from command line
 ##### Notes: high complexity
 #}}}***********************************************************
-
-prettyPrint() {
-    test -n "$1" && printf "\e[1m$1\e[0m\n" || { echo "Need one arg" >&2 && return 1; }
-}
+if ! type -- "exists" >/dev/null 2>&1;then
+    test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
+    source "$ZPWR_SCRIPTS/lib.sh" || {
+        echo "cannot access lib.sh" >&2
+        exit 1
+    }
+fi
 
 if [[ -z "$1" ]]; then
     prettyPrint "need a subject" >&2

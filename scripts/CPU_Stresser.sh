@@ -6,6 +6,15 @@
 ##### Purpose: bash script to stress system
 ##### Notes: high CPU usage
 #}}}***********************************************************
+
+if ! type -- "exists" >/dev/null 2>&1;then
+    test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
+    source "$ZPWR_SCRIPTS/lib.sh" || {
+        echo "cannot access lib.sh" >&2
+        exit 1
+    }
+fi
+
 __ScriptVersion="1.0.2"
 nproc=10
 
@@ -25,47 +34,6 @@ usage() {
     -v|version Display script version"
 
 } # ---------- end of function usage  ----------
-
-prettyPrint() {
-    printf "\e[1;4m"
-    printf "$1"
-    printf "\n\e[0m"
-}
-
-exists() {
-    type "$1" >/dev/null 2>&1
-}
-
-alternatingPrettyPrint() {
-    counter=0
-
-    if [[ -z $1 ]]; then
-        cat | perl -F"$ZPWR_DELIMITER_CHAR" -ane '
-        my $counter=0;
-        for (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$_\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$_\x1b[0m"
-            }
-        ++$counter;
-        };print "\x1b[0m"'
-    else
-        perl -F"$ZPWR_DELIMITER_CHAR" -ane '
-
-        my $counter=0;
-        for (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$_\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$_\x1b[0m"
-            }
-        ++$counter;
-        }; print "\x1b[0m"' <<<"$@"
-
-    fi
-
-}
 
 #-----------------------------------------------------------------------
 # Handle command line arguments

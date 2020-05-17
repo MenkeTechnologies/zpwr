@@ -7,31 +7,15 @@
 ##### Notes: source this file
 #}}}***********************************************************
 
+if ! type -- "exists" >/dev/null 2>&1;then
+    test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
+    source "$ZPWR_SCRIPTS/lib.sh" || {
+        echo "cannot access lib.sh" >&2
+        exit 1
+    }
+fi
+
 comp_dir="comp_dir"
-
-exists(){
-    type "$1" >/dev/null 2>&1 #alternative is command -v
-}
-
-boxesPrint(){
-    width=70
-    len=${#1}
-    spacerlen=2
-    boxesChar='/'
-    spaceChar=' '
-    sidelen=$(($width - $len - $spacerlen * 2))
-    #ceil
-    sidelen=$(( ($sidelen + 2 -1) / 2))
-    sidelen2=$sidelen
-    if (( $len % 2 == 1 )); then
-        ((--sidelen2 ))
-    fi
-
-    perl -E "say '"$boxesChar"' x $width; print '"$boxesChar"' x $sidelen; print '"$spaceChar"' x $spacerlen"
-    printf "$1"
-    perl -E "print '"$spaceChar"' x $spacerlen; say '"$boxesChar"' x $sidelen2; say '"$boxesChar"' x $width"
-    echo
-}
 
 exists mantozshcomp.py || {
     echo "we need a man to zsh completion generator..." >&2
@@ -41,7 +25,7 @@ test ! -d "$comp_dir" && command mkdir -p "$comp_dir"
 
 for command abs in ${(kv)commands}; do
     if [[ -z $_comps[$command] ]];then
-       boxesPrint $command | lolcat
+       prettyPrintBox $command | lolcat
        echo mantozshcomp.py -v 1 -s $(man -w $command)
        mantozshcomp.py -s $(man -w $command) > "$comp_dir"/_$command
         if [[ ! -s "$comp_dir/_$command" ]]; then
