@@ -6,6 +6,12 @@
 ##### Purpose: bash script to do pip updating
 ##### Notes:
 #}}}***********************************************************
+if ! type -- "exists" >/dev/null 2>&1;then
+    source "$ZPWR_SCRIPTS/lib.sh" || {
+        echo "cannot access lib.sh" >&2
+        exit 1
+    }
+fi
 
 #python 3.6
 python3 -c 'import pip' && {
