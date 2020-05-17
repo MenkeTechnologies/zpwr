@@ -1351,6 +1351,20 @@ function regenSearchEnv(){
     source "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh" "$ZPWR_ENV"
 }
 
+function regenMost(){
+
+    regenConfigLinks
+    regenZshCompCache
+    regenHistory
+    regenCtags
+    regenGtagsCtags
+    regenAllKeybindingsCache
+    regenPowerlineLink
+    regenSearchEnv
+    uncompile
+    recompile
+}
+
 function regenAll(){
 
     regenConfigLinks
