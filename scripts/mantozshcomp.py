@@ -2042,6 +2042,7 @@ def parse_manpage_at_path(manpage_path, output_directory):
                 break
 
         if success:
+            built_command_output.append("'*:filename:_files'")
             if WRITE_TO_STDOUT:
                 output_file = sys.stdout
             else:
