@@ -1064,6 +1064,9 @@ you should place your code here."
 
     (define-key evil-normal-state-map (kbd "C-d") #'zpwr/undohunk)
 
+    (define-key evil-insert-state-map (kbd "C-c <escape>") #'evil-normal-state)
+    (define-key evil-normal-state-map (kbd "C-c <escape>") #'evil-normal-state)
+
     (define-key evil-insert-state-map (kbd "C-v") #'zpwr/runner)
     (define-key evil-normal-state-map (kbd "C-v") #'zpwr/runner)
 

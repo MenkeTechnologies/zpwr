@@ -511,7 +511,27 @@ function em(){
 }
 
 function emm() {
-    echo "$PWD/$1" | $ZPWR_COPY_CMD
+    local str endstr
+    tmux send-keys -t emacs:0.0 C-c Escape
+
+    for arg in "$@"; do
+        if [[ ${arg:0:1} == "/" ]]; then
+            str="$arg"
+        elif [[ ${arg:0:1} == "~" ]]; then
+            str="$arg"
+        else
+            str="$PWD/$1"
+        fi
+        endstr="$endstr $str"
+    done
+
+    if [[ -n "$endstr" ]]; then
+        printf "$endstr" | $ZPWR_COPY_CMD
+        sleep 0.3
+        logg tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
+        tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
+    fi
+
     tmux attach-session -t emacs
 }
 
