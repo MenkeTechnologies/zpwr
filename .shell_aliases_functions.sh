@@ -512,6 +512,7 @@ function em(){
 
 function emm() {
     local str endstr
+    tmux selectp -t emacs:0.0
     tmux send-keys -t emacs:0.0 C-c Escape
 
     for arg in "$@"; do
