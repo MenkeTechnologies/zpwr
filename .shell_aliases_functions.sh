@@ -509,6 +509,12 @@ function em(){
     fi
 
 }
+
+function emm() {
+    echo "$PWD/$1" | $ZPWR_COPY_CMD
+    tmux attach-session -t emacs
+}
+
 function loadJenv() {
     if exists jenv;then
         eval "$(jenv init -)"
