@@ -2042,7 +2042,6 @@ def parse_manpage_at_path(manpage_path, output_directory):
                 break
 
         if success:
-            built_command_output.append("'*:filename:_files'")
             if WRITE_TO_STDOUT:
                 output_file = sys.stdout
             else:
@@ -2063,6 +2062,7 @@ def parse_manpage_at_path(manpage_path, output_directory):
             built_command_output.insert(2, "local arguments\n")
             built_command_output.insert(3, "arguments=(")
             # built_command_output.insert(2, "# using " + parser.__class__.__name__) # XXX MISATTRIBUTES THE CULPABILE PARSER! Was really using Type2 but reporting TypeDeroffManParser
+            built_command_output.append("'*:filename:_files'")
 
             for i, line in enumerate(built_command_output):
                 if i > 3:
