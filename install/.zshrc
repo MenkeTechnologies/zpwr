@@ -2524,6 +2524,7 @@ if [[ $ZPWR_COLORS == true ]]; then
         #homebrew tags
         zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
         zstyle ':completion:*:formulae' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:brew-cask:*:list' list-colors '=(#b)(*)=1;30=1;36;44'
         zstyle ':completion:*:common-commands' list-colors '=(#b)(*)=1;30=1;37;45'
         zstyle ':completion:*:all-commands' list-colors '=(#b)(*)=1;30=1;37;42'
     fi
