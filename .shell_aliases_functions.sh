@@ -314,6 +314,7 @@ fi
 if pwd | command egrep -sq --color=always / 2>/dev/null; then
     alias egrep="egrep --color=always"
 fi
+alias _='sudo -E'
 alias tree='tree -afC'
 alias ta="tmux attach-session"
 alias tn="tmux new-session"
