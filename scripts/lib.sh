@@ -223,17 +223,17 @@ function refresh(){
 
 }
 
-#function prettyPrint(){
-    #(( ++INSTALL_COUNTER ))
-    #printf "\x1b[32;1m"
-    #perl -le "print '#'x80"
-    #printf "\x1b[34;4m"
-    #printf "$INSTALL_COUNTER>>> $1\n"
-    #printf "\x1b[0;32;1m"
-    #perl -le "print '#'x80"
-    #printf "\x1b[0m"
-    #printf "\n"
-#}
+function prettyPrintInstaller(){
+    (( ++INSTALL_COUNTER ))
+    printf "\x1b[32;1m"
+    perl -le "print '#'x80"
+    printf "\x1b[34;4m"
+    printf "$INSTALL_COUNTER>>> $1\n"
+    printf "\x1b[0;32;1m"
+    perl -le "print '#'x80"
+    printf "\x1b[0m"
+    printf "\n"
+}
 
 function needSudo(){
     if [[ ! -w "$1" ]]; then
@@ -260,7 +260,7 @@ function proceed(){
 function prettyPrint(){
 
     if [[ -n "$1" ]];then
-        printf "\x1b[1m"
+        printf "\x1b[1;4m"
         printf "%s " "$@"
         printf "\x1b[0m\n"
     else
