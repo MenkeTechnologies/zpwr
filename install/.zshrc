@@ -3799,7 +3799,6 @@ function zpwrAllUpdates(){
     )
    zpwr updatedeps
    zpwr regen
-   zpwr recompile
    zpwr update
 }
 
