@@ -2286,7 +2286,8 @@ setopt csh_null_glob
 setopt no_list_beep
 
 # > file creates file
-setopt sh_null_cmd
+# NOT compatible with $(<<EOF) used in comp caches
+setopt no_sh_null_cmd
 
 # allow unquoted globs to pass through
 setopt no_bad_pattern
