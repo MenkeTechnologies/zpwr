@@ -1597,17 +1597,6 @@ function prettyPrintNoNewline(){
         return 1
     fi
 }
-function prettyPrint(){
-
-    if [[ -n "$1" ]];then
-        printf "\x1b[1m"
-        printf "%s " "$@"
-        printf "\x1b[0m\n"
-    else
-        loggErr "Need one arg" 
-        return 1
-    fi
-}
 
 function alternatingPrettyPrint(){
 
