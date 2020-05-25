@@ -52,7 +52,7 @@ if test -f \$file;then
     elif print -r -- \$file | command egrep -iq "\\.(tgz|tar|tar\\.gz)\$";then tar tf \$file | $COLORIZER_FZF_C;
     elif print -r -- \$file | command egrep -iq "\\.deb\$";then $deb_cmd \$file | $COLORIZER_FZF_SH;
     elif print -r -- \$file | command egrep -iq "\\.rpm\$";then $rpm_cmd \$file | $COLORIZER_FZF_SH;
-    elif print -r -- \$file | command egrep -iq "\\.zip\$";then unzip -l -- \$file | $COLORIZER_FZF_C;
+    elif print -r -- \$file | command egrep -iq "\\.zip\$";then unzip -v -- \$file | $COLORIZER_FZF_C;
     elif print -r -- \$file | command egrep -iq "\\.(bzip|bz)\$";then bzip -c -d \$file | $COLORIZER_FZF_YAML;
     elif print -r -- \$file | command egrep -iq "\\.(bzip2|bz2)\$";then bzip2 -c -d \$file | $COLORIZER_FZF_YAML;
     elif print -r -- \$file | command egrep -iq "\\.(xzip|xz)\$";then xz -c -d \$file | $COLORIZER_FZF_YAML;
