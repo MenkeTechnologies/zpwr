@@ -253,6 +253,6 @@ exists brew && {
 }
 
 #decolorize prompt
-printf "Done\n\x1b[0m"
+prettyPrint "Done"
 
 exists clearList && clearList
