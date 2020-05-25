@@ -1604,36 +1604,6 @@ function prettyPrintNoNewline(){
     fi
 }
 
-function alternatingPrettyPrint(){
-
-    local counter
-    counter=0
-
-    if [[ -z $1 ]]; then
-        cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
-        my $counter=0;
-        for (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$_\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$_\x1b[0m"
-            }
-        ++$counter;
-        };print "\x1b[0m"'
-    else
-        echo "$@" | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
-        my $counter=0;
-        for (@F){
-            if ($counter % 2 == 0){
-                 print "\x1b[36m$_\x1b[0m"
-            } else {
-                 print "\x1b[1;4;34m$_\x1b[0m"
-            }
-        ++$counter;
-        }; print "\x1b[0m"'
-    fi
-}
-
 function tac(){
 
     sed '1!G;h;$!d' "$@"
