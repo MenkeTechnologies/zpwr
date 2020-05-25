@@ -1147,21 +1147,27 @@ function humanReadable(){
 }
 
 function f(){
+    local base
 
-    if [[ -f "$1" ]]; then
+    if [[ -z "$1" ]]; then
+        cd -
+        return 0
+    elif [[ -f "$1" ]]; then
         cd "$(dirname "$1")"
     elif [[ -d "$1" ]];then
         cd "$1"
     else
-        test -z "$1" && cd - && return 0
         echo "$1" | command grep -E '\-[0-9]+' && cd "$1" && return 0
-        local base
         base="$(dirname "$1")"
+        if [[ $base == "." ]]; then
+            loggErr "'$1': Not a valid file or directory."
+            return 1
+        fi
         while [[ "$base" != / ]]; do
             test -d "$base" && cd "$base"&& return 0
             base="$(dirname "$base")"
         done
-        loggErr "Not a valid file or directory."
+        loggErr "'$1': Not a valid file or directory."
         return 1
     fi
 }
