@@ -63,11 +63,14 @@ brew install curl
 brew install curl-openssl
 brew install cython
 brew install dart
+brew install dav1d
 brew install dbus
 brew install dhex
 brew install dialog
 brew install diff-so-fancy
 brew install doc
+brew install docbook
+brew install docbook-xsl
 brew install docker
 brew install eigen
 brew install elixir
@@ -111,6 +114,7 @@ brew install git
 brew install glassfish
 brew install glib
 brew install glib-networking
+brew install global
 brew install gmp
 brew install gnu-getopt
 brew install gnu-prolog
@@ -140,6 +144,7 @@ brew install gst-plugins-ugly
 brew install gstreamer
 brew install gtk+3
 brew install gts
+brew install guile
 brew install hadoop
 brew install harfbuzz
 brew install heroku
@@ -259,7 +264,6 @@ brew install mad
 brew install mailutils
 brew install makedepend
 brew install man2html
-brew install mariadb
 brew install maven
 brew install mecab
 brew install mecab-ipadic
@@ -340,7 +344,6 @@ brew install pixman
 brew install pkcs11-helper
 brew install pkg-config
 brew install pokemonsay
-brew install ponysay
 brew install portaudio
 brew install portmidi
 brew install postgresql
@@ -393,6 +396,7 @@ brew install slurm
 brew install smpeg
 brew install snappy
 brew install sntop
+brew install socat
 brew install sox
 brew install spaceinvaders-go
 brew install spark
@@ -402,6 +406,7 @@ brew install sphinx-doc
 brew install springboot
 brew install sqlite
 brew install srm
+brew install srt
 brew install srtp
 brew install swig
 brew install taglib
@@ -450,6 +455,7 @@ brew install with-readline
 brew install wxmac
 brew install x264
 brew install x265
+brew install xmlto
 brew install xvid
 brew install xz
 brew install yasm
