@@ -2623,11 +2623,11 @@ alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
 alias gac='git add . && git commit -m "'$ZPWR_TABSTOP'"'
 
 exists zf || alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
-exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;bk;gla;zp gitclearcache; }' *"
+exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'isGitDir && { gffa; bk; gla; zp gitclearcache; }' *"
 
-exists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;bk;gla;zp gitclearcache; gco master; }' *"
+exists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'isGitDir && { gco master; gffa; bk; gla; zp gitclearcache; }' *"
 
-exists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;bk;gla;zp gitclearcache; gco development; }' *"
+exists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'isGitDir && { gco development; gffa; bk; gla; zp gitclearcache; }' *"
 
 exists zff || alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
