@@ -298,7 +298,7 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin \
     fast-syntax-highlighting zsh-autosuggestions \
     history-substring-search ruby gem rake yarn ng \
     coffee node npm perl cpanm git github gradle ant mvn \
-    scala lein spring django pip pyenv python go man nmap \
+    scala lein spring django pip pyenv python golang man nmap \
     postgres redis-cli colorize sudo rsync docker \
     docker-compose \
     vundle rust rustup cargo meteor gulp grunt glassfish tig fd \
@@ -439,7 +439,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
             plugins+=(suse)
             ;;
         (fedora)
-            plugins+=(yum fedora dnf)
+            plugins+=(yum dnf)
             ;;
         (*) :
             ;;
