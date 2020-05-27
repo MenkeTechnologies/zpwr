@@ -11,6 +11,8 @@
 #**************************************************************
 # do not want any surprises when relative cd to other dirs
 unset CDPATH
+
+test -z "$ZPWR_DELIMITER_CHAR" && export ZPWR_DELIMITER_CHAR='%'
 #}}}***********************************************************
 
 #{{{                    MARK:installer lib fns
