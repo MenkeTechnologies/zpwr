@@ -192,6 +192,8 @@ export ZPWR_INTERATIVE_MENU_SELECT=true
 export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
 # log file
 export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
+# default OMZ theme if Powerlevel 9k not used
+export ZPWR_DEFAULT_OMZ_THEME=simonoff
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
@@ -358,13 +360,13 @@ if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
         if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then
             source "$ZPWR_PROMPT_FILE"
         else
-            ZSH_THEME=simonoff
+            ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
         fi
     else
-        ZSH_THEME=simonoff
+        ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
     fi
 else
-    test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=simonoff
+    test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
 fi
 
 #colors for common commands
@@ -1998,7 +2000,7 @@ function my-accept-line () {
 
     set +x
     zle .accept-line
-    #leaky simonoff theme so reset ANSI escape sequences
+    #leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
     printf "\x1b[0m"
 }
 
@@ -2025,7 +2027,7 @@ function precmd(){
         :
         #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
     fi
-    #leaky simonoff theme so reset ANSI escape sequences
+    #leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
     if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
