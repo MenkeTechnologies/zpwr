@@ -446,6 +446,8 @@ export ZPWR_INTERATIVE_MENU_SELECT=true
 export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
 # log file
 export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
+# default OMZ theme if Powerlevel 9k not used
+export ZPWR_DEFAULT_OMZ_THEME=simonoff
 ```
 
 ## Tests
