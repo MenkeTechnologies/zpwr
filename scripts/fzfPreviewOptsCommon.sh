@@ -12,8 +12,8 @@ source "$ZPWR_SCRIPTS/lib.sh" || {
     exit 1
 }
 
-exists rpm && rpm_cmd='rpm -qi \$file;rpm -qlp \$file' || rpm_cmd="stat"
-exists dpkg && deb_cmd='dpkg -I \$file;dpkg -c \$file' || deb_cmd="stat"
+exists rpm && rpm_cmd='rpm -qi $file;rpm -qlp $file' || rpm_cmd="stat"
+exists dpkg && deb_cmd='dpkg -I $file;dpkg -c $file' || deb_cmd="stat"
 
 os="$(uname -s)"
 if echo "$os" | grep -iq darwin; then
