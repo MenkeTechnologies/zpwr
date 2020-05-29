@@ -13,8 +13,8 @@ source "$ZPWR_SCRIPTS/lib.sh" || {
     exit 1
 }
 
-exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
-exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
+exists rpm && rpm_cmd='rpm -qi \$file;rpm -qlp \$file' || rpm_cmd="stat"
+exists dpkg && deb_cmd='dpkg -I \$file;dpkg -c \$file' || deb_cmd="stat"
 
 os="$(uname -s)"
 if echo "$os" | grep -iq darwin; then
@@ -52,8 +52,8 @@ test -z \$file && file=\$(echo {} | cut -d" " -f2 | sed "s@^~@$HOME@");
 if test -f \$file;then
     if print -r -- \$file | command egrep -iq "\\.[jw]ar\$";then jar tf \$file | $COLORIZER_FZF_JAVA;
     elif print -r -- \$file | command egrep -iq "\\.(tgz|tar|tar\\.gz)\$";then tar tf \$file | $COLORIZER_FZF_C;
-    elif print -r -- \$file | command egrep -iq "\\.deb\$";then $deb_cmd \$file | $COLORIZER_FZF_SH;
-    elif print -r -- \$file | command egrep -iq "\\.rpm\$";then $rpm_cmd \$file | $COLORIZER_FZF_SH;
+    elif print -r -- \$file | command egrep -iq "\\.deb\$";then $deb_cmd | $COLORIZER_FZF_SH;
+    elif print -r -- \$file | command egrep -iq "\\.rpm\$";then $rpm_cmd | $COLORIZER_FZF_SH;
     elif print -r -- \$file | command egrep -iq "\\.zip\$";then unzip -v -- \$file | $COLORIZER_FZF_C;
     elif print -r -- \$file | command egrep -iq "\\.(bzip|bz)\$";then bzip -c -d \$file | $COLORIZER_FZF_YAML;
     elif print -r -- \$file | command egrep -iq "\\.(bzip2|bz2)\$";then bzip2 -c -d \$file | $COLORIZER_FZF_YAML;
