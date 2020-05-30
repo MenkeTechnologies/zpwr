@@ -1138,10 +1138,12 @@ function f(){
         echo "$1" | command grep -E '\-[0-9]+' && cd "$1" && return 0
         base="$(dirname "$1")"
 
-        for dir in (#i)$1*(N);do
-            cd "$dir"
-            return
-        done
+        if isZsh;then
+            eval 'for dir in (#i)'"$1"'*(N);do
+                cd "$dir"
+                return
+            done'
+        fi
 
         if [[ $base == "." ]]; then
             loggErr "'$1': Not a valid file or directory."
