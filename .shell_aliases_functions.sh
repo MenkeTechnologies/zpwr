@@ -1137,6 +1137,12 @@ function f(){
     else
         echo "$1" | command grep -E '\-[0-9]+' && cd "$1" && return 0
         base="$(dirname "$1")"
+
+        for dir in (#i)$1*(N);do
+            cd "$dir"
+            return
+        done
+
         if [[ $base == "." ]]; then
             loggErr "'$1': Not a valid file or directory."
             return 1
