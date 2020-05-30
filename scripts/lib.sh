@@ -12,7 +12,8 @@
 # do not want any surprises when relative cd to other dirs
 unset CDPATH
 
-test -z "$ZPWR_LOCAL" && export ZPWR_LOCAL="$HOME/.zpwr/local"
+test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+test -z "$ZPWR_LOCAL" && export ZPWR_LOCAL="$ZPWR/local"
 test -z "$ZPWR_OS_TYPE" && export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 test -z "$ZPWR_DELIMITER_CHAR" && export ZPWR_DELIMITER_CHAR='%'
 test -z "$ZPWR_GITHUB_ACCOUNT" && export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
@@ -32,7 +33,6 @@ test -z "$ZPWR_EMACS" && export ZPWR_EMACS='command emacs -nw'
 test -z "$ZPWR_ALL_GIT_DIRS" && export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
 test -z "$ZPWR_LOGFILE" && export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 test -z "$ZPWR_TOKEN_PRE" && export ZPWR_TOKEN_PRE="$ZPWR_LOCAL/.tokens.sh"
-
 test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
 #}}}***********************************************************
 
