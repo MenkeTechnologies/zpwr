@@ -1,5 +1,5 @@
 #!/usr/bin/env zsh
-#{{{ MARK:Header
+#{{{                    MARK:Header
 #**************************************************************
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies

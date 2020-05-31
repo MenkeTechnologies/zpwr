@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#{{{ MARK:Header
+#{{{                    MARK:Header
 #**************************************************************
 ##### Author: JACOBMENKE
 ##### Date: Mon Jul 10 12:14:31 EDT 2017
@@ -28,7 +28,7 @@ addHeader() {
     firstString="$(
         cat <<EOM
 #!/usr/bin/env $1
-#{{{ MARK:Header
+#{{{                    MARK:Header
 #**************************************************************
 ##### Author: $(whoami | tr 'a-z' 'A-Z')
 ##### Date: $(date)

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#{{{ MARK:Header
+#{{{                    MARK:Header
 #**************************************************************
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies

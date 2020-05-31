@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#{{{ MARK:Header
+#{{{                    MARK:Header
 #**************************************************************
 ##### Author: JACOBMENKE
 ##### Date: Fri Jun 30 15:18:40 EDT 2017
@@ -7,6 +7,9 @@
 ##### Notes:
 #}}}***********************************************************
 
+
+#{{{                    MARK:function defs
+#**************************************************************
 executableScriptsProcessing() {
     # then make it executable
     if [[ ! -x "$1" ]]; then
@@ -20,7 +23,7 @@ addHeader() {
     headerSTRING=$(
         cat <<EOM
 #!/usr/bin/env $1
-#{{{ MARK:Header
+#{{{                    MARK:Header
 #**************************************************************
 ##### Author: $ZPWR_GITHUB_ACCOUNT
 ##### GitHub: $ZPWR_GITHUB_URL
@@ -41,6 +44,8 @@ createTemplate() {
     addHeader "$1" "$2"
     executableScriptsProcessing "$2"
 }
+#}}}***********************************************************
+
 
 #if no arguments then exit
 (($# < 1)) && echo "Need one argument." >&2 && exit 1
@@ -48,6 +53,9 @@ createTemplate() {
 #file name is the first argument
 fileToBeExecuted="$1"
 
+
+#{{{                    MARK:main
+#**************************************************************
 case "$fileToBeExecuted" in
 *.zsh)
     createTemplate zsh "$fileToBeExecuted"
@@ -77,3 +85,5 @@ case "$fileToBeExecuted" in
     exit 1
     ;;
 esac
+#}}}***********************************************************
+
