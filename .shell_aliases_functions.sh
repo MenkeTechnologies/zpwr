@@ -70,9 +70,6 @@ export PERL5LIB="$HOME/perl5/lib/perl5"
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
 export HISTSIZE=50000
 export HISTTIMEFORMAT=' %F %T _ '
-export ZPWR_BLUE="\x1b[37;44m"
-export ZPWR_RED="\x1b[31m"
-export ZPWR_RESET="\x1b[0m"
 export UMASK=077
 export LESS="-M -N -R -K -F -X"
 if [[ -z "$TMUX" ]]; then

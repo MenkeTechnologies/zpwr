@@ -157,4 +157,7 @@ export ZPWR_TMUX_REMOTE_PREFIX=b
 export ZPWR_D="$HOME/Desktop"
 export ZPWR_DOC="$HOME/Documents"
 export ZPWR_DL="$HOME/Downloads"
+export ZPWR_BLUE="\x1b[37;44m"
+export ZPWR_RED="\x1b[31m"
+export ZPWR_RESET="\x1b[0m"
 #}}}***********************************************************
