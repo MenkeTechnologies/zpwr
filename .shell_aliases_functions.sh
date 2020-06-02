@@ -61,7 +61,10 @@ export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
-source "$ZPWR_SCRIPTS/crossOSCommands.sh"
+source "$ZPWR_SCRIPTS/crossOSCommands.sh" || {
+    echo "where is $ZPWR_SCRIPTS/crossOSCommands.sh" >&2
+    return 1
+}
 export FORKED_DIR="$HOME/forkedRepos"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
