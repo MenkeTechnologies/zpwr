@@ -1151,6 +1151,7 @@ function execpy(){
     shift
     if [[ ! -f "$PYSCRIPTS/$script" ]]; then
         loggErr "$PYSCRIPTS/$script does not exist!"
+        return 1
     fi
     python3 "$PYSCRIPTS/$script" "$@"
 
