@@ -50,7 +50,6 @@ function chooseNvimVim(){
 #{{{                    MARK:Env Vars
 #**************************************************************
 export Z_DATA="$HOME/.z"
-test -f "$ZPWR_TOKEN_PRE" && source "$ZPWR_TOKEN_PRE" || touch "$ZPWR_TOKEN_PRE"
 #bash xtrace
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 #zsh xtrace
@@ -443,8 +442,6 @@ exists idea && {
     alias ic="idea create"
     alias il="idea list"
 }
-#**********************************************************************
-
 #**************************************************************
 #}}}
 
@@ -3067,5 +3064,10 @@ export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
 alias exa="$ZPWR_EXA_COMMAND"
 
 exists hexedit && alias he='hexedit -l 16'
+
+if ! isZsh; then
+    test -f "$ZPWR_TOKEN_PRE" && source "$ZPWR_TOKEN_PRE" || touch "$ZPWR_TOKEN_PRE"
+fi
+
 return 0
 #}}}***********************************************************
