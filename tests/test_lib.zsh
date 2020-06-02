@@ -8,7 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-ENV_FILE="$PWR/.zpwr_env.sh"
+ENV_FILE="$PWD/.zpwr_env.sh"
 ALIAS_FILE="$PWD/.shell_aliases_functions.sh"
 
 if [[ ! -f $ENV_FILE ]]; then
