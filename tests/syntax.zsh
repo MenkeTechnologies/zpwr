@@ -12,6 +12,18 @@
     load "test_lib.zsh"
 }
 
+@test '.zpwr.env.sh bash syntax check' {
+	test -f .zpwr_env.sh
+	run bash -n .zpwr_env.sh
+    assert $state equals 0
+}
+
+@test '.zpwr.env.sh zsh syntax check' {
+	test -f .zpwr_env.sh
+	run zsh -n .zpwr_env.sh
+    assert $state equals 0
+}
+
 @test '.powerlevel9kconfig.sh zsh syntax check' {
 	test -f .powerlevel9kconfig.sh
 	run zsh -n .powerlevel9kconfig.sh
