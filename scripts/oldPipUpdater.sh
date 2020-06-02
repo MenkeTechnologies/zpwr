@@ -12,8 +12,6 @@ source "$ZPWR_SCRIPTS/lib.sh" || {
     exit 1
 }
 
-export ZPWR_DELIMITER_CHAR='%'
-
 if exists python2;then
     outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 

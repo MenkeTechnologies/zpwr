@@ -395,15 +395,14 @@ alias tclsh="rlwrap tclsh"
 alias logs="sudo tail -f /var/log/**/*.log | ccze"
 alias beats="sudo tail -f /var/log/*beat/* | ccze"
 alias matr="cmatrix -C blue -abs"
-alias tm="python3 $PYSCRIPTS/tmux_starter.py"
-alias tmm="python3 $PYSCRIPTS/ssh_starter.py"
-alias tmm_notabs="python3 $PYSCRIPTS/complete_ssh_starter.py;"
-alias tmm_full="python3 $PYSCRIPTS/tabs.py;python3 $PYSCRIPTS/complete_ssh_starter.py;"
-alias inst="bash $ZPWR_SCRIPTS/tgzLocalInstaller.sh"
 #**********************************************************************
 
 #                           MARK:PYTHON ZPWR_SCRIPTS
 #**********************************************************************
+alias tm="execpy tmux_starter.py"
+alias tmm="execpy ssh_starter.py"
+alias tmm_notabs="execpy complete_ssh_starter.py;"
+alias tmm_full="execpy tabs.py; execpy complete_ssh_starter.py"
 alias mapit="execpy mapIt.py"
 alias ,,="execpy amazonSearch.py"
 alias shutpy="execpy shutdown.py"
@@ -427,6 +426,7 @@ eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
 #**********************************************************************
 #                           MARK:SHELL ZPWR_SCRIPTS
 #**********************************************************************
+alias inst="bash $ZPWR_SCRIPTS/tgzLocalInstaller.sh"
 alias ct="bash $ZPWR_SCRIPTS/createTextFile.sh"
 alias u="bash $ZPWR_SCRIPTS/upLoadPi.sh"
 alias u2="bash $ZPWR_SCRIPTS/upLoadPi2.sh"
@@ -1149,6 +1149,9 @@ function execpy(){
 
     script="$1"
     shift
+    if [[ ! -f "$PYSCRIPTS/$script" ]]; then
+        loggErr "$PYSCRIPTS/$script does not exist!"
+    fi
     python3 "$PYSCRIPTS/$script" "$@"
 
 }
