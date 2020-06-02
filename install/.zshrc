@@ -1,5 +1,4 @@
-    #...     ..      ..                                    ..
-  #x*8888x.:*8888: -"888:                            < .z@8"`
+    *8888x.:*8888: -"888:                            < .z@8"`
  #X   48888X `8888H  8888                 u.    u.    !@88E
 #X8x.  8888X  8888X  !888>       .u     x@88k u@88c.  '888E   u
 #X8888 X8888  88888   "*8%-   ud8888.  ^"8888""8888"   888E u@8NL
@@ -3560,6 +3559,7 @@ function uncompile(){
         "$HOME/.zlogin"
         "$ZSH_COMPDUMP"
         "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR_ENV_FILE"
         "$ZPWR_SCRIPTS/lib.sh"
     )
 
@@ -3611,6 +3611,7 @@ function recompile(){
         "$HOME/.zlogin"
         "$ZSH_COMPDUMP"
         "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR_ENV_FILE"
         "$ZPWR_SCRIPTS/lib.sh"
     )
 
