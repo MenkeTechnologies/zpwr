@@ -85,7 +85,7 @@ fi
 
 #{{{                    MARK:PATH
 #**************************************************************
-if echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
+if ! echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts"
 
     export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
