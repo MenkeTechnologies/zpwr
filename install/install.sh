@@ -14,8 +14,6 @@
 unset CDPATH
 
 VERSION="2.0.0"
-# get operating system type
-ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # resolve all symlinks
 ZPWR_INSTALL="$(pwd -P)"
 #normally ~/.zpwr
