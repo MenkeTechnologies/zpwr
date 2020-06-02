@@ -73,6 +73,10 @@ export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 source "$ZPWR_ENV_FILE" || {
     echo "where is $ZPWR_ENV_FILE" >&2
 }
+
+if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
+    mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports

@@ -25,6 +25,10 @@ source "$ZPWR_SCRIPTS/lib.sh" || {
     return 1
 }
 
+if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
+    mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
+fi
+
 function chooseNvimVim(){
 
     if [[ $ZPWR_USE_NEOVIM == true ]]; then

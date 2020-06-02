@@ -136,28 +136,31 @@ export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
 # log file
 export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 # default OMZ theme if Powerlevel 9k not used
-
-if [[ $ZPWR_EXA_EXTENDED == true ]]; then
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
-else
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
-fi
-#tmux prefix on outer session
-if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-    mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
-fi
+export ZPWR_DEFAULT_OMZ_THEME=simonoff
+# temp files
 export ZPWR_TEMPFILE="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-$USER"
 export ZPWR_TEMPFILE1="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-1$USER"
 export ZPWR_TEMPFILE2="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER"
 export ZPWR_TEMPFILE3="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-3$USER"
 export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"
+# SQL temp files for use with learning collection
 export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
+# tmux prefix on outer session
 export ZPWR_TMUX_PREFIX=x
+# tmux prefix on inner session
 export ZPWR_TMUX_REMOTE_PREFIX=b
+# common dirs
 export ZPWR_D="$HOME/Desktop"
 export ZPWR_DOC="$HOME/Documents"
 export ZPWR_DL="$HOME/Downloads"
+# common colors
 export ZPWR_BLUE="\x1b[37;44m"
 export ZPWR_RED="\x1b[31m"
 export ZPWR_RESET="\x1b[0m"
+# command for exa (replaces ls)
+if [[ $ZPWR_EXA_EXTENDED == true ]]; then
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
+else
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
+fi
 #}}}***********************************************************
