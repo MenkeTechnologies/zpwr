@@ -201,6 +201,12 @@ forgit_clean=fgclean
 forgit_stash_show=fgss
 #}}}***********************************************************
 
+#{{{                    MARK:grc colorizer
+#**************************************************************
+#colors for common commands
+test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
+#}}}***********************************************************
+
 #{{{                    MARK:source tokens
 #**************************************************************
 test -f "$ZPWR_TOKEN_PRE" &&
@@ -247,9 +253,6 @@ if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
 else
     test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
 fi
-
-#colors for common commands
-test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 # fish like menu select search
 zmodload -i zsh/complist
