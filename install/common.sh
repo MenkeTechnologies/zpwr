@@ -22,20 +22,23 @@ if ! test -f common.sh; then
     exit 1
 fi
 
-ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
-
 # resolve all symlinks
 ZPWR_INSTALL="$(pwd -P)"
 ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
 ZPWR_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
-
-export ZPWR_DELIMITER_CHAR='%'
 #}}}***********************************************************
 
 #{{{                    MARK:installer lib fns
 #**************************************************************
+
+if source "$ZPWR_BASE_DIR/.zpwr_env.sh";then
+    echo "loaded $ZPWR_BASE_DIR/.zpwr_env.sh"
+else
+    echo "where is ZPWR_BASE_DIR/.zpwr_env.sh" >&2
+    exit 1
+fi
 
 if source "$ZPWR_BASE_SCRIPTS/lib.sh";then
     echo "loaded $ZPWR_BASE_SCRIPTS/lib.sh"

@@ -17,6 +17,7 @@ if test -z "$ZPWR";then
     test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
     source "$ZPWR_ENV_FILE" || {
         echo "where is $ZPWR_ENV_FILE" >&2
+        return 1
     }
 fi
 #}}}***********************************************************
