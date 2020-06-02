@@ -408,6 +408,21 @@ alias ud=" execpy udemy.py"
 alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit0} if /inet\\s/ and !/127/'"
 
 alias pgrep='pgrep -l'
+alias dl="cd $ZPWR_DL"
+alias docu="cd $ZPWR_DOC"
+alias mus='cd $HOME/Music'
+alias jobs="jobs -l"
+alias sd="clear;ssh d "
+alias cl=clear
+alias mkdir='mkdir -pv'
+alias exa="$ZPWR_EXA_COMMAND"
+exists hexedit && alias he='hexedit -l 16'
+alias fh='f !$'
+alias gh=openmygh
+eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
+if [[ -d "$FORKED_DIR" ]]; then
+    alias fp="cd $FORKED_DIR"
+fi
 #**********************************************************************
 #                           MARK:SHELL ZPWR_SCRIPTS
 #**********************************************************************
@@ -419,18 +434,11 @@ alias sy="bash $ZPWR_SCRIPTS/sync.sh"
 alias sf="bash $ZPWR_SCRIPTS/directoryContentsSize.sh"
 alias sc='cd $ZPWR_SCRIPTS'
 alias bluef='source $ZPWR_SCRIPTS/blueText.sh'
-alias dl="cd $ZPWR_DL"
-alias docu="cd $ZPWR_DOC"
-alias mus='cd $HOME/Music'
-alias jobs="jobs -l"
 alias u8="bash $ZPWR_SCRIPTS/updater.sh"
 alias u8r="bash -l $ZPWR_SCRIPTS/updater.sh -s"
-alias sd="clear;ssh d "
 alias gitgo='$ZPWR_SCRIPTS/gitgo.sh'
 alias watchGit='bash $ZPWR_SCRIPTS/watchServiceFSWatchGit.sh'
 alias watchPiWeb='bash $ZPWR_SCRIPTS/watchServiceFSWatchPiWeb.sh'
-alias cl=clear
-alias mkdir='mkdir -pv'
 #**********************************************************************
 #                           MARK:REMOTE SHELLS ZPWR_SCRIPTS
 #**********************************************************************
@@ -1131,8 +1139,6 @@ function f(){
     fi
 }
 
-alias fh='f !$'
-
 function execpy(){
 
     if [[ -z "$1" ]]; then
@@ -1727,9 +1733,6 @@ function openmygh(){
     fi
 
 }
-alias gh=openmygh
-
-eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
 
 function zpwr(){
     if test -z $1;then
@@ -1742,17 +1745,11 @@ function zpwr(){
 function zp(){
 
     if test -z $1;then
-        cd "$ZPWR_REPO"
+        cd "$ZPWR"
     else
         zpwr "$@"
     fi
 }
-
-export ZPWR_REPO="$HOME/.$ZPWR_REPO_NAME"
-
-if [[ -d "$FORKED_DIR" ]]; then
-    alias fp="cd $FORKED_DIR"
-fi
 
 function zpz(){
 
@@ -3062,9 +3059,6 @@ export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
 
 #{{{                    MARK:Global Alias
 #**************************************************************
-alias exa="$ZPWR_EXA_COMMAND"
-
-exists hexedit && alias he='hexedit -l 16'
 
 if ! isZsh; then
     test -f "$ZPWR_TOKEN_PRE" && source "$ZPWR_TOKEN_PRE" || touch "$ZPWR_TOKEN_PRE"
