@@ -276,7 +276,7 @@ plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround
 
 Alternatively, change these env vars to false in `~/.zpwr/local/.tokens.sh`.  The first controls all expansion in any position.
 The second variable controls expansion in second position.  For example with sudo/zpwr/env in the first position and the alias to expand in the second position on the command line.
-> ~/.zshrc
+> ~/.zpwr/.zpwr_env.sh
 ```sh
 # aliases expand in first position
 export ZPWR_EXPAND=true
@@ -319,7 +319,7 @@ export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
 
 ## Environment Variables
-These are environment variables set in `~/.zshrc` which you can override in your `~/.zpwr/local/.tokens.sh` to customize the behavior of the terminal setup.
+These are environment variables set in `~/.zpwr/.zpwr_env.sh` which you can override in your `~/.zpwr/local/.tokens.sh` to customize the behavior of the terminal setup.
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file

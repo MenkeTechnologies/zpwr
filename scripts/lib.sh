@@ -12,28 +12,13 @@
 # do not want any surprises when relative cd to other dirs
 unset CDPATH
 
-test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
-test -z "$ZPWR_LOCAL" && export ZPWR_LOCAL="$ZPWR/local"
-test -z "$ZPWR_OS_TYPE" && export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
-test -z "$ZPWR_DELIMITER_CHAR" && export ZPWR_DELIMITER_CHAR='%'
-test -z "$ZPWR_GITHUB_ACCOUNT" && export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
-test -z "$ZPWR_GITHUB_URL" && export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
-test -z "$ZPWR_REPO_NAME" && export ZPWR_REPO_NAME="zpwr"
-test -z "$ZPWR_COMPLETION_DIR" && export ZPWR_COMPLETION_DIR="zsh-more-completions"
-test -z "$ZPWR_VIM_KEYBINDINGS" && export ZPWR_VIM_KEYBINDINGS="$ZPWR_LOCAL/zpwrVimKeybindings.txt"
-test -z "$ZPWR_ALL_KEYBINDINGS" && export ZPWR_ALL_KEYBINDINGS="$ZPWR_LOCAL/zpwrKeybindings.txt"
-test -z "$ZPWR_LOG_UNDER_COLOR" && export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
-test -z "$ZPWR_LOG_QUOTE_COLOR" && export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
-test -z "$ZPWR_LOG_DATE_COLOR" && export ZPWR_LOG_DATE_COLOR='\x1b[0;37;42m'
-test -z "$ZPWR_LOG_MSG_COLOR" && export ZPWR_LOG_MSG_COLOR='\x1b[0;37;43m'
-test -z "$ZPWR_CD_AUTO_LS" && export ZPWR_CD_AUTO_LS=true
-test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$ZPWR/scripts"
-test -z "$ZPWR_SCRIPTS_MAC" && export ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
-test -z "$ZPWR_EMACS" && export ZPWR_EMACS='command emacs -nw'
-test -z "$ZPWR_ALL_GIT_DIRS" && export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
-test -z "$ZPWR_LOGFILE" && export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
-test -z "$ZPWR_TOKEN_PRE" && export ZPWR_TOKEN_PRE="$ZPWR_LOCAL/.tokens.sh"
-test -z "$ZPWR_HIDDEN_DIR_TEMP" && export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
+if test -z "$ZPWR";then
+    export ZPWR="$HOME/.zpwr"
+    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+    source "$ZPWR_ENV_FILE" || {
+        echo "where is $ZPWR_ENV_FILE" >&2
+    }
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:installer lib fns
