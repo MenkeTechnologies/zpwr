@@ -2756,10 +2756,10 @@ fi
 
 #set right prompt string during continuation
 RPS2='+%N:%i:%^'
-export PS3=$'\e[1;34m-->>>> \e[0m'
+# zsh xtrace prompt
+export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 #change OMZ history size in memory
-export HISTSIZE=10000000
-HISTSIZE=999999999
+export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
 #change OMZ history file size
 

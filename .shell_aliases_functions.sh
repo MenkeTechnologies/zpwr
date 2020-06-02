@@ -54,10 +54,9 @@ function chooseNvimVim(){
 #{{{                    MARK:Env Vars
 #**************************************************************
 export Z_DATA="$HOME/.z"
-#bash xtrace
+export PS3=$'\e[1;34m-->>>> \e[0m'
+# bash xtrace prompt
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
-#zsh xtrace
-export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 export NMON='mndckt'
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
@@ -86,7 +85,7 @@ fi
 
 #{{{                    MARK:PATH
 #**************************************************************
-echo "$PATH" | command grep -isq $ZPWR_SCRIPTS || {
+if echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts"
 
     export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
@@ -173,7 +172,7 @@ echo "$PATH" | command grep -isq $ZPWR_SCRIPTS || {
     test -s \
     "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" &&
     source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
-}
+fi
 #}}}
 
 #{{{                          MARK:ALIASES
@@ -216,14 +215,6 @@ fi
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
-
-test -d "$ZPWR_D" && alias d="cd $ZPWR_D"
-
-if [[ -d "/var/www/html" ]];then
-    alias we="cd /var/www/html"
-elif [[ -d "/usr/local/var/www" ]];then
-    alias we="cd /usr/local/var/www"
-fi
 
 exists fc && alias please='sudo $(fc -ln -1)'
 exists spotify && {
@@ -276,6 +267,16 @@ alias e="cd /etc"
 alias ue="cd /usr/local/etc"
 alias de="cd /dev"
 alias a="cd $HOME"
+test -d "$ZPWR_D" && alias d="cd $ZPWR_D"
+
+if [[ -d "/var/www/html" ]];then
+    alias we="cd /var/www/html"
+elif [[ -d "/usr/local/var/www" ]];then
+    alias we="cd /usr/local/var/www"
+fi
+if [[ -d "$FORKED_DIR" ]]; then
+    alias d="cd $FORKED_DIR"
+fi
 alias k="pkill"
 alias ka="killall"
 alias sin="./configure && make && sudo make install"
@@ -423,9 +424,6 @@ exists hexedit && alias he='hexedit -l 16'
 alias fh='f !$'
 alias gh=openmygh
 eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
-if [[ -d "$FORKED_DIR" ]]; then
-    alias fp="cd $FORKED_DIR"
-fi
 #**********************************************************************
 #                           MARK:SHELL ZPWR_SCRIPTS
 #**********************************************************************
