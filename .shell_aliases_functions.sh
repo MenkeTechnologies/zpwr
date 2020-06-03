@@ -2488,6 +2488,7 @@ function pygmentcolors(){
 }
 
 function detachall(){
+
     tmux list-clients | tr -d : |
         perl -ane '`tmux detach-client -t $F[0]`'
 }
