@@ -2283,6 +2283,9 @@ function ff(){
         for (( i = 0; i < 10;++i )); do
             eval "$@"
         done
+    else
+       loggErr "ff <cmd> to run <cmd> 10 times" 
+       return 1
     fi
 }
 
