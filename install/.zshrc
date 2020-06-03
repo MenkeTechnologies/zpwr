@@ -480,21 +480,26 @@ function editorRecent(){
 }
 
 function sudoEmacsRecent(){
+
     sudoEditorRecent "$ZPWR_EMACS"
 }
 
 function emacsRecent(){
+
     editorRecent "$ZPWR_EMACS"
 }
 function sudoVimRecent(){
+
     sudoEditorRecent "$EDITOR"
 }
 
 function vimRecent(){
+
     editorRecent "$EDITOR"
 }
 
 function scriptCount(){
+
     command ls \
         "$ZPWR_SCRIPTS/"*.{sh,zsh,pl,py} \
         "$ZPWR_SCRIPTS/macOnly/"*.{sh,zsh,pl,py} |
@@ -881,6 +886,7 @@ function fzfFilesearchVerbEdit(){
 }
 
 function zpwrZstyle() {
+
     sel=$(zstyle -L | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m)
 
     if [[ -n "$sel" ]]; then
@@ -893,6 +899,7 @@ function zpwrZstyle() {
 
 
 function fzfFilesearchVerb(){
+
     local editor
     editor="$1"
 
@@ -1381,25 +1388,32 @@ function locateFzfNoZLE(){
 }
 
 function locateFzfEditNoZLEC(){
+
     locateFzfEditNoZLE "c"
 }
 
 function locateFzfNoZLEC(){
+
     locateFzfNoZLE "c"
 }
+
 function locateFzfEditNoZLEVim(){
+
     locateFzfEditNoZLE "$EDITOR"
 }
 
 function locateFzfNoZLEVim(){
+
     locateFzfNoZLE "$EDITOR"
 }
 
 function locateFzfEditNoZLEEmacs(){
+
     locateFzfEditNoZLE "$ZPWR_EMACS"
 }
 
 function locateFzfNoZLEEmacs(){
+    
     locateFzfNoZLE "$ZPWR_EMACS"
 }
 
@@ -1447,26 +1461,32 @@ function findFzfNoZLE(){
 }
 
 function findFzfEditNoZLEC(){
+
     findFzfEditNoZLE "c"
 }
 
 function findFzfNoZLEC(){
+
     findFzfNoZLE "c"
 }
 
 function findFzfEditNoZLEVim(){
+
     findFzfEditNoZLE "$EDITOR"
 }
 
 function findFzfNoZLEVim(){
+
     findFzfNoZLE "$EDITOR"
 }
 
 function findFzfEditNoZLEEmacs(){
+
     findFzfEditNoZLE "$ZPWR_EMACS"
 }
 
 function findFzfNoZLEEmacs(){
+    
     findFzfNoZLE "$ZPWR_EMACS"
 }
 
@@ -2997,6 +3017,7 @@ function _fzf_complete_killall() {
 
 # mvim ;<tab>
 function _fzf_complete_mvim() {
+
   _fzf_complete '-m' "$@" < <(
     perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
     )
@@ -3566,6 +3587,7 @@ fi
 autoload -Uz zrecompile
 
 function uncompile(){
+
     local dir files sudoFiles
 
     files=(
@@ -3618,6 +3640,7 @@ function uncompile(){
 }
 
 function recompile(){
+
     local dir files sudoFiles
 
     files=(
@@ -3661,6 +3684,7 @@ function recompile(){
 }
 
 function zshrcsearch(){
+
     if [[ -z "$1" ]]; then
         zsh -ilvx -c false &> $ZPWR_TEMPFILE4
         less $ZPWR_TEMPFILE4
@@ -3824,18 +3848,22 @@ function getGtags(){
 
 
 function emacsZpwrGtags(){
+
     getGtags "$ZPWR_EMACS"
 }
 
 function vimZpwrGtags(){
+
     getGtags "$EDITOR"
 }
 
 function emacsZpwrGtagsEdit(){
+
     getGtagsEdit "$ZPWR_EMACS"
 }
 
 function vimZpwrGtagsEdit(){
+
     getGtagsEdit "$EDITOR"
 }
 
@@ -3862,6 +3890,7 @@ function evalTester(){
 }
 
 function regenHistory() {
+
     prettyPrint "Regen $HISTFILE"
     (
         builtin cd "$HOME"
@@ -3975,6 +4004,7 @@ unset GROOVY_HOME # when set this messes up classpath
 
 # override plugin def
 function magic-enter () {
+
   # If commands are not already set, use the defaults
   [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status -u ."
   [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."

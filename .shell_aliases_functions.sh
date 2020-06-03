@@ -201,6 +201,7 @@ alias ca='cat -n'
 alias sa='sudo cat -n'
 alias ra='sudo rm -rf --'
 alias die='sudo kill -9 --'
+alias da=detachall
 
 if exists emacs; then
     alias emacs='emacs -nw'
@@ -458,6 +459,7 @@ exists idea && {
 #{{{                    MARK:Shell functions
 #**************************************************************
 function rm(){
+
     command rm -v "$@"
 }
 
@@ -472,6 +474,7 @@ function em(){
 }
 
 function emm() {
+
     local str endstr
     tmux selectp -t emacs:0.0
     tmux send-keys -t emacs:0.0 C-c Escape
@@ -498,6 +501,7 @@ function emm() {
 }
 
 function loadJenv() {
+
     if exists jenv;then
         eval "$(jenv init -)"
         jenv enable-plugin export &>/dev/null
@@ -723,7 +727,7 @@ function s(){
 function xx(){
 
     local counter cmd DONE
-    
+
     cmd="$1"
     test -z "$2" && counter=100 || counter="$2"
 
@@ -737,7 +741,7 @@ function xx(){
 }
 
 function urlSafe(){
-    
+
     cat | base64 | tr '+/=' '._-'
 }
 
@@ -1203,7 +1207,7 @@ function gil(){
     fi
 
     vim "$file"
-    
+
 }
 
 function contribCountDirs(){
@@ -1740,6 +1744,7 @@ function openmygh(){
 }
 
 function zpwr(){
+
     if test -z $1;then
         openmygh "$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME"
     else
@@ -2482,7 +2487,6 @@ function pygmentcolors(){
     done
 }
 
-alias da=detachall
 function detachall(){
     tmux list-clients | tr -d : |
         perl -ane '`tmux detach-client -t $F[0]`'
@@ -2993,6 +2997,7 @@ function changeGitAuthorEmail(){
 }
 
 function zpwrUninstall() {
+
     echo sudo rm -rf -- \
         "$ZPWR" \
         "$HOME/.tmux" \

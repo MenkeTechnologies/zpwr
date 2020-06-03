@@ -42,12 +42,14 @@ function loggErr(){
 }
 
 function loggConsolePrefix(){
+
     prettyPrint "$ZPWR_CHAR_LOGO $*"
     logg "$ZPWR_CHAR_LOGO $*"
 
 }
 
 function loggConsole(){
+
     prettyPrint "$*"
     logg "$*"
 
@@ -103,11 +105,13 @@ function loggDebug(){
 }
 
 function fail(){
+
         echo "failure due to $1" >&2
         exit 1
 }
 
 function fileMustExist(){
+
     if [[ ! -f "$1" ]]; then
         echo "where is the file $1?" >&2
         exit 1
@@ -115,6 +119,7 @@ function fileMustExist(){
 }
 
 function goInstallerDir(){
+
     local ret=0
     builtin cd "$ZPWR_INSTALL" || ret=1
 
@@ -130,6 +135,7 @@ function goInstallerDir(){
 
 
 function goInstallerOutputDir(){
+
     local ret=0
     builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
 
@@ -143,7 +149,7 @@ function goInstallerOutputDir(){
     fi
 }
 
-isZsh(){
+function isZsh(){
 
     if command ps -p $$ | command grep -qs zsh; then
         return 0
@@ -153,7 +159,9 @@ isZsh(){
 }
 
 if isZsh; then
+
     if ! type -- exists>/dev/null 2>&1; then
+
         function exists(){
 
             #alternative is command -v
@@ -172,6 +180,7 @@ else
 fi
 
 function update(){
+
     exists "$1" || {
 
         if [[ $2 == mac ]]; then
@@ -193,6 +202,7 @@ function update(){
 }
 
 function upgrade(){
+
     if [[ $1 == mac ]]; then
         brew update
         brew upgrade
@@ -213,6 +223,7 @@ function upgrade(){
 }
 
 function refresh(){
+
     if [[ $1 == mac ]]; then
         brew update
     elif [[ $1 == debian ]];then
@@ -279,6 +290,7 @@ function prettyPrint(){
 }
 
 function prettyPrintBoxStdin(){
+
     local perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
@@ -290,6 +302,7 @@ function prettyPrintBoxStdin(){
 }
 
 function prettyPrintBox(){
+
     local perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
@@ -298,12 +311,14 @@ function prettyPrintBox(){
 }
 
 function turnOffDebugging(){
+
     set +x
     set +v
     exec 2> /dev/tty
 }
 
 function turnOnDebugging(){
+
     set -x
     set -v
     exec 2>> >(tee "$ZPWR_INSTALLER_OUTPUT/logfile.txt")
@@ -311,6 +326,7 @@ function turnOnDebugging(){
 }
 
 function alternatingPrettyPrint(){
+
     counter=0
 
     if [[ -z $1 ]]; then
@@ -340,7 +356,8 @@ function alternatingPrettyPrint(){
 
 }
 
-gitRepoUpdater() {
+function gitRepoUpdater() {
+
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then
