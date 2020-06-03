@@ -246,6 +246,7 @@ addDependenciesMac(){
 #**************************************************************
 
 function usage(){
+
     echo "Usage :  $0 [options] [--]
 
     Options:
@@ -259,6 +260,7 @@ function usage(){
 
 
 function showDeps(){
+
     bash "$ZPWR_INSTALL/scripts/about.sh" 2>/dev/null
     {
         printf "Installing ${#dependencies_ary[@]} packages on $distroName: "
@@ -275,6 +277,7 @@ files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell
 dirs=(.zpwr/scripts .config/htop .config/powerline/themes/tmux)
 
 function backup(){
+
     test -d "$BACKUP_DIR" || mkdir -p "$BACKUP_DIR"
     for file in ${files[@]} ; do
         test -f "$HOME/$file" && cp "$HOME/$file" "$BACKUP_DIR"
@@ -285,6 +288,7 @@ function backup(){
 }
 
 function warnOverwrite(){
+
     prettyPrintBox "The following will be overwritten: .zshrc, .tmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.conf, .shell_aliases_functions.sh in $HOME"
     prettyPrintBox "These files if they exist will be backed to $BACKUP_DIR"
     prettyPrintBoxStdin <<EOF
@@ -300,12 +304,14 @@ EOF
 }
 
 function warnSudo(){
+
     prettyPrintBox "It is highly recommended to run 'sudo visudo' to allow noninteractive install.  This allows running sudo without a password.  The following line would be added to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:ALL"
     proceed
 
 }
 
 function pluginsinstall(){
+
     goInstallerDir
     fileMustExist plugins_install.sh
     bash plugins_install.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
@@ -314,6 +320,7 @@ function pluginsinstall(){
 }
 
 function ycminstall(){
+
     goInstallerDir
     fileMustExist ycm_install.sh
     bash ycm_install.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
@@ -322,6 +329,7 @@ function ycminstall(){
 }
 
 function cargoinstall(){
+
     goInstallerDir
     fileMustExist rustupinstall.sh
     bash rustupinstall.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &

@@ -14,19 +14,12 @@ fi
 
 source common.sh
 
-installVimPlugin(){
-    echo "Installing vim plugin $1."
-    git clone "https://github.com/$1.git"
-}
-
 if [[ ! -d "$HOME/.vim/bundle" ]]; then
     mkdir -p "$HOME/.vim/bundle"
 fi
 
 if builtin cd "$HOME/.vim/bundle"; then
-    while read repo; do
-        installVimPlugin "$repo"
-    done < "$ZPWR_INSTALL/.vimbundle"
+    installGitHubPluginFromFile "$ZPWR_INSTALL/.vimbundle"
 
     echo "Installing Taglist Plugin"
     cp -R "$ZPWR_INSTALL/taglist_46" .

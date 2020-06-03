@@ -21,6 +21,7 @@ prettyPrintBox "installing gdb dashboard"
 wget -P ~ https://git.io/.gdbinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
+
     prettyPrintBox "Upgrading pip"
     sudo python3 -m pip install --upgrade pip
     prettyPrintBox "Installing psutil for Python Glances"
@@ -70,6 +71,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 
     prettyPrintBox "Installing vim-vint"
     sudo python3 -m pip install vim-vint
+
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
     if [[ -z $distroName ]]; then
@@ -167,8 +169,11 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
     prettyPrintBox "Installing vim-vint"
     sudo python3 -m pip install vim-vint
+
 else
+
     if [[ "$ZPWR_OS_TYPE" == "freebsd" ]]; then
+
         sudo python3 -m pip
         sudo python3 -m python3 -m pip install --upgrade
 
@@ -186,7 +191,7 @@ else
 
         python3 -c 'import pip' && sudo pip3 install powerline-status || sudo python3 -m pip install powerline-status
         python3 -c 'import pip' && sudo pip3 install powerline-mem-segment || sudo python3 -m pip install powerline-mem-segment
-        
+
         prettyPrintBox "Installing Tmux Powerline"
 
         tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"

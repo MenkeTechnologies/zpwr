@@ -22,6 +22,7 @@ fi
 goInstallerOutputDir
 
 function installNpmRpm(){
+
     prettyPrintBox "curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -"
     curl -sL https://rpm.nodesource.com/setup_13.x | sudo -E bash -
     prettyPrintBox "install nodejs"
@@ -31,7 +32,9 @@ function installNpmRpm(){
     prettyPrintBox "install build-essential"
     update "build-essential" "$distroFamily"
 }
+
 function installNpmDeb(){
+
     prettyPrintBox "curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
     prettyPrintBox "install nodejs"

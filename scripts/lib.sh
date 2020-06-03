@@ -149,6 +149,35 @@ function goInstallerOutputDir(){
     fi
 }
 
+function installGitHubPluginFromFile(){
+
+    local file
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an repo file"
+        return 1
+    fi
+
+    file="$1"
+
+    while read repo; do
+        installGitHubPlugin "$repo"
+    done < "$file"
+
+}
+
+function installGitHubPlugin(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an repo"
+        return 1
+    fi
+
+
+    echo "Installing plugin $1."
+    git clone "https://github.com/$1.git"
+}
+
 function isZsh(){
 
     if command ps -p $$ | command grep -qs zsh; then
