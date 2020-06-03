@@ -468,12 +468,6 @@ export ZPWR_DL="$HOME/Downloads"
 export ZPWR_BLUE="\x1b[37;44m"
 export ZPWR_RED="\x1b[31m"
 export ZPWR_RESET="\x1b[0m"
-# command for exa (replaces ls)
-if [[ $ZPWR_EXA_EXTENDED == true ]]; then
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
-else
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
-fi
 ```
 
 ## Tests

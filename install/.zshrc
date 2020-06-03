@@ -216,6 +216,13 @@ test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 test -f "$ZPWR_TOKEN_PRE" &&
     source "$ZPWR_TOKEN_PRE" ||
     touch "$ZPWR_TOKEN_PRE"
+
+# command for exa (replaces ls)
+if [[ $ZPWR_EXA_EXTENDED == true ]]; then
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
+else
+    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:post token
