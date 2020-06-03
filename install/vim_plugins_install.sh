@@ -19,7 +19,7 @@ if [[ ! -d "$HOME/.vim/bundle" ]]; then
 fi
 
 if builtin cd "$HOME/.vim/bundle"; then
-    installGitHubPluginFromFile "$ZPWR_INSTALL/.vimbundle"
+    installGitHubPluginsFromFile "$ZPWR_INSTALL/.vimbundle"
 
     echo "Installing Taglist Plugin"
     cp -R "$ZPWR_INSTALL/taglist_46" .

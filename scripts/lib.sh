@@ -149,7 +149,7 @@ function goInstallerOutputDir(){
     fi
 }
 
-function installGitHubPluginFromFile(){
+function installGitHubPluginsFromFile(){
 
     local file
 
