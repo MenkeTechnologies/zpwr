@@ -273,6 +273,7 @@ function refresh(){
 }
 
 function prettyPrintInstaller(){
+
     (( ++INSTALL_COUNTER ))
     printf "\x1b[32;1m"
     perl -le "print '#'x80"
@@ -285,6 +286,7 @@ function prettyPrintInstaller(){
 }
 
 function needSudo(){
+
     if [[ ! -w "$1" ]]; then
         return 0
     else
@@ -293,6 +295,7 @@ function needSudo(){
 }
 
 function proceed(){
+
     printf "Proceed?(y/n) >>> "
     read -n1
     echo
