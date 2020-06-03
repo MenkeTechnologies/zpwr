@@ -113,7 +113,7 @@ export ZPWR_FZF_LOGO="<<)ZPWR(>>"
 # to activate sending to numbered tmux panes
 export ZPWR_SEND_KEYS_PANE=-1
 # when true sends every char to synced panes
-# when false does not send enteifypanes
+# when false does not send enter and Control to synced panes
 export ZPWR_SEND_KEYS_FULL=false
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 export ZPWR_NVIMINFO="$ZPWR_LOCAL/.nviminfo"
