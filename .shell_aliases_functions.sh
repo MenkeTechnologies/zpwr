@@ -276,7 +276,7 @@ elif [[ -d "/usr/local/var/www" ]];then
     alias we="cd /usr/local/var/www"
 fi
 if [[ -d "$FORKED_DIR" ]]; then
-    alias d="cd $FORKED_DIR"
+    alias fp="cd $FORKED_DIR"
 fi
 alias k="pkill"
 alias ka="killall"
