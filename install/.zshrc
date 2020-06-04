@@ -2549,6 +2549,7 @@ exists zff || alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL
 exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
 exists zu8 || alias zu8='zpwr updateall'
+exists zua || alias zua='zpwr updateall zpwr regen'
 
 function tabNum() {
     echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
