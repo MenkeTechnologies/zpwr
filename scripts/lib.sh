@@ -118,6 +118,39 @@ function fileMustExist(){
     fi
 }
 
+function isGitDir(){
+
+    command git rev-parse --git-dir 2> /dev/null 1>&2
+}
+
+function isGitDirMessage(){
+
+    if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
+        printf "\x1b[0;1;31m"
+        loggErr "NOT GIT DIR: $(pwd -P)"
+        printf "\x1b[0m"
+        return 1
+    fi
+}
+
+function gil(){
+
+    if ! isGitDir; then
+       loggErr "not in a git dir."
+       return 1
+    fi
+
+    local file=".git/info/exclude"
+
+    if [[ ! -f "$file" ]]; then
+       loggErr "$file must exist"
+       return 1
+    fi
+
+    vim "$file"
+
+}
+
 function goInstallerDir(){
 
     local ret=0

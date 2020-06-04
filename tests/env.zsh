@@ -92,6 +92,36 @@
     assert $? equals 0
 }
 
+@test 'exists zsh' {
+    run exists zsh
+    assert $? equals 0
+}
+
+@test 'exists isGitDir' {
+    run exists isGitDir
+    assert $? equals 0
+}
+
+@test 'isGitDir works' {
+    run isGitDir
+    assert $? equals 0
+}
+
+@test 'exists isZsh' {
+    run exists isZsh
+    assert $? equals 0
+}
+
+@test 'exists prettyPrint' {
+    run exists prettyPrint
+    assert $? equals 0
+}
+
+@test 'prettyPrint works' {
+    run prettyPrint "hello world"
+    assert $? equals 0
+}
+
 @test 'exists fn' {
     run type exists
     assert $? equals 0
