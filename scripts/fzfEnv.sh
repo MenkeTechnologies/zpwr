@@ -47,16 +47,16 @@ esac
 {
 case \$cmdType in
     (alias)
-        command grep -m1 -Fa "alias \$file" "${ZPWR_ENV}Value.txt"
+        command grep -m1 -Fa "alias \$file=" "${ZPWR_ENV}Value.txt"
         ;;
     (param)
-        command grep -m1 -Fa "export \$file" "${ZPWR_ENV}Value.txt"
+        command grep -m1 -Fa "export \$file=" "${ZPWR_ENV}Value.txt"
         ;;
     (builtin)
-        command grep -m1 -Fa "\$file" | grep -F "shell builtin" "${ZPWR_ENV}Value.txt"
+        command grep -m1 -Fa "\$file" | grep -F "is a shell builtin" "${ZPWR_ENV}Value.txt"
         ;;
     (resword)
-        command grep -m1 -Fa "\$file" | grep -F "reserved word" "${ZPWR_ENV}Value.txt"
+        command grep -m1 -Fa "\$file" | grep -F "is a reserved word" "${ZPWR_ENV}Value.txt"
         ;;
     (command)
         if test -f \$file;then
