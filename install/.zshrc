@@ -2522,11 +2522,7 @@ function globalAliasesInit(){
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${ZPWR_TABSTOP}m${ZPWR_TABSTOP}\\x1b[0m"
 
 
-    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v='| pbcopy -pboard general'
-    else
-        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v='| xclip -selection clipboard'
-    fi
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v="| ${=ZPWR_COPY_CMD}"
 }
 
 globalAliasesInit
