@@ -3561,6 +3561,9 @@ autoload -Uz zrecompile
 
 function uncompile(){
 
+    emulate -L zsh
+    setopt noglob
+
     local dir files sudoFiles
 
     files=(
@@ -3577,7 +3580,7 @@ function uncompile(){
         /etc/profile
         /etc/zshrc
         /etc/profile.env
-        )
+    )
 
     prettyPrint "deleting all compiled configs"
 
