@@ -11,6 +11,10 @@
 ENV_FILE="$PWD/.zpwr_env.sh"
 ALIAS_FILE="$PWD/.shell_aliases_functions.sh"
 ZPWR_VERBS_FILE="$PWD/scripts/zpwr.zsh"
+ZPWR_FN_FILE="$PWD/scripts/lib.sh"
+TEST_FILE=tests/testfile
+TOKENS_FILE=local/.tokens.sh
+
 
 if [[ ! -f $ENV_FILE ]]; then
     error "$ENV_FILE does not exist"
@@ -30,8 +34,11 @@ fi
 
 load $ZPWR_VERBS_FILE
 
+if [[ ! -f $ZPWR_FN_FILE ]]; then
+    error "$ZPWR_FN_FILE does not exist"
+fi
 
-TEST_FILE=tests/testfile
-TOKENS_FILE=local/.tokens.sh
+load $ZPWR_FN_FILE
+
 
 setopt nullglob

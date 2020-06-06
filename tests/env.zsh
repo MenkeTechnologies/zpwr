@@ -80,6 +80,31 @@
     assert $? equals 0
 }
 
+@test 'isZsh' {
+    run isZsh
+    assert $state equals 0
+}
+
+@test 'exists isZsh' {
+    run exists isZsh
+    assert $state equals 0
+}
+
+@test 'exists' {
+    run exists prettyPrint
+    assert $state equals 0
+}
+
+@test 'prettyPrintBox' {
+    run prettyPrintox test
+    assert $state equals 0
+}
+
+@test 'prettyPrint' {
+    run prettyPrint test
+    assert $state equals 0
+}
+
 @test 'www no args' {
     run www
     assert $state equals 1
