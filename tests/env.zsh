@@ -29,7 +29,19 @@
     assert "$output" contains fetch
     assert "$output" contains push
 }
+
+@test 'zpwr junk verb 1' {
+    run zpwr junk &>/dev/null
+    assert $state equals 1
+}
+
+@test 'zpwr junk verb 2' {
+    run zpwr 111 &>/dev/null
+    assert $state equals 1
+}
+
 @test 'ZPWR' {
+
     test -n $ZPWR
     assert $? equals 0
 }

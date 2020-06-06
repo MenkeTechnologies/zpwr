@@ -248,6 +248,7 @@ if [[ -n "$verb" ]]; then
 
     if [[ $found == false ]]; then
         prettyPrint "Unknown subcommand: '$verb'"
+        return 1
     fi
 fi
 
