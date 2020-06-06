@@ -504,7 +504,7 @@ function loadJenv() {
 
     if exists jenv;then
         eval "$(jenv init -)"
-        jenv enable-plugin export &>/dev/null
+        jenv enable-plugin export > /dev/null 2>&1
         prettyPrint "jenv loaded"
         if [[ -n "$1" ]]; then
             jenv "$@"
@@ -705,13 +705,13 @@ function s(){
         if [[ $sec_cmd == s ]]; then
             {
                 test -z "$1" && ${=cmd} . || command s "$@"
-            } &>/dev/null
+            } >/dev/null 2>&1
         else
             {
             out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             url="https://google.com/search?q=$out"
                 ${=sec_cmd} $url
-            } &>/dev/null
+            } >/dev/null 2>&1
         fi
     else
         if [[ $sec_cmd == s ]]; then
@@ -1677,15 +1677,15 @@ function o(){
 
     if isZsh; then
         if [[ -z "$1" ]]; then
-            ${=open_cmd} . &>> "$ZPWR_LOGFILE"
+            ${=open_cmd} . >> "$ZPWR_LOGFILE" 2>&1
         else
-            ${=open_cmd} "$@" &>> "$ZPWR_LOGFILE"
+            ${=open_cmd} "$@" >> "$ZPWR_LOGFILE" 2>&1
         fi
     else
         if [[ -z "$1" ]]; then
-            $open_cmd . &>/dev/null
+            $open_cmd . > /dev/null 2>&1
         else
-            $open_cmd "$@" &>/dev/null
+            $open_cmd "$@" >/dev/null 2>&1
         fi
     fi
 
@@ -1697,15 +1697,15 @@ function openmygh(){
 
     if isZsh; then
         if [[ -n "$1" ]]; then
-            ${=open_cmd} "https://github.com/$1" &>> "$ZPWR_LOGFILE"
+            ${=open_cmd} "https://github.com/$1" >> "$ZPWR_LOGFILE" 2>&1
         else
-            ${=open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" &>> "$ZPWR_LOGFILE"
+            ${=open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" >> "$ZPWR_LOGFILE" 2>&1
         fi
     else
         if [[ -n "$1" ]]; then
-            ${open_cmd} "https://github.com/$1" &> /dev/null
+            ${open_cmd} "https://github.com/$1" > /dev/null 2>&1
         else
-            ${open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" &> /dev/null
+            ${open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" > /dev/null 2>&1
         fi
     fi
 
@@ -2312,7 +2312,7 @@ function cCommon(){
     exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
     if exists $colorizer;then
-        if echo | $colorizer &>/dev/null; then
+        if echo | $colorizer > /dev/null 2>&1; then
             for file in "$@";do
                 if [[ -f "$file" ]]; then
                     if (( $# > 1)); then
@@ -2469,10 +2469,10 @@ function scripts(){
 
     (
         {
-            gvim -S ~/.vim/sessions/gvim.vim &> /dev/null
+            gvim -S ~/.vim/sessions/gvim.vim > /dev/null 2>&1
             sleep 2
             open -a Terminal.app
-        } &>/dev/null &
+        } >/dev/null 2>&1 &
     )
 }
 
