@@ -138,9 +138,9 @@ export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 # default OMZ theme if Powerlevel 9k not used
 export ZPWR_DEFAULT_OMZ_THEME=simonoff
 # cache of env keys
-export ZPWR_ENV_KEY_FILE="${ZPWR_ENV}Value.txt"
+export ZPWR_ENV_KEY_FILE="${ZPWR_ENV}Key.txt"
 # cache of env values
-export ZPWR_ENV_VALUE_FILE="${ZPWR_ENV}Key.txt"
+export ZPWR_ENV_VALUE_FILE="${ZPWR_ENV}Value.txt"
 # temp files
 export ZPWR_TEMPFILE="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-$USER"
 export ZPWR_TEMPFILE1="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-1$USER"
