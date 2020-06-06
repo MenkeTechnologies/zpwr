@@ -15,8 +15,8 @@ allRemotes() {
     done < <(git remote)
 }
 banner() {
-    if [[ -d "$ZPWR_REPO" ]]; then
-        if cd "$ZPWR_REPO"; then
+    if [[ -d "$ZPWR" ]]; then
+        if cd "$ZPWR"; then
             version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"
             info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"
             fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"
@@ -98,8 +98,8 @@ EOF
     printf "\x1b[35m"
     printf "\x1b[4m"
 
-    #if [[ -d "$ZPWR_REPO" ]]; then
-    #if cd "$ZPWR_REPO";then
+    #if [[ -d "$ZPWR" ]]; then
+    #if cd "$ZPWR";then
     #{
     #allRemotes
     #} | perl -pe 's@(.*)@\x1b[31m$1@'
