@@ -8,6 +8,10 @@
 ##### Notes: escape $ in comments for perl subs
 #}}}***********************************************************
 
+if [[ -z $ZPWR_VERBS ]]; then
+    declare -A ZPWR_VERBS
+fi
+
 ZPWR_VERBS[about]='about=show \$ZPWR_REPO_NAME banner'
 ZPWR_VERBS[allsearch]='fzfAllKeybind=search all keybindings'
 ZPWR_VERBS[altprettyprint]='alternatingPrettyPrint=pretty with alternating color'
@@ -213,11 +217,15 @@ ZPWR_VERBS[zstyle]='zpwrZstyle=fuzzy search zstyle'
 ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
 ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
 
-
-
 verb="$1"
 
 if [[ -n "$verb" ]]; then
+
+    if [[ $(basename $verb) == $(basename $0) ]]; then
+        #zunit does this
+        return 0
+    fi
+
     shift
     found=false
     for k v in ${(kv)ZPWR_VERBS[@]};do

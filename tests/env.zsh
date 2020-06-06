@@ -12,10 +12,33 @@
     load "test_lib.zsh"
 }
 
+@test 'zpwr about verb script' {
+    run zpwr about
+    assert $state equals 0
+
+    assert "$output" is_not_empty
+    assert "$output" contains fetch
+    assert "$output" contains push
+}
+
+@test 'zpwr banner verb script no output' {
+    run zpwr banner &>/dev/null
+    assert $state equals 0
+
+    assert "$output" is_not_empty
+    assert "$output" contains fetch
+    assert "$output" contains push
+}
 @test 'ZPWR' {
     test -n $ZPWR
     assert $? equals 0
 }
+
+@test 'ZPWR_VERBS' {
+    test -n $ZPWR_VERBS
+    assert $? equals 0
+}
+
 
 @test 'ZPWR_BLUE' {
     test -n $ZPWR_BLUE
