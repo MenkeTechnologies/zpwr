@@ -92,6 +92,38 @@
     assert $? equals 0
 }
 
+@test 'is a git dir message' {
+    run isGitDirMessage
+    assert $state equals 0
+    assert "$output" is_empty
+}
+
+@test 'is a git dir' {
+    run isGitDir
+    assert $state equals 0
+    assert "$output" is_empty
+}
+
+@test 'exists loggDebug' {
+    run exists loggDebug
+    assert $state equals 0
+}
+
+@test 'exists loggErr' {
+    run exists loggErr
+    assert $state equals 0
+}
+
+@test 'exists loggNotGit' {
+    run exists loggNotGit
+    assert $state equals 0
+}
+
+@test 'exists logg' {
+    run exists logg
+    assert $state equals 0
+}
+
 @test 'isZsh' {
     run isZsh
     assert $state equals 0
