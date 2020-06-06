@@ -96,7 +96,7 @@
 }
 
 @test 'prettyPrintBox' {
-    run prettyPrintox test
+    run prettyPrintBox test
     assert $state equals 0
 }
 
