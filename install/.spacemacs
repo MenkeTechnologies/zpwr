@@ -484,7 +484,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
     )
 
     (defun zpwr/flatten (list)
-        (mapcan (lambda (x) (if (listp x) x nil)) list))
+        "flattens list"
+        (cond
+            ((atom list) (list list))
+            ((null (cdr list)) (zpwr/flatten (car list)))
+            (t (append (zpwr/flatten (car list)) (zpwr/flatten (cdr list))))
+        )
+    )
 
     (defun zpwr/undo-all ()
         "Undo all edits."
