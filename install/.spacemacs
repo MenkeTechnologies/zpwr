@@ -501,10 +501,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
             (undo-more 1))
         (message "Buffer was completely undone"))
 
-    (defun zpwr/replace ()
-      "Replace word under cursor"
-      (interactive)
-      (let ((mylist nil) (flattened nil) (cmd (concat "%s@\\C\\<" (current-word) "\\>@" (current-word) "@g")))
+    (defun zpwr/replaceHelper (left right)
+
+      (let ((mylist nil) (flattened nil) (cmd (concat "%s@\\C\\<" left "\\>@" right "@g")))
          (progn
           (setq mylist '())
           (add-to-list 'mylist (listify-key-sequence cmd) t)
@@ -516,6 +515,19 @@ before packages are loaded. If you are unsure, you should try in setting them in
             )
          )
         )
+
+    )
+
+    (defun zpwr/replace ()
+      "Replace word under cursor"
+      (interactive)
+      (zpwr/replaceHelper (current-word) "")
+    )
+
+    (defun zpwr/replaceFill ()
+      "Replace word under cursor"
+      (interactive)
+      (zpwr/replaceHelper (current-word) (current-word))
     )
 
     (defun zpwr/extract-fold (section)
@@ -1123,7 +1135,8 @@ you should place your code here."
     (define-key evil-normal-state-map (kbd "k") #'evil-previous-visual-line)
 
     (spacemacs/set-leader-keys (kbd "of") #'zpwr/extract-fold)
-    (spacemacs/set-leader-keys (kbd "or") #'zpwr/replace)
+    (spacemacs/set-leader-keys (kbd "orf") #'zpwr/replaceFill)
+    (spacemacs/set-leader-keys (kbd "orr") #'zpwr/replace)
 
     (spacemacs/set-leader-keys (kbd "o.") #'helm-themes)
 
