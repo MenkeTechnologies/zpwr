@@ -483,6 +483,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
        )
     )
 
+    (defun zpwr/flatten (list)
+        (mapcan (lambda (x) (if (listp x) x nil)) list))
 
     (defun zpwr/undo-all ()
         "Undo all edits."
@@ -496,7 +498,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (defun zpwr/replace ()
       "Replace word under cursor"
       (interactive)
-      (let ((mylist nil) (flattened nil) (cmd (concat ":%s@\\C\\<" (current-word) "\\>@" (current-word) "@g")))
+      (let ((mylist nil) (flattened nil) (cmd (concat "%s@\\C\\<" (current-word) "\\>@" (current-word) "@g")))
          (progn
           (setq mylist '())
           (add-to-list 'mylist (listify-key-sequence cmd) t)
