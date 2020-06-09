@@ -93,10 +93,10 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 ## ZPWR Dependencies
 - zsh
 - tmux
-- neovim with 82 plugins and python3/node support
+- neovim with 78 plugins and python3/node support
 - perl
 - bash
-- oh-my-zsh with 71 plugins of which 29 are custom
+- oh-my-zsh with 75 plugins of which 31 are custom
 - forked powerlevel9k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
@@ -144,9 +144,9 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - SUSE
 
 ## ZPWR Extras Not Installed
-- Jetbrains .ideamvimrc
-- Jetbrains settings JAR
-- Jetbrains JVM Options idea.vmoptions
+- JetBrains .ideamvimrc
+- JetBrains settings JAR
+- JetBrains JVM Options idea.vmoptions
 - Spacemacs Config with 460+ packages in .spacemacs
 - Emacs Yasnippets
 - Alacritty Main Config
