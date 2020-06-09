@@ -484,6 +484,14 @@ exists zunit && {
 }
 ```
 
+## Shell Startup speed
+Running `zpwr regen` will zcompile all zpwr configs and all compsys completions in fpath.  This will maximize startup speed.
+Replacing the lolcat into ponysay banner like so on startup will further increase speed.
+```sh
+export ZPWR_INTRO_BANNER=nopony
+```
+Due to the sheer number of plugins and completions startup usually takes 2-4 seconds on faster machines but up to 10-12 secconds on slow machines.
+
 ## Contributing
 I am looking for contributors especially for expanding the zunit tests.
 
