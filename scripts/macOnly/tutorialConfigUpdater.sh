@@ -96,7 +96,7 @@ for dir in "$HOME/.oh-my-zsh/custom/plugins/"*; do
     else
         logg "adding zsh plugin $dir"
     fi
-        
+
     bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR_INSTALL/.zshplugins"
 done
 
