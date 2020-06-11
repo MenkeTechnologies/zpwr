@@ -164,14 +164,6 @@ if [[ $skip != true ]]; then
         fi
     }
 
-    exists cpanm && {
-        prettyPrint "Updating Perl Packages"
-        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
-        if [[ -n "$perlOutdated" ]]; then
-            echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2>/dev/null
-        fi
-    }
-
     prettyPrint "Updating Vundle Plugins"
 
     if [[ $end != true ]]; then
@@ -192,6 +184,15 @@ if [[ $skip != true ]]; then
         pio upgrade
     }
     source "$ZPWR_SCRIPTS/updaterPip.sh"
+
+    exists cpanm && {
+        prettyPrint "Updating Perl Packages"
+        perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
+        if [[ -n "$perlOutdated" ]]; then
+            echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2>/dev/null
+        fi
+    }
+
 
 fi
 
