@@ -144,6 +144,41 @@
     assert $state equals 0
 }
 
+@test 'prettyPrintBox output' {
+    out=myoutput
+    run prettyPrintBox $out
+    assert $state equals 0
+    assert "$output" is_not_empty
+    assert "$output" contains $out
+}
+
+@test 'prettyPrintBox increment' {
+    out=myoutput
+    prettyPrintBox $out
+    run prettyPrintBox $out
+    assert $state equals 0
+    assert "$output" is_not_empty
+    assert "$output" contains "2>"
+}
+
+@test 'r' {
+    origPwd=$(pwd)
+    parent=${$(pwd):h}
+    r &> /dev/null
+    assert $parent same_as $(pwd)
+    f &> /dev/null
+    assert $origPwd same_as $(pwd)
+}
+
+@test 'f' {
+    origPwd=$(pwd)
+    parent=${$(pwd):h}
+    f .. &> /dev/null
+    assert $parent same_as $(pwd)
+    f  &> /dev/null
+    assert $origPwd same_as $(pwd)
+}
+
 @test 'prettyPrint' {
     run prettyPrint test
     assert $state equals 0
