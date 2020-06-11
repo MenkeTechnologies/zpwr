@@ -420,6 +420,8 @@ export ZPWR_QUOTE_START_CHAR="<<("
 export ZPWR_QUOTE_END_CHAR=")>>"
 # prompt for all fzf
 export ZPWR_FZF_LOGO="<<)ZPWR(>>"
+# command for all fzf
+export ZPWR_FZF="fzf"
 # set to comma separated list of pane numbers
 # to activate sending to numbered tmux panes
 export ZPWR_SEND_KEYS_PANE=-1
