@@ -2397,14 +2397,14 @@ function agIntoFzf(){
 
     if test -z "$1";then
         command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
-        eval "fzf $FZF_AG_OPTS" |
+        eval "$ZPWR_FZF $FZF_AG_OPTS" |
         cut -d ':' -f1 |
         perl -pe 's@^(.*)\n$@"'"$PWD/"'$1" @'
 
     else
 
         command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
-        eval "fzf $FZF_AG_OPTS" |
+        eval "$ZPWR_FZF $FZF_AG_OPTS" |
         perl -pe 's@^(.*?):(\d+):(.*)@+$2 "'"$PWD/"'$1"@;s@\n@ @g'
 
     fi
@@ -2672,8 +2672,7 @@ function searchDirtyGitRepos(){
             fi
         done < "$ZPWR_ALL_GIT_DIRS"
     } |
-        fzf --preview 'printf "\x1b[1;4;37;44m%s\x1b[0m\n" "git -C {} status -s; git diff --stat -p --color=always HEAD";
-cd {} && git status -s && git diff --stat -p --color=always HEAD 2>/dev/null' |
+        eval "$ZPWR_FZF $FZF_SEARCH_GIT_OPTS" |
         perl -ne 'print "cd $_"'
     }
 
@@ -2691,11 +2690,9 @@ cd {} && git status -s && git diff --stat -p --color=always HEAD 2>/dev/null' |
 function searchAllGitRepos(){
 
     goThere(){
-    cat "$ZPWR_ALL_GIT_DIRS" |
-        fzf --preview 'printf "\x1b[1;4;37;44m%s\x1b[0m\n" "git -C {} status; git diff --stat -p --color=always HEAD";
-builtin cd {} && git status && git diff --stat -p --color=always HEAD 2>/dev/null' |
+        cat "$ZPWR_ALL_GIT_DIRS" |
+        eval "$ZPWR_FZF $FZF_SEARCH_GIT_OPTS" |
         perl -ne 'print "cd $_"'
-
     }
 
     shouldRegen="$1"

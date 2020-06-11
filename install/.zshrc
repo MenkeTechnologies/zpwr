@@ -710,13 +710,13 @@ function getrcWidget(){
 
 function intoFzf(){
 
-    LBUFFER="$LBUFFER |& fzf -m --border --ansi"
+    LBUFFER="$LBUFFER |& $ZPWR_FZF -m --border --ansi"
     zle .accept-line
 }
 
 function lsoffzf(){
 
-    LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"
+    LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | $ZPWR_FZF -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"
 }
 
 # cache autoload +X functions,aliases, builtins,reswords into file
@@ -731,7 +731,7 @@ function clearListFZF(){
         print -l ${(k)reswords}
         ls -d *
     } |
-    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS"
+    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS"
 }
 
 function fzvim(){
@@ -741,12 +741,12 @@ function fzvim(){
         file="$ZPWR_NVIMINFO"
         test -e "$file" || touch "$file"
         perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file" |
-    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
+    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
     else
         file="$HOME/.viminfo"
     perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' "$file" |
-    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
+    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
     fi
 }
@@ -768,7 +768,7 @@ function fzvimAll(){
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} |
         perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
-    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
+    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 function fzvimScript(){
@@ -781,7 +781,7 @@ function fzvimScript(){
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} |
         perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
-    eval "fzf -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
+    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
@@ -868,7 +868,7 @@ function fzfFileSearch(){
         -o -fstype 'devfs' -o -fstype 'devtmpfs' \
         -o -fstype 'proc' \) -prune -o -type f -print \
         -o -type l -print 2> /dev/null | cut -c3- |
-        eval "fzf -m --border $FZF_CTRL_T_OPTS" | perl -ne 'chomp $_; print "\"$_\" "'
+        eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" | perl -ne 'chomp $_; print "\"$_\" "'
 }
 
 function fzfFilesearchVerbEdit(){
@@ -940,7 +940,7 @@ function fzfDirSearch(){
         -o -fstype 'devfs' -o -fstype 'devtmpfs' \
         -o -fstype 'proc' \) -prune -o -type d -print \
         -o -type l -print 2> /dev/null | cut -c3- |
-        eval "fzf --border $FZF_CTRL_T_OPTS"
+        eval "$ZPWR_FZF --border $FZF_CTRL_T_OPTS"
 }
 
 function fzfDirsearchVerb(){
@@ -957,7 +957,7 @@ function fzfDirsearchVerb(){
 function fzfZList(){
 
     z -l |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
-    eval "fzf -e --no-sort --border $FZF_CTRL_T_OPTS" |
+    eval "$ZPWR_FZF -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }
 
@@ -975,14 +975,14 @@ function fzfZListVerb(){
 function fasdFList(){
 
     fasd -f |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
-    eval "fzf -m --no-sort --border $FZF_CTRL_T_OPTS" |
+    eval "$ZPWR_FZF -m --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
 function fm(){
 
    FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfMan.sh" "$1")'"
-    man "$1" | col -b | eval "fzf --no-sort -m $FZF_MAN_OPTS"
+    man "$1" | col -b | eval "$ZPWR_FZF --no-sort -m $FZF_MAN_OPTS"
 }
 
 function zFZF(){
@@ -1079,7 +1079,7 @@ function fzfEnvVerbAccept(){
     fi
 
     sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
-        eval "fzf -m --border $FZF_ENV_OPTS")
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS")
 
     if [[ -n "$sel" ]]; then
         print -sr -- "$sel"
@@ -1102,7 +1102,7 @@ function fzfEnvVerbEdit(){
     fi
 
     sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
-        eval "fzf -m --border $FZF_ENV_OPTS")
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS")
 
     if [[ -n "$sel" ]]; then
         print -zr -- "$sel"
@@ -1115,7 +1115,7 @@ function historyVerbAccept(){
 
     local num sel
       sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
-    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $ZPWR_FZF |
     perl -lane 'print "@F[1..$#F]"')
 
 }
@@ -1124,7 +1124,7 @@ function historyVerbEdit(){
 
     local num sel
       sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
-    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $ZPWR_FZF |
     perl -lane 'print "@F[1..$#F]"')
 
     if [[ -n "$sel" ]]; then
@@ -1307,7 +1307,7 @@ function fzfEnv(){
     fi
 
     sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
-        eval "fzf -m --border $FZF_ENV_OPTS" | perl -pe 's@\n@ @g')
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS" | perl -pe 's@\n@ @g')
     BUFFER="$LBUFFER$sel$RBUFFER"
     CURSOR=$(($#LBUFFER + $#sel))
 
@@ -1335,12 +1335,12 @@ function fzfVimKeybind(){
 
 function getLocate(){
 
-    eval "locate / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" |
+    eval "locate / 2>/dev/null | $ZPWR_FZF -m $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 function getFound(){
 
-    eval "find / 2>/dev/null | fzf -m $FZF_CTRL_T_OPTS" |
+    eval "find / 2>/dev/null | $ZPWR_FZF -m $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
@@ -2994,15 +2994,17 @@ export FZF_GTAGS_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter ' ' --nth 1 --revers
 
 export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
 
+export FZF_SEARCH_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitSearchOpts.sh")'"
+
 if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
     export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"
 else
     export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"
 fi
 
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff=' "$(fzf '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f=" \$(fzf $FZF_CTRL_T_OPTS)"
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z=" | fzf $FZF_CTRL_T_OPTS "
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff=' "$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f=" \$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z=" | $ZPWR_FZF $FZF_CTRL_T_OPTS "
 
 # killall ;<tab>
 function _fzf_complete_killall() {
@@ -3756,7 +3758,7 @@ function zpwrVerbs(){
         done
         printf "${ZPWR_VERBS[$k]}\n"
     done |
-        eval "fzf -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
+        eval "$ZPWR_FZF -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
         perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
 }
 
@@ -3777,7 +3779,7 @@ function gtagsIntoFzf(){
     (
         builtin cd "$HOME"
         global -x '.*' |
-        eval "fzf $FZF_GTAGS_OPTS" |
+        eval "$ZPWR_FZF $FZF_GTAGS_OPTS" |
     perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "'"$HOME/"'$3"@;s@\n@ @g'
     )
 }
