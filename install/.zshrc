@@ -3574,6 +3574,9 @@ function uncompile(){
         "$HOME/.zlogin"
         "$ZSH_COMPDUMP"
         "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR/.powerlevel9kconfig.sh"
+        "$ZPWR_LOCAL/.tokens.sh"
+        "$ZPWR_LOCAL/.tokens-post.sh"
         "$ZPWR_ENV_FILE"
         "$ZPWR_SCRIPTS/lib.sh"
     )
@@ -3627,6 +3630,9 @@ function recompile(){
         "$HOME/.zlogin"
         "$ZSH_COMPDUMP"
         "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR/.powerlevel9kconfig.sh"
+        "$ZPWR_LOCAL/.tokens.sh"
+        "$ZPWR_LOCAL/.tokens-post.sh"
         "$ZPWR_ENV_FILE"
         "$ZPWR_SCRIPTS/lib.sh"
     )
