@@ -46,6 +46,18 @@
     assert $? equals 0
 }
 
+@test 'ZPWR_FZF' {
+
+    run echo $ZPWR_FZF | grep fzf
+    assert $state equals 0
+}
+
+@test 'ZPWR_FZF' {
+
+    test -n $ZPWR_FZF
+    assert $? equals 0
+}
+
 @test 'ZPWR_VERBS' {
     test -n $ZPWR_VERBS
     assert $? equals 0
