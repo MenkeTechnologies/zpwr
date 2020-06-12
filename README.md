@@ -440,6 +440,8 @@ export ZPWR_DEFAULT_BANNER="bash $ZPWR_SCRIPTS_MAC/figletRandomFontOnce.sh $(hos
 export ZPWR_BANNER_SCRIPT="$ZPWR_SCRIPTS/about.sh"
 # the emacs command
 export ZPWR_EMACS='command emacs -nw'
+# the emacs client command
+export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
 # the marker found color in bat output into fzf from ag search
 export ZPWR_MARKER_COLOR="0;1;4;37;44m"
 # whether to search interactively in menuselect

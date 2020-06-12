@@ -481,12 +481,12 @@ function editorRecent(){
 
 function sudoEmacsRecent(){
 
-    sudoEditorRecent "$ZPWR_EMACS"
+    sudoEditorRecent "$ZPWR_EMACS_CLIENT"
 }
 
 function emacsRecent(){
 
-    editorRecent "$ZPWR_EMACS"
+    editorRecent "$ZPWR_EMACS_CLIENT"
 }
 function sudoVimRecent(){
 
