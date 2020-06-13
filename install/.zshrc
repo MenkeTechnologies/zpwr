@@ -3639,6 +3639,7 @@ function uncompile(){
         "$ZPWR_LOCAL/.tokens-post.sh"
         "$ZPWR_ENV_FILE"
         "$ZPWR_SCRIPTS/lib.sh"
+        "$ZPWR_SCRIPTS/crossOSCommands.sh"
     )
 
     sudoFiles=(
@@ -3695,6 +3696,7 @@ function recompile(){
         "$ZPWR_LOCAL/.tokens-post.sh"
         "$ZPWR_ENV_FILE"
         "$ZPWR_SCRIPTS/lib.sh"
+        "$ZPWR_SCRIPTS/crossOSCommands.sh"
     )
 
     sudoFiles=(
