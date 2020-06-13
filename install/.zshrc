@@ -2890,10 +2890,6 @@ if [[ -d "$ZPWR_TMUX" ]]; then
     hash -d ZPWR_TMUX="$ZPWR_TMUX"
 fi
 
-if [[ -d "$ZPWR_REPO" ]]; then
-    hash -d ZPWR_REPO="$ZPWR_REPO"
-fi
-
 if [[ -d "$ZPWR" ]]; then
     hash -d ZPWR="$ZPWR"
 fi
@@ -3767,7 +3763,7 @@ fi
 function zpwrAllUpdates(){
     (
 
-    builtin cd "$ZPWR_REPO" &&
+    builtin cd "$ZPWR" &&
         git pull &&
         {
             if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
