@@ -379,66 +379,76 @@ function sub (){
 
 function emacsAllEdit(){
 
-        BUFFER="$(fzvimAll)"
-        if [[ -z "$BUFFER" ]]; then
-            return
-        fi
-        BUFFER="$ZPWR_EMACS $BUFFER"
-        loggDebug "builtin cd $ZPWR"
-        eval "builtin cd $ZPWR"
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
 
-        BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
-        loggDebug "$BUFFER"
-        print -s -- "$BUFFER"
-        eval "$BUFFER"
+    BUFFER="$(fzvimAll)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    BUFFER="$ZPWR_EMACS $BUFFER"
+    loggDebug "builtin cd $ZPWR"
+    eval "builtin cd $ZPWR"
+
+    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+    print -s -- "$BUFFER"
+    eval "$BUFFER"
 }
 
 function emacsScriptEdit(){
 
-        BUFFER="$(fzvimScript)"
-        if [[ -z "$BUFFER" ]]; then
-            return
-        fi
-        BUFFER="$ZPWR_EMACS $BUFFER"
-        loggDebug "builtin cd $ZPWR_SCRIPTS"
-        eval "builtin cd $ZPWR_SCRIPTS"
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
 
-        BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
-        loggDebug "$BUFFER"
-        print -s -- "$BUFFER"
-        eval "$BUFFER"
+    BUFFER="$(fzvimScript)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    BUFFER="$ZPWR_EMACS $BUFFER"
+    loggDebug "builtin cd $ZPWR_SCRIPTS"
+    eval "builtin cd $ZPWR_SCRIPTS"
+
+    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+    print -s -- "$BUFFER"
+    eval "$BUFFER"
 }
 
 function vimAllEdit(){
 
-        BUFFER="$(fzvimAll)"
-        if [[ -z "$BUFFER" ]]; then
-            return
-        fi
-        BUFFER="$EDITOR $BUFFER"
-        loggDebug "builtin cd $ZPWR"
-        eval "builtin cd $ZPWR"
+    BUFFER="$(fzvimAll)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    BUFFER="$EDITOR $BUFFER"
+    loggDebug "builtin cd $ZPWR"
+    eval "builtin cd $ZPWR"
 
-        BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
-        loggDebug "$BUFFER"
-        print -s -- "$BUFFER"
-        eval "$BUFFER"
+    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+    print -s -- "$BUFFER"
+    eval "$BUFFER"
 }
 
 function vimScriptEdit(){
 
-        BUFFER="$(fzvimScript)"
-        if [[ -z "$BUFFER" ]]; then
-            return
-        fi
-        BUFFER="$EDITOR $BUFFER"
-        loggDebug "builtin cd $ZPWR_SCRIPTS"
-        eval "builtin cd $ZPWR_SCRIPTS"
+    BUFFER="$(fzvimScript)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    BUFFER="$EDITOR $BUFFER"
+    loggDebug "builtin cd $ZPWR_SCRIPTS"
+    eval "builtin cd $ZPWR_SCRIPTS"
 
-        BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
-        loggDebug "$BUFFER"
-        print -s -- "$BUFFER"
-        eval "$BUFFER"
+    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+    print -s -- "$BUFFER"
+    eval "$BUFFER"
 }
 
 function sudoEditorRecent(){
@@ -481,10 +491,20 @@ function editorRecent(){
 
 function sudoEmacsRecent(){
 
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     sudoEditorRecent "$ZPWR_EMACS_CLIENT"
 }
 
 function emacsRecent(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
 
     editorRecent "$ZPWR_EMACS_CLIENT"
 }
@@ -845,10 +865,20 @@ function fzfWordsearchVerb(){
 
 function emacsFzfWordsearchVerbEdit(){
 
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     fzfWordsearchVerbEdit "$ZPWR_EMACS"
 }
 
 function emacsFzfWordsearchVerb(){
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     fzfWordsearchVerb "$ZPWR_EMACS"
 }
 
@@ -914,10 +944,20 @@ function fzfFilesearchVerb(){
 
 function emacsFzfFilesearchVerbEdit(){
 
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     fzfFilesearchVerbEdit "$ZPWR_EMACS"
 }
 
 function emacsFzfFilesearchVerb(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
 
     fzfFilesearchVerb "$ZPWR_EMACS"
 
@@ -1409,11 +1449,21 @@ function locateFzfNoZLEVim(){
 
 function locateFzfEditNoZLEEmacs(){
 
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     locateFzfEditNoZLE "$ZPWR_EMACS"
 }
 
 function locateFzfNoZLEEmacs(){
-    
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     locateFzfNoZLE "$ZPWR_EMACS"
 }
 
@@ -1482,11 +1532,21 @@ function findFzfNoZLEVim(){
 
 function findFzfEditNoZLEEmacs(){
 
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     findFzfEditNoZLE "$ZPWR_EMACS"
 }
 
 function findFzfNoZLEEmacs(){
     
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     findFzfNoZLE "$ZPWR_EMACS"
 }
 
@@ -3833,6 +3893,11 @@ function getGtags(){
 
 function emacsZpwrGtags(){
 
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     getGtags "$ZPWR_EMACS"
 }
 
@@ -3843,6 +3908,11 @@ function vimZpwrGtags(){
 
 function emacsZpwrGtagsEdit(){
 
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
     getGtagsEdit "$ZPWR_EMACS"
 }
 
@@ -3852,6 +3922,11 @@ function vimZpwrGtagsEdit(){
 }
 
 function emacsZpwrCtags(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
 
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
