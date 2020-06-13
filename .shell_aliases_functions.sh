@@ -3007,7 +3007,6 @@ function zpwrUninstall() {
         prettyPrint "Uninstall!"
         for dir in "$ZPWR_LOCAL/$USER.rc"*;do
             mv "$dir" "$HOME"
-            
         done
         unlinkConf
     sudo rm -rf -- \

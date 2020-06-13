@@ -824,6 +824,23 @@ function vimFzf(){
     fi
 }
 
+function emacsFzf(){
+
+    zle .kill-whole-line
+    BUFFER="$(fzvim $ZPWR_EMACS_CLIENT)"
+    mywords=(${(z)BUFFER})
+    if (( $#mywords == 0 )); then
+        zle .kill-whole-line
+    else
+        firstdir=${mywords[1]:h}
+        loggDebug "words='$mywords[1]'=>'$firstdir'"
+        BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
+        #:h takes aways last "
+        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
+        zle .accept-line
+    fi
+}
+
 function fzfWordsearchVerbEdit(){
 
     local editor
@@ -1543,7 +1560,7 @@ function findFzfEditNoZLEEmacs(){
 }
 
 function findFzfNoZLEEmacs(){
-    
+
     if ! exists emacs; then
         logErr "emacs must exist"
         return 1
@@ -1674,6 +1691,7 @@ zle -N updater
 zle -N runner
 zle -N intoFzf
 zle -N intoFzfAg
+zle -N emacsFzf
 zle -N vimFzf
 zle -N vimFzfSudo
 zle -N getrcWidget
@@ -1786,6 +1804,9 @@ exists z && {
 
 bindkey -M viins '^V^V' vimFzf
 bindkey -M vicmd '^V^V' vimFzf
+
+bindkey -M viins '^V^K' emacsFzf
+bindkey -M vicmd '^V^K' emacsFzf
 
 bindkey -M viins '^Q' lastWordDouble
 bindkey -M vicmd '^Q' lastWordDouble
