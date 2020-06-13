@@ -2812,6 +2812,28 @@ function emacsZpwr(){
     clearList
     isGitDir && git diff HEAD
 }
+
+function emacsAllServer(){
+
+    builtin cd $ZPWR
+    ${=ZPWR_EMACS} \
+    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
+    "$ZPWR/"*.{sh,py,zsh,pl} \
+    "$ZPWR/"*.md \
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
+    "$ZPWR_TMUX/tmux-"* \
+    "$ZPWR/"{.minvimrc,.mininit.vim} \
+    "$ZPWR_INSTALL/conf."* \
+    "$ZPWR_INSTALL/"*.sh \
+    "$ZPWR_INSTALL/"*.service \
+    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
+    clearList
+    isGitDir && git diff HEAD
+}
+
 function emacsAll(){
 
     builtin cd $ZPWR
