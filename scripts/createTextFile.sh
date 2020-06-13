@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-executableScriptsProcessing() {
+function executableScriptsProcessing() {
     # then make it executable
     chmod 700 "$newfile"
     #add header that can be extracted with grep ^#:
@@ -16,13 +16,13 @@ executableScriptsProcessing() {
 
 }
 
-openTextEditor() {
+function openTextEditor() {
     open -t "$newfile"
     #run python3 script with pyautogi commands for keyboard shortcuts
     python3 "$HOME/PycharmProjects/fromShell/textEditorTwoColumns.py"
 }
 
-addHeader() {
+function addHeader() {
     #first arg is the interpreter
     #second arg is the absolute path to file
     firstString="$(
@@ -45,7 +45,7 @@ EOM
 
 }
 
-createTheFile() {
+function createTheFile() {
     #create newfile
     touch "$newfile"
 

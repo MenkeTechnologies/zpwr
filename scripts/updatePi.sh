@@ -15,7 +15,7 @@ if ! type -- "exists" >/dev/null 2>&1;then
     }
 fi
 
-updatePI() {
+function updatePI() {
     #first argument is user@host and port number configured in .ssh/config
     #-t to force pseudoterminal allocation for interactive programs on remote host
     #pipe yes into programs that require confirmation

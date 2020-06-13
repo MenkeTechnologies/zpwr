@@ -7,6 +7,12 @@
 ##### Notes:
 #}}}***********************************************************
 
+type tmux >/dev/null 2>&1 || {
+    echo "You don't have tmux so we are exiting..." >&2
+    exit 1
+}
+
+leavePresentPaneAloneFlag=false
 __ScriptVersion="1.0.0"
 
 #=== FUNCTION ================================================================
@@ -14,6 +20,7 @@ __ScriptVersion="1.0.0"
 # DESCRIPTION: Display usage information.
 #===============================================================================
 function usage() {
+
     echo "Usage : $0 [options] [--]
 
     Options:
@@ -28,13 +35,6 @@ function usage() {
 #-----------------------------------------------------------------------
 
 #set -x
-
-type tmux >/dev/null 2>&1 || {
-    echo "You don't have tmux so we are exiting..." >&2
-    exit 1
-}
-
-leavePresentPaneAloneFlag=false
 
 while getopts ":hvl" opt; do
     case $opt in

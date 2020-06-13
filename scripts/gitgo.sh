@@ -33,13 +33,14 @@
 ############### functions ##############
 ##########################################
 
-myPrettyPrint() {
+function myPrettyPrint() {
     #print white text 37m on blue background 44m
     printf "\e[37;44m"
     printf "$1"
     printf "\e[0m\n"
 }
-initializeGitDirectory() {
+
+function initializeGitDirectory() {
     #there is no .git directory
     if [[ ! -d ".git" ]]; then
         myPrettyPrint "Do you want to initialize this diqrectory with Git?"
@@ -71,7 +72,7 @@ initializeGitDirectory() {
 
 #create remote repository on Github
 
-getRemoteDetails() {
+function getRemoteDetails() {
 
     #if function was called with no arguments
     if [[ -z "$1" ]]; then
@@ -103,13 +104,13 @@ getRemoteDetails() {
     getInitialCommit
 }
 
-getInitialCommit() {
+function getInitialCommit() {
     myPrettyPrint "What is your commit message?"
     read commitMessage
     commitTheDirectory "$commitMessage"
 }
 
-usage() {
+function usage() {
     #myPrettyPrint format
     printf "\e[37;44m"
     #if argument passed in then print it
@@ -128,7 +129,7 @@ EOM
     exit 1
 }
 
-gitPull() {
+function gitPull() {
     #if .git directory exists and remote repository established
     if [[ -d ".git" && "$(git remote)" ]]; then
         local PULL_URL="$(git remote -v |
@@ -141,7 +142,7 @@ gitPull() {
 
 }
 
-gitPush() {
+function gitPush() {
     #check for argument
     if [[ -z "$1" ]]; then
         usage "Need a commit message."
@@ -156,7 +157,7 @@ gitPush() {
     fi
 }
 
-commitTheDirectory() {
+function commitTheDirectory() {
     #commitMessage is first argument
     local commitMessage="$1"
     local origin="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"

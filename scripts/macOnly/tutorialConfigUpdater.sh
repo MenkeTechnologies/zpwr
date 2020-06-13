@@ -6,9 +6,6 @@
 ##### Purpose:  script to update multiple Github repos
 ##### Notes:TutorialFiles, PersonalWebsite, zpwr
 #}}}***********************************************************
-
-shopt -s dotglob
-
 tutorialDir="$HOME/Documents/tutorialsRepo"
 websiteDir="$HOME/WebstormProjects/PersonalWebsite"
 ZPWR_DIR="$ZPWR"
@@ -21,6 +18,8 @@ fi
 if [[ -z $ZPWR_SCRIPTS_MAC ]]; then
     ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
 fi
+
+shopt -s dotglob
 
 if ! type -- "exists" >/dev/null 2>&1;then
     test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"

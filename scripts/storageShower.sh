@@ -7,13 +7,12 @@
 ##### Notes:
 #}}}***********************************************************
 
-__ScriptVersion="version"
-
 #=== FUNCTION ================================================================
 # NAME: usage
 # DESCRIPTION: Display usage information.
 #===============================================================================
 function usage() {
+
     echo "Usage : $0 [options] lineCount RefreshTime(sec)
 
     Options:
@@ -21,6 +20,8 @@ function usage() {
     -v|version Display script version"
 
 } # ---------- end of function usage  ----------
+
+__ScriptVersion="version"
 
 #-----------------------------------------------------------------------
 # Handle command line arguments

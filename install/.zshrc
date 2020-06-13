@@ -388,7 +388,7 @@ function emacsAllEdit(){
     if [[ -z "$BUFFER" ]]; then
         return
     fi
-    BUFFER="$ZPWR_EMACS $BUFFER"
+    BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
     loggDebug "builtin cd $ZPWR"
     eval "builtin cd $ZPWR"
 
@@ -409,7 +409,7 @@ function emacsScriptEdit(){
     if [[ -z "$BUFFER" ]]; then
         return
     fi
-    BUFFER="$ZPWR_EMACS $BUFFER"
+    BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
     loggDebug "builtin cd $ZPWR_SCRIPTS"
     eval "builtin cd $ZPWR_SCRIPTS"
 
@@ -455,7 +455,7 @@ function sudoEditorRecent(){
     local editor
     editor="$1"
 
-    BUFFER="$(fzvim)"
+    BUFFER="$(fzvim $editor)"
     if [[ -z "$BUFFER" ]]; then
         return
     fi
@@ -474,7 +474,7 @@ function editorRecent(){
     local editor
     editor="$1"
 
-    BUFFER="$(fzvim)"
+    BUFFER="$(fzvim $editor)"
     if [[ -z "$BUFFER" ]]; then
         return
     fi
@@ -508,6 +508,7 @@ function emacsRecent(){
 
     editorRecent "$ZPWR_EMACS_CLIENT"
 }
+
 function sudoVimRecent(){
 
     sudoEditorRecent "$EDITOR"
@@ -756,7 +757,8 @@ function clearListFZF(){
 
 function fzvim(){
 
-    local file
+    local file editor
+    editor="$1"
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         file="$ZPWR_NVIMINFO"
         test -e "$file" || touch "$file"
@@ -808,7 +810,7 @@ function fzvimScript(){
 function vimFzf(){
 
     zle .kill-whole-line
-    BUFFER="$(fzvim)"
+    BUFFER="$(fzvim vim)"
     mywords=(${(z)BUFFER})
     if (( $#mywords == 0 )); then
         zle .kill-whole-line
@@ -870,7 +872,7 @@ function emacsFzfWordsearchVerbEdit(){
         return 1
     fi
 
-    fzfWordsearchVerbEdit "$ZPWR_EMACS"
+    fzfWordsearchVerbEdit "$ZPWR_EMACS_CLIENT"
 }
 
 function emacsFzfWordsearchVerb(){
@@ -879,7 +881,7 @@ function emacsFzfWordsearchVerb(){
         return 1
     fi
 
-    fzfWordsearchVerb "$ZPWR_EMACS"
+    fzfWordsearchVerb "$ZPWR_EMACS_CLIENT"
 }
 
 function vimFzfWordsearchVerbEdit(){
@@ -949,7 +951,7 @@ function emacsFzfFilesearchVerbEdit(){
         return 1
     fi
 
-    fzfFilesearchVerbEdit "$ZPWR_EMACS"
+    fzfFilesearchVerbEdit "$ZPWR_EMACS_CLIENT"
 }
 
 function emacsFzfFilesearchVerb(){
@@ -959,7 +961,7 @@ function emacsFzfFilesearchVerb(){
         return 1
     fi
 
-    fzfFilesearchVerb "$ZPWR_EMACS"
+    fzfFilesearchVerb "$ZPWR_EMACS_CLIENT"
 
 }
 
@@ -1179,9 +1181,9 @@ function vimFzfSudo(){
     zle .kill-whole-line
 
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        LBUFFER="sudo -E nvim $(fzvim)"
+        LBUFFER="sudo -E nvim $(fzvim nvim)"
     else
-        LBUFFER="sudo -E vim $(fzvim)"
+        LBUFFER="sudo -E vim $(fzvim vim)"
     fi
     mywords=("${(z)BUFFER}")
     if (( $#mywords == 3 )); then
@@ -1454,7 +1456,7 @@ function locateFzfEditNoZLEEmacs(){
         return 1
     fi
 
-    locateFzfEditNoZLE "$ZPWR_EMACS"
+    locateFzfEditNoZLE "$ZPWR_EMACS_CLIENT"
 }
 
 function locateFzfNoZLEEmacs(){
@@ -1464,7 +1466,7 @@ function locateFzfNoZLEEmacs(){
         return 1
     fi
 
-    locateFzfNoZLE "$ZPWR_EMACS"
+    locateFzfNoZLE "$ZPWR_EMACS_CLIENT"
 }
 
 function findFzfEditNoZLE(){
@@ -1537,7 +1539,7 @@ function findFzfEditNoZLEEmacs(){
         return 1
     fi
 
-    findFzfEditNoZLE "$ZPWR_EMACS"
+    findFzfEditNoZLE "$ZPWR_EMACS_CLIENT"
 }
 
 function findFzfNoZLEEmacs(){
@@ -1547,7 +1549,7 @@ function findFzfNoZLEEmacs(){
         return 1
     fi
 
-    findFzfNoZLE "$ZPWR_EMACS"
+    findFzfNoZLE "$ZPWR_EMACS_CLIENT"
 }
 
 function locateFzfEdit(){
@@ -3904,7 +3906,7 @@ function emacsZpwrGtags(){
         return 1
     fi
 
-    getGtags "$ZPWR_EMACS"
+    getGtags "$ZPWR_EMACS_CLIENT"
 }
 
 function vimZpwrGtags(){
@@ -3919,7 +3921,7 @@ function emacsZpwrGtagsEdit(){
         return 1
     fi
 
-    getGtagsEdit "$ZPWR_EMACS"
+    getGtagsEdit "$ZPWR_EMACS_CLIENT"
 }
 
 function vimZpwrGtagsEdit(){

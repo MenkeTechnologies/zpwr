@@ -1,3 +1,14 @@
+#!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: MenkeTechnologies
+##### GitHub: https://github.com/MenkeTechnologies
+##### Date: Sat Jun 13 17:22:20 EDT 2020
+##### Purpose: bash script to email with inotify
+##### Notes:
+#}}}***********************************************************
+
+
 trap "echo;\
 python -c 'print(\"_\" * 100)';
 echo going down;\

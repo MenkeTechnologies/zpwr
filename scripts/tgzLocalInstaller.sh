@@ -7,15 +7,17 @@
 ##### Notes:
 #}}}***********************************************************
 
-trap "echo bye; exit 1" INT
-
-__ScriptVersion="1.0.0"
-
 #=== FUNCTION ================================================================
 # NAME: usage
 # DESCRIPTION: Display usage information.
 #===============================================================================
+
+trap "echo bye; exit 1" int
+
+__scriptversion="1.0.0"
+
 function usage() {
+
     echo "Usage : $0 [options] [--]
 
     Options:
@@ -24,6 +26,28 @@ function usage() {
     -n|no-install No sudo make install" >&2
 
 } # ---------- end of function usage  ----------
+
+function install() {
+
+    if [[ "$1" =~ .*\.tar\.gz ]]; then
+        directory_name="${1%.tar.gz}"
+    elif [[ "$1" =~ .*\.tgz ]]; then
+        directory_name="${1%.tgz}"
+    else
+        echo "Need to be tar.gz or .tgz for automatic!"
+        echo "What is the tarball path?"
+        read directory_name
+    fi
+
+    tar xvfz "$1"
+    cd *"$directory_name" && {
+        if [[ $no_install == true ]]; then
+            ./configure && make
+        else
+            ./configure && make && sudo make install
+        fi
+    }
+}
 
 #-----------------------------------------------------------------------
 # Handle command line arguments
@@ -55,27 +79,6 @@ done
 shift $(($OPTIND - 1))
 
 tarbellDirectory="$1"
-
-install() {
-    if [[ "$1" =~ .*\.tar\.gz ]]; then
-        directory_name="${1%.tar.gz}"
-    elif [[ "$1" =~ .*\.tgz ]]; then
-        directory_name="${1%.tgz}"
-    else
-        echo "Need to be tar.gz or .tgz for automatic!"
-        echo "What is the tarball path?"
-        read directory_name
-    fi
-
-    tar xvfz "$1"
-    cd *"$directory_name" && {
-        if [[ $no_install == true ]]; then
-            ./configure && make
-        else
-            ./configure && make && sudo make install
-        fi
-    }
-}
 
 if [[ -z "$tarbellDirectory" ]]; then
     if [[ ! -f "configure" ]]; then

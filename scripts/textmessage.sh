@@ -15,9 +15,11 @@ if ! type -- "exists" >/dev/null 2>&1;then
 fi
 
 if [[ -z "$1" ]]; then
+
     prettyPrint "need a subject" >&2
     exit 1
 else
+
     member_1="5551113333"
     default_recipent="555111333"
 

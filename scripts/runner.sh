@@ -7,14 +7,16 @@
 ##### Notes:
 #}}}***********************************************************
 
-executableScriptsProcessing() {
+function executableScriptsProcessing() {
+
     # then make it executable
     if [[ ! -x "$1" ]]; then
         chmod 744 "$1"
     fi
 }
 
-compileExecuteTheFile() {
+function compileExecuteTheFile() {
+
     executableScriptsProcessing "$2"
     #compile
     eval "$1 \"$2\""
@@ -25,7 +27,9 @@ compileExecuteTheFile() {
 
     sleep 1000
 }
-executeTheFile() {
+
+function executeTheFile() {
+
     executableScriptsProcessing "$2"
     #execute the file with the proper interpreter or compiler
     if [[ "$1" == "java" ]]; then
@@ -42,7 +46,8 @@ executeTheFile() {
     sleep 1000
 }
 
-executeFileFirstArgIsCommand() {
+function executeFileFirstArgIsCommand() {
+
     executableScriptsProcessing "$2"
     eval "$1"
     sleep 1000
@@ -57,70 +62,70 @@ clear
 fileToBeExecuted="$1"
 
 case "$fileToBeExecuted" in
-*.zsh)
-    executeTheFile zsh "$fileToBeExecuted"
-    ;;
-*.sh)
-    executeTheFile bash "$fileToBeExecuted"
-    ;;
-*.pl)
-    executeTheFile perl "$fileToBeExecuted"
-    ;;
-*.rb)
-    executeTheFile ruby "$fileToBeExecuted"
-    ;;
-*.coffee)
-    executeTheFile coffee "$fileToBeExecuted"
-    ;;
-*.el)
-    executeFileFirstArgIsCommand "emacs --batch --eval '(load-file \"$fileToBeExecuted\")'" "$fileToBeExecuted"
-    ;;
-*.vim)
-    command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | sed -n '4,$p'"
-    executeFileFirstArgIsCommand "$command" "$fileToBeExecuted"
-    ;;
-*.py)
-    executeTheFile python3 "$fileToBeExecuted"
-    ;;
-*.lisp)
-    executeTheFile clisp "$fileToBeExecuted"
-    ;;
-*.hs)
-    executeFileFirstArgIsCommand "ghc -e ':script $fileToBeExecuted'" "$fileToBeExecuted"
-    ;;
-*.java)
-    executeTheFile java "$fileToBeExecuted"
-    ;;
-*.cr)
-    executeTheFile crystal "$fileToBeExecuted"
-    ;;
-*.lua)
-    executeTheFile lua "$fileToBeExecuted"
-    ;;
-*.groovy)
-    executeTheFile groovy "$fileToBeExecuted"
-    ;;
-*.tcl)
-    executeTheFile tclsh "$fileToBeExecuted"
-    ;;
-*.ml)
-    executeTheFile ocaml "$fileToBeExecuted"
-    ;;
-*.swift)
-    executeTheFile swift "$fileToBeExecuted"
-    ;;
-*.f90)
-    compileExecuteTheFile gfortran "$fileToBeExecuted"
-    ;;
-*.clj)
-    executeTheFile clojure "$fileToBeExecuted"
-    ;;
-*.*)
-    echo "Don't know what the run with. File ending is not recognized!" >&2
-    exit 1
-    ;;
-*)
-    echo "Don't know what the run with! No File ending." >&2
-    exit 1
-    ;;
+    *.zsh)
+        executeTheFile zsh "$fileToBeExecuted"
+        ;;
+    *.sh)
+        executeTheFile bash "$fileToBeExecuted"
+        ;;
+    *.pl)
+        executeTheFile perl "$fileToBeExecuted"
+        ;;
+    *.rb)
+        executeTheFile ruby "$fileToBeExecuted"
+        ;;
+    *.coffee)
+        executeTheFile coffee "$fileToBeExecuted"
+        ;;
+    *.el)
+        executeFileFirstArgIsCommand "emacs --batch --eval '(load-file \"$fileToBeExecuted\")'" "$fileToBeExecuted"
+        ;;
+    *.vim)
+        command="vim -i NONE -V1 -Nes -c 'so""$fileToBeExecuted""' -c'echo""|q!' 2>&1 | sed -n '4,$p'"
+        executeFileFirstArgIsCommand "$command" "$fileToBeExecuted"
+        ;;
+    *.py)
+        executeTheFile python3 "$fileToBeExecuted"
+        ;;
+    *.lisp)
+        executeTheFile clisp "$fileToBeExecuted"
+        ;;
+    *.hs)
+        executeFileFirstArgIsCommand "ghc -e ':script $fileToBeExecuted'" "$fileToBeExecuted"
+        ;;
+    *.java)
+        executeTheFile java "$fileToBeExecuted"
+        ;;
+    *.cr)
+        executeTheFile crystal "$fileToBeExecuted"
+        ;;
+    *.lua)
+        executeTheFile lua "$fileToBeExecuted"
+        ;;
+    *.groovy)
+        executeTheFile groovy "$fileToBeExecuted"
+        ;;
+    *.tcl)
+        executeTheFile tclsh "$fileToBeExecuted"
+        ;;
+    *.ml)
+        executeTheFile ocaml "$fileToBeExecuted"
+        ;;
+    *.swift)
+        executeTheFile swift "$fileToBeExecuted"
+        ;;
+    *.f90)
+        compileExecuteTheFile gfortran "$fileToBeExecuted"
+        ;;
+    *.clj)
+        executeTheFile clojure "$fileToBeExecuted"
+        ;;
+    *.*)
+        echo "Don't know what the run with. File ending is not recognized!" >&2
+        exit 1
+        ;;
+    *)
+        echo "Don't know what the run with! No File ending." >&2
+        exit 1
+        ;;
 esac

@@ -1,3 +1,13 @@
+#!/usr/bin/env zsh
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: MenkeTechnologies
+##### GitHub: https://github.com/MenkeTechnologies
+##### Date: Sat Jun 13 17:37:15 EDT 2020
+##### Purpose: zsh script to overalias with grc
+##### Notes:
+#}}}***********************************************************
+
 if [[ "$TERM" != dumb ]] && (( $+commands[grc] )) ; then
   # Prevent grc aliases from overriding zsh completions.
   setopt COMPLETE_ALIASES

@@ -8,6 +8,7 @@
 #}}}***********************************************************
 
 encrypt_program=ccrypt
+
 if [[ ! -e "$1" ]]; then
     echo "file or dir does not exist" >&2
     exit 1

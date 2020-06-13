@@ -8,6 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 out="$(command ps -e |& command grep -v -E '\bgrep\b')"
+
 if echo "$out" | command grep -i -qs 'emacs.*bg-daemon'; then
     loggConsolePrefix "not starting emacs daemon"
 else

@@ -11,7 +11,7 @@ home_dir=$HOME
 scripts_dir=$ZPWR_SCRIPTS
 backup_dir=$scripts_dir/rcBackups
 
-usage() {
+function usage() {
     #here doc for printing multiline
     cat <<\EOM
 usage:

@@ -8,7 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-usage(){
+function usage(){
 {
     cat<<EOF
     Usage: $0 /path/to/oldfile /path/to/newfile <pids>

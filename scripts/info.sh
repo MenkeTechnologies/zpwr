@@ -15,5 +15,3 @@ while true; do
     uname -a | tr 'a-z' 'A-Z' | lolcat
     sleep 60
 done
-
-:

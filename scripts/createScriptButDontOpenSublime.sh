@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-executableScriptsProcessing() {
+function executableScriptsProcessing() {
     # then make it executable
     chmod 700 "$newfile"
     #add hr	echo "#created by JAKOBMENKE --> `date` " >> "$newfile"
@@ -15,14 +15,14 @@ executableScriptsProcessing() {
     openTextEditor
 }
 
-openTextEditor() {
+function openTextEditor() {
     # open -t "$newfile"
     subl "$newfile/dogs"
     #run python3 script with pyautogi commands for keyboard shortcuts
     python3 "$HOME/PycharmProjects/textEditorTwoColumns.py"
 }
 
-createTheFile() {
+function createTheFile() {
     #create newfile
     touch "$newfile"
 

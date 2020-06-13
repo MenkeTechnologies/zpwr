@@ -33,6 +33,7 @@ exists spoof || {
 }
 
 function disable_proxy() {
+
     kill $!
     sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
     prettyPrint "SOCKS proxy disabled"

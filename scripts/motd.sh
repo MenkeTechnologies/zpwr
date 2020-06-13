@@ -3,66 +3,66 @@
 clear
 
 function color (){
-  echo "\e[$1m$2\e[0m"
+    echo "\e[$1m$2\e[0m"
 }
 
 function extend (){
-  local str="$1"
-  let spaces=60-${#1}
-  while [ $spaces -gt 0 ]; do
-    str="$str "
-    let spaces=spaces-1
-  done
-  echo "$str"
+    local str="$1"
+    let spaces=60-${#1}
+    while [ $spaces -gt 0 ]; do
+        str="$str "
+        let spaces=spaces-1
+    done
+    echo "$str"
 }
 
 function center (){
-  local str="$1"
-  let spacesLeft=(78-${#1})/2
-  let spacesRight=78-spacesLeft-${#1}
-  while [ $spacesLeft -gt 0 ]; do
-    str=" $str"
-    let spacesLeft=spacesLeft-1
-  done
-  
-  while [ $spacesRight -gt 0 ]; do
-    str="$str "
-    let spacesRight=spacesRight-1
-  done
-  
-  echo "$str"
+    local str="$1"
+    let spacesLeft=(78-${#1})/2
+    let spacesRight=78-spacesLeft-${#1}
+    while [ $spacesLeft -gt 0 ]; do
+        str=" $str"
+        let spacesLeft=spacesLeft-1
+    done
+
+    while [ $spacesRight -gt 0 ]; do
+        str="$str "
+        let spacesRight=spacesRight-1
+    done
+
+    echo "$str"
 }
 
 function sec2time (){
-  local input=$1
-  
-  if [ $input -lt 60 ]; then
-    echo "$input seconds"
-  else
-    ((days=input/86400))
-    ((input=input%86400))
-    ((hours=input/3600))
-    ((input=input%3600))
-    ((mins=input/60))
-    
-    local daysPlural="s"
-    local hoursPlural="s"
-    local minsPlural="s"
-    
-    if [ $days -eq 1 ]; then
-      daysPlural=""
+    local input=$1
+
+    if [ $input -lt 60 ]; then
+        echo "$input seconds"
+    else
+        ((days=input/86400))
+        ((input=input%86400))
+        ((hours=input/3600))
+        ((input=input%3600))
+        ((mins=input/60))
+
+        local daysPlural="s"
+        local hoursPlural="s"
+        local minsPlural="s"
+
+        if [ $days -eq 1 ]; then
+            daysPlural=""
+        fi
+
+        if [ $hours -eq 1 ]; then
+            hoursPlural=""
+        fi
+
+        if [ $mins -eq 1 ]; then
+            minsPlural=""
+        fi
+
+        echo "$days day$daysPlural, $hours hour$hoursPlural, $mins minute$minsPlural"
     fi
-    
-    if [ $hours -eq 1 ]; then
-      hoursPlural=""
-    fi
-    
-    if [ $mins -eq 1 ]; then
-      minsPlural=""
-    fi
-    
-    echo "$days day$daysPlural, $hours hour$hoursPlural, $mins minute$minsPlural"
-  fi
 }
 
 borderColor=35

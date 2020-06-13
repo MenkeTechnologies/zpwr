@@ -1,4 +1,12 @@
 #!/usr/bin/env zsh
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: MenkeTechnologies
+##### GitHub: https://github.com/MenkeTechnologies
+##### Date: Sat Jun 13 17:36:30 EDT 2020
+##### Purpose: zsh script to delete comp file
+##### Notes:
+#}}}***********************************************************
 
 echo deleting git modified _comps dups
 

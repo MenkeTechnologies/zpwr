@@ -12,13 +12,12 @@ type fping >/dev/null 2>&1 || {
     exit 1
 }
 
-gateway_ip='8.8.8.8'
-
+gateway_ip='1.1.1.1'
 network_check_tries=0
-
 network_check_threshold=5
 
-restart_br0() {
+function restart_br0() {
+
     echo "$(date) Network was not working for the previous $network_check_tries checks."
     echo "Restarting br0"
     sudo ifdown br0

@@ -8,7 +8,7 @@
 #}}}***********************************************************
 printf "\e[37;44m"
 
-displayProgress() {
+function displayProgress() {
     local spinner="\|/-"            # spinner
     local chars=1                   # number of characters to display
     local delay=.1                  # time in seconds between characters
@@ -30,7 +30,7 @@ displayProgress() {
     done
 }
 
-startCursor() {
+function startCursor() {
     #start swiveling cursor in background
     displayProgress &
     #grab its PID so can kill later
@@ -38,13 +38,13 @@ startCursor() {
     sleep 1
 }
 
-killCursor() {
+function killCursor() {
     kill $progress_pid
     wait $progress_pid 2>/dev/null
     tput cnorm
 }
 
-convertFiles() {
+function convertFiles() {
 
     for file in $(ls *.$originalFileEnding); do
         #get first part of name ie frame, delimited by underscore
@@ -65,7 +65,7 @@ convertFiles() {
     done
 }
 
-checkForExistence() {
+function checkForExistence() {
     ls *.$originalFileEnding &>/dev/null || {
         echo "No '$originalFileEnding' files found..."
         exit

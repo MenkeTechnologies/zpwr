@@ -22,7 +22,8 @@ __ScriptVersion="1.0.0"
 # NAME: usage
 # DESCRIPTION: Display usage information.
 #===============================================================================
-usage() {
+function usage() {
+
     echo "Usage : $0 [options] [--]
 
     Options:

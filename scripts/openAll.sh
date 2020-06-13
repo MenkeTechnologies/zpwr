@@ -7,9 +7,8 @@
 ##### Notes:
 #}}}***********************************************************
 
-printf "\e[37;44m"
+function displayProgressIndicator() {
 
-displayProgressIndicator() {
     local spinner="\|/-"            # spinner
     local chars=1                   # number of characters to display
     local delay=.1                  # time in seconds between characters
@@ -32,7 +31,8 @@ displayProgressIndicator() {
     done
 }
 
-startCursor() {
+function startCursor() {
+
     #start swiveling cursor in background
     displayProgressIndicator &
     #grab its PID so can kill later
@@ -40,12 +40,16 @@ startCursor() {
     sleep 1
 }
 
-killCursor() {
+function killCursor() {
+
     kill $progress_pid
     wait $progress_pid 2>/dev/null
     tput cnorm
     printf "\e[0m"
 }
+
+printf "\e[37;44m"
+
 #$# is number of arguments
 
 (($# == 0)) && echo "Need one argument." >&2 && exit 1

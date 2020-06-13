@@ -22,7 +22,8 @@ nproc=10
 # NAME: usage
 # DESCRIPTION: Display usage information.
 #===============================================================================
-usage() {
+function usage() {
+
     echo "Usage : $0 [options] [--]
     Default number of spawned processes is $nproc.
     Change this with -n option.
@@ -34,6 +35,12 @@ usage() {
     -v|version Display script version"
 
 } # ---------- end of function usage  ----------
+
+function killpids() {
+    echo "${1:1}" | perl -ae '`kill $_`for@F'
+    exit 0
+}
+
 
 #-----------------------------------------------------------------------
 # Handle command line arguments
@@ -65,11 +72,6 @@ while getopts "n:dhv" opt; do
     esac # --- end of case ---
 done
 shift $((OPTIND - 1))
-
-killpids() {
-    echo "${1:1}" | perl -ae '`kill $_`for@F'
-    exit 0
-}
 
 if [[ "$detach" == true ]]; then
     alternatingPrettyPrint "Spawning $ZPWR_DELIMITER_CHAR${nproc}$ZPWR_DELIMITER_CHAR processes in background."

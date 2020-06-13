@@ -11,7 +11,7 @@ sortedCommand=gsort
 
 type "$sortedCommand" >/dev/null 2>&1 || sortedCommand=sort
 # set -x
-usage() {
+function usage() {
     #here doc for printing multiline
     cat <<EOM >&2
     usage:
@@ -25,16 +25,16 @@ EOM
 #show file sizes of all files in pwd
 #checking for presence of sorted flag which is
 #set in getopts
-dontSummarizeSizes() {
+function dontSummarizeSizes() {
     [[ -n $sorted ]] && du -sh * | $sortedCommand -h || du -sh *
 }
 
 #show just summarize size
-summarizeSizes() {
+function summarizeSizes() {
     du -sh $(pwd)
 }
 
-showHidden() {
+function showHidden() {
     #checking for presence of sorted flag which is
     #set in getopts
     if [[ $sorted ]]; then

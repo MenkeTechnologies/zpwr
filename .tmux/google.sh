@@ -8,7 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-getOpenCommand(){
+function getOpenCommand(){
     local open_cmd
 
     case "$ZPWR_OS_TYPE" in

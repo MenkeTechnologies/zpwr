@@ -7,14 +7,17 @@
 ##### Purpose: bash script to document
 ##### Notes:
 #}}}***********************************************************
-allRemotes() {
+function allRemotes() {
+
     while read; do
         printf "\x1b[1;34m$REPLY"
         printf "\x1b[0m\x0a"
         git remote show "$REPLY"
     done < <(git remote)
 }
-banner() {
+
+function banner() {
+
     if [[ -d "$ZPWR" ]]; then
         if cd "$ZPWR"; then
             version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"

@@ -8,6 +8,7 @@
 #}}}***********************************************************
 dir_watched="$1"
 first_iteration=true
+
 while read -d "" event; do
 
     echo "The event was $event"

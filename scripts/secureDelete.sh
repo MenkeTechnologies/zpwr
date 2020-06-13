@@ -16,7 +16,7 @@ e_badargs=70 # Various error exit codes.
 e_not_found=71
 e_changed_mind=72
 
-displayProgress() {
+function displayProgress() {
 
     local arr=('|' '\' '-' '/')
     local revarr=('|' '/' '-' '\')
@@ -38,7 +38,8 @@ displayProgress() {
 
 }
 
-startCursor() {
+function startCursor() {
+
     #cursor is invisible
     tput civis
     #bold text
@@ -49,7 +50,8 @@ startCursor() {
     progress_pid=$!
 }
 
-killCursor() {
+function killCursor() {
+
     #kill cursor with PID store in startCursor
     kill $progress_pid
     #discard error message

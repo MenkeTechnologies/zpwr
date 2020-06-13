@@ -9,7 +9,7 @@
 
 trap "tput cnorm; exit" INT TERM QUIT
 
-usage() {
+function usage() {
 
     cat <<EOM
     usage:

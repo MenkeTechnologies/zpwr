@@ -12,7 +12,8 @@ cols=$(tput cols)
 
 printf "Starting..."
 
-startCursor() {
+function startCursor() {
+
     #cursor is invisible
     tput civis
 
@@ -22,7 +23,8 @@ startCursor() {
     progress_pid=$!
 }
 
-killCursor() {
+function killCursor() {
+
     #kill cursor with PID store in startCursor
     kill $progress_pid
     #discard error message
@@ -31,7 +33,7 @@ killCursor() {
     tput cnorm
 }
 
-displayProgress() {
+function displayProgress() {
 
     local arr=('|' '\' '-' '/')
     local revarr=('|' '/' '-' '\')

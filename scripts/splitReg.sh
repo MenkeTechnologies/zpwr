@@ -13,6 +13,7 @@ fi
 trap 'rm "$file"' INT
 
 function usage() {
+
     echo -e "\e[34mUsage : $0 [options] [--]
 
     Options:

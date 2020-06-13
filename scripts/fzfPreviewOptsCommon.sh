@@ -7,6 +7,7 @@
 ##### Purpose: bash script to
 ##### Notes: no single quotes
 #}}}***********************************************************
+
 source "$ZPWR_SCRIPTS/lib.sh" || {
     echo "cannot access lib.sh" >&2
     exit 1

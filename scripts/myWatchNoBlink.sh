@@ -12,7 +12,7 @@
 #make cursor visible and get rid of bold
 trap 'tput cnorm; printf "\e[0m"; exit' INT
 
-usage() {
+function usage() {
 
     cat <<EOM
     usage:
@@ -20,6 +20,34 @@ usage() {
     -b display bold
 EOM
     exit 1
+}
+
+function watchCommand() {
+
+    home=$(tput cup 0 0)
+    #tput ed clears to end of screen
+    ed=$(tput ed)
+    #tput el clears to end of line
+    el=$(tput el)
+    #position cursor at 0,0
+    printf '%s%s' "$home" "$ed"
+    while true; do
+        #adapts to resizing of screen
+        ROWS=$(tput lines)
+        COLS=$(tput cols)
+        CMD="$@"
+        eval "$CMD" | head -n "$ROWS" | while IFS= read; do
+            #prints %-30.5s = 30 spaces for left justificationa and five characters
+            printf '%-*.*s%s\n' $COLS $COLS "$REPLY" "$el"
+        done
+        #position cursor back to 0,0
+        printf '%s%s' "$ed" "$home"
+        sleep $timeToSleep
+    done
+
+    if [[ $boldflag == true ]]; then
+        printf "\e[0m"
+    fi
 }
 
 optstring=bh
@@ -55,32 +83,6 @@ if [[ $boldflag == true ]]; then
     printf "\e[1m"
 fi
 
-watchCommand() {
-    home=$(tput cup 0 0)
-    #tput ed clears to end of screen
-    ed=$(tput ed)
-    #tput el clears to end of line
-    el=$(tput el)
-    #position cursor at 0,0
-    printf '%s%s' "$home" "$ed"
-    while true; do
-        #adapts to resizing of screen
-        ROWS=$(tput lines)
-        COLS=$(tput cols)
-        CMD="$@"
-        eval "$CMD" | head -n "$ROWS" | while IFS= read; do
-            #prints %-30.5s = 30 spaces for left justificationa and five characters
-            printf '%-*.*s%s\n' $COLS $COLS "$REPLY" "$el"
-        done
-        #position cursor back to 0,0
-        printf '%s%s' "$ed" "$home"
-        sleep $timeToSleep
-    done
-
-    if [[ $boldflag == true ]]; then
-        printf "\e[0m"
-    fi
-}
 
 #make cursor invisible
 tput civis

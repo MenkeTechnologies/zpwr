@@ -10,6 +10,21 @@
 total=0
 commands=""
 
+function findTotal() {
+
+    total=$(expr $(ls -F $1 | grep ".*[*@]" | wc -l) + $total)
+
+    for f in $(ls -A $1); do
+
+        if [ -x "$1/$f" ]; then
+
+            commands="$f $commands"
+        fi
+
+    done
+
+}
+
 while getopts "chd" OPTION; do
     case $OPTION in
 
@@ -34,20 +49,6 @@ while getopts "chd" OPTION; do
     esac
 done
 
-findTotal() {
-
-    total=$(expr $(ls -F $1 | grep ".*[*@]" | wc -l) + $total)
-
-    for f in $(ls -A $1); do
-
-        if [ -x "$1/$f" ]; then
-
-            commands="$f $commands"
-        fi
-
-    done
-
-}
 
 dirNum=$(expr $(echo $PATH | tr -cd : | wc -c) + 1)
 

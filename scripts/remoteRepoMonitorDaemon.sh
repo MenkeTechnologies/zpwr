@@ -14,7 +14,8 @@ ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
 [[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && exit 1
 [[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && exit 1
 
-gittersmaster() {
+function gittersmaster() {
+
     git fetch -f --all --prune --tags
     git reset --hard origin/master
     git checkout -B master origin/master
@@ -22,7 +23,8 @@ gittersmaster() {
     git reset --hard origin/master
 }
 
-gittersdev() {
+function gittersdev() {
+
     git fetch -f --all --prune --tags
     git reset --hard origin/dev
     git checkout -B dev origin/dev
@@ -30,7 +32,8 @@ gittersdev() {
     git reset --hard origin/dev
 }
 
-main() {
+function main() {
+
     gittersdev
     #cp .shell_aliases_functions.sh "$HOME/.zpwr"
     #cp .zshrc "$HOME"
@@ -59,7 +62,8 @@ main() {
     refreshers
 }
 
-refreshers() {
+function refreshers() {
+
     #create new zsh in right pane
     #space for safety as C-c tends to cut off first character
     tmux send-keys -t right C-c C-c C-c " tmux source-file ~/.tmux.conf; exec zsh" C-m

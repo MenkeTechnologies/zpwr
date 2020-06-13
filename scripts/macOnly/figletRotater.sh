@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: MenkeTechnologies
+##### GitHub: https://github.com/MenkeTechnologies
+##### Date: Sat Jun 13 17:34:28 EDT 2020
+##### Purpose: bash script to print random figet fonts
+##### Notes:
+#}}}***********************************************************
+
 [[ "$(uname)" == Darwin ]] && {
     FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
 } || {

@@ -7,6 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 minutes_to_sleep=10
+
 while true; do
     logg "Updating Software"
     oldtime=$(date +"%s")

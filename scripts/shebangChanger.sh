@@ -38,18 +38,20 @@ endofmessage
     printf "\e[0m"
 }
 
-(($# < 2)) && usage >&2 && exit 1
+function addContents() {
 
-executableProgram=$1
-path="#!/usr/bin/env $executableProgram"
-shift
-
-addContents() {
     printf "\e[1;4m Adding shebang : $path to $file\e[0m\n"
     echo "$path" >"$file"
     echo "$tail" >>"$file"
     chmod u+x "$file"
 }
+
+
+(($# < 2)) && usage >&2 && exit 1
+
+executableProgram=$1
+path="#!/usr/bin/env $executableProgram"
+shift
 
 for file; do
     lineCounter=1
