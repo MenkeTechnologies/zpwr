@@ -2312,12 +2312,12 @@ recachedCompsys=false
 # reload compsys cache if file is stale for 1 week
 for dump in ~/.zcompdump*(N.mh+168); do
     logg "regenerating stale '$dump' older than 1 week"
+    #lines="$(command grep "#omz" "$ZSH_COMPDUMP")"
     # avoid insecure warning message with -u
-    lines="$(command grep "#omz" "$ZSH_COMPDUMP")"
-    compinit -u -d "$ZSH_COMPDUMP"
-    echo "$lines" >> "$ZSH_COMPDUMP"
+    #compinit -u -d "$ZSH_COMPDUMP"
+    #echo "$lines" >> "$ZSH_COMPDUMP"
     #zcompile $ZSH_COMPDUMP
-    recachedCompsys=true
+    #recachedCompsys=true
     break
 done
 
