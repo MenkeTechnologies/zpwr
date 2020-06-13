@@ -245,8 +245,8 @@ alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
 alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
 alias tok="builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
 alias conf="builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR/.tmux.conf $ZPWR/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_TOKEN_PRE $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
-alias etok="builtin cd $ZPWR; ${ZPWR_EMACS} $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
-alias econf="builtin cd $ZPWR; ${ZPWR_EMACS} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_TOKEN_PRE $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
+alias etok="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
+alias econf="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_TOKEN_PRE $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
 alias zpt="builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;clearList;isGitDir && git diff HEAD"
 #}}}***********************************************************
 alias deleteTab="sed '/^[\x20\x09]*$/d'"
@@ -2788,7 +2788,7 @@ function commits(){
 function emacsEmacsConfig(){
 
     builtin cd $ZPWR
-    ${=ZPWR_EMACS} \
+    ${=ZPWR_EMACS_CLIENT} \
     "$ZPWR_INSTALL/.spacemacs" \
     "$ZPWR_INSTALL/emacs/snippets/"*-mode/*
     clearList
@@ -2808,14 +2808,14 @@ function vimEmacsConfig(){
 function emacsZpwr(){
 
     builtin cd $ZPWR
-    ${=ZPWR_EMACS} .
+    ${=ZPWR_EMACS_CLIENT} .
     clearList
     isGitDir && git diff HEAD
 }
 function emacsAll(){
 
     builtin cd $ZPWR
-    ${=ZPWR_EMACS} \
+    ${=ZPWR_EMACS_CLIENT} \
     "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR/"*.md \
@@ -2856,7 +2856,7 @@ function vimAll(){
 
 function emacsScripts(){
 
-    ${=ZPWR_EMACS} \
+    ${=ZPWR_EMACS_CLIENT} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
