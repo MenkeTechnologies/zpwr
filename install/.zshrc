@@ -2689,7 +2689,6 @@ alias fori="for (( i = 0; i < $ZPWR_TABSTOP; ++i )); do
 done"
 
 alias lg="logg $(tabNumCmd 1 tr a-zA-Z)=$(tabNumCmd 1 tr a-zA-Z)"
-alias vb="cd $HOME/.vim/bundle"
 
 alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) master$ZPWR_TABSTOP FETCH_HEAD | less"
 

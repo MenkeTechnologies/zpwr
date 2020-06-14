@@ -410,11 +410,7 @@ alias shutpy="execpy shutdown.py"
 alias pb="execpy bills.py"
 alias ud=" execpy udemy.py"
 alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit0} if /inet\\s/ and !/127/'"
-
 alias pgrep='pgrep -l'
-alias dl="cd $ZPWR_DL"
-alias docu="cd $ZPWR_DOC"
-alias mus='cd $HOME/Music'
 alias jobs="jobs -l"
 alias sd="clear;ssh d "
 alias cl=clear
@@ -424,8 +420,19 @@ exists hexedit && alias he='hexedit -l 16'
 alias fh='f !$'
 alias gh=openmygh
 eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
+alias dl="cd $ZPWR_DL"
+alias docu="cd $ZPWR_DOC"
+alias mus="cd $HOME/Music"
+
+if [[ -d "$HOME/.vim/bundle" ]]; then
+    alias vb="cd $HOME/.vim/bundle"
+fi
+
+if [[ -d "$HOME/.emacs.d/elpa" ]]; then
+    alias eb="cd $HOME/.emacs.d/elpa"
+fi
 #**********************************************************************
-#                           MARK:SHELL ZPWR_SCRIPTS
+#                           MARK:aliases for ZPWR_SCRIPTS
 #**********************************************************************
 alias inst="bash $ZPWR_SCRIPTS/tgzLocalInstaller.sh"
 alias ct="bash $ZPWR_SCRIPTS/createTextFile.sh"
