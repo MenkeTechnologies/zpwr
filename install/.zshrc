@@ -4070,9 +4070,9 @@ fi
 #{{{                    MARK:Misc
 #**************************************************************
 
-exists zunit && {
+if exists zunit; then
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
-}
+fi
 
 # Example usage: zmv -W '*.pl' '*.perl'
 autoload zmv
