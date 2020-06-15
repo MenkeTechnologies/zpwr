@@ -1391,28 +1391,6 @@ function gsdc(){
 
 }
 
-function gitCommitAndPush(){
-
-    if ! isGitDir; then
-       loggErr "not in a git dir."
-       return 1
-    fi
-
-
-    currentDir="$(pwd -P)"
-    for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
-       if [[ "$currentDir" == "$dir" ]]; then
-           return 1
-       fi
-    done
-
-    echo
-    git pull --no-rebase
-    git add .
-    git commit -m "$1"
-    git push
-}
-
 function replacer(){
 
     if [[ -z "$2" ]]; then
