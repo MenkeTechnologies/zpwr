@@ -78,6 +78,9 @@ ETAGS
 #######################################################################
 #cmake
 cmake-build-debug/
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
 #object files
 *.[oa]
 
