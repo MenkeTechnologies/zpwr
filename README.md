@@ -318,6 +318,12 @@ export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 ```
 to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
 
+## Adding more OMZ plugins
+Add in `~/.zpwr/local/.tokens.sh` your extra plugins
+```sh
+plugins+=(omzplug1 omzplug2)
+```
+
 ## Environment Variables
 These are environment variables set in `~/.zpwr/.zpwr_env.sh` which you can override in your `~/.zpwr/local/.tokens.sh` to customize the behavior of the terminal setup.
 ```sh
