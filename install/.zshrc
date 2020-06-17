@@ -2621,6 +2621,10 @@ alias gac='git add . && git commit -m "'$ZPWR_TABSTOP'"'
 exists zf || alias zf="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' *"
 exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'isGitDir && { gffa; bk; gla; zp gitclearcache; }' *"
 
+exists zfgmw || alias zfgmw="$ZPWR_REPO_NAME fordir 'isGitDir && { gco master; gffa; git clean -dff && git reset --hard origin/master && git clean -dff ; gla; zp gitclearcache; }' *"
+
+exists zfgdw || alias zfgdw="$ZPWR_REPO_NAME fordir 'isGitDir && { gco development; gffa; git clean -dff && git reset --hard origin/development && git clean -dff ; gla; zp gitclearcache; }' *"
+
 exists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'isGitDir && { gco master; gffa; bk; gla; zp gitclearcache; }' *"
 
 exists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'isGitDir && { gco development; gffa; bk; gla; zp gitclearcache; }' *"
@@ -2628,6 +2632,8 @@ exists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'isGitDir && { gco development
 exists zff || alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
 exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
+
+exists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'gfa;git reset origin/\$(git_current_branch) --hard ;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
 exists zu8 || alias zu8='zpwr updateall'
 exists zua || alias zua='zpwr updateall; zpwr regen'
