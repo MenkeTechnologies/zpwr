@@ -2708,6 +2708,10 @@ if [[ -d "$ZPWR_SCRIPTS" ]]; then
     exists zs || alias zs="cd $ZPWR_SCRIPTS"
 fi
 
+if [[ -d "$ZPWR_SCRIPTS_MAC" ]]; then
+    exists zsm || alias zsm="cd $ZPWR_SCRIPTS_MAC"
+fi
+
 if [[ -d "$ZPWR" ]]; then
     exists zh || alias zh="cd $ZPWR"
 fi
