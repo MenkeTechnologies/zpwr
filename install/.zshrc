@@ -2629,7 +2629,7 @@ exists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'isGitDir && { gco master; gff
 
 exists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'isGitDir && { gco development; gffa; bk; gla; zp gitclearcache; }' *"
 
-exists zff || alias zff="$ZPWR_REPO_NAME fordir '$ZPWR_TABSTOP' \$(cat $ZPWR_ALL_GIT_DIRS)"
+exists zff || alias zff="$ZPWR_REPO_NAME fordir 'isGitDir&& {$ZPWR_TABSTOP;}' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
 exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'gfa;bk;gla;zp gitclearcache' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
