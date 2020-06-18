@@ -3780,6 +3780,19 @@ function zshrcsearch(){
     fi
 }
 
+function zpwrEnvCounts(){
+
+    prettyPrint "Commands: ${#commands}"
+    prettyPrint "Functions: ${#functions}"
+    prettyPrint "Completions: ${#_comps}"
+    prettyPrint "Functions (not completions): "$(( $#functions - $#_comps ))
+    prettyPrint "Aliases: ${#aliases}"
+    prettyPrint "Global Aliases: ${#galiases}"
+    prettyPrint "Suffix Aliases: ${#saliases}"
+    prettyPrint "Builtins: ${#builtins}"
+    prettyPrint "Parameters: ${#parameters}"
+}
+
 function zarg(){
 
     if [[ -z "$2" ]]; then

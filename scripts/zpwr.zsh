@@ -61,6 +61,7 @@ ZPWR_VERBS[emacsfilesearchedit]='emacsFzfFilesearchVerbEdit=edit emacs a file in
 ZPWR_VERBS[envaccept]='fzfEnvVerbAccept=accept from fzf env'
 ZPWR_VERBS[envedit]='fzfEnvVerbEdit=edit from fzf env'
 ZPWR_VERBS[envvars]='zpwrEnvVars=list all ZPWR env vars'
+ZPWR_VERBS[envcounts]='zpwrEnvCounts=count all ZPWR env'
 ZPWR_VERBS[envsearch]='fzfEnv=search all aliases, parameters, builtins, keywords and functions'
 ZPWR_VERBS[figletfonts]='figletfonts=show all figlet fonts'
 ZPWR_VERBS[findsearch]='findFzfNoZLEC=c find drive for file'
