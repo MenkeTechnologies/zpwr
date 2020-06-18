@@ -1300,8 +1300,8 @@ function regenZshCompCache(){
     prettyPrint "regen zsh compsys cache"
     local lines
     lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
-    echo command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*
-    command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*
+    echo command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*(DN)
+    command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*(DN)
     compinit -u -d "$ZSH_COMPDUMP"
     echo "$lines" >> "$ZSH_COMPDUMP"
 }
