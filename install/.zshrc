@@ -3791,6 +3791,8 @@ function zpwrEnvCounts(){
     prettyPrint "Suffix Aliases: ${#saliases}"
     prettyPrint "Builtins: ${#builtins}"
     prettyPrint "Parameters: ${#parameters}"
+    prettyPrint "ZPWR verbs: ${#ZPWR_VERBS}"
+    prettyPrint "ZPWR environment variables: $(env | command grep -i '^ZPWR' | wc -l | tr -d ' ')"
 }
 
 function zarg(){
