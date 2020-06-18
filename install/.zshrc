@@ -2728,6 +2728,10 @@ if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
     exists zlt || alias zlt="cd $ZPWR_HIDDEN_DIR_TEMP"
 fi
 
+if [[ -d "$ZPWR_LOCAL/installer" ]]; then
+    exists zli || alias zli="cd $ZPWR_LOCAL/installer"
+fi
+
 if [[ -d "$ZPWR_LOCAL" ]]; then
     exists zl || alias zl="cd $ZPWR_LOCAL"
     exists zlr || alias zlr="cd $ZPWR_LOCAL/rcBackups"
