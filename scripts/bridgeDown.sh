@@ -8,10 +8,8 @@
 ##### Notes: eth0 replaces br0, tap0 and eth0 bridge
 #}}}***********************************************************
 
-#######################################################################
-#                             LOCAL VARS                              #
-#######################################################################
-
+#{{{                    MARK:Local Vars
+#**************************************************************
 # Define physical ethernet interface to be bridged
 # with TAP interface(s) above.
 eth="eth0"
@@ -26,11 +24,10 @@ br="br0"
 
 # Define list of TAP interfaces to be bridged together
 tap="tap0"
+#}}}**************************************************************
 
-#######################################################################
-#                          TAKE DOWN BRIDGE                           #
-#######################################################################
-
+#{{{                    MARK:Take Down Bridge
+#**************************************************************
 iptables -D INPUT -i $br -j ACCEPT
 iptables -D FORWARD -i $br -j ACCEPT
 
@@ -44,3 +41,4 @@ done
 
 ifconfig $eth $eth_ip netmask $eth_netmask broadcast $eth_broadcast
 route add default gw $eth_gateway $eth
+#}}}**************************************************************

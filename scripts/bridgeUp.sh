@@ -8,10 +8,8 @@
 ##### Notes: br0, tap0 and eth0 bridged
 #}}}***********************************************************
 
-#######################################################################
-#                             LOCAL VARS                              #
-#######################################################################
-
+#{{{                    MARK:Local vars
+#**************************************************************
 # Define physical ethernet interface to be bridged
 # with TAP interface(s) above.
 eth="eth0"
@@ -26,11 +24,10 @@ br="br0"
 
 # Define list of TAP interfaces to be bridged together
 tap="tap0"
+#}}}**************************************************************
 
-#######################################################################
-#                           BRING UP BRIDGE                           #
-#######################################################################
-
+#{{{                    MARK:Bring up bridge
+#**************************************************************
 for t in $tap; do
     openvpn --mktun --dev $t
 done
@@ -55,3 +52,4 @@ ifconfig $eth 0.0.0.0 promisc up
 ifconfig $br $eth_ip netmask $eth_netmask broadcast $eth_broadcast
 ip link set $br address $eth_mac
 route add default gw $eth_gateway $br
+#}}}**************************************************************
