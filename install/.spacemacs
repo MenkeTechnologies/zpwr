@@ -860,7 +860,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
             (define-key evil-normal-state-local-map (kbd "C-k") #'zpwr/up-four)
             (define-key evil-normal-state-local-map (kbd "C-h") #'zpwr/right-four)
             (define-key evil-normal-state-local-map (kbd "C-l") #'zpwr/left-four)
-            (define-key evil-normal-state-local-map (kbd "C-z") #'helm-swoop)
+            (define-key evil-normal-state-local-map (kbd "C-s") #'helm-swoop)
             (define-key evil-normal-state-local-map (kbd "gd") #'spacemacs/jump-to-definition)
             ;;(message "evil normal setup done")
         )
@@ -902,7 +902,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
         (define-key evil-evilified-state-map (kbd "C-k") #'zpwr/up-four)
         (define-key evil-evilified-state-map (kbd "C-h") #'zpwr/right-four)
         (define-key evil-evilified-state-map (kbd "C-l") #'zpwr/left-four)
-        (define-key evil-evilified-state-local-map (kbd "C-z") #'helm-swoop)
+        (define-key evil-evilified-state-local-map (kbd "C-s") #'helm-swoop)
       )
     )
 
@@ -1116,10 +1116,10 @@ you should place your code here."
     (define-key evil-insert-state-map (kbd "C-d") #'company-complete)
     (define-key evil-insert-state-map (kbd "C-SPC") #'company-complete)
 
-    (define-key evil-insert-state-map (kbd "C-z") #'helm-swoop)
-    (define-key evil-normal-state-map (kbd "C-z") #'helm-swoop)
+    (define-key evil-insert-state-map (kbd "C-s") #'helm-swoop)
+    (define-key evil-normal-state-map (kbd "C-s") #'helm-swoop)
 
-    ;;(define-key overriding-local-map (kbd "C-z") #'helm-swoop)
+    ;;(define-key overriding-local-map (kbd "C-s") #'helm-swoop)
 
     (define-key evil-insert-state-map (kbd "C-f") #'spacemacs/frame-killer)
     (define-key evil-normal-state-map (kbd "C-f") #'spacemacs/frame-killer)
