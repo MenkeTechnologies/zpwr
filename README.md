@@ -257,8 +257,8 @@ function linkConf(){
 ```
 
 ## Tmux prefix
-The default tmux prefix key is C-z (control-z) on macOS so one can control inner tmux sessions on Linux/UNIX (prefix is C-b) separately.
-To invoke C-z in the shell press C-z twice.
+The default tmux prefix key is C-a (control-a) on macOS so one can control inner tmux sessions on Linux/UNIX (prefix is C-b) separately.
+To invoke C-a in the shell press C-a twice.
 The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed and dehighlight when prefix is deactivated.
 
 ## Autosaving Vim Plugins
