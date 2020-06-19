@@ -30,6 +30,17 @@ function loggNotGit() {
     loggErr "$(pwd) is not a git dir"
 }
 
+function loggInfo(){
+
+    test -z "$1" && loggErr "need arg" >&2 && return 1
+    {
+        printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____INFO: "
+        printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
+        printf "\x1b[0m"
+        printf "\n"
+    } >&1
+}
+
 function loggErr(){
 
     test -z "$1" && loggErr "need arg" >&2 && return 1

@@ -3795,24 +3795,26 @@ function zpwrLineCount(){
 
 function zpwrEnvCounts(){
 
-    prettyPrint "Commands: ${#commands}"
-    prettyPrint "Functions: ${#functions}"
-    prettyPrint "Completions: ${#_comps}"
-    prettyPrint "Functions (not completions): "$(( $#functions - $#_comps ))
-    prettyPrint "ZPWR functions: "${(k)functions[(I)*zpwr*]}
-    prettyPrint "Aliases: ${#aliases}"
-    prettyPrint "Global Aliases: ${#galiases}"
-    prettyPrint "Git Aliases: "${#aliases[(R)*git*]}
-    prettyPrint "Cd Aliases: "${#aliases[(R)*cd*]}
-    prettyPrint "ZPWR Aliases: "${#aliases[(R)(#i)*zpwr*]}
-    prettyPrint "Suffix Aliases: ${#saliases}"
-    prettyPrint "Builtins: ${#builtins}"
-    prettyPrint "Reserved words: ${#reswords}"
-    prettyPrint "Parameters: ${#parameters}"
-    prettyPrint "Environment Variables: "${#parameters[(R)scalar-export]}
-    prettyPrint "Local Parameters: "${#parameters[(R)^scalar-export]}
-    prettyPrint "ZPWR verbs: ${#ZPWR_VERBS}"
-    prettyPrint "ZPWR environment variables: " ${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
+    prettyPrint "ENV COUNTS"
+    echo "Commands: ${#commands}"
+    echo "Functions: ${#functions}"
+    echo "Completions: ${#_comps}"
+    echo "Functions (not completions): "$(( $#functions - $#_comps ))
+    echo "Builtins: ${#builtins}"
+    echo "Reserved words: ${#reswords}"
+    echo "Parameters: ${#parameters}"
+    echo "Environment Variables: "${#parameters[(R)scalar-export]}
+    echo "Local Parameters: "${#parameters[(R)^scalar-export]}
+    echo "Aliases: ${#aliases}"
+    echo "Global Aliases: ${#galiases}"
+    echo "Git Aliases: "${#aliases[(R)*git*]}
+    echo "Cd Aliases: "${#aliases[(R)*cd*]}
+    echo "Suffix Aliases: ${#saliases}"
+    prettyPrint "ZPWR COUNTS"
+    echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
+    echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
+    echo "ZPWR verbs: ${#ZPWR_VERBS}"
+    echo "ZPWR environment variables: " ${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
 }
 
 function zarg(){

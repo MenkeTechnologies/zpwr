@@ -129,6 +129,8 @@ ZPWR_VERBS[loadjenv]='loadJenv=lazy load jenv, calls jenv $@'
 ZPWR_VERBS[locatesearch]='locateFzfNoZLEC=accept locate drive for file'
 ZPWR_VERBS[locatesearchedit]='locateFzfEditNoZLEC=edit locate drive for file'
 ZPWR_VERBS[log]='logg=write to \$ZPWR_LOGFILE'
+ZPWR_VERBS[logerror]='loggErr=write error to console'
+ZPWR_VERBS[loginfo]='loggInfo=write info to console'
 ZPWR_VERBS[logincount]='loginCount=count of logins by user'
 ZPWR_VERBS[lsof]='killLsofVerbAccept=kill from lsof output'
 ZPWR_VERBS[lsofedit]='killLsofVerbEdit=edit kill from lsof output'
@@ -242,10 +244,10 @@ if [[ -n "$verb" ]]; then
             cmd=${v%%=*}
             for exp in ${(s%;%)cmd}; do
                 if alias $exp 1>/dev/null 2>&1;then
-                    prettyPrint "Eval subcommand '$exp'"
+                    logg "Eval subcommand '$exp'"
                     eval "$exp"
                 else
-                    prettyPrint "Exec subcommand '$exp'"
+                    logg "Exec subcommand '$exp'"
                     eval "$exp " ${(q)@}
                 fi
             done
@@ -254,7 +256,7 @@ if [[ -n "$verb" ]]; then
     done
 
     if [[ $found == false ]]; then
-        prettyPrint "Unknown subcommand: '$verb'"
+        loggErr "Unknown subcommand: '$verb'"
         return 1
     fi
 fi
