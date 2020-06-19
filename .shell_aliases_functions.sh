@@ -190,6 +190,7 @@ alias loo="tail -n 1000 -F $ZPWR_LOGFILE"
 alias ol="tail -n 1000 -F $ZPWR_LOGFILE"
 alias llo="tail -n 1000 -F $ZPWR_LOGFILE"
 alias va='cd /var'
+alias vl='cd /var/log'
 exists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
 alias cpan='rlwrap cpan'
 alias nz='exec zsh'
