@@ -29,10 +29,10 @@
 # `b `       '  d'
 
 #GITHUB_ACCOUNT environment variable needed for the script to create a remote repository
-##########################################
-############### functions ##############
-##########################################
 
+
+#{{{                    MARK:Functions
+#**************************************************************
 function myPrettyPrint() {
     #print white text 37m on blue background 44m
     printf "\e[37;44m"
@@ -170,16 +170,14 @@ function commitTheDirectory() {
         getRemoteDetails "${REPO_NAME##*/}"
     }
 }
+#}}}**************************************************************
 
-##########################################
-############### MAIN ##############
-##########################################
 
+#{{{                    MARK:Getopts
+#**************************************************************
 #possible options to script= -h for help, -p with argument to push with commit,
 #-l to pull from github, and -c to create repo
 #only one option at a time forced with break
-#{{{ MARK:GETOPTS
-#**************************************************************
 optstring=p:hcl
 while getopts $optstring opt; do
     case $opt in
@@ -202,9 +200,11 @@ while getopts $optstring opt; do
     *) usage >&2 ;;
     esac
 done
+#}}}**************************************************************
 
-#}}}***********************************************************
 
+#{{{                    MARK:main
+#**************************************************************
 #if no options and no arguments passed to script then commit with "default-commit"
 #if no options and 1 argument then commit with 1 argument
 #gitPush function checks for presence of .git directory
@@ -215,3 +215,5 @@ if [[ $OPTIND == 1 ]]; then
         gitPush "$1"
     fi
 fi
+#}}}**************************************************************
+
