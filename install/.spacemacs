@@ -1140,6 +1140,8 @@ you should place your code here."
 
     (spacemacs/set-leader-keys (kbd "o.") #'helm-themes)
 
+    (spacemacs/set-leader-keys (kbd "on") #'helm-M-x)
+
     (spacemacs/set-leader-keys (kbd "o,") #'dotspacemacs/sync-configuration-layers)
 
     (spacemacs/set-leader-keys (kbd "o/") #'spotify-playpause)
