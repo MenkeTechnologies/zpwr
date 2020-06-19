@@ -3799,18 +3799,20 @@ function zpwrEnvCounts(){
     prettyPrint "Functions: ${#functions}"
     prettyPrint "Completions: ${#_comps}"
     prettyPrint "Functions (not completions): "$(( $#functions - $#_comps ))
-    prettyPrint "ZPWR functions: "$(zpwrLineCount 'declare +f' zpwr)
+    prettyPrint "ZPWR functions: "${(k)functions[(I)*zpwr*]}
     prettyPrint "Aliases: ${#aliases}"
     prettyPrint "Global Aliases: ${#galiases}"
-    prettyPrint "Git Aliases: "$(zpwrLineCount alias '\bgit\b')
-    prettyPrint "Cd Aliases: "$(zpwrLineCount alias '\bcd\b')
-    prettyPrint "ZPWR Aliases: "$(zpwrLineCount alias zpwr)
+    prettyPrint "Git Aliases: "${#aliases[(R)*git*]}
+    prettyPrint "Cd Aliases: "${#aliases[(R)*cd*]}
+    prettyPrint "ZPWR Aliases: "${#aliases[(R)(#i)*zpwr*]}
     prettyPrint "Suffix Aliases: ${#saliases}"
     prettyPrint "Builtins: ${#builtins}"
     prettyPrint "Reserved words: ${#reswords}"
     prettyPrint "Parameters: ${#parameters}"
+    prettyPrint "Environment Variables: "${#parameters[(R)scalar-export]}
+    prettyPrint "Local Parameters: "${#parameters[(R)^scalar-export]}
     prettyPrint "ZPWR verbs: ${#ZPWR_VERBS}"
-    prettyPrint "ZPWR environment variables: $(zpwrLineCount env '^ZPWR_')"
+    prettyPrint "ZPWR environment variables: " ${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
 }
 
 function zarg(){
