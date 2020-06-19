@@ -3782,19 +3782,35 @@ function zshrcsearch(){
     fi
 }
 
+function zpwrLineCount(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage zpwrLineCount <cmd> <search>"
+        return 1
+    fi
+
+    eval "$1" | command grep -i -E "$2" | wc -l | tr -d ' '
+
+}
+
 function zpwrEnvCounts(){
 
     prettyPrint "Commands: ${#commands}"
     prettyPrint "Functions: ${#functions}"
     prettyPrint "Completions: ${#_comps}"
     prettyPrint "Functions (not completions): "$(( $#functions - $#_comps ))
+    prettyPrint "ZPWR functions: "$(zpwrLineCount 'declare +f' zpwr)
     prettyPrint "Aliases: ${#aliases}"
     prettyPrint "Global Aliases: ${#galiases}"
+    prettyPrint "Git Aliases: "$(zpwrLineCount alias '\bgit\b')
+    prettyPrint "Cd Aliases: "$(zpwrLineCount alias '\bcd\b')
+    prettyPrint "ZPWR Aliases: "$(zpwrLineCount alias zpwr)
     prettyPrint "Suffix Aliases: ${#saliases}"
     prettyPrint "Builtins: ${#builtins}"
+    prettyPrint "Reserved words: ${#reswords}"
     prettyPrint "Parameters: ${#parameters}"
     prettyPrint "ZPWR verbs: ${#ZPWR_VERBS}"
-    prettyPrint "ZPWR environment variables: $(env | command grep -i '^ZPWR' | wc -l | tr -d ' ')"
+    prettyPrint "ZPWR environment variables: $(zpwrLineCount env '^ZPWR_')"
 }
 
 function zarg(){
