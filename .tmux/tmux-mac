@@ -1,6 +1,6 @@
-unbind C-b
+unbind $ZPWR_TMUX_PREFIX_LINUX
 #unbind -T prefix C-z
-set -g prefix C-a
+set -g prefix $ZPWR_TMUX_PREFIX_MAC
 
 bind-key -T copy-mode-vi v send-keys -X begin-selection
 

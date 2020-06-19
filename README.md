@@ -260,6 +260,13 @@ function linkConf(){
 The default tmux prefix key is C-a (control-a) on macOS so one can control inner tmux sessions on Linux/UNIX (prefix is C-b) separately.
 To invoke C-a in the shell press C-a twice.
 The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed and dehighlight when prefix is deactivated.
+You change the prefixes in `~/.zpwr/local/.tokens.sh` with these environment variable.
+```sh
+# the tmux prefix on mac
+export ZPWR_TMUX_PREFIX_MAC='C-a'
+# the tmux prefix on linux
+export ZPWR_TMUX_PREFIX_LINUX='C-b'
+```
 
 ## Autosaving Vim Plugins
 One of the vim plugin is vim-autosave which autosaves all edits thus making `:w` unnecessary.
@@ -417,6 +424,10 @@ export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
 export ZPWR_SCRIPTS="$ZPWR/scripts"
 export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
+# the tmux prefix on mac
+export ZPWR_TMUX_PREFIX_MAC='C-a'
+# the tmux prefix on linux
+export ZPWR_TMUX_PREFIX_LINUX='C-b'
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
@@ -459,9 +470,9 @@ export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 # default OMZ theme if Powerlevel 9k not used
 export ZPWR_DEFAULT_OMZ_THEME=simonoff
 # cache of env keys
-export ZPWR_ENV_KEY_FILE="${ZPWR_ENV}Value.txt"
+export ZPWR_ENV_KEY_FILE="${ZPWR_ENV}Key.txt"
 # cache of env values
-export ZPWR_ENV_VALUE_FILE="${ZPWR_ENV}Key.txt"
+export ZPWR_ENV_VALUE_FILE="${ZPWR_ENV}Value.txt"
 # temp files
 export ZPWR_TEMPFILE="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-$USER"
 export ZPWR_TEMPFILE1="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-1$USER"
@@ -470,10 +481,6 @@ export ZPWR_TEMPFILE3="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-3$USER"
 export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"
 # SQL temp files for use with learning collection
 export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
-# tmux prefix on outer session
-export ZPWR_TMUX_PREFIX=x
-# tmux prefix on inner session
-export ZPWR_TMUX_REMOTE_PREFIX=b
 # common dirs
 export ZPWR_D="$HOME/Desktop"
 export ZPWR_DOC="$HOME/Documents"

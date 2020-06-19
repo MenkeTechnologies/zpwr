@@ -1,3 +1,7 @@
+unbind C-b
+#unbind -T prefix C-z
+set -g prefix $ZPWR_TMUX_PREFIX_LINUX
+
 bind-key -T root MouseDown3Pane if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t="
 
 bind-key C-v run "tmux set-buffer \"$(xclip -o -sel clipboard)\"; tmux paste-buffer"

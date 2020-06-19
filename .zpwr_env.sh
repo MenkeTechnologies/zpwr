@@ -100,6 +100,10 @@ export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
 export ZPWR_SCRIPTS="$ZPWR/scripts"
 export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
+# the tmux prefix on mac
+export ZPWR_TMUX_PREFIX_MAC='C-a'
+# the tmux prefix on linux
+export ZPWR_TMUX_PREFIX_LINUX='C-b'
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO="<<)(>>"
@@ -153,10 +157,6 @@ export ZPWR_TEMPFILE3="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-3$USER"
 export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"
 # SQL temp files for use with learning collection
 export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
-# tmux prefix on outer session
-export ZPWR_TMUX_PREFIX=x
-# tmux prefix on inner session
-export ZPWR_TMUX_REMOTE_PREFIX=b
 # common dirs
 export ZPWR_D="$HOME/Desktop"
 export ZPWR_DOC="$HOME/Documents"
