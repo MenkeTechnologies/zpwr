@@ -1362,7 +1362,9 @@ you should place your code here."
     (setq highlight-indent-guides-auto-enabled nil)
     (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
 
+    ;; only spaces not tabs
     (setq-default indent-tabs-mode nil)
+    ;; 4 spaces not tabs
     (setq-default tab-width 4)
 
     ;;always y or n
