@@ -1129,20 +1129,25 @@ function f(){
     elif [[ -d "$1" ]];then
         cd "$1"
     else
+        #cd -1
         echo "$1" | command grep -E '\-[0-9]+' && cd "$1" && return 0
-        base="$(dirname "$1")"
 
+        #cd to first partial name match
         if isZsh;then
-            eval 'for dir in (#i)'"$1"'*(N);do
+            eval 'for dir in (#i)'"$1"'*(N/);do
                 cd "$dir"
                 return
             done'
         fi
 
+        base="$(dirname "$1")"
+
         if [[ $base == "." ]]; then
             loggErr "'$1': Not a valid file or directory."
             return 1
         fi
+
+        #find next dir to root
         while [[ "$base" != / ]]; do
             test -d "$base" && cd "$base"&& return 0
             base="$(dirname "$base")"
