@@ -1571,7 +1571,7 @@ function findFzfNoZLEEmacs(){
 
 function locateFzfEdit(){
 
-    local firstArg sel
+    local firstArg sel firstdir
 
     mywords=(${(z)BUFFER})
     if (( $#mywords == 0 )); then
@@ -1583,9 +1583,10 @@ function locateFzfEdit(){
         fi
         firstArg="${${(Az)sel}[1]//\"/}"
         if [[ -d "$firstArg" ]]; then
-            BUFFER="cd $firstArg; c $sel"
+            BUFFER="builtin cd \"$firstArg\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
         else
-            BUFFER="c $sel"
+            firstdir=${firstArg:h}
+            BUFFER="builtin cd \"$firstdir\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
         fi
         zle .accept-line
     else
@@ -1604,7 +1605,7 @@ function locateFzfEdit(){
 
 function locateFzf(){
 
-    local firstArg sel
+    local firstArg sel firstdir
 
     mywords=(${(z)BUFFER})
     if (( $#mywords == 0 )); then
@@ -1616,9 +1617,10 @@ function locateFzf(){
         fi
         firstArg="${${(Az)sel}[1]//\"/}"
         if [[ -d "$firstArg" ]]; then
-            BUFFER="cd $firstArg; c $sel"
+            BUFFER="builtin cd \"$firstArg\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
         else
-            BUFFER="c $sel"
+            firstdir=${firstArg:h}
+            BUFFER="builtin cd \"$firstdir\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
         fi
         zle .accept-line
     else
@@ -1632,6 +1634,33 @@ function locateFzf(){
             zle reset-prompt
         fi
     fi
+}
+
+function cca() {
+    local firstArg sel firstdir
+    firstArg="${${(Az)@}[1]//\"/}"
+    firstdir=${firstArg:h}
+    BUFFER="builtin cd \"$firstdir\"; c ""$@""; clearList; isGitDir && git diff HEAD; "
+    logg "$BUFFER"
+    eval "$BUFFER"
+}
+
+function cv() {
+    local firstArg sel firstdir
+    firstArg="${${(Az)@}[1]//\"/}"
+    firstdir=${firstArg:h}
+    BUFFER="builtin cd \"$firstdir\"; $EDITOR ""$@""; clearList; isGitDir && git diff HEAD; "
+    logg "$BUFFER"
+    eval "$BUFFER"
+}
+
+function ce() {
+    local firstArg sel firstdir
+    firstArg="${${(Az)@}[1]//\"/}"
+    firstdir=${firstArg:h}
+    BUFFER="builtin cd \"$firstdir\"; $ZPWR_EMACS_CLIENT ""$@""; clearList; isGitDir && git diff HEAD; "
+    logg "$BUFFER"
+    eval "$BUFFER"
 }
 
 function fzfCommits(){
