@@ -413,11 +413,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 
     ;;{{{                    MARK:zpwr vars
     ;;**************************************************************
-    (setq zpwr/inc 4)
-    (setq zpwr/as-interval 0.9)
-    (setq zpwr-snippets-dir
-     "~/.emacs.d/private/snippets/zpwr-snippets"
-     )
+    (defvar zpwr/inc 4 "motion size when ctrl key held")
+    (defvar zpwr/as-interval 0.9 "interval between auto saves")
+    (defvar zpwr-snippets-dir "~/.emacs.d/private/snippets/zpwr-snippets" "private snippets dir for zpwr")
     ;;}}}***********************************************************
 
     ;;{{{                    MARK:tokens
