@@ -759,18 +759,9 @@ function fzvim(){
 
     local file editor
     editor="$1"
-    if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        file="$ZPWR_NVIMINFO"
-        test -e "$file" || touch "$file"
-        nvimAndRecentf | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' |
+    nvimAndRecentf | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' |
     eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-    else
-        file="$HOME/.viminfo"
-    perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' "$file" |
-    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-    fi
 }
 
 function fzvimAll(){
@@ -3150,25 +3141,14 @@ function _fzf_complete_mvim() {
 function _fzf_complete_vim() {
 
   _fzf_complete '-m' "$@" < <(
-    local file
-    if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        file="$ZPWR_NVIMINFO"
-        test -e "$file" || touch "$file"
-        perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file"
-    else
-        file="$HOME/.viminfo"
-    perl -lne 'do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}' "$file"
-    fi
+        ZPWR_USE_NEOVIM=false catNvimOrVimInfo | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}'
     )
 }
 # nvim ;<tab>
 function _fzf_complete_nvim() {
 
-    local file
-    file="$ZPWR_NVIMINFO"
-    test -e "$file" || touch "$file"
   _fzf_complete '-m' "$@" < <(
-        perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' "$file"
+        ZPWR_USE_NEOVIM=true catNvimOrVimInfo | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}'
     )
 }
 # printf ;<tab>

@@ -3027,8 +3027,22 @@ function parseRecentf(){
     cat "$ZPWR_RECENTF" | command perl -ne 'do {$_=~s@$ENV{HOME}@~@;$_=~s@[ ]+@@g; $_="> $_"; $_=~s@"@@g; print $_} if m{/}'
 }
 
+function catNvimOrVimInfo() {
+
+    local file
+    if [[ $ZPWR_USE_NEOVIM == true ]]; then
+        file="$ZPWR_NVIMINFO"
+        test -e "$file" || touch "$file"
+        cat "$file"
+    else
+        file="$HOME/.viminfo"
+        test -e "$file" || touch "$file"
+        tac "$file"
+    fi
+}
+
 function nvimAndRecentf() {
-    cat "$ZPWR_NVIMINFO"
+    catNvimOrVimInfo
     if [[ -f $ZPWR_RECENTF ]]; then
         parseRecentf
     fi
