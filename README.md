@@ -397,7 +397,7 @@ export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
-#maybe z4ze
+# maybe z4ze
 export ZPWR_REPO_NAME="zpwr"
 # the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR="zsh-more-completions"
@@ -423,6 +423,7 @@ export ZPWR_ENV="$ZPWR_LOCAL/zpwrEnv"
 export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
 export ZPWR_SCRIPTS="$ZPWR/scripts"
+# the location of macOS only associated interpreted scripts
 export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
 # the tmux prefix on mac
 export ZPWR_TMUX_PREFIX_MAC='C-a'
@@ -447,6 +448,8 @@ export ZPWR_SEND_KEYS_PANE=-1
 export ZPWR_SEND_KEYS_FULL=false
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 export ZPWR_NVIMINFO="$ZPWR_LOCAL/.nviminfo"
+# emacs recent files
+export ZPWR_RECENTF="$HOME/.emacs.d/.cache/recentf"
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
 # ponysay banner when shell startup finishes
