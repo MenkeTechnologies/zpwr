@@ -1358,6 +1358,7 @@ you should place your code here."
     (setq highlight-indent-guides-responsive 'top)
     (setq highlight-indent-guides-delay 0.5)
     (setq highlight-indent-guides-auto-enabled nil)
+    (setq completion-ignore-case t)
     (set-face-foreground 'highlight-indent-guides-top-character-face "cyan")
 
     ;; only spaces not tabs
