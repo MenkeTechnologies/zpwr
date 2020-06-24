@@ -3017,6 +3017,23 @@ function zpwrUninstall() {
     fi
 }
 
+function parseRecentf(){
+
+    if [[ ! -f $ZPWR_RECENTF ]]; then
+        loggErr "$ZPWR_RECENTF does not exist"
+        return 1
+    fi
+
+    cat "$ZPWR_RECENTF" | command perl -ne 'do {$_=~s@$ENV{HOME}@~@;$_=~s@[ ]+@@g; $_="> $_"; $_=~s@"@@g; print $_} if m{/}'
+}
+
+function nvimAndRecentf() {
+    cat "$ZPWR_NVIMINFO"
+    if [[ -f $ZPWR_RECENTF ]]; then
+        parseRecentf
+    fi
+}
+
 function changeGitEmail(){
 
     if [[ -z "$3" ]]; then
