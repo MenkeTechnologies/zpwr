@@ -3024,7 +3024,7 @@ function parseRecentf(){
         return 1
     fi
 
-    cat "$ZPWR_RECENTF" | command perl -ne 'do {$_=~s@$ENV{HOME}@~@;$_=~s@[ ]+@@g; $_="> $_"; $_=~s@"@@g; print $_} if m{/}'
+    tac "$ZPWR_RECENTF" | command perl -ne 'do {$_=~s@$ENV{HOME}@~@;$_=~s@[ ]+@@g; $_="> $_"; $_=~s@"@@g; print $_} if m{/}'
 }
 
 function catNvimOrVimInfo() {
@@ -3042,10 +3042,10 @@ function catNvimOrVimInfo() {
 }
 
 function nvimAndRecentf() {
-    catNvimOrVimInfo
     if [[ -f $ZPWR_RECENTF ]]; then
         parseRecentf
     fi
+    catNvimOrVimInfo
 }
 
 function changeGitEmail(){
