@@ -205,8 +205,8 @@ alias die='sudo kill -9 --'
 alias da=detachall
 
 if exists emacs; then
-    alias emacs='emacs -nw'
-    alias ee='emacsclient -c -nw -a ""'
+    alias emacs="$ZPWR_EMACS"
+    alias ee="$ZPWR_EMACS_CLIENT"
     alias me='source em-server.sh'
 fi
 
@@ -474,9 +474,9 @@ function rm(){
 function em(){
 
     if [[ -z "$1" ]]; then
-        emacs .
+        "${=ZPWR_EMACS}" .
     else
-        emacs "$@"
+        "${=ZPWR_EMACS}" "$@"
     fi
 
 }
@@ -3042,6 +3042,7 @@ function catNvimOrVimInfo() {
 }
 
 function recentfThenNvim() {
+
     catNvimOrVimInfo
     if [[ -f $ZPWR_RECENTF ]]; then
         parseRecentf
@@ -3049,6 +3050,7 @@ function recentfThenNvim() {
 }
 
 function nvimThenRecentf() {
+
     if [[ -f $ZPWR_RECENTF ]]; then
         parseRecentf
     fi
