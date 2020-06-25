@@ -48,7 +48,6 @@ function chooseNvimVim(){
         }
     fi
 }
-
 #}}}***********************************************************
 
 #{{{                    MARK:Env Vars
@@ -57,13 +56,16 @@ export Z_DATA="$HOME/.z"
 export PS3=$'\e[1;34m-->>>> \e[0m'
 # bash xtrace prompt
 export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
+# defaut layout config for nmon
 export NMON='mndckt'
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
+
 source "$ZPWR_SCRIPTS/crossOSCommands.sh" || {
     echo "where is $ZPWR_SCRIPTS/crossOSCommands.sh" >&2
     return 1
 }
+
 export FORKED_DIR="$HOME/forkedRepos"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
@@ -78,6 +80,7 @@ export HISTSIZE=50000
 export HISTTIMEFORMAT=' %F %T _ '
 export UMASK=077
 export LESS="-M -N -R -K -F -X"
+
 if [[ -z "$TMUX" ]]; then
     export TERM="xterm-256color"
 fi
@@ -219,12 +222,14 @@ alias p2="python2"
 alias p3="python3"
 
 exists fc && alias please='sudo $(fc -ln -1)'
+
 exists spotify && {
     alias rep='spotify replay'
     alias ne='spotify next'
     alias pe='spotify prev'
     alias spa='spotify pause'
 }
+
 if isZsh; then
     alias 10='cd -10'
     alias 11='cd -11'
