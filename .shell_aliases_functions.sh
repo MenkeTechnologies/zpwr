@@ -303,11 +303,6 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
     alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
     alias rtsync="$ZPWR_SCRIPTS_MAC/rsyncr.sh"
-    alias ig='cd $HOME/IdeaProjects'
-    alias pg='cd $HOME/PycharmProjects'
-    alias cg='cd $HOME/ClionProjects'
-    alias wg='cd $HOME/WebstormProjects'
-    alias mg='cd $HOME/RubymineProjects'
     alias asg='cd $HOME/AndroidStudioProjects'
     alias xg='cd $HOME/Documents/xcode'
     alias ap='cd /Applications'
@@ -431,6 +426,26 @@ fi
 
 if [[ -d "$HOME/.emacs.d/elpa" ]]; then
     alias eb="cd $HOME/.emacs.d/elpa"
+fi
+
+if [[ -d "$HOME/IdeaProjects" ]]; then
+    alias ig='cd $HOME/IdeaProjects'
+fi
+
+if [[ -d "$HOME/PycharmProjects" ]]; then
+    alias pg='cd $HOME/PycharmProjects'
+fi
+
+if [[ -d "$HOME/CLionProjects" ]]; then
+    alias cg='cd $HOME/ClionProjects'
+fi
+
+if [[ -d "$HOME/WebstormProjects" ]]; then
+    alias wg='cd $HOME/WebstormProjects'
+fi
+
+if [[ -d "$HOME/RubymineProjects" ]]; then
+    alias mg='cd $HOME/RubymineProjects'
 fi
 #**********************************************************************
 #                           MARK:aliases for ZPWR_SCRIPTS
