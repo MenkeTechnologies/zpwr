@@ -3041,7 +3041,14 @@ function catNvimOrVimInfo() {
     fi
 }
 
-function nvimAndRecentf() {
+function recentfThenNvim() {
+    catNvimOrVimInfo
+    if [[ -f $ZPWR_RECENTF ]]; then
+        parseRecentf
+    fi
+}
+
+function nvimThenRecentf() {
     if [[ -f $ZPWR_RECENTF ]]; then
         parseRecentf
     fi

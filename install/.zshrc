@@ -759,9 +759,18 @@ function fzvim(){
 
     local file editor
     editor="$1"
-    nvimAndRecentf | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' |
+    case $editor in
+        nvim|vim)
+    nvimThenRecentf | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' |
     eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+            ;;
+        *)
+    recentfThenNvim | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' |
+    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
+        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+            ;;
+    esac
 }
 
 function fzvimAll(){
