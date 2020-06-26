@@ -14,5 +14,7 @@ fi
 
 source common.sh
 
-ln -s "$(pwd)/.spacemacs" "$HOME/.spacemacs"
+prettyPrintBox "Installing spacemacs"
+
+ln -sf "$(pwd)/.spacemacs" "$HOME/.spacemacs"
 git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
