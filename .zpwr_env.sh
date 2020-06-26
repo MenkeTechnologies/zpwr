@@ -72,6 +72,7 @@ export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # for alternating pretty printer
 export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+export GITHUB_ACCOUNT="$ZPWR_GITHUB_ACCOUNT"
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
 # maybe z4ze
 export ZPWR_REPO_NAME="zpwr"
