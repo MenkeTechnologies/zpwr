@@ -3488,8 +3488,14 @@ function _megacomplete(){
 
 
     local -a last_command_array
-    local expl cmd ret
-    cmd=${(Q)words[1]}
+    local expl cmd ret i continueRegex
+    continueRegex='^(\-.*|sudo|env)$'
+    i=1
+    cmd=${(Q)words[i]}
+
+    while echo $cmd | grep -qs -E $continueRegex; do
+        cmd=${(Q)words[$((++i))]}
+    done
 
     \_complete && ret=0 || ret=1
 
