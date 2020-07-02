@@ -3439,17 +3439,13 @@ function _tmux_pane_words() {
   # Based on vim-tmuxcomplete's splitwords function.
   # https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
   _tmux_capture_pane() {
-    tmux capture-pane -J -p -S -100 $@ |
-        col -b |
-      # Remove "^C".
-      sed 's@\^C\S*@ @g' |
-      # copy lines and split words
-      sed 'p;s@^a-zA-Z0-9_]@ @g' |
-      # split on spaces
+      tmux capture-pane -J -p -S -100 $@ |
+      col -b |
       tr -s '[:space:]' '\n' |
+      sed 's@\^C\S*@ @g;s@:.*$@@' |
       # remove surrounding non-word characters
-      command grep -o -E "[a-zA-Z0-9.]+[a-zA-Z_0-9.-]{2}[a-zA-Z0-9.-]+" |
-          command grep -v -E '(\.\.+|^[0-9MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)'
+      command grep -v -E '(\.\.+|^[0-9.]+[a-zA-Z]+$|^[0-9]*$|^MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)' |
+      command grep -o -E "[a-zA-Z0-9.:]+"
   }
   # Capture current pane first.
   w=( ${(u)=$(_tmux_capture_pane)} )
@@ -3485,10 +3481,11 @@ function _complete_clipboard(){
     fi
 }
 
-local -A whitelist_tmux_completion
-whitelist_tmux_completion=(ping 1 dig 2 digs 3 host 4 mtr 5 traceroute 6)
-
 function _megacomplete(){
+
+    local -a whitelist_tmux_completion
+    whitelist_tmux_completion=(ping dig digs host mtr traceroute whois)
+
 
     local -a last_command_array
     local expl cmd ret
@@ -3497,7 +3494,7 @@ function _megacomplete(){
     \_complete && ret=0 || ret=1
 
     if [[ -n "$TMUX_PANE" ]]; then
-        if (( $+whitelist_tmux_completion[$cmd] )); then
+        if (( $whitelist_tmux_completion[(I)$cmd] )); then
             _tmux_pane_words
         fi
     fi
