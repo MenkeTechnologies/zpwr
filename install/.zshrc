@@ -2684,6 +2684,7 @@ function tabNumCmd() {
 alias i='if [[ '$ZPWR_TABSTOP' ]];then
     '$ZPWR_TABSTOP'
 fi'
+
 alias iee='if [[ '$ZPWR_TABSTOP' ]];then
     '$ZPWR_TABSTOP'
 elif [[ '$ZPWR_TABSTOP' ]];then
@@ -2691,6 +2692,7 @@ elif [[ '$ZPWR_TABSTOP' ]];then
 else
     '$ZPWR_TABSTOP'
 fi'
+
 alias ieee='if [[ '$ZPWR_TABSTOP' ]];then
     '$ZPWR_TABSTOP'
 elif [[ '$ZPWR_TABSTOP' ]];then
@@ -2700,17 +2702,21 @@ elif [[ '$ZPWR_TABSTOP' ]];then
 else
     '$ZPWR_TABSTOP'
 fi'
+
 alias ie='if [[ '$ZPWR_TABSTOP' ]];then
     '$ZPWR_TABSTOP'
 else
     '$ZPWR_TABSTOP'
 fi'
+
 alias wr='while read line;do
     '$ZPWR_TABSTOP'
 done < '$ZPWR_TABSTOP''
-alias wt='while [[ true'$ZPWR_TABSTOP' ]];do
+
+alias wt='while true'$ZPWR_TABSTOP';do
     '$ZPWR_TABSTOP'
 done'
+
 alias fkv='for k v in ${(kv)'$ZPWR_TABSTOP'[@]};do
     '$ZPWR_TABSTOP'
 done'
@@ -3484,7 +3490,7 @@ function _complete_clipboard(){
 function _megacomplete(){
 
     local -a whitelist_tmux_completion
-    whitelist_tmux_completion=(ping nslookup nmap dig digs host mtr traceroute tracepath whois torsocks proxychains nc netcat curl wget http)
+    whitelist_tmux_completion=(ping ping6 nslookup nmap dig digs host mtr traceroute tracepath whois torsocks proxychains nc netcat curl wget http)
 
 
     local -a last_command_array
