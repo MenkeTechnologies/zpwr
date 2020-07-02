@@ -3445,7 +3445,7 @@ function _tmux_pane_words() {
       sed 's@\^C\S*@ @g;s@:.*$@@' |
       # remove surrounding non-word characters
       command grep -v -E '(\.\.+|^[0-9.]+[a-zA-Z]+$|^[0-9]*$|^MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)' |
-      command grep -o -E "[a-zA-Z0-9.:]+"
+      command grep -o -E "[-a-zA-Z0-9.:]+"
   }
   # Capture current pane first.
   w=( ${(u)=$(_tmux_capture_pane)} )
