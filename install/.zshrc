@@ -3489,7 +3489,7 @@ function _megacomplete(){
 
     local -a last_command_array
     local expl cmd ret
-    cmd=$words[1]
+    cmd=${(Q)words[1]}
 
     \_complete && ret=0 || ret=1
 
