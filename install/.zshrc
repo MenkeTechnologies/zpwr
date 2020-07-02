@@ -3484,7 +3484,7 @@ function _complete_clipboard(){
 function _megacomplete(){
 
     local -a whitelist_tmux_completion
-    whitelist_tmux_completion=(ping nslookup nmap dig digs host mtr traceroute tracepath whois torsocks proxychains nc netcat)
+    whitelist_tmux_completion=(ping nslookup nmap dig digs host mtr traceroute tracepath whois torsocks proxychains nc netcat curl wget http)
 
 
     local -a last_command_array
