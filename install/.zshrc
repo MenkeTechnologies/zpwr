@@ -3499,7 +3499,7 @@ function _megacomplete(){
     i=1
     cmd=${(Q)words[i]}
 
-    while echo $cmd | grep -qs -E $continueRegex; do
+    while printf -- $cmd | grep -qs -E $continueRegex; do
         cmd=${(Q)words[$((++i))]}
     done
 
