@@ -14,9 +14,9 @@ if ! type -- "exists" >/dev/null 2>&1;then
     }
 fi
 
-#python 3.6
+#python3
 python3 -c 'import pip' && {
-    prettyPrint "Updating Python3.6 Packages"
+    prettyPrint "Updating Python3 Packages"
     installDir=$(python3 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
     if [[ ! -w "$installDir" ]]; then
         needSudoBase=true
@@ -62,9 +62,9 @@ python3 -c 'import pip' && {
 
 }
 
-#python 2.7 (non system)
+#python 2 (non system)
 exists python2 && python2 -c 'import pip' && {
-    prettyPrint "Updating Python2.7 Packages"
+    prettyPrint "Updating Python2 Packages"
 
     installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
     if [[ ! -w "$installDir" ]]; then

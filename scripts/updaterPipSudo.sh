@@ -14,9 +14,9 @@ if ! type -- "exists" >/dev/null 2>&1;then
         exit 1
     }
 fi
-#python 3.6
+#python 3
 python3 -c 'import pip' && {
-    prettyPrint "Updating Python3.6 Packages"
+    prettyPrint "Updating Python3 Packages"
     needSudoBase=true
     if [[ "$needSudoBase" == true ]]; then
         prettyPrint "Outdated Pip3 list with sudo: $needSudoBase"
@@ -53,9 +53,9 @@ python3 -c 'import pip' && {
 
 }
 
-#python 2.7 (non system)
+#python 2 (non system)
 exists python2 && python2 -c 'import pip' && {
-    prettyPrint "Updating Python2.7 Packages"
+    prettyPrint "Updating Python2 Packages"
     needSudoBase=true
 
     if [[ "$needSudoBase" == true ]]; then
