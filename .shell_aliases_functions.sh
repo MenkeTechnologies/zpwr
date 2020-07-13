@@ -67,6 +67,7 @@ source "$ZPWR_SCRIPTS/crossOSCommands.sh" || {
 }
 
 export FORKED_DIR="$HOME/forkedRepos"
+export D="$HOME/Desktop"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export XAUTHORITY="$HOME/.Xauthority"
