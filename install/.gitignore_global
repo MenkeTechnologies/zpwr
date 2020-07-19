@@ -32,12 +32,60 @@ yarn-error.log*
 
 #{{{                    MARK:Java
 #**************************************************************
+*.jar
+*.war
+*.ear
+*.class
+
 #gradle
 .gradle
 build/
 .gradletasknamecache
 #maven
 target/
+#eclipse
+.project
+.metadata
+local.properties
+.classpath
+.settings/
+.loadpath
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+.recommenders
+.metadata
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# PyDev specific (Python IDE for Eclipse)
+*.pydevproject
+
+# CDT-specific (C/C++ Development Tooling)
+.cproject
+
+# CDT- autotools
+.autotools
+
+# Java annotation processor (APT)
+.factorypath
+
+# PDT-specific (PHP Development Tools)
+.buildpath
+
+# sbteclipse plugin
+.target
+
+# Tern plugin
+.tern-project
+
+# TeXlipse plugin
+.texlipse
 #}}}***********************************************************
 
 #{{{                    MARK:XCode
