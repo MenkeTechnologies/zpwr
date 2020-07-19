@@ -12,7 +12,7 @@ source "$ZPWR_SCRIPTS/fzfPreviewOptsCommon.sh"
 
 cat<<EOF
         if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
-            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | fold -80 | head -500;
+            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | head -500;
             test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
             xxd \$file | $COLORIZER_FZF_YAML
         else
@@ -21,7 +21,7 @@ cat<<EOF
     fi
 else
     if test -e {}; then
-        "$ZPWR_SCRIPTS/clearList.sh" -- {} | fold -80 | head -500;
+        "$ZPWR_SCRIPTS/clearList.sh" -- \$file | head -500;
     else
         source $ZPWR/.shell_aliases_functions.sh;
         {

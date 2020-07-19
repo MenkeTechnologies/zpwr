@@ -66,7 +66,7 @@ if test -f \$file;then
     elif print -r -- \$file | command egrep -iq "\\.(xzip|xz)\$";then xz -c -d \$file | $COLORIZER_FZF_YAML;
     elif print -r -- \$file | command egrep -iq "\\.(gzip|gz)\$";then gzip -c -d \$file | $COLORIZER_FZF_YAML;
     elif print -r -- \$file | command egrep -iq "\\.(so|dylib).*\$";then
-        "$ZPWR_SCRIPTS/clearList.sh" -- \$file | fold -80 | head -500; 
+            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | head -500;
             $nmcmd \$file | $COLORIZER_FZF_YAML
             xxd \$file | $COLORIZER_FZF_YAML
     else
@@ -75,7 +75,7 @@ EOF
 
 cat<<EOF
         if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
-            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | fold -80 | head -500;
+            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | head -500;
             test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
             xxd \$file | $COLORIZER_FZF_YAML
         else

@@ -32,14 +32,14 @@ case \$cmdType in
     (command)
         if test -f \$file;then
             if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
-                "$ZPWR_SCRIPTS/clearList.sh" -- \$file| fold -80 | head -500
+                "$ZPWR_SCRIPTS/clearList.sh" -- \$file | head -500;
                 test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
                 xxd \$file | $COLORIZER_FZF_YAML
             else
                 $COLORIZER_FZF_FILE 2>/dev/null
             fi
         else
-            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | fold -80
+            "$ZPWR_SCRIPTS/clearList.sh" -- \$file
         fi
         return 0
         ;;
@@ -62,14 +62,14 @@ case \$cmdType in
     (command)
         if test -f \$file;then
             if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
-                "$ZPWR_SCRIPTS/clearList.sh" -- \$file| fold -80 | head -500
+                "$ZPWR_SCRIPTS/clearList.sh" -- \$file | head -500;
                 test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
                 xxd \$file | $COLORIZER_FZF_YAML
             else
                 $COLORIZER_FZF_FILE 2>/dev/null
             fi
         else
-            "$ZPWR_SCRIPTS/clearList.sh" -- \$file | fold -80
+            "$ZPWR_SCRIPTS/clearList.sh" -- \$file
         fi
         ;;
     (func)

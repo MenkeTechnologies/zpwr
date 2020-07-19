@@ -3108,7 +3108,7 @@ ZPWR_COMMON_FZF_ELEM="--prompt='$ZPWR_FZF_LOGO ' --bind=ctrl-n:page-down,ctrl-p:
 
 #to include dirs files in search
 export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
-export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%"
+export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100% --preview-window=':wrap'"
 local rpm_cmd
 local deb_cmd
 exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
