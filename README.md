@@ -440,6 +440,8 @@ export ZPWR_QUOTE_END_CHAR=")>>"
 export ZPWR_FZF_LOGO="<<)ZPWR(>>"
 # command for all fzf
 export ZPWR_FZF="fzf"
+# command for all fzf clearlist in preview pane
+export ZPWR_FZF_CLEARLIST="$ZPWR_SCRIPTS/clearList.sh -- \$file | fold -s -w 80"
 # set to comma separated list of pane numbers
 # to activate sending to numbered tmux panes
 export ZPWR_SEND_KEYS_PANE=-1
