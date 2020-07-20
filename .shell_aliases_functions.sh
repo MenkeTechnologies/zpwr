@@ -291,6 +291,7 @@ alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
 alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
+alias sc='systemctl'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
@@ -463,7 +464,6 @@ alias u2="bash $ZPWR_SCRIPTS/upLoadPi2.sh"
 alias pw="bash $ZPWR_SCRIPTS/uploadWebPi.sh"
 alias sy="bash $ZPWR_SCRIPTS/sync.sh"
 alias sf="bash $ZPWR_SCRIPTS/directoryContentsSize.sh"
-alias sc='cd $ZPWR_SCRIPTS'
 alias bluef='source $ZPWR_SCRIPTS/blueText.sh'
 alias u8="bash $ZPWR_SCRIPTS/updater.sh"
 alias u8r="bash -l $ZPWR_SCRIPTS/updater.sh -s"
