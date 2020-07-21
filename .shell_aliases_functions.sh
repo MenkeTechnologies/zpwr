@@ -291,7 +291,7 @@ alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
 alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
-alias sc='systemctl'
+alias sc='sudo -E systemctl'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
