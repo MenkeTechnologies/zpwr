@@ -293,6 +293,8 @@ for plug in ${plugins[@]}; do
     fi
 done
 
+fpath=(${(u)fpath})
+
 exists subl && plugins+=(sublime)
 
 exists rails && plugins+=(rails)
@@ -4190,6 +4192,7 @@ function magic-enter () {
     zle accept-line
   fi
 }
+path=(${(u)path})
 #}}}***********************************************************
 
 #{{{                    MARK:Finish
