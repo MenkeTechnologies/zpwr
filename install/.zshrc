@@ -67,6 +67,11 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 
 #{{{                    MARK:ZPWR Exports
 #**************************************************************
+typeset -aU fpath
+fpath=(${(u)fpath})
+typeset -aU path
+path=(${(u)path})
+
 export ZPWR="$HOME/.zpwr"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 
@@ -293,7 +298,6 @@ for plug in ${plugins[@]}; do
     fi
 done
 
-fpath=(${(u)fpath})
 
 exists subl && plugins+=(sublime)
 
@@ -2388,7 +2392,7 @@ if [[ ${+_comps[z]} == 0 ]]; then
     #zcompile $ZSH_COMPDUMP
 else
     logg "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
-    logg "_comps size: '$#_comps' fpath length: '$#fpath'"
+    logg "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
 fi
 
 #dont include pwd after ../
@@ -4192,6 +4196,7 @@ function magic-enter () {
     zle accept-line
   fi
 }
+fpath=(${(u)fpath})
 path=(${(u)path})
 #}}}***********************************************************
 
