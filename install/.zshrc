@@ -287,7 +287,11 @@ setopt menucomplete
 #**************************************************************
 
 # OMZ does not add nested comp dirs to fpath so do it here, assume src
-echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
+
+if [[ $ZPWR_DEBUG == true ]]; then
+    echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
+fi
+
 for plug in ${plugins[@]}; do
     if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
         #null glob - no error
