@@ -65,12 +65,18 @@
 startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 #}}}***********************************************************
 
-#{{{                    MARK:ZPWR Exports
+#{{{                    MARK:FPATH AND PATH NO DUPLICATES
 #**************************************************************
+# duplicates slow down searching and 
+# mess up OMZ fpath check if should remove zcompdump
 typeset -aU fpath
 fpath=(${(u)fpath})
 typeset -aU path
 path=(${(u)path})
+#}}}***********************************************************
+
+#{{{                    MARK:ZPWR Exports
+#**************************************************************
 
 export ZPWR="$HOME/.zpwr"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
@@ -4196,9 +4202,16 @@ function magic-enter () {
     zle accept-line
   fi
 }
+#}}}***********************************************************
+
+#{{{                    MARK:FPATH AND PATH REMOVE DUPLICATES
+#**************************************************************
+# duplicates slow down searching and
+# mess up OMZ fpath check if should remove zcompdump
 fpath=(${(u)fpath})
 path=(${(u)path})
 #}}}***********************************************************
+
 
 #{{{                    MARK:Finish
 #**************************************************************
