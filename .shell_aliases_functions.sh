@@ -75,7 +75,6 @@ export TERMINAL_APP="Terminal.app"
 export YARN_HOME="$HOME/.config/yarn"
 export TMUX_HOME="$HOME/.tmux"
 export NODE_HOME="/usr/local/lib/node_modules"
-export PERL5LIB="$HOME/perl5/lib/perl5"
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
 export HISTSIZE=50000
 export HISTTIMEFORMAT=' %F %T _ '
