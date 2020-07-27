@@ -3538,11 +3538,13 @@ function _megacomplete(){
         num=$((HISTCMD-1))
         last_command=$history[$num]
         last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
-        if (( $#last_command_array > 0 )); then
+        if (( $#last_command_array > 0 && ret == 1 )); then
             _complete_plus_last_command_args
         fi
 
-        _complete_clipboard
+        if (( ret == 1)); then
+            _complete_clipboard
+        fi
     fi
 
     return $ret
