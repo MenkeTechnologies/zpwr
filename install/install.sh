@@ -35,13 +35,6 @@ LOGFILE_CARGO_YCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
 
 INSTALL_VIM_SRC=false
 
-vimV="$(vim --version | head -n 1 | awk '{print $5}')"
-if [[ -n $vimV ]]; then
-    if echo "$vimV >= 8.0" | bc 2>/dev/null | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
-        INSTALL_VIM_SRC=true
-    fi
-fi
-
 # shows count of steps in installer
 INSTALL_COUNTER=0
 
@@ -87,6 +80,14 @@ if ! source common.sh; then
     echo "Must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
+
+exists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
+if [[ -n $vimV ]]; then
+    if echo "$vimV >= 8.0" | bc 2>/dev/null | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
+        INSTALL_VIM_SRC=true
+    fi
+fi
+
 #}}}***********************************************************
 
 #{{{                    MARK:mkdir if needed
