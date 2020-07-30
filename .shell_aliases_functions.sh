@@ -2655,19 +2655,17 @@ function searchGitCommon(){
 
 function regenAllGitRepos(){
 
-        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
-    {
-        while read; do
-            dirname $REPLY
-        done < <(sudo find / -name .git -type d -prune 2>/dev/null)
+    prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
+    sudo find / -name .git -type d -prune 2>/dev/null |
+        tee "$ZPWR_TEMPFILE3"
+    perl -i -pe 's@/.git$@@' "$ZPWR_TEMPFILE3"
 
-    } > "$ZPWR_TEMPFILE3"
     # removing system read only mounted dirs on macOS
     if [[ $ZPWR_OS_TYPE == darwin ]]; then
         perl -i -pe 's@^/System/Volumes/Data@@' "$ZPWR_TEMPFILE3"
     fi
-    sort "$ZPWR_TEMPFILE3" | uniq > "$ZPWR_ALL_GIT_DIRS"
 
+    sort "$ZPWR_TEMPFILE3" | uniq > "$ZPWR_ALL_GIT_DIRS"
 }
 
 function searchDirtyGitRepos(){
