@@ -718,6 +718,12 @@ function cloneToForked(){
 }
 
 function s(){
+    exists isZsh || {
+        source "$ZPWR_SCRIPTS/lib.sh" || {
+            echo "where is $ZPWR_SCRIPTS/lib.sh" >&2
+            return 1
+        } && loggErr 'forced to load lib.sh due to missing isZsh'
+    }
 
     if exists subl; then
         cmd=subl
