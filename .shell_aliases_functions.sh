@@ -346,7 +346,11 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 else
     #Linux or Unix
     alias ip="grc -c $HOME/conf.ifconfig ip"
-    alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
+    if exists exa; then
+        alias lr="$ZPWR_EXA_COMMAND -R"
+    else
+        alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
+    fi
     test -d "$HOME/.local/share/Trash" &&
         alias tra='cd $HOME/.local/share/Trash'
     if [[ "$ZPWR_OS_TYPE" == linux ]]; then
