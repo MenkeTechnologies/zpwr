@@ -316,9 +316,14 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias tra='cd $HOME/.Trash'
     alias co="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
     alias bl='brew link --force --overwrite'
-    exists gls &&
-     alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
-     alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
+    
+    if exists exa; then
+        alias lr="$ZPWR_EXA_COMMAND -R"
+    else
+        exists gls &&
+        alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
+        alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
+    fi
 
     chooseNvimVim
 
