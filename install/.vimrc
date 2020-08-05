@@ -1650,6 +1650,8 @@ let g:ale_fixers = {'ruby': ['rubocop'], 'sh': ['shfmt'], 'perl': ['perltidy'], 
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_delay = 1000
 
+let g:ale_hover_cursor = 0
+
 let g:ale_sign_error = '!✗'
 let g:ale_sign_warning = '!⚠'
 
