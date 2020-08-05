@@ -471,7 +471,7 @@ function vimScriptEdit(){
 }
 
 function sudoEditorRecent(){
-    local editor
+    local firstdir editor
     editor="$1"
 
     BUFFER="$(fzvim $editor)"
@@ -490,7 +490,7 @@ function sudoEditorRecent(){
 }
 
 function editorRecent(){
-    local editor
+    local firstdir editor
     editor="$1"
 
     BUFFER="$(fzvim $editor)"
@@ -828,6 +828,7 @@ function fzvimScript(){
 
 function vimFzf(){
 
+    local firstdir editor
     zle .kill-whole-line
     BUFFER="$(fzvim vim)"
     mywords=(${(z)BUFFER})
@@ -845,6 +846,7 @@ function vimFzf(){
 
 function emacsFzf(){
 
+    local firstdir editor
     zle .kill-whole-line
     BUFFER="$(fzvim $ZPWR_EMACS_CLIENT)"
     mywords=(${(z)BUFFER})
@@ -862,7 +864,7 @@ function emacsFzf(){
 
 function fzfWordsearchVerbEdit(){
 
-    local editor
+    local firstdir editor
     editor="$1"
     local file
     BUFFER=$(agIntoFzf vim)
@@ -883,7 +885,7 @@ function fzfWordsearchVerbEdit(){
 
 function fzfWordsearchVerb(){
 
-    local editor
+    local firstdir editor
     editor="$1"
     local file
     BUFFER=$(agIntoFzf vim)
@@ -1215,6 +1217,7 @@ function historyVerbEdit(){
 function vimFzfSudo(){
 
     zle .kill-whole-line
+    local firstdir editor
 
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         LBUFFER="sudo -E nvim $(fzvim nvim)"
@@ -3979,7 +3982,7 @@ function gtagsIntoFzf(){
 
 function getGtagsEdit(){
 
-    local editor
+    local firstdir editor
     editor="$1"
     local file
     BUFFER=$(gtagsIntoFzf)

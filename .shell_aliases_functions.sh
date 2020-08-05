@@ -1154,7 +1154,7 @@ function humanReadable(){
 }
 
 function f(){
-    local base
+    local base dir
 
     if [[ -z "$1" ]]; then
         cd -
@@ -1622,6 +1622,8 @@ function ino(){
         loggErr "need an arg"
         return 1
     fi
+
+    local dir
 
     dir="$1"
     command mkdir "$dir" && cd "$dir" &&
@@ -2384,6 +2386,7 @@ function c(){
 
 exists http && function ge(){
 
+    local styles_dir
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"
@@ -2478,6 +2481,7 @@ function figletfonts(){
 
 function pygmentcolors(){
 
+    local dir
     dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"
     for i in "$dir/pygments/styles/"* ; do
         echo "$i"
@@ -2738,6 +2742,7 @@ function regenConfigLinks(){
 
 function regenPowerlineLink(){
 
+    local dir
     dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"
     if needSudo "$dir"; then
         prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"

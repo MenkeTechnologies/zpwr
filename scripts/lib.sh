@@ -403,7 +403,7 @@ function turnOnDebugging(){
 
 function alternatingPrettyPrint(){
 
-    counter=0
+    local counter=0
 
     if [[ -z $1 ]]; then
         cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
@@ -434,6 +434,7 @@ function alternatingPrettyPrint(){
 
 function gitRepoUpdater() {
 
+    local enclosing_dir
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then
