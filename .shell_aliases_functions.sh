@@ -1233,7 +1233,7 @@ function contribCountDirs(){
        return 1
     fi
 
-    local dirOfDirs user curDir sum
+    local dirOfDirs user curDir sum dir
 
     user="$1"
     shift
@@ -1388,8 +1388,7 @@ function gsdc(){
        return 1
     fi
 
-
-    local currentDir
+    local currentDir dir
     currentDir="$(pwd -P)"
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
         if [[ "$currentDir" == "$dir" ]]; then
@@ -1868,6 +1867,8 @@ function linkConf(){
 # pull down latest configuration files from $ZPWR_REPO_NAME
 function getrc(){
 
+    local dir
+
     if [[ -z "$1" ]]; then
         branch=master
     else
@@ -2238,6 +2239,9 @@ function fordirUpdate(){
        loggErr "fordirUpdate <dirs> to run git update in each dir"
        return 1
     fi
+
+    local dir cmd
+
     cmd="git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache"
     for dir in "$@"; do
         if [[ -d "$dir" ]]; then
@@ -2254,7 +2258,11 @@ function fordir(){
        loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"
        return 1
     fi
+
+    local dir cmd
+
     cmd="$1"
+
     if [[ -d "$cmd" || -f "$cmd" ]]; then
        loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"
        return 1
@@ -2768,6 +2776,7 @@ function goclean() {
         loggErr "need package name"
         return 1
     fi
+
     local pkg ost cnt
     pkg=$1;
     shift
@@ -3017,6 +3026,8 @@ function changeGitAuthorEmail(){
 }
 
 function zpwrUninstall() {
+
+    local dir
 
     echo sudo rm -rf -- \
         "$ZPWR" \
