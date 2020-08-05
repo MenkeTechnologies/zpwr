@@ -364,8 +364,8 @@ else
             alias apz="sudo zypper update; sudo zypper dist-upgrade -y; u8"
         elif exists apt;then
             alias api="sudo apt install -y"
-            alias apa="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean"
-            alias apz="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt autoclean; u8"
+            alias apa="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt clean"
+            alias apz="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt clean; u8"
         elif exists yum;then
             alias api="sudo yum install -y"
             alias apa="sudo yum check-update; sudo yum upgrade -y "
