@@ -184,7 +184,13 @@ if [[ $skip != true ]]; then
         pio update
         pio upgrade
     }
+
     source "$ZPWR_SCRIPTS/updaterPip.sh"
+
+    exists snap && {
+        prettyPrint "Updating Snap Packages"
+        sudo -E snap refresh
+    }
 
     exists cpanm && {
         prettyPrint "Updating Perl Packages"
@@ -193,7 +199,6 @@ if [[ $skip != true ]]; then
             echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2>/dev/null
         fi
     }
-
 
 fi
 
