@@ -151,7 +151,9 @@ function gil(){
        return 1
     fi
 
-    local file=".git/info/exclude"
+    local file
+
+    file=".git/info/exclude"
 
     if [[ ! -f "$file" ]]; then
        loggErr "$file must exist"
@@ -164,7 +166,10 @@ function gil(){
 
 function goInstallerDir(){
 
-    local ret=0
+    local ret
+
+    ret=0
+
     builtin cd "$ZPWR_INSTALL" || ret=1
 
     if [[ "$(pwd)" != "$ZPWR_INSTALL" ]]; then
@@ -180,7 +185,10 @@ function goInstallerDir(){
 
 function goInstallerOutputDir(){
 
-    local ret=0
+    local ret
+
+    ret=0
+
     builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
 
     if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
@@ -195,12 +203,12 @@ function goInstallerOutputDir(){
 
 function installGitHubPluginsFromFile(){
 
-    local file
-
     if [[ -z "$1" ]]; then
         loggErr "need an repo file"
         return 1
     fi
+
+    local file
 
     file="$1"
 
@@ -367,7 +375,10 @@ function prettyPrint(){
 
 function prettyPrintBoxStdin(){
 
-    local perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
+    local perlfile
+
+    perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
+
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
     {
@@ -379,7 +390,10 @@ function prettyPrintBoxStdin(){
 
 function prettyPrintBox(){
 
-    local perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
+    local perlfile
+
+    perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
+
     [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
     printf "$INSTALL_COUNTER>>> $@\n" | "$perlfile" -f
@@ -434,7 +448,8 @@ function alternatingPrettyPrint(){
 
 function gitRepoUpdater() {
 
-    local enclosing_dir
+    local enclosing_dir generic_git_repo_plugin
+
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then

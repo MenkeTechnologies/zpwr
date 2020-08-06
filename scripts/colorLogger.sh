@@ -6,7 +6,9 @@
 ##### Purpose: bash script to monitor log files in color
 ##### Notes:
 #}}}***********************************************************
+
 if ! type -- "exists" >/dev/null 2>&1;then
+
     test -z "$ZPWR_SCRIPTS" && export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
     source "$ZPWR_SCRIPTS/lib.sh" || {
         echo "cannot access lib.sh" >&2
@@ -30,6 +32,7 @@ type ccze 1>/dev/null 2>&1 && weHaveCCZE=yes
 
 if [[ "$(uname)" == Darwin ]]; then
     if [[ "$weHaveCCZE" == yes ]]; then
+
         prettyPrint "Color logging for Darwin"
         #"$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
         #$HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \

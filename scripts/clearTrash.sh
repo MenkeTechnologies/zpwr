@@ -8,13 +8,12 @@
 #}}}***********************************************************
 
 if [[ "$(uname)" == "Darwin" ]]; then
+
     rm -rf "$HOME"/.Trash/*
 else
     #works for RPi
 
-        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
-
-
+    distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
     case $distroName in
     Raspbian)

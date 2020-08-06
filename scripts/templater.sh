@@ -20,9 +20,11 @@ function executableScriptsProcessing() {
 
 function addHeader() {
 
+    local headerStr
+
     #first arg is the interpreter
     #second arg is the absolute path to file
-    headerSTRING=$(
+    headerStr=$(
         cat <<EOM
 #!/usr/bin/env $1
 #{{{                    MARK:Header
@@ -37,7 +39,7 @@ EOM
     )
 
     #add header to first argument which is the absolute path to file
-    echo "$headerSTRING" >"$2"
+    echo "$headerStr" >"$2"
     echo >>"$2"
     echo >>"$2"
 }

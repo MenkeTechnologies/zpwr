@@ -471,7 +471,8 @@ function vimScriptEdit(){
 }
 
 function sudoEditorRecent(){
-    local firstdir editor
+    local firstdir editor mywords
+
     editor="$1"
 
     BUFFER="$(fzvim $editor)"
@@ -490,7 +491,8 @@ function sudoEditorRecent(){
 }
 
 function editorRecent(){
-    local firstdir editor
+    local firstdir editor mywords
+
     editor="$1"
 
     BUFFER="$(fzvim $editor)"
@@ -548,6 +550,8 @@ function scriptCount(){
 
 function lastWordDouble(){
 
+    local firstdir editor mywords
+
     mywords=("${(z)BUFFER}")
     if [[ $BUFFER[-1] == " " ]]; then
         BUFFER="$BUFFER"$mywords[-1]
@@ -570,6 +574,8 @@ function updater (){
 }
 
 function tutsUpdate() {
+
+    local commitMessage
 
     commitMessage="$BUFFER"
     if [[ ! -z "$commitMessage" ]]; then
@@ -705,7 +711,10 @@ function clipboard(){
 
     [[ -z "$BUFFER" ]] && return 1
 
-    local clipcmd=$ZPWR_COPY_CMD
+    local clipcmd
+
+    clipcmd=$ZPWR_COPY_CMD
+
     if [[ -n $clipcmd ]]; then
             print -sr -- "$BUFFER"
             print -rn "$BUFFER" | ${=clipcmd}
@@ -777,7 +786,9 @@ function clearListFZF(){
 function fzvim(){
 
     local file editor
+
     editor="$1"
+
     case $editor in
         nvim|vim)
     nvimThenRecentf | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' |
@@ -828,7 +839,8 @@ function fzvimScript(){
 
 function vimFzf(){
 
-    local firstdir editor
+    local firstdir editor mywords
+
     zle .kill-whole-line
     BUFFER="$(fzvim vim)"
     mywords=(${(z)BUFFER})
@@ -846,7 +858,8 @@ function vimFzf(){
 
 function emacsFzf(){
 
-    local firstdir editor
+    local firstdir editor mywords
+
     zle .kill-whole-line
     BUFFER="$(fzvim $ZPWR_EMACS_CLIENT)"
     mywords=(${(z)BUFFER})
@@ -864,10 +877,11 @@ function emacsFzf(){
 
 function fzfWordsearchVerbEdit(){
 
-    local firstdir editor
+    local firstdir editor file mywords
+
     editor="$1"
-    local file
     BUFFER=$(agIntoFzf vim)
+
     if [[ -n "$BUFFER" ]]; then
         mywords=(${(z)BUFFER})
         firstdir=${mywords[2]:h}
@@ -885,10 +899,11 @@ function fzfWordsearchVerbEdit(){
 
 function fzfWordsearchVerb(){
 
-    local firstdir editor
+    local firstdir editor file mywords
+
     editor="$1"
-    local file
     BUFFER=$(agIntoFzf vim)
+
     if [[ -z "$BUFFER" ]]; then
         return
     fi
@@ -943,9 +958,9 @@ function fzfFileSearch(){
 
 function fzfFilesearchVerbEdit(){
 
-    local editor
+    local editor sel
+
     editor="$1"
-    local sel
     sel=$(fzfFileSearch)
     if [[ -n "$sel" ]]; then
         BUFFER="$editor $sel"
@@ -956,6 +971,8 @@ function fzfFilesearchVerbEdit(){
 }
 
 function zpwrZstyle() {
+
+    local sel
 
     sel=$(zstyle -L | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m)
 
@@ -970,11 +987,11 @@ function zpwrZstyle() {
 
 function fzfFilesearchVerb(){
 
-    local editor
-    editor="$1"
+    local editor file
 
-    local file
+    editor="$1"
     file=$(fzfFileSearch)
+
     if [[ -z "$file" ]]; then
         return
     fi
@@ -1026,7 +1043,9 @@ function fzfDirSearch(){
 function fzfDirsearchVerb(){
 
     local dir
+
     dir=$(fzfDirSearch)
+
     if [[ -z "$dir" ]]; then
         return
     fi
@@ -1044,7 +1063,9 @@ function fzfZList(){
 function fzfZListVerb(){
 
     local dir
+
     dir=$(fzfZList)
+
     if [[ -z "$dir" ]]; then
         return
     fi
@@ -1067,6 +1088,8 @@ function fm(){
 
 function zFZF(){
 
+    local mywords
+
     zle .kill-whole-line
     BUFFER="z $(fzfZList)"
     mywords=(${(z)BUFFER})
@@ -1078,6 +1101,8 @@ function zFZF(){
 }
 
 function fasdFZF(){
+
+    local mywords
 
     BUFFER="$BUFFER $(fasdFList)"
     mywords=(${(z)BUFFER})
@@ -1091,7 +1116,9 @@ function fasdFZF(){
 function fasdFListVerb(){
 
     local file
+
     file=$(fasdFList)
+
     if [[ -z "$file" ]]; then
         return
     fi
@@ -1100,6 +1127,8 @@ function fasdFListVerb(){
 }
 
 function killPSVerbAccept(){
+
+    local sel
 
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [[ -n "$sel" ]]; then
@@ -1113,6 +1142,8 @@ function killPSVerbAccept(){
 
 function killPSVerbEdit(){
 
+    local sel
+
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
@@ -1123,6 +1154,8 @@ function killPSVerbEdit(){
 }
 
 function killLsofVerbAccept(){
+
+    local sel
 
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [[ -n "$sel" ]]; then
@@ -1135,6 +1168,8 @@ function killLsofVerbAccept(){
 }
 
 function killLsofVerbEdit(){
+
+    local sel
 
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
     if [[ -n "$sel" ]]; then
@@ -1149,6 +1184,7 @@ function killLsofVerbEdit(){
 function fzfEnvVerbAccept(){
 
     local num sel
+
     if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
         loggDebug "regenerating keys for $ZPWR_ENV"
         regenSearchEnv
@@ -1172,6 +1208,7 @@ function fzfEnvVerbAccept(){
 function fzfEnvVerbEdit(){
 
     local num sel
+
     if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
         loggDebug "regenerating keys for $ZPWR_ENV"
         regenSearchEnv
@@ -1217,7 +1254,7 @@ function historyVerbEdit(){
 function vimFzfSudo(){
 
     zle .kill-whole-line
-    local firstdir editor
+    local firstdir editor mywords
 
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         LBUFFER="sudo -E nvim $(fzvim nvim)"
@@ -1238,6 +1275,8 @@ function vimFzfSudo(){
 
 function intoFzfAg(){
 
+    local firstdir editor mywords
+
     mywords=("${(z)BUFFER}")
 
     if echo ${mywords[1]} | command grep -sq vim; then
@@ -1252,6 +1291,8 @@ function intoFzfAg(){
 }
 
 function keySender(){
+
+    local pane mywords
 
     if (( $ZPWR_SEND_KEYS_PANE != -1 )); then
         #tmux send-keys -t learn:0.0 $1
@@ -1280,6 +1321,9 @@ function startSend(){
         loggErr "need arg: <pane>"
         return 1
     fi
+
+    local pane mywords pid
+
     ZPWR_SEND_KEYS_PANE=$1
 
     if [[ ! -d $ZPWR_LOCAL ]]; then
@@ -1295,6 +1339,8 @@ function startSend(){
 }
 
 function keyClear(){
+
+    local pane mywords pid
 
     if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
         for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
@@ -1319,9 +1365,11 @@ function clearLine() {
 
 function regenZshCompCache(){
 
-    prettyPrint "regen zsh compsys cache"
     local lines
+
+    prettyPrint "regen zsh compsys cache"
     lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
+
     echo command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*(DN)
     command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*(DN)
     compinit -u -d "$ZSH_COMPDUMP"
@@ -1364,6 +1412,8 @@ function regenAll(){
 }
 
 function deleteLastWord(){
+
+    local mywords
 
     mywords=(${(z)BUFFER})
     if (( $#mywords > 1  )); then
@@ -1428,8 +1478,8 @@ function getFound(){
 function locateFzfEditNoZLE(){
 
     local firstArg sel editor
-    editor="$1"
 
+    editor="$1"
     sel="$(getLocate)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
@@ -1449,8 +1499,8 @@ function locateFzfEditNoZLE(){
 function locateFzfNoZLE(){
 
     local firstArg sel editor
-    editor="$1"
 
+    editor="$1"
     sel="$(getLocate)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
@@ -1511,8 +1561,8 @@ function locateFzfNoZLEEmacs(){
 function findFzfEditNoZLE(){
 
     local firstArg sel editor
-    editor="$1"
 
+    editor="$1"
     sel="$(getFound)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
@@ -1532,8 +1582,8 @@ function findFzfEditNoZLE(){
 function findFzfNoZLE(){
 
     local firstArg sel editor
-    editor="$1"
 
+    editor="$1"
     sel="$(getFound)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
@@ -1593,7 +1643,7 @@ function findFzfNoZLEEmacs(){
 
 function locateFzfEdit(){
 
-    local firstArg sel firstdir
+    local firstArg sel firstdir mywords
 
     mywords=(${(z)BUFFER})
     if (( $#mywords == 0 )); then
@@ -1627,7 +1677,7 @@ function locateFzfEdit(){
 
 function locateFzf(){
 
-    local firstArg sel firstdir
+    local firstArg sel firstdir mywords
 
     mywords=(${(z)BUFFER})
     if (( $#mywords == 0 )); then
@@ -1659,7 +1709,9 @@ function locateFzf(){
 }
 
 function cca() {
+
     local firstArg sel firstdir
+
     firstArg="${${(Az)@}[1]//\"/}"
     firstdir=${firstArg:h}
     BUFFER="builtin cd \"$firstdir\"; c ""$@""; clearList; isGitDir && git diff HEAD; "
@@ -1668,7 +1720,9 @@ function cca() {
 }
 
 function cv() {
+
     local firstArg sel firstdir
+
     firstArg="${${(Az)@}[1]//\"/}"
     firstdir=${firstArg:h}
     BUFFER="builtin cd \"$firstdir\"; $EDITOR ""$@""; clearList; isGitDir && git diff HEAD; "
@@ -1677,7 +1731,9 @@ function cv() {
 }
 
 function ce() {
+
     local firstArg sel firstdir
+
     firstArg="${${(Az)@}[1]//\"/}"
     firstdir=${firstArg:h}
     BUFFER="builtin cd \"$firstdir\"; $ZPWR_EMACS_CLIENT ""$@""; clearList; isGitDir && git diff HEAD; "
@@ -1982,6 +2038,8 @@ bindkey '^[~' _bash_complete-word
 
 function my-accept-line () {
 
+    local pane commandsThatModifyFiles regex mywords line command cmd out aliases
+
     ZPWR_WILL_CLEAR=false
     if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
         keyClear
@@ -1998,7 +2056,6 @@ function my-accept-line () {
     fi
 
     #do we want to clear the screen and run ls after we exec the current line?
-    local commandsThatModifyFiles regex mywords line
 
     commandsThatModifyFiles=(unlink rm srm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
@@ -2206,6 +2263,8 @@ if (( $version > 5.2 )); then
 fi
 
 function EOLorNextTabStop(){
+
+    local lenToFirstTS
 
     lenToFirstTS=${#BUFFER%%$ZPWR_TABSTOP*}
     if (( $lenToFirstTS < ${#BUFFER} )); then
@@ -2697,6 +2756,8 @@ function tabNum() {
 
 function tabNumCmd() {
 
+    local num args
+
     num=$1
     shift
     args="$@"
@@ -3044,6 +3105,8 @@ source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
 #print 2d array of colors
 function colortest(){
 
+    local backgroundColor
+
     for backgroundColor in ${(ko)bg}; do
         print -n "$bg[$backgroundColor]"
         printf '%s%-8s' $fg[black] black
@@ -3072,6 +3135,8 @@ function colortest(){
 
 
 function 256colors(){
+
+    local i
 
     if [[ -z "$1" ]]; then
         for i in {0..255};do
@@ -3276,8 +3341,10 @@ function _fzf_complete_git() {
     if ! isGitDir; then
         return 1
     fi
+
     local lastWord
     lastWord=${${(Az)@}[-1]}
+
     if git cat-file -t -- $lastWord &>/dev/null; then
         export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitOpts.sh" $lastWord)'"
     else
@@ -3335,6 +3402,7 @@ _comps[csh]=_tcsh
 function _cl(){
 
     local global_aliases
+
     _alternative \
         'global-aliases:global alias:compadd -Qk galiases' \
         'suffix-aliases:suffix alias:_suffix_alias_files' \
@@ -3360,7 +3428,7 @@ exists zshz && zcmd=zshz || zcmd=_z
 
 function _f(){
 
-    local cmd
+    local cmd ret
     if exists fasd;then
         _alternative 'files:directory:_path_files -g "*(-D/)"' &&
             ret=0 || ret=1
@@ -3385,6 +3453,8 @@ function _f(){
 
 function _c(){
 
+    local ret
+
     if exists fasd;then
         _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' &&
         ret=0 || ret=1
@@ -3406,11 +3476,15 @@ function _c(){
 
 function _ssd(){
 
+    local arguments
+
     arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and/running/')"')')
     _arguments -s $arguments
 }
 
 function _ssu(){
+
+    local arguments
 
     arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')
     _arguments -s $arguments
@@ -3424,6 +3498,7 @@ done
 function _zpwr(){
 
   local arguments
+
   arguments=(
   '--help[show this help message and exit]: :->noargs'
   '--shell[enter shell repl]: :->noargs'
@@ -3461,7 +3536,7 @@ function _zpwr(){
 
 function _tmux_pane_words() {
 
-  local expl
+  local expl i
   local -a w
 
   # Based on vim-tmuxcomplete's splitwords function.
@@ -3594,7 +3669,7 @@ function _command_names(){
     # complete only external commands and executable files. This and a
     # `-' as the first argument is then removed from the arguments.
 
-    local args defs ffilt
+    local args defs ffilt aliasesAry galiasesAry k v
 
     zstyle -t ":completion:${curcontext}:commands" rehash && rehash
 
@@ -3614,11 +3689,11 @@ function _command_names(){
     else
     [[ "$1" = - ]] && shift
 
-    local -a aliasesAry
+    declare -a aliasesAry
     for k v in ${(kv)aliases}; do
         aliasesAry+=($k:"${(q)v}")
     done
-    local -a galiasesAry
+    declare -a galiasesAry
     for k v in ${(kv)galiases}; do
         galiasesAry+=($k:"${(q)v}")
     done
@@ -3653,7 +3728,7 @@ function _command_names(){
 function _parameters() {
 
     # function_body
-    # local expl pattern fakes faked tmp pfilt
+    local expl pattern fakes faked tmp pfilt i fakes faked maxLen ary
 
     if compset -P '*:'; then
         _history_modifiers p
@@ -3680,7 +3755,7 @@ function _parameters() {
     pfilt='[^_.]'
 
     declare -a ary
-    local maxLen=50
+    maxLen=50
     for i in "${(@M)${(@k)parameters[(R)${pattern[2]}~*local*]}:#${~pfilt}*}"; do
         ary+=($i:"${${(P)i}:0:100}")
     done
@@ -3713,7 +3788,7 @@ function uncompile(){
     emulate -L zsh
     setopt noglob
 
-    local dir files sudoFiles
+    local dir files sudoFiles file
 
     files=(
         "$HOME/.zshrc"
@@ -3773,7 +3848,7 @@ function uncompile(){
 
 function recompile(){
 
-    local dir files sudoFiles
+    local dir files sudoFiles file
 
     files=(
         "$HOME/.zshrc"
@@ -3874,6 +3949,8 @@ function zarg(){
         loggErr "need two args, escaped glob and cmd with {}"
         return 1
     fi
+
+    local first
 
     first="$1"
     shift
@@ -3982,10 +4059,11 @@ function gtagsIntoFzf(){
 
 function getGtagsEdit(){
 
-    local firstdir editor
+    local firstdir editor file mywords
+
     editor="$1"
-    local file
     BUFFER=$(gtagsIntoFzf)
+
     if [[ -n "$BUFFER" ]]; then
         mywords=(${(z)BUFFER})
         firstdir=${mywords[2]:h}
@@ -4002,10 +4080,11 @@ function getGtagsEdit(){
 
 function getGtags(){
 
-    local editor
+    local firstdir editor file mywords
+
     editor="$1"
-    local file
     BUFFER=$(gtagsIntoFzf)
+
     if [[ -z "$BUFFER" ]]; then
         return
     fi

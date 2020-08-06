@@ -34,6 +34,8 @@ function gittersdev() {
 
 function main() {
 
+    local dir completionDir
+
     gittersdev
     #cp .shell_aliases_functions.sh "$HOME/.zpwr"
     #cp .zshrc "$HOME"
@@ -54,8 +56,8 @@ function main() {
         #echo "$(date) How is ZPWR_SCRIPTS null?" >&2
         #env
     #fi
-    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
-    for dir in "$COMPLETION_DIR/"*; do
+    completionDir="$HOME/.oh-my-zsh/custom/plugins"
+    for dir in "$completionDir/"*; do
         printf "$dir: "
         test -d "$dir" && ( builtin cd "$dir" && git pull; )
     done

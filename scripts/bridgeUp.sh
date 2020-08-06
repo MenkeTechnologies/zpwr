@@ -8,48 +8,54 @@
 ##### Notes: br0, tap0 and eth0 bridged
 #}}}***********************************************************
 
+function bridgeUp(){
 #{{{                    MARK:Local vars
 #**************************************************************
 # Define physical ethernet interface to be bridged
 # with TAP interface(s) above.
-eth="eth0"
-eth_ip="192.168.0.149"
-eth_netmask="255.255.255.0"
-eth_broadcast="192.168.0.255"
-eth_gateway="192.168.0.1"
-eth_mac="REPLACE"
+    local eth eth_ip eth_netmask eth_broadcast eth_gateway eth_mac t br tap
 
-# Define Bridge Interface
-br="br0"
+    eth="eth0"
+    eth_ip="192.168.0.149"
+    eth_netmask="255.255.255.0"
+    eth_broadcast="192.168.0.255"
+    eth_gateway="192.168.0.1"
+    eth_mac="REPLACE"
 
-# Define list of TAP interfaces to be bridged together
-tap="tap0"
-#}}}**************************************************************
+    # Define Bridge Interface
+    br="br0"
 
-#{{{                    MARK:Bring up bridge
-#**************************************************************
-for t in $tap; do
-    openvpn --mktun --dev $t
-done
+    # Define list of TAP interfaces to be bridged together
+    tap="tap0"
+    #}}}**************************************************************
 
-brctl addbr $br
-brctl addif $br $eth
+    #{{{                    MARK:Bring up bridge
+    #**************************************************************
+    for t in $tap; do
+        openvpn --mktun --dev $t
+    done
 
-for t in $tap; do
-    brctl addif $br $t
-done
+    brctl addbr $br
+    brctl addif $br $eth
 
-for t in $tap; do
-    ifconfig $t 0.0.0.0 promisc up
-    iptables -A INPUT -i $t -j ACCEPT
-done
+    for t in $tap; do
+        brctl addif $br $t
+    done
 
-iptables -A INPUT -i $br -j ACCEPT
-iptables -A FORWARD -i $br -j ACCEPT
+    for t in $tap; do
+        ifconfig $t 0.0.0.0 promisc up
+        iptables -A INPUT -i $t -j ACCEPT
+    done
 
-ifconfig $eth 0.0.0.0 promisc up
+    iptables -A INPUT -i $br -j ACCEPT
+    iptables -A FORWARD -i $br -j ACCEPT
 
-ifconfig $br $eth_ip netmask $eth_netmask broadcast $eth_broadcast
-ip link set $br address $eth_mac
-route add default gw $eth_gateway $br
-#}}}**************************************************************
+    ifconfig $eth 0.0.0.0 promisc up
+
+    ifconfig $br $eth_ip netmask $eth_netmask broadcast $eth_broadcast
+    ip link set $br address $eth_mac
+    route add default gw $eth_gateway $br
+    #}}}**************************************************************
+}
+
+bridgeUp "$@"

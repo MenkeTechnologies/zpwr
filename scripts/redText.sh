@@ -6,9 +6,6 @@
 ##### Purpose: bash script for filtering text
 ##### Notes:
 #}}}***********************************************************
-#escape sequences
-ZPWR_RED='\e[31;1m'
-ZPWR_RESET='\e[0m'
 
 #loop through stdin and add escape sequences at head and tail of each line
 while read; do

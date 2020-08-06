@@ -3,37 +3,41 @@
 clear
 
 function color (){
+
     echo "\e[$1m$2\e[0m"
 }
 
 function extend (){
+
     local str="$1"
     let spaces=60-${#1}
-    while [ $spaces -gt 0 ]; do
+    while (( spaces > 0 )); do
         str="$str "
-        let spaces=spaces-1
+        (( --spaces ))
     done
     echo "$str"
 }
 
 function center (){
+
     local str="$1"
     let spacesLeft=(78-${#1})/2
     let spacesRight=78-spacesLeft-${#1}
-    while [ $spacesLeft -gt 0 ]; do
+    while (( spacesLeft > 0 )); do
         str=" $str"
-        let spacesLeft=spacesLeft-1
+        (( --spacesLeft ))
     done
 
-    while [ $spacesRight -gt 0 ]; do
+    while (( spacesRight > 0 )); do
         str="$str "
-        let spacesRight=spacesRight-1
+        (( --spacesRight ))
     done
 
     echo "$str"
 }
 
 function sec2time (){
+
     local input=$1
 
     if [ $input -lt 60 ]; then
@@ -135,4 +139,4 @@ label5="$borderBar  $(color $statsLabelColor "Temperature...:") $label5$borderBa
 stats="$label1\n$label2\n$label3\n$label4\n$label5"
 
 # Print motd
-echo -e "$header\n$borderEmptyLine\n$greetings\n$borderEmptyLine\n$stats\n$borderEmptyLine\n$borderBottomLine"       
+echo -e "$header\n$borderEmptyLine\n$greetings\n$borderEmptyLine\n$stats\n$borderEmptyLine\n$borderBottomLine"

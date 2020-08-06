@@ -37,6 +37,7 @@ function usage() {
 } # ---------- end of function usage  ----------
 
 function killpids() {
+
     echo "${1:1}" | perl -ae '`kill $_`for@F'
     exit 0
 }

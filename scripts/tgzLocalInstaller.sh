@@ -29,6 +29,8 @@ function usage() {
 
 function install() {
 
+    local directory_name
+
     if [[ "$1" =~ .*\.tar\.gz ]]; then
         directory_name="${1%.tar.gz}"
     elif [[ "$1" =~ .*\.tgz ]]; then

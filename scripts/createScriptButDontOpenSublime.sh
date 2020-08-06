@@ -8,6 +8,7 @@
 #}}}***********************************************************
 
 function executableScriptsProcessing() {
+
     # then make it executable
     chmod 700 "$newfile"
     #add hr	echo "#created by JAKOBMENKE --> `date` " >> "$newfile"
@@ -16,6 +17,7 @@ function executableScriptsProcessing() {
 }
 
 function openTextEditor() {
+
     # open -t "$newfile"
     subl "$newfile/dogs"
     #run python3 script with pyautogi commands for keyboard shortcuts
@@ -23,6 +25,7 @@ function openTextEditor() {
 }
 
 function createTheFile() {
+
     #create newfile
     touch "$newfile"
 

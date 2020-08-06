@@ -9,12 +9,20 @@
 
 BACKUP_DIR="$ZPWR_LOCAL/rcBackups"
 
-if [[ ! -d "$BACKUP_DIR" ]]; then
-    mkdir "$BACKUP_DIR"
-fi
+function copyConfigs(){
 
-files=("$HISTFILE")
+    local file files
 
-for file in "${files[@]}"; do
-    cp "$file" "$BACKUP_DIR/${file##*/}""$(date +%s)"
-done
+    if [[ ! -d "$BACKUP_DIR" ]]; then
+        mkdir "$BACKUP_DIR"
+    fi
+
+    files=("$HISTFILE")
+
+    for file in "${files[@]}"; do
+        cp "$file" "$BACKUP_DIR/${file##*/}""$(date +%s)"
+    done
+
+}
+
+copyConfigs "$@"

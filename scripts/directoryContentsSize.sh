@@ -12,6 +12,7 @@ sortedCommand=gsort
 type "$sortedCommand" >/dev/null 2>&1 || sortedCommand=sort
 # set -x
 function usage() {
+
     #here doc for printing multiline
     cat <<EOM >&2
     usage:
@@ -26,15 +27,18 @@ EOM
 #checking for presence of sorted flag which is
 #set in getopts
 function dontSummarizeSizes() {
+
     [[ -n $sorted ]] && du -sh * | $sortedCommand -h || du -sh *
 }
 
 #show just summarize size
 function summarizeSizes() {
+
     du -sh $(pwd)
 }
 
 function showHidden() {
+
     #checking for presence of sorted flag which is
     #set in getopts
     if [[ $sorted ]]; then

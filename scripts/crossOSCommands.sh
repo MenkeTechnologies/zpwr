@@ -12,6 +12,7 @@ if [[ -z "$ZPWR_OS_TYPE" ]]; then
 fi
 
 function getOpenCommand(){
+
     local open_cmd
 
     case "$ZPWR_OS_TYPE" in
@@ -37,6 +38,7 @@ function getOpenCommand(){
 }
 
 function getPasteCommand(){
+
     local paste_cmd
 
     case "$ZPWR_OS_TYPE" in
@@ -66,6 +68,7 @@ function getPasteCommand(){
 }
 
 function getCopyCommand(){
+
     local copy_cmd
 
     case "$ZPWR_OS_TYPE" in

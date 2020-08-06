@@ -316,7 +316,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias tra='cd $HOME/.Trash'
     alias co="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
     alias bl='brew link --force --overwrite'
-    
+
     if exists exa; then
         alias lr="$ZPWR_EXA_COMMAND -R"
     else
@@ -577,6 +577,9 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
             loggErr "Title is \$1 and message is \$2..." &&
             return 1
         fi
+
+        local title msg
+
         title="$1"
         msg="$2"
         echo "display notification \"$msg\" with title \"$title\"" |
@@ -595,6 +598,8 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
     function scriptToPDF(){
 
+        local tempFile
+
         tempFile="$HOME/__test.ps"
         vim "$1" -c "hardcopy > $tempFile" -c quitall
         cat "$tempFile" | open -fa Preview
@@ -609,7 +614,10 @@ else
                 loggErr "need an arg"
                 return 1
             fi
+            local tempFile
+
             tempFile="$HOME/__test.ps"
+
             vim "$1" -c "hardcopy > $tempFile" -c quitall
             ps2pdf "$tempFile" "${1%%.*}".pdf
             rm "$tempFile"
@@ -617,6 +625,8 @@ else
     }
 
     function ssd() {
+
+        local service
 
         for service in "$@"; do
             prettyPrint "sudo systemctl stop $service"
@@ -627,6 +637,8 @@ else
     }
 
     function ssu() {
+
+        local service
 
         for service in "$@"; do
             prettyPrint "sudo systemctl start $service"
@@ -639,7 +651,10 @@ else
 
     function tailufw(){
 
+        local size
+
         size=100
+
         if [[ -n $1 ]]; then
             size=$1
         fi
@@ -669,11 +684,12 @@ else
 
     function restart(){
 
+        local src_dir service service_path group
+
         service="$1"
-        local src_dir
         src_dir="$ZPWR_INSTALL"
-        local service_path
         service_path="$src_dir/$service.service"
+
         test -d "$src_dir" ||
     { loggErr "$src_dir does not exists." && return 1; }
         test -f "$service_path" ||
@@ -714,6 +730,8 @@ fi
 
 function cloneToForked(){
 
+    local branch
+
     branch=master
     (
         if [[ -z "$1" ]]; then
@@ -727,12 +745,15 @@ function cloneToForked(){
 }
 
 function s(){
+
     exists isZsh || {
         source "$ZPWR_SCRIPTS/lib.sh" || {
             echo "where is $ZPWR_SCRIPTS/lib.sh" >&2
             return 1
         } && loggErr 'forced to load lib.sh due to missing isZsh'
     }
+
+    local cmd sec_cmd out url
 
     if exists subl; then
         cmd=subl
@@ -769,7 +790,7 @@ function s(){
 
 function xx(){
 
-    local counter cmd DONE
+    local counter cmd DONE iter
 
     cmd="$1"
     test -z "$2" && counter=100 || counter="$2"
@@ -790,6 +811,8 @@ function urlSafe(){
 
 function cgh(){
 
+    local user
+
     [[ -z "$1" ]] && user="$ZPWR_GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/$user" |
     command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
@@ -806,12 +829,16 @@ function upload(){
 
 function jd(){
 
+    local dir
+
     for dir;do
         command mkdir -p "$dir"
     done
 }
 
 function j(){
+
+    local file
 
     for file;do
         dirname="$(dirname $file)"
@@ -832,6 +859,8 @@ function scnew(){
 
 function p(){
 
+    local cmd out
+
     if [[ "$ZPWR_OS_TYPE" == linux || "$ZPWR_OS_TYPE" == darwin ]]; then
         [[ -z $1 ]] && ps -ef && return 0
         out="$(ps -ef)"
@@ -850,6 +879,8 @@ function p(){
 }
 
 function b(){
+
+    local cmd sleepTime
 
     if [[ $1 == -s ]]; then
         sleepTime=$2
@@ -895,14 +926,16 @@ function largestGitFiles(){
         return 1
     fi
 
+    local page obj filename size
+
     if [[ -z $1 ]]; then
-       page=50 
+       page=50
    else
        page=$1
     fi
 
     prettyPrint "Top $page Largest Git Objects"
-    local obj
+
     obj=$(git rev-list --all --objects)
     while read -r sha type size; do
         filename=$(echo $obj | command grep $sha)
@@ -922,6 +955,8 @@ function clearGitCommit(){
         loggErr "clearGitCache <regex>"
         return 1
     fi
+
+    local regex
 
     regex="^$1\$"
 
@@ -950,6 +985,8 @@ function clearGitCache(){
 
 function about(){
 
+    local old
+
     old="$LESS"
     unset LESS
     if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
@@ -960,7 +997,7 @@ function about(){
 
 function clearList() {
 
-    local FOUND out out2
+    local FOUND out out2 ls_command lib_command rank loc arg
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists exa;then
@@ -1133,8 +1170,9 @@ function animate(){
 
 function blocksToSize(){
 
+    local bytes input
+
     read input
-    local bytes
     bytes=$(( input * 512 ))
     echo $bytes | humanreadable
 }
@@ -1199,8 +1237,11 @@ function execpy(){
         return 1
     fi
 
+    local script
+
     script="$1"
     shift
+
     if [[ ! -f "$PYSCRIPTS/$script" ]]; then
         loggErr "$PYSCRIPTS/$script does not exist!"
         return 1
@@ -1233,7 +1274,7 @@ function contribCountDirs(){
        return 1
     fi
 
-    local dirOfDirs user curDir sum dir
+    local dirOfDirs user curDir sum dir lineCount
 
     user="$1"
     shift
@@ -1269,6 +1310,8 @@ function contribCount(){
        return 1
     fi
 
+    local lines lineCount
+
     lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"
     lineCount="$(echo $lines | wc -l)"
     prettyPrint "Contribution Count"
@@ -1291,6 +1334,8 @@ function totalLines(){
        loggErr "not in a git dir."
        return 1
     fi
+
+    local filter lineCount
 
     prettyPrint "starting total line count..."
     {
@@ -1339,6 +1384,8 @@ function contribCountLines(){
        loggErr "not in a git dir."
        return 1
     fi
+
+    local filter lineCount
 
     prettyPrint "starting line contrib count..."
     {
@@ -1389,7 +1436,9 @@ function gsdc(){
     fi
 
     local currentDir dir
+
     currentDir="$(pwd -P)"
+
     for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
         if [[ "$currentDir" == "$dir" ]]; then
             printf "\x1b[0;1;31m"
@@ -1438,6 +1487,7 @@ function replacer(){
         return 1
     fi
 
+    local orig replace
 
     orig="$1"
     replace="$2"
@@ -1452,6 +1502,8 @@ function replacer(){
 }
 
 function creategif(){
+
+    local res outFile
 
     outFile=out.gif
     res=600x400
@@ -1472,6 +1524,7 @@ function creategif(){
 function hc(){
 
     local reponame old_dir
+
     test -z "$1" && reponame="$(basename "$(pwd)")" ||
         reponame="$1"
     printf "\e[1m"
@@ -1490,6 +1543,8 @@ function hc(){
 }
 
 function hd(){
+
+    local repo user line out
 
     test -n "$1" && repo="$1" && user="$ZPWR_GITHUB_ACCOUNT" || {
 		if line="$(git remote -v 2>/dev/null | sed 1q)";then
@@ -1583,6 +1638,8 @@ function backup(){
         return 1
     fi
 
+    local newfile
+
     newfile="$1".$(date +%Y%m%d.%H.%M.bak)
     mv "$1" "$newfile"
     cp -pR "$newfile" "$1"
@@ -1600,8 +1657,7 @@ function gcl() {
         loggErr "usage gcl <repo>"
         return 1
     fi
-    local git_name
-    local dir_name
+    local git_name dir_name last_arg
 
     last_arg=${@: -1}
     git_name="${last_arg##*/}"
@@ -1700,6 +1756,8 @@ function jetbrainsWorkspaceEdit(){
 
 function o(){
 
+    local open_cmd
+
     open_cmd="$ZPWR_OPEN_CMD" || return 1
 
     if isZsh; then
@@ -1719,6 +1777,8 @@ function o(){
 }
 
 function openmygh(){
+
+    local open_cmd
 
     open_cmd="$ZPWR_OPEN_CMD" || return 1
 
@@ -1759,6 +1819,7 @@ function zp(){
 function zpz(){
 
     local dirsc forked
+
     dirsc="$ZPWR"
 
     if [[ -d "$dirsc" ]]; then
@@ -1772,6 +1833,7 @@ function zpz(){
 function zr(){
 
     local dirsc forked
+
     dirsc="$ZPWR_SCRIPTS"
     forked="$FORKED_DIR"
 
@@ -1786,7 +1848,10 @@ function zr(){
 
 function goInstallerDir(){
 
-    local ret=0
+    local ret
+
+    ret=0
+
     builtin cd "$ZPWR_INSTALL" || ret=1
 
     if [[ "$(pwd)" != "$ZPWR_INSTALL" ]]; then
@@ -1803,7 +1868,8 @@ function goInstallerDir(){
 function unlinkConf(){
     (
 
-    local -a symFiles
+    local symFiles file snipDir
+
     symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc .ctags)
 
     for file in ${symFiles[@]} ; do
@@ -1820,7 +1886,7 @@ function unlinkConf(){
     done
     rm -rf "$HOME/.vim/UltiSnips"
 
-    local snipDir="$HOME/.emacs.d/private/snippets/zpwr-snippets"
+    snipDir="$HOME/.emacs.d/private/snippets/zpwr-snippets"
 
     if [[ -d "$snipDir" ]]; then
        rm -rf "$snipDir"
@@ -1840,7 +1906,8 @@ function linkConf(){
         ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    local -a symFiles
+    local symFiles file snipDir
+
     symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc)
 
     for file in ${symFiles[@]} ; do
@@ -1853,7 +1920,7 @@ function linkConf(){
     prettyPrint "Installing UltiSnips to $HOME/.vim/UltiSnips"
     echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
     ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
-    local snipDir="$HOME/.emacs.d/private/snippets"
+    snipDir="$HOME/.emacs.d/private/snippets"
 
     if [[ -d "$snipDir" ]]; then
         prettyPrint "Installing yasnippets to $snipDir"
@@ -1867,7 +1934,7 @@ function linkConf(){
 # pull down latest configuration files from $ZPWR_REPO_NAME
 function getrc(){
 
-    local dir
+    local dir branch completionDir
 
     if [[ -z "$1" ]]; then
         branch=master
@@ -1901,8 +1968,8 @@ function getrc(){
     bash "$ZPWR_BANNER_SCRIPT"
     linkConf
 
-    COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"
-    for dir in "$COMPLETION_DIR/"*;do
+    completionDir="$HOME/.oh-my-zsh/custom/plugins"
+    for dir in "$completionDir/"*;do
         printf "$dir: "
         test -d "$dir" && ( builtin cd "$dir" && git pull; )
     done
@@ -1923,6 +1990,8 @@ function rename(){
         return 1
     fi
 
+    local search out
+
     search="$1"
     shift
     for file in "$@"; do
@@ -1936,6 +2005,8 @@ function rename(){
 }
 
 function torip(){
+
+    local ip
 
     ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
     whois $ip
@@ -1958,6 +2029,8 @@ function mycurl(){
 
 function perlremovespaces(){
 
+    local file
+
     for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
         perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
@@ -1967,10 +2040,12 @@ function perlremovespaces(){
 function pirun(){
 
     trap 'DONE=true' QUIT
-    local DONE
+
+    local DONE picounter pi
+
     DONE=false
-    local picounter
     picounter=1
+
     for pi in "${PI_ARRAY[@]}" ; do
         [[ $DONE == true ]] && return 1
         alternatingPrettyPrint \
@@ -1995,14 +2070,16 @@ function digs(){
         return 1
     fi
 
-    local OPTIND opt exe secret
+    local OPTIND opt exe secret url noport noproto ip primary colo
+
     while getopts "s" opt 2>/dev/null;do
         case $opt in
-            s)secret=true;;
+            s) secret=true;;
             *) loggErr "bad opt"; return 1
         esac
     done
     shift $(($OPTIND-1))
+
     exists grc && colo=grc || {
         colo=
         echo "No grc colorizer no defaulting to no colors"
@@ -2197,7 +2274,9 @@ function digs(){
 
 function to(){
 
+    local file
     file="$HOME/.config/powerline/themes/tmux/default.json"
+
     [[ ! -f "$file" ]] && loggErr "no tmux config" && return 1
     if cat "$file" | grep -sq "external_ip"; then
         perl -i -pe 's@^.*external_ip.*$@@' "$file"
@@ -2225,7 +2304,10 @@ function www(){
        loggErr "www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
        return 1
     fi
+
+    local time
     time=$1
+
     shift
     while true; do
         eval "$@"
@@ -2267,7 +2349,9 @@ function fordir(){
        loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"
        return 1
     fi
+
     shift
+
     for dir in "$@"; do
         if [[ -d "$dir" ]]; then
             (
@@ -2283,6 +2367,9 @@ function ff(){
        loggErr "ff <cmd> to run <cmd> 10 times" 
        return 1
     fi
+
+    local i
+
     if [[ ! -d "$1" && ! -f "$1" ]]; then
         for (( i = 0; i < 10;++i )); do
             eval "$@"
@@ -2299,8 +2386,12 @@ function fff(){
        loggErr "fff <iter> <cmd> to run <cmd> <iter> times" 
        return 1
     fi
+
+    local i num
+
     num=$1
     shift
+
     for (( i = 0; i < $num;++i )); do
         eval "$@"
     done
@@ -2312,6 +2403,8 @@ function post(){
         loggErr "need two args"
         return 1
     fi
+
+    local out postfix
     postfix="$1"
     shift
     out="$(eval "$@")"
@@ -2324,6 +2417,9 @@ function pre(){
         loggErr "need two args"
         return 1
     fi
+
+    local out prefix
+
     prefix="$1"
     shift
     out="$(eval "$@")"
@@ -2341,9 +2437,9 @@ exists pssh && function pir(){
 
 function cCommon(){
 
-    local colorizer=bat
-    local rpm_cmd
-    local deb_cmd
+    local colorizer rpm_cmd deb_cmd file
+    colorizer=bat
+
     exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
     exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
@@ -2394,7 +2490,10 @@ function c(){
 
 exists http && function ge(){
 
-    local styles_dir
+    local styles_dir url file len rand randscript random_color file_ary
+
+    declare -a file_ary
+
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
 
     url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"
@@ -2402,15 +2501,16 @@ exists http && function ge(){
     shift
 
     if [[ -d "$styles_dir" ]]; then
-        declare -a file_ary
         for file in "$styles_dir"/* ; do
             file=${file##*/}
             echo "$file" | command grep -sq -E "init|pycache" ||
                 file_ary+=("${file%.*}")
         done
+
         len=${#file_ary}
         randscript="print int(rand()*$len)"
         rand=$(echo "$randscript" | perl)
+
         logg $rand
         isZsh && ((++rand))
 
@@ -2449,19 +2549,21 @@ function agIntoFzf(){
 
 function figletfonts(){
 
+    local figletDir ary file font
+
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+        figletDir="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
     else
-        FIGLET_DIR="/usr/share/figlet"
+        figletDir="/usr/share/figlet"
     fi
 
-    if [[ ! -d "$FIGLET_DIR" ]]; then
-        loggErr "Can not find $FIGLET_DIR" && return 1
+    if [[ ! -d "$figletDir" ]]; then
+        loggErr "Can not find $figletDir" && return 1
     fi
 
     declare -a ary
 
-    for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
+    for file in $(find "$figletDir" -iname "*.flf"); do
         ary+=${file##*/}
     done
 
@@ -2489,7 +2591,7 @@ function figletfonts(){
 
 function pygmentcolors(){
 
-    local dir
+    local dir i
     dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"
     for i in "$dir/pygments/styles/"* ; do
         echo "$i"
@@ -2528,6 +2630,8 @@ declare -A _tempAry
 
 function jsonToArray(){
 
+    local json key value
+
     local json="$(cat)"
     while IFS="=" read -r key value;do
         _tempAry[$key]=$value
@@ -2545,6 +2649,8 @@ function jsonToArray(){
 }
 
 function arrayToJson(){
+
+    local ary key
 
     if isZsh; then
         ary="$1"
@@ -2611,7 +2717,8 @@ function regenGtagsType(){
         return 1
     fi
 
-    local type=$1
+    local type file
+    type=$1
 
     if exists gtags; then
         prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
@@ -2675,6 +2782,8 @@ function regenAllKeybindingsCache(){
 
 function searchGitCommon(){
 
+    local out
+
     out="$(goThere)"
     echo "$out"
     eval "$out"
@@ -2697,7 +2806,10 @@ function regenAllGitRepos(){
 
 function searchDirtyGitRepos(){
 
-    goThere(){
+    local shouldRegen
+
+    function goThere(){
+
     {
         while read; do
             builtin cd "$REPLY" 2>/dev/null || continue
@@ -2725,7 +2837,9 @@ function searchDirtyGitRepos(){
 
 function searchAllGitRepos(){
 
-    goThere(){
+    local shouldRegen
+
+    function goThere(){
         cat "$ZPWR_ALL_GIT_DIRS" |
         eval "$ZPWR_FZF $FZF_SEARCH_GIT_OPTS" |
         perl -ne 'print "cd $_"'
@@ -2777,7 +2891,7 @@ function goclean() {
         return 1
     fi
 
-    local pkg ost cnt
+    local pkg ost cnt src_dir bin_dir
     pkg=$1;
     shift
 
@@ -2787,7 +2901,6 @@ function goclean() {
     fi
 
     # Delete the source directory and compiled package directory(ies)
-    local src_dir bin_dir
     src_dir="$GOPATH/src/$pkg"
     bin_dir="$GOPATH/pkg/$ost/$pkg"
 
@@ -2942,7 +3055,9 @@ function timer() {
         loggErr "timer <commands...>"
         return 1
     fi
-    local count total totstart totend avg runtime
+
+    local count cmd total totstart totend avg runtime local_command
+
     count=100
     if exists gdate;then
         cmd=gdate
@@ -2987,6 +3102,8 @@ function changeGitCommitterEmail(){
         return 1
     fi
 
+    local oldEmail newEmail
+
     oldEmail="$1"
     newEmail="$2"
 
@@ -3011,6 +3128,8 @@ function changeGitAuthorEmail(){
         loggNotGit
         return 1
     fi
+
+    local oldEmail newEmail
 
     oldEmail="$1"
     newEmail="$2"
@@ -3079,6 +3198,7 @@ function parseRecentf(){
 function catNvimOrVimInfo() {
 
     local file
+
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
         file="$ZPWR_NVIMINFO"
         test -e "$file" || touch "$file"

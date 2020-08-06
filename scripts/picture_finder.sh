@@ -35,8 +35,9 @@ function killCursor() {
 
 function displayProgress() {
 
-    local arr=('|' '\' '-' '/')
-    local revarr=('|' '/' '-' '\')
+    local arr revvarr i k
+    arr=('|' '\' '-' '/')
+    revarr=('|' '/' '-' '\')
 
     while true; do
 

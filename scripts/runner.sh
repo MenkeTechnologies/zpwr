@@ -17,6 +17,8 @@ function executableScriptsProcessing() {
 
 function compileExecuteTheFile() {
 
+    local dir file
+
     executableScriptsProcessing "$2"
     #compile
     eval "$1 \"$2\""
@@ -29,6 +31,8 @@ function compileExecuteTheFile() {
 }
 
 function executeTheFile() {
+
+    local dir file
 
     executableScriptsProcessing "$2"
     #execute the file with the proper interpreter or compiler

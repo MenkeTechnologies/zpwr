@@ -10,6 +10,7 @@
 () {
     emulate -L zsh
     setopt noglob
+    local k v
 
     for k v in ${(kv)parameters}; do
         print -l "param $k"

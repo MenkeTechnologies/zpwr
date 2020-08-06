@@ -23,6 +23,8 @@ EOM
 
 function watchCommand() {
 
+    local home ed ell ROWS COLS CMD concat
+
     home=$(tput cup 0 0)
     #tput ed clears to end of screen
     ed=$(tput ed)

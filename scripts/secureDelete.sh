@@ -18,8 +18,10 @@ e_changed_mind=72
 
 function displayProgress() {
 
-    local arr=('|' '\' '-' '/')
-    local revarr=('|' '/' '-' '\')
+    local arr revarr i k
+
+    arr=('|' '\' '-' '/')
+    revarr=('|' '/' '-' '\')
 
     while true; do
         for i in {0..1}; do

@@ -17,7 +17,7 @@ ZPWR_EXA_COMMAND="command exa --git -il -F -H --extended --color-scale -g -a --c
 
 function clearList() {
 
-    local FOUND out out2
+    local FOUND out out2 ls_command lib_command rank loc arg
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if exists exa;then

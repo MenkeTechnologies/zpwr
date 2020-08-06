@@ -9,6 +9,7 @@
 printf "\e[37;44m"
 
 function displayProgress() {
+
     local spinner="\|/-"            # spinner
     local chars=1                   # number of characters to display
     local delay=.1                  # time in seconds between characters
@@ -31,6 +32,7 @@ function displayProgress() {
 }
 
 function startCursor() {
+
     #start swiveling cursor in background
     displayProgress &
     #grab its PID so can kill later
@@ -39,6 +41,7 @@ function startCursor() {
 }
 
 function killCursor() {
+
     kill $progress_pid
     wait $progress_pid 2>/dev/null
     tput cnorm
@@ -46,15 +49,17 @@ function killCursor() {
 
 function convertFiles() {
 
-    for file in $(ls *.$originalFileEnding); do
-        #get first part of name ie frame, delimited by underscore
-        local first=$(echo ${file%%$delim*})
-        local last=$(echo ${file##*_})
-        local number=$(echo ${last%%.*})
-        #get number convert to base 10 and strip leading zeros
-        local number=$((10#$number))
+    local file first last number newfile
 
-        local newfile="$first$number.$endFileEnding"
+    for file in $(ls *.$originalFileEnding); do
+        # get first part of name ie frame, delimited by underscore
+        first=$(echo ${file%%$delim*})
+        last=$(echo ${file##*_})
+        number=$(echo ${last%%.*})
+        # get number convert to base 10 and strip leading zeros
+        number=$((10#$number))
+
+        newfile="$first$number.$endFileEnding"
 
         if [[ -z "$1" ]]; then
             mv "$file" "$newfile"
@@ -66,6 +71,7 @@ function convertFiles() {
 }
 
 function checkForExistence() {
+
     ls *.$originalFileEnding &>/dev/null || {
         echo "No '$originalFileEnding' files found..."
         exit

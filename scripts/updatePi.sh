@@ -22,6 +22,8 @@ function updatePI() {
     #alternatively apt-get has -y option
     # -x option to disable x11 forwarding
 
+    local hostname manager
+
     hostname="$(echo "$1" | awk -F: '{print $1}')"
     manager="$(echo "$1" | awk -F: '{print $2}')"
     prettyPrint "Updating $hostname with $manager"

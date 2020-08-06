@@ -12,6 +12,8 @@ commands=""
 
 function findTotal() {
 
+    local total f
+
     total=$(expr $(ls -F $1 | grep ".*[*@]" | wc -l) + $total)
 
     for f in $(ls -A $1); do

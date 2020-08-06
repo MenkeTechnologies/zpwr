@@ -18,6 +18,8 @@ function allRemotes() {
 
 function banner() {
 
+    local version info fetch push lastcommit
+
     if [[ -d "$ZPWR" ]]; then
         if cd "$ZPWR"; then
             version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"

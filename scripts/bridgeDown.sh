@@ -8,37 +8,43 @@
 ##### Notes: eth0 replaces br0, tap0 and eth0 bridge
 #}}}***********************************************************
 
-#{{{                    MARK:Local Vars
-#**************************************************************
-# Define physical ethernet interface to be bridged
-# with TAP interface(s) above.
-eth="eth0"
-eth_ip="192.168.0.149"
-eth_netmask="255.255.255.0"
-eth_broadcast="192.168.0.255"
-eth_gateway="192.168.0.1"
-eth_mac="REPLACE"
+function bridgeDown(){
+    #{{{                    MARK:Local Vars
+    #**************************************************************
+    # Define physical ethernet interface to be bridged
+    # with TAP interface(s) above.
+    local eth eth_ip eth_netmask eth_broadcast eth_gateway eth_mac t br tap
 
-# Define Bridge Interface
-br="br0"
+    eth="eth0"
+    eth_ip="192.168.0.149"
+    eth_netmask="255.255.255.0"
+    eth_broadcast="192.168.0.255"
+    eth_gateway="192.168.0.1"
+    eth_mac="REPLACE"
 
-# Define list of TAP interfaces to be bridged together
-tap="tap0"
-#}}}**************************************************************
+    # Define Bridge Interface
+    br="br0"
 
-#{{{                    MARK:Take Down Bridge
-#**************************************************************
-iptables -D INPUT -i $br -j ACCEPT
-iptables -D FORWARD -i $br -j ACCEPT
+    # Define list of TAP interfaces to be bridged together
+    tap="tap0"
+    #}}}**************************************************************
 
-ifconfig $br down
-brctl delbr $br
+    #{{{                    MARK:Take Down Bridge
+    #**************************************************************
+    iptables -D INPUT -i $br -j ACCEPT
+    iptables -D FORWARD -i $br -j ACCEPT
 
-for t in $tap; do
-    openvpn --rmtun --dev $t
-    iptables -D INPUT -i $t -j ACCEPT
-done
+    ifconfig $br down
+    brctl delbr $br
 
-ifconfig $eth $eth_ip netmask $eth_netmask broadcast $eth_broadcast
-route add default gw $eth_gateway $eth
-#}}}**************************************************************
+    for t in $tap; do
+        openvpn --rmtun --dev $t
+        iptables -D INPUT -i $t -j ACCEPT
+    done
+
+    ifconfig $eth $eth_ip netmask $eth_netmask broadcast $eth_broadcast
+    route add default gw $eth_gateway $eth
+    #}}}**************************************************************
+}
+
+bridgeDown "$@"
