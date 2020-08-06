@@ -446,6 +446,18 @@ function alternatingPrettyPrint(){
 
 }
 
+function clearGitCache(){
+
+    if ! isGitDir; then
+        loggNotGit
+        return 1
+    fi
+
+    git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d 2>/dev/null
+    git reflog expire --expire=now --all 2>/dev/null
+    git gc --prune=now 2>/dev/null
+}
+
 function gitRepoUpdater() {
 
     local enclosing_dir generic_git_repo_plugin
@@ -460,7 +472,7 @@ function gitRepoUpdater() {
                     (
                         builtin cd "$generic_git_repo_plugin" &&
                         git fetch --all --prune &&
-                        git pull --all
+                        git pull --all && clearGitCache
                     )
                 fi
             fi

@@ -952,7 +952,7 @@ function clearGitCommit(){
     fi
 
     if [[ -z "$1" ]]; then
-        loggErr "clearGitCache <regex>"
+        loggErr "clearGitCommit <regex>"
         return 1
     fi
 
@@ -969,18 +969,6 @@ function clearGitCommit(){
     else
         git commit-tree "$@";
     fi'  HEAD
-}
-
-function clearGitCache(){
-
-    if ! isGitDir; then
-        loggNotGit
-        return 1
-    fi
-
-    git for-each-ref --format="%(refname)" refs/original/ | xargs -n 1 git update-ref -d 2>/dev/null
-    git reflog expire --expire=now --all
-    git gc --prune=now
 }
 
 function about(){
