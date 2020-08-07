@@ -20,7 +20,7 @@ function updaterLoop(){
             cat <<EOF
         \$tp = localtime->strptime("$olddate", "%Y-%m-%d %H:%M:%S") + 3600*24;
         print \$tp->strftime("%Y-%m-%d %H:%M:%S")."\n";
-    EOF
+EOF
         )
         nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)
         bash -l updater.sh -e
