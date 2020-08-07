@@ -3728,8 +3728,8 @@ function _command_names(){
 function _parameters() {
 
     # function_body
-    local expl pattern fakes faked tmp pfilt i fakes faked maxLen ary
-
+    local expl pattern tmp pfilt i maxLen ary
+    local -a fakes faked
     if compset -P '*:'; then
         _history_modifiers p
         return
