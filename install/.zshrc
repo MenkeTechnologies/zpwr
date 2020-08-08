@@ -3809,7 +3809,9 @@ function uncompile(){
 
     sudoFiles=(
         /etc/profile
+        /etc/zprofile
         /etc/zshrc
+        /etc/zshrc*
         /etc/profile.env
     )
 
@@ -3869,7 +3871,9 @@ function recompile(){
 
     sudoFiles=(
         /etc/profile
+        /etc/zprofile
         /etc/zshrc
+        /etc/zshrc*
         /etc/profile.env
         )
 
