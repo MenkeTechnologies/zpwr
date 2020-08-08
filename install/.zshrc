@@ -3786,14 +3786,14 @@ autoload -Uz zrecompile
 function uncompile(){
 
     emulate -L zsh
-    setopt noglob
+    setopt nullglob
 
     local dir files sudoFiles file
 
     files=(
-        "$HOME/.zshrc"
-        "$HOME/.zlogout"
-        "$HOME/.zlogin"
+        "$HOME/.zshrc"*
+        "$HOME/.zlogout"*
+        "$HOME/.zlogin"*
         "$HOME/grc.zsh"
         "$ZSH/oh-my-zsh.sh"
         "$ZSH_COMPDUMP"
@@ -3808,16 +3808,16 @@ function uncompile(){
     )
 
     sudoFiles=(
-        /etc/profile
-        /etc/zprofile
-        /etc/zshrc
+        /etc/profile*
+        /etc/zprofile*
         /etc/zshrc*
-        /etc/profile.env
+        /etc/profile.env*
     )
 
     prettyPrint "deleting all compiled configs"
 
     for file in ${files[@]}; do
+        file=${file%*.zwc*}
         if [[ -f "$file.zwc" ]]; then
             echo rm -f "$file.zwc"
             rm -f "$file.zwc"
@@ -3828,9 +3828,10 @@ function uncompile(){
     done
 
     for file in ${sudoFiles[@]}; do
+        file=${file%*.zwc*}
         if [[ -f "$file.zwc" ]]; then
-            echo sudo rm "$file.zwc"
-            sudo rm "$file.zwc"
+            echo sudo rm "$file".zwc
+            sudo rm "$file".zwc
         elif [[ -f "$file.zwc.old" ]]; then
             echo sudo rm "$file.zwc.old"
             sudo rm "$file.zwc.old"
@@ -3850,12 +3851,15 @@ function uncompile(){
 
 function recompile(){
 
+    emulate -L zsh
+    setopt nullglob
+
     local dir files sudoFiles file
 
     files=(
-        "$HOME/.zshrc"
-        "$HOME/.zlogout"
-        "$HOME/.zlogin"
+        "$HOME/.zshrc"*
+        "$HOME/.zlogout"*
+        "$HOME/.zlogin"*
         "$HOME/grc.zsh"
         "$ZSH/oh-my-zsh.sh"
         "$ZSH_COMPDUMP"
@@ -3870,11 +3874,10 @@ function recompile(){
     )
 
     sudoFiles=(
-        /etc/profile
-        /etc/zprofile
-        /etc/zshrc
+        /etc/profile*
+        /etc/zprofile*
         /etc/zshrc*
-        /etc/profile.env
+        /etc/profile.env*
         )
 
     prettyPrint "recompiling all configs to .zwc for speed"
