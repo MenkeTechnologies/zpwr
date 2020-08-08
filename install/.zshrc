@@ -3811,6 +3811,7 @@ function uncompile(){
         /etc/profile*
         /etc/zprofile*
         /etc/zshrc*
+        /etc/zsh/z*
         /etc/profile.env*
     )
 
@@ -3877,6 +3878,7 @@ function recompile(){
         /etc/profile*
         /etc/zprofile*
         /etc/zshrc*
+        /etc/zsh/z*
         /etc/profile.env*
         )
 
