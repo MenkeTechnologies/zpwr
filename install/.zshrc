@@ -3239,6 +3239,7 @@ function _fzf_complete_mvim() {
     perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
     )
 }
+
 # vim ;<tab>
 function _fzf_complete_vim() {
 
@@ -3246,6 +3247,23 @@ function _fzf_complete_vim() {
         ZPWR_USE_NEOVIM=false catNvimOrVimInfo | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}'
     )
 }
+
+# emacsclient ;<tab>
+function _fzf_complete_emacsclient() {
+
+  _fzf_complete '-m' "$@" < <(
+        recentfThenNvim | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}'
+    )
+}
+
+# emacs ;<tab>
+function _fzf_complete_emacs() {
+
+  _fzf_complete '-m' "$@" < <(
+        recentfThenNvim | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}'
+    )
+}
+
 # nvim ;<tab>
 function _fzf_complete_nvim() {
 
@@ -3253,6 +3271,7 @@ function _fzf_complete_nvim() {
         ZPWR_USE_NEOVIM=true catNvimOrVimInfo | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}'
     )
 }
+
 # printf ;<tab>
 function _fzf_complete_printf() {
 
