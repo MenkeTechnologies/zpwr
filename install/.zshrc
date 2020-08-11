@@ -69,12 +69,12 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 #**************************************************************
 # duplicates slow down searching and 
 # mess up OMZ fpath check if should remove zcompdump
-typeset -aU fpath
+declare -aU fpath
 fpath=(${(u)fpath})
-typeset -aU path
+declare -aU path
 path=(${(u)path})
 # FPATH should not be exported
-typeset +x FPATH
+declare +x FPATH
 #}}}***********************************************************
 
 #{{{                    MARK:ZPWR Exports
