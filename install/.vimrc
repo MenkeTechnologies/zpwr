@@ -1261,7 +1261,7 @@ function! ExtractMethod() range
         silent! exe a:firstline.','.a:lastline.'move'.l:line
 
         '<
-        exe 'normal! Ofunction ' . l:name ."(){\<Esc>"
+        exe 'normal! Ofunction ' . l:name ."(){\<CR>\<Esc>"
         '>
         exe "normal! o}\<CR>\<Esc>k"
         exe "normal! vi{=va{V\<Esc>"
@@ -1274,7 +1274,7 @@ function! ExtractMethod() range
         silent! exe a:firstline.','.a:lastline.'move'.l:line
 
         '<
-        exe 'normal! Osub ' . l:name ."(){\<Esc>"
+        exe 'normal! Osub ' . l:name ."(){\<CR>\<Esc>"
         '>
         exe "normal! o}\<CR>\<Esc>k"
         exe "normal! vi{=va{V\<Esc>"
@@ -1282,7 +1282,7 @@ function! ExtractMethod() range
 
     elseif l:exeFileType == 'py'
         '<
-        exe 'normal! Odef ' . l:name ."():\<Esc>"
+        exe 'normal! Odef ' . l:name ."():\<CR>\<Esc>"
         '>
         exe "normal! o\<Esc>vi{>\<Esc>"
         exe 'normal! o'.l:name. ''
