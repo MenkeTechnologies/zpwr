@@ -232,7 +232,7 @@ function installGitHubPlugin(){
 
 function isZsh(){
 
-    if command ps -p $$ | command grep -qs zsh; then
+    if [[ $(command ps -p $$) =~ zsh ]]; then
         return 0
     else
         return 1
