@@ -2010,7 +2010,7 @@ bindkey '\eOR' getrcWidget
 
 #determine if this terminal was started in IDE
 if [[ "$ZPWR_OS_TYPE" == darwin ]];then
-    if echo "$ZPWR_PARENT_PROCESS" | command grep -q -E 'login|tmux'; then
+    if [[ "$ZPWR_PARENT_PROCESS" == *(login|tmux)* ]]; then
         #Ctrl plus arrow keys
         bindkey '\e[1;5A' gitfunc
         bindkey '\e[1;5B' updater
@@ -2070,7 +2070,7 @@ function my-accept-line () {
 
     local pane commandsThatModifyFiles regex mywords line command cmd out aliases
 
-    if ! [[ $(zpwrExpandAliases $BUFFER) =~ 'zc-.*' ]]; then
+    if ! [[ $(zpwrExpandAliases $BUFFER) = zc* ]]; then
         ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
         zc-rename $ZPWR_CONVEY_NAME &>/dev/null
         ZPWR_CONVEY_LAST_CMD=$BUFFER
@@ -2087,7 +2087,7 @@ function my-accept-line () {
     if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
         keyClear
     else
-        if ! echo $BUFFER | command grep -q stopSend; then
+        if ! [[ $BUFFER == *stopSend* ]]; then
             for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
                 tmux send-keys -t $pane "C-m"
             done
@@ -2104,7 +2104,7 @@ function my-accept-line () {
 
     for command in ${commandsThatModifyFiles[@]}; do
         regex="^sudo $command .*\$|^$command .*\$"
-        if echo "$BUFFER" | command grep -q -E "$regex"; then
+        if [[ "$BUFFER" =~ $regex ]]; then
             ZPWR_WILL_CLEAR=true
         fi
     done
@@ -2116,7 +2116,7 @@ function my-accept-line () {
         #sudo =iftop fails so remove =
         cmd=${cmd#=}
         out="$(alias -- $cmd)"
-        if echo "$out" | command grep -q -E "grc"; then
+        if [[ "$out" == *grc* ]]; then
             cmdlet="$(eval echo "${out#*=}")"
             print -srn -- "$BUFFER"
             BUFFER="sudo $cmdlet $mywords[3,$]"
@@ -3658,7 +3658,7 @@ function _megacomplete(){
     i=1
     cmd=${(Q)words[i]}
 
-    while printf -- $cmd | grep -qs -E $continueRegex; do
+    while [[ $cmd =~ $continueRegex ]]; do
         cmd=${(Q)words[$((++i))]}
     done
 
@@ -3674,7 +3674,7 @@ function _megacomplete(){
         _complete_hist
     fi
 
-    if (( $#words >= 2 )) && echo $words[-1] | perl -ne 'exit 1 if ! m{\S}'; then
+    if (( $#words >= 2 )) && [[ $words[-1] == [^[:space:]]## ]]; then
         num=$((HISTCMD-1))
         last_command=$history[$num]
         last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
@@ -4300,7 +4300,7 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                     ;;
             esac
             logg "searching for $key in $out"
-            echo "$out" | grep -aqs "$key" && mobile=false
+            [[ "$out" == *"$key"* ]] && mobile=false
 
             command rm "$ZPWR_TEMPFILE"
             if [[ $mobile == "false" ]]; then
