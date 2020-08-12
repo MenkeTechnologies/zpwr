@@ -4367,9 +4367,9 @@ path=(${(u)path})
 
 #{{{                    MARK:zdharma post init
 #**************************************************************
-zc-id
 ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} PWD:${PWD} DATE:$(date)"
-zc-rename $ZPWR_CONVEY_NAME
+zc-rename $ZPWR_CONVEY_NAME &>/dev/null
+zc-id
 #}}}***********************************************************
 
 #{{{                    MARK:Finish
