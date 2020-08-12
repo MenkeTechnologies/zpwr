@@ -18,6 +18,7 @@ ZPWR_VERBS[altprettyprint]='alternatingPrettyPrint=pretty with alternating color
 ZPWR_VERBS[attach]='tmux attach-session=attach to tmux session'
 ZPWR_VERBS[background]='b=run arg in background'
 ZPWR_VERBS[backup]='backup=backup files'
+ZPWR_VERBS[backuphist]='zpwrBackupHistfile=backup \$HISTFILE'
 ZPWR_VERBS[banner]='about=show \$ZPWR_REPO_NAME banner'
 ZPWR_VERBS[brc]='brc=shell aliases file vim session'
 ZPWR_VERBS[cat]='c=zpwr cat args'

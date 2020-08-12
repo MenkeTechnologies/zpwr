@@ -4240,6 +4240,15 @@ function regenHistory() {
     )
 }
 
+function zpwrBackupHistfile(){
+
+    prettyPrint "Save backup of $HISTFILE"
+    (
+        builtin cd "$HOME"
+        builtin fc -W "$HISTFILE"
+        bash "$ZPWR_SCRIPTS/backupConfig.sh"
+    )
+}
 
 function zpwrRestoreHistfile(){
 
