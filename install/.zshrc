@@ -4231,6 +4231,19 @@ function regenHistory() {
         command rm -rf .zsh_history_bad
     )
 }
+
+
+function zpwrRestoreHistfile(){
+
+    prettyPrint "Restore backup of $HISTFILE"
+    (
+        builtin cd "$HOME"
+        command rm "$HISTFILE"
+        prettyPrint command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
+        command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
+        builtin fc -R "$HISTFILE"
+    )
+}
 #}}}***********************************************************
 
 #{{{                    MARK:Suffix aliases
