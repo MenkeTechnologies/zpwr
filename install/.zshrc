@@ -369,9 +369,10 @@ fi
 #**************************************************************
 zstyle ":plugin:zconvey" output_method "feeder"
 zstyle ":plugin:zconvey" greeting "none"
-zstyle ":plugin:zconvey" ls_after_rename "1"
+zstyle ":plugin:zconvey" ls_after_rename "0"
 zstyle ":plugin:zconvey" use_zsystem_flock "1"
 alias za=zc-all
+alias zid=zc-id
 alias zls=zc-all
 alias zla=zc-logo-all
 alias zn=zc-bg-notify
@@ -404,7 +405,6 @@ alias -r > "$ZPWR_LOCAL/.common_aliases"
 #{{{                    MARK:zdharma postconfig
 #**************************************************************
 path+=($ZCONVEY_REPO_DIR/cmds)
-zc-rename "${TTY}_${$}_${PWD}"
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Fxns
@@ -2058,10 +2058,22 @@ bindkey '^[~' _bash_complete-word
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
 #exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
+#
+zpwrExpandAliases() {
+  unset 'functions[_expand-aliases]'
+  functions[_expand-aliases]=$BUFFER
+  (($+functions[_expand-aliases])) &&
+    echo ${functions[_expand-aliases]#$'\t'}
+}
 
 function my-accept-line () {
 
     local pane commandsThatModifyFiles regex mywords line command cmd out aliases
+
+    if ! [[ $(zpwrExpandAliases $BUFFER) =~ 'zc-.*' ]]; then
+        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
+        zc-rename $ZPWR_CONVEY_NAME &>/dev/null
+    fi
 
     ZPWR_WILL_CLEAR=false
     if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
@@ -4356,6 +4368,8 @@ path=(${(u)path})
 #{{{                    MARK:zdharma post init
 #**************************************************************
 zc-id
+ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} PWD:${PWD} DATE:$(date)"
+zc-rename $ZPWR_CONVEY_NAME
 #}}}***********************************************************
 
 #{{{                    MARK:Finish
