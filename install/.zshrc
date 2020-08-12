@@ -188,19 +188,19 @@ export MAGIC_ENTER_OTHER_COMMAND="clearList"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin \
-    fasd-simple gh_reveal zsh-travis \
-    zsh-z zsh-expand zsh-autopair \
-    zsh-nginx zsh-more-completions history-search-multi-word \
-    forgit fzf-zsh zsh-completions zsh-sed-sub \
-    fast-syntax-highlighting zsh-autosuggestions \
-    history-substring-search ruby gem rake yarn ng \
-    coffee node npm perl cpanm git github gradle ant mvn \
-    scala lein spring django pip pyenv python golang man nmap \
-    postgres redis-cli colorize sudo rsync docker \
-    docker-compose \
-    vundle rust rustup cargo meteor gulp grunt glassfish tig fd \
-    zsh-very-colorful-manuals zsh-git-acp \
+plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin
+    fasd-simple gh_reveal zsh-travis
+    zsh-z zsh-expand zsh-autopair
+    zsh-nginx zsh-more-completions history-search-multi-word
+    forgit fzf-zsh zsh-completions zsh-sed-sub
+    fast-syntax-highlighting zsh-autosuggestions
+    history-substring-search ruby gem rake yarn ng
+    coffee node npm perl cpanm git github gradle ant mvn
+    scala lein spring django pip pyenv python golang man nmap
+    postgres redis-cli colorize sudo rsync docker
+    docker-compose
+    vundle rust rustup cargo meteor gulp grunt glassfish tig fd
+    zsh-very-colorful-manuals zsh-git-acp
     tmux magic-enter zconvey zsh-unique-id zzcomplete zui zbrowse)
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
