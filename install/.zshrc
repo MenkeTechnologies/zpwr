@@ -374,6 +374,7 @@ zstyle ":plugin:zconvey" use_zsystem_flock "1"
 alias za=zc-all
 alias zls=zc-all
 alias zla=zc-logo-all
+alias zn=zc-bg-notify
 #}}}***********************************************************
 
 #{{{                    MARK:Sourcing OMZ and alias file
