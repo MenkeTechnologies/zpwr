@@ -2498,7 +2498,7 @@ for dump in ~/.zcompdump*(N.mh+168); do
     break
 done
 
-if [[ ${+_comps[z]} == 0 ]]; then
+if ! (( $+_comps[z] )); then
     #compsys completion for z was not found when it should have been
     logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
     logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
