@@ -367,7 +367,7 @@ fi
 
 #{{{                    MARK:zdharma configs pre OMZ
 #**************************************************************
-zstyle ":plugin:zconvey" output_method "zsh"
+zstyle ":plugin:zconvey" output_method "feeder"
 zstyle ":plugin:zconvey" greeting "none"
 zstyle ":plugin:zconvey" ls_after_rename "1"
 zstyle ":plugin:zconvey" use_zsystem_flock "1"
