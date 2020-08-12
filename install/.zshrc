@@ -373,7 +373,7 @@ zstyle ":plugin:zconvey" ls_after_rename "0"
 zstyle ":plugin:zconvey" use_zsystem_flock "1"
 alias za=zc-all
 alias zid=zc-id
-alias zls=zc-all
+alias zls=zc-ls
 alias zla=zc-logo-all
 alias zn=zc-bg-notify
 #}}}***********************************************************
