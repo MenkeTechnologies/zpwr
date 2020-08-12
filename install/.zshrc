@@ -112,9 +112,9 @@ function exists(){
 
     #alternative is command -v
     type -- "$1" &>/dev/null || return 1 &&
-    type -- "$1" 2>/dev/null |
-    command grep -sqv "suffix alias" 2>/dev/null
+    [[ $(type -- "$1" 2>/dev/null) != *"suffix alias"* ]]
 }
+
 export SHELL="$(which zsh)"
 
 #}}}***********************************************************
