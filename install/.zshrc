@@ -298,7 +298,7 @@ for plug in ${plugins[@]}; do
         for dir in "$ZSH/custom/plugins/$plug/"*src(N); do
             if [[ -d "$dir" ]]; then
                 if [[ -z ${fpath[(r)$dir]} ]];then
-                    if echo $dir | grep -qs "override"; then
+                    if [[ $dir = *override* ]]; then
                         fpath=($dir $fpath)
                     else
                         fpath=($fpath $dir)
