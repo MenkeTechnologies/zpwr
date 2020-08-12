@@ -2073,6 +2073,14 @@ function my-accept-line () {
     if ! [[ $(zpwrExpandAliases $BUFFER) =~ 'zc-.*' ]]; then
         ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
         zc-rename $ZPWR_CONVEY_NAME &>/dev/null
+        ZPWR_CONVEY_LAST_CMD=$BUFFER
+    else
+        if [[ -z $ZPWR_CONVEY_LAST_CMD ]]; then
+            ZPWR_CONVEY_LAST_CMD="-zsh $-"
+        fi
+
+        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD: $ZPWR_CONVEY_LAST_CMD PWD:${PWD} DATE:$(date)"
+        zc-rename $ZPWR_CONVEY_NAME &>/dev/null
     fi
 
     ZPWR_WILL_CLEAR=false
