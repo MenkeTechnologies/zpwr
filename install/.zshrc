@@ -200,8 +200,8 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin \
     postgres redis-cli colorize sudo rsync docker \
     docker-compose \
     vundle rust rustup cargo meteor gulp grunt glassfish tig fd \
-    zsh-very-colorful-manuals zsh-git-acp tmux magic-enter)
-
+    zsh-very-colorful-manuals zsh-git-acp \
+    tmux magic-enter zconvey zsh-unique-id zzcomplete zui zbrowse)
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 #}}}***********************************************************
@@ -365,6 +365,17 @@ else
 fi
 #}}}***********************************************************
 
+#{{{                    MARK:zdharma configs pre OMZ
+#**************************************************************
+zstyle ":plugin:zconvey" output_method "zsh"
+zstyle ":plugin:zconvey" greeting "none"
+zstyle ":plugin:zconvey" ls_after_rename "1"
+zstyle ":plugin:zconvey" use_zsystem_flock "1"
+alias za=zc-all
+alias zls=zc-all
+alias zla=zc-logo-all
+#}}}***********************************************************
+
 #{{{                    MARK:Sourcing OMZ and alias file
 #**************************************************************
 autoload -Uz compinit
@@ -375,7 +386,9 @@ if [[ $ZPWR_DEBUG == true ]]; then
     echo "pre: $fpath" >> "$ZPWR_LOGFILE"
 fi
 
+
 source $ZSH/oh-my-zsh.sh
+
 
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
@@ -385,6 +398,12 @@ fi
 _alias_file="$ZPWR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$ZPWR_LOCAL/.common_aliases"
+#}}}***********************************************************
+#
+#{{{                    MARK:zdharma postconfig
+#**************************************************************
+path+=($ZCONVEY_REPO_DIR/cmds)
+zc-rename "${TTY}_${$}_${PWD}"
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Fxns
@@ -1865,6 +1884,9 @@ bindkey -M vicmd '^F^H' lsoffzf
 
 bindkey -M viins '^F^J' zpwrVerbsWidgetAccept
 bindkey -M vicmd '^F^J' zpwrVerbsWidgetAccept
+
+bindkey -M viins '^F^M' zzcomplete
+bindkey -M vicmd '^F^M' zzcomplete
 
 bindkey -M viins '^F^N' zpwrVerbsWidget
 bindkey -M vicmd '^F^N' zpwrVerbsWidget
@@ -4330,6 +4352,10 @@ fpath=(${(u)fpath})
 path=(${(u)path})
 #}}}***********************************************************
 
+#{{{                    MARK:zdharma post init
+#**************************************************************
+zc-id
+#}}}***********************************************************
 
 #{{{                    MARK:Finish
 #**************************************************************

@@ -9,6 +9,8 @@ zdharma/history-search-multi-word
 MenkeTechnologies/jhipster-oh-my-zsh-plugin
 MenkeTechnologies/revolver
 unixorn/warhol.plugin.zsh
+zdharma/zbrowse
+zdharma/zconvey
 hlissner/zsh-autopair
 zsh-users/zsh-autosuggestions
 lukechilds/zsh-better-npm-completion
@@ -23,8 +25,12 @@ MenkeTechnologies/zsh-nginx
 MenkeTechnologies/zsh-sed-sub
 MenkeTechnologies/zsh-surround
 zsh-users/zsh-syntax-highlighting
+zdharma/zsh-tig-plugin
 MenkeTechnologies/zsh-travis
+zdharma/zsh-unique-id
 MenkeTechnologies/zsh-very-colorful-manuals
 MenkeTechnologies/zsh-xcode-completions
 MenkeTechnologies/zsh-z
+zdharma/zui
 MenkeTechnologies/zunit
+zdharma/zzcomplete
