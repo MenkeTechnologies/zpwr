@@ -4399,7 +4399,6 @@ path=(${(u)path})
 #**************************************************************
 ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} PWD:${PWD} DATE:$(date)"
 zc-rename $ZPWR_CONVEY_NAME &>/dev/null
-zc-id
 #}}}***********************************************************
 
 #{{{                    MARK:Finish
