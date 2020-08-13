@@ -2797,6 +2797,26 @@ function tabNum() {
     echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
 
+function zm() {
+
+    if [[ -n "$1" ]]; then
+        z "$1"
+        prettyPrint "z $1 => cd $(z -e $1)"
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir 'isGitDir && { gco master; gffa; git clean -dff && git reset --hard origin/master && git clean -dff ; gla; zp gitclearcache; }' *
+}
+
+function zd() {
+
+    if [[ -n "$1" ]]; then
+        z "$1"
+        prettyPrint "z $1 => cd $(z -e $1)"
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir 'isGitDir && { gco development; gffa; git clean -dff && git reset --hard origin/development && git clean -dff ; gla; zp gitclearcache; }' *
+}
+
 function tabNumCmd() {
 
     local num args
