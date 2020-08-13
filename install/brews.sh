@@ -127,6 +127,7 @@ brew install gperftools
 brew install gpgme
 brew install gradle
 brew install grails
+brew install grap
 brew install graphicsmagick
 brew install graphite2
 brew install graphviz
@@ -151,6 +152,7 @@ brew install heroku
 brew install heroku-node
 brew install hexedit
 brew install hicolor-icon-theme
+brew install hping
 brew install html2text
 brew install htop
 brew install httpd
@@ -242,6 +244,7 @@ brew install libunistring
 brew install libupnp
 brew install libusb
 brew install libusb-compat
+brew install libusrsctp
 brew install libuv
 brew install libvidstab
 brew install libvorbis
@@ -316,9 +319,9 @@ brew install openblas
 brew install opencore-amr
 brew install openexr
 brew install openjdk
+brew install openjdk@11
 brew install openjpeg
 brew install openldap
-brew install openssl
 brew install openssl@1.1
 brew install openvpn
 brew install opus
@@ -344,6 +347,7 @@ brew install pixman
 brew install pkcs11-helper
 brew install pkg-config
 brew install pokemonsay
+brew install popt
 brew install portaudio
 brew install portmidi
 brew install postgresql
@@ -356,13 +360,13 @@ brew install pv
 brew install py2cairo
 brew install py3cairo
 brew install pygobject3
-brew install python
 brew install python@2
 brew install python@3.8
 brew install qrencode
 brew install qt
 brew install r
 brew install ranger
+brew install rav1e
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis
@@ -408,6 +412,7 @@ brew install sqlite
 brew install srm
 brew install srt
 brew install srtp
+brew install subversion
 brew install swig
 brew install taglib
 brew install tal
@@ -457,6 +462,7 @@ brew install x264
 brew install x265
 brew install xmlto
 brew install xvid
+brew install xxhash
 brew install xz
 brew install yasm
 brew install zlib
@@ -465,4 +471,5 @@ brew install zplug
 brew install zsh
 brew install zsh-lovers
 brew install zshdb
+brew install zstd
 brew install zzz
