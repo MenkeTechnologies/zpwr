@@ -18,3 +18,4 @@ Scala
 Jms messenger
 Kubernetes
 MapStruct Support
+String Manipulation
