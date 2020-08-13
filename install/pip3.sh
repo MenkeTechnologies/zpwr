@@ -1,306 +1,302 @@
-pip3 install -
-pip3 install -andas
-pip3 install -nicorn
-pip3 install -unicorn
-pip3 install alabaster
-pip3 install aniso8601
-pip3 install appnope
-pip3 install asn1crypto
-pip3 install astroid
-pip3 install atomicwrites
-pip3 install attrs
-pip3 install Babel
-pip3 install backcall
-pip3 install backports.shutil-get-terminal-size
-pip3 install banknumber
-pip3 install behave
-pip3 install bleach
-pip3 install blessings
-pip3 install bpython
-pip3 install cachetools
-pip3 install certifi
-pip3 install cffi
-pip3 install chardet
-pip3 install cli-helpers
-pip3 install Click
-pip3 install colorama
-pip3 install configobj
-pip3 install cryptography
-pip3 install cursor
-pip3 install curtsies
-pip3 install cycler
-pip3 install Cython
-pip3 install decorator
-pip3 install defusedxml
-pip3 install Django
-pip3 install docopt
-pip3 install docutils
-pip3 install entrypoints
-pip3 install enum34
-pip3 install flake8
-pip3 install Flask
-pip3 install Flask-PyMongo
-pip3 install Flask-RESTful
-pip3 install gpg
-pip3 install greenlet
-pip3 install gunicorn
-pip3 install h5py
-pip3 install halo
-pip3 install html5lib
-pip3 install humanize
-pip3 install idna
-pip3 install imageio
-pip3 install imageio-ffmpeg
-pip3 install imagesize
-pip3 install importlib-metadata
-pip3 install ipykernel
-pip3 install ipython
-pip3 install ipython-genutils
-pip3 install ipywidgets
-pip3 install isort
-pip3 install itsdangerous
-pip3 install jedi
-pip3 install Jinja2
-pip3 install joblib
-pip3 install jsonschema
-pip3 install jupyter-client
-pip3 install jupyter-core
-pip3 install Kivy
-pip3 install Kivy-Garden
-pip3 install kiwisolver
-pip3 install lazy-object-proxy
-pip3 install log-symbols
-pip3 install lxml
-pip3 install Markdown
-pip3 install MarkupSafe
-pip3 install matplotlib
-pip3 install mccabe
-pip3 install mdv
-pip3 install mercurial
-pip3 install meson
-pip3 install mistune
-pip3 install more-itertools
-pip3 install MouseInfo
-pip3 install moviepy
-pip3 install msgpack
-pip3 install mycli
-pip3 install mysqlclient
-pip3 install nbconvert
-pip3 install nbformat
-pip3 install neovim
-pip3 install neovim-remote
-pip3 install notebook
-pip3 install numpy
-pip3 install olefile
-pip3 install opencv-python
-pip3 install packaging
-pip3 install paho-mqtt
-pip3 install pandas
-pip3 install pandocfilters
-pip3 install parse
-pip3 install parse-type
-pip3 install parso
-pip3 install pexpect
-pip3 install pgcli
-pip3 install pgspecial
-pip3 install pickleshare
-pip3 install Pillow
-pip3 install pip
-pip3 install pluggy
-pip3 install powerline-mem-segment
-pip3 install powerline-status
-pip3 install prettytable
-pip3 install proglog
-pip3 install prometheus-client
-pip3 install prompt-toolkit
-pip3 install psutil
-pip3 install psycopg2
-pip3 install ptyprocess
-pip3 install py
-pip3 install PyAutoGUI
-pip3 install pycairo
-pip3 install pycodestyle
-pip3 install pycparser
-pip3 install pydf
-pip3 install pyflakes
-pip3 install PyGetWindow
-pip3 install Pygments
-pip3 install PyGObject
-pip3 install pylint
-pip3 install pymongo
-pip3 install PyMsgBox
-pip3 install PyMySQL
-pip3 install pynvim
-pip3 install pyobjc
-pip3 install pyobjc-core
-pip3 install pyobjc-framework-Accounts
-pip3 install pyobjc-framework-AddressBook
-pip3 install pyobjc-framework-AdSupport
-pip3 install pyobjc-framework-AppleScriptKit
-pip3 install pyobjc-framework-AppleScriptObjC
-pip3 install pyobjc-framework-ApplicationServices
-pip3 install pyobjc-framework-AuthenticationServices
-pip3 install pyobjc-framework-Automator
-pip3 install pyobjc-framework-AVFoundation
-pip3 install pyobjc-framework-AVKit
-pip3 install pyobjc-framework-BusinessChat
-pip3 install pyobjc-framework-CalendarStore
-pip3 install pyobjc-framework-CFNetwork
-pip3 install pyobjc-framework-CloudKit
-pip3 install pyobjc-framework-Cocoa
-pip3 install pyobjc-framework-Collaboration
-pip3 install pyobjc-framework-ColorSync
-pip3 install pyobjc-framework-Contacts
-pip3 install pyobjc-framework-ContactsUI
-pip3 install pyobjc-framework-CoreAudio
-pip3 install pyobjc-framework-CoreAudioKit
-pip3 install pyobjc-framework-CoreBluetooth
-pip3 install pyobjc-framework-CoreData
-pip3 install pyobjc-framework-CoreHaptics
-pip3 install pyobjc-framework-CoreLocation
-pip3 install pyobjc-framework-CoreMedia
-pip3 install pyobjc-framework-CoreMediaIO
-pip3 install pyobjc-framework-CoreML
-pip3 install pyobjc-framework-CoreMotion
-pip3 install pyobjc-framework-CoreServices
-pip3 install pyobjc-framework-CoreSpotlight
-pip3 install pyobjc-framework-CoreText
-pip3 install pyobjc-framework-CoreWLAN
-pip3 install pyobjc-framework-CryptoTokenKit
-pip3 install pyobjc-framework-DeviceCheck
-pip3 install pyobjc-framework-DictionaryServices
-pip3 install pyobjc-framework-DiscRecording
-pip3 install pyobjc-framework-DiscRecordingUI
-pip3 install pyobjc-framework-DiskArbitration
-pip3 install pyobjc-framework-DVDPlayback
-pip3 install pyobjc-framework-EventKit
-pip3 install pyobjc-framework-ExceptionHandling
-pip3 install pyobjc-framework-ExecutionPolicy
-pip3 install pyobjc-framework-ExternalAccessory
-pip3 install pyobjc-framework-FileProvider
-pip3 install pyobjc-framework-FileProviderUI
-pip3 install pyobjc-framework-FinderSync
-pip3 install pyobjc-framework-FSEvents
-pip3 install pyobjc-framework-GameCenter
-pip3 install pyobjc-framework-GameController
-pip3 install pyobjc-framework-GameKit
-pip3 install pyobjc-framework-GameplayKit
-pip3 install pyobjc-framework-ImageCaptureCore
-pip3 install pyobjc-framework-IMServicePlugIn
-pip3 install pyobjc-framework-InputMethodKit
-pip3 install pyobjc-framework-InstallerPlugins
-pip3 install pyobjc-framework-InstantMessage
-pip3 install pyobjc-framework-Intents
-pip3 install pyobjc-framework-IOSurface
-pip3 install pyobjc-framework-iTunesLibrary
-pip3 install pyobjc-framework-LatentSemanticMapping
-pip3 install pyobjc-framework-LaunchServices
-pip3 install pyobjc-framework-libdispatch
-pip3 install pyobjc-framework-LinkPresentation
-pip3 install pyobjc-framework-LocalAuthentication
-pip3 install pyobjc-framework-MapKit
-pip3 install pyobjc-framework-MediaAccessibility
-pip3 install pyobjc-framework-MediaLibrary
-pip3 install pyobjc-framework-MediaPlayer
-pip3 install pyobjc-framework-MediaToolbox
-pip3 install pyobjc-framework-MetalKit
-pip3 install pyobjc-framework-ModelIO
-pip3 install pyobjc-framework-MultipeerConnectivity
-pip3 install pyobjc-framework-NaturalLanguage
-pip3 install pyobjc-framework-NetFS
-pip3 install pyobjc-framework-Network
-pip3 install pyobjc-framework-NetworkExtension
-pip3 install pyobjc-framework-NotificationCenter
-pip3 install pyobjc-framework-OpenDirectory
-pip3 install pyobjc-framework-OSAKit
-pip3 install pyobjc-framework-OSLog
-pip3 install pyobjc-framework-PencilKit
-pip3 install pyobjc-framework-Photos
-pip3 install pyobjc-framework-PhotosUI
-pip3 install pyobjc-framework-PreferencePanes
-pip3 install pyobjc-framework-PubSub
-pip3 install pyobjc-framework-PushKit
-pip3 install pyobjc-framework-QTKit
-pip3 install pyobjc-framework-Quartz
-pip3 install pyobjc-framework-QuickLookThumbnailing
-pip3 install pyobjc-framework-SafariServices
-pip3 install pyobjc-framework-SceneKit
-pip3 install pyobjc-framework-ScreenSaver
-pip3 install pyobjc-framework-ScriptingBridge
-pip3 install pyobjc-framework-SearchKit
-pip3 install pyobjc-framework-Security
-pip3 install pyobjc-framework-SecurityFoundation
-pip3 install pyobjc-framework-SecurityInterface
-pip3 install pyobjc-framework-ServiceManagement
-pip3 install pyobjc-framework-Social
-pip3 install pyobjc-framework-SoundAnalysis
-pip3 install pyobjc-framework-Speech
-pip3 install pyobjc-framework-SpriteKit
-pip3 install pyobjc-framework-StoreKit
-pip3 install pyobjc-framework-SyncServices
-pip3 install pyobjc-framework-SystemConfiguration
-pip3 install pyobjc-framework-SystemExtensions
-pip3 install pyobjc-framework-UserNotifications
-pip3 install pyobjc-framework-VideoSubscriberAccount
-pip3 install pyobjc-framework-VideoToolbox
-pip3 install pyobjc-framework-Vision
-pip3 install pyobjc-framework-WebKit
-pip3 install pyparsing
-pip3 install PyPDF2
-pip3 install pyperclip
-pip3 install PyRect
-pip3 install pyrsistent
-pip3 install PyScreeze
-pip3 install pytest
-pip3 install python-dateutil
-pip3 install python-docx
-pip3 install PyTweening
-pip3 install pytz
-pip3 install pyzmq
-pip3 install relativetimebuilder
-pip3 install reppy
-pip3 install requests
-pip3 install scikit-learn
-pip3 install scipy
-pip3 install selenium
-pip3 install Send2Trash
-pip3 install setproctitle
-pip3 install setuptools
-pip3 install simplegeneric
-pip3 install six
-pip3 install sklearn
-pip3 install snowballstemmer
-pip3 install Sphinx
-pip3 install sphinxcontrib-applehelp
-pip3 install sphinxcontrib-devhelp
-pip3 install sphinxcontrib-htmlhelp
-pip3 install sphinxcontrib-jsmath
-pip3 install sphinxcontrib-qthelp
-pip3 install sphinxcontrib-serializinghtml
-pip3 install sphinxcontrib-websupport
-pip3 install spidy-web-crawler
-pip3 install spinners
-pip3 install sqlparse
-pip3 install tabulate
-pip3 install termcolor
-pip3 install terminado
-pip3 install terminaltables
-pip3 install testpath
-pip3 install tornado
-pip3 install tqdm
-pip3 install traitlets
-pip3 install typed-ast
-pip3 install typing
-pip3 install urllib3
-pip3 install virtualenv
-pip3 install wcwidth
-pip3 install webencodings
-pip3 install websockets
-pip3 install Werkzeug
-pip3 install wheel
-pip3 install widgetsnbextension
-pip3 install wrapt
-pip3 install xlrd
-pip3 install xlwt
-pip3 install yapf
-pip3 install zipp
+python3 -m pip install alabaster
+python3 -m pip install aniso8601
+python3 -m pip install appnope
+python3 -m pip install asn1crypto
+python3 -m pip install astroid
+python3 -m pip install atomicwrites
+python3 -m pip install attrs
+python3 -m pip install Babel
+python3 -m pip install backcall
+python3 -m pip install backports.shutil-get-terminal-size
+python3 -m pip install banknumber
+python3 -m pip install behave
+python3 -m pip install bleach
+python3 -m pip install blessings
+python3 -m pip install bpython
+python3 -m pip install cachetools
+python3 -m pip install certifi
+python3 -m pip install cffi
+python3 -m pip install chardet
+python3 -m pip install cli-helpers
+python3 -m pip install Click
+python3 -m pip install colorama
+python3 -m pip install configobj
+python3 -m pip install cryptography
+python3 -m pip install cursor
+python3 -m pip install curtsies
+python3 -m pip install cycler
+python3 -m pip install Cython
+python3 -m pip install decorator
+python3 -m pip install defusedxml
+python3 -m pip install Django
+python3 -m pip install docopt
+python3 -m pip install docutils
+python3 -m pip install entrypoints
+python3 -m pip install enum34
+python3 -m pip install flake8
+python3 -m pip install Flask
+python3 -m pip install Flask-PyMongo
+python3 -m pip install Flask-RESTful
+python3 -m pip install gpg
+python3 -m pip install greenlet
+python3 -m pip install gunicorn
+python3 -m pip install h5py
+python3 -m pip install halo
+python3 -m pip install html5lib
+python3 -m pip install humanize
+python3 -m pip install idna
+python3 -m pip install imageio
+python3 -m pip install imageio-ffmpeg
+python3 -m pip install imagesize
+python3 -m pip install importlib-metadata
+python3 -m pip install ipykernel
+python3 -m pip install ipython
+python3 -m pip install ipython-genutils
+python3 -m pip install ipywidgets
+python3 -m pip install isort
+python3 -m pip install itsdangerous
+python3 -m pip install jedi
+python3 -m pip install Jinja2
+python3 -m pip install joblib
+python3 -m pip install jsonschema
+python3 -m pip install jupyter-client
+python3 -m pip install jupyter-core
+python3 -m pip install Kivy
+python3 -m pip install Kivy-Garden
+python3 -m pip install kiwisolver
+python3 -m pip install lazy-object-proxy
+python3 -m pip install log-symbols
+python3 -m pip install lxml
+python3 -m pip install Markdown
+python3 -m pip install MarkupSafe
+python3 -m pip install matplotlib
+python3 -m pip install mccabe
+python3 -m pip install mdv
+python3 -m pip install mercurial
+python3 -m pip install meson
+python3 -m pip install mistune
+python3 -m pip install more-itertools
+python3 -m pip install MouseInfo
+python3 -m pip install moviepy
+python3 -m pip install msgpack
+python3 -m pip install mycli
+python3 -m pip install mysqlclient
+python3 -m pip install nbconvert
+python3 -m pip install nbformat
+python3 -m pip install neovim
+python3 -m pip install neovim-remote
+python3 -m pip install notebook
+python3 -m pip install numpy
+python3 -m pip install olefile
+python3 -m pip install opencv-python
+python3 -m pip install packaging
+python3 -m pip install paho-mqtt
+python3 -m pip install pandas
+python3 -m pip install pandocfilters
+python3 -m pip install parse
+python3 -m pip install parse-type
+python3 -m pip install parso
+python3 -m pip install pexpect
+python3 -m pip install pgcli
+python3 -m pip install pgspecial
+python3 -m pip install pickleshare
+python3 -m pip install Pillow
+python3 -m pip install pip
+python3 -m pip install pluggy
+python3 -m pip install powerline-mem-segment
+python3 -m pip install powerline-status
+python3 -m pip install prettytable
+python3 -m pip install proglog
+python3 -m pip install prometheus-client
+python3 -m pip install prompt-toolkit
+python3 -m pip install psutil
+python3 -m pip install psycopg2
+python3 -m pip install ptyprocess
+python3 -m pip install py
+python3 -m pip install PyAutoGUI
+python3 -m pip install pycairo
+python3 -m pip install pycodestyle
+python3 -m pip install pycparser
+python3 -m pip install pydf
+python3 -m pip install pyflakes
+python3 -m pip install PyGetWindow
+python3 -m pip install Pygments
+python3 -m pip install PyGObject
+python3 -m pip install pylint
+python3 -m pip install pymongo
+python3 -m pip install PyMsgBox
+python3 -m pip install PyMySQL
+python3 -m pip install pynvim
+python3 -m pip install pyobjc
+python3 -m pip install pyobjc-core
+python3 -m pip install pyobjc-framework-Accounts
+python3 -m pip install pyobjc-framework-AddressBook
+python3 -m pip install pyobjc-framework-AdSupport
+python3 -m pip install pyobjc-framework-AppleScriptKit
+python3 -m pip install pyobjc-framework-AppleScriptObjC
+python3 -m pip install pyobjc-framework-ApplicationServices
+python3 -m pip install pyobjc-framework-AuthenticationServices
+python3 -m pip install pyobjc-framework-Automator
+python3 -m pip install pyobjc-framework-AVFoundation
+python3 -m pip install pyobjc-framework-AVKit
+python3 -m pip install pyobjc-framework-BusinessChat
+python3 -m pip install pyobjc-framework-CalendarStore
+python3 -m pip install pyobjc-framework-CFNetwork
+python3 -m pip install pyobjc-framework-CloudKit
+python3 -m pip install pyobjc-framework-Cocoa
+python3 -m pip install pyobjc-framework-Collaboration
+python3 -m pip install pyobjc-framework-ColorSync
+python3 -m pip install pyobjc-framework-Contacts
+python3 -m pip install pyobjc-framework-ContactsUI
+python3 -m pip install pyobjc-framework-CoreAudio
+python3 -m pip install pyobjc-framework-CoreAudioKit
+python3 -m pip install pyobjc-framework-CoreBluetooth
+python3 -m pip install pyobjc-framework-CoreData
+python3 -m pip install pyobjc-framework-CoreHaptics
+python3 -m pip install pyobjc-framework-CoreLocation
+python3 -m pip install pyobjc-framework-CoreMedia
+python3 -m pip install pyobjc-framework-CoreMediaIO
+python3 -m pip install pyobjc-framework-CoreML
+python3 -m pip install pyobjc-framework-CoreMotion
+python3 -m pip install pyobjc-framework-CoreServices
+python3 -m pip install pyobjc-framework-CoreSpotlight
+python3 -m pip install pyobjc-framework-CoreText
+python3 -m pip install pyobjc-framework-CoreWLAN
+python3 -m pip install pyobjc-framework-CryptoTokenKit
+python3 -m pip install pyobjc-framework-DeviceCheck
+python3 -m pip install pyobjc-framework-DictionaryServices
+python3 -m pip install pyobjc-framework-DiscRecording
+python3 -m pip install pyobjc-framework-DiscRecordingUI
+python3 -m pip install pyobjc-framework-DiskArbitration
+python3 -m pip install pyobjc-framework-DVDPlayback
+python3 -m pip install pyobjc-framework-EventKit
+python3 -m pip install pyobjc-framework-ExceptionHandling
+python3 -m pip install pyobjc-framework-ExecutionPolicy
+python3 -m pip install pyobjc-framework-ExternalAccessory
+python3 -m pip install pyobjc-framework-FileProvider
+python3 -m pip install pyobjc-framework-FileProviderUI
+python3 -m pip install pyobjc-framework-FinderSync
+python3 -m pip install pyobjc-framework-FSEvents
+python3 -m pip install pyobjc-framework-GameCenter
+python3 -m pip install pyobjc-framework-GameController
+python3 -m pip install pyobjc-framework-GameKit
+python3 -m pip install pyobjc-framework-GameplayKit
+python3 -m pip install pyobjc-framework-ImageCaptureCore
+python3 -m pip install pyobjc-framework-IMServicePlugIn
+python3 -m pip install pyobjc-framework-InputMethodKit
+python3 -m pip install pyobjc-framework-InstallerPlugins
+python3 -m pip install pyobjc-framework-InstantMessage
+python3 -m pip install pyobjc-framework-Intents
+python3 -m pip install pyobjc-framework-IOSurface
+python3 -m pip install pyobjc-framework-iTunesLibrary
+python3 -m pip install pyobjc-framework-LatentSemanticMapping
+python3 -m pip install pyobjc-framework-LaunchServices
+python3 -m pip install pyobjc-framework-libdispatch
+python3 -m pip install pyobjc-framework-LinkPresentation
+python3 -m pip install pyobjc-framework-LocalAuthentication
+python3 -m pip install pyobjc-framework-MapKit
+python3 -m pip install pyobjc-framework-MediaAccessibility
+python3 -m pip install pyobjc-framework-MediaLibrary
+python3 -m pip install pyobjc-framework-MediaPlayer
+python3 -m pip install pyobjc-framework-MediaToolbox
+python3 -m pip install pyobjc-framework-MetalKit
+python3 -m pip install pyobjc-framework-ModelIO
+python3 -m pip install pyobjc-framework-MultipeerConnectivity
+python3 -m pip install pyobjc-framework-NaturalLanguage
+python3 -m pip install pyobjc-framework-NetFS
+python3 -m pip install pyobjc-framework-Network
+python3 -m pip install pyobjc-framework-NetworkExtension
+python3 -m pip install pyobjc-framework-NotificationCenter
+python3 -m pip install pyobjc-framework-OpenDirectory
+python3 -m pip install pyobjc-framework-OSAKit
+python3 -m pip install pyobjc-framework-OSLog
+python3 -m pip install pyobjc-framework-PencilKit
+python3 -m pip install pyobjc-framework-Photos
+python3 -m pip install pyobjc-framework-PhotosUI
+python3 -m pip install pyobjc-framework-PreferencePanes
+python3 -m pip install pyobjc-framework-PubSub
+python3 -m pip install pyobjc-framework-PushKit
+python3 -m pip install pyobjc-framework-QTKit
+python3 -m pip install pyobjc-framework-Quartz
+python3 -m pip install pyobjc-framework-QuickLookThumbnailing
+python3 -m pip install pyobjc-framework-SafariServices
+python3 -m pip install pyobjc-framework-SceneKit
+python3 -m pip install pyobjc-framework-ScreenSaver
+python3 -m pip install pyobjc-framework-ScriptingBridge
+python3 -m pip install pyobjc-framework-SearchKit
+python3 -m pip install pyobjc-framework-Security
+python3 -m pip install pyobjc-framework-SecurityFoundation
+python3 -m pip install pyobjc-framework-SecurityInterface
+python3 -m pip install pyobjc-framework-ServiceManagement
+python3 -m pip install pyobjc-framework-Social
+python3 -m pip install pyobjc-framework-SoundAnalysis
+python3 -m pip install pyobjc-framework-Speech
+python3 -m pip install pyobjc-framework-SpriteKit
+python3 -m pip install pyobjc-framework-StoreKit
+python3 -m pip install pyobjc-framework-SyncServices
+python3 -m pip install pyobjc-framework-SystemConfiguration
+python3 -m pip install pyobjc-framework-SystemExtensions
+python3 -m pip install pyobjc-framework-UserNotifications
+python3 -m pip install pyobjc-framework-VideoSubscriberAccount
+python3 -m pip install pyobjc-framework-VideoToolbox
+python3 -m pip install pyobjc-framework-Vision
+python3 -m pip install pyobjc-framework-WebKit
+python3 -m pip install pyparsing
+python3 -m pip install PyPDF2
+python3 -m pip install pyperclip
+python3 -m pip install PyRect
+python3 -m pip install pyrsistent
+python3 -m pip install PyScreeze
+python3 -m pip install pytest
+python3 -m pip install python-dateutil
+python3 -m pip install python-docx
+python3 -m pip install PyTweening
+python3 -m pip install pytz
+python3 -m pip install pyzmq
+python3 -m pip install relativetimebuilder
+python3 -m pip install reppy
+python3 -m pip install requests
+python3 -m pip install scikit-learn
+python3 -m pip install scipy
+python3 -m pip install selenium
+python3 -m pip install Send2Trash
+python3 -m pip install setproctitle
+python3 -m pip install setuptools
+python3 -m pip install simplegeneric
+python3 -m pip install six
+python3 -m pip install sklearn
+python3 -m pip install snowballstemmer
+python3 -m pip install Sphinx
+python3 -m pip install sphinxcontrib-applehelp
+python3 -m pip install sphinxcontrib-devhelp
+python3 -m pip install sphinxcontrib-htmlhelp
+python3 -m pip install sphinxcontrib-jsmath
+python3 -m pip install sphinxcontrib-qthelp
+python3 -m pip install sphinxcontrib-serializinghtml
+python3 -m pip install sphinxcontrib-websupport
+python3 -m pip install spidy-web-crawler
+python3 -m pip install spinners
+python3 -m pip install sqlparse
+python3 -m pip install tabulate
+python3 -m pip install termcolor
+python3 -m pip install terminado
+python3 -m pip install terminaltables
+python3 -m pip install testpath
+python3 -m pip install tornado
+python3 -m pip install tqdm
+python3 -m pip install traitlets
+python3 -m pip install typed-ast
+python3 -m pip install typing
+python3 -m pip install urllib3
+python3 -m pip install virtualenv
+python3 -m pip install wcwidth
+python3 -m pip install webencodings
+python3 -m pip install websockets
+python3 -m pip install Werkzeug
+python3 -m pip install wheel
+python3 -m pip install widgetsnbextension
+python3 -m pip install wrapt
+python3 -m pip install xlrd
+python3 -m pip install xlwt
+python3 -m pip install yapf
+python3 -m pip install zipp
