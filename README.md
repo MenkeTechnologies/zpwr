@@ -686,13 +686,13 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bind-key    -T copy-mode-vi Right                send-keys -X cursor-right ```
 - ``` bind-key    -T copy-mode-vi C-Up                 send-keys -X scroll-up ```
 - ``` bind-key    -T copy-mode-vi C-Down               send-keys -X scroll-down ```
+- ``` bind-key    -T prefix       C-a                  send-prefix ```
 - ``` bind-key    -T prefix       C-n                  next-window ```
 - ``` bind-key    -T prefix       C-o                  rotate-window ```
 - ``` bind-key    -T prefix       C-p                  previous-window ```
 - ``` bind-key    -T prefix       C-r                  run-shell /Users/wizard/.tmux/plugins/tmux-resurrect/scripts/restore.sh ```
 - ``` bind-key    -T prefix       C-s                  run-shell /Users/wizard/.tmux/plugins/tmux-resurrect/scripts/save.sh ```
 - ``` bind-key    -T prefix       C-v                  run-shell "tmux set buffer \"$(reattach-to-user-namespace pbpaste)\"; tmux paste-buffer" ```
-- ``` bind-key    -T prefix       C-x                  send-prefix ```
 - ``` bind-key    -T prefix       C-z                  suspend-client ```
 - ``` bind-key    -T prefix       Space                next-layout ```
 - ``` bind-key    -T prefix       !                    break-pane ```
@@ -746,6 +746,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bind-key    -T prefix       \\                   split-window -h -c "#{pane_current_path}" ```
 - ``` bind-key    -T prefix       ]                    paste-buffer ```
 - ``` bind-key    -T prefix       _                    split-window -v -c "#{pane_current_path}" ```
+- ``` bind-key    -T prefix       a                    last-window ```
 - ``` bind-key    -T prefix       c                    new-window ```
 - ``` bind-key    -T prefix       d                    detach-client ```
 - ``` bind-key    -T prefix       f                    command-prompt "find-window -Z -- '%%'" ```
@@ -826,6 +827,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -M viins "^F^J" zpwrVerbsWidgetAccept ```
 - ``` bindkey -M viins "^F^K" alternateQuotes ```
 - ``` bindkey -M viins "^F^L" list-choices ```
+- ``` bindkey -M viins "^F^M" zzcomplete ```
 - ``` bindkey -M viins "^F^N" zpwrVerbsWidget ```
 - ``` bindkey -M viins "^F^P" basicSedSub ```
 - ``` bindkey -M viins "^F^R" asVar ```
@@ -902,9 +904,11 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -M viins "^[[1;5D" dbz ```
 - ``` bindkey -M viins "^[[1~" beginning-of-line ```
 - ``` bindkey -M viins "^[[200~" bracketed-paste ```
+- ``` bindkey -M viins "^[[3;5~" kill-word ```
 - ``` bindkey -M viins "^[[3~" delete-char ```
 - ``` bindkey -M viins "^[[4~" end-of-line ```
 - ``` bindkey -M viins "^[[5~" clipboard ```
+- ``` bindkey -M viins "^[[6~" down-line-or-history ```
 - ``` bindkey -M viins "^[[A" up-line-or-history ```
 - ``` bindkey -M viins "^[[B" down-line-or-history ```
 - ``` bindkey -M viins "^[[C" vi-forward-char ```
@@ -940,6 +944,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -a "^F^J" zpwrVerbsWidgetAccept ```
 - ``` bindkey -a "^F^K" alternateQuotes ```
 - ``` bindkey -a "^F^L" list-choices ```
+- ``` bindkey -a "^F^M" zzcomplete ```
 - ``` bindkey -a "^F^N" zpwrVerbsWidget ```
 - ``` bindkey -a "^F^P" basicSedSub ```
 - ``` bindkey -a "^F^R" asVar ```
@@ -947,6 +952,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -a "^F^V" edit-command-line ```
 - ``` bindkey -a "^G" what-cursor-position ```
 - ``` bindkey -a "^H" vi-backward-char ```
+- ``` bindkey -a "^I" expand-or-complete-with-dots ```
 - ``` bindkey -a "^J" accept-line ```
 - ``` bindkey -a "^K" learn ```
 - ``` bindkey -a "^L" clear-screen ```
@@ -984,15 +990,24 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -a "^[^U" up-case-word ```
 - ``` bindkey -a "^[^[" sudo-command-line ```
 - ``` bindkey -a "^[ " sshRegain ```
-- ``` bindkey -a "^[OA" up-line-or-history ```
-- ``` bindkey -a "^[OB" down-line-or-history ```
+- ``` bindkey -a "^[OA" up-line-or-beginning-search ```
+- ``` bindkey -a "^[OB" down-line-or-beginning-search ```
 - ``` bindkey -a "^[OC" vi-forward-char ```
 - ``` bindkey -a "^[OD" vi-backward-char ```
+- ``` bindkey -a "^[[1;5C" forward-word ```
+- ``` bindkey -a "^[[1;5D" backward-word ```
+- ``` bindkey -a "^[[1~" beginning-of-line ```
 - ``` bindkey -a "^[[200~" bracketed-paste ```
+- ``` bindkey -a "^[[3;5~" kill-word ```
+- ``` bindkey -a "^[[3~" delete-char ```
+- ``` bindkey -a "^[[4~" end-of-line ```
+- ``` bindkey -a "^[[5~" up-line-or-history ```
+- ``` bindkey -a "^[[6~" down-line-or-history ```
 - ``` bindkey -a "^[[A" up-line-or-history ```
 - ``` bindkey -a "^[[B" down-line-or-history ```
 - ``` bindkey -a "^[[C" vi-forward-char ```
 - ``` bindkey -a "^[[D" vi-backward-char ```
+- ``` bindkey -a "^[[Z" reverse-menu-complete ```
 - ``` bindkey -a " " vi-forward-char ```
 - ``` bindkey -a "\"" vi-set-buffer ```
 - ``` bindkey -a "#" pound-insert ```
@@ -1068,7 +1083,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -a "y" vi-yank ```
 - ``` bindkey -a "|" vi-goto-column ```
 - ``` bindkey -a "~" vi-swap-case ```
-- ``` bindkey -a "^?" vi-backward-char ```
+- ``` bindkey -a "^?" backward-delete-char ```
 # Zsh Menuselect Mode keybindings (bindkey -M menuselect -L)
 - ``` bindkey -M menuselect "^@" accept-line ```
 - ``` bindkey -M menuselect "^D" accept-and-menu-complete ```
@@ -1247,9 +1262,11 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` bindkey -M viopp "j" down-line ```
 - ``` bindkey -M viopp "k" up-line ```
 # Vim Keybindings Insert Mode
+- ```                                                                                  ```
+- ```  ```
 - ``` i  <S-BS>       @<Plug>delimitMateS-BS ```
 - ``` i  <BS>         @<Plug>delimitMateBS ```
-- ``` i  <Plug>delimitMateJumpMany *@<SNR>53_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>" ```
+- ``` i  <Plug>delimitMateJumpMany *@<SNR>55_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>" ```
 - ``` i  <C-G>g       @<Plug>delimitMateJumpMany ```
 - ``` i  <C-H>        @<Plug>delimitMateBS ```
 - ``` i  "            @<Plug>delimitMate" ```
@@ -1261,8 +1278,8 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` i  `            @<Plug>delimitMate` ```
 - ``` i  {            @<Plug>delimitMate{ ```
 - ``` i  }            @<Plug>delimitMate} ```
-- ``` i  <Plug>ISurround * <C-R>=<SNR>132_insert(1)<CR> ```
-- ``` i  <Plug>Isurround * <C-R>=<SNR>132_insert()<CR> ```
+- ``` i  <Plug>ISurround * <C-R>=<SNR>168_insert(1)<CR> ```
+- ``` i  <Plug>Isurround * <C-R>=<SNR>168_insert()<CR> ```
 - ``` i  <Plug>(sexp_insert_backspace) * sexp#backspace_insertion() ```
 - ``` i  <Plug>(sexp_insert_double_quote) * sexp#quote_insertion('"') ```
 - ``` i  <Plug>(sexp_insert_closing_curly) * sexp#closing_insertion('}') ```
@@ -1308,20 +1325,20 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` i  <Plug>(emmet-update-tag) * <C-R>=emmet#util#closePopup()<CR><C-R>=emmet#updateTag()<CR> ```
 - ``` i  <Plug>(emmet-expand-word) * <C-R>=emmet#util#closePopup()<CR><C-R>=emmet#expandAbbr(1,"")<CR> ```
 - ``` i  <Plug>(emmet-expand-abbr) * <C-R>=emmet#util#closePopup()<CR><C-R>=emmet#expandAbbr(0,"")<CR> ```
-- ``` i  <Plug>delimitMateS-Tab * <SNR>53_TriggerAbb()."\<C-R>=delimitMate#JumpAny()\<CR>" ```
-- ``` i  <Plug>delimitMateSpace * <SNR>53_TriggerAbb()."\<C-R>=delimitMate#ExpandSpace()\<CR>" ```
-- ``` i  <Plug>delimitMateCR * <SNR>53_TriggerAbb()."\<C-R>=delimitMate#ExpandReturn()\<CR>" ```
+- ``` i  <Plug>delimitMateS-Tab * <SNR>55_TriggerAbb()."\<C-R>=delimitMate#JumpAny()\<CR>" ```
+- ``` i  <Plug>delimitMateSpace * <SNR>55_TriggerAbb()."\<C-R>=delimitMate#ExpandSpace()\<CR>" ```
+- ``` i  <Plug>delimitMateCR * <SNR>55_TriggerAbb()."\<C-R>=delimitMate#ExpandReturn()\<CR>" ```
 - ``` i  <Plug>delimitMateS-BS * delimitMate#WithinEmptyPair() ? "\<Del>" : "\<S-BS>" ```
 - ``` i  <Plug>delimitMateBS * <C-R>=delimitMate#BS()<CR> ```
-- ``` i  <Plug>delimitMate` * <SNR>53_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\`\")<CR>" ```
-- ``` i  <Plug>delimitMate' * <SNR>53_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\'\")<CR>" ```
-- ``` i  <Plug>delimitMate" * <SNR>53_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\"\")<CR>" ```
-- ``` i  <Plug>delimitMate] * <SNR>53_TriggerAbb().delimitMate#JumpOut("\]") ```
-- ``` i  <Plug>delimitMate} * <SNR>53_TriggerAbb().delimitMate#JumpOut("\}") ```
-- ``` i  <Plug>delimitMate) * <SNR>53_TriggerAbb().delimitMate#JumpOut("\)") ```
-- ``` i  <Plug>delimitMate[ * <SNR>53_TriggerAbb().delimitMate#ParenDelim("]") ```
-- ``` i  <Plug>delimitMate{ * <SNR>53_TriggerAbb().delimitMate#ParenDelim("}") ```
-- ``` i  <Plug>delimitMate( * <SNR>53_TriggerAbb().delimitMate#ParenDelim(")") ```
+- ``` i  <Plug>delimitMate` * <SNR>55_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\`\")<CR>" ```
+- ``` i  <Plug>delimitMate' * <SNR>55_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\'\")<CR>" ```
+- ``` i  <Plug>delimitMate" * <SNR>55_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\"\")<CR>" ```
+- ``` i  <Plug>delimitMate] * <SNR>55_TriggerAbb().delimitMate#JumpOut("\]") ```
+- ``` i  <Plug>delimitMate} * <SNR>55_TriggerAbb().delimitMate#JumpOut("\}") ```
+- ``` i  <Plug>delimitMate) * <SNR>55_TriggerAbb().delimitMate#JumpOut("\)") ```
+- ``` i  <Plug>delimitMate[ * <SNR>55_TriggerAbb().delimitMate#ParenDelim("]") ```
+- ``` i  <Plug>delimitMate{ * <SNR>55_TriggerAbb().delimitMate#ParenDelim("}") ```
+- ``` i  <Plug>delimitMate( * <SNR>55_TriggerAbb().delimitMate#ParenDelim(")") ```
 - ``` i  <Plug>(ale_complete) * <C-\><C-O>:ALEComplete<CR> ```
 - ``` i  <Plug>(ale_show_completion_menu) * <C-X><C-O> ```
 - ``` i  <Plug>(asyncomplete_force_refresh) * asyncomplete#force_refresh() ```
@@ -1414,6 +1431,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` i  <C-Z>       * <Esc>:suspend<CR> ```
 - ``` i  <C-\>       * <Esc>+ ```
 # Vim Keybindings Normal Mode
+- ```                                                                                  ```
 - ``` n  <Space>hp    @<Plug>(GitGutterPreviewHunk) ```
 - ``` n  <Space>hu    @<Plug>(GitGutterUndoHunk) ```
 - ``` n  <Space>hs    @<Plug>(GitGutterStageHunk) ```
@@ -1570,14 +1588,14 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` nox-           * repmo#SelfKey('-', '+') ```
 - ``` n  .             <Plug>(RepeatDot) ```
 - ``` nox;             repmo#LastKey('<Plug>Sneak_;') ```
-- ``` n  <p          & :<C-U>call <SNR>133_putline(v:count1 . ']p', 'Below')<CR><'] ```
-- ``` n  <P          & :<C-U>call <SNR>133_putline(v:count1 . '[p', 'Above')<CR><'] ```
-- ``` n  =p          & :<C-U>call <SNR>133_putline(v:count1 . ']p', 'Below')<CR>='] ```
-- ``` n  =P          & :<C-U>call <SNR>133_putline(v:count1 . '[p', 'Above')<CR>='] ```
+- ``` n  <p          & :<C-U>call <SNR>169_putline(v:count1 . ']p', 'Below')<CR><'] ```
+- ``` n  <P          & :<C-U>call <SNR>169_putline(v:count1 . '[p', 'Above')<CR><'] ```
+- ``` n  =p          & :<C-U>call <SNR>169_putline(v:count1 . ']p', 'Below')<CR>='] ```
+- ``` n  =P          & :<C-U>call <SNR>169_putline(v:count1 . '[p', 'Above')<CR>='] ```
 - ``` n  =op         * <Nop> ```
-- ``` n  =o            <SNR>133_legacy_option_map(nr2char(getchar())) ```
-- ``` n  >p          & :<C-U>call <SNR>133_putline(v:count1 . ']p', 'Below')<CR>>'] ```
-- ``` n  >P          & :<C-U>call <SNR>133_putline(v:count1 . '[p', 'Above')<CR>>'] ```
+- ``` n  =o            <SNR>169_legacy_option_map(nr2char(getchar())) ```
+- ``` n  >p          & :<C-U>call <SNR>169_putline(v:count1 . ']p', 'Below')<CR>>'] ```
+- ``` n  >P          & :<C-U>call <SNR>169_putline(v:count1 . '[p', 'Above')<CR>>'] ```
 - ``` n  @:            <Plug>RepeatEx ```
 - ```    B           * repmo#SelfKey('b', 'w') ```
 - ``` noxE           * repmo#SelfKey('E', 'gE') ```
@@ -1597,23 +1615,23 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  [y            <Plug>unimpaired_string_encode ```
 - ``` n  [P            <Plug>unimpairedPutAbove ```
 - ``` n  [p            <Plug>unimpairedPutAbove ```
-- ``` n  [op         & :call <SNR>133_setup_paste()<CR>O ```
+- ``` n  [op         & :call <SNR>169_setup_paste()<CR>O ```
 - ``` n  [o+         & :set cursorline cursorcolumn<CR> ```
 - ``` n  [ox         & :set cursorline cursorcolumn<CR> ```
 - ``` n  [ov         & :set virtualedit+=all<CR> ```
-- ``` n  [ow         & :setlocal wrap<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [os         & :setlocal spell<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [or         & :setlocal relativenumber<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [on         & :setlocal number<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [ol         & :setlocal list<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [oi         & :set ignorecase<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [oh         & :set hlsearch<C-R>=<SNR>133_statusbump()<CR><CR> ```
+- ``` n  [ow         & :setlocal wrap<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [os         & :setlocal spell<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [or         & :setlocal relativenumber<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [on         & :setlocal number<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [ol         & :setlocal list<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [oi         & :set ignorecase<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [oh         & :set hlsearch<C-R>=<SNR>169_statusbump()<CR><CR> ```
 - ``` n  [od         & :diffthis<CR> ```
-- ``` n  [o|         & :setlocal cursorcolumn<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [ou         & :setlocal cursorcolumn<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [o_         & :setlocal cursorline<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [o-         & :setlocal cursorline<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  [oc         & :setlocal cursorline<C-R>=<SNR>133_statusbump()<CR><CR> ```
+- ``` n  [o|         & :setlocal cursorcolumn<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [ou         & :setlocal cursorcolumn<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [o_         & :setlocal cursorline<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [o-         & :setlocal cursorline<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  [oc         & :setlocal cursorline<C-R>=<SNR>169_statusbump()<CR><CR> ```
 - ``` n  [ob         & :set background=light<CR> ```
 - ``` n  [e            <Plug>unimpairedMoveUp ```
 - ``` n  [<Space>      <Plug>unimpairedBlankUp ```
@@ -1645,23 +1663,23 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  ]y            <Plug>unimpaired_string_decode ```
 - ``` n  ]P            <Plug>unimpairedPutBelow ```
 - ``` n  ]p            <Plug>unimpairedPutBelow ```
-- ``` n  ]op         & :call <SNR>133_setup_paste()<CR>o ```
+- ``` n  ]op         & :call <SNR>169_setup_paste()<CR>o ```
 - ``` n  ]o+         & :set nocursorline nocursorcolumn<CR> ```
 - ``` n  ]ox         & :set nocursorline nocursorcolumn<CR> ```
 - ``` n  ]ov         & :set virtualedit-=all<CR> ```
-- ``` n  ]ow         & :setlocal nowrap<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]os         & :setlocal nospell<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]or         & :setlocal norelativenumber<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]on         & :setlocal nonumber<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]ol         & :setlocal nolist<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]oi         & :set noignorecase<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]oh         & :set nohlsearch<C-R>=<SNR>133_statusbump()<CR><CR> ```
+- ``` n  ]ow         & :setlocal nowrap<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]os         & :setlocal nospell<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]or         & :setlocal norelativenumber<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]on         & :setlocal nonumber<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]ol         & :setlocal nolist<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]oi         & :set noignorecase<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]oh         & :set nohlsearch<C-R>=<SNR>169_statusbump()<CR><CR> ```
 - ``` n  ]od         & :diffoff<CR> ```
-- ``` n  ]o|         & :setlocal nocursorcolumn<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]ou         & :setlocal nocursorcolumn<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]o_         & :setlocal nocursorline<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]o-         & :setlocal nocursorline<C-R>=<SNR>133_statusbump()<CR><CR> ```
-- ``` n  ]oc         & :setlocal nocursorline<C-R>=<SNR>133_statusbump()<CR><CR> ```
+- ``` n  ]o|         & :setlocal nocursorcolumn<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]ou         & :setlocal nocursorcolumn<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]o_         & :setlocal nocursorline<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]o-         & :setlocal nocursorline<C-R>=<SNR>169_statusbump()<CR><CR> ```
+- ``` n  ]oc         & :setlocal nocursorline<C-R>=<SNR>169_statusbump()<CR><CR> ```
 - ``` n  ]ob         & :set background=dark<CR> ```
 - ``` n  ]e            <Plug>unimpairedMoveDown ```
 - ``` n  ]<Space>      <Plug>unimpairedBlankDown ```
@@ -1685,7 +1703,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` nox]m          * repmo#SelfKey(']m', '[m') ```
 - ``` noxb             <Plug>CamelCaseMotion_b ```
 - ``` n  cop         * <Nop> ```
-- ``` n  co            <SNR>133_legacy_option_map(nr2char(getchar())) ```
+- ``` n  co            <SNR>169_legacy_option_map(nr2char(getchar())) ```
 - ``` n  cS            <Plug>CSurround ```
 - ``` n  cs            <Plug>Csurround ```
 - ``` n  cr            <Plug>(abolish-coerce-word) ```
@@ -1715,23 +1733,23 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` noxt             repmo#ZapKey('<Plug>Sneak_t') ```
 - ``` n  u             <Plug>(RepeatUndo) ```
 - ``` noxw             <Plug>CamelCaseMotion_w ```
-- ``` n  yop         & :call <SNR>133_setup_paste()<CR>0C ```
-- ``` n  yo+         & :set <C-R>=<SNR>133_cursor_options()<CR><CR> ```
-- ``` n  yox         & :set <C-R>=<SNR>133_cursor_options()<CR><CR> ```
+- ``` n  yop         & :call <SNR>169_setup_paste()<CR>0C ```
+- ``` n  yo+         & :set <C-R>=<SNR>169_cursor_options()<CR><CR> ```
+- ``` n  yox         & :set <C-R>=<SNR>169_cursor_options()<CR><CR> ```
 - ``` n  yov         & :set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR> ```
-- ``` n  yow         & :setlocal <C-R>=<SNR>133_toggle("wrap")<CR><CR> ```
-- ``` n  yos         & :setlocal <C-R>=<SNR>133_toggle("spell")<CR><CR> ```
-- ``` n  yor         & :setlocal <C-R>=<SNR>133_toggle("relativenumber")<CR><CR> ```
-- ``` n  yon         & :setlocal <C-R>=<SNR>133_toggle("number")<CR><CR> ```
-- ``` n  yol         & :setlocal <C-R>=<SNR>133_toggle("list")<CR><CR> ```
-- ``` n  yoi         & :set <C-R>=<SNR>133_toggle("ignorecase")<CR><CR> ```
-- ``` n  yoh         & :set <C-R>=<SNR>133_toggle("hlsearch")<CR><CR> ```
+- ``` n  yow         & :setlocal <C-R>=<SNR>169_toggle("wrap")<CR><CR> ```
+- ``` n  yos         & :setlocal <C-R>=<SNR>169_toggle("spell")<CR><CR> ```
+- ``` n  yor         & :setlocal <C-R>=<SNR>169_toggle("relativenumber")<CR><CR> ```
+- ``` n  yon         & :setlocal <C-R>=<SNR>169_toggle("number")<CR><CR> ```
+- ``` n  yol         & :setlocal <C-R>=<SNR>169_toggle("list")<CR><CR> ```
+- ``` n  yoi         & :set <C-R>=<SNR>169_toggle("ignorecase")<CR><CR> ```
+- ``` n  yoh         & :set <C-R>=<SNR>169_toggle("hlsearch")<CR><CR> ```
 - ``` n  yod         & :<C-R>=&diff ? "diffoff" : "diffthis"<CR><CR> ```
-- ``` n  yo|         & :setlocal <C-R>=<SNR>133_toggle("cursorcolumn")<CR><CR> ```
-- ``` n  you         & :setlocal <C-R>=<SNR>133_toggle("cursorcolumn")<CR><CR> ```
-- ``` n  yo_         & :setlocal <C-R>=<SNR>133_toggle("cursorline")<CR><CR> ```
-- ``` n  yo-         & :setlocal <C-R>=<SNR>133_toggle("cursorline")<CR><CR> ```
-- ``` n  yoc         & :setlocal <C-R>=<SNR>133_toggle("cursorline")<CR><CR> ```
+- ``` n  yo|         & :setlocal <C-R>=<SNR>169_toggle("cursorcolumn")<CR><CR> ```
+- ``` n  you         & :setlocal <C-R>=<SNR>169_toggle("cursorcolumn")<CR><CR> ```
+- ``` n  yo_         & :setlocal <C-R>=<SNR>169_toggle("cursorline")<CR><CR> ```
+- ``` n  yo-         & :setlocal <C-R>=<SNR>169_toggle("cursorline")<CR><CR> ```
+- ``` n  yoc         & :setlocal <C-R>=<SNR>169_toggle("cursorline")<CR><CR> ```
 - ``` n  yob         & :set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR> ```
 - ``` n  ySS           <Plug>YSsurround ```
 - ``` n  ySs           <Plug>YSsurround ```
@@ -1749,31 +1767,31 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  <Plug>(MatchitNormalForward) * :<C-U>call matchit#Match_wrapper('',1,'n')<CR> ```
 - ``` n  <Plug>(wildfire-quick-select) * :<C-U>call wildfire#QuickSelect(['ip', 'i)', 'i]', 'i}', 'i''', 'i"', 'it'])<CR> ```
 - ``` n  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Start(v:count1, ['ip', 'i)', 'i]', 'i}', 'i''', 'i"', 'it'])<CR> ```
-- ``` n  <Plug>unimpaired_line_xml_decode * <SNR>133_TransformSetup("xml_decode")."_" ```
-- ``` n  <Plug>unimpaired_xml_decode * <SNR>133_TransformSetup("xml_decode") ```
-- ``` n  <Plug>unimpaired_line_xml_encode * <SNR>133_TransformSetup("xml_encode")."_" ```
-- ``` n  <Plug>unimpaired_xml_encode * <SNR>133_TransformSetup("xml_encode") ```
-- ``` n  <Plug>unimpaired_line_url_decode * <SNR>133_TransformSetup("url_decode")."_" ```
-- ``` n  <Plug>unimpaired_url_decode * <SNR>133_TransformSetup("url_decode") ```
-- ``` n  <Plug>unimpaired_line_url_encode * <SNR>133_TransformSetup("url_encode")."_" ```
-- ``` n  <Plug>unimpaired_url_encode * <SNR>133_TransformSetup("url_encode") ```
-- ``` n  <Plug>unimpaired_line_string_decode * <SNR>133_TransformSetup("string_decode")."_" ```
-- ``` n  <Plug>unimpaired_string_decode * <SNR>133_TransformSetup("string_decode") ```
-- ``` n  <Plug>unimpaired_line_string_encode * <SNR>133_TransformSetup("string_encode")."_" ```
-- ``` n  <Plug>unimpaired_string_encode * <SNR>133_TransformSetup("string_encode") ```
-- ``` n  <Plug>unimpairedPutBelow * :call <SNR>133_putline(']p', 'Below')<CR> ```
-- ``` n  <Plug>unimpairedPutAbove * :call <SNR>133_putline('[p', 'Above')<CR> ```
-- ``` n  <Plug>unimpairedPaste * :call <SNR>133_setup_paste()<CR> ```
-- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>133_MoveSelectionDown(v:count1)<CR> ```
-- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>133_MoveSelectionUp(v:count1)<CR> ```
-- ``` n  <Plug>unimpairedMoveDown * :<C-U>call <SNR>133_Move('+',v:count1,'Down')<CR> ```
-- ``` n  <Plug>unimpairedMoveUp * :<C-U>call <SNR>133_Move('--',v:count1,'Up')<CR> ```
-- ``` n  <Plug>unimpairedBlankDown * :<C-U>call <SNR>133_BlankDown(v:count1)<CR> ```
-- ``` n  <Plug>unimpairedBlankUp * :<C-U>call <SNR>133_BlankUp(v:count1)<CR> ```
-- ``` n  <Plug>unimpairedContextNext * :<C-U>call <SNR>133_Context(0)<CR> ```
-- ``` n  <Plug>unimpairedContextPrevious * :<C-U>call <SNR>133_Context(1)<CR> ```
-- ``` n  <Plug>unimpairedDirectoryPrevious * :<C-U>edit <C-R>=<SNR>133_fnameescape(fnamemodify(<SNR>133_FileByOffset(-v:count1), ':.'))<CR><CR> ```
-- ``` n  <Plug>unimpairedDirectoryNext * :<C-U>edit <C-R>=<SNR>133_fnameescape(fnamemodify(<SNR>133_FileByOffset(v:count1), ':.'))<CR><CR> ```
+- ``` n  <Plug>unimpaired_line_xml_decode * <SNR>169_TransformSetup("xml_decode")."_" ```
+- ``` n  <Plug>unimpaired_xml_decode * <SNR>169_TransformSetup("xml_decode") ```
+- ``` n  <Plug>unimpaired_line_xml_encode * <SNR>169_TransformSetup("xml_encode")."_" ```
+- ``` n  <Plug>unimpaired_xml_encode * <SNR>169_TransformSetup("xml_encode") ```
+- ``` n  <Plug>unimpaired_line_url_decode * <SNR>169_TransformSetup("url_decode")."_" ```
+- ``` n  <Plug>unimpaired_url_decode * <SNR>169_TransformSetup("url_decode") ```
+- ``` n  <Plug>unimpaired_line_url_encode * <SNR>169_TransformSetup("url_encode")."_" ```
+- ``` n  <Plug>unimpaired_url_encode * <SNR>169_TransformSetup("url_encode") ```
+- ``` n  <Plug>unimpaired_line_string_decode * <SNR>169_TransformSetup("string_decode")."_" ```
+- ``` n  <Plug>unimpaired_string_decode * <SNR>169_TransformSetup("string_decode") ```
+- ``` n  <Plug>unimpaired_line_string_encode * <SNR>169_TransformSetup("string_encode")."_" ```
+- ``` n  <Plug>unimpaired_string_encode * <SNR>169_TransformSetup("string_encode") ```
+- ``` n  <Plug>unimpairedPutBelow * :call <SNR>169_putline(']p', 'Below')<CR> ```
+- ``` n  <Plug>unimpairedPutAbove * :call <SNR>169_putline('[p', 'Above')<CR> ```
+- ``` n  <Plug>unimpairedPaste * :call <SNR>169_setup_paste()<CR> ```
+- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>169_MoveSelectionDown(v:count1)<CR> ```
+- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>169_MoveSelectionUp(v:count1)<CR> ```
+- ``` n  <Plug>unimpairedMoveDown * :<C-U>call <SNR>169_Move('+',v:count1,'Down')<CR> ```
+- ``` n  <Plug>unimpairedMoveUp * :<C-U>call <SNR>169_Move('--',v:count1,'Up')<CR> ```
+- ``` n  <Plug>unimpairedBlankDown * :<C-U>call <SNR>169_BlankDown(v:count1)<CR> ```
+- ``` n  <Plug>unimpairedBlankUp * :<C-U>call <SNR>169_BlankUp(v:count1)<CR> ```
+- ``` n  <Plug>unimpairedContextNext * :<C-U>call <SNR>169_Context(0)<CR> ```
+- ``` n  <Plug>unimpairedContextPrevious * :<C-U>call <SNR>169_Context(1)<CR> ```
+- ``` n  <Plug>unimpairedDirectoryPrevious * :<C-U>edit <C-R>=<SNR>169_fnameescape(fnamemodify(<SNR>169_FileByOffset(-v:count1), ':.'))<CR><CR> ```
+- ``` n  <Plug>unimpairedDirectoryNext * :<C-U>edit <C-R>=<SNR>169_fnameescape(fnamemodify(<SNR>169_FileByOffset(v:count1), ':.'))<CR><CR> ```
 - ``` n  <Plug>unimpairedTPNext * :<C-U>exe "p".(v:count ? v:count : "")."tnext"<CR> ```
 - ``` n  <Plug>unimpairedTPPrevious * :<C-U>exe "p".(v:count ? v:count : "")."tprevious"<CR> ```
 - ``` n  <Plug>unimpairedTLast * :<C-U>exe "".(v:count ? v:count : "")."tlast"<CR> ```
@@ -1800,13 +1818,13 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  <Plug>unimpairedAFirst * :<C-U>exe "".(v:count ? v:count : "")."first"<CR> ```
 - ``` n  <Plug>unimpairedANext * :<C-U>exe "".(v:count ? v:count : "")."next"<CR> ```
 - ``` n  <Plug>unimpairedAPrevious * :<C-U>exe "".(v:count ? v:count : "")."previous"<CR> ```
-- ``` n  <Plug>YSurround * <SNR>132_opfunc2('setup') ```
-- ``` n  <Plug>Ysurround * <SNR>132_opfunc('setup') ```
-- ``` n  <Plug>YSsurround * <SNR>132_opfunc2('setup').'_' ```
-- ``` n  <Plug>Yssurround * '^'.v:count1.<SNR>132_opfunc('setup').'g_' ```
-- ``` n  <Plug>CSurround * :<C-U>call <SNR>132_changesurround(1)<CR> ```
-- ``` n  <Plug>Csurround * :<C-U>call <SNR>132_changesurround()<CR> ```
-- ``` n  <Plug>Dsurround * :<C-U>call <SNR>132_dosurround(<SNR>132_inputtarget())<CR> ```
+- ``` n  <Plug>YSurround * <SNR>168_opfunc2('setup') ```
+- ``` n  <Plug>Ysurround * <SNR>168_opfunc('setup') ```
+- ``` n  <Plug>YSsurround * <SNR>168_opfunc2('setup').'_' ```
+- ``` n  <Plug>Yssurround * '^'.v:count1.<SNR>168_opfunc('setup').'g_' ```
+- ``` n  <Plug>CSurround * :<C-U>call <SNR>168_changesurround(1)<CR> ```
+- ``` n  <Plug>Csurround * :<C-U>call <SNR>168_changesurround()<CR> ```
+- ``` n  <Plug>Dsurround * :<C-U>call <SNR>168_dosurround(<SNR>168_inputtarget())<CR> ```
 - ``` n  <Plug>SurroundRepeat * . ```
 - ``` n  <Plug>(startify-open-buffers) * :<C-U>call startify#open_buffers()<CR> ```
 - ``` n  <Plug>SneakPrevious   <Plug>Sneak_, ```
@@ -1821,38 +1839,38 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` n  <Plug>Sneak_t * :<C-U>call sneak#wrap('', 1, 0, 0, 0)<CR> ```
 - ``` n  <Plug>Sneak_F * :<C-U>call sneak#wrap('', 1, 1, 1, 0)<CR> ```
 - ``` n  <Plug>Sneak_f * :<C-U>call sneak#wrap('', 1, 0, 1, 0)<CR> ```
-- ``` n  <Plug>Sneak_, * :<C-U>call <SNR>130_rpt('', 1)<CR> ```
-- ``` n  <Plug>Sneak_; * :<C-U>call <SNR>130_rpt('', 0)<CR> ```
+- ``` n  <Plug>Sneak_, * :<C-U>call <SNR>166_rpt('', 1)<CR> ```
+- ``` n  <Plug>Sneak_; * :<C-U>call <SNR>166_rpt('', 0)<CR> ```
 - ``` n  <Plug>Sneak_S * :<C-U>call sneak#wrap('', 2, 1, 2, 1)<CR> ```
 - ``` n  <Plug>Sneak_s * :<C-U>call sneak#wrap('', 2, 0, 2, 1)<CR> ```
-- ``` n  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 1) | call <SNR>127_repeat_set("\<Plug>(sexp_capture_next_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_capture_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 1) | call <SNR>127_repeat_set("\<Plug>(sexp_capture_prev_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_emit_tail_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 0) | call <SNR>127_repeat_set("\<Plug>(sexp_emit_tail_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_emit_head_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 0) | call <SNR>127_repeat_set("\<Plug>(sexp_emit_head_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_swap_element_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 0) | call <SNR>127_repeat_set("\<Plug>(sexp_swap_element_forward)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_swap_element_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 0) | call <SNR>127_repeat_set("\<Plug>(sexp_swap_element_backward)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_swap_list_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 1) | call <SNR>127_repeat_set("\<Plug>(sexp_swap_list_forward)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_swap_list_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 1) | call <SNR>127_repeat_set("\<Plug>(sexp_swap_list_backward)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_splice_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#splice_list(b:sexp_count) | call <SNR>127_repeat_set("\<Plug>(sexp_splice_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_convolute) * :<C-U>let b:sexp_count = v:count | call sexp#convolute(b:sexp_count, 'n') | call <SNR>127_repeat_set("\<Plug>(sexp_convolute)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_raise_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_element', 'n', 1) | call <SNR>127_repeat_set("\<Plug>(sexp_raise_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_raise_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_list', 'n', 0, 0) | call <SNR>127_repeat_set("\<Plug>(sexp_raise_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_insert_at_list_tail) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(1) | call <SNR>127_repeat_set("\<Plug>(sexp_insert_at_list_tail)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_insert_at_list_head) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(0) | call <SNR>127_repeat_set("\<Plug>(sexp_insert_at_list_head)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_curly_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_curly_tail_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_curly_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_curly_head_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_square_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_square_tail_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_square_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_square_head_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_round_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_round_tail_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_round_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_round_head_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_curly_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_curly_tail_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_curly_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_curly_head_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_square_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_square_tail_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_square_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_square_head_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_round_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_round_tail_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_round_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>127_repeat_set("\<Plug>(sexp_round_head_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_indent_top) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(1, b:sexp_count) | call <SNR>127_repeat_set("\<Plug>(sexp_indent_top)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_indent) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(0, b:sexp_count) | call <SNR>127_repeat_set("\<Plug>(sexp_indent)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 1) | call <SNR>163_repeat_set("\<Plug>(sexp_capture_next_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_capture_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 1) | call <SNR>163_repeat_set("\<Plug>(sexp_capture_prev_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_emit_tail_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 0) | call <SNR>163_repeat_set("\<Plug>(sexp_emit_tail_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_emit_head_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 0) | call <SNR>163_repeat_set("\<Plug>(sexp_emit_head_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_swap_element_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 0) | call <SNR>163_repeat_set("\<Plug>(sexp_swap_element_forward)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_swap_element_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 0) | call <SNR>163_repeat_set("\<Plug>(sexp_swap_element_backward)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_swap_list_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 1) | call <SNR>163_repeat_set("\<Plug>(sexp_swap_list_forward)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_swap_list_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 1) | call <SNR>163_repeat_set("\<Plug>(sexp_swap_list_backward)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_splice_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#splice_list(b:sexp_count) | call <SNR>163_repeat_set("\<Plug>(sexp_splice_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_convolute) * :<C-U>let b:sexp_count = v:count | call sexp#convolute(b:sexp_count, 'n') | call <SNR>163_repeat_set("\<Plug>(sexp_convolute)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_raise_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_element', 'n', 1) | call <SNR>163_repeat_set("\<Plug>(sexp_raise_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_raise_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_list', 'n', 0, 0) | call <SNR>163_repeat_set("\<Plug>(sexp_raise_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_insert_at_list_tail) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(1) | call <SNR>163_repeat_set("\<Plug>(sexp_insert_at_list_tail)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_insert_at_list_head) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(0) | call <SNR>163_repeat_set("\<Plug>(sexp_insert_at_list_head)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_curly_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_curly_tail_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_curly_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_curly_head_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_square_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_square_tail_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_square_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_square_head_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_round_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_round_tail_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_round_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_round_head_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_curly_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_curly_tail_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_curly_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_curly_head_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_square_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_square_tail_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_square_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_square_head_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_round_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_round_tail_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_round_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>163_repeat_set("\<Plug>(sexp_round_head_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_indent_top) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(1, b:sexp_count) | call <SNR>163_repeat_set("\<Plug>(sexp_indent_top)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_indent) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(0, b:sexp_count) | call <SNR>163_repeat_set("\<Plug>(sexp_indent)", b:sexp_count)<CR> ```
 - ``` n  <Plug>(sexp_select_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#select_adjacent_element', 'n', 1)<CR> ```
 - ``` n  <Plug>(sexp_select_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#select_adjacent_element', 'n', 0)<CR> ```
 - ``` n  <Plug>(sexp_move_to_next_top_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#move_to_adjacent_element('n', b:sexp_count, 1, 0, 1)<CR> ```
@@ -2032,9 +2050,9 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ```    <Plug>(asterisk-z*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 0, 'is_whole' : 1}) ```
 - ```    <Plug>(asterisk-g*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 1, 'is_whole' : 0}) ```
 - ```    <Plug>(asterisk-*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 1, 'is_whole' : 1}) ```
-- ``` n  <Plug>(abolish-coerce-word) * <SNR>103_coerce(nr2char(getchar())).'iw' ```
-- ``` n  <Plug>(abolish-coerce) * <SNR>103_coerce(nr2char(getchar())) ```
-- ``` n  <Plug>NERDCommenterAltDelims * :call <SNR>61_SwitchToAlternativeDelimiters(1)<CR> ```
+- ``` n  <Plug>(abolish-coerce-word) * <SNR>105_coerce(nr2char(getchar())).'iw' ```
+- ``` n  <Plug>(abolish-coerce) * <SNR>105_coerce(nr2char(getchar())) ```
+- ``` n  <Plug>NERDCommenterAltDelims * :call <SNR>63_SwitchToAlternativeDelimiters(1)<CR> ```
 - ``` n  <Plug>NERDCommenterUncomment * :call NERDComment("n", "Uncomment")<CR> ```
 - ``` n  <Plug>NERDCommenterAlignBoth * :call NERDComment("n", "AlignBoth")<CR> ```
 - ``` n  <Plug>NERDCommenterAlignLeft * :call NERDComment("n", "AlignLeft")<CR> ```
@@ -2265,18 +2283,18 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` v  <Plug>(MatchitVisualForward) * :<C-U>call matchit#Match_wrapper('',1,'v')<CR>m'gv`` ```
 - ``` v  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Fuel(v:count1)<CR> ```
 - ``` v  <Plug>(wildfire-water) * :<C-U>call wildfire#Water(v:count1)<CR> ```
-- ``` x  <Plug>unimpaired_xml_decode * <SNR>133_TransformSetup("xml_decode") ```
-- ``` x  <Plug>unimpaired_xml_encode * <SNR>133_TransformSetup("xml_encode") ```
-- ``` x  <Plug>unimpaired_url_decode * <SNR>133_TransformSetup("url_decode") ```
-- ``` x  <Plug>unimpaired_url_encode * <SNR>133_TransformSetup("url_encode") ```
-- ``` x  <Plug>unimpaired_string_decode * <SNR>133_TransformSetup("string_decode") ```
-- ``` x  <Plug>unimpaired_string_encode * <SNR>133_TransformSetup("string_encode") ```
-- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>133_MoveSelectionDown(v:count1)<CR> ```
-- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>133_MoveSelectionUp(v:count1)<CR> ```
-- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>133_Context(0)<CR> ```
-- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>133_Context(1)<CR> ```
-- ``` v  <Plug>VgSurround * :<C-U>call <SNR>132_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
-- ``` v  <Plug>VSurround * :<C-U>call <SNR>132_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
+- ``` x  <Plug>unimpaired_xml_decode * <SNR>169_TransformSetup("xml_decode") ```
+- ``` x  <Plug>unimpaired_xml_encode * <SNR>169_TransformSetup("xml_encode") ```
+- ``` x  <Plug>unimpaired_url_decode * <SNR>169_TransformSetup("url_decode") ```
+- ``` x  <Plug>unimpaired_url_encode * <SNR>169_TransformSetup("url_encode") ```
+- ``` x  <Plug>unimpaired_string_decode * <SNR>169_TransformSetup("string_decode") ```
+- ``` x  <Plug>unimpaired_string_encode * <SNR>169_TransformSetup("string_encode") ```
+- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>169_MoveSelectionDown(v:count1)<CR> ```
+- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>169_MoveSelectionUp(v:count1)<CR> ```
+- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>169_Context(0)<CR> ```
+- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>169_Context(1)<CR> ```
+- ``` v  <Plug>VgSurround * :<C-U>call <SNR>168_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
+- ``` v  <Plug>VSurround * :<C-U>call <SNR>168_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
 - ``` x  <Plug>SneakPrevious   <Plug>Sneak_, ```
 - ``` x  <Plug>SneakNext   <Plug>Sneak_; ```
 - ``` x  <Plug>(SneakStreakBackward)   <Plug>SneakLabel_S ```
@@ -2291,8 +2309,8 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` x  <Plug>Sneak_t * :<C-U>call sneak#wrap(visualmode(), 1, 0, 0, 0)<CR> ```
 - ``` x  <Plug>Sneak_F * :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 0)<CR> ```
 - ``` x  <Plug>Sneak_f * :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 0)<CR> ```
-- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>130_rpt(visualmode(), 1)<CR> ```
-- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>130_rpt(visualmode(), 0)<CR> ```
+- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>166_rpt(visualmode(), 1)<CR> ```
+- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>166_rpt(visualmode(), 0)<CR> ```
 - ``` x  <Plug>Sneak_S * :<C-U>call sneak#wrap(visualmode(), 2, 1, 2, 1)<CR> ```
 - ``` x  <Plug>Sneak_s * :<C-U>call sneak#wrap(visualmode(), 2, 0, 2, 1)<CR> ```
 - ``` x  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'v', 1, 1)<CR> ```
@@ -2593,7 +2611,8 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` v  <C-Right>   * >gv ```
 - ``` v  <RightMouse> * "*y`> ```
 # Vim Keybindings Command Colon Mode
-- ```  ```
+- ```                                                                                                                                                                  ```
+- ```                                                                                  ```
 - ``` !  <M-C-H>     * <C-W> ```
 - ``` !  <M-BS>      * <C-W> ```
 - ``` !  <M-p>       * <Up> ```
@@ -2607,7 +2626,7 @@ Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and 
 - ``` c  <C-D>       * getcmdpos()>strlen(getcmdline())?"\<C-D>":"\<Del>" ```
 - ``` c  <C-F>       * getcmdpos()>strlen(getcmdline())?&cedit:"\<Right>" ```
 - ``` c  <C-R><C-G>  & fnameescape(fugitive#Object(@%)) ```
-- ``` c  <C-T>       * <SNR>122_transpose() ```
-- ``` c  <C-U>       * <SNR>122_ctrl_u() ```
+- ``` c  <C-T>       * <SNR>158_transpose() ```
+- ``` c  <C-U>       * <SNR>158_ctrl_u() ```
 - ``` c  <C-X><C-A>  * <C-A> ```
 - ``` c  <C-Y>       * <C-R>- ```
