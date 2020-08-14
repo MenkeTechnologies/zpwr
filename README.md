@@ -516,7 +516,7 @@ export ZPWR_INTRO_BANNER=nopony
 Due to the sheer number of plugins and completions startup usually takes 2-4 seconds on faster machines but up to 10-12 seconds on slow machines.
 
 ## Contributing
-I am looking for contributors. Especially for documentation and expanding the tests.
+I am looking for contributors. Especially for documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests.
 
 ## Warnings
 Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.
