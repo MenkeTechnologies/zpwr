@@ -76,6 +76,8 @@ or type C-d (Control-d) to return to installer script.
 - vim extract variable from visual selection for shell, perl and python scripts (`gv` to select extracted)
 - vim autohighlight word under cursor after delay like most code editors
 - software updater script, `source autoUpdater.sh`,  on 24 hour loop
+- 960+ aliases
+- 300+ git aliases from OMZ plugins and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - zsh keybindings to git add, commit and push with commit message from current command line [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - git blacklisted directories [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
