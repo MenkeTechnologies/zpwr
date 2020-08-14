@@ -39,100 +39,100 @@ set nocompatible               " be improved
 
 ""{{{                    mark:settings
 ""**************************************************************
-"backslash replaced by space for leader keybindings
+" backslash replaced by space for leader keybindings
 let mapleader = "\<space>"
 
-"for youcompleteme doc window to open at bottom
+" for youcompleteme doc window to open at bottom
 set splitright
 set noswapfile
 set nowritebackup
 set ruler
 set autoread
-"searches are case insensitive
+" searches are case insensitive
 set ignorecase
-"tab is 4 spaces
+" tab is 4 spaces
 set tabstop=4
-"snap to nearest tabstop
+" snap to nearest tabstop
 set shiftround
 set cindent
 set ttyfast
-"1000 ms wait for next key in mappings
+" 1000 ms wait for next key in mappings
 set timeoutlen=1000
-"status bar always shown
+" status bar always shown
 set laststatus=2
-"/ and ? wrap around EOF
+" / and ? wrap around EOF
 set wrapscan
 set t_Co=256
 set backspace=2
 set encoding=utf8
-"jump to matching brace
+" jump to matching brace
 set showmatch
 set showmode
 " highlight matches in / and ?
 set hlsearch
-"search performed for each keypress
+" search performed for each keypress
 set incsearch
 " mouse scroling and clicking
 set mouse=a
-">> and << indent set to four spaces
+" >> and << indent set to four spaces
 set shiftwidth=4
 set expandtab
-"wrap lines
+" wrap lines
 set linebreak
-"long line soft wrap indicator
+" long line soft wrap indicator
 set showbreak=-->
-"show line numbers
+" show line numbers
 set number
 set backupdir=~/tmp
-"tab completion in command mode cycles through menu
+" tab completion in command mode cycles through menu
 set wildmenu
-"globbing is case insensitive
+" globbing is case insensitive
 set wildignorecase
 
-"file:line:column:match
+" file:line:column:match
 set grepprg=ag\ --nogroup\ --column\ $*
-"file:line:column:match
+" file:line:column:match
 set grepformat=%f:%l:%c:%m
 
-"visual selection automatically into system clipboard
+" visual selection automatically into system clipboard
 set guioptions+=a
-"font sizee 14 for Hack Nerd Font (powerine symbols)
+" font sizee 14 for Hack Nerd Font (powerine symbols)
 set guifont=Hack\ Nerd\ Font:h14
-"start browsing in current dir
+" start browsing in current dir
 set browsedir=current
-"reduce enter key after message alerts
+" reduce enter key after message alerts
 set shortmess=aIcFT
 
-"left gutter fold column
+" left gutter fold column
 set foldcolumn=2
 
-"1 lines for :cmd window
+" 1 lines for :cmd window
 set cmdheight=1
 
-"including tags in ^N completion
+" including tags in ^N completion
 set complete+=]
 
-"show the leader/prefix/number key when pressed
+" show the leader/prefix/number key when pressed
 set showcmd
 
 set completeopt=longest,noinsert,noselect,menuone
 set omnifunc=zsh_completion#Complete
 
 if ! has('nvim')
-    "visual mode automatically copies to system clipboard
+    " visual mode automatically copies to system clipboard
     set clipboard=autoselect
 endif
 
-"show trailing spaces and tabs
+" show trailing spaces and tabs
 set list listchars=tab:\ \ ,trail:·
 
-"customize .viminfo
+" customize .viminfo
 set viminfo='1000,<50,s10,h
 
-"show vertical line at 80 chars width
+" show vertical line at 80 chars width
 set colorcolumn=80
 
-"gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
+" gutter update time for vim-gitgutter, vim-boomarks and vim-markology plugins
 set updatetime=150
 ""}}}***********************************************************
 
@@ -178,7 +178,7 @@ let g:auto_save_events = ['InsertLeave', 'TextChanged', 'TextChangedI']
 
 let g:indentLine_setColors = 1
 
-"0 if you want to enable it later via :RainbowToggle
+" 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
 
 let g:rainbow_conf = {
@@ -245,7 +245,7 @@ let g:session_autoload = 'no'
 
 let g:ackprg = 'ag --vimgrep'
 let g:ctrlp_arg_map = 1
-"tree style file explorer
+" tree style file explorer
 let g:netrw_liststyle=3
 
 highlight BookmarkSign ctermbg=NONE ctermfg=160
@@ -266,10 +266,10 @@ let g:NERDTreeDisableFileExtensionHighlight = 1
 let g:NERDTreeDisableExactMatchHighlight = 1
 let g:NERDTreeDisablePatternMatchHighlight = 1
 
-"too slow with icons
+" too slow with icons
 let g:webdevicons_enable_nerdtree=1
 
-"matches JetBrains IDE mappings on macOS
+" matches JetBrains IDE mappings on macOS
 let g:multi_cursor_use_default_mapping=0
 let g:multi_cursor_start_word_key      = '<C-g>'
 let g:multi_cursor_next_key  = '<C-g>'
@@ -284,7 +284,7 @@ filetype plugin indent on    " required
 "{{{                    MARK:Mappings
 "**************************************************************
 
-"faster movements, used in all modes
+" faster movements, used in all modes
 nnoremap <c-j> 4j
 vnoremap <c-j> 4j
 nnoremap <c-k> 4k
@@ -299,19 +299,19 @@ vnoremap <leader>- 4-
 nnoremap <leader>= 4+
 vnoremap <leader>= 4+
 
-"reselect visual mode last region after indenting
+" reselect visual mode last region after indenting
 vnoremap < <gv
 vnoremap > >gv
 
-"copy to tmux clipboard
+" copy to tmux clipboard
 vnoremap <silent><leader>b :w !tmux set-buffer "$(cat)"<CR><CR>
-"for when forgot to do sudo vim <file> and file is readonly
+" for when forgot to do sudo vim <file> and file is readonly
 noremap <silent><leader>sudo :w !sudo tee % &>/dev/null<CR><CR><CR>
 
-"indenting and focus line at center of editor
+" indenting and focus line at center of editor
 inoremap <silent> <C-L> <ESC>mbgg=G`bzza
 
-"transpose words (like emacs `transpose-words')
+" transpose words (like emacs `transpose-words')
 function! TransposeWords()
     if search('\w\+\%#\w*\W\+\w\+')
     elseif search('\w\+\W\+\%#\W*\w\+')
@@ -323,31 +323,31 @@ function! TransposeWords()
     normal! el
 endfunction
 
-"Transpose Chars Like Emacs
+" Transpose Chars Like Emacs
 nnoremap <silent> <C-T> xp
 
-"Transpose Words Like Emacs
+" Transpose Words Like Emacs
 nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
 inoremap <silent> <C-D><C-T> <C-O>:call TransposeWords()<CR>
 
-"rename word under caret
+" rename word under caret
 nnoremap <Leader>g :%s/\C\<<C-r><C-w>\>//g<Left><Left>
-"rename word under caret with cursor at end of replacement word
+" rename word under caret with cursor at end of replacement word
 nnoremap <Leader>r :%s/\C\<<C-r><C-w>\>/<C-r><C-W>/g<Left><Left>
 
 inoremap <c-t> i<bs><c-o>:silent! undojoin \| normal! xp<cr>
 
-"allow dot to repeat @:
+" allow dot to repeat @:
 nnoremap <silent><Plug>RepeatEx @: :call repeat#set("\<Plug>RepeatEx")<CR>
 nmap @: <Plug>RepeatEx
 
-"move to next word and capitalize
+" move to next word and capitalize
 nnoremap <ESC><C-C> wvU
 
-"Insert mode mappings:
+" Insert mode mappings:
 "inoremap <C-C> <C-O>w<C-O>vU
 
-"Ctrl-C exits like in shell
+" Ctrl-C exits like in shell
 nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
 "vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
 inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
@@ -370,7 +370,7 @@ inoremap <End> <C-[>Gi
 nnoremap <Home> gg
 nnoremap <End> G
 
-"comment out
+" comment out
 inoremap <silent> <C-B> <ESC>I//<ESC>ji
 inoremap <silent> <C-B><C-N> <ESC>^2xji
 
@@ -382,9 +382,9 @@ nnoremap <silent> <leader>q :qa!<CR>
 nnoremap <silent> <leader>wq :wq!<CR>
 nnoremap <silent> <leader>e :q!<CR>
 nnoremap <silent> <leader>w :w!<CR>
-"vertical split
+" vertical split
 nnoremap <silent> <leader>v :vsplit<CR>
-"horizontal split
+" horizontal split
 nnoremap <silent> <leader>s :split<CR>
 nnoremap <silent> <leader>t :tabnew<CR>
 
@@ -397,7 +397,7 @@ onoremap ah :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rg_vk0"<cr>
 
 "{{{                    MARK:Custom Fxns
 "**************************************************************
-"navigate to next or previous vim fold marker
+" navigate to next or previous vim fold marker
 fun GoToNextMarker(searchTerm, backwardsSearch)
     let oldwrap = &wrapscan
     set nowrapscan
@@ -422,7 +422,7 @@ fun GoToNextMarker(searchTerm, backwardsSearch)
     unlet oldwrap
 endf
 
-"indent, get rid of pairs of new lines and move cursor to middle of screen
+" indent, get rid of pairs of new lines and move cursor to middle of screen
 function! IndentSqueeze()
     silent! exe 'normal! mbgg=G'
     silent! exe '1,$!cat -s'
@@ -430,7 +430,7 @@ function! IndentSqueeze()
     redraw!
 endfunction
 
-"indent and move cursor to middle of screen
+" indent and move cursor to middle of screen
 function! Indent()
     exe ':normal mbgg=G'
     exe ':normal `bzz'
@@ -441,7 +441,7 @@ endfunction
 "{{{                    MARK:Find Vim Markers
 "**************************************************************
 nnoremap <silent> <leader>z :call IndentSqueeze()<cr>
-"bind control arrow keys in insert and normal modes to navigate fold markers
+" bind control arrow keys in insert and normal modes to navigate fold markers
 inoremap <silent> <C-Down> <C-[>:<C-U>call GoToNextMarker("{{{",0)<CR>i
 inoremap <silent> <C-Up> <C-[>:<C-U>call GoToNextMarker("{{{",1)<CR>i
 nnoremap <silent> <C-Down> :<C-U>call GoToNextMarker("{{{",0)<CR>
@@ -455,7 +455,7 @@ function! InsertEOLVar(toInsert, front, back)
     exe 'normal! lmb'
     exe 'normal! F'.a:front
     exe 'normal! i'.a:toInsert
-    "move to last char on line
+    " move to last char on line
     exe 'normal! g_'
     exe 'normal! a'.a:toInsert
     exe 'silent! normal! `b'
@@ -465,7 +465,7 @@ function! InsertEquals(toInsert, front, back)
     exe 'normal! lmb'
     exe 'normal! T'.a:front
     exe 'normal! i'.a:toInsert
-    "move to last char on line
+    " move to last char on line
     exe 'normal! g_'
     exe 'normal! a'.a:toInsert
     exe 'silent! normal! `b'
@@ -556,7 +556,7 @@ function! InsertQuoteVisualMode(type)
 
     if a:type == 'single'
         let quote="'"
-        "if matches echo .* L=echo R=last non space
+        " if matches echo .* L=echo R=last non space
     elseif a:type == 'double'
         let quote='"'
     elseif a:type == 'back'
@@ -622,7 +622,7 @@ function! Quoter(type)
 
     if a:type == 'single'
         let quote="'"
-        "if matches echo .* L=echo R=last non space
+        " if matches echo .* L=echo R=last non space
     elseif a:type == 'double'
         let quote='"'
     elseif a:type == 'back'
@@ -669,8 +669,8 @@ function! Quoter(type)
         let g:COUNTER=g:COUNTER +1
         return 0
     endif
-    "if line matches regex and cursor position within matching capture group
-    "then run the quoting
+    " if line matches regex and cursor position within matching capture group
+    " then run the quoting
 
     if (line =~ '\v^.*\$\(.*\).*$')
         call InsertMatchingPunct(quote, '$')
@@ -714,7 +714,7 @@ augroup indentGroup
     autocmd!
 
     let currentFileEnding=tolower(expand('%:e'))
-    "if the filetype is not in blacklist (index = -1) then we will indent
+    " if the filetype is not in blacklist (index = -1) then we will indent
     if index(blacklist, currentFileEnding) < 0
         let filename=expand('%:p:t')
         if filename != '.zshrc'
@@ -743,8 +743,8 @@ vnoremap <silent> <leader>( :call InsertQuoteVisualMode("paren")<CR>
 
 "{{{                    MARK:Plugin Mappings
 "**************************************************************
-"quickfix window
-"conflicts with nerd commenter
+" quickfix window
+" conflicts with nerd commenter
 augroup cwindow_group
     autocmd!
     autocmd VimEnter * nnoremap <silent> <leader>cn :cnext<CR>
@@ -753,17 +753,17 @@ augroup cwindow_group
     autocmd VimEnter * nnoremap <silent> <leader>co :copen<CR>
 augroup end
 
-"location list window
+" location list window
 nnoremap <silent> <leader>ln :lnext<CR>
 nnoremap <silent> <leader>lp :lprev<CR>
 nnoremap <silent> <leader>lc :lclose<CR>
 nnoremap <silent> <leader>lo :lopen<CR>
 
-"args
+" args
 nnoremap <silent> <leader>an :next<CR>
 nnoremap <silent> <leader>ap :prev<CR>
 
-"buffers
+" buffers
 nnoremap <silent> <leader>n :bnext<CR>
 nnoremap <silent> <leader>p :bprev<CR>
 
@@ -785,7 +785,7 @@ inoremap <F6> <ESC>:SyntasticToggleMode<CR>
 nnoremap <F7> :TTags<CR>
 inoremap <F7> <ESC>:TTags<CR>
 
-"keep subtitution flags
+" keep subtitution flags
 nnoremap & :&&<CR>
 xnoremap & :&&<CR>
 
@@ -797,10 +797,10 @@ xnoremap && :normal mzg&`zzz<CR>
 
 map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
 map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
-"map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
+" map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
 noremap <silent> <leader>z nea
 
-"for moving selection up and down, displacing other text
+" for moving selection up and down, displacing other text
 vnoremap <C-Right> >gv
 vnoremap <C-Left> <gv
 
@@ -941,7 +941,7 @@ function! TmuxRepeat(type)
     let exeFileType=expand('%:e')
     let $VIMHOME = $HOME.'/.vim'
 
-    "non empty when tmux server is running
+    " non empty when tmux server is running
     let tmux=$TMUX
     let a_save = ""
 
@@ -1017,7 +1017,7 @@ function! TmuxRepeatGeneric()
 endfunction
 
 autocmd VimEnter * inoremap <silent> <C-V> <ESC>:w!<CR>:call TmuxRepeat("file")<CR>a
-"reassign readline plugin mapping
+" reassign readline plugin mapping
 autocmd VimEnter * nunmap S
 
 function! GetFirstCodeLineHash()
@@ -1345,7 +1345,7 @@ vnoremap <silent> <C-D>, :call NERDComment("x","Toggle")<CR>`>
 vnoremap <silent> <C-D>y :<C-C>:update<CR>:SyntasticCheck<CR>
 vnoremap <silent> <C-D>d :<C-C>:update<CR>
 
-"insert mode keybindings for fzf-vim
+" insert mode keybindings for fzf-vim
 inoremap <silent> <C-D><C-D> <C-O>:GitGutterUndoHunk<CR>
 
 inoremap <silent> <C-D>a <C-O>:Ag<CR>
@@ -1382,7 +1382,7 @@ inoremap <silent> <C-D>, <C-O>:FZFEnv<CR>
 inoremap <silent> <C-D>\ <C-X><C-L>
 inoremap <silent> <C-D>n <C-X><C-O>
 
-"normal mode keybindings for fzf-vim
+" normal mode keybindings for fzf-vim
 nnoremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 
 nnoremap <silent> <C-D>a :Ag<CR>
@@ -1434,7 +1434,7 @@ nnoremap <silent> <leader>/ :LocateAll<CR>
 nnoremap <silent> <C-D>. :FZFKeys<CR>
 nnoremap <silent> <C-D>, :FZFEnv<CR>
 
-"similar to tmux <prefix> - and <prefix> | to split panes
+" similar to tmux <prefix> - and <prefix> | to split panes
 nnoremap <silent> <C-W>- :split<CR>
 nnoremap <silent> <C-W>\ :vsplit<CR>
 
@@ -1453,18 +1453,18 @@ augroup misc_group
     autocmd!
     autocmd filetype * set tags+=~/tags
     autocmd filetype * call AutoCorrect()
-    "uncomment following if you want just want autocorrection in text and markdown files
-    "autocmd filetype text call AutoCorrect()
-    "autocmd filetype markdown call AutoCorrect()
+    " uncomment following if you want just want autocorrection in text and markdown files
+    " autocmd filetype text call AutoCorrect()
+    " autocmd filetype markdown call AutoCorrect()
 
     autocmd BufReadPre,FileReadPre *.[chy] set cindent
     autocmd BufRead * setlocal foldmethod=marker
-    "open folds on startup
+    " open folds on startup
     autocmd BufRead * normal zR
     autocmd FileType java let b:dispatch = 'javac %'
 augroup end
 
-"diffing colors
+" diffing colors
 fun! SetDiffColors()
     highlight DiffAdd    cterm=bold ctermfg=white ctermbg=DarkGreen
     highlight DiffDelete cterm=bold ctermfg=white ctermbg=DarkGrey
@@ -1483,7 +1483,7 @@ augroup file_templates
 augroup end
 
 function! SetHLSIns()
-"only for first bufenter, required to activate the highlight on hover
+" only for first bufenter, required to activate the highlight on hover
     if !exists('g:hl_activated')
         let g:hl_activated = 1
         call feedkeys("\<ESC>:set hls\<CR>Gi")
@@ -1496,7 +1496,7 @@ autocmd BufNewFile * call SetHLSIns()
 
 "{{{                    MARK:Ending
 "**************************************************************
-"load all pathogen plugins
+" load all pathogen plugins
 if filereadable(expand('~/.vim/autoload/pathogen.vim'))
     runtime! autoload/pathogen.vim
     if exists('g:loaded_pathogen')
@@ -1509,7 +1509,7 @@ filetype plugin indent on
 
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 
-"powerline-status pip package installs to different locations of different OS
+" powerline-status pip package installs to different locations of different OS
 let os = substitute(system('uname'), '\n', '', '')
 
 if os == 'Darwin'
@@ -1562,14 +1562,14 @@ if ! has('nvim')
     set runtimepath+=~/.tmux/powerline/bindings/vim/
 endif
 
-"gf and :find will find files automatically in these locations
+" gf and :find will find files automatically in these locations
 set path+=~/Desktop
 set path+=~/.zpwr/scripts
 
-"default colorscheme
+" default colorscheme
 silent! colorscheme zpwrmarklar
 
-"personal common mispellings
+" personal common mispellings
 iabbrev tth the
 iabbrev tehn then
 iabbrev retrun return
@@ -1577,28 +1577,28 @@ iabbrev retunr return
 iabbrev delte delete
 iabbrev deltee delete
 
-"dict completion normally invoked in insert mode with C-X C-K
+" dict completion normally invoked in insert mode with C-X C-K
 set dictionary+=/usr/share/dict/words
-"thesaurus completion normally invoked in insert mode with C-X C-T
+" thesaurus completion normally invoked in insert mode with C-X C-T
 set thesaurus+=~/mthesaur.txt
 
 source ~/.oh-my-zsh/custom/plugins/fzf/plugin/fzf.vim
 
-"easier mapping for dict completion
+" easier mapping for dict completion
 inoremap <silent> <F10> <C-X><C-K>
-"easier mapping for thesaurus completion
+" easier mapping for thesaurus completion
 inoremap <silent> <F11> <C-X><C-T>
 
-"default keybindings
+" default keybindings
 let g:fzf_action = {
             \ 'ctrl-t': 'tab split',
             \ 'ctrl-x': 'split',
             \ 'ctrl-v': 'vsplit' }
 
-"default fzf location and size
+" default fzf location and size
 let g:fzf_layout = { 'down': '~50%' }
 
-"use vim colorscheme colors
+" use vim colorscheme colors
 let g:fzf_colors =
             \ { 'fg':      ['fg', 'Normal'],
             \ 'bg':      ['bg', 'Normal'],
@@ -1663,7 +1663,7 @@ let g:snips_github='MenkeTechnologies'
 
 command! -bang Colors call fzf#vim#colors({'left': '20', 'options': '--reverse' }, <bang>0)
 
-"give :Ag preview window with first line of matched file matches fzf input
+" give :Ag preview window with first line of matched file matches fzf input
 command! -bang -nargs=* Agg call fzf#vim#ag(<q-args>, {'options': "--delimiter : --nth 4.. --preview 'bat --paging never --wrap character --color always --style=\"numbers,grid,changes,header\" $(cut -d: -f1 <<< {}) | sed -n $(cut -d: -f2 <<< {}),\\$p | head -".&lines."'", 'bottom': '50%'}, <bang>0)
 
 command! -nargs=* Rg
@@ -1719,10 +1719,10 @@ command! -bang -nargs=* FZFFuncs call FZFFuncsFun()
 command! -bang -nargs=* FZFVars call FZFVarsFun()
 
 
-"give :History preview window
+" give :History preview window
 command! -bang -nargs=* HistoryFiles call fzf#vim#history({'options': fzfStrFinal})
 
-"give :Files preview window
+" give :Files preview window
 command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options': fzfStrFinal}))
 
 " complete all files on /
@@ -1814,7 +1814,7 @@ endif
 " enable vimtex completion options in YCM
 silent! autocmd VimEnter * let g:ycm_semantic_triggers.tex=g:vimtex#re#youcompleteme
 
-"disable python2 for neovim
+" disable python2 for neovim
 let g:loaded_python_provider = 0
 let g:vimtex_compiler_progname = 'nvr'
 
@@ -1850,7 +1850,7 @@ function! AutoHighlightToggle()
   endif
 endfunction
 
-"highlight on hover activated automatically
+" highlight on hover activated automatically
 augroup auto_highlight
     autocmd!
     autocmd CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
@@ -1862,7 +1862,7 @@ augroup auto_set_hls
 augroup end
 
 function! SetHLS()
-"only for first bufenter, required to activate the highlight on hover
+" only for first bufenter, required to activate the highlight on hover
     if !exists('g:hl_activated')
         let g:hl_activated = 1
         call feedkeys(":set hlsearch\<CR>")

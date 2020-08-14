@@ -5,12 +5,31 @@
 #### Master [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=master)](https://travis-ci.com/MenkeTechnologies/zpwr) Dev [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=dev)](https://travis-ci.com/MenkeTechnologies/zpwr) Version [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) Commits [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) Contributors [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 
-
 This project started out as my own version of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) repo and it then grew.
 
 It is an extremely powerful custom terminal environment built on top of [oh-my-zsh](http://github.com/robbyrussell/oh-my-zsh).
 
 There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
+
+# Full Installation Instructions
+
+```sh
+git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh
+```
+
+The installer will confirm what will be installed and overwritten before executing.
+
+Some interactivity is required near end of installer for postfix, wireshark and snort installs.
+
+Once you reach the oh-my-zsh prompt, type 
+```sh
+logout
+```
+or
+```sh
+exit
+```
+or type C-d (Control-d) to return to installer script.
 
 ## ZPWR Features
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
@@ -74,9 +93,10 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
 - zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
 - zpwr subcommands count `zpwr verbscount`
-- zpwr subcommands into fzf `zpwr verbs`
+- zpwr subcommands into fzf `zpwr verbs`, 240+ zpwr verbs
+- zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
-- centralized environment variables in ZPWR namespace to control functionality
+- 94+ centralized environment variables in ZPWR namespace to control functionality
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
 - centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - user specific ZPWR files in `~/.zpwr/local` git ignored
@@ -96,7 +116,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - neovim with 78 plugins and python3/node support
 - perl
 - bash
-- oh-my-zsh with 75 plugins of which 31 are custom
+- oh-my-zsh with 80 plugins of which 45 are custom
 - forked powerlevel9k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
@@ -145,6 +165,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 
 ## ZPWR Extras Not Installed
 - JetBrains .ideamvimrc
+- JetBrains plugin list
 - JetBrains settings JAR
 - JetBrains JVM Options idea.vmoptions
 - Spacemacs Config with 460+ packages in .spacemacs
@@ -153,26 +174,6 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - Alacritty Color Theme
 - macOS Terminal Color Theme
 - gtags from zpwr and .globalrc
-
-# Full Installation Instructions
-
-```sh
-git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh
-```
-
-The installer will confirm what will be installed and overwritten before executing.
-
-Some interactivity is required near end of installer for postfix, wireshark and snort installs.
-
-Once you reach the oh-my-zsh prompt, type 
-```sh
-logout
-```
-or
-```sh
-exit
-```
-or type C-d (Control-d) to return to installer script.
 
 ## Limited Install
 ```sh
@@ -294,7 +295,7 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 The relevant code is the [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) plugin for expansion at the second position.
 > ~/.oh-my-zsh/custom/plugins/zsh-expand/zsh-expand.plugin.zsh
 ```sh
-if echo "$firstword_partition" | command grep -qE '(sudo|zpwr|env)';then
+if printf -- "$ZPWR_VARS[firstword_partition]" | command grep -qsE $ZPWR_VARS[continueFirstPositionRegex];then
 ```
 
 ## Running script from vim in tmux right pane is supported for these languages
@@ -512,10 +513,10 @@ Replacing the lolcat into ponysay banner like so on startup will further increas
 ```sh
 export ZPWR_INTRO_BANNER=nopony
 ```
-Due to the sheer number of plugins and completions startup usually takes 2-4 seconds on faster machines but up to 10-12 secconds on slow machines.
+Due to the sheer number of plugins and completions startup usually takes 2-4 seconds on faster machines but up to 10-12 seconds on slow machines.
 
 ## Contributing
-I am looking for contributors especially for expanding the zunit tests.
+I am looking for contributors. Especially for documentation and expanding the tests.
 
 ## Warnings
 Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.

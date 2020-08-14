@@ -94,9 +94,9 @@ fi
 
 #{{{                    MARK:non ZPWR Exports
 #**************************************************************
-#map to hold global data between scripts
+# map to hold global data between scripts
 declare -A ZPWR_VARS
-#map to store each zpwr verb, key is the verbname, value is cmd=description
+# map to store each zpwr verb, key is the verbname, value is cmd=description
 declare -A ZPWR_VERBS
 source "$ZPWR_SCRIPTS/zpwr.zsh"
 
@@ -110,7 +110,7 @@ export HISTFILE="$HOME/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history"
 
 function exists(){
 
-    #alternative is command -v
+    # alternative is command -v
     type -- "$1" &>/dev/null || return 1 &&
     [[ $(type -- "$1" 2>/dev/null) != *"suffix alias"* ]]
 }
@@ -172,7 +172,6 @@ export ARCHFLAGS="-arch x86_64"
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
 
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
 
@@ -188,6 +187,7 @@ export MAGIC_ENTER_OTHER_COMMAND="clearList"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
+
 plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin
     fasd-simple gh_reveal zsh-travis
     zsh-z zsh-expand zsh-autopair
@@ -220,7 +220,7 @@ forgit_stash_show=fgss
 
 #{{{                    MARK:grc colorizer
 #**************************************************************
-#colors for common commands
+# colors for common commands
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 #}}}***********************************************************
 
@@ -257,7 +257,7 @@ if [[ ! -d $ZPWR_LOCAL ]]; then
 fi
 
 if [[ $ZPWR_PROFILING == true ]]; then
-    #profiling startup
+    # profiling startup
     zmodload zsh/zprof
 fi
 
@@ -294,7 +294,7 @@ fi
 
 for plug in ${plugins[@]}; do
     if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
-        #null glob - no error
+        # null glob - no error
         for dir in "$ZSH/custom/plugins/$plug/"*src(N); do
             if [[ -d "$dir" ]]; then
                 if [[ -z ${fpath[(r)$dir]} ]];then
@@ -303,7 +303,7 @@ for plug in ${plugins[@]}; do
                     else
                         fpath=($fpath $dir)
                     fi
-                    #echo "add $dir to $fpath" >> "$ZPWR_LOGFILE"
+                    # echo "add $dir to $fpath" >> "$ZPWR_LOGFILE"
                 fi
             fi
         done
@@ -327,7 +327,7 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
-    #determine if this terminal was started in IDE
+    # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
@@ -358,7 +358,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
     esac
 
 else
-    #unix
+    # unix
     :
 fi
 #}}}***********************************************************
@@ -394,18 +394,18 @@ if [[ $ZPWR_DEBUG == true ]]; then
     echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
 fi
 # You may need to manually set your language environment
-#has all aliases and functions common to bourne like shells
+# has all aliases and functions common to bourne like shells
 _alias_file="$ZPWR/.shell_aliases_functions.sh"
 test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$ZPWR_LOCAL/.common_aliases"
 #}}}***********************************************************
-#
+
 #{{{                    MARK:zdharma postconfig
 #**************************************************************
 path+=($ZCONVEY_REPO_DIR/cmds)
 #}}}***********************************************************
 
-#{{{                    MARK:Custom Fxns
+#{{{                    MARK:Custom Functions
 #**************************************************************
 function sub (){
 
@@ -2111,7 +2111,7 @@ function my-accept-line () {
     if [[ ${mywords[1]} == 'sudo' ]]; then
         cmd=${mywords[2]}
 
-        #sudo =iftop fails so remove =
+        # sudo =iftop fails so remove =
         cmd=${cmd#=}
         out="$(alias -- $cmd)"
         if [[ "$out" == *grc* ]]; then
@@ -2132,10 +2132,10 @@ function my-accept-line () {
             aliases="$(cat $ZPWR_LOCAL/.common_aliases)"
             line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
             if [[ -z $line ]];then
-                #fxn
+                # function
                 BUFFER="\\$mywords"
             else
-                #non global alias
+                # non global alias
                 print "$line" | grep -F "'" && \
                     BUFFER="${line:1:-1} $mywords[2,$]" ||
                     BUFFER="$line $mywords[2,$]"
@@ -2145,7 +2145,7 @@ function my-accept-line () {
 
     set +x
     zle .accept-line
-    #leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
+    # leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
     printf "\x1b[0m"
 }
 
@@ -2172,7 +2172,7 @@ function precmd(){
         :
         #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
     fi
-    #leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
+    # leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
     printf "\x1b[0m"
     #lose normal mode
     if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
@@ -2204,7 +2204,7 @@ bindkey -M viins . rationalize-dot
 bindkey -M listscroll q send-break
 bindkey -M listscroll f complete-word
 
-#bbind shift tab to reverse menucomplete, opposite of tab
+# bind shift tab to reverse menucomplete, opposite of tab
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
@@ -2236,13 +2236,13 @@ else
     fi
 fi
 
-#bind function arrow keys in menuselect mode
+# bind function arrow keys in menuselect mode
 bindkey -M menuselect '\e[5~' vi-backward-word
 bindkey -M menuselect '\e[6~' vi-forward-word
 bindkey -M menuselect '\e[1~' vi-beginning-of-line
 bindkey -M menuselect '\e[4~' vi-end-of-line
 
-# like helm
+# incremental fuzzy filter on keypress like emacs helm and fzf
 
 if [[ $ZPWR_INTERATIVE_MENU_SELECT == true ]]; then
     bindkey -M menuselect '^I' vi-forward-char
@@ -2262,10 +2262,10 @@ bindkey -M menuselect '^N' vi-forward-word
 
 bindkey -M menuselect '^H' vi-backward-char
 bindkey -M menuselect '^L' vi-forward-char
-#search through options
+# search through options
 bindkey -M menuselect '?' history-incremental-search-backward
 
-#for interactive menuselect
+# for interactive menuselect
 bindkey -M menuselect '^V' vi-insert
 
 function expandAliasAccept(){
@@ -2426,7 +2426,7 @@ setopt transient_rprompt
 # perform implicit tees or cats when multiple redirections are attempted
 setopt multios
 
-#dot files included in regular globs
+# dot files included in regular globs
 setopt glob_dots
 
 # no glob in all globs then error
@@ -2441,10 +2441,10 @@ setopt no_sh_null_cmd
 # allow unquoted globs to pass through
 setopt no_bad_pattern
 
-#globs sorted numerically
+# globs sorted numerically
 setopt numeric_glob_sort
 
-#global substitution is case insensitive
+# global substitution is case insensitive
 setopt nocaseglob
 
 # filename completion after =
@@ -2458,16 +2458,16 @@ fi
 #array expandsion include prefix
 setopt rc_expand_param
 
-#display octal and hex like C
+# display octal and hex like C
 setopt cbases
 
-#any failing command in pipeline fails entire pipeline
+# any failing command in pipeline fails entire pipeline
 setopt pipefail 2>/dev/null
 
-#search PATH for zsh <script>
+# search PATH for zsh <script>
 setopt pathscript
 
-#more compact menu completion
+# more compact menu completion
 setopt list_packed
 
 # increase max size for directory stack
@@ -2497,7 +2497,7 @@ for dump in ~/.zcompdump*(N.mh+168); do
 done
 
 if ! (( $+_comps[z] )); then
-    #compsys completion for z was not found when it should have been
+    # compsys completion for z was not found when it should have been
     logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
     logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
     lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
@@ -2510,7 +2510,7 @@ else
     logg "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
 fi
 
-#dont include pwd after ../
+# do not include pwd after ../
 zstyle ':completion:*' ignore-parents parent pwd
 
 # remove slash if argument is a directory
@@ -2519,7 +2519,7 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
-#separate files and dirs in _files completion
+# separate files and dirs in _files completion
 #zstyle ':completion:*' file-patterns '%p(^-/):globbed-files' '^(-/):directories' '*:all-files'
 
 if [[ $ZPWR_COLORS == true ]]; then
@@ -2560,7 +2560,7 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 # offer indexes before parameters in subscripts
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
-#using tag name as group name so ordering the groups by tag name here
+# using tag name as group name so ordering the groups by tag name here
 zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tmux contexts last-ten
 
 zstyle ':completion:*:*:z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
@@ -2581,7 +2581,7 @@ zstyle ':completion:*:correct:*' insert-unambiguous true
 zstyle ':completion:*' matcher-list '' \
     'm:{a-z\-}={A-Z\_}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' 'r:|?=** m:{a-z\-}={A-Z\_}'
 
-#parse out host aliases and hostnames from ssh config
+# parse out host aliases and hostnames from ssh config
 if [[ -r "$HOME/.ssh/config" ]]; then
     h=(${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
     h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
@@ -2595,7 +2595,7 @@ fi
 if [[ $ZPWR_COLORS == true ]]; then
 
     zstyle ':completion:*' list-colors 'ma=37;1;4;44'
-    #main option for menu selection colors
+    # main option for menu selection colors
     zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
     zstyle ':completion:*:executables' list-colors '=(#b)(*)=1;30=1;37;44'
     zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=1;32;45'
@@ -2608,7 +2608,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
     zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
 
-    #git commit colors
+    # git commit colors
     zstyle ':completion:*:*:commits' list-colors '=(#b)(*)='$ZPWR_COMMIT_STYLE
     zstyle ':completion:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
     zstyle ':completion:*:commit-tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
@@ -2631,7 +2631,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:*(git|git-checkout):*:files' list-colors '=(#b)(*)=1;30=1;32;43'
     zstyle ':completion:*:prefixes' list-colors '=(#b)(*)=1;30=1;37;43'
 
-     #separate colors for sections of manual pages
+     # separate colors for sections of manual pages
     zstyle ':completion:*:manuals.1' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:manuals.2' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:manuals.3' list-colors '=(#b)(*)=1;30=1;37;43'
@@ -2646,12 +2646,12 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:manuals.1p' list-colors '=(#b)(*)=1;30=37;46'
     zstyle ':completion:*:manuals.3p' list-colors '=(#b)(*)=1;30=37;46'
 
-    #pgrep and kill
+    # pgrep and kill
     zstyle ':completion:*:processes' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:processes-names' list-colors '=(#b)(*)=1;30=1;37;43'
     zstyle ':completion:*:pname' list-colors '=(#b)(*)=1;30=1;37;43'
 
-   #separate colors for git commans types
+   # separate colors for git commans types
     zstyle ':completion:*:main-porcelain-commands' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:user-commands' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:third-party-commands' list-colors '=(#b)(*)=1;30=1;37;43'
@@ -2672,7 +2672,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:*:*:*:vtags' list-colors '=(#b)(*)=1;37;45'
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        #homebrew tags
+        # homebrew tags
         zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
         zstyle ':completion:*:formulae' list-colors '=(#b)(*)=1;30=1;36;44'
         zstyle ':completion:*:*:brew-cask:*:list' list-colors '=(#b)(*)=1;30=1;36;44'
@@ -2969,10 +2969,10 @@ function noPonyBanner(){
     eval "$ZPWR_DEFAULT_BANNER"
 }
 
-#go to desktop if not root
+# go to desktop if not root
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     if [[ "$UID" != "0" ]]; then
-         #builtin cd "$D" && clear
+         # builtin cd "$D" && clear
         clear
         if type figlet > /dev/null 2>&1; then
             printf "\e[1m"
@@ -2991,7 +2991,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         printf "\e[0m"
         listNoClear
     else
-        #root on unix
+        # root on unix
         clearList
     fi
 else
@@ -3049,28 +3049,28 @@ else
         fi
         listNoClear
     else
-        #root on linux
+        # root on linux
         clearList
     fi
 fi
 
-#stderr colorization filter
-#color2
+# stderr colorization filter
+# color2
 
-#set right prompt string during continuation
+# set right prompt string during continuation
 RPS2='+%N:%i:%^'
 # zsh xtrace prompt
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
-#change OMZ history size in memory
+# change OMZ history size in memory
 export HISTSIZE=999999999
 export SAVEHIST=$HISTSIZE
-#change OMZ history file size
+# change OMZ history file size
 
 #}}}***********************************************************
 
 #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
 #**************************************************************
-#if this is a mac or linux
+# if this is a mac or linux
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
         : ~HOMEBREW_HOME_FORMULAE
@@ -3078,7 +3078,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
 fi
 
 if [[ -d "$ZSH" ]]; then
-    #oh-my-zsh sets this
+    # oh-my-zsh sets this
     : ~ZSH
 fi
 
@@ -3091,14 +3091,14 @@ if [[ -d "$ZPWR_SCRIPTS" ]]; then
 fi
 
 if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-    #shorten to prevail over absolute path in print -p %~
-    #must be <= .zpwr/temp
+    # shorten to prevail over absolute path in print -p %~
+    # must be <= .zpwr/temp
     hash -d ZPWR_TEMP="$ZPWR_HIDDEN_DIR_TEMP"
 fi
 
 if [[ -d "$ZPWR_LOCAL" ]]; then
-    #shorten to prevail over absolute path in print -p %~
-    #must be <= .zpwr
+    # shorten to prevail over absolute path in print -p %~
+    # must be <= .zpwr
     hash -d ZPWR="$ZPWR_LOCAL"
 fi
 
@@ -3122,8 +3122,8 @@ if [[ -d "$PYEXECUTABLES" ]]; then
 fi
 
 if [[ -d "$TMUX_HOME" ]]; then
-    #shorten to prevail over absolute path in print -p %~
-    #must be <= .tmux
+    # shorten to prevail over absolute path in print -p %~
+    # must be <= .tmux
     hash -d TMUXH="$TMUX_HOME"
 fi
 
@@ -3163,7 +3163,7 @@ source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
 
 #{{{                    MARK:ColorTest
 #**************************************************************
-#print 2d array of colors
+# print 2d array of colors
 function colortest(){
 
     local backgroundColor
@@ -3214,7 +3214,7 @@ function 256colors(){
 
 #{{{                    MARK:FZF
 #**************************************************************
-#default value for pygmentize theme
+# default value for pygmentize theme
 export PYGMENTIZE_COLOR="emacs"
 export ZPWR_COLORIZER=bat
 
@@ -3414,8 +3414,9 @@ function _fzf_complete_clearList() {
     )
 }
 
-#git diff ;<tab>
-#git diff SHA-1 ;<tab>
+# usage
+# git diff ;<tab>
+# git diff SHA-1 ;<tab>
 function _fzf_complete_git() {
 
     if ! isGitDir; then
@@ -3493,7 +3494,7 @@ function _cl(){
         'parameters:parameters:_parameters' \
         'files:filenames:_path_files -g "* .*"' \
         'commands:commands:compadd -Qk commands'
-        #need to escape [ for g[ in PATH, compadd -Q does this
+        # need to escape [ for g[ in PATH, compadd -Q does this
 }
 
 function _p(){
@@ -3717,7 +3718,7 @@ function _r(){
 
 # list of completers to use
 zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
-#zstyle ':completion:*:*:*:*:functions' ignored-patterns
+# zstyle ':completion:*:*:*:*:functions' ignored-patterns
 
 compdef _cl clearList
 compdef _git-clone gcl
@@ -3741,8 +3742,8 @@ fi
 exists _kubectl && compdef _kubectl kubectl
 exists _express && compdef _express express
 
-#redefine global zsh completion function called at first parameter
-#adding global aliases and files
+# redefine global zsh completion function called at first parameter
+# adding global aliases and files
 function _command_names(){
 
     # The option `-e' if given as the first argument says that we should
@@ -4372,7 +4373,7 @@ alias mmv='noglob zmv -W'
 
 exists thefuck && eval $(thefuck --alias)
 
-#force alias z to zshz not zypper on suse
+# force alias z to zshz not zypper on suse
 alias z="$zcmd 2>&1"
 autoload zargs
 ###}}}***********************************************************
@@ -4380,8 +4381,10 @@ autoload zargs
 #{{{                    MARK:Groovy
 #**************************************************************
 unset GROOVY_HOME # when set this messes up classpath
+###}}}***********************************************************
 
-# override plugin def
+#{{{                    MARK:Override plugin defs
+#**************************************************************
 function magic-enter () {
 
   # If commands are not already set, use the defaults
@@ -4421,7 +4424,7 @@ zc-rename $ZPWR_CONVEY_NAME &>/dev/null
 
 #{{{                    MARK:Finish
 #**************************************************************
-#source .tokens.sh to override with user functions
+# source .tokens.sh to override with user functions
 test -f "$ZPWR_TOKEN_POST" &&
     source "$ZPWR_TOKEN_POST" ||
     touch "$ZPWR_TOKEN_POST"

@@ -180,7 +180,7 @@ fi
 
 #{{{                          MARK:ALIASES
 #**********************************************************************
-#portable aliases
+# portable aliases
 exists c.pl && {
     alias pp='c.pl'
     alias ppp='c.pl *'
@@ -258,7 +258,7 @@ alias zpt="builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml
 alias deleteTab="sed '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper="tr 'a-z' 'A-Z'"
-#over aliases
+# over aliases
 if pwd | command grep -sq --color=always / 2>/dev/null; then
     alias grep="grep --color=always"
 fi
@@ -294,7 +294,7 @@ alias sc='sudo -E systemctl'
 #alias df='grc --colour=on -c "$HOME/conf.df" df'
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    #Darwin specific aliases
+    # Darwin/macOS specific aliases
     alias p_refresh="pio -f -c clion init --ide clion "
     alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
     alias cpu="top -o cpu"
@@ -304,8 +304,8 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias bsaver="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
     alias pkill="pkill -iIl"
     alias q="qlmanage -p &>/dev/null"
-    #keep remote tty sessions alive by stopping sleep
-    #sudo pmset -c ttyskeepawake 1
+    # keep remote tty sessions alive by stopping sleep
+    # sudo pmset -c ttyskeepawake 1
     alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
     alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
     alias rtsync="$ZPWR_SCRIPTS_MAC/rsyncr.sh"
@@ -344,7 +344,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         alias apz="brew update && brew outdated && brew upgrade && brew cleanup; brew cu -ay; u8"
     }
 else
-    #Linux or Unix
+    # Linux or Unix
     alias ip="grc -c $HOME/conf.ifconfig ip"
     if exists exa; then
         alias lr="$ZPWR_EXA_COMMAND -R"
@@ -1024,11 +1024,11 @@ function clearList() {
         for arg in "$@"; do
             FOUND=false
             prettyPrint "/--------------- $arg --------------/"
-            #perl boxPrint.pl "$arg"
+            # perl boxPrint.pl "$arg"
             echo
             if exists $arg; then
                 FOUND=true
-                #exe matching
+                # exe matching
                 while read loc;do
                     lf="$(echo $loc | cut -d' ' -f3-10)"
                     if [[ $(type "$arg") == "$loc" ]]; then
@@ -1083,7 +1083,7 @@ function clearList() {
                     fi
                 done < <(type -a "$arg" 2>/dev/null | sort | uniq)
             fi
-            #path matching, not exe
+            # path matching, not exe
             if eval "$ls_command -d -- \"$arg\"" 2>/dev/null; then
                 FOUND=true
                 prettyPrint "$arg"
@@ -1093,7 +1093,7 @@ function clearList() {
                 du -sh -- "$arg"
                 prettyPrint "STATS:"
                 stat -- "$arg"
-                #for readibility
+                # for readibility
                 echo
                 echo
             else
@@ -1105,7 +1105,7 @@ function clearList() {
                     print -rl -- ${(tP)arg}
                     prettyPrint "VALUE:"
                     echo $out
-                    #for readibility
+                    # for readibility
                     echo
                     echo
                 else
@@ -1116,7 +1116,7 @@ function clearList() {
                         print -rl -- ${(tP)arg}
                         prettyPrint "ENV:"
                         echo $out2
-                        #for readibility
+                        # for readibility
                         echo
                         echo
                     fi
@@ -1247,9 +1247,9 @@ function search(){
 
 function cd(){
 
-    #builtin is necessary here to distinguish
-    #bt function name and builtin cd command
-    #don't want to recursively call this function
+    # builtin is necessary here to distinguish
+    # bt function name and builtin cd command
+    # don't want to recursively call this function
     builtin cd "$@"
     if [[ $ZPWR_CD_AUTO_LS == true ]]; then
         clearList
@@ -2443,8 +2443,8 @@ function cCommon(){
                         bash fzfPreviewOptsCtrlT.sh |
                             sed "s@{}@$file@" | zsh
                     else
-                    #preserve the PATH env var
-                    #with /etc/sudoers having Defaults secure_path
+                    # preserve the PATH env var
+                    # with /etc/sudoers having Defaults secure_path
                         bash fzfPreviewOptsCtrlT.sh |
                             sed "s@{}@$file@" |
                             sudo -E env "PATH=$PATH" zsh
