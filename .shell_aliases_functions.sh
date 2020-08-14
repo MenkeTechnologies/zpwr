@@ -760,6 +760,7 @@ function s(){
     else
         cmd="$ZPWR_OPEN_CMD"
     fi
+
     if type -a s | command grep -sqv function; then
         sec_cmd=s
     else
@@ -769,13 +770,13 @@ function s(){
         if [[ $sec_cmd == s ]]; then
             {
                 test -z "$1" && ${=cmd} . || command s "$@"
-            } >/dev/null 2>&1
+            }
         else
             {
             out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             url="https://google.com/search?q=$out"
                 ${=sec_cmd} $url
-            } >/dev/null 2>&1
+            }
         fi
     else
         if [[ $sec_cmd == s ]]; then
