@@ -213,10 +213,6 @@ if exists emacs; then
     alias me='source em-server.sh'
 fi
 
-if exists docker; then
-    alias dk=docker
-fi
-
 test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"

@@ -197,10 +197,10 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin
     history-substring-search ruby gem rake yarn ng
     coffee node npm perl cpanm git github gradle ant mvn
     scala lein spring django pip pyenv python golang man nmap
-    postgres redis-cli colorize sudo rsync docker
+    postgres redis-cli colorize sudo rsync
     docker-compose
     vundle rust rustup cargo meteor gulp grunt glassfish tig fd
-    zsh-very-colorful-manuals zsh-git-acp
+    zsh-very-colorful-manuals zsh-docker-aliases zsh-git-acp
     tmux magic-enter zconvey zsh-unique-id zzcomplete zui zbrowse zsh-better-npm-completion)
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
@@ -309,13 +309,15 @@ for plug in ${plugins[@]}; do
         done
     fi
 done
-
+if exists docker; then
+    plugins+=(docker zsh-docker-aliases)
+fi
 
 exists subl && plugins+=(sublime)
 
 exists rails && plugins+=(rails)
 
-exists kubectl && plugins+=(zsh-kubectl-aliases zsh-kubectl-completion)
+exists kubectl && plugins+=(kubectl-aliases zsh-kubectl-completion)
 
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
