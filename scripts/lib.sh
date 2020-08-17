@@ -205,6 +205,31 @@ function goInstallerOutputDir(){
 
 function installGitHubPluginsFromFile(){
 
+    function usage ()
+    {
+        echo "Usage :  $0 [options] [--]
+
+        Options:
+        -h|help       Display this message
+        -f|force)     overwrite dest"
+
+    }
+
+    while getopts ":hf" opt;  do
+      case $opt in
+
+        h|help) usage; exit 0   ;;
+
+        f|force) forceFlag=true ;;
+
+        * ) printf "\n  Option does not exist : $OPTARG\n"
+            usage; exit 1   ;;
+
+        esac
+    done
+
+    shift $((OPTIND-1))
+
     if [[ -z "$1" ]]; then
         loggErr "need an repo file"
         return 1
@@ -214,13 +239,19 @@ function installGitHubPluginsFromFile(){
 
     file="$1"
 
-    while read repo; do
-        installGitHubPlugin "$repo"
-    done < "$file"
+    if [[ $forceFlag == true ]]; then
+        while read repo; do
+            overwriteGitHubPlugin "$repo"
+        done < "$file"
+    else
+        while read repo; do
+            installGitHubPlugin "$repo"
+        done < "$file"
+    fi
 
 }
 
-function installGitHubPlugin(){
+function overwriteGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
         loggErr "need an repo"
@@ -239,6 +270,23 @@ function installGitHubPlugin(){
     fi
 
     test -d "$repo" || git clone "https://github.com/$1.git"
+}
+
+function installGitHubPlugin(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "need an repo"
+        return 1
+    fi
+
+    local user repo
+
+    repo=${1#*/}
+    user=${1%/*}
+
+    echo "Installing plugin $user/$repo."
+
+    git clone "https://github.com/$1.git"
 }
 
 function update(){
