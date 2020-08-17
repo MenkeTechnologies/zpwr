@@ -164,7 +164,6 @@ export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"
 # SQL temp files for use with learning collection
 export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
 # remove all files in these dirs, modify this in your tokens file
-export -T ZPWR_DIRS_CLEAN zpwrDirsClean
 # common dirs
 export ZPWR_D="$HOME/Desktop"
 export ZPWR_DOC="$HOME/Documents"
@@ -174,3 +173,41 @@ export ZPWR_BLUE="\x1b[37;44m"
 export ZPWR_RED="\x1b[31m"
 export ZPWR_RESET="\x1b[0m"
 #}}}***********************************************************
+
+#{{{                    MARK:Functions for conditional exports
+#**************************************************************
+
+function isZsh(){
+
+    if [[ $(command ps -o command -p $$) =~ '^zsh' ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if isZsh; then
+
+    if ! type -- exists>/dev/null 2>&1; then
+
+        function exists(){
+            #alternative is command -v
+            type -- "$1" &>/dev/null || return 1 &&
+            [[ $(type -- "$1" 2>/dev/null) != *"suffix alias"* ]]
+        }
+    fi
+else
+    function exists(){
+
+        #alternative is command -v
+        type -- "$1" >/dev/null 2>&1
+    }
+fi
+
+if isZsh; then
+    declare -T ZPWR_DIRS_CLEAN zpwrDirsClean
+fi
+
+export ZPWR_DIRS_CLEAN
+#}}}***********************************************************
+

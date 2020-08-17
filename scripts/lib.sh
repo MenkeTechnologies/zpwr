@@ -14,12 +14,14 @@ unset CDPATH
 
 if test -z "$ZPWR";then
     export ZPWR="$HOME/.zpwr"
-    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-    source "$ZPWR_ENV_FILE" || {
-        echo "where is $ZPWR_ENV_FILE" >&2
-        return 1
-    }
 fi
+
+test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+
+source "$ZPWR_ENV_FILE" || {
+    echo "where is $ZPWR_ENV_FILE" >&2
+    return 1
+}
 #}}}***********************************************************
 
 #{{{                    MARK:installer lib fns
@@ -225,37 +227,19 @@ function installGitHubPlugin(){
         return 1
     fi
 
+    local user repo
 
-    echo "Installing plugin $1."
-    git clone "https://github.com/$1.git"
-}
+    repo=${1#*/}
+    user=${1%/*}
 
-function isZsh(){
-
-    if [[ $(command ps -p $$) =~ zsh ]]; then
-        return 0
-    else
-        return 1
+    echo "Installing plugin $user/$repo."
+    if [[ -d "$repo" ]]; then
+        prettyPrint "rm -rf $repo"
+        rm -rf "$repo"
     fi
+
+    test -d "$repo" || git clone "https://github.com/$1.git"
 }
-
-if isZsh; then
-
-    if ! type -- exists>/dev/null 2>&1; then
-
-        function exists(){
-            #alternative is command -v
-            type -- "$1" &>/dev/null || return 1 &&
-            [[ $(type -- "$1" 2>/dev/null) != *"suffix alias"* ]]
-        }
-    fi
-else
-    function exists(){
-
-        #alternative is command -v
-        type -- "$1" >/dev/null 2>&1
-    }
-fi
 
 function update(){
 
@@ -477,5 +461,6 @@ function gitRepoUpdater() {
     fi
 }
 
-
 #}}}***********************************************************
+
+
