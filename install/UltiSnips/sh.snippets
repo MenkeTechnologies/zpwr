@@ -102,3 +102,40 @@ if [[ ! ${1:condition} ]]; then
     $2
 fi
 endsnippet
+
+snippet getopt
+local scriptVersion
+
+script="${1:version}"
+
+function usage() {
+    echo "Usage :  $${0:0} [options] [--]
+
+    Options:
+    -h|help       Display this message
+    -v|version    Display script version"
+
+}
+
+while getopts ":hv$2" opt; do
+    case $opt in
+
+    h|help)
+        usage
+        exit 0
+        ;;
+
+    v|version)
+        echo "$${0:0} -- Version $__ScriptVersion"
+        exit 0
+        ;;$3
+    *)
+        printf "\n  Option does not exist : $OPTARG\n"
+        usage
+        exit 1
+        ;;
+    esac
+done
+
+shift $(($OPTIND-1))
+endsnippet
