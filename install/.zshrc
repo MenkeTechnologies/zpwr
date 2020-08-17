@@ -198,7 +198,6 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin
     coffee node npm perl cpanm git github gradle ant mvn
     scala lein spring django pip pyenv python golang man nmap
     postgres redis-cli colorize sudo rsync
-    docker-compose
     vundle rust rustup cargo meteor gulp grunt glassfish tig fd
     zsh-very-colorful-manuals zsh-docker-aliases zsh-git-acp
     tmux magic-enter zconvey zsh-unique-id zzcomplete zui zbrowse zsh-better-npm-completion)
@@ -292,6 +291,24 @@ if [[ $ZPWR_DEBUG == true ]]; then
     echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
 fi
 
+if exists docker; then
+    plugins+=(docker zsh-docker-aliases)
+fi
+
+if exists docker-compose; then
+    plugins+=(docker-compose)
+fi
+
+exists kubectl && plugins+=(kubectl-aliases zsh-kubectl-completion)
+
+exists subl && plugins+=(sublime)
+
+exists rails && plugins+=(rails)
+
+if [[ $ZPWR_LEARN != false ]]; then
+    plugins+=(zsh-learn)
+fi
+
 for plug in ${plugins[@]}; do
     if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
         # null glob - no error
@@ -310,21 +327,7 @@ for plug in ${plugins[@]}; do
     fi
 done
 
-if exists docker; then
-    plugins+=(docker zsh-docker-aliases)
-fi
-
-exists kubectl && plugins+=(kubectl-aliases zsh-kubectl-completion)
-
-exists subl && plugins+=(sublime)
-
-exists rails && plugins+=(rails)
-
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
-
-if [[ $ZPWR_LEARN != false ]]; then
-    plugins+=(zsh-learn)
-fi
 
 ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 
