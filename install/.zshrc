@@ -309,15 +309,16 @@ for plug in ${plugins[@]}; do
         done
     fi
 done
+
 if exists docker; then
     plugins+=(docker zsh-docker-aliases)
 fi
 
+exists kubectl && plugins+=(kubectl-aliases zsh-kubectl-completion)
+
 exists subl && plugins+=(sublime)
 
 exists rails && plugins+=(rails)
-
-exists kubectl && plugins+=(kubectl-aliases zsh-kubectl-completion)
 
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
