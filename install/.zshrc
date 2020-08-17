@@ -4291,13 +4291,16 @@ function zpwrRestoreHistfile(){
 }
 
 function zpwrCleanAll() {
+
     clearCache
     clearTemp
     zpwrClean
 }
 
 function zpwrClean() {
+
     local dir files
+
     for dir in ${ZPWR_DIRS_CLEAN[@]} ; do
 
         files=("$dir"/*(N))
