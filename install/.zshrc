@@ -4289,6 +4289,26 @@ function zpwrRestoreHistfile(){
         builtin fc -R "$HISTFILE"
     )
 }
+
+function zpwrCleanAll() {
+    clearCache
+    clearTemp
+    zpwrClean
+}
+
+function zpwrClean() {
+    local dir files
+    for dir in ${ZPWR_DIRS_CLEAN[@]} ; do
+
+        files=("$dir"/*(N))
+
+        if (( $#files )); then
+            prettyPrint sudo rm -rfv "$dir"/*(N)
+            sudo rm -rfv "$dir"/*(N)
+        fi
+    done
+}
+
 #}}}***********************************************************
 
 #{{{                    MARK:Suffix aliases

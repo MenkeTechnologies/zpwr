@@ -28,6 +28,8 @@ ZPWR_VERBS[catrecentfviminfo]='recentfThenNvim=cat recentf then custom vim info 
 ZPWR_VERBS[catnviminforecentf]='nvimThenRecentf=cat custom vim info file then recentf'
 ZPWR_VERBS[cd]='f=cd to directory arg'
 ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
+ZPWR_VERBS[clean]='zpwrClean=clear all $ZPWR_DIRS_CLEAN'
+ZPWR_VERBS[cleanall]='zpwrCleanAll=clear all $ZPWR_DIRS_CLEAN, temp and cache'
 ZPWR_VERBS[clearcache]='clearCache=clear all zpwr cache files'
 ZPWR_VERBS[cleartemp]='clearTemp=clear all zpwr temp files'
 ZPWR_VERBS[clearls]='clearList=clear and list the files with no args'
