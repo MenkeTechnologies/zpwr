@@ -280,7 +280,11 @@ fi
 if [[ -d "$FORKED_DIR" ]]; then
     alias fp="cd $FORKED_DIR"
 fi
+
 alias k="pkill"
+if exists kubectl; then
+    alias k8=kubectl
+fi
 alias ka="killall"
 alias sin="./configure && make && sudo make install"
 alias curl='curl -fsSL'
