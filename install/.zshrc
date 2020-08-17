@@ -4301,7 +4301,12 @@ function zpwrClean() {
 
     local dir files
 
-    for dir in ${ZPWR_DIRS_CLEAN[@]} ; do
+    if ! (( $#zpwrDirsClean )); then
+        loggErr "zpwrDirsClean is empty."
+        return 1
+    fi
+
+    for dir in ${zpwrDirsClean[@]} ; do
 
         files=("$dir"/*(N))
 

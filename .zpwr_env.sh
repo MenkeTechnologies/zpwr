@@ -164,7 +164,7 @@ export ZPWR_TEMPFILE4="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER"
 # SQL temp files for use with learning collection
 export ZPWR_TEMPFILE_SQL="$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql"
 # remove all files in these dirs, modify this in your tokens file
-export ZPWR_DIRS_CLEAN=()
+export -T ZPWR_DIRS_CLEAN zpwrDirsClean
 # common dirs
 export ZPWR_D="$HOME/Desktop"
 export ZPWR_DOC="$HOME/Documents"
