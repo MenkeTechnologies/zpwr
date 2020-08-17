@@ -4292,8 +4292,9 @@ function zpwrRestoreHistfile(){
 
 function zpwrCleanAll() {
 
+    prettyPrint "clearCache"
     clearCache
-    clearTemp
+    prettyPrint "clear $zpwrDirsClean"
     zpwrClean
 }
 
