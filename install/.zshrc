@@ -201,7 +201,7 @@ plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin
     docker-compose
     vundle rust rustup cargo meteor gulp grunt glassfish tig fd
     zsh-very-colorful-manuals zsh-git-acp
-    tmux magic-enter zconvey zsh-unique-id zzcomplete zui zbrowse)
+    tmux magic-enter zconvey zsh-unique-id zzcomplete zui zbrowse zsh-better-npm-completion)
 
 source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
 #}}}***********************************************************
@@ -2679,6 +2679,9 @@ if [[ $ZPWR_COLORS == true ]]; then
         zstyle ':completion:*:common-commands' list-colors '=(#b)(*)=1;30=1;37;45'
         zstyle ':completion:*:all-commands' list-colors '=(#b)(*)=1;30=1;37;42'
     fi
+
+    zstyle ':completion:*:npm-search' list-colors '=(#b)(*)=1;30=1;36;44'
+    zstyle ':completion:*:npm-cache' list-colors '=(#b)(*)=1;30=1;37;46'
 
     #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
     zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
