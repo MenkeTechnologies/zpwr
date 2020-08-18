@@ -18,7 +18,7 @@
 # https://github.com/MenkeTechnologies
 #
 
-#{{{                    MARK:Global Fxn
+#{{{                    MARK:Import env and global fn
 #**************************************************************
 
 if ! type -- "exists" >/dev/null 2>&1;then
@@ -34,7 +34,6 @@ source "$ZPWR_SCRIPTS/crossOSCommands.sh" || {
     echo "where is $ZPWR_SCRIPTS/crossOSCommands.sh" >&2
     return 1
 }
-
 
 
 if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
