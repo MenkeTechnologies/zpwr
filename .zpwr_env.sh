@@ -179,7 +179,7 @@ export ZPWR_RESET="\x1b[0m"
 
 function isZsh(){
 
-    if [[ $(command ps -o command -p $$) =~ '^zsh' ]]; then
+    if [[ $(command ps -o command= -p $$) =~ '^-?zsh' ]]; then
         return 0
     else
         return 1
