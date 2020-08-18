@@ -7,25 +7,34 @@
 #####   Notes: 
 #}}}***********************************************************
 
-#{{{                    MARK:sanity
-#**************************************************************
-# do not want any surprises when relative cd to other dirs
-unset CDPATH
-
-if test -z "$ZPWR";then
-    export ZPWR="$HOME/.zpwr"
-fi
-
-test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-
-source "$ZPWR_ENV_FILE" || {
-    echo "where is $ZPWR_ENV_FILE" >&2
-    return 1
-}
-#}}}***********************************************************
-
 #{{{                    MARK:installer lib fns
 #**************************************************************
+function isZsh(){
+
+    if [[ $(command ps -o command= -p $$) =~ '^-?zsh' ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+if isZsh; then
+
+    if ! type -- exists>/dev/null 2>&1; then
+
+        function exists(){
+            #alternative is command -v
+            type -- "$1" &>/dev/null || return 1 &&
+            [[ $(type -- "$1" 2>/dev/null) != *"suffix alias"* ]]
+        }
+    fi
+else
+    function exists(){
+
+        #alternative is command -v
+        type -- "$1" >/dev/null 2>&1
+    }
+fi
 
 function loggNotGit() {
 

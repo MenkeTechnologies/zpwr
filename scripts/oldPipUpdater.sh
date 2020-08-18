@@ -7,10 +7,15 @@
 ##### Notes:
 #}}}***********************************************************
 
-source "$ZPWR_SCRIPTS/lib.sh" || {
-    echo "cannot access lib.sh" >&2
-    exit 1
-}
+
+if ! type -- "exists" >/dev/null 2>&1;then
+    test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+    source "$ZPWR_ENV_FILE" || {
+        echo "cannot access $ZPWR_ENV_FILE" >&2
+        exit 1
+    }
+fi
 
 if exists python2;then
     outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')

@@ -16,13 +16,21 @@
 # see README.md
 # the base dir for zpwr configs
 export ZPWR="$HOME/.zpwr"
+# this file
+export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+# local file ignored by git
 export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_HIDDEN_DIR="$ZPWR/local"
+# private tokens file sourced before 
 export ZPWR_TOKEN_PRE="$ZPWR_LOCAL/.tokens.sh"
+# private tokens file sourced after
 export ZPWR_TOKEN_POST="$ZPWR_LOCAL/.tokens-post.sh"
 export ZPWR_TEST="$ZPWR/tests"
-export ZPWR_HIDDEN_DIR="$ZPWR/local"
+# zpwr install files
 export ZPWR_INSTALL="$ZPWR/install"
+# zpwr tmux config files
 export ZPWR_TMUX="$ZPWR/.tmux"
+# zpwr tmux git ignored files
 export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
 # the base dir for zpwr temp
 export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
@@ -101,7 +109,9 @@ export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"
 # the location of associated interpreted scripts
 export ZPWR_SCRIPTS="$ZPWR/scripts"
 # the location of macOS only associated interpreted scripts
-export ZPWR_SCRIPTS_MAC="$ZPWR/scripts/macOnly"
+export ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
+# the location of zpwr lib file
+export ZPWR_LIB="$ZPWR_SCRIPTS/lib.sh"
 # the tmux prefix on mac
 export ZPWR_TMUX_PREFIX_MAC='C-a'
 # the tmux prefix on linux
@@ -174,35 +184,16 @@ export ZPWR_RED="\x1b[31m"
 export ZPWR_RESET="\x1b[0m"
 #}}}***********************************************************
 
-#{{{                    MARK:Functions for conditional exports
+#{{{                    MARK:source lib file
 #**************************************************************
+# do not want any surprises when relative cd to other dirs
+unset CDPATH
 
-function isZsh(){
-
-    if [[ $(command ps -o command= -p $$) =~ '^-?zsh' ]]; then
-        return 0
-    else
-        return 1
-    fi
+source "$ZPWR_LIB" || {
+    echo "where is $ZPWR_LIB" >&2
+    return 1
 }
-
-if isZsh; then
-
-    if ! type -- exists>/dev/null 2>&1; then
-
-        function exists(){
-            #alternative is command -v
-            type -- "$1" &>/dev/null || return 1 &&
-            [[ $(type -- "$1" 2>/dev/null) != *"suffix alias"* ]]
-        }
-    fi
-else
-    function exists(){
-
-        #alternative is command -v
-        type -- "$1" >/dev/null 2>&1
-    }
-fi
+#}}}***********************************************************
 
 if isZsh; then
     declare -T ZPWR_DIRS_CLEAN zpwrDirsClean
