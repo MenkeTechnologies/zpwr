@@ -2789,7 +2789,7 @@ function regenAllGitRepos(){
 
     if exists fd; then
         prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from fd /"
-        sudo fd '\.git$' / --type d --absolute-path --color=never --threads=8 --hidden --no-ignore | perl -ne 'print if m{/.git$}' |
+        sudo -E "PATH=$PATH" env fd '\.git$' / --type d --absolute-path --color=never --threads=8 --hidden --no-ignore | perl -ne 'print if m{/.git$}' |
         tee "$ZPWR_TEMPFILE3"
     else
         prettyPrint "No fd-find so regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
