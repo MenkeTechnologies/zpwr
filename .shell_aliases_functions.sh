@@ -1318,10 +1318,6 @@ function contribCount(){
     fi
 }
 
-function isBinary() {
-  LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -sq '^Binary'
-}
-
 function totalLines(){
 
     if ! isGitDir; then
@@ -1335,7 +1331,7 @@ function totalLines(){
     {
 
     while read; do
-        isbinary "$REPLY" && continue
+        isBinary "$REPLY" && continue
         filter=false
         for arg in "$@"; do
            if echo "$REPLY" | command grep -sq "$arg"; then
@@ -1385,7 +1381,7 @@ function contribCountLines(){
     {
 
     while read; do
-        isbinary "$REPLY" && continue
+        isBinary "$REPLY" && continue
         filter=false
         for arg in "$@"; do
            if echo "$REPLY" | command grep -q "$arg"; then

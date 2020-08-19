@@ -11,11 +11,7 @@
 #**************************************************************
 function isZsh(){
 
-    if [[ $(command ps -o command= -p $$) =~ '^-?zsh' ]]; then
-        return 0
-    else
-        return 1
-    fi
+     [[ $(command ps -o command= -p $$) =~ '^-?zsh' ]]
 }
 
 if isZsh; then
@@ -35,6 +31,11 @@ else
         type -- "$1" >/dev/null 2>&1
     }
 fi
+
+function isBinary() {
+
+    [[ $(LC_MESSAGES=C command grep -Hm1 '^' < "${1:-$REPLY}") =~ '^Binary' ]]
+}
 
 function loggNotGit() {
 
