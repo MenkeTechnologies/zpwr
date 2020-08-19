@@ -3818,31 +3818,34 @@ function _zpwr(){
 
 }
 
-function _tmux_pane_words() {
+# Based on vim-tmuxcomplete's splitwords function.
+# https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
+tmux_capture_paner() {
+
+    tmux capture-pane -J -p -S -100 $@ |
+    col -b |
+    tr -s '[:space:]' '\n' |
+    sed 's@\^C\S*@ @g;s@:.*$@@' |
+    # remove surrounding non-word characters
+    command grep -v -E '(\.\.+|^[0-9.]+[a-zA-Z]+$|^[0-9]*$|^MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)' |
+    command grep -o -E "[-a-zA-Z0-9.:]+"
+}
+
+function tmux_pane_words() {
 
   local expl i
   local -a w
 
-  # Based on vim-tmuxcomplete's splitwords function.
-  # https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
-  _tmux_capture_pane() {
-      tmux capture-pane -J -p -S -100 $@ |
-      col -b |
-      tr -s '[:space:]' '\n' |
-      sed 's@\^C\S*@ @g;s@:.*$@@' |
-      # remove surrounding non-word characters
-      command grep -v -E '(\.\.+|^[0-9.]+[a-zA-Z]+$|^[0-9]*$|^MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)' |
-      command grep -o -E "[-a-zA-Z0-9.:]+"
-  }
   # Capture current pane first.
-  w=( ${(u)=$(_tmux_capture_pane)} )
+    w=( ${(u)=$(tmux_capture_paner)} )
 
-  for i in $(tmux list-panes -F '#D'); do
-    # Skip current pane (handled before).
-    [[ "$TMUX_PANE" = "$i" ]] && continue
-    w+=( ${(u)=$(_tmux_capture_pane -t $i)} )
-  done
-  _wanted tmux expl 'words from all tmux panes' compadd -a w
+    for i in $(tmux list-panes -F '#D'); do
+        # Skip current pane (handled before).
+        [[ "$TMUX_PANE" = "$i" ]] && continue
+        w+=( ${(u)=$(tmux_capture_paner -t $i)} )
+    done
+
+    _wanted tmux expl 'words from all tmux panes' compadd -a w
 }
 
 declare -a last_ten
@@ -3888,7 +3891,7 @@ function _megacomplete(){
 
     if [[ -n "$TMUX_PANE" ]]; then
         if (( $whitelist_tmux_completion[(I)$cmd] )); then
-            _tmux_pane_words
+            tmux_pane_words
         fi
     fi
 
@@ -4164,7 +4167,7 @@ function recompile(){
         /etc/zshrc*
         /etc/zsh/z*
         /etc/profile.env*
-        )
+    )
 
     prettyPrint "recompiling all configs to .zwc for speed"
 
@@ -4258,17 +4261,18 @@ if exists jenv;then
 fi
 
 function zpwrAllUpdates(){
-    (
 
-    builtin cd "$ZPWR" &&
-        git pull &&
-        {
-            if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
-                bash "$ZPWR_BANNER_SCRIPT"
-            fi
-        } &&
-        linkConf
+    (
+        builtin cd "$ZPWR" &&
+            git pull &&
+            {
+                if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
+                    bash "$ZPWR_BANNER_SCRIPT"
+                fi
+            } &&
+            linkConf
     )
+
    zpwr updatedeps
    zpwr regen
    zpwr update
@@ -4316,10 +4320,12 @@ function zpwrVerbs(){
     local len sep k v i width
     sep=" "
     width=25
+    o
     for k in ${(ko)ZPWR_VERBS[@]};do
         len=$#k
         printf $k
         spaces=$(( width - len ))
+
         for (( i = 0; i < $spaces; ++i )); do
            printf $sep
         done
