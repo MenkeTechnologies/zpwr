@@ -2787,9 +2787,15 @@ function searchGitCommon(){
 
 function regenAllGitRepos(){
 
-    prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
-    sudo find / -name .git -type d -prune 2>/dev/null |
+    if exists fd; then
+        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from fd /"
+        sudo fd '\.git$' / --type d --absolute-path --color=never --threads=8 --hidden --no-ignore | perl -ne 'print if m{/.git$}' |
         tee "$ZPWR_TEMPFILE3"
+    else
+        prettyPrint "No fd-find so regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
+        sudo find / -name .git -type d -prune 2>/dev/null |
+        tee "$ZPWR_TEMPFILE3"
+    fi
     perl -i -pe 's@/.git$@@' "$ZPWR_TEMPFILE3"
 
     # removing system read only mounted dirs on macOS
