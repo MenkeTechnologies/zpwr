@@ -495,6 +495,7 @@ function vimScriptEdit(){
 }
 
 function sudoEditorRecent(){
+
     local firstdir editor mywords
 
     editor="$1"
@@ -515,6 +516,7 @@ function sudoEditorRecent(){
 }
 
 function editorRecent(){
+
     local firstdir editor mywords
 
     editor="$1"
@@ -904,6 +906,7 @@ function lsoffzf(){
 # cache autoload +X functions,aliases, builtins,reswords into file
 # search with fzf
 function clearListFZF(){
+
     {
         print -l ${(k)functions}
         print -l ${(v)commands}
@@ -1228,6 +1231,7 @@ function fzfZListVerb(){
     if [[ -z "$dir" ]]; then
         return
     fi
+
     print -sr -- "builtin cd \"$dir\" && clearList"
     eval "builtin cd \"$dir\" && clearList"
 }
@@ -1252,6 +1256,7 @@ function zFZF(){
     zle .kill-whole-line
     BUFFER="z $(fzfZList)"
     mywords=(${(z)BUFFER})
+
     if (( $#mywords == 1 )); then
         zle .kill-whole-line
     else
@@ -1265,6 +1270,7 @@ function fasdFZF(){
 
     BUFFER="$BUFFER $(fasdFList)"
     mywords=(${(z)BUFFER})
+
     if (( $#mywords == 1 )); then
         :
     else
@@ -1290,6 +1296,7 @@ function killPSVerbAccept(){
     local sel
 
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -sr -- "$BUFFER"
@@ -1304,6 +1311,7 @@ function killPSVerbEdit(){
     local sel
 
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -rz -- "$BUFFER"
@@ -1317,6 +1325,7 @@ function killLsofVerbAccept(){
     local sel
 
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -rs -- "$BUFFER"
@@ -1331,6 +1340,7 @@ function killLsofVerbEdit(){
     local sel
 
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
+
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -rz -- "$BUFFER"
@@ -2234,8 +2244,10 @@ bindkey '^[~' _bash_complete-word
 #exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
 #
 zpwrExpandAliases() {
+
   unset 'functions[_expand-aliases]'
   functions[_expand-aliases]=$BUFFER
+
   (($+functions[_expand-aliases])) &&
     echo ${functions[_expand-aliases]#$'\t'}
 }
@@ -3582,7 +3594,7 @@ function _fzf_complete_c() {
 function _fzf_complete_f() {
 
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
-  find . -type d |& perl -lpe '$_=~s@$ENV{HOME}@~@'
+        find . -type d |& perl -lpe '$_=~s@$ENV{HOME}@~@'
     )
 }
 
@@ -3642,6 +3654,7 @@ function _fzf_complete_git() {
         printf "\x1b[0m"
     )
 }
+
 function _fzf_complete_git_post() {
 
     cut -d ' ' -f1
@@ -4528,23 +4541,22 @@ unset GROOVY_HOME # when set this messes up classpath
 function magic-enter () {
 
   # If commands are not already set, use the defaults
-  [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status -u ."
-  [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
+    [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status -u ."
+    [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 
-  if [[ -z $BUFFER ]]; then
-    echo ""
-    if git rev-parse --is-inside-work-tree &>/dev/null; then
-      eval "$MAGIC_ENTER_GIT_COMMAND"
+    if [[ -z $BUFFER ]]; then
+        echo ""
+        if git rev-parse --is-inside-work-tree &>/dev/null; then
+            eval "$MAGIC_ENTER_GIT_COMMAND"
+        else
+            eval "$MAGIC_ENTER_OTHER_COMMAND"
+        fi
+        # add extra NL to see last file
+        echo
+        zle redisplay
     else
-      eval "$MAGIC_ENTER_OTHER_COMMAND"
+        zle accept-line
     fi
-    # add extra NL to see last file
-    echo
-
-    zle redisplay
-  else
-    zle accept-line
-  fi
 }
 #}}}***********************************************************
 
