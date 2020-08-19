@@ -1890,7 +1890,7 @@ function locateFzf(){
 function cca() {
 
     if [[ -z "$1" ]]; then
-        loggErr "cca <file...>"
+        loggErr "usage: cca <file...>"
         return 1
     fi
 
@@ -1906,7 +1906,7 @@ function cca() {
 function cv() {
 
     if [[ -z "$1" ]]; then
-        loggErr "cv <file...>"
+        loggErr "usage: cv <file...>"
         return 1
     fi
 
@@ -1922,7 +1922,7 @@ function cv() {
 function ce() {
 
     if [[ -z "$1" ]]; then
-        loggErr "ce <file...>"
+        loggErr "usage: ce <file...>"
         return 1
     fi
 
