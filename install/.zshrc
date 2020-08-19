@@ -4233,7 +4233,8 @@ function zpwrEnvCounts(){
     echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
     echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
     echo "ZPWR verbs: ${#ZPWR_VERBS}"
-    echo "ZPWR environment variables: " ${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
+    echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
+    echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
 }
 
 function zarg(){
@@ -4565,6 +4566,8 @@ test -f "$ZPWR_TOKEN_POST" &&
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
 logg "zsh startup took $startupTimeMs seconds"
+
+ZPWR_VARS[startupTimeMs]=$startupTimeMs
 
 if [[ $ZPWR_PROFILING == true ]]; then
     zprof
