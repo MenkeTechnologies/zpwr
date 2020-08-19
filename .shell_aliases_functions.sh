@@ -1788,7 +1788,9 @@ function openmygh(){
 
 }
 
-function zpwr(){
+alias zpg=zpgh
+
+function zpgh(){
 
     if test -z $1;then
         openmygh "$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME"
@@ -1797,12 +1799,15 @@ function zpwr(){
     fi
 }
 
-function zp(){
+alias zp=zpwr
+alias zpw=zpwr
+
+function zpwr(){
 
     if test -z $1;then
         cd "$ZPWR"
     else
-        zpwr "$@"
+        . zpwr.zsh "$@"
     fi
 }
 
