@@ -3376,6 +3376,30 @@ function _fzf_complete_alias() {
     )
 }
 
+# zpwr ;<tab>
+function _fzf_complete_zpwr() {
+
+  FZF_COMPLETION_OPTS=$FZF_ENV_OPTS_VERBS _fzf_complete '-m --preview-window=down:25 --border'  "$@" < <(
+    local len sep k v i width
+    sep=" "
+    width=25
+    for k in ${(ko)ZPWR_VERBS[@]};do
+        len=$#k
+        printf $k
+        spaces=$(( width - len ))
+        for (( i = 0; i < $spaces; ++i )); do
+           printf $sep
+        done
+        printf "${ZPWR_VERBS[$k]}\n"
+    done
+)
+}
+
+function _fzf_complete_zpwr_post() {
+
+        perl -e '@a=<>;$c=$#a;for (@a){print "zpwr " if $c!=$#a; print "$1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
+
+}
 # c ;<tab>
 function _fzf_complete_c() {
 
