@@ -46,6 +46,7 @@ function chooseNvimVim(){
         exists nvim && {
             alias v='nvim'
             alias vi='nvim'
+            alias vv='nvim'
             alias vim='nvim'
             alias vm="nvim -u $ZPWR/.mininit.vim"
             alias sv='sudo -E nvim'
@@ -54,6 +55,7 @@ function chooseNvimVim(){
         exists vim && {
             alias v=vim
             alias vi=vim
+            alias vv=vim
             alias vm="vim -u $ZPWR/.minvimrc"
             alias sv='sudo -E vim'
         }
@@ -658,7 +660,6 @@ else
         done
     }
 
-
     function tailufw(){
 
         local size
@@ -1217,6 +1218,7 @@ function humanReadable(){
 }
 
 function f(){
+
     local base dir
 
     if [[ -z "$1" ]]; then
@@ -1636,7 +1638,7 @@ function escapeRemove(){
 }
 
 function prettyPrintNoNewline(){
-    o
+
     if [[ -z "$1" ]]; then
         loggErr "usage: prettyPrintNoNewline <string>"
         return 1
