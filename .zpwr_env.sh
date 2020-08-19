@@ -42,7 +42,7 @@ export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
-# spelling correction in expand plugin
+# spelling correction in zsh-expand plugin
 export ZPWR_CORRECT=true
 # aliases expand after spelling correction
 export ZPWR_CORRECT_EXPAND=true
