@@ -1889,6 +1889,11 @@ function locateFzf(){
 
 function cca() {
 
+    if [[ -z "$1" ]]; then
+        loggErr "cca <file...>"
+        return 1
+    fi
+
     local firstArg sel firstdir
 
     firstArg="${${(Az)@}[1]//\"/}"
@@ -1900,6 +1905,11 @@ function cca() {
 
 function cv() {
 
+    if [[ -z "$1" ]]; then
+        loggErr "cv <file...>"
+        return 1
+    fi
+
     local firstArg sel firstdir
 
     firstArg="${${(Az)@}[1]//\"/}"
@@ -1910,6 +1920,11 @@ function cv() {
 }
 
 function ce() {
+
+    if [[ -z "$1" ]]; then
+        loggErr "ce <file...>"
+        return 1
+    fi
 
     local firstArg sel firstdir
 
