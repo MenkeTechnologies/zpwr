@@ -584,7 +584,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     function nn(){
 
         if [[ -z "$2" ]];then
-            loggErr "Title is \$1 and message is \$2..." &&
+            loggErr "usage: Title is \$1 and message is \$2..." &&
             return 1
         fi
 
@@ -621,7 +621,7 @@ else
         function scriptToPDF(){
 
             if [[ -z "$1" ]]; then
-                loggErr "need an arg"
+                loggErr "usage: scriptToPDF <script>"
                 return 1
             fi
             local tempFile
@@ -842,7 +842,7 @@ function cgh(){
 function upload(){
 
     if [[ -z "$2" ]]; then
-        loggErr "upload <file> <URL>"
+        loggErr "usage: upload <file> <URL>"
         return 1
     fi
     command curl -vvv -fsSL -F file=@"$1" http://"$2"
@@ -882,7 +882,7 @@ function j(){
 function scnew(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need an arg"
+        loggErr "usage: scnew <file>"
         return 1
     fi
 
@@ -989,7 +989,7 @@ function clearGitCommit(){
     fi
 
     if [[ -z "$1" ]]; then
-        loggErr "clearGitCommit <regex>"
+        loggErr "usage: clearGitCommit <regex>"
         return 1
     fi
 
@@ -1258,7 +1258,7 @@ function f(){
 function execpy(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need an arg"
+        loggErr "usage: execpy <file>"
         return 1
     fi
 
@@ -1295,7 +1295,7 @@ function cd(){
 function contribCountDirs(){
 
     if [[ -z "$2" ]]; then
-       loggErr "user regex is \$1 and dirs are \$@" 
+       loggErr "usage: user regex is \$1 and dirs are \$@" 
        return 1
     fi
 
@@ -1504,7 +1504,7 @@ function gsdc(){
 function replacer(){
 
     if [[ -z "$2" ]]; then
-        loggErr "need two args"
+        loggErr "usage: replacer <original> <replacement>"
         return 1
     fi
 
@@ -1525,7 +1525,7 @@ function replacer(){
 function creategif(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need an arg"
+        loggErr "usage: creategif <file>"
         return 1
     fi
 
@@ -1636,15 +1636,16 @@ function escapeRemove(){
 }
 
 function prettyPrintNoNewline(){
-
-    if [[ -n "$1" ]];then
-        printf "\x1b[1m"
-        printf "%s " "$@"
-        printf "\x1b[0m"
-    else
-        loggErr "Need one arg" 
+    o
+    if [[ -z "$1" ]]; then
+        loggErr "usage: prettyPrintNoNewline <string>"
         return 1
     fi
+
+
+    printf "\x1b[1m"
+    printf "%s " "$@"
+    printf "\x1b[0m"
 }
 
 function tac(){
@@ -1655,7 +1656,7 @@ function tac(){
 function backup(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need an arg"
+        loggErr "usage: backup <file>"
         return 1
     fi
 
@@ -1675,7 +1676,7 @@ exists gcl && {
 function gcl() {
 
     if [[ -z "$1" ]]; then
-        loggErr "usage gcl <repo>"
+        loggErr "usage: gcl <repo>"
         return 1
     fi
 
@@ -1696,7 +1697,7 @@ function gcl() {
 function ino(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need an arg"
+        loggErr "usage: ino <dir>"
         return 1
     fi
 
@@ -2013,8 +2014,8 @@ function getrcdev(){
 
 function rename(){
 
-    if [[ -z "$1" ]]; then
-        loggErr "need an arg"
+    if [[ -z "$2" ]]; then
+        loggErr "usage: rename <search> <file...>"
         return 1
     fi
 
@@ -2058,7 +2059,7 @@ function mycurl(){
 function perlremovespaces(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: perlremovespaces <file>"
+        loggErr "usage: perlremovespaces <file...>"
         return 1
     fi
 
@@ -2099,7 +2100,7 @@ function pirun(){
 function digs(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need an arg"
+        loggErr "usage: digs <url...>"
         return 1
     fi
 
@@ -2323,7 +2324,7 @@ function to(){
 function ww(){
 
     if [[ -z "$1" ]]; then
-       loggErr "ww <cmd> to run <cmd> forever" 
+       loggErr "usage: ww <cmd> to run <cmd> forever" 
        return 1
     fi
     while true; do
@@ -2334,7 +2335,7 @@ function ww(){
 function www(){
 
     if [[ -z "$2" ]]; then
-       loggErr "www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
+       loggErr "usage: www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
        return 1
     fi
 
@@ -2351,7 +2352,7 @@ function www(){
 function fordirUpdate(){
 
     if [[ -z "$1" ]]; then
-       loggErr "fordirUpdate <dirs> to run git update in each dir"
+       loggErr "usage: fordirUpdate <dirs> to run git update in each dir"
        return 1
     fi
 
@@ -2370,7 +2371,7 @@ function fordirUpdate(){
 function fordir(){
 
     if [[ -z "$2" ]]; then
-       loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"
+       loggErr "usage: fordir <cmd> <dirs> to run <cmd> in each dir"
        return 1
     fi
 
@@ -2379,7 +2380,7 @@ function fordir(){
     cmd="$1"
 
     if [[ -d "$cmd" || -f "$cmd" ]]; then
-       loggErr "fordir <cmd> <dirs> to run <cmd> in each dir"
+       loggErr "usage: fordir <cmd> <dirs> to run <cmd> in each dir"
        return 1
     fi
 
@@ -2408,7 +2409,7 @@ function ff(){
             eval "$@"
         done
     else
-       loggErr "ff <cmd> to run <cmd> 10 times" 
+       loggErr "usage: ff <cmd> to run <cmd> 10 times" 
        return 1
     fi
 }
@@ -2416,7 +2417,7 @@ function ff(){
 function fff(){
 
     if [[ -z "$2" ]]; then
-       loggErr "fff <iter> <cmd> to run <cmd> <iter> times" 
+       loggErr "usage: fff <iter> <cmd> to run <cmd> <iter> times" 
        return 1
     fi
 
@@ -2433,7 +2434,7 @@ function fff(){
 function post(){
 
     if [[ -z "$2" ]]; then
-        loggErr "need two args"
+        loggErr "usage: post <suffix> <cmd>"
         return 1
     fi
 
@@ -2447,7 +2448,7 @@ function post(){
 function pre(){
 
     if [[ -z "$2" ]]; then
-        loggErr "need two args"
+        loggErr "usage: pre <prefix> <cmd>"
         return 1
     fi
 
@@ -2513,6 +2514,11 @@ function c(){
             cCommon "$ZPWR_TEMPFILE" | less
         fi
     else
+        if [[ -z "$1" ]]; then
+            loggErr "usage: c <file...>"
+            return 1
+        fi
+
         if [[ -p /dev/stdout ]];then
             cCommon "$@"
         else
@@ -2928,7 +2934,7 @@ function regenPowerlineLink(){
 function goclean() {
 
     if [[ -z "$1" ]]; then
-        loggErr "need package name"
+        loggErr "usage: goclean <package>"
         return 1
     fi
 
@@ -3093,7 +3099,7 @@ function vimScripts(){
 function timer() {
 
     if [[ -z "$1" ]]; then
-        loggErr "timer <commands...>"
+        loggErr "timer <command...>"
         return 1
     fi
 
@@ -3134,7 +3140,7 @@ function timer() {
 function changeGitCommitterEmail(){
 
     if [[ -z "$2" ]]; then
-        loggErr "need two args <oldEmail> <newEmail>"
+        loggErr "usage: changeGitCommitterEmail <oldEmail> <newEmail>"
         return 1
     fi
 
@@ -3161,7 +3167,7 @@ function changeGitCommitterEmail(){
 function changeGitAuthorEmail(){
 
     if [[ -z "$2" ]]; then
-        loggErr "need two args <oldEmail> <newEmail>"
+        loggErr "usage: changeGitAuthorEmail <oldEmail> <newEmail>"
         return 1
     fi
 
@@ -3270,7 +3276,7 @@ function nvimThenRecentf() {
 function changeGitEmail(){
 
     if [[ -z "$3" ]]; then
-        loggErr "need three args <oldEmail> <newName> <newEmail>"
+        loggErr "usage: changeGitEmail <oldEmail> <newName> <newEmail>"
         return 1
     fi
 

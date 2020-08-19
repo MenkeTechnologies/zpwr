@@ -70,7 +70,7 @@ done
 shift $((OPTIND - 1))
 
 if [[ -z "$1" ]]; then
-    echo "need an arg" >&2
+    echo "usage: myWatchNoBlink.sh <command>  [<timeToSleep>]" >&2
     exit 1
 fi
 

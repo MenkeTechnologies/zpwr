@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-(($# == 0)) && echo "need an arg " >&2 && exit 1
+(($# < 2)) && echo "usage: randomCow.sh <width> <filter>" >&2 && exit 1
 
 declare -a COW_FILES
 
