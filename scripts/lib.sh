@@ -64,6 +64,20 @@ function loggErr(){
     } >&2
 }
 
+function needSudo(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: needSudo <file>"
+        return 1
+    fi
+
+    if [[ ! -w "$1" ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
+
 function loggConsolePrefix(){
 
     prettyPrint "$ZPWR_CHAR_LOGO $*"

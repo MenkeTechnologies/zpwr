@@ -564,6 +564,115 @@ function vimRecent(){
     editorRecent "$EDITOR"
 }
 
+function gtagsIntoFzf(){
+
+    #gtags referenced to $HOME
+    (
+        builtin cd "$HOME"
+        global -x '.*' |
+        eval "$ZPWR_FZF $FZF_GTAGS_OPTS" |
+    perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "'"$HOME/"'$3"@;s@\n@ @g'
+    )
+}
+
+function getGtagsEdit(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "getGtagsEdit <editor>"
+        return 1
+    fi
+
+    local firstdir editor file mywords
+
+    editor="$1"
+    BUFFER=$(gtagsIntoFzf)
+
+    if [[ -n "$BUFFER" ]]; then
+        mywords=(${(z)BUFFER})
+        firstdir=${mywords[2]:h}
+        loggDebug "builtin cd $firstdir\""
+        #:h takes aways last "
+        BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
+        loggDebug "$BUFFER"
+        print -zr -- "$BUFFER"
+    else
+        return
+    fi
+
+}
+
+function getGtags(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "getGtags <editor>"
+        return 1
+    fi
+
+    local firstdir editor file mywords
+
+    editor="$1"
+    BUFFER=$(gtagsIntoFzf)
+
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    mywords=(${(z)BUFFER})
+    firstdir=${mywords[2]:h}
+    loggDebug "builtin cd $firstdir\""
+    #:h takes aways last "
+    BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+
+    print -sr -- "$BUFFER"
+    eval "$BUFFER"
+}
+
+
+function emacsZpwrGtags(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    getGtags "$ZPWR_EMACS_CLIENT"
+}
+
+function vimZpwrGtags(){
+
+    getGtags "$EDITOR"
+}
+
+function emacsZpwrGtagsEdit(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    getGtagsEdit "$ZPWR_EMACS_CLIENT"
+}
+
+function vimZpwrGtagsEdit(){
+
+    getGtagsEdit "$EDITOR"
+}
+
+function emacsZpwrCtags(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    cat "$ZPWR_SCRIPTS/tags" | fzf
+}
+
+function vimZpwrCtags(){
+
+    cat "$ZPWR_SCRIPTS/tags" | fzf
+}
+
 function scriptCount(){
 
     command ls \
@@ -809,6 +918,11 @@ function clearListFZF(){
 
 function fzvim(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "fzvim <editor>"
+        return 1
+    fi
+
     local file editor
 
     editor="$1"
@@ -901,6 +1015,11 @@ function emacsFzf(){
 
 function fzfWordsearchVerbEdit(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "fzfWordsearchVerbEdit <editor>"
+        return 1
+    fi
+
     local firstdir editor file mywords
 
     editor="$1"
@@ -922,6 +1041,11 @@ function fzfWordsearchVerbEdit(){
 }
 
 function fzfWordsearchVerb(){
+
+   if [[ -z "$1" ]]; then
+        loggErr "fzfWordsearchVerb <editor>"
+        return 1
+    fi
 
     local firstdir editor file mywords
 
@@ -953,6 +1077,7 @@ function emacsFzfWordsearchVerbEdit(){
 }
 
 function emacsFzfWordsearchVerb(){
+
     if ! exists emacs; then
         logErr "emacs must exist"
         return 1
@@ -982,6 +1107,11 @@ function fzfFileSearch(){
 
 function fzfFilesearchVerbEdit(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "fzfFilesearchVerbEdit <editor>"
+        return 1
+    fi
+
     local editor sel
 
     editor="$1"
@@ -1010,6 +1140,11 @@ function zpwrZstyle() {
 
 
 function fzfFilesearchVerb(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "fzfFilesearchVerb <editor>"
+        return 1
+    fi
 
     local editor file
 
@@ -1501,6 +1636,11 @@ function getFound(){
 
 function locateFzfEditNoZLE(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "locateFzfEditNoZLE <editor>"
+        return 1
+    fi
+
     local firstArg sel editor
 
     editor="$1"
@@ -1521,6 +1661,11 @@ function locateFzfEditNoZLE(){
 }
 
 function locateFzfNoZLE(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "locateFzfNoZLE <editor>"
+        return 1
+    fi
 
     local firstArg sel editor
 
@@ -1584,6 +1729,11 @@ function locateFzfNoZLEEmacs(){
 
 function findFzfEditNoZLE(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "findFzfEditNoZLE <editor>"
+        return 1
+    fi
+
     local firstArg sel editor
 
     editor="$1"
@@ -1604,6 +1754,11 @@ function findFzfEditNoZLE(){
 }
 
 function findFzfNoZLE(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "findFzfNoZLE <editor>"
+        return 1
+    fi
 
     local firstArg sel editor
 
@@ -4167,105 +4322,6 @@ function numZpwrVerbs(){
 function zpwrEnvVars(){
 
     env | command grep -i "^$ZPWR_REPO_NAME" | fzf
-}
-
-function gtagsIntoFzf(){
-
-    #gtags referenced to $HOME
-    (
-        builtin cd "$HOME"
-        global -x '.*' |
-        eval "$ZPWR_FZF $FZF_GTAGS_OPTS" |
-    perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "'"$HOME/"'$3"@;s@\n@ @g'
-    )
-}
-
-function getGtagsEdit(){
-
-    local firstdir editor file mywords
-
-    editor="$1"
-    BUFFER=$(gtagsIntoFzf)
-
-    if [[ -n "$BUFFER" ]]; then
-        mywords=(${(z)BUFFER})
-        firstdir=${mywords[2]:h}
-        loggDebug "builtin cd $firstdir\""
-        #:h takes aways last "
-        BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
-        loggDebug "$BUFFER"
-        print -zr -- "$BUFFER"
-    else
-        return
-    fi
-
-}
-
-function getGtags(){
-
-    local firstdir editor file mywords
-
-    editor="$1"
-    BUFFER=$(gtagsIntoFzf)
-
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    mywords=(${(z)BUFFER})
-    firstdir=${mywords[2]:h}
-    loggDebug "builtin cd $firstdir\""
-    #:h takes aways last "
-    BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
-
-    print -sr -- "$BUFFER"
-    eval "$BUFFER"
-}
-
-
-function emacsZpwrGtags(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    getGtags "$ZPWR_EMACS_CLIENT"
-}
-
-function vimZpwrGtags(){
-
-    getGtags "$EDITOR"
-}
-
-function emacsZpwrGtagsEdit(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    getGtagsEdit "$ZPWR_EMACS_CLIENT"
-}
-
-function vimZpwrGtagsEdit(){
-
-    getGtagsEdit "$EDITOR"
-}
-
-function emacsZpwrCtags(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    cat "$ZPWR_SCRIPTS/tags" | fzf
-}
-
-function vimZpwrCtags(){
-
-    cat "$ZPWR_SCRIPTS/tags" | fzf
 }
 
 function revealRecurse(){

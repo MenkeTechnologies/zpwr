@@ -502,6 +502,11 @@ exists idea && {
 #**************************************************************
 function rm(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "usage: rm <file>"
+        return 1
+    fi
+
     command rm -v "$@"
 }
 
@@ -689,6 +694,11 @@ else
 
     function restart(){
 
+        if [[ -z "$1" ]]; then
+            loggErr "usage: restart <services>"
+            return 1
+        fi
+
         local src_dir service service_path group
 
         service="$1"
@@ -796,6 +806,11 @@ function s(){
 
 function xx(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "usage: xx <cmd>"
+        return 1
+    fi
+
     local counter cmd DONE iter
 
     cmd="$1"
@@ -835,6 +850,12 @@ function upload(){
 
 function jd(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "usage: j <dir/dir>"
+        return 1
+    fi
+
+
     local dir
 
     for dir;do
@@ -843,6 +864,11 @@ function jd(){
 }
 
 function j(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: j <dir/file>"
+        return 1
+    fi
 
     local file
 
@@ -885,6 +911,11 @@ function p(){
 }
 
 function b(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: b <cmds> or b -s <sleeptime> <cmds>"
+        return 1
+    fi
 
     local cmd sleepTime
 
@@ -1493,15 +1524,15 @@ function replacer(){
 
 function creategif(){
 
-    local res outFile
-
-    outFile=out.gif
-    res=600x400
-
     if [[ -z "$1" ]]; then
         loggErr "need an arg"
         return 1
     fi
+
+    local res outFile
+
+    outFile=out.gif
+    res=600x400
 
     test -n "$2" && res="$2"
 
@@ -1647,6 +1678,7 @@ function gcl() {
         loggErr "usage gcl <repo>"
         return 1
     fi
+
     local git_name dir_name last_arg
 
     last_arg=${@: -1}
@@ -2024,6 +2056,11 @@ function mycurl(){
 }
 
 function perlremovespaces(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: perlremovespaces <file>"
+        return 1
+    fi
 
     local file
 
@@ -2486,6 +2523,11 @@ function c(){
 
 exists http && function ge(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "usage: ge <url>"
+        return 1
+    fi
+
     local styles_dir url file len rand randscript random_color file_ary
 
     declare -a file_ary
@@ -2646,6 +2688,12 @@ function jsonToArray(){
 
 function arrayToJson(){
 
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: arrayToJson <array>"
+        return 1
+    fi
+
     local ary key
 
     if isZsh; then
@@ -2667,15 +2715,6 @@ function loginCount(){
     perl -e 'print `last -f "$_"`for</var/log/wtmp*>' |
         perl -lane 'print $F[0] if /\S+/ && !/wtmp/' |
         sort | uniq -c | sort -rn
-}
-
-function needSudo(){
-
-    if [[ ! -w "$1" ]]; then
-        return 0
-    else
-        return 1
-    fi
 }
 
 function clearTemp(){
