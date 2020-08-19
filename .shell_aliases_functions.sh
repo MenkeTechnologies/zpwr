@@ -1801,6 +1801,7 @@ function zpgh(){
 
 alias zp=zpwr
 alias zpw=zpwr
+alias zpwrgh=zpwr
 
 function zpwr(){
 
