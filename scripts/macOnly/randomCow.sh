@@ -7,7 +7,10 @@
 ##### Notes:
 #}}}***********************************************************
 
-(($# < 2)) && echo "usage: randomCow.sh <width> <filter>" >&2 && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: randomCow.sh <width> [<filter>]" >&2
+    exit 1
+fi
 
 declare -a COW_FILES
 
