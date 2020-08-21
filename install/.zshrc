@@ -2256,7 +2256,7 @@ function my-accept-line () {
 
     local pane commandsThatModifyFiles regex mywords line command cmd out aliases
 
-    if ! [[ $(zpwrExpandAliases $BUFFER) = zc* ]]; then
+    if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
         ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
         zc-rename $ZPWR_CONVEY_NAME &>/dev/null
         ZPWR_CONVEY_LAST_CMD=$BUFFER
