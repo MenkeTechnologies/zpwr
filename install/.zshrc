@@ -3472,9 +3472,9 @@ else
     export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"
 fi
 
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff=' "$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f=" \$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z=" | $ZPWR_FZF $FZF_CTRL_T_OPTS "
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff='"$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f="\$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
+alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z="| $ZPWR_FZF $FZF_CTRL_T_OPTS "
 
 # killall ;<tab>
 function _fzf_complete_killall() {
