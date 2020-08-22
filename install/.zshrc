@@ -4333,7 +4333,7 @@ function zpwrVerbs(){
     local len sep k v i width
     sep=" "
     width=25
-    o
+
     for k in ${(ko)ZPWR_VERBS[@]};do
         len=$#k
         printf $k
