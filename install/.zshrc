@@ -2987,14 +2987,38 @@ function tabNum() {
     echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
 
+function zg() {
+
+    local branch dir
+    branch=master
+    dir=$2
+
+    if [[ -n $1 ]]; then
+        branch=$1
+    fi
+
+    if [[ -n "$dir" ]]; then
+        if [[ $ != . ]]; then
+            z "$dir"
+            prettyPrint "z $dir => cd $(z -e $dir)"
+        fi
+    fi
+
+
+    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
+}
+
 function zm() {
 
-    local branch
+    local branch dir
     branch=master
+    dir=$1
 
-    if [[ -n "$1" ]]; then
-        z "$1"
-        prettyPrint "z $1 => cd $(z -e $1)"
+    if [[ -n "$dir" ]]; then
+        if [[ $dir != . ]]; then
+            z "$dir"
+            prettyPrint "z $dir => cd $(z -e $dir)"
+        fi
     fi
 
     if [[ -n $2 ]]; then
@@ -3006,12 +3030,15 @@ function zm() {
 
 function zd() {
 
-    local branch
+    local branch dir
     branch=development
+    dir=$1
 
-    if [[ -n "$1" ]]; then
-        z "$1"
-        prettyPrint "z $1 => cd $(z -e $1)"
+    if [[ -n "$dir" ]]; then
+        if [[ $dir != . ]]; then
+            z "$dir"
+            prettyPrint "z $dir => cd $(z -e $dir)"
+        fi
     fi
 
     if [[ -n $2 ]]; then
