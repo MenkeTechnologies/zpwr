@@ -2983,27 +2983,42 @@ exists zu8 || alias zu8='zpwr updateall'
 exists zua || alias zua='zpwr updateall'
 
 function tabNum() {
+
     echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
 
 function zm() {
 
+    local branch
+    branch=master
+
     if [[ -n "$1" ]]; then
         z "$1"
         prettyPrint "z $1 => cd $(z -e $1)"
     fi
 
-    ${=ZPWR_REPO_NAME} fordir 'isGitDir && { gco master; gffa; git clean -dff && git reset --hard origin/master && git clean -dff ; gla; zp gitclearcache; }' *
+    if [[ -n $2 ]]; then
+        branch=$2
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
 }
 
 function zd() {
 
+    local branch
+    branch=development
+
     if [[ -n "$1" ]]; then
         z "$1"
         prettyPrint "z $1 => cd $(z -e $1)"
     fi
 
-    ${=ZPWR_REPO_NAME} fordir 'isGitDir && { gco development; gffa; git clean -dff && git reset --hard origin/development && git clean -dff ; gla; zp gitclearcache; }' *
+    if [[ -n $2 ]]; then
+        branch=$2
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
 }
 
 function tabNumCmd() {
