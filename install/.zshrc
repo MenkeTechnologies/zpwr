@@ -4614,21 +4614,21 @@ unset GROOVY_HOME # when set this messes up classpath
 function magic-enter () {
 
   # If commands are not already set, use the defaults
-    [ -z "$MAGIC_ENTER_GIT_COMMAND" ] && MAGIC_ENTER_GIT_COMMAND="git status -u ."
-    [ -z "$MAGIC_ENTER_OTHER_COMMAND" ] && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
+    test -z "$MAGIC_ENTER_GIT_COMMAND" && MAGIC_ENTER_GIT_COMMAND="git status -u ."
+    test -z "$MAGIC_ENTER_OTHER_COMMAND" && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
 
     if [[ -z $BUFFER ]]; then
-        echo ""
-        if git rev-parse --is-inside-work-tree &>/dev/null; then
+        echo
+        if isGitDir; then
             eval "$MAGIC_ENTER_GIT_COMMAND"
         else
             eval "$MAGIC_ENTER_OTHER_COMMAND"
         fi
         # add extra NL to see last file
         echo
-        zle redisplay
+        zle .redisplay
     else
-        zle accept-line
+        zle .accept-line
     fi
 }
 #}}}***********************************************************
