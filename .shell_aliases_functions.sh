@@ -696,7 +696,7 @@ else
     function restart(){
 
         if [[ -z "$1" ]]; then
-            loggErr "usage: restart <services>"
+            loggErr "usage: restart <services...>"
             return 1
         fi
 
@@ -1297,7 +1297,7 @@ function cd(){
 function contribCountDirs(){
 
     if [[ -z "$2" ]]; then
-       loggErr "usage: user regex is \$1 and dirs are \$@" 
+       loggErr "usage: contribCountDirs <user regex> <dirs...>"
        return 1
     fi
 
@@ -1333,7 +1333,7 @@ function contribCountDirs(){
 function contribCount(){
 
     if ! isGitDir; then
-       loggErr "not in a git dir."
+       loggNotGit
        return 1
     fi
 
@@ -1354,7 +1354,7 @@ function contribCount(){
 function totalLines(){
 
     if ! isGitDir; then
-       loggErr "not in a git dir."
+       loggNotGit
        return 1
     fi
 
@@ -1404,7 +1404,7 @@ function totalLines(){
 function contribCountLines(){
 
     if ! isGitDir; then
-       loggErr "not in a git dir."
+       loggNotGit
        return 1
     fi
 
@@ -1454,7 +1454,7 @@ function contribCountLines(){
 function gsdc(){
 
     if ! isGitDir; then
-       loggErr "not in a git dir."
+       loggNotGit
        return 1
     fi
 
@@ -2756,7 +2756,7 @@ function clearCache(){
 function regenGtagsType(){
 
     if [[ -z $1 ]]; then
-        loggErr "regenGtagsType <type>"
+        loggErr "usage: regenGtagsType <type>"
         return 1
     fi
 
@@ -3101,7 +3101,7 @@ function vimScripts(){
 function timer() {
 
     if [[ -z "$1" ]]; then
-        loggErr "timer <command...>"
+        loggErr "usage: timer <command...>"
         return 1
     fi
 

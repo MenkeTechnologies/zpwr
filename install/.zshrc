@@ -580,7 +580,7 @@ function gtagsIntoFzf(){
 function getGtagsEdit(){
 
     if [[ -z "$1" ]]; then
-        loggErr "getGtagsEdit <editor>"
+        loggErr "usage: getGtagsEdit <editor>"
         return 1
     fi
 
@@ -606,7 +606,7 @@ function getGtagsEdit(){
 function getGtags(){
 
     if [[ -z "$1" ]]; then
-        loggErr "getGtags <editor>"
+        loggErr "usage: getGtags <editor>"
         return 1
     fi
 
@@ -922,7 +922,7 @@ function clearListFZF(){
 function fzvim(){
 
     if [[ -z "$1" ]]; then
-        loggErr "fzvim <editor>"
+        loggErr "usage: fzvim <editor>"
         return 1
     fi
 
@@ -1019,7 +1019,7 @@ function emacsFzf(){
 function fzfWordsearchVerbEdit(){
 
     if [[ -z "$1" ]]; then
-        loggErr "fzfWordsearchVerbEdit <editor>"
+        loggErr "usage: fzfWordsearchVerbEdit <editor>"
         return 1
     fi
 
@@ -1046,7 +1046,7 @@ function fzfWordsearchVerbEdit(){
 function fzfWordsearchVerb(){
 
    if [[ -z "$1" ]]; then
-        loggErr "fzfWordsearchVerb <editor>"
+        loggErr "usage: fzfWordsearchVerb <editor>"
         return 1
     fi
 
@@ -1111,7 +1111,7 @@ function fzfFileSearch(){
 function fzfFilesearchVerbEdit(){
 
     if [[ -z "$1" ]]; then
-        loggErr "fzfFilesearchVerbEdit <editor>"
+        loggErr "usage: fzfFilesearchVerbEdit <editor>"
         return 1
     fi
 
@@ -1145,7 +1145,7 @@ function zpwrZstyle() {
 function fzfFilesearchVerb(){
 
     if [[ -z "$1" ]]; then
-        loggErr "fzfFilesearchVerb <editor>"
+        loggErr "usage: fzfFilesearchVerb <editor>"
         return 1
     fi
 
@@ -1487,7 +1487,7 @@ function startSendFull(){
 function startSend(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need arg: <pane>"
+        loggErr "usage: startSend <pane>"
         return 1
     fi
 
@@ -1647,7 +1647,7 @@ function getFound(){
 function locateFzfEditNoZLE(){
 
     if [[ -z "$1" ]]; then
-        loggErr "locateFzfEditNoZLE <editor>"
+        loggErr "usage: locateFzfEditNoZLE <editor>"
         return 1
     fi
 
@@ -1673,7 +1673,7 @@ function locateFzfEditNoZLE(){
 function locateFzfNoZLE(){
 
     if [[ -z "$1" ]]; then
-        loggErr "locateFzfNoZLE <editor>"
+        loggErr "usage: locateFzfNoZLE <editor>"
         return 1
     fi
 
@@ -1740,7 +1740,7 @@ function locateFzfNoZLEEmacs(){
 function findFzfEditNoZLE(){
 
     if [[ -z "$1" ]]; then
-        loggErr "findFzfEditNoZLE <editor>"
+        loggErr "usage: findFzfEditNoZLE <editor>"
         return 1
     fi
 
@@ -1766,7 +1766,7 @@ function findFzfEditNoZLE(){
 function findFzfNoZLE(){
 
     if [[ -z "$1" ]]; then
-        loggErr "findFzfNoZLE <editor>"
+        loggErr "usage: findFzfNoZLE <editor>"
         return 1
     fi
 
@@ -4293,7 +4293,7 @@ function zshrcsearch(){
 function zpwrLineCount(){
 
     if [[ -z "$2" ]]; then
-        loggErr "usage zpwrLineCount <cmd> <search>"
+        loggErr "usage: zpwrLineCount <cmd> <search>"
         return 1
     fi
 
@@ -4329,7 +4329,7 @@ function zpwrEnvCounts(){
 function zarg(){
 
     if [[ -z "$2" ]]; then
-        loggErr "need two args, escaped glob and cmd with {}"
+        loggErr "usage: zarg <escaped glob> <cmd with {}>"
         return 1
     fi
 
@@ -4367,7 +4367,7 @@ function zpwrAllUpdates(){
 function zpwrForAllGitDirs(){
 
     if [[ -z "$1" ]]; then
-        loggErr "zpwrForGitDir <cmd>"
+        loggErr "usage: zpwrForGitDir <cmd>"
         return 1
     fi
 
