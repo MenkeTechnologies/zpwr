@@ -173,7 +173,7 @@ function isGitDirMessage(){
 function gil(){
 
     if ! isGitDir; then
-       loggErr "not in a git dir."
+       loggNotGit
        return 1
     fi
 
