@@ -1980,10 +1980,41 @@ function interceptDelete(){
     keySender
 }
 
+function zpwrVerbsEditNoZLE(){
+
+    local firstArg sel editor
+
+    sel="$(getZpwrVerbs)"
+
+    BUFFER="$sel"
+
+    if [[ -n "$sel" ]]; then
+        print -zr -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+function zpwrVerbsNoZLE(){
+
+    local firstArg sel editor
+
+    sel="$(getZpwrVerbs)"
+
+    BUFFER="$sel"
+
+    if [[ -n "$sel" ]]; then
+        print -sr -- "$BUFFER"
+        eval "$BUFFER"
+    else
+        return
+    fi
+}
+
 function zpwrVerbsWidgetAccept(){
 
     zle .kill-whole-line
-    BUFFER="$(zpwrVerbs)"
+    BUFFER="$(getZpwrVerbs)"
     loggDebug "$BUFFER"
     zle .accept-line
 }
@@ -1991,7 +2022,7 @@ function zpwrVerbsWidgetAccept(){
 function zpwrVerbsWidget(){
 
     zle .kill-whole-line
-    BUFFER="$(zpwrVerbs)"
+    BUFFER="$(getZpwrVerbs)"
     loggDebug "$BUFFER"
     CURSOR=$#BUFFER
     zle vi-insert
@@ -4361,7 +4392,7 @@ function zpwrUpdateAllGitDirs(){
         $(cat $ZPWR_ALL_GIT_DIRS)
 }
 
-function zpwrVerbs(){
+function getZpwrVerbs(){
 
     if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
         logg "regenerating keys for $ZPWR_ENV"
