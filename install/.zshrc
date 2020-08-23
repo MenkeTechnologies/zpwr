@@ -2771,8 +2771,8 @@ zstyle ':completion:*' matcher-list '' \
 
 # parse out host aliases and hostnames from ssh config
 if [[ -r "$HOME/.ssh/config" ]]; then
-    h=(${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-    h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
+    h=(${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
+    h=($h ${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
 fi
 
 if (( $#h > 0 )); then
