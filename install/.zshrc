@@ -4628,7 +4628,8 @@ function magic-enter () {
         echo
         zle .redisplay
     else
-        zle .accept-line
+        # use custom accept line
+        zle accept-line
     fi
 }
 #}}}***********************************************************
