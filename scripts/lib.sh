@@ -346,7 +346,7 @@ function upgrade(){
     elif [[ $1 == suse ]];then
         sudo zypper --non-interactive update
     elif [[ $1 == arch ]];then
-        sudo pacman -Suy
+        sudo pacman -Syu
     elif [[ $1 == redhat ]];then
         sudo yum upgrade -y
     elif [[ $1 == freebsd ]];then
