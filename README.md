@@ -483,7 +483,7 @@ export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
 # the marker found color in bat output into fzf from ag search
 export ZPWR_MARKER_COLOR="0;1;4;37;44m"
 # whether to search interactively in menuselect
-export ZPWR_INTERATIVE_MENU_SELECT=true
+export ZPWR_INTERACTIVE_MENU_SELECT=true
 # list of git dirs
 export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"
 # log file

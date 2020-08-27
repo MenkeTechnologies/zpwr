@@ -2463,7 +2463,7 @@ bindkey -M menuselect '\e[4~' vi-end-of-line
 
 # incremental fuzzy filter on keypress like emacs helm and fzf
 
-if [[ $ZPWR_INTERATIVE_MENU_SELECT == true ]]; then
+if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
     bindkey -M menuselect '^I' vi-forward-char
     bindkey -M menuselect '^?' undo
     bindkey -M menuselect '.' self-insert
@@ -4145,7 +4145,7 @@ function _parameters() {
 
 }
 
-if [[ $ZPWR_INTERATIVE_MENU_SELECT == true ]]; then
+if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
     zstyle ':completion:*:*:*:*:*' menu select=0 interactive
 else
     zstyle ':completion:*:*:*:*:*' menu select=0
