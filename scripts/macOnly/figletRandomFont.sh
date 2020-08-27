@@ -7,21 +7,38 @@
 ##### Notes:
 #}}}***********************************************************
 
-[[ "$(uname)" == Darwin ]] && {
-    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
-} || {
-    FIGLET_DIR="/usr/share/figlet"
-}
+if ! type -- "exists" >/dev/null 2>&1;then
+    test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+    source "$ZPWR_ENV_FILE" || {
+        echo "cannot access $ZPWR_ENV_FILE" >&2
+        exit 1
+    }
+fi
 
-TEXT_TO_DISPLAY="$1"
-FILTER="$2"
+if [[ -z "$1" ]]; then
+        loggErr "usage: $0 <textToDisplay>"
+        return 1
+fi
 
-#set -x
+if [[ "$(uname)" == Darwin ]]; then
+    figletDir="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+else
+    figletDir="/usr/share/figlet"
+fi
 
-trap "tput cnorm; clear; ls -G -FlhAO; exit" INT
+textToDisplay="$1"
+filter="$2"
+time="$3"
+
+if [[ -z $time ]]; then
+    time=2
+fi
+
+trap "tput cnorm; clear; exit" INT
 trap 'font=${ary[$randIndex]}' 3
 
-for file in $(find "$FIGLET_DIR" -iname "*.flf"); do
+for file in $(find "$figletDir" -iname "*.flf"); do
     ary+=($file)
 done
 
@@ -32,17 +49,17 @@ while true; do
     randIndex=$(($RANDOM % $rangePossibleIndices))
     font=${ary[$randIndex]}
     echo "$(date) random font is $font" >>"$ZPWR_LOGFILE"
-    Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"
+    output="$(echo $textToDisplay | figlet -f $font)"
 
-    if [[ -n "$FILTER" ]]; then
-        echo "$(basename $font)" | $FILTER
+    if [[ -n "$filter" ]]; then
+        echo "$(basename $font)" | $filter
         clear
-        echo "$output" | "$FILTER"
+        echo "$output" | "$filter"
     else
         echo "$(basename $font)"
         clear
         echo "$output"
 
     fi
-    sleep 30
+    sleep $time
 done
