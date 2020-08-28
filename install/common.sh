@@ -13,12 +13,12 @@
 unset CDPATH
 
 if ! test -f install.sh; then
-    echo "install.sh ust be in ~/.zpwr/install directory" >&2
+    echo "install.sh must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
 
 if ! test -f common.sh; then
-    echo "common.sh Must be in ~/.zpwr/install directory" >&2
+    echo "common.sh must be in ~/.zpwr/install directory" >&2
     exit 1
 fi
 
@@ -46,6 +46,11 @@ else
     echo "where is $ZPWR_BASE_SCRIPTS/lib.sh" >&2
     exit 1
 fi
-
 #}}}***********************************************************
 
+#{{{                    MARK:source tokens
+#**************************************************************
+if [[ -f "$ZPWR_TOKEN_PRE" ]] && source "$ZPWR_TOKEN_PRE"; then
+    echo "loaded $ZPWR_TOKEN_PRE"
+fi
+#**************************************************************
