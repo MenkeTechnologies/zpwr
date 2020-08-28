@@ -313,7 +313,7 @@ The main window show in the screenshots is started by Prefix-D in an empty tmux 
 Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/control-window` or in the terminal with `tmux source-file ~/.tmux/control-window` in an empty tmux window.
 
 ## Personal Config
-Startup shell files will source `~/.zpwr/local/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.  You can override installer variables in this file before install.
+Startup shell files will source `~/.zpwr/local/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any only features like `isZsh && myZshConfig`.
 
 Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and create a ctags file named `~/tags` in your home directory.
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
@@ -348,9 +348,9 @@ export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 # local file ignored by git
 export ZPWR_LOCAL="$ZPWR/local"
 export ZPWR_HIDDEN_DIR="$ZPWR/local"
-# private tokens file sourced before 
+# private tokens file sourced before. should be bash/zsh compatible
 export ZPWR_TOKEN_PRE="$ZPWR_LOCAL/.tokens.sh"
-# private tokens file sourced after
+# private tokens file sourced after. should be bash/zsh compatible
 export ZPWR_TOKEN_POST="$ZPWR_LOCAL/.tokens-post.sh"
 export ZPWR_TEST="$ZPWR/tests"
 # zpwr install files
