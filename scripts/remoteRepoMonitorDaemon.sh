@@ -90,7 +90,7 @@ while true; do
     }
 
     #echo "$(date) git poll in $(pwd)" >&2
-    git fetch origin
+    git fetch -f --all --prune --tags
     output=$(git log HEAD..origin/dev --oneline)
 
     if [[ -n "$output" ]]; then
