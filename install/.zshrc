@@ -4558,32 +4558,36 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
         if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
 
             mobile=true
-            cat ~/.ssh/authorized_keys |
-                command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
+            if [[ -f "$HOME/.ssh/authorized_keys" ]]; then
+                cat "$HOME/.ssh/authorized_keys" |
+                    command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
 
-            case $distroName in
-                (debian|raspbian|kali|ubuntu|parrot)
-                    out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
-                    ;;
-                (centos|rhel)
-                    out="$(tail /var/log/messages)"
-                    ;;
-                (*suse*|arch|manjaro*)
-                    out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
-                    ;;
-                (fedora)
-                    out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
-                    ;;
-                (*) :
-                    ;;
-            esac
-            logg "searching for $key in $out"
-            [[ "$out" == *"$key"* ]] && mobile=false
+                case $distroName in
+                    (debian|raspbian|kali|ubuntu|parrot)
+                        out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"
+                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
+                        ;;
+                    (centos|rhel)
+                        out="$(tail /var/log/messages)"
+                        ;;
+                    (*suse*|arch|manjaro*)
+                        out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
+                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
+                        ;;
+                    (fedora)
+                        out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"
+                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
+                        ;;
+                    (*) :
+                        ;;
+                esac
+                logg "searching for $key in $out"
+                [[ "$out" == *"$key"* ]] && mobile=false
+                command rm "$ZPWR_TEMPFILE"
+            else
+                logg "$HOME/.ssh/authorized_keys does not exist so NO attach"
+            fi
 
-            command rm "$ZPWR_TEMPFILE"
             if [[ $mobile == "false" ]]; then
                 logg "found $key so desktop"
                 num_con="$(command ps -ef |command grep -a 'sshd' | command grep -a pts | command grep -av grep | wc -l)"
@@ -4609,12 +4613,12 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                         fi
                     } &> /dev/null
                 else
-                    logg "clients so NO"
+                    logg "clients so NO attach"
                     logg command tmux attach
                     command tmux attach
                 fi
             else
-                logg "mobile so NO"
+                logg "not desktop so NO attach"
             fi
         fi
 
