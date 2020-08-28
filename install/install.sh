@@ -516,6 +516,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
 
         prettyPrintBox "Installing Powerline fonts"
         if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
+            goInstallerOutputDir
             wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
             wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
             # move font to valid font path
