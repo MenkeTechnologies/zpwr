@@ -17,7 +17,7 @@ if ! type -- "exists" >/dev/null 2>&1;then
 fi
 
 if [[ $ZPWR_USE_NEOVIM == true ]]; then
-    if commandExists nim; then
+    if commandExists nvim; then
         cmd=nvim
     else
         cmd=vim
