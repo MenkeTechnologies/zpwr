@@ -21,6 +21,7 @@ function gittersmaster() {
     git checkout -B master origin/master
     git pull --force
     git reset --hard origin/master
+    git fetch -f --all --prune --tags
 }
 
 function gittersdev() {
@@ -30,6 +31,7 @@ function gittersdev() {
     git checkout -B dev origin/dev
     git pull --force
     git reset --hard origin/dev
+    git fetch -f --all --prune --tags
 }
 
 function main() {
