@@ -206,7 +206,7 @@ addDependenciesArch(){
 }
 
 addDependenciesSuse(){
-    dependencies_ary=(python3-devel llvm-devel openssl-devel ${dependencies_ary[@]})
+    dependencies_ary=(python3-devel llvm-devel openssl-devel go ${dependencies_ary[@]})
     dependencies_ary+=(gcc-c++ makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel \
         mysql-devel libevent-devel postgresql-devel fortune ruby-devel net-tools-deprecated \
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel)
