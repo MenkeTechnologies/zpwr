@@ -42,6 +42,8 @@ export ZPWR_PROMPT=POWERLEVEL
 export ZPWR_EXPAND=true
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
+# expand globs, history etc with zle expand-word
+export ZPWR_EXPAND_NATIVE=true
 # spelling correction in zsh-expand plugin
 export ZPWR_CORRECT=true
 # aliases expand after spelling correction
