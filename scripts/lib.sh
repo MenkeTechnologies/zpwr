@@ -33,7 +33,7 @@ else
 fi
 
 function commandExists(){
-    hash -- "$1" >/dev/null 2>&1
+    type -ap -- "$1" >/dev/null 2>&1
 }
 
 function blocksToSize(){
