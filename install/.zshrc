@@ -4565,18 +4565,18 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
                 case $distroName in
                     (debian|raspbian|kali|ubuntu|parrot)
                         out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"
-                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}')"
+                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}')"
                         ;;
                     (centos|rhel)
                         out="$(tail /var/log/messages)"
                         ;;
                     (*suse*|arch|manjaro*)
                         out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
-                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
+                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}' | awk -F: '{print $2}')"
                         ;;
                     (fedora)
                         out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"
-                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" | awk '{print $2}' | awk -F: '{print $2}')"
+                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}' | awk -F: '{print $2}')"
                         ;;
                     (*) :
                         ;;
