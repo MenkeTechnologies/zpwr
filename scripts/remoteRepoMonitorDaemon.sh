@@ -17,22 +17,22 @@ remoteName=origin
 
 function gittersmaster() {
 
-    git fetch -f --all --prune --tags $remoteName
+    git fetch -f --all --prune --tags
     git reset --hard $remoteName/master
     git checkout -B master $remoteName/master
     git pull --force
     git reset --hard $remoteName/master
-    git fetch -f --all --prune --tags $remoteName
+    git fetch -f --all --prune --tags
 }
 
 function gittersdev() {
 
-    git fetch -f --all --prune --tags $remoteName
+    git fetch -f --all --prune --tags
     git reset --hard $remoteName/dev
     git checkout -B dev $remoteName/dev
     git pull --force
     git reset --hard $remoteName/dev
-    git fetch -f --all --prune --tags $remoteName
+    git fetch -f --all --prune --tags
 }
 
 function main() {
@@ -91,7 +91,7 @@ while true; do
     }
 
     #echo "$(date) git poll in $(pwd)" >&2
-    git fetch -f --all --prune --tags $remoteName
+    git fetch -f --all --prune --tags
     output=$(git log HEAD..$remoteName/dev --oneline)
 
     if [[ -n "$output" ]]; then
