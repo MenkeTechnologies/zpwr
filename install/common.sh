@@ -53,4 +53,10 @@ fi
 if [[ -f "$ZPWR_TOKEN_PRE" ]] && source "$ZPWR_TOKEN_PRE"; then
     echo "loaded $ZPWR_TOKEN_PRE"
 fi
+
+if source "$ZPWR_RE_ENV_FILE"; then
+    echo "loaded $ZPWR_RE_ENV_FILE"
+else
+    echo "where is $ZPWR_RE_ENV_FILE" >&2
+fi
 #**************************************************************

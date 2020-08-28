@@ -21,8 +21,11 @@ ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
-export ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
-export ZPWR_HIDDEN_DIR="$HOME/.zpwr/local"
+
+test -z $ZPWR && export ZPWR="$HOME/.zpwr"
+export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
+
 BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
 # the destination directory for zpwr specific temp files

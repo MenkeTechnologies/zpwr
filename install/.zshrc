@@ -80,11 +80,16 @@ declare +x FPATH
 #{{{                    MARK:ZPWR Exports
 #**************************************************************
 
-export ZPWR="$HOME/.zpwr"
+test -z $ZPWR && export ZPWR="$HOME/.zpwr"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
 
 source "$ZPWR_ENV_FILE" || {
     echo "where is $ZPWR_ENV_FILE" >&2
+}
+
+source "$ZPWR_RE_ENV_FILE" || {
+    echo "where is $ZPWR_RE_ENV_FILE" >&2
 }
 
 if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
@@ -226,6 +231,10 @@ test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 test -f "$ZPWR_TOKEN_PRE" &&
     source "$ZPWR_TOKEN_PRE" ||
     touch "$ZPWR_TOKEN_PRE"
+
+source "$ZPWR_RE_ENV_FILE" || {
+    echo "where is $ZPWR_RE_ENV_FILE" >&2
+}
 
 # command for exa (replaces ls)
 if [[ $ZPWR_EXA_EXTENDED == true ]]; then
@@ -4056,6 +4065,7 @@ function uncompile(){
         "$ZPWR_LOCAL/.tokens.sh"
         "$ZPWR_LOCAL/.tokens-post.sh"
         "$ZPWR_ENV_FILE"
+        "$ZPWR_RE_ENV_FILE"
         "$ZPWR_SCRIPTS/zpwr.zsh"
         "$ZPWR_SCRIPTS/lib.sh"
         "$ZPWR_SCRIPTS/crossOSCommands.sh"
@@ -4123,6 +4133,7 @@ function recompile(){
         "$ZPWR_LOCAL/.tokens.sh"
         "$ZPWR_LOCAL/.tokens-post.sh"
         "$ZPWR_ENV_FILE"
+        "$ZPWR_RE_ENV_FILE"
         "$ZPWR_SCRIPTS/zpwr.zsh"
         "$ZPWR_SCRIPTS/lib.sh"
         "$ZPWR_SCRIPTS/crossOSCommands.sh"
@@ -4647,6 +4658,10 @@ zc-rename $ZPWR_CONVEY_NAME &>/dev/null
 test -f "$ZPWR_TOKEN_POST" &&
     source "$ZPWR_TOKEN_POST" ||
     touch "$ZPWR_TOKEN_POST"
+
+source "$ZPWR_RE_ENV_FILE" || {
+    echo "where is $ZPWR_RE_ENV_FILE" >&2
+}
 
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
