@@ -23,6 +23,7 @@ ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 
 test -z $ZPWR && export ZPWR="$HOME/.zpwr"
+echo "installing to $ZPWR"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
 
