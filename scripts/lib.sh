@@ -623,7 +623,10 @@ function gitRepoUpdater() {
 
 function listNoClear () {
 
-    commandExists exa && eval "$ZPWR_EXA_COMMAND" && return 0
+    if commandExists exa; then
+        eval "$ZPWR_EXA_COMMAND"
+        return 0
+    fi
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if commandExists grc; then
@@ -637,7 +640,7 @@ function listNoClear () {
             grc -c "$HOME/conf.gls" \
             ls -iFlhA --color=always
         else
-            ls -ifhla
+            ls -ifhlA
         fi
     fi
 }
