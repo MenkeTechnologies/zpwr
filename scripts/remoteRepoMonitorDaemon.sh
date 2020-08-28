@@ -7,31 +7,32 @@
 ##### Notes: watches 2 repos
 #}}}***********************************************************
 
-BASE_DIR="$HOME/.zpwr"
-CONFIG_DIR="$HOME/.zpwr"
-ZSH_COMP_DIR="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
+baseDir="$HOME/.zpwr"
+configDir="$HOME/.zpwr"
+zshCompDir="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
+remoteName=origin
 
-[[ ! -d "$CONFIG_DIR" ]] && echo "no $CONFIG_DIR" >&2 && exit 1
-[[ ! -d "$ZSH_COMP_DIR" ]] && echo "no $ZSH_COMP_DIR" >&2 && exit 1
+[[ ! -d "$configDir" ]] && echo "no $configDir" >&2 && exit 1
+[[ ! -d "$zshCompDir" ]] && echo "no $zshCompDir" >&2 && exit 1
 
 function gittersmaster() {
 
-    git fetch -f --all --prune --tags
-    git reset --hard origin/master
-    git checkout -B master origin/master
+    git fetch -f --all --prune --tags $remoteName
+    git reset --hard $remoteName/master
+    git checkout -B master $remoteName/master
     git pull --force
-    git reset --hard origin/master
-    git fetch -f --all --prune --tags
+    git reset --hard $remoteName/master
+    git fetch -f --all --prune --tags $remoteName
 }
 
 function gittersdev() {
 
-    git fetch -f --all --prune --tags
-    git reset --hard origin/dev
-    git checkout -B dev origin/dev
+    git fetch -f --all --prune --tags $remoteName
+    git reset --hard $remoteName/dev
+    git checkout -B dev $remoteName/dev
     git pull --force
-    git reset --hard origin/dev
-    git fetch -f --all --prune --tags
+    git reset --hard $remoteName/dev
+    git fetch -f --all --prune --tags $remoteName
 }
 
 function main() {
@@ -79,29 +80,29 @@ function refreshers() {
 
 while true; do
 
-    cd "$CONFIG_DIR" || {
-        echo "$(date) Directory $CONFIG_DIR does not exist" >&2
-        if [[ ! -d "$BASE_DIR" ]]; then
-            mkdir -pv "BASE_DIR"
-            cd "$BASE_DIR" || exit 1
-            echo "$(date) Created $CONFIG_DIR and exiting." >&2
+    cd "$configDir" || {
+        echo "$(date) Directory $configDir does not exist" >&2
+        if [[ ! -d "$baseDir" ]]; then
+            mkdir -pv "baseDir"
+            cd "$baseDir" || exit 1
+            echo "$(date) Created $configDir and exiting." >&2
             exit 1
         fi
     }
 
     #echo "$(date) git poll in $(pwd)" >&2
-    git fetch -f --all --prune --tags
-    output=$(git log HEAD..origin/dev --oneline)
+    git fetch -f --all --prune --tags $remoteName
+    output=$(git log HEAD..$remoteName/dev --oneline)
 
     if [[ -n "$output" ]]; then
         echo "$(date) We have change to $(git remote -v)"
         main
     fi
 
-    cd "$ZSH_COMP_DIR" || { echo "$(date) Directory $ZSH_COMP_DIR does not exist" >&2 && exit 1; }
+    cd "$zshCompDir" || { echo "$(date) Directory $zshCompDir does not exist" >&2 && exit 1; }
     #echo "$(date) git poll in $(pwd)" >&2
-    git fetch origin
-    output=$(git log HEAD..origin/master --oneline)
+    git fetch $remoteName
+    output=$(git log HEAD..$remoteName/master --oneline)
 
     if [[ -n "$output" ]]; then
         echo "$(date) We have change to $(git remote -v)" >&2
