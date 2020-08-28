@@ -9,7 +9,7 @@
 #}}}***********************************************************
 
 if ! test -f common.sh; then
-    echo "Must be in ~/.zpwr/install directory" >&2
+    echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
 

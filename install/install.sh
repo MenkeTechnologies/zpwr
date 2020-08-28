@@ -50,22 +50,22 @@ export COLUMNS="$(tput cols)"
 #{{{                    MARK:sanity
 #**************************************************************
 if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALL" ]]; then
-    echo "Must be in ~/.zpwr/install directory" >&2
+    echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
 
 if [[ ! -d $ZPWR_BASE_SCRIPTS ]]; then
-    echo "Must be in ~/.zpwr/install directory" >&2
+    echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
 
 if [[ ! -d $ZPWR_BASE_DIR ]]; then
-    echo "Must be in ~/.zpwr/install directory" >&2
+    echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
 
 if [[ ! -d $ZPWR_INSTALLER_LOCAL ]]; then
-    echo "Must be in ~/.zpwr/install directory" >&2
+    echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
 
@@ -81,7 +81,7 @@ fi
 
 # source common functions
 if ! source common.sh; then
-    echo "Must be in ~/.zpwr/install directory" >&2
+    echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
 

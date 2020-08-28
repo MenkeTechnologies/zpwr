@@ -13,12 +13,12 @@
 unset CDPATH
 
 if ! test -f install.sh; then
-    echo "install.sh must be in ~/.zpwr/install directory" >&2
+    echo "install.sh must be in $ZPWR/install directory" >&2
     exit 1
 fi
 
 if ! test -f common.sh; then
-    echo "common.sh must be in ~/.zpwr/install directory" >&2
+    echo "common.sh must be in $ZPWR/install directory" >&2
     exit 1
 fi
 
