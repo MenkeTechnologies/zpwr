@@ -54,7 +54,7 @@ logg "Copying scripts to custom Installer Repo $ZPWR_DIR"
 #cp "$HOME/.ideavimrc" "$ZPWR_DIR_INSTALL"
 #cp "$HOME/.inputrc" "$ZPWR_DIR_INSTALL"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
-#cp -R "$HOME/.vim/Ultisnips" "$ZPWR_DIR_INSTALL"
+#cp -R "$HOME/.vim/UltiSnips" "$ZPWR_DIR_INSTALL"
 
 type=ctags
 
@@ -137,7 +137,7 @@ logg "Copying shell scripts"
 rm -rf "$tutorialDir/shell/"*
 cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
 cp -R "$ZPWR_SCRIPTS/macOnly" "$tutorialDir/shell"
-cp -R "$HOME/.vim/Ultisnips" "$tutorialDir"
+cp -R "$HOME/.vim/UltiSnips" "$tutorialDir"
 #README="$tutorialDir/shell/README.md"
 #echo "# Mac and Linux Scripts" > "$README"
 #bash "$ZPWR_SCRIPTS/headerSummarizer.sh" "$ZPWR_SCRIPTS/"*.sh >> "$README"

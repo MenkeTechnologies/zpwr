@@ -21,9 +21,9 @@ mkdir -p "$HOME/.vim/autoload" "$HOME/.vim/bundle" && curl -LSso "$HOME/.vim/aut
 goInstallerDir
 source vim_plugins_install.sh
 
-prettyPrintBox "Installing Ultisnips snippets"
+prettyPrintBox "Installing UltiSnips snippets"
 goInstallerDir
-ln -sf $ZPWR_INSTALL/Ultisnips $HOME/.vim/Ultisnips
+ln -sf $ZPWR_INSTALL/UltiSnips $HOME/.vim/UltiSnips
 
 nvimDir="$HOME/.config/nvim"
 [[ ! -d "$nvimDir" ]] && mkdir -p "$nvimDir"
