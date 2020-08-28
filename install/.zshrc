@@ -109,7 +109,17 @@ export CHEATCOLORS=true
 
 export SHELL="$(which zsh)"
 
-#}}}***********************************************************
+# stderr colorization filter
+# color2
+
+# set right prompt string during continuation
+RPS2='+%N:%i:%^'
+# zsh xtrace prompt
+export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
+# change OMZ history size in memory
+export HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+# change OMZ history file size#}}}***********************************************************
 
 #{{{                    MARK:OMZ env vars
 #**************************************************************
@@ -3202,123 +3212,6 @@ alias numcmd='print $#commands'
 #
 #}}}***********************************************************
 
-#{{{                    MARK:Initialize Login
-#**************************************************************
-function banner(){
-
-    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
-    ponysay -W 100
-}
-function bannerLolcat(){
-    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
-    ponysay -W 100 |
-    splitReg.sh -- \
-    ---------------------- lolcat
-}
-
-function noPonyBanner(){
-
-    eval "$ZPWR_DEFAULT_BANNER"
-}
-
-# go to desktop if not root
-if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    if [[ "$UID" != "0" ]]; then
-         # builtin cd "$D" && clear
-        clear
-        if type figlet > /dev/null 2>&1; then
-            printf "\e[1m"
-            if [[ -f "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" ]]; then
-                if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-                    if [[ -f "$ZPWR_SCRIPTS/splitReg.sh" ]];then
-                        bannerLolcat
-                    else
-                        banner
-                    fi
-                else
-                    noPonyBanner
-                fi
-            fi
-        fi
-        printf "\e[0m"
-        listNoClear
-    else
-        # root on unix
-        clearList
-    fi
-else
-    if [[ "$UID" != "0" ]]; then
-        clear
-        if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
-            case $distroName in
-                (raspbian)
-                    test -d "$D" && builtin cd "$D"
-                    if type ponysay 1>/dev/null 2>&1; then
-                        bash "$ZPWR_SCRIPTS/motd.sh" | ponysay -W 120
-                    else
-                        bash "$ZPWR_SCRIPTS/motd.sh"
-                    fi
-                    ;;
-                (ubuntu|debian|kali|linuxmint|parrot)
-                    test -d "$D" && builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 |
-                        splitReg.sh -- ------------- lolcat
-                    ;;
-                (fedora|centos|rhel)
-                    test -d "$D" && builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 |
-                        splitReg.sh -- ------------- lolcat
-                    ;;
-                (*suse*|arch|manjaro*)
-                    test -d "$D" && builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 |
-                        splitReg.sh -- ------------- lolcat
-                    ;;
-                (*) :
-                    ;;
-            esac
-        else
-            case $distroName in
-                (raspbian)
-                    test -d "$D" && builtin cd "$D"
-                    bash "$ZPWR_SCRIPTS/motd.sh"
-                    ;;
-                (ubuntu|debian|kali|linuxmint|parrot)
-                    test -d "$D" && builtin cd "$D"
-                    noPonyBanner
-                    ;;
-                (fedora|centos|rhel)
-                    test -d "$D" && builtin cd "$D"
-                    noPonyBanner
-                    ;;
-                (*suse*|arch|manjaro*)
-                    test -d "$D" && builtin cd "$D"
-                    noPonyBanner
-                    ;;
-                (*) :
-                    ;;
-            esac
-        fi
-        listNoClear
-    else
-        # root on linux
-        clearList
-    fi
-fi
-
-# stderr colorization filter
-# color2
-
-# set right prompt string during continuation
-RPS2='+%N:%i:%^'
-# zsh xtrace prompt
-export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
-# change OMZ history size in memory
-export HISTSIZE=999999999
-export SAVEHIST=$HISTSIZE
-# change OMZ history file size
-
-#}}}***********************************************************
 
 #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
 #**************************************************************
@@ -4494,11 +4387,166 @@ function zpwrClean() {
     done
 }
 
+function banner(){
+
+    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
+    ponysay -W 100
+}
+function bannerLolcat(){
+    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
+    ponysay -W 100 |
+    splitReg.sh -- \
+    ---------------------- lolcat
+}
+
+function noPonyBanner(){
+
+    eval "$ZPWR_DEFAULT_BANNER"
+}
+
+#}}}***********************************************************
+
+#{{{                    MARK:Misc
+#**************************************************************
+
+if exists zunit; then
+    alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
+fi
+
+# Example usage: zmv -W '*.pl' '*.perl'
+autoload zmv
+alias mmv='noglob zmv -W'
+
+exists thefuck && eval $(thefuck --alias)
+
+# force alias z to zshz not zypper on suse
+alias z="$zcmd 2>&1"
+autoload zargs
+###}}}***********************************************************
+
+#{{{                    MARK:Groovy
+#**************************************************************
+unset GROOVY_HOME # when set this messes up classpath
+###}}}***********************************************************
+
+#{{{                    MARK:Override plugin defs
+#**************************************************************
+function magic-enter () {
+
+  # If commands are not already set, use the defaults
+    test -z "$MAGIC_ENTER_GIT_COMMAND" && MAGIC_ENTER_GIT_COMMAND="git status -u ."
+    test -z "$MAGIC_ENTER_OTHER_COMMAND" && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
+
+    if [[ -z $BUFFER ]]; then
+        echo
+        if isGitDir; then
+            eval "$MAGIC_ENTER_GIT_COMMAND"
+        else
+            eval "$MAGIC_ENTER_OTHER_COMMAND"
+        fi
+        # add extra NL to see last file
+        echo
+        zle .redisplay
+    else
+        # use custom accept line
+        zle accept-line
+    fi
+}
 #}}}***********************************************************
 
 #{{{                    MARK:Suffix aliases
 #**************************************************************
 alias -s txt='vim'
+#}}}***********************************************************
+
+#{{{                    MARK:Initialize Login
+#**************************************************************
+# go to desktop if not root
+if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
+    if [[ "$UID" != "0" ]]; then
+         # builtin cd "$D" && clear
+        clear
+        if type figlet > /dev/null 2>&1; then
+            printf "\e[1m"
+            if [[ -f "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" ]]; then
+                if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
+                    if [[ -f "$ZPWR_SCRIPTS/splitReg.sh" ]];then
+                        bannerLolcat
+                    else
+                        banner
+                    fi
+                else
+                    noPonyBanner
+                fi
+            fi
+        fi
+        printf "\e[0m"
+        listNoClear
+    else
+        # root on unix
+        clearList
+    fi
+else
+    if [[ "$UID" != "0" ]]; then
+        clear
+        if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
+            case $distroName in
+                (raspbian)
+                    test -d "$D" && builtin cd "$D"
+                    if type ponysay 1>/dev/null 2>&1; then
+                        bash "$ZPWR_SCRIPTS/motd.sh" | ponysay -W 120
+                    else
+                        bash "$ZPWR_SCRIPTS/motd.sh"
+                    fi
+                    ;;
+                (ubuntu|debian|kali|linuxmint|parrot)
+                    test -d "$D" && builtin cd "$D"
+                    figlet -f block "$(whoami)" | ponysay -W 120 |
+                        splitReg.sh -- ------------- lolcat
+                    ;;
+                (fedora|centos|rhel)
+                    test -d "$D" && builtin cd "$D"
+                    figlet -f block "$(whoami)" | ponysay -W 120 |
+                        splitReg.sh -- ------------- lolcat
+                    ;;
+                (*suse*|arch|manjaro*)
+                    test -d "$D" && builtin cd "$D"
+                    figlet -f block "$(whoami)" | ponysay -W 120 |
+                        splitReg.sh -- ------------- lolcat
+                    ;;
+                (*) :
+                    ;;
+            esac
+        else
+            case $distroName in
+                (raspbian)
+                    test -d "$D" && builtin cd "$D"
+                    bash "$ZPWR_SCRIPTS/motd.sh"
+                    ;;
+                (ubuntu|debian|kali|linuxmint|parrot)
+                    test -d "$D" && builtin cd "$D"
+                    noPonyBanner
+                    ;;
+                (fedora|centos|rhel)
+                    test -d "$D" && builtin cd "$D"
+                    noPonyBanner
+                    ;;
+                (*suse*|arch|manjaro*)
+                    test -d "$D" && builtin cd "$D"
+                    noPonyBanner
+                    ;;
+                (*) :
+                    ;;
+            esac
+        fi
+        listNoClear
+    else
+        # root on linux
+        clearList
+    fi
+fi
+
+
 #}}}***********************************************************
 
 #{{{                    MARK:Auto attach tmux
@@ -4574,53 +4622,6 @@ if [[ $ZPWR_AUTO_ATTACH == true ]]; then
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:Misc
-#**************************************************************
-
-if exists zunit; then
-    alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
-fi
-
-# Example usage: zmv -W '*.pl' '*.perl'
-autoload zmv
-alias mmv='noglob zmv -W'
-
-exists thefuck && eval $(thefuck --alias)
-
-# force alias z to zshz not zypper on suse
-alias z="$zcmd 2>&1"
-autoload zargs
-###}}}***********************************************************
-
-#{{{                    MARK:Groovy
-#**************************************************************
-unset GROOVY_HOME # when set this messes up classpath
-###}}}***********************************************************
-
-#{{{                    MARK:Override plugin defs
-#**************************************************************
-function magic-enter () {
-
-  # If commands are not already set, use the defaults
-    test -z "$MAGIC_ENTER_GIT_COMMAND" && MAGIC_ENTER_GIT_COMMAND="git status -u ."
-    test -z "$MAGIC_ENTER_OTHER_COMMAND" && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
-
-    if [[ -z $BUFFER ]]; then
-        echo
-        if isGitDir; then
-            eval "$MAGIC_ENTER_GIT_COMMAND"
-        else
-            eval "$MAGIC_ENTER_OTHER_COMMAND"
-        fi
-        # add extra NL to see last file
-        echo
-        zle .redisplay
-    else
-        # use custom accept line
-        zle accept-line
-    fi
-}
-#}}}***********************************************************
 
 #{{{                    MARK:FPATH AND PATH REMOVE DUPLICATES
 #**************************************************************
