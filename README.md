@@ -450,7 +450,23 @@ export ZPWR_RESET="\x1b[0m"
 
 ```sh
 # the base dir for zpwr configs
-export ZPWR="$HOME/.zpwr"
+test -z ZPWR && export ZPWR="$HOME/.zpwr"
+# local file ignored by git
+export ZPWR_LOCAL="$ZPWR/local"
+export ZPWR_HIDDEN_DIR="$ZPWR/local"
+# private tokens file sourced before 
+export ZPWR_TOKEN_PRE="$ZPWR_LOCAL/.tokens.sh"
+# private tokens file sourced after
+export ZPWR_TOKEN_POST="$ZPWR_LOCAL/.tokens-post.sh"
+export ZPWR_TEST="$ZPWR/tests"
+# zpwr install files
+export ZPWR_INSTALL="$ZPWR/install"
+# zpwr tmux config files
+export ZPWR_TMUX="$ZPWR/.tmux"
+# zpwr tmux git ignored files
+export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
+# the base dir for zpwr temp
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
 # the path to a lock file (semaphore) for zpwr
 export ZPWR_LOCK_FILE="$ZPWR_LOCAL/.lock"
 # cache file for all zpwr env lookups
@@ -502,23 +518,6 @@ export ZPWR_VIM_KEYBINDINGS="$ZPWR_LOCAL/zpwrVimKeybindings.txt"
 export ZPWR_ALL_KEYBINDINGS="$ZPWR_LOCAL/zpwrAllKeybindings.txt"
 export GITHUB_ACCOUNT="$ZPWR_GITHUB_ACCOUNT"
 export ZPWR_GITHUB_URL="https://github.com/$ZPWR_GITHUB_ACCOUNT"
-# local file ignored by git
-export ZPWR_LOCAL="$ZPWR/local"
-export ZPWR_HIDDEN_DIR="$ZPWR/local"
-# private tokens file sourced before 
-export ZPWR_TOKEN_PRE="$ZPWR_LOCAL/.tokens.sh"
-# private tokens file sourced after
-export ZPWR_TOKEN_POST="$ZPWR_LOCAL/.tokens-post.sh"
-export ZPWR_TEST="$ZPWR/tests"
-# zpwr install files
-export ZPWR_INSTALL="$ZPWR/install"
-# zpwr tmux config files
-export ZPWR_TMUX="$ZPWR/.tmux"
-# zpwr tmux git ignored files
-export ZPWR_TMUX_LOCAL="$ZPWR_TMUX/local"
-# the base dir for zpwr temp
-export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_LOCAL/.temp"
-
 ```
 
 ## Tests

@@ -27,11 +27,6 @@ echo "installing to $ZPWR"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
 
-BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
-
-# the destination directory for zpwr specific temp files
-export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
-
 ESCAPE_REMOVER="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
 # the destination directory for zpwr specific installed files
 LOGFILE="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
@@ -84,6 +79,11 @@ if ! source common.sh; then
     echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
+
+BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
+
+# the destination directory for zpwr specific temp files
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
 
 exists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
 if [[ -n $vimV ]]; then
