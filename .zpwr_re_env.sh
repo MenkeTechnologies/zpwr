@@ -11,7 +11,7 @@
 #{{{                    MARK:env vars to re eval after sourcing tokens
 #**************************************************************
 # the base dir for zpwr configs
-export ZPWR="$HOME/.zpwr"
+test -z ZPWR && export ZPWR="$HOME/.zpwr"
 # the path to a lock file (semaphore) for zpwr
 export ZPWR_LOCK_FILE="$ZPWR_LOCAL/.lock"
 # cache file for all zpwr env lookups
