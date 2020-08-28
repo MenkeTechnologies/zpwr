@@ -851,23 +851,28 @@ dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Locati
 
 prettyPrintBox "linking $dir to ~/.tmux/powerline"
 
-if [[ ! -d "$HOME/.tmux" ]]; then
-    prettyPrintBox "$HOME/.tmux does not exist"
+if [[ -z $TMUX_HOME ]]; then
+    TMUX_HOME="$HOME/.tmux"
 fi
 
-if [[ ! -d "$dir" ]]; then
-    prettyPrintBox "$dir does not exist"
+if [[ ! -d "$TMUX_HOME" ]]; then
+    prettyPrintBox "$TMUX_HOME does not exist"
 else
-    if needSudo "$dir"; then
-        prettyPrintBox "linking $dir to $TMUX_HOME/powerline with sudo"
-        echo sudo ln -sf "$dir" "$HOME/.tmux/powerline"
-        sudo ln -sf "$dir" "$TMUX_HOME/powerline"
+    if [[ ! -d "$dir" ]]; then
+        prettyPrintBox "$dir does not exist"
     else
-        prettyPrintBox "linking $dir to $TMUX_HOME/powerline"
-        echo ln -sf "$dir" "$HOME/.tmux/powerline"
-        ln -sf "$dir" "$TMUX_HOME/powerline"
+        if needSudo "$dir"; then
+            prettyPrintBox "linking $dir to $TMUX_HOME/powerline with sudo"
+            echo sudo ln -sf "$dir" "$TMUX_HOME/powerline"
+            sudo ln -sf "$dir" "$TMUX_HOME/powerline"
+        else
+            prettyPrintBox "linking $dir to $TMUX_HOME/powerline"
+            echo ln -sf "$dir" "$TMUX_HOME/powerline"
+            ln -sf "$dir" "$TMUX_HOME/powerline"
+        fi
     fi
 fi
+
 #}}}***********************************************************
 
 #{{{                    MARK:start tmux
