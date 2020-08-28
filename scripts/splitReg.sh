@@ -7,7 +7,16 @@
 ##### Notes:
 #}}}***********************************************************
 
-if [[ ZPWR_TRACE == true ]]; then
+if ! type -- "exists" >/dev/null 2>&1;then
+    test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+    source "$ZPWR_ENV_FILE" || {
+        echo "cannot access $ZPWR_ENV_FILE" >&2
+        exit 1
+    }
+fi
+
+if [[ $ZPWR_TRACE == true ]]; then
     set -x
 fi
 trap 'rm "$file"' INT
@@ -63,6 +72,8 @@ shift $(($OPTIND - 1))
 regex="$1"
 filter="$2"
 
+commandExists $filter || filter='cat'
+
 file="$ZPWR_TEMPFILE"
 cat > "$file"
 output=$(cat $file)
@@ -115,6 +126,6 @@ rm "$file"
 
 #cat | tee >(sed -n "1,/$regex"p) >(sed -n "/$regex/,$p" | "$filter" ) >/dev/null
 #however possibly issues with ordering of output to screen
-if [[ ZPWR_TRACE == true ]]; then
+if [[ $ZPWR_TRACE == true ]]; then
     set +x
 fi
