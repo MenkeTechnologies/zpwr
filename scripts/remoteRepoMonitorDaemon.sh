@@ -99,7 +99,11 @@ while true; do
         main
     fi
 
-    cd "$zshCompDir" || { echo "$(date) Directory $zshCompDir does not exist" >&2 && exit 1; }
+    if ! cd "$zshCompDir"; then
+        echo "$(date) Directory $zshCompDir does not exist" >&2
+        exit 1
+    fi
+
     #echo "$(date) git poll in $(pwd)" >&2
     git fetch $remoteName
     output=$(git log HEAD..$remoteName/master --oneline)
