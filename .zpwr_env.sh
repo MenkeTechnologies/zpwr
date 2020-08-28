@@ -186,6 +186,16 @@ export ZPWR_RED="\x1b[31m"
 export ZPWR_RESET="\x1b[0m"
 #}}}***********************************************************
 
+#{{{                    MARK:NonZPWR
+#**************************************************************
+# history file
+export HISTFILE="$HOME/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history"
+# command to run on enter key with empty buffer
+export MAGIC_ENTER_OTHER_COMMAND="clearList"
+# command to run on enter key with empty buffer and git dir
+export MAGIC_ENTER_GIT_COMMAND='clearList; test -n "$(git status --porcelain)" && git status -u .'
+#}}}***********************************************************
+
 #{{{                    MARK:source lib file
 #**************************************************************
 # do not want any surprises when relative cd to other dirs

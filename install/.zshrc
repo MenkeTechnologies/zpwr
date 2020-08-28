@@ -106,14 +106,6 @@ unalias ag &> /dev/null
 #stop delay when entering normal mode
 export KEYTIMEOUT=1
 export CHEATCOLORS=true
-export HISTFILE="$HOME/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history"
-
-function exists(){
-
-    # alternative is command -v
-    type -- "$1" &>/dev/null || return 1 &&
-    [[ $(type -- "$1" 2>/dev/null) != *"suffix alias"* ]]
-}
 
 export SHELL="$(which zsh)"
 
@@ -176,10 +168,6 @@ export ARCHFLAGS="-arch x86_64"
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
 
 ZSH_DISABLE_COMPFIX=true
-
-export MAGIC_ENTER_GIT_COMMAND='clearList; test -n "$(git status --porcelain)" && git status -u .'
-
-export MAGIC_ENTER_OTHER_COMMAND="clearList"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
