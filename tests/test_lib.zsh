@@ -9,6 +9,7 @@
 #}}}***********************************************************
 
 ENV_FILE="$PWD/.zpwr_env.sh"
+RE_ENV_FILE="$PWD/.zpwr_re_env.sh"
 ALIAS_FILE="$PWD/.shell_aliases_functions.sh"
 ZPWR_VERBS_FILE="$PWD/scripts/zpwr.zsh"
 ZPWR_FN_FILE="$PWD/scripts/lib.sh"
@@ -20,7 +21,13 @@ if [[ ! -f $ENV_FILE ]]; then
     error "$ENV_FILE does not exist"
 fi
 
-load $ENV_FILE
+load $RE_ENV_FILE
+
+if [[ ! -f $RE_ENV_FILE ]]; then
+    error "$RE_ENV_FILE does not exist"
+fi
+
+load $RE_ENV_FILE
 
 if [[ ! -f $ALIAS_FILE ]]; then
     error "$ALIAS_FILE does not exist"
