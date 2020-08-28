@@ -36,6 +36,90 @@ function commandExists(){
     hash -- "$1" >/dev/null 2>&1
 }
 
+function blocksToSize(){
+
+    local bytes input
+
+    read input
+    bytes=$(( input * 512 ))
+    echo $bytes | humanreadable
+}
+
+function humanReadable(){
+
+    awk 'function human(x) {
+        s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"
+        while (x>=1024 && length(s)>1){
+            x/=1024; s=substr(s,5)
+        }
+        s=substr(s,1,4)
+        xf=(s==" B  ") ? "%d" : "%.2f"
+        return sprintf(xf"%s", x, s)
+    }
+    {gsub(/^[0-9]+/, human($1));print}'
+}
+
+function perlremovespaces(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: perlremovespaces <file...>"
+        return 1
+    fi
+
+    local file
+
+    for file;do
+        printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
+        perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
+    done
+}
+
+function rename(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: rename <search> <file...>"
+        return 1
+    fi
+
+    local search out
+
+    search="$1"
+    shift
+    for file in "$@"; do
+        test -d "$file" && continue
+        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
+        if (( $out != 0 )); then
+            #statements
+            mv "$file" "$(echo "$file" | sed -E "$search")"
+        fi
+    done
+}
+
+function escapeRemove(){
+
+    while read; do
+        echo "$REPLY" | sed -e 's@\e\[.\{1,5\}m@@g'
+    done
+}
+
+function prettyPrintNoNewline(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: prettyPrintNoNewline <string>"
+        return 1
+    fi
+
+
+    printf "\x1b[1m"
+    printf "%s " "$@"
+    printf "\x1b[0m"
+}
+
+function tac(){
+
+    sed '1!G;h;$!d' "$@"
+}
+
 function isBinary() {
 
     [[ $(LC_MESSAGES=C command grep -Hm1 '^' < "${1:-$REPLY}") =~ '^Binary' ]]
