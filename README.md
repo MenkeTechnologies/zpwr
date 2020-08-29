@@ -447,6 +447,8 @@ export ZPWR_DEFAULT_OMZ_THEME=simonoff
 export ZPWR_BLUE="\x1b[37;44m"
 export ZPWR_RED="\x1b[31m"
 export ZPWR_RESET="\x1b[0m"
+# set to false if this file is sourced during remote execution with no ZPWR env
+test -z $ZPWR_REMOTE && export ZPWR_REMOTE=false
 ```
 
 ```sh

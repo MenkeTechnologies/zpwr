@@ -117,10 +117,14 @@ export ZPWR_DEFAULT_OMZ_THEME=simonoff
 export ZPWR_BLUE="\x1b[37;44m"
 export ZPWR_RED="\x1b[31m"
 export ZPWR_RESET="\x1b[0m"
+# set to false if this file is sourced during remote execution with no ZPWR env
+test -z $ZPWR_REMOTE && export ZPWR_REMOTE=false
 
-source "$ZPWR_RE_ENV_FILE" || {
-    echo "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'" >&2
-}
+if [[ $ZPWR_REMOTE == false ]]; then
+    source "$ZPWR_RE_ENV_FILE" || {
+        echo "could not source ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'" >&2
+    }
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:NonZPWR
@@ -136,15 +140,19 @@ export MAGIC_ENTER_GIT_COMMAND='clearList; test -n "$(git status --porcelain)" &
 # do not want any surprises when relative cd to other dirs
 unset CDPATH
 
-source "$ZPWR_LIB" || {
-    echo "where is ZPWR_LIB '$ZPWR_LIB'" >&2
-}
+if [[ $ZPWR_REMOTE == false ]]; then
+    source "$ZPWR_LIB" || {
+        echo "could not source ZPWR_LIB '$ZPWR_LIB'" >&2
+    }
+fi
 #}}}***********************************************************
 
-if isZsh; then
-    declare -T ZPWR_DIRS_CLEAN zpwrDirsClean
-fi
+if [[ $ZPWR_REMOTE == false ]]; then
+    if isZsh; then
+        declare -T ZPWR_DIRS_CLEAN zpwrDirsClean
+    fi
 
-export ZPWR_DIRS_CLEAN
+    export ZPWR_DIRS_CLEAN
+fi
 #}}}***********************************************************
 

@@ -15,8 +15,10 @@ while [ -h "$source" ]; do # resolve $source until the file is no longer a symli
 done
 dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
 
-if ! source "$dir/init.sh"; then
-    echo "could not source dir '$dir/init.sh'"
+if [[ $ZPWR_REMOTE == false ]]; then
+    if ! source "$dir/init.sh"; then
+        echo "could not source dir '$dir/init.sh'"
+    fi
 fi
 
 #python3
