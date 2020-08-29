@@ -428,6 +428,33 @@ function sub (){
     zle .accept-line
 }
 
+function zpwrEditTag(){
+
+    if ! isGitDir; then
+        loggNotGit
+        return 1
+    fi
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrEditTag <tag>"
+        return 1
+    fi
+
+    local tag desc wantedTag
+
+    wantedTag="$1"
+
+    while read tag desc; do
+        if [[ $tag == *$wantedTag* ]]; then
+            break
+        fi
+    done < <(git tag --sort=-v:refname -n -l)
+
+    BUFFER="git tag -fam \"$desc\" $tag && git push -f origin --tags"
+
+    print -rz -- "$BUFFER"
+}
+
 function emacsAllEdit(){
 
     if ! exists emacs; then
