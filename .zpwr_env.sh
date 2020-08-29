@@ -119,7 +119,7 @@ export ZPWR_RED="\x1b[31m"
 export ZPWR_RESET="\x1b[0m"
 
 source "$ZPWR_RE_ENV_FILE" || {
-    echo "where is ZPWR_RE_ENV_FILE $ZPWR_RE_ENV_FILE" >&2
+    echo "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'" >&2
 }
 #}}}***********************************************************
 
@@ -137,7 +137,7 @@ export MAGIC_ENTER_GIT_COMMAND='clearList; test -n "$(git status --porcelain)" &
 unset CDPATH
 
 source "$ZPWR_LIB" || {
-    echo "where is ZPWR_LIB $ZPWR_LIB" >&2
+    echo "where is ZPWR_LIB '$ZPWR_LIB'" >&2
 }
 #}}}***********************************************************
 
