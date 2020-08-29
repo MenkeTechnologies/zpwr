@@ -31,7 +31,8 @@ exit
 ```
 or type C-d (Control-d) to return to installer script.
 
-To install to custom directory export ZPWR to that directory in your shell environment before installing.  ZPWR also needs to be permanently exported in the environment before `~/.zshrc` is read by zsh such as in `~/.zshenv` for example.
+## Full Installation Instructions to `$ZPWR`
+To install to a custom directory, clone the project to that directory and `export ZPWR=<my_directory>` in your shell environment before installing.  After install, ZPWR needs to be permanently exported in the environment before `~/.zshrc` is read by zsh.  `~/.zshenv` is one possible location for the export.
 
 ## ZPWR Features
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
