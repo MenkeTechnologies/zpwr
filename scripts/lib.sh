@@ -516,7 +516,7 @@ function prettyPrint(){
 function bannerSleep(){
 
     local time
-    time=2
+    time=1
 
     if [[ -n $1 ]]; then
         time=$1
