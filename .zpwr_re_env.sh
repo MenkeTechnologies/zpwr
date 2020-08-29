@@ -4,7 +4,7 @@
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Fri Aug 28 16:10:06 EDT 2020
-##### Purpose: bash script to
+##### Purpose: bash/zsh script to hold refreshable env vars
 ##### Notes:
 #}}}***********************************************************
 

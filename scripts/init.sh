@@ -4,8 +4,8 @@
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Sat Aug 29 00:34:22 EDT 2020
-##### Purpose: bash script to
-##### Notes:
+##### Purpose: bash/zsh script to load zpwr env files
+##### Notes: need to source lib files because functions not exported
 #}}}***********************************************************
 
 if ! type -- "exists" >/dev/null 2>&1;then

@@ -4,7 +4,7 @@
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Tue Jun  2 11:16:35 EDT 2020
-##### Purpose: bash script to
+##### Purpose: bash/zsh script to hold env vars
 ##### Notes:
 #}}}***********************************************************
 
