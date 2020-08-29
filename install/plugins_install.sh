@@ -23,7 +23,7 @@ source vim_plugins_install.sh
 
 prettyPrintBox "Installing UltiSnips snippets"
 goInstallerDir
-ln -sf $ZPWR_INSTALL/UltiSnips $HOME/.vim/UltiSnips
+ln -sfn $ZPWR_INSTALL/UltiSnips $HOME/.vim/UltiSnips
 
 nvimDir="$HOME/.config/nvim"
 [[ ! -d "$nvimDir" ]] && mkdir -p "$nvimDir"

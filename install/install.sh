@@ -867,12 +867,12 @@ else
     else
         if needSudo "$dir"; then
             prettyPrintBox "linking $dir to $TMUX_HOME/powerline with sudo"
-            echo sudo ln -sf "$dir" "$TMUX_HOME/powerline"
-            sudo ln -sf "$dir" "$TMUX_HOME/powerline"
+            echo sudo ln -sfn "$dir" "$TMUX_HOME/powerline"
+            sudo ln -sfn "$dir" "$TMUX_HOME/powerline"
         else
             prettyPrintBox "linking $dir to $TMUX_HOME/powerline"
-            echo ln -sf "$dir" "$TMUX_HOME/powerline"
-            ln -sf "$dir" "$TMUX_HOME/powerline"
+            echo ln -sfn "$dir" "$TMUX_HOME/powerline"
+            ln -sfn "$dir" "$TMUX_HOME/powerline"
         fi
     fi
 fi
