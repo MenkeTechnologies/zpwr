@@ -684,9 +684,7 @@ function vimZpwrCtags(){
 
 function zpwrScriptCount(){
 
-    command ls \
-        "$ZPWR_SCRIPTS/"*.{sh,zsh,pl,py} \
-        "$ZPWR_SCRIPTS_MAC/"*.{sh,zsh,pl,py} |
+    zpwrListScripts |
         wc -l |
         awk '{$1=$1};1'
 }
@@ -972,15 +970,18 @@ function fzvimAll(){
     eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
-function fzvimScript(){
 
+function zpwrListScripts(){
     command ls \
-    "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} |
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
+}
+
+function fzvimScript(){
+
+    zpwrListScripts |
         perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
     eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
