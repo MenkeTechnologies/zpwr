@@ -7,13 +7,13 @@
 ##### Notes: watches 2 repos
 #}}}***********************************************************
 
-baseDir="$HOME/.zpwr"
-configDir="$HOME/.zpwr"
+baseDir="$ZPWR"
+configDir="$ZPWR"
 zshCompDir="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
 remoteName=origin
 
-[[ ! -d "$configDir" ]] && echo "no $configDir" >&2 && exit 1
-[[ ! -d "$zshCompDir" ]] && echo "no $zshCompDir" >&2 && exit 1
+[[ ! -d "$configDir" ]] && echo "no config dir '$configDir'" >&2 && exit 1
+[[ ! -d "$zshCompDir" ]] && echo "no zshCompDir '$zshCompDir'" >&2 && exit 1
 
 function gittersmaster() {
 
