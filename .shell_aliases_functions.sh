@@ -746,7 +746,7 @@ else
         fi
 
         perl -i -pe "s@/home/$USER/\\.zpwr/scripts@$ZPWR_SCRIPTS@g" "$service_path"
-        perl -i -pe "s@/home/$USER/\\.zpwr$ZPWR@g" "$service_path"
+        perl -i -pe "s@/home/$USER/\\.zpwr@$ZPWR@g" "$service_path"
 
         sudo cp "$service_path" /etc/systemd/system
         sudo systemctl daemon-reload
