@@ -2560,7 +2560,7 @@ function regenCtags(){
 function regenAllKeybindingsCache(){
 
     prettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
-    bash "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
+    zsh "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
     escapeRemover.pl |
     perl -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"
 
