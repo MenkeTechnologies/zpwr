@@ -737,13 +737,16 @@ else
             return 1
         fi
 
+
         if [[ $UID != 0 ]]; then
             perl -i -pe "s@pi@$USER@g" "$service_path"
             perl -i -pe "s@^Group=.*@Group=$group@g" "$service_path"
         else
             perl -i -pe "s@pi@$USER@g;s@/home/root@/root@;" "$service_path"
         fi
-        perl -i -pe "s@/home/pi/\\.zpwr/scripts@$ZPWR_SCRIPTS@g" "$service_path"
+
+        perl -i -pe "s@/home/$USER/\\.zpwr/scripts@$ZPWR_SCRIPTS@g" "$service_path"
+
         sudo cp "$service_path" /etc/systemd/system
         sudo systemctl daemon-reload
         sudo systemctl restart $service.service
