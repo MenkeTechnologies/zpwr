@@ -77,7 +77,7 @@ filter="$2"
 commandExists $filter || filter='cat'
 
 file="$ZPWR_TEMPFILE"
-cat > "$file"
+command cat > "$file"
 output=$(cat $file)
 demarcatingLineNum=$(echo "$output" | command grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)
 
