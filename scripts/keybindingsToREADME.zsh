@@ -6,7 +6,12 @@
 ##### Purpose: zsh script to gen the keybindings for README
 ##### Notes:
 #}}}***********************************************************
+0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+0="${${(M)0:#/*}:-$PWD/$0}"
 
+if ! source "${0:h}/init.sh"; then
+    echo "could not source 0/init.sh '${0:h}/init.sh'"
+fi
 
 if [[ -z "$ZPWR_TEMPFILE" ]]; then
     ZPWR_TEMPFILE="/tmp/.temp$$"

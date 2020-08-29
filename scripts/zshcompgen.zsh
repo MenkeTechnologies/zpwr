@@ -6,16 +6,11 @@
 ##### Purpose: zsh script to generate missing comps
 ##### Notes: source this file
 #}}}***********************************************************
-source="${BASH_SOURCE[0]}"
-while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
-  dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
-  source="$(readlink "$source")"
-  [[ $source != /* ]] && source="$dir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-done
-dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+0="${${(M)0:#/*}:-$PWD/$0}"
 
-if ! source "$dir/init.sh"; then
-    echo "could not source dir '$dir/init.sh'"
+if ! source "${0:h}/init.sh"; then
+    echo "could not source 0/init.sh '${0:h}/init.sh'"
 fi
 
 comp_dir="comp_dir"

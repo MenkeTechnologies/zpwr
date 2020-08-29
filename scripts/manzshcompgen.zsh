@@ -6,12 +6,11 @@
 ##### Purpose: zsh script to generate missing comps
 ##### Notes: source this file
 #}}}***********************************************************
-
 0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 
-if ! source "$0/init.sh"; then
-    echo "could not source 0/init.sh '$0/init.sh'"
+if ! source "${0:h}/init.sh"; then
+    echo "could not source 0/init.sh '${0:h}/init.sh'"
 fi
 
 comp_dir="comp_dir"

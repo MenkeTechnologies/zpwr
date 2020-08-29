@@ -3,7 +3,7 @@
 #**************************************************************
 ##### Author: JACOBMENKE
 ##### Date: Fri Oct  4 17:27:00 EDT 2019
-##### Purpose: bash script to show screenfetch
+##### Purpose: zsh script to get envv
 ##### Notes:
 #}}}***********************************************************
 
