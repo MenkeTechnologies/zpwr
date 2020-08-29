@@ -65,12 +65,12 @@ if [[ ! -d $ZPWR_INSTALLER_LOCAL ]]; then
 fi
 
 if ! test -f "$ESCAPE_REMOVER"; then
-    echo "where is $ESCAPE_REMOVER?" >&2
+    echo "where is ESCAPE_REMOVER '$ESCAPE_REMOVER'?" >&2
     exit 1
 fi
 
 if ! test -x "$ESCAPE_REMOVER"; then
-    echo "why $ESCAPE_REMOVER not exe?" >&2
+    echo "why '$ESCAPE_REMOVER' not exe?" >&2
     exit 1
 fi
 

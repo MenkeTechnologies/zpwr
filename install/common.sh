@@ -36,14 +36,14 @@ ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
 if source "$ZPWR_BASE_DIR/.zpwr_env.sh";then
     echo "loaded $ZPWR_BASE_DIR/.zpwr_env.sh"
 else
-    echo "where is ZPWR_BASE_DIR/.zpwr_env.sh" >&2
+    echo "where is ZPWR_BASE_DIR/.zpwr_env.sh '$ZPWR_BASE_DIR/.zpwr_env.sh'?" >&2
     exit 1
 fi
 
 if source "$ZPWR_BASE_SCRIPTS/lib.sh";then
     echo "loaded $ZPWR_BASE_SCRIPTS/lib.sh"
 else
-    echo "where is $ZPWR_BASE_SCRIPTS/lib.sh" >&2
+    echo "where is ZPWR_BASE_SCRIPTS '$ZPWR_BASE_SCRIPTS/lib.sh'" >&2
     exit 1
 fi
 #}}}***********************************************************
@@ -57,6 +57,6 @@ fi
 if source "$ZPWR_RE_ENV_FILE"; then
     echo "loaded $ZPWR_RE_ENV_FILE"
 else
-    echo "where is $ZPWR_RE_ENV_FILE" >&2
+    echo "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'" >&2
 fi
 #**************************************************************

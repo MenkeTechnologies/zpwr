@@ -46,7 +46,7 @@
         run zsh -n $TOKENS_FILE
         assert $state equals 0
     else
-        skip "where is $TOKENS_FILE? $(ls -l local)"
+        skip "where is TOKENS_FILE $TOKENS_FILE? $(ls -l local)"
     fi
 }
 

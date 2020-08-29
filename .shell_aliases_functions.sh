@@ -3048,7 +3048,21 @@ export GIT_COMMITTER_EMAIL="$CORRECT_EMAIL"
 #**************************************************************
 
 if ! isZsh; then
-    test -f "$ZPWR_TOKEN_PRE" && source "$ZPWR_TOKEN_PRE" || touch "$ZPWR_TOKEN_PRE"
+    if test -f "$ZPWR_TOKEN_PRE"; then
+        if ! source "$ZPWR_TOKEN_PRE"; then
+            loggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+        fi
+    else
+        touch "$ZPWR_TOKEN_PRE"
+    fi
+
+    if test -f "$ZPWR_TOKEN_POST"; then
+        if ! source "$ZPWR_TOKEN_POST"; then
+            loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+        fi
+    else
+        touch "$ZPWR_TOKEN_POST"
+    fi
 fi
 
 return 0

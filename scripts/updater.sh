@@ -8,13 +8,16 @@
 ##### Notes:
 #}}}***********************************************************
 
-if ! type -- "exists" >/dev/null 2>&1;then
-    test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
-    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-    source "$ZPWR_ENV_FILE" || {
-        echo "cannot access $ZPWR_ENV_FILE" >&2
-        exit 1
-    }
+source="${BASH_SOURCE[0]}"
+while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+  dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+  source="$(readlink "$source")"
+  [[ $source != /* ]] && source="$dir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+
+if ! source "$dir/init.sh"; then
+    echo "could not source dir '$dir/init.sh'"
 fi
 
 __ScriptVersion="1.0.0"
@@ -236,10 +239,10 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
     fi
 
     #update python packages
-    ssh -x "$hostname" bash < <(cat "$ZPWR_ENV_FILE" "$ZPWR_LIB" "$ZPWR_SCRIPTS/updaterPip.sh")
+    ssh -x "$hostname" bash < <(cat "$ZPWR_ENV_FILE" "$ZPWR_RE_ENV_FILE" "$ZPWR_TOKEN_PRE""$ZPWR_LIB" "$ZPWR_TOKEN_POST" "$ZPWR_SCRIPTS/updaterPip.sh" 2>dev/null)
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to send stdin script into bash
-    ssh -x "$hostname" bash < <(cat "$ZPWR_ENV_FILE" "$ZPWR_LIB" "$ZPWR_SCRIPTS/rpiSoftwareUpdater.sh")
+    ssh -x "$hostname" bash < <(cat "$ZPWR_ENV_FILE" "$ZPWR_RE_ENV_FILE" "$ZPWR_TOKEN_PRE" "$ZPWR_LIB" "$ZPWR_TOKEN_POST" "$ZPWR_SCRIPTS/rpiSoftwareUpdater.sh" 2>/dev/null)
 }
 
 #for loop through arrayOfPI, each item in array is item is .ssh/config file for

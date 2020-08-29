@@ -6,14 +6,16 @@
 ##### Purpose: bash script to use tor network
 ##### Notes:
 #}}}***********************************************************
+source="${BASH_SOURCE[0]}"
+while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+  dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+  source="$(readlink "$source")"
+  [[ $source != /* ]] && source="$dir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
 
-if ! type -- "exists" >/dev/null 2>&1;then
-    test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
-    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-    source "$ZPWR_ENV_FILE" || {
-        echo "cannot access $ZPWR_ENV_FILE" >&2
-        exit 1
-    }
+if ! source "$dir/init.sh"; then
+    echo "could not source dir '$dir/init.sh'"
 fi
 
 INTERFACE=Wi-Fi

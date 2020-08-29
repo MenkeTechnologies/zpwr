@@ -11,25 +11,20 @@ websiteDir="$HOME/WebstormProjects/PersonalWebsite"
 ZPWR_DIR="$ZPWR"
 ZPWR_DIR_INSTALL="$ZPWR/install"
 ZPWR_DIR_INSTALL_GTAGS="$ZPWR/install/g-tags"
-if [[ -z $ZPWR_SCRIPTS ]]; then
-    ZPWR_SCRIPTS="$ZPWR/scripts"
-fi
-
-if [[ -z $ZPWR_SCRIPTS_MAC ]]; then
-    ZPWR_SCRIPTS_MAC="$ZPWR_SCRIPTS/macOnly"
-fi
 
 shopt -s dotglob
 
-if ! type -- "exists" >/dev/null 2>&1;then
-    test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
-    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-    source "$ZPWR_ENV_FILE" || {
-        echo "cannot access $ZPWR_ENV_FILE" >&2
-        exit 1
-    }
-fi
+source="${BASH_SOURCE[0]}"
+while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+  dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+  source="$(readlink "$source")"
+  [[ $source != /* ]] && source="$dir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
 
+if ! source "$dir/init.sh"; then
+    echo "could not source dir '$dir/init.sh'"
+fi
 
 [[ -n "$1" ]] && commitMessage="$1" || commitMessage="update"
 

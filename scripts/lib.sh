@@ -238,7 +238,7 @@ function fail(){
 function fileMustExist(){
 
     if [[ ! -f "$1" ]]; then
-        echo "where is the file $1?" >&2
+        echo "where is the file '$1'?" >&2
         exit 1
     fi
 }
@@ -291,7 +291,7 @@ function goInstallerDir(){
     fi
 
     if (( ret == 1 )); then
-        echo "where is $ZPWR_INSTALL" >&2
+        echo "where is ZPWR_INSTALL '$ZPWR_INSTALL'" >&2
         exit 1
     fi
 }
@@ -310,7 +310,7 @@ function goInstallerOutputDir(){
     fi
 
     if (( ret == 1 )); then
-        echo "where is $ZPWR_INSTALLER_OUTPUT" >&2
+        echo "where is ZPWR_INSTALLER_OUTPUT '$ZPWR_INSTALLER_OUTPUT'" >&2
         exit 1
     fi
 }
@@ -520,7 +520,7 @@ function prettyPrintBoxStdin(){
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
 
-    [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
+    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
     {
         printf "$INSTALL_COUNTER>>> $@\n"
@@ -535,7 +535,7 @@ function prettyPrintBox(){
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
 
-    [[ ! -e "$perlfile" ]] && echo "where is $perlfile?" >&1 && exit 1
+    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&1 && exit 1
     (( ++INSTALL_COUNTER ))
     printf "$INSTALL_COUNTER>>> $@\n" | "$perlfile" -f
     echo

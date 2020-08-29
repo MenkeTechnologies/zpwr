@@ -85,11 +85,7 @@ export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
 
 source "$ZPWR_ENV_FILE" || {
-    echo "where is $ZPWR_ENV_FILE" >&2
-}
-
-source "$ZPWR_RE_ENV_FILE" || {
-    echo "where is $ZPWR_RE_ENV_FILE" >&2
+    echo "where is ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
 }
 
 if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
@@ -228,12 +224,16 @@ test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 #{{{                    MARK:source tokens
 #**************************************************************
-test -f "$ZPWR_TOKEN_PRE" &&
-    source "$ZPWR_TOKEN_PRE" ||
+if test -f "$ZPWR_TOKEN_PRE"; then
+    if ! source "$ZPWR_TOKEN_PRE"; then
+        loggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+    fi
+else
     touch "$ZPWR_TOKEN_PRE"
+fi
 
 source "$ZPWR_RE_ENV_FILE" || {
-    echo "where is $ZPWR_RE_ENV_FILE" >&2
+    echo "where is ZPWR_RE_ENV_FILE$ZPWR_RE_ENV_FILE" >&2
 }
 
 # command for exa (replaces ls)
@@ -4655,9 +4655,13 @@ zc-rename $ZPWR_CONVEY_NAME &>/dev/null
 #{{{                    MARK:Finish
 #**************************************************************
 # source .tokens.sh to override with user functions
-test -f "$ZPWR_TOKEN_POST" &&
-    source "$ZPWR_TOKEN_POST" ||
+if test -f "$ZPWR_TOKEN_POST"; then
+    if ! source "$ZPWR_TOKEN_POST"; then
+        loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+    fi
+else
     touch "$ZPWR_TOKEN_POST"
+fi
 
 source "$ZPWR_RE_ENV_FILE" || {
     echo "where is $ZPWR_RE_ENV_FILE" >&2

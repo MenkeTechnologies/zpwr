@@ -7,13 +7,11 @@
 ##### Notes: source this file
 #}}}***********************************************************
 
-if ! type -- "exists" >/dev/null 2>&1;then
-    test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
-    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-    source "$ZPWR_ENV_FILE" || {
-        echo "cannot access $ZPWR_ENV_FILE" >&2
-        exit 1
-    }
+0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+0="${${(M)0:#/*}:-$PWD/$0}"
+
+if ! source "$0/init.sh"; then
+    echo "could not source 0/init.sh '$0/init.sh'"
 fi
 
 comp_dir="comp_dir"
