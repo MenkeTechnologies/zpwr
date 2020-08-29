@@ -10,12 +10,12 @@ unbind -T copy-mode-vi Enter
 bind-key -T copy-mode-vi Enter send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
 
 
-bind-key -T copy-mode-vi x send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell 'tmux display-message -p -F "#{pane_current_path}" > ~/.zpwr/.tmux/local/pane_pwd' \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh open"
+bind-key -T copy-mode-vi x send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell 'tmux display-message -p -F "#{pane_current_path}" > $ZPWR_TMUX_LOCAL/pane_pwd' \; run-shell "reattach-to-user-namespace bash $ZPWR_TMUX/google.sh open"
 
-bind-key -T copy-mode-vi MouseDown3Pane send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh google"
+bind-key -T copy-mode-vi MouseDown3Pane send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash $ZPWR_TMUX/google.sh google"
 
-bind-key -T copy-mode-vi s send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh google"
-bind-key -T copy-mode-vi z send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh google"
+bind-key -T copy-mode-vi s send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash $ZPWR_TMUX/google.sh google"
+bind-key -T copy-mode-vi z send-keys -X  copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash $ZPWR_TMUX/google.sh google"
 
 set -g default-command "reattach-to-user-namespace -l $SHELL"
 

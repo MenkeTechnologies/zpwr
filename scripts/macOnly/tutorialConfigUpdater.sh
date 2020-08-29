@@ -34,22 +34,7 @@ cd "$ZPWR_DIR" || exit 1
 git checkout dev
 
 logg "Copying scripts to custom Installer Repo $ZPWR_DIR"
-#rm -rf "$ZPWR_DIR/scripts/"*
-#cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$ZPWR_DIR/scripts" 2>/dev/null
-#cp -R "$ZPWR_SCRIPTS/macOnly" "$ZPWR_DIR/scripts"
-#cp "$ZPWR/.powerlevel9kconfig.sh" "$ZPWR_DIR"
-#cp "$HOME/.zpwr/.minvimrc" "$ZPWR_DIR"
-#cp -R "$HOME/.zpwr/.tmux/"* "$ZPWR_DIR/.tmux" 2>/dev/null
-#cp "$HOME/.zpwr/.shell_aliases_functions.sh" "$ZPWR_DIR"
-
-#cp "$HOME/conf.gls" "$ZPWR_DIR_INSTALL"
-#cp "$HOME/conf.df" "$ZPWR_DIR_INSTALL"
-#cp "$HOME/conf.mount" "$ZPWR_DIR_INSTALL"
-#cp "$HOME/conf.whois" "$ZPWR_DIR_INSTALL"
-#cp "$HOME/.ideavimrc" "$ZPWR_DIR_INSTALL"
-#cp "$HOME/.inputrc" "$ZPWR_DIR_INSTALL"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
-#cp -R "$HOME/.vim/UltiSnips" "$ZPWR_DIR_INSTALL"
 
 type=ctags
 
@@ -111,7 +96,7 @@ cp "$ZPWR_DIR_INSTALL/.zshrc" "$tutorialDir/zsh"
 logg "Copying vimrc"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$tutorialDir/vim"
 logg "Copying minimal minvimrc"
-cp "$HOME/.zpwr/.minvimrc" "$tutorialDir/vim"
+cp "$ZPWR/.minvimrc" "$tutorialDir/vim"
 
 logg "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
@@ -122,7 +107,7 @@ cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
 logg "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$tutorialDir/tmux"
-cp -R "$HOME/.zpwr/.tmux/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
+cp -R "$ZPWR_TMUX/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
 logg "Copying shell_aliases_functions to $tutorialDir"
 cp "$ZPWR/.shell_aliases_functions.sh" "$tutorialDir/aliases"

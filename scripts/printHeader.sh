@@ -7,8 +7,6 @@
 ##### Notes:
 #}}}***********************************************************
 
-if [[ -z "$ZPWR_SCRIPTS" ]]; then
-    ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
-fi
+[[ -z "$ZPWR_SCRIPTS" ]] && ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
 
 perl -X "$ZPWR_SCRIPTS/banner.pl"

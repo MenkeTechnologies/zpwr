@@ -40,25 +40,6 @@ function main() {
     local dir completionDir
 
     gittersdev
-    #cp .shell_aliases_functions.sh "$HOME/.zpwr"
-    #cp .zshrc "$HOME"
-    #cp .vimrc "$HOME"
-    #cp .minvimrc "$HOME/.zpwr"
-    #cp .tmux.conf "$HOME"
-    #cp conf.gls "$HOME"
-    #cp conf.df "$HOME"
-    #cp conf.ifconfig "$HOME"
-    #cp grc.zsh "$HOME"
-    #cp .inputrc "$HOME"
-    #cp -R .tmux/* "$HOME/.zpwr/.tmux"
-    #if [[ -n "$ZPWR_SCRIPTS" ]]; then
-        #rm -f "$ZPWR_SCRIPTS/"*
-        #cp -f scripts/* "$ZPWR_SCRIPTS"
-        #cp -Rf scripts/macOnly "$ZPWR_SCRIPTS"
-    #else
-        #echo "$(date) How is ZPWR_SCRIPTS null?" >&2
-        #env
-    #fi
     completionDir="$HOME/.oh-my-zsh/custom/plugins"
     for dir in "$completionDir/"*; do
         printf "$dir: "

@@ -30,7 +30,7 @@ function getOpenCommand(){
 
 }
 
-test -z "$ZPWR_LOGFILE" && ZPWR_LOGFILE="$HOME/.zpwr/local/zpwrLog.txt"
+test -z "$ZPWR_LOGFILE" && ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 
 exec 1>> "$ZPWR_LOGFILE" 2>&1
 
@@ -85,7 +85,7 @@ fi
 cmd="$(getOpenCommand)"
 
 if [[ "$1" == open ]]; then
-    dir="$(cat $HOME/.zpwr/.tmux/local/pane_pwd)"
+    dir="$(cat $ZPWR_TMUX_LOCAL/pane_pwd)"
     echo "pane dir is '$dir'"
     echo "DIRECT open '$cmd' to '$out'"
     if ! $cmd "$out";then
