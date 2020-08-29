@@ -682,12 +682,13 @@ function vimZpwrCtags(){
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
 
-function scriptCount(){
+function zpwrScriptCount(){
 
     command ls \
         "$ZPWR_SCRIPTS/"*.{sh,zsh,pl,py} \
-        "$ZPWR_SCRIPTS/macOnly/"*.{sh,zsh,pl,py} |
-        wc -l
+        "$ZPWR_SCRIPTS_MAC/"*.{sh,zsh,pl,py} |
+        wc -l |
+        awk '{$1=$1};1'
 }
 
 function lastWordDouble(){
@@ -4216,6 +4217,7 @@ function zpwrEnvCounts(){
     echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
     echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
     echo "ZPWR verbs: ${#ZPWR_VERBS}"
+    echo "ZPWR script count: $(zpwrScriptCount)"
     echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
     echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
 }
