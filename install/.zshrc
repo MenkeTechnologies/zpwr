@@ -4067,7 +4067,8 @@ function uncompile(){
         "$ZPWR_ENV_FILE"
         "$ZPWR_RE_ENV_FILE"
         "$ZPWR_SCRIPTS/zpwr.zsh"
-        "$ZPWR_SCRIPTS/lib.sh"
+        "$ZPWR_LIB"
+        "$ZPWR_LIB_INIT"
         "$ZPWR_SCRIPTS/crossOSCommands.sh"
     )
 
@@ -4135,7 +4136,8 @@ function recompile(){
         "$ZPWR_ENV_FILE"
         "$ZPWR_RE_ENV_FILE"
         "$ZPWR_SCRIPTS/zpwr.zsh"
-        "$ZPWR_SCRIPTS/lib.sh"
+        "$ZPWR_LIB"
+        "$ZPWR_LIB_INIT"
         "$ZPWR_SCRIPTS/crossOSCommands.sh"
     )
 

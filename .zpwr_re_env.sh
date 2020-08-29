@@ -82,6 +82,8 @@ evalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
 evalIfNeeded ZPWR_SCRIPTS_MAC "$ZPWR_SCRIPTS_MAC" "$ZPWR_SCRIPTS/macOnly" "$ZPWR_SCRIPTS"
 # the location of zpwr lib file
 evalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
+# the location of zpwr init file
+evalIfNeeded ZPWR_LIB_INIT "$ZPWR_LIB_INIT" "$ZPWR_SCRIPTS/init.sh" "$ZPWR_SCRIPTS"
 # command for all fzf clearlist in preview pane
 evalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "$ZPWR_SCRIPTS/clearList.sh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
