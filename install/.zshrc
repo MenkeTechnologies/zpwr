@@ -1622,7 +1622,7 @@ function fzfEnv(){
     BUFFER="$LBUFFER$sel$RBUFFER"
     CURSOR=$(($#LBUFFER + $#sel))
 
-    zle reset-prompt
+    zle reset-prompt 2>/dev/null
 }
 
 
