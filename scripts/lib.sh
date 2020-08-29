@@ -183,7 +183,7 @@ function loggConsole(){
 function logg(){
 
     if [[ $ZPWR_COLORS == true ]]; then
-        if [[ -z $1 ]]; then
+        if [[ -n $1 ]]; then
             {
                 printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
                 printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
@@ -203,7 +203,7 @@ function logg(){
             test -z "$1" && loggErr "need arg" && return 1
         fi
     else
-        if [[ -z $1 ]]; then
+        if [[ -n $1 ]]; then
             {
                 printf "\n_____________$(date)____ "
                 printf "_'%s'_ " "$@"
