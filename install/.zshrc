@@ -86,6 +86,7 @@ export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
 
 source "$ZPWR_ENV_FILE" || {
     echo "where is ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
+    return 1
 }
 
 if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then

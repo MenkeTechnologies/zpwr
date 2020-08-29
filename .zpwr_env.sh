@@ -121,6 +121,7 @@ export ZPWR_RESET="\x1b[0m"
 test -z $ZPWR_REMOTE && export ZPWR_REMOTE=false
 
 if [[ $ZPWR_REMOTE == false ]]; then
+    test -z "$ZPWR_RE_ENV_FILE" && export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
     source "$ZPWR_RE_ENV_FILE" || {
         echo "could not source ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'" >&2
     }
