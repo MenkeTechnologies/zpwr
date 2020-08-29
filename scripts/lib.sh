@@ -513,6 +513,19 @@ function prettyPrint(){
     fi
 }
 
+function bannerSleep(){
+
+    local time
+    time=2
+
+    if [[ -n $1 ]]; then
+        time=$1
+    fi
+
+    bash "$ZPWR_SCRIPTS/about.sh"
+    sleep $time
+}
+
 function prettyPrintBoxStdin(){
 
     local perlfile

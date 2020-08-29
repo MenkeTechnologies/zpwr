@@ -266,7 +266,6 @@ function usage(){
 
 function showDeps(){
 
-    bash "$ZPWR_INSTALL/scripts/about.sh" 2>/dev/null
     {
         printf "Installing ${#dependencies_ary[@]} packages on $distroName: "
         for dep in "${dependencies_ary[@]}" ; do
@@ -274,6 +273,7 @@ function showDeps(){
         done
     } | prettyPrintBoxStdin
     proceed
+    bannerSleep
 }
 
 files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell_aliases_functions.sh \
@@ -396,7 +396,6 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         distroName=Mac
         distroFamily=mac
         showDeps
-        bash "$ZPWR_SCRIPTS/about.sh"
 
         if exists "brew"; then
             # install homebrew
@@ -502,7 +501,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
         esac
 
         showDeps
-        bash "$ZPWR_SCRIPTS/about.sh"
+
         refresh "$distroFamily"
 
         if [[ $skip != true ]]; then
@@ -553,7 +552,7 @@ else
             prettyPrintBox "Fetching Dependencies for $distroName with pkg"
             addDependenciesFreeBSD
             showDeps
-            bash "$ZPWR_SCRIPTS/about.sh"
+
             refresh "$distroFamily"
 
             if [[ $skip != true ]]; then
