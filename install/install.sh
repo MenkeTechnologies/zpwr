@@ -381,6 +381,7 @@ if [[ $skip == true ]]; then
     prettyPrintBox "Skipping dependencies section"
 fi
 
+
 #}}}***********************************************************
 
 #{{{                    MARK:macOS
@@ -395,6 +396,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         distroName=Mac
         distroFamily=mac
         showDeps
+        bash "$ZPWR_SCRIPTS/about.sh"
 
         if exists "brew"; then
             # install homebrew
@@ -500,6 +502,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
         esac
 
         showDeps
+        bash "$ZPWR_SCRIPTS/about.sh"
         refresh "$distroFamily"
 
         if [[ $skip != true ]]; then
@@ -550,6 +553,7 @@ else
             prettyPrintBox "Fetching Dependencies for $distroName with pkg"
             addDependenciesFreeBSD
             showDeps
+            bash "$ZPWR_SCRIPTS/about.sh"
             refresh "$distroFamily"
 
             if [[ $skip != true ]]; then
