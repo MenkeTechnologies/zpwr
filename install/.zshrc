@@ -3480,8 +3480,13 @@ if [[ $ZPWR_COLORS == true ]]; then
         zstyle ':completion:*:all-commands' list-colors '=(#b)(*)=1;30=1;37;42'
     fi
 
+    # npm
     zstyle ':completion:*:npm-search' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:npm-cache' list-colors '=(#b)(*)=1;30=1;37;46'
+
+    # tmux
+    zstyle ':completion:*:*:*:*:attached-sessions' list-colors '=(#b)(*)=1;30=1;37;43'
+    zstyle ':completion:*:*:*:*:detached-sessions' list-colors '=(#b)(*)=1;30=1;37;45'
 
     #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
     zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
@@ -4436,11 +4441,13 @@ zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|
 
 #{{{                    MARK:ZPWR Compsys Functions
 #**************************************************************
-declare -a subcommands_ary
+declare -a zpwrSubcommandsAry
 
 for k v in ${(kv)ZPWR_VERBS[@]};do
-    subcommands_ary+=("$k:$v")
+    zpwrSubcommandsAry+=("$k:$v")
 done
+
+ZPWR_VARS[zpwrSubcommandsAry]=zpwrSubcommandsAry
 
 function __zpwr_gtl(){
 
@@ -4479,7 +4486,7 @@ function _zpwr(){
     if (( CURRENT >= 1 )); then
         case $state in
             verb)
-                _describe -t commands "zpwr verb" subcommands_ary
+                _describe -t commands "zpwr verb" zpwrSubcommandsAry
                 ;;
             args)
                 verb=$words[1]
