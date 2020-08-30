@@ -77,9 +77,8 @@ path=(${(u)path})
 declare +x FPATH
 #}}}***********************************************************
 
-#{{{                    MARK:ZPWR Exports
+#{{{                    MARK:ZPWR source env file which sources lib
 #**************************************************************
-
 test -z $ZPWR && export ZPWR="$HOME/.zpwr"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
@@ -92,16 +91,17 @@ source "$ZPWR_ENV_FILE" || {
 if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
     mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
 fi
-#}}}***********************************************************
 
-#{{{                    MARK:non ZPWR Exports
-#**************************************************************
 # map to hold global data between scripts
 declare -A ZPWR_VARS
 # map to store each zpwr verb, key is the verbname, value is cmd=description
 declare -A ZPWR_VERBS
+# get zpwr verbs
 source "$ZPWR_SCRIPTS/zpwr.zsh"
+#}}}***********************************************************
 
+#{{{                    MARK:non ZPWR Exports
+#**************************************************************
 export LC_ALL="en_US.UTF-8"
 export ZSH=$HOME/.oh-my-zsh
 unalias ag &> /dev/null
@@ -118,10 +118,7 @@ export SHELL="$(which zsh)"
 RPS2='+%N:%i:%^'
 # zsh xtrace prompt
 export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
-# change OMZ history size in memory
-export HISTSIZE=999999999
-export SAVEHIST=$HISTSIZE
-# change OMZ history file size#}}}***********************************************************
+#}}}***********************************************************
 
 #{{{                    MARK:OMZ env vars
 #**************************************************************
@@ -183,7 +180,10 @@ ZSH_DISABLE_COMPFIX=true
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
+#}}}***********************************************************
 
+#{{{                    MARK:OMZ plugins
+#**************************************************************
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -223,7 +223,7 @@ forgit_stash_show=fgss
 test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 #}}}***********************************************************
 
-#{{{                    MARK:source tokens
+#{{{                    MARK:source tokens pre OMZ
 #**************************************************************
 if test -f "$ZPWR_TOKEN_PRE"; then
     if ! source "$ZPWR_TOKEN_PRE"; then
@@ -245,7 +245,7 @@ else
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:post token
+#{{{                    MARK:post first token
 #**************************************************************
 if [[ ! -d $ZPWR ]]; then
     mkdir -p $ZPWR
@@ -290,7 +290,7 @@ zmodload -i zsh/complist
 setopt menucomplete
 #}}}***********************************************************
 
-#{{{                    MARK:OMZ Plugins
+#{{{                    MARK:OMZ conditional Plugins
 #**************************************************************
 
 # OMZ does not add nested comp dirs to fpath so do it here, assume src
@@ -394,13 +394,14 @@ alias zn=zc-bg-notify
 #**************************************************************
 autoload -Uz compinit
 
+# compsys cache file
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
 
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "pre: $fpath" >> "$ZPWR_LOGFILE"
 fi
 
-
+# source OMZ
 source $ZSH/oh-my-zsh.sh
 
 
@@ -414,8 +415,46 @@ test -s "$_alias_file" && source "$_alias_file"
 alias -r > "$ZPWR_LOCAL/.common_aliases"
 #}}}***********************************************************
 
-#{{{                    MARK:Override plugin defs
+#{{{                    MARK:Override OMZ config
 #**************************************************************
+function addOMZAttrib() {
+    zcompdump_metadata="#omz revision: $(builtin cd -q "$ZSH"; git rev-parse HEAD 2>/dev/null)\n#omz fpath: $fpath"
+    echo "\n$zcompdump_metadata" | tee -a "$ZSH_COMPDUMP" &>/dev/null
+}
+
+local recachedCompsys lines
+recachedCompsys=false
+# reload compsys cache if file is stale for 1 week
+for dump in ~/.zcompdump*(N.mh+168); do
+    logg "regenerating stale '$dump' older than 1 week"
+    lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
+    rm "$ZSH_COMPDUMP"
+    # avoid insecure warning message with -u
+    compinit -u -d "$ZSH_COMPDUMP"
+    echo "$lines" >> "$ZSH_COMPDUMP"
+    zcompile $ZSH_COMPDUMP
+    recachedCompsys=true
+    break
+done
+
+if ! (( $+_comps[z] )); then
+    # compsys completion for z was not found when it should have been
+    logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
+    logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
+    lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
+    rm "$ZSH_COMPDUMP"
+    compinit -u -d "$ZSH_COMPDUMP"
+    echo "$lines" >> "$ZSH_COMPDUMP"
+    #zcompile $ZSH_COMPDUMP
+else
+    logg "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
+    logg "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
+fi
+
+# change OMZ history size in memory
+export HISTSIZE=999999999
+export SAVEHIST=$HISTSIZE
+# change OMZ history file size
 function magic-enter () {
 
   # If commands are not already set, use the defaults
@@ -439,24 +478,523 @@ function magic-enter () {
 }
 #}}}***********************************************************
 
-#{{{                    MARK:Suffix aliases
-#**************************************************************
-alias -s txt='vim'
-#}}}***********************************************************
-
-#{{{                    MARK:zdharma postconfig
-#**************************************************************
-path+=($ZCONVEY_REPO_DIR/cmds)
-#}}}***********************************************************
-
 #{{{                    MARK:zdharma post init
 #**************************************************************
+path+=($ZCONVEY_REPO_DIR/cmds)
 ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} PWD:${PWD} DATE:$(date)"
 zc-rename $ZPWR_CONVEY_NAME &>/dev/null
 #}}}***********************************************************
 
+#{{{                    MARK:Zpwr verbs
+#**************************************************************
+function tabNum() {
+
+    echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
+}
+
+function zg() {
+
+    local branch dir
+    branch=master
+    dir=$2
+
+    if [[ -n $1 ]]; then
+        branch=$1
+    fi
+
+    if [[ -n "$dir" ]]; then
+        if [[ $ != . ]]; then
+            z "$dir"
+            prettyPrint "z $dir => cd $(z -e $dir)"
+        fi
+    fi
+
+
+    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
+}
+
+function zm() {
+
+    local branch dir
+    branch=master
+    dir=$1
+
+    if [[ -n "$dir" ]]; then
+        if [[ $dir != . ]]; then
+            z "$dir"
+            prettyPrint "z $dir => cd $(z -e $dir)"
+        fi
+    fi
+
+    if [[ -n $2 ]]; then
+        branch=$2
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
+}
+
+function zd() {
+
+    local branch dir
+    branch=development
+    dir=$1
+
+    if [[ -n "$dir" ]]; then
+        if [[ $dir != . ]]; then
+            z "$dir"
+            prettyPrint "z $dir => cd $(z -e $dir)"
+        fi
+    fi
+
+    if [[ -n $2 ]]; then
+        branch=$2
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
+}
+
+function tabNumCmd() {
+
+    local num args
+
+    num=$1
+    shift
+    args="$@"
+    echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
+}
+autoload -Uz zrecompile
+
+function uncompile(){
+
+    emulate -L zsh
+    setopt nullglob
+
+    local dir files sudoFiles file
+
+    files=(
+        "$HOME/.zshrc"*
+        "$HOME/.zlogout"*
+        "$HOME/.zlogin"*
+        "$HOME/grc.zsh"
+        "$ZSH/oh-my-zsh.sh"
+        "$ZSH_COMPDUMP"
+        "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR/.powerlevel9kconfig.sh"
+        "$ZPWR_LOCAL/.tokens.sh"
+        "$ZPWR_LOCAL/.tokens-post.sh"
+        "$ZPWR_ENV_FILE"
+        "$ZPWR_RE_ENV_FILE"
+        "$ZPWR_SCRIPTS/zpwr.zsh"
+        "$ZPWR_LIB"
+        "$ZPWR_LIB_INIT"
+        "$ZPWR_SCRIPTS/crossOSCommands.sh"
+    )
+
+    sudoFiles=(
+        /etc/profile*
+        /etc/zprofile*
+        /etc/zshrc*
+        /etc/zsh/z*
+        /etc/profile.env*
+    )
+
+    prettyPrint "deleting all compiled configs"
+
+    for file in ${files[@]}; do
+        file=${file%*.zwc*}
+        if [[ -f "$file.zwc" ]]; then
+            echo rm -f "$file.zwc"
+            rm -f "$file.zwc"
+        elif [[ -f "$file.zwc.old" ]]; then
+            echo rm -f "$file.zwc.old"
+            rm -f "$file.zwc.old"
+        fi
+    done
+
+    for file in ${sudoFiles[@]}; do
+        file=${file%*.zwc*}
+        if [[ -f "$file.zwc" ]]; then
+            echo sudo rm "$file".zwc
+            sudo rm "$file".zwc
+        elif [[ -f "$file.zwc.old" ]]; then
+            echo sudo rm "$file.zwc.old"
+            sudo rm "$file.zwc.old"
+        fi
+    done
+
+	for dir in $fpath; do
+		if test -d $dir;then
+            if [[ -f "$dir.zwc" ]]; then
+                echo rm -rf "$dir.zwc"
+                rm -rf "$dir.zwc" 2>/dev/null ||
+                sudo rm -rf "$dir.zwc"
+            fi
+        fi
+	done
+}
+
+function recompile(){
+
+    emulate -L zsh
+    setopt nullglob
+
+    local dir files sudoFiles file
+
+    files=(
+        "$HOME/.zshrc"*
+        "$HOME/.zlogout"*
+        "$HOME/.zlogin"*
+        "$HOME/grc.zsh"
+        "$ZSH/oh-my-zsh.sh"
+        "$ZSH_COMPDUMP"
+        "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR/.powerlevel9kconfig.sh"
+        "$ZPWR_LOCAL/.tokens.sh"
+        "$ZPWR_LOCAL/.tokens-post.sh"
+        "$ZPWR_ENV_FILE"
+        "$ZPWR_RE_ENV_FILE"
+        "$ZPWR_SCRIPTS/zpwr.zsh"
+        "$ZPWR_LIB"
+        "$ZPWR_LIB_INIT"
+        "$ZPWR_SCRIPTS/crossOSCommands.sh"
+    )
+
+    sudoFiles=(
+        /etc/profile*
+        /etc/zprofile*
+        /etc/zshrc*
+        /etc/zsh/z*
+        /etc/profile.env*
+    )
+
+    prettyPrint "recompiling all configs to .zwc for speed"
+
+    for file in ${files[@]}; do
+        if [[ -f "$file" ]]; then
+            zrecompile -p "$file"
+        fi
+    done
+    for file in ${sudoFiles[@]}; do
+        if [[ -f "$file" ]]; then
+            sudo zsh -c "autoload zrecompile; zrecompile -p $file"
+        fi
+    done
+
+	for dir in $fpath; do
+		if test -d $dir;then
+            files=( $dir/*(N) )
+            if (($#files)); then
+                zrecompile -p $dir.zwc $files 2> /dev/null ||
+                sudo zsh -c "autoload zrecompile; zrecompile -p $dir.zwc $files"
+            fi
+        fi
+	done
+}
+
+function zshrcsearch(){
+
+    if [[ -z "$1" ]]; then
+        zsh -ilvx -c false &> $ZPWR_TEMPFILE4
+        less $ZPWR_TEMPFILE4
+    else
+        zsh -ilvx -c false &> $ZPWR_TEMPFILE4
+        ag --color --numbers -C 5 -i -- "$@" $ZPWR_TEMPFILE4 | less
+    fi
+}
+
+function zpwrLineCount(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: zpwrLineCount <cmd> <search>"
+        return 1
+    fi
+
+    eval "$1" | command grep -i -E "$2" | wc -l | tr -d ' '
+
+}
+
+function zpwrEnvCounts(){
+
+    prettyPrint "ENV COUNTS"
+    echo "Commands: ${#commands}"
+    echo "Functions: ${#functions}"
+    echo "Completions: ${#_comps}"
+    echo "Functions (not completions): "$(( $#functions - $#_comps ))
+    echo "Builtins: ${#builtins}"
+    echo "Reserved words: ${#reswords}"
+    echo "Parameters: ${#parameters}"
+    echo "Environment Variables: "${#parameters[(R)scalar-export]}
+    echo "Local Parameters: "${#parameters[(R)^scalar-export]}
+    echo "Aliases: ${#aliases}"
+    echo "Global Aliases: ${#galiases}"
+    echo "Git Aliases: "${#aliases[(R)*git*]}
+    echo "Cd Aliases: "${#aliases[(R)*cd*]}
+    echo "Suffix Aliases: ${#saliases}"
+    prettyPrint "ZPWR COUNTS"
+    echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
+    echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
+    echo "ZPWR verbs: ${#ZPWR_VERBS}"
+    echo "ZPWR script count: $(zpwrScriptCount)"
+    echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
+    echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
+}
+
+function zarg(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: zarg <escaped glob> <cmd with {}>"
+        return 1
+    fi
+
+    local first
+
+    first="$1"
+    shift
+
+    echo eval "zargs -i{} -- '$first' -- '$*'"
+    eval "zargs -i{} -- $first -- $*"
+}
+
+if exists jenv;then
+    export PATH="$HOME/.jenv/shims:$PATH"
+fi
+
+function zpwrAllUpdates(){
+
+    (
+        builtin cd "$ZPWR" &&
+            git pull &&
+            {
+                if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
+                    bash "$ZPWR_BANNER_SCRIPT"
+                fi
+            } &&
+            linkConf
+    )
+
+   zpwr updatedeps
+   zpwr regen
+   zpwr update
+}
+
+function zpwrForAllGitDirs(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrForGitDir <cmd>"
+        return 1
+    fi
+
+    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS first."
+        regenAllGitRepos regen
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir $1 \
+        $(cat $ZPWR_ALL_GIT_DIRS)
+}
+
+function zpwrUpdateAllGitDirs(){
+
+    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
+        regenAllGitRepos regen
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir \
+    'git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache' \
+        $(cat $ZPWR_ALL_GIT_DIRS)
+}
+
+function zpwrListVerbs(){
+    local len sep k v i width
+    sep=" "
+    width=25
+
+    for k in ${(ko)ZPWR_VERBS[@]};do
+        len=$#k
+        printf $k
+        spaces=$(( width - len ))
+
+        for (( i = 0; i < $spaces; ++i )); do
+            printf $sep
+        done
+        printf "${ZPWR_VERBS[$k]}\n"
+    done
+}
+
+function zpwrVerbsFZF(){
+
+    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
+        logg "regenerating keys for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
+        logg "regenerating values for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+
+    zpwrListVerbs |
+        eval "$ZPWR_FZF -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
+        perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
+}
+
+function zpwrNumVerbs(){
+
+    #the size of hashmap
+    echo $#ZPWR_VERBS
+}
+
+function zpwrEnvVars(){
+
+    env | command grep -i "^$ZPWR_REPO_NAME" | fzf
+}
+
+function revealRecurse(){
+
+    for i in **/*(/); do
+        ( builtin cd $i && reveal 2>/dev/null; )
+    done
+}
+
+function evalTester(){
+
+    echo eval fordir ${(q)*}
+}
+
+function regenHistory() {
+
+    prettyPrint "Regen $HISTFILE"
+    (
+        builtin cd "$HOME"
+        command mv "$HISTFILE" .zsh_history_bad
+        command strings .zsh_history_bad > "$HISTFILE"
+        builtin fc -R ."$HISTFILE"
+        command rm -rf .zsh_history_bad
+    )
+}
+
+function zpwrBackupHistfile(){
+
+    prettyPrint "Save backup of $HISTFILE"
+    (
+        builtin cd "$HOME"
+        builtin fc -W "$HISTFILE"
+        bash "$ZPWR_SCRIPTS/backupConfig.sh"
+    )
+}
+
+function zpwrRestoreHistfile(){
+
+    prettyPrint "Restore backup of $HISTFILE"
+    (
+        builtin cd "$HOME"
+        command rm "$HISTFILE"
+        prettyPrint command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
+        command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
+        builtin fc -R "$HISTFILE"
+    )
+}
+
+function zpwrCleanAll() {
+
+    prettyPrint "clearCache"
+    clearCache
+    prettyPrint "clear $zpwrDirsClean"
+    zpwrClean
+}
+
+function zpwrClean() {
+
+    local dir files
+
+    if ! (( $#zpwrDirsClean )); then
+        loggErr "zpwrDirsClean is empty."
+        return 1
+    fi
+
+    for dir in ${zpwrDirsClean[@]} ; do
+
+        files=("$dir"/*(N))
+
+        if (( $#files )); then
+            prettyPrint sudo rm -rfv "$dir"/*(N)
+            sudo rm -rfv "$dir"/*(N)
+        fi
+    done
+}
+
+function banner(){
+
+    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
+    ponysay -W 100
+}
+function bannerLolcat(){
+    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
+    ponysay -W 100 |
+    splitReg.sh -- \
+    ---------------------- lolcat
+}
+
+function noPonyBanner(){
+
+    eval "$ZPWR_DEFAULT_BANNER"
+}
+#}}}***********************************************************
+
 #{{{                    MARK:Custom Functions
 #**************************************************************
+#
+#{{{                    MARK:ColorTest
+#**************************************************************
+# print 2d array of colors
+function colortest(){
+
+    local backgroundColor
+
+    for backgroundColor in ${(ko)bg}; do
+        print -n "$bg[$backgroundColor]"
+        printf '%s%-8s' $fg[black] black
+        printf '%s%-8s' $fg[red] red
+        printf '%s%-8s' $fg[green] green
+        printf '%s%-8s' $fg[yellow] yellow
+        printf '%s%-8s' $fg[blue] blue
+        printf '%s%-8s' $fg[magenta] magenta
+        printf '%s%-8s' $fg[cyan] cyan
+        printf '%s%-8s' $fg[white] white
+        print $reset_color
+        print -n "$bg[$backgroundColor]"
+        printf "\x1b[1m"
+        printf '%s%-8s' $fg[black] black
+        printf '%s%-8s' $fg[red] red
+        printf '%s%-8s' $fg[green] green
+        printf '%s%-8s' $fg[yellow] yellow
+        printf '%s%-8s' $fg[blue] blue
+        printf '%s%-8s' $fg[magenta] magenta
+        printf '%s%-8s' $fg[cyan] cyan
+        printf '%s%-8s' $fg[white] white
+        print $reset_color
+        printf "%40s\n" "on $backgroundColor"
+    done
+}
+
+
+function 256colors(){
+
+    local i
+
+    if [[ -z "$1" ]]; then
+        for i in {0..255};do
+            printf "\x1b[48;5;${i};37m    $i    "
+        done
+    else
+        for i in {0..255};do
+            printf "\x1b[38;5;${i}m    $i   $@"
+        done
+    fi
+    printf "\n"
+}
+#}}}***********************************************************
+
 function sub (){
 
     zle .kill-whole-line
@@ -775,8 +1313,6 @@ function lastWordDouble(){
         CURSOR=$#BUFFER
     fi
 }
-
-zle -N lastWordDouble
 
 function updater (){
 
@@ -1598,8 +2134,6 @@ function self-insert() {
   keySender $KEYS
 }
 
-zle -N self-insert
-
 function clearLine() {
 
     keyClear
@@ -2102,6 +2636,21 @@ function zpwrVerbsWidget(){
     zle vi-insert
 }
 
+function zpwrExpandAliases() {
+
+  unset 'functions[_expand-aliases]'
+  functions[_expand-aliases]=$BUFFER
+
+  (($+functions[_expand-aliases])) &&
+    echo ${functions[_expand-aliases]#$'\t'}
+}
+#}}}***********************************************************
+
+#{{{                    MARK:ZLE bindkey
+#**************************************************************
+
+zle -N self-insert
+zle -N lastWordDouble
 zle -N fzfCommits
 zle -N updater
 zle -N runner
@@ -2347,15 +2896,6 @@ bindkey '^[~' _bash_complete-word
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
 #exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
-#
-zpwrExpandAliases() {
-
-  unset 'functions[_expand-aliases]'
-  functions[_expand-aliases]=$BUFFER
-
-  (($+functions[_expand-aliases])) &&
-    echo ${functions[_expand-aliases]#$'\t'}
-}
 
 function my-accept-line () {
 
@@ -2634,9 +3174,8 @@ if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
     }
 fi
 
-zle -N zle-keymap-select
-
 autoload -Uz bracketed-paste-magic
+zle -N zle-keymap-select
 zle -N bracketed-paste bracketed-paste-magic
 #}}}***********************************************************
 
@@ -2769,39 +3308,7 @@ export DIRSTACKSIZE=20
 
 #{{{                    MARK:Completions
 #**************************************************************
-function addOMZAttrib() {
-    zcompdump_metadata="#omz revision: $(builtin cd -q "$ZSH"; git rev-parse HEAD 2>/dev/null)\n#omz fpath: $fpath"
-    echo "\n$zcompdump_metadata" | tee -a "$ZSH_COMPDUMP" &>/dev/null
-}
 
-local recachedCompsys lines
-recachedCompsys=false
-# reload compsys cache if file is stale for 1 week
-for dump in ~/.zcompdump*(N.mh+168); do
-    logg "regenerating stale '$dump' older than 1 week"
-    lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
-    rm "$ZSH_COMPDUMP"
-    # avoid insecure warning message with -u
-    compinit -u -d "$ZSH_COMPDUMP"
-    echo "$lines" >> "$ZSH_COMPDUMP"
-    zcompile $ZSH_COMPDUMP
-    recachedCompsys=true
-    break
-done
-
-if ! (( $+_comps[z] )); then
-    # compsys completion for z was not found when it should have been
-    logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
-    logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
-    lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
-    rm "$ZSH_COMPDUMP"
-    compinit -u -d "$ZSH_COMPDUMP"
-    echo "$lines" >> "$ZSH_COMPDUMP"
-    #zcompile $ZSH_COMPDUMP
-else
-    logg "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
-    logg "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
-fi
 
 # do not include pwd after ../
 zstyle ':completion:*' ignore-parents parent pwd
@@ -3012,7 +3519,11 @@ zstyle ':completion:*:manuals' separate-sections true
 # ignore .. as completion option
 zstyle ':completion:*' ignored-patterns '*..'
 zstyle ':completion:*' ignored-patterns '*.'
+#}}}***********************************************************
 
+#{{{                    MARK:Suffix aliases
+#**************************************************************
+alias -s txt='vim'
 #}}}***********************************************************
 
 #{{{                    MARK:Global Aliases
@@ -3087,81 +3598,7 @@ exists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;git reset o
 exists zu8 || alias zu8='zpwr updateall'
 exists zua || alias zua='zpwr updateall'
 
-function tabNum() {
 
-    echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
-}
-
-function zg() {
-
-    local branch dir
-    branch=master
-    dir=$2
-
-    if [[ -n $1 ]]; then
-        branch=$1
-    fi
-
-    if [[ -n "$dir" ]]; then
-        if [[ $ != . ]]; then
-            z "$dir"
-            prettyPrint "z $dir => cd $(z -e $dir)"
-        fi
-    fi
-
-
-    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
-}
-
-function zm() {
-
-    local branch dir
-    branch=master
-    dir=$1
-
-    if [[ -n "$dir" ]]; then
-        if [[ $dir != . ]]; then
-            z "$dir"
-            prettyPrint "z $dir => cd $(z -e $dir)"
-        fi
-    fi
-
-    if [[ -n $2 ]]; then
-        branch=$2
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
-}
-
-function zd() {
-
-    local branch dir
-    branch=development
-    dir=$1
-
-    if [[ -n "$dir" ]]; then
-        if [[ $dir != . ]]; then
-            z "$dir"
-            prettyPrint "z $dir => cd $(z -e $dir)"
-        fi
-    fi
-
-    if [[ -n $2 ]]; then
-        branch=$2
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
-}
-
-function tabNumCmd() {
-
-    local num args
-
-    num=$1
-    shift
-    args="$@"
-    echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
-}
 
 alias i='if [[ '$ZPWR_TABSTOP' ]];then
     '$ZPWR_TABSTOP'
@@ -3288,7 +3725,6 @@ alias numcmd='print $#commands'
 #
 #}}}***********************************************************
 
-
 #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
 #**************************************************************
 # if this is a mac or linux
@@ -3380,57 +3816,6 @@ fi
 #{{{                    MARK:OPAM env
 #**************************************************************
 source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
-#}}}***********************************************************
-
-#{{{                    MARK:ColorTest
-#**************************************************************
-# print 2d array of colors
-function colortest(){
-
-    local backgroundColor
-
-    for backgroundColor in ${(ko)bg}; do
-        print -n "$bg[$backgroundColor]"
-        printf '%s%-8s' $fg[black] black
-        printf '%s%-8s' $fg[red] red
-        printf '%s%-8s' $fg[green] green
-        printf '%s%-8s' $fg[yellow] yellow
-        printf '%s%-8s' $fg[blue] blue
-        printf '%s%-8s' $fg[magenta] magenta
-        printf '%s%-8s' $fg[cyan] cyan
-        printf '%s%-8s' $fg[white] white
-        print $reset_color
-        print -n "$bg[$backgroundColor]"
-        printf "\x1b[1m"
-        printf '%s%-8s' $fg[black] black
-        printf '%s%-8s' $fg[red] red
-        printf '%s%-8s' $fg[green] green
-        printf '%s%-8s' $fg[yellow] yellow
-        printf '%s%-8s' $fg[blue] blue
-        printf '%s%-8s' $fg[magenta] magenta
-        printf '%s%-8s' $fg[cyan] cyan
-        printf '%s%-8s' $fg[white] white
-        print $reset_color
-        printf "%40s\n" "on $backgroundColor"
-    done
-}
-
-
-function 256colors(){
-
-    local i
-
-    if [[ -z "$1" ]]; then
-        for i in {0..255};do
-            printf "\x1b[48;5;${i};37m    $i    "
-        done
-    else
-        for i in {0..255};do
-            printf "\x1b[38;5;${i}m    $i   $@"
-        done
-    fi
-    printf "\n"
-}
 #}}}***********************************************************
 
 #{{{                    MARK:FZF
@@ -3714,387 +4099,6 @@ local green="64"
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow"
-#}}}***********************************************************
-
-#{{{                    MARK:Zpwr verbs
-#**************************************************************
-autoload -Uz zrecompile
-
-function uncompile(){
-
-    emulate -L zsh
-    setopt nullglob
-
-    local dir files sudoFiles file
-
-    files=(
-        "$HOME/.zshrc"*
-        "$HOME/.zlogout"*
-        "$HOME/.zlogin"*
-        "$HOME/grc.zsh"
-        "$ZSH/oh-my-zsh.sh"
-        "$ZSH_COMPDUMP"
-        "$ZPWR/.shell_aliases_functions.sh"
-        "$ZPWR/.powerlevel9kconfig.sh"
-        "$ZPWR_LOCAL/.tokens.sh"
-        "$ZPWR_LOCAL/.tokens-post.sh"
-        "$ZPWR_ENV_FILE"
-        "$ZPWR_RE_ENV_FILE"
-        "$ZPWR_SCRIPTS/zpwr.zsh"
-        "$ZPWR_LIB"
-        "$ZPWR_LIB_INIT"
-        "$ZPWR_SCRIPTS/crossOSCommands.sh"
-    )
-
-    sudoFiles=(
-        /etc/profile*
-        /etc/zprofile*
-        /etc/zshrc*
-        /etc/zsh/z*
-        /etc/profile.env*
-    )
-
-    prettyPrint "deleting all compiled configs"
-
-    for file in ${files[@]}; do
-        file=${file%*.zwc*}
-        if [[ -f "$file.zwc" ]]; then
-            echo rm -f "$file.zwc"
-            rm -f "$file.zwc"
-        elif [[ -f "$file.zwc.old" ]]; then
-            echo rm -f "$file.zwc.old"
-            rm -f "$file.zwc.old"
-        fi
-    done
-
-    for file in ${sudoFiles[@]}; do
-        file=${file%*.zwc*}
-        if [[ -f "$file.zwc" ]]; then
-            echo sudo rm "$file".zwc
-            sudo rm "$file".zwc
-        elif [[ -f "$file.zwc.old" ]]; then
-            echo sudo rm "$file.zwc.old"
-            sudo rm "$file.zwc.old"
-        fi
-    done
-
-	for dir in $fpath; do
-		if test -d $dir;then
-            if [[ -f "$dir.zwc" ]]; then
-                echo rm -rf "$dir.zwc"
-                rm -rf "$dir.zwc" 2>/dev/null ||
-                sudo rm -rf "$dir.zwc"
-            fi
-        fi
-	done
-}
-
-function recompile(){
-
-    emulate -L zsh
-    setopt nullglob
-
-    local dir files sudoFiles file
-
-    files=(
-        "$HOME/.zshrc"*
-        "$HOME/.zlogout"*
-        "$HOME/.zlogin"*
-        "$HOME/grc.zsh"
-        "$ZSH/oh-my-zsh.sh"
-        "$ZSH_COMPDUMP"
-        "$ZPWR/.shell_aliases_functions.sh"
-        "$ZPWR/.powerlevel9kconfig.sh"
-        "$ZPWR_LOCAL/.tokens.sh"
-        "$ZPWR_LOCAL/.tokens-post.sh"
-        "$ZPWR_ENV_FILE"
-        "$ZPWR_RE_ENV_FILE"
-        "$ZPWR_SCRIPTS/zpwr.zsh"
-        "$ZPWR_LIB"
-        "$ZPWR_LIB_INIT"
-        "$ZPWR_SCRIPTS/crossOSCommands.sh"
-    )
-
-    sudoFiles=(
-        /etc/profile*
-        /etc/zprofile*
-        /etc/zshrc*
-        /etc/zsh/z*
-        /etc/profile.env*
-    )
-
-    prettyPrint "recompiling all configs to .zwc for speed"
-
-    for file in ${files[@]}; do
-        if [[ -f "$file" ]]; then
-            zrecompile -p "$file"
-        fi
-    done
-    for file in ${sudoFiles[@]}; do
-        if [[ -f "$file" ]]; then
-            sudo zsh -c "autoload zrecompile; zrecompile -p $file"
-        fi
-    done
-
-	for dir in $fpath; do
-		if test -d $dir;then
-            files=( $dir/*(N) )
-            if (($#files)); then
-                zrecompile -p $dir.zwc $files 2> /dev/null ||
-                sudo zsh -c "autoload zrecompile; zrecompile -p $dir.zwc $files"
-            fi
-        fi
-	done
-}
-
-function zshrcsearch(){
-
-    if [[ -z "$1" ]]; then
-        zsh -ilvx -c false &> $ZPWR_TEMPFILE4
-        less $ZPWR_TEMPFILE4
-    else
-        zsh -ilvx -c false &> $ZPWR_TEMPFILE4
-        ag --color --numbers -C 5 -i -- "$@" $ZPWR_TEMPFILE4 | less
-    fi
-}
-
-function zpwrLineCount(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: zpwrLineCount <cmd> <search>"
-        return 1
-    fi
-
-    eval "$1" | command grep -i -E "$2" | wc -l | tr -d ' '
-
-}
-
-function zpwrEnvCounts(){
-
-    prettyPrint "ENV COUNTS"
-    echo "Commands: ${#commands}"
-    echo "Functions: ${#functions}"
-    echo "Completions: ${#_comps}"
-    echo "Functions (not completions): "$(( $#functions - $#_comps ))
-    echo "Builtins: ${#builtins}"
-    echo "Reserved words: ${#reswords}"
-    echo "Parameters: ${#parameters}"
-    echo "Environment Variables: "${#parameters[(R)scalar-export]}
-    echo "Local Parameters: "${#parameters[(R)^scalar-export]}
-    echo "Aliases: ${#aliases}"
-    echo "Global Aliases: ${#galiases}"
-    echo "Git Aliases: "${#aliases[(R)*git*]}
-    echo "Cd Aliases: "${#aliases[(R)*cd*]}
-    echo "Suffix Aliases: ${#saliases}"
-    prettyPrint "ZPWR COUNTS"
-    echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
-    echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
-    echo "ZPWR verbs: ${#ZPWR_VERBS}"
-    echo "ZPWR script count: $(zpwrScriptCount)"
-    echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
-    echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
-}
-
-function zarg(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: zarg <escaped glob> <cmd with {}>"
-        return 1
-    fi
-
-    local first
-
-    first="$1"
-    shift
-
-    echo eval "zargs -i{} -- '$first' -- '$*'"
-    eval "zargs -i{} -- $first -- $*"
-}
-
-if exists jenv;then
-    export PATH="$HOME/.jenv/shims:$PATH"
-fi
-
-function zpwrAllUpdates(){
-
-    (
-        builtin cd "$ZPWR" &&
-            git pull &&
-            {
-                if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
-                    bash "$ZPWR_BANNER_SCRIPT"
-                fi
-            } &&
-            linkConf
-    )
-
-   zpwr updatedeps
-   zpwr regen
-   zpwr update
-}
-
-function zpwrForAllGitDirs(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrForGitDir <cmd>"
-        return 1
-    fi
-
-    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS first."
-        regenAllGitRepos regen
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir $1 \
-        $(cat $ZPWR_ALL_GIT_DIRS)
-}
-
-function zpwrUpdateAllGitDirs(){
-
-    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
-        regenAllGitRepos regen
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir \
-    'git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache' \
-        $(cat $ZPWR_ALL_GIT_DIRS)
-}
-
-function zpwrListVerbs(){
-    local len sep k v i width
-    sep=" "
-    width=25
-
-    for k in ${(ko)ZPWR_VERBS[@]};do
-        len=$#k
-        printf $k
-        spaces=$(( width - len ))
-
-        for (( i = 0; i < $spaces; ++i )); do
-            printf $sep
-        done
-        printf "${ZPWR_VERBS[$k]}\n"
-    done
-}
-
-function zpwrVerbsFZF(){
-
-    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
-        logg "regenerating keys for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
-        logg "regenerating values for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-
-    zpwrListVerbs |
-        eval "$ZPWR_FZF -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
-        perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
-}
-
-function zpwrNumVerbs(){
-
-    #the size of hashmap
-    echo $#ZPWR_VERBS
-}
-
-function zpwrEnvVars(){
-
-    env | command grep -i "^$ZPWR_REPO_NAME" | fzf
-}
-
-function revealRecurse(){
-
-    for i in **/*(/); do
-        ( builtin cd $i && reveal 2>/dev/null; )
-    done
-}
-
-function evalTester(){
-
-    echo eval fordir ${(q)*}
-}
-
-function regenHistory() {
-
-    prettyPrint "Regen $HISTFILE"
-    (
-        builtin cd "$HOME"
-        command mv "$HISTFILE" .zsh_history_bad
-        command strings .zsh_history_bad > "$HISTFILE"
-        builtin fc -R ."$HISTFILE"
-        command rm -rf .zsh_history_bad
-    )
-}
-
-function zpwrBackupHistfile(){
-
-    prettyPrint "Save backup of $HISTFILE"
-    (
-        builtin cd "$HOME"
-        builtin fc -W "$HISTFILE"
-        bash "$ZPWR_SCRIPTS/backupConfig.sh"
-    )
-}
-
-function zpwrRestoreHistfile(){
-
-    prettyPrint "Restore backup of $HISTFILE"
-    (
-        builtin cd "$HOME"
-        command rm "$HISTFILE"
-        prettyPrint command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
-        command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
-        builtin fc -R "$HISTFILE"
-    )
-}
-
-function zpwrCleanAll() {
-
-    prettyPrint "clearCache"
-    clearCache
-    prettyPrint "clear $zpwrDirsClean"
-    zpwrClean
-}
-
-function zpwrClean() {
-
-    local dir files
-
-    if ! (( $#zpwrDirsClean )); then
-        loggErr "zpwrDirsClean is empty."
-        return 1
-    fi
-
-    for dir in ${zpwrDirsClean[@]} ; do
-
-        files=("$dir"/*(N))
-
-        if (( $#files )); then
-            prettyPrint sudo rm -rfv "$dir"/*(N)
-            sudo rm -rfv "$dir"/*(N)
-        fi
-    done
-}
-
-function banner(){
-
-    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
-    ponysay -W 100
-}
-function bannerLolcat(){
-    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
-    ponysay -W 100 |
-    splitReg.sh -- \
-    ---------------------- lolcat
-}
-
-function noPonyBanner(){
-
-    eval "$ZPWR_DEFAULT_BANNER"
-}
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Compsys Functions
