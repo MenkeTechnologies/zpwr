@@ -16,7 +16,7 @@
 " https://github.com/menketechnologies
 "
 
-"{{{                    mark:neobundle
+"{{{                    MARK:neobundle
 "**************************************************************
 "neobundle scripts-----------------------------
 set nocompatible               " be improved
@@ -37,7 +37,7 @@ set nocompatible               " be improved
 
 "}}}***********************************************************
 
-""{{{                    mark:settings
+""{{{                    MARK:settings
 ""**************************************************************
 " backslash replaced by space for leader keybindings
 let mapleader = "\<space>"
@@ -1887,7 +1887,6 @@ let g:tmuxcomplete#trigger = 'omnifunc'
 
 set completefunc=zsh_completion#Complete
 "}}}***********************************************************
- 
 
 "{{{                    mark:deoplete/neosnippets
 "**************************************************************

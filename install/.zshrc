@@ -943,7 +943,7 @@ function noPonyBanner(){
 
 #{{{                    MARK:Custom Functions
 #**************************************************************
-#
+
 #{{{                    MARK:ColorTest
 #**************************************************************
 # print 2d array of colors
@@ -4535,7 +4535,7 @@ function _zpwr(){
 }
 #}}}***********************************************************
 
-#{{{                    MARK:compdefs
+#{{{                    MARK:Compdefs
 #**************************************************************
 _comps[ftp]=_ftp
 _comps[traceroute]=_traceroute

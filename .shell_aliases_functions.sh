@@ -193,8 +193,8 @@ if ! echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
 fi
 #}}}
 
-#{{{                          MARK:ALIASES
-#**********************************************************************
+#{{{                    MARK:Aliases
+#**************************************************************
 # portable aliases
 exists c.pl && {
     alias pp='c.pl'
@@ -266,6 +266,7 @@ alias etok="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE;clearList;isG
 alias econf="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_TOKEN_PRE $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
 alias zpt="builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;clearList;isGitDir && git diff HEAD"
 #}}}***********************************************************
+
 alias deleteTab="sed '/^[\x20\x09]*$/d'"
 alias ba="bash"
 alias upper="tr 'a-z' 'A-Z'"
@@ -422,10 +423,10 @@ alias tclsh="rlwrap tclsh"
 alias logs="sudo tail -f /var/log/**/*.log | ccze"
 alias beats="sudo tail -f /var/log/*beat/* | ccze"
 alias matr="cmatrix -C blue -abs"
-#**********************************************************************
+#}}}***********************************************************
 
-#                           MARK:PYTHON ZPWR_SCRIPTS
-#**********************************************************************
+#{{{                          MARK:PYTHON ZPWR_SCRIPTS
+#**************************************************************
 alias tm="execpy tmux_starter.py"
 alias tmm="execpy ssh_starter.py"
 alias tmm_notabs="execpy complete_ssh_starter.py;"
@@ -477,9 +478,10 @@ fi
 if [[ -d "$HOME/RubymineProjects" ]]; then
     alias mg='cd $HOME/RubymineProjects'
 fi
-#**********************************************************************
-#                           MARK:aliases for ZPWR_SCRIPTS
-#**********************************************************************
+#}}}***********************************************************
+
+#{{{                          MARK:aliases for ZPWR_SCRIPTS
+#**************************************************************
 alias inst="bash $ZPWR_SCRIPTS/tgzLocalInstaller.sh"
 alias ct="bash $ZPWR_SCRIPTS/createTextFile.sh"
 alias u="bash $ZPWR_SCRIPTS/upLoadPi.sh"
@@ -493,9 +495,6 @@ alias u8r="bash -l $ZPWR_SCRIPTS/updater.sh -s"
 alias gitgo='$ZPWR_SCRIPTS/gitgo.sh'
 alias watchGit='bash $ZPWR_SCRIPTS/watchServiceFSWatchGit.sh'
 alias watchPiWeb='bash $ZPWR_SCRIPTS/watchServiceFSWatchPiWeb.sh'
-#**********************************************************************
-#                           MARK:REMOTE SHELLS ZPWR_SCRIPTS
-#**********************************************************************
 exists tput && {
     bold=$(tput bold || tput md)
     red=$(tput setaf 1)
@@ -505,8 +504,7 @@ exists idea && {
     alias ic="idea create"
     alias il="idea list"
 }
-#**************************************************************
-#}}}
+#}}}***********************************************************
 
 #{{{                    MARK:Shell functions
 #**************************************************************
