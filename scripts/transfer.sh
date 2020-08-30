@@ -7,10 +7,17 @@
 ##### Notes:
 #}}}***********************************************************
 
-#{{{                    mark:aa
+#{{{                    MARK:usage
 #**************************************************************
-(($# < 1)) && echo "First Arg is the file to transfer" >&2 && exit 1
+if (($# < 1)); then
+    echo "First Arg is the file to transfer" >&2
+    exit 1
+fi
 transferFile="$1"
+#}}}***********************************************************
+
+#{{{                    MARK:scp
+#**************************************************************
 #escape $HOME to prevent expansion on original host
 scp -r "$transferFile" 'r2:$HOME/Desktop'
 #}}}**************************************************************
