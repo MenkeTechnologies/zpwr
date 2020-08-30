@@ -2856,7 +2856,7 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # using tag name as group name so ordering the groups by tag name here
 zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tmux contexts last-ten
 
-zstyle ':completion:*:*:z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
+zstyle ':completion:*:*:(z|zshz|zm|zd|zg):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
 
 # show command descriptions if available
 zstyle ':completion:*' extra-verbose yes
@@ -4419,20 +4419,22 @@ else
 fi
 #}}}***********************************************************
 
+#{{{                    MARK:ZPWR verbs zstyle
+#**************************************************************
+zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort false
+zstyle ':completion:*:*:(zpwr-z|gitzfordir|gitzfordirmaster|gitzfordirdevelop):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
+zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-z|zpwr-r):*:*' sort false
+#}}}***********************************************************
+
 #{{{                    MARK:ZPWR Compsys Functions
 #**************************************************************
 declare -a subcommands_ary
+
 for k v in ${(kv)ZPWR_VERBS[@]};do
     subcommands_ary+=("$k:$v")
 done
 
-zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort false
-zstyle ':completion:*:*:zpwr-z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
-
-zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-z|zpwr-r):*:*' sort false
-
 function __zpwr_gtl(){
-
 
     if ! isGitDir; then
         _message "$PWD is not a git dir"
@@ -4441,7 +4443,6 @@ function __zpwr_gtl(){
 
     local -a ary
     local tag des
-
 
     while read tag desc; do
         ary+=("$tag:$desc")
@@ -4497,6 +4498,9 @@ function _zpwr(){
                     gitedittag)
                         __zpwr_gtl
                         ;;
+                    gitzfordir|gitzfordirmaster|gitzfordirdevelop)
+                        _zcommand
+                        ;;
                     info | clearlist)
                         _cl
                         ;;
@@ -4542,6 +4546,7 @@ compdef _f f
 compdef _c c
 compdef _p p
 compdef _r r
+compdef _zcommand zm zd zg
 compdef _ssd ssd
 compdef _ssu ssu
 compdef _zpwr zpwr zp
