@@ -644,6 +644,43 @@ else
         }
     }
 
+    function tailufw(){
+
+        local size
+
+        size=100
+
+        if [[ -n $1 ]]; then
+            size=$1
+        fi
+        if exists ccze; then
+            sudo tail -n $size -F /var/log/{syslog,messages} |
+                command grep -i ufw | ccze
+        else
+            sudo tail -n $size -F /var/log/{syslog,messages} |
+                command grep -i ufw
+        fi
+    }
+
+fi
+
+if commandExists systemctl; then
+
+    function restartZabbixAgent(){
+
+        if exists ccze; then
+    sudo systemctl restart zabbix-agent
+    sudo systemctl --no-pager status zabbix-agent
+    sudo journalctl -n 100 --no-pager
+    sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log | ccze
+        else
+    sudo systemctl restart zabbix-agent
+    sudo systemctl --no-pager status zabbix-agent
+    sudo journalctl -n 100 --no-pager
+    sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
+        fi
+    }
+
     function ssd() {
 
         local service
@@ -666,39 +703,6 @@ else
             sudo systemctl start "$service"
             sudo systemctl enable "$service"
         done
-    }
-
-    function tailufw(){
-
-        local size
-
-        size=100
-
-        if [[ -n $1 ]]; then
-            size=$1
-        fi
-        if exists ccze; then
-            sudo tail -n $size -F /var/log/{syslog,messages} |
-                command grep -i ufw | ccze
-        else
-            sudo tail -n $size -F /var/log/{syslog,messages} |
-                command grep -i ufw
-        fi
-    }
-
-    function restartZabbixAgent(){
-
-        if exists ccze; then
-    sudo systemctl restart zabbix-agent
-    sudo systemctl --no-pager status zabbix-agent
-    sudo journalctl -n 100 --no-pager
-    sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log | ccze
-        else
-    sudo systemctl restart zabbix-agent
-    sudo systemctl --no-pager status zabbix-agent
-    sudo journalctl -n 100 --no-pager
-    sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
-        fi
     }
 
     function restart(){

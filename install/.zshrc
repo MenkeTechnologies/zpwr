@@ -3786,6 +3786,12 @@ for k v in ${(kv)ZPWR_VERBS[@]};do
     subcommands_ary+=("$k:$v")
 done
 
+zstyle ":completion:*:*:zpwr-gitedittag:*:commit-tags" sort false
+
+zstyle ':completion:*:*:zpwr-z:*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
+
+    zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-z|zpwr-r):*:*' sort false
+
 function __zpwr_gtl(){
 
 
@@ -3805,7 +3811,8 @@ function __zpwr_gtl(){
     _describe -t commit-tags tags ary
 }
 
-zstyle ":completion:*:*:zpwr-gitedittag" sort false
+# eager load for _tmux-attach-session
+_tmux &>/dev/null
 
 function _zpwr(){
 
@@ -3833,11 +3840,32 @@ function _zpwr(){
                 verb=$words[1]
                 curcontext="${curcontext%:*:*}:zpwr-$verb:"
                 case $verb in
+                    redo|re|redosql|rsql|searchl|se|see|seee|searchlee|searchle)
+                        _se
+                        ;;
+                    attach)
+                        _tmux-attach-session
+                        ;;
+                    cat)
+                        _c
+                        ;;
+                    cd)
+                        _f
+                        ;;
                     gitedittag)
                         __zpwr_gtl
                         ;;
                     info | clearlist)
                         _cl
+                        ;;
+                    servicedown)
+                        _ssd
+                        ;;
+                    serviceup)
+                        _ssu
+                        ;;
+                    z)
+                        _zcommand
                         ;;
                     *)
                         _alternative \

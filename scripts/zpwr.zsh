@@ -43,6 +43,7 @@ ZPWR_VERBS[copycommand]='getCopyCommand=get the command to copy with system'
 ZPWR_VERBS[decompile]='uncompile=delete all cache comps'
 ZPWR_VERBS[detach]='detachall=detach from all tmux sessions'
 ZPWR_VERBS[digs]='digs=run series on networking commands on arg'
+ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
 ZPWR_VERBS[exists]='exists=check if command is valid'
 ZPWR_VERBS[emacstokens]='etok=emacs the .tokens.sh file'
 ZPWR_VERBS[emacsconfig]='econf=emacs all zpwr configs'
@@ -250,8 +251,13 @@ ZPWR_VERBS[zpz]='zpz=cd to \$ZPWR_REPO_NAME and git co, rebase and push'
 ZPWR_VERBS[zrc]='zrc=zshrc vim session'
 ZPWR_VERBS[zshsearch]='zshrcsearch=search zshrc for arg'
 ZPWR_VERBS[zstyle]='zpwrZstyle=fuzzy search zstyle'
-ZPWR_VERBS[zcd]='fzfZListVerb=cd to z frecency ranked dir'
-ZPWR_VERBS[dirsearch]='fzfDirsearchVerb=cd to a sub dir'
+ZPWR_VERBS[zcd]='fzfZListVerb=list then cd to z frecency ranked dir'
+ZPWR_VERBS[z]='z=cd to z frecency ranked dir'
+
+if commandExists systemctl; then
+    ZPWR_VERBS[serviceup]='ssu=start and enable systemd service'
+    ZPWR_VERBS[servicedown]='ssd=stop and disable systemd service'
+fi
 
 verb="$1"
 
