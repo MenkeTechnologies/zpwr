@@ -2058,7 +2058,7 @@ function zpwrVerbsEditNoZLE(){
 
     local firstArg sel editor
 
-    sel="$(getZpwrVerbs)"
+    sel="$(zpwrVerbsFZF)"
 
     BUFFER="$sel"
 
@@ -2073,7 +2073,7 @@ function zpwrVerbsNoZLE(){
 
     local firstArg sel editor
 
-    sel="$(getZpwrVerbs)"
+    sel="$(zpwrVerbsFZF)"
 
     BUFFER="$sel"
 
@@ -2088,7 +2088,7 @@ function zpwrVerbsNoZLE(){
 function zpwrVerbsWidgetAccept(){
 
     zle .kill-whole-line
-    BUFFER="$(getZpwrVerbs)"
+    BUFFER="$(zpwrVerbsFZF)"
     loggDebug "$BUFFER"
     zle .accept-line
 }
@@ -2096,7 +2096,7 @@ function zpwrVerbsWidgetAccept(){
 function zpwrVerbsWidget(){
 
     zle .kill-whole-line
-    BUFFER="$(getZpwrVerbs)"
+    BUFFER="$(zpwrVerbsFZF)"
     loggDebug "$BUFFER"
     CURSOR=$#BUFFER
     zle vi-insert
@@ -3961,17 +3961,7 @@ function zpwrUpdateAllGitDirs(){
         $(cat $ZPWR_ALL_GIT_DIRS)
 }
 
-function getZpwrVerbs(){
-
-    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
-        logg "regenerating keys for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
-        logg "regenerating values for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-
+function zpwrListVerbs(){
     local len sep k v i width
     sep=" "
     width=25
@@ -3982,15 +3972,29 @@ function getZpwrVerbs(){
         spaces=$(( width - len ))
 
         for (( i = 0; i < $spaces; ++i )); do
-           printf $sep
+            printf $sep
         done
         printf "${ZPWR_VERBS[$k]}\n"
-    done |
+    done
+}
+
+function zpwrVerbsFZF(){
+
+    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
+        logg "regenerating keys for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
+        logg "regenerating values for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+
+    zpwrListVerbs |
         eval "$ZPWR_FZF -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
         perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
 }
 
-function numZpwrVerbs(){
+function zpwrNumVerbs(){
 
     #the size of hashmap
     echo $#ZPWR_VERBS
@@ -4461,18 +4465,15 @@ function _zpwr(){
 
 
   arguments=(
-    '--help[show this help message and exit]: :->noargs'
-    '1:zpwr subcommand:->verb'
-    '*::args to zpwr:->args'
+        '(- :)'{-h,--help}'[show help message and exit]'
+        '1:zpwr subcommand:->verb'
+        '*::args to zpwr:->args'
     )
 
     _arguments -s -C : $arguments && return
 
     if (( CURRENT >= 1 )); then
         case $state in
-            noargs)
-                _message "nothing to complete"
-                ;;
             verb)
                 _describe -t commands "zpwr verb" subcommands_ary
                 ;;

@@ -194,8 +194,9 @@ ZPWR_VERBS[start]='tmm_notabs=start with no tabs'
 ZPWR_VERBS[starttabs]='tmm_full=start all tabs'
 ZPWR_VERBS[subcommands]='zpwrVerbsNoZLE=run the subcommands for zpwr <tab>'
 ZPWR_VERBS[subcommandsedit]='zpwrVerbsEditNoZLE=edit the subcommands for zpwr <tab>'
-ZPWR_VERBS[subcommandsview]='getZpwrVerbs=the subcommands for zpwr <tab>'
-ZPWR_VERBS[subcommandscount]='numZpwrVerbs=number of choice for zpwr <tab>'
+ZPWR_VERBS[subcommandsfzf]='zpwrVerbsFZF=fzf the subcommands for zpwr <tab>'
+ZPWR_VERBS[subcommandslist]='zpwrListVerbs=the subcommands for zpwr <tab>'
+ZPWR_VERBS[subcommandscount]='zpwrNumVerbs=number of choice for zpwr <tab>'
 ZPWR_VERBS[taillog]='lo=tail -F \$ZPWR_LOGFILE'
 ZPWR_VERBS[test]='tru=run all zpwr tests'
 ZPWR_VERBS[tests]='tru=run all zpwr tests'
@@ -217,8 +218,9 @@ ZPWR_VERBS[upload]='upload=upload with curl'
 ZPWR_VERBS[urlsafe]='urlSafe=base64 encode'
 ZPWR_VERBS[verbs]='zpwrVerbsNoZLE=run the subcommands for zpwr <tab>'
 ZPWR_VERBS[verbsedit]='zpwrVerbsEditNoZLE=edit the subcommands for zpwr <tab>'
-ZPWR_VERBS[verbsview]='getZpwrVerbs=the subcommands for zpwr <tab>'
-ZPWR_VERBS[verbscount]='numZpwrVerbs=number of choice for zpwr <tab>'
+ZPWR_VERBS[verbsfzf]='zpwrVerbsFZF=fzf the subcommands for zpwr <tab>'
+ZPWR_VERBS[verbslist]='zpwrListVerbs=list the subcommands for zpwr <tab>'
+ZPWR_VERBS[verbscount]='zpwrNumVerbs=number of choice for zpwr <tab>'
 ZPWR_VERBS[vimall]='vimAll=vim all zpwr files for :argdo'
 ZPWR_VERBS[vimconfig]='conf=edit all zpwr configs'
 ZPWR_VERBS[vimemacsconfig]='vimEmacsConfig=vim edit emacs zpwr configs'
@@ -264,13 +266,19 @@ verb="$1"
 
 if [[ -n "$verb" ]]; then
 
-    if [[ $(basename $verb) == $(basename $0) ]]; then
+    if [[ $(basename -- $verb) == $(basename -- $0) ]]; then
         #zunit does this
         return 0
     fi
 
     shift
     found=false
+
+    if [[ $verb =~ '-h|--help' ]]; then
+        zpwrListVerbs | less
+        return 0
+    fi
+
     for k v in ${(kv)ZPWR_VERBS[@]};do
 
         if [[ $k == $verb ]]; then
