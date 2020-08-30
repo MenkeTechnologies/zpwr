@@ -3852,11 +3852,17 @@ function _zpwr(){
                     cd)
                         _f
                         ;;
+                    cdup)
+                        _r
+                        ;;
                     gitedittag)
                         __zpwr_gtl
                         ;;
                     info | clearlist)
                         _cl
+                        ;;
+                    ps)
+                        _p
                         ;;
                     servicedown)
                         _ssd
