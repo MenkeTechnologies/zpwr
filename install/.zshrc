@@ -3786,20 +3786,42 @@ for k v in ${(kv)ZPWR_VERBS[@]};do
     subcommands_ary+=("$k:$v")
 done
 
+function __zpwr_gtl(){
+
+
+    if ! isGitDir; then
+        _message "$PWD is not a git dir"
+        return 1
+    fi
+
+    local -a ary
+    local tag des
+
+
+    while read tag desc; do
+        ary+=("$tag:$desc")
+    done < <(git tag --sort=-v:refname -n -l)
+
+    _describe -t commit-tags tags ary
+}
+
+zstyle ":completion:*:*:zpwr-gitedittag" sort false
+
 function _zpwr(){
 
-  local arguments
+  local arguments verb
+  local curcontext=$curcontext state line ret
+
 
   arguments=(
-  '--help[show this help message and exit]: :->noargs'
-  '--shell[enter shell repl]: :->noargs'
-  '1:zpwr subcommand:->verb'
+    '--help[show this help message and exit]: :->noargs'
+    '1:zpwr subcommand:->verb'
     '*::args to zpwr:->args'
     )
 
-    _arguments -s -C : $arguments && return 0
+    _arguments -s -C : $arguments && return
 
-    if [[ CURRENT -ge 1 ]]; then
+    if (( CURRENT >= 1 )); then
         case $state in
             noargs)
                 _message "nothing to complete"
@@ -3808,12 +3830,17 @@ function _zpwr(){
                 _describe -t commands "zpwr verb" subcommands_ary
                 ;;
             args)
-                case $words[1] in
+                verb=$words[1]
+                curcontext="${curcontext%:*:*}:zpwr-$verb:"
+                case $verb in
+                    gitedittag)
+                        __zpwr_gtl
+                        ;;
                     info | clearlist)
-                    _cl
+                        _cl
                         ;;
                     *)
-                    _alternative \
+                        _alternative \
                     'files:files:_files' \
                     'directory-stack:directory stack:_directory_stack'
                         ;;
