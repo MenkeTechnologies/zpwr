@@ -1,0 +1,22 @@
+function ___p(){
+
+    local cmd out
+
+    if [[ "$ZPWR_OS_TYPE" == linux || "$ZPWR_OS_TYPE" == darwin ]]; then
+        [[ -z $1 ]] && ps -ef && return 0
+        out="$(ps -ef)"
+    else
+        [[ -z $1 ]] && ps aux && return 0
+        out="$(ps aux)"
+    fi
+
+    for cmd; do
+        prettyPrint "SEARCH TERM: $cmd"
+        echo "$out" |
+            command grep --color=always -a -i -F -- "$cmd" ||
+            echo "Nothing found for $cmd."
+        echo
+    done
+}
+
+___p "$@"

@@ -1,0 +1,32 @@
+function ___searchDirtyGitRepos(){
+
+    local shouldRegen
+
+    function goThere(){
+
+    {
+        while read; do
+            builtin cd "$REPLY" 2>/dev/null || continue
+            if ! git diff-index --quiet HEAD -- 2>/dev/null;then
+                echo "$REPLY"
+            elif [[ ! -z "$(git ls-files --exclude-standard --others 2>/dev/null)" ]];then
+                echo "$REPLY"
+            fi
+        done < "$ZPWR_ALL_GIT_DIRS"
+    } |
+        eval "$ZPWR_FZF $FZF_SEARCH_GIT_OPTS" |
+        perl -ne 'print "cd $_"'
+    }
+
+    shouldRegen="$1"
+    if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
+        regenAllGitRepos
+    elif [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
+        regenAllGitRepos regen
+    fi
+
+    searchGitCommon
+}
+
+___searchDirtyGitRepos "$@"

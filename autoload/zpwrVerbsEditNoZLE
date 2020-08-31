@@ -1,0 +1,16 @@
+function ___zpwrVerbsEditNoZLE(){
+
+    local firstArg sel editor
+
+    sel="$(zpwrVerbsFZF)"
+
+    BUFFER="$sel"
+
+    if [[ -n "$sel" ]]; then
+        print -zr -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+___zpwrVerbsEditNoZLE "$@"

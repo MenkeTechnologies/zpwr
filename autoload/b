@@ -1,0 +1,26 @@
+function ___b(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: b <cmds> or b -s <sleeptime> <cmds>"
+        return 1
+    fi
+
+    local cmd sleepTime
+
+    if [[ $1 == -s ]]; then
+        sleepTime=$2
+        shift 2
+    fi
+
+    for cmd; do
+        test -z $sleepTime && {
+            ( eval "$cmd" & )
+            p $(echo "$cmd" | awk '{print $1}')
+        } || {
+            ( eval "sleep $sleepTime && $cmd" & )
+            p $(echo "$cmd" | awk '{print $1}')
+        }
+    done
+}
+
+___b "$@"

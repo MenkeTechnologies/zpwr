@@ -338,7 +338,7 @@ done
 
 # add ZPWR autoload dirs to fpath
 fpath=($ZPWR_AUTOLOAD $ZPWR_COMPS $fpath)
-autoload -U $ZPWR_AUTOLOAD/*(.:t)
+autoload -z $ZPWR_AUTOLOAD/*(.:t)
 autoload -Uz zrecompile zm zargs
 
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
@@ -968,44 +968,6 @@ function killPSVerbEdit(){
     fi
 }
 
-function killLsofVerbAccept(){
-
-    local sel
-
-    sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
-
-    if [[ -n "$sel" ]]; then
-        BUFFER="sudo kill -9 -- $sel"
-        print -rs -- "$BUFFER"
-        eval "$BUFFER"
-    else
-        return
-    fi
-}
-
-function killLsofVerbEdit(){
-
-    local sel
-
-    sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
-
-    if [[ -n "$sel" ]]; then
-        BUFFER="sudo kill -9 -- $sel"
-        print -rz -- "$BUFFER"
-    else
-        return
-    fi
-}
-
-function historyVerbAccept(){
-
-    local num sel
-      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
-    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $ZPWR_FZF |
-    perl -lane 'print "@F[1..$#F]"')
-
-}
-
 function keySender(){
 
     local pane mywords
@@ -1202,37 +1164,6 @@ function interceptDelete(){
     keySender
 }
 
-function zpwrVerbsEditNoZLE(){
-
-    local firstArg sel editor
-
-    sel="$(zpwrVerbsFZF)"
-
-    BUFFER="$sel"
-
-    if [[ -n "$sel" ]]; then
-        print -zr -- "$BUFFER"
-    else
-        return
-    fi
-}
-
-function zpwrVerbsNoZLE(){
-
-    local firstArg sel editor
-
-    sel="$(zpwrVerbsFZF)"
-
-    BUFFER="$sel"
-
-    if [[ -n "$sel" ]]; then
-        print -sr -- "$BUFFER"
-        eval "$BUFFER"
-    else
-        return
-    fi
-}
-
 function zpwrVerbsWidgetAccept(){
 
     zle .kill-whole-line
@@ -1250,14 +1181,6 @@ function zpwrVerbsWidget(){
     zle vi-insert
 }
 
-function zpwrExpandAliases() {
-
-  unset 'functions[_expand-aliases]'
-  functions[_expand-aliases]=$BUFFER
-
-  (($+functions[_expand-aliases])) &&
-    echo ${functions[_expand-aliases]#$'\t'}
-}
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE bindkey

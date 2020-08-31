@@ -1,0 +1,37 @@
+function ___goclean() {
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: goclean <package>"
+        return 1
+    fi
+
+    local pkg ost cnt src_dir bin_dir
+    pkg=$1;
+    shift
+
+    # Set local variables
+    if [[ "$(uname -m)" == "x86_64" ]];then
+        ost="$(uname | tr A-Z a-z)_amd64"
+    fi
+
+    # Delete the source directory and compiled package directory(ies)
+    src_dir="$GOPATH/src/$pkg"
+    bin_dir="$GOPATH/pkg/$ost/$pkg"
+
+    if [[ ! -d "$src_dir" ]]; then
+        loggErr "$src_dir from $pkg does not exist"
+        return 1
+    fi
+    if [[ ! -d "$bin_dir" ]]; then
+        loggErr "$bin_dirfrom $pkg does not exist"
+    fi
+    # Clean removes object files from package source directories (ignore error)
+    go clean -i $pkg 2>/dev/null
+
+    echo rm -rf "$src_dir"
+    echo rm -rf "$bin_dir"
+    rm -rf "$src_dir"
+    rm -rf "$bin_dir"
+}
+
+___goclean "$@"

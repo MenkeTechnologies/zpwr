@@ -1,0 +1,28 @@
+function ___changeGitCommitterEmail(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: changeGitCommitterEmail <oldEmail> <newEmail>"
+        return 1
+    fi
+
+    if ! isGitDir; then
+        loggNotGit
+        return 1
+    fi
+
+    local oldEmail newEmail
+
+    oldEmail="$1"
+    newEmail="$2"
+
+    prettyPrint "change committer $oldEmail to $newEmail"
+
+    git filter-branch --commit-filter '
+    if [ "$GIT_COMMITTER_EMAIL" = "'$oldEmail'" ]; then
+        GIT_COMMITTER_EMAIL="'$newEmail'"; git commit-tree "$@";
+    else
+        git commit-tree "$@";
+    fi' HEAD
+}
+
+___changeGitCommitterEmail "$@"

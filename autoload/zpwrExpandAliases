@@ -1,0 +1,10 @@
+function ___zpwrExpandAliases() {
+
+  unset 'functions[_expand-aliases]'
+  functions[_expand-aliases]=$BUFFER
+
+  (($+functions[_expand-aliases])) &&
+    echo ${functions[_expand-aliases]#$'\t'}
+}
+
+___zpwrExpandAliases "$@"

@@ -528,33 +528,6 @@ function em(){
 
 }
 
-function emm() {
-
-    local str endstr
-    tmux selectp -t emacs:0.0
-    tmux send-keys -t emacs:0.0 C-c Escape
-
-    for arg in "$@"; do
-        if [[ ${arg:0:1} == "/" ]]; then
-            str="$arg"
-        elif [[ ${arg:0:1} == "~" ]]; then
-            str="$arg"
-        else
-            str="$PWD/$1"
-        fi
-        endstr="$endstr $str"
-    done
-
-    if [[ -n "$endstr" ]]; then
-        printf "$endstr" | $ZPWR_COPY_CMD
-        sleep 0.3
-        logg tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
-        tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
-    fi
-
-    tmux attach-session -t emacs
-}
-
 function loadJenv() {
 
     if exists jenv;then
@@ -778,27 +751,6 @@ function cloneToForked(){
     )
 }
 
-function xx(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: xx <cmd>"
-        return 1
-    fi
-
-    local counter cmd DONE iter
-
-    cmd="$1"
-    test -z "$2" && counter=100 || counter="$2"
-
-    trap 'DONE=true' QUIT
-    DONE=false
-    for iter in {1..$counter} ; do
-       [[ $DONE == true ]] && break || eval "$cmd"
-    done
-
-    trap QUIT
-}
-
 function urlSafe(){
 
     cat | base64 | tr '+/=' '._-'
@@ -861,52 +813,6 @@ function scnew(){
     fi
 
     bash "$ZPWR_SCRIPTS/createScriptButDontOpenSublime.sh" "$1"
-}
-
-function p(){
-
-    local cmd out
-
-    if [[ "$ZPWR_OS_TYPE" == linux || "$ZPWR_OS_TYPE" == darwin ]]; then
-        [[ -z $1 ]] && ps -ef && return 0
-        out="$(ps -ef)"
-    else
-        [[ -z $1 ]] && ps aux && return 0
-        out="$(ps aux)"
-    fi
-
-    for cmd; do
-        prettyPrint "SEARCH TERM: $cmd"
-        echo "$out" |
-            command grep --color=always -a -i -F -- "$cmd" ||
-            echo "Nothing found for $cmd."
-        echo
-    done
-}
-
-function b(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: b <cmds> or b -s <sleeptime> <cmds>"
-        return 1
-    fi
-
-    local cmd sleepTime
-
-    if [[ $1 == -s ]]; then
-        sleepTime=$2
-        shift 2
-    fi
-
-    for cmd; do
-        test -z $sleepTime && {
-            ( eval "$cmd" & )
-            p $(echo "$cmd" | awk '{print $1}')
-        } || {
-            ( eval "sleep $sleepTime && $cmd" & )
-            p $(echo "$cmd" | awk '{print $1}')
-        }
-    done
 }
 
 function suc(){
@@ -1036,42 +942,6 @@ function cd(){
     fi
 }
 
-function contribCountDirs(){
-
-    if [[ -z "$2" ]]; then
-       loggErr "usage: contribCountDirs <user regex> <dirs...>"
-       return 1
-    fi
-
-    local dirOfDirs user curDir sum dir lineCount
-
-    user="$1"
-    shift
-    curDir="$(pwd)"
-    sum=0
-
-    printf "" > "$ZPWR_TEMPFILE1"
-
-    for dir in "$@"; do
-        if [[ -d "$dir" ]]; then
-            (
-            builtin cd "$dir"
-            isGitDir || continue
-
-            lineCount="$(git log --pretty="%an" | grep -E "$user" | wc -l)"
-            prettyPrint "Contribution Count for $user at $dir is $lineCount"
-            echo $lineCount >> "$ZPWR_TEMPFILE1"
-        )
-        fi
-    done
-
-    while read; do
-       ((sum += $REPLY))
-    done < "$ZPWR_TEMPFILE1"
-    echo "Total contributions for ${ZPWR_DELIMITER_CHAR}$user${ZPWR_DELIMITER_CHAR} is ${ZPWR_DELIMITER_CHAR}$sum${ZPWR_DELIMITER_CHAR}." | alternatingPrettyPrint
-
-}
-
 function contribCount(){
 
     if ! isGitDir; then
@@ -1091,56 +961,6 @@ function contribCount(){
         echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             alternatingPrettyPrint
     fi
-}
-
-function totalLines(){
-
-    if ! isGitDir; then
-       loggNotGit
-       return 1
-    fi
-
-    local filter lineCount
-
-    prettyPrint "starting total line count..."
-    {
-
-    while read; do
-        isBinary "$REPLY" && continue
-        filter=false
-        for arg in "$@"; do
-           if echo "$REPLY" | command grep -sq "$arg"; then
-               filter=true
-               break
-           fi
-        done
-
-        if [[ $filter = false ]]; then
-            cat "$REPLY"
-        fi
-    done < <(git ls-files) 2>/dev/null
-
-    } > "$ZPWR_TEMPFILE"
-
-    if ! test -f "$ZPWR_TEMPFILE"; then
-        printf "\x1b[0;1;31m"
-        loggErr "where is $ZPWR_TEMPFILE" 
-        printf "\x1b[0m"
-        return 1
-    fi
-
-    prettyPrint "Total Line Count"
-    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
-    if (( $lineCount > 10 )); then
-        echo "$lineCount" |
-            perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
-            alternatingPrettyPrint | less -r
-    else
-        echo "$lineCount" |
-            perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
-            alternatingPrettyPrint
-    fi
-    command rm "$ZPWR_TEMPFILE"
 }
 
 function replacer(){
@@ -1272,27 +1092,6 @@ function gcl() {
     fi
 }
 
-function jetbrainsWorkspaceEdit(){
-
-    perl -E 'say "_"x100'
-    prettyPrint "MONITORING WORKSPACE..."
-    perl -E 'say "_"x100'
-    while true; do
-        if command grep -q '<component name="RunManager" selected=' \
-            .idea/workspace.xml; then
-            perl -E 'say "_"x100' | lolcat
-            figletRandomFontOnce.sh "MATCH ENJOY>>>>" \
-            | ponysay -W 120
-            perl -E 'say "_"x100' | lolcat
-            sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
-
-        else
-            loggErr "No Match Yet" 
-            sleep 1
-        fi
-    done
-}
-
 function o(){
 
     local open_cmd
@@ -1391,53 +1190,6 @@ function zr(){
     fi
 }
 
-# pull down latest configuration files from $ZPWR_REPO_NAME
-function getrc(){
-
-    local dir branch completionDir
-
-    if [[ -z "$1" ]]; then
-        branch=master
-    else
-        branch="$1"
-    fi
-
-    if [[ $ZPWR_OS_TYPE == darwin ]]; then
-        if exists dialog;then
-            dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$ZPWR_TEMPFILE"
-            clear
-            REPLY="$(cat "$ZPWR_TEMPFILE")"
-            command rm "$ZPWR_TEMPFILE"
-        else
-            printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> "
-            read
-        fi
-
-        if [[ $REPLY != "y" ]]; then
-            clearList
-            return 0
-        fi
-    fi
-
-    if [[ -d "$ZPWR" ]]; then
-        builtin cd "$ZPWR"
-        logg $(git pull 2>&1)
-    fi
-
-    builtin cd "$ZPWR"
-    bash "$ZPWR_BANNER_SCRIPT"
-    linkConf
-
-    completionDir="$HOME/.oh-my-zsh/custom/plugins"
-    for dir in "$completionDir/"*;do
-        printf "$dir: "
-        test -d "$dir" && ( builtin cd "$dir" && git pull; )
-    done
-
-    test -n "$TERM" && exec "$SHELL"
-
-}
-
 function getrcdev(){
 
     getrc dev
@@ -1464,32 +1216,6 @@ function mycurl(){
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 |
     command sed "/^*/d" | sed -E "s@(<|>) @@g" |
     sed -E "/^(\{|\}| ) (\[|C)/d"
-}
-
-function pirun(){
-
-    trap 'DONE=true' QUIT
-
-    local DONE picounter pi
-
-    DONE=false
-    picounter=1
-
-    for pi in "${PI_ARRAY[@]}" ; do
-        [[ $DONE == true ]] && return 1
-        alternatingPrettyPrint \
-        "Executing $ZPWR_DELIMITER_CHAR'$1'$ZPWR_DELIMITER_CHAR on $ZPWR_DELIMITER_CHAR$pi$ZPWR_DELIMITER_CHAR"
-        if [[ -z $2 ]]; then
-            ssh "${pi%:*}" "$1" 2>/dev/null
-        else
-            ssh "${pi%:*}" "$1" 2>/dev/null
-            if (( picounter == $2 )); then
-                return
-            fi
-        fi
-        ((++picounter))
-    done
-    trap QUIT
 }
 
 function to(){
@@ -1549,33 +1275,6 @@ function fordirUpdate(){
         if [[ -d "$dir" ]]; then
             (
                 builtin cd "$dir" && isGitDir && prettyPrint "cd $dir && $cmd" && eval "$cmd"
-            )
-        fi
-    done
-}
-
-function fordir(){
-
-    if [[ -z "$2" ]]; then
-       loggErr "usage: fordir <cmd> <dirs> to run <cmd> in each dir"
-       return 1
-    fi
-
-    local dir cmd
-
-    cmd="$1"
-
-    if [[ -d "$cmd" || -f "$cmd" ]]; then
-       loggErr "usage: fordir <cmd> <dirs> to run <cmd> in each dir"
-       return 1
-    fi
-
-    shift
-
-    for dir in "$@"; do
-        if [[ -d "$dir" ]]; then
-            (
-                builtin cd "$dir" && prettyPrint "cd $dir && $cmd" && eval "$cmd"
             )
         fi
     done
@@ -1767,52 +1466,6 @@ function gitCheckoutRebasePush(){
     git branch -a | head -2 | perl -ane 'if ($F[0] eq "*"){$cur=$F[1]}else{$alt=$F[0]};if ($. == 2){$cmd="git checkout $alt; git rebase $cur;git push;";print "$cmd\n"; `$cmd`}'
 }
 
-declare -A _tempAry
-
-function jsonToArray(){
-
-    local json key value
-
-    local json="$(cat)"
-    while IFS="=" read -r key value;do
-        _tempAry[$key]=$value
-    done < <(echo "$json" | jq -r "to_entries|map(\"\(.key)=\(.value)\")|.[]")
-
-
-    if isZsh;then
-        printf '%s=%s\n' "${(@kv)_tempAry}"
-    else
-        for key in "${!_tempAry[@]}";do
-            echo "$key=${_tempAry[$key]}"
-        done
-    fi
-    set +x
-}
-
-function arrayToJson(){
-
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: arrayToJson <array>"
-        return 1
-    fi
-
-    local ary key
-
-    if isZsh; then
-        ary="$1"
-        printf '%s\n%s\n' "${(kv)${(P)ary}[@]}" |
-        jq -Rn '[inputs | { (.): input}] | add'
-    else
-        ary="$1"
-        for key in "${!${!ary}[@]}"; do
-            printf "%s\n" "$key"
-            printf "%s\n" "${aaname[$key]}"
-        done | jq -Rn '[inputs | { (.): input}] | add'
-    fi
-
-}
-
 function loginCount(){
 
     perl -e 'print `last -f "$_"`for</var/log/wtmp*>' |
@@ -1848,41 +1501,6 @@ function clearCache(){
     } >> "$ZPWR_LOGFILE" 2>&1
 }
 
-function regenGtagsType(){
-
-    if [[ -z $1 ]]; then
-        loggErr "usage: regenGtagsType <type>"
-        return 1
-    fi
-
-    local type file
-    type=$1
-
-    if exists gtags; then
-        prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
-        (
-        builtin cd "$HOME"
-        command rm GPATH GRTAGS GTAGS 2>/dev/null
-        for file in \
-            "$ZPWR_INSTALL/"* \
-            "$ZPWR/"* \
-            "$ZPWR_SCRIPTS"/* \
-            "$ZPWR_SCRIPTS_MAC/"*; do
-            if [[ -f "$file" ]]; then
-                echo "$file"
-            fi
-        done | gtags --accept-dotfiles --gtagslabel=$type -f -
-        if [[ ! -s GTAGS ]]; then
-            loggErr "forced to copy back gtags because empty"
-            echo command cp "$ZPWR_INSTALL/g-tags/"{GPATH,GRTAGS,GTAGS} "$HOME"
-            command cp "$ZPWR_INSTALL/g-tags/"{GPATH,GRTAGS,GTAGS} "$HOME"
-        fi
-        )
-    else
-        loggErr "gtags does not exist"
-    fi
-
-}
 function regenGtagsCtags(){
 
     regenGtagsType ctags
@@ -1927,79 +1545,6 @@ function searchGitCommon(){
     eval "$out"
 }
 
-function regenAllGitRepos(){
-
-    if exists fd; then
-        prettyPrint "Regen $ZPWR_ALL_GIT_DIRS with all git dirs from fd /"
-        sudo -E "PATH=$PATH" env fd '\.git$' / --type d --absolute-path --color=never --threads=8 --hidden --no-ignore | perl -ne 'print if m{/.git$}' |
-        tee "$ZPWR_TEMPFILE3"
-    else
-        prettyPrint "No fd-find so regen $ZPWR_ALL_GIT_DIRS with all git dirs from find /"
-        sudo find / -name .git -type d -prune 2>/dev/null |
-        tee "$ZPWR_TEMPFILE3"
-    fi
-    perl -i -pe 's@/.git$@@' "$ZPWR_TEMPFILE3"
-
-    # removing system read only mounted dirs on macOS
-    if [[ $ZPWR_OS_TYPE == darwin ]]; then
-        perl -i -pe 's@^/System/Volumes/Data@@' "$ZPWR_TEMPFILE3"
-    fi
-
-    sort "$ZPWR_TEMPFILE3" | uniq > "$ZPWR_ALL_GIT_DIRS"
-}
-
-function searchDirtyGitRepos(){
-
-    local shouldRegen
-
-    function goThere(){
-
-    {
-        while read; do
-            builtin cd "$REPLY" 2>/dev/null || continue
-            if ! git diff-index --quiet HEAD -- 2>/dev/null;then
-                echo "$REPLY"
-            elif [[ ! -z "$(git ls-files --exclude-standard --others 2>/dev/null)" ]];then
-                echo "$REPLY"
-            fi
-        done < "$ZPWR_ALL_GIT_DIRS"
-    } |
-        eval "$ZPWR_FZF $FZF_SEARCH_GIT_OPTS" |
-        perl -ne 'print "cd $_"'
-    }
-
-    shouldRegen="$1"
-    if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
-        regenAllGitRepos
-    elif [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
-        regenAllGitRepos regen
-    fi
-
-    searchGitCommon
-}
-
-function searchAllGitRepos(){
-
-    local shouldRegen
-
-    function goThere(){
-        cat "$ZPWR_ALL_GIT_DIRS" |
-        eval "$ZPWR_FZF $FZF_SEARCH_GIT_OPTS" |
-        perl -ne 'print "cd $_"'
-    }
-
-    shouldRegen="$1"
-    if [[ $shouldRegen == regen ]] || [[ ! -f "$ZPWR_ALL_GIT_DIRS" ]]; then
-        regenAllGitRepos
-    elif [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
-        regenAllGitRepos regen
-    fi
-
-    searchGitCommon
-}
-
 function regenConfigLinks(){
 
     prettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
@@ -2026,42 +1571,6 @@ function regenPowerlineLink(){
         )
     fi
     command tmux source-file "$HOME/.tmux.conf"
-}
-
-function goclean() {
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: goclean <package>"
-        return 1
-    fi
-
-    local pkg ost cnt src_dir bin_dir
-    pkg=$1;
-    shift
-
-    # Set local variables
-    if [[ "$(uname -m)" == "x86_64" ]];then
-        ost="$(uname | tr A-Z a-z)_amd64"
-    fi
-
-    # Delete the source directory and compiled package directory(ies)
-    src_dir="$GOPATH/src/$pkg"
-    bin_dir="$GOPATH/pkg/$ost/$pkg"
-
-    if [[ ! -d "$src_dir" ]]; then
-        loggErr "$src_dir from $pkg does not exist"
-        return 1
-    fi
-    if [[ ! -d "$bin_dir" ]]; then
-        loggErr "$bin_dirfrom $pkg does not exist"
-    fi
-    # Clean removes object files from package source directories (ignore error)
-    go clean -i $pkg 2>/dev/null
-
-    echo rm -rf "$src_dir"
-    echo rm -rf "$bin_dir"
-    rm -rf "$src_dir"
-    rm -rf "$bin_dir"
 }
 
 function commits(){
@@ -2108,69 +1617,6 @@ function emacsZpwr(){
     isGitDir && git diff HEAD
 }
 
-function emacsAllServer(){
-
-    builtin cd $ZPWR
-    ${=ZPWR_EMACS} \
-    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
-    "$ZPWR/"*.{sh,py,zsh,pl} \
-    "$ZPWR/"*.md \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/tmux-"* \
-    "$ZPWR/"{.minvimrc,.mininit.vim} \
-    "$ZPWR_INSTALL/conf."* \
-    "$ZPWR_INSTALL/"*.sh \
-    "$ZPWR_INSTALL/"*.service \
-    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
-    clearList
-    isGitDir && git diff HEAD
-}
-
-function emacsAll(){
-
-    builtin cd $ZPWR
-    ${=ZPWR_EMACS_CLIENT} \
-    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
-    "$ZPWR/"*.{sh,py,zsh,pl} \
-    "$ZPWR/"*.md \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/tmux-"* \
-    "$ZPWR/"{.minvimrc,.mininit.vim} \
-    "$ZPWR_INSTALL/conf."* \
-    "$ZPWR_INSTALL/"*.sh \
-    "$ZPWR_INSTALL/"*.service \
-    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
-    clearList
-    isGitDir && git diff HEAD
-}
-
-function vimAll(){
-
-    builtin cd $ZPWR
-    vim \
-    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
-    "$ZPWR/"*.{sh,py,zsh,pl} \
-    "$ZPWR/"*.md \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/tmux-"* \
-    "$ZPWR/"{.minvimrc,.mininit.vim} \
-    "$ZPWR_INSTALL/conf."* \
-    "$ZPWR_INSTALL/"*.sh \
-    "$ZPWR_INSTALL/"*.service \
-    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
-    clearList
-    isGitDir && git diff HEAD
-}
-
 function emacsScripts(){
 
     ${=ZPWR_EMACS_CLIENT} \
@@ -2191,60 +1637,6 @@ function vimScripts(){
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
-}
-
-function changeGitCommitterEmail(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: changeGitCommitterEmail <oldEmail> <newEmail>"
-        return 1
-    fi
-
-    if ! isGitDir; then
-        loggNotGit
-        return 1
-    fi
-
-    local oldEmail newEmail
-
-    oldEmail="$1"
-    newEmail="$2"
-
-    prettyPrint "change committer $oldEmail to $newEmail"
-
-    git filter-branch --commit-filter '
-    if [ "$GIT_COMMITTER_EMAIL" = "'$oldEmail'" ]; then
-        GIT_COMMITTER_EMAIL="'$newEmail'"; git commit-tree "$@";
-    else
-        git commit-tree "$@";
-    fi' HEAD
-}
-
-function changeGitAuthorEmail(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: changeGitAuthorEmail <oldEmail> <newEmail>"
-        return 1
-    fi
-
-    if ! isGitDir; then
-        loggNotGit
-        return 1
-    fi
-
-    local oldEmail newEmail
-
-    oldEmail="$1"
-    newEmail="$2"
-
-    prettyPrint "change author $oldEmail to $newEmail"
-
-    git filter-branch --commit-filter '
-    if [ "$GIT_AUTHOR_EMAIL" = "'$oldEmail'" ]; then
-        GIT_AUTHOR_EMAIL="'$newEmail'"; git commit-tree "$@";
-    else
-        git commit-tree "$@";
-    fi' HEAD
 }
 
 function parseRecentf(){

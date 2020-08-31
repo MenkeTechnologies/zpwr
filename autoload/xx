@@ -1,0 +1,22 @@
+function ___xx(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: xx <cmd>"
+        return 1
+    fi
+
+    local counter cmd DONE iter
+
+    cmd="$1"
+    test -z "$2" && counter=100 || counter="$2"
+
+    trap 'DONE=true' QUIT
+    DONE=false
+    for iter in {1..$counter} ; do
+       [[ $DONE == true ]] && break || eval "$cmd"
+    done
+
+    trap QUIT
+}
+
+___xx "$@"
