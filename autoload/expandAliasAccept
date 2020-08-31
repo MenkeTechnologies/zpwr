@@ -1,0 +1,8 @@
+function ___expandAliasAccept(){
+    zle _expand_alias
+    zle expand-history
+    zle expand-word
+    zle .accept-line
+}
+
+___expandAliasAccept "$@"

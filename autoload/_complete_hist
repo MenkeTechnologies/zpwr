@@ -1,0 +1,7 @@
+function ___complete_hist(){
+
+    last_ten=( ${(f)"$(fc -l 200 | perl -lane 'print "@F[1..$#F]"')"} )
+    _wanted last-ten expl 'last commands' compadd -Qa last_ten
+}
+
+___complete_hist "$@"

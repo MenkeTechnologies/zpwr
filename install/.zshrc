@@ -513,22 +513,6 @@ if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
 
-function zpwrForAllGitDirs(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrForGitDir <cmd>"
-        return 1
-    fi
-
-    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS first."
-        regenAllGitRepos regen
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir $1 \
-        $(cat $ZPWR_ALL_GIT_DIRS)
-}
-
 function zpwrUpdateAllGitDirs(){
 
     if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
@@ -1360,7 +1344,14 @@ function zpwrExpandAliases() {
 
 #{{{                    MARK:ZLE bindkey
 #**************************************************************
-
+autoload -Uz select-bracketed select-quoted bracketed-paste-magic
+zle -N select-bracketed
+zle -N select-quoted
+zle -N zle-keymap-select
+zle -N bracketed-paste bracketed-paste-magic
+zle -N expandAliasAccept
+zle -N rationalize-dot
+zle -N downTen
 zle -N self-insert
 zle -N lastWordDouble
 zle -N fzfCommits
@@ -1386,6 +1377,23 @@ zle -N interceptSurround
 zle -N asVar
 zle -N zpwrVerbsWidget
 zle -N zpwrVerbsWidgetAccept
+zle -N updater
+zle -N sub
+zle -N dbz
+zle -N sshRegain
+zle -N tutsUpdate
+zle -N subLine
+zle -N changeQuotes
+zle -N alternateQuotes
+zle -N clipboard
+zle -N EOLorNextTabStop
+
+bindkey -M vicmd '^G' what-cursor-position
+bindkey -M viins '^G' what-cursor-position
+bindkey -M viins '^[^M' self-insert-unmeta
+bindkey -M viins '^P' EOLorNextTabStop
+bindkey -M vicmd '^P' EOLorNextTabStop
+bindkey -M vicmd G end-of-buffer-or-history
 
 #vim mode for zle
 bindkey -v
@@ -1411,7 +1419,6 @@ bindkey -M vicmd "\e^O" runner
 
 bindkey -M viins "\e^P" updater
 bindkey -M vicmd "\e^P" updater
-
 
 bindkey -M viins '^r' redo
 bindkey -M vicmd '^r' redo
@@ -1500,10 +1507,6 @@ bindkey -M vicmd '^V^G' fzf-cd-widget
 #completion trigger plus tab, defaults to ~~
 export FZF_COMPLETION_TRIGGER=';'
 
-zle -N changeQuotes
-zle -N alternateQuotes
-zle -N clipboard
-
 bindkey -M viins '^Y' changeQuotes
 bindkey -M vicmd '^Y' changeQuotes
 
@@ -1536,13 +1539,6 @@ bindkey -M vicmd '^B' clipboard
 #shift tab
 bindkey -M viins '\e[Z' clipboard
 
-zle -N updater
-zle -N sub
-zle -N dbz
-zle -N sshRegain
-zle -N tutsUpdate
-zle -N subLine
-
 bindkey '\e[1;2D' sub
 bindkey '\e^f' sub
 
@@ -1574,7 +1570,6 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]];then
     fi
 fi
 
-
 bindkey '^N' sudo-command-line
 bindkey -M viins '\e^T' transpose-words
 bindkey -M vicmd '\e^T' transpose-words
@@ -1605,6 +1600,110 @@ bindkey '^[,' _history-complete-newer
 bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
+
+if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
+    #export DISPLAY=$(cat $ZPWR_LOCAL/.display.txt) ||
+    :
+else
+    :
+    #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
+fi
+
+bindkey -M viins . rationalize-dot
+
+bindkey -M listscroll q send-break
+bindkey -M listscroll f complete-word
+
+# bind shift tab to reverse menucomplete, opposite of tab
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+bindkey -M menuselect '^d' accept-and-menu-complete
+bindkey -M menuselect '^f' accept-and-infer-next-history
+
+if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
+    if echo "$ZPWR_PARENT_PROCESS" | command grep -q -E 'login|tmux'; then
+        bindkey -M menuselect '\e[1;5A' vi-backward-word
+        bindkey -M menuselect '\e[1;5B' vi-forward-word
+        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+        bindkey -M menuselect '\e[1;5C' vi-end-of-line
+    else
+        bindkey -M menuselect '\e[5A' vi-backward-word
+        bindkey -M menuselect '\e[5B' vi-forward-word
+        bindkey -M menuselect '\e[5D' vi-beginning-of-line
+        bindkey -M menuselect '\e[5C' vi-end-of-line
+    fi
+else
+    if [[ "$distroName" == raspbian ]]; then
+        #bindkey -M menuselect '\eOA' vi-backward-word
+        #bindkey -M menuselect '\eOB' vi-forward-word
+        #bindkey -M menuselect '\eOD' vi-beginning-of-line
+        #bindkey -M menuselect '\eOC' vi-end-of-line
+        :
+    else
+        bindkey -M menuselect '\e[1;5A' vi-backward-word
+        bindkey -M menuselect '\e[1;5B' vi-forward-word
+        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
+        bindkey -M menuselect '\e[1;5C' vi-end-of-line
+    fi
+fi
+
+# bind function arrow keys in menuselect mode
+bindkey -M menuselect '\e[5~' vi-backward-word
+bindkey -M menuselect '\e[6~' vi-forward-word
+bindkey -M menuselect '\e[1~' vi-beginning-of-line
+bindkey -M menuselect '\e[4~' vi-end-of-line
+
+# incremental fuzzy filter on keypress like emacs helm and fzf
+
+if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
+    bindkey -M menuselect '^I' vi-forward-char
+    bindkey -M menuselect '^?' undo
+    bindkey -M menuselect '.' self-insert
+else
+    :
+fi
+
+bindkey -M menuselect '|' history-incremental-search-forward
+
+bindkey -M menuselect '^J' down-history
+bindkey -M menuselect '^K' up-history
+
+bindkey -M menuselect '^P' vi-backward-word
+bindkey -M menuselect '^N' vi-forward-word
+
+bindkey -M menuselect '^H' vi-backward-char
+bindkey -M menuselect '^L' vi-forward-char
+# search through options
+bindkey -M menuselect '?' history-incremental-search-backward
+
+# for interactive menuselect
+bindkey -M menuselect '^V' vi-insert
+
+
+bindkey -M menuselect '^M' .accept-line
+bindkey -M menuselect '^@' accept-line
+bindkey -M menuselect '^S' reverse-menu-complete
+
+# bind vim text objects on command line, depends on zsh having visual and operator pendings modes in zle
+#
+version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"
+
+if (( $version > 5.2 )); then
+    for km in viopp visual; do
+        bindkey -M $km -- '-' vi-up-line-or-history
+        for c in ${(s..):-'()[]{}<>bB'}; do
+            bindkey -M $km i$c select-bracketed
+            bindkey -M $km a$c select-bracketed
+        done
+        for c in "${(s..):-\'\"\`\|,./:;-=+@}"; do
+            bindkey -M $km i$c select-quoted
+            bindkey -M $km a$c select-quoted
+        done
+    done
+fi
+#}}}***********************************************************
+
+#{{{                    MARK:ZLE hooks
+#**************************************************************
 #Filter stderr through shell scripts
 #having this setting messes with tmux resurrect so will enable it on individual basis
 #exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
@@ -1725,157 +1824,6 @@ function precmd(){
     fi
 }
 
-if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
-    #export DISPLAY=$(cat $ZPWR_LOCAL/.display.txt) ||
-    :
-    else
-        :
-        #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
-    fi
-
-function rationalize-dot (){
-
-    if [[ $LBUFFER = *.. ]]; then
-        LBUFFER+=/..
-    else
-        LBUFFER+=.
-    fi
-}
-
-zle -N rationalize-dot
-zle -N downTen
-bindkey -M viins . rationalize-dot
-
-bindkey -M listscroll q send-break
-bindkey -M listscroll f complete-word
-
-# bind shift tab to reverse menucomplete, opposite of tab
-bindkey -M menuselect '^[[Z' reverse-menu-complete
-bindkey -M menuselect '^d' accept-and-menu-complete
-bindkey -M menuselect '^f' accept-and-infer-next-history
-
-if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    if echo "$ZPWR_PARENT_PROCESS" | command grep -q -E 'login|tmux'; then
-        bindkey -M menuselect '\e[1;5A' vi-backward-word
-        bindkey -M menuselect '\e[1;5B' vi-forward-word
-        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[1;5C' vi-end-of-line
-    else
-        bindkey -M menuselect '\e[5A' vi-backward-word
-        bindkey -M menuselect '\e[5B' vi-forward-word
-        bindkey -M menuselect '\e[5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[5C' vi-end-of-line
-    fi
-else
-    if [[ "$distroName" == raspbian ]]; then
-        #bindkey -M menuselect '\eOA' vi-backward-word
-        #bindkey -M menuselect '\eOB' vi-forward-word
-        #bindkey -M menuselect '\eOD' vi-beginning-of-line
-        #bindkey -M menuselect '\eOC' vi-end-of-line
-        :
-    else
-        bindkey -M menuselect '\e[1;5A' vi-backward-word
-        bindkey -M menuselect '\e[1;5B' vi-forward-word
-        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[1;5C' vi-end-of-line
-    fi
-fi
-
-# bind function arrow keys in menuselect mode
-bindkey -M menuselect '\e[5~' vi-backward-word
-bindkey -M menuselect '\e[6~' vi-forward-word
-bindkey -M menuselect '\e[1~' vi-beginning-of-line
-bindkey -M menuselect '\e[4~' vi-end-of-line
-
-# incremental fuzzy filter on keypress like emacs helm and fzf
-
-if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
-    bindkey -M menuselect '^I' vi-forward-char
-    bindkey -M menuselect '^?' undo
-    bindkey -M menuselect '.' self-insert
-else
-    :
-fi
-
-bindkey -M menuselect '|' history-incremental-search-forward
-
-bindkey -M menuselect '^J' down-history
-bindkey -M menuselect '^K' up-history
-
-bindkey -M menuselect '^P' vi-backward-word
-bindkey -M menuselect '^N' vi-forward-word
-
-bindkey -M menuselect '^H' vi-backward-char
-bindkey -M menuselect '^L' vi-forward-char
-# search through options
-bindkey -M menuselect '?' history-incremental-search-backward
-
-# for interactive menuselect
-bindkey -M menuselect '^V' vi-insert
-
-function expandAliasAccept(){
-    zle _expand_alias
-    zle expand-history
-    zle expand-word
-    zle .accept-line
-}
-
-zle -N expandAliasAccept
-
-bindkey -M menuselect '^M' .accept-line
-bindkey -M menuselect '^@' accept-line
-bindkey -M menuselect '^S' reverse-menu-complete
-
-autoload -U select-bracketed select-quoted
-zle -N select-bracketed
-zle -N select-quoted
-
-# bind vim text objects on command line, depends on zsh having visual and operator pendings modes in zle
-#
-version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"
-
-if (( $version > 5.2 )); then
-    for km in viopp visual; do
-        bindkey -M $km -- '-' vi-up-line-or-history
-        for c in ${(s..):-'()[]{}<>bB'}; do
-            bindkey -M $km i$c select-bracketed
-            bindkey -M $km a$c select-bracketed
-        done
-        for c in "${(s..):-\'\"\`\|,./:;-=+@}"; do
-            bindkey -M $km i$c select-quoted
-            bindkey -M $km a$c select-quoted
-        done
-    done
-fi
-
-function EOLorNextTabStop(){
-
-    local lenToFirstTS
-
-    lenToFirstTS=${#BUFFER%%$ZPWR_TABSTOP*}
-    if (( $lenToFirstTS < ${#BUFFER} )); then
-        CURSOR=$lenToFirstTS
-        RBUFFER=${RBUFFER:$#ZPWR_TABSTOP}
-    else
-        if [[ $BUFFER[-1] = ";" ]]; then
-            BUFFER+=" "
-        else
-            BUFFER+=" "
-        fi
-        CURSOR=$#BUFFER
-        zle vi-insert
-    fi
-}
-
-zle -N EOLorNextTabStop
-
-bindkey -M vicmd '^G' what-cursor-position
-bindkey -M viins '^G' what-cursor-position
-bindkey -M viins '^[^M' self-insert-unmeta
-bindkey -M viins '^P' EOLorNextTabStop
-bindkey -M vicmd '^P' EOLorNextTabStop
-bindkey -M vicmd G end-of-buffer-or-history
-
 # RPROMPT shows vim modes (insert vs normal)
 if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
     function zle-keymap-select() {
@@ -1885,10 +1833,6 @@ if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
         zle reset-prompt
     }
 fi
-
-autoload -Uz bracketed-paste-magic
-zle -N zle-keymap-select
-zle -N bracketed-paste bracketed-paste-magic
 #}}}***********************************************************
 
 #{{{                    MARK:Setopt Options
@@ -2788,17 +2732,6 @@ local zcmd
 exists zshz && zcmd=zshz || zcmd=_z
 
 declare -a last_ten
-
-function _complete_hist(){
-
-    last_ten=( ${(f)"$(fc -l 200 | perl -lane 'print "@F[1..$#F]"')"} )
-    _wanted last-ten expl 'last commands' compadd -Qa last_ten
-}
-
-function _complete_plus_last_command_args() {
-
-    _wanted last-line expl 'last args' compadd -Qa last_command_array
-}
 
 # list of completers to use
 zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct

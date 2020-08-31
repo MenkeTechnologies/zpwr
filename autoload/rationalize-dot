@@ -1,0 +1,10 @@
+function ___rationalize-dot (){
+
+    if [[ $LBUFFER = *.. ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
+}
+
+___rationalize-dot "$@"

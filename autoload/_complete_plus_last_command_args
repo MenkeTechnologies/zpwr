@@ -1,0 +1,6 @@
+function ___complete_plus_last_command_args() {
+
+    _wanted last-line expl 'last args' compadd -Qa last_command_array
+}
+
+___complete_plus_last_command_args "$@"
