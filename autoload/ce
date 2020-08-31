@@ -1,0 +1,17 @@
+function ___ce() {
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: ce <file...>"
+        return 1
+    fi
+
+    local firstArg sel firstdir
+
+    firstArg="${${(Az)@}[1]//\"/}"
+    firstdir=${firstArg:h}
+    BUFFER="builtin cd \"$firstdir\"; $ZPWR_EMACS_CLIENT ""$@""; clearList; isGitDir && git diff HEAD; "
+    logg "$BUFFER"
+    eval "$BUFFER"
+}
+
+___ce "$@"

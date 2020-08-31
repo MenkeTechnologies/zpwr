@@ -1,0 +1,20 @@
+#compdef clearList
+
+function __cl(){
+
+    local global_aliases
+
+    _alternative \
+        'global-aliases:global alias:compadd -Qk galiases' \
+        'suffix-aliases:suffix alias:_suffix_alias_files' \
+        'aliases:alias:compadd -Qk aliases' \
+        'builtins:builtin command:compadd -Qk builtins' \
+        'reserved-words:reserved word:compadd -Qk reswords' \
+        'functions:shell function:compadd -Qk functions' \
+        'parameters:parameters:_parameters' \
+        'files:filenames:_path_files -g "* .*"' \
+        'commands:commands:compadd -Qk commands'
+        # need to escape [ for g[ in PATH, compadd -Q does this
+}
+
+__cl "$@"

@@ -1,0 +1,18 @@
+function tmux_pane_words() {
+
+  local expl i
+  local -a w
+
+  # Capture current pane first.
+    w=( ${(u)=$(tmux_capture_paner)} )
+
+    for i in $(tmux list-panes -F '#D'); do
+        # Skip current pane (handled before).
+        [[ "$TMUX_PANE" = "$i" ]] && continue
+        w+=( ${(u)=$(tmux_capture_paner -t $i)} )
+    done
+
+    _wanted tmux expl 'words from all tmux panes' compadd -a w
+}
+
+tmux_pane_words "$@"

@@ -1,0 +1,21 @@
+function ___tutsUpdate() {
+
+    local commitMessage
+
+    commitMessage="$BUFFER"
+    if [[ ! -z "$commitMessage" ]]; then
+        if [[ "$commitMessage" =~ ^\ +$ ]]; then
+            loggErr "No commit message"
+            zle .accept-line
+        else
+            zle .kill-whole-line
+            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$ZPWR_LOGFILE\" 2>&1 & )"
+            zle .accept-line
+        fi
+    else
+        loggErr "No commit message"
+        zle .accept-line
+    fi
+}
+
+___tutsUpdate "$@"

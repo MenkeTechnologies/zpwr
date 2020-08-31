@@ -1,0 +1,91 @@
+#compdef zpwr zp
+function __zpwr_gtl(){
+
+    if ! isGitDir; then
+        _message "$PWD is not a git dir"
+        return 1
+    fi
+
+    local -a ary
+    local tag des
+
+    while read tag desc; do
+        ary+=("$tag:$desc")
+    done < <(git tag --sort=-v:refname -n -l)
+
+    _describe -t commit-tags tags ary
+}
+
+function __zpwr(){
+
+  local arguments verb
+  local curcontext=$curcontext state line ret
+
+
+  arguments=(
+        '(- :)'{-h,--help}'[show help message and exit]'
+        '1:zpwr subcommand:->verb'
+        '*::args to zpwr:->args'
+    )
+
+    _arguments -s -C : $arguments && return
+
+    if (( CURRENT >= 1 )); then
+        case $state in
+            verb)
+                _describe -t commands "zpwr verb" zpwrSubcommandsAry
+                ;;
+            args)
+                verb=$words[1]
+                curcontext="${curcontext%:*:*}:zpwr-$verb:"
+                case $verb in
+                    redo|re|redosql|rsql|searchl|se|see|seee|searchlee|searchle)
+                        _se
+                        ;;
+                    attach)
+                        _tmux-attach-session
+                        ;;
+                    cat)
+                        _c
+                        ;;
+                    cd)
+                        _f
+                        ;;
+                    cdup)
+                        _r
+                        ;;
+                    gitedittag)
+                        __zpwr_gtl
+                        ;;
+                    gitzfordir|gitzfordirmaster|gitzfordirdevelop)
+                        _zcommand
+                        ;;
+                    info | clearlist)
+                        _cl
+                        ;;
+                    ps)
+                        _p
+                        ;;
+                    servicedown)
+                        _ssd
+                        ;;
+                    serviceup)
+                        _ssu
+                        ;;
+                    z)
+                        _zcommand
+                        ;;
+                    *)
+                        _alternative \
+                    'files:files:_files' \
+                    'directory-stack:directory stack:_directory_stack'
+                        ;;
+                esac
+            ;;
+        esac
+        return
+    fi
+
+}
+
+__zpwr "$@"

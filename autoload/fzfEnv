@@ -1,0 +1,22 @@
+function ___fzfEnv(){
+
+    local sel
+
+    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
+        loggDebug "regenerating keys for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
+        loggDebug "regenerating values for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+
+    sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS" | perl -pe 's@\n@ @g')
+    BUFFER="$LBUFFER$sel$RBUFFER"
+    CURSOR=$(($#LBUFFER + $#sel))
+
+    zle reset-prompt 2>/dev/null
+}
+
+___fzfEnv "$@"

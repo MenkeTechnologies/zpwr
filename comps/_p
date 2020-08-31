@@ -1,0 +1,10 @@
+#compdef p
+
+function __p(){
+
+    _alternative \
+    'process-names:processes:_pgrep' \
+    'processes:pids:_pids'
+}
+
+__p "$@"

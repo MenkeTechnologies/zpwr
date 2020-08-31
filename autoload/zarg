@@ -1,0 +1,17 @@
+function ___zarg(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: zarg <escaped glob> <cmd with {}>"
+        return 1
+    fi
+
+    local first
+
+    first="$1"
+    shift
+
+    echo eval "zargs -i{} -- '$first' -- '$*'"
+    eval "zargs -i{} -- $first -- $*"
+}
+
+___zarg "$@"

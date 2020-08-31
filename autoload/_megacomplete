@@ -1,0 +1,45 @@
+function ___megacomplete(){
+
+    local -a whitelist_tmux_completion
+    whitelist_tmux_completion=(ping ping6 nslookup nmap dig digs host mtr traceroute tracepath whois torsocks proxychains nc netcat curl wget http)
+
+
+    local -a last_command_array
+    local expl cmd ret i continueRegex
+    continueRegex='^(\-.*|sudo|env)$'
+    i=1
+    cmd=${(Q)words[i]}
+
+    while [[ $cmd =~ $continueRegex ]]; do
+        cmd=${(Q)words[$((++i))]}
+    done
+
+    \_complete && ret=0 || ret=1
+
+    if [[ -n "$TMUX_PANE" ]]; then
+        if (( $whitelist_tmux_completion[(I)$cmd] )); then
+            tmux_pane_words
+        fi
+    fi
+
+    if (( $CURRENT == 1 )); then
+        _complete_hist
+    fi
+
+    if (( $#words >= 2 )) && [[ $words[-1] == [^[:space:]]## ]]; then
+        num=$((HISTCMD-1))
+        last_command=$history[$num]
+        last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
+        if (( $#last_command_array > 0 && ret == 1 )); then
+            _complete_plus_last_command_args
+        fi
+
+        if (( ret == 1)); then
+            _complete_clipboard
+        fi
+    fi
+
+    return $ret
+}
+
+___megacomplete "$@"

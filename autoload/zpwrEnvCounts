@@ -1,0 +1,27 @@
+function zpwrEnvCounts(){
+
+    prettyPrint "ENV COUNTS"
+    echo "Commands: ${#commands}"
+    echo "Functions: ${#functions}"
+    echo "Completions: ${#_comps}"
+    echo "Functions (not completions): "$(( $#functions - $#_comps ))
+    echo "Builtins: ${#builtins}"
+    echo "Reserved words: ${#reswords}"
+    echo "Parameters: ${#parameters}"
+    echo "Environment Variables: "${#parameters[(R)scalar-export]}
+    echo "Local Parameters: "${#parameters[(R)^scalar-export]}
+    echo "Aliases: ${#aliases}"
+    echo "Global Aliases: ${#galiases}"
+    echo "Git Aliases: "${#aliases[(R)*git*]}
+    echo "Cd Aliases: "${#aliases[(R)*cd*]}
+    echo "Suffix Aliases: ${#saliases}"
+    prettyPrint "ZPWR COUNTS"
+    echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
+    echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
+    echo "ZPWR verbs: ${#ZPWR_VERBS}"
+    echo "ZPWR script count: $(zpwrScriptCount)"
+    echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
+    echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
+}
+
+zpwrEnvCounts "$@"

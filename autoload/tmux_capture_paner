@@ -1,0 +1,14 @@
+# Based on vim-tmuxcomplete's splitwords function.
+# https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
+function tmux_capture_paner() {
+
+    tmux capture-pane -J -p -S -100 $@ |
+    col -b |
+    tr -s '[:space:]' '\n' |
+    sed 's@\^C\S*@ @g;s@:.*$@@' |
+    # remove surrounding non-word characters
+    command grep -v -E '(\.\.+|^[0-9.]+[a-zA-Z]+$|^[0-9]*$|^MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)' |
+    command grep -o -E "[-a-zA-Z0-9.:]+"
+}
+
+tmux_capture_paner "$@"

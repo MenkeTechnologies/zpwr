@@ -317,6 +317,7 @@ if [[ $ZPWR_LEARN != false ]]; then
     plugins+=(zsh-learn)
 fi
 
+
 for plug in ${plugins[@]}; do
     if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
         # null glob - no error
@@ -334,6 +335,11 @@ for plug in ${plugins[@]}; do
         done
     fi
 done
+
+# add ZPWR autoload dirs to fpath
+fpath=($ZPWR_AUTOLOAD $ZPWR_COMPS $fpath)
+autoload -U $ZPWR_AUTOLOAD/*(.:t)
+autoload -Uz zrecompile zm zargs
 
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
@@ -447,8 +453,8 @@ if ! (( $+_comps[z] )); then
     echo "$lines" >> "$ZSH_COMPDUMP"
     #zcompile $ZSH_COMPDUMP
 else
-    logg "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
-    logg "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
+    loggDebug "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
+    loggDebug "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
 fi
 
 # change OMZ history size in memory
@@ -492,67 +498,6 @@ function tabNum() {
     echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
 
-function zg() {
-
-    local branch dir
-    branch=master
-    dir=$2
-
-    if [[ -n $1 ]]; then
-        branch=$1
-    fi
-
-    if [[ -n "$dir" ]]; then
-        if [[ $ != . ]]; then
-            z "$dir"
-            prettyPrint "z $dir => cd $(z -e $dir)"
-        fi
-    fi
-
-
-    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
-}
-
-function zm() {
-
-    local branch dir
-    branch=master
-    dir=$1
-
-    if [[ -n "$dir" ]]; then
-        if [[ $dir != . ]]; then
-            z "$dir"
-            prettyPrint "z $dir => cd $(z -e $dir)"
-        fi
-    fi
-
-    if [[ -n $2 ]]; then
-        branch=$2
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
-}
-
-function zd() {
-
-    local branch dir
-    branch=development
-    dir=$1
-
-    if [[ -n "$dir" ]]; then
-        if [[ $dir != . ]]; then
-            z "$dir"
-            prettyPrint "z $dir => cd $(z -e $dir)"
-        fi
-    fi
-
-    if [[ -n $2 ]]; then
-        branch=$2
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
-}
-
 function tabNumCmd() {
 
     local num args
@@ -562,198 +507,7 @@ function tabNumCmd() {
     args="$@"
     echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
 }
-autoload -Uz zrecompile
 
-function uncompile(){
-
-    emulate -L zsh
-    setopt nullglob
-
-    local dir files sudoFiles file
-
-    files=(
-        "$HOME/.zshrc"*
-        "$HOME/.zlogout"*
-        "$HOME/.zlogin"*
-        "$HOME/grc.zsh"
-        "$ZSH/oh-my-zsh.sh"
-        "$ZSH_COMPDUMP"
-        "$ZPWR/.shell_aliases_functions.sh"
-        "$ZPWR/.powerlevel9kconfig.sh"
-        "$ZPWR_LOCAL/.tokens.sh"
-        "$ZPWR_LOCAL/.tokens-post.sh"
-        "$ZPWR_ENV_FILE"
-        "$ZPWR_RE_ENV_FILE"
-        "$ZPWR_SCRIPTS/zpwr.zsh"
-        "$ZPWR_LIB"
-        "$ZPWR_LIB_INIT"
-        "$ZPWR_SCRIPTS/crossOSCommands.sh"
-    )
-
-    sudoFiles=(
-        /etc/profile*
-        /etc/zprofile*
-        /etc/zshrc*
-        /etc/zsh/z*
-        /etc/profile.env*
-    )
-
-    prettyPrint "deleting all compiled configs"
-
-    for file in ${files[@]}; do
-        file=${file%*.zwc*}
-        if [[ -f "$file.zwc" ]]; then
-            echo rm -f "$file.zwc"
-            rm -f "$file.zwc"
-        elif [[ -f "$file.zwc.old" ]]; then
-            echo rm -f "$file.zwc.old"
-            rm -f "$file.zwc.old"
-        fi
-    done
-
-    for file in ${sudoFiles[@]}; do
-        file=${file%*.zwc*}
-        if [[ -f "$file.zwc" ]]; then
-            echo sudo rm "$file".zwc
-            sudo rm "$file".zwc
-        elif [[ -f "$file.zwc.old" ]]; then
-            echo sudo rm "$file.zwc.old"
-            sudo rm "$file.zwc.old"
-        fi
-    done
-
-	for dir in $fpath; do
-		if test -d $dir;then
-            if [[ -f "$dir.zwc" ]]; then
-                echo rm -rf "$dir.zwc"
-                rm -rf "$dir.zwc" 2>/dev/null ||
-                sudo rm -rf "$dir.zwc"
-            fi
-        fi
-	done
-}
-
-function recompile(){
-
-    emulate -L zsh
-    setopt nullglob
-
-    local dir files sudoFiles file
-
-    files=(
-        "$HOME/.zshrc"*
-        "$HOME/.zlogout"*
-        "$HOME/.zlogin"*
-        "$HOME/grc.zsh"
-        "$ZSH/oh-my-zsh.sh"
-        "$ZSH_COMPDUMP"
-        "$ZPWR/.shell_aliases_functions.sh"
-        "$ZPWR/.powerlevel9kconfig.sh"
-        "$ZPWR_LOCAL/.tokens.sh"
-        "$ZPWR_LOCAL/.tokens-post.sh"
-        "$ZPWR_ENV_FILE"
-        "$ZPWR_RE_ENV_FILE"
-        "$ZPWR_SCRIPTS/zpwr.zsh"
-        "$ZPWR_LIB"
-        "$ZPWR_LIB_INIT"
-        "$ZPWR_SCRIPTS/crossOSCommands.sh"
-    )
-
-    sudoFiles=(
-        /etc/profile*
-        /etc/zprofile*
-        /etc/zshrc*
-        /etc/zsh/z*
-        /etc/profile.env*
-    )
-
-    prettyPrint "recompiling all configs to .zwc for speed"
-
-    for file in ${files[@]}; do
-        if [[ -f "$file" ]]; then
-            zrecompile -p "$file"
-        fi
-    done
-    for file in ${sudoFiles[@]}; do
-        if [[ -f "$file" ]]; then
-            sudo zsh -c "autoload zrecompile; zrecompile -p $file"
-        fi
-    done
-
-	for dir in $fpath; do
-		if test -d $dir;then
-            files=( $dir/*(N) )
-            if (($#files)); then
-                zrecompile -p $dir.zwc $files 2> /dev/null ||
-                sudo zsh -c "autoload zrecompile; zrecompile -p $dir.zwc $files"
-            fi
-        fi
-	done
-}
-
-function zshrcsearch(){
-
-    if [[ -z "$1" ]]; then
-        zsh -ilvx -c false &> $ZPWR_TEMPFILE4
-        less $ZPWR_TEMPFILE4
-    else
-        zsh -ilvx -c false &> $ZPWR_TEMPFILE4
-        ag --color --numbers -C 5 -i -- "$@" $ZPWR_TEMPFILE4 | less
-    fi
-}
-
-function zpwrLineCount(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: zpwrLineCount <cmd> <search>"
-        return 1
-    fi
-
-    eval "$1" | command grep -i -E "$2" | wc -l | tr -d ' '
-
-}
-
-function zpwrEnvCounts(){
-
-    prettyPrint "ENV COUNTS"
-    echo "Commands: ${#commands}"
-    echo "Functions: ${#functions}"
-    echo "Completions: ${#_comps}"
-    echo "Functions (not completions): "$(( $#functions - $#_comps ))
-    echo "Builtins: ${#builtins}"
-    echo "Reserved words: ${#reswords}"
-    echo "Parameters: ${#parameters}"
-    echo "Environment Variables: "${#parameters[(R)scalar-export]}
-    echo "Local Parameters: "${#parameters[(R)^scalar-export]}
-    echo "Aliases: ${#aliases}"
-    echo "Global Aliases: ${#galiases}"
-    echo "Git Aliases: "${#aliases[(R)*git*]}
-    echo "Cd Aliases: "${#aliases[(R)*cd*]}
-    echo "Suffix Aliases: ${#saliases}"
-    prettyPrint "ZPWR COUNTS"
-    echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
-    echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
-    echo "ZPWR verbs: ${#ZPWR_VERBS}"
-    echo "ZPWR script count: $(zpwrScriptCount)"
-    echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
-    echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
-}
-
-function zarg(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: zarg <escaped glob> <cmd with {}>"
-        return 1
-    fi
-
-    local first
-
-    first="$1"
-    shift
-
-    echo eval "zargs -i{} -- '$first' -- '$*'"
-    eval "zargs -i{} -- $first -- $*"
-}
 
 if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
@@ -943,58 +697,6 @@ function noPonyBanner(){
 
 #{{{                    MARK:Custom Functions
 #**************************************************************
-
-#{{{                    MARK:ColorTest
-#**************************************************************
-# print 2d array of colors
-function colortest(){
-
-    local backgroundColor
-
-    for backgroundColor in ${(ko)bg}; do
-        print -n "$bg[$backgroundColor]"
-        printf '%s%-8s' $fg[black] black
-        printf '%s%-8s' $fg[red] red
-        printf '%s%-8s' $fg[green] green
-        printf '%s%-8s' $fg[yellow] yellow
-        printf '%s%-8s' $fg[blue] blue
-        printf '%s%-8s' $fg[magenta] magenta
-        printf '%s%-8s' $fg[cyan] cyan
-        printf '%s%-8s' $fg[white] white
-        print $reset_color
-        print -n "$bg[$backgroundColor]"
-        printf "\x1b[1m"
-        printf '%s%-8s' $fg[black] black
-        printf '%s%-8s' $fg[red] red
-        printf '%s%-8s' $fg[green] green
-        printf '%s%-8s' $fg[yellow] yellow
-        printf '%s%-8s' $fg[blue] blue
-        printf '%s%-8s' $fg[magenta] magenta
-        printf '%s%-8s' $fg[cyan] cyan
-        printf '%s%-8s' $fg[white] white
-        print $reset_color
-        printf "%40s\n" "on $backgroundColor"
-    done
-}
-
-
-function 256colors(){
-
-    local i
-
-    if [[ -z "$1" ]]; then
-        for i in {0..255};do
-            printf "\x1b[48;5;${i};37m    $i    "
-        done
-    else
-        for i in {0..255};do
-            printf "\x1b[38;5;${i}m    $i   $@"
-        done
-    fi
-    printf "\n"
-}
-#}}}***********************************************************
-
 function sub (){
 
     zle .kill-whole-line
@@ -1212,33 +914,6 @@ function getGtagsEdit(){
 
 }
 
-function getGtags(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: getGtags <editor>"
-        return 1
-    fi
-
-    local firstdir editor file mywords
-
-    editor="$1"
-    BUFFER=$(gtagsIntoFzf)
-
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    mywords=(${(z)BUFFER})
-    firstdir=${mywords[2]:h}
-    loggDebug "builtin cd $firstdir\""
-    #:h takes aways last "
-    BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
-
-    print -sr -- "$BUFFER"
-    eval "$BUFFER"
-}
-
-
 function emacsZpwrGtags(){
 
     if ! exists emacs; then
@@ -1323,50 +998,6 @@ function updater (){
     zle .accept-line
 }
 
-function tutsUpdate() {
-
-    local commitMessage
-
-    commitMessage="$BUFFER"
-    if [[ ! -z "$commitMessage" ]]; then
-        if [[ "$commitMessage" =~ ^\ +$ ]]; then
-            loggErr "No commit message"
-            zle .accept-line
-        else
-            zle .kill-whole-line
-            BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$ZPWR_LOGFILE\" 2>&1 & )"
-            zle .accept-line
-        fi
-    else
-        loggErr "No commit message"
-        zle .accept-line
-    fi
-}
-
-function sshRegain() {
-
-    if echo "$(command ps -ef)" | command  grep -q 'ssh '; then
-        if [[ "$BUFFER" != "" ]]; then
-            print -sr -- "$BUFFER"
-            local __NEW_BUFFER="exe \"$BUFFER\""
-            echo
-            eval "$__NEW_BUFFER"
-            BUFFER=""
-            zle .accept-line
-            return 0
-        else
-            return 1
-        fi
-    else
-        zle .kill-whole-line
-        if echo "$(command ps -ef)" | command grep -q 'tmux '; then
-            BUFFER=tmm
-        else
-            BUFFER=tmm_full
-        fi
-        zle .accept-line
-    fi
-}
 
 function dbz() {
 
@@ -1377,109 +1008,9 @@ function dbz() {
 
 ZPWR_COUNTER=0
 
-function changeQuotes(){
-
-    if (( $ZPWR_COUNTER % 8 == 0 )); then
-        __OLDBUFFER="${BUFFER}"
-        BUFFER=${BUFFER//\"/\'}
-    elif (( $ZPWR_COUNTER % 8 == 1 )); then
-        if [[ "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(print -r "$BUFFER" | tr -d "'" )" ]]; then
-            ZPWR_COUNTER=0
-            return 1
-        fi
-        BUFFER=${BUFFER//\'/\"}
-    elif (( $ZPWR_COUNTER % 8 == 2 )); then
-        if [[ "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" != \
-            "$(print -r "$BUFFER" | tr -d "\"" )" ]]; then
-            ZPWR_COUNTER=0
-            return 1
-        fi
-        BUFFER=${BUFFER//\"/\`}
-    elif (( $ZPWR_COUNTER % 8 == 3 )); then
-        if [[ \
-            "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(print -r "$BUFFER" | tr -d "\`" )" ]]; then ZPWR_COUNTER=0
-            return 1
-        fi
-        _SEMI_OLDBUFFER="$BUFFER"
-        BUFFER="\"${BUFFER}\""
-    elif (( $ZPWR_COUNTER % 8 == 4 )); then
-        if [[ "$(print -r "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != \
-            "$(print -r "$BUFFER" | tr -d "\`\"" )" ]]; then
-            ZPWR_COUNTER=0
-            return 1
-        fi
-        #semi has no quotes
-        _SEMI_OLDBUFFER=${_SEMI_OLDBUFFER//\`/}
-        BUFFER="\$(${_SEMI_OLDBUFFER})"
-    elif (( $ZPWR_COUNTER % 8 == 5 )); then
-        #only diff should be $()
-        if (( ${#BUFFER} < 4 )); then
-            ZPWR_COUNTER=0
-            return 1
-            #statements
-        fi
-        if [[ "$_SEMI_OLDBUFFER" != \
-            "$(print -r "${BUFFER:2:-1}" )" ]]; then
-            ZPWR_COUNTER=0
-            return 1
-        fi
-        BUFFER="\"${BUFFER}\""
-    elif (( $ZPWR_COUNTER % 8 == 6 )); then
-        if (( ${#BUFFER} < 6 )); then
-            ZPWR_COUNTER=0
-            return 1
-            #statements
-        fi
-        if [[ "${_SEMI_OLDBUFFER}" != \
-            "${BUFFER:3:-2}" ]]; then
-            ZPWR_COUNTER=0
-            return 1
-        fi
-        # back to no quotes
-        BUFFER="$_SEMI_OLDBUFFER"
-    else
-        if [[ "${_SEMI_OLDBUFFER}" != "${BUFFER}" ]]; then
-            ZPWR_COUNTER=0
-            return 1
-        fi
-        #back to original
-        BUFFER="${__OLDBUFFER}"
-    fi
-
-    ((++ZPWR_COUNTER))
-}
-
 function alternateQuotes(){
 
     BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"
-}
-
-
-function clipboard(){
-
-    [[ -z "$BUFFER" ]] && return 1
-
-    local clipcmd
-
-    clipcmd=$ZPWR_COPY_CMD
-
-    if [[ -n $clipcmd ]]; then
-            print -sr -- "$BUFFER"
-            print -rn "$BUFFER" | ${=clipcmd}
-            echo
-            print -n "\x1b[0;34mCopied \x1b[1m\""
-            print -rn "$BUFFER"
-            print  "\"\x1b[0;34m to System Clipboard!"
-            echo
-            zle .redisplay
-    else
-        echo
-        printf "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
-        echo
-        zle .redisplay
-    fi
 }
 
 function runner() {
@@ -1532,52 +1063,6 @@ function clearListFZF(){
         ls -d *
     } |
     eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS"
-}
-
-function fzvim(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: fzvim <editor>"
-        return 1
-    fi
-
-    local file editor
-
-    editor="$1"
-
-    case $editor in
-        nvim|vim)
-    nvimThenRecentf | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' |
-    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-            ;;
-        *)
-    recentfThenNvim | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}' |
-    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-            ;;
-    esac
-}
-
-function fzvimAll(){
-
-    command ls \
-    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
-    "$ZPWR/"*.{sh,py,zsh,pl} \
-    "$ZPWR/"*.md \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/tmux-"* \
-    "$ZPWR/"{.minvimrc,.mininit.vim} \
-    "$ZPWR_INSTALL/conf."* \
-    "$ZPWR_INSTALL/"*.sh \
-    "$ZPWR_INSTALL/"*.service \
-    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} |
-        perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
-    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
 function fzvimScript(){
@@ -2200,29 +1685,6 @@ function deleteLastWord(){
     fi
 }
 
-
-function fzfEnv(){
-
-    local sel
-
-    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
-        loggDebug "regenerating keys for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
-        loggDebug "regenerating values for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-
-    sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
-        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS" | perl -pe 's@\n@ @g')
-    BUFFER="$LBUFFER$sel$RBUFFER"
-    CURSOR=$(($#LBUFFER + $#sel))
-
-    zle reset-prompt 2>/dev/null
-}
-
-
 function fzfAllKeybind(){
 
     if [[ ! -s "$ZPWR_ALL_KEYBINDINGS" ]]; then
@@ -2438,73 +1900,6 @@ function findFzfNoZLEEmacs(){
     findFzfNoZLE "$ZPWR_EMACS_CLIENT"
 }
 
-function locateFzfEdit(){
-
-    local firstArg sel firstdir mywords
-
-    mywords=(${(z)BUFFER})
-    if (( $#mywords == 0 )); then
-        sel="$(getFound)"
-
-        if [[ -z "$sel" ]]; then
-            zle .kill-whole-line 2>/dev/null
-            return 0
-        fi
-        firstArg="${${(Az)sel}[1]//\"/}"
-        if [[ -d "$firstArg" ]]; then
-            BUFFER="builtin cd \"$firstArg\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
-        else
-            firstdir=${firstArg:h}
-            BUFFER="builtin cd \"$firstdir\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
-        fi
-        zle .accept-line
-    else
-        sel="$(getFound)"
-
-        if [[ ! -z "$sel" ]]; then
-            #trim and squeeze
-            BUFFER=$(print -r -- "$BUFFER $sel" | awk '{$1=$1};1')
-            CURSOR="$#BUFFER"
-            zle reset-prompt
-        else
-            zle reset-prompt
-        fi
-    fi
-}
-
-function locateFzf(){
-
-    local firstArg sel firstdir mywords
-
-    mywords=(${(z)BUFFER})
-    if (( $#mywords == 0 )); then
-        sel="$(getFound)"
-
-        if [[ -z "$sel" ]]; then
-            zle .kill-whole-line 2>/dev/null
-            return 0
-        fi
-        firstArg="${${(Az)sel}[1]//\"/}"
-        if [[ -d "$firstArg" ]]; then
-            BUFFER="builtin cd \"$firstArg\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
-        else
-            firstdir=${firstArg:h}
-            BUFFER="builtin cd \"$firstdir\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
-        fi
-        zle .accept-line
-    else
-        sel="$(getFound)"
-
-        if [[ ! -z "$sel" ]]; then
-            BUFFER=$(print -r -- "$BUFFER $sel" | awk '{$1=$1};1')
-            CURSOR="$#BUFFER"
-            zle .accept-line 2>/dev/null
-        else
-            zle reset-prompt
-        fi
-    fi
-}
-
 function cca() {
 
     if [[ -z "$1" ]]; then
@@ -2533,22 +1928,6 @@ function cv() {
     firstArg="${${(Az)@}[1]//\"/}"
     firstdir=${firstArg:h}
     BUFFER="builtin cd \"$firstdir\"; $EDITOR ""$@""; clearList; isGitDir && git diff HEAD; "
-    logg "$BUFFER"
-    eval "$BUFFER"
-}
-
-function ce() {
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: ce <file...>"
-        return 1
-    fi
-
-    local firstArg sel firstdir
-
-    firstArg="${${(Az)@}[1]//\"/}"
-    firstdir=${firstArg:h}
-    BUFFER="builtin cd \"$firstdir\"; $ZPWR_EMACS_CLIENT ""$@""; clearList; isGitDir && git diff HEAD; "
     logg "$BUFFER"
     eval "$BUFFER"
 }
@@ -3669,6 +3048,14 @@ if [[ -d "$ZPWR_SCRIPTS" ]]; then
     exists zs || alias zs="cd $ZPWR_SCRIPTS"
 fi
 
+if [[ -d "$ZPWR_COMPS" ]]; then
+    exists zco || alias zco="cd $ZPWR_COMPS"
+fi
+
+if [[ -d "$ZPWR_AUTOLOAD" ]]; then
+    exists zal || alias zal="cd $ZPWR_AUTOLOAD"
+fi
+
 if [[ -d "$ZPWR_SCRIPTS_MAC" ]]; then
     exists zsm || alias zsm="cd $ZPWR_SCRIPTS_MAC"
 fi
@@ -4108,126 +3495,9 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
 
 #{{{                    MARK:Custom Compsys Functions
 #**************************************************************
-function _cl(){
-
-    local global_aliases
-
-    _alternative \
-        'global-aliases:global alias:compadd -Qk galiases' \
-        'suffix-aliases:suffix alias:_suffix_alias_files' \
-        'aliases:alias:compadd -Qk aliases' \
-        'builtins:builtin command:compadd -Qk builtins' \
-        'reserved-words:reserved word:compadd -Qk reswords' \
-        'functions:shell function:compadd -Qk functions' \
-        'parameters:parameters:_parameters' \
-        'files:filenames:_path_files -g "* .*"' \
-        'commands:commands:compadd -Qk commands'
-        # need to escape [ for g[ in PATH, compadd -Q does this
-}
-
-function _p(){
-
-    _alternative \
-    'process-names:processes:_pgrep' \
-    'processes:pids:_pids'
-}
 
 local zcmd
 exists zshz && zcmd=zshz || zcmd=_z
-
-function _f(){
-
-    local cmd ret
-    if exists fasd;then
-        _alternative 'files:directory:_path_files -g "*(-D/)"' &&
-            ret=0 || ret=1
-
-        if [[ $ret == 1 ]] && (( $#words > 1 )); then
-            _alternative \
-            'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
-            'fasd-file:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
-            'directory-stack:directory stack:_directory_stack'
-        fi
-    else
-        _alternative 'files:directory:_path_files -g "*(-D/)"' &&
-            ret=0 || ret=1
-        if [[ $ret == 1 ]] && (( $#words > 1 )); then
-            _alternative \
-            'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
-            'directory-stack:directory stack:_directory_stack'
-        fi
-    fi
-
-}
-
-function _c(){
-
-    local ret
-
-    if exists fasd;then
-        _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' &&
-        ret=0 || ret=1
-        if [[ $ret == 1 ]] && (( $#words > 1 )); then
-            _alternative \
-            'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
-            'fasd-file:fasd ranked files:(('"$(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
-            'fasd:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))'
-        fi
-    else
-        _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' &&
-        ret=0 || ret=1
-        if [[ $ret == 1 ]] && (( $#words > 1 )); then
-            _alternative \
-            'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))'
-        fi
-    fi
-}
-
-function _ssd(){
-
-    local arguments
-
-    arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and/running/')"')')
-    _arguments -s $arguments
-}
-
-function _ssu(){
-
-    local arguments
-
-    arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')
-    _arguments -s $arguments
-}
-
-# Based on vim-tmuxcomplete's splitwords function.
-# https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
-tmux_capture_paner() {
-
-    tmux capture-pane -J -p -S -100 $@ |
-    col -b |
-    tr -s '[:space:]' '\n' |
-    sed 's@\^C\S*@ @g;s@:.*$@@' |
-    # remove surrounding non-word characters
-    command grep -v -E '(\.\.+|^[0-9.]+[a-zA-Z]+$|^[0-9]*$|^MmKkGgBbqv\.]+$|^[rwxRWXsSdDcCBbPp\.-]+$)' |
-    command grep -o -E "[-a-zA-Z0-9.:]+"
-}
-
-function tmux_pane_words() {
-
-  local expl i
-  local -a w
-
-  # Capture current pane first.
-    w=( ${(u)=$(tmux_capture_paner)} )
-
-    for i in $(tmux list-panes -F '#D'); do
-        # Skip current pane (handled before).
-        [[ "$TMUX_PANE" = "$i" ]] && continue
-        w+=( ${(u)=$(tmux_capture_paner -t $i)} )
-    done
-
-    _wanted tmux expl 'words from all tmux panes' compadd -a w
-}
 
 declare -a last_ten
 
@@ -4236,71 +3506,10 @@ function _complete_hist(){
     last_ten=( ${(f)"$(fc -l 200 | perl -lane 'print "@F[1..$#F]"')"} )
     _wanted last-ten expl 'last commands' compadd -Qa last_ten
 }
+
 function _complete_plus_last_command_args() {
 
     _wanted last-line expl 'last args' compadd -Qa last_command_array
-}
-
-function _complete_clipboard(){
-
-    local clipboard_str
-    clipboard_str="$(${=ZPWR_PASTE_CMD} 2>/dev/null)"
-
-    if [[ -n "$clipboard_str" ]]; then
-    clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "'${clipboard_str}'")
-    _wanted last-clip expl 'clipboard args' compadd -Qa clipboard_array
-    fi
-}
-
-function _megacomplete(){
-
-    local -a whitelist_tmux_completion
-    whitelist_tmux_completion=(ping ping6 nslookup nmap dig digs host mtr traceroute tracepath whois torsocks proxychains nc netcat curl wget http)
-
-
-    local -a last_command_array
-    local expl cmd ret i continueRegex
-    continueRegex='^(\-.*|sudo|env)$'
-    i=1
-    cmd=${(Q)words[i]}
-
-    while [[ $cmd =~ $continueRegex ]]; do
-        cmd=${(Q)words[$((++i))]}
-    done
-
-    \_complete && ret=0 || ret=1
-
-    if [[ -n "$TMUX_PANE" ]]; then
-        if (( $whitelist_tmux_completion[(I)$cmd] )); then
-            tmux_pane_words
-        fi
-    fi
-
-    if (( $CURRENT == 1 )); then
-        _complete_hist
-    fi
-
-    if (( $#words >= 2 )) && [[ $words[-1] == [^[:space:]]## ]]; then
-        num=$((HISTCMD-1))
-        last_command=$history[$num]
-        last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")
-        if (( $#last_command_array > 0 && ret == 1 )); then
-            _complete_plus_last_command_args
-        fi
-
-        if (( ret == 1)); then
-            _complete_clipboard
-        fi
-    fi
-
-    return $ret
-}
-
-function _r(){
-
-    rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)." "};print ++$c.":/"'))
-
-    _describe -t zdir 'rdirs' rdirs
 }
 
 # list of completers to use
@@ -4313,117 +3522,6 @@ if [[ $ZPWR_LEARN != false ]]; then
     # as opposed to lexicographic sort
     zstyle ':completion:*:*:(se|see|seee|redo|rsql|re|searchl|searchle|searchlee|z|r):*:*' sort false
 fi
-
-# redefine global zsh completion function called at first parameter
-# adding global aliases and files
-function _command_names(){
-
-    # The option `-e' if given as the first argument says that we should
-    # complete only external commands and executable files. This and a
-    # `-' as the first argument is then removed from the arguments.
-
-    local args defs ffilt aliasesAry galiasesAry k v
-
-    zstyle -t ":completion:${curcontext}:commands" rehash && rehash
-
-    zstyle -t ":completion:${curcontext}:functions" prefix-needed &&
-    [[ $PREFIX != [_.]* ]] &&
-    ffilt='[(I)[^_.]*]'
-
-    defs=(
-        'commands:external command:_path_commands'
-    )
-
-    [[ -n "$path[(r).]" || $PREFIX = */* ]] &&
-        defs+=( 'executables:executable file:_files -g \*\(-\*\)' )
-
-    if [[ "$1" = -e ]]; then
-    shift
-    else
-    [[ "$1" = - ]] && shift
-
-    declare -a aliasesAry
-    for k v in ${(kv)aliases}; do
-        aliasesAry+=($k:"${(q)v}")
-    done
-    declare -a galiasesAry
-    for k v in ${(kv)galiases}; do
-        galiasesAry+=($k:"${(q)v}")
-    done
-
-    defs=( "$defs[@]"
-        'global-aliases:global alias:(('$galiasesAry'))'
-        'aliases:alias:(('$aliasesAry'))'
-        "functions:shell function:compadd -k 'functions$ffilt'"
-        'builtins:builtin command:compadd -Qk builtins'
-        'suffix-aliases:suffix alias:_suffix_alias_files'
-        'reserved-words:reserved word:compadd -Qk reswords'
-        'jobs:: _jobs -t'
-        'parameters:: _parameters -g "^*(readonly|association)*" -qS= -r "\n\t\- =[+"'
-        'parameters:: _parameters -g "*association*~*readonly*" -qS\[ -r "\n\t\- =[+"'
-        'files:files:_files'
-    )
-    fi
-
-    args=( "$@" )
-
-    local -a cmdpath
-    if zstyle -a ":completion:${curcontext}" command-path cmdpath &&
-        [[ $#cmdpath -gt 0 ]]
-    then
-        local -a +h path
-        local -A +h commands
-        path=( $cmdpath )
-    fi
-    _alternative -O args "$defs[@]"
-}
-
-function _parameters() {
-
-    # function_body
-    local expl pattern tmp pfilt i maxLen ary
-    local -a fakes faked
-    if compset -P '*:'; then
-        _history_modifiers p
-        return
-    fi
-
-    pattern=(-g \*)
-    zparseopts -D -K -E g:=pattern
-
-    fakes=()
-    faked=()
-    if zstyle -a ":completion:${curcontext}:" fake-parameters tmp; then
-    for i in "$tmp[@]"; do
-        if [[ "$i" = *:* ]]; then
-        faked=( "$faked[@]" "$i" )
-        else
-        fakes=( "$fakes[@]" "$i" )
-        fi
-    done
-    fi
-
-    zstyle -t ":completion:${curcontext}:parameters" prefix-needed &&
-    [[ $PREFIX != [_.]* ]] && \
-    pfilt='[^_.]'
-
-    declare -a ary
-    maxLen=50
-    for i in "${(@M)${(@k)parameters[(R)${pattern[2]}~*local*]}:#${~pfilt}*}"; do
-        ary+=($i:"${${(P)i}:0:100}")
-    done
-
-    for i in "$fakes[@]"; do
-        ary+=($i:"${(P)i:0:100}")
-    done
-
-    for i in "${(@)${(@M)faked:#${~pattern[2]}}%%:*}"; do
-        ary+=($i:"${(P)i:0:100}")
-    done
-
-    _describe -t parameters parameter ary
-
-}
 
 if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
     zstyle ':completion:*:*:*:*:*' menu select=0 interactive
@@ -4448,98 +3546,6 @@ for k v in ${(kv)ZPWR_VERBS[@]};do
 done
 
 ZPWR_VARS[zpwrSubcommandsAry]=zpwrSubcommandsAry
-
-function __zpwr_gtl(){
-
-    if ! isGitDir; then
-        _message "$PWD is not a git dir"
-        return 1
-    fi
-
-    local -a ary
-    local tag des
-
-    while read tag desc; do
-        ary+=("$tag:$desc")
-    done < <(git tag --sort=-v:refname -n -l)
-
-    _describe -t commit-tags tags ary
-}
-
-# eager load for _tmux-attach-session
-_tmux &>/dev/null
-
-function _zpwr(){
-
-  local arguments verb
-  local curcontext=$curcontext state line ret
-
-
-  arguments=(
-        '(- :)'{-h,--help}'[show help message and exit]'
-        '1:zpwr subcommand:->verb'
-        '*::args to zpwr:->args'
-    )
-
-    _arguments -s -C : $arguments && return
-
-    if (( CURRENT >= 1 )); then
-        case $state in
-            verb)
-                _describe -t commands "zpwr verb" zpwrSubcommandsAry
-                ;;
-            args)
-                verb=$words[1]
-                curcontext="${curcontext%:*:*}:zpwr-$verb:"
-                case $verb in
-                    redo|re|redosql|rsql|searchl|se|see|seee|searchlee|searchle)
-                        _se
-                        ;;
-                    attach)
-                        _tmux-attach-session
-                        ;;
-                    cat)
-                        _c
-                        ;;
-                    cd)
-                        _f
-                        ;;
-                    cdup)
-                        _r
-                        ;;
-                    gitedittag)
-                        __zpwr_gtl
-                        ;;
-                    gitzfordir|gitzfordirmaster|gitzfordirdevelop)
-                        _zcommand
-                        ;;
-                    info | clearlist)
-                        _cl
-                        ;;
-                    ps)
-                        _p
-                        ;;
-                    servicedown)
-                        _ssd
-                        ;;
-                    serviceup)
-                        _ssu
-                        ;;
-                    z)
-                        _zcommand
-                        ;;
-                    *)
-                        _alternative \
-                    'files:files:_files' \
-                    'directory-stack:directory stack:_directory_stack'
-                        ;;
-                esac
-            ;;
-        esac
-        return
-    fi
-
-}
 #}}}***********************************************************
 
 #{{{                    MARK:Compdefs
@@ -4552,16 +3558,8 @@ _comps[ksh]=_ksh
 _comps[tcsh]=_tcsh
 _comps[csh]=_tcsh
 
-compdef _cl clearList
 compdef _git-clone gcl
-compdef _f f
-compdef _c c
-compdef _p p
-compdef _r r
 compdef _zcommand zm zd zg
-compdef _ssd ssd
-compdef _ssu ssu
-compdef _zpwr zpwr zp
 compdef _man fm
 compdef _tmux _zsh_tmux_plugin_run
 exists _kubectl && compdef _kubectl kubectl
@@ -4576,14 +3574,12 @@ if exists zunit; then
 fi
 
 # Example usage: zmv -W '*.pl' '*.perl'
-autoload zmv
 alias mmv='noglob zmv -W'
 
 exists thefuck && eval $(thefuck --alias)
 
 # force alias z to zshz not zypper on suse
 alias z="$zcmd 2>&1"
-autoload zargs
 ###}}}***********************************************************
 
 #{{{                    MARK:Groovy
@@ -4783,7 +3779,7 @@ source "$ZPWR_RE_ENV_FILE" || {
 
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
-logg "zsh startup took $startupTimeMs seconds"
+loggDebug "zsh startup took $startupTimeMs seconds"
 
 ZPWR_VARS[startupTimeMs]=$startupTimeMs
 

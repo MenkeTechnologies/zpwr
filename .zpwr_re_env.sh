@@ -56,8 +56,13 @@ type -a evalIfNeeded 1>/dev/null 2>&1 || function evalIfNeeded() {
 test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
+# autoloaded non completion functions
+evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD " "$ZPWR/autoload" "$ZPWR"
+# autoloaded completion functions
+evalIfNeeded ZPWR_COMPS "$ZPWR_COMPS " "$ZPWR/comps" "$ZPWR"
+# same as zpwr local
 evalIfNeeded ZPWR_HIDDEN_DIR "$ZPWR_HIDDEN_DIR" "$ZPWR/local" "$ZPWR"
-# private tokens file sourced before 
+# private tokens file sourced before
 evalIfNeeded ZPWR_TOKEN_PRE "$ZPWR_TOKEN_PRE" "$ZPWR_LOCAL/.tokens.sh" "$ZPWR_LOCAL"
 # private tokens file sourced after
 evalIfNeeded ZPWR_TOKEN_POST "$ZPWR_TOKEN_POST" "$ZPWR_LOCAL/.tokens-post.sh" "$ZPWR_LOCAL"

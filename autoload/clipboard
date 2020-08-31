@@ -1,0 +1,26 @@
+function ___clipboard(){
+
+    [[ -z "$BUFFER" ]] && return 1
+
+    local clipcmd
+
+    clipcmd=$ZPWR_COPY_CMD
+
+    if [[ -n $clipcmd ]]; then
+            print -sr -- "$BUFFER"
+            print -rn "$BUFFER" | ${=clipcmd}
+            echo
+            print -n "\x1b[0;34mCopied \x1b[1m\""
+            print -rn "$BUFFER"
+            print  "\"\x1b[0;34m to System Clipboard!"
+            echo
+            zle .redisplay
+    else
+        echo
+        printf "\x1b[0;34mNO \x1b[1m\"XCLIP\"\x1b[0;34m Found!\n"
+        echo
+        zle .redisplay
+    fi
+}
+
+___clipboard "$@"

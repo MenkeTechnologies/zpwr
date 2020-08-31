@@ -1,0 +1,70 @@
+function uncompile(){
+
+    emulate -L zsh
+    setopt nullglob
+
+    local dir files sudoFiles file
+
+    files=(
+        "$HOME/.zshrc"*
+        "$HOME/.zlogout"*
+        "$HOME/.zlogin"*
+        "$HOME/grc.zsh"
+        "$ZSH/oh-my-zsh.sh"
+        "$ZSH_COMPDUMP"
+        "$ZPWR/.shell_aliases_functions.sh"
+        "$ZPWR/.powerlevel9kconfig.sh"
+        "$ZPWR_LOCAL/.tokens.sh"
+        "$ZPWR_LOCAL/.tokens-post.sh"
+        "$ZPWR_ENV_FILE"
+        "$ZPWR_RE_ENV_FILE"
+        "$ZPWR_SCRIPTS/zpwr.zsh"
+        "$ZPWR_LIB"
+        "$ZPWR_LIB_INIT"
+        "$ZPWR_SCRIPTS/crossOSCommands.sh"
+    )
+
+    sudoFiles=(
+        /etc/profile*
+        /etc/zprofile*
+        /etc/zshrc*
+        /etc/zsh/z*
+        /etc/profile.env*
+    )
+
+    prettyPrint "deleting all compiled configs"
+
+    for file in ${files[@]}; do
+        file=${file%*.zwc*}
+        if [[ -f "$file.zwc" ]]; then
+            echo rm -f "$file.zwc"
+            rm -f "$file.zwc"
+        elif [[ -f "$file.zwc.old" ]]; then
+            echo rm -f "$file.zwc.old"
+            rm -f "$file.zwc.old"
+        fi
+    done
+
+    for file in ${sudoFiles[@]}; do
+        file=${file%*.zwc*}
+        if [[ -f "$file.zwc" ]]; then
+            echo sudo rm "$file".zwc
+            sudo rm "$file".zwc
+        elif [[ -f "$file.zwc.old" ]]; then
+            echo sudo rm "$file.zwc.old"
+            sudo rm "$file.zwc.old"
+        fi
+    done
+
+	for dir in $fpath; do
+		if test -d $dir;then
+            if [[ -f "$dir.zwc" ]]; then
+                echo rm -rf "$dir.zwc"
+                rm -rf "$dir.zwc" 2>/dev/null ||
+                sudo rm -rf "$dir.zwc"
+            fi
+        fi
+	done
+}
+
+uncompile "$@"
