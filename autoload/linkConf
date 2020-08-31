@@ -1,0 +1,36 @@
+# link over latest configuration files from $ZPWR_REPO_NAME
+function ___linkConf(){
+
+    (
+    if [[ ! -f "$HOME/.ctags" ]]; then
+        prettyPrint "Linking .ctags to home directory"
+        goInstallerDir
+        ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
+    fi
+
+    local symFiles file snipDir
+
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc)
+
+    for file in ${symFiles[@]} ; do
+        prettyPrint "Installing $file to $HOME"
+        goInstallerDir
+        echo ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
+        ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
+    done
+
+    prettyPrint "Installing UltiSnips to $HOME/.vim/UltiSnips"
+    echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
+    ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
+    snipDir="$HOME/.emacs.d/private/snippets"
+
+    if [[ -d "$snipDir" ]]; then
+        prettyPrint "Installing yasnippets to $snipDir"
+        command rm -rf "$snipDir/zpwr-snippets" 2>/dev/null
+        echo ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
+        ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
+    fi
+    )
+}
+
+___linkConf "$@"

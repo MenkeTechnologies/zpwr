@@ -1,0 +1,53 @@
+function ___gsdc(){
+
+    if ! isGitDir; then
+       loggNotGit
+       return 1
+    fi
+
+    local currentDir dir
+
+    currentDir="$(pwd -P)"
+
+    for dir in "${BLACKLISTED_DIRECTORIES[@]}" ; do
+        if [[ "$currentDir" == "$dir" ]]; then
+            printf "\x1b[0;1;31m"
+            print -sr "$BUFFER"
+            loggErr "BLACKLISTED: $(pwd -P)"
+            printf "\x1b[0m"
+            return 1
+        fi
+    done
+
+	git status | command grep -sq "nothing to commit" && {
+        printf "\x1b[0;1;31m"
+        loggErr "Nothing has changed."
+        echo
+        BUFFER=""
+        printf "\x1b[0m"
+        return 0
+	}
+
+	gitSdiffColorizer.pl | less -r
+
+    printf "\x1b[0m"
+
+    if [[ -z "$1" ]]; then
+        return 0
+    else
+        printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
+        if isZsh; then
+            read -k 1
+        else
+            read -n 1
+        fi
+        if [[ "$REPLY" == 'y' ]]; then
+            return 0
+        else
+            return 1
+        fi
+    fi
+
+}
+
+___gsdc "$@"

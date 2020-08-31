@@ -1,0 +1,64 @@
+function __ino(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: ino <dir>"
+        return 1
+    fi
+
+    local dir
+
+    dir="$1"
+    command mkdir "$dir" && cd "$dir" &&
+        platformio init --ide clion --board uno
+    {
+        cat <<\EOF
+#include <Arduino.h>
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+}
+
+void loop() {
+  digitalWrite(LED_BUILTIN, HIGH);
+  delay(1000);
+  digitalWrite(LED_BUILTIN, LOW);
+  delay(1000);
+}
+EOF
+    } > src/main.cpp
+
+    {
+        cat <<\EOF
+#!/usr/bin/env bash
+
+[[ -n "$1" ]] && cd "$1"
+
+command ps -ef | command grep platformio | command grep -v grep > /dev/null && {
+
+    figletRandomFontOnce.sh "GO GO GO !!!" | cowsay -f eyes -W 150
+
+   command ps -ef | command grep platformio | command grep -v grep | awk '{print $2}' | xargs kill
+}
+
+platformio run -t upload && platformio device monitor
+EOF
+    } > Runner.sh
+
+    chmod +x Runner.sh
+    {
+        cat <<\EOF
+add_custom_target(
+        PLATFORMIO_JAKE ALL
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+EOF
+    } >> CMakeLists.txt
+
+    clion .
+
+    jetbrainsWorkspaceEdit "$dir"
+
+}
+
+
+__ino "$@"

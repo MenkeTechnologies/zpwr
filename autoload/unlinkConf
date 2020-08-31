@@ -1,0 +1,32 @@
+#link over latest configuration files from $ZPWR_REPO_NAME
+function ___unlinkConf(){
+    (
+
+    local symFiles file snipDir
+
+    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc .ctags)
+
+    for file in ${symFiles[@]} ; do
+        if [[ -f "$HOME/$file" ]]; then
+            if [[ -h "$HOME/$file" ]]; then
+                prettyPrint "REMOVING $HOME/$file"
+                goInstallerDir
+                echo rm -f $HOME/$file
+                rm -f -- $HOME/$file
+            else
+                prettyPrint "not REMOVING $HOME/$file because not symlink"
+            fi
+        fi
+    done
+    rm -rf "$HOME/.vim/UltiSnips"
+
+    snipDir="$HOME/.emacs.d/private/snippets/zpwr-snippets"
+
+    if [[ -d "$snipDir" ]]; then
+       rm -rf "$snipDir"
+    fi
+
+    )
+}
+
+___unlinkConf "$@"

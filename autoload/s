@@ -1,0 +1,46 @@
+function ___s(){
+
+    exists isZsh || {
+        source "$ZPWR_SCRIPTS/lib.sh" || {
+            echo "where is $ZPWR_SCRIPTS/lib.sh" >&2
+            return 1
+        } && loggErr 'forced to load lib.sh due to missing isZsh'
+    }
+
+    local cmd sec_cmd out url
+
+    if exists subl; then
+        cmd=subl
+    else
+        cmd="$ZPWR_OPEN_CMD"
+    fi
+
+    if type -a s | command grep -sqv function; then
+        sec_cmd=s
+    else
+        sec_cmd="$ZPWR_OPEN_CMD"
+    fi
+    if isZsh; then
+        if [[ $sec_cmd == s ]]; then
+            {
+                test -z "$1" && ${=cmd} . || command s "$@"
+            }
+        else
+            {
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            url="https://google.com/search?q=$out"
+                ${=sec_cmd} $url
+            }
+        fi
+    else
+        if [[ $sec_cmd == s ]]; then
+            test -z "$1" && $cmd . || command s "$@"
+        else
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            url="https://google.com/search?q=$out"
+            $sec_cmd $url
+        fi
+    fi
+}
+
+___s "$@"

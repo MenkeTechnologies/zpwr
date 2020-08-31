@@ -1,0 +1,51 @@
+function ___contribCountLines(){
+
+    if ! isGitDir; then
+       loggNotGit
+       return 1
+    fi
+
+    local filter lineCount
+
+    prettyPrint "starting line contrib count..."
+    {
+
+    while read; do
+        isBinary "$REPLY" && continue
+        filter=false
+        for arg in "$@"; do
+           if echo "$REPLY" | command grep -q "$arg"; then
+               filter=true
+               break
+           fi
+       done
+        if [[ $filter = false ]]; then
+            git blame "$REPLY" | perl -lne 'do{($_=$1)=~s@^\s+|\s+$@@g; $_=~s@\s+@ @g;print} if m{^[0-9a-f^]+\s\((.*)\s\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\s.*\d\)\s.*$}'
+        fi
+    done < <(git ls-files) 2>/dev/null
+
+    } > "$ZPWR_TEMPFILE"
+
+    if ! test -f "$ZPWR_TEMPFILE"; then
+        printf "\x1b[0;1;31m"
+        loggErr "where is $ZPWR_TEMPFILE"
+        printf "\x1b[0m"
+        return 1
+    fi
+
+    prettyPrint "Line Contribution Count"
+    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
+    if (( $lineCount > 10 )); then
+        cat "$ZPWR_TEMPFILE" | sort | uniq -c | sort -r |
+        perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            alternatingPrettyPrint | less -r
+    else
+        cat "$ZPWR_TEMPFILE" | sort | uniq -c | sort -r |
+        perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            alternatingPrettyPrint
+    fi
+    command rm "$ZPWR_TEMPFILE"
+
+}
+
+___contribCountLines "$@"

@@ -1,0 +1,210 @@
+function ___digs(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: digs <url...>"
+        return 1
+    fi
+
+    local OPTIND opt exe secret url noport noproto ip primary colo
+
+    while getopts "s" opt 2>/dev/null;do
+        case $opt in
+            s) secret=true;;
+            *) loggErr "bad opt"; return 1
+        esac
+    done
+    shift $(($OPTIND-1))
+
+    exists grc && colo=grc || {
+        colo=
+        echo "No grc colorizer no defaulting to no colors"
+    }
+
+    if [[ -n $colo ]] && [[ ! -f "$HOME/conf.whois" ]]; then
+        loggErr "cannot proceed without $HOME/conf.whois for grc"
+        return 1
+    fi
+
+    if [[ -n "$secret" ]]; then
+        exists proxychains && exe=proxychains
+        exists proxychains4 && {
+           isZsh &&
+                exe=(proxychains4 -q) ||
+                exe="proxychains4 -q"
+        }
+
+        if [[ -z "$exe" ]]; then
+            loggErr "cannot proceed without proxychains" return 1
+        fi
+
+
+        if exists dig;then
+            for url in "$@"; do
+                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
+                exec 2>&1
+                prettyPrint "DIG: $noport"
+                if [[ -n "$colo" ]]; then
+                    $exe dig +trace "$noport" | grcat conf.dig
+                else
+                    $exe dig +trace "$noport"
+                fi
+
+                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
+                prettyPrint "HOST: $noproto"
+                out="$($exe host "$noproto")"
+                if exists lolcat; then
+                    echo "$out" | lolcat
+                else
+                    echo "$out"
+                fi
+                echo
+                if echo "$out" | command grep -sq 'address';then
+                    #regular domain name
+                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
+                    if [[ ${noproto: -1} == "." ]]; then
+                        noproto="${noproto:0:-1}"
+                    fi
+                    prettyPrint "DIG: $ip"
+                    if [[ -n "$colo" ]]; then
+                        $exe dig -x "$ip" | grcat conf.dig
+                    else
+                        $exe dig -x "$ip"
+                    fi
+
+                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
+                    out="$($exe whois "$primary")"
+                    if echo "$out" | command grep -sq 'No match';then
+                        prettyPrint "WHOIS: $ip"
+                        if [[ -n "$colo" ]]; then
+                            $exe whois "$ip" | grcat "$HOME/conf.whois"
+                        else
+                            $exe whois "$ip"
+                        fi
+                    else
+                        prettyPrint "WHOIS: $primary"
+                        if [[ -n "$colo" ]]; then
+                            echo "$out" | grcat "$HOME/conf.whois"
+                            echo
+                            prettyPrint "WHOIS: $ip"
+                            $exe whois "$ip" | grcat  "$HOME/conf.whois"
+                        else
+                            echo "$out"
+                            echo
+                            prettyPrint "WHOIS: $ip"
+                            $exe whois "$ip"
+                        fi
+                    fi
+                else
+                    out="$($exe whois "$noproto")"
+                    if echo "$out" | command grep -sq 'No match';then
+                        prettyPrint "WHOIS: $ip"
+                        if [[ -n "$colo" ]]; then
+                            $exe whois "$ip" | grcat "$HOME/conf.whois"
+                        else
+                            $exe whois "$ip"
+                        fi
+                    else
+                        prettyPrint "WHOIS: $noproto"
+
+                        if [[ -n "$colo" ]]; then
+                            echo "$out" | grcat "$HOME/conf.whois"
+                            prettyPrint "WHOIS: $ip"
+                            $exe whois "$ip" | grcat "$HOME/conf.whois"
+                        else
+                            echo "$out"
+                            prettyPrint "WHOIS: $ip"
+                            $exe whois "$ip"
+                        fi
+                    fi
+                fi
+                if exists http; then
+                    prettyPrint "HTTPIE: $url"
+                    torify http -v --follow --pretty=all "$url"
+                else
+                    prettyPrint "CURL: $url"
+                    $exe curl -vvv -k -fsSL "$url"
+                fi
+                    echo
+                    echo
+                    prettyPrint "TRACEROUTE: $noproto"
+                    if [[ -n "$colo" ]]; then
+                        $exe traceroute "$noproto" | grcat conf.traceroute
+                    else
+                        $exe traceroute "$noproto"
+                    fi
+                exec 2>/dev/tty
+            done | less -MN
+        else
+            loggErr "you need dig"
+        fi
+    else
+
+        isZsh && colo=(grc --colour=on) || colo="grc --colour=on "
+
+        if exists dig; then
+            for url in "$@"; do
+                noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
+                exec 2>&1
+                prettyPrint "DIG: $noport"
+                $colo $exe dig +trace "$noport"
+                noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
+                prettyPrint "HOST: $noproto"
+                out="$($colo $exe host "$noproto")"
+                if exists lolcat; then
+                    echo "$out" | lolcat
+                else
+                    echo "$out"
+                fi
+                echo
+                echo
+                if echo "$out" | command grep -sq 'address';then
+                    #regular domain name
+                    ip="$(echo "$out" | command grep 'address' | head -n 1 | awk '{print $4}')"
+                    if [[ ${noproto: -1} == "." ]]; then
+                        noproto="${noproto:0:-1}"
+                    fi
+                    prettyPrint "DIG: $ip"
+                    $colo $exe dig -x "$ip"
+                    primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
+                    out="$($exe whois "$primary")"
+                    if echo "$out" | command grep -sq 'No match';then
+                        prettyPrint "WHOIS: $ip"
+                        $colo -c "$HOME/conf.whois" $exe whois "$ip"
+                    else
+                        prettyPrint "WHOIS: $primary"
+                        echo "$out" | grcat "$HOME/conf.whois"
+                        prettyPrint "WHOIS: $ip"
+                        $colo -c "$HOME/conf.whois" $exe whois "$ip"
+                    fi
+                else
+                    out="$($colo $exe whois "$noproto")"
+                    if echo "$out" | command grep -sq 'No match'; then
+                        prettyPrint "WHOIS: $ip"
+                        $colo -c "$HOME/conf.whois" $exe whois "$ip"
+                    else
+                        prettyPrint "WHOIS: $noproto"
+                        echo "$out" | grcat  "$HOME/conf.whois"
+                        prettyPrint "WHOIS: $ip"
+                        $colo -c "$HOME/conf.whois" $exe whois "$ip"
+                    fi
+                fi
+                if exists http; then
+                    prettyPrint "HTTPIE: $url"
+                    $exe http -v --follow --pretty=all "$url"
+                else
+                    prettyPrint "CURL: $url"
+                    $colo $exe curl -vvv -k -fsSL "$url"
+                fi
+                    echo
+                    echo
+                    prettyPrint "TRACEROUTE: $noproto"
+                    $colo $exe traceroute "$noproto"
+                exec 2>/dev/tty
+            done | less -MN
+        else
+            loggErr "you need dig"
+        fi
+    fi
+}
+
+___digs "$@"
