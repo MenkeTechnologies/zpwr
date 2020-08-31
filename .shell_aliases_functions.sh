@@ -512,12 +512,12 @@ exists idea && {
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
     if isZsh; then
-        autoload -z $ZPWR_AUTOLOAD/darwin/*(.:t)
+        eval 'autoload -z $ZPWR_AUTOLOAD/darwin/*(.:t)'
     fi
 
 else
     if isZsh; then
-        autoload -z $ZPWR_AUTOLOAD/linux/*(.:t)
+        eval 'autoload -z $ZPWR_AUTOLOAD/linux/*(.:t)'
     fi
 
 fi
@@ -525,7 +525,7 @@ fi
 if commandExists systemctl; then
 
     if isZsh; then
-        autoload -z $ZPWR_AUTOLOAD/systemctl/*(.:t)
+        eval 'autoload -z $ZPWR_AUTOLOAD/systemctl/*(.:t)'
     fi
 
 fi
