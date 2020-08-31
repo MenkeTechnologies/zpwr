@@ -542,19 +542,6 @@ function loadJenv() {
     fi
 }
 
-function r(){
-
-    local cdstr
-    if [[ -z $1 ]]; then
-        cd ..
-    else
-        for (( i = 0; i < $1; ++i )); do
-            cdstr+="../"
-        done
-        cd "$cdstr" || return 1
-    fi
-}
-
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
     function exe(){
