@@ -1,0 +1,5 @@
+function ___vimFzfWordsearchVerbr(){
+    fzfWordsearchVerb "$EDITOR"
+}
+
+___vimFzfWordsearchVerbr "$@"

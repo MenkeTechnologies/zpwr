@@ -1,0 +1,6 @@
+function ___locateFzfEditNoZLEC(){
+
+    locateFzfEditNoZLE "c"
+}
+
+___locateFzfEditNoZLEC "$@"

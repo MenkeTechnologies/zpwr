@@ -1,0 +1,11 @@
+function ___emacsFzfFilesearchVerbEdit(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    fzfFilesearchVerbEdit "$ZPWR_EMACS_CLIENT"
+}
+
+___emacsFzfFilesearchVerbEdit "$@"

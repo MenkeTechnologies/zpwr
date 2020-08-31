@@ -1,0 +1,6 @@
+function ___findFzfNoZLEC(){
+
+    findFzfNoZLE "c"
+}
+
+___findFzfNoZLEC "$@"

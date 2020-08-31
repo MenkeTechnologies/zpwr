@@ -1,0 +1,6 @@
+function ___findFzfNoZLEVim(){
+
+    findFzfNoZLE "$EDITOR"
+}
+
+___findFzfNoZLEVim "$@"

@@ -1,0 +1,6 @@
+function ___locateFzfEditNoZLEVim(){
+
+    locateFzfEditNoZLE "$EDITOR"
+}
+
+___locateFzfEditNoZLEVim "$@"
