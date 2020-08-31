@@ -1,0 +1,15 @@
+function ___loadJenv() {
+
+    if exists jenv;then
+        eval "$(jenv init -)"
+        jenv enable-plugin export > /dev/null 2>&1
+        prettyPrint "jenv loaded"
+        if [[ -n "$1" ]]; then
+            jenv "$@"
+        fi
+    else
+        loggErr "No jenv"
+    fi
+}
+
+___loadJenv "$@"

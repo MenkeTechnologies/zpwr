@@ -1,0 +1,14 @@
+function ___clearCache(){
+
+    clearTemp
+    {
+        command rm -rf \
+            "$ZPWR_LOGFILE" \
+            "$ZPWR_VIM_KEYBINDINGS" \
+            "$ZPWR_ALL_KEYBINDINGS" \
+            "$ZPWR_ALL_GIT_DIRS" \
+            "$ZPWR_ENV"*
+    } >> "$ZPWR_LOGFILE" 2>&1
+}
+
+___clearCache "$@"

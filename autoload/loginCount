@@ -1,0 +1,8 @@
+function ___loginCount(){
+
+    perl -e 'print `last -f "$_"`for</var/log/wtmp*>' |
+        perl -lane 'print $F[0] if /\S+/ && !/wtmp/' |
+        sort | uniq -c | sort -rn
+}
+
+___loginCount "$@"

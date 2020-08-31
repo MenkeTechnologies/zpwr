@@ -1,0 +1,10 @@
+function ___rm(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: rm <file>"
+        return 1
+    fi
+
+    command rm -v "$@"
+}
+___rm "$@"

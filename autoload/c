@@ -1,0 +1,24 @@
+function ___c(){
+
+    if [[ -p /dev/stdin ]]; then
+        cat > "$ZPWR_TEMPFILE"
+        if [[ -p /dev/stdout ]];then
+            cCommon "$ZPWR_TEMPFILE"
+        else
+            cCommon "$ZPWR_TEMPFILE" | less
+        fi
+    else
+        if [[ -z "$1" ]]; then
+            loggErr "usage: c <file...>"
+            return 1
+        fi
+
+        if [[ -p /dev/stdout ]];then
+            cCommon "$@"
+        else
+            cCommon "$@" | less
+        fi
+    fi
+}
+
+___c "$@"

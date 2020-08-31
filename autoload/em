@@ -1,0 +1,11 @@
+function ___em(){
+
+    if [[ -z "$1" ]]; then
+        "${=ZPWR_EMACS}" .
+    else
+        "${=ZPWR_EMACS}" "$@"
+    fi
+
+}
+
+___em "$@"

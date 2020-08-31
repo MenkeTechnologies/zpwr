@@ -1,0 +1,14 @@
+function ___regenCtags(){
+
+    prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
+    (
+    builtin cd "$ZPWR_SCRIPTS"
+    command rm tags 2>/dev/null
+    ctags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR/".*.sh
+    ctags --append --fields=+l "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS_MAC/"*
+    command cp tags "$HOME"
+    )
+
+}
+
+___regenCtags "$@"

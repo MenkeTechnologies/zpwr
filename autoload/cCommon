@@ -1,0 +1,36 @@
+function ___cCommon(){
+
+    local colorizer rpm_cmd deb_cmd file
+    colorizer=bat
+
+    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
+    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
+
+    if exists $colorizer;then
+        if echo | $colorizer > /dev/null 2>&1; then
+            for file in "$@";do
+                if [[ -f "$file" ]]; then
+                    if (( $# > 1)); then
+                        printf "\x1b[34;1;4m$file\x1b[0m\n"
+                    fi
+                    if [[ -r "$file" ]]; then
+                        bash fzfPreviewOptsCtrlT.sh |
+                            sed "s@{}@$file@" | zsh
+                    else
+                    # preserve the PATH env var
+                    # with /etc/sudoers having Defaults secure_path
+                        bash fzfPreviewOptsCtrlT.sh |
+                            sed "s@{}@$file@" |
+                            sudo -E env "PATH=$PATH" zsh
+                    fi
+                fi
+            done
+        else
+            cat -n "$@"
+        fi
+    else
+        cat -n "$@"
+    fi
+}
+
+___cCommon "$@"

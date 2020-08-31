@@ -508,39 +508,6 @@ exists idea && {
 
 #{{{                    MARK:Shell functions
 #**************************************************************
-function rm(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: rm <file>"
-        return 1
-    fi
-
-    command rm -v "$@"
-}
-
-function em(){
-
-    if [[ -z "$1" ]]; then
-        "${=ZPWR_EMACS}" .
-    else
-        "${=ZPWR_EMACS}" "$@"
-    fi
-
-}
-
-function loadJenv() {
-
-    if exists jenv;then
-        eval "$(jenv init -)"
-        jenv enable-plugin export > /dev/null 2>&1
-        prettyPrint "jenv loaded"
-        if [[ -n "$1" ]]; then
-            jenv "$@"
-        fi
-    else
-        loggErr "No jenv"
-    fi
-}
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
@@ -783,143 +750,10 @@ exists pssh && function pir(){
     pssh --inline-stdout --timeout 90 -h "$ZPWR_LOCAL/hosts.txt" "$@"
 }
 
-function cCommon(){
-
-    local colorizer rpm_cmd deb_cmd file
-    colorizer=bat
-
-    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
-    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
-
-    if exists $colorizer;then
-        if echo | $colorizer > /dev/null 2>&1; then
-            for file in "$@";do
-                if [[ -f "$file" ]]; then
-                    if (( $# > 1)); then
-                        printf "\x1b[34;1;4m$file\x1b[0m\n"
-                    fi
-                    if [[ -r "$file" ]]; then
-                        bash fzfPreviewOptsCtrlT.sh |
-                            sed "s@{}@$file@" | zsh
-                    else
-                    # preserve the PATH env var
-                    # with /etc/sudoers having Defaults secure_path
-                        bash fzfPreviewOptsCtrlT.sh |
-                            sed "s@{}@$file@" |
-                            sudo -E env "PATH=$PATH" zsh
-                    fi
-                fi
-            done
-        else
-            cat -n "$@"
-        fi
-    else
-        cat -n "$@"
-    fi
-}
-
-function c(){
-
-    if [[ -p /dev/stdin ]]; then
-        cat > "$ZPWR_TEMPFILE"
-        if [[ -p /dev/stdout ]];then
-            cCommon "$ZPWR_TEMPFILE"
-        else
-            cCommon "$ZPWR_TEMPFILE" | less
-        fi
-    else
-        if [[ -z "$1" ]]; then
-            loggErr "usage: c <file...>"
-            return 1
-        fi
-
-        if [[ -p /dev/stdout ]];then
-            cCommon "$@"
-        else
-            cCommon "$@" | less
-        fi
-    fi
-}
-
-function agIntoFzf(){
-
-    if test -z "$1";then
-        command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
-        eval "$ZPWR_FZF $FZF_AG_OPTS" |
-        cut -d ':' -f1 |
-        perl -pe 's@^(.*)\n$@"'"$PWD/"'$1" @'
-
-    else
-
-        command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
-        eval "$ZPWR_FZF $FZF_AG_OPTS" |
-        perl -pe 's@^(.*?):(\d+):(.*)@+$2 "'"$PWD/"'$1"@;s@\n@ @g'
-
-    fi
-}
-
-function detachall(){
-
-    tmux list-clients | tr -d : |
-        perl -ane '`tmux detach-client -t $F[0]`'
-}
-
-
-function scripts(){
-
-    (
-        {
-            gvim -S ~/.vim/sessions/gvim.vim > /dev/null 2>&1
-            sleep 2
-            open -a Terminal.app
-        } >/dev/null 2>&1 &
-    )
-}
-
 if [[ $ZPWR_LEARN != false ]]; then
     export ZPWR_SCHEMA_NAME=root
     export ZPWR_TABLE_NAME=LearningCollection
 fi
-
-function gitCheckoutRebasePush(){
-
-    git branch -a | head -2 | perl -ane 'if ($F[0] eq "*"){$cur=$F[1]}else{$alt=$F[0]};if ($. == 2){$cmd="git checkout $alt; git rebase $cur;git push;";print "$cmd\n"; `$cmd`}'
-}
-
-function loginCount(){
-
-    perl -e 'print `last -f "$_"`for</var/log/wtmp*>' |
-        perl -lane 'print $F[0] if /\S+/ && !/wtmp/' |
-        sort | uniq -c | sort -rn
-}
-
-function clearTemp(){
-
-    {
-        command rm -rf \
-            "$ZPWR_TEMPFILE" \
-            "$ZPWR_TEMPFILE1" \
-            "$ZPWR_TEMPFILE2" \
-            "$ZPWR_TEMPFILE3" \
-            "$ZPWR_TEMPFILE4" \
-            "$ZPWR_TEMPFILE_SQL" \
-            "$ZPWR_TMUX_LOCAL"/pane* \
-            "$ZPWR_HIDDEN_DIR_TEMP"/*
-    } >> "$ZPWR_LOGFILE" 2>&1
-}
-
-function clearCache(){
-
-    clearTemp
-    {
-        command rm -rf \
-            "$ZPWR_LOGFILE" \
-            "$ZPWR_VIM_KEYBINDINGS" \
-            "$ZPWR_ALL_KEYBINDINGS" \
-            "$ZPWR_ALL_GIT_DIRS" \
-            "$ZPWR_ENV"*
-    } >> "$ZPWR_LOGFILE" 2>&1
-}
 
 function regenGtagsCtags(){
 
@@ -929,31 +763,6 @@ function regenGtagsCtags(){
 function regenGtagsPygments(){
 
     regenGtagsType pygments
-}
-
-function regenCtags(){
-
-    prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
-    (
-    builtin cd "$ZPWR_SCRIPTS"
-    command rm tags 2>/dev/null
-    ctags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR/".*.sh
-    ctags --append --fields=+l "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS_MAC/"*
-    command cp tags "$HOME"
-    )
-
-}
-
-function regenAllKeybindingsCache(){
-
-    prettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
-    zsh "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
-    escapeRemover.pl |
-    perl -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"
-
-    isZsh && source "$ZPWR_SCRIPTS/keybindingsToFZF.zsh" |
-        escapeRemover.pl |
-        perl -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
 }
 
 function searchGitCommon(){
@@ -1029,21 +838,6 @@ function parseRecentf(){
     fi
 
     tac "$ZPWR_RECENTF" | command perl -ne 'do {$_=~s@$ENV{HOME}@~@;$_=~s@[ ]+@@g; $_="> $_"; $_=~s@"@@g; print $_} if m{/}'
-}
-
-function catNvimOrVimInfo() {
-
-    local file
-
-    if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        file="$ZPWR_NVIMINFO"
-        test -e "$file" || touch "$file"
-        cat "$file"
-    else
-        file="$HOME/.viminfo"
-        test -e "$file" || touch "$file"
-        tac "$file"
-    fi
 }
 
 function recentfThenNvim() {

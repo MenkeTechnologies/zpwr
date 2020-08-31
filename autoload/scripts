@@ -1,0 +1,12 @@
+function ___scripts(){
+
+    (
+        {
+            gvim -S ~/.vim/sessions/gvim.vim > /dev/null 2>&1
+            sleep 2
+            open -a Terminal.app
+        } >/dev/null 2>&1 &
+    )
+}
+
+___scripts "$@"
