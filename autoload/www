@@ -1,0 +1,18 @@
+function ___www(){
+
+    if [[ -z "$2" ]]; then
+       loggErr "usage: www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
+       return 1
+    fi
+
+    local time
+    time=$1
+
+    shift
+    while true; do
+        eval "$@"
+        sleep $time
+    done
+}
+
+___www "$@"

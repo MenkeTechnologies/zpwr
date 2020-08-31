@@ -830,64 +830,6 @@ function vimFzfFilesearchVerb(){
     fzfFilesearchVerb "$EDITOR"
 }
 
-function fzfDirSearch(){
-
-    command find -L . -mindepth 1 \
-        \( -path '*/\\.*' -o -fstype 'sysfs' \
-        -o -fstype 'devfs' -o -fstype 'devtmpfs' \
-        -o -fstype 'proc' \) -prune -o -type d -print \
-        -o -type l -print 2> /dev/null | cut -c3- |
-        eval "$ZPWR_FZF --border $FZF_CTRL_T_OPTS"
-}
-
-function fzfDirsearchVerb(){
-
-    local dir
-
-    dir=$(fzfDirSearch)
-
-    if [[ -z "$dir" ]]; then
-        return
-    fi
-    print -rs -- "builtin cd \"$dir\" && clearList"
-    eval "builtin cd \"$dir\" && clearList"
-}
-
-function fzfZList(){
-
-    z -l |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
-    eval "$ZPWR_FZF -e --no-sort --border $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
-}
-
-function fzfZListVerb(){
-
-    local dir
-
-    dir=$(fzfZList)
-
-    if [[ -z "$dir" ]]; then
-        return
-    fi
-
-    print -sr -- "builtin cd \"$dir\" && clearList"
-    eval "builtin cd \"$dir\" && clearList"
-}
-
-function zFZF(){
-
-    local mywords
-
-    zle .kill-whole-line
-    BUFFER="z $(fzfZList)"
-    mywords=(${(z)BUFFER})
-
-    if (( $#mywords == 1 )); then
-        zle .kill-whole-line
-    else
-        zle .accept-line
-    fi
-}
 
 function fasdFZF(){
 
@@ -914,17 +856,6 @@ function startSendFull(){
 
     ZPWR_SEND_KEYS_FULL=true
     startSend "$@"
-}
-
-function keyClear(){
-
-    local pane mywords pid
-
-    if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
-        for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-            tmux send-keys -t $pane "C-u"
-        done
-    fi
 }
 
 function self-insert() {
@@ -1085,23 +1016,6 @@ function interceptDelete(){
     #deleteMatching
     exists autopair-delete && autopair-delete
     keySender
-}
-
-function zpwrVerbsWidgetAccept(){
-
-    zle .kill-whole-line
-    BUFFER="$(zpwrVerbsFZF)"
-    loggDebug "$BUFFER"
-    zle .accept-line
-}
-
-function zpwrVerbsWidget(){
-
-    zle .kill-whole-line
-    BUFFER="$(zpwrVerbsFZF)"
-    loggDebug "$BUFFER"
-    CURSOR=$#BUFFER
-    zle vi-insert
 }
 
 #}}}***********************************************************

@@ -1,0 +1,21 @@
+function ___execpy(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: execpy <file>"
+        return 1
+    fi
+
+    local script
+
+    script="$1"
+    shift
+
+    if [[ ! -f "$PYSCRIPTS/$script" ]]; then
+        loggErr "$PYSCRIPTS/$script does not exist!"
+        return 1
+    fi
+    python3 "$PYSCRIPTS/$script" "$@"
+
+}
+
+___execpy "$@"

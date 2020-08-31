@@ -1,0 +1,9 @@
+function ___zpwrVerbsWidgetAccept(){
+
+    zle .kill-whole-line
+    BUFFER="$(zpwrVerbsFZF)"
+    loggDebug "$BUFFER"
+    zle .accept-line
+}
+
+___zpwrVerbsWidgetAccept "$@"

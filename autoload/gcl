@@ -1,0 +1,22 @@
+function ___gcl() {
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: gcl <repo>"
+        return 1
+    fi
+
+    local git_name dir_name last_arg
+
+    last_arg=${@: -1}
+    git_name="${last_arg##*/}"
+    dir_name=${git_name%.*}
+    git clone -v --progress --recursive "$@"
+    if [[ -d "$dir_name" ]]; then
+        cd "$dir_name"
+    else
+        loggErr "$dir_name failed to clone"
+        return 1
+    fi
+}
+
+___gcl "$@"

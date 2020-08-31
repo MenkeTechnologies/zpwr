@@ -1,0 +1,12 @@
+function ___keyClear(){
+
+    local pane mywords pid
+
+    if (( $ZPWR_SEND_KEYS_PANE >= 0 )); then
+        for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+            tmux send-keys -t $pane "C-u"
+        done
+    fi
+}
+
+___keyClear "$@"

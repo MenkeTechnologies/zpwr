@@ -1,0 +1,15 @@
+function ___fzfZListVerb(){
+
+    local dir
+
+    dir=$(fzfZList)
+
+    if [[ -z "$dir" ]]; then
+        return
+    fi
+
+    print -sr -- "builtin cd \"$dir\" && clearList"
+    eval "builtin cd \"$dir\" && clearList"
+}
+
+___fzfZListVerb "$@"

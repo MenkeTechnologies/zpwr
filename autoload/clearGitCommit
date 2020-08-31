@@ -1,0 +1,28 @@
+function ___clearGitCommit(){
+
+    if ! isGitDir; then
+        loggNotGit
+        return 1
+    fi
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: clearGitCommit <regex>"
+        return 1
+    fi
+
+    local regex
+
+    regex="^$1\$"
+
+    prettyPrint "Removing all commits with /$regex/"
+
+    git filter-branch --commit-filter '
+    if [ `git rev-list --all --grep "'"$regex"'" | grep -c "$GIT_COMMIT"` -gt 0 ]
+    then
+        skip_commit "$@";
+    else
+        git commit-tree "$@";
+    fi'  HEAD
+}
+
+___clearGitCommit "$@"

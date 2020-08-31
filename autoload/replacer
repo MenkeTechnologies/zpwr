@@ -1,0 +1,22 @@
+function ___replacer(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: replacer <original> <replacement>"
+        return 1
+    fi
+
+    local orig replace
+
+    orig="$1"
+    replace="$2"
+    shift 2
+    if test -n "$3"; then
+        for file in "$@" ; do
+            sed -i'' "s@$orig@$replace@g" "$file"
+        done
+    else
+        cat | sed "s@$orig@$replace@g"
+    fi
+}
+
+___replacer "$@"

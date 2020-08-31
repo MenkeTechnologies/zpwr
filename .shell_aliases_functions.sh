@@ -735,22 +735,6 @@ if commandExists systemctl; then
 
 fi
 
-function cloneToForked(){
-
-    local branch
-
-    branch=master
-    (
-        if [[ -z "$1" ]]; then
-            builtin cd "$FORKED_DIR" || return 1
-        else
-            builtin cd "$@" || return 1
-        fi
-        git clone -b "$branch" \
-            "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
-    )
-}
-
 function urlSafe(){
 
     cat | base64 | tr '+/=' '._-'
@@ -836,58 +820,6 @@ function allRemotes(){
     done < <(git remote)
 }
 
-function largestGitFiles(){
-
-    if ! isGitDir; then
-        loggNotGit
-        return 1
-    fi
-
-    local page obj filename size
-
-    if [[ -z $1 ]]; then
-       page=50
-   else
-       page=$1
-    fi
-
-    prettyPrint "Top $page Largest Git Objects"
-
-    obj=$(git rev-list --all --objects)
-    while read -r sha type size; do
-        filename=$(echo $obj | command grep $sha)
-        size=$(printf $size | humanReadable)
-        printf "%-70s %10s\n" $filename $size
-    done < <(echo $obj | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
-}
-
-function clearGitCommit(){
-
-    if ! isGitDir; then
-        loggNotGit
-        return 1
-    fi
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: clearGitCommit <regex>"
-        return 1
-    fi
-
-    local regex
-
-    regex="^$1\$"
-
-    prettyPrint "Removing all commits with /$regex/"
-
-    git filter-branch --commit-filter '
-    if [ `git rev-list --all --grep "'"$regex"'" | grep -c "$GIT_COMMIT"` -gt 0 ]
-    then
-        skip_commit "$@";
-    else
-        git commit-tree "$@";
-    fi'  HEAD
-}
-
 function about(){
 
     local old
@@ -905,26 +837,6 @@ function animate(){
     bash "$ZPWR_SCRIPTS/animation"
 }
 
-function execpy(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: execpy <file>"
-        return 1
-    fi
-
-    local script
-
-    script="$1"
-    shift
-
-    if [[ ! -f "$PYSCRIPTS/$script" ]]; then
-        loggErr "$PYSCRIPTS/$script does not exist!"
-        return 1
-    fi
-    python3 "$PYSCRIPTS/$script" "$@"
-
-}
-
 function search(){
 
     test -z $2 && command grep -iRnC 5 "$1" * ||
@@ -940,89 +852,6 @@ function cd(){
     if [[ $ZPWR_CD_AUTO_LS == true ]]; then
         clearList
     fi
-}
-
-function contribCount(){
-
-    if ! isGitDir; then
-       loggNotGit
-       return 1
-    fi
-
-    local lines lineCount
-
-    lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"
-    lineCount="$(echo $lines | wc -l)"
-    prettyPrint "Contribution Count"
-    if (( $lineCount > 10 )); then
-        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
-            alternatingPrettyPrint | less -r
-    else
-        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
-            alternatingPrettyPrint
-    fi
-}
-
-function replacer(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: replacer <original> <replacement>"
-        return 1
-    fi
-
-    local orig replace
-
-    orig="$1"
-    replace="$2"
-    shift 2
-    if test -n "$3"; then
-        for file in "$@" ; do
-            sed -i'' "s@$orig@$replace@g" "$file"
-        done
-    else
-        cat | sed "s@$orig@$replace@g"
-    fi
-}
-
-function creategif(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: creategif <file>"
-        return 1
-    fi
-
-    local res outFile
-
-    outFile=out.gif
-    res=600x400
-
-    test -n "$2" && res="$2"
-
-    test -n "$3" && outFile="$3"
-
-    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - |
-    gifsicle --optimize=3 --delay=3 > "$outFile"
-}
-
-function hc(){
-
-    local reponame old_dir
-
-    test -z "$1" && reponame="$(basename "$(pwd)")" ||
-        reponame="$1"
-    printf "\e[1m"
-    old_dir="$(pwd)"
-    test -n "$1" && cd "$reponame"
-
-    git init
-    hub create "$reponame"
-    echo "# $reponame" > README.md
-    echo "# created by $ZPWR_GITHUB_ACCOUNT" >> README.md
-    git add .
-    git commit -m "first commit"
-    git push --set-upstream origin master
-    test -n "$1" && cd "$old_dir"
-    printf "\e[0m"
 }
 
 function pstreemonitor(){
@@ -1051,89 +880,8 @@ function color2(){
     fi
 }
 
-function backup(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: backup <file>"
-        return 1
-    fi
-
-    local newfile
-
-    newfile="$1".$(date +%Y%m%d.%H.%M.bak)
-    mv "$1" "$newfile"
-    cp -pR "$newfile" "$1"
-    printf \
-        "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
-}
-
 exists gcl && {
     unalias gcl >/dev/null 2>&1
-}
-
-function gcl() {
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: gcl <repo>"
-        return 1
-    fi
-
-    local git_name dir_name last_arg
-
-    last_arg=${@: -1}
-    git_name="${last_arg##*/}"
-    dir_name=${git_name%.*}
-    git clone -v --progress --recursive "$@"
-    if [[ -d "$dir_name" ]]; then
-        cd "$dir_name"
-    else
-        loggErr "$dir_name failed to clone"
-        return 1
-    fi
-}
-
-function o(){
-
-    local open_cmd
-
-    open_cmd="$ZPWR_OPEN_CMD" || return 1
-
-    if isZsh; then
-        if [[ -z "$1" ]]; then
-            ${=open_cmd} . >> "$ZPWR_LOGFILE" 2>&1
-        else
-            ${=open_cmd} "$@" >> "$ZPWR_LOGFILE" 2>&1
-        fi
-    else
-        if [[ -z "$1" ]]; then
-            $open_cmd . > /dev/null 2>&1
-        else
-            $open_cmd "$@" >/dev/null 2>&1
-        fi
-    fi
-
-}
-
-function openmygh(){
-
-    local open_cmd
-
-    open_cmd="$ZPWR_OPEN_CMD" || return 1
-
-    if isZsh; then
-        if [[ -n "$1" ]]; then
-            ${=open_cmd} "https://github.com/$1" >> "$ZPWR_LOGFILE" 2>&1
-        else
-            ${=open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" >> "$ZPWR_LOGFILE" 2>&1
-        fi
-    else
-        if [[ -n "$1" ]]; then
-            ${open_cmd} "https://github.com/$1" > /dev/null 2>&1
-        else
-            ${open_cmd} "https://github.com/$ZPWR_GITHUB_ACCOUNT" > /dev/null 2>&1
-        fi
-    fi
-
 }
 
 alias zpg=zpgh
@@ -1216,133 +964,6 @@ function mycurl(){
     "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 |
     command sed "/^*/d" | sed -E "s@(<|>) @@g" |
     sed -E "/^(\{|\}| ) (\[|C)/d"
-}
-
-function to(){
-
-    local file
-    file="$HOME/.config/powerline/themes/tmux/default.json"
-
-    [[ ! -f "$file" ]] && loggErr "no tmux config" && return 1
-    if cat "$file" | grep -sq "external_ip"; then
-        perl -i -pe 's@^.*external_ip.*$@@' "$file"
-        printf "Removing External IP\n"
-    else
-        perl -0 -i -pe 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
-        printf "Adding External IP\n"
-    fi
-}
-
-function ww(){
-
-    if [[ -z "$1" ]]; then
-       loggErr "usage: ww <cmd> to run <cmd> forever" 
-       return 1
-    fi
-    while true; do
-        eval "$@"
-    done
-}
-
-function www(){
-
-    if [[ -z "$2" ]]; then
-       loggErr "usage: www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
-       return 1
-    fi
-
-    local time
-    time=$1
-
-    shift
-    while true; do
-        eval "$@"
-        sleep $time
-    done
-}
-
-function fordirUpdate(){
-
-    if [[ -z "$1" ]]; then
-       loggErr "usage: fordirUpdate <dirs> to run git update in each dir"
-       return 1
-    fi
-
-    local dir cmd
-
-    cmd="git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache"
-    for dir in "$@"; do
-        if [[ -d "$dir" ]]; then
-            (
-                builtin cd "$dir" && isGitDir && prettyPrint "cd $dir && $cmd" && eval "$cmd"
-            )
-        fi
-    done
-}
-
-function ff(){
-
-    if [[ -z "$1" ]]; then
-       loggErr "ff <cmd> to run <cmd> 10 times" 
-       return 1
-    fi
-
-    local i
-
-    if [[ ! -d "$1" && ! -f "$1" ]]; then
-        for (( i = 0; i < 10;++i )); do
-            eval "$@"
-        done
-    else
-       loggErr "usage: ff <cmd> to run <cmd> 10 times" 
-       return 1
-    fi
-}
-
-function fff(){
-
-    if [[ -z "$2" ]]; then
-       loggErr "usage: fff <iter> <cmd> to run <cmd> <iter> times" 
-       return 1
-    fi
-
-    local i num
-
-    num=$1
-    shift
-
-    for (( i = 0; i < $num;++i )); do
-        eval "$@"
-    done
-}
-
-function post(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: post <suffix> <cmd>"
-        return 1
-    fi
-
-    local out postfix
-    postfix="$1"
-    shift
-    out="$(eval "$@")"
-    echo "$out" | perl -lnE "say \"\$_ $postfix\""
-}
-
-function pre(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: pre <prefix> <cmd>"
-        return 1
-    fi
-
-    local out prefix
-
-    prefix="$1"
-    shift
-    out="$(eval "$@")"
-    echo "$out" | perl -lnE "say \"$prefix \$_\""
 }
 
 exists pssh && function pir(){
@@ -1549,44 +1170,6 @@ function regenConfigLinks(){
 
     prettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
     linkConf
-}
-
-function regenPowerlineLink(){
-
-    local dir
-    dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"
-    if needSudo "$dir"; then
-        prettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
-        echo sudo ln -sfn "$dir" "$TMUX_HOME"
-        (
-            builtin cd "$HOME"
-            sudo ln -sfn "$dir" "$TMUX_HOME"
-        )
-    else
-        prettyPrint "linking $dir to $TMUX_HOME/powerline"
-        echo ln -sfn "$dir" "$TMUX_HOME/powerline"
-        (
-            builtin cd "$HOME"
-            ln -sfn "$dir" "$TMUX_HOME"
-        )
-    fi
-    command tmux source-file "$HOME/.tmux.conf"
-}
-
-function commits(){
-
-    if isGitDir; then
-        if [[ $EDITOR = nvim ]];then
-            nvim -c 'call feedkeys(":Commits!\<CR>")'
-        elif [[ $EDITOR == 'mvim -v' ]];then
-            mvim -v -c 'call feedkeys(":Commits!\<CR>")'
-        else
-            vim -c 'call feedkeys(":Commits!\<CR>")'
-        fi
-    else
-        loggNotGit
-        return 1
-    fi
 }
 
 function emacsEmacsConfig(){

@@ -1,0 +1,17 @@
+function ___commits(){
+
+    if isGitDir; then
+        if [[ $EDITOR = nvim ]];then
+            nvim -c 'call feedkeys(":Commits!\<CR>")'
+        elif [[ $EDITOR == 'mvim -v' ]];then
+            mvim -v -c 'call feedkeys(":Commits!\<CR>")'
+        else
+            vim -c 'call feedkeys(":Commits!\<CR>")'
+        fi
+    else
+        loggNotGit
+        return 1
+    fi
+}
+
+___commits "$@"

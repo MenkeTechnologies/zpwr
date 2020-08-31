@@ -1,0 +1,20 @@
+function ___ff(){
+
+    if [[ -z "$1" ]]; then
+       loggErr "ff <cmd> to run <cmd> 10 times" 
+       return 1
+    fi
+
+    local i
+
+    if [[ ! -d "$1" && ! -f "$1" ]]; then
+        for (( i = 0; i < 10;++i )); do
+            eval "$@"
+        done
+    else
+       loggErr "usage: ff <cmd> to run <cmd> 10 times" 
+       return 1
+    fi
+}
+
+___ff "$@"

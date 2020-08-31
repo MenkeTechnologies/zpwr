@@ -1,0 +1,10 @@
+function ___zpwrVerbsWidget(){
+
+    zle .kill-whole-line
+    BUFFER="$(zpwrVerbsFZF)"
+    loggDebug "$BUFFER"
+    CURSOR=$#BUFFER
+    zle vi-insert
+}
+
+___zpwrVerbsWidget "$@"

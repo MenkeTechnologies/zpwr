@@ -1,0 +1,17 @@
+function ___backup(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: backup <file>"
+        return 1
+    fi
+
+    local newfile
+
+    newfile="$1".$(date +%Y%m%d.%H.%M.bak)
+    mv "$1" "$newfile"
+    cp -pR "$newfile" "$1"
+    printf \
+        "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
+}
+
+___backup "$@"

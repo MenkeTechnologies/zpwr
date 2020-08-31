@@ -1,0 +1,23 @@
+function ___o(){
+
+    local open_cmd
+
+    open_cmd="$ZPWR_OPEN_CMD" || return 1
+
+    if isZsh; then
+        if [[ -z "$1" ]]; then
+            ${=open_cmd} . >> "$ZPWR_LOGFILE" 2>&1
+        else
+            ${=open_cmd} "$@" >> "$ZPWR_LOGFILE" 2>&1
+        fi
+    else
+        if [[ -z "$1" ]]; then
+            $open_cmd . > /dev/null 2>&1
+        else
+            $open_cmd "$@" >/dev/null 2>&1
+        fi
+    fi
+
+}
+
+___o "$@"

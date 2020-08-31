@@ -1,0 +1,18 @@
+function ___fff(){
+
+    if [[ -z "$2" ]]; then
+       loggErr "usage: fff <iter> <cmd> to run <cmd> <iter> times" 
+       return 1
+    fi
+
+    local i num
+
+    num=$1
+    shift
+
+    for (( i = 0; i < $num;++i )); do
+        eval "$@"
+    done
+}
+
+___fff "$@"

@@ -1,0 +1,16 @@
+function ___pre(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: pre <prefix> <cmd>"
+        return 1
+    fi
+
+    local out prefix
+
+    prefix="$1"
+    shift
+    out="$(eval "$@")"
+    echo "$out" | perl -lnE "say \"$prefix \$_\""
+}
+
+___pre "$@"

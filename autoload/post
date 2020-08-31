@@ -1,0 +1,15 @@
+function ___post(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: post <suffix> <cmd>"
+        return 1
+    fi
+
+    local out postfix
+    postfix="$1"
+    shift
+    out="$(eval "$@")"
+    echo "$out" | perl -lnE "say \"\$_ $postfix\""
+}
+
+___post "$@"

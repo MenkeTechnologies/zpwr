@@ -1,0 +1,22 @@
+function ___hc(){
+
+    local reponame old_dir
+
+    test -z "$1" && reponame="$(basename "$(pwd)")" ||
+        reponame="$1"
+    printf "\e[1m"
+    old_dir="$(pwd)"
+    test -n "$1" && cd "$reponame"
+
+    git init
+    hub create "$reponame"
+    echo "# $reponame" > README.md
+    echo "# created by $ZPWR_GITHUB_ACCOUNT" >> README.md
+    git add .
+    git commit -m "first commit"
+    git push --set-upstream origin master
+    test -n "$1" && cd "$old_dir"
+    printf "\e[0m"
+}
+
+___hc "$@"
