@@ -1,0 +1,10 @@
+function ___pygmentcolors(){
+
+    local dir i
+    dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"
+    for i in "$dir/pygments/styles/"* ; do
+        echo "$i"
+    done
+}
+
+___pygmentcolors "$@"

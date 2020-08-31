@@ -1,0 +1,6 @@
+function ___urlSafe(){
+
+    cat | base64 | tr '+/=' '._-'
+}
+
+___urlSafe "$@"

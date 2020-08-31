@@ -1,0 +1,11 @@
+function ___scnew(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: scnew <file>"
+        return 1
+    fi
+
+    bash "$ZPWR_SCRIPTS/createScriptButDontOpenSublime.sh" "$1"
+}
+
+___scnew "$@"

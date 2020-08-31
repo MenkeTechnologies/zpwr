@@ -1,0 +1,10 @@
+function ___upload(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: upload <file> <URL>"
+        return 1
+    fi
+    command curl -vvv -fsSL -F file=@"$1" http://"$2"
+}
+
+___upload "$@"

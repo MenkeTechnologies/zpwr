@@ -722,56 +722,9 @@ if commandExists systemctl; then
 
 fi
 
-function urlSafe(){
-
-    cat | base64 | tr '+/=' '._-'
-}
-
-function cgh(){
-
-    local user
-
-    [[ -z "$1" ]] && user="$ZPWR_GITHUB_ACCOUNT" || user="$1"
-    curl -s "https://github.com/$user" |
-    command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
-}
-
-function upload(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: upload <file> <URL>"
-        return 1
-    fi
-    command curl -vvv -fsSL -F file=@"$1" http://"$2"
-}
-
-function scnew(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: scnew <file>"
-        return 1
-    fi
-
-    bash "$ZPWR_SCRIPTS/createScriptButDontOpenSublime.sh" "$1"
-}
-
-function suc(){
-
-    subl "$ZPWR_SCRIPTS"
-    f "$ZPWR_SCRIPTS"
-    python3 "$PYSCRIPTS/textEditorTwoColumns.py"
-}
-
-
 function animate(){
 
     bash "$ZPWR_SCRIPTS/animation"
-}
-
-function search(){
-
-    test -z $2 && command grep -iRnC 5 "$1" * ||
-        command grep -iRnC 5 "$1" "$2"
 }
 
 function cd(){
@@ -791,27 +744,7 @@ function pstreemonitor(){
     "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
 }
 
-function return2(){
-
-    if isZsh; then
-        exec 2> /dev/tty
-    else
-        loggErr "only for zsh"
-        return 1
-    fi
-}
-
-function color2(){
-
-    if isZsh; then
-        exec 2> >(redText.sh)
-    else
-        loggErr "only for zsh"
-        return 1
-    fi
-}
-
-alias gcl && {
+alias gcl >/dev/null 2>&1 && {
     unalias gcl
 }
 
@@ -830,41 +763,15 @@ alias zp=zpwr
 alias zpw=zpwr
 alias zpwrgh=zpwr
 
-function zpwr(){
-
-    if test -z $1;then
-        cd "$ZPWR"
-    else
-        . zpwr.zsh "$@"
-    fi
-}
-
 function getrcdev(){
 
     getrc dev
-}
-
-function torip(){
-
-    local ip
-
-    ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
-    whois $ip
-    echo $ip
 }
 
 function toriprenew() {
 
     printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' |
         nc 127.0.0.1 9051
-}
-
-function mycurl(){
-
-    command curl -fsSL -A \
-    "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 |
-    command sed "/^*/d" | sed -E "s@(<|>) @@g" |
-    sed -E "/^(\{|\}| ) (\[|C)/d"
 }
 
 exists pssh && function pir(){
@@ -949,15 +856,6 @@ function agIntoFzf(){
         perl -pe 's@^(.*?):(\d+):(.*)@+$2 "'"$PWD/"'$1"@;s@\n@ @g'
 
     fi
-}
-
-function pygmentcolors(){
-
-    local dir i
-    dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"
-    for i in "$dir/pygments/styles/"* ; do
-        echo "$i"
-    done
 }
 
 function detachall(){

@@ -1,0 +1,10 @@
+function ___cgh(){
+
+    local user
+
+    [[ -z "$1" ]] && user="$ZPWR_GITHUB_ACCOUNT" || user="$1"
+    curl -s "https://github.com/$user" |
+    command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
+}
+
+___cgh "$@"

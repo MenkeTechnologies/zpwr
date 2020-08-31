@@ -1,0 +1,10 @@
+function ___zpwr(){
+
+    if test -z $1;then
+        cd "$ZPWR"
+    else
+        . zpwr.zsh "$@"
+    fi
+}
+
+___zpwr "$@"

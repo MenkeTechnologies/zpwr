@@ -1,0 +1,7 @@
+function ___search(){
+
+    test -z $2 && command grep -iRnC 5 "$1" * ||
+        command grep -iRnC 5 "$1" "$2"
+}
+
+___search "$@"

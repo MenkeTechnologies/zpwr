@@ -1,0 +1,11 @@
+function ___return2(){
+
+    if isZsh; then
+        exec 2> /dev/tty
+    else
+        loggErr "only for zsh"
+        return 1
+    fi
+}
+
+___return2 "$@"
