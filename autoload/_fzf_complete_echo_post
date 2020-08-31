@@ -1,0 +1,6 @@
+function ___fzf_complete_echo_post() {
+
+    perl -pe '$_="\$$_" if ! m{^\$.*}'
+}
+
+___fzf_complete_echo_post "$@"

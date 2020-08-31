@@ -1,0 +1,9 @@
+# z ;<tab>
+function ___fzf_complete_z() {
+
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
+    z -l |& perl -lne 'for (reverse <>){do{($_=$1)=~s@$ENV{HOME}@~@;print} if m{\d+\.*\d+\s*(.*)}}'
+    )
+}
+
+___fzf_complete_z "$@"

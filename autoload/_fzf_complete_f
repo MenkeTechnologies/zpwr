@@ -1,0 +1,9 @@
+# f ;<tab>
+function ___fzf_complete_f() {
+
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
+        find . -type d |& perl -lpe '$_=~s@$ENV{HOME}@~@'
+    )
+}
+
+___fzf_complete_f "$@"

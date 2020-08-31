@@ -1,0 +1,11 @@
+# r ;<tab>
+function ___fzf_complete_r() {
+
+    local dir
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS_2 _fzf_complete '--ansi' "$@" < <(
+  dirname $(pwd) |
+    perl -e '$s=<>;chomp $s;$c=1;print "$c $s\n";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c." $s\n"};print ++$c." /"'
+    )
+}
+
+___fzf_complete_r "$@"

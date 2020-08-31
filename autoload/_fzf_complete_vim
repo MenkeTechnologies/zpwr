@@ -1,0 +1,9 @@
+# vim ;<tab>
+function ___fzf_complete_vim() {
+
+  _fzf_complete '-m' "$@" < <(
+        ZPWR_USE_NEOVIM=false catNvimOrVimInfo | perl -le '@l=reverse<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;print $o if -f $f}if m{^>.(.*)}}'
+    )
+}
+
+___fzf_complete_vim "$@"

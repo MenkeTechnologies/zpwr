@@ -1,0 +1,9 @@
+# alias ;<tab>
+function ___fzf_complete_alias() {
+
+  _fzf_complete '-m' "$@" < <(
+      alias | sed 's@=.*@@'
+    )
+}
+
+___fzf_complete_alias "$@"

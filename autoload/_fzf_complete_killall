@@ -1,0 +1,9 @@
+# killall ;<tab>
+function ___fzf_complete_killall() {
+
+  _fzf_complete '-m' "$@" < <(
+    command ps -e -o command | sed -n '2,$p'
+    )
+}
+
+___fzf_complete_killall "$@"

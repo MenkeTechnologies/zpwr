@@ -1,0 +1,9 @@
+# mvim ;<tab>
+function ___fzf_complete_mvim() {
+
+  _fzf_complete '-m' "$@" < <(
+    perl -lne 'do{($_=$1)=~s@$ENV{HOME}@~@;print}if m{^>.(.*)}' ~/.viminfo
+    )
+}
+
+___fzf_complete_mvim "$@"

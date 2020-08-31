@@ -1,0 +1,6 @@
+function ___fzf_complete_r_post() {
+
+    cut -d ' ' -f1
+}
+
+___fzf_complete_r_post "$@"
