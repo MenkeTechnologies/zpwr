@@ -525,40 +525,6 @@ function zpwrUpdateAllGitDirs(){
         $(cat $ZPWR_ALL_GIT_DIRS)
 }
 
-function zpwrListVerbs(){
-
-    local len sep k v i width
-    sep=" "
-    width=25
-
-    for k in ${(ko)ZPWR_VERBS[@]};do
-        len=$#k
-        printf $k
-        spaces=$(( width - len ))
-
-        for (( i = 0; i < $spaces; ++i )); do
-            printf $sep
-        done
-        printf "${ZPWR_VERBS[$k]}\n"
-    done
-}
-
-function zpwrVerbsFZF(){
-
-    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
-        logg "regenerating keys for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
-        logg "regenerating values for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-
-    zpwrListVerbs |
-        eval "$ZPWR_FZF -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
-        perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
-}
-
 function zpwrNumVerbs(){
 
     #the size of hashmap
@@ -604,44 +570,12 @@ function zpwrBackupHistfile(){
     )
 }
 
-function zpwrRestoreHistfile(){
-
-    prettyPrint "Restore backup of $HISTFILE"
-    (
-        builtin cd "$HOME"
-        command rm "$HISTFILE"
-        prettyPrint command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
-        command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
-        builtin fc -R "$HISTFILE"
-    )
-}
-
 function zpwrCleanAll() {
 
     prettyPrint "clearCache"
     clearCache
     prettyPrint "clear $zpwrDirsClean"
     zpwrClean
-}
-
-function zpwrClean() {
-
-    local dir files
-
-    if ! (( $#zpwrDirsClean )); then
-        loggErr "zpwrDirsClean is empty."
-        return 1
-    fi
-
-    for dir in ${zpwrDirsClean[@]} ; do
-
-        files=("$dir"/*(N))
-
-        if (( $#files )); then
-            prettyPrint sudo rm -rfv "$dir"/*(N)
-            sudo rm -rfv "$dir"/*(N)
-        fi
-    done
 }
 
 function banner(){
@@ -844,22 +778,6 @@ function intoFzf(){
 function lsoffzf(){
 
     LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | $ZPWR_FZF -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"
-}
-
-# cache autoload +X functions,aliases, builtins,reswords into file
-# search with fzf
-function clearListFZF(){
-
-    {
-        print -l ${(k)functions}
-        print -l ${(v)commands}
-        print -l ${(k)aliases}
-        print -l ${(k)galiases}
-        print -l ${(k)builtins}
-        print -l ${(k)reswords}
-        ls -d *
-    } |
-    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS"
 }
 
 function emacsFzfWordsearchVerbEdit(){

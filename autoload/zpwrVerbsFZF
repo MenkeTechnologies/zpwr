@@ -1,0 +1,17 @@
+function ___zpwrVerbsFZF(){
+
+    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
+        logg "regenerating keys for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
+        logg "regenerating values for $ZPWR_ENV"
+        regenSearchEnv
+    fi
+
+    zpwrListVerbs |
+        eval "$ZPWR_FZF -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
+        perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
+}
+
+___zpwrVerbsFZF "$@"
