@@ -687,33 +687,6 @@ function sub (){
     zle .accept-line
 }
 
-function zpwrEditTag(){
-
-    if ! isGitDir; then
-        loggNotGit
-        return 1
-    fi
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrEditTag <tag>"
-        return 1
-    fi
-
-    local tag desc wantedTag
-
-    wantedTag="$1"
-
-    while read tag desc; do
-        if [[ $tag == *$wantedTag* ]]; then
-            break
-        fi
-    done < <(git tag --sort=-v:refname -n -l)
-
-    BUFFER="git tag -fam \"$desc\" $tag && git push -f origin --tags"
-
-    print -rz -- "$BUFFER"
-}
-
 function emacsAllEdit(){
 
     if ! exists emacs; then
@@ -827,32 +800,6 @@ function gtagsIntoFzf(){
         eval "$ZPWR_FZF $FZF_GTAGS_OPTS" |
     perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "'"$HOME/"'$3"@;s@\n@ @g'
     )
-}
-
-function getGtagsEdit(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: getGtagsEdit <editor>"
-        return 1
-    fi
-
-    local firstdir editor file mywords
-
-    editor="$1"
-    BUFFER=$(gtagsIntoFzf)
-
-    if [[ -n "$BUFFER" ]]; then
-        mywords=(${(z)BUFFER})
-        firstdir=${mywords[2]:h}
-        loggDebug "builtin cd $firstdir\""
-        #:h takes aways last "
-        BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
-        loggDebug "$BUFFER"
-        print -zr -- "$BUFFER"
-    else
-        return
-    fi
-
 }
 
 function emacsZpwrGtags(){
@@ -1294,54 +1241,6 @@ function killLsofVerbEdit(){
     fi
 }
 
-
-function fzfEnvVerbAccept(){
-
-    local num sel
-
-    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
-        loggDebug "regenerating keys for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
-        loggDebug "regenerating values for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-
-    sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
-        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS")
-
-    if [[ -n "$sel" ]]; then
-        print -sr -- "$sel"
-        eval "$sel"
-    else
-        return
-    fi
-}
-
-function fzfEnvVerbEdit(){
-
-    local num sel
-
-    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
-        loggDebug "regenerating keys for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
-        loggDebug "regenerating values for $ZPWR_ENV"
-        regenSearchEnv
-    fi
-
-    sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
-        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS")
-
-    if [[ -n "$sel" ]]; then
-        print -zr -- "$sel"
-    else
-        return
-    fi
-}
-
 function historyVerbAccept(){
 
     local num sel
@@ -1349,37 +1248,6 @@ function historyVerbAccept(){
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $ZPWR_FZF |
     perl -lane 'print "@F[1..$#F]"')
 
-}
-
-function historyVerbEdit(){
-
-    local num sel
-      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
-    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $ZPWR_FZF |
-    perl -lane 'print "@F[1..$#F]"')
-
-    if [[ -n "$sel" ]]; then
-        print -zr -- "$sel"
-    else
-        return
-    fi
-}
-
-function intoFzfAg(){
-
-    local firstdir editor mywords
-
-    mywords=("${(z)BUFFER}")
-
-    if echo ${mywords[1]} | command grep -sq vim; then
-        BUFFER="$BUFFER $(agIntoFzf vim)"
-    else
-        BUFFER="$BUFFER $(agIntoFzf)"
-    fi
-
-    BUFFER=${BUFFER:s@  @ @}
-
-    CURSOR=$#BUFFER
 }
 
 function keySender(){
@@ -1428,19 +1296,6 @@ function clearLine() {
 
     keyClear
     LBUFFER=
-}
-
-function regenZshCompCache(){
-
-    local lines
-
-    prettyPrint "regen zsh compsys cache"
-    lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
-
-    echo command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*(DN)
-    command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*(DN)
-    compinit -u -d "$ZSH_COMPDUMP"
-    echo "$lines" >> "$ZSH_COMPDUMP"
 }
 
 function regenSearchEnv(){
@@ -1568,20 +1423,6 @@ function findFzfNoZLEEmacs(){
     fi
 
     findFzfNoZLE "$ZPWR_EMACS_CLIENT"
-}
-
-function fzfCommits(){
-
-    BUFFER=""
-    zle .kill-whole-line
-    if isGitDir; then
-        BUFFER="vim -v -c Commits! -c quitall"
-        zle .accept-line
-    else
-        zle .kill-whole-line
-        zle .accept-line
-        return 1
-    fi
 }
 
 function asVar(){
