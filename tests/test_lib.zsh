@@ -13,8 +13,13 @@ ZPWR_RE_ENV_FILE="$PWD/.zpwr_re_env.sh"
 ALIAS_FILE="$PWD/.shell_aliases_functions.sh"
 ZPWR_VERBS_FILE="$PWD/scripts/zpwr.zsh"
 ZPWR_FN_FILE="$PWD/scripts/lib.sh"
+ZPWR_AUTOLOAD="$PWD/autoload"
+ZPWR_COMPS="$PWD/comps"
 TEST_FILE=tests/testfile
 TOKENS_FILE=local/.tokens.sh
+
+fpath=($ZPWR_AUTOLOAD $ZPWR_COMPS $fpath)
+autoload -U $ZPWR_AUTOLOAD/*(.:t)
 
 
 if [[ ! -f $ZPWR_ENV_FILE ]]; then
