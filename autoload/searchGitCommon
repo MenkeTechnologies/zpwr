@@ -1,0 +1,10 @@
+function ___searchGitCommon(){
+
+    local out
+
+    out="$(goThere)"
+    echo "$out"
+    eval "$out"
+}
+
+___searchGitCommon "$@"

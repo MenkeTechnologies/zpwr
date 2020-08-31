@@ -1,0 +1,5 @@
+function ___getrcdev(){
+
+    getrc dev
+}
+___getrcdev "$@"

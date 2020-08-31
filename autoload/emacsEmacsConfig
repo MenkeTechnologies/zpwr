@@ -1,0 +1,11 @@
+function ___emacsEmacsConfig(){
+
+    builtin cd $ZPWR
+    ${=ZPWR_EMACS_CLIENT} \
+    "$ZPWR_INSTALL/.spacemacs" \
+    "$ZPWR_INSTALL/emacs/snippets/"*-mode/*
+    clearList
+    isGitDir && git diff HEAD
+}
+
+___emacsEmacsConfig "$@"

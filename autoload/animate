@@ -1,0 +1,6 @@
+function ___animate(){
+
+    bash "$ZPWR_SCRIPTS/animation"
+}
+
+___animate "$@"

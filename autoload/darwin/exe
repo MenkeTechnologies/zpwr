@@ -1,0 +1,5 @@
+function ___exe(){
+
+    python3 "$PYSCRIPTS/ssh_runner.py" "$@"
+}
+___exe "$@"

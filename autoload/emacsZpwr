@@ -1,0 +1,9 @@
+function ___emacsZpwr(){
+
+    builtin cd $ZPWR
+    ${=ZPWR_EMACS_CLIENT} .
+    clearList
+    isGitDir && git diff HEAD
+}
+
+___emacsZpwr "$@"

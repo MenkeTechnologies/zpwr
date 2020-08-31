@@ -1,0 +1,6 @@
+function ___db2(){
+
+    python3 "$PYSCRIPTS/logIntoMyDB.py"
+}
+
+___db2 "$@"

@@ -1,0 +1,11 @@
+function ___vimEmacsConfig(){
+
+    builtin cd $ZPWR
+    vim \
+    "$ZPWR_INSTALL/.spacemacs" \
+    "$ZPWR_INSTALL/emacs/snippets/"*-mode/*
+    clearList
+    isGitDir && git diff HEAD
+}
+
+___vimEmacsConfig "$@"

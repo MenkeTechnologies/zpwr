@@ -1,0 +1,6 @@
+function ___db(){
+
+    python3 "$PYSCRIPTS/loginDBChrome.py"
+}
+
+___db "$@"

@@ -1,0 +1,6 @@
+function ___alternateQuotes(){
+
+    BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"
+}
+
+___alternateQuotes "$@"

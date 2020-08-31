@@ -1,0 +1,6 @@
+function ___regenGtagsPygments(){
+
+    regenGtagsType pygments
+}
+
+___regenGtagsPygments "$@"

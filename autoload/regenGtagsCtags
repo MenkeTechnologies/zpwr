@@ -1,0 +1,7 @@
+function ___regenGtagsCtags(){
+
+    regenGtagsType ctags
+
+}
+
+___regenGtagsCtags "$@"

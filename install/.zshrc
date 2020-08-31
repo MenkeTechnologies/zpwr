@@ -337,7 +337,8 @@ for plug in ${plugins[@]}; do
 done
 
 # add ZPWR autoload dirs to fpath
-fpath=($ZPWR_AUTOLOAD $ZPWR_COMPS $fpath)
+fpath=($ZPWR_AUTOLOAD/linux $ZPWR_AUTOLOAD/darwin $ZPWR_AUTOLOAD/systemctl $ZPWR_AUTOLOAD $ZPWR_COMPS $fpath)
+
 autoload -z $ZPWR_AUTOLOAD/*(.:t)
 autoload -Uz zrecompile zm zargs
 
@@ -423,14 +424,10 @@ alias -r > "$ZPWR_LOCAL/.common_aliases"
 
 #{{{                    MARK:Override OMZ config
 #**************************************************************
-function addOMZAttrib() {
-    zcompdump_metadata="#omz revision: $(builtin cd -q "$ZSH"; git rev-parse HEAD 2>/dev/null)\n#omz fpath: $fpath"
-    echo "\n$zcompdump_metadata" | tee -a "$ZSH_COMPDUMP" &>/dev/null
-}
-
 local recachedCompsys lines
 recachedCompsys=false
 # reload compsys cache if file is stale for 1 week
+
 for dump in ~/.zcompdump*(N.mh+168); do
     logg "regenerating stale '$dump' older than 1 week"
     lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
@@ -513,11 +510,6 @@ function noPonyBanner(){
 function vimZpwrCtags(){
 
     cat "$ZPWR_SCRIPTS/tags" | fzf
-}
-
-function alternateQuotes(){
-
-    BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"
 }
 
 function emacsFzfWordsearchVerbEdit(){

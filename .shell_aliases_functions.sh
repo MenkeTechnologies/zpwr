@@ -511,223 +511,33 @@ exists idea && {
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 
-    function exe(){
-
-        python3 "$PYSCRIPTS/ssh_runner.py" "$@"
-    }
-
-    function nn(){
-
-        if [[ -z "$2" ]];then
-            loggErr "usage: Title is \$1 and message is \$2..." &&
-            return 1
-        fi
-
-        local title msg
-
-        title="$1"
-        msg="$2"
-        echo "display notification \"$msg\" with title \"$title\"" |
-            osascript
-    }
-
-    function db(){
-
-        python3 "$PYSCRIPTS/loginDBChrome.py"
-    }
-
-    function db2(){
-
-        python3 "$PYSCRIPTS/logIntoMyDB.py"
-    }
-
-    function scriptToPDF(){
-
-        local tempFile
-
-        tempFile="$HOME/__test.ps"
-        vim "$1" -c "hardcopy > $tempFile" -c quitall
-        cat "$tempFile" | open -fa Preview
-        rm "$tempFile"
-    }
+    if isZsh; then
+        autoload -z $ZPWR_AUTOLOAD/darwin/*(.:t)
+    fi
 
 else
-    exists ps2pdf && {
-        function scriptToPDF(){
-
-            if [[ -z "$1" ]]; then
-                loggErr "usage: scriptToPDF <script>"
-                return 1
-            fi
-            local tempFile
-
-            tempFile="$HOME/__test.ps"
-
-            vim "$1" -c "hardcopy > $tempFile" -c quitall
-            ps2pdf "$tempFile" "${1%%.*}".pdf
-            rm "$tempFile"
-        }
-    }
-
-    function tailufw(){
-
-        local size
-
-        size=100
-
-        if [[ -n $1 ]]; then
-            size=$1
-        fi
-        if exists ccze; then
-            sudo tail -n $size -F /var/log/{syslog,messages} |
-                command grep -i ufw | ccze
-        else
-            sudo tail -n $size -F /var/log/{syslog,messages} |
-                command grep -i ufw
-        fi
-    }
+    if isZsh; then
+        autoload -z $ZPWR_AUTOLOAD/linux/*(.:t)
+    fi
 
 fi
 
 if commandExists systemctl; then
 
-    function restartZabbixAgent(){
-
-        if exists ccze; then
-    sudo systemctl restart zabbix-agent
-    sudo systemctl --no-pager status zabbix-agent
-    sudo journalctl -n 100 --no-pager
-    sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log | ccze
-        else
-    sudo systemctl restart zabbix-agent
-    sudo systemctl --no-pager status zabbix-agent
-    sudo journalctl -n 100 --no-pager
-    sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
-        fi
-    }
-
-    function ssd() {
-
-        local service
-
-        for service in "$@"; do
-            prettyPrint "sudo systemctl stop $service"
-            prettyPrint "sudo systemctl disable $service"
-            sudo systemctl stop "$service"
-            sudo systemctl disable "$service"
-        done
-    }
-
-    function ssu() {
-
-        local service
-
-        for service in "$@"; do
-            prettyPrint "sudo systemctl start $service"
-            prettyPrint "sudo systemctl enable $service"
-            sudo systemctl start "$service"
-            sudo systemctl enable "$service"
-        done
-    }
-
-    function restart(){
-
-        if [[ -z "$1" ]]; then
-            loggErr "usage: restart <services...>"
-            return 1
-        fi
-
-        local src_dir service service_path group
-
-        service="$1"
-        src_dir="$ZPWR_INSTALL"
-        service_path="$src_dir/$service.service"
-
-        test -d "$src_dir" ||
-    { loggErr "$src_dir does not exists." && return 1; }
-        test -f "$service_path" ||
-    { loggErr "$service_path does not exists so falling back to $1." && service_path="$1"; }
-
-        test -f "$service_path" ||
-    { loggErr "$service_path does not exists so exiting." && return 1; }
-
-        test -d "/etc/systemd/system" ||
-    { loggErr "/etc/systemd/system does not exists. Is systemd installed?" && return 1; }
-
-        ( builtin cd "$src_dir" && git pull; )
-        group=$(id -gn)
-
-        cp "$service_path" "$ZPWR_LOCAL"
-
-        service_path="$ZPWR_LOCAL/$service.service"
-
-        if ! test -f "$service_path"; then
-            loggErr "$service_path does not exists"
-            return 1
-        fi
-
-
-        perl -i -pe "s@pi@$USER@g" "$service_path"
-
-        if [[ $UID != 0 ]]; then
-            perl -i -pe "s@^Group=.*@Group=$group@g" "$service_path"
-            perl -i -pe "s@/home/$USER/\\.zpwr/scripts@$ZPWR_SCRIPTS@g" "$service_path"
-            perl -i -pe "s@/home/$USER/\\.zpwr@$ZPWR@g" "$service_path"
-        else
-            perl -i -pe "s@/home/root@/root@;" "$service_path"
-            perl -i -pe "s@/root/\\.zpwr/scripts@$ZPWR_SCRIPTS@g" "$service_path"
-            perl -i -pe "s@/root/\\.zpwr@$ZPWR@g" "$service_path"
-        fi
-
-
-        sudo cp "$service_path" /etc/systemd/system
-        sudo systemctl daemon-reload
-        sudo systemctl restart $service.service
-        sudo systemctl --no-pager -l status $service.service
-        sudo journalctl -f
-    }
+    if isZsh; then
+        autoload -z $ZPWR_AUTOLOAD/systemctl/*(.:t)
+    fi
 
 fi
-
-function animate(){
-
-    bash "$ZPWR_SCRIPTS/animation"
-}
-
-function cd(){
-
-    # builtin is necessary here to distinguish
-    # bt function name and builtin cd command
-    # don't want to recursively call this function
-    builtin cd "$@"
-    if [[ $ZPWR_CD_AUTO_LS == true ]]; then
-        clearList
-    fi
-}
 
 alias gcl >/dev/null 2>&1 && {
     unalias gcl
 }
 
 alias zpg=zpgh
-
-function zpgh(){
-
-    if test -z $1;then
-        openmygh "$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME"
-    else
-        . zpwr.zsh "$@"
-    fi
-}
-
 alias zp=zpwr
 alias zpw=zpwr
 alias zpwrgh=zpwr
-
-function getrcdev(){
-
-    getrc dev
-}
 
 exists pssh && function pir(){
 
@@ -742,54 +552,6 @@ if [[ $ZPWR_LEARN != false ]]; then
     export ZPWR_SCHEMA_NAME=root
     export ZPWR_TABLE_NAME=LearningCollection
 fi
-
-function regenGtagsCtags(){
-
-    regenGtagsType ctags
-
-}
-function regenGtagsPygments(){
-
-    regenGtagsType pygments
-}
-
-function searchGitCommon(){
-
-    local out
-
-    out="$(goThere)"
-    echo "$out"
-    eval "$out"
-}
-
-function emacsEmacsConfig(){
-
-    builtin cd $ZPWR
-    ${=ZPWR_EMACS_CLIENT} \
-    "$ZPWR_INSTALL/.spacemacs" \
-    "$ZPWR_INSTALL/emacs/snippets/"*-mode/*
-    clearList
-    isGitDir && git diff HEAD
-}
-
-function vimEmacsConfig(){
-
-    builtin cd $ZPWR
-    vim \
-    "$ZPWR_INSTALL/.spacemacs" \
-    "$ZPWR_INSTALL/emacs/snippets/"*-mode/*
-    clearList
-    isGitDir && git diff HEAD
-}
-
-function emacsZpwr(){
-
-    builtin cd $ZPWR
-    ${=ZPWR_EMACS_CLIENT} .
-    clearList
-    isGitDir && git diff HEAD
-}
-
 #}}}***********************************************************
 
 #{{{                    MARK:Global Alias
