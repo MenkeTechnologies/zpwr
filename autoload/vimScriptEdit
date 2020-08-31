@@ -1,0 +1,17 @@
+function ___vimScriptEdit(){
+
+    BUFFER="$(fzvimScript)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    BUFFER="$EDITOR $BUFFER"
+    loggDebug "builtin cd $ZPWR_SCRIPTS"
+    eval "builtin cd $ZPWR_SCRIPTS"
+
+    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+    print -s -- "$BUFFER"
+    eval "$BUFFER"
+}
+
+___vimScriptEdit "$@"

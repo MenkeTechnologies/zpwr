@@ -1,0 +1,20 @@
+function ___fzfFilesearchVerb(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: fzfFilesearchVerb <editor>"
+        return 1
+    fi
+
+    local editor file
+
+    editor="$1"
+    file=$(fzfFileSearch)
+
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -sr -- "$editor $file; clearList; isGitDir && git diff HEAD"
+    eval "$editor $file; clearList; isGitDir && git diff HEAD"
+}
+
+___fzfFilesearchVerb "$@"

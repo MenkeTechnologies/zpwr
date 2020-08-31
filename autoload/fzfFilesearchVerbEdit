@@ -1,0 +1,20 @@
+function ___fzfFilesearchVerbEdit(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: fzfFilesearchVerbEdit <editor>"
+        return 1
+    fi
+
+    local editor sel
+
+    editor="$1"
+    sel=$(fzfFileSearch)
+    if [[ -n "$sel" ]]; then
+        BUFFER="$editor $sel"
+        print -rz -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+___fzfFilesearchVerbEdit "$@"

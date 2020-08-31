@@ -687,80 +687,6 @@ function sub (){
     zle .accept-line
 }
 
-function emacsAllEdit(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    BUFFER="$(fzvimAll)"
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
-    loggDebug "builtin cd $ZPWR"
-    eval "builtin cd $ZPWR"
-
-    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
-    print -s -- "$BUFFER"
-    eval "$BUFFER"
-}
-
-function emacsScriptEdit(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    BUFFER="$(fzvimScript)"
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
-    loggDebug "builtin cd $ZPWR_SCRIPTS"
-    eval "builtin cd $ZPWR_SCRIPTS"
-
-    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
-    print -s -- "$BUFFER"
-    eval "$BUFFER"
-}
-
-function vimAllEdit(){
-
-    BUFFER="$(fzvimAll)"
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    BUFFER="$EDITOR $BUFFER"
-    loggDebug "builtin cd $ZPWR"
-    eval "builtin cd $ZPWR"
-
-    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
-    print -s -- "$BUFFER"
-    eval "$BUFFER"
-}
-
-function vimScriptEdit(){
-
-    BUFFER="$(fzvimScript)"
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    BUFFER="$EDITOR $BUFFER"
-    loggDebug "builtin cd $ZPWR_SCRIPTS"
-    eval "builtin cd $ZPWR_SCRIPTS"
-
-    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
-    print -s -- "$BUFFER"
-    eval "$BUFFER"
-}
-
 function sudoEmacsRecent(){
 
     if ! exists emacs; then
@@ -886,7 +812,6 @@ function updater (){
     zle .accept-line
 }
 
-
 function dbz() {
 
     zle .kill-whole-line
@@ -953,14 +878,6 @@ function clearListFZF(){
     eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS"
 }
 
-function fzvimScript(){
-
-    zpwrScriptList |
-        perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
-    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-}
-
 function emacsFzfWordsearchVerbEdit(){
 
     if ! exists emacs; then
@@ -988,69 +905,6 @@ function vimFzfWordsearchVerbEdit(){
 
 function vimFzfWordsearchVerb(){
     fzfWordsearchVerb "$EDITOR"
-}
-
-function fzfFileSearch(){
-
-    command find -L . -mindepth 1 \
-        \( -path '*/\\.*' -o -fstype 'sysfs' \
-        -o -fstype 'devfs' -o -fstype 'devtmpfs' \
-        -o -fstype 'proc' \) -prune -o -type f -print \
-        -o -type l -print 2> /dev/null | cut -c3- |
-        eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" | perl -ne 'chomp $_; print "\"$_\" "'
-}
-
-function fzfFilesearchVerbEdit(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: fzfFilesearchVerbEdit <editor>"
-        return 1
-    fi
-
-    local editor sel
-
-    editor="$1"
-    sel=$(fzfFileSearch)
-    if [[ -n "$sel" ]]; then
-        BUFFER="$editor $sel"
-        print -rz -- "$BUFFER"
-    else
-        return
-    fi
-}
-
-function zpwrZstyle() {
-
-    local sel
-
-    sel=$(zstyle -L | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m)
-
-    if [[ -n "$sel" ]]; then
-        BUFFER="$editor $sel"
-        print -rz -- "$BUFFER"
-    else
-        return
-    fi
-}
-
-
-function fzfFilesearchVerb(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: fzfFilesearchVerb <editor>"
-        return 1
-    fi
-
-    local editor file
-
-    editor="$1"
-    file=$(fzfFileSearch)
-
-    if [[ -z "$file" ]]; then
-        return
-    fi
-    print -sr -- "$editor $file; clearList; isGitDir && git diff HEAD"
-    eval "$editor $file; clearList; isGitDir && git diff HEAD"
 }
 
 function emacsFzfFilesearchVerbEdit(){
