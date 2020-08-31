@@ -98,10 +98,10 @@ To install to a custom directory, clone the project to that directory and `expor
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
 - zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
 - zpwr subcommands count `zpwr verbscount`
-- zpwr subcommands into fzf `zpwr verbs`, 240+ zpwr verbs
+- zpwr subcommands into fzf `zpwr verbs`, 260+ zpwr verbs
 - zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
-- 94+ centralized environment variables in ZPWR namespace to control functionality
+- 100+ centralized environment variables in ZPWR namespace to control functionality
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
 - centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - user specific ZPWR files in `~/.zpwr/local` git ignored
@@ -120,7 +120,7 @@ To install to a custom directory, clone the project to that directory and `expor
 - tmux
 - neovim with 78 plugins and python3/node support
 - perl
-- bash
+- bash (4.0+, 3.2 not supported)
 - oh-my-zsh with 80 plugins of which 45 are custom
 - forked powerlevel9k zsh prompt with ~dirs
 - youcompleteme
@@ -456,6 +456,11 @@ test -z $ZPWR_REMOTE && export ZPWR_REMOTE=false
 test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
+# autoloaded non completion functions
+evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD " "$ZPWR/autoload" "$ZPWR"
+# autoloaded completion functions
+evalIfNeeded ZPWR_COMPS "$ZPWR_COMPS " "$ZPWR/comps" "$ZPWR"
+# same as zpwr local
 evalIfNeeded ZPWR_HIDDEN_DIR "$ZPWR_HIDDEN_DIR" "$ZPWR/local" "$ZPWR"
 # private tokens file sourced before 
 evalIfNeeded ZPWR_TOKEN_PRE "$ZPWR_TOKEN_PRE" "$ZPWR_LOCAL/.tokens.sh" "$ZPWR_LOCAL"
@@ -536,7 +541,7 @@ exists zunit && {
 ```
 
 ## Shell Startup speed
-Running `zpwr regen` will zcompile all zpwr configs and all compsys completions in fpath.  This will maximize startup speed.
+Running `zpwr regen` will zcompile all zpwr configs and all autoloaded funtions and compsys completions in fpath.  This will maximize startup speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/comps` contains autoloaded compsys funtions.
 Replacing the lolcat into ponysay banner like so on startup will further increase speed.
 ```sh
 export ZPWR_INTRO_BANNER=nopony
