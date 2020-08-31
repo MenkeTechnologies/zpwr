@@ -513,24 +513,6 @@ if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
 
-function zpwrAllUpdates(){
-
-    (
-        builtin cd "$ZPWR" &&
-            git pull &&
-            {
-                if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
-                    bash "$ZPWR_BANNER_SCRIPT"
-                fi
-            } &&
-            linkConf
-    )
-
-   zpwr updatedeps
-   zpwr regen
-   zpwr update
-}
-
 function zpwrForAllGitDirs(){
 
     if [[ -z "$1" ]]; then
@@ -560,6 +542,7 @@ function zpwrUpdateAllGitDirs(){
 }
 
 function zpwrListVerbs(){
+
     local len sep k v i width
     sep=" "
     width=25
@@ -805,48 +788,6 @@ function vimScriptEdit(){
     eval "$BUFFER"
 }
 
-function sudoEditorRecent(){
-
-    local firstdir editor mywords
-
-    editor="$1"
-
-    BUFFER="$(fzvim $editor)"
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    mywords=(${(z)BUFFER})
-    firstdir=${mywords[1]:h}
-    BUFFER="sudo $editor $BUFFER"
-    loggDebug "builtin cd $firstdir\""
-    #:h takes aways last "
-    eval "builtin cd $firstdir\""
-    loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
-    print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
-    eval "$BUFFER; clearList;isGitDir && git diff HEAD"
-}
-
-function editorRecent(){
-
-    local firstdir editor mywords
-
-    editor="$1"
-
-    BUFFER="$(fzvim $editor)"
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    mywords=(${(z)BUFFER})
-    firstdir=${mywords[1]:h}
-    BUFFER="$editor $BUFFER"
-    loggDebug "builtin cd $firstdir\""
-    #:h takes aways last "
-    eval "builtin cd $firstdir\""
-    loggDebug "$BUFFER; clearList;isGitDir && git diff HEAD"
-    print -s -- "$BUFFER; clearList;isGitDir && git diff HEAD"
-    eval "$BUFFER; clearList;isGitDir && git diff HEAD"
-}
-
 function sudoEmacsRecent(){
 
     if ! exists emacs; then
@@ -1071,97 +1012,6 @@ function fzvimScript(){
         perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
     eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-}
-
-function vimFzf(){
-
-    local firstdir editor mywords
-
-    zle .kill-whole-line
-    BUFFER="$(fzvim vim)"
-    mywords=(${(z)BUFFER})
-    if (( $#mywords == 0 )); then
-        zle .kill-whole-line
-    else
-        firstdir=${mywords[1]:h}
-        loggDebug "words='$mywords[1]'=>'$firstdir'"
-        BUFFER="$EDITOR $BUFFER"
-        #:h takes aways last "
-        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
-        zle .accept-line
-    fi
-}
-
-function emacsFzf(){
-
-    local firstdir editor mywords
-
-    zle .kill-whole-line
-    BUFFER="$(fzvim $ZPWR_EMACS_CLIENT)"
-    mywords=(${(z)BUFFER})
-    if (( $#mywords == 0 )); then
-        zle .kill-whole-line
-    else
-        firstdir=${mywords[1]:h}
-        loggDebug "words='$mywords[1]'=>'$firstdir'"
-        BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
-        #:h takes aways last "
-        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
-        zle .accept-line
-    fi
-}
-
-function fzfWordsearchVerbEdit(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: fzfWordsearchVerbEdit <editor>"
-        return 1
-    fi
-
-    local firstdir editor file mywords
-
-    editor="$1"
-    BUFFER=$(agIntoFzf vim)
-
-    if [[ -n "$BUFFER" ]]; then
-        mywords=(${(z)BUFFER})
-        firstdir=${mywords[2]:h}
-        loggDebug "builtin cd $firstdir\""
-        #:h takes aways last "
-        BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
-        loggDebug "$BUFFER"
-
-    print -zr -- "$BUFFER"
-    else
-        return
-    fi
-
-}
-
-function fzfWordsearchVerb(){
-
-   if [[ -z "$1" ]]; then
-        loggErr "usage: fzfWordsearchVerb <editor>"
-        return 1
-    fi
-
-    local firstdir editor file mywords
-
-    editor="$1"
-    BUFFER=$(agIntoFzf vim)
-
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    mywords=(${(z)BUFFER})
-    firstdir=${mywords[2]:h}
-    loggDebug "builtin cd $firstdir\""
-    #:h takes aways last "
-    BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
-
-    print -sr -- "$BUFFER"
-    eval "$BUFFER"
 }
 
 function emacsFzfWordsearchVerbEdit(){
@@ -1515,28 +1365,6 @@ function historyVerbEdit(){
     fi
 }
 
-function vimFzfSudo(){
-
-    zle .kill-whole-line
-    local firstdir editor mywords
-
-    if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        LBUFFER="sudo -E nvim $(fzvim nvim)"
-    else
-        LBUFFER="sudo -E vim $(fzvim vim)"
-    fi
-    mywords=("${(z)BUFFER}")
-    if (( $#mywords == 3 )); then
-        zle .kill-whole-line
-    else
-        firstdir=${mywords[4]:h}
-        #logg "words='$mywords[4]'=>'$firstdir'"
-        #:h takes aways last "
-        BUFFER="cd $firstdir\"; $BUFFER; clearList"
-        zle .accept-line
-    fi
-}
-
 function intoFzfAg(){
 
     local firstdir editor mywords
@@ -1577,29 +1405,6 @@ function startSendFull(){
 
     ZPWR_SEND_KEYS_FULL=true
     startSend "$@"
-}
-
-function startSend(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: startSend <pane>"
-        return 1
-    fi
-
-    local pane mywords pid
-
-    ZPWR_SEND_KEYS_PANE=$1
-
-    if [[ ! -d $ZPWR_LOCAL ]]; then
-        mkdir -p $ZPWR_LOCAL
-    fi
-
-    echo > $ZPWR_LOCK_FILE
-
-    for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-        pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$pane'}')
-        echo $pid >> $ZPWR_LOCK_FILE
-    done
 }
 
 function keyClear(){
@@ -1644,35 +1449,6 @@ function regenSearchEnv(){
     source "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh" "$ZPWR_ENV"
 }
 
-function regenMost(){
-
-    regenConfigLinks
-    regenZshCompCache
-    regenHistory
-    regenCtags
-    regenGtagsCtags
-    regenAllKeybindingsCache
-    regenPowerlineLink
-    regenSearchEnv
-    uncompile
-    recompile
-}
-
-function regenAll(){
-
-    regenConfigLinks
-    regenZshCompCache
-    regenHistory
-    regenCtags
-    regenGtagsCtags
-    regenAllKeybindingsCache
-    regenPowerlineLink
-    regenSearchEnv
-    uncompile
-    recompile
-    regenAllGitRepos regen
-}
-
 function deleteLastWord(){
 
     local mywords
@@ -1712,59 +1488,6 @@ function getFound(){
 
     eval "find / 2>/dev/null | $ZPWR_FZF -m $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-}
-
-function locateFzfEditNoZLE(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: locateFzfEditNoZLE <editor>"
-        return 1
-    fi
-
-    local firstArg sel editor
-
-    editor="$1"
-    sel="$(getLocate)"
-
-    firstArg="${${(Az)sel}[1]//\"/}"
-    if [[ -d "$firstArg" ]]; then
-        BUFFER="cd $firstArg;$editor $sel"
-    else
-        BUFFER="$editor $sel"
-    fi
-
-    if [[ -n "$sel" ]]; then
-        print -zr -- "$BUFFER"
-    else
-        return
-    fi
-}
-
-function locateFzfNoZLE(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: locateFzfNoZLE <editor>"
-        return 1
-    fi
-
-    local firstArg sel editor
-
-    editor="$1"
-    sel="$(getLocate)"
-
-    firstArg="${${(Az)sel}[1]//\"/}"
-    if [[ -d "$firstArg" ]]; then
-        BUFFER="cd $firstArg;$editor $sel"
-    else
-        BUFFER="$editor $sel"
-    fi
-
-    if [[ -n "$sel" ]]; then
-        print -sr -- "$BUFFER"
-        eval "$BUFFER"
-    else
-        return
-    fi
 }
 
 function locateFzfEditNoZLEC(){
@@ -1807,59 +1530,6 @@ function locateFzfNoZLEEmacs(){
     locateFzfNoZLE "$ZPWR_EMACS_CLIENT"
 }
 
-function findFzfEditNoZLE(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: findFzfEditNoZLE <editor>"
-        return 1
-    fi
-
-    local firstArg sel editor
-
-    editor="$1"
-    sel="$(getFound)"
-
-    firstArg="${${(Az)sel}[1]//\"/}"
-    if [[ -d "$firstArg" ]]; then
-        BUFFER="cd $firstArg;$editor $sel"
-    else
-        BUFFER="$editor $sel"
-    fi
-
-    if [[ -n "$sel" ]]; then
-        print -zr -- "$BUFFER"
-    else
-        return
-    fi
-}
-
-function findFzfNoZLE(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: findFzfNoZLE <editor>"
-        return 1
-    fi
-
-    local firstArg sel editor
-
-    editor="$1"
-    sel="$(getFound)"
-
-    firstArg="${${(Az)sel}[1]//\"/}"
-    if [[ -d "$firstArg" ]]; then
-        BUFFER="cd $firstArg;$editor $sel"
-    else
-        BUFFER="$editor $sel"
-    fi
-
-    if [[ -n "$sel" ]]; then
-        print -sr -- "$BUFFER"
-        eval "$BUFFER"
-    else
-        return
-    fi
-}
-
 function findFzfEditNoZLEC(){
 
     findFzfEditNoZLE "c"
@@ -1898,38 +1568,6 @@ function findFzfNoZLEEmacs(){
     fi
 
     findFzfNoZLE "$ZPWR_EMACS_CLIENT"
-}
-
-function cca() {
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: cca <file...>"
-        return 1
-    fi
-
-    local firstArg sel firstdir
-
-    firstArg="${${(Az)@}[1]//\"/}"
-    firstdir=${firstArg:h}
-    BUFFER="builtin cd \"$firstdir\"; c ""$@""; clearList; isGitDir && git diff HEAD; "
-    logg "$BUFFER"
-    eval "$BUFFER"
-}
-
-function cv() {
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: cv <file...>"
-        return 1
-    fi
-
-    local firstArg sel firstdir
-
-    firstArg="${${(Az)@}[1]//\"/}"
-    firstdir=${firstArg:h}
-    BUFFER="builtin cd \"$firstdir\"; $EDITOR ""$@""; clearList; isGitDir && git diff HEAD; "
-    logg "$BUFFER"
-    eval "$BUFFER"
 }
 
 function fzfCommits(){
@@ -3365,25 +3003,6 @@ function _fzf_complete_alias() {
     )
 }
 
-# zpwr ;<tab>
-function _fzf_complete_zpwr() {
-
-  FZF_COMPLETION_OPTS=$FZF_ENV_OPTS_VERBS _fzf_complete '-m --preview-window=down:25 --border'  "$@" < <(
-    local len sep k v i width
-    sep=" "
-    width=25
-    for k in ${(ko)ZPWR_VERBS[@]};do
-        len=$#k
-        printf $k
-        spaces=$(( width - len ))
-        for (( i = 0; i < $spaces; ++i )); do
-           printf $sep
-        done
-        printf "${ZPWR_VERBS[$k]}\n"
-    done
-)
-}
-
 function _fzf_complete_zpwr_post() {
 
         perl -e '@a=<>;$c=$#a;for (@a){print "zpwr " if $c!=$#a; print "$1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
@@ -3433,32 +3052,6 @@ function _fzf_complete_clearList() {
 
     FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(
         cat "${ZPWR_ENV}Key.txt" | awk '{print $2}'
-    )
-}
-
-# usage
-# git diff ;<tab>
-# git diff SHA-1 ;<tab>
-function _fzf_complete_git() {
-
-    if ! isGitDir; then
-        return 1
-    fi
-
-    local lastWord
-    lastWord=${${(Az)@}[-1]}
-
-    if git cat-file -t -- $lastWord &>/dev/null; then
-        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitOpts.sh" $lastWord)'"
-    else
-        export FZF_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitOpts.sh" HEAD)'"
-    fi
-    FZF_COMPLETION_OPTS="$FZF_GIT_OPTS" \
-        _fzf_complete "-m $FZF_DRACULA --ansi" "$@" < <(
-        printf "\x1b[${ZPWR_COMMIT_STYLE}m"
-        git log --format='%h %s'
-        git for-each-ref | perl -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
-        printf "\x1b[0m"
     )
 }
 

@@ -1,0 +1,19 @@
+function ___zpwrAllUpdates(){
+
+    (
+        builtin cd "$ZPWR" &&
+            git pull &&
+            {
+                if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
+                    bash "$ZPWR_BANNER_SCRIPT"
+                fi
+            } &&
+            linkConf
+    )
+
+   zpwr updatedeps
+   zpwr regen
+   zpwr update
+}
+
+___zpwrAllUpdates "$@"

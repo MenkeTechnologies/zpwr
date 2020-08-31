@@ -1,0 +1,15 @@
+function ___regenMost(){
+
+    regenConfigLinks
+    regenZshCompCache
+    regenHistory
+    regenCtags
+    regenGtagsCtags
+    regenAllKeybindingsCache
+    regenPowerlineLink
+    regenSearchEnv
+    uncompile
+    recompile
+}
+
+___regenMost "$@"

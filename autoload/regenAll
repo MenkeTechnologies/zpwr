@@ -1,0 +1,16 @@
+function ___regenAll(){
+
+    regenConfigLinks
+    regenZshCompCache
+    regenHistory
+    regenCtags
+    regenGtagsCtags
+    regenAllKeybindingsCache
+    regenPowerlineLink
+    regenSearchEnv
+    uncompile
+    recompile
+    regenAllGitRepos regen
+}
+
+___regenAll "$@"

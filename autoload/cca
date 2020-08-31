@@ -1,0 +1,17 @@
+function ___cca() {
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: cca <file...>"
+        return 1
+    fi
+
+    local firstArg sel firstdir
+
+    firstArg="${${(Az)@}[1]//\"/}"
+    firstdir=${firstArg:h}
+    BUFFER="builtin cd \"$firstdir\"; c ""$@""; clearList; isGitDir && git diff HEAD; "
+    logg "$BUFFER"
+    eval "$BUFFER"
+}
+
+___cca "$@"
