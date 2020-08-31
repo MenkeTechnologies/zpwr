@@ -1,0 +1,7 @@
+function ___toriprenew() {
+
+    printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' |
+        nc 127.0.0.1 9051
+}
+
+___toriprenew "$@"

@@ -1,0 +1,7 @@
+function ___pstreemonitor(){
+
+    bash $ZPWR_SCRIPTS/myWatchNoBlink.sh \
+    "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
+}
+
+___pstreemonitor "$@"

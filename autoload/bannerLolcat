@@ -1,0 +1,8 @@
+function ___bannerLolcat(){
+    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
+    ponysay -W 100 |
+    splitReg.sh -- \
+    ---------------------- lolcat
+}
+
+___bannerLolcat "$@"

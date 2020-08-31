@@ -1,0 +1,8 @@
+function ___zpwrScriptCount(){
+
+    zpwrScriptList |
+        wc -l |
+        awk '{$1=$1};1'
+}
+
+___zpwrScriptCount "$@"

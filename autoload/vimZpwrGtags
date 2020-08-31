@@ -1,0 +1,6 @@
+function ___vimZpwrGtags(){
+
+    getGtags "$EDITOR"
+}
+
+___vimZpwrGtags "$@"

@@ -1,0 +1,7 @@
+function ___banner(){
+
+    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
+    ponysay -W 100
+}
+
+___banner "$@"

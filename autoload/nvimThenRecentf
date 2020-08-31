@@ -1,0 +1,9 @@
+function ___nvimThenRecentf() {
+
+    if [[ -f $ZPWR_RECENTF ]]; then
+        parseRecentf
+    fi
+    catNvimOrVimInfo
+}
+
+___nvimThenRecentf "$@"

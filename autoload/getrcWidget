@@ -1,0 +1,8 @@
+function ___getrcWidget(){
+
+    zle .kill-whole-line
+    BUFFER="getrc"
+    zle .accept-line
+}
+
+___getrcWidget "$@"

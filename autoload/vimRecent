@@ -1,0 +1,6 @@
+function ___vimRecent(){
+
+    editorRecent "$EDITOR"
+}
+
+___vimRecent "$@"

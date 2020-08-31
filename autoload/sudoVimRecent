@@ -1,0 +1,6 @@
+function ___sudoVimRecent(){
+
+    sudoEditorRecent "$EDITOR"
+}
+
+___sudoVimRecent "$@"

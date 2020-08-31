@@ -1,0 +1,8 @@
+function ___up8widget() {
+
+    zle .kill-whole-line
+    BUFFER=u8
+    zle .accept-line
+}
+
+___up8widget "$@"

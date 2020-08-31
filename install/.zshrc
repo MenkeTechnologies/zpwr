@@ -502,48 +502,6 @@ function zpwrEnvVars(){
     env | command grep -i "^$ZPWR_REPO_NAME" | fzf
 }
 
-function revealRecurse(){
-
-    for i in **/*(/); do
-        ( builtin cd $i && reveal 2>/dev/null; )
-    done
-}
-
-function evalTester(){
-
-    echo eval fordir ${(q)*}
-}
-
-function zpwrBackupHistfile(){
-
-    prettyPrint "Save backup of $HISTFILE"
-    (
-        builtin cd "$HOME"
-        builtin fc -W "$HISTFILE"
-        bash "$ZPWR_SCRIPTS/backupConfig.sh"
-    )
-}
-
-function zpwrCleanAll() {
-
-    prettyPrint "clearCache"
-    clearCache
-    prettyPrint "clear $zpwrDirsClean"
-    zpwrClean
-}
-
-function banner(){
-
-    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
-    ponysay -W 100
-}
-function bannerLolcat(){
-    bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
-    ponysay -W 100 |
-    splitReg.sh -- \
-    ---------------------- lolcat
-}
-
 function noPonyBanner(){
 
     eval "$ZPWR_DEFAULT_BANNER"
@@ -552,150 +510,14 @@ function noPonyBanner(){
 
 #{{{                    MARK:Custom Functions
 #**************************************************************
-function sub (){
-
-    zle .kill-whole-line
-    BUFFER="suc"
-    zle .accept-line
-}
-
-function sudoEmacsRecent(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    sudoEditorRecent "$ZPWR_EMACS_CLIENT"
-}
-
-function emacsRecent(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    editorRecent "$ZPWR_EMACS_CLIENT"
-}
-
-function sudoVimRecent(){
-
-    sudoEditorRecent "$EDITOR"
-}
-
-function vimRecent(){
-
-    editorRecent "$EDITOR"
-}
-
-function gtagsIntoFzf(){
-
-    #gtags referenced to $HOME
-    (
-        builtin cd "$HOME"
-        global -x '.*' |
-        eval "$ZPWR_FZF $FZF_GTAGS_OPTS" |
-    perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "'"$HOME/"'$3"@;s@\n@ @g'
-    )
-}
-
-function emacsZpwrGtags(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    getGtags "$ZPWR_EMACS_CLIENT"
-}
-
-function vimZpwrGtags(){
-
-    getGtags "$EDITOR"
-}
-
-function emacsZpwrGtagsEdit(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    getGtagsEdit "$ZPWR_EMACS_CLIENT"
-}
-
-function vimZpwrGtagsEdit(){
-
-    getGtagsEdit "$EDITOR"
-}
-
-function emacsZpwrCtags(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    cat "$ZPWR_SCRIPTS/tags" | fzf
-}
-
 function vimZpwrCtags(){
 
     cat "$ZPWR_SCRIPTS/tags" | fzf
 }
 
-function zpwrScriptList(){
-
-    command ls \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
-}
-
-function zpwrScriptCount(){
-
-    zpwrScriptList |
-        wc -l |
-        awk '{$1=$1};1'
-}
-
-function dbz() {
-
-    zle .kill-whole-line
-    BUFFER=db
-    zle .accept-line
-}
-
 function alternateQuotes(){
 
     BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"
-}
-
-function up8widget() {
-
-    zle .kill-whole-line
-    BUFFER=u8
-    zle .accept-line
-}
-
-function getrcWidget(){
-
-    zle .kill-whole-line
-    BUFFER="getrc"
-    zle .accept-line
-}
-
-function intoFzf(){
-
-    LBUFFER="$LBUFFER |& $ZPWR_FZF -m --border --ansi"
-    zle .accept-line
-}
-
-function lsoffzf(){
-
-    LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | $ZPWR_FZF -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"
 }
 
 function emacsFzfWordsearchVerbEdit(){
@@ -758,28 +580,6 @@ function vimFzfFilesearchVerb(){
     fzfFilesearchVerb "$EDITOR"
 }
 
-
-function fasdFZF(){
-
-    local mywords
-
-    BUFFER="$BUFFER $(fasdFList)"
-    mywords=(${(z)BUFFER})
-
-    if (( $#mywords == 1 )); then
-        :
-    else
-        zle .accept-line
-    fi
-}
-
-function stopSend(){
-
-    ZPWR_SEND_KEYS_PANE=-1
-    ZPWR_SEND_KEYS_FULL=false
-    command rm $ZPWR_LOCK_FILE &>/dev/null
-}
-
 function startSendFull(){
 
     ZPWR_SEND_KEYS_FULL=true
@@ -802,47 +602,6 @@ function regenSearchEnv(){
 
     prettyPrint "regenerating all env into ${ZPWR_ENV}{Key,Value}.txt"
     source "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh" "$ZPWR_ENV"
-}
-
-function deleteLastWord(){
-
-    local mywords
-
-    mywords=(${(z)BUFFER})
-    if (( $#mywords > 1  )); then
-        BUFFER=${mywords[1,-2]}" "
-    else
-        BUFFER=
-    fi
-}
-
-function fzfAllKeybind(){
-
-    if [[ ! -s "$ZPWR_ALL_KEYBINDINGS" ]]; then
-        loggDebug "regenerating $ZPWR_ALL_KEYBINDINGS"
-        regenAllKeybindingsCache
-    fi
-    cat "$ZPWR_ALL_KEYBINDINGS" | fzf
-}
-
-function fzfVimKeybind(){
-
-    if [[ ! -s "$ZPWR_VIM_KEYBINDINGS" ]]; then
-        loggDebug "regenerating $ZPWR_VIM_KEYBINDINGS"
-        regenAllKeybindingsCache
-    fi
-    cat "$ZPWR_VIM_KEYBINDINGS" | fzf
-}
-
-function getLocate(){
-
-    eval "locate / 2>/dev/null | $ZPWR_FZF -m $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-}
-function getFound(){
-
-    eval "find / 2>/dev/null | $ZPWR_FZF -m $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
 function locateFzfEditNoZLEC(){

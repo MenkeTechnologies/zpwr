@@ -705,12 +705,6 @@ function cd(){
     fi
 }
 
-function pstreemonitor(){
-
-    bash $ZPWR_SCRIPTS/myWatchNoBlink.sh \
-    "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
-}
-
 alias gcl >/dev/null 2>&1 && {
     unalias gcl
 }
@@ -733,12 +727,6 @@ alias zpwrgh=zpwr
 function getrcdev(){
 
     getrc dev
-}
-
-function toriprenew() {
-
-    printf 'AUTHENTICATE ""\r\nsignal NEWNYM\r\nQUIT' |
-        nc 127.0.0.1 9051
 }
 
 exists pssh && function pir(){
@@ -774,12 +762,6 @@ function searchGitCommon(){
     eval "$out"
 }
 
-function regenConfigLinks(){
-
-    prettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
-    linkConf
-}
-
 function emacsEmacsConfig(){
 
     builtin cd $ZPWR
@@ -806,54 +788,6 @@ function emacsZpwr(){
     ${=ZPWR_EMACS_CLIENT} .
     clearList
     isGitDir && git diff HEAD
-}
-
-function emacsScripts(){
-
-    ${=ZPWR_EMACS_CLIENT} \
-    "$ZPWR/"*.{sh,py,zsh,pl} \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
-}
-
-function vimScripts(){
-
-    vim \
-    "$ZPWR/"*.{sh,py,zsh,pl} \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
-}
-
-function parseRecentf(){
-
-    if [[ ! -f $ZPWR_RECENTF ]]; then
-        loggErr "$ZPWR_RECENTF does not exist"
-        return 1
-    fi
-
-    tac "$ZPWR_RECENTF" | command perl -ne 'do {$_=~s@$ENV{HOME}@~@;$_=~s@[ ]+@@g; $_="> $_"; $_=~s@"@@g; print $_} if m{/}'
-}
-
-function recentfThenNvim() {
-
-    catNvimOrVimInfo
-    if [[ -f $ZPWR_RECENTF ]]; then
-        parseRecentf
-    fi
-}
-
-function nvimThenRecentf() {
-
-    if [[ -f $ZPWR_RECENTF ]]; then
-        parseRecentf
-    fi
-    catNvimOrVimInfo
 }
 
 #}}}***********************************************************

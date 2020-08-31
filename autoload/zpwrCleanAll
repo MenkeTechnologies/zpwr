@@ -1,0 +1,9 @@
+function ___zpwrCleanAll() {
+
+    prettyPrint "clearCache"
+    clearCache
+    prettyPrint "clear $zpwrDirsClean"
+    zpwrClean
+}
+
+___zpwrCleanAll "$@"

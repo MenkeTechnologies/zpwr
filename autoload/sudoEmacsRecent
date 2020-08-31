@@ -1,0 +1,11 @@
+function ___sudoEmacsRecent(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    sudoEditorRecent "$ZPWR_EMACS_CLIENT"
+}
+
+___sudoEmacsRecent "$@"

@@ -1,0 +1,8 @@
+function ___stopSend(){
+
+    ZPWR_SEND_KEYS_PANE=-1
+    ZPWR_SEND_KEYS_FULL=false
+    command rm $ZPWR_LOCK_FILE &>/dev/null
+}
+
+___stopSend "$@"

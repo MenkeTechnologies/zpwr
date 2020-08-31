@@ -1,0 +1,10 @@
+function ___fzfAllKeybind(){
+
+    if [[ ! -s "$ZPWR_ALL_KEYBINDINGS" ]]; then
+        loggDebug "regenerating $ZPWR_ALL_KEYBINDINGS"
+        regenAllKeybindingsCache
+    fi
+    cat "$ZPWR_ALL_KEYBINDINGS" | fzf
+}
+
+___fzfAllKeybind "$@"

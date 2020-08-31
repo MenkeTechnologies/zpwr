@@ -1,0 +1,8 @@
+function ___dbz() {
+
+    zle .kill-whole-line
+    BUFFER=db
+    zle .accept-line
+}
+
+___dbz "$@"

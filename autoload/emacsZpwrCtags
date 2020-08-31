@@ -1,0 +1,11 @@
+function ___emacsZpwrCtags(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    cat "$ZPWR_SCRIPTS/tags" | fzf
+}
+
+___emacsZpwrCtags "$@"

@@ -1,0 +1,8 @@
+function ___sub (){
+
+    zle .kill-whole-line
+    BUFFER="suc"
+    zle .accept-line
+}
+
+___sub "$@"

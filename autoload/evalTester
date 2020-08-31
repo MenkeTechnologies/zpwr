@@ -1,0 +1,6 @@
+function ___evalTester(){
+
+    echo eval fordir ${(q)*}
+}
+
+___evalTester "$@"
