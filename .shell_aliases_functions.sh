@@ -539,6 +539,17 @@ alias zp=zpwr
 alias zpw=zpwr
 alias zpwrgh=zpwr
 
+function cd(){
+
+    # builtin is necessary here to distinguish
+    # bt function name and builtin cd command
+    # don't want to recursively call this function
+    builtin cd "$@"
+    if [[ $ZPWR_CD_AUTO_LS == true ]]; then
+        clearList
+    fi
+}
+
 exists pssh && function pir(){
 
     if ! test -s "$ZPWR_LOCAL/hosts.txt"; then

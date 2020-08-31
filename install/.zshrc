@@ -494,11 +494,6 @@ if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
 
-function zpwrEnvVars(){
-
-    env | command grep -i "^$ZPWR_REPO_NAME" | fzf
-}
-
 function noPonyBanner(){
 
     eval "$ZPWR_DEFAULT_BANNER"
@@ -570,12 +565,6 @@ function vimFzfFilesearchVerbEdit(){
 function vimFzfFilesearchVerb(){
 
     fzfFilesearchVerb "$EDITOR"
-}
-
-function startSendFull(){
-
-    ZPWR_SEND_KEYS_FULL=true
-    startSend "$@"
 }
 
 function self-insert() {

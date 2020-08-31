@@ -1,0 +1,6 @@
+function ___zpwrEnvVars(){
+
+    env | command grep -i "^$ZPWR_REPO_NAME" | fzf
+}
+
+___zpwrEnvVars "$@"
