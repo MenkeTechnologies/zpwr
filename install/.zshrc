@@ -493,43 +493,9 @@ zc-rename $ZPWR_CONVEY_NAME &>/dev/null
 
 #{{{                    MARK:Zpwr verbs
 #**************************************************************
-function tabNum() {
-
-    echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
-}
-
-function tabNumCmd() {
-
-    local num args
-
-    num=$1
-    shift
-    args="$@"
-    echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
-}
-
-
 if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
-
-function zpwrUpdateAllGitDirs(){
-
-    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
-        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
-        regenAllGitRepos regen
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir \
-    'git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache' \
-        $(cat $ZPWR_ALL_GIT_DIRS)
-}
-
-function zpwrNumVerbs(){
-
-    #the size of hashmap
-    echo $#ZPWR_VERBS
-}
 
 function zpwrEnvVars(){
 
@@ -546,18 +512,6 @@ function revealRecurse(){
 function evalTester(){
 
     echo eval fordir ${(q)*}
-}
-
-function regenHistory() {
-
-    prettyPrint "Regen $HISTFILE"
-    (
-        builtin cd "$HOME"
-        command mv "$HISTFILE" .zsh_history_bad
-        command strings .zsh_history_bad > "$HISTFILE"
-        builtin fc -R ."$HISTFILE"
-        command rm -rf .zsh_history_bad
-    )
 }
 
 function zpwrBackupHistfile(){
@@ -707,21 +661,6 @@ function zpwrScriptCount(){
         awk '{$1=$1};1'
 }
 
-function lastWordDouble(){
-
-    local firstdir editor mywords
-
-    mywords=("${(z)BUFFER}")
-    if [[ $BUFFER[-1] == " " ]]; then
-        BUFFER="$BUFFER"$mywords[-1]
-        CURSOR=$#BUFFER
-    else
-        BUFFER="$BUFFER "$mywords[-1]
-        CURSOR=$#BUFFER
-    fi
-}
-
-
 function dbz() {
 
     zle .kill-whole-line
@@ -732,17 +671,6 @@ function dbz() {
 function alternateQuotes(){
 
     BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"
-}
-
-function runner() {
-
-    if [[ ! -z "$BUFFER" ]]; then
-        tutsUpdate
-    else
-        zle .kill-whole-line
-        BUFFER=ge
-        zle .accept-line
-    fi
 }
 
 function up8widget() {

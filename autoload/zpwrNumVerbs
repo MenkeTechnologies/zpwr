@@ -1,0 +1,7 @@
+function ___zpwrNumVerbs(){
+
+    #the size of hashmap
+    echo $#ZPWR_VERBS
+}
+
+___zpwrNumVerbs "$@"

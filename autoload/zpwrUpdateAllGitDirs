@@ -1,0 +1,13 @@
+function ___zpwrUpdateAllGitDirs(){
+
+    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        prettyPrint "must regen $ZPWR_ALL_GIT_DIRS because empty."
+        regenAllGitRepos regen
+    fi
+
+    ${=ZPWR_REPO_NAME} fordir \
+    'git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache' \
+        $(cat $ZPWR_ALL_GIT_DIRS)
+}
+
+___zpwrUpdateAllGitDirs "$@"

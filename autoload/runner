@@ -1,0 +1,11 @@
+function __runner() {
+
+    if [[ ! -z "$BUFFER" ]]; then
+        tutsUpdate
+    else
+        zle .kill-whole-line
+        BUFFER=ge
+        zle .accept-line
+    fi
+}
+__runner "$@"

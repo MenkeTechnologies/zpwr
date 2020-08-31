@@ -1,0 +1,11 @@
+function ___tabNumCmd() {
+
+    local num args
+
+    num=$1
+    shift
+    args="$@"
+    echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
+}
+
+___tabNumCmd "$@"

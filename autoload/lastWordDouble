@@ -1,0 +1,15 @@
+function ___lastWordDouble(){
+
+    local firstdir editor mywords
+
+    mywords=("${(z)BUFFER}")
+    if [[ $BUFFER[-1] == " " ]]; then
+        BUFFER="$BUFFER"$mywords[-1]
+        CURSOR=$#BUFFER
+    else
+        BUFFER="$BUFFER "$mywords[-1]
+        CURSOR=$#BUFFER
+    fi
+}
+
+___lastWordDouble "$@"
