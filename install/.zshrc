@@ -2659,7 +2659,7 @@ if [[ $ZPWR_LEARN != false ]]; then
     compdef _se se see seee redo rsql re searchl searchle searchlee redosql
     # to allow reverse numeric sort and numeric sort
     # as opposed to lexicographic sort
-    zstyle ':completion:*:*:(se|see|seee|redo|rsql|re|searchl|searchle|searchlee|z|r):*:*' sort false
+    zstyle ':completion:*:*:(se|see|seee|redo|rsql|re|searchl|searchle|searchlee|z|r|zm|zd|zg):*:*' sort false
 fi
 
 if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
@@ -2672,8 +2672,12 @@ fi
 #{{{                    MARK:ZPWR verbs zstyle
 #**************************************************************
 zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort false
-zstyle ':completion:*:*:(zpwr-z|gitzfordir|gitzfordirmaster|gitzfordirdevelop):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
-zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-z|zpwr-r):*:*' sort false
+
+zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
+
+zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop):*:*' sort false
+
+zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-r):*:*' sort false
 #}}}***********************************************************
 
 #{{{                    MARK:ZPWR Compsys Functions
