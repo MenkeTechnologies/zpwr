@@ -1,0 +1,11 @@
+function ___findFzfNoZLEEmacs(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    findFzfNoZLE "$ZPWR_EMACS_CLIENT"
+}
+
+___findFzfNoZLEEmacs "$@"

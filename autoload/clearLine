@@ -1,0 +1,7 @@
+function ___clearLine() {
+
+    keyClear
+    LBUFFER=
+}
+
+___clearLine "$@"

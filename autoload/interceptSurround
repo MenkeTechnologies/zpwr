@@ -1,0 +1,8 @@
+function ___interceptSurround(){
+
+    #surround
+    exists autopair-insert && autopair-insert
+    keySender
+}
+
+___interceptSurround "$@"

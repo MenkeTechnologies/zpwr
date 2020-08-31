@@ -1,0 +1,8 @@
+function ___interceptDelete(){
+
+    #deleteMatching
+    exists autopair-delete && autopair-delete
+    keySender
+}
+
+___interceptDelete "$@"

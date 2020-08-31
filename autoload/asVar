@@ -1,0 +1,8 @@
+function ___asVar(){
+
+    region_highlight=("P0 20 fg=blue,bg=red")
+    BUFFER="=\"\$($BUFFER)\""
+    CURSOR=0
+}
+
+___asVar "$@"

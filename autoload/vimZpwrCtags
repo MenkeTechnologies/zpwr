@@ -1,0 +1,6 @@
+function ___vimZpwrCtags(){
+
+    cat "$ZPWR_SCRIPTS/tags" | fzf
+}
+
+___vimZpwrCtags "$@"

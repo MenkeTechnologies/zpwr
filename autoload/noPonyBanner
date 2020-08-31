@@ -1,0 +1,6 @@
+function ___noPonyBanner(){
+
+    eval "$ZPWR_DEFAULT_BANNER"
+}
+
+___noPonyBanner "$@"

@@ -493,40 +493,10 @@ zc-rename $ZPWR_CONVEY_NAME &>/dev/null
 if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
-
-function noPonyBanner(){
-
-    eval "$ZPWR_DEFAULT_BANNER"
-}
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Functions
 #**************************************************************
-function vimZpwrCtags(){
-
-    cat "$ZPWR_SCRIPTS/tags" | fzf
-}
-
-function emacsFzfWordsearchVerbEdit(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    fzfWordsearchVerbEdit "$ZPWR_EMACS_CLIENT"
-}
-
-function emacsFzfWordsearchVerb(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    fzfWordsearchVerb "$ZPWR_EMACS_CLIENT"
-}
-
 function vimFzfWordsearchVerbEdit(){
 
     fzfWordsearchVerbEdit "$EDITOR"
@@ -571,18 +541,6 @@ function self-insert() {
 
   zle .self-insert
   keySender $KEYS
-}
-
-function clearLine() {
-
-    keyClear
-    LBUFFER=
-}
-
-function regenSearchEnv(){
-
-    prettyPrint "regenerating all env into ${ZPWR_ENV}{Key,Value}.txt"
-    source "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh" "$ZPWR_ENV"
 }
 
 function locateFzfEditNoZLEC(){
@@ -654,38 +612,6 @@ function findFzfEditNoZLEEmacs(){
 
     findFzfEditNoZLE "$ZPWR_EMACS_CLIENT"
 }
-
-function findFzfNoZLEEmacs(){
-
-    if ! exists emacs; then
-        logErr "emacs must exist"
-        return 1
-    fi
-
-    findFzfNoZLE "$ZPWR_EMACS_CLIENT"
-}
-
-function asVar(){
-
-    region_highlight=("P0 20 fg=blue,bg=red")
-    BUFFER="=\"\$($BUFFER)\""
-    CURSOR=0
-}
-
-function interceptSurround(){
-
-    #surround
-    exists autopair-insert && autopair-insert
-    keySender
-}
-
-function interceptDelete(){
-
-    #deleteMatching
-    exists autopair-delete && autopair-delete
-    keySender
-}
-
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE bindkey
@@ -2024,87 +1950,9 @@ unset GROOVY_HOME # when set this messes up classpath
 #**************************************************************
 # go to desktop if not root
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    if [[ "$UID" != "0" ]]; then
-         # builtin cd "$D" && clear
-        clear
-        if type figlet > /dev/null 2>&1; then
-            printf "\e[1m"
-            if [[ -f "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" ]]; then
-                if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-                    if [[ -f "$ZPWR_SCRIPTS/splitReg.sh" ]];then
-                        bannerLolcat
-                    else
-                        banner
-                    fi
-                else
-                    noPonyBanner
-                fi
-            fi
-        fi
-        printf "\e[0m"
-        listNoClear
-    else
-        # root on unix
-        clearList
-    fi
+    zpwrDarwinBanner
 else
-    if [[ "$UID" != "0" ]]; then
-        clear
-        if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
-            case $distroName in
-                (raspbian)
-                    test -d "$D" && builtin cd "$D"
-                    if type ponysay 1>/dev/null 2>&1; then
-                        bash "$ZPWR_SCRIPTS/motd.sh" | ponysay -W 120
-                    else
-                        bash "$ZPWR_SCRIPTS/motd.sh"
-                    fi
-                    ;;
-                (ubuntu|debian|kali|linuxmint|parrot)
-                    test -d "$D" && builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 |
-                        splitReg.sh -- ------------- lolcat
-                    ;;
-                (fedora|centos|rhel)
-                    test -d "$D" && builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 |
-                        splitReg.sh -- ------------- lolcat
-                    ;;
-                (*suse*|arch|manjaro*)
-                    test -d "$D" && builtin cd "$D"
-                    figlet -f block "$(whoami)" | ponysay -W 120 |
-                        splitReg.sh -- ------------- lolcat
-                    ;;
-                (*) :
-                    ;;
-            esac
-        else
-            case $distroName in
-                (raspbian)
-                    test -d "$D" && builtin cd "$D"
-                    bash "$ZPWR_SCRIPTS/motd.sh"
-                    ;;
-                (ubuntu|debian|kali|linuxmint|parrot)
-                    test -d "$D" && builtin cd "$D"
-                    noPonyBanner
-                    ;;
-                (fedora|centos|rhel)
-                    test -d "$D" && builtin cd "$D"
-                    noPonyBanner
-                    ;;
-                (*suse*|arch|manjaro*)
-                    test -d "$D" && builtin cd "$D"
-                    noPonyBanner
-                    ;;
-                (*) :
-                    ;;
-            esac
-        fi
-        listNoClear
-    else
-        # root on linux
-        clearList
-    fi
+    zpwrLinuxBanner
 fi
 
 
@@ -2115,74 +1963,7 @@ fi
 if [[ $ZPWR_AUTO_ATTACH == true ]]; then
 
     if [[ "$(uname)" == Linux ]]; then
-
-        if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
-
-            mobile=true
-            if [[ -f "$HOME/.ssh/authorized_keys" ]]; then
-                cat "$HOME/.ssh/authorized_keys" |
-                    command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
-
-                case $distroName in
-                    (debian|raspbian|kali|ubuntu|parrot)
-                        out="$(sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"
-                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}')"
-                        ;;
-                    (centos|rhel)
-                        out="$(tail /var/log/messages)"
-                        ;;
-                    (*suse*|arch|manjaro*)
-                        out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
-                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}' | awk -F: '{print $2}')"
-                        ;;
-                    (fedora)
-                        out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"
-                        key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}' | awk -F: '{print $2}')"
-                        ;;
-                    (*) :
-                        ;;
-                esac
-                logg "searching for $key in $out"
-                [[ "$out" == *"$key"* ]] && mobile=false
-                command rm "$ZPWR_TEMPFILE"
-            else
-                logg "$HOME/.ssh/authorized_keys does not exist so NO attach"
-            fi
-
-            if [[ $mobile == "false" ]]; then
-                logg "found $key so desktop"
-                num_con="$(command ps -ef |command grep -a 'sshd' | command grep -a pts | command grep -av grep | wc -l)"
-                logg "num connections: $num_con"
-                if (( $num_con == 1 )); then
-                    logg "no tmux clients"
-                    {
-                        out="$(tmux ls 2>&1)"
-                        ret=$?
-                        logg "tmux ls = ret: $ret, out: $out"
-                        if [[ $ret == 0 ]]; then
-                            logg "attaching to existing"
-                            logg command tmux attach
-                            command tmux attach
-                            ret=$?
-                            logg "tmux attach = ret: $ret"
-                        else
-                            logg "creating new session"
-                            logg tmux new-session \; \
-                            source-file "$ZPWR_TMUX/control-window"
-                            tmux new-session \; \
-                            source-file "$ZPWR_TMUX/control-window"
-                        fi
-                    } &> /dev/null
-                else
-                    logg "clients so NO attach"
-                    logg command tmux attach
-                    command tmux attach
-                fi
-            else
-                logg "not desktop so NO attach"
-            fi
-        fi
-
+        zpwrAttachSetup
     fi
 fi
 #}}}***********************************************************
