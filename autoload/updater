@@ -1,0 +1,11 @@
+function ___updater (){
+
+    zle .kill-whole-line
+    #bash -l options for creating login shell to run script
+    #avoiding issues with rvm which only runs on login shell
+    BUFFER="( cat $ZPWR_SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"
+    zle .accept-line
+}
+
+
+___updater "$@"

@@ -45,7 +45,7 @@ To install to a custom directory, clone the project to that directory and `expor
 - custom styling for tag grouping in menu selection
 - tag grouping for man pages by section
 - heavily colorized man pages color grouped by sections [zsh-very-colorful-manuals](https://github.com/MenkeTechnologies/zsh-very-colorful-manuals)
-- insert matching quotes, brackets and parentheses like most IDEs [zsh-surround](https://github.com/MenkeTechnologies/zsh-surround)
+- insert matching quotes, brackets and parentheses like most IDEs [zsh-autopair](https://github.com/hlissner/zsh-autopair)
 - custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching (fzvim)
 - vim keybindings (insert, normal and visual modes) to run current code file open in vim in tmux pane to right
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
@@ -284,7 +284,7 @@ Expansion can be disabled entirely by removing [zsh-expand](https://github.com/M
 
 > ~/.zshrc
 ```sh
-plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-surround
+plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-autopair
 ```
 
 Alternatively, change these env vars to false in `~/.zpwr/local/.tokens.sh`.  The first controls all expansion in any position.

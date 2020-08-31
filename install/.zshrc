@@ -721,14 +721,6 @@ function lastWordDouble(){
     fi
 }
 
-function updater (){
-
-    zle .kill-whole-line
-    #bash -l options for creating login shell to run script
-    #avoiding issues with rvm which only runs on login shell
-    BUFFER="( cat $ZPWR_SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"
-    zle .accept-line
-}
 
 function dbz() {
 
@@ -736,8 +728,6 @@ function dbz() {
     BUFFER=db
     zle .accept-line
 }
-
-ZPWR_COUNTER=0
 
 function alternateQuotes(){
 
@@ -755,7 +745,7 @@ function runner() {
     fi
 }
 
-function updater() {
+function up8widget() {
 
     zle .kill-whole-line
     BUFFER=u8
@@ -884,19 +874,6 @@ function fzfZListVerb(){
     eval "builtin cd \"$dir\" && clearList"
 }
 
-function fasdFList(){
-
-    fasd -f |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
-    eval "$ZPWR_FZF -m --no-sort --border $FZF_CTRL_T_OPTS" |
-        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
-}
-
-function fm(){
-
-   FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfMan.sh" "$1")'"
-    man "$1" | col -b | eval "$ZPWR_FZF --no-sort -m $FZF_MAN_OPTS"
-}
-
 function zFZF(){
 
     local mywords
@@ -923,60 +900,6 @@ function fasdFZF(){
         :
     else
         zle .accept-line
-    fi
-}
-
-function fasdFListVerb(){
-
-    local file
-
-    file=$(fasdFList)
-
-    if [[ -z "$file" ]]; then
-        return
-    fi
-    print -sr -- "c $file"
-    eval "c $file"
-}
-
-function killPSVerbAccept(){
-
-    local sel
-
-    sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
-
-    if [[ -n "$sel" ]]; then
-        BUFFER="sudo kill -9 -- $sel"
-        print -sr -- "$BUFFER"
-        eval "$BUFFER"
-    else
-        return
-    fi
-}
-
-function killPSVerbEdit(){
-
-    local sel
-
-    sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"
-
-    if [[ -n "$sel" ]]; then
-        BUFFER="sudo kill -9 -- $sel"
-        print -rz -- "$BUFFER"
-    else
-        return
-    fi
-}
-
-function keySender(){
-
-    local pane mywords
-
-    if (( $ZPWR_SEND_KEYS_PANE != -1 )); then
-        #tmux send-keys -t learn:0.0 $1
-        for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-            tmux send-keys -t $pane "C-u" "$BUFFER" #&>/dev/null
-        done
     fi
 }
 
@@ -1219,6 +1142,7 @@ zle -N asVar
 zle -N zpwrVerbsWidget
 zle -N zpwrVerbsWidgetAccept
 zle -N updater
+zle -N up8widget
 zle -N sub
 zle -N dbz
 zle -N sshRegain
@@ -1258,8 +1182,8 @@ bindkey -M vicmd "^W" deleteLastWord
 bindkey -M viins "\e^O" runner
 bindkey -M vicmd "\e^O" runner
 
-bindkey -M viins "\e^P" updater
-bindkey -M vicmd "\e^P" updater
+bindkey -M viins "\e^P" up8widget
+bindkey -M vicmd "\e^P" up8widget
 
 bindkey -M viins '^r' redo
 bindkey -M vicmd '^r' redo
@@ -1388,7 +1312,7 @@ bindkey -M vicmd '\e ' sshRegain
 bindkey -M viins '\e ' sshRegain
 
 #F1 key
-bindkey '\eOP' updater
+bindkey '\eOP' up8widget
 #F2 key
 bindkey '\eOQ' sub
 

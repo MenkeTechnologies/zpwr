@@ -1,3 +1,4 @@
+ZPWR_COUNTER=0
 
 function ___changeQuotes(){
 

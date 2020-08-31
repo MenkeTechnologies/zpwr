@@ -1,0 +1,13 @@
+function ___keySender(){
+
+    local pane mywords
+
+    if (( $ZPWR_SEND_KEYS_PANE != -1 )); then
+        #tmux send-keys -t learn:0.0 $1
+        for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+            tmux send-keys -t $pane "C-u" "$BUFFER" #&>/dev/null
+        done
+    fi
+}
+
+___keySender "$@"

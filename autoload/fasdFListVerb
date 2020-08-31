@@ -1,0 +1,14 @@
+function ___fasdFListVerb(){
+
+    local file
+
+    file=$(fasdFList)
+
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -sr -- "c $file"
+    eval "c $file"
+}
+
+___fasdFListVerb "$@"
