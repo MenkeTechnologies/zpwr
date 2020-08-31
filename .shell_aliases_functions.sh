@@ -745,37 +745,6 @@ function upload(){
     command curl -vvv -fsSL -F file=@"$1" http://"$2"
 }
 
-function jd(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: j <dir/dir>"
-        return 1
-    fi
-
-
-    local dir
-
-    for dir;do
-        command mkdir -p "$dir"
-    done
-}
-
-function j(){
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: j <dir/file>"
-        return 1
-    fi
-
-    local file
-
-    for file;do
-        dirname="$(dirname $file)"
-        [[ "$dirname" != . ]] && command mkdir -p "$dirname"
-        touch "$file"
-    done
-}
-
 function scnew(){
 
     if [[ -z "$1" ]]; then
@@ -793,31 +762,6 @@ function suc(){
     python3 "$PYSCRIPTS/textEditorTwoColumns.py"
 }
 
-function allRemotes(){
-
-    if ! isGitDir; then
-        loggNotGit
-        return 1
-    fi
-
-    while read; do
-        printf "\x1b[1;34m$REPLY"
-        printf "\x1b[0m\x0a"
-        git remote show "$REPLY"
-    done < <(git remote)
-}
-
-function about(){
-
-    local old
-
-    old="$LESS"
-    unset LESS
-    if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
-        bash "$ZPWR_BANNER_SCRIPT" | less -rFX
-    fi
-    export LESS="$old"
-}
 
 function animate(){
 
@@ -867,8 +811,8 @@ function color2(){
     fi
 }
 
-exists gcl && {
-    unalias gcl >/dev/null 2>&1
+alias gcl && {
+    unalias gcl
 }
 
 alias zpg=zpgh
@@ -892,36 +836,6 @@ function zpwr(){
         cd "$ZPWR"
     else
         . zpwr.zsh "$@"
-    fi
-}
-
-function zpz(){
-
-    local dirsc forked
-
-    dirsc="$ZPWR"
-
-    if [[ -d "$dirsc" ]]; then
-        cd "$dirsc"
-        gitCheckoutRebasePush
-    else
-        loggErr "$dirsc does not exist"
-    fi
-}
-
-function zr(){
-
-    local dirsc forked
-
-    dirsc="$ZPWR_SCRIPTS"
-    forked="$FORKED_DIR"
-
-    if [[ -d "$dirsc" ]]; then
-        cd "$dirsc"
-    elif [[ -d "$forked" ]]; then
-        cd "$forked"
-    else
-        loggErr "$dirsc and $forked do not exist"
     fi
 }
 

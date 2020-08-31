@@ -1,0 +1,13 @@
+function ___about(){
+
+    local old
+
+    old="$LESS"
+    unset LESS
+    if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
+        bash "$ZPWR_BANNER_SCRIPT" | less -rFX
+    fi
+    export LESS="$old"
+}
+
+___about "$@"

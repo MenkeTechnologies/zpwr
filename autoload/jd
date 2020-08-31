@@ -1,0 +1,16 @@
+function ___jd(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: j <dir/dir>"
+        return 1
+    fi
+
+
+    local dir
+
+    for dir;do
+        command mkdir -p "$dir"
+    done
+}
+
+___jd "$@"

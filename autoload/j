@@ -1,0 +1,17 @@
+function ___j(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: j <dir/file>"
+        return 1
+    fi
+
+    local file
+
+    for file;do
+        dirname="$(dirname $file)"
+        [[ "$dirname" != . ]] && command mkdir -p "$dirname"
+        touch "$file"
+    done
+}
+
+___j "$@"

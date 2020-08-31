@@ -1,0 +1,15 @@
+function ___zpz(){
+
+    local dirsc forked
+
+    dirsc="$ZPWR"
+
+    if [[ -d "$dirsc" ]]; then
+        cd "$dirsc"
+        gitCheckoutRebasePush
+    else
+        loggErr "$dirsc does not exist"
+    fi
+}
+
+___zpz "$@"
