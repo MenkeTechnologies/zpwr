@@ -32,6 +32,8 @@ function recompile(){
         /etc/zprofile*
         /etc/zshrc*
         /etc/zshenv*
+        /etc/zlogin*
+        /etc/zlogout*
         /etc/zsh/z*
         /etc/profile.env*
     )
