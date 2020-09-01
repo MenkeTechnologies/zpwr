@@ -18,8 +18,8 @@ ZPWR_COMPS="$PWD/comps"
 TEST_FILE=tests/testfile
 TOKENS_FILE=local/.tokens.sh
 
-fpath=($ZPWR_AUTOLOAD $ZPWR_COMPS $fpath)
-autoload -z $ZPWR_AUTOLOAD/*(.:t)
+fpath=($ZPWR_AUTOLOAD/* $ZPWR_COMPS $fpath)
+autoload -z $ZPWR_AUTOLOAD/*/*(.:t)
 
 if [[ ! -f $ZPWR_ENV_FILE ]]; then
     error "$ZPWR_ENV_FILE does not exist"
