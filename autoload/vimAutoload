@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ___vimScripts(){
+
+    vim \
+        "$ZPWR_AUTOLOAD/"**/*(.)
+}
+
+
+___vimScripts "$@"

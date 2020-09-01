@@ -16,7 +16,8 @@ function ___emacsAll(){
     "$ZPWR_INSTALL/"*.service \
     "$ZPWR_INSTALL/UltiSnips/"*.snippets \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} \
+    "$ZPWR_AUTOLOAD/"**/*(.)
     clearList
     isGitDir && git diff HEAD
 }

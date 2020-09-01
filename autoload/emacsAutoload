@@ -1,0 +1,9 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ___emacsScripts(){
+
+    ${=ZPWR_EMACS_CLIENT} \
+        "$ZPWR_AUTOLOAD/"**/*(.)
+}
+
+___emacsScripts "$@"
