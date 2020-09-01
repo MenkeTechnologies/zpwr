@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ___zpwrVerbsWidgetAccept(){
+
+    zle .kill-whole-line
+    sel="$(fzvimAll)"
+
+    if [[ -n "$sel" ]]; then
+        BUFFER="vim $sel"
+        zle .accept-line
+    else
+        BUFFER=""
+        CURSOR=$#BUFFER
+        zle vi-insert
+    fi
+}
+
+___zpwrVerbsWidgetAccept "$@"

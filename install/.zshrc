@@ -494,6 +494,8 @@ zle -N fasdFZF
 zle -N interceptDelete
 zle -N interceptSurround
 zle -N asVar
+zle -N zpwrVimAllWidget
+zle -N zpwrVimAllWidgetAccept
 zle -N zpwrVerbsWidget
 zle -N zpwrVerbsWidgetAccept
 zle -N updater
@@ -562,6 +564,12 @@ bindkey -M vicmd '^F^H' lsoffzf
 
 bindkey -M viins '^F^J' zpwrVerbsWidgetAccept
 bindkey -M vicmd '^F^J' zpwrVerbsWidgetAccept
+
+bindkey -M viins '^V ' zpwrVimAllWidgetAccept
+bindkey -M vicmd '^V ' zpwrVimAllWidgetAccept
+
+bindkey -M viins '^Vm' zpwrVimAllWidget
+bindkey -M vicmd '^Vm' zpwrVimAllWidget
 
 bindkey -M viins '^F^M' zzcomplete
 bindkey -M vicmd '^F^M' zzcomplete
