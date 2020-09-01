@@ -508,20 +508,6 @@ exists idea && {
 
 #{{{                    MARK:Shell functions
 #**************************************************************
-
-if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-
-    if isZsh; then
-        eval 'autoload -z $ZPWR_AUTOLOAD/darwin/*(.:t)'
-    fi
-
-else
-    if isZsh; then
-        eval 'autoload -z $ZPWR_AUTOLOAD/linux/*(.:t)'
-    fi
-
-fi
-
 if commandExists systemctl; then
 
     if isZsh; then

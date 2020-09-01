@@ -339,22 +339,28 @@ done
 # add ZPWR autoload dirs to fpath
 fpath=($ZPWR_AUTOLOAD_LINUX $ZPWR_AUTOLOAD_DARWIN $ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
 
-autoload -z $ZPWR_AUTOLOAD/common/*(.:t)
-autoload -Uz zrecompile zm zargs
-
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 
 ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
+#}}}***********************************************************
+#
+#{{{                    MARK:autoload
+#**************************************************************
+autoload -z $ZPWR_AUTOLOAD/common/*(.:t)
+autoload -Uz zrecompile zm zargs
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
+    autoload -z $ZPWR_AUTOLOAD/darwin/*(.:t)
     # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
+
+    autoload -z $ZPWR_AUTOLOAD/linux/*(.:t)
     zpwrLinuxPlugins
 else
     # unix
-    :
+    autoload -z $ZPWR_AUTOLOAD/linux/*(.:t)
 fi
 #}}}***********************************************************
 
