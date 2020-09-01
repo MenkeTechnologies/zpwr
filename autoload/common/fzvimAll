@@ -2,20 +2,7 @@
 # vim: set ft=sh:
 function ___fzvimAll(){
 
-    command ls \
-    "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
-    "$ZPWR/"*.{sh,py,zsh,pl} \
-    "$ZPWR/"*.md \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
-    "$ZPWR_TMUX/tmux-"* \
-    "$ZPWR/"{.minvimrc,.mininit.vim} \
-    "$ZPWR_INSTALL/conf."* \
-    "$ZPWR_INSTALL/"*.sh \
-    "$ZPWR_INSTALL/"*.service \
-    "$ZPWR_INSTALL/UltiSnips/"*.snippets \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} |
+    zpwrListFiles |
         perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}' |
     eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
