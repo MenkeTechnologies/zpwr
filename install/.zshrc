@@ -565,8 +565,8 @@ bindkey -M vicmd '^F^H' lsoffzf
 bindkey -M viins '^F^J' zpwrVerbsWidgetAccept
 bindkey -M vicmd '^F^J' zpwrVerbsWidgetAccept
 
-bindkey -M viins '^V ' zpwrVimAllWidgetAccept
-bindkey -M vicmd '^V ' zpwrVimAllWidgetAccept
+bindkey -M viins '^V^V' zpwrVimAllWidgetAccept
+bindkey -M vicmd '^V^V' zpwrVimAllWidgetAccept
 
 bindkey -M viins '^Vm' zpwrVimAllWidget
 bindkey -M vicmd '^Vm' zpwrVimAllWidget
@@ -617,8 +617,8 @@ exists z && {
     bindkey -M vicmd '^V^S' zFZF
 }
 
-bindkey -M viins '^V^V' vimFzf
-bindkey -M vicmd '^V^V' vimFzf
+bindkey -M viins '^V ' vimFzf
+bindkey -M vicmd '^V ' vimFzf
 
 bindkey -M viins '^V^K' emacsFzf
 bindkey -M vicmd '^V^K' emacsFzf
