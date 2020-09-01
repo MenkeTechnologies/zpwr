@@ -351,33 +351,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
-    #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
-    plugins+=(systemd)
-    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
-
-    case $distroName in
-        (debian|raspbian|kali|parrot|zorin)
-            plugins+=(debian)
-            ;;
-        (ubuntu|linuxmint|elementary)
-            plugins+=(ubuntu)
-            ;;
-        (centos|rhel)
-            plugins+=(yum dnf)
-            ;;
-        (arch|manjaro*)
-            plugins+=(archlinux)
-            ;;
-        (*suse*)
-            plugins+=(suse)
-            ;;
-        (fedora)
-            plugins+=(yum dnf)
-            ;;
-        (*) :
-            ;;
-    esac
-
+    zpwrLinuxPlugins
 else
     # unix
     :
@@ -429,26 +403,12 @@ recachedCompsys=false
 # reload compsys cache if file is stale for 1 week
 
 for dump in ~/.zcompdump*(N.mh+168); do
-    logg "regenerating stale '$dump' older than 1 week"
-    lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
-    rm "$ZSH_COMPDUMP"
-    # avoid insecure warning message with -u
-    compinit -u -d "$ZSH_COMPDUMP"
-    echo "$lines" >> "$ZSH_COMPDUMP"
-    zcompile $ZSH_COMPDUMP
-    recachedCompsys=true
+    zpwrStaleZcompdump
     break
 done
 
 if ! (( $+_comps[z] )); then
-    # compsys completion for z was not found when it should have been
-    logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
-    logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
-    lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
-    rm "$ZSH_COMPDUMP"
-    compinit -u -d "$ZSH_COMPDUMP"
-    echo "$lines" >> "$ZSH_COMPDUMP"
-    #zcompile $ZSH_COMPDUMP
+    zpwrRetryZcompdump
 else
     loggDebug "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
     loggDebug "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"

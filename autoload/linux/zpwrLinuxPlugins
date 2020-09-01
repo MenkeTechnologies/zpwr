@@ -1,0 +1,29 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+#[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
+plugins+=(systemd)
+distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
+
+case $distroName in
+    (debian|raspbian|kali|parrot|zorin)
+        plugins+=(debian)
+        ;;
+    (ubuntu|linuxmint|elementary)
+        plugins+=(ubuntu)
+        ;;
+    (centos|rhel)
+        plugins+=(yum dnf)
+        ;;
+    (arch|manjaro*)
+        plugins+=(archlinux)
+        ;;
+    (*suse*)
+        plugins+=(suse)
+        ;;
+    (fedora)
+        plugins+=(yum dnf)
+        ;;
+    (*) :
+        ;;
+esac
