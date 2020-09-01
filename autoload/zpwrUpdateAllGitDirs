@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___zpwrUpdateAllGitDirs(){
 
     if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then

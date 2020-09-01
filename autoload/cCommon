@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___cCommon(){
 
     local colorizer rpm_cmd deb_cmd file

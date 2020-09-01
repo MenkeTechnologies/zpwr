@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___regenSearchEnv(){
 
     prettyPrint "regenerating all env into ${ZPWR_ENV}{Key,Value}.txt"

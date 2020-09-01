@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
 
     mobile=true

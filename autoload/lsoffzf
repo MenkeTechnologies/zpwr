@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___lsoffzf(){
 
     LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | $ZPWR_FZF -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"

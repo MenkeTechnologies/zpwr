@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___vimZpwrCtags(){
 
     cat "$ZPWR_SCRIPTS/tags" | fzf

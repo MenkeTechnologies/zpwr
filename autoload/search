@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___search(){
 
     test -z $2 && command grep -iRnC 5 "$1" * ||

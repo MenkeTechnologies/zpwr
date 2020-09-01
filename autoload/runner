@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function __runner() {
 
     if [[ ! -z "$BUFFER" ]]; then

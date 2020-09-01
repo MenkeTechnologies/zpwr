@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___stopSend(){
 
     ZPWR_SEND_KEYS_PANE=-1

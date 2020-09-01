@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___sshRegain() {
 
     if echo "$(command ps -ef)" | command  grep -q 'ssh '; then

@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 # Based on vim-tmuxcomplete's splitwords function.
 # https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
 function tmux_capture_paner() {

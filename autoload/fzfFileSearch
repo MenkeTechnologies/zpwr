@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___fzfFileSearch(){
 
     command find -L . -mindepth 1 \

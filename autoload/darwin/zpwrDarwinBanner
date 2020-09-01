@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 if [[ "$UID" != "0" ]]; then
         # builtin cd "$D" && clear
     clear

@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 function ___fzf_complete_zpwr_post() {
 
         perl -e '@a=<>;$c=$#a;for (@a){print "zpwr " if $c!=$#a; print "$1"if m{^(\S+)\s+};print ";" if $c--;print " "}'

@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
 # pull down latest configuration files from $ZPWR_REPO_NAME
 function ___getrc(){
 
