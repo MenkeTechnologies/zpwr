@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #{{{                    MARK:Header
-#**************************************************************
+ear**************************************************************
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Thu Sep  5 22:34:56 EDT 2019
