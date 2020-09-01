@@ -57,7 +57,15 @@ test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
 # autoloaded non completion functions
-evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD " "$ZPWR/autoload" "$ZPWR"
+evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD" "$ZPWR/autoload" "$ZPWR"
+# autoloaded common non completion functions
+evalIfNeeded ZPWR_AUTOLOAD_COMMON "$ZPWR_AUTOLOAD_COMMON" "$ZPWR_AUTOLOAD/common" "$ZPWR_AUTOLOAD"
+# autoloaded darwin non completion functions
+evalIfNeeded ZPWR_AUTOLOAD_DARWIN "$ZPWR_AUTOLOAD_DARWIN" "$ZPWR_AUTOLOAD/darwin" "$ZPWR_AUTOLOAD"
+# autoloaded linux non completion functions
+evalIfNeeded ZPWR_AUTOLOAD_LINUX "$ZPWR_AUTOLOAD_LINUX" "$ZPWR_AUTOLOAD/linux" "$ZPWR_AUTOLOAD"
+# autoloaded systemctl non completion functions
+evalIfNeeded ZPWR_AUTOLOAD_SYSTEMCTL "$ZPWR_AUTOLOAD_SYSTEMTCTL" "$ZPWR_AUTOLOAD/systemtl" "$ZPWR_AUTOLOAD"
 # autoloaded completion functions
 evalIfNeeded ZPWR_COMPS "$ZPWR_COMPS " "$ZPWR/comps" "$ZPWR"
 # same as zpwr local

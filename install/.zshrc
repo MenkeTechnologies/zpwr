@@ -337,9 +337,9 @@ for plug in ${plugins[@]}; do
 done
 
 # add ZPWR autoload dirs to fpath
-fpath=($ZPWR_AUTOLOAD/linux $ZPWR_AUTOLOAD/darwin $ZPWR_AUTOLOAD/systemctl $ZPWR_AUTOLOAD $ZPWR_COMPS $fpath)
+fpath=($ZPWR_AUTOLOAD_LINUX $ZPWR_AUTOLOAD_DARWIN $ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
 
-autoload -z $ZPWR_AUTOLOAD/*(.:t)
+autoload -z $ZPWR_AUTOLOAD/common/*(.:t)
 autoload -Uz zrecompile zm zargs
 
 exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
@@ -1483,8 +1483,8 @@ if [[ -d "$ZPWR_COMPS" ]]; then
     exists zco || alias zco="cd $ZPWR_COMPS"
 fi
 
-if [[ -d "$ZPWR_AUTOLOAD" ]]; then
-    exists zal || alias zal="cd $ZPWR_AUTOLOAD"
+if [[ -d "$ZPWR_AUTOLOAD_COMMON" ]]; then
+    exists zal || alias zal="cd $ZPWR_AUTOLOAD_COMMON"
 fi
 
 if [[ -d "$ZPWR_SCRIPTS_MAC" ]]; then
