@@ -889,7 +889,7 @@ function my-accept-line () {
         if [[ "$out" == *grc* ]]; then
             cmdlet="$(eval echo "${out#*=}")"
             print -srn -- "$BUFFER"
-            BUFFER="sudo $cmdlet $mywords[3,$]"
+            BUFFER="sudo -E $cmdlet $mywords[3,$]"
             echo
             eval "$BUFFER"
             BUFFER=""

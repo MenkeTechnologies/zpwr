@@ -217,9 +217,9 @@ alias la="clearList"
 alias l="clearList"
 alias t="cd /"
 alias ca='cat -n'
-alias sa='sudo cat -n'
-alias ra='sudo rm -rf --'
-alias die='sudo kill -9 --'
+alias sa='sudo -E cat -n'
+alias ra='sudo -E rm -rf --'
+alias die='sudo -E kill -9 --'
 alias da=detachall
 
 if exists emacs; then
@@ -232,7 +232,7 @@ test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
 alias p2="python2"
 alias p3="python3"
 
-exists fc && alias please='sudo $(fc -ln -1)'
+exists fc && alias please='sudo -E $(fc -ln -1)'
 
 exists spotify && {
     alias rep='spotify replay'
@@ -302,7 +302,7 @@ if exists kubectl; then
     alias k8=kubectl
 fi
 alias ka="killall"
-alias sin="./configure && make && sudo make install"
+alias sin="./configure && make && sudo -E make install"
 alias curl='curl -fsSL'
 alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
 alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
@@ -328,7 +328,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     alias asg='cd $HOME/AndroidStudioProjects'
     alias xg='cd $HOME/Documents/xcode'
     alias ap='cd /Applications'
-    alias sudoedit='sudo $EDITOR'
+    alias sudoedit='sudo -E $EDITOR'
     alias tra='cd $HOME/.Trash'
     alias co="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
     alias bl='brew link --force --overwrite'
@@ -351,7 +351,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
                 alias vi='mvim -v'
                 alias vim='mvim -v'
                 alias vm="mvim -v -u $ZPWR_LOCAL/.minvimrc"
-                alias sv='sudo mvim -v'
+                alias sv='sudo -E mvim -v'
             fi
         }
     fi
@@ -371,24 +371,24 @@ else
         alias tra='cd $HOME/.local/share/Trash'
     if [[ "$ZPWR_OS_TYPE" == linux ]]; then
         if exists pacman;then
-            alias api="sudo pacman -Sy --noconfirm"
-            alias apa="sudo pacman -Syyu --noconfirm --overwrite='*'"
-            alias apz="sudo pacman -Syyu --noconfirm --overwrite='*';u8"
+            alias api="sudo -E pacman -Sy --noconfirm"
+            alias apa="sudo -E pacman -Syyu --noconfirm --overwrite='*'"
+            alias apz="sudo -E pacman -Syyu --noconfirm --overwrite='*';u8"
         elif exists zypper;then
-            alias api="sudo zypper install -y"
-            alias apa="sudo zypper update; sudo zypper dist-upgrade -y"
-            alias apz="sudo zypper update; sudo zypper dist-upgrade -y; u8"
+            alias api="sudo -E zypper install -y"
+            alias apa="sudo -E zypper update; sudo -E zypper dist-upgrade -y"
+            alias apz="sudo -E zypper update; sudo -E zypper dist-upgrade -y; u8"
         elif exists apt;then
-            alias api="sudo apt install -y"
-            alias apa="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt clean"
-            alias apz="sudo apt update; sudo apt dist-upgrade -y; sudo apt autoremove -y; sudo apt clean; u8"
+            alias api="sudo -E apt install -y"
+            alias apa="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean"
+            alias apz="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean; u8"
         elif exists yum;then
-            alias api="sudo yum install -y"
-            alias apa="sudo yum check-update; sudo yum upgrade -y "
-            alias apz="sudo yum check-update; sudo yum upgrade -y; u8"
+            alias api="sudo -E yum install -y"
+            alias apa="sudo -E yum check-update; sudo -E yum upgrade -y "
+            alias apz="sudo -E yum check-update; sudo -E yum upgrade -y; u8"
         fi
 
-        alias ipt="sudo iptables --line-numbers -L"
+        alias ipt="sudo -E iptables --line-numbers -L"
         test -z "$distroName" && {
             distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
         }
@@ -411,17 +411,17 @@ else
                 ;;
         esac
     elif [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
-            alias api="sudo pkg install -y"
-            alias apa="yes | sudo pkg update; sudo pkg upgrade -y"
-            alias apz="yes | sudo pkg update; sudo pkg upgrade -y;u8"
+            alias api="sudo -E pkg install -y"
+            alias apa="yes | sudo pkg -E update; sudo -E pkg upgrade -y"
+            alias apz="yes | sudo pkg -E update; sudo -E pkg upgrade -y;u8"
     else
         loggErr "unsupported OS $ZPWR_OS_TYPE"
     fi
     chooseNvimVim
 fi
 alias tclsh="rlwrap tclsh"
-alias logs="sudo tail -f /var/log/**/*.log | ccze"
-alias beats="sudo tail -f /var/log/*beat/* | ccze"
+alias logs="sudo -E tail -f /var/log/**/*.log | ccze"
+alias beats="sudo -E tail -f /var/log/*beat/* | ccze"
 alias matr="cmatrix -C blue -abs"
 #}}}***********************************************************
 
