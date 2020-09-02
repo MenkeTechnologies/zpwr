@@ -511,7 +511,7 @@ exists idea && {
 if commandExists systemctl; then
 
     if isZsh; then
-        eval 'autoload -z $ZPWR_AUTOLOAD/systemctl/*(.:t)'
+        eval 'autoload -z $ZPWR_AUTOLOAD_SYSTEMCTL/*(.:t)'
     fi
 
 fi

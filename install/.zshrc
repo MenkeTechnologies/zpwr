@@ -351,16 +351,16 @@ autoload -Uz zrecompile zm zargs
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
-    autoload -z $ZPWR_AUTOLOAD/darwin/*(.:t)
+    autoload -z $ZPWR_AUTOLOAD_DARWIN/*(.:t)
     # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
-    autoload -z $ZPWR_AUTOLOAD/linux/*(.:t)
+    autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
     zpwrLinuxPlugins
 else
     # unix
-    autoload -z $ZPWR_AUTOLOAD/linux/*(.:t)
+    autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
 fi
 #}}}***********************************************************
 
