@@ -16,13 +16,16 @@ hlissner/zsh-autopair
 zsh-users/zsh-autosuggestions
 MenkeTechnologies/zsh-better-npm-completion
 zsh-users/zsh-completions
+MenkeTechnologies/zsh-cpan-completion
 akarzim/zsh-docker-aliases
 MenkeTechnologies/zsh-expand
+MenkeTechnologies/zsh-gem-completion
 MenkeTechnologies/zsh-git-acp
 nnao45/zsh-kubectl-completion
 MenkeTechnologies/zsh-learn
 MenkeTechnologies/zsh-more-completions
 MenkeTechnologies/zsh-nginx
+srijanshetty/zsh-pip-completion
 MenkeTechnologies/zsh-sed-sub
 MenkeTechnologies/zsh-surround
 zsh-users/zsh-syntax-highlighting

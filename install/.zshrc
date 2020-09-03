@@ -191,11 +191,13 @@ ZSH_DISABLE_COMPFIX=true
 plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin
     fasd-simple gh_reveal zsh-travis
     zsh-z zsh-expand zsh-autopair
+    zsh-gem-completion zsh-pip-completion
+    zsh-cpan-completion
     zsh-nginx zsh-more-completions history-search-multi-word
     forgit fzf-zsh zsh-completions zsh-sed-sub
     fast-syntax-highlighting zsh-autosuggestions
-    history-substring-search ruby gem rake yarn ng
-    coffee node npm perl cpanm git github gradle ant mvn
+    history-substring-search ruby rake yarn ng
+    coffee node npm perl git github gradle ant mvn
     scala lein spring django pip pyenv python golang man nmap
     postgres redis-cli colorize sudo rsync
     vundle rust rustup cargo meteor gulp grunt glassfish tig fd
