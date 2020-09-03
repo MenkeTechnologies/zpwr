@@ -59,8 +59,6 @@ if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
             } &> /dev/null
         else
             logg "clients so NO attach"
-            logg command tmux attach
-            command tmux attach
         fi
     else
         logg "not desktop so NO attach"
