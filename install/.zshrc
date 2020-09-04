@@ -1834,6 +1834,13 @@ source "$ZPWR_RE_ENV_FILE" || {
     echo "where is $ZPWR_RE_ENV_FILE" >&2
 }
 
+if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
+    : ~ZPWR_PLUGIN_DIR
+    # ./ = dont show in prompt
+    export PD="$ZPWR_PLUGIN_DIR/."
+fi
+
+
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
 loggDebug "zsh startup took $startupTimeMs seconds"
