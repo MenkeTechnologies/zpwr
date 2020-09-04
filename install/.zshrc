@@ -461,14 +461,6 @@ fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
 
-if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
-  # Load only from secure directories
-  compinit -i -C -d "${ZSH_COMPDUMP}"
-else
-  # If the user wants it, load from all found directories
-  compinit -u -C -d "${ZSH_COMPDUMP}"
-fi
-
 for p in $ghPlugins; do
     zinit load $p
 done
@@ -476,6 +468,14 @@ done
 for p in $omzPlugins; do
     zinit ice svn for OMZ::plugins/$p pick=null
 done
+
+if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
+  # Load only from secure directories
+  compinit -i -C -d "${ZSH_COMPDUMP}"
+else
+  # If the user wants it, load from all found directories
+  compinit -u -C -d "${ZSH_COMPDUMP}"
+fi
 
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
