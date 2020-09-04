@@ -14,17 +14,22 @@ type -a ZPWR_VARS 1>/dev/null 2>&1 || declare -A ZPWR_VARS
 
 type -a evalIfNeeded 1>/dev/null 2>&1 || function evalIfNeeded() {
 
-    local name base add current currentNoBase toRemove
+    local name current prev
     name="$1"
     current="$2"
     wanted="$3"
-    old="${ZPWR_VARS[$name]}"
 
     # first time sourced from .zpwr_env.sh
-    if [[ -z "$old" ]]; then
-        ZPWR_VARS[$name]="$current"
-        #echo eval "export $name=\"$wanted\""
+    if [[ -z "$current" ]]; then
+        # when no env var from env pre zpwr and first time this file is read
         eval "export $name=\"$wanted\""
+        ZPWR_VARS[prev_$name]="$wanted"
+        return 0
+    elif [[ -z "${ZPWR_VARS[prev_$name]}" ]]; then
+        # when env var from zshenv but first time this file is read
+        # overwrite it b/c all zpwr config must be done in zpwr except $ZPWR
+        eval "export $name=\"$wanted\""
+        ZPWR_VARS[prev_$name]="$wanted"
         return 0
     fi
 
@@ -32,24 +37,16 @@ type -a evalIfNeeded 1>/dev/null 2>&1 || function evalIfNeeded() {
     if [[ "$current" == "$wanted" ]]; then
         return 0
     fi
+    prev=${ZPWR_VARS[prev_$name]}
 
-    shift 3;
-
-    # remove all inner environment variables
-    for toRemove; do
-        current=${current//$toRemove}
-        old=${old//$toRemove}
-    done
-
-    # user has inner environment variables with no direct modification of this environment variables
-    # so reexport with new inner environment variables
-    if [[ "$current" == "$old" ]]; then
-        # when just base has changed, re export with new base
-        #echo eval "export $name=\"$wanted\""
+    if [[ "$current" == "$prev" ]]; then
+        # user has made change to base variables so reexport
         eval "export $name=\"$wanted\""
+        # save prev state
+        ZPWR_VARS[prev_$name]="$wanted"
         return 0
     fi
-
+    # user has made direct change to env variable so leave alone
 }
 
 # the base dir for zpwr configs
