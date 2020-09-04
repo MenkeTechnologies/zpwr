@@ -185,7 +185,7 @@ ZSH_DISABLE_COMPFIX=true
 #{{{                    MARK:OMZ plugins
 #**************************************************************
 
-ghPlugins=(
+ZPWR_GH_PLUGINS=(
     MenkeTechnologies/fasd-simple
     zdharma/fast-syntax-highlighting
     wfxr/forgit
@@ -225,7 +225,7 @@ ghPlugins=(
     zdharma/zzcomplete
 )
 
-omzPlugins=(
+ZPWR_OMZ_PLUGINS=(
     ruby
     rake
     yarn
@@ -258,7 +258,7 @@ omzPlugins=(
     magic-enter
 )
 
-omzComps=(
+ZPWR_OMZ_COMPS=(
     gradle
     scala
     lein
@@ -272,22 +272,22 @@ omzComps=(
 
 
 if exists docker; then
-    omzComps+=(docker)
-    ghPlugins+=(akarzim/zsh-docker-aliases)
+    ZPWR_OMZ_COMPS+=(docker)
+    ZPWR_GH_PLUGINS+=(akarzim/zsh-docker-aliases)
 fi
 
 if exists docker-compose; then
-    omzPlugins+=(docker-compose)
+    ZPWR_OMZ_PLUGINS+=(docker-compose)
 fi
 
-exists kubectl && ghPlugins+=(MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion)
+exists kubectl && ZPWR_GH_PLUGINS+=(MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion)
 
-exists subl && omzPlugins+=(sublime)
+exists subl && ZPWR_OMZ_PLUGINS+=(sublime)
 
-exists rails && omzPlugins+=(rails)
+exists rails && ZPWR_OMZ_PLUGINS+=(rails)
 
 if [[ $ZPWR_LEARN != false ]]; then
-    ghPlugins+=(MenkeTechnologies/zsh-learn)
+    ZPWR_GH_PLUGINS+=(MenkeTechnologies/zsh-learn)
 fi
 
 #}}}***********************************************************
@@ -443,14 +443,14 @@ fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
 
-for p in $ghPlugins; do
+for p in $ZPWR_GH_PLUGINS; do
     zinit load $p
 done
 
-for p in $omzComps; do
+for p in $ZPWR_OMZ_COMPS; do
     zinit ice svn for OMZ::plugins/$p pick=null
 done
-for p in $omzPlugins; do
+for p in $ZPWR_OMZ_PLUGINS; do
     zinit ice svn for OMZ::plugins/$p pick=null
     zinit snippet OMZ::plugins/$p 2>/dev/null
 done
