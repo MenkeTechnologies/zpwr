@@ -460,6 +460,8 @@ evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
 evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD " "$ZPWR/autoload" "$ZPWR"
 # autoloaded completion functions
 evalIfNeeded ZPWR_COMPS "$ZPWR_COMPS " "$ZPWR/comps" "$ZPWR"
+# OMZ custom plugin dir
+evalIfNeeded ZPWR_PLUGIN_DIR "$ZPWR_PLUGIN_DIR" "$ZSH_CUSTOM/plugins" "$ZSH_CUSTOM"
 # same as zpwr local
 evalIfNeeded ZPWR_HIDDEN_DIR "$ZPWR_HIDDEN_DIR" "$ZPWR/local" "$ZPWR"
 # private tokens file sourced before 
