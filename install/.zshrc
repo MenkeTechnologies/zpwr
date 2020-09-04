@@ -349,7 +349,7 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
 #{{{                    MARK:autoload
 #**************************************************************
 autoload -z $ZPWR_AUTOLOAD/common/*(.:t)
-autoload -Uz zrecompile zm zargsjj
+autoload -Uz zrecompile zm zargs
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
