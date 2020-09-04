@@ -25,7 +25,7 @@ nnao45/zsh-kubectl-completion
 MenkeTechnologies/zsh-learn
 MenkeTechnologies/zsh-more-completions
 MenkeTechnologies/zsh-nginx
-srijanshetty/zsh-pip-completion
+MenkeTechnologies/zsh-pip-description-completion
 MenkeTechnologies/zsh-sed-sub
 MenkeTechnologies/zsh-surround
 zsh-users/zsh-syntax-highlighting

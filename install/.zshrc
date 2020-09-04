@@ -191,14 +191,14 @@ ZSH_DISABLE_COMPFIX=true
 plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin
     fasd-simple gh_reveal zsh-travis
     zsh-z zsh-expand zsh-autopair
-    zsh-gem-completion zsh-pip-completion
+    zsh-gem-completion zsh-pip-description-completion
     zsh-cpan-completion
     zsh-nginx zsh-more-completions history-search-multi-word
     forgit fzf-zsh zsh-completions zsh-sed-sub
     fast-syntax-highlighting zsh-autosuggestions
     history-substring-search ruby rake yarn ng
     coffee node npm perl git github gradle ant mvn
-    scala lein spring django pip pyenv python golang man nmap
+    scala lein spring django pyenv python golang man nmap
     postgres redis-cli colorize sudo rsync
     vundle rust rustup cargo meteor gulp grunt glassfish tig fd
     zsh-very-colorful-manuals zsh-docker-aliases zsh-git-acp
@@ -1233,6 +1233,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:manuals.3p' list-colors '=(#b)(*)=1;30=37;46'
 
     zstyle ':completion:*:cpan-module' list-colors '=(#b)(*)=1;30=37;46'
+    zstyle ':completion:*:remote-pip' list-colors '=(#b)(*)=1;30=37;46'
     zstyle ':completion:*:remote-gem' list-colors '=(#b)(*)=1;30=37;46'
     # pgrep and kill
     zstyle ':completion:*:processes' list-colors '=(#b)(*)=1;30=1;36;44'
