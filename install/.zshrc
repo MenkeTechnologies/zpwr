@@ -236,10 +236,10 @@ omzPlugins=(
     perl
     git
     github
-    gradle
     ant
     mvn
 
+    gradle
     scala
     lein
     spring
@@ -473,11 +473,8 @@ for p in $ghPlugins; do
     zinit load $p
 done
 
-zinit ice svn
-
-
 for p in $omzPlugins; do
-    zinit snippet OMZP::$p
+    zinit ice svn for OMZ::plugins/$p pick=null
 done
 
 if [[ $ZPWR_DEBUG == true ]]; then
