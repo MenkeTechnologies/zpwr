@@ -3,7 +3,7 @@
 function ___emacsAll(){
 
     builtin cd $ZPWR
-    ${=ZPWR_EMACS_CLIENT} "$(zpwrListFiles)"
+    ${=ZPWR_EMACS_CLIENT} "${=$(zpwrListFiles)}"
     clearList
     isGitDir && git diff HEAD
 }
