@@ -54,6 +54,9 @@ function __zpwr(){
                     cdup)
                         _r
                         ;;
+                    clone|cloneToForked)
+                        _git-clone
+                        ;;
                     gitedittag)
                         __zpwr_gtl
                         ;;
