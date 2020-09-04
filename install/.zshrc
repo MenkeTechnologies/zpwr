@@ -467,6 +467,7 @@ done
 
 for p in $omzPlugins; do
     zinit ice svn for OMZ::plugins/$p pick=null
+    zinit snippet OMZ::plugins/$p
 done
 
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
