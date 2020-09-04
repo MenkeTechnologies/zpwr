@@ -21,7 +21,10 @@ function zpwrEnvCounts(){
     echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
     echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
     echo "ZPWR verbs: ${#ZPWR_VERBS}"
-    echo "ZPWR script count: $(zpwrScriptCount)"
+    echo "ZPWR zsh plugins: ${#plugins}"
+    echo "ZPWR vim plugins: $(zpwrVimPluginCount)"
+    echo "ZPWR autoloads: $(zpwrAutoloadCount)"
+    echo "ZPWR scripts: $(zpwrScriptCount)"
     echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
     echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
 }
