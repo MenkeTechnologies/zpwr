@@ -551,7 +551,7 @@ fi
 if [[ $COMPLETION_WAITING_DOTS = true ]]; then
   expand-or-complete-with-dots() {
     print -Pn "%F{red}…%f"
-    zle expand-or-complete
+    zle .expand-or-complete
     zle redisplay
   }
   zle -N expand-or-complete-with-dots
