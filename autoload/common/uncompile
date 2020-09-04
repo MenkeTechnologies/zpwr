@@ -25,6 +25,13 @@ function uncompile(){
         "$ZPWR_LIB"
         "$ZPWR_LIB_INIT"
         "$ZPWR_SCRIPTS/crossOSCommands.sh"
+        "$ZSH/lib/"*.zsh
+        "$ZSH/plugins/"*/*.plugin.zsh
+        "$ZSH/themes/"*.zsh-theme
+        "$ZSH_CUSTOM/plugins/"*/*.plugin.zsh
+        "$ZSH_CUSTOM/plugins/"*/*.plugin.zsh
+        "$ZSH_CUSTOM/themes/"*/*.zsh-theme
+        "$ZSH_CUSTOM/lib/"*.zsh
     )
 
     sudoFiles=(

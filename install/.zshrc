@@ -130,7 +130,7 @@ export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-#DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="true"
 
 DISABLE_UPDATE_PROMPT="true"
 
@@ -349,7 +349,7 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
 #{{{                    MARK:autoload
 #**************************************************************
 autoload -z $ZPWR_AUTOLOAD/common/*(.:t)
-autoload -Uz zrecompile zm zargs
+autoload -Uz zrecompile zm zargsjj
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
