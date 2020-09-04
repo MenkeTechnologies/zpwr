@@ -386,23 +386,23 @@ fi
 
 
 
-for plug in ${plugins[@]}; do
-    if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
-        # null glob - no error
-        for dir in "$ZSH/custom/plugins/$plug/"*src(N); do
-            if [[ -d "$dir" ]]; then
-                if [[ -z ${fpath[(r)$dir]} ]];then
-                    if [[ $dir = *override* ]]; then
-                        fpath=($dir $fpath)
-                    else
-                        fpath=($fpath $dir)
-                    fi
-                    # echo "add $dir to $fpath" >> "$ZPWR_LOGFILE"
-                fi
-            fi
-        done
-    fi
-done
+#for plug in ${plugins[@]}; do
+    #if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
+        ## null glob - no error
+        #for dir in "$ZSH/custom/plugins/$plug/"*src(N); do
+            #if [[ -d "$dir" ]]; then
+                #if [[ -z ${fpath[(r)$dir]} ]];then
+                    #if [[ $dir = *override* ]]; then
+                        #fpath=($dir $fpath)
+                    #else
+                        #fpath=($fpath $dir)
+                    #fi
+                    ## echo "add $dir to $fpath" >> "$ZPWR_LOGFILE"
+                #fi
+            #fi
+        #done
+    #fi
+#done
 
 # add ZPWR autoload dirs to fpath
 fpath=($ZPWR_AUTOLOAD_LINUX $ZPWR_AUTOLOAD_DARWIN $ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
