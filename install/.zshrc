@@ -549,19 +549,14 @@ fi
 
 #{{{                    MARK:ZLE bindkey
 #**************************************************************
-if [[ $COMPLETION_WAITING_DOTS = true ]]; then
-  expand-or-complete-with-dots() {
+expand-or-complete-with-dots() {
     print -Pn "%F{red}…%f"
     zle expand-or-complete
     zle redisplay
-  }
-  zle -N expand-or-complete-with-dots
-  # Set the function as the default tab completion widget
-  bindkey -M viins "^I" expand-or-complete-with-dots
-  bindkey -M vicmd "^I" expand-or-complete-with-dots
-fi
+}
 
 autoload -Uz select-bracketed select-quoted bracketed-paste-magic
+zle -N expand-or-complete-with-dots
 zle -N select-bracketed
 zle -N select-quoted
 zle -N zle-keymap-select
@@ -608,15 +603,15 @@ zle -N alternateQuotes
 zle -N clipboard
 zle -N EOLorNextTabStop
 
+#vim mode for zle
+bindkey -v
+
 bindkey -M vicmd '^G' what-cursor-position
 bindkey -M viins '^G' what-cursor-position
 bindkey -M viins '^[^M' self-insert-unmeta
 bindkey -M viins '^P' EOLorNextTabStop
 bindkey -M vicmd '^P' EOLorNextTabStop
 bindkey -M vicmd G end-of-buffer-or-history
-
-#vim mode for zle
-bindkey -v
 
 bindkey -M viins "^?" interceptDelete
 bindkey -M viins '"' interceptSurround
@@ -807,9 +802,6 @@ bindkey -M vicmd '^A' beginning-of-line
 bindkey -M viins '^E' end-of-line
 bindkey -M vicmd '^E' end-of-line
 
-# env var to show dots does not work with vim mode
-bindkey '^I' expand-or-complete-with-dots
-
 bindkey '^X^R' _read_comp
 bindkey '^X?' _complete_debug
 bindkey '^XC' _correct_filename
@@ -926,6 +918,13 @@ if (( $version > 5.2 )); then
         done
     done
 fi
+
+test -s "$HOME/.zinit/plugins/fzf/shell/completion.zsh" \
+    && source "$HOME/.zinit/plugins/fzf/shell/completion.zsh"
+
+bindkey -M vicmd '^I' expand-or-complete-with-dots
+bindkey -M viins '^I' expand-or-complete-with-dots
+
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE hooks
@@ -1772,8 +1771,6 @@ alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff='"$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' -
 alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f="\$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
 alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z="| $ZPWR_FZF $FZF_CTRL_T_OPTS "
 
-test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \
-    && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh"
 
 local base03="234"
 local base02="235"
