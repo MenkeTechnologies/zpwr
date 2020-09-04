@@ -238,18 +238,7 @@ omzPlugins=(
     github
     ant
     mvn
-
-    gradle
-    scala
-    lein
-    spring
-    redis-cli
-    rust
-    cargo
-    rustup
-    fd
-
-    django
+     django
     pyenv
     python
     golang
@@ -269,8 +258,21 @@ omzPlugins=(
     magic-enter
 )
 
+omzComps=(
+    gradle
+    scala
+    lein
+    spring
+    redis-cli
+    rust
+    cargo
+    rustup
+    fd
+)
+
+
 if exists docker; then
-    omzPlugins+=(docker)
+    omzComps+=(docker)
     ghPlugins+=(akarzim/zsh-docker-aliases)
 fi
 
@@ -384,26 +386,6 @@ if [[ $ZPWR_DEBUG == true ]]; then
     echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
 fi
 
-
-
-#for plug in ${plugins[@]}; do
-    #if [[ -d "$ZSH/custom/plugins/$plug" ]]; then
-        ## null glob - no error
-        #for dir in "$ZSH/custom/plugins/$plug/"*src(N); do
-            #if [[ -d "$dir" ]]; then
-                #if [[ -z ${fpath[(r)$dir]} ]];then
-                    #if [[ $dir = *override* ]]; then
-                        #fpath=($dir $fpath)
-                    #else
-                        #fpath=($fpath $dir)
-                    #fi
-                    ## echo "add $dir to $fpath" >> "$ZPWR_LOGFILE"
-                #fi
-            #fi
-        #done
-    #fi
-#done
-
 # add ZPWR autoload dirs to fpath
 fpath=($ZPWR_AUTOLOAD_LINUX $ZPWR_AUTOLOAD_DARWIN $ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
 
@@ -465,9 +447,12 @@ for p in $ghPlugins; do
     zinit load $p
 done
 
+for p in $omzComps; do
+    zinit ice svn for OMZ::plugins/$p pick=null
+done
 for p in $omzPlugins; do
     zinit ice svn for OMZ::plugins/$p pick=null
-    zinit snippet OMZ::plugins/$p
+    zinit snippet OMZ::plugins/$p 2>/dev/null
 done
 
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
@@ -774,6 +759,8 @@ bindkey '\eOQ' sub
 
 #F3 key
 bindkey '\eOR' getrcWidget
+stty stop undef
+stty start undef
 
 #determine if this terminal was started in IDE
 if [[ "$ZPWR_OS_TYPE" == darwin ]];then
