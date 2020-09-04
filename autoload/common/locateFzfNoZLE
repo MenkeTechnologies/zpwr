@@ -27,4 +27,4 @@ function ___locateFzfNoZLE(){
     fi
 }
 
-___locateFzfNoZLE
+___locateFzfNoZLE "$@"

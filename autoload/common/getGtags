@@ -26,4 +26,4 @@ function ___getGtags(){
     eval "$BUFFER"
 }
 
-___getGtags
+___getGtags "$@"

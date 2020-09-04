@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-unction ___figletfonts(){
+function ___figletfonts(){
 
     local figletDir ary file font
 

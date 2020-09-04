@@ -8,4 +8,4 @@ function ___fzvimAll(){
         perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
-___fzvimAll
+___fzvimAll "$@"

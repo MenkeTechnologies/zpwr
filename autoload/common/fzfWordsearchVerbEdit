@@ -27,4 +27,4 @@ function ___fzfWordsearchVerbEdit(){
 
 }
 
-___fzfWordsearchVerbEdit 
+___fzfWordsearchVerbEdit "$@"

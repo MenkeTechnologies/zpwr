@@ -10,4 +10,4 @@ function ___color2(){
     fi
 }
 
-___color2
+___color2 "$@"
