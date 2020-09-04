@@ -109,7 +109,7 @@ if ! echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
     export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
+        #export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
         export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         export PATH="$ZPWR_SCRIPTS_MAC:$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$HOME/.platformio/penv/bin"
     else

@@ -184,43 +184,48 @@ ZSH_DISABLE_COMPFIX=true
 
 #{{{                    MARK:OMZ plugins
 #**************************************************************
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
 
-plugins=(
-    fzf-tab
-    revolver
-    zunit
-    jhipster-oh-my-zsh-plugin
-    fasd-simple
-    gh_reveal
-    zsh-travis
-    zsh-z
-    zsh-expand
-    zsh-autopair
-    zsh-gem-completion
-    zsh-pip-description-completion
-    zsh-cpan-completion
-    zsh-nginx
-    zsh-more-completions
-    history-search-multi-word
-    forgit
-    fzf-zsh
-    zsh-completions
-    zsh-sed-sub
-    fast-syntax-highlighting
-    zsh-autosuggestions
-    history-substring-search
-    zsh-very-colorful-manuals
-    zsh-docker-aliases
-    zsh-git-acp
-    zconvey
-    zsh-unique-id
-    zzcomplete
-    zui
-    zbrowse
-    zsh-better-npm-completion
+ghPlugins=(
+    MenkeTechnologies/fasd-simple
+    zdharma/fast-syntax-highlighting
+    wfxr/forgit
+    MenkeTechnologies/fzf
+    MenkeTechnologies/fzf-tab
+    Treri/fzf-zsh
+    MenkeTechnologies/gh_reveal
+    zdharma/history-search-multi-word
+    MenkeTechnologies/jhipster-oh-my-zsh-plugin
+    MenkeTechnologies/revolver
+    zdharma/zbrowse
+    zdharma/zconvey
+    hlissner/zsh-autopair
+    zsh-users/zsh-autosuggestions
+    MenkeTechnologies/zsh-better-npm-completion
+    zsh-users/zsh-completions
+    zsh-users/zsh-history-substring-search
+    MenkeTechnologies/zsh-cpan-completion
+    akarzim/zsh-docker-aliases
+    MenkeTechnologies/zsh-expand
+    MenkeTechnologies/zsh-gem-completion
+    MenkeTechnologies/zsh-git-acp
+    MenkeTechnologies/zsh-more-completions
+    MenkeTechnologies/zsh-nginx
+    MenkeTechnologies/zsh-pip-description-completion
+    MenkeTechnologies/zsh-sed-sub
+    zsh-users/zsh-syntax-highlighting
+    zdharma/zsh-tig-plugin
+    MenkeTechnologies/zsh-travis
+    zdharma/zsh-unique-id
+    MenkeTechnologies/zsh-very-colorful-manuals
+    MenkeTechnologies/zsh-xcode-completions
+    MenkeTechnologies/zsh-z
+    MenkeTechnologies/powerlevel9k
+    zdharma/zui
+    MenkeTechnologies/zunit
+    zdharma/zzcomplete
+)
+
+omzPlugins=(
     ruby
     rake
     yarn
@@ -234,9 +239,16 @@ plugins=(
     gradle
     ant
     mvn
+
     scala
     lein
     spring
+    redis-cli
+    rust
+    cargo
+    rustup
+    fd
+
     django
     pyenv
     python
@@ -244,25 +256,38 @@ plugins=(
     man
     nmap
     postgres
-    redis-cli
     colorize
     sudo
     rsync
     vundle
-    rust
-    rustup
-    cargo
     meteor
     gulp
     grunt
     glassfish
     tig
-    fd
     tmux
     magic-enter
 )
 
-source "$HOME/.oh-my-zsh/lib/key-bindings.zsh"
+if exists docker; then
+    omzPlugins+=(docker)
+    ghPlugins+=(akarzim/zsh-docker-aliases)
+fi
+
+if exists docker-compose; then
+    omzPlugins+=(docker-compose)
+fi
+
+exists kubectl && ghPlugins+=(MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion)
+
+exists subl && omzPlugins+=(sublime)
+
+exists rails && omzPlugins+=(rails)
+
+if [[ $ZPWR_LEARN != false ]]; then
+    ghPlugins+=(MenkeTechnologies/zsh-learn)
+fi
+
 #}}}***********************************************************
 
 #{{{                    MARK:forgit https://github.com/wfxr/forgit
@@ -359,23 +384,6 @@ if [[ $ZPWR_DEBUG == true ]]; then
     echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
 fi
 
-if exists docker; then
-    plugins+=(docker zsh-docker-aliases)
-fi
-
-if exists docker-compose; then
-    plugins+=(docker-compose)
-fi
-
-exists kubectl && plugins+=(kubectl-aliases zsh-kubectl-completion)
-
-exists subl && plugins+=(sublime)
-
-exists rails && plugins+=(rails)
-
-if [[ $ZPWR_LEARN != false ]]; then
-    plugins+=(zsh-learn)
-fi
 
 
 for plug in ${plugins[@]}; do
@@ -449,8 +457,28 @@ if [[ $ZPWR_DEBUG == true ]]; then
 fi
 
 # source OMZ
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
+source "$HOME/.zinit/bin/zinit.zsh"
+
+if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
+  # Load only from secure directories
+  compinit -i -C -d "${ZSH_COMPDUMP}"
+else
+  # If the user wants it, load from all found directories
+  compinit -u -C -d "${ZSH_COMPDUMP}"
+fi
+
+for p in $ghPlugins; do
+    zinit load $p
+done
+
+zinit ice svn
+
+
+for p in $omzPlugins; do
+    zinit snippet OMZP::$p
+done
 
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
@@ -523,6 +551,18 @@ fi
 
 #{{{                    MARK:ZLE bindkey
 #**************************************************************
+if [[ $COMPLETION_WAITING_DOTS = true ]]; then
+  expand-or-complete-with-dots() {
+    print -Pn "%F{red}…%f"
+    zle expand-or-complete
+    zle redisplay
+  }
+  zle -N expand-or-complete-with-dots
+  # Set the function as the default tab completion widget
+  bindkey -M viins "^I" expand-or-complete-with-dots
+  bindkey -M vicmd "^I" expand-or-complete-with-dots
+fi
+
 autoload -Uz select-bracketed select-quoted bracketed-paste-magic
 zle -N select-bracketed
 zle -N select-quoted
@@ -1509,56 +1549,56 @@ alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) mast
 alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
 if [[ -d "$ZPWR_INSTALL" ]]; then
-    exists zi || alias zi="cd $ZPWR_INSTALL"
+    alias zi="cd $ZPWR_INSTALL"
 fi
 
 if [[ -d "$ZPWR_SCRIPTS" ]]; then
-    exists zs || alias zs="cd $ZPWR_SCRIPTS"
+    alias zs="cd $ZPWR_SCRIPTS"
 fi
 
 if [[ -d "$ZPWR_COMPS" ]]; then
-    exists zco || alias zco="cd $ZPWR_COMPS"
+    alias zco="cd $ZPWR_COMPS"
 fi
 
 if [[ -d "$ZPWR_AUTOLOAD_COMMON" ]]; then
-    exists zal || alias zal="cd $ZPWR_AUTOLOAD_COMMON"
+    alias zal="cd $ZPWR_AUTOLOAD_COMMON"
 fi
 
 if [[ -d "$ZPWR_SCRIPTS_MAC" ]]; then
-    exists zsm || alias zsm="cd $ZPWR_SCRIPTS_MAC"
+    alias zsm="cd $ZPWR_SCRIPTS_MAC"
 fi
 
 if [[ -d "$ZPWR" ]]; then
-    exists zh || alias zh="cd $ZPWR"
+    alias zh="cd $ZPWR"
 fi
 
 if [[ -d "$ZPWR_TMUX" ]]; then
-    exists ztm || alias ztm="cd $ZPWR_TMUX"
+    alias ztm="cd $ZPWR_TMUX"
 fi
 
 if [[ -d "$ZPWR_TMUX" ]]; then
-    exists zt || alias zt="cd $ZPWR_TEST"
+    alias zt="cd $ZPWR_TEST"
 fi
 
 if [[ -d "$ZPWR_TMUX_LOCAL" ]]; then
-    exists ztl || alias ztl="cd $ZPWR_TMUX_LOCAL"
+    alias ztl="cd $ZPWR_TMUX_LOCAL"
 fi
 
 if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-    exists zlt || alias zlt="cd $ZPWR_HIDDEN_DIR_TEMP"
+    alias zlt="cd $ZPWR_HIDDEN_DIR_TEMP"
 fi
 
 if [[ -d "$ZPWR_LOCAL/installer" ]]; then
-    exists zli || alias zli="cd $ZPWR_LOCAL/installer"
+    alias zli="cd $ZPWR_LOCAL/installer"
 fi
 
 if [[ -d "$ZPWR_LOCAL" ]]; then
-    exists zl || alias zl="cd $ZPWR_LOCAL"
-    exists zlr || alias zlr="cd $ZPWR_LOCAL/rcBackups"
+    alias zl="cd $ZPWR_LOCAL"
+    alias zlr="cd $ZPWR_LOCAL/rcBackups"
 fi
 
 if [[ -d "$ZSH/custom/plugins" ]]; then
-    exists zpl || alias zpl="cd $ZSH/custom/plugins"
+    alias zpl="cd $ZSH/custom/plugins"
 fi
 
 alias numcmd='print $#commands'
