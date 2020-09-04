@@ -1232,6 +1232,8 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:manuals.1p' list-colors '=(#b)(*)=1;30=37;46'
     zstyle ':completion:*:manuals.3p' list-colors '=(#b)(*)=1;30=37;46'
 
+    zstyle ':completion:*:cpan-module' list-colors '=(#b)(*)=1;30=37;46'
+    zstyle ':completion:*:remote-gem' list-colors '=(#b)(*)=1;30=37;46'
     # pgrep and kill
     zstyle ':completion:*:processes' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:processes-names' list-colors '=(#b)(*)=1;30=1;37;43'
