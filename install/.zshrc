@@ -443,8 +443,6 @@ fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
 
-export ZSH_CUSTOM="$HOME/.zinit"
-
 for p in $ZPWR_GH_PLUGINS; do
     zinit load $p
 done
