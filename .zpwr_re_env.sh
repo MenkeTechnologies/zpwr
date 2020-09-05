@@ -65,8 +65,10 @@ evalIfNeeded ZPWR_AUTOLOAD_LINUX "$ZPWR_AUTOLOAD_LINUX" "$ZPWR_AUTOLOAD/linux" "
 evalIfNeeded ZPWR_AUTOLOAD_SYSTEMCTL "$ZPWR_AUTOLOAD_SYSTEMTCTL" "$ZPWR_AUTOLOAD/systemctl" "$ZPWR_AUTOLOAD"
 # autoloaded completion functions
 evalIfNeeded ZPWR_COMPS "$ZPWR_COMPS" "$ZPWR/comps" "$ZPWR"
-# OMZ custom plugin dir
+# custom plugin dir
 evalIfNeeded ZPWR_PLUGIN_DIR "$ZPWR_PLUGIN_DIR" "$ZSH_CUSTOM/plugins" "$ZSH_CUSTOM"
+# fzf custom plugin dir
+evalIfNeeded ZPWR_ZINIT_FZF "$ZPWR_ZINIT_FZF" "$ZPWR_PLUGIN_DIR/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_DIR"
 # same as zpwr local
 evalIfNeeded ZPWR_HIDDEN_DIR "$ZPWR_HIDDEN_DIR" "$ZPWR/local" "$ZPWR"
 # private tokens file sourced before

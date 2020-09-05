@@ -1582,7 +1582,7 @@ set dictionary+=/usr/share/dict/words
 " thesaurus completion normally invoked in insert mode with C-X C-T
 set thesaurus+=~/mthesaur.txt
 
-source ~/.zinit/plugins/fzf/plugin/fzf.vim
+source $ZPWR_ZINIT_FZF/plugin/fzf.vim
 
 " easier mapping for dict completion
 inoremap <silent> <F10> <C-X><C-K>

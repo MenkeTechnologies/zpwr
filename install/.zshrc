@@ -1908,13 +1908,12 @@ fi
 source "$ZPWR_RE_ENV_FILE" || {
     echo "where is $ZPWR_RE_ENV_FILE" >&2
 }
+test -s "$ZPWR_ZINIT_FZF/shell/completion.zsh" \
+    && source "$ZPWR_ZINIT_FZF/shell/completion.zsh"
 
-test -s "$ZPWR_PLUGIN_DIR/fzf/shell/completion.zsh" \
-    && source "$ZPWR_PLUGIN_DIR/fzf/shell/completion.zsh"
-
-export PATH="$ZPWR_PLUGIN_DIR/fzf/bin:$PATH"
-export MANPATH="$ZPWR_PLUGIN_DIR/fzf/man:$MANPATH"
-source "$ZPWR_PLUGIN_DIR/fzf/shell/key-bindings.zsh"
+export PATH="$ZPWR_ZINIT_FZF/bin:$PATH"
+export MANPATH="$ZPWR_ZINIT_FZF/fzf/man:$MANPATH"
+source "$ZPWR_ZINIT_FZF/shell/key-bindings.zsh"
 
 if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
     : ~ZPWR_PLUGIN_DIR
