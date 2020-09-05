@@ -254,10 +254,10 @@ ZPWR_OMZ_PLUGINS=(
     tig
     tmux
     magic-enter
+    gradle
 )
 
 ZPWR_OMZ_COMPS=(
-    gradle
     scala
     lein
     spring
@@ -378,8 +378,6 @@ setopt menucomplete
 #{{{                    MARK:OMZ conditional Plugins
 #**************************************************************
 
-# OMZ does not add nested comp dirs to fpath so do it here, assume src
-
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
 fi
@@ -447,8 +445,7 @@ if [[ $ZPWR_DEBUG == true ]]; then
     echo "pre: $fpath" >> "$ZPWR_LOGFILE"
 fi
 
-# source OMZ
-# source $ZSH/oh-my-zsh.sh
+# prevent zinit from putting system fpath after zinit completions
 
 source "$HOME/.zinit/bin/zinit.zsh"
 
