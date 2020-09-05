@@ -240,6 +240,8 @@ exists spotify && {
 }
 
 if isZsh; then
+    # zsh xtrace prompt
+    export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
     alias 10='cd -10'
     alias 11='cd -11'
     alias 12='cd -12'

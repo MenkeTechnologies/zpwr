@@ -117,8 +117,6 @@ export SHELL="$(which zsh)"
 
 # set right prompt string during continuation
 RPS2='+%N:%i:%^'
-# zsh xtrace prompt
-export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ env vars
