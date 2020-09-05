@@ -23,7 +23,9 @@ done
 dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
 
 if ! source "$dir/init.sh"; then
-    echo "could not source dir '$dir/init.sh'"
+    if ! source "$dir/../init.sh"; then
+        echo "could not source dir '$dir/../init.sh'"
+    fi
 fi
 
 [[ -n "$1" ]] && commitMessage="$1" || commitMessage="update"

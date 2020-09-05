@@ -15,7 +15,9 @@ done
 dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
 
 if ! source "$dir/init.sh"; then
-    echo "could not source dir '$dir/init.sh'"
+    if ! source "$dir/../init.sh"; then
+        echo "could not source dir '$dir/../init.sh'"
+    fi
 fi
 
 #commented out sections not necessary if sudo is not requiring passwd
