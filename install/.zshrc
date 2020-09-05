@@ -206,7 +206,6 @@ plugins=(
     zsh-more-completions
     history-search-multi-word
     forgit
-    fzf-zsh
     zsh-completions
     zsh-sed-sub
     fast-syntax-highlighting
@@ -519,6 +518,9 @@ zc-rename $ZPWR_CONVEY_NAME &>/dev/null
 if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
+export PATH="$PATH:$ZPWR_PLUGIN_DIR/fzf/bin"
+export MANPATH="$MANPATH:$ZPWR_PLUGIN_DIR/fzf/man"
+source "$ZPWR_PLUGIN_DIR/fzf/shell/key-bindings.zsh"
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE bindkey

@@ -3,7 +3,6 @@ zdharma/fast-syntax-highlighting
 wfxr/forgit
 MenkeTechnologies/fzf
 MenkeTechnologies/fzf-tab
-Treri/fzf-zsh
 MenkeTechnologies/gh_reveal
 zdharma/history-search-multi-word
 MenkeTechnologies/jhipster-oh-my-zsh-plugin
@@ -27,7 +26,6 @@ MenkeTechnologies/zsh-nginx
 MenkeTechnologies/zsh-pip-description-completion
 MenkeTechnologies/zsh-sed-sub
 MenkeTechnologies/zsh-surround
-zsh-users/zsh-syntax-highlighting
 zdharma/zsh-tig-plugin
 MenkeTechnologies/zsh-travis
 zdharma/zsh-unique-id
