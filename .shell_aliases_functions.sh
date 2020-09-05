@@ -76,7 +76,7 @@ function chooseNvimVim(){
 export Z_DATA="$HOME/.z"
 export PS3=$'\e[1;34m-->>>> \e[0m'
 # bash xtrace prompt
-export PS4='>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
+export PS4=$'>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
 # defaut layout config for nmon
 export NMON='mndckt'
 export CLICOLOR="YES"
