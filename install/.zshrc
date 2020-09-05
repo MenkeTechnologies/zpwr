@@ -191,7 +191,6 @@ ZPWR_GH_PLUGINS=(
     wfxr/forgit
     MenkeTechnologies/fzf
     MenkeTechnologies/fzf-tab
-    Treri/fzf-zsh
     MenkeTechnologies/gh_reveal
     zdharma/history-search-multi-word
     MenkeTechnologies/jhipster-oh-my-zsh-plugin
@@ -905,9 +904,6 @@ if (( $version > 5.2 )); then
         done
     done
 fi
-
-test -s "$HOME/.zinit/plugins/fzf/shell/completion.zsh" \
-    && source "$HOME/.zinit/plugins/fzf/shell/completion.zsh"
 
 bindkey -M vicmd '^I' expand-or-complete-with-dots
 bindkey -M viins '^I' expand-or-complete-with-dots
@@ -1758,7 +1754,6 @@ alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff='"$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' -
 alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f="\$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
 alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z="| $ZPWR_FZF $FZF_CTRL_T_OPTS "
 
-
 local base03="234"
 local base02="235"
 local base01="240"
@@ -1913,6 +1908,13 @@ fi
 source "$ZPWR_RE_ENV_FILE" || {
     echo "where is $ZPWR_RE_ENV_FILE" >&2
 }
+
+test -s "$ZPWR_PLUGIN_DIR/fzf/shell/completion.zsh" \
+    && source "$ZPWR_PLUGIN_DIR/fzf/shell/completion.zsh"
+
+export PATH="$ZPWR_PLUGIN_DIR/fzf/bin:$PATH"
+export MANPATH="$ZPWR_PLUGIN_DIR/fzf/man:$MANPATH"
+source "$ZPWR_PLUGIN_DIR/fzf/shell/key-bindings.zsh"
 
 if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
     : ~ZPWR_PLUGIN_DIR
