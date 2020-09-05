@@ -57,8 +57,11 @@ if ! type -- "exists" >/dev/null 2>&1;then
             loggErr "where is ZPWR_LIB '$ZPWR_LIB'"
             exit 1
         fi
+    fi
 
-
+    if ! isZsh; then
+        # bash xtrace prompt
+        export PS4=$'>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
     fi
 
 fi
