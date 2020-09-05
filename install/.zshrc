@@ -518,9 +518,6 @@ zc-rename $ZPWR_CONVEY_NAME &>/dev/null
 if exists jenv;then
     export PATH="$HOME/.jenv/shims:$PATH"
 fi
-export PATH="$PATH:$ZPWR_PLUGIN_DIR/fzf/bin"
-export MANPATH="$MANPATH:$ZPWR_PLUGIN_DIR/fzf/man"
-source "$ZPWR_PLUGIN_DIR/fzf/shell/key-bindings.zsh"
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE bindkey
@@ -1736,9 +1733,6 @@ alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff='"$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' -
 alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f="\$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
 alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z="| $ZPWR_FZF $FZF_CTRL_T_OPTS "
 
-test -s "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh" \
-    && source "$HOME/.oh-my-zsh/custom/plugins/fzf/shell/completion.zsh"
-
 local base03="234"
 local base02="235"
 local base01="240"
@@ -1893,6 +1887,13 @@ fi
 source "$ZPWR_RE_ENV_FILE" || {
     echo "where is $ZPWR_RE_ENV_FILE" >&2
 }
+
+test -s "$ZPWR_PLUGIN_DIR/fzf/shell/completion.zsh" \
+    && source "$ZPWR_PLUGIN_DIR/fzf/shell/completion.zsh"
+
+export PATH="$ZPWR_PLUGIN_DIR/fzf/bin:$PATH"
+export MANPATH="$ZPWR_PLUGIN_DIR/fzf/man:$MANPATH"
+source "$ZPWR_PLUGIN_DIR/fzf/shell/key-bindings.zsh"
 
 if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
     : ~ZPWR_PLUGIN_DIR
