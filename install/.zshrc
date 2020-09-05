@@ -442,6 +442,8 @@ fi
 
 source "$HOME/.zinit/bin/zinit.zsh"
 
+export ZSH_CUSTOM="$HOME/.zinit"
+
 for p in $ZPWR_GH_PLUGINS; do
     zinit load $p
 done
@@ -1469,8 +1471,6 @@ exists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;git reset o
 
 exists zu8 || alias zu8='zpwr updateall'
 exists zua || alias zua='zpwr updateall'
-
-
 
 alias i='if [[ '$ZPWR_TABSTOP' ]];then
     '$ZPWR_TABSTOP'
