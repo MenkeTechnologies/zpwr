@@ -434,6 +434,17 @@ autoload -Uz compinit
 # compsys cache file
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
 
+function expand-or-complete-with-dots() {
+    print -Pn "%F{red}…%f"
+    zle expand-or-complete
+    zle redisplay
+}
+
+zle -N expand-or-complete-with-dots
+
+bindkey -M vicmd '^I' expand-or-complete-with-dots
+bindkey -M viins '^I' expand-or-complete-with-dots
+
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "pre: $fpath" >> "$ZPWR_LOGFILE"
 fi
@@ -534,14 +545,8 @@ fi
 
 #{{{                    MARK:ZLE bindkey
 #**************************************************************
-expand-or-complete-with-dots() {
-    print -Pn "%F{red}…%f"
-    zle expand-or-complete
-    zle redisplay
-}
 
 autoload -Uz select-bracketed select-quoted bracketed-paste-magic
-zle -N expand-or-complete-with-dots
 zle -N select-bracketed
 zle -N select-quoted
 zle -N zle-keymap-select
@@ -905,9 +910,6 @@ if (( $version > 5.2 )); then
         done
     done
 fi
-
-bindkey -M vicmd '^I' expand-or-complete-with-dots
-bindkey -M viins '^I' expand-or-complete-with-dots
 
 #}}}***********************************************************
 
