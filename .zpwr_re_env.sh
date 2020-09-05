@@ -51,6 +51,15 @@ type -a evalIfNeeded 1>/dev/null 2>&1 || function evalIfNeeded() {
 
 # the base dir for zpwr configs
 test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+
+if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+    evalIfNeeded ZSH "$ZSH" "$HOME/.oh-my-zsh" "$HOME"
+    evalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
+elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+    evalIfNeeded ZSH "$ZSH" "$HOME/.zinit" "$HOME"
+    evalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH" "$ZSH"
+fi
+
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
 # autoloaded non completion functions

@@ -82,6 +82,8 @@ declare +x FPATH
 test -z $ZPWR && export ZPWR="$HOME/.zpwr"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
 
 source "$ZPWR_ENV_FILE" || {
     echo "where is ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
@@ -103,7 +105,6 @@ source "$ZPWR_SCRIPTS/zpwr.zsh"
 #{{{                    MARK:non ZPWR Exports
 #**************************************************************
 export LC_ALL="en_US.UTF-8"
-export ZSH=$HOME/.oh-my-zsh
 unalias ag &> /dev/null
 #stop delay when entering normal mode
 export KEYTIMEOUT=1
@@ -1577,7 +1578,7 @@ if [[ -d "$ZPWR_LOCAL" ]]; then
     alias zlr="cd $ZPWR_LOCAL/rcBackups"
 fi
 
-if [[ -d "$ZSH/custom/plugins" ]]; then
+if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
     alias zpl="cd $ZPWR_PLUGIN_DIR"
 fi
 
