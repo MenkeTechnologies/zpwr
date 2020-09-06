@@ -72,16 +72,22 @@ logg "Updating vim plugins list"
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$ZPWR_DIR_INSTALL/.vimbundle"
 logg "Updating zsh plugins list"
 printf "" > "$ZPWR_DIR_INSTALL/.zshplugins"
-for dir in "$HOME/.oh-my-zsh/custom/plugins/"*; do
-    if basename "$dir" | grep -sq "example";then
-        logg "not adding zsh plugin $dir"
-        continue;
-    else
-        logg "adding zsh plugin $dir"
-    fi
 
-    bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR_INSTALL/.zshplugins"
-done
+if [[ -z $ZSH_CUSTOM ]]; then
+    loggErr "ZSH_CUSTOM is null so can not update zsh plugins list"
+else
+    for dir in "$ZSH_CUSTOM/plugins/"*; do
+        if basename "$dir" | grep -sq "example";then
+            logg "not adding zsh plugin $dir"
+            continue;
+        else
+            logg "adding zsh plugin $dir"
+        fi
+
+        bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR_INSTALL/.zshplugins"
+    done
+fi
+
 
 git add .
 git commit -m "$commitMessage"

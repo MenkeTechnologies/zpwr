@@ -9,7 +9,7 @@
 
 baseDir="$ZPWR"
 configDir="$ZPWR"
-zshCompDir="$HOME/.oh-my-zsh/custom/plugins/$ZSH_COMP_REPO_NAME"
+zshCompDir="$HOME/.zinit/plugins/$ZSH_COMP_REPO_NAME"
 remoteName=origin
 
 [[ ! -d "$configDir" ]] && echo "no config dir '$configDir'" >&2 && exit 1
@@ -40,7 +40,7 @@ function main() {
     local dir completionDir
 
     gittersdev
-    completionDir="$HOME/.oh-my-zsh/custom/plugins"
+    completionDir="$zshCompDir"
     for dir in "$completionDir/"*; do
         printf "$dir: "
         test -d "$dir" && ( builtin cd "$dir" && git pull; )

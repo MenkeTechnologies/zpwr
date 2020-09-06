@@ -93,14 +93,20 @@ if [[ $skip != true ]]; then
     #update pathogen plugins
     gitRepoUpdater "$HOME/.vim/bundle"
 
-    prettyPrint "Updating OhMyZsh"
-    cd "$HOME/.oh-my-zsh/tools" && bash "$HOME/.oh-my-zsh/tools/upgrade.sh"
+    if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+        prettyPrint "Updating OhMyZsh"
+        builtin cd "$ZSH/tools" && bash "$ZSH/tools/upgrade.sh"
 
-    prettyPrint "Updating OhMyZsh Plugins"
-    gitRepoUpdater "$HOME/.oh-my-zsh/custom/plugins"
+        prettyPrint "Updating OhMyZsh Plugins"
+        gitRepoUpdater "$ZSH_CUSTOM/plugins"
 
-    prettyPrint "Updating OhMyZsh Themes"
-    gitRepoUpdater "$HOME/.oh-my-zsh/custom/themes"
+        prettyPrint "Updating OhMyZsh Themes"
+        gitRepoUpdater "$ZSH_CUSTOM/themes"
+    elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+        prettyPrint "Updating Zinit"
+        zinit self-update
+        zinit update
+    fi
 
     exists /usr/local/bin/ruby && {
         prettyPrint "Updating Ruby Packages"

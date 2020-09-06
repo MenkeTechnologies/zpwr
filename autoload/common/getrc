@@ -37,7 +37,7 @@ function ___getrc(){
     bash "$ZPWR_BANNER_SCRIPT"
     linkConf
 
-    completionDir="$HOME/.oh-my-zsh/custom/plugins"
+    completionDir="$ZSH_CUSTOM/plugins"
     for dir in "$completionDir/"*;do
         printf "$dir: "
         test -d "$dir" && ( builtin cd "$dir" && git pull; )

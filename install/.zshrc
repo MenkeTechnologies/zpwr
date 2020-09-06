@@ -194,7 +194,6 @@ ZSH_DISABLE_COMPFIX=true
 
 ZPWR_GH_PLUGINS=(
     MenkeTechnologies/fasd-simple
-    zdharma/fast-syntax-highlighting
     wfxr/forgit
     MenkeTechnologies/fzf
     MenkeTechnologies/fzf-tab
@@ -218,7 +217,7 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/zsh-nginx
     MenkeTechnologies/zsh-pip-description-completion
     MenkeTechnologies/zsh-sed-sub
-    zsh-users/zsh-syntax-highlighting
+    zdharma/fast-syntax-highlighting
     zdharma/zsh-tig-plugin
     MenkeTechnologies/zsh-travis
     zdharma/zsh-unique-id
