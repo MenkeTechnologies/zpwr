@@ -566,7 +566,8 @@ fi
 #{{{                    MARK:ZLE bindkey
 #**************************************************************
 
-autoload -Uz select-bracketed select-quoted bracketed-paste-magic
+autoload -Uz select-bracketed select-quoted bracketed-paste-magic edit-command-line
+zle -N edit-command-line
 zle -N select-bracketed
 zle -N select-quoted
 zle -N zle-keymap-select
@@ -788,12 +789,12 @@ bindkey '\eOR' getrcWidget
 if [[ "$ZPWR_OS_TYPE" == darwin ]];then
     if [[ "$ZPWR_PARENT_PROCESS" == *(login|tmux)* ]]; then
         #Ctrl plus arrow keys
-        bindkey '\e[1;5A' gitfunc
+        bindkey '\e[1;5A' gapCheckDiff
         bindkey '\e[1;5B' updater
         bindkey '\e[1;5C' tutsUpdate
         bindkey '\e[1;5D' dbz
     else
-        bindkey '\e[5A' gitfunc
+        bindkey '\e[5A' gacpCheckDiff
         bindkey '\e[5B' updater
         bindkey '\e[5C' tutsUpdate
         bindkey '\e[5D' dbz
