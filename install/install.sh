@@ -810,7 +810,10 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     prettyPrintBox "Change default shell to zsh"
     sudo -E chsh -s $(which zsh)
 
+    prettyPrintBox "Clone fzf"
     git clone https://github.com/MenkeTechnologies/fzf.git "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf"
+    prettyPrintBox "Link fzf"
+    echo ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
     ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
 
     prettyPrintBox "Installing fzf"
