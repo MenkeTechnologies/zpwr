@@ -29,6 +29,8 @@ function ___unlinkConf(){
     fi
 
     if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+        prettyPrint "Unlink fzf for zinit"
+        echo rm -rf "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
         rm -rf "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
     fi
 

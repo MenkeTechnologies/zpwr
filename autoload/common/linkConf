@@ -35,6 +35,8 @@ function ___linkConf(){
     )
 
     if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+        prettyPrint "Link fzf for zinit"
+        echo ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
         ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
     fi
 }
