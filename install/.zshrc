@@ -94,6 +94,14 @@ if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
     mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
 fi
 
+if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+    if [[ ! -d $ZSH ]]; then
+        prettyPrintBox "Installing zinit"
+        mkdir "$ZINIT_HOME"
+        git clone https://github.com/zdharma/zinit.git "$ZINIT_HOME/bin"
+    fi
+fi
+
 # map to hold global data between scripts
 declare -A ZPWR_VARS
 # map to store each zpwr verb, key is the verbname, value is cmd=description

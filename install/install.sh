@@ -798,11 +798,10 @@ fi
 #{{{                    MARK:zsh
 #**************************************************************
 prettyPrintBox "Installing zinit"
-
 mkdir "$ZINIT_HOME"
-
 git clone https://github.com/zdharma/zinit.git "$ZINIT_HOME/bin"
-prettyPrintBox "Change default sell to zsh"
+
+prettyPrintBox "Change default shell to zsh"
 sudo chsh -s $(which zsh)
 
 prettyPrintBox "Linking zshrc configuration file to home directory"
