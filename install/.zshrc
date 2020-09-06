@@ -245,7 +245,6 @@ ZPWR_OMZ_PLUGINS=(
     perl
     git
     github
-    ant
     mvn
     django
     python
