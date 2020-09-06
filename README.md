@@ -441,8 +441,8 @@ export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
 export ZPWR_MARKER_COLOR="0;1;4;37;44m"
 # whether to search interactively in menuselect
 export ZPWR_INTERACTIVE_MENU_SELECT=true
-# default OMZ theme if Powerlevel 9k not used
-export ZPWR_DEFAULT_OMZ_THEME=simonoff
+# plugin framework
+export ZPWR_PLUGIN_MANAGER=zinit
 # common colors
 export ZPWR_BLUE="\x1b[37;44m"
 export ZPWR_RED="\x1b[31m"
@@ -454,6 +454,15 @@ test -z $ZPWR_REMOTE && export ZPWR_REMOTE=false
 ```sh
 # the base dir for zpwr configs
 test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+    evalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.oh-my-zsh" "$HOME"
+    export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
+    evalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
+elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+    evalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.zinit" "$HOME"
+    export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
+    evalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH" "$ZSH"
+fi
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
 # autoloaded non completion functions

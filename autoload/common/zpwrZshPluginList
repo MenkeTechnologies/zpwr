@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ___zpwrZshPluginList(){
+
+    command ls -d \
+        "$ZPWR_PLUGIN_MANAGER_HOME/plugins"/*(N) \
+        "$ZPWR_PLUGIN_MANAGER_HOME/snippets"/*~*/OMZ::plugins(N) \
+        "$ZPWR_PLUGIN_MANAGER_HOME/snippets"/OMZ::plugins/*(N) 2>/dev/null
+}
+
+___zpwrZshPluginList "$@"

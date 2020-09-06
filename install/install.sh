@@ -7,7 +7,7 @@
 #####   Notes: goal - work on mac and linux
 #####   Notes: this script should a one liner installer
 #}}}***********************************************************
-export ZINIT_HOME="$HOME/.zinit"
+export ZPWR_PLUGIN_MANAGER_HOME="$HOME/.zinit"
 
 #{{{                    MARK:Env vars
 #**************************************************************
@@ -798,8 +798,8 @@ fi
 #{{{                    MARK:zsh
 #**************************************************************
 prettyPrintBox "Installing zinit"
-mkdir "$ZINIT_HOME"
-git clone https://github.com/zdharma/zinit.git "$ZINIT_HOME/bin"
+mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
+git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
 
 prettyPrintBox "Change default shell to zsh"
 sudo chsh -s $(which zsh)
@@ -821,10 +821,10 @@ prettyPrintBox "Running Vundle"
 vim -c PluginInstall -c qall
 
 prettyPrintBox "Installing Powerlevel9k"
-git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZINIT_HOME/plugins/powerlevel9k"
+git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZPWR_PLUGIN_MANAGER_HOME/plugins/powerlevel9k"
 
 prettyPrintBox "Installing fzf"
-"$ZINIT_HOME/plugins/fzf/install" --bin
+"$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf/install" --bin
 
 if [[ $justConfig != true ]]; then
     prettyPrintBox "Final refreshing of dependencies"

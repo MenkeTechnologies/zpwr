@@ -95,10 +95,10 @@ if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
 fi
 
 if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
-    if [[ ! -d $ZSH ]]; then
+    if [[ ! -d $ZPWR_PLUGIN_MANAGER_HOME ]]; then
         prettyPrintBox "Installing zinit"
-        mkdir "$ZINIT_HOME"
-        git clone https://github.com/zdharma/zinit.git "$ZINIT_HOME/bin"
+        mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
+        git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
     fi
 fi
 
