@@ -767,9 +767,6 @@ bindkey '\eOQ' sub
 
 #F3 key
 bindkey '\eOR' getrcWidget
-stty stop undef
-stty start undef
-
 #determine if this terminal was started in IDE
 if [[ "$ZPWR_OS_TYPE" == darwin ]];then
     if [[ "$ZPWR_PARENT_PROCESS" == *(login|tmux)* ]]; then
@@ -914,6 +911,10 @@ if (( $version > 5.2 )); then
     done
 fi
 
+if exists history-substring-search-down history-substring-search-up; then
+    bindkey '^[[A' history-substring-search-up
+    bindkey '^[[B' history-substring-search-down
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE hooks
@@ -1174,6 +1175,11 @@ setopt list_packed
 
 # increase max size for directory stack
 export DIRSTACKSIZE=20
+
+# so we can bind ^S and ^Q
+setopt no_flow_control
+stty stop undef
+stty start undef
 #}}}***********************************************************
 
 #{{{                    MARK:Completions
