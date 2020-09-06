@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ___zpwrAllUpdates(){
+
+    if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+        zinit update
+        zinit self-update
+        zinit compinit
+        zinit compile
+    else
+        loggErr "You must have ZPWR_PLUGIN_MANAGER '$ZPWR_PLUGIN_MANAGER' == zinit"
+   fi
+}
+
+___zpwrAllUpdates "$@"

@@ -16,12 +16,7 @@ function ___zpwrAllUpdates(){
    zpwr updatedeps
    zpwr regen
    zpwr update
-   if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
-    zinit update
-    zinit self-update
-    zinit compinit
-    zinit compile
-   fi
-}
+   zpwr updatezinit
+  }
 
 ___zpwrAllUpdates "$@"
