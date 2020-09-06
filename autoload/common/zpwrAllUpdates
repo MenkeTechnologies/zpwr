@@ -19,8 +19,8 @@ function ___zpwrAllUpdates(){
    if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
     zinit update
     zinit self-update
-    zinit compile
     zinit compinit
+    zinit compile
    fi
 }
 
