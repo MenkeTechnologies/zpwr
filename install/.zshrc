@@ -243,7 +243,7 @@ ZPWR_OMZ_PLUGINS=(
     github
     ant
     mvn
-     django
+    django
     python
     golang
     man
@@ -286,6 +286,7 @@ fi
 
 exists kubectl && ZPWR_GH_PLUGINS+=(MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion)
 
+exists systemctl && ZPWR_OMZ_PLUGINS+=(systemd)
 exists subl && ZPWR_OMZ_PLUGINS+=(sublime)
 
 exists rails && ZPWR_OMZ_PLUGINS+=(rails)
