@@ -9,11 +9,11 @@
 
 baseDir="$ZPWR"
 configDir="$ZPWR"
-zshCompDir="$ZSH_CUSTOM/plugins/$ZSH_COMP_REPO_NAME"
+zshPluginDir="$ZSH_CUSTOM/plugins/"
 remoteName=origin
 
 [[ ! -d "$configDir" ]] && echo "no config dir '$configDir'" >&2 && exit 1
-[[ ! -d "$zshCompDir" ]] && echo "no zshCompDir '$zshCompDir'" >&2 && exit 1
+[[ ! -d "$zshPluginDir" ]] && echo "no zshPluginDir '$zshPluginDir'" >&2 && exit 1
 
 function gittersmaster() {
 
@@ -40,7 +40,7 @@ function main() {
     local dir completionDir
 
     gittersdev
-    completionDir="$zshCompDir"
+    completionDir="$zshPluginDir"
     for dir in "$completionDir/"*; do
         printf "$dir: "
         test -d "$dir" && ( builtin cd "$dir" && git pull; )
@@ -80,8 +80,8 @@ while true; do
         main
     fi
 
-    if ! cd -- *"$zshCompDir"; then
-        echo "$(date) Directory $zshCompDir does not exist" >&2
+    if ! cd -- "$zshPluginDir"; then
+        echo "$(date) Directory $zshPluginDir does not exist" >&2
         exit 1
     fi
 
