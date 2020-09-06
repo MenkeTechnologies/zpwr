@@ -8,6 +8,7 @@
 #####   Notes: this script should a one liner installer
 #}}}***********************************************************
 export ZPWR_PLUGIN_MANAGER_HOME="$HOME/.zinit"
+export ZPWR_PLUGIN_MANAGER="zinit"
 
 #{{{                    MARK:Env vars
 #**************************************************************
@@ -809,12 +810,13 @@ goInstallerDir
 echo ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 
-prettyPrintBox "Installing Zsh plugins"
+if [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
+    prettyPrintBox "Installing Zsh plugins"
+    goInstallerDir
+    fileMustExist zsh_plugins_install.sh
 
-goInstallerDir
-fileMustExist zsh_plugins_install.sh
-
-source zsh_plugins_install.sh
+    source zsh_plugins_install.sh
+fi
 
 prettyPrintBox "Running Vundle"
 #run vundle install for ultisnips, supertab
