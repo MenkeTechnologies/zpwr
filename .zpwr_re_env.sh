@@ -66,6 +66,8 @@ fi
 evalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/fzf" "$ZSH"
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
+# alias and funtion file bash compatible
+evalIfNeeded ZPWR_ALIAS_FILE "$ZPWR_ALIAS_FILE" "$ZPWR/.shell_aliases_functions.sh" "$ZPWR"
 # autoloaded non completion functions
 evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD" "$ZPWR/autoload" "$ZPWR"
 # autoloaded common non completion functions

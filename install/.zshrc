@@ -476,6 +476,8 @@ for p in $ZPWR_OMZ_PLUGINS; do
     zinit snippet OMZ::plugins/$p
 done
 
+unset p
+
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
   # Load only from secure directories
   compinit -i -C -d "${ZSH_COMPDUMP}"
@@ -489,8 +491,7 @@ if [[ $ZPWR_DEBUG == true ]]; then
 fi
 # You may need to manually set your language environment
 # has all aliases and functions common to bourne like shells
-_alias_file="$ZPWR/.shell_aliases_functions.sh"
-test -s "$_alias_file" && source "$_alias_file"
+test -s "$ZPWR_ALIAS_FILE" && source "$ZPWR_ALIAS_FILE"
 alias -r > "$ZPWR_LOCAL/.common_aliases"
 #}}}***********************************************************
 
@@ -1605,6 +1606,7 @@ if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
     alias zhc="cd $ZPWR_PLUGIN_MANAGER_HOME/completions"
     alias zhp="cd $ZPWR_PLUGIN_MANAGER_HOME/plugins"
     alias zhb="cd $ZPWR_PLUGIN_MANAGER_HOME/bin"
+    alias zhs="cd $ZPWR_PLUGIN_MANAGER_HOME/snippets"
 
     alias zpl="cd $ZPWR_PLUGIN_DIR"
 fi
