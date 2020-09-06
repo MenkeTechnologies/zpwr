@@ -9,7 +9,7 @@
 
 baseDir="$ZPWR"
 configDir="$ZPWR"
-zshCompDir="$HOME/.zinit/plugins/$ZSH_COMP_REPO_NAME"
+zshCompDir="$ZSH_CUSTOM/plugins/$ZSH_COMP_REPO_NAME"
 remoteName=origin
 
 [[ ! -d "$configDir" ]] && echo "no config dir '$configDir'" >&2 && exit 1
