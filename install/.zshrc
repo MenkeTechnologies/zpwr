@@ -189,7 +189,7 @@ ZSH_DISABLE_COMPFIX=true
 # ZSH_CUSTOM=/path/to/new-custom-folder
 #}}}***********************************************************
 
-#{{{                    MARK:OMZ plugins
+#{{{                    MARK:ZSH plugins
 #**************************************************************
 
 ZPWR_GH_PLUGINS=(
@@ -274,6 +274,7 @@ ZPWR_OMZ_COMPS=(
     fd
 )
 
+# conditional plugins
 
 if exists docker; then
     ZPWR_OMZ_COMPS+=(docker)
@@ -467,10 +468,11 @@ for p in $ZPWR_GH_PLUGINS; do
 done
 
 for p in $ZPWR_OMZ_COMPS; do
-    zinit ice svn nocompile pick"null" for OMZ::plugins/$p
+    zinit ice svn nocompile as"completion" pick"null"
+    zinit snippet OMZ::plugins/$p
 done
 for p in $ZPWR_OMZ_PLUGINS; do
-    zinit ice svn nocompile pick "null"
+    zinit ice svn nocompile  
     zinit snippet OMZ::plugins/$p
 done
 
@@ -1554,7 +1556,7 @@ alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) mast
 alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
 if [[ -d "$ZPWR_INSTALL" ]]; then
-    alias zi="cd $ZPWR_INSTALL"
+    alias zin="cd $ZPWR_INSTALL"
 fi
 
 if [[ -d "$ZPWR_SCRIPTS" ]]; then
@@ -1571,10 +1573,6 @@ fi
 
 if [[ -d "$ZPWR_SCRIPTS_MAC" ]]; then
     alias zsm="cd $ZPWR_SCRIPTS_MAC"
-fi
-
-if [[ -d "$ZPWR" ]]; then
-    alias zh="cd $ZPWR"
 fi
 
 if [[ -d "$ZPWR_TMUX" ]]; then
@@ -1602,7 +1600,12 @@ if [[ -d "$ZPWR_LOCAL" ]]; then
     alias zlr="cd $ZPWR_LOCAL/rcBackups"
 fi
 
-if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
+if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
+    alias zh="cd $ZPWR_PLUGIN_MANAGER_HOME"
+    alias zhc="cd $ZPWR_PLUGIN_MANAGER_HOME/completions"
+    alias zhp="cd $ZPWR_PLUGIN_MANAGER_HOME/plugins"
+    alias zhb="cd $ZPWR_PLUGIN_MANAGER_HOME/bin"
+
     alias zpl="cd $ZPWR_PLUGIN_DIR"
 fi
 
