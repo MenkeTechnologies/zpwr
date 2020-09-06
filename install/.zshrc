@@ -208,10 +208,8 @@ ZPWR_GH_PLUGINS=(
     zdharma/zbrowse
     zdharma/zconvey
     hlissner/zsh-autopair
-    zsh-users/zsh-autosuggestions
     MenkeTechnologies/zsh-better-npm-completion
     zsh-users/zsh-completions
-    zsh-users/zsh-history-substring-search
     MenkeTechnologies/zsh-cpan-completion
     akarzim/zsh-docker-aliases
     MenkeTechnologies/zsh-expand
@@ -221,7 +219,6 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/zsh-nginx
     MenkeTechnologies/zsh-pip-description-completion
     MenkeTechnologies/zsh-sed-sub
-    zdharma/fast-syntax-highlighting
     zdharma/zsh-tig-plugin
     MenkeTechnologies/zsh-travis
     zdharma/zsh-unique-id
@@ -232,6 +229,10 @@ ZPWR_GH_PLUGINS=(
     zdharma/zui
     MenkeTechnologies/zunit
     zdharma/zzcomplete
+    #this order matters
+    zsh-users/zsh-history-substring-search
+    zsh-users/zsh-autosuggestions
+    zdharma/fast-syntax-highlighting
 )
 
 ZPWR_OMZ_PLUGINS=(
@@ -471,16 +472,16 @@ fi
 source "$HOME/.zinit/bin/zinit.zsh"
 
 for p in $ZPWR_GH_PLUGINS; do
-    zinit ice nocompile
+    zinit ice lucid nocompile
     zinit load $p
 done
 
 for p in $ZPWR_OMZ_COMPS; do
-    zinit ice svn nocompile as"completion" pick"null"
+    zinit ice svn lucid nocompile as"completion" pick"null"
     zinit snippet OMZ::plugins/$p
 done
 for p in $ZPWR_OMZ_PLUGINS; do
-    zinit ice svn nocompile  
+    zinit ice svn lucid nocompile
     zinit snippet OMZ::plugins/$p
 done
 
