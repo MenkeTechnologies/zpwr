@@ -10,7 +10,9 @@
 #{{{ MARK:PowerLevel9k
 #**************************************************************
 ZSH_THEME="powerlevel9k/powerlevel9k"
-source "$HOME/.oh-my-zsh/custom/themes/powerlevel9k/powerlevel9k.zsh-theme"
+if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+    source "$CUSTOM/themes/powerlevel9k/powerlevel9k.zsh-theme"
+fi
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir history ssh rbenv root_indicator status vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vi_mode command_execution_time dir_writable background_jobs custom_pid)
 

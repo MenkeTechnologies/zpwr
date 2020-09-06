@@ -365,10 +365,14 @@ source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
 
 if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
     if test -s "$ZPWR_PROMPT_FILE";then
-        if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then
-            source "$ZPWR_PROMPT_FILE"
+        if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+            if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then
+                source "$ZPWR_PROMPT_FILE"
+            else
+                ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
+            fi
         else
-            ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
+            source "$ZPWR_PROMPT_FILE"
         fi
     else
         ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
