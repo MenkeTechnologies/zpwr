@@ -237,7 +237,6 @@ ZPWR_OMZ_PLUGINS=(
     ant
     mvn
      django
-    pyenv
     python
     golang
     man
