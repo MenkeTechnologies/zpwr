@@ -52,7 +52,8 @@ function uncompile(){
         if [[ -f "$file.zwc" ]]; then
             echo rm -f "$file.zwc"
             rm -f "$file.zwc"
-        elif [[ -f "$file.zwc.old" ]]; then
+        fi
+        if [[ -f "$file.zwc.old" ]]; then
             echo rm -f "$file.zwc.old"
             rm -f "$file.zwc.old"
         fi
