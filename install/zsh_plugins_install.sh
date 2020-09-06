@@ -14,11 +14,11 @@ fi
 
 source common.sh
 
-if [[ ! -d "$HOME/.oh-my-zsh/custom/plugins" ]]; then
-    mkdir -p "$HOME/.oh-my-zsh/custom/plugins"
+if [[ ! -d "$ZINIT_HOME/plugins" ]]; then
+    mkdir -p "$ZINIT_HOME/plugins"
 fi
 
-if builtin cd "$HOME/.oh-my-zsh/custom/plugins"; then
+if builtin cd "$ZINIT_HOME/plugins"; then
     installGitHubPluginsFromFile "$@" "$ZPWR_INSTALL/.zshplugins"
 else
     echo "could not cd to $HOME/.vim/bundle/YouCompleteMe" >&2

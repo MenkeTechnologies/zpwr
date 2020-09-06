@@ -28,6 +28,7 @@ ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
 ZPWR_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
+test -z $ZINIT_HOME && export ZINIT_HOME="$HOME/.zinit"
 #}}}***********************************************************
 
 #{{{                    MARK:installer lib fns

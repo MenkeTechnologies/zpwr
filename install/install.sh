@@ -7,6 +7,7 @@
 #####   Notes: goal - work on mac and linux
 #####   Notes: this script should a one liner installer
 #}}}***********************************************************
+export ZINIT_HOME="$HOME/.zinit"
 
 #{{{                    MARK:Env vars
 #**************************************************************
@@ -181,7 +182,7 @@ EOF
 # 7) youcompleteme
 # 8) ultisnips
 # 9) supertab
-# 10) oh-my-zsh
+# 10) zinit
 # 11) powerlevel9k prompt
 # 12) pathogen
 # 13) nerdtree
@@ -796,11 +797,13 @@ fi
 
 #{{{                    MARK:zsh
 #**************************************************************
-prettyPrintBox "Installing oh-my-zsh..."
-#oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#install custom theme based on agnosterzak
-cp "$ZPWR_INSTALL/agnosterzak.zsh-theme" "$HOME/.oh-my-zsh/themes/"
+prettyPrintBox "Installing zinit"
+
+mkdir "$ZINIT_HOME"
+
+git clone https://github.com/zdharma/zinit.git "$ZINIT_HOME/bin"
+prettyPrintBox "Change default sell to zsh"
+sudo chsh -s $(which zsh)
 
 prettyPrintBox "Linking zshrc configuration file to home directory"
 goInstallerDir
@@ -819,10 +822,10 @@ prettyPrintBox "Running Vundle"
 vim -c PluginInstall -c qall
 
 prettyPrintBox "Installing Powerlevel9k"
-git clone https://github.com/MenkeTechnologies/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZINIT_HOME/plugins/powerlevel9k"
 
 prettyPrintBox "Installing fzf"
-"$HOME/.oh-my-zsh/custom/plugins/fzf/install" --bin
+"$ZINIT_HOME/plugins/fzf/install" --bin
 
 if [[ $justConfig != true ]]; then
     prettyPrintBox "Final refreshing of dependencies"
