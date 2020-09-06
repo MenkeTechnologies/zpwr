@@ -9,7 +9,7 @@
 
 baseDir="$ZPWR"
 configDir="$ZPWR"
-zshPluginDir="$ZSH_CUSTOM/plugins/"
+zshPluginDir="$ZSH_CUSTOM/plugins"
 remoteName=origin
 
 [[ ! -d "$configDir" ]] && echo "no config dir '$configDir'" >&2 && exit 1
