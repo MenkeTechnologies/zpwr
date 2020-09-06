@@ -80,7 +80,7 @@ while true; do
         main
     fi
 
-    if ! cd "$zshCompDir"; then
+    if ! cd -- *"$zshCompDir"; then
         echo "$(date) Directory $zshCompDir does not exist" >&2
         exit 1
     fi
