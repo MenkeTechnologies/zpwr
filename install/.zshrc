@@ -916,8 +916,16 @@ if (( $version > 5.2 )); then
 fi
 
 if exists history-substring-search-down history-substring-search-up; then
-    bindkey '^[[A' history-substring-search-up
-    bindkey '^[[B' history-substring-search-down
+
+    if [[ -n "$terminfo[kcuu1]" ]]; then
+        bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
+        bindkey -M viins '^[[A' history-substring-search-up
+    fi
+    if [[ -n "$terminfo[kcud1]" ]]; then
+        bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
+        bindkey -M viins '^[[B' history-substring-search-down
+    fi
+
 fi
 #}}}***********************************************************
 
