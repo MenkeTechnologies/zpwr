@@ -379,8 +379,8 @@ else
             alias apz="sudo -E pacman -Syyu --noconfirm --overwrite='*';u8"
         elif exists zypper;then
             alias api="sudo -E zypper install -y"
-            alias apa="sudo -E zypper update; sudo -E zypper dist-upgrade -y"
-            alias apz="sudo -E zypper update; sudo -E zypper dist-upgrade -y; u8"
+            alias apa="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y"
+            alias apz="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y; u8"
         elif exists apt;then
             alias api="sudo -E apt install -y"
             alias apa="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean"
