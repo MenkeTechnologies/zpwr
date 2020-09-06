@@ -56,10 +56,12 @@ if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
     evalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.oh-my-zsh" "$HOME"
     export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
     evalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
+    evalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/fzf" "$ZSH"
 elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
     evalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.zinit" "$HOME"
     export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
     evalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH" "$ZSH"
+    evalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/$ZPWR_GITHUB_ACCOUNT---fzf" "$ZSH_CUSTOM" "$ZPWR_GITHUB_ACCOUNT"
 fi
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
