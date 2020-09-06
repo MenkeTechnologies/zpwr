@@ -10,6 +10,7 @@ Environment="ZPWR=/home/pi/.zpwr"
 Environment="ZSH_CUSTOM=/home/pi/.zinit"
 Environment="ZPWR_SCRIPTS=/home/pi/.zpwr/scripts"
 Environment="REPO_NAME=zpwr"
+Environment="ZPWR_COMP_REPO_NAME=zsh-more-completions"
 ExecStart=/usr/bin/env bash /home/pi/.zpwr/scripts/remoteRepoMonitorDaemon.sh
 ExecStop=/usr/bin/env kill $MAINPID
 

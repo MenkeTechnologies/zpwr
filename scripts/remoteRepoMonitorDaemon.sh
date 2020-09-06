@@ -80,7 +80,7 @@ while true; do
         main
     fi
 
-    if ! cd -- "$zshPluginDir"; then
+    if ! cd -- "$zshPluginDir/"*$ZPWR_COMP_REPO_NAME; then
         echo "$(date) Directory $zshPluginDir does not exist" >&2
         exit 1
     fi
