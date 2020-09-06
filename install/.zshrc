@@ -85,10 +85,14 @@ export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
-source "$ZPWR_ENV_FILE" || {
-    echo "where is ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
-    return 1
+function zpwrInitEnv() {
+    source "$ZPWR_ENV_FILE" || {
+        echo "where is ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
+        return 1
+    }
 }
+
+zpwrInitEnv
 
 if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
     mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
@@ -319,17 +323,27 @@ test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
 
 #{{{                    MARK:source tokens pre OMZ
 #**************************************************************
-if test -f "$ZPWR_TOKEN_PRE"; then
-    if ! source "$ZPWR_TOKEN_PRE"; then
-        loggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
-    fi
-else
-    touch "$ZPWR_TOKEN_PRE"
-fi
 
-source "$ZPWR_RE_ENV_FILE" || {
-    echo "where is ZPWR_RE_ENV_FILE$ZPWR_RE_ENV_FILE" >&2
+function zpwrTokenPre() {
+    if test -f "$ZPWR_TOKEN_PRE"; then
+        if ! source "$ZPWR_TOKEN_PRE"; then
+            loggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+        fi
+    else
+        touch "$ZPWR_TOKEN_PRE"
+    fi
+
+    source "$ZPWR_RE_ENV_FILE" || {
+        echo "where is ZPWR_RE_ENV_FILE$ZPWR_RE_ENV_FILE" >&2
+    }
 }
+
+zpwrTokenPre
+
+if [[ $ZPWR_PROFILING == true ]]; then
+    # profiling startup
+    zmodload zsh/zprof
+fi
 
 # command for exa (replaces ls)
 if [[ $ZPWR_EXA_EXTENDED == true ]]; then
@@ -355,11 +369,6 @@ fi
 
 if [[ ! -d $ZPWR_LOCAL ]]; then
     mkdir -p $ZPWR_LOCAL
-fi
-
-if [[ $ZPWR_PROFILING == true ]]; then
-    # profiling startup
-    zmodload zsh/zprof
 fi
 
 [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
@@ -1926,18 +1935,23 @@ path=(${(u)path})
 
 #{{{                    MARK:Finish
 #**************************************************************
-# source .tokens.sh to override with user functions
-if test -f "$ZPWR_TOKEN_POST"; then
-    if ! source "$ZPWR_TOKEN_POST"; then
-        loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+function zpwrTokenPost() {
+    # source .tokens.sh to override with user functions
+    if test -f "$ZPWR_TOKEN_POST"; then
+        if ! source "$ZPWR_TOKEN_POST"; then
+            loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+        fi
+    else
+        touch "$ZPWR_TOKEN_POST"
     fi
-else
-    touch "$ZPWR_TOKEN_POST"
-fi
 
-source "$ZPWR_RE_ENV_FILE" || {
-    echo "where is $ZPWR_RE_ENV_FILE" >&2
+    source "$ZPWR_RE_ENV_FILE" || {
+        echo "where is $ZPWR_RE_ENV_FILE" >&2
+    }
 }
+
+zpwrTokenPost
+
 test -s "$ZPWR_ZINIT_FZF/shell/completion.zsh" \
     && source "$ZPWR_ZINIT_FZF/shell/completion.zsh"
 
