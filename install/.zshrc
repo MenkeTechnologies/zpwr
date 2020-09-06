@@ -462,15 +462,16 @@ fi
 source "$HOME/.zinit/bin/zinit.zsh"
 
 for p in $ZPWR_GH_PLUGINS; do
+    zinit ice nocompile
     zinit load $p
 done
 
 for p in $ZPWR_OMZ_COMPS; do
-    zinit ice svn for OMZ::plugins/$p pick=null
+    zinit ice svn nocompile pick"null" for OMZ::plugins/$p
 done
 for p in $ZPWR_OMZ_PLUGINS; do
-    zinit ice svn for OMZ::plugins/$p pick=null
-    zinit snippet OMZ::plugins/$p 2>/dev/null
+    zinit ice svn nocompile pick "null"
+    zinit snippet OMZ::plugins/$p
 done
 
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
