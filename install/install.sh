@@ -798,12 +798,30 @@ fi
 
 #{{{                    MARK:zsh
 #**************************************************************
-prettyPrintBox "Installing zinit"
-mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
-git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
 
-prettyPrintBox "Change default shell to zsh"
-sudo chsh -s $(which zsh)
+if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
+    prettyPrintBox "Installing zinit"
+    mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
+    git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
+    if [[ -d $ZPWR_PLUGIN_MANAGER_HOME/plugins ]]; then
+        mkdir -pv $ZPWR_PLUGIN_MANAGER_HOME/plugins/
+    fi
+
+    prettyPrintBox "Change default shell to zsh"
+    sudo -E chsh -s $(which zsh)
+
+    git clone https://github.com/MenkeTechnologies/fzf.git "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf"
+    ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
+
+    prettyPrintBox "Installing fzf"
+    "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf/install" --bin
+
+elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
+    prettyPrintBox "Installing OhMyZsh"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    prettyPrintBox "Installing fzf"
+    "$ZPWR_PLUGIN_MANAGER_HOME/custom/plugins/fzf/install" --bin
+fi
 
 prettyPrintBox "Linking zshrc configuration file to home directory"
 goInstallerDir
@@ -824,9 +842,6 @@ vim -c PluginInstall -c qall
 
 prettyPrintBox "Installing Powerlevel9k"
 git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZPWR_PLUGIN_MANAGER_HOME/plugins/powerlevel9k"
-
-prettyPrintBox "Installing fzf"
-"$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf/install" --bin
 
 if [[ $justConfig != true ]]; then
     prettyPrintBox "Final refreshing of dependencies"

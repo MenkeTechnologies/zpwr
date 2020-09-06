@@ -22,6 +22,7 @@ MenkeTechnologies/zsh-xcode-completions
 MenkeTechnologies/zsh-z
 MenkeTechnologies/zunit
 akarzim/zsh-docker-aliases
+MenkeTechnologies/fzf
 hlissner/zsh-autopair
 nnao45/zsh-kubectl-completion
 wfxr/forgit
