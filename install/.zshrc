@@ -208,31 +208,29 @@ ZPWR_GH_PLUGINS=(
     zdharma/zbrowse
     zdharma/zconvey
     hlissner/zsh-autopair
-    MenkeTechnologies/zsh-better-npm-completion
     zsh-users/zsh-completions
-    MenkeTechnologies/zsh-cpan-completion
     akarzim/zsh-docker-aliases
     MenkeTechnologies/zsh-expand
-    MenkeTechnologies/zsh-gem-completion
     MenkeTechnologies/zsh-git-acp
-    MenkeTechnologies/zsh-more-completions
     MenkeTechnologies/zsh-nginx
-    MenkeTechnologies/zsh-pip-description-completion
     MenkeTechnologies/zsh-sed-sub
     zdharma/zsh-tig-plugin
     MenkeTechnologies/zsh-travis
     zdharma/zsh-unique-id
     MenkeTechnologies/zsh-very-colorful-manuals
-    MenkeTechnologies/zsh-xcode-completions
     MenkeTechnologies/zsh-z
-    MenkeTechnologies/powerlevel9k
     zdharma/zui
     MenkeTechnologies/zunit
     zdharma/zzcomplete
+    #atload"zicompinit; zicdreplay" blockf
+    MenkeTechnologies/zsh-gem-completion
+    MenkeTechnologies/zsh-cpan-completion
+    MenkeTechnologies/zsh-pip-description-completion
+    MenkeTechnologies/zsh-xcode-completions
+    MenkeTechnologies/zsh-better-npm-completion
+    MenkeTechnologies/zsh-more-completions
     #this order matters
     zsh-users/zsh-history-substring-search
-    zsh-users/zsh-autosuggestions
-    zdharma/fast-syntax-highlighting
 )
 
 ZPWR_OMZ_PLUGINS=(
@@ -484,6 +482,18 @@ for p in $ZPWR_OMZ_PLUGINS; do
     zinit ice svn lucid nocompile
     zinit snippet OMZ::plugins/$p
 done
+
+    zinit ice lucid nocompile
+    zinit load \
+    MenkeTechnologies/powerlevel9k
+
+    zinit ice lucid nocompile
+    zinit load \
+    zsh-users/zsh-autosuggestions
+
+    zinit ice lucid nocompile
+    zinit load \
+    zdharma/fast-syntax-highlighting
 
 unset p
 
