@@ -104,8 +104,7 @@ if [[ $skip != true ]]; then
         gitRepoUpdater "$ZSH_CUSTOM/themes"
     elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
         prettyPrint "Updating Zinit"
-        zinit self-update
-        zinit update
+        gitRepoUpdater "$ZSH_CUSTOM/plugins"
     fi
 
     exists /usr/local/bin/ruby && {

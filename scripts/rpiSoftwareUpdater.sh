@@ -38,8 +38,7 @@ if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
         gitRepoUpdater "$ZSH_CUSTOM/themes"
 elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
     prettyPrint "Updating Zinit"
-    zinit self-update
-    zinit update
+    gitRepoUpdater "$ZSH_CUSTOM/plugins"
 fi
 
 cargo_bin="$HOME/.cargo/bin/cargo"
