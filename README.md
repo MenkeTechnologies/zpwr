@@ -7,7 +7,7 @@
 
 This project started out as my own version of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) repo and it then grew.
 
-It is an extremely powerful custom terminal environment built on top of [oh-my-zsh](http://github.com/robbyrussell/oh-my-zsh).
+It is an extremely powerful custom terminal environment built on top of [zinit](https://github.com/zdharma/zinit).
 
 There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
 
@@ -21,7 +21,7 @@ The installer will confirm what will be installed and overwritten before executi
 
 Some interactivity is required near end of installer for postfix, wireshark and snort installs.
 
-Once you reach the oh-my-zsh prompt, type 
+Once you reach the zinit prompt, type 
 ```sh
 logout
 ```
@@ -121,7 +121,7 @@ To install to a custom directory, clone the project to that directory and `expor
 - neovim with 78 plugins and python3/node support
 - perl
 - bash (4.0+, 3.2 not supported)
-- oh-my-zsh with 80 plugins of which 45 are custom
+- zinit with 80 plugins of which 45 are custom
 - forked powerlevel9k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
@@ -211,7 +211,7 @@ rm -rf ~/.zpwr
 ```
 This will not uninstall packages installed by system package manager, pip modules, gems, vim plugins, tmux plugins and zsh plugins.
 You must remove these manually if desired.
-If desired you can also uninstall oh-my-zsh with ```uninstall_oh_my_zsh```.  Make sure `~/.zshrc` is your original version.
+If desired you can also uninstall zinit with ```rm -rf ~/.zinit```.  Make sure `~/.zshrc` is your original version.
 
 ## Font
 You need to change the Terminal font to support the Powerline triangles and other special characters in the Powerlevel9k PROMPT.
@@ -298,7 +298,7 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 ```
 
 The relevant code is the [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) plugin for expansion at the second position.
-> ~/.oh-my-zsh/custom/plugins/zsh-expand/zsh-expand.plugin.zsh
+> ~/.zinit/plugins/zsh-expand/zpwrExpandLib.zsh
 ```sh
 if printf -- "$ZPWR_VARS[firstword_partition]" | command grep -qsE $ZPWR_VARS[continueFirstPositionRegex];then
 ```
