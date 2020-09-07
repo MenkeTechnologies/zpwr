@@ -436,10 +436,6 @@ zstyle ":plugin:zconvey" use_zsystem_flock "1"
 #{{{                    MARK:Sourcing OMZ and alias file
 #**************************************************************
 autoload -Uz compinit
-zpwrCompinit() {
-    compinit -u -d ${ZINIT[ZCOMPDUMP_PATH]:-${ZDOTDIR:-$HOME}/.zcompdump} "${(Q@)${(z@)ZINIT[COMPINIT_OPTS]}}"
-}
-
 # compsys cache file
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
 
@@ -463,6 +459,12 @@ fi
 # prevent zinit from putting system fpath after zinit completions
 
 source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
+
+#override zicompinit
+zicompinit() {
+    compinit -u -d ${ZINIT[ZCOMPDUMP_PATH]:-${ZDOTDIR:-$HOME}/.zcompdump} "${(Q@)${(z@)ZINIT[COMPINIT_OPTS]}}" 2>/dev/null
+}
+
 
 # late load calling precmd
 zinit ice lucid nocompile wait'!' \
@@ -513,7 +515,7 @@ zsh-users/zsh-autosuggestions
 # late , must be last to load
 # runs ZLE keybindings to override other late loaders
 # runs compinit
-zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zpwrCompinit 2> /dev/null; zicdreplay"
+zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zicompinit; zicdreplay"
 zinit load \
 zdharma/fast-syntax-highlighting
 
