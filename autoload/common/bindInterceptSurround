@@ -1,0 +1,13 @@
+function bindInterceptSurround() {
+    zle -N interceptDelete
+    zle -N interceptSurround
+    bindkey -M viins "^?" interceptDelete
+    bindkey -M viins '"' interceptSurround
+    bindkey -M viins "'" interceptSurround
+    bindkey -M viins '`' interceptSurround
+    bindkey -M viins "(" interceptSurround
+    bindkey -M viins "[" interceptSurround
+    bindkey -M viins "{" interceptSurround
+}
+
+bindInterceptSurround "$@"

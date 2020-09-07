@@ -67,8 +67,7 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 
 #{{{                    MARK:FPATH AND PATH NO DUPLICATES
 #**************************************************************
-# duplicates slow down searching and 
-# mess up OMZ fpath check if should remove zcompdump
+# duplicates slow down searching
 declare -aU fpath
 fpath=(${(u)fpath})
 declare -aU path
@@ -207,7 +206,6 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/revolver
     zdharma/zbrowse
     zdharma/zconvey
-    hlissner/zsh-autopair
     zsh-users/zsh-completions
     akarzim/zsh-docker-aliases
     MenkeTechnologies/zsh-expand
@@ -229,8 +227,6 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/zsh-xcode-completions
     MenkeTechnologies/zsh-better-npm-completion
     MenkeTechnologies/zsh-more-completions
-    #this order matters
-    zsh-users/zsh-history-substring-search
 )
 
 ZPWR_OMZ_PLUGINS=(
@@ -395,7 +391,7 @@ zmodload -i zsh/complist
 setopt menucomplete
 #}}}***********************************************************
 
-#{{{                    MARK:OMZ conditional Plugins
+#{{{                    MARK:FPATH setup
 #**************************************************************
 
 if [[ $ZPWR_DEBUG == true ]]; then
@@ -467,35 +463,54 @@ fi
 
 # prevent zinit from putting system fpath after zinit completions
 
-source "$HOME/.zinit/bin/zinit.zsh"
+source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
 
+# late load calling precmd
+zinit ice lucid nocompile wait'!' \
+atload'_powerline_set_jobnum;_powerline_set_main_keymap_name;powerlevel9k_prepare_prompts'
+
+zinit load \
+MenkeTechnologies/powerlevel9k
+
+# late
 for p in $ZPWR_GH_PLUGINS; do
-    zinit ice lucid nocompile
+    zinit ice lucid nocompile wait
     zinit load $p
 done
 
+# late
 for p in $ZPWR_OMZ_COMPS; do
-    zinit ice svn lucid nocompile as"completion" pick"null"
+    zinit ice svn lucid nocompile as"completion" pick"null" wait
     zinit snippet OMZ::plugins/$p
 done
+
+# late
 for p in $ZPWR_OMZ_PLUGINS; do
-    zinit ice svn lucid nocompile
+    zinit ice svn lucid nocompile wait
     zinit snippet OMZ::plugins/$p
 done
-
-    zinit ice lucid nocompile
-    zinit load \
-    MenkeTechnologies/powerlevel9k
-
-    zinit ice lucid nocompile
-    zinit load \
-    zsh-users/zsh-autosuggestions
-
-    zinit ice lucid nocompile
-    zinit load \
-    zdharma/fast-syntax-highlighting
-
 unset p
+
+
+# late bind keystrokes
+zinit ice lucid nocompile atload="bindInterceptSurround"
+zinit load \
+hlissner/zsh-autopair
+
+# late bind keystrokes, must come before syntax highlight
+zinit ice lucid nocompile wait'0a' atload'bindHistorySubstring'
+zinit load \
+zsh-users/zsh-history-substring-search
+
+# late , must come before syntax highlight
+zinit ice lucid nocompile wait'0b' atload'_zsh_autosuggest_start'
+zinit load \
+zsh-users/zsh-autosuggestions
+
+# late , must be last to load
+zinit ice lucid nocompile wait'0c' atload"zicompinit; zicdreplay"
+zinit load \
+zdharma/fast-syntax-highlighting
 
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
   # Load only from secure directories
@@ -525,12 +540,12 @@ for dump in ~/.zcompdump*(N.mh+168); do
     break
 done
 
-if ! (( $+_comps[z] )); then
-    zpwrRetryZcompdump
-else
-    loggDebug "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
-    loggDebug "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
-fi
+#if ! (( $+_comps[z] )); then
+    #zpwrRetryZcompdump
+#else
+    #loggDebug "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
+    #loggDebug "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
+#fi
 
 # change OMZ history size in memory
 export HISTSIZE=999999999
@@ -605,8 +620,6 @@ zle -N locateFzf
 zle -N locateFzfEdit
 zle -N fzfEnv
 zle -N fasdFZF
-zle -N interceptDelete
-zle -N interceptSurround
 zle -N asVar
 zle -N zpwrVimAllWidget
 zle -N zpwrVimAllWidgetAccept
@@ -633,14 +646,6 @@ bindkey -M viins '^[^M' self-insert-unmeta
 bindkey -M viins '^P' EOLorNextTabStop
 bindkey -M vicmd '^P' EOLorNextTabStop
 bindkey -M vicmd G end-of-buffer-or-history
-
-bindkey -M viins "^?" interceptDelete
-bindkey -M viins '"' interceptSurround
-bindkey -M viins "'" interceptSurround
-bindkey -M viins '`' interceptSurround
-bindkey -M viins "(" interceptSurround
-bindkey -M viins "[" interceptSurround
-bindkey -M viins "{" interceptSurround
 
 bindkey -M viins "^Vc" fzfCommits
 bindkey -M vicmd "^Vc" fzfCommits
@@ -839,13 +844,13 @@ bindkey '^[/' _history-complete-older
 bindkey '^[~' _bash_complete-word
 
 
-if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
+#if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
     #export DISPLAY=$(cat $ZPWR_LOCAL/.display.txt) ||
-    :
-else
-    :
+    #:
+#else
+    #:
     #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
-fi
+#fi
 
 bindkey -M viins . rationalize-dot
 
@@ -858,7 +863,7 @@ bindkey -M menuselect '^d' accept-and-menu-complete
 bindkey -M menuselect '^f' accept-and-infer-next-history
 
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    if echo "$ZPWR_PARENT_PROCESS" | command grep -q -E 'login|tmux'; then
+    if [[ "$ZPWR_PARENT_PROCESS" =~ 'login|tmux' ]]; then
         bindkey -M menuselect '\e[1;5A' vi-backward-word
         bindkey -M menuselect '\e[1;5B' vi-forward-word
         bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
@@ -939,18 +944,6 @@ if (( $version > 5.2 )); then
     done
 fi
 
-if exists history-substring-search-down history-substring-search-up; then
-
-    if [[ -n "$terminfo[kcuu1]" ]]; then
-        bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up
-        bindkey -M viins '^[[A' history-substring-search-up
-    fi
-    if [[ -n "$terminfo[kcud1]" ]]; then
-        bindkey -M viins "$terminfo[kcud1]" history-substring-search-down
-        bindkey -M viins '^[[B' history-substring-search-down
-    fi
-
-fi
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE hooks
