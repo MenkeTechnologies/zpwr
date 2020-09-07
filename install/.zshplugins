@@ -27,7 +27,6 @@ akarzim/zsh-docker-aliases
 MenkeTechnologies/fzf
 hlissner/zsh-autopair
 nnao45/zsh-kubectl-completion
-wfxr/forgit
 zdharma/fast-syntax-highlighting
 zdharma/history-search-multi-word
 zdharma/zbrowse

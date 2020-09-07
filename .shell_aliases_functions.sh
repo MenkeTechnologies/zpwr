@@ -142,7 +142,7 @@ if ! echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
 #{{{                    MARK:Rust Config
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
-    if exists exa; then
+    if commandExists exa; then
         alias exa="$ZPWR_EXA_COMMAND"
     fi
 

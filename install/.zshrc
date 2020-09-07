@@ -355,7 +355,7 @@ else
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:expand-complete-dots
+#{{{                    MARK:pre zinit
 #**************************************************************
 # compsys cache file
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
@@ -365,6 +365,21 @@ bindkey -v
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "pre: $fpath" >> "$ZPWR_LOGFILE"
 fi
+
+function zpwrTokenPost() {
+    # source .tokens.sh to override with user functions
+    if test -f "$ZPWR_TOKEN_POST"; then
+        if ! source "$ZPWR_TOKEN_POST"; then
+            loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+        fi
+    else
+        touch "$ZPWR_TOKEN_POST"
+    fi
+
+    source "$ZPWR_RE_ENV_FILE" || {
+        echo "where is $ZPWR_RE_ENV_FILE" >&2
+    }
+}
 #}}}***********************************************************
 
 #{{{                    MARK:ZINIT
@@ -439,7 +454,7 @@ zsh-users/zsh-autosuggestions
 # late , must be last to load
 # runs ZLE keybindings to override other late loaders
 # runs compinit
-zinit ice lucid nocompile wait'0d' atinit'bindPenultimate;bindFinal'
+zinit ice lucid nocompile wait'0d' atinit'bindPenultimate;bindFinal;zpwrTokenPost'
 zinit load \
     zdharma/fast-syntax-highlighting
 
@@ -720,22 +735,6 @@ alias zp=zpwr
 
 #{{{                    MARK:Finish
 #**************************************************************
-function zpwrTokenPost() {
-    # source .tokens.sh to override with user functions
-    if test -f "$ZPWR_TOKEN_POST"; then
-        if ! source "$ZPWR_TOKEN_POST"; then
-            loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
-        fi
-    else
-        touch "$ZPWR_TOKEN_POST"
-    fi
-
-    source "$ZPWR_RE_ENV_FILE" || {
-        echo "where is $ZPWR_RE_ENV_FILE" >&2
-    }
-}
-
-zpwrTokenPost
 
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
