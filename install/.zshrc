@@ -454,6 +454,8 @@ function expand-or-complete-with-dots() {
 
 zle -N expand-or-complete-with-dots
 
+bindkey -v
+
 bindkey -M vicmd '^I' expand-or-complete-with-dots
 bindkey -M viins '^I' expand-or-complete-with-dots
 
@@ -467,7 +469,7 @@ source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
 
 # late load calling precmd
 zinit ice lucid nocompile wait'!' \
-atload'_powerline_set_jobnum;_powerline_set_main_keymap_name;powerlevel9k_prepare_prompts'
+atload'_powerline_set_jobnum &>/dev/null;_powerline_set_main_keymap_name &>/dev/null;powerlevel9k_prepare_prompts'
 
 zinit load \
 MenkeTechnologies/powerlevel9k
@@ -493,7 +495,7 @@ unset p
 
 
 # late bind keystrokes
-zinit ice lucid nocompile atload="bindInterceptSurround"
+zinit ice lucid nocompile wait atload="bindInterceptSurround"
 zinit load \
 hlissner/zsh-autopair
 
@@ -508,7 +510,9 @@ zinit load \
 zsh-users/zsh-autosuggestions
 
 # late , must be last to load
-zinit ice lucid nocompile wait'0c' atload"zicompinit; zicdreplay"
+# runs ZLE keybindings to override other late loaders
+# runs compinit
+zinit ice lucid nocompile wait'0c' atload"bindOverrideZLE;zicompinit; zicdreplay"
 zinit load \
 zdharma/fast-syntax-highlighting
 
@@ -590,360 +594,8 @@ fi
 
 #{{{                    MARK:ZLE bindkey
 #**************************************************************
-
-autoload -Uz select-bracketed select-quoted bracketed-paste-magic edit-command-line
-zle -N edit-command-line
-zle -N select-bracketed
-zle -N select-quoted
-zle -N zle-keymap-select
-zle -N bracketed-paste bracketed-paste-magic
-zle -N expandAliasAccept
-zle -N rationalize-dot
-zle -N downTen
-zle -N self-insert
-zle -N lastWordDouble
-zle -N fzfCommits
-zle -N updater
-zle -N runner
-zle -N intoFzf
-zle -N intoFzfAg
-zle -N emacsFzf
-zle -N vimFzf
-zle -N vimFzfSudo
-zle -N getrcWidget
-zle -N clearLine
-zle -N deleteLastWord
-zle -N lsoffzf
-zle -N fzfVimKeybind
-zle -N fzfAllKeybind
-zle -N locateFzf
-zle -N locateFzfEdit
-zle -N fzfEnv
-zle -N fasdFZF
-zle -N asVar
-zle -N zpwrVimAllWidget
-zle -N zpwrVimAllWidgetAccept
-zle -N zpwrVerbsWidget
-zle -N zpwrVerbsWidgetAccept
-zle -N updater
-zle -N up8widget
-zle -N sub
-zle -N dbz
-zle -N sshRegain
-zle -N tutsUpdate
-zle -N subLine
-zle -N changeQuotes
-zle -N alternateQuotes
-zle -N clipboard
-zle -N EOLorNextTabStop
-
-#vim mode for zle
-bindkey -v
-
-bindkey -M vicmd '^G' what-cursor-position
-bindkey -M viins '^G' what-cursor-position
-bindkey -M viins '^[^M' self-insert-unmeta
-bindkey -M viins '^P' EOLorNextTabStop
-bindkey -M vicmd '^P' EOLorNextTabStop
-bindkey -M vicmd G end-of-buffer-or-history
-
-bindkey -M viins "^Vc" fzfCommits
-bindkey -M vicmd "^Vc" fzfCommits
-
-bindkey -M viins "^U" clearLine
-bindkey -M vicmd "^U" clearLine
-
-bindkey -M vicmd "^W" deleteLastWord
-
-bindkey -M viins "\e^O" runner
-bindkey -M vicmd "\e^O" runner
-
-bindkey -M viins "\e^P" up8widget
-bindkey -M vicmd "\e^P" up8widget
-
-bindkey -M viins '^r' redo
-bindkey -M vicmd '^r' redo
-bindkey -M viins '^z' undo
-bindkey -M vicmd '^z' undo
-
-bindkey -M viins '^F^V' edit-command-line
-bindkey -M vicmd '^F^V' edit-command-line
-
-bindkey -M viins '^O' fzf-tab-complete
-bindkey -M vicmd '^O' fzf-tab-complete
-
-bindkey -M viins '^F^F' fzf-file-widget
-bindkey -M vicmd '^F^F' fzf-file-widget
-
-bindkey -M viins '^F^D' intoFzf
-bindkey -M vicmd '^F^D' intoFzf
-
-bindkey -M viins '^F^H' lsoffzf
-bindkey -M vicmd '^F^H' lsoffzf
-
-bindkey -M viins '^F^J' zpwrVerbsWidgetAccept
-bindkey -M vicmd '^F^J' zpwrVerbsWidgetAccept
-
-bindkey -M viins '^V^V' zpwrVimAllWidgetAccept
-bindkey -M vicmd '^V^V' zpwrVimAllWidgetAccept
-
-bindkey -M viins '^Vm' zpwrVimAllWidget
-bindkey -M vicmd '^Vm' zpwrVimAllWidget
-
-bindkey -M viins '^F^M' zzcomplete
-bindkey -M vicmd '^F^M' zzcomplete
-
-bindkey -M viins '^F^N' zpwrVerbsWidget
-bindkey -M vicmd '^F^N' zpwrVerbsWidget
-
-bindkey -M viins '^F^G' intoFzfAg
-bindkey -M vicmd '^F^G' intoFzfAg
-
-bindkey -M viins '^F^R' asVar
-bindkey -M vicmd '^F^R' asVar
-
-bindkey -M viins '^V//' locateFzf
-bindkey -M vicmd '^V//' locateFzf
-
-bindkey -M viins '^V/.' locateFzfEdit
-bindkey -M vicmd '^V/.' locateFzfEdit
-
-bindkey -M viins '^V.' fzfAllKeybind
-bindkey -M vicmd '^V.' fzfAllKeybind
-
-bindkey -M viins '^Vk' fzfVimKeybind
-bindkey -M viins '^Vk' fzfVimKeybind
-
-bindkey -M viins '^V,' fzfEnv
-bindkey -M vicmd '^V,' fzfEnv
-
-bindkey -M viins '^V^N' vimFzfSudo
-bindkey -M vicmd '^V^N' vimFzfSudo
-
-exists history-search-multi-word && {
-    bindkey -M viins '^V^R' history-search-multi-word
-    bindkey -M vicmd '^V^R' history-search-multi-word
-}
-
-exists fasd && {
-    bindkey -M viins '^V^F' fasdFZF
-    bindkey -M vicmd '^V^F' fasdFZF
-}
-
-exists z && {
-    zle -N zFZF
-    bindkey -M viins '^V^S' zFZF
-    bindkey -M vicmd '^V^S' zFZF
-}
-
-bindkey -M viins '^V ' vimFzf
-bindkey -M vicmd '^V ' vimFzf
-
-bindkey -M viins '^V^K' emacsFzf
-bindkey -M vicmd '^V^K' emacsFzf
-
-bindkey -M viins '^Q' lastWordDouble
-bindkey -M vicmd '^Q' lastWordDouble
-
-bindkey -M viins '^V^Z' fzf-history-widget
-bindkey -M vicmd '^V^Z' fzf-history-widget
-
-bindkey -M viins '^V^G' fzf-cd-widget
-bindkey -M vicmd '^V^G' fzf-cd-widget
-
-#completion trigger plus tab, defaults to ~~
-export FZF_COMPLETION_TRIGGER=';'
-
-bindkey -M viins '^Y' changeQuotes
-bindkey -M vicmd '^Y' changeQuotes
-
-#unbind for later use
-bindkey -M viins -r '^V'
-bindkey -M vicmd -r '^V'
-
-#unbind for later use
-bindkey -M viins -r '^F'
-bindkey -M vicmd -r '^F'
-
-bindkey -M viins '^F^L' list-choices
-bindkey -M vicmd '^F^L' list-choices
-
-bindkey -M viins '^F^K' alternateQuotes
-bindkey -M vicmd '^F^K' alternateQuotes
-
-bindkey -M viins '\e^D' capitalize-word
-bindkey -M vicmd '\e^D' capitalize-word
-
-bindkey -M viins '\e^L' down-case-word
-bindkey -M vicmd '\e^L' down-case-word
-
-bindkey -M viins '\e^U' up-case-word
-bindkey -M vicmd '\e^U' up-case-word
-
-bindkey -M viins '\e[5~' clipboard
-bindkey -M viins '^B' clipboard
-bindkey -M vicmd '^B' clipboard
-#shift tab
-bindkey -M viins '\e[Z' clipboard
-
-bindkey '\e[1;2D' sub
-bindkey '\e^f' sub
-
-#bound to escape spacebar
-bindkey -M vicmd '\e ' sshRegain
-bindkey -M viins '\e ' sshRegain
-
-#F1 key
-bindkey '\eOP' up8widget
-#F2 key
-bindkey '\eOQ' sub
-
-#F3 key
-bindkey '\eOR' getrcWidget
-#determine if this terminal was started in IDE
-if [[ "$ZPWR_OS_TYPE" == darwin ]];then
-    if [[ "$ZPWR_PARENT_PROCESS" == *(login|tmux)* ]]; then
-        #Ctrl plus arrow keys
-        bindkey '\e[1;5A' gacpCheckDiff
-        bindkey '\e[1;5B' updater
-        bindkey '\e[1;5C' tutsUpdate
-        bindkey '\e[1;5D' dbz
-    else
-        bindkey '\e[5A' gacpCheckDiff
-        bindkey '\e[5B' updater
-        bindkey '\e[5C' tutsUpdate
-        bindkey '\e[5D' dbz
-    fi
-fi
-
-bindkey '^N' sudo-command-line
-bindkey -M viins '\e^T' transpose-words
-bindkey -M vicmd '\e^T' transpose-words
-bindkey -M viins '^T' transpose-chars
-bindkey -M vicmd '^T' transpose-chars
-
-bindkey -M viins '^A' beginning-of-line
-bindkey -M vicmd '^A' beginning-of-line
-bindkey -M viins '^E' end-of-line
-bindkey -M vicmd '^E' end-of-line
-
-bindkey '^X^R' _read_comp
-bindkey '^X?' _complete_debug
-bindkey '^XC' _correct_filename
-bindkey '^Xa' _expand_alias
-bindkey '^Xc' _correct_word
-bindkey '^Xd' _list_expansions
-bindkey '^Xe' _expand_word
-bindkey '^Xh' _complete_help
-bindkey '^Xm' _most_recent_file
-bindkey '^Xn' _next_tags
-bindkey '^Xt' _complete_tag
-bindkey '^X~' _bash_list-choices
-bindkey '^[,' _history-complete-newer
-bindkey '^[/' _history-complete-older
-bindkey '^[~' _bash_complete-word
-
-
-#if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
-    #export DISPLAY=$(cat $ZPWR_LOCAL/.display.txt) ||
-    #:
-#else
-    #:
-    #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
-#fi
-
-bindkey -M viins . rationalize-dot
-
-bindkey -M listscroll q send-break
-bindkey -M listscroll f complete-word
-
-# bind shift tab to reverse menucomplete, opposite of tab
-bindkey -M menuselect '^[[Z' reverse-menu-complete
-bindkey -M menuselect '^d' accept-and-menu-complete
-bindkey -M menuselect '^f' accept-and-infer-next-history
-
-if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    if [[ "$ZPWR_PARENT_PROCESS" =~ 'login|tmux' ]]; then
-        bindkey -M menuselect '\e[1;5A' vi-backward-word
-        bindkey -M menuselect '\e[1;5B' vi-forward-word
-        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[1;5C' vi-end-of-line
-    else
-        bindkey -M menuselect '\e[5A' vi-backward-word
-        bindkey -M menuselect '\e[5B' vi-forward-word
-        bindkey -M menuselect '\e[5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[5C' vi-end-of-line
-    fi
-else
-    if [[ "$distroName" == raspbian ]]; then
-        #bindkey -M menuselect '\eOA' vi-backward-word
-        #bindkey -M menuselect '\eOB' vi-forward-word
-        #bindkey -M menuselect '\eOD' vi-beginning-of-line
-        #bindkey -M menuselect '\eOC' vi-end-of-line
-        :
-    else
-        bindkey -M menuselect '\e[1;5A' vi-backward-word
-        bindkey -M menuselect '\e[1;5B' vi-forward-word
-        bindkey -M menuselect '\e[1;5D' vi-beginning-of-line
-        bindkey -M menuselect '\e[1;5C' vi-end-of-line
-    fi
-fi
-
-# bind function arrow keys in menuselect mode
-bindkey -M menuselect '\e[5~' vi-backward-word
-bindkey -M menuselect '\e[6~' vi-forward-word
-bindkey -M menuselect '\e[1~' vi-beginning-of-line
-bindkey -M menuselect '\e[4~' vi-end-of-line
-
-# incremental fuzzy filter on keypress like emacs helm and fzf
-
-if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
-    bindkey -M menuselect '^I' vi-forward-char
-    bindkey -M menuselect '^?' undo
-    bindkey -M menuselect '.' self-insert
-else
-    :
-fi
-
-bindkey -M menuselect '|' history-incremental-search-forward
-
-bindkey -M menuselect '^J' down-history
-bindkey -M menuselect '^K' up-history
-
-bindkey -M menuselect '^P' vi-backward-word
-bindkey -M menuselect '^N' vi-forward-word
-
-bindkey -M menuselect '^H' vi-backward-char
-bindkey -M menuselect '^L' vi-forward-char
-# search through options
-bindkey -M menuselect '?' history-incremental-search-backward
-
-# for interactive menuselect
-bindkey -M menuselect '^V' vi-insert
-
-
-bindkey -M menuselect '^M' .accept-line
-bindkey -M menuselect '^@' accept-line
-bindkey -M menuselect '^S' reverse-menu-complete
-
-# bind vim text objects on command line, depends on zsh having visual and operator pendings modes in zle
-#
-version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"
-
-if (( $version > 5.2 )); then
-    for km in viopp visual; do
-        bindkey -M $km -- '-' vi-up-line-or-history
-        for c in ${(s..):-'()[]{}<>bB'}; do
-            bindkey -M $km i$c select-bracketed
-            bindkey -M $km a$c select-bracketed
-        done
-        for c in "${(s..):-\'\"\`\|,./:;-=+@}"; do
-            bindkey -M $km i$c select-quoted
-            bindkey -M $km a$c select-quoted
-        done
-    done
-fi
-
+# ZLE keybindings late loaded in autoload/common/bindOverrideZLE
+# this is to override any late loaded plugins with keybindings
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE hooks
