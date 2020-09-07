@@ -1,14 +1,29 @@
-selectp -t 0 # select the first (0) pane 
-splitw -h -p 50  # split it into two halves
-selectp -t 0 # select the first (0) pane 
-splitw -h -p 50 #it into two halves
-selectp -t 2 # select the first (0) pane 
-splitw -h -p 50 # split it into two halves
-selectp -t 0 # select the first (0) pane 
+#select the first (0) pane
+selectp -t 0
+
+# split it into two halves
+splitw -h -p 50
+selectp -t 0
+
+#split into two halves
+splitw -h -p 50
+selectp -t 2
+
+# split it into two halves
+splitw -h -p 50
+selectp -t 0
+
+wait-for -L my2
+
+#if brc does not exist like wth zinit late load, have tmux sleep for 5 sec
+send-keys "brc || bash -c 'sleep 5; tmux wait-for -U my2' &;" C-m
+wait-for -L my2
+
+#proceed after sleep
 send-keys "brc" C-m
-selectp -t 1 # select the first (0) pane 
-send-keys "vrc" C-m
-selectp -t 2 # select the first (0) pane 
+selectp -t 1
+send-keys 'vrc' C-m
+selectp -t 2
 send-keys "trc" C-m
-selectp -t 3 # select the first (0) pane 
+selectp -t 3
 send-keys "zrc" C-m

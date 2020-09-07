@@ -1,11 +1,26 @@
-selectp -t 0 # select the first (0) pane
-splitw -h -p 50 # split it into two vertical halves
-selectp -t 1 # select the first (0) pane
-splitw -v -p 50 # split it into two horizontal halves
-selectp -t 0 # select the top left pane
+#select the first (0) pane
+selectp -t 0
+# split it into two vertical halves
+splitw -h -p 50
+#select the first (0) pane
+selectp -t 1
+# split it into two horizontal halves
+splitw -v -p 50
+# select the left pane
+selectp -t 0
+
+wait-for -L my1
+
+#if se does not exist like wth zinit late load, have tmux sleep for 5 sec
+send-keys "se || bash -c 'sleep 5; tmux wait-for -U my1' &;" C-m
+wait-for -L my1
+
+#proceed after sleep
+
+selectp -t 0
 send-keys "se" C-m
-selectp -t 1 # select the middle pane
-send-keys "redo ;" Tab
+selectp -t 1
+send-keys "sef" C-m
 
 selectp -t 2
 send-keys "se" C-m
