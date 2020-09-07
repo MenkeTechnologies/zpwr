@@ -207,6 +207,11 @@ exists thefuck && eval $(thefuck --alias)
 
 # force alias z to zshz not zypper on suse
 alias z="$zcmd 2>&1"
+alias za=zc-all
+alias zid=zc-id
+alias zls=zc-ls
+alias zla=zc-logo-all
+alias zn=zc-bg-notify
 ###}}}***********************************************************
 }
 bindAliasesZshLate "$@"
