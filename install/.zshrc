@@ -799,7 +799,7 @@ bindkey '\eOR' getrcWidget
 if [[ "$ZPWR_OS_TYPE" == darwin ]];then
     if [[ "$ZPWR_PARENT_PROCESS" == *(login|tmux)* ]]; then
         #Ctrl plus arrow keys
-        bindkey '\e[1;5A' gapCheckDiff
+        bindkey '\e[1;5A' gacpCheckDiff
         bindkey '\e[1;5B' updater
         bindkey '\e[1;5C' tutsUpdate
         bindkey '\e[1;5D' dbz
