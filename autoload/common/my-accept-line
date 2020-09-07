@@ -38,7 +38,7 @@ function my-accept-line () {
     commandsThatModifyFiles=(unlink rm srm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
     for command in ${commandsThatModifyFiles[@]}; do
-        regex="^sudo[ ]+[-]*[[:alpha:]]*[ ]*(env)?[ ]+$command .*\$|^$command .*\$"
+        regex='^[[:space:]]*sudo[[:space:]]+([-]+[[:alpha:]]*[[:space:]]*)*(env[[:space:]]+)*'"$command"'[[:space:]]+.*$|^[[:space:]]*'"$command"'[[:space:]]+.*$'
         if [[ "$BUFFER" =~ $regex ]]; then
             ZPWR_WILL_CLEAR=true
         fi
@@ -63,9 +63,10 @@ function my-accept-line () {
         fi
     fi
 
+    # prevent global alias in first position from expanding
     if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
-        if [[ ! -z $(alias -g $mywords[1]) ]];then
+        if [[ -n $(alias -g $mywords[1]) ]];then
             aliases="$(cat $ZPWR_LOCAL/.common_aliases)"
             line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
             if [[ -z $line ]];then
@@ -80,7 +81,6 @@ function my-accept-line () {
         fi
     fi
 
-    set +x
     zle .accept-line
     # leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
     printf "\x1b[0m"
