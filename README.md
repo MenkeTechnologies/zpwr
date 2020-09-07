@@ -443,6 +443,8 @@ export ZPWR_MARKER_COLOR="0;1;4;37;44m"
 export ZPWR_INTERACTIVE_MENU_SELECT=true
 # plugin framework
 export ZPWR_PLUGIN_MANAGER=zinit
+# delay between shell start and compinit
+export ZPWR_ZINIT_COMPINIT_DELAY=8
 # common colors
 export ZPWR_BLUE="\x1b[37;44m"
 export ZPWR_RED="\x1b[31m"

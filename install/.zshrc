@@ -220,7 +220,7 @@ ZPWR_GH_PLUGINS=(
     zdharma/zui
     MenkeTechnologies/zunit
     zdharma/zzcomplete
-    #atload"zicompinit; zicdreplay" blockf
+    #comps
     MenkeTechnologies/zsh-gem-completion
     MenkeTechnologies/zsh-cpan-completion
     MenkeTechnologies/zsh-pip-description-completion
@@ -505,14 +505,14 @@ zinit load \
 zsh-users/zsh-history-substring-search
 
 # late , must come before syntax highlight
-zinit ice lucid nocompile wait'0b' atload'_zsh_autosuggest_start'
+zinit ice lucid nocompile wait'0b' atload'_zsh_autosuggest_start;bindOverrideZLE;bindFZFLate'
 zinit load \
 zsh-users/zsh-autosuggestions
 
 # late , must be last to load
 # runs ZLE keybindings to override other late loaders
 # runs compinit
-zinit ice lucid nocompile wait'0c' atload"bindOverrideZLE;zicompinit; zicdreplay"
+zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zicompinit; zicdreplay"
 zinit load \
 zdharma/fast-syntax-highlighting
 
@@ -1374,102 +1374,7 @@ source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
 
 #{{{                    MARK:FZF
 #**************************************************************
-# default value for pygmentize theme
-export PYGMENTIZE_COLOR="emacs"
-export ZPWR_COLORIZER=bat
-
-if [[ $ZPWR_COLORIZER == bat ]]; then
-
-    if exists bat;then
-        export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
-        export COLORIZER_FZF_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
-        export COLORIZER_FZF_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
-        export COLORIZER_FZF_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'
-        export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
-        export COLORIZER_NL=''
-    else
-        export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
-        export COLORIZER_FZF_FILE_TEXT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-        export COLORIZER_FZF_FILE_DEFAULT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-        export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-        export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
-        export COLORIZER_NL=' | cat -n'
-    fi
-else
-    export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
-    export COLORIZER_FZF_FILE_TEXT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-    export COLORIZER_FZF_FILE_DEFAULT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-    export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-    export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
-    export COLORIZER_NL=' | cat -n'
-fi
-
-export COLORIZER_FZF_C="$ZPWR_COLORIZER -l c"
-export COLORIZER_FZF_SH="$ZPWR_COLORIZER  -l sh"
-export COLORIZER_FZF_YAML="$ZPWR_COLORIZER -l yaml"
-export COLORIZER_FZF_JAVA="$ZPWR_COLORIZER -l java"
-export FZF_DRACULA="--color=dark
---color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
---color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
-export FZF_JELLY="--color fg:-1,bg:-1,hl:230,fg+:3,bg+:233,hl+:229
---color info:150,prompt:110,spinner:150,pointer:167,marker:174"
-
-
-export ZPWR_COMMON_FZF_ELEM
-ZPWR_COMMON_FZF_ELEM="--prompt='$ZPWR_FZF_LOGO ' --bind=ctrl-n:page-down,ctrl-p:page-up"
-
-#to include dirs files in search
-export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
-export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%"
-local rpm_cmd
-local deb_cmd
-exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
-exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
-
-export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
-export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsCtrlT.sh")'"
-export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"
-export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
-
-export FZF_AG_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter : --nth 3.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfAgOpts.sh")'"
-
-export FZF_GTAGS_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter ' ' --nth 1 --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfGtagsOpts.sh")'"
-
-export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
-
-export FZF_SEARCH_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitSearchOpts.sh")'"
-
-if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-    export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"
-else
-    export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"
-fi
-
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff='"$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f="\$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
-alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z="| $ZPWR_FZF $FZF_CTRL_T_OPTS "
-
-local base03="234"
-local base02="235"
-local base01="240"
-local base00="241"
-local base0="244"
-local base1="245"
-local base2="254"
-local base3="230"
-local yellow="136"
-local orange="166"
-local red="160"
-local magenta="125"
-local violet="61"
-local blue="33"
-local cyan="37"
-local green="64"
-
-# Solarized Dark color scheme for fzf
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
-    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
-    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow"
+# ran in bindFZFLate
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Compsys Functions
