@@ -290,7 +290,7 @@ exists subl && ZPWR_OMZ_PLUGINS+=(sublime)
 exists rails && ZPWR_OMZ_PLUGINS+=(rails)
 
 if [[ $ZPWR_LEARN != false ]]; then
-    ZPWR_GH_PLUGINS+=(MenkeTechnologies/zsh-learn)
+    ZPWR_GH_PLUGINS=(MenkeTechnologies/zsh-learn $ZPWR_GH_PLUGINS)
 fi
 
 #}}}***********************************************************
@@ -465,6 +465,9 @@ zicompinit() {
     compinit -u -d ${ZINIT[ZCOMPDUMP_PATH]:-${ZDOTDIR:-$HOME}/.zcompdump} "${(Q@)${(z@)ZINIT[COMPINIT_OPTS]}}" 2>/dev/null
 }
 
+# filled late
+declare -a zpwrSubcommandsAry
+
 
 # late load calling precmd
 zinit ice lucid nocompile wait'!' \
@@ -507,8 +510,9 @@ zinit ice lucid nocompile wait'0b' atload'bindHistorySubstring'
 zinit load \
 zsh-users/zsh-history-substring-search
 
+
 # late , must come before syntax highlight
-zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindOverrideZLE;bindFZFLate'
+zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindOverrideZLE;bindFZFLate;bindZpwrVerbs'
 zinit load \
 zsh-users/zsh-autosuggestions
 
@@ -1216,17 +1220,6 @@ zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzf
 zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop):*:*' sort false
 
 zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-r):*:*' sort false
-#}}}***********************************************************
-
-#{{{                    MARK:ZPWR Compsys Functions
-#**************************************************************
-declare -a zpwrSubcommandsAry
-
-for k v in ${(kv)ZPWR_VERBS[@]};do
-    zpwrSubcommandsAry+=("$k:$v")
-done
-
-ZPWR_VARS[zpwrSubcommandsAry]=zpwrSubcommandsAry
 #}}}***********************************************************
 
 #{{{                    MARK:Compdefs

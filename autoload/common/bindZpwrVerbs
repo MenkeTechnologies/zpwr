@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function bindZpwrVerbs(){
+
+        #{{{                    MARK:ZPWR Compsys Functions
+#**************************************************************
+
+    for k v in ${(kv)ZPWR_VERBS[@]};do
+        zpwrSubcommandsAry+=("$k:$v")
+    done
+
+    ZPWR_VARS[zpwrSubcommandsAry]=zpwrSubcommandsAry
+#}}}***********************************************************
+}
+
+bindZpwrVerbs "$@"
