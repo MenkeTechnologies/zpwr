@@ -21,15 +21,7 @@ The installer will confirm what will be installed and overwritten before executi
 
 Some interactivity is required near end of installer for postfix, wireshark and snort installs.
 
-Once you reach the zinit prompt, type 
-```sh
-logout
-```
-or
-```sh
-exit
-```
-or type C-d (Control-d) to return to installer script.
+Zinit will install plugins on first zsh after install.
 
 ## Full Installation Instructions to `$ZPWR`
 To install to a custom directory, clone the project to that directory and `export ZPWR=<my_directory>` in your shell environment before installing.  After install, ZPWR needs to be permanently exported in the environment before `~/.zshrc` is read by zsh.  `~/.zshenv` is one possible location for the export.
@@ -564,8 +556,10 @@ Replacing the lolcat into ponysay banner like so on startup will further increas
 ```sh
 export ZPWR_INTRO_BANNER=nopony
 ```
-Due to the sheer number of plugins and completions startup usually takes 2-4 seconds on faster machines but up to 10-12 seconds on slow machines.
-
+With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup at around 8 seconds by default.
+```sh
+export ZPWR_ZINIT_COMPINIT_DELAY=8
+```
 ## Contributing
 I am looking for contributors. Especially for documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests.
 
