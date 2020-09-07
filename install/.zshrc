@@ -1484,13 +1484,6 @@ declare -a last_ten
 zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
 # zstyle ':completion:*:*:*:*:functions' ignored-patterns
 
-if [[ $ZPWR_LEARN != false ]]; then
-    compdef _se se see seee redo rsql re searchl searchle searchlee redosql
-    # to allow reverse numeric sort and numeric sort
-    # as opposed to lexicographic sort
-    zstyle ':completion:*:*:(se|see|seee|redo|rsql|re|searchl|searchle|searchlee|z|r|zm|zd|zg):*:*' sort false
-fi
-
 if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
     zstyle ':completion:*:*:*:*:*' menu select=0 interactive
 else
