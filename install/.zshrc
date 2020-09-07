@@ -335,7 +335,6 @@ fi
 # add ZPWR autoload dirs to fpath
 fpath=($ZPWR_AUTOLOAD_LINUX $ZPWR_AUTOLOAD_DARWIN $ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
 
-#ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 #}}}***********************************************************
 #
 #{{{                    MARK:autoload
@@ -446,16 +445,20 @@ zsh-users/zsh-history-substring-search
 
 
 # late , must come before syntax highlight
-zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindFZFLate;bindZpwrVerbs;bindZpwrZstyle;bindPenultimate'
+zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindFZFLate;bindZpwrVerbs;bindZpwrZstyle'
 zinit load \
 zsh-users/zsh-autosuggestions
 
 # late , must be last to load
 # runs ZLE keybindings to override other late loaders
 # runs compinit
-zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zicompinit; zicdreplay;bindFinal"
+zinit ice lucid nocompile wait'0d' atinit'bindPenultimate;bindFinal'
 zinit load \
-zdharma/fast-syntax-highlighting
+    zdharma/fast-syntax-highlighting
+
+zinit ice lucid nocompile as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit"zicompinit; zicdreplay"
+zinit light \
+    MenkeTechnologies/zsh-zinit-final
 
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
   # Load only from secure directories
