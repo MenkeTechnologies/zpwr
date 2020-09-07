@@ -12,7 +12,7 @@ selectp -t 2
 
 wait-for -L my1
 #if se does not exist like wth zinit late load, have tmux sleep
-send-keys "exists se && { bash -c 'tmux wait-for -U my1' & } || bash -c 'sleep 3; tmux wait-for -U my1' &;" C-m
+send-keys "exists se && { bash -c 'tmux wait-for -U my1' & } || bash -c 'sleep 5; tmux wait-for -U my1' &;" C-m
 wait-for -L my1
 
 #proceed after sleep
