@@ -208,7 +208,6 @@ ZPWR_GH_PLUGINS=(
     zdharma/zconvey
     zsh-users/zsh-completions
     akarzim/zsh-docker-aliases
-    MenkeTechnologies/zsh-expand
     MenkeTechnologies/zsh-git-acp
     MenkeTechnologies/zsh-nginx
     MenkeTechnologies/zsh-sed-sub
@@ -442,6 +441,9 @@ alias zn=zc-bg-notify
 #{{{                    MARK:Sourcing OMZ and alias file
 #**************************************************************
 autoload -Uz compinit
+zpwrCompinit() {
+    compinit -u -d ${ZINIT[ZCOMPDUMP_PATH]:-${ZDOTDIR:-$HOME}/.zcompdump} "${(Q@)${(z@)ZINIT[COMPINIT_OPTS]}}"
+}
 
 # compsys cache file
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
@@ -470,15 +472,8 @@ source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
 # late load calling precmd
 zinit ice lucid nocompile wait'!' \
 atload'_powerline_set_jobnum &>/dev/null;_powerline_set_main_keymap_name &>/dev/null;powerlevel9k_prepare_prompts'
-
 zinit load \
 MenkeTechnologies/powerlevel9k
-
-# late
-for p in $ZPWR_GH_PLUGINS; do
-    zinit ice lucid nocompile wait
-    zinit load $p
-done
 
 # late
 for p in $ZPWR_OMZ_COMPS; do
@@ -491,28 +486,39 @@ for p in $ZPWR_OMZ_PLUGINS; do
     zinit ice svn lucid nocompile wait
     zinit snippet OMZ::plugins/$p
 done
+
+# override OMZ aliases
+zinit ice lucid nocompile wait'0' \
+atload'bindAliasesLate;createAliasCache'
+zinit load \
+    MenkeTechnologies/zsh-expand
+
+# late GH plugins
+for p in $ZPWR_GH_PLUGINS; do
+    zinit ice lucid nocompile wait
+    zinit load $p
+done
 unset p
 
-
 # late bind keystrokes
-zinit ice lucid nocompile wait atload="bindInterceptSurround"
+zinit ice lucid nocompile wait'0a' atload='bindInterceptSurround'
 zinit load \
 hlissner/zsh-autopair
 
 # late bind keystrokes, must come before syntax highlight
-zinit ice lucid nocompile wait'0a' atload'bindHistorySubstring'
+zinit ice lucid nocompile wait'0b' atload'bindHistorySubstring'
 zinit load \
 zsh-users/zsh-history-substring-search
 
 # late , must come before syntax highlight
-zinit ice lucid nocompile wait'0b' atload'_zsh_autosuggest_start;bindOverrideZLE;bindFZFLate'
+zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindOverrideZLE;bindFZFLate'
 zinit load \
 zsh-users/zsh-autosuggestions
 
 # late , must be last to load
 # runs ZLE keybindings to override other late loaders
 # runs compinit
-zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zicompinit 2> /dev/null; zicdreplay"
+zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zpwrCompinit 2> /dev/null; zicdreplay"
 zinit load \
 zdharma/fast-syntax-highlighting
 
@@ -529,8 +535,7 @@ if [[ $ZPWR_DEBUG == true ]]; then
 fi
 # You may need to manually set your language environment
 # has all aliases and functions common to bourne like shells
-test -s "$ZPWR_ALIAS_FILE" && source "$ZPWR_ALIAS_FILE"
-alias -r > "$ZPWR_LOCAL/.common_aliases"
+ test -s "$ZPWR_ALIAS_FILE" && source "$ZPWR_ALIAS_FILE"
 #}}}***********************************************************
 
 #{{{                    MARK:Override OMZ config
