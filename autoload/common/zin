@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zs(){
+    if [[ -d "$ZPWR_INSTALL" ]]; then
+        cd "$ZPWR_INSTALL"
+    else
+        loggErr "ZPWR_INSTALL '$ZPWR_INSTALL' is not a directory."
+    fi
+
+}
+
+zs "$@"

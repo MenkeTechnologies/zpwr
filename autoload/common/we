@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function we(){
+    if [[ -d "/var/www/html" ]];then
+        cd /var/www/html
+    elif [[ -d "/usr/local/var/www" ]];then
+        cd /usr/local/var/www
+        else
+        loggErr "could NOT cd /var/ww/html NOR /usr/local/var/www"
+    fi
+}
+
+we "$@"

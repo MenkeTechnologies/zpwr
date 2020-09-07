@@ -109,8 +109,6 @@ fi
 declare -A ZPWR_VARS
 # map to store each zpwr verb, key is the verbname, value is cmd=description
 declare -A ZPWR_VERBS
-# get zpwr verbs
-source "$ZPWR_SCRIPTS/zpwr.zsh"
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
@@ -362,18 +360,7 @@ fi
 # compsys cache file
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
 
-function expand-or-complete-with-dots() {
-    print -Pn "%F{red}…%f"
-    zle expand-or-complete
-    zle redisplay
-}
-
-zle -N expand-or-complete-with-dots
-
 bindkey -v
-
-bindkey -M vicmd '^I' expand-or-complete-with-dots
-bindkey -M viins '^I' expand-or-complete-with-dots
 
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "pre: $fpath" >> "$ZPWR_LOGFILE"
@@ -414,7 +401,7 @@ done
 
 zinit ice lucid nocompile wait atinit='bindForGit'
 zinit load \
-    wfxr/forgit
+    MenkeTechnologies/forgit
 
 # late GH plugins
 for p in $ZPWR_GH_PLUGINS; do
@@ -728,8 +715,6 @@ path=(${(u)path})
 
 #{{{                    MARK:Immediate Usage
 #**************************************************************
-alias a="cd $HOME"
-test -d "$ZPWR_D" && alias d="cd $ZPWR_D"
 alias zp=zpwr
 #}}}***********************************************************
 

@@ -77,7 +77,6 @@ exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;bk;gla;zp g
 exists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;git reset origin/\$(git_current_branch) --hard ;gla;zp gitclearcache; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
 exists zu8 || alias zu8='zpwr updateall'
-exists zua || alias zua='zpwr updateall'
 
 alias i='if [[ '$ZPWR_TABSTOP' ]];then
     '$ZPWR_TABSTOP'
@@ -135,20 +134,8 @@ alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) mast
 
 alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
-if [[ -d "$ZPWR_INSTALL" ]]; then
-    alias zin="cd $ZPWR_INSTALL"
-fi
-
-if [[ -d "$ZPWR_SCRIPTS" ]]; then
-    alias zs="cd $ZPWR_SCRIPTS"
-fi
-
 if [[ -d "$ZPWR_COMPS" ]]; then
     alias zco="cd $ZPWR_COMPS"
-fi
-
-if [[ -d "$ZPWR_AUTOLOAD_COMMON" ]]; then
-    alias zal="cd $ZPWR_AUTOLOAD_COMMON"
 fi
 
 if [[ -d "$ZPWR_SCRIPTS_MAC" ]]; then
@@ -176,7 +163,6 @@ if [[ -d "$ZPWR_LOCAL/installer" ]]; then
 fi
 
 if [[ -d "$ZPWR_LOCAL" ]]; then
-    alias zl="cd $ZPWR_LOCAL"
     alias zlr="cd $ZPWR_LOCAL/rcBackups"
 fi
 

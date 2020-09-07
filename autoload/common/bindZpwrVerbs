@@ -4,6 +4,8 @@ function bindZpwrVerbs(){
 
         #{{{                    MARK:ZPWR Compsys Functions
 #**************************************************************
+    # get zpwr verbs
+    source "$ZPWR_SCRIPTS/zpwr.zsh"
 
     for k v in ${(kv)ZPWR_VERBS[@]};do
         zpwrSubcommandsAry+=("$k:$v")

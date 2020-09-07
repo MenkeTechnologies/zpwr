@@ -5,6 +5,14 @@ function bindOverrideZLE(){
 
     autoload -Uz select-bracketed select-quoted bracketed-paste-magic edit-command-line
 
+
+    function expand-or-complete-with-dots() {
+        print -Pn "%F{red}…%f"
+        zle expand-or-complete
+        zle redisplay
+    }
+
+    zle -N expand-or-complete-with-dots
     zle -N accept-line my-accept-line
     zle -N magic-enter
     zle -N edit-command-line
@@ -51,6 +59,10 @@ function bindOverrideZLE(){
     zle -N alternateQuotes
     zle -N clipboard
     zle -N EOLorNextTabStop
+
+    bindkey -M vicmd '^I' expand-or-complete-with-dots
+    bindkey -M viins '^I' expand-or-complete-with-dots
+
 
     bindkey -M viins '^M' magic-enter
     bindkey -M vicmd '^M' magic-enter

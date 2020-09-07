@@ -54,7 +54,6 @@ function bindAliasesLate(){
     alias ll="clearList"
     alias la="clearList"
     alias l="clearList"
-    alias t="cd /"
     alias ca='cat -n'
     alias sa='sudo -E cat -n'
     alias ra='sudo -E rm -rf --'
@@ -125,19 +124,6 @@ function bindAliasesLate(){
     alias tree='tree -afC'
     alias ta="tmux attach-session"
     alias tn="tmux new-session"
-    alias h="cd /usr/local"
-    alias e="cd /etc"
-    alias ue="cd /usr/local/etc"
-    alias de="cd /dev"
-
-    if [[ -d "/var/www/html" ]];then
-        alias we="cd /var/www/html"
-    elif [[ -d "/usr/local/var/www" ]];then
-        alias we="cd /usr/local/var/www"
-    fi
-    if [[ -d "$FORKED_DIR" ]]; then
-        alias fp="cd $FORKED_DIR"
-    fi
 
     alias k="pkill"
     if exists kubectl; then
