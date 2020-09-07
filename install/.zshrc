@@ -512,7 +512,7 @@ zsh-users/zsh-autosuggestions
 # late , must be last to load
 # runs ZLE keybindings to override other late loaders
 # runs compinit
-zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zicompinit; zicdreplay"
+zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zicompinit 2> /dev/null; zicdreplay"
 zinit load \
 zdharma/fast-syntax-highlighting
 
