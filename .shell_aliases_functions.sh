@@ -40,35 +40,6 @@ if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
     mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
 fi
 
-function chooseNvimVim(){
-
-    if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        if commandExists nvim; then
-            alias v='nvim'
-            alias vi='nvim'
-            alias vv='nvim'
-            alias vim='nvim'
-            alias vm="nvim -u $ZPWR/.mininit.vim"
-            alias sv='sudo -E nvim'
-        else
-            if commandExists vim; then
-                alias v=vim
-                alias vi=vim
-                alias vv=vim
-                alias vm="vim -u $ZPWR/.minvimrc"
-                alias sv='sudo -E vim'
-            fi
-        fi
-    else
-        if commandExists vim; then
-            alias v=vim
-            alias vi=vim
-            alias vv=vim
-            alias vm="vim -u $ZPWR/.minvimrc"
-            alias sv='sudo -E vim'
-        fi
-    fi
-}
 #}}}***********************************************************
 
 #{{{                    MARK:Env Vars
