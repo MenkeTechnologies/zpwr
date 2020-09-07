@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function bindPowerlineTmux(){
+    [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
+    source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
+}
+
+bindPowerlineTmux "$@"

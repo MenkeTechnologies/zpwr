@@ -116,18 +116,9 @@ source "$ZPWR_SCRIPTS/zpwr.zsh"
 #{{{                    MARK:non ZPWR Exports
 #**************************************************************
 export LC_ALL="en_US.UTF-8"
-unalias ag &> /dev/null
 #stop delay when entering normal mode
 export KEYTIMEOUT=1
-export CHEATCOLORS=true
-
 export SHELL="$(which zsh)"
-
-# stderr colorization filter
-# color2
-
-# set right prompt string during continuation
-RPS2='+%N:%i:%^'
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ env vars
@@ -155,9 +146,6 @@ DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
 
 # UNCOMMENT THE FOLLOWING LINE IF YOU WANT TO DISABLE MARKING UNTRACKED FILES
 # under VCS as dirty. This makes repository status check for large repositories
@@ -197,7 +185,6 @@ ZSH_DISABLE_COMPFIX=true
 
 ZPWR_GH_PLUGINS=(
     MenkeTechnologies/fasd-simple
-    wfxr/forgit
     MenkeTechnologies/fzf
     MenkeTechnologies/fzf-tab
     MenkeTechnologies/gh_reveal
@@ -205,7 +192,6 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/jhipster-oh-my-zsh-plugin
     MenkeTechnologies/revolver
     zdharma/zbrowse
-    zdharma/zconvey
     zsh-users/zsh-completions
     akarzim/zsh-docker-aliases
     MenkeTechnologies/zsh-git-acp
@@ -256,8 +242,6 @@ ZPWR_OMZ_PLUGINS=(
     glassfish
     tig
     tmux
-    magic-enter
-    gradle
 )
 
 ZPWR_OMZ_COMPS=(
@@ -295,25 +279,6 @@ fi
 
 #}}}***********************************************************
 
-#{{{                    MARK:forgit https://github.com/wfxr/forgit
-#**************************************************************
-export FORGIT_NO_ALIASES=true
-forgit_log=fglo
-forgit_diff=fgd
-forgit_add=fga
-forgit_reset_head=fgrh
-forgit_ignore=fgi
-forgit_restore=fgcf
-forgit_clean=fgclean
-forgit_stash_show=fgss
-#}}}***********************************************************
-
-#{{{                    MARK:grc colorizer
-#**************************************************************
-# colors for common commands
-test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
-#}}}***********************************************************
-
 #{{{                    MARK:source tokens pre OMZ
 #**************************************************************
 
@@ -338,12 +303,6 @@ if [[ $ZPWR_PROFILING == true ]]; then
     zmodload zsh/zprof
 fi
 
-# command for exa (replaces ls)
-if [[ $ZPWR_EXA_EXTENDED == true ]]; then
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
-else
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
-fi
 #}}}***********************************************************
 
 #{{{                    MARK:post first token
@@ -364,30 +323,6 @@ if [[ ! -d $ZPWR_LOCAL ]]; then
     mkdir -p $ZPWR_LOCAL
 fi
 
-[[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
-source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
-
-if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
-    if test -s "$ZPWR_PROMPT_FILE";then
-        if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
-            if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then
-                source "$ZPWR_PROMPT_FILE"
-            else
-                ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
-            fi
-        else
-            source "$ZPWR_PROMPT_FILE"
-        fi
-    else
-        ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
-    fi
-else
-    test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
-fi
-
-# fish like menu select search
-zmodload -i zsh/complist
-setopt menucomplete
 #}}}***********************************************************
 
 #{{{                    MARK:FPATH setup
@@ -400,15 +335,13 @@ fi
 # add ZPWR autoload dirs to fpath
 fpath=($ZPWR_AUTOLOAD_LINUX $ZPWR_AUTOLOAD_DARWIN $ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
 
-exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
-
-ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
+#ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 #}}}***********************************************************
 #
 #{{{                    MARK:autoload
 #**************************************************************
 autoload -z $ZPWR_AUTOLOAD/common/*(.:t)
-autoload -Uz zrecompile zm zargs
+autoload -Uz zrecompile zm zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     plugins+=(zsh-xcode-completions brew osx pod)
@@ -425,17 +358,8 @@ else
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:zdharma configs pre OMZ
+#{{{                    MARK:expand-complete-dots
 #**************************************************************
-zstyle ":plugin:zconvey" output_method "feeder"
-zstyle ":plugin:zconvey" greeting "none"
-zstyle ":plugin:zconvey" ls_after_rename "0"
-zstyle ":plugin:zconvey" use_zsystem_flock "1"
-#}}}***********************************************************
-
-#{{{                    MARK:Sourcing OMZ and alias file
-#**************************************************************
-autoload -Uz compinit
 # compsys cache file
 export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
 
@@ -455,7 +379,10 @@ bindkey -M viins '^I' expand-or-complete-with-dots
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "pre: $fpath" >> "$ZPWR_LOGFILE"
 fi
+#}}}***********************************************************
 
+#{{{                    MARK:ZINIT
+#**************************************************************
 # prevent zinit from putting system fpath after zinit completions
 
 source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
@@ -468,12 +395,11 @@ zicompinit() {
 # filled late
 declare -a zpwrSubcommandsAry
 
-
-# late load calling precmd
-zinit ice lucid nocompile wait'!' \
+# late load prompt and call precmd fns first thing after prompt loads
+zinit ice lucid nocompile wait'!' atinit'bindPowerline;bindPowerlineTmux;bindZpwrDirs' \
 atload'_powerline_set_jobnum &>/dev/null;_powerline_set_main_keymap_name &>/dev/null;powerlevel9k_prepare_prompts'
 zinit load \
-MenkeTechnologies/powerlevel9k
+    MenkeTechnologies/powerlevel9k
 
 # late
 for p in $ZPWR_OMZ_COMPS; do
@@ -487,11 +413,9 @@ for p in $ZPWR_OMZ_PLUGINS; do
     zinit snippet OMZ::plugins/$p
 done
 
-# override OMZ aliases
-zinit ice lucid nocompile wait'0' \
-atload'bindAliasesLate;createAliasCache;bindAliasesZshLate'
+zinit ice lucid nocompile wait atinit='bindForGit'
 zinit load \
-    MenkeTechnologies/zsh-expand
+    wfxr/forgit
 
 # late GH plugins
 for p in $ZPWR_GH_PLUGINS; do
@@ -500,7 +424,17 @@ for p in $ZPWR_GH_PLUGINS; do
 done
 unset p
 
-# late bind keystrokes
+zinit ice lucid nocompile wait atinit='bindZdharma' atload'bindZdharmaPost'
+zinit load \
+    zdharma/zconvey
+
+# override OMZ/plugin aliases with own aliases
+zinit ice lucid nocompile wait'0' \
+atload'bindAliasesLate;createAliasCache;bindAliasesZshLate;bindOverrideZLE;'
+zinit load \
+    MenkeTechnologies/zsh-expand
+
+# late bind autopair keystrokes
 zinit ice lucid nocompile wait'0a' atload='bindInterceptSurround'
 zinit load \
 hlissner/zsh-autopair
@@ -512,14 +446,14 @@ zsh-users/zsh-history-substring-search
 
 
 # late , must come before syntax highlight
-zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindOverrideZLE;bindFZFLate;bindZpwrVerbs'
+zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindFZFLate;bindZpwrVerbs;bindZpwrZstyle;bindPenultimate'
 zinit load \
 zsh-users/zsh-autosuggestions
 
 # late , must be last to load
 # runs ZLE keybindings to override other late loaders
 # runs compinit
-zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zicompinit; zicdreplay"
+zinit ice lucid nocompile wait"$ZPWR_ZINIT_COMPINIT_DELAY" atload"zicompinit; zicdreplay;bindFinal"
 zinit load \
 zdharma/fast-syntax-highlighting
 
@@ -536,7 +470,7 @@ if [[ $ZPWR_DEBUG == true ]]; then
 fi
 # You may need to manually set your language environment
 # has all aliases and functions common to bourne like shells
- test -s "$ZPWR_ALIAS_FILE" && source "$ZPWR_ALIAS_FILE"
+test -s "$ZPWR_ALIAS_FILE" && source "$ZPWR_ALIAS_FILE"
 #}}}***********************************************************
 
 #{{{                    MARK:Override OMZ config
@@ -559,43 +493,13 @@ done
 
 # change OMZ history size in memory
 export HISTSIZE=999999999
-export SAVEHIST=$HISTSIZE
 # change OMZ history file size
-function magic-enter () {
-
-  # If commands are not already set, use the defaults
-    test -z "$MAGIC_ENTER_GIT_COMMAND" && MAGIC_ENTER_GIT_COMMAND="git status -u ."
-    test -z "$MAGIC_ENTER_OTHER_COMMAND" && MAGIC_ENTER_OTHER_COMMAND="ls -lh ."
-
-    if [[ -z $BUFFER ]]; then
-        echo
-        if isGitDir; then
-            eval "$MAGIC_ENTER_GIT_COMMAND"
-        else
-            eval "$MAGIC_ENTER_OTHER_COMMAND"
-        fi
-        # add extra NL to see last file
-        echo
-        zle .redisplay
-    else
-        # use custom accept line
-        zle accept-line
-    fi
-}
-#}}}***********************************************************
-
-#{{{                    MARK:zdharma post init
-#**************************************************************
-path+=($ZCONVEY_REPO_DIR/cmds)
-ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} PWD:${PWD} DATE:$(date)"
-zc-rename $ZPWR_CONVEY_NAME &>/dev/null
+export SAVEHIST=$HISTSIZE
 #}}}***********************************************************
 
 #{{{                    MARK:Zpwr verbs
 #**************************************************************
-if exists jenv;then
-    export PATH="$HOME/.jenv/shims:$PATH"
-fi
+# late loaded in autoload/common/bindZpwrVerbs
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE bindkey
@@ -606,97 +510,6 @@ fi
 
 #{{{                    MARK:ZLE hooks
 #**************************************************************
-#Filter stderr through shell scripts
-#having this setting messes with tmux resurrect so will enable it on individual basis
-#exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
-
-function my-accept-line () {
-
-    local pane commandsThatModifyFiles regex mywords line command cmd out aliases
-
-    if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
-        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
-        zc-rename $ZPWR_CONVEY_NAME &>/dev/null
-        ZPWR_CONVEY_LAST_CMD=$BUFFER
-    else
-        if [[ -z $ZPWR_CONVEY_LAST_CMD ]]; then
-            ZPWR_CONVEY_LAST_CMD="-zsh $-"
-        fi
-
-        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD: $ZPWR_CONVEY_LAST_CMD PWD:${PWD} DATE:$(date)"
-        zc-rename $ZPWR_CONVEY_NAME &>/dev/null
-    fi
-
-    ZPWR_WILL_CLEAR=false
-    if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
-        keyClear
-    else
-        if ! [[ $BUFFER == *stopSend* ]]; then
-            for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-                tmux send-keys -t $pane "C-m"
-            done
-        else
-            for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-                tmux send-keys -t $pane "C-u"
-            done
-        fi
-    fi
-
-    #do we want to clear the screen and run ls after we exec the current line?
-
-    commandsThatModifyFiles=(unlink rm srm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
-
-    for command in ${commandsThatModifyFiles[@]}; do
-        regex="^sudo[ ]+[-]*[[:alpha:]]*[ ]*(env)?[ ]+$command .*\$|^$command .*\$"
-        if [[ "$BUFFER" =~ $regex ]]; then
-            ZPWR_WILL_CLEAR=true
-        fi
-    done
-    mywords=("${(z)BUFFER}")
-
-    if [[ ${mywords[1]} == 'sudo' ]]; then
-        cmd=${mywords[2]}
-
-        # sudo =iftop fails so remove =
-        cmd=${cmd#=}
-        out="$(alias -- $cmd)"
-        if [[ "$out" == *grc* ]]; then
-            cmdlet="$(eval echo "${out#*=}")"
-            print -srn -- "$BUFFER"
-            BUFFER="sudo -E $cmdlet $mywords[3,$]"
-            echo
-            eval "$BUFFER"
-            BUFFER=""
-            zle .accept-line
-            return 0
-        fi
-    fi
-
-    if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
-        [[ -z "$BUFFER" ]] && zle .accept-line && return 0
-        if [[ ! -z $(alias -g $mywords[1]) ]];then
-            aliases="$(cat $ZPWR_LOCAL/.common_aliases)"
-            line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
-            if [[ -z $line ]];then
-                # function
-                BUFFER="\\$mywords"
-            else
-                # non global alias
-                print "$line" | grep -F "'" && \
-                    BUFFER="${line:1:-1} $mywords[2,$]" ||
-                    BUFFER="$line $mywords[2,$]"
-            fi
-        fi
-    fi
-
-    set +x
-    zle .accept-line
-    # leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
-    printf "\x1b[0m"
-}
-
-zle -N accept-line my-accept-line
-
 function precmd(){
 
     (( $? == 0)) && {
@@ -725,20 +538,14 @@ function precmd(){
         RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
     fi
 }
-
-# RPROMPT shows vim modes (insert vs normal)
-if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
-    function zle-keymap-select() {
-        RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
-        [[ $KEYMAP = vicmd ]] && RPROMPT="%B%F{red}-<<%b%F{blue}NORMAL%B%F{red}>>- %B%F{blue}$RPROMPT"
-        () { return $__prompt_status }
-        zle reset-prompt
-    }
-fi
 #}}}***********************************************************
 
 #{{{                    MARK:Setopt Options
 #**************************************************************
+# fish like menu select search
+zmodload -i zsh/complist
+setopt menucomplete
+
 # allow '' escape
 setopt rcquotes
 
@@ -869,337 +676,13 @@ stty stop undef
 stty start undef
 #}}}***********************************************************
 
-#{{{                    MARK:Completions
-#**************************************************************
-
-
-# do not include pwd after ../
-zstyle ':completion:*' ignore-parents parent pwd
-
-# remove slash if argument is a directory
-zstyle ':completion:*' squeeze-slashes true
-# Enable completion caching, use rehash to clear
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
-
-# separate files and dirs in _files completion
-#zstyle ':completion:*' file-patterns '%p(^-/):globbed-files' '^(-/):directories' '*:all-files'
-
-if [[ $ZPWR_COLORS == true ]]; then
-    # Make the list prompt friendly
-    zstyle ':completion:*' list-prompt \
-        $'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%M%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
-
-    # Make the selection prompt friendly when there are a lot of choices
-    zstyle ':completion:*' select-prompt \
-        $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[37;44m%p\e[0;1;31m>>-\e[0m'
-
-    # Add simple colors to kill
-    zstyle ':completion:*:*:kill:*:processes' list-colors \
-        '=(#b) #([0-9]#) ([0-9a-z-]#)*=01;34=0=01'
-
-    # formatting and messages, blue text with red punctuation
-    zstyle ':completion:*' format \
-        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
-
-    zstyle ':completion:*:descriptions' format \
-        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
-
-    zstyle ':completion:*:corrections' format \
-        $'\e[1;31m-<<\e[0;34m%d (errors: %e)\e[1;31m>>-\e[0m'
-
-    zstyle ':completion:*:messages' format \
-        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
-
-    zstyle ':completion:*:explanations' format \
-        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
-
-    zstyle ':completion:*:warnings' format \
-        $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
-fi
-
-zstyle ':completion:*' auto-description 'Specify: %d'
-
-# offer indexes before parameters in subscripts
-zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
-
-# using tag name as group name so ordering the groups by tag name here
-zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tmux contexts last-ten
-
-zstyle ':completion:*:*:(z|zshz|zm|zd|zg):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
-
-# show command descriptions if available
-zstyle ':completion:*' extra-verbose yes
-
-# don't complete duplicates for these commands
-zstyle ':completion::*:(git-add|git-rm|less|rm|vi|vim|v):*' ignore-line true
-
-#insert unambiguous for correct completer
-zstyle ':completion:*:correct:*' insert-unambiguous true
-
-# 0 -- vanilla completion (abc => abc)
-# 1 -- smart case completion (abc => Abc)
-# 2 -- word flex completion (abc => A-big-Car)
-# 3 -- full flex completion (abc => ABraCadabra)
-zstyle ':completion:*' matcher-list '' \
-    'm:{a-z\-}={A-Z\_}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' 'r:|?=** m:{a-z\-}={A-Z\_}'
-
-# parse out host aliases and hostnames from ssh config
-if [[ -r "$HOME/.ssh/config" ]]; then
-    h=(${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-    h=($h ${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
-fi
-
-if (( $#h > 0 )); then
-    zstyle ':completion:*:ssh:*' hosts $h
-    zstyle ':completion:*:slogin:*' hosts $h
-fi
-
-if [[ $ZPWR_COLORS == true ]]; then
-
-    zstyle ':completion:*' list-colors 'ma=37;1;4;44'
-    # main option for menu selection colors
-    zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
-    zstyle ':completion:*:executables' list-colors '=(#b)(*)=1;30=1;37;44'
-    zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=1;32;45'
-    zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
-    zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
-    zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=34;42;4'
-    zstyle ':completion:*:suffix-aliases' list-colors '=(#b)(*)=1;30=1;34;41;4'
-    zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
-    zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
-    zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
-    zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
-
-    # git commit colors
-    zstyle ':completion:*:*:commits' list-colors '=(#b)(*)='$ZPWR_COMMIT_STYLE
-    zstyle ':completion:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
-    zstyle ':completion:*:commit-tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
-    zstyle ':completion:*:cached-files' list-colors '=(#b)(*)=1;30=1;34;41;4'
-    zstyle ':completion:*:files' list-colors '=(#b)(*)=1;30=1;34;41;4'
-    zstyle ':completion:*:blobs' list-colors '=(#b)(*)=1;30=1;34;41;4'
-    zstyle ':completion:*:blob-objects' list-colors '=(#b)(*)=1;30=1;34;41;4'
-    zstyle ':completion:*:trees' list-colors '=(#b)(*)=1;30=1;34;41;4'
-
-    zstyle ':completion:*:tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
-
-    zstyle ':completion:*:heads-local' list-colors '=(#b)(*)=1;30=1;34;43;4'
-    zstyle ':completion:*:heads-remote' list-colors '=(#b)(*)=1;30=1;37;46'
-    zstyle ':completion:*:modified-files' list-colors '=(#b)(*)=1;30=1;37;42'
-    zstyle ':completion:*:revisions' list-colors '=(#b)(*)=1;30=1;37;42'
-    zstyle ':completion:*:recent-branches' list-colors '=(#b)(*)=1;30=1;37;44'
-    zstyle ':completion:*:remote-branch-names-noprefix' list-colors '=(#b)(*)=1;30=1;33;46'
-    zstyle ':completion:*:blobs-and-trees-in-treeish' list-colors '=(#b)(*)=1;30=1;34;43'
-    zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;37;43'
-    zstyle ':completion:*:*(git|git-checkout):*:files' list-colors '=(#b)(*)=1;30=1;32;43'
-    zstyle ':completion:*:prefixes' list-colors '=(#b)(*)=1;30=1;37;43'
-
-     # separate colors for sections of manual pages
-    zstyle ':completion:*:manuals.1' list-colors '=(#b)(*)=1;30=1;36;44'
-    zstyle ':completion:*:manuals.2' list-colors '=(#b)(*)=1;30=1;37;42'
-    zstyle ':completion:*:manuals.3' list-colors '=(#b)(*)=1;30=1;37;43'
-    zstyle ':completion:*:manuals.4' list-colors '=(#b)(*)=1;30=37;46'
-    zstyle ':completion:*:manuals.5' list-colors '=(#b)(*)=1;30=1;34;43;4'
-    zstyle ':completion:*:manuals.6' list-colors '=(#b)(*)=1;30=1;37;41'
-    zstyle ':completion:*:manuals.7' list-colors '=(#b)(*)=1;30=34;42;4'
-    zstyle ':completion:*:manuals.8' list-colors '=(#b)(*)=1;30=1;34;41;4'
-    zstyle ':completion:*:manuals.9' list-colors '=(#b)(*)=1;30=1;36;44'
-    zstyle ':completion:*:manuals.n' list-colors '=(#b)(*)=1;30=1;4;37;45'
-    zstyle ':completion:*:manuals.0p' list-colors '=(#b)(*)=1;30=37;46'
-    zstyle ':completion:*:manuals.1p' list-colors '=(#b)(*)=1;30=37;46'
-    zstyle ':completion:*:manuals.3p' list-colors '=(#b)(*)=1;30=37;46'
-
-    zstyle ':completion:*:cpan-module' list-colors '=(#b)(*)=1;30=37;46'
-    zstyle ':completion:*:remote-pip' list-colors '=(#b)(*)=1;30=37;46'
-    zstyle ':completion:*:remote-gem' list-colors '=(#b)(*)=1;30=37;46'
-    # pgrep and kill
-    zstyle ':completion:*:processes' list-colors '=(#b)(*)=1;30=1;36;44'
-    zstyle ':completion:*:processes-names' list-colors '=(#b)(*)=1;30=1;37;43'
-    zstyle ':completion:*:pname' list-colors '=(#b)(*)=1;30=1;37;43'
-
-   # separate colors for git commans types
-    zstyle ':completion:*:main-porcelain-commands' list-colors '=(#b)(*)=1;30=1;36;44'
-    zstyle ':completion:*:user-commands' list-colors '=(#b)(*)=1;30=1;37;42'
-    zstyle ':completion:*:third-party-commands' list-colors '=(#b)(*)=1;30=1;37;43'
-    zstyle ':completion:*:ancillary-manipulator-commands' list-colors '=(#b)(*)=1;30=37;46'
-    zstyle ':completion:*:ancillary-interrogator-commands' list-colors '=(#b)(*)=1;30=1;34;43;4'
-    zstyle ':completion:*:interaction-commands' list-colors '=(#b)(*)=1;30=1;37;41'
-    zstyle ':completion:*:plumbing-manipulator-commands' list-colors '=(#b)(*)=1;30=34;42;4'
-    zstyle ':completion:*:plumbing-interrogator-commands' list-colors '=(#b)(*)=1;30=1;34;41;4'
-    zstyle ':completion:*:plumbing-sync-commands' list-colors '=(#b)(*)=1;30=1;36;44'
-    zstyle ':completion:*:plumbing-sync-helper-commands' list-colors '=(#b)(*)=1;30=1;4;37;45'
-    zstyle ':completion:*:plumbing-internal-helper-commands' list-colors '=(#b)(*)=1;30=37;46'
-
-    zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
-
-    zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
-    zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
-    zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
-    zstyle ':completion:*:*:*:*:vtags' list-colors '=(#b)(*)=1;37;45'
-
-    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        # homebrew tags
-        zstyle ':completion::complete:brew-cask:argument-rest:list' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:formulae' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:*:brew-cask:*:list' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:common-commands' list-colors '=(#b)(*)=1;30=1;37;45'
-        zstyle ':completion:*:all-commands' list-colors '=(#b)(*)=1;30=1;37;42'
-    fi
-
-    # npm
-    zstyle ':completion:*:npm-search' list-colors '=(#b)(*)=1;30=1;36;44'
-    zstyle ':completion:*:npm-cache' list-colors '=(#b)(*)=1;30=1;37;46'
-
-    # tmux
-    zstyle ':completion:*:*:*:*:attached-sessions' list-colors '=(#b)(*)=1;30=1;37;43'
-    zstyle ':completion:*:*:*:*:detached-sessions' list-colors '=(#b)(*)=1;30=1;37;45'
-
-    #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
-    zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
-
-    zstyle ':completion:*:*:tmux' list-colors '=(#b)(*)=1;37;45'
-    zstyle ':completion:*:*:last-ten' list-colors '=(#b)(*)=1;33;45'
-    zstyle ':completion:*:*:last-line' list-colors '=(#b)(*)=1;37;44'
-    zstyle ':completion:*:*:last-clip' list-colors '=(#b)(*)=1;37;45'
-    #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
-    zstyle ':completion:*' list-separator "$ZPWR_CHAR_LOGO"
-    COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
-
-    zstyle -e ':completion:*:local-directories' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:*:f:*:*' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:globbed-files' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:argument-rest:*' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:all-files' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:files' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:directories' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS"
-
-    zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,:?@#-]##)[ ]#([<)(>]#)[ ]#([a-zA-Z0-9+?.,()@3-]#)*=1;32=1;31=34=1;31=34'
-fi
-zstyle ':completion:*:killall:*' command 'ps -o command'
-
-# use tag names as menu select separators
-zstyle ':completion:*' group-name ''
-
-# divide man pages by sections
-zstyle ':completion:*:manuals' separate-sections true
-
-# Ignore compsys completion functions
-#zstyle ':completion:*:functions' ignored-patterns '_*'
-
-# zstyle ':completion:*' ignored-patterns '*..' # BREAKS find -ctime <tab>
-
-# ignore .. as completion option
-zstyle ':completion:*:files' ignored-patterns '*..'
-zstyle ':completion:*:files' ignored-patterns '*.'
-#}}}***********************************************************
-
-#{{{                    MARK:ENV VARS IN ZSH PROMPT %~
-#**************************************************************
-# if this is a mac or linux
-if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
-    if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
-        : ~HOMEBREW_HOME_FORMULAE
-    fi
-fi
-
-if [[ -d "$ZSH" ]]; then
-    # oh-my-zsh sets this
-    : ~ZSH
-fi
-
-if [[ -d "$FORKED_DIR" ]]; then
-    : ~FORKED_DIR
-fi
-
-if [[ -d "$ZPWR_SCRIPTS" ]]; then
-    : ~ZPWR_SCRIPTS
-fi
-
-if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-    # shorten to prevail over absolute path in print -p %~
-    # must be <= .zpwr/temp
-    hash -d ZPWR_TEMP="$ZPWR_HIDDEN_DIR_TEMP"
-fi
-
-if [[ -d "$ZPWR_LOCAL" ]]; then
-    # shorten to prevail over absolute path in print -p %~
-    # must be <= .zpwr
-    hash -d ZPWR="$ZPWR_LOCAL"
-fi
-
-if [[ -d "$ZPWR_LOCAL" ]]; then
-    hash -d ZPWR_LOCAL="$ZPWR_LOCAL"
-fi
-if [[ -d "$ZPWR_TMUX" ]]; then
-    hash -d ZPWR_TMUX="$ZPWR_TMUX"
-fi
-
-if [[ -d "$ZPWR" ]]; then
-    hash -d ZPWR="$ZPWR"
-fi
-
-if [[ -d "$PYSCRIPTS" ]]; then
-    : ~PYSCRIPTS
-fi
-
-if [[ -d "$PYEXECUTABLES" ]]; then
-    : ~PYEXECUTABLES
-fi
-
-if [[ -d "$TMUX_HOME" ]]; then
-    # shorten to prevail over absolute path in print -p %~
-    # must be <= .tmux
-    hash -d TMUXH="$TMUX_HOME"
-fi
-
-if [[ -d "$ZPWR_DOC" ]]; then
-    : ~ZPWR_DOC
-fi
-
-if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
-    : ~HOMEBREW_HOME_FORMULAE
-fi
-
-if [[ -d "$YARN_HOME" ]]; then
-    : ~YARN_HOME
-fi
-
-if [[ -d "$PERL5LIB" ]]; then
-    : ~PERL5LIB
-fi
-
-if [[ -d "$NODE_HOME" ]]; then
-    : ~NODE_HOME
-fi
-
-if [[ -d "$ZPWR_D" ]]; then
-    : ~ZPWR_D
-fi
-
-if [[ -d "$ZPWR_DL" ]]; then
-    : ~ZPWR_DL
-fi
-#}}}***********************************************************
-
-#{{{                    MARK:OPAM env
-#**************************************************************
-source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
-#}}}***********************************************************
-
 #{{{                    MARK:FZF
 #**************************************************************
-# ran in bindFZFLate
+# run in autoload/common/bindFZFLate
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Compsys Functions
 #**************************************************************
-
-local zcmd
-exists zshz && zcmd=zshz || zcmd=_z
-
-declare -a last_ten
-
 # list of completers to use
 zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
 # zstyle ':completion:*:*:*:*:functions' ignored-patterns
@@ -1211,40 +694,6 @@ else
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:ZPWR verbs zstyle
-#**************************************************************
-zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort false
-
-zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
-
-zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop):*:*' sort false
-
-zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-r):*:*' sort false
-#}}}***********************************************************
-
-#{{{                    MARK:Compdefs
-#**************************************************************
-_comps[ftp]=_ftp
-_comps[traceroute]=_traceroute
-_comps[host]=_host
-_comps[passwd]=_passwd
-_comps[ksh]=_ksh
-_comps[tcsh]=_tcsh
-_comps[csh]=_tcsh
-
-compdef _git-clone gcl
-compdef _zcommand zm zd zg
-compdef _man fm
-compdef _tmux _zsh_tmux_plugin_run
-exists _kubectl && compdef _kubectl kubectl
-exists _express && compdef _express express
-#}}}***********************************************************
-
-
-#{{{                    MARK:Groovy
-#**************************************************************
-unset GROOVY_HOME # when set this messes up classpath
-###}}}***********************************************************
 
 #{{{                    MARK:Initialize Login
 #**************************************************************
@@ -1254,8 +703,6 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 else
     zpwrLinuxBanner
 fi
-
-
 #}}}***********************************************************
 
 #{{{                    MARK:Auto attach tmux
@@ -1276,6 +723,13 @@ fpath=(${(u)fpath})
 path=(${(u)path})
 #}}}***********************************************************
 
+#{{{                    MARK:Immediate Usage
+#**************************************************************
+alias a="cd $HOME"
+test -d "$ZPWR_D" && alias d="cd $ZPWR_D"
+alias zp=zpwr
+#}}}***********************************************************
+
 #{{{                    MARK:Finish
 #**************************************************************
 function zpwrTokenPost() {
@@ -1294,20 +748,6 @@ function zpwrTokenPost() {
 }
 
 zpwrTokenPost
-
-test -s "$ZPWR_ZINIT_FZF/shell/completion.zsh" \
-    && source "$ZPWR_ZINIT_FZF/shell/completion.zsh"
-
-export PATH="$ZPWR_ZINIT_FZF/bin:$PATH"
-export MANPATH="$ZPWR_ZINIT_FZF/fzf/man:$MANPATH"
-source "$ZPWR_ZINIT_FZF/shell/key-bindings.zsh"
-
-if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
-    : ~ZPWR_PLUGIN_DIR
-    # ./ = dont show in prompt
-    export PD="$ZPWR_PLUGIN_DIR/."
-fi
-
 
 endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))

@@ -11,15 +11,17 @@ selectp -t 2
 
 # split it into two halves
 splitw -h -p 50
-selectp -t 0
+
+#select last created pane
+selectp -t 3
 
 wait-for -L my2
-
-#if brc does not exist like wth zinit late load, have tmux sleep for 5 sec
-send-keys "brc || bash -c 'sleep 5; tmux wait-for -U my2' &;" C-m
+#if zrc does not exist like wth zinit late load, have tmux sleep
+send-keys "exists zrc && { bash -c 'tmux wait-for -U my2' &;}|| bash -c 'sleep 3; tmux wait-for -U my2' &;" C-m
 wait-for -L my2
 
 #proceed after sleep
+selectp -t 0
 send-keys "brc" C-m
 selectp -t 1
 send-keys 'vrc' C-m

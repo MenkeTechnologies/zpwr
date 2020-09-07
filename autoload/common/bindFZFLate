@@ -1,6 +1,8 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function bindFZFLate(){
+    
+    exists bat && export BAT_THEME="$ZPWR_BAT_THEME"
 # default value for pygmentize theme
     export PYGMENTIZE_COLOR="emacs"
     export ZPWR_COLORIZER=bat

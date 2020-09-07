@@ -1,0 +1,65 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function bindFinal(){
+
+    #{{{                    MARK:OPAM env
+    #**************************************************************
+    test -f "$HOME/.opam/opam-init/init.zsh" &&
+    source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
+    #}}}***********************************************************
+    unalias ag &> /dev/null
+    export CHEATCOLORS=true
+
+    #Filter stderr through shell scripts
+    #having this setting messes with tmux resurrect so will enable it on individual basis
+    #exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
+    # stderr colorization filter
+    # color2
+
+    # set right prompt string during continuation
+    export RPS2='+%N:%i:%^'
+
+    #{{{                    MARK:grc colorizer
+    #**************************************************************
+    # colors for common commands
+    test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
+    #}}}***********************************************************
+
+    if exists jenv;then
+        export PATH="$HOME/.jenv/shims:$PATH"
+    fi
+
+    #{{{                    MARK:Compdefs
+    #**************************************************************
+    _comps[ftp]=_ftp
+    _comps[traceroute]=_traceroute
+    _comps[host]=_host
+    _comps[passwd]=_passwd
+    _comps[ksh]=_ksh
+    _comps[tcsh]=_tcsh
+    _comps[csh]=_tcsh
+
+    compdef _git-clone gcl
+    compdef _zcommand zm zd zg
+    compdef _man fm
+    compdef _tmux _zsh_tmux_plugin_run
+    exists _kubectl && compdef _kubectl kubectl
+    exists _express && compdef _express express
+    #}}}***********************************************************
+
+
+    #{{{                    MARK:Groovy
+    #**************************************************************
+    unset GROOVY_HOME # when set this messes up classpath
+    ###}}}***********************************************************
+
+    if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
+        : ~ZPWR_PLUGIN_DIR
+        # ./ = dont show in prompt
+        export PD="$ZPWR_PLUGIN_DIR/."
+    fi
+
+}
+
+bindFinal "$@"

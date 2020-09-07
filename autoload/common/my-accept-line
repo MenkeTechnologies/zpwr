@@ -1,0 +1,89 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function my-accept-line () {
+
+    local pane commandsThatModifyFiles regex mywords line command cmd out aliases
+
+    if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
+        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
+        zc-rename $ZPWR_CONVEY_NAME &>/dev/null
+        ZPWR_CONVEY_LAST_CMD=$BUFFER
+    else
+        if [[ -z $ZPWR_CONVEY_LAST_CMD ]]; then
+            ZPWR_CONVEY_LAST_CMD="-zsh $-"
+        fi
+
+        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD: $ZPWR_CONVEY_LAST_CMD PWD:${PWD} DATE:$(date)"
+        zc-rename $ZPWR_CONVEY_NAME &>/dev/null
+    fi
+
+    ZPWR_WILL_CLEAR=false
+    if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
+        keyClear
+    else
+        if ! [[ $BUFFER == *stopSend* ]]; then
+            for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+                tmux send-keys -t $pane "C-m"
+            done
+        else
+            for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+                tmux send-keys -t $pane "C-u"
+            done
+        fi
+    fi
+
+    #do we want to clear the screen and run ls after we exec the current line?
+
+    commandsThatModifyFiles=(unlink rm srm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
+
+    for command in ${commandsThatModifyFiles[@]}; do
+        regex="^sudo[ ]+[-]*[[:alpha:]]*[ ]*(env)?[ ]+$command .*\$|^$command .*\$"
+        if [[ "$BUFFER" =~ $regex ]]; then
+            ZPWR_WILL_CLEAR=true
+        fi
+    done
+    mywords=("${(z)BUFFER}")
+
+    if [[ ${mywords[1]} == 'sudo' ]]; then
+        cmd=${mywords[2]}
+
+        # sudo =iftop fails so remove =
+        cmd=${cmd#=}
+        out="$(alias -- $cmd)"
+        if [[ "$out" == *grc* ]]; then
+            cmdlet="$(eval echo "${out#*=}")"
+            print -srn -- "$BUFFER"
+            BUFFER="sudo -E $cmdlet $mywords[3,$]"
+            echo
+            eval "$BUFFER"
+            BUFFER=""
+            zle .accept-line
+            return 0
+        fi
+    fi
+
+    if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
+        [[ -z "$BUFFER" ]] && zle .accept-line && return 0
+        if [[ ! -z $(alias -g $mywords[1]) ]];then
+            aliases="$(cat $ZPWR_LOCAL/.common_aliases)"
+            line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
+            if [[ -z $line ]];then
+                # function
+                BUFFER="\\$mywords"
+            else
+                # non global alias
+                print "$line" | grep -F "'" && \
+                    BUFFER="${line:1:-1} $mywords[2,$]" ||
+                    BUFFER="$line $mywords[2,$]"
+            fi
+        fi
+    fi
+
+    set +x
+    zle .accept-line
+    # leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
+    printf "\x1b[0m"
+}
+
+my-accept-line "$@"

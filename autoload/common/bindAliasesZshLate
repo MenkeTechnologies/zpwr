@@ -189,6 +189,9 @@ if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
 
     alias zpl="cd $ZPWR_PLUGIN_DIR"
 fi
+alias zpg=zpgh
+alias zpw=zpwr
+alias zpwrgh=zpwr
 
 alias numcmd='print $#commands'
 #}}}***********************************************************
@@ -205,6 +208,8 @@ alias mmv='noglob zmv -W'
 
 exists thefuck && eval $(thefuck --alias)
 
+local zcmd
+exists zshz && zcmd=zshz || zcmd=_z
 # force alias z to zshz not zypper on suse
 alias z="$zcmd 2>&1"
 alias za=zc-all

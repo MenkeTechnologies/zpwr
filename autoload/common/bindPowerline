@@ -1,0 +1,26 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function bindPowerline(){
+
+    if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
+    if test -s "$ZPWR_PROMPT_FILE";then
+        if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+            if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then
+                source "$ZPWR_PROMPT_FILE"
+            else
+                ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
+            fi
+        else
+            source "$ZPWR_PROMPT_FILE"
+        fi
+    else
+        ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
+    fi
+else
+    test ! -z $ZPWR_PROMPT && ZSH_THEME=$ZPWR_PROMPT || ZSH_THEME=$ZPWR_DEFAULT_OMZ_THEME
+fi
+
+
+}
+
+bindPowerline "$@"

@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function bindForGit(){
+    #{{{                    MARK:forgit https://github.com/wfxr/forgit
+#**************************************************************
+    export FORGIT_NO_ALIASES=true
+    forgit_log=fglo
+    forgit_diff=fgd
+    forgit_add=fga
+    forgit_reset_head=fgrh
+    forgit_ignore=fgi
+    forgit_restore=fgcf
+    forgit_clean=fgclean
+    forgit_stash_show=fgss
+#}}}***********************************************************
+
+}
+
+bindForGit "$@"

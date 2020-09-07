@@ -1,0 +1,96 @@
+
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function bindZpwrDirs(){
+
+    #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
+#**************************************************************
+# if this is a mac or linux
+if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
+    if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
+        : ~HOMEBREW_HOME_FORMULAE
+    fi
+fi
+
+if [[ -d "$ZSH" ]]; then
+    # oh-my-zsh sets this
+    : ~ZSH
+fi
+
+if [[ -d "$FORKED_DIR" ]]; then
+    : ~FORKED_DIR
+fi
+
+if [[ -d "$ZPWR_SCRIPTS" ]]; then
+    : ~ZPWR_SCRIPTS
+fi
+
+if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
+    # shorten to prevail over absolute path in print -p %~
+    # must be <= .zpwr/temp
+    hash -d ZPWR_TEMP="$ZPWR_HIDDEN_DIR_TEMP"
+fi
+
+if [[ -d "$ZPWR_LOCAL" ]]; then
+    # shorten to prevail over absolute path in print -p %~
+    # must be <= .zpwr
+    hash -d ZPWR="$ZPWR_LOCAL"
+fi
+
+if [[ -d "$ZPWR_LOCAL" ]]; then
+    hash -d ZPWR_LOCAL="$ZPWR_LOCAL"
+fi
+if [[ -d "$ZPWR_TMUX" ]]; then
+    hash -d ZPWR_TMUX="$ZPWR_TMUX"
+fi
+
+if [[ -d "$ZPWR" ]]; then
+    hash -d ZPWR="$ZPWR"
+fi
+
+if [[ -d "$PYSCRIPTS" ]]; then
+    : ~PYSCRIPTS
+fi
+
+if [[ -d "$PYEXECUTABLES" ]]; then
+    : ~PYEXECUTABLES
+fi
+
+if [[ -d "$TMUX_HOME" ]]; then
+    # shorten to prevail over absolute path in print -p %~
+    # must be <= .tmux
+    hash -d TMUXH="$TMUX_HOME"
+fi
+
+if [[ -d "$ZPWR_DOC" ]]; then
+    : ~ZPWR_DOC
+fi
+
+if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
+    : ~HOMEBREW_HOME_FORMULAE
+fi
+
+if [[ -d "$YARN_HOME" ]]; then
+    : ~YARN_HOME
+fi
+
+if [[ -d "$PERL5LIB" ]]; then
+    : ~PERL5LIB
+fi
+
+if [[ -d "$NODE_HOME" ]]; then
+    : ~NODE_HOME
+fi
+
+if [[ -d "$ZPWR_D" ]]; then
+    : ~ZPWR_D
+fi
+
+if [[ -d "$ZPWR_DL" ]]; then
+    : ~ZPWR_DL
+fi
+#}}}***********************************************************
+
+}
+
+bindZpwrDirs "$@"
