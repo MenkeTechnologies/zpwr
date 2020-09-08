@@ -2,14 +2,17 @@
 # vim: set ft=sh:
 if [[ "$UID" != "0" ]]; then
 
+    if [[ $ZPWR_BANNER_DESKTOP == true ]]; then
+        if [[ -d "$ZPWR_D" ]]; then
+            builtin cd "$ZPWR_D"
+        fi
+    fi
     if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
         clear
     fi
-
     if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
         case $distroName in
             (raspbian)
-                test -d "$D" && builtin cd "$D"
                 if type ponysay 1>/dev/null 2>&1; then
                     bash "$ZPWR_SCRIPTS/motd.sh" | ponysay -W 120
                 else
@@ -17,17 +20,14 @@ if [[ "$UID" != "0" ]]; then
                 fi
                 ;;
             (ubuntu|debian|kali|linuxmint|parrot)
-                test -d "$D" && builtin cd "$D"
                 figlet -f block "$(whoami)" | ponysay -W 120 |
                     splitReg.sh -- ------------- lolcat
                 ;;
             (fedora|centos|rhel)
-                test -d "$D" && builtin cd "$D"
                 figlet -f block "$(whoami)" | ponysay -W 120 |
                     splitReg.sh -- ------------- lolcat
                 ;;
             (*suse*|arch|manjaro*)
-                test -d "$D" && builtin cd "$D"
                 figlet -f block "$(whoami)" | ponysay -W 120 |
                     splitReg.sh -- ------------- lolcat
                 ;;
@@ -37,19 +37,15 @@ if [[ "$UID" != "0" ]]; then
     else
         case $distroName in
             (raspbian)
-                test -d "$D" && builtin cd "$D"
                 bash "$ZPWR_SCRIPTS/motd.sh"
                 ;;
             (ubuntu|debian|kali|linuxmint|parrot)
-                test -d "$D" && builtin cd "$D"
                 noPonyBanner
                 ;;
             (fedora|centos|rhel)
-                test -d "$D" && builtin cd "$D"
                 noPonyBanner
                 ;;
             (*suse*|arch|manjaro*)
-                test -d "$D" && builtin cd "$D"
                 noPonyBanner
                 ;;
             (*) :

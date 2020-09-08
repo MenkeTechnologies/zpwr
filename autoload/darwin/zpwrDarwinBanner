@@ -23,6 +23,11 @@ if [[ "$UID" != "0" ]]; then
         fi
     fi
     printf "\e[0m"
+    if [[ $ZPWR_BANNER_DESKTOP == true ]]; then
+        if [[ -d "$ZPWR_D" ]]; then
+            builtin cd "$ZPWR_D"
+        fi
+    fi
     if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
         listNoClear
     fi
