@@ -35,7 +35,6 @@ zdharma/zsh-tig-plugin
 zdharma/zsh-unique-id
 zdharma/zui
 zdharma/zzcomplete
-zinit-zsh/zinit-console
 zsh-users/zsh-autosuggestions
 zsh-users/zsh-completions
 zsh-users/zsh-history-substring-search

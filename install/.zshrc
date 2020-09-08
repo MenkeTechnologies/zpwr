@@ -78,11 +78,16 @@ declare +x FPATH
 
 #{{{                    MARK:ZPWR source env file which sources lib
 #**************************************************************
-test -z $ZPWR && export ZPWR="$HOME/.zpwr"
+test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="$ZSH/custom"
+
+# map to hold global data between scripts
+declare -Ag ZPWR_VARS
+# map to store each zpwr verb, key is the verbname, value is cmd=description
+declare -Ag ZPWR_VERBS
+# filled late
+declare -a zpwrSubcommandsAry
 
 function zpwrInitEnv() {
     source "$ZPWR_ENV_FILE" || {
@@ -97,18 +102,13 @@ if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
     mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
 fi
 
-if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
-    if [[ ! -d $ZPWR_PLUGIN_MANAGER_HOME ]]; then
+if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
+    if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
         prettyPrintBox "Installing zinit"
         mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
         git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
     fi
 fi
-
-# map to hold global data between scripts
-declare -Ag ZPWR_VARS
-# map to store each zpwr verb, key is the verbname, value is cmd=description
-declare -Ag ZPWR_VERBS
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
@@ -129,14 +129,6 @@ export AUTOPAIR_BKSPC_WIDGET='.backward-delete-char'
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
 HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
-
-DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -167,22 +159,13 @@ hg_prompt_info(){}
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
 
 ZSH_DISABLE_COMPFIX=true
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
 #}}}***********************************************************
 
-#{{{                    MARK:ZSH plugins
+#{{{                    MARK:Zinit plugins and snippets
 #**************************************************************
-
 ZPWR_GH_PLUGINS=(
     MenkeTechnologies/fasd-simple
     MenkeTechnologies/fzf
@@ -281,7 +264,6 @@ fi
 
 #{{{                    MARK:source tokens pre OMZ
 #**************************************************************
-
 function zpwrTokenPre() {
     if test -f "$ZPWR_TOKEN_PRE"; then
         if ! source "$ZPWR_TOKEN_PRE"; then
@@ -302,7 +284,6 @@ if [[ $ZPWR_PROFILING == true ]]; then
     # profiling startup
     zmodload zsh/zprof
 fi
-
 #}}}***********************************************************
 
 #{{{                    MARK:post first token
@@ -322,19 +303,16 @@ fi
 if [[ ! -d $ZPWR_LOCAL ]]; then
     mkdir -p $ZPWR_LOCAL
 fi
-
 #}}}***********************************************************
 
 #{{{                    MARK:FPATH setup
 #**************************************************************
-
 if [[ $ZPWR_DEBUG == true ]]; then
     echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
 fi
 
 # add ZPWR autoload dirs to fpath
 fpath=($ZPWR_AUTOLOAD_LINUX $ZPWR_AUTOLOAD_DARWIN $ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
-
 #}}}***********************************************************
 #
 #{{{                    MARK:autoload
@@ -343,7 +321,8 @@ autoload -z $ZPWR_AUTOLOAD/common/*(.:t)
 autoload -Uz zrecompile zm zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
-    plugins+=(zsh-xcode-completions brew osx pod)
+    ZPWR_OMZ_PLUGINS+=(brew osx)
+    ZPWR_OMZ_COMPS+=(pod)
     autoload -z $ZPWR_AUTOLOAD_DARWIN/*(.:t)
     # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
@@ -386,17 +365,12 @@ function zpwrTokenPost() {
 
 #{{{                    MARK:ZINIT
 #**************************************************************
-# prevent zinit from putting system fpath after zinit completions
-
 source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
 
 #override zicompinit
 zicompinit() {
     compinit -u -d ${ZINIT[ZCOMPDUMP_PATH]:-${ZDOTDIR:-$HOME}/.zcompdump} "${(Q@)${(z@)ZINIT[COMPINIT_OPTS]}}" 2>/dev/null
 }
-
-# filled late
-declare -a zpwrSubcommandsAry
 
 # late load prompt and call precmd fns first thing after prompt loads
 zinit ice lucid nocompile wait'!' atinit'bindPowerline;bindPowerlineTmux;bindZpwrDirs' \
@@ -406,7 +380,7 @@ zinit load \
 
 # late
 for p in $ZPWR_OMZ_COMPS; do
-    zinit ice svn lucid nocompile as"completion" pick"null" wait
+    zinit ice svn lucid nocompile as'completion' pick'null' wait
     zinit snippet OMZ::plugins/$p
 done
 
@@ -460,7 +434,7 @@ zinit ice lucid nocompile wait'0d' atinit'bindPenultimate;bindFinal;zpwrTokenPos
 zinit load \
     zdharma/fast-syntax-highlighting
 
-zinit ice lucid nocompile as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit"zicompinit; zicdreplay"
+zinit ice lucid nocompile as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit'zicompinit; zicdreplay'
 zinit light \
     MenkeTechnologies/zsh-zinit-final
 
@@ -498,10 +472,10 @@ done
     #loggDebug "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
 #fi
 
-# change OMZ history size in memory
+# change history size in memory
 export HISTSIZE=999999999
-# change OMZ history file size
-export SAVEHIST=$HISTSIZE
+# change history file size
+export SAVEHIST="$HISTSIZE"
 #}}}***********************************************************
 
 #{{{                    MARK:Zpwr verbs
@@ -513,38 +487,6 @@ export SAVEHIST=$HISTSIZE
 #**************************************************************
 # ZLE keybindings late loaded in autoload/common/bindOverrideZLE
 # this is to override any late loaded plugins with keybindings
-#}}}***********************************************************
-
-#{{{                    MARK:ZLE hooks
-#**************************************************************
-function precmd(){
-
-    (( $? == 0)) && {
-        if [[ "$ZPWR_WILL_CLEAR" == true ]]; then
-            if [[ $ZPWR_RM_AUTO_LS == true ]]; then
-                clear
-                listNoClear
-            fi
-            # to prevent ZPWR_WILL_CLEAR staying true when
-            # called from zle widgets and not from
-            # pressing enter key
-            ZPWR_WILL_CLEAR=false
-        fi
-    }
-    if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
-        #export DISPLAY=$(cat $ZPWR_LOCAL/.display.txt) ||
-        :
-    else
-        :
-        #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
-    fi
-    # leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
-    printf "\x1b[0m"
-    #lose normal mode
-    if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
-        RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
-    fi
-}
 #}}}***********************************************************
 
 #{{{                    MARK:Setopt Options
@@ -654,7 +596,7 @@ setopt nocaseglob
 # filename completion after =
 setopt magic_equal_subst
 
-if [[ $ZPWR_AUTO_SELECT == true ]]; then
+if [[ "$ZPWR_AUTO_SELECT" == true ]]; then
     #auto select first item of menu completion
     setopt menu_complete
 fi
@@ -694,7 +636,7 @@ stty start undef
 zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
 # zstyle ':completion:*:*:*:*:functions' ignored-patterns
 
-if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
+if [[ "$ZPWR_INTERACTIVE_MENU_SELECT" == true ]]; then
     zstyle ':completion:*:*:*:*:*' menu select=0 interactive
 else
     zstyle ':completion:*:*:*:*:*' menu select=0
@@ -714,9 +656,9 @@ fi
 
 #{{{                    MARK:Auto attach tmux
 #**************************************************************
-if [[ $ZPWR_AUTO_ATTACH == true ]]; then
+if [[ "$ZPWR_AUTO_ATTACH" == true ]]; then
 
-    if [[ "$(uname)" == Linux ]]; then
+    if [[ "$ZPWR_OS_TYPE" == linux ]]; then
         zpwrAttachSetup
     fi
 fi
@@ -730,7 +672,7 @@ fpath=(${(u)fpath})
 path=(${(u)path})
 #}}}***********************************************************
 
-#{{{                    MARK:Immediate Usage
+#{{{                    MARK:Early bind Immediate Usage
 #**************************************************************
 alias zp=zpwr
 #}}}***********************************************************
@@ -742,9 +684,9 @@ endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
 loggDebug "zsh startup took $startupTimeMs seconds"
 
-ZPWR_VARS[startupTimeMs]=$startupTimeMs
+ZPWR_VARS[startupTimeMs]="$startupTimeMs"
 
-if [[ $ZPWR_PROFILING == true ]]; then
+if [[ "$ZPWR_PROFILING" == true ]]; then
     zprof
 fi
 #}}}***********************************************************

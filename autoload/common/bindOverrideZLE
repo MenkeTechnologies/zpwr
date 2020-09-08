@@ -385,5 +385,39 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
             zle reset-prompt
         }
     fi
+
+    #{{{                    MARK:ZLE hooks
+#**************************************************************
+function precmd(){
+
+    (( $? == 0)) && {
+        if [[ "$ZPWR_WILL_CLEAR" == true ]]; then
+            if [[ $ZPWR_RM_AUTO_LS == true ]]; then
+                clear
+                listNoClear
+            fi
+            # to prevent ZPWR_WILL_CLEAR staying true when
+            # called from zle widgets and not from
+            # pressing enter key
+            ZPWR_WILL_CLEAR=false
+        fi
+    }
+    if [[ ! -z "$TMUX" ]] && [[ -f $ZPWR_LOCAL/.display.txt ]]; then
+        #export DISPLAY=$(cat $ZPWR_LOCAL/.display.txt) ||
+        :
+    else
+        :
+        #echo $DISPLAY > $ZPWR_LOCAL/.display.txt
+    fi
+    # leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
+    printf "\x1b[0m"
+    #lose normal mode
+    if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
+        RPROMPT="%B%F{blue}$$ %b%F{blue}$-"
+    fi
+}
+#}}}***********************************************************
+
+
 }
 bindOverrideZLE "$@"

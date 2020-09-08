@@ -45,6 +45,7 @@ fi
 #{{{                    MARK:Env Vars
 #**************************************************************
 export Z_DATA="$HOME/.z"
+# ANSI quotes not single quotes needed here for \
 export PS3=$'\e[1;34m-->>>> \e[0m'
 # defaut layout config for nmon
 export NMON='mndckt'
@@ -72,7 +73,7 @@ fi
 
 #{{{                    MARK:PATH
 #**************************************************************
-if ! echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
+if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
     export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts"
 
     export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
@@ -105,7 +106,7 @@ if ! echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
-        if [[ $ZPWR_USE_NEOVIM == true ]]; then
+        if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
             if exists nvim; then
                 export EDITOR='nvim'
                 export PSQL_EDITOR='nvim -c "setf sql"'
@@ -123,7 +124,7 @@ if ! echo "$PATH" | command grep -isq $ZPWR_SCRIPTS; then
             fi
         fi
     else
-        if [[ $ZPWR_USE_NEOVIM == true ]]; then
+        if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
             if exists nvim; then
                 export EDITOR='nvim'
                 export PSQL_EDITOR='nvim -c "setf sql"'

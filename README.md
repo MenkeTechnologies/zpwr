@@ -272,11 +272,11 @@ One of the vim plugin is vim-autosave which autosaves all edits thus making `:w`
 
 ## Bypassing expansion on space
 C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.
-Expansion can be disabled entirely by removing [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) from plugins array in `~/.zshrc`.
+Expansion can be disabled entirely by removing [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) from ZPWR_GH_PLUGINS array in `~/.zshrc`.
 
 > ~/.zshrc
 ```sh
-plugins=(fasd-simple gh_reveal zsh-z zsh-expand zsh-autopair
+ZPWR_GH_PLUGINS=(plug1 plug2)
 ```
 
 Alternatively, change these env vars to false in `~/.zpwr/local/.tokens.sh`.  The first controls all expansion in any position.
@@ -323,10 +323,12 @@ export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 ```
 to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
 
-## Adding more OMZ plugins
-Add in `~/.zpwr/local/.tokens.sh` your extra plugins
+## Adding more Zinit plugins
+Add in `~/.zpwr/local/.tokens-post.sh` your extra plugins like such
 ```sh
-plugins+=(omzplug1 omzplug2)
+zinit ice lucid nocompile wait'0a'
+zinit load \
+hlissner/zsh-autopair
 ```
 
 ## Environment Variables
