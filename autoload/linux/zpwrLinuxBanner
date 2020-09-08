@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 if [[ "$UID" != "0" ]]; then
 
-    if [[ $ZPWR_BANNER_DESKTOP == true ]]; then
+    if [[ $ZPWR_BANNER_DESKTOP_LINUX == true ]]; then
         if [[ -d "$ZPWR_D" ]]; then
             builtin cd "$ZPWR_D"
         fi

@@ -105,8 +105,10 @@ export ZPWR_MAP_C_V_VIM_NORMAL=false
 export ZPWR_INTRO_BANNER=ponies
 # clear and ls before and after banner
 export ZPWR_BANNER_CLEARLIST=true
-# cd to Desktop after banner
-export ZPWR_BANNER_DESKTOP=false
+# cd to Desktop after banner Darwin
+export ZPWR_BANNER_DESKTOP_DARWIN=false
+# cd to Desktop after banner Linux
+export ZPWR_BANNER_DESKTOP_LINUX=true
 # the emacs command
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command

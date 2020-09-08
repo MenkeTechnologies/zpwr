@@ -2,7 +2,11 @@
 # vim: set ft=sh:
 if [[ "$UID" != "0" ]]; then
 
-    # builtin cd "$D" && clear
+    if [[ $ZPWR_BANNER_DESKTOP_DARWIN == true ]]; then
+        if [[ -d "$ZPWR_D" ]]; then
+            builtin cd "$ZPWR_D"
+        fi
+    fi
 
     if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
         clear
@@ -22,12 +26,9 @@ if [[ "$UID" != "0" ]]; then
             fi
         fi
     fi
+
     printf "\e[0m"
-    if [[ $ZPWR_BANNER_DESKTOP == true ]]; then
-        if [[ -d "$ZPWR_D" ]]; then
-            builtin cd "$ZPWR_D"
-        fi
-    fi
+
     if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
         listNoClear
     fi
