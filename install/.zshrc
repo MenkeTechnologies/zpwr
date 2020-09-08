@@ -114,9 +114,11 @@ declare -Ag ZPWR_VERBS
 #{{{                    MARK:non ZPWR Exports
 #**************************************************************
 export LC_ALL="en_US.UTF-8"
-#stop delay when entering normal mode
+# stop delay when entering normal mode
 export KEYTIMEOUT=1
 export SHELL="$(which zsh)"
+# default vi-backward-delete-char does not delete paste insert point
+export AUTOPAIR_BKSPC_WIDGET='.backward-delete-char'
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ env vars
