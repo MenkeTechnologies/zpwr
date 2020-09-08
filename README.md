@@ -55,7 +55,7 @@ To install to a custom directory, clone the project to that directory and `expor
 - integration of [fasd](https://github.com/MenkeTechnologies/fasd-simple) frecency database into _files completion
 - zsh menucompletion for [z](https://github.com/MenkeTechnologies/zsh-z) command based on frecency [z](https://github.com/MenkeTechnologies/zsh-z) and [fasd](https://github.com/MenkeTechnologies/fasd-simple) databases
 - keybindings to save to mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
--d functions to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- functions to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - `redo <number...>` prints to prompt SQL update statements for learning items [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - `rsql <number...>` prints to vim SQL update statements for learning items that run once vim is quit [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
