@@ -17,7 +17,7 @@ selectp -t 3
 
 wait-for -L my2
 #if zrc does not exist like wth zinit late load, have tmux sleep
-send-keys "exists zrc && { bash -c 'tmux wait-for -U my2' &;}|| bash -c 'sleep 5; tmux wait-for -U my2' &;" C-m
+send-keys "if exists zrc; then  bash -c 'tmux wait-for -U my2' & else bash -c 'sleep 5; tmux wait-for -U my2' & fi" C-m
 wait-for -L my2
 
 #proceed after sleep
