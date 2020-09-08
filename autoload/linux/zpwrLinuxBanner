@@ -1,7 +1,11 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 if [[ "$UID" != "0" ]]; then
-    clear
+
+    if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
+        clear
+    fi
+
     if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
         case $distroName in
             (raspbian)
@@ -52,7 +56,9 @@ if [[ "$UID" != "0" ]]; then
                 ;;
         esac
     fi
-    listNoClear
+    if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
+        listNoClear
+    fi
 else
     # root on linux
     clearList

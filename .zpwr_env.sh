@@ -46,7 +46,7 @@ export ZPWR_TRACE=false
 export ZPWR_USE_NEOVIM=true
 # use mac vim over vim on darwin
 export ZPWR_PREFER_MVIM=true
-#whether to include all the zpwr learning functions
+# whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
 # ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
@@ -103,6 +103,8 @@ export ZPWR_SEND_KEYS_FULL=false
 export ZPWR_MAP_C_V_VIM_NORMAL=false
 # ponysay banner when shell startup finishes
 export ZPWR_INTRO_BANNER=ponies
+# clear and ls before and after banner
+export ZPWR_BANNER_CLEARLIST=true
 # the emacs command
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command

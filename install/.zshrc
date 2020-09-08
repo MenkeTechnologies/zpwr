@@ -106,9 +106,9 @@ if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
 fi
 
 # map to hold global data between scripts
-declare -A ZPWR_VARS
+declare -Ag ZPWR_VARS
 # map to store each zpwr verb, key is the verbname, value is cmd=description
-declare -A ZPWR_VERBS
+declare -Ag ZPWR_VERBS
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports

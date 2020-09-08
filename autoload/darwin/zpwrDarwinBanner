@@ -1,8 +1,13 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 if [[ "$UID" != "0" ]]; then
-        # builtin cd "$D" && clear
-    clear
+
+    # builtin cd "$D" && clear
+
+    if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
+        clear
+    fi
+
     if type figlet > /dev/null 2>&1; then
         printf "\e[1m"
         if [[ -f "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" ]]; then
@@ -18,7 +23,9 @@ if [[ "$UID" != "0" ]]; then
         fi
     fi
     printf "\e[0m"
-    listNoClear
+    if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
+        listNoClear
+    fi
 else
     # root on unix
     clearList

@@ -10,7 +10,9 @@
 
 #{{{                    MARK:env vars to re eval after sourcing tokens
 #**************************************************************
-type -a ZPWR_VARS 1>/dev/null 2>&1 || declare -A ZPWR_VARS
+type -a ZPWR_VARS 1>/dev/null 2>&1 || {
+        declare -Ag ZPWR_VARS
+}
 
 type -a evalIfNeeded 1>/dev/null 2>&1 || function evalIfNeeded() {
 
