@@ -11,22 +11,22 @@ function ___getrc(){
         branch="$1"
     fi
 
-    if [[ $ZPWR_OS_TYPE == darwin ]]; then
-        if exists dialog;then
-            dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$ZPWR_TEMPFILE"
-            clear
-            REPLY="$(cat "$ZPWR_TEMPFILE")"
-            command rm "$ZPWR_TEMPFILE"
-        else
-            printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> "
-            read
-        fi
+#    if [[ $ZPWR_OS_TYPE == darwin ]]; then
+        #if exists dialog;then
+            #dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$ZPWR_TEMPFILE"
+            #clear
+            #REPLY="$(cat "$ZPWR_TEMPFILE")"
+            #command rm "$ZPWR_TEMPFILE"
+        #else
+            #printf "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> "
+            #read
+        #fi
 
-        if [[ $REPLY != "y" ]]; then
-            clearList
-            return 0
-        fi
-    fi
+        #if [[ $REPLY != "y" ]]; then
+            #clearList
+            #return 0
+        #fi
+    #fi
 
     if [[ -d "$ZPWR" ]]; then
         builtin cd "$ZPWR"
@@ -39,8 +39,7 @@ function ___getrc(){
 
     completionDir="$ZSH_CUSTOM/plugins"
     for dir in "$completionDir/"*;do
-        printf "$dir: "
-        test -d "$dir" && ( builtin cd "$dir" && git pull; )
+        test -d "$dir" && (builtin cd "$dir" && isGitDir && printf "$dir: "; git pull; )
     done
 
     test -n "$TERM" && exec "$SHELL"

@@ -620,14 +620,13 @@ function gitRepoUpdater() {
     if [[ -d "$enclosing_dir" ]]; then
         for generic_git_repo_plugin in "$enclosing_dir/"*; do
             if [[ -d "$generic_git_repo_plugin" ]]; then
-                if [[ -d "$generic_git_repo_plugin"/.git ]]; then
-                    printf "%s: " "$(basename "$generic_git_repo_plugin")"
                     (
                         builtin cd "$generic_git_repo_plugin" &&
+                        isGitDir && 
+                        printf "\x1b[1m%s:\x1b[0m " "$(basename "$generic_git_repo_plugin")" &&
                         git fetch --all --prune &&
                         git pull --all && clearGitCache
                     )
-                fi
             fi
         done
     fi
