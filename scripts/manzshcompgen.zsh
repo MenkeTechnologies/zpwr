@@ -8,25 +8,26 @@
 #}}}***********************************************************
 if [[ -n "$ZPWR" && -n "$ZPWR_LIB_INIT" ]]; then
     if ! source "$ZPWR_LIB_INIT" ""; then
-        echo "Could not source dir '$ZPWR_LIB_INIT'."
+        echo "Could not source file ZPWR_LIB_INIT '$ZPWR_LIB_INIT'."
         exit 1
     fi
 else
     0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
     0="${${(M)0:#/*}:-$PWD/$0}"
-    dir="${0:A}"
+    zpwrBaseDir="${0:A}"
 
-    while [[ ! -f "$dir/.zpwr_root" ]]; do
-        dir="${dir:h}"
-        if [[ "$dir" == / ]]; then
+    while [[ ! -f "$zpwrBaseDir/.zpwr_root" ]]; do
+        zpwrBaseDir="${zpwrBaseDir:h}"
+        if [[ "$zpwrBaseDir" == / ]]; then
             echo "Could not find .zpwr_root file up the directory tree." >&2
             exit 1
         fi
     done
-    if ! source "$dir/scripts/init.sh" "$dir"; then
-        echo "Could not source dir '$dir/scripts/init.sh'."
+    if ! source "$zpwrBaseDir/scripts/init.sh" "$zpwrBaseDir"; then
+        echo "Could not source zpwrBaseDir '$zpwrBaseDir/scripts/init.sh'."
         exit 1
     fi
+    unset zpwrBaseDir
 fi
 
 comp_dir="comp_dir"

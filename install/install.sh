@@ -7,24 +7,47 @@
 #####   Notes: goal - work on mac and linux
 #####   Notes: this script should a one liner installer
 #}}}***********************************************************
+#{{{                    MARK:zinit
+#**************************************************************
 export ZPWR_PLUGIN_MANAGER_HOME="$HOME/.zinit"
 export ZPWR_PLUGIN_MANAGER="zinit"
-
-#{{{                    MARK:Env vars
-#**************************************************************
 # do not want any surprises when relative cd to other dirs
 unset CDPATH
+declare zpwrBaseDir
 
 VERSION="2.0.0"
 # resolve all symlinks
 ZPWR_INSTALL="$(pwd -P)"
 #normally ~/.zpwr
-ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
+#}}}***********************************************************
+
+#{{{                    MARK:Find $ZPWR
+#**************************************************************
+source="${BASH_SOURCE[0]}"
+while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+zpwrBaseDir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+source="$(readlink "$source")"
+[[ $source != /* ]] && source="$zpwrBaseDir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+zpwrBaseDir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+
+while [[ ! -f "$zpwrBaseDir/.zpwr_root" ]]; do
+    zpwrBaseDir="$(dirname "$zpwrBaseDir")"
+    if [[ "$zpwrBaseDir" == / ]]; then
+        echo "Could not find .zpwr_root file up the directory tree." >&2
+        exit 1
+    fi
+done
+export ZPWR="$zpwrBaseDir"
+#}}}***********************************************************
+
+#{{{                    MARK:Env vars
+#**************************************************************
+ZPWR_BASE_DIR="$ZPWR"
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 
-test -z $ZPWR && export ZPWR="$HOME/.zpwr"
 echo "installing to $ZPWR"
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
