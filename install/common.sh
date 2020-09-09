@@ -12,6 +12,24 @@
 # do not want any surprises when relative cd to other dirs
 unset CDPATH
 
+source="${BASH_SOURCE[0]}"
+while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+zpwrBaseDir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+source="$(readlink "$source")"
+[[ $source != /* ]] && source="$zpwrBaseDir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+zpwrBaseDir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+
+while [[ ! -f "$zpwrBaseDir/.zpwr_root" ]]; do
+    zpwrBaseDir="$(dirname "$zpwrBaseDir")"
+    if [[ "$zpwrBaseDir" == / ]]; then
+        echo "Could not find .zpwr_root file up the directory tree." >&2
+        exit 1
+    fi
+done
+export ZPWR="$zpwrBaseDir"
+unset zpwrBaseDir
+
 if ! test -f install.sh; then
     echo "install.sh must be in $ZPWR/install directory" >&2
     exit 1
@@ -24,7 +42,7 @@ fi
 
 # resolve all symlinks
 ZPWR_INSTALL="$(pwd -P)"
-ZPWR_BASE_DIR="$(dirname $ZPWR_INSTALL)"
+ZPWR_BASE_DIR="$ZPWR"
 ZPWR_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_BASE_DIR/local/installer"
