@@ -67,13 +67,19 @@ startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
 
 #{{{                    MARK:FPATH AND PATH NO DUPLICATES
 #**************************************************************
+function zpwrDedupPaths() {
+    # duplicates slow down searching and
+    # mess up OMZ fpath check if should remove zcompdump
+    fpath=(${(u)fpath})
+    path=(${(u)path})
+}
+
 # duplicates slow down searching
 declare -aU fpath
-fpath=(${(u)fpath})
 declare -aU path
-path=(${(u)path})
 # FPATH should not be exported
 declare +x FPATH
+zpwrDedupPaths
 #}}}***********************************************************
 
 #{{{                    MARK:ZPWR source env file which sources lib
@@ -439,7 +445,7 @@ zinit load \
 
 # use fpath NOT symlinks into ~/.zinit/completions
 # to have more-completions be last resort and not overrride system completions
-zinit ice lucid nocompile wait'0e' nocompletions
+zinit ice lucid nocompile wait'0e' nocompletions atload='zpwrDedupPaths'
 zinit load \
     MenkeTechnologies/zsh-more-completions
 
@@ -671,14 +677,6 @@ if [[ "$ZPWR_AUTO_ATTACH" == true ]]; then
         zpwrAttachSetup
     fi
 fi
-#}}}***********************************************************
-
-#{{{                    MARK:FPATH AND PATH REMOVE DUPLICATES
-#**************************************************************
-# duplicates slow down searching and
-# mess up OMZ fpath check if should remove zcompdump
-fpath=(${(u)fpath})
-path=(${(u)path})
 #}}}***********************************************************
 
 #{{{                    MARK:Early bind Immediate Usage
