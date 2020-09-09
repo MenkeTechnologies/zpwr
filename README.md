@@ -307,7 +307,7 @@ File ending of currently edited file in vim determines the interpreter used by t
 
 ## Tmux Main Window
 The main window show in the screenshots is started by Prefix-D in an empty tmux window.  This sources a tmux script named control-window.
-Alternatively you could invoke the script by Prefix-: `source-file ~/.tmux/control-window` or in the terminal with `tmux source-file ~/.tmux/control-window` in an empty tmux window.
+Alternatively you could invoke the script by Prefix-: `source-file ~/.zpwr/.tmux/control-window` or in the terminal with `tmux source-file ~/.zpwr/.tmux/control-window` in an empty tmux window.
 
 ## Personal Config
 Startup shell files will source `~/.zpwr/local/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any only features like `isZsh && myZshConfig`.
