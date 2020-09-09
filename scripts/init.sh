@@ -9,7 +9,11 @@
 #}}}***********************************************************
 
 if ! type -- "exists" >/dev/null 2>&1;then
-    test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+    if [[ -z "$1" ]]; then
+        test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+    else
+        export ZPWR="$1"
+    fi
     test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
     test -z "$ZPWR_RE_ENV_FILE" && export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
 

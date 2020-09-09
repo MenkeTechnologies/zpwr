@@ -6,11 +6,30 @@
 ##### Purpose: zsh script to gen the keybindings for README
 ##### Notes:
 #}}}***********************************************************
-0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
-0="${${(M)0:#/*}:-$PWD/$0}"
-
 if ! source "${0:h}/init.sh"; then
     echo "could not source 0/init.sh '${0:h}/init.sh'"
+fi
+if [[ -n "$ZPWR" && -n "$ZPWR_LIB_INIT" ]]; then
+    if ! source "$ZPWR_LIB_INIT" ""; then
+        echo "Could not source dir '$ZPWR_LIB_INIT'."
+        exit 1
+    fi
+else
+    0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+    0="${${(M)0:#/*}:-$PWD/$0}"
+    dir="${0:A}"
+
+    while [[ ! -f "$dir/.zpwr_root" ]]; do
+        dir="${dir:h}"
+        if [[ "$dir" == / ]]; then
+            echo "Could not find .zpwr_root file up the directory tree." >&2
+            exit 1
+        fi
+    done
+    if ! source "$dir/scripts/init.sh" "$dir"; then
+        echo "Could not source dir '$dir/scripts/init.sh'."
+        exit 1
+    fi
 fi
 
 if [[ -z "$ZPWR_TEMPFILE" ]]; then

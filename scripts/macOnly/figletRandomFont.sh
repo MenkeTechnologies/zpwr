@@ -6,24 +6,36 @@
 ##### Purpose: bash script to display random figlet fonts
 ##### Notes:
 #}}}***********************************************************
+if [[ -n "$ZPWR" && -n "$ZPWR_LIB_INIT" ]]; then
+    if ! source "$ZPWR_LIB_INIT" ""; then
+        echo "Could not source dir '$ZPWR_LIB_INIT'."
+        exit 1
+    fi
+else
+    source="${BASH_SOURCE[0]}"
+    while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
+    dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+    source="$(readlink "$source")"
+    [[ $source != /* ]] && source="$dir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+    done
+    dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
 
-source="${BASH_SOURCE[0]}"
-while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
-  dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
-  source="$(readlink "$source")"
-  [[ $source != /* ]] && source="$dir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-done
-dir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
-
-if ! source "$dir/init.sh"; then
-    if ! source "$dir/../init.sh"; then
-        echo "could not source dir '$dir/../init.sh'"
+    while [[ ! -f "$dir/.zpwr_root" ]]; do
+        dir="$(dirname "$dir")"
+        if [[ "$dir" == / ]]; then
+            echo "Could not find .zpwr_root file up the directory tree." >&2
+            exit 1
+        fi
+    done
+    if ! source "$dir/scripts/init.sh" "$dir"; then
+        echo "Could not source dir '$dir/scripts/init.sh'."
+        exit 1
     fi
 fi
 
 if [[ -z "$1" ]]; then
         loggErr "usage: $0 <textToDisplay>"
-        return 1
+        exit 1
 fi
 
 if [[ "$(uname)" == Darwin ]]; then

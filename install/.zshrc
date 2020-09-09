@@ -78,7 +78,10 @@ declare +x FPATH
 
 #{{{                    MARK:ZPWR source env file which sources lib
 #**************************************************************
-test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
+0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+0="${${(M)0:#/*}:-$PWD/$0}"
+export ZPWR="${0:A:h:h}"
+
 export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
 

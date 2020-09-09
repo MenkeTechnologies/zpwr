@@ -24,7 +24,7 @@ Some interactivity is required near end of installer for postfix, wireshark and 
 Zinit will install plugins on first zsh after install.
 
 ## Full Installation Instructions to `$ZPWR`
-To install to a custom directory, clone the project to that directory and `export ZPWR=<my_directory>` in your shell environment before installing.  After install, ZPWR needs to be permanently exported in the environment before `~/.zshrc` is read by zsh.  `~/.zshenv` is one possible location for the export.
+To install to a custom directory, clone the project to custom directory ands start the installer.  ZPWR will pick up its location and export ZPWR to that directory.  This also means you can move ZPWR after install, exec a new zsh and all environment variables will be set accordingly.
 
 ## ZPWR Features
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
