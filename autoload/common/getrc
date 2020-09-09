@@ -38,9 +38,7 @@ function ___getrc(){
     linkConf
 
     completionDir="$ZSH_CUSTOM/plugins"
-    for dir in "$completionDir/"*;do
-        test -d "$dir" && (builtin cd "$dir" && isGitDir && printf "$dir: "; git pull; )
-    done
+    gitRepoUpdater "$completionDir"
 
     test -n "$TERM" && exec "$SHELL"
 
