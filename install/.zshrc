@@ -194,7 +194,6 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/zsh-pip-description-completion
     MenkeTechnologies/zsh-xcode-completions
     MenkeTechnologies/zsh-better-npm-completion
-    MenkeTechnologies/zsh-more-completions
 )
 
 ZPWR_OMZ_PLUGINS=(
@@ -399,6 +398,7 @@ for p in $ZPWR_GH_PLUGINS; do
     zinit ice lucid nocompile wait
     zinit load $p
 done
+
 unset p
 
 zinit ice lucid nocompile wait atinit='bindZdharma' atload'bindZdharmaPost'
@@ -414,18 +414,18 @@ zinit load \
 # late bind autopair keystrokes
 zinit ice lucid nocompile wait'0a' atload='bindInterceptSurround'
 zinit load \
-hlissner/zsh-autopair
+    hlissner/zsh-autopair
 
 # late bind keystrokes, must come before syntax highlight
 zinit ice lucid nocompile wait'0b' atload'bindHistorySubstring'
 zinit load \
-zsh-users/zsh-history-substring-search
+    zsh-users/zsh-history-substring-search
 
 
 # late , must come before syntax highlight
 zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindFZFLate;bindZpwrVerbs;bindZpwrZstyle'
 zinit load \
-zsh-users/zsh-autosuggestions
+    zsh-users/zsh-autosuggestions
 
 # late , must be last to load
 # runs ZLE keybindings to override other late loaders
@@ -433,6 +433,12 @@ zsh-users/zsh-autosuggestions
 zinit ice lucid nocompile wait'0d' atinit'bindPenultimate;bindFinal;zpwrTokenPost'
 zinit load \
     zdharma/fast-syntax-highlighting
+
+# use fpath NOT symlinks into ~/.zinit/completions
+# to have more-completions be last resort and not overrride system completions
+zinit ice lucid nocompile wait'0e' nocompletions
+zinit load \
+    MenkeTechnologies/zsh-more-completions
 
 zinit ice lucid nocompile as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit'zicompinit; zicdreplay'
 zinit light \
