@@ -574,7 +574,7 @@ export ZPWR_ZINIT_COMPINIT_DELAY=8
 I am looking for contributors. Especially for documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests.
 
 ## Warnings
-Moving the scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.
+Moving  scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZPWR_TMUX` which defaults to `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.
 
 # Running on a MacbookPro
 ![Alt text](http://jakobmenke.com/img/tmuxfinal22.png?raw=true)
