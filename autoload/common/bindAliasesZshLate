@@ -134,47 +134,6 @@ alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) mast
 
 alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
-if [[ -d "$ZPWR_COMPS" ]]; then
-    alias zco="cd $ZPWR_COMPS"
-fi
-
-if [[ -d "$ZPWR_SCRIPTS_MAC" ]]; then
-    alias zsm="cd $ZPWR_SCRIPTS_MAC"
-fi
-
-if [[ -d "$ZPWR_TMUX" ]]; then
-    alias ztm="cd $ZPWR_TMUX"
-fi
-
-if [[ -d "$ZPWR_TMUX" ]]; then
-    alias zt="cd $ZPWR_TEST"
-fi
-
-if [[ -d "$ZPWR_TMUX_LOCAL" ]]; then
-    alias ztl="cd $ZPWR_TMUX_LOCAL"
-fi
-
-if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-    alias zlt="cd $ZPWR_HIDDEN_DIR_TEMP"
-fi
-
-if [[ -d "$ZPWR_LOCAL/installer" ]]; then
-    alias zli="cd $ZPWR_LOCAL/installer"
-fi
-
-if [[ -d "$ZPWR_LOCAL" ]]; then
-    alias zlr="cd $ZPWR_LOCAL/rcBackups"
-fi
-
-if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
-    alias zh="cd $ZPWR_PLUGIN_MANAGER_HOME"
-    alias zhc="cd $ZPWR_PLUGIN_MANAGER_HOME/completions"
-    alias zhp="cd $ZPWR_PLUGIN_MANAGER_HOME/plugins"
-    alias zhb="cd $ZPWR_PLUGIN_MANAGER_HOME/bin"
-    alias zhs="cd $ZPWR_PLUGIN_MANAGER_HOME/snippets"
-
-    alias zpl="cd $ZPWR_PLUGIN_DIR"
-fi
 alias zpg=zpgh
 alias zpw=zpwr
 alias zpwrgh=zpwr

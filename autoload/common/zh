@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zh() {
+
+    if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
+        cd "$ZPWR_PLUGIN_MANAGER_HOME"
+    else
+        loggErr "ZPWR_PLUGIN_MANAGER_HOME '$ZPWR_PLUGIN_MANAGER_HOME' is not a dir."
+    fi
+
+}
+
+zh "$@"

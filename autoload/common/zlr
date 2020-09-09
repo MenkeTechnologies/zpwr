@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zlr() {
+
+    if [[ -d "$ZPWR_LOCAL/rcBackups" ]]; then
+        cd "$ZPWR_LOCAL/rcBackups"
+    else
+        loggErr "ZPWR_LOCAL/rcBackups '$ZPWR_LOCAL/rcBackups' is not a dir."
+    fi
+
+}
+
+zlr "$@"

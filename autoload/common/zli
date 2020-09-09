@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zli() {
+
+    if [[ -d "$ZPWR_LOCAL/installer" ]]; then
+        cd "$ZPWR_LOCAL/installer"
+    else
+        loggErr "ZPWR_LOCAL/installer '$ZPWR_LOCAL/installer' is not a dir."
+    fi
+
+}
+
+zli "$@"

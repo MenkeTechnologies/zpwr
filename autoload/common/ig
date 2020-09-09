@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ig() {
+
+    if [[ -d "$HOME/IdeaProjects" ]]; then
+        cd "$HOME/IdeaProjects"
+    else
+        loggErr "HOME/IdeaProjects '$HOME/IdeaProjects' is not a dir."
+    fi
+
+}
+
+ig "$@"

@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function dl() {
+
+    if [[ -d "$ZPWR_DL" ]]; then
+        cd "$ZPWR_DL"
+    else
+        loggErr "ZPWR_DL '$ZPWR_DL' is not a dir."
+    fi
+
+}
+
+dl "$@"

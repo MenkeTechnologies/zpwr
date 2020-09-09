@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zco() {
+
+    if [[ -d "$ZPWR_COMPS" ]]; then
+        cd "$ZPWR_COMPS"
+    else
+        loggErr "ZPWR_COMPS '$ZPWR_COMPS' is not a dir."
+    fi
+
+}
+
+zco "$@"

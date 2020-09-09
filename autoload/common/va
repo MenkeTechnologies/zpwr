@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function va() {
+
+    if [[ -d "/var" ]]; then
+        cd "/var"
+    else
+        loggErr "'/var' is not a dir."
+    fi
+
+}
+
+va "$@"

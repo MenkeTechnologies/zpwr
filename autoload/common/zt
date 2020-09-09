@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zt() {
+
+    if [[ -d "$ZPWR_TEST" ]]; then
+        cd "$ZPWR_TEST"
+    else
+        loggErr "ZPWR_TEST '$ZPWR_TEST' is not a dir."
+    fi
+
+}
+
+zt "$@"

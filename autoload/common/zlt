@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zlt() {
+
+    if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
+        cd "$ZPWR_HIDDEN_DIR_TEMP"
+    else
+        loggErr "ZPWR_HIDDEN_DIR_TEMP '$ZPWR_HIDDEN_DIR_TEMP' is not a dir."
+    fi
+
+}
+
+zlt "$@"

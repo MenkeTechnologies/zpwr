@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function cg() {
+
+    if [[ -d "$HOME/ClionProjects" ]]; then
+        cd "$HOME/ClionProjects"
+    else
+        loggErr "HOME/ClionProjects '$HOME/ClionProjects' is not a dir."
+    fi
+
+}
+
+cg "$@"

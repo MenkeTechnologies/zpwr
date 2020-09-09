@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function eb() {
+
+    if [[ -d "$HOME/.emacs.d/elpa" ]]; then
+        cd "$HOME/.emacs.d/elpa"
+    else
+        loggErr "HOME/.emacs.d/elpa '$HOME/.emacs.d/elpa' is not a dir."
+    fi
+
+}
+
+eb "$@"

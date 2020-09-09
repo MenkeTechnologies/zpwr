@@ -331,9 +331,9 @@ nnoremap <silent> <ESC><C-T> :call TransposeWords()<CR>
 inoremap <silent> <C-D><C-T> <C-O>:call TransposeWords()<CR>
 
 " rename word under caret
-nnoremap <Leader>g :%s/\C\<<C-r><C-w>\>//g<Left><Left>
+nnoremap <Leader>g :%s@\C\<<C-r><C-w>\>@@g<Left><Left>
 " rename word under caret with cursor at end of replacement word
-nnoremap <Leader>r :%s/\C\<<C-r><C-w>\>/<C-r><C-W>/g<Left><Left>
+nnoremap <Leader>r :%s@\C\<<C-r><C-w>\>@<C-r><C-W>@g<Left><Left>
 
 inoremap <c-t> i<bs><c-o>:silent! undojoin \| normal! xp<cr>
 

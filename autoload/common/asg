@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function asg() {
+
+    if [[ -d "$HOME/AndroidStudioProjects" ]]; then
+        cd "$HOME/AndroidStudioProjects"
+    else
+        loggErr "HOME/AndroidStudioProjects '$HOME/AndroidStudioProjects' is not a dir."
+    fi
+
+}
+
+asg "$@"

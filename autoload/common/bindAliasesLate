@@ -46,8 +46,6 @@ function bindAliasesLate(){
     alias loo="tail -n 1000 -F $ZPWR_LOGFILE"
     alias ol="tail -n 1000 -F $ZPWR_LOGFILE"
     alias llo="tail -n 1000 -F $ZPWR_LOGFILE"
-    alias va='cd /var'
-    alias vl='cd /var/log'
     exists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
     alias cpan='rlwrap cpan'
     alias nz='exec zsh'
@@ -153,7 +151,6 @@ function bindAliasesLate(){
         alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
         alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
         alias rtsync="$ZPWR_SCRIPTS_MAC/rsyncr.sh"
-        alias asg='cd $HOME/AndroidStudioProjects'
         alias xg='cd $HOME/Documents/xcode'
         alias ap='cd /Applications'
         alias sudoedit='sudo -E $EDITOR'
@@ -275,37 +272,8 @@ function bindAliasesLate(){
     alias fh='f !$'
     alias gh=openmygh
     eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
-    alias dl="cd $ZPWR_DL"
-    alias docu="cd $ZPWR_DOC"
     alias mus="cd $HOME/Music"
 
-    if [[ -d "$HOME/.vim/bundle" ]]; then
-        alias vb="cd $HOME/.vim/bundle"
-    fi
-
-    if [[ -d "$HOME/.emacs.d/elpa" ]]; then
-        alias eb="cd $HOME/.emacs.d/elpa"
-    fi
-
-    if [[ -d "$HOME/IdeaProjects" ]]; then
-        alias ig='cd $HOME/IdeaProjects'
-    fi
-
-    if [[ -d "$HOME/PycharmProjects" ]]; then
-        alias pg='cd $HOME/PycharmProjects'
-    fi
-
-    if [[ -d "$HOME/CLionProjects" ]]; then
-        alias cg='cd $HOME/ClionProjects'
-    fi
-
-    if [[ -d "$HOME/WebstormProjects" ]]; then
-        alias wg='cd $HOME/WebstormProjects'
-    fi
-
-    if [[ -d "$HOME/RubymineProjects" ]]; then
-        alias mg='cd $HOME/RubymineProjects'
-    fi
     #}}}***********************************************************
 
     #{{{                          MARK:aliases for ZPWR_SCRIPTS
