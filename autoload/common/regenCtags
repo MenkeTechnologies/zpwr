@@ -6,7 +6,10 @@ function ___regenCtags(){
     (
     builtin cd "$ZPWR_SCRIPTS"
     command rm tags 2>/dev/null
-    ctags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR/".*.sh
+    ctags --language-force=sh --fields=+l "$HOME/.zshrc" "$ZPWR/".*.sh \
+            "$ZPWR_AUTOLOAD_LINUX/"* "$ZPWR_AUTOLOAD_DARWIN/"* \
+            "$ZPWR_AUTOLOAD_SYSTEMCTL/"* "$ZPWR_AUTOLOAD_COMMON/"* \
+            "$ZPWR_COMPS/"*
     ctags --append --fields=+l "$ZPWR_SCRIPTS"/* "$ZPWR_SCRIPTS_MAC/"*
     command cp tags "$HOME"
     )

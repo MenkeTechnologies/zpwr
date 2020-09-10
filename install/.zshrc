@@ -319,27 +319,33 @@ if [[ $ZPWR_DEBUG == true ]]; then
     echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
 fi
 
-# add ZPWR autoload dirs to fpath
-fpath=($ZPWR_AUTOLOAD_LINUX $ZPWR_AUTOLOAD_DARWIN $ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
+fpath=($ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_COMPS $fpath)
 #}}}***********************************************************
 #
 #{{{                    MARK:autoload
 #**************************************************************
-autoload -z $ZPWR_AUTOLOAD/common/*(.:t)
+autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t)
 autoload -Uz zrecompile zm zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     ZPWR_OMZ_PLUGINS+=(brew osx)
     ZPWR_OMZ_COMPS+=(pod)
+
+    # add ZPWR autoload dirs to fpath
+    fpath=($ZPWR_AUTOLOAD_DARWIN $fpath)
     autoload -z $ZPWR_AUTOLOAD_DARWIN/*(.:t)
     # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
+    # add ZPWR autoload dirs to fpath
+    fpath=($ZPWR_AUTOLOAD_LINUX $fpath)
     autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
     zpwrLinuxPlugins
 else
     # unix
+    # add ZPWR autoload dirs to fpath
+    fpath=($ZPWR_AUTOLOAD_LINUX $fpath)
     autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
 fi
 #}}}***********************************************************

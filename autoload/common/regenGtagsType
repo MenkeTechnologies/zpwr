@@ -19,6 +19,9 @@ function ___regenGtagsType(){
             "$ZPWR_INSTALL/"* \
             "$ZPWR/"* \
             "$ZPWR_SCRIPTS"/* \
+            "$ZPWR_AUTOLOAD_LINUX/"* "$ZPWR_AUTOLOAD_DARWIN/"* \
+            "$ZPWR_AUTOLOAD_SYSTEMCTL/"* "$ZPWR_AUTOLOAD_COMMON/"* \
+            "$ZPWR_COMPS/"* \
             "$ZPWR_SCRIPTS_MAC/"*; do
             if [[ -f "$file" ]]; then
                 echo "$file"
