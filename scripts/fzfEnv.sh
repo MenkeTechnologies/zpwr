@@ -55,10 +55,10 @@ case \$cmdType in
         if test -f \$file;then
             if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
                 $ZPWR_FZF_CLEARLIST
-                test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
-                xxd \$file | $COLORIZER_FZF_YAML
+                test -x \$file && objdump -d \$file | $FZF_COLORIZER_YAML
+                xxd \$file | $FZF_COLORIZER_YAML
             else
-                $COLORIZER_FZF_FILE 2>/dev/null
+                $FZF_COLORIZER_FILE 2>/dev/null
             fi
         else
             $ZPWR_FZF_CLEARLIST
@@ -85,10 +85,10 @@ case \$cmdType in
         if test -f \$file;then
             if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
                 $ZPWR_FZF_CLEARLIST
-                test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
-                xxd \$file | $COLORIZER_FZF_YAML
+                test -x \$file && objdump -d \$file | $FZF_COLORIZER_YAML
+                xxd \$file | $FZF_COLORIZER_YAML
             else
-                $COLORIZER_FZF_FILE 2>/dev/null
+                $FZF_COLORIZER_FILE 2>/dev/null
             fi
         else
             $ZPWR_FZF_CLEARLIST

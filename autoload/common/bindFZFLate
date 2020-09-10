@@ -10,33 +10,33 @@ function bindFZFLate(){
     if [[ $ZPWR_COLORIZER == bat ]]; then
 
         if exists bat;then
-            export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
-            export COLORIZER_FZF_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
-            export COLORIZER_FZF_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
-            export COLORIZER_FZF_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'
+            export FZF_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'
+            export FZF_COLORIZER_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
+            export FZF_COLORIZER_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
+            export FZF_COLORIZER_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'
             export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
             export COLORIZER_NL=''
         else
-            export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
-            export COLORIZER_FZF_FILE_TEXT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-            export COLORIZER_FZF_FILE_DEFAULT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-            export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
+            export FZF_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
+            export FZF_COLORIZER_FILE_TEXT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
+            export FZF_COLORIZER_FILE_DEFAULT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
+            export FZF_COLORIZER_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
             export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
             export COLORIZER_NL=' | cat -n'
         fi
     else
-        export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
-        export COLORIZER_FZF_FILE_TEXT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-        export COLORIZER_FZF_FILE_DEFAULT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
-        export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
+        export FZF_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
+        export FZF_COLORIZER_FILE_TEXT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
+        export FZF_COLORIZER_FILE_DEFAULT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
+        export FZF_COLORIZER_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
         export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
         export COLORIZER_NL=' | cat -n'
     fi
 
-    export COLORIZER_FZF_C="$ZPWR_COLORIZER -l c"
-    export COLORIZER_FZF_SH="$ZPWR_COLORIZER  -l sh"
-    export COLORIZER_FZF_YAML="$ZPWR_COLORIZER -l yaml"
-    export COLORIZER_FZF_JAVA="$ZPWR_COLORIZER -l java"
+    export FZF_COLORIZER_C="$ZPWR_COLORIZER -l c"
+    export FZF_COLORIZER_SH="$ZPWR_COLORIZER  -l sh"
+    export FZF_COLORIZER_YAML="$ZPWR_COLORIZER -l yaml"
+    export FZF_COLORIZER_JAVA="$ZPWR_COLORIZER -l java"
     export FZF_DRACULA="--color=dark
     --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f
     --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"
@@ -66,6 +66,8 @@ function bindFZFLate(){
 
     export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
 
+    export FZF_ENV_OPTS_PLAIN="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvPlain.sh")'"
+
     export FZF_SEARCH_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitSearchOpts.sh")'"
 
     if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
@@ -74,7 +76,7 @@ function bindFZFLate(){
         export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"
     fi
 
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff='"$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$COLORIZER_FZF$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ff='"$($ZPWR_FZF '"$ZPWR_COMMON_FZF_ELEM"' --preview "[[ -f {} ]] && '"$FZF_COLORIZER$ZPWR_TABSTOP"'  2>/dev/null | cat -n || stat -- {} | fold -80 | head -500")"'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}f="\$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z="| $ZPWR_FZF $FZF_CTRL_T_OPTS "
 

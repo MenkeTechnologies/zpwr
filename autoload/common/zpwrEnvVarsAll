@@ -1,0 +1,9 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ___zpwrEnvVarsAll(){
+
+        env | command grep -iE '^[A-Z0-9_]+='
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS_PLAIN" | perl -pe 's@\n@ @g'
+}
+
+___zpwrEnvVarsAll "$@"

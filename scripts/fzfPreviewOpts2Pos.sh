@@ -14,8 +14,8 @@ isZsh && ps='$pipestatus[1]' || ps='${PIPESTATUS[0]}'
 cat<<EOF
         if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
             $ZPWR_FZF_CLEARLIST
-            test -x \$file && objdump -d \$file | $COLORIZER_FZF_YAML
-            xxd \$file | $COLORIZER_FZF_YAML
+            test -x \$file && objdump -d \$file | $FZF_COLORIZER_YAML
+            xxd \$file | $FZF_COLORIZER_YAML
         else
             $casestr
         fi

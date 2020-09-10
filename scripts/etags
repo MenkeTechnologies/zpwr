@@ -325,24 +325,24 @@ function colortest(){colortest2512,77473
 function 256colors(){256colors2541,78409
 export PYGMENTIZE_COLOR="emacs"PYGMENTIZE_COLOR2559,78873
 export ZPWR_COLORIZER=batZPWR_COLORIZER2560,78905
-        export COLORIZER_FZF='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'COLORIZER_FZF2565,78994
-        export COLORIZER_FZF_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'COLORIZER_FZF_FILE_TEXT2566,79117
-        export COLORIZER_FZF_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'COLORIZER_FZF_FILE_DEFAULT2567,79262
-        export COLORIZER_FZF_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'COLORIZER_FZF_FILE2568,79410
+        export FZF_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'FZF_COLORIZER2565,78994
+        export FZF_COLORIZER_FILE_TEXT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'FZF_COLORIZER_FILE_TEXT2566,79117
+        export FZF_COLORIZER_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'FZF_COLORIZER_FILE_DEFAULT2567,79262
+        export FZF_COLORIZER_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'FZF_COLORIZER_FILE2568,79410
         export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'ZPWR_COLORIZER2569,79543
         export COLORIZER_NL=''COLORIZER_NL2570,79664
-        export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"COLORIZER_FZF2572,79704
-        export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"COLORIZER_FZF_FILE2573,79804
+        export FZF_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"FZF_COLORIZER2572,79704
+        export FZF_COLORIZER_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"FZF_COLORIZER_FILE2573,79804
         export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"ZPWR_COLORIZER2574,79917
         export COLORIZER_NL=' | cat -n'COLORIZER_NL2575,80006
-    export COLORIZER_FZF="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"COLORIZER_FZF2578,80058
-    export COLORIZER_FZF_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"COLORIZER_FZF_FILE2579,80154
+    export FZF_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"FZF_COLORIZER2578,80058
+    export FZF_COLORIZER_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"FZF_COLORIZER_FILE2579,80154
     export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"ZPWR_COLORIZER2580,80263
     export COLORIZER_NL=' | cat -n'COLORIZER_NL2581,80348
-export COLORIZER_FZF_C="$ZPWR_COLORIZER -l c"COLORIZER_FZF_C2584,80388
-export COLORIZER_FZF_SH="$ZPWR_COLORIZER  -l sh"COLORIZER_FZF_SH2585,80434
-export COLORIZER_FZF_YAML="$ZPWR_COLORIZER -l yaml"COLORIZER_FZF_YAML2586,80483
-export COLORIZER_FZF_JAVA="$ZPWR_COLORIZER -l java"COLORIZER_FZF_JAVA2587,80535
+export FZF_COLORIZER_C="$ZPWR_COLORIZER -l c"FZF_COLORIZER_C2584,80388
+export FZF_COLORIZER_SH="$ZPWR_COLORIZER  -l sh"FZF_COLORIZER_SH2585,80434
+export FZF_COLORIZER_YAML="$ZPWR_COLORIZER -l yaml"FZF_COLORIZER_YAML2586,80483
+export FZF_COLORIZER_JAVA="$ZPWR_COLORIZER -l java"FZF_COLORIZER_JAVA2587,80535
 export FZF_DRACULA="--color=darkFZF_DRACULA2588,80587
 --color=fg:-1,bg:-1,hl:#5fff87,fg+:-1,bg+:-1,hl+:#ffaf5f--color2589,80620
 --color=info:#af87ff,prompt:#5fff87,pointer:#ff87d7,marker:#ff87d7,spinner:#ff87d7"--color2590,80677

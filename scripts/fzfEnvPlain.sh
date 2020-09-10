@@ -35,15 +35,15 @@ else
 
     unset zpwrBaseDir
 fi
+
 # []\[^$.*/] = this regex matches any of ][^$.*/ characters
 # 3 backslashes \\ => \ after heredoc, \$ => $ after heredoc, \\\$ => \$ after heredoc
 # \$ needed bc inside double quotes when passed to perl
 cat<<EOF
 line={};
-line=\$(echo \$line | perl -ne "do{@ary=split /\\\s+/,\\\$1;print \\\$ary[0]} if m{^\\\S+\\\s+([\\\s\\\S]+)=\\\S+}" | perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
-
-cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV_KEY_FILE} | awk "{print \\\$1}")
-file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV_KEY_FILE} | awk "{print \\\$2}")
+line=\$(echo \$line| perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
+cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
+file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
 
 if [[ \$ZPWR_DEBUG == true ]]; then
     echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
@@ -70,16 +70,16 @@ esac
 {
 case \$cmdType in
     (alias)
-        command grep -m1 -Fa "alias \$file=" "${ZPWR_ENV_VALUE_FILE}"
+        command grep -m1 -Fa "alias \$file=" "${ZPWR_ENV}Value.txt"
         ;;
     (param)
-        command grep -m1 -Fa "export \$file=" "${ZPWR_ENV_VALUE_FILE}"
+        command grep -m1 -Fa "export \$file=" "${ZPWR_ENV}Value.txt"
         ;;
     (builtin)
-        command grep -m1 -Fa "\$file" | grep -F "is a shell builtin" "${ZPWR_ENV_VALUE_FILE}"
+        command grep -m1 -Fa "\$file" | grep -F "is a shell builtin" "${ZPWR_ENV}Value.txt"
         ;;
     (resword)
-        command grep -m1 -Fa "\$file" | grep -F "is a reserved word" "${ZPWR_ENV_VALUE_FILE}"
+        command grep -m1 -Fa "\$file" | grep -F "is a reserved word" "${ZPWR_ENV}Value.txt"
         ;;
     (command)
         if test -f \$file;then
@@ -95,14 +95,14 @@ case \$cmdType in
         fi
         ;;
     (func)
-        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
+        file=\$(echo \$file| perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
         if [[ \$ZPWR_DEBUG == true ]]; then
             echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
         fi
-        command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV_VALUE_FILE}"
-        command perl -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV_VALUE_FILE}" | fold -80
+        command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV}Value.txt"
+        command perl -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV}Value.txt" | fold -80
         ;;
 esac
-} | ponysay -W 75 | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
+} | fold -w 50
 
 EOF
