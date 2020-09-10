@@ -60,6 +60,10 @@ function bindFinal(){
         export PD="$ZPWR_PLUGIN_DIR/."
     fi
 
+    test -s \
+    "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" &&
+    source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
+
 }
 
 bindFinal "$@"

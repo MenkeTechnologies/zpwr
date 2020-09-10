@@ -153,9 +153,6 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
 #**************************************************************
     export GOPATH="$HOME/go"
 
-    test -s \
-    "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" &&
-    source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
 fi
 #}}}
 
