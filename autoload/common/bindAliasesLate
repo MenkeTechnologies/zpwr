@@ -175,7 +175,7 @@ function bindAliasesLate(){
                     alias v='mvim -v'
                     alias vi='mvim -v'
                     alias vim='mvim -v'
-                    alias vm="mvim -v -u $ZPWR_LOCAL/.minvimrc"
+                    alias vm="mvim -v -u $ZPWR/.minvimrc"
                     alias sv='sudo -E mvim -v'
                 fi
             }
