@@ -73,3 +73,6 @@ tpope/vim-surround
 tpope/vim-unimpaired
 wakatime/vim-wakatime
 Valodim/vim-zsh-completion
+lervag/vimtex
+benmills/vimux
+gcmt/wildfire.vim
