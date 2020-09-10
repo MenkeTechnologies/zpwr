@@ -62,7 +62,8 @@
 
 #{{{                    MARK:start timestamp
 #**************************************************************
-startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
+zmodload zsh/datetime
+startTimestamp=$EPOCHREALTIME
 #}}}***********************************************************
 
 #{{{                    MARK:FPATH AND PATH NO DUPLICATES
@@ -693,7 +694,7 @@ alias zp=zpwr
 #{{{                    MARK:Finish
 #**************************************************************
 
-endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')
+endTimestamp=$EPOCHREALTIME
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
 loggDebug "zsh startup took $startupTimeMs seconds"
 
