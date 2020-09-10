@@ -25,7 +25,7 @@ function __zpwr(){
   arguments=(
         '(- :)'{-h,--help}'[show help message and exit]'
         '1:zpwr subcommand:->verb'
-        '*::args to zpwr:->args'
+        '*:: :->args'
     )
 
     _arguments -s -C : $arguments && return

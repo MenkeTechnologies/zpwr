@@ -58,8 +58,6 @@ zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 # using tag name as group name so ordering the groups by tag name here
 zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest globbed-files files local-directories hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tmux contexts last-ten
 
-zstyle ':completion:*:*:(z|zshz|zm|zd|zg):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
-
 # show command descriptions if available
 zstyle ':completion:*' extra-verbose yes
 
@@ -163,8 +161,6 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:plumbing-internal-helper-commands' list-colors '=(#b)(*)=1;30=37;46'
 
     zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
-
-    zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
     zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
     zstyle ':completion:*:*:*:*:vtags' list-colors '=(#b)(*)=1;37;45'
@@ -227,12 +223,16 @@ zstyle ':completion:*:files' ignored-patterns '*.'
 #}}}***********************************************************
 #{{{                    MARK:ZPWR verbs zstyle
 #**************************************************************
+#not working for zpwr subcommands
 zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort false
+zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg|z|zs|f):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
 
-zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
+zstyle ':completion::megacomplete:zpwr-gitedittag::commit-tags' sort false
 
-zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop):*:*' sort false
-
+#working
+zstyle ":completion:*:*:*:*:*:zdir" sort false
+zstyle ":completion:*:*:*:*:*:fasd" sort false
+zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' sort false
 zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-r):*:*' sort false
 #}}}***********************************************************
 }
