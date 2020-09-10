@@ -59,8 +59,11 @@ if exists gtags; then
     builtin cd "$HOME"
     command rm GPATH GRTAGS GTAGS 2>/dev/null
     for file in \
-        "$ZPWR_INSTALL/"* \
         "$ZPWR/"* \
+        "$ZPWR_INSTALL/"* \
+        "$ZPWR_AUTOLOAD_LINUX/"* "$ZPWR_AUTOLOAD_DARWIN/"* \
+        "$ZPWR_AUTOLOAD_SYSTEMCTL/"* "$ZPWR_AUTOLOAD_COMMON/"* \
+        "$ZPWR_COMPS/"* \
         "$ZPWR_SCRIPTS"/* \
         "$ZPWR_SCRIPTS_MAC/"*; do
         if [[ -f "$file" ]]; then
