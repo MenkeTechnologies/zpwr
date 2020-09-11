@@ -4,11 +4,14 @@ function bindZpwrVerbs(){
 
         #{{{                    MARK:ZPWR Compsys Functions
 #**************************************************************
+    local cnt
     # get zpwr verbs
     source "$ZPWR_SCRIPTS/zpwr.zsh"
 
+    cnt=0
     for k v in ${(kv)ZPWR_VERBS[@]};do
-        zpwrSubcommandsAry+=("$k:$v")
+        ((++cnt))
+        zpwrSubcommandsAry[$cnt]="$k:$v"
     done
 
     ZPWR_VARS[zpwrSubcommandsAry]=zpwrSubcommandsAry
