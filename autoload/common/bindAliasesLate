@@ -252,8 +252,8 @@ function bindAliasesLate(){
 
     #{{{                          MARK:PYTHON ZPWR_SCRIPTS
     #**************************************************************
-    alias tm="execpy tmux_starter.py"
-    alias tmm="execpy ssh_starter.py"
+    alias tmm='execpy tmux_starter.py'
+    alias tmms="execpy ssh_starter.py"
     alias tmm_notabs="execpy complete_ssh_starter.py;"
     alias tmm_full="execpy tabs.py; execpy complete_ssh_starter.py"
     alias mapit="execpy mapIt.py"

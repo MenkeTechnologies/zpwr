@@ -688,7 +688,8 @@ fi
 
 #{{{                    MARK:Early bind Immediate Usage
 #**************************************************************
-alias zp=zpwr
+alias zp='zpwr'
+alias tm='tmux'
 #}}}***********************************************************
 
 #{{{                    MARK:Finish
