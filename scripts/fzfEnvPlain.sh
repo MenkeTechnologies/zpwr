@@ -103,6 +103,6 @@ case \$cmdType in
         fi
         ;;
 esac
-} | fold -w 40
+}
 
 EOF

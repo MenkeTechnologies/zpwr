@@ -60,7 +60,7 @@ function bindFZFLate(){
     export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"
 
 
-    export FZF_ENV_OPTS_PLAIN="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvPlain.sh")'"
+    export FZF_ENV_OPTS_PLAIN="$ZPWR_COMMON_FZF_ELEM --preview-window=right:50%:wrap -m --border --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvPlain.sh")'"
 
     if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
         export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
