@@ -26,22 +26,26 @@ function f() {
     else
         cd "$@"
     fi
-    
 }
 
 function t() {
     cd "/"
-    
+}
+
+function d() {
+    cd "$HOME/Desktop"
+}
+
+function a() {
+    cd "$HOME"
 }
 
 function r() {
     cd ..
-    
 }
 
 function e() {
     cd "/etc"
-    
 }
 
 alias l='clearList'
