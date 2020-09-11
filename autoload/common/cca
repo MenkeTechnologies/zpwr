@@ -10,8 +10,9 @@ function ___cca() {
     local firstArg sel firstdir
 
     firstArg="${${(Az)@}[1]//\"/}"
-    firstdir=${firstArg:h}
-    BUFFER="builtin cd \"$firstdir\"; c ""$@""; "
+    firstdir=${firstArg:A:h}
+    BUFFER="cd \"$firstdir\"; c ""${@:A}""; "
+    print -sr "$BUFFER"
     logg "$BUFFER"
     eval "$BUFFER"
 }
