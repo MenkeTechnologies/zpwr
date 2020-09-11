@@ -61,13 +61,17 @@ function bindFZFLate(){
 
 
     export FZF_ENV_OPTS_PLAIN="$ZPWR_COMMON_FZF_ELEM --preview-window=right:50%:wrap -m --border --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvPlain.sh")'"
+    export FZF_ENV_OPTS_VERBS_PLAIN="$ZPWR_COMMON_FZF_ELEM --preview-window=right:50%:wrap -m --border --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbsPlain.sh")'"
+    export FZF_ENV_OPTS_CURRENT_PLAIN="$ZPWR_COMMON_FZF_ELEM --preview-window=right:50%:wrap -m --border --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvCurrentPlain.sh")'"
 
     if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
         export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"
         export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"
+        export FZF_ENV_OPTS_CURRENT="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvCurrent.sh")'"
     else
         export FZF_ENV_OPTS="$FZF_ENV_OPTS_PLAIN"
-        export FZF_ENV_OPTS_VERBS="$FZF_ENV_OPTS_PLAIN"
+        export FZF_ENV_OPTS_VERBS="$FZF_ENV_OPTS_VERBS_PLAIN"
+        export FZF_ENV_OPTS_CURRENT="$FZF_ENV_OPTS_CURRENT_PLAIN"
     fi
 
     export FZF_AG_OPTS="$ZPWR_COMMON_FZF_ELEM -m --delimiter : --nth 3.. --reverse --border --ansi --preview '$(bash "$ZPWR_SCRIPTS/fzfAgOpts.sh")'"

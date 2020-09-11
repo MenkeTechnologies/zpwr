@@ -32,6 +32,17 @@ else
     }
 fi
 
+function stdinExists(){
+    local in arg
+    in="$(cat)"
+    arg="$1"
+    if [[ -n "$in" ]]; then
+        echo "$in"
+    else
+        echo "No input found for $arg!"
+    fi
+}
+
 function commandExists(){
     type -ap -- "$1" >/dev/null 2>&1
 }

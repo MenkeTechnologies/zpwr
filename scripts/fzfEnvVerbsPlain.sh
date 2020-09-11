@@ -113,6 +113,6 @@ case \$cmdType in
         fi
         ;;
 esac
-} | stdinExists "\$file" | ponysay -W 75 | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
+} | stdinExists "\$file"
 
 EOF

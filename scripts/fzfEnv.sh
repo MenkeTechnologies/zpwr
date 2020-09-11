@@ -49,6 +49,16 @@ if [[ \$ZPWR_DEBUG == true ]]; then
     echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
 fi
 
+function stdinExists(){
+    local in arg
+    in="\$(cat)"
+    arg="\$1"
+    if [[ -n "\$in" ]]; then
+        echo "\$in"
+    else
+        echo "No input found for \$arg!"
+    fi
+}
 
 case \$cmdType in
     (command)
@@ -103,6 +113,6 @@ case \$cmdType in
         fi
         ;;
 esac
-} | cowsay | ponysay | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
+} | stdinExists "\$file" | cowsay | ponysay | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
 
 EOF
