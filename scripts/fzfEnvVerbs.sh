@@ -73,13 +73,21 @@ case \$cmdType in
         command grep -m1 -Fa "alias \$file=" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (param)
-        command grep -m1 -Fa "export \$file=" "${ZPWR_ENV_VALUE_FILE}"
+        command perl -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or m{^======\$} ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{export .*=} and ! m{^======\$} ) ) } for @a; }" "${ZPWR_ENV}Value.txt"
         ;;
     (builtin)
         command grep -m1 -Fa "\$file" | grep -F "is a shell builtin" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (resword)
         command grep -m1 -Fa "\$file" | grep -F "is a reserved word" "${ZPWR_ENV_VALUE_FILE}"
+        ;;
+    (func)
+        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
+        if [[ \$ZPWR_DEBUG == true ]]; then
+            echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
+        fi
+        command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV_VALUE_FILE}"
+        command perl -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (command)
         if test -f \$file;then
@@ -93,14 +101,6 @@ case \$cmdType in
         else
             $ZPWR_FZF_CLEARLIST
         fi
-        ;;
-    (func)
-        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
-        if [[ \$ZPWR_DEBUG == true ]]; then
-            echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
-        fi
-        command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV_VALUE_FILE}"
-        command perl -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV_VALUE_FILE}" | fold -80
         ;;
 esac
 } | ponysay -W 75 | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
