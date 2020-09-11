@@ -15,14 +15,14 @@ function bindFZFLate(){
             export FZF_COLORIZER_FILE_DEFAULT='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" -l ASP "$file"'
             export FZF_COLORIZER_FILE='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" "$file"'
             export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
-            export COLORIZER_NL=''
+            export FZF_COLORIZER_NL=''
         else
             export FZF_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
             export FZF_COLORIZER_FILE_TEXT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
             export FZF_COLORIZER_FILE_DEFAULT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
             export FZF_COLORIZER_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
             export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
-            export COLORIZER_NL=' | cat -n'
+            export FZF_COLORIZER_NL=' | cat -n'
         fi
     else
         export FZF_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR {} | cat -n"
@@ -30,7 +30,7 @@ function bindFZFLate(){
         export FZF_COLORIZER_FILE_DEFAULT="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
         export FZF_COLORIZER_FILE="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR \"\$file\" | cat -n"
         export ZPWR_COLORIZER="pygmentize -f terminal256 -g -O style=\$PYGMENTIZE_COLOR"
-        export COLORIZER_NL=' | cat -n'
+        export FZF_COLORIZER_NL=' | cat -n'
     fi
 
     export FZF_COLORIZER_C="$ZPWR_COLORIZER -l c"
