@@ -40,20 +40,31 @@
         print -l "export $k=${(P)k}"
     done > "$ZPWR_ENV_VALUE_FILE"
 
+    #separators between each section
+    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+
     alias -L \
         >> "$ZPWR_ENV_VALUE_FILE"
+
+    print "======" >> "$ZPWR_ENV_VALUE_FILE"
 
     for k v in ${(kv)builtins}; do
         type -a -- $k
     done >> "$ZPWR_ENV_VALUE_FILE"
 
+    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+
     for k v in ${(kv)reswords}; do
         type -a -- $reswords
     done >> "$ZPWR_ENV_VALUE_FILE"
 
+    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+
     for k v in ${(kv)commands}; do
         print -l -- $v
     done >> "$ZPWR_ENV_VALUE_FILE"
+
+    print "======" >> "$ZPWR_ENV_VALUE_FILE"
 
     echo "start gen functions"
     for k v in ${(kv)functions}; do
@@ -61,6 +72,10 @@
         type -a -- $k >> "$ZPWR_ENV_VALUE_FILE"
     done
 
+    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+
     declare -f >> "$ZPWR_ENV_VALUE_FILE"
+
+    print "======" >> "$ZPWR_ENV_VALUE_FILE"
 }
 
