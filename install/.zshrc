@@ -456,7 +456,7 @@ zinit ice lucid nocompile wait'0e' nocompletions atload='zpwrDedupPaths'
 zinit load \
     MenkeTechnologies/zsh-more-completions
 
-zinit ice lucid nocompile as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit'zicompinit; zicdreplay'
+zinit ice lucid nocompile nocd as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit'zicompinit; zicdreplay'
 zinit light \
     MenkeTechnologies/zsh-zinit-final
 
