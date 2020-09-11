@@ -73,7 +73,7 @@ case \$cmdType in
         command grep -m1 -Fa "alias \$file=" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (param)
-        command perl -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or m{^======\$} ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{export .*=} and ! m{^======\$} ) ) } for @a; }" "${ZPWR_ENV}Value.txt"
+        command perl -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or m{^======\$} ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} and ! m{^======\$} ) ) } for @a; }" "${ZPWR_ENV}Value.txt"
         ;;
     (builtin)
         command grep -m1 -Fa "\$file" | grep -F "is a shell builtin" "${ZPWR_ENV_VALUE_FILE}"
