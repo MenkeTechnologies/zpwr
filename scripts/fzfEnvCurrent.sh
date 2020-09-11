@@ -36,13 +36,19 @@ else
     unset zpwrBaseDir
 fi
 
+if [[ $1 == plain ]]; then
+    filter=' | stdinExists "$line'
+else
+    filter=' | stdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
+fi
+
 # []\[^$.*/] = this regex matches any of ][^$.*/ characters
 # 3 backslashes \\ => \ after heredoc, \$ => $ after heredoc, \\\$ => \$ after heredoc
 # \$ needed bc inside double quotes when passed to perl
 cat<<EOF
 line={};
+orig={};
 line=\$(echo \$line| perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
-file=\$line
 
 function stdinExists(){
     local in arg
@@ -51,12 +57,11 @@ function stdinExists(){
     if [[ -n "\$in" ]]; then
         echo "\$in"
     else
-        echo "No input found for \$arg!"
+        echo "No input found for _\${arg}_!"
     fi
 }
 
 export -p |
-command perl -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or eof ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} ) ) } for @a; }" |
-stdinExists "\$file" | cowsay | ponysay | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
+command perl -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$line=} ... (m{^export .*=} or eof ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} ) ) } for @a; }" $filter
 
 EOF

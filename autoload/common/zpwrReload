@@ -1,0 +1,24 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrReload(){
+
+    prettyPrint "Reloading started..."
+    zpwrTokenPre
+    bindPowerline;bindPowerlineTmux;bindZpwrDirs
+    bindForGit
+    bindZdharma
+    bindZdharmaPost
+    prettyPrint "Reloading bindAliasesLate;createAliasCache;bindAliasesZshLate;bindOverrideZLE"
+    bindAliasesLate;createAliasCache;bindAliasesZshLate;bindOverrideZLE
+    bindInterceptSurround
+    bindHistorySubstring
+    prettyPrint "Reloading bindFZFLate;bindZpwrVerbs;bindZpwrZstyle"
+    bindFZFLate;bindZpwrVerbs;bindZpwrZstyle
+    bindPenultimate;bindFinal;zpwrTokenPost
+
+    prettyPrint "Reloading finished..."
+
+}
+
+zpwrReload "$@"

@@ -39,8 +39,16 @@ fi
 # []\[^$.*/] = this regex matches any of ][^$.*/ characters
 # 3 backslashes \\ => \ after heredoc, \$ => $ after heredoc, \\\$ => \$ after heredoc
 # \$ needed bc inside double quotes when passed to perl
+
+if [[ $1 == plain ]]; then
+    filter=' | stdinExists "$line'
+else
+    filter=' | stdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
+fi
+
 cat<<EOF
 line={};
+orig={};
 line=\$(echo \$line| perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
@@ -56,7 +64,7 @@ function stdinExists(){
     if [[ -n "\$in" ]]; then
         echo "\$in"
     else
-        echo "No input found for \$arg!"
+        echo "No input found for _\${arg}_!"
     fi
 }
 
@@ -113,6 +121,6 @@ case \$cmdType in
         fi
         ;;
 esac
-} | stdinExists "\$file" | cowsay | ponysay | "$ZPWR_SCRIPTS/splitReg.sh" -- ---------- lolcat
+} $filter
 
 EOF
