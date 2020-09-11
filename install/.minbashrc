@@ -1,0 +1,53 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+#!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: MenkeTechnologies
+##### GitHub: https://github.com/MenkeTechnologies
+##### Date: Thu Sep 10 21:49:19 EDT 2020
+##### Purpose: bash script or minima setup
+##### Notes: 
+#}}}***********************************************************
+
+function clearList() {
+   clear 
+   ls -AlhF
+}
+
+function cd() {
+    builtin cd "$@"
+    clearList
+}
+
+function f() {
+    if [[ -z "$1" ]]; then
+        cd -
+    else
+        cd "$@"
+    fi
+    
+}
+
+function t() {
+    cd "/"
+    
+}
+
+function r() {
+    cd ..
+    
+}
+
+function e() {
+    cd "/etc"
+    
+}
+
+alias l='clearList'
+alias la='clearList'
+alias ls='clearList'
+
+function c() {
+    cat "$@" | less -M -N -R -K -F -X
+}
