@@ -11,7 +11,7 @@ function ___cca() {
 
     firstArg="${${(Az)@}[1]//\"/}"
     firstdir=${firstArg:h}
-    BUFFER="builtin cd \"$firstdir\"; c ""$@""; clearList; isGitDir && git diff HEAD; "
+    BUFFER="builtin cd \"$firstdir\"; c ""$@""; "
     logg "$BUFFER"
     eval "$BUFFER"
 }
