@@ -57,7 +57,7 @@
 	tool = vimdiff
 
 [pull]
-	rebase = true
+	rebase = false
 
 [help]
 	autocorrect = 1
