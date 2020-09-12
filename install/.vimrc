@@ -981,8 +981,8 @@ function! TmuxRepeat(type)
                     silent! exec "!tmux send-keys -t vimmers:0. C-c ' bash \"$ZPWR_SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
-                    silent! exec '!tmux send-keys -t vimmer:1. C-c up C-m'
-                    echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
+                    silent! exec "!tmux send-keys -t vimmer:1 C-c ' clear' C-m up up C-m"
+                    "echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
                     redraw!
                 endif
             else
@@ -995,9 +995,8 @@ function! TmuxRepeat(type)
                     silent! exec "!tmux send-keys -t right C-c ' bash \"$ZPWR_SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
-                    silent! exec '!tmux send-keys -t right C-c up C-m'
-                    echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
-                    redraw!
+                    "echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"
+                    call TmuxRepeatGeneric()
                 endif
             endif
             exe "normal! zz"
