@@ -49,7 +49,7 @@ function globalAliasesInit(){
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${ZPWR_TABSTOP}m${ZPWR_TABSTOP}\\x1b[0m"
 
 
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v="| ${=ZPWR_COPY_CMD}"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v="| ${ZPWR_COPY_CMD}"
 }
 
 globalAliasesInit
