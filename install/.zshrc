@@ -600,7 +600,8 @@ setopt glob_dots
 # no glob in all globs then error
 setopt csh_null_glob
 
-setopt no_list_beep
+# silence all bells and beeps
+setopt no_beep
 
 # > file creates file
 # NOT compatible with $(<<EOF) used in comp caches
