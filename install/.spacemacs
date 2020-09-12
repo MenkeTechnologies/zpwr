@@ -1379,6 +1379,8 @@ you should place your code here."
 
     ;;{{{                    MARK:final
         ;;**************************************************************
+    (setq ycmd-server-command (list "python" (file-truename "~/.vim/bundle/YouCompleteMe/third_party/ycmd/ycmd")))
+
     (zpwr/compHook)
 
     (setq origami-fold-style 'triple-braces)
