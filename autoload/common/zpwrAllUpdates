@@ -14,8 +14,8 @@ function ___zpwrAllUpdates(){
     )
 
    zpwr updatedeps
-   zpwr regen
    zpwr updatezinit
+   zpwr regen
    zpwr update
   }
 
