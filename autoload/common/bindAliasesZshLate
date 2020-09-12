@@ -47,7 +47,7 @@ function globalAliasesInit(){
     alias ${ZPWR_GLOBAL_ALIAS_PREFIX}gp="git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push"
     alias ${ZPWR_GLOBAL_ALIAS_PREFIX}grp="git reset --soft $ZPWR_TABSTOP && git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push -f origin $ZPWR_TABSTOP"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${ZPWR_TABSTOP}m${ZPWR_TABSTOP}\\x1b[0m"
-    alias rrd="www 5 'remoteName=origin;output=\$(git log HEAD..\$remoteName/master --oneline); if [[ -n "\$output" ]]; then echo \"\$(date) We have change to \$(git remote -v)\" >&2; git fetch -f --all --prune --tags;git reset --hard \$remoteName/master;$ZPWR_TABSTOP; fi'"
+    alias rrd="www 5 'remoteName=origin;git fetch -f --all --prune --tags;output=\$(git log HEAD..\$remoteName/master --oneline); if [[ -n "\$output" ]]; then echo \"\$(date) We have change to \$(git remote -v)\" >&2; git reset --hard \$remoteName/master;$ZPWR_TABSTOP; fi'"
 
 
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v="| ${ZPWR_COPY_CMD}"

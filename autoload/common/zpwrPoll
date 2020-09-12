@@ -1,0 +1,47 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ___zpwrPoll() {
+
+    if ! isGitDir; then
+        loggNotGit
+        return 1
+    fi
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrrPoll <cmd> <time> <refspec>"
+        return 1
+    fi
+
+    local cmd sleepTime ref remoteName
+
+    cmd="$1"
+    sleepTime="5"
+    ref="origin/master"
+    remoteName=origin
+
+    if [[ -n $2 ]]; then
+        sleepTime="$2"
+    fi
+
+    if [[ -n $3 ]]; then
+        ref="$3"
+        remoteName=${ref%%/*}
+    fi
+
+    while true; do
+        git fetch -f --all --prune --tags &>/dev/null
+        output=$(git log HEAD..$ref --oneline)
+        if [[ -n "$output" ]]; then
+            echo "$(date) We have change to $(git remote -v)"
+            git reset --hard $ref
+            eval "$cmd"
+        fi
+        sleep "$leepTime"
+
+
+    done
+
+
+}
+
+___zpwrPoll "$@"
