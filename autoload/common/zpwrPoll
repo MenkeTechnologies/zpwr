@@ -4,20 +4,20 @@ function ___zpwrPoll() {
 
     if ! isGitDir; then
         loggNotGit
-        return 1
-    fi
-
-    if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrrPoll <cmd> <time> <refspec>"
+        loggErr "usage: zpwrPoll <cmd> <time> <refspec>"
         return 1
     fi
 
     local cmd sleepTime ref remoteName
 
-    cmd="$1"
+    cmd="git log --stat --format=fuller -1"
     sleepTime="1"
     ref="origin/master"
     remoteName=origin
+
+    if [[ -n "$1" ]]; then
+        cmd="$1"
+    fi
 
     if [[ -n "$2" ]]; then
         ref="$2"
