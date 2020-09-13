@@ -207,14 +207,14 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
     if [[ "$manager" == "apt" ]]; then
         ssh -x "$hostname" '
         yes | sudo apt update
-        yes | sudo apt dist-upgrade
         yes | sudo apt-get autoremove
         yes | sudo apt-get clean'
+        #yes | sudo apt dist-upgrade
     elif [[ "$manager" == zypper ]]; then
         ssh -x "$hostname" 'sudo zypper --non-interactive refresh
         sudo zypper --non-interactive update
-        sudo zypper --non-interactive dist-upgrade
         sudo zypper --non-interactive clean -a'
+        #sudo zypper --non-interactive dist-upgrade
     elif [[ "$manager" == dnf ]]; then
         ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'

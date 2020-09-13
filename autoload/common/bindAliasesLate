@@ -202,11 +202,13 @@ function bindAliasesLate(){
             elif exists zypper;then
                 alias api="sudo -E zypper install -y"
                 alias apa="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y"
-                alias apz="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y; u8"
+                alias apz="sudo -E zypper update -y; u8"
+                #alias apz="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y; u8"
             elif exists apt;then
                 alias api="sudo -E apt install -y"
                 alias apa="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean"
-                alias apz="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean; u8"
+                alias apz="sudo -E apt update; sudo -E apt autoremove -y; sudo -E apt clean; u8"
+                #alias apz="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean; u8"
             elif exists yum;then
                 alias api="sudo -E yum install -y"
                 alias apa="sudo -E yum check-update; sudo -E yum upgrade -y "
