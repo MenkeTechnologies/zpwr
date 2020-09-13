@@ -47,6 +47,7 @@ brew cask install java8
 brew cask install karabiner
 brew cask install keyboard-maestro
 brew cask install kicad
+brew cask install kitty
 brew cask install latexit
 brew cask install libreoffice
 brew cask install little-snitch
@@ -80,7 +81,6 @@ brew cask install scenebuilder
 brew cask install skim
 brew cask install skype
 brew cask install slack
-brew cask install soapui
 brew cask install spotify
 brew cask install station
 brew cask install sublime-text

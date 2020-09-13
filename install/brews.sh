@@ -128,6 +128,7 @@ brew install gpgme
 brew install gradle
 brew install grails
 brew install grap
+brew install graphene
 brew install graphicsmagick
 brew install graphite2
 brew install graphviz
@@ -263,6 +264,7 @@ brew install lua@5.1
 brew install luajit
 brew install lz4
 brew install lzo
+brew install macvim
 brew install mad
 brew install mailutils
 brew install makedepend
@@ -367,6 +369,7 @@ brew install qt
 brew install r
 brew install ranger
 brew install rav1e
+brew install re2c
 brew install readline
 brew install reattach-to-user-namespace
 brew install redis
@@ -377,7 +380,6 @@ brew install rsync
 brew install rtmpdump
 brew install rubberband
 brew install ruby
-brew install rust
 brew install rustup-init
 brew install s-lang
 brew install s-search
@@ -412,6 +414,7 @@ brew install sqlite
 brew install srm
 brew install srt
 brew install srtp
+brew install sshfs
 brew install subversion
 brew install swig
 brew install taglib
