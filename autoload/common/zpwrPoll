@@ -37,6 +37,7 @@ function ___zpwrPoll() {
             echo "$(date) We have change to ref '$ref' at $(git remote -v)'"
             git reset --hard $ref
             eval "$cmd"
+            prettyPrint '//////////////////////////////////////////////////////////////'
         fi
         sleep "$sleepTime"
 
