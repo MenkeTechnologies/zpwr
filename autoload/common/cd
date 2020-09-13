@@ -7,7 +7,7 @@ function cd(){
     # bt function name and builtin cd command
     # don't want to recursively call this function
     builtin cd "$@" || return 1
-    if [[ $ZPWR_CD_AUTO_LS == true ]]; then
+    if [[ $ZPWR_AUTO_LS_CD == true ]]; then
         clearList
     fi
 }

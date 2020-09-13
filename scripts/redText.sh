@@ -9,5 +9,5 @@
 
 #loop through stdin and add escape sequences at head and tail of each line
 while read; do
-    echo -e "${ZPWR_RED}$REPLY${ZPWR_RESET}"
+    echo -e "${ZPWR_COLOR_RED}$REPLY${ZPWR_COLOR_RESET}"
 done

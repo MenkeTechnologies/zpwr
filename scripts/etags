@@ -41,8 +41,8 @@ export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'ZPWR_LOG_UNDER_COLOR140,5975
 export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'ZPWR_LOG_QUOTE_COLOR142,6044
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'ZPWR_LOG_DATE_COLOR144,6117
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'ZPWR_LOG_MSG_COLOR146,6190
-export ZPWR_RM_AUTO_LS=trueZPWR_RM_AUTO_LS148,6307
-export ZPWR_CD_AUTO_LS=trueZPWR_CD_AUTO_LS150,6367
+export ZPWR_AUTO_LS_RM=trueZPWR_AUTO_LS_RM148,6307
+export ZPWR_AUTO_LS_CD=trueZPWR_AUTO_LS_CD150,6367
 export ZPWR_ENV="$ZPWR_LOCAL/zpwrEnv"ZPWR_ENV152,6433
 export ZPWR_PROMPT_FILE="$ZPWR/.powerlevel9kconfig.sh"ZPWR_PROMPT_FILE154,6516
 export ZPWR_SCRIPTS="$ZPWR/scripts"ZPWR_SCRIPTS156,6620
@@ -579,9 +579,9 @@ export PERL5LIB="$HOME/perl5/lib/perl5"PERL5LIB154,5758
 export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"NODE_PATH155,5798
 export HISTSIZE=50000HISTSIZE156,5876
 export HISTTIMEFORMAT=' %F %T _ 'HISTTIMEFORMAT157,5898
-export ZPWR_BLUE="\x1b[37;44m"ZPWR_BLUE158,5932
-export ZPWR_RED="\x1b[31m"ZPWR_RED159,5963
-export ZPWR_RESET="\x1b[0m"ZPWR_RESET160,5990
+export ZPWR_COLOR_BLUE="\x1b[37;44m"ZPWR_COLOR_BLUE158,5932
+export ZPWR_COLOR_RED="\x1b[31m"ZPWR_COLOR_RED159,5963
+export ZPWR_COLOR_RESET="\x1b[0m"ZPWR_COLOR_RESET160,5990
 export UMASK=077UMASK161,6018
 export LESS="-M -N -R -K -F -X"LESS162,6035
     export TERM="xterm-256color"TERM164,6093
@@ -1017,12 +1017,12 @@ checkForExistence() {checkForExistence68,1897
 delim=_delim81,2267
 
 /Users/wizard/.zpwr/scripts/blueText.sh,76
-ZPWR_BLUE='\e[37;44m'ZPWR_BLUE10,334
-ZPWR_RESET='\e[0m'ZPWR_RESET11,356
+ZPWR_COLOR_BLUE='\e[37;44m'ZPWR_COLOR_BLUE10,334
+ZPWR_COLOR_RESET='\e[0m'ZPWR_COLOR_RESET11,356
 
 /Users/wizard/.zpwr/scripts/blueUpperText.sh,76
-ZPWR_BLUE='\e[37;44m'ZPWR_BLUE10,348
-ZPWR_RESET='\e[0m'ZPWR_RESET11,370
+ZPWR_COLOR_BLUE='\e[37;44m'ZPWR_COLOR_BLUE10,348
+ZPWR_COLOR_RESET='\e[0m'ZPWR_COLOR_RESET11,370
 
 /Users/wizard/.zpwr/scripts/boiler_gen.py,904
 import osos2,23
@@ -1045,8 +1045,8 @@ valid_framework = get_frame_work(user_framework)valid_framework161,4101
     min_args = 3min_args168,4297
 
 /Users/wizard/.zpwr/scripts/boldText.sh,76
-ZPWR_BLUE='\e[37;44m'ZPWR_BLUE10,326
-ZPWR_RESET='\e[0m'ZPWR_RESET11,348
+ZPWR_COLOR_BLUE='\e[37;44m'ZPWR_COLOR_BLUE10,326
+ZPWR_COLOR_RESET='\e[0m'ZPWR_COLOR_RESET11,348
 
 /Users/wizard/.zpwr/scripts/boxPrint.pl,0
 
@@ -1111,8 +1111,8 @@ weHaveCCZE=noweHaveCCZE22,512
 /Users/wizard/.zpwr/scripts/connectionShower.sh,0
 
 /Users/wizard/.zpwr/scripts/coolFormatter.sh,76
-ZPWR_BLUE='\e[37;44m'ZPWR_BLUE10,313
-ZPWR_RESET='\e[0m'ZPWR_RESET11,335
+ZPWR_COLOR_BLUE='\e[37;44m'ZPWR_COLOR_BLUE10,313
+ZPWR_COLOR_RESET='\e[0m'ZPWR_COLOR_RESET11,335
 
 /Users/wizard/.zpwr/scripts/createScriptButDontOpenSublime.sh,219
 executableScriptsProcessing() {executableScriptsProcessing10,311
@@ -1756,8 +1756,8 @@ pipe=/tmp/testpipepipe10,295
 pipe=$HOME/Desktop/testpipepipe11,314
 
 /Users/wizard/.zpwr/scripts/redText.sh,73
-ZPWR_RED='\e[31;1m'ZPWR_RED10,308
-ZPWR_RESET='\e[0m'ZPWR_RESET11,328
+ZPWR_COLOR_RED='\e[31;1m'ZPWR_COLOR_RED10,308
+ZPWR_COLOR_RESET='\e[0m'ZPWR_COLOR_RESET11,328
 
 /Users/wizard/.zpwr/scripts/regexreplace.pl,31
 sub addToAry {addToAry31,666

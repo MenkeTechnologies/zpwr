@@ -10,7 +10,7 @@
 
 address="pi@$MY_IP:/var/www/html"
 
-printf "${ZPWR_BLUE}"
+printf "${ZPWR_COLOR_BLUE}"
 printf "Uploading $* to $address\n" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
 
 #loop through all arguments and upload with scp recursively to pi server
@@ -18,7 +18,7 @@ printf "Uploading $* to $address\n" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
 w=80
 
 python -c "print('_'*$w)" | lolcat
-printf "${ZPWR_BLUE}"
+printf "${ZPWR_COLOR_BLUE}"
 total=$#
 count=0
 for i in "$@"; do
@@ -31,9 +31,9 @@ for i in "$@"; do
     fi
 done
 
-#decolrize prompt with ZPWR_RESET environment variable
+#decolorize prompt with ZPWR_COLOR_RESET environment variable
 perl -le "print'_'x $w" | lolcat
-printf "$ZPWR_BLUEDone\n${ZPWR_RESET}"
+printf "${ZPWR_COLOR_BLUE}Done\n${ZPWR_COLOR_RESET}"
 
 #if just uploading to website one html file
 if [[ "$#" == 1 && "$1" =~ .*.html ]]; then

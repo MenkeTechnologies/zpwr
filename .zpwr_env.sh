@@ -16,6 +16,10 @@
 # see README.md
 # linux OS auto attach to tmux sessions
 export ZPWR_AUTO_ATTACH=true
+# run ls after rm and other modifying commands such as touch automatically
+export ZPWR_AUTO_LS_RM=true
+# run ls after cd automatically
+export ZPWR_AUTO_LS_CD=true
 # auto select first item of menuselect
 export ZPWR_AUTO_SELECT=true
 # clear and ls before and after banner
@@ -33,6 +37,10 @@ export ZPWR_BAT_THEME="GitHub"
 export ZPWR_CHAR_LOGO="<<)(>>"
 # output is more colorful
 export ZPWR_COLORS=true
+# common colors
+export ZPWR_COLOR_BLUE="\x1b[37;44m"
+export ZPWR_COLOR_RED="\x1b[31m"
+export ZPWR_COLOR_RESET="\x1b[0m"
 # ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
 # the repo name for more zsh compsys completions
@@ -118,17 +126,8 @@ export ZPWR_TMUX_PREFIX_LINUX='C-b'
 export ZPWR_TRACE=false
 # use nvim not vim
 export ZPWR_USE_NEOVIM=true
-# run ls after rm and other modifying commands such as touch automatically
-export ZPWR_RM_AUTO_LS=true
-# run ls after cd automatically
-export ZPWR_CD_AUTO_LS=true
 # delay between shell start and compinit
 export ZPWR_ZINIT_COMPINIT_DELAY=8
-
-# common colors
-export ZPWR_BLUE="\x1b[37;44m"
-export ZPWR_RED="\x1b[31m"
-export ZPWR_RESET="\x1b[0m"
 
 # set to false if this file is sourced during remote execution with no ZPWR env
 test -z $ZPWR_REMOTE && export ZPWR_REMOTE=false

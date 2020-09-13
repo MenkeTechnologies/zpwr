@@ -9,10 +9,10 @@
 
 outputDir="Desktop"
 master="jacobmenke"
-printf "${ZPWR_BLUE}Downloading $*\n"
+printf "${ZPWR_COLOR_BLUE}Downloading $*\n"
 for i in "$@"; do
     scp -P2234 -r "$i" "$master"'@localhost:$HOME/'"$outputDir"
     #if not using reverse port forwarding then ip address must be hardcoded
     #scp -r "$i" $(whoami)@192.168.0.105:~/"$outputDir"
 done
-printf "Done${ZPWR_RESET}\n"
+printf "Done${ZPWR_COLOR_RESET}\n"

@@ -64,8 +64,8 @@
 }
 
 
-@test 'ZPWR_BLUE' {
-    test -n $ZPWR_BLUE
+@test 'ZPWR_COLOR_BLUE' {
+    test -n $ZPWR_COLOR_BLUE
     assert $? equals 0
 }
 

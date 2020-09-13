@@ -392,7 +392,7 @@ function precmd(){
 
     (( $? == 0)) && {
         if [[ "$ZPWR_WILL_CLEAR" == true ]]; then
-            if [[ $ZPWR_RM_AUTO_LS == true ]]; then
+            if [[ $ZPWR_AUTO_LS_RM == true ]]; then
                 clear
                 listNoClear
             fi
