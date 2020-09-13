@@ -181,9 +181,6 @@ function bindAliasesLate(){
             }
         fi
 
-        exists brew && {
-            alias apz="brew update && brew outdated && brew upgrade && brew cleanup; brew cu -ay; u8"
-        }
     else
         # Linux or Unix
         alias ip="grc -c $HOME/conf.ifconfig ip"
@@ -198,21 +195,15 @@ function bindAliasesLate(){
             if exists pacman;then
                 alias api="sudo -E pacman -Sy --noconfirm"
                 alias apa="sudo -E pacman -Syyu --noconfirm --overwrite='*'"
-                alias apz="sudo -E pacman -Syyu --noconfirm --overwrite='*';u8"
             elif exists zypper;then
                 alias api="sudo -E zypper install -y"
                 alias apa="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y"
-                alias apz="sudo -E zypper update -y; u8"
-                #alias apz="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y; u8"
             elif exists apt;then
                 alias api="sudo -E apt install -y"
                 alias apa="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean"
-                alias apz="sudo -E apt update; sudo -E apt autoremove -y; sudo -E apt clean; u8"
-                #alias apz="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean; u8"
             elif exists yum;then
                 alias api="sudo -E yum install -y"
                 alias apa="sudo -E yum check-update; sudo -E yum upgrade -y "
-                alias apz="sudo -E yum check-update; sudo -E yum upgrade -y; u8"
             fi
 
             alias ipt="sudo -E iptables --line-numbers -L"
@@ -240,7 +231,6 @@ function bindAliasesLate(){
         elif [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
                 alias api="sudo -E pkg install -y"
                 alias apa="yes | sudo pkg -E update; sudo -E pkg upgrade -y"
-                alias apz="yes | sudo pkg -E update; sudo -E pkg upgrade -y;u8"
         else
             loggErr "unsupported OS $ZPWR_OS_TYPE"
         fi
