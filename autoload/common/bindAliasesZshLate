@@ -61,6 +61,8 @@ globalAliasesInit
 alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
 alias gac='git add . && git commit -m "'$ZPWR_TABSTOP'"'
 
+unalias zpl
+
 exists zf || alias zf="$ZPWR_REPO_NAME fordir 'isGitDir && { $ZPWR_TABSTOP; }' *"
 exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'isGitDir && { gffa; bk; gla; zp gitclearcache; }' *"
 
