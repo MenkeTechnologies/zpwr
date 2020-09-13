@@ -15,18 +15,19 @@ function ___zpwrPoll() {
     local cmd sleepTime ref remoteName
 
     cmd="$1"
-    sleepTime="5"
+    sleepTime="1"
     ref="origin/master"
     remoteName=origin
 
-    if [[ -n $2 ]]; then
-        sleepTime="$2"
-    fi
-
-    if [[ -n $3 ]]; then
-        ref="$3"
+    if [[ -n "$2" ]]; then
+        ref="$2"
         remoteName=${ref%%/*}
     fi
+
+    if [[ -n "$3" ]]; then
+        sleepTime="$3"
+    fi
+
 
     prettyPrint "Start polling for '$ref' every '$sleepTime' sec with command '$cmd'"
 
