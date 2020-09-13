@@ -28,15 +28,17 @@ function ___zpwrPoll() {
         remoteName=${ref%%/*}
     fi
 
+    prettyPrint "Start polling for '$ref' every '$sleepTime' sec with command '$cmd'"
+
     while true; do
         git fetch -f --all --prune --tags &>/dev/null
         output=$(git log HEAD..$ref --oneline)
         if [[ -n "$output" ]]; then
-            echo "$(date) We have change to $(git remote -v)"
+            echo "$(date) We have change to ref '$ref' at $(git remote -v)'"
             git reset --hard $ref
             eval "$cmd"
         fi
-        sleep "$leepTime"
+        sleep "$sleepTime"
 
 
     done
