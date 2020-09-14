@@ -2,13 +2,19 @@
 # vim: set ft=sh:
 function z(){
 
-    if [[ -z $ZPWR_VARS[zcmd] ]]; then
+    if [[ -z ${ZPWR_VARS[zcmd]} ]]; then
         local zcmd
-        exists zshz && zcmd=zshz || zcmd=_z
-        ZPWR_VARS[zcmd]="$zcmd"
+        if exists zshz; then
+            ZPWR_VARS[zcmd]="zshz"
+        elif exists _z; then
+            ZPWR_VARS[zcmd]="_z 2>&1"
+        else
+            loggErr "ERROR: zshz and _z do not exist."
+            return 1
+        fi
     fi
     # force alias z to zshz not zypper on suse
-    ${=ZPWR_VARS[zcmd]} "$@" 2>&1
+    ${=ZPWR_VARS[zcmd]} "$@"
 
 }
 
