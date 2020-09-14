@@ -16,19 +16,20 @@ function zpwrAttachSetup() {
 
             case $distroName in
                 (debian|raspbian|kali|ubuntu|parrot)
-                    out="$(cat /dev/null | sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}')"
+                    out="$(command cat /dev/null | sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}')"
                     ;;
                 (centos|rhel)
-                    out="$(tail /var/log/messages)"
+                    out="$(command tail /var/log/messages | command grep 'Accepted publickey' | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\d+\s+\w+:(\w+)\s+.*$}')"
                     ;;
                 (*suse*|arch|manjaro*)
-                    out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}' | awk -F: '{print $2}')"
+                    out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\d+\s+\w+:(\w+)\s+.*$}')"
                     ;;
                 (fedora)
-                    out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | tail -1)"
-                    key="$(ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}' | awk -F: '{print $2}')"
+                    out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\d+\s+\w+:(\w+)\s+.*$}')"
                     ;;
                 (*) :
                     ;;
@@ -42,7 +43,7 @@ function zpwrAttachSetup() {
 
         if [[ $mobile == "false" ]]; then
             logg "found '$key' so desktop"
-            out="$(sudo ps -ef |command perl -ne 'print if /\bsshd\b/ and /\bpts\b/ and ! /\bperl\b/')"
+            out="$(sudo ps -ef | command perl -ne 'print if /\bsshd\b/ and /\bpts\b/ and ! /\bperl\b/')"
             logg "sshd and pts: $out"
             num_con="$(echo "$out" | wc -l)"
             logg "num connections: '$num_con'"
