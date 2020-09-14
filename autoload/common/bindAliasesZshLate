@@ -2,6 +2,8 @@
 # vim: set ft=sh:
 function bindAliasesZshLate(){
 
+unalias zpl
+unalias z
 #{{{                    MARK:Suffix aliases
 #**************************************************************
 alias -s txt='vim'
@@ -60,8 +62,6 @@ globalAliasesInit
 #**************************************************************
 alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
 alias gac='git add . && git commit -m "'$ZPWR_TABSTOP'"'
-
-unalias zpl
 
 exists zf || alias zf="$ZPWR_REPO_NAME fordir 'isGitDir && { $ZPWR_TABSTOP; }' *"
 exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'isGitDir && { gffa; bk; gla; zp gitclearcache; }' *"
@@ -159,10 +159,6 @@ alias mmv='noglob zmv -W'
 
 exists thefuck && eval $(thefuck --alias)
 
-local zcmd
-exists zshz && zcmd=zshz || zcmd=_z
-# force alias z to zshz not zypper on suse
-alias z="$zcmd 2>&1"
 alias za=zc-all
 alias zid=zc-id
 alias zls=zc-ls

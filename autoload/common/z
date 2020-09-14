@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function z(){
+
+    if [[ -z $ZPWR_VARS[zcmd] ]]; then
+        local zcmd
+        exists zshz && zcmd=zshz || zcmd=_z
+        ZPWR_VARS[zcmd]="$zcmd"
+    fi
+    # force alias z to zshz not zypper on suse
+    ${=ZPWR_VARS[zcmd]} "$@" 2>&1
+
+}
+
+z "$@"
