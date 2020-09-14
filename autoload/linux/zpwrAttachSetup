@@ -42,7 +42,7 @@ function zpwrAttachSetup() {
 
         if [[ $mobile == "false" ]]; then
             logg "found '$key' so desktop"
-            out="$(command ps -ef |command perl -ne 'print if /\bsshd\b/ and /\bpts\b/ and ! /\bperl\b/')"
+            out="$(sudo command ps -ef |command perl -ne 'print if /\bsshd\b/ and /\bpts\b/ and ! /\bperl\b/')"
             logg "sshd and pts: $out"
             num_con="$(echo "$out" | wc -l)"
             logg "num connections: '$num_con'"
