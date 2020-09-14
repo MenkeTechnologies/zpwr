@@ -177,6 +177,7 @@ ZSH_DISABLE_COMPFIX=true
 #{{{                    MARK:Zinit plugins and snippets
 #**************************************************************
 ZPWR_GH_PLUGINS=(
+    MenkeTechnologies/zsh-z
     MenkeTechnologies/fasd-simple
     MenkeTechnologies/fzf
     MenkeTechnologies/fzf-tab
@@ -194,7 +195,6 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/zsh-travis
     zdharma/zsh-unique-id
     MenkeTechnologies/zsh-very-colorful-manuals
-    MenkeTechnologies/zsh-z
     zdharma/zui
     MenkeTechnologies/zunit
     zdharma/zzcomplete
@@ -405,10 +405,6 @@ for p in $ZPWR_OMZ_PLUGINS; do
     zinit snippet OMZ::plugins/$p
 done
 
-zinit ice lucid nocompile wait atinit='bindForGit'
-zinit load \
-    MenkeTechnologies/forgit
-
 # late GH plugins
 for p in $ZPWR_GH_PLUGINS; do
     zinit ice lucid nocompile wait
@@ -416,6 +412,11 @@ for p in $ZPWR_GH_PLUGINS; do
 done
 
 unset p
+
+
+zinit ice lucid nocompile wait atinit='bindForGit'
+zinit load \
+    MenkeTechnologies/forgit
 
 zinit ice lucid nocompile wait atinit='bindZdharma' atload'bindZdharmaPost'
 zinit load \
