@@ -2,8 +2,8 @@
 # vim: set ft=sh:
 function bindAliasesZshLate(){
 
-unalias zpl
-unalias z
+unalias zpl &>/dev/null
+unalias z &>/dev/null
 #{{{                    MARK:Suffix aliases
 #**************************************************************
 alias -s txt='vim'
