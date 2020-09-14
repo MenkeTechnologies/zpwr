@@ -5,8 +5,10 @@ function zpwrAttachSetup() {
     emulate -L zsh
     setopt nullglob
 
+
     if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
 
+        local mobile out key num_con ret
         mobile=true
         if [[ -f "$HOME/.ssh/authorized_keys" ]]; then
             cat "$HOME/.ssh/authorized_keys" |
@@ -40,7 +42,9 @@ function zpwrAttachSetup() {
 
         if [[ $mobile == "false" ]]; then
             logg "found '$key' so desktop"
-            num_con="$(command ps -ef |command perl -ne 'print if /\bsshd\b/ and /\bpts\b/ and ! /\bperl\b/' | wc -l)"
+            out="$(command ps -ef |command perl -ne 'print if /\bsshd\b/ and /\bpts\b/ and ! /\bperl\b/')"
+            logg "sshd and pts: $out"
+            num_con="$(echo "$out" | wc -l)"
             logg "num connections: '$num_con'"
             if (( $num_con <= 1 )); then
                 logg "no tmux clients"
