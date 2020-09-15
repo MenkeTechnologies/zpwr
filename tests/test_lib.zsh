@@ -8,6 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
+ZPWR="$PWD"
 ZPWR_ENV_FILE="$PWD/.zpwr_env.sh"
 ZPWR_RE_ENV_FILE="$PWD/.zpwr_re_env.sh"
 ALIAS_FILE="$PWD/.shell_aliases_functions.sh"
