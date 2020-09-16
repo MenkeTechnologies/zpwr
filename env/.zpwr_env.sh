@@ -11,7 +11,7 @@
 #{{{                    MARK:Env Variables
 #**************************************************************
 # Global Environment Variables for ZPWR by MenkeTechnologies
-# More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file
+# More Environment Variables in ~/.zpwr/env/.shell_aliases_functions.sh near top of file
 # override in ~/.zpwr/local/.tokens.sh, ~/.zpwr/local is git ignored
 # see README.md
 # linux OS auto attach to tmux sessions

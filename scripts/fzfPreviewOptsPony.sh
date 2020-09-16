@@ -23,7 +23,7 @@ else
     if test -e {}; then
         $ZPWR_FZF_CLEARLIST
     else
-        source $ZPWR/.shell_aliases_functions.sh;
+        source $ZPWR_ALIAS_FILE
         {
             if print -r -- {} | command egrep "\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d"; then
                 whois -- {} | command egrep -q "No (match|whois)" && dig {} || whois -- {};

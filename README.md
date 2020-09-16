@@ -341,7 +341,7 @@ hlissner/zsh-autopair
 These are environment variables set in `~/.zpwr/.zpwr_env.sh` and `~/.zpwr/.zpwr_re_env.sh` which you can override in your `~/.zpwr/local/.tokens.sh` to customize the behavior of the terminal setup.  The file `~/.zpwr/.zpwr_re_env.sh` is reread after user tokens file to update environment variables that depend on previous variables that could change in user token file.
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
-# More Environment Variables in ~/.zpwr/.shell_aliases_functions.sh near top of file
+# More Environment Variables in ~/.zpwr/env/.shell_aliases_functions.sh near top of file
 # override in ~/.zpwr/local/.tokens.sh, ~/.zpwr/local is git ignored
 # see README.md
 # linux OS auto attach to tmux sessions
