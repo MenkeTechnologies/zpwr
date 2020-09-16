@@ -36,8 +36,8 @@ source "$ZPWR_SCRIPTS/crossOSCommands.sh" || {
 }
 
 
-if [[ ! -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-    mkdir -p "$ZPWR_HIDDEN_DIR_TEMP"
+if [[ ! -d "$ZPWR_LOCAL_TEMP" ]]; then
+    mkdir -p "$ZPWR_LOCAL_TEMP"
 fi
 
 #}}}***********************************************************

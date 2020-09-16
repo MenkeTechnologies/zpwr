@@ -36,7 +36,6 @@ ZPWR_ENV="$ZPWR/env"
 ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 ZPWR_VERBS_FILE="$ZPWR/scripts/zpwr.zsh"
-ZPWR_FN_FILE="$ZPWR/scripts/lib.sh"
 ZPWR_AUTOLOAD="$ZPWR/autoload"
 ZPWR_COMPS="$ZPWR/comps"
 TEST_FILE=tests/testfile
@@ -69,10 +68,10 @@ fi
 
 load $ZPWR_VERBS_FILE
 
-if [[ ! -f $ZPWR_FN_FILE ]]; then
-    error "$ZPWR_FN_FILE does not exist"
+if [[ ! -f $ZPWR_LIB ]]; then
+    error "$ZPWR_LIB does not exist"
 fi
 
-load $ZPWR_FN_FILE
+load $ZPWR_LIB
 
 setopt nullglob
