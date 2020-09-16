@@ -4,7 +4,7 @@
 function ___fzf_complete_clearList() {
 
     FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(
-        cat "${ZPWR_ENV}Key.txt" | awk '{print $2}'
+        cat "${ZPWR_LOCAL_ENV}Key.txt" | awk '{print $2}'
     )
 }
 

@@ -4,16 +4,16 @@ function ___fzfEnv(){
 
     local sel
 
-    if [[ ! -s "${ZPWR_ENV}Key.txt" ]]; then
-        loggDebug "regenerating keys for $ZPWR_ENV"
+    if [[ ! -s "${ZPWR_LOCAL_ENV}Key.txt" ]]; then
+        loggDebug "regenerating keys for $ZPWR_LOCAL_ENV"
         regenSearchEnv
     fi
-    if [[ ! -s "${ZPWR_ENV}Value.txt" ]]; then
-        loggDebug "regenerating values for $ZPWR_ENV"
+    if [[ ! -s "${ZPWR_LOCAL_ENV}Value.txt" ]]; then
+        loggDebug "regenerating values for $ZPWR_LOCAL_ENV"
         regenSearchEnv
     fi
 
-    sel=$(cat "${ZPWR_ENV}Key.txt" | awk '{print $2}' |
+    sel=$(cat "${ZPWR_LOCAL_ENV}Key.txt" | awk '{print $2}' |
         eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS" | perl -pe 's@\n@ @g')
     BUFFER="$LBUFFER$sel$RBUFFER"
     CURSOR=$(($#LBUFFER + $#sel))
