@@ -67,6 +67,12 @@ if [[ ! -d $ZPWR ]]; then
     exit 1
 fi
 
+# source common functions
+if ! source common.sh; then
+    echo "Must be in $ZPWR/install directory" >&2
+    exit 1
+fi
+
 if [[ ! -d $ZPWR_LOCAL ]]; then
     echo "Must be in $ZPWR/install directory" >&2
     exit 1
@@ -79,12 +85,6 @@ fi
 
 if ! test -x "$ESCAPE_REMOVER"; then
     echo "why '$ESCAPE_REMOVER' not exe?" >&2
-    exit 1
-fi
-
-# source common functions
-if ! source common.sh; then
-    echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
 
