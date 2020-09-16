@@ -78,16 +78,6 @@ if [[ ! -d $ZPWR_LOCAL ]]; then
     exit 1
 fi
 
-if ! test -f "$ESCAPE_REMOVER"; then
-    echo "where is ESCAPE_REMOVER '$ESCAPE_REMOVER'?" >&2
-    exit 1
-fi
-
-if ! test -x "$ESCAPE_REMOVER"; then
-    echo "why '$ESCAPE_REMOVER' not exe?" >&2
-    exit 1
-fi
-
 if [[ $ZPWR == "$ZPWR_INSTALL" ]]; then
     echo "Must be in $ZPWR/install directory" >&2
     exit 1
@@ -103,6 +93,17 @@ ESCAPE_REMOVER="$ZPWR_SCRIPTS/escapeRemover.pl"
 # the destination directory for zpwr specific installed files
 LOGFILE="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
 LOGFILE_CARGO_YCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
+
+if ! test -f "$ESCAPE_REMOVER"; then
+    echo "where is ESCAPE_REMOVER '$ESCAPE_REMOVER'?" >&2
+    exit 1
+fi
+
+if ! test -x "$ESCAPE_REMOVER"; then
+    echo "why '$ESCAPE_REMOVER' not exe?" >&2
+    exit 1
+fi
+
 
 BACKUP_DIR="$ZPWR_LOCAL/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
