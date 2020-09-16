@@ -52,10 +52,10 @@ test -z $ZINIT_HOME && export ZINIT_HOME="$HOME/.zinit"
 #{{{                    MARK:installer lib fns
 #**************************************************************
 
-if source "$ZPWR_BASE_DIR/.zpwr_env.sh";then
-    echo "loaded $ZPWR_BASE_DIR/.zpwr_env.sh"
+if source "$ZPWR_BASE_DIR/env/.zpwr_env.sh";then
+    echo "loaded $ZPWR_BASE_DIR/env/.zpwr_env.sh"
 else
-    echo "where is ZPWR_BASE_DIR/.zpwr_env.sh '$ZPWR_BASE_DIR/.zpwr_env.sh'?" >&2
+    echo "where is ZPWR_BASE_DIR/env/.zpwr_env.sh '$ZPWR_BASE_DIR/env/.zpwr_env.sh'?" >&2
     exit 1
 fi
 
