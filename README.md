@@ -14,7 +14,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 # Full Installation Instructions to `~/.zpwr`
 
 ```sh
-sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/master/s)"
+sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/master/install/s)"
 ```
 OR
 ```sh
