@@ -17,8 +17,7 @@ declare zpwrBaseDir
 
 VERSION="2.0.0"
 # resolve all symlinks
-ZPWR_INSTALL="$(pwd -P)"
-#normally ~/.zpwr
+ZPWR_PWD="$(pwd -P)"
 #}}}***********************************************************
 
 #{{{                    MARK:Find $ZPWR
@@ -44,6 +43,7 @@ export ZPWR="$zpwrBaseDir"
 #{{{                    MARK:Env vars
 #**************************************************************
 echo "installing to $ZPWR"
+#normally ~/.zpwr
 export ZPWR_ENV="$ZPWR/env"
 export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
@@ -78,7 +78,7 @@ if [[ ! -d $ZPWR_LOCAL ]]; then
     exit 1
 fi
 
-if [[ $ZPWR == "$ZPWR_INSTALL" ]]; then
+if [[ $ZPWR == "$ZPWR_PWD" ]]; then
     echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
