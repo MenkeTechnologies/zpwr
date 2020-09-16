@@ -49,8 +49,9 @@ ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
 ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
 
 echo "installing to $ZPWR"
-export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
+export ZPWR_ENV="$ZPWR/env"
+export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
+export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 
 ESCAPE_REMOVER="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
 # the destination directory for zpwr specific installed files
@@ -105,10 +106,10 @@ if ! source common.sh; then
     exit 1
 fi
 
-BACKUP_DIR="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
+BACKUP_DIR="$ZPWR_INSTALLER_LOCAL/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
 # the destination directory for zpwr specific temp files
-export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_HIDDEN_DIR/.temp"
+export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_INSTALLER_LOCAL/.temp"
 
 exists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
 if [[ -n $vimV ]]; then
@@ -125,8 +126,8 @@ if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
     mkdir -p $ZPWR_INSTALLER_OUTPUT
 fi
 
-if [[ ! -d $ZPWR_HIDDEN_DIR ]]; then
-    mkdir -p $ZPWR_HIDDEN_DIR
+if [[ ! -d $ZPWR_INSTALLER_LOCAL ]]; then
+    mkdir -p $ZPWR_INSTALLER_LOCAL
 fi
 
 if [[ ! -d $ZPWR_HIDDEN_DIR_TEMP ]]; then
