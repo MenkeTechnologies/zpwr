@@ -98,7 +98,7 @@ function bindAliasesLate(){
     #{{{                    MARK:ALIASES for editing config files
     #**************************************************************
     alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
-    alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR_ENV/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null"
+    alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null"
     alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
     alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
     alias tok="builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
