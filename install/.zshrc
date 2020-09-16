@@ -234,6 +234,14 @@ ZPWR_OMZ_PLUGINS=(
     glassfish
     tig
     tmux
+    gradle
+    grails
+)
+
+ZPWR_OMZ_LIBS=(
+    git.zsh
+    directories.zsh
+    grep.zsh
 )
 
 ZPWR_OMZ_COMPS=(
@@ -262,6 +270,17 @@ exists kubectl && ZPWR_GH_PLUGINS+=(MenkeTechnologies/kubectl-aliases nnao45/zsh
 
 exists systemctl && ZPWR_OMZ_PLUGINS+=(systemd)
 exists subl && ZPWR_OMZ_PLUGINS+=(sublime)
+exists svn && ZPWR_OMZ_PLUGINS+=(svn)
+
+exists adb && ZPWR_OMZ_COMPS+=(adb)
+
+if [[ $ZPWR_OS_TYPE == debian ]]; then
+    ZPWR_OMZ_PLUGINS+=(debian)
+elif [[ $ZPWR_OS_TYPE == ubuntu ]]; then
+    ZPWR_OMZ_PLUGINS+=(ubuntu)
+elif [[ $ZPWR_OS_TYPE == darwin ]]; then
+    ZPWR_OMZ_PLUGINS+=(xcode)
+fi
 
 exists rails && ZPWR_OMZ_PLUGINS+=(rails)
 
@@ -399,6 +418,11 @@ for p in $ZPWR_OMZ_COMPS; do
     zinit snippet OMZ::plugins/$p
 done
 
+for p in $ZPWR_OMZ_LIBS; do
+    zinit ice lucid nocompile wait
+    zinit snippet OMZL::$p
+done
+
 # late
 for p in $ZPWR_OMZ_PLUGINS; do
     zinit ice svn lucid nocompile wait
@@ -414,7 +438,7 @@ done
 unset p
 
 
-zinit ice lucid nocompile wait atinit='bindForGit'
+zinit ice lucid nocompile wait atinit='omzOverrides; bindForGit'
 zinit load \
     MenkeTechnologies/forgit
 

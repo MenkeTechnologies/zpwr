@@ -293,9 +293,7 @@ function bindAliasesLate(){
         alias il="idea list"
     }
 
-    alias gcl >/dev/null 2>&1 && {
-        unalias gcl
-    }
+    unalias gcl >/dev/null 2>&1
     #}}}***********************************************************
 }
 bindAliasesLate "$@"
