@@ -2,6 +2,9 @@
 # vim: set ft=sh:
 function __zpwrUninstall() {
 
+    emulate -L zsh
+    setopt nullglob
+
     local dir
 
     echo sudo rm -rf -- \
