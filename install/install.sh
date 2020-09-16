@@ -43,20 +43,11 @@ export ZPWR="$zpwrBaseDir"
 
 #{{{                    MARK:Env vars
 #**************************************************************
-ZPWR_BASE_DIR="$ZPWR"
-ZPWR_BASE_SCRIPTS="$ZPWR_BASE_DIR/scripts"
-ZPWR_INSTALLER_LOCAL="$ZPWR_BASE_DIR/local"
-ZPWR_INSTALLER_OUTPUT="$ZPWR_INSTALLER_LOCAL/installer"
-
 echo "installing to $ZPWR"
 export ZPWR_ENV="$ZPWR/env"
 export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 
-ESCAPE_REMOVER="$ZPWR_BASE_SCRIPTS/escapeRemover.pl"
-# the destination directory for zpwr specific installed files
-LOGFILE="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
-LOGFILE_CARGO_YCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
 
 INSTALL_VIM_SRC=false
 
@@ -70,22 +61,13 @@ export COLUMNS="$(tput cols)"
 
 #{{{                    MARK:sanity
 #**************************************************************
-if [[ $ZPWR_BASE_DIR == "$ZPWR_INSTALL" ]]; then
+
+if [[ ! -d $ZPWR ]]; then
     echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
 
-if [[ ! -d $ZPWR_BASE_SCRIPTS ]]; then
-    echo "Must be in $ZPWR/install directory" >&2
-    exit 1
-fi
-
-if [[ ! -d $ZPWR_BASE_DIR ]]; then
-    echo "Must be in $ZPWR/install directory" >&2
-    exit 1
-fi
-
-if [[ ! -d $ZPWR_INSTALLER_LOCAL ]]; then
+if [[ ! -d $ZPWR_LOCAL ]]; then
     echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
@@ -106,10 +88,24 @@ if ! source common.sh; then
     exit 1
 fi
 
-BACKUP_DIR="$ZPWR_INSTALLER_LOCAL/$USER.rc.bak.$(date +'%m.%d.%Y')"
+if [[ $ZPWR == "$ZPWR_INSTALL" ]]; then
+    echo "Must be in $ZPWR/install directory" >&2
+    exit 1
+fi
 
-# the destination directory for zpwr specific temp files
-export ZPWR_HIDDEN_DIR_TEMP="$ZPWR_INSTALLER_LOCAL/.temp"
+if [[ ! -d $ZPWR_SCRIPTS ]]; then
+    echo "Must be in $ZPWR/install directory" >&2
+    exit 1
+fi
+
+ZPWR_INSTALLER_OUTPUT="$ZPWR_LOCAL/installer"
+ESCAPE_REMOVER="$ZPWR_SCRIPTS/escapeRemover.pl"
+# the destination directory for zpwr specific installed files
+LOGFILE="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
+LOGFILE_CARGO_YCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
+
+BACKUP_DIR="$ZPWR_LOCAL/$USER.rc.bak.$(date +'%m.%d.%Y')"
+
 
 exists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
 if [[ -n $vimV ]]; then
@@ -126,12 +122,13 @@ if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
     mkdir -p $ZPWR_INSTALLER_OUTPUT
 fi
 
-if [[ ! -d $ZPWR_INSTALLER_LOCAL ]]; then
-    mkdir -p $ZPWR_INSTALLER_LOCAL
+if [[ ! -d $ZPWR_LOCAL ]]; then
+    mkdir -p $ZPWR_LOCAL
 fi
 
-if [[ ! -d $ZPWR_HIDDEN_DIR_TEMP ]]; then
-    mkdir -p $ZPWR_HIDDEN_DIR_TEMP
+# the destination directory for zpwr specific temp files
+if [[ ! -d $ZPWR_LOCAL_TEMP ]]; then
+    mkdir -p $ZPWR_LOCAL_TEMP
 fi
 #}}}***********************************************************
 

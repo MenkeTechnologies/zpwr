@@ -25,10 +25,10 @@ if [[ -d "$ZPWR_SCRIPTS" ]]; then
     : ~ZPWR_SCRIPTS
 fi
 
-if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
+if [[ -d "$ZPWR_LOCAL_TEMP" ]]; then
     # shorten to prevail over absolute path in print -p %~
     # must be <= .zpwr/temp
-    hash -d ZPWR_TEMP="$ZPWR_HIDDEN_DIR_TEMP"
+    hash -d ZPWR_TEMP="$ZPWR_LOCAL_TEMP"
 fi
 
 if [[ -d "$ZPWR_LOCAL" ]]; then

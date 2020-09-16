@@ -2,10 +2,10 @@
 # vim: set ft=sh:
 function zlt() {
 
-    if [[ -d "$ZPWR_HIDDEN_DIR_TEMP" ]]; then
-        cd "$ZPWR_HIDDEN_DIR_TEMP"
+    if [[ -d "$ZPWR_LOCAL_TEMP" ]]; then
+        cd "$ZPWR_LOCAL_TEMP"
     else
-        loggErr "ZPWR_HIDDEN_DIR_TEMP '$ZPWR_HIDDEN_DIR_TEMP' is not a dir."
+        loggErr "ZPWR_LOCAL_TEMP '$ZPWR_LOCAL_TEMP' is not a dir."
     fi
 
 }

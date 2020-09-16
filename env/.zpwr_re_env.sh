@@ -112,7 +112,7 @@ evalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/tmux" "$ZPWR"
 # zpwr tmux git ignored files
 evalIfNeeded ZPWR_TMUX_LOCAL "$ZPWR_TMUX_LOCAL" "$ZPWR_TMUX/local" "$ZPWR_TMUX"
 # the base dir for zpwr temp
-evalIfNeeded ZPWR_HIDDEN_DIR_TEMP "$ZPWR_HIDDEN_DIR_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_LOCAL"
+evalIfNeeded ZPWR_LOCAL_TEMP "$ZPWR_LOCAL_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_LOCAL"
 # the path to a lock file (semaphore) for zpwr
 evalIfNeeded ZPWR_LOCK_FILE "$ZPWR_LOCK_FILE" "$ZPWR_LOCAL/.lock" "$ZPWR_LOCAL"
 # cache file for all zpwr env lookups
@@ -146,13 +146,13 @@ evalIfNeeded ZPWR_ENV_KEY_FILE "$ZPWR_ENV_KEY_FILE" "${ZPWR_LOCAL_ENV}Key.txt" "
 # cache of env values
 evalIfNeeded ZPWR_ENV_VALUE_FILE "$ZPWR_ENV_VALUE_FILE" "${ZPWR_LOCAL_ENV}Value.txt" "$ZPWR_LOCAL_ENV"
 # temp files
-evalIfNeeded ZPWR_TEMPFILE "$ZPWR_TEMPFILE" "$ZPWR_HIDDEN_DIR_TEMP/.temp$$-$USER" "$ZPWR_HIDDEN_DIR_TEMP" "$USER"
-evalIfNeeded ZPWR_TEMPFILE1 "$ZPWR_TEMPFILE1" "$ZPWR_HIDDEN_DIR_TEMP/.temp$$-1$USER" "$ZPWR_HIDDEN_DIR_TEMP" "$USER"
-evalIfNeeded ZPWR_TEMPFILE2 "$ZPWR_TEMPFILE2" "$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER" "$ZPWR_HIDDEN_DIR_TEMP" "$USER"
-evalIfNeeded ZPWR_TEMPFILE3 "$ZPWR_TEMPFILE3" "$ZPWR_HIDDEN_DIR_TEMP/.temp$$-3$USER" "$ZPWR_HIDDEN_DIR_TEMP" "$USER"
-evalIfNeeded ZPWR_TEMPFILE4 "$ZPWR_TEMPFILE4" "$ZPWR_HIDDEN_DIR_TEMP/.temp$$-4$USER" "$ZPWR_HIDDEN_DIR_TEMP" "$USER"
+evalIfNeeded ZPWR_TEMPFILE "$ZPWR_TEMPFILE" "$ZPWR_LOCAL_TEMP/.temp$$-$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+evalIfNeeded ZPWR_TEMPFILE1 "$ZPWR_TEMPFILE1" "$ZPWR_LOCAL_TEMP/.temp$$-1$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+evalIfNeeded ZPWR_TEMPFILE2 "$ZPWR_TEMPFILE2" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+evalIfNeeded ZPWR_TEMPFILE3 "$ZPWR_TEMPFILE3" "$ZPWR_LOCAL_TEMP/.temp$$-3$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+evalIfNeeded ZPWR_TEMPFILE4 "$ZPWR_TEMPFILE4" "$ZPWR_LOCAL_TEMP/.temp$$-4$USER" "$ZPWR_LOCAL_TEMP" "$USER"
 # SQL temp files for use with learning collection
-evalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_HIDDEN_DIR_TEMP/.temp$$-2$USER.sql" "$ZPWR_HIDDEN_DIR_TEMP" "$USER"
+evalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER.sql" "$ZPWR_LOCAL_TEMP" "$USER"
 # remove all files in these dirs, modify this in your tokens file
 # common dirs
 evalIfNeeded ZPWR_D "$ZPWR_D" "$HOME/Desktop" "$HOME"
