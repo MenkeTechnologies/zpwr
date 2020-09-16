@@ -419,8 +419,8 @@ for p in $ZPWR_OMZ_COMPS; do
 done
 
 for p in $ZPWR_OMZ_LIBS; do
-    zinit ice lucid nocompile wait
-    zinit snippet OMZL::$p
+    zinit ice lucid nocompile wait atload='omzOverrides'
+    zinit snippet OMZ::lib/$p
 done
 
 # late
@@ -438,7 +438,7 @@ done
 unset p
 
 
-zinit ice lucid nocompile wait atinit='omzOverrides; bindForGit'
+zinit ice lucid nocompile wait atinit='bindForGit'
 zinit load \
     MenkeTechnologies/forgit
 

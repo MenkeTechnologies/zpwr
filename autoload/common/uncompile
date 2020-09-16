@@ -33,6 +33,7 @@ function uncompile(){
         "$ZSH_CUSTOM/themes/"*/*.zsh-theme
         "$ZSH_CUSTOM/lib/"*.zsh
         "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.zsh
+        "$ZSH_CUSTOM/snippets/OMZ::lib/"*/*.zsh
         "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.plugin.zsh
     )
 
