@@ -556,7 +556,7 @@ evalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB
 ```
 
 ## Tests
-You can run all the unit tests via `zunit --verbose $ZPWR/tests/*.zsh` while in `~/.zpwr` directory
+You can run all the unit tests via `zunit --verbose $ZPWR/tests/*.zsh`.
 
 There is also `zpwr tests` or the alias `tru` to run the tests.
 ```sh

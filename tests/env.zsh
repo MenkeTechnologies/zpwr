@@ -46,6 +46,42 @@
     assert $? equals 0
 }
 
+@test 'ZPWR_ENV_FILE' {
+
+    test -n $ZPWR_ENV_FILE
+    assert $? equals 0
+}
+
+@test 'ZPWR_RE_ENV_FILE' {
+
+    test -n $ZPWR_RE_ENV_FILE
+    assert $? equals 0
+}
+
+@test 'ZPWR_EXPAND' {
+
+    test -n $ZPWR_EXPAND
+    assert $? equals 0
+}
+
+@test 'ZPWR_EXPAND_NATIVE' {
+
+    test -n $ZPWR_EXPAND_NATIVE
+    assert $? equals 0
+}
+
+@test 'ZPWR_LIB_INIT' {
+
+    test -n $ZPWR_LIB_INIT
+    assert $? equals 0
+}
+
+@test 'ZPWR_LIB' {
+
+    test -n $ZPWR_LIB
+    assert $? equals 0
+}
+
 @test 'ZPWR_FZF' {
 
     run echo $ZPWR_FZF | grep fzf
@@ -104,7 +140,7 @@
     assert $? equals 0
 }
 
-@test 'is a git dir message' {
+@test 'is a git dir message' 
     run isGitDirMessage
     assert $state equals 0
     assert "$output" is_empty

@@ -8,14 +8,37 @@
 ##### Notes:
 #}}}***********************************************************
 
-ZPWR="$PWD"
-ZPWR_ENV_FILE="$PWD/.zpwr_env.sh"
-ZPWR_RE_ENV_FILE="$PWD/.zpwr_re_env.sh"
-ALIAS_FILE="$PWD/.shell_aliases_functions.sh"
-ZPWR_VERBS_FILE="$PWD/scripts/zpwr.zsh"
-ZPWR_FN_FILE="$PWD/scripts/lib.sh"
-ZPWR_AUTOLOAD="$PWD/autoload"
-ZPWR_COMPS="$PWD/comps"
+0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+0="${${(M)0:#/*}:-$ZPWR/$0}"
+zpwrBaseDir="${0:A}"
+
+while [[ ! -f "$zpwrBaseDir/.zpwr_root" ]]; do
+    zpwrBaseDir="${zpwrBaseDir:h}"
+    if [[ "$zpwrBaseDir" == / ]]; then
+        echo "Could not find .zpwr_root file up the directory tree." >&2
+        exit 1
+    fi
+done
+
+if ! source "$zpwrBaseDir/scripts/init.sh" "$zpwrBaseDir"; then
+    echo "Could not source zpwrBaseDir '$zpwrBaseDir/scripts/init.sh'."
+    exit 1
+fi
+ZPWR="$zpwrBaseDir"
+unset zpwrBaseDir
+
+if [[ "$PWD" != "$ZPWR" ]]; then
+    #echo "You are not in $ZPWR. Forced to cd $ZPWR"
+    cd "$ZPWR"
+fi
+
+ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
+ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
+ALIAS_FILE="$ZPWR/.shell_aliases_functions.sh"
+ZPWR_VERBS_FILE="$ZPWR/scripts/zpwr.zsh"
+ZPWR_FN_FILE="$ZPWR/scripts/lib.sh"
+ZPWR_AUTOLOAD="$ZPWR/autoload"
+ZPWR_COMPS="$ZPWR/comps"
 TEST_FILE=tests/testfile
 TOKENS_FILE=local/.tokens.sh
 
