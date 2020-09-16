@@ -50,8 +50,8 @@ cat<<EOF
 line={};
 orig={};
 line=\$(echo \$line| perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
-cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")
-file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")
+cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV_KEY_FILE} | awk "{print \\\$1}")
+file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV_KEY_FILE} | awk "{print \\\$2}")
 
 if [[ \$ZPWR_DEBUG == true ]]; then
     echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
@@ -88,24 +88,24 @@ esac
 {
 case \$cmdType in
     (alias)
-        command grep -m1 -Fa "alias \$file=" "${ZPWR_ENV}Value.txt"
+        command grep -m1 -Fa "alias \$file=" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (param)
-        command perl -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or m{^======\$} ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} and ! m{^======\$} ) ) } for @a; }" "${ZPWR_ENV}Value.txt"
+        command perl -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or m{^======\$} ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} and ! m{^======\$} ) ) } for @a; }" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (builtin)
-        command grep -m1 -Fa "\$file" | grep -F "is a shell builtin" "${ZPWR_ENV}Value.txt"
+        command grep -m1 -Fa "\$file" | grep -F "is a shell builtin" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (resword)
-        command grep -m1 -Fa "\$file" | grep -F "is a reserved word" "${ZPWR_ENV}Value.txt"
+        command grep -m1 -Fa "\$file" | grep -F "is a reserved word" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (func)
         file=\$(echo \$file| perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
         if [[ \$ZPWR_DEBUG == true ]]; then
-            echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
+            echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> "$ZPWR_LOGFILE"
         fi
-        command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV}Value.txt"
-        command perl -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV}Value.txt"
+        command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV_VALUE_FILE}"
+        command perl -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (command)
         if test -f \$file;then
