@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
 ##### Author: JACOBMENKE
@@ -60,6 +60,7 @@ if exists gtags; then
     command rm GPATH GRTAGS GTAGS 2>/dev/null
     for file in \
         "$ZPWR/"* \
+        "$ZPWR_ENV/"* \
         "$ZPWR_INSTALL/"* \
         "$ZPWR_AUTOLOAD_LINUX/"* "$ZPWR_AUTOLOAD_DARWIN/"* \
         "$ZPWR_AUTOLOAD_SYSTEMCTL/"* "$ZPWR_AUTOLOAD_COMMON/"* \
@@ -120,7 +121,7 @@ cp "$ZPWR_DIR_INSTALL/.zshrc" "$tutorialDir/zsh"
 logg "Copying vimrc"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$tutorialDir/vim"
 logg "Copying minimal minvimrc"
-cp "$ZPWR/.minvimrc" "$tutorialDir/vim"
+cp "$ZPWR_ENV/.minvimrc" "$tutorialDir/vim"
 
 logg "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
@@ -133,8 +134,8 @@ rm -rf "$tutorialDir/tmux/"*
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$ZPWR_TMUX/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
-logg "Copying shell_aliases_functions to $tutorialDir"
-cp "$ZPWR/.shell_aliases_functions.sh" "$tutorialDir/aliases"
+logg "Copying shell_aliases_functions $ZPWR_ALIAS_FILE to $tutorialDir"
+cp "$ZPWR_ALIAS_FILE" "$tutorialDir/aliases"
 
 logg "Copying shell scripts"
 #clear out old scripts, dbl quotes escape asterisk
@@ -165,7 +166,7 @@ cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
 logg "Copying powerlevel config"
-cp "$ZPWR/.powerlevel9kconfig.sh" "$tutorialDir"
+cp "$ZPWR_PROMPT_FILE" "$tutorialDir"
 
 #logg "Copying vim plugins"
 
@@ -207,12 +208,12 @@ dotdir="$websiteDir/downloads/dotfiles"
 logg "Copying config files to websiteDir"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$dotdir/.."
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir/.."
-cp "$ZPWR/.shell_aliases_functions.sh" "$dotdir/.."
+cp "$ZPWR_ALIAS_FILE" "$dotdir/.."
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$dotdir/.."
 
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$dotdir"
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir"
-cp "$ZPWR/.shell_aliases_functions.sh" "$dotdir"
+cp "$ZPWR_ALIAS_FILE" "$dotdir"
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$dotdir"
 
 logg "Copying scripts to $websiteDir"

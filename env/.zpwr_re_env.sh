@@ -81,7 +81,7 @@ evalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/fzf" "$ZSH"
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
 # alias and funtion file bash compatible
-evalIfNeeded ZPWR_ALIAS_FILE "$ZPWR_ALIAS_FILE" "$ZPWR/.shell_aliases_functions.sh" "$ZPWR"
+evalIfNeeded ZPWR_ALIAS_FILE "$ZPWR_ALIAS_FILE" "$ZPWR_ENV/.shell_aliases_functions.sh" "$ZPWR_ENV"
 # autoloaded non completion functions
 evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD" "$ZPWR/autoload" "$ZPWR"
 # autoloaded common non completion functions
@@ -116,9 +116,9 @@ evalIfNeeded ZPWR_HIDDEN_DIR_TEMP "$ZPWR_HIDDEN_DIR_TEMP" "$ZPWR_LOCAL/.temp" "$
 # the path to a lock file (semaphore) for zpwr
 evalIfNeeded ZPWR_LOCK_FILE "$ZPWR_LOCK_FILE" "$ZPWR_LOCAL/.lock" "$ZPWR_LOCAL"
 # cache file for all zpwr env lookups
-evalIfNeeded ZPWR_ENV "$ZPWR_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL"
+evalIfNeeded ZPWR_LOCAL_ENV "$ZPWR_LOCAL_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL"
 # forked powerlevel9k config file for PROMPT
-evalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR/.powerlevel9kconfig.sh" "$ZPWR"
+evalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.powerlevel9kconfig.sh" "$ZPWR_ENV"
 # the location of associated interpreted scripts
 evalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
 # the location of macOS only associated interpreted scripts
@@ -142,9 +142,9 @@ evalIfNeeded ZPWR_ALL_GIT_DIRS "$ZPWR_ALL_GIT_DIRS" "$ZPWR_LOCAL/zpwrGitDirs.txt
 # log file
 evalIfNeeded ZPWR_LOGFILE "$ZPWR_LOGFILE" "$ZPWR_LOCAL/zpwrLog.txt" "$ZPWR_LOCAL"
 # cache of env keys
-evalIfNeeded ZPWR_ENV_KEY_FILE "$ZPWR_ENV_KEY_FILE" "${ZPWR_ENV}Key.txt" "$ZPWR_ENV"
+evalIfNeeded ZPWR_ENV_KEY_FILE "$ZPWR_ENV_KEY_FILE" "${ZPWR_LOCAL_ENV}Key.txt" "$ZPWR_LOCAL_ENV"
 # cache of env values
-evalIfNeeded ZPWR_ENV_VALUE_FILE "$ZPWR_ENV_VALUE_FILE" "${ZPWR_ENV}Value.txt" "$ZPWR_ENV"
+evalIfNeeded ZPWR_ENV_VALUE_FILE "$ZPWR_ENV_VALUE_FILE" "${ZPWR_LOCAL_ENV}Value.txt" "$ZPWR_LOCAL_ENV"
 # temp files
 evalIfNeeded ZPWR_TEMPFILE "$ZPWR_TEMPFILE" "$ZPWR_HIDDEN_DIR_TEMP/.temp$$-$USER" "$ZPWR_HIDDEN_DIR_TEMP" "$USER"
 evalIfNeeded ZPWR_TEMPFILE1 "$ZPWR_TEMPFILE1" "$ZPWR_HIDDEN_DIR_TEMP/.temp$$-1$USER" "$ZPWR_HIDDEN_DIR_TEMP" "$USER"

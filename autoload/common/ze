@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ze() {
+
+    if [[ -d "$ZPWR_ENV" ]]; then
+        cd "$ZPWR_ENV"
+    else
+        loggErr "ZPWR_ENV '$ZPWR_ENV' is not a dir."
+    fi
+
+}
+
+ze "$@"

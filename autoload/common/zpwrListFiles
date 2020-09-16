@@ -1,10 +1,11 @@
 command ls "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
+    "$ZPWR_ENV/"*.{sh,py,zsh,pl} \
     "$ZPWR/"*.md \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/tmux-"* \
-    "$ZPWR/"{.minvimrc,.mininit.vim} \
+    "$ZPWR_ENV/"{.minvimrc,.mininit.vim} \
     "$ZPWR_INSTALL/conf."* \
     "$ZPWR_INSTALL/"*.sh \
     "$ZPWR_INSTALL/"*.service \
@@ -12,4 +13,5 @@ command ls "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} \
     "$ZPWR_AUTOLOAD/"*/*(.N) \
-    "$ZPWR_COMPS/"**/*(.N)
+    "$ZPWR_COMPS/"**/*(.N) \
+    "$ZPWR_TEST/"**/*(.N)

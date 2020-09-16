@@ -11,14 +11,14 @@ function bindAliasesLate(){
                 alias vi='nvim'
                 alias vv='nvim'
                 alias vim='nvim'
-                alias vm="nvim -u $ZPWR/.mininit.vim"
+                alias vm="nvim -u $ZPWR_ENV/.mininit.vim"
                 alias sv='sudo -E nvim'
             else
                 if commandExists vim; then
                     alias v=vim
                     alias vi=vim
                     alias vv=vim
-                    alias vm="vim -u $ZPWR/.minvimrc"
+                    alias vm="vim -u $ZPWR_ENV/.minvimrc"
                     alias sv='sudo -E vim'
                 fi
             fi
@@ -27,7 +27,7 @@ function bindAliasesLate(){
                 alias v=vim
                 alias vi=vim
                 alias vv=vim
-                alias vm="vim -u $ZPWR/.minvimrc"
+                alias vm="vim -u $ZPWR_ENV/.minvimrc"
                 alias sv='sudo -E vim'
             fi
         fi
@@ -98,13 +98,13 @@ function bindAliasesLate(){
     #{{{                    MARK:ALIASES for editing config files
     #**************************************************************
     alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
-    alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null"
+    alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR_ENV/.shell_aliases_functions.sh; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null"
     alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
     alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
     alias tok="builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
-    alias conf="builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR/.tmux.conf $ZPWR/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_TOKEN_PRE $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
+    alias conf="builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_ENV/.minvimrc;clearList;isGitDir && git diff HEAD"
     alias etok="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
-    alias econf="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR/.shell_aliases_functions.sh $ZPWR_TMUX/*(.) $ZPWR/.powerlevel9kconfig.sh $ZPWR_TOKEN_PRE $ZPWR/.minvimrc;clearList;isGitDir && git diff HEAD"
+    alias econf="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_ENV/.minvimrc;clearList;isGitDir && git diff HEAD"
     alias zpt="builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;clearList;isGitDir && git diff HEAD"
     #}}}***********************************************************
 
@@ -175,7 +175,7 @@ function bindAliasesLate(){
                     alias v='mvim -v'
                     alias vi='mvim -v'
                     alias vim='mvim -v'
-                    alias vm="mvim -v -u $ZPWR/.minvimrc"
+                    alias vm="mvim -v -u $ZPWR_ENV/.minvimrc"
                     alias sv='sudo -E mvim -v'
                 fi
             }

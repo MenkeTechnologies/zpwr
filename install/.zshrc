@@ -88,9 +88,10 @@ zpwrDedupPaths
 0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
 0="${${(M)0:#/*}:-$PWD/$0}"
 export ZPWR="${0:A:h:h}"
+export ZPWR_ENV="$ZPWR/env"
 
-export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
+export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
+export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 
 # map to hold global data between scripts
 declare -Ag ZPWR_VARS

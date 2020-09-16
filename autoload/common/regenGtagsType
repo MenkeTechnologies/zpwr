@@ -17,6 +17,7 @@ function ___regenGtagsType(){
         command rm GPATH GRTAGS GTAGS 2>/dev/null
         for file in \
             "$ZPWR/"* \
+            "$ZPWR_ENV/".*.sh \
             "$ZPWR_INSTALL/"* \
             "$ZPWR_AUTOLOAD_LINUX/"* "$ZPWR_AUTOLOAD_DARWIN/"* \
             "$ZPWR_AUTOLOAD_SYSTEMCTL/"* "$ZPWR_AUTOLOAD_COMMON/"* \

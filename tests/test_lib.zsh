@@ -32,9 +32,9 @@ if [[ "$PWD" != "$ZPWR" ]]; then
     cd "$ZPWR"
 fi
 
-ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
-ALIAS_FILE="$ZPWR/.shell_aliases_functions.sh"
+ZPWR_ENV="$ZPWR/env"
+ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
+ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 ZPWR_VERBS_FILE="$ZPWR/scripts/zpwr.zsh"
 ZPWR_FN_FILE="$ZPWR/scripts/lib.sh"
 ZPWR_AUTOLOAD="$ZPWR/autoload"
@@ -57,11 +57,11 @@ fi
 
 load $ZPWR_RE_ENV_FILE
 
-if [[ ! -f $ALIAS_FILE ]]; then
-    error "$ALIAS_FILE does not exist"
+if [[ ! -f $ZPWR_ALIAS_FILE ]]; then
+    error "$ZPWR_ALIAS_FILE does not exist"
 fi
 
-load $ALIAS_FILE
+load $ZPWR_ALIAS_FILE
 
 if [[ ! -f $ZPWR_VERBS_FILE ]]; then
     error "$ZPWR_VERBS_FILE does not exist"

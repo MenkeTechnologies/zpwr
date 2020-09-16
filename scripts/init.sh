@@ -14,8 +14,9 @@ if ! type -- "exists" >/dev/null 2>&1;then
     else
         export ZPWR="$1"
     fi
-    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/.zpwr_env.sh"
-    test -z "$ZPWR_RE_ENV_FILE" && export ZPWR_RE_ENV_FILE="$ZPWR/.zpwr_re_env.sh"
+    test -z "$ZPWR_ENV" && export ZPWR_ENV="$ZPWR/env"
+    test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
+    test -z "$ZPWR_RE_ENV_FILE" && export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 
     if [[ -z "$ZPWR_LIB" ]]; then
         if source "$ZPWR_ENV_FILE"; then

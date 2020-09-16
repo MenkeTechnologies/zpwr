@@ -12,32 +12,45 @@
     load "test_lib.zsh"
 }
 
-@test '.zpwr.env.sh bash syntax check' {
-	test -f .zpwr_env.sh
-	run bash -n .zpwr_env.sh
+@test '$ZPWR_ENV/.zpwr_env.sh bash syntax check' {
+	test -f $ZPWR_ENV/.zpwr_env.sh
+	run bash -n $ZPWR_ENV/.zpwr_env.sh
     assert $state equals 0
 }
 
-@test '.zpwr.env.sh zsh syntax check' {
-	test -f .zpwr_env.sh
-	run zsh -n .zpwr_env.sh
+@test '$ZPWR_ENV/.zpwr_env.sh zsh syntax check' {
+	test -f $ZPWR_ENV/.zpwr_env.sh
+	run zsh -n $ZPWR_ENV/.zpwr_env.sh
     assert $state equals 0
 }
 
-@test '.powerlevel9kconfig.sh zsh syntax check' {
-	test -f .powerlevel9kconfig.sh
-	run zsh -n .powerlevel9kconfig.sh
+@test '$ZPWR_ENV/.zpwr_re_env.sh bash syntax check' {
+	test -f $ZPWR_ENV/.zpwr_re_env.sh
+	run bash -n $ZPWR_ENV/.zpwr_re_env.sh
+    assert $state equals 0
+}
+
+@test '$ZPWR_ENV/.zpwr_re_env.sh zsh syntax check' {
+	test -f $ZPWR_ENV/.zpwr_re_env.sh
+	run zsh -n $ZPWR_ENV/.zpwr_re_env.sh
+    assert $state equals 0
+}
+
+@test '$ZPWR_PROMPT_FILE zsh syntax check' {
+	test -f $ZPWR_PROMPT_FILE
+	run zsh $ZPWR_PROMPT_FILE
+    assert $state equals 0
+}
+
+@test '$ZPWR_PROMPT_FILE bash syntax check' {
+	test -f $ZPWR_PROMPT_FILE
+	run bash -n $ZPWR_PROMPT_FILE
     assert $state equals 0
 }
 
 @test '.tmux/google.sh bash syntax check' {
 	test -f .tmux/google.sh
 	run bash -n .tmux/google.sh
-    assert $state equals 0
-}
-@test '.powerlevel9kconfig.sh bash syntax check' {
-	test -f .powerlevel9kconfig.sh
-	run bash -n .powerlevel9kconfig.sh
     assert $state equals 0
 }
 
@@ -56,7 +69,12 @@
 }
 
 @test 'scripts bash alias file syntax check' {
-	run bash -n .shell_aliases_functions.sh
+	run bash -n "$ZPWR_ALIAS_FILE"
+    assert $state equals 0
+}
+
+@test 'shell alias syntax check' {
+	run zsh -n "$ZPWR_ALIAS_FILE"
     assert $state equals 0
 }
 
@@ -78,7 +96,7 @@
        skip "$- must be interactive term"
     fi
 
-    run vim -u NONE -c 'try | source .minvimrc | catch | cq | endtry | q';
+    run vim -u NONE -c 'try | source env/.minvimrc | catch | cq | endtry | q';
     assert $state equals 0
 }
 
@@ -121,8 +139,4 @@
     assert $? equals 0
 }
 
-@test 'shell alias syntax check' {
-	run zsh -n .shell_aliases_functions.sh
-    assert $state equals 0
-}
 
