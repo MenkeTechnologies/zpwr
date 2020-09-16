@@ -25,8 +25,8 @@ Zinit will install plugins on first zsh after install.
 
 ## Full Installation Instructions to `$ZPWR`
 To install to a custom directory, clone the project to custom directory ands start the installer.  ZPWR will pick up its location and export ZPWR to that directory.
-This also means you can move ZPWR after install after updating the sym links that are in $HOME.  First `export ZPWR_INSTALL=<mydirectory>/install` in current shell.  Replace mydirectory with new install dir and keep /install.
-Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory.  Then exec a new zsh and all environment variables will be set accordingly.
+This also means you can move ZPWR after install after updating the sym links that are in `$HOME`.  First `export ZPWR_INSTALL=<mydirectory>/install` in current shell.  Replace `<mydirectory>` with your new install dir and keep `/install` in the export.
+Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
 ## ZPWR Features
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
@@ -558,7 +558,7 @@ evalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB
 ## Tests
 You can run all the unit tests via `zunit --verbose $ZPWR/tests/*.zsh`.
 
-There is also `zpwr tests` or the alias `tru` to run the tests.
+There is also `zpwr tests` or the alias `tru` (tests run) to run the tests.
 ```sh
 exists zunit && {
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
