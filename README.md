@@ -287,7 +287,7 @@ ZPWR_GH_PLUGINS=(plug1 plug2)
 
 Alternatively, change these env vars to false in `~/.zpwr/local/.tokens.sh`.  The first controls all expansion in any position.
 The second variable controls expansion in second position.  For example with sudo/zpwr/env in the first position and the alias to expand in the second position on the command line.
-> ~/.zpwr/.zpwr_env.sh
+> ~/.zpwr/env/.zpwr_env.sh
 ```sh
 # aliases expand in first position
 export ZPWR_EXPAND=true
@@ -338,7 +338,7 @@ hlissner/zsh-autopair
 ```
 
 ## Environment Variables
-These are environment variables set in `~/.zpwr/.zpwr_env.sh` and `~/.zpwr/.zpwr_re_env.sh` which you can override in your `~/.zpwr/local/.tokens.sh` to customize the behavior of the terminal setup.  The file `~/.zpwr/.zpwr_re_env.sh` is reread after user tokens file to update environment variables that depend on previous variables that could change in user token file.
+These are environment variables set in `~/.zpwr/env/.zpwr_env.sh` and `~/.zpwr/env/.zpwr_re_env.sh` which you can override in your `~/.zpwr/local/.tokens.sh` to customize the behavior of the terminal setup.  The file `~/.zpwr/env/.zpwr_re_env.sh` is reread after user tokens file to update environment variables that depend on previous variables that could change in user token file.
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
 # More Environment Variables in ~/.zpwr/env/.shell_aliases_functions.sh near top of file
