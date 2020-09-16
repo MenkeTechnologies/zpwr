@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: MenkeTechnologies
+##### GitHub: https://github.com/MenkeTechnologies
+##### Date: Wed Sep 16 02:36:02 EDT 2020
+##### Purpose: bash script to install zpwr
+##### Notes: run with sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/master/s)"
+#}}}***********************************************************
+
+git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh
