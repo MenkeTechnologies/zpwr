@@ -48,9 +48,9 @@
     assert $state equals 0
 }
 
-@test '.tmux/google.sh bash syntax check' {
-	test -f .tmux/google.sh
-	run bash -n .tmux/google.sh
+@test '$ZPWR_TMUX/google.sh bash syntax check' {
+	test -f "$ZPWR_TMUX/google.sh"
+	run bash -n "$ZPWR_TMUX/google.sh"
     assert $state equals 0
 }
 

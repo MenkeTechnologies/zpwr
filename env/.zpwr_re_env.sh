@@ -108,7 +108,7 @@ evalIfNeeded ZPWR_TEST "$ZPWR_TEST" "$ZPWR/tests" "$ZPWR"
 # zpwr install files
 evalIfNeeded ZPWR_INSTALL "$ZPWR_INSTALL" "$ZPWR/install" "$ZPWR"
 # zpwr tmux config files
-evalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/.tmux" "$ZPWR"
+evalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/tmux" "$ZPWR"
 # zpwr tmux git ignored files
 evalIfNeeded ZPWR_TMUX_LOCAL "$ZPWR_TMUX_LOCAL" "$ZPWR_TMUX/local" "$ZPWR_TMUX"
 # the base dir for zpwr temp

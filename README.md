@@ -311,7 +311,7 @@ File ending of currently edited file in vim determines the interpreter used by t
 
 ## Tmux Main Window
 The main window show in the screenshots is started by Prefix-D in an empty tmux window.  This sources a tmux script named control-window.
-Alternatively you could invoke the script by Prefix-: `source-file ~/.zpwr/.tmux/control-window` or in the terminal with `tmux source-file ~/.zpwr/.tmux/control-window` in an empty tmux window.
+Alternatively you could invoke the script by Prefix-: `source-file ~/.zpwr/tmux/control-window` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window` in an empty tmux window.
 
 ## Personal Config
 Startup shell files will source `~/.zpwr/local/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any only features like `isZsh && myZshConfig`.
@@ -509,7 +509,7 @@ evalIfNeeded ZPWR_TEST "$ZPWR_TEST" "$ZPWR/tests" "$ZPWR"
 # zpwr install files
 evalIfNeeded ZPWR_INSTALL "$ZPWR_INSTALL" "$ZPWR/install" "$ZPWR"
 # zpwr tmux config files
-evalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/.tmux" "$ZPWR"
+evalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/tmux" "$ZPWR"
 # zpwr tmux git ignored files
 evalIfNeeded ZPWR_TMUX_LOCAL "$ZPWR_TMUX_LOCAL" "$ZPWR_TMUX/local" "$ZPWR_TMUX"
 # the base dir for zpwr temp
@@ -593,7 +593,7 @@ export ZPWR_ZINIT_COMPINIT_DELAY=8
 I am looking for contributors. Especially for documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests.
 
 ## Warnings
-Moving  scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZPWR_TMUX` which defaults to `~/.zpwr/.tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.
+Moving  scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZPWR_TMUX` which defaults to `~/.zpwr/tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.
 
 # Running on a MacbookPro
 ![Alt text](http://jakobmenke.com/img/tmuxfinal22.png?raw=true)
@@ -734,17 +734,17 @@ Moving  scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$Z
 - ``` bind-key    -T copy-mode-vi n                    send-keys -X search-again ```
 - ``` bind-key    -T copy-mode-vi o                    send-keys -X other-end ```
 - ``` bind-key    -T copy-mode-vi q                    send-keys -X cancel ```
-- ``` bind-key    -T copy-mode-vi s                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh google" ```
+- ``` bind-key    -T copy-mode-vi s                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
 - ``` bind-key    -T copy-mode-vi t                    command-prompt -1 -p "(jump to forward)" "send -X jump-to-forward \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi v                    send-keys -X begin-selection ```
 - ``` bind-key    -T copy-mode-vi w                    send-keys -X next-word ```
-- ``` bind-key    -T copy-mode-vi x                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell "tmux display-message -p -F \"#{pane_current_path}\" > ~/.zpwr/.tmux/local/pane_pwd" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh open" ```
+- ``` bind-key    -T copy-mode-vi x                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell "tmux display-message -p -F \"#{pane_current_path}\" > ~/.zpwr/tmux/local/pane_pwd" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh open" ```
 - ``` bind-key    -T copy-mode-vi y                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" ```
-- ``` bind-key    -T copy-mode-vi z                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh google" ```
+- ``` bind-key    -T copy-mode-vi z                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
 - ``` bind-key    -T copy-mode-vi \{                   send-keys -X previous-paragraph ```
 - ``` bind-key    -T copy-mode-vi \}                   send-keys -X next-paragraph ```
 - ``` bind-key    -T copy-mode-vi MouseDown1Pane       select-pane ```
-- ``` bind-key    -T copy-mode-vi MouseDown3Pane       send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/.tmux/google.sh google" ```
+- ``` bind-key    -T copy-mode-vi MouseDown3Pane       send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
 - ``` bind-key    -T copy-mode-vi MouseDrag1Pane       select-pane \; send-keys -X begin-selection ```
 - ``` bind-key    -T copy-mode-vi MouseDragEnd1Pane    send-keys -X copy-selection-and-cancel ```
 - ``` bind-key    -T copy-mode-vi WheelUpPane          select-pane \; send-keys -X -N 5 scroll-up ```
@@ -799,21 +799,21 @@ Moving  scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$Z
 - ``` bind-key    -T prefix       =                    choose-buffer -Z ```
 - ``` bind-key    -T prefix       >                    display-menu -T "#[align=centre]#{pane_index} (#{pane_id})" -x P -y P "#{?mouse_word,Search For #[underscore]#{=/9/...:mouse_word},}" C-r "copy-mode -t=; send -Xt= search-backward \"#{q:mouse_word}\"" "#{?mouse_word,Type #[underscore]#{=/9/...:mouse_word},}" C-y "send-keys -l -- \"#{q:mouse_word}\"" "#{?mouse_word,Copy #[underscore]#{=/9/...:mouse_word},}" c "set-buffer -- \"#{q:mouse_word}\"" "#{?mouse_line,Copy Line,}" l "set-buffer -- \"#{q:mouse_line}\""  "Horizontal Split" h "split-window -h" "Vertical Split" v "split-window -v"  "Swap Up" u "swap-pane -U" "Swap Down" d "swap-pane -D" "#{?pane_marked_set,,-}Swap Marked" s swap-pane  Kill X kill-pane Respawn R "respawn-pane -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" "#{?window_zoomed_flag,Unzoom,Zoom}" z "resize-pane -Z" ```
 - ``` bind-key    -T prefix       ?                    list-keys -N ```
-- ``` bind-key    -T prefix       D                    source-file /Users/wizard/.zpwr/.tmux/control-window ```
-- ``` bind-key    -T prefix       E                    source-file /Users/wizard/.zpwr/.tmux/fourVertical ```
-- ``` bind-key    -T prefix       F                    source-file /Users/wizard/.zpwr/.tmux/four-panes ```
-- ``` bind-key    -T prefix       G                    source-file /Users/wizard/.zpwr/.tmux/eight-panes ```
+- ``` bind-key    -T prefix       D                    source-file /Users/wizard/.zpwr/tmux/control-window ```
+- ``` bind-key    -T prefix       E                    source-file /Users/wizard/.zpwr/tmux/fourVertical ```
+- ``` bind-key    -T prefix       F                    source-file /Users/wizard/.zpwr/tmux/four-panes ```
+- ``` bind-key    -T prefix       G                    source-file /Users/wizard/.zpwr/tmux/eight-panes ```
 - ``` bind-key -r -T prefix       H                    resize-pane -L 5 ```
 - ``` bind-key    -T prefix       I                    run-shell /Users/wizard/.tmux/plugins/tpm/bindings/install_plugins ```
 - ``` bind-key -r -T prefix       J                    resize-pane -D 5 ```
 - ``` bind-key -r -T prefix       K                    resize-pane -U 5 ```
 - ``` bind-key -r -T prefix       L                    resize-pane -R 5 ```
-- ``` bind-key    -T prefix       M                    source-file /Users/wizard/.zpwr/.tmux/learn ```
-- ``` bind-key    -T prefix       O                    source-file /Users/wizard/.zpwr/.tmux/sixteen-panes ```
+- ``` bind-key    -T prefix       M                    source-file /Users/wizard/.zpwr/tmux/learn ```
+- ``` bind-key    -T prefix       O                    source-file /Users/wizard/.zpwr/tmux/sixteen-panes ```
 - ``` bind-key    -T prefix       P                    paste-buffer ```
-- ``` bind-key    -T prefix       R                    source-file /Users/wizard/.zpwr/.tmux/thirtytwo-panes-repl ```
+- ``` bind-key    -T prefix       R                    source-file /Users/wizard/.zpwr/tmux/thirtytwo-panes-repl ```
 - ``` bind-key    -T prefix       S                    set-window-option synchronize-panes ```
-- ``` bind-key    -T prefix       T                    source-file /Users/wizard/.zpwr/.tmux/config-files ```
+- ``` bind-key    -T prefix       T                    source-file /Users/wizard/.zpwr/tmux/config-files ```
 - ``` bind-key    -T prefix       U                    run-shell /Users/wizard/.tmux/plugins/tpm/bindings/update_plugins ```
 - ``` bind-key    -T prefix       Y                    split-window -v -c "#{pane_current_path}" \; select-pane -l \; kill-pane ```
 - ``` bind-key    -T prefix       [                    copy-mode ```
