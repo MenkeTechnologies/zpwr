@@ -52,6 +52,12 @@
     assert $? equals 0
 }
 
+@test '$ZPWR/.zpwr_root' {
+
+    test -f "$ZPWR/.zpwr_root"
+    assert $? equals 0
+}
+
 @test 'ZPWR_ENV_FILE' {
 
     test -n $ZPWR_ENV_FILE
