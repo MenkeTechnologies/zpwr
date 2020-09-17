@@ -162,14 +162,14 @@
 }
 
 @test 'zpwr comps zsh syntax check' {
-    for file in $ZPWR_COMPS/**/*~*.zwc(.);do
+    for file in $ZPWR_COMPS/**/*~*.zwc~*.zwc.old(.);do
         run zsh -n $file
         assert $state equals 0
     done
 }
 
 @test 'zpwr autoload zsh syntax check' {
-    for file in $ZPWR_AUTOLOAD/**/*~*.zwc(.);do
+    for file in $ZPWR_AUTOLOAD/**/*~*.zwc~*.zwc.old(.);do
         run zsh -n $file
         assert $state equals 0
     done
