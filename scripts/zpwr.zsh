@@ -9,7 +9,7 @@
 #}}}***********************************************************
 
 if [[ -z $ZPWR_VERBS ]]; then
-    declare -A ZPWR_VERBS
+    declare -Ag ZPWR_VERBS
 fi
 
 ZPWR_VERBS[about]='about=show \$ZPWR_REPO_NAME banner'

@@ -12,6 +12,12 @@
     load "test_lib.zsh"
 }
 
+@test 'autoload env' {
+    run prettyPrintBox env
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
 @test 'zpwr about verb script' {
     run zpwr about
     assert $state equals 0
@@ -95,7 +101,7 @@
 }
 
 @test 'ZPWR_VERBS' {
-    test -n $ZPWR_VERBS
+    test -n "$ZPWR_VERBS"
     assert $? equals 0
 }
 

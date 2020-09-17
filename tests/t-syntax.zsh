@@ -12,6 +12,12 @@
     load "test_lib.zsh"
 }
 
+@test 'autoload syntax' {
+    run prettyPrintBox syntax
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
 @test '$ZPWR_ENV/.zpwr_env.sh bash syntax check' {
 	test -f $ZPWR_ENV/.zpwr_env.sh
 	run bash -n $ZPWR_ENV/.zpwr_env.sh
@@ -63,8 +69,38 @@
     fi
 }
 
+@test 'ZPWR_INSTALL/s file exists' {
+	test -f "$ZPWR_INSTALL/s"
+    assert $? equals 0
+}
+
+@test 'ZPWR_INSTALL/s bash syntax check' {
+	run bash -n "$ZPWR_INSTALL/s"
+    assert $state equals 0
+}
+
+@test 'ZPWR_INSTALL/s zsh syntax check' {
+	run zsh -n "$ZPWR_INSTALL/s"
+    assert $state equals 0
+}
+
+@test 'ZPWR_PROMPT_FILE file exists' {
+	test -f "$ZPWR_PROMPT_FILE"
+    assert $? equals 0
+}
+
+@test 'ZPWR_PROMPT_FILE bash syntax check' {
+	run bash -n "$ZPWR_PROMPT_FILE"
+    assert $state equals 0
+}
+
+@test 'ZPWR_PROMPT_FILE zsh syntax check' {
+	run zsh -n "$ZPWR_PROMPT_FILE"
+    assert $state equals 0
+}
+
 @test 'install/zshrc exists' {
-	test -f install/.zshrc
+	test -f "$ZPWR_INSTALL/".zshrc
     assert $? equals 0
 }
 
@@ -101,41 +137,41 @@
 }
 
 @test 'mac only scripts bash syntax check' {
-	for file in scripts/macOnly/*.sh;do
+	for file in "$ZPWR_SCRIPTS_MAC/"*.sh;do
         run bash -n $file
         assert $state equals 0
     done
 }
 
 @test 'mac only scripts zsh syntax check' {
-	for file in scripts/macOnly/*.{sh,zsh};do
+	for file in "$ZPWR_SCRIPTS_MAC/"*.{sh,zsh};do
         run zsh -n $file
         assert $state equals 0
     done
 }
 
 @test 'install scripts bash syntax check' {
-	run bash -n install/*.sh
+	run bash -n "$ZPWR_INSTALL/"*.sh
     assert $state equals 0
 }
 
 @test 'install scripts zsh syntax check' {
-	run zsh -n install/*.{sh,zsh}
+	run zsh -n "$ZPWR_INSTALL/"*.{sh,zsh}
     assert $state equals 0
 }
 
 @test 'scripts bash syntax check' {
-	run bash -n scripts/*.sh
+	run bash -n "$ZPWR_SCRIPTS/"*.sh
     assert $state equals 0
 }
 
 @test 'scripts zsh syntax check' {
-	run zsh -n scripts/*.{sh,zsh}
+	run zsh -n "$ZPWR_SCRIPTS/"*.{sh,zsh}
     assert $state equals 0
 }
 
 @test 'zshrc syntax check' {
-	zsh -n install/.zshrc
+	zsh -n "$ZPWR_INSTALL/".zshrc
     assert $? equals 0
 }
 

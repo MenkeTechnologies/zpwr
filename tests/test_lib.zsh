@@ -35,7 +35,6 @@ fi
 ZPWR_ENV="$ZPWR/env"
 ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
-ZPWR_VERBS_FILE="$ZPWR/scripts/zpwr.zsh"
 ZPWR_AUTOLOAD="$ZPWR/autoload"
 ZPWR_COMPS="$ZPWR/comps"
 TEST_FILE=tests/testfile

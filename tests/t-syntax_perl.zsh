@@ -12,14 +12,20 @@
     load "test_lib.zsh"
 }
 
+@test 'autoload syntax perl' {
+    run prettyPrintBox "syntax perl"
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
 @test 'zshrc exists' {
 	test -f install/.zshrc
     assert $? equals 0
 }
 
-@test 'py scripts syntax check' {
-	for file in scripts/*.py;do
-        run python3 -c "import ast; ast.parse(open('$file').read())"
+@test 'perl scripts syntax check' {
+	for file in scripts/*.pl;do
+        run perl -c $file
         assert $state equals 0
     done
 
