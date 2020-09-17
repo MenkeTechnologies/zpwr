@@ -447,16 +447,17 @@ zinit ice lucid nocompile wait atinit='bindZdharma' atload'bindZdharmaPost'
 zinit load \
     zdharma/zconvey
 
+# late bind autopair keystrokes
+zinit ice lucid nocompile wait'0' atload='bindInterceptSurround'
+zinit load \
+    hlissner/zsh-autopair
+
 # override OMZ/plugin aliases with own aliases
-zinit ice lucid nocompile wait'0' \
+zinit ice lucid nocompile wait'0a' \
 atload'bindAliasesLate;createAliasCache;bindAliasesZshLate;bindOverrideZLE;'
 zinit load \
     MenkeTechnologies/zsh-expand
 
-# late bind autopair keystrokes
-zinit ice lucid nocompile wait'0a' atload='bindInterceptSurround'
-zinit load \
-    hlissner/zsh-autopair
 
 # late bind keystrokes, must come before syntax highlight
 zinit ice lucid nocompile wait'0b' atload'bindHistorySubstring'
