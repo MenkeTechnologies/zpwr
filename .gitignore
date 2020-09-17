@@ -1,7 +1,6 @@
 local/
-.tmux/local/
-.tmux/plugins/
-.tokens.sh
+tmux/local/
+tmux/plugins/
 GTAGS
 GRTAGS
 GPATH
