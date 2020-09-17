@@ -17,7 +17,7 @@
     assert $state equals 0
     assert "$output" is_not_empty
 }
-
+default
 @test '$ZPWR_ENV/.zpwr_env.sh bash syntax check' {
 	test -f $ZPWR_ENV/.zpwr_env.sh
 	run bash -n $ZPWR_ENV/.zpwr_env.sh
@@ -99,9 +99,14 @@
     assert $state equals 0
 }
 
-@test 'install/zshrc exists' {
-	test -f "$ZPWR_INSTALL/".zshrc
-    assert $? equals 0
+@test 'min bash alias file syntax check' {
+	run bash -n "$ZPWR_INSTALL/.minbashrc"
+    assert $state equals 0
+}
+
+@test 'min bash alias file syntax check' {
+	run zsh -n "$ZPWR_INSTALL/.minbashrc"
+    assert $state equals 0
 }
 
 @test 'scripts bash alias file syntax check' {
@@ -170,9 +175,12 @@
     assert $state equals 0
 }
 
+@test 'install/zshrc exists' {
+	test -f "$ZPWR_INSTALL/".zshrc
+    assert $? equals 0
+}
+
 @test 'zshrc syntax check' {
 	zsh -n "$ZPWR_INSTALL/".zshrc
     assert $? equals 0
 }
-
-
