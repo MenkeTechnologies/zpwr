@@ -121,10 +121,10 @@ evalIfNeeded ZPWR_LOCAL_ENV "$ZPWR_LOCAL_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL
 evalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.powerlevel9kconfig.sh" "$ZPWR_ENV"
 # the location of associated interpreted scripts
 evalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
-# the location of zpwr verbs setup script
-evalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_SCRIPTS/zpwr.zsh" "$ZPWR_SCRIPTS"
 # the location of macOS only associated interpreted scripts
 evalIfNeeded ZPWR_SCRIPTS_MAC "$ZPWR_SCRIPTS_MAC" "$ZPWR_SCRIPTS/macOnly" "$ZPWR_SCRIPTS"
+# the location of zpwr verbs setup script
+evalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_SCRIPTS/zpwr.zsh" "$ZPWR_SCRIPTS"
 # the location of zpwr lib file
 evalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 # the location of zpwr init file

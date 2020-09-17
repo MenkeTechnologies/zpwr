@@ -17,7 +17,7 @@
     assert $state equals 0
     assert "$output" is_not_empty
 }
-default
+
 @test '$ZPWR_ENV/.zpwr_env.sh bash syntax check' {
 	test -f $ZPWR_ENV/.zpwr_env.sh
 	run bash -n $ZPWR_ENV/.zpwr_env.sh

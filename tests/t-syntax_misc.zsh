@@ -25,13 +25,10 @@
     done
 }
 
-@test 'ZPWR_INSTALL/alacritty.yml syntax check' {
-    run python3 -c 'import yaml, sys; yaml.safe_load(sys.stdin)' < "$ZPWR_INSTALL/alacritty.yml"
-    assert $state equals 0
-}
-
-@test 'ZPWR_INSTALL/zpwr.yml syntax check' {
-    run python3 -c 'import yaml, sys; yaml.safe_load(sys.stdin)' < "$ZPWR_INSTALL/zpwr.yml"
-    assert $state equals 0
+@test 'ZPWR_INSTALL/*.yml/yaml syntax check' {
+	for file in "$ZPWR_INSTALL/"*.{yaml,yml};do
+        run python3 -c 'import yaml, sys; yaml.safe_load(sys.stdin)' < "$file"
+        assert $state equals 0
+    done
 }
 
