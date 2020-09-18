@@ -56,7 +56,7 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # using tag name as group name so ordering the groups by tag name here
-zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest strings hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tglobbed-files files local-directories tmux contexts last-ten
+zstyle ':completion:*' group-order commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters options argument-rest strings identifiers hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix fasd-file fasd zdir tglobbed-files files local-directories tmux contexts last-ten
 
 # show command descriptions if available
 zstyle ':completion:*' extra-verbose yes
