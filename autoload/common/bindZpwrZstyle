@@ -4,6 +4,12 @@ function bindZpwrZstyle(){
 
     #{{{                    MARK:Completions
 #**************************************************************
+zpwrCachingPolicy () {
+    # rebuild if cache is more than a week old
+    local -a oldp
+    oldp=( "$1"(Nm+7) )
+    (( $#oldp ))
+}
 
 # do not include pwd after ../
 zstyle ':completion:*' ignore-parents parent pwd
@@ -11,11 +17,21 @@ zstyle ':completion:*' ignore-parents parent pwd
 # remove slash if argument is a directory
 zstyle ':completion:*' squeeze-slashes true
 # Enable completion caching, use rehash to clear
-zstyle ':completion::complete:*' use-cache on
-zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
+zstyle ':completion:*' use-cache on
+
+# compsys cache dir
+zstyle ':completion:*' cache-path "$ZPWR_COMPSYS_CACHE"
+
+if [[ ! -d "$ZPWR_COMPSYS_CACHE" ]]; then
+    loggErr "Forced to create ZPWR_COMPSYS_CACHE '$ZPWR_COMPSYS_CACHE'"
+    mkdir "$ZPWR_COMPSYS_CACHE"
+fi
+
+zstyle ':completion:*' cache-policy zpwrCachingPolicy
 
 # separate files and dirs in _files completion
 #zstyle ':completion:*' file-patterns '%p(^-/):globbed-files' '^(-/):directories' '*:all-files'
+
 
 if [[ $ZPWR_COLORS == true ]]; then
     # Make the list prompt friendly
@@ -164,6 +180,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
     zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
     zstyle ':completion:*:*:*:*:vtags' list-colors '=(#b)(*)=1;37;45'
+    zstyle ':completion:*:s-providers' list-colors '=(#b)(*)=1;30=1;36;44'
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         # homebrew tags

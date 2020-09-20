@@ -155,7 +155,8 @@ evalIfNeeded ZPWR_TEMPFILE3 "$ZPWR_TEMPFILE3" "$ZPWR_LOCAL_TEMP/.temp$$-3$USER" 
 evalIfNeeded ZPWR_TEMPFILE4 "$ZPWR_TEMPFILE4" "$ZPWR_LOCAL_TEMP/.temp$$-4$USER" "$ZPWR_LOCAL_TEMP" "$USER"
 # SQL temp files for use with learning collection
 evalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER.sql" "$ZPWR_LOCAL_TEMP" "$USER"
-# remove all files in these dirs, modify this in your tokens file
+# zsh compsys completion system dir for cached completions
+evalIfNeeded ZPWR_COMPSYS_CACHE "$ZPWR_COMPSYS_CACHE" "$HOME/.zcompcache" "$HOME"
 # common dirs
 evalIfNeeded ZPWR_D "$ZPWR_D" "$HOME/Desktop" "$HOME"
 evalIfNeeded ZPWR_DOC "$ZPWR_DOC" "$HOME/Documents" "$HOME"
