@@ -18,8 +18,7 @@ fi
 
 __z_dirs_comp(){
 
-    if ( ! (( $+__z_dirs )) || _cache_invalid z_dirs_cache ) && ! _retrieve_cache z_dirs_cache;
-    then
+    if ( ! (( $+__z_dirs )) || _cache_invalid z_dirs_cache ) && ! _retrieve_cache z_dirs_cache; then
         __z_dirs=( $($zcmd -l |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l') )
         _store_cache z_dirs_cache __z_dirs
     fi
@@ -28,8 +27,7 @@ __z_dirs_comp(){
 }
 __fasd_dirs_comp(){
 
-    if ( ! (( $+__fasd_dirs )) || _cache_invalid fasd_dirs_cache ) && ! _retrieve_cache fasd_dirs_cache;
-    then
+    if ( ! (( $+__fasd_dirs )) || _cache_invalid fasd_dirs_cache ) && ! _retrieve_cache fasd_dirs_cache; then
         __fasd_dirs=( $(fasd -d |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$} }for@l') )
         _store_cache fasd_dirs_cache __fasd_dirs
     fi
