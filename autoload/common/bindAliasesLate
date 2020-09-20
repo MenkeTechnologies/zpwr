@@ -195,12 +195,12 @@ function bindAliasesLate(){
             if exists pacman;then
                 alias api="sudo -E pacman -Sy --noconfirm"
                 alias apa="sudo -E pacman -Syyu --noconfirm --overwrite='*'"
-            elif exists zypper;then
-                alias api="sudo -E zypper install -y"
-                alias apa="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y"
             elif exists apt;then
                 alias api="sudo -E apt install -y"
                 alias apa="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean"
+            elif exists zypper;then
+                alias api="sudo -E zypper install -y"
+                alias apa="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y"
             elif exists yum;then
                 alias api="sudo -E yum install -y"
                 alias apa="sudo -E yum check-update; sudo -E yum upgrade -y "
