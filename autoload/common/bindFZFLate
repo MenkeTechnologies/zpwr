@@ -45,7 +45,7 @@ function bindFZFLate(){
 
 
     export ZPWR_COMMON_FZF_ELEM
-    ZPWR_COMMON_FZF_ELEM="--prompt='$ZPWR_FZF_LOGO ' --bind=ctrl-n:page-down,ctrl-p:page-up"
+    ZPWR_COMMON_FZF_ELEM="--prompt='$ZPWR_FZF_LOGO ' --bind=ctrl-n:page-down,ctrl-p:page-up,tab:toggle+down,ctrl-j:down,ctrl-k:up"
 
 #to include dirs files in search
     export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
@@ -111,6 +111,18 @@ function bindFZFLate(){
     export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS
         --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
         --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow"
+
+    export FZF_TAB_OPTS=(
+    --ansi   # Enable ANSI color support, necessary for showing groups
+    --expect='$continuous_trigger' # For continuous completion
+    '--color=hl:$(( $#headers == 0 ? 108 : 255 ))'
+    --nth=2,3 --delimiter='\x00'  # Don't search prefix
+    --layout=reverse --height='${FZF_TMUX_HEIGHT:=100%}'
+    --tiebreak=begin -m
+    '--query=$query'   # $query will be expanded to query string at runtime.
+    '--header-lines=$#headers' # $#headers will be expanded to lines of headers at runtime
+    )
+    export FZF_TAB_COMMAND="$ZPWR_FZF"
 }
 
 bindFZFLate "$@"
