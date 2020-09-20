@@ -373,9 +373,6 @@ fi
 
 #{{{                    MARK:pre zinit
 #**************************************************************
-# compsys cache file
-export ZSH_COMPDUMP="$HOME/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT"
-
 bindkey -v
 
 if [[ $ZPWR_DEBUG == true ]]; then
@@ -401,6 +398,8 @@ function zpwrTokenPost() {
 #{{{                    MARK:ZINIT
 #**************************************************************
 source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
+# tell zinit where compsy cache file is
+ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
 
 #override zicompinit
 zicompinit() {
