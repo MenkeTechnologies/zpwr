@@ -1,0 +1,7 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function bindOverrideOMZCompdefs(){
+    _comps[npm]=_npm
+}
+bindOverrideOMZCompdefs "$@"
