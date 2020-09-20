@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zcc(){
+
+    if [[ -d "$ZPWR_COMPSYS_CACHE" ]]; then
+        cd "$ZPWR_COMPSYS_CACHE"
+    else
+        loggErr "ZPWR_COMPSYS_CACHE '$ZPWR_COMPSYS_CACHE' is not a directory."
+    fi
+
+}
+
+zcc "$@"
