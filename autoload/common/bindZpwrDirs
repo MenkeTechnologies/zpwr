@@ -40,6 +40,11 @@ fi
 if [[ -d "$ZPWR_LOCAL" ]]; then
     hash -d ZPWR_LOCAL="$ZPWR_LOCAL"
 fi
+
+if [[ -d "$ZPWR_COMPSYS_CACHE" ]]; then
+    hash -d ZPWR_COMPSYS_CACHE="$ZPWR_COMPSYS_CACHE"
+fi
+
 if [[ -d "$ZPWR_TMUX" ]]; then
     hash -d ZPWR_TMUX="$ZPWR_TMUX"
 fi
