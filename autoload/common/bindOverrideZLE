@@ -337,7 +337,7 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
         :
     fi
 
-    bindkey -M menuselect '|' history-incremental-search-forward
+    bindkey -M menuselect '^X' history-incremental-search-forward
 
     bindkey -M menuselect '^J' down-history
     bindkey -M menuselect '^K' up-history
