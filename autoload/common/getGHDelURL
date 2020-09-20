@@ -2,8 +2,12 @@
 # vim: set ft=sh:
 function getGHDelURL(){
 
-    local repo user line out
+    if [[ -z "$GITHUB_DELETE_TOKEN" ]]; then
+        loggErr "GITHUB_DELETE_TOKEN is missing."
+        return 1
+    fi
 
+    local repo user line out
 
     test -n "$1" && repo="$1"
     test -n "$2" && user="$2"
@@ -24,7 +28,7 @@ function getGHDelURL(){
     test -z "$repo" && loggErr "bad repo $repo" && return 1
     test -z "$user" && loggErr "bad user $user" && return 1
 
-    echo "curl -fsSL -u $user -X DELETE https://api.github.com/repos/$user/$repo"
+    echo "curl -fsSL -H 'Authorization: token $GITHUB_DELETE_TOKEN' -X DELETE https://api.github.com/repos/$user/$repo"
 
 }
 

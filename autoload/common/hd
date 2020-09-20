@@ -7,7 +7,7 @@ function ___hd(){
     if cmd="$(getGHDelURL)";then
 
         prettyPrint "Exe '$cmd'"
-        if ${=cmd}; then
+        if eval "$cmd"; then
             prettyPrint "Successful deletion."
         else
             loggErr "Error in deletion."
