@@ -17,7 +17,7 @@ function ___searchDirtyGitRepos(){
         done < "$ZPWR_ALL_GIT_DIRS"
     } |
         eval "$ZPWR_FZF $FZF_SEARCH_GIT_OPTS" |
-        perl -ne 'print "cd $_"'
+        perl -ne 'chomp;print "cd \"$_\""'
     }
 
     shouldRegen="$1"
