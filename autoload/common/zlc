@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zcc(){
+function zlc(){
 
     if [[ -d "$ZPWR_COMPSYS_CACHE" ]]; then
         cd "$ZPWR_COMPSYS_CACHE"
@@ -10,4 +10,4 @@ function zcc(){
 
 }
 
-zcc "$@"
+zlc "$@"
