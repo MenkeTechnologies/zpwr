@@ -2,15 +2,13 @@
 # vim: set ft=sh:
 function __regenZshCompCache(){
 
-    local lines
-
+    emulate -L zsh
+    setopt nullglob
     prettyPrint "regen zsh compsys cache"
-    lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
 
-    echo command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*(DN)
-    command rm -fv "$ZSH_COMPDUMP"*(DN) "$HOME/.zcompdump"*(DN)
+    echo command rm -fv "$ZSH_COMPDUMP"*(DN) "$ZPWR_LOCAL/.zcompdump"*(D) "$HOME/.zcompdump"*(D)
+    command rm -fv "$ZSH_COMPDUMP"*(DN) "$ZPWR_LOCAL/.zcompdump"*(D) "$HOME/.zcompdump"*(D)
     compinit -u -d "$ZSH_COMPDUMP"
-    echo "$lines" >> "$ZSH_COMPDUMP"
 }
 
 __regenZshCompCache "$@"
