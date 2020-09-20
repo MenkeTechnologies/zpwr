@@ -17,7 +17,7 @@ function ___s(){
         cmd="$ZPWR_OPEN_CMD"
     fi
 
-    if type -a s | command grep -sqv function; then
+    if commandExists s; then
         sec_cmd=s
     else
         sec_cmd="$ZPWR_OPEN_CMD"
@@ -25,13 +25,13 @@ function ___s(){
     if isZsh; then
         if [[ $sec_cmd == s ]]; then
             {
-                test -z "$1" && ${=cmd} . || command s "$@"
+            test -z "$1" && ${=cmd} . || command s "$@"
             }
         else
             {
             out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             url="https://google.com/search?q=$out"
-                ${=sec_cmd} $url
+            ${=sec_cmd} $url
             }
         fi
     else
