@@ -7,4 +7,4 @@ function fm(){
     man "$1" | col -b | eval "$ZPWR_FZF --no-sort -m $FZF_MAN_OPTS"
 }
 
-fm "$2"
+fm "$@"
