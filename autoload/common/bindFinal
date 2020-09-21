@@ -30,24 +30,6 @@ function bindFinal(){
         export PATH="$HOME/.jenv/shims:$PATH"
     fi
 
-    #{{{                    MARK:Compdefs
-    #**************************************************************
-    _comps[ftp]=_ftp
-    _comps[traceroute]=_traceroute
-    _comps[host]=_host
-    _comps[passwd]=_passwd
-    _comps[ksh]=_ksh
-    _comps[tcsh]=_tcsh
-    _comps[csh]=_tcsh
-
-    compdef _git-clone gcl
-    compdef _zcommand zm zd zg
-    compdef _man fm
-    compdef _tmux _zsh_tmux_plugin_run
-    exists _kubectl && compdef _kubectl kubectl
-    exists _express && compdef _express express
-    #}}}***********************************************************
-
 
     #{{{                    MARK:Groovy
     #**************************************************************
