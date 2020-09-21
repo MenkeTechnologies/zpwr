@@ -66,6 +66,9 @@ function __zpwr(){
                     info | clearlist)
                         _cl
                         ;;
+                    man)
+                        _man
+                        ;;
                     ps)
                         _p
                         ;;
