@@ -3,6 +3,11 @@
 
 function fm(){
 
+    if [[ -z "$1" ]]; then
+        loggErr "usage: fm <manpage>"
+        return 1
+    fi
+
    FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfMan.sh" "$1")'"
     man "$1" | col -b | eval "$ZPWR_FZF --no-sort -m $FZF_MAN_OPTS"
 }
