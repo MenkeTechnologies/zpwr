@@ -2,9 +2,13 @@
 # vim: set ft=sh:
 function ___zpwrCleanAll() {
 
-    prettyPrint "clearCache"
-    clearCache
-    prettyPrint "clear $zpwrDirsClean"
+    prettyPrint "cleanCache"
+    cleanCache
+    prettyPrint "cleanCompCache"
+    cleanCompCache
+    prettyPrint "cleanTemp"
+    cleanTemp
+    prettyPrint "clean $zpwrDirsClean"
     zpwrClean
 }
 

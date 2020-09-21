@@ -2,6 +2,9 @@
 # vim: set ft=sh:
 function ___zpwrClean() {
 
+    emulate -L zsh
+    setopt nullglob
+
     local dir files
 
     if ! (( $#zpwrDirsClean )); then
@@ -14,8 +17,8 @@ function ___zpwrClean() {
         files=("$dir"/*(N))
 
         if (( $#files )); then
-            prettyPrint sudo rm -rfv "$dir"/*(N)
-            sudo rm -rfv "$dir"/*(N)
+            prettyPrint sudo rm -rfv "$dir"/*
+            sudo rm -rfv "$dir"/*
         fi
     done
 }
