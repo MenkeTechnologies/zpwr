@@ -43,6 +43,7 @@ export ZPWR_COLOR_RED="\x1b[31m"
 export ZPWR_COLOR_RESET="\x1b[0m"
 # ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
+# sudo prefix to add when you get permission denied
 export ZPWR_SUDO_CMD='sudo -E'
 # the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR='zsh-more-completions'

@@ -361,10 +361,10 @@ export ZPWR_BANNER_DESKTOP_LINUX=true
 # ponysay banner when shell startup finishes
 export ZPWR_INTRO_BANNER=ponies
 # bat (syntax highlighting) theme
-export ZPWR_BAT_THEME="GitHub"
+export ZPWR_BAT_THEME='GitHub'
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
-export ZPWR_CHAR_LOGO="<<)(>>"
+export ZPWR_CHAR_LOGO='<<)(>>'
 # output is more colorful
 export ZPWR_COLORS=true
 # common colors
@@ -373,8 +373,10 @@ export ZPWR_COLOR_RED="\x1b[31m"
 export ZPWR_COLOR_RESET="\x1b[0m"
 # ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
+# sudo prefix to add when you get permission denied
+export ZPWR_SUDO_CMD='sudo -E'
 # the repo name for more zsh compsys completions
-export ZPWR_COMPLETION_DIR="zsh-more-completions"
+export ZPWR_COMPLETION_DIR='zsh-more-completions'
 # spelling correction in zsh-expand plugin
 export ZPWR_CORRECT=true
 # aliases expand after spelling correction
@@ -398,9 +400,9 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 # expand globs, history etc with zle expand-word
 export ZPWR_EXPAND_NATIVE=true
 # command for all fzf
-export ZPWR_FZF="fzf"
+export ZPWR_FZF='fzf'
 # prompt for all fzf
-export ZPWR_FZF_LOGO="<<)ZPWR(>>"
+export ZPWR_FZF_LOGO='<<)ZPWR(>>'
 # GH username
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 # the char that prefixes global aliases like je<space>
@@ -420,7 +422,7 @@ export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
 # the marker found color in bat output into fzf from ag search
-export ZPWR_MARKER_COLOR="0;1;4;37;44m"
+export ZPWR_MARKER_COLOR='0;1;4;37;44m'
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework
@@ -432,11 +434,11 @@ export ZPWR_PROFILING=false
 # set to POWERLEVEL to use the powerlevel9k prompt
 export ZPWR_PROMPT=POWERLEVEL
 # char to separate log messages
-export ZPWR_QUOTE_START_CHAR="<<("
+export ZPWR_QUOTE_START_CHAR='<<('
 # char to separate log messages
-export ZPWR_QUOTE_END_CHAR=")>>"
+export ZPWR_QUOTE_END_CHAR=')>>'
 # maybe z4ze
-export ZPWR_REPO_NAME="zpwr"
+export ZPWR_REPO_NAME='zpwr'
 # when true sends every char to synced panes
 # when false does not send enter and Control to synced panes
 export ZPWR_SEND_KEYS_FULL=false
