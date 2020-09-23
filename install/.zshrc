@@ -190,6 +190,7 @@ ZPWR_GH_PLUGINS=(
     zsh-users/zsh-completions
     akarzim/zsh-docker-aliases
     MenkeTechnologies/zsh-git-acp
+    MenkeTechnologies/zsh-sudo
     MenkeTechnologies/zsh-nginx
     MenkeTechnologies/zsh-sed-sub
     zdharma/zsh-tig-plugin
@@ -226,7 +227,6 @@ ZPWR_OMZ_PLUGINS=(
     nmap
     postgres
     colorize
-    sudo
     rsync
     vundle
     meteor
