@@ -40,7 +40,7 @@ for directory; do
     if [[ -d "$directory" ]]; then
         cd "$directory" && {
             isGitDir && {
-                line="$(git remote -v 2>/dev/null)" && {
+                line="$(git remote -v 2>/dev/null | command grep origin | head -n 1)" && {
                     if echo "$line" | grep -q 'git@'; then
                         #ssh
                         out="$(echo $line | perl -ne 'do{($_=$1)=~ s@.git$@@;print;exit} if m{^.*:(\S+/\S+)\.git\s+.*$}')"
