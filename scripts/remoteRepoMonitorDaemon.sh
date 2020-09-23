@@ -15,7 +15,7 @@ remoteName=origin
 [[ ! -d "$configDir" ]] && echo "no config dir '$configDir'" >&2 && exit 1
 [[ ! -d "$zshPluginDir" ]] && echo "no zshPluginDir '$zshPluginDir'" >&2 && exit 1
 
-function gittersmaster() {
+function resetToMaster() {
 
     git fetch -f --all --prune --tags
     git reset --hard $remoteName/master
@@ -25,7 +25,7 @@ function gittersmaster() {
     git fetch -f --all --prune --tags
 }
 
-function gittersdev() {
+function resetToDev() {
 
     git fetch -f --all --prune --tags
     git reset --hard $remoteName/dev
@@ -39,11 +39,11 @@ function main() {
 
     local dir completionDir
 
-    gittersdev
+    resetToDev
     completionDir="$zshPluginDir"
     for dir in "$completionDir/"*; do
         printf "$dir: "
-        test -d "$dir" && ( builtin cd "$dir" && git pull; )
+        test -d "$dir" && ( builtin cd "$dir" && resetToMaster; )
     done
     refreshers
 }
@@ -91,7 +91,7 @@ while true; do
 
     if [[ -n "$output" ]]; then
         echo "$(date) We have change to $(git remote -v)" >&2
-        gittersmaster
+        resetToMaster
         refreshers
     fi
 
