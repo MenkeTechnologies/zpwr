@@ -196,6 +196,8 @@ flycheck_*.el
 .tmux/resurrect/
 #java
 test.java
+*.patch
+*.diff
 #}}}***********************************************************
 
 #{{{                    MARK:Python
