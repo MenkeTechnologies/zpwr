@@ -38,7 +38,7 @@ function my-accept-line () {
     commandsThatModifyFiles=(unlink rm srm to md touch chown chmod rmdir mv cp chflags chgrp ln mkdir nz git\ reset git\ clone gcl dot_clean)
 
     for command in ${commandsThatModifyFiles[@]}; do
-            if [[ $BUFFER =~ ^([[:space:]]*)([[:graph:]]+=[[:graph:]]+[[:space:]]+)*(([\\\"\']*builtin[\\\"\']*[[:space:]]+)*[\\\"\']*command[\\\"\']*)?([[:space:]]*)(([\\\"\']*sudo[\\\"\']*([[:space:]]+)((-[ABbEHnPSis]+[[:space:]]*|-[CghpTu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*([\\\"\']*env[\\\"\']*[[:space:]]+(-[iv]+[[:space:]]*|-[PSu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:space:]])*[\\\"\']*"$command"[\\\"\']*(.*)$ ]]; then
+            if [[ $BUFFER =~ ^([[:space:]]*)([[:graph:]]+=[[:graph:]]+[[:space:]]+)*(([\\\"\']*builtin[\\\"\']*[[:space:]]+)*[\\\"\']*command[\\\"\']*)?([[:space:]]*)(([\\\"\']*sudo[\\\"\']*([[:space:]]+)((-[ABbEHnPSis]+[[:space:]]*|-[CghpTu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*([\\\"\']*env[\\\"\']*[[:space:]]+(-[iv]+[[:space:]]*|-[PSu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*)*([[:space:]])*[\\\"\']*"$command"[\\\"\']*(.*)$ ]]; then
             ZPWR_WILL_CLEAR=true
         fi
     done
