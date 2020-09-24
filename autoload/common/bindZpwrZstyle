@@ -36,7 +36,7 @@ fi
 zstyle ':completion:*' cache-policy zpwrWeeklyCachingPolicy
 zstyle ':completion:*:(fasd|fasd-file|zdir)' cache-policy zpwrDailyCachingPolicy
 zstyle ':completion:*:*:(f|z|zshz|zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' cache-policy zpwrDailyCachingPolicy
-zstyle ':completion:force-cache:' cache-policy zpwrDailyCachingPolicy
+zstyle ':completion:force-cache:*' cache-policy zpwrDailyCachingPolicy
 
 # separate files and dirs in _files completion
 #zstyle ':completion:*' file-patterns '%p(^-/):globbed-files' '^(-/):directories' '*:all-files'
