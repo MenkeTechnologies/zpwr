@@ -4,13 +4,19 @@ function bindZpwrZstyle(){
 
     #{{{                    MARK:Completions
 #**************************************************************
-zpwrCachingPolicy () {
+zpwrWeeklyCachingPolicy () {
     # rebuild if cache is more than a week old
     local -a oldp
     oldp=( "$1"(Nm+7) )
     (( $#oldp ))
 }
 
+zpwrDailyCachingPolicy () {
+    # rebuild if cache is more than a week old
+    local -a oldp
+    oldp=( "$1"(Nm+1) )
+    (( $#oldp ))
+}
 # do not include pwd after ../
 zstyle ':completion:*' ignore-parents parent pwd
 
@@ -27,7 +33,10 @@ if [[ ! -d "$ZPWR_COMPSYS_CACHE" ]]; then
     mkdir "$ZPWR_COMPSYS_CACHE"
 fi
 
-zstyle ':completion:*' cache-policy zpwrCachingPolicy
+zstyle ':completion:*' cache-policy zpwrWeeklyCachingPolicy
+zstyle ':completion:*:(fasd|fasd-file|zdir)' cache-policy zpwrDailyCachingPolicy
+zstyle ':completion:*:*:(f|z|zshz|zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' cache-policy zpwrDailyCachingPolicy
+zstyle ':completion:force-cache:' cache-policy zpwrDailyCachingPolicy
 
 # separate files and dirs in _files completion
 #zstyle ':completion:*' file-patterns '%p(^-/):globbed-files' '^(-/):directories' '*:all-files'
