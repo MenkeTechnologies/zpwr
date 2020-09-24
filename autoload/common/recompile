@@ -28,9 +28,10 @@ function recompile(){
         "$ZPWR_COMPSYS_CACHE/"*
         "$ZSH/lib/"*.zsh
         "$ZSH/plugins/"*/*.plugin.zsh
+        "$ZSH/plugins/"*/*.zsh
         "$ZSH/themes/"*.zsh-theme
         "$ZSH_CUSTOM/plugins/"*/*.plugin.zsh
-        "$ZSH_CUSTOM/plugins/"*/*.plugin.zsh
+        "$ZSH_CUSTOM/plugins/"*/*.zsh
         "$ZSH_CUSTOM/themes/"*/*.zsh-theme
         "$ZSH_CUSTOM/lib/"*.zsh
         "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.zsh
