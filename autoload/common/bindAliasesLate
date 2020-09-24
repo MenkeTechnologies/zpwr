@@ -12,14 +12,14 @@ function bindAliasesLate(){
                 alias vv='nvim'
                 alias vim='nvim'
                 alias vm="nvim -u $ZPWR_ENV/.mininit.vim"
-                alias sv='sudo -E nvim'
+                alias sv="$ZPWR_FULL_SUDO nvim"
             else
                 if commandExists vim; then
                     alias v=vim
                     alias vi=vim
                     alias vv=vim
                     alias vm="vim -u $ZPWR_ENV/.minvimrc"
-                    alias sv='sudo -E vim'
+                    alias sv="$ZPWR_FULL_SUDO vim"
                 fi
             fi
         else
@@ -28,7 +28,7 @@ function bindAliasesLate(){
                 alias vi=vim
                 alias vv=vim
                 alias vm="vim -u $ZPWR_ENV/.minvimrc"
-                alias sv='sudo -E vim'
+                alias sv="$ZPWR_FULL_SUDO vim"
             fi
         fi
     }
@@ -54,9 +54,9 @@ function bindAliasesLate(){
     alias la="clearList"
     alias l="clearList"
     alias ca='cat -n'
-    alias sa='sudo -E cat -n'
-    alias ra='sudo -E rm -rf --'
-    alias die='sudo -E kill -9 --'
+    alias sa="$ZPWR_FULL_SUDO cat -n"
+    alias ra="$ZPWR_FULL_SUDO rm -rf --"
+    alias die="$ZPWR_FULL_SUDO kill -9 --"
     alias da=detachall
 
     if exists emacs; then
@@ -69,7 +69,7 @@ function bindAliasesLate(){
     alias p2="python2"
     alias p3="python3"
 
-    exists fc && alias please='sudo -E $(fc -ln -1)'
+    exists fc && alias please="$ZPWR_FULL_SUDO \$(fc -ln -1)"
 
     exists spotify && {
         alias rep='spotify replay'
@@ -119,7 +119,7 @@ function bindAliasesLate(){
     if pwd | command egrep -sq --color=always / 2>/dev/null; then
         alias egrep="egrep --color=always"
     fi
-    alias _='\builtin command sudo -E env'
+    alias _="$ZPWR_FULL_SUDO"
     alias tree='tree -afC'
     alias ta="tmux attach-session"
     alias tn="tmux new-session"
@@ -129,11 +129,11 @@ function bindAliasesLate(){
         alias k8=kubectl
     fi
     alias ka="killall"
-    alias sin="./configure && make && sudo -E make install"
+    alias sin="./configure && make && $ZPWR_FULL_SUDO make install"
     alias curl='curl -fsSL'
     alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
     alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
-    alias sc='sudo -E systemctl'
+    alias sc="$ZPWR_FULL_SUDO systemctl"
     #alias df='grc --colour=on -c "$HOME/conf.df" df'
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
@@ -154,7 +154,7 @@ function bindAliasesLate(){
         alias rtsync="$ZPWR_SCRIPTS_MAC/rsyncr.sh"
         alias xg='cd $HOME/Documents/xcode'
         alias ap='cd /Applications'
-        alias sudoedit='sudo -E $EDITOR'
+        alias sudoedit="$ZPWR_FULL_SUDO $EDITOR"
         alias tra='cd $HOME/.Trash'
         alias co="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
         alias bl='brew link --force --overwrite'
@@ -177,7 +177,7 @@ function bindAliasesLate(){
                     alias vi='mvim -v'
                     alias vim='mvim -v'
                     alias vm="mvim -v -u $ZPWR_ENV/.minvimrc"
-                    alias sv='sudo -E mvim -v'
+                    alias sv="$ZPWR_FULL_SUDO mvim -v"
                 fi
             }
         fi
@@ -194,20 +194,20 @@ function bindAliasesLate(){
             alias tra='cd $HOME/.local/share/Trash'
         if [[ "$ZPWR_OS_TYPE" == linux ]]; then
             if exists pacman;then
-                alias api="sudo -E pacman -Sy --noconfirm"
-                alias apa="sudo -E pacman -Syyu --noconfirm --overwrite='*'"
+                alias api="$ZPWR_FULL_SUDO pacman -Sy --noconfirm"
+                alias apa="$ZPWR_FULL_SUDO pacman -Syyu --noconfirm --overwrite='*'"
             elif exists apt;then
-                alias api="sudo -E apt install -y"
-                alias apa="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean"
+                alias api="$ZPWR_FULL_SUDO apt install -y"
+                alias apa="$ZPWR_FULL_SUDO apt update; $ZPWR_FULL_SUDO apt dist-upgrade -y; $ZPWR_FULL_SUDO apt autoremove -y; $ZPWR_FULL_SUDO apt clean"
             elif exists zypper;then
-                alias api="sudo -E zypper install -y"
-                alias apa="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y"
+                alias api="$ZPWR_FULL_SUDO zypper install -y"
+                alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
             elif exists yum;then
-                alias api="sudo -E yum install -y"
-                alias apa="sudo -E yum check-update; sudo -E yum upgrade -y "
+                alias api="$ZPWR_FULL_SUDO yum install -y"
+                alias apa="$ZPWR_FULL_SUDO yum check-update; $ZPWR_FULL_SUDO yum upgrade -y "
             fi
 
-            alias ipt="sudo -E iptables --line-numbers -L"
+            alias ipt="$ZPWR_FULL_SUDO iptables --line-numbers -L"
             test -z "$distroName" && {
                 distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
             }
@@ -230,16 +230,16 @@ function bindAliasesLate(){
                     ;;
             esac
         elif [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
-                alias api="sudo -E pkg install -y"
-                alias apa="yes | sudo pkg -E update; sudo -E pkg upgrade -y"
+                alias api="$ZPWR_FULL_SUDO pkg install -y"
+                alias apa="yes | sudo pkg -E update; $ZPWR_FULL_SUDO pkg upgrade -y"
         else
             loggErr "unsupported OS $ZPWR_OS_TYPE"
         fi
         chooseNvimVim
     fi
     alias tclsh="rlwrap tclsh"
-    alias logs="sudo -E tail -f /var/log/**/*.log | ccze"
-    alias beats="sudo -E tail -f /var/log/*beat/* | ccze"
+    alias logs="$ZPWR_FULL_SUDO tail -f /var/log/**/*.log | ccze"
+    alias beats="$ZPWR_FULL_SUDO tail -f /var/log/*beat/* | ccze"
     alias matr="cmatrix -C blue -abs"
     #}}}***********************************************************
 
