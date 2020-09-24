@@ -40,8 +40,10 @@ function my-accept-line () {
     for command in ${commandsThatModifyFiles[@]}; do
             if [[ $BUFFER =~ ^([[:space:]]*)([[:graph:]]+=[[:graph:]]+[[:space:]]+)*(([\\\"\']*builtin[\\\"\']*[[:space:]]+)*[\\\"\']*command[\\\"\']*)?([[:space:]]*)(([\\\"\']*sudo[\\\"\']*([[:space:]]+)((-[ABbEHnPSis]+[[:space:]]*|-[CghpTu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*([\\\"\']*env[\\\"\']*[[:space:]]+(-[iv]+[[:space:]]*|-[PSu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*)*([[:space:]])*[\\\"\']*"$command"[\\\"\']*(.*)$ ]]; then
             ZPWR_WILL_CLEAR=true
+            break
         fi
     done
+
     mywords=("${(z)BUFFER}")
 
     if [[ ${mywords[1]} == 'sudo' ]]; then
