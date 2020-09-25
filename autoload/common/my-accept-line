@@ -69,13 +69,13 @@ function my-accept-line () {
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ -n $(alias -g $mywords[1]) ]];then
             aliases="$(cat $ZPWR_LOCAL/.common_aliases)"
-            line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
+            line="$(print -r -- $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
             if [[ -z $line ]];then
                 # function
                 BUFFER="\\$mywords"
             else
                 # non global alias
-                print "$line" | grep -F "'" && \
+                print -- "$line" | grep -F "'" && \
                     BUFFER="${line:1:-1} $mywords[2,$]" ||
                     BUFFER="$line $mywords[2,$]"
             fi

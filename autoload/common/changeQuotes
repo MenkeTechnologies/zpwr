@@ -8,30 +8,30 @@ function ___changeQuotes(){
         __OLDBUFFER="${BUFFER}"
         BUFFER=${BUFFER//\"/\'}
     elif (( $ZPWR_COUNTER % 8 == 1 )); then
-        if [[ "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(print -r "$BUFFER" | tr -d "'" )" ]]; then
+        if [[ "$(print -r -- "$__OLDBUFFER" | tr -d "'\"\`" )" \
+            != "$(print -r -- "$BUFFER" | tr -d "'" )" ]]; then
             ZPWR_COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\'/\"}
     elif (( $ZPWR_COUNTER % 8 == 2 )); then
-        if [[ "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" != \
-            "$(print -r "$BUFFER" | tr -d "\"" )" ]]; then
+        if [[ "$(print -r -- "$__OLDBUFFER" | tr -d "'\"\`" )" != \
+            "$(print -r -- "$BUFFER" | tr -d "\"" )" ]]; then
             ZPWR_COUNTER=0
             return 1
         fi
         BUFFER=${BUFFER//\"/\`}
     elif (( $ZPWR_COUNTER % 8 == 3 )); then
         if [[ \
-            "$(print -r "$__OLDBUFFER" | tr -d "'\"\`" )" \
-            != "$(print -r "$BUFFER" | tr -d "\`" )" ]]; then ZPWR_COUNTER=0
+            "$(print -r -- "$__OLDBUFFER" | tr -d "'\"\`" )" \
+            != "$(print -r -- "$BUFFER" | tr -d "\`" )" ]]; then ZPWR_COUNTER=0
             return 1
         fi
         _SEMI_OLDBUFFER="$BUFFER"
         BUFFER="\"${BUFFER}\""
     elif (( $ZPWR_COUNTER % 8 == 4 )); then
-        if [[ "$(print -r "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != \
-            "$(print -r "$BUFFER" | tr -d "\`\"" )" ]]; then
+        if [[ "$(print -r -- "$_SEMI_OLDBUFFER" | tr -d "'\"\`" )" != \
+            "$(print -r -- "$BUFFER" | tr -d "\`\"" )" ]]; then
             ZPWR_COUNTER=0
             return 1
         fi
@@ -46,7 +46,7 @@ function ___changeQuotes(){
             #statements
         fi
         if [[ "$_SEMI_OLDBUFFER" != \
-            "$(print -r "${BUFFER:2:-1}" )" ]]; then
+            "$(print -r -- "${BUFFER:2:-1}" )" ]]; then
             ZPWR_COUNTER=0
             return 1
         fi

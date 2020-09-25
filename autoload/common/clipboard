@@ -10,11 +10,11 @@ function ___clipboard(){
 
     if [[ -n $clipcmd ]]; then
             print -sr -- "$BUFFER"
-            print -rn "$BUFFER" | ${=clipcmd}
+            print -rn -- "$BUFFER" | ${=clipcmd}
             echo
             print -n "\x1b[0;34mCopied \x1b[1m\""
-            print -rn "$BUFFER"
-            print  "\"\x1b[0;34m to System Clipboard!"
+            print -rn -- "$BUFFER"
+            print \"\x1b[0;34m to System Clipboard!"
             echo
             zle .redisplay
     else
