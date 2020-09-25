@@ -46,9 +46,9 @@ function ___digs(){
                 exec 2>&1
                 prettyPrint "DIG: $noport"
                 if [[ -n "$colo" ]]; then
-                    $exe dig +trace "$noport" | grcat conf.dig
+                    $exe dig +trace -t ANY "$noport" | grcat conf.dig
                 else
-                    $exe dig +trace "$noport"
+                    $exe dig +trace -t ANY "$noport"
                 fi
 
                 noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
