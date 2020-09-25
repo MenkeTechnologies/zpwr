@@ -164,6 +164,13 @@ alias zid=zc-id
 alias zls=zc-ls
 alias zla=zc-logo-all
 alias zn=zc-bg-notify
+
+alias wget='noglob wget'
+alias curl='noglob curl'
+alias http='noglob http'
+alias digs='noglob digs'
+alias lftp='noglob lftp'
+
 ###}}}***********************************************************
 }
 bindAliasesZshLate "$@"
