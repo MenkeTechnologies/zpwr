@@ -14,7 +14,7 @@ function ___clipboard(){
             echo
             print -n "\x1b[0;34mCopied \x1b[1m\""
             print -rn -- "$BUFFER"
-            print \"\x1b[0;34m to System Clipboard!"
+            print "\"\x1b[0;34m to System Clipboard!"
             echo
             zle .redisplay
     else
