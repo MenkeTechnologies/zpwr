@@ -166,7 +166,7 @@ alias zla=zc-logo-all
 alias zn=zc-bg-notify
 
 alias wget='noglob wget'
-alias curl='noglob curl'
+alias curl='noglob \curl -fsSL'
 alias http='noglob http'
 alias digs='noglob digs'
 alias lftp='noglob lftp'
