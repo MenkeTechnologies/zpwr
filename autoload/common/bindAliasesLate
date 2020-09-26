@@ -133,7 +133,11 @@ function bindAliasesLate(){
     alias curl='curl -fsSL'
     alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
     alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
-    alias sc="$ZPWR_FULL_SUDO systemctl"
+
+    if exists systemctl; then
+        alias sc="$ZPWR_FULL_SUDO systemctl"
+        alias jcf="$ZPWR_FULL_SUDO journalctl -f"
+    fi
     #alias df='grc --colour=on -c "$HOME/conf.df" df'
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
