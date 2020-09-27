@@ -670,8 +670,8 @@ export DIRSTACKSIZE=20
 
 # so we can bind ^S and ^Q
 setopt no_flow_control
-stty stop undef
-stty start undef
+#stty stop undef
+#stty start undef
 #}}}***********************************************************
 
 #{{{                    MARK:FZF
