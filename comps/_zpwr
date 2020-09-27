@@ -24,6 +24,7 @@ function __zpwr(){
 
   arguments=(
         '(- :)'{-h,--help}'[show help message and exit]'
+        '(- :)'{-V,--version}'[show zpwr version and exit]'
         '1:zpwr subcommand:->verb'
         '*:: :->args'
     )

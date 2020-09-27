@@ -297,6 +297,11 @@ if [[ -n "$verb" ]]; then
     shift
     found=false
 
+    if [[ $verb =~ '-V|--version' ]]; then
+        about | less
+        return 0
+    fi
+
     if [[ $verb =~ '-h|--help' ]]; then
         zpwrListVerbs | less
         return 0
