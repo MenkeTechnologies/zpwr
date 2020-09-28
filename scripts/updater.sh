@@ -240,6 +240,7 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
     if [[ "$manager" == "apt" ]]; then
         ssh -x "$hostname" '
         yes | sudo apt-get update
+        yes | sudo apt-get upgrade
         yes | sudo apt-get autoremove
         yes | sudo apt-get clean'
         #yes | sudo apt-get dist-upgrade

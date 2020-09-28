@@ -12,7 +12,7 @@ function apz(){
                     sudo -E zypper update -y
                     #alias apz="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y; u8"
                 elif exists apt;then
-                    sudo -E apt update; sudo -E apt autoremove -y; sudo -E apt clean
+                    sudo -E apt update; sudo -E apt upgrade -y;sudo -E apt autoremove -y; sudo -E apt clean
                     #alias apz="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean; u8"
                 elif exists yum;then
                     sudo -E yum check-update; sudo -E yum upgrade -y
