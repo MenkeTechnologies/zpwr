@@ -19,80 +19,79 @@ function __zpwr_gtl(){
 function __zpwr(){
 
   local arguments verb
-  local curcontext=$curcontext state line ret
+  local curcontext=$curcontext state line ret=0
 
 
   arguments=(
         '(- :)'{-h,--help}'[show help message and exit]'
         '(- :)'{-V,--version}'[show zpwr version and exit]'
-        '1:zpwr subcommand:->verb'
-        '*:: :->args'
+        '(-)1:zpwr subcommand:->verb'
+        '(-)*:: :->args'
     )
 
-    _arguments -s -C : $arguments && return
+    _arguments -s -C : $arguments && return 0
 
-    if (( CURRENT >= 1 )); then
-        case $state in
-            verb)
-                _describe -t commands "zpwr verb" zpwrSubcommandsAry
-                ;;
-            args)
-                verb=$words[1]
-                curcontext="${curcontext%:*:*}:zpwr-$verb:"
-                case $verb in
-                    redo|re|redosql|rsql|searchl|se|see|seee|searchlee|searchle)
-                        _se
-                        ;;
-                    attach)
-                        _tmux-attach-session
-                        ;;
-                    cat)
-                        _c
-                        ;;
-                    cd)
-                        _f
-                        ;;
-                    cdup)
-                        _r
-                        ;;
-                    clone|cloneToForked)
-                        _git-clone
-                        ;;
-                    gitedittag)
-                        __zpwr_gtl
-                        ;;
-                    gitzfordir|gitzfordirmaster|gitzfordirdevelop)
-                        _zcommand
-                        ;;
-                    info | clearlist)
-                        _cl
-                        ;;
-                    man)
-                        _man
-                        ;;
-                    ps)
-                        _p
-                        ;;
-                    servicedown)
-                        _ssd
-                        ;;
-                    serviceup)
-                        _ssu
-                        ;;
-                    z)
-                        _zcommand
-                        ;;
-                    *)
-                        _alternative \
-                    'files:files:_files' \
-                    'directory-stack:directory stack:_directory_stack'
-                        ;;
-                esac
+    case $state in
+        verb)
+            _describe -t commands "zpwr verb" zpwrSubcommandsAry || ret=1
             ;;
-        esac
-        return
-    fi
+        args)
+            verb=$words[1]
+            curcontext="${curcontext%:*:*}:zpwr-$verb:"
+            case $verb in
+                redo|re|redosql|rsql|searchl|se|see|seee|searchlee|searchle)
+                    _se
+                    ;;
+                attach)
+                    _tmux-attach-session
+                    ;;
+                cat)
+                    _c
+                    ;;
+                cd)
+                    _f
+                    ;;
+                cdup)
+                    _r
+                    ;;
+                clone|cloneToForked)
+                    _git-clone
+                    ;;
+                gitedittag)
+                    __zpwr_gtl
+                    ;;
+                gitzfordir|gitzfordirmaster|gitzfordirdevelop)
+                    _zcommand
+                    ;;
+                info | clearlist)
+                    _cl
+                    ;;
+                man)
+                    _man
+                    ;;
+                ps)
+                    _p
+                    ;;
+                servicedown)
+                    _ssd
+                    ;;
+                serviceup)
+                    _ssu
+                    ;;
+                z)
+                    _zcommand
+                    ;;
+                *)
+                    _alternative \
+                'files:files:_files' \
+                'directory-stack:directory stack:_directory_stack'
+                    ;;
+            esac
+            ret=$?
+        ;;
+    esac
 
+    return ret
 }
 
 __zpwr "$@"
