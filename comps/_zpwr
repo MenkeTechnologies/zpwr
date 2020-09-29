@@ -25,11 +25,11 @@ function __zpwr(){
   arguments=(
         '(- :)'{-h,--help}'[show help message and exit]'
         '(- :)'{-V,--version}'[show zpwr version and exit]'
-        '(-)1:zpwr subcommand:->verb'
-        '(-)*:: :->args'
+        '1:zpwr subcommand:->verb'
+        '*:: :->args'
     )
 
-    _arguments -s -C : $arguments && return 0
+    _arguments -S -s $arguments && return 0
 
     case $state in
         verb)

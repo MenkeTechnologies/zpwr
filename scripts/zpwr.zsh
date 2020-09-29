@@ -289,14 +289,7 @@ verb="$1"
 
 if [[ -n "$verb" ]]; then
 
-    if [[ $(basename -- $verb) == $(basename -- $0) ]]; then
-        #zunit does this
-        return 0
-    fi
-
     shift
-    found=false
-
     if [[ $verb =~ '-V|--version' ]]; then
         about | less
         return 0
@@ -306,6 +299,18 @@ if [[ -n "$verb" ]]; then
         zpwrListVerbs | less
         return 0
     fi
+
+    while [[ $verb == '--' ]]; do
+        verb="$1"
+        shift
+    done
+
+    if [[ $(basename -- $verb) == $(basename -- $0) ]]; then
+        #zunit does this
+        return 0
+    fi
+
+    found=false
 
     for k v in ${(kv)ZPWR_VERBS[@]};do
 
