@@ -452,6 +452,8 @@ export ZPWR_SURROUND=true
 # the string that marks a tabstop when expanding aliases
 # move to next tabstop with ^P
 export ZPWR_TABSTOP=__________
+# include tabstop aliases
+export ZPWR_TABSTOP_ALIASES=true
 # the tmux prefix on mac
 export ZPWR_TMUX_PREFIX_MAC='C-a'
 # the tmux prefix on linux
