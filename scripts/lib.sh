@@ -440,7 +440,7 @@ function upgrade(){
         brew upgrade
     elif [[ $1 == debian ]];then
         sudo apt-get update -y
-        sudo apt-get dist-upgrade -y
+        #sudo apt-get dist-upgrade -y
     elif [[ $1 == suse ]];then
         sudo zypper --non-interactive update
     elif [[ $1 == arch ]];then
