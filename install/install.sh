@@ -20,34 +20,8 @@ VERSION="2.0.0"
 ZPWR_PWD="$(pwd -P)"
 #}}}***********************************************************
 
-#{{{                    MARK:Find $ZPWR
-#**************************************************************
-source="${BASH_SOURCE[0]}"
-while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
-zpwrBaseDir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
-source="$(readlink "$source")"
-[[ $source != /* ]] && source="$zpwrBaseDir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-done
-zpwrBaseDir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
-
-while [[ ! -f "$zpwrBaseDir/.zpwr_root" ]]; do
-    zpwrBaseDir="$(dirname "$zpwrBaseDir")"
-    if [[ "$zpwrBaseDir" == / ]]; then
-        echo "Could not find .zpwr_root file up the directory tree." >&2
-        exit 1
-    fi
-done
-export ZPWR="$zpwrBaseDir"
-#}}}***********************************************************
-
 #{{{                    MARK:Env vars
 #**************************************************************
-echo "installing to $ZPWR"
-#normally ~/.zpwr
-export ZPWR_ENV="$ZPWR/env"
-export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
-export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
-
 
 INSTALL_VIM_SRC=false
 
@@ -61,17 +35,17 @@ export COLUMNS="$(tput cols)"
 
 #{{{                    MARK:sanity
 #**************************************************************
+# source common functions
+if ! source common.sh; then
+    echo "$ZPWR_PWD/common.sh source failed.  Are you in \$ZPWR/install directory?" >&2
+    exit 1
+fi
 
 if [[ ! -d $ZPWR ]]; then
     echo "Must be in $ZPWR/install directory" >&2
     exit 1
 fi
-
-# source common functions
-if ! source common.sh; then
-    echo "Must be in $ZPWR/install directory" >&2
-    exit 1
-fi
+echo "installing to $ZPWR"
 
 if [[ ! -d $ZPWR_LOCAL ]]; then
     echo "Must be in $ZPWR/install directory" >&2
