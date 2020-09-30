@@ -504,14 +504,14 @@ function proceed(){
         read -n1
         echo
         case $REPLY in
-            [yY][eE][sS]|[yY])
+            [yY])
                 break;
                 ;;
-            [nN][oO]|[nN])
+            [nN])
                 exit 1
                 ;;
             *)
-                loggErr "You must enter yes/y or no/n"
+                loggErr "You must enter y(es) or n(no)"
                 ;;
         esac
     done
