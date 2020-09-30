@@ -499,17 +499,22 @@ function needSudo(){
 
 function proceed(){
 
-    printf "Proceed?(y/n) >>> "
-    read -n1
-    echo
-    case $REPLY in
-        [yY][eE][sS]|[yY])
-            :
-            ;;
-        *)
-            exit 1
-            ;;
-    esac
+    while true; do
+        printf "Proceed?(y/n) >>> "
+        read -n1
+        echo
+        case $REPLY in
+            [yY][eE][sS]|[yY])
+                break;
+                ;;
+            [nN][oO]|[nN])
+                exit 1
+                ;;
+            *)
+                loggErr "You must enter yes/y or no/n"
+                ;;
+        esac
+    done
 }
 
 function prettyPrint(){
