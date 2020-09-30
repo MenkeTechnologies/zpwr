@@ -8,8 +8,8 @@ function bindFinal(){
     test -f "$HOME/.opam/opam-init/init.zsh" &&
     source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
     #}}}***********************************************************
-    alias ag='ag --hidden'
-    alias rg='rg --hidden'
+    alias ag="ag --hidden '$ZPWR_TABSTOP'"
+    alias rg="rg --hidden '$ZPWR_TABSTOP'"
     export CHEATCOLORS=true
 
     #Filter stderr through shell scripts
