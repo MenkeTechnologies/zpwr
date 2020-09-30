@@ -29,7 +29,7 @@ case $distroName in
         ;;
 esac
 
-if [[ $ZPWR_PLUGIN_MANAGER == zinitt ]]; then
+if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
     ZPWR_OMZ_PLUGINS+=("${tmpAry[@]}")
 else
     plugins+=("${tmpAry[@]}")
