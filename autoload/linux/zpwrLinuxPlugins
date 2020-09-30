@@ -1,29 +1,38 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-#[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
-plugins+=(systemd)
+declare -a tmpAry
+#[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && tmpAry+=(tmux)
+tmpAry+=(systemd)
 distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 
 case $distroName in
     (debian|raspbian|kali|parrot|zorin)
-        plugins+=(debian)
+        tmpAry+=(debian)
         ;;
     (ubuntu|linuxmint|elementary)
-        plugins+=(ubuntu)
+        tmpAry+=(ubuntu)
         ;;
     (centos|rhel)
-        plugins+=(yum dnf)
+        tmpAry+=(yum dnf)
         ;;
     (arch|manjaro*)
-        plugins+=(archlinux)
+        tmpAry+=(archlinux)
         ;;
     (*suse*)
-        plugins+=(suse)
+        tmpAry+=(suse)
         ;;
     (fedora)
-        plugins+=(yum dnf)
+        tmpAry+=(yum dnf)
         ;;
     (*) :
         ;;
 esac
+
+if [[ $ZPWR_PLUGIN_MANAGER == zinitt ]]; then
+    ZPWR_OMZ_PLUGINS+=("${tmpAry[@]}")
+else
+    plugins+=("${tmpAry[@]}")
+fi
+
+unset tmpAry
