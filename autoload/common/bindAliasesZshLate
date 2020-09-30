@@ -13,7 +13,8 @@ alias -s txt='vim'
 #**************************************************************
 function globalAliasesInit(){
 
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command grep -v -E '\bag\b' |& \\ag --color -i --"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& command ag -v '\bag\b' |& \\ag --hidden --color -i --"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}r="|& command rg -v '\brg\b' |& \\rg --hidden --color=always -i --"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$ZPWR_LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
@@ -33,7 +34,7 @@ function globalAliasesInit(){
 
     alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="perl -i -pe 's@\\b$ZPWR_TABSTOP\\b@quotemeta($ZPWR_TABSTOP)@ge' **/*(.)"
 
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}r="| sort"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}sr="| sort"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
     #default value tabstops
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}see="| sed -E 's@.*$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
