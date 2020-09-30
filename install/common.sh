@@ -27,7 +27,12 @@ while [[ ! -f "$zpwrBaseDir/.zpwr_root" ]]; do
         exit 1
     fi
 done
+
 export ZPWR="$zpwrBaseDir"
+export ZPWR_ENV="$ZPWR/env"
+export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
+export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
+
 unset zpwrBaseDir
 
 if ! test -f install.sh; then
