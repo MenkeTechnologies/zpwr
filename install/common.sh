@@ -32,7 +32,6 @@ export ZPWR="$zpwrBaseDir"
 export ZPWR_ENV="$ZPWR/env"
 export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
-export ZPWR_TMUX="$ZPWR/.tmux"
 
 unset zpwrBaseDir
 
