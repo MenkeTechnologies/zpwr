@@ -839,8 +839,10 @@ prettyPrintBox "Running Vundle"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
 
-prettyPrintBox "Installing Powerlevel9k"
-git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZPWR_PLUGIN_MANAGER_HOME/plugins/powerlevel9k"
+if [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
+    prettyPrintBox "Installing Powerlevel9k"
+    git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZPWR_PLUGIN_MANAGER_HOME/themes/powerlevel9k"
+fi
 
 if [[ $justConfig != true ]]; then
     prettyPrintBox "Final refreshing of dependencies"
