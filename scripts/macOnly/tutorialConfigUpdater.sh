@@ -87,7 +87,7 @@ cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
 
 logg "Updating vim plugins list"
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$ZPWR_DIR_INSTALL/.vimbundle"
-perl -i -pe 's@^.*vim-waktime.*$@@g' "$ZPWR_INSTALL/.vimbundle"
+perl -0 -i -pe 's@\n.*wakatime.*\n@\n@g' "$ZPWR_INSTALL/.vimbundle"
 logg "Updating zsh plugins list"
 printf "" > "$ZPWR_DIR_INSTALL/.zshplugins"
 
