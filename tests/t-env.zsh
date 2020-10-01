@@ -47,108 +47,173 @@
 }
 
 @test 'ZPWR' {
-
-    test -n $ZPWR
-    assert $? equals 0
-    test -d $ZPWR
-    assert $? equals 0
+    run test -n $ZPWR
+    assert $state equals 0
+    run test -d $ZPWR
+    assert $state equals 0
 }
-@test 'ZPWR_ENV' {
 
-    test -n $ZPWR_ENV
-    assert $? equals 0
-    test -d $ZPWR_ENV
-    assert $? equals 0
+@test 'ZPWR_ENV' {
+    run test -n $ZPWR_ENV
+    assert $state equals 0
+    run test -d $ZPWR_ENV
+    assert $state equals 0
+}
+
+@test 'ZPWR_ENV/.zpwr_env.sh' {
+
+    run test -n $ZPWR_ENV/.zpwr_env.sh
+    assert $state equals 0
+    run test -f $ZPWR_ENV/.zpwr_env.sh
+    assert $state equals 0
+}
+
+@test 'ZPWR_ENV/.zpwr_env.sh not dir' {
+    run test -d $ZPWR_ENV/.zpwr_env.sh
+    assert $state equals 1
+}
+
+@test 'ZPWR_ENV/.zpwr_re_env.sh' {
+
+    run test -n $ZPWR_ENV/.zpwr_re_env.sh
+    assert $state equals 0
+    run test -f $ZPWR_ENV/.zpwr_re_env.sh
+    assert $state equals 0
+}
+
+@test 'ZPWR_ENV/.zpwr_re_env.sh not dir' {
+    run test -d $ZPWR_ENV/.zpwr_re_env.sh
+    assert $state equals 1
+}
+
+@test 'ZPWR_INSTALL/zpwr.yml' {
+
+    run test -n $ZPWR_INSTALL/zpwr.yml
+    assert $state equals 0
+    run test -f $ZPWR_INSTALL/zpwr.yml
+    assert $state equals 0
+}
+
+@test 'ZPWR_INSTALL/.gitconfig' {
+
+    run test -n $ZPWR_INSTALL/.gitconfig
+    assert $state equals 0
+    run test -f $ZPWR_INSTALL/.gitconfig
+    assert $state equals 0
+}
+
+@test 'ZPWR_INSTALL/.zshrc' {
+
+    run test -n $ZPWR_INSTALL/.zshrc
+    assert $state equals 0
+    run test -f $ZPWR_INSTALL/.zshrc
+    assert $state equals 0
+}
+
+@test 'ZPWR_INSTALL/install.sh' {
+
+    run test -n $ZPWR_INSTALL/install.sh
+    assert $state equals 0
+    run test -f $ZPWR_INSTALL/install.sh
+    assert $state equals 0
 }
 
 @test 'ZPWR_INSTALL' {
 
-    test -n $ZPWR_INSTALL
-    assert $? equals 0
-    test -d $ZPWR_INSTALL
-    assert $? equals 0
+    run test -n $ZPWR_INSTALL
+    assert $state equals 0
+    run test -d $ZPWR_INSTALL
+    assert $state equals 0
 }
 
 @test 'ZPWR_TMUX' {
 
     test -n $ZPWR_TMUX
-    assert $? equals 0
+    assert $state equals 0
     test -d $ZPWR_TMUX
-    assert $? equals 0
+    assert $state equals 0
+}
+
+@test 'ZPWR_TMUX_LOCAL' {
+
+    test -n $ZPWR_TMUX_LOCAL
+    assert $state equals 0
+    test -d $ZPWR_TMUX_LOCAL
+    assert $state equals 0
 }
 
 @test 'ZPWR_TEST' {
 
-    test -n $ZPWR_TEST
-    assert $? equals 0
-    test -d $ZPWR_TEST
-    assert $? equals 0
+    run test -n $ZPWR_TEST
+    assert $state equals 0
+    run test -d $ZPWR_TEST
+    assert $state equals 0
 }
 
 @test 'ZPWR_SCRIPTS' {
 
-    test -n $ZPWR_SCRIPTS
-    assert $? equals 0
-    test -d $ZPWR_SCRIPTS
-    assert $? equals 0
+    run test -n $ZPWR_SCRIPTS
+    assert $state equals 0
+    run test -d $ZPWR_SCRIPTS
+    assert $state equals 0
 }
 
 @test '$ZPWR/.zpwr_root' {
 
-    test -f "$ZPWR/.zpwr_root"
-    assert $? equals 0
+    run test -f "$ZPWR/.zpwr_root"
+    assert $state equals 0
 }
 
 @test 'ZPWR_ENV_FILE' {
 
-    test -n $ZPWR_ENV_FILE
-    assert $? equals 0
-    test -f $ZPWR_ENV_FILE
-    assert $? equals 0
+    run test -n $ZPWR_ENV_FILE
+    assert $state equals 0
+    run test -f $ZPWR_ENV_FILE
+    assert $state equals 0
 }
 
 @test 'ZPWR_RE_ENV_FILE' {
 
-    test -n $ZPWR_RE_ENV_FILE
-    assert $? equals 0
-    test -f $ZPWR_RE_ENV_FILE
-    assert $? equals 0
+    run test -n $ZPWR_RE_ENV_FILE
+    assert $state equals 0
+    run test -f $ZPWR_RE_ENV_FILE
+    assert $state equals 0
 }
 
 @test 'ZPWR_EXPAND' {
 
-    test -n $ZPWR_EXPAND
-    assert $? equals 0
+    run test -n $ZPWR_EXPAND
+    assert $state equals 0
 }
 
 @test 'ZPWR_EXPAND_NATIVE' {
 
-    test -n $ZPWR_EXPAND_NATIVE
-    assert $? equals 0
+    run test -n $ZPWR_EXPAND_NATIVE
+    assert $state equals 0
 }
 
 @test 'ZPWR_LIB_INIT' {
 
-    test -n $ZPWR_LIB_INIT
-    assert $? equals 0
-    test -f $ZPWR_LIB_INIT
-    assert $? equals 0
+    run test -n $ZPWR_LIB_INIT
+    assert $state equals 0
+    run test -f $ZPWR_LIB_INIT
+    assert $state equals 0
 }
 
 @test 'ZPWR_LIB' {
 
-    test -n $ZPWR_LIB
-    assert $? equals 0
-    test -f $ZPWR_LIB
-    assert $? equals 0
+    run test -n $ZPWR_LIB
+    assert $state equals 0
+    run test -f $ZPWR_LIB
+    assert $state equals 0
 }
 
 @test 'ZPWR_COMPS' {
 
-    test -n $ZPWR_COMPS
-    assert $? equals 0
-    test -d $ZPWR_COMPS
-    assert $? equals 0
+    run test -n $ZPWR_COMPS
+    assert $state equals 0
+    run test -d $ZPWR_COMPS
+    assert $state equals 0
 }
 
 @test 'ZPWR_FZF' {
@@ -159,89 +224,89 @@
 
 @test 'ZPWR_FZF' {
 
-    test -n $ZPWR_FZF
-    assert $? equals 0
+    run test -n $ZPWR_FZF
+    assert $state equals 0
 }
 
 @test 'ZPWR_VERBS' {
-    test -n "$ZPWR_VERBS"
-    assert $? equals 0
+    run test -n "${#ZPWR_VERBS}"
+    assert $state equals 0
 }
 
 
 @test 'ZPWR_COLOR_BLUE' {
-    test -n $ZPWR_COLOR_BLUE
-    assert $? equals 0
+    run test -n $ZPWR_COLOR_BLUE
+    assert $state equals 0
 }
 
 @test 'ZPWR_LOCAL' {
-    test -n $ZPWR_LOCAL
-    assert $? equals 0
-    test -d $ZPWR_LOCAL
-    assert $? equals 0
+    run test -n $ZPWR_LOCAL
+    assert $state equals 0
+    run test -d $ZPWR_LOCAL
+    assert $state equals 0
 }
 
 @test 'ZPWR_AUTOLOAD_COMMON' {
-    test -n $ZPWR_AUTOLOAD_COMMON
-    assert $? equals 0
-    test -d $ZPWR_AUTOLOAD_COMMON
-    assert $? equals 0
+    run test -n $ZPWR_AUTOLOAD_COMMON
+    assert $state equals 0
+    run test -d $ZPWR_AUTOLOAD_COMMON
+    assert $state equals 0
 }
 
 @test 'ZPWR_AUTOLOAD' {
-    test -n $ZPWR_AUTOLOAD
-    assert $? equals 0
-    test -d $ZPWR_AUTOLOAD
-    assert $? equals 0
+    run test -n $ZPWR_AUTOLOAD
+    assert $state equals 0
+    run test -d $ZPWR_AUTOLOAD
+    assert $state equals 0
 }
 
 @test 'ZPWR_AUTOLOAD_DARWIN' {
-    test -n $ZPWR_AUTOLOAD_DARWIN
-    assert $? equals 0
-    test -d $ZPWR_AUTOLOAD_DARWIN
-    assert $? equals 0
+    run test -n $ZPWR_AUTOLOAD_DARWIN
+    assert $state equals 0
+    run test -d $ZPWR_AUTOLOAD_DARWIN
+    assert $state equals 0
 }
 
 @test 'ZPWR_AUTOLOAD_LINUX' {
-    test -n $ZPWR_AUTOLOAD_LINUX
-    assert $? equals 0
-    test -d $ZPWR_AUTOLOAD_LINUX
-    assert $? equals 0
+    run test -n $ZPWR_AUTOLOAD_LINUX
+    assert $state equals 0
+    run test -d $ZPWR_AUTOLOAD_LINUX
+    assert $state equals 0
 }
 
 @test 'ZPWR_COMPYS_CACHE' {
-    test -n $ZPWR_COMPYS_CACHE
-    assert $? equals 0
+    run test -n $ZPWR_COMPYS_CACHE
+    assert $state equals 0
 }
 
 @test 'ZPWR_OS_TYPE' {
-    test -n $ZPWR_OS_TYPE
-    assert $? equals 0
+    run test -n $ZPWR_OS_TYPE
+    assert $state equals 0
 }
 
 @test 'ZPWR_GITHUB_ACCOUNT' {
-    test -n $ZPWR_GITHUB_ACCOUNT
-    assert $? equals 0
+    run test -n $ZPWR_GITHUB_ACCOUNT
+    assert $state equals 0
 }
 
 @test 'ZPWR_REPO_NAME' {
-    test -n $ZPWR_REPO_NAME
-    assert $? equals 0
+    run test -n $ZPWR_REPO_NAME
+    assert $state equals 0
     assert $ZPWR_REPO_NAME equals zpwr
 }
 
 @test 'ZPWR_COMPETION_DIR' {
-    test -n $ZPWR_COMPETION_DIR
-    assert $? equals 0
+    run test -n $ZPWR_COMPETION_DIR
+    assert $state equals 0
 }
 @test 'ZPWR_GITHUB_ACCOUNT' {
-    test -n $ZPWR_GITHUB_ACCOUNT
-    assert $? equals 0
+    run test -n $ZPWR_GITHUB_ACCOUNT
+    assert $state equals 0
 }
 
 @test 'ZPWR_GITHUB_URL' {
-    test -n $ZPWR_GITHUB_URL
-    assert $? equals 0
+    run test -n $ZPWR_GITHUB_URL
+    assert $state equals 0
 }
 
 @test 'is a git dir message' 
