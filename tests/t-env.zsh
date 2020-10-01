@@ -128,17 +128,17 @@
 
 @test 'ZPWR_TMUX' {
 
-    test -n $ZPWR_TMUX
+    run test -n $ZPWR_TMUX
     assert $state equals 0
-    test -d $ZPWR_TMUX
+    run test -d $ZPWR_TMUX
     assert $state equals 0
 }
 
 @test 'ZPWR_TMUX_LOCAL' {
 
-    test -n $ZPWR_TMUX_LOCAL
+    run test -n $ZPWR_TMUX_LOCAL
     assert $state equals 0
-    test -d $ZPWR_TMUX_LOCAL
+    run test -d $ZPWR_TMUX_LOCAL
     assert $state equals 0
 }
 
