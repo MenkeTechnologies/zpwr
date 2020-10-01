@@ -216,10 +216,10 @@
     assert $state equals 0
 }
 
-@test 'ZPWR_FZF' {
+@test 'ZPWR_FZF grep fzf' {
 
-    run echo $ZPWR_FZF | grep fzf
-    assert $state equals 0
+    run echo $ZPWR_FZF
+    assert $output contains fzf
 }
 
 @test 'ZPWR_FZF' {
@@ -233,6 +233,20 @@
     assert $state equals 0
 }
 
+@test 'ZPWR_VERBS[cd]' {
+    run test -n "${ZPWR_VERBS[cd]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[tests]' {
+    run test -n "${ZPWR_VERBS[tests]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS counts' {
+    run echo "${#ZPWR_VERBS}"
+    assert $output is_greater_than 200
+}
 
 @test 'ZPWR_COLOR_BLUE' {
     run test -n $ZPWR_COLOR_BLUE
