@@ -53,6 +53,45 @@
     test -d $ZPWR
     assert $? equals 0
 }
+@test 'ZPWR_ENV' {
+
+    test -n $ZPWR_ENV
+    assert $? equals 0
+    test -d $ZPWR_ENV
+    assert $? equals 0
+}
+
+@test 'ZPWR_INSTALL' {
+
+    test -n $ZPWR_INSTALL
+    assert $? equals 0
+    test -d $ZPWR_INSTALL
+    assert $? equals 0
+}
+
+@test 'ZPWR_TMUX' {
+
+    test -n $ZPWR_TMUX
+    assert $? equals 0
+    test -d $ZPWR_TMUX
+    assert $? equals 0
+}
+
+@test 'ZPWR_TEST' {
+
+    test -n $ZPWR_TEST
+    assert $? equals 0
+    test -d $ZPWR_TEST
+    assert $? equals 0
+}
+
+@test 'ZPWR_SCRIPTS' {
+
+    test -n $ZPWR_SCRIPTS
+    assert $? equals 0
+    test -d $ZPWR_SCRIPTS
+    assert $? equals 0
+}
 
 @test '$ZPWR/.zpwr_root' {
 
@@ -100,7 +139,15 @@
 
     test -n $ZPWR_LIB
     assert $? equals 0
-    test -d $ZPWR_LIB
+    test -f $ZPWR_LIB
+    assert $? equals 0
+}
+
+@test 'ZPWR_COMPS' {
+
+    test -n $ZPWR_COMPS
+    assert $? equals 0
+    test -d $ZPWR_COMPS
     assert $? equals 0
 }
 

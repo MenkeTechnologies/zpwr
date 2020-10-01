@@ -69,6 +69,20 @@
     assert "$output" contains update
 }
 
+@test 'zpwrScriptCount' {
+    run zpwr scriptcount &>/dev/null
+    assert $state equals 0
+    assert "$output" is_not_empty
+    assert "$output" is_greater_than 100
+}
+
+@test 'zpwrScriptList ' {
+    run zpwr scriptlist &>/dev/null
+    assert $state equals 0
+    assert "$output" is_not_empty
+    assert "$output" contains .sh
+    assert "$output" contains about.sh
+}
 @test 'zpwrListVerbs poll' {
     run zpwr verbslist &>/dev/null
     assert $state equals 0
