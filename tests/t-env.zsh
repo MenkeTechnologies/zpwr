@@ -50,6 +50,8 @@
 
     test -n $ZPWR
     assert $? equals 0
+    test -d $ZPWR
+    assert $? equals 0
 }
 
 @test '$ZPWR/.zpwr_root' {
@@ -62,11 +64,15 @@
 
     test -n $ZPWR_ENV_FILE
     assert $? equals 0
+    test -f $ZPWR_ENV_FILE
+    assert $? equals 0
 }
 
 @test 'ZPWR_RE_ENV_FILE' {
 
     test -n $ZPWR_RE_ENV_FILE
+    assert $? equals 0
+    test -f $ZPWR_RE_ENV_FILE
     assert $? equals 0
 }
 
@@ -86,11 +92,15 @@
 
     test -n $ZPWR_LIB_INIT
     assert $? equals 0
+    test -f $ZPWR_LIB_INIT
+    assert $? equals 0
 }
 
 @test 'ZPWR_LIB' {
 
     test -n $ZPWR_LIB
+    assert $? equals 0
+    test -d $ZPWR_LIB
     assert $? equals 0
 }
 
@@ -119,6 +129,41 @@
 
 @test 'ZPWR_LOCAL' {
     test -n $ZPWR_LOCAL
+    assert $? equals 0
+    test -d $ZPWR_LOCAL
+    assert $? equals 0
+}
+
+@test 'ZPWR_AUTOLOAD_COMMON' {
+    test -n $ZPWR_AUTOLOAD_COMMON
+    assert $? equals 0
+    test -d $ZPWR_AUTOLOAD_COMMON
+    assert $? equals 0
+}
+
+@test 'ZPWR_AUTOLOAD' {
+    test -n $ZPWR_AUTOLOAD
+    assert $? equals 0
+    test -d $ZPWR_AUTOLOAD
+    assert $? equals 0
+}
+
+@test 'ZPWR_AUTOLOAD_DARWIN' {
+    test -n $ZPWR_AUTOLOAD_DARWIN
+    assert $? equals 0
+    test -d $ZPWR_AUTOLOAD_DARWIN
+    assert $? equals 0
+}
+
+@test 'ZPWR_AUTOLOAD_LINUX' {
+    test -n $ZPWR_AUTOLOAD_LINUX
+    assert $? equals 0
+    test -d $ZPWR_AUTOLOAD_LINUX
+    assert $? equals 0
+}
+
+@test 'ZPWR_COMPYS_CACHE' {
+    test -n $ZPWR_COMPYS_CACHE
     assert $? equals 0
 }
 
@@ -191,6 +236,11 @@
 
 @test 'exists isZsh' {
     run exists isZsh
+    assert $state equals 0
+}
+
+@test 'commandExists' {
+    run commandExists ls
     assert $state equals 0
 }
 

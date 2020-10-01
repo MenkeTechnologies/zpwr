@@ -137,6 +137,21 @@
     assert $? equals 0
 }
 
+@test 'zl' {
+    zl &>/dev/null
+    [[ "$PWD" == "$ZPWR_LOCAL" ]]
+    assert $? equals 0
+}
+
+@test 'zlc' {
+    if [[ ! -d "$ZPWR_COMPSYS_CACHE" ]]; then
+        mkdir -pv "$ZPWR_COMPSYS_CACHE"
+    fi
+    zlc &>/dev/null
+    [[ "$PWD" == "$ZPWR_COMPSYS_CACHE" ]]
+    assert $? equals 0
+}
+
 @test 'zt' {
     zt &>/dev/null
     [[ "$PWD" == "$ZPWR_TEST" ]]
