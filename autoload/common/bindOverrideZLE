@@ -5,13 +5,9 @@ function bindOverrideZLE(){
 
     autoload -Uz select-bracketed select-quoted bracketed-paste-magic edit-command-line
 
+    autoload -z bufferXtrace expand-or-complete-with-dots
 
-    function expand-or-complete-with-dots() {
-        print -Pn "%F{red}…%f"
-        zle expand-or-complete
-        zle redisplay
-    }
-
+    zle -N bufferXtrace
     zle -N expand-or-complete-with-dots
     zle -N accept-line my-accept-line
     zle -N magic-enter
@@ -95,6 +91,9 @@ function bindOverrideZLE(){
     bindkey -M vicmd '^r' redo
     bindkey -M viins '^z' undo
     bindkey -M vicmd '^z' undo
+
+    bindkey -M vicmd '^X^X' bufferXtrace
+    bindkey -M viins '^X^X' bufferXtrace
 
     bindkey -M viins '^F^V' edit-command-line
     bindkey -M vicmd '^F^V' edit-command-line
