@@ -36,8 +36,39 @@
     assert "$output" contains push
 }
 
+@test 'zpwr -- banner verb script no output' {
+    run zpwr -- banner &>/dev/null
+    assert $state equals 0
+
+    assert "$output" is_not_empty
+    assert "$output" contains fetch
+    assert "$output" contains push
+}
+
 @test 'zpwr junk verb 1' {
     run zpwr junk &>/dev/null
+    assert $state equals 1
+}
+
+@test 'zpwr -- junk verb 1' {
+    run zpwr -- junk &>/dev/null
+    assert $state equals 1
+}
+
+@test 'zpwr --version' {
+    run zpwr --version
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'zpwr --help' {
+    run zpwr --help &>/dev/null
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'zpwr --junk' {
+    run zpwr --junk
     assert $state equals 1
 }
 
