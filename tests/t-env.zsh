@@ -234,12 +234,12 @@
 }
 
 @test 'ZPWR_VERBS[cd]' {
-    run test -n "${ZPWR_VERBS[cd]}"
+run test -n "${(qqq)ZPWR_VERBS[cd]}"
     assert $state equals 0
 }
 
 @test 'ZPWR_VERBS[tests]' {
-    run test -n "${ZPWR_VERBS[tests]}"
+run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $state equals 0
 }
 
