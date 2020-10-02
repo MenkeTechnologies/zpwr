@@ -813,7 +813,7 @@ class Deroffer:
         if self.str_at(0):
             # Split at whitespace
             comps = self.s.split(None, 2)
-            if len(comps) is 2:
+            if len(comps) == 2:
                 name, value = comps
                 value = value.rstrip()
                 self.reg_table[name] = value
@@ -1015,7 +1015,7 @@ class Deroffer:
             if self.str_at(0):
                 # Split at whitespace
                 comps = self.s.split(None, 2)
-                if len(comps) is 2:
+                if len(comps) == 2:
                     name, value = comps
                     value = value.rstrip()
                     self.reg_table[name] = value
@@ -1289,6 +1289,7 @@ def output_complete_command(cmdname, args, description, output_list, argument):
         else:
             pass
         if argument != "":
+            argument = re.sub(r'[<>]', '', argument)
             comps.append(":" + argument)
     else:
         comps.append("'")
@@ -1304,6 +1305,7 @@ def output_complete_command(cmdname, args, description, output_list, argument):
         else:
             pass
         if argument != "":
+            argument = re.sub(r'[<>]', '', argument)
             comps.append(":" + argument)
         comps.append("'")
     output_list.append(
