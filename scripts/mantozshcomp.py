@@ -1269,6 +1269,8 @@ def output_complete_command(cmdname, args, description, output_list, argument):
     description = re.sub(r"'", "", description)
     description = re.sub(r"\[", "\\[", description)
     description = re.sub(r"\]", "\\]", description)
+
+    description = re.sub(r"^: ", "", description)
     comps = []
     if len(args) > 1:
         comps.append("{")
