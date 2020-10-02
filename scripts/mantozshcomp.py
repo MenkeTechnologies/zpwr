@@ -1289,7 +1289,8 @@ def output_complete_command(cmdname, args, description, output_list, argument):
         else:
             pass
         if argument != "":
-            argument = re.sub(r'[<>]', '', argument)
+            argument = re.sub(r'^<', '', argument)
+            argument = re.sub(r'>$', '', argument)
             comps.append(":" + argument)
     else:
         comps.append("'")
@@ -1305,7 +1306,8 @@ def output_complete_command(cmdname, args, description, output_list, argument):
         else:
             pass
         if argument != "":
-            argument = re.sub(r'[<>]', '', argument)
+            argument = re.sub(r'^<', '', argument)
+            argument = re.sub(r'>$', '', argument)
             comps.append(":" + argument)
         comps.append("'")
     output_list.append(
