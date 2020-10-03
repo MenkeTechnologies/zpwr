@@ -11,7 +11,7 @@ function zpwrAttachSetup() {
         local mobile out key num_con ret
         mobile=true
         if [[ -f "$HOME/.ssh/authorized_keys" ]]; then
-            cat "$HOME/.ssh/authorized_keys" |
+            command cat "$HOME/.ssh/authorized_keys" |
                 command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
 
             case $distroName in
@@ -51,7 +51,7 @@ function zpwrAttachSetup() {
             if (( $num_con <= 1 )); then
                 logg "no tmux clients"
                 {
-                    out="$(tmux ls 2>&1)"
+                    out="$(command tmux ls 2>&1)"
                     ret=$?
                     logg "tmux ls = ret: '$ret', out: '$out'"
                     if [[ $ret == 0 ]]; then
@@ -64,7 +64,7 @@ function zpwrAttachSetup() {
                         logg "creating new session"
                         logg tmux new-session \; \
                         source-file "$ZPWR_TMUX/control-window"
-                        tmux new-session \; \
+                        command tmux new-session \; \
                         source-file "$ZPWR_TMUX/control-window"
                         ret=$?
                         logg "tmux create ret: '$ret'"
