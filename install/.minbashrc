@@ -1,6 +1,6 @@
+#!/usr/bin/env bash
 # -*- mode: sh -*-
 # vim: set ft=sh:
-#!/usr/bin/env bash
 #{{{                    MARK:Header
 #**************************************************************
 ##### Author: MenkeTechnologies
@@ -10,17 +10,17 @@
 ##### Notes: 
 #}}}***********************************************************
 
-function clearList() {
+ clearList() {
    clear 
    ls -AlhF
 }
 
-function cd() {
+ cd() {
     builtin cd "$@"
     clearList
 }
 
-function f() {
+ f() {
     if [[ -z "$1" ]]; then
         cd -
     else
@@ -28,23 +28,23 @@ function f() {
     fi
 }
 
-function t() {
+ t() {
     cd "/"
 }
 
-function d() {
+ d() {
     cd "$HOME/Desktop"
 }
 
-function a() {
+ a() {
     cd "$HOME"
 }
 
-function r() {
+ r() {
     cd ..
 }
 
-function e() {
+ e() {
     cd "/etc"
 }
 
@@ -52,6 +52,6 @@ alias l='clearList'
 alias la='clearList'
 alias ls='clearList'
 
-function c() {
+ c() {
     cat "$@" | less -M -N -R -K -F -X
 }
