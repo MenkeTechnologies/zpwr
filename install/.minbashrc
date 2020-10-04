@@ -10,48 +10,48 @@
 ##### Notes: 
 #}}}***********************************************************
 
- clearList() {
-   clear 
+clearList() {
+   clear
    ls -AlhF
 }
 
- cd() {
-    builtin cd "$@"
+cdClear() {
+    cd "$@"
     clearList
 }
 
- f() {
+f() {
     if [[ -z "$1" ]]; then
-        cd -
+        cdClear -
     else
-        cd "$@"
+        cdClear "$@"
     fi
 }
 
- t() {
-    cd "/"
+t() {
+    cdClear "/"
 }
 
- d() {
-    cd "$HOME/Desktop"
+d() {
+    cdClear "$HOME/Desktop"
 }
 
- a() {
-    cd "$HOME"
+a() {
+    cdClear "$HOME"
 }
 
- r() {
-    cd ..
+r() {
+    cdClear ..
 }
 
- e() {
-    cd "/etc"
+e() {
+    cdClear "/etc"
 }
 
 alias l='clearList'
 alias la='clearList'
 alias ls='clearList'
 
- c() {
+c() {
     cat "$@" | less -M -N -R -K -F -X
 }
