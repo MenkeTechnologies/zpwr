@@ -66,6 +66,12 @@ globalAliasesInit
 #{{{                    MARK:Regular Aliases
 #**************************************************************
     if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
+
+        
+        if exists lftp; then
+            alias lf="lftp sftp://$ZPWR_TABSTOP"
+        fi
+
         alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
         alias gac='git add . && git commit -m "'$ZPWR_TABSTOP'"'
         exists zff || alias zff="$ZPWR_REPO_NAME fordir 'isGitDir && { $ZPWR_TABSTOP; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
