@@ -720,7 +720,7 @@ function clearList() {
                 # exe matching
                 while read loc;do
                     lf="$(echo $loc | cut -d' ' -f3-10)"
-                    if [[ $(type "$arg") == "$loc" ]]; then
+                    if [[ $(type -- "$arg") == "$loc" ]]; then
                         rank="Primary"
                     else
                         rank="Secondary"
@@ -770,7 +770,7 @@ function clearList() {
                         echo
                         echo
                     fi
-                done < <(type -a "$arg" 2>/dev/null | sort | uniq)
+                done < <(type -a -- "$arg" 2>/dev/null | sort | uniq)
             fi
             # path matching, not exe
             if eval "$ls_command -d -- \"$arg\"" 2>/dev/null; then
@@ -786,7 +786,7 @@ function clearList() {
                 echo
                 echo
             else
-                out=$(declare -m "$arg")
+                out=$(declare -m -- "$arg")
 
                 if [[ -n $out ]]; then
                     FOUND=true
