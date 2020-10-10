@@ -34,11 +34,16 @@ ln -sf $ZPWR_INSTALL/init.vim "$nvimDir"
 
 #custom settings for tmux powerline
 tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
+tmuxPowerlineColorsDir="$HOME/.config/powerline/colorschemes/tmux"
 [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
+[[ ! -d "$tmuxPowerlineColorsDir" ]] && mkdir -p "$tmuxPowerlineColorsDir"
 
 prettyPrintBox "Installing Tmux Powerline Config"
 goInstallerDir
-ln -sf $ZPWR_INSTALL/default.json "$tmuxPowerlineDir/default.json"
+ln -sf $ZPWR_INSTALL/.config/powerline/themes/default.json "$tmuxPowerlineDir/default.json"
+echo ln -sf $ZPWR_INSTALL/.config/powerline/themes/default.json "$tmuxPowerlineDir/default.json"
+ln -sf $ZPWR_INSTALL/.config/powerline/colorschemes/default.json "$tmuxPowerlineColorsDir/default.json"
+echo ln -sf $ZPWR_INSTALL/.config/powerline/colorschemes/default.json "$tmuxPowerlineColorsDir/default.json"
 
 prettyPrintBox "Installing Tmux Plugin Manager"
 [[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p "$HOME/.tmux/plugins/tpm"
@@ -73,9 +78,9 @@ prettyPrintBox "HushLogin to $HOME"
 prettyPrintBox "Installing my.cnf to $HOME"
 [[ ! -f "$HOME/.my.cnf" ]] && touch "$HOME/.my.cnf"
 
-prettyPrintBox "Changing pager to cat for MySQL Clients such as MyCLI"
-echo "[client]" >> "$HOME/.my.cnf"
-echo "pager=cat" >> "$HOME/.my.cnf"
+#prettyPrintBox "Changing pager to cat for MySQL Clients such as MyCLI"
+#echo "[client]" >> "$HOME/.my.cnf"
+#echo "pager=cat" >> "$HOME/.my.cnf"
 
 prettyPrintBox "Installing htoprc file...."
 goInstallerDir
