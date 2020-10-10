@@ -3,11 +3,6 @@
 
         "right": [
             {
-
-                "function": "powerline.segments.common.sys.cpu_load_percent"
-            },
-
-            {
                 "function": "powerline.segments.common.players.spotify",
                 "name": "player"
             },
@@ -16,6 +11,10 @@
             },
             {
                 "function" : "powerline.segments.common.vcs.stash"
+            },
+            {
+
+                "function": "powerline.segments.common.sys.cpu_load_percent"
             },
 
             {
