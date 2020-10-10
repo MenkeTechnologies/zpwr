@@ -18,15 +18,15 @@
     assert "$output" is_not_empty
 }
 
-@test 'ZPWR_INSTALL/*.json syntax check' {
-	for file in "$ZPWR_INSTALL/"*.json;do
+@test 'ZPWR_INSTALL/**/*.json syntax check' {
+	for file in "$ZPWR_INSTALL/"**/*.json;do
         run python3 -m json.tool &>/dev/null < "$file"
         assert $state equals 0
     done
 }
 
-@test 'ZPWR_INSTALL/*.yml/yaml syntax check' {
-	for file in "$ZPWR_INSTALL/"*.{yaml,yml};do
+@test 'ZPWR_INSTALL/**/*.yml/yaml syntax check' {
+	for file in "$ZPWR_INSTALL/"**/*.{yaml,yml};do
         run python3 -c 'import yaml, sys; yaml.safe_load(sys.stdin)' < "$file"
         assert $state equals 0
     done
