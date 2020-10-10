@@ -689,7 +689,7 @@ if [[ -n "$iface" ]]; then
             cp "$ZPWR_INSTALLER_OUTPUT/.iftop.conf" "$HOME"
     fi
 else
-    echo"IPv4 Iface missing: $ip and interface: $iface"
+    echo "IPv4 Iface missing: $ip and interface: $iface"
     if [[ -f "$HOME/.iftop.conf" ]]; then
         if ! grep -E '^interface:\S+' "$HOME/.iftop.conf"; then
             echo "no interface in $HOME/.iftop.conf. No mod"
