@@ -138,7 +138,7 @@ function isBinary() {
 
 function loggNotGit() {
 
-    loggErr "$(pwd) is not a git dir"
+    loggErr "'$(pwd)' is not a git dir"
 }
 
 function loggInfo(){
@@ -297,7 +297,7 @@ function goInstallerDir(){
     builtin cd "$ZPWR_INSTALL" || ret=1
 
     if [[ "$(pwd)" != "$ZPWR_INSTALL" ]]; then
-        echo "pwd $PWD is not $ZPWR_INSTALL"
+        echo "pwd '$PWD' is not '$ZPWR_INSTALL'" >&2
     fi
 
     if (( ret == 1 )); then
@@ -316,7 +316,7 @@ function goInstallerOutputDir(){
     builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
 
     if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
-        echo "pwd $PWD is not $ZPWR_INSTALLER_OUTPUT"
+        echo "pwd '$PWD' is not '$ZPWR_INSTALLER_OUTPUT'" >&2
     fi
 
     if (( ret == 1 )); then
