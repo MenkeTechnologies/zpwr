@@ -14,7 +14,10 @@
             },
             {
 
-                "function": "powerline.segments.common.sys.cpu_load_percent"
+                "function": "powerline.segments.common.sys.cpu_load_percent",
+                "args": {
+                    "format": "{0:2.0f}%"
+                }
             },
 
             {
