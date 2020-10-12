@@ -243,6 +243,7 @@ ZPWR_OMZ_LIBS=(
     git.zsh
     directories.zsh
     grep.zsh
+    functions.zsh
 )
 
 ZPWR_OMZ_COMPS=(
