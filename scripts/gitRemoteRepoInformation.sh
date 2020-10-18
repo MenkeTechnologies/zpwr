@@ -43,12 +43,12 @@ for directory; do
                 line="$(git remote -v 2>/dev/null | command grep origin | head -n 1)" && {
                     if echo "$line" | grep -q 'git@'; then
                         #ssh
-                        out="$(echo $line | perl -ne 'do{($_=$1)=~ s@.git$@@;print;exit} if m{^.*:(\S+/\S+)\.git\s+.*$}')"
+                        out="$(echo $line | perl -ne 'do{($_=$1)=~ s@\.git$@@;print;exit} if m{^.*:(\S+/\S+)\.git\s+.*$}')"
                         #user="${out%/*}"
                         #repo="${out#*/}"
                     else
                         #http
-                        out="$(echo $line | perl -ne 'do{($_=$1)=~ s@.git$@@;print;exit} if m{^.*/(\S+/\S+)\s+.*$}')"
+                        out="$(echo $line | perl -ne 'do{($_=$1)=~ s@\.git$@@;print;exit} if m{^.*/(\S+/\S+)\s+.*$}')"
                     fi
                     echo "$out"
                 }
