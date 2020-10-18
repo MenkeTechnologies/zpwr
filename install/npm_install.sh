@@ -59,7 +59,7 @@ elif [[ "$ZPWR_OS_TYPE" == linux ]];then
             distroFamily=suse
             installNpmRpm
             ;;
-        (centos|fedora|rhel)
+        (centos|fedora|rhel|amzn)
             distroFamily=redhat
             installNpmRpm
             ;;

@@ -487,7 +487,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
                 prettyPrintBox "Fetching Dependencies for $distroName with zypper"
                 addDependenciesSuse
                 ;;
-            (centos|fedora|rhel)
+            (centos|fedora|rhel|amzn)
                 distroFamily=redhat
                 prettyPrintBox "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
                 addDependenciesRedHat

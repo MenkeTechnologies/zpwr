@@ -87,7 +87,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
             (*suse*)
                 distroFamily=suse
                 ;;
-            (centos|fedora|rhel)
+            (centos|fedora|rhel|amzn)
                 distroFamily=redhat
                 ;;
             (*)
