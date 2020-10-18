@@ -72,7 +72,7 @@ else
     debian | ubuntu | elementary | raspbian | kali | zorin | parrot)
         distro=debian
         ;;
-    centos | fedora | rhel)
+    centos | fedora | rhel | amzn)
         distro=redhat
         ;;
     opensuse* | suse* | arch | manjaro*)
