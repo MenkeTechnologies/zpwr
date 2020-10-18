@@ -261,7 +261,6 @@ zstyle ':completion::megacomplete:zpwr-gitedittag::commit-tags' sort false
 zstyle ":completion:*:*:*:*:*:zdir" sort false
 zstyle ":completion:*:*:*:*:*:fasd" sort false
 zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' sort false
-zstyle ':completion:*:*:(zpwr-se|zpwr-see|zpwr-seee|zpwr-redo|zpwr-rsql|zpwr-re|zpwr-searchl|zpwr-searchle|zpwr-searchlee|zpwr-r):*:*' sort false
 #}}}***********************************************************
 
 #{{{                    MARK:fzf-tab change fzf cmd
