@@ -2,6 +2,11 @@
     "segments": {
 
         "right": [
+
+            {
+                "function": "powerline.segments.common.net.network_load",
+                "interface": "en0"
+            },
             {
                 "function": "powerline.segments.common.players.spotify",
                 "name": "player"
@@ -42,11 +47,6 @@
             },
             {
                 "function": "powerline.segments.common.bat.battery"
-            },
-
-            {
-                "function": "powerline.segments.common.net.network_load",
-                "interface": "en0"
             },
 
             {
