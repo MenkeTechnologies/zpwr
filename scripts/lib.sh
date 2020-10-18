@@ -297,7 +297,7 @@ function goInstallerDir(){
     builtin cd "$ZPWR_INSTALL" || ret=1
 
     if [[ "$(pwd)" != "$ZPWR_INSTALL" ]]; then
-        echo "pwd '$PWD' is not '$ZPWR_INSTALL'" >&2
+        echo "pwd '$PWD' is not ZPWR_INSTALL '$ZPWR_INSTALL'" >&2
     fi
 
     if (( ret == 1 )); then
