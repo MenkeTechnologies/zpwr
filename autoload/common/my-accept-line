@@ -49,21 +49,27 @@ function my-accept-line () {
 
     mywords=("${(z)BUFFER}")
 
-    if [[ ${mywords[1]} == 'sudo' ]]; then
-        cmd=${mywords[2]}
+    #so sudo -E env ping uses grc overalias of ping
+    if commandExists grc; then
+        if [[ $BUFFER =~ "^([[:space:]]*)([[:graph:]]+=[[:graph:]]+[[:space:]]+)*(([\\\\\"\']*builtin[\\\\\"\']*[[:space:]]+)*[\\\\\"\']*command[\\\\\"\']*)?([[:space:]]*)(([\\\\\"\']*zpwr[\\\\\"\']*([[:space:]]+)(-[[:graph:]]+)*)*([\\\\\"\']*sudo[\\\\\"\']*([[:space:]]+)((-[ABbEHnPSis]+[[:space:]]*|-[CghpTu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*([\\\\\"\']*env[\\\\\"\']*[[:space:]]+(-[iv]+[[:space:]]*|-[PSu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*)*([[:space:]]*)(.*)$" ]]; then
+            cmd_words=("${(z)match[-1]}")
+            if [[ $match[6] =~ '(sudo|env)' ]]; then
+                cmd=${cmd_words[1]}
 
-        # sudo =iftop fails so remove =
-        cmd=${cmd#=}
-        out="$(alias -- $cmd)"
-        if [[ "$out" == *grc* ]]; then
-            cmdlet="$(eval echo "${out#*=}")"
-            print -srn -- "$BUFFER"
-            BUFFER="sudo -E $cmdlet $mywords[3,$]"
-            echo
-            eval "$BUFFER"
-            BUFFER=""
-            zle .accept-line
-            return 0
+                # sudo =iftop fails so remove =
+                cmd=${cmd#=}
+                out="$(alias -- $cmd)"
+                if [[ "$out" == *grc* ]]; then
+                    cmdlet="$(eval echo "${out#*=}")"
+                    print -srn -- "$BUFFER"
+                    BUFFER="sudo -E $cmdlet $cmd_words[2,$]"
+                    echo
+                    eval "$BUFFER"
+                    BUFFER=""
+                    zle .accept-line
+                    return 0
+                fi
+            fi
         fi
     fi
 
