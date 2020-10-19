@@ -67,9 +67,12 @@
 
 [interactive]
 	singlekey = yes
-    
+
 [rerere]
 	enabled = yes
 
 [rebase]
 	autoStash = true
+
+[mergetool]
+    keepBackup = false
