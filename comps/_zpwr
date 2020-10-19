@@ -33,7 +33,20 @@ function __zpwr(){
 
     case $state in
         verb)
-            _describe -t commands "zpwr verb" zpwrSubcommandsAry || ret=1
+            _describe -t zpwr-misc "zpwr misc verbs" zpwrMiscVerbs || ret=1
+            _describe -t zpwr-vim "zpwr vim verbs" zpwrVimVerbs || ret=1
+            _describe -t zpwr-emacs "zpwr emacs verbs" zpwrEmacsVerbs || ret=1
+            _describe -t zpwr-git "zpwr git verbs" zpwrGitVerbs || ret=1
+            _describe -t zpwr-regen "zpwr regen verbs" zpwrRegenVerbs || ret=1
+            _describe -t zpwr-clean "zpwr clean verbs" zpwrCleanVerbs || ret=1
+            _describe -t zpwr-travis "zpwr travis verbs" zpwrTravisVerbs || ret=1
+            _describe -t zpwr-learn "zpwr learn verbs" zpwrLearnVerbs || ret=1
+            _describe -t zpwr-search "zpwr env verbs" zpwrSearchVerbs || ret=1
+            _describe -t zpwr-update "zpwr update verbs" zpwrUpdateVerbs || ret=1
+            _describe -t zpwr-cd "zpwr cd verbs" zpwrCdVerbs || ret=1
+            _describe -t zpwr-forgit "zpwr forgit verbs" zpwrForgitVerbs || ret=1
+
+            #_describe -t commands "zpwr verbs" zpwrSubcommandsAry || ret=1
             ;;
         args)
             verb=$words[1]

@@ -129,6 +129,20 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:corrections' list-colors '=(#b)(*)=1;30=1;37;4;43'
     zstyle ':completion:*:original' list-colors '=(#b)(*)=1;30=34;42;4'
 
+    #zpwr verbs
+    zstyle ':completion:*:zpwr-vim' list-colors '=(#b)(*)=1;30=1;36;44'
+    zstyle ':completion:*:zpwr-emacs' list-colors '=(#b)(*)=1;30=1;37;45'
+    zstyle ':completion:*:zpwr-regen' list-colors '=(#b)(*)=1;30=1;32;45'
+    zstyle ':completion:*:zpwr-clean' list-colors '=(#b)(*)=1;30=1;4;37;45'
+    zstyle ':completion:*:zpwr-misc' list-colors '=(#b)(*)=1;30=37;46'
+    zstyle ':completion:*:zpwr-travis' list-colors '=(#b)(*)=1;30=1;34;41'
+    zstyle ':completion:*:zpwr-learn' list-colors '=(#b)(*)=1;30=1;37;42'
+    zstyle ':completion:*:zpwr-search' list-colors '=(#b)(*)=1;30=1;34;43'
+    zstyle ':completion:*:zpwr-update' list-colors '=(#b)(*)=1;30=1;37;46'
+    zstyle ':completion:*:zpwr-cd' list-colors '=(#b)(*)=1;30=1;37;42'
+    zstyle ':completion:*:zpwr-forgit' list-colors '=(#b)(*)=1;30=34;42'
+    zstyle ':completion:*:zpwr-git' list-colors '=(#b)(*)=1;30=1;34;43'
+
     # git commit colors
     zstyle ':completion:*:*:commits' list-colors '=(#b)(*)='$ZPWR_COMMIT_STYLE
     zstyle ':completion:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
