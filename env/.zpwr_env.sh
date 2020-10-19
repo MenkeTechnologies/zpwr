@@ -37,6 +37,10 @@ export ZPWR_BAT_THEME='GitHub'
 export ZPWR_CHAR_LOGO='<<)(>>'
 # output is more colorful
 export ZPWR_COLORS=true
+# colored section headers
+export ZPWR_COLORS_SECTIONS=true
+# zpwr <tab> is more colorful
+export ZPWR_COLORS_VERBS=true
 # common colors
 export ZPWR_COLOR_BLUE="\x1b[37;44m"
 export ZPWR_COLOR_RED="\x1b[31m"
