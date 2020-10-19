@@ -1465,8 +1465,6 @@ you should place your code here."
         ))
     ;;}}}***********************************************************
 
-    (global-wakatime-mode)
-
     (message "end user-c")
 
       (setq helm-source-names-using-follow (quote
