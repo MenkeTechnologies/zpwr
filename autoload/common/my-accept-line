@@ -62,7 +62,7 @@ function my-accept-line () {
                 if [[ "$out" == *grc* ]]; then
                     cmdlet="$(eval echo "${out#*=}")"
                     print -srn -- "$BUFFER"
-                    BUFFER="sudo -E $cmdlet $cmd_words[2,$]"
+                    BUFFER="sudo -E env \"PATH=$PATH\" $cmdlet $cmd_words[2,$]"
                     echo
                     eval "$BUFFER"
                     BUFFER=""
