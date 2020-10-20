@@ -68,19 +68,25 @@ function uncompile(){
         file=${file%*.zwc*}
         if [[ -f "$file.zwc" ]]; then
             echo sudo rm "$file".zwc
-            sudo rm "$file".zwc
-        elif [[ -f "$file.zwc.old" ]]; then
+            sudo rm -f "$file".zwc
+        fi
+        if [[ -f "$file.zwc.old" ]]; then
             echo sudo rm "$file.zwc.old"
-            sudo rm "$file.zwc.old"
+            sudo rm -f "$file.zwc.old"
         fi
     done
 
 	for dir in $fpath; do
 		if test -d $dir;then
             if [[ -f "$dir.zwc" ]]; then
-                echo rm -rf "$dir.zwc"
-                rm -rf "$dir.zwc" 2>/dev/null ||
-                sudo rm -rf "$dir.zwc"
+                echo rm -f "$dir.zwc"
+                rm -f "$dir.zwc" 2>/dev/null ||
+                sudo rm -f "$dir.zwc"
+            fi
+            if [[ -f "$dir.zwc.old" ]]; then
+                echo rm -f "$dir.zwc.old"
+                rm -f "$dir.zwc.old" ||
+                sudo rm -f "$dir.zwc.old"
             fi
         fi
 	done
