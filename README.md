@@ -1,4 +1,4 @@
-#| ZPWR => World's Most Advanced UNIX Terminal Environment
+# ZPWR => World's Most Advanced UNIX Terminal Environment
 
 ![Alt text](http://jakobmenke.com/img/tmuxfinal1.png?raw=true)
 
