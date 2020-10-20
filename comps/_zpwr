@@ -86,6 +86,9 @@ function __zpwr(){
                 ps)
                     _p
                     ;;
+                search)
+                    _s
+                    ;;
                 servicedown)
                     _ssd
                     ;;
