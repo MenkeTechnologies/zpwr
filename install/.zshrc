@@ -97,8 +97,6 @@ export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 declare -Ag ZPWR_VARS
 # map to store each zpwr verb, key is the verbname, value is cmd=description
 declare -Ag ZPWR_VERBS
-# filled late
-declare -a zpwrSubcommandsAry
 
 function zpwrInitEnv() {
     source "$ZPWR_ENV_FILE" || {

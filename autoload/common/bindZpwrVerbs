@@ -8,9 +8,9 @@ function bindZpwrVerbs(){
     # get zpwr verbs
     source "$ZPWR_SCRIPTS/zpwr.zsh"
 
-    declare -ag zpwrForgitVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs 
+    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs 
+    declare -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs 
 
-    cnt=0
     for k v in ${(kv)ZPWR_VERBS[@]};do
         case $k in
             forgit*)
@@ -51,8 +51,7 @@ function bindZpwrVerbs(){
                 ;;
         esac
 
-        ((++cnt))
-        zpwrSubcommandsAry[$cnt]="$k:$v"
+        zpwrSubcommandsAry+="$k:$v"
     done
 
     ZPWR_VARS[zpwrSubcommandsAry]=zpwrSubcommandsAry
