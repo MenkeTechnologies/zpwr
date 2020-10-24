@@ -12,7 +12,7 @@ function _digs(){
         '-s[use proxychains]'
         '*: :__hosts_urls'
     )
-    _arguments -sS $arguments
+    _arguments -S -s $arguments
 }
 
 _digs "$@"
