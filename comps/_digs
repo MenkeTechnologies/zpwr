@@ -1,0 +1,18 @@
+#compdef digs
+
+function __hosts_urls(){
+    _alternative 'hosts:hosts:_hosts' 'urls:urls:_urls'
+}
+
+function _digs(){
+
+    local arguments
+
+    arguments=(
+        '-s[use proxychains]'
+        '*: :__hosts_urls'
+    )
+    _arguments -sS $arguments
+}
+
+_digs "$@"

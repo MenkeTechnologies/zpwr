@@ -71,6 +71,9 @@ function __zpwr(){
                 clone|cloneToForked)
                     _git-clone
                     ;;
+                digs)
+                    _digs
+                    ;;
                 gitedittag)
                     __zpwr_gtl
                     ;;
