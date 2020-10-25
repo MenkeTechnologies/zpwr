@@ -165,6 +165,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - parrot OS
 - WSL ubuntu/kali/suse/leap/fedora
 - SUSE
+- AMI
 
 ## ZPWR Extras Not Installed
 - JetBrains .ideamvimrc
@@ -177,6 +178,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - Alacritty Color Theme
 - macOS Terminal Color Theme
 - gtags from zpwr and .globalrc
+- .gitconfig and .gitignore_global
 
 ## Limited Install
 ```sh
