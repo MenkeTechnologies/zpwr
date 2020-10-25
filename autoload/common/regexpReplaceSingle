@@ -1,0 +1,34 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+integer pcre
+
+[[ -o re_match_pcre ]] && pcre=1
+
+emulate -L zsh
+(( pcre )) && setopt re_match_pcre
+
+# $4 is the string to be matched
+4=${(P)1}
+# $5 is the final string
+5=
+# 6 indicates if we made a change
+6=
+local MATCH MBEGIN MEND
+local -a match mbegin mend
+
+if [[ -n $4 ]]; then
+  if [[ $4 =~ $2 ]]; then
+    # append initial part and subsituted match
+    5+=${4[1,MBEGIN-1]}${(e)3}
+    # truncate remaining string
+    4=${4[MEND+1,-1]}
+    # indicate we did something
+    6=1
+  fi
+fi
+5+=$4
+
+eval ${1}=${(q)5}
+# status 0 if we did something, else 1.
+[[ -n $6 ]]
+
