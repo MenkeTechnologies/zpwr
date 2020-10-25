@@ -28,7 +28,7 @@ if [[ -n $4 ]]; then
 fi
 5+=$4
 
-eval ${1}=${(q)5}
+eval "$1=${(q)5}"
 # status 0 if we did something, else 1.
 [[ -n $6 ]]
 
