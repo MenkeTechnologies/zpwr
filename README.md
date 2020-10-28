@@ -96,10 +96,10 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
 - zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
 - zpwr subcommands count `zpwr verbscount`
-- zpwr subcommands into fzf `zpwr verbs`, 275+ zpwr verbs
+- zpwr subcommands into fzf `zpwr verbs`, 290+ zpwr verbs
 - zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
-- 115+ centralized environment variables in ZPWR namespace to control functionality
+- 125+ centralized environment variables in ZPWR namespace to control functionality
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
 - centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - user specific ZPWR files in `~/.zpwr/local` git ignored
