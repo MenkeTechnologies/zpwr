@@ -1,0 +1,3 @@
+#compdef commandExists
+
+_command_names
