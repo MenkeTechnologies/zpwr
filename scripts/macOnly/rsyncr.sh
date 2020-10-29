@@ -7,7 +7,10 @@
 ##### Notes:
 #}}}***********************************************************
 
-[[ -z "$2" ]] && echo "Need two args local and remote dirs....." >&2 && exit 1
+if [[ -z "$2" ]]; then
+    echo "usage: rsyncr.sh <local_dir> <remote_dir>" >&2
+    exit 1
+fi
 
 localDIR="$1"
 remoteDIR="$2"

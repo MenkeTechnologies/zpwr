@@ -143,7 +143,10 @@ function loggNotGit() {
 
 function loggInfo(){
 
-    test -z "$1" && loggErr "need arg" >&2 && return 1
+    if [[ -z "$1" ]]; then
+        loggErr "usage: loggInfo <msg>"
+        return 1
+    fi
     {
         printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____INFO: "
         printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
@@ -154,7 +157,10 @@ function loggInfo(){
 
 function loggErr(){
 
-    test -z "$1" && loggErr "need arg" >&2 && return 1
+    if [[ -z "$1" ]]; then
+        loggErr "usage: loggErr <msg>"
+        return 1
+    fi
     {
         printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ERROR: "
         printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
@@ -211,7 +217,10 @@ function logg(){
                 printf "\n"
             } >> "$ZPWR_LOGFILE"
         else
-            test -z "$1" && loggErr "need arg" && return 1
+            if [[ -z "$1" ]]; then
+                loggErr "usage: logg <msg>"
+                return 1
+            fi
         fi
     else
         if [[ -n $1 ]]; then
@@ -227,7 +236,10 @@ function logg(){
                 printf "'_ \n"
             } >> "$ZPWR_LOGFILE"
         else
-            test -z "$1" && loggErr "need arg" && return 1
+            if [[ -z "$1" ]]; then
+                loggErr "usage: logg <msg>"
+                return 1
+            fi
         fi
     fi
 }
@@ -353,7 +365,7 @@ function installGitHubPluginsFromFile(){
     shift $((OPTIND-1))
 
     if [[ -z "$1" ]]; then
-        loggErr "need an repo file"
+        loggErr "usage: installGitHubPluginsFromFile <repo_file>"
         return 1
     fi
 
@@ -376,7 +388,7 @@ function installGitHubPluginsFromFile(){
 function overwriteGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need an repo"
+        loggErr "usage: overwriteGitHubPlugin <repo>"
         return 1
     fi
 
@@ -397,7 +409,7 @@ function overwriteGitHubPlugin(){
 function installGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        loggErr "need an repo"
+        loggErr "usage: installGitHubPlugin <repo>"
         return 1
     fi
 
@@ -524,7 +536,7 @@ function prettyPrint(){
         printf "%s " "$@"
         printf "\x1b[0m\n"
     else
-        loggErr "Need one arg" 
+        loggErr "usage: prettyPrint <msg>"
         return 1
     fi
 }

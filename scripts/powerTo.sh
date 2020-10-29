@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 type tmux >/dev/null 2>&1 || {
-    echo "You don't have tmux so we are exiting..." >&2
+    echo "You don't have tmux so exiting..." >&2
     exit 1
 }
 
@@ -61,7 +61,10 @@ while getopts ":hvl" opt; do
 done
 shift $(($OPTIND - 1))
 
-(($# == 0)) && echo "Need an arg." >&2 && exit 1
+if (($# == 0)); then
+    echo "usage: powerTo.sh (<num> <command)|(<command>)" >&2
+    exit 1
+fi
 
 realNum=$(tmux list-panes | wc -l)
 
