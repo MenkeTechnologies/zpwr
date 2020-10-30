@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrPasteToBuffer(){
+
+
+    BUFFER="$(${=ZPWR_PASTE_CMD})"
+    print -rz -- "$BUFFER"
+}
+
+zpwrPasteToBuffer "$@"
