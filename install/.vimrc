@@ -1151,6 +1151,13 @@ function! CopyClip() range
     echom 'copied '.l:len.' to system clipboard'
 endfunction
 
+function! PasteClip()
+    let @z = system($ZPWR_PASTE_CMD. " | tr -d '\r'")
+    exe 'normal! "zp'
+endfunction
+
+command! -bang -nargs=* Paste call PasteClip()
+
 "copy to system clipboard and move cursor to end of selection
 vnoremap <silent> <C-B> :call CopyClip()<CR>`>
 vnoremap <RightMouse> :call CopyClip()<CR>`>
