@@ -207,12 +207,12 @@ function bindAliasesLate(){
             elif exists apt;then
                 alias api="$ZPWR_FULL_SUDO apt install -y"
                 alias apa="$ZPWR_FULL_SUDO apt update; $ZPWR_FULL_SUDO apt dist-upgrade -y; $ZPWR_FULL_SUDO apt autoremove -y; $ZPWR_FULL_SUDO apt clean"
-            elif exists zypper;then
-                alias api="$ZPWR_FULL_SUDO zypper install -y"
-                alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
             elif exists yum;then
                 alias api="$ZPWR_FULL_SUDO yum install -y"
                 alias apa="$ZPWR_FULL_SUDO yum check-update; $ZPWR_FULL_SUDO yum upgrade -y "
+            elif exists zypper;then
+                alias api="$ZPWR_FULL_SUDO zypper install -y"
+                alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
             fi
 
             alias ipt="$ZPWR_FULL_SUDO iptables --line-numbers -L"
