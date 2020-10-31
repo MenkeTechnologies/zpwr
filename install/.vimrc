@@ -1373,7 +1373,8 @@ inoremap <silent> <C-D>l <C-O>:Lines<CR>
 inoremap <silent> <C-D>m <C-O>:Map<CR>
 "inoremap <silent> <C-D>n <C-O>:Snippets<CR>
 inoremap <silent> <C-D>o <C-O>:ALEToggle<CR>
-inoremap <silent> <C-D>p <C-O>:call GetRef()<CR>
+inoremap <silent> <C-D>r <C-O>:call GetRef()<CR>
+inoremap <silent> <C-D>p <C-O>:call PasteClip()<CR>
 inoremap <silent> <C-D>q <C-O>:SaveSession!<CR><TAB>
 inoremap <silent> <C-D>rq <Esc>:silent !open -t %:p:h<CR>:redraw!<CR>a
 inoremap <silent> <C-D>rr <Esc>:Rg<CR>
@@ -1420,7 +1421,8 @@ nnoremap <silent> <leader>m :Map<CR>
 nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>o :ALEToggle<CR>
 nnoremap <silent> <leader>o :ALEToggle<CR>
-nnoremap <silent> <C-D>p :call GetRef()<CR>
+nnoremap <silent> <C-D>r :call GetRef()<CR>
+nnoremap <silent> <C-D>p :call PasteClip()<CR>
 nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
 nnoremap <silent> <C-D>rq :silent !open -t %:p:h<CR>:redraw!<CR>
 nnoremap <silent> <C-D>rr :Rg<CR>
