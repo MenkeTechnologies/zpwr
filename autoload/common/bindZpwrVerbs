@@ -9,7 +9,7 @@ function bindZpwrVerbs(){
     source "$ZPWR_SCRIPTS/zpwr.zsh"
 
     unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs 
-    declare -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs 
+    declare -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs
 
     for k v in ${(kv)ZPWR_VERBS[@]};do
         case $k in
@@ -33,6 +33,9 @@ function bindZpwrVerbs(){
                 ;;
             travis*)
                 zpwrTravisVerbs+=("$k:$v")
+                ;;
+            copy*|paste*)
+                zpwrClipboardVerbs+=("$k:$v")
                 ;;
             learn*|searchl*)
                 zpwrLearnVerbs+=("$k:$v")
