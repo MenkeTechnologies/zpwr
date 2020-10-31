@@ -366,7 +366,6 @@ augroup background_group
     inoremap <silent> <C-Z> <C-[>:suspend<CR>
 augroup end
 
-vnoremap <RightMouse> "*y`>
 inoremap <Home> <C-[>ggi
 inoremap <End> <C-[>Gi
 nnoremap <Home> gg
@@ -1147,11 +1146,14 @@ function! CopyClip() range
     let l:wordUnderCursor = s:getVisualSelection()
     let l:len = len(split(l:wordUnderCursor, '\n'))
     let l:stripped = Strip(l:wordUnderCursor)
+    "let @* = l:stripped
+    call system($ZPWR_COPY_CMD, l:stripped)
     echom 'copied '.l:len.' to system clipboard'
-    let @* = l:stripped
 endfunction
+
 "copy to system clipboard and move cursor to end of selection
-vnoremap <silent> <C-B> :call CopyClip()<CR>
+vnoremap <silent> <C-B> :call CopyClip()<CR>`>
+vnoremap <RightMouse> :call CopyClip()<CR>`>
 
 function! ExtractFoldMarker() range
     let l:wordUnderCursor = s:getVisualSelection()
