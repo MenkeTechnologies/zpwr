@@ -1702,7 +1702,7 @@ command! FZFKeys call fzf#run({
 \  'down':    '40%'})
 
 command! FZFEnv call fzf#run({
-\  'source':  "cat ".$ZPWR_ENV."Key.txt | awk '{print $2}'",
+\  'source':  "cat ".$ZPWR_ENV_KEY_FILE." | awk '{print $2}'",
 \  'sink':    'e',
 \  'options': $FZF_ENV_OPTS,
 \  'down':    '40%'})
