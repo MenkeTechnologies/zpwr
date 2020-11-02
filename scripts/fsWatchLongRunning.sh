@@ -26,8 +26,8 @@ while read -d "" event; do
         } &
         pid=$!
     else
-        #subsequent runs
-        #dont execute commands is previous command still running
+        # subsequent runs
+        # do not execute commands if previous command still running
         ps -ef | awk '{print $1,$2}' | grep -q "$pid" && echo "blocking next call..." || {
 
             {
