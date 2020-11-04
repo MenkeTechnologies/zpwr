@@ -152,9 +152,9 @@ exists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;git reset o
 exists zu8 || alias zu8='zpwr updateall'
 
 
-alias zpg=zpgh
+alias zpg=zpwrgh
 alias zpw=zpwr
-alias zpwrgh=zpwr
+alias zpgh=zpwrgh
 
 alias numcmd='print $#commands'
 #}}}***********************************************************

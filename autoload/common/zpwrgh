@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpgh(){
+function zpwrgh(){
 
     if test -z $1;then
         openmygh "$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME"
@@ -10,4 +10,4 @@ function ___zpgh(){
 }
 
 
-___zpgh "$@"
+zpwrgh "$@"
