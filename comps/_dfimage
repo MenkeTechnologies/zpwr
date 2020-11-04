@@ -1,0 +1,8 @@
+#compdef dfimage
+
+
+if (( $+functions[__docker_complete_images] )); then 
+    __docker_complete_images
+else
+    _docker
+fi

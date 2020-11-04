@@ -1,0 +1,7 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function dfimage(){
+    docker run -v /var/run/docker.sock:/var/run/docker.sock --rm chenzj/dfimage "$@"
+}
+
+dfimage "$@"
