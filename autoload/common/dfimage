@@ -1,6 +1,12 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function dfimage(){
+
+    if ! commandExists docker; then
+        loggErr 'docker command is missing'
+        return 1
+    fi
+
     docker run -v /var/run/docker.sock:/var/run/docker.sock --rm chenzj/dfimage "$@"
 }
 

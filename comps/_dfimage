@@ -1,5 +1,9 @@
 #compdef dfimage
 
+if ! type -ap -- docker &>/dev/null; then
+    _message 'no docker command'
+    return 1
+fi
 
 if (( $+functions[__docker_complete_images] )); then 
     __docker_complete_images
