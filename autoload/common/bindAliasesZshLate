@@ -67,7 +67,6 @@ globalAliasesInit
 #**************************************************************
     if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
 
-        
         if exists lftp; then
             alias lf="lftp sftp://$ZPWR_TABSTOP"
         fi
@@ -115,6 +114,10 @@ globalAliasesInit
             '$ZPWR_TABSTOP'
         done'
 
+        alias fun='function '$ZPWR_TABSTOP'(){
+            '$ZPWR_TABSTOP';
+        }'
+
         alias fe='for i in '$ZPWR_TABSTOP';do
             '$ZPWR_TABSTOP'
         done'
@@ -150,7 +153,6 @@ exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;bk;gla;zp g
 exists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;git reset origin/\$(git_current_branch) --hard ;gla;zp gitclearcache; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
 exists zu8 || alias zu8='zpwr updateall'
-
 
 alias zpg=zpwrgh
 alias zpw=zpwr
