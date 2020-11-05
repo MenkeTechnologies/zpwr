@@ -397,8 +397,7 @@
       where=${(V)VCS_STATUS_LOCAL_BRANCH}
     fi
     if [[ -n $VCS_STATUS_TAG ]]; then
-        res+="${(g::)POWERLEVEL9K_VCS_TAG_ICON}"
-      where=${(V)VCS_STATUS_TAG}
+        where+=" ${(g::)POWERLEVEL9K_VCS_TAG_ICON}${(V)VCS_STATUS_TAG}"
     fi
 
     # If local branch name or tag is at most 32 characters long, show it in full.
