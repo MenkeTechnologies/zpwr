@@ -111,13 +111,13 @@
     wifi                  # wifi speed
     # =========================[ Line #2 ]=========================
     newline
-    vi_mode
+    battery               # internal battery
     time                    # current time
     #public_ip             # public IP address
     proxy                 # system-wide http/https/ftp proxy
     newline                 # \n
     command_execution_time  # duration of the last command
-    battery               # internal battery
+    vi_mode
     custom_pid
     # example               # example user-defined segment (see prompt_example function below)
   )
