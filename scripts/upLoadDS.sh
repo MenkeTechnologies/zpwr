@@ -6,7 +6,10 @@
 ##### Purpose: bash script to upload file to NAS
 ##### Notes:
 #}}}***********************************************************
-[[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: uploadDS.sh <file>" >&2
+    exit 1
+fi
 
 printf "${ZPWR_COLOR_BLUE}Uploading $*\n" | ponysay -W 120
 

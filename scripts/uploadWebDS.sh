@@ -6,7 +6,10 @@
 ##### Purpose: bash script to upload to web direcctory of NAS
 ##### Notes:
 #}}}***********************************************************
-[[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: uploadWebDS.sh <file>" >&2
+    exit 1
+fi
 
 address="jacobmenke@$MY_IP:/var/services/web"
 

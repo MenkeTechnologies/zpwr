@@ -6,7 +6,10 @@
 ##### Purpose: bash script to to upload to RPi
 ##### Notes:
 #}}}***********************************************************
-[[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: uploadPi2.sh <file>" >&2
+    exit 1
+fi
 
 printf "${ZPWR_COLOR_BLUE}Uploading $* to $IP\n" | ponysay -W 120
 
