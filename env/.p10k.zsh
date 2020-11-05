@@ -56,7 +56,7 @@
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    command_execution_time  # duration of the last command
+    battery               # internal battery
     dir_writable
     background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
@@ -107,15 +107,15 @@
     todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    time                    # current time
+    wifi                  # wifi speed
     # =========================[ Line #2 ]=========================
     newline
-    wifi                  # wifi speed
+    time                    # current time
     ip                    # ip address and bandwidth usage for a specified network interface
     #public_ip             # public IP address
     proxy                 # system-wide http/https/ftp proxy
     newline                 # \n
-    battery               # internal battery
+    command_execution_time  # duration of the last command
     custom_pid
     # example               # example user-defined segment (see prompt_example function below)
   )
@@ -1598,7 +1598,7 @@
   # typeset -g POWERLEVEL9K_TIME_FOREGROUND=0
   # typeset -g POWERLEVEL9K_TIME_BACKGROUND=7
   # Format for the current time: 09:51:02. See `man 3 strftime`.
-  typeset -g POWERLEVEL9K_TIME_FORMAT='at %D{%H:%M:%S}'
+  typeset -g POWERLEVEL9K_TIME_FORMAT='%D{%H:%M:%S}'
   # If set to true, time will update when you hit enter. This way prompts for the past
   # commands will contain the start times of their commands as opposed to the default
   # behavior where they contain the end times of their preceding commands.
