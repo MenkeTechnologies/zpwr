@@ -35,6 +35,7 @@
     custom_env_bat
     custom_env_editor
     custom_env_term
+    vi_mode
     newline                 # \n
     context
     dir                     # current directory
@@ -55,7 +56,6 @@
   # last prompt line gets hidden if it would overlap with left prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    vi_mode
     command_execution_time  # duration of the last command
     dir_writable
     background_jobs         # presence of background jobs
