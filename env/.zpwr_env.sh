@@ -59,7 +59,7 @@ export ZPWR_CORRECT=true
 export ZPWR_CORRECT_EXPAND=true
 # turns on debugging logs using logg function
 export ZPWR_DEBUG=false
-# default OMZ theme if Powerlevel 9k not used
+# default OMZ theme if Powerlevel 10k not used
 export ZPWR_DEFAULT_OMZ_THEME=simonoff
 # for alternating pretty printer
 export ZPWR_DELIMITER_CHAR='%'
@@ -107,7 +107,7 @@ export ZPWR_PLUGIN_MANAGER=zinit
 export ZPWR_PREFER_MVIM=true
 # uses the zprof function to profile startup
 export ZPWR_PROFILING=false
-# set to POWERLEVEL to use the powerlevel9k prompt
+# set to POWERLEVEL to use the powerlevel10k prompt
 export ZPWR_PROMPT=POWERLEVEL
 # char to separate log messages
 export ZPWR_QUOTE_START_CHAR='<<('

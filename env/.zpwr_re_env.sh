@@ -117,7 +117,7 @@ evalIfNeeded ZPWR_LOCAL_TEMP "$ZPWR_LOCAL_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_LOCAL
 evalIfNeeded ZPWR_LOCK_FILE "$ZPWR_LOCK_FILE" "$ZPWR_LOCAL/.lock" "$ZPWR_LOCAL"
 # cache file for all zpwr env lookups
 evalIfNeeded ZPWR_LOCAL_ENV "$ZPWR_LOCAL_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL"
-# forked powerlevel9k config file for PROMPT
+# forked powerlevel10k config file for PROMPT
 evalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.p10k.zsh" "$ZPWR_ENV"
 # the location of associated interpreted scripts
 evalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"

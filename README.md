@@ -120,7 +120,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - perl
 - bash (4.0+, 3.2 not supported)
 - zinit with 80 plugins of which 45 are custom
-- forked powerlevel9k zsh prompt with ~dirs
+- forked powerlevel10k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
 - supertab
@@ -214,7 +214,7 @@ You must remove these manually if desired.
 If desired you can also uninstall zinit with ```rm -rf ~/.zinit```.  Make sure `~/.zshrc` is your original version.
 
 ## Font
-You need to change the Terminal font to support the Powerline triangles and other special characters in the Powerlevel9k PROMPT.
+You need to change the Terminal font to support the Powerline triangles and other special characters in the Powerlevel10k PROMPT.
 
 The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
 documentation for details on how to change the font.
@@ -391,7 +391,7 @@ export ZPWR_CORRECT=true
 export ZPWR_CORRECT_EXPAND=true
 # turns on debugging logs using logg function
 export ZPWR_DEBUG=false
-# default OMZ theme if Powerlevel 9k not used
+# default OMZ theme if Powerlevel 10k not used
 export ZPWR_DEFAULT_OMZ_THEME=simonoff
 # for alternating pretty printer
 export ZPWR_DELIMITER_CHAR='%'
@@ -439,7 +439,7 @@ export ZPWR_PLUGIN_MANAGER=zinit
 export ZPWR_PREFER_MVIM=true
 # uses the zprof function to profile startup
 export ZPWR_PROFILING=false
-# set to POWERLEVEL to use the powerlevel9k prompt
+# set to POWERLEVEL to use the powerlevel10k prompt
 export ZPWR_PROMPT=POWERLEVEL
 # char to separate log messages
 export ZPWR_QUOTE_START_CHAR='<<('
@@ -530,8 +530,8 @@ evalIfNeeded ZPWR_LOCAL_TEMP "$ZPWR_LOCAL_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_LOCAL
 evalIfNeeded ZPWR_LOCK_FILE "$ZPWR_LOCK_FILE" "$ZPWR_LOCAL/.lock" "$ZPWR_LOCAL"
 # cache file for all zpwr env lookups
 evalIfNeeded ZPWR_LOCAL_ENV "$ZPWR_LOCAL_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL"
-# forked powerlevel9k config file for PROMPT
-evalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.powerlevel9kconfig.sh" "$ZPWR_ENV"
+# forked powerlevel10k config file for PROMPT
+evalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.powerlevel10kconfig.sh" "$ZPWR_ENV"
 # the location of associated interpreted scripts
 evalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
 # the location of macOS only associated interpreted scripts
