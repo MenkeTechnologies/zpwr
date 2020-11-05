@@ -359,6 +359,7 @@
 
   # Branch icon. Set this parameter to '\uF126 ' for the popular Powerline branch icon.
   typeset -g POWERLEVEL9K_VCS_BRANCH_ICON='\uF126 '
+  typeset -g POWERLEVEL9K_VCS_TAG_ICON='\uF02B '
 
   # Untracked files icon. It's really a question mark, your font isn't broken.
   # Change the value of this parameter to show a different icon.
@@ -394,8 +395,9 @@
     if [[ -n $VCS_STATUS_LOCAL_BRANCH ]]; then
       res+="${clean}${(g::)POWERLEVEL9K_VCS_BRANCH_ICON}"
       where=${(V)VCS_STATUS_LOCAL_BRANCH}
-    elif [[ -n $VCS_STATUS_TAG ]]; then
-      res+="${meta}#"
+    fi
+    if [[ -n $VCS_STATUS_TAG ]]; then
+        res+="${(g::)POWERLEVEL9K_VCS_TAG_ICON}"
       where=${(V)VCS_STATUS_TAG}
     fi
 
