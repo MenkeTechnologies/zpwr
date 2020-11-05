@@ -3,7 +3,7 @@
 function omzOverrides(){
     #{{{                    MARK:forgit https://github.com/wfxr/forgit
 #**************************************************************
-unfunction d
+unfunction d &>/dev/null
 autoload "$ZPWR_AUTOLOAD_COMMON"/d
 #}}}***********************************************************
 

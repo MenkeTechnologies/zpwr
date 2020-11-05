@@ -85,7 +85,12 @@ zpwrDedupPaths
 
 #{{{                    MARK:ZPWR source env file which sources lib
 #**************************************************************
-0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+if [[ -z $ZSH_ARGZERO ]]; then
+    0="${(%):-%N}"
+else
+    0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+fi
+
 0="${${(M)0:#/*}:-$PWD/$0}"
 export ZPWR="${0:A:h:h}"
 export ZPWR_ENV="$ZPWR/env"
