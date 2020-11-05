@@ -412,7 +412,7 @@ zicompinit() {
 
 # late load prompt and call precmd fns first thing after prompt loads
 
-zinit ice lucid nocompile wait'!' atinit'bindPowerline;bindPowerlineTmux;bindZpwrDirs' atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null;unset ___pdir_path ___pdir_orig; _p9k_precmd &> /dev/null'
+zinit ice lucid nocd nocompile wait'!' atinit'bindPowerline;bindPowerlineTmux;bindZpwrDirs' atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null;bindPreCmd; _p9k_precmd &> /dev/null'
 zinit load MenkeTechnologies/powerlevel10k
 
 # late
