@@ -396,12 +396,27 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $state equals 0
 }
 
-@test 'commandExists' {
+@test 'commandExists zsh' {
+    run commandExists zsh
+    assert $state equals 0
+}
+
+@test 'commandExists ls' {
     run commandExists ls
     assert $state equals 0
 }
 
-@test 'exists' {
+@test 'exists type' {
+    run exists type
+    assert $state equals 0
+}
+
+@test 'exists prettyPrintBox' {
+    run exists prettyPrintBox
+    assert $state equals 0
+}
+
+@test 'exists prettyPrint' {
     run exists prettyPrint
     assert $state equals 0
 }

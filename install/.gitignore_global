@@ -301,6 +301,8 @@ flycheck_*.el
 
 #{{{                    MARK:misc
 #**************************************************************
+*.swp
+*.bak
 #logback
 *.log
 .tmux/resurrect/

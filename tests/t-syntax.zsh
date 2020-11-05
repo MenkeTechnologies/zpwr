@@ -48,12 +48,6 @@
     assert $state equals 0
 }
 
-@test '$ZPWR_PROMPT_FILE bash syntax check' {
-	test -f $ZPWR_PROMPT_FILE
-	run bash -n $ZPWR_PROMPT_FILE
-    assert $state equals 0
-}
-
 @test '$ZPWR_TMUX/google.sh bash syntax check' {
 	test -f "$ZPWR_TMUX/google.sh"
 	run bash -n "$ZPWR_TMUX/google.sh"
@@ -87,11 +81,6 @@
 @test 'ZPWR_PROMPT_FILE file exists' {
 	test -f "$ZPWR_PROMPT_FILE"
     assert $? equals 0
-}
-
-@test 'ZPWR_PROMPT_FILE bash syntax check' {
-	run bash -n "$ZPWR_PROMPT_FILE"
-    assert $state equals 0
 }
 
 @test 'ZPWR_PROMPT_FILE zsh syntax check' {
