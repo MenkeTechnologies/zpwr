@@ -110,12 +110,12 @@
     time                    # current time
     # =========================[ Line #2 ]=========================
     newline
+    wifi                  # wifi speed
     ip                    # ip address and bandwidth usage for a specified network interface
     #public_ip             # public IP address
     proxy                 # system-wide http/https/ftp proxy
     newline                 # \n
     battery               # internal battery
-    wifi                  # wifi speed
     custom_pid
     # example               # example user-defined segment (see prompt_example function below)
   )
