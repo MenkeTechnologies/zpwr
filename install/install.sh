@@ -82,7 +82,7 @@ fi
 BACKUP_DIR="$ZPWR_LOCAL/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
 
-exists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
+commmandExists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
 if [[ -n $vimV ]]; then
     if echo "$vimV >= 8.0" | bc 2>/dev/null | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
         INSTALL_VIM_SRC=true
@@ -180,7 +180,7 @@ EOF
 # 8) ultisnips
 # 9) supertab
 # 10) zinit
-# 11) powerlevel9k prompt
+# 11) powerlevel10k prompt
 # 12) pathogen
 # 13) nerdtree
 # 14) fzf
@@ -395,20 +395,20 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         distroFamily=mac
         showDeps
 
-        if exists "brew"; then
+        if ! commandExists brew; then
             # install homebrew
             prettyPrintBox "Installing HomeBrew..."
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
         fi
 
-        if ! exists "brew"; then
+        if ! commandExists brew; then
             prettyPrintBox "Need Homebrew"
             exit 1
         fi
 
         prettyPrintBox "We have Homebrew..."
 
-        if ! brew ls python > /dev/null 2>&1; then
+        if ! command brew ls python > /dev/null 2>&1; then
             brew install python
             brew install pip
         fi
@@ -506,7 +506,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
             prettyPrintBox "Now The Main Course..."
             sleep 1
             prettyPrintBox "Checking for curl before rustup install"
-            exists curl || update curl "$distroFamily"
+            commandExists curl || update curl "$distroFamily"
             cargoinstall
             pluginsinstall
             # main loop
@@ -557,7 +557,7 @@ else
                 prettyPrintBox "Now The Main Course..."
                 sleep 1
                 prettyPrintBox "Checking for curl before rustup install"
-                exists curl || update curl "$distroFamily"
+                commandExists curl || update curl "$distroFamily"
                 cargoinstall
                 pluginsinstall
 
@@ -614,7 +614,7 @@ if [[ $justConfig != true ]]; then
 
     goInstallerDir
 
-    exists nvim || {
+    commandExists nvim || {
         fileMustExist neovim_install.sh
         source neovim_install.sh
     }
@@ -733,7 +733,7 @@ if [[ $justConfig != true ]]; then
         fi
     fi
 
-    if ! exists grc; then
+    if ! commandExists grc; then
         goInstallerOutputDir
         prettyPrintBox "Installing grc from source to $(pwd)"
         git clone https://github.com/garabik/grc.git
@@ -746,7 +746,7 @@ if [[ $justConfig != true ]]; then
 
     if [[ $ZPWR_OS_TYPE == darwin ]]; then
         prettyPrintBox "Try again for ponysay and lolcat on mac"
-        exists ponysay || brew install ponysay
+        commandExists ponysay || brew install ponysay
     fi
 
     prettyPrintBox "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
@@ -799,7 +799,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     prettyPrintBox "Installing zinit"
     mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
     git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
-    if [[ -d $ZPWR_PLUGIN_MANAGER_HOME/plugins ]]; then
+    if [[ ! -d $ZPWR_PLUGIN_MANAGER_HOME/plugins ]]; then
         mkdir -pv $ZPWR_PLUGIN_MANAGER_HOME/plugins/
     fi
 
@@ -824,6 +824,7 @@ fi
 
 prettyPrintBox "Linking zshrc configuration file to home directory"
 goInstallerDir
+
 echo ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 
