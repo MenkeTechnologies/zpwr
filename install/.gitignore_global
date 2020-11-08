@@ -206,6 +206,7 @@ ETAGS
 #**************************************************************
 #cmake
 cmake-build-debug/
+.cxx/
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
