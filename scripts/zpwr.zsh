@@ -332,9 +332,11 @@ if [[ -n "$verb" ]]; then
                 if alias $exp 1>/dev/null 2>&1;then
                     logg "Eval subcommand '$exp'"
                     eval "$exp"
+                    ret=$?
                 else
                     logg "Exec subcommand '$exp'"
                     eval "$exp " ${(q)@}
+                    ret=$?
                 fi
             done
             break
@@ -345,5 +347,7 @@ if [[ -n "$verb" ]]; then
         loggErr "Unknown subcommand: '$verb'"
         return 1
     fi
+
+    return $ret
 fi
 
