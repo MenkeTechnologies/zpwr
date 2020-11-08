@@ -375,7 +375,7 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
     fi
 
     # RPROMPT shows vim modes (insert vs normal)
-    if [[ $ZPWR_PROMPT != POWERLEVEL ]]; then
+    if [[ $ZPWR_PROMPT != powerlevel10k ]]; then
         zle -N zle-keymap-select
         function zle-keymap-select() {
             RPROMPT="%B%F{blue}$$ %b%F{blue}$-"

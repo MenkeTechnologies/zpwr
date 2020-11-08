@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function bindPowerline(){
 
-    if [[ $ZPWR_PROMPT == POWERLEVEL ]]; then
+    if [[ $ZPWR_PROMPT == powerlevel10k ]]; then
     if test -s "$ZPWR_PROMPT_FILE";then
         if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
             if [[ -d "$HOME/.oh-my-zsh/custom/themes/powerlevel9k" ]]; then

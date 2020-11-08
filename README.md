@@ -440,7 +440,7 @@ export ZPWR_PREFER_MVIM=true
 # uses the zprof function to profile startup
 export ZPWR_PROFILING=false
 # set to POWERLEVEL to use the powerlevel10k prompt
-export ZPWR_PROMPT=POWERLEVEL
+export ZPWR_PROMPT=powerlevel10k
 # char to separate log messages
 export ZPWR_QUOTE_START_CHAR='<<('
 # char to separate log messages

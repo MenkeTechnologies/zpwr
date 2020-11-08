@@ -16,6 +16,11 @@ function magic-enter () {
         fi
         # add extra NL to see last file
         echo
+
+        if [[ $ZPWR_PROMPT == powerlevel10k ]]; then
+            echo
+            echo
+        fi
         zle .redisplay
     else
         # use custom accept line
