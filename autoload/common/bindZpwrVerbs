@@ -37,9 +37,6 @@ function bindZpwrVerbs(){
             copy*|paste*)
                 zpwrClipboardVerbs+=("$k:$v")
                 ;;
-            learn*|searchl*)
-                zpwrLearnVerbs+=("$k:$v")
-                ;;
             env*|*search)
                 zpwrSearchVerbs+=("$k:$v")
                 ;;
@@ -48,6 +45,9 @@ function bindZpwrVerbs(){
                 ;;
             cd*|*cd|home*)
                 zpwrCdVerbs+=("$k:$v")
+                ;;
+            *learn*|searchl*|se|ser|see*|sef)
+                zpwrLearnVerbs+=("$k:$v")
                 ;;
             *)
                 zpwrMiscVerbs+=("$k:$v")
