@@ -419,7 +419,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
             prettyPrintBox "Now The Main Course..."
             sleep 1
 
-            prettyPrintBox "Updating repos"
+            prettyPrintBox "Updating dependency list"
             refresh "$distroFamily"
             prettyPrintBox "Installing java"
             brew cask install java
@@ -500,6 +500,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
 
         showDeps
 
+        prettyPrintBox "Updating dependency list"
         refresh "$distroFamily"
 
         if [[ $skip != true ]]; then
@@ -551,6 +552,7 @@ else
             addDependenciesFreeBSD
             showDeps
 
+            prettyPrintBox "Updating dependency list"
             refresh "$distroFamily"
 
             if [[ $skip != true ]]; then
@@ -846,7 +848,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
 fi
 
 if [[ $justConfig != true ]]; then
-    prettyPrintBox "Final refreshing of dependencies"
+    prettyPrintBox "Final updating of dependency list"
     refresh "$distroFamily"
 fi
 

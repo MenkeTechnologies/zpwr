@@ -480,7 +480,7 @@ function refresh(){
     elif [[ $1 == freebsd ]];then
         sudo pkg update
     elif [[ $1 == redhat ]];then
-        sudo yum update -y
+        sudo yum check-update -y
     else
         prettyPrint "Error with refresh with $1." >&2
     fi
