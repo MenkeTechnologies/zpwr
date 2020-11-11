@@ -3,8 +3,8 @@
 function zpwrEmacsPluginList(){
 
     command ls -d \
-        "$HOME/.emacs.d/.cache/quelpa/build/"*(/) \
-        "$HOME/.emacs.d/elpa/"*(/)
+        "$HOME/.emacs.d/.cache/quelpa/build/"*(/N) \
+        "$HOME/.emacs.d/elpa/"*(/N) 2>/dev/null
 }
 
 zpwrEmacsPluginList "$@"

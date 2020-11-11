@@ -3,7 +3,7 @@
 function ___zpwrVimPluginList(){
 
     command ls -d \
-        "$HOME/.vim/bundle/"*(/)
+        "$HOME/.vim/bundle/"*(/N) 2> /dev/null
 }
 
 ___zpwrVimPluginList "$@"
