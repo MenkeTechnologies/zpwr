@@ -1,10 +1,18 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zpwrEmacsPluginList(){
+function ___zpwrEmacsPluginList(){
 
-    command ls -d \
-        "$HOME/.emacs.d/.cache/quelpa/build/"*(/N) \
-        "$HOME/.emacs.d/elpa/"*(/N) 2>/dev/null
+    emulate -L zsh
+    setopt nullglob
+
+    local dirs
+
+    dirs=(
+        "$HOME/.emacs.d/.cache/quelpa/build/"*(/)
+        "$HOME/.emacs.d/elpa/"*(/)
+    )
+
+    (($#dirs)) && command ls -d $dirs 2> /dev/null
 }
 
-zpwrEmacsPluginList "$@"
+___zpwrEmacsPluginList "$@"

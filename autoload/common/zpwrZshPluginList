@@ -2,10 +2,18 @@
 # vim: set ft=sh:
 function ___zpwrZshPluginList(){
 
-    command ls -d \
-        "$ZPWR_PLUGIN_MANAGER_HOME/plugins"/*(N) \
-        "$ZPWR_PLUGIN_MANAGER_HOME/snippets"/*~*/OMZ::plugins(N) \
-        "$ZPWR_PLUGIN_MANAGER_HOME/snippets"/OMZ::plugins/*(N) 2>/dev/null
+    emulate -L zsh
+    setopt nullglob extendedglob
+
+    local dirs
+
+    dirs=(
+        "$ZPWR_PLUGIN_MANAGER_HOME/plugins"/*(/)
+        "$ZPWR_PLUGIN_MANAGER_HOME/snippets"/OMZ::plugins/*(/)
+        #"$ZPWR_PLUGIN_MANAGER_HOME/snippets"/^OMZ::plugins/*
+    )
+
+    (($#dirs)) && command ls -d $dirs 2> /dev/null
 }
 
 ___zpwrZshPluginList "$@"
