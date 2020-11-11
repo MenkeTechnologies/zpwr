@@ -23,6 +23,7 @@ function zpwrEnvCounts(){
     echo "ZPWR verbs: ${#ZPWR_VERBS}"
     echo "ZPWR zsh plugins: $(zpwrZshPluginCount)"
     echo "ZPWR vim plugins: $(zpwrVimPluginCount)"
+    echo "ZPWR emacs plugins: $(zpwrEmacsPluginCount)"
     echo "ZPWR autoloads: $(zpwrAutoloadCount)"
     echo "ZPWR scripts: $(zpwrScriptCount)"
     echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
