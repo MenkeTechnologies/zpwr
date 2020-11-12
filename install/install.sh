@@ -81,7 +81,7 @@ fi
 BACKUP_DIR="$ZPWR_LOCAL/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
 
-commmandExists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
+commandExists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
 if [[ -n $vimV ]]; then
     if echo "$vimV >= 8.0" | bc 2>/dev/null | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
         INSTALL_VIM_SRC=true
