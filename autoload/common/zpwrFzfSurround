@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrFzfSurround(){
 
-    BUFFER="{ $BUFFER; } | $ZPWR_FZF"
+    BUFFER="{ $BUFFER; } |& $ZPWR_FZF"
 
     zle .accept-line
 }
