@@ -62,7 +62,6 @@ if [[ ! -d $ZPWR_SCRIPTS ]]; then
     exit 1
 fi
 
-ZPWR_INSTALLER_OUTPUT="$ZPWR_LOCAL/installer"
 ESCAPE_REMOVER="$ZPWR_SCRIPTS/escapeRemover.pl"
 # the destination directory for zpwr specific installed files
 LOGFILE="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
