@@ -33,9 +33,6 @@ export ZPWR_ENV="$ZPWR/env"
 export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 export ZPWR_INSTALL="$ZPWR/install"
-export ZPWR_LOCAL="$ZPWR/local"
-export ZPWR_SCRIPTS="$ZPWR/scripts"
-export ZPWR_INSTALLER_OUTPUT="$ZPWR_LOCAL/installer"
 
 unset zpwrBaseDir
 
@@ -82,4 +79,6 @@ if source "$ZPWR_RE_ENV_FILE"; then
 else
     echo "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'" >&2
 fi
+
+export ZPWR_INSTALLER_OUTPUT="$ZPWR_LOCAL/installer"
 #**************************************************************
