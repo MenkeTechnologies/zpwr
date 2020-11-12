@@ -76,7 +76,7 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 # expand globs, history etc with zle expand-word
 export ZPWR_EXPAND_NATIVE=true
 # command for all fzf
-export ZPWR_FZF='fzf'
+export ZPWR_FZF='fzf --ansi'
 # prompt for all fzf
 export ZPWR_FZF_LOGO='<<)ZPWR(>>'
 # GH username
