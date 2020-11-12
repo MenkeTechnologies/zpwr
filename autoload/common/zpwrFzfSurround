@@ -2,6 +2,10 @@
 # vim: set ft=sh:
 function zpwrFzfSurround(){
 
+    if test -z "$BUFFER" || [[ "$BUFFER" == [[:space:]]# ]]; then
+        zle up-line-or-history
+    fi
+
     BUFFER="{ $BUFFER; } |& $ZPWR_FZF"
 
     zle .accept-line

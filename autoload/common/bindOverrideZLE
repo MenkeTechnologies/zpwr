@@ -149,8 +149,8 @@ function bindOverrideZLE(){
     bindkey -M viins '^V^N' vimFzfSudo
     bindkey -M vicmd '^V^N' vimFzfSudo
 
-    bindkey -M viins '^V^H' zpwrFzfSurround
-    bindkey -M vicmd '^V^H' zpwrFzfSurround
+    bindkey -M viins '^V;' zpwrFzfSurround
+    bindkey -M vicmd '^V;' zpwrFzfSurround
 
     exists history-search-multi-word && {
         bindkey -M viins '^V^R' history-search-multi-word
