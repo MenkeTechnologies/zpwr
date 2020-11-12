@@ -191,7 +191,7 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/revolver
     zdharma/zbrowse
     zsh-users/zsh-completions
-    akarzim/zsh-docker-aliases
+    MenkeTechnologies/zsh-docker-aliases
     MenkeTechnologies/zsh-git-acp
     MenkeTechnologies/zsh-sudo
     MenkeTechnologies/zsh-nginx
