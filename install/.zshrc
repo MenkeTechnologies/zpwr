@@ -191,7 +191,6 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/revolver
     zdharma/zbrowse
     zsh-users/zsh-completions
-    MenkeTechnologies/zsh-docker-aliases
     MenkeTechnologies/zsh-git-acp
     MenkeTechnologies/zsh-sudo
     MenkeTechnologies/zsh-nginx
@@ -264,7 +263,9 @@ ZPWR_OMZ_COMPS=(
 
 if exists docker; then
     ZPWR_OMZ_COMPS+=(docker)
-    ZPWR_GH_PLUGINS+=(akarzim/zsh-docker-aliases)
+    ZPWR_GH_PLUGINS+=(
+    MenkeTechnologies/zsh-docker-aliases
+    )
 fi
 
 if exists docker-compose; then
