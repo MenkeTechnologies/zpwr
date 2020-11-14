@@ -1403,7 +1403,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <leader>. :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
-nnoremap <silent> <leader>j :Commands<CR>
+nnoremap <silent> <leader>; :Commands<CR>
 nnoremap <silent> <C-D>e :ALEInfo<CR>
 nnoremap <silent> <leader>env :FZFEnv<CR>
 nnoremap <silent> <C-D>f :Files<CR>
@@ -1418,7 +1418,7 @@ nnoremap <silent> <C-D>k :ALEFix<CR>
 nnoremap <silent> <leader>, :FZFMaps<CR>
 nnoremap <silent> <leader>ke :FZFKeys<CR>
 nnoremap <silent> <C-D>l :Lines<CR>
-nnoremap <silent> <leader>l :Lines<CR>
+nnoremap <silent> <leader>j :Lines<CR>
 nnoremap <silent> <C-D>m :Map<CR>
 nnoremap <silent> <leader>m :Map<CR>
 nnoremap <silent> <C-D>n :Snippets<CR>
