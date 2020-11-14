@@ -1403,7 +1403,7 @@ nnoremap <silent> <leader>b :Buffers<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <leader>. :Colors<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
-nnoremap <silent> <leader>p :Commands<CR>
+nnoremap <silent> <leader>j :Commands<CR>
 nnoremap <silent> <C-D>e :ALEInfo<CR>
 nnoremap <silent> <leader>env :FZFEnv<CR>
 nnoremap <silent> <C-D>f :Files<CR>
