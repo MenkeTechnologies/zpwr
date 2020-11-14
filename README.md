@@ -28,7 +28,7 @@ Some interactivity is required near end of installer for postfix, wireshark and 
 Zinit will install plugins on first zsh after install.
 
 ## Full Installation Instructions to `$ZPWR`
-To install to a custom directory, clone the project to custom directory ands start the installer.  ZPWR will pick up its location and export ZPWR to that directory.
+To install to a custom directory, clone the project to custom directory and start the installer.  ZPWR will pick up its location and export ZPWR to that directory.
 This also means you can move ZPWR after install after updating the sym links that are in `$HOME`.  First `export ZPWR_INSTALL=<mydirectory>/install` in current shell.  Replace `<mydirectory>` with your new install dir and keep `/install` in the export.
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
@@ -36,7 +36,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - snippets with tabstops that expand with spacebar and advance to next stop with C-p [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - expanding regular aliases and global aliases from zsh menu selection and in vim insert mode [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
-- color-coded sections of zsh menu completion for commands, aliases, functions and builtins
+- color-coded sections of zsh menu completion for commands, aliases, reswords, functions, builtins, parameters, files, command history, correction
 - color-coded sections of zsh menu completion for man pages
 - color-coded sections of zsh menu completion  for git subcommands
 - color-coded sections of zsh menu completion for git objects
@@ -48,7 +48,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - vim keybindings (insert, normal and visual modes) to run current code file open in vim in tmux pane to right
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right in REPL
-- fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF*OPTS env vars
+- fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF...OPTS env vars
 - 11k zsh tab completions [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - ergonomic, recursive tmux keybindings for next and previous windows
 - zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygementize
@@ -63,14 +63,14 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - keybindings to save to mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - functions to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- `redo <number...>` prints to prompt SQL update statements for learning items [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- `rsql <number...>` prints to vim SQL update statements for learning items that run once vim is quit [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- `zpwr redo <number...>` prints to prompt SQL update statements for learning items [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- `zpwr redosql <number...>` prints to vim SQL update statements for learning items that run once vim is quit [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - zle keybinding formats newlines and spaces before saving to mysql learning database [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- oh my zsh plugins loading based on OS
+- zsh plugins loading based on OS
 - tmux keybindings and scripts based on OS
-- custom ZPWR banner with latest commit and tag when `getrc`, `zpwr banner` or `zpwr about` and `install.sh` run
+- custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `install.sh` run
 - custom banner commands when new shell is launched
-- zle sed sub widget to replace globally on current command line
+- zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
 - vim text objects on command line
 - vim extract method for shell, perl and python scripts (`gv` to select extracted)
 - vim extract variable for shell, perl and python scripts (`gv` to select extracted)
@@ -78,25 +78,26 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - vim autohighlight word under cursor after delay like most code editors
 - software updater script, `source autoUpdater.sh`,  on 24 hour loop
 - 1800+ aliases
-- 300+ git aliases from OMZ plugins and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
+- 300+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - zsh keybindings to git add, commit and push with commit message from current command line [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - git blacklisted directories [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - zle quote swapper widget
-- zsh, tmux and vim keybindings to copy to system clipboard
-- shell function to pull down latest code changes from this repo (getrc)
-- shell function that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips (c)
-- shell function uses same shell code to generate output that default FZF preview pane does (c)
-- shell function automaticaly runs sudo when file is not readable (c)
-- shell function that cds to any of parent directories with zsh completion (r)
+- zsh, tmux and vim keybindings to copy/paste to system clipboard
+- shell function to pull down latest code changes from this repo with `zpwr update`
+- shell function that is wrapper around bat that works with text, jars, tgz, rpm, deb and zips with `zpwr cat` or `c`
+- shell function uses same shell code to generate output that default FZF preview pane does with `zpwr cat` or `c`
+- shell function automatically runs sudo when file is not readable with `zpwr cat` or `c`
+- shell function that cds to any of parent directories with zsh completion with `zpwr cdup` or `r`
 - 165+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
 - color coded, tag grouped clearList zsh completion
 - search google from tmux mouse drag selection (tmux's copy-mode-vi)
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
 - zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
-- zpwr subcommands count `zpwr verbscount`
-- zpwr subcommands into fzf `zpwr verbs`, 290+ zpwr verbs
+- zpwr subcommands count with `zpwr verbscount`
+- zpwr subcommands into fzf with `zpwr verbs`
+- 290+ zpwr verbs
 - zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
 - 125+ centralized environment variables in ZPWR namespace to control functionality
@@ -110,16 +111,16 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - learn.service = systemd service that runs learning collection API
 - restart function that launches poll and learn by enabling and starting in systemd
 - central control of zpwr colorful output with `ZPWR_COLORS`
-- zsh completion with descriptions for parameters, aliases and global aliases
+- zsh completion with descriptions for parameters, regular, suffix and global aliases
 
 
 ## ZPWR Dependencies
 - zsh
 - tmux
-- neovim with 78 plugins and python3/node support
+- neovim with 79 plugins and python3/node support
 - perl
 - bash (4.0+, 3.2 not supported)
-- zinit with 80 plugins of which 45 are custom
+- zinit with 87 plugins of which 27 are custom
 - forked powerlevel10k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
