@@ -62,9 +62,9 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh menucompletion for [z](https://github.com/MenkeTechnologies/zsh-z) command based on frecency [z](https://github.com/MenkeTechnologies/zsh-z) and [fasd](https://github.com/MenkeTechnologies/fasd-simple) databases
 - keybindings to save to mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - functions to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- functions, `redo <number...>` and `rsql <number...>`, to modify mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- `zpwr redo <number...>` prints to prompt SQL update statements for learning items [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- `zpwr redosql <number...>` prints to vim SQL update statements for learning items that run once vim is quit [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- functions, `zpwr redo <number/regex...>` and `zpwr rsql <number/regex...>`, to modify mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- `zpwr redo <number/regex...>` prints to prompt SQL update statements for learning items [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- `zpwr redosql <number/regex...>` prints to vim SQL update statements for learning items that run once vim is quit [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - zle keybinding formats newlines and spaces before saving to mysql learning database [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - zsh plugins loading based on OS
 - tmux keybindings and scripts based on OS
@@ -97,7 +97,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
 - zpwr subcommands count with `zpwr verbscount`
 - zpwr subcommands into fzf with `zpwr verbs`
-- 290+ zpwr verbs
+- 295+ zpwr verbs
 - zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
 - 125+ centralized environment variables in ZPWR namespace to control functionality
