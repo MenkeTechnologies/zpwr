@@ -5,9 +5,8 @@ MenkeTechnologies/fzf-tab
 MenkeTechnologies/gh_reveal
 MenkeTechnologies/jhipster-oh-my-zsh-plugin
 MenkeTechnologies/kubectl-aliases
-MenkeTechnologies/powerlevel10k
-MenkeTechnologies/powerlevel9k
 MenkeTechnologies/revolver
+MenkeTechnologies/zpwrp10k
 MenkeTechnologies/zsh-better-npm-completion
 MenkeTechnologies/zsh-cpan-completion
 MenkeTechnologies/zsh-docker-aliases
@@ -26,7 +25,6 @@ MenkeTechnologies/zsh-xcode-completions
 MenkeTechnologies/zsh-z
 MenkeTechnologies/zsh-zinit-final
 MenkeTechnologies/zunit
-akarzim/zsh-docker-aliases
 MenkeTechnologies/fzf
 hlissner/zsh-autopair
 nnao45/zsh-kubectl-completion
