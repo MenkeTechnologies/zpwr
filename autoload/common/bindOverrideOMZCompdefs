@@ -16,7 +16,7 @@ function bindOverrideOMZCompdefs(){
     _comps[csh]=_tcsh
 
     compdef _git-clone gcl
-    compdef _zcommand zm zd zg
+    compdef _zcommand_mult zm zd zg
     compdef _man fm
     compdef _tmux _zsh_tmux_plugin_run
     exists _kubectl && compdef _kubectl kubectl

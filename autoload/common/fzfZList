@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___fzfZList(){
 
-    z -l |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
+    { z -l; fasd -d; } |& perl -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
     eval "$ZPWR_FZF -e --no-sort --border $FZF_CTRL_T_OPTS" |
         perl -pe 's@^([~])([^~]*)$@"$ENV{HOME}$2"@;s@\s+@@g;'
 }

@@ -3,22 +3,54 @@
 function zg() {
 
     local branch dir
-    branch=master
-    dir=$2
+    branch=development
+
+    function usage() {
+        echo "Usage : zg [options] [--] <branch> <zdir>...
+        Options:
+        -h|help       Display this message" >&2
+    }
+
+    function runGit() {
+        ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
+    }
+
+    while getopts ":hb:" opt; do
+        case $opt in
+        h|help)
+            usage
+            return 0
+            ;;
+        *)
+            printf "\n  Option does not exist : $OPTARG\n"
+            usage
+            return 1
+            ;;
+        esac
+    done
+
+    shift $(( OPTIND - 1 ))
 
     if [[ -n $1 ]]; then
         branch=$1
+        shift
     fi
 
-    if [[ -n "$dir" ]]; then
-        if [[ $ != . ]]; then
-            z "$dir"
-            prettyPrint "z $dir => cd $(z -e $dir)"
+    if [[ -z "$1" ]]; then
+        runGit
+        return 0
+    fi
+
+    for dir in "$@" ; do
+        if [[ -n "$dir" ]]; then
+            if z "$dir"; then
+                prettyPrint "z $dir => cd $(z -e $dir)"
+
+                runGit
+            fi
         fi
-    fi
+    done
 
-
-    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
 }
 
 zg "$@"

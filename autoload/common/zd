@@ -4,20 +4,52 @@ function zd() {
 
     local branch dir
     branch=development
-    dir=$1
 
-    if [[ -n "$dir" ]]; then
-        if [[ $dir != . ]]; then
-            z "$dir"
-            prettyPrint "z $dir => cd $(z -e $dir)"
+    function usage() {
+        echo "Usage : zd [options] [--] <zdir>...
+        Options:
+        -h|help       Display this message
+        -b|branch     branch name" >&2
+    }
+
+    function runGit() {
+        ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
+    }
+
+    while getopts ":hb:" opt; do
+        case $opt in
+        h|help)
+            usage
+            return 0
+            ;;
+        b|branch)
+            branch="$OPTARG"
+            ;;
+        *)
+            printf "\n  Option does not exist : $OPTARG\n"
+            usage
+            return 1
+            ;;
+        esac
+    done
+
+    shift $(( OPTIND - 1 ))
+
+    if [[ -z "$1" ]]; then
+        runGit
+        return 0
+    fi
+
+    for dir in "$@" ; do
+        if [[ -n "$dir" ]]; then
+            if z "$dir"; then
+                prettyPrint "z $dir => cd $(z -e $dir)"
+
+                runGit
+            fi
         fi
-    fi
+    done
 
-    if [[ -n $2 ]]; then
-        branch=$2
-    fi
-
-    ${=ZPWR_REPO_NAME} fordir "isGitDir && { gco $branch; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
 }
 
 zd "$@"
