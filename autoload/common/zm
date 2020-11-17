@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zm() {
 
-    local branch dir opstr
+    local branch dir optstr
     branch=master
 
     function usage() {
@@ -28,7 +28,7 @@ function zm() {
             branch="$OPTARG"
             ;;
         [celrtx])
-            opstr="$opstr-$opt "
+            optstr="$optstr-$opt "
             ;;
         *)
             printf "\n  Option does not exist : $OPTARG\n"
@@ -47,7 +47,7 @@ function zm() {
 
     for dir in "$@" ; do
         if [[ -n "$dir" ]]; then
-            if z "$opstr" "$dir"; then
+            if z ${=optstr} "$dir"; then
                 prettyPrint "z $optstr$dir => cd $(z -e $dir)"
                 runGit
             fi
