@@ -2,13 +2,14 @@
 # vim: set ft=sh:
 function zg() {
 
-    local branch dir
-    branch=development
+    local branch dir opstr
 
     function usage() {
         echo "Usage : zg [options] [--] <branch> <zdir>...
         Options:
-        -h|help       Display this message" >&2
+        -[celrtx]     See z -h
+        -h|help       Display this message
+        -b|branch     branch name" >&2
     }
 
     function runGit() {
@@ -21,6 +22,12 @@ function zg() {
             usage
             return 0
             ;;
+        b|branch)
+            branch="$OPTARG"
+            ;;
+        [celrtx])
+            opstr="$opstr-$opt "
+            ;;
         *)
             printf "\n  Option does not exist : $OPTARG\n"
             usage
@@ -31,9 +38,13 @@ function zg() {
 
     shift $(( OPTIND - 1 ))
 
-    if [[ -n $1 ]]; then
-        branch=$1
-        shift
+    if [[ -z "$branch" ]]; then
+        if [[ -n $1 ]]; then
+            branch=$1
+            shift
+        else
+            branch=development
+        fi
     fi
 
     if [[ -z "$1" ]]; then
@@ -44,7 +55,7 @@ function zg() {
     for dir in "$@" ; do
         if [[ -n "$dir" ]]; then
             if z "$dir"; then
-                prettyPrint "z $dir => cd $(z -e $dir)"
+                prettyPrint "z $optstr$dir => cd $(z -e $dir)"
 
                 runGit
             fi
