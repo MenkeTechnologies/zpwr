@@ -57,9 +57,10 @@ function executeFileFirstArgIsCommand() {
     sleep 1000
 }
 
-#if no arguments then exit
-
-(($# < 1)) && echo "Need one argument." >&2 && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: runner.sh <file>" >&2
+    exit 1
+fi
 
 #file name is the first argument
 clear

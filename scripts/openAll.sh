@@ -50,9 +50,10 @@ function killCursor() {
 
 printf "\e[37;44m"
 
-#$# is number of arguments
-
-(($# == 0)) && echo "Need one argument." >&2 && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: openAll.sh <file>..." >&2
+    exit 1
+fi
 
 #set the fileExtension variable to first argument
 declare -a fileExtensions

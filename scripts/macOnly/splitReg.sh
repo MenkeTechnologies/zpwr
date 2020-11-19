@@ -10,6 +10,7 @@
 trap 'rm "$file"' INT
 
 function usage() {
+
     echo -e "\e[34mUsage : $0 [options] [--]
 
     Options:
@@ -54,7 +55,10 @@ while getopts "hvil:" opt; do
 done
 shift $(($OPTIND - 1))
 
-(($# < 2)) && echo "Need a regex and filter.." >&2 && exit 1
+if (($# < 2)); then
+    echo "usage: splitReg.sh <regex> <filter>" >&2
+    exit 1
+fi
 
 regex="$1"
 filter="$2"

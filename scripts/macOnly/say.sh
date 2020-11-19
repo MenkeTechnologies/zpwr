@@ -7,7 +7,10 @@
 ##### Notes:
 #}}}***********************************************************
 
-(("$#" == 0)) && echo "Need one argument." && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: say.sh <message>..." >&2
+    exit 1
+fi
 
 messageToSpeak=""
 for i in "$*"; do

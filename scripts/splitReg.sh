@@ -86,7 +86,11 @@ while getopts "hvil:" opt; do
 done
 shift $(($OPTIND - 1))
 
-(($# < 2)) && echo "Need a regex and filter.." >&2 && exit 1
+
+if (($# < 2)); then
+    echo "usage: splitReg.sh <file>" >&2
+    exit 1
+fi
 
 regex="$1"
 filter="$2"

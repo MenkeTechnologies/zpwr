@@ -36,8 +36,7 @@ else
 fi
 
 if [[ -z "$1" ]]; then
-
-    prettyPrint "need a subject" >&2
+    echo "usage: textmessage.sh <subject>" >&2
     exit 1
 else
 

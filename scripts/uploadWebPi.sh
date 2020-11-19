@@ -6,7 +6,10 @@
 ##### Purpose: bash script to upload to web dir of RPi
 ##### Notes:
 #}}}***********************************************************
-[[ -z "$1" ]] && echo "Need an argument." >&2 && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: uploadWebPi.sh <file>" >&2
+    exit 1
+fi
 
 address="pi@$MY_IP:/var/www/html"
 

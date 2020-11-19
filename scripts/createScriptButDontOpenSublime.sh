@@ -44,8 +44,10 @@ function createTheFile() {
 
 }
 
-#if no arguments then exit
-[[ -z "$1" ]] && echo "${0##*/} needs an argument ..." && exit 1
+if [[ -z "$1" ]]; then
+    echo "usage: createScriptButDontOpenSublime.sh <file>" >&2
+    exit 1
+fi
 
 #file name is the first argument
 newfile="$1"

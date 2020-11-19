@@ -8,8 +8,10 @@
 #}}}***********************************************************
 firstFile="$1"
 
-#exit is argument count less than 2
-(($# < 2)) && echo "${0##*/} needs two args" >&2 && exit 1
+if (($# < 2)); then
+    echo "usage: sync.sh <file1> <file2>" >&2
+    exit 1
+fi
 
 #add backslash if not already present to first file
 #to make sure the contents of folder 1 are synced not the folder itself
