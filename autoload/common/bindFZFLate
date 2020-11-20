@@ -126,7 +126,7 @@ function bindFZFLate(){
         --print-query
     )
     export FZF_TAB_COMMAND=(
-        $ZPWR_FZF
+        ${=ZPWR_FZF}
         $FZF_TAB_OPTS
     )
 }
