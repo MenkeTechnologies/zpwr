@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___EOLorNextTabStop(){
+function EOLorNextTabStop(){
 
     local lenToFirstTS
 
@@ -19,4 +19,4 @@ function ___EOLorNextTabStop(){
     fi
 }
 
-___EOLorNextTabStop "$@"
+EOLorNextTabStop "$@"

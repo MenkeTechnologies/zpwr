@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___256colors(){
+function 256colors(){
 
     local i
 
@@ -16,4 +16,4 @@ function ___256colors(){
     printf "\n"
 }
 
-___256colors "$@"
+256colors "$@"
