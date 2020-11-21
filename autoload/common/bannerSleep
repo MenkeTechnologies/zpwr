@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function bannerSleep(){
+
+    local time
+    time=1
+
+    if [[ -n $1 ]]; then
+        time=$1
+    fi
+
+    bash "$ZPWR_SCRIPTS/about.sh"
+    sleep $time
+}
+
+bannerSleep "$2"

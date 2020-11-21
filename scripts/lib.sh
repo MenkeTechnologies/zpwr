@@ -33,6 +33,7 @@ else
 fi
 
 function stdinExists(){
+
     local in arg
     in="$(cat)"
     arg="$1"
@@ -44,6 +45,7 @@ function stdinExists(){
 }
 
 function commandExists(){
+
     type -ap -- "$1" >/dev/null 2>&1
 }
 
@@ -70,10 +72,10 @@ function humanReadable(){
     {gsub(/^[0-9]+/, human($1));print}'
 }
 
-function perlremovespaces(){
+function perlRemoveSpaces(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: perlremovespaces <file...>"
+        loggErr "usage: perlRemoveSpaces <file...>"
         return 1
     fi
 
@@ -82,27 +84,6 @@ function perlremovespaces(){
     for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
         perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
-    done
-}
-
-function rename(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: rename <search> <file...>"
-        return 1
-    fi
-
-    local search out
-
-    search="$1"
-    shift
-    for file in "$@"; do
-        test -d "$file" && continue
-        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
-        if (( $out != 0 )); then
-            #statements
-            mv "$file" "$(echo "$file" | sed -E "$search")"
-        fi
     done
 }
 
@@ -124,11 +105,6 @@ function prettyPrintNoNewline(){
     printf "\x1b[1m"
     printf "%s " "$@"
     printf "\x1b[0m"
-}
-
-function tac(){
-
-    sed '1!G;h;$!d' "$@"
 }
 
 function isBinary() {
@@ -280,25 +256,6 @@ function isGitDirMessage(){
     fi
 }
 
-function gil(){
-
-    if ! isGitDir; then
-       loggNotGit
-       return 1
-    fi
-
-    local file
-
-    file=".git/info/exclude"
-
-    if [[ ! -f "$file" ]]; then
-       loggErr "$file must exist"
-       return 1
-    fi
-
-    vim "$file"
-
-}
 
 function goInstallerDir(){
 
@@ -541,19 +498,6 @@ function prettyPrint(){
     fi
 }
 
-function bannerSleep(){
-
-    local time
-    time=1
-
-    if [[ -n $1 ]]; then
-        time=$1
-    fi
-
-    bash "$ZPWR_SCRIPTS/about.sh"
-    sleep $time
-}
-
 function prettyPrintBoxStdin(){
 
     local perlfile
@@ -657,30 +601,6 @@ function gitRepoUpdater() {
                     )
             fi
         done
-    fi
-}
-
-function listNoClear () {
-
-    if commandExists exa; then
-        eval "$ZPWR_EXA_COMMAND"
-        return 0
-    fi
-
-    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        if commandExists grc; then
-            grc -c "$HOME/conf.gls" gls \
-            -iFlhA --color=always
-        else
-            ls -iFlhAO
-        fi
-    else
-        if commandExists grc; then
-            grc -c "$HOME/conf.gls" \
-            ls -iFlhA --color=always
-        else
-            ls -ifhlA
-        fi
     fi
 }
 

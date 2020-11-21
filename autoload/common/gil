@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function gil(){
+
+    if ! isGitDir; then
+       loggNotGit
+       return 1
+    fi
+
+    local file
+
+    file=".git/info/exclude"
+
+    if [[ ! -f "$file" ]]; then
+       loggErr "$file must exist"
+       return 1
+    fi
+
+    vim "$file"
+
+}
+
+gil "$@"

@@ -1,0 +1,24 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function rename(){
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: rename <search> <file...>"
+        return 1
+    fi
+
+    local search out
+
+    search="$1"
+    shift
+    for file in "$@"; do
+        test -d "$file" && continue
+        out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')
+        if (( $out != 0 )); then
+            #statements
+            mv "$file" "$(echo "$file" | sed -E "$search")"
+        fi
+    done
+}
+
+rename "$@"
