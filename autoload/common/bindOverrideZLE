@@ -179,6 +179,9 @@ function bindOverrideZLE(){
     bindkey -M viins '^V ' vimFzf
     bindkey -M vicmd '^V ' vimFzf
 
+    bindkey -M viins '^V^@' vimFzf
+    bindkey -M vicmd '^V^@' vimFzf
+
     bindkey -M viins '^V^K' emacsFzf
     bindkey -M vicmd '^V^K' emacsFzf
 
