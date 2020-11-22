@@ -112,9 +112,13 @@ function bindOverrideZLE(){
 
     bindkey -M viins '^F^J' zpwrVerbsWidgetAccept
     bindkey -M vicmd '^F^J' zpwrVerbsWidgetAccept
+    bindkey -M viins '^Fj' zpwrVerbsWidgetAccept
+    bindkey -M vicmd '^Fj' zpwrVerbsWidgetAccept
 
     bindkey -M viins '^V^V' zpwrVimAllWidgetAccept
     bindkey -M vicmd '^V^V' zpwrVimAllWidgetAccept
+    bindkey -M viins '^Vv' zpwrVimAllWidgetAccept
+    bindkey -M vicmd '^Vv' zpwrVimAllWidgetAccept
 
     bindkey -M viins '^Vm' zpwrVimAllWidget
     bindkey -M vicmd '^Vm' zpwrVimAllWidget
@@ -166,6 +170,10 @@ function bindOverrideZLE(){
         zle -N zFZF
         bindkey -M viins '^V^S' zFZF
         bindkey -M vicmd '^V^S' zFZF
+        bindkey -M viins '^V^L' zFZF
+        bindkey -M vicmd '^V^L' zFZF
+        bindkey -M viins '^Vl' zFZF
+        bindkey -M vicmd '^Vl' zFZF
     }
 
     bindkey -M viins '^V ' vimFzf
