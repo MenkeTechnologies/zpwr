@@ -318,6 +318,11 @@ ETAGS
 
 #{{{                    MARK:C/C++
 #**************************************************************
+#automake
+.deps/
+.dirstamp
+/config.log
+/config.status
 #cmake
 cmake-build-debug/
 .cxx/
