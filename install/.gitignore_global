@@ -319,6 +319,7 @@ ETAGS
 #{{{                    MARK:C/C++
 #**************************************************************
 #automake
+*.cache
 .deps/
 .dirstamp
 /config.log
