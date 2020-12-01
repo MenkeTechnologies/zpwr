@@ -59,6 +59,17 @@ function bindAliasesLate(){
     alias die="$ZPWR_FULL_SUDO kill -9 --"
     alias da=detachall
     alias ni='npm install'
+    alias zu=zunit
+    alias pk=p10k
+    local prefix=
+    if commandExists grc; then
+        prefix='\grc --colour=on '
+    fi
+    alias mk='make'
+    alias mkc="make clean"
+    alias mka="make all"
+    alias mkca="make clean all"
+    alias mki="$ZPWR_FULL_SUDO ${prefix}make install"
 
     if exists emacs; then
         alias emacs="$ZPWR_EMACS"
