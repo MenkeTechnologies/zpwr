@@ -15,6 +15,12 @@ clearList() {
    ls -AlhF
 }
 
+clearListRec() {
+   clear
+   ls -AlhFR
+}
+
+
 cdClear() {
     cd "$@"
     clearList
@@ -50,7 +56,8 @@ e() {
 
 alias l='clearList'
 alias la='clearList'
-alias ls='clearList'
+alias lr='clearListRec'
+alias v=vi
 
 c() {
     cat "$@" | less -M -N -R -K -F -X
