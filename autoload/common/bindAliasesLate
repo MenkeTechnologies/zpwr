@@ -61,6 +61,7 @@ function bindAliasesLate(){
     alias ni='npm install'
     alias zu=zunit
     alias pk=p10k
+    alias co=cargo
     local prefix=
     if commandExists grc; then
         prefix='\grc --colour=on '
@@ -176,7 +177,7 @@ function bindAliasesLate(){
         alias ap='cd /Applications'
         alias sudoedit="$ZPWR_FULL_SUDO $EDITOR"
         alias tra='cd $HOME/.Trash'
-        alias co="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
+        alias colo="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
         alias bl='brew link --force --overwrite'
 
         if exists exa; then
