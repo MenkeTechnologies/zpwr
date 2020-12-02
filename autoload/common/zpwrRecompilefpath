@@ -6,7 +6,6 @@ function zpwrRecompileFpath() {
     setopt nullglob
     setopt extendedglob
 
-
     local dir compileFile
 
     declare -aU fpathZshFiles fpathFilesToTest
