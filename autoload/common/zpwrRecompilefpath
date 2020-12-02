@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function zpwrRecompilefpath() {
+function zpwrRecompileFpath() {
     emulate -L zsh
     setopt nullglob
     setopt extendedglob
@@ -45,4 +45,4 @@ function zpwrRecompilefpath() {
 
 }
 
-zpwrRecompilefpath "$@"
+zpwrRecompileFpath "$@"

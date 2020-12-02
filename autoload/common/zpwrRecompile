@@ -3,67 +3,8 @@
 
 function zpwrRecompile(){
 
-    local dir compileFile
-    declare -aU knownZshFiles globalFiles
-
-
-    knownZshFiles=(
-        "$HOME/.zshrc"*
-        "$HOME/.zshenv"*
-        "$HOME/.zlogout"*
-        "$HOME/.zlogin"*
-        "$HOME/grc.zsh"
-        "$ZSH/oh-my-zsh.sh"
-        "$ZSH_COMPDUMP"
-        "$ZPWR_ALIAS_FILE"
-        "$ZPWR_PROMPT_FILE"
-        "$ZPWR_LOCAL/.tokens.sh"
-        "$ZPWR_LOCAL/.tokens-post.sh"
-        "$ZPWR_ENV_FILE"
-        "$ZPWR_RE_ENV_FILE"
-        "$ZPWR_SCRIPTS/zpwr.zsh"
-        "$ZPWR_LIB"
-        "$ZPWR_LIB_INIT"
-        "$ZPWR_SCRIPTS/crossOSCommands.sh"
-        "$ZPWR_COMPSYS_CACHE/"*
-        "$ZSH/lib/"*.zsh
-        "$ZSH/plugins/"*/*.plugin.zsh
-        "$ZSH/plugins/"*/*.zsh
-        "$ZSH/themes/"*.zsh-theme
-        "$ZSH_CUSTOM/plugins/"*/*.plugin.zsh
-        "$ZSH_CUSTOM/plugins/"*/*.zsh
-        "$ZSH_CUSTOM/themes/"*/*.zsh-theme
-        "$ZSH_CUSTOM/lib/"*.zsh
-        "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.zsh
-        "$ZSH_CUSTOM/snippets/OMZ::lib/"*/*.zsh
-        "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.plugin.zsh
-    )
-
-    globalFiles=(
-        /etc/profile*
-        /etc/zprofile*
-        /etc/zshrc*
-        /etc/zshenv*
-        /etc/zlogin*
-        /etc/zlogout*
-        /etc/zsh/z*
-        /etc/profile.env*
-    )
-
-    prettyPrint "Zrecompiling ${#knownZshFiles} local and ${#globalFiles} global zsh files"
-
-    for compileFile in ${knownZshFiles[@]}; do
-        if [[ -f "$compileFile" ]]; then
-            zrecompile -p "$compileFile"
-        fi
-    done
-    for compileFile in ${globalFiles[@]}; do
-        if [[ -f "$compileFile" ]]; then
-            sudo zsh -c "autoload zrecompile; zrecompile -p $compileFile"
-        fi
-    done
-
-    zpwrRecompilefpath "$@"
+    zpwrRecompileFiles "$@"
+    zpwrRecompileFpath "$@"
 
   }
 
