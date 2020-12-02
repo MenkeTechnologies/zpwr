@@ -1,13 +1,13 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function recompile(){
 
-    emulate -L zsh
-    setopt nullglob
+function zpwrRecompile(){
 
-    local dir files sudoFiles file
+    local dir compileFile
+    declare -aU knownZshFiles globalFiles
 
-    files=(
+
+    knownZshFiles=(
         "$HOME/.zshrc"*
         "$HOME/.zshenv"*
         "$HOME/.zlogout"*
@@ -39,7 +39,7 @@ function recompile(){
         "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.plugin.zsh
     )
 
-    sudoFiles=(
+    globalFiles=(
         /etc/profile*
         /etc/zprofile*
         /etc/zshrc*
@@ -50,28 +50,21 @@ function recompile(){
         /etc/profile.env*
     )
 
-    prettyPrint "recompiling all configs to .zwc for speed"
+    prettyPrint "Zrecompiling ${#knownZshFiles} local and ${#globalFiles} global zsh files"
 
-    for file in ${files[@]}; do
-        if [[ -f "$file" ]]; then
-            zrecompile -p "$file"
+    for compileFile in ${knownZshFiles[@]}; do
+        if [[ -f "$compileFile" ]]; then
+            zrecompile -p "$compileFile"
         fi
     done
-    for file in ${sudoFiles[@]}; do
-        if [[ -f "$file" ]]; then
-            sudo zsh -c "autoload zrecompile; zrecompile -p $file"
+    for compileFile in ${globalFiles[@]}; do
+        if [[ -f "$compileFile" ]]; then
+            sudo zsh -c "autoload zrecompile; zrecompile -p $compileFile"
         fi
     done
 
-	for dir in $fpath; do
-		if test -d $dir;then
-            files=( $dir/*(N) )
-            if (($#files)); then
-                zrecompile -p $dir.zwc $files 2> /dev/null ||
-                sudo zsh -c "autoload zrecompile; zrecompile -p $dir.zwc $files"
-            fi
-        fi
-	done
-}
+    zpwrRecompilefpath "$@"
 
-recompile "$@"
+  }
+
+zpwrRecompile "$@"

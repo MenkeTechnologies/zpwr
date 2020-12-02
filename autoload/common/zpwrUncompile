@@ -1,13 +1,13 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function uncompile(){
+function zpwrUncompile(){
 
     emulate -L zsh
     setopt nullglob
 
-    local dir files sudoFiles file
+    local dir knownZshFiles globalFiles file
 
-    files=(
+    knownZshFiles=(
         "$HOME/.zshrc"*
         "$HOME/.zshenv"*
         "$HOME/.zlogout"*
@@ -39,7 +39,7 @@ function uncompile(){
         "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.plugin.zsh
     )
 
-    sudoFiles=(
+    globalFiles=(
         /etc/profile*
         /etc/zprofile*
         /etc/zshrc*
@@ -50,9 +50,9 @@ function uncompile(){
         /etc/profile.env*
     )
 
-    prettyPrint "deleting all compiled configs"
+    prettyPrint "Removing ${#knownZshFiles} local and ${#globalFiles} global *.zwc files if exist"
 
-    for file in ${files[@]}; do
+    for file in ${knownZshFiles[@]}; do
         file=${file%*.zwc*}
         if [[ -f "$file.zwc" ]]; then
             echo rm -f "$file.zwc"
@@ -64,7 +64,7 @@ function uncompile(){
         fi
     done
 
-    for file in ${sudoFiles[@]}; do
+    for file in ${globalFiles[@]}; do
         file=${file%*.zwc*}
         if [[ -f "$file.zwc" ]]; then
             echo sudo rm "$file".zwc
@@ -92,4 +92,4 @@ function uncompile(){
 	done
 }
 
-uncompile "$@"
+zpwrUncompile "$@"
