@@ -1,22 +1,13 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrAllUpdates(){
+function zpwrAllUpdates(){
 
-    (
-        builtin cd "$ZPWR" &&
-            git pull &&
-            {
-                if [[ -f "$ZPWR_BANNER_SCRIPT" ]]; then
-                    bash "$ZPWR_BANNER_SCRIPT"
-                fi
-            } &&
-            linkConf
-    )
+   zpwrReset
+   zpwrUpdateDeps
+   zpwrZinitUpdates
+   zpwrRegenMost
+   zpwrUpdate
 
-   zpwr updatedeps
-   zpwr updatezinit
-   zpwr regen
-   zpwr update
-  }
+}
 
-___zpwrAllUpdates "$@"
+zpwrAllUpdates "$@"
