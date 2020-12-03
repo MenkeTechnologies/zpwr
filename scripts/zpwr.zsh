@@ -13,6 +13,7 @@ if [[ -z $ZPWR_VERBS ]]; then
 fi
 
 ZPWR_VERBS[about]='zpwrAbout=show \$ZPWR_REPO_NAME banner'
+ZPWR_VERBS[a]='zpwrCleanRefreshCountsTestUpdate=banner, counts, clean, refresh zwc and update deps'
 ZPWR_VERBS[all]='zpwrCleanRefreshCountsTestUpdate=banner, counts, clean, refresh zwc and update deps'
 ZPWR_VERBS[allsearch]='fzfAllKeybind=search all keybindings'
 ZPWR_VERBS[altprettyprint]='alternatingPrettyPrint=pretty with alternating color'
