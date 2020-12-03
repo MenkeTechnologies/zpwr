@@ -12,7 +12,8 @@ if [[ -z $ZPWR_VERBS ]]; then
     declare -Ag ZPWR_VERBS
 fi
 
-ZPWR_VERBS[about]='about=show \$ZPWR_REPO_NAME banner'
+ZPWR_VERBS[about]='zpwrAbout=show \$ZPWR_REPO_NAME banner'
+ZPWR_VERBS[all]='zpwrCleanRefreshCountsTestUpdate=banner, counts, clean, refresh zwc and update deps'
 ZPWR_VERBS[allsearch]='fzfAllKeybind=search all keybindings'
 ZPWR_VERBS[altprettyprint]='alternatingPrettyPrint=pretty with alternating color'
 ZPWR_VERBS[attach]='tmux attach-session=attach to tmux session'
@@ -22,7 +23,7 @@ ZPWR_VERBS[autoloadlist]='zpwrAutoloadList=total list of autoloads in \$ZPWR'
 ZPWR_VERBS[background]='b=run arg in background'
 ZPWR_VERBS[backup]='backup=backup files'
 ZPWR_VERBS[backuphistory]='zpwrBackupHistfile=backup \$HISTFILE'
-ZPWR_VERBS[banner]='about=show \$ZPWR_REPO_NAME banner'
+ZPWR_VERBS[banner]='zpwrAbout=show \$ZPWR_REPO_NAME banner'
 ZPWR_VERBS[brc]='brc=shell aliases file vim session'
 ZPWR_VERBS[cat]='c=zpwr cat args'
 ZPWR_VERBS[catcd]='cca=cat and cd to first dir'
@@ -134,6 +135,7 @@ ZPWR_VERBS[gitfordirdevelop]='zfgdw=run git wipe to develop branch in git dirs i
 ZPWR_VERBS[gitfordirmaster]='zfgmw=run git wipe to master branch in git dirs in $PWD'
 ZPWR_VERBS[gitforalldir]='zpwrForAllGitDirs=run cmd in all git dirs'
 ZPWR_VERBS[github]='openmygh=open github profile'
+ZPWR_VERBS[githubzpwr]='zpwrgh=open zpwr github repo'
 ZPWR_VERBS[gitignore]='gil=vim ~/.git/info/exclude'
 ZPWR_VERBS[gitlargest]='largestGitFiles=show largest files stored by git in descending order'
 ZPWR_VERBS[gitremotes]='allRemotes=list all git remotes'
@@ -247,7 +249,7 @@ ZPWR_VERBS[uninstall]='zpwrUninstall=uninstall all zpwr configs'
 ZPWR_VERBS[uncompile]='zpwrUncompile=delete all cache comps'
 ZPWR_VERBS[update]='getrc=update zpwr custom configs'
 ZPWR_VERBS[updateall]='zpwrAllUpdates=update zpwr custom configs and deps'
-ZPWR_VERBS[updatedeps]='apz=update all dependencies'
+ZPWR_VERBS[updatedeps]='zpwrUpdateDeps=update all dependencies'
 ZPWR_VERBS[updatezinit]='zpwrZinitUpdates=update zinit dependencies'
 ZPWR_VERBS[upload]='upload=upload with curl'
 ZPWR_VERBS[urlsafe]='urlSafe=base64 encode'
@@ -309,7 +311,7 @@ if [[ -n "$verb" ]]; then
 
     shift
     if [[ $verb =~ '-V|--version' ]]; then
-        about | less
+        zpwrAbout | less
         return 0
     fi
 

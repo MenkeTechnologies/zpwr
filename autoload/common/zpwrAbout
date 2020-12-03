@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___about(){
+function zpwrAbout(){
 
     local old
 
@@ -12,4 +12,4 @@ function ___about(){
     export LESS="$old"
 }
 
-___about "$@"
+zpwrAbout "$@"

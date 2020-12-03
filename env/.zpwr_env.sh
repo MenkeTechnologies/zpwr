@@ -118,6 +118,8 @@ export ZPWR_REPO_NAME='zpwr'
 # when true sends every char to synced panes
 # when false does not send enter and Control to synced panes
 export ZPWR_SEND_KEYS_FULL=false
+# how long to sleep after display of counts in zpwr display of all
+export ZPWR_LOOK_TIME=5
 # set to comma separated list of pane numbers
 # to activate sending to numbered tmux panes
 export ZPWR_SEND_KEYS_PANE=-1

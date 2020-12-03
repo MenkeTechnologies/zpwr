@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrCleanRefreshCountsTestUpdate(){
+
+
+    zpwrCd "$ZPWR"
+    zpwrAbout
+    zpwrEnvCounts
+    sleep "$ZPWR_LOOK_TIME"
+    zpwrClean
+    zpwrRefreshZwc
+    zpwrTest
+    zpwrUpdateDeps
+
+  }
+
+zpwrCleanRefreshCountsTestUpdate "$@"

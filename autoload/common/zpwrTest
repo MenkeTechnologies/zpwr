@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrTest(){
+
+    (
+    builtin cd /Users/wizard/.zpwr &&
+        zunit --verbose /Users/wizard/.zpwr/tests/*.zsh
+    )
+
+}
+
+zpwrTest "$@"
