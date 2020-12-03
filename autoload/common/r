@@ -1,16 +1,8 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___r(){
+function r(){
 
-    local cdstr
-    if [[ -z $1 ]]; then
-        cd ..
-    else
-        for (( i = 0; i < $1; ++i )); do
-            cdstr+="../"
-        done
-        cd "$cdstr" || return 1
-    fi
+    zpwrCdUp "$@"
 }
 
-___r "$@"
+r "$@"
