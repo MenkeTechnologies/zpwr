@@ -4,11 +4,9 @@
 function zpwrCleanRefreshUpdate(){
 
 
-    f "$ZPWR"
     zpwrClean
     zpwrRefreshZwc
-    zpwr
-    apz
+    zpwrUpdateDeps
 
   }
 
