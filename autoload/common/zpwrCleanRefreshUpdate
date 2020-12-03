@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrCleanRefreshUpdate(){
+
+
+    f "$ZPWR"
+    zpwrClean
+    zpwrRefreshZwc
+    zpwr
+    apz
+
+  }
+
+zpwrCleanRefreshUpdate "$@"
