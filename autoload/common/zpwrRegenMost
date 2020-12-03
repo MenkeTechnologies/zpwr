@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___regenMost(){
+function zpwrRegenMost(){
 
     regenConfigLinks
     regenZshCompCache
@@ -10,8 +10,7 @@ function ___regenMost(){
     regenAllKeybindingsCache
     regenPowerlineLink
     regenSearchEnv
-    uncompile
-    recompile
+    zpwrRefreshZwc
 }
 
-___regenMost "$@"
+zpwrRegenMost "$@"

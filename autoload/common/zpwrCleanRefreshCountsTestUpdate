@@ -9,7 +9,7 @@ function zpwrCleanRefreshCountsTestUpdate(){
     zpwrEnvCounts
     sleep "$ZPWR_LOOK_TIME"
     zpwrClean
-    zpwrRefreshZwc
+    zpwrRegenMost
     zpwrTest
     zpwrUpdateDeps
 
