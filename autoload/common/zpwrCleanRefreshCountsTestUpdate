@@ -5,7 +5,7 @@ function zpwrCleanRefreshCountsTestUpdate(){
 
 
     zpwrCd "$ZPWR"
-    zpwrAbout
+    zpwrAbout simple
     zpwrEnvCounts
     sleep "$ZPWR_LOOK_TIME"
     zpwrClean
