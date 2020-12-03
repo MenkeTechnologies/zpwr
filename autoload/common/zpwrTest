@@ -4,8 +4,8 @@
 function zpwrTest(){
 
     (
-    builtin cd /Users/wizard/.zpwr &&
-        zunit --verbose /Users/wizard/.zpwr/tests/*.zsh
+    builtin cd "$ZPWR" &&
+        zunit --verbose "$ZPWR_TEST"/*.zsh
     )
 
 }
