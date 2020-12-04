@@ -97,7 +97,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
 - zpwr subcommands count with `zpwr verbscount`
 - zpwr subcommands into fzf with `zpwr verbs`
-- 300+ zpwr verbs
+- 315+ zpwr verbs
 - zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
 - 125+ centralized environment variables in ZPWR namespace to control functionality
