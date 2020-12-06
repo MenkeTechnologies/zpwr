@@ -3,9 +3,9 @@
 function ___zpwr(){
 
     if test -z $1;then
-        cd "$ZPWR"
+        zpwrCd "$ZPWR"
     else
-        . zpwr.zsh "$@"
+        source zpwr.zsh "$@"
     fi
 }
 
