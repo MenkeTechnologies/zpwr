@@ -1,14 +1,14 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___changeGitEmail(){
-
-    if [[ -z "$3" ]]; then
-        loggErr "usage: changeGitEmail <oldEmail> <newName> <newEmail>"
-        return 1
-    fi
+function zpwrChangeGitEmail(){
 
     if ! isGitDir; then
         loggNotGit
+        return 1
+    fi
+
+    if [[ -z "$3" ]]; then
+        loggErr "usage: zpwrChangeGitEmail <oldEmail> <newName> <newEmail>"
         return 1
     fi
 
@@ -29,4 +29,4 @@ function ___changeGitEmail(){
     ' --tag-name-filter cat -- --branches --tags
 }
 
-___changeGitEmail "$@"
+zpwrChangeGitEmail "$@"

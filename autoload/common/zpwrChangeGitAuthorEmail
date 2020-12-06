@@ -1,14 +1,14 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___changeGitAuthorEmail(){
-
-    if [[ -z "$2" ]]; then
-        loggErr "usage: changeGitAuthorEmail <oldEmail> <newEmail>"
-        return 1
-    fi
+function zpwrChangeGitAuthorEmail(){
 
     if ! isGitDir; then
         loggNotGit
+        return 1
+    fi
+
+    if [[ -z "$2" ]]; then
+        loggErr "usage: zpwrChangeGitAuthorEmail <oldEmail> <newEmail>"
         return 1
     fi
 
@@ -27,4 +27,4 @@ function ___changeGitAuthorEmail(){
     fi' HEAD
 }
 
-___changeGitAuthorEmail "$@"
+zpwrChangeGitAuthorEmail "$@"

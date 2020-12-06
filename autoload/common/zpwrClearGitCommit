@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___clearGitCommit(){
+function zpwrClearGitCommit(){
 
     if ! isGitDir; then
         loggNotGit
@@ -8,7 +8,7 @@ function ___clearGitCommit(){
     fi
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: clearGitCommit <regex>"
+        loggErr "usage: zpwrClearGitCommit <regex>"
         return 1
     fi
 
@@ -27,4 +27,4 @@ function ___clearGitCommit(){
     fi'  HEAD
 }
 
-___clearGitCommit "$@"
+zpwrClearGitCommit "$@"
