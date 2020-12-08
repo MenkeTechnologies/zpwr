@@ -90,6 +90,9 @@ function __zpwr(){
                 ps)
                     _p
                     ;;
+                reveal)
+                    _reveal
+                    ;;
                 search)
                     _s
                     ;;
