@@ -43,8 +43,8 @@ function __zpwr(){
             _describe -t zpwr-cd "zpwr cd verbs" zpwrCdVerbs && ret=0
             _describe -t zpwr-clipboard "zpwr clipboard verbs" zpwrClipboardVerbs && ret=0
             _describe -t zpwr-emacs "zpwr emacs verbs" zpwrEmacsVerbs && ret=0
-            _describe -t zpwr-vim "zpwr vim verbs" zpwrVimVerbs || ret=0
-            _describe -t zpwr-git "zpwr git verbs" zpwrGitVerbs || ret=0
+            _describe -t zpwr-vim "zpwr vim verbs" zpwrVimVerbs && ret=0
+            _describe -t zpwr-git "zpwr git verbs" zpwrGitVerbs && ret=0
             _describe -t zpwr-misc "zpwr misc verbs" zpwrMiscVerbs && ret=0
             _describe -t zpwr-forgit "zpwr forgit verbs" zpwrForgitVerbs && ret=0
 
