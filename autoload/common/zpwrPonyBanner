@@ -1,9 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___banner(){
+function zpwrPonyBanner(){
 
     bash "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" "$(hostname)" |
     ponysay -W 100
 }
 
-___banner "$@"
+zpwrPonyBanner "$@"
