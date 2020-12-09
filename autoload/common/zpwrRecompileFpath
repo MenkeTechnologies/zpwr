@@ -16,7 +16,7 @@ function zpwrRecompileFpath() {
 		if [[ -d $dir ]];then
             # zcompile all _comps and *.zsh
             #echo (#i)$dir/(*.zsh|_*)(.)
-            fpathZshFiles=( (#i)$dir/(*.zsh|_*)(.) )
+            fpathZshFiles=( (#i)$dir/(*.zsh|_*)(.) (#i)$dir/(*.zsh|_*)(@) )
 
             # find other files
             # echo (#i)$dir/*~($dir/*.(zsh|zwc|md)|$dir/.*|$dir/_*|$dir/LICENSE)(.)
