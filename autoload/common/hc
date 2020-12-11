@@ -8,8 +8,11 @@ function ___hc(){
         repoName="$(basename "$(pwd)")" ||
     else
         repoName="$1"
-        commmand mkdir "$repoName"
-        cd "$repoName"
+        command mkdir "$repoName"
+        if ! cd "$repoName"; then
+            loggErr "could not cd to $repoName"
+            return 1
+        fi
     fi
     printf "\x1b[1m"
 
