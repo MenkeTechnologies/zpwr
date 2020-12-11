@@ -80,6 +80,8 @@ fi
 evalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/fzf" "$ZSH"
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
+# plugin misc cache files
+evalIfNeeded ZSH_CACHE_DIR "$ZSH_CACHE_DIR" "$ZPWR_LOCAL/.cache" "$ZPWR_LOCAL"
 # alias and function file bash compatible
 evalIfNeeded ZPWR_ALIAS_FILE "$ZPWR_ALIAS_FILE" "$ZPWR_ENV/.shell_aliases_functions.sh" "$ZPWR_ENV"
 # autoloaded non completion functions
