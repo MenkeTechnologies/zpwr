@@ -197,6 +197,7 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/zsh-sed-sub
     zdharma/zsh-tig-plugin
     MenkeTechnologies/zsh-travis
+    MenkeTechnologies/zsh-git-repo-cache
     zdharma/zsh-unique-id
     MenkeTechnologies/zsh-very-colorful-manuals
     zdharma/zui

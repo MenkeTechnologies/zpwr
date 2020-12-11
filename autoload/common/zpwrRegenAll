@@ -3,7 +3,7 @@
 function zpwrRegenAll(){
 
     zpwrRegenMost
-    regenAllGitRepos regen
+    zsh-git-repo-regenAllGitRepos regen
 }
 
 zpwrRegenAll "$@"
