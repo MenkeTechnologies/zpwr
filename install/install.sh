@@ -270,7 +270,7 @@ function showDeps(){
         done
     } | prettyPrintBoxStdin
     proceed
-    bannerSleep
+    bash "$ZPWR_SCRIPTS/zpwrBannerSleep.sh"
 }
 
 files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell_aliases_functions.sh \
