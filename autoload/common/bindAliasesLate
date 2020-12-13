@@ -226,6 +226,7 @@ function bindAliasesLate(){
             elif exists zypper;then
                 alias api="$ZPWR_FULL_SUDO zypper install -y"
                 alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
+                alias zy='zypper'
             fi
 
             alias ipt="$ZPWR_FULL_SUDO iptables --line-numbers -L"
@@ -317,5 +318,24 @@ function bindAliasesLate(){
 
     unalias gcl >/dev/null 2>&1
     #}}}***********************************************************
+
+    #{{{                    MARK:zypper unalias due to zpwr conflicts
+    #**************************************************************
+    unalias z >/dev/null 2>&1
+    unalias zh >/dev/null 2>&1
+    unalias zhc >/dev/null 2>&1
+    unalias zhp >/dev/null 2>&1
+    unalias zhs >/dev/null 2>&1
+    unalias zhse >/dev/null 2>&1
+    unalias zs >/dev/null 2>&1
+    unalias ze >/dev/null 2>&1
+    unalias zlr >/dev/null 2>&1
+    unalias zlc >/dev/null 2>&1
+    unalias zls >/dev/null 2>&1
+    unalias zal >/dev/null 2>&1
+    unalias zt >/dev/null 2>&1
+    unalias ztm >/dev/null 2>&1
+    #}}}***********************************************************
 }
+
 bindAliasesLate "$@"
