@@ -4,6 +4,8 @@
 # adding global aliases and files
 __aliases(){
 
+    local k v
+
     if ( ! (( $+__aliases_ary )) || _cache_invalid alias_cache ) && ! _retrieve_cache alias_cache; then
         for k v in ${(kv)aliases}; do
             __aliases_ary+=($k:"${(q)v}")
@@ -17,6 +19,7 @@ __aliases(){
 __galiases(){
 
     local galiasesAry
+    local k v
 
     if ( ! (( $+__galiases_ary )) || _cache_invalid galias_cache ) && ! _retrieve_cache galias_cache; then
         for k v in ${(kv)galiases}; do

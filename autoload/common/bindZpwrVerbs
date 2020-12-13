@@ -5,6 +5,7 @@ function bindZpwrVerbs(){
         #{{{                    MARK:ZPWR Compsys Functions
 #**************************************************************
     local cnt
+    local k v
     # get zpwr verbs
     source "$ZPWR_SCRIPTS/zpwr.zsh"
 
