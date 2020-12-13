@@ -3,8 +3,8 @@
 function zpwrKillRemote() {
 
     prettyPrint "die tmux and ssh"
-    tmux kill-server
-    killall ssh autossh
+    command tmux kill-server
+    command killall ssh autossh
 
 }
 
