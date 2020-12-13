@@ -95,7 +95,7 @@ if [[ $skip != true ]]; then
         width=80
         perl -le "print '_'x$width" | lolcat
         if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-            exists catme && exists cowsay && exists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
+            commandExists catme && commandExists cowsay && commandExists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
         fi
         perl -le "print '_'x$width" | lolcat
     fi
@@ -121,14 +121,14 @@ if [[ $skip != true ]]; then
         gitRepoUpdater "$ZSH_CUSTOM/plugins"
     fi
 
-    exists /usr/local/bin/ruby && {
+    commandExists /usr/local/bin/ruby && {
         prettyPrint "Updating Ruby Packages"
         yes | /usr/local/bin/gem update --system
         yes | /usr/local/bin/gem update
         yes | /usr/local/bin/gem cleanup
     }
 
-    exists brew && {
+    commandExists brew && {
         prettyPrint "Updating Homebrew Packages"
         brew update  #&> /dev/null
         brew upgrade #&> /dev/null
@@ -139,7 +139,7 @@ if [[ $skip != true ]]; then
         brew services cleanup
     }
 
-    exists npm && {
+    commandExists npm && {
         prettyPrint "Updating NPM packages"
         installDir=$(npm root -g | head -n 1)
         if [[ ! -w "$installDir" ]]; then
@@ -162,25 +162,25 @@ if [[ $skip != true ]]; then
         fi
     }
 
-    exists rustup && {
+    commandExists rustup && {
         prettyPrint "Updating rustup"
         rustup update
     }
 
-    exists cargo && {
+    commandExists cargo && {
         prettyPrint "Updating cargo packages"
         cargo install cargo-update 2>/dev/null
         cargo install-update -a
     }
 
-    exists yarn && {
+    commandExists yarn && {
         prettyPrint "Updating yarn packages"
         yarn global upgrade
         # prettyPrint "Updating yarn itself"
         # npm install -g yarn
     }
 
-    exists cpanm && {
+    commandExists cpanm && {
         prettyPrint "Updating Perl Packages"
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
         if [[ -n "$perlOutdated" ]]; then
@@ -188,7 +188,7 @@ if [[ $skip != true ]]; then
         fi
     }
 
-    exists pio && {
+    commandExists pio && {
         prettyPrint "Updating PlatformIO"
         pio update
         pio upgrade
@@ -234,7 +234,7 @@ for pi in "${PI_ARRAY[@]}"; do
     updatePI "$pi"
 done
 
-exists brew && {
+commandExists brew && {
     if brew tap | grep cask-upgrade 1>/dev/null 2>&1; then
         # we have brew cu
         prettyPrint "Updating Homebrew Casks!"
@@ -252,7 +252,7 @@ prettyPrint "Updating Vundle Plugins"
 
 if [[ $end != true ]]; then
     if [[ $USE_NEOVIM == true ]]; then
-        if exists nvim; then
+        if commandExists nvim; then
             nvim -c VundleUpdate -c quitall
         else
             vim -c VundleUpdate -c quitall

@@ -9,7 +9,7 @@ function ___tailufw(){
     if [[ -n $1 ]]; then
         size=$1
     fi
-    if exists ccze; then
+    if commandExists ccze; then
         sudo tail -n $size -F /var/log/{syslog,messages} |
             command grep -i ufw | ccze
     else

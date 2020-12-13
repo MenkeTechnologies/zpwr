@@ -46,7 +46,7 @@ INTERFACE=Wi-Fi
 #exit
 #done 2>/dev/null &
 
-exists spoof || {
+commandExists spoof || {
     loggErr "you need spoof!. Exiting."
     exit
 }

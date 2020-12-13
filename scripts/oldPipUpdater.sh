@@ -35,7 +35,7 @@ else
     unset zpwrBaseDir
 fi
 
-if exists python2;then
+if commandExists python2;then
     outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
 
     if [[ "$(uname)" == Darwin ]]; then

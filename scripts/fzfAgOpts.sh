@@ -36,8 +36,8 @@ else
     unset zpwrBaseDir
 fi
 
-exists rpm && rpm_cmd='{ rpm -qi $file; rpm -qlp $file; }' || rpm_cmd="stat"
-exists dpkg && deb_cmd='{ dpkg -I $file; dpkg -c $file; }' || deb_cmd="stat"
+commandExists rpm && rpm_cmd='{ rpm -qi $file; rpm -qlp $file; }' || rpm_cmd="stat"
+commandExists dpkg && deb_cmd='{ dpkg -I $file; dpkg -c $file; }' || deb_cmd="stat"
 
 os="$(uname -s)"
 if echo "$os" | grep -iq darwin; then

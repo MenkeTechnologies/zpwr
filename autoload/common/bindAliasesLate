@@ -180,10 +180,10 @@ function bindAliasesLate(){
         alias colo="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
         alias bl='brew link --force --overwrite'
 
-        if exists exa; then
+        if commandExists exa; then
             alias lr="$ZPWR_EXA_COMMAND -R"
         else
-            exists gls &&
+            commandExists gls &&
             alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
             alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
         fi

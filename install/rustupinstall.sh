@@ -15,42 +15,42 @@ source common.sh
 
 
 while true; do
-    if exists curl;then
+    if commandExists curl;then
         break
     fi
     sleep 5
 done
 
-exists bat || {
+commandExists bat || {
     prettyPrintBox "Installing Rustup if cargo does not exist"
-    exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+    commandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
     prettyPrintBox "Updating rustup"
     "$HOME/.cargo/bin/rustup" update
     prettyPrintBox "Installing Bat (cat replacement) with Cargo"
     "$HOME/.cargo/bin/cargo" install bat
 }
 
-exists fd || {
+commandExists fd || {
     prettyPrintBox "Installing rustup if cargo does not exist"
-    exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+    commandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
     prettyPrintBox "Updating rustup"
     "$HOME/.cargo/bin/rustup" update
     prettyPrintBox "Installing Fd (find replacement) with Cargo"
     "$HOME/.cargo/bin/cargo" install fd-find
 }
 
-exists exa || {
+commandExists exa || {
     prettyPrintBox "Installing rustup if cargo does not exist"
-    exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+    commandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
     prettyPrintBox "Updating rustup"
     "$HOME/.cargo/bin/rustup" update
     prettyPrintBox "Installing Exa with Cargo"
     "$HOME/.cargo/bin/cargo" install exa
 }
 
-exists rg || {
+commandExists rg || {
     prettyPrintBox "Installing rustup if cargo does not exist"
-    exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+    commandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
     prettyPrintBox "Updating rustup"
     "$HOME/.cargo/bin/rustup" update
     prettyPrintBox "Installing ripgrep with Cargo"
@@ -59,7 +59,7 @@ exists rg || {
 
 
 prettyPrintBox "Installing Rustup if cargo does not exist"
-exists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+commandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
 prettyPrintBox "Updating rustup"
 "$HOME/.cargo/bin/rustup" update
 prettyPrintBox "Installing cargo-update with Cargo"

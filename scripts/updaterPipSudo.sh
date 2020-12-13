@@ -77,7 +77,7 @@ python3 -c 'import pip' && {
 }
 
 #python 2 (non system)
-exists python2 && python2 -c 'import pip' && {
+commandExists python2 && python2 -c 'import pip' && {
     prettyPrint "Updating Python2 Packages"
     needSudoBase=true
 

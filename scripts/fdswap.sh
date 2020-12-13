@@ -23,7 +23,7 @@ if [[ -z "$2" ]]; then
     usage
 fi
 
-if ! exists gdb; then
+if ! commandExists gdb; then
     echo "Unable to find gdb." >&2
     usage
 fi
