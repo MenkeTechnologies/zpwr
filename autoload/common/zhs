@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zh() {
+function zhs() {
 
     if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME/snippets" ]]; then
         cd "$ZPWR_PLUGIN_MANAGER_HOME/snippets"
@@ -10,4 +10,4 @@ function zh() {
 
 }
 
-zh "$@"
+zhs "$@"
