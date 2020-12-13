@@ -115,15 +115,15 @@ function bindAliasesLate(){
 
     #{{{                    MARK:ALIASES for editing config files
     #**************************************************************
-    alias vrc="vim -S ~/.vim/sessions/vrc.vim ~/.vimrc"
-    alias brc="vim -S ~/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null"
-    alias zrc="vim -S ~/.vim/sessions/zshrc.vim + ~/.zshrc"
-    alias trc="vim -S ~/.vim/sessions/trc.vim ~/.tmux.conf"
-    alias tok="builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
-    alias conf="builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_ENV/.minvimrc;clearList;isGitDir && git diff HEAD"
-    alias etok="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE;clearList;isGitDir && git diff HEAD"
-    alias econf="builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_ENV/.minvimrc;clearList;isGitDir && git diff HEAD"
-    alias zpt="builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;clearList;isGitDir && git diff HEAD"
+    alias vrc='vim -S $HOME/.vim/sessions/vrc.vim $HOME/.vimrc'
+    alias brc='vim -S $HOME/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null'
+    alias zrc='vim -S $HOME/.vim/sessions/zshrc.vim + $HOME/.zshrc'
+    alias trc='vim -S $HOME/.vim/sessions/trc.vim $HOME/.tmux.conf'
+    alias tok='builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; clearList;isGitDir && git diff HEAD'
+    alias conf='builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;clearList;isGitDir && git diff HEAD'
+    alias etok='builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;clearList;isGitDir && git diff HEAD'
+    alias econf='builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;clearList;isGitDir && git diff HEAD'
+    alias zpt='builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;clearList;isGitDir && git diff HEAD'
     #}}}***********************************************************
 
     alias deleteTab="sed '/^[\x20\x09]*$/d'"
