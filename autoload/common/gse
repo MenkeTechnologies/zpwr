@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function gse(){
+
+    if [[ -z "$1" ]]; then
+            loggErr "usage: gse <git-search-regex>"
+            return 1
+        fi
+
+    local arg cmd logcmd grepcmd
+    arg="$1"
+    cmd="$ZPWR_GIT_COLOR_PREFIX"
+    logcmd="${cmd} log -p -G $arg"
+    grepcmd="${cmd} rev-list --all | xargs ${cmd} grep  -C 10 $arg"
+
+
+    prettyPrint "$logcmd"
+    ${=logcmd}
+    prettyPrint "$grepcmd"
+    ${=grepcmd}
+}
+
+gse "$@" |& less

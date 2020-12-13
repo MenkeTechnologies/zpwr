@@ -13,6 +13,7 @@ MenkeTechnologies/zsh-docker-aliases
 MenkeTechnologies/zsh-expand
 MenkeTechnologies/zsh-gem-completion
 MenkeTechnologies/zsh-git-acp
+MenkeTechnologies/zsh-git-repo-cache
 MenkeTechnologies/zsh-learn
 MenkeTechnologies/zsh-more-completions
 MenkeTechnologies/zsh-nginx

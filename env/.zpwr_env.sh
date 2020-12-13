@@ -109,6 +109,8 @@ export ZPWR_PREFER_MVIM=true
 export ZPWR_PROFILING=false
 # set to POWERLEVEL to use the powerlevel10k prompt
 export ZPWR_PROMPT=powerlevel10k
+# git colored output cmd prefix
+export ZPWR_GIT_COLOR_PREFIX="git -c color.status=always -c color.ui=always --no-pager"
 # char to separate log messages
 export ZPWR_QUOTE_START_CHAR='<<('
 # char to separate log messages
