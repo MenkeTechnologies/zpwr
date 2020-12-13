@@ -223,10 +223,6 @@ function bindAliasesLate(){
             elif exists yum;then
                 alias api="$ZPWR_FULL_SUDO yum install -y"
                 alias apa="$ZPWR_FULL_SUDO yum check-update; $ZPWR_FULL_SUDO yum upgrade -y "
-            elif exists zypper;then
-                alias api="$ZPWR_FULL_SUDO zypper install -y"
-                alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
-                alias zy="$ZPWR_FULL_SUDO zypper"
             fi
 
             alias ipt="$ZPWR_FULL_SUDO iptables --line-numbers -L"
@@ -247,6 +243,11 @@ function bindAliasesLate(){
         alias exa='exa --git -il -F -H --color-scale -g -a'
                     ;;
                 (*suse*) :
+                    if exists zypper;then
+                        alias api="$ZPWR_FULL_SUDO zypper install -y"
+                        alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
+                        alias zy="$ZPWR_FULL_SUDO zypper"
+                    fi
                     ;;
                 (*) :
                     ;;
