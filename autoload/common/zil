@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zin(){
+function zil(){
     if [[ -d "$ZPWR_INSTALL" ]]; then
         cd "$ZPWR_INSTALL"
     else
@@ -9,4 +9,4 @@ function zin(){
 
 }
 
-zin "$@"
+zil "$@"
