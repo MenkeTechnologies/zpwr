@@ -139,8 +139,8 @@
     assert $? equals 0
 }
 
-@test 'zin' {
-    zin &>/dev/null
+@test 'zil' {
+    zil &>/dev/null
     [[ "$PWD" == "$ZPWR_INSTALL" ]]
     assert $? equals 0
 }
