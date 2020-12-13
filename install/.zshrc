@@ -436,14 +436,14 @@ done
 
 # late GH plugins
 for p in $ZPWR_GH_PLUGINS; do
-    zinit ice lucid nocompile wait
+    zinit ice lucid nocompile  wait
     zinit load $p
 done
 
 unset p
 
 
-zinit ice lucid nocompile wait atinit='bindForGit'
+zinit ice lucid nocompile wait atinit='bindOverrideOMZ;bindForGit'
 zinit load \
     MenkeTechnologies/forgit
 
