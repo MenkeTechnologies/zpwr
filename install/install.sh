@@ -714,25 +714,9 @@ fi
 if [[ $justConfig != true ]]; then
     prettyPrintBox "Installing IFTOP-color by MenkeTechnologies"
 
-    goInstallerOutputDir
-    automake --version 2>&1 | grep -q '16' || {
-        wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
-            tar xvfz automake-1.16.tar.gz
-            builtin cd automake-1.16 && ./configure && make && sudo make install
-            make clean
-        }
-
-    [[ ! -d "$HOME/forkedRepos" ]] && mkdir "$HOME/forkedRepos"
-    if builtin cd "$HOME/forkedRepos"; then
-        git clone https://github.com/MenkeTechnologies/iftopcolor
-        if builtin cd iftopcolor; then
-            aclocal
-            automake --add-missing
-            ./configure && make && sudo make install
-        else
-            fail "could not cd to iftopcolor"
-        fi
-    fi
+    goInstallerDir
+    fileMustExist iftop_install.sh
+    source iftop_install.sh
 
     if ! commandExists grc; then
         goInstallerOutputDir
@@ -768,7 +752,6 @@ if [[ $justConfig != true ]]; then
 
     goInstallerDir
     fileMustExist go_install.sh
-
     source go_install.sh
 
     if ! test -f /usr/local/sbin/iftop;then
