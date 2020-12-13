@@ -6,19 +6,27 @@ function bindOverrideOMZ(){
     #**************************************************************
     unalias z >/dev/null 2>&1
     unalias zh >/dev/null 2>&1
+    unalias zhb >/dev/null 2>&1
     unalias zhc >/dev/null 2>&1
     unalias zhp >/dev/null 2>&1
     unalias zhs >/dev/null 2>&1
     unalias zhse >/dev/null 2>&1
+
     unalias zs >/dev/null 2>&1
     unalias ze >/dev/null 2>&1
-    unalias zlr >/dev/null 2>&1
+
+    unalias zl >/dev/null 2>&1
+    unalias zli >/dev/null 2>&1
     unalias zlc >/dev/null 2>&1
+    unalias zlr >/dev/null 2>&1
     unalias zls >/dev/null 2>&1
+
+    unalias zpl >/dev/null 2>&1
     unalias zal >/dev/null 2>&1
     unalias zt >/dev/null 2>&1
     unalias ztm >/dev/null 2>&1
     #}}}***********************************************************
 
 }
+
 bindOverrideOMZ "$@"

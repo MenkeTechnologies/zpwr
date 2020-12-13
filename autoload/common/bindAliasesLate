@@ -226,7 +226,7 @@ function bindAliasesLate(){
             elif exists zypper;then
                 alias api="$ZPWR_FULL_SUDO zypper install -y"
                 alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
-                alias zy='zypper'
+                alias zy="$ZPWR_FULL_SUDO zypper"
             fi
 
             alias ipt="$ZPWR_FULL_SUDO iptables --line-numbers -L"
