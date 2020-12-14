@@ -12,6 +12,12 @@ if [[ -z $ZPWR_VERBS ]]; then
     declare -Ag ZPWR_VERBS
 fi
 
+if [[ -z $ZPWR_VARS ]]; then
+    declare -Ag ZPWR_VARS
+fi
+
+ZPWR_VARS[VERB_0]="$0"
+
 () {
     local k v verb cmd found ret exp
 
@@ -339,7 +345,7 @@ fi
             shift
         done
 
-        if [[ $(basename -- $verb) == $(basename -- $0) ]]; then
+        if [[ $(basename -- $verb) == $(basename -- ${ZPWR_VARS[VERB_0]}) ]]; then
             #zunit does this
             return 0
         fi
