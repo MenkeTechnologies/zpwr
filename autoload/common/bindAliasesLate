@@ -308,8 +308,8 @@ function bindAliasesLate(){
     alias watchGit='bash $ZPWR_SCRIPTS/watchServiceFSWatchGit.sh'
     alias watchPiWeb='bash $ZPWR_SCRIPTS/watchServiceFSWatchPiWeb.sh'
     exists tput && {
-        bold=$(tput bold || tput md)
-        red=$(tput setaf 1)
+        ZPWR_VARS[bold]=$(tput bold || tput md)
+        ZPWR_VARS[red]=$(tput setaf 1)
     }
 
     exists idea && {

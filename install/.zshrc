@@ -509,14 +509,9 @@ test -s "$ZPWR_ALIAS_FILE" && source "$ZPWR_ALIAS_FILE"
 
 #{{{                    MARK:Override OMZ config
 #**************************************************************
-local recachedCompsys lines
-recachedCompsys=false
+ZPWR_VARS[recachedCompsys]=felse
 # reload compsys cache if file is stale for 1 week
-
-for dump in ~/.zcompdump*(N.mh+168); do
-    zpwrStaleZcompdump
-    break
-done
+zpwrStaleZcompdump
 
 #if ! (( $+_comps[z] )); then
     #zpwrRetryZcompdump
@@ -731,7 +726,11 @@ endTimestamp=$EPOCHREALTIME
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
 loggDebug "zsh startup took $startupTimeMs seconds"
 
+ZPWR_VARS[startTimestamp]="$startTimestamp"
+ZPWR_VARS[endTimestamp]="$endTimestamp"
 ZPWR_VARS[startupTimeMs]="$startupTimeMs"
+
+unset startupTimeMs startTimestamp endTimestamp
 
 if [[ "$ZPWR_PROFILING" == true ]]; then
     zprof

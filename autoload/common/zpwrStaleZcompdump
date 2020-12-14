@@ -1,10 +1,21 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-logg "regenerating stale '$dump' older than 1 week"
-lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
-rm "$ZSH_COMPDUMP"
-# avoid insecure warning message with -u
-compinit -u -d "$ZSH_COMPDUMP"
-echo "$lines" >> "$ZSH_COMPDUMP"
-zcompile $ZSH_COMPDUMP
-recachedCompsys=true
+
+function zpwrStaleZcompdump() {
+
+    local dump lines
+
+    for dump in ~/.zcompdump*(N.mh+168); do
+        logg "regenerating stale '$dump' older than 1 week"
+        lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
+        rm "$ZSH_COMPDUMP"
+        # avoid insecure warning message with -u
+        compinit -u -d "$ZSH_COMPDUMP"
+        echo "$lines" >> "$ZSH_COMPDUMP"
+        zcompile $ZSH_COMPDUMP
+        ZPWR_VARS[recachedCompsys]=true
+        break
+    done
+}
+
+zpwrStaleZcompdump "$@"

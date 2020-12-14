@@ -16,7 +16,7 @@ type -a ZPWR_VARS 1>/dev/null 2>&1 || {
 
 type -a evalIfNeeded 1>/dev/null 2>&1 || function evalIfNeeded() {
 
-    local name current prev
+    local name current prev wanted
     name="$1"
     current="$2"
     wanted="$3"
