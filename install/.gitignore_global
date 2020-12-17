@@ -66,7 +66,19 @@ $RECYCLE.BIN/
 #{{{                    MARK:JetBrains
 #**************************************************************
 .idea/
+.idea_modules/
+*.iws
 *.iml
+atlassian-ide-plugin.xml
+
+hs_err_pid*
+
+# Crashlytics plugin
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
 local.properties
 *~
 *.iws
@@ -228,6 +240,7 @@ dist
 *.war
 *.ear
 *.class
+.mtj.tmp/
 
 #gradle
 .gradle
@@ -235,6 +248,13 @@ build/
 .gradletasknamecache
 #maven
 target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
 #eclipse
 .project
 .metadata
@@ -328,6 +348,7 @@ ETAGS
 /config.status
 #cmake
 cmake-build-debug/
+cmake-build-release/
 .cxx/
 CMakeFiles/
 CMakeCache.txt
@@ -421,20 +442,7 @@ flycheck_*.el
 /network-security.data
 
 #}}}***********************************************************
-
-#{{{                    MARK:misc
-#**************************************************************
-*.swp
-*.bak
-#logback
-*.log
-.tmux/resurrect/
-#java
-test.java
-*.patch
-*.diff
-#}}}***********************************************************
-
+#
 #{{{                    MARK:Python
 #**************************************************************
 # Byte-compiled / optimized / DLL files
@@ -465,3 +473,23 @@ share/python-wheels/
 *.egg
 MANIFEST
 #}}}***********************************************************
+
+#{{{                    MARK:misc
+#**************************************************************
+*.swp
+*.bak
+#logback
+*.log
+.tmux/resurrect/
+#java
+test.java
+*.patch
+*.diff
+# Package Files #
+*.nar
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+#}}}***********************************************************
+
