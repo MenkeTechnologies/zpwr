@@ -432,6 +432,10 @@ export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 export ZPWR_MAP_C_V_VIM_NORMAL=false
 # the marker found color in bat output into fzf from ag search
 export ZPWR_MARKER_COLOR='0;1;4;37;44m'
+# default value for pygmentize theme
+export ZPWR_PYGMENTIZE_COLOR="emacs"
+# zpwr colorizer = bat or pygmentize
+export ZPWR_COLORIZER=bat
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework
