@@ -158,7 +158,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[gh]='openmygh=open github profile'
     ZPWR_VERBS[hd]='hd=delete remote github repo'
     ZPWR_VERBS[ghz]='zpwrgh=open zpwr github repo'
-    ZPWR_VERBS[gitignore]='gil=vim ~/.git/info/exclude'
+    ZPWR_VERBS[gitignore]='gil=\$EDITOR ~/.git/info/exclude'
     ZPWR_VERBS[gitlargest]='largestGitFiles=show largest files stored by git in descending order'
     ZPWR_VERBS[gitremotes]='allRemotes=list all git remotes'
     ZPWR_VERBS[gitrepos]='zsh-git-repo-searchAllGitRepos=search \$ZPWR_ALL_GIT_DIRS in fzf'

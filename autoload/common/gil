@@ -16,7 +16,7 @@ function gil(){
        return 1
     fi
 
-    vim "$file"
+    ${=EDITOR} "$file"
 
 }
 
