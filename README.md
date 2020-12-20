@@ -49,7 +49,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF...OPTS env vars
-- 11k zsh tab completions [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
+- ~11.5k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - ergonomic, recursive tmux keybindings for next and previous windows
 - zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygementize
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygementize
@@ -75,13 +75,13 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - vim extract method for shell, perl and python scripts (`gv` to select extracted)
 - vim extract variable for shell, perl and python scripts (`gv` to select extracted)
 - vim extract variable from visual selection for shell, perl and python scripts (`gv` to select extracted)
-- vim autohighlight word under cursor after delay like most code editors
+- vim autohighlight word under cursor after delay like JetBrains IDEs
 - software updater script, `source autoUpdater.sh`,  on 24 hour loop
 - 1800+ aliases
-- 300+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
+- 320+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - zsh keybindings to git add, commit and push with commit message from current command line [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
-- git blacklisted directories [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
+- git commit blacklisted directories [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - zle quote swapper widget
 - zsh, tmux and vim keybindings to copy/paste to system clipboard
 - shell function to pull down latest code changes from this repo with `zpwr update`
@@ -97,10 +97,10 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
 - zpwr subcommands count with `zpwr verbscount`
 - zpwr subcommands into fzf with `zpwr verbs`
-- 315+ zpwr verbs
+- 320+ zpwr verbs
 - zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
-- 125+ centralized environment variables in ZPWR namespace to control functionality
+- 130+ centralized environment variables in ZPWR namespace to control functionality
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
 - centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - user specific ZPWR files in `~/.zpwr/local` git ignored
@@ -109,9 +109,10 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
 - poll.service = systemd service that polls github and download latest zpwr code
 - learn.service = systemd service that runs learning collection API
-- restart function that launches poll and learn by enabling and starting in systemd
+- restart function that launches poll.service and learn by enabling and starting in systemd
 - central control of zpwr colorful output with `ZPWR_COLORS`
 - zsh completion with descriptions for parameters, regular, suffix and global aliases
+- 2700+ line README
 
 
 ## ZPWR Dependencies
