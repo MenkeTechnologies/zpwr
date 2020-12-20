@@ -12,7 +12,22 @@ function ___linkConf(){
 
     local symFiles file snipDir
 
-    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc)
+    symFiles=(
+        .tmux.conf
+        .ideavimrc
+        .vimrc
+        grc.zsh
+        conf.gls
+        conf.df
+        conf.ifconfig
+        conf.mount
+        conf.whois
+        .iftopcolors
+        .inputrc
+        .zshrc
+        #.spacemacs
+        .globalrc
+    )
 
     for file in ${symFiles[@]} ; do
         prettyPrint "Installing $file to $HOME"

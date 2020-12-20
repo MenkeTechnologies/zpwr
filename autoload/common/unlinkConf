@@ -6,7 +6,22 @@ function ___unlinkConf(){
 
     local symFiles file snipDir
 
-    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc .ctags)
+    symFiles=(
+        .tmux.conf
+        .ideavimrc
+        .vimrc
+        grc.zsh
+        conf.gls
+        conf.df
+        conf.ifconfig
+        conf.mount
+        conf.whois
+        .iftopcolors
+        .inputrc
+        .zshrc
+        #.spacemacs
+        .globalrc
+    )
 
     for file in ${symFiles[@]} ; do
         if [[ -f "$HOME/$file" ]]; then

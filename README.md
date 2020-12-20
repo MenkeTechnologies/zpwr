@@ -187,11 +187,11 @@ git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/ins
 ```
 This will install just config files not dependencies.
 
-You can then run each install script in `.zpwr/install` manually to install just vim plugins or cargo packages etc.
+You can then run each install shell script in `.zpwr/install` manually to install just vim plugins or cargo packages etc.
 
 ## Install Destination
 
-Most zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR` environment variable.  Exceptions include `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/grc.zsh` which are sym linked into home dir.
+All zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR` environment variable.  `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/grc.zsh` and othere config files are sym linked into home dir to be read by the respective program.
 Your old configs for these files will be found in a directory name approximately `~/.zpwr/local/username.rc.bak.date` after install.  Exact directory name is generated as shown.
 ```sh
 backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
@@ -204,7 +204,7 @@ Run `zpwr uninstall`.  This will ask for confirmation before moving backups dirs
 
 OR
 
-1. Run `unlinkConf` to unlink all zpwr config symlinks.
+1. Run `zpwr rmconfiglinks` (`unlinkConf`) to unlink all zpwr config symlinks.
 2. Copy all configs from backup dir mentioned above to home directory most importantly the `.zshrc`, `.vimrc` and `.tmux.conf`.
 3. Remove the zpwr dir as shown.
 ```sh
@@ -212,60 +212,24 @@ rm -rf ~/.zpwr
 ```
 This will not uninstall packages installed by system package manager, pip modules, gems, vim plugins, tmux plugins and zsh plugins.
 You must remove these manually if desired.
-If desired you can also uninstall zinit with ```rm -rf ~/.zinit```.  Make sure `~/.zshrc` is your original version.
+If desired you can also uninstall zinit with ```rm -rf ~/.zinit```.  Make sure `~/.zshrc` and other config files in `$HOME` are original versions.
 
 ## Font
-You need to change the Terminal font to support the Powerline triangles and other special characters in the Powerlevel10k PROMPT.
+You need to change the Terminal font to display the Powerline triangles and other special characters in the Powerlevel10k `$PROMPT`.
 
 The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
 documentation for details on how to change the font.
 
 ## Updating
-`zpwr updateall` updates all zpwr config, caches and dependencies.  `zpwr update` updates just zpwr configs.
+`zpwr updateall` (`zua`) links all zpwr config files, updates zpwr and zsh plugins, regens all caches and updates all dependencies. 
 
-### getrc and linkConf functions
-There is a shell function called `getrc`, or `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`.
-It invokes `linkConf` which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` in `$HOME` and some other miscellaneous configuration files.
-> ~/.zpwr/.shell_aliases_functions.sh: linkConf
-```sh
-### link over latest configuration files from $ZPWR_REPO_NAME
-function linkConf(){
-
-    (
-    if [[ ! -f "$HOME/.ctags" ]]; then
-        prettyPrint "Linking .ctags to home directory"
-        goInstallerDir
-        ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
-    fi
-
-    local -a symFiles
-    symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs .globalrc)
-
-    for file in ${symFiles[@]} ; do
-        prettyPrint "Installing $file to $HOME"
-        goInstallerDir
-        echo ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
-        ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
-    done
-
-    prettyPrint "Installing UltiSnips to $HOME/.vim/UltiSnips"
-    echo ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
-    ln -sfn $ZPWR_INSTALL/UltiSnips "$HOME/.vim/UltiSnips"
-    local snipDir="$HOME/.emacs.d/private/snippets"
-
-    if [[ -d "$snipDir" ]]; then
-        prettyPrint "Installing yasnippets to $snipDir"
-        command rm -rf "$snipDir/zpwr-snippets" 2>/dev/null
-        echo ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
-        ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
-    fi
-    )
-}
-```
+### zpwr update and linkConf functions
+There is a shell function called `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`, links all zpwr config files and updates all zsh plugins.
+It invokes `zpwr regenconfiglinks` (`linkConf`) which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` and some other miscellaneous configuration files into `$HOME`.
 
 ## Tmux prefix
-The default tmux prefix key is C-a (control-a) on macOS so one can control inner tmux sessions on Linux/UNIX (prefix is C-b) separately.
-To invoke C-a in the shell press C-a twice.
+The default tmux prefix key is C-a (control-a) on macOS so one can control inner tmux sessions (inside tmux session login to another computer and attach to its tmux session) on Linux/UNIX (prefix is C-b) separately.
+To invoke C-a in the shell press C-a twice or to invoke C-b press C-b twice.
 The left most segment of the tmux powerline status bar will be highlighted when the prefix is pressed and dehighlight when prefix is deactivated.
 You change the prefixes in `~/.zpwr/local/.tokens.sh` with these environment variable.
 ```sh
@@ -281,21 +245,33 @@ One of the vim plugin is vim-autosave which autosaves all edits thus making `:w`
 
 ## Bypassing expansion on space
 C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.
-Expansion can be disabled entirely by removing [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) from ZPWR_GH_PLUGINS array in `~/.zshrc`.
+Expansion can be disabled entirely by adding `zinit unload MenkeTechnologies/zsh-expand &>/dev/null` to `~/.zpwr/local/.tokens.sh` or removing [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) from ZPWR_GH_PLUGINS array in `~/.zpwr/local/.tokens.sh`.
 
-> ~/.zshrc
+> ~/.zpwr/local/.tokens.sh
 ```sh
-ZPWR_GH_PLUGINS=(plug1 plug2)
+zinit unload MenkeTechnologies/zsh-expand &>/dev/null
 ```
 
-Alternatively, change these env vars to false in `~/.zpwr/local/.tokens.sh`.  The first controls all expansion in any position.
-The second variable controls expansion in second position.  For example with sudo/zpwr/env in the first position and the alias to expand in the second position on the command line.
-> ~/.zpwr/env/.zpwr_env.sh
+OR
+
+> ~/.zpwr/local/.tokens.sh
+```sh
+ZPWR_GH_PLUGINS[$ZPWR_GH_PLUGINS[(i)MenkeTechnologies/zsh-expand]]=()
+
+```
+
+Alternatively, change these env vars to false in `~/.zpwr/local/.tokens.sh`.  The first turn off expansion in any position.
+The second variable turns off expansion in second position.  For example with sudo/zpwr/env in the first position and the alias to expand in the second position on the command line.  The third turn offs glob/history/param etc expansion in any position.  The fourth turns off spelling correction in any position.
+> ~/.zpwr/local/.tokens.sh
 ```sh
 # aliases expand in first position
-export ZPWR_EXPAND=true
+export ZPWR_EXPAND=false
 # aliases expand in second position after sudo
-export ZPWR_EXPAND_SECOND_POSITION=true
+export ZPWR_EXPAND_SECOND_POSITION=false
+# expand globs, history etc with zle expand-word
+export ZPWR_EXPAND_NATIVE=false
+# spelling correction in zsh-expand plugin
+export ZPWR_CORRECT=false
 ```
 
 The relevant code is the [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) plugin for expansion at the second position.
@@ -313,8 +289,8 @@ if printf -- "$ZPWR_VARS[firstword_partition]" | command grep -qsE $ZPWR_VARS[co
 File ending of currently edited file in vim determines the interpreter used by the bash script `$ZPWR_SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
 
 ## Tmux Main Window
-The main window show in the screenshots is started by Prefix-D in an empty tmux window.  This sources a tmux script named control-window.
-Alternatively you could invoke the script by Prefix-: `source-file ~/.zpwr/tmux/control-window` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window` in an empty tmux window.
+The main window show in the screenshots is started by prefix-D (tmux prefix definition mentioned above) in an empty tmux window.  This sources a tmux script `~/.zpwr/tmux/control-window`.
+Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-window` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window` in an empty tmux window.
 
 ## Personal Config
 Startup shell files will source `~/.zpwr/local/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any only features like `isZsh && myZshConfig`.
@@ -602,7 +578,7 @@ exists zunit && {
 ```
 
 ## Shell Startup speed
-Running `zpwr regen` will zcompile all zpwr configs and all autoloaded funtions and compsys completions in fpath.  This will maximize startup speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/comps` contains autoloaded compsys funtions.
+Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded funtions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/comps` contains autoloaded compsys funtions.
 Replacing the lolcat into ponysay banner like so on startup will further increase speed.
 ```sh
 export ZPWR_INTRO_BANNER=nopony
