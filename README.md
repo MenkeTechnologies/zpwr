@@ -33,50 +33,57 @@ This also means you can move ZPWR after install after updating the sym links tha
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
 ## ZPWR Features
+- 320+ zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
+- 130+ centralized environment variables in ZPWR namespace to control functionality
+- 670+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
+- user specific ZPWR files in `~/.zpwr/local` git ignored
+- installer specific ZPWR files in `~/.zpwr/install` git tracked
+- ZPWR installer ouput in `~/.zpwr/local/installer` git ignored
+- central on/off control of zpwr colorful output with `ZPWR_COLORS`
+- zsh completion with descriptions for parameters, regular, suffix and global aliases
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - snippets with tabstops that expand with spacebar and advance to next stop with C-p [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - expanding regular aliases and global aliases from zsh menu selection and in vim insert mode [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
-- color-coded sections of zsh menu completion for commands, aliases, reswords, functions, builtins, parameters, files, command history, correction
-- color-coded sections of zsh menu completion for man pages
-- color-coded sections of zsh menu completion  for git subcommands
-- color-coded sections of zsh menu completion for git objects
-- custom styling for tag grouping in menu selection
-- tag grouping for man pages by section
-- heavily colorized man pages color grouped by sections [zsh-very-colorful-manuals](https://github.com/MenkeTechnologies/zsh-very-colorful-manuals)
+- color-coded groups of zsh menu completion for commands, aliases, reswords, functions, builtins, parameters, files, command history, correction
+- color-coded groups of zsh menu completion for man pages
+- color-coded groups of zsh menu completion for git subcommands
+- color-coded groups of zsh menu completion for git objects
+- heavily colorized man pages [zsh-very-colorful-manuals](https://github.com/MenkeTechnologies/zsh-very-colorful-manuals)
 - insert matching quotes, brackets and parentheses like most IDEs [zsh-autopair](https://github.com/hlissner/zsh-autopair)
-- custom keybinding to open files most recently edited based on viminfo and placed into fzf for fuzzy searching (fzvim)
+- custom keybinding to open files most recently edited based on viminfo and emacs recentff and placed into fzf for fuzzy searching (fzvim)
 - vim keybindings (insert, normal and visual modes) to run current code file open in vim in tmux pane to right
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right in REPL
-- fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF...OPTS env vars
+- fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF.*OPTS env vars
 - ~11.5k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - ergonomic, recursive tmux keybindings for next and previous windows
-- zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygementize
-- zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygementize
-- zsh keybindings to fzf search of most recent files opened in vim with syntax highlighted, numbered preview pane from bat or pygementize
-- zsh keybindings to fzf search of network process with lsof return PIDs
-- fzf searching of all git directories on computer
-- fzf searching of all dirty git directories on computer
+- zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygmentize
+- zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize
+- zsh keybindings to fzf search of network processes with lsof return PIDs
+- zsh function to cache all git directories
+- zsh function for fzf searching of all git directories
+- zsh function for fzf searching of all dirty git directories
+- zsh function to exec cmd in all git directories
 - integration of [z](https://github.com/MenkeTechnologies/zsh-z) frecency database into _files completion
 - integration of [fasd](https://github.com/MenkeTechnologies/fasd-simple) frecency database into _files completion
 - zsh menucompletion for [z](https://github.com/MenkeTechnologies/zsh-z) command based on frecency [z](https://github.com/MenkeTechnologies/zsh-z) and [fasd](https://github.com/MenkeTechnologies/fasd-simple) databases
 - keybindings to save to mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- functions to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
-- functions, `zpwr redo <number/regex...>` and `zpwr rsql <number/regex...>`, to modify mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
+- functions `zpwr searchl` to search from mysql learning table [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - `zpwr redo <number/regex...>` prints to prompt SQL update statements for learning items [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - `zpwr redosql <number/regex...>` prints to vim SQL update statements for learning items that run once vim is quit [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - zle keybinding formats newlines and spaces before saving to mysql learning database [zsh-learn](https://github.com/MenkeTechnologies/zsh-learn)
 - zsh plugins loading based on OS
+- zsh functions autoloading based on OS
 - tmux keybindings and scripts based on OS
 - custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `install.sh` run
-- custom banner commands when new shell is launched
+- custom banners when new shell is launched
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
-- vim text objects on command line
-- vim extract method for shell, perl and python scripts (`gv` to select extracted)
-- vim extract variable for shell, perl and python scripts (`gv` to select extracted)
+- expanded vim text objects on command line
+- vim extract method from visual selection for shell, perl and python scripts (`gv` to select extracted)
+- vim extract variable under cursor for shell, perl and python scripts (`gv` to select extracted)
 - vim extract variable from visual selection for shell, perl and python scripts (`gv` to select extracted)
 - vim autohighlight word under cursor after delay like JetBrains IDEs
-- software updater script, `source autoUpdater.sh`,  on 24 hour loop
+- software updater script, `source ~/.zpwr/scripts/autoUpdater.sh`,  on 24 hour loop
 - 1800+ aliases
 - 320+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
@@ -91,27 +98,19 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - shell function that cds to any of parent directories with zsh completion with `zpwr cdup` or `r`
 - 165+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
-- color coded, tag grouped clearList zsh completion
+- color-coded, grouped clearList zsh completion
 - search google from tmux mouse drag selection (tmux's copy-mode-vi)
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
-- zpwr subcommands covering most of ZPWR functions with colorized zsh menucompletion `zpwr <tab>`
 - zpwr subcommands count with `zpwr verbscount`
-- zpwr subcommands into fzf with `zpwr verbs`
-- 320+ zpwr verbs
+- zpwr subcommands into fzf then execed with `zpwr verbs`
+- zpwr subcommands into fzf with `zpwr verbsedit`
 - zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
-- 130+ centralized environment variables in ZPWR namespace to control functionality
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
-- centralized ZPWR files in `~/.zpwr` allowing easy uninstall
-- user specific ZPWR files in `~/.zpwr/local` git ignored
-- installer specific ZPWR files in `~/.zpwr/install` git tracked
-- ZPWR installer ouput in `~/.zpwr/local/installer` git ignored
 - systemd functions for starting/enabling, stopping/disabling service with zsh completion
-- poll.service = systemd service that polls github and download latest zpwr code
-- learn.service = systemd service that runs learning collection API
+- systemd service, poll.service, that polls github and download latest zpwr code
+- systemd service, learn.service, that runs learning collection API
 - restart function that launches poll.service and learn by enabling and starting in systemd
-- central control of zpwr colorful output with `ZPWR_COLORS`
-- zsh completion with descriptions for parameters, regular, suffix and global aliases
 - 2700+ line README
 
 
@@ -201,7 +200,7 @@ Installer artifacts such as log files and cloned repos go into `~/.zpwr/local/in
 
 ## Uninstall
 
-Run `zpwr uninstall`.  This will ask for confirmation before moving backups dirs to $HOME, unlinking all configs from $HOME and deleting all config dirs.
+Run `zpwr uninstall`.  This will ask for confirmation before moving backups dirs to `$HOME`, unlinking all configs from `$HOME` and deleting all config dirs.
 
 OR
 
