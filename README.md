@@ -191,7 +191,7 @@ You can then run each install shell script in `.zpwr/install` manually to instal
 
 ## Install Destination
 
-All zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR` environment variable.  `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/grc.zsh` and othere config files are sym linked into home dir to be read by the respective program.
+All zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR` environment variable.  `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf`, `~/grc.zsh` and other config files are sym linked into home dir to be read by the respective program.
 Your old configs for these files will be found in a directory name approximately `~/.zpwr/local/username.rc.bak.date` after install.  Exact directory name is generated as shown.
 ```sh
 backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
