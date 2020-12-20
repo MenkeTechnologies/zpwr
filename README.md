@@ -306,7 +306,7 @@ Change in `~/.zpwr/local/.tokens.sh`
 ```sh
 export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 ```
-to match your GitHub account name to enable various functionality with your account like `openMyGH`, `hc` and `hd` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
+to match your GitHub account name to enable various functionality with your account like `zpwr github`, `zpwr githubcreate` and `zpwr githubdelete` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively
 
 ## Adding more Zinit plugins
 Add in `~/.zpwr/local/.tokens-post.sh` your extra plugins like such
