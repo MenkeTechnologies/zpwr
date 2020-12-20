@@ -9,8 +9,8 @@ function bindZpwrVerbs(){
     # get zpwr verbs
     source "$ZPWR_SCRIPTS/zpwr.zsh"
 
-    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs 
-    declare -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs
+    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitRepoVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs 
+    declare -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitRepoVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs
 
     for k v in ${(kv)ZPWR_VERBS[@]};do
         case $k in
@@ -28,6 +28,9 @@ function bindZpwrVerbs(){
                 ;;
             clean*)
                 zpwrCleanVerbs+=("$k:$v")
+                ;;
+            gitrepos*)
+                zpwrGitReposVerbs+=("$k:$v")
                 ;;
             github*)
                 zpwrGithubVerbs+=("$k:$v")
