@@ -293,7 +293,7 @@ The main window show in the screenshots is started by prefix-D (tmux prefix defi
 Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-window` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window` in an empty tmux window.
 
 ## Personal Config
-Startup shell files will source `~/.zpwr/local/.tokens.sh` so you can put your additional code there.  This file will not be overridden with the `getrc` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any only features like `isZsh && myZshConfig`.
+Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup so you can put your additional code there.  This file will not be overridden with the `zpwr update` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any only features like `isZsh && myZshConfig`.  Startup shell files will source `~/.zpwr/local/.tokens-post.sh` after all zsh config and zinit startup.
 
 Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and create a ctags file named `~/tags` in your home directory.
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
@@ -578,20 +578,20 @@ exists zunit && {
 ```
 
 ## Shell Startup speed
-Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded funtions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/comps` contains autoloaded compsys funtions.
-Replacing the lolcat into ponysay banner like so on startup will further increase speed.
+Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded funtions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/autoload/comps` contains autoloaded compsys funtions.
+Removing the lolcat into ponysay banner like so on startup will further increase speed.
 ```sh
 export ZPWR_INTRO_BANNER=nopony
 ```
-With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (minimal if `zpwr regenzsh` and `zpwr compile` have run to create .zcompdump.zwc) at around 8 seconds by default.
+With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc) after a few seconds.
 ```sh
 export ZPWR_ZINIT_COMPINIT_DELAY=8
 ```
 ## Contributing
-I am looking for contributors. Especially for documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests.
+I am looking for contributors mostly for documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests.
 
 ## Warnings
-Moving  scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZPWR_TMUX` which defaults to `~/.zpwr/tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.
+Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZPWR_TMUX` which defaults to `~/.zpwr/tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.  The only user modifiable files are the user token files.
 
 # Running on a MacbookPro
 ![Alt text](http://jakobmenke.com/img/tmuxfinal22.png?raw=true)
