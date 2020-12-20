@@ -7,10 +7,14 @@ function ___hd(){
     if cmd="$(getGHDelURL)";then
 
         prettyPrint "Exe '$cmd'"
-        if eval "$cmd"; then
-            prettyPrint "Successful deletion."
-        else
-            loggErr "Error in deletion."
+        prettyPrintNoNewline "are you sure? y/n > "
+        read
+        if [[ $REPLY == y ]]; then
+            if eval "$cmd"; then
+                prettyPrint "Successful deletion."
+            else
+                loggErr "Error in deletion."
+            fi
         fi
     else
             loggErr "getGHDelURL failed."
