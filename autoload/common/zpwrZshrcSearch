@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zshrcsearch(){
+function zpwrZshrcSearch(){
 
     if [[ -z "$1" ]]; then
         zsh -ilvx -c false &> $ZPWR_TEMPFILE4
@@ -11,4 +11,4 @@ function ___zshrcsearch(){
     fi
 }
 
-___zshrcsearch "$@"
+zpwrZshrcSearch "$@"

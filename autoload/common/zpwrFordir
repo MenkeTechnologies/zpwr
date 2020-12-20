@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___fordir(){
+function zpwrFordir(){
 
     if [[ -z "$2" ]]; then
        loggErr "usage: fordir <cmd> <dirs> to run <cmd> in each dir"
@@ -27,4 +27,4 @@ function ___fordir(){
     done
 }
 
-___fordir "$@"
+zpwrFordir "$@"

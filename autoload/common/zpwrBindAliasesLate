@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function bindAliasesLate(){
+function zpwrBindAliasesLate(){
 
     function chooseNvimVim(){
 
@@ -322,4 +322,4 @@ function bindAliasesLate(){
 
 }
 
-bindAliasesLate "$@"
+zpwrBindAliasesLate "$@"

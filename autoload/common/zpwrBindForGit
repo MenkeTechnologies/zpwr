@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function bindForGit(){
+function zpwrBindForGit(){
     #{{{                    MARK:forgit https://github.com/wfxr/forgit
 #**************************************************************
     export FORGIT_NO_ALIASES=true
@@ -16,4 +16,4 @@ function bindForGit(){
 
 }
 
-bindForGit "$@"
+zpwrBindForGit "$@"

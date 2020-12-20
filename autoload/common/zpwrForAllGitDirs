@@ -12,7 +12,7 @@ function ___zpwrForAllGitDirs(){
         regenAllGitRepos regen
     fi
 
-    ${=ZPWR_REPO_NAME} fordir $1 \
+    zpwrFordir $1 \
         $(cat $ZPWR_ALL_GIT_DIRS)
 }
 

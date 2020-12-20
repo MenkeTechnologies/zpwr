@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function bindZdharma(){
+function zpwrBindZdharma(){
 
     #{{{                    MARK:zdharma configs pre OMZ
     #**************************************************************
@@ -12,4 +12,4 @@ function bindZdharma(){
 
 }
 
-bindZdharma "$@"
+zpwrBindZdharma "$@"

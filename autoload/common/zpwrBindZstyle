@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function bindZpwrZstyle(){
+function zpwrBindZstyle(){
 
     #{{{                    MARK:Completions
 #**************************************************************
@@ -296,4 +296,4 @@ zstyle ':fzf-tab:*' command ${FZF_TAB_COMMAND:-fzf} $FZF_TAB_OPTS
 
 }
 
-bindZpwrZstyle "$@"
+zpwrBindZstyle "$@"

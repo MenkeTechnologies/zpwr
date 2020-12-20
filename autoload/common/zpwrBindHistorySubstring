@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function bindHistorySubstring() {
+function zpwrBindHistorySubstring() {
     if exists history-substring-search-down history-substring-search-up; then
 
         if [[ -n "$terminfo[kcuu1]" ]]; then
@@ -15,4 +15,4 @@ function bindHistorySubstring() {
 
     fi
 }
-bindHistorySubstring "$@"
+zpwrBindHistorySubstring "$@"

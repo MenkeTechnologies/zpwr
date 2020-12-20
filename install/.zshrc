@@ -415,7 +415,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     # late load prompt and call precmd fns first thing after prompt loads
 
-    zinit ice lucid nocd nocompile wait'!' atinit'bindPowerline;bindPowerlineTmux;bindZpwrDirs' atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null;bindPreCmd; _p9k_precmd &> /dev/null'
+    zinit ice lucid nocd nocompile wait'!' atinit'zpwrBindPowerline;zpwrBindPowerlineTmux;zpwrBindDirs' atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null;zpwrBindPreCmd; _p9k_precmd &> /dev/null'
     zinit load MenkeTechnologies/zpwrp10k
 
     # late
@@ -444,41 +444,41 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     unset p
 
 
-    zinit ice lucid nocompile wait atinit='bindOverrideOMZ;bindForGit'
+    zinit ice lucid nocompile wait atinit='zpwrBindOverrideOMZ;zpwrBindForGit'
     zinit load \
         MenkeTechnologies/forgit
 
-    zinit ice lucid nocompile wait atinit='bindZdharma' atload'bindZdharmaPost'
+    zinit ice lucid nocompile wait atinit='zpwrBindZdharma' atload'zpwrBindZdharmaPost'
     zinit load \
         zdharma/zconvey
 
     # late bind autopair keystrokes
-    zinit ice lucid nocompile wait'0' atload='bindInterceptSurround'
+    zinit ice lucid nocompile wait'0' atload='zpwrBindInterceptSurround'
     zinit load \
         hlissner/zsh-autopair
 
     # override OMZ/plugin aliases with own aliases
     zinit ice lucid nocompile wait'0a' \
-    atload'bindAliasesLate;createAliasCache;bindAliasesZshLate;bindOverrideZLE;'
+    atload'zpwrBindAliasesLate;createAliasCache;zpwrBindAliasesZshLate;zpwrBindOverrideZLE;'
     zinit load \
         MenkeTechnologies/zsh-expand
 
 
     # late bind keystrokes, must come before syntax highlight
-    zinit ice lucid nocompile wait'0b' atload'bindHistorySubstring'
+    zinit ice lucid nocompile wait'0b' atload'zpwrBindHistorySubstring'
     zinit load \
         zsh-users/zsh-history-substring-search
 
 
     # late , must come before syntax highlight
-    zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;bindFZFLate;bindZpwrVerbs;bindZpwrZstyle'
+    zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;zpwrBindFZFLate;zpwrBindVerbs;zpwrBindZstyle'
     zinit load \
         zsh-users/zsh-autosuggestions
 
     # late , must be last to load
     # runs ZLE keybindings to override other late loaders
     # runs compinit
-    zinit ice lucid nocompile wait'0d' atinit'bindPenultimate;bindFinal;zpwrTokenPost'
+    zinit ice lucid nocompile wait'0d' atinit'zpwrBindPenultimate;zpwrBindFinal;zpwrTokenPost'
     zinit load \
         zdharma/fast-syntax-highlighting
 
@@ -488,7 +488,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zinit load \
         MenkeTechnologies/zsh-more-completions
 
-    zinit ice lucid nocompile nocd as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit'zicompinit; zicdreplay; bindOverrideOMZCompdefs'
+    zinit ice lucid nocompile nocd as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit'zicompinit; zicdreplay;zpwrBindOverrideOMZCompdefs'
     zinit light \
         MenkeTechnologies/zsh-zinit-final
 elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
@@ -543,12 +543,12 @@ export SAVEHIST="$HISTSIZE"
 
 #{{{                    MARK:Zpwr verbs
 #**************************************************************
-# late loaded in autoload/common/bindZpwrVerbs
+# late loaded in autoload/common/zpwrBindVerbs
 #}}}***********************************************************
 
 #{{{                    MARK:ZLE bindkey
 #**************************************************************
-# ZLE keybindings late loaded in autoload/common/bindOverrideZLE
+# ZLE keybindings late loaded in autoload/common/zpwrBindOverrideZLE
 # this is to override any late loaded plugins with keybindings
 #}}}***********************************************************
 
@@ -691,7 +691,7 @@ setopt no_flow_control
 
 #{{{                    MARK:FZF
 #**************************************************************
-# run in autoload/common/bindFZFLate
+# run in autoload/common/zpwrBindFZFLate
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Compsys Functions

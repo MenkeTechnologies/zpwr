@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function bindFinal(){
+function zpwrBindFinal(){
 
     #{{{                    MARK:OPAM env
     #**************************************************************
@@ -51,4 +51,4 @@ function bindFinal(){
 
 }
 
-bindFinal "$@"
+zpwrBindFinal "$@"

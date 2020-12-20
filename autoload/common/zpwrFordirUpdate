@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___fordirUpdate(){
+function zpwrFordirUpdate(){
 
     if [[ -z "$1" ]]; then
        loggErr "usage: fordirUpdate <dirs> to run git update in each dir"
@@ -19,4 +19,4 @@ function ___fordirUpdate(){
     done
 }
 
-___fordirUpdate "$@"
+zpwrFordirUpdate "$@"

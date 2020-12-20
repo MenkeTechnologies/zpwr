@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function bindInterceptSurround() {
+function zpwrBindInterceptSurround() {
     zle -N interceptDelete
     zle -N interceptSurround
     bindkey -M viins "^?" interceptDelete
@@ -13,4 +13,4 @@ function bindInterceptSurround() {
     bindkey -M viins "{" interceptSurround
 }
 
-bindInterceptSurround "$@"
+zpwrBindInterceptSurround "$@"

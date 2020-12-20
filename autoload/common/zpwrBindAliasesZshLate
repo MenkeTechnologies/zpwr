@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function bindAliasesZshLate(){
+function zpwrBindAliasesZshLate(){
 
 unalias zpl &>/dev/null
 unalias z &>/dev/null
@@ -189,4 +189,4 @@ alias pn='print -rl --'
 
 ###}}}***********************************************************
 }
-bindAliasesZshLate "$@"
+zpwrBindAliasesZshLate "$@"

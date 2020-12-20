@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function bindZdharmaPost(){
+function zpwrBindZdharmaPost(){
 
     #{{{                    MARK:zdharma post init
     #**************************************************************
@@ -10,4 +10,4 @@ function bindZdharmaPost(){
     #}}}***********************************************************
 }
 
-bindZdharmaPost "$@"
+zpwrBindZdharmaPost "$@"

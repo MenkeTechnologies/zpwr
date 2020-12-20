@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function bindFZFLate(){
+function zpwrBindFZFLate(){
 
     function zpwrBatSetup() {
         export ZPWR_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header"'
@@ -135,4 +135,4 @@ function bindFZFLate(){
     )
 }
 
-bindFZFLate "$@"
+zpwrBindFZFLate "$@"

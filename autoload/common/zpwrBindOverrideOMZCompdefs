@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function bindOverrideOMZCompdefs(){
+function zpwrBindOverrideOMZCompdefs(){
 
     #{{{                    MARK:Compdefs
     #**************************************************************
@@ -23,4 +23,4 @@ function bindOverrideOMZCompdefs(){
     exists _express && compdef _express express
     #}}}***********************************************************
 }
-bindOverrideOMZCompdefs "$@"
+zpwrBindOverrideOMZCompdefs "$@"

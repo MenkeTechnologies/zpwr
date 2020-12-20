@@ -1,7 +1,7 @@
 
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function bindZpwrDirs(){
+function zpwrBindDirs(){
 
     #{{{                    MARK:ENV VARS IN ZSH PROMPT %~
 #**************************************************************
@@ -98,4 +98,4 @@ fi
 
 }
 
-bindZpwrDirs "$@"
+zpwrBindDirs "$@"

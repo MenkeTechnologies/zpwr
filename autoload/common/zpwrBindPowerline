@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function bindPowerline(){
+function zpwrBindPowerline(){
 
     if [[ $ZPWR_PROMPT == powerlevel10k ]]; then
     if test -s "$ZPWR_PROMPT_FILE";then
@@ -23,4 +23,4 @@ fi
 
 }
 
-bindPowerline "$@"
+zpwrBindPowerline "$@"

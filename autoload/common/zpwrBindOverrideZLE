@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function bindOverrideZLE(){
+function zpwrBindOverrideZLE(){
 
     autoload -Uz select-bracketed select-quoted bracketed-paste-magic edit-command-line
 
@@ -436,4 +436,4 @@ function precmd(){
 
 
 }
-bindOverrideZLE "$@"
+zpwrBindOverrideZLE "$@"
