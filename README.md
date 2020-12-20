@@ -245,9 +245,9 @@ One of the vim plugin is vim-autosave which autosaves all edits thus making `:w`
 
 ## Bypassing expansion on space
 C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.
-Expansion can be disabled entirely by adding `zinit unload MenkeTechnologies/zsh-expand &>/dev/null` to `~/.zpwr/local/.tokens.sh` or removing [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) from ZPWR_GH_PLUGINS array in `~/.zpwr/local/.tokens.sh`.
+Expansion can be disabled entirely by adding `zinit unload MenkeTechnologies/zsh-expand &>/dev/null` to `~/.zpwr/local/.tokens-post.sh` or removing [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) from ZPWR_GH_PLUGINS array in `~/.zpwr/local/.tokens.sh`.
 
-> ~/.zpwr/local/.tokens.sh
+> ~/.zpwr/local/.tokens-post.sh
 ```sh
 zinit unload MenkeTechnologies/zsh-expand &>/dev/null
 ```
