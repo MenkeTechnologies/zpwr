@@ -6,10 +6,7 @@ function ___hd(){
 
     if cmd="$(getGHDelURL)";then
 
-        prettyPrint "Exe '$cmd'"
-        prettyPrintNoNewline "are you sure? y/n > "
-        read
-        if [[ $REPLY == y ]]; then
+        if zpwrConfirm "Exe '$cmd'"; then
             if eval "$cmd"; then
                 prettyPrint "Successful deletion."
             else

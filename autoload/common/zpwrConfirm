@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrConfirm() {
+
+    if [[ -n "$1" ]]; then
+        prettyPrint "$@"
+    fi
+
+    prettyPrintNoNewline "Are you sure? y/n > "
+    read
+    if [[ $REPLY == y ]]; then
+        return 0
+    else
+        return 1
+    fi
+
+}
+
+zpwrConfirm "$@"

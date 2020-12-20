@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function __zpwrUninstall() {
+function zpwrUninstall() {
 
     emulate -L zsh
     setopt nullglob
@@ -18,9 +18,7 @@ function __zpwrUninstall() {
         "$HOME/.zshrc.pre"* \
         "$ZSH_COMPDUMP"* \
         "$HOME/.zcompdump"*
-    prettyPrintNoNewline "are you sure? y/n > "
-    read
-    if [[ $REPLY == y ]]; then
+    if zpwrConfirm; then
         prettyPrint "Uninstall!"
         for dir in "$ZPWR_LOCAL/$USER.rc"*;do
             mv "$dir" "$HOME"
@@ -42,4 +40,4 @@ function __zpwrUninstall() {
     fi
 }
 
-__zpwrUninstall "$@"
+zpwrUninstall "$@"
