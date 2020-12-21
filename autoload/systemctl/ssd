@@ -5,8 +5,8 @@ function ___ssd() {
     local service
 
     for service in "$@"; do
-        prettyPrint "sudo systemctl stop $service"
-        prettyPrint "sudo systemctl disable $service"
+        zpwrPrettyPrint "sudo systemctl stop $service"
+        zpwrPrettyPrint "sudo systemctl disable $service"
         sudo systemctl stop "$service"
         sudo systemctl disable "$service"
     done

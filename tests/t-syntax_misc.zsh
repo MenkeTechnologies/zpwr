@@ -13,7 +13,7 @@
 }
 
 @test 'misc syntax banner' {
-    run prettyPrintBox "syntax json/yaml etc"
+    run zpwrPrettyPrintBox "syntax json/yaml etc"
     assert $state equals 0
     assert "$output" is_not_empty
 }

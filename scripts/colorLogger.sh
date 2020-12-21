@@ -52,14 +52,14 @@ type ccze 1>/dev/null 2>&1 && weHaveCCZE=yes
 if [[ "$(uname)" == Darwin ]]; then
     if [[ "$weHaveCCZE" == yes ]]; then
 
-        prettyPrint "Color logging for Darwin"
+        zpwrPrettyPrint "Color logging for Darwin"
         #"$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
         #$HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
         #/Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
         "$tailVersion" -F /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
             /var/log/*beat*/* | ccze
     else
-        prettyPrint "Decolorized logging for Darwin"
+        zpwrPrettyPrint "Decolorized logging for Darwin"
         "$tailVersion" -F /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
         "$HOME"/Library/Logs/**/*.log \
         "$HOME"/Library/Logs/**/*.out /Library/Logs/**/*.log /var/log/*beat*/*
@@ -83,12 +83,12 @@ else
     if [[ "$distro" == debian ]]; then
 
         if [[ "$weHaveCCZE" == yes ]]; then
-            prettyPrint "Color logging for $distroName"
+            zpwrPrettyPrint "Color logging for $distroName"
             sudo "$tailVersion" -F \
                 /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} \
                 /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/*| ccze
         else
-            prettyPrint "Decolorized logging for $distroName"
+            zpwrPrettyPrint "Decolorized logging for $distroName"
             sudo "$tailVersion" -F /var/log/**/*.log \
                 /var/log/{dmesg,debug,lastlog,messages,syslog} \
                 /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/*
@@ -97,33 +97,33 @@ else
     elif [[ "$distro" == redhat ]]; then
 
         if [[ "$weHaveCCZE" == yes ]]; then
-            prettyPrint "Color logging for $distroName"
+            zpwrPrettyPrint "Color logging for $distroName"
             sudo "$tailVersion" -F \
                 /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog,secure} \
                 /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/*| ccze
         else
-            prettyPrint "Decolorized logging for $distroName"
+            zpwrPrettyPrint "Decolorized logging for $distroName"
             sudo "$tailVersion" -F /var/log/**/*.log \
                 /var/log/{dmesg,debug,lastlog,messages,syslog,secure} \
                 /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/*
         fi
     elif [[ "$distro" == suse ]]; then
         if [[ "$weHaveCCZE" == yes ]]; then
-            prettyPrint "Color logging for $distroName"
+            zpwrPrettyPrint "Color logging for $distroName"
             sudo journalctl -f | ccze
         else
-            prettyPrint "Decolorized logging for $distroName"
+            zpwrPrettyPrint "Decolorized logging for $distroName"
             sudo journalctl -f
         fi
     else
         printf "Unsupported distro: $distroName...but trying anyways\n" >&2
         if [[ "$weHaveCCZE" == yes ]]; then
-            prettyPrint "Color logging for $distroName"
+            zpwrPrettyPrint "Color logging for $distroName"
             sudo "$tailVersion" -F \
                 /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} \
                 /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/*| ccze
         else
-            prettyPrint "Decolorized logging for $distroName"
+            zpwrPrettyPrint "Decolorized logging for $distroName"
             sudo "$tailVersion" -f \
                 /var/log/**/*.log /var/log/{dmesg,debug,lastlog,messages,syslog} \
                 /var/log/**/*.err "$HOME"/**/*.log /var/log/*beat*/*

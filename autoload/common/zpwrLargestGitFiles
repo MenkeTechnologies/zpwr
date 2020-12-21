@@ -3,7 +3,7 @@
 function zpwrLargestGitFiles(){
 
     if ! isGitDir; then
-        loggNotGit
+        zpwrLoggNotGit
         return 1
     fi
 
@@ -15,12 +15,12 @@ function zpwrLargestGitFiles(){
        page=$1
     fi
 
-    prettyPrint "Top $page Largest Git Objects"
+    zpwrPrettyPrint "Top $page Largest Git Objects"
 
     obj=$(git rev-list --all --objects)
     while read -r sha type size; do
         filename=$(echo $obj | command grep $sha)
-        size=$(printf $size | humanReadable)
+        size=$(printf $size | zpwrHumanReadable)
         printf "%-70s %10s\n" $filename $size
     done < <(echo $obj | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
 }

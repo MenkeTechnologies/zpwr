@@ -14,9 +14,9 @@ function gse(){
     grepcmd="${cmd} rev-list --all | xargs ${cmd} grep  -C 10 $arg"
 
 
-    prettyPrint "$logcmd"
+    zpwrPrettyPrint "$logcmd"
     ${=logcmd}
-    prettyPrint "$grepcmd"
+    zpwrPrettyPrint "$grepcmd"
     ${=grepcmd}
 }
 

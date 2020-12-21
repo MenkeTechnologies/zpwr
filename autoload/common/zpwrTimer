@@ -31,13 +31,13 @@ function zpwrTimer() {
         done
         #zsh supports decimals not bash
         avg=$((runtime/(count *1.0)))
-        prettyPrint "$local_command took $runtime ms for $count rounds" >> "$ZPWR_TEMPFILE"
+        zpwrPrettyPrint "$local_command took $runtime ms for $count rounds" >> "$ZPWR_TEMPFILE"
         echo
     done
     cat "$ZPWR_TEMPFILE"
     totend=$($cmd +%s)
     tot=$((totend-totstart))
-    prettyPrint "total seconds at $tot s."
+    zpwrPrettyPrint "total seconds at $tot s."
     command rm "$ZPWR_TEMPFILE"
 }
 

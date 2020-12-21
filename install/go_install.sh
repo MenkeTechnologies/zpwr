@@ -16,13 +16,13 @@ source common.sh
 
 export GOPATH="$HOME/go"
 
-prettyPrintBox "Installing mylg"
+zpwrPrettyPrintBox "Installing mylg"
 go get github.com/mehrdadrad/mylg
 
 ( cd "$GOPATH/src/github.com/mehrdadrad/mylg/" && go build mylg.go; )
 
-prettyPrintBox "Installing gotop"
+zpwrPrettyPrintBox "Installing gotop"
 go get github.com/cjbassi/gotop
 
-prettyPrintBox "Installing lolcat in go"
+zpwrPrettyPrintBox "Installing lolcat in go"
 go get github.com/MenkeTechnologies/lolcat

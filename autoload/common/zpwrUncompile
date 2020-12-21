@@ -52,7 +52,7 @@ function zpwrUncompile(){
         /etc/profile.env*
     )
 
-    prettyPrint "Removing ${#knownZshFiles} local and ${#globalFiles} global *.zwc files if exist"
+    zpwrPrettyPrint "Removing ${#knownZshFiles} local and ${#globalFiles} global *.zwc files if exist"
 
     for file in ${knownZshFiles[@]}; do
         file=${file%*.zwc*}

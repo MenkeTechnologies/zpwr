@@ -26,12 +26,12 @@ function zpwrUnlinkConf(){
     for file in ${symFiles[@]} ; do
         if [[ -f "$HOME/$file" ]]; then
             if [[ -h "$HOME/$file" ]]; then
-                prettyPrint "REMOVING $HOME/$file"
-                goInstallerDir
+                zpwrPrettyPrint "REMOVING $HOME/$file"
+                zpwrGoInstallerDir
                 echo rm -f $HOME/$file
                 rm -f -- $HOME/$file
             else
-                prettyPrint "not REMOVING $HOME/$file because not symlink"
+                zpwrPrettyPrint "not REMOVING $HOME/$file because not symlink"
             fi
         fi
     done
@@ -44,7 +44,7 @@ function zpwrUnlinkConf(){
     fi
 
     if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
-        prettyPrint "Unlink fzf for zinit"
+        zpwrPrettyPrint "Unlink fzf for zinit"
         echo rm -rf "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
         rm -rf "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
     fi

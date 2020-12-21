@@ -3,13 +3,13 @@
 function zpwrTotalLines(){
 
     if ! isGitDir; then
-       loggNotGit
+       zpwrLoggNotGit
        return 1
     fi
 
     local filter lineCount
 
-    prettyPrint "starting total line count..."
+    zpwrPrettyPrint "starting total line count..."
     {
 
     while read; do
@@ -36,7 +36,7 @@ function zpwrTotalLines(){
         return 1
     fi
 
-    prettyPrint "Total Line Count"
+    zpwrPrettyPrint "Total Line Count"
     lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
         echo "$lineCount" |

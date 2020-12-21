@@ -40,7 +40,7 @@ test ! -d "$comp_dir" && command mkdir -p "$comp_dir"
 
 for command abs in ${(kv)commands}; do
     if [[ -z $_comps[$command] ]];then
-       prettyPrintBox $command | lolcat
+       zpwrPrettyPrintBox $command | lolcat
        echo mantozshcomp.py -v 1 -s $(man -w $command)
        mantozshcomp.py -s $(man -w $command) > "$comp_dir"/_$command
         if [[ ! -s "$comp_dir/_$command" ]]; then

@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrEnvCounts(){
 
-    prettyPrint "ENV COUNTS"
+    zpwrPrettyPrint "ENV COUNTS"
     echo "Commands: ${#commands}"
     echo "Functions: ${#functions}"
     echo "Completions: ${#_comps}"
@@ -17,7 +17,7 @@ function zpwrEnvCounts(){
     echo "Git Aliases: "${#aliases[(R)*git*]}
     echo "Cd Aliases: "${#aliases[(R)*cd*]}
     echo "Suffix Aliases: ${#saliases}"
-    prettyPrint "ZPWR COUNTS"
+    zpwrPrettyPrint "ZPWR COUNTS"
     echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
     echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
     echo "ZPWR verbs: ${#ZPWR_VERBS}"

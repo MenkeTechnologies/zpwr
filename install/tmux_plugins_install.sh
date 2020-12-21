@@ -19,7 +19,7 @@ if [[ -d "$HOME/.tmux/plugins" ]]; then
 fi
 
 if builtin cd "$HOME/.tmux/plugins"; then
-    installGitHubPluginsFromFile "$ZPWR_INSTALL/.tmuxplugins"
+    zpwrInstallGitHubPluginsFromFile "$ZPWR_INSTALL/.tmuxplugins"
 else
     echo "could not cd to $HOME/.tmux/plugins" >&2
     exit 1

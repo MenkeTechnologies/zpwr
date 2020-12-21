@@ -5,8 +5,8 @@ function ___ssu() {
     local service
 
     for service in "$@"; do
-        prettyPrint "sudo systemctl start $service"
-        prettyPrint "sudo systemctl enable $service"
+        zpwrPrettyPrint "sudo systemctl start $service"
+        zpwrPrettyPrint "sudo systemctl enable $service"
         sudo systemctl start "$service"
         sudo systemctl enable "$service"
     done

@@ -101,36 +101,36 @@ fi
 
 if [[ $skip != true ]]; then
 
-    prettyPrint "Updating Tmux Plugins"
-    gitRepoUpdater "$HOME/.tmux/plugins"
+    zpwrPrettyPrint "Updating Tmux Plugins"
+    zpwrGitRepoUpdater "$HOME/.tmux/plugins"
 
-    prettyPrint "Updating Pathogen Plugins"
+    zpwrPrettyPrint "Updating Pathogen Plugins"
     #update pathogen plugins
-    gitRepoUpdater "$HOME/.vim/bundle"
+    zpwrGitRepoUpdater "$HOME/.vim/bundle"
 
     if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
-        prettyPrint "Updating OhMyZsh"
+        zpwrPrettyPrint "Updating OhMyZsh"
         builtin cd "$ZSH/tools" && bash "$ZSH/tools/upgrade.sh"
 
-        prettyPrint "Updating OhMyZsh Plugins"
-        gitRepoUpdater "$ZSH_CUSTOM/plugins"
+        zpwrPrettyPrint "Updating OhMyZsh Plugins"
+        zpwrGitRepoUpdater "$ZSH_CUSTOM/plugins"
 
-        prettyPrint "Updating OhMyZsh Themes"
-        gitRepoUpdater "$ZSH_CUSTOM/themes"
+        zpwrPrettyPrint "Updating OhMyZsh Themes"
+        zpwrGitRepoUpdater "$ZSH_CUSTOM/themes"
     elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
-        prettyPrint "Updating Zinit"
-        gitRepoUpdater "$ZSH_CUSTOM/plugins"
+        zpwrPrettyPrint "Updating Zinit"
+        zpwrGitRepoUpdater "$ZSH_CUSTOM/plugins"
     fi
 
     commandExists /usr/local/bin/ruby && {
-        prettyPrint "Updating Ruby Packages"
+        zpwrPrettyPrint "Updating Ruby Packages"
         yes | /usr/local/bin/gem update --system
         yes | /usr/local/bin/gem update
         yes | /usr/local/bin/gem cleanup
     }
 
     commandExists brew && {
-        prettyPrint "Updating Homebrew Packages"
+        zpwrPrettyPrint "Updating Homebrew Packages"
         brew update  #&> /dev/null
         brew upgrade #&> /dev/null
         #remove brew cache
@@ -141,22 +141,22 @@ if [[ $skip != true ]]; then
     }
 
     commandExists npm && {
-        prettyPrint "Updating NPM packages"
+        zpwrPrettyPrint "Updating NPM packages"
         installDir=$(npm root -g | head -n 1)
         if [[ ! -w "$installDir" ]]; then
-            needSudo=yes
+            zpwrNeedSudo=yes
         else
-            needSudo=no
+            zpwrNeedSudo=no
         fi
         for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4); do
-            if [[ $needSudo == yes ]]; then
+            if [[ $zpwrNeedSudo == yes ]]; then
                 sudo npm install -g "$package"
             else
                 npm install -g "$package"
             fi
         done
-        prettyPrint "Updating NPM itself"
-        if [[ $needSudo == yes ]]; then
+        zpwrPrettyPrint "Updating NPM itself"
+        if [[ $zpwrNeedSudo == yes ]]; then
             sudo npm install -g npm
         else
             npm install -g npm
@@ -164,32 +164,32 @@ if [[ $skip != true ]]; then
     }
 
     commandExists rustup && {
-        prettyPrint "Updating rustup"
+        zpwrPrettyPrint "Updating rustup"
         rustup update
     }
 
     commandExists cargo && {
-        prettyPrint "Updating cargo packages"
+        zpwrPrettyPrint "Updating cargo packages"
         cargo install cargo-update 2>/dev/null
         cargo install-update -a
     }
 
     commandExists yarn && {
-        prettyPrint "Updating yarn packages"
+        zpwrPrettyPrint "Updating yarn packages"
         yarn global upgrade
-        # prettyPrint "Updating yarn itself"
+        # zpwrPrettyPrint "Updating yarn itself"
         # npm install -g yarn
     }
 
 
     commandExists emacs && {
         if [[ -f "$HOME/.emacs.d/init.el" ]]; then
-            prettyPrint "Updating spacemacs packages"
+            zpwrPrettyPrint "Updating spacemacs packages"
             emacs --batch -l "$HOME/.emacs.d/init.el" --eval="(progn (configuration-layer/update-packages t)(spacemacs/kill-emacs))"
         fi
     }
 
-    prettyPrint "Updating Vundle Plugins"
+    zpwrPrettyPrint "Updating Vundle Plugins"
 
     if [[ $end != true ]]; then
         if [[ $ZPWR_USE_NEOVIM == true ]]; then
@@ -204,7 +204,7 @@ if [[ $skip != true ]]; then
     fi
 
     commandExists pio && {
-        prettyPrint "Updating PlatformIO"
+        zpwrPrettyPrint "Updating PlatformIO"
         pio update
         pio upgrade
     }
@@ -212,12 +212,12 @@ if [[ $skip != true ]]; then
     source "$ZPWR_SCRIPTS/updaterPip.sh"
 
     commandExists snap && {
-        prettyPrint "Updating Snap Packages"
+        zpwrPrettyPrint "Updating Snap Packages"
         sudo -E snap refresh
     }
 
     commandExists cpanm && {
-        prettyPrint "Updating Perl Packages"
+        zpwrPrettyPrint "Updating Perl Packages"
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
         if [[ -n "$perlOutdated" ]]; then
             echo "$perlOutdated" | cpanm --local-lib "$HOME/perl5" --force 2>/dev/null
@@ -235,7 +235,7 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
 
     hostname="$(echo "$1" | awk -F: '{print $1}')"
     manager="$(echo "$1" | awk -F: '{print $2}')"
-    prettyPrint "Updating $hostname with $manager"
+    zpwrPrettyPrint "Updating $hostname with $manager"
 
     if [[ "$manager" == "apt" ]]; then
         ssh -x "$hostname" '
@@ -274,19 +274,19 @@ done
 commandExists brew && {
     if brew tap | grep cask-upgrade 1>/dev/null 2>&1; then
         # we have brew cu
-        prettyPrint "Updating Homebrew Casks!"
+        zpwrPrettyPrint "Updating Homebrew Casks!"
         brew cu -ay --cleanup
     else
         # we don't have brew cu
-        prettyPrint "Installing brew-cask-upgrade"
+        zpwrPrettyPrint "Installing brew-cask-upgrade"
         brew tap buo/cask-upgrade
         brew update
-        prettyPrint "Updating Homebrew Casks!"
+        zpwrPrettyPrint "Updating Homebrew Casks!"
         brew cu -ay --cleanup
     fi
 }
 
 #decolorize prompt
-prettyPrint "Done"
+zpwrPrettyPrint "Done"
 
 exists zpwrClearList && zpwrClearList

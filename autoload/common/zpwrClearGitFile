@@ -3,7 +3,7 @@
 function zpwrClearGitFile(){
 
     if ! isGitDir; then
-        loggNotGit
+        zpwrLoggNotGit
         return 1
     fi
 
@@ -15,7 +15,7 @@ function zpwrClearGitFile(){
     local file
 
     for file in "$@"; do
-        prettyPrint "Removing $file from all commits with $file"
+        zpwrPrettyPrint "Removing $file from all commits with $file"
         git filter-branch -f --index-filter "git rm -rf --cached --ignore-unmatch $file" HEAD
     done
 }

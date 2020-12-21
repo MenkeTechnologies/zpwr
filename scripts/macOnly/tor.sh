@@ -55,29 +55,29 @@ function disable_proxy() {
 
     kill $!
     sudo networksetup -setsocksfirewallproxystate "$INTERFACE" off
-    prettyPrint "SOCKS proxy disabled"
+    zpwrPrettyPrint "SOCKS proxy disabled"
     sudo spoof reset wi-fi
-    prettyPrint "MAC Address Reset"
+    zpwrPrettyPrint "MAC Address Reset"
     sudo networksetup -setairportpower en0 off
     sudo networksetup -setairportpower en0 on
-    prettyPrint "Wi-Fi On"
+    zpwrPrettyPrint "Wi-Fi On"
     exit 1
 }
 
 trap disable_proxy INT
 
-prettyPrint "Wi-Fi Off"
+zpwrPrettyPrint "Wi-Fi Off"
 sudo networksetup -setairportpower en0 off
 sudo spoof randomize wi-fi
-prettyPrint "MAC Address Spoofed"
+zpwrPrettyPrint "MAC Address Spoofed"
 sudo networksetup -setairportpower en0 on
-prettyPrint "Wi-Fi On With Artificial Identification"
+zpwrPrettyPrint "Wi-Fi On With Artificial Identification"
 
 sudo networksetup -setsocksfirewallproxy "$INTERFACE" 127.0.0.1 9050 off
 sudo networksetup -setsocksfirewallproxystate "$INTERFACE" on
 
-prettyPrint "SOCKS proxy 127.0.0.1:9050 enabled."
-prettyPrint "Starting Tor..."
+zpwrPrettyPrint "SOCKS proxy 127.0.0.1:9050 enabled."
+zpwrPrettyPrint "Starting Tor..."
 
 tor &
 while true; do

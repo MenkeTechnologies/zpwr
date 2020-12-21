@@ -37,9 +37,9 @@ else
 fi
 
 if [[ $1 == plain ]]; then
-    filter=' | stdinExists "$line'
+    filter=' | zpwrStdinExists "$line'
 else
-    filter=' | stdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
+    filter=' | zpwrStdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
 fi
 
 # []\[^$.*/] = this regex matches any of ][^$.*/ characters
@@ -50,7 +50,7 @@ line={};
 orig={};
 line=\$(echo \$line| perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
 
-function stdinExists(){
+function zpwrStdinExists(){
     local in arg
     in="\$(cat)"
     arg="\$1"

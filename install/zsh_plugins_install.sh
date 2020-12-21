@@ -19,7 +19,7 @@ if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME/plugins" ]]; then
 fi
 
 if builtin cd "$ZPWR_PLUGIN_MANAGER_HOME/plugins"; then
-    installGitHubPluginsFromFile "$@" "$ZPWR_INSTALL/.zshplugins"
+    zpwrInstallGitHubPluginsFromFile "$@" "$ZPWR_INSTALL/.zshplugins"
 else
     echo "could not cd to $HOME/.vim/bundle/YouCompleteMe" >&2
     exit 1

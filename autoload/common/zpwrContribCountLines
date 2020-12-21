@@ -3,13 +3,13 @@
 function zpwrContribCountLines(){
 
     if ! isGitDir; then
-       loggNotGit
+       zpwrLoggNotGit
        return 1
     fi
 
     local filter lineCount
 
-    prettyPrint "starting line contrib count..."
+    zpwrPrettyPrint "starting line contrib count..."
     {
 
     while read; do
@@ -35,7 +35,7 @@ function zpwrContribCountLines(){
         return 1
     fi
 
-    prettyPrint "Line Contribution Count"
+    zpwrPrettyPrint "Line Contribution Count"
     lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
     if (( $lineCount > 10 )); then
         cat "$ZPWR_TEMPFILE" | sort | uniq -c | sort -r |

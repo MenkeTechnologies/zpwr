@@ -13,7 +13,7 @@
 }
 
 @test 'autoload syntax perl' {
-    run prettyPrintBox "syntax perl"
+    run zpwrPrettyPrintBox "syntax perl"
     assert $state equals 0
     assert "$output" is_not_empty
 }

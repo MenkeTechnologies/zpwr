@@ -10,7 +10,7 @@ function zpwrRecompileFpath() {
 
     declare -aU fpathZshFiles fpathFilesToTest
 
-    prettyPrint "ZRecompiling fpath/dir/* into fpath/dir.zwc"
+    zpwrPrettyPrint "ZRecompiling fpath/dir/* into fpath/dir.zwc"
 
 	for dir in $fpath; do
 		if [[ -d $dir ]];then
@@ -22,7 +22,7 @@ function zpwrRecompileFpath() {
             # echo (#i)$dir/*~($dir/*.(zsh|zwc|md)|$dir/.*|$dir/_*|$dir/LICENSE)(.)
             fpathFilesToTest=( (#i)$dir/*~($dir/*.(zsh|zwc|md)|$dir/.*|$dir/_*|$dir/LICENSE)(.) )
 
-            #prettyPrint "Processing $dir"
+            #zpwrPrettyPrint "Processing $dir"
             if (( $#fpathFilesToTest )); then
                 # echo "Found known zsh files: ${#fpathZshFiles} and checking possible autoload files: ${#fpathFilesToTest}"
             fi

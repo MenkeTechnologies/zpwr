@@ -37,9 +37,9 @@ else
 fi
 
 if [[ $1 == plain ]]; then
-    filter=' | stdinExists "$line'
+    filter=' | zpwrStdinExists "$line'
 else
-    filter=' | stdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
+    filter=' | zpwrStdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
 fi
 
 # []\[^$.*/] = this regex matches any of ][^$.*/ characters
@@ -57,7 +57,7 @@ if [[ \$ZPWR_DEBUG == true ]]; then
     echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
 fi
 
-function stdinExists(){
+function zpwrStdinExists(){
     local in arg
     in="\$(cat)"
     arg="\$1"

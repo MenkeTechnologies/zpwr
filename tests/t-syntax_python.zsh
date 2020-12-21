@@ -13,7 +13,7 @@
 }
 
 @test 'autoload syntax python' {
-    run prettyPrintBox "syntax python"
+    run zpwrPrettyPrintBox "syntax python"
     assert $state equals 0
     assert "$output" is_not_empty
 }

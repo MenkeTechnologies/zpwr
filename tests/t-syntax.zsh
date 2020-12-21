@@ -13,7 +13,7 @@
 }
 
 @test 'autoload syntax' {
-    run prettyPrintBox syntax
+    run zpwrPrettyPrintBox syntax
     assert $state equals 0
     assert "$output" is_not_empty
 }

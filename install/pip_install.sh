@@ -15,61 +15,61 @@ fi
 
 source common.sh
 
-goInstallerOutputDir
+zpwrGoInstallerOutputDir
 
-prettyPrintBox "installing gdb dashboard"
+zpwrPrettyPrintBox "installing gdb dashboard"
 wget -P ~ https://git.io/.gdbinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 
-    prettyPrintBox "Upgrading pip"
+    zpwrPrettyPrintBox "Upgrading pip"
     sudo python3 -m pip install --upgrade pip
-    prettyPrintBox "Installing psutil for Python Glances"
+    zpwrPrettyPrintBox "Installing psutil for Python Glances"
     sudo python3 -m pip install psutil 
-    prettyPrintBox "Installing Python Glances"
+    zpwrPrettyPrintBox "Installing Python Glances"
     sudo python3 -m pip install glances
-    prettyPrintBox "Installing Virtualenv"
+    zpwrPrettyPrintBox "Installing Virtualenv"
     sudo python3 -m pip install virtualenv
 
-    prettyPrintBox "Installing Powerline..."
+    zpwrPrettyPrintBox "Installing Powerline..."
 
     sudo python3 -m pip install powerline-status
-    prettyPrintBox "Installing Tmux Powerline"
+    zpwrPrettyPrintBox "Installing Tmux Powerline"
 
-    prettyPrintBox "Installing neovim python lib"
+    zpwrPrettyPrintBox "Installing neovim python lib"
     sudo python3 -m pip install pynvim
 
-    prettyPrintBox "Installing neovim remote"
+    zpwrPrettyPrintBox "Installing neovim remote"
     sudo python3 -m pip install neovim-remote
 
     tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
 
     sudo python3 -m pip install powerline-mem-segment
-    prettyPrintBox "Installing PyDf"
+    zpwrPrettyPrintBox "Installing PyDf"
     sudo python3 -m pip install pydf
 
-    prettyPrintBox "Installing MyCLI"
+    zpwrPrettyPrintBox "Installing MyCLI"
     sudo python3 -m pip install mycli
 
-    prettyPrintBox "Installing PGCLI"
+    zpwrPrettyPrintBox "Installing PGCLI"
     sudo python3 -m pip install pgcli
 
 
     exists youtube_dl || {
-        prettyPrintBox "Installing youtube-dl"
+        zpwrPrettyPrintBox "Installing youtube-dl"
         sudo python3 -m pip install --upgrade youtube_dl
     }
 
-    prettyPrintBox "Installing bpython for python3"
+    zpwrPrettyPrintBox "Installing bpython for python3"
     sudo python3 -m pip install bpython
 
-    prettyPrintBox "Installing pygments for python3"
+    zpwrPrettyPrintBox "Installing pygments for python3"
     sudo python3 -m pip install pygments
 
-    prettyPrintBox "Installing yapf"
+    zpwrPrettyPrintBox "Installing yapf"
     sudo python3 -m pip install yapf
 
-    prettyPrintBox "Installing vim-vint"
+    zpwrPrettyPrintBox "Installing vim-vint"
     sudo python3 -m pip install vim-vint
 
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
@@ -91,15 +91,15 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
                 distroFamily=redhat
                 ;;
             (*)
-                prettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
+                zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
                 exit 1
                 ;;
         esac
     fi
 
     if [[ "$distroFamily" == redhat ]]; then
-        goInstallerOutputDir
-        prettyPrintBox "Installing grc for RedHat"
+        zpwrGoInstallerOutputDir
+        zpwrPrettyPrintBox "Installing grc for RedHat"
         git clone https://github.com/garabik/grc.git && builtin cd grc && sudo bash install.sh
     fi
 
@@ -108,66 +108,66 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         sudo ln -s /usr/bin/python36 /usr/bin/python3
     fi
 
-    prettyPrintBox "Upgrading pip"
+    zpwrPrettyPrintBox "Upgrading pip"
     sudo python3 -m pip install --upgrade pip
 
-    prettyPrintBox "Installing powerline mem segment"
+    zpwrPrettyPrintBox "Installing powerline mem segment"
     sudo python3 -m pip install powerline-mem-segment
 
-    prettyPrintBox "Installing psutil for Python Glances"
+    zpwrPrettyPrintBox "Installing psutil for Python Glances"
     sudo python3 -m pip install psutil 
 
-    prettyPrintBox "Installing setuptools"
+    zpwrPrettyPrintBox "Installing setuptools"
     sudo python3 -m pip install setuptools
 
-    prettyPrintBox "Installing Python Glances"
+    zpwrPrettyPrintBox "Installing Python Glances"
     sudo python3 -m pip install glances
-    prettyPrintBox "Installing Powerline..."
+    zpwrPrettyPrintBox "Installing Powerline..."
 
     python3 -c 'import pip' && sudo pip3 install powerline-status || sudo python3 -m pip install powerline-status
     python3 -c 'import pip' && sudo pip3 install powerline-mem-segment || sudo python3 -m pip install powerline-mem-segment
 
-    prettyPrintBox "Installing Tmux Powerline"
+    zpwrPrettyPrintBox "Installing Tmux Powerline"
 
     tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
     [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
     sudo python3 -m pip install powerline-mem-segment
-    prettyPrintBox "Installing PyDf"
+    zpwrPrettyPrintBox "Installing PyDf"
     sudo python3 -m pip install pydf
 
-    prettyPrintBox "Installing neovim python lib"
+    zpwrPrettyPrintBox "Installing neovim python lib"
     sudo python3 -m pip install pynvim
 
-    prettyPrintBox "Installing neovim remote"
+    zpwrPrettyPrintBox "Installing neovim remote"
     sudo python3 -m pip install neovim-remote
 
-    prettyPrintBox "Installing MyCLI"
+    zpwrPrettyPrintBox "Installing MyCLI"
     sudo python3 -m pip install mycli
 
-    prettyPrintBox "Installing Speedtest"
+    zpwrPrettyPrintBox "Installing Speedtest"
     sudo python3 -m pip install speedtest-cli
 
-    prettyPrintBox "Installing PGCLI"
+    zpwrPrettyPrintBox "Installing PGCLI"
     sudo python3 -m pip install pgcli
 
     exists youtube_dl || {
-        prettyPrintBox "Installing youtube-dl"
+        zpwrPrettyPrintBox "Installing youtube-dl"
         sudo python3 -m pip install --upgrade youtube_dl
     }
 
-    prettyPrintBox "Installing bpython for python3"
+    zpwrPrettyPrintBox "Installing bpython for python3"
     sudo python3 -m pip install bpython
 
-    prettyPrintBox "Installing httpie for python3"
+    zpwrPrettyPrintBox "Installing httpie for python3"
     sudo python3 -m pip install httpie
 
-    prettyPrintBox "Installing pygments for python3"
+    zpwrPrettyPrintBox "Installing pygments for python3"
     sudo python3 -m pip install pygments
 
-    prettyPrintBox "Installing yapf"
+    zpwrPrettyPrintBox "Installing yapf"
     sudo python3 -m pip install yapf
 
-    prettyPrintBox "Installing vim-vint"
+    zpwrPrettyPrintBox "Installing vim-vint"
     sudo python3 -m pip install vim-vint
 
 else
@@ -177,59 +177,59 @@ else
         sudo python3 -m pip
         sudo python3 -m python3 -m pip install --upgrade
 
-        prettyPrintBox "Upgrading pip"
+        zpwrPrettyPrintBox "Upgrading pip"
         sudo python3 -m pip install --upgrade pip
-        prettyPrintBox "Installing psutil for Python Glances"
+        zpwrPrettyPrintBox "Installing psutil for Python Glances"
         sudo python3 -m pip install psutil
 
-        prettyPrintBox "Installing setuptools"
+        zpwrPrettyPrintBox "Installing setuptools"
         sudo python3 -m pip install setuptools
 
-        prettyPrintBox "Installing Python Glances"
+        zpwrPrettyPrintBox "Installing Python Glances"
         sudo python3 -m pip install glances
-        prettyPrintBox "Installing Powerline..."
+        zpwrPrettyPrintBox "Installing Powerline..."
 
         python3 -c 'import pip' && sudo pip3 install powerline-status || sudo python3 -m pip install powerline-status
         python3 -c 'import pip' && sudo pip3 install powerline-mem-segment || sudo python3 -m pip install powerline-mem-segment
 
-        prettyPrintBox "Installing Tmux Powerline"
+        zpwrPrettyPrintBox "Installing Tmux Powerline"
 
         tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
         [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
         sudo python3 -m pip install powerline-mem-segment
-        prettyPrintBox "Installing PyDf"
+        zpwrPrettyPrintBox "Installing PyDf"
         sudo python3 -m pip install pydf
 
-        prettyPrintBox "Installing MyCLI"
+        zpwrPrettyPrintBox "Installing MyCLI"
         sudo python3 -m pip install mycli
 
-        prettyPrintBox "Installing Speedtest"
+        zpwrPrettyPrintBox "Installing Speedtest"
         sudo python3 -m pip install speedtest-cli
 
-        prettyPrintBox "Installing neovim python lib"
+        zpwrPrettyPrintBox "Installing neovim python lib"
         sudo python3 -m pip install pynvim
 
-        prettyPrintBox "Installing neovim remote"
+        zpwrPrettyPrintBox "Installing neovim remote"
         sudo python3 -m pip install neovim-remote
 
-        prettyPrintBox "Installing PGCLI"
+        zpwrPrettyPrintBox "Installing PGCLI"
         sudo python3 -m pip install pgcli
 
         exists youtube_dl || {
-            prettyPrintBox "Installing youtube-dl"
+            zpwrPrettyPrintBox "Installing youtube-dl"
             sudo python3 -m pip install youtube_dl
         }
-        prettyPrintBox "Installing bpython for python3"
+        zpwrPrettyPrintBox "Installing bpython for python3"
         sudo python3 -m pip install bpython
 
-        prettyPrintBox "Installing pygments for python3"
+        zpwrPrettyPrintBox "Installing pygments for python3"
         sudo python3 -m pip install pygments
 
-        prettyPrintBox "Installing vim-vint"
+        zpwrPrettyPrintBox "Installing vim-vint"
         sudo python3 -m pip install vim-vint
 
-        prettyPrintBox "Installing yapf"
+        zpwrPrettyPrintBox "Installing yapf"
         sudo python3 -m pip install yapf
     fi
 fi
-prettyPrintBox "Done With Python Packages"
+zpwrPrettyPrintBox "Done With Python Packages"

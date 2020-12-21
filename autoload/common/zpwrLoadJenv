@@ -5,7 +5,7 @@ function zpwrLoadJenv() {
     if exists jenv;then
         eval "$(jenv init -)"
         jenv enable-plugin export > /dev/null 2>&1
-        prettyPrint "jenv loaded"
+        zpwrPrettyPrint "jenv loaded"
         if [[ -n "$1" ]]; then
             jenv "$@"
         fi

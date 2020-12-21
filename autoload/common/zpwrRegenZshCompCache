@@ -4,7 +4,7 @@ function __regenZshCompCache(){
 
     emulate -L zsh
     setopt nullglob
-    prettyPrint "regen zsh compsys cache"
+    zpwrPrettyPrint "regen zsh compsys cache"
 
     echo command rm -fv "$ZSH_COMPDUMP"*(DN) "$ZPWR_LOCAL/.zcompdump"*(D) "$HOME/.zcompdump"*(D)
     command rm -fv "$ZSH_COMPDUMP"*(DN) "$ZPWR_LOCAL/.zcompdump"*(D) "$HOME/.zcompdump"*(D)

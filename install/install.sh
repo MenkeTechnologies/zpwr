@@ -268,7 +268,7 @@ function showDeps(){
         for dep in "${dependencies_ary[@]}" ; do
             printf "$dep "
         done
-    } | prettyPrintBoxStdin
+    } | zpwrPrettyPrintBoxStdin
     proceed
     bash "$ZPWR_SCRIPTS/zpwrBannerSleep.sh"
 }
@@ -291,9 +291,9 @@ function backup(){
 
 function warnOverwrite(){
 
-    prettyPrintBox "The following will be overwritten: .zshrc, .tmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.conf, .shell_aliases_functions.sh in $HOME"
-    prettyPrintBox "These files if they exist will be backed to $BACKUP_DIR"
-    prettyPrintBoxStdin <<EOF
+    zpwrPrettyPrintBox "The following will be overwritten: .zshrc, .tmux.conf, .inputrc, .vimrc, .ideavimrc, .iftop.conf, .shell_aliases_functions.sh in $HOME"
+    zpwrPrettyPrintBox "These files if they exist will be backed to $BACKUP_DIR"
+    zpwrPrettyPrintBoxStdin <<EOF
 The following directories if they exist will be backed to $BACKUP_DIR: 
 $HOME/${dirs[0]},
 $HOME/${dirs[1]},
@@ -307,37 +307,37 @@ EOF
 
 function warnSudo(){
 
-    prettyPrintBox "It is highly recommended to run 'sudo visudo' to allow noninteractive install.  This allows running sudo without a password.  The following line would be added to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:ALL"
+    zpwrPrettyPrintBox "It is highly recommended to run 'sudo visudo' to allow noninteractive install.  This allows running sudo without a password.  The following line would be added to /etc/sudoers: <Your Username> ALL=(ALL) NOPASSWD:ALL"
     proceed
 
 }
 
 function pluginsinstall(){
 
-    goInstallerDir
-    fileMustExist plugins_install.sh
+    zpwrGoInstallerDir
+    zpwrFileMustExist plugins_install.sh
     bash plugins_install.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
     PLUGIN_PID=$!
-    prettyPrintBox "Installing vim and tmux plugins in background @ $PLUGIN_PID"
+    zpwrPrettyPrintBox "Installing vim and tmux plugins in background @ $PLUGIN_PID"
 }
 
 function ycminstall(){
 
-    goInstallerDir
-    fileMustExist ycm_install.sh
+    zpwrGoInstallerDir
+    zpwrFileMustExist ycm_install.sh
     bash ycm_install.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
     YCM_PID=$!
-    prettyPrintBox "Installing YouCompleteMe in background @ $YCM_PID"
+    zpwrPrettyPrintBox "Installing YouCompleteMe in background @ $YCM_PID"
 }
 
 function cargoinstall(){
 
-    goInstallerDir
-    fileMustExist rustupinstall.sh
+    zpwrGoInstallerDir
+    zpwrFileMustExist rustupinstall.sh
     bash rustupinstall.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
     CARGO_PID=$!
     echo $CARGO_PID
-    prettyPrintBox "Installing rustup for exa, fd and bat in background @ $CARGO_PID"
+    zpwrPrettyPrintBox "Installing rustup for exa, fd and bat in background @ $CARGO_PID"
 }
 #}}}***********************************************************
 
@@ -371,11 +371,11 @@ do
 trap 'echo kill $YCM_PID $PLUGIN_PID $CARGO_PID; kill $YCM_PID $PLUGIN_PID $CARGO_PID 2>/dev/null;echo bye;exit' INT TERM HUP QUIT
 
 if [[ $justConfig == true ]]; then
-    prettyPrintBox "Installing just configs"
+    zpwrPrettyPrintBox "Installing just configs"
 fi
 
 if [[ $skip == true ]]; then
-    prettyPrintBox "Skipping dependencies section"
+    zpwrPrettyPrintBox "Skipping dependencies section"
 fi
 
 
@@ -388,7 +388,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     warnSudo
 
     if [[ $justConfig != true ]]; then
-        prettyPrintBox "Checking Dependencies for Mac..."
+        zpwrPrettyPrintBox "Checking Dependencies for Mac..."
         addDependenciesMac
         distroName=Mac
         distroFamily=mac
@@ -396,63 +396,63 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 
         if ! commandExists brew; then
             # install homebrew
-            prettyPrintBox "Installing HomeBrew..."
+            zpwrPrettyPrintBox "Installing HomeBrew..."
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
         fi
 
         if ! commandExists brew; then
-            prettyPrintBox "Need Homebrew"
+            zpwrPrettyPrintBox "Need Homebrew"
             exit 1
         fi
 
-        prettyPrintBox "We have Homebrew..."
+        zpwrPrettyPrintBox "We have Homebrew..."
 
         if ! command brew ls python > /dev/null 2>&1; then
             brew install python
             brew install pip
         fi
 
-        prettyPrintBox "We have Python..."
+        zpwrPrettyPrintBox "We have Python..."
 
         if [[ $skip != true ]]; then
-            prettyPrintBox "Now The Main Course..."
+            zpwrPrettyPrintBox "Now The Main Course..."
             sleep 1
 
-            prettyPrintBox "Updating dependency list"
+            zpwrPrettyPrintBox "Updating dependency list"
             refresh "$distroFamily"
-            prettyPrintBox "Installing java"
+            zpwrPrettyPrintBox "Installing java"
             brew cask install java
-            prettyPrintBox "Checking for curl before rustup install"
+            zpwrPrettyPrintBox "Checking for curl before rustup install"
             exists curl || update curl mac
             cargoinstall
             pluginsinstall
 
             # main loop
             for prog in "${dependencies_ary[@]}"; do
-                prettyPrintBox "Installing $prog"
+                zpwrPrettyPrintBox "Installing $prog"
                 update "$prog" mac
             done
 
-            prettyPrintBox "Upgrading packages"
+            zpwrPrettyPrintBox "Upgrading packages"
             upgrade mac
         fi
 
-        prettyPrintBox "Tapping Homebrew fonts"
+        zpwrPrettyPrintBox "Tapping Homebrew fonts"
         brew tap homebrew/cask-fonts
-        prettyPrintBox "Installing hack nerd font"
+        zpwrPrettyPrintBox "Installing hack nerd font"
         brew cask install font-hack-nerd-font
 
-        prettyPrintBox "Installing meteor"
+        zpwrPrettyPrintBox "Installing meteor"
         curl https://install.meteor.com/ | sh
 
-        prettyPrintBox "PostInstalling nodejs"
+        zpwrPrettyPrintBox "PostInstalling nodejs"
         brew postinstall node
 
         # system sed breaks extended regex
         ln -s /usr/local/bin/gsed /usr/local/bin/sed
 
         if test -f '/usr/local/share/zsh/site-functions/_git'; then
-            prettyPrintBox "Removing homebrew installed git zsh completion at /usr/local/share/zsh/site-functions/_git because conflicts with zsh's git completion"
+            zpwrPrettyPrintBox "Removing homebrew installed git zsh completion at /usr/local/share/zsh/site-functions/_git because conflicts with zsh's git completion"
             rm '/usr/local/share/zsh/site-functions/_git'
         fi
 
@@ -473,54 +473,54 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
         case $distroName in
             (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
                 distroFamily=debian
-                prettyPrintBox "Fetching Dependencies for $distroName with the Advanced Package Manager..."
+                zpwrPrettyPrintBox "Fetching Dependencies for $distroName with the Advanced Package Manager..."
                 addDependenciesDebian
                 ;;
             (arch|manjaro*)
                 distroFamily=arch
-                prettyPrintBox "Fetching Dependencies for $distroName with zypper"
+                zpwrPrettyPrintBox "Fetching Dependencies for $distroName with zypper"
                 addDependenciesArch
                 ;;
             (*suse*)
                 distroFamily=suse
-                prettyPrintBox "Fetching Dependencies for $distroName with zypper"
+                zpwrPrettyPrintBox "Fetching Dependencies for $distroName with zypper"
                 addDependenciesSuse
                 ;;
             (centos|fedora|rhel|amzn)
                 distroFamily=redhat
-                prettyPrintBox "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
+                zpwrPrettyPrintBox "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
                 addDependenciesRedHat
                 ;;
             (*)
-                prettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
+                zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
                 exit 1
                 ;;
         esac
 
         showDeps
 
-        prettyPrintBox "Updating dependency list"
+        zpwrPrettyPrintBox "Updating dependency list"
         refresh "$distroFamily"
 
         if [[ $skip != true ]]; then
-            prettyPrintBox "Now The Main Course..."
+            zpwrPrettyPrintBox "Now The Main Course..."
             sleep 1
-            prettyPrintBox "Checking for curl before rustup install"
+            zpwrPrettyPrintBox "Checking for curl before rustup install"
             commandExists curl || update curl "$distroFamily"
             cargoinstall
             pluginsinstall
             # main loop
             for prog in "${dependencies_ary[@]}"; do
-                prettyPrintBox "Installing $prog"
+                zpwrPrettyPrintBox "Installing $prog"
                 update "$prog" "$distroFamily"
             done
-            prettyPrintBox "Upgrading $distroFamily"
+            zpwrPrettyPrintBox "Upgrading $distroFamily"
             upgrade "$distroFamily"
         fi
 
-        prettyPrintBox "Installing Powerline fonts"
+        zpwrPrettyPrintBox "Installing Powerline fonts"
         if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
-            goInstallerOutputDir
+            zpwrGoInstallerOutputDir
             wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
             wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
             # move font to valid font path
@@ -530,7 +530,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
             # Install the fontconfig file
             sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
         else
-            prettyPrintBox "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
+            zpwrPrettyPrintBox "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
         fi
     fi
 #}}}***********************************************************
@@ -547,17 +547,17 @@ else
         warnSudo
 
         if [[ $justConfig != true ]]; then
-            prettyPrintBox "Fetching Dependencies for $distroName with pkg"
+            zpwrPrettyPrintBox "Fetching Dependencies for $distroName with pkg"
             addDependenciesFreeBSD
             showDeps
 
-            prettyPrintBox "Updating dependency list"
+            zpwrPrettyPrintBox "Updating dependency list"
             refresh "$distroFamily"
 
             if [[ $skip != true ]]; then
-                prettyPrintBox "Now The Main Course..."
+                zpwrPrettyPrintBox "Now The Main Course..."
                 sleep 1
-                prettyPrintBox "Checking for curl before rustup install"
+                zpwrPrettyPrintBox "Checking for curl before rustup install"
                 commandExists curl || update curl "$distroFamily"
                 cargoinstall
                 pluginsinstall
@@ -565,16 +565,16 @@ else
                 # main loop
 
                 for prog in "${dependencies_ary[@]}"; do
-                    prettyPrintBox "Installing $prog"
+                    zpwrPrettyPrintBox "Installing $prog"
                     update "$prog" "$distroFamily"
                 done
 
-                prettyPrintBox "Upgrading $distroFamily"
+                zpwrPrettyPrintBox "Upgrading $distroFamily"
 
                 upgrade "$distroFamily"
             fi
 
-            prettyPrintBox "Installing Powerline fonts"
+            zpwrPrettyPrintBox "Installing Powerline fonts"
             if [[ -d /usr/share/fonts ]] && [[ -d /etc/fonts/conf.d ]]; then
                 wget https://github.com/powerline/powerline/raw/develop/font/PowerlineSymbols.otf
                 wget https://github.com/powerline/powerline/raw/develop/font/10-powerline-symbols.conf
@@ -585,10 +585,10 @@ else
                 # Install the fontconfig file
                 sudo mv 10-powerline-symbols.conf /etc/fonts/conf.d/
             else
-                prettyPrintBox "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
+                zpwrPrettyPrintBox "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
             fi
         else
-            prettyPrintBox "Your OS $ZPWR_OS_TYPE is unsupported!" >&2
+            zpwrPrettyPrintBox "Your OS $ZPWR_OS_TYPE is unsupported!" >&2
             exit 1
         fi
 
@@ -601,30 +601,30 @@ fi
 #{{{                    MARK:vim
 #**************************************************************
 
-prettyPrintBox "Common Installer Section"
+zpwrPrettyPrintBox "Common Installer Section"
 
 if [[ $justConfig != true ]]; then
     if [[ $INSTALL_VIM_SRC == true ]]; then
         #if neovim already installed, vim already points to neovim
-        prettyPrintBox "Vim Version less than 8.0 or without python! Installing Vim from Source."
+        zpwrPrettyPrintBox "Vim Version less than 8.0 or without python! Installing Vim from Source."
 
-        goInstallerDir
-        fileMustExist vim_install.sh
+        zpwrGoInstallerDir
+        zpwrFileMustExist vim_install.sh
         source vim_install.sh
     fi
 
-    goInstallerDir
+    zpwrGoInstallerDir
 
     commandExists nvim || {
-        fileMustExist neovim_install.sh
+        zpwrFileMustExist neovim_install.sh
         source neovim_install.sh
     }
 
-    goInstallerDir
-    fileMustExist npm_install.sh
+    zpwrGoInstallerDir
+    zpwrFileMustExist npm_install.sh
     source npm_install.sh
 
-    goInstallerDir
+    zpwrGoInstallerDir
 
 fi
 
@@ -635,14 +635,14 @@ fi
 if [[ $justConfig != true ]]; then
     ycminstall
 
-    goInstallerDir
-    fileMustExist pip_install.sh
+    zpwrGoInstallerDir
+    zpwrFileMustExist pip_install.sh
 
     source pip_install.sh
 
-    goInstallerOutputDir
+    zpwrGoInstallerOutputDir
 
-    prettyPrintBox "Installing Pipes.sh from source"
+    zpwrPrettyPrintBox "Installing Pipes.sh from source"
 
     git clone https://github.com/pipeseroni/pipes.sh.git
 
@@ -654,17 +654,17 @@ fi
 
 case "$distroName" in
     (*suse*|ubuntu|debian|linuxmint|raspbian|Mac)
-        needSudo=yes
+        zpwrNeedSudo=yes
         ;;
     (fedora)
-        needSudo=no
+        zpwrNeedSudo=no
         ;;
     (*)
-        needSudo=no
+        zpwrNeedSudo=no
         ;;
 esac
 
-prettyPrintBox "Installing Iftop config..."
+zpwrPrettyPrintBox "Installing Iftop config..."
 ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
 iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
 
@@ -712,15 +712,15 @@ fi
 #{{{                    MARK:Utilities
 #**************************************************************
 if [[ $justConfig != true ]]; then
-    prettyPrintBox "Installing IFTOP-color by MenkeTechnologies"
+    zpwrPrettyPrintBox "Installing IFTOP-color by MenkeTechnologies"
 
-    goInstallerDir
-    fileMustExist iftop_install.sh
+    zpwrGoInstallerDir
+    zpwrFileMustExist iftop_install.sh
     source iftop_install.sh
 
     if ! commandExists grc; then
-        goInstallerOutputDir
-        prettyPrintBox "Installing grc from source to $(pwd)"
+        zpwrGoInstallerOutputDir
+        zpwrPrettyPrintBox "Installing grc from source to $(pwd)"
         git clone https://github.com/garabik/grc.git
         if builtin cd grc; then
             sudo bash install.sh
@@ -730,47 +730,47 @@ if [[ $justConfig != true ]]; then
     fi
 
     if [[ $ZPWR_OS_TYPE == darwin ]]; then
-        prettyPrintBox "Try again for ponysay and lolcat on mac"
+        zpwrPrettyPrintBox "Try again for ponysay and lolcat on mac"
         commandExists ponysay || brew install ponysay
     fi
 
-    prettyPrintBox "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
+    zpwrPrettyPrintBox "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
     if [[ "$(uname)" == Darwin ]]; then
         GRC_DIR=/usr/local/share/grc
     else
         GRC_DIR=/usr/share/grc
     fi
 
-    goInstallerOutputDir
+    zpwrGoInstallerOutputDir
 
-    prettyPrintBox "Installing ponysay from source"
+    zpwrPrettyPrintBox "Installing ponysay from source"
     git clone https://github.com/erkin/ponysay.git && {
         builtin cd ponysay && sudo ./setup.py --freedom=partial install
     }
 
-    prettyPrintBox "Installing Go deps"
+    zpwrPrettyPrintBox "Installing Go deps"
 
-    goInstallerDir
-    fileMustExist go_install.sh
+    zpwrGoInstallerDir
+    zpwrFileMustExist go_install.sh
     source go_install.sh
 
     if ! test -f /usr/local/sbin/iftop;then
-        prettyPrintBox "No iftop so installing"
+        zpwrPrettyPrintBox "No iftop so installing"
         update iftop "$distroFamily"
     fi
 
     if [[ "$ZPWR_OS_TYPE" != darwin ]]; then
-        prettyPrintBox "Installing snort"
+        zpwrPrettyPrintBox "Installing snort"
         update snort "$distroFamily"
-        prettyPrintBox "Installing logwatch"
+        zpwrPrettyPrintBox "Installing logwatch"
         update logwatch "$distroFamily"
-        prettyPrintBox "Installing postfix"
+        zpwrPrettyPrintBox "Installing postfix"
         update postfix "$distroFamily"
     fi
 
-    prettyPrintBox "Installing wireshark"
+    zpwrPrettyPrintBox "Installing wireshark"
     update wireshark "$distroFamily"
-    prettyPrintBox "Installing mailutils"
+    zpwrPrettyPrintBox "Installing mailutils"
     update mailutils "$distroFamily"
 fi
 
@@ -780,57 +780,57 @@ fi
 #**************************************************************
 
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
-    prettyPrintBox "Installing zinit"
+    zpwrPrettyPrintBox "Installing zinit"
     mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
     git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
     if [[ ! -d $ZPWR_PLUGIN_MANAGER_HOME/plugins ]]; then
         mkdir -pv $ZPWR_PLUGIN_MANAGER_HOME/plugins/
     fi
 
-    prettyPrintBox "Change default shell to zsh"
+    zpwrPrettyPrintBox "Change default shell to zsh"
     sudo chsh -s "$(which zsh)"
 
-    prettyPrintBox "Clone fzf"
+    zpwrPrettyPrintBox "Clone fzf"
     git clone https://github.com/MenkeTechnologies/fzf.git "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf"
-    prettyPrintBox "Link fzf"
+    zpwrPrettyPrintBox "Link fzf"
     echo ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
     ln -sfn "$ZPWR_PLUGIN_MANAGER_HOME/plugins/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
 
-    prettyPrintBox "Installing fzf"
+    zpwrPrettyPrintBox "Installing fzf"
     "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf/install" --bin
 
 elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
-    prettyPrintBox "Installing OhMyZsh"
+    zpwrPrettyPrintBox "Installing OhMyZsh"
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-    prettyPrintBox "Installing fzf"
+    zpwrPrettyPrintBox "Installing fzf"
     "$ZPWR_PLUGIN_MANAGER_HOME/custom/plugins/fzf/install" --bin
 fi
 
-prettyPrintBox "Linking zshrc configuration file to home directory"
-goInstallerDir
+zpwrPrettyPrintBox "Linking zshrc configuration file to home directory"
+zpwrGoInstallerDir
 
 echo ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 
 if [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
-    prettyPrintBox "Installing Zsh plugins"
-    goInstallerDir
-    fileMustExist zsh_plugins_install.sh
+    zpwrPrettyPrintBox "Installing Zsh plugins"
+    zpwrGoInstallerDir
+    zpwrFileMustExist zsh_plugins_install.sh
 
     source zsh_plugins_install.sh
 fi
 
-prettyPrintBox "Running Vundle"
+zpwrPrettyPrintBox "Running Vundle"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
 
 if [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
-    prettyPrintBox "Installing Powerlevel9k"
+    zpwrPrettyPrintBox "Installing Powerlevel9k"
     git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZPWR_PLUGIN_MANAGER_HOME/themes/powerlevel9k"
 fi
 
 if [[ $justConfig != true ]]; then
-    prettyPrintBox "Final updating of dependency list"
+    zpwrPrettyPrintBox "Final updating of dependency list"
     refresh "$distroFamily"
 fi
 
@@ -838,22 +838,22 @@ fi
 
 #{{{                    MARK:Final sym links
 #**************************************************************
-goInstallerDir
+zpwrGoInstallerDir
 
-prettyPrintBox "Generating $ZPWR_INSTALLER_OUTPUT/zpwr_log.txt with $ESCAPE_REMOVER from $LOGFILE"
+zpwrPrettyPrintBox "Generating $ZPWR_INSTALLER_OUTPUT/zpwr_log.txt with $ESCAPE_REMOVER from $LOGFILE"
 "$ESCAPE_REMOVER" "$LOGFILE" > "$ZPWR_INSTALLER_OUTPUT/zpwr_log.txt"
 
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
-    prettyPrintBox "Waiting for cargo installer to finish"
+    zpwrPrettyPrintBox "Waiting for cargo installer to finish"
     wait $CARGO_PID
     wait $YCM_PID
     wait $PLUGIN_PID
 fi
 
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
-    prettyPrintBox "Done!!!!!!"
-    prettyPrintBox "Starting Tmux..."
-    prettyPrintBox "Starting the matrix"
+    zpwrPrettyPrintBox "Done!!!!!!"
+    zpwrPrettyPrintBox "Starting Tmux..."
+    zpwrPrettyPrintBox "Starting the matrix"
 fi
 
 # must have zsh at this point
@@ -861,24 +861,24 @@ export SHELL="$(which zsh)"
 
 dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
 
-prettyPrintBox "linking $dir to ~/.tmux/powerline"
+zpwrPrettyPrintBox "linking $dir to ~/.tmux/powerline"
 
 if [[ -z $TMUX_HOME ]]; then
     TMUX_HOME="$HOME/.tmux"
 fi
 
 if [[ ! -d "$TMUX_HOME" ]]; then
-    prettyPrintBox "$TMUX_HOME does not exist"
+    zpwrPrettyPrintBox "$TMUX_HOME does not exist"
 else
     if [[ ! -d "$dir" ]]; then
-        prettyPrintBox "$dir does not exist"
+        zpwrPrettyPrintBox "$dir does not exist"
     else
-        if needSudo "$dir"; then
-            prettyPrintBox "linking $dir to $TMUX_HOME/powerline with sudo"
+        if zpwrNeedSudo "$dir"; then
+            zpwrPrettyPrintBox "linking $dir to $TMUX_HOME/powerline with sudo"
             echo sudo ln -sfn "$dir" "$TMUX_HOME/powerline"
             sudo ln -sfn "$dir" "$TMUX_HOME/powerline"
         else
-            prettyPrintBox "linking $dir to $TMUX_HOME/powerline"
+            zpwrPrettyPrintBox "linking $dir to $TMUX_HOME/powerline"
             echo ln -sfn "$dir" "$TMUX_HOME/powerline"
             ln -sfn "$dir" "$TMUX_HOME/powerline"
         fi

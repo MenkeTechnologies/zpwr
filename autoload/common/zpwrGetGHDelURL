@@ -15,7 +15,7 @@ function zpwrGetGHDelURL(){
     if [[ -z "$user" && -z "$repo" ]]; then
         user="$ZPWR_GITHUB_ACCOUNT"
         if ! isGitDir; then
-            loggNotGit
+            zpwrLoggNotGit
             return 1
         fi
         out=$(bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$PWD")

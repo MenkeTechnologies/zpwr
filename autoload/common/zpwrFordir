@@ -21,7 +21,7 @@ function zpwrFordir(){
     for dir in "$@"; do
         if [[ -d "$dir" ]]; then
             (
-                builtin cd "$dir" && prettyPrint "cd $dir && $cmd" && eval "$cmd"
+                builtin cd "$dir" && zpwrPrettyPrint "cd $dir && $cmd" && eval "$cmd"
             )
         fi
     done

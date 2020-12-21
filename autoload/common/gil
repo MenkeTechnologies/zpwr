@@ -3,7 +3,7 @@
 function gil(){
 
     if ! isGitDir; then
-       loggNotGit
+       zpwrLoggNotGit
        return 1
     fi
 

@@ -41,9 +41,9 @@ fi
 # \$ needed bc inside double quotes when passed to perl
 
 if [[ $1 == plain ]]; then
-    filter=' | stdinExists "$line'
+    filter=' | zpwrStdinExists "$line'
 else
-    filter=' | stdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
+    filter=' | zpwrStdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
 fi
 
 cat<<EOF
@@ -57,7 +57,7 @@ if [[ \$ZPWR_DEBUG == true ]]; then
     echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> $ZPWR_LOGFILE
 fi
 
-function stdinExists(){
+function zpwrStdinExists(){
     local in arg
     in="\$(cat)"
     arg="\$1"

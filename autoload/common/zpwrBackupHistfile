@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___zpwrBackupHistfile(){
 
-    prettyPrint "Save backup of $HISTFILE"
+    zpwrPrettyPrint "Save backup of $HISTFILE"
     builtin fc -W "$HISTFILE"
     bash "$ZPWR_SCRIPTS/backupConfig.sh"
 }

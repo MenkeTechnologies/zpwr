@@ -44,7 +44,7 @@ function ___digs(){
             for url in "$@"; do
                 noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
                 exec 2>&1
-                prettyPrint "DIG: $noport"
+                zpwrPrettyPrint "DIG: $noport"
                 if [[ -n "$colo" ]]; then
                     $exe dig +trace -t ANY "$noport" | grcat conf.dig
                 else
@@ -52,7 +52,7 @@ function ___digs(){
                 fi
 
                 noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
-                prettyPrint "HOST: $noproto"
+                zpwrPrettyPrint "HOST: $noproto"
                 out="$($exe host "$noproto")"
                 if exists lolcat; then
                     echo "$out" | lolcat
@@ -66,7 +66,7 @@ function ___digs(){
                     if [[ ${noproto: -1} == "." ]]; then
                         noproto="${noproto:0:-1}"
                     fi
-                    prettyPrint "DIG: $ip"
+                    zpwrPrettyPrint "DIG: $ip"
                     if [[ -n "$colo" ]]; then
                         $exe dig -x "$ip" | grcat conf.dig
                     else
@@ -76,59 +76,59 @@ function ___digs(){
                     primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
                     out="$($exe whois "$primary")"
                     if echo "$out" | command grep -sq 'No match';then
-                        prettyPrint "WHOIS: $ip"
+                        zpwrPrettyPrint "WHOIS: $ip"
                         if [[ -n "$colo" ]]; then
                             $exe whois "$ip" | grcat "$HOME/conf.whois"
                         else
                             $exe whois "$ip"
                         fi
                     else
-                        prettyPrint "WHOIS: $primary"
+                        zpwrPrettyPrint "WHOIS: $primary"
                         if [[ -n "$colo" ]]; then
                             echo "$out" | grcat "$HOME/conf.whois"
                             echo
-                            prettyPrint "WHOIS: $ip"
+                            zpwrPrettyPrint "WHOIS: $ip"
                             $exe whois "$ip" | grcat  "$HOME/conf.whois"
                         else
                             echo "$out"
                             echo
-                            prettyPrint "WHOIS: $ip"
+                            zpwrPrettyPrint "WHOIS: $ip"
                             $exe whois "$ip"
                         fi
                     fi
                 else
                     out="$($exe whois "$noproto")"
                     if echo "$out" | command grep -sq 'No match';then
-                        prettyPrint "WHOIS: $ip"
+                        zpwrPrettyPrint "WHOIS: $ip"
                         if [[ -n "$colo" ]]; then
                             $exe whois "$ip" | grcat "$HOME/conf.whois"
                         else
                             $exe whois "$ip"
                         fi
                     else
-                        prettyPrint "WHOIS: $noproto"
+                        zpwrPrettyPrint "WHOIS: $noproto"
 
                         if [[ -n "$colo" ]]; then
                             echo "$out" | grcat "$HOME/conf.whois"
-                            prettyPrint "WHOIS: $ip"
+                            zpwrPrettyPrint "WHOIS: $ip"
                             $exe whois "$ip" | grcat "$HOME/conf.whois"
                         else
                             echo "$out"
-                            prettyPrint "WHOIS: $ip"
+                            zpwrPrettyPrint "WHOIS: $ip"
                             $exe whois "$ip"
                         fi
                     fi
                 fi
                 if exists http; then
-                    prettyPrint "HTTPIE: $url"
+                    zpwrPrettyPrint "HTTPIE: $url"
                     torify http -v --follow --pretty=all "$url"
                 else
-                    prettyPrint "CURL: $url"
+                    zpwrPrettyPrint "CURL: $url"
                     $exe curl -vvv -k -fsSL "$url"
                 fi
                     echo
                     echo
-                    prettyPrint "TRACEROUTE: $noproto"
+                    zpwrPrettyPrint "TRACEROUTE: $noproto"
                     if [[ -n "$colo" ]]; then
                         $exe traceroute "$noproto" | grcat conf.traceroute
                     else
@@ -147,10 +147,10 @@ function ___digs(){
             for url in "$@"; do
                 noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
                 exec 2>&1
-                prettyPrint "DIG: $noport"
+                zpwrPrettyPrint "DIG: $noport"
                 $colo $exe dig +trace "$noport"
                 noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
-                prettyPrint "HOST: $noproto"
+                zpwrPrettyPrint "HOST: $noproto"
                 out="$($colo $exe host "$noproto")"
                 if exists lolcat; then
                     echo "$out" | lolcat
@@ -165,41 +165,41 @@ function ___digs(){
                     if [[ ${noproto: -1} == "." ]]; then
                         noproto="${noproto:0:-1}"
                     fi
-                    prettyPrint "DIG: $ip"
+                    zpwrPrettyPrint "DIG: $ip"
                     $colo $exe dig -x "$ip"
                     primary="$(echo "$noproto" | sed -E 's@^(.*)\.([^.]+)\.([^.]+)$@\2.\3@')"
                     out="$($exe whois "$primary")"
                     if echo "$out" | command grep -sq 'No match';then
-                        prettyPrint "WHOIS: $ip"
+                        zpwrPrettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
-                        prettyPrint "WHOIS: $primary"
+                        zpwrPrettyPrint "WHOIS: $primary"
                         echo "$out" | grcat "$HOME/conf.whois"
-                        prettyPrint "WHOIS: $ip"
+                        zpwrPrettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     fi
                 else
                     out="$($colo $exe whois "$noproto")"
                     if echo "$out" | command grep -sq 'No match'; then
-                        prettyPrint "WHOIS: $ip"
+                        zpwrPrettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     else
-                        prettyPrint "WHOIS: $noproto"
+                        zpwrPrettyPrint "WHOIS: $noproto"
                         echo "$out" | grcat  "$HOME/conf.whois"
-                        prettyPrint "WHOIS: $ip"
+                        zpwrPrettyPrint "WHOIS: $ip"
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     fi
                 fi
                 if exists http; then
-                    prettyPrint "HTTPIE: $url"
+                    zpwrPrettyPrint "HTTPIE: $url"
                     $exe http -v --follow --pretty=all "$url"
                 else
-                    prettyPrint "CURL: $url"
+                    zpwrPrettyPrint "CURL: $url"
                     $colo $exe curl -vvv -k -fsSL "$url"
                 fi
                     echo
                     echo
-                    prettyPrint "TRACEROUTE: $noproto"
+                    zpwrPrettyPrint "TRACEROUTE: $noproto"
                     $colo $exe traceroute "$noproto"
                 exec 2>/dev/tty
             done | less -MN

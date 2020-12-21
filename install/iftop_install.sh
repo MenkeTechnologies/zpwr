@@ -14,7 +14,7 @@ fi
 
 source common.sh
 
-goInstallerOutputDir
+zpwrGoInstallerOutputDir
 
 automake --version 2>&1 | grep -q '16' || {
     wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz

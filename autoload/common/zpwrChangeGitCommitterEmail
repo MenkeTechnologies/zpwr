@@ -8,7 +8,7 @@ function zpwrChangeGitCommitterEmail(){
     fi
 
     if ! isGitDir; then
-        loggNotGit
+        zpwrLoggNotGit
         return 1
     fi
 
@@ -17,7 +17,7 @@ function zpwrChangeGitCommitterEmail(){
     oldEmail="$1"
     newEmail="$2"
 
-    prettyPrint "change committer $oldEmail to $newEmail"
+    zpwrPrettyPrint "change committer $oldEmail to $newEmail"
 
     git filter-branch -f --commit-filter '
     if [ "$GIT_COMMITTER_EMAIL" = "'$oldEmail'" ]; then

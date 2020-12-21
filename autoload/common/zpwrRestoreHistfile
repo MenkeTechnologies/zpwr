@@ -2,9 +2,9 @@
 # vim: set ft=sh:
 function ___zpwrRestoreHistfile(){
 
-    prettyPrint "Restore backup of $HISTFILE"
+    zpwrPrettyPrint "Restore backup of $HISTFILE"
     command rm "$HISTFILE"
-    prettyPrint command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
+    zpwrPrettyPrint command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
     command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
     builtin fc -R "$HISTFILE"
 }

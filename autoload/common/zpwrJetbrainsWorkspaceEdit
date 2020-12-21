@@ -3,7 +3,7 @@
 function zpwrJetbrainsWorkspaceEdit(){
 
     perl -E 'say "_"x100'
-    prettyPrint "MONITORING WORKSPACE..."
+    zpwrPrettyPrint "MONITORING WORKSPACE..."
     perl -E 'say "_"x100'
     while true; do
         if command grep -q '<component name="RunManager" selected=' \

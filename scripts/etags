@@ -544,7 +544,7 @@ isZsh(){isZsh23,845
         function exists(){exists34,1021
     function exists(){exists44,1259
 function chooseNvimVim(){chooseNvimVim51,1365
-function loggNotGit() {loggNotGit70,1823
+function zpwrLoggNotGit() {zpwrLoggNotGit70,1823
 function zpwrLoggErr(){zpwrLoggErr75,1889
 export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"ZPWR_ALL_GIT_DIRS107,3727
 export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"ZPWR_LOGFILE108,3782
@@ -686,7 +686,7 @@ function zpwrLargestGitFiles(){zpwrLargestGitFiles939,30430
        page=$1page949,30576
     obj=$(git rev-list --all --objects)obj954,30661
         filename=$(echo $obj | command grep $sha)filename956,30737
-        size=$(printf $size | humanReadable)size957,30787
+        size=$(printf $size | zpwrHumanReadable)size957,30787
 function clearGitCommit(){clearGitCommit962,30982
     regex="^$1\$"regex974,31170
 function zpwrClearGitCache(){zpwrClearGitCache987,31456
@@ -712,9 +712,9 @@ function zpwrClearList() {zpwrClearList1009,31893
                             out="$(hash | command grep "^$arg=")"out1074,34097
 function zpwrListNoClear () {zpwrListNoClear1125,35907
 function zpwrAnimate(){zpwrAnimate1146,36354
-function blocksToSize(){blocksToSize1151,36413
+function zpwrBlocksToSize(){zpwrBlocksToSize1151,36413
     bytes=$(( input * 512 ))bytes1155,36470
-function humanReadable(){humanReadable1159,36534
+function zpwrHumanReadable(){zpwrHumanReadable1159,36534
         s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"s1162,36590
         s=substr(s,1,4)s1166,36724
         xf=(s==" B  ") ? "%d" : "%.2f"xf1167,36748
@@ -726,7 +726,7 @@ function zpwrExecpy(){zpwrExecpy1195,37392
 function search(){search1208,37562
 function cd(){cd1214,37673
 function isGitDir(){isGitDir1224,37921
-function isGitDirMessage(){isGitDirMessage1229,38000
+function zpwrIsGitDirMessage(){zpwrIsGitDirMessage1229,38000
 function gil(){gil1239,38217
     local file=".git/info/exclude"file1246,38317
 function zpwrContribCountDirs(){zpwrContribCountDirs1257,38467
@@ -771,8 +771,8 @@ function hd(){hd1543,45164
 function zpwrPstreemonitor(){zpwrPstreemonitor1580,46262
 function return2(){return21586,46404
 function color2(){color21596,46536
-function escapeRemove(){escapeRemove1606,46672
-function prettyPrint(){prettyPrint1613,46781
+function zpwrEscapeRemove(){zpwrEscapeRemove1606,46672
+function zpwrPrettyPrint(){zpwrPrettyPrint1613,46781
 function zpwrAlternatingPrettyPrint(){zpwrAlternatingPrettyPrint1625,46978
     counter=0counter1628,47032
 function tac(){tac1655,47698
@@ -796,7 +796,7 @@ function zpz(){zpz1845,51938
 function zr(){zr1858,52137
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"dirsc1861,52176
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"forked1862,52218
-function goInstallerDir(){goInstallerDir1873,52435
+function zpwrGoInstallerDir(){zpwrGoInstallerDir1873,52435
     local ret=0ret1875,52463
 function zpwrUnlinkConf(){zpwrUnlinkConf1889,52775
     symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1893,52827
@@ -886,7 +886,7 @@ function zpwrArrayToJson(){zpwrArrayToJson2610,74231
         ary="$1"ary2613,74275
         ary="$1"ary2617,74399
 function zpwrLoginCount(){zpwrLoginCount2626,74599
-function needSudo(){needSudo2633,74771
+function zpwrNeedSudo(){zpwrNeedSudo2633,74771
 function clearTemp(){clearTemp2642,74875
 function clearCache(){clearCache2657,75233
 function regenEmacsTags(){regenEmacsTags2670,75501
@@ -949,7 +949,7 @@ function changeGitEmail(){changeGitEmail3036,85005
 __ScriptVersion="1.0.2"__ScriptVersion9,303
 nproc=10nproc10,327
 usage() {usage16,553
-prettyPrint() {prettyPrint29,907
+zpwrPrettyPrint() {zpwrPrettyPrint29,907
 exists() {exists35,984
 zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint39,1028
     counter=0counter40,1055
@@ -1076,7 +1076,7 @@ tap="tap0"tap28,912
 isZsh(){isZsh10,332
     exists(){exists19,462
     exists(){exists27,659
-prettyPrint(){prettyPrint33,755
+zpwrPrettyPrint(){zpwrPrettyPrint33,755
 ZPWR_EXA_COMMAND="command exa --git -il -F -H --extended --color-scale -g -a --colour=always"ZPWR_EXA_COMMAND44,942
 zpwrClearList() {zpwrClearList46,1037
             ls_command="$ZPWR_EXA_COMMAND"ls_command49,1123
@@ -1100,7 +1100,7 @@ zpwrClearList() {zpwrClearList46,1037
         distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName15,377
 
 /Users/wizard/.zpwr/scripts/colorLogger.sh,321
-prettyPrint() {prettyPrint10,302
+zpwrPrettyPrint() {zpwrPrettyPrint10,302
 tailVersion=tailtailVersion20,494
 weHaveCCZE=noweHaveCCZE22,512
     distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName47,1390
@@ -1356,23 +1356,23 @@ file="$1"file9,167
 
 /Users/wizard/.zpwr/scripts/lib.sh,905
 function fail(){fail18,674
-function fileMustExist(){fileMustExist23,746
-function goInstallerDir(){goInstallerDir30,867
+function zpwrFileMustExist(){zpwrFileMustExist23,746
+function zpwrGoInstallerDir(){zpwrGoInstallerDir30,867
     local ret=0ret31,894
-function goInstallerOutputDir(){goInstallerOutputDir45,1147
+function zpwrGoInstallerOutputDir(){zpwrGoInstallerOutputDir45,1147
     local ret=0ret46,1180
 function exists(){exists59,1468
 function update(){update63,1520
 function upgrade(){upgrade84,2113
 function refresh(){refresh104,2632
-function needSudo(){needSudo136,3378
+function zpwrNeedSudo(){zpwrNeedSudo136,3378
 function proceed(){proceed144,3481
 function prettyPrintStdin(){prettyPrintStdin158,3687
     local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"perlfile159,3716
-function prettyPrint(){prettyPrint169,3962
+function zpwrPrettyPrint(){zpwrPrettyPrint169,3962
     local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"perlfile170,3986
-function turnOffDebugging(){turnOffDebugging177,4204
-function turnOnDebugging(){turnOnDebugging183,4279
+function zpwrTurnOffDebugging(){zpwrTurnOffDebugging177,4204
+function zpwrTurnOnDebugging(){zpwrTurnOnDebugging183,4279
 function zpwrAlternatingPrettyPrint(){zpwrAlternatingPrettyPrint190,4445
     counter=0counter191,4480
 
@@ -1781,12 +1781,12 @@ outputDir="Desktop"outputDir10,307
 master="jacobmenke"master11,327
 
 /Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh,400
-prettyPrint() {prettyPrint13,380
+zpwrPrettyPrint() {zpwrPrettyPrint13,380
 exists() {exists19,457
 export ZPWR_DELIMITER_CHAR='%'ZPWR_DELIMITER_CHAR22,500
 zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint24,532
     counter=0counter25,559
-gitRepoUpdater() {gitRepoUpdater53,1251
+zpwrGitRepoUpdater() {zpwrGitRepoUpdater53,1251
     enclosing_dir="$1"enclosing_dir54,1270
 cargo_bin="$HOME/.cargo/bin/cargo"cargo_bin88,2304
 rustup_bin="$HOME/.cargo/bin/rustup"rustup_bin94,2493
@@ -1905,7 +1905,7 @@ fileToBeExecuted="$1"fileToBeExecuted49,1187
 /Users/wizard/.zpwr/scripts/test.sh,0
 
 /Users/wizard/.zpwr/scripts/textmessage.sh,201
-prettyPrint() {prettyPrint10,335
+zpwrPrettyPrint() {zpwrPrettyPrint10,335
     member_1="5551113333"member_118,518
     default_recipent="555111333"default_recipent19,544
     family_phone_numbers=("$member_1")family_phone_numbers21,578
@@ -1942,15 +1942,15 @@ updatePI() {updatePI10,290
 /Users/wizard/.zpwr/scripts/zpwrUpdater.sh,786
 __ScriptVersion="1.0.0"__ScriptVersion11,332
 usage() {usage17,573
-prettyPrint() {prettyPrint63,1646
+zpwrPrettyPrint() {zpwrPrettyPrint63,1646
 zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint69,1723
 exists() {exists96,2404
-gitRepoUpdater() {gitRepoUpdater100,2448
+zpwrGitRepoUpdater() {zpwrGitRepoUpdater100,2448
     enclosing_dir="$1"enclosing_dir101,2467
         width=80width123,3192
         installDir=$(npm root -g | head -n 1)installDir167,4578
-            needSudo=yesneedSudo169,4666
-            needSudo=noneedSudo171,4704
+            zpwrNeedSudo=yeszpwrNeedSudo169,4666
+            zpwrNeedSudo=nozpwrNeedSudo171,4704
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")perlOutdated208,5666
 updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote hostupdatePI238,6451
     hostname="$(echo "$1" | awk -F: '{print $1}')"hostname242,6680
@@ -1965,50 +1965,50 @@ ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"ZPWR_LOGFILE11,350
 /Users/wizard/.zpwr/scripts/updaterNoPip.sh,784
 __ScriptVersion="1.0.0"__ScriptVersion11,332
 usage() {usage17,573
-prettyPrint() {prettyPrint61,1576
+zpwrPrettyPrint() {zpwrPrettyPrint61,1576
 zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint67,1653
 exists() {exists94,2334
-gitRepoUpdater() {gitRepoUpdater98,2378
+zpwrGitRepoUpdater() {zpwrGitRepoUpdater98,2378
     enclosing_dir="$1"enclosing_dir99,2397
         width=80width117,2997
         installDir=$(npm root -g | head -n 1)installDir161,4383
-            needSudo=yesneedSudo163,4471
-            needSudo=noneedSudo165,4509
+            zpwrNeedSudo=yeszpwrNeedSudo163,4471
+            zpwrNeedSudo=nozpwrNeedSudo165,4509
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")perlOutdated202,5471
 updatePI() { #-t to force pseudoterminal allocation for interactive programs on remote hostupdatePI216,5856
     hostname="$(echo "$1" | awk -F: '{print $1}')"hostname220,6085
     manager="$(echo "$1" | awk -F: '{print $2}')"manager221,6136
 
 /Users/wizard/.zpwr/scripts/updaterPip.sh,1358
-prettyPrint() {prettyPrint10,285
+zpwrPrettyPrint() {zpwrPrettyPrint10,285
     installDir=$(python3 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir19,449
         needSudoBase=trueneedSudoBase21,575
         needSudoBase=falseneedSudoBase23,610
         outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated27,753
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated30,942
         installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir35,1112
-            needSudo=trueneedSudo37,1262
-            needSudo=falseneedSudo39,1301
+            zpwrNeedSudo=truezpwrNeedSudo37,1262
+            zpwrNeedSudo=falsezpwrNeedSudo39,1301
     installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir68,2274
         needSudoBase=trueneedSudoBase70,2400
         needSudoBase=falseneedSudoBase72,2435
         outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated77,2579
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated80,2768
         installDir=$(python2 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir84,2912
-            needSudo=trueneedSudo86,3062
-            needSudo=falseneedSudo88,3101
+            zpwrNeedSudo=truezpwrNeedSudo86,3062
+            zpwrNeedSudo=falsezpwrNeedSudo88,3101
 
 /Users/wizard/.zpwr/scripts/updaterPipSudo.sh,928
-prettyPrint() {prettyPrint10,285
+zpwrPrettyPrint() {zpwrPrettyPrint10,285
     needSudoBase=trueneedSudoBase19,449
         outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated22,580
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated25,769
-        needSudo=trueneedSudo30,939
+        zpwrNeedSudo=truezpwrNeedSudo30,939
         installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir32,962
     needSudoBase=trueneedSudoBase58,2003
         outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated62,2135
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated65,2324
-        needSudo=trueneedSudo69,2468
+        zpwrNeedSudo=truezpwrNeedSudo69,2468
         installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir70,2490
 
 /Users/wizard/.zpwr/scripts/uploadWebDS.sh,61
@@ -2148,7 +2148,7 @@ node_exe="/usr/local/lib/node_modules/cowsay/cli.js"node_exe17,397
     font=${COW_FILES[$randIndex]}font37,1072
 
 /Users/wizard/.zpwr/scripts/macOnly/resetWIFI.sh,34
-prettyPrint() {prettyPrint9,290
+zpwrPrettyPrint() {zpwrPrettyPrint9,290
 
 /Users/wizard/.zpwr/scripts/macOnly/rsyncr.sh,78
 localDIR="$1"DIR12,389
@@ -2173,7 +2173,7 @@ delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: 
 PATH="/usr/local/bin:$PATH"PATH10,271
 
 /Users/wizard/.zpwr/scripts/macOnly/tor.sh,115
-prettyPrint() {prettyPrint9,290
+zpwrPrettyPrint() {zpwrPrettyPrint9,290
 INTERFACE=Wi-FiINTERFACE13,339
 function disable_proxy() {disable_proxy31,618
 
@@ -2183,5 +2183,5 @@ websiteDir="$HOME/WebstormProjects/PersonalWebsite"websiteDir11,380
 ZPWR_DIR="$ZPWR"ZPWR_DIR12,432
 ZPWR_DIR_INSTALL="$ZPWR/install"ZPWR_DIR_INSTALL13,449
     ZPWR_SCRIPTS="$ZPWR/scripts"ZPWR_SCRIPTS15,514
-prettyPrint() {prettyPrint18,551
+zpwrPrettyPrint() {zpwrPrettyPrint18,551
 dotdir="$websiteDir/downloads/dotfiles"dotdir152,4846

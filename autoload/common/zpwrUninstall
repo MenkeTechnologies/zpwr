@@ -19,7 +19,7 @@ function zpwrUninstall() {
         "$ZSH_COMPDUMP"* \
         "$HOME/.zcompdump"*
     if zpwrConfirm; then
-        prettyPrint "Uninstall!"
+        zpwrPrettyPrint "Uninstall!"
         for dir in "$ZPWR_LOCAL/$USER.rc"*;do
             mv "$dir" "$HOME"
         done
@@ -36,7 +36,7 @@ function zpwrUninstall() {
         "$ZSH_COMPDUMP"* \
         "$HOME/.zcompdump"*
     else
-        prettyPrint "Abort uninstall"
+        zpwrPrettyPrint "Abort uninstall"
     fi
 }
 

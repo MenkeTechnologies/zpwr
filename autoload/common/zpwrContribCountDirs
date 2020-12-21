@@ -23,7 +23,7 @@ function zpwrContribCountDirs(){
             isGitDir || continue
 
             lineCount="$(git log --pretty="%an" | grep -E "$user" | wc -l)"
-            prettyPrint "Contribution Count for $user at $dir is $lineCount"
+            zpwrPrettyPrint "Contribution Count for $user at $dir is $lineCount"
             echo $lineCount >> "$ZPWR_TEMPFILE1"
         )
         fi

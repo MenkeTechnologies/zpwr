@@ -8,7 +8,7 @@ function ___hd(){
 
         if zpwrConfirm "Exe '$cmd'"; then
             if eval "$cmd"; then
-                prettyPrint "Successful deletion."
+                zpwrPrettyPrint "Successful deletion."
             else
                 zpwrLoggErr "Error in deletion."
             fi

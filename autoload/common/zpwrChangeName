@@ -22,7 +22,7 @@ function zpwrChangeName(){
             echo
 
             if [[ -f "$oldName" ]]; then
-                prettyPrint "mv $oldName $newName"
+                zpwrPrettyPrint "mv $oldName $newName"
                 mv "$oldName" "$newName"
             fi
 
@@ -32,7 +32,7 @@ function zpwrChangeName(){
                 "$ZPWR/"**/*~"$ZPWR/".git/**(.)
 
             if [[ -f "$newName" ]]; then
-                prettyPrint "less $newName"
+                zpwrPrettyPrint "less $newName"
                 less "$newName"
             fi
         fi

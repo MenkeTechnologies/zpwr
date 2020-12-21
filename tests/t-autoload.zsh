@@ -13,7 +13,7 @@
 }
 
 @test 'autoload banner' {
-    run prettyPrintBox autoload
+    run zpwrPrettyPrintBox autoload
     assert $state equals 0
     assert "$output" is_not_empty
 }

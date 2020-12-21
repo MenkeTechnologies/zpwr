@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrRegenAllKeybindingsCache(){
 
-    prettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
+    zpwrPrettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
     zsh "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
     escapeRemover.pl |
     perl -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"

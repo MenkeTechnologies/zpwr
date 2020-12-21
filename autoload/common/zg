@@ -55,7 +55,7 @@ function zg() {
     for dir in "$@" ; do
         if [[ -n "$dir" ]]; then
             if z ${=optstr} "$dir"; then
-                prettyPrint "z $optstr$dir => cd $(z -e $dir)"
+                zpwrPrettyPrint "z $optstr$dir => cd $(z -e $dir)"
 
                 runGit
             fi

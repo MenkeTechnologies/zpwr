@@ -11,7 +11,7 @@ function zpwrCommits(){
             vim -c 'call feedkeys(":Commits!\<CR>")'
         fi
     else
-        loggNotGit
+        zpwrLoggNotGit
         return 1
     fi
 }

@@ -17,7 +17,7 @@ function ___zpwrClean() {
         files=("$dir"/*(N))
 
         if (( $#files )); then
-            prettyPrint sudo rm -rfv "$dir"/*
+            zpwrPrettyPrint sudo rm -rfv "$dir"/*
             sudo rm -rfv "$dir"/*
         fi
     done

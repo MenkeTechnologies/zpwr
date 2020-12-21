@@ -19,29 +19,29 @@ if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
     mkdir -p $ZPWR_INSTALLER_OUTPUT
 fi
 
-goInstallerOutputDir
+zpwrGoInstallerOutputDir
 
 function installNpmRpm(){
 
-    prettyPrintBox "curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -"
+    zpwrPrettyPrintBox "curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -"
     curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
-    prettyPrintBox "install nodejs"
+    zpwrPrettyPrintBox "install nodejs"
     update "nodejs" "$distroFamily"
-    prettyPrintBox "install npm"
+    zpwrPrettyPrintBox "install npm"
     update "npm" "$distroFamily"
-    prettyPrintBox "install build-essential"
+    zpwrPrettyPrintBox "install build-essential"
     update "build-essential" "$distroFamily"
 }
 
 function installNpmDeb(){
 
-    prettyPrintBox "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -"
+    zpwrPrettyPrintBox "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-    prettyPrintBox "install nodejs"
+    zpwrPrettyPrintBox "install nodejs"
     update "nodejs" "$distroFamily"
-    prettyPrintBox "install npm"
+    zpwrPrettyPrintBox "install npm"
     update "npm" "$distroFamily"
-    prettyPrintBox "install build-essential"
+    zpwrPrettyPrintBox "install build-essential"
     update "build-essential" "$distroFamily"
 }
 
@@ -64,7 +64,7 @@ elif [[ "$ZPWR_OS_TYPE" == linux ]];then
             installNpmRpm
             ;;
         (*)
-            prettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
+            zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
             ;;
     esac
 else
@@ -73,14 +73,14 @@ else
         distroName=FreeBSD
         installNpmDeb
     else
-        prettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
+        zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
     fi
 fi
 
 exists diff-so-fancy || {
-    prettyPrintBox "npm installing diff-so-fancy"
+    zpwrPrettyPrintBox "npm installing diff-so-fancy"
     sudo npm i -g diff-so-fancy
 }
-prettyPrintBox "installing neovim nodejs lib"
+zpwrPrettyPrintBox "installing neovim nodejs lib"
 sudo npm i -g neovim
 

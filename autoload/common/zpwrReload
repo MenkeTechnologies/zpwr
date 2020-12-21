@@ -3,21 +3,21 @@
 
 function zpwrReload(){
 
-    prettyPrint "Reloading started..."
+    zpwrPrettyPrint "Reloading started..."
     zpwrTokenPre
     bindPowerline;bindPowerlineTmux;bindZpwrDirs
     bindForGit
     bindZdharma
     bindZdharmaPost
-    prettyPrint "Reloading bindAliasesLate;zpwrCreateAliasCache;bindAliasesZshLate;bindOverrideZLE"
+    zpwrPrettyPrint "Reloading bindAliasesLate;zpwrCreateAliasCache;bindAliasesZshLate;bindOverrideZLE"
     bindAliasesLate;zpwrCreateAliasCache;bindAliasesZshLate;bindOverrideZLE
     bindInterceptSurround
     bindHistorySubstring
-    prettyPrint "Reloading bindFZFLate;bindZpwrVerbs;bindZpwrZstyle"
+    zpwrPrettyPrint "Reloading bindFZFLate;bindZpwrVerbs;bindZpwrZstyle"
     bindFZFLate;bindZpwrVerbs;bindZpwrZstyle
     bindPenultimate;bindFinal;zpwrTokenPost
 
-    prettyPrint "Reloading finished..."
+    zpwrPrettyPrint "Reloading finished..."
 
 }
 

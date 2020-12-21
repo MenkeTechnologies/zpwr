@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrRegenConfigLinks(){
 
-    prettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
+    zpwrPrettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
     zpwrLinkConf
 }
 

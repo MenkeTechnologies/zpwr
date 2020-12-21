@@ -13,7 +13,7 @@ function ___p(){
     fi
 
     for cmd; do
-        prettyPrint "SEARCH TERM: $cmd"
+        zpwrPrettyPrint "SEARCH TERM: $cmd"
         echo "$out" |
             command grep --color=always -a -i -F -- "$cmd" ||
             echo "Nothing found for $cmd."

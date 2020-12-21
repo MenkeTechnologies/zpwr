@@ -38,7 +38,7 @@ function zpwrUpdate(){
     zpwrLinkConf
 
     completionDir="$ZSH_CUSTOM/plugins"
-    gitRepoUpdater "$completionDir"
+    zpwrGitRepoUpdater "$completionDir"
 
     test -n "$TERM" && exec "$SHELL"
 

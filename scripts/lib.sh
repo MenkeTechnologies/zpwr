@@ -32,7 +32,7 @@ else
     }
 fi
 
-function stdinExists(){
+function zpwrStdinExists(){
 
     local in arg
     in="$(cat)"
@@ -49,7 +49,7 @@ function commandExists(){
     type -ap -- "$1" >/dev/null 2>&1
 }
 
-function blocksToSize(){
+function zpwrBlocksToSize(){
 
     local bytes input
 
@@ -58,7 +58,7 @@ function blocksToSize(){
     echo $bytes | humanreadable
 }
 
-function humanReadable(){
+function zpwrHumanReadable(){
 
     awk 'function human(x) {
         s=" B   KiB MiB GiB TiB PiB EiB ZiB YiB"
@@ -72,10 +72,10 @@ function humanReadable(){
     {gsub(/^[0-9]+/, human($1));print}'
 }
 
-function perlRemoveSpaces(){
+function zpwrPerlRemoveSpaces(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: perlRemoveSpaces <file...>"
+        zpwrLoggErr "usage: zpwrPerlRemoveSpaces <file...>"
         return 1
     fi
 
@@ -87,20 +87,19 @@ function perlRemoveSpaces(){
     done
 }
 
-function escapeRemove(){
+function zpwrEscapeRemove(){
 
     while read; do
         echo "$REPLY" | sed -e 's@\e\[.\{1,5\}m@@g'
     done
 }
 
-function prettyPrintNoNewline(){
+function zpwrPrettyPrintNoNewline(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: prettyPrintNoNewline <string>"
+        zpwrLoggErr "usage: zpwrPrettyPrintNoNewline <string>"
         return 1
     fi
-
 
     printf "\x1b[1m"
     printf "%s " "$@"
@@ -112,7 +111,7 @@ function isBinary() {
     [[ $(LC_MESSAGES=C command grep -Hm1 '^' < "${1:-$REPLY}") =~ '^Binary' ]]
 }
 
-function loggNotGit() {
+function zpwrLoggNotGit() {
 
     zpwrLoggErr "'$(pwd)' is not a git dir"
 }
@@ -145,10 +144,10 @@ function zpwrLoggErr(){
     } >&2
 }
 
-function needSudo(){
+function zpwrNeedSudo(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: needSudo <file>"
+        zpwrLoggErr "usage: zpwrNeedSudo <file>"
         return 1
     fi
 
@@ -161,14 +160,14 @@ function needSudo(){
 
 function loggConsolePrefix(){
 
-    prettyPrint "$ZPWR_CHAR_LOGO $*"
+    zpwrPrettyPrint "$ZPWR_CHAR_LOGO $*"
     logg "$ZPWR_CHAR_LOGO $*"
 
 }
 
 function loggConsole(){
 
-    prettyPrint "$*"
+    zpwrPrettyPrint "$*"
     logg "$*"
 
 }
@@ -233,7 +232,7 @@ function fail(){
         exit 1
 }
 
-function fileMustExist(){
+function zpwrFileMustExist(){
 
     if [[ ! -f "$1" ]]; then
         echo "where is the file '$1'?" >&2
@@ -246,7 +245,7 @@ function isGitDir(){
     command git rev-parse --git-dir 2> /dev/null 1>&2
 }
 
-function isGitDirMessage(){
+function zpwrIsGitDirMessage(){
 
     if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
         printf "\x1b[0;1;31m"
@@ -257,7 +256,7 @@ function isGitDirMessage(){
 }
 
 
-function goInstallerDir(){
+function zpwrGoInstallerDir(){
 
     local ret
 
@@ -276,7 +275,7 @@ function goInstallerDir(){
 }
 
 
-function goInstallerOutputDir(){
+function zpwrGoInstallerOutputDir(){
 
     local ret
 
@@ -294,10 +293,9 @@ function goInstallerOutputDir(){
     fi
 }
 
-function installGitHubPluginsFromFile(){
+function zpwrInstallGitHubPluginsFromFile(){
 
-    function usage ()
-    {
+    function usage (){
         echo "Usage :  $0 [options] [--]
 
         Options:
@@ -322,7 +320,7 @@ function installGitHubPluginsFromFile(){
     shift $((OPTIND-1))
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: installGitHubPluginsFromFile <repo_file>"
+        zpwrLoggErr "usage: zpwrInstallGitHubPluginsFromFile <repo_file>"
         return 1
     fi
 
@@ -332,20 +330,21 @@ function installGitHubPluginsFromFile(){
 
     if [[ $forceFlag == true ]]; then
         while read repo; do
-            overwriteGitHubPlugin "$repo"
+            zpwrOverwriteGitHubPlugin "$repo"
         done < "$file"
     else
         while read repo; do
-            installGitHubPlugin "$repo"
+            zpwrInstallGitHubPlugin "$repo"
         done < "$file"
     fi
+    unset usage
 
 }
 
-function overwriteGitHubPlugin(){
+function zpwrOverwriteGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: overwriteGitHubPlugin <repo>"
+        zpwrLoggErr "usage: zpwrOverwriteGitHubPlugin <repo>"
         return 1
     fi
 
@@ -356,17 +355,17 @@ function overwriteGitHubPlugin(){
 
     echo "Installing plugin $user/$repo."
     if [[ -d "$repo" ]]; then
-        prettyPrint "rm -rf $repo"
+        zpwrPrettyPrint "rm -rf $repo"
         rm -rf "$repo"
     fi
 
     test -d "$repo" || git clone "https://github.com/$1.git"
 }
 
-function installGitHubPlugin(){
+function zpwrInstallGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: installGitHubPlugin <repo>"
+        zpwrLoggErr "usage: zpwrInstallGitHubPlugin <repo>"
         return 1
     fi
 
@@ -397,7 +396,7 @@ function update(){
         elif [[ $2 == freebsd ]];then
             sudo pkg install -y "$1"
         else
-            prettyPrint "Error at install of $1 on $2." >&2
+            zpwrPrettyPrint "Error at install of $1 on $2." >&2
         fi
     }
 }
@@ -419,7 +418,7 @@ function upgrade(){
     elif [[ $1 == freebsd ]];then
         sudo pkg upgrade -y
     else
-        prettyPrint "Error with upgrade with $1." >&2
+        zpwrPrettyPrint "Error with upgrade with $1." >&2
     fi
 }
 
@@ -439,12 +438,12 @@ function refresh(){
     elif [[ $1 == redhat ]];then
         sudo yum check-update -y
     else
-        prettyPrint "Error with refresh with $1." >&2
+        zpwrPrettyPrint "Error with refresh with $1." >&2
     fi
 
 }
 
-function prettyPrintInstaller(){
+function zpwrPrettyPrintInstaller(){
 
     (( ++INSTALL_COUNTER ))
     printf "\x1b[32;1m"
@@ -457,7 +456,7 @@ function prettyPrintInstaller(){
     printf "\n"
 }
 
-function needSudo(){
+function zpwrNeedSudo(){
 
     if [[ ! -w "$1" ]]; then
         return 0
@@ -486,19 +485,19 @@ function proceed(){
     done
 }
 
-function prettyPrint(){
+function zpwrPrettyPrint(){
 
     if [[ -n "$1" ]];then
         printf "\x1b[1;4m"
         printf "%s " "$@"
         printf "\x1b[0m\n"
     else
-        zpwrLoggErr "usage: prettyPrint <msg>"
+        zpwrLoggErr "usage: zpwrPrettyPrint <msg>"
         return 1
     fi
 }
 
-function prettyPrintBoxStdin(){
+function zpwrPrettyPrintBoxStdin(){
 
     local perlfile
 
@@ -513,7 +512,7 @@ function prettyPrintBoxStdin(){
     echo
 }
 
-function prettyPrintBox(){
+function zpwrPrettyPrintBox(){
 
     local perlfile
 
@@ -525,14 +524,14 @@ function prettyPrintBox(){
     echo
 }
 
-function turnOffDebugging(){
+function zpwrTurnOffDebugging(){
 
     set +x
     set +v
     exec 2> /dev/tty
 }
 
-function turnOnDebugging(){
+function zpwrTurnOnDebugging(){
 
     set -x
     set -v
@@ -574,7 +573,7 @@ function zpwrAlternatingPrettyPrint(){
 function zpwrClearGitCache(){
 
     if ! isGitDir; then
-        loggNotGit
+        zpwrLoggNotGit
         return 1
     fi
 
@@ -583,7 +582,7 @@ function zpwrClearGitCache(){
     git gc --prune=now 2>/dev/null
 }
 
-function gitRepoUpdater() {
+function zpwrGitRepoUpdater() {
 
     local enclosing_dir generic_git_repo_plugin
 
@@ -643,7 +642,7 @@ function zpwrClearList() {
     if [[ -n "$1" ]]; then
         for arg in "$@"; do
             FOUND=false
-            prettyPrint "/--------------- $arg --------------/"
+            zpwrPrettyPrint "/--------------- $arg --------------/"
             # perl boxPrint.pl "$arg"
             echo
             if exists $arg; then
@@ -657,34 +656,34 @@ function zpwrClearList() {
                         rank="Secondary"
                     fi
                     if [[ -f "$lf" ]]; then
-                        prettyPrint "$lf" &&
+                        zpwrPrettyPrint "$lf" &&
                         eval "$ls_command -- $lf" &&
-                        prettyPrint "FILE TYPE:" &&
+                        zpwrPrettyPrint "FILE TYPE:" &&
                         eval "file -- $lf" &&
-                        prettyPrint "DEPENDENT ON:" &&
+                        zpwrPrettyPrint "DEPENDENT ON:" &&
                         eval "$lib_command $lf"
-                        prettyPrint "SIZE:"
+                        zpwrPrettyPrint "SIZE:"
                         du -sh -- "$lf"
-                        prettyPrint "STATS:"
+                        zpwrPrettyPrint "STATS:"
                         stat -- "$lf"
                         out=$(man -wa "$(basename $lf)" 2>/dev/null)
                         if [[ -n "$out" ]]; then
-                            prettyPrint "MAN:"
+                            zpwrPrettyPrint "MAN:"
                             echo "$out"
                         fi
                         if isZsh; then
                             out="$(hash | command grep "^$arg=")"
                             if [[ -n "$out" ]]; then
-                                prettyPrint "HASH TABLE:"
+                                zpwrPrettyPrint "HASH TABLE:"
                                 echo "$(hash | command grep "^$arg=")"
                             fi
                         fi
-                        prettyPrint "PRECEDENCE: "
+                        zpwrPrettyPrint "PRECEDENCE: "
                         echo "$rank"
                         echo
                         echo
                     else
-                        prettyPrint "FILE TYPE:"
+                        zpwrPrettyPrint "FILE TYPE:"
                         echo "$loc"
                         echo "$loc" | command grep -sq "function" &&
                         {
@@ -696,7 +695,7 @@ function zpwrClearList() {
                     {
                 alias -- "$(echo "$loc" | awk '{print $1}')"
                         }
-                        prettyPrint "PRECEDENCE: "
+                        zpwrPrettyPrint "PRECEDENCE: "
                         echo "$rank"
                         echo
                         echo
@@ -706,12 +705,12 @@ function zpwrClearList() {
             # path matching, not exe
             if eval "$ls_command -d -- \"$arg\"" 2>/dev/null; then
                 FOUND=true
-                prettyPrint "$arg"
-                prettyPrint "FILE TYPE:"
+                zpwrPrettyPrint "$arg"
+                zpwrPrettyPrint "FILE TYPE:"
                 file -- "$arg"
-                prettyPrint "SIZE:"
+                zpwrPrettyPrint "SIZE:"
                 du -sh -- "$arg"
-                prettyPrint "STATS:"
+                zpwrPrettyPrint "STATS:"
                 stat -- "$arg"
                 # for readibility
                 echo
@@ -721,9 +720,9 @@ function zpwrClearList() {
 
                 if [[ -n $out ]]; then
                     FOUND=true
-                    prettyPrint "DATA TYPE:"
+                    zpwrPrettyPrint "DATA TYPE:"
                     print -rl -- ${(tP)arg}
-                    prettyPrint "VALUE:"
+                    zpwrPrettyPrint "VALUE:"
                     echo $out
                     # for readibility
                     echo
@@ -732,9 +731,9 @@ function zpwrClearList() {
                     out2=$(set | command grep "^$arg=")
                     if [[ -n $out2 ]]; then
                         FOUND=true
-                        prettyPrint "DATA TYPE:"
+                        zpwrPrettyPrint "DATA TYPE:"
                         print -rl -- ${(tP)arg}
-                        prettyPrint "ENV:"
+                        zpwrPrettyPrint "ENV:"
                         echo $out2
                         # for readibility
                         echo

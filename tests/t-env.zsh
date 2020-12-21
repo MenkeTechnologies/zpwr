@@ -13,7 +13,7 @@
 }
 
 @test 'autoload env' {
-    run prettyPrintBox env
+    run zpwrPrettyPrintBox env
     assert $state equals 0
     assert "$output" is_not_empty
 }
@@ -358,7 +358,7 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
 }
 
 @test 'is a git dir message' 
-    run isGitDirMessage
+    run zpwrIsGitDirMessage
     assert $state equals 0
     assert "$output" is_empty
 }
@@ -379,8 +379,8 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $state equals 0
 }
 
-@test 'exists loggNotGit' {
-    run exists loggNotGit
+@test 'exists zpwrLoggNotGit' {
+    run exists zpwrLoggNotGit
     assert $state equals 0
 }
 
@@ -414,33 +414,33 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $state equals 0
 }
 
-@test 'exists prettyPrintBox' {
-    run exists prettyPrintBox
+@test 'exists zpwrPrettyPrintBox' {
+    run exists zpwrPrettyPrintBox
     assert $state equals 0
 }
 
-@test 'exists prettyPrint' {
-    run exists prettyPrint
+@test 'exists zpwrPrettyPrint' {
+    run exists zpwrPrettyPrint
     assert $state equals 0
 }
 
-@test 'prettyPrintBox' {
-    run prettyPrintBox test
+@test 'zpwrPrettyPrintBox' {
+    run zpwrPrettyPrintBox test
     assert $state equals 0
 }
 
-@test 'prettyPrintBox output' {
+@test 'zpwrPrettyPrintBox output' {
     out=myoutput
-    run prettyPrintBox $out
+    run zpwrPrettyPrintBox $out
     assert $state equals 0
     assert "$output" is_not_empty
     assert "$output" contains $out
 }
 
-@test 'prettyPrintBox increment' {
+@test 'zpwrPrettyPrintBox increment' {
     out=myoutput
-    prettyPrintBox $out
-    run prettyPrintBox $out
+    zpwrPrettyPrintBox $out
+    run zpwrPrettyPrintBox $out
     assert $state equals 0
     assert "$output" is_not_empty
     assert "$output" contains "2>"
@@ -464,8 +464,8 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $origPwd same_as $(pwd)
 }
 
-@test 'prettyPrint' {
-    run prettyPrint test
+@test 'zpwrPrettyPrint' {
+    run zpwrPrettyPrint test
     assert $state equals 0
 }
 
@@ -524,13 +524,13 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $? equals 0
 }
 
-@test 'exists prettyPrint' {
-    run exists prettyPrint
+@test 'exists zpwrPrettyPrint' {
+    run exists zpwrPrettyPrint
     assert $? equals 0
 }
 
-@test 'prettyPrint works' {
-    run prettyPrint "hello world"
+@test 'zpwrPrettyPrint works' {
+    run zpwrPrettyPrint "hello world"
     assert $? equals 0
 }
 
@@ -544,8 +544,8 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $? equals 0
 }
 
-@test 'prettyPrint fn' {
-    run type prettyPrint
+@test 'zpwrPrettyPrint fn' {
+    run type zpwrPrettyPrint
     assert $? equals 0
 }
 

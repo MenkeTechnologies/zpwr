@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrRegenCtags(){
 
-    prettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
+    zpwrPrettyPrint "Regen ctags to $ZPWR_SCRIPTS/tags and $HOME/tags"
     (
     builtin cd "$ZPWR_SCRIPTS"
     command rm tags 2>/dev/null

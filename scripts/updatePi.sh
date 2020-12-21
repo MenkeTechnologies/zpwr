@@ -46,7 +46,7 @@ function updatePI() {
 
     hostname="$(echo "$1" | awk -F: '{print $1}')"
     manager="$(echo "$1" | awk -F: '{print $2}')"
-    prettyPrint "Updating $hostname with $manager"
+    zpwrPrettyPrint "Updating $hostname with $manager"
 
     if [[ "$manager" == "apt" ]]; then
         ssh -x "$hostname" '

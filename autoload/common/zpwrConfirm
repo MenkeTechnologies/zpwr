@@ -3,10 +3,10 @@
 function zpwrConfirm() {
 
     if [[ -n "$1" ]]; then
-        prettyPrint "$@"
+        zpwrPrettyPrint "$@"
     fi
 
-    prettyPrintNoNewline "Are you sure? y/n > "
+    zpwrPrettyPrintNoNewline "Are you sure? y/n > "
     read
     if [[ $REPLY == y ]]; then
         return 0

@@ -11,7 +11,7 @@ function zpwrRegenGtagsType(){
     type=$1
 
     if exists gtags; then
-        prettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
+        zpwrPrettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
         (
         builtin cd "$HOME"
         command rm GPATH GRTAGS GTAGS 2>/dev/null
