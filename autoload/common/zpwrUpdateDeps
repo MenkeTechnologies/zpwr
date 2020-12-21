@@ -22,7 +22,7 @@ function zpwrUpdateDeps(){
         yes | sudo pkg -E update; sudo -E pkg upgrade -y
     fi
 
-    bash "$ZPWR_SCRIPTS/zpwrUpdater.sh"
+    bash "$ZPWR_SCRIPTS/updater.sh"
 
 }
 
