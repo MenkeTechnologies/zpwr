@@ -1,4 +1,4 @@
-#compdef clearList
+#compdef zpwrClearList
 
 function __cl(){
 

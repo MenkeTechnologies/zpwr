@@ -4,7 +4,7 @@ function zpwrEmacsZpwr(){
 
     builtin cd $ZPWR
     ${=ZPWR_EMACS_CLIENT} .
-    clearList
+    zpwrClearList
     isGitDir && git diff HEAD
 }
 

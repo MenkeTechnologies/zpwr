@@ -14,7 +14,7 @@ function zpwrEmacsFzf(){
         loggDebug "words='$mywords[1]'=>'$firstdir'"
         BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
         #:h takes aways last "
-        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
+        BUFFER="builtin cd $firstdir\"; $BUFFER; zpwrClearList;isGitDir && git diff HEAD"
         zle .accept-line
     fi
 }

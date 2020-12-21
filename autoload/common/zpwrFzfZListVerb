@@ -10,8 +10,8 @@ function zpwrFzfZListVerb(){
         return
     fi
 
-    print -sr -- "builtin cd \"$dir\" && clearList"
-    eval "builtin cd \"$dir\" && clearList"
+    print -sr -- "builtin cd \"$dir\" && zpwrClearList"
+    eval "builtin cd \"$dir\" && zpwrClearList"
 }
 
 zpwrFzfZListVerb "$@"

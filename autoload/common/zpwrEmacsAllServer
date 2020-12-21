@@ -17,7 +17,7 @@ function zpwrEmacsAllServer(){
     "$ZPWR_INSTALL/UltiSnips/"*.snippets \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
-    clearList
+    zpwrClearList
     isGitDir && git diff HEAD
 }
 

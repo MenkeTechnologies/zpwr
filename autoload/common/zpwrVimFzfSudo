@@ -17,7 +17,7 @@ function zpwrVimFzfSudo(){
         firstdir=${mywords[4]:h}
         #logg "words='$mywords[4]'=>'$firstdir'"
         #:h takes aways last "
-        BUFFER="cd $firstdir\"; $BUFFER; clearList"
+        BUFFER="cd $firstdir\"; $BUFFER; zpwrClearList"
         zle .accept-line
     fi
 }

@@ -71,7 +71,7 @@ export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command
 export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
-# exa command invoked from clearList shows extended attributes
+# exa command invoked from zpwrClearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # aliases expand in first position
 export ZPWR_EXPAND=true
@@ -165,9 +165,9 @@ fi
 #{{{                    MARK:NonZPWR
 #**************************************************************
 # command to run on enter key with empty buffer
-export MAGIC_ENTER_OTHER_COMMAND='clearList'
+export MAGIC_ENTER_OTHER_COMMAND='zpwrClearList'
 # command to run on enter key with empty buffer and git dir
-export MAGIC_ENTER_GIT_COMMAND='clearList; test -n "$(git status --porcelain)" && git status -u .'
+export MAGIC_ENTER_GIT_COMMAND='zpwrClearList; test -n "$(git status --porcelain)" && git status -u .'
 #}}}***********************************************************
 
 #{{{                    MARK:source lib file

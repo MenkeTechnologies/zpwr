@@ -138,7 +138,7 @@ evalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 # the location of zpwr init file
 evalIfNeeded ZPWR_LIB_INIT "$ZPWR_LIB_INIT" "$ZPWR_SCRIPTS/init.sh" "$ZPWR_SCRIPTS"
 # command for all fzf clearlist in preview pane
-evalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/clearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
+evalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/zpwrClearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 evalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_LOCAL"
 # emacs recent files

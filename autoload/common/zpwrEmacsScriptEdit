@@ -15,7 +15,7 @@ function zpwrEmacsScriptEdit(){
     loggDebug "builtin cd $ZPWR_SCRIPTS"
     eval "builtin cd $ZPWR_SCRIPTS"
 
-    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+    BUFFER="$BUFFER; zpwrClearList; isGitDir && git diff HEAD"
     loggDebug "$BUFFER"
     print -s -- "$BUFFER"
     eval "$BUFFER"

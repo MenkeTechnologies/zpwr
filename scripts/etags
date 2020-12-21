@@ -165,7 +165,7 @@ function zpwrVimFzf(){zpwrVimFzf770,25200
     mywords=(${(z)BUFFER})mywords774,25267
         firstdir=${mywords[1]:h}firstdir778,25366
         BUFFER="$EDITOR $BUFFER"BUFFER780,25452
-        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"BUFFER782,25516
+        BUFFER="builtin cd $firstdir\"; $BUFFER; zpwrClearList;isGitDir && git diff HEAD"BUFFER782,25516
 function zpwrFzfWordsearchVerbEdit(){zpwrFzfWordsearchVerbEdit787,25637
     sel=$(fz vim)sel790,25686
         BUFFER="$EDITOR $sel"BUFFER792,25731
@@ -217,7 +217,7 @@ function zpwrVimFzfSudo(){zpwrVimFzfSudo1004,31433
         LBUFFER="sudo -E vim $(zpwrFzvim)"LBUFFER1011,31576
     mywords=("${(z)BUFFER}")mywords1013,31622
         firstdir=${mywords[4]:h}firstdir1017,31723
-        BUFFER="cd $firstdir\"; $BUFFER; clearList"BUFFER1020,31836
+        BUFFER="cd $firstdir\"; $BUFFER; zpwrClearList"BUFFER1020,31836
 function zpwrIntoFzfAg(){zpwrIntoFzfAg1025,31923
     mywords=("${(z)BUFFER}")mywords1027,31946
         BUFFER="$BUFFER $(fz vim)"BUFFER1030,32031
@@ -693,7 +693,7 @@ function zpwrClearGitCache(){zpwrClearGitCache987,31456
 function about(){about999,31719
     old="$LESS"old1001,31738
     export LESS="$old"LESS1006,31867
-function clearList() {clearList1009,31893
+function zpwrClearList() {zpwrClearList1009,31893
             ls_command="$ZPWR_EXA_COMMAND"ls_command1013,31989
                 ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"ls_command1016,32077
                 ls_command="ls -iFlhAOd"ls_command1018,32172
@@ -1072,13 +1072,13 @@ tap="tap0"tap28,912
 
 /Users/wizard/.zpwr/scripts/c.pl,0
 
-/Users/wizard/.zpwr/scripts/clearList.sh,1304
+/Users/wizard/.zpwr/scripts/zpwrClearList.sh,1304
 isZsh(){isZsh10,332
     exists(){exists19,462
     exists(){exists27,659
 prettyPrint(){prettyPrint33,755
 ZPWR_EXA_COMMAND="command exa --git -il -F -H --extended --color-scale -g -a --colour=always"ZPWR_EXA_COMMAND44,942
-clearList() {clearList46,1037
+zpwrClearList() {zpwrClearList46,1037
             ls_command="$ZPWR_EXA_COMMAND"ls_command49,1123
                 ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"ls_command52,1211
                 ls_command="ls -iFlhAOd"ls_command54,1306

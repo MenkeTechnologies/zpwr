@@ -9,8 +9,8 @@ function zpwrFzfDirsearchVerb(){
     if [[ -z "$dir" ]]; then
         return
     fi
-    print -rs -- "builtin cd \"$dir\" && clearList"
-    eval "builtin cd \"$dir\" && clearList"
+    print -rs -- "builtin cd \"$dir\" && zpwrClearList"
+    eval "builtin cd \"$dir\" && zpwrClearList"
 }
 
 zpwrFzfDirsearchVerb "$@"

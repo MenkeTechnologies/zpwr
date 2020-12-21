@@ -14,10 +14,10 @@ function zpwrLocateFzf(){
         fi
         firstArg="${${(Az)sel}[1]//\"/}"
         if [[ -d "$firstArg" ]]; then
-            BUFFER="builtin cd \"$firstArg\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
+            BUFFER="builtin cd \"$firstArg\"; $EDITOR $sel; zpwrClearList; isGitDir && git diff HEAD; "
         else
             firstdir=${firstArg:h}
-            BUFFER="builtin cd \"$firstdir\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
+            BUFFER="builtin cd \"$firstdir\"; $EDITOR $sel; zpwrClearList; isGitDir && git diff HEAD; "
         fi
         zle .accept-line
     else

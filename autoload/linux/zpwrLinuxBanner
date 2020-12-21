@@ -60,5 +60,5 @@ if [[ "$UID" != "0" ]]; then
     fi
 else
     # root on linux
-    clearList
+    zpwrClearList
 fi

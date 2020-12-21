@@ -6,7 +6,7 @@ function zpwrVimEmacsConfig(){
     vim \
     "$ZPWR_INSTALL/.spacemacs" \
     "$ZPWR_INSTALL/emacs/snippets/"*-mode/*
-    clearList
+    zpwrClearList
     isGitDir && git diff HEAD
 }
 

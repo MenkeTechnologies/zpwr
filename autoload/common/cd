@@ -8,7 +8,7 @@ function cd(){
     # don't want to recursively call this function
     builtin cd "$@" || return 1
     if [[ $ZPWR_AUTO_LS_CD == true ]]; then
-        clearList
+        zpwrClearList
     fi
 }
 

@@ -37,5 +37,5 @@ if [[ "$1" == "--" ]]; then
     shift
 fi
 
-clearList "$@"
+zpwrClearList "$@"
 

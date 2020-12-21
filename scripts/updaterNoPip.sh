@@ -265,4 +265,4 @@ fi
 #decolorize prompt
 printf "Done\n\x1b[0m"
 
-exists clearList && clearList
+exists zpwrClearList && zpwrClearList

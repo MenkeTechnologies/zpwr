@@ -23,7 +23,7 @@ function zpwrGetrc(){
         #fi
 
         #if [[ $REPLY != "y" ]]; then
-            #clearList
+            #zpwrClearList
             #return 0
         #fi
     #fi

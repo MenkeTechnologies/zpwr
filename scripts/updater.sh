@@ -289,4 +289,4 @@ commandExists brew && {
 #decolorize prompt
 prettyPrint "Done"
 
-exists clearList && clearList
+exists zpwrClearList && zpwrClearList

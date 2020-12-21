@@ -604,7 +604,7 @@ function gitRepoUpdater() {
     fi
 }
 
-function clearList() {
+function zpwrClearList() {
 
     local FOUND out out2 ls_command lib_command rank loc arg
 

@@ -11,7 +11,7 @@ function ___cv() {
 
     firstArg="${${(Az)@}[1]//\"/}"
     firstdir=${firstArg:h}
-    BUFFER="builtin cd \"$firstdir\"; $EDITOR ""$@""; clearList; isGitDir && git diff HEAD; "
+    BUFFER="builtin cd \"$firstdir\"; $EDITOR ""$@""; zpwrClearList; isGitDir && git diff HEAD; "
     logg "$BUFFER"
     eval "$BUFFER"
 }

@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-# clearList ;<tab>
+# zpwrClearList ;<tab>
 function ___fzf_complete_clearList() {
 
     FZF_COMPLETION_OPTS=$FZF_ENV_OPTS _fzf_complete '-m' "$@" < <(

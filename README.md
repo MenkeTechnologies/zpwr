@@ -97,8 +97,8 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - shell function uses same shell code to generate output that default FZF preview pane does with `zpwr cat` or `c`
 - shell function automatically runs sudo when file is not readable with `zpwr cat` or `c`
 - shell function that cds to any of parent directories with zsh completion with `zpwr cdup` or `r`
-- clearList function that run clear and ls and show stats for commands, files, aliases, functions etc
-- color-coded, grouped clearList zsh completion
+- zpwrClearList function that run clear and ls and show stats for commands, files, aliases, functions etc
+- color-coded, grouped zpwrClearList zsh completion
 - search google from tmux mouse drag selection (tmux's copy-mode-vi)
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
 - zpwr subcommands count with `zpwr verbscount`
@@ -376,7 +376,7 @@ export ZPWR_DELIMITER_CHAR='%'
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command
 export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
-# exa command invoked from clearList shows extended attributes
+# exa command invoked from zpwrClearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # aliases expand in first position
 export ZPWR_EXPAND=true
@@ -524,7 +524,7 @@ evalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 # the location of zpwr init file
 evalIfNeeded ZPWR_LIB_INIT "$ZPWR_LIB_INIT" "$ZPWR_SCRIPTS/init.sh" "$ZPWR_SCRIPTS"
 # command for all fzf clearlist in preview pane
-evalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/clearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
+evalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/zpwrClearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
 evalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_LOCAL"
 # emacs recent files

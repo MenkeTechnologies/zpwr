@@ -15,7 +15,7 @@ function zpwrEmacsAllEdit(){
     loggDebug "builtin cd $ZPWR"
     eval "builtin cd $ZPWR"
 
-    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+    BUFFER="$BUFFER; zpwrClearList; isGitDir && git diff HEAD"
     loggDebug "$BUFFER"
     print -s -- "$BUFFER"
     eval "$BUFFER"
