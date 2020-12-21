@@ -17,12 +17,11 @@ function zpwrBindOverrideZLE(){
     zle -N bracketed-paste bracketed-paste-magic
     zle -N zpwrExpandAliasAccept
     zle -N zpwrRationalizeDot
-    zle -N downTen
     zle -N zpwrSelfInsert
     zle -N zpwrLastWordDouble
     zle -N zpwrFzfCommits
-    zle -N updater
-    zle -N runner
+    zle -N zpwrUpdater
+    zle -N zpwrRunner
     zle -N zpwrIntoFzf
     zle -N zpwrIntoFzfAg
     zle -N zpwrEmacsFzf
@@ -43,13 +42,12 @@ function zpwrBindOverrideZLE(){
     zle -N zpwrVimAllWidgetAccept
     zle -N zpwrVerbsWidget
     zle -N zpwrVerbsWidgetAccept
-    zle -N updater
+    zle -N zpwrUpdater
     zle -N zpwrUp8widget
     zle -N sub
     zle -N dbz
     zle -N zpwrSshRegain
     zle -N zpwrTutsUpdate
-    zle -N subLine
     zle -N zpwrChangeQuotes
     zle -N zpwrAlternateQuotes
     zle -N zpwrClipboard
@@ -80,8 +78,8 @@ function zpwrBindOverrideZLE(){
 
     bindkey -M vicmd "^W" zpwrDeleteLastWord
 
-    bindkey -M viins "\e^O" runner
-    bindkey -M vicmd "\e^O" runner
+    bindkey -M viins "\e^O" zpwrRunner
+    bindkey -M vicmd "\e^O" zpwrRunner
 
     bindkey -M viins "\e^P" zpwrUp8widget
     bindkey -M vicmd "\e^P" zpwrUp8widget
@@ -249,12 +247,12 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
         if [[ "$ZPWR_PARENT_PROCESS" == *(login|tmux)* ]]; then
             #Ctrl plus arrow keys
             bindkey '\e[1;5A' gacpCheckDiff
-            bindkey '\e[1;5B' updater
+            bindkey '\e[1;5B' zpwrUpdater
             bindkey '\e[1;5C' zpwrTutsUpdate
             bindkey '\e[1;5D' dbz
         else
             bindkey '\e[5A' gacpCheckDiff
-            bindkey '\e[5B' updater
+            bindkey '\e[5B' zpwrUpdater
             bindkey '\e[5C' zpwrTutsUpdate
             bindkey '\e[5D' dbz
         fi
