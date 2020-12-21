@@ -23,6 +23,9 @@ function zpwrBindVerbs(){
             emacs*)
                 zpwrEmacsVerbs+=("$k:$v")
                 ;;
+            *learn*|searchl*|se|ser|see*|sef)
+                zpwrLearnVerbs+=("$k:$v")
+                ;;
             regen*)
                 zpwrRegenVerbs+=("$k:$v")
                 ;;
@@ -52,9 +55,6 @@ function zpwrBindVerbs(){
                 ;;
             cd*|*cd|home*)
                 zpwrCdVerbs+=("$k:$v")
-                ;;
-            *learn*|searchl*|se|ser|see*|sef)
-                zpwrLearnVerbs+=("$k:$v")
                 ;;
             *)
                 zpwrMiscVerbs+=("$k:$v")
