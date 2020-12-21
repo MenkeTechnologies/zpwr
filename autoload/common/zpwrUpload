@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___upload(){
+function zpwrUpload(){
 
     if [[ -z "$2" ]]; then
         loggErr "usage: upload <file> <URL>"
@@ -9,4 +9,4 @@ function ___upload(){
     command curl -vvv -fsSL -F file=@"$1" http://"$2"
 }
 
-___upload "$@"
+zpwrUpload "$@"

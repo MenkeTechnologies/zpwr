@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___backup(){
+function zpwrBackup(){
 
     if [[ -z "$1" ]]; then
         loggErr "usage: backup <file>"
@@ -16,4 +16,4 @@ function ___backup(){
         "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
 }
 
-___backup "$@"
+zpwrBackup "$@"

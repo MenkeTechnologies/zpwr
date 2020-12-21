@@ -1,9 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function rename(){
+function zpwrRename(){
 
     if [[ -z "$2" ]]; then
-        loggErr "usage: rename <search> <file...>"
+        loggErr "usage: zpwrRename <search> <file...>"
         return 1
     fi
 
@@ -21,4 +21,4 @@ function rename(){
     done
 }
 
-rename "$@"
+zpwrRename "$@"
