@@ -4,6 +4,11 @@ function ___hc(){
 
     local repoName old_dir
 
+    if ! commandExists hub; then
+        loggErr "You need the 'hub' command or repo creation."
+        return 1
+    fi
+
     if [[ -z "$1" ]]; then
         repoName="$(basename "$(pwd)")" ||
     else
@@ -17,13 +22,15 @@ function ___hc(){
     printf "\x1b[1m"
 
     git init
-    hub create "$repoName"
-    echo "# $repoName" > README.md
-    echo "# created by $ZPWR_GITHUB_ACCOUNT" >> README.md
-    git add .
-    git commit -m "first commit"
-    git push --set-upstream origin master
-    printf "\x1b[0m"
+
+    if hub create "$repoName"; then
+        echo "# $repoName" > README.md
+        echo "# created by $ZPWR_GITHUB_ACCOUNT" >> README.md
+        git add .
+        git commit -m "first commit"
+        git push --set-upstream origin master
+        printf "\x1b[0m"
+    fi
 }
 
 ___hc "$@"
