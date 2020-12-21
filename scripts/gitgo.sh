@@ -28,7 +28,7 @@
 # X. 9 `   '  P )X
 # `b `       '  d'
 
-#GITHUB_ACCOUNT environment variable needed for the script to create a remote repository
+#ZPWR_GITHUB_ACCOUNT environment variable needed for the script to create a remote repository
 
 
 #{{{                    MARK:Functions
@@ -100,7 +100,7 @@ function getRemoteDetails() {
         read ORGIN_NAME
     fi
     #concat url from variables
-    local URL="https://github.com/$GITHUB_ACCOUNT/$REPO_NAME_TO_CREATE"
+    local URL="https://github.com/$ZPWR_GITHUB_ACCOUNT/$REPO_NAME_TO_CREATE"
     #add the remote repository
     git remote add "$ORGIN_NAME" "$URL" 2>/dev/null
     getInitialCommit
