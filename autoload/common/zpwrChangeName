@@ -1,0 +1,47 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrChangeName(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrChangeName <files...>"
+        return 1
+    fi
+    local oldName newName arg
+
+    for arg; do
+        oldName="$arg"
+        newName="zpwr${oldName:0:1:u}${oldName:1}"
+
+        echo "mv $oldName $newName;
+        perl -i -pe 's@\b___'$oldName'\b@quotemeta($newName)@ge' **/*(.);
+        perl -i -pe 's@\b'$oldName'\b@quotemeta($newName)@ge' **/*(.);
+        less $newName"
+
+        if zpwrConfirm; then
+
+            echo
+
+            if [[ -f "$oldName" ]]; then
+                prettyPrint "mv $oldName $newName"
+                mv "$oldName" "$newName"
+            fi
+
+            perl -i -pe 's@\b___'"$oldName"'\b@quotemeta('"$newName"')@ge' \
+                "$ZPWR/"**/*~"$ZPWR/".git/**(.)
+            perl -i -pe 's@\b'"$oldName"'\b@quotemeta('"$newName"')@ge' \
+                "$ZPWR/"**/*~"$ZPWR/".git/**(.)
+
+            if [[ -f "$newName" ]]; then
+                prettyPrint "less $newName"
+                less "$newName"
+            fi
+        fi
+
+        echo
+
+    done
+
+
+}
+
+zpwrChangeName "$@"

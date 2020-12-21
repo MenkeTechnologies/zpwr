@@ -46,6 +46,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[cd]='zpwrCd=cd to directory arg'
     ZPWR_VERBS[cdup]='zpwrCdUp=cd up tree to directory arg'
     ZPWR_VERBS[cfasd]='fasdFListVerb=c the fasd frecency ranked file'
+    ZPWR_VERBS[changename]='zpwrChangeName=mv into zpwr namespace and sed sub all occurrences'
     ZPWR_VERBS[clean]='zpwrClean=clear all $ZPWR_DIRS_CLEAN'
     ZPWR_VERBS[cleanall]='zpwrCleanAll=clear all $ZPWR_DIRS_CLEAN, temp and cache'
     ZPWR_VERBS[cleancache]='cleanCache=clean all zpwr cache files'
