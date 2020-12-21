@@ -1,8 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function __findFzfEditNoZLEVim(){
-
-    findFzfEditNoZLE "$EDITOR"
-}
-
-__findFzfEditNoZLEVim "$@"

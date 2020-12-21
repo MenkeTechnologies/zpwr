@@ -35,7 +35,7 @@ function zpwrUpdate(){
 
     builtin cd "$ZPWR"
     bash "$ZPWR_BANNER_SCRIPT"
-    linkConf
+    zpwrLinkConf
 
     completionDir="$ZSH_CUSTOM/plugins"
     gitRepoUpdater "$completionDir"

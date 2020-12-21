@@ -1,0 +1,24 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrJetbrainsWorkspaceEdit(){
+
+    perl -E 'say "_"x100'
+    prettyPrint "MONITORING WORKSPACE..."
+    perl -E 'say "_"x100'
+    while true; do
+        if command grep -q '<component name="RunManager" selected=' \
+            .idea/workspace.xml; then
+            perl -E 'say "_"x100' | lolcat
+            figletRandomFontOnce.sh "MATCH ENJOY>>>>" \
+            | ponysay -W 120
+            perl -E 'say "_"x100' | lolcat
+            sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
+
+        else
+            loggErr "No Match Yet" 
+            sleep 1
+        fi
+    done
+}
+
+zpwrJetbrainsWorkspaceEdit "$@"

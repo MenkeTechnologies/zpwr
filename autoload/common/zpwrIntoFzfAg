@@ -1,0 +1,20 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrIntoFzfAg(){
+
+    local firstdir editor mywords
+
+    mywords=("${(z)BUFFER}")
+
+    if echo ${mywords[1]} | command grep -sq vim; then
+        BUFFER="$BUFFER $(zpwrAgIntoFzf vim)"
+    else
+        BUFFER="$BUFFER $(zpwrAgIntoFzf)"
+    fi
+
+    BUFFER=${BUFFER:s@  @ @}
+
+    CURSOR=$#BUFFER
+}
+
+zpwrIntoFzfAg "$@"

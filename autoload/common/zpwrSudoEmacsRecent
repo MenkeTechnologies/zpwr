@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrSudoEmacsRecent(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    zpwrSudoEditorRecent "$ZPWR_EMACS_CLIENT"
+}
+
+zpwrSudoEmacsRecent "$@"

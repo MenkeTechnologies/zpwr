@@ -1,9 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function ___intoFzf(){
-
-    LBUFFER="$LBUFFER |& $ZPWR_FZF -m --border --ansi"
-    zle .accept-line
-}
-
-___intoFzf "$@"

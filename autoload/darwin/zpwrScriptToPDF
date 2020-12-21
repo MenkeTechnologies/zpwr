@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrScriptToPDF(){
+
+    local tempFile
+
+    tempFile="$HOME/__test.ps"
+    vim "$1" -c "hardcopy > $tempFile" -c quitall
+    cat "$tempFile" | open -fa Preview
+    rm "$tempFile"
+}
+
+zpwrScriptToPDF "$@"

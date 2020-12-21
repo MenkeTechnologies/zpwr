@@ -3,7 +3,7 @@
 function ___self-insert() {
 
   zle .self-insert
-  keySender $KEYS
+  zpwrKeySender $KEYS
 }
 
 ___self-insert "$@"

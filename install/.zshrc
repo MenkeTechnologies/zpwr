@@ -425,7 +425,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     done
 
     for p in $ZPWR_OMZ_LIBS; do
-        zinit ice lucid nocompile wait atload='omzOverrides'
+        zinit ice lucid nocompile wait atload='zpwrOmzOverrides'
         zinit snippet OMZ::lib/$p
     done
 

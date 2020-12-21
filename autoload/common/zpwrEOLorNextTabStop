@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEOLorNextTabStop(){
+
+    local lenToFirstTS
+
+    lenToFirstTS=${#BUFFER%%$ZPWR_TABSTOP*}
+    if (( $lenToFirstTS < ${#BUFFER} )); then
+        CURSOR=$lenToFirstTS
+        RBUFFER=${RBUFFER:$#ZPWR_TABSTOP}
+    else
+        if [[ $BUFFER[-1] = ";" ]]; then
+            BUFFER+=" "
+        else
+            BUFFER+=" "
+        fi
+        CURSOR=$#BUFFER
+        zle vi-insert
+    fi
+}
+
+zpwrEOLorNextTabStop "$@"

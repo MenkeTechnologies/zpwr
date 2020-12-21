@@ -58,7 +58,7 @@ EOF
 
     clion .
 
-    jetbrainsWorkspaceEdit "$dir"
+    zpwrJetbrainsWorkspaceEdit "$dir"
 
 }
 

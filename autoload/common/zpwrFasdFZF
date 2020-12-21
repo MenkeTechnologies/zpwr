@@ -1,0 +1,17 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFasdFZF(){
+
+    local mywords
+
+    BUFFER="$BUFFER $(zpwrFasdFList)"
+    mywords=(${(z)BUFFER})
+
+    if (( $#mywords == 1 )); then
+        :
+    else
+        zle .accept-line
+    fi
+}
+
+zpwrFasdFZF "$@"

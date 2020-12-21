@@ -1,9 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___scriptToPDF(){
+function zpwrScriptToPDF(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: scriptToPDF <script>"
+        loggErr "usage: zpwrScriptToPDF <script>"
         return 1
     fi
     local tempFile
@@ -14,4 +14,4 @@ function ___scriptToPDF(){
     ps2pdf "$tempFile" "${1%%.*}".pdf
     rm "$tempFile"
 }
-___scriptToPDF "$@"
+zpwrScriptToPDF "$@"

@@ -1,8 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function ___sudoVimRecent(){
-
-    sudoEditorRecent "$EDITOR"
-}
-
-___sudoVimRecent "$@"

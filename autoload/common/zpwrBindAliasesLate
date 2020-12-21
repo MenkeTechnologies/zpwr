@@ -170,8 +170,8 @@ function zpwrBindAliasesLate(){
         alias q="qlmanage -p &>/dev/null"
         # keep remote tty sessions alive by stopping sleep
         # sudo pmset -c ttyskeepawake 1
-        alias v1="open -a 'vnc viewer';execpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
-        alias v2="open -a 'vnc viewer';execpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
+        alias v1="open -a 'vnc viewer';zpwrExecpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
+        alias v2="open -a 'vnc viewer';zpwrExecpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
         alias rtsync="$ZPWR_SCRIPTS_MAC/rsyncr.sh"
         alias xg='cd $HOME/Documents/xcode'
         alias ap='cd /Applications'
@@ -268,15 +268,15 @@ function zpwrBindAliasesLate(){
 
     #{{{                          MARK:PYTHON ZPWR_SCRIPTS
     #**************************************************************
-    alias tmm='execpy tmux_starter.py'
-    alias tmms="execpy ssh_starter.py"
-    alias tmm_notabs="execpy complete_ssh_starter.py;"
-    alias tmm_full="execpy tabs.py; execpy complete_ssh_starter.py"
-    alias mapit="execpy mapIt.py"
-    alias ,,="execpy amazonSearch.py"
-    alias shutpy="execpy shutdown.py"
-    alias pb="execpy bills.py"
-    alias ud=" execpy udemy.py"
+    alias tmm='zpwrExecpy tmux_starter.py'
+    alias tmms="zpwrExecpy ssh_starter.py"
+    alias tmm_notabs="zpwrExecpy complete_ssh_starter.py;"
+    alias tmm_full="zpwrExecpy tabs.py; zpwrExecpy complete_ssh_starter.py"
+    alias mapit="zpwrExecpy mapIt.py"
+    alias ,,="zpwrExecpy amazonSearch.py"
+    alias shutpy="zpwrExecpy shutdown.py"
+    alias pb="zpwrExecpy bills.py"
+    alias ud=" zpwrExecpy udemy.py"
     alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit0} if /inet\\s/ and !/127/'"
     alias pgrep='pgrep -l'
     alias jobs="jobs -l"
@@ -286,8 +286,8 @@ function zpwrBindAliasesLate(){
     alias exa="$ZPWR_EXA_COMMAND"
     exists hexedit && alias he='hexedit -l 16'
     alias fh='f !$'
-    alias gh=openmygh
-    eval "alias $ZPWR_GITHUB_ACCOUNT='openmygh $ZPWR_GITHUB_ACCOUNT'"
+    alias gh=zpwrOpenmygh
+    eval "alias $ZPWR_GITHUB_ACCOUNT='zpwrOpenmygh $ZPWR_GITHUB_ACCOUNT'"
     alias mus="cd $HOME/Music"
 
     #}}}***********************************************************

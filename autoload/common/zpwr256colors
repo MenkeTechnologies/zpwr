@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwr256colors(){
+
+    local i
+
+    if [[ -z "$1" ]]; then
+        for i in {0..255};do
+            printf "\x1b[48;5;${i};37m    $i    "
+        done
+    else
+        for i in {0..255};do
+            printf "\x1b[38;5;${i}m    $i   $@"
+        done
+    fi
+    printf "\n"
+}
+
+zpwr256colors "$@"

@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFindFzfNoZLEEmacs(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    zpwrFindFzfNoZLE "$ZPWR_EMACS_CLIENT"
+}
+
+zpwrFindFzfNoZLEEmacs "$@"

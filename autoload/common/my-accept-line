@@ -20,9 +20,9 @@ function my-accept-line () {
 
     ZPWR_WILL_CLEAR=false
     if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
-        keyClear
+        zpwrKeyClear
     else
-        if ! [[ $BUFFER == *stopSend* ]]; then
+        if ! [[ $BUFFER == *zpwrStopSend* ]]; then
             for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
                 tmux send-keys -t $pane "C-m"
             done

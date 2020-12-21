@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrExecpy(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrExecpy <file>"
+        return 1
+    fi
+
+    local script
+
+    script="$1"
+    shift
+
+    if [[ ! -f "$PYSCRIPTS/$script" ]]; then
+        loggErr "$PYSCRIPTS/$script does not exist!"
+        return 1
+    fi
+    python3 "$PYSCRIPTS/$script" "$@"
+
+}
+
+zpwrExecpy "$@"

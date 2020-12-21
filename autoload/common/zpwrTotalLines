@@ -1,0 +1,53 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTotalLines(){
+
+    if ! isGitDir; then
+       loggNotGit
+       return 1
+    fi
+
+    local filter lineCount
+
+    prettyPrint "starting total line count..."
+    {
+
+    while read; do
+        isBinary "$REPLY" && continue
+        filter=false
+        for arg in "$@"; do
+           if echo "$REPLY" | command grep -sq "$arg"; then
+               filter=true
+               break
+           fi
+        done
+
+        if [[ $filter = false ]]; then
+            cat "$REPLY"
+        fi
+    done < <(git ls-files) 2>/dev/null
+
+    } > "$ZPWR_TEMPFILE"
+
+    if ! test -f "$ZPWR_TEMPFILE"; then
+        printf "\x1b[0;1;31m"
+        loggErr "where is $ZPWR_TEMPFILE" 
+        printf "\x1b[0m"
+        return 1
+    fi
+
+    prettyPrint "Total Line Count"
+    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
+    if (( $lineCount > 10 )); then
+        echo "$lineCount" |
+            perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            alternatingPrettyPrint | less -r
+    else
+        echo "$lineCount" |
+            perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            alternatingPrettyPrint
+    fi
+    command rm "$ZPWR_TEMPFILE"
+}
+
+zpwrTotalLines "$@"

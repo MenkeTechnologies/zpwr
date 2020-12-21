@@ -1,9 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function ___regenGtagsCtags(){
-
-    regenGtagsType ctags
-
-}
-
-___regenGtagsCtags "$@"

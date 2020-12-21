@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrRegenHistory() {
+
+    prettyPrint "Regen $HISTFILE"
+    (
+        builtin cd "$HOME"
+        command mv "$HISTFILE" .zsh_history_bad
+        command strings .zsh_history_bad > "$HISTFILE"
+        builtin fc -R ."$HISTFILE"
+        command rm -rf .zsh_history_bad
+    )
+}
+
+zpwrRegenHistory "$@"

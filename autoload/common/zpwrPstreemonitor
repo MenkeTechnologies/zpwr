@@ -1,0 +1,9 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrPstreemonitor(){
+
+    bash $ZPWR_SCRIPTS/myWatchNoBlink.sh \
+    "pstree -g 2 -u $USER | sed s@$USER@@ | sed s@/.*/@@ | tail -75"
+}
+
+zpwrPstreemonitor "$@"

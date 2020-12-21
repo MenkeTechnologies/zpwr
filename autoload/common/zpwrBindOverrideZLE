@@ -15,16 +15,16 @@ function zpwrBindOverrideZLE(){
     zle -N select-bracketed
     zle -N select-quoted
     zle -N bracketed-paste bracketed-paste-magic
-    zle -N expandAliasAccept
+    zle -N zpwrExpandAliasAccept
     zle -N rationalize-dot
     zle -N downTen
     zle -N self-insert
-    zle -N lastWordDouble
+    zle -N zpwrLastWordDouble
     zle -N fzfCommits
     zle -N updater
     zle -N runner
-    zle -N intoFzf
-    zle -N intoFzfAg
+    zle -N zpwrIntoFzf
+    zle -N zpwrIntoFzfAg
     zle -N emacsFzf
     zle -N vimFzf
     zle -N vimFzfSudo
@@ -33,12 +33,12 @@ function zpwrBindOverrideZLE(){
     zle -N deleteLastWord
     zle -N lsoffzf
     zle -N fzfVimKeybind
-    zle -N fzfAllKeybind
+    zle -N zpwrFzfAllKeybind
     zle -N locateFzf
     zle -N locateFzfEdit
     zle -N fzfEnv
-    zle -N fasdFZF
-    zle -N asVar
+    zle -N zpwrFasdFZF
+    zle -N zpwrAsVar
     zle -N zpwrVimAllWidget
     zle -N zpwrVimAllWidgetAccept
     zle -N zpwrVerbsWidget
@@ -47,13 +47,13 @@ function zpwrBindOverrideZLE(){
     zle -N up8widget
     zle -N sub
     zle -N dbz
-    zle -N sshRegain
-    zle -N tutsUpdate
+    zle -N zpwrSshRegain
+    zle -N zpwrTutsUpdate
     zle -N subLine
     zle -N changeQuotes
-    zle -N alternateQuotes
+    zle -N zpwrAlternateQuotes
     zle -N clipboard
-    zle -N EOLorNextTabStop
+    zle -N zpwrEOLorNextTabStop
     zle -N zpwrFzfSurround
 
     bindkey -M vicmd '^I' expand-or-complete-with-dots
@@ -68,8 +68,8 @@ function zpwrBindOverrideZLE(){
 
     bindkey -M viins '^[^M' self-insert-unmeta
 
-    bindkey -M viins '^P' EOLorNextTabStop
-    bindkey -M vicmd '^P' EOLorNextTabStop
+    bindkey -M viins '^P' zpwrEOLorNextTabStop
+    bindkey -M vicmd '^P' zpwrEOLorNextTabStop
 
     bindkey -M vicmd G end-of-buffer-or-history
 
@@ -104,8 +104,8 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^F^F' fzf-file-widget
     bindkey -M vicmd '^F^F' fzf-file-widget
 
-    bindkey -M viins '^F^D' intoFzf
-    bindkey -M vicmd '^F^D' intoFzf
+    bindkey -M viins '^F^D' zpwrIntoFzf
+    bindkey -M vicmd '^F^D' zpwrIntoFzf
 
     bindkey -M viins '^F^H' lsoffzf
     bindkey -M vicmd '^F^H' lsoffzf
@@ -129,11 +129,11 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^F^N' zpwrVerbsWidget
     bindkey -M vicmd '^F^N' zpwrVerbsWidget
 
-    bindkey -M viins '^F^G' intoFzfAg
-    bindkey -M vicmd '^F^G' intoFzfAg
+    bindkey -M viins '^F^G' zpwrIntoFzfAg
+    bindkey -M vicmd '^F^G' zpwrIntoFzfAg
 
-    bindkey -M viins '^F^R' asVar
-    bindkey -M vicmd '^F^R' asVar
+    bindkey -M viins '^F^R' zpwrAsVar
+    bindkey -M vicmd '^F^R' zpwrAsVar
 
     bindkey -M viins '^V//' locateFzf
     bindkey -M vicmd '^V//' locateFzf
@@ -141,8 +141,8 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^V/.' locateFzfEdit
     bindkey -M vicmd '^V/.' locateFzfEdit
 
-    bindkey -M viins '^V.' fzfAllKeybind
-    bindkey -M vicmd '^V.' fzfAllKeybind
+    bindkey -M viins '^V.' zpwrFzfAllKeybind
+    bindkey -M vicmd '^V.' zpwrFzfAllKeybind
 
     bindkey -M viins '^Vk' fzfVimKeybind
     bindkey -M viins '^Vk' fzfVimKeybind
@@ -162,8 +162,8 @@ function zpwrBindOverrideZLE(){
     }
 
     exists fasd && {
-        bindkey -M viins '^V^F' fasdFZF
-        bindkey -M vicmd '^V^F' fasdFZF
+        bindkey -M viins '^V^F' zpwrFasdFZF
+        bindkey -M vicmd '^V^F' zpwrFasdFZF
     }
 
     exists z && {
@@ -185,8 +185,8 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^V^K' emacsFzf
     bindkey -M vicmd '^V^K' emacsFzf
 
-    bindkey -M viins '^Q' lastWordDouble
-    bindkey -M vicmd '^Q' lastWordDouble
+    bindkey -M viins '^Q' zpwrLastWordDouble
+    bindkey -M vicmd '^Q' zpwrLastWordDouble
 
     bindkey -M viins '^V^Z' fzf-history-widget
     bindkey -M vicmd '^V^Z' fzf-history-widget
@@ -211,8 +211,8 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^F^L' list-choices
     bindkey -M vicmd '^F^L' list-choices
 
-    bindkey -M viins '^F^K' alternateQuotes
-    bindkey -M vicmd '^F^K' alternateQuotes
+    bindkey -M viins '^F^K' zpwrAlternateQuotes
+    bindkey -M vicmd '^F^K' zpwrAlternateQuotes
 
     bindkey -M viins '\e^D' capitalize-word
     bindkey -M vicmd '\e^D' capitalize-word
@@ -233,8 +233,8 @@ function zpwrBindOverrideZLE(){
     bindkey '\e^f' sub
 
 #bound to escape spacebar
-    bindkey -M vicmd '\e ' sshRegain
-    bindkey -M viins '\e ' sshRegain
+    bindkey -M vicmd '\e ' zpwrSshRegain
+    bindkey -M viins '\e ' zpwrSshRegain
 
 #F1 key
     bindkey '\eOP' up8widget
@@ -251,12 +251,12 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
             #Ctrl plus arrow keys
             bindkey '\e[1;5A' gacpCheckDiff
             bindkey '\e[1;5B' updater
-            bindkey '\e[1;5C' tutsUpdate
+            bindkey '\e[1;5C' zpwrTutsUpdate
             bindkey '\e[1;5D' dbz
         else
             bindkey '\e[5A' gacpCheckDiff
             bindkey '\e[5B' updater
-            bindkey '\e[5C' tutsUpdate
+            bindkey '\e[5C' zpwrTutsUpdate
             bindkey '\e[5D' dbz
         fi
     fi

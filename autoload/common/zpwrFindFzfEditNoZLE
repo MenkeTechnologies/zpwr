@@ -1,0 +1,29 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFindFzfEditNoZLE(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrFindFzfEditNoZLE <editor>"
+        return 1
+    fi
+
+    local firstArg sel editor
+
+    editor="$1"
+    sel="$(getFound)"
+
+    firstArg="${${(Az)sel}[1]//\"/}"
+    if [[ -d "$firstArg" ]]; then
+        BUFFER="cd $firstArg;$editor $sel"
+    else
+        BUFFER="$editor $sel"
+    fi
+
+    if [[ -n "$sel" ]]; then
+        print -zr -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+zpwrFindFzfEditNoZLE "$@"

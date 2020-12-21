@@ -7,7 +7,7 @@
 ##### Purpose: bash script to document
 ##### Notes:
 #}}}***********************************************************
-function allRemotes() {
+function zpwrAllRemotes() {
 
     while read; do
         printf "\x1b[1;34m$REPLY"
@@ -106,7 +106,7 @@ EOF
     #if [[ -d "$ZPWR" ]]; then
     #if cd "$ZPWR";then
     #{
-    #allRemotes
+    #zpwrAllRemotes
     #} | perl -pe 's@(.*)@\x1b[31m$1@'
 
     #fi

@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrAsVar(){
+
+    region_highlight=("P0 20 fg=blue,bg=red")
+    BUFFER="=\"\$($BUFFER)\""
+    CURSOR=0
+}
+
+zpwrAsVar "$@"

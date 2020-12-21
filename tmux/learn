@@ -23,4 +23,4 @@ selectp -t 1
 send-keys "sef" C-m
 
 selectp -t 2
-send-keys "se; startSend 1" C-m
+send-keys "se; zpwrStartSend 1" C-m

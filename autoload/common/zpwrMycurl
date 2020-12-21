@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrMycurl(){
+
+    command curl -fsSL -A \
+    "Mozilla/5.0 (Windows; U; Windows NT 5.1; de; rv:1.9.2.3) Gecko/20100401 Firefox/3.6.3" -v "$@" 2>&1 |
+    command sed "/^*/d" | sed -E "s@(<|>) @@g" |
+    sed -E "/^(\{|\}| ) (\[|C)/d"
+}
+
+zpwrMycurl "$@"

@@ -223,9 +223,9 @@ documentation for details on how to change the font.
 ## Updating
 `zpwr updateall` (`zua`) links all zpwr config files, updates zpwr and zsh plugins, regens all caches and updates all dependencies. 
 
-### zpwr update and linkConf functions
+### zpwr update and zpwrLinkConf functions
 There is a shell function called `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`, links all zpwr config files and updates all zsh plugins.
-It invokes `zpwr regenconfiglinks` (`linkConf`) which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` and some other miscellaneous configuration files into `$HOME`.
+It invokes `zpwr regenconfiglinks` (`zpwrLinkConf`) which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` and some other miscellaneous configuration files into `$HOME`.
 
 ## Tmux prefix
 The default tmux prefix key is C-a (control-a) on macOS so one can control inner tmux sessions (inside tmux session login to another computer and attach to its tmux session) on Linux/UNIX (prefix is C-b) separately.
@@ -892,17 +892,17 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^C" self-insert ```
 - ``` bindkey -M viins "^D" list-choices ```
 - ``` bindkey -M viins "^E" end-of-line ```
-- ``` bindkey -M viins "^F^D" intoFzf ```
+- ``` bindkey -M viins "^F^D" zpwrIntoFzf ```
 - ``` bindkey -M viins "^F^F" fzf-file-widget ```
-- ``` bindkey -M viins "^F^G" intoFzfAg ```
+- ``` bindkey -M viins "^F^G" zpwrIntoFzfAg ```
 - ``` bindkey -M viins "^F^H" lsoffzf ```
 - ``` bindkey -M viins "^F^J" zpwrVerbsWidgetAccept ```
-- ``` bindkey -M viins "^F^K" alternateQuotes ```
+- ``` bindkey -M viins "^F^K" zpwrAlternateQuotes ```
 - ``` bindkey -M viins "^F^L" list-choices ```
 - ``` bindkey -M viins "^F^M" zzcomplete ```
 - ``` bindkey -M viins "^F^N" zpwrVerbsWidget ```
 - ``` bindkey -M viins "^F^P" basicSedSub ```
-- ``` bindkey -M viins "^F^R" asVar ```
+- ``` bindkey -M viins "^F^R" zpwrAsVar ```
 - ``` bindkey -M viins "^F^S" gitFunc ```
 - ``` bindkey -M viins "^F^V" edit-command-line ```
 - ``` bindkey -M viins "^G" what-cursor-position ```
@@ -914,13 +914,13 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^M" magic-enter ```
 - ``` bindkey -M viins "^N" sudo-command-line ```
 - ``` bindkey -M viins "^O" fzf-tab-complete ```
-- ``` bindkey -M viins "^P" EOLorNextTabStop ```
-- ``` bindkey -M viins "^Q" lastWordDouble ```
+- ``` bindkey -M viins "^P" zpwrEOLorNextTabStop ```
+- ``` bindkey -M viins "^Q" zpwrLastWordDouble ```
 - ``` bindkey -M viins "^R" redo ```
 - ``` bindkey -M viins "^S" gitFuncNoCheck ```
 - ``` bindkey -M viins "^T" transpose-chars ```
 - ``` bindkey -M viins "^U" clearLine ```
-- ``` bindkey -M viins "^V^F" fasdFZF ```
+- ``` bindkey -M viins "^V^F" zpwrFasdFZF ```
 - ``` bindkey -M viins "^V^G" fzf-cd-widget ```
 - ``` bindkey -M viins "^V^K" emacsFzf ```
 - ``` bindkey -M viins "^V^N" vimFzfSudo ```
@@ -929,7 +929,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^V^V" vimFzf ```
 - ``` bindkey -M viins "^V^Z" fzf-history-widget ```
 - ``` bindkey -M viins "^V," fzfEnv ```
-- ``` bindkey -M viins "^V." fzfAllKeybind ```
+- ``` bindkey -M viins "^V." zpwrFzfAllKeybind ```
 - ``` bindkey -M viins "^V/." locateFzfEdit ```
 - ``` bindkey -M viins "^V//" locateFzf ```
 - ``` bindkey -M viins "^Vc" fzfCommits ```
@@ -959,7 +959,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[^T" transpose-words ```
 - ``` bindkey -M viins "^[^U" up-case-word ```
 - ``` bindkey -M viins "^[^[" sudo-command-line ```
-- ``` bindkey -M viins "^[ " sshRegain ```
+- ``` bindkey -M viins "^[ " zpwrSshRegain ```
 - ``` bindkey -M viins "^[," _history-complete-newer ```
 - ``` bindkey -M viins "^[/" _history-complete-older ```
 - ``` bindkey -M viins "^[OA" history-substring-search-up ```
@@ -972,7 +972,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[[1;2D" sub ```
 - ``` bindkey -M viins "^[[1;5A" gitfunc ```
 - ``` bindkey -M viins "^[[1;5B" updater ```
-- ``` bindkey -M viins "^[[1;5C" tutsUpdate ```
+- ``` bindkey -M viins "^[[1;5C" zpwrTutsUpdate ```
 - ``` bindkey -M viins "^[[1;5D" dbz ```
 - ``` bindkey -M viins "^[[1~" beginning-of-line ```
 - ``` bindkey -M viins "^[[200~" bracketed-paste ```
@@ -1009,17 +1009,17 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^B" clipboard ```
 - ``` bindkey -a "^D" list-choices ```
 - ``` bindkey -a "^E" end-of-line ```
-- ``` bindkey -a "^F^D" intoFzf ```
+- ``` bindkey -a "^F^D" zpwrIntoFzf ```
 - ``` bindkey -a "^F^F" fzf-file-widget ```
-- ``` bindkey -a "^F^G" intoFzfAg ```
+- ``` bindkey -a "^F^G" zpwrIntoFzfAg ```
 - ``` bindkey -a "^F^H" lsoffzf ```
 - ``` bindkey -a "^F^J" zpwrVerbsWidgetAccept ```
-- ``` bindkey -a "^F^K" alternateQuotes ```
+- ``` bindkey -a "^F^K" zpwrAlternateQuotes ```
 - ``` bindkey -a "^F^L" list-choices ```
 - ``` bindkey -a "^F^M" zzcomplete ```
 - ``` bindkey -a "^F^N" zpwrVerbsWidget ```
 - ``` bindkey -a "^F^P" basicSedSub ```
-- ``` bindkey -a "^F^R" asVar ```
+- ``` bindkey -a "^F^R" zpwrAsVar ```
 - ``` bindkey -a "^F^S" gitFunc ```
 - ``` bindkey -a "^F^V" edit-command-line ```
 - ``` bindkey -a "^G" what-cursor-position ```
@@ -1031,13 +1031,13 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^M" magic-enter ```
 - ``` bindkey -a "^N" down-history ```
 - ``` bindkey -a "^O" fzf-tab-complete ```
-- ``` bindkey -a "^P" EOLorNextTabStop ```
-- ``` bindkey -a "^Q" lastWordDouble ```
+- ``` bindkey -a "^P" zpwrEOLorNextTabStop ```
+- ``` bindkey -a "^Q" zpwrLastWordDouble ```
 - ``` bindkey -a "^R" redo ```
 - ``` bindkey -a "^S" gitFuncNoCheck ```
 - ``` bindkey -a "^T" transpose-chars ```
 - ``` bindkey -a "^U" clearLine ```
-- ``` bindkey -a "^V^F" fasdFZF ```
+- ``` bindkey -a "^V^F" zpwrFasdFZF ```
 - ``` bindkey -a "^V^G" fzf-cd-widget ```
 - ``` bindkey -a "^V^K" emacsFzf ```
 - ``` bindkey -a "^V^N" vimFzfSudo ```
@@ -1046,7 +1046,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^V^V" vimFzf ```
 - ``` bindkey -a "^V^Z" fzf-history-widget ```
 - ``` bindkey -a "^V," fzfEnv ```
-- ``` bindkey -a "^V." fzfAllKeybind ```
+- ``` bindkey -a "^V." zpwrFzfAllKeybind ```
 - ``` bindkey -a "^V/." locateFzfEdit ```
 - ``` bindkey -a "^V//" locateFzf ```
 - ``` bindkey -a "^Vc" fzfCommits ```
@@ -1061,7 +1061,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^[^T" transpose-words ```
 - ``` bindkey -a "^[^U" up-case-word ```
 - ``` bindkey -a "^[^[" sudo-command-line ```
-- ``` bindkey -a "^[ " sshRegain ```
+- ``` bindkey -a "^[ " zpwrSshRegain ```
 - ``` bindkey -a "^[OA" up-line-or-beginning-search ```
 - ``` bindkey -a "^[OB" down-line-or-beginning-search ```
 - ``` bindkey -a "^[OC" vi-forward-char ```

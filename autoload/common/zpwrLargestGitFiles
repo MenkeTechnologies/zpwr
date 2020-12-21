@@ -1,0 +1,28 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrLargestGitFiles(){
+
+    if ! isGitDir; then
+        loggNotGit
+        return 1
+    fi
+
+    local page obj filename size
+
+    if [[ -z $1 ]]; then
+       page=50
+   else
+       page=$1
+    fi
+
+    prettyPrint "Top $page Largest Git Objects"
+
+    obj=$(git rev-list --all --objects)
+    while read -r sha type size; do
+        filename=$(echo $obj | command grep $sha)
+        size=$(printf $size | humanReadable)
+        printf "%-70s %10s\n" $filename $size
+    done < <(echo $obj | awk '{print $1}' | git cat-file --batch-check | sort -k3nr | head -n $page)
+}
+
+zpwrLargestGitFiles "$@"

@@ -1,9 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function ___regenConfigLinks(){
-
-    prettyPrint "linking $ZPWR_INSTALL/.{zshrc,vimrc,tmux.conf} to $HOME"
-    linkConf
-}
-
-___regenConfigLinks "$@"

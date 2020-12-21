@@ -3,7 +3,7 @@
 function ___nvimThenRecentf() {
 
     if [[ -f $ZPWR_RECENTF ]]; then
-        parseRecentf
+        zpwrParseRecentf
     fi
     catNvimOrVimInfo
 }

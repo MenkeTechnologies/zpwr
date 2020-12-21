@@ -1,0 +1,45 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFigletfonts(){
+
+    local figletDir ary file font
+
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
+        figletDir="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+    else
+        figletDir="/usr/share/figlet"
+    fi
+
+    if [[ ! -d "$figletDir" ]]; then
+        loggErr "Can not find $figletDir" && return 1
+    fi
+
+    declare -a ary
+
+    for file in $(find "$figletDir" -iname "*.flf"); do
+        ary+=${file##*/}
+    done
+
+    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
+        exists ponysay || { loggErr "you need ponysay" && return 1; }
+    fi
+    exists lolcat || { loggErr "you need lolcat" && return 1; }
+    exists splitReg.sh || { loggErr "you need splitReg.sh" && return 1; }
+    exists tput || { loggErr "you need tput" && return 1; }
+
+    alternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}iglet ${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}onts ${ZPWR_DELIMITER_CHAR}A${ZPWR_DELIMITER_CHAR}re:"
+
+
+    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
+        for font in ${ary[@]} ; do
+            printf "${font%.*} "
+        done | ponysay -W $(tput cols) | splitReg.sh -- ---------------------- lolcat
+    else
+        for font in ${ary[@]} ; do
+            printf "${font%.*} "
+        done
+        printf "\n"
+    fi
+}
+
+zpwrFigletfonts "$@"

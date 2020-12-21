@@ -3,7 +3,7 @@
 function __runner() {
 
     if [[ ! -z "$BUFFER" ]]; then
-        tutsUpdate
+        zpwrTutsUpdate
     else
         zle .kill-whole-line
         BUFFER=ge

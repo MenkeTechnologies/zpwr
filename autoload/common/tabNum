@@ -1,8 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function ___tabNum() {
-
-    echo "${ZPWR_TABSTOP}$1${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
-}
-
-___tabNum "$@"

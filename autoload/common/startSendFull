@@ -1,9 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function ___startSendFull(){
-
-    ZPWR_SEND_KEYS_FULL=true
-    startSend "$@"
-}
-
-___startSendFull "$@"

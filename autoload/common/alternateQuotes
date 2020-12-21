@@ -1,8 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function ___alternateQuotes(){
-
-    BUFFER="$(print -r -- "$BUFFER" | tr "\"'" "'\"" )"
-}
-
-___alternateQuotes "$@"

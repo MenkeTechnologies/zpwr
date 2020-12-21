@@ -91,7 +91,7 @@ function sub (){sub452,16841
 function scriptEdit(){scriptEdit459,16925
         BUFFER="$(fzvimScript)"BUFFER461,16949
         BUFFER="$EDITOR $BUFFER"BUFFER465,17047
-function sudoVimRecent(){sudoVimRecent474,17388
+function zpwrSudoVimRecent(){zpwrSudoVimRecent474,17388
     BUFFER="$(fzvim)"BUFFER476,17415
     mywords=(${(z)BUFFER})mywords480,17491
     firstdir=${mywords[1]:h}firstdir481,17518
@@ -102,7 +102,7 @@ function vimRecent(){vimRecent491,17864
     firstdir=${mywords[1]:h}firstdir498,17990
     BUFFER="$EDITOR $BUFFER"BUFFER499,18019
 function scriptCount(){scriptCount508,18331
-function lastWordDouble(){lastWordDouble515,18483
+function zpwrLastWordDouble(){zpwrLastWordDouble515,18483
     mywords=("${(z)BUFFER}")mywords517,18511
         BUFFER="$BUFFER"$mywords[-1]BUFFER519,18578
         CURSOR=$#BUFFERCURSOR520,18615
@@ -110,10 +110,10 @@ function lastWordDouble(){lastWordDouble515,18483
         CURSOR=$#BUFFERCURSOR523,18686
 function updater (){updater529,18743
     BUFFER="( cat $ZPWR_SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"BUFFER534,18911
-function tutsUpdate() {tutsUpdate538,19108
+function zpwrTutsUpdate() {zpwrTutsUpdate538,19108
     commitMessage="$BUFFER"commitMessage540,19133
             BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$ZPWR_LOGFILE\" 2>&1 & )"BUFFER547,19366
-function sshRegain() {sshRegain556,19581
+function zpwrSshRegain() {zpwrSshRegain556,19581
             local __NEW_BUFFER="exe \"$BUFFER\""__NEW_BUFFER561,19743
             BUFFER=""BUFFER564,19842
             BUFFER=tmmBUFFER573,20065
@@ -141,7 +141,7 @@ function changeQuotes(){changeQuotes590,20272
         BUFFER="$_SEMI_OLDBUFFER"BUFFER651,22273
             ZPWR_COUNTER=0ZPWR_COUNTER654,22375
         BUFFER="${__OLDBUFFER}"BUFFER658,22460
-function alternateQuotes(){alternateQuotes664,22526
+function zpwrAlternateQuotes(){zpwrAlternateQuotes664,22526
     BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"BUFFER666,22555
 function clipboard(){clipboard670,22612
     local clipcmd=$ZPWR_COPY_CMDclipcmd674,22671
@@ -151,7 +151,7 @@ function updater() {updater703,23313
     BUFFER=u8BUFFER706,23360
 function getrcWidget(){getrcWidget710,23398
     BUFFER="getrc"BUFFER713,23448
-function intoFzf(){intoFzf717,23491
+function zpwrIntoFzf(){zpwrIntoFzf717,23491
     LBUFFER="$LBUFFER |& fzf -m --border --ansi"LBUFFER719,23512
 function lsoffzf(){lsoffzf723,23585
     LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"LBUFFER725,23606
@@ -183,17 +183,17 @@ function fzfDirsearchVerb(){fzfDirsearchVerb853,27208
 function fzfZList(){fzfZList864,27425
 function fzfZListVerb(){fzfZListVerb871,27675
     dir=$(fzfZList)dir874,27715
-function fasdFList(){fasdFList882,27884
+function zpwrFasdFList(){zpwrFasdFList882,27884
 function fm(){fm889,28133
    FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfMan.sh" "$1")'"FZF_MAN_OPTS891,28149
 function zFZF(){zFZF895,28305
     BUFFER="z $(fzfZList)"BUFFER898,28348
     mywords=(${(z)BUFFER})mywords899,28375
-function fasdFZF(){fasdFZF907,28509
-    BUFFER="$BUFFER $(fasdFList)"BUFFER909,28530
+function zpwrFasdFZF(){zpwrFasdFZF907,28509
+    BUFFER="$BUFFER $(zpwrFasdFList)"BUFFER909,28530
     mywords=(${(z)BUFFER})mywords910,28564
-function fasdFListVerb(){fasdFListVerb918,28679
-    file=$(fasdFList)file921,28721
+function zpwrFasdFListVerb(){zpwrFasdFListVerb918,28679
+    file=$(zpwrFasdFList)file921,28721
 function killPSVerbAccept(){killPSVerbAccept929,28843
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel931,28873
         BUFFER="sudo kill -9 -- $sel"BUFFER933,29169
@@ -218,34 +218,34 @@ function vimFzfSudo(){vimFzfSudo1004,31433
     mywords=("${(z)BUFFER}")mywords1013,31622
         firstdir=${mywords[4]:h}firstdir1017,31723
         BUFFER="cd $firstdir\"; $BUFFER; clearList"BUFFER1020,31836
-function intoFzfAg(){intoFzfAg1025,31923
+function zpwrIntoFzfAg(){zpwrIntoFzfAg1025,31923
     mywords=("${(z)BUFFER}")mywords1027,31946
         BUFFER="$BUFFER $(fz vim)"BUFFER1030,32031
         BUFFER="$BUFFER $(fz)"BUFFER1032,32075
     BUFFER=${BUFFER:s@  @ @}BUFFER1035,32114
     CURSOR=$#BUFFERCURSOR1037,32144
-function keySender(){keySender1040,32167
-function stopSend(){stopSend1050,32424
+function zpwrKeySender(){zpwrKeySender1040,32167
+function zpwrStopSend(){zpwrStopSend1050,32424
     ZPWR_SEND_KEYS_PANE=-1ZPWR_SEND_KEYS_PANE1052,32446
     ZPWR_SEND_KEYS_FULL=falseZPWR_SEND_KEYS_FULL1053,32473
-function startSendFull(){startSendFull1057,32549
+function zpwrStartSendFull(){zpwrStartSendFull1057,32549
     ZPWR_SEND_KEYS_FULL=trueZPWR_SEND_KEYS_FULL1059,32576
-function startSend(){startSend1063,32627
+function zpwrStartSend(){zpwrStartSend1063,32627
     ZPWR_SEND_KEYS_PANE=$1ZPWR_SEND_KEYS_PANE1069,32736
         pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$pane'}')pid1078,32921
-function keyClear(){keyClear1083,33082
+function zpwrKeyClear(){zpwrKeyClear1083,33082
 function self-insert() {self1092,33274
 function clearLine() {clearLine1100,33360
     LBUFFER=LBUFFER1103,33397
-function regenZshCompCache(){regenZshCompCache1106,33413
-function regenSearchEnv(){regenSearchEnv1113,33556
+function zpwrRegenZshCompCache(){zpwrRegenZshCompCache1106,33413
+function zpwrRegenSearchEnv(){zpwrRegenSearchEnv1113,33556
 function regenAll(){regenAll1119,33723
 function deleteLastWord(){deleteLastWord1131,33922
     mywords=(${(z)BUFFER})mywords1133,33950
         BUFFER=${mywords[1,-2]}" "BUFFER1135,34011
         BUFFER=BUFFER1137,34055
 function fzfEnv(){fzfEnv1142,34082
-function fzfAllKeybind(){fzfAllKeybind1158,34456
+function zpwrFzfAllKeybind(){zpwrFzfAllKeybind1158,34456
 function fzfVimKeybind(){fzfVimKeybind1167,34667
 function getFound(){getFound1176,34878
 function locateFzf(){locateFzf1182,35018
@@ -259,7 +259,7 @@ function locateFzf(){locateFzf1182,35018
 function fzfCommits(){fzfCommits1212,35683
     BUFFER=""BUFFER1214,35707
         BUFFER="vim -v -c Commits! -c quitall"BUFFER1217,35768
-function asVar(){asVar1226,35930
+function zpwrAsVar(){zpwrAsVar1226,35930
     region_highlight=("P0 20 fg=blue,bg=red")region_highlight1228,35949
     BUFFER="=\"\$($BUFFER)\""BUFFER1229,35995
     CURSOR=0CURSOR1230,36025
@@ -292,9 +292,9 @@ function precmd(){precmd1556,43863
             ZPWR_WILL_CLEAR=falseZPWR_WILL_CLEAR1567,44215
         RPROMPT="%B%F{blue}$$ %b%F{blue}$-"RPROMPT1581,44626
 function rationalize-dot (){rationalize1593,44883
-function expandAliasAccept(){expandAliasAccept1655,47064
+function zpwrExpandAliasAccept(){zpwrExpandAliasAccept1655,47064
 version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"version1674,47534
-function EOLorNextTabStop(){EOLorNextTabStop1690,48044
+function zpwrEOLorNextTabStop(){zpwrEOLorNextTabStop1690,48044
     lenToFirstTS=${#BUFFER%%$ZPWR_TABSTOP*}lenToFirstTS1692,48074
         CURSOR=$lenToFirstTSCURSOR1694,48164
         RBUFFER=${RBUFFER:$#ZPWR_TABSTOP}RBUFFER1695,48193
@@ -308,8 +308,8 @@ recachedCompsys=falserecachedCompsys1862,52674
     h=($h ${${${(@M)${(f)"$(cat ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})h1965,56742
     COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'COMMON_ZSTYLE_OPTS2069,63050
 function globalAliasesInit(){globalAliasesInit2101,64565
-function tabNum() {tabNum2162,68513
-function tabNumCmd() {tabNumCmd2167,68600
+function zpwrTabNum() {zpwrTabNum2162,68513
+function zpwrTabNumCmd() {zpwrTabNumCmd2167,68600
     num=$1num2169,68624
     args="$@"args2171,68645
 function banner(){banner2294,71848
@@ -322,7 +322,7 @@ HISTFILE="$HOME/.${ZPWR_REPO_NAME}_history"HISTFILE2404,75169
 RPS2='+%N:%i:%^'RPS22408,75260
 export PS3=$'\e[1;34m-->>>> \e[0m'PS32409,75277
 function colortest(){colortest2512,77473
-function 256colors(){256colors2541,78409
+function zpwr256colors(){zpwr256colors2541,78409
 export PYGMENTIZE_COLOR="emacs"PYGMENTIZE_COLOR2559,78873
 export ZPWR_COLORIZER=batZPWR_COLORIZER2560,78905
         export FZF_COLORIZER='bat --paging never --wrap character --color always --style="numbers,grid,changes,header" {}'FZF_COLORIZER2565,78994
@@ -486,7 +486,7 @@ function numZpwrVerbs(){numZpwrVerbs3415,105652
 function zpwrEnvVars(){zpwrEnvVars3421,105728
 function zpwrTags(){zpwrTags3426,105807
 function revealRecurse(){revealRecurse3431,105867
-function evalTester(){evalTester3438,105980
+function zpwrEvalTester(){zpwrEvalTester3438,105980
 
 /Users/wizard/.zpwr/.powerlevel9kconfig.sh,4351
 ZSH_THEME="powerlevel9k/powerlevel9k"ZSH_THEME12,380
@@ -633,9 +633,9 @@ function r(){r549,21129
         msg="$2"msg576,21608
     function db(){db581,21723
     function db2(){db2586,21796
-    function scriptToPDF(){scriptToPDF591,21868
+    function zpwrScriptToPDF(){zpwrScriptToPDF591,21868
         tempFile="$HOME/__test.ps"tempFile593,21897
-        function scriptToPDF(){scriptToPDF601,22087
+        function zpwrScriptToPDF(){zpwrScriptToPDF601,22087
             tempFile="$HOME/__test.ps"tempFile607,22233
     function ssd() {ssd614,22420
     function ssu() {ssu624,22696
@@ -680,8 +680,8 @@ function p(){p881,29285
 function b(){b900,29730
         sleepTime=$2sleepTime903,29773
 function suc(){suc918,30079
-function allRemotes(){allRemotes925,30195
-function largestGitFiles(){largestGitFiles939,30430
+function zpwrAllRemotes(){zpwrAllRemotes925,30195
+function zpwrLargestGitFiles(){zpwrLargestGitFiles939,30430
        page=50 page947,30552
        page=$1page949,30576
     obj=$(git rev-list --all --objects)obj954,30661
@@ -721,7 +721,7 @@ function humanReadable(){humanReadable1159,36534
 function f(){f1173,36873
         base="$(dirname "$1")"base1183,37127
             base="$(dirname "$base")"base1186,37248
-function execpy(){execpy1195,37392
+function zpwrExecpy(){zpwrExecpy1195,37392
     script="$1"script1202,37494
 function search(){search1208,37562
 function cd(){cd1214,37673
@@ -739,7 +739,7 @@ function contribCount(){contribCount1293,39336
     lineCount="$(echo $lines | wc -l)"lineCount1301,39511
 function isBinary() {isBinary1312,39943
   LC_MESSAGES=C command grep -Hm1 '^' < "${1-$REPLY}" | command grep -sq '^Binary'LC_MESSAGES1313,39965
-function totalLines(){totalLines1316,40051
+function zpwrTotalLines(){zpwrTotalLines1316,40051
         filter=falsefilter1328,40269
                filter=truefilter1331,40378
     lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1351,40793
@@ -768,7 +768,7 @@ function hd(){hd1543,45164
                 repo="$(echo $line | awk -F'/' '{print $5}' |repo1556,45690
     user="$(echo "$user" | tr 'A-Z' 'a-z')"user1562,45821
     out="$(curl -u "$user" -X DELETE "https://api.github.com/repos/$user/$repo")"out1567,45987
-function pstreemonitor(){pstreemonitor1580,46262
+function zpwrPstreemonitor(){zpwrPstreemonitor1580,46262
 function return2(){return21586,46404
 function color2(){color21596,46536
 function escapeRemove(){escapeRemove1606,46672
@@ -783,10 +783,10 @@ function gcl() {gcl1678,48066
     dir_name=${git_name%.*}dir_name1688,48233
 function ino(){ino1698,48443
     dir="$1"dir1705,48542
-function jetbrainsWorkspaceEdit(){jetbrainsWorkspaceEdit1758,49514
+function zpwrJetbrainsWorkspaceEdit(){zpwrJetbrainsWorkspaceEdit1758,49514
 function o(){o1779,50616
     open_cmd="$ZPWR_OPEN_CMD" || return 1open_cmd1781,50631
-function openmygh(){openmygh1799,50995
+function zpwrOpenmygh(){zpwrOpenmygh1799,50995
     open_cmd="$ZPWR_OPEN_CMD" || return 1open_cmd1801,51017
 function zpwr(){zpwr1822,51590
 function zp(){zp1830,51729
@@ -801,7 +801,7 @@ function goInstallerDir(){goInstallerDir1873,52435
 function unlinkConf(){unlinkConf1889,52775
     symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1893,52827
     local snipDir="$HOME/.emacs.d/private/snippets"snipDir1903,53179
-function linkConf(){linkConf1914,53368
+function zpwrLinkConf(){zpwrLinkConf1914,53368
     symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1924,53594
     local snipDir="$HOME/.emacs.d/private"snipDir1936,54146
 function getrc(){getrc1948,54545
@@ -813,10 +813,10 @@ function getrcdev(){getrcdev1992,55655
 function rename(){rename1997,55694
     search="$1"search2004,55796
         out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')out2008,55883
-function torip(){torip2016,56092
+function zpwrTorip(){zpwrTorip2016,56092
     ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)ip2018,56111
-function toriprenew() {toriprenew2023,56194
-function mycurl(){mycurl2029,56304
+function zpwrToriprenew() {zpwrToriprenew2023,56194
+function zpwrMycurl(){zpwrMycurl2029,56304
 function perlremovespaces(){perlremovespaces2037,56545
 function pirun(){pirun2045,56803
     DONE=falseDONE2049,56863
@@ -870,19 +870,19 @@ function c(){c2445,69322
         rand=$(echo "$randscript" | perl)rand2480,70269
             random_color=${file_ary[$i]}random_color2485,70402
 function fz(){fz2500,70854
-function figletfonts(){figletfonts2514,71746
+function zpwrFigletfonts(){zpwrFigletfonts2514,71746
         FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR2517,71816
         FIGLET_DIR="/usr/share/figlet"FIGLET_DIR2519,71896
-function pygmentcolors(){pygmentcolors2554,72987
+function zpwrPygmentcolors(){zpwrPygmentcolors2554,72987
     dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"dir2556,73014
 function detachall(){detachall2563,73199
 function scripts(){scripts2569,73309
     export ZPWR_SCHEMA_NAME=rootZPWR_SCHEMA_NAME2581,73526
     export ZPWR_TABLE_NAME=LearningCollectionZPWR_TABLE_NAME2582,73559
 function gitCheckoutRebasePush(){gitCheckoutRebasePush2585,73609
-function jsonToArray(){jsonToArray2592,73845
+function zpwrJsonToArray(){zpwrJsonToArray2592,73845
     local json="$(cat)"json2594,73870
-function arrayToJson(){arrayToJson2610,74231
+function zpwrArrayToJson(){zpwrArrayToJson2610,74231
         ary="$1"ary2613,74275
         ary="$1"ary2617,74399
 function loginCount(){loginCount2626,74599
@@ -891,7 +891,7 @@ function clearTemp(){clearTemp2642,74875
 function clearCache(){clearCache2657,75233
 function regenEmacsTags(){regenEmacsTags2670,75501
 function regenTags(){regenTags2683,75883
-function regenAllKeybindingsCache(){regenAllKeybindingsCache2696,76226
+function zpwrRegenAllKeybindingsCache(){zpwrRegenAllKeybindingsCache2696,76226
 function searchGitCommon(){searchGitCommon2708,76649
     out="$(goThere)"out2710,76678
 function regenAllGitRepos(){regenAllGitRepos2715,76734
@@ -901,8 +901,8 @@ function searchDirtyGitRepos(){searchDirtyGitRepos2732,77223
 function searchAllGitRepos(){searchAllGitRepos2761,78171
     goThere(){goThere2763,78202
     shouldRegen="$1"shouldRegen2771,78493
-function regenConfigLinks(){regenConfigLinks2782,78791
-function regenPowerlineLink(){regenPowerlineLink2788,78911
+function zpwrRegenConfigLinks(){zpwrRegenConfigLinks2782,78791
+function zpwrRegenPowerlineLink(){zpwrRegenPowerlineLink2788,78911
     dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"dir2790,78943
 function goclean() {goclean2809,79577
     pkg=$1;pkg2816,79708
@@ -957,7 +957,7 @@ killpids() {killpids101,2320
         pids="$pids $!"pids119,2996
 
 /Users/wizard/.zpwr/scripts/about.sh,559
-allRemotes() {allRemotes10,341
+zpwrAllRemotes() {zpwrAllRemotes10,341
 banner() {banner17,498
             version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"version20,577
             info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"info21,682

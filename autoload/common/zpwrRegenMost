@@ -2,14 +2,14 @@
 # vim: set ft=sh:
 function zpwrRegenMost(){
 
-    regenConfigLinks
-    regenZshCompCache
-    regenHistory
-    regenCtags
-    regenGtagsCtags
-    regenAllKeybindingsCache
-    regenPowerlineLink
-    regenSearchEnv
+    zpwrRegenConfigLinks
+    zpwrRegenZshCompCache
+    zpwrRegenHistory
+    zpwrRegenCtags
+    zpwrRegenGtagsCtags
+    zpwrRegenAllKeybindingsCache
+    zpwrRegenPowerlineLink
+    zpwrRegenSearchEnv
     zpwrRefreshZwc
 }
 

@@ -10,7 +10,7 @@ function ___fzfWordsearchVerb(){
     local firstdir editor file mywords
 
     editor="$1"
-    BUFFER=$(agIntoFzf vim)
+    BUFFER=$(zpwrAgIntoFzf vim)
 
     if [[ -z "$BUFFER" ]]; then
         return

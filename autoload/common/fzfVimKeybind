@@ -4,7 +4,7 @@ function ___fzfVimKeybind(){
 
     if [[ ! -s "$ZPWR_VIM_KEYBINDINGS" ]]; then
         loggDebug "regenerating $ZPWR_VIM_KEYBINDINGS"
-        regenAllKeybindingsCache
+        zpwrRegenAllKeybindingsCache
     fi
     cat "$ZPWR_VIM_KEYBINDINGS" | fzf
 }
