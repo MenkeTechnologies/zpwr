@@ -1141,14 +1141,14 @@ zpwrGetPasteCommand(){zpwrGetPasteCommand39,983
                 paste_cmd='xclip -o -sel clip'paste_cmd51,1292
                 paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"paste_cmd53,1356
             paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"paste_cmd57,1480
-getCopyCommand(){getCopyCommand68,1708
+zpwrGetCopyCommand(){zpwrGetCopyCommand68,1708
             copy_cmd='pbcopy'copy_cmd73,1791
             copy_cmd='clip.exe'copy_cmd76,1853
                 copy_cmd='xclip -i -sel clip'copy_cmd80,1970
                 copy_cmd='clip.exe'copy_cmd82,2033
             copy_cmd='clip.exe'copy_cmd86,2114
 export ZPWR_OPEN_CMD="$(zpwrGetOpenCommand)"ZPWR_OPEN_CMD97,2298
-export ZPWR_COPY_CMD="$(getCopyCommand)"ZPWR_COPY_CMD98,2339
+export ZPWR_COPY_CMD="$(zpwrGetCopyCommand)"ZPWR_COPY_CMD98,2339
 export ZPWR_PASTE_CMD="$(zpwrGetPasteCommand)"ZPWR_PASTE_CMD99,2380
 
 /Users/wizard/.zpwr/scripts/delete_dups.zsh,41

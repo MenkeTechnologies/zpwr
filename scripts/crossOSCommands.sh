@@ -67,7 +67,7 @@ function zpwrGetPasteCommand(){
     echo "$paste_cmd"
 }
 
-function getCopyCommand(){
+function zpwrGetCopyCommand(){
 
     local copy_cmd
 
@@ -98,7 +98,7 @@ function getCopyCommand(){
 }
 
 export ZPWR_OPEN_CMD="$(zpwrGetOpenCommand)"
-export ZPWR_COPY_CMD="$(getCopyCommand)"
+export ZPWR_COPY_CMD="$(zpwrGetCopyCommand)"
 export ZPWR_PASTE_CMD="$(zpwrGetPasteCommand)"
 
 
