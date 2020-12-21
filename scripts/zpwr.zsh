@@ -165,8 +165,6 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[gitignore]='gil=\$EDITOR ~/.git/info/exclude'
     ZPWR_VERBS[gitlargest]='zpwrLargestGitFiles=show largest files stored by git in descending order'
     ZPWR_VERBS[gitremotes]='zpwrAllRemotes=list all git remotes'
-    ZPWR_VERBS[gitrepos]='zsh-git-repo-searchAllGitRepos=search \$ZPWR_ALL_GIT_DIRS in fzf'
-    ZPWR_VERBS[gitreposdirty]='zsh-git-repo-searchDirtyGitRepos=search dirty \$ZPWR_ALL_GIT_DIRS in fzf'
     ZPWR_VERBS[gitreposexec]='zpwrForAllGitDirs=run cmd in all git dirs'
     ZPWR_VERBS[gitsearch]='gse=search for regex in git log'
     ZPWR_VERBS[gitupdatefordir]='zpwrUpdateAllGitDirs=run git updates in all git dirs'
