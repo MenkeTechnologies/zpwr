@@ -3,7 +3,7 @@
 function zpwrContribCountDirs(){
 
     if [[ -z "$2" ]]; then
-       loggErr "usage: zpwrContribCountDirs <user regex> <dirs...>"
+       zpwrLoggErr "usage: zpwrContribCountDirs <user regex> <dirs...>"
        return 1
     fi
 

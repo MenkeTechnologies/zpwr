@@ -5,7 +5,7 @@ function docu() {
     if [[ -d "$ZPWR_DOC" ]]; then
         cd "$ZPWR_DOC"
     else
-        loggErr "ZPWR_DOC '$ZPWR_DOC' is not a dir."
+        zpwrLoggErr "ZPWR_DOC '$ZPWR_DOC' is not a dir."
     fi
 
 }

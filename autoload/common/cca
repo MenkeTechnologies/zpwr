@@ -3,7 +3,7 @@
 function ___cca() {
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: cca <file...>"
+        zpwrLoggErr "usage: cca <file...>"
         return 1
     fi
 

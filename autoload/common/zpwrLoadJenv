@@ -10,7 +10,7 @@ function zpwrLoadJenv() {
             jenv "$@"
         fi
     else
-        loggErr "No jenv"
+        zpwrLoggErr "No jenv"
     fi
 }
 

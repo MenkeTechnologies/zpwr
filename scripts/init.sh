@@ -30,7 +30,7 @@ if ! type -- "exists" >/dev/null 2>&1;then
             if source "$ZPWR_TOKEN_PRE"; then
                 : logg "loaded ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
             else
-                loggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+                zpwrLoggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
             fi
         else
             touch "$ZPWR_TOKEN_PRE"
@@ -39,7 +39,7 @@ if ! type -- "exists" >/dev/null 2>&1;then
         if source "$ZPWR_RE_ENV_FILE"; then
             : logg "loaded ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
         else
-            loggErr "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
+            zpwrLoggErr "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
             exit 1
         fi
 
@@ -47,7 +47,7 @@ if ! type -- "exists" >/dev/null 2>&1;then
             if source "$ZPWR_TOKEN_POST"; then
                 : logg "loaded ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
             else
-                loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+                zpwrLoggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
             fi
         else
             touch "$ZPWR_TOKEN_POST"
@@ -59,7 +59,7 @@ if ! type -- "exists" >/dev/null 2>&1;then
         if source "$ZPWR_LIB"; then
             : logg "loaded ZPWR_LIB '$ZPWR_LIB'"
         else
-            loggErr "where is ZPWR_LIB '$ZPWR_LIB'"
+            zpwrLoggErr "where is ZPWR_LIB '$ZPWR_LIB'"
             exit 1
         fi
     fi

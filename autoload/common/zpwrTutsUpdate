@@ -7,7 +7,7 @@ function zpwrTutsUpdate() {
     commitMessage="$BUFFER"
     if [[ ! -z "$commitMessage" ]]; then
         if [[ "$commitMessage" =~ ^\ +$ ]]; then
-            loggErr "No commit message"
+            zpwrLoggErr "No commit message"
             zle .accept-line
         else
             zle .kill-whole-line
@@ -15,7 +15,7 @@ function zpwrTutsUpdate() {
             zle .accept-line
         fi
     else
-        loggErr "No commit message"
+        zpwrLoggErr "No commit message"
         zle .accept-line
     fi
 }

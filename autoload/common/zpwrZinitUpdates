@@ -8,7 +8,7 @@ function ___zpwrAllUpdates(){
         zinit compinit
         zinit compile
     else
-        loggErr "You must have ZPWR_PLUGIN_MANAGER '$ZPWR_PLUGIN_MANAGER' == zinit"
+        zpwrLoggErr "You must have ZPWR_PLUGIN_MANAGER '$ZPWR_PLUGIN_MANAGER' == zinit"
    fi
 }
 

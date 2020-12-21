@@ -3,7 +3,7 @@
 function zpwrGetGHDelURL(){
 
     if [[ -z "$GITHUB_DELETE_TOKEN" ]]; then
-        loggErr "GITHUB_DELETE_TOKEN is missing."
+        zpwrLoggErr "GITHUB_DELETE_TOKEN is missing."
         return 1
     fi
 
@@ -25,8 +25,8 @@ function zpwrGetGHDelURL(){
 
     user="$(echo "$user" | tr 'A-Z' 'a-z')"
 
-    test -z "$repo" && loggErr "bad repo $repo" && return 1
-    test -z "$user" && loggErr "bad user $user" && return 1
+    test -z "$repo" && zpwrLoggErr "bad repo $repo" && return 1
+    test -z "$user" && zpwrLoggErr "bad user $user" && return 1
 
     echo "curl -fsSL -H 'Authorization: token $GITHUB_DELETE_TOKEN' -X DELETE https://api.github.com/repos/$user/$repo"
 

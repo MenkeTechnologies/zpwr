@@ -5,7 +5,7 @@ function ig() {
     if [[ -d "$HOME/IdeaProjects" ]]; then
         cd "$HOME/IdeaProjects"
     else
-        loggErr "HOME/IdeaProjects '$HOME/IdeaProjects' is not a dir."
+        zpwrLoggErr "HOME/IdeaProjects '$HOME/IdeaProjects' is not a dir."
     fi
 
 }

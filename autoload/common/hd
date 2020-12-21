@@ -10,11 +10,11 @@ function ___hd(){
             if eval "$cmd"; then
                 prettyPrint "Successful deletion."
             else
-                loggErr "Error in deletion."
+                zpwrLoggErr "Error in deletion."
             fi
         fi
     else
-            loggErr "zpwrGetGHDelURL failed."
+            zpwrLoggErr "zpwrGetGHDelURL failed."
     fi
 
 }

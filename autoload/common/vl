@@ -5,7 +5,7 @@ function vl() {
     if [[ -d "/var/log" ]]; then
         cd "/var/log"
     else
-        loggErr "'/var/log' is not a dir."
+        zpwrLoggErr "'/var/log' is not a dir."
     fi
 
 }

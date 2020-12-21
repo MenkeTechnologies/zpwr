@@ -4,7 +4,7 @@ function ___zpwrVerbsWidget(){
 
     zle .kill-whole-line
     BUFFER="$(zpwrVerbsFZF)"
-    loggDebug "$BUFFER"
+    zpwrLoggDebug "$BUFFER"
     CURSOR=$#BUFFER
     zle vi-insert
 }

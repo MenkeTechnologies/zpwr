@@ -6,7 +6,7 @@ function we(){
     elif [[ -d "/usr/local/var/www" ]];then
         cd /usr/local/var/www
         else
-        loggErr "could NOT cd /var/ww/html NOR /usr/local/var/www"
+        zpwrLoggErr "could NOT cd /var/ww/html NOR /usr/local/var/www"
     fi
 }
 

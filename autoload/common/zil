@@ -4,7 +4,7 @@ function zil(){
     if [[ -d "$ZPWR_INSTALL" ]]; then
         cd "$ZPWR_INSTALL"
     else
-        loggErr "ZPWR_INSTALL '$ZPWR_INSTALL' is not a directory."
+        zpwrLoggErr "ZPWR_INSTALL '$ZPWR_INSTALL' is not a directory."
     fi
 
 }

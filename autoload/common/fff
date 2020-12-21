@@ -3,7 +3,7 @@
 function ___fff(){
 
     if [[ -z "$2" ]]; then
-       loggErr "usage: fff <iter> <cmd> to run <cmd> <iter> times" 
+       zpwrLoggErr "usage: fff <iter> <cmd> to run <cmd> <iter> times" 
        return 1
     fi
 

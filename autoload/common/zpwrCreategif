@@ -3,7 +3,7 @@
 function zpwrCreategif(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrCreategif <file>"
+        zpwrLoggErr "usage: zpwrCreategif <file>"
         return 1
     fi
 

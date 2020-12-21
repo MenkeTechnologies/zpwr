@@ -2,4 +2,4 @@
 # name: logg error
 # key: loe
 # --
-loggErr "______'"'$1'"'_____ = ""'$1'"
+zpwrLoggErr "______'"'$1'"'_____ = ""'$1'"

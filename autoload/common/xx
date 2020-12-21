@@ -3,7 +3,7 @@
 function ___xx(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: xx <cmd>"
+        zpwrLoggErr "usage: xx <cmd>"
         return 1
     fi
 

@@ -4,7 +4,7 @@ function zpwrArrayToJson(){
 
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrArrayToJson <array>"
+        zpwrLoggErr "usage: zpwrArrayToJson <array>"
         return 1
     fi
 

@@ -3,7 +3,7 @@
 function zpwrParseRecentf(){
 
     if [[ ! -f $ZPWR_RECENTF ]]; then
-        loggErr "$ZPWR_RECENTF does not exist"
+        zpwrLoggErr "$ZPWR_RECENTF does not exist"
         return 1
     fi
 

@@ -3,7 +3,7 @@
 function zpwrFzvim(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrFzvim <editor>"
+        zpwrLoggErr "usage: zpwrFzvim <editor>"
         return 1
     fi
 

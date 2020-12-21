@@ -3,7 +3,7 @@
 function gse(){
 
     if [[ -z "$1" ]]; then
-            loggErr "usage: gse <git-search-regex>"
+            zpwrLoggErr "usage: gse <git-search-regex>"
             return 1
         fi
 

@@ -302,7 +302,7 @@ fi
 function zpwrTokenPre() {
     if test -f "$ZPWR_TOKEN_PRE"; then
         if ! source "$ZPWR_TOKEN_PRE"; then
-            loggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+            zpwrLoggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
         fi
     else
         touch "$ZPWR_TOKEN_PRE"
@@ -394,7 +394,7 @@ function zpwrTokenPost() {
     # source .tokens.sh to override with user functions
     if test -f "$ZPWR_TOKEN_POST"; then
         if ! source "$ZPWR_TOKEN_POST"; then
-            loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+            zpwrLoggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
         fi
     else
         touch "$ZPWR_TOKEN_POST"
@@ -508,7 +508,7 @@ elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
 
 else
 
-    loggErr "Unsupported ZPWR_PLUGIN_MANAGER '$ZPWR_PLUGIN_MANAGER'!"
+    zpwrLoggErr "Unsupported ZPWR_PLUGIN_MANAGER '$ZPWR_PLUGIN_MANAGER'!"
 fi
 
 if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
@@ -536,8 +536,8 @@ zpwrStaleZcompdump
 #if ! (( $+_comps[z] )); then
     #zpwrRetryZcompdump
 #else
-    #loggDebug "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
-    #loggDebug "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
+    #zpwrLoggDebug "found '${_comps[z]}' for z so used cached '$ZSH_COMPDUMP'"
+    #zpwrLoggDebug "_comps size: '$#_comps' fpath length: '$#fpath' path length: '$#path'"
 #fi
 
 # change history size in memory
@@ -744,7 +744,7 @@ alias tm='tmux'
 
 endTimestamp=$EPOCHREALTIME
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
-loggDebug "zsh startup took $startupTimeMs seconds"
+zpwrLoggDebug "zsh startup took $startupTimeMs seconds"
 
 ZPWR_VARS[startTimestamp]="$startTimestamp"
 ZPWR_VARS[endTimestamp]="$endTimestamp"

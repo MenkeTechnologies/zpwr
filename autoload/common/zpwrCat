@@ -11,7 +11,7 @@ function zpwrCat(){
         fi
     else
         if [[ -z "$1" ]]; then
-            loggErr "usage: zpwrCat <file...>"
+            zpwrLoggErr "usage: zpwrCat <file...>"
             return 1
         fi
 

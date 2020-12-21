@@ -3,7 +3,7 @@
 function zpwrFzfWordsearchVerb(){
 
    if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrFzfWordsearchVerb <editor>"
+        zpwrLoggErr "usage: zpwrFzfWordsearchVerb <editor>"
         return 1
     fi
 
@@ -17,10 +17,10 @@ function zpwrFzfWordsearchVerb(){
     fi
     mywords=(${(z)BUFFER})
     firstdir=${mywords[2]:h}
-    loggDebug "builtin cd $firstdir\""
+    zpwrLoggDebug "builtin cd $firstdir\""
     #:h takes aways last "
     BUFFER="builtin cd $firstdir\"; $editor $BUFFER; zpwrClearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
+    zpwrLoggDebug "$BUFFER"
 
     print -sr -- "$BUFFER"
     eval "$BUFFER"

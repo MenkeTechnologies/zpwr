@@ -8,7 +8,7 @@ function zpwrClearGitCommit(){
     fi
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrClearGitCommit <regex>"
+        zpwrLoggErr "usage: zpwrClearGitCommit <regex>"
         return 1
     fi
 

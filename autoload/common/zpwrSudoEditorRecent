@@ -13,10 +13,10 @@ function zpwrSudoEditorRecent(){
     mywords=(${(z)BUFFER})
     firstdir=${mywords[1]:h}
     BUFFER="sudo $editor $BUFFER"
-    loggDebug "builtin cd $firstdir\""
+    zpwrLoggDebug "builtin cd $firstdir\""
     #:h takes aways last "
     eval "builtin cd $firstdir\""
-    loggDebug "$BUFFER; zpwrClearList;isGitDir && git diff HEAD"
+    zpwrLoggDebug "$BUFFER; zpwrClearList;isGitDir && git diff HEAD"
     print -s -- "$BUFFER; zpwrClearList;isGitDir && git diff HEAD"
     eval "$BUFFER; zpwrClearList;isGitDir && git diff HEAD"
 }

@@ -3,7 +3,7 @@
 function ___ce() {
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: ce <file...>"
+        zpwrLoggErr "usage: ce <file...>"
         return 1
     fi
 

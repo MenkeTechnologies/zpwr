@@ -2,4 +2,4 @@
 # name: logg debug
 # key: lod
 # --
-loggDebug "______'"'$1'"'_____ = ""'$1'"
+zpwrLoggDebug "______'"'$1'"'_____ = ""'$1'"

@@ -5,11 +5,11 @@ function zpwrFzfEnv(){
     local sel
 
     if [[ ! -s "${ZPWR_LOCAL_ENV}Key.txt" ]]; then
-        loggDebug "regenerating keys for $ZPWR_LOCAL_ENV"
+        zpwrLoggDebug "regenerating keys for $ZPWR_LOCAL_ENV"
         zpwrRegenSearchEnv
     fi
     if [[ ! -s "${ZPWR_LOCAL_ENV}Value.txt" ]]; then
-        loggDebug "regenerating values for $ZPWR_LOCAL_ENV"
+        zpwrLoggDebug "regenerating values for $ZPWR_LOCAL_ENV"
         zpwrRegenSearchEnv
     fi
 

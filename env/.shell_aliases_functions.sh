@@ -54,7 +54,7 @@ export LSCOLORS="ExFxBxDxCxegedabagacad"
 export FORKED_DIR="$HOME/forkedRepos"
 export D="$HOME/Desktop"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
-export PYSCRIPTS="$HOME/PycharmProjects/fromShell"
+export ZPWR_PYSCRIPTS="$HOME/PycharmProjects/fromShell"
 export XAUTHORITY="$HOME/.Xauthority"
 export TERMINAL_APP="Terminal.app"
 export YARN_HOME="$HOME/.config/yarn"
@@ -170,7 +170,7 @@ fi
 exists pssh && function pir(){
 
     if ! test -s "$ZPWR_LOCAL/hosts.txt"; then
-        loggErr "you need hosts.txt in your $ZPWR_LOCAL"
+        zpwrLoggErr "you need hosts.txt in your $ZPWR_LOCAL"
         return 1
     fi
     pssh --inline-stdout --timeout 90 -h "$ZPWR_LOCAL/hosts.txt" "$@"
@@ -188,7 +188,7 @@ fi
 if ! isZsh; then
     if test -f "$ZPWR_TOKEN_PRE"; then
         if ! source "$ZPWR_TOKEN_PRE"; then
-            loggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+            zpwrLoggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
         fi
     else
         touch "$ZPWR_TOKEN_PRE"
@@ -196,7 +196,7 @@ if ! isZsh; then
 
     if test -f "$ZPWR_TOKEN_POST"; then
         if ! source "$ZPWR_TOKEN_POST"; then
-            loggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+            zpwrLoggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
         fi
     else
         touch "$ZPWR_TOKEN_POST"

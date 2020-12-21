@@ -8,7 +8,7 @@ function zpwrClearGitFile(){
     fi
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrClearGitCommit <files...>"
+        zpwrLoggErr "usage: zpwrClearGitCommit <files...>"
         return 1
     fi
 

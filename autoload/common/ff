@@ -3,7 +3,7 @@
 function ___ff(){
 
     if [[ -z "$1" ]]; then
-       loggErr "ff <cmd> to run <cmd> 10 times" 
+       zpwrLoggErr "ff <cmd> to run <cmd> 10 times" 
        return 1
     fi
 
@@ -14,7 +14,7 @@ function ___ff(){
             eval "$@"
         done
     else
-       loggErr "usage: ff <cmd> to run <cmd> 10 times" 
+       zpwrLoggErr "usage: ff <cmd> to run <cmd> 10 times" 
        return 1
     fi
 }

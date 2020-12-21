@@ -3,7 +3,7 @@
 function ___ge(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: ge <url>"
+        zpwrLoggErr "usage: ge <url>"
         return 1
     fi
 

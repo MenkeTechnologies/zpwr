@@ -5,7 +5,7 @@ function wg() {
     if [[ -d "$HOME/WebstormProjects" ]]; then
         cd "$HOME/WebstormProjects"
     else
-        loggErr "HOME/WebstormProjects '$HOME/WebstormProjects' is not a dir."
+        zpwrLoggErr "HOME/WebstormProjects '$HOME/WebstormProjects' is not a dir."
     fi
 
 }

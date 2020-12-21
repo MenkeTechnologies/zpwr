@@ -545,7 +545,7 @@ isZsh(){isZsh23,845
     function exists(){exists44,1259
 function chooseNvimVim(){chooseNvimVim51,1365
 function loggNotGit() {loggNotGit70,1823
-function loggErr(){loggErr75,1889
+function zpwrLoggErr(){zpwrLoggErr75,1889
 export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"ZPWR_ALL_GIT_DIRS107,3727
 export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"ZPWR_LOGFILE108,3782
     export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'ZPWR_EXA_COMMAND113,3955
@@ -663,7 +663,7 @@ function s(){s724,25561
 function loggConsolePrefix(){loggConsolePrefix758,26517
 function loggConsole(){loggConsole763,26617
 function logg(){logg769,26680
-function loggDebug(){loggDebug811,28080
+function zpwrLoggDebug(){zpwrLoggDebug811,28080
 function xx(){xx818,28170
     cmd="$1"cmd822,28218
     DONE=falseDONE826,28306

@@ -4,7 +4,7 @@ function ___zpwrPoll() {
 
     if ! isGitDir; then
         loggNotGit
-        loggErr "usage: zpwrPoll <cmd> <time> <refspec>"
+        zpwrLoggErr "usage: zpwrPoll <cmd> <time> <refspec>"
         return 1
     fi
 

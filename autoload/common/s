@@ -6,7 +6,7 @@ function ___s(){
         source "$ZPWR_SCRIPTS/lib.sh" || {
             echo "where is $ZPWR_SCRIPTS/lib.sh" >&2
             return 1
-        } && loggErr 'forced to load lib.sh due to missing isZsh'
+        } && zpwrLoggErr 'forced to load lib.sh due to missing isZsh'
     }
 
     local cmd sec_cmd out url

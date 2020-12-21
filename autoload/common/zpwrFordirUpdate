@@ -3,7 +3,7 @@
 function zpwrFordirUpdate(){
 
     if [[ -z "$1" ]]; then
-       loggErr "usage: fordirUpdate <dirs> to run git update in each dir"
+       zpwrLoggErr "usage: fordirUpdate <dirs> to run git update in each dir"
        return 1
     fi
 

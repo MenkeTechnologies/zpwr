@@ -12,7 +12,7 @@ function gil(){
     file=".git/info/exclude"
 
     if [[ ! -f "$file" ]]; then
-       loggErr "$file must exist"
+       zpwrLoggErr "$file must exist"
        return 1
     fi
 

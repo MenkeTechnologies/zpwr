@@ -3,7 +3,7 @@
 function ___nn(){
 
         if [[ -z "$2" ]];then
-            loggErr "usage: nn <title> <message>..." &&
+            zpwrLoggErr "usage: nn <title> <message>..." &&
             return 1
         fi
 

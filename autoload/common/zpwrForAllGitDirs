@@ -3,7 +3,7 @@
 function ___zpwrForAllGitDirs(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrForGitDir <cmd>"
+        zpwrLoggErr "usage: zpwrForGitDir <cmd>"
         return 1
     fi
 

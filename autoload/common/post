@@ -3,7 +3,7 @@
 function ___post(){
 
     if [[ -z "$2" ]]; then
-        loggErr "usage: post <suffix> <cmd>"
+        zpwrLoggErr "usage: post <suffix> <cmd>"
         return 1
     fi
 

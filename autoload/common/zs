@@ -4,7 +4,7 @@ function zs(){
     if [[ -d "$ZPWR_SCRIPTS" ]]; then
         cd "$ZPWR_SCRIPTS"
     else
-        loggErr "ZPWR_SCRIPTS '$ZPWR_SCRIPTS' is not a directory."
+        zpwrLoggErr "ZPWR_SCRIPTS '$ZPWR_SCRIPTS' is not a directory."
     fi
 
 }

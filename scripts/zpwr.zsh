@@ -199,9 +199,9 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[locatesearch]='zpwrLocateFzfNoZLEC=accept locate drive for file'
     ZPWR_VERBS[locatesearchedit]='zpwrLocateFzfEditNoZLEC=edit locate drive for file'
     ZPWR_VERBS[log]='logg=write to \$ZPWR_LOGFILE'
-    ZPWR_VERBS[logdebug]='loggDebug=write debug to \$ZPWR_LOGFILE'
-    ZPWR_VERBS[logerror]='loggErr=write error to console'
-    ZPWR_VERBS[loginfo]='loggInfo=write info to console'
+    ZPWR_VERBS[logdebug]='zpwrLoggDebug=write debug to \$ZPWR_LOGFILE'
+    ZPWR_VERBS[logerror]='zpwrLoggErr=write error to console'
+    ZPWR_VERBS[loginfo]='zpwrLoggInfo=write info to console'
     ZPWR_VERBS[logincount]='zpwrLoginCount=count of logins by user'
     ZPWR_VERBS[lsof]='zpwrKillLsofVerbAccept=kill from lsof output'
     ZPWR_VERBS[lsofedit]='zpwrKillLsofVerbEdit=edit kill from lsof output'
@@ -214,7 +214,6 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[opencommand]='zpwrGetOpenCommand=get the command to open with system'
     ZPWR_VERBS[pastecommand]='zpwrGetPasteCommand=get the command to paste with system'
     ZPWR_VERBS[pastebuffer]='zpwrPasteToBuffer=paste clipboard to BUFFER'
-    ZPWR_VERBS[pi]='pi=ping all LAN devices'
     ZPWR_VERBS[pir]='pir=run command on all devices'
     ZPWR_VERBS[plugins]='zpl=cd to \$ZSH_CUSTOM/plugins'
     ZPWR_VERBS[poll]='zpwrPoll=poll git remote and run command'
@@ -251,8 +250,6 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[scripts]='zs=cd to scripts directory'
     ZPWR_VERBS[scripttopdf]='zpwrScriptToPDF=convert script to PDF'
     ZPWR_VERBS[search]='s=search google for args'
-    ZPWR_VERBS[start]='tmm_notabs=start with no tabs'
-    ZPWR_VERBS[starttabs]='tmm_full=start all tabs'
     ZPWR_VERBS[subcommands]='zpwrVerbsNoZLE=run the subcommands for zpwr <tab>'
     ZPWR_VERBS[subcommandsedit]='zpwrVerbsEditNoZLE=edit the subcommands for zpwr <tab>'
     ZPWR_VERBS[subcommandsfzf]='zpwrVerbsFZF=fzf the subcommands for zpwr <tab>'
@@ -331,6 +328,15 @@ ZPWR_VARS[VERB_0]="$0"
         ZPWR_VERBS[servicedown]='ssd=stop and disable systemd service'
     fi
 
+    if exists pi; then
+        ZPWR_VERBS[pi]='pi=ping all LAN devices'
+    fi
+
+    if [[ -d "$ZPWR_PYSCRIPTS" ]]; then
+        ZPWR_VERBS[start]='tmm_notabs=start with no tabs'
+        ZPWR_VERBS[starttabs]='tmm_full=start all tabs'
+    fi
+
     verb="$1"
 
     if [[ -n "$verb" ]]; then
@@ -379,7 +385,7 @@ ZPWR_VARS[VERB_0]="$0"
         done
 
         if [[ $found == false ]]; then
-            loggErr "Unknown subcommand: '$verb'"
+            zpwrLoggErr "Unknown subcommand: '$verb'"
             return 1
         fi
 

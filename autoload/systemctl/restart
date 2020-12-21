@@ -3,7 +3,7 @@
 function ___restart(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: restart <services...>"
+        zpwrLoggErr "usage: restart <services...>"
         return 1
     fi
 
@@ -14,15 +14,15 @@ function ___restart(){
     service_path="$src_dir/$service.service"
 
     test -d "$src_dir" ||
-{ loggErr "$src_dir does not exists." && return 1; }
+{ zpwrLoggErr "$src_dir does not exists." && return 1; }
     test -f "$service_path" ||
-{ loggErr "$service_path does not exists so falling back to $1." && service_path="$1"; }
+{ zpwrLoggErr "$service_path does not exists so falling back to $1." && service_path="$1"; }
 
     test -f "$service_path" ||
-{ loggErr "$service_path does not exists so exiting." && return 1; }
+{ zpwrLoggErr "$service_path does not exists so exiting." && return 1; }
 
     test -d "/etc/systemd/system" ||
-{ loggErr "/etc/systemd/system does not exists. Is systemd installed?" && return 1; }
+{ zpwrLoggErr "/etc/systemd/system does not exists. Is systemd installed?" && return 1; }
 
     ( builtin cd "$src_dir" && git pull; )
     group=$(id -gn)
@@ -32,7 +32,7 @@ function ___restart(){
     service_path="$ZPWR_LOCAL/$service.service"
 
     if ! test -f "$service_path"; then
-        loggErr "$service_path does not exists"
+        zpwrLoggErr "$service_path does not exists"
         return 1
     fi
 

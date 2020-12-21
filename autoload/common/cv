@@ -3,7 +3,7 @@
 function ___cv() {
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: cv <file...>"
+        zpwrLoggErr "usage: cv <file...>"
         return 1
     fi
 

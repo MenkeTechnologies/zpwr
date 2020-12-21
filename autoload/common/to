@@ -5,7 +5,7 @@ function ___to(){
     local file
     file="$HOME/.config/powerline/themes/tmux/default.json"
 
-    [[ ! -f "$file" ]] && loggErr "no tmux config" && return 1
+    [[ ! -f "$file" ]] && zpwrLoggErr "no tmux config" && return 1
     if cat "$file" | grep -sq "external_ip"; then
         perl -i -pe 's@^.*external_ip.*$@@' "$file"
         printf "Removing External IP\n"

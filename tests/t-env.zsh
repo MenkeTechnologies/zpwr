@@ -369,13 +369,13 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert "$output" is_empty
 }
 
-@test 'exists loggDebug' {
-    run exists loggDebug
+@test 'exists zpwrLoggDebug' {
+    run exists zpwrLoggDebug
     assert $state equals 0
 }
 
-@test 'exists loggErr' {
-    run exists loggErr
+@test 'exists zpwrLoggErr' {
+    run exists zpwrLoggErr
     assert $state equals 0
 }
 

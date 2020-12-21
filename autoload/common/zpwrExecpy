@@ -3,7 +3,7 @@
 function zpwrExecpy(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrExecpy <file>"
+        zpwrLoggErr "usage: zpwrExecpy <file>"
         return 1
     fi
 
@@ -12,11 +12,11 @@ function zpwrExecpy(){
     script="$1"
     shift
 
-    if [[ ! -f "$PYSCRIPTS/$script" ]]; then
-        loggErr "$PYSCRIPTS/$script does not exist!"
+    if [[ ! -f "$ZPWR_PYSCRIPTS/$script" ]]; then
+        zpwrLoggErr "$ZPWR_PYSCRIPTS/$script does not exist!"
         return 1
     fi
-    python3 "$PYSCRIPTS/$script" "$@"
+    python3 "$ZPWR_PYSCRIPTS/$script" "$@"
 
 }
 

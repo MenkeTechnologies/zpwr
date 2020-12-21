@@ -11,7 +11,7 @@ function zpwrVimFzf(){
         zle .kill-whole-line
     else
         firstdir=${mywords[1]:h}
-        loggDebug "words='$mywords[1]'=>'$firstdir'"
+        zpwrLoggDebug "words='$mywords[1]'=>'$firstdir'"
         BUFFER="$EDITOR $BUFFER"
         #:h takes aways last "
         BUFFER="builtin cd $firstdir\"; $BUFFER; zpwrClearList;isGitDir && git diff HEAD"

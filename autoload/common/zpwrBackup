@@ -3,7 +3,7 @@
 function zpwrBackup(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: backup <file>"
+        zpwrLoggErr "usage: backup <file>"
         return 1
     fi
 

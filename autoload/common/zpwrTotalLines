@@ -31,7 +31,7 @@ function zpwrTotalLines(){
 
     if ! test -f "$ZPWR_TEMPFILE"; then
         printf "\x1b[0;1;31m"
-        loggErr "where is $ZPWR_TEMPFILE" 
+        zpwrLoggErr "where is $ZPWR_TEMPFILE" 
         printf "\x1b[0m"
         return 1
     fi

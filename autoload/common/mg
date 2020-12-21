@@ -5,7 +5,7 @@ function mg() {
     if [[ -d "$HOME/RubymineProjects" ]]; then
         cd "$HOME/RubymineProjects"
     else
-        loggErr "HOME/RubymineProjects '$HOME/RubymineProjects' is not a dir."
+        zpwrLoggErr "HOME/RubymineProjects '$HOME/RubymineProjects' is not a dir."
     fi
 
 }

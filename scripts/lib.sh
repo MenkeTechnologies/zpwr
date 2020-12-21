@@ -75,7 +75,7 @@ function humanReadable(){
 function perlRemoveSpaces(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: perlRemoveSpaces <file...>"
+        zpwrLoggErr "usage: perlRemoveSpaces <file...>"
         return 1
     fi
 
@@ -97,7 +97,7 @@ function escapeRemove(){
 function prettyPrintNoNewline(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: prettyPrintNoNewline <string>"
+        zpwrLoggErr "usage: prettyPrintNoNewline <string>"
         return 1
     fi
 
@@ -114,13 +114,13 @@ function isBinary() {
 
 function loggNotGit() {
 
-    loggErr "'$(pwd)' is not a git dir"
+    zpwrLoggErr "'$(pwd)' is not a git dir"
 }
 
-function loggInfo(){
+function zpwrLoggInfo(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: loggInfo <msg>"
+        zpwrLoggErr "usage: zpwrLoggInfo <msg>"
         return 1
     fi
     {
@@ -131,10 +131,10 @@ function loggInfo(){
     } >&1
 }
 
-function loggErr(){
+function zpwrLoggErr(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: loggErr <msg>"
+        zpwrLoggErr "usage: zpwrLoggErr <msg>"
         return 1
     fi
     {
@@ -148,7 +148,7 @@ function loggErr(){
 function needSudo(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: needSudo <file>"
+        zpwrLoggErr "usage: needSudo <file>"
         return 1
     fi
 
@@ -194,7 +194,7 @@ function logg(){
             } >> "$ZPWR_LOGFILE"
         else
             if [[ -z "$1" ]]; then
-                loggErr "usage: logg <msg>"
+                zpwrLoggErr "usage: logg <msg>"
                 return 1
             fi
         fi
@@ -213,14 +213,14 @@ function logg(){
             } >> "$ZPWR_LOGFILE"
         else
             if [[ -z "$1" ]]; then
-                loggErr "usage: logg <msg>"
+                zpwrLoggErr "usage: logg <msg>"
                 return 1
             fi
         fi
     fi
 }
 
-function loggDebug(){
+function zpwrLoggDebug(){
 
     if [[ $ZPWR_DEBUG == true ]]; then
        logg "$@" 
@@ -250,7 +250,7 @@ function isGitDirMessage(){
 
     if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
         printf "\x1b[0;1;31m"
-        loggErr "NOT GIT DIR: $(pwd -P)"
+        zpwrLoggErr "NOT GIT DIR: $(pwd -P)"
         printf "\x1b[0m"
         return 1
     fi
@@ -322,7 +322,7 @@ function installGitHubPluginsFromFile(){
     shift $((OPTIND-1))
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: installGitHubPluginsFromFile <repo_file>"
+        zpwrLoggErr "usage: installGitHubPluginsFromFile <repo_file>"
         return 1
     fi
 
@@ -345,7 +345,7 @@ function installGitHubPluginsFromFile(){
 function overwriteGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: overwriteGitHubPlugin <repo>"
+        zpwrLoggErr "usage: overwriteGitHubPlugin <repo>"
         return 1
     fi
 
@@ -366,7 +366,7 @@ function overwriteGitHubPlugin(){
 function installGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: installGitHubPlugin <repo>"
+        zpwrLoggErr "usage: installGitHubPlugin <repo>"
         return 1
     fi
 
@@ -480,7 +480,7 @@ function proceed(){
                 exit 1
                 ;;
             *)
-                loggErr "You must enter y(es) or n(no)"
+                zpwrLoggErr "You must enter y(es) or n(no)"
                 ;;
         esac
     done
@@ -493,7 +493,7 @@ function prettyPrint(){
         printf "%s " "$@"
         printf "\x1b[0m\n"
     else
-        loggErr "usage: prettyPrint <msg>"
+        zpwrLoggErr "usage: prettyPrint <msg>"
         return 1
     fi
 }
@@ -743,7 +743,7 @@ function zpwrClearList() {
                 fi
             fi
             if [[ $FOUND == false ]]; then
-                loggErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
+                zpwrLoggErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
             fi
         done
     else

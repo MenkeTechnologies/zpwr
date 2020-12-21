@@ -12,7 +12,7 @@ function ___zr(){
     elif [[ -d "$forked" ]]; then
         cd "$forked"
     else
-        loggErr "$dirsc and $forked do not exist"
+        zpwrLoggErr "$dirsc and $forked do not exist"
     fi
 }
 

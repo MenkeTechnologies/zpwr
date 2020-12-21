@@ -3,7 +3,7 @@
 function zpwrChangeName(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: zpwrChangeName <files...>"
+        zpwrLoggErr "usage: zpwrChangeName <files...>"
         return 1
     fi
     local oldName newName arg

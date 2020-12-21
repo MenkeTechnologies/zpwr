@@ -8,7 +8,7 @@ function zpwrChangeGitAuthorEmail(){
     fi
 
     if [[ -z "$2" ]]; then
-        loggErr "usage: zpwrChangeGitAuthorEmail <oldEmail> <newEmail>"
+        zpwrLoggErr "usage: zpwrChangeGitAuthorEmail <oldEmail> <newEmail>"
         return 1
     fi
 

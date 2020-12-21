@@ -34,7 +34,7 @@ else
 fi
 
 if [[ -z "$1" ]]; then
-        loggErr "usage: $0 <textToDisplay>"
+        zpwrLoggErr "usage: $0 <textToDisplay>"
         exit 1
 fi
 

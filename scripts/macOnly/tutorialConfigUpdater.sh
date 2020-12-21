@@ -76,7 +76,7 @@ if exists gtags; then
 
     )
 else
-    loggErr "gtags does not exist"
+    zpwrLoggErr "gtags does not exist"
 fi
 
 logg "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
@@ -92,7 +92,7 @@ logg "Updating zsh plugins list"
 printf "" > "$ZPWR_DIR_INSTALL/.zshplugins"
 
 if [[ -z $ZSH_CUSTOM ]]; then
-    loggErr "ZSH_CUSTOM is null so can not update zsh plugins list"
+    zpwrLoggErr "ZSH_CUSTOM is null so can not update zsh plugins list"
 else
     for dir in "$ZSH_CUSTOM/plugins/"*; do
         if basename "$dir" | grep -sq "example";then

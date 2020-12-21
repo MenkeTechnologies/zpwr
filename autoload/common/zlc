@@ -5,7 +5,7 @@ function zlc(){
     if [[ -d "$ZPWR_COMPSYS_CACHE" ]]; then
         cd "$ZPWR_COMPSYS_CACHE"
     else
-        loggErr "ZPWR_COMPSYS_CACHE '$ZPWR_COMPSYS_CACHE' is not a directory."
+        zpwrLoggErr "ZPWR_COMPSYS_CACHE '$ZPWR_COMPSYS_CACHE' is not a directory."
     fi
 
 }

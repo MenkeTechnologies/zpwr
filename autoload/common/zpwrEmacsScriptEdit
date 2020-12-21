@@ -12,11 +12,11 @@ function zpwrEmacsScriptEdit(){
         return
     fi
     BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
-    loggDebug "builtin cd $ZPWR_SCRIPTS"
+    zpwrLoggDebug "builtin cd $ZPWR_SCRIPTS"
     eval "builtin cd $ZPWR_SCRIPTS"
 
     BUFFER="$BUFFER; zpwrClearList; isGitDir && git diff HEAD"
-    loggDebug "$BUFFER"
+    zpwrLoggDebug "$BUFFER"
     print -s -- "$BUFFER"
     eval "$BUFFER"
 }

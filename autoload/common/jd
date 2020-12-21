@@ -3,7 +3,7 @@
 function ___jd(){
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: j <dir/dir>"
+        zpwrLoggErr "usage: j <dir/dir>"
         return 1
     fi
 

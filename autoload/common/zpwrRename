@@ -3,7 +3,7 @@
 function zpwrRename(){
 
     if [[ -z "$2" ]]; then
-        loggErr "usage: zpwrRename <search> <file...>"
+        zpwrLoggErr "usage: zpwrRename <search> <file...>"
         return 1
     fi
 

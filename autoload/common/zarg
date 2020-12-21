@@ -3,7 +3,7 @@
 function ___zarg(){
 
     if [[ -z "$2" ]]; then
-        loggErr "usage: zarg <escaped glob> <cmd with {}>"
+        zpwrLoggErr "usage: zarg <escaped glob> <cmd with {}>"
         return 1
     fi
 

@@ -5,7 +5,7 @@ function asg() {
     if [[ -d "$HOME/AndroidStudioProjects" ]]; then
         cd "$HOME/AndroidStudioProjects"
     else
-        loggErr "HOME/AndroidStudioProjects '$HOME/AndroidStudioProjects' is not a dir."
+        zpwrLoggErr "HOME/AndroidStudioProjects '$HOME/AndroidStudioProjects' is not a dir."
     fi
 
 }

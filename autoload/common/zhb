@@ -5,7 +5,7 @@ function zhb() {
     if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME/bin" ]]; then
         cd "$ZPWR_PLUGIN_MANAGER_HOME/bin"
     else
-        loggErr "ZPWR_PLUGIN_MANAGER_HOME/bin '$ZPWR_PLUGIN_MANAGER_HOME/bin' is not a dir."
+        zpwrLoggErr "ZPWR_PLUGIN_MANAGER_HOME/bin '$ZPWR_PLUGIN_MANAGER_HOME/bin' is not a dir."
     fi
 
 }

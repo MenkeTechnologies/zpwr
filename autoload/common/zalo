@@ -5,7 +5,7 @@ function zalo(){
     if [[ -d "$ZPWR_AUTOLOAD_COMPS" ]]; then
         cd "$ZPWR_AUTOLOAD_COMPS"
     else
-        loggErr "ZPWR_AUTOLOAD_COMPS '$ZPWR_AUTOLOAD_COMPS' is not a directory."
+        zpwrLoggErr "ZPWR_AUTOLOAD_COMPS '$ZPWR_AUTOLOAD_COMPS' is not a directory."
     fi
 
 }
