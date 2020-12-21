@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function colortest(){
+function zpwrColortest(){
 
     local backgroundColor
 
@@ -30,4 +30,4 @@ function colortest(){
     done
 }
 
-colortest "$@"
+zpwrColortest "$@"

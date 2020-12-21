@@ -5,10 +5,10 @@ function zpwrBindOverrideZLE(){
 
     autoload -Uz select-bracketed select-quoted bracketed-paste-magic edit-command-line
 
-    autoload -z zpwrBufferXtrace expand-or-complete-with-dots
+    autoload -z zpwrBufferXtrace zpwrExpandOrCompleteWithDots
 
     zle -N zpwrBufferXtrace
-    zle -N expand-or-complete-with-dots
+    zle -N zpwrExpandOrCompleteWithDots
     zle -N accept-line zpwrAcceptLine
     zle -N zpwrMagicEnter
     zle -N edit-command-line
@@ -18,7 +18,7 @@ function zpwrBindOverrideZLE(){
     zle -N zpwrExpandAliasAccept
     zle -N zpwrRationalizeDot
     zle -N downTen
-    zle -N self-insert
+    zle -N zpwrSelfInsert
     zle -N zpwrLastWordDouble
     zle -N zpwrFzfCommits
     zle -N updater
@@ -52,13 +52,12 @@ function zpwrBindOverrideZLE(){
     zle -N subLine
     zle -N zpwrChangeQuotes
     zle -N zpwrAlternateQuotes
-    zle -N clipboard
+    zle -N zpwrClipboard
     zle -N zpwrEOLorNextTabStop
     zle -N zpwrFzfSurround
 
-    bindkey -M vicmd '^I' expand-or-complete-with-dots
-    bindkey -M viins '^I' expand-or-complete-with-dots
-
+    bindkey -M vicmd '^I' zpwrExpandOrCompleteWithDots
+    bindkey -M viins '^I' zpwrExpandOrCompleteWithDots
 
     bindkey -M viins '^M' zpwrMagicEnter
     bindkey -M vicmd '^M' zpwrMagicEnter
@@ -223,11 +222,11 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '\e^U' up-case-word
     bindkey -M vicmd '\e^U' up-case-word
 
-    bindkey -M viins '\e[5~' clipboard
-    bindkey -M viins '^B' clipboard
-    bindkey -M vicmd '^B' clipboard
+    bindkey -M viins '\e[5~' zpwrClipboard
+    bindkey -M viins '^B' zpwrClipboard
+    bindkey -M vicmd '^B' zpwrClipboard
 #shift tab
-    bindkey -M viins '\e[Z' clipboard
+    bindkey -M viins '\e[Z' zpwrClipboard
 
     bindkey '\e[1;2D' sub
     bindkey '\e^f' sub
@@ -345,7 +344,7 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
     if [[ $ZPWR_INTERACTIVE_MENU_SELECT == true ]]; then
         bindkey -M menuselect '^I' vi-forward-char
         bindkey -M menuselect '^?' undo
-        bindkey -M menuselect '.' self-insert
+        bindkey -M menuselect '.' zpwrSelfInsert
     else
         :
     fi

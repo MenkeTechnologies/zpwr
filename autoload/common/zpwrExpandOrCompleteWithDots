@@ -1,10 +1,11 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function expand-or-complete-with-dots() {
+
+function zpwrExpandOrCompleteWithDots() {
     print -Pn "%F{red}…%f"
     zle expand-or-complete
     zle redisplay
 }
 
-expand-or-complete-with-dots "$@"
+zpwrExpandOrCompleteWithDots "$@"

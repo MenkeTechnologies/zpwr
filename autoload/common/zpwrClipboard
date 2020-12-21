@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___clipboard(){
+function zpwrClipboard(){
 
     [[ -z "$BUFFER" ]] && return 1
 
@@ -25,4 +25,4 @@ function ___clipboard(){
     fi
 }
 
-___clipboard "$@"
+zpwrClipboard "$@"

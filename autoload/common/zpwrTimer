@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___timer() {
+function zpwrTimer() {
 
     if [[ -z "$1" ]]; then
         loggErr "usage: timer <command...>"
@@ -41,4 +41,4 @@ function ___timer() {
     command rm "$ZPWR_TEMPFILE"
 }
 
-___timer "$@"
+zpwrTimer "$@"

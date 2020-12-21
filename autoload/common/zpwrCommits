@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___commits(){
+function zpwrCommits(){
 
     if isGitDir; then
         if [[ $EDITOR = nvim ]];then
@@ -16,4 +16,4 @@ function ___commits(){
     fi
 }
 
-___commits "$@"
+zpwrCommits "$@"
