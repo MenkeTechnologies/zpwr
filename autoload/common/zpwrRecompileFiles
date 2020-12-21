@@ -26,6 +26,8 @@ function zpwrRecompileFiles(){
         "$ZPWR_LIB_INIT"
         "$ZPWR_SCRIPTS/crossOSCommands.sh"
         "$ZPWR_COMPSYS_CACHE/"*
+        "$ZPWR_PLUGIN_MANAGER_HOME/"*.zsh
+        "$ZPWR_PLUGIN_MANAGER_HOME/bin/"**/*.zsh
         "$ZSH/lib/"*.zsh
         "$ZSH/plugins/"*/*.plugin.zsh
         "$ZSH/plugins/"*/*.zsh
