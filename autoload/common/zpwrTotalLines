@@ -41,11 +41,11 @@ function zpwrTotalLines(){
     if (( $lineCount > 10 )); then
         echo "$lineCount" |
             perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
-            alternatingPrettyPrint | less -r
+            zpwrAlternatingPrettyPrint | less -r
     else
         echo "$lineCount" |
             perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
-            alternatingPrettyPrint
+            zpwrAlternatingPrettyPrint
     fi
     command rm "$ZPWR_TEMPFILE"
 }

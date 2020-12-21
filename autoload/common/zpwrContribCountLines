@@ -40,11 +40,11 @@ function zpwrContribCountLines(){
     if (( $lineCount > 10 )); then
         cat "$ZPWR_TEMPFILE" | sort | uniq -c | sort -r |
         perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
-            alternatingPrettyPrint | less -r
+            zpwrAlternatingPrettyPrint | less -r
     else
         cat "$ZPWR_TEMPFILE" | sort | uniq -c | sort -r |
         perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
-            alternatingPrettyPrint
+            zpwrAlternatingPrettyPrint
     fi
     command rm "$ZPWR_TEMPFILE"
 

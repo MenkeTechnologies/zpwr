@@ -540,7 +540,7 @@ function turnOnDebugging(){
     exec >> >(tee "$ZPWR_INSTALLER_OUTPUT/logfile.txt")
 }
 
-function alternatingPrettyPrint(){
+function zpwrAlternatingPrettyPrint(){
 
     local counter=0
 
@@ -571,7 +571,7 @@ function alternatingPrettyPrint(){
 
 }
 
-function clearGitCache(){
+function zpwrClearGitCache(){
 
     if ! isGitDir; then
         loggNotGit
@@ -597,7 +597,7 @@ function gitRepoUpdater() {
                         isGitDir && 
                         printf "\x1b[1m%s:\x1b[0m " "$(basename "$generic_git_repo_plugin")" &&
                         git fetch --all --prune &&
-                        git pull --all && clearGitCache
+                        git pull --all && zpwrClearGitCache
                     )
             fi
         done

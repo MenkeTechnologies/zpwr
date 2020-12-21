@@ -47,6 +47,10 @@ export ZPWR_COLOR_RED="\x1b[31m"
 export ZPWR_COLOR_RESET="\x1b[0m"
 # ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
+# named compsys colors
+export ZPWR_NAMED_COLORS='=(#b)(*)=1;37;46'
+# file prefix compsys colors
+export ZPWR_COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 # sudo prefix to add when you get permission denied
 export ZPWR_SUDO_CMD='sudo -E'
 # sudo for aliases

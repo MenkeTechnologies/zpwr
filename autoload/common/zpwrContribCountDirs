@@ -32,7 +32,7 @@ function zpwrContribCountDirs(){
     while read; do
        ((sum += $REPLY))
     done < "$ZPWR_TEMPFILE1"
-    echo "Total contributions for ${ZPWR_DELIMITER_CHAR}$user${ZPWR_DELIMITER_CHAR} is ${ZPWR_DELIMITER_CHAR}$sum${ZPWR_DELIMITER_CHAR}." | alternatingPrettyPrint
+    echo "Total contributions for ${ZPWR_DELIMITER_CHAR}$user${ZPWR_DELIMITER_CHAR} is ${ZPWR_DELIMITER_CHAR}$sum${ZPWR_DELIMITER_CHAR}." | zpwrAlternatingPrettyPrint
 
 }
 

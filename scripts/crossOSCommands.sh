@@ -11,7 +11,7 @@ if [[ -z "$ZPWR_OS_TYPE" ]]; then
     export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 fi
 
-function getOpenCommand(){
+function zpwrGetOpenCommand(){
 
     local open_cmd
 
@@ -37,7 +37,7 @@ function getOpenCommand(){
     echo "$open_cmd"
 }
 
-function getPasteCommand(){
+function zpwrGetPasteCommand(){
 
     local paste_cmd
 
@@ -97,9 +97,9 @@ function getCopyCommand(){
     echo "$copy_cmd"
 }
 
-export ZPWR_OPEN_CMD="$(getOpenCommand)"
+export ZPWR_OPEN_CMD="$(zpwrGetOpenCommand)"
 export ZPWR_COPY_CMD="$(getCopyCommand)"
-export ZPWR_PASTE_CMD="$(getPasteCommand)"
+export ZPWR_PASTE_CMD="$(zpwrGetPasteCommand)"
 
 
 

@@ -689,7 +689,7 @@ function zpwrLargestGitFiles(){zpwrLargestGitFiles939,30430
         size=$(printf $size | humanReadable)size957,30787
 function clearGitCommit(){clearGitCommit962,30982
     regex="^$1\$"regex974,31170
-function clearGitCache(){clearGitCache987,31456
+function zpwrClearGitCache(){zpwrClearGitCache987,31456
 function about(){about999,31719
     old="$LESS"old1001,31738
     export LESS="$old"LESS1006,31867
@@ -773,7 +773,7 @@ function return2(){return21586,46404
 function color2(){color21596,46536
 function escapeRemove(){escapeRemove1606,46672
 function prettyPrint(){prettyPrint1613,46781
-function alternatingPrettyPrint(){alternatingPrettyPrint1625,46978
+function zpwrAlternatingPrettyPrint(){zpwrAlternatingPrettyPrint1625,46978
     counter=0counter1628,47032
 function tac(){tac1655,47698
 function backup(){backup1660,47743
@@ -932,7 +932,7 @@ function zpwrChangeGitCommitterEmail(){zpwrChangeGitCommitterEmail2986,83971
     oldEmail="$1"oldEmail2998,84182
     newEmail="$2"newEmail2999,84200
         GIT_COMMITTER_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_COMMITTER_EMAIL3005,84374
-function changeGitAuthorEmail(){changeGitAuthorEmail3011,84494
+function zpwrChangeGitAuthorEmail(){zpwrChangeGitAuthorEmail3011,84494
     oldEmail="$1"oldEmail3023,84702
     newEmail="$2"newEmail3024,84720
         GIT_AUTHOR_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_AUTHOR_EMAIL3030,84888
@@ -951,7 +951,7 @@ nproc=10nproc10,327
 usage() {usage16,553
 prettyPrint() {prettyPrint29,907
 exists() {exists35,984
-alternatingPrettyPrint() {alternatingPrettyPrint39,1028
+zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint39,1028
     counter=0counter40,1055
 killpids() {killpids101,2320
         pids="$pids $!"pids119,2996
@@ -1132,10 +1132,10 @@ newfile="$1"newfile74,1789
 
 /Users/wizard/.zpwr/scripts/crossOSCommands.sh,1176
     export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"ZPWR_OS_TYPE11,347
-getOpenCommand(){getOpenCommand14,412
+zpwrGetOpenCommand(){zpwrGetOpenCommand14,412
                 open_cmd='nohup xdg-open'open_cmd24,646
                 open_cmd='cmd.exe /c start ""'open_cmd26,705
-getPasteCommand(){getPasteCommand39,983
+zpwrGetPasteCommand(){zpwrGetPasteCommand39,983
             paste_cmd='pbpaste'paste_cmd44,1068
             paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"paste_cmd47,1132
                 paste_cmd='xclip -o -sel clip'paste_cmd51,1292
@@ -1147,9 +1147,9 @@ getCopyCommand(){getCopyCommand68,1708
                 copy_cmd='xclip -i -sel clip'copy_cmd80,1970
                 copy_cmd='clip.exe'copy_cmd82,2033
             copy_cmd='clip.exe'copy_cmd86,2114
-export ZPWR_OPEN_CMD="$(getOpenCommand)"ZPWR_OPEN_CMD97,2298
+export ZPWR_OPEN_CMD="$(zpwrGetOpenCommand)"ZPWR_OPEN_CMD97,2298
 export ZPWR_COPY_CMD="$(getCopyCommand)"ZPWR_COPY_CMD98,2339
-export ZPWR_PASTE_CMD="$(getPasteCommand)"ZPWR_PASTE_CMD99,2380
+export ZPWR_PASTE_CMD="$(zpwrGetPasteCommand)"ZPWR_PASTE_CMD99,2380
 
 /Users/wizard/.zpwr/scripts/delete_dups.zsh,41
     cmd="$(echo $f | cut -c2-)"cmd6,77
@@ -1373,7 +1373,7 @@ function prettyPrint(){prettyPrint169,3962
     local perlfile="$ZPWR_BASE_SCRIPTS/boxPrint.pl"perlfile170,3986
 function turnOffDebugging(){turnOffDebugging177,4204
 function turnOnDebugging(){turnOnDebugging183,4279
-function alternatingPrettyPrint(){alternatingPrettyPrint190,4445
+function zpwrAlternatingPrettyPrint(){zpwrAlternatingPrettyPrint190,4445
     counter=0counter191,4480
 
 /Users/wizard/.zpwr/scripts/listAllCommands.sh,52
@@ -1673,7 +1673,7 @@ commandList=""commandList69,1255
 
 /Users/wizard/.zpwr/scripts/oldPipUpdater.sh,471
 export ZPWR_DELIMITER_CHAR='%'ZPWR_DELIMITER_CHAR10,269
-alternatingPrettyPrint() {alternatingPrettyPrint12,301
+zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint12,301
     counter=0counter13,328
 outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated43,1225
     outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated58,2310
@@ -1784,7 +1784,7 @@ master="jacobmenke"master11,327
 prettyPrint() {prettyPrint13,380
 exists() {exists19,457
 export ZPWR_DELIMITER_CHAR='%'ZPWR_DELIMITER_CHAR22,500
-alternatingPrettyPrint() {alternatingPrettyPrint24,532
+zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint24,532
     counter=0counter25,559
 gitRepoUpdater() {gitRepoUpdater53,1251
     enclosing_dir="$1"enclosing_dir54,1270
@@ -1943,7 +1943,7 @@ updatePI() {updatePI10,290
 __ScriptVersion="1.0.0"__ScriptVersion11,332
 usage() {usage17,573
 prettyPrint() {prettyPrint63,1646
-alternatingPrettyPrint() {alternatingPrettyPrint69,1723
+zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint69,1723
 exists() {exists96,2404
 gitRepoUpdater() {gitRepoUpdater100,2448
     enclosing_dir="$1"enclosing_dir101,2467
@@ -1966,7 +1966,7 @@ ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"ZPWR_LOGFILE11,350
 __ScriptVersion="1.0.0"__ScriptVersion11,332
 usage() {usage17,573
 prettyPrint() {prettyPrint61,1576
-alternatingPrettyPrint() {alternatingPrettyPrint67,1653
+zpwrAlternatingPrettyPrint() {zpwrAlternatingPrettyPrint67,1653
 exists() {exists94,2334
 gitRepoUpdater() {gitRepoUpdater98,2378
     enclosing_dir="$1"enclosing_dir99,2397

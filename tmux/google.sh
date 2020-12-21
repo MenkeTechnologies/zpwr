@@ -8,7 +8,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-function getOpenCommand(){
+function zpwrGetOpenCommand(){
     local open_cmd
 
     case "$ZPWR_OS_TYPE" in
@@ -82,7 +82,7 @@ else
     esac
 fi
 
-cmd="$(getOpenCommand)"
+cmd="$(zpwrGetOpenCommand)"
 
 if [[ "$1" == open ]]; then
     dir="$(cat $ZPWR_TMUX_LOCAL/pane_pwd)"

@@ -241,18 +241,16 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:*:last-line' list-colors '=(#b)(*)=1;37;44'
     zstyle ':completion:*:*:last-clip' list-colors '=(#b)(*)=1;37;45'
     #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
-    export ZPWR_NAMED_COLORS='=(#b)(*)=1;37;46'
-    COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
     #COMMON_ZSTYLE_OPTS_NAMED='reply=("${${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:-=(#b)(*)=1;30=1;37;46}")'
 
 
-    zstyle -e ':completion:*:local-directories' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:*:f:*:*' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:globbed-files' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:argument-rest:*' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:all-files' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:files' list-colors "$COMMON_ZSTYLE_OPTS"
-    zstyle -e ':completion:*:directories' list-colors "$COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:local-directories' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:*:f:*:*' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:globbed-files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:argument-rest:*' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:all-files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+    zstyle -e ':completion:*:directories' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
     #zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS_NAMED"
     zstyle ':completion:*:named-directories' list-colors '=(#b)(*)=1;30=1;37;46'
 

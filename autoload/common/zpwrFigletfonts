@@ -27,7 +27,7 @@ function zpwrFigletfonts(){
     exists splitReg.sh || { loggErr "you need splitReg.sh" && return 1; }
     exists tput || { loggErr "you need tput" && return 1; }
 
-    alternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}iglet ${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}onts ${ZPWR_DELIMITER_CHAR}A${ZPWR_DELIMITER_CHAR}re:"
+    zpwrAlternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}iglet ${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}onts ${ZPWR_DELIMITER_CHAR}A${ZPWR_DELIMITER_CHAR}re:"
 
 
     if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then

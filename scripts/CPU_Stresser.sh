@@ -95,14 +95,14 @@ done
 shift $((OPTIND - 1))
 
 if [[ "$detach" == true ]]; then
-    alternatingPrettyPrint "Spawning $ZPWR_DELIMITER_CHAR${nproc}$ZPWR_DELIMITER_CHAR processes in background."
+    zpwrAlternatingPrettyPrint "Spawning $ZPWR_DELIMITER_CHAR${nproc}$ZPWR_DELIMITER_CHAR processes in background."
     for ((i = 0; i < nproc; ++i)); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
         (yes &>/dev/null &)
     done
 else
-    alternatingPrettyPrint "Spawning $ZPWR_DELIMITER_CHAR${nproc}$ZPWR_DELIMITER_CHAR processes interactively."
+    zpwrAlternatingPrettyPrint "Spawning $ZPWR_DELIMITER_CHAR${nproc}$ZPWR_DELIMITER_CHAR processes interactively."
     for ((i = 0; i < nproc; ++i)); do
         #launch yes in the background in subshell disowning it
         #send all output to /dev/null
@@ -112,7 +112,7 @@ else
 
     trap 'killpids "$pids" 2>/dev/null' INT QUIT
 
-    alternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}Ctrl-C$ZPWR_DELIMITER_CHAR to kill all spawned processes."
+    zpwrAlternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}Ctrl-C$ZPWR_DELIMITER_CHAR to kill all spawned processes."
 
     wait $!
 
