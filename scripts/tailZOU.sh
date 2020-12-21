@@ -60,7 +60,7 @@ svc=(ufw ovpn zabbix-agent)
 if [[ $restart == yes ]]; then
 
     for s in ${svc[@]} ; do
-        if commandExists $s; then
+        if zpwrCommandExists $s; then
             sudo systemctl restart $s
             sudo systemctl --no-pager status $s
             sudo journalctl -n 100 --no-pager
@@ -73,7 +73,7 @@ fi
 
 #{{{                    MARK:Tail
 #**************************************************************
-if commandExists ccze; then
+if zpwrCommandExists ccze; then
     if [[ $color == no ]]; then
         {
         sudo tail -n $size -F \

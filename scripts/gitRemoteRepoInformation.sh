@@ -39,7 +39,7 @@ fi
 for directory; do
     if [[ -d "$directory" ]]; then
         cd "$directory" && {
-            isGitDir && {
+            zpwrIsGitDir && {
                 line="$(git remote -v 2>/dev/null | command grep origin | head -n 1)" && {
                     if echo "$line" | grep -q 'git@'; then
                         #ssh

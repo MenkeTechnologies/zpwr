@@ -95,7 +95,7 @@ if [[ $skip != true ]]; then
         width=80
         perl -le "print '_'x$width" | lolcat
         if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-            commandExists catme && commandExists cowsay && commandExists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
+            zpwrCommandExists catme && zpwrCommandExists cowsay && zpwrCommandExists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
         fi
         perl -le "print '_'x$width" | lolcat
     fi
@@ -121,14 +121,14 @@ if [[ $skip != true ]]; then
         zpwrGitRepoUpdater "$ZSH_CUSTOM/plugins"
     fi
 
-    commandExists /usr/local/bin/ruby && {
+    zpwrCommandExists /usr/local/bin/ruby && {
         zpwrPrettyPrint "Updating Ruby Packages"
         yes | /usr/local/bin/gem update --system
         yes | /usr/local/bin/gem update
         yes | /usr/local/bin/gem cleanup
     }
 
-    commandExists brew && {
+    zpwrCommandExists brew && {
         zpwrPrettyPrint "Updating Homebrew Packages"
         brew update  #&> /dev/null
         brew upgrade #&> /dev/null
@@ -139,7 +139,7 @@ if [[ $skip != true ]]; then
         brew services cleanup
     }
 
-    commandExists npm && {
+    zpwrCommandExists npm && {
         zpwrPrettyPrint "Updating NPM packages"
         installDir=$(npm root -g | head -n 1)
         if [[ ! -w "$installDir" ]]; then
@@ -162,25 +162,25 @@ if [[ $skip != true ]]; then
         fi
     }
 
-    commandExists rustup && {
+    zpwrCommandExists rustup && {
         zpwrPrettyPrint "Updating rustup"
         rustup update
     }
 
-    commandExists cargo && {
+    zpwrCommandExists cargo && {
         zpwrPrettyPrint "Updating cargo packages"
         cargo install cargo-update 2>/dev/null
         cargo install-update -a
     }
 
-    commandExists yarn && {
+    zpwrCommandExists yarn && {
         zpwrPrettyPrint "Updating yarn packages"
         yarn global upgrade
         # zpwrPrettyPrint "Updating yarn itself"
         # npm install -g yarn
     }
 
-    commandExists cpanm && {
+    zpwrCommandExists cpanm && {
         zpwrPrettyPrint "Updating Perl Packages"
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
         if [[ -n "$perlOutdated" ]]; then
@@ -188,7 +188,7 @@ if [[ $skip != true ]]; then
         fi
     }
 
-    commandExists pio && {
+    zpwrCommandExists pio && {
         zpwrPrettyPrint "Updating PlatformIO"
         pio update
         pio upgrade
@@ -234,7 +234,7 @@ for pi in "${PI_ARRAY[@]}"; do
     updatePI "$pi"
 done
 
-commandExists brew && {
+zpwrCommandExists brew && {
     if brew tap | grep cask-upgrade 1>/dev/null 2>&1; then
         # we have brew cu
         zpwrPrettyPrint "Updating Homebrew Casks!"
@@ -252,7 +252,7 @@ zpwrPrettyPrint "Updating Vundle Plugins"
 
 if [[ $end != true ]]; then
     if [[ $USE_NEOVIM == true ]]; then
-        if commandExists nvim; then
+        if zpwrCommandExists nvim; then
             nvim -c VundleUpdate -c quitall
         else
             vim -c VundleUpdate -c quitall
@@ -265,4 +265,4 @@ fi
 #decolorize prompt
 printf "Done\n\x1b[0m"
 
-exists zpwrClearList && zpwrClearList
+zpwrExists zpwrClearList && zpwrClearList

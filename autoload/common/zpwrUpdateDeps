@@ -3,18 +3,18 @@
 function zpwrUpdateDeps(){
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        exists brew && {
+        zpwrExists brew && {
                 brew update && brew outdated && brew upgrade && brew cleanup; brew cu -ay
             }
     elif [[ "$ZPWR_OS_TYPE" == linux ]]; then
-                if exists pacman;then
+                if zpwrExists pacman;then
                     sudo -E pacman -Syyu --noconfirm --overwrite='*'
-                elif exists apt;then
+                elif zpwrExists apt;then
                     sudo -E apt update; sudo -E apt upgrade -y;sudo -E apt autoremove -y; sudo -E apt clean
                     #alias zpwrUpdateDeps="sudo -E apt update; sudo -E apt dist-upgrade -y; sudo -E apt autoremove -y; sudo -E apt clean; u8"
-                elif exists yum;then
+                elif zpwrExists yum;then
                     sudo -E yum check-update; sudo -E yum upgrade -y
-                elif exists zypper;then
+                elif zpwrExists zypper;then
                     sudo -E zypper update -y
                     #alias zpwrUpdateDeps="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y; u8"
                 fi

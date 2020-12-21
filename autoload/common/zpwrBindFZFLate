@@ -23,12 +23,12 @@ function zpwrBindFZFLate(){
         export FZF_COLORIZER_FILE="$ZPWR_COLORIZER -- \"\$file\" $FZF_COLORIZER_NL"
     }
 
-    commandExists bat && export BAT_THEME="$ZPWR_BAT_THEME"
+    zpwrCommandExists bat && export BAT_THEME="$ZPWR_BAT_THEME"
     export PYGMENTIZE_COLOR="$ZPWR_PYGMENTIZE_COLOR"
 
     if [[ "$ZPWR_COLORIZER" == bat ]]; then
 
-        if commandExists bat;then
+        if zpwrCommandExists bat;then
             zpwrBatSetup
         else
             zpwrPygmentizeSetup
@@ -56,8 +56,8 @@ function zpwrBindFZFLate(){
     export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%"
     local rpm_cmd
     local deb_cmd
-    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
-    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
+    zpwrExists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
+    zpwrExists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'
     export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsCtrlT.sh")'"

@@ -12,7 +12,7 @@ function zpwrGetrc(){
     fi
 
 #    if [[ $ZPWR_OS_TYPE == darwin ]]; then
-        #if exists dialog;then
+        #if zpwrExists dialog;then
             #dialog --inputbox "Are you sure that you want to overwrite your .zshrc,.vimrc,.tmux.conf, .shell_aliases_functions.sh?(y/n) >>> " 12 40 2> "$ZPWR_TEMPFILE"
             #clear
             #REPLY="$(cat "$ZPWR_TEMPFILE")"

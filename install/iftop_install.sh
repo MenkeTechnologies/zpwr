@@ -23,7 +23,7 @@ automake --version 2>&1 | grep -q '16' || {
             ./configure && make && sudo make install
             make clean
         else
-            fail "could not cd to automake-1.16"
+            zpwrFail "could not cd to automake-1.16"
         fi
     }
 
@@ -36,6 +36,6 @@ if builtin cd "$HOME/forkedRepos"; then
         ./configure && make && sudo make install
         make clean
     else
-        fail "could not cd to iftopcolor"
+        zpwrFail "could not cd to iftopcolor"
     fi
 fi

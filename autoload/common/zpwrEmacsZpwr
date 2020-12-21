@@ -5,7 +5,7 @@ function zpwrEmacsZpwr(){
     builtin cd $ZPWR
     ${=ZPWR_EMACS_CLIENT} .
     zpwrClearList
-    isGitDir && git diff HEAD
+    zpwrIsGitDir && git diff HEAD
 }
 
 zpwrEmacsZpwr "$@"

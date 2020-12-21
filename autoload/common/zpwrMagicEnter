@@ -9,7 +9,7 @@ function zpwrMagicEnter () {
 
     if [[ -z $BUFFER ]]; then
         echo
-        if isGitDir; then
+        if zpwrIsGitDir; then
             eval "$MAGIC_ENTER_GIT_COMMAND"
         else
             eval "$MAGIC_ENTER_OTHER_COMMAND"

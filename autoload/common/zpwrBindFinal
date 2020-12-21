@@ -29,7 +29,7 @@ function zpwrBindFinal(){
     test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
     #}}}***********************************************************
 
-    if exists jenv;then
+    if zpwrExists jenv;then
         export PATH="$HOME/.jenv/shims:$PATH"
     fi
 

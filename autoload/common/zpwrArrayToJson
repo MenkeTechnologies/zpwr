@@ -10,7 +10,7 @@ function zpwrArrayToJson(){
 
     local ary key
 
-    if isZsh; then
+    if zpwrIsZsh; then
         ary="$1"
         printf '%s\n%s\n' "${(kv)${(P)ary}[@]}" |
         jq -Rn '[inputs | { (.): input}] | add'

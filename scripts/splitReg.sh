@@ -95,7 +95,7 @@ fi
 regex="$1"
 filter="$2"
 
-commandExists $filter || filter='cat'
+zpwrCommandExists $filter || filter='cat'
 
 file="$ZPWR_TEMPFILE"
 command cat > "$file"

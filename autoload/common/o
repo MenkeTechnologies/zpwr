@@ -6,7 +6,7 @@ function ___o(){
 
     open_cmd="$ZPWR_OPEN_CMD" || return 1
 
-    if isZsh; then
+    if zpwrIsZsh; then
         if [[ -z "$1" ]]; then
             ${=open_cmd} . >> "$ZPWR_LOGFILE" 2>&1
         else

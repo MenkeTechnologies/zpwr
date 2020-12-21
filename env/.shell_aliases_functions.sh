@@ -21,7 +21,7 @@
 #{{{                    MARK:Import env and global fn
 #**************************************************************
 
-if ! type -- "exists" >/dev/null 2>&1;then
+if ! type -- "zpwrExists" >/dev/null 2>&1;then
     test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
     test -z "$ZPWR_ENV_FILE" && export ZPWR_ENV_FILE="$ZPWR/env/.zpwr_env.sh"
     source "$ZPWR_ENV_FILE" || {
@@ -86,7 +86,7 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
         export PATH="$PATH:/usr/games"
     fi
 
-    exists yarn && export PATH="$(yarn global bin):$PATH"
+    zpwrExists yarn && export PATH="$(yarn global bin):$PATH"
 
 #}}}***********************************************************
 
@@ -107,7 +107,7 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
         if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
-            if exists nvim; then
+            if zpwrExists nvim; then
                 export EDITOR='nvim'
                 export PSQL_EDITOR='nvim -c "setf sql"'
             else
@@ -115,7 +115,7 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
                 export PSQL_EDITOR='vim -c "setf sql"'
             fi
         else
-            if exists mvim; then
+            if zpwrExists mvim; then
                 export EDITOR='mvim -v'
                 export PSQL_EDITOR='mvim -v -c "setf sql"'
             else
@@ -125,7 +125,7 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
         fi
     else
         if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
-            if exists nvim; then
+            if zpwrExists nvim; then
                 export EDITOR='nvim'
                 export PSQL_EDITOR='nvim -c "setf sql"'
             else
@@ -143,7 +143,7 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
 #{{{                    MARK:Rust Config
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
-    if commandExists exa; then
+    if zpwrCommandExists exa; then
         alias exa="$ZPWR_EXA_COMMAND"
     fi
 
@@ -159,15 +159,15 @@ fi
 
 #{{{                    MARK:Shell functions
 #**************************************************************
-if commandExists systemctl; then
+if zpwrCommandExists systemctl; then
 
-    if isZsh; then
+    if zpwrIsZsh; then
         eval 'autoload -z $ZPWR_AUTOLOAD_SYSTEMCTL/*(.:t)'
     fi
 
 fi
 
-exists pssh && function pir(){
+zpwrExists pssh && function pir(){
 
     if ! test -s "$ZPWR_LOCAL/hosts.txt"; then
         zpwrLoggErr "you need hosts.txt in your $ZPWR_LOCAL"
@@ -185,7 +185,7 @@ fi
 #{{{                    MARK:Global Alias
 #**************************************************************
 
-if ! isZsh; then
+if ! zpwrIsZsh; then
     if test -f "$ZPWR_TOKEN_PRE"; then
         if ! source "$ZPWR_TOKEN_PRE"; then
             zpwrLoggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"

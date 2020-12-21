@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___restartZabbixAgent(){
 
-    if exists ccze; then
+    if zpwrExists ccze; then
 sudo systemctl restart zabbix-agent
 sudo systemctl --no-pager status zabbix-agent
 sudo journalctl -n 100 --no-pager

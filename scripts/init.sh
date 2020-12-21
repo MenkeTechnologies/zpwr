@@ -8,7 +8,7 @@
 ##### Notes: need to source lib files because functions not exported
 #}}}***********************************************************
 
-if ! type -- "exists" >/dev/null 2>&1;then
+if ! type -- "zpwrExists" >/dev/null 2>&1;then
     if [[ -z "$1" ]]; then
         test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
     else
@@ -64,7 +64,7 @@ if ! type -- "exists" >/dev/null 2>&1;then
         fi
     fi
 
-    if ! isZsh; then
+    if ! zpwrIsZsh; then
         # bash xtrace prompt
         export PS4=$'>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
     fi

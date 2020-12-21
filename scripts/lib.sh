@@ -9,23 +9,23 @@
 
 #{{{                    MARK:installer lib fns
 #**************************************************************
-function isZsh(){
+function zpwrIsZsh(){
 
      [[ $(command ps -o command= -p $$) =~ '^-?zsh' ]]
 }
 
-if isZsh; then
+if zpwrIsZsh; then
 
-    if ! type -- exists>/dev/null 2>&1; then
+    if ! type -- zpwrExists>/dev/null 2>&1; then
 
-        function exists(){
+        function zpwrExists(){
             #alternative is command -v
             type -- "$1" &>/dev/null || return 1 &&
             [[ $(type -- "$1" 2>/dev/null) != *"suffix alias"* ]]
         }
     fi
 else
-    function exists(){
+    function zpwrExists(){
 
         #alternative is command -v
         type -- "$1" >/dev/null 2>&1
@@ -44,7 +44,7 @@ function zpwrStdinExists(){
     fi
 }
 
-function commandExists(){
+function zpwrCommandExists(){
 
     type -ap -- "$1" >/dev/null 2>&1
 }
@@ -106,7 +106,7 @@ function zpwrPrettyPrintNoNewline(){
     printf "\x1b[0m"
 }
 
-function isBinary() {
+function zpwrIsBinary() {
 
     [[ $(LC_MESSAGES=C command grep -Hm1 '^' < "${1:-$REPLY}") =~ '^Binary' ]]
 }
@@ -158,14 +158,14 @@ function zpwrNeedSudo(){
     fi
 }
 
-function loggConsolePrefix(){
+function zpwrLoggConsolePrefix(){
 
     zpwrPrettyPrint "$ZPWR_CHAR_LOGO $*"
     logg "$ZPWR_CHAR_LOGO $*"
 
 }
 
-function loggConsole(){
+function zpwrLoggConsole(){
 
     zpwrPrettyPrint "$*"
     logg "$*"
@@ -226,7 +226,7 @@ function zpwrLoggDebug(){
     fi
 }
 
-function fail(){
+function zpwrFail(){
 
         echo "failure due to $1" >&2
         exit 1
@@ -240,7 +240,7 @@ function zpwrFileMustExist(){
     fi
 }
 
-function isGitDir(){
+function zpwrIsGitDir(){
 
     command git rev-parse --git-dir 2> /dev/null 1>&2
 }
@@ -379,9 +379,9 @@ function zpwrInstallGitHubPlugin(){
     git clone "https://github.com/$1.git"
 }
 
-function update(){
+function zpwrUpdate(){
 
-    exists "$1" || {
+    zpwrExists "$1" || {
 
         if [[ $2 == mac ]]; then
             brew install "$1"
@@ -401,7 +401,7 @@ function update(){
     }
 }
 
-function upgrade(){
+function zpwrUpgrade(){
 
     if [[ $1 == mac ]]; then
         brew update
@@ -422,7 +422,7 @@ function upgrade(){
     fi
 }
 
-function refresh(){
+function zpwrRefresh(){
 
     if [[ $1 == mac ]]; then
         brew update
@@ -572,7 +572,7 @@ function zpwrAlternatingPrettyPrint(){
 
 function zpwrClearGitCache(){
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
         zpwrLoggNotGit
         return 1
     fi
@@ -593,7 +593,7 @@ function zpwrGitRepoUpdater() {
             if [[ -d "$generic_git_repo_plugin" ]]; then
                     (
                         builtin cd "$generic_git_repo_plugin" &&
-                        isGitDir && 
+                        zpwrIsGitDir && 
                         printf "\x1b[1m%s:\x1b[0m " "$(basename "$generic_git_repo_plugin")" &&
                         git fetch --all --prune &&
                         git pull --all && zpwrClearGitCache
@@ -608,10 +608,10 @@ function zpwrClearList() {
     local FOUND out out2 ls_command lib_command rank loc arg
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        if commandExists exa;then
+        if zpwrCommandExists exa;then
             ls_command="$ZPWR_EXA_COMMAND"
         else
-            if commandExists grc; then
+            if zpwrCommandExists grc; then
                 ls_command="grc -c $HOME/conf.gls gls -iFlhAd --color=always"
             else
                 ls_command="ls -iFlhAOd"
@@ -620,10 +620,10 @@ function zpwrClearList() {
         lib_command="otool -L"
     elif [[ "$ZPWR_OS_TYPE" == linux ]];then
 
-        if commandExists exa;then
+        if zpwrCommandExists exa;then
             ls_command="$ZPWR_EXA_COMMAND"
         else
-            if commandExists grc; then
+            if zpwrCommandExists grc; then
                 ls_command="grc -c $HOME/conf.gls ls -iFlhA --color=always"
             else
                 ls_command="ls -iFlhA"
@@ -631,7 +631,7 @@ function zpwrClearList() {
         fi
         lib_command="ldd"
     else
-        if commandExists grc;then
+        if zpwrCommandExists grc;then
             ls_command="grc -c $HOME/conf.gls ls -iFlhA"
         else
             ls_command="ls -iFhlA"
@@ -645,7 +645,7 @@ function zpwrClearList() {
             zpwrPrettyPrint "/--------------- $arg --------------/"
             # perl boxPrint.pl "$arg"
             echo
-            if exists $arg; then
+            if zpwrExists $arg; then
                 FOUND=true
                 # exe matching
                 while read loc;do
@@ -671,7 +671,7 @@ function zpwrClearList() {
                             zpwrPrettyPrint "MAN:"
                             echo "$out"
                         fi
-                        if isZsh; then
+                        if zpwrIsZsh; then
                             out="$(hash | command grep "^$arg=")"
                             if [[ -n "$out" ]]; then
                                 zpwrPrettyPrint "HASH TABLE:"

@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___zpwrPoll() {
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
         zpwrLoggNotGit
         zpwrLoggErr "usage: zpwrPoll <cmd> <time> <refspec>"
         return 1

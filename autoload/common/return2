@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___return2(){
 
-    if isZsh; then
+    if zpwrIsZsh; then
         exec 2> /dev/tty
     else
         zpwrLoggErr "only for zsh"

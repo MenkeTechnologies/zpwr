@@ -29,7 +29,7 @@ function ___ge(){
         rand=$(echo "$randscript" | perl)
 
         logg $rand
-        isZsh && ((++rand))
+        zpwrIsZsh && ((++rand))
 
         for (( i = 0; i < $len; ++i )); do
             random_color=${file_ary[$i]}

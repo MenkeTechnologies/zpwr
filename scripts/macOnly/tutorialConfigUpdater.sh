@@ -53,7 +53,7 @@ cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 
 type=ctags
 
-if exists gtags; then
+if zpwrExists gtags; then
     logg "Regen GNU gtags to $HOME/GTAGS with $type parser"
     (
     builtin cd "$HOME"

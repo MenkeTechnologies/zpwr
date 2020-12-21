@@ -26,11 +26,11 @@ function installNpmRpm(){
     zpwrPrettyPrintBox "curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -"
     curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
     zpwrPrettyPrintBox "install nodejs"
-    update "nodejs" "$distroFamily"
+    zpwrUpdate "nodejs" "$distroFamily"
     zpwrPrettyPrintBox "install npm"
-    update "npm" "$distroFamily"
+    zpwrUpdate "npm" "$distroFamily"
     zpwrPrettyPrintBox "install build-essential"
-    update "build-essential" "$distroFamily"
+    zpwrUpdate "build-essential" "$distroFamily"
 }
 
 function installNpmDeb(){
@@ -38,11 +38,11 @@ function installNpmDeb(){
     zpwrPrettyPrintBox "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     zpwrPrettyPrintBox "install nodejs"
-    update "nodejs" "$distroFamily"
+    zpwrUpdate "nodejs" "$distroFamily"
     zpwrPrettyPrintBox "install npm"
-    update "npm" "$distroFamily"
+    zpwrUpdate "npm" "$distroFamily"
     zpwrPrettyPrintBox "install build-essential"
-    update "build-essential" "$distroFamily"
+    zpwrUpdate "build-essential" "$distroFamily"
 }
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
@@ -77,7 +77,7 @@ else
     fi
 fi
 
-exists diff-so-fancy || {
+zpwrExists diff-so-fancy || {
     zpwrPrettyPrintBox "npm installing diff-so-fancy"
     sudo npm i -g diff-so-fancy
 }

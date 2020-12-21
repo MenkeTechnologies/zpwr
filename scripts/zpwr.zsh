@@ -71,8 +71,8 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[detach]='zpwrDetachall=detach from all tmux sessions'
     ZPWR_VERBS[digs]='digs=run series on networking commands on arg'
     ZPWR_VERBS[dirsearch]='zpwrFzfDirsearchVerb=cd to a sub dir'
-    ZPWR_VERBS[exists]='exists=check if identifier is valid'
-    ZPWR_VERBS[existscommand]='commandExists=check if command is valid'
+    ZPWR_VERBS[exists]='zpwrExists=check if identifier is valid'
+    ZPWR_VERBS[existscommand]='zpwrCommandExists=check if command is valid'
     ZPWR_VERBS[emacstokens]='etok=emacs the .tokens.sh file'
     ZPWR_VERBS[emacsconfig]='econf=emacs all zpwr configs'
     ZPWR_VERBS[emacsall]='zpwrEmacsAll=emacs all zpwr files for :argdo'
@@ -148,7 +148,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[gitclearcommit]='zpwrClearGitCommit=remove matching git commits from history'
     ZPWR_VERBS[gitclearcache]='zpwrClearGitCache=clear old git refs and objects'
     ZPWR_VERBS[gitclearfile]='zpwrClearGitFile=rm file from all git refs and objects'
-    ZPWR_VERBS[gitdir]='isGitDir=check if pwd is git dir'
+    ZPWR_VERBS[gitdir]='zpwrIsGitDir=check if pwd is git dir'
     ZPWR_VERBS[gitupdatetag]='lcm=print tag and latest msg to BUFFER'
     ZPWR_VERBS[gitedittag]='zpwrEditTag=print tag to BUFFER'
     ZPWR_VERBS[gitfordirdevelop]='zfgdw=run git wipe to develop branch in git dirs in $PWD'
@@ -323,12 +323,12 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[zcd]='zpwrFzfZListVerb=list then cd to z frecency ranked dir'
     ZPWR_VERBS[z]='z=cd to z frecency ranked dir'
 
-    if commandExists systemctl; then
+    if zpwrCommandExists systemctl; then
         ZPWR_VERBS[serviceup]='ssu=start and enable systemd service'
         ZPWR_VERBS[servicedown]='ssd=stop and disable systemd service'
     fi
 
-    if exists pi; then
+    if zpwrExists pi; then
         ZPWR_VERBS[pi]='pi=ping all LAN devices'
     fi
 

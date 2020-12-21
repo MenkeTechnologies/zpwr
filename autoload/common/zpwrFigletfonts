@@ -21,11 +21,11 @@ function zpwrFigletfonts(){
     done
 
     if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
-        exists ponysay || { zpwrLoggErr "you need ponysay" && return 1; }
+        zpwrExists ponysay || { zpwrLoggErr "you need ponysay" && return 1; }
     fi
-    exists lolcat || { zpwrLoggErr "you need lolcat" && return 1; }
-    exists splitReg.sh || { zpwrLoggErr "you need splitReg.sh" && return 1; }
-    exists tput || { zpwrLoggErr "you need tput" && return 1; }
+    zpwrExists lolcat || { zpwrLoggErr "you need lolcat" && return 1; }
+    zpwrExists splitReg.sh || { zpwrLoggErr "you need splitReg.sh" && return 1; }
+    zpwrExists tput || { zpwrLoggErr "you need tput" && return 1; }
 
     zpwrAlternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}iglet ${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}onts ${ZPWR_DELIMITER_CHAR}A${ZPWR_DELIMITER_CHAR}re:"
 

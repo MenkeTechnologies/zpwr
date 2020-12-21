@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrLoadJenv() {
 
-    if exists jenv;then
+    if zpwrExists jenv;then
         eval "$(jenv init -)"
         jenv enable-plugin export > /dev/null 2>&1
         zpwrPrettyPrint "jenv loaded"

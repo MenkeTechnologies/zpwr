@@ -1,7 +1,7 @@
 #compdef zpwr zp
 function __zpwr_gtl(){
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
         _message "$PWD is not a git dir"
         return 1
     fi

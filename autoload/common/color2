@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___color2(){
 
-    if isZsh; then
+    if zpwrIsZsh; then
         exec 2> >(redText.sh)
     else
         zpwrLoggErr "only for zsh"

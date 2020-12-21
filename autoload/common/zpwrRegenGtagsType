@@ -10,7 +10,7 @@ function zpwrRegenGtagsType(){
     local type file
     type=$1
 
-    if exists gtags; then
+    if zpwrExists gtags; then
         zpwrPrettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
         (
         builtin cd "$HOME"

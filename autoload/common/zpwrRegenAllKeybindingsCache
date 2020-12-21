@@ -7,7 +7,7 @@ function zpwrRegenAllKeybindingsCache(){
     escapeRemover.pl |
     perl -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"
 
-    isZsh && source "$ZPWR_SCRIPTS/keybindingsToFZF.zsh" |
+    zpwrIsZsh && source "$ZPWR_SCRIPTS/keybindingsToFZF.zsh" |
         escapeRemover.pl |
         perl -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
 }

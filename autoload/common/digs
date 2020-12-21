@@ -17,7 +17,7 @@ function ___digs(){
     done
     shift $(($OPTIND-1))
 
-    exists grc && colo=grc || {
+    zpwrExists grc && colo=grc || {
         colo=
         echo "No grc colorizer no defaulting to no colors"
     }
@@ -28,9 +28,9 @@ function ___digs(){
     fi
 
     if [[ -n "$secret" ]]; then
-        exists proxychains && exe=proxychains
-        exists proxychains4 && {
-           isZsh &&
+        zpwrExists proxychains && exe=proxychains
+        zpwrExists proxychains4 && {
+           zpwrIsZsh &&
                 exe=(proxychains4 -q) ||
                 exe="proxychains4 -q"
         }
@@ -40,7 +40,7 @@ function ___digs(){
         fi
 
 
-        if exists dig;then
+        if zpwrExists dig;then
             for url in "$@"; do
                 noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
                 exec 2>&1
@@ -54,7 +54,7 @@ function ___digs(){
                 noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
                 zpwrPrettyPrint "HOST: $noproto"
                 out="$($exe host "$noproto")"
-                if exists lolcat; then
+                if zpwrExists lolcat; then
                     echo "$out" | lolcat
                 else
                     echo "$out"
@@ -119,7 +119,7 @@ function ___digs(){
                         fi
                     fi
                 fi
-                if exists http; then
+                if zpwrExists http; then
                     zpwrPrettyPrint "HTTPIE: $url"
                     torify http -v --follow --pretty=all "$url"
                 else
@@ -141,9 +141,9 @@ function ___digs(){
         fi
     else
 
-        isZsh && colo=(grc --colour=on) || colo="grc --colour=on "
+        zpwrIsZsh && colo=(grc --colour=on) || colo="grc --colour=on "
 
-        if exists dig; then
+        if zpwrExists dig; then
             for url in "$@"; do
                 noport="$(echo "$url" | sed -E 's@(.*\.[^/]+)(/.*)$@\1@' | sed -E 's@:[0-9]{1,4}$@@')"
                 exec 2>&1
@@ -152,7 +152,7 @@ function ___digs(){
                 noproto="$(echo "$noport" | sed -E 's@https://|http://@@')"
                 zpwrPrettyPrint "HOST: $noproto"
                 out="$($colo $exe host "$noproto")"
-                if exists lolcat; then
+                if zpwrExists lolcat; then
                     echo "$out" | lolcat
                 else
                     echo "$out"
@@ -190,7 +190,7 @@ function ___digs(){
                         $colo -c "$HOME/conf.whois" $exe whois "$ip"
                     fi
                 fi
-                if exists http; then
+                if zpwrExists http; then
                     zpwrPrettyPrint "HTTPIE: $url"
                     $exe http -v --follow --pretty=all "$url"
                 else

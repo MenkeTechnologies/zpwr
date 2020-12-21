@@ -153,17 +153,17 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^V;' zpwrFzfSurround
     bindkey -M vicmd '^V;' zpwrFzfSurround
 
-    exists history-search-multi-word && {
+    zpwrExists history-search-multi-word && {
         bindkey -M viins '^V^R' history-search-multi-word
         bindkey -M vicmd '^V^R' history-search-multi-word
     }
 
-    exists fasd && {
+    zpwrExists fasd && {
         bindkey -M viins '^V^F' zpwrFasdFZF
         bindkey -M vicmd '^V^F' zpwrFasdFZF
     }
 
-    exists z && {
+    zpwrExists z && {
         zle -N zpwrZFZF
         bindkey -M viins '^V^S' zpwrZFZF
         bindkey -M vicmd '^V^S' zpwrZFZF

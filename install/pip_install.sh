@@ -55,7 +55,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     sudo python3 -m pip install pgcli
 
 
-    exists youtube_dl || {
+    zpwrExists youtube_dl || {
         zpwrPrettyPrintBox "Installing youtube-dl"
         sudo python3 -m pip install --upgrade youtube_dl
     }
@@ -150,7 +150,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
     zpwrPrettyPrintBox "Installing PGCLI"
     sudo python3 -m pip install pgcli
 
-    exists youtube_dl || {
+    zpwrExists youtube_dl || {
         zpwrPrettyPrintBox "Installing youtube-dl"
         sudo python3 -m pip install --upgrade youtube_dl
     }
@@ -215,7 +215,7 @@ else
         zpwrPrettyPrintBox "Installing PGCLI"
         sudo python3 -m pip install pgcli
 
-        exists youtube_dl || {
+        zpwrExists youtube_dl || {
             zpwrPrettyPrintBox "Installing youtube-dl"
             sudo python3 -m pip install youtube_dl
         }

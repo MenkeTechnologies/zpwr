@@ -7,7 +7,7 @@ function zpwrEmacsEmacsConfig(){
     "$ZPWR_INSTALL/.spacemacs" \
     "$ZPWR_INSTALL/emacs/snippets/"*-mode/*
     zpwrClearList
-    isGitDir && git diff HEAD
+    zpwrIsGitDir && git diff HEAD
 }
 
 zpwrEmacsEmacsConfig "$@"

@@ -77,7 +77,7 @@ python3 -c 'import pip' && {
 }
 
 #python 2 (non system)
-commandExists python2 && python2 -c 'import pip' && {
+zpwrCommandExists python2 && python2 -c 'import pip' && {
     zpwrPrettyPrint "Updating Python2 Packages"
     needSudoBase=true
 

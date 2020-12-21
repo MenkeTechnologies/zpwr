@@ -13,7 +13,7 @@ function zpwrFordirUpdate(){
     for dir in "$@"; do
         if [[ -d "$dir" ]]; then
             (
-                builtin cd "$dir" && isGitDir && zpwrPrettyPrint "cd $dir && $cmd" && eval "$cmd"
+                builtin cd "$dir" && zpwrIsGitDir && zpwrPrettyPrint "cd $dir && $cmd" && eval "$cmd"
             )
         fi
     done

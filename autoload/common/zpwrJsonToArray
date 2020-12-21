@@ -11,7 +11,7 @@ function zpwrJsonToArray(){
     done < <(echo "$json" | jq -r "to_entries|map(\"\(.key)=\(.value)\")|.[]")
 
 
-    if isZsh;then
+    if zpwrIsZsh;then
         printf '%s=%s\n' "${(@kv)_tempAry}"
     else
         for key in "${!_tempAry[@]}";do

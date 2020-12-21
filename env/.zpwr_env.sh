@@ -183,7 +183,7 @@ fi
 #}}}***********************************************************
 
 if [[ "$ZPWR_REMOTE" != true ]]; then
-    if isZsh; then
+    if zpwrIsZsh; then
         declare -Tgx ZPWR_DIRS_CLEAN zpwrDirsClean
     fi
 

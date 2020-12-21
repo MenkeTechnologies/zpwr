@@ -10,7 +10,7 @@ function zpwrTimer() {
     local count cmd total totstart totend avg runtime local_command
 
     count=100
-    if exists gdate;then
+    if zpwrExists gdate;then
         cmd=gdate
     else
         cmd=date

@@ -60,13 +60,13 @@ elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
 fi
 
 cargo_bin="$HOME/.cargo/bin/cargo"
-commandExists "$cargo_bin" && {
+zpwrCommandExists "$cargo_bin" && {
     zpwrPrettyPrint "Updating cargo packages"
     "$cargo_bin" install cargo-update 2>/dev/null
     "$cargo_bin" install-update -a
 }
 rustup_bin="$HOME/.cargo/bin/rustup"
-commandExists "$rustup_bin" && {
+zpwrCommandExists "$rustup_bin" && {
     zpwrPrettyPrint "Updating rustup"
     "$rustup_bin" update
 }
@@ -77,7 +77,7 @@ zpwrPrettyPrint "Updating Vundle Plugins"
 zpwrAlternatingPrettyPrint "Updating Ruby ${ZPWR_DELIMITER_CHAR}Gems${ZPWR_DELIMITER_CHAR} for ${ZPWR_DELIMITER_CHAR}$(whoami)${ZPWR_DELIMITER_CHAR} on ${ZPWR_DELIMITER_CHAR}$(hostname)${ZPWR_DELIMITER_CHAR}"
 sudo gem update
 
-commandExists npm && {
+zpwrCommandExists npm && {
     zpwrAlternatingPrettyPrint "Updating ${ZPWR_DELIMITER_CHAR}NPM${ZPWR_DELIMITER_CHAR} packages for ${ZPWR_DELIMITER_CHAR}$(whoami)${ZPWR_DELIMITER_CHAR} on${ZPWR_DELIMITER_CHAR}$(hostname)${ZPWR_DELIMITER_CHAR}"
     for package in $(npm -g outdated --parseable --depth=0 | cut -d: -f4); do
         sudo npm install -g "$package"

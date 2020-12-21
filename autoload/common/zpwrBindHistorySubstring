@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 
 function zpwrBindHistorySubstring() {
-    if exists history-substring-search-down history-substring-search-up; then
+    if zpwrExists history-substring-search-down history-substring-search-up; then
 
         if [[ -n "$terminfo[kcuu1]" ]]; then
             bindkey -M viins "$terminfo[kcuu1]" history-substring-search-up

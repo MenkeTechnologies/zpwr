@@ -18,7 +18,7 @@ function zpwrEmacsAllServer(){
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
     "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
     zpwrClearList
-    isGitDir && git diff HEAD
+    zpwrIsGitDir && git diff HEAD
 }
 
 zpwrEmacsAllServer "$@"

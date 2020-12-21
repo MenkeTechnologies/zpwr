@@ -32,7 +32,7 @@ fi
 
 comp_dir="comp_dir"
 
-exists mantozshcomp.py || {
+zpwrExists mantozshcomp.py || {
     echo "we need a man to zsh completion generator..." >&2
     return 1
 }

@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrAllRemotes(){
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
         zpwrLoggNotGit
         return 1
     fi

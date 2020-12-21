@@ -3,7 +3,7 @@
 function zpwrInterceptSurround(){
 
     #surround
-    exists autopair-insert && autopair-insert
+    zpwrExists autopair-insert && autopair-insert
     zpwrKeySender
 }
 

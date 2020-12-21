@@ -5,7 +5,7 @@ function zpwrEmacsAll(){
     builtin cd $ZPWR
     ${=ZPWR_EMACS_CLIENT} "${=$(zpwrListFiles)}"
     zpwrClearList
-    isGitDir && git diff HEAD
+    zpwrIsGitDir && git diff HEAD
 }
 
 zpwrEmacsAll "$@"

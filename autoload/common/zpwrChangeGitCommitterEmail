@@ -7,7 +7,7 @@ function zpwrChangeGitCommitterEmail(){
         return 1
     fi
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
         zpwrLoggNotGit
         return 1
     fi

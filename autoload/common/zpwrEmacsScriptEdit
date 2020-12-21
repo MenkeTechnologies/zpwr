@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrEmacsScriptEdit(){
 
-    if ! exists emacs; then
+    if ! zpwrExists emacs; then
         logErr "emacs must exist"
         return 1
     fi
@@ -15,7 +15,7 @@ function zpwrEmacsScriptEdit(){
     zpwrLoggDebug "builtin cd $ZPWR_SCRIPTS"
     eval "builtin cd $ZPWR_SCRIPTS"
 
-    BUFFER="$BUFFER; zpwrClearList; isGitDir && git diff HEAD"
+    BUFFER="$BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
     zpwrLoggDebug "$BUFFER"
     print -s -- "$BUFFER"
     eval "$BUFFER"

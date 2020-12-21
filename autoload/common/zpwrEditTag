@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___zpwrEditTag(){
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
         zpwrLoggNotGit
         return 1
     fi

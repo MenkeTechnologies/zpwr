@@ -67,13 +67,13 @@ globalAliasesInit
 #**************************************************************
     if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
 
-        if exists lftp; then
+        if zpwrExists lftp; then
             alias lf="lftp sftp://$ZPWR_TABSTOP"
         fi
 
         alias gacp='git add . && git commit -m "'$ZPWR_TABSTOP'" && git push'
         alias gac='git add . && git commit -m "'$ZPWR_TABSTOP'"'
-        exists zff || alias zff="$ZPWR_REPO_NAME fordir 'isGitDir && { $ZPWR_TABSTOP; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
+        zpwrExists zff || alias zff="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { $ZPWR_TABSTOP; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
         alias i='if [[ '$ZPWR_TABSTOP' ]];then
             '$ZPWR_TABSTOP'
         fi'
@@ -132,27 +132,27 @@ globalAliasesInit
 
         alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
-        exists zfgw || alias zfgw="$ZPWR_REPO_NAME fordir 'zpwrWipedBranch=$ZPWR_TABSTOP; isGitDir && { gco \$zpwrWipedBranch; gffa; git clean -dff && git reset --hard origin/\$zpwrWipedBranch && git clean -dff ; gla; zp gitclearcache; }' *"
-        exists zf || alias zf="$ZPWR_REPO_NAME fordir 'isGitDir && { $ZPWR_TABSTOP; }' *"
+        zpwrExists zfgw || alias zfgw="$ZPWR_REPO_NAME fordir 'zpwrWipedBranch=$ZPWR_TABSTOP; zpwrIsGitDir && { gco \$zpwrWipedBranch; gffa; git clean -dff && git reset --hard origin/\$zpwrWipedBranch && git clean -dff ; gla; zp gitclearcache; }' *"
+        zpwrExists zf || alias zf="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { $ZPWR_TABSTOP; }' *"
         alias lg="logg $(zpwrTabNumCmd 1 tr a-zA-Z)=$(zpwrTabNumCmd 1 tr a-zA-Z)"
     fi
 
 
-exists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'isGitDir && { gffa; bk; gla; zp gitclearcache; }' *"
+zpwrExists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gffa; bk; gla; zp gitclearcache; }' *"
 
-exists zfgmw || alias zfgmw="$ZPWR_REPO_NAME fordir 'isGitDir && { gco master; gffa; git clean -dff && git reset --hard origin/master && git clean -dff ; gla; zp gitclearcache; }' *"
+zpwrExists zfgmw || alias zfgmw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco master; gffa; git clean -dff && git reset --hard origin/master && git clean -dff ; gla; zp gitclearcache; }' *"
 
-exists zfgdw || alias zfgdw="$ZPWR_REPO_NAME fordir 'isGitDir && { gco development; gffa; git clean -dff && git reset --hard origin/development && git clean -dff ; gla; zp gitclearcache; }' *"
+zpwrExists zfgdw || alias zfgdw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco development; gffa; git clean -dff && git reset --hard origin/development && git clean -dff ; gla; zp gitclearcache; }' *"
 
-exists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'isGitDir && { gco master; gffa; bk; gla; zp gitclearcache; }' *"
+zpwrExists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco master; gffa; bk; gla; zp gitclearcache; }' *"
 
-exists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'isGitDir && { gco development; gffa; bk; gla; zp gitclearcache; }' *"
+zpwrExists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco development; gffa; bk; gla; zp gitclearcache; }' *"
 
-exists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;bk;gla;zp gitclearcache; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
+zpwrExists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gfa;bk;gla;zp gitclearcache; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
-exists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'isGitDir && { gfa;git reset origin/\$(git_current_branch) --hard ;gla;zp gitclearcache; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
+zpwrExists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gfa;git reset origin/\$(git_current_branch) --hard ;gla;zp gitclearcache; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
 
-exists zu8 || alias zu8='zpwr updateall'
+zpwrExists zu8 || alias zu8='zpwr updateall'
 
 alias zpg=zpwrgh
 alias zpw=zpwr
@@ -164,14 +164,14 @@ alias numcmd='print $#commands'
 #{{{                    MARK:Misc
 #**************************************************************
 
-if exists zunit; then
+if zpwrExists zunit; then
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
 fi
 
 # Example usage: zmv -W '*.pl' '*.perl'
 alias mmv='noglob zmv -W'
 
-exists thefuck && eval $(thefuck --alias)
+zpwrExists thefuck && eval $(thefuck --alias)
 
 alias za=zc-all
 alias zid=zc-id

@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrCommits(){
 
-    if isGitDir; then
+    if zpwrIsGitDir; then
         if [[ $EDITOR = nvim ]];then
             nvim -c 'call feedkeys(":Commits!\<CR>")'
         elif [[ $EDITOR == 'mvim -v' ]];then

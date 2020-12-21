@@ -5,10 +5,10 @@ function zpwrCCommon(){
     local colorizer rpm_cmd deb_cmd file
     colorizer=bat
 
-    exists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
-    exists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
+    zpwrExists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
+    zpwrExists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
-    if exists $colorizer;then
+    if zpwrExists $colorizer;then
         if echo | $colorizer > /dev/null 2>&1; then
             for file in "$@";do
                 if [[ -f "$file" ]]; then

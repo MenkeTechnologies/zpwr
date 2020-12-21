@@ -5,7 +5,7 @@
 # git diff SHA-1 ;<tab>
 function ___fzf_complete_git() {
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
         return 1
     fi
 

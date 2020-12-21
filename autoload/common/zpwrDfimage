@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrDfimage(){
 
-    if ! commandExists docker; then
+    if ! zpwrCommandExists docker; then
         zpwrLoggErr 'docker command is missing'
         return 1
     fi

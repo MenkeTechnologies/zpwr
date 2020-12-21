@@ -50,7 +50,7 @@ function zpwrAcceptLine () {
     mywords=("${(z)BUFFER}")
 
     #so sudo -E env ping uses grc overalias of ping
-    if commandExists grc; then
+    if zpwrCommandExists grc; then
         if [[ $BUFFER =~ "^([[:space:]]*)([[:graph:]]+=[[:graph:]]+[[:space:]]+)*(([\\\\\"\']*builtin[\\\\\"\']*[[:space:]]+)*[\\\\\"\']*command[\\\\\"\']*)?([[:space:]]*)(([\\\\\"\']*zpwr[\\\\\"\']*([[:space:]]+)(-[[:graph:]]+)*)*([\\\\\"\']*sudo[\\\\\"\']*([[:space:]]+)((-[ABbEHnPSis]+[[:space:]]*|-[CghpTu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*([\\\\\"\']*env[\\\\\"\']*[[:space:]]+(-[iv]+[[:space:]]*|-[PSu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*)*([[:space:]]*)(.*)$" ]]; then
             cmd_words=("${(z)match[-1]}")
             if [[ $match[6] =~ '(sudo|env)' ]]; then

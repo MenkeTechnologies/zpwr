@@ -15,8 +15,8 @@ function zpwrFzfFilesearchVerb(){
     if [[ -z "$file" ]]; then
         return
     fi
-    print -sr -- "$editor $file; zpwrClearList; isGitDir && git diff HEAD"
-    eval "$editor $file; zpwrClearList; isGitDir && git diff HEAD"
+    print -sr -- "$editor $file; zpwrClearList; zpwrIsGitDir && git diff HEAD"
+    eval "$editor $file; zpwrClearList; zpwrIsGitDir && git diff HEAD"
 }
 
 zpwrFzfFilesearchVerb "$@"

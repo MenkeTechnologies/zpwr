@@ -293,7 +293,7 @@ The main window show in the screenshots is started by prefix-D (tmux prefix defi
 Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-window` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window` in an empty tmux window.
 
 ## Personal Config
-Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup so you can put your additional code there.  This file will not be overridden with the `zpwr update` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any only features like `isZsh && myZshConfig`.  Startup shell files will source `~/.zpwr/local/.tokens-post.sh` after all zsh config and zinit startup.
+Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup so you can put your additional code there.  This file will not be overridden with the `zpwr update` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any only features like `zpwrIsZsh && myZshConfig`.  Startup shell files will source `~/.zpwr/local/.tokens-post.sh` after all zsh config and zinit startup.
 
 Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and create a ctags file named `~/tags` in your home directory.
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
@@ -571,7 +571,7 @@ You can run all the unit tests via `zunit --verbose $ZPWR/tests/*.zsh`.
 
 There is also `zpwr tests` or the alias `tru` (tests run) to run the tests.
 ```sh
-exists zunit && {
+zpwrExists zunit && {
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
 }
 ```

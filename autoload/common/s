@@ -2,27 +2,27 @@
 # vim: set ft=sh:
 function ___s(){
 
-    exists isZsh || {
+    zpwrExists zpwrIsZsh || {
         source "$ZPWR_SCRIPTS/lib.sh" || {
             echo "where is $ZPWR_SCRIPTS/lib.sh" >&2
             return 1
-        } && zpwrLoggErr 'forced to load lib.sh due to missing isZsh'
+        } && zpwrLoggErr 'forced to load lib.sh due to missing zpwrIsZsh'
     }
 
     local cmd sec_cmd out url
 
-    if exists subl; then
+    if zpwrExists subl; then
         cmd=subl
     else
         cmd="$ZPWR_OPEN_CMD"
     fi
 
-    if commandExists s; then
+    if zpwrCommandExists s; then
         sec_cmd=s
     else
         sec_cmd="$ZPWR_OPEN_CMD"
     fi
-    if isZsh; then
+    if zpwrIsZsh; then
         if [[ $sec_cmd == s ]]; then
             {
             test -z "$1" && ${=cmd} . || command s "$@"

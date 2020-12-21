@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrContribCountLines(){
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
        zpwrLoggNotGit
        return 1
     fi
@@ -13,7 +13,7 @@ function zpwrContribCountLines(){
     {
 
     while read; do
-        isBinary "$REPLY" && continue
+        zpwrIsBinary "$REPLY" && continue
         filter=false
         for arg in "$@"; do
            if echo "$REPLY" | command grep -q "$arg"; then

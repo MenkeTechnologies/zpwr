@@ -4,9 +4,9 @@ function z(){
 
     if [[ -z ${ZPWR_VARS[zcmd]} ]]; then
         local zcmd
-        if exists zshz; then
+        if zpwrExists zshz; then
             ZPWR_VARS[zcmd]="zshz"
-        elif exists _z; then
+        elif zpwrExists _z; then
             ZPWR_VARS[zcmd]="_z 2>&1"
         else
             zpwrLoggErr "ERROR: zshz and _z do not exist."

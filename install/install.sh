@@ -81,7 +81,7 @@ fi
 BACKUP_DIR="$ZPWR_LOCAL/$USER.rc.bak.$(date +'%m.%d.%Y')"
 
 
-commandExists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
+zpwrCommandExists vim && vimV="$(vim --version | head -n 1 | awk '{print $5}')"
 if [[ -n $vimV ]]; then
     if echo "$vimV >= 8.0" | bc 2>/dev/null | grep -q 1 || vim --version 2>&1 | grep -q '\-python3';then
         INSTALL_VIM_SRC=true
@@ -394,13 +394,13 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         distroFamily=mac
         showDeps
 
-        if ! commandExists brew; then
+        if ! zpwrCommandExists brew; then
             # install homebrew
             zpwrPrettyPrintBox "Installing HomeBrew..."
             /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
         fi
 
-        if ! commandExists brew; then
+        if ! zpwrCommandExists brew; then
             zpwrPrettyPrintBox "Need Homebrew"
             exit 1
         fi
@@ -419,22 +419,22 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
             sleep 1
 
             zpwrPrettyPrintBox "Updating dependency list"
-            refresh "$distroFamily"
+            zpwrRefresh "$distroFamily"
             zpwrPrettyPrintBox "Installing java"
             brew cask install java
             zpwrPrettyPrintBox "Checking for curl before rustup install"
-            exists curl || update curl mac
+            zpwrExists curl || zpwrUpdate curl mac
             cargoinstall
             pluginsinstall
 
             # main loop
             for prog in "${dependencies_ary[@]}"; do
                 zpwrPrettyPrintBox "Installing $prog"
-                update "$prog" mac
+                zpwrUpdate "$prog" mac
             done
 
             zpwrPrettyPrintBox "Upgrading packages"
-            upgrade mac
+            zpwrUpgrade mac
         fi
 
         zpwrPrettyPrintBox "Tapping Homebrew fonts"
@@ -500,22 +500,22 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
         showDeps
 
         zpwrPrettyPrintBox "Updating dependency list"
-        refresh "$distroFamily"
+        zpwrRefresh "$distroFamily"
 
         if [[ $skip != true ]]; then
             zpwrPrettyPrintBox "Now The Main Course..."
             sleep 1
             zpwrPrettyPrintBox "Checking for curl before rustup install"
-            commandExists curl || update curl "$distroFamily"
+            zpwrCommandExists curl || zpwrUpdate curl "$distroFamily"
             cargoinstall
             pluginsinstall
             # main loop
             for prog in "${dependencies_ary[@]}"; do
                 zpwrPrettyPrintBox "Installing $prog"
-                update "$prog" "$distroFamily"
+                zpwrUpdate "$prog" "$distroFamily"
             done
             zpwrPrettyPrintBox "Upgrading $distroFamily"
-            upgrade "$distroFamily"
+            zpwrUpgrade "$distroFamily"
         fi
 
         zpwrPrettyPrintBox "Installing Powerline fonts"
@@ -552,13 +552,13 @@ else
             showDeps
 
             zpwrPrettyPrintBox "Updating dependency list"
-            refresh "$distroFamily"
+            zpwrRefresh "$distroFamily"
 
             if [[ $skip != true ]]; then
                 zpwrPrettyPrintBox "Now The Main Course..."
                 sleep 1
                 zpwrPrettyPrintBox "Checking for curl before rustup install"
-                commandExists curl || update curl "$distroFamily"
+                zpwrCommandExists curl || zpwrUpdate curl "$distroFamily"
                 cargoinstall
                 pluginsinstall
 
@@ -566,12 +566,12 @@ else
 
                 for prog in "${dependencies_ary[@]}"; do
                     zpwrPrettyPrintBox "Installing $prog"
-                    update "$prog" "$distroFamily"
+                    zpwrUpdate "$prog" "$distroFamily"
                 done
 
                 zpwrPrettyPrintBox "Upgrading $distroFamily"
 
-                upgrade "$distroFamily"
+                zpwrUpgrade "$distroFamily"
             fi
 
             zpwrPrettyPrintBox "Installing Powerline fonts"
@@ -615,7 +615,7 @@ if [[ $justConfig != true ]]; then
 
     zpwrGoInstallerDir
 
-    commandExists nvim || {
+    zpwrCommandExists nvim || {
         zpwrFileMustExist neovim_install.sh
         source neovim_install.sh
     }
@@ -718,20 +718,20 @@ if [[ $justConfig != true ]]; then
     zpwrFileMustExist iftop_install.sh
     source iftop_install.sh
 
-    if ! commandExists grc; then
+    if ! zpwrCommandExists grc; then
         zpwrGoInstallerOutputDir
         zpwrPrettyPrintBox "Installing grc from source to $(pwd)"
         git clone https://github.com/garabik/grc.git
         if builtin cd grc; then
             sudo bash install.sh
         else
-            fail "could not cd to grc"
+            zpwrFail "could not cd to grc"
         fi
     fi
 
     if [[ $ZPWR_OS_TYPE == darwin ]]; then
         zpwrPrettyPrintBox "Try again for ponysay and lolcat on mac"
-        commandExists ponysay || brew install ponysay
+        zpwrCommandExists ponysay || brew install ponysay
     fi
 
     zpwrPrettyPrintBox "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
@@ -756,22 +756,22 @@ if [[ $justConfig != true ]]; then
 
     if ! test -f /usr/local/sbin/iftop;then
         zpwrPrettyPrintBox "No iftop so installing"
-        update iftop "$distroFamily"
+        zpwrUpdate iftop "$distroFamily"
     fi
 
     if [[ "$ZPWR_OS_TYPE" != darwin ]]; then
         zpwrPrettyPrintBox "Installing snort"
-        update snort "$distroFamily"
+        zpwrUpdate snort "$distroFamily"
         zpwrPrettyPrintBox "Installing logwatch"
-        update logwatch "$distroFamily"
+        zpwrUpdate logwatch "$distroFamily"
         zpwrPrettyPrintBox "Installing postfix"
-        update postfix "$distroFamily"
+        zpwrUpdate postfix "$distroFamily"
     fi
 
     zpwrPrettyPrintBox "Installing wireshark"
-    update wireshark "$distroFamily"
+    zpwrUpdate wireshark "$distroFamily"
     zpwrPrettyPrintBox "Installing mailutils"
-    update mailutils "$distroFamily"
+    zpwrUpdate mailutils "$distroFamily"
 fi
 
 #}}}***********************************************************
@@ -831,7 +831,7 @@ fi
 
 if [[ $justConfig != true ]]; then
     zpwrPrettyPrintBox "Final updating of dependency list"
-    refresh "$distroFamily"
+    zpwrRefresh "$distroFamily"
 fi
 
 #}}}***********************************************************

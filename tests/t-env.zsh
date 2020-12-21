@@ -364,63 +364,63 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
 }
 
 @test 'is a git dir' {
-    run isGitDir
+    run zpwrIsGitDir
     assert $state equals 0
     assert "$output" is_empty
 }
 
-@test 'exists zpwrLoggDebug' {
-    run exists zpwrLoggDebug
+@test 'zpwrExists zpwrLoggDebug' {
+    run zpwrExists zpwrLoggDebug
     assert $state equals 0
 }
 
-@test 'exists zpwrLoggErr' {
-    run exists zpwrLoggErr
+@test 'zpwrExists zpwrLoggErr' {
+    run zpwrExists zpwrLoggErr
     assert $state equals 0
 }
 
-@test 'exists zpwrLoggNotGit' {
-    run exists zpwrLoggNotGit
+@test 'zpwrExists zpwrLoggNotGit' {
+    run zpwrExists zpwrLoggNotGit
     assert $state equals 0
 }
 
-@test 'exists logg' {
-    run exists logg
+@test 'zpwrExists logg' {
+    run zpwrExists logg
     assert $state equals 0
 }
 
-@test 'isZsh' {
-    run isZsh
+@test 'zpwrIsZsh' {
+    run zpwrIsZsh
     assert $state equals 0
 }
 
-@test 'exists isZsh' {
-    run exists isZsh
+@test 'zpwrExists zpwrIsZsh' {
+    run zpwrExists zpwrIsZsh
     assert $state equals 0
 }
 
-@test 'commandExists zsh' {
-    run commandExists zsh
+@test 'zpwrCommandExists zsh' {
+    run zpwrCommandExists zsh
     assert $state equals 0
 }
 
-@test 'commandExists ls' {
-    run commandExists ls
+@test 'zpwrCommandExists ls' {
+    run zpwrCommandExists ls
     assert $state equals 0
 }
 
-@test 'exists type' {
-    run exists type
+@test 'zpwrExists type' {
+    run zpwrExists type
     assert $state equals 0
 }
 
-@test 'exists zpwrPrettyPrintBox' {
-    run exists zpwrPrettyPrintBox
+@test 'zpwrExists zpwrPrettyPrintBox' {
+    run zpwrExists zpwrPrettyPrintBox
     assert $state equals 0
 }
 
-@test 'exists zpwrPrettyPrint' {
-    run exists zpwrPrettyPrint
+@test 'zpwrExists zpwrPrettyPrint' {
+    run zpwrExists zpwrPrettyPrint
     assert $state equals 0
 }
 
@@ -494,38 +494,38 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $state equals 1
 }
 
-@test 'isZsh fn' {
-    run type isZsh
+@test 'zpwrIsZsh fn' {
+    run type zpwrIsZsh
     assert $? equals 0
 }
 
-@test 'isZsh returns 0' {
-    run isZsh
+@test 'zpwrIsZsh returns 0' {
+    run zpwrIsZsh
     assert $? equals 0
 }
 
-@test 'exists zsh' {
-    run exists zsh
+@test 'zpwrExists zsh' {
+    run zpwrExists zsh
     assert $? equals 0
 }
 
-@test 'exists isGitDir' {
-    run exists isGitDir
+@test 'zpwrExists zpwrIsGitDir' {
+    run zpwrExists zpwrIsGitDir
     assert $? equals 0
 }
 
-@test 'isGitDir works' {
-    run isGitDir
+@test 'zpwrIsGitDir works' {
+    run zpwrIsGitDir
     assert $? equals 0
 }
 
-@test 'exists isZsh' {
-    run exists isZsh
+@test 'zpwrExists zpwrIsZsh' {
+    run zpwrExists zpwrIsZsh
     assert $? equals 0
 }
 
-@test 'exists zpwrPrettyPrint' {
-    run exists zpwrPrettyPrint
+@test 'zpwrExists zpwrPrettyPrint' {
+    run zpwrExists zpwrPrettyPrint
     assert $? equals 0
 }
 
@@ -534,8 +534,8 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $? equals 0
 }
 
-@test 'exists fn' {
-    run type exists
+@test 'zpwrExists fn' {
+    run type zpwrExists
     assert $? equals 0
 }
 

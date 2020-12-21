@@ -3,7 +3,7 @@ function __c(){
 
     local ret
 
-    if exists fasd;then
+    if zpwrExists fasd;then
         _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' &&
         ret=0 || ret=1
         if [[ $ret == 1 ]] && (( $#words > 1 )); then

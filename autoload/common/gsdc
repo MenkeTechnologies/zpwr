@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___gsdc(){
 
-    if ! isGitDir; then
+    if ! zpwrIsGitDir; then
        zpwrLoggNotGit
        return 1
     fi
@@ -38,7 +38,7 @@ function ___gsdc(){
         return 0
     else
         printf "\x1b[4;34m>>>>>> Push? \x1b[0m"
-        if isZsh; then
+        if zpwrIsZsh; then
             read -k 1
         else
             read -n 1

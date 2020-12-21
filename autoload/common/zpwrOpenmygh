@@ -6,7 +6,7 @@ function zpwrOpenmygh(){
 
     open_cmd="$ZPWR_OPEN_CMD" || return 1
 
-    if isZsh; then
+    if zpwrIsZsh; then
         if [[ -n "$1" ]]; then
             ${=open_cmd} "https://github.com/$1" >> "$ZPWR_LOGFILE" 2>&1
         else

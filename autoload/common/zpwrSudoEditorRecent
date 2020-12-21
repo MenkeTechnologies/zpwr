@@ -16,9 +16,9 @@ function zpwrSudoEditorRecent(){
     zpwrLoggDebug "builtin cd $firstdir\""
     #:h takes aways last "
     eval "builtin cd $firstdir\""
-    zpwrLoggDebug "$BUFFER; zpwrClearList;isGitDir && git diff HEAD"
-    print -s -- "$BUFFER; zpwrClearList;isGitDir && git diff HEAD"
-    eval "$BUFFER; zpwrClearList;isGitDir && git diff HEAD"
+    zpwrLoggDebug "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
+    print -s -- "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
+    eval "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
 }
 
 zpwrSudoEditorRecent "$@"

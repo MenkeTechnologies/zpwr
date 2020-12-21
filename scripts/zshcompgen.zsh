@@ -33,7 +33,7 @@ fi
 
 comp_dir="comp_dir"
 
-exists help2comp.py || {
+zpwrExists help2comp.py || {
     echo "we need a zsh completion generator..." >&2
     return 1
 }

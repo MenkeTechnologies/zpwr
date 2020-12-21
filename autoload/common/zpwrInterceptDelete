@@ -3,7 +3,7 @@
 function zpwrInterceptDelete(){
 
     #deleteMatching
-    exists autopair-delete && autopair-delete
+    zpwrExists autopair-delete && autopair-delete
     zpwrKeySender
 }
 

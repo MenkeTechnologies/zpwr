@@ -4,7 +4,7 @@ function zpwrFzfCommits(){
 
     BUFFER=""
     zle .kill-whole-line
-    if isGitDir; then
+    if zpwrIsGitDir; then
         BUFFER="vim -v -c Commits! -c quitall"
         zle .accept-line
     else

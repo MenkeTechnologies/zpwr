@@ -20,7 +20,7 @@ function zpwrContribCountDirs(){
         if [[ -d "$dir" ]]; then
             (
             builtin cd "$dir"
-            isGitDir || continue
+            zpwrIsGitDir || continue
 
             lineCount="$(git log --pretty="%an" | grep -E "$user" | wc -l)"
             zpwrPrettyPrint "Contribution Count for $user at $dir is $lineCount"

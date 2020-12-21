@@ -31,7 +31,7 @@ else
 fi
 
 if [[ $ZPWR_USE_NEOVIM == true ]]; then
-    if commandExists nvim; then
+    if zpwrCommandExists nvim; then
         cmd=nvim
     else
         cmd=vim

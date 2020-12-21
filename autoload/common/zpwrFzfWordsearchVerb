@@ -19,7 +19,7 @@ function zpwrFzfWordsearchVerb(){
     firstdir=${mywords[2]:h}
     zpwrLoggDebug "builtin cd $firstdir\""
     #:h takes aways last "
-    BUFFER="builtin cd $firstdir\"; $editor $BUFFER; zpwrClearList; isGitDir && git diff HEAD"
+    BUFFER="builtin cd $firstdir\"; $editor $BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
     zpwrLoggDebug "$BUFFER"
 
     print -sr -- "$BUFFER"

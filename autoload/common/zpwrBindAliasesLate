@@ -6,7 +6,7 @@ function zpwrBindAliasesLate(){
     function chooseNvimVim(){
 
         if [[ $ZPWR_USE_NEOVIM == true ]]; then
-            if commandExists nvim; then
+            if zpwrCommandExists nvim; then
                 alias v='nvim'
                 alias vi='nvim'
                 alias vv='nvim'
@@ -14,7 +14,7 @@ function zpwrBindAliasesLate(){
                 alias vm="nvim -u $ZPWR_ENV/.mininit.vim"
                 alias sv="$ZPWR_FULL_SUDO nvim"
             else
-                if commandExists vim; then
+                if zpwrCommandExists vim; then
                     alias v=vim
                     alias vi=vim
                     alias vv=vim
@@ -23,7 +23,7 @@ function zpwrBindAliasesLate(){
                 fi
             fi
         else
-            if commandExists vim; then
+            if zpwrCommandExists vim; then
                 alias v=vim
                 alias vi=vim
                 alias vv=vim
@@ -35,19 +35,19 @@ function zpwrBindAliasesLate(){
     #{{{                    MARK:Aliases
     #**************************************************************
     # portable aliases
-    exists c.pl && {
+    zpwrExists c.pl && {
         alias pp='c.pl'
         alias ppp='c.pl *'
     }
     alias dirs='dirs -v'
-    exists proxychains && alias pc='proxychains'
-    exists proxychains4 && alias pc='proxychains'
+    zpwrExists proxychains && alias pc='proxychains'
+    zpwrExists proxychains4 && alias pc='proxychains'
     alias bug='ZPWR_TRACE=true;ZPWR_DEBUG=true;'
     alias lo="tail -n 1000 -F $ZPWR_LOGFILE"
     alias loo="tail -n 1000 -F $ZPWR_LOGFILE"
     alias ol="tail -n 1000 -F $ZPWR_LOGFILE"
     alias llo="tail -n 1000 -F $ZPWR_LOGFILE"
-    exists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
+    zpwrExists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
     alias cpan='rlwrap cpan'
     alias nz='exec zsh'
     alias ll="zpwrClearList"
@@ -63,7 +63,7 @@ function zpwrBindAliasesLate(){
     alias pk=p10k
     alias co=cargo
     local prefix=
-    if commandExists grc; then
+    if zpwrCommandExists grc; then
         prefix='\grc --colour=on '
     fi
     alias mk='make'
@@ -72,13 +72,13 @@ function zpwrBindAliasesLate(){
     alias mkca="make clean all"
     alias mki="$ZPWR_FULL_SUDO ${prefix}make install"
 
-    if exists emacs; then
+    if zpwrExists emacs; then
         alias emacs="$ZPWR_EMACS"
         alias ee="$ZPWR_EMACS_CLIENT"
         alias me='source em-server.sh'
     fi
 
-    if exists heroku; then
+    if zpwrExists heroku; then
         alias hk='heroku'
     fi
 
@@ -86,16 +86,16 @@ function zpwrBindAliasesLate(){
     alias p2="python2"
     alias p3="python3"
 
-    exists fc && alias please="$ZPWR_FULL_SUDO \$(fc -ln -1)"
+    zpwrExists fc && alias please="$ZPWR_FULL_SUDO \$(fc -ln -1)"
 
-    exists spotify && {
+    zpwrExists spotify && {
         alias rep='spotify replay'
         alias ne='spotify next'
         alias pe='spotify prev'
         alias spa='spotify pause'
     }
 
-    if isZsh; then
+    if zpwrIsZsh; then
         # zsh xtrace prompt
         export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'
         alias 10='cd -10'
@@ -119,11 +119,11 @@ function zpwrBindAliasesLate(){
     alias brc='vim -S $HOME/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null'
     alias zrc='vim -S $HOME/.vim/sessions/zshrc.vim + $HOME/.zshrc'
     alias trc='vim -S $HOME/.vim/sessions/trc.vim $HOME/.tmux.conf'
-    alias tok='builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;isGitDir && git diff HEAD'
-    alias conf='builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;isGitDir && git diff HEAD'
-    alias etok='builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;zpwrClearList;isGitDir && git diff HEAD'
-    alias econf='builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;isGitDir && git diff HEAD'
-    alias zpt='builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;isGitDir && git diff HEAD'
+    alias tok='builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias conf='builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias etok='builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias econf='builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias zpt='builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
     #}}}***********************************************************
 
     alias deleteTab="sed '/^[\x20\x09]*$/d'"
@@ -142,7 +142,7 @@ function zpwrBindAliasesLate(){
     alias tn="tmux new-session"
 
     alias k="pkill"
-    if exists kubectl; then
+    if zpwrExists kubectl; then
         alias k8=kubectl
     fi
     alias ka="killall"
@@ -151,7 +151,7 @@ function zpwrBindAliasesLate(){
     alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
     alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
 
-    if exists systemctl; then
+    if zpwrExists systemctl; then
         alias sc="$ZPWR_FULL_SUDO systemctl"
         alias jcf="$ZPWR_FULL_SUDO journalctl -f"
     fi
@@ -180,10 +180,10 @@ function zpwrBindAliasesLate(){
         alias colo="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
         alias bl='brew link --force --overwrite'
 
-        if commandExists exa; then
+        if zpwrCommandExists exa; then
             alias lr="$ZPWR_EXA_COMMAND -R"
         else
-            commandExists gls &&
+            zpwrCommandExists gls &&
             alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
             alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
         fi
@@ -192,7 +192,7 @@ function zpwrBindAliasesLate(){
 
         # mvim overrides vim if not using nvim
         if [[ $ZPWR_PREFER_MVIM == true ]]; then
-            exists mvim && {
+            zpwrExists mvim && {
                 if [[ $ZPWR_USE_NEOVIM != true ]]; then
                     alias v='mvim -v'
                     alias vi='mvim -v'
@@ -206,7 +206,7 @@ function zpwrBindAliasesLate(){
     else
         # Linux or Unix
         alias ip="grc -c $HOME/conf.ifconfig ip"
-        if exists exa; then
+        if zpwrExists exa; then
             alias lr="$ZPWR_EXA_COMMAND -R"
         else
             alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
@@ -214,13 +214,13 @@ function zpwrBindAliasesLate(){
         test -d "$HOME/.local/share/Trash" &&
             alias tra='cd $HOME/.local/share/Trash'
         if [[ "$ZPWR_OS_TYPE" == linux ]]; then
-            if exists pacman;then
+            if zpwrExists pacman;then
                 alias api="$ZPWR_FULL_SUDO pacman -Sy --noconfirm"
                 alias apa="$ZPWR_FULL_SUDO pacman -Syyu --noconfirm --overwrite='*'"
-            elif exists apt;then
+            elif zpwrExists apt;then
                 alias api="$ZPWR_FULL_SUDO apt install -y"
                 alias apa="$ZPWR_FULL_SUDO apt update; $ZPWR_FULL_SUDO apt dist-upgrade -y; $ZPWR_FULL_SUDO apt autoremove -y; $ZPWR_FULL_SUDO apt clean"
-            elif exists yum;then
+            elif zpwrExists yum;then
                 alias api="$ZPWR_FULL_SUDO yum install -y"
                 alias apa="$ZPWR_FULL_SUDO yum check-update; $ZPWR_FULL_SUDO yum upgrade -y "
             fi
@@ -243,7 +243,7 @@ function zpwrBindAliasesLate(){
         alias exa='exa --git -il -F -H --color-scale -g -a'
                     ;;
                 (*suse*) :
-                    if exists zypper;then
+                    if zpwrExists zypper;then
                         alias api="$ZPWR_FULL_SUDO zypper install -y"
                         alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
                         alias zy="$ZPWR_FULL_SUDO zypper"
@@ -284,7 +284,7 @@ function zpwrBindAliasesLate(){
     alias cl=clear
     alias mkdir='mkdir -pv'
     alias exa="$ZPWR_EXA_COMMAND"
-    exists hexedit && alias he='hexedit -l 16'
+    zpwrExists hexedit && alias he='hexedit -l 16'
     alias fh='f !$'
     alias gh=zpwrOpenmygh
     eval "alias $ZPWR_GITHUB_ACCOUNT='zpwrOpenmygh $ZPWR_GITHUB_ACCOUNT'"
@@ -307,12 +307,12 @@ function zpwrBindAliasesLate(){
     alias gitgo='$ZPWR_SCRIPTS/gitgo.sh'
     alias watchGit='bash $ZPWR_SCRIPTS/watchServiceFSWatchGit.sh'
     alias watchPiWeb='bash $ZPWR_SCRIPTS/watchServiceFSWatchPiWeb.sh'
-    exists tput && {
+    zpwrExists tput && {
         ZPWR_VARS[bold]=$(tput bold || tput md)
         ZPWR_VARS[red]=$(tput setaf 1)
     }
 
-    exists idea && {
+    zpwrExists idea && {
         alias ic="idea create"
         alias il="idea list"
     }

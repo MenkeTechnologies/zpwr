@@ -9,7 +9,7 @@
 #}}}***********************************************************
 
 source "$ZPWR_SCRIPTS/fzfPreviewOptsCommon2Pos.sh"
-isZsh && ps='$pipestatus[1]' || ps='${PIPESTATUS[0]}'
+zpwrIsZsh && ps='$pipestatus[1]' || ps='${PIPESTATUS[0]}'
 
 cat<<EOF
         if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then

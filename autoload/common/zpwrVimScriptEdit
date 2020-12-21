@@ -10,7 +10,7 @@ function zpwrVimScriptEdit(){
     zpwrLoggDebug "builtin cd $ZPWR_SCRIPTS"
     eval "builtin cd $ZPWR_SCRIPTS"
 
-    BUFFER="$BUFFER; zpwrClearList; isGitDir && git diff HEAD"
+    BUFFER="$BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
     zpwrLoggDebug "$BUFFER"
     print -s -- "$BUFFER"
     eval "$BUFFER"
