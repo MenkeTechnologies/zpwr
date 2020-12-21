@@ -92,6 +92,8 @@ evalIfNeeded ZPWR_AUTOLOAD_COMMON "$ZPWR_AUTOLOAD_COMMON" "$ZPWR_AUTOLOAD/common
 evalIfNeeded ZPWR_AUTOLOAD_COMP_UTILS "$ZPWR_AUTOLOAD_COMP_UTILS " "$ZPWR_AUTOLOAD/comp_utils" "$ZPWR_AUTOLOAD"
 # autoloaded darwin non completion functions
 evalIfNeeded ZPWR_AUTOLOAD_DARWIN "$ZPWR_AUTOLOAD_DARWIN" "$ZPWR_AUTOLOAD/darwin" "$ZPWR_AUTOLOAD"
+# autoloaded fzf helper functions
+evalIfNeeded ZPWR_AUTOLOAD_FZF "$ZPWR_AUTOLOAD_FZF" "$ZPWR_AUTOLOAD/fzf" "$ZPWR_AUTOLOAD"
 # autoloaded linux non completion functions
 evalIfNeeded ZPWR_AUTOLOAD_LINUX "$ZPWR_AUTOLOAD_LINUX" "$ZPWR_AUTOLOAD/linux" "$ZPWR_AUTOLOAD"
 # autoloaded systemctl non completion functions

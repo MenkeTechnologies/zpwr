@@ -349,7 +349,7 @@ fi
 fpath=($ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_AUTOLOAD_COMP_UTILS $ZPWR_COMPS $fpath)
 #}}}***********************************************************
 #
-#{{{                    MARK:autoload
+#{{{                    MARK:Autoload
 #**************************************************************
 autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t) $ZPWR_AUTOLOAD_COMP_UTILS/*(.:t)
 autoload -Uz zrecompile zm zargs compinit
@@ -375,9 +375,14 @@ else
     fpath=($ZPWR_AUTOLOAD_LINUX $fpath)
     autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
 fi
+
+if commandExists fzf; then
+    fpath=($ZPWR_AUTOLOAD_FZF $fpath)
+    autoload -z $ZPWR_AUTOLOAD_FZF/*(.:t)
+fi
 #}}}***********************************************************
 
-#{{{                    MARK:pre plugin mgr
+#{{{                    MARK:Pre plugin manager
 #**************************************************************
 bindkey -v
 
