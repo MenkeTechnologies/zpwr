@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFzfFilesearchVerb(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrFzfFilesearchVerb <editor>"
+        return 1
+    fi
+
+    local editor file
+
+    editor="$1"
+    file=$(zpwrFzfFileSearch)
+
+    if [[ -z "$file" ]]; then
+        return
+    fi
+    print -sr -- "$editor $file; clearList; isGitDir && git diff HEAD"
+    eval "$editor $file; clearList; isGitDir && git diff HEAD"
+}
+
+zpwrFzfFilesearchVerb "$@"

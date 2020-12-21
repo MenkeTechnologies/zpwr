@@ -1,0 +1,35 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrLocateFzf(){
+
+    local firstArg sel firstdir mywords
+
+    mywords=(${(z)BUFFER})
+    if (( $#mywords == 0 )); then
+        sel="$(zpwrGetFound)"
+
+        if [[ -z "$sel" ]]; then
+            zle .kill-whole-line 2>/dev/null
+            return 0
+        fi
+        firstArg="${${(Az)sel}[1]//\"/}"
+        if [[ -d "$firstArg" ]]; then
+            BUFFER="builtin cd \"$firstArg\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
+        else
+            firstdir=${firstArg:h}
+            BUFFER="builtin cd \"$firstdir\"; $EDITOR $sel; clearList; isGitDir && git diff HEAD; "
+        fi
+        zle .accept-line
+    else
+        sel="$(zpwrGetFound)"
+
+        if [[ ! -z "$sel" ]]; then
+            BUFFER=$(print -r -- "$BUFFER $sel" | awk '{$1=$1};1')
+            CURSOR="$#BUFFER"
+            zle .accept-line 2>/dev/null
+        else
+            zle reset-prompt
+        fi
+    fi
+}
+zpwrLocateFzf "$@"

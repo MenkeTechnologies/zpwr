@@ -1,0 +1,24 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEmacsScriptEdit(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    BUFFER="$(zpwrFzvimScript)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
+    loggDebug "builtin cd $ZPWR_SCRIPTS"
+    eval "builtin cd $ZPWR_SCRIPTS"
+
+    BUFFER="$BUFFER; clearList; isGitDir && git diff HEAD"
+    loggDebug "$BUFFER"
+    print -s -- "$BUFFER"
+    eval "$BUFFER"
+}
+
+zpwrEmacsScriptEdit "$@"

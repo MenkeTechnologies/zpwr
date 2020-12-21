@@ -1,0 +1,7 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimFzfWordsearchVerb(){
+    zpwrFzfWordsearchVerb "$EDITOR"
+}
+
+zpwrVimFzfWordsearchVerb "$@"

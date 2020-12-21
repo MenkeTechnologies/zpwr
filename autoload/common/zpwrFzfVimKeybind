@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFzfVimKeybind(){
+
+    if [[ ! -s "$ZPWR_VIM_KEYBINDINGS" ]]; then
+        loggDebug "regenerating $ZPWR_VIM_KEYBINDINGS"
+        zpwrRegenAllKeybindingsCache
+    fi
+    cat "$ZPWR_VIM_KEYBINDINGS" | fzf
+}
+
+zpwrFzfVimKeybind "$@"

@@ -5,9 +5,9 @@ function zpwrCat(){
     if [[ -p /dev/stdin ]]; then
         cat > "$ZPWR_TEMPFILE"
         if [[ -p /dev/stdout ]];then
-            cCommon "$ZPWR_TEMPFILE"
+            zpwrCCommon "$ZPWR_TEMPFILE"
         else
-            cCommon "$ZPWR_TEMPFILE" | less
+            zpwrCCommon "$ZPWR_TEMPFILE" | less
         fi
     else
         if [[ -z "$1" ]]; then
@@ -16,9 +16,9 @@ function zpwrCat(){
         fi
 
         if [[ -p /dev/stdout ]];then
-            cCommon "$@"
+            zpwrCCommon "$@"
         else
-            cCommon "$@" | less
+            zpwrCCommon "$@" | less
         fi
     fi
 }

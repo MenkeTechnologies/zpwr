@@ -1,0 +1,29 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrPirun(){
+
+    trap 'DONE=true' QUIT
+
+    local DONE picounter pi
+
+    DONE=false
+    picounter=1
+
+    for pi in "${PI_ARRAY[@]}" ; do
+        [[ $DONE == true ]] && return 1
+        alternatingPrettyPrint \
+        "Executing $ZPWR_DELIMITER_CHAR'$1'$ZPWR_DELIMITER_CHAR on $ZPWR_DELIMITER_CHAR$pi$ZPWR_DELIMITER_CHAR"
+        if [[ -z $2 ]]; then
+            ssh "${pi%:*}" "$1" 2>/dev/null
+        else
+            ssh "${pi%:*}" "$1" 2>/dev/null
+            if (( picounter == $2 )); then
+                return
+            fi
+        fi
+        ((++picounter))
+    done
+    trap QUIT
+}
+
+zpwrPirun "$@"

@@ -459,7 +459,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     # override OMZ/plugin aliases with own aliases
     zinit ice lucid nocompile wait'0a' \
-    atload'zpwrBindAliasesLate;createAliasCache;zpwrBindAliasesZshLate;zpwrBindOverrideZLE;'
+    atload'zpwrBindAliasesLate;zpwrCreateAliasCache;zpwrBindAliasesZshLate;zpwrBindOverrideZLE;'
     zinit load \
         MenkeTechnologies/zsh-expand
 

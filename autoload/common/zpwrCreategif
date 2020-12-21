@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCreategif(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrCreategif <file>"
+        return 1
+    fi
+
+    local res outFile
+
+    outFile=out.gif
+    res=600x400
+
+    test -n "$2" && res="$2"
+
+    test -n "$3" && outFile="$3"
+
+    ffmpeg -i "$1" -s "$res" -pix_fmt rgb24 -r 10 -f gif - |
+    gifsicle --optimize=3 --delay=3 > "$outFile"
+}
+
+zpwrCreategif "$@"

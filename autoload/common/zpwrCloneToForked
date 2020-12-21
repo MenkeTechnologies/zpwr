@@ -1,0 +1,20 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCloneToForked(){
+
+    local branch
+
+    branch=master
+    (
+        if [[ -z "$1" ]]; then
+            builtin cd "$FORKED_DIR" || return 1
+        else
+            builtin cd "$@" || return 1
+        fi
+        git clone -b "$branch" \
+            "https://github.com/$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME.git"
+    )
+}
+
+
+zpwrCloneToForked "$@"

@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrNvimThenRecentf() {
+
+    if [[ -f $ZPWR_RECENTF ]]; then
+        zpwrParseRecentf
+    fi
+    zpwrCatNvimOrVimInfo
+}
+
+zpwrNvimThenRecentf "$@"

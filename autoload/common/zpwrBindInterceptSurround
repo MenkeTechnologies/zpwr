@@ -2,15 +2,15 @@
 # vim: set ft=sh:
 
 function zpwrBindInterceptSurround() {
-    zle -N interceptDelete
-    zle -N interceptSurround
-    bindkey -M viins "^?" interceptDelete
-    bindkey -M viins '"' interceptSurround
-    bindkey -M viins "'" interceptSurround
-    bindkey -M viins '`' interceptSurround
-    bindkey -M viins "(" interceptSurround
-    bindkey -M viins "[" interceptSurround
-    bindkey -M viins "{" interceptSurround
+    zle -N zpwrInterceptDelete
+    zle -N zpwrInterceptSurround
+    bindkey -M viins "^?" zpwrInterceptDelete
+    bindkey -M viins '"' zpwrInterceptSurround
+    bindkey -M viins "'" zpwrInterceptSurround
+    bindkey -M viins '`' zpwrInterceptSurround
+    bindkey -M viins "(" zpwrInterceptSurround
+    bindkey -M viins "[" zpwrInterceptSurround
+    bindkey -M viins "{" zpwrInterceptSurround
 }
 
 zpwrBindInterceptSurround "$@"

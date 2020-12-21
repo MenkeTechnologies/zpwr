@@ -1,0 +1,17 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrHistoryVerbEdit(){
+
+    local num sel
+      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |
+    FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" $ZPWR_FZF |
+    perl -lane 'print "@F[1..$#F]"')
+
+    if [[ -n "$sel" ]]; then
+        print -zr -- "$sel"
+    else
+        return
+    fi
+}
+
+zpwrHistoryVerbEdit "$@"

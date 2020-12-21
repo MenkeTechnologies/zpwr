@@ -1,0 +1,30 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFzfWordsearchVerbEdit(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrFzfWordsearchVerbEdit <editor>"
+        return 1
+    fi
+
+    local firstdir editor file mywords
+
+    editor="$1"
+    BUFFER=$(zpwrAgIntoFzf vim)
+
+    if [[ -n "$BUFFER" ]]; then
+        mywords=(${(z)BUFFER})
+        firstdir=${mywords[2]:h}
+        loggDebug "builtin cd $firstdir\""
+        #:h takes aways last "
+        BUFFER="builtin cd $firstdir\"; $editor $BUFFER; clearList; isGitDir && git diff HEAD"
+        loggDebug "$BUFFER"
+
+    print -zr -- "$BUFFER"
+    else
+        return
+    fi
+
+}
+
+zpwrFzfWordsearchVerbEdit "$@"

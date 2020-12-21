@@ -10,7 +10,7 @@ function zpwrFindFzfNoZLE(){
     local firstArg sel editor
 
     editor="$1"
-    sel="$(getFound)"
+    sel="$(zpwrGetFound)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
     if [[ -d "$firstArg" ]]; then

@@ -7,7 +7,7 @@ function zpwrEmacsZpwrGtagsEdit(){
         return 1
     fi
 
-    getGtagsEdit "$ZPWR_EMACS_CLIENT"
+    zpwrGetGtagsEdit "$ZPWR_EMACS_CLIENT"
 }
 
 zpwrEmacsZpwrGtagsEdit "$@"

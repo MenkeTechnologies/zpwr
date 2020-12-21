@@ -4,7 +4,7 @@ function ___hd(){
 
     local cmd
 
-    if cmd="$(getGHDelURL)";then
+    if cmd="$(zpwrGetGHDelURL)";then
 
         if zpwrConfirm "Exe '$cmd'"; then
             if eval "$cmd"; then
@@ -14,7 +14,7 @@ function ___hd(){
             fi
         fi
     else
-            loggErr "getGHDelURL failed."
+            loggErr "zpwrGetGHDelURL failed."
     fi
 
 }

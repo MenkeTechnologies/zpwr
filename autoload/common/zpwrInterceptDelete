@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrInterceptDelete(){
+
+    #deleteMatching
+    exists autopair-delete && autopair-delete
+    zpwrKeySender
+}
+
+zpwrInterceptDelete "$@"

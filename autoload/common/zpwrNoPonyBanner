@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrNoPonyBanner(){
+
+    eval "$ZPWR_DEFAULT_BANNER"
+}
+
+zpwrNoPonyBanner "$@"

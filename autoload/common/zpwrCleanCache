@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCleanCache(){
+
+    emulate -L zsh
+    setopt nullglob
+
+    rm -rf \
+        "$ZPWR_LOGFILE" \
+        "$ZPWR_VIM_KEYBINDINGS" \
+        "$ZPWR_ALL_KEYBINDINGS" \
+        "$ZPWR_ALL_GIT_DIRS" \
+        "$ZPWR_LOCAL_ENV"*
+}
+
+zpwrCleanCache "$@"

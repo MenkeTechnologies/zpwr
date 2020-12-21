@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCleanTemp(){
+
+    emulate -L zsh
+    setopt nullglob
+
+    rm -rf \
+        "$ZPWR_TEMPFILE" \
+        "$ZPWR_TEMPFILE1" \
+        "$ZPWR_TEMPFILE2" \
+        "$ZPWR_TEMPFILE3" \
+        "$ZPWR_TEMPFILE4" \
+        "$ZPWR_TEMPFILE_SQL" \
+        "$ZPWR_TMUX_LOCAL"/pane* \
+        "$ZPWR_LOCAL_TEMP"/*
+}
+
+zpwrCleanTemp "$@"

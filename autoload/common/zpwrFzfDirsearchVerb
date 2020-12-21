@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFzfDirsearchVerb(){
+
+    local dir
+
+    dir=$(zpwrFzfDirSearch)
+
+    if [[ -z "$dir" ]]; then
+        return
+    fi
+    print -rs -- "builtin cd \"$dir\" && clearList"
+    eval "builtin cd \"$dir\" && clearList"
+}
+
+zpwrFzfDirsearchVerb "$@"

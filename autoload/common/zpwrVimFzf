@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimFzf(){
+
+    local firstdir editor mywords
+
+    zle .kill-whole-line
+    BUFFER="$(zpwrFzvim vim)"
+    mywords=(${(z)BUFFER})
+    if (( $#mywords == 0 )); then
+        zle .kill-whole-line
+    else
+        firstdir=${mywords[1]:h}
+        loggDebug "words='$mywords[1]'=>'$firstdir'"
+        BUFFER="$EDITOR $BUFFER"
+        #:h takes aways last "
+        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
+        zle .accept-line
+    fi
+}
+
+zpwrVimFzf "$@"

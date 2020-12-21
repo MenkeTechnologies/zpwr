@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEmacsZpwr(){
+
+    builtin cd $ZPWR
+    ${=ZPWR_EMACS_CLIENT} .
+    clearList
+    isGitDir && git diff HEAD
+}
+
+zpwrEmacsZpwr "$@"

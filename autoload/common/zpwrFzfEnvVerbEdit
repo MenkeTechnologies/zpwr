@@ -1,0 +1,26 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFzfEnvVerbEdit(){
+
+    local num sel
+
+    if [[ ! -s "${ZPWR_LOCAL_ENV}Key.txt" ]]; then
+        loggDebug "regenerating keys for $ZPWR_LOCAL_ENV"
+        zpwrRegenSearchEnv
+    fi
+    if [[ ! -s "${ZPWR_LOCAL_ENV}Value.txt" ]]; then
+        loggDebug "regenerating values for $ZPWR_LOCAL_ENV"
+        zpwrRegenSearchEnv
+    fi
+
+    sel=$(cat "${ZPWR_LOCAL_ENV}Key.txt" | awk '{print $2}' |
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS")
+
+    if [[ -n "$sel" ]]; then
+        print -zr -- "$sel"
+    else
+        return
+    fi
+}
+
+zpwrFzfEnvVerbEdit "$@"

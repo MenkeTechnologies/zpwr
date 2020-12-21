@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEmacsFzf(){
+
+    local firstdir editor mywords
+
+    zle .kill-whole-line
+    BUFFER="$(zpwrFzvim $ZPWR_EMACS_CLIENT)"
+    mywords=(${(z)BUFFER})
+    if (( $#mywords == 0 )); then
+        zle .kill-whole-line
+    else
+        firstdir=${mywords[1]:h}
+        loggDebug "words='$mywords[1]'=>'$firstdir'"
+        BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
+        #:h takes aways last "
+        BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"
+        zle .accept-line
+    fi
+}
+
+zpwrEmacsFzf "$@"

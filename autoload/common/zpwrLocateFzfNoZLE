@@ -1,0 +1,30 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrLocateFzfNoZLE(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrLocateFzfNoZLE <editor>"
+        return 1
+    fi
+
+    local firstArg sel editor
+
+    editor="$1"
+    sel="$(zpwrGetLocate)"
+
+    firstArg="${${(Az)sel}[1]//\"/}"
+    if [[ -d "$firstArg" ]]; then
+        BUFFER="cd $firstArg;$editor $sel"
+    else
+        BUFFER="$editor $sel"
+    fi
+
+    if [[ -n "$sel" ]]; then
+        print -sr -- "$BUFFER"
+        eval "$BUFFER"
+    else
+        return
+    fi
+}
+
+zpwrLocateFzfNoZLE "$@"

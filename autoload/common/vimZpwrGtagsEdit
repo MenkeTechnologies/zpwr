@@ -1,8 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function ___vimZpwrGtagsEdit(){
-
-    getGtagsEdit "$EDITOR"
-}
-
-___vimZpwrGtagsEdit "$@"

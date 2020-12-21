@@ -1,0 +1,27 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrListNoClear () {
+
+    if commandExists exa; then
+        eval "$ZPWR_EXA_COMMAND"
+        return 0
+    fi
+
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
+        if commandExists grc; then
+            grc -c "$HOME/conf.gls" gls \
+            -iFlhA --color=always
+        else
+            ls -iFlhAO
+        fi
+    else
+        if commandExists grc; then
+            grc -c "$HOME/conf.gls" \
+            ls -iFlhA --color=always
+        else
+            ls -ifhlA
+        fi
+    fi
+}
+
+zpwrListNoClear "$@"

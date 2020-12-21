@@ -89,15 +89,15 @@ _alias_file="$ZPWR/.shell_aliases_functions.sh"_alias_file445,16534
 function sub (){sub452,16841
     BUFFER="suc"BUFFER455,16884
 function scriptEdit(){scriptEdit459,16925
-        BUFFER="$(fzvimScript)"BUFFER461,16949
+        BUFFER="$(zpwrFzvimScript)"BUFFER461,16949
         BUFFER="$EDITOR $BUFFER"BUFFER465,17047
 function zpwrSudoVimRecent(){zpwrSudoVimRecent474,17388
-    BUFFER="$(fzvim)"BUFFER476,17415
+    BUFFER="$(zpwrFzvim)"BUFFER476,17415
     mywords=(${(z)BUFFER})mywords480,17491
     firstdir=${mywords[1]:h}firstdir481,17518
     BUFFER="sudo $EDITOR $BUFFER"BUFFER482,17547
-function vimRecent(){vimRecent491,17864
-    BUFFER="$(fzvim)"BUFFER493,17887
+function zpwrVimRecent(){zpwrVimRecent491,17864
+    BUFFER="$(zpwrFzvim)"BUFFER493,17887
     mywords=(${(z)BUFFER})mywords497,17963
     firstdir=${mywords[1]:h}firstdir498,17990
     BUFFER="$EDITOR $BUFFER"BUFFER499,18019
@@ -121,7 +121,7 @@ function zpwrSshRegain() {zpwrSshRegain556,19581
 function dbz() {dbz581,20175
     BUFFER=dbBUFFER584,20218
 ZPWR_COUNTER=0ZPWR_COUNTER588,20256
-function changeQuotes(){changeQuotes590,20272
+function zpwrChangeQuotes(){zpwrChangeQuotes590,20272
         __OLDBUFFER="${BUFFER}"__OLDBUFFER593,20340
         BUFFER=${BUFFER//\"/\'}BUFFER594,20372
             ZPWR_COUNTER=0ZPWR_COUNTER598,20571
@@ -149,72 +149,72 @@ function runner() {runner692,23148
         BUFFER=geBUFFER698,23260
 function updater() {updater703,23313
     BUFFER=u8BUFFER706,23360
-function getrcWidget(){getrcWidget710,23398
-    BUFFER="getrc"BUFFER713,23448
+function zpwrGetrcWidget(){zpwrGetrcWidget710,23398
+    BUFFER="zpwrGetrc"BUFFER713,23448
 function zpwrIntoFzf(){zpwrIntoFzf717,23491
     LBUFFER="$LBUFFER |& fzf -m --border --ansi"LBUFFER719,23512
-function lsoffzf(){lsoffzf723,23585
+function zpwrLsoffzf(){zpwrLsoffzf723,23585
     LBUFFER="$LBUFFER$(sudo lsof -i | sed -n '2,$p' | fzf -m | awk '{print $2}' | uniq | tr '[:space:]' ' ')"LBUFFER725,23606
-function clearListFZF(){clearListFZF730,23804
-function fzvim(){fzvim743,24111
+function zpwrClearListFZF(){zpwrClearListFZF730,23804
+function zpwrFzvim(){zpwrFzvim743,24111
         file="$ZPWR_NVIMINFO"file747,24189
         file="$HOME/.viminfo"file753,24539
-function fzvimScript(){fzvimScript760,24787
-function vimFzf(){vimFzf770,25200
-    BUFFER="$(fzvim)"BUFFER773,25245
+function zpwrFzvimScript(){zpwrFzvimScript760,24787
+function zpwrVimFzf(){zpwrVimFzf770,25200
+    BUFFER="$(zpwrFzvim)"BUFFER773,25245
     mywords=(${(z)BUFFER})mywords774,25267
         firstdir=${mywords[1]:h}firstdir778,25366
         BUFFER="$EDITOR $BUFFER"BUFFER780,25452
         BUFFER="builtin cd $firstdir\"; $BUFFER; clearList;isGitDir && git diff HEAD"BUFFER782,25516
-function fzfWordsearchVerbEdit(){fzfWordsearchVerbEdit787,25637
+function zpwrFzfWordsearchVerbEdit(){zpwrFzfWordsearchVerbEdit787,25637
     sel=$(fz vim)sel790,25686
         BUFFER="$EDITOR $sel"BUFFER792,25731
-function fzfWordsearchVerb(){fzfWordsearchVerb799,25825
+function zpwrFzfWordsearchVerb(){zpwrFzfWordsearchVerb799,25825
     file=$(fz vim)file802,25871
-function fzfFileSearch(){fzfFileSearch810,26078
-function fzfFilesearchVerbEdit(){fzfFilesearchVerbEdit820,26437
-    sel=$(fzfFileSearch)sel823,26486
+function zpwrFzfFileSearch(){zpwrFzfFileSearch810,26078
+function zpwrFzfFilesearchVerbEdit(){zpwrFzfFilesearchVerbEdit820,26437
+    sel=$(zpwrFzfFileSearch)sel823,26486
         BUFFER="$EDITOR $sel"BUFFER825,26538
-function fzfFilesearchVerb(){fzfFilesearchVerb832,26632
-    file=$(fzfFileSearch)file835,26678
-function fzfDirSearch(){fzfDirSearch843,26892
-function fzfDirsearchVerb(){fzfDirsearchVerb853,27208
-    dir=$(fzfDirSearch)dir856,27252
-function fzfZList(){fzfZList864,27425
-function fzfZListVerb(){fzfZListVerb871,27675
-    dir=$(fzfZList)dir874,27715
+function zpwrFzfFilesearchVerb(){zpwrFzfFilesearchVerb832,26632
+    file=$(zpwrFzfFileSearch)file835,26678
+function zpwrFzfDirSearch(){zpwrFzfDirSearch843,26892
+function zpwrFzfDirsearchVerb(){zpwrFzfDirsearchVerb853,27208
+    dir=$(zpwrFzfDirSearch)dir856,27252
+function zpwrFzfZList(){zpwrFzfZList864,27425
+function zpwrFzfZListVerb(){zpwrFzfZListVerb871,27675
+    dir=$(zpwrFzfZList)dir874,27715
 function zpwrFasdFList(){zpwrFasdFList882,27884
 function fm(){fm889,28133
    FZF_MAN_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfMan.sh" "$1")'"FZF_MAN_OPTS891,28149
-function zFZF(){zFZF895,28305
-    BUFFER="z $(fzfZList)"BUFFER898,28348
+function zpwrZFZF(){zpwrZFZF895,28305
+    BUFFER="z $(zpwrFzfZList)"BUFFER898,28348
     mywords=(${(z)BUFFER})mywords899,28375
 function zpwrFasdFZF(){zpwrFasdFZF907,28509
     BUFFER="$BUFFER $(zpwrFasdFList)"BUFFER909,28530
     mywords=(${(z)BUFFER})mywords910,28564
 function zpwrFasdFListVerb(){zpwrFasdFListVerb918,28679
     file=$(zpwrFasdFList)file921,28721
-function killPSVerbAccept(){killPSVerbAccept929,28843
+function zpwrKillPSVerbAccept(){zpwrKillPSVerbAccept929,28843
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel931,28873
         BUFFER="sudo kill -9 -- $sel"BUFFER933,29169
-function killPSVerbEdit(){killPSVerbEdit941,29294
+function zpwrKillPSVerbEdit(){zpwrKillPSVerbEdit941,29294
     sel="$(command ps -ef | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel943,29322
         BUFFER="sudo kill -9 -- $sel"BUFFER945,29618
-function killLsofVerbAccept(){killLsofVerbAccept952,29720
+function zpwrKillLsofVerbAccept(){zpwrKillLsofVerbAccept952,29720
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel954,29752
         BUFFER="sudo kill -9 -- $sel"BUFFER956,30046
-function killLsofVerbEdit(){killLsofVerbEdit964,30171
+function zpwrKillLsofVerbEdit(){zpwrKillLsofVerbEdit964,30171
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel966,30201
         BUFFER="sudo kill -9 -- $sel"BUFFER968,30495
-function historyVerbAccept(){historyVerbAccept975,30597
+function zpwrHistoryVerbAccept(){zpwrHistoryVerbAccept975,30597
       sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |sel978,30646
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |FZF_DEFAULT_OPTS979,30728
-function historyVerbEdit(){historyVerbEdit990,31026
+function zpwrHistoryVerbEdit(){zpwrHistoryVerbEdit990,31026
       sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |sel993,31073
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |FZF_DEFAULT_OPTS994,31155
-function vimFzfSudo(){vimFzfSudo1004,31433
-        LBUFFER="sudo -E nvim $(fzvim)"LBUFFER1009,31527
-        LBUFFER="sudo -E vim $(fzvim)"LBUFFER1011,31576
+function zpwrVimFzfSudo(){zpwrVimFzfSudo1004,31433
+        LBUFFER="sudo -E nvim $(zpwrFzvim)"LBUFFER1009,31527
+        LBUFFER="sudo -E vim $(zpwrFzvim)"LBUFFER1011,31576
     mywords=("${(z)BUFFER}")mywords1013,31622
         firstdir=${mywords[4]:h}firstdir1017,31723
         BUFFER="cd $firstdir\"; $BUFFER; clearList"BUFFER1020,31836
@@ -235,36 +235,36 @@ function zpwrStartSend(){zpwrStartSend1063,32627
         pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$pane'}')pid1078,32921
 function zpwrKeyClear(){zpwrKeyClear1083,33082
 function self-insert() {self1092,33274
-function clearLine() {clearLine1100,33360
+function zpwrClearLine() {zpwrClearLine1100,33360
     LBUFFER=LBUFFER1103,33397
 function zpwrRegenZshCompCache(){zpwrRegenZshCompCache1106,33413
 function zpwrRegenSearchEnv(){zpwrRegenSearchEnv1113,33556
 function regenAll(){regenAll1119,33723
-function deleteLastWord(){deleteLastWord1131,33922
+function zpwrDeleteLastWord(){zpwrDeleteLastWord1131,33922
     mywords=(${(z)BUFFER})mywords1133,33950
         BUFFER=${mywords[1,-2]}" "BUFFER1135,34011
         BUFFER=BUFFER1137,34055
-function fzfEnv(){fzfEnv1142,34082
+function zpwrFzfEnv(){zpwrFzfEnv1142,34082
 function zpwrFzfAllKeybind(){zpwrFzfAllKeybind1158,34456
-function fzfVimKeybind(){fzfVimKeybind1167,34667
-function getFound(){getFound1176,34878
-function locateFzf(){locateFzf1182,35018
+function zpwrFzfVimKeybind(){zpwrFzfVimKeybind1167,34667
+function zpwrGetFound(){zpwrGetFound1176,34878
+function zpwrLocateFzf(){zpwrLocateFzf1182,35018
     mywords=(${(z)BUFFER})mywords1185,35066
-        found="$(getFound)"found1187,35127
+        found="$(zpwrGetFound)"found1187,35127
         firstArg="${${(Az)found}[1]//\"/}"firstArg1193,35268
             BUFFER="cd $firstArg; c $found"BUFFER1195,35349
             BUFFER="c $found"BUFFER1197,35406
-        found="$(getFound)"found1201,35481
+        found="$(zpwrGetFound)"found1201,35481
             BUFFER="$BUFFER $found"BUFFER1204,35547
-function fzfCommits(){fzfCommits1212,35683
+function zpwrFzfCommits(){zpwrFzfCommits1212,35683
     BUFFER=""BUFFER1214,35707
         BUFFER="vim -v -c Commits! -c quitall"BUFFER1217,35768
 function zpwrAsVar(){zpwrAsVar1226,35930
     region_highlight=("P0 20 fg=blue,bg=red")region_highlight1228,35949
     BUFFER="=\"\$($BUFFER)\""BUFFER1229,35995
     CURSOR=0CURSOR1230,36025
-function interceptSurround(){interceptSurround1233,36041
-function interceptDelete(){interceptDelete1240,36149
+function zpwrInterceptSurround(){zpwrInterceptSurround1233,36041
+function zpwrInterceptDelete(){zpwrInterceptDelete1240,36149
 function zpwrVerbsWidgetAccept(){zpwrVerbsWidgetAccept1247,36261
     BUFFER="$(zpwrVerbs)"BUFFER1250,36321
 function zpwrVerbsWidget(){zpwrVerbsWidget1255,36395
@@ -313,8 +313,8 @@ function zpwrTabNumCmd() {zpwrTabNumCmd2167,68600
     num=$1num2169,68624
     args="$@"args2171,68645
 function banner(){banner2294,71848
-function bannerLolcat(){bannerLolcat2299,71962
-function noPonyBanner(){noPonyBanner2306,72139
+function zpwrBannerLolcat(){zpwrBannerLolcat2299,71962
+function zpwrNoPonyBanner(){zpwrNoPonyBanner2306,72139
 export HISTSIZE=10000000HISTSIZE2400,75080
 HISTSIZE=999999999HISTSIZE2401,75105
 SAVEHIST=$HISTSIZESAVEHIST2403,75150
@@ -354,7 +354,7 @@ function fzf_setup(){fzf_setup2595,80894
     export FZF_CTRL_T_COMMAND='find . | ag -v ".git/"'FZF_CTRL_T_COMMAND2608,81319
     export FZF_CTRL_T_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsCtrlT.sh")'"FZF_CTRL_T_OPTS2609,81374
     export FZF_CTRL_T_OPTS_2="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts2Pos.sh")'"FZF_CTRL_T_OPTS_22610,81484
-    export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh")'"FZF_ENV_OPTS2611,81595
+    export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/zpwrFzfEnv.sh")'"FZF_ENV_OPTS2611,81595
     export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh")'"FZF_ENV_OPTS_VERBS2613,81690
         export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"FZF_COMPLETION_OPTS2616,81846
         export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"FZF_COMPLETION_OPTS2618,81972
@@ -485,7 +485,7 @@ function zpwrVerbs(){zpwrVerbs3388,104909
 function numZpwrVerbs(){numZpwrVerbs3415,105652
 function zpwrEnvVars(){zpwrEnvVars3421,105728
 function zpwrTags(){zpwrTags3426,105807
-function revealRecurse(){revealRecurse3431,105867
+function zpwrRevealRecurse(){zpwrRevealRecurse3431,105867
 function zpwrEvalTester(){zpwrEvalTester3438,105980
 
 /Users/wizard/.zpwr/.powerlevel9kconfig.sh,4351
@@ -649,7 +649,7 @@ function r(){r549,21129
         service_path="$src_dir/$service.service"service_path671,23956
         group=$(id -gn)group684,24509
         service_path="$ZPWR_LOCAL/$service.service"service_path688,24576
-function cloneToForked(){cloneToForked710,25250
+function zpwrCloneToForked(){zpwrCloneToForked710,25250
     branch=masterbranch712,25277
 function s(){s724,25561
         cmd=sublcmd727,25601
@@ -667,7 +667,7 @@ function loggDebug(){loggDebug811,28080
 function xx(){xx818,28170
     cmd="$1"cmd822,28218
     DONE=falseDONE826,28306
-function urlSafe(){urlSafe834,28434
+function zpwrUrlSafe(){zpwrUrlSafe834,28434
 function cgh(){cgh839,28496
 function upload(){upload846,28700
 function jd(){jd855,28866
@@ -710,7 +710,7 @@ function clearList() {clearList1009,31893
                         rank="Secondary"rank1055,33252
                         out=$(man -wa "$(basename $lf)" 2>/dev/null)out1068,33826
                             out="$(hash | command grep "^$arg=")"out1074,34097
-function listNoClear () {listNoClear1125,35907
+function zpwrListNoClear () {zpwrListNoClear1125,35907
 function animate(){animate1146,36354
 function blocksToSize(){blocksToSize1151,36413
     bytes=$(( input * 512 ))bytes1155,36470
@@ -729,12 +729,12 @@ function isGitDir(){isGitDir1224,37921
 function isGitDirMessage(){isGitDirMessage1229,38000
 function gil(){gil1239,38217
     local file=".git/info/exclude"file1246,38317
-function contribCountDirs(){contribCountDirs1257,38467
+function zpwrContribCountDirs(){zpwrContribCountDirs1257,38467
     user="$1"user1266,38638
     curDir="$(pwd)"curDir1268,38662
     sum=0sum1269,38682
             lineCount="$(git log --pretty="%an" | grep -E "$user" | wc -l)"lineCount1279,38863
-function contribCount(){contribCount1293,39336
+function zpwrContribCount(){zpwrContribCount1293,39336
     lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"lines1300,39445
     lineCount="$(echo $lines | wc -l)"lineCount1301,39511
 function isBinary() {isBinary1312,39943
@@ -743,7 +743,7 @@ function zpwrTotalLines(){zpwrTotalLines1316,40051
         filter=falsefilter1328,40269
                filter=truefilter1331,40378
     lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1351,40793
-function contribCountLines(){contribCountLines1364,41261
+function zpwrContribCountLines(){zpwrContribCountLines1364,41261
         filter=falsefilter1376,41488
                filter=truefilter1379,41596
     lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"lineCount1398,42161
@@ -755,7 +755,7 @@ function gitCommitAndPush(){gitCommitAndPush1463,43678
 function replacer(){replacer1485,44044
     orig="$1"orig1493,44151
     replace="$2"replace1494,44165
-function creategif(){creategif1505,44371
+function zpwrCreategif(){zpwrCreategif1505,44371
     outFile=out.gifoutFile1507,44394
     res=600x400res1508,44414
 function hc(){hc1523,44690
@@ -798,18 +798,18 @@ function zr(){zr1858,52137
     forked="$FORKED_DIR/$ZPWR_REPO_NAME"forked1862,52218
 function goInstallerDir(){goInstallerDir1873,52435
     local ret=0ret1875,52463
-function unlinkConf(){unlinkConf1889,52775
+function zpwrUnlinkConf(){zpwrUnlinkConf1889,52775
     symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1893,52827
     local snipDir="$HOME/.emacs.d/private/snippets"snipDir1903,53179
 function zpwrLinkConf(){zpwrLinkConf1914,53368
     symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1924,53594
     local snipDir="$HOME/.emacs.d/private"snipDir1936,54146
-function getrc(){getrc1948,54545
+function zpwrGetrc(){zpwrGetrc1948,54545
         branch=masterbranch1951,54591
         branch="$1"branch1953,54622
             REPLY="$(cat "$ZPWR_TEMPFILE")"REPLY1960,54909
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"COMPLETION_DIR1982,55428
-function getrcdev(){getrcdev1992,55655
+function zpwrGetrcdev(){zpwrGetrcdev1992,55655
 function rename(){rename1997,55694
     search="$1"search2004,55796
         out=$(echo "$file" | sed -n "$search"p |  wc -l | tr -d ' ')out2008,55883
@@ -818,7 +818,7 @@ function zpwrTorip(){zpwrTorip2016,56092
 function zpwrToriprenew() {zpwrToriprenew2023,56194
 function zpwrMycurl(){zpwrMycurl2029,56304
 function perlremovespaces(){perlremovespaces2037,56545
-function pirun(){pirun2045,56803
+function zpwrPirun(){zpwrPirun2045,56803
     DONE=falseDONE2049,56863
     picounter=1picounter2051,56898
 function digs(){digs2069,57407
@@ -859,7 +859,7 @@ function post(){post2377,67620
 function pre(){pre2389,67825
     prefix="$1"prefix2395,67925
     out="$(eval "$@")"out2397,67951
-function cCommon(){cCommon2410,68260
+function zpwrCCommon(){zpwrCCommon2410,68260
     local colorizer=batcolorizer2412,68281
 function c(){c2445,69322
     styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'styles_dir2465,69711
@@ -875,7 +875,7 @@ function zpwrFigletfonts(){zpwrFigletfonts2514,71746
         FIGLET_DIR="/usr/share/figlet"FIGLET_DIR2519,71896
 function zpwrPygmentcolors(){zpwrPygmentcolors2554,72987
     dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"dir2556,73014
-function detachall(){detachall2563,73199
+function zpwrDetachall(){zpwrDetachall2563,73199
 function scripts(){scripts2569,73309
     export ZPWR_SCHEMA_NAME=rootZPWR_SCHEMA_NAME2581,73526
     export ZPWR_TABLE_NAME=LearningCollectionZPWR_TABLE_NAME2582,73559
@@ -885,7 +885,7 @@ function zpwrJsonToArray(){zpwrJsonToArray2592,73845
 function zpwrArrayToJson(){zpwrArrayToJson2610,74231
         ary="$1"ary2613,74275
         ary="$1"ary2617,74399
-function loginCount(){loginCount2626,74599
+function zpwrLoginCount(){zpwrLoginCount2626,74599
 function needSudo(){needSudo2633,74771
 function clearTemp(){clearTemp2642,74875
 function clearCache(){clearCache2657,75233
@@ -910,12 +910,12 @@ function goclean() {goclean2809,79577
     src_dir="$GOPATH/src/$pkg"src_dir2826,79947
     bin_dir="$GOPATH/pkg/$ost/$pkg"bin_dir2827,79978
 function commits(){commits2845,80434
-function emacsEmacsConfig(){emacsEmacsConfig2861,80802
-function vimEmacsConfig(){vimEmacsConfig2871,80998
-function emacsAll(){emacsAll2881,81181
-function vimAll(){vimAll2902,81768
-function emacsScripts(){emacsScripts2923,82342
-function vimScripts(){vimScripts2935,82662
+function zpwrEmacsEmacsConfig(){zpwrEmacsEmacsConfig2861,80802
+function zpwrVimEmacsConfig(){zpwrVimEmacsConfig2871,80998
+function zpwrEmacsAll(){zpwrEmacsAll2881,81181
+function zpwrVimAll(){zpwrVimAll2902,81768
+function zpwrEmacsScripts(){zpwrEmacsScripts2923,82342
+function zpwrVimScripts(){zpwrVimScripts2935,82662
 function timer() {timer2947,82969
     count=100count2954,83128
         cmd=gdatecmd2956,83167
@@ -928,7 +928,7 @@ function timer() {timer2947,82969
         avg=$((runtime/(count *1.0)))avg2975,83664
     totend=$($cmd +%s)totend2980,83841
     tot=$((totend-totstart))tot2981,83864
-function changeGitCommitterEmail(){changeGitCommitterEmail2986,83971
+function zpwrChangeGitCommitterEmail(){zpwrChangeGitCommitterEmail2986,83971
     oldEmail="$1"oldEmail2998,84182
     newEmail="$2"newEmail2999,84200
         GIT_COMMITTER_EMAIL="'$newEmail'"; git commit-tree "$@";GIT_COMMITTER_EMAIL3005,84374
@@ -1206,7 +1206,7 @@ first_iteration=truefirst_iteration10,317
         pid=$!pid26,757
             pid=$!pid39,1222
 
-/Users/wizard/.zpwr/scripts/fzfEnv.sh,452
+/Users/wizard/.zpwr/scripts/zpwrFzfEnv.sh,452
 isZsh(){isZsh11,358
     exists(){exists21,488
     exists(){exists29,682

@@ -43,20 +43,20 @@ if [[ "$UID" != "0" ]]; then
                 bash "$ZPWR_SCRIPTS/motd.sh"
                 ;;
             (ubuntu|debian|kali|linuxmint|parrot)
-                noPonyBanner
+                zpwrNoPonyBanner
                 ;;
             (fedora|centos|rhel)
-                noPonyBanner
+                zpwrNoPonyBanner
                 ;;
             (*suse*|arch|manjaro*)
-                noPonyBanner
+                zpwrNoPonyBanner
                 ;;
             (*) :
                 ;;
         esac
     fi
     if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
-        listNoClear
+        zpwrListNoClear
     fi
 else
     # root on linux

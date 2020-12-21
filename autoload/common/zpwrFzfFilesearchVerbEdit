@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFzfFilesearchVerbEdit(){
+
+    if [[ -z "$1" ]]; then
+        loggErr "usage: zpwrFzfFilesearchVerbEdit <editor>"
+        return 1
+    fi
+
+    local editor sel
+
+    editor="$1"
+    sel=$(zpwrFzfFileSearch)
+    if [[ -n "$sel" ]]; then
+        BUFFER="$editor $sel"
+        print -rz -- "$BUFFER"
+    else
+        return
+    fi
+}
+
+zpwrFzfFilesearchVerbEdit "$@"

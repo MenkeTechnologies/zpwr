@@ -1,0 +1,35 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGetGHDelURL(){
+
+    if [[ -z "$GITHUB_DELETE_TOKEN" ]]; then
+        loggErr "GITHUB_DELETE_TOKEN is missing."
+        return 1
+    fi
+
+    local repo user line out
+
+    test -n "$1" && repo="$1"
+    test -n "$2" && user="$2"
+
+    if [[ -z "$user" && -z "$repo" ]]; then
+        user="$ZPWR_GITHUB_ACCOUNT"
+        if ! isGitDir; then
+            loggNotGit
+            return 1
+        fi
+        out=$(bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$PWD")
+        user=${out%/*}
+        repo=${out#*/}
+    fi
+
+    user="$(echo "$user" | tr 'A-Z' 'a-z')"
+
+    test -z "$repo" && loggErr "bad repo $repo" && return 1
+    test -z "$user" && loggErr "bad user $user" && return 1
+
+    echo "curl -fsSL -H 'Authorization: token $GITHUB_DELETE_TOKEN' -X DELETE https://api.github.com/repos/$user/$repo"
+
+}
+
+zpwrGetGHDelURL "$@"

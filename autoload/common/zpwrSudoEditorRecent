@@ -6,7 +6,7 @@ function zpwrSudoEditorRecent(){
 
     editor="$1"
 
-    BUFFER="$(fzvim $editor)"
+    BUFFER="$(zpwrFzvim $editor)"
     if [[ -z "$BUFFER" ]]; then
         return
     fi

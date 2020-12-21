@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEmacsFzfFilesearchVerb(){
+
+    if ! exists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    zpwrFzfFilesearchVerb "$ZPWR_EMACS_CLIENT"
+
+}
+
+zpwrEmacsFzfFilesearchVerb "$@"

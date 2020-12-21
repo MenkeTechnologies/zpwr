@@ -1,0 +1,24 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrContribCount(){
+
+    if ! isGitDir; then
+       loggNotGit
+       return 1
+    fi
+
+    local lines lineCount
+
+    lines="$(git log --pretty="%an" | sort | uniq -c | sort -rn)"
+    lineCount="$(echo $lines | wc -l)"
+    prettyPrint "Contribution Count"
+    if (( $lineCount > 10 )); then
+        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            alternatingPrettyPrint | less -r
+    else
+        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            alternatingPrettyPrint
+    fi
+}
+
+zpwrContribCount "$@"

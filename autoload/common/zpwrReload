@@ -9,8 +9,8 @@ function zpwrReload(){
     bindForGit
     bindZdharma
     bindZdharmaPost
-    prettyPrint "Reloading bindAliasesLate;createAliasCache;bindAliasesZshLate;bindOverrideZLE"
-    bindAliasesLate;createAliasCache;bindAliasesZshLate;bindOverrideZLE
+    prettyPrint "Reloading bindAliasesLate;zpwrCreateAliasCache;bindAliasesZshLate;bindOverrideZLE"
+    bindAliasesLate;zpwrCreateAliasCache;bindAliasesZshLate;bindOverrideZLE
     bindInterceptSurround
     bindHistorySubstring
     prettyPrint "Reloading bindFZFLate;bindZpwrVerbs;bindZpwrZstyle"

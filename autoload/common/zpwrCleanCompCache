@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCleanCompCache(){
+
+    emulate -L zsh
+    setopt nullglob
+
+    rm -rf \
+        "$ZPWR_COMPSYS_CACHE"
+}
+
+zpwrCleanCompCache "$@"

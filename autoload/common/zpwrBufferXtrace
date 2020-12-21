@@ -1,0 +1,47 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrBufferXtrace() {
+
+        if test -z "$BUFFER" || [[ "$BUFFER" == [[:space:]]# ]]; then
+            zle up-line-or-history
+        fi
+        if [[ $ZPWR_TRACE == true ]]; then
+            set -x
+        fi
+
+        ZPWR_VARS[origL]="$LBUFFER"
+        ZPWR_VARS[origR]="$RBUFFER"
+
+        local wasXtrace=false
+
+        if [[ $LBUFFER =~ '^(.*)((set|setopt)[[:space:]]+(-x|xtrace|-o xtrace)[[:space:]]*\;+[;[:space:]]*)+(.*)$' ]]; then
+            LBUFFER="${match[1]}${match[5]}"
+            wasXtrace=true
+        fi
+
+        if [[ $LBUFFER =~ '^(.*)(\;+[;[:space:]]*(set|unsetopt)[[:space:]]+(\+x|xtrace|\+o xtrace))+(.*)$' ]]; then
+            LBUFFER="${match[1]}${match[5]}"
+            wasXtrace=true
+        fi
+
+        if [[ $RBUFFER =~ '^(.*)((set|setopt)[[:space:]]+(-x|xtrace|-o xtrace)[[:space:]]*\;+[;[:space:]]*)+(.*)$' ]]; then
+            RBUFFER="${match[1]}${match[5]}"
+            wasXtrace=true
+        fi
+
+        if [[ $RBUFFER =~ '^(.*)(\;+[;[:space:]]*(set|unsetopt)[[:space:]]+(\+x|xtrace|\+o xtrace))+(.*)$' ]]; then
+            RBUFFER="${match[1]}${match[5]}"
+            wasXtrace=true
+        fi
+
+        if [[ $wasXtrace == false ]]; then
+            LBUFFER="set -x; $LBUFFER";
+            RBUFFER="$RBUFFER; set +x";
+        fi
+
+        if [[ $ZPWR_TRACE == true ]]; then
+            set +x
+        fi
+}
+
+zpwrBufferXtrace "$@"

@@ -1,0 +1,20 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+# cache autoload +X functions,aliases, builtins,reswords into file
+# search with fzf
+function zpwrClearListFZF(){
+
+    {
+        print -l ${(k)functions}
+        print -l ${(v)commands}
+        print -l ${(k)aliases}
+        print -l ${(k)galiases}
+        print -l ${(k)builtins}
+        print -l ${(k)reswords}
+        ls -d *
+    } |
+    eval "$ZPWR_FZF -m -e --no-sort --border $FZF_CTRL_T_OPTS"
+}
+
+
+zpwrClearListFZF "$@"

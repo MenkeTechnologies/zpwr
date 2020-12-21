@@ -3,7 +3,7 @@
 function ___zpwrVerbsWidgetAccept(){
 
     zle .kill-whole-line
-    sel="$(fzvimAll)"
+    sel="$(zpwrFzvimAll)"
 
     if [[ -n "$sel" ]]; then
         BUFFER="vim $sel"

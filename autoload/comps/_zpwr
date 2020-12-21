@@ -71,7 +71,7 @@ function __zpwr(){
                 cdup)
                     _r
                     ;;
-                clone|cloneToForked)
+                clone|zpwrCloneToForked)
                     _git-clone
                     ;;
                 digs)

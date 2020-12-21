@@ -5,9 +5,9 @@ function zpwrBindOverrideZLE(){
 
     autoload -Uz select-bracketed select-quoted bracketed-paste-magic edit-command-line
 
-    autoload -z bufferXtrace expand-or-complete-with-dots
+    autoload -z zpwrBufferXtrace expand-or-complete-with-dots
 
-    zle -N bufferXtrace
+    zle -N zpwrBufferXtrace
     zle -N expand-or-complete-with-dots
     zle -N accept-line my-accept-line
     zle -N magic-enter
@@ -20,23 +20,23 @@ function zpwrBindOverrideZLE(){
     zle -N downTen
     zle -N self-insert
     zle -N zpwrLastWordDouble
-    zle -N fzfCommits
+    zle -N zpwrFzfCommits
     zle -N updater
     zle -N runner
     zle -N zpwrIntoFzf
     zle -N zpwrIntoFzfAg
-    zle -N emacsFzf
-    zle -N vimFzf
-    zle -N vimFzfSudo
-    zle -N getrcWidget
-    zle -N clearLine
-    zle -N deleteLastWord
-    zle -N lsoffzf
-    zle -N fzfVimKeybind
+    zle -N zpwrEmacsFzf
+    zle -N zpwrVimFzf
+    zle -N zpwrVimFzfSudo
+    zle -N zpwrGetrcWidget
+    zle -N zpwrClearLine
+    zle -N zpwrDeleteLastWord
+    zle -N zpwrLsoffzf
+    zle -N zpwrFzfVimKeybind
     zle -N zpwrFzfAllKeybind
-    zle -N locateFzf
-    zle -N locateFzfEdit
-    zle -N fzfEnv
+    zle -N zpwrLocateFzf
+    zle -N zpwrLocateFzfEdit
+    zle -N zpwrFzfEnv
     zle -N zpwrFasdFZF
     zle -N zpwrAsVar
     zle -N zpwrVimAllWidget
@@ -44,13 +44,13 @@ function zpwrBindOverrideZLE(){
     zle -N zpwrVerbsWidget
     zle -N zpwrVerbsWidgetAccept
     zle -N updater
-    zle -N up8widget
+    zle -N zpwrUp8widget
     zle -N sub
     zle -N dbz
     zle -N zpwrSshRegain
     zle -N zpwrTutsUpdate
     zle -N subLine
-    zle -N changeQuotes
+    zle -N zpwrChangeQuotes
     zle -N zpwrAlternateQuotes
     zle -N clipboard
     zle -N zpwrEOLorNextTabStop
@@ -73,27 +73,27 @@ function zpwrBindOverrideZLE(){
 
     bindkey -M vicmd G end-of-buffer-or-history
 
-    bindkey -M viins "^Vc" fzfCommits
-    bindkey -M vicmd "^Vc" fzfCommits
+    bindkey -M viins "^Vc" zpwrFzfCommits
+    bindkey -M vicmd "^Vc" zpwrFzfCommits
 
-    bindkey -M viins "^U" clearLine
-    bindkey -M vicmd "^U" clearLine
+    bindkey -M viins "^U" zpwrClearLine
+    bindkey -M vicmd "^U" zpwrClearLine
 
-    bindkey -M vicmd "^W" deleteLastWord
+    bindkey -M vicmd "^W" zpwrDeleteLastWord
 
     bindkey -M viins "\e^O" runner
     bindkey -M vicmd "\e^O" runner
 
-    bindkey -M viins "\e^P" up8widget
-    bindkey -M vicmd "\e^P" up8widget
+    bindkey -M viins "\e^P" zpwrUp8widget
+    bindkey -M vicmd "\e^P" zpwrUp8widget
 
     bindkey -M viins '^r' redo
     bindkey -M vicmd '^r' redo
     bindkey -M viins '^z' undo
     bindkey -M vicmd '^z' undo
 
-    bindkey -M vicmd '^X^X' bufferXtrace
-    bindkey -M viins '^X^X' bufferXtrace
+    bindkey -M vicmd '^X^X' zpwrBufferXtrace
+    bindkey -M viins '^X^X' zpwrBufferXtrace
 
     bindkey -M viins '^F^V' edit-command-line
     bindkey -M vicmd '^F^V' edit-command-line
@@ -107,8 +107,8 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^F^D' zpwrIntoFzf
     bindkey -M vicmd '^F^D' zpwrIntoFzf
 
-    bindkey -M viins '^F^H' lsoffzf
-    bindkey -M vicmd '^F^H' lsoffzf
+    bindkey -M viins '^F^H' zpwrLsoffzf
+    bindkey -M vicmd '^F^H' zpwrLsoffzf
 
     bindkey -M viins '^F^J' zpwrVerbsWidgetAccept
     bindkey -M vicmd '^F^J' zpwrVerbsWidgetAccept
@@ -135,23 +135,23 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^F^R' zpwrAsVar
     bindkey -M vicmd '^F^R' zpwrAsVar
 
-    bindkey -M viins '^V//' locateFzf
-    bindkey -M vicmd '^V//' locateFzf
+    bindkey -M viins '^V//' zpwrLocateFzf
+    bindkey -M vicmd '^V//' zpwrLocateFzf
 
-    bindkey -M viins '^V/.' locateFzfEdit
-    bindkey -M vicmd '^V/.' locateFzfEdit
+    bindkey -M viins '^V/.' zpwrLocateFzfEdit
+    bindkey -M vicmd '^V/.' zpwrLocateFzfEdit
 
     bindkey -M viins '^V.' zpwrFzfAllKeybind
     bindkey -M vicmd '^V.' zpwrFzfAllKeybind
 
-    bindkey -M viins '^Vk' fzfVimKeybind
-    bindkey -M viins '^Vk' fzfVimKeybind
+    bindkey -M viins '^Vk' zpwrFzfVimKeybind
+    bindkey -M viins '^Vk' zpwrFzfVimKeybind
 
-    bindkey -M viins '^V,' fzfEnv
-    bindkey -M vicmd '^V,' fzfEnv
+    bindkey -M viins '^V,' zpwrFzfEnv
+    bindkey -M vicmd '^V,' zpwrFzfEnv
 
-    bindkey -M viins '^V^N' vimFzfSudo
-    bindkey -M vicmd '^V^N' vimFzfSudo
+    bindkey -M viins '^V^N' zpwrVimFzfSudo
+    bindkey -M vicmd '^V^N' zpwrVimFzfSudo
 
     bindkey -M viins '^V;' zpwrFzfSurround
     bindkey -M vicmd '^V;' zpwrFzfSurround
@@ -167,23 +167,23 @@ function zpwrBindOverrideZLE(){
     }
 
     exists z && {
-        zle -N zFZF
-        bindkey -M viins '^V^S' zFZF
-        bindkey -M vicmd '^V^S' zFZF
-        bindkey -M viins '^V^L' zFZF
-        bindkey -M vicmd '^V^L' zFZF
-        bindkey -M viins '^Vl' zFZF
-        bindkey -M vicmd '^Vl' zFZF
+        zle -N zpwrZFZF
+        bindkey -M viins '^V^S' zpwrZFZF
+        bindkey -M vicmd '^V^S' zpwrZFZF
+        bindkey -M viins '^V^L' zpwrZFZF
+        bindkey -M vicmd '^V^L' zpwrZFZF
+        bindkey -M viins '^Vl' zpwrZFZF
+        bindkey -M vicmd '^Vl' zpwrZFZF
     }
 
-    bindkey -M viins '^V ' vimFzf
-    bindkey -M vicmd '^V ' vimFzf
+    bindkey -M viins '^V ' zpwrVimFzf
+    bindkey -M vicmd '^V ' zpwrVimFzf
 
-    bindkey -M viins '^V^@' vimFzf
-    bindkey -M vicmd '^V^@' vimFzf
+    bindkey -M viins '^V^@' zpwrVimFzf
+    bindkey -M vicmd '^V^@' zpwrVimFzf
 
-    bindkey -M viins '^V^K' emacsFzf
-    bindkey -M vicmd '^V^K' emacsFzf
+    bindkey -M viins '^V^K' zpwrEmacsFzf
+    bindkey -M vicmd '^V^K' zpwrEmacsFzf
 
     bindkey -M viins '^Q' zpwrLastWordDouble
     bindkey -M vicmd '^Q' zpwrLastWordDouble
@@ -197,8 +197,8 @@ function zpwrBindOverrideZLE(){
 #completion trigger plus tab, defaults to ~~
     export FZF_COMPLETION_TRIGGER=';'
 
-    bindkey -M viins '^Y' changeQuotes
-    bindkey -M vicmd '^Y' changeQuotes
+    bindkey -M viins '^Y' zpwrChangeQuotes
+    bindkey -M vicmd '^Y' zpwrChangeQuotes
 
 #unbind for later use
     bindkey -M viins -r '^V'
@@ -237,12 +237,12 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '\e ' zpwrSshRegain
 
 #F1 key
-    bindkey '\eOP' up8widget
+    bindkey '\eOP' zpwrUp8widget
 #F2 key
     bindkey '\eOQ' sub
 
 #F3 key
-    bindkey '\eOR' getrcWidget
+    bindkey '\eOR' zpwrGetrcWidget
 
 ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 #determine if this terminal was started in IDE
@@ -410,7 +410,7 @@ function precmd(){
         if [[ "$ZPWR_WILL_CLEAR" == true ]]; then
             if [[ $ZPWR_AUTO_LS_RM == true ]]; then
                 clear
-                listNoClear
+                zpwrListNoClear
             fi
             # to prevent ZPWR_WILL_CLEAR staying true when
             # called from zle widgets and not from
