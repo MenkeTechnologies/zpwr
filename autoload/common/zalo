@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zalo(){
+
+    if [[ -d "$ZPWR_AUTOLOAD_COMPS" ]]; then
+        cd "$ZPWR_AUTOLOAD_COMPS"
+    else
+        loggErr "ZPWR_AUTOLOAD_COMPS '$ZPWR_AUTOLOAD_COMPS' is not a directory."
+    fi
+
+}
+
+zalo "$@"

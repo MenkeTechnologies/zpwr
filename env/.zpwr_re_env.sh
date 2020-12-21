@@ -88,6 +88,8 @@ evalIfNeeded ZPWR_ALIAS_FILE "$ZPWR_ALIAS_FILE" "$ZPWR_ENV/.shell_aliases_functi
 evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD" "$ZPWR/autoload" "$ZPWR"
 # autoloaded common non completion functions
 evalIfNeeded ZPWR_AUTOLOAD_COMMON "$ZPWR_AUTOLOAD_COMMON" "$ZPWR_AUTOLOAD/common" "$ZPWR_AUTOLOAD"
+# autoloaded common completion but completion helper functions
+evalIfNeeded ZPWR_AUTOLOAD_COMPS "$ZPWR_AUTOLOAD_COMPS " "$ZPWR_AUTOLOAD/comps" "$ZPWR_AUTOLOAD"
 # autoloaded common non completion but completion helper functions
 evalIfNeeded ZPWR_AUTOLOAD_COMP_UTILS "$ZPWR_AUTOLOAD_COMP_UTILS " "$ZPWR_AUTOLOAD/comp_utils" "$ZPWR_AUTOLOAD"
 # autoloaded darwin non completion functions

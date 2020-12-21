@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zals(){
+
+    if [[ -d "$ZPWR_AUTOLOAD_SYSTEMCTL" ]]; then
+        cd "$ZPWR_AUTOLOAD_SYSTEMCTL"
+    else
+        loggErr "ZPWR_AUTOLOAD_SYSTEMCTL '$ZPWR_AUTOLOAD_SYSTEMCTL' is not a directory."
+    fi
+
+}
+
+zals "$@"

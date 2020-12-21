@@ -2,10 +2,10 @@
 # vim: set ft=sh:
 function zal(){
 
-    if [[ -d "$ZPWR_AUTOLOAD_COMMON" ]]; then
-        cd "$ZPWR_AUTOLOAD_COMMON"
+    if [[ -d "$ZPWR_AUTOLOAD" ]]; then
+        cd "$ZPWR_AUTOLOAD"
     else
-        loggErr "ZPWR_AUTOLOAD_COMMON '$ZPWR_AUTOLOAD_COMMON' is not a directory."
+        loggErr "ZPWR_AUTOLOAD '$ZPWR_AUTOLOAD' is not a directory."
     fi
 
 }

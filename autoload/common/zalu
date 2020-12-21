@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zalu(){
+
+    if [[ -d "$ZPWR_AUTOLOAD_COMP_UTILS" ]]; then
+        cd "$ZPWR_AUTOLOAD_COMP_UTILS"
+    else
+        loggErr "ZPWR_AUTOLOAD_COMP_UTILS '$ZPWR_AUTOLOAD_COMP_UTILS' is not a directory."
+    fi
+
+}
+
+zalu "$@"
