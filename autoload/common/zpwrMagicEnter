@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function magic-enter () {
+function zpwrMagicEnter () {
 
   # If commands are not already set, use the defaults
     test -z "$MAGIC_ENTER_GIT_COMMAND" && MAGIC_ENTER_GIT_COMMAND="git status -u ."
@@ -28,4 +28,4 @@ function magic-enter () {
     fi
 }
 
-magic-enter "$@"
+zpwrMagicEnter "$@"

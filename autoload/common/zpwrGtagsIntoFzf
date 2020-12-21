@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___gtagsIntoFzf(){
+function zpwrGtagsIntoFzf(){
 
     #gtags referenced to $HOME
     (
@@ -11,4 +11,4 @@ function ___gtagsIntoFzf(){
     )
 }
 
-___gtagsIntoFzf "$@"
+zpwrGtagsIntoFzf "$@"

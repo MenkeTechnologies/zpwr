@@ -1,9 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___replacer(){
+function zpwrReplacer(){
 
     if [[ -z "$2" ]]; then
-        loggErr "usage: replacer <original> <replacement>"
+        loggErr "usage: zpwrReplacer <original> <replacement>"
         return 1
     fi
 
@@ -21,4 +21,4 @@ function ___replacer(){
     fi
 }
 
-___replacer "$@"
+zpwrReplacer "$@"

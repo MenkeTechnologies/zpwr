@@ -1,20 +1,20 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function tmux_pane_words() {
+function zpwrTmux_pane_words() {
 
   local expl i
   local -a w
 
   # Capture current pane first.
-    w=( ${(u)=$(tmux_capture_paner)} )
+    w=( ${(u)=$(zpwrTmux_capture_paner)} )
 
     for i in $(tmux list-panes -F '#D'); do
         # Skip current pane (handled before).
         [[ "$TMUX_PANE" = "$i" ]] && continue
-        w+=( ${(u)=$(tmux_capture_paner -t $i)} )
+        w+=( ${(u)=$(zpwrTmux_capture_paner -t $i)} )
     done
 
     _wanted tmux expl 'words from all tmux panes' compadd -a w
 }
 
-tmux_pane_words "$@"
+zpwrTmux_pane_words "$@"

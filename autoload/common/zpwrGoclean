@@ -1,9 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___goclean() {
+function zpwrGoclean() {
 
     if [[ -z "$1" ]]; then
-        loggErr "usage: goclean <package>"
+        loggErr "usage: zpwrGoclean <package>"
         return 1
     fi
 
@@ -36,4 +36,4 @@ function ___goclean() {
     rm -rf "$bin_dir"
 }
 
-___goclean "$@"
+zpwrGoclean "$@"

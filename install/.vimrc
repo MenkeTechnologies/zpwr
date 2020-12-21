@@ -979,7 +979,7 @@ function! TmuxRepeat(type)
                 endif
 
                 if index(supportedTypes, exeFileType) >= 0
-                    silent! exec "!tmux send-keys -t vimmers:0. C-c ' bash \"$ZPWR_SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
+                    silent! exec "!tmux send-keys -t vimmers:0. C-c ' bash \"$ZPWR_SCRIPTS/zpwrRunner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
                     silent! exec "!tmux send-keys -t vimmer:1 C-c ' clear' C-m up up C-m"
@@ -993,7 +993,7 @@ function! TmuxRepeat(type)
                     return 0
                 endif
                 if index(supportedTypes, exeFileType) >= 0
-                    silent! exec "!tmux send-keys -t right C-c ' bash \"$ZPWR_SCRIPTS/runner.sh\"' ' \"' ".fileName." '\"' C-m"
+                    silent! exec "!tmux send-keys -t right C-c ' bash \"$ZPWR_SCRIPTS/zpwrRunner.sh\"' ' \"' ".fileName." '\"' C-m"
                     redraw!
                 else
                     "echom "Unknown Filetype '".exeFileType. "'. Falling Back to Prev Command!"

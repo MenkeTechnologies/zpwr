@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___rationalize-dot (){
+function zpwrRationalizeDot(){
 
     if [[ $LBUFFER = *.. ]]; then
         LBUFFER+=/..
@@ -9,4 +9,4 @@ function ___rationalize-dot (){
     fi
 }
 
-___rationalize-dot "$@"
+zpwrRationalizeDot "$@"

@@ -911,7 +911,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^J" accept-line ```
 - ``` bindkey -M viins "^K" learn ```
 - ``` bindkey -M viins "^L" clear-screen ```
-- ``` bindkey -M viins "^M" magic-enter ```
+- ``` bindkey -M viins "^M" zpwrMagicEnter ```
 - ``` bindkey -M viins "^N" sudo-command-line ```
 - ``` bindkey -M viins "^O" fzf-tab-complete ```
 - ``` bindkey -M viins "^P" zpwrEOLorNextTabStop ```
@@ -954,8 +954,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[^F" sub ```
 - ``` bindkey -M viins "^[^L" down-case-word ```
 - ``` bindkey -M viins "^[^M" self-insert-unmeta ```
-- ``` bindkey -M viins "^[^O" runner ```
-- ``` bindkey -M viins "^[^P" updater ```
+- ``` bindkey -M viins "^[^O" zpwrRunner ```
+- ``` bindkey -M viins "^[^P" zpwrUpdater ```
 - ``` bindkey -M viins "^[^T" transpose-words ```
 - ``` bindkey -M viins "^[^U" up-case-word ```
 - ``` bindkey -M viins "^[^[" sudo-command-line ```
@@ -966,12 +966,12 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[OB" history-substring-search-down ```
 - ``` bindkey -M viins "^[OC" vi-forward-char ```
 - ``` bindkey -M viins "^[OD" vi-backward-char ```
-- ``` bindkey -M viins "^[OP" updater ```
+- ``` bindkey -M viins "^[OP" zpwrUpdater ```
 - ``` bindkey -M viins "^[OQ" sub ```
 - ``` bindkey -M viins "^[OR" zpwrGetrcWidget ```
 - ``` bindkey -M viins "^[[1;2D" sub ```
 - ``` bindkey -M viins "^[[1;5A" gitfunc ```
-- ``` bindkey -M viins "^[[1;5B" updater ```
+- ``` bindkey -M viins "^[[1;5B" zpwrUpdater ```
 - ``` bindkey -M viins "^[[1;5C" zpwrTutsUpdate ```
 - ``` bindkey -M viins "^[[1;5D" dbz ```
 - ``` bindkey -M viins "^[[1~" beginning-of-line ```
@@ -994,7 +994,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -R -M viins "#"-"&" self-insert ```
 - ``` bindkey -R -M viins "'"-"(" zpwrInterceptSurround ```
 - ``` bindkey -R -M viins ")"-"-" self-insert ```
-- ``` bindkey -M viins "." rationalize-dot ```
+- ``` bindkey -M viins "." zpwrRationalizeDot ```
 - ``` bindkey -R -M viins "/"-"Z" self-insert ```
 - ``` bindkey -M viins "[" zpwrInterceptSurround ```
 - ``` bindkey -R -M viins "\\\\"-"_" self-insert ```
@@ -1028,7 +1028,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^J" accept-line ```
 - ``` bindkey -a "^K" learn ```
 - ``` bindkey -a "^L" clear-screen ```
-- ``` bindkey -a "^M" magic-enter ```
+- ``` bindkey -a "^M" zpwrMagicEnter ```
 - ``` bindkey -a "^N" down-history ```
 - ``` bindkey -a "^O" fzf-tab-complete ```
 - ``` bindkey -a "^P" zpwrEOLorNextTabStop ```
@@ -1056,8 +1056,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^[" beep ```
 - ``` bindkey -a "^[^D" capitalize-word ```
 - ``` bindkey -a "^[^L" down-case-word ```
-- ``` bindkey -a "^[^O" runner ```
-- ``` bindkey -a "^[^P" updater ```
+- ``` bindkey -a "^[^O" zpwrRunner ```
+- ``` bindkey -a "^[^P" zpwrUpdater ```
 - ``` bindkey -a "^[^T" transpose-words ```
 - ``` bindkey -a "^[^U" up-case-word ```
 - ``` bindkey -a "^[^[" sudo-command-line ```

@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 # Based on vim-tmuxcomplete's splitwords function.
 # https://github.com/wellle/tmux-complete.vim/blob/master/sh/tmuxcomplete
-function tmux_capture_paner() {
+function zpwrTmux_capture_paner() {
 
     tmux capture-pane -J -p -S -100 $@ |
     col -b |
@@ -13,4 +13,4 @@ function tmux_capture_paner() {
     command grep -o -E "[-a-zA-Z0-9.:]+"
 }
 
-tmux_capture_paner "$@"
+zpwrTmux_capture_paner "$@"

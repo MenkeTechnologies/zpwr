@@ -8,7 +8,7 @@ function ___zpz(){
 
     if [[ -d "$dirsc" ]]; then
         cd "$dirsc"
-        gitCheckoutRebasePush
+        zpwrGitCheckoutRebasePush
     else
         loggErr "$dirsc does not exist"
     fi

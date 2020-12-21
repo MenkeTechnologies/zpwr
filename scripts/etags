@@ -108,8 +108,8 @@ function zpwrLastWordDouble(){zpwrLastWordDouble515,18483
         CURSOR=$#BUFFERCURSOR520,18615
         BUFFER="$BUFFER "$mywords[-1]BUFFER522,18648
         CURSOR=$#BUFFERCURSOR523,18686
-function updater (){updater529,18743
-    BUFFER="( cat $ZPWR_SCRIPTS/updater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"BUFFER534,18911
+function zpwrUpdater (){zpwrUpdater529,18743
+    BUFFER="( cat $ZPWR_SCRIPTS/zpwrUpdater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"BUFFER534,18911
 function zpwrTutsUpdate() {zpwrTutsUpdate538,19108
     commitMessage="$BUFFER"commitMessage540,19133
             BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$ZPWR_LOGFILE\" 2>&1 & )"BUFFER547,19366
@@ -145,9 +145,9 @@ function zpwrAlternateQuotes(){zpwrAlternateQuotes664,22526
     BUFFER="$(print -r "$BUFFER" | tr "\"'" "'\"" )"BUFFER666,22555
 function clipboard(){clipboard670,22612
     local clipcmd=$ZPWR_COPY_CMDclipcmd674,22671
-function runner() {runner692,23148
+function zpwrRunner() {zpwrRunner692,23148
         BUFFER=geBUFFER698,23260
-function updater() {updater703,23313
+function zpwrUpdater() {zpwrUpdater703,23313
     BUFFER=u8BUFFER706,23360
 function zpwrGetrcWidget(){zpwrGetrcWidget710,23398
     BUFFER="zpwrGetrc"BUFFER713,23448
@@ -291,7 +291,7 @@ function my-accept-line () {my1483,41590
 function precmd(){precmd1556,43863
             ZPWR_WILL_CLEAR=falseZPWR_WILL_CLEAR1567,44215
         RPROMPT="%B%F{blue}$$ %b%F{blue}$-"RPROMPT1581,44626
-function rationalize-dot (){rationalize1593,44883
+function 0 (){rationalize1593,44883
 function zpwrExpandAliasAccept(){zpwrExpandAliasAccept1655,47064
 version="$(zsh --version | awk '{print $2}' | awk -F. '{print $1 "." $2}')"version1674,47534
 function zpwrEOLorNextTabStop(){zpwrEOLorNextTabStop1690,48044
@@ -673,7 +673,7 @@ function upload(){upload846,28700
 function jd(){jd855,28866
 function j(){j862,28941
         dirname="$(dirname $file)"dirname865,28972
-function scnew(){scnew871,29102
+function zpwrScnew(){zpwrScnew871,29102
 function p(){p881,29285
         out="$(ps -ef)"out885,29415
         out="$(ps aux)"out888,29490
@@ -711,7 +711,7 @@ function clearList() {clearList1009,31893
                         out=$(man -wa "$(basename $lf)" 2>/dev/null)out1068,33826
                             out="$(hash | command grep "^$arg=")"out1074,34097
 function zpwrListNoClear () {zpwrListNoClear1125,35907
-function animate(){animate1146,36354
+function zpwrAnimate(){zpwrAnimate1146,36354
 function blocksToSize(){blocksToSize1151,36413
     bytes=$(( input * 512 ))bytes1155,36470
 function humanReadable(){humanReadable1159,36534
@@ -752,7 +752,7 @@ function gsdc(){gsdc1412,42682
         BUFFER=""BUFFER1436,43251
 function gitCommitAndPush(){gitCommitAndPush1463,43678
     currentDir="$(pwd -P)"currentDir1471,43792
-function replacer(){replacer1485,44044
+function zpwrReplacer(){zpwrReplacer1485,44044
     orig="$1"orig1493,44151
     replace="$2"replace1494,44165
 function zpwrCreategif(){zpwrCreategif1505,44371
@@ -879,7 +879,7 @@ function zpwrDetachall(){zpwrDetachall2563,73199
 function scripts(){scripts2569,73309
     export ZPWR_SCHEMA_NAME=rootZPWR_SCHEMA_NAME2581,73526
     export ZPWR_TABLE_NAME=LearningCollectionZPWR_TABLE_NAME2582,73559
-function gitCheckoutRebasePush(){gitCheckoutRebasePush2585,73609
+function zpwrGitCheckoutRebasePush(){zpwrGitCheckoutRebasePush2585,73609
 function zpwrJsonToArray(){zpwrJsonToArray2592,73845
     local json="$(cat)"json2594,73870
 function zpwrArrayToJson(){zpwrArrayToJson2610,74231
@@ -904,7 +904,7 @@ function searchAllGitRepos(){searchAllGitRepos2761,78171
 function zpwrRegenConfigLinks(){zpwrRegenConfigLinks2782,78791
 function zpwrRegenPowerlineLink(){zpwrRegenPowerlineLink2788,78911
     dir="$(sudo python3 -m pip show powerline-status | command grep --color=always '^Location' | awk '{print $2}')/powerline"dir2790,78943
-function goclean() {goclean2809,79577
+function zpwrGoclean() {zpwrGoclean2809,79577
     pkg=$1;pkg2816,79708
         ost="$(uname | tr A-Z a-z)_amd64"ost2821,79801
     src_dir="$GOPATH/src/$pkg"src_dir2826,79947
@@ -1791,7 +1791,7 @@ gitRepoUpdater() {gitRepoUpdater53,1251
 cargo_bin="$HOME/.cargo/bin/cargo"cargo_bin88,2304
 rustup_bin="$HOME/.cargo/bin/rustup"rustup_bin94,2493
 
-/Users/wizard/.zpwr/scripts/runner.sh,556
+/Users/wizard/.zpwr/scripts/zpwrRunner.sh,556
 executableScriptsProcessing() {executableScriptsProcessing10,303
 compileExecuteTheFile() {compileExecuteTheFile17,427
     dir="$(dirname "$2")"dir21,524
@@ -1939,7 +1939,7 @@ updatePI() {updatePI10,290
     hostname="$(echo "$1" | awk -F: '{print $1}')"hostname17,599
     manager="$(echo "$1" | awk -F: '{print $2}')"manager18,650
 
-/Users/wizard/.zpwr/scripts/updater.sh,786
+/Users/wizard/.zpwr/scripts/zpwrUpdater.sh,786
 __ScriptVersion="1.0.0"__ScriptVersion11,332
 usage() {usage17,573
 prettyPrint() {prettyPrint63,1646

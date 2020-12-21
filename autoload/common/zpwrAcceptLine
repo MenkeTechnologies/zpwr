@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-function my-accept-line () {
+function zpwrAcceptLine () {
 
     local pane commandsThatModifyFiles regex mywords line command cmd out aliases
 
@@ -96,4 +96,4 @@ function my-accept-line () {
     printf "\x1b[0m"
 }
 
-my-accept-line "$@"
+zpwrAcceptLine "$@"

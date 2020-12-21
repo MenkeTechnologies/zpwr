@@ -20,7 +20,7 @@ function ___megacomplete(){
 
     if [[ -n "$TMUX_PANE" ]]; then
         if (( $whitelist_tmux_completion[(I)$cmd] )); then
-            tmux_pane_words
+            zpwrTmux_pane_words
         fi
     fi
 

@@ -10,7 +10,7 @@ function zpwrGetGtagsEdit(){
     local firstdir editor file mywords
 
     editor="$1"
-    BUFFER=$(gtagsIntoFzf)
+    BUFFER=$(zpwrGtagsIntoFzf)
 
     if [[ -n "$BUFFER" ]]; then
         mywords=(${(z)BUFFER})

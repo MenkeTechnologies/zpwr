@@ -1,4 +1,4 @@
-#compdef dfimage
+#compdef zpwrDfimage
 
 if ! type -ap -- docker &>/dev/null; then
     _message 'no docker command'
