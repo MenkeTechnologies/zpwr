@@ -186,6 +186,30 @@
 
 @test 'zal' {
     zal &>/dev/null
+    [[ "$PWD" == "$ZPWR_AUTOLOAD" ]]
+    assert $? equals 0
+}
+
+@test 'zalf' {
+    zalf &>/dev/null
+    [[ "$PWD" == "$ZPWR_AUTOLOAD_FZF" ]]
+    assert $? equals 0
+}
+
+@test 'zall' {
+    zall &>/dev/null
+    [[ "$PWD" == "$ZPWR_AUTOLOAD_LINUX" ]]
+    assert $? equals 0
+}
+
+@test 'zald' {
+    zald &>/dev/null
+    [[ "$PWD" == "$ZPWR_AUTOLOAD_DARWIN" ]]
+    assert $? equals 0
+}
+
+@test 'zalc' {
+    zalc &>/dev/null
     [[ "$PWD" == "$ZPWR_AUTOLOAD_COMMON" ]]
     assert $? equals 0
 }
