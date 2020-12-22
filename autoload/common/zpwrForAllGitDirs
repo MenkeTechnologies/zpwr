@@ -9,7 +9,7 @@ function ___zpwrForAllGitDirs(){
 
     if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
         zpwrPrettyPrint "must regen $ZPWR_ALL_GIT_DIRS first."
-        regenAllGitRepos regen
+        zsh-git-repo-regenAllGitRepos regen
     fi
 
     zpwrFordir "$*" \
