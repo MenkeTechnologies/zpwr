@@ -8,33 +8,22 @@ function zpwrBindAliasesLate(){
         if [[ $ZPWR_USE_NEOVIM == true ]]; then
             if zpwrCommandExists nvim; then
                 ZPWR_VIM='nvim'
-                alias v='nvim'
-                alias vi='nvim'
-                alias vv='nvim'
-                alias vim='nvim'
-                alias vm="nvim -u $ZPWR_ENV/.mininit.vim"
-                alias sv="$ZPWR_FULL_SUDO nvim"
             else
                 if zpwrCommandExists vim; then
                     ZPWR_VIM='vim'
-                    alias v=vim
-                    alias vi=vim
-                    alias vv=vim
-                    alias vm="vim -u =$ZPWR_ENV/.minvimrc"
-                    alias sv="$ZPWR_FULL_SUDO vim"
                 fi
             fi
         else
             if zpwrCommandExists vim; then
                 ZPWR_VIM='vim'
-                ZPWR_VAR[EDITOR]="$ZPWR_VIM"
-                alias v=vim
-                alias vi=vim
-                alias vv=vim
-                alias vm="vim -u $ZPWR_ENV/.minvimrc"
-                alias sv="$ZPWR_FULL_SUDO vim"
             fi
         fi
+        alias v="$ZPWR_VIM"
+        alias vi="$ZPWR_VIM"
+        alias vv="$ZPWR_VIM"
+        alias vim="$ZPWR_VIM"
+        alias vm="$ZPWR_VIM -u $ZPWR_ENV/.mininit.vim"
+        alias sv="$ZPWR_FULL_SUDO $ZPWR_VIM"
     }
     #{{{                    MARK:Aliases
     #**************************************************************
