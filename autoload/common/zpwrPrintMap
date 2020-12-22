@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrPrintMap(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLoggErr "usage: zpwrPrintMap <map...>"
+        return 1
+    fi
+
+    local map arg k v sep
+    sep=" "
+    for map in "$@"; do
+        zpwrPrettyPrint "$map"
+        for k v in ${(kv)${(P)map}[@]};do
+            if [[ -z "$v" ]]; then
+                v="'${v}'"
+            fi
+            printf "%-40s%-5s%-50s\n" "${map}[$k]" "$sep" "${v}"
+        done
+    done | less
+}
+
+zpwrPrintMap "$@"

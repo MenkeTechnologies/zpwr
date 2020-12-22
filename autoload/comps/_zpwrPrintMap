@@ -1,0 +1,10 @@
+#compdef zpwrPrintMap
+function _zpwrPrintMap(){
+
+    local ret
+
+    _wanted parameters expl maps compadd ${(k)parameters[(R)association*]}
+
+}
+
+_zpwrPrintMap "$@"

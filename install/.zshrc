@@ -531,7 +531,7 @@ test -s "$ZPWR_ALIAS_FILE" && source "$ZPWR_ALIAS_FILE"
 
 #{{{                    MARK:Override OMZ config
 #**************************************************************
-ZPWR_VARS[recachedCompsys]=felse
+ZPWR_VARS[recachedCompsys]=false
 # reload compsys cache if file is stale for 1 week
 zpwrStaleZcompdump
 

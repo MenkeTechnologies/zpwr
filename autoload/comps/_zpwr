@@ -92,6 +92,9 @@ function __zpwr(){
                 man)
                     _man
                     ;;
+                printmap)
+                    _zpwrPrintMap
+                    ;;
                 ps)
                     _p
                     ;;

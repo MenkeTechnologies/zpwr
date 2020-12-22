@@ -220,6 +220,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[post]='post=postfix all output'
     ZPWR_VERBS[pre]='pre=prefix all output'
     ZPWR_VERBS[prettyprint]='zpwrPrettyPrint=pretty print with color'
+    ZPWR_VERBS[printmap]='zpwrPrintMap=pretty print maps'
     ZPWR_VERBS[ps]='p=ps -ef | grep arg'
     ZPWR_VERBS[pygmentcolors]='zpwrPygmentcolors=show all pygment colors'
     ZPWR_VERBS[recompile]='zpwrRecompile=recompile all cache comps'
