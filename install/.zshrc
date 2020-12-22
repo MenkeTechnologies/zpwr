@@ -409,9 +409,11 @@ function zpwrTokenPost() {
 #{{{                    MARK:ZPWR_PLUGIN_MANAGER
 #**************************************************************
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
+    declare -A ZINIT
+    ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
+    ZINIT[COMPINIT_OPTS]='-C'
     source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
     # tell zinit where compsy cache file is
-    ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
 
     #override zicompinit
     zicompinit() {
