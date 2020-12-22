@@ -23,7 +23,7 @@ function zpwrBindVerbs(){
             emacs*)
                 zpwrEmacsVerbs+=("$k:$v")
                 ;;
-            *learn*|searchl*|se|ser|see*|sef)
+            quiz*|*learn*|searchl*|se|ser|see*|sef)
                 zpwrLearnVerbs+=("$k:$v")
                 ;;
             regen*)
