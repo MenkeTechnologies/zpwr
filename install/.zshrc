@@ -375,11 +375,6 @@ else
     fpath=($ZPWR_AUTOLOAD_LINUX $fpath)
     autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
 fi
-
-if zpwrCommandExists fzf; then
-    fpath=($ZPWR_AUTOLOAD_FZF $fpath)
-    autoload -z $ZPWR_AUTOLOAD_FZF/*(.:t)
-fi
 #}}}***********************************************************
 
 #{{{                    MARK:Pre plugin manager
