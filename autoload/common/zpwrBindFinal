@@ -49,6 +49,8 @@ function zpwrBindFinal(){
     "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" &&
     source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
 
+    ZPWR_VARS[EDITOR]="$ZPWR_VIM"
+
 }
 
 zpwrBindFinal "$@"

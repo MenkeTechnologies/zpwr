@@ -7,6 +7,7 @@ function zpwrBindAliasesLate(){
 
         if [[ $ZPWR_USE_NEOVIM == true ]]; then
             if zpwrCommandExists nvim; then
+                ZPWR_VIM='nvim'
                 alias v='nvim'
                 alias vi='nvim'
                 alias vv='nvim'
@@ -15,15 +16,18 @@ function zpwrBindAliasesLate(){
                 alias sv="$ZPWR_FULL_SUDO nvim"
             else
                 if zpwrCommandExists vim; then
+                    ZPWR_VIM='vim'
                     alias v=vim
                     alias vi=vim
                     alias vv=vim
-                    alias vm="vim -u $ZPWR_ENV/.minvimrc"
+                    alias vm="vim -u =$ZPWR_ENV/.minvimrc"
                     alias sv="$ZPWR_FULL_SUDO vim"
                 fi
             fi
         else
             if zpwrCommandExists vim; then
+                ZPWR_VIM='vim'
+                ZPWR_VAR[EDITOR]="$ZPWR_VIM"
                 alias v=vim
                 alias vi=vim
                 alias vv=vim
@@ -115,15 +119,15 @@ function zpwrBindAliasesLate(){
 
     #{{{                    MARK:ALIASES for editing config files
     #**************************************************************
-    alias vrc='vim -S $HOME/.vim/sessions/vrc.vim $HOME/.vimrc'
-    alias brc='vim -S $HOME/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null'
-    alias zrc='vim -S $HOME/.vim/sessions/zshrc.vim + $HOME/.zshrc'
-    alias trc='vim -S $HOME/.vim/sessions/trc.vim $HOME/.tmux.conf'
-    alias tok='builtin cd $ZPWR; vim $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias conf='builtin cd $ZPWR; vim $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias etok='builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias econf='builtin cd $ZPWR; ${ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias zpt='builtin cd $ZPWR_TEST; vim $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias vrc='${=ZPWR_VIM} -S $HOME/.vim/sessions/vrc.vim $HOME/.vimrc'
+    alias brc='${=ZPWR_VIM} -S $HOME/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null'
+    alias zrc='${=ZPWR_VIM} -S $HOME/.vim/sessions/zshrc.vim + $HOME/.zshrc'
+    alias trc='${=ZPWR_VIM} -S $HOME/.vim/sessions/trc.vim $HOME/.tmux.conf'
+    alias tok='builtin cd $ZPWR; ${=ZPWR_VIM} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias conf='builtin cd $ZPWR; ${=ZPWR_VIM} $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias etok='builtin cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias econf='builtin cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias zpt='builtin cd $ZPWR_TEST; ${=ZPWR_VIM} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
     #}}}***********************************************************
 
     alias deleteTab="sed '/^[\x20\x09]*$/d'"
@@ -194,6 +198,7 @@ function zpwrBindAliasesLate(){
         if [[ $ZPWR_PREFER_MVIM == true ]]; then
             zpwrExists mvim && {
                 if [[ $ZPWR_USE_NEOVIM != true ]]; then
+                    ZPWR_VIM='mvim -v'
                     alias v='mvim -v'
                     alias vi='mvim -v'
                     alias vim='mvim -v'

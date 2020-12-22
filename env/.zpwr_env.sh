@@ -67,6 +67,8 @@ export ZPWR_DEBUG=false
 export ZPWR_DEFAULT_OMZ_THEME=simonoff
 # for alternating pretty printer
 export ZPWR_DELIMITER_CHAR='%'
+# the default vim command
+export ZPWR_VIM='nvim'
 # the emacs command
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command
