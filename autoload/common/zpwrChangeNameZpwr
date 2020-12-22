@@ -27,9 +27,9 @@ function zpwrChangeNameZpwr(){
             fi
 
             perl -i -pe 's@\b___'"$oldName"'\b@'"$newName"'@g' \
-                "$ZPWR/"**/*~"$ZPWR/".git/**(.)
+                "$ZPWR/"**/*~"$ZPWR/".git/**~"$ZPWR/"**/*.zwc(.)
             perl -i -pe 's@\b'"$oldName"'\b@'"$newName"'@g' \
-                "$ZPWR/"**/*~"$ZPWR/".git/**(.)
+                "$ZPWR/"**/*~"$ZPWR/".git/**~"$ZPWR/"**/*.zwc(.)
 
             if [[ -f "$newName" ]]; then
                 zpwrPrettyPrint "less $newName"

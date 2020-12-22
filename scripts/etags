@@ -564,7 +564,7 @@ export PROMPT4=$'\e[34m%x\t%0N\t%i\t%_\e[0m\t'PROMPT4138,5157
 export NMON='mndckt'NMON139,5204
 export CLICOLOR="YES"CLICOLOR140,5225
 export LSCOLORS="ExFxBxDxCxegedabagacad"LSCOLORS141,5247
-export FORKED_DIR="$HOME/forkedRepos"FORKED_DIR143,5330
+export ZPWR_FORKED_DIR="$HOME/forkedRepos"ZPWR_FORKED_DIR143,5330
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"PYEXECUTABLES144,5368
 export PYSCRIPTS="$HOME/PycharmProjects/fromShell"PYSCRIPTS145,5421
 export ZPWR_D="$HOME/Desktop"ZPWR_D146,5472
@@ -795,7 +795,7 @@ function zpz(){zpz1845,51938
     dirsc="$ZPWR"dirsc1848,51978
 function zr(){zr1858,52137
     dirsc="$ZPWR_SCRIPTS/$ZPWR_REPO_NAME"dirsc1861,52176
-    forked="$FORKED_DIR/$ZPWR_REPO_NAME"forked1862,52218
+    forked="$ZPWR_FORKED_DIR/$ZPWR_REPO_NAME"forked1862,52218
 function zpwrGoInstallerDir(){zpwrGoInstallerDir1873,52435
     local ret=0ret1875,52463
 function zpwrUnlinkConf(){zpwrUnlinkConf1889,52775

@@ -12,7 +12,7 @@ function zpwrUninstall() {
         "$HOME/.tmux" \
         "$HOME/.vim" \
         "$HOME/.tmux" \
-        "$FORKED_DIR" \
+        "$ZPWR_FORKED_DIR" \
         "$HOME/.zpwr"* \
         "$HOME/.zshrc"* \
         "$HOME/.zshrc.pre"* \
@@ -29,7 +29,7 @@ function zpwrUninstall() {
         "$HOME/.tmux" \
         "$HOME/.vim" \
         "$HOME/.tmux" \
-        "$FORKED_DIR" \
+        "$ZPWR_FORKED_DIR" \
         "$HOME/.zpwr"* \
         "$HOME/.zshrc"* \
         "$HOME/.zshrc.pre"* \

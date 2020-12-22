@@ -17,8 +17,8 @@ if [[ -d "$ZSH" ]]; then
     : ~ZSH
 fi
 
-if [[ -d "$FORKED_DIR" ]]; then
-    : ~FORKED_DIR
+if [[ -d "$ZPWR_FORKED_DIR" ]]; then
+    : ~ZPWR_FORKED_DIR
 fi
 
 if [[ -d "$ZPWR_SCRIPTS" ]]; then

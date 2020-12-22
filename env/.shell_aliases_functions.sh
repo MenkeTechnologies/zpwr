@@ -51,7 +51,6 @@ export PS3=$'\e[1;34m-->>>> \e[0m'
 export NMON='mndckt'
 export CLICOLOR="YES"
 export LSCOLORS="ExFxBxDxCxegedabagacad"
-export FORKED_DIR="$HOME/forkedRepos"
 export D="$HOME/Desktop"
 export PYEXECUTABLES="$HOME/Documents/pythonScripts"
 export ZPWR_PYSCRIPTS="$HOME/PycharmProjects/fromShell"

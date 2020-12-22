@@ -555,6 +555,8 @@ evalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_LOCAL_TEMP/.temp$$-2$
 evalIfNeeded ZPWR_COMPSYS_CACHE "$ZPWR_COMPSYS_CACHE" "$ZPWR_LOCAL/zcompcache" "$ZPWR_LOCAL"
 # compsys cache file
 evalIfNeeded ZSH_COMPDUMP "$ZSH_COMPDUMP" "$ZPWR_LOCAL/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT" "$ZPWR_LOCAL" "$ZPWR_REPO_NAME" "$ZPWR_GITHUB_ACCOUNT"
+# forked repos dir
+evalIfNeeded ZPWR_FORKED_DIR "$ZPWR_FORKED_DIR" "$HOME/forkedRepos" "$HOME"
 # common dirs
 evalIfNeeded ZPWR_D "$ZPWR_D" "$HOME/Desktop" "$HOME"
 evalIfNeeded ZPWR_DOC "$ZPWR_DOC" "$HOME/Documents" "$HOME"

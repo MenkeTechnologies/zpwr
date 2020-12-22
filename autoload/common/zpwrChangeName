@@ -3,7 +3,7 @@
 function zpwrChangeName(){
 
     if [[ -z "$3" ]]; then
-        zpwrLoggErr "usage: zpwrChangeName <rootdir> <prefix> <files...>"
+        zpwrLoggErr "usage: zpwrChangeName <rootdir> <prefix> <file/terms...>"
         return 1
     fi
     local oldName newName arg newPrefix rootDir
@@ -11,6 +11,7 @@ function zpwrChangeName(){
     rootDir="$1"
     newPrefix="$2"
 
+    shift
     shift
 
     for arg; do
@@ -32,9 +33,9 @@ function zpwrChangeName(){
             fi
 
             perl -i -pe 's@\b___'"$oldName"'\b@'"$newName"'@g' \
-                "$rootDir/"**/*~"$rootDir/".git/**(.)
+                "$rootDir/"**/*~"$rootDir/".git/**~"$rootDir/"**/*.zwc(.)
             perl -i -pe 's@\b'"$oldName"'\b@'"$newName"'@g' \
-                "$rootDir/"**/*~"$rootDir/".git/**(.)
+                "$rootDir/"**/*~"$rootDir/".git/**~"$rootDir/"**/*.zwc(.)
 
             if [[ -f "$newName" ]]; then
                 zpwrPrettyPrint "less $newName"
