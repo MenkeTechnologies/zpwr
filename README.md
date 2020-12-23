@@ -11,6 +11,49 @@ It is an extremely powerful custom terminal environment built on top of [zinit](
 
 There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
 
+## Contents
+
+- [Install Full](#full-installation-instructions-to-zpwr)
+- [Features](#zpwr-features)
+- [Dependencies](#zpwr-dependencies)
+- [Supported Operating Systems](#supported-operating-systems)
+- [ZPWR Extras Not Installed](#zpwr-extras-not-installed)
+- [Install Limited](#limited-install)
+- [Uninstall](#uninstall)
+- [Setup Step: Font](#font)
+- [Updating](#updating)
+- [Tmux Prefix Detail](#tmux-prefix) - How To
+- [Vim Autosave](#autosaving-vim-plugins) - Feature
+- [Bypass Space Expansion](#bypassing-expansion-on-space) - How To
+- [Turnin Off Ponies And Colors Globally](#turning-off-ponies-and-colors-globally) - How To
+- [Bypass Space Expansion](#bypassing-expansion-on-space) - How To
+- [Vim Language Support For Tmux Right Pane](#running-script-from-vim-in-tmux-right-pane-is-supported-for-these-languages)
+- [Main Window](#tmux-main-window) - Feature
+- [Personal Config File Information](#personal-config) - Detail
+- [zpwr-verb menu completion](#zpwr-verbs) - Feature
+- [Github Account Variable](#zpwr_github_account-variable) - Setup Step
+- [Add A New Zsh Plugin](#adding-more-zinit-plugins) - How To
+- [Configurable Environment Variables](#environment-variables) - Feature
+- [Test Suite](#tests)
+- [Super Fast Shell Startup Speed](#shell-startup-speed) - Feature
+- [Contributing](#contributing) - documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests
+- [Warning](#warnings) - The only user modifiable files are the user token files
+- [MacbookPro Screenshots](#running-on-a-macbookpro)
+- [RasberryPie Screenshots](#running-on-the-raspberry-pi-3)
+- [Rock64 Screenshots](#running-on-the-rock64)
+- [KeyBindings](#keybindings-generated-with-source-keybindingstoreadmezsh--readmemd)
+- [Tmux Keybindings](#tmux-keybindings-tmux-lsk)
+- [Zsh Vim Insert Mode Keybindings](#zsh-vim-insert-mode-keybindings-bindkey--m-viins--l)
+- [Zsh Vim Normal Mode Keybindings](#zsh-vim-normal-mode-keybindings-bindkey--m-vicmd--l)
+- [Zsh Vim MenuSelect Mode Keybindings](#zsh-menuselect-mode-keybindings-bindkey--m-menuselect--l)
+- [Zsh Vim Visual Mode Keybindings](#zsh-vim-visual-mode-keybindings-bindkey--m-visual--l)
+- [Zsh Vim ListScroll Mode Keybindings](#zsh-listscroll-mode-keybindings-bindkey--m-listscroll--l)
+- [Zsh Vim Operator Mode Keybindings](#zsh-vim-operator-mode-keybindings-bindkey--m-viopp--l)
+- [Vim Insert Mode Keybindings](#vim-keybindings-insert-mode)
+- [Vim Normal Mode Keybindings](#vim-keybindings-normal-mode)
+- [Vim Keybindings Visual Mode](#vim-keybindings-visual-mode)
+- [Vim Keybindings Command Colon Mode](#vim-keybindings-command-colon-mode)
+
 # Full Installation Instructions to `~/.zpwr`
 
 ```sh
