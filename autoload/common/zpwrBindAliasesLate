@@ -75,7 +75,7 @@ function zpwrBindAliasesLate(){
         alias hk='heroku'
     fi
 
-    test -d "$PYSCRIPTS" && alias py="cd $PYSCRIPTS"
+    test -d "$ZPWR_PYSCRIPTS" && alias py="cd $ZPWR_PYSCRIPTS"
     alias p2="python2"
     alias p3="python3"
 
