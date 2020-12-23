@@ -39,7 +39,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - [Contributing](#contributing) - documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests
 - [Warning](#warnings) - The only user modifiable files are the user token files
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
-- [RasberryPie Screenshots](#running-on-the-raspberry-pi-3)
+- [RasberryPi Screenshots](#running-on-the-raspberry-pi-3)
 - [Rock64 Screenshots](#running-on-the-rock64)
 - [KeyBindings](#keybindings-generated-with-source-keybindingstoreadmezsh--readmemd)
 - [Tmux Keybindings](#tmux-keybindings-tmux-lsk)
@@ -76,9 +76,9 @@ This also means you can move ZPWR after install after updating the sym links tha
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
 ## ZPWR Features
-- 320+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
-- 130+ centralized environment variables in ZPWR namespace to control functionality
-- 670+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
+- 335+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
+- 145+ centralized environment variables in ZPWR namespace to control functionality
+- 690+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - ~11.5k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 165+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - user specific ZPWR files in `~/.zpwr/local` git ignored
@@ -97,19 +97,19 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - color-coded groups of zsh menu completion for git objects
 - heavily colorized man pages [zsh-very-colorful-manuals](https://github.com/MenkeTechnologies/zsh-very-colorful-manuals)
 - insert matching quotes, brackets and parentheses like most IDEs [zsh-autopair](https://github.com/hlissner/zsh-autopair)
-- custom keybinding to open files most recently edited based on viminfo and emacs recentff and placed into fzf for fuzzy searching (zpwrFzvim)
+- custom keybinding to open files most recently edited based on viminfo and emacs recentff and placed into fzf for fuzzy searching `zpwr vimrecent`
 - vim keybindings (insert, normal and visual modes) to run current code file open in vim in tmux pane to right
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF.*OPTS env vars
 - ergonomic, recursive tmux keybindings for next and previous windows
-- zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygmentize
-- zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize
-- zsh keybindings to fzf search of network processes with lsof return PIDs
-- zsh function to cache all git directories
-- zsh function for fzf searching of all git directories
-- zsh function for fzf searching of all dirty git directories
-- zsh function to exec cmd in all git directories
+- zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimfilesearch`
+- zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimwordsearch`
+- zsh keybindings to fzf search of network processes with lsof return PIDs `zpwr lsof`
+- zsh function to cache all git directories `zpwr regengitrepocache`
+- zsh function for fzf searching of all git directories `zpwr gitrepos`
+- zsh function for fzf searching of all dirty git directories `zpwr gitreposdirty`
+- zsh function to exec cmd in all git directories `zpwr gitreposexec`
 - integration of [z](https://github.com/MenkeTechnologies/zsh-z) frecency database into _files completion
 - integration of [fasd](https://github.com/MenkeTechnologies/fasd-simple) frecency database into _files completion
 - zsh menucompletion for [z](https://github.com/MenkeTechnologies/zsh-z) command based on frecency [z](https://github.com/MenkeTechnologies/zsh-z) and [fasd](https://github.com/MenkeTechnologies/fasd-simple) databases
@@ -122,7 +122,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh functions autoloading based on OS
 - tmux keybindings and scripts based on OS
 - custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `install.sh` run
-- custom banners when new shell is launched
+- custom banners when new shell is launched `zpwr banner`
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
 - expanded vim text objects on command line
 - vim extract method from visual selection for shell, perl and python scripts (`gv` to select extracted)
@@ -328,7 +328,7 @@ To turn off all ponysay ponies, colored groups and colored group descriptions, a
 > ~/.zpwr/local/.tokens.sh
 ```sh
 # ponysay banner when shell startup finishes
-export ZPWR_INTRO_BANNER=noponies
+export ZPWR_INTRO_BANNER=nopony
 # output is more colorful
 export ZPWR_COLORS=false
 # colored section headers
@@ -364,7 +364,7 @@ Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and crea
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
 
 ## zpwr verbs
-Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf.
+Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf and then execute selected verb.
 
 ## ZPWR_GITHUB_ACCOUNT variable
 Change in `~/.zpwr/local/.tokens.sh`
@@ -388,7 +388,7 @@ These are environment variables set in `~/.zpwr/env/.zpwr_env.sh` and `~/.zpwr/e
 # More Environment Variables in ~/.zpwr/env/.shell_aliases_functions.sh near top of file
 # override in ~/.zpwr/local/.tokens.sh, ~/.zpwr/local is git ignored
 # see README.md
-# linux OS auto attach to tmux sessions
+# linux OS SSH auto attach to tmux sessions
 export ZPWR_AUTO_ATTACH=true
 # run ls after rm and other modifying commands such as touch automatically
 export ZPWR_AUTO_LS_RM=true
@@ -413,11 +413,11 @@ export ZPWR_CHAR_LOGO='<<)(>>'
 export ZPWR_DESC_PRE='-<<'
 # group description trailing chars
 export ZPWR_DESC_POST='>>-'
-# group description text color
+# group description text color ANSI codes
 export ZPWR_DESC_TEXT_COLOR='34'
-# group description leading chars color
+# group description leading chars color ANSI codes
 export ZPWR_DESC_PRE_COLOR='1;31'
-# group description trailing chars color
+# group description trailing chars color ANSI codes
 export ZPWR_DESC_POST_COLOR='1;31'
 # output is more colorful
 export ZPWR_COLORS=true
@@ -425,16 +425,20 @@ export ZPWR_COLORS=true
 export ZPWR_COLORS_SECTIONS=true
 # zpwr <tab> is more colorful
 export ZPWR_COLORS_VERBS=true
-# common colors
+# common colors ANSI codes
 export ZPWR_COLOR_BLUE="\x1b[37;44m"
 export ZPWR_COLOR_RED="\x1b[31m"
 export ZPWR_COLOR_RESET="\x1b[0m"
 # ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
+# named compsys colors zsh pattern and ANSI codes
+export ZPWR_NAMED_COLORS='=(#b)(*)=1;37;46'
+# file prefix compsys colors
+export ZPWR_COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 # sudo prefix to add when you get permission denied
 export ZPWR_SUDO_CMD='sudo -E'
-# sudo for aliases
-export ZPWR_FULL_SUDO='\builtin command sudo -E env'
+# sudo for aliases and expansion
+export ZPWR_FULL_SUDO='\builtin command sudo -E env PATH="$PATH"'
 # the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR='zsh-more-completions'
 # spelling correction in zsh-expand plugin
@@ -462,7 +466,7 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 # expand globs, history etc with zle expand-word
 export ZPWR_EXPAND_NATIVE=true
 # command for all fzf
-export ZPWR_FZF='fzf'
+export ZPWR_FZF='fzf --ansi'
 # prompt for all fzf
 export ZPWR_FZF_LOGO='<<)ZPWR(>>'
 # GH username
@@ -473,7 +477,7 @@ export ZPWR_GLOBAL_ALIAS_PREFIX=j
 export ZPWR_INTERACTIVE_MENU_SELECT=true
 # whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
-# logg function underscore color
+# logg function underscore color ANSI codes
 export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
 # logg function quote color
 export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
@@ -483,7 +487,7 @@ export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
-# the marker found color in bat output into fzf from ag search
+# the marker found color in bat output into fzf from ag search ANSI codes
 export ZPWR_MARKER_COLOR='0;1;4;37;44m'
 # default value for pygmentize theme
 export ZPWR_PYGMENTIZE_COLOR="emacs"
@@ -499,6 +503,8 @@ export ZPWR_PREFER_MVIM=true
 export ZPWR_PROFILING=false
 # set to POWERLEVEL to use the powerlevel10k prompt
 export ZPWR_PROMPT=powerlevel10k
+# git colored output cmd prefix
+export ZPWR_GIT_COLOR_PREFIX="git -c color.status=always -c color.ui=always --no-pager"
 # char to separate log messages
 export ZPWR_QUOTE_START_CHAR='<<('
 # char to separate log messages
@@ -508,6 +514,8 @@ export ZPWR_REPO_NAME='zpwr'
 # when true sends every char to synced panes
 # when false does not send enter and Control to synced panes
 export ZPWR_SEND_KEYS_FULL=false
+# how long to sleep after display of counts in zpwr display of all
+export ZPWR_LOOK_TIME=5
 # set to comma separated list of pane numbers
 # to activate sending to numbered tmux panes
 export ZPWR_SEND_KEYS_PANE=-1
@@ -654,9 +662,9 @@ evalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB
 ```
 
 ## Tests
-You can run all the unit tests via `zunit --verbose $ZPWR/tests/*.zsh`.
+You can run all the unit tests via `zpwr tests`.
 
-There is also `zpwr tests` or the alias `tru` (tests run) to run the tests.
+There is also the alias `tru` (tests run) to run the tests.
 ```sh
 zpwrExists zunit && {
     alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
