@@ -53,8 +53,8 @@ if [[ -d "$ZPWR" ]]; then
     hash -d ZPWR="$ZPWR"
 fi
 
-if [[ -d "$PYSCRIPTS" ]]; then
-    : ~PYSCRIPTS
+if [[ -d "$ZPWR_PYSCRIPTS" ]]; then
+    : ~ZPWR_PYSCRIPTS
 fi
 
 if [[ -d "$PYEXECUTABLES" ]]; then

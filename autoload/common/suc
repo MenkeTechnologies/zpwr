@@ -4,7 +4,7 @@ function ___suc(){
 
     subl "$ZPWR_SCRIPTS"
     f "$ZPWR_SCRIPTS"
-    python3 "$PYSCRIPTS/textEditorTwoColumns.py"
+    python3 "$ZPWR_PYSCRIPTS/textEditorTwoColumns.py"
 }
 
 ___suc "$@"

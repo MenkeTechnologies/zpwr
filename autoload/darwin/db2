@@ -1,8 +1,8 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___db2(){
+function db2(){
 
-    python3 "$PYSCRIPTS/logIntoMyDB.py"
+    python3 "$ZPWR_PYSCRIPTS/logIntoMyDB.py"
 }
 
-___db2 "$@"
+db2 "$@"
