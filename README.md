@@ -13,26 +13,26 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 
 ## Contents
 
-- [Install Full](#full-installation-instructions-to-zpwr)
+- [Full Install](#full-installation-instructions-to-zpwr)
 - [Features](#zpwr-features)
 - [Dependencies](#zpwr-dependencies)
 - [Supported Operating Systems](#supported-operating-systems)
 - [ZPWR Extras Not Installed](#zpwr-extras-not-installed)
-- [Install Limited](#limited-install)
+- [Limited Install](#limited-install)
 - [Uninstall](#uninstall)
 - [Setup Step: Font](#font)
 - [Updating](#updating)
 - [Tmux Prefix Detail](#tmux-prefix) - How To
 - [Vim Autosave](#autosaving-vim-plugins) - Feature
 - [Bypass Space Expansion](#bypassing-expansion-on-space) - How To
-- [Turnin Off Ponies And Colors Globally](#turning-off-ponies-and-colors-globally) - How To
+- [Turning Off Ponies And Colors Globally](#turning-off-ponies-and-colors-globally) - How To
 - [Bypass Space Expansion](#bypassing-expansion-on-space) - How To
 - [Vim Language Support For Tmux Right Pane](#running-script-from-vim-in-tmux-right-pane-is-supported-for-these-languages)
 - [Main Window](#tmux-main-window) - Feature
 - [Personal Config File Information](#personal-config) - Detail
-- [zpwr-verb menu completion](#zpwr-verbs) - Feature
-- [Github Account Variable](#zpwr_github_account-variable) - Setup Step
-- [Add A New Zsh Plugin](#adding-more-zinit-plugins) - How To
+- [ZPWR verb menu completion](#zpwr-verbs) - Feature
+- [Github Account Environment Variable](#zpwr_github_account-variable) - Setup Step
+- [Adding A New Zsh Plugin](#adding-more-zinit-plugins) - How To
 - [Configurable Environment Variables](#environment-variables) - Feature
 - [Test Suite](#tests)
 - [Super Fast Shell Startup Speed](#shell-startup-speed) - Feature
