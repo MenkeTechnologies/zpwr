@@ -3,18 +3,17 @@
 # link over latest configuration files from $ZPWR_REPO_NAME
 function zpwrLinkConf(){
 
-    (
     if [[ ! -f "$HOME/.ctags" ]]; then
         zpwrPrettyPrint "Linking .ctags to home directory"
-        zpwrGoInstallerDir
         ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    local symFiles file snipDir userSymFiles
+    local symFiles file snipDir abspath
+    local -A userSymFiles
 
     userSymFiles=(
-        "${ZPWR_TMUXRC}"
-        "${ZPWR_VIMRC}"
+        .tmux.conf "${ZPWR_TMUXRC}"
+        .vimrc "${ZPWR_VIMRC}"
     )
 
     symFiles=(
@@ -32,11 +31,11 @@ function zpwrLinkConf(){
         .globalrc
     )
 
-    for file in ${userSymFiles[@]} ; do
-        if [[ "$file" != "$HOME/${file:t}" ]]; then
+    for file abspath in ${(kv)userSymFiles[@]} ; do
+        if [[ "$abspath" != "$HOME/${file}" ]]; then
             zpwrPrettyPrint "Installing $file to $HOME"
-            echo ln -sf $file "$HOME/${file:t}"
-            ln -sf $file "$HOME/${file:t}"
+            echo ln -sf $abspath "$HOME/${file}"
+            ln -sf $abspath "$HOME/${file}"
         else
             zpwrPrettyPrint "Not touching $file because in $HOME"
         fi
@@ -59,7 +58,6 @@ function zpwrLinkConf(){
         echo ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
         ln -sfn $ZPWR_INSTALL/emacs/snippets "$snipDir/zpwr-snippets"
     fi
-    )
 
     if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
         zpwrPrettyPrint "Link fzf for zinit"
