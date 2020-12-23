@@ -2,13 +2,14 @@
 # vim: set ft=sh:
 #link over latest configuration files from $ZPWR_REPO_NAME
 function zpwrUnlinkConf(){
-    (
 
-    local symFiles file snipDir userSymFiles
+    local symFiles file snipDir abspath
+
+    local -A userSymFiles
 
     userSymFiles=(
-        "${ZPWR_TMUXRC}"
-        "${ZPWR_VIMRC}"
+        .tmux.conf "${ZPWR_TMUXRC}"
+        .vimrc "${ZPWR_VIMRC}"
     )
 
     symFiles=(
@@ -26,8 +27,7 @@ function zpwrUnlinkConf(){
         .globalrc
     )
 
-    for file in ${userSymFiles[@]} ; do
-        file="${file:t}"
+    for file abspath in ${(kv)userSymFiles[@]} ; do
         if [[ -f "$HOME/$file" ]]; then
             if [[ -h "$HOME/$file" ]]; then
                 zpwrPrettyPrint "REMOVING $HOME/$file"
@@ -63,8 +63,6 @@ function zpwrUnlinkConf(){
         echo rm -rf "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
         rm -rf "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
     fi
-
-    )
 }
 
 zpwrUnlinkConf "$@"
