@@ -35,6 +35,16 @@ export ZPWR_BAT_THEME='GitHub'
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO='<<)(>>'
+# group description leading chars
+export ZPWR_DESC_PRE='-<<'
+# group description trailing chars
+export ZPWR_DESC_POST='>>-'
+# group description text color
+export ZPWR_DESC_TEXT_COLOR='34'
+# group description leading chars color
+export ZPWR_DESC_PRE_COLOR='1;31'
+# group description trailing chars color
+export ZPWR_DESC_POST_COLOR='1;31'
 # output is more colorful
 export ZPWR_COLORS=true
 # colored section headers
