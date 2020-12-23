@@ -44,34 +44,62 @@ zstyle ':completion:force-cache:*' cache-policy zpwrDailyCachingPolicy
 if [[ $ZPWR_COLORS_SECTIONS == true ]]; then
     # Make the list prompt friendly
     zstyle ':completion:*' list-prompt \
-        $'\e[1;31m-<<\e[0;34m%SAt %s\e[44;32m%M%p\e[0;34m%S, Hit TAB for more, or the characters to insert%s\e[0;1;31m>>-\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_POST_COLOR$'m%SAt %s\e[44;32m%M%p\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%S, Hit TAB for more, or the characters to insert%s\e[0;'$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     # Make the selection prompt friendly when there are a lot of choices
     zstyle ':completion:*' select-prompt \
-        $'\e[1;31m-<<\e[0;34m%SScrolling active: current selection at %s\e[37;44m%p\e[0;1;31m>>-\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%SScrolling active: current selection at %s\e[37;44m%p\e[0;'$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     # formatting and messages, blue text with red punctuation
     zstyle ':completion:*' format \
-        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     zstyle ':completion:*:descriptions' format \
-        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     zstyle ':completion:*:corrections' format \
-        $'\e[1;31m-<<\e[0;34m%d (errors: %e)\e[1;31m>>-\e[0m'
+        $'\e'$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d (errors: %e)\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     zstyle ':completion:*:messages' format \
-        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     zstyle ':completion:*:explanations' format \
-        $'\e[1;31m-<<\e[0;34m%d\e[1;31m>>-\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     zstyle ':completion:*:warnings' format \
-        $'\e[1;31m-<<\e[0;34mNo Matches for %d\e[1;31m>>-\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'mNo Matches for %d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
-    zstyle ':completion:*' list-separator "$ZPWR_CHAR_LOGO"
+else
+    # Make the list prompt friendly
+    zstyle ':completion:*' list-prompt \
+        "%SAt %s%M%pS, Hit TAB for more, or the characters to insert%s"
+
+    # Make the selection prompt friendly when there are a lot of choices
+    zstyle ':completion:*' select-prompt \
+        "%SScrolling active: current selection at %s%p"
+
+    # formatting and messages, blue text with red punctuation
+    zstyle ':completion:*' format \
+        "$ZPWR_DESC_PRE%d$ZPWR_DESC_POST"
+
+    zstyle ':completion:*:descriptions' format \
+        "$ZPWR_DESC_PRE%d$ZPWR_DESC_POST"
+
+    zstyle ':completion:*:corrections' format \
+        "$ZPWR_DESC_PRE%d (errors: %e)$ZPWR_DESC_POST"
+
+    zstyle ':completion:*:messages' format \
+        "$ZPWR_DESC_PRE%d$ZPWR_DESC_POST"
+
+    zstyle ':completion:*:explanations' format \
+        "$ZPWR_DESC_PRE%d$ZPWR_DESC_POST"
+
+    zstyle ':completion:*:warnings' format \
+        "No Matches for %d"
+
 fi
 
+zstyle ':completion:*' list-separator "$ZPWR_CHAR_LOGO"
 zstyle ':completion:*' auto-description 'Specify: %d'
 
 # offer indexes before parameters in subscripts

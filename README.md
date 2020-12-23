@@ -324,13 +324,15 @@ if printf -- "$ZPWR_VARS[firstword_partition]" | command grep -qsE $ZPWR_VARS[co
 ```
 
 ## Turning off ponies and colors globally
-To turn off ZPWR colors and all ponysay ponies, add to tokens file.
+To turn off all ponysay ponies, colored groups and colored group descriptions, add to tokens file.
 > ~/.zpwr/local/.tokens.sh
 ```sh
 # ponysay banner when shell startup finishes
 export ZPWR_INTRO_BANNER=noponies
 # output is more colorful
 export ZPWR_COLORS=false
+# colored section headers
+export ZPWR_COLORS_SECTIONS=false
 ```
 
 ## Running script from vim in tmux right pane is supported for these languages
@@ -407,6 +409,16 @@ export ZPWR_BAT_THEME='GitHub'
 # this the description separator in compsys option completions (ls -<tab>)
 # and the separator for function se() between row number and learning
 export ZPWR_CHAR_LOGO='<<)(>>'
+# group description leading chars
+export ZPWR_DESC_PRE='-<<'
+# group description trailing chars
+export ZPWR_DESC_POST='>>-'
+# group description text color
+export ZPWR_DESC_TEXT_COLOR='34'
+# group description leading chars color
+export ZPWR_DESC_PRE_COLOR='1;31'
+# group description trailing chars color
+export ZPWR_DESC_POST_COLOR='1;31'
 # output is more colorful
 export ZPWR_COLORS=true
 # colored section headers
