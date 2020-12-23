@@ -170,6 +170,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[gitremotes]='zpwrAllRemotes=list all git remotes'
     ZPWR_VERBS[gitreposexec]='zpwrForAllGitDirs=run cmd in all git dirs'
     ZPWR_VERBS[gitreposdirtyexec]='zpwrForAllGitDirsDirty=run cmd in all git dirs'
+    ZPWR_VERBS[gitreposdirtyrefreshexec]='zpwrForAllGitDirsRefreshDirty=refresh cache and run cmd in all git dirs'
     ZPWR_VERBS[gitsearch]='gse=search for regex in git log'
     ZPWR_VERBS[gitupdatefordir]='zpwrUpdateAllGitDirs=run git updates in all git dirs'
     ZPWR_VERBS[gitzfordir]='zg=run git wipe on any branch $1 in git dirs in $PWD and z $2 if present'

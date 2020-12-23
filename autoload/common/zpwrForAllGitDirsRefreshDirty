@@ -1,9 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zpwrForAllGitDirsDirty(){
+function zpwrForAllGitDirsRefreshDirty(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrForAllGitDirsDirty <cmd>"
+        zpwrLoggErr "usage: zpwrForAllGitDirsRefreshDirty <cmd>"
         return 1
     fi
 
@@ -12,12 +12,12 @@ function zpwrForAllGitDirsDirty(){
         zsh-git-repo-regenAllGitRepos regen
     fi
 
-    if [[ ! -s "$ZPWR_ALL_GIT_DIRS_DIRTY" ]]; then
-        zsh-git-repo-regenAllGitReposDirty regen
-    fi
+    zpwrCleanGitRepoDirtyCache
+
+    zsh-git-repo-regenAllGitReposDirty regen
 
     zpwrFordir "$*" \
         $(cat $ZPWR_ALL_GIT_DIRS_DIRTY)
 }
 
-zpwrForAllGitDirsDirty "$@"
+zpwrForAllGitDirsRefreshDirty "$@"

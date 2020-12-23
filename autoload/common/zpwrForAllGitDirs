@@ -1,9 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrForAllGitDirs(){
+function zpwrForAllGitDirs(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrForGitDir <cmd>"
+        zpwrLoggErr "usage: zpwrForAllGitDirs <cmd>"
         return 1
     fi
 
@@ -16,4 +16,4 @@ function ___zpwrForAllGitDirs(){
         $(cat $ZPWR_ALL_GIT_DIRS)
 }
 
-___zpwrForAllGitDirs "$@"
+zpwrForAllGitDirs "$@"
