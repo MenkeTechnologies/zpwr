@@ -14,7 +14,7 @@
 # More Environment Variables in ~/.zpwr/env/.shell_aliases_functions.sh near top of file
 # override in ~/.zpwr/local/.tokens.sh, ~/.zpwr/local is git ignored
 # see README.md
-# linux OS auto attach to tmux sessions
+# linux OS SSH auto attach to tmux sessions
 export ZPWR_AUTO_ATTACH=true
 # run ls after rm and other modifying commands such as touch automatically
 export ZPWR_AUTO_LS_RM=true
@@ -39,11 +39,11 @@ export ZPWR_CHAR_LOGO='<<)(>>'
 export ZPWR_DESC_PRE='-<<'
 # group description trailing chars
 export ZPWR_DESC_POST='>>-'
-# group description text color
+# group description text color ANSI codes
 export ZPWR_DESC_TEXT_COLOR='34'
-# group description leading chars color
+# group description leading chars color ANSI codes
 export ZPWR_DESC_PRE_COLOR='1;31'
-# group description trailing chars color
+# group description trailing chars color ANSI codes
 export ZPWR_DESC_POST_COLOR='1;31'
 # output is more colorful
 export ZPWR_COLORS=true
@@ -51,19 +51,19 @@ export ZPWR_COLORS=true
 export ZPWR_COLORS_SECTIONS=true
 # zpwr <tab> is more colorful
 export ZPWR_COLORS_VERBS=true
-# common colors
+# common colors ANSI codes
 export ZPWR_COLOR_BLUE="\x1b[37;44m"
 export ZPWR_COLOR_RED="\x1b[31m"
 export ZPWR_COLOR_RESET="\x1b[0m"
 # ANSI styling codes for git commits
 export ZPWR_COMMIT_STYLE='1;37;45'
-# named compsys colors
+# named compsys colors zsh pattern and ANSI codes
 export ZPWR_NAMED_COLORS='=(#b)(*)=1;37;46'
 # file prefix compsys colors
 export ZPWR_COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:${(s.:.)LS_COLORS}")'
 # sudo prefix to add when you get permission denied
 export ZPWR_SUDO_CMD='sudo -E'
-# sudo for aliases
+# sudo for aliases and expansion
 export ZPWR_FULL_SUDO='\builtin command sudo -E env PATH="$PATH"'
 # the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR='zsh-more-completions'
@@ -103,7 +103,7 @@ export ZPWR_GLOBAL_ALIAS_PREFIX=j
 export ZPWR_INTERACTIVE_MENU_SELECT=true
 # whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
-# logg function underscore color
+# logg function underscore color ANSI codes
 export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
 # logg function quote color
 export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
@@ -113,7 +113,7 @@ export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
-# the marker found color in bat output into fzf from ag search
+# the marker found color in bat output into fzf from ag search ANSI codes
 export ZPWR_MARKER_COLOR='0;1;4;37;44m'
 # default value for pygmentize theme
 export ZPWR_PYGMENTIZE_COLOR="emacs"
