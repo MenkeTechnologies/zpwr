@@ -10,12 +10,14 @@ function zpwrLinkConf(){
         ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
     fi
 
-    local symFiles file snipDir
+    local symFiles file snipDir userSymFiles
+
+    userSymFiles=(
+        "${ZPWR_TMUXRC}"
+        "${ZPWR_VIMRC}"
+    )
 
     symFiles=(
-        .tmux.conf
-        .ideavimrc
-        .vimrc
         grc.zsh
         conf.gls
         conf.df
@@ -25,13 +27,19 @@ function zpwrLinkConf(){
         .iftopcolors
         .inputrc
         .zshrc
+        #"$ZPWR_IDEAVIMRC"
         #.spacemacs
         .globalrc
     )
 
+    for file in ${userSymFiles[@]} ; do
+        zpwrPrettyPrint "Installing $file to $HOME"
+        echo ln -sf $file "$HOME/${file:t}"
+        ln -sf $file "$HOME/${file:t}"
+    done
+
     for file in ${symFiles[@]} ; do
         zpwrPrettyPrint "Installing $file to $HOME"
-        zpwrGoInstallerDir
         echo ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
         ln -sf $ZPWR_INSTALL/$file "$HOME/$file"
     done

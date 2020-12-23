@@ -4,12 +4,14 @@
 function zpwrUnlinkConf(){
     (
 
-    local symFiles file snipDir
+    local symFiles file snipDir userSymFiles
+
+    userSymFiles=(
+        "${ZPWR_TMUXRC}"
+        "${ZPWR_VIMRC}"
+    )
 
     symFiles=(
-        .tmux.conf
-        .ideavimrc
-        .vimrc
         grc.zsh
         conf.gls
         conf.df
@@ -19,15 +21,28 @@ function zpwrUnlinkConf(){
         .iftopcolors
         .inputrc
         .zshrc
+        #"$ZPWR_IDEAVIMRC"
         #.spacemacs
         .globalrc
     )
+
+    for file in ${userSymFiles[@]} ; do
+        file="${file:t}"
+        if [[ -f "$HOME/$file" ]]; then
+            if [[ -h "$HOME/$file" ]]; then
+                zpwrPrettyPrint "REMOVING $HOME/$file"
+                echo rm -f $HOME/$file
+                rm -f -- $HOME/$file
+            else
+                zpwrPrettyPrint "not REMOVING $HOME/$file because not symlink"
+            fi
+        fi
+    done
 
     for file in ${symFiles[@]} ; do
         if [[ -f "$HOME/$file" ]]; then
             if [[ -h "$HOME/$file" ]]; then
                 zpwrPrettyPrint "REMOVING $HOME/$file"
-                zpwrGoInstallerDir
                 echo rm -f $HOME/$file
                 rm -f -- $HOME/$file
             else
