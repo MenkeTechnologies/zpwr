@@ -26,11 +26,11 @@ function installNpmRpm(){
     zpwrPrettyPrintBox "curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -"
     curl -sL https://rpm.nodesource.com/setup_14.x | sudo -E bash -
     zpwrPrettyPrintBox "install nodejs"
-    zpwrUpdate "nodejs" "$distroFamily"
+    zpwrInstallerUpdate "nodejs" "$distroFamily"
     zpwrPrettyPrintBox "install npm"
-    zpwrUpdate "npm" "$distroFamily"
+    zpwrInstallerUpdate "npm" "$distroFamily"
     zpwrPrettyPrintBox "install build-essential"
-    zpwrUpdate "build-essential" "$distroFamily"
+    zpwrInstallerUpdate "build-essential" "$distroFamily"
 }
 
 function installNpmDeb(){
@@ -38,11 +38,11 @@ function installNpmDeb(){
     zpwrPrettyPrintBox "curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
     zpwrPrettyPrintBox "install nodejs"
-    zpwrUpdate "nodejs" "$distroFamily"
+    zpwrInstallerUpdate "nodejs" "$distroFamily"
     zpwrPrettyPrintBox "install npm"
-    zpwrUpdate "npm" "$distroFamily"
+    zpwrInstallerUpdate "npm" "$distroFamily"
     zpwrPrettyPrintBox "install build-essential"
-    zpwrUpdate "build-essential" "$distroFamily"
+    zpwrInstallerUpdate "build-essential" "$distroFamily"
 }
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then

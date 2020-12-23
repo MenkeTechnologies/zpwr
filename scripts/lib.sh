@@ -379,7 +379,7 @@ function zpwrInstallGitHubPlugin(){
     git clone "https://github.com/$1.git"
 }
 
-function zpwrUpdate(){
+function zpwrInstallerUpdate(){
 
     zpwrExists "$1" || {
 
@@ -396,12 +396,12 @@ function zpwrUpdate(){
         elif [[ $2 == freebsd ]];then
             sudo pkg install -y "$1"
         else
-            zpwrPrettyPrint "Error at install of $1 on $2." >&2
+            zpwrPrettyPrint "Error at install of '$1' on '$2'." >&2
         fi
     }
 }
 
-function zpwrUpgrade(){
+function zpwrInstallerUpgrade(){
 
     if [[ $1 == mac ]]; then
         brew update
@@ -418,11 +418,11 @@ function zpwrUpgrade(){
     elif [[ $1 == freebsd ]];then
         sudo pkg upgrade -y
     else
-        zpwrPrettyPrint "Error with upgrade with $1." >&2
+        zpwrPrettyPrint "Error with upgrade with '$1'." >&2
     fi
 }
 
-function zpwrRefresh(){
+function zpwrInstallerRefresh(){
 
     if [[ $1 == mac ]]; then
         brew update
@@ -438,7 +438,7 @@ function zpwrRefresh(){
     elif [[ $1 == redhat ]];then
         sudo yum check-update -y
     else
-        zpwrPrettyPrint "Error with refresh with $1." >&2
+        zpwrPrettyPrint "Error with refresh with '$1'." >&2
     fi
 
 }
