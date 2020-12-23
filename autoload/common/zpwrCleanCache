@@ -5,11 +5,13 @@ function zpwrCleanCache(){
     emulate -L zsh
     setopt nullglob
 
-    rm -rf \
-        "$ZPWR_LOGFILE" \
+    echo rm -rf \
         "$ZPWR_VIM_KEYBINDINGS" \
         "$ZPWR_ALL_KEYBINDINGS" \
-        "$ZPWR_ALL_GIT_DIRS" \
+        "$ZPWR_LOCAL_ENV"*
+    rm -rf \
+        "$ZPWR_VIM_KEYBINDINGS" \
+        "$ZPWR_ALL_KEYBINDINGS" \
         "$ZPWR_LOCAL_ENV"*
 }
 

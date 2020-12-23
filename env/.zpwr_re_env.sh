@@ -147,8 +147,10 @@ evalIfNeeded ZPWR_RECENTF "$ZPWR_RECENTF" "$HOME/.emacs.d/.cache/recentf" "$HOME
 evalIfNeeded ZPWR_DEFAULT_BANNER "$ZPWR_DEFAULT_BANNER" "bash $ZPWR_SCRIPTS_MAC/figletRandomFontOnce.sh $(hostname)" "$ZPWR_SCRIPTS_MAC"
 # zpwr banner file location
 evalIfNeeded ZPWR_BANNER_SCRIPT "$ZPWR_BANNER_SCRIPT" "$ZPWR_SCRIPTS/about.sh" "$ZPWR_SCRIPTS"
-# list of git dirs
+# cache of git dirs
 evalIfNeeded ZPWR_ALL_GIT_DIRS "$ZPWR_ALL_GIT_DIRS" "$ZPWR_LOCAL/zpwrGitDirs.txt" "$ZPWR_LOCAL"
+# cache of dirty git dirs
+evalIfNeeded ZPWR_ALL_GIT_DIRS_DIRTY "$ZPWR_ALL_GIT_DIRS_DIRTY" "$ZPWR_LOCAL/zpwrGitDirsDirty.txt" "$ZPWR_LOCAL"
 # log file
 evalIfNeeded ZPWR_LOGFILE "$ZPWR_LOGFILE" "$ZPWR_LOCAL/zpwrLog.txt" "$ZPWR_LOCAL"
 # cache of env keys

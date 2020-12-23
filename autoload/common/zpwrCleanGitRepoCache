@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCleanGitRepoCache(){
+
+    emulate -L zsh
+    setopt nullglob
+
+    echo rm -rf \
+        "$ZPWR_ALL_GIT_DIRS"
+    rm -rf \
+        "$ZPWR_ALL_GIT_DIRS"
+}
+
+zpwrCleanGitRepoCache "$@"

@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCleanLog(){
+
+    emulate -L zsh
+    setopt nullglob
+
+    echo rm -rf \
+        "$ZPWR_LOGFILE"
+    rm -rf \
+        "$ZPWR_LOGFILE"
+}
+
+zpwrCleanLog "$@"
