@@ -37,7 +37,7 @@ else
 fi
 
 if [[ $1 == plain ]]; then
-    filter=' | zpwrStdinExists "$line'
+    filter=' | zpwrStdinExists "$line"'
 else
     filter=' | zpwrStdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
 fi

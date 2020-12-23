@@ -280,6 +280,16 @@ The relevant code is the [zsh-expand](https://github.com/MenkeTechnologies/zsh-e
 if printf -- "$ZPWR_VARS[firstword_partition]" | command grep -qsE $ZPWR_VARS[continueFirstPositionRegex];then
 ```
 
+## Turning off ponies and colors globally
+To turn off ZPWR colors and all ponysay ponies, add to tokens file.
+> ~/.zpwr/local/.tokens.sh
+```sh
+# ponysay banner when shell startup finishes
+export ZPWR_INTRO_BANNER=noponies
+# output is more colorful
+export ZPWR_COLORS=false
+```
+
 ## Running script from vim in tmux right pane is supported for these languages
 > ~/.vimrc
 ```vim
@@ -476,7 +486,7 @@ fi
 evalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/fzf" "$ZSH"
 # local file ignored by git
 evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
-# alias and funtion file bash compatible
+# alias and function file bash compatible
 evalIfNeeded ZPWR_ALIAS_FILE "$ZPWR_ALIAS_FILE" "$ZPWR_ENV/.shell_aliases_functions.sh" "$ZPWR_ENV"
 # autoloaded non completion functions
 evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD" "$ZPWR/autoload" "$ZPWR"
@@ -581,7 +591,7 @@ zpwrExists zunit && {
 ```
 
 ## Shell Startup speed
-Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded funtions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/autoload/comps` contains autoloaded compsys funtions.
+Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded functions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/autoload/comps` contains autoloaded compsys functions.
 Removing the lolcat into ponysay banner like so on startup will further increase speed.
 ```sh
 export ZPWR_INTRO_BANNER=nopony

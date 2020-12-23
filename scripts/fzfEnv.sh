@@ -41,7 +41,7 @@ fi
 # \$ needed bc inside double quotes when passed to perl
 
 if [[ $1 == plain ]]; then
-    filter=' | zpwrStdinExists "$line'
+    filter=' | zpwrStdinExists "$line"'
 else
     filter=' | zpwrStdinExists "$line" | cowsay | ponysay | '"$ZPWR_SCRIPTS/splitReg.sh"' -- ---------- lolcat'
 fi
