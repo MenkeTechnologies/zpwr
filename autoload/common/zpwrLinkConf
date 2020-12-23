@@ -33,9 +33,13 @@ function zpwrLinkConf(){
     )
 
     for file in ${userSymFiles[@]} ; do
-        zpwrPrettyPrint "Installing $file to $HOME"
-        echo ln -sf $file "$HOME/${file:t}"
-        ln -sf $file "$HOME/${file:t}"
+        if [[ "$file" != "$HOME/${file:t}" ]]; then
+            zpwrPrettyPrint "Installing $file to $HOME"
+            echo ln -sf $file "$HOME/${file:t}"
+            ln -sf $file "$HOME/${file:t}"
+        else
+            zpwrPrettyPrint "Not touching $file because in $HOME"
+        fi
     done
 
     for file in ${symFiles[@]} ; do

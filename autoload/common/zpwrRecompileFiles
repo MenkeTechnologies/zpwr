@@ -52,7 +52,7 @@ function zpwrRecompileFiles(){
         /etc/profile.env*
     )
 
-    zpwrPrettyPrint "Zrecompiling ${#knownZshFiles} local and ${#globalFiles} global zsh files"
+    zpwrPrettyPrint "ZRecompiling ${#knownZshFiles} local and ${#globalFiles} global zsh files"
 
     for compileFile in ${knownZshFiles[@]}; do
         if [[ -f "$compileFile" ]]; then
