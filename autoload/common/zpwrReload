@@ -5,17 +5,17 @@ function zpwrReload(){
 
     zpwrPrettyPrint "Reloading started..."
     zpwrTokenPre
-    bindPowerline;bindPowerlineTmux;bindZpwrDirs
-    bindForGit
-    bindZdharma
-    bindZdharmaPost
-    zpwrPrettyPrint "Reloading bindAliasesLate;zpwrCreateAliasCache;bindAliasesZshLate;bindOverrideZLE"
-    bindAliasesLate;zpwrCreateAliasCache;bindAliasesZshLate;bindOverrideZLE
-    bindInterceptSurround
-    bindHistorySubstring
-    zpwrPrettyPrint "Reloading bindFZFLate;bindZpwrVerbs;bindZpwrZstyle"
-    bindFZFLate;bindZpwrVerbs;bindZpwrZstyle
-    bindPenultimate;bindFinal;zpwrTokenPost
+    zpwrBindPowerline;zpwrBindPowerlineTmux;zpwrBindDirs
+    zpwrBindForGit
+    zpwrBindZdharma
+    zpwrBindZdharmaPost
+    zpwrPrettyPrint "Reloading zpwrBindAliasesLate;zpwrCreateAliasCache;zpwrBindAliasesZshLate;zpwrBindOverrideZLE"
+    zpwrBindAliasesLate;zpwrCreateAliasCache;zpwrBindAliasesZshLate;zpwrBindOverrideZLE
+    zpwrBindInterceptSurround
+    zpwrBindHistorySubstring
+    zpwrPrettyPrint "Reloading zpwrBindFZFLate;zpwrBindVerbs;zpwrBindZstyle"
+    zpwrBindFZFLate;zpwrBindVerbs;zpwrBindZstyle
+    zpwrBindPenultimate;zpwrBindFinal;zpwrTokenPost
 
     zpwrPrettyPrint "Reloading finished..."
 
