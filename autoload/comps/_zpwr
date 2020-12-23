@@ -56,7 +56,7 @@ function __zpwr(){
             verb=$words[1]
             curcontext="${curcontext%:*:*}:zpwr-$verb:"
             case $verb in
-                redo|re|redosql|rsql|searchl|se|see|seee|searchlee|searchle|get)
+                redo|re|redosql|rsql|searchl|se|see|seee|searchlee|searchle|getlearn|learnget)
                     _se
                     ;;
                 attach)
