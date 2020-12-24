@@ -205,6 +205,7 @@ ZPWR_GH_PLUGINS=(
     zdharma/zzcomplete
     #comps
     MenkeTechnologies/zsh-gem-completion
+    MenkeTechnologies/zsh-cargo-completion
     MenkeTechnologies/zsh-cpan-completion
     MenkeTechnologies/zsh-pip-description-completion
     MenkeTechnologies/zsh-xcode-completions
@@ -255,7 +256,6 @@ ZPWR_OMZ_COMPS=(
     spring
     redis-cli
     rust
-    cargo
     rustup
     fd
 )
