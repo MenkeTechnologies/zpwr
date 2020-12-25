@@ -58,7 +58,7 @@ if [[ $ZPWR_COLORS_SECTIONS == true ]]; then
         $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     zstyle ':completion:*:corrections' format \
-        $'\e'$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d (errors: %e)\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d (errors: %e)\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     zstyle ':completion:*:messages' format \
         $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
