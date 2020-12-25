@@ -44,7 +44,7 @@ zstyle ':completion:force-cache:*' cache-policy zpwrDailyCachingPolicy
 if [[ $ZPWR_COLORS_SECTIONS == true ]]; then
     # Make the list prompt friendly
     zstyle ':completion:*' list-prompt \
-        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_POST_COLOR$'m%SAt %s\e[44;32m%M%p\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%S, Hit TAB for more, or the characters to insert%s\e[0;'$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%SAt %s\e[44;37m%M%p\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%S, Hit TAB for more, or the characters to insert%s\e[0;'$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     # Make the selection prompt friendly when there are a lot of choices
     zstyle ':completion:*' select-prompt \
