@@ -390,6 +390,58 @@ cmake_install.cmake
 *.out
 *.app
 #}}}***********************************************************
+#
+#{{{                    MARK:Autotools
+#**************************************************************
+Makefile.in
+ar-lib
+mdate-sh
+py-compile
+test-driver
+ylwrap
+.dirstamp
+
+# http://www.gnu.org/software/autoconf
+aclocal.m4
+autom4te.cache/
+config.*
+configure
+configure.ac
+depcomp
+install-sh
+libtool
+ltmain.sh
+m4/
+missing
+stamp-h?
+.libs/
+*.l[ao]
+*~
+
+autom4te.cache
+autoscan*.log
+compile
+config.guess
+config.h.in
+config.sub
+configure.scan
+
+# https://www.gnu.org/software/libtool/
+
+ltmain.sh
+
+# http://www.gnu.org/software/texinfo
+
+texinfo.tex
+
+# http://www.gnu.org/software/m4/
+
+m4/libtool.m4
+m4/ltoptions.m4
+m4/ltsugar.m4
+m4/ltversion.m4
+m4/lt~obsolete.m4
+#}}}***********************************************************
 
 #{{{                    MARK:emacs
 #**************************************************************
