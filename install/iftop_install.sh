@@ -16,24 +16,22 @@ source common.sh
 
 zpwrGoInstallerOutputDir
 
-automake --version 2>&1 | grep -q '16' || {
-    wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
-        tar xvfz automake-1.16.tar.gz
-        if builtin cd automake-1.16; then
-            ./configure && make && sudo make install
-            make clean
-        else
-            zpwrFail "could not cd to automake-1.16"
-        fi
-    }
+#automake --version 2>&1 | grep -q '16' || {
+    #wget https://ftp.gnu.org/gnu/automake/automake-1.16.tar.gz
+        #tar xvfz automake-1.16.tar.gz
+        #if builtin cd automake-1.16; then
+            #./configure && make && sudo make install
+            #make clean
+        #else
+            #zpwrFail "could not cd to automake-1.16"
+        #fi
+    #}
 
 [[ ! -d "$HOME/forkedRepos" ]] && mkdir "$HOME/forkedRepos"
 if builtin cd "$HOME/forkedRepos"; then
     git clone https://github.com/MenkeTechnologies/iftopcolor
     if builtin cd iftopcolor; then
-        aclocal
-        automake --add-missing
-        ./configure && make && sudo make install
+        cmake . && make && sudo make install
         make clean
     else
         zpwrFail "could not cd to iftopcolor"
