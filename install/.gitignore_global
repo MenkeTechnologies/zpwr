@@ -353,6 +353,7 @@ cmake-build-release/
 CMakeFiles/
 CMakeCache.txt
 cmake_install.cmake
+install_manifest.txt
 #object files
 *.[oa]
 *.gcov
