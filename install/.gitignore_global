@@ -349,6 +349,7 @@ ETAGS
 #cmake
 cmake-build-debug/
 cmake-build-release/
+*.cbp
 .cxx/
 CMakeFiles/
 CMakeCache.txt
