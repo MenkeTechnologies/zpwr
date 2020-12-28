@@ -67,6 +67,8 @@ export LESS="-M -N -R -K -F -X"
 
 if [[ -z "$TMUX" ]]; then
     export TERM="xterm-256color"
+else
+    export NCURSES_NO_UTF8_ACS=1
 fi
 #}}}***********************************************************
 
