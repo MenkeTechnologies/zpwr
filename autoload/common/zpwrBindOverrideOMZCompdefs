@@ -14,6 +14,7 @@ function zpwrBindOverrideOMZCompdefs(){
     _comps[ksh]=_ksh
     _comps[tcsh]=_tcsh
     _comps[csh]=_tcsh
+    _comps[pmap]=_pmap
 
     compdef _git-clone gcl
     compdef _zcommand_mult zm zd zg
