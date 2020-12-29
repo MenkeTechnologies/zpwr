@@ -19,8 +19,8 @@ my $exe_bat_exists = grep -x "$_/$exe_bat", @PATH;
 my $exe        = 'pygmentize';
 my $exe_exists = grep -x "$_/$exe", @PATH;
 
-my $colorizer        = $ENV{COLORIZER};
-my $PYGMENTIZE_COLOR = $ENV{PYGMENTIZE_COLOR};
+my $colorizer        = $ENV{ZPWR_COLORIZER};
+my $PYGMENTIZE_COLOR = $ENV{ZPWR_PYGMENTIZE_COLOR};
 
 #expand $var
 $PYGMENTIZE_COLOR =~ s/(\$\w+)/$1/eeg;
