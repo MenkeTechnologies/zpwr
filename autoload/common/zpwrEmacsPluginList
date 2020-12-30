@@ -5,11 +5,12 @@ function ___zpwrEmacsPluginList(){
     emulate -L zsh
     setopt nullglob
 
-    local dirs
+    local -aU dirs
 
     dirs=(
         "$HOME/.emacs.d/.cache/quelpa/build/"*(/)
         "$HOME/.emacs.d/elpa/"*(/)
+        "$HOME/.emacs.d/elpa/develop/"*(/)
     )
 
     (($#dirs)) && command ls -d $dirs 2> /dev/null

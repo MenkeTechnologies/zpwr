@@ -4,7 +4,7 @@ function ___zpwrVimPluginList(){
 
     emulate -L zsh
     setopt nullglob
-    local dirs
+    local -aU dirs
 
     dirs=(
         "$HOME/.vim/bundle/"*(/)
