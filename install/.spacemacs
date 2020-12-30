@@ -33,7 +33,7 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(perl5
      typescript
      go
      windows-scripts
@@ -47,9 +47,23 @@ values."
      latex
      erc
      ruby
+     csv
+     lua
+     ocaml
+     swift
+     erlang
+     haskell
+     ruby-on-rails
+     ansible
+     asm
+     react
+     django
+     scala
      git
      docker
+     terraform
      search-engine
+     elixir
      github
      rust
      c-c++
@@ -67,6 +81,8 @@ values."
      slack
      nginx
      clojure
+     emacs-lisp
+     common-lisp
      html
      osx
      org
