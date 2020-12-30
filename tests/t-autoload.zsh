@@ -26,6 +26,14 @@
     assert "$output" contains push
 }
 
+@test 'zpwr bannercounts' {
+    run zpwr bannercounts
+    assert $state equals 0
+    assert "$output" is_not_empty
+    assert "$output" contains fetch
+    assert "$output" contains push
+}
+
 @test 'zpwr ps' {
     run zpwr ps &>/dev/null
     assert $state equals 0
@@ -83,6 +91,7 @@
     assert "$output" contains .sh
     assert "$output" contains about.sh
 }
+
 @test 'zpwrListVerbs poll' {
     run zpwr verbslist &>/dev/null
     assert $state equals 0
@@ -132,6 +141,15 @@
     assert "$output" contains zs
 }
 
+@test 'exists ze fails' {
+    run exists ze &>/dev/null
+    assert $state equals 127
+}
+
+@test 'zpwrExists ze' {
+    run zpwrExists ze &>/dev/null
+    assert $state equals 0
+}
 
 @test 'zs' {
     zs &>/dev/null
@@ -148,6 +166,18 @@
 @test 'ztm' {
     ztm &>/dev/null
     [[ "$PWD" == "$ZPWR_TMUX" ]]
+    assert $? equals 0
+}
+
+@test 'zalf' {
+    zalf &>/dev/null
+    [[ "$PWD" == "$ZPWR_AUTOLOAD_FZF" ]]
+    assert $? equals 0
+}
+
+@test 'zalc' {
+    zalc &>/dev/null
+    [[ "$PWD" == "$ZPWR_AUTOLOAD_COMMON" ]]
     assert $? equals 0
 }
 
