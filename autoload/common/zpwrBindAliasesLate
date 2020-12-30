@@ -116,7 +116,8 @@ function zpwrBindAliasesLate(){
     alias conf='builtin cd $ZPWR; ${=ZPWR_VIM} $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
     alias etok='builtin cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;zpwrClearList;zpwrIsGitDir && git diff HEAD'
     alias econf='builtin cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias zpt='builtin cd $ZPWR_TEST; ${=ZPWR_VIM} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias zvt='builtin cd $ZPWR_TEST; ${=ZPWR_VIM} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias zet='builtin cd $ZPWR_TEST; ${=ZPWR_EMACS_CLIENT} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
     #}}}***********************************************************
 
     alias deleteTab="sed '/^[\x20\x09]*$/d'"

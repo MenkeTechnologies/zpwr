@@ -47,7 +47,7 @@ function zpwrBindVerbs(){
             copy*|paste*)
                 zpwrClipboardVerbs+=("$k:$v")
                 ;;
-            env*|*search)
+            ev*|env*|*search)
                 zpwrSearchVerbs+=("$k:$v")
                 ;;
             update*)
