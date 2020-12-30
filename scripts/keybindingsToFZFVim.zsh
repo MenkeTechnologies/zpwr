@@ -36,7 +36,6 @@ if [[ $ZPWR_USE_NEOVIM == true ]]; then
     else
         cmd=vim
     fi
-    cmd=nvim
 else
     cmd=vim
 fi
