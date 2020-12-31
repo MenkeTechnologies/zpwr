@@ -54,12 +54,21 @@
     assert $state equals 0
 }
 
-@test 'local/.tokens.sh syntax check' {
-    if [[ -f $TOKENS_FILE ]]; then
-        run zsh -n $TOKENS_FILE
+@test 'ZPWR_TOKEN_PRE syntax check' {
+    if [[ -f $ZPWR_TOKEN_PRE ]]; then
+        run zsh -n $ZPWR_TOKEN_POST
         assert $state equals 0
     else
-        skip "where is TOKENS_FILE $TOKENS_FILE? $(ls -l local)"
+        skip "where is ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'?"
+    fi
+}
+
+@test 'ZPWR_TOKEN_POST syntax check' {
+    if [[ -f $ZPWR_TOKEN_POST ]]; then
+        run zsh -n $ZPWR_TOKEN_POST
+        assert $state equals 0
+    else
+        skip "where is ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST '?"
     fi
 }
 

@@ -22,10 +22,11 @@ while [[ ! -f "$zpwrBaseDir/.zpwr_root" ]]; do
     fi
 done
 
-if ! source "$zpwrBaseDir/scripts/init.sh" "$zpwrBaseDir"; then
-    echo "Could not source zpwrBaseDir '$zpwrBaseDir/scripts/init.sh'."
+if ! test -f "$zpwrBaseDir/scripts/init.sh"; then
+    echo "Could not find zpwrBaseDir '$zpwrBaseDir/scripts/init.sh'."
     exit 1
 fi
+
 ZPWR="$zpwrBaseDir"
 unset zpwrBaseDir
 
@@ -39,7 +40,6 @@ ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 ZPWR_AUTOLOAD="$ZPWR/autoload"
 TEST_FILE=tests/testfile
-TOKENS_FILE=local/.tokens.sh
 
 fpath=($ZPWR_AUTOLOAD/*(/) $fpath)
 autoload -z $ZPWR_AUTOLOAD/*/*(.:t)
@@ -48,13 +48,19 @@ if [[ ! -f $ZPWR_ENV_FILE ]]; then
     error "$ZPWR_ENV_FILE does not exist"
 fi
 
-load $ZPWR_RE_ENV_FILE
+load $ZPWR_ENV_FILE
 
 if [[ ! -f $ZPWR_RE_ENV_FILE ]]; then
     error "$ZPWR_RE_ENV_FILE does not exist"
 fi
 
 load $ZPWR_RE_ENV_FILE
+
+if [[ ! -f $ZPWR_LIB ]]; then
+    error "$ZPWR_LIB does not exist"
+fi
+
+load $ZPWR_LIB
 
 if [[ ! -f $ZPWR_ALIAS_FILE ]]; then
     error "$ZPWR_ALIAS_FILE does not exist"
@@ -67,11 +73,5 @@ if [[ ! -f $ZPWR_VERBS_FILE ]]; then
 fi
 
 load $ZPWR_VERBS_FILE
-
-if [[ ! -f $ZPWR_LIB ]]; then
-    error "$ZPWR_LIB does not exist"
-fi
-
-load $ZPWR_LIB
 
 setopt nullglob
