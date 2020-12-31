@@ -268,7 +268,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[taillog]='lo=tail -F \$ZPWR_LOGFILE'
     ZPWR_VERBS[test]='tru=run all zpwr tests'
     ZPWR_VERBS[tests]='tru=run all zpwr tests'
-    ZPWR_VERBS[timer]='timer=timer one or more commands'
+    ZPWR_VERBS[timer]='zpwrTimer=timer one or more commands'
     ZPWR_VERBS[to]='to=toggle external ip'
     ZPWR_VERBS[tokens]='tok=vim the .tokens.sh file'
     ZPWR_VERBS[toggle]='to=toggle external ip'
