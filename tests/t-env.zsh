@@ -255,6 +255,12 @@
     assert $state equals 0
 }
 
+@test 'ZPWR_COMMIT_STYLE' {
+
+    run test -n "$ZPWR_COMMIT_STYLE"
+    assert $state equals 0
+}
+
 @test 'ZPWR_CORRECT' {
 
     run test -n "$ZPWR_CORRECT"
@@ -272,6 +278,18 @@
     run test -n "$ZPWR_CROSS_OS"
     assert $state equals 0
     run test -f "$ZPWR_CROSS_OS"
+    assert $state equals 0
+}
+
+@test 'ZPWR_D' {
+
+    run test -n "$ZPWR_D"
+    assert $state equals 0
+}
+
+@test 'ZPWR_DEBUG' {
+
+    run test -n "$ZPWR_DEBUG"
     assert $state equals 0
 }
 
@@ -406,9 +424,17 @@
     assert $state equals 0
 }
 
+@test 'ZPWR_FOKED_DIR typo' {
+
+    run test -n "$ZPWR_FOKED_DIR"
+    assert $state equals 1
+}
+
 @test 'ZPWR_FORKED_DIR' {
 
     run test -n "$ZPWR_FORKED_DIR"
+    assert $state equals 0
+    run test -d "$ZPWR_FORKED_DIR"
     assert $state equals 0
 }
 
@@ -465,6 +491,11 @@
 @test 'ZPWR_INSTALL' {
 
     run test -d "$ZPWR_INSTALL"
+    assert $state equals 0
+}
+
+@test 'ZPWR_LEARN' {
+    run test -n "$ZPWR_LEARN"
     assert $state equals 0
 }
 
@@ -553,6 +584,14 @@
     assert $state equals 0
 }
 
+@test 'ZPWR_SCRIPTS_MAC' {
+
+    run test -n "$ZPWR_SCRIPTS_MAC"
+    assert $state equals 0
+    run test -d "$ZPWR_SCRIPTS_MAC"
+    assert $state equals 0
+}
+
 @test 'ZPWR_TEST' {
 
     run test -n "$ZPWR_TEST"
@@ -592,6 +631,13 @@
 @test 'ZPWR_TRACE' {
 
     run test -n "$ZPWR_TRACE"
+    assert $state equals 0
+}
+
+
+@test 'ZPWR_USE_NEOVIM' {
+
+    run test -n "$ZPWR_USE_NEOVIM"
     assert $state equals 0
 }
 

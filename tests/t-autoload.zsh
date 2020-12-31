@@ -43,6 +43,13 @@
     assert "$output" contains "$out"
 }
 
+@test 'zpwr timer' {
+    run zpwr timer pwd
+    assert $state equals 0
+    assert "$output" is_not_empty
+    assert "$output" contains "$PWD"
+}
+
 @test 'zpwrListVerbs count' {
     run zpwr verbscount &>/dev/null
     assert $state equals 0
@@ -147,6 +154,11 @@
 }
 
 @test 'zpwrExists ze' {
+    run zpwrExists zesfadf &>/dev/null
+    assert $state equals 1
+}
+
+@test 'zpwrExists ze' {
     run zpwrExists ze &>/dev/null
     assert $state equals 0
 }
@@ -178,6 +190,12 @@
 @test 'zalc' {
     zalc &>/dev/null
     [[ "$PWD" == "$ZPWR_AUTOLOAD_COMMON" ]]
+    assert $? equals 0
+}
+
+@test 'zalo' {
+    zalo &>/dev/null
+    [[ "$PWD" == "$ZPWR_AUTOLOAD_COMPS" ]]
     assert $? equals 0
 }
 
