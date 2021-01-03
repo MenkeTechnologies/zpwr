@@ -47,10 +47,10 @@ python3 -c 'import pip' && {
         needSudoBase=false
     fi
     if [[ "$needSudoBase" == true ]]; then
-        zpwrPrettyPrint "Outdated Pip3 list with sudo: $needSudoBase"
-        outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+        zpwrPrettyPrint "Outdated Pip3 list with sudo needed: $needSudoBase"
+        outdated=$(sudo -EH python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     else
-        zpwrPrettyPrint "Outdated Pip3 list with no sudo: $needSudoBase"
+        zpwrPrettyPrint "Outdated Pip3 list with sudo needed: $needSudoBase"
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     fi
 
@@ -65,9 +65,9 @@ python3 -c 'import pip' && {
 
         if [[ "$zpwrNeedSudo" == true ]]; then
             zpwrPrettyPrint "sudo needed: $zpwrNeedSudo for $package at $installDir"
-            sudo -E python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
+            sudo -EH python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         else
-            zpwrPrettyPrint "false sudo needed: $zpwrNeedSudo for $package at $installDir"
+            zpwrPrettyPrint "sudo needed: $zpwrNeedSudo for $package at $installDir"
             python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         fi
 
@@ -76,9 +76,9 @@ python3 -c 'import pip' && {
     if [[ "$needSudoBase" == true ]]; then
         zpwrPrettyPrint "Updating Pip3 with sudo needed: $needSudoBase"
         #update pip itself
-        sudo -E python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+        sudo -EH python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     else
-        zpwrPrettyPrint "Updating Pip3 needed: $needSudoBase"
+        zpwrPrettyPrint "Updating Pip3 with sudo needed: $needSudoBase"
         #update pip itself
         python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     fi
@@ -97,10 +97,10 @@ zpwrCommandExists python2 && python2 -c 'import pip' && {
     fi
 
     if [[ "$needSudoBase" == true ]]; then
-        zpwrPrettyPrint "Outdated Pip2 list with sudo: $needSudoBase"
-        outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+        zpwrPrettyPrint "Outdated Pip2 list with sudo needed: $needSudoBase"
+        outdated=$(sudo -EH python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     else
-        zpwrPrettyPrint "Outdated Pip2 list with no sudo: $needSudoBase"
+        zpwrPrettyPrint "Outdated Pip2 list with sudo needed: $needSudoBase"
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     fi
 
@@ -114,7 +114,7 @@ zpwrCommandExists python2 && python2 -c 'import pip' && {
 
         if [[ "$zpwrNeedSudo" == true ]]; then
             zpwrPrettyPrint "sudo needed: $zpwrNeedSudo for $package at $installDir"
-            sudo -E python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
+            sudo -EH python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
         else
             zpwrPrettyPrint "false sudo needed: $zpwrNeedSudo for $package at $installDir"
             python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
@@ -125,7 +125,7 @@ zpwrCommandExists python2 && python2 -c 'import pip' && {
     if [[ "$needSudoBase" == true ]]; then
         zpwrPrettyPrint "Updating Pip2 with sudo needed: $needSudoBase"
         #update pip itself
-        sudo -E python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+        sudo -EH python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
     else
         zpwrPrettyPrint "Updating Pip2 with sudo needed: $needSudoBase"
         #update pip itself
