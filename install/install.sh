@@ -421,7 +421,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
             zpwrPrettyPrintBox "Updating dependency list"
             zpwrInstallerRefresh "$distroFamily"
             zpwrPrettyPrintBox "Installing java"
-            brew cask install java
+            brew install --cask java
             zpwrPrettyPrintBox "Checking for curl before rustup install"
             zpwrExists curl || zpwrInstallerUpdate curl mac
             cargoinstall
@@ -440,7 +440,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         zpwrPrettyPrintBox "Tapping Homebrew fonts"
         brew tap homebrew/cask-fonts
         zpwrPrettyPrintBox "Installing hack nerd font"
-        brew cask install font-hack-nerd-font
+        brew install --cask font-hack-nerd-font
 
         zpwrPrettyPrintBox "Installing meteor"
         curl https://install.meteor.com/ | sh
