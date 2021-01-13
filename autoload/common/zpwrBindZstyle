@@ -311,7 +311,7 @@ zstyle ':completion:*:files' ignored-patterns '*.'
 #**************************************************************
 #not working for zpwr subcommands
 zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort false
-zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg|z|zs|f):*:*' group-order zdir options argument-rest globbed-files files fasd-file fasd last-ten
+zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg|z|zs|f):*:*' group-order options argument-rest globbed-files files fasd-file fasd zdir last-ten
 
 zstyle ':completion::megacomplete:zpwr-gitedittag::commit-tags' sort false
 
