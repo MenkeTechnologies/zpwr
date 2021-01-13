@@ -46,14 +46,17 @@ function __f(){
     fi
     local cmd ret
     if zpwrExists fasd;then
-        _alternative 'files:directory:_path_files -g "*(-D/)"' &&
+        _alternative \
+            'files:directory:_path_files -g "*(-D/)"' &&
             ret=0 || ret=1
 
         if [[ $ret == 1 ]] && (( $#words > 1 )); then
             _alternative \
-            'zdir:z ranked directories:__z_dirs_comp' \
             'fasd:fasd ranked directories:__fasd_dirs_comp' \
+            'zdir:z ranked directories:__z_dirs_comp' \
+            'files:directory:_path_files -g "*(-D/)"' \
             'directory-stack:directory stack:_directory_stack'
+            return 1
         fi
     else
         _alternative 'files:directory:_path_files -g "*(-D/)"' &&
@@ -61,7 +64,9 @@ function __f(){
         if [[ $ret == 1 ]] && (( $#words > 1 )); then
             _alternative \
             'zdir:z ranked directories:__z_dirs_comp' \
+            'files:directory:_path_files -g "*(-D/)"' \
             'directory-stack:directory stack:_directory_stack'
+            return 1
         fi
     fi
 
