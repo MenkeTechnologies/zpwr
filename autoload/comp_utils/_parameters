@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___parameters() {
+function _parameters() {
 
     # function_body
     local expl pattern tmp pfilt i maxLen ary
@@ -47,4 +47,4 @@ function ___parameters() {
 
 }
 
-___parameters "$@"
+_parameters "$@"
