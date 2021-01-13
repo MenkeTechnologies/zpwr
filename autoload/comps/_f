@@ -35,7 +35,7 @@ __fasd_dirs_comp(){
     _describe -t fasd "fasd ranked directories" __fasd_dirs
 }
 
-function __f(){
+function _f(){
 
     if zpwrExists zshz; then
         zcmd=zshz
@@ -71,4 +71,4 @@ function __f(){
     fi
 
 }
-__f "$@"
+_f "$@"

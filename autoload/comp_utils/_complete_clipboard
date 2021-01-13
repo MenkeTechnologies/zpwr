@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function __complete_clipboard(){
+function _complete_clipboard(){
 
     local clipboard_str
     clipboard_str="$(${=ZPWR_PASTE_CMD} 2>/dev/null)"
@@ -11,4 +11,4 @@ function __complete_clipboard(){
     fi
 }
 
-__complete_clipboard "$@"
+_complete_clipboard "$@"

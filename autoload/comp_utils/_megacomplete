@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___megacomplete(){
+function _megacomplete(){
 
     local -a whitelist_tmux_completion
     whitelist_tmux_completion=(ping ping6 nslookup nmap dig digs host mtr traceroute tracepath whois torsocks proxychains nc netcat curl wget http)
@@ -44,4 +44,4 @@ function ___megacomplete(){
     return $ret
 }
 
-___megacomplete "$@"
+_megacomplete "$@"
