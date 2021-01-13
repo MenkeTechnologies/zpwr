@@ -7,13 +7,19 @@ zpwrExists(){
     command grep -qv "suffix alias" 2>/dev/null
 }
 
+ZPWR_HAS_Z=true
+ZPWR_HAS_FASD=true
+
 if zpwrExists zshz; then
     zcmd=zshz
 elif zpwrExists _z; then
     zcmd=_z
 else
-    printf "where is the zshz or _z command?" >&2
-    return 1
+    ZPWR_HAS_Z=false
+fi
+
+if ! zpwrExists fasd;then
+    ZPWR_HAS_FASD=false
 fi
 
 __z_dirs_comp(){
@@ -37,37 +43,35 @@ __fasd_dirs_comp(){
 
 function _f(){
 
-    if zpwrExists zshz; then
-        zcmd=zshz
-    elif zpwrExists _z; then
-        zcmd=_z
-    else
-        return 1
-    fi
-    local cmd ret
-    if zpwrExists fasd;then
-        _alternative \
-            'files:directory:_path_files -g "*(-D/)"' &&
-            ret=0 || ret=1
+    _alternative \
+        'files:directory:_path_files -g "*(-D/)"' && return 0
 
-        if [[ $ret == 1 ]] && (( $#words > 1 )); then
-            _alternative \
-            'fasd:fasd ranked directories:__fasd_dirs_comp' \
-            'zdir:z ranked directories:__z_dirs_comp' \
-            'files:directory:_path_files -g "*(-D/)"' \
-            'directory-stack:directory stack:_directory_stack'
-            return 1
+    local cmd ret
+
+    if (( $#words > 1 )); then
+        if [[ "$ZPWR_HAS_FASD" == true ]]; then
+
+            if [[ "$ZPWR_HAS_Z" == true ]]; then
+                    _alternative \
+                    'fasd:fasd ranked directories:__fasd_dirs_comp' \
+                    'zdir:z ranked directories:__z_dirs_comp' \
+                    'directory-stack:directory stack:_directory_stack'
+                else
+                    _alternative \
+                    'fasd:fasd ranked directories:__fasd_dirs_comp' \
+                    'directory-stack:directory stack:_directory_stack'
+            fi
+        else
+            if [[ "$ZPWR_HAS_Z" == true ]]; then
+                    _alternative \
+                    'zdir:z ranked directories:__z_dirs_comp' \
+                    'directory-stack:directory stack:_directory_stack'
+                else
+                    _alternative \
+                    'directory-stack:directory stack:_directory_stack'
+            fi
         fi
-    else
-        _alternative 'files:directory:_path_files -g "*(-D/)"' &&
-            ret=0 || ret=1
-        if [[ $ret == 1 ]] && (( $#words > 1 )); then
-            _alternative \
-            'zdir:z ranked directories:__z_dirs_comp' \
-            'files:directory:_path_files -g "*(-D/)"' \
-            'directory-stack:directory stack:_directory_stack'
-            return 1
-        fi
+        return 1
     fi
 
 }
