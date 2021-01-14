@@ -1,25 +1,76 @@
 #compdef c
-function __c(){
+
+ZPWR_HAS_Z=true
+ZPWR_HAS_FASD=true
+
+if zpwrExists zshz; then
+    zcmd=zshz
+elif zpwrExists _z; then
+    zcmd=_z
+else
+    ZPWR_HAS_Z=false
+fi
+
+if ! zpwrExists fasd;then
+    ZPWR_HAS_FASD=false
+fi
+
+__z_dirs_comp(){
+
+    if ! (( $+__z_dirs )) && ! _retrieve_cache z_dirs_cache; then
+        __z_dirs=( $($zcmd -l |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l') )
+        _store_cache z_dirs_cache __z_dirs
+    fi
+
+    _describe -t zdir "z ranked directories" __z_dirs
+}
+__fasd_dirs_comp(){
+
+    if ! (( $+__fasd_dirs )) && ! _retrieve_cache fasd_dirs_cache; then
+        __fasd_dirs=( $(fasd -d |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$} }for@l') )
+        _store_cache fasd_dirs_cache __fasd_dirs
+    fi
+
+    _describe -t fasd "fasd ranked directories" __fasd_dirs
+}
+
+__fasd_files_comp(){
+
+    if ! (( $+__fasd_files )) && ! _retrieve_cache fasd_files_cache; then
+        __fasd_files=( $(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l') )
+        _store_cache fasd_files_cache __fasd_files
+    fi
+
+    _describe -t fasd-file "fasd ranked files" __fasd_files
+}
+
+function _c(){
+
+    _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' && return 0
 
     local ret
 
-    if zpwrExists fasd;then
-        _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' &&
-        ret=0 || ret=1
-        if [[ $ret == 1 ]] && (( $#words > 1 )); then
-            _alternative \
-            'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))' \
-            'fasd-file:fasd ranked files:(('"$(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))' \
-            'fasd:fasd ranked directories:(('"$(fasd -d |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l')"'))'
+    if (( $#words > 1 )); then
+        if [[ "$ZPWR_HAS_FASD" == true ]]; then
+
+            if [[ "$ZPWR_HAS_Z" == true ]]; then
+                _alternative \
+                'fasd:fasd ranked directories:__fasd_dirs_comp' \
+                'fasd:fasd ranked files:__fasd_files_comp' \
+                'zdir:z ranked directories:__z_dirs_comp'
+            else
+                _alternative \
+                'fasd:fasd ranked files:__fasd_files_comp' \
+                'fasd:fasd ranked directories:__fasd_dirs_comp'
+            fi
+        else
+            if [[ "$ZPWR_HAS_Z" == true ]]; then
+                _alternative \
+                'zdir:z ranked directories:__z_dirs_comp' 
+            fi
         fi
-    else
-        _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' &&
-        ret=0 || ret=1
-        if [[ $ret == 1 ]] && (( $#words > 1 )); then
-            _alternative \
-            'zdir:z ranked directories:(('"$($zcmd -l |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l')"'))'
-        fi
+        return 1
     fi
 }
 
-__c "$@"
+_c "$@"
