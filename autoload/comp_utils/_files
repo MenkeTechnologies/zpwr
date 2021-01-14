@@ -159,32 +159,6 @@ done
 _alternative \
     'files:files:__origfiles'
 
-__fasd_files_comp(){
-
-    local tag='fasd-file'
-    local curcontext="force-cache$curcontext"
-
-    if ! (( $+__fasd_files )) && ! _retrieve_cache fasd_files_cache; then
-        __fasd_files=( $(fasd -f |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$} }for@l') )
-        _store_cache fasd_files_cache __fasd_files
-    fi
-
-    _describe -t $tag "fasd ranked files" __fasd_files
-}
-__fasd_dirs_comp(){
-
-    local tag='fasd'
-    local curcontext="force-cache$curcontext"
-
-
-    if ! (( $+__fasd_dirs )) && ! _retrieve_cache fasd_dirs_cache; then
-        __fasd_dirs=( $(fasd -d |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$} }for@l') )
-        _store_cache fasd_dirs_cache __fasd_dirs
-    fi
-
-    _describe -t $tag "fasd ranked directories" __fasd_dirs
-}
-
 #if didn't find file then search fasd
 if [[ $original_ret == 1 ]] && (( $#words > 1 )) && type -ap -- fasd &>/dev/null; then
     #if not an option
