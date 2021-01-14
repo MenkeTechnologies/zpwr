@@ -3,6 +3,8 @@
 
 __z_dirs_comp(){
 
+    local curcontext="force-cache$curcontext"
+
     if ! (( $+__z_dirs )) && ! _retrieve_cache z_dirs_cache; then
         __z_dirs=( $($zcmd -l |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l') )
         _store_cache z_dirs_cache __z_dirs
