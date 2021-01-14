@@ -15,35 +15,6 @@ if ! zpwrExists fasd;then
     ZPWR_HAS_FASD=false
 fi
 
-__z_dirs_comp(){
-
-    if ! (( $+__z_dirs )) && ! _retrieve_cache z_dirs_cache; then
-        __z_dirs=( $($zcmd -l |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l') )
-        _store_cache z_dirs_cache __z_dirs
-    fi
-
-    _describe -t zdir "z ranked directories" __z_dirs
-}
-__fasd_dirs_comp(){
-
-    if ! (( $+__fasd_dirs )) && ! _retrieve_cache fasd_dirs_cache; then
-        __fasd_dirs=( $(fasd -d |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$} }for@l') )
-        _store_cache fasd_dirs_cache __fasd_dirs
-    fi
-
-    _describe -t fasd "fasd ranked directories" __fasd_dirs
-}
-
-__fasd_files_comp(){
-
-    if ! (( $+__fasd_files )) && ! _retrieve_cache fasd_files_cache; then
-        __fasd_files=( $(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l') )
-        _store_cache fasd_files_cache __fasd_files
-    fi
-
-    _describe -t fasd-file "fasd ranked files" __fasd_files
-}
-
 function _c(){
 
     _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' && return 0

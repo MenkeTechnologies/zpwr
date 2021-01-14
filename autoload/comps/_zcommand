@@ -1,0 +1,57 @@
+#compdef z zshz
+
+local curcontext="$curcontext" state state_descr line expl arguments zcmd tmp ret=1
+
+ZPWR_HAS_Z=true
+ZPWR_HAS_FASD=true
+
+if zpwrExists zshz; then
+    zcmd=zshz
+elif zpwrExists _z; then
+    zcmd=_z
+else
+    ZPWR_HAS_Z=false
+fi
+
+if ! zpwrExists fasd;then
+    ZPWR_HAS_FASD=false
+fi
+
+arguments=(
+       '-c[restrict matches to subdirectories of the current directory]'
+       '-e[echo the best match, do not cd]'
+       '-h[show a brief help message]'
+       '-l[list only]'
+       '-r[match by rank only]'
+       '-t[match by recent access only]'
+       '-x[remove the current directory from the datafile]'
+        '1:command:->command'
+        '*::options:->options'
+)
+
+
+__display(){
+    if zpwrExists fasd;then
+        _alternative \
+            'zdir:z ranked directories:__z_dirs_comp' \
+            'fasd:fasd ranked directories:__fasd_dirs_comp' \
+            'files:directory:_path_files -g ".*(/) *(/)"'
+    else
+        _alternative \
+            'zdir:z ranked directories:__z_dirs_comp' \
+            'files:directory:_path_files -g ".*(/) *(/)"'
+    fi
+}
+
+_arguments -s -C : $arguments && return 0
+
+case "$state" in
+    command)
+        __display && return 0
+        ;;
+    options)
+        _message "no more arguments for z"
+        return 1
+        ;;
+esac
+

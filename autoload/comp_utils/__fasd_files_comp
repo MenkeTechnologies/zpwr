@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+__fasd_files_comp(){
+
+    if ! (( $+__fasd_files )) && ! _retrieve_cache fasd_files_cache; then
+        __fasd_files=( $(fasd -f |& perl -e '@l=reverse<>;do{print "$2\\:".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l') )
+        _store_cache fasd_files_cache __fasd_files
+    fi
+
+    _describe -t fasd-file "fasd ranked files" __fasd_files
+}
+
+__fasd_files_comp "$@"

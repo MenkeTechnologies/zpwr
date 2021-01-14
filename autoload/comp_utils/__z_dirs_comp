@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+__z_dirs_comp(){
+
+    if ! (( $+__z_dirs )) && ! _retrieve_cache z_dirs_cache; then
+        __z_dirs=( $($zcmd -l |& perl -e '@l=reverse<>;do{print "$2:$1 " if m{^\s*(\S+)\s+(\S+)\s*$}}for@l') )
+        _store_cache z_dirs_cache __z_dirs
+    fi
+
+    _describe -t zdir "z ranked directories" __z_dirs
+}
+
+__z_dirs_comp "$@"
