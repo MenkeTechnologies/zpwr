@@ -24,8 +24,10 @@ function ___hc(){
     git init
 
     if hub create "$repoName"; then
-        echo "# $repoName" > README.md
-        echo "# created by $ZPWR_GITHUB_ACCOUNT" >> README.md
+        if [[ ! -f README.md ]]; then
+            echo "# $repoName" > README.md
+            echo "# created by $ZPWR_GITHUB_ACCOUNT" >> README.md
+        fi
         git add .
         git commit -m "first commit"
         git push --set-upstream origin master

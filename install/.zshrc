@@ -262,24 +262,25 @@ ZPWR_OMZ_COMPS=(
 
 # conditional plugins
 
-if zpwrExists docker; then
+if zpwrCommandExists docker; then
     ZPWR_OMZ_COMPS+=(docker)
     ZPWR_GH_PLUGINS+=(
-    MenkeTechnologies/zsh-docker-aliases
+        MenkeTechnologies/zsh-docker-aliases
     )
 fi
 
-if zpwrExists docker-compose; then
+if zpwrCommandExists docker-compose; then
     ZPWR_OMZ_PLUGINS+=(docker-compose)
 fi
 
-zpwrExists kubectl && ZPWR_GH_PLUGINS+=(MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion)
+zpwrCommandExists kubectl && ZPWR_GH_PLUGINS+=(MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion)
+zpwrCommandExists oc && ZPWR_GH_PLUGINS+=(MenkeTechnologies/zsh-openshift-aliases)
 
-zpwrExists systemctl && ZPWR_OMZ_PLUGINS+=(systemd)
-zpwrExists subl && ZPWR_OMZ_PLUGINS+=(sublime)
-zpwrExists svn && ZPWR_OMZ_PLUGINS+=(svn)
+zpwrCommandExists systemctl && ZPWR_OMZ_PLUGINS+=(systemd)
+zpwrCommandExists subl && ZPWR_OMZ_PLUGINS+=(sublime)
+zpwrCommandExists svn && ZPWR_OMZ_PLUGINS+=(svn)
 
-zpwrExists adb && ZPWR_OMZ_COMPS+=(adb)
+zpwrCommandExists adb && ZPWR_OMZ_COMPS+=(adb)
 
 if [[ $ZPWR_OS_TYPE == debian ]]; then
     ZPWR_OMZ_PLUGINS+=(debian)
@@ -289,7 +290,7 @@ elif [[ $ZPWR_OS_TYPE == darwin ]]; then
     ZPWR_OMZ_PLUGINS+=(xcode)
 fi
 
-zpwrExists rails && ZPWR_OMZ_PLUGINS+=(rails)
+zpwrCommandExists rails && ZPWR_OMZ_PLUGINS+=(rails)
 
 if [[ $ZPWR_LEARN != false ]]; then
     ZPWR_GH_PLUGINS=(MenkeTechnologies/zsh-learn $ZPWR_GH_PLUGINS)
