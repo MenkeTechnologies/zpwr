@@ -2,35 +2,7 @@
 # vim: set ft=sh:
 # redefine global zsh completion function called at first parameter
 # adding global aliases and files
-__aliases(){
 
-    local k v
-
-    if ( ! (( $+__aliases_ary )) || _cache_invalid alias_cache ) && ! _retrieve_cache alias_cache; then
-        for k v in ${(kv)aliases}; do
-            __aliases_ary+=($k:"${(q)v}")
-        done
-
-        _store_cache alias_cache __aliases_ary
-    fi
-
-    _describe -t aliases alias __aliases_ary
-}
-__galiases(){
-
-    local galiasesAry
-    local k v
-
-    if ( ! (( $+__galiases_ary )) || _cache_invalid galias_cache ) && ! _retrieve_cache galias_cache; then
-        for k v in ${(kv)galiases}; do
-            __galiases_ary+=($k:"${(q)v}")
-        done
-
-        _store_cache galias_cache __galiases_ary
-    fi
-
-    _describe -t global-aliases 'global alias' __galiases_ary
-}
 function _command_names(){
 
     # The option `-e' if given as the first argument says that we should
@@ -59,8 +31,8 @@ function _command_names(){
 
     defs=( 
         "$defs[@]"
-        'global-aliases:global alias:__galiases'
-        'aliases:alias:__aliases'
+        'global-aliases:global alias:__zpwr_galiases'
+        'aliases:alias:__zpwr_aliases'
         "functions:shell function:compadd -k 'functions$ffilt'"
         'builtins:builtin command:compadd -Qk builtins'
         'suffix-aliases:suffix alias:_suffix_alias_files'

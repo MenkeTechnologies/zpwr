@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+__zpwr_aliases(){
+
+    local k v
+
+    if ( ! (( $+__aliases_ary )) || _cache_invalid alias_cache ) && ! _retrieve_cache alias_cache; then
+        for k v in ${(kv)aliases}; do
+            __aliases_ary+=($k:"${(q)v}")
+        done
+
+        _store_cache alias_cache __aliases_ary
+    fi
+
+    _describe -t aliases alias __aliases_ary
+}
+
+__zpwr_aliases "$@"
