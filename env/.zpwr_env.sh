@@ -161,7 +161,7 @@ export ZPWR_TRACE=false
 # use nvim not vim
 export ZPWR_USE_NEOVIM=true
 # delay between shell start and compinit
-export ZPWR_ZINIT_COMPINIT_DELAY=8
+export ZPWR_ZINIT_COMPINIT_DELAY=0
 
 # set to false if this file is sourced during remote execution with no ZPWR env
 test -z "$ZPWR_REMOTE" && export ZPWR_REMOTE=false
