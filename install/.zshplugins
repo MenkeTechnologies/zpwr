@@ -8,6 +8,7 @@ MenkeTechnologies/kubectl-aliases
 MenkeTechnologies/revolver
 MenkeTechnologies/zpwrp10k
 MenkeTechnologies/zsh-better-npm-completion
+MenkeTechnologies/zsh-cargo-completion
 MenkeTechnologies/zsh-cpan-completion
 MenkeTechnologies/zsh-docker-aliases
 MenkeTechnologies/zsh-expand
@@ -17,6 +18,7 @@ MenkeTechnologies/zsh-git-repo-cache
 MenkeTechnologies/zsh-learn
 MenkeTechnologies/zsh-more-completions
 MenkeTechnologies/zsh-nginx
+MenkeTechnologies/zsh-openshift-aliases
 MenkeTechnologies/zsh-pip-description-completion
 MenkeTechnologies/zsh-sed-sub
 MenkeTechnologies/zsh-sudo
