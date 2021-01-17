@@ -76,10 +76,10 @@ function zpwrDedupPaths() {
 }
 
 # duplicates slow down searching
-declare -aU fpath
-declare -aU path
+builtin declare -aU fpath
+builtin declare -aU path
 # FPATH should not be exported
-declare +x FPATH
+builtin declare +x FPATH
 zpwrDedupPaths
 #}}}***********************************************************
 
@@ -91,21 +91,23 @@ else
     0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
 fi
 
+# convert $0 to abs path
 0="${${(M)0:#/*}:-$PWD/$0}"
-export ZPWR="${0:A:h:h}"
-export ZPWR_ENV="$ZPWR/env"
 
-export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
-export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
+builtin export ZPWR="${0:A:h:h}"
+builtin export ZPWR_ENV="$ZPWR/env"
+
+builtin export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
+builtin export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 
 # map to hold global data between scripts
-declare -Ag ZPWR_VARS
+builtin declare -Ag ZPWR_VARS
 # map to store each zpwr verb, key is the verbname, value is cmd=description
-declare -Ag ZPWR_VERBS
+builtin declare -Ag ZPWR_VERBS
 
 function zpwrInitEnv() {
-    source "$ZPWR_ENV_FILE" || {
-        echo "where is ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
+    builtin source "$ZPWR_ENV_FILE" || {
+        builtin echo "where is ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
         return 1
     }
 }
@@ -113,26 +115,26 @@ function zpwrInitEnv() {
 zpwrInitEnv
 
 if [[ ! -d "$ZPWR_LOCAL_TEMP" ]]; then
-    mkdir -p "$ZPWR_LOCAL_TEMP"
+    command mkdir -p "$ZPWR_LOCAL_TEMP"
 fi
 
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
         zpwrPrettyPrintBox "Installing zinit"
-        mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
-        git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
+        command mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
+        command git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
     fi
 fi
 #}}}***********************************************************
 
 #{{{                    MARK:non ZPWR Exports
 #**************************************************************
-export LC_ALL="en_US.UTF-8"
+builtin export LC_ALL="en_US.UTF-8"
 # stop delay when entering normal mode
-export KEYTIMEOUT=1
-export SHELL="$(which zsh)"
+builtin export KEYTIMEOUT=1
+builtin export SHELL="$(which zsh)"
 # default vi-backward-delete-char does not delete paste insert point
-export AUTOPAIR_BKSPC_WIDGET='.backward-delete-char'
+builtin export AUTOPAIR_BKSPC_WIDGET='.backward-delete-char'
 #}}}***********************************************************
 
 #{{{                    MARK:OMZ env vars
@@ -164,14 +166,14 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 HIST_STAMPS="mm/dd/yyyy"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+builtin export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 #get rid of mercurial prompt
 hg_prompt_info(){}
 # User configuration
 
 # Compilation flags
-export ARCHFLAGS="-arch x86_64"
+builtin export ARCHFLAGS="-arch x86_64"
 
 ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
 
@@ -301,15 +303,16 @@ fi
 #{{{                    MARK:source tokens pre OMZ
 #**************************************************************
 function zpwrTokenPre() {
-    if test -f "$ZPWR_TOKEN_PRE"; then
-        if ! source "$ZPWR_TOKEN_PRE"; then
+
+    if builtin test -f "$ZPWR_TOKEN_PRE"; then
+        if ! builtin source "$ZPWR_TOKEN_PRE"; then
             zpwrLoggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
         fi
     else
-        touch "$ZPWR_TOKEN_PRE"
+        command touch "$ZPWR_TOKEN_PRE"
     fi
 
-    source "$ZPWR_RE_ENV_FILE" || {
+    builtin source "$ZPWR_RE_ENV_FILE" || {
         echo "where is ZPWR_RE_ENV_FILE$ZPWR_RE_ENV_FILE" >&2
     }
 }
@@ -318,7 +321,7 @@ zpwrTokenPre
 
 if [[ $ZPWR_PROFILING == true ]]; then
     # profiling startup
-    zmodload zsh/zprof
+    builtin zmodload zsh/zprof
 fi
 #}}}***********************************************************
 
@@ -343,17 +346,17 @@ fi
 
 #{{{                    MARK:FPATH setup
 #**************************************************************
-if [[ $ZPWR_DEBUG == true ]]; then
-    echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
-fi
+#if [[ $ZPWR_DEBUG == true ]]; then
+    #echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
+#fi
 
 fpath=($ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_AUTOLOAD_COMP_UTILS $ZPWR_COMPS $fpath)
 #}}}***********************************************************
 #
 #{{{                    MARK:Autoload
 #**************************************************************
-autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t) $ZPWR_AUTOLOAD_COMP_UTILS/*(.:t)
-autoload -Uz zrecompile zm zargs compinit
+builtin autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t) $ZPWR_AUTOLOAD_COMP_UTILS/*(.:t)
+builtin autoload -Uz zrecompile zm zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     ZPWR_OMZ_PLUGINS+=(brew osx)
@@ -361,43 +364,44 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
 
     # add ZPWR autoload dirs to fpath
     fpath=($ZPWR_AUTOLOAD_DARWIN $fpath)
-    autoload -z $ZPWR_AUTOLOAD_DARWIN/*(.:t)
+    builtin autoload -z $ZPWR_AUTOLOAD_DARWIN/*(.:t)
     # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
     # add ZPWR autoload dirs to fpath
     fpath=($ZPWR_AUTOLOAD_LINUX $fpath)
-    autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
+    builtin autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
     zpwrLinuxPlugins
 else
     # unix
     # add ZPWR autoload dirs to fpath
     fpath=($ZPWR_AUTOLOAD_LINUX $fpath)
-    autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
+    builtin autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
 fi
 #}}}***********************************************************
 
 #{{{                    MARK:Pre plugin manager
 #**************************************************************
-bindkey -v
+# vi mode
+builtin bindkey -v
 
-if [[ $ZPWR_DEBUG == true ]]; then
-    echo "pre: $fpath" >> "$ZPWR_LOGFILE"
-fi
+#if [[ $ZPWR_DEBUG == true ]]; then
+    #echo "pre: $fpath" >> "$ZPWR_LOGFILE"
+#fi
 
 function zpwrTokenPost() {
     # source .tokens.sh to override with user functions
-    if test -f "$ZPWR_TOKEN_POST"; then
-        if ! source "$ZPWR_TOKEN_POST"; then
+    if builtin test -f "$ZPWR_TOKEN_POST"; then
+        if ! builtin source "$ZPWR_TOKEN_POST"; then
             zpwrLoggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
         fi
     else
         touch "$ZPWR_TOKEN_POST"
     fi
 
-    source "$ZPWR_RE_ENV_FILE" || {
-        echo "where is $ZPWR_RE_ENV_FILE" >&2
+    builtin source "$ZPWR_RE_ENV_FILE" || {
+        builtin echo "where is $ZPWR_RE_ENV_FILE" >&2
     }
 }
 #}}}***********************************************************
@@ -405,10 +409,10 @@ function zpwrTokenPost() {
 #{{{                    MARK:ZPWR_PLUGIN_MANAGER
 #**************************************************************
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
-    declare -A ZINIT
+    builtin declare -A ZINIT
     ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
     ZINIT[COMPINIT_OPTS]='-C'
-    source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
+    builtin source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
     # tell zinit where compsy cache file is
 
     #override zicompinit
@@ -418,7 +422,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     # late load prompt and call precmd fns first thing after prompt loads
 
-    zinit ice lucid nocd nocompile wait'!' atinit'zpwrBindPowerline;zpwrBindPowerlineTmux;zpwrBindDirs' atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null;zpwrBindPreCmd; _p9k_precmd &> /dev/null'
+    zinit ice lucid nocd nocompile wait'!' atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs' atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPreCmd; _p9k_precmd &> /dev/null'
     zinit load MenkeTechnologies/zpwrp10k
 
     # late
@@ -444,7 +448,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         zinit load $p
     done
 
-    unset p
+    builtin unset p
 
 
     zinit ice lucid nocompile wait atinit='zpwrBindOverrideOMZ;zpwrBindForGit'
@@ -462,7 +466,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     # override OMZ/plugin aliases with own aliases
     zinit ice lucid nocompile wait'0a' \
-    atload'zpwrBindAliasesLate;zpwrCreateAliasCache;zpwrBindAliasesZshLate;zpwrBindOverrideZLE;'
+    atload'zpwrBindAliasesLate; zpwrCreateAliasCache; zpwrBindAliasesZshLate; zpwrBindOverrideZLE'
     zinit load \
         MenkeTechnologies/zsh-expand
 
@@ -474,26 +478,30 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
 
     # late , must come before syntax highlight
-    zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start;zpwrBindFZFLate;zpwrBindVerbs;zpwrBindZstyle'
+    zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start; zpwrBindFZFLate; zpwrBindVerbs; zpwrBindZstyle'
     zinit load \
         zsh-users/zsh-autosuggestions
 
-    # late , must be last to load
+    # late loaded, must be last to load
     # runs ZLE keybindings to override other late loaders
-    # runs compinit
-    zinit ice lucid nocompile wait'0d' atinit'zpwrBindPenultimate;zpwrBindFinal;zpwrTokenPost'
+    zinit ice lucid nocompile wait'0d' atinit'zpwrBindPenultimate; zpwrBindFinal; zpwrTokenPost'
     zinit load \
-        zdharma/fast-syntax-highlighting
+        MenkeTechnologies/zsh-zinit-final
 
     # use fpath NOT symlinks into ~/.zinit/completions
     # to have more-completions be last resort and not overrride system completions
-    zinit ice lucid nocompile wait'0e' nocompletions atload='zpwrDedupPaths'
+    zinit ice lucid nocompile wait'0e' nocompletions
     zinit load \
         MenkeTechnologies/zsh-more-completions
 
-    zinit ice lucid nocompile nocd as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAY" atinit'zicompinit; zicdreplay;zpwrBindOverrideOMZCompdefs'
+    zinit ice lucid nocompile nocd as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAYf" atinit'zicompinit; zicdreplay;zpwrBindOverrideOMZCompdefs'
     zinit light \
         MenkeTechnologies/zsh-zinit-final
+
+    zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}g" nocompletions atload='zpwrDedupPaths'
+    zinit load \
+        zdharma/fast-syntax-highlighting
+
 elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
 
     plugins+=(
@@ -502,27 +510,29 @@ elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
         ${ZPWR_GH_PLUGINS[@]}
     )
 
-    source "$ZPWR_PLUGIN_MANAGER_HOME/oh-my-zsh.sh"
+    builtin source "$ZPWR_PLUGIN_MANAGER_HOME/oh-my-zsh.sh"
 
 else
 
     zpwrLoggErr "Unsupported ZPWR_PLUGIN_MANAGER '$ZPWR_PLUGIN_MANAGER'!"
+    if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
+        # Load only from secure directories
+        compinit -i -C -d "${ZSH_COMPDUMP}"
+    else
+        # If the user wants it, load from all found directories
+        compinit -u -C -d "${ZSH_COMPDUMP}"
+    fi
 fi
 
-if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
-  # Load only from secure directories
-  compinit -i -C -d "${ZSH_COMPDUMP}"
-else
-  # If the user wants it, load from all found directories
-  compinit -u -C -d "${ZSH_COMPDUMP}"
-fi
 
-if [[ $ZPWR_DEBUG == true ]]; then
-    echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
-fi
+
+#if [[ $ZPWR_DEBUG == true ]]; then
+    #echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
+#fi
+#
 # You may need to manually set your language environment
 # has all aliases and functions common to bourne like shells
-test -s "$ZPWR_ALIAS_FILE" && source "$ZPWR_ALIAS_FILE"
+builtin test -s "$ZPWR_ALIAS_FILE" && builtin source "$ZPWR_ALIAS_FILE"
 #}}}***********************************************************
 
 #{{{                    MARK:Override OMZ config
@@ -539,9 +549,9 @@ zpwrStaleZcompdump
 #fi
 
 # change history size in memory
-export HISTSIZE=999999999
+builtin export HISTSIZE=999999999
 # change history file size
-export SAVEHIST="$HISTSIZE"
+builtin export SAVEHIST="$HISTSIZE"
 #}}}***********************************************************
 
 #{{{                    MARK:Zpwr verbs
@@ -558,136 +568,138 @@ export SAVEHIST="$HISTSIZE"
 #{{{                    MARK:Setopt Options
 #**************************************************************
 # fish like menu select search
-zmodload -i zsh/complist
-setopt menucomplete
+builtin zmodload -i zsh/complist
+
+builtin setopt menucomplete
 
 # allow '' escape
-setopt rcquotes
+builtin setopt rcquotes
 
 # Allow comments even in interactive shells (especially for Muness)
-setopt interactive_comments
+builtin setopt interactive_comments
 
 # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
-setopt auto_cd
+builtin setopt auto_cd
 
 # if argument to cd is the name of a parameter whose value is a valid directory, it will become the current directory
-setopt cdablevarS
+builtin setopt cdablevarS
 
 # don't push multiple copies of the same directory onto the directory stack
-setopt pushd_ignore_dups
+builtin setopt pushd_ignore_dups
 
 # treat #, ~, and ^ as part of patterns for filename generation
-setopt extended_glob
+builtin setopt extended_glob
 
 # Allow multiple terminal sessions to all append to one zsh command history
-setopt append_history
+builtin setopt append_history
 
 # save timestamp of command and duration
-setopt extended_history
+builtin setopt extended_history
 
 # Add comamnds as they are typed, don't wait until shell exit
-setopt inc_append_history
+builtin setopt inc_append_history
 
 # when trimming history, lose oldest duplicates first
-setopt hist_expire_dups_first
+builtin setopt hist_expire_dups_first
 
 # Do not write events to history that are duplicates of previous events
-setopt hist_ignore_dups
+builtin setopt hist_ignore_dups
 
 # do not execute, just expand history
-setopt hist_verify
+builtin setopt hist_verify
 
 # remove command line from history list when first character on the line is a space
-setopt hist_ignore_space
+builtin setopt hist_ignore_space
 
 # When searching history don't display results already cycled through twice
-setopt hist_find_no_dups
+builtin setopt hist_find_no_dups
 
 # Remove extra blanks from each command line being added to history
-setopt hist_reduce_blanks
+builtin setopt hist_reduce_blanks
 
 # do not execute, just expand history
-unsetopt hist_verify
+builtin unsetopt hist_verify
+
 # imports new commands and appends typed commands to history
-setopt share_history
+builtin setopt share_history
 
 # When completing from the middle of a word, move the cursor to the end of the word
-setopt always_to_end
+builtin setopt always_to_end
 
 # show completion menu on successive tab press. needs unsetop menu_complete to work
-#setopt auto_menu
+# builtin setopt auto_menu
 
 # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
-setopt auto_name_dirs
+builtin setopt auto_name_dirs
 
 # Allow completion from within a word/phrase
-setopt complete_in_word
+builtin setopt complete_in_word
 
 # spelling correction for commands
-#setopt correct
+#builtin setopt correct
 
 # spelling correction for arguments
-#setopt correct_all
+#builtin setopt correct_all
 
 # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
-setopt prompt_subst
+builtin setopt prompt_subst
 
 # only show the rprompt on the current prompt
-setopt transient_rprompt
+builtin setopt transient_rprompt
 
 # perform implicit tees or cats when multiple redirections are attempted
-setopt multios
+builtin setopt multios
 
 # dot files included in regular globs
-setopt glob_dots
+builtin setopt glob_dots
 
 # no glob in all globs then error
-setopt csh_null_glob
+builtin setopt csh_null_glob
 
 # silence all bells and beeps
-setopt no_beep
+builtin setopt no_beep
 
 # > file creates file
 # NOT compatible with $(<<EOF) used in comp caches
-setopt no_sh_null_cmd
+builtin setopt no_sh_null_cmd
 
 # allow unquoted globs to pass through
-setopt no_bad_pattern
+builtin setopt no_bad_pattern
 
 # globs sorted numerically
-setopt numeric_glob_sort
+builtin setopt numeric_glob_sort
 
 # global substitution is case insensitive
-setopt nocaseglob
+builtin setopt nocaseglob
 
 # filename completion after =
-setopt magic_equal_subst
+builtin setopt magic_equal_subst
 
 if [[ "$ZPWR_AUTO_SELECT" == true ]]; then
     #auto select first item of menu completion
-    setopt menu_complete
+    builtin setopt menu_complete
 fi
 
 #array expandsion include prefix
-setopt rc_expand_param
+builtin setopt rc_expand_param
 
 # display octal and hex like C
-setopt cbases
+builtin setopt cbases
 
 # any failing command in pipeline fails entire pipeline
-setopt pipefail 2>/dev/null
+builtin setopt pipefail 2>/dev/null
 
 # search PATH for zsh <script>
-setopt pathscript
+builtin setopt pathscript
 
 # more compact menu completion
-setopt list_packed
+builtin setopt list_packed
 
 # increase max size for directory stack
-export DIRSTACKSIZE=20
+builtin export DIRSTACKSIZE=20
 
 # so we can bind ^S and ^Q
-setopt no_flow_control
+builtin setopt no_flow_control
 #stty stop undef
 #stty start undef
 #}}}***********************************************************
@@ -700,13 +712,13 @@ setopt no_flow_control
 #{{{                    MARK:Custom Compsys Functions
 #**************************************************************
 # list of completers to use
-zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
-# zstyle ':completion:*:*:*:*:functions' ignored-patterns
+builtin zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
+#builtin zstyle ':completion:*:*:*:*:functions' ignored-patterns
 
 if [[ "$ZPWR_INTERACTIVE_MENU_SELECT" == true ]]; then
-    zstyle ':completion:*:*:*:*:*' menu select=0 interactive
+   builtin zstyle ':completion:*:*:*:*:*' menu select=0 interactive
 else
-    zstyle ':completion:*:*:*:*:*' menu select=0
+   builtin zstyle ':completion:*:*:*:*:*' menu select=0
 fi
 #}}}***********************************************************
 
@@ -733,8 +745,8 @@ fi
 
 #{{{                    MARK:Early bind Immediate Usage
 #**************************************************************
-alias zp='zpwr'
-alias tm='tmux'
+builtin alias zp='zpwr'
+builtin alias tm='tmux'
 #}}}***********************************************************
 
 #{{{                    MARK:Finish
@@ -748,7 +760,7 @@ ZPWR_VARS[startTimestamp]="$startTimestamp"
 ZPWR_VARS[endTimestamp]="$endTimestamp"
 ZPWR_VARS[startupTimeMs]="$startupTimeMs"
 
-unset startupTimeMs startTimestamp endTimestamp
+builtin unset startupTimeMs startTimestamp endTimestamp
 
 if [[ "$ZPWR_PROFILING" == true ]]; then
     zprof
