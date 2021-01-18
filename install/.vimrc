@@ -1162,6 +1162,8 @@ command! -bang -nargs=* Paste call PasteClip()
 vnoremap <silent> <C-B> :call CopyClip()<CR>`>
 vnoremap <RightMouse> :call CopyClip()<CR>`>
 
+vnoremap <silent><leader>g :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`>
+
 function! ExtractFoldMarker() range
     let l:wordUnderCursor = s:getVisualSelection()
 
