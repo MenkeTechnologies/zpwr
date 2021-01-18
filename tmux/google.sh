@@ -39,23 +39,23 @@ ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 if [[ "$1" == "google" ]]; then
     case "$ZPWR_OS_TYPE" in
         darwin*)
-            out="$(pbpaste | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            out="$(pbpaste | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
             ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
-                out="$(xclip -o -sel clip | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+                out="$(xclip -o -sel clip | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
             else
-                out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+                out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
             fi
             ;;
         cygwin*)
-            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
             ;;
         msys*)
-            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
             ;;
         *)
-            out="$(xclip -o -sel clip | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            out="$(xclip -o -sel clip | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
             ;;
     esac
 else
