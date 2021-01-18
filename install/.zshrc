@@ -62,7 +62,7 @@
 
 #{{{                    MARK:start timestamp
 #**************************************************************
-zmodload zsh/datetime
+builtin zmodload zsh/datetime
 startTimestamp=$EPOCHREALTIME
 #}}}***********************************************************
 
@@ -175,7 +175,7 @@ hg_prompt_info(){}
 # Compilation flags
 builtin export ARCHFLAGS="-arch x86_64"
 
-ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd)
+ZSH_AUTOSUGGEST_STRATEGY=( match_prev_cmd )
 
 ZSH_DISABLE_COMPFIX=true
 #}}}***********************************************************
@@ -265,37 +265,35 @@ ZPWR_OMZ_COMPS=(
 # conditional plugins
 
 if zpwrCommandExists docker; then
-    ZPWR_OMZ_COMPS+=(docker)
-    ZPWR_GH_PLUGINS+=(
-        MenkeTechnologies/zsh-docker-aliases
-    )
+    ZPWR_OMZ_COMPS+=( docker )
+    ZPWR_GH_PLUGINS+=( MenkeTechnologies/zsh-docker-aliases )
 fi
 
 if zpwrCommandExists docker-compose; then
-    ZPWR_OMZ_PLUGINS+=(docker-compose)
+    ZPWR_OMZ_PLUGINS+=( docker-compose )
 fi
 
-zpwrCommandExists kubectl && ZPWR_GH_PLUGINS+=(MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion)
-zpwrCommandExists oc && ZPWR_GH_PLUGINS+=(MenkeTechnologies/zsh-openshift-aliases)
+zpwrCommandExists kubectl && ZPWR_GH_PLUGINS+=( MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion )
+zpwrCommandExists oc && ZPWR_GH_PLUGINS+=( MenkeTechnologies/zsh-openshift-aliases )
 
-zpwrCommandExists systemctl && ZPWR_OMZ_PLUGINS+=(systemd)
-zpwrCommandExists subl && ZPWR_OMZ_PLUGINS+=(sublime)
-zpwrCommandExists svn && ZPWR_OMZ_PLUGINS+=(svn)
+zpwrCommandExists systemctl && ZPWR_OMZ_PLUGINS+=( systemd )
+zpwrCommandExists subl && ZPWR_OMZ_PLUGINS+=( sublime )
+zpwrCommandExists svn && ZPWR_OMZ_PLUGINS+=( svn )
 
-zpwrCommandExists adb && ZPWR_OMZ_COMPS+=(adb)
+zpwrCommandExists adb && ZPWR_OMZ_COMPS+=( adb )
 
 if [[ $ZPWR_OS_TYPE == debian ]]; then
-    ZPWR_OMZ_PLUGINS+=(debian)
+    ZPWR_OMZ_PLUGINS+=( debian )
 elif [[ $ZPWR_OS_TYPE == ubuntu ]]; then
-    ZPWR_OMZ_PLUGINS+=(ubuntu)
+    ZPWR_OMZ_PLUGINS+=( ubuntu )
 elif [[ $ZPWR_OS_TYPE == darwin ]]; then
-    ZPWR_OMZ_PLUGINS+=(xcode)
+    ZPWR_OMZ_PLUGINS+=( xcode )
 fi
 
-zpwrCommandExists rails && ZPWR_OMZ_PLUGINS+=(rails)
+zpwrCommandExists rails && ZPWR_OMZ_PLUGINS+=( rails )
 
 if [[ $ZPWR_LEARN != false ]]; then
-    ZPWR_GH_PLUGINS=(MenkeTechnologies/zsh-learn $ZPWR_GH_PLUGINS)
+    ZPWR_GH_PLUGINS=( MenkeTechnologies/zsh-learn $ZPWR_GH_PLUGINS )
 fi
 
 #}}}***********************************************************
@@ -328,19 +326,19 @@ fi
 #{{{                    MARK:post first token
 #**************************************************************
 if [[ ! -d $ZPWR ]]; then
-    mkdir -p $ZPWR
+    command mkdir -p $ZPWR
 fi
 
 if [[ ! -d $ZPWR_INSTALL ]]; then
-    mkdir -p $ZPWR_INSTALL
+    command mkdir -p $ZPWR_INSTALL
 fi
 
 if [[ ! -d $ZPWR_TMUX_LOCAL ]]; then
-    mkdir -p $ZPWR_TMUX_LOCAL
+    command mkdir -p $ZPWR_TMUX_LOCAL
 fi
 
 if [[ ! -d $ZPWR_LOCAL ]]; then
-    mkdir -p $ZPWR_LOCAL
+    command mkdir -p $ZPWR_LOCAL
 fi
 #}}}***********************************************************
 
@@ -359,24 +357,24 @@ builtin autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t) $ZPWR_AUTOLOAD_COMP_UTILS/*(.:t
 builtin autoload -Uz zrecompile zm zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
-    ZPWR_OMZ_PLUGINS+=(brew osx)
-    ZPWR_OMZ_COMPS+=(pod)
+    ZPWR_OMZ_PLUGINS+=( brew osx )
+    ZPWR_OMZ_COMPS+=( pod )
 
     # add ZPWR autoload dirs to fpath
-    fpath=($ZPWR_AUTOLOAD_DARWIN $fpath)
+    fpath=( $ZPWR_AUTOLOAD_DARWIN $fpath )
     builtin autoload -z $ZPWR_AUTOLOAD_DARWIN/*(.:t)
     # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
     # add ZPWR autoload dirs to fpath
-    fpath=($ZPWR_AUTOLOAD_LINUX $fpath)
+    fpath=( $ZPWR_AUTOLOAD_LINUX $fpath )
     builtin autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
     zpwrLinuxPlugins
 else
     # unix
     # add ZPWR autoload dirs to fpath
-    fpath=($ZPWR_AUTOLOAD_LINUX $fpath)
+    fpath=( $ZPWR_AUTOLOAD_LINUX $fpath )
     builtin autoload -z $ZPWR_AUTOLOAD_LINUX/*(.:t)
 fi
 #}}}***********************************************************
@@ -422,7 +420,8 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     # late load prompt and call precmd fns first thing after prompt loads
 
-    zinit ice lucid nocd nocompile wait'!' atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs' atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPreCmd; _p9k_precmd &> /dev/null'
+    zinit ice lucid nocd nocompile wait'!' atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs' \
+        atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPreCmd; _p9k_precmd &> /dev/null'
     zinit load MenkeTechnologies/zpwrp10k
 
     # late
@@ -478,7 +477,8 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
 
     # late , must come before syntax highlight
-    zinit ice lucid nocompile wait'0c' atload'_zsh_autosuggest_start; zpwrBindFZFLate; zpwrBindVerbs; zpwrBindZstyle'
+    zinit ice lucid nocompile wait'0c' \
+        atload'_zsh_autosuggest_start; zpwrBindFZFLate; zpwrBindVerbs; zpwrBindZstyle'
     zinit load \
         zsh-users/zsh-autosuggestions
 
@@ -494,7 +494,8 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zinit load \
         MenkeTechnologies/zsh-more-completions
 
-    zinit ice lucid nocompile nocd as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAYf" atinit'zicompinit; zicdreplay;zpwrBindOverrideOMZCompdefs'
+    zinit ice lucid nocompile nocd as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAYf" \
+        atinit'zicompinit; zicdreplay;zpwrBindOverrideOMZCompdefs'
     zinit light \
         MenkeTechnologies/zsh-zinit-final
 
@@ -512,16 +513,17 @@ elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
 
     builtin source "$ZPWR_PLUGIN_MANAGER_HOME/oh-my-zsh.sh"
 
+    if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
+        # Load only from secure directories
+        compinit -i -C -d "$ZSH_COMPDUMP"
+    else
+        # If the user wants it, load from all found directories
+        compinit -u -C -d "$ZSH_COMPDUMP"
+    fi
+
 else
 
     zpwrLoggErr "Unsupported ZPWR_PLUGIN_MANAGER '$ZPWR_PLUGIN_MANAGER'!"
-    if [[ $ZSH_DISABLE_COMPFIX != true ]]; then
-        # Load only from secure directories
-        compinit -i -C -d "${ZSH_COMPDUMP}"
-    else
-        # If the user wants it, load from all found directories
-        compinit -u -C -d "${ZSH_COMPDUMP}"
-    fi
 fi
 
 
@@ -570,10 +572,8 @@ builtin export SAVEHIST="$HISTSIZE"
 # fish like menu select search
 builtin zmodload -i zsh/complist
 
-builtin setopt menucomplete
-
 # allow '' escape
-builtin setopt rcquotes
+builtin setopt rc_quotes
 
 # Allow comments even in interactive shells (especially for Muness)
 builtin setopt interactive_comments
@@ -582,7 +582,7 @@ builtin setopt interactive_comments
 builtin setopt auto_cd
 
 # if argument to cd is the name of a parameter whose value is a valid directory, it will become the current directory
-builtin setopt cdablevarS
+builtin setopt cdable_vars
 
 # don't push multiple copies of the same directory onto the directory stack
 builtin setopt pushd_ignore_dups
@@ -626,7 +626,7 @@ builtin setopt share_history
 # When completing from the middle of a word, move the cursor to the end of the word
 builtin setopt always_to_end
 
-# show completion menu on successive tab press. needs unsetop menu_complete to work
+# show completion menu on successive tab press. needs unsetopt menu_complete to work
 # builtin setopt auto_menu
 
 # any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
@@ -700,8 +700,6 @@ builtin export DIRSTACKSIZE=20
 
 # so we can bind ^S and ^Q
 builtin setopt no_flow_control
-#stty stop undef
-#stty start undef
 #}}}***********************************************************
 
 #{{{                    MARK:FZF
@@ -753,7 +751,7 @@ builtin alias tm='tmux'
 #**************************************************************
 
 endTimestamp=$EPOCHREALTIME
-startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))
+startupTimeMs=$( printf "%.3f" $(( endTimestamp - startTimestamp )) )
 zpwrLoggDebug "zsh startup took $startupTimeMs seconds"
 
 ZPWR_VARS[startTimestamp]="$startTimestamp"
