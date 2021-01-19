@@ -88,7 +88,7 @@ fi
     echo
 
 
-} | escapeRemover.pl | perl -ne 'print if m{\S+}' > "$ZPWR_TEMPFILE"
+} | escapeRemover.pl | perl -ne 'do{$_=~ s@$ENV{HOME}@~@g;print} if m{\S+}' > "$ZPWR_TEMPFILE"
 
 
 command rm "$ZPWR_TEMPFILE1"

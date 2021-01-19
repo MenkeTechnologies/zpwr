@@ -916,10 +916,11 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       c                    new-window ```
 - ``` bind-key    -T prefix       d                    detach-client ```
 - ``` bind-key    -T prefix       f                    command-prompt "find-window -Z -- '%%'" ```
-- ``` bind-key    -T prefix       h                    kill-pane ```
+- ``` bind-key -r -T prefix       h                    select-pane -L ```
 - ``` bind-key    -T prefix       i                    display-message ```
-- ``` bind-key -r -T prefix       k                    switch-client -p ```
-- ``` bind-key -r -T prefix       l                    switch-client -n ```
+- ``` bind-key -r -T prefix       j                    select-pane -D ```
+- ``` bind-key -r -T prefix       k                    select-pane -U ```
+- ``` bind-key -r -T prefix       l                    select-pane -R ```
 - ``` bind-key    -T prefix       m                    select-pane -m ```
 - ``` bind-key -r -T prefix       n                    next-window ```
 - ``` bind-key    -T prefix       o                    select-pane -t :.+ ```
@@ -929,7 +930,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       s                    choose-tree -Zs ```
 - ``` bind-key    -T prefix       t                    clock-mode ```
 - ``` bind-key    -T prefix       w                    choose-tree -Z ```
-- ``` bind-key    -T prefix       x                    confirm-before -p "kill-pane #P? (y/n)" kill-pane ```
+- ``` bind-key    -T prefix       x                    kill-pane ```
 - ``` bind-key    -T prefix       z                    resize-pane -Z ```
 - ``` bind-key -r -T prefix       \{                   rotate-window ```
 - ``` bind-key    -T prefix       |                    split-window -h ```
@@ -1004,7 +1005,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^H" autopair-delete ```
 - ``` bindkey -M viins "^I" fzf-completion ```
 - ``` bindkey -M viins "^J" accept-line ```
-- ``` bindkey -M viins "^K" learn ```
+- ``` bindkey -M viins "^K" zsh-learn-Learn ```
 - ``` bindkey -M viins "^L" clear-screen ```
 - ``` bindkey -M viins "^M" zpwrMagicEnter ```
 - ``` bindkey -M viins "^N" sudo-command-line ```
@@ -1071,14 +1072,11 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[OB" history-substring-search-down ```
 - ``` bindkey -M viins "^[OC" vi-forward-char ```
 - ``` bindkey -M viins "^[OD" vi-backward-char ```
-- ``` bindkey -M viins "^[OF" end-of-line ```
-- ``` bindkey -M viins "^[OH" beginning-of-line ```
 - ``` bindkey -M viins "^[OP" zpwrUp8widget ```
 - ``` bindkey -M viins "^[OQ" sub ```
 - ``` bindkey -M viins "^[OR" zpwrGetrcWidget ```
 - ``` bindkey -M viins "^[[1;2D" sub ```
 - ``` bindkey -M viins "^[[200~" bracketed-paste ```
-- ``` bindkey -M viins "^[[3~" delete-char ```
 - ``` bindkey -M viins "^[[5A" gacpCheckDiff ```
 - ``` bindkey -M viins "^[[5B" zpwrUpdater ```
 - ``` bindkey -M viins "^[[5C" zpwrTutsUpdate ```
@@ -1137,7 +1135,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^H" vi-backward-char ```
 - ``` bindkey -a "^I" zpwrExpandOrCompleteWithDots ```
 - ``` bindkey -a "^J" accept-line ```
-- ``` bindkey -a "^K" learn ```
+- ``` bindkey -a "^K" zsh-learn-Learn ```
 - ``` bindkey -a "^L" clear-screen ```
 - ``` bindkey -a "^M" zpwrMagicEnter ```
 - ``` bindkey -a "^N" down-history ```
@@ -2379,6 +2377,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` x  <Space>ef     :call ExtractFoldMarker()<CR> ```
 - ``` x  <Space>ev     :call ExtractVariableVisual()<CR> ```
 - ``` x  <Space>em     :call ExtractMethod()<CR> ```
+- ``` v  <Space>g    * :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`> ```
 - ```    <Space><Space>e   <Plug>(easymotion-bd-e) ```
 - ```    <Space><Space>w   <Plug>(easymotion-bd-w) ```
 - ``` x  <Space>x    * :normal mzg&`zzz<CR> ```
@@ -2468,18 +2467,18 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  <Plug>(MatchitVisualForward) * :<C-U>call matchit#Match_wrapper('',1,'v')<CR>m'gv`` ```
 - ``` v  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Fuel(v:count1)<CR> ```
 - ``` v  <Plug>(wildfire-water) * :<C-U>call wildfire#Water(v:count1)<CR> ```
-- ``` x  <Plug>unimpaired_xml_decode * <SNR>171_TransformSetup("xml_decode") ```
-- ``` x  <Plug>unimpaired_xml_encode * <SNR>171_TransformSetup("xml_encode") ```
-- ``` x  <Plug>unimpaired_url_decode * <SNR>171_TransformSetup("url_decode") ```
-- ``` x  <Plug>unimpaired_url_encode * <SNR>171_TransformSetup("url_encode") ```
-- ``` x  <Plug>unimpaired_string_decode * <SNR>171_TransformSetup("string_decode") ```
-- ``` x  <Plug>unimpaired_string_encode * <SNR>171_TransformSetup("string_encode") ```
-- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>171_MoveSelectionDown(v:count1)<CR> ```
-- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>171_MoveSelectionUp(v:count1)<CR> ```
-- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>171_Context(0)<CR> ```
-- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>171_Context(1)<CR> ```
-- ``` v  <Plug>VgSurround * :<C-U>call <SNR>170_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
-- ``` v  <Plug>VSurround * :<C-U>call <SNR>170_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
+- ``` x  <Plug>unimpaired_xml_decode * <SNR>170_TransformSetup("xml_decode") ```
+- ``` x  <Plug>unimpaired_xml_encode * <SNR>170_TransformSetup("xml_encode") ```
+- ``` x  <Plug>unimpaired_url_decode * <SNR>170_TransformSetup("url_decode") ```
+- ``` x  <Plug>unimpaired_url_encode * <SNR>170_TransformSetup("url_encode") ```
+- ``` x  <Plug>unimpaired_string_decode * <SNR>170_TransformSetup("string_decode") ```
+- ``` x  <Plug>unimpaired_string_encode * <SNR>170_TransformSetup("string_encode") ```
+- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>170_MoveSelectionDown(v:count1)<CR> ```
+- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>170_MoveSelectionUp(v:count1)<CR> ```
+- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>170_Context(0)<CR> ```
+- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>170_Context(1)<CR> ```
+- ``` v  <Plug>VgSurround * :<C-U>call <SNR>169_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
+- ``` v  <Plug>VSurround * :<C-U>call <SNR>169_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
 - ``` x  <Plug>SneakPrevious   <Plug>Sneak_, ```
 - ``` x  <Plug>SneakNext   <Plug>Sneak_; ```
 - ``` x  <Plug>(SneakStreakBackward)   <Plug>SneakLabel_S ```
@@ -2494,8 +2493,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` x  <Plug>Sneak_t * :<C-U>call sneak#wrap(visualmode(), 1, 0, 0, 0)<CR> ```
 - ``` x  <Plug>Sneak_F * :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 0)<CR> ```
 - ``` x  <Plug>Sneak_f * :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 0)<CR> ```
-- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>168_rpt(visualmode(), 1)<CR> ```
-- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>168_rpt(visualmode(), 0)<CR> ```
+- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>167_rpt(visualmode(), 1)<CR> ```
+- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>167_rpt(visualmode(), 0)<CR> ```
 - ``` x  <Plug>Sneak_S * :<C-U>call sneak#wrap(visualmode(), 2, 1, 2, 1)<CR> ```
 - ``` x  <Plug>Sneak_s * :<C-U>call sneak#wrap(visualmode(), 2, 0, 2, 1)<CR> ```
 - ``` x  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'v', 1, 1)<CR> ```
@@ -2813,4 +2812,4 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` c  <C-T>       * <SNR>159_transpose() ```
 - ``` c  <C-U>       * <SNR>159_ctrl_u() ```
 - ``` c  <C-X><C-A>  * <C-A> ```
-- ``` c  <C-Y>       * <C-R>- ```
+- ``` c  <C-Y>       * pumvisible() ? "\<C-Y>" : "\<C-R>-" ```
