@@ -106,7 +106,31 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # using tag name as group name so ordering the groups by tag name here
-zstyle ':completion:*' group-order c options commands aliases alias global-aliases suffix-aliases functions builtins reserved-words parameters argument-rest strings identifiers hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix corrections packages npm-search npm-cache remote-crate remote-gem remote-pip original globbed-files files fasd-file fasd zdir local-directories tmux contexts last-ten last-clip
+zstyle ':completion:*' group-order \
+    zpwr-regen \
+    zpwr-clean \
+    zpwr-travis \
+    zpwr-learn \
+    zpwr-search \
+    zpwr-env \
+    zpwr-update \
+    zpwr-cd \
+    zpwr-clipboard \
+    zpwr-emacs \
+    zpwr-vim \
+    zpwr-github \
+    zpwr-gitrepos \
+    zpwr-git \
+    zpwr-misc \
+    zpwr-forgit \
+    c options commands aliases alias global-aliases \
+    suffix-aliases functions builtins reserved-words parameters argument-rest \
+    strings identifiers hosts commits heads commit-tags heads-local heads-remote \
+    recent-branches tags commit-objects remote-branch-names-noprefix corrections \
+    packages npm-search npm-cache remote-crate remote-gem remote-pip original \
+    globbed-files files fasd-file fasd zdir local-directories tmux contexts \
+    last-ten \
+    last-clip
 
 # show command descriptions if available
 zstyle ':completion:*' extra-verbose yes
