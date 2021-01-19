@@ -106,7 +106,7 @@ zstyle ':completion:*' auto-description 'Specify: %d'
 zstyle ':completion:*:*:-subscript-:*' tag-order indexes parameters
 
 # using tag name as group name so ordering the groups by tag name here
-zstyle ':completion:*' group-order c options commands aliases global-aliases suffix-aliases functions builtins reserved-words parameters argument-rest strings identifiers hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix corrections original globbed-files files fasd-file fasd zdir local-directories tmux contexts last-ten
+zstyle ':completion:*' group-order c options commands aliases alias global-aliases suffix-aliases functions builtins reserved-words parameters argument-rest strings identifiers hosts commits heads commit-tags heads-local heads-remote recent-branches tags commit-objects remote-branch-names-noprefix corrections original globbed-files files fasd-file fasd zdir local-directories tmux contexts last-ten
 
 # show command descriptions if available
 zstyle ':completion:*' extra-verbose yes
@@ -152,6 +152,7 @@ if [[ $ZPWR_COLORS == true ]]; then
     zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
     zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
     zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=34;42;4'
+    zstyle ':completion:*:alias' list-colors '=(#b)(*)=1;30=34;42;4'
     zstyle ':completion:*:suffix-aliases' list-colors '=(#b)(*)=1;30=1;34;41;4'
     zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
     zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
