@@ -35,11 +35,11 @@ __display(){
         _alternative \
             'zdir:z ranked directories:__z_dirs_comp' \
             'fasd:fasd ranked directories:__fasd_dirs_comp' \
-            'files:directory:_path_files -g ".*(/) *(/)"'
+            'abs-directories:directory:_path_files -g ".*(/) *(/)"'
     else
         _alternative \
             'zdir:z ranked directories:__z_dirs_comp' \
-            'files:directory:_path_files -g ".*(/) *(/)"'
+            'abs-directories:directory:_path_files -g ".*(/) *(/)"'
     fi
 }
 
