@@ -332,6 +332,8 @@ inoremap <silent> <C-D><C-T> <C-O>:call TransposeWords()<CR>
 
 " rename word under caret
 nnoremap <Leader>g :%s@\C\<<C-r><C-w>\>@@g<Left><Left>
+
+vnoremap <Leader>g :'<,'>%s@\C\<<C-r><C-w>\>@@g<Left><Left>
 " rename word under caret with cursor at end of replacement word
 nnoremap <Leader>r :%s@\C\<<C-r><C-w>\>@<C-r><C-W>@g<Left><Left>
 
@@ -1048,22 +1050,22 @@ function! s:getVisualSelection()
     return join(lines, "\n")
 endfunction
 
-function! s:commonEV(lang, regex, name, wordUnderCursor)
+function! s:commonEV(lang, regex, name, wordsUnderCursor)
     let l:line=GetFirstCodeLineHash()
     exe "normal mz"
     exe '%sno@'.a:regex.'@$'.a:name.'@g'
-    if match(a:wordUnderCursor, '"') >= 0 || match(a:wordUnderCursor, "'") >= 0
+    if match(a:wordsUnderCursor, '"') >= 0 || match(a:wordsUnderCursor, "'") >= 0
         if a:lang == 'sh'
-            exe 'normal! '.(l:line+1).'GO'.a:name.'='.a:wordUnderCursor
+            exe 'normal! '.(l:line+1).'GO'.a:name.'='.a:wordsUnderCursor
         elseif a:lang == 'pl'
-            exe 'normal! '.(l:line+1).'GOmy $'.a:name.'='.a:wordUnderCursor.';'
+            exe 'normal! '.(l:line+1).'GOmy $'.a:name.'='.a:wordsUnderCursor.';'
 
         endif
     else
         if a:lang == 'sh'
-            exe 'normal! '.(l:line+1).'GO'.a:name.'="'.a:wordUnderCursor.'"'
+            exe 'normal! '.(l:line+1).'GO'.a:name.'="'.a:wordsUnderCursor.'"'
         elseif a:lang == 'pl'
-            exe 'normal! '.(l:line+1).'GOmy $'.a:name.'="'.a:wordUnderCursor.'";'
+            exe 'normal! '.(l:line+1).'GOmy $'.a:name.'="'.a:wordsUnderCursor.'";'
         endif
     endif
     exe "normal! V\<Esc>"
@@ -1071,8 +1073,8 @@ function! s:commonEV(lang, regex, name, wordUnderCursor)
 endfunction
 
 function! ExtractVariableVisual() range
-    let l:wordUnderCursor = s:getVisualSelection()
-    let l:name = inputdialog('Extract variable to replace visual __'.wordUnderCursor.'__:')
+    let l:wordsUnderCursor = s:getVisualSelection()
+    let l:name = inputdialog('Extract variable to replace visual __'.wordsUnderCursor.'__:')
 
     if l:name== ''
        return 1
@@ -1080,7 +1082,7 @@ function! ExtractVariableVisual() range
 
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:exeFileType=expand('%:e')
-    let l:regex=escape(l:wordUnderCursor, '/\')
+    let l:regex=escape(l:wordsUnderCursor, '/\')
     "echom '%sno@'.l:regex.'@$'.l:name."@g"
     let l:filename=expand('%:t')
     if l:filename == '.zshrc'
@@ -1089,14 +1091,14 @@ function! ExtractVariableVisual() range
 
     exe 'normal! `<'
     if l:exeFileType == 'sh' || l:exeFileType == 'zsh'
-        call s:commonEV('sh', l:regex, l:name, l:wordUnderCursor)
+        call s:commonEV('sh', l:regex, l:name, l:wordsUnderCursor)
     elseif l:exeFileType == 'pl'
-        call s:commonEV('pl', l:regex, l:name, l:wordUnderCursor)
+        call s:commonEV('pl', l:regex, l:name, l:wordsUnderCursor)
     elseif l:exeFileType == 'py'
         let l:line=GetFirstCodeLineHash()
         exe 'normal! mz'
         exe '%sno@'.l:regex.'@'.l:name.'@g'
-        exe 'normal! '.(l:line+1).'GO'.l:name.'='.l:wordUnderCursor
+        exe 'normal! '.(l:line+1).'GO'.l:name.'='.l:wordsUnderCursor
         exe 'normal! `z'
 
     elseif index(supportedTypes, l:exeFileType) < 0
@@ -1143,9 +1145,9 @@ let s:fileTypeToComment = {
             \  }
 
 function! CopyClip() range
-    let l:wordUnderCursor = s:getVisualSelection()
-    let l:len = len(split(l:wordUnderCursor, '\n'))
-    let l:stripped = Strip(l:wordUnderCursor)
+    let l:wordsUnderCursor = s:getVisualSelection()
+    let l:len = len(split(l:wordsUnderCursor, '\n'))
+    let l:stripped = Strip(l:wordsUnderCursor)
     "let @* = l:stripped
     call system($ZPWR_COPY_CMD, l:stripped)
     echom 'copied '.l:len.' to system clipboard'
@@ -1162,10 +1164,10 @@ command! -bang -nargs=* Paste call PasteClip()
 vnoremap <silent> <C-B> :call CopyClip()<CR>`>
 vnoremap <RightMouse> :call CopyClip()<CR>`>
 
-vnoremap <silent><leader>g :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`>
+vnoremap <silent>gs :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`>
 
 function! ExtractFoldMarker() range
-    let l:wordUnderCursor = s:getVisualSelection()
+    let l:wordsUnderCursor = s:getVisualSelection()
 
     let l:old=&formatoptions
     set formatoptions-=o
@@ -1201,8 +1203,8 @@ function! ExtractFoldMarker() range
 endfunction
 
 function! ExtractVariable()
-    let l:wordUnderCursor = expand("<cword>")
-    let l:name = inputdialog('Extract variable to replace __'.wordUnderCursor.'__:')
+    let l:wordsUnderCursor = expand("<cword>")
+    let l:name = inputdialog('Extract variable to replace __'.wordsUnderCursor.'__:')
 
     if l:name== ''
        return 1
@@ -1210,7 +1212,7 @@ function! ExtractVariable()
 
     let l:supportedTypes=['sh','zsh', 'pl', 'py']
     let l:exeFileType=expand('%:e')
-    let l:regex=fnameescape(l:wordUnderCursor)
+    let l:regex=fnameescape(l:wordsUnderCursor)
     "echom '%s@\<'.l:regex.'\>@$'.l:name."@g"
     let l:filename=expand('%:t')
     if l:filename == '.zshrc'
@@ -1221,7 +1223,7 @@ function! ExtractVariable()
         let l:line=GetFirstCodeLineHash()
         exe 'normal mz'
         exe '%s@\<'.l:regex.'\>@$'.l:name.'@g'
-        exe 'normal! '.(l:line+1).'GO'.l:name.'='.l:wordUnderCursor
+        exe 'normal! '.(l:line+1).'GO'.l:name.'='.l:wordsUnderCursor
         exe "normal! V\<Esc>"
         exe 'normal! `z'
 
@@ -1229,7 +1231,7 @@ function! ExtractVariable()
         let l:line=GetFirstCodeLineHash()
         exe 'normal mz'
         exe '%s@\<'.l:regex.'\>@$'.l:name.'@g'
-        exe 'normal! '.(l:line+1).'GOmy $'.l:name.'='.l:wordUnderCursor.';'
+        exe 'normal! '.(l:line+1).'GOmy $'.l:name.'='.l:wordsUnderCursor.';'
         exe "normal! V\<Esc>"
         exe 'normal! `zzz'
 
@@ -1237,7 +1239,7 @@ function! ExtractVariable()
         let l:line=GetFirstCodeLineHash()
         exe 'normal mz'
         exe '%s@\<'.l:regex.'\>@'.l:name.'@g'
-        exe 'normal! '.(l:line+1).'GO'.l:name.'='.l:wordUnderCursor
+        exe 'normal! '.(l:line+1).'GO'.l:name.'='.l:wordsUnderCursor
         exe 'normal! `z'
 
     elseif index(supportedTypes, l:exeFileType) < 0
