@@ -3,7 +3,7 @@
 function zd() {
 
     local branch dir optstr
-    branch=development
+    branch='$(git_dev_branch)'
 
     function usage() {
         echo "Usage : zd [options] [--] <zdir>...
