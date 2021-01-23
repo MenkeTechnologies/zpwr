@@ -14,7 +14,7 @@ function zm() {
     }
 
     function runGit() {
-        ${=ZPWR_REPO_NAME} fordir "zpwrIsGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
+        ${=ZPWR_REPO_NAME} fordir "zpwrIsGitDir && { _m=$branch; gco \$_m ; gffa; git clean -dff && git reset --hard origin/\$_m && git clean -dff ; gla; zp gitclearcache; unset _m; }" *
     }
 
 

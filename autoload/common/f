@@ -1,8 +1,8 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___f(){
+function f(){
 
     zpwrCd "$@"
 }
 
-___f "$@"
+f "$@"
