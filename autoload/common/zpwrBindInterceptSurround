@@ -4,6 +4,7 @@
 function zpwrBindInterceptSurround() {
     zle -N zpwrInterceptDelete
     zle -N zpwrInterceptSurround
+    zle -N zpwrSelfInsert
     bindkey -M viins "^?" zpwrInterceptDelete
     bindkey -M viins '"' zpwrInterceptSurround
     bindkey -M viins "'" zpwrInterceptSurround
@@ -11,6 +12,8 @@ function zpwrBindInterceptSurround() {
     bindkey -M viins "(" zpwrInterceptSurround
     bindkey -M viins "[" zpwrInterceptSurround
     bindkey -M viins "{" zpwrInterceptSurround
+
+    zle -A zpwrSelfInsert self-insert
 }
 
 zpwrBindInterceptSurround "$@"
