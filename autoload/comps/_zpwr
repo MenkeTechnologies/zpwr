@@ -48,6 +48,7 @@ function __zpwr(){
             _describe -t zpwr-gitrepos "zpwr git repo cache verbs" zpwrGitReposVerbs && ret=0
             _describe -t zpwr-git "zpwr git verbs" zpwrGitVerbs && ret=0
             _describe -t zpwr-misc "zpwr misc verbs" zpwrMiscVerbs && ret=0
+            _describe -t zpwr-send "zpwr send verbs" zpwrSendVerbs && ret=0
             _describe -t zpwr-forgit "zpwr forgit verbs" zpwrForgitVerbs && ret=0
 
             #_describe -t commands "zpwr verbs" zpwrSubcommandsAry && ret=0
