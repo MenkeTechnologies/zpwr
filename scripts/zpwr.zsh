@@ -61,6 +61,8 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[clearls]='zpwrClearList=clear and list the files with no args'
     ZPWR_VERBS[clearlist]='zpwrClearList=clear and list the files with no args'
     ZPWR_VERBS[clone]='gcl=clone and cd to arg'
+    ZPWR_VERBS[colortest]='zpwrColorTest=test colors'
+    ZPWR_VERBS[colortest256]='zpwr256ColorTest=test 256 colors'
     ZPWR_VERBS[zpwrCloneToForked]='zpwrCloneToForked=clone \$ZPWR_REPO_NAME to \$ZPWR_FORKED_DIR'
     ZPWR_VERBS[colorsdiff]='gsdc=colorized side diff'
     ZPWR_VERBS[color2]='color2=turn on stderr filter'
