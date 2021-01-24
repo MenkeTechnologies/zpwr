@@ -110,6 +110,9 @@ function __zpwr(){
                 serviceup)
                     _ssu
                     ;;
+                startsend*|stopsend*)
+                    __tmux-panes
+                    ;;
                 z)
                     _zcommand
                     ;;

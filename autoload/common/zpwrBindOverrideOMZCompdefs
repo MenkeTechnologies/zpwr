@@ -22,6 +22,10 @@ function zpwrBindOverrideOMZCompdefs(){
     compdef _tmux _zsh_tmux_plugin_run
     zpwrExists _kubectl && compdef _kubectl kubectl
     zpwrExists _express && compdef _express express
+
+    # load inner tmux comp fns for _zpwr
+    _tmux &> /dev/null
+
     #}}}***********************************************************
 }
 zpwrBindOverrideOMZCompdefs "$@"
