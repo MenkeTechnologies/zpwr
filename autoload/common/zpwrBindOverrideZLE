@@ -246,12 +246,12 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
     if [[ "$ZPWR_OS_TYPE" == darwin ]];then
         if [[ "$ZPWR_PARENT_PROCESS" == *(login|tmux)* ]]; then
             #Ctrl plus arrow keys
-            bindkey '\e[1;5A' gacpCheckDiff
+            bindkey '\e[1;5A' zsh-gacp-CheckDiff
             bindkey '\e[1;5B' zpwrUpdater
             bindkey '\e[1;5C' zpwrTutsUpdate
             bindkey '\e[1;5D' dbz
         else
-            bindkey '\e[5A' gacpCheckDiff
+            bindkey '\e[5A' zsh-gacp-CheckDiff
             bindkey '\e[5B' zpwrUpdater
             bindkey '\e[5C' zpwrTutsUpdate
             bindkey '\e[5D' dbz

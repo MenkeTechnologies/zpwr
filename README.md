@@ -998,7 +998,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^F^N" zpwrVerbsWidget ```
 - ``` bindkey -M viins "^F^P" basicSedSub ```
 - ``` bindkey -M viins "^F^R" zpwrAsVar ```
-- ``` bindkey -M viins "^F^S" gacpCheckDiff ```
+- ``` bindkey -M viins "^F^S" zsh-gacp-CheckDiff ```
 - ``` bindkey -M viins "^F^V" edit-command-line ```
 - ``` bindkey -M viins "^Fj" zpwrVerbsWidgetAccept ```
 - ``` bindkey -M viins "^G" what-cursor-position ```
@@ -1015,7 +1015,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^P" zpwrEOLorNextTabStop ```
 - ``` bindkey -M viins "^Q" zpwrLastWordDouble ```
 - ``` bindkey -M viins "^R" fzf-history-widget ```
-- ``` bindkey -M viins "^S" gacpNoCheck ```
+- ``` bindkey -M viins "^S" zsh-gacp-NoCheck ```
 - ``` bindkey -M viins "^T" fzf-file-widget ```
 - ``` bindkey -M viins "^U" zpwrClearLine ```
 - ``` bindkey -M viins "^V^@" zpwrVimFzf ```
@@ -1072,12 +1072,15 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[OB" history-substring-search-down ```
 - ``` bindkey -M viins "^[OC" vi-forward-char ```
 - ``` bindkey -M viins "^[OD" vi-backward-char ```
+- ``` bindkey -M viins "^[OF" end-of-line ```
+- ``` bindkey -M viins "^[OH" beginning-of-line ```
 - ``` bindkey -M viins "^[OP" zpwrUp8widget ```
 - ``` bindkey -M viins "^[OQ" sub ```
 - ``` bindkey -M viins "^[OR" zpwrGetrcWidget ```
 - ``` bindkey -M viins "^[[1;2D" sub ```
 - ``` bindkey -M viins "^[[200~" bracketed-paste ```
-- ``` bindkey -M viins "^[[5A" gacpCheckDiff ```
+- ``` bindkey -M viins "^[[3~" delete-char ```
+- ``` bindkey -M viins "^[[5A" zsh-gacp-CheckDiff ```
 - ``` bindkey -M viins "^[[5B" zpwrUpdater ```
 - ``` bindkey -M viins "^[[5C" zpwrTutsUpdate ```
 - ``` bindkey -M viins "^[[5D" dbz ```
@@ -1128,7 +1131,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^F^N" zpwrVerbsWidget ```
 - ``` bindkey -a "^F^P" basicSedSub ```
 - ``` bindkey -a "^F^R" zpwrAsVar ```
-- ``` bindkey -a "^F^S" gacpCheckDiff ```
+- ``` bindkey -a "^F^S" zsh-gacp-CheckDiff ```
 - ``` bindkey -a "^F^V" edit-command-line ```
 - ``` bindkey -a "^Fj" zpwrVerbsWidgetAccept ```
 - ``` bindkey -a "^G" what-cursor-position ```
@@ -1143,7 +1146,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^P" zpwrEOLorNextTabStop ```
 - ``` bindkey -a "^Q" zpwrLastWordDouble ```
 - ``` bindkey -a "^R" redo ```
-- ``` bindkey -a "^S" gacpNoCheck ```
+- ``` bindkey -a "^S" zsh-gacp-NoCheck ```
 - ``` bindkey -a "^T" transpose-chars ```
 - ``` bindkey -a "^U" zpwrClearLine ```
 - ``` bindkey -a "^V^@" zpwrVimFzf ```
@@ -2073,7 +2076,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Plug>(RepeatRedo) * :<C-U>call repeat#wrap("\<C-R>",v:count)<CR> ```
 - ``` n  <Plug>(RepeatUndoLine) * :<C-U>call repeat#wrap('U',v:count)<CR> ```
 - ``` n  <Plug>(RepeatUndo) * :<C-U>call repeat#wrap('u',v:count)<CR> ```
-- ``` n  <Plug>(RepeatDot) * :<C-U>exe repeat#run(v:count)<CR> ```
+- ``` n  <Plug>(RepeatDot) * :<C-U>if !repeat#run(v:count)|echoerr repeat#errmsg()|endif<CR> ```
 - ``` n  <Plug>RefactorExtractSetter * <C-\><C-N>:call lh#refactor#extract_setter()<CR> ```
 - ``` n  <Plug>RefactorExtractGetter * <C-\><C-N>:call lh#refactor#extract_getter()<CR> ```
 - ``` n  <Plug>RefactorPutLastDown * <C-\><C-N>:call lh#refactor#put_extracted_last('')<CR> ```
@@ -2377,7 +2380,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` x  <Space>ef     :call ExtractFoldMarker()<CR> ```
 - ``` x  <Space>ev     :call ExtractVariableVisual()<CR> ```
 - ``` x  <Space>em     :call ExtractMethod()<CR> ```
-- ``` v  <Space>g    * :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`> ```
 - ```    <Space><Space>e   <Plug>(easymotion-bd-e) ```
 - ```    <Space><Space>w   <Plug>(easymotion-bd-w) ```
 - ``` x  <Space>x    * :normal mzg&`zzz<CR> ```
@@ -2389,6 +2391,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  <Space>"    * :call InsertQuoteVisualMode("double")<CR> ```
 - ```    <Space>z    * nea ```
 - ``` v  <Space>r    * :'<,'>s@\C\<<C-R><C-W>\>@<C-R><C-W>@g<Left><Left> ```
+- ``` v  <Space>g    * :'<,'>%s@\C\<<C-R><C-W>\>@@g<Left><Left> ```
 - ```    <Space>sudo * :w !sudo tee % &>/dev/null<CR><CR><CR> ```
 - ``` v  <Space>b    * :w !tmux set-buffer "$(cat)"<CR><CR> ```
 - ``` v  <Space>=    * 4+ ```
@@ -2443,6 +2446,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  gx            <Plug>NetrwBrowseXVis ```
 - ``` x  g%            <Plug>(MatchitVisualBackward) ```
 - ``` x  gS            <Plug>VgSurround ```
+- ``` v  gs          * :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`> ```
 - ``` noxge          * repmo#SelfKey('ge', 'e') ```
 - ``` noxgE          * repmo#SelfKey('gE', 'E') ```
 - ``` noxh           * repmo#SelfKey('h', 'l') ```
@@ -2809,7 +2813,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` c  <C-D>       * getcmdpos()>strlen(getcmdline())?"\<C-D>":"\<Del>" ```
 - ``` c  <C-F>       * getcmdpos()>strlen(getcmdline())?&cedit:"\<Right>" ```
 - ``` c  <C-R><C-G>  & fnameescape(fugitive#Object(@%)) ```
-- ``` c  <C-T>       * <SNR>159_transpose() ```
-- ``` c  <C-U>       * <SNR>159_ctrl_u() ```
+- ``` c  <C-T>       * <SNR>160_transpose() ```
+- ``` c  <C-U>       * <SNR>160_ctrl_u() ```
 - ``` c  <C-X><C-A>  * <C-A> ```
 - ``` c  <C-Y>       * pumvisible() ? "\<C-Y>" : "\<C-R>-" ```
