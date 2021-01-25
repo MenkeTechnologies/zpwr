@@ -3,7 +3,7 @@
 function zm() {
 
     local branch dir optstr
-    branch='$(git_main_branch)'
+    branch='$(zsh-gacp-mainBranch)'
 
     function usage() {
         echo "Usage : zm [options] [--] <zdir>...
