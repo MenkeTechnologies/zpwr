@@ -35,7 +35,8 @@ function zpwrBindAliasesLate(){
     alias dirs='dirs -v'
     zpwrExists proxychains && alias pc='proxychains'
     zpwrExists proxychains4 && alias pc='proxychains'
-    alias bug='ZPWR_TRACE=true;ZPWR_DEBUG=true;'
+    alias debug='ZPWR_TRACE=true;ZPWR_DEBUG=true;'
+    alias unbug='ZPWR_TRACE=false;ZPWR_DEBUG=false;'
     alias lo="tail -n 1000 -F $ZPWR_LOGFILE"
     alias loo="tail -n 1000 -F $ZPWR_LOGFILE"
     alias ol="tail -n 1000 -F $ZPWR_LOGFILE"
