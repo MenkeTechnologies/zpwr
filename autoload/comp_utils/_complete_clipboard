@@ -3,8 +3,7 @@
 function _complete_clipboard(){
 
     local clipboard_str
-    clipboard_str="$(${=ZPWR_PASTE_CMD} 2>/dev/null)"
-
+    clipboard_str="${$(${(Q)=ZPWR_PASTE_CMD} 2>/dev/null)//$'\r'}"
     if [[ -n "$clipboard_str" ]]; then
     clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "'${clipboard_str}'")
     _wanted last-clip expl 'clipboard args' compadd -Qa clipboard_array

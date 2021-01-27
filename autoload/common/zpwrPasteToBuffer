@@ -3,7 +3,7 @@
 function zpwrPasteToBuffer(){
 
 
-    BUFFER="${$(${(Q)=ZPWR_PASTE_CMD})//$'\r'}"
+    BUFFER="${$(${(Q)=ZPWR_PASTE_CMD} 2>/dev/null )//$'\r'}"
     print -rz -- "$BUFFER"
 }
 
