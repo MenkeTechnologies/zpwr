@@ -224,6 +224,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[opencommand]='zpwrGetOpenCommand=get the command to open with system'
     ZPWR_VERBS[pastecommand]='zpwrGetPasteCommand=get the command to paste with system'
     ZPWR_VERBS[pastebuffer]='zpwrPasteToBuffer=paste clipboard to BUFFER'
+    ZPWR_VERBS[pastestring]='zpwrPasteToStdout=paste clipboard to stdout'
     ZPWR_VERBS[pir]='pir=run command on all devices'
     ZPWR_VERBS[plugins]='zpl=cd to \$ZSH_CUSTOM/plugins'
     ZPWR_VERBS[poll]='zpwrPoll=poll git remote and run command'
