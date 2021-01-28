@@ -7,7 +7,7 @@ function ___zpwrEditTag(){
         return 1
     fi
 
-    if [[ -z "$1" ]]; then
+    if [[ -n "$2" ]]; then
         zpwrLoggErr "usage: zpwrEditTag <tag>"
         return 1
     fi
@@ -16,7 +16,14 @@ function ___zpwrEditTag(){
 
     wantedTag="$1"
 
+    if [[ -z "$wantedTag" ]]; then
+        while read tag desc; do
+            break
+        done < <(git tag --sort=-v:refname -n -l)
+    fi
+
     while read tag desc; do
+
         if [[ $tag == *$wantedTag* ]]; then
             break
         fi
