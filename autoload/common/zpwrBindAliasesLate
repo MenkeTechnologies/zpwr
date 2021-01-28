@@ -291,7 +291,7 @@ function zpwrBindAliasesLate(){
     #{{{                          MARK:aliases for ZPWR_SCRIPTS
     #**************************************************************
     alias inst="bash $ZPWR_SCRIPTS/tgzLocalInstaller.sh"
-    alias ct="bash $ZPWR_SCRIPTS/createTextFile.sh"
+    alias ctxt="bash $ZPWR_SCRIPTS/createTextFile.sh"
     alias u="bash $ZPWR_SCRIPTS/upLoadPi.sh"
     alias u2="bash $ZPWR_SCRIPTS/upLoadPi2.sh"
     alias pw="bash $ZPWR_SCRIPTS/uploadWebPi.sh"
