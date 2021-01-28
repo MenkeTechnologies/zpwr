@@ -10,12 +10,15 @@
 
 #{{{                    MARK:env vars to re eval after sourcing tokens
 #**************************************************************
-if ! (( $+ZPWR_VARS )) || [[ ${parameters[ZPWR_VARS]} != association ]]; then
+if [[ $(command ps -o command= -p $$) =~ (^-?|/)zsh ]]; then
+    if ! (( $+ZPWR_VARS )) || [[ ${parameters[ZPWR_VARS]} != association ]]; then
+        declare -Ag ZPWR_VARS
+    fi
+else
     declare -Ag ZPWR_VARS
 fi
 
-if ! (( $+functions[zpwrEvalIfNeeded] )); then
-function zpwrEvalIfNeeded() {
+type -a zpwrEvalIfNeeded 1>/dev/null 2>&1 || function zpwrEvalIfNeeded() {
 
     local name current prev wanted
     name="$1"
@@ -51,7 +54,6 @@ function zpwrEvalIfNeeded() {
     fi
     # user has made direct change to env variable so leave alone
 }
-fi
 
 # the base dir for zpwr configs
 test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"

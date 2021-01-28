@@ -11,7 +11,7 @@
 #**************************************************************
 function zpwrIsZsh(){
 
-    [[ $(command ps -o command= -p $$) =~ '(^-?|/)zsh' ]]
+    [[ $(command ps -o command= -p $$) =~ (^-?|/)zsh ]]
 }
 
 if zpwrIsZsh; then
