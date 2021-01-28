@@ -11,7 +11,8 @@ function zpwrPrintMap(){
     sep=" "
     for map in "$@"; do
         zpwrPrettyPrint "$map"
-        for k v in ${(kv)${(P)map}[@]};do
+        for k in ${(ko)${(P)map}[@]};do
+            v="${${(P)map}[$k]}"
             if [[ -z "$v" ]]; then
                 v="'${v}'"
             fi
