@@ -170,6 +170,11 @@ export ZPWR_ZINIT_COMPINIT_DELAY=0
 # set to false if this file is sourced during remote execution with no ZPWR env
 test -z "$ZPWR_REMOTE" && export ZPWR_REMOTE=false
 
+function zpwrIsZsh(){
+
+    [[ $(command ps -o command= -p $$) =~ '(^-?|/)zsh' ]]
+}
+
 if [[ "$ZPWR_REMOTE" == false ]]; then
     test -z "$ZPWR_RE_ENV_FILE" && export ZPWR_RE_ENV_FILE="$ZPWR/env/.zpwr_re_env.sh"
     source "$ZPWR_RE_ENV_FILE" || {
