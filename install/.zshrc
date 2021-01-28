@@ -409,7 +409,7 @@ function zpwrTokenPost() {
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     builtin declare -A ZINIT
     ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
-    ZINIT[COMPINIT_OPTS]='-C'
+    ZINIT[COMPINIT_OPTS]='-C -u'
     builtin source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
     # tell zinit where compsy cache file is
 
@@ -494,7 +494,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zinit load \
         MenkeTechnologies/zsh-more-completions
 
-    zinit ice lucid nocompile nocd as'null' wait"$ZPWR_ZINIT_COMPINIT_DELAYf" \
+    zinit ice lucid nocompile nocd as'null' wait"${ZPWR_ZINIT_COMPINIT_DELAY}f" \
         atinit'zicompinit; zicdreplay;zpwrBindOverrideOMZCompdefs'
     zinit light \
         MenkeTechnologies/zsh-zinit-final
