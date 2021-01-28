@@ -10,11 +10,12 @@
 
 #{{{                    MARK:env vars to re eval after sourcing tokens
 #**************************************************************
-type -a ZPWR_VARS 1>/dev/null 2>&1 || {
-        declare -Ag ZPWR_VARS
-}
+if ! (( $+ZPWR_VARS )) || [[ ${parameters[ZPWR_VARS]} != association ]]; then
+    declare -Ag ZPWR_VARS
+fi
 
-type -a evalIfNeeded 1>/dev/null 2>&1 || function evalIfNeeded() {
+if ! (( $+functions[zpwrEvalIfNeeded] )); then
+function zpwrEvalIfNeeded() {
 
     local name current prev wanted
     name="$1"
@@ -50,18 +51,19 @@ type -a evalIfNeeded 1>/dev/null 2>&1 || function evalIfNeeded() {
     fi
     # user has made direct change to env variable so leave alone
 }
+fi
 
 # the base dir for zpwr configs
 test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
 
 if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
-    evalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.oh-my-zsh" "$HOME"
+    zpwrEvalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.oh-my-zsh" "$HOME"
     export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
-    evalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
+    zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
 elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
-    evalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.zinit" "$HOME"
+    zpwrEvalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.zinit" "$HOME"
     export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
-    evalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH" "$ZSH"
+    zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH" "$ZSH"
 fi
 
 if [[ $ZPWR_COLORS = true ]]; then
@@ -77,119 +79,119 @@ else
 fi
 
 # fzf dir
-evalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/fzf" "$ZSH"
+zpwrEvalIfNeeded ZPWR_FZF_DIR "$ZPWR_FZF_DIR" "$ZSH_CUSTOM/plugins/fzf" "$ZSH"
 # local file ignored by git
-evalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
+zpwrEvalIfNeeded ZPWR_LOCAL "$ZPWR_LOCAL" "$ZPWR/local" "$ZPWR"
 # plugin misc cache files
-evalIfNeeded ZSH_CACHE_DIR "$ZSH_CACHE_DIR" "$ZPWR_LOCAL/.cache" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZSH_CACHE_DIR "$ZSH_CACHE_DIR" "$ZPWR_LOCAL/.cache" "$ZPWR_LOCAL"
 # alias and function file bash compatible
-evalIfNeeded ZPWR_ALIAS_FILE "$ZPWR_ALIAS_FILE" "$ZPWR_ENV/.shell_aliases_functions.sh" "$ZPWR_ENV"
+zpwrEvalIfNeeded ZPWR_ALIAS_FILE "$ZPWR_ALIAS_FILE" "$ZPWR_ENV/.shell_aliases_functions.sh" "$ZPWR_ENV"
 # autoloaded non completion functions
-evalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD" "$ZPWR/autoload" "$ZPWR"
+zpwrEvalIfNeeded ZPWR_AUTOLOAD "$ZPWR_AUTOLOAD" "$ZPWR/autoload" "$ZPWR"
 # autoloaded common non completion functions
-evalIfNeeded ZPWR_AUTOLOAD_COMMON "$ZPWR_AUTOLOAD_COMMON" "$ZPWR_AUTOLOAD/common" "$ZPWR_AUTOLOAD"
+zpwrEvalIfNeeded ZPWR_AUTOLOAD_COMMON "$ZPWR_AUTOLOAD_COMMON" "$ZPWR_AUTOLOAD/common" "$ZPWR_AUTOLOAD"
 # autoloaded common completion but completion helper functions
-evalIfNeeded ZPWR_AUTOLOAD_COMPS "$ZPWR_AUTOLOAD_COMPS " "$ZPWR_AUTOLOAD/comps" "$ZPWR_AUTOLOAD"
+zpwrEvalIfNeeded ZPWR_AUTOLOAD_COMPS "$ZPWR_AUTOLOAD_COMPS " "$ZPWR_AUTOLOAD/comps" "$ZPWR_AUTOLOAD"
 # autoloaded common non completion but completion helper functions
-evalIfNeeded ZPWR_AUTOLOAD_COMP_UTILS "$ZPWR_AUTOLOAD_COMP_UTILS " "$ZPWR_AUTOLOAD/comp_utils" "$ZPWR_AUTOLOAD"
+zpwrEvalIfNeeded ZPWR_AUTOLOAD_COMP_UTILS "$ZPWR_AUTOLOAD_COMP_UTILS " "$ZPWR_AUTOLOAD/comp_utils" "$ZPWR_AUTOLOAD"
 # autoloaded darwin non completion functions
-evalIfNeeded ZPWR_AUTOLOAD_DARWIN "$ZPWR_AUTOLOAD_DARWIN" "$ZPWR_AUTOLOAD/darwin" "$ZPWR_AUTOLOAD"
+zpwrEvalIfNeeded ZPWR_AUTOLOAD_DARWIN "$ZPWR_AUTOLOAD_DARWIN" "$ZPWR_AUTOLOAD/darwin" "$ZPWR_AUTOLOAD"
 # autoloaded fzf helper functions
-evalIfNeeded ZPWR_AUTOLOAD_FZF "$ZPWR_AUTOLOAD_FZF" "$ZPWR_AUTOLOAD/fzf" "$ZPWR_AUTOLOAD"
+zpwrEvalIfNeeded ZPWR_AUTOLOAD_FZF "$ZPWR_AUTOLOAD_FZF" "$ZPWR_AUTOLOAD/fzf" "$ZPWR_AUTOLOAD"
 # autoloaded linux non completion functions
-evalIfNeeded ZPWR_AUTOLOAD_LINUX "$ZPWR_AUTOLOAD_LINUX" "$ZPWR_AUTOLOAD/linux" "$ZPWR_AUTOLOAD"
+zpwrEvalIfNeeded ZPWR_AUTOLOAD_LINUX "$ZPWR_AUTOLOAD_LINUX" "$ZPWR_AUTOLOAD/linux" "$ZPWR_AUTOLOAD"
 # autoloaded systemctl non completion functions
-evalIfNeeded ZPWR_AUTOLOAD_SYSTEMCTL "$ZPWR_AUTOLOAD_SYSTEMTCTL" "$ZPWR_AUTOLOAD/systemctl" "$ZPWR_AUTOLOAD"
+zpwrEvalIfNeeded ZPWR_AUTOLOAD_SYSTEMCTL "$ZPWR_AUTOLOAD_SYSTEMTCTL" "$ZPWR_AUTOLOAD/systemctl" "$ZPWR_AUTOLOAD"
 # autoloaded completion functions
-evalIfNeeded ZPWR_COMPS "$ZPWR_COMPS" "$ZPWR/autoload/comps" "$ZPWR"
+zpwrEvalIfNeeded ZPWR_COMPS "$ZPWR_COMPS" "$ZPWR/autoload/comps" "$ZPWR"
 # cross OS comand file
-evalIfNeeded ZPWR_CROSS_OS "$ZPWR_CROSS_OS" "$ZPWR_SCRIPTS/crossOSCommands.sh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_CROSS_OS "$ZPWR_CROSS_OS" "$ZPWR_SCRIPTS/crossOSCommands.sh" "$ZPWR_SCRIPTS"
 # the location of macOS only associated interpreted scripts
 # custom plugin dir
-evalIfNeeded ZPWR_PLUGIN_DIR "$ZPWR_PLUGIN_DIR" "$ZSH_CUSTOM/plugins" "$ZSH_CUSTOM"
+zpwrEvalIfNeeded ZPWR_PLUGIN_DIR "$ZPWR_PLUGIN_DIR" "$ZSH_CUSTOM/plugins" "$ZSH_CUSTOM"
 # fzf custom plugin dir
-evalIfNeeded ZPWR_ZINIT_FZF "$ZPWR_ZINIT_FZF" "$ZPWR_PLUGIN_DIR/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_DIR"
+zpwrEvalIfNeeded ZPWR_ZINIT_FZF "$ZPWR_ZINIT_FZF" "$ZPWR_PLUGIN_DIR/MenkeTechnologies---fzf" "$ZPWR_PLUGIN_DIR"
 # same as zpwr local
-evalIfNeeded ZPWR_HIDDEN_DIR "$ZPWR_HIDDEN_DIR" "$ZPWR/local" "$ZPWR"
+zpwrEvalIfNeeded ZPWR_HIDDEN_DIR "$ZPWR_HIDDEN_DIR" "$ZPWR/local" "$ZPWR"
 # private tokens file sourced before
-evalIfNeeded ZPWR_TOKEN_PRE "$ZPWR_TOKEN_PRE" "$ZPWR_LOCAL/.tokens.sh" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_TOKEN_PRE "$ZPWR_TOKEN_PRE" "$ZPWR_LOCAL/.tokens.sh" "$ZPWR_LOCAL"
 # private tokens file sourced after
-evalIfNeeded ZPWR_TOKEN_POST "$ZPWR_TOKEN_POST" "$ZPWR_LOCAL/.tokens-post.sh" "$ZPWR_LOCAL"
-evalIfNeeded ZPWR_TEST "$ZPWR_TEST" "$ZPWR/tests" "$ZPWR"
+zpwrEvalIfNeeded ZPWR_TOKEN_POST "$ZPWR_TOKEN_POST" "$ZPWR_LOCAL/.tokens-post.sh" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_TEST "$ZPWR_TEST" "$ZPWR/tests" "$ZPWR"
 # zpwr install files
-evalIfNeeded ZPWR_INSTALL "$ZPWR_INSTALL" "$ZPWR/install" "$ZPWR"
+zpwrEvalIfNeeded ZPWR_INSTALL "$ZPWR_INSTALL" "$ZPWR/install" "$ZPWR"
 # user tmux.conf file
-evalIfNeeded ZPWR_TMUXRC "$ZPWR_TMUXRC" "$ZPWR_INSTALL/.tmux.conf" "$ZPWR_INSTALL"
+zpwrEvalIfNeeded ZPWR_TMUXRC "$ZPWR_TMUXRC" "$ZPWR_INSTALL/.tmux.conf" "$ZPWR_INSTALL"
 # user vimrc file
-evalIfNeeded ZPWR_VIMRC "$ZPWR_VIMRC" "$ZPWR_INSTALL/.vimrc" "$ZPWR_INSTALL"
+zpwrEvalIfNeeded ZPWR_VIMRC "$ZPWR_VIMRC" "$ZPWR_INSTALL/.vimrc" "$ZPWR_INSTALL"
 # user ideavimrc file
-evalIfNeeded ZPWR_IDEAVIMRC "$ZPWR_IDEAVIMRC" "$ZPWR_INSTALL/.ideavimrc" "$ZPWR_INSTALL"
+zpwrEvalIfNeeded ZPWR_IDEAVIMRC "$ZPWR_IDEAVIMRC" "$ZPWR_INSTALL/.ideavimrc" "$ZPWR_INSTALL"
 # zpwr tmux config files
-evalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/tmux" "$ZPWR"
+zpwrEvalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/tmux" "$ZPWR"
 # zpwr tmux git ignored files
-evalIfNeeded ZPWR_TMUX_LOCAL "$ZPWR_TMUX_LOCAL" "$ZPWR_TMUX/local" "$ZPWR_TMUX"
+zpwrEvalIfNeeded ZPWR_TMUX_LOCAL "$ZPWR_TMUX_LOCAL" "$ZPWR_TMUX/local" "$ZPWR_TMUX"
 # the base dir for zpwr temp
-evalIfNeeded ZPWR_LOCAL_TEMP "$ZPWR_LOCAL_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_LOCAL_TEMP "$ZPWR_LOCAL_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_LOCAL"
 # the path to a lock file (semaphore) for zpwr
-evalIfNeeded ZPWR_LOCK_FILE "$ZPWR_LOCK_FILE" "$ZPWR_LOCAL/.lock" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_LOCK_FILE "$ZPWR_LOCK_FILE" "$ZPWR_LOCAL/.lock" "$ZPWR_LOCAL"
 # cache file for all zpwr env lookups
-evalIfNeeded ZPWR_LOCAL_ENV "$ZPWR_LOCAL_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_LOCAL_ENV "$ZPWR_LOCAL_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL"
 # forked powerlevel10k config file for PROMPT
-evalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.p10k.zsh" "$ZPWR_ENV"
+zpwrEvalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.p10k.zsh" "$ZPWR_ENV"
 # the location of associated interpreted scripts
-evalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
+zpwrEvalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
 # the location of macOS only associated interpreted scripts
-evalIfNeeded ZPWR_SCRIPTS_MAC "$ZPWR_SCRIPTS_MAC" "$ZPWR_SCRIPTS/macOnly" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_SCRIPTS_MAC "$ZPWR_SCRIPTS_MAC" "$ZPWR_SCRIPTS/macOnly" "$ZPWR_SCRIPTS"
 # the location of zpwr verbs setup script
-evalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_SCRIPTS/zpwr.zsh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_SCRIPTS/zpwr.zsh" "$ZPWR_SCRIPTS"
 # the location of zpwr lib file
-evalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 # the location of zpwr init file
-evalIfNeeded ZPWR_LIB_INIT "$ZPWR_LIB_INIT" "$ZPWR_SCRIPTS/init.sh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_LIB_INIT "$ZPWR_LIB_INIT" "$ZPWR_SCRIPTS/init.sh" "$ZPWR_SCRIPTS"
 # command for all fzf clearlist in preview pane
-evalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/zpwrClearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/zpwrClearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
 # when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
-evalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_LOCAL"
 # emacs recent files
-evalIfNeeded ZPWR_RECENTF "$ZPWR_RECENTF" "$HOME/.emacs.d/.cache/recentf" "$HOME"
+zpwrEvalIfNeeded ZPWR_RECENTF "$ZPWR_RECENTF" "$HOME/.emacs.d/.cache/recentf" "$HOME"
 # alternate banner to ponysay
-evalIfNeeded ZPWR_DEFAULT_BANNER "$ZPWR_DEFAULT_BANNER" "bash $ZPWR_SCRIPTS_MAC/figletRandomFontOnce.sh $(hostname)" "$ZPWR_SCRIPTS_MAC"
+zpwrEvalIfNeeded ZPWR_DEFAULT_BANNER "$ZPWR_DEFAULT_BANNER" "bash $ZPWR_SCRIPTS_MAC/figletRandomFontOnce.sh $(hostname)" "$ZPWR_SCRIPTS_MAC"
 # zpwr banner file location
-evalIfNeeded ZPWR_BANNER_SCRIPT "$ZPWR_BANNER_SCRIPT" "$ZPWR_SCRIPTS/about.sh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_BANNER_SCRIPT "$ZPWR_BANNER_SCRIPT" "$ZPWR_SCRIPTS/about.sh" "$ZPWR_SCRIPTS"
 # cache of git dirs
-evalIfNeeded ZPWR_ALL_GIT_DIRS "$ZPWR_ALL_GIT_DIRS" "$ZPWR_LOCAL/zpwrGitDirs.txt" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_ALL_GIT_DIRS "$ZPWR_ALL_GIT_DIRS" "$ZPWR_LOCAL/zpwrGitDirs.txt" "$ZPWR_LOCAL"
 # cache of dirty git dirs
-evalIfNeeded ZPWR_ALL_GIT_DIRS_DIRTY "$ZPWR_ALL_GIT_DIRS_DIRTY" "$ZPWR_LOCAL/zpwrGitDirsDirty.txt" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_ALL_GIT_DIRS_DIRTY "$ZPWR_ALL_GIT_DIRS_DIRTY" "$ZPWR_LOCAL/zpwrGitDirsDirty.txt" "$ZPWR_LOCAL"
 # log file
-evalIfNeeded ZPWR_LOGFILE "$ZPWR_LOGFILE" "$ZPWR_LOCAL/zpwrLog.txt" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_LOGFILE "$ZPWR_LOGFILE" "$ZPWR_LOCAL/zpwrLog.txt" "$ZPWR_LOCAL"
 # cache of env keys
-evalIfNeeded ZPWR_ENV_KEY_FILE "$ZPWR_ENV_KEY_FILE" "${ZPWR_LOCAL_ENV}Key.txt" "$ZPWR_LOCAL_ENV"
+zpwrEvalIfNeeded ZPWR_ENV_KEY_FILE "$ZPWR_ENV_KEY_FILE" "${ZPWR_LOCAL_ENV}Key.txt" "$ZPWR_LOCAL_ENV"
 # cache of env values
-evalIfNeeded ZPWR_ENV_VALUE_FILE "$ZPWR_ENV_VALUE_FILE" "${ZPWR_LOCAL_ENV}Value.txt" "$ZPWR_LOCAL_ENV"
+zpwrEvalIfNeeded ZPWR_ENV_VALUE_FILE "$ZPWR_ENV_VALUE_FILE" "${ZPWR_LOCAL_ENV}Value.txt" "$ZPWR_LOCAL_ENV"
 # temp files
-evalIfNeeded ZPWR_TEMPFILE "$ZPWR_TEMPFILE" "$ZPWR_LOCAL_TEMP/.temp$$-$USER" "$ZPWR_LOCAL_TEMP" "$USER"
-evalIfNeeded ZPWR_TEMPFILE1 "$ZPWR_TEMPFILE1" "$ZPWR_LOCAL_TEMP/.temp$$-1$USER" "$ZPWR_LOCAL_TEMP" "$USER"
-evalIfNeeded ZPWR_TEMPFILE2 "$ZPWR_TEMPFILE2" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER" "$ZPWR_LOCAL_TEMP" "$USER"
-evalIfNeeded ZPWR_TEMPFILE3 "$ZPWR_TEMPFILE3" "$ZPWR_LOCAL_TEMP/.temp$$-3$USER" "$ZPWR_LOCAL_TEMP" "$USER"
-evalIfNeeded ZPWR_TEMPFILE4 "$ZPWR_TEMPFILE4" "$ZPWR_LOCAL_TEMP/.temp$$-4$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+zpwrEvalIfNeeded ZPWR_TEMPFILE "$ZPWR_TEMPFILE" "$ZPWR_LOCAL_TEMP/.temp$$-$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+zpwrEvalIfNeeded ZPWR_TEMPFILE1 "$ZPWR_TEMPFILE1" "$ZPWR_LOCAL_TEMP/.temp$$-1$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+zpwrEvalIfNeeded ZPWR_TEMPFILE2 "$ZPWR_TEMPFILE2" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+zpwrEvalIfNeeded ZPWR_TEMPFILE3 "$ZPWR_TEMPFILE3" "$ZPWR_LOCAL_TEMP/.temp$$-3$USER" "$ZPWR_LOCAL_TEMP" "$USER"
+zpwrEvalIfNeeded ZPWR_TEMPFILE4 "$ZPWR_TEMPFILE4" "$ZPWR_LOCAL_TEMP/.temp$$-4$USER" "$ZPWR_LOCAL_TEMP" "$USER"
 # SQL temp files for use with learning collection
-evalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER.sql" "$ZPWR_LOCAL_TEMP" "$USER"
+zpwrEvalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER.sql" "$ZPWR_LOCAL_TEMP" "$USER"
 # zsh compsys completion system dir for cached completions
-evalIfNeeded ZPWR_COMPSYS_CACHE "$ZPWR_COMPSYS_CACHE" "$ZPWR_LOCAL/zcompcache" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_COMPSYS_CACHE "$ZPWR_COMPSYS_CACHE" "$ZPWR_LOCAL/zcompcache" "$ZPWR_LOCAL"
 # compsys cache file
-evalIfNeeded ZSH_COMPDUMP "$ZSH_COMPDUMP" "$ZPWR_LOCAL/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT" "$ZPWR_LOCAL" "$ZPWR_REPO_NAME" "$ZPWR_GITHUB_ACCOUNT"
+zpwrEvalIfNeeded ZSH_COMPDUMP "$ZSH_COMPDUMP" "$ZPWR_LOCAL/.zcompdump-$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT" "$ZPWR_LOCAL" "$ZPWR_REPO_NAME" "$ZPWR_GITHUB_ACCOUNT"
 # forked repos dir
-evalIfNeeded ZPWR_FORKED_DIR "$ZPWR_FORKED_DIR" "$HOME/forkedRepos" "$HOME"
+zpwrEvalIfNeeded ZPWR_FORKED_DIR "$ZPWR_FORKED_DIR" "$HOME/forkedRepos" "$HOME"
 # common dirs
-evalIfNeeded ZPWR_D "$ZPWR_D" "$HOME/Desktop" "$HOME"
-evalIfNeeded ZPWR_DOC "$ZPWR_DOC" "$HOME/Documents" "$HOME"
-evalIfNeeded ZPWR_DL "$ZPWR_DL" "$HOME/Downloads" "$HOME"
+zpwrEvalIfNeeded ZPWR_D "$ZPWR_D" "$HOME/Desktop" "$HOME"
+zpwrEvalIfNeeded ZPWR_DOC "$ZPWR_DOC" "$HOME/Documents" "$HOME"
+zpwrEvalIfNeeded ZPWR_DL "$ZPWR_DL" "$HOME/Downloads" "$HOME"
 # history file
-evalIfNeeded HISTFILE "$HISTFILE" "$ZPWR_LOCAL/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history" "$ZPWR_LOCAL" "$ZPWR_REPO_NAME" "$ZPWR_GITHUB_ACCOUNT"
+zpwrEvalIfNeeded HISTFILE "$HISTFILE" "$ZPWR_LOCAL/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history" "$ZPWR_LOCAL" "$ZPWR_REPO_NAME" "$ZPWR_GITHUB_ACCOUNT"
 # the path for vim keybindings cache
-evalIfNeeded ZPWR_VIM_KEYBINDINGS "$ZPWR_VIM_KEYBINDINGS" "$ZPWR_LOCAL/zpwrVimKeybindings.txt" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_VIM_KEYBINDINGS "$ZPWR_VIM_KEYBINDINGS" "$ZPWR_LOCAL/zpwrVimKeybindings.txt" "$ZPWR_LOCAL"
 # the path for all keybindings cache
-evalIfNeeded ZPWR_ALL_KEYBINDINGS "$ZPWR_ALL_KEYBINDINGS" "$ZPWR_LOCAL/zpwrAllKeybindings.txt" "$ZPWR_LOCAL"
-evalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB_ACCOUNT" "$ZPWR_GITHUB_ACCOUNT"
+zpwrEvalIfNeeded ZPWR_ALL_KEYBINDINGS "$ZPWR_ALL_KEYBINDINGS" "$ZPWR_LOCAL/zpwrAllKeybindings.txt" "$ZPWR_LOCAL"
+zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB_ACCOUNT" "$ZPWR_GITHUB_ACCOUNT"
 #}}}***********************************************************
 

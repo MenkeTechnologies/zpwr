@@ -8,11 +8,12 @@
 ##### Notes: escape $ in comments for perl subs
 #}}}***********************************************************
 
-if [[ -z $ZPWR_VERBS ]]; then
+if ! (( $+ZPWR_VERBS )) || [[ ${parameters[ZPWR_VERBS]} != association ]]; then
+
     declare -Ag ZPWR_VERBS
 fi
 
-if [[ -z $ZPWR_VARS ]]; then
+if ! (( $+ZPWR_VARS )) || [[ ${parameters[ZPWR_VARS]} != association ]]; then
     declare -Ag ZPWR_VARS
 fi
 
