@@ -91,6 +91,10 @@ export ZPWR_EXPAND=true
 export ZPWR_EXPAND_SECOND_POSITION=true
 # expand globs, history etc with zle expand-word
 export ZPWR_EXPAND_NATIVE=true
+# expand inside "
+export ZPWR_EXPAND_QUOTE_DOUBLE=true
+# expand inside '
+export ZPWR_EXPAND_QUOTE_SINGLE=false
 # command for all fzf
 export ZPWR_FZF='fzf --ansi'
 # prompt for all fzf
