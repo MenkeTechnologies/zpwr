@@ -10,7 +10,7 @@
 
 #{{{                    MARK:env vars to re eval after sourcing tokens
 #**************************************************************
-if [[ $(command ps -o command= -p $$) =~ (^-?|/)zsh ]]; then
+if zpwrIsZsh; then
     if ! (( $+ZPWR_VARS )) || [[ ${parameters[ZPWR_VARS]} != association ]]; then
         declare -Ag ZPWR_VARS
     fi
