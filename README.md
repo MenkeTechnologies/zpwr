@@ -76,15 +76,15 @@ This also means you can move ZPWR after install after updating the sym links tha
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
 ## ZPWR Features
-- 335+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
-- 145+ centralized environment variables in ZPWR namespace to control functionality
-- 690+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
+- 350+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
+- 150+ centralized environment variables in ZPWR namespace to control functionality
+- 700+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - ~11.5k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 165+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - user specific ZPWR files in `~/.zpwr/local` git ignored
 - installer specific ZPWR files in `~/.zpwr/install` git tracked
-- 1800+ aliases
-- 320+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
+- 1900+ aliases
+- 330+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - ZPWR installer ouput in `~/.zpwr/local/installer` git ignored
 - central on/off control of zpwr colorful output with `ZPWR_COLORS`
 - zsh completion with descriptions for parameters, regular, suffix and global aliases
@@ -154,7 +154,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - systemd service, poll.service, that polls github and download latest zpwr code
 - systemd service, learn.service, that runs learning collection API
 - restart function that launches poll.service and learn by enabling and starting in systemd
-- 2700+ line README
+- 2800+ line README
 
 
 ## ZPWR Dependencies
