@@ -30,6 +30,7 @@ MenkeTechnologies/zsh-zinit-final
 MenkeTechnologies/zunit
 MenkeTechnologies/fzf
 hlissner/zsh-autopair
+marlonrichert/zsh-hist
 nnao45/zsh-kubectl-completion
 zdharma/fast-syntax-highlighting
 zdharma/history-search-multi-word

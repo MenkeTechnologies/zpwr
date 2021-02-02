@@ -205,6 +205,7 @@ ZPWR_GH_PLUGINS=(
     zdharma/zui
     MenkeTechnologies/zunit
     zdharma/zzcomplete
+    marlonrichert/zsh-hist
     #comps
     MenkeTechnologies/zsh-gem-completion
     MenkeTechnologies/zsh-cargo-completion
@@ -553,7 +554,7 @@ zpwrStaleZcompdump
 # change history size in memory
 builtin export HISTSIZE=999999999
 # change history file size
-builtin export SAVEHIST="$HISTSIZE"
+builtin export SAVEHIST=99999999
 #}}}***********************************************************
 
 #{{{                    MARK:Zpwr verbs
