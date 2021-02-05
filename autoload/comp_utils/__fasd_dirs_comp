@@ -3,7 +3,7 @@
 
 __fasd_dirs_comp(){
 
-    local curcontext="force-cache$curcontext"
+    local curcontext="daily-cache$curcontext"
 
     if ! (( $+__fasd_dirs )) && ! _retrieve_cache fasd_dirs_cache; then
         __fasd_dirs=( $(fasd -d |& perl -e '@l=reverse<>;do{print quotemeta($2).":".quotemeta($1)." " if m{^\s*(\S+)\s+(\S+)\s*$} }for@l') )
