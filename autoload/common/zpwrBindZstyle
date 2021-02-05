@@ -4,6 +4,13 @@ function zpwrBindZstyle(){
 
     #{{{                    MARK:Completions
 #**************************************************************
+zpwrMonthlyCachingPolicy () {
+    # rebuild if cache is more than a week old
+    local -a oldp
+    oldp=( "$1"(Nm+31) )
+    (( $#oldp ))
+}
+
 zpwrWeeklyCachingPolicy () {
     # rebuild if cache is more than a week old
     local -a oldp
@@ -33,10 +40,10 @@ if [[ ! -d "$ZPWR_COMPSYS_CACHE" ]]; then
     command mkdir "$ZPWR_COMPSYS_CACHE"
 fi
 
-zstyle ':completion:*' cache-policy zpwrWeeklyCachingPolicy
+zstyle ':completion:*' cache-policy zpwrMonthlyCachingPolicy
 zstyle ':completion:*:(fasd|fasd-file|zdir)' cache-policy zpwrDailyCachingPolicy
 zstyle ':completion:*:*:(f|z|zshz|zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' cache-policy zpwrDailyCachingPolicy
-zstyle ':completion:force-cache:*' cache-policy zpwrDailyCachingPolicy
+zstyle ':completion:daily-cache:*' cache-policy zpwrDailyCachingPolicy
 
 # separate files and dirs in _files completion
 #zstyle ':completion:*' file-patterns '%p(^-/):globbed-files' '^(-/):directories' '*:all-files'
