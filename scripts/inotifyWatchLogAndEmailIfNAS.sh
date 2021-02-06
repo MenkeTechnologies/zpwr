@@ -8,6 +8,10 @@
 ##### Notes:
 #}}}***********************************************************
 
+if [[ -z "$EMAIL" ]]; then
+    echo "\$EMAIL must be set" >&2
+    exit 1
+fi
 
 trap "echo;\
 python -c 'print(\"_\" * 100)';
@@ -33,7 +37,7 @@ while inotifywait "$file"; do
         echo "$(date) Sending email......"
         python -c 'print("_"*100)'
         echo
-        echo "$out" | mutt -s "NAS ALERT: $file at $(date)" jamenk@me.com
+        echo "$out" | mutt -s "NAS ALERT: $file at $(date)" "$EMAIL"
     } || {
         echo
         python -c 'print("_"*100)'
