@@ -17,64 +17,90 @@ source common.sh
 
 zpwrGoInstallerOutputDir
 
-zpwrPrettyPrintBox "installing gdb dashboard"
-wget -P ~ https://git.io/.gdbinit
+if [[ ! -f "$HOME/.gdbinit" ]]; then
+    zpwrPrettyPrintBox "installing gdb dashboard"
+    wget -P ~ https://git.io/.gdbinit
+fi
 
-if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
+function pipInstallerCommon() {
 
     zpwrPrettyPrintBox "Upgrading pip"
-    sudo python3 -m pip install --upgrade pip
+    sudo -EH python3 -m pip install --upgrade pip
+
     zpwrPrettyPrintBox "Installing psutil for Python Glances"
-    sudo python3 -m pip install psutil 
+    sudo -EH python3 -m pip install psutil
+
+    zpwrPrettyPrintBox "Installing setuptools"
+    sudo -EH python3 -m pip install setuptools
+
     zpwrPrettyPrintBox "Installing Python Glances"
-    sudo python3 -m pip install glances
+    sudo -EH python3 -m pip install glances
+
     zpwrPrettyPrintBox "Installing Virtualenv"
-    sudo python3 -m pip install virtualenv
+    sudo -EH python3 -m pip install virtualenv
 
     zpwrPrettyPrintBox "Installing Powerline..."
+    sudo -EH python3 -m pip install powerline-status
 
-    sudo python3 -m pip install powerline-status
+    zpwrPrettyPrintBox "Installing Powerline Mem Segment..."
+    sudo -EH python3 -m pip install powerline-mem-segment
+
     zpwrPrettyPrintBox "Installing Tmux Powerline"
+    tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
+    [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
+
+    zpwrPrettyPrintBox "Installing Powerline Mem Segment..."
+    sudo -EH python3 -m pip install powerline-mem-segment
+
+    zpwrPrettyPrintBox "Installing PyDf"
+    sudo -EH python3 -m pip install pydf
 
     zpwrPrettyPrintBox "Installing neovim python lib"
-    sudo python3 -m pip install pynvim
+    sudo -EH python3 -m pip install pynvim
 
     zpwrPrettyPrintBox "Installing neovim remote"
-    sudo python3 -m pip install neovim-remote
-
-    tmuxPowerlineDir=$HOME/.config/powerline/themes/tmux
-
-    sudo python3 -m pip install powerline-mem-segment
-    zpwrPrettyPrintBox "Installing PyDf"
-    sudo python3 -m pip install pydf
+    sudo -EH python3 -m pip install neovim-remote
 
     zpwrPrettyPrintBox "Installing MyCLI"
-    sudo python3 -m pip install mycli
+    sudo -EH python3 -m pip install mycli
+
+    zpwrPrettyPrintBox "Installing Speedtest"
+    sudo -EH python3 -m pip install speedtest-cli
 
     zpwrPrettyPrintBox "Installing PGCLI"
-    sudo python3 -m pip install pgcli
-
+    sudo -EH python3 -m pip install pgcli
 
     zpwrExists youtube_dl || {
+
         zpwrPrettyPrintBox "Installing youtube-dl"
-        sudo python3 -m pip install --upgrade youtube_dl
+        sudo -EH python3 -m pip install --upgrade youtube_dl
     }
 
     zpwrPrettyPrintBox "Installing bpython for python3"
-    sudo python3 -m pip install bpython
+    sudo -EH python3 -m pip install bpython
+
+    zpwrPrettyPrintBox "Installing httpie for python3"
+    sudo -EH python3 -m pip install httpie
 
     zpwrPrettyPrintBox "Installing pygments for python3"
-    sudo python3 -m pip install pygments
+    sudo -EH python3 -m pip install pygments
 
     zpwrPrettyPrintBox "Installing yapf"
-    sudo python3 -m pip install yapf
+    sudo -EH python3 -m pip install yapf
 
     zpwrPrettyPrintBox "Installing vim-vint"
-    sudo python3 -m pip install vim-vint
+    sudo -EH python3 -m pip install vim-vint
+
+}
+
+if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
+
+    pipInstallerCommon
 
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
     if [[ -z $distroName ]]; then
+
         distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
         case $distroName in
@@ -98,138 +124,29 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
     fi
 
     if [[ "$distroFamily" == redhat ]]; then
+
         zpwrGoInstallerOutputDir
         zpwrPrettyPrintBox "Installing grc for RedHat"
         git clone https://github.com/garabik/grc.git && builtin cd grc && sudo bash install.sh
     fi
 
     if [[ "$distroName" == centos ]]; then
+
         sudo yum install -y python36
         sudo ln -s /usr/bin/python36 /usr/bin/python3
     fi
 
-    zpwrPrettyPrintBox "Upgrading pip"
-    sudo python3 -m pip install --upgrade pip
-
-    zpwrPrettyPrintBox "Installing powerline mem segment"
-    sudo python3 -m pip install powerline-mem-segment
-
-    zpwrPrettyPrintBox "Installing psutil for Python Glances"
-    sudo python3 -m pip install psutil 
-
-    zpwrPrettyPrintBox "Installing setuptools"
-    sudo python3 -m pip install setuptools
-
-    zpwrPrettyPrintBox "Installing Python Glances"
-    sudo python3 -m pip install glances
-    zpwrPrettyPrintBox "Installing Powerline..."
-
-    python3 -c 'import pip' && sudo pip3 install powerline-status || sudo python3 -m pip install powerline-status
-    python3 -c 'import pip' && sudo pip3 install powerline-mem-segment || sudo python3 -m pip install powerline-mem-segment
-
-    zpwrPrettyPrintBox "Installing Tmux Powerline"
-
-    tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
-    [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-    sudo python3 -m pip install powerline-mem-segment
-    zpwrPrettyPrintBox "Installing PyDf"
-    sudo python3 -m pip install pydf
-
-    zpwrPrettyPrintBox "Installing neovim python lib"
-    sudo python3 -m pip install pynvim
-
-    zpwrPrettyPrintBox "Installing neovim remote"
-    sudo python3 -m pip install neovim-remote
-
-    zpwrPrettyPrintBox "Installing MyCLI"
-    sudo python3 -m pip install mycli
-
-    zpwrPrettyPrintBox "Installing Speedtest"
-    sudo python3 -m pip install speedtest-cli
-
-    zpwrPrettyPrintBox "Installing PGCLI"
-    sudo python3 -m pip install pgcli
-
-    zpwrExists youtube_dl || {
-        zpwrPrettyPrintBox "Installing youtube-dl"
-        sudo python3 -m pip install --upgrade youtube_dl
-    }
-
-    zpwrPrettyPrintBox "Installing bpython for python3"
-    sudo python3 -m pip install bpython
-
-    zpwrPrettyPrintBox "Installing httpie for python3"
-    sudo python3 -m pip install httpie
-
-    zpwrPrettyPrintBox "Installing pygments for python3"
-    sudo python3 -m pip install pygments
-
-    zpwrPrettyPrintBox "Installing yapf"
-    sudo python3 -m pip install yapf
-
-    zpwrPrettyPrintBox "Installing vim-vint"
-    sudo python3 -m pip install vim-vint
+    pipInstallerCommon
 
 else
 
     if [[ "$ZPWR_OS_TYPE" == "freebsd" ]]; then
 
-        sudo python3 -m pip
-        sudo python3 -m python3 -m pip install --upgrade
-
-        zpwrPrettyPrintBox "Upgrading pip"
-        sudo python3 -m pip install --upgrade pip
-        zpwrPrettyPrintBox "Installing psutil for Python Glances"
-        sudo python3 -m pip install psutil
-
-        zpwrPrettyPrintBox "Installing setuptools"
-        sudo python3 -m pip install setuptools
-
-        zpwrPrettyPrintBox "Installing Python Glances"
-        sudo python3 -m pip install glances
-        zpwrPrettyPrintBox "Installing Powerline..."
-
-        python3 -c 'import pip' && sudo pip3 install powerline-status || sudo python3 -m pip install powerline-status
-        python3 -c 'import pip' && sudo pip3 install powerline-mem-segment || sudo python3 -m pip install powerline-mem-segment
-
-        zpwrPrettyPrintBox "Installing Tmux Powerline"
-
-        tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
-        [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-        sudo python3 -m pip install powerline-mem-segment
-        zpwrPrettyPrintBox "Installing PyDf"
-        sudo python3 -m pip install pydf
-
-        zpwrPrettyPrintBox "Installing MyCLI"
-        sudo python3 -m pip install mycli
-
-        zpwrPrettyPrintBox "Installing Speedtest"
-        sudo python3 -m pip install speedtest-cli
-
-        zpwrPrettyPrintBox "Installing neovim python lib"
-        sudo python3 -m pip install pynvim
-
-        zpwrPrettyPrintBox "Installing neovim remote"
-        sudo python3 -m pip install neovim-remote
-
-        zpwrPrettyPrintBox "Installing PGCLI"
-        sudo python3 -m pip install pgcli
-
-        zpwrExists youtube_dl || {
-            zpwrPrettyPrintBox "Installing youtube-dl"
-            sudo python3 -m pip install youtube_dl
-        }
-        zpwrPrettyPrintBox "Installing bpython for python3"
-        sudo python3 -m pip install bpython
-
-        zpwrPrettyPrintBox "Installing pygments for python3"
-        sudo python3 -m pip install pygments
-
-        zpwrPrettyPrintBox "Installing vim-vint"
-        sudo python3 -m pip install vim-vint
-
-        zpwrPrettyPrintBox "Installing yapf"
-        sudo python3 -m pip install yapf
+        pipInstallerCommon
+    else
+        zpwrPrettyPrintBox "Your Unix OS is unsupported!" >&2
+        exit 1
     fi
 fi
+
 zpwrPrettyPrintBox "Done With Python Packages"
