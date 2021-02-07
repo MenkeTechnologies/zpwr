@@ -81,10 +81,12 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 700+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - ~11.5k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 170+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
-- user specific ZPWR files in `~/.zpwr/local` git ignored
-- installer specific ZPWR files in `~/.zpwr/install` git tracked
+- 2.8k+ line README
+- 46k+ LOC
 - 1900+ aliases
 - 330+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
+- user specific ZPWR files in `~/.zpwr/local` git ignored
+- installer specific ZPWR files in `~/.zpwr/install` git tracked
 - ZPWR installer ouput in `~/.zpwr/local/installer` git ignored
 - central on/off control of zpwr colorful output with `ZPWR_COLORS`
 - zsh completion with descriptions for parameters, regular, suffix and global aliases
@@ -154,7 +156,6 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - systemd service, poll.service, that polls github and download latest zpwr code
 - systemd service, learn.service, that runs learning collection API
 - restart function that launches poll.service and learn by enabling and starting in systemd
-- 2800+ line README
 
 
 ## ZPWR Dependencies
