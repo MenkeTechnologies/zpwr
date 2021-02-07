@@ -57,6 +57,15 @@ zpwrCommandExists rg || {
     "$HOME/.cargo/bin/cargo" install ripgrep
 }
 
+zpwrCommandExists thumbs || {
+    zpwrPrettyPrintBox "Installing rustup if cargo does not exist"
+    zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+    zpwrPrettyPrintBox "Updating rustup"
+    "$HOME/.cargo/bin/rustup" update
+    zpwrPrettyPrintBox "Installing thumbs with Cargo"
+    "$HOME/.cargo/bin/cargo" install thumbs 
+}
+
 
 zpwrPrettyPrintBox "Installing Rustup if cargo does not exist"
 zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
