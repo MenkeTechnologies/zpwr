@@ -859,7 +859,7 @@ fi
 # must have zsh at this point
 export SHELL="$(which zsh)"
 
-dir="$(sudo python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
+dir="$(sudo -EH python3 -m pip show powerline-status | \grep --color=always '^Location' | awk '{print $2}')/powerline"
 
 zpwrPrettyPrintBox "linking $dir to ~/.tmux/powerline"
 
