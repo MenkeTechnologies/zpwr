@@ -74,7 +74,7 @@ if [[ $ZPWR_COLORS_SECTIONS == true ]]; then
         $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'m%d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
     zstyle ':completion:*:warnings' format \
-        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'mNo Matches for %d\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
+        $'\e['$ZPWR_DESC_PRE_COLOR'm'$ZPWR_DESC_PRE$'\e[0;'$ZPWR_DESC_TEXT_COLOR$'mNo Matches for %d'$'\e['$ZPWR_DESC_POST_COLOR'm'$ZPWR_DESC_POST$'\e[0m'
 
 else
     # Make the list prompt friendly
