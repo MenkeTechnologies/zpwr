@@ -14,8 +14,8 @@ if ! type -ap thumbs &>/dev/null; then
 fi
 
 if ! zmodload zsh/net/socket; then
-    echo "Could NOT load zsh/net/socket" >&2
-    #exit 1
+    tmux display-message "Could NOT load zsh/net/socket"
+    exit 0
 fi
 
 local type
