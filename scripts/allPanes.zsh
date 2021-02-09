@@ -8,78 +8,41 @@
 ##### Notes:
 #}}}***********************************************************
 
-declare -a panes
-declare -A paneInfo
-local out cnt id winw winh pw ph pl pt h w t l o row col win
+if ! type -ap thumbs &>/dev/null; then
+    tmux display-message 'You need thumbs!'
+    exit 0
+fi
+
+if [[ ! -p "$ZPWR_TEMPFIFO" ]]; then
+    tmux display-message 'You need ZPWR_TEMPFIFO '$ZPWR_TEMPFIFO'. Exec a new shell!'
+    exit 0
+fi
 
 exec 2>> "$ZPWR_LOGFILE"
 
-if ! zmodload zsh/curses; then
-    echo "Could NOT load zsh/curses" >&2
-    #exit 1
-    
+local active_win new_pane active_pane msg
+
+#tmux wait-for -L fingerl1
+
+active_win="$(tmux lsw -F '#{?window_active,y,n} #{window_id}' | perl -ane 'print $1 if m{y (.*)}')"
+active_sess="$(tmux ls -F '#{?session_attached,y,n} #{session_id}' | perl -ane 'print $1 if m{y (.*)}')"
+active_pane="$(tmux lsp -F '#{?pane_active,y,n} #{pane_id}' | perl -ane 'print $1 if m{y (.*)}')"
+
+tmux new-window -n "[zpwr-thumbs]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh $active_win"
+
+#block
+msg="$(cat "$ZPWR_TEMPFIFO")"
+
+#tmux wait-for -L fingerl1
+#tmux resize-pane -Z
+
+#tmux swap-pane -d -s "$new_pane" -t "$active_pane"
+
+tmux select-window -t "$active_sess:$active_win"
+tmux select-pane -t "$active_sess:$active_win.$active_pane"
+if [[ "$msg" == full ]]; then
+    tmux paste-buffer
 fi
+#tmux resize-pane -Z
 
-win=stdscr
-
-#zcurses addwin $win $LINES $COLUMNS 0 0 
-
-while read id winw winh pw ph pl pr pt; do
-    id=${id#%}
-    panes+=(${id})
-    paneInfo[${id}.w]="$pw"
-    paneInfo[${id}.h]="$ph"
-    paneInfo[${id}.t]="$pt"
-    paneInfo[${id}.l]="$pl"
-    paneInfo[${id}.r]="$pr"
-    paneInfo[${id}.o]="$(tmux capture-pane -p -t "%$id")"
-done < \
-<(tmux lsp -F '#{pane_id} #{window_width} #{window_height} #{pane_width} #{pane_height} #{pane_left} #{pane_right} #{pane_top} ')
-
-tmux resize-pane -Z
-
-zcurses init
-
-for id in ${panes[@]};do
-    cnt=0
-    h=$paneInfo[$id.h]
-    w=$paneInfo[$id.w]
-    t=$paneInfo[$id.t]
-    l=$paneInfo[$id.l]
-    r=$paneInfo[$id.r]
-    o=$paneInfo[$id.o]
-
-    
-    #say zcurses move $win $t $l
-    #say zcurses string $win "$o"
-    #$id
-    case $id in
-        *)
-            for num in ${(f)o}; do
-                zcurses move $win $((t + cnt)) $l
-                zcurses string $win $num
-                ((++cnt))
-            done
-
-            ;;
-    esac
-    #zcurses string $win "$id"
-
-    #for row in {0..$w}; do
-        #for col in {0..$((h-1))}; do
-            #out[$cnt]=$o[$((row + col))]
-            #((++cnt))
-        #done
-        #((cnt+=$w))
-
-    #done
-done
-
-zcurses refresh $win
-
-#echo zcurses delwin $win
-tmux capture-pane -J -p | thumbs -m
-
-zcurses end
-
-tmux resize-pane -Z
+exit 0
