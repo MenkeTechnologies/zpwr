@@ -28,7 +28,7 @@ active_win="$(tmux lsw -F '#{?window_active,y,n} #{window_id}' | perl -ane 'prin
 active_sess="$(tmux ls -F '#{?session_attached,y,n} #{session_id}' | perl -ane 'print $1 if m{y (.*)}')"
 active_pane="$(tmux lsp -F '#{?pane_active,y,n} #{pane_id}' | perl -ane 'print $1 if m{y (.*)}')"
 
-tmux new-window -n "[zpwr-thumbs]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh $active_win single"
+tmux new-window -n "[zpwr-thumbs]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh $active_win multi"
 
 #block
 msg="$(cat "$ZPWR_TEMPFIFO")"
