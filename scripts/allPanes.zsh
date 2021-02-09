@@ -44,21 +44,21 @@ zsocket -a $fdl
 fdc=$REPLY
 read -u $fdc && msg=$REPLY
 
+exec {fdc}>&-
+exec {fdl}>&-
+rm -f "$ZPWR_SOCKET$$"
+
 #tmux wait-for -L fingerl1
 #tmux resize-pane -Z
 
 #tmux swap-pane -d -s "$new_pane" -t "$active_pane"
 
-tmux select-window -t "$active_sess:$active_win"
-tmux select-pane -t "$active_sess:$active_win.$active_pane"
-if [[ "$msg" == full ]]; then
+if tmux select-window -t "$active_sess:$active_win" &&
+   tmux select-pane -t "$active_sess:$active_win.$active_pane" &&
+   [[ "$msg" == full ]]; then
     tmux paste-buffer
 fi
 
-exec >&$fdc-
-exec >&$fdl-
-
-rm -f "$ZPWR_SOCKET$$"
 #tmux resize-pane -Z
 
 exit 0
