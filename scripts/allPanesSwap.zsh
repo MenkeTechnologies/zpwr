@@ -12,27 +12,34 @@ exec 2>> "$ZPWR_LOGFILE"
 printf "" > $ZPWR_TEMPFILE
 declare -a ZPWR_PANES
 declare -A ZPWR_PANE_INFO
-local line out cnt id winw winh pw ph pl pt h w t l o row col win wid type ary socket fdc
+local line out cnt id winw winh pw ph pl pt h w t l o row col win wid type ary socket fdc err=0
 local capture="$ZPWR_TMUX_CAPTURE-$(date +%s).txt"
 
 if ! zmodload zsh/curses; then
-    echo "Could NOT load zsh/curses" >&2
-    exit 1
+    tmux display-message "Could NOT load zsh/curses"
+    err=1
 fi
 
 if ! zmodload zsh/net/socket; then
-    echo "Could NOT load zsh/net/socket" >&2
-    exit 1
+    tmux display-message "Could NOT load zsh/net/socket"
+    err=1
 fi
 
 if [[ -z "$3" ]]; then
-    echo "usage: allPanesSwap.zsh <win_id> <single/multi> <socket>" >&2
+    tmux display-message "usage: allPanesSwap.zsh <win_id> <single/multi> <socket>"
     exit 1
 fi
 
 wid="$1"
 type="$2"
 socket="$3"
+
+zsocket $socket
+fdc=$REPLY
+
+if (( err )); then
+    print -u $fdc err
+fi
 
 win=stdscr
 # zcurses addwin $win $LINES $COLUMNS 0 0 
@@ -91,9 +98,6 @@ tmux set-buffer "$out"
 print -rn -- "$out" | ${=ZPWR_COPY_CMD}
 
 zcurses end
-
-zsocket $socket
-fdc=$REPLY
 
 if [[ -z $out ]]; then
     print -u $fdc empty
