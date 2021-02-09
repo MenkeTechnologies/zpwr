@@ -51,6 +51,11 @@ function zpwrBindFinal(){
 
     ZPWR_VARS[EDITOR]="$ZPWR_VIM"
 
+    if [[ ! -p "$ZPWR_TEMPFIFO" ]]; then
+        rm -f "$ZPWR_TEMPFIFO"
+        mkfifo "$ZPWR_TEMPFIFO"
+    fi
+
 }
 
 zpwrBindFinal "$@"
