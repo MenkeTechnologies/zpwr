@@ -12,18 +12,27 @@ exec 2>> "$ZPWR_LOGFILE"
 printf "" > $ZPWR_TEMPFILE
 declare -a ZPWR_PANES
 declare -A ZPWR_PANE_INFO
-local line out cnt id winw winh pw ph pl pt h w t l o row col win ary
+local line out cnt id winw winh pw ph pl pt h w t l o row col win wid type ary socket fdc
 local capture="$ZPWR_TMUX_CAPTURE-$(date +%s).txt"
 
 if ! zmodload zsh/curses; then
     echo "Could NOT load zsh/curses" >&2
-    #exit 1
-fi
-
-if [[ -z "$2" ]]; then
-    echo "usage: allPanesSwap.zsh <win_id> <single/multi>" >&2
     exit 1
 fi
+
+if ! zmodload zsh/net/socket; then
+    echo "Could NOT load zsh/net/socket" >&2
+    exit 1
+fi
+
+if [[ -z "$3" ]]; then
+    echo "usage: allPanesSwap.zsh <win_id> <single/multi> <socket>" >&2
+    exit 1
+fi
+
+wid="$1"
+type="$2"
+socket="$3"
 
 win=stdscr
 # zcurses addwin $win $LINES $COLUMNS 0 0 
@@ -38,7 +47,7 @@ while read id winw winh pw ph pl pr pt; do
     ZPWR_PANE_INFO[${id}.r]="$pr"
     ZPWR_PANE_INFO[${id}.o]="$(tmux capture-pane -p -t "%$id")"
 done < \
-<(tmux lsp -t "$1" -F '#{pane_id} #{window_width} #{window_height} #{pane_width} #{pane_height} #{pane_left} #{pane_right} #{pane_top} ')
+<(tmux lsp -t "$wid" -F '#{pane_id} #{window_width} #{window_height} #{pane_width} #{pane_height} #{pane_left} #{pane_right} #{pane_top} ')
 
 #tmux wait-for -U fingerl1
 
@@ -70,7 +79,7 @@ zcurses refresh $win
 
 tmux capture-pane -J -p > "$capture"
 
-if [[ $2 == single ]]; then
+if [[ $type == single ]]; then
     cat "$capture" | thumbs -t "$ZPWR_TEMPFILE"
 else
     cat "$capture" | thumbs -m -t "$ZPWR_TEMPFILE"
@@ -83,8 +92,11 @@ print -rn -- "$out" | ${=ZPWR_COPY_CMD}
 
 zcurses end
 
+zsocket $socket
+fdc=$REPLY
+
 if [[ -z $out ]]; then
-    echo empty > "$ZPWR_TEMPFIFO"
+    print -u $fdc empty
 else
-    echo full > "$ZPWR_TEMPFIFO"
+    print -u $fdc full
 fi
