@@ -180,6 +180,8 @@ zpwrEvalIfNeeded ZPWR_TEMPFILE4 "$ZPWR_TEMPFILE4" "$ZPWR_LOCAL_TEMP/.temp$$-4$US
 zpwrEvalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER.sql" "$ZPWR_LOCAL_TEMP" "$USER"
 # last tmux window text capture
 zpwrEvalIfNeeded ZPWR_TMUX_CAPTURE "$ZPWR_TMUX_CAPTURE" "$ZPWR_TMUX_LOCAL/tmux-capture-$$-$USER" "$ZPWR_TMUX_LOCAL" "$USER"
+# socket for IPC
+zpwrEvalIfNeeded ZPWR_SOCKET "$ZPWR_SOCKET" "$ZPWR_LOCAL_TEMP/.temp-$USER-socket" "$ZPWR_LOCAL_TEMP" "$USER"
 # fifo for IPC
 zpwrEvalIfNeeded ZPWR_TEMPFIFO "$ZPWR_TEMPFIFO" "$ZPWR_LOCAL_TEMP/.temp-$USER-fifo" "$ZPWR_LOCAL_TEMP" "$USER"
 # zsh compsys completion system dir for cached completions
