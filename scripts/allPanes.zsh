@@ -34,7 +34,7 @@ active_sess="$(tmux ls -F '#{?session_attached,y,n} #{session_id}' | perl -ane '
 active_pane="$(tmux lsp -F '#{?pane_active,y,n} #{pane_id}' | perl -ane 'print $1 if m{y (.*)}')"
 
 
-tmux new-window -n "[zpwr-thumbs-$active_sess-$active_win]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh $active_win $type $ZPWR_SOCKET$$"
+tmux new-window -n "[zpwr-thumbs-$active_sess-$active_win-$active_pane]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh $active_win $type $ZPWR_SOCKET$$"
 
 zsocket -l $ZPWR_SOCKET$$
 fdl=$REPLY
@@ -53,10 +53,10 @@ rm -f "$ZPWR_SOCKET$$"
 
 #tmux swap-pane -d -s "$new_pane" -t "$active_pane"
 
-if tmux select-window -t "$active_sess:$active_win" &&
-   tmux select-pane -t "$active_sess:$active_win.$active_pane" &&
-   [[ "$msg" == full ]]; then
-    tmux paste-buffer
+if tmux select-window -t "$active_sess:$active_win"; then
+   if [[ "$msg" == full ]] && tmux select-pane -t "$active_sess:$active_win.$active_pane"; then
+        tmux paste-buffer
+    fi
 fi
 
 #tmux resize-pane -Z
