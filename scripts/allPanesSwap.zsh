@@ -13,7 +13,7 @@ printf "" > $ZPWR_TEMPFILE
 declare -a ZPWR_PANES
 declare -A ZPWR_PANE_INFO
 local line out cnt id winw winh pw ph pl pt h w t l o row col win ary
-
+local capture="$ZPWR_TMUX_CAPTURE-$(date +%s).txt"
 
 if ! zmodload zsh/curses; then
     echo "Could NOT load zsh/curses" >&2
@@ -26,8 +26,7 @@ if [[ -z "$2" ]]; then
 fi
 
 win=stdscr
-
-#zcurses addwin $win $LINES $COLUMNS 0 0 
+# zcurses addwin $win $LINES $COLUMNS 0 0 
 
 while read id winw winh pw ph pl pr pt; do
     id=${id#%}
@@ -54,45 +53,32 @@ for id in ${ZPWR_PANES[@]};do
     l=$ZPWR_PANE_INFO[$id.l]
     r=$ZPWR_PANE_INFO[$id.r]
     o=$ZPWR_PANE_INFO[$id.o]
+    # keep trailing space
     o="$o."
     ary=("${(@f)${o}}")
 
 
-    #say zcurses move $win $t $l
-    #say zcurses string $win "$o"
-    #$id
-    case $id in
-        *)
-            for line in "${ary[@]}"; do
-                zcurses move $win $((t + cnt)) $l
-                zcurses string $win $line
-                ((++cnt))
-            done
+    for line in "${ary[@]}"; do
+        zcurses move $win $((t + cnt)) $l
+        zcurses string $win "$line"
+        ((++cnt))
+    done
 
-            ;;
-    esac
-    #zcurses string $win "$id"
-
-    #for row in {0..$w}; do
-        #for col in {0..$((h-1))}; do
-            #out[$cnt]=$o[$((row + col))]
-            #((++cnt))
-        #done
-        #((cnt+=$w))
-
-    #done
 done
 
 zcurses refresh $win
+env >> "$ZPWR_LOGFILE"
 
-#echo zcurses delwin $win
+tmux capture-pane -J -p > "$capture"
+
 if [[ $2 == single ]]; then
-    tmux capture-pane -J -p | thumbs -t "$ZPWR_TEMPFILE"
+    cat "$capture" | thumbs -t "$ZPWR_TEMPFILE"
 else
-    tmux capture-pane -J -p | thumbs -m -t "$ZPWR_TEMPFILE"
+    cat "$capture" | thumbs -m -t "$ZPWR_TEMPFILE"
 fi
 
 out="${(j. .)${(f)$(<$ZPWR_TEMPFILE)}}"
+
 tmux set-buffer "$out"
 print -rn -- "$out" | ${=ZPWR_COPY_CMD}
 

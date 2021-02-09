@@ -178,6 +178,8 @@ zpwrEvalIfNeeded ZPWR_TEMPFILE3 "$ZPWR_TEMPFILE3" "$ZPWR_LOCAL_TEMP/.temp$$-3$US
 zpwrEvalIfNeeded ZPWR_TEMPFILE4 "$ZPWR_TEMPFILE4" "$ZPWR_LOCAL_TEMP/.temp$$-4$USER" "$ZPWR_LOCAL_TEMP" "$USER"
 # SQL temp files for use with learning collection
 zpwrEvalIfNeeded ZPWR_TEMPFILE_SQL "$ZPWR_TEMPFILE_SQL" "$ZPWR_LOCAL_TEMP/.temp$$-2$USER.sql" "$ZPWR_LOCAL_TEMP" "$USER"
+# last tmux window text capture
+zpwrEvalIfNeeded ZPWR_TMUX_CAPTURE "$ZPWR_TMUX_CAPTURE" "$ZPWR_TMUX_LOCAL/tmux-capture-$$-$USER" "$ZPWR_TMUX_LOCAL" "$USER"
 # fifo for IPC
 zpwrEvalIfNeeded ZPWR_TEMPFIFO "$ZPWR_TEMPFIFO" "$ZPWR_LOCAL_TEMP/.temp-$USER-fifo" "$ZPWR_LOCAL_TEMP" "$USER"
 # zsh compsys completion system dir for cached completions
