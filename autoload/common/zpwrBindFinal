@@ -53,7 +53,7 @@ function zpwrBindFinal(){
 
     if [[ ! -p "$ZPWR_TEMPFIFO" ]]; then
         rm -f "$ZPWR_TEMPFIFO"
-        mkfifo "$ZPWR_TEMPFIFO"
+        mkfifo "$ZPWR_TEMPFIFO" &>> "$ZPWR_LOGFILE"
     fi
 
 }
