@@ -67,7 +67,6 @@ for id in ${ZPWR_PANES[@]};do
 done
 
 zcurses refresh $win
-env >> "$ZPWR_LOGFILE"
 
 tmux capture-pane -J -p > "$capture"
 
