@@ -94,7 +94,13 @@ fi
 
 out="${(j. .)${(f)$(<$ZPWR_TEMPFILE)}}"
 
-tmux set-buffer "$out"
+# trail space
+if [[ $out[-1] == ' ' ]]; then
+    tmux set-buffer "$out"
+else
+    tmux set-buffer "$out "
+fi
+
 print -rn -- "$out" | ${=ZPWR_COPY_CMD}
 
 zcurses end
