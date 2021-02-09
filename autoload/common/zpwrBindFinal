@@ -51,9 +51,9 @@ function zpwrBindFinal(){
 
     ZPWR_VARS[EDITOR]="$ZPWR_VIM"
 
-    if [[ ! -p "$ZPWR_TEMPFIFO" ]]; then
-        rm -f "$ZPWR_TEMPFIFO"
-        mkfifo "$ZPWR_TEMPFIFO" &>> "$ZPWR_LOGFILE"
+    if [[ ! -p "$ZPWR_FIFO" ]]; then
+        rm -f "$ZPWR_FIFO"
+        mkfifo "$ZPWR_FIFO" &>> "$ZPWR_LOGFILE"
     fi
 
 }
