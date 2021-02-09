@@ -656,7 +656,7 @@ zpwrEvalIfNeeded ZPWR_TMUX_CAPTURE "$ZPWR_TMUX_CAPTURE" "$ZPWR_TMUX_LOCAL/tmux-c
 # socket for IPC
 zpwrEvalIfNeeded ZPWR_SOCKET "$ZPWR_SOCKET" "$ZPWR_LOCAL_TEMP/.temp-$USER-socket" "$ZPWR_LOCAL_TEMP" "$USER"
 # fifo for IPC
-zpwrEvalIfNeeded ZPWR_TEMPFIFO "$ZPWR_TEMPFIFO" "$ZPWR_LOCAL_TEMP/.temp-$USER-fifo" "$ZPWR_LOCAL_TEMP" "$USER"
+zpwrEvalIfNeeded ZPWR_FIFO "$ZPWR_FIFO" "$ZPWR_LOCAL_TEMP/.temp-$USER-fifo" "$ZPWR_LOCAL_TEMP" "$USER"
 # zsh compsys completion system dir for cached completions
 evalIfNeeded ZPWR_COMPSYS_CACHE "$ZPWR_COMPSYS_CACHE" "$ZPWR_LOCAL/zcompcache" "$ZPWR_LOCAL"
 # compsys cache file
