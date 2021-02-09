@@ -20,8 +20,8 @@ if ! zmodload zsh/curses; then
     #exit 1
 fi
 
-if [[ -z "$1" ]]; then
-    echo "usage: allPanesSwap.zsh <win_id>" >&2
+if [[ -z "$2" ]]; then
+    echo "usage: allPanesSwap.zsh <win_id> <single/multi>" >&2
     exit 1
 fi
 
@@ -86,7 +86,11 @@ done
 zcurses refresh $win
 
 #echo zcurses delwin $win
-tmux capture-pane -J -p | thumbs -m -t "$ZPWR_TEMPFILE"
+if [[ $2 == single ]]; then
+    tmux capture-pane -J -p | thumbs -t "$ZPWR_TEMPFILE"
+else
+    tmux capture-pane -J -p | thumbs -m -t "$ZPWR_TEMPFILE"
+fi
 
 out="${(j. .)${(f)$(<$ZPWR_TEMPFILE)}}"
 tmux set-buffer "$out"
