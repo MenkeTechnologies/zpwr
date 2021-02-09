@@ -13,7 +13,6 @@ printf "" > $ZPWR_TEMPFILE
 declare -a ZPWR_PANES
 declare -A ZPWR_PANE_INFO
 local line out cnt id winw winh pw ph pl pt h w t l o row col win wid type ary socket fdc err=0
-local capture="$ZPWR_TMUX_CAPTURE-$(date +%s).txt"
 
 if ! zmodload zsh/curses; then
     tmux display-message "Could NOT load zsh/curses"
@@ -33,6 +32,8 @@ fi
 wid="$1"
 type="$2"
 socket="$3"
+
+local capture="$ZPWR_TMUX_CAPTURE-win$wid-$(date +%s).txt"
 
 zsocket $socket
 fdc=$REPLY

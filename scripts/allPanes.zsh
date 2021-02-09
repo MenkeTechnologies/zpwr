@@ -34,7 +34,7 @@ active_sess="$(tmux ls -F '#{?session_attached,y,n} #{session_id}' | perl -ane '
 active_pane="$(tmux lsp -F '#{?pane_active,y,n} #{pane_id}' | perl -ane 'print $1 if m{y (.*)}')"
 
 
-tmux new-window -n "[zpwr-thumbs]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh $active_win $type $ZPWR_SOCKET$$"
+tmux new-window -n "[zpwr-thumbs-$active_sess-$active_win]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh $active_win $type $ZPWR_SOCKET$$"
 
 zsocket -l $ZPWR_SOCKET$$
 fdl=$REPLY
