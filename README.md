@@ -79,7 +79,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 350+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
 - 150+ centralized environment variables in ZPWR namespace to control functionality
 - 700+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
-- ~11.5k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
+- 11.5k+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 170+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2.8k+ line README
 - 46k+ LOC
@@ -164,7 +164,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - neovim with 79 plugins and python3/node support
 - perl
 - bash (4.0+, 3.2 not supported)
-- zinit with 87 plugins of which 27 are custom
+- zinit with 90+ plugins of which 30+ are custom
 - forked powerlevel10k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
@@ -179,6 +179,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - exa
 - bat
 - fd-find
+- thumbs
 - ripgrep
 - cargo-update
 - go
