@@ -24,16 +24,17 @@ if ! zmodload zsh/net/socket; then
     err=1
 fi
 
-if [[ -z "$3" ]]; then
-    tmux display-message "usage: allPanesSwap.zsh <win_id> <single/multi> <socket>"
+if [[ -z "$4" ]]; then
+    tmux display-message "usage: allPanesSwap.zsh <sess_id> <win_id> <single/multi> <socket>"
     exit 1
 fi
 
-wid="$1"
-type="$2"
-socket="$3"
+sid="$1"
+wid="$2"
+type="$3"
+socket="$4"
 
-local capture="$ZPWR_TMUX_CAPTURE-win$wid-$(date +%s).txt"
+local capture="$ZPWR_TMUX_CAPTURE-$sid-$wid-$(date +%s).txt"
 
 zsocket $socket
 fdc=$REPLY
