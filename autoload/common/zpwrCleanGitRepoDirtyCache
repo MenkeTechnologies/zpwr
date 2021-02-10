@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zpwrCleanGitRepoCache(){
+function zpwrCleanGitRepoDirtyCache(){
 
     emulate -L zsh
     setopt nullglob
@@ -11,4 +11,4 @@ function zpwrCleanGitRepoCache(){
         "$ZPWR_ALL_GIT_DIRS_DIRTY"
 }
 
-zpwrCleanGitRepoCache "$@"
+zpwrCleanGitRepoDirtyCache "$@"
