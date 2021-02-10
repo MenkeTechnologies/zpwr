@@ -687,8 +687,8 @@ builtin setopt rc_expand_param
 # display octal and hex like C
 builtin setopt cbases
 
-# any failing command in pipeline fails entire pipeline
-builtin setopt pipefail 2>/dev/null
+# any failing command in pipeline fails entire pipeline, breaks grep -q && ...
+#builtin setopt pipefail 2>/dev/null
 
 # search PATH for zsh <script>
 builtin setopt pathscript
