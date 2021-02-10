@@ -89,10 +89,15 @@ zcurses refresh $win
 tmux capture-pane -J -p > "$capture"
 
 if [[ $type == single ]]; then
-    cat "$capture" | thumbs -t "$ZPWR_TEMPFILE"
+    type=''
 else
-    cat "$capture" | thumbs -m -t "$ZPWR_TEMPFILE"
+    type='-m'
 fi
+
+cat "$capture" | thumbs \
+    --regexp '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$' \
+    '((?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,})(?::.*)?' \
+    ${=type} -t "$ZPWR_TEMPFILE"
 
 out="${(j. .)${(f)$(<$ZPWR_TEMPFILE)}}"
 
