@@ -162,6 +162,8 @@ zpwrEvalIfNeeded ZPWR_DEFAULT_BANNER "$ZPWR_DEFAULT_BANNER" "bash $ZPWR_SCRIPTS_
 zpwrEvalIfNeeded ZPWR_BANNER_SCRIPT "$ZPWR_BANNER_SCRIPT" "$ZPWR_SCRIPTS/about.sh" "$ZPWR_SCRIPTS"
 # cache of git dirs
 zpwrEvalIfNeeded ZPWR_ALL_GIT_DIRS "$ZPWR_ALL_GIT_DIRS" "$ZPWR_LOCAL/zpwrGitDirs.txt" "$ZPWR_LOCAL"
+# cache of clean git dirs
+zpwrEvalIfNeeded ZPWR_ALL_GIT_DIRS_CLEAN "$ZPWR_ALL_GIT_DIRS_CLEAN" "$ZPWR_LOCAL/zpwrGitDirsClean.txt" "$ZPWR_LOCAL"
 # cache of dirty git dirs
 zpwrEvalIfNeeded ZPWR_ALL_GIT_DIRS_DIRTY "$ZPWR_ALL_GIT_DIRS_DIRTY" "$ZPWR_LOCAL/zpwrGitDirsDirty.txt" "$ZPWR_LOCAL"
 # log file

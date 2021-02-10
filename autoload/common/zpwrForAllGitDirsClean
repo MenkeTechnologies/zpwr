@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrForAllGitDirsClean(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLoggErr "usage: zpwrForAllGitDirsClean <cmd>"
+        return 1
+    fi
+
+    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        zpwrPrettyPrint "must regen $ZPWR_ALL_GIT_DIRS first."
+        zsh-git-repo-regenAllGitRepos regen
+    fi
+
+    if [[ ! -s "$ZPWR_ALL_GIT_DIRS_CLEAN" ]]; then
+        zsh-git-repo-regenAllGitReposDirty regen
+    fi
+
+    zpwrFordir "$*" \
+        $(cat $ZPWR_ALL_GIT_DIRS_CLEAN)
+}
+
+zpwrForAllGitDirsClean "$@"

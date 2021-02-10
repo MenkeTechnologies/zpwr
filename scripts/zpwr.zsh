@@ -175,6 +175,8 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[gitlargest]='zpwrLargestGitFiles=show largest files stored by git in descending order'
     ZPWR_VERBS[gitremotes]='zpwrAllRemotes=list all git remotes'
     ZPWR_VERBS[gitreposexec]='zpwrForAllGitDirs=run cmd in cached git dirs'
+    ZPWR_VERBS[gitreposcleanexec]='zpwrForAllGitDirsRefreshClean=refresh clean cache and run cmd in clean git dirs'
+    ZPWR_VERBS[gitreposcleancacheexec]='zpwrForAllGitDirsClean=run cmd in clean dirty dirs'
     ZPWR_VERBS[gitreposdirtyexec]='zpwrForAllGitDirsRefreshDirty=refresh dirty cache and run cmd in dirty git dirs'
     ZPWR_VERBS[gitreposdirtycacheexec]='zpwrForAllGitDirsDirty=run cmd in cached dirty dirs'
     ZPWR_VERBS[gitsearch]='gse=search for regex in git log'
