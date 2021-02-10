@@ -8,6 +8,7 @@ command ls "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc
     "$ZPWR_ENV/"{.minvimrc,.mininit.vim} \
     "$ZPWR_INSTALL/conf."* \
     "$ZPWR_INSTALL/"*.sh \
+    "$ZPWR_INSTALL/".* \
     "$ZPWR_INSTALL/"*.service \
     "$ZPWR_INSTALL/UltiSnips/"*.snippets \
     "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
