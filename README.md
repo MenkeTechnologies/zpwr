@@ -1093,14 +1093,11 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[OQ" sub ```
 - ``` bindkey -M viins "^[OR" zpwrGetrcWidget ```
 - ``` bindkey -M viins "^[[1;2D" sub ```
-- ``` bindkey -M viins "^[[1;5A" zsh-gacp-CheckDiff ```
-- ``` bindkey -M viins "^[[1;5B" zpwrUpdater ```
-- ``` bindkey -M viins "^[[1;5C" zpwrTutsUpdate ```
-- ``` bindkey -M viins "^[[1;5D" dbz ```
-- ``` bindkey -M viins "^[[1~" beginning-of-line ```
 - ``` bindkey -M viins "^[[200~" bracketed-paste ```
-- ``` bindkey -M viins "^[[3~" delete-char ```
-- ``` bindkey -M viins "^[[4~" end-of-line ```
+- ``` bindkey -M viins "^[[5A" zsh-gacp-CheckDiff ```
+- ``` bindkey -M viins "^[[5B" zpwrUpdater ```
+- ``` bindkey -M viins "^[[5C" zpwrTutsUpdate ```
+- ``` bindkey -M viins "^[[5D" dbz ```
 - ``` bindkey -M viins "^[[5~" zpwrClipboard ```
 - ``` bindkey -M viins "^[[A" history-substring-search-up ```
 - ``` bindkey -M viins "^[[B" history-substring-search-down ```
@@ -1302,12 +1299,12 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M menuselect "^[OB" down-line-or-history ```
 - ``` bindkey -M menuselect "^[OC" forward-char ```
 - ``` bindkey -M menuselect "^[OD" backward-char ```
-- ``` bindkey -M menuselect "^[[1;5A" vi-backward-word ```
-- ``` bindkey -M menuselect "^[[1;5B" vi-forward-word ```
-- ``` bindkey -M menuselect "^[[1;5C" vi-end-of-line ```
-- ``` bindkey -M menuselect "^[[1;5D" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[1~" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[4~" vi-end-of-line ```
+- ``` bindkey -M menuselect "^[[5A" vi-backward-word ```
+- ``` bindkey -M menuselect "^[[5B" vi-forward-word ```
+- ``` bindkey -M menuselect "^[[5C" vi-end-of-line ```
+- ``` bindkey -M menuselect "^[[5D" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[5~" vi-backward-word ```
 - ``` bindkey -M menuselect "^[[6~" vi-forward-word ```
 - ``` bindkey -M menuselect "^[[A" up-line-or-history ```
@@ -1460,8 +1457,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viopp "j" down-line ```
 - ``` bindkey -M viopp "k" up-line ```
 # Vim Keybindings Insert Mode
-- ```                                                                                                                                                                  ```
-- ```                                                                                  ```
 - ``` i  <S-BS>       @<Plug>delimitMateS-BS ```
 - ``` i  <BS>         @<Plug>delimitMateBS ```
 - ``` i  <Plug>delimitMateJumpMany *@<SNR>56_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>" ```
@@ -1630,7 +1625,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  <C-Z>       * <Esc>:suspend<CR> ```
 - ``` i  <C-\>       * <Esc>+ ```
 # Vim Keybindings Normal Mode
-- ```                                                                                  ```
 - ``` n  <Space>hp    @<Plug>(GitGutterPreviewHunk) ```
 - ``` n  <Space>hu    @<Plug>(GitGutterUndoHunk) ```
 - ``` n  <Space>hs    @<Plug>(GitGutterStageHunk) ```
@@ -2351,7 +2345,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Home>      * gg ```
 - ``` n  <Plug>RepeatEx * @: :call repeat#set("\<Plug>RepeatEx")<CR> ```
 # Vim Keybindings Visual Mode
-- ```                                                                                  ```
 - ``` x  <Space>hs    @<Plug>(GitGutterStageHunk) ```
 - ``` x  ac           @<Plug>(GitGutterTextObjectOuterVisual) ```
 - ``` x  ic           @<Plug>(GitGutterTextObjectInnerVisual) ```
@@ -2492,18 +2485,18 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  <Plug>(MatchitVisualForward) * :<C-U>call matchit#Match_wrapper('',1,'v')<CR>m'gv`` ```
 - ``` v  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Fuel(v:count1)<CR> ```
 - ``` v  <Plug>(wildfire-water) * :<C-U>call wildfire#Water(v:count1)<CR> ```
-- ``` x  <Plug>unimpaired_xml_decode * <SNR>171_TransformSetup("xml_decode") ```
-- ``` x  <Plug>unimpaired_xml_encode * <SNR>171_TransformSetup("xml_encode") ```
-- ``` x  <Plug>unimpaired_url_decode * <SNR>171_TransformSetup("url_decode") ```
-- ``` x  <Plug>unimpaired_url_encode * <SNR>171_TransformSetup("url_encode") ```
-- ``` x  <Plug>unimpaired_string_decode * <SNR>171_TransformSetup("string_decode") ```
-- ``` x  <Plug>unimpaired_string_encode * <SNR>171_TransformSetup("string_encode") ```
-- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>171_MoveSelectionDown(v:count1)<CR> ```
-- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>171_MoveSelectionUp(v:count1)<CR> ```
-- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>171_Context(0)<CR> ```
-- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>171_Context(1)<CR> ```
-- ``` v  <Plug>VgSurround * :<C-U>call <SNR>170_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
-- ``` v  <Plug>VSurround * :<C-U>call <SNR>170_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
+- ``` x  <Plug>unimpaired_xml_decode * <SNR>170_TransformSetup("xml_decode") ```
+- ``` x  <Plug>unimpaired_xml_encode * <SNR>170_TransformSetup("xml_encode") ```
+- ``` x  <Plug>unimpaired_url_decode * <SNR>170_TransformSetup("url_decode") ```
+- ``` x  <Plug>unimpaired_url_encode * <SNR>170_TransformSetup("url_encode") ```
+- ``` x  <Plug>unimpaired_string_decode * <SNR>170_TransformSetup("string_decode") ```
+- ``` x  <Plug>unimpaired_string_encode * <SNR>170_TransformSetup("string_encode") ```
+- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>170_MoveSelectionDown(v:count1)<CR> ```
+- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>170_MoveSelectionUp(v:count1)<CR> ```
+- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>170_Context(0)<CR> ```
+- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>170_Context(1)<CR> ```
+- ``` v  <Plug>VgSurround * :<C-U>call <SNR>169_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
+- ``` v  <Plug>VSurround * :<C-U>call <SNR>169_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
 - ``` x  <Plug>SneakPrevious   <Plug>Sneak_, ```
 - ``` x  <Plug>SneakNext   <Plug>Sneak_; ```
 - ``` x  <Plug>(SneakStreakBackward)   <Plug>SneakLabel_S ```
@@ -2518,8 +2511,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` x  <Plug>Sneak_t * :<C-U>call sneak#wrap(visualmode(), 1, 0, 0, 0)<CR> ```
 - ``` x  <Plug>Sneak_F * :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 0)<CR> ```
 - ``` x  <Plug>Sneak_f * :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 0)<CR> ```
-- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>168_rpt(visualmode(), 1)<CR> ```
-- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>168_rpt(visualmode(), 0)<CR> ```
+- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>167_rpt(visualmode(), 1)<CR> ```
+- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>167_rpt(visualmode(), 0)<CR> ```
 - ``` x  <Plug>Sneak_S * :<C-U>call sneak#wrap(visualmode(), 2, 1, 2, 1)<CR> ```
 - ``` x  <Plug>Sneak_s * :<C-U>call sneak#wrap(visualmode(), 2, 0, 2, 1)<CR> ```
 - ``` x  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'v', 1, 1)<CR> ```
@@ -2821,8 +2814,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  <C-Left>    * <gv ```
 - ``` v  <C-Right>   * >gv ```
 # Vim Keybindings Command Colon Mode
-- ```                                                                                                                                                                  ```
-- ```                                                                                  ```
 - ``` !  <M-C-H>     * <C-W> ```
 - ``` !  <M-BS>      * <C-W> ```
 - ``` !  <M-p>       * <Up> ```
