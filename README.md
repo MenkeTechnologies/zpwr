@@ -104,7 +104,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right as standalone script
 - vim keybindings (insert, normal and visual modes) to run current vim selection in tmux pane to right in REPL
 - fzf preview pane show contents of JAR, WAR, deb, rpm, zip, tgz and gzip files controlled by central FZF.*OPTS env vars
-- ergonomic, recursive tmux keybindings for next and previous windows
+- ergonomic, repeating tmux keybindings for next and previous windows
 - zsh keybindings to fzf search file names and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimfilesearch`
 - zsh keybindings to fzf search file contents and syntax highlighted, numbered file preview from bat or pygmentize `zpwr vimwordsearch`
 - zsh keybindings to fzf search of network processes with lsof return PIDs `zpwr lsof`

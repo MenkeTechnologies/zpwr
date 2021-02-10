@@ -16,7 +16,7 @@
 [alias]
     last = log -1 HEAD
 	unstage = reset HEAD --
-	untrack = rm --cached
+	untrack = rm --cached -r
 	track = add -N
 	stage = add
 	visual = !gitk
