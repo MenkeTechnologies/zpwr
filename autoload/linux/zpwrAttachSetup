@@ -70,9 +70,9 @@ function zpwrAttachSetup() {
                         sid=$(tmux new-session -P -d 2>> "$ZPWR_LOGFILE") 
                         ret=$?
                         logg "tmux create ret: '$ret'"
-                        #2x C-C to rid copy-mode
-                        tmux send-keys -t $sid C-C
-                        tmux send-keys -t $sid C-C
+                        #2x q C-h to rid copy-mode
+                        tmux send-keys -t $sid q C-h
+                        tmux send-keys -t $sid q C-h
                         tmux send-keys -t $sid 'tmux source-file "$ZPWR_TMUX/control-window"' C-m
                         tmux attach-session -t $sid
                     fi
