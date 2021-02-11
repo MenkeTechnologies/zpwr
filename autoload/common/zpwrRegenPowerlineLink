@@ -25,7 +25,7 @@ function zpwrRegenPowerlineLink(){
             ln -sfn "$dir" "$TMUX_HOME"
         )
     fi
-    command tmux source-file "$ZPWR_TMUX/init.conf"
+    command tmux source-file "$ZPWR_TMUX/init.conf" &>> "$ZPWR_LOGFILE"
 }
 
 zpwrRegenPowerlineLink "$@"
