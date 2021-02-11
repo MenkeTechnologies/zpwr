@@ -4,6 +4,7 @@ function zpwrRegenAll(){
 
     zpwrRegenMost
     zsh-git-repo-regenAllGitRepos regen
+    zsh-git-repo-regenAllGitReposDirty
 }
 
 zpwrRegenAll "$@"
