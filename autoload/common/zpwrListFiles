@@ -5,6 +5,7 @@ command ls "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/"*.{sh,py,zsh,pl} \
     "$ZPWR_TMUX/tmux-"* \
+    "$ZPWR_TMUX/"*(x.) \
     "$ZPWR_TMUX/"*.conf \
     "$ZPWR_ENV/"{.minvimrc,.mininit.vim} \
     "$ZPWR_INSTALL/conf."* \
