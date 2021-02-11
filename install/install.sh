@@ -893,7 +893,7 @@ if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     if [[ $noTmux != true ]];then
         command tmux source-file "$HOME/.tmux.conf"
         zsh -c 'tmux new-session -d -s main'
-        tmux send-keys -t "main" 'tmux source-file "'"$ZPWR_TMUX/control-window"'"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
+        tmux send-keys -t "main" 'tmux source-file "'"$ZPWR_TMUX/control-window.conf"'"; tmux select-pane -t right; tmux send-keys "matr" C-m' C-m
         tmux attach -t main
     fi
 fi

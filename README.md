@@ -350,8 +350,8 @@ export ZPWR_COLORS_SECTIONS=false
 File ending of currently edited file in vim determines the interpreter used by the bash script `$ZPWR_SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
 
 ## Tmux Main Window
-The main window show in the screenshots is started by prefix-D (tmux prefix definition mentioned above) in an empty tmux window.  This sources a tmux script `~/.zpwr/tmux/control-window`.
-Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-window` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window` in an empty tmux window.
+The main window show in the screenshots is started by prefix-D (tmux prefix definition mentioned above) in an empty tmux window.  This sources a tmux script `~/.zpwr/tmux/control-window.conf`.
+Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-windo.conf` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window.conf` in an empty tmux pane.
 
 ## Personal Config
 Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup so you can put your additional code there.  This file will not be overridden with the `zpwr update` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any zsh only features like `zpwrIsZsh && myZshConfig`.  Startup shell files will source `~/.zpwr/local/.tokens-post.sh` after all zsh config and zinit startup.
@@ -868,12 +868,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode-vi Right                send-keys -X cursor-right ```
 - ``` bind-key    -T copy-mode-vi C-Up                 send-keys -X scroll-up ```
 - ``` bind-key    -T copy-mode-vi C-Down               send-keys -X scroll-down ```
-- ``` bind-key    -T prefix       C-a                  send-prefix ```
-- ``` bind-key    -T prefix       C-n                  next-window ```
 - ``` bind-key    -T prefix       C-o                  rotate-window ```
-- ``` bind-key    -T prefix       C-p                  previous-window ```
-- ``` bind-key    -T prefix       C-r                  run-shell ~/.tmux/plugins/tmux-resurrect/scripts/restore.sh ```
-- ``` bind-key    -T prefix       C-s                  run-shell ~/.tmux/plugins/tmux-resurrect/scripts/save.sh ```
 - ``` bind-key    -T prefix       C-v                  run-shell "tmux set buffer \"$(reattach-to-user-namespace pbpaste)\"; tmux paste-buffer" ```
 - ``` bind-key    -T prefix       C-z                  suspend-client ```
 - ``` bind-key    -T prefix       Space                run-shell -b "~/.zpwr/scripts/allPanes.zsh single" ```
@@ -928,7 +923,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       \\                   split-window -h -c "#{pane_current_path}" ```
 - ``` bind-key    -T prefix       ]                    paste-buffer ```
 - ``` bind-key    -T prefix       _                    split-window -v -c "#{pane_current_path}" ```
-- ``` bind-key    -T prefix       a                    last-window ```
 - ``` bind-key    -T prefix       c                    new-window ```
 - ``` bind-key    -T prefix       d                    detach-client ```
 - ``` bind-key    -T prefix       f                    command-prompt "find-window -Z -- '%%'" ```
@@ -1093,11 +1087,14 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[OQ" sub ```
 - ``` bindkey -M viins "^[OR" zpwrGetrcWidget ```
 - ``` bindkey -M viins "^[[1;2D" sub ```
+- ``` bindkey -M viins "^[[1;5A" zsh-gacp-CheckDiff ```
+- ``` bindkey -M viins "^[[1;5B" zpwrUpdater ```
+- ``` bindkey -M viins "^[[1;5C" zpwrTutsUpdate ```
+- ``` bindkey -M viins "^[[1;5D" dbz ```
+- ``` bindkey -M viins "^[[1~" beginning-of-line ```
 - ``` bindkey -M viins "^[[200~" bracketed-paste ```
-- ``` bindkey -M viins "^[[5A" zsh-gacp-CheckDiff ```
-- ``` bindkey -M viins "^[[5B" zpwrUpdater ```
-- ``` bindkey -M viins "^[[5C" zpwrTutsUpdate ```
-- ``` bindkey -M viins "^[[5D" dbz ```
+- ``` bindkey -M viins "^[[3~" delete-char ```
+- ``` bindkey -M viins "^[[4~" end-of-line ```
 - ``` bindkey -M viins "^[[5~" zpwrClipboard ```
 - ``` bindkey -M viins "^[[A" history-substring-search-up ```
 - ``` bindkey -M viins "^[[B" history-substring-search-down ```
@@ -1299,12 +1296,12 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M menuselect "^[OB" down-line-or-history ```
 - ``` bindkey -M menuselect "^[OC" forward-char ```
 - ``` bindkey -M menuselect "^[OD" backward-char ```
+- ``` bindkey -M menuselect "^[[1;5A" vi-backward-word ```
+- ``` bindkey -M menuselect "^[[1;5B" vi-forward-word ```
+- ``` bindkey -M menuselect "^[[1;5C" vi-end-of-line ```
+- ``` bindkey -M menuselect "^[[1;5D" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[1~" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[4~" vi-end-of-line ```
-- ``` bindkey -M menuselect "^[[5A" vi-backward-word ```
-- ``` bindkey -M menuselect "^[[5B" vi-forward-word ```
-- ``` bindkey -M menuselect "^[[5C" vi-end-of-line ```
-- ``` bindkey -M menuselect "^[[5D" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[5~" vi-backward-word ```
 - ``` bindkey -M menuselect "^[[6~" vi-forward-word ```
 - ``` bindkey -M menuselect "^[[A" up-line-or-history ```
@@ -1457,6 +1454,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viopp "j" down-line ```
 - ``` bindkey -M viopp "k" up-line ```
 # Vim Keybindings Insert Mode
+- ```                                                                                                                                                                  ```
+- ```                                                                                  ```
 - ``` i  <S-BS>       @<Plug>delimitMateS-BS ```
 - ``` i  <BS>         @<Plug>delimitMateBS ```
 - ``` i  <Plug>delimitMateJumpMany *@<SNR>56_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>" ```
@@ -1625,6 +1624,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  <C-Z>       * <Esc>:suspend<CR> ```
 - ``` i  <C-\>       * <Esc>+ ```
 # Vim Keybindings Normal Mode
+- ```  ```
 - ``` n  <Space>hp    @<Plug>(GitGutterPreviewHunk) ```
 - ``` n  <Space>hu    @<Plug>(GitGutterUndoHunk) ```
 - ``` n  <Space>hs    @<Plug>(GitGutterStageHunk) ```
@@ -2345,6 +2345,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Home>      * gg ```
 - ``` n  <Plug>RepeatEx * @: :call repeat#set("\<Plug>RepeatEx")<CR> ```
 # Vim Keybindings Visual Mode
+- ```                                                                                  ```
 - ``` x  <Space>hs    @<Plug>(GitGutterStageHunk) ```
 - ``` x  ac           @<Plug>(GitGutterTextObjectOuterVisual) ```
 - ``` x  ic           @<Plug>(GitGutterTextObjectInnerVisual) ```
@@ -2814,6 +2815,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  <C-Left>    * <gv ```
 - ``` v  <C-Right>   * >gv ```
 # Vim Keybindings Command Colon Mode
+- ```                                                                                  ```
 - ``` !  <M-C-H>     * <C-W> ```
 - ``` !  <M-BS>      * <C-W> ```
 - ``` !  <M-p>       * <Up> ```
