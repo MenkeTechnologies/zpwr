@@ -18,7 +18,9 @@
 if has("nvim")
     "source $VIM/sysinit.vim
 else
-    source $VIMRUNTIME/defaults.vim
+    if !empty(glob('$VIMRUNTIME/defaults.vim'))
+        source $VIMRUNTIME/defaults.vim
+    endif
 endif
 
 let mapleader = "\<space>"
