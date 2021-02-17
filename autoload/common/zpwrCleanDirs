@@ -1,6 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrClean() {
+
+function zpwrCleanDirs() {
 
     emulate -L zsh
     setopt nullglob
@@ -23,4 +24,4 @@ function ___zpwrClean() {
     done
 }
 
-___zpwrClean "$@"
+zpwrCleanDirs "$@"

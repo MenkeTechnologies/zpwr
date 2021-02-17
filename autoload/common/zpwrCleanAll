@@ -1,6 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrCleanAll() {
+
+function zpwrCleanAll() {
 
     zpwrPrettyPrint "zpwrCleanLog"
     zpwrCleanLog
@@ -15,7 +16,7 @@ function ___zpwrCleanAll() {
     zpwrPrettyPrint "zpwrCleanTemp"
     zpwrCleanTemp
     zpwrPrettyPrint "clean $zpwrDirsClean"
-    zpwrClean
+    zpwrCleanDirs
 }
 
-___zpwrCleanAll "$@"
+zpwrCleanAll "$@"
