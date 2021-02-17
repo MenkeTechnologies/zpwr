@@ -56,6 +56,12 @@ function zpwrAcceptLine () {
             if [[ $match[6] =~ '(sudo|env)' ]]; then
                 cmd=${cmd_words[1]}
 
+                # sudo -
+                if [[ -z "$cmd" ]]; then
+                    zle .accept-line
+                    return 0
+                fi
+
                 # sudo =iftop fails so remove =
                 cmd=${cmd#=}
                 out="$(alias -- $cmd)"
