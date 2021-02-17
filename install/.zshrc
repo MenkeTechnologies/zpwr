@@ -421,8 +421,8 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     # late load prompt and call precmd fns first thing after prompt loads
 
-    zinit ice lucid nocd nocompile wait'!' atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs' \
-        atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPreCmd; _p9k_precmd &> /dev/null'
+    zinit ice lucid nocd nocompile wait'!' atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs; zpwrPrecmd' \
+        atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPrecmd; _p9k_precmd &> /dev/null'
     zinit load MenkeTechnologies/zpwrp10k
 
     # late
