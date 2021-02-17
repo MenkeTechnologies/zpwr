@@ -1,8 +1,0 @@
-# -*- mode: sh -*-
-# vim: set ft=sh:
-function zpwrBindPreCmd(){
-    # zinit dirs showing in prompt
-    unset ___pdir_path ___pdir_orig ___oldcd;
-}
-
-zpwrBindPreCmd "$@"

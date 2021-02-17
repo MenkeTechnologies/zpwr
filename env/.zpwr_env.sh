@@ -123,6 +123,8 @@ export ZPWR_MARKER_COLOR='0;1;4;37;44m'
 export ZPWR_PYGMENTIZE_COLOR="emacs"
 # zpwr colorizer = bat or pygmentize
 export ZPWR_COLORIZER=bat
+# zsh options set in precmd fn before prompt
+export ZPWR_OPTS=
 # the OS of the host
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework
