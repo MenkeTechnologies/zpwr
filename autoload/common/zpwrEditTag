@@ -29,7 +29,7 @@ function ___zpwrEditTag(){
         fi
     done < <(git tag --sort=-v:refname -n -l)
 
-    BUFFER="git tag -fam \"$desc\" $tag && git push -f origin --tags"
+    BUFFER="git tag -fam '$desc' $tag && git push -f origin --tags"
 
     print -rz -- "$BUFFER"
 }

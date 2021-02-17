@@ -238,7 +238,7 @@ function zpwrBindAliasesLate(){
                 (ubuntu|debian|kali|linuxmint) :
                     ;;
                 (fedora|centos|rhel)
-        alias exa='exa --git -il -F -H --color-scale -g -a'
+                    alias exa='exa --git -il -F -H --color-scale -g -a'
                     ;;
                 (*suse*) :
                     if zpwrExists zypper;then
