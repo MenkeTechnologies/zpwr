@@ -6,7 +6,7 @@ function lcm(){
     msg="$(git log -1 --pretty='%s')"
     tag="$(git tag --sort=-v:refname -l | sed 1q)"
 
-    print -z -- "git tag -fam \"$msg\" $tag && git push -f origin --tags"
+    print -z -- "git tag -fam '$msg' $tag && git push -f origin --tags"
 }
 
 lcm "$@"
