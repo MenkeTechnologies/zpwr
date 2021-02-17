@@ -3,10 +3,11 @@
 function ___zpwrRestoreHistfile(){
 
     zpwrPrettyPrint "Restore backup of $HISTFILE"
-    command rm "$HISTFILE"
+    echo command rm -f "$HISTFILE"
+    command rm -f "$HISTFILE"
     zpwrPrettyPrint command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
     command cp $ZPWR_LOCAL/rcBackups/.$ZPWR_REPO_NAME-$ZPWR_GITHUB_ACCOUNT-history*(.DOL[1]) "$HISTFILE"
-    builtin fc -R "$HISTFILE"
+    builtin fc -p "$HISTFILE"
 }
 
 ___zpwrRestoreHistfile "$@"
