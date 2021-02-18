@@ -7,9 +7,11 @@ function zpwrCleanGitRepoDirtyCache(){
     setopt nullglob
 
     echo rm -rf \
-        "$ZPWR_ALL_GIT_DIRS_DIRTY"
+        "$ZPWR_ALL_GIT_DIRS_DIRTY" \
+        "$ZPWR_ALL_GIT_DIRS_CLEAN"
     rm -rf \
-        "$ZPWR_ALL_GIT_DIRS_DIRTY"
+        "$ZPWR_ALL_GIT_DIRS_DIRTY" \
+        "$ZPWR_ALL_GIT_DIRS_CLEAN"
 }
 
 zpwrCleanGitRepoDirtyCache "$@"
