@@ -3,7 +3,7 @@
 
 function zpwrAcceptLine () {
 
-    local pane commandsThatModifyFiles regex mywords line command cmd out aliases
+    local pane commandsThatModifyFiles regex mywords line command cmd out aliases args grc_cmd
 
     if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
         ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
@@ -51,24 +51,18 @@ function zpwrAcceptLine () {
 
     #so sudo -E env ping uses grc overalias of ping
     if zpwrCommandExists grc; then
-        if [[ $BUFFER =~ "^([[:space:]]*)([[:graph:]]+=[[:graph:]]+[[:space:]]+)*(([\\\\\"\']*builtin[\\\\\"\']*[[:space:]]+)*[\\\\\"\']*command[\\\\\"\']*)?([[:space:]]*)(([\\\\\"\']*zpwr[\\\\\"\']*([[:space:]]+)(-[[:graph:]]+)*)*([\\\\\"\']*sudo[\\\\\"\']*([[:space:]]+)((-[ABbEHnPSis]+[[:space:]]*|-[CghpTu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*([\\\\\"\']*env[\\\\\"\']*[[:space:]]+(-[iv]+[[:space:]]*|-[PSu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*)*([[:space:]]*)(.*)$" ]]; then
-            cmd_words=("${(z)match[-1]}")
-            if [[ $match[6] =~ '(sudo|env)' ]]; then
-                cmd=${cmd_words[1]}
-
-                # sudo -
-                if [[ -z "$cmd" ]]; then
-                    zle .accept-line
-                    return 0
-                fi
+        if [[ $BUFFER =~ "^([[:space:]]*)([[:graph:]]+=[[:graph:]]+[[:space:]]+)*(([\\\"\']*builtin[\\\"\']*[[:space:]]+)*[\\\"\']*command[\\\"\']*)?([[:space:]]*)(([\\\"\']*zpwr[\\\\\"\']*([[:space:]]+)(-[[:graph:]]+)*)*([\\\"\']*sudo[\\\"\']*([[:space:]]+)((-[ABbEHnPSis]+[[:space:]]*|-[CghpTu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*([\\\"\']*env[\\\"\']*[[:space:]]+(-[iv]+[[:space:]]*|-[PSu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*)*([[:space:]]*)([[:graph:]]+)(.*)$" ]]; then
+            args=("${(z)match[-1]}")
+            cmd="${match[-2]}"
+            if [[ $match[10] =~ sudo ]] || [[ $match[15] =~ env ]]; then
 
                 # sudo =iftop fails so remove =
                 cmd=${cmd#=}
                 out="$(alias -- $cmd)"
                 if [[ "$out" == *grc* ]]; then
-                    cmdlet="$(eval echo "${out#*=}")"
+                    grc_cmd="$(eval echo "${out#*=}")"
                     print -srn -- "$BUFFER"
-                    BUFFER="sudo -E env \"PATH=$PATH\" $cmdlet $cmd_words[2,$]"
+                    BUFFER="sudo -E env \"PATH=$PATH\" $grc_cmd ${args[@]}"
                     echo
                     eval "$BUFFER"
                     BUFFER=""
