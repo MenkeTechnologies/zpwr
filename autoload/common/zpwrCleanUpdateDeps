@@ -3,7 +3,7 @@
 
 function zpwrCleanUpdateDeps() {
 
-    zpwrClean
+    zpwrCleanDirs
     zpwrUpdateDeps
 
 }
