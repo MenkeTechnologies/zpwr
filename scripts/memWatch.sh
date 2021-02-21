@@ -25,6 +25,7 @@ function memCheckLoop() {
             free -h
 
             mutt -s "MEMORY_THRESHOLD exceeded: $used" "$1" < <(free -h; top -w 500 -c -o %MEM -bn1; )
+            sleep 3600
         fi
         sleep 10
     done
@@ -32,7 +33,7 @@ function memCheckLoop() {
 }
 
 if [[ -z "$1" ]]; then
-    MEMORY_THRESHOLD=20000000
+    MEMORY_THRESHOLD=30000000
 else
     MEMORY_THRESHOLD="$1"
 fi
