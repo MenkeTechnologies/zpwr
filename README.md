@@ -123,8 +123,8 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh plugins loading based on OS
 - zsh functions autoloading based on OS
 - tmux keybindings and scripts based on OS
-- custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `install.sh` run
-- custom banners when new shell is launched `zpwr banner`
+- custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `$ZPWR_INSTALL/install.sh` run
+- custom banners when new shell is launched `ZPWR_DEFAULT_BANNER`
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
 - expanded vim text objects on command line
 - vim extract method from visual selection for shell, perl and python scripts (`gv` to select extracted)
