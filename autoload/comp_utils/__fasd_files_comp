@@ -6,7 +6,7 @@ __fasd_files_comp(){
     local curcontext="daily-cache$curcontext"
 
     if ! (( $+__fasd_files )) && ! _retrieve_cache fasd_files_cache; then
-        __fasd_files=( $(fasd -f |& perl -e '@l=reverse<>;do{print quotemeta($2).":".quotemeta($1)." " if/^\s*(\S+)\s+(\S+)\s*$/}for@l') )
+        __fasd_files=( ${(@f)"$(fasd -f 2>&1 | perl -e '@l=reverse<>;do{print quotemeta($2).":".quotemeta($1)."\n" if m{^\s*(\S+)\s+(\S+.*)$}}for@l')"} )
         _store_cache fasd_files_cache __fasd_files
     fi
 

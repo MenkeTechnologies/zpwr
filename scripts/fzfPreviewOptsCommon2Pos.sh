@@ -70,7 +70,7 @@ EOF
 
 
 cat<<EOF
-test -z \$file && file=\$(echo {} | cut -d" " -f2 | sed "s@^~@$HOME@");
+test -z \$file && file=\$(echo {} | cut -d" " -f2- | sed "s@^~@$HOME@");
 if test -f \$file;then
     if print -r -- \$file | command egrep -iq "\\.[jw]ar\$";then jar tf \$file | $FZF_COLORIZER_JAVA;
     elif print -r -- \$file | command egrep -iq "\\.(tgz|tar|tar\\.gz)\$";then tar tf \$file | $FZF_COLORIZER_C;
