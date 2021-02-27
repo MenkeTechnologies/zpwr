@@ -11,7 +11,7 @@
 #**************************************************************
 function zpwrIsZsh(){
 
-    [[ $(command ps -o command= -p $$) =~ (^-?|/)zsh ]]
+    test -n $ZSH_VERSION
 }
 
 if zpwrIsZsh; then

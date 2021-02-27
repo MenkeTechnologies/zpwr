@@ -25,6 +25,7 @@
 	supdate = submodule update --remote --merge
     m4 = mergetool -t merge4
     m3 = mergetool -t merge3
+    wipe = checkout --
 
 [color "diff-highlight"]
 	oldNormal = red bold
