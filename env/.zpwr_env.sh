@@ -174,7 +174,7 @@ test -z "$ZPWR_REMOTE" && export ZPWR_REMOTE=false
 
 function zpwrIsZsh(){
 
-    test -n $ZSH_VERSION
+    test -n "$ZSH_VERSION"
 }
 
 if [[ "$ZPWR_REMOTE" == false ]]; then
