@@ -11,7 +11,7 @@
 #**************************************************************
 function zpwrIsZsh(){
 
-    test -n $ZSH_VERSION
+    test -n "$ZSH_VERSION"
 }
 
 if zpwrIsZsh; then
