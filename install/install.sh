@@ -891,10 +891,7 @@ fi
 #**************************************************************
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     if [[ $noTmux != true ]];then
-        zsh -c "ZPWR_TMUX=$ZPWR_TMUX SHELL=$SHELL tmux new-session -d -s main"
-        tmux send-keys -t 'main' "tmux source-file \"$ZPWR_TMUX/control-window.conf\"; tmux select-pane -t right; tmux send-keys \"matr\" C-m" C-m
-
-        tmux attach -t main
+        source "$ZPWR_INSTALL/startMux.sh"
     fi
 fi
 #}}}***********************************************************
