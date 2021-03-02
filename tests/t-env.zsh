@@ -12,6 +12,33 @@
     load "test_lib.zsh"
 }
 
+@test 'zpwrIsZsh fn returns 0' {
+    run type zpwrIsZsh
+    assert $state equals 0
+}
+
+@test 'bash source bad file' {
+    run bash -c "source ${ZPWR_LIB}t || exit 2; zpwrIsZsh || exit 1"
+    assert $state equals 2
+}
+
+@test 'bash zpwrIsZsh fn returns 1' {
+    run bash -c "source $ZPWR_LIB"
+    assert $state equals 0
+    run bash -c "source $ZPWR_LIB || exit 2; zpwrIsZsh || exit 1"
+    assert $state equals 1
+}
+
+@test 'zpwrIsZsh fn' {
+    run type zpwrIsZsh
+    assert $state equals 0
+}
+
+@test 'zpwrIsZsh returns 0' {
+    run zpwrIsZsh
+    assert $state equals 0
+}
+
 @test 'autoload env' {
     run zpwrPrettyPrintBox env
     assert $state equals 0
@@ -828,16 +855,6 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
 @test 'gcl' {
     run gcl
     assert $state equals 1
-}
-
-@test 'zpwrIsZsh fn' {
-    run type zpwrIsZsh
-    assert $? equals 0
-}
-
-@test 'zpwrIsZsh returns 0' {
-    run zpwrIsZsh
-    assert $? equals 0
 }
 
 @test 'zpwrExists zsh' {

@@ -8,6 +8,13 @@
 ##### Notes:
 #}}}***********************************************************
 
+if ! test -f common.sh; then
+    echo "Must be in $ZPWR/install directory" >&2
+    exit 1
+fi
+
+source common.sh
+
 tmux new-session -s zpwr -d
 tmux send-keys -t zpwr q C-h
 tmux send-keys -t zpwr "tmux source-file $ZPWR_TMUX/control-window.conf; tmux select-pane -t zpwr:0.4; tmux send-keys 'cmatrix -C blue -abs' C-m" C-m

@@ -891,7 +891,8 @@ fi
 #**************************************************************
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     if [[ $noTmux != true ]];then
-        source "$ZPWR_INSTALL/startMux.sh"
+        zpwrGoInstallerDir
+        source "startMux.sh"
     fi
 fi
 #}}}***********************************************************
