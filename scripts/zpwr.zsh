@@ -119,6 +119,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[eva]='zpwrEnvVarsAll=list all env vars'
     ZPWR_VERBS[e]='zpwrEnvCounts=count all ZPWR env'
     ZPWR_VERBS[envcounts]='zpwrEnvCounts=count all ZPWR env'
+    ZPWR_VERBS[execglob]='zpwrExecGlob=exec on globbed files'
     ZPWR_VERBS[environmentcounts]='zpwrEnvCounts=count all ZPWR env'
     ZPWR_VERBS[envcachesearch]='zpwrFzfEnv=search all cached aliases, parameters, builtins, keywords and functions'
     ZPWR_VERBS[environmentcachesearch]='zpwrFzfEnv=search all cached aliases, parameters, builtins, keywords and functions'
