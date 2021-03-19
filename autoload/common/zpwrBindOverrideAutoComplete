@@ -37,12 +37,6 @@ function zpwrBindOverrideAutoComplete(){
     #zstyle ':autocomplete:*:too-many-matches' message ''
 
     zstyle ':autocomplete:' config false
-    zstyle -d ':completion:*:functions' ignored-patterns
-    zstyle -d ':completion:*:*:*:*:*' menu
-    zstyle -d '*' single-ignored
-    zstyle -d ':completion:*' special-dirs
-    zstyle -d ':completion:*:default' list-prompt
-    unset LISTPROMPT
     # no:  Tab uses Zsh's completion system only.
     # yes: Tab first tries Fzf's completion, then falls back to Zsh's.
     # NOTE 1: Can NOT be changed at runtime.
