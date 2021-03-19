@@ -457,7 +457,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     zinit ice lucid nocompile wait atinit='zpwrBindZdharma' atload'zpwrBindZdharmaPost'
     zinit load \
-        zdharma/zconvey
+        MenkeTechnologies/zconvey
 
     # late bind autopair keystrokes
     zinit ice lucid nocompile wait'0' atload='zpwrBindInterceptSurround'
