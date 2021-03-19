@@ -714,15 +714,20 @@ builtin setopt no_flow_control
 
 #{{{                    MARK:Custom Compsys Functions
 #**************************************************************
-# list of completers to use
-builtin zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
-#builtin zstyle ':completion:*:*:*:*:functions' ignored-patterns
+function zpwrBindMenu() {
+    # list of completers to use
 
-if [[ "$ZPWR_INTERACTIVE_MENU_SELECT" == true ]]; then
-   builtin zstyle ':completion:*:*:*:*:*' menu select=0 interactive
-else
-   builtin zstyle ':completion:*:*:*:*:*' menu select=0
-fi
+    builtin zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
+    #builtin zstyle ':completion:*:*:*:*:functions' ignored-patterns
+
+    if [[ "$ZPWR_INTERACTIVE_MENU_SELECT" == true ]]; then
+    builtin zstyle ':completion:*:*:*:*:*' menu select=0 interactive
+    else
+    builtin zstyle ':completion:*:*:*:*:*' menu select=0
+    fi
+}
+
+zpwrBindMenu
 #}}}***********************************************************
 
 

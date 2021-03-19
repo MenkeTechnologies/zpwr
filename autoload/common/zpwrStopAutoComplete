@@ -1,0 +1,34 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrStopAutoComplete(){
+
+    if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+        funcs=(_main_complete _expand _complete _approximate _wanted compadd)
+
+        for fun in ${funcs[@]}; do
+            functions[$fun]=${functions[.autocomplete.$fun]}
+        done
+
+        zinit unload MenkeTechnologies/zsh-autocomplete
+        zpwrBindOverrideZLE
+        zpwrBindZstyle
+        zpwrBindMenu
+
+        .autocomplete.zle-flags (){
+            :
+        }
+
+        zinit ice lucid nocompile atload'_zsh_autosuggest_start; zpwrBindFZFLate; zpwrBindVerbs; zpwrBindZstyle'
+        zinit load zsh-users/zsh-autosuggestions 2>/dev/null
+
+        zinit ice lucid nocompile nocompletions atload='zpwrDedupPaths'
+        zinit load zdharma/fast-syntax-highlighting 2>/dev/null
+
+    else
+        zpwrLoggErr "cannot switch to autocomplete without zinit."
+        return 1
+    fi
+
+}
+
+zpwrStopAutoComplete "$@"

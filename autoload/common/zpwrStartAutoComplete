@@ -1,0 +1,25 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrStartAutoComplete(){
+
+    if zpwrExists .autocomplete.compadd; then
+        zpwrLoggErr "already loaded zsh-autocomplete"
+        return 1
+    fi
+
+    if [[ -n "$1" ]]; then
+        export ZPWR_AUTO_COMPLETE_DELAY="$1"
+    fi
+    export ZPWR_AUTO_COMPLETE=true
+
+    if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+        zpwrBindOverrideAutoComplete
+        zinit load MenkeTechnologies/zsh-autocomplete
+    else
+        zpwrLoggErr "cannot switch to autocomplete without zinit."
+        return 1
+    fi
+
+}
+
+zpwrStartAutoComplete "$@"
