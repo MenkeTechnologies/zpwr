@@ -291,7 +291,13 @@ One of the vim plugin is vim-autosave which autosaves all edits thus making `:w`
 `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
 
 ## Auto List Completions
-`zpwr startauto [delay]` will start automatically listing completion choices.  `zpwr stopauto` will disable this.
+`zpwr startauto [delay]` will start automatically listing completion choices.  `zpwr stopauto` will disable this.  ZPWR_AUTO_COMPLETE will turn this on permanently with ZPWR_AUTO_COMPLETE_DELAY as delay time.
+```sh
+# list completion choices automatically
+export ZPWR_AUTO_COMPLETE=false
+# delay before listing completion choices automatically
+export ZPWR_AUTO_COMPLETE_DELAY=3.0
+```
 
 ## Bypassing expansion on space
 C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.
