@@ -47,4 +47,5 @@ function zpwrBindOverrideAutoComplete(){
     zstyle ':autocomplete:*' add-space executables aliases functions builtins reserved-words commands
 
 }
+
 zpwrBindOverrideAutoComplete "$@"

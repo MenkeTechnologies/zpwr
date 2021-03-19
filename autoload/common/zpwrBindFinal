@@ -56,15 +56,6 @@ function zpwrBindFinal(){
         mkfifo "$ZPWR_FIFO" &>> "$ZPWR_LOGFILE"
     fi
 
-    if [[ $ZPWR_AUTO_COMPLETE == true ]]; then
-        zstyle -d ':completion:*:functions' ignored-patterns
-        zstyle -d ':completion:*:*:*:*:*' menu
-        zstyle -d '*' single-ignored
-        zstyle -d ':completion:*' special-dirs
-        zstyle -d ':completion:*:default' list-prompt
-        unset LISTPROMPT
-    fi
-
 }
 
 zpwrBindFinal "$@"

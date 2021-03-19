@@ -24,6 +24,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - [Updating](#updating)
 - [Tmux Prefix Detail](#tmux-prefix) - How To
 - [Vim Autosave](#autosaving-vim-plugins) - Feature
+- [Auto Display Completion Choices](#auto-list-completions) - Feature
 - [Bypass Space Expansion](#bypassing-expansion-on-space) - How To
 - [Turning Off Ponies And Colors Globally](#turning-off-ponies-and-colors-globally) - How To
 - [Bypass Space Expansion](#bypassing-expansion-on-space) - How To
@@ -31,6 +32,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - [Main Window](#tmux-main-window) - Feature
 - [Personal Config File Information](#personal-config) - Detail
 - [ZPWR verb menu completion](#zpwr-verbs) - Feature
+- [ZPWR auto menu completion](#zpwr-start-auto) - Feature
 - [Github Account Environment Variable](#zpwr_github_account-variable) - Setup Step
 - [Adding A New Zsh Plugin](#adding-more-zinit-plugins) - How To
 - [Configurable Environment Variables](#environment-variables) - Feature
@@ -287,6 +289,9 @@ export ZPWR_TMUX_PREFIX_LINUX='C-b'
 ## Autosaving Vim Plugins
 One of the vim plugin is vim-autosave which autosaves all edits thus making `:w` unnecessary.
 `:u 0` in vim command(colon) mode will reset all changes in buffer which will then be autosaved.
+
+## Auto List Completions
+`zpwr startauto [delay]` will start automatically listing completion choices.  `zpwr stopauto` will disable this.
 
 ## Bypassing expansion on space
 C-Space (Control-Space or actually the ^@ terminal escape code) will bypass all expansion of globbing, aliases and words.

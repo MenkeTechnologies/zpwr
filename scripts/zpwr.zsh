@@ -271,6 +271,8 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[startsend]='zpwrStartSend=dup some keys to pane'
     ZPWR_VERBS[startsendfull]='zpwrStartSendFull=dup all keys to pane'
     ZPWR_VERBS[stopsend]='zpwrStopSend=stop dup keys to pane'
+    ZPWR_VERBS[startauto]='zpwrStartAutoComplete=start autocomplete'
+    ZPWR_VERBS[stopauto]='zpwrStopAutoComplete=stop autocomplete'
     ZPWR_VERBS[subcommands]='zpwrVerbsNoZLE=run the subcommands for zpwr <tab>'
     ZPWR_VERBS[subcommandsedit]='zpwrVerbsEditNoZLE=edit the subcommands for zpwr <tab>'
     ZPWR_VERBS[subcommandsfzf]='zpwrVerbsFZF=fzf the subcommands for zpwr <tab>'
