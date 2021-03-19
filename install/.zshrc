@@ -464,6 +464,12 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zinit load \
         hlissner/zsh-autopair
 
+    if [[ $ZPWR_AUTO_COMPLETE == true ]]; then
+        zinit ice lucid nocompile wait"0" atinit='zpwrBindOverrideAutoComplete'
+    zinit load \
+        MenkeTechnologies/zsh-autocomplete
+    fi
+
     # override OMZ/plugin aliases with own aliases
     zinit ice lucid nocompile wait'0a' \
     atload'zpwrBindAliasesLate; zpwrCreateAliasCache; zpwrBindAliasesZshLate; zpwrBindOverrideZLE'
@@ -475,7 +481,6 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zinit ice lucid nocompile wait'0b' atload'zpwrBindHistorySubstring'
     zinit load \
         zsh-users/zsh-history-substring-search
-
 
     # late , must come before syntax highlight
     zinit ice lucid nocompile wait'0c' \

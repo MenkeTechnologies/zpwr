@@ -16,6 +16,8 @@
 # see README.md
 # linux OS SSH auto attach to tmux sessions
 export ZPWR_AUTO_ATTACH=true
+# list completion choices automatically
+export ZPWR_AUTO_COMPLETE=false
 # run ls after rm and other modifying commands such as touch automatically
 export ZPWR_AUTO_LS_RM=true
 # run ls after cd automatically
