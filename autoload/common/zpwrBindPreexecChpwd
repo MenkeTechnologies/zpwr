@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrBindPreexecChpwd(){
+
+    preexec_functions=(
+        ${(@)preexec_functions:#zpwrPreexec}
+        zpwrPreexec
+    )
+
+    chpwd_functions=(
+        ${(@)chpwd_functions:#zpwrChpwd}
+        zpwrChpwd
+    )
+
+}
+
+zpwrBindPreexecChpwd "$@"

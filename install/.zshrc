@@ -504,7 +504,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zinit light \
         MenkeTechnologies/zsh-zinit-final
 
-    zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}h" nocompletions atload='zpwrDedupPaths'
+    zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}h" nocompletions atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
     zinit load \
         zdharma/fast-syntax-highlighting
 
