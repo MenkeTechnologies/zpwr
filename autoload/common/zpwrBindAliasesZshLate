@@ -79,7 +79,7 @@ globalAliasesInit
         fi'
 
         if zpwrCommandExists openssl; then
-            alias osc=': | openssl s_client -connect '$ZPWR_TABSTOP':443 | openssl x509 -text -noout'
+            alias osc=': | openssl s_client -connect '$ZPWR_TABSTOP':443 | openssl x509 -text -noout | less -MNRKFX'
         fi
 
         alias iee='if [[ '$ZPWR_TABSTOP' ]];then
