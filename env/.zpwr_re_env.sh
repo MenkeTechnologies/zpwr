@@ -132,6 +132,8 @@ zpwrEvalIfNeeded ZPWR_IDEAVIMRC "$ZPWR_IDEAVIMRC" "$ZPWR_INSTALL/.ideavimrc" "$Z
 zpwrEvalIfNeeded ZPWR_TMUX "$ZPWR_TMUX" "$ZPWR/tmux" "$ZPWR"
 # zpwr tmux git ignored files
 zpwrEvalIfNeeded ZPWR_TMUX_LOCAL "$ZPWR_TMUX_LOCAL" "$ZPWR_TMUX/local" "$ZPWR_TMUX"
+# the base path for zsh temp
+zpwrEvalIfNeeded TMPPREFIX "$TMPPREFIX" "$ZPWR_LOCAL/.temp/zsh" "$ZPWR_LOCAL"
 # the base dir for zpwr temp
 zpwrEvalIfNeeded ZPWR_LOCAL_TEMP "$ZPWR_LOCAL_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_LOCAL"
 # the path to a lock file (semaphore) for zpwr
