@@ -355,7 +355,7 @@ fpath=($ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_AUTOLOAD_COMP_UTILS 
 #{{{                    MARK:Autoload
 #**************************************************************
 builtin autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t) $ZPWR_AUTOLOAD_COMP_UTILS/*(.:t)
-builtin autoload -Uz zrecompile zm zargs compinit
+builtin autoload -Uz zrecompile zmv zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     ZPWR_OMZ_PLUGINS+=( brew osx )
