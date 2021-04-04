@@ -6,7 +6,9 @@ MenkeTechnologies/gh_reveal
 MenkeTechnologies/jhipster-oh-my-zsh-plugin
 MenkeTechnologies/kubectl-aliases
 MenkeTechnologies/revolver
+MenkeTechnologies/zconvey
 MenkeTechnologies/zpwrp10k
+MenkeTechnologies/zsh-autocomplete
 MenkeTechnologies/zsh-better-npm-completion
 MenkeTechnologies/zsh-cargo-completion
 MenkeTechnologies/zsh-cpan-completion
@@ -30,12 +32,12 @@ MenkeTechnologies/zsh-zinit-final
 MenkeTechnologies/zunit
 MenkeTechnologies/fzf
 hlissner/zsh-autopair
+marlonrichert/zsh-autocomplete
 marlonrichert/zsh-hist
 nnao45/zsh-kubectl-completion
 zdharma/fast-syntax-highlighting
 zdharma/history-search-multi-word
 zdharma/zbrowse
-zdharma/zconvey
 zdharma/zsh-tig-plugin
 zdharma/zsh-unique-id
 zdharma/zui
