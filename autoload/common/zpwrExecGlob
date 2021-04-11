@@ -9,20 +9,25 @@ function zpwrExecGlob(){
     emulate -L zsh
     setopt noshwordsplit extendedglob globdots nullglob globsubst
 
-    local glob command files f
+    local glob command files failed f
 
     glob="$1"
     command="$2"
     shift
     shift
 
-    files=( ${glob}(N) )
+    files=( ${glob} )
+    failed=()
 
     zpwrPrettyPrint "Processing ${#files} files"
 
-    for f in ${files[@]}; do
+    for f in "${files[@]}"; do
         zpwrLoggInfo "${(e)command}"
-        eval "${(e)command}"
+        eval "${(e)command}" || failed+=("$f")
+    done
+
+    for f in "${failed[@]}"; do
+        zpwrLoggErr "FAILED: ${(e)command}"
     done
 
 }
