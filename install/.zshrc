@@ -264,6 +264,9 @@ ZPWR_OMZ_COMPS=(
 )
 
 # conditional plugins
+if zpwrCommandExists dotnet; then
+    ZPWR_GH_PLUGINS+=( MenkeTechnologies/zsh-dotnet-completion )
+fi
 
 if zpwrCommandExists docker; then
     ZPWR_OMZ_COMPS+=( docker )
