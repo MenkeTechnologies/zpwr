@@ -27,7 +27,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 #}}}***********************************************************
-#
+
 #{{{                    MARK:Windows
 #**************************************************************
 # Windows thumbnail cache files
@@ -367,6 +367,24 @@ DerivedData
 *.ipa
 *.xcuserstate
 project.xcworkspace
+#}}}***********************************************************
+
+#{{{                    MARK:Scala
+#**************************************************************
+.bloop
+.bsp/
+.metals
+# sbt
+project/
+target/
+bin/
+.history
+.scala_dependencies
+.cache
+.cache-main
+local.sbt
+jitwatch.out
+build-sbt/
 #}}}***********************************************************
 
 
