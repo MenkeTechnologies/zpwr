@@ -78,15 +78,15 @@ This also means you can move ZPWR after install after updating the sym links tha
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
 ## ZPWR Features
-- 350+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
-- 150+ centralized environment variables in ZPWR namespace to control functionality
-- 700+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
+- 360+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
+- 155+ centralized environment variables in ZPWR namespace to control functionality
+- 750+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - 11.5k+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 170+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2.8k+ line README
-- 46k+ LOC
+- 48k+ LOC
 - 1900+ aliases
-- 330+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
+- 335+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - user specific ZPWR files in `~/.zpwr/local` git ignored
 - installer specific ZPWR files in `~/.zpwr/install` git tracked
 - ZPWR installer ouput in `~/.zpwr/local/installer` git ignored
@@ -166,7 +166,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - neovim with 79 plugins and python3/node support
 - perl
 - bash (4.0+, 3.2 not supported)
-- zinit with 90+ plugins of which 30+ are custom
+- zinit with 95+ plugins of which 30+ are custom
 - forked powerlevel10k zsh prompt with ~dirs
 - youcompleteme
 - ultisnips
@@ -220,7 +220,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - JetBrains plugin list
 - JetBrains settings JAR
 - JetBrains JVM Options idea.vmoptions
-- Spacemacs Config with 460+ packages in .spacemacs
+- Spacemacs Config with 490+ packages in .spacemacs
 - Emacs Yasnippets
 - Alacritty Main Config
 - Alacritty Color Theme
