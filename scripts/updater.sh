@@ -140,6 +140,25 @@ if [[ $skip != true ]]; then
         brew services cleanup
     }
 
+    zpwrCommandExists pnpm && {
+        zpwrPrettyPrint "Updating PNPM packages"
+        installDir=$(pnpm root -g | head -n 1)
+        if [[ ! -w "$installDir" ]]; then
+            zpwrNeedSudo=yes
+        else
+            zpwrNeedSudo=no
+        fi
+        for package in $(pnpm -g outdated --parseable --depth=0 | cut -d: -f4); do
+            if [[ $zpwrNeedSudo == yes ]]; then
+                sudo pnpm add -g "$package"
+            else
+                pnpm add -g "$package"
+            fi
+        done
+        zpwrPrettyPrint "Updating PNPM itself"
+        pnpm add -g pnpm
+    }
+
     zpwrCommandExists npm && {
         zpwrPrettyPrint "Updating NPM packages"
         installDir=$(npm root -g | head -n 1)
