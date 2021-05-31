@@ -1,3 +1,24 @@
+#{{{                    MARK:misc
+#**************************************************************
+*.swp
+*.bak
+#logback
+*.log
+.tmux/resurrect/
+#java
+test.java
+*.patch
+*.diff
+# Package Files #
+*.nar
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+.exercism/
+*.lock
+#}}}***********************************************************
+
 #{{{                    MARK:macOS
 #**************************************************************
 ehthumbs.db
@@ -147,7 +168,7 @@ po/*~
 
 #{{{                    MARK:Node.js
 #**************************************************************
-*.lock
+!yarn.lock
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -1026,23 +1047,4 @@ MigrationBackup/
 FodyWeavers.xsd
 #}}}***********************************************************
 
-#{{{                    MARK:misc
-#**************************************************************
-*.swp
-*.bak
-#logback
-*.log
-.tmux/resurrect/
-#java
-test.java
-*.patch
-*.diff
-# Package Files #
-*.nar
-*.zip
-*.tar.gz
-*.tgz
-*.rar
-.exercism/
-#}}}***********************************************************
 
