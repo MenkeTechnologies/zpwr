@@ -1,0 +1,56 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrExecGlobParallel(){
+
+    if [[ -z "$2" ]]; then
+        zpwrLoggErr "usage: zpwrExecGlobParallel <glob> <command with auto \$f replacement and 1 level of eval>"
+        return 1
+    fi
+    emulate -L zsh
+    setopt noshwordsplit extendedglob globdots nullglob globsubst #no_notify
+    command rm -f $ZPWR_TEMPFILE4
+
+    function zpwrKillProcessGrp() {
+        local p f
+
+        for p in ${pids[@]}; do
+            # echo kill -9 -$p
+            kill -9 -$p &>/dev/null
+        done
+
+        for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
+            test -z "$f" && continue
+            zpwrLoggErr "FAILED: ${(e)command}"
+        done
+    }
+
+    local glob command f
+    local -a files failed pids
+
+    glob="$1"
+    command="$2"
+    shift
+    shift
+
+    files=( ${glob} )
+
+    zpwrPrettyPrint "Processing ${#files} files"
+
+    trap 'zpwrKillProcessGrp; return 1' INT QUIT
+
+    for f in "${files[@]}"; do
+        zpwrLoggInfo "${(e)command}"
+        eval "${(e)command} || echo \"$f\" >> $ZPWR_TEMPFILE4" &
+        pids+=( $! )
+    done
+
+    wait ${=pids}
+
+    for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
+        test -z "$f" && continue
+        zpwrLoggErr "FAILED: ${(e)command}"
+    done
+
+}
+
+zpwrExecGlobParallel "$@"
