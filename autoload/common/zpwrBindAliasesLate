@@ -82,12 +82,16 @@ function zpwrBindAliasesLate(){
 
     zpwrExists fc && alias please="$ZPWR_FULL_SUDO \$(fc -ln -1)"
 
-    zpwrExists spotify && {
+    if zpwrExists spotify; then
         alias rep='spotify replay'
         alias ne='spotify next'
         alias pe='spotify prev'
         alias spa='spotify pause'
-    }
+    fi
+
+    if zpwrCommandExists exercism; then
+        alias es='exercism submit'
+    fi
 
     if zpwrIsZsh; then
         # zsh xtrace prompt
