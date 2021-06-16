@@ -36,7 +36,7 @@
 [color "diff"]
     plain = blue
     meta = cyan bold
-	frag = magenta bold ul
+	frag = magenta bold
 	commit = magenta
 	old = red bold
 	new = green bold
