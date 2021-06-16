@@ -9,8 +9,8 @@ function zpwrBindVerbs(){
     # get zpwr verbs
     source "$ZPWR_SCRIPTS/zpwr.zsh"
 
-    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitRepoVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrSendVerbs
-    declare -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitRepoVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs
+    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrSendVerbs
+    declare -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs
 
     for k v in ${(kv)ZPWR_VERBS[@]};do
         case $k in
