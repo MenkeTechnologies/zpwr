@@ -36,6 +36,7 @@ tomtom/ttags_vim
 SirVer/ultisnips
 mbbill/undotree
 tsukkee/unite-tag
+junegunn/vader.vim
 tpope/vim-abolish
 vim-airline/vim-airline
 vim-airline/vim-airline-themes
