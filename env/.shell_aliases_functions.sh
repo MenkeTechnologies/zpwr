@@ -107,6 +107,7 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
         export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
         export PIP_HOME="/usr/local/lib/python2.7/site-packages"
+
         if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
             if zpwrExists nvim; then
                 export EDITOR='nvim'

@@ -33,7 +33,6 @@ function zpwrBindFinal(){
         export PATH="$HOME/.jenv/shims:$PATH"
     fi
 
-
     #{{{                    MARK:Groovy
     #**************************************************************
     unset GROOVY_HOME # when set this messes up classpath
