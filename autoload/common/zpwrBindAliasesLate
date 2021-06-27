@@ -180,6 +180,11 @@ function zpwrBindAliasesLate(){
         alias colo="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
         alias bl='brew link --force --overwrite'
 
+        if [[ -d /usr/local/opt/tcl-tk/bin ]]; then
+            export PATH="/usr/local/opt/tcl-tk/bin:$PATH"
+        fi
+
+
         if zpwrCommandExists exa; then
             alias lr="$ZPWR_EXA_COMMAND -R"
         else
