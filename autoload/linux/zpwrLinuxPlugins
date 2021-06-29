@@ -16,7 +16,7 @@ case $distroName in
     (centos|rhel)
         tmpAry+=(yum dnf)
         ;;
-    (arch|manjaro*)
+    (arch|endeavouros | manjaro*)
         tmpAry+=(archlinux)
         ;;
     (*suse*)
