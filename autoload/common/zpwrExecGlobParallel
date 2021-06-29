@@ -46,10 +46,12 @@ function zpwrExecGlobParallel(){
 
     wait ${=pids}
 
-    for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
-        test -z "$f" && continue
-        zpwrLoggErr "FAILED: ${(e)command}"
-    done
+    if [[ -f "$ZPWR_TEMPFILE4" ]]; then
+        for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
+            test -z "$f" && continue
+            zpwrLoggErr "FAILED: ${(e)command}"
+        done
+    fi
 
 }
 
