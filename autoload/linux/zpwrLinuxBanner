@@ -30,7 +30,7 @@ if [[ "$UID" != "0" ]]; then
                 figlet -f block "$(whoami)" | ponysay -W 120 |
                     splitReg.sh -- ------------- lolcat
                 ;;
-            (*suse*|arch|manjaro*)
+            (*suse*|arch|endeavouros | manjaro*)
                 figlet -f block "$(whoami)" | ponysay -W 120 |
                     splitReg.sh -- ------------- lolcat
                 ;;
@@ -48,7 +48,7 @@ if [[ "$UID" != "0" ]]; then
             (fedora|centos|rhel)
                 zpwrNoPonyBanner
                 ;;
-            (*suse*|arch|manjaro*)
+            (*suse*|arch|endeavouros | manjaro*)
                 zpwrNoPonyBanner
                 ;;
             (*) :

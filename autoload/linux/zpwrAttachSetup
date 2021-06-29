@@ -24,7 +24,7 @@ function zpwrAttachSetup() {
                     out="$(command tail /var/log/messages | command grep 'Accepted publickey' | command tail -1)"
                     key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\w+\s+\w+:(\w+).*$}')"
                     ;;
-                (*suse*|arch|manjaro*)
+                (*suse*|arch|endeavouros | manjaro*)
                     out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | command tail -1)"
                     key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\w+\s+\w+:(\w+).*$}')"
                     ;;

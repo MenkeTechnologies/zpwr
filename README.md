@@ -208,6 +208,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - debian
 - arch
 - manjaro
+- endeavouros
 - mint
 - zorin
 - parrot OS
