@@ -69,15 +69,15 @@ else
     distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
     case "$distroName" in
-    debian | ubuntu | elementary | raspbian | kali | zorin | parrot)
-        distro=debian
-        ;;
-    centos | fedora | rhel | amzn)
-        distro=redhat
-        ;;
-    opensuse* | suse* | arch | endeavouros | manjaro*)
-        distro=suse
-        ;;
+        (debian | ubuntu* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
+            distro=debian
+            ;;
+        (centos | fedora | rhel | amzn)
+            distro=redhat
+            ;;
+        (opensuse* | suse* | arch | endeavouros | manjaro*)
+            distro=suse
+            ;;
     esac
 
     if [[ "$distro" == debian ]]; then

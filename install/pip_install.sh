@@ -104,16 +104,16 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
         case $distroName in
-            (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
+            (debian | ubuntu* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
                 distroFamily=debian
                 ;;
-            (arch|endeavouros | manjaro*)
+            (arch | endeavouros | manjaro*)
                 distroFamily=arch
                 ;;
             (*suse*)
                 distroFamily=suse
                 ;;
-            (centos|fedora|rhel|amzn)
+            (centos | fedora | rhel | amzn)
                 distroFamily=redhat
                 ;;
             (*)

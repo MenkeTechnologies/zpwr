@@ -471,12 +471,12 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
 
     if [[ $justConfig != true ]]; then
         case $distroName in
-            (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
+            (debian | ubuntu* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
                 distroFamily=debian
                 zpwrPrettyPrintBox "Fetching Dependencies for $distroName with the Advanced Package Manager..."
                 addDependenciesDebian
                 ;;
-            (arch|endeavouros | manjaro*)
+            (arch | endeavouros | manjaro*)
                 distroFamily=arch
                 zpwrPrettyPrintBox "Fetching Dependencies for $distroName with zypper"
                 addDependenciesArch
@@ -486,7 +486,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
                 zpwrPrettyPrintBox "Fetching Dependencies for $distroName with zypper"
                 addDependenciesSuse
                 ;;
-            (centos|fedora|rhel|amzn)
+            (centos | fedora | rhel | amzn)
                 distroFamily=redhat
                 zpwrPrettyPrintBox "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
                 addDependenciesRedHat
