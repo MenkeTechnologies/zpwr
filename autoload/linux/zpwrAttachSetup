@@ -16,15 +16,15 @@ function zpwrAttachSetup() {
                 command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
 
             case $distroName in
-                (debian|raspbian|kali|ubuntu|parrot)
+                (debian | ubuntu* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
                     out="$(command cat /dev/null | sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | command tail -1)"
                     key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}')"
                     ;;
-                (centos|rhel)
+                (centos | rhel | amzn)
                     out="$(command tail /var/log/messages | command grep 'Accepted publickey' | command tail -1)"
                     key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\w+\s+\w+:(\w+).*$}')"
                     ;;
-                (*suse*|arch|endeavouros | manjaro*)
+                (*suse* | arch | endeavouros | manjaro*)
                     out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | command tail -1)"
                     key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\w+\s+\w+:(\w+).*$}')"
                     ;;

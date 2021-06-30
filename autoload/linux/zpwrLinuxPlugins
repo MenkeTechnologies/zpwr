@@ -7,16 +7,16 @@ tmpAry+=(systemd)
 distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 
 case $distroName in
-    (debian|raspbian|kali|parrot|zorin)
+    (debian | raspbian | kali | parrot | zorin)
         tmpAry+=(debian)
         ;;
-    (ubuntu|linuxmint|elementary)
+    (ubuntu* | linuxmint | elementary*)
         tmpAry+=(ubuntu)
         ;;
-    (centos|rhel)
+    (centos | rhel | amzn)
         tmpAry+=(yum dnf)
         ;;
-    (arch|endeavouros | manjaro*)
+    (arch | endeavouros | manjaro*)
         tmpAry+=(archlinux)
         ;;
     (*suse*)
