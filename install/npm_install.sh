@@ -51,20 +51,20 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 elif [[ "$ZPWR_OS_TYPE" == linux ]];then
     distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
     case $distroName in
-        (debian|ubuntu|elementary|raspbian|kali|linuxmint|zorin|parrot)
+        (debian | ubuntu* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
             distroFamily=debian
-        installNpmDeb
+            installNpmDeb
             ;;
         (*suse*)
             distroFamily=suse
             installNpmRpm
             ;;
-        (centos|fedora|rhel|amzn)
+        (centos | fedora | rhel | amzn)
             distroFamily=redhat
             installNpmRpm
             ;;
         (*)
-            zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
+            zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported for installing npm from source." >&2
             ;;
     esac
 else
@@ -77,10 +77,16 @@ else
     fi
 fi
 
-zpwrExists diff-so-fancy || {
-    zpwrPrettyPrintBox "npm installing diff-so-fancy"
-    sudo npm i -g diff-so-fancy
-}
-zpwrPrettyPrintBox "installing neovim nodejs lib"
-sudo npm i -g neovim
+if zpwrCommandExists npm; then
+    zpwrExists diff-so-fancy || {
+        zpwrPrettyPrintBox "npm installing diff-so-fancy"
+        sudo npm i -g diff-so-fancy
+    }
+
+    zpwrPrettyPrintBox "installing neovim nodejs lib"
+    sudo npm i -g neovim
+else
+    zpwrPrettyPrintBox "npm is unavailable.  Abort npm package install." >&2
+    return 1
+fi
 
