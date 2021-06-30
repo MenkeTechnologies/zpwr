@@ -5,7 +5,7 @@ function ___hc(){
     local repoName old_dir
 
     if ! zpwrCommandExists hub; then
-        zpwrLoggErr "You need the 'hub' command or repo creation."
+        zpwrLoggErr "You need the 'hub' command for repo creation."
         return 1
     fi
 
