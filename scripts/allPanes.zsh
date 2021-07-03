@@ -28,9 +28,11 @@ local active_win new_pane active_pane msg
 
 #tmux wait-for -L fingerl1
 
-active_win="$(tmux lsw -F '#{?window_active,y,n} #{window_id}' | perl -ane 'print $1 if m{y (.*)}')"
-active_sess="$(tmux ls -F '#{?session_attached,y,n} #{session_id}' | perl -ane 'print $1 if m{y (.*)}')"
-active_pane="$(tmux lsp -F '#{?pane_active,y,n} #{pane_id}' | perl -ane 'print $1 if m{y (.*)}')"
+active_sess="$(tmux display-message -p '#{session_id}')"
+
+active_win="$(tmux display-message -p '#{window_id}')"
+
+active_pane="$(tmux display-message -p '#{pane_id}')"
 
 
 tmux new-window -n "[zpwr-thumbs-$active_sess-$active_win-$active_pane]" "zsh $ZPWR_SCRIPTS/allPanesSwap.zsh \\$active_sess $active_win $type $ZPWR_SOCKET$$"
