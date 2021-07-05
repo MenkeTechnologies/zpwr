@@ -1,41 +1,36 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #{{{                    MARK:Header
 #**************************************************************
 ##### Author: SUZIE
 ##### Date: Fri Apr 6 15:40:01 EDT 2018
-##### Purpose: bash script to do pip updating
+##### Purpose: zsh script to do pip updating
 ##### Notes:
 #}}}***********************************************************
 if [[ -n "$ZPWR" && -n "$ZPWR_LIB_INIT" ]]; then
     if ! source "$ZPWR_LIB_INIT" ""; then
-        echo "Could not source dir '$ZPWR_LIB_INIT'."
+        echo "Could not source file ZPWR_LIB_INIT '$ZPWR_LIB_INIT'."
         exit 1
     fi
 else
-    source="${BASH_SOURCE[0]}"
-    while [ -h "$source" ]; do # resolve $source until the file is no longer a symlink
-    zpwrBaseDir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
-    source="$(readlink "$source")"
-    [[ $source != /* ]] && source="$zpwrBaseDir/$source" # if $source was a relative symlink, we need to resolve it relative to the path where the symlink file was located
-    done
-    zpwrBaseDir="$( cd -P "$( dirname "$source" )" >/dev/null 2>&1 && pwd )"
+    0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
+    0="${${(M)0:#/*}:-$PWD/$0}"
+    zpwrBaseDir="${0:A}"
 
     while [[ ! -f "$zpwrBaseDir/.zpwr_root" ]]; do
-        zpwrBaseDir="$(dirname "$zpwrBaseDir")"
+        zpwrBaseDir="${zpwrBaseDir:h}"
         if [[ "$zpwrBaseDir" == / ]]; then
             echo "Could not find .zpwr_root file up the directory tree." >&2
             exit 1
         fi
     done
-    if [[ $ZPWR_REMOTE == false ]]; then
-        if ! source "$zpwrBaseDir/scripts/init.sh" "$zpwrBaseDir"; then
-            echo "Could not source zpwrBaseDir '$zpwrBaseDir/scripts/init.sh'."
-            exit 1
-        fi
+    if ! source "$zpwrBaseDir/scripts/init.sh" "$zpwrBaseDir"; then
+        echo "Could not source zpwrBaseDir '$zpwrBaseDir/scripts/init.sh'."
+        exit 1
     fi
-
     unset zpwrBaseDir
 fi
+
+declare -T ZPWR_PIP_BLACKLIST pipBlacklist
 
 #python3
 python3 -c 'import pip' && {
@@ -54,8 +49,15 @@ python3 -c 'import pip' && {
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     fi
 
-    for package in $outdated; do
+    for package in "${(@f)outdated}"; do
         #get last package
+        if (( $+pipBlacklist )); then
+            if (( pipBlacklist[(Ie)$package] )); then
+                logg "skip update of $package due to blacklist"
+                continue
+            fi
+        fi
+
         installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
         if [[ ! -w "$installDir" ]]; then
             zpwrNeedSudo=true
@@ -104,7 +106,15 @@ zpwrCommandExists python2 && python2 -c 'import pip' && {
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     fi
 
-    for package in $outdated; do
+    for package in "${(@f)outdated}"; do
+
+        if (( $+pipBlacklist )); then
+            if (( pipBlacklist[(Ie)$package] )); then
+                logg "skip update of $package due to blacklist"
+                continue
+            fi
+        fi
+
         installDir=$(python2 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
         if [[ ! -w "$installDir" ]]; then
             zpwrNeedSudo=true
