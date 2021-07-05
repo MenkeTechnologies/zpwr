@@ -228,7 +228,7 @@ if [[ $skip != true ]]; then
         pio upgrade
     }
 
-    source "$ZPWR_SCRIPTS/updaterPip.sh"
+    zsh "$ZPWR_SCRIPTS/updaterPip.zsh"
 
     zpwrCommandExists snap && {
         zpwrPrettyPrint "Updating Snap Packages"
@@ -279,7 +279,7 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
     fi
 
     #update python packages
-    ssh -x "$hostname" bash < <(echo "export ZPWR_REMOTE=true"; cat "$ZPWR_LIB" "$ZPWR_ENV_FILE" "$ZPWR_RE_ENV_FILE" "$ZPWR_TOKEN_PRE"  "$ZPWR_TOKEN_POST" "$ZPWR_SCRIPTS/updaterPip.sh" 2> /dev/null)
+    ssh -x "$hostname" zsh < <(echo "export ZPWR_REMOTE=true"; cat "$ZPWR_LIB" "$ZPWR_ENV_FILE" "$ZPWR_RE_ENV_FILE" "$ZPWR_TOKEN_PRE"  "$ZPWR_TOKEN_POST" "$ZPWR_SCRIPTS/updaterPip.zsh" 2> /dev/null)
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to send stdin script into bash
     ssh -x "$hostname" bash < <(echo "export ZPWR_REMOTE=true"; cat "$ZPWR_LIB" "$ZPWR_ENV_FILE" "$ZPWR_RE_ENV_FILE" "$ZPWR_TOKEN_PRE" "$ZPWR_TOKEN_POST" "$ZPWR_SCRIPTS/rpiSoftwareUpdater.sh" 2> /dev/null)

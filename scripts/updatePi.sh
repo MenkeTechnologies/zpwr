@@ -67,7 +67,7 @@ function updatePI() {
     fi
 
     #update python packages
-    ssh -x "$hostname" bash < <(cat "$ZPWR_LIB" "$ZPWR_SCRIPTS/updaterPip.sh")
+    ssh -x "$hostname" zsh < <(cat "$ZPWR_LIB" "$ZPWR_SCRIPTS/updaterPip.zsh")
     #here we will update the Pi's own software and vim plugins (not included in apt-get)
     #avoid sending commmands from stdin into ssh, better to send stdin script into bash
     ssh -x "$hostname" bash < <(cat "$ZPWR_LIB" "$ZPWR_SCRIPTS/rpiSoftwareUpdater.sh")
