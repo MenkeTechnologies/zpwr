@@ -84,7 +84,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 11.5k+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 170+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2.8k+ line README
-- 48k+ LOC
+- 50k+ LOC
 - 1900+ aliases
 - 335+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - user specific ZPWR files in `~/.zpwr/local` git ignored
