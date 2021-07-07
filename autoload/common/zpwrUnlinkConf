@@ -13,7 +13,6 @@ function zpwrUnlinkConf(){
     )
 
     symFiles=(
-        grc.zsh
         conf.gls
         conf.df
         conf.ifconfig

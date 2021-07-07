@@ -1,4 +1,4 @@
-command ls "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,grc.zsh,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
+command ls "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
     "$ZPWR/"*.{sh,py,zsh,pl} \
     "$ZPWR_ENV/"*.{sh,py,zsh,pl} \
     "$ZPWR/"*.md \

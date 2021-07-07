@@ -57,7 +57,7 @@ if [[ ! -f "$HOME/.ctags" ]]; then
     ln -sf $ZPWR_INSTALL/.ctags "$HOME/.ctags"
 fi
 
-symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc)
+symFiles=(.tmux.conf .ideavimrc .vimrc conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc)
 
 for file in ${symFiles[@]} ; do
     zpwrPrettyPrintBox "Installing $file to $HOME"

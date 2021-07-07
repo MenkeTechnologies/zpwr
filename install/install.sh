@@ -274,7 +274,7 @@ function showDeps(){
 }
 
 files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell_aliases_functions.sh \
-    conf.gls conf.df conf.ifconfig conf.mount grc.zsh .inputrc .zpwr/.powerlevel9kconfig.sh .my.cnf motd.sh)
+    conf.gls conf.df conf.ifconfig conf.mount .inputrc .zpwr/.powerlevel9kconfig.sh .my.cnf motd.sh)
 
 dirs=(.zpwr/scripts .config/htop .config/powerline/themes/tmux)
 
@@ -734,7 +734,7 @@ if [[ $justConfig != true ]]; then
         zpwrCommandExists ponysay || brew install ponysay
     fi
 
-    zpwrPrettyPrintBox "Installing grc configuration for colorization and grc.zsh for auto aliasing...asking for passwd with sudo"
+    zpwrPrettyPrintBox "Installing grc configuration for colorization...asking for passwd with sudo"
     if [[ "$(uname)" == Darwin ]]; then
         GRC_DIR=/usr/local/share/grc
     else
