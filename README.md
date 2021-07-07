@@ -78,7 +78,7 @@ This also means you can move ZPWR after install after updating the sym links tha
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
 ## ZPWR Features
-- 360+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
+- 365+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
 - 155+ centralized environment variables in ZPWR namespace to control functionality
 - 750+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - 11.5k+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
