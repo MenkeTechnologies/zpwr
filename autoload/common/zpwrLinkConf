@@ -17,7 +17,6 @@ function zpwrLinkConf(){
     )
 
     symFiles=(
-        grc.zsh
         conf.gls
         conf.df
         conf.ifconfig

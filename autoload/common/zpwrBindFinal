@@ -26,7 +26,7 @@ function zpwrBindFinal(){
     #{{{                    MARK:grc colorizer
     #**************************************************************
     # colors for common commands
-    test -s "$HOME/grc.zsh" && source "$HOME/grc.zsh"
+    test -s "$ZPWR_ENV/grc.zsh" && source "$ZPWR_ENV/grc.zsh"
     #}}}***********************************************************
 
     if zpwrExists jenv;then
