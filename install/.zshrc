@@ -453,6 +453,9 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     builtin unset p
 
+    zinit ice as"program" pick"bin/git-fuzzy"
+    zinit load bigH/git-fuzzy
+
 
     zinit ice lucid nocompile wait atinit='zpwrBindOverrideOMZ;zpwrBindForGit'
     zinit load \
