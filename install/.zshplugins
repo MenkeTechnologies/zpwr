@@ -31,6 +31,7 @@ MenkeTechnologies/zsh-xcode-completions
 MenkeTechnologies/zsh-z
 MenkeTechnologies/zsh-zinit-final
 MenkeTechnologies/zunit
+bigH/git-fuzzy
 MenkeTechnologies/fzf
 hlissner/zsh-autopair
 marlonrichert/zsh-autocomplete

@@ -86,7 +86,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 2.8k+ line README
 - 50k+ LOC
 - 1900+ aliases
-- 335+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
+- 340+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - user specific ZPWR files in `~/.zpwr/local` git ignored
 - installer specific ZPWR files in `~/.zpwr/install` git tracked
 - ZPWR installer ouput in `~/.zpwr/local/installer` git ignored
