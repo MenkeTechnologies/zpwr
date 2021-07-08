@@ -19,3 +19,4 @@ Jms messenger
 Kubernetes
 MapStruct Support
 String Manipulation
+swagger
