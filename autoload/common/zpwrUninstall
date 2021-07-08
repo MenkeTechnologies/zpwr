@@ -24,6 +24,7 @@ function zpwrUninstall() {
             mv "$dir" "$HOME"
         done
         zpwrUnlinkConf
+        zpwrUncompile
     sudo rm -rf -- \
         "$ZPWR" \
         "$HOME/.tmux" \
