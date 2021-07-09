@@ -90,6 +90,15 @@ globalAliasesInit
             '$ZPWR_TABSTOP'
         fi'
 
+        alias cas='case '$ZPWR_TABSTOP' in
+            ( '$ZPWR_TABSTOP' )
+                '$ZPWR_TABSTOP'
+                ;;
+            ( * )
+                '$ZPWR_TABSTOP'
+                ;;
+        esac'
+
         alias ieee='if [[ '$ZPWR_TABSTOP' ]];then
             '$ZPWR_TABSTOP'
         elif [[ '$ZPWR_TABSTOP' ]];then
