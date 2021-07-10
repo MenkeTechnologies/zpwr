@@ -99,6 +99,14 @@ globalAliasesInit
                 ;;
         esac'
 
+        alias sel='select choice in '$ZPWR_TABSTOP'; do
+            '$ZPWR_TABSTOP'
+        done'
+
+        alias repe='repeat '$ZPWR_TABSTOP'; do
+            '$ZPWR_TABSTOP'
+        done'
+
         alias ieee='if [[ '$ZPWR_TABSTOP' ]];then
             '$ZPWR_TABSTOP'
         elif [[ '$ZPWR_TABSTOP' ]];then
@@ -118,6 +126,10 @@ globalAliasesInit
         alias wr='while read line;do
             '$ZPWR_TABSTOP'
         done < '$ZPWR_TABSTOP''
+
+        alias wh='while [[ '$ZPWR_TABSTOP' ]];do
+            '$ZPWR_TABSTOP'
+        done'
 
         alias wt='while true'$ZPWR_TABSTOP';do
             '$ZPWR_TABSTOP'
