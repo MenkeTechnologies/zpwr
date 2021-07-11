@@ -206,6 +206,7 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/zunit
     zdharma/zzcomplete
     marlonrichert/zsh-hist
+    MenkeTechnologies/fzf-zsh-plugin
     #comps
     MenkeTechnologies/zsh-gem-completion
     MenkeTechnologies/zsh-cargo-completion
