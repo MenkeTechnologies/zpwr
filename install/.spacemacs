@@ -34,8 +34,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-d
-dperl5
+     perl5
      typescript
      go
      windows-scripts
@@ -45,6 +44,8 @@ dperl5
      systemd
      yaml
      shell-scripts
+     multiple-cursors
+     treemacs
      javascript
      latex
      erc
@@ -365,7 +366,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'origami
