@@ -2,12 +2,14 @@
 # vim: set ft=sh:
 function zpwrCat(){
 
+    emulate -L zsh
+
     if [[ -p /dev/stdin ]]; then
-        cat > "$ZPWR_TEMPFILE"
+
         if [[ -p /dev/stdout ]];then
-            zpwrCCommon "$ZPWR_TEMPFILE"
+            zpwrCCommon =(cat)
         else
-            zpwrCCommon "$ZPWR_TEMPFILE" | less
+            zpwrCCommon =(cat) | less
         fi
     else
         if [[ -z "$1" ]]; then
