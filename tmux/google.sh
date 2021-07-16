@@ -36,26 +36,28 @@ exec 1>> "$ZPWR_LOGFILE" 2>&1
 
 ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
 
+pyScript='import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read().strip(), safe=""))'
+
 if [[ "$1" == "google" ]]; then
     case "$ZPWR_OS_TYPE" in
         darwin*)
-            out="$(pbpaste | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
+            out="$(pbpaste | python3 -c "$pyScript")"
             ;;
         linux*)
             if [[ "$(uname -r)" != *icrosoft* ]];then
-                out="$(xclip -o -sel clip | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
+                out="$(xclip -o -sel clip | python3 -c "$pyScript")"
             else
-                out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
+                out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c "$pyScript")"
             fi
             ;;
         cygwin*)
-            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
+            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c "$pyScript")"
             ;;
         msys*)
-            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
+            out="$(powershell.exe -noprofile -command 'Get-Clipboard'| python3 -c "$pyScript")"
             ;;
         *)
-            out="$(xclip -o -sel clip | python3 -c 'import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read(), safe=""))')"
+            out="$(xclip -o -sel clip | python3 -c "$pyScript")"
             ;;
     esac
 else
@@ -80,6 +82,9 @@ else
             out="$(xclip -o -sel clip)"
             ;;
     esac
+
+    # trim spaces
+    out="$(printf -- "%s" "$out" | perl -pe 's@^\s+|\s+$@@g')"
 fi
 
 cmd="$(zpwrGetOpenCommand)"
