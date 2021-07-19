@@ -136,6 +136,7 @@ nnoremap <Home> gg
 nnoremap <End> G
 
 imap jf <ESC>
+imap fj <ESC>
 
 "comment out
 inoremap <silent> <C-B> <ESC>I//<ESC>ji

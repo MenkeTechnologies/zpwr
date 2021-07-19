@@ -22,7 +22,9 @@ nmap ]] j0[[%/{<CR>
 nmap [] k$][%?}<CR>]}]]}]]
 
 imap <C-e> <C-o>A
+
 imap jf <ESC>
+imap fj <ESC>
 "inoremap <Up> <NOP>
 "inoremap <Down> <NOP>
 "inoremap <Left> <NOP>

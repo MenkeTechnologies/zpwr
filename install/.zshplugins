@@ -2,6 +2,7 @@ MenkeTechnologies/fasd-simple
 MenkeTechnologies/forgit
 MenkeTechnologies/fzf
 MenkeTechnologies/fzf-tab
+MenkeTechnologies/fzf-zsh-plugin
 MenkeTechnologies/gh_reveal
 MenkeTechnologies/jhipster-oh-my-zsh-plugin
 MenkeTechnologies/kubectl-aliases
@@ -34,7 +35,6 @@ MenkeTechnologies/zunit
 bigH/git-fuzzy
 MenkeTechnologies/fzf
 hlissner/zsh-autopair
-marlonrichert/zsh-autocomplete
 marlonrichert/zsh-hist
 nnao45/zsh-kubectl-completion
 zdharma/fast-syntax-highlighting
