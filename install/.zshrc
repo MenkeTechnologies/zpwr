@@ -131,7 +131,7 @@ fi
 #**************************************************************
 builtin export LC_ALL="en_US.UTF-8"
 # stop delay when entering normal mode
-builtin export KEYTIMEOUT=1
+builtin export KEYTIMEOUT="$ZPWR_KEYTIMEOUT"
 builtin export SHELL="$(which zsh)"
 # default vi-backward-delete-char does not delete paste insert point
 builtin export AUTOPAIR_BKSPC_WIDGET='.backward-delete-char'
