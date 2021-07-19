@@ -209,6 +209,7 @@ function zpwrBindOverrideZLE(){
     bindkey -M vicmd '^F^L' list-choices
 
     bindkey -M viins 'jf' vi-cmd-mode
+    bindkey -M viins 'fj' vi-cmd-mode
 
     bindkey -M viins '^F^K' zpwrAlternateQuotes
     bindkey -M vicmd '^F^K' zpwrAlternateQuotes

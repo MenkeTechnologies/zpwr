@@ -786,6 +786,7 @@ nnoremap <F6> :SyntasticToggleMode<CR>
 inoremap <F6> <ESC>:SyntasticToggleMode<CR>
 
 imap jf <ESC>
+imap fj <ESC>
 
 nnoremap <F7> :TTags<CR>
 inoremap <F7> <ESC>:TTags<CR>
