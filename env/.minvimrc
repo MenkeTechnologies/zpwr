@@ -135,6 +135,8 @@ inoremap <End> <C-[>Gi
 nnoremap <Home> gg
 nnoremap <End> G
 
+imap jf <ESC>
+
 "comment out
 inoremap <silent> <C-B> <ESC>I//<ESC>ji
 inoremap <silent> <C-B><C-N> <ESC>^2xji

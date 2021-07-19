@@ -785,6 +785,8 @@ inoremap <F5> <ESC>:LOTRToggle<CR>
 nnoremap <F6> :SyntasticToggleMode<CR>
 inoremap <F6> <ESC>:SyntasticToggleMode<CR>
 
+imap jf <ESC>
+
 nnoremap <F7> :TTags<CR>
 inoremap <F7> <ESC>:TTags<CR>
 

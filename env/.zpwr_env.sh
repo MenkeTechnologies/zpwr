@@ -109,6 +109,8 @@ export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
 export ZPWR_GLOBAL_ALIAS_PREFIX=j
 # whether to search interactively in menuselect
 export ZPWR_INTERACTIVE_MENU_SELECT=true
+# timeout for keybindings
+export ZPWR_KEYTIMEOUT=10
 # whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
 # logg function underscore color ANSI codes
