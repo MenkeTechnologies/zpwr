@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Run me like this: ./create_manpage_completions.py /usr/share/man/man{1,8}/* > man_completions.fish
+# Run me like this: ./create_manpage_completions.py /usr/share/man/man{1,8}/* > _man_completions
 """
 <OWNER> = Siteshwar Vashisht
 <YEAR> = 2012
@@ -1228,16 +1228,16 @@ def unquote_single_quotes(data):
     return data
 
 
-# Make a string of characters that are deemed safe in fish without needing to be escaped
+# Make a string of characters that are deemed safe in zsh without needing to be escaped
 # Note that space is not included
-g_fish_safe_chars = frozenset(string.ascii_letters + string.digits +
+g_zsh_safe_chars = frozenset(string.ascii_letters + string.digits +
                               "_+-|/:=@~")
 
 
-def fish_escape_single_quote(str):
+def zsh_escape_single_quote(str):
     # Escape a string if necessary so that it can be put in single quotes
     # If it has no non-safe chars, there's nothing to do
-    if g_fish_safe_chars.issuperset(str):
+    if g_zsh_safe_chars.issuperset(str):
         return str
 
     str = str.replace("\\", "\\\\")  # Replace one backslash with two
@@ -1328,7 +1328,7 @@ def built_command(options, description, arg):
     # print(f"option:___{options}___, desc:___{description}___, arg:___{arg}___", file=sys.stderr)
 
     man_optionlist = re.split(' |,|"|=|[|]', options)
-    fish_options = []
+    zsh_options = []
     for optionstr in man_optionlist:
         option = re.sub(r"(\[.*\])", "", optionstr)
         option = option.strip(" \t\r\n[](){}.,:!")
@@ -1341,22 +1341,22 @@ def built_command(options, description, arg):
 
         if option.startswith("--"):
             # New style long option (--recursive)
-            fish_options.append("-l " + fish_escape_single_quote(option[2:]))
+            zsh_options.append("-l " + zsh_escape_single_quote(option[2:]))
         elif option.startswith("-") and len(option) == 2:
             # New style short option (-r)
-            fish_options.append("-s " + fish_escape_single_quote(option[1:]))
+            zsh_options.append("-s " + zsh_escape_single_quote(option[1:]))
         elif option.startswith("-") and len(option) > 2:
             # Old style long option (-recursive)
-            fish_options.append("-o " + fish_escape_single_quote(option[1:]))
+            zsh_options.append("-o " + zsh_escape_single_quote(option[1:]))
 
     # Determine which options are new (not already in existing_options)
     # Then add those to the existing options
     existing_options = already_output_completions.setdefault(CMDNAME, set())
-    fish_options = [opt for opt in fish_options if opt not in existing_options]
-    existing_options.update(fish_options)
+    zsh_options = [opt for opt in zsh_options if opt not in existing_options]
+    existing_options.update(zsh_options)
 
     # Maybe it's all for naught
-    if not fish_options:
+    if not zsh_options:
         return
 
     # Here's what we'll use to truncate if necessary
@@ -1400,10 +1400,10 @@ def built_command(options, description, arg):
         truncated_description = truncated_description[:prefix_len] + truncation_suffix
 
     # Escape some more things
-    truncated_description = fish_escape_single_quote(truncated_description)
-    escaped_cmd = fish_escape_single_quote(CMDNAME)
+    truncated_description = zsh_escape_single_quote(truncated_description)
+    escaped_cmd = zsh_escape_single_quote(CMDNAME)
 
-    output_complete_command(escaped_cmd, fish_options, truncated_description,
+    output_complete_command(escaped_cmd, zsh_options, truncated_description,
                             built_command_output, arg)
 
 
@@ -2004,8 +2004,7 @@ def parse_manpage_at_path(manpage_path, output_directory):
     if cmd_base in ignoredcommands:
         return
 
-    # Ignore perl's gazillion man pages
-    ignored_prefixes = ["perl", "zsh"]
+    ignored_prefixes = ["zsh"]
     for prefix in ignored_prefixes:
         if cmd_base.startswith(prefix):
             return
@@ -2122,7 +2121,7 @@ def parse_and_output_man_pages(paths, output_directory, show_progress):
         # Get the "base" command, e.g. gcc.1.gz -> gcc
         man_file_name = os.path.basename(manpage_path)
         CMDNAME = man_file_name.split(".", 1)[0]
-        output_file_name = CMDNAME + ".fish"
+        output_file_name = "_" + CMDNAME
 
         # Show progress if we're doing that
         if show_progress:
@@ -2227,7 +2226,7 @@ def usage(script_name):
      -h, --help\t\tShow this help message
      -v, --verbose [0, 1, 2]\tShow debugging output to stderr. Larger is more verbose.
      -s, --stdout\tWrite all completions to stdout (trumps the --directory option)
-     -d, --directory [dir]\tWrite all completions to the given directory, instead of to ~/.local/share/fish/generated_completions
+     -d, --directory [dir]\tWrite all completions to the given directory, instead of to ~/.zsh
      -m, --manpath\tProcess all man1 and man8 files available in the manpath (as determined by manpath)
      -p, --progress\tShow progress
     """)
@@ -2255,7 +2254,7 @@ if __name__ == "__main__":
         sys.exit(2)
 
     # Directories within which we will clean up autogenerated completions
-    # This script originally wrote completions into ~/.config/fish/completions
+    # This script originally wrote completions into ~/.zsh
     # Now it writes them into a separate directory
     cleanup_directories = []
 
@@ -2295,7 +2294,7 @@ if __name__ == "__main__":
         sys.exit(0)
 
     if not WRITE_TO_STDOUT and not output_directory:
-        # Default to ~/.local/share/fish/generated_completions/
+        # Default to ~/.zsh
         # Create it if it doesn't exist
         xdg_data_home = os.getenv("XDG_DATA_HOME", "~/.zsh")
         output_directory = os.path.expanduser(xdg_data_home +
