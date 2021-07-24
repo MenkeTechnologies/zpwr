@@ -10,7 +10,7 @@ case $distroName in
     (debian | raspbian | kali | parrot | zorin)
         tmpAry+=(debian)
         ;;
-    (ubuntu* | linuxmint | elementary*)
+    (ubuntu* | linuxmint | pop* | elementary*)
         tmpAry+=(ubuntu)
         ;;
     (centos | rhel | amzn)

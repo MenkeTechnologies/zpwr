@@ -471,7 +471,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
 
     if [[ $justConfig != true ]]; then
         case $distroName in
-            (debian | ubuntu* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
+            (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
                 distroFamily=debian
                 zpwrPrettyPrintBox "Fetching Dependencies for $distroName with the Advanced Package Manager..."
                 addDependenciesDebian

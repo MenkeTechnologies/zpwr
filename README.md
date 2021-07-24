@@ -201,6 +201,9 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - macOS
 - raspbian
 - debian
+- mx linux
+- garuda
+- popos!
 - freebsd
 - kali
 - fedora
