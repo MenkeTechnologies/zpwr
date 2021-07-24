@@ -75,7 +75,7 @@ else
         (centos | fedora | rhel | amzn)
             distro=redhat
             ;;
-        (opensuse* | suse* | arch | endeavouros | manjaro*)
+        (opensuse* | suse* | arch | garuda | endeavouros | manjaro*)
             distro=suse
             ;;
     esac
