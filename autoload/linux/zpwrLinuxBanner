@@ -42,7 +42,7 @@ if [[ "$UID" != "0" ]]; then
             (raspbian)
                 bash "$ZPWR_SCRIPTS/motd.sh"
                 ;;
-            (ubuntu* | debian | kali | linuxmint | parrot)
+            (ubuntu* | debian | kali | pop* | linuxmint | parrot)
                 zpwrNoPonyBanner
                 ;;
             (fedora | centos | rhel | amzn)
