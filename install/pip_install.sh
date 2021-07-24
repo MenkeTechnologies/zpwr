@@ -107,7 +107,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
             (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
                 distroFamily=debian
                 ;;
-            (arch | endeavouros | manjaro*)
+            (arch | endeavouros | garuda | manjaro*)
                 distroFamily=arch
                 ;;
             (*suse*)

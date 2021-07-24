@@ -476,7 +476,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
                 zpwrPrettyPrintBox "Fetching Dependencies for $distroName with the Advanced Package Manager..."
                 addDependenciesDebian
                 ;;
-            (arch | endeavouros | manjaro*)
+            (arch | endeavouros | garuda | manjaro*)
                 distroFamily=arch
                 zpwrPrettyPrintBox "Fetching Dependencies for $distroName with zypper"
                 addDependenciesArch

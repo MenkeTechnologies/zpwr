@@ -30,7 +30,7 @@ if [[ "$UID" != "0" ]]; then
                 figlet -f block "$(whoami)" | ponysay -W 120 |
                     splitReg.sh -- ------------- lolcat
                 ;;
-            (*suse* | arch | endeavouros | manjaro*)
+            (*suse* | arch | endeavouros | garuda | manjaro*)
                 figlet -f block "$(whoami)" | ponysay -W 120 |
                     splitReg.sh -- ------------- lolcat
                 ;;
