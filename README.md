@@ -1,6 +1,6 @@
 # ZPWR => World's Most Advanced UNIX Terminal Environment
 
-![Alt text](http://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
+![Alt text](https://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
 
 #### Master [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=master)](https://travis-ci.com/MenkeTechnologies/zpwr) Dev [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=dev)](https://travis-ci.com/MenkeTechnologies/zpwr) Version [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) Commits [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) Contributors [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
@@ -63,7 +63,7 @@ sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/master/inst
 ```
 OR
 ```sh
-git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh
+git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh
 ```
 
 The installer will confirm what will be installed and overwritten before executing.
@@ -234,7 +234,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 ## Limited Install
 ```sh
-git clone http://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh -c
+git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh -c
 ```
 This will install just config files not dependencies.
 
@@ -730,13 +730,13 @@ I am looking for contributors mostly for documentation, marketing, video tutoria
 Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZPWR_TMUX` which defaults to `~/.zpwr/tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.  The only user modifiable files are the user token files.
 
 # Running on a MacbookPro
-![Alt text](http://menketechnologies.github.io/img/tmuxfinal22.png?raw=true)
-![Alt text](http://menketechnologies.github.io/img/tmux-scripts.png)
+![Alt text](https://menketechnologies.github.io/img/tmuxfinal22.png?raw=true)
+![Alt text](https://menketechnologies.github.io/img/tmux-scripts.png)
 # Running on the Raspberry Pi 3
-![Alt text](http://menketechnologies.github.io/img/tmuxfinal3.png?raw=true)
-![Alt text](http://menketechnologies.github.io/img/tmuxfinal4.png?raw=true)
+![Alt text](https://menketechnologies.github.io/img/tmuxfinal3.png?raw=true)
+![Alt text](https://menketechnologies.github.io/img/tmuxfinal4.png?raw=true)
 # Running on the Rock64
-![Final 5](http://menketechnologies.github.io/img/tmuxfinal5.jpg?raw=true)
+![Final 5](https://menketechnologies.github.io/img/tmuxfinal5.jpg?raw=true)
 
 ## Keybindings generated with `source keybindingsToREADME.zsh >> README.md`
 
