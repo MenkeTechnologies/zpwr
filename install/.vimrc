@@ -1811,7 +1811,17 @@ function! AppendToFile(file, lines)
 endfunction
 
 function! WriteToNVimInfo()
-    let viminfo = $ZPWR_LOCAL.'/.nviminfo'
+    let dir=$ZPWR_LOCAL
+
+    if empty(dir)
+        if isdirectory(expand('~/.zpwr/local'))
+            let dir=expand('~/.zpwr/local')
+        else
+            return 0
+        endif
+    endi
+
+    let viminfo = dir.'/.nviminfo'
     let curFile = expand('%:p:~')
     if curFile != ''
         let curFile = '> '.curFile
