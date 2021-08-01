@@ -2,10 +2,12 @@ brew install aalib
 brew install ack
 brew install activemq
 brew install adns
+brew install aften
 brew install akka
 brew install algol68g
 brew install alpine
 brew install amap
+brew install ansible
 brew install ant
 brew install aom
 brew install apache-spark
@@ -77,10 +79,12 @@ brew install dcraw
 brew install dhex
 brew install dialog
 brew install diff-so-fancy
+brew install diwe.log
 brew install doc
 brew install docbook
 brew install docbook-xsl
 brew install docker
+brew install dotnet
 brew install double-conversion
 brew install doxygen
 brew install eigen
@@ -99,6 +103,8 @@ brew install figlet
 brew install fish
 brew install flac
 brew install fluid-synth
+brew install fmt
+brew install folly
 brew install fontconfig
 brew install fortune
 brew install fpc
@@ -117,6 +123,7 @@ brew install gdk-pixbuf
 brew install geckodriver
 brew install geoip
 brew install gettext
+brew install gflags
 brew install gforth
 brew install ghc
 brew install ghostscript
@@ -127,6 +134,7 @@ brew install glassfish
 brew install glib
 brew install glib-networking
 brew install global
+brew install glog
 brew install gmp
 brew install gnu-getopt
 brew install gnu-prolog
@@ -182,6 +190,7 @@ brew install ilmbase
 brew install imagemagick
 brew install imagemagick@6
 brew install imap-uw
+brew install imath
 brew install imlib2
 brew install instantclient-basic
 brew install instantclient-sdk
@@ -190,6 +199,7 @@ brew install iperf3
 brew install isl
 brew install jansson
 brew install jasper
+brew install jbig2dec
 brew install jemalloc
 brew install jenv
 brew install jetty
@@ -220,6 +230,8 @@ brew install libevent
 brew install libffi
 brew install libftdi0
 brew install libgcrypt
+brew install libgit2
+brew install libgit2-glib
 brew install libgpg-error
 brew install libgtop
 brew install libheif
@@ -285,14 +297,17 @@ brew install libzip
 brew install links
 brew install little-cms2
 brew install llvm
+brew install llvm@11
 brew install llvm@9
 brew install lua
 brew install lua@5.1
 brew install luajit
 brew install luajit-openresty
+brew install luv
 brew install lynis
 brew install lz4
 brew install lzo
+brew install m4
 brew install mad
 brew install mailutils
 brew install makedepend
@@ -405,6 +420,7 @@ brew install rav1e
 brew install re2c
 brew install readline
 brew install reattach-to-user-namespace
+brew install rebar3
 brew install redis
 brew install revolver
 brew install ripgrep
@@ -430,6 +446,7 @@ brew install sdl_ttf
 brew install shared-mime-info
 brew install shellcheck
 brew install shfmt
+brew install six
 brew install sl
 brew install slurm
 brew install smpeg
@@ -448,7 +465,6 @@ brew install sqlite
 brew install srm
 brew install srt
 brew install srtp
-brew install sshfs
 brew install subversion
 brew install swig
 brew install taglib
@@ -474,6 +490,7 @@ brew install tomee-plume
 brew install tor
 brew install torsocks
 brew install tree
+brew install tree-sitter
 brew install two-lame
 brew install ufraw
 brew install unbound
@@ -494,6 +511,7 @@ brew install wget
 brew install wildfly-as
 brew install with-readline
 brew install wxmac
+brew install wxwidgets
 brew install x264
 brew install x265
 brew install xmlto
