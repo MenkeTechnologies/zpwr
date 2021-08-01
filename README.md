@@ -704,12 +704,12 @@ evalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB
 ```
 
 ## Tests
-You can run zpwr unit tests via `zpwr tests` and include plugin tests wth `zpwr testall`.
+You can run zpwr unit tests via `zpwr test` and include plugin tests wth `zpwr testall`.
 
 There is also the alias `tru` (tests run) to run the tests.
 ```sh
 zpwrExists zunit && {
-    alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
+    alias tru="( builtin cd $ZPWR && zunit --verbose )"
 }
 ```
 

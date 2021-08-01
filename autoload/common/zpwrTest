@@ -3,7 +3,9 @@
 
 function zpwrTest(){
 
-    zunit --verbose "$ZPWR_TEST"/*.zsh
+    (
+        builtin cd "$ZPWR" && zunit --verbose
+    )
 
 }
 
