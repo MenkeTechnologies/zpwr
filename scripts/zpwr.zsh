@@ -398,11 +398,11 @@ ZPWR_VARS[VERB_0]="$0"
                 cmd=${v%%=*}
                 for exp in ${(s%;%)cmd}; do
                     if alias $exp 1>/dev/null 2>&1;then
-                        logg "Eval subcommand '$exp'"
+                        zpwrLoggDebug "Eval subcommand '$exp'"
                         eval "$exp"
                         ret=$?
                     else
-                        logg "Exec subcommand '$exp'"
+                        zpwrLoggDebug "Eval subcommand '$exp'"
                         eval "$exp " ${(q)@}
                         ret=$?
                     fi
