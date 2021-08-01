@@ -39,7 +39,7 @@ ZPWR_ENV="$ZPWR/env"
 ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 ZPWR_AUTOLOAD="$ZPWR/autoload"
-TEST_FILE=tests/testfile
+TEST_FILE=tests/_support/testfile
 
 fpath=($ZPWR_AUTOLOAD/*(/) $fpath)
 autoload -z $ZPWR_AUTOLOAD/*/*(.:t)

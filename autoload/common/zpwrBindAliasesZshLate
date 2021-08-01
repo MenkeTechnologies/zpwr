@@ -190,7 +190,7 @@ alias numcmd='print $#commands'
 #**************************************************************
 
 if zpwrExists zunit; then
-    alias tru="( builtin cd $ZPWR && zunit --verbose $ZPWR/tests/*.zsh )"
+    alias tru="( builtin cd $ZPWR && zunit --verbose )"
 fi
 
 # Example usage: zmv -W '*.pl' '*.perl'
