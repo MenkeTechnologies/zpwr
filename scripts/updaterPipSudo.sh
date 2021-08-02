@@ -27,7 +27,7 @@ else
             exit 1
         fi
     done
-    if [[ $ZPWR_REMOTE == false ]]; then
+    if [[ $ZPWR_REMOTE != true ]]; then
         if ! source "$zpwrBaseDir/scripts/init.sh" "$zpwrBaseDir"; then
             echo "Could not source zpwrBaseDir '$zpwrBaseDir/scripts/init.sh'."
             exit 1

@@ -186,12 +186,28 @@ function zpwrIsZsh(){
     test -n "$ZSH_VERSION"
 }
 
-if [[ "$ZPWR_REMOTE" == false ]]; then
+if [[ "$ZPWR_REMOTE" != true ]]; then
+
     test -z "$ZPWR_RE_ENV_FILE" && export ZPWR_RE_ENV_FILE="$ZPWR/env/.zpwr_re_env.sh"
+
     source "$ZPWR_RE_ENV_FILE" || {
         echo "could not source ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'" >&2
     }
+
+    #{{{                    MARK:source lib file
+    #**************************************************************
+    source "$ZPWR_LIB" || {
+        echo "could not source ZPWR_LIB '$ZPWR_LIB'" >&2
+    }
+    #}}}***********************************************************
+
+    if zpwrIsZsh; then
+        declare -Tgx ZPWR_DIRS_CLEAN zpwrDirsClean
+    fi
 fi
+
+# do not want any surprises when relative cd to other dirs
+unset CDPATH
 #}}}***********************************************************
 
 #{{{                    MARK:NonZPWR
@@ -201,24 +217,3 @@ export MAGIC_ENTER_OTHER_COMMAND='zpwrClearList'
 # command to run on enter key with empty buffer and git dir
 export MAGIC_ENTER_GIT_COMMAND='zpwrClearList; test -n "$(git status --porcelain)" && git status -u .'
 #}}}***********************************************************
-
-#{{{                    MARK:source lib file
-#**************************************************************
-# do not want any surprises when relative cd to other dirs
-unset CDPATH
-
-if [[ "$ZPWR_REMOTE" == false ]]; then
-    source "$ZPWR_LIB" || {
-        echo "could not source ZPWR_LIB '$ZPWR_LIB'" >&2
-    }
-fi
-#}}}***********************************************************
-
-if [[ "$ZPWR_REMOTE" != true ]]; then
-    if zpwrIsZsh; then
-        declare -Tgx ZPWR_DIRS_CLEAN zpwrDirsClean
-    fi
-
-fi
-#}}}***********************************************************
-
