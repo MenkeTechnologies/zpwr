@@ -754,7 +754,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode    C-r                  command-prompt -i -I "#{pane_search_string}" -p "(search up)" "send -X search-backward-incremental \"%%%\"" ```
 - ``` bind-key    -T copy-mode    C-s                  command-prompt -i -I "#{pane_search_string}" -p "(search down)" "send -X search-forward-incremental \"%%%\"" ```
 - ``` bind-key    -T copy-mode    C-v                  send-keys -X page-down ```
-- ``` bind-key    -T copy-mode    C-w                  send-keys -X copy-selection-and-cancel ```
+- ``` bind-key    -T copy-mode    C-w                  send-keys -X copy-pipe-and-cancel ```
 - ``` bind-key    -T copy-mode    Escape               send-keys -X cancel ```
 - ``` bind-key    -T copy-mode    Space                send-keys -X page-down ```
 - ``` bind-key    -T copy-mode    ,                    send-keys -X jump-reverse ```
@@ -763,18 +763,20 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode    N                    send-keys -X search-reverse ```
 - ``` bind-key    -T copy-mode    R                    send-keys -X rectangle-toggle ```
 - ``` bind-key    -T copy-mode    T                    command-prompt -1 -p "(jump to backward)" "send -X jump-to-backward \"%%%\"" ```
+- ``` bind-key    -T copy-mode    X                    send-keys -X set-mark ```
 - ``` bind-key    -T copy-mode    f                    command-prompt -1 -p "(jump forward)" "send -X jump-forward \"%%%\"" ```
 - ``` bind-key    -T copy-mode    g                    command-prompt -p "(goto line)" "send -X goto-line \"%%%\"" ```
 - ``` bind-key    -T copy-mode    n                    send-keys -X search-again ```
 - ``` bind-key    -T copy-mode    q                    send-keys -X cancel ```
+- ``` bind-key    -T copy-mode    r                    send-keys -X refresh-from-pane ```
 - ``` bind-key    -T copy-mode    t                    command-prompt -1 -p "(jump to forward)" "send -X jump-to-forward \"%%%\"" ```
 - ``` bind-key    -T copy-mode    MouseDown1Pane       select-pane ```
 - ``` bind-key    -T copy-mode    MouseDrag1Pane       select-pane \; send-keys -X begin-selection ```
-- ``` bind-key    -T copy-mode    MouseDragEnd1Pane    send-keys -X copy-selection-and-cancel ```
+- ``` bind-key    -T copy-mode    MouseDragEnd1Pane    send-keys -X copy-pipe-and-cancel ```
 - ``` bind-key    -T copy-mode    WheelUpPane          select-pane \; send-keys -X -N 5 scroll-up ```
 - ``` bind-key    -T copy-mode    WheelDownPane        select-pane \; send-keys -X -N 5 scroll-down ```
-- ``` bind-key    -T copy-mode    DoubleClick1Pane     select-pane \; send-keys -X select-word ```
-- ``` bind-key    -T copy-mode    TripleClick1Pane     select-pane \; send-keys -X select-line ```
+- ``` bind-key    -T copy-mode    DoubleClick1Pane     select-pane \; send-keys -X select-word \; run-shell -d 0.3 \; send-keys -X copy-pipe-and-cancel ```
+- ``` bind-key    -T copy-mode    TripleClick1Pane     select-pane \; send-keys -X select-line \; run-shell -d 0.3 \; send-keys -X copy-pipe-and-cancel ```
 - ``` bind-key    -T copy-mode    Home                 send-keys -X start-of-line ```
 - ``` bind-key    -T copy-mode    End                  send-keys -X end-of-line ```
 - ``` bind-key    -T copy-mode    NPage                send-keys -X page-down ```
@@ -802,7 +804,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode    M-m                  send-keys -X back-to-indentation ```
 - ``` bind-key    -T copy-mode    M-r                  send-keys -X middle-line ```
 - ``` bind-key    -T copy-mode    M-v                  send-keys -X page-up ```
-- ``` bind-key    -T copy-mode    M-w                  send-keys -X copy-selection-and-cancel ```
+- ``` bind-key    -T copy-mode    M-w                  send-keys -X copy-pipe-and-cancel ```
+- ``` bind-key    -T copy-mode    M-x                  send-keys -X jump-to-mark ```
 - ``` bind-key    -T copy-mode    "M-{"                send-keys -X previous-paragraph ```
 - ``` bind-key    -T copy-mode    "M-}"                send-keys -X next-paragraph ```
 - ``` bind-key    -T copy-mode    M-Up                 send-keys -X halfpage-up ```
@@ -815,7 +818,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode-vi C-e                  send-keys -X scroll-down ```
 - ``` bind-key    -T copy-mode-vi C-f                  send-keys -X page-down ```
 - ``` bind-key    -T copy-mode-vi C-h                  send-keys -X cursor-left ```
-- ``` bind-key    -T copy-mode-vi C-j                  send-keys -X copy-selection-and-cancel ```
+- ``` bind-key    -T copy-mode-vi C-j                  send-keys -X copy-pipe-and-cancel ```
 - ``` bind-key    -T copy-mode-vi Enter                send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy" ```
 - ``` bind-key    -T copy-mode-vi C-u                  send-keys -X halfpage-up ```
 - ``` bind-key    -T copy-mode-vi C-v                  send-keys -X rectangle-toggle ```
@@ -827,7 +830,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode-vi %                    send-keys -X next-matching-bracket ```
 - ``` bind-key    -T copy-mode-vi *                    send-keys -FX search-forward "#{copy_cursor_word}" ```
 - ``` bind-key    -T copy-mode-vi ,                    send-keys -X jump-reverse ```
-- ``` bind-key    -T copy-mode-vi /                    command-prompt -p "(search down)" "send -X search-forward \"%%%\"" ```
+- ``` bind-key    -T copy-mode-vi /                    command-prompt -i -p "(search down)" "send -X search-forward-incremental \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi 0                    send-keys -X start-of-line ```
 - ``` bind-key    -T copy-mode-vi 1                    command-prompt -N -I 1 -p (repeat) "send -N \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi 2                    command-prompt -N -I 2 -p (repeat) "send -N \"%%%\"" ```
@@ -840,7 +843,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode-vi 9                    command-prompt -N -I 9 -p (repeat) "send -N \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi :                    command-prompt -p "(goto line)" "send -X goto-line \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi \;                   send-keys -X jump-again ```
-- ``` bind-key    -T copy-mode-vi ?                    command-prompt -p "(search up)" "send -X search-backward \"%%%\"" ```
+- ``` bind-key    -T copy-mode-vi ?                    command-prompt -i -p "(search up)" "send -X search-backward-incremental \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi A                    send-keys -X append-selection-and-cancel ```
 - ``` bind-key    -T copy-mode-vi B                    send-keys -X previous-space ```
 - ``` bind-key    -T copy-mode-vi D                    send-keys -X copy-end-of-line ```
@@ -856,6 +859,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode-vi T                    command-prompt -1 -p "(jump to backward)" "send -X jump-to-backward \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi V                    send-keys -X select-line ```
 - ``` bind-key    -T copy-mode-vi W                    send-keys -X next-space ```
+- ``` bind-key    -T copy-mode-vi X                    send-keys -X set-mark ```
 - ``` bind-key    -T copy-mode-vi ^                    send-keys -X back-to-indentation ```
 - ``` bind-key    -T copy-mode-vi b                    send-keys -X previous-word ```
 - ``` bind-key    -T copy-mode-vi e                    send-keys -X next-word-end ```
@@ -868,23 +872,24 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode-vi n                    send-keys -X search-again ```
 - ``` bind-key    -T copy-mode-vi o                    send-keys -X other-end ```
 - ``` bind-key    -T copy-mode-vi q                    send-keys -X cancel ```
-- ``` bind-key    -T copy-mode-vi s                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
+- ``` bind-key    -T copy-mode-vi r                    send-keys -X refresh-from-pane ```
+- ``` bind-key    -T copy-mode-vi s                    send-keys -X copy-pipe-no-clear "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
 - ``` bind-key    -T copy-mode-vi t                    command-prompt -1 -p "(jump to forward)" "send -X jump-to-forward \"%%%\"" ```
 - ``` bind-key    -T copy-mode-vi v                    send-keys -X begin-selection ```
 - ``` bind-key    -T copy-mode-vi w                    send-keys -X next-word ```
-- ``` bind-key    -T copy-mode-vi x                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell "tmux display-message -p -F \"#{pane_current_path}\" > \$ZPWR_TMUX_LOCAL/pane_pwd" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh open" ```
-- ``` bind-key    -T copy-mode-vi y                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" ```
-- ``` bind-key    -T copy-mode-vi z                    send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
+- ``` bind-key    -T copy-mode-vi x                    send-keys -X copy-pipe-no-clear "reattach-to-user-namespace pbcopy" \; display-message -F "current pane directory #{pane_current_path}" \; run-shell "tmux display-message -p -F \"#{pane_current_path}\" > \$ZPWR_TMUX_LOCAL/pane_pwd" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh open" ```
+- ``` bind-key    -T copy-mode-vi y                    send-keys -X copy-pipe-no-clear "reattach-to-user-namespace pbcopy" ```
+- ``` bind-key    -T copy-mode-vi z                    send-keys -X copy-pipe-no-clear "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
 - ``` bind-key    -T copy-mode-vi \{                   send-keys -X previous-paragraph ```
 - ``` bind-key    -T copy-mode-vi \}                   send-keys -X next-paragraph ```
 - ``` bind-key    -T copy-mode-vi MouseDown1Pane       select-pane ```
-- ``` bind-key    -T copy-mode-vi MouseDown3Pane       send-keys -X copy-pipe "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
+- ``` bind-key    -T copy-mode-vi MouseDown3Pane       send-keys -X copy-pipe-no-clear "reattach-to-user-namespace pbcopy" \; run-shell "reattach-to-user-namespace bash ~/.zpwr/tmux/google.sh google" ```
 - ``` bind-key    -T copy-mode-vi MouseDrag1Pane       select-pane \; send-keys -X begin-selection ```
-- ``` bind-key    -T copy-mode-vi MouseDragEnd1Pane    send-keys -X copy-selection-and-cancel ```
+- ``` bind-key    -T copy-mode-vi MouseDragEnd1Pane    send-keys -X copy-pipe-and-cancel ```
 - ``` bind-key    -T copy-mode-vi WheelUpPane          select-pane \; send-keys -X -N 5 scroll-up ```
 - ``` bind-key    -T copy-mode-vi WheelDownPane        select-pane \; send-keys -X -N 5 scroll-down ```
-- ``` bind-key    -T copy-mode-vi DoubleClick1Pane     select-pane \; send-keys -X select-word ```
-- ``` bind-key    -T copy-mode-vi TripleClick1Pane     select-pane \; send-keys -X select-line ```
+- ``` bind-key    -T copy-mode-vi DoubleClick1Pane     select-pane \; send-keys -X select-word \; run-shell -d 0.3 \; send-keys -X copy-pipe-and-cancel ```
+- ``` bind-key    -T copy-mode-vi TripleClick1Pane     select-pane \; send-keys -X select-line \; run-shell -d 0.3 \; send-keys -X copy-pipe-and-cancel ```
 - ``` bind-key    -T copy-mode-vi BSpace               send-keys -X cursor-left ```
 - ``` bind-key    -T copy-mode-vi NPage                send-keys -X page-down ```
 - ``` bind-key    -T copy-mode-vi PPage                send-keys -X page-up ```
@@ -892,6 +897,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode-vi Down                 send-keys -X cursor-down ```
 - ``` bind-key    -T copy-mode-vi Left                 send-keys -X cursor-left ```
 - ``` bind-key    -T copy-mode-vi Right                send-keys -X cursor-right ```
+- ``` bind-key    -T copy-mode-vi M-x                  send-keys -X jump-to-mark ```
 - ``` bind-key    -T copy-mode-vi C-Up                 send-keys -X scroll-up ```
 - ``` bind-key    -T copy-mode-vi C-Down               send-keys -X scroll-down ```
 - ``` bind-key    -T prefix       C-o                  rotate-window ```
@@ -904,13 +910,13 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       \$                   command-prompt -I "#S" "rename-session -- '%%'" ```
 - ``` bind-key    -T prefix       %                    split-window -h ```
 - ``` bind-key    -T prefix       &                    confirm-before -p "kill-window #W? (y/n)" kill-window ```
-- ``` bind-key    -T prefix       \'                   command-prompt -p index "select-window -t ':%%'" ```
+- ``` bind-key    -T prefix       \'                   command-prompt -W -p index "select-window -t ':%%'" ```
 - ``` bind-key -r -T prefix       (                    switch-client -p ```
 - ``` bind-key -r -T prefix       )                    switch-client -n ```
 - ``` bind-key    -T prefix       +                    split-window -v -c "#{pane_current_path}" \; select-pane -l \; kill-pane ```
 - ``` bind-key    -T prefix       ,                    command-prompt -I "#W" "rename-window -- '%%'" ```
-- ``` bind-key    -T prefix       -                    split-window -v ```
-- ``` bind-key    -T prefix       .                    command-prompt "move-window -t '%%'" ```
+- ``` bind-key    -T prefix       -                    split-window -v -c "#{pane_current_path}" ```
+- ``` bind-key    -T prefix       .                    command-prompt -T "move-window -t '%%'" ```
 - ``` bind-key    -T prefix       /                    command-prompt -k -p key "list-keys -1N \"%%%\"" ```
 - ``` bind-key    -T prefix       0                    select-window -t :=0 ```
 - ``` bind-key    -T prefix       1                    select-window -t :=1 ```
@@ -924,31 +930,32 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       9                    select-window -t :=9 ```
 - ``` bind-key    -T prefix       :                    command-prompt ```
 - ``` bind-key    -T prefix       \;                   last-pane ```
-- ``` bind-key    -T prefix       <                    display-menu -T "#[align=centre]#{window_index}:#{window_name}" -x W -y S "Swap Left" l "swap-window -t:-1" "Swap Right" r "swap-window -t:+1" "#{?pane_marked_set,,-}Swap Marked" s swap-window  Kill X kill-window Respawn R "respawn-window -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" Rename n "command-prompt -I \"#W\" \"rename-window -- '%%'\""  "New After" w "new-window -a" "New At End" W new-window ```
+- ``` bind-key    -T prefix       <                    display-menu -T "#[align=centre]#{window_index}:#{window_name}" -x W -y W "#{?#{>:#{session_windows},1},,-}Swap Left" l "swap-window -t:-1" "#{?#{>:#{session_windows},1},,-}Swap Right" r "swap-window -t:+1" "#{?pane_marked_set,,-}Swap Marked" s swap-window '' Kill X kill-window Respawn R "respawn-window -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" Rename n "command-prompt -I \"#W\" \"rename-window -- '%%'\"" '' "New After" w "new-window -a" "New At End" W new-window ```
 - ``` bind-key    -T prefix       =                    choose-buffer -Z ```
-- ``` bind-key    -T prefix       >                    display-menu -T "#[align=centre]#{pane_index} (#{pane_id})" -x P -y P "#{?mouse_word,Search For #[underscore]#{=/9/...:mouse_word},}" C-r "copy-mode -t=; send -Xt= search-backward \"#{q:mouse_word}\"" "#{?mouse_word,Type #[underscore]#{=/9/...:mouse_word},}" C-y "send-keys -l -- \"#{q:mouse_word}\"" "#{?mouse_word,Copy #[underscore]#{=/9/...:mouse_word},}" c "set-buffer -- \"#{q:mouse_word}\"" "#{?mouse_line,Copy Line,}" l "set-buffer -- \"#{q:mouse_line}\""  "Horizontal Split" h "split-window -h" "Vertical Split" v "split-window -v"  "Swap Up" u "swap-pane -U" "Swap Down" d "swap-pane -D" "#{?pane_marked_set,,-}Swap Marked" s swap-pane  Kill X kill-pane Respawn R "respawn-pane -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" "#{?window_zoomed_flag,Unzoom,Zoom}" z "resize-pane -Z" ```
+- ``` bind-key    -T prefix       >                    display-menu -T "#[align=centre]#{pane_index} (#{pane_id})" -x P -y P "#{?#{m/r:(copy|view)-mode,#{pane_mode}},Go To Top,}" < "send -X history-top" "#{?#{m/r:(copy|view)-mode,#{pane_mode}},Go To Bottom,}" > "send -X history-bottom" '' "#{?mouse_word,Search For #[underscore]#{=/9/...:mouse_word},}" C-r "if -F \"#{?#{m/r:(copy|view)-mode,#{pane_mode}},0,1}\" \"copy-mode -t=\" ; send -Xt= search-backward \"#{q:mouse_word}\"" "#{?mouse_word,Type #[underscore]#{=/9/...:mouse_word},}" C-y "copy-mode -q ; send-keys -l -- \"#{q:mouse_word}\"" "#{?mouse_word,Copy #[underscore]#{=/9/...:mouse_word},}" c "copy-mode -q ; set-buffer -- \"#{q:mouse_word}\"" "#{?mouse_line,Copy Line,}" l "copy-mode -q ; set-buffer -- \"#{q:mouse_line}\"" '' "Horizontal Split" h "split-window -h" "Vertical Split" v "split-window -v" '' "#{?#{>:#{window_panes},1},,-}Swap Up" u "swap-pane -U" "#{?#{>:#{window_panes},1},,-}Swap Down" d "swap-pane -D" "#{?pane_marked_set,,-}Swap Marked" s swap-pane '' Kill X kill-pane Respawn R "respawn-pane -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" "#{?#{>:#{window_panes},1},,-}#{?window_zoomed_flag,Unzoom,Zoom}" z "resize-pane -Z" ```
 - ``` bind-key    -T prefix       ?                    list-keys -N ```
-- ``` bind-key    -T prefix       D                    source-file ~/.zpwr/tmux/control-window ```
-- ``` bind-key    -T prefix       E                    source-file ~/.zpwr/tmux/fourVertical ```
-- ``` bind-key    -T prefix       F                    source-file ~/.zpwr/tmux/four-panes ```
-- ``` bind-key    -T prefix       G                    source-file ~/.zpwr/tmux/eight-panes ```
+- ``` bind-key    -T prefix       C                    customize-mode -Z ```
+- ``` bind-key    -T prefix       D                    source-file ~/.zpwr/tmux/control-window.conf ```
+- ``` bind-key    -T prefix       E                    source-file ~/.zpwr/tmux/fourVertical.conf ```
+- ``` bind-key    -T prefix       F                    source-file ~/.zpwr/tmux/four-panes.conf ```
+- ``` bind-key    -T prefix       G                    source-file ~/.zpwr/tmux/eight-panes.conf ```
 - ``` bind-key -r -T prefix       H                    resize-pane -L 5 ```
 - ``` bind-key    -T prefix       I                    run-shell ~/.tmux/plugins/tpm/bindings/install_plugins ```
 - ``` bind-key -r -T prefix       J                    resize-pane -D 5 ```
 - ``` bind-key -r -T prefix       K                    resize-pane -U 5 ```
 - ``` bind-key -r -T prefix       L                    resize-pane -R 5 ```
-- ``` bind-key    -T prefix       M                    source-file ~/.zpwr/tmux/learn ```
-- ``` bind-key    -T prefix       O                    source-file ~/.zpwr/tmux/sixteen-panes ```
+- ``` bind-key    -T prefix       M                    source-file ~/.zpwr/tmux/learn.conf ```
+- ``` bind-key    -T prefix       O                    source-file ~/.zpwr/tmux/sixteen-panes.conf ```
 - ``` bind-key    -T prefix       P                    paste-buffer ```
-- ``` bind-key    -T prefix       R                    source-file ~/.zpwr/tmux/thirtytwo-panes-repl ```
+- ``` bind-key    -T prefix       R                    source-file ~/.zpwr/tmux/thirtytwo-panes-repl.conf ```
 - ``` bind-key    -T prefix       S                    set-window-option synchronize-panes ```
-- ``` bind-key    -T prefix       T                    source-file ~/.zpwr/tmux/config-files ```
+- ``` bind-key    -T prefix       T                    source-file ~/.zpwr/tmux/config-files.conf ```
 - ``` bind-key    -T prefix       U                    run-shell ~/.tmux/plugins/tpm/bindings/update_plugins ```
 - ``` bind-key    -T prefix       Y                    split-window -v -c "#{pane_current_path}" \; select-pane -l \; kill-pane ```
 - ``` bind-key    -T prefix       [                    copy-mode ```
 - ``` bind-key    -T prefix       \\                   split-window -h -c "#{pane_current_path}" ```
-- ``` bind-key    -T prefix       ]                    paste-buffer ```
-- ``` bind-key    -T prefix       _                    split-window -v -c "#{pane_current_path}" ```
+- ``` bind-key    -T prefix       ]                    paste-buffer -p ```
+- ``` bind-key    -T prefix       _                    split-window -v ```
 - ``` bind-key    -T prefix       c                    new-window ```
 - ``` bind-key    -T prefix       d                    detach-client ```
 - ``` bind-key    -T prefix       f                    command-prompt "find-window -Z -- '%%'" ```
@@ -962,7 +969,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       o                    select-pane -t :.+ ```
 - ``` bind-key -r -T prefix       p                    previous-window ```
 - ``` bind-key    -T prefix       q                    display-panes -d 5000 ```
-- ``` bind-key    -T prefix       r                    source-file ~/.tmux.conf \; display-message "Tmux Reloaded!" ```
+- ``` bind-key    -T prefix       r                    source-file ~/.zpwr/tmux/init.conf \; display-message "Tmux Reloaded!" \; copy-mode -q ```
 - ``` bind-key    -T prefix       s                    choose-tree -Zs ```
 - ``` bind-key    -T prefix       t                    clock-mode ```
 - ``` bind-key    -T prefix       v                    run-shell -b "~/.zpwr/scripts/allPanes.zsh multi" ```
@@ -1004,15 +1011,18 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T root         C-]                  switch-client -p ```
 - ``` bind-key    -T root         MouseDown1Pane       select-pane -t = \; send-keys -M ```
 - ``` bind-key    -T root         MouseDown1Status     select-window -t = ```
+- ``` bind-key    -T root         MouseDown2Pane       select-pane -t = \; if-shell -F "#{||:#{pane_in_mode},#{mouse_any_flag}}" "send -M" "paste -p" ```
 - ``` bind-key    -T root         MouseDown3Pane       if-shell -F -t = "#{mouse_any_flag}" "select-pane -t=; send-keys -M" "select-pane -t=" ```
-- ``` bind-key    -T root         MouseDown3Status     display-menu -T "#[align=centre]#{window_index}:#{window_name}" -t = -x W -y S "Swap Left" l "swap-window -t:-1" "Swap Right" r "swap-window -t:+1" "#{?pane_marked_set,,-}Swap Marked" s swap-window  Kill X kill-window Respawn R "respawn-window -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" Rename n "command-prompt -I \"#W\" \"rename-window -- '%%'\""  "New After" w "new-window -a" "New At End" W new-window ```
-- ``` bind-key    -T root         MouseDown3StatusLeft display-menu -T "#[align=centre]#{session_name}" -t = -x M -y S Next n "switch-client -n" Previous p "switch-client -p"  Renumber N "move-window -r" Rename n "command-prompt -I \"#S\" \"rename-session -- '%%'\""  "New Session" s new-session "New Window" w new-window ```
-- ``` bind-key    -T root         MouseDrag1Pane       if-shell -F -t = "#{mouse_any_flag}" "if -Ft= \"#{pane_in_mode}\" \"copy-mode -M\" \"send-keys -M\"" "copy-mode -M" ```
+- ``` bind-key    -T root         MouseDown3Status     display-menu -T "#[align=centre]#{window_index}:#{window_name}" -t = -x W -y W "#{?#{>:#{session_windows},1},,-}Swap Left" l "swap-window -t:-1" "#{?#{>:#{session_windows},1},,-}Swap Right" r "swap-window -t:+1" "#{?pane_marked_set,,-}Swap Marked" s swap-window '' Kill X kill-window Respawn R "respawn-window -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" Rename n "command-prompt -I \"#W\" \"rename-window -- '%%'\"" '' "New After" w "new-window -a" "New At End" W new-window ```
+- ``` bind-key    -T root         MouseDown3StatusLeft display-menu -T "#[align=centre]#{session_name}" -t = -x M -y W Next n "switch-client -n" Previous p "switch-client -p" '' Renumber N "move-window -r" Rename n "command-prompt -I \"#S\" \"rename-session -- '%%'\"" '' "New Session" s new-session "New Window" w new-window ```
+- ``` bind-key    -T root         MouseDrag1Pane       if-shell -F "#{||:#{pane_in_mode},#{mouse_any_flag}}" "send -M" "copy-mode -M" ```
 - ``` bind-key    -T root         MouseDrag1Border     resize-pane -M ```
-- ``` bind-key    -T root         WheelUpPane          if-shell -F -t = "#{mouse_any_flag}" "send-keys -M" "if -Ft= \"#{pane_in_mode}\" \"send-keys -M\" \"copy-mode -et=\"" ```
+- ``` bind-key    -T root         WheelUpPane          if-shell -F "#{||:#{pane_in_mode},#{mouse_any_flag}}" "send -M" "copy-mode -e" ```
 - ``` bind-key    -T root         WheelUpStatus        previous-window ```
 - ``` bind-key    -T root         WheelDownStatus      next-window ```
-- ``` bind-key    -T root         M-MouseDown3Pane     display-menu -T "#[align=centre]#{pane_index} (#{pane_id})" -t = -x M -y M "#{?mouse_word,Search For #[underscore]#{=/9/...:mouse_word},}" C-r "copy-mode -t=; send -Xt= search-backward \"#{q:mouse_word}\"" "#{?mouse_word,Type #[underscore]#{=/9/...:mouse_word},}" C-y "send-keys -l -- \"#{q:mouse_word}\"" "#{?mouse_word,Copy #[underscore]#{=/9/...:mouse_word},}" c "set-buffer -- \"#{q:mouse_word}\"" "#{?mouse_line,Copy Line,}" l "set-buffer -- \"#{q:mouse_line}\""  "Horizontal Split" h "split-window -h" "Vertical Split" v "split-window -v"  "Swap Up" u "swap-pane -U" "Swap Down" d "swap-pane -D" "#{?pane_marked_set,,-}Swap Marked" s swap-pane  Kill X kill-pane Respawn R "respawn-pane -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" "#{?window_zoomed_flag,Unzoom,Zoom}" z "resize-pane -Z" ```
+- ``` bind-key    -T root         DoubleClick1Pane     select-pane -t = \; if-shell -F "#{||:#{pane_in_mode},#{mouse_any_flag}}" "send -M" "copy-mode -H ; send -X select-word ; run -d0.3 ; send -X copy-pipe-and-cancel" ```
+- ``` bind-key    -T root         TripleClick1Pane     select-pane -t = \; if-shell -F "#{||:#{pane_in_mode},#{mouse_any_flag}}" "send -M" "copy-mode -H ; send -X select-line ; run -d0.3 ; send -X copy-pipe-and-cancel" ```
+- ``` bind-key    -T root         M-MouseDown3Pane     display-menu -T "#[align=centre]#{pane_index} (#{pane_id})" -t = -x M -y M "#{?#{m/r:(copy|view)-mode,#{pane_mode}},Go To Top,}" < "send -X history-top" "#{?#{m/r:(copy|view)-mode,#{pane_mode}},Go To Bottom,}" > "send -X history-bottom" '' "#{?mouse_word,Search For #[underscore]#{=/9/...:mouse_word},}" C-r "if -F \"#{?#{m/r:(copy|view)-mode,#{pane_mode}},0,1}\" \"copy-mode -t=\" ; send -Xt= search-backward \"#{q:mouse_word}\"" "#{?mouse_word,Type #[underscore]#{=/9/...:mouse_word},}" C-y "copy-mode -q ; send-keys -l -- \"#{q:mouse_word}\"" "#{?mouse_word,Copy #[underscore]#{=/9/...:mouse_word},}" c "copy-mode -q ; set-buffer -- \"#{q:mouse_word}\"" "#{?mouse_line,Copy Line,}" l "copy-mode -q ; set-buffer -- \"#{q:mouse_line}\"" '' "Horizontal Split" h "split-window -h" "Vertical Split" v "split-window -v" '' "#{?#{>:#{window_panes},1},,-}Swap Up" u "swap-pane -U" "#{?#{>:#{window_panes},1},,-}Swap Down" d "swap-pane -D" "#{?pane_marked_set,,-}Swap Marked" s swap-pane '' Kill X kill-pane Respawn R "respawn-pane -k" "#{?pane_marked,Unmark,Mark}" m "select-pane -m" "#{?#{>:#{window_panes},1},,-}#{?window_zoomed_flag,Unzoom,Zoom}" z "resize-pane -Z" ```
 - ``` bind-key    -T root         M-Up                 select-pane -U ```
 - ``` bind-key    -T root         M-Down               select-pane -D ```
 - ``` bind-key    -T root         M-Left               select-pane -L ```
@@ -1145,7 +1155,11 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "]" autopair-close ```
 - ``` bindkey -R -M viins "\^"-"_" self-insert ```
 - ``` bindkey -M viins "\`" zpwrInterceptSurround ```
-- ``` bindkey -R -M viins "a"-"z" self-insert ```
+- ``` bindkey -R -M viins "a"-"f" self-insert ```
+- ``` bindkey -M viins "fj" vi-cmd-mode ```
+- ``` bindkey -R -M viins "g"-"j" self-insert ```
+- ``` bindkey -M viins "jf" vi-cmd-mode ```
+- ``` bindkey -R -M viins "k"-"z" self-insert ```
 - ``` bindkey -M viins "{" zpwrInterceptSurround ```
 - ``` bindkey -M viins "|" self-insert ```
 - ``` bindkey -M viins "}" autopair-close ```
@@ -1480,11 +1494,10 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viopp "j" down-line ```
 - ``` bindkey -M viopp "k" up-line ```
 # Vim Keybindings Insert Mode
-- ```                                                                                                                                                                  ```
-- ```                                                                                  ```
+- ```  ```
 - ``` i  <S-BS>       @<Plug>delimitMateS-BS ```
 - ``` i  <BS>         @<Plug>delimitMateBS ```
-- ``` i  <Plug>delimitMateJumpMany *@<SNR>56_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>" ```
+- ``` i  <Plug>delimitMateJumpMany *@<SNR>57_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>" ```
 - ``` i  <C-G>g       @<Plug>delimitMateJumpMany ```
 - ``` i  <C-H>        @<Plug>delimitMateBS ```
 - ``` i  "            @<Plug>delimitMate" ```
@@ -1496,8 +1509,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  `            @<Plug>delimitMate` ```
 - ``` i  {            @<Plug>delimitMate{ ```
 - ``` i  }            @<Plug>delimitMate} ```
-- ``` i  <Plug>ISurround * <C-R>=<SNR>169_insert(1)<CR> ```
-- ``` i  <Plug>Isurround * <C-R>=<SNR>169_insert()<CR> ```
+- ``` i  <Plug>ISurround * <C-R>=<SNR>137_insert(1)<CR> ```
+- ``` i  <Plug>Isurround * <C-R>=<SNR>137_insert()<CR> ```
 - ``` i  <Plug>(sexp_insert_backspace) * sexp#backspace_insertion() ```
 - ``` i  <Plug>(sexp_insert_double_quote) * sexp#quote_insertion('"') ```
 - ``` i  <Plug>(sexp_insert_closing_curly) * sexp#closing_insertion('}') ```
@@ -1513,7 +1526,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  <M-d>       * <C-O>dw ```
 - ``` !  <M-f>       * <S-Right> ```
 - ``` !  <M-b>       * <S-Left> ```
-- ``` i  <Plug>NERDCommenterInsert * <Space><BS><Esc>:call NERDComment('i', 'insert')<CR> ```
+- ``` i  <Plug>NERDCommenterInsert * <Space><BS><Esc>:call nerdcommenter#Comment('i', "insert")<CR> ```
 - ``` i  <Plug>(neosnippet_start_unite_snippet) * unite#sources#neosnippet#start_complete() ```
 - ``` i  <Plug>(neosnippet_jump) * neosnippet#mappings#jump_impl() ```
 - ``` i  <Plug>(neosnippet_expand) * neosnippet#mappings#expand_impl() ```
@@ -1543,20 +1556,20 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  <Plug>(emmet-update-tag) * <C-R>=emmet#util#closePopup()<CR><C-R>=emmet#updateTag()<CR> ```
 - ``` i  <Plug>(emmet-expand-word) * <C-R>=emmet#util#closePopup()<CR><C-R>=emmet#expandAbbr(1,"")<CR> ```
 - ``` i  <Plug>(emmet-expand-abbr) * <C-R>=emmet#util#closePopup()<CR><C-R>=emmet#expandAbbr(0,"")<CR> ```
-- ``` i  <Plug>delimitMateS-Tab * <SNR>56_TriggerAbb()."\<C-R>=delimitMate#JumpAny()\<CR>" ```
-- ``` i  <Plug>delimitMateSpace * <SNR>56_TriggerAbb()."\<C-R>=delimitMate#ExpandSpace()\<CR>" ```
-- ``` i  <Plug>delimitMateCR * <SNR>56_TriggerAbb()."\<C-R>=delimitMate#ExpandReturn()\<CR>" ```
+- ``` i  <Plug>delimitMateS-Tab * <SNR>57_TriggerAbb()."\<C-R>=delimitMate#JumpAny()\<CR>" ```
+- ``` i  <Plug>delimitMateSpace * <SNR>57_TriggerAbb()."\<C-R>=delimitMate#ExpandSpace()\<CR>" ```
+- ``` i  <Plug>delimitMateCR * <SNR>57_TriggerAbb()."\<C-R>=delimitMate#ExpandReturn()\<CR>" ```
 - ``` i  <Plug>delimitMateS-BS * delimitMate#WithinEmptyPair() ? "\<Del>" : "\<S-BS>" ```
 - ``` i  <Plug>delimitMateBS * <C-R>=delimitMate#BS()<CR> ```
-- ``` i  <Plug>delimitMate` * <SNR>56_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\`\")<CR>" ```
-- ``` i  <Plug>delimitMate' * <SNR>56_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\'\")<CR>" ```
-- ``` i  <Plug>delimitMate" * <SNR>56_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\"\")<CR>" ```
-- ``` i  <Plug>delimitMate] * <SNR>56_TriggerAbb().delimitMate#JumpOut("\]") ```
-- ``` i  <Plug>delimitMate} * <SNR>56_TriggerAbb().delimitMate#JumpOut("\}") ```
-- ``` i  <Plug>delimitMate) * <SNR>56_TriggerAbb().delimitMate#JumpOut("\)") ```
-- ``` i  <Plug>delimitMate[ * <SNR>56_TriggerAbb().delimitMate#ParenDelim("]") ```
-- ``` i  <Plug>delimitMate{ * <SNR>56_TriggerAbb().delimitMate#ParenDelim("}") ```
-- ``` i  <Plug>delimitMate( * <SNR>56_TriggerAbb().delimitMate#ParenDelim(")") ```
+- ``` i  <Plug>delimitMate` * <SNR>57_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\`\")<CR>" ```
+- ``` i  <Plug>delimitMate' * <SNR>57_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\'\")<CR>" ```
+- ``` i  <Plug>delimitMate" * <SNR>57_TriggerAbb()."<C-R>=delimitMate#QuoteDelim(\"\\\"\")<CR>" ```
+- ``` i  <Plug>delimitMate] * <SNR>57_TriggerAbb().delimitMate#JumpOut("\]") ```
+- ``` i  <Plug>delimitMate} * <SNR>57_TriggerAbb().delimitMate#JumpOut("\}") ```
+- ``` i  <Plug>delimitMate) * <SNR>57_TriggerAbb().delimitMate#JumpOut("\)") ```
+- ``` i  <Plug>delimitMate[ * <SNR>57_TriggerAbb().delimitMate#ParenDelim("]") ```
+- ``` i  <Plug>delimitMate{ * <SNR>57_TriggerAbb().delimitMate#ParenDelim("}") ```
+- ``` i  <Plug>delimitMate( * <SNR>57_TriggerAbb().delimitMate#ParenDelim(")") ```
 - ``` i  <Plug>(ale_complete) * <C-\><C-O>:ALEComplete<CR> ```
 - ``` i  <Plug>(ale_show_completion_menu) * <C-X><C-O><C-P> ```
 - ``` i  <Plug>(asyncomplete_force_refresh) * asyncomplete#force_refresh() ```
@@ -1629,7 +1642,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  <C-S>         <Plug>Isurround ```
 - ``` i  <C-T>       * i<BS><C-O>:silent! undojoin | normal! xp<CR> ```
 - ``` i  <C-X><C-A>  * <C-A> ```
-- ``` i  <C-X>       * <C-R>=<SNR>32_ManualCompletionEnter()<CR> ```
+- ``` i  <C-X>       * <C-R>=<SNR>33_ManualCompletionEnter()<CR> ```
 - ``` i  <C-X><C-L>  * fzf#vim#complete(fzf#wrap({ 'prefix': '^.*$', 'source': 'rg -n ^ --color always', 'options': '--ansi --delimiter : --nth 3..', 'left': '60', 'reducer': { lines -> join(split(lines[0], ':\zs')[2:], '') }})) ```
 - ``` i  <C-X><C-K>  * fzf#vim#complete#word({'left': '15%'}) ```
 - ``` i  <C-Y>m        <Plug>(emmet-merge-lines) ```
@@ -1649,6 +1662,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  <C-Y>,        <Plug>(emmet-expand-abbr) ```
 - ``` i  <C-Z>       * <Esc>:suspend<CR> ```
 - ``` i  <C-\>       * <Esc>+ ```
+- ``` i  fj            <Esc> ```
+- ``` i  jf            <Esc> ```
 # Vim Keybindings Normal Mode
 - ```  ```
 - ``` n  <Space>hp    @<Plug>(GitGutterPreviewHunk) ```
@@ -1812,14 +1827,14 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` nox-           * repmo#SelfKey('-', '+') ```
 - ``` n  .             <Plug>(RepeatDot) ```
 - ``` nox;             repmo#LastKey('<Plug>Sneak_;') ```
-- ``` n  <p          & :<C-U>call <SNR>170_putline(v:count1 . ']p', 'Below')<CR><'] ```
-- ``` n  <P          & :<C-U>call <SNR>170_putline(v:count1 . '[p', 'Above')<CR><'] ```
-- ``` n  =p          & :<C-U>call <SNR>170_putline(v:count1 . ']p', 'Below')<CR>='] ```
-- ``` n  =P          & :<C-U>call <SNR>170_putline(v:count1 . '[p', 'Above')<CR>='] ```
+- ``` n  <p          & :<C-U>call <SNR>138_putline(v:count1 . ']p', 'Below')<CR><'] ```
+- ``` n  <P          & :<C-U>call <SNR>138_putline(v:count1 . '[p', 'Above')<CR><'] ```
+- ``` n  =p          & :<C-U>call <SNR>138_putline(v:count1 . ']p', 'Below')<CR>='] ```
+- ``` n  =P          & :<C-U>call <SNR>138_putline(v:count1 . '[p', 'Above')<CR>='] ```
 - ``` n  =op         * <Nop> ```
-- ``` n  =o            <SNR>170_legacy_option_map(nr2char(getchar())) ```
-- ``` n  >p          & :<C-U>call <SNR>170_putline(v:count1 . ']p', 'Below')<CR>>'] ```
-- ``` n  >P          & :<C-U>call <SNR>170_putline(v:count1 . '[p', 'Above')<CR>>'] ```
+- ``` n  =o            <SNR>138_legacy_option_map(nr2char(getchar())) ```
+- ``` n  >p          & :<C-U>call <SNR>138_putline(v:count1 . ']p', 'Below')<CR>>'] ```
+- ``` n  >P          & :<C-U>call <SNR>138_putline(v:count1 . '[p', 'Above')<CR>>'] ```
 - ``` n  @:            <Plug>RepeatEx ```
 - ```    B           * repmo#SelfKey('b', 'w') ```
 - ``` noxE           * repmo#SelfKey('E', 'gE') ```
@@ -1839,23 +1854,23 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  [y            <Plug>unimpaired_string_encode ```
 - ``` n  [P            <Plug>unimpairedPutAbove ```
 - ``` n  [p            <Plug>unimpairedPutAbove ```
-- ``` n  [op         & :call <SNR>170_setup_paste()<CR>O ```
+- ``` n  [op         & :call <SNR>138_setup_paste()<CR>O ```
 - ``` n  [o+         & :set cursorline cursorcolumn<CR> ```
 - ``` n  [ox         & :set cursorline cursorcolumn<CR> ```
 - ``` n  [ov         & :set virtualedit+=all<CR> ```
-- ``` n  [ow         & :setlocal wrap<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [os         & :setlocal spell<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [or         & :setlocal relativenumber<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [on         & :setlocal number<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [ol         & :setlocal list<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [oi         & :set ignorecase<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [oh         & :set hlsearch<C-R>=<SNR>170_statusbump()<CR><CR> ```
+- ``` n  [ow         & :setlocal wrap<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [os         & :setlocal spell<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [or         & :setlocal relativenumber<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [on         & :setlocal number<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [ol         & :setlocal list<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [oi         & :set ignorecase<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [oh         & :set hlsearch<C-R>=<SNR>138_statusbump()<CR><CR> ```
 - ``` n  [od         & :diffthis<CR> ```
-- ``` n  [o|         & :setlocal cursorcolumn<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [ou         & :setlocal cursorcolumn<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [o_         & :setlocal cursorline<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [o-         & :setlocal cursorline<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  [oc         & :setlocal cursorline<C-R>=<SNR>170_statusbump()<CR><CR> ```
+- ``` n  [o|         & :setlocal cursorcolumn<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [ou         & :setlocal cursorcolumn<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [o_         & :setlocal cursorline<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [o-         & :setlocal cursorline<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  [oc         & :setlocal cursorline<C-R>=<SNR>138_statusbump()<CR><CR> ```
 - ``` n  [ob         & :set background=light<CR> ```
 - ``` n  [e            <Plug>unimpairedMoveUp ```
 - ``` n  [<Space>      <Plug>unimpairedBlankUp ```
@@ -1887,23 +1902,23 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  ]y            <Plug>unimpaired_string_decode ```
 - ``` n  ]P            <Plug>unimpairedPutBelow ```
 - ``` n  ]p            <Plug>unimpairedPutBelow ```
-- ``` n  ]op         & :call <SNR>170_setup_paste()<CR>o ```
+- ``` n  ]op         & :call <SNR>138_setup_paste()<CR>o ```
 - ``` n  ]o+         & :set nocursorline nocursorcolumn<CR> ```
 - ``` n  ]ox         & :set nocursorline nocursorcolumn<CR> ```
 - ``` n  ]ov         & :set virtualedit-=all<CR> ```
-- ``` n  ]ow         & :setlocal nowrap<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]os         & :setlocal nospell<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]or         & :setlocal norelativenumber<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]on         & :setlocal nonumber<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]ol         & :setlocal nolist<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]oi         & :set noignorecase<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]oh         & :set nohlsearch<C-R>=<SNR>170_statusbump()<CR><CR> ```
+- ``` n  ]ow         & :setlocal nowrap<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]os         & :setlocal nospell<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]or         & :setlocal norelativenumber<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]on         & :setlocal nonumber<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]ol         & :setlocal nolist<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]oi         & :set noignorecase<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]oh         & :set nohlsearch<C-R>=<SNR>138_statusbump()<CR><CR> ```
 - ``` n  ]od         & :diffoff<CR> ```
-- ``` n  ]o|         & :setlocal nocursorcolumn<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]ou         & :setlocal nocursorcolumn<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]o_         & :setlocal nocursorline<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]o-         & :setlocal nocursorline<C-R>=<SNR>170_statusbump()<CR><CR> ```
-- ``` n  ]oc         & :setlocal nocursorline<C-R>=<SNR>170_statusbump()<CR><CR> ```
+- ``` n  ]o|         & :setlocal nocursorcolumn<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]ou         & :setlocal nocursorcolumn<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]o_         & :setlocal nocursorline<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]o-         & :setlocal nocursorline<C-R>=<SNR>138_statusbump()<CR><CR> ```
+- ``` n  ]oc         & :setlocal nocursorline<C-R>=<SNR>138_statusbump()<CR><CR> ```
 - ``` n  ]ob         & :set background=dark<CR> ```
 - ``` n  ]e            <Plug>unimpairedMoveDown ```
 - ``` n  ]<Space>      <Plug>unimpairedBlankDown ```
@@ -1927,7 +1942,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` nox]m          * repmo#SelfKey(']m', '[m') ```
 - ``` noxb             <Plug>CamelCaseMotion_b ```
 - ``` n  cop         * <Nop> ```
-- ``` n  co            <SNR>170_legacy_option_map(nr2char(getchar())) ```
+- ``` n  co            <SNR>138_legacy_option_map(nr2char(getchar())) ```
 - ``` n  cS            <Plug>CSurround ```
 - ``` n  cs            <Plug>Csurround ```
 - ``` n  cr            <Plug>(abolish-coerce-word) ```
@@ -1957,23 +1972,23 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` noxt             repmo#ZapKey('<Plug>Sneak_t') ```
 - ``` n  u             <Plug>(RepeatUndo) ```
 - ``` noxw             <Plug>CamelCaseMotion_w ```
-- ``` n  yop         & :call <SNR>170_setup_paste()<CR>0C ```
-- ``` n  yo+         & :set <C-R>=<SNR>170_cursor_options()<CR><CR> ```
-- ``` n  yox         & :set <C-R>=<SNR>170_cursor_options()<CR><CR> ```
+- ``` n  yop         & :call <SNR>138_setup_paste()<CR>0C ```
+- ``` n  yo+         & :set <C-R>=<SNR>138_cursor_options()<CR><CR> ```
+- ``` n  yox         & :set <C-R>=<SNR>138_cursor_options()<CR><CR> ```
 - ``` n  yov         & :set <C-R>=(&virtualedit =~# "all") ? "virtualedit-=all" : "virtualedit+=all"<CR><CR> ```
-- ``` n  yow         & :setlocal <C-R>=<SNR>170_toggle("wrap")<CR><CR> ```
-- ``` n  yos         & :setlocal <C-R>=<SNR>170_toggle("spell")<CR><CR> ```
-- ``` n  yor         & :setlocal <C-R>=<SNR>170_toggle("relativenumber")<CR><CR> ```
-- ``` n  yon         & :setlocal <C-R>=<SNR>170_toggle("number")<CR><CR> ```
-- ``` n  yol         & :setlocal <C-R>=<SNR>170_toggle("list")<CR><CR> ```
-- ``` n  yoi         & :set <C-R>=<SNR>170_toggle("ignorecase")<CR><CR> ```
-- ``` n  yoh         & :set <C-R>=<SNR>170_toggle("hlsearch")<CR><CR> ```
+- ``` n  yow         & :setlocal <C-R>=<SNR>138_toggle("wrap")<CR><CR> ```
+- ``` n  yos         & :setlocal <C-R>=<SNR>138_toggle("spell")<CR><CR> ```
+- ``` n  yor         & :setlocal <C-R>=<SNR>138_toggle("relativenumber")<CR><CR> ```
+- ``` n  yon         & :setlocal <C-R>=<SNR>138_toggle("number")<CR><CR> ```
+- ``` n  yol         & :setlocal <C-R>=<SNR>138_toggle("list")<CR><CR> ```
+- ``` n  yoi         & :set <C-R>=<SNR>138_toggle("ignorecase")<CR><CR> ```
+- ``` n  yoh         & :set <C-R>=<SNR>138_toggle("hlsearch")<CR><CR> ```
 - ``` n  yod         & :<C-R>=&diff ? "diffoff" : "diffthis"<CR><CR> ```
-- ``` n  yo|         & :setlocal <C-R>=<SNR>170_toggle("cursorcolumn")<CR><CR> ```
-- ``` n  you         & :setlocal <C-R>=<SNR>170_toggle("cursorcolumn")<CR><CR> ```
-- ``` n  yo_         & :setlocal <C-R>=<SNR>170_toggle("cursorline")<CR><CR> ```
-- ``` n  yo-         & :setlocal <C-R>=<SNR>170_toggle("cursorline")<CR><CR> ```
-- ``` n  yoc         & :setlocal <C-R>=<SNR>170_toggle("cursorline")<CR><CR> ```
+- ``` n  yo|         & :setlocal <C-R>=<SNR>138_toggle("cursorcolumn")<CR><CR> ```
+- ``` n  you         & :setlocal <C-R>=<SNR>138_toggle("cursorcolumn")<CR><CR> ```
+- ``` n  yo_         & :setlocal <C-R>=<SNR>138_toggle("cursorline")<CR><CR> ```
+- ``` n  yo-         & :setlocal <C-R>=<SNR>138_toggle("cursorline")<CR><CR> ```
+- ``` n  yoc         & :setlocal <C-R>=<SNR>138_toggle("cursorline")<CR><CR> ```
 - ``` n  yob         & :set background=<C-R>=&background == "dark" ? "light" : "dark"<CR><CR> ```
 - ``` n  ySS           <Plug>YSsurround ```
 - ``` n  ySs           <Plug>YSsurround ```
@@ -1984,38 +1999,38 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  z/          * :if AutoHighlightToggle()|set hls|endif<CR> ```
 - ``` nox{           * repmo#SelfKey('{', '}') ```
 - ``` nox}           * repmo#SelfKey('}', '{') ```
-- ``` n  <Plug>NetrwBrowseX * :call netrw#BrowseX(expand((exists("g:netrw_gx")? g:netrw_gx : '<cfile>')),netrw#CheckIfRemote())<CR> ```
+- ``` n  <Plug>NetrwBrowseX * :call netrw#BrowseX(netrw#GX(),netrw#CheckIfRemote(netrw#GX()))<CR> ```
 - ``` n  <Plug>(MatchitNormalMultiForward) * :<C-U>call matchit#MultiMatch("W",  "n")<CR> ```
 - ``` n  <Plug>(MatchitNormalMultiBackward) * :<C-U>call matchit#MultiMatch("bW", "n")<CR> ```
 - ``` n  <Plug>(MatchitNormalBackward) * :<C-U>call matchit#Match_wrapper('',0,'n')<CR> ```
 - ``` n  <Plug>(MatchitNormalForward) * :<C-U>call matchit#Match_wrapper('',1,'n')<CR> ```
 - ``` n  <Plug>(wildfire-quick-select) * :<C-U>call wildfire#QuickSelect(['ip', 'i)', 'i]', 'i}', 'i''', 'i"', 'it'])<CR> ```
 - ``` n  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Start(v:count1, ['ip', 'i)', 'i]', 'i}', 'i''', 'i"', 'it'])<CR> ```
-- ``` n  <Plug>unimpaired_line_xml_decode * <SNR>170_TransformSetup("xml_decode")."_" ```
-- ``` n  <Plug>unimpaired_xml_decode * <SNR>170_TransformSetup("xml_decode") ```
-- ``` n  <Plug>unimpaired_line_xml_encode * <SNR>170_TransformSetup("xml_encode")."_" ```
-- ``` n  <Plug>unimpaired_xml_encode * <SNR>170_TransformSetup("xml_encode") ```
-- ``` n  <Plug>unimpaired_line_url_decode * <SNR>170_TransformSetup("url_decode")."_" ```
-- ``` n  <Plug>unimpaired_url_decode * <SNR>170_TransformSetup("url_decode") ```
-- ``` n  <Plug>unimpaired_line_url_encode * <SNR>170_TransformSetup("url_encode")."_" ```
-- ``` n  <Plug>unimpaired_url_encode * <SNR>170_TransformSetup("url_encode") ```
-- ``` n  <Plug>unimpaired_line_string_decode * <SNR>170_TransformSetup("string_decode")."_" ```
-- ``` n  <Plug>unimpaired_string_decode * <SNR>170_TransformSetup("string_decode") ```
-- ``` n  <Plug>unimpaired_line_string_encode * <SNR>170_TransformSetup("string_encode")."_" ```
-- ``` n  <Plug>unimpaired_string_encode * <SNR>170_TransformSetup("string_encode") ```
-- ``` n  <Plug>unimpairedPutBelow * :call <SNR>170_putline(']p', 'Below')<CR> ```
-- ``` n  <Plug>unimpairedPutAbove * :call <SNR>170_putline('[p', 'Above')<CR> ```
-- ``` n  <Plug>unimpairedPaste * :call <SNR>170_setup_paste()<CR> ```
-- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>170_MoveSelectionDown(v:count1)<CR> ```
-- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>170_MoveSelectionUp(v:count1)<CR> ```
-- ``` n  <Plug>unimpairedMoveDown * :<C-U>call <SNR>170_Move('+',v:count1,'Down')<CR> ```
-- ``` n  <Plug>unimpairedMoveUp * :<C-U>call <SNR>170_Move('--',v:count1,'Up')<CR> ```
-- ``` n  <Plug>unimpairedBlankDown * :<C-U>call <SNR>170_BlankDown(v:count1)<CR> ```
-- ``` n  <Plug>unimpairedBlankUp * :<C-U>call <SNR>170_BlankUp(v:count1)<CR> ```
-- ``` n  <Plug>unimpairedContextNext * :<C-U>call <SNR>170_Context(0)<CR> ```
-- ``` n  <Plug>unimpairedContextPrevious * :<C-U>call <SNR>170_Context(1)<CR> ```
-- ``` n  <Plug>unimpairedDirectoryPrevious * :<C-U>edit <C-R>=<SNR>170_fnameescape(fnamemodify(<SNR>170_FileByOffset(-v:count1), ':.'))<CR><CR> ```
-- ``` n  <Plug>unimpairedDirectoryNext * :<C-U>edit <C-R>=<SNR>170_fnameescape(fnamemodify(<SNR>170_FileByOffset(v:count1), ':.'))<CR><CR> ```
+- ``` n  <Plug>unimpaired_line_xml_decode * <SNR>138_TransformSetup("xml_decode")."_" ```
+- ``` n  <Plug>unimpaired_xml_decode * <SNR>138_TransformSetup("xml_decode") ```
+- ``` n  <Plug>unimpaired_line_xml_encode * <SNR>138_TransformSetup("xml_encode")."_" ```
+- ``` n  <Plug>unimpaired_xml_encode * <SNR>138_TransformSetup("xml_encode") ```
+- ``` n  <Plug>unimpaired_line_url_decode * <SNR>138_TransformSetup("url_decode")."_" ```
+- ``` n  <Plug>unimpaired_url_decode * <SNR>138_TransformSetup("url_decode") ```
+- ``` n  <Plug>unimpaired_line_url_encode * <SNR>138_TransformSetup("url_encode")."_" ```
+- ``` n  <Plug>unimpaired_url_encode * <SNR>138_TransformSetup("url_encode") ```
+- ``` n  <Plug>unimpaired_line_string_decode * <SNR>138_TransformSetup("string_decode")."_" ```
+- ``` n  <Plug>unimpaired_string_decode * <SNR>138_TransformSetup("string_decode") ```
+- ``` n  <Plug>unimpaired_line_string_encode * <SNR>138_TransformSetup("string_encode")."_" ```
+- ``` n  <Plug>unimpaired_string_encode * <SNR>138_TransformSetup("string_encode") ```
+- ``` n  <Plug>unimpairedPutBelow * :call <SNR>138_putline(']p', 'Below')<CR> ```
+- ``` n  <Plug>unimpairedPutAbove * :call <SNR>138_putline('[p', 'Above')<CR> ```
+- ``` n  <Plug>unimpairedPaste * :call <SNR>138_setup_paste()<CR> ```
+- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>138_MoveSelectionDown(v:count1)<CR> ```
+- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>138_MoveSelectionUp(v:count1)<CR> ```
+- ``` n  <Plug>unimpairedMoveDown * :<C-U>call <SNR>138_Move('+',v:count1,'Down')<CR> ```
+- ``` n  <Plug>unimpairedMoveUp * :<C-U>call <SNR>138_Move('--',v:count1,'Up')<CR> ```
+- ``` n  <Plug>unimpairedBlankDown * :<C-U>exe <SNR>138_BlankDown()<CR> ```
+- ``` n  <Plug>unimpairedBlankUp * :<C-U>exe <SNR>138_BlankUp()<CR> ```
+- ``` n  <Plug>unimpairedContextNext * :<C-U>call <SNR>138_Context(0)<CR> ```
+- ``` n  <Plug>unimpairedContextPrevious * :<C-U>call <SNR>138_Context(1)<CR> ```
+- ``` n  <Plug>unimpairedDirectoryPrevious * :<C-U>edit <C-R>=<SNR>138_fnameescape(fnamemodify(<SNR>138_FileByOffset(-v:count1), ':.'))<CR><CR> ```
+- ``` n  <Plug>unimpairedDirectoryNext * :<C-U>edit <C-R>=<SNR>138_fnameescape(fnamemodify(<SNR>138_FileByOffset(v:count1), ':.'))<CR><CR> ```
 - ``` n  <Plug>unimpairedTPNext * :<C-U>exe "p".(v:count ? v:count : "")."tnext"<CR> ```
 - ``` n  <Plug>unimpairedTPPrevious * :<C-U>exe "p".(v:count ? v:count : "")."tprevious"<CR> ```
 - ``` n  <Plug>unimpairedTLast * :<C-U>exe "".(v:count ? v:count : "")."tlast"<CR> ```
@@ -2042,13 +2057,13 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Plug>unimpairedAFirst * :<C-U>exe "".(v:count ? v:count : "")."first"<CR> ```
 - ``` n  <Plug>unimpairedANext * :<C-U>exe "".(v:count ? v:count : "")."next"<CR> ```
 - ``` n  <Plug>unimpairedAPrevious * :<C-U>exe "".(v:count ? v:count : "")."previous"<CR> ```
-- ``` n  <Plug>YSurround * <SNR>169_opfunc2('setup') ```
-- ``` n  <Plug>Ysurround * <SNR>169_opfunc('setup') ```
-- ``` n  <Plug>YSsurround * <SNR>169_opfunc2('setup').'_' ```
-- ``` n  <Plug>Yssurround * '^'.v:count1.<SNR>169_opfunc('setup').'g_' ```
-- ``` n  <Plug>CSurround * :<C-U>call <SNR>169_changesurround(1)<CR> ```
-- ``` n  <Plug>Csurround * :<C-U>call <SNR>169_changesurround()<CR> ```
-- ``` n  <Plug>Dsurround * :<C-U>call <SNR>169_dosurround(<SNR>169_inputtarget())<CR> ```
+- ``` n  <Plug>YSurround * <SNR>137_opfunc2('setup') ```
+- ``` n  <Plug>Ysurround * <SNR>137_opfunc('setup') ```
+- ``` n  <Plug>YSsurround * <SNR>137_opfunc2('setup').'_' ```
+- ``` n  <Plug>Yssurround * '^'.v:count1.<SNR>137_opfunc('setup').'g_' ```
+- ``` n  <Plug>CSurround * :<C-U>call <SNR>137_changesurround(1)<CR> ```
+- ``` n  <Plug>Csurround * :<C-U>call <SNR>137_changesurround()<CR> ```
+- ``` n  <Plug>Dsurround * :<C-U>call <SNR>137_dosurround(<SNR>137_inputtarget())<CR> ```
 - ``` n  <Plug>SurroundRepeat * . ```
 - ``` n  <Plug>(startify-open-buffers) * :<C-U>call startify#open_buffers()<CR> ```
 - ``` n  <Plug>SneakPrevious   <Plug>Sneak_, ```
@@ -2063,38 +2078,38 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Plug>Sneak_t * :<C-U>call sneak#wrap('', 1, 0, 0, 0)<CR> ```
 - ``` n  <Plug>Sneak_F * :<C-U>call sneak#wrap('', 1, 1, 1, 0)<CR> ```
 - ``` n  <Plug>Sneak_f * :<C-U>call sneak#wrap('', 1, 0, 1, 0)<CR> ```
-- ``` n  <Plug>Sneak_, * :<C-U>call <SNR>167_rpt('', 1)<CR> ```
-- ``` n  <Plug>Sneak_; * :<C-U>call <SNR>167_rpt('', 0)<CR> ```
+- ``` n  <Plug>Sneak_, * :<C-U>call <SNR>135_rpt('', 1)<CR> ```
+- ``` n  <Plug>Sneak_; * :<C-U>call <SNR>135_rpt('', 0)<CR> ```
 - ``` n  <Plug>Sneak_S * :<C-U>call sneak#wrap('', 2, 1, 2, 1)<CR> ```
 - ``` n  <Plug>Sneak_s * :<C-U>call sneak#wrap('', 2, 0, 2, 1)<CR> ```
-- ``` n  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 1) | call <SNR>164_repeat_set("\<Plug>(sexp_capture_next_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_capture_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 1) | call <SNR>164_repeat_set("\<Plug>(sexp_capture_prev_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_emit_tail_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 0) | call <SNR>164_repeat_set("\<Plug>(sexp_emit_tail_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_emit_head_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 0) | call <SNR>164_repeat_set("\<Plug>(sexp_emit_head_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_swap_element_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 0) | call <SNR>164_repeat_set("\<Plug>(sexp_swap_element_forward)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_swap_element_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 0) | call <SNR>164_repeat_set("\<Plug>(sexp_swap_element_backward)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_swap_list_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 1) | call <SNR>164_repeat_set("\<Plug>(sexp_swap_list_forward)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_swap_list_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 1) | call <SNR>164_repeat_set("\<Plug>(sexp_swap_list_backward)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_splice_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#splice_list(b:sexp_count) | call <SNR>164_repeat_set("\<Plug>(sexp_splice_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_convolute) * :<C-U>let b:sexp_count = v:count | call sexp#convolute(b:sexp_count, 'n') | call <SNR>164_repeat_set("\<Plug>(sexp_convolute)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_raise_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_element', 'n', 1) | call <SNR>164_repeat_set("\<Plug>(sexp_raise_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_raise_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_list', 'n', 0, 0) | call <SNR>164_repeat_set("\<Plug>(sexp_raise_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_insert_at_list_tail) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(1) | call <SNR>164_repeat_set("\<Plug>(sexp_insert_at_list_tail)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_insert_at_list_head) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(0) | call <SNR>164_repeat_set("\<Plug>(sexp_insert_at_list_head)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_curly_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_curly_tail_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_curly_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_curly_head_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_square_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_square_tail_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_square_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_square_head_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_round_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_round_tail_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_round_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_round_head_wrap_element)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_curly_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_curly_tail_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_curly_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_curly_head_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_square_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_square_tail_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_square_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_square_head_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_round_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_round_tail_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_round_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>164_repeat_set("\<Plug>(sexp_round_head_wrap_list)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_indent_top) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(1, b:sexp_count) | call <SNR>164_repeat_set("\<Plug>(sexp_indent_top)", b:sexp_count)<CR> ```
-- ``` n  <Plug>(sexp_indent) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(0, b:sexp_count) | call <SNR>164_repeat_set("\<Plug>(sexp_indent)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 1) | call <SNR>132_repeat_set("\<Plug>(sexp_capture_next_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_capture_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 1) | call <SNR>132_repeat_set("\<Plug>(sexp_capture_prev_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_emit_tail_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 1, 0) | call <SNR>132_repeat_set("\<Plug>(sexp_emit_tail_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_emit_head_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'n', 0, 0) | call <SNR>132_repeat_set("\<Plug>(sexp_emit_head_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_swap_element_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 0) | call <SNR>132_repeat_set("\<Plug>(sexp_swap_element_forward)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_swap_element_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 0) | call <SNR>132_repeat_set("\<Plug>(sexp_swap_element_backward)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_swap_list_forward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 1, 1) | call <SNR>132_repeat_set("\<Plug>(sexp_swap_list_forward)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_swap_list_backward) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#swap_element', 'n', 0, 1) | call <SNR>132_repeat_set("\<Plug>(sexp_swap_list_backward)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_splice_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#splice_list(b:sexp_count) | call <SNR>132_repeat_set("\<Plug>(sexp_splice_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_convolute) * :<C-U>let b:sexp_count = v:count | call sexp#convolute(b:sexp_count, 'n') | call <SNR>132_repeat_set("\<Plug>(sexp_convolute)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_raise_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_element', 'n', 1) | call <SNR>132_repeat_set("\<Plug>(sexp_raise_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_raise_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#raise', 'n', 'sexp#select_current_list', 'n', 0, 0) | call <SNR>132_repeat_set("\<Plug>(sexp_raise_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_insert_at_list_tail) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(1) | call <SNR>132_repeat_set("\<Plug>(sexp_insert_at_list_tail)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_insert_at_list_head) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#insert_at_list_terminal(0) | call <SNR>132_repeat_set("\<Plug>(sexp_insert_at_list_head)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_curly_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_curly_tail_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_curly_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_curly_head_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_square_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_square_tail_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_square_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_square_head_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_round_tail_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_round_tail_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_round_head_wrap_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('e', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_round_head_wrap_element)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_curly_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 1, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_curly_tail_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_curly_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '{', '}', 0, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_curly_head_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_square_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 1, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_square_tail_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_square_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '[', ']', 0, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_square_head_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_round_tail_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 1, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_round_tail_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_round_head_wrap_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#wrap('f', '(', ')', 0, g:sexp_insert_after_wrap) | call <SNR>132_repeat_set("\<Plug>(sexp_round_head_wrap_list)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_indent_top) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(1, b:sexp_count) | call <SNR>132_repeat_set("\<Plug>(sexp_indent_top)", b:sexp_count)<CR> ```
+- ``` n  <Plug>(sexp_indent) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#indent(0, b:sexp_count) | call <SNR>132_repeat_set("\<Plug>(sexp_indent)", b:sexp_count)<CR> ```
 - ``` n  <Plug>(sexp_select_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#select_adjacent_element', 'n', 1)<CR> ```
 - ``` n  <Plug>(sexp_select_prev_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#select_adjacent_element', 'n', 0)<CR> ```
 - ``` n  <Plug>(sexp_move_to_next_top_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#move_to_adjacent_element('n', b:sexp_count, 1, 0, 1)<CR> ```
@@ -2136,15 +2151,15 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Plug>MarkologyDisable * :MarkologyDisable<CR> ```
 - ``` n  <Plug>MarkologyEnable * :MarkologyEnable<CR> ```
 - ``` n  <Plug>LOTRToggle * :LOTRToggle<CR> ```
-- ``` n  <Plug>GitGutterPreviewHunk * :call gitgutter#utility#warn('please change your map <Plug>GitGutterPreviewHunk to <Plug>(GitGutterPreviewHunk)')<CR> ```
+- ``` n  <Plug>GitGutterPreviewHunk * :call gitgutter#utility#warn('Please change your map <Plug>GitGutterPreviewHunk to <Plug>(GitGutterPreviewHunk)')<CR> ```
 - ``` n  <Plug>(GitGutterPreviewHunk) * :GitGutterPreviewHunk<CR> ```
-- ``` n  <Plug>GitGutterUndoHunk * :call gitgutter#utility#warn('please change your map <Plug>GitGutterUndoHunk to <Plug>(GitGutterUndoHunk)')<CR> ```
+- ``` n  <Plug>GitGutterUndoHunk * :call gitgutter#utility#warn('Please change your map <Plug>GitGutterUndoHunk to <Plug>(GitGutterUndoHunk)')<CR> ```
 - ``` n  <Plug>(GitGutterUndoHunk) * :GitGutterUndoHunk<CR> ```
-- ``` n  <Plug>GitGutterStageHunk * :call gitgutter#utility#warn('please change your map <Plug>GitGutterStageHunk to <Plug>(GitGutterStageHunk)')<CR> ```
+- ``` n  <Plug>GitGutterStageHunk * :call gitgutter#utility#warn('Please change your map <Plug>GitGutterStageHunk to <Plug>(GitGutterStageHunk)')<CR> ```
 - ``` n  <Plug>(GitGutterStageHunk) * :GitGutterStageHunk<CR> ```
-- ``` n  <Plug>GitGutterPrevHunk * &diff ? '[c' : ":\<C-U>call gitgutter#utility#warn('please change your map \<Plug>GitGutterPrevHunk to \<Plug>(GitGutterPrevHunk)')\<CR>" ```
+- ``` n  <Plug>GitGutterPrevHunk * &diff ? '[c' : ":\<C-U>call gitgutter#utility#warn('Please change your map \<Plug>GitGutterPrevHunk to \<Plug>(GitGutterPrevHunk)')\<CR>" ```
 - ``` n  <Plug>(GitGutterPrevHunk) * &diff ? '[c' : ":\<C-U>execute v:count1 . 'GitGutterPrevHunk'\<CR>" ```
-- ``` n  <Plug>GitGutterNextHunk * &diff ? ']c' : ":\<C-U>call gitgutter#utility#warn('please change your map \<Plug>GitGutterNextHunk to \<Plug>(GitGutterNextHunk)')\<CR>" ```
+- ``` n  <Plug>GitGutterNextHunk * &diff ? ']c' : ":\<C-U>call gitgutter#utility#warn('Please change your map \<Plug>GitGutterNextHunk to \<Plug>(GitGutterNextHunk)')\<CR>" ```
 - ``` n  <Plug>(GitGutterNextHunk) * &diff ? ']c' : ":\<C-U>execute v:count1 . 'GitGutterNextHunk'\<CR>" ```
 - ```    <Plug>(easymotion-prefix)N   <Plug>(easymotion-N) ```
 - ```    <Plug>(easymotion-prefix)n   <Plug>(easymotion-n) ```
@@ -2274,21 +2289,21 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ```    <Plug>(asterisk-z*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 0, 'is_whole' : 1}) ```
 - ```    <Plug>(asterisk-g*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 1, 'is_whole' : 0}) ```
 - ```    <Plug>(asterisk-*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 1, 'is_whole' : 1}) ```
-- ``` n  <Plug>(abolish-coerce-word) * <SNR>106_coerce(nr2char(getchar())).'iw' ```
-- ``` n  <Plug>(abolish-coerce) * <SNR>106_coerce(nr2char(getchar())) ```
-- ``` n  <Plug>NERDCommenterAltDelims * :call <SNR>64_SwitchToAlternativeDelimiters(1)<CR> ```
-- ``` n  <Plug>NERDCommenterUncomment * :call NERDComment("n", "Uncomment")<CR> ```
-- ``` n  <Plug>NERDCommenterAlignBoth * :call NERDComment("n", "AlignBoth")<CR> ```
-- ``` n  <Plug>NERDCommenterAlignLeft * :call NERDComment("n", "AlignLeft")<CR> ```
-- ``` n  <Plug>NERDCommenterAppend * :call NERDComment("n", "Append")<CR> ```
-- ``` n  <Plug>NERDCommenterYank * :call NERDComment("n", "Yank")<CR> ```
-- ``` n  <Plug>NERDCommenterSexy * :call NERDComment("n", "Sexy")<CR> ```
-- ``` n  <Plug>NERDCommenterInvert * :call NERDComment("n", "Invert")<CR> ```
-- ``` n  <Plug>NERDCommenterToEOL * :call NERDComment("n", "ToEOL")<CR> ```
-- ``` n  <Plug>NERDCommenterNested * :call NERDComment("n", "Nested")<CR> ```
-- ``` n  <Plug>NERDCommenterMinimal * :call NERDComment("n", "Minimal")<CR> ```
-- ``` n  <Plug>NERDCommenterToggle * :call NERDComment("n", "Toggle")<CR> ```
-- ``` n  <Plug>NERDCommenterComment * :call NERDComment("n", "Comment")<CR> ```
+- ``` n  <Plug>(abolish-coerce-word) * <SNR>108_coerce(nr2char(getchar())).'iw' ```
+- ``` n  <Plug>(abolish-coerce) * <SNR>108_coerce(nr2char(getchar())) ```
+- ``` n  <Plug>NERDCommenterAltDelims * :call nerdcommenter#SwitchToAlternativeDelimiters(1)<CR> ```
+- ``` n  <Plug>NERDCommenterUncomment * :call nerdcommenter#Comment("n", "Uncomment")<CR> ```
+- ``` n  <Plug>NERDCommenterAlignBoth * :call nerdcommenter#Comment("n", "AlignBoth")<CR> ```
+- ``` n  <Plug>NERDCommenterAlignLeft * :call nerdcommenter#Comment("n", "AlignLeft")<CR> ```
+- ``` n  <Plug>NERDCommenterAppend * :call nerdcommenter#Comment("n", "Append")<CR> ```
+- ``` n  <Plug>NERDCommenterYank * :call nerdcommenter#Comment("n", "Yank")<CR> ```
+- ``` n  <Plug>NERDCommenterSexy * :call nerdcommenter#Comment("n", "Sexy")<CR> ```
+- ``` n  <Plug>NERDCommenterInvert * :call nerdcommenter#Comment("n", "Invert")<CR> ```
+- ``` n  <Plug>NERDCommenterToEOL * :call nerdcommenter#Comment("n", "ToEOL")<CR> ```
+- ``` n  <Plug>NERDCommenterNested * :call nerdcommenter#Comment("n", "Nested")<CR> ```
+- ``` n  <Plug>NERDCommenterMinimal * :call nerdcommenter#Comment("n", "Minimal")<CR> ```
+- ``` n  <Plug>NERDCommenterToggle * :call nerdcommenter#Comment("n", "Toggle")<CR> ```
+- ``` n  <Plug>NERDCommenterComment * :call nerdcommenter#Comment("n", "Comment")<CR> ```
 - ``` n  <Plug>(neosnippet_jump)   g<C-H><Plug>(neosnippet_jump) ```
 - ``` n  <Plug>(neosnippet_expand)   g<C-H><Plug>(neosnippet_expand) ```
 - ``` n  <Plug>(neosnippet_jump_or_expand)   g<C-H><Plug>(neosnippet_jump_or_expand) ```
@@ -2312,6 +2327,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Plug>(emmet-expand-word) * :call emmet#expandAbbr(1,"")<CR> ```
 - ``` n  <Plug>(emmet-expand-abbr) * :call emmet#expandAbbr(3,"")<CR> ```
 - ``` n  <Plug>(ctrlp) * :<C-U>CtrlP<CR> ```
+- ``` n  <F11>       * :call conque_term#exec_file()<CR> ```
 - ``` n  <Plug>CamelCaseMotion_e * :<C-U>call camelcasemotion#Motion('e',v:count1,'n')<CR> ```
 - ``` n  <Plug>CamelCaseMotion_b * :<C-U>call camelcasemotion#Motion('b',v:count1,'n')<CR> ```
 - ``` n  <Plug>CamelCaseMotion_w * :<C-U>call camelcasemotion#Motion('w',v:count1,'n')<CR> ```
@@ -2356,7 +2372,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Plug>(ale_previous_wrap) * :ALEPreviousWrap<CR> ```
 - ``` n  <Plug>(ale_previous) * :ALEPrevious<CR> ```
 - ``` n  <Plug>(ale_show_completion_menu) * :call ale#completion#RestoreCompletionOptions()<CR> ```
-- ``` n  <F11>       * :call conque_term#exec_file()<CR> ```
+- ``` n  <Plug>(fzf-normal) * <Nop> ```
+- ``` n  <Plug>(fzf-insert) * i ```
 - ``` n  <F7>        * :TTags<CR> ```
 - ``` n  <F6>        * :SyntasticToggleMode<CR> ```
 - ``` n  <F5>        * :LOTRToggle<CR> ```
@@ -2371,7 +2388,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Home>      * gg ```
 - ``` n  <Plug>RepeatEx * @: :call repeat#set("\<Plug>RepeatEx")<CR> ```
 # Vim Keybindings Visual Mode
-- ```                                                                                  ```
+- ```  ```
 - ``` x  <Space>hs    @<Plug>(GitGutterStageHunk) ```
 - ``` x  ac           @<Plug>(GitGutterTextObjectOuterVisual) ```
 - ``` x  ic           @<Plug>(GitGutterTextObjectInnerVisual) ```
@@ -2505,25 +2522,25 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` nox}           * repmo#SelfKey('}', '{') ```
 - ``` s  <BS>        * <C-G>"_c ```
 - ``` v  <Plug>NetrwBrowseXVis * :<C-U>call netrw#BrowseXVis()<CR> ```
-- ``` v  <Plug>(MatchitVisualTextObject)   <Plug>(MatchitVisualMultiBackward)o<Plug>(MatchitVisualMultiForward) ```
-- ``` v  <Plug>(MatchitVisualMultiForward) * :<C-U>call matchit#MultiMatch("W",  "n")<CR>m'gv`` ```
-- ``` v  <Plug>(MatchitVisualMultiBackward) * :<C-U>call matchit#MultiMatch("bW", "n")<CR>m'gv`` ```
-- ``` v  <Plug>(MatchitVisualBackward) * :<C-U>call matchit#Match_wrapper('',0,'v')<CR>m'gv`` ```
-- ``` v  <Plug>(MatchitVisualForward) * :<C-U>call matchit#Match_wrapper('',1,'v')<CR>m'gv`` ```
+- ``` x  <Plug>(MatchitVisualTextObject)   <Plug>(MatchitVisualMultiBackward)o<Plug>(MatchitVisualMultiForward) ```
+- ``` x  <Plug>(MatchitVisualMultiForward) * :<C-U>call matchit#MultiMatch("W",  "n")<CR>m'gv`` ```
+- ``` x  <Plug>(MatchitVisualMultiBackward) * :<C-U>call matchit#MultiMatch("bW", "n")<CR>m'gv`` ```
+- ``` x  <Plug>(MatchitVisualBackward) * :<C-U>call matchit#Match_wrapper('',0,'v')<CR>m'gv`` ```
+- ``` x  <Plug>(MatchitVisualForward) * :<C-U>call matchit#Match_wrapper('',1,'v')<CR>m'gv`` ```
 - ``` v  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Fuel(v:count1)<CR> ```
 - ``` v  <Plug>(wildfire-water) * :<C-U>call wildfire#Water(v:count1)<CR> ```
-- ``` x  <Plug>unimpaired_xml_decode * <SNR>170_TransformSetup("xml_decode") ```
-- ``` x  <Plug>unimpaired_xml_encode * <SNR>170_TransformSetup("xml_encode") ```
-- ``` x  <Plug>unimpaired_url_decode * <SNR>170_TransformSetup("url_decode") ```
-- ``` x  <Plug>unimpaired_url_encode * <SNR>170_TransformSetup("url_encode") ```
-- ``` x  <Plug>unimpaired_string_decode * <SNR>170_TransformSetup("string_decode") ```
-- ``` x  <Plug>unimpaired_string_encode * <SNR>170_TransformSetup("string_encode") ```
-- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>170_MoveSelectionDown(v:count1)<CR> ```
-- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>170_MoveSelectionUp(v:count1)<CR> ```
-- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>170_Context(0)<CR> ```
-- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>170_Context(1)<CR> ```
-- ``` v  <Plug>VgSurround * :<C-U>call <SNR>169_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
-- ``` v  <Plug>VSurround * :<C-U>call <SNR>169_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
+- ``` x  <Plug>unimpaired_xml_decode * <SNR>138_TransformSetup("xml_decode") ```
+- ``` x  <Plug>unimpaired_xml_encode * <SNR>138_TransformSetup("xml_encode") ```
+- ``` x  <Plug>unimpaired_url_decode * <SNR>138_TransformSetup("url_decode") ```
+- ``` x  <Plug>unimpaired_url_encode * <SNR>138_TransformSetup("url_encode") ```
+- ``` x  <Plug>unimpaired_string_decode * <SNR>138_TransformSetup("string_decode") ```
+- ``` x  <Plug>unimpaired_string_encode * <SNR>138_TransformSetup("string_encode") ```
+- ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>138_MoveSelectionDown(v:count1)<CR> ```
+- ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>138_MoveSelectionUp(v:count1)<CR> ```
+- ``` x  <Plug>unimpairedContextNext * :<C-U>exe 'normal! gv'|call <SNR>138_Context(0)<CR> ```
+- ``` x  <Plug>unimpairedContextPrevious * :<C-U>exe 'normal! gv'|call <SNR>138_Context(1)<CR> ```
+- ``` v  <Plug>VgSurround * :<C-U>call <SNR>137_opfunc(visualmode(),visualmode() ==# 'V' ? 0 : 1)<CR> ```
+- ``` v  <Plug>VSurround * :<C-U>call <SNR>137_opfunc(visualmode(),visualmode() ==# 'V' ? 1 : 0)<CR> ```
 - ``` x  <Plug>SneakPrevious   <Plug>Sneak_, ```
 - ``` x  <Plug>SneakNext   <Plug>Sneak_; ```
 - ``` x  <Plug>(SneakStreakBackward)   <Plug>SneakLabel_S ```
@@ -2538,8 +2555,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` x  <Plug>Sneak_t * :<C-U>call sneak#wrap(visualmode(), 1, 0, 0, 0)<CR> ```
 - ``` x  <Plug>Sneak_F * :<C-U>call sneak#wrap(visualmode(), 1, 1, 1, 0)<CR> ```
 - ``` x  <Plug>Sneak_f * :<C-U>call sneak#wrap(visualmode(), 1, 0, 1, 0)<CR> ```
-- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>167_rpt(visualmode(), 1)<CR> ```
-- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>167_rpt(visualmode(), 0)<CR> ```
+- ``` x  <Plug>Sneak_, * :<C-U>call <SNR>135_rpt(visualmode(), 1)<CR> ```
+- ``` x  <Plug>Sneak_; * :<C-U>call <SNR>135_rpt(visualmode(), 0)<CR> ```
 - ``` x  <Plug>Sneak_S * :<C-U>call sneak#wrap(visualmode(), 2, 1, 2, 1)<CR> ```
 - ``` x  <Plug>Sneak_s * :<C-U>call sneak#wrap(visualmode(), 2, 0, 2, 1)<CR> ```
 - ``` x  <Plug>(sexp_capture_next_element) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#stackop', 'v', 1, 1)<CR> ```
@@ -2592,7 +2609,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` x  <Plug>(sexp_outer_list) * :<C-U>let b:sexp_count = v:count | execute "normal! m`" | call sexp#docount(b:sexp_count, 'sexp#select_current_list', 'v', 0, 1)<CR> ```
 - ``` x  <Plug>RefactorExtractType * :call lh#refactor#extract_type(1,lh#ui#input("Name for the type to extract: "))<CR> ```
 - ``` x  <Plug>RefactorExtractVariable * :call lh#refactor#extract_variable(1,lh#ui#input("Name for the variable to extract: ", lh#refactor#default_varname()))<CR> ```
-- ``` x  <Plug>GitGutterStageHunk * :call gitgutter#utility#warn('please change your map <Plug>GitGutterStageHunk to <Plug>(GitGutterStageHunk)')<CR> ```
+- ``` x  <Plug>GitGutterStageHunk * :call gitgutter#utility#warn('Please change your map <Plug>GitGutterStageHunk to <Plug>(GitGutterStageHunk)')<CR> ```
 - ``` x  <Plug>(GitGutterStageHunk) * :GitGutterStageHunk<CR> ```
 - ``` x  <Plug>(GitGutterTextObjectOuterVisual) * :<C-U>call gitgutter#hunk#text_object(0)<CR> ```
 - ``` x  <Plug>(GitGutterTextObjectInnerVisual) * :<C-U>call gitgutter#hunk#text_object(1)<CR> ```
@@ -2798,17 +2815,17 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ```    <Plug>(asterisk-z*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 0, 'is_whole' : 1}) ```
 - ```    <Plug>(asterisk-g*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 1, 'is_whole' : 0}) ```
 - ```    <Plug>(asterisk-*) * asterisk#do(mode(1), {'direction' : 1, 'do_jump' : 1, 'is_whole' : 1}) ```
-- ``` v  <Plug>(abolish-coerce) * <SNR>106_coerce(nr2char(getchar())) ```
-- ``` x  <Plug>NERDCommenterUncomment * :call NERDComment("x", "Uncomment")<CR> ```
-- ``` x  <Plug>NERDCommenterAlignBoth * :call NERDComment("x", "AlignBoth")<CR> ```
-- ``` x  <Plug>NERDCommenterAlignLeft * :call NERDComment("x", "AlignLeft")<CR> ```
-- ``` x  <Plug>NERDCommenterYank * :call NERDComment("x", "Yank")<CR> ```
-- ``` x  <Plug>NERDCommenterSexy * :call NERDComment("x", "Sexy")<CR> ```
-- ``` x  <Plug>NERDCommenterInvert * :call NERDComment("x", "Invert")<CR> ```
-- ``` x  <Plug>NERDCommenterNested * :call NERDComment("x", "Nested")<CR> ```
-- ``` x  <Plug>NERDCommenterMinimal * :call NERDComment("x", "Minimal")<CR> ```
-- ``` x  <Plug>NERDCommenterToggle * :call NERDComment("x", "Toggle")<CR> ```
-- ``` x  <Plug>NERDCommenterComment * :call NERDComment("x", "Comment")<CR> ```
+- ``` v  <Plug>(abolish-coerce) * <SNR>108_coerce(nr2char(getchar())) ```
+- ``` x  <Plug>NERDCommenterUncomment * :call nerdcommenter#Comment("x", "Uncomment")<CR> ```
+- ``` x  <Plug>NERDCommenterAlignBoth * :call nerdcommenter#Comment("x", "AlignBoth")<CR> ```
+- ``` x  <Plug>NERDCommenterAlignLeft * :call nerdcommenter#Comment("x", "AlignLeft")<CR> ```
+- ``` x  <Plug>NERDCommenterYank * :call nerdcommenter#Comment("x", "Yank")<CR> ```
+- ``` x  <Plug>NERDCommenterSexy * :call nerdcommenter#Comment("x", "Sexy")<CR> ```
+- ``` x  <Plug>NERDCommenterInvert * :call nerdcommenter#Comment("x", "Invert")<CR> ```
+- ``` x  <Plug>NERDCommenterNested * :call nerdcommenter#Comment("x", "Nested")<CR> ```
+- ``` x  <Plug>NERDCommenterMinimal * :call nerdcommenter#Comment("x", "Minimal")<CR> ```
+- ``` x  <Plug>NERDCommenterToggle * :call nerdcommenter#Comment("x", "Toggle")<CR> ```
+- ``` x  <Plug>NERDCommenterComment * :call nerdcommenter#Comment("x", "Comment")<CR> ```
 - ``` x  <Plug>(neosnippet_register_oneshot_snippet) * :<C-U>call neosnippet#mappings#_register_oneshot_snippet()<CR> ```
 - ``` x  <Plug>(neosnippet_expand_target) * :<C-U>call neosnippet#mappings#_expand_target()<CR> ```
 - ``` x  <Plug>(neosnippet_get_selected_text) * :call neosnippet#helpers#get_selected_text(visualmode(), 1)<CR> ```
@@ -2841,7 +2858,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  <C-Left>    * <gv ```
 - ``` v  <C-Right>   * >gv ```
 # Vim Keybindings Command Colon Mode
-- ```                                                                                  ```
+- ```  ```
 - ``` !  <M-C-H>     * <C-W> ```
 - ``` !  <M-BS>      * <C-W> ```
 - ``` !  <M-p>       * <Up> ```
@@ -2855,7 +2872,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` c  <C-D>       * getcmdpos()>strlen(getcmdline())?"\<C-D>":"\<Del>" ```
 - ``` c  <C-F>       * getcmdpos()>strlen(getcmdline())?&cedit:"\<Right>" ```
 - ``` c  <C-R><C-G>  & fnameescape(fugitive#Object(@%)) ```
-- ``` c  <C-T>       * <SNR>159_transpose() ```
-- ``` c  <C-U>       * <SNR>159_ctrl_u() ```
+- ``` c  <C-T>       * <SNR>127_transpose() ```
+- ``` c  <C-U>       * <SNR>127_ctrl_u() ```
 - ``` c  <C-X><C-A>  * <C-A> ```
 - ``` c  <C-Y>       * pumvisible() ? "\<C-Y>" : "\<C-R>-" ```
