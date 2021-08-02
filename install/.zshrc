@@ -294,7 +294,6 @@ elif [[ $ZPWR_OS_TYPE == darwin ]]; then
     ZPWR_OMZ_PLUGINS+=( xcode )
 fi
 
-zpwrCommandExists rails && ZPWR_OMZ_PLUGINS+=( rails )
 
 if [[ $ZPWR_LEARN != false ]]; then
     ZPWR_GH_PLUGINS=($ZPWR_GH_PLUGINS  MenkeTechnologies/zsh-learn )
@@ -445,6 +444,10 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         zinit snippet OMZ::plugins/$p
     done
 
+    if zpwrCommandExists rails; then
+        zinit ice svn lucid nocompile nocompletions wait
+        zinit snippet OMZ::plugins/rails
+    fi
 
     # late GH plugins
     for p in $ZPWR_GH_PLUGINS; do
