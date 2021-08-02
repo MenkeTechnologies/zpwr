@@ -94,6 +94,7 @@ function zpwrBindAliasesLate(){
     fi
 
     if zpwrIsZsh; then
+        export READNULLCMD='less'
         # zsh xtrace prompt
         export PROMPT4=$'\e[34m%x\t%0N\t%I\t%_\e[0m\t'
         alias 10='cd -10'
