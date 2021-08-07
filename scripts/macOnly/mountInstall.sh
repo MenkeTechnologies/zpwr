@@ -16,13 +16,19 @@ trap clean INT
 function clean() {
 
     sudo rm -rf "$tempMount"
+    exit 0
 }
 
 function fail() {
 
-    echo "$@" >&2
+    echo "ERROR: $@" >&2
     clean
     exit 1
+}
+
+function warn() {
+
+    echo "WARN: $@" >&2
 }
 
 function reg() {
@@ -51,7 +57,7 @@ function pkgInstall(){
             continue
         fi
         bold "---------- PKG $f ----------"
-        reg sudo installer -allowUntrusted -pkg "$f" -target /
+        reg "sudo installer -allowUntrusted -pkg \"$f\" -target /"
         sudo installer -allowUntrusted -pkg "$f" -target /
 
     done < <(find "$dir" -iname '[^.]*.mpkg' 2>/dev/null)
@@ -62,7 +68,7 @@ function pkgInstall(){
             continue
         fi
         bold "---------- MPKG $f ----------"
-        reg sudo installer -allowUntrusted -pkg "$f" -target /
+        reg "sudo installer -allowUntrusted -pkg \"$f\" -target /"
         sudo installer -allowUntrusted -pkg "$f" -target /
 
     done < <(find "$dir" -iname '[^.]*.pkg' 2>/dev/null)
@@ -78,7 +84,7 @@ function vstInstall(){
             continue
         fi
         bold "---------- VST $f ----------"
-        reg sudo cp -R "$f" /Library/Audio/Plug-Ins/VST
+        reg "sudo cp -R \"$f\" /Library/Audio/Plug-Ins/VST"
         sudo cp -R "$f" /Library/Audio/Plug-Ins/VST
 
     done < <(find "$dir" -iname '[^.]*.vst' 2>/dev/null)
@@ -89,7 +95,7 @@ function vstInstall(){
             continue
         fi
         bold "---------- VST3 $f ----------"
-        reg sudo cp -R "$f" /Library/Audio/Plug-Ins/VST3
+        reg "sudo cp -R \"$f\" /Library/Audio/Plug-Ins/VST3"
         sudo cp -R "$f" /Library/Audio/Plug-Ins/VST3
 
     done < <(find "$dir" -iname '[^.]*.vst3' 2>/dev/null)
@@ -100,7 +106,7 @@ function vstInstall(){
             continue
         fi
         bold "---------- AU $f ----------"
-        reg sudo cp -R "$f" /Library/Audio/Plug-Ins/Components
+        reg "sudo cp -R \"$f\" /Library/Audio/Plug-Ins/Components"
         sudo cp -R "$f" /Library/Audio/Plug-Ins/Components
 
     done < <(find "$dir" -iname '[^.]*.component' 2>/dev/null)
@@ -116,7 +122,7 @@ function main() {
 
         bold "---------- DMG $i ----------"
 
-        reg sudo hdiutil attach -noverify -nobrowse -noautoopen -quiet -mountroot "$tempMount" "$i"
+        reg "sudo hdiutil attach -noverify -nobrowse -noautoopen -quiet -mountroot \"$tempMount\" \"$i\""
 
         expect <(echo '
         set timeout 5
@@ -140,10 +146,13 @@ function main() {
             eof     { puts " --- eof after EULA ---";     exit 0 }
             timeout { puts " --- timeout after EULA ---"; exit 2 }
         }
-    ') || fail "Could not mount $i"
+    ') || {
+        warn "Could not mount $i"
+        continue
+    }
 
         pkgInstall "$tempMount"
-        reg sudo hdiutil unmount -force "$tempMount/"*
+        reg "sudo hdiutil unmount -force \"$tempMount/\"*"
         sudo hdiutil unmount -force "$tempMount/"* || fail "could not unmount " "$tempMount/"*
 
     done < <(find "$base" -iname "*.dmg" 2>/dev/null)
