@@ -81,6 +81,11 @@ function resetToDev() {
     git fetch -f --all --prune --tags
 }
 
+function zpwrIsGitDir(){
+
+    command git rev-parse --git-dir 2> /dev/null 1>&2
+}
+
 function main() {
 
     local dir completionDir
@@ -90,7 +95,9 @@ function main() {
     for dir in "$completionDir/"*; do
         test -d "$dir" && (
             printf "$dir: "
+
             builtin cd "$dir" &&
+            zpwrIsGitDir &&
             resetToMaster
         )
     done
