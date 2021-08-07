@@ -7,6 +7,49 @@
 ##### Notes: watches 2 repos
 #}}}***********************************************************
 
+function zsh-gacp-mainBranch() {
+
+    command git rev-parse --git-dir &>/dev/null || return 1
+
+    local branch remote
+
+    if [[ -z "$1" ]]; then
+        remote=origin
+    else
+        remote="$1"
+    fi
+
+    for branch in master main; do
+        if command git show-ref -q --verify refs/remotes/$remote/$branch; then
+            echo "$branch"
+            return
+        fi
+    done
+    echo master
+}
+
+function zsh-gacp-devBranch() {
+
+    command git rev-parse --git-dir &>/dev/null || return 1
+
+    local branch remote
+
+    if [[ -z "$1" ]]; then
+        remote=origin
+    else
+        remote="$1"
+    fi
+
+    for branch in development develop devel; do
+        if command git show-ref -q --verify refs/remotes/$remote/$branch; then
+            echo "$branch"
+            return
+        fi
+    done
+
+    echo dev
+}
+
 baseDir="$ZPWR"
 configDir="$ZPWR"
 zshPluginDir="$ZSH_CUSTOM/plugins"
@@ -18,20 +61,20 @@ remoteName=origin
 function resetToMaster() {
 
     git fetch -f --all --prune --tags
-    git reset --hard $remoteName/master
-    git checkout -B master $remoteName/master
+    git reset --hard $remoteName/$(zsh-gacp-mainBranch "$remote")
+    git checkout -B master $remoteName/$(zsh-gacp-mainBranch "$remote")
     git pull --force
-    git reset --hard $remoteName/master
+    git reset --hard $remoteName/$(zsh-gacp-mainBranch "$remote")
     git fetch -f --all --prune --tags
 }
 
 function resetToDev() {
 
     git fetch -f --all --prune --tags
-    git reset --hard $remoteName/dev
-    git checkout -B dev $remoteName/dev
+    git reset --hard $remoteName/$(zsh-gacp-devBranch "$remote")
+    git checkout -B dev $remoteName/$(zsh-gacp-devBranch "$remote")
     git pull --force
-    git reset --hard $remoteName/dev
+    git reset --hard $remoteName/$(zsh-gacp-devBranch "$remote")
     git fetch -f --all --prune --tags
 }
 
@@ -90,7 +133,7 @@ while true; do
 
     #echo "$(date) git poll in $(pwd)" >&2
     git fetch $remoteName
-    output=$(git log HEAD..$remoteName/master --oneline)
+    output=$(git log HEAD..$remoteName/$(zsh-gacp-mainBranch "$remote"))
 
     if [[ -n "$output" ]]; then
         echo "$(date) We have change to $(git remote -v)" >&2
