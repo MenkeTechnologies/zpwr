@@ -42,8 +42,11 @@ function main() {
     resetToDev
     completionDir="$zshPluginDir"
     for dir in "$completionDir/"*; do
-        printf "$dir: "
-        test -d "$dir" && ( builtin cd "$dir" && resetToMaster; )
+        test -d "$dir" && (
+            printf "$dir: "
+            builtin cd "$dir" &&
+            resetToMaster
+        )
     done
     refreshers
 }
