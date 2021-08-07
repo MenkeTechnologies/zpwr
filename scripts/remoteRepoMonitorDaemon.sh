@@ -7,6 +7,9 @@
 ##### Notes: watches 2 repos
 #}}}***********************************************************
 
+REPO_NAME='zpwr'
+ZPWR_COMP_REPO_NAME='zsh-more-completions'
+
 function zsh-gacp-mainBranch() {
 
     command git rev-parse --git-dir &>/dev/null || return 1
