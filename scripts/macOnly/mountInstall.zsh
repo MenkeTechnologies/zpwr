@@ -1,10 +1,10 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #{{{                    MARK:Header
 #**************************************************************
 ##### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Mon Aug  2 20:39:01 EDT 2021
-##### Purpose: bash script to install VST/VST3/AU/DMG/PKG/MPKG
+##### Purpose: zsh script to install VST/VST3/AU/DMG/PKG/MPKG
 ##### Notes: handles EULA
 #}}}***********************************************************
 
@@ -21,7 +21,7 @@ function clean() {
 
 function fail() {
 
-    echo "ERROR: $@" >&2
+    printf "\x1b[31;3mERROR: %s\x1b[0m\n" "$*" >&2
     clean
     exit 1
 }
@@ -29,6 +29,7 @@ function fail() {
 function warn() {
 
     echo "WARN: $@" >&2
+    printf "\x1b[32;3bmWARN: %s\x1b[0m\n" "$*" >&2
 }
 
 function reg() {
@@ -114,6 +115,8 @@ function vstInstall(){
 
 function main() {
 
+    local files f
+
     while read i; do
 
         if ! echo "$i" | perl -ne 'exit 1 if '"$blackList"; then
@@ -152,8 +155,17 @@ function main() {
     }
 
         pkgInstall "$tempMount"
-        reg "sudo hdiutil unmount -force \"$tempMount/\"*"
-        sudo hdiutil unmount -force "$tempMount/"* || fail "could not unmount " "$tempMount/"*
+
+        files=( "$tempMount"/*(N) )
+
+        if (( $#files )); then
+            for f in ${files[@]}; do
+                reg "sudo hdiutil unmount -force \"$f\""
+                if ! sudo hdiutil unmount -force "$f"; then
+                    warn "Could not unmount $f"
+                fi
+            done
+        fi
 
     done < <(find "$base" -iname "*.dmg" 2>/dev/null)
 
@@ -166,10 +178,10 @@ if [[ -z "$1" ]]; then
     fail "usage: mountInstall.sh <dir>"
 fi
 
-base="$1"
+base="${1:A}"
 shift
 
-banner "Starting VST/VST3/AU/DMG/PKG/MPKG Installer by MenkeTechnologies..."
+banner "Starting VST/VST3/AU/DMG/PKG/MPKG Installer by MenkeTechnologies at $base..."
 
 main "$@"
 
