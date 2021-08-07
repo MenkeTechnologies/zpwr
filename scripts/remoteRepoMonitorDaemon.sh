@@ -94,10 +94,10 @@ function main() {
     completionDir="$zshPluginDir"
     for dir in "$completionDir/"*; do
         test -d "$dir" && (
-            printf "$dir: "
 
             builtin cd "$dir" &&
             zpwrIsGitDir &&
+            printf "$dir: " &&
             resetToMaster
         )
     done
