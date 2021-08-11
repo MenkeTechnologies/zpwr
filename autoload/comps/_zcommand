@@ -39,7 +39,7 @@ __display(){
     else
         _alternative \
             'zdir:z ranked directories:__z_dirs_comp' \
-            'abs-directories:directory:_path_files -g ".*(/) *(/)"'
+            'abs-directories:directory:_path_files -g ".*(/:A) *(/:A)"'
     fi
 }
 

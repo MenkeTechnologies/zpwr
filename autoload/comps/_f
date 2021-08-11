@@ -29,20 +29,28 @@ function _f(){
                     _alternative \
                     'fasd:fasd ranked directories:__fasd_dirs_comp' \
                     'zdir:z ranked directories:__z_dirs_comp' \
-                    'directory-stack:directory stack:_directory_stack'
+                    'named-directories: : _tilde' \
+                    'directory-stack:directory stack:_directory_stack' \
+                    'abs-directories:directory:_path_files -g ".*(/:A) *(/:A)"'
                 else
                     _alternative \
                     'fasd:fasd ranked directories:__fasd_dirs_comp' \
-                    'directory-stack:directory stack:_directory_stack'
+                    'named-directories: : _tilde' \
+                    'directory-stack:directory stack:_directory_stack' \
+                    'abs-directories:directory:_path_files -g ".*(/:A) *(/:A)"'
             fi
         else
             if [[ "$ZPWR_HAS_Z" == true ]]; then
                     _alternative \
                     'zdir:z ranked directories:__z_dirs_comp' \
-                    'directory-stack:directory stack:_directory_stack'
+                    'named-directories: : _tilde' \
+                    'directory-stack:directory stack:_directory_stack' \
+                    'abs-directories:directory:_path_files -g ".*(/:A) *(/:A)"'
                 else
                     _alternative \
-                    'directory-stack:directory stack:_directory_stack'
+                    'named-directories: : _tilde' \
+                    'directory-stack:directory stack:_directory_stack' \
+                    'abs-directories:directory:_path_files -g ".*(/:A) *(/:A)"'
             fi
         fi
         return 1
