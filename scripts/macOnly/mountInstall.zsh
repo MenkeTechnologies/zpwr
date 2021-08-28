@@ -155,6 +155,7 @@ function main() {
     }
 
         pkgInstall "$tempMount"
+        vstInstall "$tempMount"
 
         files=( "$tempMount"/*(N) )
 
