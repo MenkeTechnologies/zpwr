@@ -10,15 +10,11 @@ function zpwrEditorRecent(){
     if [[ -z "$BUFFER" ]]; then
         return
     fi
-    mywords=(${(z)BUFFER})
-    firstdir=${mywords[1]:h}
+    mywords=( ${(z)BUFFER} )
     BUFFER="$editor $BUFFER"
-    zpwrLoggDebug "builtin cd $firstdir\""
-    #:h takes aways last "
-    eval "builtin cd $firstdir\""
-    zpwrLoggDebug "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
-    print -s -- "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
-    eval "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
+    zpwrLoggDebug "$BUFFER"
+    print -sr -- "$BUFFER"
+    eval "$BUFFER"
 }
 
 zpwrEditorRecent "$@"
