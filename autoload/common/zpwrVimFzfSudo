@@ -3,21 +3,27 @@
 function zpwrVimFzfSudo(){
 
     zle .kill-whole-line
-    local firstdir editor mywords
+    local firstDir editor numWordsPre out
 
     if [[ $ZPWR_USE_NEOVIM == true ]]; then
-        LBUFFER="sudo -E nvim $(zpwrFzvim nvim)"
+        pre="$ZPWR_FULL_SUDO nvim"
+        LBUFFER="$pre $(zpwrFzvim nvim)"
     else
-        LBUFFER="sudo -E vim $(zpwrFzvim vim)"
+        pre="$ZPWR_FULL_SUDO vim"
+        LBUFFER="$pre $(zpwrFzvim vim)"
     fi
-    mywords=("${(z)BUFFER}")
-    if (( $#mywords == 3 )); then
+
+    numWordsPre=( "${(z)pre}" )
+    out=( "${(z)BUFFER}" )
+
+    if (( $#numWordsPre == $#out)); then
         zle .kill-whole-line
     else
-        firstdir=${mywords[4]:h}
-        #logg "words='$mywords[4]'=>'$firstdir'"
+        firstIndexOut=$(( $#numWordsPre + 1 ))
+        firstDir=${out[$firstIndexOut]:h}
+        #logg "words='$out[4]'=>'$firstDir'"
         #:h takes aways last "
-        BUFFER="cd $firstdir\"; $BUFFER; zpwrClearList"
+        BUFFER="cd $firstDir\"; $BUFFER; zpwrClearList"
         zle .accept-line
     fi
 }

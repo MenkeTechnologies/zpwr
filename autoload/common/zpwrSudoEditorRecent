@@ -2,23 +2,8 @@
 # vim: set ft=sh:
 function zpwrSudoEditorRecent(){
 
-    local firstdir editor mywords
+    zpwrEditorRecent "$ZPWR_FULL_SUDO $1"
 
-    editor="$1"
-
-    BUFFER="$(zpwrFzvim $editor)"
-    if [[ -z "$BUFFER" ]]; then
-        return
-    fi
-    mywords=(${(z)BUFFER})
-    firstdir=${mywords[1]:h}
-    BUFFER="sudo $editor $BUFFER"
-    zpwrLoggDebug "builtin cd $firstdir\""
-    #:h takes aways last "
-    eval "builtin cd $firstdir\""
-    zpwrLoggDebug "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
-    print -s -- "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
-    eval "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
 }
 
 zpwrSudoEditorRecent "$@"
