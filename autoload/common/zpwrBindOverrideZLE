@@ -51,6 +51,7 @@ function zpwrBindOverrideZLE(){
     zle -N zpwrChangeQuotes
     zle -N zpwrAlternateQuotes
     zle -N zpwrClipboard
+    zle -N zpwrGoogle
     zle -N zpwrEOLorNextTabStop
     zle -N zpwrFzfSurround
 
@@ -223,10 +224,13 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '\e^U' up-case-word
     bindkey -M vicmd '\e^U' up-case-word
 
+    bindkey -M viins '^V^B' zpwrGoogle
+    bindkey -M vicmd '^V^B' zpwrGoogle
+
     bindkey -M viins '\e[5~' zpwrClipboard
     bindkey -M viins '^B' zpwrClipboard
     bindkey -M vicmd '^B' zpwrClipboard
-#shift tab
+    #shift tab
     bindkey -M viins '\e[Z' zpwrClipboard
 
     bindkey '\e[1;2D' sub
