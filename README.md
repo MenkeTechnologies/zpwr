@@ -14,6 +14,7 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 ## Contents
 
 - [Full Install](#full-installation-instructions-to-zpwr)
+- [Install Options](#installation-options)
 - [Features](#zpwr-features)
 - [Dependencies](#zpwr-dependencies)
 - [Supported Operating Systems](#supported-operating-systems)
@@ -68,14 +69,24 @@ git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/in
 
 The installer will confirm what will be installed and overwritten before executing.
 
-Some interactivity is required near end of installer for postfix, wireshark and snort installs.
-
 Zinit will install plugins on first zsh after install.
 
 ## Full Installation Instructions to `$ZPWR`
 To install to a custom directory, clone the project to custom directory and start the installer.  ZPWR will pick up its location and export ZPWR to that directory.
 This also means you can move ZPWR after install after updating the sym links that are in `$HOME`.  First `export ZPWR_INSTALL=<mydirectory>/install` in current shell.  Replace `<mydirectory>` with your new install dir and keep `/install` in the export.
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
+
+## Installation Options
+```sh
+    Options:
+        -a  Install all dependencies
+        -c  Copy just configs
+        -n  Do not start tmux at end of installer
+        -s  Skip main section
+        -h  Display this message
+        -v  Display script version
+```
+
 
 ## ZPWR Features
 - 375+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`

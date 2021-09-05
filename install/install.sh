@@ -15,7 +15,7 @@ export ZPWR_PLUGIN_MANAGER="zinit"
 unset CDPATH
 declare zpwrBaseDir
 
-VERSION="2.0.0"
+VERSION="2.1.0"
 # resolve all symlinks
 ZPWR_PWD="$(pwd -P)"
 #}}}***********************************************************
@@ -252,11 +252,12 @@ function usage(){
     echo "Usage :  $0 [options] [--]
 
     Options:
-    -h|help       Display this message
-    -s|skip       Skip main section
-    -c|config     Copy just configs
-    -n|notmux     Do not start tmux at end of installer
-    -v|version    Display script version"
+        -a  Install all dependencies
+        -c  Copy just configs
+        -n  Do not start tmux at end of installer
+        -s  Skip main section
+        -h  Display this message
+        -v  Display script version"
 
 }
 
@@ -347,19 +348,22 @@ function cargoinstall(){
 skip=false
 justConfig=false
 noTmux=false
-while getopts ":hnvsc" opt
+fullInstall=false
+while getopts ":hnvsca" opt
 do
     case $opt in
 
-        h|help     )  usage; exit 0   ;;
+        h)  usage; exit 0   ;;
 
-        v|version  )  echo "$0 -- Version $VERSION"; exit 0   ;;
+        v)  echo "$0 -- Version $VERSION"; exit 0   ;;
 
-        s|skip     )  skip=true ;;
+        a)  fullInstall=true ;;
 
-        n|notmux     )  noTmux=true ;;
+        s)  skip=true ;;
 
-        c|config     )  justConfig=true ;;
+        n)  noTmux=true ;;
+
+        c)  justConfig=true ;;
 
         * )  echo -e "\n  Option does not exist : $OPTARG\n"
             usage; exit 1   ;;
@@ -759,19 +763,22 @@ if [[ $justConfig != true ]]; then
         zpwrInstallerUpdate iftop "$distroFamily"
     fi
 
-    if [[ "$ZPWR_OS_TYPE" != darwin ]]; then
-        zpwrPrettyPrintBox "Installing snort"
-        zpwrInstallerUpdate snort "$distroFamily"
-        zpwrPrettyPrintBox "Installing logwatch"
-        zpwrInstallerUpdate logwatch "$distroFamily"
-        zpwrPrettyPrintBox "Installing postfix"
-        zpwrInstallerUpdate postfix "$distroFamily"
+    if [[ $fullInstall == true ]]; then
+        if [[ "$ZPWR_OS_TYPE" != darwin ]]; then
+            zpwrPrettyPrintBox "Installing snort"
+            zpwrInstallerUpdate snort "$distroFamily"
+            zpwrPrettyPrintBox "Installing logwatch"
+            zpwrInstallerUpdate logwatch "$distroFamily"
+            zpwrPrettyPrintBox "Installing postfix"
+            zpwrInstallerUpdate postfix "$distroFamily"
+        fi
+
+        zpwrPrettyPrintBox "Installing wireshark"
+        zpwrInstallerUpdate wireshark "$distroFamily"
+        zpwrPrettyPrintBox "Installing mailutils"
+        zpwrInstallerUpdate mailutils "$distroFamily"
     fi
 
-    zpwrPrettyPrintBox "Installing wireshark"
-    zpwrInstallerUpdate wireshark "$distroFamily"
-    zpwrPrettyPrintBox "Installing mailutils"
-    zpwrInstallerUpdate mailutils "$distroFamily"
 fi
 
 #}}}***********************************************************
