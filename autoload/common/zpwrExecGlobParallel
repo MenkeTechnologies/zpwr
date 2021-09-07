@@ -18,10 +18,12 @@ function zpwrExecGlobParallel(){
             kill -9 -$p &>/dev/null
         done
 
-        for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
-            test -z "$f" && continue
-            zpwrLoggErr "FAILED: ${(e)command}"
-        done
+        if [[ -f "$ZPWR_TEMPFILE4" ]]; then
+            for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
+                test -z "$f" && continue
+                zpwrLoggErr "FAILED: ${(e)command}"
+            done
+        fi
     }
 
     local glob command f
@@ -35,6 +37,11 @@ function zpwrExecGlobParallel(){
     files=( ${glob} )
 
     zpwrPrettyPrint "Processing ${#files} files"
+
+    if ! (( $#files )); then
+        eval :
+        return 0
+    fi
 
     trap 'zpwrKillProcessGrp; return 1' INT QUIT
 
