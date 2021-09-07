@@ -35,37 +35,84 @@ function err() {
     echo "error: $@" >&2
 }
 
-function zpwrforDirZipRarMain() {
-    local dir old
+function addProcessed(){
+
+    if [[ -f $ZPWR_TEMPFILE_PROCESSED ]]; then
+        for f in "${(@f)$(<$ZPWR_TEMPFILE_PROCESSED)}"; do
+            processed+=( "${f:A}" )
+        done
+    fi
+}
+
+function zpwrForDirZipRarMain() {
+    local dir old dirs f
+    local -a processed=()
     emulate -LR zsh
     setopt nullglob
 
-    for dir in *(/); do
+    command rm -f $ZPWR_TEMPFILE_PROCESSED
+
+    if [[ -n "$@" ]]; then
+        dirs=( ${@}(/) )
+    else
+        dirs=( *(/) )
+    fi
+
+
+    for dir in "${dirs[@]}"; do
         old="$PWD"
         if ! cd "$dir"; then
-            err "cant cd to $dir"
+            err "can not cd to $dir"
             return 1
         fi
         zpwrPrettyPrint "Processing $dir"
+
         yes A | zpwr execglobparallel '*.zip' 'unzip "$f" -d "${f%*.zip}"'
+
+        addProcessed
+
         zpwr execglobparallel '*.rar~._*.rar' 'd="${f:r}";mkdir "\$d"; mv "$f" "\$d"; builtin cd "\$d";yes A | unrar x "$f"; builtin cd ..'
 
+        addProcessed
+
         if ! builtin cd "$old"; then
-            err "cant cd to $old"
+            err "can not cd to $old"
             return 1
         fi
     done
 
-    zpwrPrettyPrint 'nested zip RM'
-    echo rm -rf */*.zip
-    zpwrPrettyPrint 'nested rar RM'
-    echo rm -rf */*/*.rar
-    printf 'are you sure > '
-    read a
-    if [[ $a == y ]]; then
-        rm -rf */*.zip
-        rm -rf */*/*.rar
+    if [[ -f "$ZPWR_TEMPFILE_PROCESSED" ]]; then
+
+        zpwrPrettyPrint 'nested zip RM'
+        zpwrPrettyPrint 'nested rar RM'
+
+        for f in "${processed[@]}"; do
+            if ! [[ -e "$f" ]]; then
+                nf="${f:r}/${f:t}"
+                if [[ -e "$nf" ]]; then
+                    echo rm -rf "$nf"
+                fi
+            else
+                echo rm -rf "$f"
+            fi
+        done
+
+        zpwrPrettyPrint 'are you sure > '
+        read a
+        if [[ $a == y ]]; then
+            for f in "${processed[@]}"; do
+                test -z "$f" && continue
+                if ! [[ -e "$f" ]]; then
+                    nf="${f:r}/${f:t}"
+                    if [[ -e "$nf" ]]; then
+                        rm -rf "$nf"
+                    fi
+                else
+                    rm -rf "$f"
+                fi
+            done
+        fi
     fi
 }
 
-zpwrforDirZipRarMain "$@"
+zpwrForDirZipRarMain "$@"

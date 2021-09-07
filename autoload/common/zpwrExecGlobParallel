@@ -29,6 +29,8 @@ function zpwrExecGlobParallel(){
     local glob command f
     local -a files failed pids
 
+    command rm -f "$ZPWR_TEMPFILE_PROCESSED"
+
     glob="$1"
     command="$2"
     shift
@@ -48,6 +50,7 @@ function zpwrExecGlobParallel(){
     for f in "${files[@]}"; do
         zpwrLoggInfo "${(e)command}"
         eval "${(e)command} || echo \"$f\" >> $ZPWR_TEMPFILE4" &
+        print "${f:A}" >> "$ZPWR_TEMPFILE_PROCESSED"
         pids+=( $! )
     done
 
