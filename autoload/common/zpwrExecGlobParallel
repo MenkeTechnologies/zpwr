@@ -56,7 +56,9 @@ function zpwrExecGlobParallel(){
         ZPWR_PROCESSED[$key]="${f:A}"
     done
 
-    wait ${=pids}
+    if (( $#pids )); then
+        wait ${=pids}
+    fi
 
     if [[ -f "$ZPWR_TEMPFILE4" ]]; then
         for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
