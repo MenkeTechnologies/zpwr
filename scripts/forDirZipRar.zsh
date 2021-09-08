@@ -10,7 +10,7 @@
 if [[ -n "$ZPWR" && -n "$ZPWR_LIB_INIT" ]]; then
     if ! source "$ZPWR_LIB_INIT" ""; then
         echo "Could not source file ZPWR_LIB_INIT '$ZPWR_LIB_INIT'."
-        exit 1
+        return 1
     fi
 else
     0="${${0:#$ZSH_ARGZERO}:-${(%):-%N}}"
@@ -21,12 +21,12 @@ else
         zpwrBaseDir="${zpwrBaseDir:h}"
         if [[ "$zpwrBaseDir" == / ]]; then
             echo "Could not find .zpwr_root file up the directory tree." >&2
-            exit 1
+            return 1
         fi
     done
     if ! source "$zpwrBaseDir/scripts/init.sh" "$zpwrBaseDir"; then
         echo "Could not source zpwrBaseDir '$zpwrBaseDir/scripts/init.sh'."
-        exit 1
+        return 1
     fi
     unset zpwrBaseDir
 fi
@@ -39,7 +39,7 @@ function err() {
 #depth first traversal
 function process() {
 
-    emulate -LR zsh
+    emulate -L zsh
     local base="${1:A}" old stack rars zips
     setopt nullglob nocaseglob
 
@@ -82,7 +82,7 @@ function process() {
 
 function zpwrForDirZipRarMain() {
 
-    emulate -LR zsh
+    emulate -L zsh
     local dir old dirs f
     setopt nullglob
 
@@ -119,7 +119,12 @@ function zpwrForDirZipRarMain() {
 }
 
 ulimit -n 10240
+root="$PWD"
+
+trap 'builtin cd -q $root; unset root; return 1' INT
 
 ZPWR_PROCESSED=()
+
+unset root
 
 zpwrForDirZipRarMain "$@"

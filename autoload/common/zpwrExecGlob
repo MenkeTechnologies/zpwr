@@ -27,12 +27,16 @@ function zpwrExecGlob(){
     fi
 
     for f in "${files[@]}"; do
-        key="$$-${f:t}-$(du "$f")"
+        key="$$-${f:t}-$(du "$f" | awk '{print $1}')"
         if ! (( ${+ZPWR_PROCESSED[$key]} )); then
             zpwrLoggInfo "${(e)command}"
-            eval "${(e)command}" || failed+=("$f")
+            if eval "${(e)command}"; then
+                ZPWR_PROCESSED[$key]="${f:A}"
+            else
+                failed+=("$f")
+            fi
+
         fi
-        ZPWR_PROCESSED[$key]="${f:A}"
     done
 
     for f in "${failed[@]}"; do
