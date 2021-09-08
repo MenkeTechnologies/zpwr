@@ -27,7 +27,7 @@ function zpwrExecGlob(){
     fi
 
     for f in "${files[@]}"; do
-        key="$$-${f:t}-$(sha256sum "$f")"
+        key="$$-${f:t}-$(du "$f")"
         if ! (( ${+ZPWR_PROCESSED[$key]} )); then
             zpwrLoggInfo "${(e)command}"
             eval "${(e)command}" || failed+=("$f")

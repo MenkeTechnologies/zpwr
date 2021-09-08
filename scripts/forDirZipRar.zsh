@@ -33,49 +33,50 @@ fi
 
 function err() {
 
-    echo "error: $@" >&2
+    echo "ERROR: $@" >&2
 }
 
-#breadth first traversal
+#depth first traversal
 function process() {
 
     emulate -LR zsh
-    local base="${1:A}" old queue rars zips
-    setopt nullglob
+    local base="${1:A}" old stack rars zips
+    setopt nullglob nocaseglob
 
-    queue=( "${base}" )
-    idx=1
+    stack=( "${base}" )
+    idx='-1'
 
+    #set -x
     while true; do
 
-        dir="${queue[$idx]}"
+        dir="${stack[$idx]}"
 
         if ! builtin cd -q "$dir"; then
             err "can not cd to $dir"
-            return 1
         fi
 
         zips=( *.zip )
         rars=( *.rar )
 
         if (( $#zips )); then
-            #echo found *.zip(:A)
+            zpwrPrettyPrint "$PWD:" *.zip
             yes A | zpwr execglobparallel '*.zip~._*.zip' 'unzip "$f" -d "${f%*.zip}"'
         fi
 
         if (( $#rars )); then
-            #echo found *.rar(:A)
+            zpwrPrettyPrint "$PWD:" *.rar
             zpwr execglobparallel '*.rar~._*.rar' 'd="${f:r}";mkdir "\$d"; mv "$f" "\$d"; builtin cd "\$d";yes A | unrar x "$f"; builtin cd ..'
         fi
 
-        queue+=( *(/:A) )
-        queue[$idx]=()
+        stack[$idx]=()
+        stack+=( *(/:A) )
 
-        if ! (( $#queue )); then
+        if ! (( $#stack )); then
             break
         fi
 
     done
+    #set +x
 
 }
 
@@ -95,22 +96,25 @@ function zpwrForDirZipRarMain() {
     for dir in "${dirs[@]}"; do
         zpwrPrettyPrint "Processing $dir"
         process "$dir"
+        builtin cd -q "$old"
     done
-    builtin cd -q "$old"
+    files=( ${(v)ZPWR_PROCESSED[@]} )
 
-    zpwrPrettyPrint 'nested zip RM'
-    zpwrPrettyPrint 'nested rar RM'
+    if (( $#files )); then
+        zpwrPrettyPrint 'nested zip RM'
+        zpwrPrettyPrint 'nested rar RM'
 
-    for f in "${(v)ZPWR_PROCESSED[@]}"; do
-        echo rm -rf "$f"
-    done
-
-    zpwrPrettyPrintNoNewline 'are you sure > '
-    read a
-    if [[ $a == y ]]; then
-        for f in "${(v)ZPWR_PROCESSED[@]}"; do
-                rm -rf "$f"
+        for f in "${(v)files[@]}"; do
+            echo rm -rf "$f"
         done
+
+        zpwrPrettyPrintNoNewline 'are you sure > '
+        read a
+        if [[ $a == y ]]; then
+            for f in "${(v)files[@]}"; do
+                rm -rf "$f"
+            done
+        fi
     fi
 }
 
