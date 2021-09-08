@@ -32,25 +32,58 @@ else
 fi
 
 function err() {
+
     echo "error: $@" >&2
 }
 
-function addProcessed(){
+#breadth first traversal
+function process() {
 
-    if [[ -f $ZPWR_TEMPFILE_PROCESSED ]]; then
-        for f in "${(@f)$(<$ZPWR_TEMPFILE_PROCESSED)}"; do
-            processed+=( "${f:A}" )
-        done
-    fi
+    emulate -LR zsh
+    local base="${1:A}" old queue rars zips
+    setopt nullglob
+
+    queue=( "${base}" )
+    idx=1
+
+    while true; do
+
+        dir="${queue[$idx]}"
+
+        if ! builtin cd -q "$dir"; then
+            err "can not cd to $dir"
+            return 1
+        fi
+
+        zips=( *.zip )
+        rars=( *.rar )
+
+        if (( $#zips )); then
+            #echo found *.zip(:A)
+            yes A | zpwr execglobparallel '*.zip~._*.zip' 'unzip "$f" -d "${f%*.zip}"'
+        fi
+
+        if (( $#rars )); then
+            #echo found *.rar(:A)
+            zpwr execglobparallel '*.rar~._*.rar' 'd="${f:r}";mkdir "\$d"; mv "$f" "\$d"; builtin cd "\$d";yes A | unrar x "$f"; builtin cd ..'
+        fi
+
+        queue+=( *(/:A) )
+        queue[$idx]=()
+
+        if ! (( $#queue )); then
+            break
+        fi
+
+    done
+
 }
 
 function zpwrForDirZipRarMain() {
-    local dir old dirs f
-    local -a processed=()
-    emulate -LR zsh
-    setopt nullglob
 
-    command rm -f $ZPWR_TEMPFILE_PROCESSED
+    emulate -LR zsh
+    local dir old dirs f
+    setopt nullglob
 
     if [[ -n "$@" ]]; then
         dirs=( ${@}(/) )
@@ -58,61 +91,31 @@ function zpwrForDirZipRarMain() {
         dirs=( *(/) )
     fi
 
-
+    old="$PWD"
     for dir in "${dirs[@]}"; do
-        old="$PWD"
-        if ! cd "$dir"; then
-            err "can not cd to $dir"
-            return 1
-        fi
         zpwrPrettyPrint "Processing $dir"
+        process "$dir"
+    done
+    builtin cd -q "$old"
 
-        yes A | zpwr execglobparallel '*.zip' 'unzip "$f" -d "${f%*.zip}"'
+    zpwrPrettyPrint 'nested zip RM'
+    zpwrPrettyPrint 'nested rar RM'
 
-        addProcessed
-
-        zpwr execglobparallel '*.rar~._*.rar' 'd="${f:r}";mkdir "\$d"; mv "$f" "\$d"; builtin cd "\$d";yes A | unrar x "$f"; builtin cd ..'
-
-        addProcessed
-
-        if ! builtin cd "$old"; then
-            err "can not cd to $old"
-            return 1
-        fi
+    for f in "${(v)ZPWR_PROCESSED[@]}"; do
+        echo rm -rf "$f"
     done
 
-    if [[ -f "$ZPWR_TEMPFILE_PROCESSED" ]]; then
-
-        zpwrPrettyPrint 'nested zip RM'
-        zpwrPrettyPrint 'nested rar RM'
-
-        for f in "${processed[@]}"; do
-            if ! [[ -e "$f" ]]; then
-                nf="${f:r}/${f:t}"
-                if [[ -e "$nf" ]]; then
-                    echo rm -rf "$nf"
-                fi
-            else
-                echo rm -rf "$f"
-            fi
+    zpwrPrettyPrintNoNewline 'are you sure > '
+    read a
+    if [[ $a == y ]]; then
+        for f in "${(v)ZPWR_PROCESSED[@]}"; do
+                rm -rf "$f"
         done
-
-        zpwrPrettyPrint 'are you sure > '
-        read a
-        if [[ $a == y ]]; then
-            for f in "${processed[@]}"; do
-                test -z "$f" && continue
-                if ! [[ -e "$f" ]]; then
-                    nf="${f:r}/${f:t}"
-                    if [[ -e "$nf" ]]; then
-                        rm -rf "$nf"
-                    fi
-                else
-                    rm -rf "$f"
-                fi
-            done
-        fi
     fi
 }
+
+ulimit -n 10240
+
+ZPWR_PROCESSED=()
 
 zpwrForDirZipRarMain "$@"
