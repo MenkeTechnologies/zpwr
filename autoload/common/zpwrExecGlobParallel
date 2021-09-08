@@ -47,11 +47,10 @@ function zpwrExecGlobParallel(){
     trap 'zpwrKillProcessGrp; return 1' INT QUIT
 
     for f in "${files[@]}"; do
-        key="$$-${f:t}-$(sha256sum "$f")"
+        key="$$-${f:t}-$(du "$f")"
         if ! (( ${+ZPWR_PROCESSED[$key]} )); then
             zpwrLoggInfo "${(e)command}"
             eval "${(e)command} || echo \"$f\" >> $ZPWR_TEMPFILE4" &
-            print "${f:A}" >> "$ZPWR_TEMPFILE_PROCESSED"
             pids+=( $! )
         fi
         ZPWR_PROCESSED[$key]="${f:A}"
