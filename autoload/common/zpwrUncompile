@@ -21,7 +21,8 @@ function zpwrUncompile(){
         "$ZPWR_ENV_FILE"
         "$ZPWR_ENV/grc.zsh"
         "$ZPWR_RE_ENV_FILE"
-        "$ZPWR_SCRIPTS/zpwr.zsh"
+        "$ZPWR_SCRIPTS/"*.zsh
+        "$ZPWR_SCRIPTS/"**/*.zsh
         "$ZPWR_LIB"
         "$ZPWR_LIB_INIT"
         "$ZPWR_SCRIPTS/crossOSCommands.sh"
