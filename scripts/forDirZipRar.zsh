@@ -31,13 +31,13 @@ else
     unset zpwrBaseDir
 fi
 
-function err() {
+function zpwrForDirRarZipErr() {
 
     echo "ERROR: $@" >&2
 }
 
 #depth first traversal
-function process() {
+function zpwrForDirRarZipProcess() {
 
     emulate -L zsh
     local base="${1:A}" old stack rars zips
@@ -47,12 +47,12 @@ function process() {
     idx='-1'
 
     #set -x
-    while true; do
+    while (( $#stack )); do
 
         dir="${stack[$idx]}"
 
         if ! builtin cd -q "$dir"; then
-            err "can not cd to $dir"
+            zpwrForDirRarZipErr "can not cd to $dir"
         fi
 
         zips=( *.zip )
@@ -70,10 +70,6 @@ function process() {
 
         stack[$idx]=()
         stack+=( *(/:A) )
-
-        if ! (( $#stack )); then
-            break
-        fi
 
     done
     #set +x
@@ -95,7 +91,7 @@ function zpwrForDirZipRarMain() {
     old="$PWD"
     for dir in "${dirs[@]}"; do
         zpwrPrettyPrint "Processing $dir"
-        process "$dir"
+        zpwrForDirRarZipProcess "$dir"
         builtin cd -q "$old"
     done
     files=( ${(v)ZPWR_PROCESSED[@]} )

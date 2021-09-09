@@ -15,7 +15,7 @@ function zpwrExercismDownloadAll(){
         while read; do
             printf "\x1b[1;4mcommand exercism download --exercise=$REPLY --track=$trackName\x1b[0m\x0a"
             command exercism download --exercise="$REPLY" --track=$trackName
-        done < <(curl https://exercism.io/tracks/$trackName/exercises 2>&1 | perl -nE 'say "$1" if m{href="/tracks/'$trackName'/exercises/(.*)"}')
+        done < <(curl https://exercism.org/tracks/$trackName/exercises 2>&1 | tr ';&' '\n' | perl -nE 'say "$1" if m{/tracks/'$trackName'/exercises/(.*)}')
 
     done
 }
