@@ -40,10 +40,10 @@ function zpwrForDirRarZipErr() {
 function zpwrForDirRarZipProcess() {
 
     emulate -L zsh
-    local base="${1:A}" old stack rars zips
+    local first="${1:A}" old stack rars zips dir
     setopt nullglob nocaseglob
 
-    stack=( "${base}" )
+    stack=( "${first}" )
     idx='-1'
 
     #set -x
@@ -79,7 +79,7 @@ function zpwrForDirRarZipProcess() {
 function zpwrForDirZipRarMain() {
 
     emulate -L zsh
-    local dir old dirs f
+    local dir old dirs dir f files
     setopt nullglob
 
     if [[ -n "$@" ]]; then
