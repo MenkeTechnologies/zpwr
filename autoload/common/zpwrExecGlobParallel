@@ -55,6 +55,8 @@ function zpwrExecGlobParallel(){
             fi &
             ZPWR_PROCESSED[$key]="${f:A}"
             pids+=( $! )
+        else
+            ZPWR_PROCESSED[$key]="${f:A}"
         fi
     done
 
