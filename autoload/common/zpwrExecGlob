@@ -9,6 +9,10 @@ function zpwrExecGlob(){
     emulate -L zsh
     setopt noshwordsplit extendedglob globdots nullglob globsubst
 
+    if ! (( $+ZPWR_PROCESSED )); then
+        declare -Ag ZPWR_PROCESSED
+    fi
+
     local glob command files failed f ky
 
     glob="$1"
