@@ -79,7 +79,7 @@ function zpwrForDirRarZipProcess() {
 function zpwrForDirZipRarMain() {
 
     emulate -L zsh
-    local dir old dirs dir f files
+    local old dirs dir f files
     setopt nullglob
 
     if [[ -n "$@" ]]; then
@@ -119,7 +119,7 @@ root="$PWD"
 
 trap 'builtin cd -q $root; unset root; return 1' INT
 
-ZPWR_PROCESSED=()
+declare -Ag ZPWR_PROCESSED=()
 
 unset root
 

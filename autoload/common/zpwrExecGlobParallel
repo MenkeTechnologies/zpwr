@@ -10,6 +10,10 @@ function zpwrExecGlobParallel(){
     setopt noshwordsplit extendedglob globdots nullglob globsubst #no_notify
     command rm -f $ZPWR_TEMPFILE4
 
+    if ! (( $+ZPWR_PROCESSED )); then
+        declare -Ag ZPWR_PROCESSED
+    fi
+
     function zpwrKillProcessGrp() {
         local p f
 
