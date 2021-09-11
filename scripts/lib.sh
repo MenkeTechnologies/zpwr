@@ -111,11 +111,6 @@ function zpwrIsBinary() {
     [[ $(LC_MESSAGES=C command grep -Hm1 '^' < "${1:-$REPLY}") =~ '^Binary' ]]
 }
 
-function zpwrLogConsoleNotGit() {
-
-    zpwrLogConsoleErr "'$(pwd)' is not a git dir"
-}
-
 function zpwrLogColor(){
 
     if [[ -z $2 ]]; then
@@ -148,18 +143,33 @@ function zpwrLogConsoleErr(){
     zpwrLogColor ERROR "$*" >&2
 }
 
-function zpwrNeedSudo(){
+function zpwrLogConsoleDebug(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrNeedSudo <file>"
+        zpwrLogConsoleErr "usage: zpwrLogConsoleDebug <msg>"
         return 1
     fi
 
-    if [[ ! -w "$1" ]]; then
-        return 0
-    else
+    if [[ $ZPWR_DEBUG == true ]]; then
+       zpwrLogColor DEBUG "$*"
+    fi
+}
+
+function zpwrLogConsoleTrace(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrLogConsoleTrace <msg>"
         return 1
     fi
+
+    if [[ $ZPWR_TRACE == true ]]; then
+       zpwrLogColor TRACE "$*"
+    fi
+}
+
+function zpwrLogConsoleNotGit() {
+
+    zpwrLogConsoleErr "'$(pwd)' is not a git dir"
 }
 
 function zpwrLogConsolePrefix(){
@@ -215,17 +225,9 @@ function zpwrLog(){
     fi
 }
 
-function zpwrLogDebug(){
+function zpwrLogInfo(){
 
-    if [[ $ZPWR_DEBUG == true ]]; then
-       zpwrLog DEBUG "$*"
-    fi
-}
-function zpwrLogTrace(){
-
-    if [[ $ZPWR_TRACE == true ]]; then
-       zpwrLog TRACE "$*"
-    fi
+    zpwrLog INFO "$*"
 }
 
 function zpwrLogError(){
@@ -233,21 +235,43 @@ function zpwrLogError(){
     zpwrLog ERROR "$*"
 }
 
-function zpwrLogInfo(){
+function zpwrLogDebug(){
 
-    zpwrLog INFO "$*"
+    if [[ $ZPWR_DEBUG == true ]]; then
+       zpwrLog DEBUG "$*"
+    fi
+}
+
+function zpwrLogTrace(){
+
+    if [[ $ZPWR_TRACE == true ]]; then
+       zpwrLog TRACE "$*"
+    fi
+}
+function zpwrNeedSudo(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrNeedSudo <file>"
+        return 1
+    fi
+
+    if [[ ! -w "$1" ]]; then
+        return 0
+    else
+        return 1
+    fi
 }
 
 function zpwrFail(){
 
-        echo "failure due to $1" >&2
+        echo "Failure due to $1" >&2
         exit 1
 }
 
 function zpwrFileMustExist(){
 
     if [[ ! -f "$1" ]]; then
-        echo "where is the file '$1'?" >&2
+        echo "Where is the file '$1'?" >&2
         exit 1
     fi
 }
