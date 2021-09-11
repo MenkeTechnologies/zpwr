@@ -41,7 +41,7 @@ function zpwrForDirRarZipProcess() {
 
     emulate -L zsh
     local first="${1:A}" old stack rars zips dir
-    setopt nullglob nocaseglob
+    setopt nullglob nocaseglob extendedglob
 
     stack=( "${first}" )
     idx='-1'
@@ -71,7 +71,7 @@ function zpwrForDirRarZipProcess() {
         fi
 
         stack[$idx]=()
-        stack+=( *(/:A) )
+        stack+=( *~@*~__MACOS*~*.vst~*.component~*.vst3~*.app~*.mpkg(/:A) )
 
     done
     #set +x
@@ -82,12 +82,12 @@ function zpwrForDirZipRarMain() {
 
     emulate -L zsh
     local old dirs dir f files
-    setopt nullglob
+    setopt nullglob extendedglob
 
     if [[ -n "$@" ]]; then
         dirs=( ${@}(/) )
     else
-        dirs=( *(/) )
+        dirs=( *~@*~__MACOS*~*.vst~*.component~*.vst3~*.app~*.mpkg(/) )
     fi
 
     old="$PWD"
