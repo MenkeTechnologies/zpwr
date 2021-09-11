@@ -4,7 +4,7 @@ function fp(){
     if [[ -d "$ZPWR_FORKED_DIR" ]]; then
         cd "$ZPWR_FORKED_DIR"
     else
-        zpwrLoggErr "ZPWR_FORKED_DIR '$ZPWR_FORKED_DIR' is not a dir"
+        zpwrLogConsoleErr "ZPWR_FORKED_DIR '$ZPWR_FORKED_DIR' is not a dir"
     fi
 
 }

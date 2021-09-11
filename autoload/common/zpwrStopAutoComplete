@@ -25,7 +25,7 @@ function zpwrStopAutoComplete(){
         zinit load zdharma/fast-syntax-highlighting 2>/dev/null
 
     else
-        zpwrLoggErr "cannot switch to autocomplete without zinit."
+        zpwrLogConsoleErr "cannot switch to autocomplete without zinit."
         return 1
     fi
 

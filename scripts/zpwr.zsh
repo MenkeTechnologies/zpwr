@@ -218,10 +218,10 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[loadjenv]='zpwrLoadJenv=lazy load jenv, calls jenv $@'
     ZPWR_VERBS[locatesearch]='zpwrLocateFzfNoZLEC=accept locate drive for file'
     ZPWR_VERBS[locatesearchedit]='zpwrLocateFzfEditNoZLEC=edit locate drive for file'
-    ZPWR_VERBS[log]='logg=write to $ZPWR_LOGFILE'
-    ZPWR_VERBS[logdebug]='zpwrLoggDebug=write debug to $ZPWR_LOGFILE'
-    ZPWR_VERBS[logerror]='zpwrLoggErr=write error to console'
-    ZPWR_VERBS[loginfo]='zpwrLoggInfo=write info to console'
+    ZPWR_VERBS[log]='zpwrLog=write to $ZPWR_LOGFILE'
+    ZPWR_VERBS[logdebug]='zpwrLogDebug=write debug to $ZPWR_LOGFILE'
+    ZPWR_VERBS[logerror]='zpwrLogConsoleErr=write error to console'
+    ZPWR_VERBS[loginfo]='zpwrLogConsoleInfo=write info to console'
     ZPWR_VERBS[logincount]='zpwrLoginCount=count of logins by user'
     ZPWR_VERBS[lsof]='zpwrKillLsofVerbAccept=kill from lsof output'
     ZPWR_VERBS[lsofedit]='zpwrKillLsofVerbEdit=edit kill from lsof output'
@@ -402,11 +402,11 @@ ZPWR_VARS[VERB_0]="$0"
                 cmd=${v%%=*}
                 for exp in ${(s%;%)cmd}; do
                     if alias $exp 1>/dev/null 2>&1;then
-                        zpwrLoggDebug "Eval subcommand '$exp'"
+                        zpwrLogDebug "Eval subcommand '$exp'"
                         eval "$exp"
                         ret=$?
                     else
-                        zpwrLoggDebug "Eval subcommand '$exp'"
+                        zpwrLogDebug "Eval subcommand '$exp'"
                         eval "$exp " ${(q)@}
                         ret=$?
                     fi
@@ -416,7 +416,7 @@ ZPWR_VARS[VERB_0]="$0"
         done
 
         if [[ $found == false ]]; then
-            zpwrLoggErr "Unknown subcommand: '$verb'"
+            zpwrLogConsoleErr "Unknown subcommand: '$verb'"
             return 1
         fi
 

@@ -3,7 +3,7 @@
 function zpwrRegenGtagsType(){
 
     if [[ -z $1 ]]; then
-        zpwrLoggErr "usage: zpwrRegenGtagsType <type>"
+        zpwrLogConsoleErr "usage: zpwrRegenGtagsType <type>"
         return 1
     fi
 
@@ -29,13 +29,13 @@ function zpwrRegenGtagsType(){
             fi
         done | gtags --accept-dotfiles --gtagslabel=$type -f -
         if [[ ! -s GTAGS ]]; then
-            zpwrLoggErr "forced to copy back gtags because empty"
+            zpwrLogConsoleErr "forced to copy back gtags because empty"
             echo command cp "$ZPWR_INSTALL/g-tags/"{GPATH,GRTAGS,GTAGS} "$HOME"
             command cp "$ZPWR_INSTALL/g-tags/"{GPATH,GRTAGS,GTAGS} "$HOME"
         fi
         )
     else
-        zpwrLoggErr "gtags does not exist"
+        zpwrLogConsoleErr "gtags does not exist"
     fi
 
 }

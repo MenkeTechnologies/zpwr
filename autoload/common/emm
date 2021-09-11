@@ -20,7 +20,7 @@ function ___emm() {
     if [[ -n "$endstr" ]]; then
         printf "$endstr" | $ZPWR_COPY_CMD
         sleep 0.3
-        logg tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
+        zpwrLog tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
         tmux send-keys -t emacs:0.0 ":e $endstr" ENTER
     fi
 

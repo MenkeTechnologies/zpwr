@@ -5,7 +5,7 @@ function zl(){
     if [[ -d "$ZPWR_LOCAL" ]]; then
         cd "$ZPWR_LOCAL"
     else
-        zpwrLoggErr "ZPWR_LOCAL '$ZPWR_LOCAL' is not a directory."
+        zpwrLogConsoleErr "ZPWR_LOCAL '$ZPWR_LOCAL' is not a directory."
     fi
 
 }

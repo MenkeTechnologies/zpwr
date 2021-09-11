@@ -3,7 +3,7 @@
 function zpwrLargestGitFiles(){
 
     if ! zpwrIsGitDir; then
-        zpwrLoggNotGit
+        zpwrLogConsoleNotGit
         return 1
     fi
 

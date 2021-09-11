@@ -5,7 +5,7 @@ function zli() {
     if [[ -d "$ZPWR_LOCAL/installer" ]]; then
         cd "$ZPWR_LOCAL/installer"
     else
-        zpwrLoggErr "ZPWR_LOCAL/installer '$ZPWR_LOCAL/installer' is not a dir."
+        zpwrLogConsoleErr "ZPWR_LOCAL/installer '$ZPWR_LOCAL/installer' is not a dir."
     fi
 
 }

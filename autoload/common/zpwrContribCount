@@ -3,7 +3,7 @@
 function zpwrContribCount(){
 
     if ! zpwrIsGitDir; then
-       zpwrLoggNotGit
+       zpwrLogConsoleNotGit
        return 1
     fi
 

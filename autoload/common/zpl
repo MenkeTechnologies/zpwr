@@ -5,7 +5,7 @@ function zpl() {
     if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
         cd "$ZPWR_PLUGIN_DIR"
     else
-        zpwrLoggErr "ZPWR_PLUGIN_DIR '$ZPWR_PLUGIN_DIR' is not a dir."
+        zpwrLogConsoleErr "ZPWR_PLUGIN_DIR '$ZPWR_PLUGIN_DIR' is not a dir."
     fi
 
 }

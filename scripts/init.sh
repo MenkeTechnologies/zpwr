@@ -20,7 +20,7 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
 
     if [[ -z "$ZPWR_LIB" ]]; then
         if source "$ZPWR_ENV_FILE"; then
-            : logg "loaded ZPWR_ENV_FILE '$ZPWR_ENV_FILE'"
+            : zpwrLog "loaded ZPWR_ENV_FILE '$ZPWR_ENV_FILE'"
         else
             echo "cannot source ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
             exit 1
@@ -28,26 +28,26 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
 
         if test -f "$ZPWR_TOKEN_PRE"; then
             if source "$ZPWR_TOKEN_PRE"; then
-                : logg "loaded ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+                : zpwrLog "loaded ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
             else
-                zpwrLoggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+                zpwrLogConsoleErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
             fi
         else
             touch "$ZPWR_TOKEN_PRE"
         fi
 
         if source "$ZPWR_RE_ENV_FILE"; then
-            : logg "loaded ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
+            : zpwrLog "loaded ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
         else
-            zpwrLoggErr "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
+            zpwrLogConsoleErr "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
             exit 1
         fi
 
         if test -f "$ZPWR_TOKEN_POST"; then
             if source "$ZPWR_TOKEN_POST"; then
-                : logg "loaded ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+                : zpwrLog "loaded ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
             else
-                zpwrLoggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+                zpwrLogConsoleErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
             fi
         else
             touch "$ZPWR_TOKEN_POST"
@@ -57,9 +57,9 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
         # env vars are exported
         # so just get the functions
         if source "$ZPWR_LIB"; then
-            : logg "loaded ZPWR_LIB '$ZPWR_LIB'"
+            : zpwrLog "loaded ZPWR_LIB '$ZPWR_LIB'"
         else
-            zpwrLoggErr "where is ZPWR_LIB '$ZPWR_LIB'"
+            zpwrLogConsoleErr "where is ZPWR_LIB '$ZPWR_LIB'"
             exit 1
         fi
     fi

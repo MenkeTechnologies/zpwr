@@ -3,12 +3,12 @@
 function zpwrChangeGitCommitterEmail(){
 
     if [[ -z "$2" ]]; then
-        zpwrLoggErr "usage: zpwrChangeGitCommitterEmail <oldEmail> <newEmail>"
+        zpwrLogConsoleErr "usage: zpwrChangeGitCommitterEmail <oldEmail> <newEmail>"
         return 1
     fi
 
     if ! zpwrIsGitDir; then
-        zpwrLoggNotGit
+        zpwrLogConsoleNotGit
         return 1
     fi
 

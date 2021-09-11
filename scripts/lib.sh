@@ -75,7 +75,7 @@ function zpwrHumanReadable(){
 function zpwrPerlRemoveSpaces(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrPerlRemoveSpaces <file...>"
+        zpwrLogConsoleErr "usage: zpwrPerlRemoveSpaces <file...>"
         return 1
     fi
 
@@ -97,7 +97,7 @@ function zpwrEscapeRemove(){
 function zpwrPrettyPrintNoNewline(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrPrettyPrintNoNewline <string>"
+        zpwrLogConsoleErr "usage: zpwrPrettyPrintNoNewline <string>"
         return 1
     fi
 
@@ -111,43 +111,47 @@ function zpwrIsBinary() {
     [[ $(LC_MESSAGES=C command grep -Hm1 '^' < "${1:-$REPLY}") =~ '^Binary' ]]
 }
 
-function zpwrLoggNotGit() {
+function zpwrLogConsoleNotGit() {
 
-    zpwrLoggErr "'$(pwd)' is not a git dir"
+    zpwrLogConsoleErr "'$(pwd)' is not a git dir"
 }
 
-function zpwrLoggInfo(){
+function zpwrLogColor(){
 
-    if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrLoggInfo <msg>"
+    if [[ -z $2 ]]; then
+        zpwrLogConsoleErr "usage: zpwrLogColor <lvl> <msg>"
         return 1
     fi
-    {
-        printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____INFO: "
-        printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
-        printf "\x1b[0m"
-        printf "\n"
-    } >&1
+
+    printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____$1: "
+    shift
+    printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
+    printf "\x1b[0m"
+    printf "\n"
 }
 
-function zpwrLoggErr(){
+function zpwrLogConsoleInfo(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrLoggErr <msg>"
+        zpwrLogConsoleErr "usage: zpwrLogConsoleInfo <msg>"
         return 1
     fi
-    {
-        printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ERROR: "
-        printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
-        printf "\x1b[0m"
-        printf "\n"
-    } >&2
+    zpwrLogColor INFO "$*" >&1
+}
+
+function zpwrLogConsoleErr(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrLogConsoleErr <msg>"
+        return 1
+    fi
+    zpwrLogColor ERROR "$*" >&2
 }
 
 function zpwrNeedSudo(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrNeedSudo <file>"
+        zpwrLogConsoleErr "usage: zpwrNeedSudo <file>"
         return 1
     fi
 
@@ -158,72 +162,80 @@ function zpwrNeedSudo(){
     fi
 }
 
-function zpwrLoggConsolePrefix(){
+function zpwrLogConsolePrefix(){
 
     zpwrPrettyPrint "$ZPWR_CHAR_LOGO $*"
-    logg "$ZPWR_CHAR_LOGO $*"
+    zpwrLog "$ZPWR_CHAR_LOGO $*"
 
 }
 
-function zpwrLoggConsole(){
+function zpwrLogConsoleHeader(){
 
     zpwrPrettyPrint "$*"
-    logg "$*"
+    zpwrLogColor "$*"
 
 }
 
-function logg(){
+function zpwrLog(){
+
+    local lvl
 
     if [[ $ZPWR_COLORS == true ]]; then
-        if [[ -n $1 ]]; then
-            {
-                printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
-                printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
-                printf "\x1b[0m"
-                printf "\n"
-            } >> "$ZPWR_LOGFILE"
+        if [[ -n $2 ]]; then
+            lvl=$1
+            shift
+            zpwrLogColor $lvl "$*" >> "$ZPWR_LOGFILE"
         elif [[ -p /dev/stdin ]]; then
-            {
-                printf "\n${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____ "
-                printf "_${ZPWR_LOG_QUOTE_COLOR}$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR"
-                cat
-                printf "\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_"
-                printf "\x1b[0m"
-                printf "\n"
-            } >> "$ZPWR_LOGFILE"
-        else
-            if [[ -z "$1" ]]; then
-                zpwrLoggErr "usage: logg <msg>"
+            zpwrLogColor STDIN "$(cat)" >> "$ZPWR_LOGFILE"
+        elif [[ -z "$2" ]]; then
+                zpwrLogConsoleErr "usage: zpwrLog <lvl> <msg>"
                 return 1
-            fi
         fi
     else
-        if [[ -n $1 ]]; then
+        if [[ -n $2 ]]; then
+            lvl=$1
+            shift
             {
                 printf "\n_____________$(date)____ "
-                printf "_'%s'_ " "$@"
+                printf "_$lvl: '%s'_ " "$@"
                 printf "\n"
             } >> "$ZPWR_LOGFILE"
         elif [[ -p /dev/stdin ]]; then
             {
-                printf "\n_____________$(date)____ _'"
+                printf "\n_____________$(date)____ _STDIN: '"
                 cat
                 printf "'_ \n"
             } >> "$ZPWR_LOGFILE"
         else
             if [[ -z "$1" ]]; then
-                zpwrLoggErr "usage: logg <msg>"
+                zpwrLogConsoleErr "usage: zpwrLog <msg>"
                 return 1
             fi
         fi
     fi
 }
 
-function zpwrLoggDebug(){
+function zpwrLogDebug(){
 
     if [[ $ZPWR_DEBUG == true ]]; then
-       logg "$@" 
+       zpwrLog DEBUG "$*"
     fi
+}
+function zpwrLogTrace(){
+
+    if [[ $ZPWR_TRACE == true ]]; then
+       zpwrLog TRACE "$*"
+    fi
+}
+
+function zpwrLogError(){
+
+    zpwrLog ERROR "$*"
+}
+
+function zpwrLogInfo(){
+
+    zpwrLog INFO "$*"
 }
 
 function zpwrFail(){
@@ -249,7 +261,7 @@ function zpwrIsGitDirMessage(){
 
     if ! command git rev-parse --git-dir 2> /dev/null 1>&2; then
         printf "\x1b[0;1;31m"
-        zpwrLoggErr "NOT GIT DIR: $(pwd -P)"
+        zpwrLogConsoleErr "NOT GIT DIR: $(pwd -P)"
         printf "\x1b[0m"
         return 1
     fi
@@ -320,7 +332,7 @@ function zpwrInstallGitHubPluginsFromFile(){
     shift $((OPTIND-1))
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrInstallGitHubPluginsFromFile <repo_file>"
+        zpwrLogConsoleErr "usage: zpwrInstallGitHubPluginsFromFile <repo_file>"
         return 1
     fi
 
@@ -344,7 +356,7 @@ function zpwrInstallGitHubPluginsFromFile(){
 function zpwrOverwriteGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrOverwriteGitHubPlugin <repo>"
+        zpwrLogConsoleErr "usage: zpwrOverwriteGitHubPlugin <repo>"
         return 1
     fi
 
@@ -365,7 +377,7 @@ function zpwrOverwriteGitHubPlugin(){
 function zpwrInstallGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrInstallGitHubPlugin <repo>"
+        zpwrLogConsoleErr "usage: zpwrInstallGitHubPlugin <repo>"
         return 1
     fi
 
@@ -479,7 +491,7 @@ function proceed(){
                 exit 1
                 ;;
             *)
-                zpwrLoggErr "You must enter y(es) or n(no)"
+                zpwrLogConsoleErr "You must enter y(es) or n(no)"
                 ;;
         esac
     done
@@ -492,7 +504,7 @@ function zpwrPrettyPrint(){
         printf "%s " "$@"
         printf "\x1b[0m\n"
     else
-        zpwrLoggErr "usage: zpwrPrettyPrint <msg>"
+        zpwrLogConsoleErr "usage: zpwrPrettyPrint <msg>"
         return 1
     fi
 }
@@ -573,7 +585,7 @@ function zpwrAlternatingPrettyPrint(){
 function zpwrClearGitCache(){
 
     if ! zpwrIsGitDir; then
-        zpwrLoggNotGit
+        zpwrLogConsoleNotGit
         return 1
     fi
 
@@ -742,7 +754,7 @@ function zpwrClearList() {
                 fi
             fi
             if [[ $FOUND == false ]]; then
-                zpwrLoggErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
+                zpwrLogConsoleErr "NOT FOUND: '"'$arg'"'_____ = ""'$arg'"
             fi
         done
     else

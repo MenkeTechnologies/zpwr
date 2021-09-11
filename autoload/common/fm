@@ -4,7 +4,7 @@
 function fm(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: fm <manpage>"
+        zpwrLogConsoleErr "usage: fm <manpage>"
         return 1
     fi
 

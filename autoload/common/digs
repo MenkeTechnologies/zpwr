@@ -3,7 +3,7 @@
 function ___digs(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: digs <url...>"
+        zpwrLogConsoleErr "usage: digs <url...>"
         return 1
     fi
 
@@ -12,7 +12,7 @@ function ___digs(){
     while getopts "s" opt 2>/dev/null;do
         case $opt in
             s) secret=true;;
-            *) zpwrLoggErr "bad opt"; return 1
+            *) zpwrLogConsoleErr "bad opt"; return 1
         esac
     done
     shift $(($OPTIND-1))
@@ -23,7 +23,7 @@ function ___digs(){
     }
 
     if [[ -n $colo ]] && [[ ! -f "$HOME/conf.whois" ]]; then
-        zpwrLoggErr "cannot proceed without $HOME/conf.whois for grc"
+        zpwrLogConsoleErr "cannot proceed without $HOME/conf.whois for grc"
         return 1
     fi
 
@@ -36,7 +36,7 @@ function ___digs(){
         }
 
         if [[ -z "$exe" ]]; then
-            zpwrLoggErr "cannot proceed without proxychains" return 1
+            zpwrLogConsoleErr "cannot proceed without proxychains" return 1
         fi
 
 
@@ -137,7 +137,7 @@ function ___digs(){
                 exec 2>/dev/tty
             done | less -MN
         else
-            zpwrLoggErr "you need dig"
+            zpwrLogConsoleErr "you need dig"
         fi
     else
 
@@ -204,7 +204,7 @@ function ___digs(){
                 exec 2>/dev/tty
             done | less -MN
         else
-            zpwrLoggErr "you need dig"
+            zpwrLogConsoleErr "you need dig"
         fi
     fi
 }

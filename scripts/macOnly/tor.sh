@@ -47,7 +47,7 @@ INTERFACE=Wi-Fi
 #done 2>/dev/null &
 
 zpwrCommandExists spoof || {
-    zpwrLoggErr "you need spoof!. Exiting."
+    zpwrLogConsoleErr "you need spoof!. Exiting."
     exit
 }
 

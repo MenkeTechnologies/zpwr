@@ -75,7 +75,7 @@ export ZPWR_COMPLETION_DIR='zsh-more-completions'
 export ZPWR_CORRECT=true
 # aliases expand after spelling correction
 export ZPWR_CORRECT_EXPAND=true
-# turns on debugging logs using logg function
+# turns on debugging logs using zpwrLog function
 export ZPWR_DEBUG=false
 # default OMZ theme if Powerlevel 10k not used
 export ZPWR_DEFAULT_OMZ_THEME=simonoff
@@ -113,13 +113,13 @@ export ZPWR_INTERACTIVE_MENU_SELECT=true
 export ZPWR_KEYTIMEOUT=10
 # whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
-# logg function underscore color ANSI codes
+# zpwrLog function underscore color ANSI codes
 export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
-# logg function quote color
+# zpwrLog function quote color
 export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
-# logg function timestamp color
+# zpwrLog function timestamp color
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
-# logg function message color
+# zpwrLog function message color
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false

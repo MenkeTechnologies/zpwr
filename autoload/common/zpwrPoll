@@ -3,8 +3,8 @@
 function ___zpwrPoll() {
 
     if ! zpwrIsGitDir; then
-        zpwrLoggNotGit
-        zpwrLoggErr "usage: zpwrPoll <cmd> <time> <refspec>"
+        zpwrLogConsoleNotGit
+        zpwrLogConsoleErr "usage: zpwrPoll <cmd> <time> <refspec>"
         return 1
     fi
 

@@ -5,7 +5,7 @@ function va() {
     if [[ -d "/var" ]]; then
         cd "/var"
     else
-        zpwrLoggErr "'/var' is not a dir."
+        zpwrLogConsoleErr "'/var' is not a dir."
     fi
 
 }

@@ -3,7 +3,7 @@
 function ___zpwrLineCount(){
 
     if [[ -z "$2" ]]; then
-        zpwrLoggErr "usage: zpwrLineCount <cmd> <search>"
+        zpwrLogConsoleErr "usage: zpwrLineCount <cmd> <search>"
         return 1
     fi
 

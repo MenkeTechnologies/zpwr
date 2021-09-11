@@ -266,7 +266,7 @@ function zpwrBindAliasesLate(){
                 alias api="$ZPWR_FULL_SUDO pkg install -y"
                 alias apa="yes | sudo pkg -E update; $ZPWR_FULL_SUDO pkg upgrade -y"
         else
-            zpwrLoggErr "unsupported OS $ZPWR_OS_TYPE"
+            zpwrLogConsoleErr "unsupported OS $ZPWR_OS_TYPE"
         fi
         chooseNvimVim
     fi

@@ -3,7 +3,7 @@
 function zpwrPrintMap(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrPrintMap <map...>"
+        zpwrLogConsoleErr "usage: zpwrPrintMap <map...>"
         return 1
     fi
 

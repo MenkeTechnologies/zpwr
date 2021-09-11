@@ -3,7 +3,7 @@
 function zpwrGetGtagsEdit(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrGetGtagsEdit <editor>"
+        zpwrLogConsoleErr "usage: zpwrGetGtagsEdit <editor>"
         return 1
     fi
 
@@ -15,10 +15,10 @@ function zpwrGetGtagsEdit(){
     if [[ -n "$BUFFER" ]]; then
         mywords=(${(z)BUFFER})
         firstdir=${mywords[2]:h}
-        zpwrLoggDebug "builtin cd $firstdir\""
+        zpwrLogDebug "builtin cd $firstdir\""
         #:h takes aways last "
         BUFFER="builtin cd $firstdir\"; $editor $BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
-        zpwrLoggDebug "$BUFFER"
+        zpwrLogDebug "$BUFFER"
         print -zr -- "$BUFFER"
     else
         return

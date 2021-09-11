@@ -3,12 +3,12 @@
 function ___zpwrEditTag(){
 
     if ! zpwrIsGitDir; then
-        zpwrLoggNotGit
+        zpwrLogConsoleNotGit
         return 1
     fi
 
     if [[ -n "$2" ]]; then
-        zpwrLoggErr "usage: zpwrEditTag <tag>"
+        zpwrLogConsoleErr "usage: zpwrEditTag <tag>"
         return 1
     fi
 

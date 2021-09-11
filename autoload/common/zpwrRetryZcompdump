@@ -2,8 +2,8 @@
 # vim: set ft=sh:
 
 # compsys completion for z was not found when it should have been
-logg "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
-logg "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
+zpwrLog "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
+zpwrLog "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
 lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
 rm "$ZSH_COMPDUMP"
 compinit -u -d "$ZSH_COMPDUMP"

@@ -727,23 +727,23 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert "$output" is_empty
 }
 
-@test 'zpwrExists zpwrLoggDebug' {
-    run zpwrExists zpwrLoggDebug
+@test 'zpwrExists zpwrLogDebug' {
+    run zpwrExists zpwrLogDebug
     assert $state equals 0
 }
 
-@test 'zpwrExists zpwrLoggErr' {
-    run zpwrExists zpwrLoggErr
+@test 'zpwrExists zpwrLogConsoleErr' {
+    run zpwrExists zpwrLogConsoleErr
     assert $state equals 0
 }
 
-@test 'zpwrExists zpwrLoggNotGit' {
-    run zpwrExists zpwrLoggNotGit
+@test 'zpwrExists zpwrLogConsoleNotGit' {
+    run zpwrExists zpwrLogConsoleNotGit
     assert $state equals 0
 }
 
-@test 'zpwrExists logg' {
-    run zpwrExists logg
+@test 'zpwrExists zpwrLog' {
+    run zpwrExists zpwrLog
     assert $state equals 0
 }
 
@@ -892,8 +892,8 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $? equals 0
 }
 
-@test 'logg fn' {
-    run type logg
+@test 'zpwrLog fn' {
+    run type zpwrLog
     assert $? equals 0
 }
 

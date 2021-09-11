@@ -5,7 +5,7 @@ function zald(){
     if [[ -d "$ZPWR_AUTOLOAD_DARWIN" ]]; then
         cd "$ZPWR_AUTOLOAD_DARWIN"
     else
-        zpwrLoggErr "ZPWR_AUTOLOAD_DARWIN '$ZPWR_AUTOLOAD_DARWIN' is not a directory."
+        zpwrLogConsoleErr "ZPWR_AUTOLOAD_DARWIN '$ZPWR_AUTOLOAD_DARWIN' is not a directory."
     fi
 
 }

@@ -172,7 +172,7 @@ fi
 zpwrExists pssh && function pir(){
 
     if ! test -s "$ZPWR_LOCAL/hosts.txt"; then
-        zpwrLoggErr "you need hosts.txt in your $ZPWR_LOCAL"
+        zpwrLogConsoleErr "you need hosts.txt in your $ZPWR_LOCAL"
         return 1
     fi
     pssh --inline-stdout --timeout 90 -h "$ZPWR_LOCAL/hosts.txt" "$@"
@@ -190,7 +190,7 @@ fi
 if ! zpwrIsZsh; then
     if test -f "$ZPWR_TOKEN_PRE"; then
         if ! source "$ZPWR_TOKEN_PRE"; then
-            zpwrLoggErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+            zpwrLogConsoleErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
         fi
     else
         touch "$ZPWR_TOKEN_PRE"
@@ -198,7 +198,7 @@ if ! zpwrIsZsh; then
 
     if test -f "$ZPWR_TOKEN_POST"; then
         if ! source "$ZPWR_TOKEN_POST"; then
-            zpwrLoggErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+            zpwrLogConsoleErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
         fi
     else
         touch "$ZPWR_TOKEN_POST"

@@ -544,8 +544,8 @@ zpwrIsZsh(){zpwrIsZsh23,845
         function zpwrExists(){zpwrExists34,1021
     function zpwrExists(){zpwrExists44,1259
 function chooseNvimVim(){chooseNvimVim51,1365
-function zpwrLoggNotGit() {zpwrLoggNotGit70,1823
-function zpwrLoggErr(){zpwrLoggErr75,1889
+function zpwrLogConsoleNotGit() {zpwrLogConsoleNotGit70,1823
+function zpwrLogConsoleErr(){zpwrLogConsoleErr75,1889
 export ZPWR_ALL_GIT_DIRS="$ZPWR_LOCAL/zpwrGitDirs.txt"ZPWR_ALL_GIT_DIRS107,3727
 export ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"ZPWR_LOGFILE108,3782
     export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'ZPWR_EXA_COMMAND113,3955
@@ -660,10 +660,10 @@ function s(){s724,25561
             url="https://google.com/search?q=$out"url744,26076
             out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"out752,26309
             url="https://google.com/search?q=$out"url753,26420
-function zpwrLoggConsolePrefix(){zpwrLoggConsolePrefix758,26517
-function zpwrLoggConsole(){zpwrLoggConsole763,26617
-function logg(){logg769,26680
-function zpwrLoggDebug(){zpwrLoggDebug811,28080
+function zpwrLogConsolePrefix(){zpwrLoggConsolePrefix758,26517
+function zpwrLogConsoleHeader(){zpwrLoggConsole763,26617
+function zpwrLog(){logg769,26680
+function zpwrLogDebug(){zpwrLoggDebug811,28080
 function xx(){xx818,28170
     cmd="$1"cmd822,28218
     DONE=falseDONE826,28306

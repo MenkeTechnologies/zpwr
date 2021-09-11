@@ -3,7 +3,7 @@
 function zpwrScnew(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrScnew <file>"
+        zpwrLogConsoleErr "usage: zpwrScnew <file>"
         return 1
     fi
 

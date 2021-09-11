@@ -5,7 +5,7 @@ function pg() {
     if [[ -d "$HOME/PycharmProjects" ]]; then
         cd "$HOME/PycharmProjects"
     else
-        zpwrLoggErr "HOME/PycharmProjects '$HOME/PycharmProjects' is not a dir."
+        zpwrLogConsoleErr "HOME/PycharmProjects '$HOME/PycharmProjects' is not a dir."
     fi
 
 }
