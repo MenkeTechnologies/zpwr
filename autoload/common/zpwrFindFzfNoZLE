@@ -3,7 +3,7 @@
 function zpwrFindFzfNoZLE(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrFindFzfNoZLE <editor>"
+        zpwrLogConsoleErr "usage: zpwrFindFzfNoZLE <editor>"
         return 1
     fi
 

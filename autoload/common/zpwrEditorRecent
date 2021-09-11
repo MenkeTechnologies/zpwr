@@ -12,7 +12,7 @@ function zpwrEditorRecent(){
     fi
     mywords=( ${(z)BUFFER} )
     BUFFER="$editor $BUFFER"
-    zpwrLoggDebug "$BUFFER"
+    zpwrLogDebug "$BUFFER"
     print -sr -- "$BUFFER"
     eval "$BUFFER"
 }

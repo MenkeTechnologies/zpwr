@@ -3,7 +3,7 @@
 function zpwrScriptToPDF(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrScriptToPDF <script>"
+        zpwrLogConsoleErr "usage: zpwrScriptToPDF <script>"
         return 1
     fi
     local tempFile

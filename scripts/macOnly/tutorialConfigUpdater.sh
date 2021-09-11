@@ -48,13 +48,13 @@ shopt -s dotglob
 cd "$ZPWR_DIR" || exit 1
 git checkout dev
 
-logg "Copying scripts to custom Installer Repo $ZPWR_DIR"
+zpwrLog "Copying scripts to custom Installer Repo $ZPWR_DIR"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 
 type=ctags
 
 if zpwrExists gtags; then
-    logg "Regen GNU gtags to $HOME/GTAGS with $type parser"
+    zpwrLog "Regen GNU gtags to $HOME/GTAGS with $type parser"
     (
     builtin cd "$HOME"
     command rm GPATH GRTAGS GTAGS 2>/dev/null
@@ -72,34 +72,34 @@ if zpwrExists gtags; then
         fi
     done | gtags --accept-dotfiles --gtagslabel=$type -f -
 
-    logg "gtags size: $(global -x ".*" | wc -l)"
+    zpwrLog "gtags size: $(global -x ".*" | wc -l)"
 
     )
 else
-    zpwrLoggErr "gtags does not exist"
+    zpwrLogConsoleErr "gtags does not exist"
 fi
 
-logg "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
+zpwrLog "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$ZPWR_DIR_INSTALL_GTAGS"
 
-logg "Updating vim plugins list"
+zpwrLog "Updating vim plugins list"
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$ZPWR_DIR_INSTALL/.vimbundle"
 perl -0 -i -pe 's@\n.*wakatime.*\n@\n@g' "$ZPWR_INSTALL/.vimbundle"
-logg "Updating zsh plugins list"
+zpwrLog "Updating zsh plugins list"
 printf "" > "$ZPWR_DIR_INSTALL/.zshplugins"
 
 if [[ -z $ZSH_CUSTOM ]]; then
-    zpwrLoggErr "ZSH_CUSTOM is null so can not update zsh plugins list"
+    zpwrLogConsoleErr "ZSH_CUSTOM is null so can not update zsh plugins list"
 else
     for dir in "$ZSH_CUSTOM/plugins/"*; do
         if basename "$dir" | grep -sq "example";then
-            logg "not adding zsh plugin $dir"
+            zpwrLog "not adding zsh plugin $dir"
             continue;
         else
-            logg "adding zsh plugin $dir"
+            zpwrLog "adding zsh plugin $dir"
         fi
 
         bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR_INSTALL/.zshplugins"
@@ -109,36 +109,36 @@ fi
 
 git add .
 git commit -m "$commitMessage"
-logg "Status"
+zpwrLog "Status"
 git status
-logg "Pushing..."
+zpwrLog "Pushing..."
 git push origin dev
 #}}}***********************************************************
 
 #{{{ MARK:tutorialDir
 #**************************************************************
-logg "Copying zshrc"
+zpwrLog "Copying zshrc"
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$tutorialDir/zsh"
-logg "Copying vimrc"
+zpwrLog "Copying vimrc"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$tutorialDir/vim"
-logg "Copying minimal minvimrc"
+zpwrLog "Copying minimal minvimrc"
 cp "$ZPWR_ENV/.minvimrc" "$tutorialDir/vim"
 
-logg "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
+zpwrLog "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 
-logg "Copying tmux.conf"
+zpwrLog "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$ZPWR_TMUX/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
-logg "Copying shell_aliases_functions $ZPWR_ALIAS_FILE to $tutorialDir"
+zpwrLog "Copying shell_aliases_functions $ZPWR_ALIAS_FILE to $tutorialDir"
 cp "$ZPWR_ALIAS_FILE" "$tutorialDir/aliases"
 
-logg "Copying shell scripts"
+zpwrLog "Copying shell scripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/"*
 cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
@@ -150,32 +150,32 @@ cp -R "$HOME/.vim/UltiSnips" "$tutorialDir"
 #echo "# Mac Only Scripts" >> "$README"
 #bash "$ZPWR_SCRIPTS/headerSummarizer.sh" "$ZPWR_SCRIPTS/"macOnly/*.sh >> "$README"
 
-#logg "Copying tags file"
+#zpwrLog "Copying tags file"
 #cp "$ZPWR_SCRIPTS/tags" "$tutorialDir/shell"
 
-#logg "Copying $HOME/.ctags"
+#zpwrLog "Copying $HOME/.ctags"
 #cp "$HOME/.ctags" "$tutorialDir/ctags"
 
-logg "Copying vis ncmpcpp mpd"
+zpwrLog "Copying vis ncmpcpp mpd"
 cp -R "$HOME/.config/vis" "$tutorialDir/ncmpcpp-mpd-vis"
 
-logg "Emptying mpd log"
+zpwrLog "Emptying mpd log"
 echo >"$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
 
 echo >"$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
 cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
-logg "Copying powerlevel config"
+zpwrLog "Copying powerlevel config"
 cp "$ZPWR_PROMPT_FILE" "$tutorialDir"
 
-#logg "Copying vim plugins"
+#zpwrLog "Copying vim plugins"
 
 #sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
 cd "$tutorialDir" || exit 1
 
-#logg "Removing .git dirs..."
+#zpwrLog "Removing .git dirs..."
 
 #while read -r file; do
 #if [[ -d "$file" ]]; then
@@ -189,12 +189,12 @@ cd "$tutorialDir" || exit 1
 
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$tutorialDir/vim/.vimbundle"
 
-logg "Updating Tutorial Files Repo"
+zpwrLog "Updating Tutorial Files Repo"
 git add .
 git commit -m "$commitMessage"
-logg "Status..."
+zpwrLog "Status..."
 git status
-logg "Pushing..."
+zpwrLog "Pushing..."
 git push
 
 #}}}***********************************************************
@@ -206,7 +206,7 @@ dotdir="$websiteDir/downloads/dotfiles"
 
 [[ ! -d "$dotdir" ]] && mkdir -p "$dotdir"
 
-logg "Copying config files to websiteDir"
+zpwrLog "Copying config files to websiteDir"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$dotdir/.."
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir/.."
 cp "$ZPWR_ALIAS_FILE" "$dotdir/.."
@@ -217,7 +217,7 @@ cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir"
 cp "$ZPWR_ALIAS_FILE" "$dotdir"
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$dotdir"
 
-logg "Copying scripts to $websiteDir"
+zpwrLog "Copying scripts to $websiteDir"
 rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -p "$websiteDir/downloads/scripts"
@@ -233,8 +233,8 @@ cd ..
 
 git add .
 git commit -m "$commitMessage"
-logg "Status..."
+zpwrLog "Status..."
 git status
-logg "Pushing..."
+zpwrLog "Pushing..."
 git push
 #}}}***********************************************************

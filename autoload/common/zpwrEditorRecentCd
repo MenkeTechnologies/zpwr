@@ -14,11 +14,11 @@ function zpwrEditorRecentCd(){
     BUFFER="$editor $BUFFER"
 
     firstdir=${mywords[1]:h}
-    zpwrLoggDebug "builtin cd $firstdir\""
+    zpwrLogDebug "builtin cd $firstdir\""
     #:h takes aways last "
     eval "builtin cd $firstdir\""
 
-    zpwrLoggDebug "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
+    zpwrLogDebug "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
     print -sr -- "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
     eval "$BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
 }

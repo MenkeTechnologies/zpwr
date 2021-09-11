@@ -3,7 +3,7 @@
 function zpwrStartAutoComplete(){
 
     if zpwrExists .autocomplete.compadd; then
-        zpwrLoggErr "already loaded zsh-autocomplete"
+        zpwrLogConsoleErr "already loaded zsh-autocomplete"
         return 1
     fi
 
@@ -16,7 +16,7 @@ function zpwrStartAutoComplete(){
         zpwrBindOverrideAutoComplete
         zinit load MenkeTechnologies/zsh-autocomplete
     else
-        zpwrLoggErr "cannot switch to autocomplete without zinit."
+        zpwrLogConsoleErr "cannot switch to autocomplete without zinit."
         return 1
     fi
 

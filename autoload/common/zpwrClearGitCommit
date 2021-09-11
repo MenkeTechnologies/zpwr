@@ -3,12 +3,12 @@
 function zpwrClearGitCommit(){
 
     if ! zpwrIsGitDir; then
-        zpwrLoggNotGit
+        zpwrLogConsoleNotGit
         return 1
     fi
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrClearGitCommit <regex>"
+        zpwrLogConsoleErr "usage: zpwrClearGitCommit <regex>"
         return 1
     fi
 

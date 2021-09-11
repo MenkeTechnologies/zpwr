@@ -3,7 +3,7 @@
 function ___b(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: b <cmds> or b -s <sleeptime> <cmds>"
+        zpwrLogConsoleErr "usage: b <cmds> or b -s <sleeptime> <cmds>"
         return 1
     fi
 

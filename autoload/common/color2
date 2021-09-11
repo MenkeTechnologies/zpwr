@@ -5,7 +5,7 @@ function ___color2(){
     if zpwrIsZsh; then
         exec 2> >(redText.sh)
     else
-        zpwrLoggErr "only for zsh"
+        zpwrLogConsoleErr "only for zsh"
         return 1
     fi
 }

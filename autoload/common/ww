@@ -3,7 +3,7 @@
 function ___ww(){
 
     if [[ -z "$1" ]]; then
-       zpwrLoggErr "usage: ww <cmd> to run <cmd> forever" 
+       zpwrLogConsoleErr "usage: ww <cmd> to run <cmd> forever" 
        return 1
     fi
     while true; do

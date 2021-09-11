@@ -3,7 +3,7 @@
 function ___gcl() {
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: gcl <repo>"
+        zpwrLogConsoleErr "usage: gcl <repo>"
         return 1
     fi
 
@@ -16,7 +16,7 @@ function ___gcl() {
     if [[ -d "$dir_name" ]]; then
         cd "$dir_name"
     else
-        zpwrLoggErr "$dir_name failed to clone"
+        zpwrLogConsoleErr "$dir_name failed to clone"
         return 1
     fi
 }

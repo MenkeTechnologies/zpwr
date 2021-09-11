@@ -3,7 +3,7 @@
 function ___www(){
 
     if [[ -z "$2" ]]; then
-       zpwrLoggErr "usage: www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
+       zpwrLogConsoleErr "usage: www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
        return 1
     fi
 

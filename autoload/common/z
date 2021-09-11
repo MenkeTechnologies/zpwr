@@ -9,7 +9,7 @@ function z(){
         elif zpwrExists _z; then
             ZPWR_VARS[zcmd]="_z 2>&1"
         else
-            zpwrLoggErr "ERROR: zshz and _z do not exist."
+            zpwrLogConsoleErr "ERROR: zshz and _z do not exist."
             return 1
         fi
     fi

@@ -5,7 +5,7 @@ function zlt() {
     if [[ -d "$ZPWR_LOCAL_TEMP" ]]; then
         cd "$ZPWR_LOCAL_TEMP"
     else
-        zpwrLoggErr "ZPWR_LOCAL_TEMP '$ZPWR_LOCAL_TEMP' is not a dir."
+        zpwrLogConsoleErr "ZPWR_LOCAL_TEMP '$ZPWR_LOCAL_TEMP' is not a dir."
     fi
 
 }

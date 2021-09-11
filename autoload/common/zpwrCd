@@ -33,7 +33,7 @@ function zpwrCd(){
         base="$(dirname "$1")"
 
         if [[ $base == "." ]]; then
-            zpwrLoggErr "'$1': Not a valid file or directory."
+            zpwrLogConsoleErr "'$1': Not a valid file or directory."
             return 1
         fi
 
@@ -42,7 +42,7 @@ function zpwrCd(){
             test -d "$base" && cd "$base"&& return 0
             base="$(dirname "$base")"
         done
-        zpwrLoggErr "'$1': Not a valid file or directory."
+        zpwrLogConsoleErr "'$1': Not a valid file or directory."
         return 1
     fi
 

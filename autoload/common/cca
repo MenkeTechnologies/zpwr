@@ -3,7 +3,7 @@
 function ___cca() {
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: cca <file...>"
+        zpwrLogConsoleErr "usage: cca <file...>"
         return 1
     fi
 
@@ -13,7 +13,7 @@ function ___cca() {
     firstdir=${firstArg:A:h}
     BUFFER="cd \"$firstdir\"; c ""${@:A}""; "
     print -sr "$BUFFER"
-    logg "$BUFFER"
+    zpwrLog "$BUFFER"
     eval "$BUFFER"
 }
 

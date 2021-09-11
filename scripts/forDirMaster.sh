@@ -57,7 +57,7 @@ branch='$(zsh-gacp-mainBranch)'
 dir="$1"
 
 if [[ ! -d "$dir" ]]; then
-    zpwrLoggErr "usage: forDirMaster.sh <dir> to run <cmd> in each dir/*"
+    zpwrLogConsoleErr "usage: forDirMaster.sh <dir> to run <cmd> in each dir/*"
     exit 1
 fi
 

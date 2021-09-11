@@ -5,7 +5,7 @@ function zlr() {
     if [[ -d "$ZPWR_LOCAL/rcBackups" ]]; then
         cd "$ZPWR_LOCAL/rcBackups"
     else
-        zpwrLoggErr "ZPWR_LOCAL/rcBackups '$ZPWR_LOCAL/rcBackups' is not a dir."
+        zpwrLogConsoleErr "ZPWR_LOCAL/rcBackups '$ZPWR_LOCAL/rcBackups' is not a dir."
     fi
 
 }

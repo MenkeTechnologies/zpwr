@@ -3,7 +3,7 @@
 function gil(){
 
     if ! zpwrIsGitDir; then
-       zpwrLoggNotGit
+       zpwrLogConsoleNotGit
        return 1
     fi
 
@@ -12,7 +12,7 @@ function gil(){
     file=".git/info/exclude"
 
     if [[ ! -f "$file" ]]; then
-       zpwrLoggErr "$file must exist"
+       zpwrLogConsoleErr "$file must exist"
        return 1
     fi
 

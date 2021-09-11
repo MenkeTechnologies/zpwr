@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: logg
+# name: zpwrLog
 # key: lo
 # --
-logg "______'"'$1'"'_____ = ""'$1'"
+zpwrLog "______'"'$1'"'_____ = ""'$1'"

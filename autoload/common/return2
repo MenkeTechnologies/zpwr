@@ -5,7 +5,7 @@ function ___return2(){
     if zpwrIsZsh; then
         exec 2> /dev/tty
     else
-        zpwrLoggErr "only for zsh"
+        zpwrLogConsoleErr "only for zsh"
         return 1
     fi
 }

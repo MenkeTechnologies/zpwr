@@ -3,7 +3,7 @@
 function ___pre(){
 
     if [[ -z "$2" ]]; then
-        zpwrLoggErr "usage: pre <prefix> <cmd>"
+        zpwrLogConsoleErr "usage: pre <prefix> <cmd>"
         return 1
     fi
 

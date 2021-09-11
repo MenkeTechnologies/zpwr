@@ -9,7 +9,7 @@ function zpwrCleanDirs() {
     local dir files
 
     if ! (( $#zpwrDirsClean )); then
-        zpwrLoggErr "zpwrDirsClean is empty."
+        zpwrLogConsoleErr "zpwrDirsClean is empty."
         return 1
     fi
 

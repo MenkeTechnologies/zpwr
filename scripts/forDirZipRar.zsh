@@ -53,6 +53,8 @@ function zpwrForDirRarZipProcess() {
 
         if ! builtin cd -q "$dir"; then
             zpwrForDirRarZipErr "can not cd to $dir"
+        else
+            zpwrLogDebug "At $PWD"
         fi
 
         zips=( *.zip )

@@ -3,7 +3,7 @@
 function zpwrGoclean() {
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrGoclean <package>"
+        zpwrLogConsoleErr "usage: zpwrGoclean <package>"
         return 1
     fi
 
@@ -21,11 +21,11 @@ function zpwrGoclean() {
     bin_dir="$GOPATH/pkg/$ost/$pkg"
 
     if [[ ! -d "$src_dir" ]]; then
-        zpwrLoggErr "$src_dir from $pkg does not exist"
+        zpwrLogConsoleErr "$src_dir from $pkg does not exist"
         return 1
     fi
     if [[ ! -d "$bin_dir" ]]; then
-        zpwrLoggErr "$bin_dirfrom $pkg does not exist"
+        zpwrLogConsoleErr "$bin_dirfrom $pkg does not exist"
     fi
     # Clean removes object files from package source directories (ignore error)
     go clean -i $pkg 2>/dev/null

@@ -10,7 +10,7 @@ function ___zpz(){
         cd "$dirsc"
         zpwrGitCheckoutRebasePush
     else
-        zpwrLoggErr "$dirsc does not exist"
+        zpwrLogConsoleErr "$dirsc does not exist"
     fi
 }
 

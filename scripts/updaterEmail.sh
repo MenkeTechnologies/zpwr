@@ -13,6 +13,6 @@
 if [[ -n $ZPWR_EMAIL ]]; then
     (cat "$ZPWR_SCRIPTS/updater.sh" | bash -l 2>&1 | tee "$ZPWR_LOGFILE" | mutt -s \"Log from $(date)\" $ZPWR_EMAIL 2>"$ZPWR_LOGFILE" &)
 else
-    zpwrLoggErr "cannot proceed without \$ZPWR_EMAIL"
+    zpwrLogConsoleErr "cannot proceed without \$ZPWR_EMAIL"
 fi
 

@@ -3,7 +3,7 @@
 function zpwrContribCountLines(){
 
     if ! zpwrIsGitDir; then
-       zpwrLoggNotGit
+       zpwrLogConsoleNotGit
        return 1
     fi
 
@@ -30,7 +30,7 @@ function zpwrContribCountLines(){
 
     if ! test -f "$ZPWR_TEMPFILE"; then
         printf "\x1b[0;1;31m"
-        zpwrLoggErr "where is $ZPWR_TEMPFILE"
+        zpwrLogConsoleErr "where is $ZPWR_TEMPFILE"
         printf "\x1b[0m"
         return 1
     fi

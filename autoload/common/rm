@@ -3,7 +3,7 @@
 function ___rm(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: rm <file>"
+        zpwrLogConsoleErr "usage: rm <file>"
         return 1
     fi
 

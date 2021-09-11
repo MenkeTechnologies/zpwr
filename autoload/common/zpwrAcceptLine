@@ -42,7 +42,7 @@ function zpwrAcceptLine () {
         # NOT touchtest t
         if [[ $BUFFER =~ ^([[:space:]]*)([[:graph:]]+=[[:graph:]]+[[:space:]]+)*(([\\\"\']*builtin[\\\"\']*[[:space:]]+)*[\\\"\']*command[\\\"\']*)?([[:space:]]*)(([\\\"\']*sudo[\\\"\']*([[:space:]]+)((-[ABbEHnPSis]+[[:space:]]*|-[CghpTu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*([\\\"\']*env[\\\"\']*[[:space:]]+(-[iv]+[[:space:]]*|-[PSu][[:space:]=]+[[:graph:]]+[[:space:]]+|--)*)*([[:graph:]]+=[[:graph:]]+[[:space:]]+)*)*([[:space:]])*[\\\"\']*"$command"[\\\"\']*([^[:alnum:]]|$)(.*)$ ]]; then
             ZPWR_WILL_CLEAR=true
-            zpwrLoggDebug "found '$command' in '$BUFFER' with matches '$match'"
+            zpwrLogDebug "found '$command' in '$BUFFER' with matches '$match'"
             break
         fi
     done

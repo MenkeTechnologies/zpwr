@@ -4,7 +4,7 @@ function ___zpwrVerbsWidgetAccept(){
 
     zle .kill-whole-line
     BUFFER="$(zpwrVerbsFZF)"
-    zpwrLoggDebug "$BUFFER"
+    zpwrLogDebug "$BUFFER"
     zle .accept-line
 }
 

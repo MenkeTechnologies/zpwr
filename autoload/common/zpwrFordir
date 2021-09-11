@@ -3,7 +3,7 @@
 function zpwrFordir(){
 
     if [[ -z "$2" ]]; then
-       zpwrLoggErr "usage: zpwrFordir [ -q ] <cmd> <dirs> to run <cmd> in each dir"
+       zpwrLogConsoleErr "usage: zpwrFordir [ -q ] <cmd> <dirs> to run <cmd> in each dir"
        return 1
     fi
 
@@ -14,7 +14,7 @@ function zpwrFordir(){
     cmd="$1"
 
     if [[ -d "$cmd" || -f "$cmd" ]]; then
-       zpwrLoggErr "usage: zpwForDir [ -q ] <cmd> <dirs> to run <cmd> in each dir"
+       zpwrLogConsoleErr "usage: zpwForDir [ -q ] <cmd> <dirs> to run <cmd> in each dir"
        return 1
     fi
 

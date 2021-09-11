@@ -30,7 +30,7 @@ function zpwrUpdate(){
 
     if [[ -d "$ZPWR" ]]; then
         builtin cd "$ZPWR"
-        logg $(git pull 2>&1)
+        zpwrLog $(git pull 2>&1)
     fi
 
     builtin cd "$ZPWR"

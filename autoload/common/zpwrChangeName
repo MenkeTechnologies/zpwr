@@ -3,7 +3,7 @@
 function zpwrChangeName(){
 
     if [[ -z "$3" ]]; then
-        zpwrLoggErr "usage: zpwrChangeName <rootdir> <prefix> <file/terms...>"
+        zpwrLogConsoleErr "usage: zpwrChangeName <rootdir> <prefix> <file/terms...>"
         return 1
     fi
     local oldName newName arg newPrefix rootDir

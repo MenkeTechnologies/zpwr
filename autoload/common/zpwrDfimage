@@ -3,7 +3,7 @@
 function zpwrDfimage(){
 
     if ! zpwrCommandExists docker; then
-        zpwrLoggErr 'docker command is missing'
+        zpwrLogConsoleErr 'docker command is missing'
         return 1
     fi
 

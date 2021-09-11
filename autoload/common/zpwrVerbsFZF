@@ -3,11 +3,11 @@
 function ___zpwrVerbsFZF(){
 
     if [[ ! -s "${ZPWR_LOCAL_ENV}Key.txt" ]]; then
-        logg "regenerating keys for $ZPWR_LOCAL_ENV"
+        zpwrLog "regenerating keys for $ZPWR_LOCAL_ENV"
         zpwrRegenSearchEnv
     fi
     if [[ ! -s "${ZPWR_LOCAL_ENV}Value.txt" ]]; then
-        logg "regenerating values for $ZPWR_LOCAL_ENV"
+        zpwrLog "regenerating values for $ZPWR_LOCAL_ENV"
         zpwrRegenSearchEnv
     fi
 

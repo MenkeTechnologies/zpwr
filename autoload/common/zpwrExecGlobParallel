@@ -3,7 +3,7 @@
 function zpwrExecGlobParallel(){
 
     if [[ -z "$2" ]]; then
-        zpwrLoggErr "usage: zpwrExecGlobParallel <glob> <command with auto \$f replacement and 1 level of eval>"
+        zpwrLogConsoleErr "usage: zpwrExecGlobParallel <glob> <command with auto \$f replacement and 1 level of eval>"
         return 1
     fi
     emulate -L zsh
@@ -25,7 +25,7 @@ function zpwrExecGlobParallel(){
         if [[ -f "$ZPWR_TEMPFILE4" ]]; then
             for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
                 test -z "$f" && continue
-                zpwrLoggErr "FAILED: ${(e)command}"
+                zpwrLogConsoleErr "FAILED: ${(e)command}"
             done
         fi
     }
@@ -53,7 +53,7 @@ function zpwrExecGlobParallel(){
     for f in "${files[@]}"; do
         key="$$-${f:t}-$(du "$f" | awk '{print $1}')"
         if ! (( ${+ZPWR_PROCESSED[$key]} )); then
-            zpwrLoggInfo "${(e)command}"
+            zpwrLogConsoleInfo "${(e)command}"
             if ! eval "${(e)command}"; then
                 echo "${f:A}" >> "$ZPWR_TEMPFILE4"
             fi &
@@ -74,7 +74,7 @@ function zpwrExecGlobParallel(){
             rel="${f:t}"
             key="$$-${rel}-$(du "$f" | awk '{print $1}')"
             unset "ZPWR_PROCESSED[$key]"
-            zpwrLoggErr "FAILED: ${(e)command}"
+            zpwrLogConsoleErr "FAILED: ${(e)command}"
         done
     fi
 

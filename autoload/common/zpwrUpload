@@ -3,7 +3,7 @@
 function zpwrUpload(){
 
     if [[ -z "$2" ]]; then
-        zpwrLoggErr "usage: upload <file> <URL>"
+        zpwrLogConsoleErr "usage: upload <file> <URL>"
         return 1
     fi
     command curl -vvv -fsSL -F file=@"$1" http://"$2"

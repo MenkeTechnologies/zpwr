@@ -3,7 +3,7 @@
 function zpwrExecGlob(){
 
     if [[ -z "$2" ]]; then
-        zpwrLoggErr "usage: zpwrExecGlob <glob> <command with auto \$f replacement and 1 level of eval>"
+        zpwrLogConsoleErr "usage: zpwrExecGlob <glob> <command with auto \$f replacement and 1 level of eval>"
         return 1
     fi
     emulate -L zsh
@@ -33,7 +33,7 @@ function zpwrExecGlob(){
     for f in "${files[@]}"; do
         key="$$-${f:t}-$(du "$f" | awk '{print $1}')"
         if ! (( ${+ZPWR_PROCESSED[$key]} )); then
-            zpwrLoggInfo "${(e)command}"
+            zpwrLogConsoleInfo "${(e)command}"
             if eval "${(e)command}"; then
                 ZPWR_PROCESSED[$key]="${f:A}"
             else
@@ -45,7 +45,7 @@ function zpwrExecGlob(){
     done
 
     for f in "${failed[@]}"; do
-        zpwrLoggErr "FAILED: ${(e)command}"
+        zpwrLogConsoleErr "FAILED: ${(e)command}"
     done
 
 }

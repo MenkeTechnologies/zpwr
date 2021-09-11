@@ -3,7 +3,7 @@
 function zpwrFzfFilesearchVerbEdit(){
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: zpwrFzfFilesearchVerbEdit <editor>"
+        zpwrLogConsoleErr "usage: zpwrFzfFilesearchVerbEdit <editor>"
         return 1
     fi
 

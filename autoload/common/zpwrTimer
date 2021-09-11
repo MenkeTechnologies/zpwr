@@ -3,7 +3,7 @@
 function zpwrTimer() {
 
     if [[ -z "$1" ]]; then
-        zpwrLoggErr "usage: timer <command...>"
+        zpwrLogConsoleErr "usage: timer <command...>"
         return 1
     fi
 

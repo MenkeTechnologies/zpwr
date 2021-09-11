@@ -5,7 +5,7 @@ function zal(){
     if [[ -d "$ZPWR_AUTOLOAD" ]]; then
         cd "$ZPWR_AUTOLOAD"
     else
-        zpwrLoggErr "ZPWR_AUTOLOAD '$ZPWR_AUTOLOAD' is not a directory."
+        zpwrLogConsoleErr "ZPWR_AUTOLOAD '$ZPWR_AUTOLOAD' is not a directory."
     fi
 
 }

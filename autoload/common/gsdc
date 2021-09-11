@@ -3,7 +3,7 @@
 function ___gsdc(){
 
     if ! zpwrIsGitDir; then
-       zpwrLoggNotGit
+       zpwrLogConsoleNotGit
        return 1
     fi
 
@@ -15,7 +15,7 @@ function ___gsdc(){
         if [[ "$currentDir" == "$dir" ]]; then
             printf "\x1b[0;1;31m"
             print -sr "$BUFFER"
-            zpwrLoggErr "BLACKLISTED: $(pwd -P)"
+            zpwrLogConsoleErr "BLACKLISTED: $(pwd -P)"
             printf "\x1b[0m"
             return 1
         fi
@@ -23,7 +23,7 @@ function ___gsdc(){
 
 	git status | command grep -sq "nothing to commit" && {
         printf "\x1b[0;1;31m"
-        zpwrLoggErr "Nothing has changed."
+        zpwrLogConsoleErr "Nothing has changed."
         echo
         BUFFER=""
         printf "\x1b[0m"
