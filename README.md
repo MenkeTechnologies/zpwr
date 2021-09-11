@@ -89,13 +89,11 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 
 ## ZPWR Features
-- 375+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
+- 380+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
 - 155+ centralized environment variables in ZPWR namespace to control functionality
 - 750+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - 11.5k+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 170+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
-- 2.8k+ line README
-- 50k+ LOC
 - 1900+ aliases
 - 340+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - user specific ZPWR files in `~/.zpwr/local` git ignored
@@ -169,6 +167,8 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - systemd service, poll.service, that polls github and download latest zpwr code
 - systemd service, learn.service, that runs learning collection API
 - restart function that launches poll.service and learn by enabling and starting in systemd
+- 2.8k+ line README
+- 50k+ LOC
 
 
 ## ZPWR Dependencies
