@@ -71,7 +71,7 @@ function zpwrForDirRarZipProcess() {
         fi
 
         stack[$idx]=()
-        stack+=( *~@*~__MACOS*~*.vst~*.component~*.vst3~*.app~*.mpkg(/:A) )
+        stack+=( ${~dirGlob} )
 
     done
     #set +x
@@ -87,7 +87,7 @@ function zpwrForDirZipRarMain() {
     if [[ -n "$@" ]]; then
         dirs=( ${@}(/) )
     else
-        dirs=( *~@*~__MACOS*~*.vst~*.component~*.vst3~*.app~*.mpkg(/) )
+        dirs=( ${~dirGlob} )
     fi
 
     old="$PWD"
@@ -116,13 +116,15 @@ function zpwrForDirZipRarMain() {
     fi
 }
 
+dirGlob='*~@*~__MACOS*~*.vst~*.component~*.vst3~*.app~*.mpkg(/:A)'
+
 ulimit -n 10240
 root="$PWD"
 
-trap 'builtin cd -q $root; unset root; return 1' INT
+trap 'builtin cd -q $root; unset root dirGlob; return 1' INT
 
 declare -Ag ZPWR_PROCESSED=()
 
-unset root
-
 zpwrForDirZipRarMain "$@"
+
+unset root dirGlob
