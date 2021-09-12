@@ -194,11 +194,12 @@ if [[ -z "$1" ]]; then
     fail "usage: mountInstall.sh <dir>"
 fi
 
-base="${1:A}"
-shift
 
-banner "Starting VST/VST3/AU/DMG/PKG/MPKG Installer by MenkeTechnologies at $base..."
+for base in "${@}"; do
+    base="${base:A}"
+    banner "Starting VST/VST3/AU/DMG/PKG/MPKG Installer by MenkeTechnologies at $base..."
+    main
+done
 
-main "$@"
 
 clean
