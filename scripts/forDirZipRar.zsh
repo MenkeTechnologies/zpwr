@@ -53,6 +53,7 @@ function zpwrForDirRarZipProcess() {
 
         if ! builtin cd -q "$dir"; then
             zpwrForDirRarZipErr "can not cd to $dir"
+            continue
         else
             zpwrLogDebug "At $PWD"
         fi
@@ -94,8 +95,9 @@ function zpwrForDirZipRarMain() {
     for dir in "${dirs[@]}"; do
         zpwrPrettyPrint "Processing $dir"
         zpwrForDirRarZipProcess "$dir"
-        builtin cd -q "$old"
     done
+    builtin cd -q "$old"
+
     files=( ${(v)ZPWR_PROCESSED[@]} )
 
     if (( $#files )); then
@@ -116,7 +118,7 @@ function zpwrForDirZipRarMain() {
     fi
 }
 
-dirGlob='*~@*~__MACOS*~*.vst~*.component~*.vst3~*.app~*.mpkg(/:A)'
+dirGlob='*~@*~__MACOS*~*.vst(|3)~*.component~*.app~*.(|m)pkg(/:A)'
 
 ulimit -n 10240
 root="$PWD"
