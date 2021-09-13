@@ -113,13 +113,13 @@ export ZPWR_INTERACTIVE_MENU_SELECT=true
 export ZPWR_KEYTIMEOUT=10
 # whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
-# zpwrLog function underscore color ANSI codes
+# zpwrLogColor function underscore color ANSI codes
 export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
-# zpwrLog function quote color
+# zpwrLogColor function quote color
 export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
-# zpwrLog function timestamp color
+# zpwrLogColor function timestamp color
 export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
-# zpwrLog function message color
+# zpwrLogColor function message color
 export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false

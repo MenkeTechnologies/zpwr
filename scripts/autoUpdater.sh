@@ -12,7 +12,7 @@ function updaterLoop(){
     minutes_to_sleep=10
 
     while true; do
-        zpwrLog "Updating Software"
+        zpwrLogInfo "Updating Software"
         oldtime=$(date +"%s")
         olddate="$(date +'%Y-%m-%d %H:%M:%S')"
         unset PERL5LIB
@@ -28,7 +28,7 @@ EOF
             sleep $((minutes_to_sleep * 60))
             newtime=$(date +"%s")
             timediff=$((newtime - oldtime))
-            zpwrLog "Time diff $timediff. Next update at $nextdate."
+            zpwrLogInfo "Time diff $timediff. Next update at $nextdate."
             ((timediff > $((3600 * 24)))) && break
         done
     done

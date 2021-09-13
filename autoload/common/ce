@@ -12,7 +12,7 @@ function ___ce() {
     firstArg="${${(Az)@}[1]//\"/}"
     firstdir=${firstArg:h}
     BUFFER="builtin cd \"$firstdir\"; $ZPWR_EMACS_CLIENT ""$@""; zpwrClearList; zpwrIsGitDir && git diff HEAD; "
-    zpwrLog "$BUFFER"
+    zpwrLogInfo "$BUFFER"
     eval "$BUFFER"
 }
 

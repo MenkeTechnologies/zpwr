@@ -35,41 +35,41 @@ function zpwrAttachSetup() {
                 (*) :
                     ;;
             esac
-            zpwrLog "searching for '$key' in '$out'"
+            zpwrLogInfo "searching for '$key' in '$out'"
             [[ "$out" == *"$key"* ]] && mobile=false
             command rm "$ZPWR_TEMPFILE"
         else
-            zpwrLog "$HOME/.ssh/authorized_keys does not exist so NO attach"
+            zpwrLogInfo "$HOME/.ssh/authorized_keys does not exist so NO attach"
             return
         fi
 
         if [[ $mobile == "false" ]]; then
-            zpwrLog "found '$key' so desktop"
+            zpwrLogInfo "found '$key' so desktop"
             out="$(sudo ps -ef | command perl -ne 'print if /\bsshd\b/ and /\bpts\b/ and ! /\bperl\b/')"
-            zpwrLog "sshd and pts: $out"
+            zpwrLogInfo "sshd and pts: $out"
             num_con="$(echo "$out" | wc -l)"
-            zpwrLog "num connections: '$num_con'"
+            zpwrLogInfo "num connections: '$num_con'"
             if (( $num_con <= 1 )); then
-                zpwrLog "no tmux clients"
+                zpwrLogInfo "no tmux clients"
                 {
                     out="$(command tmux ls 2>&1)"
                     ret=$?
-                    zpwrLog "tmux ls = ret: '$ret', out: '$out'"
+                    zpwrLogInfo "tmux ls = ret: '$ret', out: '$out'"
                     if [[ $ret == 0 ]]; then
-                        zpwrLog "attaching to existing"
-                        zpwrLog command tmux attach
+                        zpwrLogInfo "attaching to existing"
+                        zpwrLogInfo command tmux attach
                         command tmux attach
                         ret=$?
-                        zpwrLog "tmux attach ret: '$ret'"
+                        zpwrLogInfo "tmux attach ret: '$ret'"
                     else
-                        zpwrLog "creating new session"
-                        zpwrLog tmux new-session \; \
+                        zpwrLogInfo "creating new session"
+                        zpwrLogInfo tmux new-session \; \
                         source-file "$ZPWR_TMUX/control-window.conf"
                         command tmux new-session \; \
                         source-file "$ZPWR_TMUX/control-window.conf"
                         sid=$(tmux new-session -P -d 2>> "$ZPWR_LOGFILE") 
                         ret=$?
-                        zpwrLog "tmux create ret: '$ret'"
+                        zpwrLogInfo "tmux create ret: '$ret'"
                         #2x q C-h to rid copy-mode
                         tmux send-keys -t $sid q C-h
                         tmux send-keys -t $sid q C-h
@@ -78,10 +78,10 @@ function zpwrAttachSetup() {
                     fi
                 } &>> "$ZPWR_LOGFILE"
             else
-                zpwrLog "clients so NO attach"
+                zpwrLogInfo "clients so NO attach"
             fi
         else
-            zpwrLog "not desktop so NO attach"
+            zpwrLogInfo "not desktop so NO attach"
         fi
     fi
 }

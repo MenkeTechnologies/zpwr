@@ -48,13 +48,13 @@ shopt -s dotglob
 cd "$ZPWR_DIR" || exit 1
 git checkout dev
 
-zpwrLog "Copying scripts to custom Installer Repo $ZPWR_DIR"
+zpwrLogInfo "Copying scripts to custom Installer Repo $ZPWR_DIR"
 cp "$HOME/.gitignore_global" "$ZPWR_DIR_INSTALL"
 
 type=ctags
 
 if zpwrExists gtags; then
-    zpwrLog "Regen GNU gtags to $HOME/GTAGS with $type parser"
+    zpwrLogInfo "Regen GNU gtags to $HOME/GTAGS with $type parser"
     (
     builtin cd "$HOME"
     command rm GPATH GRTAGS GTAGS 2>/dev/null
@@ -72,23 +72,23 @@ if zpwrExists gtags; then
         fi
     done | gtags --accept-dotfiles --gtagslabel=$type -f -
 
-    zpwrLog "gtags size: $(global -x ".*" | wc -l)"
+    zpwrLogInfo "gtags size: $(global -x ".*" | wc -l)"
 
     )
 else
     zpwrLogConsoleErr "gtags does not exist"
 fi
 
-zpwrLog "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
+zpwrLogInfo "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$ZPWR_DIR_INSTALL_GTAGS"
 
-zpwrLog "Updating vim plugins list"
+zpwrLogInfo "Updating vim plugins list"
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$ZPWR_DIR_INSTALL/.vimbundle"
 perl -0 -i -pe 's@\n.*wakatime.*\n@\n@g' "$ZPWR_INSTALL/.vimbundle"
-zpwrLog "Updating zsh plugins list"
+zpwrLogInfo "Updating zsh plugins list"
 printf "" > "$ZPWR_DIR_INSTALL/.zshplugins"
 
 if [[ -z $ZSH_CUSTOM ]]; then
@@ -96,10 +96,10 @@ if [[ -z $ZSH_CUSTOM ]]; then
 else
     for dir in "$ZSH_CUSTOM/plugins/"*; do
         if basename "$dir" | grep -sq "example";then
-            zpwrLog "not adding zsh plugin $dir"
+            zpwrLogInfo "not adding zsh plugin $dir"
             continue;
         else
-            zpwrLog "adding zsh plugin $dir"
+            zpwrLogInfo "adding zsh plugin $dir"
         fi
 
         bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$dir" >>"$ZPWR_DIR_INSTALL/.zshplugins"
@@ -109,36 +109,36 @@ fi
 
 git add .
 git commit -m "$commitMessage"
-zpwrLog "Status"
+zpwrLogInfo "Status"
 git status
-zpwrLog "Pushing..."
+zpwrLogInfo "Pushing..."
 git push origin dev
 #}}}***********************************************************
 
 #{{{ MARK:tutorialDir
 #**************************************************************
-zpwrLog "Copying zshrc"
+zpwrLogInfo "Copying zshrc"
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$tutorialDir/zsh"
-zpwrLog "Copying vimrc"
+zpwrLogInfo "Copying vimrc"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$tutorialDir/vim"
-zpwrLog "Copying minimal minvimrc"
+zpwrLogInfo "Copying minimal minvimrc"
 cp "$ZPWR_ENV/.minvimrc" "$tutorialDir/vim"
 
-zpwrLog "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
+zpwrLogInfo "Copying gtag => $HOME/"{GTAGS,GPATH,GRTAGS}
 echo cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 
-zpwrLog "Copying tmux.conf"
+zpwrLogInfo "Copying tmux.conf"
 rm -rf "$tutorialDir/tmux/"*
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$ZPWR_TMUX/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
-zpwrLog "Copying shell_aliases_functions $ZPWR_ALIAS_FILE to $tutorialDir"
+zpwrLogInfo "Copying shell_aliases_functions $ZPWR_ALIAS_FILE to $tutorialDir"
 cp "$ZPWR_ALIAS_FILE" "$tutorialDir/aliases"
 
-zpwrLog "Copying shell scripts"
+zpwrLogInfo "Copying shell scripts"
 #clear out old scripts, dbl quotes escape asterisk
 rm -rf "$tutorialDir/shell/"*
 cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
@@ -150,32 +150,32 @@ cp -R "$HOME/.vim/UltiSnips" "$tutorialDir"
 #echo "# Mac Only Scripts" >> "$README"
 #bash "$ZPWR_SCRIPTS/headerSummarizer.sh" "$ZPWR_SCRIPTS/"macOnly/*.sh >> "$README"
 
-#zpwrLog "Copying tags file"
+#zpwrLogInfo "Copying tags file"
 #cp "$ZPWR_SCRIPTS/tags" "$tutorialDir/shell"
 
-#zpwrLog "Copying $HOME/.ctags"
+#zpwrLogInfo "Copying $HOME/.ctags"
 #cp "$HOME/.ctags" "$tutorialDir/ctags"
 
-zpwrLog "Copying vis ncmpcpp mpd"
+zpwrLogInfo "Copying vis ncmpcpp mpd"
 cp -R "$HOME/.config/vis" "$tutorialDir/ncmpcpp-mpd-vis"
 
-zpwrLog "Emptying mpd log"
+zpwrLogInfo "Emptying mpd log"
 echo >"$tutorialDir/ncmpcpp-mpd-vis/.mpd/mpd.log"
 
 echo >"$HOME/Documents/tutorialsRepo/ncmpcpp-mpd-vis/.mpd/mpd.log"
 cp -R "$HOME/.config/ncmpcpp" "$tutorialDir/ncmpcpp-mpd-vis"
 cp -R "$HOME/.mpd" "$tutorialDir/ncmpcpp-mpd-vis"
 
-zpwrLog "Copying powerlevel config"
+zpwrLogInfo "Copying powerlevel config"
 cp "$ZPWR_PROMPT_FILE" "$tutorialDir"
 
-#zpwrLog "Copying vim plugins"
+#zpwrLogInfo "Copying vim plugins"
 
 #sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
 cd "$tutorialDir" || exit 1
 
-#zpwrLog "Removing .git dirs..."
+#zpwrLogInfo "Removing .git dirs..."
 
 #while read -r file; do
 #if [[ -d "$file" ]]; then
@@ -189,12 +189,12 @@ cd "$tutorialDir" || exit 1
 
 bash "$ZPWR_SCRIPTS/gitRemoteRepoInformation.sh" "$HOME/.vim/bundle/"* >"$tutorialDir/vim/.vimbundle"
 
-zpwrLog "Updating Tutorial Files Repo"
+zpwrLogInfo "Updating Tutorial Files Repo"
 git add .
 git commit -m "$commitMessage"
-zpwrLog "Status..."
+zpwrLogInfo "Status..."
 git status
-zpwrLog "Pushing..."
+zpwrLogInfo "Pushing..."
 git push
 
 #}}}***********************************************************
@@ -206,7 +206,7 @@ dotdir="$websiteDir/downloads/dotfiles"
 
 [[ ! -d "$dotdir" ]] && mkdir -p "$dotdir"
 
-zpwrLog "Copying config files to websiteDir"
+zpwrLogInfo "Copying config files to websiteDir"
 cp "$ZPWR_DIR_INSTALL/.vimrc" "$dotdir/.."
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir/.."
 cp "$ZPWR_ALIAS_FILE" "$dotdir/.."
@@ -217,7 +217,7 @@ cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$dotdir"
 cp "$ZPWR_ALIAS_FILE" "$dotdir"
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$dotdir"
 
-zpwrLog "Copying scripts to $websiteDir"
+zpwrLogInfo "Copying scripts to $websiteDir"
 rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -p "$websiteDir/downloads/scripts"
@@ -233,8 +233,8 @@ cd ..
 
 git add .
 git commit -m "$commitMessage"
-zpwrLog "Status..."
+zpwrLogInfo "Status..."
 git status
-zpwrLog "Pushing..."
+zpwrLogInfo "Pushing..."
 git push
 #}}}***********************************************************
