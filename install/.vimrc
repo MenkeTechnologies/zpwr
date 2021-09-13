@@ -287,10 +287,13 @@ filetype plugin indent on    " required
 " faster movements, used in all modes
 nnoremap <c-j> 4j
 vnoremap <c-j> 4j
+
 nnoremap <c-k> 4k
 vnoremap <c-k> 4k
+
 nnoremap <c-h> 4h
 vnoremap <c-h> 4h
+
 nnoremap <c-l> 4l
 vnoremap <c-l> 4l
 
@@ -365,7 +368,12 @@ augroup background_group
     autocmd VimEnter * set background=dark
     " dont hide json quotes
     autocmd VimEnter * set conceallevel=0
-    inoremap <silent> <C-Z> <C-[>:suspend<CR>
+    autocmd VimEnter * inoremap <silent> <C-Z> <C-[>:suspend<CR>
+    autocmd VimEnter * vnoremap <c-n> <PageDown>
+    autocmd VimEnter * vnoremap <c-p> <PageUp>
+    autocmd VimEnter * nnoremap <c-n> <PageDown>
+    autocmd VimEnter * nnoremap <c-p> <PageUp>
+
 augroup end
 
 inoremap <Home> <C-[>ggi

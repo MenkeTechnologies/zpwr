@@ -66,9 +66,6 @@ function zpwrBindOverrideZLE(){
 
     bindkey -M viins '^[^M' self-insert-unmeta
 
-    bindkey -M viins '^P' zpwrEOLorNextTabStop
-    bindkey -M vicmd '^P' zpwrEOLorNextTabStop
-
     bindkey -M vicmd G end-of-buffer-or-history
 
     bindkey -M viins "^Vc" zpwrFzfCommits
@@ -95,9 +92,6 @@ function zpwrBindOverrideZLE(){
 
     bindkey -M viins '^F^V' edit-command-line
     bindkey -M vicmd '^F^V' edit-command-line
-
-    bindkey -M viins '^O' fzf-tab-complete
-    bindkey -M vicmd '^O' fzf-tab-complete
 
     bindkey -M viins '^F^F' fzf-file-widget
     bindkey -M vicmd '^F^F' fzf-file-widget
@@ -265,14 +259,30 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
         fi
     fi
 
-    bindkey '^N' sudo-command-line
+    bindkey -M viins '^V^O' fzf-tab-complete
+    bindkey -M vicmd '^V^O' fzf-tab-complete
+
+    bindkey -M viins '^V^P' sudo-command-line
+    bindkey -M vicmd '^V^P' sudo-command-line
+
+    bindkey -M viins '^O' zpwrEOLorNextTabStop
+    bindkey -M vicmd '^O' zpwrEOLorNextTabStop
+
+    bindkey -M viins '^N' down-history
+    bindkey -M vicmd '^N' down-history
+
+    bindkey -M viins '^P' up-history
+    bindkey -M vicmd '^P' up-history
+
     bindkey -M viins '\e^T' transpose-words
     bindkey -M vicmd '\e^T' transpose-words
+
     bindkey -M viins '^T' transpose-chars
     bindkey -M vicmd '^T' transpose-chars
 
     bindkey -M viins '^A' beginning-of-line
     bindkey -M vicmd '^A' beginning-of-line
+
     bindkey -M viins '^E' end-of-line
     bindkey -M vicmd '^E' end-of-line
 

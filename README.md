@@ -28,7 +28,6 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - [Auto Display Completion Choices](#auto-list-completions) - Feature
 - [Bypass Space Expansion](#bypassing-expansion-on-space) - How To
 - [Turning Off Ponies And Colors Globally](#turning-off-ponies-and-colors-globally) - How To
-- [Bypass Space Expansion](#bypassing-expansion-on-space) - How To
 - [Vim Language Support For Tmux Right Pane](#running-script-from-vim-in-tmux-right-pane-is-supported-for-these-languages)
 - [Main Window](#tmux-main-window) - Feature
 - [Personal Config File Information](#personal-config) - Detail
@@ -102,7 +101,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - central on/off control of zpwr colorful output with `ZPWR_COLORS`
 - zsh completion with descriptions for parameters, regular, suffix and global aliases
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
-- snippets with tabstops that expand with spacebar and advance to next stop with C-p [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
+- snippets with tabstops that expand with spacebar and advance to next stop with C-o [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - expanding regular aliases and global aliases from zsh menu selection and in vim insert mode [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - color-coded groups of zsh menu completion for commands, aliases, reswords, functions, builtins, parameters, files, command history, correction
 - color-coded groups of zsh menu completion for man pages
@@ -566,7 +565,6 @@ export ZPWR_SEND_KEYS_PANE=-1
 # typing leading quote, paren, bracket inserts trailing after caret
 export ZPWR_SURROUND=true
 # the string that marks a tabstop when expanding aliases
-# move to next tabstop with ^P
 export ZPWR_TABSTOP=__________
 # include tabstop aliases
 export ZPWR_TABSTOP_ALIASES=true
@@ -829,9 +827,13 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T copy-mode-vi C-d                  send-keys -X halfpage-down ```
 - ``` bind-key    -T copy-mode-vi C-e                  send-keys -X scroll-down ```
 - ``` bind-key    -T copy-mode-vi C-f                  send-keys -X page-down ```
-- ``` bind-key    -T copy-mode-vi C-h                  send-keys -X cursor-left ```
-- ``` bind-key    -T copy-mode-vi C-j                  send-keys -X copy-pipe-and-cancel ```
+- ``` bind-key    -T copy-mode-vi C-h                  send-keys -X -N 4 cursor-left ```
+- ``` bind-key    -T copy-mode-vi C-j                  send-keys -X -N 4 cursor-down ```
+- ``` bind-key    -T copy-mode-vi C-k                  send-keys -X -N 4 cursor-up ```
+- ``` bind-key    -T copy-mode-vi C-l                  send-keys -X -N 4 cursor-right ```
 - ``` bind-key    -T copy-mode-vi Enter                send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy" ```
+- ``` bind-key    -T copy-mode-vi C-n                  send-keys -X page-down ```
+- ``` bind-key    -T copy-mode-vi C-p                  send-keys -X page-up ```
 - ``` bind-key    -T copy-mode-vi C-u                  send-keys -X halfpage-up ```
 - ``` bind-key    -T copy-mode-vi C-v                  send-keys -X rectangle-toggle ```
 - ``` bind-key    -T copy-mode-vi C-y                  send-keys -X scroll-up ```
@@ -1074,11 +1076,11 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^K" zsh-learn-Learn ```
 - ``` bindkey -M viins "^L" clear-screen ```
 - ``` bindkey -M viins "^M" zpwrMagicEnter ```
-- ``` bindkey -M viins "^N" sudo-command-line ```
-- ``` bindkey -M viins "^O" fzf-tab-complete ```
+- ``` bindkey -M viins "^N" down-history ```
+- ``` bindkey -M viins "^O" zpwrEOLorNextTabStop ```
 - ``` bindkey -M viins "^O^I" zc-logo ```
 - ``` bindkey -M viins "^O^Z" zui-demo-various ```
-- ``` bindkey -M viins "^P" zpwrEOLorNextTabStop ```
+- ``` bindkey -M viins "^P" up-history ```
 - ``` bindkey -M viins "^Q" zpwrLastWordDouble ```
 - ``` bindkey -M viins "^R" fzf-history-widget ```
 - ``` bindkey -M viins "^S" zsh-gacp-NoCheck ```
@@ -1091,6 +1093,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^V^K" zpwrEmacsFzf ```
 - ``` bindkey -M viins "^V^L" zpwrZFZF ```
 - ``` bindkey -M viins "^V^N" zpwrVimFzfSudo ```
+- ``` bindkey -M viins "^V^O" fzf-tab-complete ```
+- ``` bindkey -M viins "^V^P" sudo-command-line ```
 - ``` bindkey -M viins "^V^R" history-search-multi-word ```
 - ``` bindkey -M viins "^V^S" zpwrZFZF ```
 - ``` bindkey -M viins "^V^V" zpwrVimAllWidgetAccept ```
@@ -1213,8 +1217,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^L" clear-screen ```
 - ``` bindkey -a "^M" zpwrMagicEnter ```
 - ``` bindkey -a "^N" down-history ```
-- ``` bindkey -a "^O" fzf-tab-complete ```
-- ``` bindkey -a "^P" zpwrEOLorNextTabStop ```
+- ``` bindkey -a "^O" zpwrEOLorNextTabStop ```
+- ``` bindkey -a "^P" up-history ```
 - ``` bindkey -a "^Q" zpwrLastWordDouble ```
 - ``` bindkey -a "^R" redo ```
 - ``` bindkey -a "^S" zsh-gacp-NoCheck ```
@@ -1227,6 +1231,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^V^K" zpwrEmacsFzf ```
 - ``` bindkey -a "^V^L" zpwrZFZF ```
 - ``` bindkey -a "^V^N" zpwrVimFzfSudo ```
+- ``` bindkey -a "^V^O" fzf-tab-complete ```
+- ``` bindkey -a "^V^P" sudo-command-line ```
 - ``` bindkey -a "^V^R" history-search-multi-word ```
 - ``` bindkey -a "^V^S" zpwrZFZF ```
 - ``` bindkey -a "^V^V" zpwrVimAllWidgetAccept ```
@@ -1680,7 +1686,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  <C-Y>u        <Plug>(emmet-update-tag) ```
 - ``` i  <C-Y>;        <Plug>(emmet-expand-word) ```
 - ``` i  <C-Y>,        <Plug>(emmet-expand-abbr) ```
-- ``` i  <C-Z>       * <Esc>:suspend<CR> ```
 - ``` i  <C-\>       * <Esc>+ ```
 - ``` i  fj            <Esc> ```
 - ``` i  jf            <Esc> ```

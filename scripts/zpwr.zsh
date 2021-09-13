@@ -347,7 +347,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[whilesleep]='www=run command and sleep first arg seconds'
     ZPWR_VERBS[web]='we=cd to web dir'
     ZPWR_VERBS[zp]='zp=cd to $ZPWR_REPO_NAME'
-    ZPWR_VERBS[ZPWR]='zp=cd to $ZPWR_REPO_NAME'
+    ZPWR_VERBS[zpwr]='zp=cd to $ZPWR_REPO_NAME'
     ZPWR_VERBS[zpwrgithub]='zpgh=open zpwr github'
     ZPWR_VERBS[zpz]='zpz=cd to $ZPWR_REPO_NAME and git checkout other branch, rebase and push'
     ZPWR_VERBS[zrc]='zrc=zshrc vim session'
