@@ -160,7 +160,6 @@ export ZPWR_SEND_KEYS_PANE=-1
 # typing leading quote, paren, bracket inserts trailing after caret
 export ZPWR_SURROUND=true
 # the string that marks a tabstop when expanding aliases
-# move to next tabstop with ^P
 export ZPWR_TABSTOP=__________
 # include tabstop aliases
 export ZPWR_TABSTOP_ALIASES=true
