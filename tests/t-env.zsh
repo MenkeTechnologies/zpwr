@@ -892,6 +892,11 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $? equals 0
 }
 
+@test 'zpwrLogInfo fn' {
+    run type zpwrLogInfo
+    assert $? equals 0
+}
+
 @test 'zpwrLog fn' {
     run type zpwrLog
     assert $? equals 0

@@ -75,7 +75,7 @@ export ZPWR_COMPLETION_DIR='zsh-more-completions'
 export ZPWR_CORRECT=true
 # aliases expand after spelling correction
 export ZPWR_CORRECT_EXPAND=true
-# turns on debugging logs using zpwrLog function
+# turns on debugging logs using zpwrLogDebug function
 export ZPWR_DEBUG=false
 # default OMZ theme if Powerlevel 10k not used
 export ZPWR_DEFAULT_OMZ_THEME=simonoff

@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
-# name: zpwrLog debug
+# name: zpwrLogInfo debug
 # key: lod
 # --
 zpwrLogDebug "______'"'$1'"'_____ = ""'$1'"
