@@ -131,6 +131,7 @@ zstyle ':completion:*' group-order \
     zpwr-misc \
     zpwr-send \
     zpwr-forgit \
+    zpwr-log\
     c options commands aliases alias global-aliases \
     suffix-aliases functions builtins reserved-words parameters argument-rest \
     strings identifiers hosts commits heads commit-tags heads-local heads-remote \
@@ -212,6 +213,7 @@ if [[ $ZPWR_COLORS == true ]]; then
         zstyle ':completion:*:zpwr-github' list-colors '=(#b)(*)=1;30=1;4;37;45'
         zstyle ':completion:*:zpwr-gitrepos' list-colors '=(#b)(*)=1;30=1;4;36;44'
         zstyle ':completion:*:zpwr-clipboard' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:zpwr-log' list-colors '=(#b)(*)=1;30=1;32;45'
     fi
 
     # git commit colors
