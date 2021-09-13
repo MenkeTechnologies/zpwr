@@ -159,7 +159,7 @@ globalAliasesInit
 
         zpwrExists zfgw || alias zfgw="$ZPWR_REPO_NAME fordir 'zpwrWipedBranch=$ZPWR_TABSTOP; zpwrIsGitDir && { gco \$zpwrWipedBranch; gffa; git clean -dff && git reset --hard origin/\$zpwrWipedBranch && git clean -dff ; gla; zp gitclearcache; }' *"
         zpwrExists zf || alias zf="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { $ZPWR_TABSTOP; }' *"
-        alias lg="zpwrLog $(zpwrTabNumCmd 1 tr a-zA-Z)=$(zpwrTabNumCmd 1 tr a-zA-Z)"
+        alias lg="zpwrLogInfo $(zpwrTabNumCmd 1 tr a-zA-Z)=$(zpwrTabNumCmd 1 tr a-zA-Z)"
     fi
 
 

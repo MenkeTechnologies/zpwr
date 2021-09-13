@@ -20,7 +20,7 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
 
     if [[ -z "$ZPWR_LIB" ]]; then
         if source "$ZPWR_ENV_FILE"; then
-            : zpwrLog "loaded ZPWR_ENV_FILE '$ZPWR_ENV_FILE'"
+            : zpwrLogInfo "loaded ZPWR_ENV_FILE '$ZPWR_ENV_FILE'"
         else
             echo "cannot source ZPWR_ENV_FILE '$ZPWR_ENV_FILE'" >&2
             exit 1
@@ -28,7 +28,7 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
 
         if test -f "$ZPWR_TOKEN_PRE"; then
             if source "$ZPWR_TOKEN_PRE"; then
-                : zpwrLog "loaded ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
+                : zpwrLogInfo "loaded ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
             else
                 zpwrLogConsoleErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
             fi
@@ -37,7 +37,7 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
         fi
 
         if source "$ZPWR_RE_ENV_FILE"; then
-            : zpwrLog "loaded ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
+            : zpwrLogInfo "loaded ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
         else
             zpwrLogConsoleErr "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'"
             exit 1
@@ -45,7 +45,7 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
 
         if test -f "$ZPWR_TOKEN_POST"; then
             if source "$ZPWR_TOKEN_POST"; then
-                : zpwrLog "loaded ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
+                : zpwrLogInfo "loaded ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
             else
                 zpwrLogConsoleErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
             fi
@@ -57,7 +57,7 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
         # env vars are exported
         # so just get the functions
         if source "$ZPWR_LIB"; then
-            : zpwrLog "loaded ZPWR_LIB '$ZPWR_LIB'"
+            : zpwrLogInfo "loaded ZPWR_LIB '$ZPWR_LIB'"
         else
             zpwrLogConsoleErr "where is ZPWR_LIB '$ZPWR_LIB'"
             exit 1

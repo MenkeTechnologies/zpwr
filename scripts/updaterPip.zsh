@@ -53,7 +53,7 @@ python3 -c 'import pip' && {
         #get last package
         if (( $+pipBlacklist )); then
             if (( pipBlacklist[(Ie)$package] )); then
-                zpwrLog "skip update of $package due to blacklist"
+                zpwrLogInfo "skip update of $package due to blacklist"
                 continue
             fi
         fi
@@ -110,7 +110,7 @@ zpwrCommandExists python2 && python2 -c 'import pip' && {
 
         if (( $+pipBlacklist )); then
             if (( pipBlacklist[(Ie)$package] )); then
-                zpwrLog "skip update of $package due to blacklist"
+                zpwrLogInfo "skip update of $package due to blacklist"
                 continue
             fi
         fi

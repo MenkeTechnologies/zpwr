@@ -30,7 +30,7 @@ function zpwrGetrc(){
 
     if [[ -d "$ZPWR" ]]; then
         builtin cd "$ZPWR"
-        zpwrLog $(git pull 2>&1)
+        zpwrLogInfo $(git pull 2>&1)
     fi
 
     builtin cd "$ZPWR"

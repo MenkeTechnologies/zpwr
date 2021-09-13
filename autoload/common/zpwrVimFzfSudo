@@ -21,7 +21,7 @@ function zpwrVimFzfSudo(){
     else
         firstIndexOut=$(( $#numWordsPre + 1 ))
         firstDir=${out[$firstIndexOut]:h}
-        #zpwrLog "words='$out[4]'=>'$firstDir'"
+        #zpwrLogInfo "words='$out[4]'=>'$firstDir'"
         #:h takes aways last "
         BUFFER="cd $firstDir\"; $BUFFER; zpwrClearList"
         zle .accept-line

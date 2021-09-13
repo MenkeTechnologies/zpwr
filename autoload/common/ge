@@ -28,7 +28,7 @@ function ___ge(){
         randscript="print int(rand()*$len)"
         rand=$(echo "$randscript" | perl)
 
-        zpwrLog $rand
+        zpwrLogInfo $rand
         zpwrIsZsh && ((++rand))
 
         for (( i = 0; i < $len; ++i )); do
@@ -37,7 +37,7 @@ function ___ge(){
                 break
             fi
         done
-        zpwrLog http -v --follow --style=$random_color GET \
+        zpwrLogInfo http -v --follow --style=$random_color GET \
             $proto://$url --pretty=all "$@"
         http -v --follow --style=$random_color GET \
             $proto://$url --pretty=all "$@"
