@@ -2,4 +2,4 @@
 # name: zpwrLog
 # key: lo
 # --
-zpwrLog "______'"'$1'"'_____ = ""'$1'"
+zpwrLogInfo "______'"'$1'"'_____ = ""'$1'"

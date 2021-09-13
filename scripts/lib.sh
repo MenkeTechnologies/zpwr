@@ -175,7 +175,7 @@ function zpwrLogConsoleNotGit() {
 function zpwrLogConsolePrefix(){
 
     zpwrPrettyPrint "$ZPWR_CHAR_LOGO $*"
-    zpwrLog "$ZPWR_CHAR_LOGO $*"
+    zpwrLogInfo "$ZPWR_CHAR_LOGO $*"
 
 }
 
