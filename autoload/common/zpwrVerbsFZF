@@ -12,7 +12,7 @@ function ___zpwrVerbsFZF(){
     fi
 
     zpwrListVerbs |
-        eval "$ZPWR_FZF -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
+        eval "$ZPWR_FZF --nth 1 -m --preview-window=down:25 --border $FZF_ENV_OPTS_VERBS" |
         perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
 }
 
