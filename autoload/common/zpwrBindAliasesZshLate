@@ -71,6 +71,7 @@ globalAliasesInit
             alias lf="lftp sftp://$ZPWR_TABSTOP"
         fi
 
+        alias au='autoload -Uz'
         alias gacp="git add . && git commit -m '$ZPWR_TABSTOP' && git push"
         alias gac="git add . && git commit -m '$ZPWR_TABSTOP'"
         zpwrExists zff || alias zff="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { $ZPWR_TABSTOP; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
