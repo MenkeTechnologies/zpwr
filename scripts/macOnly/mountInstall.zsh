@@ -19,6 +19,11 @@ function clean() {
     exit 0
 }
 
+function usage() {
+    echo "usage: mountInstall.sh [-nh] [<dir...>]" >&2
+    exit 0
+}
+
 function fail() {
 
     printf "\x1b[31;3mERROR: %s\x1b[0m\n" "$*" >&2
@@ -59,7 +64,9 @@ function pkgInstall(){
         fi
         bold "---------- PKG $f ----------"
         reg "sudo installer -allowUntrusted -pkg \"$f\" -target /"
-        sudo installer -allowUntrusted -pkg "$f" -target /
+        if (( runFlag )); then
+            sudo installer -allowUntrusted -pkg "$f" -target /
+        fi
 
     done < <(find "$dir" -iname '[^.]*.mpkg' 2>/dev/null)
 
@@ -70,7 +77,9 @@ function pkgInstall(){
         fi
         bold "---------- MPKG $f ----------"
         reg "sudo installer -allowUntrusted -pkg \"$f\" -target /"
-        sudo installer -allowUntrusted -pkg "$f" -target /
+        if (( runFlag )); then
+            sudo installer -allowUntrusted -pkg "$f" -target /
+        fi
 
     done < <(find "$dir" -iname '[^.]*.pkg' 2>/dev/null)
 }
@@ -91,8 +100,9 @@ function vstInstall(){
 
         bold "---------- VST $f ----------"
         reg "sudo cp -R \"$f\" /Library/Audio/Plug-Ins/VST"
-        sudo cp -R "$f" /Library/Audio/Plug-Ins/VST
-
+        if (( runFlag )); then
+            sudo cp -R "$f" /Library/Audio/Plug-Ins/VST
+        fi
     done < <(find "$dir" -iname '[^.]*.vst' 2>/dev/null)
 
     while read f; do
@@ -107,7 +117,9 @@ function vstInstall(){
 
         bold "---------- VST3 $f ----------"
         reg "sudo cp -R \"$f\" /Library/Audio/Plug-Ins/VST3"
-        sudo cp -R "$f" /Library/Audio/Plug-Ins/VST3
+        if (( runFlag )); then
+            sudo cp -R "$f" /Library/Audio/Plug-Ins/VST3
+        fi
 
     done < <(find "$dir" -iname '[^.]*.vst3' 2>/dev/null)
 
@@ -123,7 +135,9 @@ function vstInstall(){
 
         bold "---------- AU $f ----------"
         reg "sudo cp -R \"$f\" /Library/Audio/Plug-Ins/Components"
-        sudo cp -R "$f" /Library/Audio/Plug-Ins/Components
+        if (( runFlag )); then
+            sudo cp -R "$f" /Library/Audio/Plug-Ins/Components
+        fi
 
     done < <(find "$dir" -iname '[^.]*.component' 2>/dev/null)
 }
@@ -190,14 +204,39 @@ function main() {
     vstInstall "$base"
 }
 
+runFlag=1
+
+while getopts ":hn" opt; do
+    case $opt in
+
+    h)
+        usage
+        ;;
+
+    n)
+        runFlag=0
+        ;;
+    *)
+        printf "\n  Option does not exist : $OPTARG\n"
+        usage
+        ;;
+    esac
+done
+
+shift $(($OPTIND-1))
+
 if [[ -z "$1" ]]; then
-    fail "usage: mountInstall.sh <dir>"
+    usage
 fi
 
 
 for base in "${@}"; do
     base="${base:A}"
-    banner "Starting VST/VST3/AU/DMG/PKG/MPKG Installer by MenkeTechnologies at $base..."
+    if (( runFlag )); then
+        banner "Starting VST/VST3/AU/DMG/PKG/MPKG Installer by MenkeTechnologies at $base..."
+    else
+        banner "Dry run: VST/VST3/AU/DMG/PKG/MPKG Installer by MenkeTechnologies at $base..."
+    fi
     main
 done
 
