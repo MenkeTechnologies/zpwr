@@ -4,7 +4,7 @@
 function zpwrCd(){
 
     emulate -L zsh
-    setopt cdsilent
+
     local base dir
 
     if [[ -z "$1" ]]; then
