@@ -95,6 +95,10 @@ export ZPWR_EXPAND=true
 export ZPWR_EXPAND_SECOND_POSITION=true
 # expand globs, history etc with zle expand-word
 export ZPWR_EXPAND_NATIVE=true
+# aliases expand before command line is accepted
+export ZPWR_EXPAND_PRE_EXEC=true
+# globs expand before command line is accepted
+export ZPWR_EXPAND_PRE_EXEC_GLOB=false
 # expand inside "
 export ZPWR_EXPAND_QUOTE_DOUBLE=true
 # expand inside '

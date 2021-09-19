@@ -7,6 +7,9 @@ function zpwrBindOverrideZLE(){
 
     autoload -z zpwrBufferXtrace zpwrExpandOrCompleteWithDots
 
+    ZPWR_VARS[ENTER_KEY]='ENTER'
+    ZPWR_VARS[SPACEBAR_KEY]='SPACE'
+
     zle -N zpwrBufferXtrace
     zle -N zpwrExpandOrCompleteWithDots
     zle -N accept-line zpwrAcceptLine
