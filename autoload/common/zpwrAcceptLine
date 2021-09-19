@@ -3,7 +3,7 @@
 
 function zpwrAcceptLine () {
 
-    local pane commandsThatModifyFiles regex mywords line command cmd out aliases args grc_cmd
+    local pane commandsThatModifyFiles regex mywords line command cmd out acceptAliases args grc_cmd
 
     if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
         ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
@@ -77,8 +77,8 @@ function zpwrAcceptLine () {
     if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
         [[ -z "$BUFFER" ]] && zle .accept-line && return 0
         if [[ -n $(alias -g $mywords[1]) ]];then
-            aliases="$(cat $ZPWR_LOCAL/.common_aliases)"
-            line="$(print -r -- $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
+            acceptAliases="$(cat $ZPWR_LOCAL/.common_aliases)"
+            line="$(print -r -- $acceptAliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
             if [[ -z $line ]];then
                 # function
                 BUFFER="\\$mywords"
@@ -89,6 +89,11 @@ function zpwrAcceptLine () {
                     BUFFER="$line $mywords[2,$]"
             fi
         fi
+    fi
+
+
+    if [[ $ZPWR_EXPAND_PRE_EXEC == true ]]; then
+        zpwrExpandSupernaturalSpace "${ZPWR_VARS[ENTER_KEY]}"
     fi
 
     zle .accept-line
