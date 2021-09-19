@@ -103,6 +103,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - spelling correction, abbreviation expansion and automatic capitalization on the command line [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - snippets with tabstops that expand with spacebar and advance to next stop with C-o [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
 - expanding regular aliases and global aliases from zsh menu selection and in vim insert mode [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand)
+- optional preexec expansion of regular aliases and global aliases or only history expansion of aliases
 - color-coded groups of zsh menu completion for commands, aliases, reswords, functions, builtins, parameters, files, command history, correction
 - color-coded groups of zsh menu completion for man pages
 - color-coded groups of zsh menu completion for git subcommands
@@ -504,6 +505,8 @@ export ZPWR_EXPAND_NATIVE=true
 export ZPWR_EXPAND_PRE_EXEC=true
 # globs expand before command line is accepted
 export ZPWR_EXPAND_PRE_EXEC_GLOB=false
+# second pos expand before command line is accepted
+export ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION=true
 # expand inside "
 export ZPWR_EXPAND_QUOTE_DOUBLE=true
 # expand inside '
