@@ -99,6 +99,8 @@ export ZPWR_EXPAND_NATIVE=true
 export ZPWR_EXPAND_PRE_EXEC=true
 # globs expand before command line is accepted
 export ZPWR_EXPAND_PRE_EXEC_GLOB=false
+# second pos expand before command line is accepted
+export ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION=true
 # expand inside "
 export ZPWR_EXPAND_QUOTE_DOUBLE=true
 # expand inside '
