@@ -3,17 +3,38 @@
 function zpwrBackup(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: backup <file>"
+        zpwrLogConsoleErr "usage: zpwrBackup [ -d <dir> ] <file/dir...>"
         return 1
     fi
 
-    local newfile
+    zparseopts -D -E -A opts -- d:
 
-    newfile="$1".$(date +%Y%m%d.%H.%M.bak)
-    mv "$1" "$newfile"
-    cp -pR "$newfile" "$1"
-    printf \
-        "\e[4;1m$1\e[0m backed up to \e[4;1m$newfile\e[0m\n"
+    local newfile f dir dest
+    if (( $+opts[-d] )); then
+        dir=${opts[-d]}
+    else
+        dir=.
+    fi
+
+    dir="${dir:A}"
+
+    if ! [[ -d "$dir" ]]; then
+        mkdir -pv "$dir"
+    fi
+
+
+    for f in "$@"; do
+
+        f="${f:A}"
+        if [[ "$f" == "$dir" ]]; then
+            continue
+        fi
+        newfile="${f:t}".$(date +%Y%m%d.%H.%M.bak)
+        dest="$dir/$newfile"
+        cp -pR "$f" "$dest"
+        print -- "\e[4;1m$f\e[0m backed up to \e[4;1m$dest\e[0m"
+    done
+
 }
 
 zpwrBackup "$@"
