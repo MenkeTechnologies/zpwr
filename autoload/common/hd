@@ -6,7 +6,7 @@ function ___hd(){
 
     if cmd="$(zpwrGetGHDelURL)";then
 
-        if zpwrConfirm "Exe '$cmd'"; then
+        if zpwrConfirm "Exe '${cmd//$GITHUB_TOKEN/***}'"; then
             if eval "$cmd"; then
                 zpwrPrettyPrint "Successful deletion."
             else
