@@ -73,6 +73,7 @@ function zpwrDedupPaths() {
     # mess up OMZ fpath check if should remove zcompdump
     fpath=(${(u)fpath})
     path=(${(u)path})
+    manpath=(${(u)manpath})
 }
 
 # duplicates slow down searching
