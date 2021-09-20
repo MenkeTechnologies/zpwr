@@ -2,8 +2,8 @@
 # vim: set ft=sh:
 function zpwrGetGHDelURL(){
 
-    if [[ -z "$GITHUB_DELETE_TOKEN" ]]; then
-        zpwrLogConsoleErr "GITHUB_DELETE_TOKEN is missing."
+    if [[ -z "$GITHUB_TOKEN" ]]; then
+        zpwrLogConsoleErr "GITHUB_TOKEN is missing."
         return 1
     fi
 
@@ -28,7 +28,7 @@ function zpwrGetGHDelURL(){
     test -z "$repo" && zpwrLogConsoleErr "bad repo $repo" && return 1
     test -z "$user" && zpwrLogConsoleErr "bad user $user" && return 1
 
-    echo "curl -fsSL -H 'Authorization: token $GITHUB_DELETE_TOKEN' -X DELETE https://api.github.com/repos/$user/$repo"
+    echo "curl -fsSL -H 'Authorization: token $GITHUB_TOKEN' -X DELETE https://api.github.com/repos/$user/$repo"
 
 }
 
