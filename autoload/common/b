@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___b(){
+function b(){
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: b <cmds> or b -s <sleeptime> <cmds>"
@@ -25,4 +25,4 @@ function ___b(){
     done
 }
 
-___b "$@"
+b "$@"

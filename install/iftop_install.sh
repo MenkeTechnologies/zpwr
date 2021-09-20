@@ -24,4 +24,6 @@ if builtin cd "$HOME/forkedRepos"; then
     else
         zpwrFail "could not cd to ZPWR_FORKED_DIR '$ZPWR_FORKED_DIR'"
     fi
+else
+    zpwrFail "could not cd to ZPWR_FORKED_DIR/iftopcolor '$ZPWR_FORKED_DIR/iftopcolor'"
 fi

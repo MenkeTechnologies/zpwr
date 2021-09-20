@@ -75,7 +75,7 @@ To install to a custom directory, clone the project to custom directory and star
 This also means you can move ZPWR after install after updating the sym links that are in `$HOME`.  First `export ZPWR_INSTALL=<mydirectory>/install` in current shell.  Replace `<mydirectory>` with your new install dir and keep `/install` in the export.
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
-## Installation Options
+## Installation Options to `~/.zpwr/install/install.sh`
 ```sh
     Options:
         -a  Install all dependencies
@@ -89,7 +89,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 ## ZPWR Features
 - 380+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
-- 160+ centralized environment variables in ZPWR namespace to control functionality
+- 165+ centralized environment variables in ZPWR namespace to control functionality
 - 760+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - 11.6k+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 175+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
@@ -159,7 +159,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - open URLs and files from tmux mouse drag selection (tmux's copy-mode-vi)
 - zpwr subcommands count with `zpwr verbscount`
 - zpwr subcommands into fzf then execed with `zpwr verbs`
-- zpwr subcommands into fzf with `zpwr verbsedit`
+- zpwr subcommands into fzf with `zpwr verbsedit` then onto command line
 - zpwr environment counts with `zpwr envcounts`
 - centralized FZF preview pane customization with environment variables
 - environment variables in ZPWR namespace in vim YCM completion from ctags generated `~/tags`
@@ -249,11 +249,11 @@ git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/in
 ```
 This will install just config files not dependencies.
 
-You can then run each install shell script in `.zpwr/install` manually to install just vim plugins or cargo packages etc.
+You can then run each install shell script in `~/.zpwr/install` manually to install just vim plugins or cargo packages etc.
 
 ## Install Destination
 
-All zpwr custom configs will be installed to `~/.zpwr`.  This is the `ZPWR` environment variable.  `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf` and other config files are sym linked into home dir to be read by the respective program.
+All zpwr custom configs will be installed to `~/.zpwr` by default.  This is the `ZPWR` environment variable.  `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf` and other config files are sym linked into home dir to be read by the respective program.
 Your old configs for these files will be found in a directory name approximately `~/.zpwr/local/username.rc.bak.date` after install.  Exact directory name is generated as shown.
 ```sh
 backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
@@ -377,10 +377,10 @@ File ending of currently edited file in vim determines the interpreter used by t
 
 ## Tmux Main Window
 The main window show in the screenshots is started by prefix-D (tmux prefix definition mentioned above) in an empty tmux window.  This sources a tmux script `~/.zpwr/tmux/control-window.conf`.
-Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-windo.conf` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window.conf` in an empty tmux pane.
+Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-window.conf` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window.conf` in an empty tmux pane.
 
 ## Personal Config
-Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup so you can put your additional code there.  This file will not be overridden with the `zpwr update` shell function.  You can override installer variables in this file before install.  Because this file if sourced by bash installer and zsh startup you should check if the shell is zsh before any zsh only features like `zpwrIsZsh && myZshConfig`.  Startup shell files will source `~/.zpwr/local/.tokens-post.sh` after all zsh config and zinit startup.
+Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup so you can put your additional code there.  This file will not be overridden with the `zpwr update` shell function.  You can override installer variables in this file before install.  Because this file is sourced by bash installer and zsh startup you should check if the shell is zsh before any zsh only features like `zpwrIsZsh && myZshConfig`.  Startup shell files will source `~/.zpwr/local/.tokens-post.sh` after all zsh config and zinit startup.
 
 To use a different .vimrc and/or tmux.conf, set these environment variables to absolute path of custom configs and then `zpwr regenconfiglinks`.
 
@@ -396,7 +396,7 @@ Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and crea
 YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
 
 ## zpwr verbs
-Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf and then execute selected verb.
+Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf and then execute selected verbs (fzf multiselection is enabled).  `zpwr verbsedit` puts selected verbs onto command line for editing.
 
 ## ZPWR_GITHUB_ACCOUNT variable
 Change in `~/.zpwr/local/.tokens.sh`
