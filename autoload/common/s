@@ -25,7 +25,7 @@ function ___s(){
     if zpwrIsZsh; then
         if [[ $sec_cmd == s ]]; then
             {
-            test -z "$1" && ${=cmd} . || command s "$@"
+            test -z "$1" && ${=cmd} . || command s --provider google "$@"
             }
         else
             {
@@ -36,7 +36,7 @@ function ___s(){
         fi
     else
         if [[ $sec_cmd == s ]]; then
-            test -z "$1" && $cmd . || command s "$@"
+            test -z "$1" && $cmd . || command s --provider google  "$@"
         else
             out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             url="https://google.com/search?q=$out"
