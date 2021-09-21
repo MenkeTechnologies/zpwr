@@ -192,7 +192,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[gitzfordirdevelop]='zd=z $1 if present and run git wipe to develop branch in git dirs in $PWD'
     ZPWR_VERBS[gitzfordirmaster]='zm=z $1 if present and run git wipe to master branch in git dirs in $PWD'
     ZPWR_VERBS[gittotallines]='zpwrTotalLines=count of total line count of git files'
-    ZPWR_VERBS[grep]='fz=grep through pwd with ag into fzf'
+    ZPWR_VERBS[grep]='zpwrAgIntoFzf=grep through pwd with ag into fzf'
     ZPWR_VERBS[hidden]='cd $ZPWR_HIDDEN_DIR=go to zpwr $ZPWR_HIDDEN_DIR'
     ZPWR_VERBS[hist]='zpwrHistoryVerbAccept=exec history command'
     ZPWR_VERBS[histedit]='zpwrHistoryVerbEdit=edit history command'
@@ -365,6 +365,7 @@ ZPWR_VARS[VERB_0]="$0"
 
     if zpwrExists pi; then
         ZPWR_VERBS[pi]='pi=ping all LAN devices'
+        ZPWR_VERBS[ping]='pi=ping all LAN devices'
     fi
 
     if [[ -d "$ZPWR_PYSCRIPTS" ]]; then
