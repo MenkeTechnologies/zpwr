@@ -983,6 +983,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       ]                    paste-buffer -p ```
 - ``` bind-key    -T prefix       _                    split-window -v ```
 - ``` bind-key    -T prefix       a                    last-window ```
+- ``` bind-key    -T prefix       b                    run-shell -b "~/.zpwr/scripts/allPanes.zsh single open" ```
 - ``` bind-key    -T prefix       c                    new-window ```
 - ``` bind-key    -T prefix       d                    detach-client ```
 - ``` bind-key    -T prefix       f                    command-prompt "find-window -Z -- '%%'" ```
@@ -1063,7 +1064,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^D" list-choices ```
 - ``` bindkey -M viins "^E" end-of-line ```
 - ``` bindkey -M viins "^F^D" zpwrIntoFzf ```
-- ``` bindkey -M viins "^F^F" fzf-file-widget ```
+- ``` bindkey -M viins "^F^F" zpwrVimFzfFilesearchWidgetAccept ```
 - ``` bindkey -M viins "^F^G" zpwrIntoFzfAg ```
 - ``` bindkey -M viins "^F^H" zpwrLsoffzf ```
 - ``` bindkey -M viins "^F^J" zpwrVerbsWidgetAccept ```
@@ -1076,6 +1077,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^F^S" zsh-gacp-CheckDiff ```
 - ``` bindkey -M viins "^F^V" edit-command-line ```
 - ``` bindkey -M viins "^Fj" zpwrVerbsWidgetAccept ```
+- ``` bindkey -M viins "^Fn" zpwrVerbsWidget ```
 - ``` bindkey -M viins "^G" what-cursor-position ```
 - ``` bindkey -M viins "^H" autopair-delete ```
 - ``` bindkey -M viins "^I" fzf-completion ```
@@ -1150,18 +1152,18 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^[OB" history-substring-search-down ```
 - ``` bindkey -M viins "^[OC" vi-forward-char ```
 - ``` bindkey -M viins "^[OD" vi-backward-char ```
-- ``` bindkey -M viins "^[OF" end-of-line ```
-- ``` bindkey -M viins "^[OH" beginning-of-line ```
 - ``` bindkey -M viins "^[OP" zpwrUp8widget ```
 - ``` bindkey -M viins "^[OQ" sub ```
 - ``` bindkey -M viins "^[OR" zpwrGetrcWidget ```
 - ``` bindkey -M viins "^[[1;2D" sub ```
+- ``` bindkey -M viins "^[[1;5A" zsh-gacp-CheckDiff ```
+- ``` bindkey -M viins "^[[1;5B" zpwrUpdater ```
+- ``` bindkey -M viins "^[[1;5C" zpwrTutsUpdate ```
+- ``` bindkey -M viins "^[[1;5D" dbz ```
+- ``` bindkey -M viins "^[[1~" beginning-of-line ```
 - ``` bindkey -M viins "^[[200~" bracketed-paste ```
 - ``` bindkey -M viins "^[[3~" delete-char ```
-- ``` bindkey -M viins "^[[5A" zsh-gacp-CheckDiff ```
-- ``` bindkey -M viins "^[[5B" zpwrUpdater ```
-- ``` bindkey -M viins "^[[5C" zpwrTutsUpdate ```
-- ``` bindkey -M viins "^[[5D" dbz ```
+- ``` bindkey -M viins "^[[4~" end-of-line ```
 - ``` bindkey -M viins "^[[5~" zpwrClipboard ```
 - ``` bindkey -M viins "^[[A" history-substring-search-up ```
 - ``` bindkey -M viins "^[[B" history-substring-search-down ```
@@ -1203,7 +1205,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^D" list-choices ```
 - ``` bindkey -a "^E" end-of-line ```
 - ``` bindkey -a "^F^D" zpwrIntoFzf ```
-- ``` bindkey -a "^F^F" fzf-file-widget ```
+- ``` bindkey -a "^F^F" zpwrVimFzfFilesearchWidgetAccept ```
 - ``` bindkey -a "^F^G" zpwrIntoFzfAg ```
 - ``` bindkey -a "^F^H" zpwrLsoffzf ```
 - ``` bindkey -a "^F^J" zpwrVerbsWidgetAccept ```
@@ -1216,6 +1218,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^F^S" zsh-gacp-CheckDiff ```
 - ``` bindkey -a "^F^V" edit-command-line ```
 - ``` bindkey -a "^Fj" zpwrVerbsWidgetAccept ```
+- ``` bindkey -a "^Fn" zpwrVerbsWidget ```
 - ``` bindkey -a "^G" what-cursor-position ```
 - ``` bindkey -a "^H" vi-backward-char ```
 - ``` bindkey -a "^I" zpwrExpandOrCompleteWithDots ```
@@ -1370,12 +1373,12 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M menuselect "^[OB" down-line-or-history ```
 - ``` bindkey -M menuselect "^[OC" forward-char ```
 - ``` bindkey -M menuselect "^[OD" backward-char ```
+- ``` bindkey -M menuselect "^[[1;5A" vi-backward-word ```
+- ``` bindkey -M menuselect "^[[1;5B" vi-forward-word ```
+- ``` bindkey -M menuselect "^[[1;5C" vi-end-of-line ```
+- ``` bindkey -M menuselect "^[[1;5D" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[1~" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[4~" vi-end-of-line ```
-- ``` bindkey -M menuselect "^[[5A" vi-backward-word ```
-- ``` bindkey -M menuselect "^[[5B" vi-forward-word ```
-- ``` bindkey -M menuselect "^[[5C" vi-end-of-line ```
-- ``` bindkey -M menuselect "^[[5D" vi-beginning-of-line ```
 - ``` bindkey -M menuselect "^[[5~" vi-backward-word ```
 - ``` bindkey -M menuselect "^[[6~" vi-forward-word ```
 - ``` bindkey -M menuselect "^[[A" up-line-or-history ```
@@ -1528,6 +1531,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viopp "j" down-line ```
 - ``` bindkey -M viopp "k" up-line ```
 # Vim Keybindings Insert Mode
+- ```  ```
 - ``` i  <S-BS>       @<Plug>delimitMateS-BS ```
 - ``` i  <BS>         @<Plug>delimitMateBS ```
 - ``` i  <Plug>delimitMateJumpMany *@<SNR>59_TriggerAbb()."\<C-R>=delimitMate#JumpMany()\<CR>" ```
@@ -1697,6 +1701,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` i  fj            <Esc> ```
 - ``` i  jf            <Esc> ```
 # Vim Keybindings Normal Mode
+- ```  ```
 - ``` n  <Space>hp    @<Plug>(GitGutterPreviewHunk) ```
 - ``` n  <Space>hu    @<Plug>(GitGutterUndoHunk) ```
 - ``` n  <Space>hs    @<Plug>(GitGutterStageHunk) ```
@@ -1875,14 +1880,17 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ```    W           * repmo#SelfKey('w', 'b') ```
 - ``` n  Y           * yy`> ```
 - ``` n  [%            <Plug>(MatchitNormalMultiBackward) ```
-- ``` n  [xx           <Plug>unimpaired_line_xml_encode ```
-- ``` n  [x            <Plug>unimpaired_xml_encode ```
-- ``` n  [uu           <Plug>unimpaired_line_url_encode ```
-- ``` n  [u            <Plug>unimpaired_url_encode ```
-- ``` n  [yy           <Plug>unimpaired_line_string_encode ```
-- ``` n  [y            <Plug>unimpaired_string_encode ```
+- ``` n  [xx           <Plug>(unimpaired-xml-encode-line) ```
+- ``` n  [x            <Plug>(unimpaired-xml-encode) ```
+- ``` n  [uu           <Plug>(unimpaired-url-encode-line) ```
+- ``` n  [u            <Plug>(unimpaired-url-encode) ```
+- ``` n  [CC           <Plug>(unimpaired-string-encode-line) ```
+- ``` n  [C            <Plug>(unimpaired-string-encode) ```
+- ``` n  [yy           <Plug>(unimpaired-string-encode-line) ```
+- ``` n  [y            <Plug>(unimpaired-string-encode) ```
 - ``` n  [P            <Plug>unimpairedPutAbove ```
 - ``` n  [p            <Plug>unimpairedPutAbove ```
+- ``` n  [o<Esc>     & <Nop> ```
 - ``` n  [o            <Plug>(unimpaired-enable) ```
 - ``` n  [e            <Plug>unimpairedMoveUp ```
 - ``` n  [<Space>      <Plug>unimpairedBlankUp ```
@@ -1906,14 +1914,17 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` nox[m          * repmo#SelfKey('[m', ']m') ```
 - ``` n  \K          * :OnlineThesaurusCurrentWord<CR> ```
 - ``` n  ]%            <Plug>(MatchitNormalMultiForward) ```
-- ``` n  ]xx           <Plug>unimpaired_line_xml_decode ```
-- ``` n  ]x            <Plug>unimpaired_xml_decode ```
-- ``` n  ]uu           <Plug>unimpaired_line_url_decode ```
-- ``` n  ]u            <Plug>unimpaired_url_decode ```
-- ``` n  ]yy           <Plug>unimpaired_line_string_decode ```
-- ``` n  ]y            <Plug>unimpaired_string_decode ```
+- ``` n  ]xx           <Plug>(unimpaired-xml-decode-line) ```
+- ``` n  ]x            <Plug>(unimpaired-xml-decode) ```
+- ``` n  ]uu           <Plug>(unimpaired-url-decode-line) ```
+- ``` n  ]u            <Plug>(unimpaired-url-decode) ```
+- ``` n  ]CC           <Plug>(unimpaired-string-decode-line) ```
+- ``` n  ]C            <Plug>(unimpaired-string-decode) ```
+- ``` n  ]yy           <Plug>(unimpaired-string-decode-line) ```
+- ``` n  ]y            <Plug>(unimpaired-string-decode) ```
 - ``` n  ]P            <Plug>unimpairedPutBelow ```
 - ``` n  ]p            <Plug>unimpairedPutBelow ```
+- ``` n  ]o<Esc>     & <Nop> ```
 - ``` n  ]o            <Plug>(unimpaired-disable) ```
 - ``` n  ]e            <Plug>unimpairedMoveDown ```
 - ``` n  ]<Space>      <Plug>unimpairedBlankDown ```
@@ -1965,6 +1976,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` noxt             repmo#ZapKey('<Plug>Sneak_t') ```
 - ``` n  u             <Plug>(RepeatUndo) ```
 - ``` noxw             <Plug>CamelCaseMotion_w ```
+- ``` n  yo<Esc>     & <Nop> ```
 - ``` n  yo            <Plug>(unimpaired-toggle) ```
 - ``` n  ySS           <Plug>YSsurround ```
 - ``` n  ySs           <Plug>YSsurround ```
@@ -1982,16 +1994,28 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Plug>(MatchitNormalForward) * :<C-U>call matchit#Match_wrapper('',1,'n')<CR> ```
 - ``` n  <Plug>(wildfire-quick-select) * :<C-U>call wildfire#QuickSelect(['ip', 'i)', 'i]', 'i}', 'i''', 'i"', 'it'])<CR> ```
 - ``` n  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Start(v:count1, ['ip', 'i)', 'i]', 'i}', 'i''', 'i"', 'it'])<CR> ```
+- ``` n  <Plug>(unimpaired-xml-decode-line) * <SNR>140_TransformSetup("xml_decode")."_" ```
+- ``` n  <Plug>(unimpaired-xml-decode) * <SNR>140_TransformSetup("xml_decode") ```
 - ``` n  <Plug>unimpaired_line_xml_decode * <SNR>140_TransformSetup("xml_decode")."_" ```
 - ``` n  <Plug>unimpaired_xml_decode * <SNR>140_TransformSetup("xml_decode") ```
+- ``` n  <Plug>(unimpaired-xml-encode-line) * <SNR>140_TransformSetup("xml_encode")."_" ```
+- ``` n  <Plug>(unimpaired-xml-encode) * <SNR>140_TransformSetup("xml_encode") ```
 - ``` n  <Plug>unimpaired_line_xml_encode * <SNR>140_TransformSetup("xml_encode")."_" ```
 - ``` n  <Plug>unimpaired_xml_encode * <SNR>140_TransformSetup("xml_encode") ```
+- ``` n  <Plug>(unimpaired-url-decode-line) * <SNR>140_TransformSetup("url_decode")."_" ```
+- ``` n  <Plug>(unimpaired-url-decode) * <SNR>140_TransformSetup("url_decode") ```
 - ``` n  <Plug>unimpaired_line_url_decode * <SNR>140_TransformSetup("url_decode")."_" ```
 - ``` n  <Plug>unimpaired_url_decode * <SNR>140_TransformSetup("url_decode") ```
+- ``` n  <Plug>(unimpaired-url-encode-line) * <SNR>140_TransformSetup("url_encode")."_" ```
+- ``` n  <Plug>(unimpaired-url-encode) * <SNR>140_TransformSetup("url_encode") ```
 - ``` n  <Plug>unimpaired_line_url_encode * <SNR>140_TransformSetup("url_encode")."_" ```
 - ``` n  <Plug>unimpaired_url_encode * <SNR>140_TransformSetup("url_encode") ```
+- ``` n  <Plug>(unimpaired-string-decode-line) * <SNR>140_TransformSetup("string_decode")."_" ```
+- ``` n  <Plug>(unimpaired-string-decode) * <SNR>140_TransformSetup("string_decode") ```
 - ``` n  <Plug>unimpaired_line_string_decode * <SNR>140_TransformSetup("string_decode")."_" ```
 - ``` n  <Plug>unimpaired_string_decode * <SNR>140_TransformSetup("string_decode") ```
+- ``` n  <Plug>(unimpaired-string-encode-line) * <SNR>140_TransformSetup("string_encode")."_" ```
+- ``` n  <Plug>(unimpaired-string-encode) * <SNR>140_TransformSetup("string_encode") ```
 - ``` n  <Plug>unimpaired_line_string_encode * <SNR>140_TransformSetup("string_encode")."_" ```
 - ``` n  <Plug>unimpaired_string_encode * <SNR>140_TransformSetup("string_encode") ```
 - ``` n  <Plug>unimpairedPutBelow * :call <SNR>140_putline(']p', 'Below')<CR> ```
@@ -2419,6 +2443,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Home>      * gg ```
 - ``` n  <Plug>RepeatEx * @: :call repeat#set("\<Plug>RepeatEx")<CR> ```
 # Vim Keybindings Visual Mode
+- ```  ```
 - ``` x  <Space>hs    @<Plug>(GitGutterStageHunk) ```
 - ``` x  ac           @<Plug>(GitGutterTextObjectOuterVisual) ```
 - ``` x  ic           @<Plug>(GitGutterTextObjectInnerVisual) ```
@@ -2510,18 +2535,20 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  Y           * y`>j ```
 - ``` x  Z             <Plug>Sneak_S ```
 - ``` x  [%            <Plug>(MatchitVisualMultiBackward) ```
-- ``` x  [x            <Plug>unimpaired_xml_encode ```
-- ``` x  [u            <Plug>unimpaired_url_encode ```
-- ``` x  [y            <Plug>unimpaired_string_encode ```
+- ``` x  [x            <Plug>(unimpaired-xml-encode) ```
+- ``` x  [u            <Plug>(unimpaired-url-encode) ```
+- ``` x  [C            <Plug>(unimpaired-string-encode) ```
+- ``` x  [y            <Plug>(unimpaired-string-encode) ```
 - ``` x  [e            <Plug>unimpairedMoveSelectionUp ```
 - ``` x  [n            <Plug>unimpairedContextPrevious ```
 - ``` nox[m          * repmo#SelfKey('[m', ']m') ```
 - ``` ox [[          * repmo#SelfKey('[[', ']]') ```
 - ``` v  \K          * y:Thesaurus <C-R>"<CR> ```
 - ``` x  ]%            <Plug>(MatchitVisualMultiForward) ```
-- ``` x  ]x            <Plug>unimpaired_xml_decode ```
-- ``` x  ]u            <Plug>unimpaired_url_decode ```
-- ``` x  ]y            <Plug>unimpaired_string_decode ```
+- ``` x  ]x            <Plug>(unimpaired-xml-decode) ```
+- ``` x  ]u            <Plug>(unimpaired-url-decode) ```
+- ``` x  ]C            <Plug>(unimpaired-string-decode) ```
+- ``` x  ]y            <Plug>(unimpaired-string-decode) ```
 - ``` x  ]e            <Plug>unimpairedMoveSelectionDown ```
 - ``` x  ]n            <Plug>unimpairedContextNext ```
 - ``` nox]m          * repmo#SelfKey(']m', '[m') ```
@@ -2559,11 +2586,17 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` x  <Plug>(MatchitVisualForward) * :<C-U>call matchit#Match_wrapper('',1,'v')<CR>m'gv`` ```
 - ``` v  <Plug>(wildfire-fuel) * :<C-U>call wildfire#Fuel(v:count1)<CR> ```
 - ``` v  <Plug>(wildfire-water) * :<C-U>call wildfire#Water(v:count1)<CR> ```
+- ``` x  <Plug>(unimpaired-xml-decode) * <SNR>140_TransformSetup("xml_decode") ```
 - ``` x  <Plug>unimpaired_xml_decode * <SNR>140_TransformSetup("xml_decode") ```
+- ``` x  <Plug>(unimpaired-xml-encode) * <SNR>140_TransformSetup("xml_encode") ```
 - ``` x  <Plug>unimpaired_xml_encode * <SNR>140_TransformSetup("xml_encode") ```
+- ``` x  <Plug>(unimpaired-url-decode) * <SNR>140_TransformSetup("url_decode") ```
 - ``` x  <Plug>unimpaired_url_decode * <SNR>140_TransformSetup("url_decode") ```
+- ``` x  <Plug>(unimpaired-url-encode) * <SNR>140_TransformSetup("url_encode") ```
 - ``` x  <Plug>unimpaired_url_encode * <SNR>140_TransformSetup("url_encode") ```
+- ``` x  <Plug>(unimpaired-string-decode) * <SNR>140_TransformSetup("string_decode") ```
 - ``` x  <Plug>unimpaired_string_decode * <SNR>140_TransformSetup("string_decode") ```
+- ``` x  <Plug>(unimpaired-string-encode) * <SNR>140_TransformSetup("string_encode") ```
 - ``` x  <Plug>unimpaired_string_encode * <SNR>140_TransformSetup("string_encode") ```
 - ```    <Plug>unimpairedMoveSelectionDown * :<C-U>call <SNR>140_MoveSelectionDown(v:count1)<CR> ```
 - ```    <Plug>unimpairedMoveSelectionUp * :<C-U>call <SNR>140_MoveSelectionUp(v:count1)<CR> ```
@@ -2888,6 +2921,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  <C-Left>    * <gv ```
 - ``` v  <C-Right>   * >gv ```
 # Vim Keybindings Command Colon Mode
+- ```  ```
 - ``` !  <M-C-H>     * <C-W> ```
 - ``` !  <M-BS>      * <C-W> ```
 - ``` !  <M-p>       * <Up> ```
