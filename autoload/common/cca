@@ -1,20 +1,21 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___cca() {
+function cca() {
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: cca <file...>"
         return 1
     fi
 
-    local firstArg sel firstdir
+    local firstArg sel firstDir
 
     firstArg="${${(Az)@}[1]//\"/}"
-    firstdir=${firstArg:A:h}
-    BUFFER="cd \"$firstdir\"; c ""${@:A}""; "
+    firstDir="${firstArg:A:h}"
+
+    BUFFER="builtin cd \"$firstDir\" && c ""${@:A}""; "
     print -sr "$BUFFER"
     zpwrLogInfo "$BUFFER"
     eval "$BUFFER"
 }
 
-___cca "$@"
+cca "$@"
