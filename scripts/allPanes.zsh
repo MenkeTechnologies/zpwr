@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 #{{{                    MARK:Header
-#**************************************************************
-##### Author: MenkeTechnologies
+#************************************************************** #### Author: MenkeTechnologies
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Sun Feb  7 21:47:47 EST 2021
 ##### Purpose: bash script to
@@ -21,6 +20,7 @@ fi
 local type
 
 type="$1"
+action="$2"
 
 exec 2>> "$ZPWR_LOGFILE"
 
@@ -54,8 +54,15 @@ rm -f "$ZPWR_SOCKET$$"
 
 #tmux swap-pane -d -s "$new_pane" -t "$active_pane"
 
-if tmux select-window -t "$active_sess:$active_win"; then
-   if [[ "$msg" == full ]] && tmux select-pane -t "$active_sess:$active_win.$active_pane"; then
+if [[ $action == "open" ]]; then
+    raw="$(tmux save-buffer - | perl -pe 's@(^\s|\s$)@@')"
+    if ! [[ $raw =~ :// ]]; then
+        raw="http://$raw"
+    fi
+    echo "allPanes.zsh exec: ${ZPWR_OPEN_CMD} '$raw'" >&2
+    ${=ZPWR_OPEN_CMD} "$raw"
+elif tmux select-window -t "$active_sess:$active_win"; then
+    if [[ "$msg" == full ]] && tmux select-pane -t "$active_sess:$active_win.$active_pane"; then
         tmux paste-buffer
     fi
 fi
