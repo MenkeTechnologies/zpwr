@@ -1176,6 +1176,7 @@ vnoremap <silent> <C-B> :call CopyClip()<CR>`>
 vnoremap <RightMouse> :call CopyClip()<CR>`>
 
 vnoremap <silent>gs :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`>
+vnoremap <silent>go :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh open <CR>`>
 
 function! ExtractFoldMarker() range
     let l:wordsUnderCursor = s:getVisualSelection()
