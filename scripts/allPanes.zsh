@@ -56,11 +56,13 @@ rm -f "$ZPWR_SOCKET$$"
 
 if [[ $action == "open" ]]; then
     raw="$(tmux save-buffer - | perl -pe 's@(^\s|\s$)@@')"
-    if ! [[ $raw =~ :// ]]; then
-        raw="http://$raw"
+    if [[ -n "$raw" ]]; then
+        if ! [[ $raw =~ :// ]]; then
+            raw="http://$raw"
+        fi
+        echo "allPanes.zsh exec: ${ZPWR_OPEN_CMD} '$raw'" >&2
+        ${=ZPWR_OPEN_CMD} "$raw"
     fi
-    echo "allPanes.zsh exec: ${ZPWR_OPEN_CMD} '$raw'" >&2
-    ${=ZPWR_OPEN_CMD} "$raw"
 elif tmux select-window -t "$active_sess:$active_win"; then
     if [[ "$msg" == full ]] && tmux select-pane -t "$active_sess:$active_win.$active_pane"; then
         tmux paste-buffer
