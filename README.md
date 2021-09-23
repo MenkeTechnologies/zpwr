@@ -579,6 +579,8 @@ export ZPWR_TABSTOP_ALIASES=true
 export ZPWR_TMUX_PREFIX_MAC='C-a'
 # the tmux prefix on linux
 export ZPWR_TMUX_PREFIX_LINUX='C-b'
+# the tmux copy mode history limit
+export ZPWR_TMUX_HISTORY_LIMIT=30000
 # turns on set -x in critical regions
 export ZPWR_TRACE=false
 # use nvim not vim
