@@ -997,6 +997,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       b                    run-shell -b "~/.zpwr/scripts/allPanes.zsh single open" ```
 - ``` bind-key    -T prefix       c                    new-window ```
 - ``` bind-key    -T prefix       d                    detach-client ```
+- ``` bind-key    -T prefix       e                    run-shell -b "~/.tmux/plugins/tmux-fzf-url/fzf-url.sh  '' 30000" ```
 - ``` bind-key    -T prefix       f                    command-prompt "find-window -Z -- '%%'" ```
 - ``` bind-key -r -T prefix       h                    select-pane -L ```
 - ``` bind-key    -T prefix       i                    display-message ```
@@ -1011,7 +1012,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       r                    source-file ~/.zpwr/tmux/init.conf \; display-message "Tmux Reloaded!" \; copy-mode -q ```
 - ``` bind-key    -T prefix       s                    choose-tree -Zs ```
 - ``` bind-key    -T prefix       t                    clock-mode ```
-- ``` bind-key    -T prefix       u                    run-shell -b "~/.tmux/plugins/tmux-fzf-url/fzf-url.sh '' screen" ```
+- ``` bind-key    -T prefix       u                    run-shell -b "~/.tmux/plugins/tmux-fzf-url/fzf-url.sh  '' 30000" ```
 - ``` bind-key    -T prefix       v                    run-shell -b "~/.zpwr/scripts/allPanes.zsh multi" ```
 - ``` bind-key    -T prefix       w                    choose-tree -Zw ```
 - ``` bind-key    -T prefix       x                    kill-pane ```
@@ -1819,7 +1820,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Space>h/   * :History/<CR> ```
 - ``` n  <Space>hh   * :History<CR> ```
 - ``` n  <Space>rg   * :Rg<CR> ```
-- ``` n  <Space>o    * :ALEToggle<CR> ```
+- ``` n  <Space>oa   * :ALEToggle<CR> ```
 - ``` n  <Space>m    * :Map<CR> ```
 - ``` n  <Space>j    * :Lines<CR> ```
 - ``` n  <Space>ke   * :FZFKeys<CR> ```
@@ -1835,6 +1836,9 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ```    <Space>hi     :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR> ```
 - ``` n  <Space>vj   * :w!<CR>:call TmuxRepeat("file")<CR> ```
 - ``` n  <Space>ev     :call ExtractVariable()<CR> ```
+- ``` n  <Space>os   * :call CopyCWordClip()<CR> :call system("bash $ZPWR_TMUX/google.sh google")<CR> ```
+- ``` n  <Space>ox   * :call CopyCWordClip()<CR> :call system("bash $ZPWR_TMUX/google.sh open")<CR> ```
+- ``` n  <Space>oc   * :call CopyCWordClip()<CR> ```
 - ```    <Space><Space>e   <Plug>(easymotion-bd-e) ```
 - ```    <Space><Space>w   <Plug>(easymotion-bd-w) ```
 - ``` n  <Space>x    * :normal mzg&`zzz<CR> ```
@@ -2572,7 +2576,8 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` v  gx            <Plug>NetrwBrowseXVis ```
 - ``` x  g%            <Plug>(MatchitVisualBackward) ```
 - ``` x  gS            <Plug>VgSurround ```
-- ``` v  gs          * :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`> ```
+- ``` v  go          * :call CopyClip()<CR> :call system("bash $ZPWR_TMUX/google.sh open")<CR>`> ```
+- ``` v  gs          * :call CopyClip()<CR> :call system("bash $ZPWR_TMUX/google.sh google")<CR>`> ```
 - ``` noxge          * repmo#SelfKey('ge', 'e') ```
 - ``` noxgE          * repmo#SelfKey('gE', 'E') ```
 - ``` noxh           * repmo#SelfKey('h', 'l') ```
