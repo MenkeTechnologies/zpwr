@@ -1161,7 +1161,16 @@ function! CopyClip() range
     let l:stripped = Strip(l:wordsUnderCursor)
     "let @* = l:stripped
     call system($ZPWR_COPY_CMD, l:stripped)
-    echom 'copied '.l:len.' to system clipboard'
+    echom 'copied '.l:len.' line(s) to system clipboard'
+endfunction
+
+function! CopyCWordClip()
+    let l:wordsUnderCursor = expand("<cWORD>")
+    let l:len = len(split(l:wordsUnderCursor, '\n'))
+    let l:stripped = Strip(l:wordsUnderCursor)
+    "let @* = l:stripped
+    call system($ZPWR_COPY_CMD, l:stripped)
+    echom 'copied '.l:len.' line(s) to system clipboard'
 endfunction
 
 function! PasteClip()
@@ -1175,8 +1184,12 @@ command! -bang -nargs=* Paste call PasteClip()
 vnoremap <silent> <C-B> :call CopyClip()<CR>`>
 vnoremap <RightMouse> :call CopyClip()<CR>`>
 
-vnoremap <silent>gs :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh google <CR>`>
-vnoremap <silent>go :call CopyClip()<CR> :!bash $ZPWR_TMUX/google.sh open <CR>`>
+nnoremap <silent><leader>oc :call CopyCWordClip()<CR>
+nnoremap <silent><leader>ox :call CopyCWordClip()<CR> :call system("bash $ZPWR_TMUX/google.sh open")<CR>
+nnoremap <silent><leader>os :call CopyCWordClip()<CR> :call system("bash $ZPWR_TMUX/google.sh google")<CR>
+
+vnoremap <silent>gs :call CopyClip()<CR> :call system("bash $ZPWR_TMUX/google.sh google")<CR>`>
+vnoremap <silent>go :call CopyClip()<CR> :call system("bash $ZPWR_TMUX/google.sh open")<CR>`>
 
 function! ExtractFoldMarker() range
     let l:wordsUnderCursor = s:getVisualSelection()
@@ -1439,7 +1452,7 @@ nnoremap <silent> <C-D>m :Map<CR>
 nnoremap <silent> <leader>m :Map<CR>
 nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>o :ALEToggle<CR>
-nnoremap <silent> <leader>o :ALEToggle<CR>
+nnoremap <silent> <leader>oa :ALEToggle<CR>
 nnoremap <silent> <C-D>r :call GetRef()<CR>
 nnoremap <silent> <C-D>p :call PasteClip()<CR>
 nnoremap <silent> <C-D>q :SaveSession!<CR><TAB>
