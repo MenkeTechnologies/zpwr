@@ -97,8 +97,8 @@ export ZPWR_EXPAND_SECOND_POSITION=true
 export ZPWR_EXPAND_NATIVE=true
 # aliases expand before command line is accepted
 export ZPWR_EXPAND_PRE_EXEC=true
-# globs expand before command line is accepted
-export ZPWR_EXPAND_PRE_EXEC_GLOB=false
+# globs etc expand before command line is accepted
+export ZPWR_EXPAND_PRE_EXEC_NATIVE=false
 # second pos expand before command line is accepted
 export ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION=true
 # expand inside "
