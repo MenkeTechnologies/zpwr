@@ -63,6 +63,13 @@ if [[ $action == "open" ]]; then
         echo "allPanes.zsh exec: ${ZPWR_OPEN_CMD} '$raw'" >&2
         ${=ZPWR_OPEN_CMD} "$raw"
     fi
+elif [[ $action == "google" ]]; then
+        raw="$(tmux save-buffer - | perl -pe 's@(^\s|\s$)@@')"
+        if [[ -n "$raw" ]]; then
+            print -rn -- "$raw" | ${=ZPWR_COPY_CMD}
+            echo "allPanes.zsh exec: bash \"$ZPWR_TMUX/google.sh\" google" >&2
+            bash "$ZPWR_TMUX/google.sh" google
+        fi
 elif tmux select-window -t "$active_sess:$active_win"; then
     if [[ "$msg" == full ]] && tmux select-pane -t "$active_sess:$active_win.$active_pane"; then
         tmux paste-buffer

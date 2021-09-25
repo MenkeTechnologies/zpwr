@@ -93,13 +93,18 @@ if [[ "$1" == open ]]; then
     dir="$(cat $ZPWR_TMUX_LOCAL/pane_pwd)"
     echo "Pane dir is '$dir'"
     echo "Direct open '$cmd' to '$out'"
-    if ! $cmd "$out";then
-        echo "failback open '$cmd' to '$dir/$out'"
-        $cmd "$dir/$out"
+    if ! ${cmd} "$out";then
+        if [[ -e "$dir/$out" ]]; then
+            echo "failback open '$cmd' to '$dir/$out'"
+            ${cmd} "$dir/$out"
+        else
+            echo "failback open '$cmd' to 'https://$out'"
+            ${cmd} "https://$out"
+        fi
     fi
 elif [[ "$1" == google ]];then
     echo "Google search '$cmd' to '$out'"
-    $cmd "https://google.com/search?q=$out"
+    ${cmd} "https://google.com/search?q=$out"
 else
     echo "Unsupported subcommand '$1' to '$out'" >&2
 fi
