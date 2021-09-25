@@ -1,11 +1,16 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrVerbsWidgetAccept(){
+function zpwrVerbsWidgetAccept(){
 
-    zle .kill-whole-line
-    BUFFER="$(zpwrVerbsFZF)"
-    zpwrLogDebug "$BUFFER"
-    zle .accept-line
+    local f
+    f="$(zpwrVerbsFZF)"
+
+    if [[ -n "$f" ]]; then
+        zle .kill-whole-line
+        BUFFER="$f"
+        zpwrLogDebug "$BUFFER"
+        zle .accept-line
+    fi
 }
 
-___zpwrVerbsWidgetAccept "$@"
+zpwrVerbsWidgetAccept "$@"
