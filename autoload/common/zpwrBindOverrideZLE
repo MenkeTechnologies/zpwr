@@ -52,6 +52,7 @@ function zpwrBindOverrideZLE(){
     zle -N zpwrAlternateQuotes
     zle -N zpwrClipboard
     zle -N zpwrGoogle
+    zle -N zpwrOpen
     zle -N zpwrEOLorNextTabStop
     zle -N zpwrFzfSurround
     zle -N zpwrVimFzfFilesearchWidgetAccept
@@ -125,8 +126,8 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^Fn' zpwrVerbsWidget
     bindkey -M vicmd '^Fn' zpwrVerbsWidget
 
-    bindkey -M viins '^F^G' zpwrIntoFzfAg
-    bindkey -M vicmd '^F^G' zpwrIntoFzfAg
+    bindkey -M viins '^F^I' zpwrIntoFzfAg
+    bindkey -M vicmd '^F^I' zpwrIntoFzfAg
 
     bindkey -M viins '^F^R' zpwrAsVar
     bindkey -M vicmd '^F^R' zpwrAsVar
@@ -222,8 +223,11 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '\e^U' up-case-word
     bindkey -M vicmd '\e^U' up-case-word
 
-    bindkey -M viins '^V^B' zpwrGoogle
-    bindkey -M vicmd '^V^B' zpwrGoogle
+    bindkey -M viins '^F^G' zpwrGoogle
+    bindkey -M vicmd '^F^G' zpwrGoogle
+
+    bindkey -M viins '^F^O' zpwrOpen
+    bindkey -M vicmd '^F^O' zpwrOpen
 
     bindkey -M viins '\e[5~' zpwrClipboard
     bindkey -M viins '^B' zpwrClipboard

@@ -940,6 +940,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       C-s                  run-shell ~/.tmux/plugins/tmux-resurrect/scripts/save.sh ```
 - ``` bind-key    -T prefix       C-v                  run-shell "tmux set buffer \"$(reattach-to-user-namespace pbpaste)\"; tmux paste-buffer" ```
 - ``` bind-key    -T prefix       C-z                  suspend-client ```
+- ``` bind-key    -T prefix       C-]                  send-keys ^] ```
 - ``` bind-key    -T prefix       Space                run-shell -b "~/.zpwr/scripts/allPanes.zsh single" ```
 - ``` bind-key    -T prefix       !                    break-pane ```
 - ``` bind-key    -T prefix       \"                   split-window ```
@@ -999,6 +1000,7 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bind-key    -T prefix       d                    detach-client ```
 - ``` bind-key    -T prefix       e                    run-shell -b "~/.tmux/plugins/tmux-fzf-url/fzf-url.sh  '' 30000" ```
 - ``` bind-key    -T prefix       f                    command-prompt "find-window -Z -- '%%'" ```
+- ``` bind-key    -T prefix       g                    run-shell -b "~/.zpwr/scripts/allPanes.zsh single google" ```
 - ``` bind-key -r -T prefix       h                    select-pane -L ```
 - ``` bind-key    -T prefix       i                    display-message ```
 - ``` bind-key -r -T prefix       j                    select-pane -D ```
@@ -1075,15 +1077,17 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^C" self-insert ```
 - ``` bindkey -M viins "^D" list-choices ```
 - ``` bindkey -M viins "^E" end-of-line ```
+- ``` bindkey -M viins "^F^I" zpwrIntoFzfAg ```
 - ``` bindkey -M viins "^F^D" zpwrIntoFzf ```
 - ``` bindkey -M viins "^F^F" zpwrVimFzfFilesearchWidgetAccept ```
-- ``` bindkey -M viins "^F^G" zpwrIntoFzfAg ```
+- ``` bindkey -M viins "^F^G" zpwrGoogle ```
 - ``` bindkey -M viins "^F^H" zpwrLsoffzf ```
 - ``` bindkey -M viins "^F^J" zpwrVerbsWidgetAccept ```
 - ``` bindkey -M viins "^F^K" zpwrAlternateQuotes ```
 - ``` bindkey -M viins "^F^L" list-choices ```
 - ``` bindkey -M viins "^F^M" zzcomplete ```
 - ``` bindkey -M viins "^F^N" zpwrVerbsWidget ```
+- ``` bindkey -M viins "^F^O" zpwrOpen ```
 - ``` bindkey -M viins "^F^P" basicSedSub ```
 - ``` bindkey -M viins "^F^R" zpwrAsVar ```
 - ``` bindkey -M viins "^F^S" zsh-gacp-CheckDiff ```
@@ -1108,7 +1112,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -M viins "^T" fzf-file-widget ```
 - ``` bindkey -M viins "^U" zpwrClearLine ```
 - ``` bindkey -M viins "^V^@" zpwrVimFzf ```
-- ``` bindkey -M viins "^V^B" zpwrGoogle ```
 - ``` bindkey -M viins "^V^F" zpwrFasdFZF ```
 - ``` bindkey -M viins "^V^G" fzf-cd-widget ```
 - ``` bindkey -M viins "^V^K" zpwrEmacsFzf ```
@@ -1216,15 +1219,17 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^B" zpwrClipboard ```
 - ``` bindkey -a "^D" list-choices ```
 - ``` bindkey -a "^E" end-of-line ```
+- ``` bindkey -a "^F^I" zpwrIntoFzfAg ```
 - ``` bindkey -a "^F^D" zpwrIntoFzf ```
 - ``` bindkey -a "^F^F" zpwrVimFzfFilesearchWidgetAccept ```
-- ``` bindkey -a "^F^G" zpwrIntoFzfAg ```
+- ``` bindkey -a "^F^G" zpwrGoogle ```
 - ``` bindkey -a "^F^H" zpwrLsoffzf ```
 - ``` bindkey -a "^F^J" zpwrVerbsWidgetAccept ```
 - ``` bindkey -a "^F^K" zpwrAlternateQuotes ```
 - ``` bindkey -a "^F^L" list-choices ```
 - ``` bindkey -a "^F^M" zzcomplete ```
 - ``` bindkey -a "^F^N" zpwrVerbsWidget ```
+- ``` bindkey -a "^F^O" zpwrOpen ```
 - ``` bindkey -a "^F^P" basicSedSub ```
 - ``` bindkey -a "^F^R" zpwrAsVar ```
 - ``` bindkey -a "^F^S" zsh-gacp-CheckDiff ```
@@ -1247,7 +1252,6 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` bindkey -a "^T" transpose-chars ```
 - ``` bindkey -a "^U" zpwrClearLine ```
 - ``` bindkey -a "^V^@" zpwrVimFzf ```
-- ``` bindkey -a "^V^B" zpwrGoogle ```
 - ``` bindkey -a "^V^F" zpwrFasdFZF ```
 - ``` bindkey -a "^V^G" fzf-cd-widget ```
 - ``` bindkey -a "^V^K" zpwrEmacsFzf ```
@@ -1911,19 +1915,19 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  [<Space>      <Plug>unimpairedBlankUp ```
 - ``` n  [n            <Plug>unimpairedContextPrevious ```
 - ``` n  [f            <Plug>unimpairedDirectoryPrevious ```
-- ``` n  [<C-T>        <Plug>unimpairedTPPrevious ```
-- ``` n  [T            <Plug>unimpairedTFirst ```
-- ``` n  [t            <Plug>unimpairedTPrevious ```
-- ``` n  [<C-Q>        <Plug>unimpairedQPFile ```
-- ``` n  [Q            <Plug>unimpairedQFirst ```
-- ``` n  [q            <Plug>unimpairedQPrevious ```
-- ``` n  [<C-L>        <Plug>unimpairedLPFile ```
-- ``` n  [L            <Plug>unimpairedLFirst ```
-- ``` n  [l            <Plug>unimpairedLPrevious ```
-- ``` n  [B            <Plug>unimpairedBFirst ```
-- ``` n  [b            <Plug>unimpairedBPrevious ```
-- ``` n  [A            <Plug>unimpairedAFirst ```
-- ``` n  [a            <Plug>unimpairedAPrevious ```
+- ``` n  [<C-T>        <Plug>(unimpaired-ptprevious) ```
+- ``` n  [T            <Plug>(unimpaired-tfirst) ```
+- ``` n  [t            <Plug>(unimpaired-tprevious) ```
+- ``` n  [<C-Q>        <Plug>(unimpaired-cpfile) ```
+- ``` n  [Q            <Plug>(unimpaired-cfirst) ```
+- ``` n  [q            <Plug>(unimpaired-cprevious) ```
+- ``` n  [<C-L>        <Plug>(unimpaired-lpfile) ```
+- ``` n  [L            <Plug>(unimpaired-lfirst) ```
+- ``` n  [l            <Plug>(unimpaired-lprevious) ```
+- ``` n  [B            <Plug>(unimpaired-bfirst) ```
+- ``` n  [b            <Plug>(unimpaired-bprevious) ```
+- ``` n  [A            <Plug>(unimpaired-first) ```
+- ``` n  [a            <Plug>(unimpaired-previous) ```
 - ``` n  []            k$][%?}<CR>]}]]}]] ```
 - ``` n  [[            ?{<CR>w99[{ ```
 - ``` nox[m          * repmo#SelfKey('[m', ']m') ```
@@ -1945,19 +1949,19 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  ]<Space>      <Plug>unimpairedBlankDown ```
 - ``` n  ]n            <Plug>unimpairedContextNext ```
 - ``` n  ]f            <Plug>unimpairedDirectoryNext ```
-- ``` n  ]<C-T>        <Plug>unimpairedTPNext ```
-- ``` n  ]T            <Plug>unimpairedTLast ```
-- ``` n  ]t            <Plug>unimpairedTNext ```
-- ``` n  ]<C-Q>        <Plug>unimpairedQNFile ```
-- ``` n  ]Q            <Plug>unimpairedQLast ```
-- ``` n  ]q            <Plug>unimpairedQNext ```
-- ``` n  ]<C-L>        <Plug>unimpairedLNFile ```
-- ``` n  ]L            <Plug>unimpairedLLast ```
-- ``` n  ]l            <Plug>unimpairedLNext ```
-- ``` n  ]B            <Plug>unimpairedBLast ```
-- ``` n  ]b            <Plug>unimpairedBNext ```
-- ``` n  ]A            <Plug>unimpairedALast ```
-- ``` n  ]a            <Plug>unimpairedANext ```
+- ``` n  ]<C-T>        <Plug>(unimpaired-ptnext) ```
+- ``` n  ]T            <Plug>(unimpaired-tlast) ```
+- ``` n  ]t            <Plug>(unimpaired-tnext) ```
+- ``` n  ]<C-Q>        <Plug>(unimpaired-cnfile) ```
+- ``` n  ]Q            <Plug>(unimpaired-clast) ```
+- ``` n  ]q            <Plug>(unimpaired-cnext) ```
+- ``` n  ]<C-L>        <Plug>(unimpaired-lnfile) ```
+- ``` n  ]L            <Plug>(unimpaired-llast) ```
+- ``` n  ]l            <Plug>(unimpaired-lnext) ```
+- ``` n  ]B            <Plug>(unimpaired-blast) ```
+- ``` n  ]b            <Plug>(unimpaired-bnext) ```
+- ``` n  ]A            <Plug>(unimpaired-last) ```
+- ``` n  ]a            <Plug>(unimpaired-next) ```
 - ``` n  ]]            j0[[%/{<CR> ```
 - ``` n  ][            /}<CR>b99]} ```
 - ``` nox]m          * repmo#SelfKey(']m', '[m') ```
@@ -2103,30 +2107,56 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` n  <Plug>unimpairedDirectoryNext * :<C-U>execute <SNR>140_NextFileEntry(v:count1)<CR> ```
 - ``` n  <Plug>unimpairedTPNext * :<C-U>exe "p".(v:count ? v:count : "")."tnext"<CR> ```
 - ``` n  <Plug>unimpairedTPPrevious * :<C-U>exe "p".(v:count ? v:count : "")."tprevious"<CR> ```
+- ``` n  <Plug>(unimpaired-ptnext) * :<C-U>exe v:count1 . "ptnext"<CR> ```
+- ``` n  <Plug>(unimpaired-ptprevious) * :<C-U>exe v:count1 . "ptprevious"<CR> ```
 - ``` n  <Plug>unimpairedTLast * :<C-U>exe "".(v:count ? v:count : "")."tlast"<CR> ```
 - ``` n  <Plug>unimpairedTFirst * :<C-U>exe "".(v:count ? v:count : "")."tfirst"<CR> ```
 - ``` n  <Plug>unimpairedTNext * :<C-U>exe "".(v:count ? v:count : "")."tnext"<CR> ```
 - ``` n  <Plug>unimpairedTPrevious * :<C-U>exe "".(v:count ? v:count : "")."tprevious"<CR> ```
+- ``` n  <Plug>(unimpaired-tlast) * :<C-U>exe "".(v:count ? v:count : "")."tlast"<CR> ```
+- ``` n  <Plug>(unimpaired-tfirst) * :<C-U>exe "".(v:count ? v:count : "")."tfirst"<CR> ```
+- ``` n  <Plug>(unimpaired-tnext) * :<C-U>exe "".(v:count ? v:count : "")."tnext"<CR> ```
+- ``` n  <Plug>(unimpaired-tprevious) * :<C-U>exe "".(v:count ? v:count : "")."tprevious"<CR> ```
 - ``` n  <Plug>unimpairedQNFile * :<C-U>exe "".(v:count ? v:count : "")."cnfile"<CR>zv ```
 - ``` n  <Plug>unimpairedQPFile * :<C-U>exe "".(v:count ? v:count : "")."cpfile"<CR>zv ```
+- ``` n  <Plug>(unimpaired-cnfile) * :<C-U>exe "".(v:count ? v:count : "")."cnfile"<CR>zv ```
+- ``` n  <Plug>(unimpaired-cpfile) * :<C-U>exe "".(v:count ? v:count : "")."cpfile"<CR>zv ```
 - ``` n  <Plug>unimpairedQLast * :<C-U>exe "".(v:count ? v:count : "")."clast"<CR>zv ```
 - ``` n  <Plug>unimpairedQFirst * :<C-U>exe "".(v:count ? v:count : "")."cfirst"<CR>zv ```
 - ``` n  <Plug>unimpairedQNext * :<C-U>exe "".(v:count ? v:count : "")."cnext"<CR>zv ```
 - ``` n  <Plug>unimpairedQPrevious * :<C-U>exe "".(v:count ? v:count : "")."cprevious"<CR>zv ```
+- ``` n  <Plug>(unimpaired-clast) * :<C-U>exe "".(v:count ? v:count : "")."clast"<CR>zv ```
+- ``` n  <Plug>(unimpaired-cfirst) * :<C-U>exe "".(v:count ? v:count : "")."cfirst"<CR>zv ```
+- ``` n  <Plug>(unimpaired-cnext) * :<C-U>exe "".(v:count ? v:count : "")."cnext"<CR>zv ```
+- ``` n  <Plug>(unimpaired-cprevious) * :<C-U>exe "".(v:count ? v:count : "")."cprevious"<CR>zv ```
 - ``` n  <Plug>unimpairedLNFile * :<C-U>exe "".(v:count ? v:count : "")."lnfile"<CR>zv ```
 - ``` n  <Plug>unimpairedLPFile * :<C-U>exe "".(v:count ? v:count : "")."lpfile"<CR>zv ```
+- ``` n  <Plug>(unimpaired-lnfile) * :<C-U>exe "".(v:count ? v:count : "")."lnfile"<CR>zv ```
+- ``` n  <Plug>(unimpaired-lpfile) * :<C-U>exe "".(v:count ? v:count : "")."lpfile"<CR>zv ```
 - ``` n  <Plug>unimpairedLLast * :<C-U>exe "".(v:count ? v:count : "")."llast"<CR>zv ```
 - ``` n  <Plug>unimpairedLFirst * :<C-U>exe "".(v:count ? v:count : "")."lfirst"<CR>zv ```
 - ``` n  <Plug>unimpairedLNext * :<C-U>exe "".(v:count ? v:count : "")."lnext"<CR>zv ```
 - ``` n  <Plug>unimpairedLPrevious * :<C-U>exe "".(v:count ? v:count : "")."lprevious"<CR>zv ```
+- ``` n  <Plug>(unimpaired-llast) * :<C-U>exe "".(v:count ? v:count : "")."llast"<CR>zv ```
+- ``` n  <Plug>(unimpaired-lfirst) * :<C-U>exe "".(v:count ? v:count : "")."lfirst"<CR>zv ```
+- ``` n  <Plug>(unimpaired-lnext) * :<C-U>exe "".(v:count ? v:count : "")."lnext"<CR>zv ```
+- ``` n  <Plug>(unimpaired-lprevious) * :<C-U>exe "".(v:count ? v:count : "")."lprevious"<CR>zv ```
 - ``` n  <Plug>unimpairedBLast * :<C-U>exe "".(v:count ? v:count : "")."blast"<CR> ```
 - ``` n  <Plug>unimpairedBFirst * :<C-U>exe "".(v:count ? v:count : "")."bfirst"<CR> ```
 - ``` n  <Plug>unimpairedBNext * :<C-U>exe "".(v:count ? v:count : "")."bnext"<CR> ```
 - ``` n  <Plug>unimpairedBPrevious * :<C-U>exe "".(v:count ? v:count : "")."bprevious"<CR> ```
+- ``` n  <Plug>(unimpaired-blast) * :<C-U>exe "".(v:count ? v:count : "")."blast"<CR> ```
+- ``` n  <Plug>(unimpaired-bfirst) * :<C-U>exe "".(v:count ? v:count : "")."bfirst"<CR> ```
+- ``` n  <Plug>(unimpaired-bnext) * :<C-U>exe "".(v:count ? v:count : "")."bnext"<CR> ```
+- ``` n  <Plug>(unimpaired-bprevious) * :<C-U>exe "".(v:count ? v:count : "")."bprevious"<CR> ```
 - ``` n  <Plug>unimpairedALast * :<C-U>exe "".(v:count ? v:count : "")."last"<CR> ```
 - ``` n  <Plug>unimpairedAFirst * :<C-U>exe "".(v:count ? v:count : "")."first"<CR> ```
 - ``` n  <Plug>unimpairedANext * :<C-U>exe "".(v:count ? v:count : "")."next"<CR> ```
 - ``` n  <Plug>unimpairedAPrevious * :<C-U>exe "".(v:count ? v:count : "")."previous"<CR> ```
+- ``` n  <Plug>(unimpaired-last) * :<C-U>exe "".(v:count ? v:count : "")."last"<CR> ```
+- ``` n  <Plug>(unimpaired-first) * :<C-U>exe "".(v:count ? v:count : "")."first"<CR> ```
+- ``` n  <Plug>(unimpaired-next) * :<C-U>exe "".(v:count ? v:count : "")."next"<CR> ```
+- ``` n  <Plug>(unimpaired-previous) * :<C-U>exe "".(v:count ? v:count : "")."previous"<CR> ```
 - ``` n  <Plug>YSurround * <SNR>139_opfunc2('setup') ```
 - ``` n  <Plug>Ysurround * <SNR>139_opfunc('setup') ```
 - ``` n  <Plug>YSsurround * <SNR>139_opfunc2('setup').'_' ```

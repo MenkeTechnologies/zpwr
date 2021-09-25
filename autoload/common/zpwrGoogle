@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrGoogle(){
 
-    zpwrClipboard
+    zpwrClipboard &>/dev/null
     bash "$ZPWR_TMUX/google.sh" google
 }
 
