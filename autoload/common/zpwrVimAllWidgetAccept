@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zpwrVerbsWidgetAccept(){
+function zpwrVimAllWidgetAccept(){
 
     local sel
 
@@ -13,4 +13,4 @@ function zpwrVerbsWidgetAccept(){
     fi
 }
 
-zpwrVerbsWidgetAccept "$@"
+zpwrVimAllWidgetAccept "$@"
