@@ -22,8 +22,6 @@ function zpwrLocateFzfNoZLE(){
     if [[ -n "$sel" ]]; then
         print -sr -- "$BUFFER"
         eval "$BUFFER"
-    else
-        return
     fi
 }
 

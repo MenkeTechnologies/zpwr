@@ -13,6 +13,7 @@ function zpwrLocateFzfEditNoZLE(){
     sel="$(zpwrGetLocate)"
 
     firstArg="${${(Az)sel}[1]//\"/}"
+
     if [[ -d "$firstArg" ]]; then
         BUFFER="cd $firstArg;$editor $sel"
     else
@@ -21,8 +22,6 @@ function zpwrLocateFzfEditNoZLE(){
 
     if [[ -n "$sel" ]]; then
         print -zr -- "$BUFFER"
-    else
-        return
     fi
 }
 

@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrZstyle() {
+function zpwrZstyle() {
 
     local sel
 
@@ -9,9 +9,7 @@ function ___zpwrZstyle() {
     if [[ -n "$sel" ]]; then
         BUFFER="$editor $sel"
         print -rz -- "$BUFFER"
-    else
-        return
     fi
 }
 
-___zpwrZstyle "$@"
+zpwrZstyle "$@"

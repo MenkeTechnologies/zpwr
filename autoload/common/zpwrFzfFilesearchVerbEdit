@@ -14,8 +14,6 @@ function zpwrFzfFilesearchVerbEdit(){
     if [[ -n "$sel" ]]; then
         BUFFER="$editor $sel"
         print -rz -- "$BUFFER"
-    else
-        return
     fi
 }
 
