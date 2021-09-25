@@ -2,10 +2,16 @@
 # vim: set ft=sh:
 function zpwrVimFzfFilesearchWidgetAccept(){
 
-    zle .kill-whole-line
-    BUFFER="$EDITOR $(zpwrFzfFileSearch)"
-    zpwrLogDebug "$BUFFER"
-    zle .accept-line
+    local f
+
+    f="$(zpwrFzfFileSearch)"
+
+    if [[ -n "$f" ]]; then
+        zle .kill-whole-line
+        BUFFER="$EDITOR $f"
+        zpwrLogDebug "$BUFFER"
+        zle .accept-line
+    fi
 }
 
 zpwrVimFzfFilesearchWidgetAccept "$@"
