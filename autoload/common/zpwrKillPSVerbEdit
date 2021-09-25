@@ -9,8 +9,6 @@ function zpwrKillPSVerbEdit(){
     if [[ -n "$sel" ]]; then
         BUFFER="sudo kill -9 -- $sel"
         print -rz -- "$BUFFER"
-    else
-        return
     fi
 }
 zpwrKillPSVerbEdit "$@"

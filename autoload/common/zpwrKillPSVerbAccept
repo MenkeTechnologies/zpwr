@@ -10,8 +10,6 @@ function zpwrKillPSVerbAccept(){
         BUFFER="sudo kill -9 -- $sel"
         print -sr -- "$BUFFER"
         eval "$BUFFER"
-    else
-        return
     fi
 }
 

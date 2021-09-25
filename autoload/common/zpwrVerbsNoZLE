@@ -1,19 +1,16 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrVerbsNoZLE(){
+function zpwrVerbsNoZLE(){
 
     local firstArg sel editor
 
     sel="$(zpwrVerbsFZF)"
 
-    BUFFER="$sel"
-
     if [[ -n "$sel" ]]; then
+        BUFFER="$sel"
         print -sr -- "$BUFFER"
         eval "$BUFFER"
-    else
-        return
     fi
 }
 
-___zpwrVerbsNoZLE "$@"
+zpwrVerbsNoZLE "$@"

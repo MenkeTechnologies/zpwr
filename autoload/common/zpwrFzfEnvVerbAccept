@@ -19,8 +19,6 @@ function zpwrFzfEnvVerbAccept(){
     if [[ -n "$sel" ]]; then
         print -sr -- "$sel"
         eval "$sel"
-    else
-        return
     fi
 }
 

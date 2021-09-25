@@ -5,6 +5,7 @@ function zpwrLocateFzfEdit(){
     local firstArg sel firstdir mywords
 
     mywords=(${(z)BUFFER})
+
     if (( $#mywords == 0 )); then
         sel="$(zpwrGetFound)"
 
