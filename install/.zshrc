@@ -79,6 +79,7 @@ function zpwrDedupPaths() {
 # duplicates slow down searching
 builtin declare -aU fpath
 builtin declare -aU path
+builtin declare -aU manpath
 # FPATH should not be exported
 builtin declare +x FPATH
 zpwrDedupPaths
@@ -217,6 +218,7 @@ ZPWR_GH_PLUGINS=(
 )
 
 ZPWR_OMZ_PLUGINS=(
+    rustup
     ruby
     rake
     yarn
@@ -228,7 +230,6 @@ ZPWR_OMZ_PLUGINS=(
     git
     github
     mvn
-    django
     python
     golang
     man
@@ -260,7 +261,6 @@ ZPWR_OMZ_COMPS=(
     spring
     redis-cli
     rust
-    rustup
     fd
 )
 
