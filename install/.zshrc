@@ -712,6 +712,9 @@ builtin setopt cbases
 # search PATH for zsh <script>
 builtin setopt pathscript
 
+# search PATH for zsh <dir/script>
+builtin setopt pathdirs
+
 # more compact menu completion
 builtin setopt list_packed
 
