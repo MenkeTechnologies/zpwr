@@ -63,7 +63,7 @@ export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
 export HISTSIZE=50000
 export HISTTIMEFORMAT=' %F %T _ '
 export UMASK=077
-export LESS="-M -N -R -K -F -X"
+export LESS="-M -N -R -K -F -X -i"
 
 if [[ -z "$TMUX" ]]; then
     export TERM="xterm-256color"
