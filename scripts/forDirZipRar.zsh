@@ -84,10 +84,16 @@ function zpwrForDirZipRarMain() {
 
     emulate -L zsh
     local old dirs dir f files
-    setopt nullglob extendedglob
+    setopt nullglob extendedglob noshwordsplit
 
+    zpwrPrettyPrint "Gathering dirs..."
     if [[ -n "$@" ]]; then
-        dirs=( ${@}(/) )
+        dirs=()
+        for dir; do
+            if [[ -d "$dir" ]]; then
+                dirs+=( ${dir:a} )
+            fi
+        done
     else
         dirs=( ${~dirGlob} )
     fi
