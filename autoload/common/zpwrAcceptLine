@@ -93,6 +93,7 @@ function zpwrAcceptLine () {
 
 
     if [[ $ZPWR_EXPAND_PRE_EXEC == true ]]; then
+        CURSOR=${#BUFFER}
         zpwrExpandSupernaturalSpace "${ZPWR_VARS[ENTER_KEY]}"
     fi
 

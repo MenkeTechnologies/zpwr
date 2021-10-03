@@ -2,9 +2,7 @@
 # vim: set ft=sh:
 function zpwrFzfSurround(){
 
-    if test -z "$BUFFER" || [[ "$BUFFER" == [[:space:]]# ]]; then
-        zle up-line-or-history
-    fi
+    [[ -z "$BUFFER" ]] && LBUFFER="$(builtin fc -ln -1)"
 
     BUFFER="{ $BUFFER; } |& $ZPWR_FZF"
 
