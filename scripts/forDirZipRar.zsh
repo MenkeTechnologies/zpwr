@@ -79,11 +79,34 @@ function zpwrForDirRarZipProcess() {
     #set +x
 
 }
+function zpwrForDirZipRarRm() {
+
+    local files a f
+
+    files=( ${(v)ZPWR_PROCESSED[@]} )
+
+    if (( $#files )); then
+        zpwrPrettyPrint 'nested zip RM'
+        zpwrPrettyPrint 'nested rar RM'
+
+        for f in "${(v)files[@]}"; do
+            echo rm -rf "$f"
+        done
+
+        zpwrPrettyPrintNoNewline 'are you sure > '
+        read a
+        if [[ $a == y ]]; then
+            for f in "${(v)files[@]}"; do
+                rm -rf "$f"
+            done
+        fi
+    fi
+}
 
 function zpwrForDirZipRarMain() {
 
     emulate -L zsh
-    local old dirs dir f files
+    local old dirs dir
     setopt nullglob extendedglob noshwordsplit
 
     zpwrPrettyPrint "Gathering dirs..."
@@ -105,24 +128,8 @@ function zpwrForDirZipRarMain() {
     done
     builtin cd -q "$old"
 
-    files=( ${(v)ZPWR_PROCESSED[@]} )
+    zpwrForDirZipRarRm
 
-    if (( $#files )); then
-        zpwrPrettyPrint 'nested zip RM'
-        zpwrPrettyPrint 'nested rar RM'
-
-        for f in "${(v)files[@]}"; do
-            echo rm -rf "$f"
-        done
-
-        zpwrPrettyPrintNoNewline 'are you sure > '
-        read a
-        if [[ $a == y ]]; then
-            for f in "${(v)files[@]}"; do
-                rm -rf "$f"
-            done
-        fi
-    fi
 }
 
 dirGlob='*~@*~__MACOS*~*.vst(|3)~*.component~*.app~*.(|m)pkg(/:A)'
