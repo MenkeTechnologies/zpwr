@@ -2,12 +2,11 @@
 # vim: set ft=sh:
 function zpwrBufferXtrace() {
 
-        if test -z "$BUFFER" || [[ "$BUFFER" == [[:space:]]# ]]; then
-            zle up-line-or-history
-        fi
         if [[ $ZPWR_TRACE == true ]]; then
             set -x
         fi
+
+        [[ -z "$BUFFER" ]] && LBUFFER="$(builtin fc -ln -1)"
 
         ZPWR_VARS[origL]="$LBUFFER"
         ZPWR_VARS[origR]="$RBUFFER"
