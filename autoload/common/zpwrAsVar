@@ -2,6 +2,8 @@
 # vim: set ft=sh:
 function zpwrAsVar(){
 
+    [[ -z "$BUFFER" ]] && LBUFFER="$(builtin fc -ln -1)"
+
     region_highlight=("P0 20 fg=blue,bg=red")
     BUFFER="=\"\$($BUFFER)\""
     CURSOR=0
