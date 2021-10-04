@@ -10,6 +10,7 @@ brew install --cask audacity
 brew install --cask balsamiq-wireframes
 brew install --cask bettertouchtool
 brew install --cask bitwig-studio
+brew install --cask chromedriver
 brew install --cask clion
 brew install --cask cycling74-max
 brew install --cask datagrip
@@ -18,11 +19,11 @@ brew install --cask discord
 brew install --cask disk-inventory-x
 brew install --cask docker
 brew install --cask duet
-brew install --cask eclipse-jee
 brew install --cask electric-sheep
 brew install --cask emacs
 brew install --cask firefox
 brew install --cask fl-studio
+brew install --cask folx
 brew install --cask font-codenewroman-nerd-font
 brew install --cask font-fantasquesansmono-nerd-font
 brew install --cask font-hack-nerd-font
@@ -41,7 +42,6 @@ brew install --cask java8
 brew install --cask karabiner
 brew install --cask keyboard-maestro
 brew install --cask kicad
-brew install --cask kitty
 brew install --cask latexit
 brew install --cask libreoffice
 brew install --cask macs-fan-control
@@ -76,10 +76,8 @@ brew install --cask soundflower
 brew install --cask splice
 brew install --cask spotify
 brew install --cask station
-brew install --cask sublime-text
 brew install --cask switchresx
 brew install --cask sysex-librarian
-brew install --cask tcl
 brew install --cask texmaker
 brew install --cask the-unarchiver
 brew install --cask thunderbird

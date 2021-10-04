@@ -43,6 +43,7 @@ brew install brotli
 brew install browserpass
 brew install bsdmake
 brew install c-ares
+brew install ca-certificates
 brew install cabal-install
 brew install cairo
 brew install camlp4
@@ -169,7 +170,6 @@ brew install gstreamer
 brew install gtk+3
 brew install gts
 brew install guile
-brew install hadoop
 brew install harfbuzz
 brew install heroku
 brew install heroku-node
@@ -182,6 +182,7 @@ brew install httpd
 brew install httpie
 brew install httrack
 brew install hub
+brew install hunspell
 brew install hwloc
 brew install hydra
 brew install icu4c
@@ -204,6 +205,7 @@ brew install jemalloc
 brew install jenv
 brew install jetty
 brew install jnettop
+brew install john-jumbo
 brew install jpeg
 brew install jq
 brew install jvmtop
@@ -296,9 +298,7 @@ brew install libyaml
 brew install libzip
 brew install links
 brew install little-cms2
-brew install llvm
 brew install llvm@11
-brew install llvm@9
 brew install lua
 brew install lua@5.1
 brew install luajit
@@ -329,6 +329,7 @@ brew install mpc
 brew install mpd
 brew install mpdecimal
 brew install mpfr
+brew install mpg123
 brew install mplayer
 brew install msgpack
 brew install mtr
