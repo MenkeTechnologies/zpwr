@@ -281,7 +281,10 @@ fi
 zpwrCommandExists kubectl && ZPWR_GH_PLUGINS+=( MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion )
 zpwrCommandExists oc && ZPWR_GH_PLUGINS+=( MenkeTechnologies/zsh-openshift-aliases )
 
-zpwrCommandExists systemctl && ZPWR_OMZ_PLUGINS+=( systemd )
+if zpwrCommandExists systemctl; then
+    ZPWR_OMZ_PLUGINS+=( systemd )
+    fpath+=( $ZPWR_AUTOLOAD_SYSTEMCTL )
+fi
 zpwrCommandExists subl && ZPWR_OMZ_PLUGINS+=( sublime )
 zpwrCommandExists svn && ZPWR_OMZ_PLUGINS+=( svn )
 
@@ -351,8 +354,7 @@ fi
 #if [[ $ZPWR_DEBUG == true ]]; then
     #echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
 #fi
-
-fpath=($ZPWR_AUTOLOAD_SYSTEMCTL $ZPWR_AUTOLOAD_COMMON $ZPWR_AUTOLOAD_COMP_UTILS $ZPWR_COMPS $fpath)
+fpath=($ZPWR_AUTOLOAD_COMMON $ZPWR_AUTOLOAD_COMP_UTILS $ZPWR_COMPS $fpath)
 #}}}***********************************************************
 #
 #{{{                    MARK:Autoload
