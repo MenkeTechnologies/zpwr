@@ -211,7 +211,7 @@ alias http='noglob http'
 alias digs='noglob digs'
 alias lftp='noglob lftp'
 
-alias pn='print -rl --'
+alias pn='print -Prl -- "'"$ZPWR_TABSTOP"'"'
 
 ###}}}***********************************************************
 }
