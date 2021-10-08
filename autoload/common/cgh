@@ -6,7 +6,7 @@ function ___cgh(){
 
     [[ -z "$1" ]] && user="$ZPWR_GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/$user" |
-    command perl -ne 'do {print $_ =~ s/\s+/ /r;exit0} if /[0-9] contributions/'
+        command perl -0e '$_=<>;print "$1 $2\n"if m{([\d,]+)\s+(contributions)\s+}'
 }
 
 ___cgh "$@"
