@@ -36,7 +36,7 @@ function zpwrForDirRarZipErr() {
     echo "ERROR: $@" >&2
 }
 
-#depth first traversal
+# iterative, depth first traversal with stack
 function zpwrForDirRarZipProcess() {
 
     emulate -L zsh
