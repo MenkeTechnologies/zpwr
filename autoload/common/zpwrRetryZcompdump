@@ -5,7 +5,7 @@
 zpwrLogInfo "regenerating '$ZSH_COMPDUMP' due to failed cached compinit for z"
 zpwrLogInfo "_comps size: '$#_comps' fpath: '$fpath' fpath length '$#fpath'"
 lines="$(command grep -m 2 "#omz" "$ZSH_COMPDUMP")"
-rm "$ZSH_COMPDUMP"
+command rm "$ZSH_COMPDUMP"
 compinit -u -d "$ZSH_COMPDUMP"
 echo "$lines" >> "$ZSH_COMPDUMP"
 #zcompile $ZSH_COMPDUMP
