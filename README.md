@@ -7,7 +7,7 @@
 
 This project started out as my own version of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) repo and it then grew.
 
-It is an extremely powerful custom terminal environment built on top of [zinit](https://github.com/zdharma/zinit).
+It is an extremely powerful custom terminal environment built on top of [zinit](https://github.com/zdharma-continuum/zinit).
 
 There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
 
