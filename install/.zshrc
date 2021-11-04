@@ -121,9 +121,9 @@ if [[ ! -d "$ZPWR_LOCAL_TEMP" ]]; then
 fi
 
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
-    if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
+    if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME/bin" ]]; then
         zpwrPrettyPrintBox "Installing zinit"
-        command mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
+        command mkdir -p "$ZPWR_PLUGIN_MANAGER_HOME/bin"
         command git clone https://github.com/zdharma-continuum/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
     fi
 fi
