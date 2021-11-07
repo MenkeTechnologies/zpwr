@@ -597,6 +597,9 @@ builtin zmodload -i zsh/complist
 # allow '' escape
 builtin setopt rc_quotes
 
+# allow **.c
+builtin setopt globstarshort
+
 # Allow comments even in interactive shells (especially for Muness)
 builtin setopt interactive_comments
 
