@@ -192,20 +192,20 @@ ZPWR_GH_PLUGINS=(
     zdharma-continuum/history-search-multi-word
     MenkeTechnologies/jhipster-oh-my-zsh-plugin
     MenkeTechnologies/revolver
-    MenkeTechnologies/zbrowse
+    zdharma-continuum/zbrowse
     zsh-users/zsh-completions
     MenkeTechnologies/zsh-git-acp
     MenkeTechnologies/zsh-sudo
     MenkeTechnologies/zsh-nginx
     MenkeTechnologies/zsh-sed-sub
-    MenkeTechnologies/zsh-tig-plugin
+    zdharma-continuum/zsh-tig-plugin
     MenkeTechnologies/zsh-travis
     MenkeTechnologies/zsh-git-repo-cache
     zdharma-continuum/zsh-unique-id
     MenkeTechnologies/zsh-very-colorful-manuals
     zdharma-continuum/zui
     MenkeTechnologies/zunit
-    MenkeTechnologies/zzcomplete
+    zdharma-continuum//zzcomplete
     marlonrichert/zsh-hist
     MenkeTechnologies/fzf-zsh-plugin
     #comps
