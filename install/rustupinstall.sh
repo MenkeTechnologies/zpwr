@@ -3,7 +3,7 @@
 #**************************************************************
 ##### Author: WIZARD
 ##### Date: Fri Apr 19 20:33:51 EDT 2019
-##### Purpose: bash script to install bat,fd and exa
+##### Purpose: bash script to install rust exes
 ##### Notes:
 #}}}***********************************************************
 if ! test -f common.sh; then
@@ -21,55 +21,26 @@ while true; do
     sleep 5
 done
 
-zpwrCommandExists bat || {
-    zpwrPrettyPrintBox "Installing Rustup if cargo does not exist"
-    zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    zpwrPrettyPrintBox "Updating rustup"
-    "$HOME/.cargo/bin/rustup" update
-    zpwrPrettyPrintBox "Installing Bat (cat replacement) with Cargo"
-    "$HOME/.cargo/bin/cargo" install bat
+function ins() {
+    p="$1"
+    e="$2"
+
+    zpwrCommandExists "$e" || {
+        zpwrPrettyPrintBox "Installing Rustup if cargo does not exist"
+        zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
+        zpwrPrettyPrintBox "Updating rustup"
+        "$HOME/.cargo/bin/rustup" update
+        zpwrPrettyPrintBox "Installing "$p" with cargo"
+        "$HOME/.cargo/bin/cargo" install "$p"
+    }
 }
 
-zpwrCommandExists fd || {
-    zpwrPrettyPrintBox "Installing rustup if cargo does not exist"
-    zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    zpwrPrettyPrintBox "Updating rustup"
-    "$HOME/.cargo/bin/rustup" update
-    zpwrPrettyPrintBox "Installing Fd (find replacement) with Cargo"
-    "$HOME/.cargo/bin/cargo" install fd-find
-}
+ins bat bat
+ins fd-find fd
+ins exa exa
+ins ripgrep rg
+ins thumbs thumbs
+ins temprs tp
 
-zpwrCommandExists exa || {
-    zpwrPrettyPrintBox "Installing rustup if cargo does not exist"
-    zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    zpwrPrettyPrintBox "Updating rustup"
-    "$HOME/.cargo/bin/rustup" update
-    zpwrPrettyPrintBox "Installing Exa with Cargo"
-    "$HOME/.cargo/bin/cargo" install exa
-}
-
-zpwrCommandExists rg || {
-    zpwrPrettyPrintBox "Installing rustup if cargo does not exist"
-    zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    zpwrPrettyPrintBox "Updating rustup"
-    "$HOME/.cargo/bin/rustup" update
-    zpwrPrettyPrintBox "Installing ripgrep with Cargo"
-    "$HOME/.cargo/bin/cargo" install ripgrep
-}
-
-zpwrCommandExists thumbs || {
-    zpwrPrettyPrintBox "Installing rustup if cargo does not exist"
-    zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-    zpwrPrettyPrintBox "Updating rustup"
-    "$HOME/.cargo/bin/rustup" update
-    zpwrPrettyPrintBox "Installing thumbs with Cargo"
-    "$HOME/.cargo/bin/cargo" install thumbs 
-}
-
-
-zpwrPrettyPrintBox "Installing Rustup if cargo does not exist"
-zpwrCommandExists cargo || curl https://sh.rustup.rs -sSf | sh -s -- -y
-zpwrPrettyPrintBox "Updating rustup"
-"$HOME/.cargo/bin/rustup" update
 zpwrPrettyPrintBox "Installing cargo-update with Cargo"
 "$HOME/.cargo/bin/cargo" install cargo-update
