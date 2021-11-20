@@ -425,7 +425,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
             zpwrPrettyPrintBox "Updating dependency list"
             zpwrInstallerRefresh "$distroFamily"
             zpwrPrettyPrintBox "Installing java"
-            brew install --cask java
+            brew cask install homebrew/cask-versions/adoptopenjdk8
             zpwrPrettyPrintBox "Checking for curl before rustup install"
             zpwrExists curl || zpwrInstallerUpdate curl mac
             cargoinstall
