@@ -4,9 +4,9 @@
 function zpwrCleanDirs() {
 
     emulate -L zsh
-    setopt nullglob
+    setopt nullglob extendedglob globdots noshwordsplit globsubst
 
-    local dir files
+    local dir files f
 
     if ! (( $#zpwrDirsClean )); then
         zpwrLogConsoleErr "zpwrDirsClean is empty."
@@ -15,11 +15,21 @@ function zpwrCleanDirs() {
 
     for dir in ${zpwrDirsClean[@]} ; do
 
-        files=("$dir"/*(N))
+        files=( $dir/* )
 
         if (( $#files )); then
-            zpwrPrettyPrint sudo rm -rfv "$dir"/*
-            sudo rm -rfv "$dir"/*
+            zpwrPrettyPrint sudo rm -rfv -- $dir/*
+            sudo rm -rfv -- $dir/*
+        fi
+    done
+
+    for f in ${zpwrFilesClean[@]} ; do
+
+        files=( $f )
+
+        if (( $#files )); then
+            zpwrPrettyPrint sudo rm -rfv -- $files
+            sudo rm -rfv -- $files
         fi
     done
 }
