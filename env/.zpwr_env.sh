@@ -210,6 +210,7 @@ if [[ "$ZPWR_REMOTE" != true ]]; then
 
     if zpwrIsZsh; then
         declare -Tgx ZPWR_DIRS_CLEAN zpwrDirsClean
+        declare -Tgx ZPWR_FILES_CLEAN zpwrFilesClean
         declare -Ag ZPWR_PROCESSED=()
     fi
 fi
