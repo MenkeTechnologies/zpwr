@@ -93,4 +93,5 @@ brew install --cask wine-stable
 brew install --cask wireshark
 brew install --cask xld
 brew install --cask xquartz
+brew install --cask zoom
 brew install --cask zotero

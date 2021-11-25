@@ -15,6 +15,7 @@ brew install apr
 brew install apr-util
 brew install arduino-cli
 brew install argon2
+brew install aria2
 brew install asciidoc
 brew install asciidoctor
 brew install asciinema
@@ -53,11 +54,13 @@ brew install ccrypt
 brew install ccze
 brew install chkrootkit
 brew install chmlib
+brew install cjson
 brew install clingo
 brew install clisp
 brew install clojure
 brew install cmake
 brew install cmatrix
+brew install cmocka
 brew install colordiff
 brew install conan
 brew install confuse
@@ -207,6 +210,7 @@ brew install jetty
 brew install jnettop
 brew install john-jumbo
 brew install jpeg
+brew install jpeg-xl
 brew install jq
 brew install jvmtop
 brew install kafka
@@ -252,6 +256,7 @@ brew install libmpc
 brew install libmpdclient
 brew install libnet
 brew install libnfs
+brew install libnghttp2
 brew install libnice
 brew install libogg
 brew install libomp
@@ -261,6 +266,7 @@ brew install libproxy
 brew install libpsl
 brew install libpthread-stubs
 brew install libreplaygain
+brew install librist
 brew install librsvg
 brew install libsamplerate
 brew install libscrypt
@@ -270,6 +276,7 @@ brew install libsmi
 brew install libsndfile
 brew install libsodium
 brew install libsoup
+brew install libsoup@2
 brew install libsoxr
 brew install libssh
 brew install libssh2
@@ -284,6 +291,7 @@ brew install libusb-compat
 brew install libusrsctp
 brew install libuv
 brew install libvidstab
+brew install libvmaf
 brew install libvorbis
 brew install libvpx
 brew install libvterm
@@ -297,6 +305,7 @@ brew install libxrender
 brew install libyaml
 brew install libzip
 brew install links
+brew install liquibase
 brew install little-cms2
 brew install llvm@11
 brew install lua
@@ -313,6 +322,8 @@ brew install mailutils
 brew install makedepend
 brew install man2html
 brew install maven
+brew install mbedtls
+brew install md4c
 brew install mecab
 brew install mecab-ipadic
 brew install mercurial
@@ -411,6 +422,7 @@ brew install py3cairo
 brew install pygobject3
 brew install python-tabulate
 brew install python@2
+brew install python@3.10
 brew install python@3.8
 brew install python@3.9
 brew install qrencode
@@ -423,7 +435,6 @@ brew install readline
 brew install reattach-to-user-namespace
 brew install rebar3
 brew install redis
-brew install revolver
 brew install ripgrep
 brew install rlwrap
 brew install rsync
