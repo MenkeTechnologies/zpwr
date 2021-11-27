@@ -83,7 +83,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
         -n  Do not start tmux at end of installer
         -s  Skip main section
         -h  Display this message
-        -v  Display script version
+        -V  Display script version
 ```
 
 

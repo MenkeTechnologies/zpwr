@@ -349,13 +349,13 @@ skip=false
 justConfig=false
 noTmux=false
 fullInstall=false
-while getopts ":hnvsca" opt
+while getopts ":hnVsca" opt
 do
     case $opt in
 
         h)  usage; exit 0   ;;
 
-        v)  echo "$0 -- Version $VERSION"; exit 0   ;;
+        V)  echo "$0 -- Version $VERSION"; exit 0   ;;
 
         a)  fullInstall=true ;;
 
