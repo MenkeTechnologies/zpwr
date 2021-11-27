@@ -112,20 +112,20 @@ function usage() {
     echo "Usage :  $${0:0} [options] [--]
 
     Options:
-    -h|help       Display this message
-    -v|version    Display script version"
+    -h|       Display this message
+    -V|       Display script version"
 
 }
 
 while getopts ":hv$2" opt; do
     case $opt in
 
-    h|help)
+    h)
         usage
         exit 0
         ;;
 
-    v|version)
+    V)
         echo "$${0:0} -- Version $__ScriptVersion"
         exit 0
         ;;$3
