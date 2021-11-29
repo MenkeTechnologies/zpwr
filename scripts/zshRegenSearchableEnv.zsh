@@ -14,68 +14,73 @@
 
     for k v in ${(kv)parameters}; do
         print -l "param $k"
-    done > "$ZPWR_ENV_KEY_FILE"
+    done > "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)aliases}; do
         print -l "alias $k"
-    done >> "$ZPWR_ENV_KEY_FILE"
+    done >> "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)builtins}; do
         print -l "builtin $k"
-    done >> "$ZPWR_ENV_KEY_FILE"
+    done >> "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)reswords}; do
         print -l "resword $k"
-    done >> "$ZPWR_ENV_KEY_FILE"
+    done >> "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)commands}; do
         print -l "command $v"
-    done >> "$ZPWR_ENV_KEY_FILE"
+    done >> "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)functions}; do
         print -l "func $k"
-    done >> "$ZPWR_ENV_KEY_FILE"
+    done >> "$ZPWR_TEMPFILE2"
+
+    sort -f -k 2 -u < "$ZPWR_TEMPFILE2" > "$ZPWR_ENV_KEY_FILE"
 
     for k v in ${(kv)parameters}; do
         print -l "export $k=${(P)k}"
-    done > "$ZPWR_ENV_VALUE_FILE"
+    done > "$ZPWR_TEMPFILE2"
+
 
     #separators between each section
-    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+    print "======" >> "$ZPWR_TEMPFILE2"
 
     alias -L \
-        >> "$ZPWR_ENV_VALUE_FILE"
+        >> "$ZPWR_TEMPFILE2"
 
-    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+    print "======" >> "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)builtins}; do
         type -a -- $k
-    done >> "$ZPWR_ENV_VALUE_FILE"
+    done >> "$ZPWR_TEMPFILE2"
 
-    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+    print "======" >> "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)reswords}; do
         type -a -- $reswords
-    done >> "$ZPWR_ENV_VALUE_FILE"
+    done >> "$ZPWR_TEMPFILE2"
 
-    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+    print "======" >> "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)commands}; do
         print -l -- $v
-    done >> "$ZPWR_ENV_VALUE_FILE"
+    done >> "$ZPWR_TEMPFILE2"
 
-    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+    print "======" >> "$ZPWR_TEMPFILE2"
 
     echo "start gen functions"
     for k v in ${(kv)functions}; do
         autoload +X -z -- $k
-        type -a -- $k >> "$ZPWR_ENV_VALUE_FILE"
+        type -a -- $k >> "$ZPWR_TEMPFILE2"
     done
 
-    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+    print "======" >> "$ZPWR_TEMPFILE2"
 
-    declare -f >> "$ZPWR_ENV_VALUE_FILE"
+    declare -f >> "$ZPWR_TEMPFILE2"
 
-    print "======" >> "$ZPWR_ENV_VALUE_FILE"
+    print "======" >> "$ZPWR_TEMPFILE2"
+
+    cp "$ZPWR_TEMPFILE2" "$ZPWR_ENV_VALUE_FILE"
 }
 
