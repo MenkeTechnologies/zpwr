@@ -17,7 +17,7 @@ function zpwrForAllGitDirsDirty(){
     fi
 
     zpwrFordir "$*" \
-        $(cat $ZPWR_ALL_GIT_DIRS_DIRTY)
+        "${(@f)$(<$ZPWR_ALL_GIT_DIRS_DIRTY)}"
 }
 
 zpwrForAllGitDirsDirty "$@"
