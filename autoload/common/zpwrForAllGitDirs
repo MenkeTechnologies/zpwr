@@ -13,7 +13,7 @@ function zpwrForAllGitDirs(){
     fi
 
     zpwrFordir "$*" \
-        $(cat $ZPWR_ALL_GIT_DIRS)
+        "${(@f)$(<$ZPWR_ALL_GIT_DIRS)}"
 }
 
 zpwrForAllGitDirs "$@"

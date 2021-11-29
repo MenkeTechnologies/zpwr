@@ -17,7 +17,7 @@ function zpwrForAllGitDirsRefreshDirty(){
     zsh-git-repo-regenAllGitReposDirty regen
 
     zpwrFordir "$*" \
-        $(cat $ZPWR_ALL_GIT_DIRS_DIRTY)
+        "${(@f)$(<$ZPWR_ALL_GIT_DIRS_DIRTY)}"
 }
 
 zpwrForAllGitDirsRefreshDirty "$@"

@@ -17,7 +17,7 @@ function zpwrForAllGitDirsClean(){
     fi
 
     zpwrFordir "$*" \
-        $(cat $ZPWR_ALL_GIT_DIRS_CLEAN)
+        "${(@f)$(<$ZPWR_ALL_GIT_DIRS_CLEAN)}"
 }
 
 zpwrForAllGitDirsClean "$@"
