@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___ge(){
+function ge(){
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: ge <url>"
@@ -11,9 +11,9 @@ function ___ge(){
 
     declare -a file_ary
 
-    styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'
+    styles_dir=/usr/local/opt/httpie/libexec/lib/$ZPWR_PYTHON/site-packages/pygments/styles/
 
-    url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"
+    url="$(echo $1 | sed 's,[^/]*//\([^@]*@\)\?\([^:/]*.*\),\2,')"
     echo $1 | command grep -sq https && proto=https|| proto=http
     shift
 
@@ -47,4 +47,4 @@ function ___ge(){
     fi 2>&1 | less
 }
 
-___ge "$@"
+ge "$@"
