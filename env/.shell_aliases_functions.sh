@@ -75,7 +75,7 @@ fi
 #{{{                    MARK:PATH
 #**************************************************************
 if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
-    export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts"
+    export PATH="$PATH:$HOME/go/bin"
 
     export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
 
@@ -105,8 +105,7 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
         export MANPATH=$HOME/perl5/man:$MANPATH
         export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
-        export PIP3_HOME="/usr/local/lib/python3.7/site-packages"
-        export PIP_HOME="/usr/local/lib/python2.7/site-packages"
+        export PIP3_HOME="/usr/local/lib/$ZPWR_PYTHON/site-packages"
 
         if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
             if zpwrExists nvim; then
