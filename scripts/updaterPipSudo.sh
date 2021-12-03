@@ -37,79 +37,109 @@ else
     unset zpwrBaseDir
 fi
 
-#python 3
-python3 -c 'import pip' && {
+python3 -c 'import pip' &> /dev/null && {
+
     zpwrPrettyPrint "Updating Python3 Packages"
+
     needSudoBase=true
+
     if [[ "$needSudoBase" == true ]]; then
+
         zpwrPrettyPrint "Outdated Pip3 list with sudo: $needSudoBase"
+
         outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     else
+
         zpwrPrettyPrint "Outdated Pip3 list with no sudo: $needSudoBase"
+
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+
     fi
 
     for package in $outdated; do
-        #get last package
+
+        zpwrValidatePipPackage "$package" || continue
+
         zpwrNeedSudo=true
 
         installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
         if [[ "$zpwrNeedSudo" == true ]]; then
+
             zpwrPrettyPrint "sudo needed: $zpwrNeedSudo for $package at $installDir"
-            sudo -E python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
+
+            sudo -E python3 -m pip install --upgrade --ignore-installed -- "$package"
         else
+
             zpwrPrettyPrint "false sudo needed: $zpwrNeedSudo for $package at $installDir"
-            python3 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
+
+            python3 -m pip install --upgrade --ignore-installed -- "$package"
         fi
 
     done
 
     if [[ "$needSudoBase" == true ]]; then
+
         zpwrPrettyPrint "Updating Pip3 with sudo needed: $needSudoBase"
-        #update pip itself
-        sudo -E python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+
+        sudo -E python3 -m pip install --upgrade pip setuptools wheel
     else
+
         zpwrPrettyPrint "Updating Pip3 needed: $needSudoBase"
-        #update pip itself
-        python3 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+
+        python3 -m pip install --upgrade pip setuptools wheel
     fi
 
 }
 
-#python 2 (non system)
-zpwrCommandExists python2 && python2 -c 'import pip' && {
+zpwrCommandExists python2 && python2 -c 'import pip' &>/dev/null && {
+
     zpwrPrettyPrint "Updating Python2 Packages"
+
     needSudoBase=true
 
     if [[ "$needSudoBase" == true ]]; then
+
         zpwrPrettyPrint "Outdated Pip2 list with sudo: $needSudoBase"
+
         outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     else
+
         zpwrPrettyPrint "Outdated Pip2 list with no sudo: $needSudoBase"
+
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
     fi
 
     for package in $outdated; do
+
+        zpwrValidatePipPackage "$package" || continue
+
         zpwrNeedSudo=true
+
         installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
 
         if [[ "$zpwrNeedSudo" == true ]]; then
+
             zpwrPrettyPrint "sudo needed: $zpwrNeedSudo for $package at $installDir"
-            sudo -E python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
+
+            sudo -E python2 -m pip install --upgrade --ignore-installed -- "$package"
         else
+
             zpwrPrettyPrint "false sudo needed: $zpwrNeedSudo for $package at $installDir"
-            python2 -m pip install --upgrade --ignore-installed -- "$package" #&> /dev/null
+
+            python2 -m pip install --upgrade --ignore-installed -- "$package"
         fi
 
     done
 
     if [[ "$needSudoBase" == true ]]; then
+
         zpwrPrettyPrint "Updating Pip2 with sudo needed: $needSudoBase"
-        #update pip itself
-        sudo -E python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+
+        sudo -E python2 -m pip install --upgrade pip setuptools wheel
     else
+
         zpwrPrettyPrint "Updating Pip2 with sudo needed: $needSudoBase"
-        #update pip itself
-        python2 -m pip install --upgrade pip setuptools wheel #&> /dev/null
+
+        python2 -m pip install --upgrade pip setuptools wheel
     fi
 }

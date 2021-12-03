@@ -785,4 +785,23 @@ function zpwrClearList() {
         clear && eval "$ls_command"
     fi
 }
+
+function zpwrValidatePipPackage() {
+
+    local package="$1"
+
+    #get last package
+    if (( $+pipBlacklist )); then
+        if (( pipBlacklist[(Ie)$package] )); then
+            zpwrLogInfo "skip update of $package due to blacklist"
+            return 1
+        fi
+    fi
+
+    if [[ -z "$package" ]]; then
+        return 1
+    fi
+
+    return 0
+}
 #}}}***********************************************************
