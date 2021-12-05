@@ -5,35 +5,37 @@ function zpwrCd(){
 
     emulate -L zsh
 
-    local base dir
+    local base dir noTrailSlash
 
-    if [[ -z "$1" ]]; then
+    noTrailSlash="${1%/}"
+
+    if [[ -z "$noTrailSlash" ]]; then
         cd -
         return 0
-    elif [[ -f "$1" ]]; then
-        cd "$(dirname "$1")"
-    elif [[ -d "$1" ]];then
-        cd "$1"
-    elif [[ -d "${nameddirs[$1]}" ]];then
-        cd "${nameddirs[$1]}"
-    elif [[ -d "${userdirs[$1]}" ]];then
-        cd "${userdirs[$1]}"
+    elif [[ -f "$noTrailSlash" ]]; then
+        cd "$(dirname "$noTrailSlash")"
+    elif [[ -d "$noTrailSlash" ]];then
+        cd "$noTrailSlash"
+    elif [[ -d "${nameddirs[$noTrailSlash]}" ]];then
+        cd "${nameddirs[$noTrailSlash]}"
+    elif [[ -d "${userdirs[$noTrailSlash]}" ]];then
+        cd "${userdirs[$noTrailSlash]}"
     else
         #cd -1
-        echo "$1" | command grep -E '\-[0-9]+' && cd "$1" && return 0
+        echo "$noTrailSlash" | command grep -E '\-[0-9]+' && cd "$noTrailSlash" && return 0
 
         #cd to first partial name match
         if zpwrIsZsh;then
-            eval 'for dir in (#i)'"$1"'*(N/);do
+            eval 'for dir in (#i)'"$noTrailSlash"'*(N/);do
                 cd "$dir"
                 return
             done'
         fi
 
-        base="$(dirname "$1")"
+        base="$(dirname "$noTrailSlash")"
 
         if [[ $base == "." ]]; then
-            zpwrLogConsoleErr "'$1': Not a valid file or directory."
+            zpwrLogConsoleErr "'$noTrailSlash': Not a valid file or directory."
             return 1
         fi
 
@@ -42,7 +44,7 @@ function zpwrCd(){
             test -d "$base" && cd "$base"&& return 0
             base="$(dirname "$base")"
         done
-        zpwrLogConsoleErr "'$1': Not a valid file or directory."
+        zpwrLogConsoleErr "'$noTrailSlash': Not a valid file or directory."
         return 1
     fi
 
