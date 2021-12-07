@@ -52,7 +52,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[cleandirs]='zpwrCleanDirs=clear all $ZPWR_DIRS_CLEAN'
     ZPWR_VERBS[cleandirsandtemp]='zpwrCleanDirsAndTemp=clear all $ZPWR_DIRS_CLEAN and temp'
     ZPWR_VERBS[cleanall]='zpwrCleanAll=clear all $ZPWR_DIRS_CLEAN, temp and cache'
-    ZPWR_VERBS[cleanlog]='zpwrCleanLog=clear $ZPWR_LOGILE'
+    ZPWR_VERBS[cleanlog]='zpwrCleanLog=clear $ZPWR_LOGFILE'
     ZPWR_VERBS[cleancache]='zpwrCleanCache=clean all zpwr cache files'
     ZPWR_VERBS[cleangitcache]='zpwrCleanGitRepoCache=clean all git repo cache files'
     ZPWR_VERBS[cleangitdirtycache]='zpwrCleanGitRepoDirtyCache=clean all git repo dirty cache files'
