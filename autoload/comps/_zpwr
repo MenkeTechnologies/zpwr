@@ -104,7 +104,7 @@ function __zpwr(){
                     _reveal
                     ;;
                 search)
-                    _s
+                    words=(s "${(@)words[2,-1]}") _s
                     ;;
                 servicedown)
                     _ssd
