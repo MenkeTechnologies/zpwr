@@ -55,7 +55,6 @@ function zpwrBindAliasesLate(){
     alias ni='npm install'
     alias zu=zunit
     alias pk=p10k
-    alias co=cargo
     local prefix=
     if zpwrCommandExists grc; then
         prefix='\grc --colour=on '
