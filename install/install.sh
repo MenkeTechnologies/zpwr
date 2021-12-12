@@ -811,6 +811,15 @@ elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     zpwrPrettyPrintBox "Installing fzf"
     "$ZPWR_PLUGIN_MANAGER_HOME/custom/plugins/fzf/install" --bin
+
+    zpwrPrettyPrintBox "Installing Zsh plugins"
+    zpwrGoInstallerDir
+    zpwrFileMustExist zsh_plugins_install.sh
+
+    source zsh_plugins_install.sh
+
+    zpwrPrettyPrintBox "Installing Powerlevel9k"
+    git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZPWR_PLUGIN_MANAGER_HOME/themes/powerlevel9k"
 fi
 
 zpwrPrettyPrintBox "Linking zshrc configuration file to home directory"
@@ -819,22 +828,9 @@ zpwrGoInstallerDir
 echo ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 ln -sf $ZPWR_INSTALL/.zshrc $HOME/.zshrc
 
-if [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
-    zpwrPrettyPrintBox "Installing Zsh plugins"
-    zpwrGoInstallerDir
-    zpwrFileMustExist zsh_plugins_install.sh
-
-    source zsh_plugins_install.sh
-fi
-
 zpwrPrettyPrintBox "Running Vundle"
 #run vundle install for ultisnips, supertab
 vim -c PluginInstall -c qall
-
-if [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
-    zpwrPrettyPrintBox "Installing Powerlevel9k"
-    git clone https://github.com/MenkeTechnologies/powerlevel9k.git "$ZPWR_PLUGIN_MANAGER_HOME/themes/powerlevel9k"
-fi
 
 if [[ $justConfig != true ]]; then
     zpwrPrettyPrintBox "Final updating of dependency list"
