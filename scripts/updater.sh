@@ -108,7 +108,10 @@ if [[ $skip != true ]]; then
     #update pathogen plugins
     zpwrGitRepoUpdater "$HOME/.vim/bundle"
 
-    if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+    if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+        zpwrPrettyPrint "Updating Zinit"
+        zpwrGitRepoUpdater "$ZSH_CUSTOM/plugins"
+    elif [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
         zpwrPrettyPrint "Updating OhMyZsh"
         builtin cd "$ZSH/tools" && bash "$ZSH/tools/upgrade.sh"
 
@@ -117,9 +120,6 @@ if [[ $skip != true ]]; then
 
         zpwrPrettyPrint "Updating OhMyZsh Themes"
         zpwrGitRepoUpdater "$ZSH_CUSTOM/themes"
-    elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
-        zpwrPrettyPrint "Updating Zinit"
-        zpwrGitRepoUpdater "$ZSH_CUSTOM/plugins"
     fi
 
     zpwrCommandExists /usr/local/bin/ruby && {

@@ -58,14 +58,14 @@ type -a zpwrEvalIfNeeded 1>/dev/null 2>&1 || function zpwrEvalIfNeeded() {
 # the base dir for zpwr configs
 test -z "$ZPWR" && export ZPWR="$HOME/.zpwr"
 
-if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
-    zpwrEvalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.oh-my-zsh" "$HOME"
-    export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
-    zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
-elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
     zpwrEvalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.zinit" "$HOME"
     export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
     zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH" "$ZSH"
+elif [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+    zpwrEvalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.oh-my-zsh" "$HOME"
+    export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
+    zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
 fi
 
 if [[ $ZPWR_COLORS = true ]]; then
@@ -205,6 +205,6 @@ zpwrEvalIfNeeded HISTFILE "$HISTFILE" "$ZPWR_LOCAL/.$ZPWR_REPO_NAME-$ZPWR_GITHUB
 zpwrEvalIfNeeded ZPWR_VIM_KEYBINDINGS "$ZPWR_VIM_KEYBINDINGS" "$ZPWR_LOCAL/zpwrVimKeybindings.txt" "$ZPWR_LOCAL"
 # the path for all keybindings cache
 zpwrEvalIfNeeded ZPWR_ALL_KEYBINDINGS "$ZPWR_ALL_KEYBINDINGS" "$ZPWR_LOCAL/zpwrAllKeybindings.txt" "$ZPWR_LOCAL"
+# build GitHub URL
 zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB_ACCOUNT" "$ZPWR_GITHUB_ACCOUNT"
 #}}}***********************************************************
-

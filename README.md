@@ -349,12 +349,6 @@ export ZPWR_EXPAND_QUOTE_DOUBLE=true
 export ZPWR_EXPAND_QUOTE_SINGLE=false
 ```
 
-The relevant code is the [zsh-expand](https://github.com/MenkeTechnologies/zsh-expand) plugin for expansion at the second position.
-> ~/.zinit/plugins/zsh-expand/zpwrExpandLib.zsh
-```sh
-if printf -- "$ZPWR_VARS[firstword_partition]" | command grep -qsE $ZPWR_VARS[continueFirstPositionRegex];then
-```
-
 ## Turning off ponies and colors globally
 To turn off all ponysay ponies, colored groups and colored group descriptions, add to tokens file.
 > ~/.zpwr/local/.tokens.sh
@@ -595,14 +589,14 @@ export ZPWR_THUMBS_REGEX='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:2
 ```
 
 ```sh
-if [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
-    zpwrEvalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.oh-my-zsh" "$HOME"
-    export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
-    zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
-elif [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
     zpwrEvalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.zinit" "$HOME"
     export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
     zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH" "$ZSH"
+elif [[ $ZPWR_PLUGIN_MANAGER == oh-my-zsh ]]; then
+    zpwrEvalIfNeeded ZPWR_PLUGIN_MANAGER_HOME "$ZPWR_PLUGIN_MANAGER_HOME" "$HOME/.oh-my-zsh" "$HOME"
+    export ZSH="$ZPWR_PLUGIN_MANAGER_HOME"
+    zpwrEvalIfNeeded ZSH_CUSTOM "$ZSH_CUSTOM" "$ZSH/custom" "$ZSH"
 fi
 
 # fzf dir
@@ -730,6 +724,7 @@ zpwrEvalIfNeeded HISTFILE "$HISTFILE" "$ZPWR_LOCAL/.$ZPWR_REPO_NAME-$ZPWR_GITHUB
 zpwrEvalIfNeeded ZPWR_VIM_KEYBINDINGS "$ZPWR_VIM_KEYBINDINGS" "$ZPWR_LOCAL/zpwrVimKeybindings.txt" "$ZPWR_LOCAL"
 # the path for all keybindings cache
 zpwrEvalIfNeeded ZPWR_ALL_KEYBINDINGS "$ZPWR_ALL_KEYBINDINGS" "$ZPWR_LOCAL/zpwrAllKeybindings.txt" "$ZPWR_LOCAL"
+# build GitHub URL
 zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB_ACCOUNT" "$ZPWR_GITHUB_ACCOUNT"
 ```
 
