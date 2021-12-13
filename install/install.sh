@@ -591,11 +591,10 @@ else
             else
                 zpwrPrettyPrintBox "/usr/share/fonts and /etc/fonts/conf.d must exist for powerline fonts." >&2
             fi
-        else
-            zpwrPrettyPrintBox "Your OS $ZPWR_OS_TYPE is unsupported!" >&2
-            exit 1
         fi
-
+    else
+        zpwrPrettyPrintBox "Your OS $ZPWR_OS_TYPE is unsupported!" >&2
+        exit 1
     fi
 
 fi
