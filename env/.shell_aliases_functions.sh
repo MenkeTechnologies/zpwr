@@ -81,8 +81,18 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         #export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
-        export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"
+
         export PATH="$ZPWR_SCRIPTS_MAC:$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$HOME/.platformio/penv/bin"
+
+        if [[ -d "/opt/homebrew" ]]; then
+            export PATH="/opt/homebrew/bin:$PATH"
+            export HOMEBREW_PREFIX='/opt/homebrew'
+            export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Library/taps/homebrew/homebrew-core/formula"
+        else
+            export HOMEBREW_PREFIX='/usr/local'
+            export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Homebrew/Library/taps/homebrew/homebrew-core/formula"
+        fi
+        export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
     else
         export PATH="$PATH:/usr/games"
     fi
@@ -94,7 +104,6 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
 #{{{                           MARK:HOMES
 #**********************************************************************
     if [[ "$ZPWR_OS_TYPE" == darwin ]];then
-        export HOMEBREW_HOME='/usr/local/Cellar'
         export HOMEBREW_OPT_HOME='/usr/local/opt'
         export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
         export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"

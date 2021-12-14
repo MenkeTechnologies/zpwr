@@ -9,7 +9,7 @@
 #}}}***********************************************************
 
 [[ "$(uname)" == Darwin ]] && {
-    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+    FIGLET_DIR="$HOMEBREW_CELLAR/figlet/2.2.5/share/figlet/fonts"
 } || {
     FIGLET_DIR="/usr/share/figlet"
 }

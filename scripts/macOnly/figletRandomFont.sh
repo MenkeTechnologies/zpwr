@@ -39,7 +39,7 @@ if [[ -z "$1" ]]; then
 fi
 
 if [[ "$(uname)" == Darwin ]]; then
-    figletDir="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+    figletDir="$HOMEBREW_CELLAR/figlet/2.2.5/share/figlet/fonts"
 else
     figletDir="/usr/share/figlet"
 fi

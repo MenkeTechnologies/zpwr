@@ -100,7 +100,6 @@ brew install exercism
 brew install expat
 brew install faac
 brew install faad2
-brew install fd
 brew install ffmpeg
 brew install fftw
 brew install figlet
@@ -421,7 +420,6 @@ brew install py2cairo
 brew install py3cairo
 brew install pygobject3
 brew install python-tabulate
-brew install python@2
 brew install python@3.10
 brew install python@3.8
 brew install python@3.9
@@ -472,7 +470,6 @@ brew install spark
 brew install speedtest-cli
 brew install speex
 brew install sphinx-doc
-brew install springboot
 brew install sqlite
 brew install srm
 brew install srt
