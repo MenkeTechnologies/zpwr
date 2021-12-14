@@ -6,9 +6,12 @@ function zpwrBindPenultimate(){
     test -s "$ZPWR_ZINIT_FZF/shell/completion.zsh" \
         && source "$ZPWR_ZINIT_FZF/shell/completion.zsh"
 
-    #export PATH="$ZPWR_ZINIT_FZF/bin:$PATH"
     export MANPATH="$ZPWR_ZINIT_FZF/fzf/man:$MANPATH"
     source "$ZPWR_ZINIT_FZF/shell/key-bindings.zsh"
+
+    if [[ -d "/opt/homebrew" ]]; then
+        export PATH="/opt/homebrew/bin:$PATH"
+    fi
 
 }
 

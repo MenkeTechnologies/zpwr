@@ -452,12 +452,18 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         zpwrPrettyPrintBox "PostInstalling nodejs"
         brew postinstall node
 
-        # system sed breaks extended regex
-        ln -s /usr/local/bin/gsed /usr/local/bin/sed
+        if [[ -d "/opt/homebrew" ]]; then
+            export HOMEBREW_PREFIX='/opt/homebrew'
+        else
+            export HOMEBREW_PREFIX='/usr/local'
+        fi
 
-        if test -f '/usr/local/share/zsh/site-functions/_git'; then
-            zpwrPrettyPrintBox "Removing homebrew installed git zsh completion at /usr/local/share/zsh/site-functions/_git because conflicts with zsh's git completion"
-            rm '/usr/local/share/zsh/site-functions/_git'
+        # system sed breaks extended regex
+        ln -s "$HOMEBREW_PREFIX/bin/gsed" "$HOMEBREW_PREFIX/bin/sed"
+
+        if test -f "$HOMEBREW_PREFIX/share/zsh/site-functions/_git"; then
+            zpwrPrettyPrintBox "Removing homebrew installed git zsh completion at $HOMEBREW_PREFIX/share/zsh/site-functions/_git because conflicts with zsh's git completion"
+            rm "$HOMEBREW_PREFIX/share/zsh/site-functions/_git"
         fi
 
     fi

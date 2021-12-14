@@ -5,7 +5,7 @@ function zpwrFigletfonts(){
     local figletDir ary file font
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        figletDir="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"
+        figletDir="$HOMEBREW_CELLAR/figlet/2.2.5/share/figlet/fonts"
     else
         figletDir="/usr/share/figlet"
     fi
