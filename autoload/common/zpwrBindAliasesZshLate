@@ -118,6 +118,8 @@ globalAliasesInit
             '$ZPWR_TABSTOP'
         fi'
 
+        alias fx="find . -print0 -iname '$ZPWR_TABSTOP' | xargs -0 -n1 -I{} $ZPWR_TABSTOP {}"
+
         alias ie='if [[ '$ZPWR_TABSTOP' ]];then
             '$ZPWR_TABSTOP'
         else
