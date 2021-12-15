@@ -33,17 +33,14 @@ zpwrGoInstallerDir
 ln -sf $ZPWR_INSTALL/init.vim "$nvimDir"
 
 #custom settings for tmux powerline
-tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
-tmuxPowerlineColorsDir="$HOME/.config/powerline/colorschemes/tmux"
-[[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
-[[ ! -d "$tmuxPowerlineColorsDir" ]] && mkdir -p "$tmuxPowerlineColorsDir"
 
 zpwrPrettyPrintBox "Installing Tmux Powerline Config"
 zpwrGoInstallerDir
-ln -sf $ZPWR_INSTALL/.config/powerline/themes/default.json "$tmuxPowerlineDir/default.json"
-echo ln -sf $ZPWR_INSTALL/.config/powerline/themes/default.json "$tmuxPowerlineDir/default.json"
-ln -sf $ZPWR_INSTALL/.config/powerline/colorschemes/default.json "$tmuxPowerlineColorsDir/default.json"
-echo ln -sf $ZPWR_INSTALL/.config/powerline/colorschemes/default.json "$tmuxPowerlineColorsDir/default.json"
+
+tmuxPowerlineDir="$HOME/.config/powerline"
+
+ln -sf $ZPWR_INSTALL/.config/powerline/ "$tmuxPowerlineDir"
+echo ln -sf $ZPWR_INSTALL/.config/powerline/ "$tmuxPowerlineDir"
 
 zpwrPrettyPrintBox "Installing Tmux Plugin Manager"
 [[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p "$HOME/.tmux/plugins/tpm"
