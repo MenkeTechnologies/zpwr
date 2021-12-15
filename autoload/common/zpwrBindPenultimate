@@ -9,10 +9,6 @@ function zpwrBindPenultimate(){
     export MANPATH="$ZPWR_ZINIT_FZF/fzf/man:$MANPATH"
     source "$ZPWR_ZINIT_FZF/shell/key-bindings.zsh"
 
-    if [[ -d "/opt/homebrew" ]]; then
-        export PATH="/opt/homebrew/bin:$PATH"
-    fi
-
 }
 
 zpwrBindPenultimate "$@"
