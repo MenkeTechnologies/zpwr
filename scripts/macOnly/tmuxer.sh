@@ -7,6 +7,6 @@
 ##### Notes:
 #}}}***********************************************************
 
-PATH="/usr/local/bin:$PATH"
+PATH="$HOMEBREW_PREFIX/bin:$PATH"
 
 tmux send-keys -t main "id" C-m

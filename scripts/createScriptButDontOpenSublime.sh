@@ -31,8 +31,8 @@ function createTheFile() {
 
     #echo shebang line into newfile
     case "$1" in
-    .sh) echo "#!/usr/local/bin/bash" >"$newfile" ;;
-    .pl) echo "#!/usr/local/bin/perl" >"$newfile" ;;
+    .sh) echo "#!$HOMEBREW_PREFIX/bin/bash" >"$newfile" ;;
+    .pl) echo "#!$HOMEBREW_PREFIX/bin/perl" >"$newfile" ;;
     .rb) echo "#!/usr/bin/env ruby" >"$newfile" ;;
     .py) echo "#!/Library/Frameworks/Python.framework/Versions/3.5/bin/python3" >"$newfile" ;;
     #if .txt or some other file ending then just open the file, no processing

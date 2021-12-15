@@ -58,8 +58,6 @@ export XAUTHORITY="$HOME/.Xauthority"
 export TERMINAL_APP="Terminal.app"
 export YARN_HOME="$HOME/.config/yarn"
 export TMUX_HOME="$HOME/.tmux"
-export NODE_HOME="/usr/local/lib/node_modules"
-export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"
 export HISTSIZE=50000
 export HISTTIMEFORMAT=' %F %T _ '
 export UMASK=077
@@ -88,12 +86,16 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
             export PATH="/opt/homebrew/bin:$PATH"
             export HOMEBREW_PREFIX='/opt/homebrew'
             export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Library/taps/homebrew/homebrew-core/formula"
+            export NODE_HOME="$HOMEBREW_PREFIX/lib/node_modules"
+            export NODE_PATH="$NODE_HOME:$YARN_HOME/global/node_modules"
         else
             export HOMEBREW_PREFIX='/usr/local'
             export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         fi
         export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+        export PIP3_HOME="$HOMEBREW_PREFIX/lib/$ZPWR_PYTHON/site-packages"
     else
+        export PIP3_HOME="/usr/local/lib/$ZPWR_PYTHON/site-packages"
         export PATH="$PATH:/usr/games"
     fi
 
@@ -114,7 +116,6 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
         export MANPATH=$HOME/perl5/man:$MANPATH
         export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
-        export PIP3_HOME="/usr/local/lib/$ZPWR_PYTHON/site-packages"
 
         if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
             if zpwrExists nvim; then

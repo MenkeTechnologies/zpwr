@@ -55,7 +55,7 @@ if [[ "$(uname)" == Darwin ]]; then
         zpwrPrettyPrint "Color logging for Darwin"
         #"$tailVersion" -f /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
         #$HOME/Library/Logs/**/*.log "$HOME"/Library/Logs/**/*.out \
-        #/Library/Logs/**/*.log /usr/local/var/log/**/*.log | ccze
+        #/Library/Logs/**/*.log $HOMEBREW_PREFIX/var/log/**/*.log | ccze
         "$tailVersion" -F /var/log/**/*.log /var/log/**/*.out /var/log/cups/* \
             /var/log/*beat*/* | ccze
     else
