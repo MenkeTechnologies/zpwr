@@ -93,6 +93,9 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
             export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Homebrew/Library/taps/homebrew/homebrew-core/formula"
         fi
         export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+        export HOMEBREW_OPT_HOME="$HOMEBREW_PREFIX/opt"
+        export HOMEBREW_DBHOME="$HOMEBREW_PREFIX/var"
+        export HOMEBREW_DB_CONF="$HOMEBREW_PREFIX/etc"
         export PIP3_HOME="$HOMEBREW_PREFIX/lib/$ZPWR_PYTHON/site-packages"
     else
         export PIP3_HOME="/usr/local/lib/$ZPWR_PYTHON/site-packages"
@@ -106,15 +109,12 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
 #{{{                           MARK:HOMES
 #**********************************************************************
     if [[ "$ZPWR_OS_TYPE" == darwin ]];then
-        export HOMEBREW_OPT_HOME='/usr/local/opt'
         export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
         export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
         export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
-        export HOMEBREW_DBHOME='/usr/local/var'
-        export HOMEBREW_DB_CONF='/usr/local/etc'
         #eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
         export MANPATH=$HOME/perl5/man:$MANPATH
-        export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"
+        export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$HOMEBREW_PREFIX/share/man:$MANPATH"
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
 
         if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
