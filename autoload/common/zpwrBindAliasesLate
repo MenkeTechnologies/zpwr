@@ -183,8 +183,8 @@ function zpwrBindAliasesLate(){
         alias bs="brew search"
         alias bic="brew install --cask"
 
-        if [[ -d "$HOMEBREW_PREFIX/opt/tcl-tk/bin" ]]; then
-            export PATH="$HOMEBREW_PREFIX/opt/tcl-tk/bin:$PATH"
+        if [[ -d "$HOMEBREW_OPT_HOME/tcl-tk/bin" ]]; then
+            export PATH="$HOMEBREW_OPT_HOME/tcl-tk/bin:$PATH"
         fi
 
 
