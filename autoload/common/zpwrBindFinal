@@ -55,6 +55,12 @@ function zpwrBindFinal(){
         mkfifo "$ZPWR_FIFO" &>> "$ZPWR_LOGFILE"
     fi
 
+    if [[ -d "$HOMEBREW_PREFIX/bin" ]]; then
+        export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+    fi
+
+    builtin export SHELL="$(which zsh)"
+
 }
 
 zpwrBindFinal "$@"
