@@ -169,6 +169,8 @@ endif
 " vimtex
 let g:tex_flavor = "latex"
 
+let g:autotagStartMethod='fork'
+
 " enable AutoSave on Vim startup
 let g:auto_save = 1
 " do not display the auto-save notification

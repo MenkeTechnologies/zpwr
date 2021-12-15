@@ -86,10 +86,49 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     export HOMEBREW_DBHOME="$HOMEBREW_PREFIX/var"
     export HOMEBREW_DB_CONF="$HOMEBREW_PREFIX/etc"
     export PIP3_HOME="$HOMEBREW_PREFIX/lib/$ZPWR_PYTHON/site-packages"
+    export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
+    export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
+    export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
+    #eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
+    export MANPATH=$HOME/perl5/man:$MANPATH
+    export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$HOMEBREW_PREFIX/share/man:$MANPATH"
+    export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
+
+    if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
+        if zpwrExists nvim; then
+            export EDITOR='nvim'
+            export PSQL_EDITOR='nvim -c "setf sql"'
+        else
+            export EDITOR='vim'
+            export PSQL_EDITOR='vim -c "setf sql"'
+        fi
+    else
+        if zpwrExists mvim; then
+            export EDITOR='mvim -v'
+            export PSQL_EDITOR='mvim -v -c "setf sql"'
+        else
+            export EDITOR='vim'
+            export PSQL_EDITOR='vim -c "setf sql"'
+        fi
+    fi
 else
     export PIP3_HOME="/usr/local/lib/$ZPWR_PYTHON/site-packages"
+    if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
+        if zpwrExists nvim; then
+            export EDITOR='nvim'
+            export PSQL_EDITOR='nvim -c "setf sql"'
+        else
+            export EDITOR='vim'
+            export PSQL_EDITOR='vim -c "setf sql"'
+        fi
+    else
+        export EDITOR='vim'
+        export PSQL_EDITOR='vim -c "setf sql"'
+    fi
 fi
 #}}}***********************************************************
+
+#}}}
 
 #{{{                    MARK:PATH
 #**************************************************************
@@ -114,50 +153,6 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
 
 #}}}***********************************************************
 
-#{{{                           MARK:HOMES
-#**********************************************************************
-    if [[ "$ZPWR_OS_TYPE" == darwin ]];then
-        export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
-        export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
-        export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
-        #eval `perl -I ~/perl5/lib/perl5 -Mlocal::lib`
-        export MANPATH=$HOME/perl5/man:$MANPATH
-        export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$HOMEBREW_PREFIX/share/man:$MANPATH"
-        export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
-
-        if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
-            if zpwrExists nvim; then
-                export EDITOR='nvim'
-                export PSQL_EDITOR='nvim -c "setf sql"'
-            else
-                export EDITOR='vim'
-                export PSQL_EDITOR='vim -c "setf sql"'
-            fi
-        else
-            if zpwrExists mvim; then
-                export EDITOR='mvim -v'
-                export PSQL_EDITOR='mvim -v -c "setf sql"'
-            else
-                export EDITOR='vim'
-                export PSQL_EDITOR='vim -c "setf sql"'
-            fi
-        fi
-    else
-        if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
-            if zpwrExists nvim; then
-                export EDITOR='nvim'
-                export PSQL_EDITOR='nvim -c "setf sql"'
-            else
-                export EDITOR='vim'
-                export PSQL_EDITOR='vim -c "setf sql"'
-            fi
-        else
-            export EDITOR='vim'
-            export PSQL_EDITOR='vim -c "setf sql"'
-        fi
-    fi
-#**************************************************************
-#}}}
 
 #{{{                    MARK:Rust Config
 #**************************************************************

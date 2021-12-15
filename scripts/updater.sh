@@ -122,11 +122,11 @@ if [[ $skip != true ]]; then
         zpwrGitRepoUpdater "$ZSH_CUSTOM/themes"
     fi
 
-    zpwrCommandExists /usr/local/bin/ruby && {
+    zpwrCommandExists ruby && {
         zpwrPrettyPrint "Updating Ruby Packages"
-        yes | /usr/local/bin/gem update --system
-        yes | /usr/local/bin/gem update
-        yes | /usr/local/bin/gem cleanup
+        yes | gem update --system
+        yes | gem update
+        yes | gem cleanup
     }
 
     zpwrCommandExists brew && {
@@ -235,7 +235,7 @@ if [[ $skip != true ]]; then
         sudo -E snap refresh
     }
 
-    zpwrCommandExists cpanm && {
+    zpwrCommandExists cpanm && zpwrCommandExists cpan-outdated && {
         zpwrPrettyPrint "Updating Perl Packages"
         perlOutdated=$(cpan-outdated -p -L "$PERL5LIB")
         if [[ -n "$perlOutdated" ]]; then
