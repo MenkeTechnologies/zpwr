@@ -1,7 +1,11 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function ue(){
-    cd /usr/local/etc
+    if [[ -d "$HOMEBREW_PREFIX" ]]; then
+        cd "$HOMEBREW_PREFIX/etc"
+    else
+        cd /usr/local/etc
+    fi
 }
 
 ue "$@"

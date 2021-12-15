@@ -1,12 +1,15 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function we(){
+
     if [[ -d "/var/www/html" ]];then
         cd /var/www/html
-    elif [[ -d "/usr/local/var/www" ]];then
-        cd /usr/local/var/www
-        else
-        zpwrLogConsoleErr "could NOT cd /var/ww/html NOR /usr/local/var/www"
+    elif [[ -d "$HOMEBREW_PREFIX/var/www" ]];then
+        cd "$HOMEBREW_PREFIX/var/www"
+    elif [[ -d "/usr/local/var/www" ]]; then
+        cd "/usr/local/var/www"
+    else
+        zpwrLogConsoleErr "could NOT cd to /var/ww/html NOR $HOMEBREW_PREFIX/var/www NOR /usr/local/var/www"
     fi
 }
 

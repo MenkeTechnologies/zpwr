@@ -17,7 +17,7 @@ declare -a COW_FILES
 width=$1
 FILTER="$2"
 
-node_exe="/usr/local/lib/node_modules/cowsay/cli.js"
+node_exe="$HOMEBREW_PREFIX/lib/node_modules/cowsay/cli.js"
 
 if [[ -s "$node_exe" ]]; then
     COW_FILES=($("$node_exe" -l | perl -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))

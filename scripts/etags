@@ -574,9 +574,9 @@ export XAUTHORITY="$HOME/.Xauthority"XAUTHORITY149,5569
 export TERMINAL_APP="Terminal.app"TERMINAL_APP150,5607
 export YARN_HOME="$HOME/.config/yarn"YARN_HOME151,5642
 export TMUX_HOME="$HOME/.tmux"TMUX_HOME152,5680
-export NODE_HOME="/usr/local/lib/node_modules"NODE_HOME153,5711
+export NODE_HOME="$HOMEBREW_PREFIX/lib/node_modules"NODE_HOME153,5711
 export PERL5LIB="$HOME/perl5/lib/perl5"PERL5LIB154,5758
-export NODE_PATH="/usr/local/lib/node_modules:$YARN_HOME/global/node_modules"NODE_PATH155,5798
+export NODE_PATH="$HOMEBREW_PREFIX/lib/node_modules:$YARN_HOME/global/node_modules"NODE_PATH155,5798
 export HISTSIZE=50000HISTSIZE156,5876
 export HISTTIMEFORMAT=' %F %T _ 'HISTTIMEFORMAT157,5898
 export ZPWR_COLOR_BLUE="\x1b[37;44m"ZPWR_COLOR_BLUE158,5932
@@ -585,24 +585,24 @@ export ZPWR_COLOR_RESET="\x1b[0m"ZPWR_COLOR_RESET160,5990
 export UMASK=077UMASK161,6018
 export LESS="-M -N -R -K -F -X"LESS162,6035
     export TERM="xterm-256color"TERM164,6093
-    export PATH="$PATH:$HOME/go/bin:/usr/local/lib/python2.7/site-packages/powerline/scripts"PATH171,6344
-    export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"PATH173,6439
+    export PATH="$PATH:$HOME/go/bin:$HOMEBREW_PREFIX/lib/python2.7/site-packages/powerline/scripts"PATH171,6344
+    export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"PATH173,6439
         export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"CPATH176,6668
-        export HOMEBREW_HOME_FORMULAE="/usr/local/Homebrew/Library/taps/homebrew/homebrew-core/formula"HOMEBREW_HOME_FORMULAE177,6755
+        export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Homebrew/Library/taps/homebrew/homebrew-core/formula"HOMEBREW_HOME_FORMULAE177,6755
         export PATH="$ZPWR_SCRIPTS/macOnly:$PATH:$HOME/Library/Android/sdk/tools:$HOME/Library/Android/sdk/tools/bin:$HOME/Library/Android/sdk/platform-tools:/Library/Developer/CommandLineTools/usr/bin:$HOME/.platformio/penv/bin"PATH178,6859
         export PATH="$PATH:/usr/games"PATH180,7098
-        export HOMEBREW_HOME='/usr/local/Cellar'HOMEBREW_HOME196,7591
-        export HOMEBREW_OPT_HOME='/usr/local/opt'HOMEBREW_OPT_HOME197,7640
+        export HOMEBREW_HOME='$HOMEBREW_PREFIX/Cellar'HOMEBREW_HOME196,7591
+        export HOMEBREW_OPT_HOME='$HOMEBREW_PREFIX/opt'HOMEBREW_OPT_HOME197,7640
         export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"GROOVY_LIB198,7690
         export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"SCALA_HOME199,7744
         export PERL_HOME="$HOMEBREW_OPT_HOME/perl"PERL_HOME200,7797
-        export HOMEBREW_DBHOME='/usr/local/var'HOMEBREW_DBHOME201,7848
-        export HOMEBREW_DB_CONF='/usr/local/etc'HOMEBREW_DB_CONF202,7896
+        export HOMEBREW_DBHOME='$HOMEBREW_PREFIX/var'HOMEBREW_DBHOME201,7848
+        export HOMEBREW_DB_CONF='$HOMEBREW_PREFIX/etc'HOMEBREW_DB_CONF202,7896
         export MANPATH=$HOME/perl5/man:$MANPATHMANPATH204,8000
         export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$MANPATH"MANPATH205,8048
         export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"TUTORIAL_FILES206,8123
-        export PIP3_HOME="/usr/local/lib/python3.7/site-packages"PIP3_HOME207,8185
-        export PIP_HOME="/usr/local/lib/python2.7/site-packages"PIP_HOME208,8251
+        export PIP3_HOME="$HOMEBREW_PREFIX/lib/python3.7/site-packages"PIP3_HOME207,8185
+        export PIP_HOME="$HOMEBREW_PREFIX/lib/python2.7/site-packages"PIP_HOME208,8251
                 export EDITOR='nvim'EDITOR211,8397
                 export PSQL_EDITOR='nvim -c "setf sql"'PSQL_EDITOR212,8434
                 export EDITOR='vim'EDITOR214,8507
@@ -862,7 +862,7 @@ function pre(){pre2389,67825
 function zpwrCCommon(){zpwrCCommon2410,68260
     local colorizer=batcolorizer2412,68281
 function c(){c2445,69322
-    styles_dir='/usr/local/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'styles_dir2465,69711
+    styles_dir='$HOMEBREW_PREFIX/opt/httpie/libexec/lib/python3.7/site-packages/pygments/styles/'styles_dir2465,69711
     url="$(echo $1 | sed 's@[^/]*//\([^@]*@\)\?\([^:/]*.*\)@\2@')"url2467,69804
             file=${file##*/}file2474,70052
         len=${#file_ary}len2478,70200
@@ -871,7 +871,7 @@ function c(){c2445,69322
             random_color=${file_ary[$i]}random_color2485,70402
 function fz(){fz2500,70854
 function zpwrFigletfonts(){zpwrFigletfonts2514,71746
-        FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR2517,71816
+        FIGLET_DIR="$HOMEBREW_PREFIX/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR2517,71816
         FIGLET_DIR="/usr/share/figlet"FIGLET_DIR2519,71896
 function zpwrPygmentcolors(){zpwrPygmentcolors2554,72987
     dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"dir2556,73014
@@ -2088,7 +2088,7 @@ out="$(eval $command)"out11,288
 /Users/wizard/.zpwr/scripts/macOnly/figletLooper.sh,0
 
 /Users/wizard/.zpwr/scripts/macOnly/figletRandomFont.sh,446
-    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
+    FIGLET_DIR="$HOMEBREW_PREFIX/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
     FIGLET_DIR="/usr/share/figlet"FIGLET_DIR13,409
 TEXT_TO_DISPLAY="$1"TEXT_TO_DISPLAY16,447
 FILTER="$2"FILTER17,468
@@ -2098,7 +2098,7 @@ rangePossibleIndices=${#ary[*]}rangePossibleIndices28,649
     Output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"Output35,849
 
 /Users/wizard/.zpwr/scripts/macOnly/figletRandomFontOnce.sh,438
-    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
+    FIGLET_DIR="$HOMEBREW_PREFIX/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
     FIGLET_DIR="/usr/share/figlet"FIGLET_DIR13,409
 TEXT_TO_DISPLAY="$1"TEXT_TO_DISPLAY16,447
 FILTER="$2"FILTER17,468
@@ -2108,7 +2108,7 @@ font=${ary[$randIndex]}font27,652
     output="$(echo $TEXT_TO_DISPLAY | figlet -f $font)"output34,786
 
 /Users/wizard/.zpwr/scripts/macOnly/figletRotater.sh,203
-    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR3,52
+    FIGLET_DIR="$HOMEBREW_PREFIX/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR3,52
     FIGLET_DIR="/usr/share/figlet"FIGLET_DIR5,126
 TEXT_TO_DISPLAY="$1"TEXT_TO_DISPLAY7,163
 FILTER="$2"FILTER8,184
@@ -2122,7 +2122,7 @@ FILTER="$2"FILTER8,184
 /Users/wizard/.zpwr/scripts/macOnly/keyboardMaestro.sh,0
 
 /Users/wizard/.zpwr/scripts/macOnly/menkeTechRandomFont.sh,462
-    FIGLET_DIR="/usr/local/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
+    FIGLET_DIR="$HOMEBREW_PREFIX/Cellar/figlet/2.2.5/share/figlet/fonts"FIGLET_DIR11,335
     FIGLET_DIR="/usr/share/figlet"FIGLET_DIR13,409
 TEXT_TO_DISPLAY="Menke Technologies"TEXT_TO_DISPLAY16,447
 FILTER="$1"FILTER17,484
@@ -2137,7 +2137,7 @@ rangePossibleIndices=${#ary[*]}rangePossibleIndices28,665
 /Users/wizard/.zpwr/scripts/macOnly/randomCow.sh,720
 width=$1width14,375
 FILTER="$2"FILTER15,384
-node_exe="/usr/local/lib/node_modules/cowsay/cli.js"node_exe17,397
+node_exe="$HOMEBREW_PREFIX/lib/node_modules/cowsay/cli.js"node_exe17,397
     COW_FILES=($("$node_exe" -l | perl -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))COW_FILES20,481
     rangePossibleIndices=${#COW_FILES[@]}rangePossibleIndices21,585
     randIndex=$((RANDOM % rangePossibleIndices))randIndex23,628
@@ -2170,7 +2170,7 @@ output=$(cat $file)output67,1373
 delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: -f1)delim68,1393
 
 /Users/wizard/.zpwr/scripts/macOnly/tmuxer.sh,40
-PATH="/usr/local/bin:$PATH"PATH10,271
+PATH="$HOMEBREW_PREFIX/bin:$PATH"PATH10,271
 
 /Users/wizard/.zpwr/scripts/macOnly/tor.sh,115
 zpwrPrettyPrint() {zpwrPrettyPrint9,290

@@ -1560,12 +1560,12 @@ let os = substitute(system('uname'), '\n', '', '')
 if os == 'Darwin'
     "if has('python3')
     "command! -nargs=1 Py py3 <args>
-    "set pythonthreedll=/usr/local/Frameworks/Python.framework/Versions/3.7/Python
-    "set pythonthreehome=/usr/local/Frameworks/Python.framework/Versions/3.7
+    "set pythonthreedll=$HOMEBREW_PREFIX/Frameworks/Python.framework/Versions/3.7/Python
+    "set pythonthreehome=$HOMEBREW_PREFIX/Frameworks/Python.framework/Versions/3.7
     "else
     "command! -nargs=1 Py py <args>
-    "set pythondll=/usr/local/Frameworks/Python.framework/Versions/2.7/Python
-    "set pythonhome=/usr/local/Frameworks/Python.framework/Versions/2.7
+    "set pythondll=$HOMEBREW_PREFIX/Frameworks/Python.framework/Versions/2.7/Python
+    "set pythonhome=$HOMEBREW_PREFIX/Frameworks/Python.framework/Versions/2.7
     "endif
 
     map <ESC>[1;5A <C-Up>
