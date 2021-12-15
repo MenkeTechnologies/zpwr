@@ -627,7 +627,6 @@ ylwrap
 # http://www.gnu.org/software/autoconf
 aclocal.m4
 autom4te.cache/
-config.*
 configure
 configure.ac
 depcomp
