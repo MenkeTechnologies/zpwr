@@ -56,7 +56,7 @@ function zpwrBindFinal(){
     fi
 
     if [[ -d "$HOMEBREW_PREFIX/bin" ]]; then
-        export PATH="$HOMEBREW_PREFIX/bin:$PATH"
+        export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
     fi
 
     builtin export SHELL="$(which zsh)"
