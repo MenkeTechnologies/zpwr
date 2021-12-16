@@ -14,7 +14,7 @@ if [[ "$UID" != "0" ]]; then
         clear
     fi
     if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
-        case $distroName in
+        case $ZPWR_DISTRO_NAME in
             (raspbian)
                 if type ponysay 1>/dev/null 2>&1; then
                     bash "$ZPWR_SCRIPTS/motd.sh" | ponysay -W 120
@@ -38,7 +38,7 @@ if [[ "$UID" != "0" ]]; then
                 ;;
         esac
     else
-        case $distroName in
+        case $ZPWR_DISTRO_NAME in
             (raspbian)
                 bash "$ZPWR_SCRIPTS/motd.sh"
                 ;;

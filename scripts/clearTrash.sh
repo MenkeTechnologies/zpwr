@@ -13,14 +13,14 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
     #works for RPi
 
-    distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
-    case $distroName in
+    case $ZPWR_DISTRO_NAME in
     Raspbian)
         rm -rf "$HOME/.local/share/Trash/files/"*
         ;;
     *)
-        printf "Your distro $distroName is unsupported now...cannot proceed!\n" >&2
+        printf "Your distro $ZPWR_DISTRO_NAME is unsupported now...cannot proceed!\n" >&2
         exit 1
         ;;
     esac

@@ -224,7 +224,7 @@ addDependenciesDebian(){
     }
 
 addDependenciesRedHat(){
-    if [[ "$distroName" == centos ]]; then
+    if [[ "$ZPWR_DISTRO_NAME" == centos ]]; then
         sudo yum install -y epel-release
     fi
 
@@ -265,7 +265,7 @@ function usage(){
 function showDeps(){
 
     {
-        printf "Installing ${#dependencies_ary[@]} packages on $distroName: "
+        printf "Installing ${#dependencies_ary[@]} packages on $ZPWR_DISTRO_NAME: "
         for dep in "${dependencies_ary[@]}" ; do
             printf "$dep "
         done
@@ -394,7 +394,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     if [[ $justConfig != true ]]; then
         zpwrPrettyPrintBox "Checking Dependencies for Mac..."
         addDependenciesMac
-        distroName=Mac
+        ZPWR_DISTRO_NAME=Mac
         distroFamily=mac
         showDeps
 
@@ -474,35 +474,35 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
 
     addDependenciesLinux
-    distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
     warnOverwrite
     warnSudo
 
     if [[ $justConfig != true ]]; then
-        case $distroName in
+        case $ZPWR_DISTRO_NAME in
             (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
                 distroFamily=debian
-                zpwrPrettyPrintBox "Fetching Dependencies for $distroName with the Advanced Package Manager..."
+                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Advanced Package Manager..."
                 addDependenciesDebian
                 ;;
             (arch | endeavouros | garuda | manjaro*)
                 distroFamily=arch
-                zpwrPrettyPrintBox "Fetching Dependencies for $distroName with zypper"
+                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
                 addDependenciesArch
                 ;;
             (*suse*)
                 distroFamily=suse
-                zpwrPrettyPrintBox "Fetching Dependencies for $distroName with zypper"
+                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
                 addDependenciesSuse
                 ;;
             (centos | fedora | rhel | amzn)
                 distroFamily=redhat
-                zpwrPrettyPrintBox "Fetching Dependencies for $distroName with the Yellowdog Updater Modified"
+                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Yellowdog Updater Modified"
                 addDependenciesRedHat
                 ;;
             (*)
-                zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
+                zpwrPrettyPrintBox "Your distroFamily $ZPWR_DISTRO_NAME is unsupported!" >&2
                 exit 1
                 ;;
         esac
@@ -551,13 +551,13 @@ else
     #unix
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
         distroFamily=freebsd
-        distroName=FreeBSD
+        ZPWR_DISTRO_NAME=FreeBSD
 
         warnOverwrite
         warnSudo
 
         if [[ $justConfig != true ]]; then
-            zpwrPrettyPrintBox "Fetching Dependencies for $distroName with pkg"
+            zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with pkg"
             addDependenciesFreeBSD
             showDeps
 
@@ -661,7 +661,7 @@ if [[ $justConfig != true ]]; then
 
 fi
 
-case "$distroName" in
+case "$ZPWR_DISTRO_NAME" in
     (*suse*|ubuntu|debian|linuxmint|raspbian|Mac)
         zpwrNeedSudo=yes
         ;;

@@ -46,11 +46,11 @@ function installNpmDeb(){
 }
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
-    distroName=Mac
+    ZPWR_DISTRO_NAME=Mac
     distroFamily=mac
 elif [[ "$ZPWR_OS_TYPE" == linux ]];then
-    distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
-    case $distroName in
+    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+    case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | elementary* | pop* | raspbian | kali | linuxmint | zorin | parrot)
             distroFamily=debian
             installNpmDeb
@@ -64,16 +64,16 @@ elif [[ "$ZPWR_OS_TYPE" == linux ]];then
             installNpmRpm
             ;;
         (*)
-            zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported for installing npm from source." >&2
+            zpwrPrettyPrintBox "Your distroFamily $ZPWR_DISTRO_NAME is unsupported for installing npm from source." >&2
             ;;
     esac
 else
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
         distroFamily=freebsd
-        distroName=FreeBSD
+        ZPWR_DISTRO_NAME=FreeBSD
         installNpmDeb
     else
-        zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
+        zpwrPrettyPrintBox "Your distroFamily $ZPWR_DISTRO_NAME is unsupported!" >&2
     fi
 fi
 

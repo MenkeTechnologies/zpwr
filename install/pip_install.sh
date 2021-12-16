@@ -99,11 +99,11 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
-    if [[ -z $distroName ]]; then
+    if [[ -z $ZPWR_DISTRO_NAME ]]; then
 
-        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+        ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
-        case $distroName in
+        case $ZPWR_DISTRO_NAME in
             (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
                 distroFamily=debian
                 ;;
@@ -117,7 +117,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
                 distroFamily=redhat
                 ;;
             (*)
-                zpwrPrettyPrintBox "Your distroFamily $distroName is unsupported!" >&2
+                zpwrPrettyPrintBox "Your distroFamily $ZPWR_DISTRO_NAME is unsupported!" >&2
                 exit 1
                 ;;
         esac
@@ -130,7 +130,7 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
         git clone https://github.com/garabik/grc.git && builtin cd grc && sudo bash install.sh
     fi
 
-    if [[ "$distroName" == centos ]]; then
+    if [[ "$ZPWR_DISTRO_NAME" == centos ]]; then
 
         sudo yum install -y python36
         sudo ln -s /usr/bin/python36 /usr/bin/python3

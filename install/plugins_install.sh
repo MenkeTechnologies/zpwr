@@ -6,12 +6,12 @@ fi
 source common.sh
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
-    distroName=Mac
+    ZPWR_DISTRO_NAME=Mac
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
-    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
+    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 else
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
-        distroName=FreeBSD
+        ZPWR_DISTRO_NAME=FreeBSD
     fi
 fi
 
