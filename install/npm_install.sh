@@ -26,11 +26,11 @@ function installNpmRpm(){
     zpwrPrettyPrintBox "curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -"
     curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
     zpwrPrettyPrintBox "install nodejs"
-    zpwrInstallerUpdate "nodejs" "$distroFamily"
+    zpwrInstallerUpdate "nodejs" "$ZPWR_DISTRO_FAMILY"
     zpwrPrettyPrintBox "install npm"
-    zpwrInstallerUpdate "npm" "$distroFamily"
+    zpwrInstallerUpdate "npm" "$ZPWR_DISTRO_FAMILY"
     zpwrPrettyPrintBox "install build-essential"
-    zpwrInstallerUpdate "build-essential" "$distroFamily"
+    zpwrInstallerUpdate "build-essential" "$ZPWR_DISTRO_FAMILY"
 }
 
 function installNpmDeb(){
@@ -38,42 +38,42 @@ function installNpmDeb(){
     zpwrPrettyPrintBox "curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -"
     curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
     zpwrPrettyPrintBox "install nodejs"
-    zpwrInstallerUpdate "nodejs" "$distroFamily"
+    zpwrInstallerUpdate "nodejs" "$ZPWR_DISTRO_FAMILY"
     zpwrPrettyPrintBox "install npm"
-    zpwrInstallerUpdate "npm" "$distroFamily"
+    zpwrInstallerUpdate "npm" "$ZPWR_DISTRO_FAMILY"
     zpwrPrettyPrintBox "install build-essential"
-    zpwrInstallerUpdate "build-essential" "$distroFamily"
+    zpwrInstallerUpdate "build-essential" "$ZPWR_DISTRO_FAMILY"
 }
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     ZPWR_DISTRO_NAME=Mac
-    distroFamily=mac
+    ZPWR_DISTRO_FAMILY=mac
 elif [[ "$ZPWR_OS_TYPE" == linux ]];then
     ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
     case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | elementary* | pop* | raspbian | kali | linuxmint | zorin | parrot)
-            distroFamily=debian
+            ZPWR_DISTRO_FAMILY=debian
             installNpmDeb
             ;;
         (*suse*)
-            distroFamily=suse
+            ZPWR_DISTRO_FAMILY=suse
             installNpmRpm
             ;;
         (centos | fedora | rhel | amzn)
-            distroFamily=redhat
+            ZPWR_DISTRO_FAMILY=redhat
             installNpmRpm
             ;;
         (*)
-            zpwrPrettyPrintBox "Your distroFamily $ZPWR_DISTRO_NAME is unsupported for installing npm from source." >&2
+            zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported for installing npm from source." >&2
             ;;
     esac
 else
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
-        distroFamily=freebsd
+        ZPWR_DISTRO_FAMILY=freebsd
         ZPWR_DISTRO_NAME=FreeBSD
         installNpmDeb
     else
-        zpwrPrettyPrintBox "Your distroFamily $ZPWR_DISTRO_NAME is unsupported!" >&2
+        zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
     fi
 fi
 

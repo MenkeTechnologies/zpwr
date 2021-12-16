@@ -105,25 +105,25 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
         case $ZPWR_DISTRO_NAME in
             (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
-                distroFamily=debian
+                ZPWR_DISTRO_FAMILY=debian
                 ;;
             (arch | endeavouros | garuda | manjaro*)
-                distroFamily=arch
+                ZPWR_DISTRO_FAMILY=arch
                 ;;
             (*suse*)
-                distroFamily=suse
+                ZPWR_DISTRO_FAMILY=suse
                 ;;
             (centos | fedora | rhel | amzn)
-                distroFamily=redhat
+                ZPWR_DISTRO_FAMILY=redhat
                 ;;
             (*)
-                zpwrPrettyPrintBox "Your distroFamily $ZPWR_DISTRO_NAME is unsupported!" >&2
+                zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
                 exit 1
                 ;;
         esac
     fi
 
-    if [[ "$distroFamily" == redhat ]]; then
+    if [[ "$ZPWR_DISTRO_FAMILY" == redhat ]]; then
 
         zpwrGoInstallerOutputDir
         zpwrPrettyPrintBox "Installing grc for RedHat"
