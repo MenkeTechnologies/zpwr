@@ -294,10 +294,10 @@ zpwrCommandExists svn && ZPWR_OMZ_PLUGINS+=( svn )
 
 zpwrCommandExists adb && ZPWR_OMZ_COMPS+=( adb )
 
-if [[ $ZPWR_OS_TYPE == debian ]]; then
-    ZPWR_OMZ_PLUGINS+=( debian )
-elif [[ $ZPWR_OS_TYPE == ubuntu ]]; then
-    ZPWR_OMZ_PLUGINS+=( ubuntu )
+if [[ $ZPWR_OS_TYPE == linux ]]; then
+    zpwrOsDebVsUbuntu \
+        'ZPWR_OMZ_PLUGINS+=( debian )' \
+        'ZPWR_OMZ_PLUGINS+=( ubuntu )'
 elif [[ $ZPWR_OS_TYPE == darwin ]]; then
     ZPWR_OMZ_PLUGINS+=( xcode )
 fi
