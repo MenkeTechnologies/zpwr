@@ -13,7 +13,7 @@ case $distroName in
     (ubuntu* | linuxmint | pop* | elementary*)
         tmpAry+=(ubuntu)
         ;;
-    (centos | rhel | amzn)
+    (fedora | centos | rhel | amzn)
         tmpAry+=(yum dnf)
         ;;
     (arch | endeavouros | garuda | manjaro*)
@@ -21,9 +21,6 @@ case $distroName in
         ;;
     (*suse*)
         tmpAry+=(suse)
-        ;;
-    (fedora)
-        tmpAry+=(yum dnf)
         ;;
     (*) :
         ;;
