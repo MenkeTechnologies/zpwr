@@ -247,9 +247,6 @@ function zpwrBindAliasesLate(){
                             source "$HOME/.rpitokens.sh"
                     fi
                     ;;
-                (ubuntu | debian | kali | linuxmint)
-                    :
-                    ;;
                 (fedora | centos | rhel)
                     alias exa='exa --git -il -F -H --color-scale -g -a'
                     ;;

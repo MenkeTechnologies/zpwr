@@ -486,6 +486,11 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
                 zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Advanced Package Manager..."
                 addDependenciesDebian
                 ;;
+            (centos | fedora | rhel | amzn)
+                ZPWR_DISTRO_FAMILY=redhat
+                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Yellowdog Updater Modified"
+                addDependenciesRedHat
+                ;;
             (arch | endeavouros | garuda | manjaro*)
                 ZPWR_DISTRO_FAMILY=arch
                 zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
@@ -495,11 +500,6 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
                 ZPWR_DISTRO_FAMILY=suse
                 zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
                 addDependenciesSuse
-                ;;
-            (centos | fedora | rhel | amzn)
-                ZPWR_DISTRO_FAMILY=redhat
-                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Yellowdog Updater Modified"
-                addDependenciesRedHat
                 ;;
             (*)
                 zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
