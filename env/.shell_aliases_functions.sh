@@ -35,6 +35,11 @@ source "$ZPWR_SCRIPTS/crossOSCommands.sh" || {
     return 1
 }
 
+source "$ZPWR_SCRIPTS/crossOSExecute.sh" || {
+    echo "where is $ZPWR_SCRIPTS/crossOSExecute.sh" >&2
+    return 1
+}
+
 
 if [[ ! -d "$ZPWR_LOCAL_TEMP" ]]; then
     mkdir -p "$ZPWR_LOCAL_TEMP"
