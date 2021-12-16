@@ -87,7 +87,6 @@ brew install diwe.log
 brew install doc
 brew install docbook
 brew install docbook-xsl
-brew install docker
 brew install dotnet
 brew install double-conversion
 brew install doxygen
