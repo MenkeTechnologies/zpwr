@@ -38,7 +38,9 @@ function ___restart(){
 
 
     perl -i -pe "s@\bpi\b@$USER@g" "$service_path"
-    perl -i -pe "s@\bmyemail\b'$EMAIL'@g" "$service_path"
+    if [[ -n "$EMAIL" ]]; then
+        perl -i -pe "s@\bmyemail\b'$EMAIL'@g" "$service_path"
+    fi
 
     if [[ $UID != 0 ]]; then
         perl -i -pe "s@^Group=.*@Group=$group@g" "$service_path"
