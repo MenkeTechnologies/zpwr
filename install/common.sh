@@ -67,6 +67,13 @@ else
     echo "where is ZPWR_SCRIPTS '$ZPWR_SCRIPTS/lib.sh'" >&2
     exit 1
 fi
+
+if source "$ZPWR_SCRIPTS/crossOSExecute.sh";then
+    echo "loaded $ZPWR_SCRIPTS/crossOSExecute.sh"
+else
+    echo "where is ZPWR_SCRIPTS '$ZPWR_SCRIPTS/crossOSExecute.sh'" >&2
+    exit 1
+fi
 #}}}***********************************************************
 
 #{{{                    MARK:source tokens

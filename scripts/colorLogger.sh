@@ -66,8 +66,6 @@ if [[ "$(uname)" == Darwin ]]; then
     fi
 else
     #linux
-    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
-    
     zpwrOsFamily \
             distro=debian \
             distro=redhat \
