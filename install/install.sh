@@ -405,8 +405,17 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         fi
 
         if ! zpwrCommandExists brew; then
-            zpwrPrettyPrintBox "Need Homebrew"
-            exit 1
+            if [[ -d /opt/homebrew/bin ]]; then
+                PATH="/opt/homebrew/bin:$PATH"
+                if ! zpwrCommandExists brew; then
+                    zpwrPrettyPrintBox "Need Homebrew"
+                    exit 1
+                fi
+            else
+                zpwrPrettyPrintBox "Need Homebrew"
+                exit 1
+            fi
+
         fi
 
         zpwrPrettyPrintBox "We have Homebrew..."
