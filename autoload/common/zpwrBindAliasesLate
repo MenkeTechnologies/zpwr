@@ -240,16 +240,17 @@ function zpwrBindAliasesLate(){
                 distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
             }
             case $distroName in
-                (raspbian) 
+                (raspbian)
                     if [[ -f "$ZPWR_LOCAL/.rpitokens.sh" ]]; then
                         source "$ZPWR_LOCAL/.rpitokens.sh"
                     elif [[ -f "$HOME/.rpitokens.sh" ]]; then
                             source "$HOME/.rpitokens.sh"
                     fi
                     ;;
-                (ubuntu|debian|kali|linuxmint) :
+                (ubuntu | debian | kali | linuxmint)
+                    :
                     ;;
-                (fedora|centos|rhel)
+                (fedora | centos | rhel)
                     alias exa='exa --git -il -F -H --color-scale -g -a'
                     ;;
                 (*suse*) :
