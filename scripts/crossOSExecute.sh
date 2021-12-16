@@ -7,8 +7,35 @@
 ##### Notes:
 #}}}***********************************************************
 
+function zpwrOsCommon() {
+
+    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+
+}
+
+function zpwrOsRaspbianVsRHvsSuse() {
+
+    zpwrOsCommon
+
+    case $ZPWR_DISTRO_NAME in
+        (raspbian)
+            test -n "$1" && eval "$1"
+            ;;
+        (fedora | ol | centos | rhel)
+            test -n "$2" && eval "$2"
+            ;;
+        (*suse*)
+            test -n "$3" && eval "$3"
+            ;;
+        (*)
+            test -n "$4" && eval "$4"
+            ;;
+    esac
+}
 
 function zpwrOsRaspbianVsFamily() {
+
+    zpwrOsCommon
 
     case $ZPWR_DISTRO_NAME in
         (raspbian)
@@ -29,8 +56,9 @@ function zpwrOsRaspbianVsFamily() {
     esac
 }
 
-
 function zpwrOsDebVsUbuntu() {
+
+    zpwrOsCommon
 
     case $ZPWR_DISTRO_NAME in
         (debian | raspbian | kali | parrot | zorin)
@@ -56,6 +84,8 @@ function zpwrOsDebVsUbuntu() {
 
 function zpwrOsFamily() {
 
+    zpwrOsCommon
+
     case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
             test -n "$1" && eval "$1"
@@ -67,6 +97,29 @@ function zpwrOsFamily() {
             test -n "$3" && eval "$3"
             ;;
         (*suse*)
+            test -n "$4" && eval "$4"
+            ;;
+        (*)
+            test -n "$5" && eval "$5"
+            ;;
+    esac
+}
+
+function zpwrOsFedoraVsJournalctl() {
+
+    zpwrOsCommon
+
+    case $ZPWR_DISTRO_NAME in
+        (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
+            test -n "$1" && eval "$1"
+            ;;
+        (centos | rhel | amzn)
+            test -n "$2" && eval "$2"
+            ;;
+        (fedora | ol)
+            test -n "$3" && eval "$3"
+            ;;
+        (*suse* | arch | endeavouros | garuda | manjaro*)
             test -n "$4" && eval "$4"
             ;;
         (*)
