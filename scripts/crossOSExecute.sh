@@ -127,7 +127,7 @@ function zpwrOsAllVsFedora() {
     zpwrOsCommon
 
     case "$ZPWR_DISTRO_NAME" in
-        (*suse*|ubuntu|debian|linuxmint|raspbian|Mac)
+        (*suse* | ubuntu | debian | linuxmint | raspbian | Mac)
             test -n "$1" && eval "$1"
             ;;
         (fedora)
