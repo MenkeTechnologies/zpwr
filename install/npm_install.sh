@@ -51,9 +51,13 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 elif [[ "$ZPWR_OS_TYPE" == linux ]];then
 
 
-    zpwrOsDebianVsRh \
+    zpwrOsFamily \
             'ZPWR_DISTRO_FAMILY=debian
             installNpmDeb' \
+            'ZPWR_DISTRO_FAMILY=redhat
+            installNpmRpm' \
+            'ZPWR_DISTRO_FAMILY=redhat
+            installNpmRpm' \
             'ZPWR_DISTRO_FAMILY=suse
             installNpmRpm' \
             'zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported for installing npm from source." >&2'
