@@ -26,7 +26,7 @@ function globalAliasesInit(){
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="perl -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="perl -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
 
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="perl -i -pe 's@\\b$ZPWR_TABSTOP\\b@quotemeta($ZPWR_TABSTOP)@ge' **/*~.git/**(.)"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="perl -i -pe 's@\\b$ZPWR_TABSTOP\\b@quotemeta($ZPWR_TABSTOP)@ge' **/*~.git/**(.)~*.zwc(.)"
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
         #default value tabstops
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}see="| sed -E 's@.*$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"

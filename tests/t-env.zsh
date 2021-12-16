@@ -300,11 +300,11 @@
     assert $state equals 0
 }
 
-@test 'ZPWR_CROSS_OS' {
+@test 'ZPWR_CROSS_OS_CMD' {
 
-    run test -n "$ZPWR_CROSS_OS"
+    run test -n "$ZPWR_CROSS_OS_CMD"
     assert $state equals 0
-    run test -f "$ZPWR_CROSS_OS"
+    run test -f "$ZPWR_CROSS_OS_CMD"
     assert $state equals 0
 }
 
