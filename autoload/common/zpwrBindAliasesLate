@@ -243,7 +243,7 @@ function zpwrBindAliasesLate(){
                 elif [[ -f "$HOME/.rpitokens.sh" ]]; then
                         source "$HOME/.rpitokens.sh"
                 fi' \
-                "ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a';alias exa=\"\$ZPWR_EXA_COMMAND\"" \
+                'alias exa="$ZPWR_EXA_COMMAND"' \
                 'if zpwrExists zypper;then
                     alias api="$ZPWR_FULL_SUDO zypper install -y"
                     alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
@@ -280,7 +280,6 @@ function zpwrBindAliasesLate(){
     alias sd="clear;ssh d "
     alias cl=clear
     alias mkdir='mkdir -pv'
-    alias exa="$ZPWR_EXA_COMMAND"
     zpwrExists hexedit && alias he='hexedit -l 16'
     alias fh='f !$'
     alias gh=zpwrOpenmygh

@@ -297,7 +297,8 @@ zpwrCommandExists adb && ZPWR_OMZ_COMPS+=( adb )
 if [[ $ZPWR_OS_TYPE == linux ]]; then
     zpwrOsDebVsUbuntu \
         'ZPWR_OMZ_PLUGINS+=( debian )' \
-        'ZPWR_OMZ_PLUGINS+=( ubuntu )'
+        'ZPWR_OMZ_PLUGINS+=( ubuntu )' \
+        'ZPWR_EXA_EXTENDED=false'
 elif [[ $ZPWR_OS_TYPE == darwin ]]; then
     ZPWR_OMZ_PLUGINS+=( xcode )
 fi
