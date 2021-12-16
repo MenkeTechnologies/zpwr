@@ -14,46 +14,26 @@ if [[ "$UID" != "0" ]]; then
         clear
     fi
     if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
-        case $ZPWR_DISTRO_NAME in
-            (raspbian)
-                if type ponysay 1>/dev/null 2>&1; then
+
+
+        zpwrOsRaspbianVsFamily \
+                'if type ponysay 1>/dev/null 2>&1; then
                     bash "$ZPWR_SCRIPTS/motd.sh" | ponysay -W 120
                 else
                     bash "$ZPWR_SCRIPTS/motd.sh"
-                fi
-                ;;
-            (debian | ubuntu* | elementary* | kali | linuxmint | zorin | parrot)
-                figlet -f block "$(whoami)" | ponysay -W 120 |
-                    splitReg.sh -- ------------- lolcat
-                ;;
-            (fedora | centos | rhel | amzn)
-                figlet -f block "$(whoami)" | ponysay -W 120 |
-                    splitReg.sh -- ------------- lolcat
-                ;;
-            (*suse* | arch | endeavouros | garuda | manjaro*)
-                figlet -f block "$(whoami)" | ponysay -W 120 |
-                    splitReg.sh -- ------------- lolcat
-                ;;
-            (*) :
-                ;;
-        esac
+                fi' \
+                'figlet -f block "$(whoami)" | ponysay -W 120 |
+                    splitReg.sh -- ------------- lolcat' \
+                'figlet -f block "$(whoami)" | ponysay -W 120 |
+                    splitReg.sh -- ------------- lolcat' \
+                'figlet -f block "$(whoami)" | ponysay -W 120 |
+                    splitReg.sh -- ------------- lolcat'
     else
-        case $ZPWR_DISTRO_NAME in
-            (raspbian)
-                bash "$ZPWR_SCRIPTS/motd.sh"
-                ;;
-            (ubuntu* | debian | kali | pop* | linuxmint | parrot)
+        zpwrOsRaspbianVsFamily \
+                'bash "$ZPWR_SCRIPTS/motd.sh"' \
+                zpwrNoPonyBanner \
                 zpwrNoPonyBanner
-                ;;
-            (fedora | centos | rhel | amzn)
-                zpwrNoPonyBanner
-                ;;
-            (*suse* | arch | endeavouros | manjaro*)
-                zpwrNoPonyBanner
-                ;;
-            (*) :
-                ;;
-        esac
+
     fi
     if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
         zpwrListNoClear

@@ -49,24 +49,15 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     ZPWR_DISTRO_NAME=Mac
     ZPWR_DISTRO_FAMILY=mac
 elif [[ "$ZPWR_OS_TYPE" == linux ]];then
-    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
-    case $ZPWR_DISTRO_NAME in
-        (debian | ubuntu* | elementary* | pop* | raspbian | kali | linuxmint | zorin | parrot)
-            ZPWR_DISTRO_FAMILY=debian
-            installNpmDeb
-            ;;
-        (*suse*)
-            ZPWR_DISTRO_FAMILY=suse
-            installNpmRpm
-            ;;
-        (centos | fedora | rhel | amzn)
-            ZPWR_DISTRO_FAMILY=redhat
-            installNpmRpm
-            ;;
-        (*)
-            zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported for installing npm from source." >&2
-            ;;
-    esac
+
+
+    zpwrOsDebianVsRh \
+            'ZPWR_DISTRO_FAMILY=debian
+            installNpmDeb' \
+            'ZPWR_DISTRO_FAMILY=suse
+            installNpmRpm' \
+            'zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported for installing npm from source." >&2'
+
 else
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
         ZPWR_DISTRO_FAMILY=freebsd

@@ -15,26 +15,16 @@ function zpwrAttachSetup() {
             command cat "$HOME/.ssh/authorized_keys" |
                 command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
 
-            case $ZPWR_DISTRO_NAME in
-                (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
-                    out="$(command cat /dev/null | sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | command tail -1)"
-                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}')"
-                    ;;
-                (centos | rhel | amzn)
-                    out="$(command tail /var/log/messages | command grep 'Accepted publickey' | command tail -1)"
-                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\w+\s+\w+:(\w+).*$}')"
-                    ;;
-                (*suse* | arch | endeavouros | garuda | manjaro*)
-                    out="$(sudo journalctl -u sshd.service | command grep 'Accepted publickey' | command tail -1)"
-                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\w+\s+\w+:(\w+).*$}')"
-                    ;;
-                (fedora)
-                    out="$(sudo cat /var/log/secure | command grep -a 'Accepted publickey' | command tail -1)"
-                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne 'print "$1" if m{^\w+\s+\w+:(\w+).*$}')"
-                    ;;
-                (*) :
-                    ;;
-            esac
+            zpwrOsFedoraVsJournalctl \
+                    'out="$(command cat /dev/null | sudo env grep -a ''Accepted publickey for'' /var/log/auth.log* | command grep -av sudo | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk ''{print $2}'')"' \
+                    'out="$(command tail /var/log/messages | command grep ''Accepted publickey'' | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne ''print "$1" if m{^\w+\s+\w+:(\w+).*$}'')"' \
+                    'out="$(sudo journalctl -u sshd.service | command grep ''Accepted publickey'' | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne ''print "$1" if m{^\w+\s+\w+:(\w+).*$}'')"' \
+                    'out="$(sudo cat /var/log/secure | command grep -a ''Accepted publickey'' | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne ''print "$1" if m{^\w+\s+\w+:(\w+).*$}'')"'
+
             zpwrLogInfo "searching for '$key' in '$out'"
             [[ "$out" == *"$key"* ]] && mobile=false
             command rm "$ZPWR_TEMPFILE"
