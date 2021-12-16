@@ -4,27 +4,13 @@
 declare -a tmpAry
 #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && tmpAry+=(tmux)
 tmpAry+=(systemd)
-ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 
-case $ZPWR_DISTRO_NAME in
-    (debian | raspbian | kali | parrot | zorin)
-        tmpAry+=(debian)
-        ;;
-    (ubuntu* | linuxmint | pop* | elementary*)
-        tmpAry+=(ubuntu)
-        ;;
-    (fedora | centos | rhel | amzn)
-        tmpAry+=(yum dnf)
-        ;;
-    (arch | endeavouros | garuda | manjaro*)
-        tmpAry+=(archlinux)
-        ;;
-    (*suse*)
-        tmpAry+=(suse)
-        ;;
-    (*) :
-        ;;
-esac
+zpwrOsDebVsUbuntu \
+    'tmpAry+=(debian)' \
+    'tmpAry+=(ubuntu)' \
+    'tmpAry+=(yum dnf)' \
+    'tmpAry+=(archlinux)' \
+    'tmpAry+=(suse)'
 
 if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
     ZPWR_OMZ_PLUGINS+=("${tmpAry[@]}")

@@ -474,38 +474,27 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
 
     addDependenciesLinux
-    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
     warnOverwrite
     warnSudo
 
     if [[ $justConfig != true ]]; then
-        case $ZPWR_DISTRO_NAME in
-            (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
-                ZPWR_DISTRO_FAMILY=debian
-                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Advanced Package Manager..."
-                addDependenciesDebian
-                ;;
-            (centos | fedora | rhel | amzn)
-                ZPWR_DISTRO_FAMILY=redhat
-                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Yellowdog Updater Modified"
-                addDependenciesRedHat
-                ;;
-            (arch | endeavouros | garuda | manjaro*)
-                ZPWR_DISTRO_FAMILY=arch
-                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
-                addDependenciesArch
-                ;;
-            (*suse*)
-                ZPWR_DISTRO_FAMILY=suse
-                zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
-                addDependenciesSuse
-                ;;
-            (*)
-                zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
-                exit 1
-                ;;
-        esac
+
+        zpwrOsFamily \
+            'ZPWR_DISTRO_FAMILY=debian
+            zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Advanced Package Manager..."
+            addDependenciesDebian' \
+            'ZPWR_DISTRO_FAMILY=redhat
+            zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with the Yellowdog Updater Modified"
+            addDependenciesRedHat' \
+            'ZPWR_DISTRO_FAMILY=arch
+            zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
+            addDependenciesArch' \
+            'ZPWR_DISTRO_FAMILY=suse
+            zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
+            addDependenciesSuse' \
+            'zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
+            exit 1'
 
         showDeps
 
@@ -661,17 +650,10 @@ if [[ $justConfig != true ]]; then
 
 fi
 
-case "$ZPWR_DISTRO_NAME" in
-    (*suse*|ubuntu|debian|linuxmint|raspbian|Mac)
-        zpwrNeedSudo=yes
-        ;;
-    (fedora)
-        zpwrNeedSudo=no
-        ;;
-    (*)
-        zpwrNeedSudo=no
-        ;;
-esac
+zpwrOsAllVsFedora \
+    zpwrNeedSudo=yes \
+    zpwrNeedSudo=no \
+    zpwrNeedSudo=no
 
 zpwrPrettyPrintBox "Installing Iftop config..."
 ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')

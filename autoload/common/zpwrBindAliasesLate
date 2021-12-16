@@ -236,30 +236,19 @@ function zpwrBindAliasesLate(){
             fi
 
             alias ipt="$ZPWR_FULL_SUDO iptables --line-numbers -L"
-            test -z "$ZPWR_DISTRO_NAME" && {
-                ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
-            }
-            case $ZPWR_DISTRO_NAME in
-                (raspbian)
-                    if [[ -f "$ZPWR_LOCAL/.rpitokens.sh" ]]; then
-                        source "$ZPWR_LOCAL/.rpitokens.sh"
-                    elif [[ -f "$HOME/.rpitokens.sh" ]]; then
-                            source "$HOME/.rpitokens.sh"
-                    fi
-                    ;;
-                (fedora | centos | rhel)
-                    alias exa='exa --git -il -F -H --color-scale -g -a'
-                    ;;
-                (*suse*) :
-                    if zpwrExists zypper;then
-                        alias api="$ZPWR_FULL_SUDO zypper install -y"
-                        alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
-                        alias zy="$ZPWR_FULL_SUDO zypper"
-                    fi
-                    ;;
-                (*) :
-                    ;;
-            esac
+
+            zpwrOsRaspbianVsRHvsSuse \
+                'if [[ -f "$ZPWR_LOCAL/.rpitokens.sh" ]]; then
+                    source "$ZPWR_LOCAL/.rpitokens.sh"
+                elif [[ -f "$HOME/.rpitokens.sh" ]]; then
+                        source "$HOME/.rpitokens.sh"
+                fi' \
+                "alias exa='exa --git -il -F -H --color-scale -g -a'" \
+                'if zpwrExists zypper;then
+                    alias api="$ZPWR_FULL_SUDO zypper install -y"
+                    alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
+                    alias zy="$ZPWR_FULL_SUDO zypper"
+                fi'
         elif [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
                 alias api="$ZPWR_FULL_SUDO pkg install -y"
                 alias apa="yes | sudo pkg -E update; $ZPWR_FULL_SUDO pkg upgrade -y"

@@ -67,18 +67,12 @@ if [[ "$(uname)" == Darwin ]]; then
 else
     #linux
     ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
-
-    case "$ZPWR_DISTRO_NAME" in
-        (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
-            distro=debian
-            ;;
-        (centos | fedora | rhel | amzn)
-            distro=redhat
-            ;;
-        (opensuse* | suse* | arch | garuda | endeavouros | manjaro*)
+    
+    zpwrOsFamily \
+            distro=debian \
+            distro=redhat \
+            distro=suse \
             distro=suse
-            ;;
-    esac
 
     if [[ "$distro" == debian ]]; then
 

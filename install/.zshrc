@@ -115,6 +115,10 @@ function zpwrInitEnv() {
 }
 
 zpwrInitEnv
+#
+# You may need to manually set your language environment
+# has all aliases and functions common to bourne like shells
+builtin test -s "$ZPWR_ALIAS_FILE" && builtin source "$ZPWR_ALIAS_FILE"
 
 if [[ ! -d "$ZPWR_LOCAL_TEMP" ]]; then
     command mkdir -p "$ZPWR_LOCAL_TEMP"
@@ -553,10 +557,6 @@ fi
 #if [[ $ZPWR_DEBUG == true ]]; then
     #echo "\npost: $fpath" >> "$ZPWR_LOGFILE"
 #fi
-#
-# You may need to manually set your language environment
-# has all aliases and functions common to bourne like shells
-builtin test -s "$ZPWR_ALIAS_FILE" && builtin source "$ZPWR_ALIAS_FILE"
 #}}}***********************************************************
 
 #{{{                    MARK:Override OMZ config
