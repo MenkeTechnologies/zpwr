@@ -7,7 +7,6 @@
 ##### Purpose: bash script to
 ##### Notes:
 #}}}***********************************************************
-
 if ! test -f common.sh; then
     echo "Must be in $ZPWR/install directory" >&2
     exit 1
@@ -19,12 +18,14 @@ if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
     mkdir -p $ZPWR_INSTALLER_OUTPUT
 fi
 
+NODE_VERSION="16"
+
 zpwrGoInstallerOutputDir
 
 function installNpmRpm(){
 
-    zpwrPrettyPrintBox "curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -"
-    curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
+    zpwrPrettyPrintBox "curl -sL https://rpm.nodesource.com/setup_$NODE_VERSION.x | sudo -E bash -"
+    curl -sL https://rpm.nodesource.com/setup_$NODE_VERSION.x | sudo -E bash -
     zpwrPrettyPrintBox "install nodejs"
     zpwrInstallerUpdate "nodejs" "$ZPWR_DISTRO_FAMILY"
     zpwrPrettyPrintBox "install npm"
@@ -35,8 +36,8 @@ function installNpmRpm(){
 
 function installNpmDeb(){
 
-    zpwrPrettyPrintBox "curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -"
-    curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+    zpwrPrettyPrintBox "curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | sudo -E bash -"
+    curl -sL https://deb.nodesource.com/setup_$NODE_VERSION.x | sudo -E bash -
     zpwrPrettyPrintBox "install nodejs"
     zpwrInstallerUpdate "nodejs" "$ZPWR_DISTRO_FAMILY"
     zpwrPrettyPrintBox "install npm"
