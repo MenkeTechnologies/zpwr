@@ -776,7 +776,7 @@ fi
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     zpwrPrettyPrintBox "Installing zinit"
     mkdir "$ZPWR_PLUGIN_MANAGER_HOME"
-    git clone https://github.com/zdharma/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
     if [[ ! -d $ZPWR_PLUGIN_MANAGER_HOME/plugins ]]; then
         mkdir -pv $ZPWR_PLUGIN_MANAGER_HOME/plugins/
     fi
