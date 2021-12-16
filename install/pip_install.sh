@@ -101,26 +101,14 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
     if [[ -z $ZPWR_DISTRO_NAME ]]; then
 
-        ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
-        case $ZPWR_DISTRO_NAME in
-            (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
-                ZPWR_DISTRO_FAMILY=debian
-                ;;
-            (arch | endeavouros | garuda | manjaro*)
-                ZPWR_DISTRO_FAMILY=arch
-                ;;
-            (*suse*)
-                ZPWR_DISTRO_FAMILY=suse
-                ;;
-            (centos | fedora | rhel | amzn)
-                ZPWR_DISTRO_FAMILY=redhat
-                ;;
-            (*)
-                zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
-                exit 1
-                ;;
-        esac
+        zpwrOsFamily \
+                ZPWR_DISTRO_FAMILY=debian \
+                ZPWR_DISTRO_FAMILY=redhat \
+                ZPWR_DISTRO_FAMILY=suse \
+                'zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
+                exit 1'
+
     fi
 
     if [[ "$ZPWR_DISTRO_FAMILY" == redhat ]]; then
