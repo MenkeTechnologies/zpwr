@@ -128,7 +128,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME/bin" ]]; then
         zpwrPrettyPrintBox "Installing zinit"
         command mkdir -p "$ZPWR_PLUGIN_MANAGER_HOME/bin"
-        command git clone https://github.com/zdharma-continuum/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
+        command git clone https://github.com/$ZPWR_ZDHARMA/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
     fi
 fi
 #}}}***********************************************************
@@ -193,23 +193,23 @@ ZPWR_GH_PLUGINS=(
     MenkeTechnologies/fasd-simple
     MenkeTechnologies/fzf-tab
     MenkeTechnologies/gh_reveal
-    zdharma-continuum/history-search-multi-word
+    $ZPWR_ZDHARMA/history-search-multi-word
     MenkeTechnologies/jhipster-oh-my-zsh-plugin
     MenkeTechnologies/revolver
-    zdharma-continuum/zbrowse
+    $ZPWR_ZDHARMA/zbrowse
     zsh-users/zsh-completions
     MenkeTechnologies/zsh-git-acp
     MenkeTechnologies/zsh-sudo
     MenkeTechnologies/zsh-nginx
     MenkeTechnologies/zsh-sed-sub
-    zdharma-continuum/zsh-tig-plugin
+    $ZPWR_ZDHARMA/zsh-tig-plugin
     MenkeTechnologies/zsh-travis
     MenkeTechnologies/zsh-git-repo-cache
-    zdharma-continuum/zsh-unique-id
+    $ZPWR_ZDHARMA/zsh-unique-id
     MenkeTechnologies/zsh-very-colorful-manuals
-    zdharma-continuum/zui
+    $ZPWR_ZDHARMA/zui
     MenkeTechnologies/zunit
-    zdharma-continuum//zzcomplete
+    $ZPWR_ZDHARMA/zzcomplete
     marlonrichert/zsh-hist
     MenkeTechnologies/fzf-zsh-plugin
     #comps
@@ -527,7 +527,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     zinit ice lucid nocompile wait"${ZPWR_ZINIT_COMPINIT_DELAY}h" nocompletions atload='zpwrDedupPaths;zpwrBindPreexecChpwd'
     zinit load \
-        zdharma-continuum/fast-syntax-highlighting
+        $ZPWR_ZDHARMA/fast-syntax-highlighting
 
 elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
 

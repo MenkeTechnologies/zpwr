@@ -584,6 +584,8 @@ export ZPWR_TRACE=false
 export ZPWR_USE_NEOVIM=true
 # delay between shell start and compinit
 export ZPWR_ZINIT_COMPINIT_DELAY=0
+# username for zdharma
+export ZPWR_ZDHARMA="zdharma-continuum"
 # regex for tmux thumbs
 export ZPWR_THUMBS_REGEX='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
 ((?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,})(?::.*)?'
