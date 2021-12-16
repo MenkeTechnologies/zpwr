@@ -84,7 +84,7 @@ forgit_clean=fgcleanforgit_clean326,11873
 forgit_stash_show=fgssforgit_stash_show327,11894
 plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \plugins370,14154
 ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"ZPWR_PARENT_PROCESS395,15040
-    distroName=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)distroName406,15568
+    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)ZPWR_DISTRO_NAME406,15568
 _alias_file="$ZPWR/.shell_aliases_functions.sh"_alias_file445,16534
 function sub (){sub452,16841
     BUFFER="suc"BUFFER455,16884
@@ -622,7 +622,7 @@ export LESS="-M -N -R -K -F -X"LESS162,6035
             export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"EXA_COLORS250,9686
     export GOPATH="$HOME/go"GOPATH258,10128
 function rm(){rm269,10463
-            distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName446,17530
+            ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME446,17530
     bold=$(tput bold || tput md)bold523,20647
     red=$(tput setaf 1)red524,20680
 function em(){em539,21031
@@ -1097,13 +1097,13 @@ zpwrClearList() {zpwrClearList46,1037
                             out="$(hash | command grep "^$arg=")"out110,3231
 
 /Users/wizard/.zpwr/scripts/clearTrash.sh,112
-        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName15,377
+        ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME15,377
 
 /Users/wizard/.zpwr/scripts/colorLogger.sh,321
 zpwrPrettyPrint() {zpwrPrettyPrint10,302
 tailVersion=tailtailVersion20,494
 weHaveCCZE=noweHaveCCZE22,512
-    distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName47,1390
+    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME47,1390
         distro=debiandistro51,1576
         distro=redhatdistro54,1637
         distro=susedistro57,1711
@@ -1382,7 +1382,7 @@ arr=()arr13,330
 IFS=:IFS15,404
 
 /Users/wizard/.zpwr/scripts/logs.sh,112
-        distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)distroName16,443
+        ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME16,443
 
 /Users/wizard/.zpwr/scripts/mantozshcomp.py,7598
 import bz2bz217,1466

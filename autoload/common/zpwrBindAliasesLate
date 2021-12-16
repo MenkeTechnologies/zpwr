@@ -236,10 +236,10 @@ function zpwrBindAliasesLate(){
             fi
 
             alias ipt="$ZPWR_FULL_SUDO iptables --line-numbers -L"
-            test -z "$distroName" && {
-                distroName=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
+            test -z "$ZPWR_DISTRO_NAME" && {
+                ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)
             }
-            case $distroName in
+            case $ZPWR_DISTRO_NAME in
                 (raspbian)
                     if [[ -f "$ZPWR_LOCAL/.rpitokens.sh" ]]; then
                         source "$ZPWR_LOCAL/.rpitokens.sh"

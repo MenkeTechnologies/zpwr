@@ -10,7 +10,7 @@
 
 function zpwrOsRaspbianVsFamily() {
 
-    case $distroName in
+    case $ZPWR_DISTRO_NAME in
             (raspbian)
                 eval "$1"
                 ;;
@@ -32,7 +32,7 @@ function zpwrOsRaspbianVsFamily() {
 
 function zpwrOsDebVsUbuntu() {
 
-    case $distroName in
+    case $ZPWR_DISTRO_NAME in
         (debian | raspbian | kali | parrot | zorin)
             eval "$1"
             ;;
@@ -56,7 +56,7 @@ function zpwrOsDebVsUbuntu() {
 
 function zpwrOsFamily() {
 
-    case $distroName in
+    case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
             eval "$1"
             ;;

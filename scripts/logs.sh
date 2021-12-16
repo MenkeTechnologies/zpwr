@@ -13,12 +13,12 @@ if [[ $(uname) == Darwin ]]; then
     tail -f /var/log/**/*.log /var/log/**/*.out | lolcat
 else
     #linux
-    distroName=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
-    if [[ $distroName == Raspbian ]]; then
+    if [[ $ZPWR_DISTRO_NAME == Raspbian ]]; then
         tail -f /var/log/**/*.log /var/log/{dmesg,wtmp,debug,lastlog,messages} /var/log/**/*.err | lolcat
     else
-        printf "Unsupported distro: $distroName...\n" >&2
+        printf "Unsupported distro: $ZPWR_DISTRO_NAME...\n" >&2
     fi
 
 fi

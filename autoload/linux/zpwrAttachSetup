@@ -15,7 +15,7 @@ function zpwrAttachSetup() {
             command cat "$HOME/.ssh/authorized_keys" |
                 command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
 
-            case $distroName in
+            case $ZPWR_DISTRO_NAME in
                 (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
                     out="$(command cat /dev/null | sudo env grep -a 'Accepted publickey for' /var/log/auth.log* | command grep -av sudo | command tail -1)"
                     key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk '{print $2}')"

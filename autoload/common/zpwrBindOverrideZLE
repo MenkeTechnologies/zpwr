@@ -342,7 +342,7 @@ ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F
             bindkey -M menuselect '\e[5C' vi-end-of-line
         fi
     else
-        if [[ "$distroName" == raspbian ]]; then
+        if [[ "$ZPWR_DISTRO_NAME" == raspbian ]]; then
             #bindkey -M menuselect '\eOA' vi-backward-word
             #bindkey -M menuselect '\eOB' vi-forward-word
             #bindkey -M menuselect '\eOD' vi-beginning-of-line
