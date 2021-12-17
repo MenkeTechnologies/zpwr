@@ -368,7 +368,7 @@ builtin autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t) $ZPWR_AUTOLOAD_COMP_UTILS/*(.:t
 builtin autoload -Uz zrecompile zmv zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
-    ZPWR_OMZ_PLUGINS+=( brew osx )
+    ZPWR_OMZ_PLUGINS+=( brew macos )
     ZPWR_OMZ_COMPS+=( pod )
 
     # add ZPWR autoload dirs to fpath
