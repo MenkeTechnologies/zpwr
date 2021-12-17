@@ -9,7 +9,7 @@
 
 function zpwrOsCommon() {
 
-    test -z "$ZPWR_DISTRO_NAME" && ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+    test -z "$ZPWR_DISTRO_NAME" && export ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
 
 }
 
