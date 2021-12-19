@@ -699,9 +699,9 @@ function zpwrClearList() {
                         zpwrPrettyPrint "DEPENDENT ON:" &&
                         eval "$lib_command $lf"
                         zpwrPrettyPrint "SIZE:"
-                        du -sh -- "$lf"
+                        du -sh -- "$lf" 2>/dev/null
                         zpwrPrettyPrint "STATS:"
-                        stat -- "$lf"
+                        stat -- "$lf" 2>/dev/null
                         out=$(man -wa "$(basename $lf)" 2>/dev/null)
                         if [[ -n "$out" ]]; then
                             zpwrPrettyPrint "MAN:"
@@ -745,10 +745,10 @@ function zpwrClearList() {
                 zpwrPrettyPrint "FILE TYPE:"
                 file -- "$arg"
                 zpwrPrettyPrint "SIZE:"
-                du -sh -- "$arg"
+                du -sh -- "$arg" 2>/dev/null
                 zpwrPrettyPrint "STATS:"
-                stat -- "$arg"
-                # for readibility
+                stat -- "$arg" 2>/dev/null
+                # for readability
                 echo
                 echo
             else
@@ -760,7 +760,7 @@ function zpwrClearList() {
                     print -rl -- ${(tP)arg}
                     zpwrPrettyPrint "VALUE:"
                     echo $out
-                    # for readibility
+                    # for readability
                     echo
                     echo
                 else
@@ -771,7 +771,7 @@ function zpwrClearList() {
                         print -rl -- ${(tP)arg}
                         zpwrPrettyPrint "ENV:"
                         echo $out2
-                        # for readibility
+                        # for readability
                         echo
                         echo
                     fi
