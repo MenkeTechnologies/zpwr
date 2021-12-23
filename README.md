@@ -749,7 +749,7 @@ Removing the lolcat into ponysay banner like so on startup will further increase
 ```sh
 export ZPWR_INTRO_BANNER=nopony
 ```
-With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
+With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines (.15 to .2 seconds on M1 Max) but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
 ```sh
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 ```
