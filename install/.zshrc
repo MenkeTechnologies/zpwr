@@ -222,7 +222,7 @@ ZPWR_GH_PLUGINS=(
 )
 
 ZPWR_OMZ_PLUGINS=(
-    rustup
+    rust
     ruby
     rake
     yarn
