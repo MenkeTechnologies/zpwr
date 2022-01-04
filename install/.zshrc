@@ -226,7 +226,6 @@ ZPWR_OMZ_PLUGINS=(
     ruby
     rake
     yarn
-    ng
     coffee
     node
     npm
@@ -260,6 +259,7 @@ ZPWR_OMZ_LIBS=(
 )
 
 ZPWR_OMZ_COMPS=(
+    ng
     scala
     lein
     spring
