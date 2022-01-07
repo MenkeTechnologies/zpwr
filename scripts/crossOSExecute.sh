@@ -151,10 +151,10 @@ function zpwrOsFedoraVsJournalctl() {
         (centos | rhel | amzn)
             test -n "$2" && eval "$2"
             ;;
-        (fedora | ol)
+        (*suse* | arch | endeavouros | garuda | manjaro*)
             test -n "$3" && eval "$3"
             ;;
-        (*suse* | arch | endeavouros | garuda | manjaro*)
+        (fedora | ol)
             test -n "$4" && eval "$4"
             ;;
         (*)
