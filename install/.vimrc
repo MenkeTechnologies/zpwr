@@ -1777,13 +1777,21 @@ command! -bang -nargs=* Files call fzf#vim#files('', fzf#wrap('files', {'options
 " complete all files on /
 command! -bang -nargs=* LocateAll call fzf#vim#locate('/', {'options': fzfStrFinal})
 
+function! AltOrNextBuffer()
+    if empty(expand("#"))
+        next
+    else
+        edit #
+    endif
+
+endfunction
 
 " Mapping selecting mappings
-nmap <leader><tab> <plug>(fzf-maps-n)
+nmap <silent> <leader><tab> :call AltOrNextBuffer()<CR>
 " visual
-xmap <leader><tab> <plug>(fzf-maps-x)
+xmap <silent> <leader><tab> :call AltOrNextBuffer()<CR>
 " operating pending
-omap <leader><tab> <plug>(fzf-maps-o)
+omap  <silent> <leader><tab> :call AltOrNextBuffer()<CR>
 
 " :Imap = shows all insert mode mappings
 command! -bang -nargs=* Imaps call fzf#vim#maps('i')
