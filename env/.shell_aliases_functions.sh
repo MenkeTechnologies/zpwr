@@ -222,5 +222,7 @@ if ! zpwrIsZsh; then
     fi
 fi
 
-return 0
+if [[ $ZPWR_REMOTE == false ]]; then
+    return 0
+fi
 #}}}***********************************************************
