@@ -1,7 +1,9 @@
 tmux-plugins/tmux-battery
 tmux-plugins/tmux-continuum
+MenkeTechnologies/tmux-fzf-url
 tmux-plugins/tmux-prefix-highlight
 tmux-plugins/tmux-resurrect
 tmux-plugins/tmux-sensible
+MenkeTechnologies/tmux-thumbs
 tmux-plugins/tmux-yank
 tmux-plugins/tpm
