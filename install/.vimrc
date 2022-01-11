@@ -1779,7 +1779,7 @@ command! -bang -nargs=* LocateAll call fzf#vim#locate('/', {'options': fzfStrFin
 
 function! AltOrNextBuffer()
     if empty(expand("#"))
-        next
+        bnext
     else
         edit #
     endif
