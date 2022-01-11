@@ -814,7 +814,6 @@ xnoremap && :normal mzg&`zzz<CR>
 map <silent> <leader><leader>w <Plug>(easymotion-bd-w)
 map <silent> <leader><leader>e <Plug>(easymotion-bd-e)
 " map <silent> <leader><leader>b <Plug>(easymotion-bd-b)
-noremap <silent> <leader>z nea
 
 " for moving selection up and down, displacing other text
 vnoremap <C-Right> >gv
@@ -1430,15 +1429,16 @@ nnoremap <silent> <C-D><C-D> :GitGutterUndoHunk<CR>
 nnoremap <silent> <C-D>a :Ag<CR>
 nnoremap <silent> <leader>ag :Ag<CR>
 nnoremap <silent> <C-D>b :Buffers<CR>
-nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>b :Buffers!<CR>
 nnoremap <silent> <C-D>c :Colors<CR>
 nnoremap <silent> <leader>. :Colors<CR>
+nnoremap <silent> <leader>z :Commits!<CR>
 nnoremap <silent> <C-D>d :Commands<CR>
-nnoremap <silent> <leader>; :Commands<CR>
+nnoremap <silent> <leader>; :Commands!<CR>
 nnoremap <silent> <C-D>e :ALEInfo<CR>
 nnoremap <silent> <leader>env :FZFEnv<CR>
-nnoremap <silent> <C-D>f :Files<CR>
-nnoremap <silent> <leader>f :Files<CR>
+nnoremap <silent> <C-D>f :Files!<CR>
+nnoremap <silent> <leader>f :Files!<CR>
 nnoremap <silent> <C-D>g :Commits!<CR>
 nnoremap <silent> <C-D>h :HistoryFiles<CR>
 nnoremap <silent> <C-D>i :Imap<CR>
@@ -1448,10 +1448,10 @@ nnoremap <silent> <leader>aa :Agg<CR>
 nnoremap <silent> <C-D>k :ALEFix<CR>
 nnoremap <silent> <leader>, :FZFMaps<CR>
 nnoremap <silent> <leader>ke :FZFKeys<CR>
-nnoremap <silent> <C-D>l :Lines<CR>
-nnoremap <silent> <leader>j :Lines<CR>
-nnoremap <silent> <C-D>m :Map<CR>
-nnoremap <silent> <leader>m :Map<CR>
+nnoremap <silent> <C-D>l :Lines!<CR>
+nnoremap <silent> <leader>j :Lines!<CR>
+nnoremap <silent> <C-D>m :Map!<CR>
+nnoremap <silent> <leader>m :Map!<CR>
 nnoremap <silent> <C-D>n :Snippets<CR>
 nnoremap <silent> <C-D>o :ALEToggle<CR>
 nnoremap <silent> <leader>oa :ALEToggle<CR>
@@ -1462,18 +1462,18 @@ nnoremap <silent> <C-D>rq :silent !open -t %:p:h<CR>:redraw!<CR>
 nnoremap <silent> <C-D>rr :Rg<CR>
 nnoremap <silent> <leader>rg :Rg<CR>
 nnoremap <silent> <C-D>s :History/<CR>
-nnoremap <silent> <leader>hh :History<CR>
-nnoremap <silent> <leader>h/ :History/<CR>
-nnoremap <silent> <leader>h: :History:<CR>
+nnoremap <silent> <leader>hh :History!<CR>
+nnoremap <silent> <leader>h/ :History/!<CR>
+nnoremap <silent> <leader>h: :History:!<CR>
 nnoremap <silent> <C-D>t :Tags<CR>
-nnoremap <silent> <leader>ta :Tags<CR>
+nnoremap <silent> <leader>ta :Tags!<CR>
 nnoremap <silent> <C-D>] <C-W>}<CR>
 nnoremap <silent> <leader>] <C-W>}<CR>
 nnoremap <silent> <C-D>u :History:<CR>
 nnoremap <silent> <C-D>v :w!<CR>:call TmuxRepeatGeneric()<CR>
 nnoremap <silent> <C-D>w :update<CR>
 nnoremap <silent> <C-D>x :Marks<CR>
-nnoremap <silent> <leader>ma :Marks<CR>
+nnoremap <silent> <leader>ma :Marks!<CR>
 nnoremap <silent> <C-D>y :update<CR>:SyntasticCheck<CR>
 nnoremap <silent> <C-D>z :TlistAddFiles *<CR>:TlistToggle<CR>
 nnoremap <silent> <C-D>/ :LocateAll<CR>
