@@ -7,24 +7,24 @@ function zpwrTimer() {
         return 1
     fi
 
-    local count cmd total totstart totend avg runtime local_command
+    local count zpwrTimerCmd total totstart totend avg runtime local_command
 
     count=100
     if zpwrExists gdate;then
-        cmd=gdate
+        zpwrTimerCmd=gdate
     else
-        cmd=date
+        zpwrTimerCmd=date
     fi
 
     total=0
-    totstart=$($cmd +%s)
+    totstart=$($zpwrTimerCmd +%s)
     for local_command in "$@" ; do
         echo "eval $local_command"
         for i in {1..$count} ; do
-            start=$($cmd +%s%N)
+            start=$($zpwrTimerCmd +%s%N)
             eval "$local_command"
             #echo $(eval "$1")
-            end=$($cmd +%s%N)
+            end=$($zpwrTimerCmd +%s%N)
             #zsh supports decimals not bash
             runtime=$(((end-start)/1000000.0))
             ((total += runtime))
@@ -35,7 +35,7 @@ function zpwrTimer() {
         echo
     done
     cat "$ZPWR_TEMPFILE"
-    totend=$($cmd +%s)
+    totend=$($zpwrTimerCmd +%s)
     tot=$((totend-totstart))
     zpwrPrettyPrint "total seconds at $tot s."
     command rm "$ZPWR_TEMPFILE"

@@ -100,7 +100,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
 
     if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
-        if zpwrExists nvim; then
+        if zpwrCommandExists nvim; then
             export EDITOR='nvim'
             export PSQL_EDITOR='nvim -c "setf sql"'
         else
@@ -108,7 +108,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
             export PSQL_EDITOR='vim -c "setf sql"'
         fi
     else
-        if zpwrExists mvim; then
+        if zpwrCommandExists mvim; then
             export EDITOR='mvim -v'
             export PSQL_EDITOR='mvim -v -c "setf sql"'
         else
@@ -119,7 +119,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
 else
     export PIP3_HOME="/usr/local/lib/$ZPWR_PYTHON/site-packages"
     if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
-        if zpwrExists nvim; then
+        if zpwrCommandExists nvim; then
             export EDITOR='nvim'
             export PSQL_EDITOR='nvim -c "setf sql"'
         else
@@ -154,7 +154,7 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
         export PATH="$PATH:/usr/games"
     fi
 
-    zpwrExists yarn && export PATH="$(yarn global bin):$PATH"
+    zpwrCommandExists yarn && export PATH="$(yarn global bin):$PATH"
 
 #}}}***********************************************************
 
@@ -186,7 +186,7 @@ if zpwrCommandExists systemctl; then
 
 fi
 
-zpwrExists pssh && function pir(){
+zpwrCommandExists pssh && function pir(){
 
     if ! test -s "$ZPWR_LOCAL/hosts.txt"; then
         zpwrLogConsoleErr "you need hosts.txt in your $ZPWR_LOCAL"
