@@ -622,9 +622,6 @@ builtin setopt append_history
 # save timestamp of command and duration
 builtin setopt extended_history
 
-# Add comamnds as they are typed, don't wait until shell exit
-builtin setopt inc_append_history
-
 # when trimming history, lose oldest duplicates first
 builtin setopt hist_expire_dups_first
 
