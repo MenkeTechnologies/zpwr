@@ -27,6 +27,9 @@ function zpwrGetOpenCommand(){
                 open_cmd='cmd.exe /c start ""'
             fi
             ;;
+        *bsd*)
+            open_cmd='nohup xdg-open'
+            ;;
         msys*)    open_cmd='start ""'
             ;;
         *)        echo "Platform $ZPWR_OS_TYPE not supported"
@@ -58,6 +61,10 @@ function zpwrGetPasteCommand(){
         msys*)
             paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"
             ;;
+        *bsd*)
+            paste_cmd='xclip -o -sel clip'
+            ;;
+
         *)
             echo "Platform $ZPWR_OS_TYPE not supported"
             return 1
@@ -84,6 +91,9 @@ function zpwrGetCopyCommand(){
             else
                 copy_cmd='clip.exe'
             fi
+            ;;
+        *bsd*)
+            copy_cmd='xclip -i -sel clip'
             ;;
         msys*)
             copy_cmd='clip.exe'

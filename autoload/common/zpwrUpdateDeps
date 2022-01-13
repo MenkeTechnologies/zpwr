@@ -19,7 +19,7 @@ function zpwrUpdateDeps(){
                     #alias zpwrUpdateDeps="sudo -E zypper update -y; sudo -E zypper dist-upgrade -y; u8"
                 fi
     elif [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
-        yes | sudo pkg -E update; sudo -E pkg upgrade -y
+        yes | sudo -E pkg update; sudo -E pkg upgrade -y
     fi
 
     bash "$ZPWR_SCRIPTS/updater.sh"
