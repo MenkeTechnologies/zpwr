@@ -24,6 +24,10 @@ fi
 
 function pipInstallerCommon() {
 
+    zpwrPrettyPrintBox "Ensure pip"
+    sudo -EH python3 -m ensurepip
+
+
     zpwrPrettyPrintBox "Upgrading pip"
     sudo -EH python3 -m pip install --upgrade pip
 

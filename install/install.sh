@@ -68,12 +68,17 @@ LOGFILE="$ZPWR_INSTALLER_OUTPUT/escaped_logfile.txt"
 LOGFILE_CARGO_YCM="$ZPWR_INSTALLER_OUTPUT/cargoYCM_logfile.txt"
 
 if ! test -f "$ESCAPE_REMOVER"; then
-    echo "where is ESCAPE_REMOVER '$ESCAPE_REMOVER'?" >&2
+    zpwrLogConsoleErr "where is ESCAPE_REMOVER '$ESCAPE_REMOVER'?"
     exit 1
 fi
 
 if ! test -x "$ESCAPE_REMOVER"; then
-    echo "why '$ESCAPE_REMOVER' not exe?" >&2
+    zpwrLogConsoleErr "why is '$ESCAPE_REMOVER' not executable?" >&2
+    exit 1
+fi
+
+if ! zpwrCommandExists sudo perl git curl bash; then
+    zpwrLogConsoleErr "you must have sudo, perl, git, bash and curl installed"
     exit 1
 fi
 

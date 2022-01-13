@@ -46,7 +46,9 @@ function zpwrStdinExists(){
 
 function zpwrCommandExists(){
 
-    type -ap -- "$1" >/dev/null 2>&1
+    for cmd in "$@"; do
+        type -ap -- "$cmd" >/dev/null 2>&1 || return 1
+    done
 }
 
 function zpwrBlocksToSize(){
