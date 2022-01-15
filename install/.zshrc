@@ -73,16 +73,11 @@ function zpwrDedupPaths() {
     # mess up OMZ fpath check if should remove zcompdump
     fpath=(${(u)fpath})
     path=(${(u)path})
-    manpath=(${(u)manpath})
+    manpath=(${(u)manpath} ':')
 }
 
-# duplicates slow down searching
-builtin declare -aU fpath
-builtin declare -aU path
-builtin declare -aU manpath
 # FPATH should not be exported
 builtin declare +x FPATH
-zpwrDedupPaths
 #}}}***********************************************************
 
 #{{{                    MARK:ZPWR source env file which sources lib
