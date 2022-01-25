@@ -234,7 +234,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Extras Not Installed
 - JetBrains .ideamvimrc
 - JetBrains plugin list
-- JetBrains settings JAR
+- JetBrains settings zip
 - JetBrains JVM Options idea.vmoptions
 - Spacemacs Config with 490+ packages in .spacemacs
 - Emacs Yasnippets
