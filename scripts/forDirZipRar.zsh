@@ -93,7 +93,7 @@ function zpwrForDirZipRarRm() {
             echo rm -rf "$f"
         done
 
-        zpwrPrettyPrintNoNewline 'are you sure > '
+        zpwrPrettyPrintNoNewline 'Are you sure > '
         read a
         if [[ $a == y ]]; then
             for f in "${(v)files[@]}"; do
