@@ -192,7 +192,7 @@ zpwrCommandExists pssh && function pir(){
         zpwrLogConsoleErr "you need hosts.txt in your $ZPWR_LOCAL"
         return 1
     fi
-    pssh --inline-stdout --timeout 90 -h "$ZPWR_LOCAL/hosts.txt" "$@"
+    pssh --inline-stdout --timeout ${ZPWR_PSSH_TIMEOUT:-0} -h "$ZPWR_LOCAL/hosts.txt" "$@"
 }
 
 if [[ $ZPWR_LEARN != false ]]; then
