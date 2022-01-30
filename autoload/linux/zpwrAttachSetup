@@ -51,18 +51,16 @@ function zpwrAttachSetup() {
                         zpwrLogInfo "tmux attach ret: '$ret'"
                     else
                         zpwrLogInfo "creating new session"
-                        zpwrLogInfo tmux new-session \; \
-                        source-file "$ZPWR_TMUX/control-window.conf"
-                        command tmux new-session \; \
-                        source-file "$ZPWR_TMUX/control-window.conf"
-                        sid=$(tmux new-session -P -d 2>> "$ZPWR_LOGFILE") 
+                        zpwrLogInfo tmux new-session \; source-file "$ZPWR_TMUX/control-window.conf"
+                        command tmux new-session \; source-file "$ZPWR_TMUX/control-window.conf"
+                        sid=$(command tmux new-session -P -d 2>> "$ZPWR_LOGFILE") 
                         ret=$?
                         zpwrLogInfo "tmux create ret: '$ret'"
                         #2x q C-h to rid copy-mode
-                        tmux send-keys -t $sid q C-h
-                        tmux send-keys -t $sid q C-h
-                        tmux send-keys -t $sid 'tmux source-file "$ZPWR_TMUX/control-window.conf"' C-m
-                        tmux attach-session -t $sid
+                        command tmux send-keys -t $sid q C-h
+                        command tmux send-keys -t $sid q C-h
+                        command tmux send-keys -t $sid 'command tmux source-file "$ZPWR_TMUX/control-window.conf"' C-m
+                        command tmux attach-session -t $sid
                     fi
                 } &>> "$ZPWR_LOGFILE"
             else
