@@ -189,7 +189,7 @@ function zpwrBindAliasesLate(){
 
 
         if zpwrCommandExists exa; then
-            alias lr="$ZPWR_EXA_COMMAND -R"
+            alias lr="$ZPWR_EXA_COMMAND -R --tree | less -rMN"
         else
             zpwrCommandExists gls &&
             alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
@@ -216,7 +216,7 @@ function zpwrBindAliasesLate(){
         # Linux or Unix
         alias ip="grc -c $HOME/conf.ifconfig ip"
         if zpwrExists exa; then
-            alias lr="$ZPWR_EXA_COMMAND -R"
+            alias lr="$ZPWR_EXA_COMMAND -R --tree | less -rMN"
         else
             alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
         fi
