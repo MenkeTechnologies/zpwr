@@ -74,10 +74,12 @@ if [[ $ZPWR_COLORS = true ]]; then
 fi
 
 # command for exa (replaces ls)
-if [[ $ZPWR_EXA_EXTENDED == true ]]; then
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
-else
-    export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
+if [[ -z "$ZPWR_EXA_COMMAND" ]]; then
+    if [[ $ZPWR_EXA_EXTENDED == true ]]; then
+        export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
+    else
+        export ZPWR_EXA_COMMAND='command exa --git -il -F -H --color-scale -g -a --colour=always'
+    fi
 fi
 
 # fzf dir
