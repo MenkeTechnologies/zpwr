@@ -150,6 +150,8 @@ nnoremap <silent> <leader>q :qa!<CR>
 nnoremap <silent> <leader>c :wq!<CR>
 nnoremap <silent> <leader>e :q!<CR>
 nnoremap <silent> <leader>w :w!<CR>
+nnoremap <silent> <leader>n :bnext<CR>
+nnoremap <silent> <leader>p :bprev<CR>
 "vertical split
 nnoremap <silent> <leader>s :vs<CR>
 "horizontal split
