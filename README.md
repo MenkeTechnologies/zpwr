@@ -336,7 +336,7 @@ Alternatively, change these env vars to false in `~/.zpwr/local/.tokens.sh`.  Th
 The second variable turns off expansion in second position.  For example with sudo/zpwr/env in the first position and the alias to expand in the second position on the command line.  The third turn offs glob/history/param etc expansion in any position.  The fourth turns off spelling correction in any position.
 > ~/.zpwr/local/.tokens.sh
 ```sh
-# aliases expand in first position
+# disable all expansion
 export ZPWR_EXPAND=false
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=false
@@ -490,8 +490,8 @@ export ZPWR_EMACS='command emacs -nw'
 export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
 # exa command invoked from zpwrClearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
-# aliases expand in first position
-export ZPWR_EXPAND=true
+# enable all expansion
+export ZPWR_EXPAND=false
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
 # expand globs, history etc with zle expand-word
