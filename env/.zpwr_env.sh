@@ -182,6 +182,8 @@ export ZPWR_TMUX_PREFIX_LINUX='C-b'
 export ZPWR_TMUX_HISTORY_LIMIT=30000
 # turns on set -x in critical regions
 export ZPWR_TRACE=false
+# add header template to certain filetypes in vim
+export ZPWR_VIM_TEMPLATES=true
 # use nvim not vim
 export ZPWR_USE_NEOVIM=true
 # delay between shell start and compinit
