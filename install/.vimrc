@@ -1340,8 +1340,7 @@ nmap <leader>ev :call ExtractVariable()<CR>
 xmap <leader>ev :call ExtractVariableVisual()<CR>
 xmap <leader>ef :call ExtractFoldMarker()<CR>
 
-let shouldMapV = $ZPWR_MAP_C_V_VIM_NORMAL
-if shouldMapV == 'true'
+if $ZPWR_MAP_C_V_VIM_NORMAL == 'true'
     " exec file from scratch
     nnoremap <silent> <C-v> :w!<CR>:call TmuxRepeat("file")<CR>
 endif
@@ -1519,15 +1518,17 @@ fun! SetDiffColors()
     highlight DiffText   cterm=bold ctermfg=white ctermbg=DarkRed
 endfun
 
-augroup file_templates
-    autocmd!
-    autocmd FilterWritePre * call SetDiffColors()
-    autocmd BufNewFile *.sh silent! exe '!templater.sh %:p' | e
-    autocmd BufNewFile *.zsh silent! exe '!templater.sh %:p' | e
-    autocmd BufNewFile *.rb silent! exe '!templater.sh %:p' | e
-    autocmd BufNewFile *.py silent! exe '!templater.sh %:p' | e
-    autocmd BufNewFile *.pl silent! exe '!templater.sh %:p' | e
-augroup end
+if $ZPWR_VIM_TEMPLATES == 'true'
+    augroup file_templates
+        autocmd!
+        autocmd FilterWritePre * call SetDiffColors()
+        autocmd BufNewFile *.sh silent! exe '!templater.sh %:p' | e
+        autocmd BufNewFile *.zsh silent! exe '!templater.sh %:p' | e
+        autocmd BufNewFile *.rb silent! exe '!templater.sh %:p' | e
+        autocmd BufNewFile *.py silent! exe '!templater.sh %:p' | e
+        autocmd BufNewFile *.pl silent! exe '!templater.sh %:p' | e
+    augroup end
+endif
 
 function! SetHLSIns()
 " only for first bufenter, required to activate the highlight on hover

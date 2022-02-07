@@ -584,6 +584,8 @@ export ZPWR_TMUX_HISTORY_LIMIT=30000
 export ZPWR_TRACE=false
 # use nvim not vim
 export ZPWR_USE_NEOVIM=true
+# add header template to certain filetypes in vim
+export ZPWR_VIM_TEMPLATES=true
 # delay between shell start and compinit
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 # username for zdharma
