@@ -144,7 +144,7 @@ function zpwrBindAliasesLate(){
     if zpwrExists kubectl; then
         alias k8=kubectl
     fi
-    alias ka="killall"
+    alias kal="killall"
     alias sin="./configure && make && $ZPWR_FULL_SUDO make install"
     alias curl='curl -fsSL'
     alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
