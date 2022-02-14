@@ -553,8 +553,6 @@ install_manifest.txt
 *.[oa]
 *.gcov
 *.gc*
-# Prerequisites
-*.d
 
 # Compiled Object files
 *.slo
