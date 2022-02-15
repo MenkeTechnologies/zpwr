@@ -367,7 +367,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     ZPWR_OMZ_COMPS+=( pod )
 
     # add ZPWR autoload dirs to fpath
-    fpath=( $ZPWR_AUTOLOAD_DARWIN $fpath )
+    fpath=( $ZPWR_AUTOLOAD_DARWIN "$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath )
     builtin autoload -z $ZPWR_AUTOLOAD_DARWIN/*(.:t)
     # determine if this terminal was started in IDE
     #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && plugins+=(tmux)
