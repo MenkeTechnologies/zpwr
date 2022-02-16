@@ -1256,6 +1256,35 @@ doc/api/
 .flutter-plugins
 .flutter-plugins-dependencies
 #}}}***********************************************************
+#
+#{{{                    MARK:D
+#**************************************************************
+# Compiled Object files
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled Static libraries
+*.a
+*.lib
+*test-library*
+
+# Executables
+*.exe
+
+# DUB
+.dub
+docs.json
+__dummy.html
+docs/
+
+# Code coverage
+*.lst
+#}}}***********************************************************
 
 #{{{                    MARK:haskell
 #**************************************************************
