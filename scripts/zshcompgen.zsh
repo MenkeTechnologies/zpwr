@@ -39,7 +39,13 @@ zpwrExists help2comp.py || {
 }
 test ! -d "$comp_dir" && command mkdir -p "$comp_dir"
 
+ZPWR_COMPGEN_BLACKLIST=(shutdown halt reboot poweroff)
+
 for command abs in ${(kv)commands}; do
+    if (( ZPWR_COMPGEN_BLACKLIST[(Ie)$command] )); then
+        continue
+    fi
+
     if [[ -z $_comps[$command] ]];then
        zpwrPrettyPrintBox $command | lolcat
        $abs --help < /dev/null |& help2comp.py $command > "$comp_dir"/_$command &
