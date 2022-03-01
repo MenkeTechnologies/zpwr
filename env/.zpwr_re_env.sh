@@ -74,7 +74,7 @@ if [[ $ZPWR_COLORS = true ]]; then
 fi
 
 # command for exa (replaces ls)
-if [[ -z "$ZPWR_EXA_COMMAND" ]]; then
+if [[ -z "$ZPWR_EXA_COMMAND" ]] || [[ $ZPWR_EXA_EXTENDED != true ]]; then
     if [[ $ZPWR_EXA_EXTENDED == true ]]; then
         export ZPWR_EXA_COMMAND='command exa --git -il -F -H --extended --color-scale -g -a --colour=always'
     else
