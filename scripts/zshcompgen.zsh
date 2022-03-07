@@ -39,7 +39,7 @@ zpwrExists help2comp.py || {
 }
 test ! -d "$comp_dir" && command mkdir -p "$comp_dir"
 
-ZPWR_COMPGEN_BLACKLIST=(shutdown halt reboot poweroff)
+ZPWR_COMPGEN_BLACKLIST=(shutdown halt reboot poweroff zzz)
 
 for command abs in ${(kv)commands}; do
     if (( ZPWR_COMPGEN_BLACKLIST[(Ie)$command] )); then

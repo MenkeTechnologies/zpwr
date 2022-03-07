@@ -7,8 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-pipe=/tmp/testpipe
-pipe=$HOME/Desktop/testpipe
+pipe=${TMPDIR:-/tmp}/testpipe
 trap "rm -f $pipe" EXIT
 
 if [[ ! -p $pipe ]]; then
