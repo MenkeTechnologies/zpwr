@@ -2,10 +2,13 @@
 # vim: set ft=sh:
 function zpwrRegenPowerlineLink(){
     local dir out
-    out="$(sudo python3 -m pip show powerline-status 2>/dev/null)"
+    if ! out="$(sudo python3 -m pip show powerline-status 2>&1)"; then
+        if [[ $out =~ 'not found' ]]; then
+            zpwrLogConsoleErr 'You do not have powerline-status installed!'
+        else
+            zpwrLogConsoleErr 'Pip failed'
+        fi
 
-    if [[ -z "$out" ]]; then
-        zpwrLogConsoleErr "Pip failed or you do not have powerline-status installed!"
         return 1
     fi
 
