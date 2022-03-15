@@ -64,12 +64,22 @@ function zpwrForDirRarZipProcess() {
 
         if (( $#zips )); then
             zpwrPrettyPrint "$PWD:" *.zip
-            yes A | zpwr execglobparallel '*.zip~._*.zip' 'unzip "$f" -d "${f%*.zip}"'
+            if (( ${+opts[-z]} )); then
+                yes A | zpwr execglobparallel '*.zip~._*.zip' "${opts[-z]}"
+            else
+                yes A | zpwr execglobparallel '*.zip~._*.zip' 'unzip "$f" -d "${f%*.zip}"'
+            fi
+
         fi
 
         if (( $#rars )); then
             zpwrPrettyPrint "$PWD:" *.rar
-            zpwr execglobparallel '*.rar~._*.rar' 'd="${f:r}";mkdir "\$d"; mv "$f" "\$d"; builtin cd "\$d";yes A | unrar x "$f"; builtin cd ..'
+            if (( ${+opts[-r]} )); then
+                zpwr execglobparallel '*.rar~._*.rar' "${opts[-r]}"
+            else
+                zpwr execglobparallel '*.rar~._*.rar' 'd="${f:r}";mkdir "\$d"; mv "$f" "\$d"; builtin cd "\$d";yes A | unrar x "$f"; builtin cd ..'
+
+            fi
         fi
 
         stack[$idx]=()
@@ -131,6 +141,8 @@ function zpwrForDirZipRarMain() {
     zpwrForDirZipRarRm
 
 }
+
+zparseopts -D -E -A opts -- z: r:
 
 dirGlob='*~@*~__MACOS*~*.vst(|3)~*.component~*.app~*.(|m)pkg(/:A)'
 
