@@ -19,6 +19,9 @@ test.java
 .exercism/
 *.lock
 *~
+*.asd
+*.sfk
+AbletonTmp-*
 #}}}***********************************************************
 
 #{{{                    MARK:reasonml
