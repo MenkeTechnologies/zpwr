@@ -237,6 +237,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[mygithub]='zpwrOpenmygh=open github profile'
     ZPWR_VERBS[open]='o=open with system'
     ZPWR_VERBS[opencommand]='zpwrGetOpenCommand=get the command to open with system'
+    ZPWR_VERBS[options]='zpwrOptionsFZF=show zsh options'
     ZPWR_VERBS[pastecommand]='zpwrGetPasteCommand=get the command to paste with system'
     ZPWR_VERBS[pastebuffer]='zpwrPasteToBuffer=paste clipboard to $BUFFER'
     ZPWR_VERBS[pastestring]='zpwrPasteToStdout=paste clipboard to stdout'
