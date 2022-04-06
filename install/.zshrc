@@ -590,6 +590,12 @@ builtin export SAVEHIST=99999999
 # fish like menu select search
 builtin zmodload -i zsh/complist
 
+# l=*
+builtin setopt glob_assign
+
+# !!:s/*//
+builtin setopt histsubst_pattern
+
 # allow '' escape
 builtin setopt rc_quotes
 
