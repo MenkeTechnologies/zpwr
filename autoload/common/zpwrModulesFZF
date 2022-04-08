@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrModulesFZF() {
+
+    local sel
+
+    sel=$(zmodload | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | perl -pe '$_="zmodload $_"')
+
+    if [[ -n "$sel" ]]; then
+        BUFFER="$sel"
+        print -rz -- "$BUFFER"
+    fi
+}
+
+zpwrModulesFZF "$@"
