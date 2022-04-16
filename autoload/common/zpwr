@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwr(){
+function zpwr(){
 
     if test -z $1;then
         zpwrCd "$ZPWR"
@@ -9,4 +9,4 @@ function ___zpwr(){
     fi
 }
 
-___zpwr "$@"
+zpwr "$@"
