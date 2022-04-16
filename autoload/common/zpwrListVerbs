@@ -1,7 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrListVerbs(){
+function zpwrListVerbs(){
 
+    emulate -L zsh
+    setopt nullglob globdots extendedglob
     local len sep k v i width
     sep=" "
     width=25
@@ -18,4 +20,4 @@ function ___zpwrListVerbs(){
     done
 }
 
-___zpwrListVerbs "$@"
+zpwrListVerbs "$@"

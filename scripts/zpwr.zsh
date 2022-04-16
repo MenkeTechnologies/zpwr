@@ -21,6 +21,8 @@ ZPWR_VARS[VERB_0]="$0"
 
 () {
     local k v verb cmd found ret exp
+    emulate -L zsh
+    setopt nullglob globdots extendedglob
 
 
     ZPWR_VERBS[about]='zpwrAbout=show $ZPWR_REPO_NAME banner'
