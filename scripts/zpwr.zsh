@@ -364,6 +364,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[z]='z=cd to z frecency ranked dir'
 
     if zpwrCommandExists systemctl; then
+        ZPWR_VERBS[restart]='restart=restart zpwr systemd service'
         ZPWR_VERBS[serviceup]='ssu=start and enable systemd service'
         ZPWR_VERBS[servicedown]='ssd=stop and disable systemd service'
     fi
