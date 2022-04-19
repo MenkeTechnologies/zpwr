@@ -699,6 +699,9 @@ builtin setopt numeric_glob_sort
 # global substitution is case insensitive
 builtin setopt nocaseglob
 
+# =cmd
+builtin setopt equals
+
 # filename completion after =
 builtin setopt magic_equal_subst
 
