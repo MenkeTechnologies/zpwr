@@ -602,6 +602,9 @@ builtin setopt rc_quotes
 # allow **.c
 builtin setopt globstarshort
 
+# allow {abcd0-9} expansion
+builtin setopt braceccl
+
 # Allow comments even in interactive shells (especially for Muness)
 builtin setopt interactive_comments
 
