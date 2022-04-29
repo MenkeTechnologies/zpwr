@@ -729,7 +729,7 @@ builtin setopt pathdirs
 builtin setopt list_packed
 
 # increase max size for directory stack
-builtin export DIRSTACKSIZE=20
+builtin export DIRSTACKSIZE=50
 
 # so we can bind ^S and ^Q
 builtin setopt no_flow_control
