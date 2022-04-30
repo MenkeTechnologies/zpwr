@@ -1,14 +1,14 @@
 # custom IntelliJ IDEA VM options
 
 -server
--Xms2g
--Xmx2g
+-Xms4g
+-Xmx4g
 -XX:NewRatio=3
 -Xss16m
 -XX:+UseConcMarkSweepGC
 -XX:+CMSParallelRemarkEnabled
 -XX:ConcGCThreads=4
--XX:ReservedCodeCacheSize=240m
+-XX:ReservedCodeCacheSize=1g
 -XX:+AlwaysPreTouch
 -XX:+TieredCompilation
 -XX:+UseCompressedOops
