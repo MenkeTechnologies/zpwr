@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___ssd() {
+function ssd() {
 
     local service
 
@@ -12,4 +12,4 @@ function ___ssd() {
     done
 }
 
-___ssd "$@"
+ssd "$@"

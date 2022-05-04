@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrVerbsFZF(){
+function zpwrVerbsFZF(){
 
     if [[ ! -s "${ZPWR_LOCAL_ENV}Key.txt" ]]; then
         zpwrLogInfo "regenerating keys for $ZPWR_LOCAL_ENV"
@@ -16,4 +16,4 @@ function ___zpwrVerbsFZF(){
         perl -e '@a=<>;$c=$#a;for (@a){print "zpwr $1"if m{^(\S+)\s+};print ";" if $c--;print " "}'
 }
 
-___zpwrVerbsFZF "$@"
+zpwrVerbsFZF "$@"

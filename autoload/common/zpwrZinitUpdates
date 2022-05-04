@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrAllUpdates(){
+function zpwrAllUpdates(){
 
     if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
         zinit update
@@ -12,4 +12,4 @@ function ___zpwrAllUpdates(){
    fi
 }
 
-___zpwrAllUpdates "$@"
+zpwrAllUpdates "$@"

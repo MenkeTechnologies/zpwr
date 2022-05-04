@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___o(){
+function o(){
 
     local open_cmd
 
@@ -22,4 +22,4 @@ function ___o(){
 
 }
 
-___o "$@"
+o "$@"

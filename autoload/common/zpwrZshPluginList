@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrZshPluginList(){
+function zpwrZshPluginList(){
 
     emulate -L zsh
     setopt nullglob extendedglob
@@ -16,4 +16,4 @@ function ___zpwrZshPluginList(){
     (($#dirs)) && command ls -d $dirs 2> /dev/null
 }
 
-___zpwrZshPluginList "$@"
+zpwrZshPluginList "$@"

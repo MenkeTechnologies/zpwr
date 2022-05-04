@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___hc(){
+function hc(){
 
     local repoName old_dir
 
@@ -35,4 +35,4 @@ function ___hc(){
     fi
 }
 
-___hc "$@"
+hc "$@"

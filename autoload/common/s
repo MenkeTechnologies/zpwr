@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___s(){
+function s(){
 
     zpwrExists zpwrIsZsh || {
         source "$ZPWR_SCRIPTS/lib.sh" || {
@@ -45,4 +45,4 @@ function ___s(){
     fi
 }
 
-___s "$@"
+s "$@"

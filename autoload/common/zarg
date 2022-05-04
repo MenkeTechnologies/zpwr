@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zarg(){
+function zarg(){
 
     if [[ -z "$2" ]]; then
         zpwrLogConsoleErr "usage: zarg <escaped glob> <cmd with {}>"
@@ -16,4 +16,4 @@ function ___zarg(){
     eval "zargs -i{} -- $first -- $*"
 }
 
-___zarg "$@"
+zarg "$@"

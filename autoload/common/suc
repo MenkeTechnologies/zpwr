@@ -1,10 +1,10 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___suc(){
+function suc(){
 
     subl "$ZPWR_SCRIPTS"
     f "$ZPWR_SCRIPTS"
     python3 "$ZPWR_PYSCRIPTS/textEditorTwoColumns.py"
 }
 
-___suc "$@"
+suc "$@"

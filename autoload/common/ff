@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___ff(){
+function ff(){
 
     if [[ -z "$1" ]]; then
        zpwrLogConsoleErr "ff <cmd> to run <cmd> 10 times" 
@@ -19,4 +19,4 @@ function ___ff(){
     fi
 }
 
-___ff "$@"
+ff "$@"

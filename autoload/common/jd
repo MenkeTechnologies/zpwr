@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___jd(){
+function jd(){
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: j <dir/dir>"
@@ -15,4 +15,4 @@ function ___jd(){
     done
 }
 
-___jd "$@"
+jd "$@"

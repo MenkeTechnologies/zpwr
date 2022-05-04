@@ -1,10 +1,10 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrScriptCount(){
+function zpwrScriptCount(){
 
     zpwrScriptList |
         wc -l |
         awk '{$1=$1};1'
 }
 
-___zpwrScriptCount "$@"
+zpwrScriptCount "$@"

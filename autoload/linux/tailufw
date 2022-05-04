@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___tailufw(){
+function tailufw(){
 
     local size
 
@@ -18,4 +18,4 @@ function ___tailufw(){
     fi
 }
 
-___tailufw "$@"
+tailufw "$@"

@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___to(){
+function to(){
 
     local file
     file="$HOME/.config/powerline/themes/tmux/default.json"
@@ -15,4 +15,4 @@ function ___to(){
     fi
 }
 
-___to "$@"
+to "$@"

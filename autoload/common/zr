@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zr(){
+function zr(){
 
     local dirsc forked
 
@@ -16,4 +16,4 @@ function ___zr(){
     fi
 }
 
-___zr "$@"
+zr "$@"

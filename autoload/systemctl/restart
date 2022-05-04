@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___restart(){
+function restart(){
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: restart <services...>"
@@ -60,4 +60,4 @@ function ___restart(){
     sudo journalctl -f
 }
 
-___restart "$@"
+restart "$@"

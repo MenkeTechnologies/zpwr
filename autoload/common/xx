@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___xx(){
+function xx(){
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: xx <cmd>"
@@ -21,4 +21,4 @@ function ___xx(){
     trap QUIT
 }
 
-___xx "$@"
+xx "$@"

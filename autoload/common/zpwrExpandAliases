@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrExpandAliases() {
+function zpwrExpandAliases() {
 
   unset 'functions[_expand-aliases]'
   functions[_expand-aliases]=$BUFFER
@@ -9,4 +9,4 @@ function ___zpwrExpandAliases() {
     echo ${functions[_expand-aliases]#$'\t'}
 }
 
-___zpwrExpandAliases "$@"
+zpwrExpandAliases "$@"

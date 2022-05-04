@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrEditTag(){
+function zpwrEditTag(){
 
     if ! zpwrIsGitDir; then
         zpwrLogConsoleNotGit
@@ -34,4 +34,4 @@ function ___zpwrEditTag(){
     print -rz -- "$BUFFER"
 }
 
-___zpwrEditTag "$@"
+zpwrEditTag "$@"

@@ -1,10 +1,10 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrBackupHistfile(){
+function zpwrBackupHistfile(){
 
     zpwrPrettyPrint "Save backup of $HISTFILE"
     builtin fc -W "$HISTFILE"
     bash "$ZPWR_SCRIPTS/backupConfig.sh"
 }
 
-___zpwrBackupHistfile "$@"
+zpwrBackupHistfile "$@"

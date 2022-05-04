@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___gcl() {
+function gcl() {
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: gcl <repo>"
@@ -21,4 +21,4 @@ function ___gcl() {
     fi
 }
 
-___gcl "$@"
+gcl "$@"

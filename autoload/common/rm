@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___rm(){
+function rm(){
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: rm <file>"
@@ -9,4 +9,4 @@ function ___rm(){
 
     command rm -v "$@"
 }
-___rm "$@"
+rm "$@"

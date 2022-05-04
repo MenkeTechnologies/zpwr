@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___post(){
+function post(){
 
     if [[ -z "$2" ]]; then
         zpwrLogConsoleErr "usage: post <suffix> <cmd>"
@@ -14,4 +14,4 @@ function ___post(){
     echo "$out" | perl -lnE "say \"\$_ $postfix\""
 }
 
-___post "$@"
+post "$@"

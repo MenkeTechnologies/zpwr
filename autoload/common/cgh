@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___cgh(){
+function cgh(){
 
     local user
 
@@ -9,4 +9,4 @@ function ___cgh(){
         command perl -0e '$_=<>;print "$1 $2\n"if m{([\d,]+)\s+(contributions)\s+}'
 }
 
-___cgh "$@"
+cgh "$@"

@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___pre(){
+function pre(){
 
     if [[ -z "$2" ]]; then
         zpwrLogConsoleErr "usage: pre <prefix> <cmd>"
@@ -15,4 +15,4 @@ function ___pre(){
     echo "$out" | perl -lnE "say \"$prefix \$_\""
 }
 
-___pre "$@"
+pre "$@"

@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___fff(){
+function fff(){
 
     if [[ -z "$2" ]]; then
        zpwrLogConsoleErr "usage: fff <iter> <cmd> to run <cmd> <iter> times" 
@@ -17,4 +17,4 @@ function ___fff(){
     done
 }
 
-___fff "$@"
+fff "$@"

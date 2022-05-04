@@ -1,10 +1,10 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___sub (){
+function sub (){
 
     zle .kill-whole-line
     BUFFER="suc"
     zle .accept-line
 }
 
-___sub "$@"
+sub "$@"
