@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrLineCount(){
+function zpwrLineCount(){
 
     if [[ -z "$2" ]]; then
         zpwrLogConsoleErr "usage: zpwrLineCount <cmd> <search>"
@@ -11,4 +11,4 @@ function ___zpwrLineCount(){
 
 }
 
-___zpwrLineCount "$@"
+zpwrLineCount "$@"

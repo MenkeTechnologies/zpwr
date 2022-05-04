@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___em(){
+function em(){
 
     if [[ -z "$1" ]]; then
         "${=ZPWR_EMACS}" .
@@ -10,4 +10,4 @@ function ___em(){
 
 }
 
-___em "$@"
+em "$@"

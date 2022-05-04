@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___return2(){
+function return2(){
 
     if zpwrIsZsh; then
         exec 2> /dev/tty
@@ -10,4 +10,4 @@ function ___return2(){
     fi
 }
 
-___return2 "$@"
+return2 "$@"

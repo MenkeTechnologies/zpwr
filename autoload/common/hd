@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___hd(){
+function hd(){
 
     local cmd
 
@@ -19,4 +19,4 @@ function ___hd(){
 
 }
 
-___hd "$@"
+hd "$@"

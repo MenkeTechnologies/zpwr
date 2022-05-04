@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrRestoreHistfile(){
+function zpwrRestoreHistfile(){
 
     zpwrPrettyPrint "Restore backup of $HISTFILE"
     echo command rm -f "$HISTFILE"
@@ -10,4 +10,4 @@ function ___zpwrRestoreHistfile(){
     builtin fc -p "$HISTFILE"
 }
 
-___zpwrRestoreHistfile "$@"
+zpwrRestoreHistfile "$@"

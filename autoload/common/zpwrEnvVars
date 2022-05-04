@@ -1,10 +1,10 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrEnvVars(){
+function zpwrEnvVars(){
 
     export -p |
             command perl -ne 'print "$1\n" if m{^export ('$ZPWR_REPO_NAME'[A-Z0-9_]+)=}i' |
         eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS_CURRENT" | perl -pe 's@\n@ @g'
 }
 
-___zpwrEnvVars "$@"
+zpwrEnvVars "$@"

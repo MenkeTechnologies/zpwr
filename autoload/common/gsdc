@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___gsdc(){
+function gsdc(){
 
     if ! zpwrIsGitDir; then
        zpwrLogConsoleNotGit
@@ -52,4 +52,4 @@ function ___gsdc(){
 
 }
 
-___gsdc "$@"
+gsdc "$@"

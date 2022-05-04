@@ -1,6 +1,6 @@
 #compdef ssu
 
-function __ssu(){
+function _ssu(){
 
     local arguments
 
@@ -8,4 +8,4 @@ function __ssu(){
     _arguments -s $arguments
 }
 
-__ssu "$@"
+_ssu "$@"

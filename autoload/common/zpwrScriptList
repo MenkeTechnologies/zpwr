@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrScriptList(){
+function zpwrScriptList(){
 
     command ls \
     "$ZPWR_LOCAL/"*.{sh,py,zsh,pl} \
@@ -9,4 +9,4 @@ function ___zpwrScriptList(){
     "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl}
 }
 
-___zpwrScriptList "$@"
+zpwrScriptList "$@"

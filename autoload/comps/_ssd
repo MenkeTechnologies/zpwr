@@ -1,6 +1,6 @@
 #compdef ssd
 
-function __ssd(){
+function _ssd(){
 
     local arguments
 
@@ -8,4 +8,4 @@ function __ssd(){
     _arguments -s $arguments
 }
 
-__ssd "$@"
+_ssd "$@"

@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___ce() {
+function ce() {
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: ce <file...>"
@@ -16,4 +16,4 @@ function ___ce() {
     eval "$BUFFER"
 }
 
-___ce "$@"
+ce "$@"

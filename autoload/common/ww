@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___ww(){
+function ww(){
 
     if [[ -z "$1" ]]; then
        zpwrLogConsoleErr "usage: ww <cmd> to run <cmd> forever" 
@@ -11,4 +11,4 @@ function ___ww(){
     done
 }
 
-___ww "$@"
+ww "$@"

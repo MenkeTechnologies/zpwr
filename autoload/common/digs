@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___digs(){
+function digs(){
 
     if [[ -z "$1" ]]; then
         zpwrLogConsoleErr "usage: digs <url...>"
@@ -209,4 +209,4 @@ function ___digs(){
     fi
 }
 
-___digs "$@"
+digs "$@"

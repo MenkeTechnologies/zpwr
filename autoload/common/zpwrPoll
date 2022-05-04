@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___zpwrPoll() {
+function zpwrPoll() {
 
     if ! zpwrIsGitDir; then
         zpwrLogConsoleNotGit
@@ -48,4 +48,4 @@ function ___zpwrPoll() {
 
 }
 
-___zpwrPoll "$@"
+zpwrPoll "$@"

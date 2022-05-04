@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___emm() {
+function emm() {
 
     local str endstr
     tmux selectp -t emacs:0.0
@@ -27,4 +27,4 @@ function ___emm() {
     tmux attach-session -t emacs
 }
 
-___emm "$@"
+emm "$@"

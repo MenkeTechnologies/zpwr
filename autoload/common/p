@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___p(){
+function p(){
 
     local cmd out
 
@@ -21,4 +21,4 @@ function ___p(){
     done
 }
 
-___p "$@"
+p "$@"

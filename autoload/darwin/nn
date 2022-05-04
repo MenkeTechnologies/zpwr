@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___nn(){
+function nn(){
 
         if [[ -z "$2" ]];then
             zpwrLogConsoleErr "usage: nn <title> <message>..." &&
@@ -15,4 +15,4 @@ function ___nn(){
             osascript
     }
 
-___nn "$@"
+nn "$@"

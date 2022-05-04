@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___restartZabbixAgent(){
+function restartZabbixAgent(){
 
     if zpwrExists ccze; then
 sudo systemctl restart zabbix-agent
@@ -16,4 +16,4 @@ sudo tail -n 1000 -F /var/log/zabbix-agent/zabbix_agentd.log
 }
 
 
-___restartZabbixAgent "$@"
+restartZabbixAgent "$@"

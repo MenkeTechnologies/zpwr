@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___ssu() {
+function ssu() {
 
     local service
 
@@ -12,4 +12,4 @@ function ___ssu() {
     done
 }
 
-___ssu "$@"
+ssu "$@"

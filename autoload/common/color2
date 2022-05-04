@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___color2(){
+function color2(){
 
     if zpwrIsZsh; then
         exec 2> >(redText.sh)
@@ -10,4 +10,4 @@ function ___color2(){
     fi
 }
 
-___color2 "$@"
+color2 "$@"

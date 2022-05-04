@@ -1,10 +1,10 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___dbz() {
+function dbz() {
 
     zle .kill-whole-line
     BUFFER=db
     zle .accept-line
 }
 
-___dbz "$@"
+dbz "$@"

@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function ___www(){
+function www(){
 
     if [[ -z "$2" ]]; then
        zpwrLogConsoleErr "usage: www <sleeptime in sec> <cmd> to run <cmd> forever and sleep for <time>"
@@ -17,4 +17,4 @@ function ___www(){
     done
 }
 
-___www "$@"
+www "$@"
