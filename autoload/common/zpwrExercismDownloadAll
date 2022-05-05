@@ -3,11 +3,16 @@
 
 function zpwrExercismDownloadAll(){
 
-    zparseopts -D -E -A opts -- r
-
-    if [[ -z "$1" ]]; then
-        echo "usage: zpwrExercismDownloadAll <track>" >&2
+    function ___usage() {
+        echo "usage: zpwrExercismDownloadAll [-r,--redownload] <track>" >&2
+        unset -f ___usage
         return 1
+    }
+
+    zparseopts -D -E -F -- r=re -redownload=re h=help -help=help || ___usage
+
+    if [[ -z "$1" ]] || (( $#help )); then
+        ___usage
     fi
 
     local trackName
@@ -15,7 +20,7 @@ function zpwrExercismDownloadAll(){
     for trackName in "$@"; do
 
         while read; do
-            if (( $+opts[-r] )) || [[ ! -d "$HOME/Exercism/$trackName/$REPLY" ]]; then
+            if (( $#re )) || [[ ! -d "$HOME/Exercism/$trackName/$REPLY" ]]; then
                 printf "\x1b[1;4mcommand exercism download --exercise=$REPLY --track=$trackName\x1b[0m\x0a"
                 command exercism download --exercise="$REPLY" --track=$trackName
             fi
