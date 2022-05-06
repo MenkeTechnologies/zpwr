@@ -7,9 +7,10 @@ function zpwrBackup(){
         return 1
     fi
 
+    local newfile f dir dest opts
+
     zparseopts -D -E -A opts -- d:
 
-    local newfile f dir dest
     if (( $+opts[-d] )); then
         dir=${opts[-d]}
     else

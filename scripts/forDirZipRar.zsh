@@ -155,4 +155,4 @@ declare -Ag ZPWR_PROCESSED=()
 
 zpwrForDirZipRarMain "$@"
 
-unset root dirGlob
+unset root dirGlob opts
