@@ -341,6 +341,10 @@ function zpwrGoInstallerOutputDir(){
 
     ret=0
 
+    if [[ ! -d "$ZPWR_INSTALLER_OUTPUT" ]]; then
+        command mkdir -p "$ZPWR_INSTALLER_OUTPUT"
+    fi
+
     builtin cd "$ZPWR_INSTALLER_OUTPUT" || ret=1
 
     if [[ "$(pwd)" != "$ZPWR_INSTALLER_OUTPUT" ]]; then
