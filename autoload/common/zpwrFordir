@@ -7,9 +7,9 @@ function zpwrFordir(){
        return 1
     fi
 
-    zparseopts -D -E -A opts -- q
+    local dir cmd opts
 
-    local dir cmd
+    zparseopts -D -E -A opts -- q
 
     cmd="$1"
 
