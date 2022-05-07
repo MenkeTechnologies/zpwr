@@ -250,7 +250,7 @@ function zpwrBindOverrideZLE(){
 #F3 key
     bindkey '\eOR' zpwrGetrcWidget
 
-ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
+ZPWR_PARENT_PROCESS="$(command ps -p $PPID 2>/dev/null | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"
 #determine if this terminal was started in IDE
     if [[ "$ZPWR_OS_TYPE" == darwin ]];then
         if [[ "$ZPWR_PARENT_PROCESS" == *(login|tmux)* ]]; then

@@ -219,7 +219,7 @@ addDependenciesSuse(){
     }
 
 addDependenciesAlpine(){
-    dependencies_ary=(nodejs npm chrony ${dependencies_ary[@]})
+    dependencies_ary=(nodejs npm go chrony ${dependencies_ary[@]})
 }
 
 addDependenciesDebian(){
