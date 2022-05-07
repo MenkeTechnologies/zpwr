@@ -60,7 +60,7 @@ function updatePI() {
         sudo zypper --non-interactive clean -a'
         #sudo zypper --non-interactive dist-upgrade
     elif [[ "$manager" == apk ]]; then
-        ssh -x "$hostname" 'apk -U upgrade'
+        ssh -x "$hostname" 'sudo apk -U upgrade'
     elif [[ "$manager" == dnf ]]; then
         ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'

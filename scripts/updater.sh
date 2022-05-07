@@ -272,7 +272,7 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
         ssh -x "$hostname" 'sudo pacman -Syyu --noconfirm --overwrite="*"
         sudo paccache --remove'
      elif [[ "$manager" == apk ]]; then
-        ssh -x "$hostname" 'apk -U upgrade'
+        ssh -x "$hostname" 'sudo apk -U upgrade'
      elif [[ "$manager" == dnf ]]; then
         ssh -x "$hostname" 'yes | sudo dnf upgrade
         yes | sudo dnf clean all'
