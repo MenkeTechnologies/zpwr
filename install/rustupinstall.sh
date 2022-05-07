@@ -35,6 +35,18 @@ function ins() {
     }
 }
 
+if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
+
+    zpwrOsFamily \
+        ZPWR_DISTRO_FAMILY=debian \
+        ZPWR_DISTRO_FAMILY=redhat \
+        ZPWR_DISTRO_FAMILY=suse \
+        ZPWR_DISTRO_FAMILY=suse \
+        'export CFLAGS=-mno-outline-atomics; ZPWR_DISTRO_FAMILY=alpine' \
+        'zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
+        exit 1'
+fi
+
 ins bat bat
 ins fd-find fd
 ins exa exa
