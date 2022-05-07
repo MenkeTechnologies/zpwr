@@ -110,6 +110,8 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
                 ZPWR_DISTRO_FAMILY=debian \
                 ZPWR_DISTRO_FAMILY=redhat \
                 ZPWR_DISTRO_FAMILY=suse \
+                ZPWR_DISTRO_FAMILY=suse \
+                ZPWR_DISTRO_FAMILY=alpine \
                 'zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
                 exit 1'
 

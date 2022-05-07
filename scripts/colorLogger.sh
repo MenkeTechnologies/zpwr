@@ -70,7 +70,8 @@ else
             distro=debian \
             distro=redhat \
             distro=suse \
-            distro=suse
+            distro=suse \
+            distro=alpine
 
     if [[ "$distro" == debian ]]; then
 

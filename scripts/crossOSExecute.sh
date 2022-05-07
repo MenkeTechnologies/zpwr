@@ -41,7 +41,7 @@ function zpwrOsRaspbianVsFamily() {
         (raspbian)
             test -n "$1" && eval "$1"
             ;;
-        (debian | ubuntu* | elementary* | kali | linuxmint | zorin | parrot)
+        (debian | ubuntu* | elementary* | kali | linuxmint | zorin | parrot | *alpine*)
             test -n "$2" && eval "$2"
             ;;
         (fedora | ol | centos | rhel | amzn)
@@ -61,7 +61,7 @@ function zpwrOsDebVsUbuntu() {
     zpwrOsCommon
 
     case $ZPWR_DISTRO_NAME in
-        (debian | raspbian | kali | parrot | zorin)
+        (debian | raspbian | kali | parrot | zorin | *alpine*)
             test -n "$1" && eval "$1"
             ;;
         (ubuntu* | linuxmint | pop* | elementary*)
@@ -87,7 +87,7 @@ function zpwrOsDebianVsRh() {
     zpwrOsCommon
 
     case $ZPWR_DISTRO_NAME in
-        (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
+        (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot | *alpine*)
             test -n "$1" && eval "$1"
             ;;
         (fedora | ol | centos | rhel | amzn | *suse*)
@@ -116,8 +116,11 @@ function zpwrOsFamily() {
         (*suse*)
             test -n "$4" && eval "$4"
             ;;
-        (*)
+        (*alpine*)
             test -n "$5" && eval "$5"
+            ;;
+        (*)
+            test -n "$6" && eval "$6"
             ;;
     esac
 }
@@ -127,7 +130,7 @@ function zpwrOsAllVsFedora() {
     zpwrOsCommon
 
     case "$ZPWR_DISTRO_NAME" in
-        (*suse* | ubuntu | debian | linuxmint | raspbian | Mac)
+        (*suse* | ubuntu | debian | linuxmint | raspbian | Mac | *alpine*)
             test -n "$1" && eval "$1"
             ;;
         (fedora)
@@ -145,7 +148,7 @@ function zpwrOsFedoraVsJournalctl() {
     zpwrOsCommon
 
     case $ZPWR_DISTRO_NAME in
-        (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
+        (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot | *alpine*)
             test -n "$1" && eval "$1"
             ;;
         (centos | rhel | amzn)

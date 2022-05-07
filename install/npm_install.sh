@@ -61,6 +61,8 @@ elif [[ "$ZPWR_OS_TYPE" == linux ]];then
             installNpmRpm' \
             'ZPWR_DISTRO_FAMILY=suse
             installNpmRpm' \
+            'ZPWR_DISTRO_FAMILY=alpine
+            zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported for installing npm from source." >&2' \
             'zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported for installing npm from source." >&2'
 
 else

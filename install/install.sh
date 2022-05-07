@@ -218,6 +218,10 @@ addDependenciesSuse(){
         python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel)
     }
 
+addDependenciesAlpine(){
+    dependencies_ary=(nodejs npm chrony ${dependencies_ary[@]})
+}
+
 addDependenciesDebian(){
     dependencies_ary=(python3-dev libssl-dev ${dependencies_ary[@]})
     dependencies_ary+=(mysql-server mariadb-server gcc bc lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
@@ -507,6 +511,10 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
             'ZPWR_DISTRO_FAMILY=suse
             zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with zypper"
             addDependenciesSuse' \
+            'ZPWR_DISTRO_FAMILY=alpine
+            zpwrPrettyPrintBox "Fetching Dependencies for $ZPWR_DISTRO_NAME with apk"
+            addDependenciesAlpine
+            addDependenciesDebian' \
             'zpwrPrettyPrintBox "Your ZPWR_DISTRO_FAMILY $ZPWR_DISTRO_NAME is unsupported!" >&2
             exit 1'
 
