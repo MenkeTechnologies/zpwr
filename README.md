@@ -221,6 +221,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - oraclelinux
 - centos
 - debian
+- alpine
 - arch
 - manjaro
 - endeavouros
