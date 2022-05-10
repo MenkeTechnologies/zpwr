@@ -48,6 +48,10 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 fi
 
 ins bat bat
+ins hyperfine hyperfine
+ins diskus diskus
+ins vivid vivid
+ins hexyl hexyl
 ins fd-find fd
 ins exa exa
 ins ripgrep rg
