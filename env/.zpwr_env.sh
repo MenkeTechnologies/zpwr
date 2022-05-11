@@ -90,7 +90,6 @@ export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
 # exa command invoked from zpwrClearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # enable all expansion
-export ZPWR_EXPAND=false
 export ZPWR_EXPAND=true
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true

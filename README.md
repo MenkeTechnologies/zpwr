@@ -492,7 +492,7 @@ export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
 # exa command invoked from zpwrClearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # enable all expansion
-export ZPWR_EXPAND=false
+export ZPWR_EXPAND=true
 # aliases expand in second position after sudo
 export ZPWR_EXPAND_SECOND_POSITION=true
 # expand globs, history etc with zle expand-word
@@ -583,10 +583,10 @@ export ZPWR_TMUX_PREFIX_LINUX='C-b'
 export ZPWR_TMUX_HISTORY_LIMIT=30000
 # turns on set -x in critical regions
 export ZPWR_TRACE=false
-# use nvim not vim
-export ZPWR_USE_NEOVIM=true
 # add header template to certain filetypes in vim
 export ZPWR_VIM_TEMPLATES=true
+# use nvim not vim
+export ZPWR_USE_NEOVIM=true
 # delay between shell start and compinit
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 # username for zdharma
