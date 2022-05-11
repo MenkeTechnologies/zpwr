@@ -276,7 +276,7 @@ function zpwrBindAliasesLate(){
     alias ud=" zpwrExecpy udemy.py"
     alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit0} if /inet\\s/ and !/127/'"
     alias pgrep='pgrep -l'
-    alias jobs="jobs -l"
+    alias jobs="jobs -l -d"
     alias sd="clear;ssh d "
     alias cl=clear
     alias mkdir='mkdir -pv'
