@@ -19,16 +19,16 @@ function zpwrOsRaspbianVsRHvsSuse() {
 
     case $ZPWR_DISTRO_NAME in
         (raspbian)
-            test -n "$1" && eval "$1"
+            eval "$1"
             ;;
         (fedora | ol | centos | rhel)
-            test -n "$2" && eval "$2"
+            eval "$2"
             ;;
         (*suse*)
-            test -n "$3" && eval "$3"
+            eval "$3"
             ;;
         (*)
-            test -n "$4" && eval "$4"
+            eval "$4"
             ;;
     esac
 }
@@ -39,19 +39,19 @@ function zpwrOsRaspbianVsFamily() {
 
     case $ZPWR_DISTRO_NAME in
         (raspbian)
-            test -n "$1" && eval "$1"
+            eval "$1"
             ;;
         (debian | ubuntu* | elementary* | kali | linuxmint | zorin | parrot | *alpine*)
-            test -n "$2" && eval "$2"
+            eval "$2"
             ;;
         (fedora | ol | centos | rhel | amzn)
-            test -n "$3" && eval "$3"
+            eval "$3"
             ;;
         (*suse* | arch | endeavouros | garuda | manjaro*)
-            test -n "$4" && eval "$4"
+            eval "$4"
             ;;
         (*)
-            test -n "$5" && eval "$5"
+            eval "$5"
             ;;
     esac
 }
@@ -62,22 +62,22 @@ function zpwrOsDebVsUbuntu() {
 
     case $ZPWR_DISTRO_NAME in
         (debian | raspbian | kali | parrot | zorin | *alpine*)
-            test -n "$1" && eval "$1"
+            eval "$1"
             ;;
         (ubuntu* | linuxmint | pop* | elementary*)
-            test -n "$2" && eval "$2"
+            eval "$2"
             ;;
         (fedora | ol | centos | rhel | amzn)
-            test -n "$3" && eval "$3"
+            eval "$3"
             ;;
         (arch | endeavouros | garuda | manjaro*)
-            test -n "$4" && eval "$4"
+            eval "$4"
             ;;
         (*suse*)
-            test -n "$5" && eval "$5"
+            eval "$5"
             ;;
         (*)
-            test -n "$6" && eval "$6"
+            eval "$6"
             ;;
     esac
 }
@@ -88,13 +88,13 @@ function zpwrOsDebianVsRh() {
 
     case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot | *alpine*)
-            test -n "$1" && eval "$1"
+            eval "$1"
             ;;
         (fedora | ol | centos | rhel | amzn | *suse*)
-            test -n "$2" && eval "$2"
+            eval "$2"
             ;;
         (*)
-            test -n "$3" && eval "$3"
+            eval "$3"
             ;;
     esac
 }
@@ -105,22 +105,22 @@ function zpwrOsFamily() {
 
     case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
-            test -n "$1" && eval "$1"
+            eval "$1"
             ;;
         (fedora | ol | centos | rhel | amzn)
-            test -n "$2" && eval "$2"
+            eval "$2"
             ;;
         (arch | endeavouros | garuda | manjaro*)
-            test -n "$3" && eval "$3"
+            eval "$3"
             ;;
         (*suse*)
-            test -n "$4" && eval "$4"
+            eval "$4"
             ;;
         (*alpine*)
-            test -n "$5" && eval "$5"
+            eval "$5"
             ;;
         (*)
-            test -n "$6" && eval "$6"
+            eval "$6"
             ;;
     esac
 }
@@ -131,13 +131,13 @@ function zpwrOsAllVsFedora() {
 
     case "$ZPWR_DISTRO_NAME" in
         (*suse* | ubuntu | debian | linuxmint | raspbian | Mac | *alpine*)
-            test -n "$1" && eval "$1"
+            eval "$1"
             ;;
         (fedora)
-            test -n "$2" && eval "$2"
+            eval "$2"
             ;;
         (*)
-            test -n "$3" && eval "$3"
+            eval "$3"
             ;;
     esac
 
@@ -149,19 +149,19 @@ function zpwrOsFedoraVsJournalctl() {
 
     case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot | *alpine*)
-            test -n "$1" && eval "$1"
+            eval "$1"
             ;;
         (centos | rhel | amzn)
-            test -n "$2" && eval "$2"
+            eval "$2"
             ;;
         (*suse* | arch | endeavouros | garuda | manjaro*)
-            test -n "$3" && eval "$3"
+            eval "$3"
             ;;
         (fedora | ol)
-            test -n "$4" && eval "$4"
+            eval "$4"
             ;;
         (*)
-            test -n "$5" && eval "$5"
+            eval "$5"
             ;;
     esac
 }
