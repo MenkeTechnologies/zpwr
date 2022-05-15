@@ -16,13 +16,23 @@ source common.sh
 
 export GOPATH="$HOME/go"
 
+goV=$(go version | perl -ne 'print "$1$2" if /(\d+)\.(\d+)\./')
+
+function goInstall() {
+    if (( goV >= 117 )); then
+        go install github.com/$1@latest
+    else
+        go get github.com/$1
+    fi
+}
+
 zpwrPrettyPrintBox "Installing mylg"
-go install github.com/mehrdadrad/mylg@latest
+goInstall mehrdadrad/mylg
 
 ( cd "$GOPATH/src/github.com/mehrdadrad/mylg/" && go build mylg.go; )
 
 zpwrPrettyPrintBox "Installing gotop"
-go install github.com/cjbassi/gotop@latest
+goInstall cjbassi/gotop
 
 zpwrPrettyPrintBox "Installing lolcat in go"
-go install github.com/MenkeTechnologies/lolcat@latest
+goInstall MenkeTechnologies/lolcat
