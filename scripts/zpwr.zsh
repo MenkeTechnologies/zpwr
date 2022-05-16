@@ -27,6 +27,7 @@ ZPWR_VARS[VERB_0]="$0"
 
     ZPWR_VERBS[about]='zpwrAbout=show $ZPWR_REPO_NAME banner'
     ZPWR_VERBS[a]='zpwrCleanRefreshCountsTestUpdate=banner, counts, clean, refresh zwc, test and update deps'
+    ZPWR_VERBS[alacritty]='zpwrAlacritty=edit $ZPWR_ALACRITTY_CFG'
     ZPWR_VERBS[all]='zpwrCleanRefreshCountsTestUpdate=banner, counts, clean, refresh zwc, test and update deps'
     ZPWR_VERBS[allsearch]='zpwrFzfAllKeybind=search all keybindings'
     ZPWR_VERBS[altprettyprint]='zpwrAlternatingPrettyPrint=pretty with alternating color'
