@@ -21,6 +21,7 @@ function zpwrMagicEnter () {
             echo
             echo
         fi
+        zpwrExists _p9k_precmd_impl && _p9k_precmd_impl
         zle reset-prompt
         zle .redisplay
     else
