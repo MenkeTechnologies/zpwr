@@ -21,6 +21,7 @@ function zpwrMagicEnter () {
             echo
             echo
         fi
+        zle reset-prompt
         zle .redisplay
     else
         # use custom accept line
