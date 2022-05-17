@@ -1712,7 +1712,7 @@
     POWERLEVEL9K_CUSTOM_PID='echo -e "\uf258 $$ \uf258  `date +%D` \uf168"'
     POWERLEVEL9K_CUSTOM_PID_BACKGROUND="green"
     POWERLEVEL9K_CUSTOM_PID_FOREGROUND="black"
-    POWERLEVEL9K_CUSTOM_TTY='echo -e "%K{blue}%F{white} \Uf136 `tty` \uf168 %f%k%F{blue}%f"'
+    POWERLEVEL9K_CUSTOM_TTY='echo -e "%K{blue}%F{white} \Uf136 $ZPWR_TTY \uf168 %f%k%F{blue}%f"'
     POWERLEVEL9K_CUSTOM_TTY_BACKGROUND="blue"
     POWERLEVEL9K_CUSTOM_TTY_FOREGROUND="white"
 
