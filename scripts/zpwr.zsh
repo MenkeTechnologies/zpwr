@@ -306,6 +306,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[travisbranch]='trav-git-br=open current travis branches in browser'
     ZPWR_VERBS[travispr]='trav-git-pr=open current travis PRs in browser'
     ZPWR_VERBS[trc]='trc=tmux.conf vim session'
+    ZPWR_VERBS[tty]='print "$ZPWR_TTY"=print current tty'
     ZPWR_VERBS[uninstall]='zpwrUninstall=uninstall all zpwr configs'
     ZPWR_VERBS[uncompile]='zpwrUncompile=delete all cache comps'
     ZPWR_VERBS[update]='zpwrGetrc=update zpwr custom configs'
