@@ -283,8 +283,8 @@ function showDeps(){
     bash "$ZPWR_SCRIPTS/zpwrBannerSleep.sh"
 }
 
-files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf .zpwr/.shell_aliases_functions.sh \
-    conf.gls conf.df conf.ifconfig conf.mount .inputrc .zpwr/.powerlevel9kconfig.sh .my.cnf motd.sh)
+files=(.zshrc .tmux.conf .vimrc .ideavimrc .iftopcolors .iftop.conf  \
+    conf.gls conf.df conf.ifconfig conf.mount .inputrc .my.cnf motd.sh)
 
 dirs=(.zpwr/scripts .config/htop .config/powerline/themes/tmux)
 
