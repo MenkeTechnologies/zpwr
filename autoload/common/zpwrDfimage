@@ -7,7 +7,7 @@ function zpwrDfimage(){
         return 1
     fi
 
-    docker run -v /var/run/docker.sock:/var/run/docker.sock --rm chenzj/zpwrDfimage "$@"
+    docker run -v /var/run/docker.sock:/var/run/docker.sock --rm chenzj/dfimage "$@"
 }
 
 zpwrDfimage "$@"

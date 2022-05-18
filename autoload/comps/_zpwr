@@ -16,11 +16,11 @@ function __zpwr_gtl(){
     _describe -t commit-tags tags ary
 }
 
-function __zpwr(){
+
+function _zpwr(){
 
   local arguments verb
   local curcontext=$curcontext state line ret=0
-
 
   arguments=(
         '(- * :)'{-h,--help}'[show help message and exit]'
@@ -75,6 +75,9 @@ function __zpwr(){
                     ;;
                 clone|zpwrCloneToForked)
                     _git-clone
+                    ;;
+                dfimage)
+                    __docker_complete_images
                     ;;
                 digs)
                     _digs
@@ -131,4 +134,4 @@ function __zpwr(){
     return ret
 }
 
-__zpwr "$@"
+_zpwr "$@"
