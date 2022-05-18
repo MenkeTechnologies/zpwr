@@ -27,6 +27,7 @@ function zpwrBindOverrideOMZCompdefs(){
 
     # load inner tmux comp fns for _zpwr
     _tmux &> /dev/null
+    _docker &> /dev/null
 
     #}}}***********************************************************
 }
