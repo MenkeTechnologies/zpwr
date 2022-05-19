@@ -224,8 +224,8 @@ if [[ $skip != true ]]; then
 
     zpwrCommandExists pio && {
         zpwrPrettyPrint "Updating PlatformIO"
-        pio update
         pio upgrade
+        pio pkg update -g
     }
 
     zsh "$ZPWR_SCRIPTS/updaterPip.zsh"
