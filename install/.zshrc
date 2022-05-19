@@ -275,16 +275,21 @@ if zpwrCommandExists docker-compose; then
     ZPWR_OMZ_PLUGINS+=( docker-compose )
 fi
 
-zpwrCommandExists kubectl && ZPWR_GH_PLUGINS+=( MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion )
-zpwrCommandExists oc && ZPWR_GH_PLUGINS+=( MenkeTechnologies/zsh-openshift-aliases )
+if zpwrCommandExists kubectl;then
+    ZPWR_GH_PLUGINS+=( MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion )
+fi
+
+if zpwrCommandExists oc;then
+    ZPWR_GH_PLUGINS+=( MenkeTechnologies/zsh-openshift-aliases )
+fi
 
 if zpwrCommandExists systemctl; then
     ZPWR_OMZ_PLUGINS+=( systemd )
     fpath+=( $ZPWR_AUTOLOAD_SYSTEMCTL )
 fi
+
 zpwrCommandExists subl && ZPWR_OMZ_PLUGINS+=( sublime )
 zpwrCommandExists svn && ZPWR_OMZ_PLUGINS+=( svn )
-
 zpwrCommandExists adb && ZPWR_OMZ_COMPS+=( adb )
 
 if [[ $ZPWR_OS_TYPE == linux ]]; then
@@ -298,7 +303,7 @@ fi
 
 
 if [[ $ZPWR_LEARN != false ]]; then
-    ZPWR_GH_PLUGINS=($ZPWR_GH_PLUGINS  MenkeTechnologies/zsh-learn )
+    ZPWR_GH_PLUGINS=( $ZPWR_GH_PLUGINS MenkeTechnologies/zsh-learn )
 fi
 
 #}}}***********************************************************
@@ -352,7 +357,7 @@ fi
 #if [[ $ZPWR_DEBUG == true ]]; then
     #echo "______pre fpath size '$#fpath'" and '$fpath'"'_____ = ""'$fpath'" >> $ZPWR_LOGFILE
 #fi
-fpath=($ZPWR_AUTOLOAD_COMMON $ZPWR_AUTOLOAD_COMP_UTILS $ZPWR_COMPS $fpath)
+fpath=( $ZPWR_AUTOLOAD_COMMON $ZPWR_AUTOLOAD_COMP_UTILS $ZPWR_COMPS $fpath )
 #}}}***********************************************************
 #
 #{{{                    MARK:Autoload
@@ -386,13 +391,18 @@ fi
 #{{{                    MARK:Pre plugin manager
 #**************************************************************
 # vi mode
-builtin bindkey -v
+if [[ $ZPWR_BINDKEY_VI == true ]]; then
+    builtin bindkey -v
+else
+    builtin bindkey -e
+fi
 
 #if [[ $ZPWR_DEBUG == true ]]; then
     #echo "pre: $fpath" >> "$ZPWR_LOGFILE"
 #fi
 
 function zpwrTokenPost() {
+
     # source .tokens.sh to override with user functions
     if builtin test -f "$ZPWR_TOKEN_POST"; then
         if ! builtin source "$ZPWR_TOKEN_POST"; then

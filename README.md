@@ -585,6 +585,8 @@ export ZPWR_TMUX_HISTORY_LIMIT=30000
 export ZPWR_TRACE=false
 # add header template to certain filetypes in vim
 export ZPWR_VIM_TEMPLATES=true
+# use bindkey -v
+export ZPWR_BINDKEY_VI=true
 # use nvim not vim
 export ZPWR_USE_NEOVIM=true
 # delay between shell start and compinit
