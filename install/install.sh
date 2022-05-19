@@ -13,7 +13,7 @@ export ZPWR_PLUGIN_MANAGER_HOME="$HOME/.zinit"
 export ZPWR_PLUGIN_MANAGER="zinit"
 # do not want any surprises when relative cd to other dirs
 unset CDPATH
-declare zpwrBaseDir
+typeset zpwrBaseDir
 
 VERSION="2.1.0"
 # resolve all symlinks

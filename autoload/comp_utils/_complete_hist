@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function _complete_hist(){
 
-    declare -a last_ten
+    typeset -a last_ten
 
     last_ten=( ${(f)"$(fc -l -200 2>/dev/null | perl -lane 'print "@F[1..$#F]"')"} )
     _wanted last-ten expl 'last commands' compadd -Qa last_ten

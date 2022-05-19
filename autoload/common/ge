@@ -9,7 +9,7 @@ function ge(){
 
     local styles_dir url file len rand randscript random_color file_ary
 
-    declare -a file_ary
+    typeset -a file_ary
 
     styles_dir=$HOMEBREW_PREFIX/opt/httpie/libexec/lib/$ZPWR_PYTHON/site-packages/pygments/styles/
 

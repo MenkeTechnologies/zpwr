@@ -151,7 +151,7 @@ root="$PWD"
 
 trap 'builtin cd -q $root; unset root dirGlob; return 1' INT
 
-declare -Ag ZPWR_PROCESSED=()
+typeset -Ag ZPWR_PROCESSED=()
 
 zpwrForDirZipRarMain "$@"
 

@@ -12,10 +12,10 @@
 #**************************************************************
 if zpwrIsZsh; then
     if ! (( $+ZPWR_VARS )) || [[ ${parameters[ZPWR_VARS]} != association ]]; then
-        declare -Ag ZPWR_VARS
+        typeset -Ag ZPWR_VARS
     fi
 else
-    declare -Ag ZPWR_VARS
+    typeset -Ag ZPWR_VARS
 fi
 
 type -a zpwrEvalIfNeeded 1>/dev/null 2>&1 || function zpwrEvalIfNeeded() {

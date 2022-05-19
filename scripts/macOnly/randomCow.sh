@@ -12,7 +12,7 @@ if [[ -z "$1" ]]; then
     exit 1
 fi
 
-declare -a COW_FILES
+typeset -a COW_FILES
 
 width=$1
 FILTER="$2"

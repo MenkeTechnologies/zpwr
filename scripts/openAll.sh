@@ -56,7 +56,7 @@ if [[ -z "$1" ]]; then
 fi
 
 #set the fileExtension variable to first argument
-declare -a fileExtensions
+typeset -a fileExtensions
 fileString=""
 
 for file; do

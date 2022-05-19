@@ -4,7 +4,7 @@
 function ___fzf_complete_echo() {
 
   _fzf_complete '-m' "$@" < <(
-      declare -x | perl -ne 'print "$1\n" if m{^([^=]+)=(\S+)}'
+      typeset -x | perl -ne 'print "$1\n" if m{^([^=]+)=(\S+)}'
     )
 }
 

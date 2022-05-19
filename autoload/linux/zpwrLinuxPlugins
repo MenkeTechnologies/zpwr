@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 
-declare -a tmpAry
+typeset -a tmpAry
 #[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && tmpAry+=(tmux)
 tmpAry+=(systemd)
 

@@ -4,7 +4,7 @@
 function zpwrRecompileFiles(){
 
     local dir compileFile
-    declare -aU knownZshFiles globalFiles
+    typeset -aU knownZshFiles globalFiles
 
 
     knownZshFiles=(
