@@ -29,7 +29,7 @@ function _parameters() {
     [[ $PREFIX != [_.]* ]] && \
     pfilt='[^_.]'
 
-    declare -a ary
+    typeset -a ary
     maxLen=50
     for i in "${(@M)${(@k)parameters[(R)${pattern[2]}~*local*]}:#${~pfilt}*}"; do
         ary+=($i:"${${(P)i}:0:100}")

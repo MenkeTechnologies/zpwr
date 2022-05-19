@@ -8,7 +8,7 @@ function zpwrRecompileFpath() {
 
     local dir compileFile
 
-    declare -aU fpathZshFiles fpathFilesToTest
+    typeset -aU fpathZshFiles fpathFilesToTest
 
     zpwrPrettyPrint "ZRecompiling fpath/dir/* into fpath/dir.zwc"
 

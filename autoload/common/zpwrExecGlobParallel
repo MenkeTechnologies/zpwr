@@ -11,7 +11,7 @@ function zpwrExecGlobParallel(){
     command rm -f $ZPWR_TEMPFILE4
 
     if ! (( $+ZPWR_PROCESSED )); then
-        declare -Ag ZPWR_PROCESSED
+        typeset -Ag ZPWR_PROCESSED
     fi
 
     function zpwrKillProcessGrp() {

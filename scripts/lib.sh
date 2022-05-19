@@ -787,7 +787,7 @@ function zpwrClearList() {
                 echo
                 echo
             else
-                out=$(declare -m -- "$arg")
+                out=$(typeset -m -- "$arg")
 
                 if [[ -n $out ]]; then
                     FOUND=true

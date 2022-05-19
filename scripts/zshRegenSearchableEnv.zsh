@@ -77,7 +77,7 @@
 
     print "======" >> "$ZPWR_TEMPFILE2"
 
-    declare -f >> "$ZPWR_TEMPFILE2"
+    typeset -f >> "$ZPWR_TEMPFILE2"
 
     print "======" >> "$ZPWR_TEMPFILE2"
 

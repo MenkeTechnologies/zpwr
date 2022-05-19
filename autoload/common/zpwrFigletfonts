@@ -14,7 +14,7 @@ function zpwrFigletfonts(){
         zpwrLogConsoleErr "Can not find $figletDir" && return 1
     fi
 
-    declare -a ary
+    typeset -a ary
 
     for file in $(find "$figletDir" -iname "*.flf"); do
         ary+=${file##*/}

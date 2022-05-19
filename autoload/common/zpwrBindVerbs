@@ -10,7 +10,7 @@ function zpwrBindVerbs(){
     source "$ZPWR_SCRIPTS/zpwr.zsh"
 
     unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrSendVerbs zpwrLogVerbs
-    declare -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs zpwrLogVerbs
+    typeset -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs zpwrLogVerbs
 
     for k v in ${(kv)ZPWR_VERBS[@]};do
         case $k in

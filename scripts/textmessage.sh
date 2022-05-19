@@ -44,7 +44,7 @@ else
     default_recipent="555111333"
 
     family_phone_numbers=("$member_1")
-    declare -A names_from_phone_numbers
+    typeset -A names_from_phone_numbers
     names_from_phone_numbers["$member_1"]=Member1Name
 
     if [[ -z "$3" ]]; then

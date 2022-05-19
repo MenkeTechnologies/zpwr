@@ -10,7 +10,7 @@
 trap "tput cnorm; clear; ls -G -FlhAO; exit" INT
 trap 'fortuneQuote=$(fortune)' 3
 
-declare -a ary
+typeset -a ary
 
 for file in $(cowsay -l); do
     ary+=("$file")

@@ -30,7 +30,7 @@ else
     unset zpwrBaseDir
 fi
 
-declare -T ZPWR_PIP_BLACKLIST pipBlacklist
+typeset -T ZPWR_PIP_BLACKLIST pipBlacklist
 
 
 zpwrUpdatePip "python3" "pip3" "false"

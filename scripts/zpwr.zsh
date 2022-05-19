@@ -10,11 +10,11 @@
 
 if ! (( $+ZPWR_VERBS )) || [[ ${parameters[ZPWR_VERBS]} != association ]]; then
 
-    declare -Ag ZPWR_VERBS
+    typeset -Ag ZPWR_VERBS
 fi
 
 if ! (( $+ZPWR_VARS )) || [[ ${parameters[ZPWR_VARS]} != association ]]; then
-    declare -Ag ZPWR_VARS
+    typeset -Ag ZPWR_VARS
 fi
 
 ZPWR_VARS[VERB_0]="$0"

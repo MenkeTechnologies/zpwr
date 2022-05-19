@@ -4,7 +4,7 @@
 function ___fzf_complete_printf() {
 
   _fzf_complete '-m' "$@" < <(
-      declare -xp | perl -pe '$_=~s@export\s(.*)(=.*)@$1@'
+      typeset -xp | perl -pe '$_=~s@export\s(.*)(=.*)@$1@'
     )
 }
 

@@ -77,7 +77,7 @@ function zpwrDedupPaths() {
 }
 
 # FPATH should not be exported
-builtin declare +x FPATH
+builtin typeset +x FPATH
 #}}}***********************************************************
 
 #{{{                    MARK:ZPWR source env file which sources lib
@@ -99,9 +99,9 @@ builtin export ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 builtin export ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"
 
 # map to hold global data between scripts
-builtin declare -Ag ZPWR_VARS
+builtin typeset -Ag ZPWR_VARS
 # map to store each zpwr verb, key is the verbname, value is cmd=description
-builtin declare -Ag ZPWR_VERBS
+builtin typeset -Ag ZPWR_VERBS
 
 function zpwrInitEnv() {
     builtin source "$ZPWR_ENV_FILE" || {
@@ -421,7 +421,7 @@ function zpwrTokenPost() {
 #{{{                    MARK:ZPWR_PLUGIN_MANAGER
 #**************************************************************
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
-    builtin declare -A ZINIT
+    builtin typeset -A ZINIT
     ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
     ZINIT[COMPINIT_OPTS]='-C -u'
     builtin source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
