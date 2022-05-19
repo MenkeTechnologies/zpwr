@@ -441,23 +441,23 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     # late
     for p in $ZPWR_OMZ_COMPS; do
         zinit ice svn lucid nocompile as'completion' pick'null' wait
-        zinit snippet OMZ::plugins/$p
+        zinit snippet OMZP::$p
     done
 
     for p in $ZPWR_OMZ_LIBS; do
         zinit ice lucid nocompile wait atload='zpwrOmzOverrides'
-        zinit snippet OMZ::lib/$p
+        zinit snippet OMZL::$p
     done
 
     # late
     for p in $ZPWR_OMZ_PLUGINS; do
         zinit ice svn lucid nocompile wait
-        zinit snippet OMZ::plugins/$p
+        zinit snippet OMZP::$p
     done
 
     if zpwrCommandExists rails; then
         zinit ice svn lucid nocompile nocompletions wait
-        zinit snippet OMZ::plugins/rails
+        zinit snippet OMZP::rails
     fi
 
     # late GH plugins

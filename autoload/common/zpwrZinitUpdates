@@ -3,7 +3,7 @@
 function zpwrAllUpdates(){
 
     if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
-        zinit update
+        zinit update --parallel
         zinit self-update
         zinit compinit
         zinit compile
