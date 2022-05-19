@@ -62,6 +62,12 @@ if ! type -- "zpwrExists" >/dev/null 2>&1;then
             zpwrLogConsoleErr "where is ZPWR_LIB '$ZPWR_LIB'"
             exit 1
         fi
+        if source "$ZPWR_ALIAS_FILE"; then
+            : zpwrLogInfo "loaded ZPWR_ALIAS_FILE '$ZPWR_ALIAS_FILE'"
+        else
+            zpwrLogConsoleErr "where is ZPWR_ALIAS_FILE '$ZPWR_ALIAS_FILE '"
+            exit 1
+        fi
     fi
 
     if ! zpwrIsZsh; then
