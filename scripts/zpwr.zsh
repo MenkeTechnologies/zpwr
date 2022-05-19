@@ -365,6 +365,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[zstyle]='zpwrZstyle=fuzzy search zstyle'
     ZPWR_VERBS[zcd]='zpwrFzfZListVerb=list then cd to z frecency ranked dir'
     ZPWR_VERBS[z]='z=cd to z frecency ranked dir'
+    ZPWR_VERBS[zcompdump]='zpwrZcompdump=edit zcompdump'
 
     if zpwrCommandExists systemctl; then
         ZPWR_VERBS[restart]='restart=restart zpwr systemd service'
