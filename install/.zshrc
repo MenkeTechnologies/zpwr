@@ -111,7 +111,7 @@ function zpwrInitEnv() {
 }
 
 zpwrInitEnv
-#
+
 # You may need to manually set your language environment
 # has all aliases and functions common to bourne like shells
 builtin test -s "$ZPWR_ALIAS_FILE" && builtin source "$ZPWR_ALIAS_FILE"
@@ -674,10 +674,10 @@ builtin setopt auto_name_dirs
 builtin setopt complete_in_word
 
 # spelling correction for commands
-#builtin setopt correct
+builtin setopt nocorrect
 
 # spelling correction for arguments
-#builtin setopt correct_all
+builtin setopt nocorrect_all
 
 # Enable parameter expansion, command substitution, and arithmetic expansion in the prompt
 builtin setopt prompt_subst
@@ -748,21 +748,21 @@ builtin setopt no_flow_control
 
 #{{{                    MARK:FZF
 #**************************************************************
-# run in autoload/common/zpwrBindFZFLate
+# late loads in autoload/common/zpwrBindFZFLate
 #}}}***********************************************************
 
 #{{{                    MARK:Custom Compsys Functions
 #**************************************************************
 function zpwrBindMenu() {
-    # list of completers to use
 
+    # list of completers to use
     builtin zstyle ':completion:*' completer _expand _ignored _megacomplete _approximate _correct
     #builtin zstyle ':completion:*:*:*:*:functions' ignored-patterns
 
     if [[ "$ZPWR_INTERACTIVE_MENU_SELECT" == true ]]; then
-    builtin zstyle ':completion:*:*:*:*:*' menu select=0 interactive
+        builtin zstyle ':completion:*:*:*:*:*' menu select=0 interactive
     else
-    builtin zstyle ':completion:*:*:*:*:*' menu select=0
+        builtin zstyle ':completion:*:*:*:*:*' menu select=0
     fi
 }
 
@@ -772,7 +772,6 @@ zpwrBindMenu
 
 #{{{                    MARK:Initialize Login
 #**************************************************************
-# go to desktop if not root
 if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     zpwrDarwinBanner
 else
@@ -790,7 +789,7 @@ if [[ "$ZPWR_AUTO_ATTACH" == true ]]; then
 fi
 #}}}***********************************************************
 
-#{{{                    MARK:Early bind Immediate Usage
+#{{{                    MARK:Early bind some aliases for immediate Usage
 #**************************************************************
 builtin alias zp='zpwr'
 builtin alias tm='tmux'
