@@ -71,9 +71,9 @@ startTimestamp=$EPOCHREALTIME
 function zpwrDedupPaths() {
     # duplicates slow down searching and
     # mess up OMZ fpath check if should remove zcompdump
-    fpath=(${(u)fpath})
-    path=(${(u)path})
-    manpath=(${(u)manpath} ':')
+    fpath=( ${(u)fpath} )
+    path=( ${(u)path} )
+    manpath=( ${(u)manpath} ':' )
 }
 
 # FPATH should not be exported
@@ -91,6 +91,7 @@ fi
 # convert $0 to abs path
 0="${${(M)0:#/*}:-$PWD/$0}"
 
+# from .zpwr/install/.zshrc to .zpwr/
 builtin export ZPWR="${0:A:h:h}"
 builtin export ZPWR_ENV="$ZPWR/env"
 
@@ -172,9 +173,6 @@ builtin export SSH_KEY_PATH="~/.ssh/rsa_id"
 #get rid of mercurial prompt
 hg_prompt_info(){}
 # User configuration
-
-# Compilation flags
-builtin export ARCHFLAGS="-arch x86_64"
 
 ZSH_AUTOSUGGEST_STRATEGY=( match_prev_cmd )
 
