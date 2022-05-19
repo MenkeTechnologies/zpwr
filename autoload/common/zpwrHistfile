@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrHistfile(){
+
+    zpwrCd "${HISTFILE:h}"
+    ${=EDITOR} "$HISTFILE"
+
+}
+
+zpwrHistfile "$@"

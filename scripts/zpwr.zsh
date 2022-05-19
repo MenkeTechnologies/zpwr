@@ -201,6 +201,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[hidden]='cd $ZPWR_HIDDEN_DIR=go to zpwr $ZPWR_HIDDEN_DIR'
     ZPWR_VERBS[hist]='zpwrHistoryVerbAccept=exec history command'
     ZPWR_VERBS[histedit]='zpwrHistoryVerbEdit=edit history command'
+    ZPWR_VERBS[histfile]='zpwrHistfile=edit history file'
     ZPWR_VERBS[home]='cd $ZPWR=go to zpwr $ZPWR'
     ZPWR_VERBS[homeautoload]='cd $ZPWR_AUTOLOAD=go to zpwr $ZPWR_AUTOLOAD'
     ZPWR_VERBS[homeautoloadcommon]='cd $ZPWR_AUTOLOAD_COMMON=go to zpwr $ZPWR_AUTOLOAD_COMMON'
