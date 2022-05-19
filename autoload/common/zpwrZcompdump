@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrZcompdump(){
+
+    zpwrCd "${ZSH_COMPDUMP:h}"
+    ${=EDITOR} "$ZSH_COMPDUMP"
+
+}
+
+zpwrZcompdump "$@"
