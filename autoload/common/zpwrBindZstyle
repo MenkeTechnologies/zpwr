@@ -159,11 +159,13 @@ zstyle ':completion:*' matcher-list '' \
 
 # parse out host aliases and hostnames from ssh config
 if [[ -r "$HOME/.ssh/config" ]]; then
-    ZPWR_HOSTS=(${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*})
-    ZPWR_HOSTS=($ZPWR_HOSTS ${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*})
+    ZPWR_HOSTS=(
+        ${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*}
+        ${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*}
+    )
 fi
 
-if (( $#ZPWR_HOSTS > 0 )); then
+if (( $#ZPWR_HOSTS )); then
     zstyle ':completion:*:ssh:*' hosts $ZPWR_HOSTS
     zstyle ':completion:*:slogin:*' hosts $ZPWR_HOSTS
 fi
