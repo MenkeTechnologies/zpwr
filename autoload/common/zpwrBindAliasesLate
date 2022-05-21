@@ -32,22 +32,22 @@ function zpwrBindAliasesLate(){
         alias pp='c.pl'
         alias ppp='c.pl *'
     }
-    alias dirs='dirs -v'
+    alias dirs='\builtin dirs -v'
     zpwrExists proxychains && alias pc='proxychains'
     zpwrExists proxychains4 && alias pc='proxychains'
     alias debug='ZPWR_TRACE=true;ZPWR_DEBUG=true;'
     alias unbug='ZPWR_TRACE=false;ZPWR_DEBUG=false;'
-    alias lo="tail -n +1 -F $ZPWR_LOGFILE | nl"
-    alias loo="tail -n +1 -F $ZPWR_LOGFILE | nl"
-    alias ol="tail -n +1 -F $ZPWR_LOGFILE"
-    alias llo="tail -n +1 -F $ZPWR_LOGFILE"
-    zpwrExists rlwrap && alias plr="rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
-    alias cpan='rlwrap cpan'
-    alias nz='exec zsh'
+    alias lo="'builtin' command tail -n +1 -F $ZPWR_LOGFILE | nl"
+    alias loo="'builtin' command tail -n +1 -F $ZPWR_LOGFILE | nl"
+    alias ol="'builtin' command tail -n +1 -F $ZPWR_LOGFILE"
+    alias llo="'builtin' command tail -n +1 -F $ZPWR_LOGFILE"
+    zpwrExists rlwrap && alias plr="builtin command rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
+    alias cpan='\builtin command rlwrap cpan'
+    alias nz='\builtin exec zsh'
     alias ll="zpwrClearList"
     alias la="zpwrClearList"
     alias l="zpwrClearList"
-    alias ca='cat -n'
+    alias ca='\builtin command cat -n'
     alias sa="$ZPWR_FULL_SUDO cat -n"
     alias ra="$ZPWR_FULL_SUDO rm -rf --"
     alias die="$ZPWR_FULL_SUDO kill -9 --"
