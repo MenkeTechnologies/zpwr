@@ -85,7 +85,7 @@ function zpwrBindAliasesLate(){
         alias hk='heroku'
     fi
 
-    test -d "$ZPWR_PYSCRIPTS" && alias py="cd $ZPWR_PYSCRIPTS"
+    test -d "$ZPWR_PYSCRIPTS" && alias py="zpwrCd $ZPWR_PYSCRIPTS"
     alias p2="python2"
     alias p3="python3"
 
@@ -127,12 +127,12 @@ function zpwrBindAliasesLate(){
     alias brc='${=ZPWR_VIM} -S $HOME/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null'
     alias zrc='${=ZPWR_VIM} -S $HOME/.vim/sessions/zshrc.vim + $HOME/.zshrc'
     alias trc='${=ZPWR_VIM} -S $HOME/.vim/sessions/trc.vim $HOME/.tmux.conf'
-    alias tok='builtin cd $ZPWR; ${=ZPWR_VIM} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias conf='builtin cd $ZPWR; ${=ZPWR_VIM} $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias etok='builtin cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias econf='builtin cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias zvt='builtin cd $ZPWR_TEST; ${=ZPWR_VIM} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
-    alias zet='builtin cd $ZPWR_TEST; ${=ZPWR_EMACS_CLIENT} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias tok='"builtin" cd $ZPWR; ${=ZPWR_VIM} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias conf='"builtin" cd $ZPWR; ${=ZPWR_VIM} $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias etok='"builtin" cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias econf='"builtin" cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias zvt='"builtin" cd $ZPWR_TEST; ${=ZPWR_VIM} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias zet='"builtin" cd $ZPWR_TEST; ${=ZPWR_EMACS_CLIENT} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
     #}}}***********************************************************
 
     alias deleteTab="sed '/^[\x20\x09]*$/d'"
@@ -182,10 +182,10 @@ function zpwrBindAliasesLate(){
         alias v1="open -a 'vnc viewer';zpwrExecpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
         alias v2="open -a 'vnc viewer';zpwrExecpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
         alias rtsync="$ZPWR_SCRIPTS_MAC/rsyncr.sh"
-        alias xg='cd $HOME/Documents/xcode'
-        alias ap='cd /Applications'
+        alias xg='zpwrCd $HOME/Documents/xcode'
+        alias ap='zpwrCd /Applications'
+        alias tra='zpwrCd $HOME/.Trash'
         alias sudoedit="$ZPWR_FULL_SUDO $EDITOR"
-        alias tra='cd $HOME/.Trash'
         alias colo="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
         alias bl='brew link --force --overwrite'
         alias bi="brew install"
