@@ -3,7 +3,7 @@
 function pg() {
 
     if [[ -d "$HOME/PycharmProjects" ]]; then
-        cd "$HOME/PycharmProjects"
+        zpwrCd "$HOME/PycharmProjects"
     else
         zpwrLogConsoleErr "HOME/PycharmProjects '$HOME/PycharmProjects' is not a dir."
     fi

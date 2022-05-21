@@ -3,7 +3,7 @@
 function mg() {
 
     if [[ -d "$HOME/RubymineProjects" ]]; then
-        cd "$HOME/RubymineProjects"
+        zpwrCd "$HOME/RubymineProjects"
     else
         zpwrLogConsoleErr "HOME/RubymineProjects '$HOME/RubymineProjects' is not a dir."
     fi
