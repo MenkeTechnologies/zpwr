@@ -25,7 +25,7 @@ function memCheckLoop() {
             free -h
 
             mutt -s "MEMORY_THRESHOLD exceeded: $used" "$1" < <(free -h; top -w 500 -c -o %MEM -bn1; )
-            \builtin command sudo -E reboot
+            "builtin" command sudo -E reboot
         fi
         sleep 10
     done
