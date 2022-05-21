@@ -9,9 +9,9 @@ function zpwrBindFinal(){
     source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
     #}}}***********************************************************
     if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ag="ag --hidden --color -i -- '$ZPWR_TABSTOP'"
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rg="rg --hidden --color=always -i -- '$ZPWR_TABSTOP'"
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rgf="rg --hidden --color=always -i --no-ignore-vcs -- '$ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ag="'builtin' command ag --hidden --color -i -- '$ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rg="'builtin' command rg --hidden --color=always -i -- '$ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rgf="'builtin' command rg --hidden --color=always -i --no-ignore-vcs -- '$ZPWR_TABSTOP'"
     fi
     export CHEATCOLORS=true
 
