@@ -33,6 +33,12 @@ function zpwrBindZstyle(){
     # Enable completion caching, use rehash to clear
     zstyle ':completion:*' use-cache on
 
+    # cd -opt
+    zstyle ':completion:*' complete-options on
+
+    # delims for modifiers
+    zstyle ':completion:*' delimiters '@' '/' ',' '%'
+
     # compsys cache dir
     zstyle ':completion:*' cache-path "$ZPWR_COMPSYS_CACHE"
 
