@@ -3,7 +3,7 @@
 function cg() {
 
     if [[ -d "$HOME/ClionProjects" ]]; then
-        cd "$HOME/ClionProjects"
+        zpwrCd "$HOME/ClionProjects"
     else
         zpwrLogConsoleErr "HOME/ClionProjects '$HOME/ClionProjects' is not a dir."
     fi

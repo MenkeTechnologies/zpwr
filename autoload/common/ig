@@ -3,7 +3,7 @@
 function ig() {
 
     if [[ -d "$HOME/IdeaProjects" ]]; then
-        cd "$HOME/IdeaProjects"
+        zpwrCd "$HOME/IdeaProjects"
     else
         zpwrLogConsoleErr "HOME/IdeaProjects '$HOME/IdeaProjects' is not a dir."
     fi
