@@ -3,7 +3,7 @@
 function zph() {
 
     if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME/plugins" ]]; then
-        cd "$ZPWR_PLUGIN_MANAGER_HOME/plugins"
+        zpwrCd "$ZPWR_PLUGIN_MANAGER_HOME/plugins"
     else
         zpwrLogConsoleErr "ZPWR_PLUGIN_MANAGER_HOME/plugins '$ZPWR_PLUGIN_MANAGER_HOME/plugins' is not a dir."
     fi

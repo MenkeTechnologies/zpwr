@@ -1,10 +1,11 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function ue(){
+
     if [[ -d "$HOMEBREW_PREFIX" ]]; then
-        cd "$HOMEBREW_PREFIX/etc"
+        zpwrCd "$HOMEBREW_PREFIX/etc"
     else
-        cd /usr/local/etc
+        zpwrCd /usr/local/etc
     fi
 }
 

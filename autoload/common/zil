@@ -1,8 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function zil(){
+
     if [[ -d "$ZPWR_INSTALL" ]]; then
-        cd "$ZPWR_INSTALL"
+        zpwrCd "$ZPWR_INSTALL"
     else
         zpwrLogConsoleErr "ZPWR_INSTALL '$ZPWR_INSTALL' is not a directory."
     fi

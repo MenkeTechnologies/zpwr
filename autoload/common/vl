@@ -3,7 +3,7 @@
 function vl() {
 
     if [[ -d "/var/log" ]]; then
-        cd "/var/log"
+        zpwrCd "/var/log"
     else
         zpwrLogConsoleErr "'/var/log' is not a dir."
     fi

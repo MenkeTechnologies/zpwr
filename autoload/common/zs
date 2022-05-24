@@ -1,8 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function zs(){
+
     if [[ -d "$ZPWR_SCRIPTS" ]]; then
-        cd "$ZPWR_SCRIPTS"
+        zpwrCd "$ZPWR_SCRIPTS"
     else
         zpwrLogConsoleErr "ZPWR_SCRIPTS '$ZPWR_SCRIPTS' is not a directory."
     fi

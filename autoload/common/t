@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function t(){
-    cd /
+    zpwrCd /
 }
 
 t "$@"

@@ -3,7 +3,7 @@
 function docu() {
 
     if [[ -d "$ZPWR_DOC" ]]; then
-        cd "$ZPWR_DOC"
+        zpwrCd "$ZPWR_DOC"
     else
         zpwrLogConsoleErr "ZPWR_DOC '$ZPWR_DOC' is not a dir."
     fi

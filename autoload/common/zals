@@ -3,7 +3,7 @@
 function zals(){
 
     if [[ -d "$ZPWR_AUTOLOAD_SYSTEMCTL" ]]; then
-        cd "$ZPWR_AUTOLOAD_SYSTEMCTL"
+        zpwrCd "$ZPWR_AUTOLOAD_SYSTEMCTL"
     else
         zpwrLogConsoleErr "ZPWR_AUTOLOAD_SYSTEMCTL '$ZPWR_AUTOLOAD_SYSTEMCTL' is not a directory."
     fi

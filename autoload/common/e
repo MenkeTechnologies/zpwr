@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function e(){
-    cd /etc
+    zpwrCd /etc
 }
 
 e "$@"

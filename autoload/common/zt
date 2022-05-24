@@ -3,7 +3,7 @@
 function zt() {
 
     if [[ -d "$ZPWR_TEST" ]]; then
-        cd "$ZPWR_TEST"
+        zpwrCd "$ZPWR_TEST"
     else
         zpwrLogConsoleErr "ZPWR_TEST '$ZPWR_TEST' is not a dir."
     fi

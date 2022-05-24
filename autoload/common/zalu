@@ -3,7 +3,7 @@
 function zalu(){
 
     if [[ -d "$ZPWR_AUTOLOAD_COMP_UTILS" ]]; then
-        cd "$ZPWR_AUTOLOAD_COMP_UTILS"
+        zpwrCd "$ZPWR_AUTOLOAD_COMP_UTILS"
     else
         zpwrLogConsoleErr "ZPWR_AUTOLOAD_COMP_UTILS '$ZPWR_AUTOLOAD_COMP_UTILS' is not a directory."
     fi

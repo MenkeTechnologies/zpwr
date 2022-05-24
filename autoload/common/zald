@@ -3,7 +3,7 @@
 function zald(){
 
     if [[ -d "$ZPWR_AUTOLOAD_DARWIN" ]]; then
-        cd "$ZPWR_AUTOLOAD_DARWIN"
+        zpwrCd "$ZPWR_AUTOLOAD_DARWIN"
     else
         zpwrLogConsoleErr "ZPWR_AUTOLOAD_DARWIN '$ZPWR_AUTOLOAD_DARWIN' is not a directory."
     fi
