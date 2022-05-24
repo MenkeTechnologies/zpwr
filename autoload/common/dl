@@ -3,7 +3,7 @@
 function dl() {
 
     if [[ -d "$ZPWR_DL" ]]; then
-        cd "$ZPWR_DL"
+        zpwrCd "$ZPWR_DL"
     else
         zpwrLogConsoleErr "ZPWR_DL '$ZPWR_DL' is not a dir."
     fi

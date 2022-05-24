@@ -3,7 +3,7 @@
 function ztl() {
 
     if [[ -d "$ZPWR_TMUX_LOCAL" ]]; then
-        cd "$ZPWR_TMUX_LOCAL"
+        zpwrCd "$ZPWR_TMUX_LOCAL"
     else
         zpwrLogConsoleErr "ZPWR_TMUX_LOCAL '$ZPWR_TMUX_LOCAL' is not a dir."
     fi

@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function h(){
-    cd "${HOMEBREW_PREFIX:-/usr/local}"
+    zpwrCd "${HOMEBREW_PREFIX:-/usr/local}"
 }
 
 h "$@"

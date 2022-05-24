@@ -3,7 +3,7 @@
 function zhc() {
 
     if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME/completions" ]]; then
-        cd "$ZPWR_PLUGIN_MANAGER_HOME/completions"
+        zpwrCd "$ZPWR_PLUGIN_MANAGER_HOME/completions"
     else
         zpwrLogConsoleErr "ZPWR_PLUGIN_MANAGER_HOME/completions '$ZPWR_PLUGIN_MANAGER_HOME/completions' is not a dir."
     fi

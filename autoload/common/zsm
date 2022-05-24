@@ -3,7 +3,7 @@
 function zsm() {
 
     if [[ -d "$ZPWR_SCRIPTS_MAC" ]]; then
-        cd "$ZPWR_SCRIPTS_MAC"
+        zpwrCd "$ZPWR_SCRIPTS_MAC"
     else
         zpwrLogConsoleErr "ZPWR_SCRIPTS_MAC '$ZPWR_SCRIPTS_MAC' is not a dir."
     fi

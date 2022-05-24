@@ -3,7 +3,7 @@
 function zhs() {
 
     if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME/snippets" ]]; then
-        cd "$ZPWR_PLUGIN_MANAGER_HOME/snippets"
+        zpwrCd "$ZPWR_PLUGIN_MANAGER_HOME/snippets"
     else
         zpwrLogConsoleErr "ZPWR_PLUGIN_MANAGER_HOME/snippets '$ZPWR_PLUGIN_MANAGER_HOME/snippets' is not a dir."
     fi

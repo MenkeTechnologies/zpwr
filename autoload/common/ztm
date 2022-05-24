@@ -3,7 +3,7 @@
 function ztm() {
 
     if [[ -d "$ZPWR_TMUX" ]]; then
-        cd "$ZPWR_TMUX"
+        zpwrCd "$ZPWR_TMUX"
     else
         zpwrLogConsoleErr "ZPWR_TMUX '$ZPWR_TMUX' is not a dir."
     fi

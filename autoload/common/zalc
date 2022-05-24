@@ -3,7 +3,7 @@
 function zalc(){
 
     if [[ -d "$ZPWR_AUTOLOAD_COMMON" ]]; then
-        cd "$ZPWR_AUTOLOAD_COMMON"
+        zpwrCd "$ZPWR_AUTOLOAD_COMMON"
     else
         zpwrLogConsoleErr "ZPWR_AUTOLOAD_COMMON '$ZPWR_AUTOLOAD_COMMON' is not a directory."
     fi

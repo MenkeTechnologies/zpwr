@@ -3,7 +3,7 @@
 function zalf(){
 
     if [[ -d "$ZPWR_AUTOLOAD_FZF" ]]; then
-        cd "$ZPWR_AUTOLOAD_FZF"
+        zpwrCd "$ZPWR_AUTOLOAD_FZF"
     else
         zpwrLogConsoleErr "ZPWR_AUTOLOAD_FZF '$ZPWR_AUTOLOAD_FZF' is not a directory."
     fi

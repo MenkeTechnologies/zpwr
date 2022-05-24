@@ -3,7 +3,7 @@
 function vb() {
 
     if [[ -d "$HOME/.vim/bundle" ]]; then
-        cd "$HOME/.vim/bundle"
+        zpwrCd "$HOME/.vim/bundle"
     else
         zpwrLogConsoleErr "HOME/.vim/bundle '$HOME/.vim/bundle' is not a dir."
     fi

@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function d(){
-    cd $ZPWR_D
+    zpwrCd $ZPWR_D
 }
 
 d "$@"

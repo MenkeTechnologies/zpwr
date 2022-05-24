@@ -3,7 +3,7 @@
 function zl(){
 
     if [[ -d "$ZPWR_LOCAL" ]]; then
-        cd "$ZPWR_LOCAL"
+        zpwrCd "$ZPWR_LOCAL"
     else
         zpwrLogConsoleErr "ZPWR_LOCAL '$ZPWR_LOCAL' is not a directory."
     fi

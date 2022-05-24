@@ -3,7 +3,7 @@
 function zh() {
 
     if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
-        cd "$ZPWR_PLUGIN_MANAGER_HOME"
+        zpwrCd "$ZPWR_PLUGIN_MANAGER_HOME"
     else
         zpwrLogConsoleErr "ZPWR_PLUGIN_MANAGER_HOME '$ZPWR_PLUGIN_MANAGER_HOME' is not a dir."
     fi

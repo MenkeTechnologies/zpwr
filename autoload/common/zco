@@ -3,7 +3,7 @@
 function zco() {
 
     if [[ -d "$ZPWR_COMPS" ]]; then
-        cd "$ZPWR_COMPS"
+        zpwrCd "$ZPWR_COMPS"
     else
         zpwrLogConsoleErr "ZPWR_COMPS '$ZPWR_COMPS' is not a dir."
     fi

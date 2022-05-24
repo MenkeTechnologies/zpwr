@@ -3,7 +3,7 @@
 function eb() {
 
     if [[ -d "$HOME/.emacs.d/elpa" ]]; then
-        cd "$HOME/.emacs.d/elpa"
+        zpwrCd "$HOME/.emacs.d/elpa"
     else
         zpwrLogConsoleErr "HOME/.emacs.d/elpa '$HOME/.emacs.d/elpa' is not a dir."
     fi

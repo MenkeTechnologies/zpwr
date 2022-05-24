@@ -3,7 +3,7 @@
 function ze() {
 
     if [[ -d "$ZPWR_ENV" ]]; then
-        cd "$ZPWR_ENV"
+        zpwrCd "$ZPWR_ENV"
     else
         zpwrLogConsoleErr "ZPWR_ENV '$ZPWR_ENV' is not a dir."
     fi
