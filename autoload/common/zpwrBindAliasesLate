@@ -37,17 +37,17 @@ function zpwrBindAliasesLate(){
     zpwrExists proxychains4 && alias pc='proxychains'
     alias debug='ZPWR_TRACE=true;ZPWR_DEBUG=true;'
     alias unbug='ZPWR_TRACE=false;ZPWR_DEBUG=false;'
-    alias lo="'builtin' command tail -n +1 -F $ZPWR_LOGFILE | nl"
-    alias loo="'builtin' command tail -n +1 -F $ZPWR_LOGFILE | nl"
-    alias ol="'builtin' command tail -n +1 -F $ZPWR_LOGFILE"
-    alias llo="'builtin' command tail -n +1 -F $ZPWR_LOGFILE"
-    zpwrExists rlwrap && alias plr="builtin command rlwrap -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
+    alias lo="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE | nl"
+    alias loo="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE | nl"
+    alias ol="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE"
+    alias llo="'builtin' command' 'tail' -n +1 -F $ZPWR_LOGFILE"
+    zpwrExists rlwrap && alias plr="'builtin' 'command' 'rlwrap' -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
     alias cpan='"builtin" command rlwrap cpan'
-    alias nz='"builtin" exec zsh'
+    alias nz='"builtin" "exec" "zsh"'
     alias ll="zpwrClearList"
     alias la="zpwrClearList"
     alias l="zpwrClearList"
-    alias ca='"builtin" command cat -n'
+    alias ca='"builtin" "command" "cat" "-n"'
     alias sa="$ZPWR_FULL_SUDO cat -n"
     alias ra="$ZPWR_FULL_SUDO rm -rf --"
     alias die="$ZPWR_FULL_SUDO kill -9 --"
@@ -59,15 +59,15 @@ function zpwrBindAliasesLate(){
     if zpwrCommandExists grc; then
         prefix='\grc --colour=on '
     fi
-    alias tl='"builtin" command tmux list-sessions'
-    alias tlw='"builtin" command tmux list-windows'
-    alias tlp='"builtin" command tmux list-panes'
-    alias tlb='"builtin" command tmux list-buffers'
-    alias tlc='"builtin" command tmux list-clients'
-    alias tlk='"builtin" command tmux list-keys'
-    alias ta='"builtin" command tmux attach-session'
-    alias tn='"builtin" command tmux new-session'
-    alias ts='"builtin" command tmux new-session -s'
+    alias tl='"builtin" "command" "tmux" "list-sessions"'
+    alias tlw='"builtin" "command" "tmux" "list-windows"'
+    alias tlp='"builtin" "command" "tmux" "list-panes"'
+    alias tlb='"builtin" "command" "tmux" "list-buffers"'
+    alias tlc='"builtin" "command" "tmux" "list-clients"'
+    alias tlk='"builtin" "command" "tmux" "list-keys"'
+    alias ta='"builtin" "command" "tmux" "attach-session"'
+    alias tn='"builtin" "command" "tmux" "new-session"'
+    alias ts='"builtin" "command" "tmux" "new-session" "-s"'
 
     alias mk='make'
     alias mkc="make clean"
