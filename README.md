@@ -470,7 +470,7 @@ export ZPWR_COMMON_ZSTYLE_OPTS='reply=("${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45
 # sudo prefix to add when you get permission denied
 export ZPWR_SUDO_CMD='sudo -E'
 # sudo for aliases and expansion
-export ZPWR_FULL_SUDO='"builtin" command sudo -E env PATH="$PATH"'
+export ZPWR_FULL_SUDO='"builtin" "command" "sudo" -E "env" PATH="$PATH"'
 # the repo name for more zsh compsys completions
 export ZPWR_COMPLETION_DIR='zsh-more-completions'
 # spelling correction in zsh-expand plugin
