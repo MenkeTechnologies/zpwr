@@ -3,6 +3,9 @@
 
 function zpwrAcceptLine () {
 
+    builtin emulate -L zsh
+    setopt noshwordsplit
+
     local pane commandsThatModifyFiles regex mywords line command cmd out acceptAliases args grc_cmd
 
     if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
@@ -41,9 +44,9 @@ function zpwrAcceptLine () {
         for command in ${commandsThatModifyFiles[@]}; do
             # match touch t
             # NOT touchtest t
-                mywords=( "${(Qz)match[-1]}" )
+                mywords=( "${(QLz)match[-1]}" )
 
-                if [[ ${mywords[1]} == $command ]]; then
+                if [[ ${mywords[1]} == ${command} ]]; then
                     ZPWR_WILL_CLEAR=true
                     zpwrLogDebug "found '$command' in '$BUFFER' with matches '$match'"
                     break
@@ -51,14 +54,12 @@ function zpwrAcceptLine () {
         done
     fi
 
-    mywords=( "${(z)BUFFER}" )
-
     #so sudo -E env ping uses grc overalias of ping
     if zpwrCommandExists grc; then
 
         if [[ $BUFFER =~ ${ZPWR_VARS[continueFirstPositionRegexNoZpwr]} ]]; then
 
-            mywords=( "${(Qz)match[-1]}" )
+            mywords=( "${(QLz)match[-1]}" )
             cmd=${mywords[1]}
             args=( "${mywords[2,-1]}" )
 
