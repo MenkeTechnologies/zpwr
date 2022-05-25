@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrListVerbs(){
 
-    emulate -L zsh
+    builtin emulate -L zsh
     setopt nullglob globdots extendedglob
     local len sep k v i width
     sep=" "

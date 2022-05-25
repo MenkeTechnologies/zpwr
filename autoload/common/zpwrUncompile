@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrUncompile(){
 
-    emulate -L zsh
+    builtin emulate -L zsh
     setopt nullglob
 
     local dir knownZshFiles globalFiles file

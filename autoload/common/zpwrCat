@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrCat(){
 
-    emulate -L zsh
+    builtin emulate -L zsh
 
     if [[ -p /dev/stdin ]]; then
 

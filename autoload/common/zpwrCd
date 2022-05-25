@@ -3,7 +3,7 @@
 
 function zpwrCd(){
 
-    emulate -L zsh
+    builtin emulate -L zsh
 
     local base dir noTrailSlash
 

@@ -3,7 +3,7 @@
 
 function zpwrCleanDirs() {
 
-    emulate -L zsh
+    builtin builtin emulate -L zsh
     setopt nullglob extendedglob globdots noshwordsplit globsubst
 
     local dir files f

@@ -21,7 +21,7 @@ ZPWR_VARS[VERB_0]="$0"
 
 () {
     local k v verb cmd found ret exp
-    emulate -L zsh
+    builtin builtin emulate -L zsh
     setopt nullglob globdots extendedglob
 
 

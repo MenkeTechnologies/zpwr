@@ -6,7 +6,7 @@ function zpwrExecGlob(){
         zpwrLogConsoleErr "usage: zpwrExecGlob <glob> <command with auto \$f replacement and 1 level of eval>"
         return 1
     fi
-    emulate -L zsh
+    builtin emulate -L zsh
     setopt noshwordsplit extendedglob globdots nullglob globsubst
 
     if ! (( $+ZPWR_PROCESSED )); then

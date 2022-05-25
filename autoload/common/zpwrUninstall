@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrUninstall() {
 
-    emulate -L zsh
+    builtin emulate -L zsh
     setopt nullglob
 
     local dir
