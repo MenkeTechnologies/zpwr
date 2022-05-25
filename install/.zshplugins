@@ -9,7 +9,6 @@ MenkeTechnologies/kubectl-aliases
 MenkeTechnologies/revolver
 MenkeTechnologies/zconvey
 MenkeTechnologies/zpwrp10k
-MenkeTechnologies/zsh-autocomplete
 MenkeTechnologies/zsh-better-npm-completion
 MenkeTechnologies/zsh-cargo-completion
 MenkeTechnologies/zsh-cpan-completion
@@ -37,7 +36,6 @@ MenkeTechnologies/fzf
 hlissner/zsh-autopair
 marlonrichert/zsh-hist
 nnao45/zsh-kubectl-completion
-zdharma-continuum//zzcomplete
 zdharma-continuum/fast-syntax-highlighting
 zdharma-continuum/history-search-multi-word
 zdharma-continuum/zbrowse
