@@ -3,7 +3,7 @@
 
 function zpwrCleanGitRepoDirtyCache(){
 
-    emulate -L zsh
+    builtin emulate -L zsh
     setopt nullglob
 
     echo rm -rf \

@@ -4,7 +4,7 @@ integer pcre
 
 [[ -o re_match_pcre ]] && pcre=1
 
-emulate -L zsh
+builtin emulate -L zsh
 (( pcre )) && setopt re_match_pcre
 
 # $4 is the string to be matched

@@ -19,7 +19,7 @@
 'builtin' 'setopt' 'no_aliases' 'no_sh_glob' 'brace_expand'
 
 () {
-  emulate -L zsh -o extended_glob
+  builtin emulate -L zsh -o extended_glob
 
   # Unset all configuration options. This allows you to apply configuration changes without
   # restarting zsh. Edit ~/.p10k.zsh and type `source ~/.p10k.zsh`.
@@ -376,7 +376,7 @@
   # VCS_STATUS_* parameters are set by gitstatus plugin. See reference:
   # https://github.com/romkatv/gitstatus/blob/master/gitstatus.plugin.zsh.
   function my_git_formatter() {
-    emulate -L zsh
+    builtin emulate -L zsh
 
     if [[ -n $P9K_CONTENT ]]; then
       # If P9K_CONTENT is not empty, use it. It's either "loading" or from vcs_info (not from

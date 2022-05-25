@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 () {
-    emulate -L zsh
+    builtin emulate -L zsh
     setopt noglob
     local k v
 

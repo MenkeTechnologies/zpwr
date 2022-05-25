@@ -39,7 +39,7 @@ function zpwrForDirRarZipErr() {
 # iterative, depth first traversal with stack
 function zpwrForDirRarZipProcess() {
 
-    emulate -L zsh
+    builtin emulate -L zsh
     local first="${1:A}" old stack rars zips dir
     setopt nullglob nocaseglob extendedglob
 
@@ -115,7 +115,7 @@ function zpwrForDirZipRarRm() {
 
 function zpwrForDirZipRarMain() {
 
-    emulate -L zsh
+    builtin emulate -L zsh
     local old dirs dir
     setopt nullglob extendedglob noshwordsplit
 

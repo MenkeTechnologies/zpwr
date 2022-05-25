@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function __regenZshCompCache(){
 
-    emulate -L zsh
+    builtin emulate -L zsh
     setopt nullglob
     zpwrPrettyPrint "regen zsh compsys cache"
 

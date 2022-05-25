@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrZshPluginList(){
 
-    emulate -L zsh
+    builtin emulate -L zsh
     setopt nullglob extendedglob
 
     local -aU dirs
