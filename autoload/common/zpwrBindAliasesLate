@@ -59,15 +59,15 @@ function zpwrBindAliasesLate(){
     if zpwrCommandExists grc; then
         prefix='\grc --colour=on '
     fi
-    alias tl='"builtin" "command" "tmux" "list-sessions"'
-    alias tlw='"builtin" "command" "tmux" "list-windows"'
-    alias tlp='"builtin" "command" "tmux" "list-panes"'
-    alias tlb='"builtin" "command" "tmux" "list-buffers"'
-    alias tlc='"builtin" "command" "tmux" "list-clients"'
-    alias tlk='"builtin" "command" "tmux" "list-keys"'
-    alias ta='"builtin" "command" "tmux" "attach-session"'
-    alias tn='"builtin" "command" "tmux" "new-session"'
-    alias ts='"builtin" "command" "tmux" "new-session" "-s"'
+    alias tl='"builtin" "command" "tmux" list-sessions'
+    alias tlw='"builtin" "command" "tmux" list-windows'
+    alias tlp='"builtin" "command" "tmux" list-panes'
+    alias tlb='"builtin" "command" "tmux" list-buffers'
+    alias tlc='"builtin" "command" "tmux" list-clients'
+    alias tlk='"builtin" "command" "tmux" list-keys'
+    alias ta='"builtin" "command" "tmux" attach-session'
+    alias tn='"builtin" "command" "tmux" new-session'
+    alias ts='"builtin" "command" "tmux" new-session -s'
 
     alias mk='make'
     alias mkc="make clean"
