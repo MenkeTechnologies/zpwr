@@ -48,9 +48,9 @@ function zpwrBindAliasesLate(){
     alias la="zpwrClearList"
     alias l="zpwrClearList"
     alias ca='"builtin" "command" "cat" "-n"'
-    alias sa="$ZPWR_FULL_SUDO cat -n"
-    alias ra="$ZPWR_FULL_SUDO rm -rf --"
-    alias die="$ZPWR_FULL_SUDO kill -9 --"
+    alias sa="$ZPWR_FULL_SUDO 'cat' '-n'"
+    alias ra="$ZPWR_FULL_SUDO 'rm' '-rf' '--'"
+    alias die="$ZPWR_FULL_SUDO 'kill' '-9' '--'"
     alias da=zpwrDetachall
     alias ni='npm install'
     alias zu=zunit
