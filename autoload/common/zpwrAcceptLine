@@ -39,7 +39,7 @@ function zpwrAcceptLine () {
 
     commandsThatModifyFiles=(rm mv cp mkdir ln chown chmod touch unlink srm md rmdir chflags chgrp git\ reset git\ clone gcl dot_clean)
 
-    zpwrExpandParseWords "$LBUFFER"
+    zpwrExpandParseWords "$BUFFER"
 
     if [[ "${(j@ @)ZPWR_EXPAND_WORDS_LPARTITION}" =~ ${ZPWR_VARS[continueFirstPositionRegexNoZpwr]} ]]; then
 
