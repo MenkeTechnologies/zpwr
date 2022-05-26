@@ -50,7 +50,7 @@ function zpwrAcceptLine () {
             # match touch t
             # NOT touchtest t
 
-            if [[ ${cmdstr} == ${command}* ]]; then
+            if [[ ${cmdstr} == ${command}([^[:alnum:]_]*|) ]]; then
                 ZPWR_WILL_CLEAR=true
                 zpwrLogDebug "found '$command' in '$BUFFER' with matches '$match'"
                 break
@@ -64,12 +64,12 @@ function zpwrAcceptLine () {
             cmd=${mywords[1]}
             args=( "${mywords[2,-1]}" )
 
-            if [[ $match[12] =~ sudo ]] || [[ $match[21] =~ env ]]; then
+            if [[ $match[12] == sudo* ]] || [[ $match[21] == env* ]]; then
 
                 # sudo =iftop fails so remove =
                 cmd=${cmd#=}
                 out="$(alias -- $cmd)"
-                if [[ "$out" == *grc* ]]; then
+                if [[ "$out" == grc([^[:alnum:]_]*|) ]]; then
                     grc_cmd="$(eval echo "${out#*=}")"
                     print -srn -- "$BUFFER"
                     BUFFER="sudo -E env \"PATH=$PATH\" $grc_cmd ${args[@]}"
@@ -82,7 +82,6 @@ function zpwrAcceptLine () {
             fi
         fi
     fi
-
 
     # prevent global alias in first position from expanding
     if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
