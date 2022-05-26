@@ -28,8 +28,11 @@ function zpwrBindZstyle(){
     # do not include pwd after ../
     zstyle ':completion:*' ignore-parents parent pwd
 
+    zstyle ':completion:*' insert-sections on
+
     # remove slash if argument is a directory
-    zstyle ':completion:*' squeeze-slashes true
+    zstyle ':completion:*' squeeze-slashes on
+
     # Enable completion caching, use rehash to clear
     zstyle ':completion:*' use-cache on
 
@@ -149,13 +152,13 @@ function zpwrBindZstyle(){
         last-clip
 
     # show command descriptions if available
-    zstyle ':completion:*' extra-verbose yes
+    zstyle ':completion:*' extra-verbose on
 
     # don't complete duplicates for these commands
-    zstyle ':completion::*:(git-add|git-rm|less|rm|vi|vim|v):*' ignore-line true
+    zstyle ':completion::*:(git-add|git-rm|less|rm|vi|vim|v):*' ignore-line on
 
     #insert unambiguous for correct completer
-    zstyle ':completion:*:correct:*' insert-unambiguous true
+    zstyle ':completion:*:correct:*' insert-unambiguous on
 
     # 0 -- vanilla completion (abc => abc)
     # 1 -- smart case completion (abc => Abc)
@@ -344,7 +347,7 @@ function zpwrBindZstyle(){
     zstyle ':completion:*' group-name ''
 
     # divide man pages by sections
-    zstyle ':completion:*:manuals' separate-sections true
+    zstyle ':completion:*:manuals' separate-sections on
 
     # Ignore compsys completion functions
     #zstyle ':completion:*:functions' ignored-patterns '_*'
@@ -359,15 +362,15 @@ function zpwrBindZstyle(){
     #{{{                    MARK:ZPWR verbs zstyle
     #**************************************************************
     #not working for zpwr subcommands
-    zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort false
+    zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort off
     zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg|z|zs):*:*' group-order options argument-rest globbed-files fasd-file fasd zdir files last-ten
 
-    zstyle ':completion::megacomplete:zpwr-gitedittag::commit-tags' sort false
+    zstyle ':completion::megacomplete:zpwr-gitedittag::commit-tags' sort off
 
     #working
-    zstyle ":completion:*:*:*:*:*:zdir" sort false
-    zstyle ":completion:*:*:*:*:*:fasd" sort false
-    zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' sort false
+    zstyle ":completion:*:*:*:*:*:zdir" sort off
+    zstyle ":completion:*:*:*:*:*:fasd" sort off
+    zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' sort off
     #}}}***********************************************************
 
     #{{{                    MARK:fzf-tab change fzf cmd
