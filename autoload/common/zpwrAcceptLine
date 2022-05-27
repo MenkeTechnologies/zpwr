@@ -4,8 +4,9 @@
 function zpwrAcceptLine () {
 
     builtin emulate -L zsh
+    setopt noshwordsplit
 
-    local pane commandsThatModifyFiles regex mywords line command cmd out acceptAliases args grc_cmd
+    local pane commandsThatModifyFiles regex mywords line command cmd acceptAliases args grc_cmd prefix cmdstr value
 
     if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
         ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
@@ -43,7 +44,8 @@ function zpwrAcceptLine () {
 
     if [[ "${(j@ @)ZPWR_EXPAND_WORDS_LPARTITION}" =~ ${ZPWR_VARS[continueFirstPositionRegexNoZpwr]} ]]; then
 
-        local cmdstr=${(QL)match[-1]}
+        cmdstr=${(QL)match[-1]}
+        prefix=${(QLj@@)match[1,-2]}
         mywords=( ${(z)cmdstr} )
 
         for command in ${commandsThatModifyFiles[@]}; do
@@ -57,22 +59,20 @@ function zpwrAcceptLine () {
             fi
         done
 
+        # sudo =iftop fails so remove =
+        cmd=${mywords[1]#=}
+
         #so sudo -E env ping uses grc overalias of ping
         if zpwrCommandExists grc; then
 
-            mywords=( ${(QLz)match[-1]} )
-            cmd=${mywords[1]}
             args=( "${mywords[2,-1]}" )
 
-            if [[ $match[12] == sudo* ]] || [[ $match[21] == env* ]]; then
+            if [[ $prefix == (*sudo*|*env*) ]]; then
 
-                # sudo =iftop fails so remove =
-                cmd=${cmd#=}
-                out="$(alias -- $cmd)"
-                if [[ "$out" == grc([^[:alnum:]_]*|) ]]; then
-                    grc_cmd="$(eval echo "${out#*=}")"
+                value="${aliases[$cmd]}"
+                if [[ $value == grc([^[:alnum:]_]*|) ]]; then
                     print -srn -- "$BUFFER"
-                    BUFFER="sudo -E env \"PATH=$PATH\" $grc_cmd ${args[@]}"
+                    BUFFER="$ZPWR_FULL_SUDO $value ${args[@]}"
                     echo
                     eval "$BUFFER"
                     BUFFER=""
@@ -85,18 +85,19 @@ function zpwrAcceptLine () {
 
     # prevent global alias in first position from expanding
     if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
-        [[ -z "$BUFFER" ]] && zle .accept-line && return 0
-        if [[ -n $(alias -g $mywords[1]) ]];then
-            acceptAliases="$(cat $ZPWR_LOCAL/.common_aliases)"
-            line="$(print -r -- $acceptAliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"
-            if [[ -z $line ]];then
-                # function
-                BUFFER="\\$mywords"
-            else
+        if [[ -z "$BUFFER" ]]; then
+            zle .accept-line
+            return 0
+        fi
+        if [[ -n ${galiases[$cmd]} ]];then
+            if [[ -n ${aliases[$cmd]} ]];then
                 # non global alias
                 print -- "$line" | grep -F "'" && \
                     BUFFER="${line:1:-1} $mywords[2,$]" ||
                     BUFFER="$line $mywords[2,$]"
+            else
+                # function
+                BUFFER="\\$mywords"
             fi
         fi
     fi
