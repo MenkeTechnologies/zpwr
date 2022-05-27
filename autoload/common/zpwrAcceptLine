@@ -67,7 +67,7 @@ function zpwrAcceptLine () {
 
             args=( "${mywords[2,-1]}" )
 
-            if [[ $prefix == (*sudo*|*env*) ]]; then
+            if [[ $prefix == (*sudo*|*env*|*nice*|*time*) ]]; then
 
                 value="${aliases[$cmd]}"
                 if [[ $value == grc([^[:alnum:]_]*|) ]]; then
