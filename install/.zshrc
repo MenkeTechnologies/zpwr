@@ -121,10 +121,13 @@ if [[ ! -d "$ZPWR_LOCAL_TEMP" ]]; then
 fi
 
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
+    builtin typeset -A ZINIT
     if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME/bin" ]]; then
         zpwrPrettyPrintBox "Installing zinit"
         command mkdir -p "$ZPWR_PLUGIN_MANAGER_HOME/bin"
         command git clone https://github.com/$ZPWR_ZDHARMA/zinit.git "$ZPWR_PLUGIN_MANAGER_HOME/bin"
+    else
+        ZINIT[OPTIMIZE_OUT_DISK_ACCESSES]=1
     fi
 fi
 #}}}***********************************************************
@@ -421,7 +424,6 @@ function zpwrTokenPost() {
 #{{{                    MARK:ZPWR_PLUGIN_MANAGER
 #**************************************************************
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
-    builtin typeset -A ZINIT
     ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
     ZINIT[COMPINIT_OPTS]='-C -u'
     builtin source "$ZPWR_PLUGIN_MANAGER_HOME/bin/zinit.zsh"
