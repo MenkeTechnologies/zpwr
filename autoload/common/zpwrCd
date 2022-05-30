@@ -5,15 +5,22 @@ function zpwrCd(){
 
     builtin emulate -L zsh
 
+    setopt extendedglob
+
     local base dir noTrailSlash
 
-    noTrailSlash="${1%/}"
+    if [[ $1 == /## ]]; then
+        cd /
+        return
+    else
+        noTrailSlash="${1%/}"
+        base="${noTrailSlash:h}"
+    fi
 
     if [[ -z "$noTrailSlash" ]]; then
         cd -
-        return 0
     elif [[ -f "$noTrailSlash" ]]; then
-        cd "$(dirname "$noTrailSlash")"
+        cd "$base"
     elif [[ -d "$noTrailSlash" ]];then
         cd "$noTrailSlash"
     elif [[ -d "${nameddirs[$noTrailSlash]}" ]];then
@@ -22,17 +29,14 @@ function zpwrCd(){
         cd "${userdirs[$noTrailSlash]}"
     else
         #cd -1
-        echo "$noTrailSlash" | command grep -E '\-[0-9]+' && cd "$noTrailSlash" && return 0
+        echo "$noTrailSlash" | command grep -E '\-[0-9]+' && cd "$noTrailSlash" && return
 
-        #cd to first partial name match
-        if zpwrIsZsh;then
-            eval 'for dir in (#i)'"$noTrailSlash"'*(N/);do
-                cd "$dir"
-                return
-            done'
-        fi
+        #cd to first partial leading name match
+        for dir in (#i)$noTrailSlash*(N/); do
+            cd "$dir"
+            return
+        done
 
-        base="$(dirname "$noTrailSlash")"
 
         if [[ $base == "." ]]; then
             zpwrLogConsoleErr "'$noTrailSlash': Not a valid file or directory."
@@ -41,13 +45,14 @@ function zpwrCd(){
 
         #find next dir to root
         while [[ "$base" != / ]]; do
-            test -d "$base" && cd "$base"&& return 0
-            base="$(dirname "$base")"
+            test -d "$base" && cd "$base"&& return
+            base="${base:h}"
         done
+
         zpwrLogConsoleErr "'$noTrailSlash': Not a valid file or directory."
         return 1
     fi
 
-  }
+}
 
 zpwrCd "$@"
