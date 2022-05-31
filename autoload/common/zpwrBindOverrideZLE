@@ -129,6 +129,9 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^F^I' zpwrIntoFzfAg
     bindkey -M vicmd '^F^I' zpwrIntoFzfAg
 
+    bindkey -M viins '^_' zpwrAsVar
+    bindkey -M vicmd '^_' zpwrAsVar
+
     bindkey -M viins '^F^R' zpwrAsVar
     bindkey -M vicmd '^F^R' zpwrAsVar
 
