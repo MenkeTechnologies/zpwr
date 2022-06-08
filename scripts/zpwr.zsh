@@ -83,6 +83,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[dirsearch]='zpwrFzfDirsearchVerb=cd to a sub dir'
     ZPWR_VERBS[dfimage]='zpwrDfimage=cat Dockerfile from IMAGE_ID'
     ZPWR_VERBS[exercism]='zpwrOpenExercism=go to Exercism home page'
+    ZPWR_VERBS[exercismedit]='zpwrEditExercism=edit file in $HOME/Exercism'
     ZPWR_VERBS[homeexercism]='cd $HOME/Exercism=cd to $HOME/Exercism'
     ZPWR_VERBS[exercismdownload]='zpwrExercismDownloadAll=download all for track'
     ZPWR_VERBS[exists]='zpwrExists=check if identifier is valid'

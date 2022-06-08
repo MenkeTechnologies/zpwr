@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEditExercism(){
+
+    local f
+
+    builtin cd "$HOME/Exercism"
+    f="$(zpwrFzfFileSearch)"
+
+    if [[ -n "$f" ]]; then
+        BUFFER="EDITOR=$ZPWR_VIM zpwr vimcd $f"
+        print -rs -- "$BUFFER"
+        eval "$BUFFER"
+    fi
+
+}
+
+zpwrEditExercism "$@"
