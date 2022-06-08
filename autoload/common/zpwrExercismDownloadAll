@@ -8,6 +8,7 @@ function zpwrExercismDownloadAll(){
         unset -f ___usage
         return 1
     }
+
     local trackName re help
 
     zparseopts -D -E -F -- r=re -redownload=re h=help -help=help || ___usage
@@ -15,6 +16,11 @@ function zpwrExercismDownloadAll(){
     if [[ -z "$1" ]] || (( $#help )); then
         ___usage
     fi
+
+    zpwrCommandExists exercism || {
+        zpwrLogConsoleErr "exercism command not found."
+        return 1
+    }
 
 
     for trackName in "$@"; do
