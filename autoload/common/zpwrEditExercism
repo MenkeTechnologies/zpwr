@@ -4,7 +4,11 @@ function zpwrEditExercism(){
 
     local f
 
-    builtin cd "$HOME/Exercism"
+    builtin cd -q "$HOME/Exercism" &>/dev/null || {
+        zpwrLogConsoleErr "$HOME/Exercism does not exist"
+        return 1
+    }
+
     f="$(zpwrFzfFileSearch)"
 
     if [[ -n "$f" ]]; then
