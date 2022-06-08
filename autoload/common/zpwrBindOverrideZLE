@@ -55,7 +55,7 @@ function zpwrBindOverrideZLE(){
     zle -N zpwrOpen
     zle -N zpwrEOLorNextTabStop
     zle -N zpwrFzfSurround
-    zle -N zpwrVimFzfFilesearchWidgetAccept
+    zle -N zpwrCdVimFzfFilesearchWidgetAccept
 
     bindkey -M vicmd '^I' zpwrExpandOrCompleteWithDots
     bindkey -M viins '^I' zpwrExpandOrCompleteWithDots
@@ -95,8 +95,8 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins '^F^V' edit-command-line
     bindkey -M vicmd '^F^V' edit-command-line
 
-    bindkey -M viins '^F^F' zpwrVimFzfFilesearchWidgetAccept
-    bindkey -M vicmd '^F^F' zpwrVimFzfFilesearchWidgetAccept
+    bindkey -M viins '^F^F' zpwrCdVimFzfFilesearchWidgetAccept
+    bindkey -M vicmd '^F^F' zpwrCdVimFzfFilesearchWidgetAccept
 
     bindkey -M viins '^F^D' zpwrIntoFzf
     bindkey -M vicmd '^F^D' zpwrIntoFzf
