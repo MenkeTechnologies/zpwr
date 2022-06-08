@@ -2,7 +2,13 @@
 # vim: set ft=sh:
 function zpwrFzfFileSearch(){
 
-    command fd --follow --type file --threads 8 2>/dev/null | cut -c3- |
+    emulate -LR zsh
+
+    if git check-ignore -q .; then
+        command fd --follow --type file --no-ignore --threads 8 2>/dev/null
+    else
+        command fd --follow --type file --threads 8 2>/dev/null
+    fi | cut -c3- |
         eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" | perl -ne 'chomp $_; print "\"$_\" "'
 }
 
