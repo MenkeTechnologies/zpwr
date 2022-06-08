@@ -7,15 +7,21 @@ function cv() {
         return 1
     fi
 
-    local firstArg sel firstDir
+    emulate -L zsh
+    setopt noshwordsplit
 
-    firstArg="${${(Az)@}[1]//\"/}"
-    firstDir="${firstArg:A:h}"
+    local firstArg sel firstDir args
 
-    BUFFER="builtin cd \"$firstDir\" && $EDITOR ""${@:A}""; zpwrClearList; zpwrIsGitDir && git diff HEAD; "
+    args=( "$@" )
+    firstArg="${args[1]}"
+    firstDir="${(Q)firstArg:A:h}"
+
+    BUFFER="builtin cd \"$firstDir\" && $EDITOR ${(qqq@)args:A}; zpwrClearList; zpwrIsGitDir && git diff HEAD; "
+
     print -sr "$BUFFER"
     zpwrLogDebug "$BUFFER"
     eval "$BUFFER"
+
 }
 
 cv "$@"
