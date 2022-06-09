@@ -4,7 +4,7 @@ function zpwrFzfFileSearch(){
 
     emulate -LR zsh
 
-    if git check-ignore -q .; then
+    if git check-ignore -q . &>/dev/null; then
         command fd --follow --type file --no-ignore --threads 8 2>/dev/null
     else
         command fd --follow --type file --threads 8 2>/dev/null
