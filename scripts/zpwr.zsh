@@ -192,6 +192,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[gitreposcleancacheexec]='zpwrForAllGitDirsClean=run cmd in clean dirty dirs'
     ZPWR_VERBS[gitreposdirtyexec]='zpwrForAllGitDirsRefreshDirty=refresh dirty cache and run cmd in dirty git dirs'
     ZPWR_VERBS[gitreposdirtycacheexec]='zpwrForAllGitDirsDirty=run cmd in cached dirty dirs'
+    ZPWR_VERBS[gitreposfile]='zpwrGitReposFile=edit git repos file'
     ZPWR_VERBS[gitsearch]='gse=search for regex in git log'
     ZPWR_VERBS[gitupdatefordir]='zpwrUpdateAllGitDirs=run git updates in all git dirs'
     ZPWR_VERBS[gitzfordir]='zg=run git wipe on any branch $1 in git dirs in $PWD and z $2 if present'
