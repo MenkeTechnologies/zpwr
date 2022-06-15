@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGitReposFile(){
+
+    zpwrCd "${ZPWR_ALL_GIT_DIRS:h}"
+    ${=EDITOR} "$ZPWR_ALL_GIT_DIRS" "$ZPWR_ALL_GIT_DIRS_CLEAN" "$ZPWR_ALL_GIT_DIRS_DIRTY"
+
+}
+
+zpwrGitReposFile "$@"
