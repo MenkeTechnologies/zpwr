@@ -19,7 +19,8 @@ function zpwrRecompileFiles(){
         "$ZPWR_LOCAL/.tokens.sh"
         "$ZPWR_LOCAL/.tokens-post.sh"
         "$ZPWR_ENV_FILE"
-        "$ZPWR_ENV/grc.zsh"
+        "$ZPWR_ENV/"*.zsh
+        "$ZPWR_ENV/"*.sh
         "$ZPWR_RE_ENV_FILE"
         "$ZPWR_SCRIPTS/"**/*.zsh
         "$ZPWR_LIB"

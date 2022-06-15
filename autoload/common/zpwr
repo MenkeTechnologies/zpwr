@@ -5,7 +5,7 @@ function zpwr(){
     if test -z $1;then
         zpwrCd "$ZPWR"
     else
-        source zpwr.zsh "$@"
+        source "$ZPWR_VERBS_FILE" "$@"
     fi
 }
 

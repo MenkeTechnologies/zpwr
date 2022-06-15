@@ -151,7 +151,7 @@ zpwrEvalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
 # the location of macOS only associated interpreted scripts
 zpwrEvalIfNeeded ZPWR_SCRIPTS_MAC "$ZPWR_SCRIPTS_MAC" "$ZPWR_SCRIPTS/macOnly" "$ZPWR_SCRIPTS"
 # the location of zpwr verbs setup script
-zpwrEvalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_SCRIPTS/zpwr.zsh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_ENV/zpwr.zsh" "$ZPWR_ENV"
 # the location of zpwr lib file
 zpwrEvalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 # the location of zpwr init file
