@@ -17,6 +17,8 @@ function zpwrEnvCounts(){
     echo "Git Aliases: "${#aliases[(R)*git*]}
     echo "Cd Aliases: "${#aliases[(R)*cd*]}
     echo "Suffix Aliases: ${#saliases}"
+    echo "PATH entries: ${#path}"
+    echo "FPATH entries: ${#fpath}"
     zpwrPrettyPrint "ZPWR COUNTS"
     echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
     echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
