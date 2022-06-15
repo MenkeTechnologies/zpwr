@@ -38,9 +38,10 @@ zpwrPrettyPrintBox "Installing Tmux Powerline Config"
 zpwrGoInstallerDir
 
 tmuxPowerlineDir="$HOME/.config/powerline"
+command cp -R $ZPWR_INSTALL/.config "$ZPWR_LOCAL"
 
-ln -sfn $ZPWR_INSTALL/.config/powerline/ "$tmuxPowerlineDir"
-echo ln -sfn $ZPWR_INSTALL/.config/powerline/ "$tmuxPowerlineDir"
+ln -sfn $ZPWR_LOCAL/.config/powerline/ "$tmuxPowerlineDir"
+echo ln -sfn $ZPWR_LOCAL/.config/powerline/ "$tmuxPowerlineDir"
 
 zpwrPrettyPrintBox "Installing Tmux Plugin Manager"
 [[ ! -d "$HOME/.tmux/plugins/tpm"  ]] && mkdir -p "$HOME/.tmux/plugins/tpm"
