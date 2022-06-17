@@ -188,24 +188,24 @@ function zpwrBindZstyle(){
 
         zstyle ':completion:*' list-colors 'ma=37;1;4;44'
         # main option for menu selection colors
-        zstyle ':completion:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
-        zstyle ':completion:*:executables' list-colors '=(#b)(*)=1;30=1;37;44'
-        zstyle ':completion:*:parameters' list-colors '=(#b)(*)=1;30=1;32;45'
+        zstyle ':completion:*:*:*:*:builtins' list-colors '=(#b)(*)=1;30=1;37;4;43'
+        zstyle ':completion:*:*:*:*:executables' list-colors '=(#b)(*)=1;30=1;37;44'
+        zstyle ':completion:*:*:*:*:parameters' list-colors '=(#b)(*)=1;30=1;32;45'
 
         zstyle ':completion:*:abs-directories' list-colors '=(#b)(*)=1;30=1;32;45'
 
         zstyle ':completion:*:reserved-words' list-colors '=(#b)(*)=1;30=1;4;37;45'
         zstyle ':completion:*:functions' list-colors '=(#b)(*)=1;30=1;37;41'
-        zstyle ':completion:*:aliases' list-colors '=(#b)(*)=1;30=34;42;4'
-        zstyle ':completion:*:alias' list-colors '=(#b)(*)=1;30=34;42;4'
-        zstyle ':completion:*:suffix-aliases' list-colors '=(#b)(*)=1;30=1;34;41;4'
-        zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
-        zstyle ':completion:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
-        zstyle ':completion:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
-        zstyle ':completion:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
+        zstyle ':completion:*:*:*:*:aliases' list-colors '=(#b)(*)=1;30=34;42;4'
+        zstyle ':completion:*:*:*:*:alias' list-colors '=(#b)(*)=1;30=34;42;4'
+        zstyle ':completion:*:*:*:*:suffix-aliases' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
+        zstyle ':completion:*:*:*:*:users' list-colors '=(#b)(*)=1;30=1;37;42'
+        zstyle ':completion:*:*:*:*:hosts' list-colors '=(#b)(*)=1;30=1;37;43'
+        zstyle ':completion:*:*:*:*:global-aliases' list-colors '=(#b)(*)=1;30=1;34;43;4'
 
-        zstyle ':completion:*:corrections' list-colors '=(#b)(*)=1;30=1;37;4;43'
-        zstyle ':completion:*:original' list-colors '=(#b)(*)=1;30=34;42;4'
+        zstyle ':completion:*:*:*:*:corrections' list-colors '=(#b)(*)=1;30=1;37;4;43'
+        zstyle ':completion:*:*:*:*:original' list-colors '=(#b)(*)=1;30=34;42;4'
 
         if [[ $ZPWR_COLORS_VERBS == true ]]; then
             #zpwr verbs
@@ -229,75 +229,75 @@ function zpwrBindZstyle(){
         fi
 
         # git commit colors
-        zstyle ':completion:*:*:commits' list-colors '=(#b)(*)='$ZPWR_COMMIT_STYLE
-        zstyle ':completion:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
-        zstyle ':completion:*:commit-tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
-        zstyle ':completion:*:cached-files' list-colors '=(#b)(*)=1;30=1;34;41;4'
-        zstyle ':completion:*:files' list-colors '=(#b)(*)=1;30=1;34;41;4'
-        zstyle ':completion:*:blobs' list-colors '=(#b)(*)=1;30=1;34;41;4'
-        zstyle ':completion:*:blob-objects' list-colors '=(#b)(*)=1;30=1;34;41;4'
-        zstyle ':completion:*:trees' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:commits' list-colors '=(#b)(*)='$ZPWR_COMMIT_STYLE
+        zstyle ':completion:*:*:*:*:heads' list-colors '=(#b)(*)=1;30=34;42;4'
+        zstyle ':completion:*:*:*:*:commit-tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:cached-files' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:files' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:blobs' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:blob-objects' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:trees' list-colors '=(#b)(*)=1;30=1;34;41;4'
 
-        zstyle ':completion:*:tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:tags' list-colors '=(#b)(*)=1;30=1;34;41;4'
 
-        zstyle ':completion:*:heads-local' list-colors '=(#b)(*)=1;30=1;34;43;4'
-        zstyle ':completion:*:heads-remote' list-colors '=(#b)(*)=1;30=1;37;46'
-        zstyle ':completion:*:modified-files' list-colors '=(#b)(*)=1;30=1;37;42'
-        zstyle ':completion:*:revisions' list-colors '=(#b)(*)=1;30=1;37;42'
-        zstyle ':completion:*:recent-branches' list-colors '=(#b)(*)=1;30=1;37;44'
-        zstyle ':completion:*:remote-branch-names-noprefix' list-colors '=(#b)(*)=1;30=1;33;46'
-        zstyle ':completion:*:blobs-and-trees-in-treeish' list-colors '=(#b)(*)=1;30=1;34;43'
-        zstyle ':completion:*:commit-objects' list-colors '=(#b)(*)=1;30=1;37;43'
+        zstyle ':completion:*:*:*:*:heads-local' list-colors '=(#b)(*)=1;30=1;34;43;4'
+        zstyle ':completion:*:*:*:*:heads-remote' list-colors '=(#b)(*)=1;30=1;37;46'
+        zstyle ':completion:*:*:*:*:modified-files' list-colors '=(#b)(*)=1;30=1;37;42'
+        zstyle ':completion:*:*:*:*:revisions' list-colors '=(#b)(*)=1;30=1;37;42'
+        zstyle ':completion:*:*:*:*:recent-branches' list-colors '=(#b)(*)=1;30=1;37;44'
+        zstyle ':completion:*:*:*:*:remote-branch-names-noprefix' list-colors '=(#b)(*)=1;30=1;33;46'
+        zstyle ':completion:*:*:*:*:blobs-and-trees-in-treeish' list-colors '=(#b)(*)=1;30=1;34;43'
+        zstyle ':completion:*:*:*:*:commit-objects' list-colors '=(#b)(*)=1;30=1;37;43'
         zstyle ':completion:*:*(git|git-checkout):*:files' list-colors '=(#b)(*)=1;30=1;32;43'
-        zstyle ':completion:*:prefixes' list-colors '=(#b)(*)=1;30=1;37;43'
+        zstyle ':completion:*:*:*:*:prefixes' list-colors '=(#b)(*)=1;30=1;37;43'
 
         # separate colors for sections of manual pages
-        zstyle ':completion:*:manuals.1' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:manuals.2' list-colors '=(#b)(*)=1;30=1;37;42'
-        zstyle ':completion:*:manuals.3' list-colors '=(#b)(*)=1;30=1;37;43'
-        zstyle ':completion:*:manuals.4' list-colors '=(#b)(*)=1;30=37;46'
-        zstyle ':completion:*:manuals.5' list-colors '=(#b)(*)=1;30=1;34;43;4'
-        zstyle ':completion:*:manuals.6' list-colors '=(#b)(*)=1;30=1;37;41'
-        zstyle ':completion:*:manuals.7' list-colors '=(#b)(*)=1;30=34;42;4'
-        zstyle ':completion:*:manuals.8' list-colors '=(#b)(*)=1;30=1;34;41;4'
-        zstyle ':completion:*:manuals.9' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:manuals.n' list-colors '=(#b)(*)=1;30=1;4;37;45'
-        zstyle ':completion:*:manuals.0p' list-colors '=(#b)(*)=1;30=37;46'
-        zstyle ':completion:*:manuals.1p' list-colors '=(#b)(*)=1;30=37;46'
-        zstyle ':completion:*:manuals.3p' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:manuals.1' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:manuals.2' list-colors '=(#b)(*)=1;30=1;37;42'
+        zstyle ':completion:*:*:*:*:manuals.3' list-colors '=(#b)(*)=1;30=1;37;43'
+        zstyle ':completion:*:*:*:*:manuals.4' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:manuals.5' list-colors '=(#b)(*)=1;30=1;34;43;4'
+        zstyle ':completion:*:*:*:*:manuals.6' list-colors '=(#b)(*)=1;30=1;37;41'
+        zstyle ':completion:*:*:*:*:manuals.7' list-colors '=(#b)(*)=1;30=34;42;4'
+        zstyle ':completion:*:*:*:*:manuals.8' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:manuals.9' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:manuals.n' list-colors '=(#b)(*)=1;30=1;4;37;45'
+        zstyle ':completion:*:*:*:*:manuals.0p' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:manuals.1p' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:manuals.3p' list-colors '=(#b)(*)=1;30=37;46'
 
         # remote cpan
-        zstyle ':completion:*:cpan-module' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:cpan-module' list-colors '=(#b)(*)=1;30=37;46'
         # remote pip
-        zstyle ':completion:*:remote-pip' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:remote-pip' list-colors '=(#b)(*)=1;30=37;46'
         # remote gem
-        zstyle ':completion:*:remote-gem' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:remote-gem' list-colors '=(#b)(*)=1;30=37;46'
         # remote cargo
-        zstyle ':completion:*:remote-crate' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:remote-crate' list-colors '=(#b)(*)=1;30=1;36;44'
 
         # pgrep and kill
-        zstyle ':completion:*:processes' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:processes-names' list-colors '=(#b)(*)=1;30=1;37;43'
-        zstyle ':completion:*:pname' list-colors '=(#b)(*)=1;30=1;37;43'
+        zstyle ':completion:*:*:*:*:processes' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:processes-names' list-colors '=(#b)(*)=1;30=1;37;43'
+        zstyle ':completion:*:*:*:*:pname' list-colors '=(#b)(*)=1;30=1;37;43'
 
         # separate colors for git commans types
-        zstyle ':completion:*:main-porcelain-commands' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:user-commands' list-colors '=(#b)(*)=1;30=1;37;42'
-        zstyle ':completion:*:third-party-commands' list-colors '=(#b)(*)=1;30=1;37;43'
-        zstyle ':completion:*:ancillary-manipulator-commands' list-colors '=(#b)(*)=1;30=37;46'
-        zstyle ':completion:*:ancillary-interrogator-commands' list-colors '=(#b)(*)=1;30=1;34;43;4'
-        zstyle ':completion:*:interaction-commands' list-colors '=(#b)(*)=1;30=1;37;41'
-        zstyle ':completion:*:plumbing-manipulator-commands' list-colors '=(#b)(*)=1;30=34;42;4'
-        zstyle ':completion:*:plumbing-interrogator-commands' list-colors '=(#b)(*)=1;30=1;34;41;4'
-        zstyle ':completion:*:plumbing-sync-commands' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:plumbing-sync-helper-commands' list-colors '=(#b)(*)=1;30=1;4;37;45'
-        zstyle ':completion:*:plumbing-internal-helper-commands' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:main-porcelain-commands' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:user-commands' list-colors '=(#b)(*)=1;30=1;37;42'
+        zstyle ':completion:*:*:*:*:third-party-commands' list-colors '=(#b)(*)=1;30=1;37;43'
+        zstyle ':completion:*:*:*:*:ancillary-manipulator-commands' list-colors '=(#b)(*)=1;30=37;46'
+        zstyle ':completion:*:*:*:*:ancillary-interrogator-commands' list-colors '=(#b)(*)=1;30=1;34;43;4'
+        zstyle ':completion:*:*:*:*:interaction-commands' list-colors '=(#b)(*)=1;30=1;37;41'
+        zstyle ':completion:*:*:*:*:plumbing-manipulator-commands' list-colors '=(#b)(*)=1;30=34;42;4'
+        zstyle ':completion:*:*:*:*:plumbing-interrogator-commands' list-colors '=(#b)(*)=1;30=1;34;41;4'
+        zstyle ':completion:*:*:*:*:plumbing-sync-commands' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:plumbing-sync-helper-commands' list-colors '=(#b)(*)=1;30=1;4;37;45'
+        zstyle ':completion:*:*:*:*:plumbing-internal-helper-commands' list-colors '=(#b)(*)=1;30=37;46'
 
-        zstyle ':completion:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
-        zstyle ':completion:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
+        zstyle ':completion:*:*:*:*:zdir' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:fasd' list-colors '=(#b)(*)=1;30=1;37;42'
+        zstyle ':completion:*:*:*:*:fasd-file' list-colors '=(#b)(*)=1;30=1;33;45'
         zstyle ':completion:*:*:*:*:vtags' list-colors '=(#b)(*)=1;37;45'
-        zstyle ':completion:*:s-providers' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:s-providers' list-colors '=(#b)(*)=1;30=1;36;44'
 
         if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
             # homebrew tags
@@ -308,36 +308,36 @@ function zpwrBindZstyle(){
             zstyle ':completion:*:*:("|''|)brew("|''|):*:all-commands' list-colors '=(#b)(*)=1;30=1;37;42'
         fi
 
-        zstyle ':completion:*:packages' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:packages' list-colors '=(#b)(*)=1;30=1;36;44'
 
         # npm
-        zstyle ':completion:*:npm-search' list-colors '=(#b)(*)=1;30=1;36;44'
-        zstyle ':completion:*:npm-cache' list-colors '=(#b)(*)=1;30=1;37;46'
+        zstyle ':completion:*:*:*:*:npm-search' list-colors '=(#b)(*)=1;30=1;36;44'
+        zstyle ':completion:*:*:*:*:npm-cache' list-colors '=(#b)(*)=1;30=1;37;46'
 
         # tmux
         zstyle ':completion:*:*:*:*:attached-sessions' list-colors '=(#b)(*)=1;30=1;37;43'
         zstyle ':completion:*:*:*:*:detached-sessions' list-colors '=(#b)(*)=1;30=1;37;45'
 
         #zstyle ':completion:*:*:commands' list-colors '=(#b)([a-zA-Z]#)([0-9_.-]#)([a-zA-Z]#)*=0;34=1;37;45=0;34=1;37;45'
-        zstyle ':completion:*:*:commands' list-colors '=(#b)(*)=1;37;45'
+        zstyle ':completion:*:*:*:*:commands' list-colors '=(#b)(*)=1;37;45'
 
-        zstyle ':completion:*:*:tmux' list-colors '=(#b)(*)=1;37;45'
-        zstyle ':completion:*:*:last-ten' list-colors '=(#b)(*)=1;33;45'
-        zstyle ':completion:*:*:last-line' list-colors '=(#b)(*)=1;37;44'
-        zstyle ':completion:*:*:last-clip' list-colors '=(#b)(*)=1;37;45'
+        zstyle ':completion:*:*:*:*:tmux' list-colors '=(#b)(*)=1;37;45'
+        zstyle ':completion:*:*:*:*:last-ten' list-colors '=(#b)(*)=1;33;45'
+        zstyle ':completion:*:*:*:*:last-line' list-colors '=(#b)(*)=1;37;44'
+        zstyle ':completion:*:*:*:*:last-clip' list-colors '=(#b)(*)=1;37;45'
         #zstyle ':completion:*:*:kill:*' list-colors '=(#b) #([0-9]#)*( *[a-z])*=34=31=33'
         #COMMON_ZSTYLE_OPTS_NAMED='reply=("${${PREFIX:+=(#bi)($PREFIX:t)(?)(*)==37;45=37;43=34}:-=(#b)(*)=1;30=1;37;46}")'
 
 
-        zstyle -e ':completion:*:local-directories' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+        zstyle -e ':completion:*:*:*:*:local-directories' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
         zstyle -e ':completion:*:*:f:*:*' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
-        zstyle -e ':completion:*:globbed-files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+        zstyle -e ':completion:*:*:*:*:globbed-files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
         zstyle -e ':completion:*:argument-rest:*' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
-        zstyle -e ':completion:*:all-files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
-        zstyle -e ':completion:*:files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
-        zstyle -e ':completion:*:directories' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+        zstyle -e ':completion:*:*:*:*:all-files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+        zstyle -e ':completion:*:*:*:*:files' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
+        zstyle -e ':completion:*:*:*:*:directories' list-colors "$ZPWR_COMMON_ZSTYLE_OPTS"
         #zstyle -e ':completion:*:named-directories' list-colors "$COMMON_ZSTYLE_OPTS_NAMED"
-        zstyle ':completion:*:named-directories' list-colors '=(#b)(*)=1;30=1;37;46'
+        zstyle ':completion:*:*:*:*:named-directories' list-colors '=(#b)(*)=1;30=1;37;46'
 
         zstyle ':completion:*:*:*:*:options' list-colors '=(#b)([-<)(>]##)[ ]#([a-zA-Z0-9_.,:?@#-]##)[ ]#([<)(>]#)[ ]#([a-zA-Z0-9+?.,()@3-]#)*=1;32=1;31=34=1;31=34'
     fi
