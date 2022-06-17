@@ -187,10 +187,10 @@ function zpwrBindAliasesLate(){
         alias tra='zpwrCd $HOME/.Trash'
         alias sudoedit="$ZPWR_FULL_SUDO $EDITOR"
         alias colo="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
-        alias bl='brew link --force --overwrite'
-        alias bi="brew install"
-        alias bs="brew search"
-        alias bic="brew install --cask"
+        alias bl="'builtin' 'noglob' 'command' 'brew' link --force --overwrite"
+        alias bi="'builtin' 'noglob' 'command' 'brew' install"
+        alias bs="'builtin' 'noglob' 'command' 'brew' search"
+        alias bic="'builtin' 'noglob' 'command' 'brew' install --cask"
 
         if [[ -d "$HOMEBREW_OPT_HOME/tcl-tk/bin" ]]; then
             export PATH="$HOMEBREW_OPT_HOME/tcl-tk/bin:$PATH"
