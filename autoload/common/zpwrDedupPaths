@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrDedupPaths() {
+    # duplicates slow down searching and
+    # mess up OMZ fpath check if should remove zcompdump
+    typeset -gU manpath
+    typeset -gU path
+    typeset -gU fpath
+
+    manpath+=:
+}
+
+zpwrDedupPaths "$@"

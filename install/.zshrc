@@ -68,14 +68,6 @@ startTimestamp=$EPOCHREALTIME
 
 #{{{                    MARK:FPATH AND PATH NO DUPLICATES
 #**************************************************************
-function zpwrDedupPaths() {
-    # duplicates slow down searching and
-    # mess up OMZ fpath check if should remove zcompdump
-    fpath=( ${(u)fpath} )
-    path=( ${(u)path} )
-    manpath=( ${(u)manpath} ':' )
-}
-
 # FPATH should not be exported
 builtin typeset +x FPATH
 #}}}***********************************************************
