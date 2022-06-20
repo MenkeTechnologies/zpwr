@@ -28,15 +28,18 @@ function zpwrCd(){
     elif [[ -d "${userdirs[$noTrailSlash]}" ]];then
         cd "${userdirs[$noTrailSlash]}"
     else
+
         #cd -1
-        echo "$noTrailSlash" | command grep -E '\-[0-9]+' && cd "$noTrailSlash" && return
+        if [[ $noTrailSlash == [-+][0-9]## ]]; then
+            cd "$noTrailSlash"
+            return
+        fi
 
         #cd to first partial leading name match
-        for dir in (#i)$noTrailSlash*(N/); do
+        for dir in (#i)$noTrailSlash*(N/) (#i)${noTrailSlash:gs/\//*\/}*(N/); do
             cd "$dir"
             return
         done
-
 
         if [[ $base == "." ]]; then
             zpwrLogConsoleErr "'$noTrailSlash': Not a valid file or directory."
