@@ -8,7 +8,7 @@ function _megacomplete(){
 
     local -a last_command_array
     local expl cmd ret i continueRegex
-    continueRegex='^(\-.*|builtin|command|sudo|env|nice|time)$'
+    continueRegex='^(\-.*|builtin|command|sudo|env|nohup|nice|time)$'
     i=1
     cmd=${(Q)words[i]}
 
