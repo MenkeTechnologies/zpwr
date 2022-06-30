@@ -67,10 +67,10 @@ function _zpwr(){
                 cat)
                     _c
                     ;;
-                cd)
+                cd|f|forward)
                     _f
                     ;;
-                cdup)
+                cdup|reverse|r)
                     _r
                     ;;
                 clone|zpwrCloneToForked)
