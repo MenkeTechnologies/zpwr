@@ -88,7 +88,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 
 ## ZPWR Features
-- 390+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
+- 400+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
 - 175+ centralized environment variables in ZPWR namespace to control functionality
 - 760+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
 - 12.9k+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
