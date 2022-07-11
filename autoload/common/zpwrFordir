@@ -24,11 +24,11 @@ function zpwrFordir(){
         if [[ -d "$dir" ]]; then
             if (( $+opts[-q] )); then
             (
-                builtin cd "$dir" && eval "$cmd"
+                'builtin' 'cd' "$dir" && eval "$cmd"
             )
             else
             (
-                builtin cd "$dir" && zpwrPrettyPrint "cd $dir && $cmd" && eval "$cmd"
+                'builtin' 'cd' "$dir" && zpwrPrettyPrint "'builtin' 'cd' $dir && $cmd" && eval "$cmd"
             )
             fi
         fi
