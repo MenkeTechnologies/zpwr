@@ -6,7 +6,7 @@ __z_dirs_comp(){
     local curcontext="daily-cache$curcontext"
 
     if ! (( $+__z_dirs )) && ! _retrieve_cache z_dirs_cache; then
-        __z_dirs=(${(@f)"$($zcmd -l 2>&1 | perl -e '@l=reverse<>;do{print quotemeta($2).":".quotemeta($1)."\n" if m{^\s*(\S+)\s+(\S+.*)$}}for@l')"})
+        __z_dirs=(${(@f)"$($ZPWR_VARS[zcmd] -l 2>&1 | perl -e '@l=reverse<>;do{print quotemeta($2).":".quotemeta($1)."\n" if m{^\s*(\S+)\s+(\S+.*)$}}for@l')"})
         _store_cache z_dirs_cache __z_dirs
     fi
 

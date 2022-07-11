@@ -4,9 +4,9 @@ ZPWR_HAS_Z=true
 ZPWR_HAS_FASD=true
 
 if zpwrExists zshz; then
-    zcmd=zshz
+    ZPWR_VARS[zcmd]=zshz
 elif zpwrExists _z; then
-    zcmd=_z
+    ZPWR_VARS[zcmd]=_z
 else
     ZPWR_HAS_Z=false
 fi
