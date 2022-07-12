@@ -78,13 +78,14 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     #export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
 
     if [[ -d "/opt/homebrew" ]]; then
+        eval $(/opt/homebrew/bin/brew shellenv)
         export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Library/taps/homebrew/homebrew-core/formula"
-        export NODE_HOME="$HOMEBREW_PREFIX/lib/node_modules"
-        export NODE_PATH="$NODE_HOME:$YARN_HOME/global/node_modules"
     else
         export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Homebrew/Library/taps/homebrew/homebrew-core/formula"
+        eval $(brew shellenv)
     fi
-    eval $(brew shellenv)
+    export NODE_HOME="$HOMEBREW_PREFIX/lib/node_modules"
+    export NODE_PATH="$NODE_HOME:$YARN_HOME/global/node_modules"
     export HOMEBREW_OPT_HOME="$HOMEBREW_PREFIX/opt"
     export HOMEBREW_DBHOME="$HOMEBREW_PREFIX/var"
     export HOMEBREW_DB_CONF="$HOMEBREW_PREFIX/etc"
