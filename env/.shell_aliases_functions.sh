@@ -78,15 +78,13 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     #export CPATH="/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include"
 
     if [[ -d "/opt/homebrew" ]]; then
-        export HOMEBREW_PREFIX='/opt/homebrew'
         export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Library/taps/homebrew/homebrew-core/formula"
         export NODE_HOME="$HOMEBREW_PREFIX/lib/node_modules"
         export NODE_PATH="$NODE_HOME:$YARN_HOME/global/node_modules"
     else
-        export HOMEBREW_PREFIX='/usr/local'
         export HOMEBREW_HOME_FORMULAE="$HOMEBREW_PREFIX/Homebrew/Library/taps/homebrew/homebrew-core/formula"
     fi
-    export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+    eval $(brew shellenv)
     export HOMEBREW_OPT_HOME="$HOMEBREW_PREFIX/opt"
     export HOMEBREW_DBHOME="$HOMEBREW_PREFIX/var"
     export HOMEBREW_DB_CONF="$HOMEBREW_PREFIX/etc"
@@ -204,7 +202,9 @@ fi
 #{{{                    MARK:Global Alias
 #**************************************************************
 
-if ! zpwrIsZsh; then
+if zpwrIsZsh; then
+    declare -Tgx INFOPATH infopath
+else
     if test -f "$ZPWR_TOKEN_PRE"; then
         if ! source "$ZPWR_TOKEN_PRE"; then
             zpwrLogConsoleErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
