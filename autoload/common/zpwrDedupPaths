@@ -6,6 +6,7 @@ function zpwrDedupPaths() {
     typeset -gU manpath
     typeset -gU path
     typeset -gU fpath
+    typeset -gU infopath
 
     manpath+=:
 }
