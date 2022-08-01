@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGitIgnores(){
+
+    emulate -L zsh
+    local f
+    f="$(git config core.excludesfile)"
+    ${=EDITOR} "${f/#\~/$HOME}"
+
+}
+
+zpwrGitIgnores "$@"
