@@ -2,14 +2,32 @@
 # vim: set ft=sh:
 function zpwrTotalLines(){
 
+    function ___usage() {
+        zpwrLogConsoleErr "___usage: zpwrTotalLines [-h,--help] | [-w,--nows] [<blacklist strings>...]"
+        unset -f ___usage
+    }
     if ! zpwrIsGitDir; then
        zpwrLogConsoleNotGit
        return 1
     fi
 
-    local filter lineCount
+    local filter lineCount nows help
 
-    zpwrPrettyPrint "starting total line count..."
+    zparseopts -D -E -F -- w=nows -nows=nows h=help -help=help &>/dev/null || {
+        ___usage
+        return 1
+    }
+
+    if (( $#help )); then
+        ___usage
+        return 1
+    fi
+
+    if (( $#nows )); then
+        zpwrPrettyPrint "starting total line count no whitespace..."
+    else
+        zpwrPrettyPrint "starting total line count..."
+    fi
     {
 
     while read; do
@@ -37,7 +55,13 @@ function zpwrTotalLines(){
     fi
 
     zpwrPrettyPrint "Total Line Count"
-    lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
+
+    if (( $#nows )); then
+        lineCount="$(cat "$ZPWR_TEMPFILE" | perl -ne 'print if /\S/' | wc -l)"
+    else
+        lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
+    fi
+
     if (( $lineCount > 10 )); then
         echo "$lineCount" |
             perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
