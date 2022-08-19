@@ -48,6 +48,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[catrecentfviminfo]='zpwrRecentfThenNvim=cat recentf then custom vim info file'
     ZPWR_VERBS[catnviminforecentf]='zpwrNvimThenRecentf=cat custom vim info file then recentf'
     ZPWR_VERBS[cd]='zpwrCd=cd to directory arg'
+    ZPWR_VERBS[editor]='zpwrEditor=exec $EDITOR'
     ZPWR_VERBS[forward]='zpwrCd=cd to directory arg'
     ZPWR_VERBS[fwd]='zpwrCd=cd to directory arg'
     ZPWR_VERBS[f]='zpwrCd=cd to directory arg'

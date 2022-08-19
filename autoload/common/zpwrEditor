@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEditor(){
+
+    ${=EDITOR}
+}
+
+zpwrEditor "$@"
