@@ -16,6 +16,92 @@ function zpwrIsZsh(){
 
 if zpwrIsZsh; then
 
+    function zpwrValidatePipPackage() {
+
+        if [[ -z "$1" ]]; then
+            return 1
+        fi
+
+        local package="$1"
+
+        #get last package
+        if (( $+zpwrPipBlacklist )); then
+            if (( zpwrPipBlacklist[(Ie)$package] )); then
+                zpwrLogInfo "skip update of $package due to blacklist"
+                return 1
+            fi
+        fi
+
+        return 0
+    }
+
+    function zpwrUpdatePip() {
+
+        if [[ -z "$1" || -z "$2" || -z "$3" ]]; then
+            zpwrLogConsoleErr "usage: zpwrUpdatePip COMMAND PACKAGE_MANAGER FORCE_SUDO"
+            return 1
+        fi
+
+        local cmd="$1"
+        local packageManager="$2"
+        local forceSudo="$3"
+        local needSudoBase installDir
+
+        typeset -Tgx ZPWR_PIP_BLACKLIST zpwrPipBlacklist
+
+        zpwrCommandExists ${=cmd} && ${=cmd} -c 'import pip' &> /dev/null && {
+
+            zpwrPrettyPrint "Updating $cmd packages"
+
+            installDir=$(${=cmd} -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
+
+            if [[ $forceSudo == true || ! -w "$installDir" ]]; then
+                needSudoBase=true
+            else
+                needSudoBase=false
+            fi
+
+            zpwrPrettyPrint "Outdated $packageManager list with sudo needed: $needSudoBase"
+
+            if [[ "$needSudoBase" == true ]]; then
+                outdated=$(sudo -EH ${=cmd} -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+            else
+                outdated=$(${=cmd} -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+            fi
+
+            for package in "${(@f)outdated}"; do
+
+                zpwrValidatePipPackage "$package" || continue
+
+                installDir=$(${=cmd} -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
+
+                if [[ $forceSudo == true || ! -w "$installDir" ]]; then
+                    zpwrNeedSudo=true
+                else
+                    zpwrNeedSudo=false
+                fi
+
+                zpwrPrettyPrint "sudo needed: $zpwrNeedSudo for $package at $installDir"
+
+                if [[ "$zpwrNeedSudo" == true ]]; then
+                    sudo -EH ${=cmd} -m pip install --upgrade --ignore-installed -- "$package"
+                else
+                    ${=cmd} -m pip install --upgrade --ignore-installed -- "$package"
+                fi
+
+            done
+
+            zpwrPrettyPrint "Updating $packageManager with sudo needed: $needSudoBase"
+
+            if [[ "$needSudoBase" == true ]]; then
+                sudo -EH ${=cmd} -m pip install --upgrade pip setuptools wheel
+            else
+                ${=cmd} -m pip install --upgrade pip setuptools wheel
+            fi
+
+        }
+    }
+
     if ! type -a -- zpwrExists>/dev/null 2>&1; then
 
         function zpwrExists(){
@@ -821,87 +907,4 @@ function zpwrClearList() {
     fi
 }
 
-function zpwrValidatePipPackage() {
-
-    if [[ -z "$1" ]]; then
-        return 1
-    fi
-
-    local package="$1"
-
-    #get last package
-    if (( $+pipBlacklist )); then
-        if (( pipBlacklist[(Ie)$package] )); then
-            zpwrLogInfo "skip update of $package due to blacklist"
-            return 1
-        fi
-    fi
-
-    return 0
-}
-
-function zpwrUpdatePip() {
-
-    if [[ -z "$1" || -z "$2" || -z "$3" ]]; then
-        zpwrLogConsoleErr "usage: zpwrUpdatePip COMMAND PACKAGE_MANAGER FORCE_SUDO"
-        return 1
-    fi
-
-    local cmd="$1"
-    local packageManager="$2"
-    local forceSudo="$3"
-    local needSudoBase installDir
-
-    zpwrCommandExists ${=cmd} && ${=cmd} -c 'import pip' &> /dev/null && {
-
-        zpwrPrettyPrint "Updating $cmd packages"
-
-        installDir=$(${=cmd} -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
-
-        if [[ $forceSudo == true || ! -w "$installDir" ]]; then
-            needSudoBase=true
-        else
-            needSudoBase=false
-        fi
-
-        zpwrPrettyPrint "Outdated $packageManager list with sudo needed: $needSudoBase"
-
-        if [[ "$needSudoBase" == true ]]; then
-            outdated=$(sudo -EH ${=cmd} -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
-        else
-            outdated=$(${=cmd} -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
-        fi
-
-        for package in "${(@f)outdated}"; do
-
-            zpwrValidatePipPackage "$package" || continue
-
-            installDir=$(${=cmd} -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
-
-            if [[ $forceSudo == true || ! -w "$installDir" ]]; then
-                zpwrNeedSudo=true
-            else
-                zpwrNeedSudo=false
-            fi
-
-            zpwrPrettyPrint "sudo needed: $zpwrNeedSudo for $package at $installDir"
-
-            if [[ "$zpwrNeedSudo" == true ]]; then
-                sudo -EH ${=cmd} -m pip install --upgrade --ignore-installed -- "$package"
-            else
-                ${=cmd} -m pip install --upgrade --ignore-installed -- "$package"
-            fi
-
-        done
-
-        zpwrPrettyPrint "Updating $packageManager with sudo needed: $needSudoBase"
-
-        if [[ "$needSudoBase" == true ]]; then
-            sudo -EH ${=cmd} -m pip install --upgrade pip setuptools wheel
-        else
-            ${=cmd} -m pip install --upgrade pip setuptools wheel
-        fi
-
-    }
-}
 #}}}***********************************************************
