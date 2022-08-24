@@ -10,14 +10,18 @@ function zpwrPrintMap(){
     local map arg k v sep
     sep=" "
     for map in "$@"; do
-        zpwrPrettyPrint "$map"
-        for k in ${(ko)${(P)map}[@]};do
-            v="${${(P)map}[$k]}"
-            if [[ -z "$v" ]]; then
-                v="'${v}'"
-            fi
-            printf "%-40s%-5s%-50s\n" "${map}[$k]" "$sep" "${v}"
-        done
+        if [[ ${parameters[$map]} == *association* ]]; then
+            zpwrPrettyPrint "$map"
+            for k in ${(ko)${(P)map}[@]};do
+                v="${${(P)map}[$k]}"
+                if [[ -z "$v" ]]; then
+                    v="'${v}'"
+                fi
+                printf "%-40s%-5s%-50s\n" "${map}[$k]" "$sep" "${v}"
+            done
+        else
+            zpwrLogConsoleErr "$map is not an association/hashmap."
+        fi
     done | less
 }
 
