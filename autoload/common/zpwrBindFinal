@@ -62,6 +62,12 @@ function zpwrBindFinal(){
 
     builtin export SHELL="$(which zsh)"
 
+    bindkey -M viins '^r' redo
+    bindkey -M vicmd '^r' redo
+    bindkey -M viins '^z' undo
+    bindkey -M vicmd '^z' undo
+
+
 }
 
 zpwrBindFinal "$@"
