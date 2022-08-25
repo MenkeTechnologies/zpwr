@@ -84,11 +84,6 @@ function zpwrBindOverrideZLE(){
     bindkey -M viins "\e^P" zpwrUp8widget
     bindkey -M vicmd "\e^P" zpwrUp8widget
 
-    bindkey -M viins '^r' redo
-    bindkey -M vicmd '^r' redo
-    bindkey -M viins '^z' undo
-    bindkey -M vicmd '^z' undo
-
     bindkey -M vicmd '^X^X' zpwrBufferXtrace
     bindkey -M viins '^X^X' zpwrBufferXtrace
 
