@@ -1,97 +1,75 @@
-brew install --cask -f adafruit-arduino
-brew install --cask -f adobe-acrobat-reader
-brew install --cask -f adoptopenjdk8
-brew install --cask -f alacritty
-brew install --cask -f alfred
-brew install --cask -f android-platform-tools
-brew install --cask -f android-studio
-brew install --cask -f appcode
-brew install --cask -f audacity
-brew install --cask -f balsamiq-wireframes
-brew install --cask -f bettertouchtool
-brew install --cask -f bitwig-studio
-brew install --cask -f chromedriver
-brew install --cask -f clion
-brew install --cask -f cycling74-max
-brew install --cask -f datagrip
-brew install --cask -f db-browser-for-sqlite
-brew install --cask -f discord
-brew install --cask -f disk-inventory-x
-brew install --cask -f docker
-brew install --cask -f duet
-brew install --cask -f electric-sheep
-brew install --cask -f emacs
-brew install --cask -f firefox
-brew install --cask -f fl-studio
-brew install --cask -f folx
-brew install --cask -f font-codenewroman-nerd-font
-brew install --cask -f font-fantasquesansmono-nerd-font
-brew install --cask -f font-hack-nerd-font
-brew install --cask -f font-inconsolata-nerd-font
-brew install --cask -f font-sourcecodepro-nerd-font
-brew install --cask -f gimp
-brew install --cask -f goland
-brew install --cask -f google-chrome
-brew install --cask -f hex-fiend
-brew install --cask -f intellij-idea
-brew install --cask -f iterm2
-brew install --cask -f java
-brew install --cask -f java11
-brew install --cask -f java6
-brew install --cask -f java8
-brew install --cask -f karabiner
-brew install --cask -f keyboard-maestro
-brew install --cask -f kicad
-brew install --cask -f latexit
-brew install --cask -f libreoffice
-brew install --cask -f macs-fan-control
-brew install --cask -f mactex
-brew install --cask -f macvim
-brew install --cask -f mattermost
-brew install --cask -f microsoft-teams
-brew install --cask -f multibit-hd
-brew install --cask -f mysqlworkbench
-brew install --cask -f ngrok
-brew install --cask -f onyx
-brew install --cask -f opera
-brew install --cask -f phpstorm
-brew install --cask -f postico
-brew install --cask -f postman
-brew install --cask -f processing
-brew install --cask -f pycharm
-brew install --cask -f qt-creator
-brew install --cask -f racket
-brew install --cask -f rar
-brew install --cask -f react-studio
-brew install --cask -f rider
-brew install --cask -f robo-3t
-brew install --cask -f rowanj-gitx
-brew install --cask -f rstudio
-brew install --cask -f rubymine
-brew install --cask -f scenebuilder
-brew install --cask -f skim
-brew install --cask -f skype
-brew install --cask -f slack
-brew install --cask -f soundflower
-brew install --cask -f splice
-brew install --cask -f spotify
-brew install --cask -f station
-brew install --cask -f switchresx
-brew install --cask -f sysex-librarian
-brew install --cask -f texmaker
-brew install --cask -f the-unarchiver
-brew install --cask -f thunderbird
-brew install --cask -f tor-browser
-brew install --cask -f tunnelblick
-brew install --cask -f vagrant
-brew install --cask -f virtualbox
-brew install --cask -f visual-studio-code
-brew install --cask -f vlc
-brew install --cask -f vnc-viewer
-brew install --cask -f webstorm
-brew install --cask -f wine-stable
-brew install --cask -f wireshark
-brew install --cask -f xld
-brew install --cask -f xquartz
-brew install --cask -f zoom
-brew install --cask -f zotero
+brew install --cask ableton-live-suite
+brew install --cask adobe-acrobat-reader
+brew install --cask alacritty
+brew install --cask alfred
+brew install --cask anaconda
+brew install --cask android-platform-tools
+brew install --cask android-sdk
+brew install --cask android-studio
+brew install --cask appcode
+brew install --cask arduino
+brew install --cask audacity
+brew install --cask balsamiq-wireframes
+brew install --cask bettertouchtool
+brew install --cask bitwig-studio
+brew install --cask blackhole-16ch
+brew install --cask blender
+brew install --cask chromedriver
+brew install --cask clion
+brew install --cask cycling74-max
+brew install --cask datagrip
+brew install --cask db-browser-for-sqlite
+brew install --cask discord
+brew install --cask disk-inventory-x
+brew install --cask dotnet-sdk
+brew install --cask duet
+brew install --cask electric-sheep
+brew install --cask firefox
+brew install --cask fl-studio
+brew install --cask folx
+brew install --cask gimp
+brew install --cask goland
+brew install --cask google-chrome
+brew install --cask hex-fiend
+brew install --cask intellij-idea
+brew install --cask iterm2
+brew install --cask keyboard-maestro
+brew install --cask kicad
+brew install --cask latexit
+brew install --cask libreoffice
+brew install --cask mactex
+brew install --cask mattermost
+brew install --cask melodics
+brew install --cask microsoft-teams
+brew install --cask multibit-hd
+brew install --cask obs
+brew install --cask onyx
+brew install --cask phpstorm
+brew install --cask postico
+brew install --cask postman
+brew install --cask pycharm
+brew install --cask rar
+brew install --cask react-studio
+brew install --cask reaper
+brew install --cask rider
+brew install --cask robo-3t
+brew install --cask rowanj-gitx
+brew install --cask rstudio
+brew install --cask rubymine
+brew install --cask scenebuilder
+brew install --cask slack
+brew install --cask spotify
+brew install --cask the-unarchiver
+brew install --cask thunderbird
+brew install --cask tor-browser
+brew install --cask transmission
+brew install --cask tunnelblick
+brew install --cask vagrant
+brew install --cask visual-studio-code
+brew install --cask vnc-viewer
+brew install --cask webstorm
+brew install --cask wireshark
+brew install --cask xld
+brew install --cask xquartz
+brew install --cask zoom
+brew install --cask zotero
