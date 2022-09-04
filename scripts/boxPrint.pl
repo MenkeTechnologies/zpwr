@@ -10,35 +10,40 @@
 use strict;
 use warnings;
 use feature 'say';
+
 use POSIX;
-
 use Getopt::Long;
-my $full  = 0;
-my $help  = 0;
+
+my $full = 0;
 my $width = 0;
-GetOptions( 'help|h' => \$help, 'full|f' => \$full );
+my $help = 0;
 
-if ( $help == 1 ) {
-    say STDERR "Use --full or -f to center box across width of terminal";
-    exit 1;
+sub usage {
+    select STDERR;
+    say "Usage: boxPrint.pl [-h|--help] [-f|--full]";
+    say "    [-h|--help] show this message";
+    say "    [-f|--full] center box across width of terminal";
+    exit 1
 }
 
-if ( $full == 0 ) {
-    $width = 80;
-}
-else {
+GetOptions('help|h' => \$help, 'full|f' => \$full) or usage;
+
+usage if $help;
+
+if ($full) {
+    $width = 80
+} else {
     $width = `tput cols`;
-    if ( $width == 80 ) {
-        if ( defined $ENV{'COLUMNS'} ) {
-            $width = $ENV{'COLUMNS'};
+    if ($width == 80) {
+        if (defined $ENV{'COLUMNS'}) {
+            $width = $ENV{'COLUMNS'}
         }
     }
 
-    if ( $width % 2 == 1 ) {
-        $width -= 1;
-    }
-    else {
-        $width -= 2;
+    if ($width % 2 == 1) {
+        $width -= 1
+    } else {
+        $width -= 2
     }
 }
 
@@ -51,14 +56,13 @@ my $boxesChar    = '/';
 my $spaceChar    = ' ';
 my $boxWidth     = 4;
 
-if ( scalar @ARGV > 0 ) {
-    $str .= "$_ " for @ARGV;
-}
-else {
+if (scalar @ARGV) {
+    $str .= "$_ " for @ARGV
+} else {
     while (<STDIN>) {
-        chomp $_;
-        $~ = s@\s+@ @g;
-        $str .= $_;
+        chomp;
+        s@\s+@ @g;
+        $str .= $_
     }
 }
 
@@ -70,21 +74,17 @@ my $sideCharacterLength =
 my $proposedTextLength = $inputStringLength + $spacerLength * 2 + $boxWidth;
 my $maxTextLength      = $width - ( ( $spacerLength * 2 ) + $boxWidth );
 
-if ( $proposedTextLength > $maxTextLength ) {
+if ($proposedTextLength > $maxTextLength) {
 
     my $lineCounter       = int( $inputStringLength / $maxTextLength ) + 1;
     my $charactersPerLine = int( $inputStringLength / $lineCounter );
     my $numSideCharLength =
       int( int( $width - $charactersPerLine - $boxWidth ) / 2 );
 
-# say STDOUT '___________$lineCounter = ' . $lineCounter . '___________';
-# say STDOUT '___________$charactersPerLine = ' . $charactersPerLine . '___________';
-# say STDOUT '___________$numSideCharLength = ' . $numSideCharLength . '___________';
-
     print "$boxColor";
     say $boxesChar x $width;
 
-    for ( my $i = 0 ; $i < $lineCounter ; ++$i ) {
+    for (my $i = 0 ; $i < $lineCounter ; ++$i) {
 
         my $startIndex = $charactersPerLine * $i;
 
@@ -106,7 +106,7 @@ if ( $proposedTextLength > $maxTextLength ) {
 else {
     my $side2len = $sideCharacterLength;
 
-    if ( $inputStringLength % 2 == 1 ) {
+    if ($inputStringLength % 2) {
         --$side2len;
     }
 
@@ -120,7 +120,6 @@ else {
     print $spaceChar x $spacerLength;
     say $boxesChar x $side2len;
     say $boxesChar x $width;
-
 }
 
 print "$resetColor";
