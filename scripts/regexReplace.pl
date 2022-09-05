@@ -13,40 +13,45 @@ use feature 'say';
 
 use Getopt::Long;
 
-my @files = ();
-my $regex = '\r';
+my @files       = ();
+my $regex       = '\r';
 my $replacement = "";
-my $help = 0;
+my $help        = 0;
 
 sub usage {
     select STDERR;
     say "Use --regex or --replacement to specify strings.";
-    say "Usage: regexReplace.pl [-h|--help] [--regex=REGEX] [--replacement=STRING]";
+    say
+"Usage: regexReplace.pl [-h|--help] [--regex=REGEX] [--replacement=STRING]";
     say "    [-h|--help] show this message";
     say "    [--regex] REGEX replace this REGEX";
     say "    [--replacement] STRING replace regex with this STRING";
-    exit 1
+    exit 1;
 }
 
-GetOptions('help|h' => \$help, 'regex=s' => \$regex, 'replacement=s' => \$replacement);
+GetOptions(
+    'help|h'        => \$help,
+    'regex=s'       => \$regex,
+    'replacement=s' => \$replacement
+);
 
 usage if $help;
 
 sub addToAry {
-    if (-d $_[0]) {
-        if ($_[0] =~ /\.git/) {
-            return
+    if ( -d $_[0] ) {
+        if ( $_[0] =~ /\.git/ ) {
+            return;
         }
-        for (glob("$_[0]/* $_[0]/.[!.]*") ) {
-            addToAry($_)
+        for ( glob("$_[0]/* $_[0]/.[!.]*") ) {
+            addToAry($_);
         }
     }
     else {
         say "<<<($_[0])>>>";
         my $type = `file $_[0]`;
-        if ($type =~ /text/) {
+        if ( $type =~ /text/ ) {
             my $out = `cat $_[0]`;
-            if ($out =~ /$regex/) {
+            if ( $out =~ /$regex/ ) {
                 say
 "\x1b[34;1m<<<(\x1b[0;34m$_[0]\x1b[0m has got \x1b[34m$regex!\x1b[0;34;1m)>>>\x1b[0m";
                 push @files, $_[0];
@@ -74,7 +79,7 @@ if ($length) {
     print "Remove $regex?\x1b[1;34m>\x1b[0m ";
     my $answer = <STDIN>;
     chomp $answer;
-    if ($answer =~ /y|yes/i) {
+    if ( $answer =~ /y|yes/i ) {
         `perl -i -pe 's#$regex#$replacement#g' "$_"` for @files;
     }
     else {
