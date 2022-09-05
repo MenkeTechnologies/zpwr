@@ -14,36 +14,38 @@ use feature 'say';
 use POSIX;
 use Getopt::Long;
 
-my $full = 0;
+my $full  = 0;
 my $width = 0;
-my $help = 0;
+my $help  = 0;
 
 sub usage {
     select STDERR;
     say "Usage: boxPrint.pl [-h|--help] [-f|--full]";
     say "    [-h|--help] show this message";
     say "    [-f|--full] center box across width of terminal";
-    exit 1
+    exit 1;
 }
 
-GetOptions('help|h' => \$help, 'full|f' => \$full) or usage;
+GetOptions( 'help|h' => \$help, 'full|f' => \$full ) or usage;
 
 usage if $help;
 
 if ($full) {
-    $width = 80
-} else {
+    $width = 80;
+}
+else {
     $width = `tput cols`;
-    if ($width == 80) {
-        if (defined $ENV{'COLUMNS'}) {
-            $width = $ENV{'COLUMNS'}
+    if ( $width == 80 ) {
+        if ( defined $ENV{'COLUMNS'} ) {
+            $width = $ENV{'COLUMNS'};
         }
     }
 
-    if ($width % 2 == 1) {
-        $width -= 1
-    } else {
-        $width -= 2
+    if ( $width % 2 == 1 ) {
+        $width -= 1;
+    }
+    else {
+        $width -= 2;
     }
 }
 
@@ -56,13 +58,14 @@ my $boxesChar    = '/';
 my $spaceChar    = ' ';
 my $boxWidth     = 4;
 
-if (scalar @ARGV) {
-    $str .= "$_ " for @ARGV
-} else {
+if (@ARGV) {
+    $str .= "$_ " for @ARGV;
+}
+else {
     while (<STDIN>) {
         chomp;
         s@\s+@ @g;
-        $str .= $_
+        $str .= $_;
     }
 }
 
@@ -74,7 +77,7 @@ my $sideCharacterLength =
 my $proposedTextLength = $inputStringLength + $spacerLength * 2 + $boxWidth;
 my $maxTextLength      = $width - ( ( $spacerLength * 2 ) + $boxWidth );
 
-if ($proposedTextLength > $maxTextLength) {
+if ( $proposedTextLength > $maxTextLength ) {
 
     my $lineCounter       = int( $inputStringLength / $maxTextLength ) + 1;
     my $charactersPerLine = int( $inputStringLength / $lineCounter );
@@ -84,7 +87,7 @@ if ($proposedTextLength > $maxTextLength) {
     print "$boxColor";
     say $boxesChar x $width;
 
-    for (my $i = 0 ; $i < $lineCounter ; ++$i) {
+    for ( my $i = 0 ; $i < $lineCounter ; ++$i ) {
 
         my $startIndex = $charactersPerLine * $i;
 
@@ -106,7 +109,7 @@ if ($proposedTextLength > $maxTextLength) {
 else {
     my $side2len = $sideCharacterLength;
 
-    if ($inputStringLength % 2) {
+    if ( $inputStringLength % 2 ) {
         --$side2len;
     }
 

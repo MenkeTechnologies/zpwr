@@ -7,11 +7,12 @@
 #####   Notes:
 #}}}***********************************************************
 
-my $num_args = $#ARGV + 1;
+my $num_args   = $#ARGV + 1;
 my $numColumns = 0;
-if ($num_args == 1) {
+if ( $num_args == 1 ) {
     $numColumns = $ARGV[0];
-} else {
+}
+else {
     $numColumns = `tput cols`;
     chomp $numColumns;
 }
