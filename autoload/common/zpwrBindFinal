@@ -67,7 +67,7 @@ function zpwrBindFinal(){
     bindkey -M viins '^z' undo
     bindkey -M vicmd '^z' undo
 
-
+    autoload -Uz age
 }
 
 zpwrBindFinal "$@"
