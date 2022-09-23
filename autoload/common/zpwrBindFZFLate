@@ -71,7 +71,7 @@ function zpwrBindFZFLate(){
         export FZF_ENV_OPTS_VERBS_PLAIN="$ZPWR_COMMON_FZF_ELEM --preview-window=right:50%:wrap -m --border --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh" plain)'"
         export FZF_ENV_OPTS_CURRENT_PLAIN="$ZPWR_COMMON_FZF_ELEM --preview-window=right:50%:wrap -m --border --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvCurrent.sh" plain)'"
 
-        if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
+        if [[ $ZPWR_BANNER_TYPE == ponies ]]; then
             export FZF_ENV_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnv.sh" reg)'"
             export FZF_ENV_OPTS_VERBS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvVerbs.sh" reg)'"
             export FZF_ENV_OPTS_CURRENT="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfEnvCurrent.sh" reg)'"
@@ -87,7 +87,7 @@ function zpwrBindFZFLate(){
 
         export FZF_SEARCH_GIT_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfGitSearchOpts.sh")'"
 
-        if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
+        if [[ "$ZPWR_BANNER_TYPE" == ponies ]]; then
             export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOptsPony.sh")'"
         else
             export FZF_COMPLETION_OPTS="$ZPWR_COMMON_FZF_ELEM --preview '$(bash "$ZPWR_SCRIPTS/fzfPreviewOpts.sh")'"

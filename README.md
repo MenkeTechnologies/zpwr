@@ -135,7 +135,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh functions autoloading based on OS
 - tmux keybindings and scripts based on OS
 - custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `$ZPWR_INSTALL/install.sh` run
-- custom banners when new shell is launched `ZPWR_DEFAULT_BANNER`
+- custom banners when new shell is launched `ZPWR_BANNER_COMMAND`
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
 - expanded vim text objects on command line
 - vim extract method from visual selection for shell, perl and python scripts (`gv` to select extracted)
@@ -356,7 +356,7 @@ To turn off all ponysay ponies, colored groups and colored group descriptions, a
 > ~/.zpwr/local/.tokens.sh
 ```sh
 # ponysay banner when shell startup finishes
-export ZPWR_INTRO_BANNER=nopony
+export ZPWR_BANNER_TYPE=nopony
 # output is more colorful
 export ZPWR_COLORS=false
 # colored section headers
@@ -435,7 +435,7 @@ export ZPWR_BANNER_DESKTOP_DARWIN=false
 # cd to Desktop after banner Linux
 export ZPWR_BANNER_DESKTOP_LINUX=true
 # ponysay banner when shell startup finishes
-export ZPWR_INTRO_BANNER=ponies
+export ZPWR_BANNER_TYPE=ponies
 # bat (syntax highlighting) theme
 export ZPWR_BAT_THEME='GitHub'
 # this the description separator in compsys option completions (ls -<tab>)
@@ -692,7 +692,7 @@ zpwrEvalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_L
 # emacs recent files
 zpwrEvalIfNeeded ZPWR_RECENTF "$ZPWR_RECENTF" "$HOME/.emacs.d/.cache/recentf" "$HOME"
 # alternate banner to ponysay
-zpwrEvalIfNeeded ZPWR_DEFAULT_BANNER "$ZPWR_DEFAULT_BANNER" "bash $ZPWR_SCRIPTS_MAC/figletRandomFontOnce.sh $(hostname)" "$ZPWR_SCRIPTS_MAC"
+zpwrEvalIfNeeded ZPWR_BANNER_COMMAND "$ZPWR_BANNER_COMMAND" "bash $ZPWR_SCRIPTS_MAC/figletRandomFontOnce.sh $(hostname)" "$ZPWR_SCRIPTS_MAC"
 # zpwr banner file location
 zpwrEvalIfNeeded ZPWR_BANNER_SCRIPT "$ZPWR_BANNER_SCRIPT" "$ZPWR_SCRIPTS/about.sh" "$ZPWR_SCRIPTS"
 # cache of git dirs
@@ -756,7 +756,7 @@ zpwrExists zunit && {
 Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded functions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/autoload/comps` contains autoloaded compsys functions.
 Removing the lolcat into ponysay banner like so on startup will further increase speed.
 ```sh
-export ZPWR_INTRO_BANNER=nopony
+export ZPWR_BANNER_TYPE=nopony
 ```
 With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines (.15 to .2 seconds on M1 Max) but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
 ```sh
