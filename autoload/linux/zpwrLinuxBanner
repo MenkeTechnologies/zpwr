@@ -13,7 +13,7 @@ if [[ "$UID" != "0" ]]; then
     if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
         clear
     fi
-    if [[ $ZPWR_INTRO_BANNER == ponies ]]; then
+    if [[ $ZPWR_BANNER_TYPE == ponies ]]; then
 
 
         zpwrOsRaspbianVsFamily \

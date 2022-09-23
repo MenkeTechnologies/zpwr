@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrNoPonyBanner(){
 
-    eval "$ZPWR_DEFAULT_BANNER"
+    eval "$ZPWR_BANNER_COMMAND"
 }
 
 zpwrNoPonyBanner "$@"

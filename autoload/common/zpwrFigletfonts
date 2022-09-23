@@ -20,7 +20,7 @@ function zpwrFigletfonts(){
         ary+=${file##*/}
     done
 
-    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
+    if [[ "$ZPWR_BANNER_TYPE" == ponies ]]; then
         zpwrExists ponysay || { zpwrLogConsoleErr "you need ponysay" && return 1; }
     fi
     zpwrExists lolcat || { zpwrLogConsoleErr "you need lolcat" && return 1; }
@@ -30,7 +30,7 @@ function zpwrFigletfonts(){
     zpwrAlternatingPrettyPrint "${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}iglet ${ZPWR_DELIMITER_CHAR}F${ZPWR_DELIMITER_CHAR}onts ${ZPWR_DELIMITER_CHAR}A${ZPWR_DELIMITER_CHAR}re:"
 
 
-    if [[ "$ZPWR_INTRO_BANNER" == ponies ]]; then
+    if [[ "$ZPWR_BANNER_TYPE" == ponies ]]; then
         for font in ${ary[@]} ; do
             printf "${font%.*} "
         done | ponysay -W $(tput cols) | splitReg.sh -- ---------------------- lolcat
