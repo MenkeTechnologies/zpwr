@@ -33,7 +33,7 @@ export ZPWR_BANNER_DESKTOP_DARWIN=false
 # cd to Desktop after banner Linux
 export ZPWR_BANNER_DESKTOP_LINUX=true
 # ponysay banner when shell startup finishes
-export ZPWR_BANNER_TYPE=ponies
+export ZPWR_BANNER_TYPE=noponies
 # bat (syntax highlighting) theme
 export ZPWR_BAT_THEME='GitHub'
 # this the description separator in compsys option completions (ls -<tab>)
