@@ -351,12 +351,12 @@ export ZPWR_EXPAND_QUOTE_DOUBLE=true
 export ZPWR_EXPAND_QUOTE_SINGLE=false
 ```
 
-## Turning off ponies and colors globally
+## Turning off ponies (default is off) and colors globally
 To turn off all ponysay ponies, colored groups and colored group descriptions, add to tokens file.
 > ~/.zpwr/local/.tokens.sh
 ```sh
 # ponysay banner when shell startup finishes
-export ZPWR_BANNER_TYPE=nopony
+export ZPWR_BANNER_TYPE=noponies
 # output is more colorful
 export ZPWR_COLORS=false
 # colored section headers
@@ -754,10 +754,7 @@ zpwrExists zunit && {
 
 ## Shell Startup speed
 Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded functions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/autoload/comps` contains autoloaded compsys functions.
-Removing the lolcat into ponysay banner like so on startup will further increase speed.
-```sh
-export ZPWR_BANNER_TYPE=nopony
-```
+
 With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines (.15 to .2 seconds on M1 Max) but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
 ```sh
 export ZPWR_ZINIT_COMPINIT_DELAY=0
