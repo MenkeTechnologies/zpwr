@@ -36,7 +36,7 @@ function zpwrCd(){
         fi
 
         #cd to first partial leading name match
-        for dir in (#i)$noTrailSlash*(N/) (#i)${noTrailSlash:gs/\//*\/}*(N/); do
+        for dir in (#i)$noTrailSlash*(DN-/) (#i)${noTrailSlash:gs/\//*\/}*(DN-/); do
             cd "$dir"
             return
         done
