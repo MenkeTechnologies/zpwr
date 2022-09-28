@@ -34,9 +34,9 @@ function zpwrRecompileFpath() {
 
             if (( $#fpathZshFiles )); then
                 #echo "ZRecompiling known zsh files: ${#fpathZshFiles}"
-                if ! zrecompile -p $dir.zwc $fpathZshFiles 2>> "$ZPWR_LOGFILE"; then
-                    echo ">>> FALLBACK to sudo zsh -c autoload zrecompile; zrecompile -p $dir.zwc \$fpathZshFiles"
-                    sudo zsh -c "autoload zrecompile; zrecompile -p $dir.zwc $fpathZshFiles"
+                if ! zrecompile -p -U $dir.zwc $fpathZshFiles 2>> "$ZPWR_LOGFILE"; then
+                    echo ">>> FALLBACK to sudo zsh -c autoload zrecompile; zrecompile -p -U $dir.zwc \$fpathZshFiles"
+                    sudo zsh -c "autoload zrecompile; zrecompile -p -U $dir.zwc $fpathZshFiles"
                 fi
             fi
         fi

@@ -58,12 +58,12 @@ function zpwrRecompileFiles(){
 
     for compileFile in ${knownZshFiles[@]}; do
         if [[ -f "$compileFile" ]]; then
-            zrecompile -p "$compileFile"
+            zrecompile -p -U "$compileFile"
         fi
     done
     for compileFile in ${globalFiles[@]}; do
         if [[ -f "$compileFile" ]]; then
-            sudo zsh -c "autoload zrecompile; zrecompile -p $compileFile"
+            sudo zsh -c "autoload zrecompile; zrecompile -p -U $compileFile"
         fi
     done
 
