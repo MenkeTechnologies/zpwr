@@ -1,6 +1,7 @@
 if [[ "$TERM" != dumb ]] && (( $+commands[grc] )); then
 
   (){
+    local cmd cmds
     cmds=(
         cc \
         configure \
