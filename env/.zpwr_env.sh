@@ -107,6 +107,8 @@ export ZPWR_EXPAND_QUOTE_DOUBLE=true
 export ZPWR_EXPAND_QUOTE_SINGLE=false
 # command for all fzf
 export ZPWR_FZF='fzf --ansi'
+# command for fd
+export ZPWR_FD='command fd --follow --type file --threads 8'
 # prompt for all fzf
 export ZPWR_FZF_LOGO='<<)ZPWR(>>'
 # GH username

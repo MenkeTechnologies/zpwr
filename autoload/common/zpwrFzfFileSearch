@@ -5,11 +5,12 @@ function zpwrFzfFileSearch(){
     emulate -LR zsh
 
     if git check-ignore -q . &>/dev/null; then
-        command fd --follow --type file --no-ignore --threads 8 2>/dev/null
+        ${=ZPWR_FD} --no-ignore . ./ 2>/dev/null
     else
-        command fd --follow --type file --threads 8 2>/dev/null
+        ${=ZPWR_FD} . ./ 2>/dev/null
     fi | cut -c3- |
-        eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" | perl -ne 'chomp $_; print "\"$_\" "'
+        eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" |
+        perl -ne 'chomp $_; print "\"$_\" "'
 }
 
 zpwrFzfFileSearch "$@"
