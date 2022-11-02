@@ -508,6 +508,8 @@ export ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION=true
 export ZPWR_EXPAND_QUOTE_DOUBLE=true
 # expand inside '
 export ZPWR_EXPAND_QUOTE_SINGLE=false
+# command for fd
+export ZPWR_FD='command fd --follow --type file --threads 8'
 # command for all fzf
 export ZPWR_FZF='fzf --ansi'
 # prompt for all fzf
