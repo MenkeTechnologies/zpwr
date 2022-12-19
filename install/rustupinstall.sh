@@ -57,6 +57,7 @@ ins exa exa
 ins ripgrep rg
 ins thumbs thumbs
 ins temprs tp
+ins git-delta delta
 
 zpwrPrettyPrintBox "Installing cargo-update with Cargo"
 "$HOME/.cargo/bin/cargo" install cargo-update
