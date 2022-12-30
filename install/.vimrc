@@ -72,7 +72,7 @@ set showmode
 set hlsearch
 " search performed for each keypress
 set incsearch
-" mouse scroling and clicking
+" mouse scrolling and clicking
 set mouse=a
 " >> and << indent set to four spaces
 set shiftwidth=4
