@@ -27,16 +27,16 @@ my $deleteFormatting = "1;4";
 open my $less, "|-", "less -M" or die "$!";
 select $less;
 
-my $numSpaces = int( ( $numColumns / 2 ) ) - length($file1);
+my $numSpaces = int( ( $numColumns / 2 ) );
 
 print "\x20" x $numSpaces;
 
 while (<STDIN>) {
-    my $length = length $_;
+    my $length = length;
     if ( $length < $numColumns ) {
         $numspaces = $numColumns - $length;
-        chomp $_;
-        $_ = $_ . " " x $numspaces . "\n";
+        chomp;
+        $_ .= " " x $numspaces . "\n";
     }
 
     my $debug = 0;
@@ -59,7 +59,7 @@ s@(^.*<[ ]{1,2}.*$)@\x1b[$deleteColor;$deleteFormatting;37m$1\x1b[0m@g;
 
     }
 
-    print $_;
+    print;
 }
 
 close $less;
