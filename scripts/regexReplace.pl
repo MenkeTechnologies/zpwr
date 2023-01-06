@@ -9,7 +9,7 @@
 
 use strict;
 use warnings;
-use feature 'say';
+use feature qw/say/;
 
 use Getopt::Long;
 
@@ -42,9 +42,7 @@ sub addToAry {
         if ( $_[0] =~ /\.git/ ) {
             return;
         }
-        for ( glob("$_[0]/* $_[0]/.[!.]*") ) {
-            addToAry($_);
-        }
+        addToAry $_ for glob("$_[0]/* $_[0]/.[!.]*");
     }
     else {
         say "<<<($_[0])>>>";

@@ -34,10 +34,10 @@ print "\x20" x $numSpaces;
 printf "\x1b[1;4m$file2 \x1b[0m\n";
 
 while (<$fh>) {
-    my $length = length $_;
+    my $length = length;
     if ( $length < $numColumns ) {
         $numspaces = $numColumns - $length;
-        chomp $_;
+        chomp;
         $_ = $_ . " " x $numspaces . "\n";
     }
 
@@ -61,7 +61,7 @@ s@(^.*<[ ]{1,2}.*$)@\x1b[$deleteColor;$deleteFormatting;37m$1\x1b[0m@g;
 
     }
 
-    print $_;
+    print;
 }
 
 close $less;

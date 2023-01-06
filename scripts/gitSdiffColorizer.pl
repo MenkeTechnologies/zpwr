@@ -24,11 +24,11 @@ open my $fh,
 "git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\n\";sdiff --expand-tabs -w '$numColumns HEAD * | cat -n | ";
 
 while (<$fh>) {
-    my $length = length $_;
+    my $length = length;
     if ( $length < $numColumns ) {
-        $numspaces = $numColumns - $length;
-        chomp $_;
-        $_ = $_ . " " x $numspaces . "\n";
+        my $numspaces = $numColumns - $length;
+        chomp;
+        $_ .= " " x $numspaces . "\n";
     }
 
     my $debug = 0;
@@ -49,5 +49,5 @@ s@(^.*[ ]{15,}\>.*$)@\x1b[$insertColor;$insertFormatting;37m$1\x1b[0m@g;
         $_ =~ s@(^.*\<[ ]+$)@\x1b[$deleteColor;$deleteFormatting;37m$1\x1b[0m@g;
     }
 
-    print $_;
+    print;
 }

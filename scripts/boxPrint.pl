@@ -9,7 +9,7 @@
 
 use strict;
 use warnings;
-use feature 'say';
+use feature qw/say/;
 
 use POSIX;
 use Getopt::Long;

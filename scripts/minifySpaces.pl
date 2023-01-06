@@ -7,20 +7,18 @@
 #####   Notes:
 #}}}***********************************************************
 
-use feature 'say';
+use feature qw/say/;
 
 sub removeSpaces {
     if ( -d $_[0] ) {
-        for ( glob("$_[0]/* $_[0]/.[!.]*") ) {
-            removeSpaces($_);
-        }
+        removeSpaces $_ for glob("$_[0]/* $_[0]/.[!.]*");
     }
     else {
         say "working on $_[0]";
         my $tmp = $_[0] . ".bak";
-        rename( $_[0], $tmp );
-        open( $in,  "<$tmp" );
-        open( $out, ">$_[0]" );
+        rename $_[0], $tmp;
+        open $in,  "<$tmp";
+        open $out, ">$_[0]";
         while (<$in>) {
             $_ =~ s@\s+$@\n@g;
             $_ =~ s@\x20@ @g;
@@ -31,9 +29,9 @@ sub removeSpaces {
             print $out $_;
         }
 
-        unlink($tmp);
-        close($in);
-        close($out);
+        unlink $tmp;
+        close $in;
+        close $out;
     }
 }
 
