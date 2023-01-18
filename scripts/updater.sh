@@ -137,6 +137,7 @@ if [[ $skip != true ]]; then
         rm -rf "$(brew --cache)"
         #remote old programs occupying disk sectors
         brew cleanup
+        brew autoremove
         brew services cleanup
     }
 
