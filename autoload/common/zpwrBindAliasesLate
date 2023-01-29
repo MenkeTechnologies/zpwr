@@ -189,6 +189,7 @@ function zpwrBindAliasesLate(){
         alias colo="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
         alias bl="'builtin' 'noglob' 'command' 'brew' link --force --overwrite"
         alias bi="'builtin' 'noglob' 'command' 'brew' install"
+        alias bu="'builtin' 'noglob' 'command' 'brew' uninstall --zap"
         alias bs="'builtin' 'noglob' 'command' 'brew' search"
         alias bic="'builtin' 'noglob' 'command' 'brew' install --cask"
 
