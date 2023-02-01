@@ -4,7 +4,7 @@ function zpwrCatNvimOrVimInfo() {
 
     local file
 
-    if [[ $ZPWR_USE_NEOVIM == true ]]; then
+    if [[ $ZPWR_VIM == *nvim* ]]; then
         file="$ZPWR_NVIMINFO"
         test -e "$file" || touch "$file"
         cat "$file"

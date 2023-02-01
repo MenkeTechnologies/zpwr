@@ -12,7 +12,7 @@ function zpwrEditExercism(){
     f="$(zpwrFzfFileSearch)"
 
     if [[ -n "$f" ]]; then
-        BUFFER="EDITOR=$ZPWR_VIM zpwr vimcd $f"
+        BUFFER="EDITOR='$ZPWR_VIM' zpwr vimcd $f"
         #print -rs -- "$BUFFER"
         eval "$BUFFER"
     fi
