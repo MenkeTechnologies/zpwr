@@ -12,7 +12,7 @@ function zpwrVimFzf(){
     else
         firstdir=${mywords[1]:h}
         zpwrLogDebug "words='$mywords[1]'=>'$firstdir'"
-        BUFFER="$EDITOR $BUFFER"
+        BUFFER="$ZPWR_VIM $BUFFER"
         #:h takes aways last "
         BUFFER="builtin cd $firstdir\"; $BUFFER; zpwrClearList;zpwrIsGitDir && git diff HEAD"
         zle .accept-line

@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrVimFzfFilesearchVerb(){
 
-    zpwrFzfFilesearchVerb "$EDITOR"
+    zpwrFzfFilesearchVerb "$ZPWR_VIM "
 }
 
 zpwrVimFzfFilesearchVerb "$@"

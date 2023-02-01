@@ -3,7 +3,7 @@
 function zpwrVimAll(){
 
     builtin cd $ZPWR
-    vim "${=$(zpwrListFiles)}"
+    ${=ZPWR_VIM} "${=$(zpwrListFiles)}"
     zpwrClearList
     zpwrIsGitDir && git diff HEAD
 }

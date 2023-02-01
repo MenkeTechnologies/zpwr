@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
 function vimFzfWordsearchVerbr(){
-    zpwrFzfWordsearchVerbEdit "$EDITOR"
+    zpwrFzfWordsearchVerbEdit "$ZPWR_VIM "
 }
 
 vimFzfWordsearchVerbr "$@"
