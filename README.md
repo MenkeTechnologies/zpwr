@@ -484,8 +484,10 @@ export ZPWR_DEBUG=false
 export ZPWR_DEFAULT_OMZ_THEME=simonoff
 # for alternating pretty printer
 export ZPWR_DELIMITER_CHAR='%'
-# the default vim command
+# the default vim command, override in tokens file
 export ZPWR_VIM='nvim'
+# set EDITOR to $ZPWR_VIM command
+export ZPWR_EDITOR_TO_VIM='true'
 # the emacs command
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command
@@ -548,8 +550,6 @@ export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 export ZPWR_PLUGIN_MANAGER=zinit
 # global python version
 export ZPWR_PYTHON='python3.10'
-# use mac vim over vim on darwin
-export ZPWR_PREFER_MVIM=true
 # uses the zprof function to profile startup
 export ZPWR_PROFILING=false
 # set to POWERLEVEL to use the powerlevel10k prompt
@@ -590,8 +590,6 @@ export ZPWR_TRACE=false
 export ZPWR_VIM_TEMPLATES=true
 # use bindkey -v
 export ZPWR_BINDKEY_VI=true
-# use nvim not vim
-export ZPWR_USE_NEOVIM=true
 # delay between shell start and compinit
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 # username for zdharma
@@ -690,7 +688,7 @@ zpwrEvalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 zpwrEvalIfNeeded ZPWR_LIB_INIT "$ZPWR_LIB_INIT" "$ZPWR_SCRIPTS/init.sh" "$ZPWR_SCRIPTS"
 # command for all fzf clearlist in preview pane
 zpwrEvalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/zpwrClearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
-# when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
+# the file used to find most recent files opened in neovim
 zpwrEvalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_LOCAL"
 # emacs recent files
 zpwrEvalIfNeeded ZPWR_RECENTF "$ZPWR_RECENTF" "$HOME/.emacs.d/.cache/recentf" "$HOME"

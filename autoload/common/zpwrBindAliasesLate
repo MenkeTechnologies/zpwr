@@ -3,28 +3,12 @@
 
 function zpwrBindAliasesLate(){
 
-    function chooseNvimVim(){
-
-        if [[ $ZPWR_USE_NEOVIM == true ]]; then
-            if zpwrCommandExists nvim; then
-                ZPWR_VIM='nvim'
-            else
-                if zpwrCommandExists vim; then
-                    ZPWR_VIM='vim'
-                fi
-            fi
-        else
-            if zpwrCommandExists vim; then
-                ZPWR_VIM='vim'
-            fi
-        fi
-        alias v="$ZPWR_VIM"
-        alias vi="$ZPWR_VIM"
-        alias vv="$ZPWR_VIM"
-        alias vim="$ZPWR_VIM"
-        alias vm="$ZPWR_VIM -u $ZPWR_ENV/.mininit.vim"
-        alias sv="$ZPWR_FULL_SUDO $ZPWR_VIM"
-    }
+    alias v="$ZPWR_VIM"
+    alias vi="$ZPWR_VIM"
+    alias vv="$ZPWR_VIM"
+    alias vim="$ZPWR_VIM"
+    alias vm="$ZPWR_VIM -u $ZPWR_ENV/.mininit.vim"
+    alias sv="$ZPWR_FULL_SUDO $ZPWR_VIM"
     #{{{                    MARK:Aliases
     #**************************************************************
     # portable aliases
@@ -207,21 +191,6 @@ function zpwrBindAliasesLate(){
             alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
         fi
 
-        chooseNvimVim
-
-        # mvim overrides vim if not using nvim
-        if [[ $ZPWR_PREFER_MVIM == true ]]; then
-            zpwrExists mvim && {
-                if [[ $ZPWR_USE_NEOVIM != true ]]; then
-                    ZPWR_VIM='mvim -v'
-                    alias v='mvim -v'
-                    alias vi='mvim -v'
-                    alias vim='mvim -v'
-                    alias vm="mvim -v -u $ZPWR_ENV/.minvimrc"
-                    alias sv="$ZPWR_FULL_SUDO mvim -v"
-                fi
-            }
-        fi
 
     else
         # Linux or Unix
@@ -266,7 +235,6 @@ function zpwrBindAliasesLate(){
         else
             zpwrLogConsoleErr "unsupported OS $ZPWR_OS_TYPE"
         fi
-        chooseNvimVim
     fi
     alias tclsh="rlwrap tclsh"
     alias logs="$ZPWR_FULL_SUDO tail -f /var/log/**/*.log | ccze"

@@ -98,36 +98,19 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$HOMEBREW_PREFIX/share/man:$MANPATH"
     export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"
 
-    if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
+    if [[ "$ZPWR_EDITOR_TO_VIM" == true ]]; then
         if zpwrCommandExists nvim; then
-            export EDITOR='nvim'
-            export PSQL_EDITOR='nvim -c "setf sql"'
-        else
-            export EDITOR='vim'
-            export PSQL_EDITOR='vim -c "setf sql"'
-        fi
-    else
-        if zpwrCommandExists mvim; then
-            export EDITOR='mvim -v'
-            export PSQL_EDITOR='mvim -v -c "setf sql"'
-        else
-            export EDITOR='vim'
-            export PSQL_EDITOR='vim -c "setf sql"'
+            export EDITOR="$ZPWR_VIM"
+            export PSQL_EDITOR="$ZPWR_VIM -c \"setf sql\""
         fi
     fi
 else
     export PIP3_HOME="/usr/local/lib/$ZPWR_PYTHON/site-packages"
-    if [[ "$ZPWR_USE_NEOVIM" == true ]]; then
+    if [[ "$ZPWR_EDITOR_TO_VIM" == true ]]; then
         if zpwrCommandExists nvim; then
-            export EDITOR='nvim'
-            export PSQL_EDITOR='nvim -c "setf sql"'
-        else
-            export EDITOR='vim'
-            export PSQL_EDITOR='vim -c "setf sql"'
+            export EDITOR="$ZPWR_VIM"
+            export PSQL_EDITOR="$ZPWR_VIM -c \"setf sql\""
         fi
-    else
-        export EDITOR='vim'
-        export PSQL_EDITOR='vim -c "setf sql"'
     fi
 fi
 #}}}***********************************************************

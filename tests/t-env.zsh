@@ -662,9 +662,9 @@
 }
 
 
-@test 'ZPWR_USE_NEOVIM' {
+@test 'ZPWR_VIM' {
 
-    run test -n "$ZPWR_USE_NEOVIM"
+    run test -n "$ZPWR_VIM"
     assert $state equals 0
 }
 

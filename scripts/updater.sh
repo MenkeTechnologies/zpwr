@@ -212,15 +212,7 @@ if [[ $skip != true ]]; then
     zpwrPrettyPrint "Updating Vundle Plugins"
 
     if [[ $end != true ]]; then
-        if [[ $ZPWR_USE_NEOVIM == true ]]; then
-            if zpwrCommandExists nvim; then
-                nvim -c VundleUpdate -c quitall
-            else
-                vim -c VundleUpdate -c quitall
-            fi
-        else
-            vim -c VundleUpdate -c quitall
-        fi
+            $ZPWR_VIM -c VundleUpdate -c quitall
     fi
 
     zpwrCommandExists pio && {

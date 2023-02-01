@@ -158,7 +158,7 @@ zpwrEvalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 zpwrEvalIfNeeded ZPWR_LIB_INIT "$ZPWR_LIB_INIT" "$ZPWR_SCRIPTS/init.sh" "$ZPWR_SCRIPTS"
 # command for all fzf clearlist in preview pane
 zpwrEvalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/zpwrClearList.zsh -- \\\$file | fold -s -w 80" "$ZPWR_SCRIPTS"
-# when ZPWR_USE_NEOVIM=true this the file used to find most recent files opened in neovim
+# the file used to find most recent files opened in neovim
 zpwrEvalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_LOCAL"
 # alacritty config file
 zpwrEvalIfNeeded ZPWR_ALACRITTY_CFG "$ZPWR_ALACRITTY_CFG" "$HOME/.config/alacritty/alacritty.yml" "$HOME"

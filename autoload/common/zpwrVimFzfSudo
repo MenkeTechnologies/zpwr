@@ -5,7 +5,7 @@ function zpwrVimFzfSudo(){
     zle .kill-whole-line
     local firstDir editor numWordsPre out
 
-    if [[ $ZPWR_USE_NEOVIM == true ]]; then
+    if [[ $ZPWR_VIM == *nvim* ]]; then
         pre="$ZPWR_FULL_SUDO nvim"
         LBUFFER="$pre $(zpwrFzvim nvim)"
     else

@@ -30,15 +30,7 @@ else
     unset zpwrBaseDir
 fi
 
-if [[ $ZPWR_USE_NEOVIM == true ]]; then
-    if zpwrCommandExists nvim; then
-        cmd=nvim
-    else
-        cmd=vim
-    fi
-else
-    cmd=vim
-fi
+cmd=$ZPWR_VIM
 
 if [[ -z "$ZPWR_TEMPFILE" ]]; then
     ZPWR_TEMPFILE="/tmp/.temp$$"
@@ -56,13 +48,13 @@ if [[ -z "$ZPWR_TEMPFILE4" ]]; then
     ZPWR_TEMPFILE4="/tmp/.temp$$-4"
 fi
 {
-    $cmd -e -c 'redir! > '$ZPWR_TEMPFILE1' | silent imap | redir END | quitall'
+    $=cmd -e -c 'redir! > '$ZPWR_TEMPFILE1' | silent imap | redir END | quitall'
     cat $ZPWR_TEMPFILE1
-    $cmd -e -c 'redir! > '$ZPWR_TEMPFILE2' | silent nmap | redir END | quitall'
+    $=cmd -e -c 'redir! > '$ZPWR_TEMPFILE2' | silent nmap | redir END | quitall'
     cat $ZPWR_TEMPFILE2
-    $cmd -e -c 'redir! > '$ZPWR_TEMPFILE3' | silent vmap | redir END | quitall'
+    $=cmd -e -c 'redir! > '$ZPWR_TEMPFILE3' | silent vmap | redir END | quitall'
     cat $ZPWR_TEMPFILE3
-    $cmd -e -c 'redir! > '$ZPWR_TEMPFILE4' | silent cmap | redir END | quitall'
+    $=cmd -e -c 'redir! > '$ZPWR_TEMPFILE4' | silent cmap | redir END | quitall'
     cat $ZPWR_TEMPFILE4
 
 } | perl -ne 'print if /\S+/' > "$ZPWR_TEMPFILE"
