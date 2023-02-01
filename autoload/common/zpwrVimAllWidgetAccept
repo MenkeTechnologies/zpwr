@@ -8,7 +8,7 @@ function zpwrVimAllWidgetAccept(){
 
     if [[ -n "$sel" ]]; then
         zle .kill-whole-line
-        BUFFER="vim $sel"
+        BUFFER="$ZPWR_VIM $sel"
         zle .accept-line
     fi
 }

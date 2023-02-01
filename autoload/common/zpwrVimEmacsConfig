@@ -3,7 +3,7 @@
 function zpwrVimEmacsConfig(){
 
     builtin cd $ZPWR
-    vim \
+    ${=ZPWR_VIM} \
     "$ZPWR_INSTALL/.spacemacs" \
     "$ZPWR_INSTALL/emacs/snippets/"*-mode/*
     zpwrClearList

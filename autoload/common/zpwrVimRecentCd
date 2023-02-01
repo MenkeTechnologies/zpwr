@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrVimRecentCd(){
 
-    zpwrEditorRecentCd "$EDITOR"
+    zpwrEditorRecentCd "$ZPWR_VIM"
 }
 
 zpwrVimRecentCd "$@"

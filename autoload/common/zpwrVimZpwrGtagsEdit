@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrVimZpwrGtagsEdit(){
 
-    zpwrGetGtagsEdit "$EDITOR"
+    zpwrGetGtagsEdit "$ZPWR_VIM"
 }
 
 zpwrVimZpwrGtagsEdit "$@"

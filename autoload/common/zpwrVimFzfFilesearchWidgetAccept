@@ -8,7 +8,7 @@ function zpwrVimFzfFilesearchWidgetAccept(){
 
     if [[ -n "$f" ]]; then
         zle .kill-whole-line
-        BUFFER="$EDITOR $f"
+        BUFFER="$ZPWR_VIM $f"
         zpwrLogDebug "$BUFFER"
         zle .accept-line
     fi

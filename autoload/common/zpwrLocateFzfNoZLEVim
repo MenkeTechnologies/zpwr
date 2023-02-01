@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrLocateFzfNoZLEVim(){
 
-    zpwrLocateFzfNoZLE "$EDITOR"
+    zpwrLocateFzfNoZLE "$ZPWR_VIM"
 }
 
 zpwrLocateFzfNoZLEVim "$@"

@@ -6,7 +6,7 @@ function zpwrVimAllEdit(){
     if [[ -z "$BUFFER" ]]; then
         return
     fi
-    BUFFER="$EDITOR $BUFFER"
+    BUFFER="$ZPWR_VIM $BUFFER"
     zpwrLogDebug "builtin cd $ZPWR"
     eval "builtin cd $ZPWR"
 

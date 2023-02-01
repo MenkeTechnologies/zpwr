@@ -8,7 +8,7 @@ function zpwrVimAllWidget(){
 
     if [[ -n "$sel" ]]; then
         zle .kill-whole-line
-        BUFFER="vim $sel"
+        BUFFER="$ZPWR_VIM $sel"
         CURSOR=$#BUFFER
         zle vi-insert
     fi
