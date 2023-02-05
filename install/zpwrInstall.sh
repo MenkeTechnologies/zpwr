@@ -410,7 +410,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         if ! zpwrCommandExists brew; then
             # install homebrew
             zpwrPrettyPrintBox "Installing HomeBrew..."
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/zpwrInstall.sh)"
         fi
 
         if ! zpwrCommandExists brew; then
@@ -736,7 +736,7 @@ if [[ $justConfig != true ]]; then
         zpwrPrettyPrintBox "Installing grc from source to $(pwd)"
         git clone https://github.com/garabik/grc.git
         if builtin cd grc; then
-            sudo bash install.sh
+            sudo bash zpwrInstall.sh
         else
             zpwrFail "could not cd to grc"
         fi
@@ -817,7 +817,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
 elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
     zpwrPrettyPrintBox "Installing OhMyZsh"
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/zpwrInstall.sh)"
     zpwrPrettyPrintBox "Installing fzf"
     "$ZPWR_PLUGIN_MANAGER_HOME/custom/plugins/fzf/install" --bin
 
