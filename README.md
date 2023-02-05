@@ -63,7 +63,7 @@ sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/master/inst
 ```
 OR
 ```sh
-git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh
+git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh
 ```
 
 The installer will confirm what will be installed and overwritten before executing.
@@ -75,7 +75,7 @@ To install to a custom directory, clone the project to custom directory and star
 This also means you can move ZPWR after install after updating the sym links that are in `$HOME`.  First `export ZPWR_INSTALL=<mydirectory>/install` in current shell.  Replace `<mydirectory>` with your new install dir and keep `/install` in the export.
 Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing to your new directory `<mydirectory>`.  Then exec a new zsh with `exec zsh` and all environment variables will be set accordingly.
 
-## Installation Options to `~/.zpwr/install/install.sh`
+## Installation Options to `~/.zpwr/install/zpwrInstall.sh`
 ```sh
     Options:
         -a  Install all dependencies
@@ -134,7 +134,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh plugins loading based on OS
 - zsh functions autoloading based on OS
 - tmux keybindings and scripts based on OS
-- custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `$ZPWR_INSTALL/install.sh` run
+- custom ZPWR banner with latest commit and tag when `zpwr update`, `zpwr banner` or `zpwr about` and `$ZPWR_INSTALL/zpwrInstall.sh` run
 - custom banners when new shell is launched `ZPWR_BANNER_COMMAND`
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
 - expanded vim text objects on command line
@@ -248,7 +248,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 ## Limited Install
 ```sh
-git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./install.sh -c
+git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh -c
 ```
 This will install just config files not dependencies.
 

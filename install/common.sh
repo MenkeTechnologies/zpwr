@@ -37,8 +37,8 @@ export ZPWR_TMUX="$ZPWR/tmux"
 
 unset zpwrBaseDir
 
-if ! test -f install.sh; then
-    echo "install.sh must be in $ZPWR/install directory" >&2
+if ! test -f zpwrInstall.sh; then
+    echo "zpwrInstall.sh must be in $ZPWR/install directory" >&2
     exit 1
 fi
 

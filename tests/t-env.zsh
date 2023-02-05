@@ -503,9 +503,9 @@
     assert $state equals 0
 }
 
-@test 'ZPWR_INSTALL/install.sh' {
+@test 'ZPWR_INSTALL/zpwrInstall.sh' {
 
-    run test -f "$ZPWR_INSTALL/install.sh"
+    run test -f "$ZPWR_INSTALL/zpwrInstall.sh"
     assert $state equals 0
 }
 
