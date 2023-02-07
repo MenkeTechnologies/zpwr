@@ -5,10 +5,16 @@ function p(){
     local cmd out
 
     if [[ "$ZPWR_OS_TYPE" == linux || "$ZPWR_OS_TYPE" == darwin ]]; then
-        [[ -z $1 ]] && ps -ef && return 0
+        if [[ -z $1 ]]; then
+            eval ps -ef
+            return 0
+        fi
         out="$(ps -ef)"
     else
-        [[ -z $1 ]] && ps aux && return 0
+        if [[ -z $1 ]]; then
+            eval ps aux
+            return 0
+        fi
         out="$(ps aux)"
     fi
 
