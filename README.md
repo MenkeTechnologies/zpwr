@@ -63,7 +63,7 @@ sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/master/inst
 ```
 OR
 ```sh
-git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh
+git clone --depth 1 -- https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh
 ```
 
 The installer will confirm what will be installed and overwritten before executing.
@@ -248,7 +248,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 ## Limited Install
 ```sh
-git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh -c
+git clone --depth 1 -- https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh -c
 ```
 This will install just config files not dependencies.
 
