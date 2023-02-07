@@ -8,4 +8,4 @@
 ##### Notes: run with sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/master/s)"
 #}}}***********************************************************
 
-git clone https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh
+git clone --depth 1 -- https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh
