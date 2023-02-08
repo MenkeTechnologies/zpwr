@@ -6,10 +6,10 @@ function zpwrVimFzfSudo(){
     local firstDir editor numWordsPre out
 
     if [[ $ZPWR_VIM == *nvim* ]]; then
-        pre="$ZPWR_FULL_SUDO nvim"
+        pre="$ZPWR_FULL_SUDO $ZPWR_VIM"
         LBUFFER="$pre $(zpwrFzvim nvim)"
     else
-        pre="$ZPWR_FULL_SUDO vim"
+        pre="$ZPWR_FULL_SUDO $ZPWR_VIM"
         LBUFFER="$pre $(zpwrFzvim vim)"
     fi
 
