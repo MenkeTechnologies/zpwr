@@ -8,7 +8,8 @@ function zpwrExercismDownloadAll(){
         unset -f ___usage
     }
 
-    local trackName redownload help
+    local trackName redownload help cmd
+    local -a opts
 
     zparseopts -D -E -F -- r=redownload -redownload=redownload h=help -help=help &>/dev/null || { ___usage; return 1 }
 
@@ -22,13 +23,15 @@ function zpwrExercismDownloadAll(){
         return 1
     }
 
-
+    if (( $#redownload )); then
+        opts+=('--force' )
+    fi
     for trackName in "$@"; do
-
         while read; do
             if (( $#redownload )) || [[ ! -d "$HOME/Exercism/$trackName/$REPLY" ]]; then
-                printf "\x1b[1;4mcommand exercism download --exercise=$REPLY --track=$trackName\x1b[0m\x0a"
-                command exercism download --exercise="$REPLY" --track=$trackName
+                cmd="command exercism download --exercise=$REPLY --track=$trackName ${=opts[@]}"
+                printf "\x1b[1;4m$cmd\x1b[0m\x0a"
+                ${=cmd}
             fi
         done < <(curl https://exercism.org/tracks/$trackName/exercises 2>&1 | tr ';&' '\n' | perl -nE 'say "$1" if m{/tracks/'$trackName'/exercises/(.*)}')
 
