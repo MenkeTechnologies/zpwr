@@ -11,7 +11,10 @@ It is an extremely powerful custom terminal environment built on top of [zinit](
 
 There is a significant amount of custom zsh, bash, vimL and perl code that I wrote to support very advanced functionality that I desired.
 
+<details><summary>
+
 ## Contents
+</summary>
 
 - [Full Install](#full-installation-instructions-to-zpwr)
 - [Install Options](#installation-options)
@@ -56,6 +59,13 @@ There is a significant amount of custom zsh, bash, vimL and perl code that I wro
 - [Vim Keybindings Visual Mode](#vim-keybindings-visual-mode)
 - [Vim Keybindings Command Colon Mode](#vim-keybindings-command-colon-mode)
 
+</details>
+
+<details><summary>
+
+## Installation (many ways to get started)
+</summary>
+
 # Full Installation Instructions to `~/.zpwr`
 
 ```sh
@@ -86,8 +96,47 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
         -V  Display script version
 ```
 
+## Limited Install
+```sh
+git clone --depth 1 -- https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh -c
+```
+This will install just config files not dependencies.
+
+You can then run each install shell script in `~/.zpwr/install` manually to install just vim plugins or cargo packages etc.
+
+## Install Destination
+
+All zpwr custom configs will be installed to `~/.zpwr` by default.  This is the `ZPWR` environment variable.  `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf` and other config files are sym linked into home dir to be read by the respective program.
+Your old configs for these files will be found in a directory name approximately `~/.zpwr/local/username.rc.bak.date` after install.  Exact directory name is generated as shown.
+```sh
+backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
+```
+Installer artifacts such as log files and cloned repos go into `~/.zpwr/local/installer`.
+
+**^ Warning:** Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZPWR_TMUX` which defaults to `~/.zpwr/tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.  The only user modifiable files are the user token files.
+
+## Font (suggested external dependency)
+You need to change the Terminal font to display the Powerline triangles and other special characters in the Powerlevel10k `$PROMPT`.
+
+The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
+documentation for details on how to change the font.
+
+## Tests
+You can run zpwr unit tests via `zpwr test` and include plugin tests wth `zpwr testall`.
+
+There is also the alias `tru` (tests run) to run the tests.
+```sh
+zpwrExists zunit && {
+    alias tru="( builtin cd $ZPWR && zunit --verbose )"
+}
+```
+
+</details>
+<details><summary>
 
 ## ZPWR Features
+</summary>
+
 - 405+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
 - 175+ centralized environment variables in ZPWR namespace to control functionality
 - 775+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
@@ -170,8 +219,12 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 2.8k+ line README
 - 50k+ LOC
 
+</details>
+<details><summary>
 
 ## ZPWR Dependencies
+</summary>
+
 - zsh
 - tmux
 - neovim with 79 plugins and python3/node support
@@ -208,7 +261,12 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - ponysay
 - pygments
 
-# Supported Operating Systems:
+</details>    
+<details><summary>
+
+## Supported Operating Systems:
+</summary>
+
 - macOS
 - raspbian
 - debian
@@ -233,7 +291,13 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - SUSE
 - AMI
 
+</details>
+
+<details><summary>
+
 ## ZPWR Extras Not Installed
+</summary>
+
 - JetBrains .ideamvimrc
 - JetBrains plugin list
 - JetBrains settings zip
@@ -246,24 +310,11 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - gtags from zpwr and .globalrc
 - .gitconfig and .gitignore_global
 
-## Limited Install
-```sh
-git clone --depth 1 -- https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh -c
-```
-This will install just config files not dependencies.
-
-You can then run each install shell script in `~/.zpwr/install` manually to install just vim plugins or cargo packages etc.
-
-## Install Destination
-
-All zpwr custom configs will be installed to `~/.zpwr` by default.  This is the `ZPWR` environment variable.  `~/.zshrc`, `~/.vimrc`, `~/.tmux.conf` and other config files are sym linked into home dir to be read by the respective program.
-Your old configs for these files will be found in a directory name approximately `~/.zpwr/local/username.rc.bak.date` after install.  Exact directory name is generated as shown.
-```sh
-backupdir="$ZPWR_HIDDEN_DIR/$USER.rc.bak.$(date +'%m.%d.%Y')"
-```
-Installer artifacts such as log files and cloned repos go into `~/.zpwr/local/installer`.
+</details>
+<details><summary>
 
 ## Uninstall
+</summary>
 
 Run `zpwr uninstall`.  This will ask for confirmation before moving backups dirs to `$HOME`, unlinking all configs from `$HOME` and deleting all config dirs.
 
@@ -279,18 +330,75 @@ This will not uninstall packages installed by system package manager, pip module
 You must remove these manually if desired.
 If desired you can also uninstall zinit with ```rm -rf ~/.zinit```.  Make sure `~/.zshrc` and other config files in `$HOME` are original versions.
 
-## Font
-You need to change the Terminal font to display the Powerline triangles and other special characters in the Powerlevel10k `$PROMPT`.
-
-The installer installs Hack Nerd Font on the Mac with Homebrew and Powerline Symbols on Linux.  Consult your terminal emulator
-documentation for details on how to change the font.
+</details>
+<details><summary>
 
 ## Updating
+</summary>
+
 `zpwr updateall` (`zua`) links all zpwr config files, updates zpwr and zsh plugins, regens all caches and updates all dependencies. 
 
 ### zpwr update and zpwrLinkConf functions
 There is a shell function called `zpwr update` that will update ZPWR by pulling the latest changes from this repository into `~/.zpwr`, links all zpwr config files and updates all zsh plugins.
 It invokes `zpwr regenconfiglinks` (`zpwrLinkConf`) which sym links `~/.zshrc`, `~/.vimrc` and `~/.tmux.conf` and some other miscellaneous configuration files into `$HOME`.
+ 
+## Shell Startup speed
+Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded functions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/autoload/comps` contains autoloaded compsys functions.
+
+With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines (.15 to .2 seconds on M1 Max) but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
+```sh
+export ZPWR_ZINIT_COMPINIT_DELAY=0
+```
+
+</details>
+<details><summary>
+
+## Zpwr configs
+</summary>
+
+## Tmux Main Window
+The main window show in the screenshots is started by prefix-D (tmux prefix definition mentioned above) in an empty tmux window.  This sources a tmux script `~/.zpwr/tmux/control-window.conf`.
+Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-window.conf` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window.conf` in an empty tmux pane.
+
+## Personal Config
+Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup so you can put your additional code there.  This file will not be overridden with the `zpwr update` shell function.  You can override installer variables in this file before install.  Because this file is sourced by bash installer and zsh startup you should check if the shell is zsh before any zsh only features like `zpwrIsZsh && myZshConfig`.  Startup shell files will source `~/.zpwr/local/.tokens-post.sh` after all zsh config and zinit startup.
+
+To use a different .vimrc and/or tmux.conf, set these environment variables to absolute path of custom configs and then `zpwr regenconfiglinks`.
+
+> ~/.zpwr/local/.tokens.sh
+```sh
+# user tmux.conf file
+export ZPWR_TMUXRC="$HOME/.tmux.conf"
+# user vimrc file
+export ZPWR_VIMRC="$HOME/.vimrc"
+```
+
+Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and create a ctags file named `~/tags` in your home directory.
+YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
+
+## zpwr verbs
+Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf and then execute selected verbs (fzf multiselection is enabled).  `zpwr verbsedit` puts selected verbs onto command line for editing.
+
+## ZPWR_GITHUB_ACCOUNT variable
+Change in `~/.zpwr/local/.tokens.sh`
+```sh
+export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
+```
+to match your GitHub account name to enable various functionality with your account like `zpwr github`, `zpwr githubcreate` and `zpwr githubdelete` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively.
+
+</details>
+<details><summary>
+
+## Additional Customization (z-init, tmux, vim, autocompletions, and more)
+</summary>
+
+## Adding more Zinit plugins
+Add in `~/.zpwr/local/.tokens-post.sh` your extra plugins like such
+```sh
+zinit ice lucid nocompile wait'0a'
+zinit load \
+hlissner/zsh-autopair
+```
 
 ## Tmux prefix
 The default tmux prefix key is C-a (control-a) on macOS so one can control inner tmux sessions (inside tmux session login to another computer and attach to its tmux session) on Linux/UNIX (prefix is C-b) separately.
@@ -372,45 +480,14 @@ export ZPWR_COLORS_SECTIONS=false
 
 File ending of currently edited file in vim determines the interpreter used by the bash script `$ZPWR_SCRIPTS/runner.sh` which defaults to `~/.zpwr/scripts/runner.sh`
 
-## Tmux Main Window
-The main window show in the screenshots is started by prefix-D (tmux prefix definition mentioned above) in an empty tmux window.  This sources a tmux script `~/.zpwr/tmux/control-window.conf`.
-Alternatively you could invoke the script by prefix-: `source-file ~/.zpwr/tmux/control-window.conf` or in the terminal with `tmux source-file ~/.zpwr/tmux/control-window.conf` in an empty tmux pane.
+</details>
 
-## Personal Config
-Startup shell files will source `~/.zpwr/local/.tokens.sh` before zsh config and zinit startup so you can put your additional code there.  This file will not be overridden with the `zpwr update` shell function.  You can override installer variables in this file before install.  Because this file is sourced by bash installer and zsh startup you should check if the shell is zsh before any zsh only features like `zpwrIsZsh && myZshConfig`.  Startup shell files will source `~/.zpwr/local/.tokens-post.sh` after all zsh config and zinit startup.
 
-To use a different .vimrc and/or tmux.conf, set these environment variables to absolute path of custom configs and then `zpwr regenconfiglinks`.
-
-> ~/.zpwr/local/.tokens.sh
-```sh
-# user tmux.conf file
-export ZPWR_TMUXRC="$HOME/.tmux.conf"
-# user vimrc file
-export ZPWR_VIMRC="$HOME/.vimrc"
-```
-
-Running `zpwr regen` will regenerate all cache files in `~/.zpwr/local` and create a ctags file named `~/tags` in your home directory.
-YCM (vim code completion engine) will source this file (`autocmd filetype * set tags+=~/tags` includes `~/tags`), while providing completion so ZPWR env vars vim code completion in `~/.zpwr/local/.tokens.sh` should work.  Inside vim `<Space>]` will jump to definition of the tag in the preview window.
-
-## zpwr verbs
-Typing `zpwr <tab>` will invoked zsh menucompletion for zpwr verbs/subcommands.  These subcommands invoke other shell functions passing all args.  `zpwr verbs` will list them all in fzf and then execute selected verbs (fzf multiselection is enabled).  `zpwr verbsedit` puts selected verbs onto command line for editing.
-
-## ZPWR_GITHUB_ACCOUNT variable
-Change in `~/.zpwr/local/.tokens.sh`
-```sh
-export ZPWR_GITHUB_ACCOUNT='MenkeTechnologies'
-```
-to match your GitHub account name to enable various functionality with your account like `zpwr github`, `zpwr githubcreate` and `zpwr githubdelete` shell functions for opening your GitHub home page, creating and deleting GitHub repos from the command line respectively.
-
-## Adding more Zinit plugins
-Add in `~/.zpwr/local/.tokens-post.sh` your extra plugins like such
-```sh
-zinit ice lucid nocompile wait'0a'
-zinit load \
-hlissner/zsh-autopair
-```
+<details><summary>
 
 ## Environment Variables
+</summary>
+    
 These are environment variables set in `~/.zpwr/env/.zpwr_env.sh` and `~/.zpwr/env/.zpwr_re_env.sh` which you can override in your `~/.zpwr/local/.tokens.sh` to customize the behavior of the terminal setup.  The file `~/.zpwr/env/.zpwr_re_env.sh` is reread after user tokens file to update environment variables that depend on previous variables that could change in user token file.
 ```sh
 # Global Environment Variables for ZPWR by MenkeTechnologies
@@ -742,42 +819,38 @@ zpwrEvalIfNeeded ZPWR_ALL_KEYBINDINGS "$ZPWR_ALL_KEYBINDINGS" "$ZPWR_LOCAL/zpwrA
 # build GitHub URL
 zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GITHUB_ACCOUNT" "$ZPWR_GITHUB_ACCOUNT"
 ```
+    
+</details>
 
-## Tests
-You can run zpwr unit tests via `zpwr test` and include plugin tests wth `zpwr testall`.
+<details><summary>
 
-There is also the alias `tru` (tests run) to run the tests.
-```sh
-zpwrExists zunit && {
-    alias tru="( builtin cd $ZPWR && zunit --verbose )"
-}
-```
-
-## Shell Startup speed
-Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded functions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed.  `~/.zpwr/autoload` contains ZPWR autoloaded functions and `~/.zpwr/autoload/comps` contains autoloaded compsys functions.
-
-With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines (.15 to .2 seconds on M1 Max) but up to 2-10 seconds on slow machines such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
-```sh
-export ZPWR_ZINIT_COMPINIT_DELAY=0
-```
 ## Contributing
+</summary>
+    
 I am looking for contributors mostly for documentation, marketing, video tutorials, GIFs/screenshots in README and expanding the tests.
 
-## Warnings
-Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZPWR_TMUX` which defaults to `~/.zpwr/tmux` will break a lot of functionality because vim and tmux configurations depend on these scipts for advanced features.  The only user modifiable files are the user token files.
+</details>
+<details><summary>
 
-# Running on a MacbookPro
+## What it looks like on different operating systems (Proof)
+</summary>
+    
+## Running on a MacbookPro
 ![Alt text](https://menketechnologies.github.io/img/tmuxfinal22.png?raw=true)
 ![Alt text](https://menketechnologies.github.io/img/tmux-scripts.png)
-# Running on the Raspberry Pi 3
+## Running on the Raspberry Pi 3
 ![Alt text](https://menketechnologies.github.io/img/tmuxfinal3.png?raw=true)
 ![Alt text](https://menketechnologies.github.io/img/tmuxfinal4.png?raw=true)
-# Running on the Rock64
+## Running on the Rock64
 ![Final 5](https://menketechnologies.github.io/img/tmuxfinal5.jpg?raw=true)
 
-## Keybindings generated with `source keybindingsToREADME.zsh >> README.md`
+</details>
+<details><summary>
 
-# Tmux keybindings (tmux lsk)
+## Tmux keybindings (tmux lsk)
+</summary>
+
+#### Keybindings generated with `source keybindingsToREADME.zsh >> README.md`
 - ``` bind-key    -T copy-mode    C-Space              send-keys -X begin-selection ```
 - ``` bind-key    -T copy-mode    C-a                  send-keys -X start-of-line ```
 - ``` bind-key    -T copy-mode    C-b                  send-keys -X cursor-left ```
@@ -3030,3 +3103,5 @@ Moving scripts from `$ZPWR_SCRIPTS` which defaults to `~/.zpwr/scripts` and `$ZP
 - ``` c  <C-U>       * <SNR>128_ctrl_u() ```
 - ``` c  <C-X><C-A>  * <C-A> ```
 - ``` c  <C-Y>       * pumvisible() ? "\<C-Y>" : "\<C-R>-" ```
+
+</details>
