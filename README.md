@@ -389,7 +389,7 @@ to match your GitHub account name to enable various functionality with your acco
 </details>
 <details><summary>
 
-## Additional Customization (z-init, tmux, vim, autocompletions, and more)
+## More Customization (z-init, tmux, vim, autocompletions, and more)
 </summary>
 
 ## Adding more Zinit plugins
