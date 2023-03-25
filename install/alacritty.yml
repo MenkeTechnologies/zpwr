@@ -13,6 +13,7 @@
   #TERM: xterm-256color
 
 window:
+  option_as_alt: Both
   # Window dimensions (changes require restart)
   #
   # Specified in number of columns/lines, not pixels.
@@ -351,9 +352,6 @@ working_directory: None
 # Alacritty will fall back to the WinPTY automatically if the ConPTY
 # backend cannot be initialized.
 enable_experimental_conpty_backend: false
-
-# Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
 
 debug:
   # Display the time it takes to redraw each frame.
