@@ -29,6 +29,9 @@ function zpwrCCommon(){
                             sed "s@{}@$file@" |
                             sudo -E env "PATH=$PATH" zsh
                     fi
+                else
+                    zpwrLogConsoleErr "'$file' is not a file."
+                    return 1
                 fi
             done
         else

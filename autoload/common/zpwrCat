@@ -3,13 +3,15 @@
 function zpwrCat(){
 
     builtin emulate -L zsh
+    local ret=1
 
     if [[ -p /dev/stdin ]]; then
 
         if [[ -p /dev/stdout ]];then
-            zpwrCCommon =(cat)
+            zpwrCCommon =(cat) && ret=0
         else
             zpwrCCommon =(cat) | less
+            ret=${pipestatus[1]}
         fi
     else
         if [[ -z "$1" ]]; then
@@ -18,11 +20,14 @@ function zpwrCat(){
         fi
 
         if [[ -p /dev/stdout ]];then
-            zpwrCCommon "$@"
+            zpwrCCommon "$@" && ret=0
         else
-            zpwrCCommon "$@" | less
+            zpwrCCommon "$@"
+            ret=${pipestatus[1]}
         fi
     fi
+
+    return $ret
 }
 
 zpwrCat "$@"
