@@ -7,15 +7,15 @@
 ##### Notes:
 #}}}***********************************************************
 
-function zpwrOsCommon() {
+function zpwrSetDistroName() {
 
-    test -z "$ZPWR_DISTRO_NAME" && export ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)
+    test -z "$ZPWR_DISTRO_NAME" && export ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
 
 }
 
 function zpwrOsRaspbianVsRHvsSuse() {
 
-    zpwrOsCommon
+    zpwrSetDistroName
 
     case $ZPWR_DISTRO_NAME in
         (raspbian)
@@ -35,7 +35,7 @@ function zpwrOsRaspbianVsRHvsSuse() {
 
 function zpwrOsRaspbianVsFamily() {
 
-    zpwrOsCommon
+    zpwrSetDistroName
 
     case $ZPWR_DISTRO_NAME in
         (raspbian)
@@ -58,7 +58,7 @@ function zpwrOsRaspbianVsFamily() {
 
 function zpwrOsDebVsUbuntu() {
 
-    zpwrOsCommon
+    zpwrSetDistroName
 
     case $ZPWR_DISTRO_NAME in
         (debian | raspbian | kali | parrot | zorin | *alpine*)
@@ -84,7 +84,7 @@ function zpwrOsDebVsUbuntu() {
 
 function zpwrOsDebianVsRh() {
 
-    zpwrOsCommon
+    zpwrSetDistroName
 
     case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot | *alpine*)
@@ -101,7 +101,7 @@ function zpwrOsDebianVsRh() {
 
 function zpwrOsFamily() {
 
-    zpwrOsCommon
+    zpwrSetDistroName
 
     case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot)
@@ -127,7 +127,7 @@ function zpwrOsFamily() {
 
 function zpwrOsAllVsFedora() {
 
-    zpwrOsCommon
+    zpwrSetDistroName
 
     case "$ZPWR_DISTRO_NAME" in
         (*suse* | ubuntu | debian | linuxmint | raspbian | Mac | *alpine*)
@@ -145,7 +145,7 @@ function zpwrOsAllVsFedora() {
 
 function zpwrOsFedoraVsJournalctl() {
 
-    zpwrOsCommon
+    zpwrSetDistroName
 
     case $ZPWR_DISTRO_NAME in
         (debian | ubuntu* | pop* | elementary* | raspbian | kali | linuxmint | zorin | parrot | *alpine*)

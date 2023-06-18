@@ -8,7 +8,7 @@ source common.sh
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     ZPWR_DISTRO_NAME=Mac
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
-    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)
+    zpwrSetDistroName
 else
     if [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
         ZPWR_DISTRO_NAME=FreeBSD
