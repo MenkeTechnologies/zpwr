@@ -225,6 +225,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - arch
 - artix
 - manjaro
+- arcolinux
 - endeavouros
 - mint
 - zorin
