@@ -10,8 +10,8 @@ function zpwrBindFinal(){
     #}}}***********************************************************
     if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ag="'builtin' command ag --hidden --color -i -- '$ZPWR_TABSTOP'"
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rg="'builtin' command rg --hidden --color=always -i -- '$ZPWR_TABSTOP'"
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rgf="'builtin' command rg --hidden --color=always -i --no-ignore-vcs -- '$ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rg="'builtin' command rg --hidden --threads=8 --color=always -i -- '$ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rgf="'builtin' command rg --hidden --threads=8 --color=always -i --no-ignore-vcs -- '$ZPWR_TABSTOP'"
     fi
     export CHEATCOLORS=true
 

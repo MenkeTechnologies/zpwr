@@ -14,7 +14,7 @@ alias -s txt='vim'
 function globalAliasesInit(){
 
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& 'builtin' command ag -v '\bag\b' |& \\ag --hidden --color -i --"
-    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}r="|& 'builtin' command rg -v '\brg\b' |& \\rg --hidden --color=always -i --"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}r="|& 'builtin' command rg -v '\brg\b' |& \\rg --hidden --threads=8 --color=always -i --"
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$ZPWR_LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
 
     if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
