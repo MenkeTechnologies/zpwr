@@ -47,7 +47,7 @@ function zpwrOsRaspbianVsFamily() {
         (fedora | ol | centos | rhel | amzn)
             eval "$3"
             ;;
-        (*suse* | arch | *artix* | endeavouros | garuda | manjaro* | arcolinux*)
+        (*suse* | arch | *artix* | endeavouros | garuda | manjaro* | arcolinux* | archcraft*)
             eval "$4"
             ;;
         (*)
@@ -70,7 +70,7 @@ function zpwrOsDebVsUbuntu() {
         (fedora | ol | centos | rhel | amzn)
             eval "$3"
             ;;
-        (arch | *artix* | endeavouros | garuda | manjaro* | arcolinux*)
+        (arch | *artix* | endeavouros | garuda | manjaro* | arcolinux* | archcraft*)
             eval "$4"
             ;;
         (*suse*)
@@ -110,7 +110,7 @@ function zpwrOsFamily() {
         (fedora | ol | centos | rhel | amzn)
             eval "$2"
             ;;
-        (arch | *artix* | endeavouros | garuda | manjaro* | arcolinux*)
+        (arch | *artix* | endeavouros | garuda | manjaro* | arcolinux* | archcraft*)
             eval "$3"
             ;;
         (*suse*)
@@ -154,7 +154,7 @@ function zpwrOsFedoraVsJournalctl() {
         (centos | rhel | amzn)
             eval "$2"
             ;;
-        (*suse* | arch | *artix* | endeavouros | garuda | manjaro* | arcolinux*)
+        (*suse* | arch | *artix* | endeavouros | garuda | manjaro* | arcolinux* | archcraft*)
             eval "$3"
             ;;
         (fedora | ol)
