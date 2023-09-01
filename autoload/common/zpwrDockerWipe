@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrDockerWipe(){
+
+    if [[ -z $1 ]]; then
+        docker stop $(docker ps -qa) 2>/dev/null
+        docker rm -f $(docker ps -qa) 2>/dev/null
+        docker rmi -f $(docker images -qa) 2>/dev/null
+    else
+        app="$1"
+        docker stop $(docker ps -qa --filter name=".*$app.*") 2>/dev/null
+        docker rm -f $(docker ps -qa --filter name=".*$app.*") 2>/dev/null
+        docker rmi -f $(docker images -qa "*$app*") 2>/dev/null
+    fi
+
+}
+
+zpwrDockerWipe "$@"
