@@ -89,6 +89,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[detach]='zpwrDetachall=detach from all tmux sessions'
     ZPWR_VERBS[digs]='digs=run series on networking commands on arg'
     ZPWR_VERBS[dirsearch]='zpwrFzfDirsearchVerb=cd to a sub dir'
+    ZPWR_VERBS[dockerwipe]='zpwrDockerWipe=wipe out all docker images or based on name'
     ZPWR_VERBS[dfimage]='zpwrDfimage=cat Dockerfile from IMAGE_ID'
     ZPWR_VERBS[exercism]='zpwrOpenExercism=go to Exercism home page'
     ZPWR_VERBS[exercismedit]='zpwrEditExercism=edit file in $HOME/Exercism'
