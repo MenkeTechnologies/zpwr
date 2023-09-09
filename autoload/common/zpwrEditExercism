@@ -9,7 +9,7 @@ function zpwrEditExercism(){
         return 1
     }
 
-    f="$(zpwrFzfFileSearch)"
+    f="$(zpwrFzfFileSearch sort)"
 
     if [[ -n "$f" ]]; then
         BUFFER="EDITOR='$ZPWR_VIM' zpwr vimcd $f"
