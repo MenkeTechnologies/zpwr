@@ -3,12 +3,17 @@
 function zpwrFzfFileSearch(){
 
     emulate -LR zsh
+    local filter=cat
+
+    if [[ -n "$1" ]]; then
+        filter="$1"
+    fi
 
     if git check-ignore -q . &>/dev/null; then
         ${=ZPWR_FD} --no-ignore . ./ 2>/dev/null
     else
         ${=ZPWR_FD} . ./ 2>/dev/null
-    fi | cut -c3- |
+    fi | ${=filter} | cut -c3- |
         eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" |
         perl -ne 'chomp $_; print "\"$_\" "'
 }
