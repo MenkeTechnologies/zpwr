@@ -202,9 +202,9 @@ dependencies_ary=(subversion openssl moreutils cmake tig hexedit boxes tal iperf
 
 addDependenciesLinux(){
     dependencies_ary=(neovim pkg-config libclang1 clang llvm ${dependencies_ary[@]})
-    dependencies_ary+=(python-pip inxi build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets \
+    dependencies_ary+=(python3-pip inxi build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets \
         php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
-        lua5.1 lua5.1-dev rl-dev software-properties-common sysv-rc-conf afpfs-ng \
+        lua5.1 lua5.1-dev rl-dev software-properties-common afpfs-ng \
         samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace)
     }
 addDependenciesArch(){
@@ -228,7 +228,7 @@ addDependenciesDebian(){
         ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
         libxpm-dev libxt-dev \
         libperl-dev libpq-dev libpcap-dev fortunes ruby-dev \
-        python3-pip libffi-dev libssl-dev grc automake whatweb)
+        libffi-dev libssl-dev grc automake whatweb)
 
     }
 
