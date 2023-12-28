@@ -161,7 +161,7 @@ zpwrEvalIfNeeded ZPWR_FZF_CLEARLIST "$ZPWR_FZF_CLEARLIST" "zsh $ZPWR_SCRIPTS/zpw
 # the file used to find most recent files opened in neovim
 zpwrEvalIfNeeded ZPWR_NVIMINFO "$ZPWR_NVIMINFO" "$ZPWR_LOCAL/.nviminfo" "$ZPWR_LOCAL"
 # alacritty config file
-zpwrEvalIfNeeded ZPWR_ALACRITTY_CFG "$ZPWR_ALACRITTY_CFG" "$HOME/.config/alacritty/alacritty.yml" "$HOME"
+zpwrEvalIfNeeded ZPWR_ALACRITTY_CFG "$ZPWR_ALACRITTY_CFG" "$HOME/.config/alacritty/alacritty.toml" "$HOME"
 # emacs recent files
 zpwrEvalIfNeeded ZPWR_RECENTF "$ZPWR_RECENTF" "$HOME/.emacs.d/.cache/recentf" "$HOME"
 # alternate banner to ponysay
