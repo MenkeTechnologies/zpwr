@@ -247,13 +247,19 @@ ZPWR_OMZ_LIBS=(
 )
 
 ZPWR_OMZ_COMPS=(
-    ng
-    scala
-    lein
-    spring
-    redis-cli
-    rust
-    fd
+    ng/_ng
+    coffee/_coffee
+    scala/_scala
+    lein/_lein
+    glassfish/_asadmin
+    spring/_spring
+    redis-cli/_redis-cli
+    rust/_rustc
+    fd/_fd
+    github/_hub
+    meteor/_meteor
+    yarn/_yarn
+    golang/_golang
 )
 
 # conditional plugins
@@ -262,12 +268,12 @@ if zpwrCommandExists dotnet; then
 fi
 
 if zpwrCommandExists docker; then
-    ZPWR_OMZ_COMPS+=( docker )
     ZPWR_GH_PLUGINS+=( MenkeTechnologies/zsh-docker-aliases )
 fi
 
 if zpwrCommandExists docker-compose; then
     ZPWR_OMZ_PLUGINS+=( docker-compose )
+    ZPWR_OMZ_COMPS+=( docker-compose/_docker-compose )
 fi
 
 if zpwrCommandExists kubectl;then
@@ -285,7 +291,7 @@ fi
 
 zpwrCommandExists subl && ZPWR_OMZ_PLUGINS+=( sublime )
 zpwrCommandExists svn && ZPWR_OMZ_PLUGINS+=( svn )
-zpwrCommandExists adb && ZPWR_OMZ_COMPS+=( adb )
+zpwrCommandExists adb && ZPWR_OMZ_COMPS+=( adb/_adb )
 
 if [[ $ZPWR_OS_TYPE == linux ]]; then
     zpwrOsDebVsUbuntu \
@@ -294,6 +300,7 @@ if [[ $ZPWR_OS_TYPE == linux ]]; then
         'ZPWR_EXA_EXTENDED=false'
 elif [[ $ZPWR_OS_TYPE == darwin ]]; then
     ZPWR_OMZ_PLUGINS+=( xcode )
+    ZPWR_OMZ_COMPS+=( xcode/_xcselv )
 fi
 
 
@@ -361,8 +368,10 @@ builtin autoload -z $ZPWR_AUTOLOAD_COMMON/*(.:t) $ZPWR_AUTOLOAD_COMP_UTILS/*(.:t
 builtin autoload -Uz zrecompile zmv zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
-    ZPWR_OMZ_PLUGINS+=( brew macos )
-    ZPWR_OMZ_COMPS+=( pod )
+    ZPWR_OMZ_PLUGINS+=( brew )
+    #ZPWR_OMZ_PLUGINS+=( macos )
+    ZPWR_OMZ_COMPS+=( macos/_security )
+    ZPWR_OMZ_COMPS+=( pod/_pod )
 
     # add ZPWR autoload dirs to fpath
     fpath=( $ZPWR_AUTOLOAD_DARWIN "$HOMEBREW_PREFIX/share/zsh/site-functions" $fpath )
@@ -437,8 +446,12 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         local p
 
         for p in $ZPWR_OMZ_COMPS; do
-            zinit ice svn lucid nocompile as'completion' pick'null' wait
+            zinit ice lucid nocompile as'completion' pick'null' wait
             zinit snippet OMZP::$p
+        done
+        # WARNING temporary hack to allow linking OMZ completions into .zinit/completions
+        for p in $ZPWR_OMZ_COMPS; do
+            ln -sfn $ZSH/snippets/OMZP::${p%/*}/${p#*/}/${p#*/} $ZSH/completions/${p#*/}
         done
 
         for p in $ZPWR_OMZ_LIBS; do
@@ -448,12 +461,12 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
         # late
         for p in $ZPWR_OMZ_PLUGINS; do
-            zinit ice svn lucid nocompile wait
+            zinit ice lucid nocompile wait
             zinit snippet OMZP::$p
         done
 
         if zpwrCommandExists rails; then
-            zinit ice svn lucid nocompile nocompletions wait
+            zinit ice lucid nocompile nocompletions wait
             zinit snippet OMZP::rails
         fi
 
