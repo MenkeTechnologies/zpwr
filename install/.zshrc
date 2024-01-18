@@ -369,7 +369,7 @@ builtin autoload -Uz zrecompile zmv zargs compinit
 
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
     ZPWR_OMZ_PLUGINS+=( brew )
-    #ZPWR_OMZ_PLUGINS+=( macos )
+    ZPWR_OMZ_PLUGINS+=( macos )
     ZPWR_OMZ_COMPS+=( macos/_security )
     ZPWR_OMZ_COMPS+=( pod/_pod )
 
@@ -464,6 +464,16 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
             zinit ice lucid nocompile wait
             zinit snippet OMZP::$p
         done
+
+        # WARNING download extra plugin files manually until zinit supports snippets with multiple files
+        if [[ $ZPWR_OS_TYPE == darwin ]]; then
+            local files=(music spotify) f
+            for f in ${files[@]}; do
+                if [[ ! -f "$ZSH/snippets/OMZP::macos/$f" ]]; then
+                    wget -qP "$ZSH/snippets/OMZP::macos" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/macos/$f
+                fi
+            done
+        fi
 
         if zpwrCommandExists rails; then
             zinit ice lucid nocompile nocompletions wait
