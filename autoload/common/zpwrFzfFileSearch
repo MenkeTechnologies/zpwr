@@ -1,5 +1,13 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
+
+function zpwrConvertToRelPath(){
+    while read; do
+        zpwrRelPath $REPLY
+    done
+}
+
+
 function zpwrFzfFileSearch(){
 
     emulate -LR zsh
@@ -10,17 +18,15 @@ function zpwrFzfFileSearch(){
     fi
 
     if zpwrIsGitDir; then
-        top=$(git rev-parse --show-prefix)
-        noslash=${top//[^\/]/}
-        rel=${noslash:gs@/@../@}
+        top=$(git rev-parse --show-toplevel)
         if git check-ignore -q . &>/dev/null; then
-            ${=ZPWR_FD} --no-ignore . $rel 2>/dev/null
+            ${=ZPWR_FD} --no-ignore . $top 2>/dev/null
         else
-            ${=ZPWR_FD} . $rel 2>/dev/null
-        fi
+            ${=ZPWR_FD} . $top 2>/dev/null
+        fi | zpwrConvertToRelPath
     else
         ${=ZPWR_FD} . ./ 2>/dev/null | cut -c3-
-    fi | ${=filter}  |
+    fi | ${=filter} |
         eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" |
         perl -ne 'chomp $_; print "\"$_\" "'
 }
