@@ -19,11 +19,19 @@ function zpwrFzfFileSearch(){
 
     if zpwrIsGitDir; then
         top=$(git rev-parse --show-toplevel)
-        if git check-ignore -q . &>/dev/null; then
-            ${=ZPWR_FD} --no-ignore . $top 2>/dev/null
+        if [[ $PWD == $top ]]; then
+            if git check-ignore -q . &>/dev/null; then
+                ${=ZPWR_FD} --no-ignore . ./ 2>/dev/null
+            else
+                ${=ZPWR_FD} . ./ 2>/dev/null
+            fi
         else
-            ${=ZPWR_FD} . $top 2>/dev/null
-        fi | zpwrConvertToRelPath
+            if git check-ignore -q . &>/dev/null; then
+                ${=ZPWR_FD} --no-ignore . $top 2>/dev/null
+            else
+                ${=ZPWR_FD} . $top 2>/dev/null
+            fi | zpwrConvertToRelPath
+        fi
     else
         ${=ZPWR_FD} . ./ 2>/dev/null | cut -c3-
     fi | ${=filter} |
