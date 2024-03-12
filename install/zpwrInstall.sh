@@ -410,7 +410,7 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         if ! zpwrCommandExists brew; then
             # install homebrew
             zpwrPrettyPrintBox "Installing HomeBrew..."
-            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/zpwrInstall.sh)"
+            /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         fi
 
         if ! zpwrCommandExists brew; then
