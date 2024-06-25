@@ -6,7 +6,7 @@ function zpwrRecompileFpath() {
     setopt nullglob
     setopt extendedglob
 
-    local dir compileFile
+    local dir compileFile origDir
 
     typeset -aU fpathZshFiles fpathFilesToTest
 
@@ -14,6 +14,9 @@ function zpwrRecompileFpath() {
 
 	for dir in $fpath; do
 		if [[ -d $dir ]];then
+            origDir="${dir}"
+            builtin cd "${dir:h}"
+            dir=${dir:t}
             # zcompile all _comps and *.zsh
             #echo (#i)$dir/(*.zsh|_*)(.)
             fpathZshFiles=( (#i)$dir/(*.zsh|_*)(.) (#i)$dir/(*.zsh|_*)(@) )
@@ -33,7 +36,7 @@ function zpwrRecompileFpath() {
             done
 
             if (( $#fpathZshFiles )); then
-                #echo "ZRecompiling known zsh files: ${#fpathZshFiles}"
+                print "Recompiling ${#fpathZshFiles} zsh files in ${origDir}: "
                 if ! zrecompile -p -U $dir.zwc $fpathZshFiles 2>> "$ZPWR_LOGFILE"; then
                     echo ">>> FALLBACK to sudo zsh -c autoload zrecompile; zrecompile -p -U $dir.zwc \$fpathZshFiles"
                     sudo zsh -c "autoload zrecompile; zrecompile -p -U $dir.zwc $fpathZshFiles"
