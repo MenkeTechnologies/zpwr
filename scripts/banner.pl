@@ -2,6 +2,8 @@
 use utf8;
 
 use feature qw/say/;
+binmode(STDOUT, ":encoding(UTF-8)");
+
 
 my $width = 80;
 my $date  = `date`;
