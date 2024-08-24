@@ -36,7 +36,7 @@ function zpwrRecompileFpath() {
             done
 
             if (( $#fpathZshFiles )); then
-                print "Recompiling ${#fpathZshFiles} zsh files in ${origDir}: "
+                print "Found ${#fpathZshFiles} zsh files in ${origDir}: "
                 if ! zrecompile -p -U $dir.zwc $fpathZshFiles 2>> "$ZPWR_LOGFILE"; then
                     echo ">>> FALLBACK to sudo zsh -c autoload zrecompile; zrecompile -p -U $dir.zwc \$fpathZshFiles"
                     sudo zsh -c "autoload zrecompile; zrecompile -p -U $dir.zwc $fpathZshFiles"
