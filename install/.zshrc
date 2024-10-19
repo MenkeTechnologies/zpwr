@@ -255,7 +255,6 @@ ZPWR_OMZ_COMPS=(
     spring/_spring
     redis-cli/_redis-cli
     rust/_rustc
-    fd/_fd
     github/_hub
     meteor/_meteor
     yarn/_yarn
