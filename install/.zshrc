@@ -290,7 +290,6 @@ fi
 
 zpwrCommandExists subl && ZPWR_OMZ_PLUGINS+=( sublime )
 zpwrCommandExists svn && ZPWR_OMZ_PLUGINS+=( svn )
-zpwrCommandExists adb && ZPWR_OMZ_COMPS+=( adb/_adb )
 
 if [[ $ZPWR_OS_TYPE == linux ]]; then
     zpwrOsDebVsUbuntu \
