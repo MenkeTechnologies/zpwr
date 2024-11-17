@@ -236,5 +236,5 @@ unset CDPATH
 # command to run on enter key with empty buffer
 export MAGIC_ENTER_OTHER_COMMAND='zpwrClearList'
 # command to run on enter key with empty buffer and git dir
-export MAGIC_ENTER_GIT_COMMAND='zpwrClearList; test -n "$(git status --porcelain)" && git status -u .'
+export MAGIC_ENTER_GIT_COMMAND='zpwrClearList'
 #}}}***********************************************************
