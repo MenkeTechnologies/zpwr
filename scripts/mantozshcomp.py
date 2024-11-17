@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.10
 # Run me like this: ./create_manpage_completions.py /usr/share/man/man{1,8}/* > _man_completions
 """
 <OWNER> = Siteshwar Vashisht
