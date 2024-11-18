@@ -72,16 +72,16 @@ EOF
 cat<<EOF
 test -z \$file && file=\$(echo {} | sed "s@^~@$HOME@");
 if test -f \$file;then
-    if print -r -- \$file | command egrep -iq "\\.[jw]ar\$";then jar tf \$file | $FZF_COLORIZER_JAVA;
-    elif print -r -- \$file | command egrep -iq "\\.(tgz|tar|tar\\.gz)\$";then tar tf \$file | $FZF_COLORIZER_C;
-    elif print -r -- \$file | command egrep -iq "\\.deb\$";then $deb_cmd | $FZF_COLORIZER_SH;
-    elif print -r -- \$file | command egrep -iq "\\.rpm\$";then $rpm_cmd | $FZF_COLORIZER_SH;
-    elif print -r -- \$file | command egrep -iq "\\.zip\$";then unzip -v -- \$file | $FZF_COLORIZER_C;
-    elif print -r -- \$file | command egrep -iq "\\.(bzip|bz)\$";then bzip -c -d \$file | $FZF_COLORIZER_YAML;
-    elif print -r -- \$file | command egrep -iq "\\.(bzip2|bz2)\$";then bzip2 -c -d \$file | $FZF_COLORIZER_YAML;
-    elif print -r -- \$file | command egrep -iq "\\.(xzip|xz)\$";then xz -c -d \$file | $FZF_COLORIZER_YAML;
-    elif print -r -- \$file | command egrep -iq "\\.(gzip|gz)\$";then gzip -c -d \$file | $FZF_COLORIZER_YAML;
-    elif print -r -- \$file | command egrep -iq "\\.(so|dylib).*\$";then
+    if print -r -- \$file | command grep -E -iq "\\.[jw]ar\$";then jar tf \$file | $FZF_COLORIZER_JAVA;
+    elif print -r -- \$file | command grep -E -iq "\\.(tgz|tar|tar\\.gz)\$";then tar tf \$file | $FZF_COLORIZER_C;
+    elif print -r -- \$file | command grep -E -iq "\\.deb\$";then $deb_cmd | $FZF_COLORIZER_SH;
+    elif print -r -- \$file | command grep -E -iq "\\.rpm\$";then $rpm_cmd | $FZF_COLORIZER_SH;
+    elif print -r -- \$file | command grep -E -iq "\\.zip\$";then unzip -v -- \$file | $FZF_COLORIZER_C;
+    elif print -r -- \$file | command grep -E -iq "\\.(bzip|bz)\$";then bzip -c -d \$file | $FZF_COLORIZER_YAML;
+    elif print -r -- \$file | command grep -E -iq "\\.(bzip2|bz2)\$";then bzip2 -c -d \$file | $FZF_COLORIZER_YAML;
+    elif print -r -- \$file | command grep -E -iq "\\.(xzip|xz)\$";then xz -c -d \$file | $FZF_COLORIZER_YAML;
+    elif print -r -- \$file | command grep -E -iq "\\.(gzip|gz)\$";then gzip -c -d \$file | $FZF_COLORIZER_YAML;
+    elif print -r -- \$file | command grep -E -iq "\\.(so|dylib).*\$";then
         $ZPWR_FZF_CLEARLIST
         $nmcmd \$file | $FZF_COLORIZER_YAML
         xxd \$file | $FZF_COLORIZER_YAML

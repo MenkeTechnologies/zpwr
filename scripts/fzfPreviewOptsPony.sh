@@ -25,10 +25,10 @@ else
     else
         source $ZPWR_ALIAS_FILE
         {
-            if print -r -- {} | command egrep "\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d"; then
-                whois -- {} | command egrep -q "No (match|whois)" && dig {} || whois -- {};
+            if print -r -- {} | command grep -E "\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d\\.\\d\\d\\d"; then
+                whois -- {} | command grep -E -q "No (match|whois)" && dig {} || whois -- {};
             else
-                cat $ZPWR_LOCAL/.common_aliases | grep -- {}= || set | command grep -a -- {} | command grep -v -- ZSH_EXEC || alias | command grep -a -- {} || { whois -- {} | command egrep -q "No (match|whois)" && dig {} || whois -- {}; }
+                cat $ZPWR_LOCAL/.common_aliases | grep -- {}= || set | command grep -a -- {} | command grep -v -- ZSH_EXEC || alias | command grep -a -- {} || { whois -- {} | command grep -E -q "No (match|whois)" && dig {} || whois -- {}; }
             fi
         } | cowsay | ponysay
     fi
