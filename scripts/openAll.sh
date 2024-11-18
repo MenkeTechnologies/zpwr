@@ -62,7 +62,7 @@ fileString=""
 for file; do
     #transform filename extension arguments to lowercase
     file="$(echo $file | tr '[:upper:]' '[:lower:]')"
-    #build up string for egrep
+    #build up string for grep -E
     fileString+=$file"|"
     #add extension to array
     fileExtensions+=($file)
@@ -98,7 +98,7 @@ while read line; do
 
     fi
     #find all files in pwd that have the fileExtensions in their names, remove last pipe from fileString
-done < <(find "$dir_to_search" -type f | egrep -i "${fileString%|}")
+done < <(find "$dir_to_search" -type f | grep -E -i "${fileString%|}")
 
 killCursor
 

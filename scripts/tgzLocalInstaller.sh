@@ -85,7 +85,7 @@ tarbellDirectory="$1"
 if [[ -z "$tarbellDirectory" ]]; then
     if [[ ! -f "configure" ]]; then
         for file in $(\ls -A); do
-            echo "$file" | egrep -q '\.tar\.gz|\.tgz' && echo "huere" && install "$file" && break
+            echo "$file" | grep -E -q '\.tar\.gz|\.tgz' && echo "huere" && install "$file" && break
         done
         "$SHELL"
     else
