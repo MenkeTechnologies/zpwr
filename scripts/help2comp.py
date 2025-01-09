@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: UTF-8 -*-
 
 # Parse getopt-style help texts for options
@@ -43,7 +43,7 @@ def cut_option(line):
     if len(opt) > 0:
         newline = line.replace(opt[0], "", 1).strip(STRIP_CHARS)
         # return without parameter
-        return newline, re.split('[ [=]', opt[0], 1)[0]
+        return newline, re.split(r'[ [=]', opt[0], 1)[0]
     else:
         return newline, None
 
@@ -84,8 +84,8 @@ def _escape(line):
     """
     Escape the syntax-breaking characters.
     """
-    line = line.replace('[', r'\[').replace(']', r'\]')
-    line = re.sub('\'', '', line)  # ' is unescapable afaik
+    line = line.replace(r'[', r'\[').replace(r']', r'\]')
+    line = re.sub(r'\'', '', line)  # ' is unescapable afaik
     return line
 
 
