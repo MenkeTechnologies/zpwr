@@ -193,7 +193,7 @@ EOF
 # 17) zsh
 #etc
 
-dependencies_ary=(subversion openssl moreutils cmake tig hexedit boxes tal iperf vim tmux chkrootkit wget cowsay cmatrix htop bpython sl mutt \
+dependencies_ary=(subversion openssl moreutils cmake tig hexedit boxes tal iperf vim tmux wget cowsay cmatrix htop bpython sl mutt \
     screenfetch ccze htop figlet zsh docker.io docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb postgresql jnettop iotop fping ctags texinfo lsof \
@@ -780,6 +780,8 @@ if [[ $justConfig != true ]]; then
             zpwrInstallerUpdate logwatch "$ZPWR_DISTRO_FAMILY"
             zpwrPrettyPrintBox "Installing postfix"
             zpwrInstallerUpdate postfix "$ZPWR_DISTRO_FAMILY"
+            zpwrPrettyPrintBox "Installing chkrootkit"
+            zpwrInstallerUpdate chkrootkit "$ZPWR_DISTRO_FAMILY"
         fi
 
         zpwrPrettyPrintBox "Installing wireshark"
