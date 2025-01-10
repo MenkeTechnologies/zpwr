@@ -193,7 +193,7 @@ EOF
 # 17) zsh
 #etc
 
-dependencies_ary=(subversion openssl moreutils cmake tig hexedit boxes tal iperf vim tmux wget cowsay cmatrix htop bpython sl mutt \
+dependencies_ary=(subversion openssl grc moreutils cmake tig hexedit boxes tal iperf vim tmux wget cowsay cmatrix htop bpython sl mutt \
     screenfetch ccze htop figlet zsh docker.io docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
     mongodb jnettop iotop fping ctags texinfo lsof \
@@ -215,7 +215,7 @@ addDependenciesSuse(){
     dependencies_ary=(python3-devel llvm-devel openssl-devel go ${dependencies_ary[@]})
     dependencies_ary+=(man gcc-c++ makeinfo autoconf openldap2-devel mariadb postgresql-server libcurl-devel net-snmp-devel \
         mysql-devel libevent-devel postgresql-devel fortune ruby-devel net-tools-deprecated \
-        python3-pip curl libffi-devel grc libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel)
+        python3-pip curl libffi-devel libpcap-devel the_silver_searcher kernel-devel gcc libxml2-devel libxslt-devel)
     }
 
 addDependenciesAlpine(){
@@ -228,7 +228,7 @@ addDependenciesDebian(){
         ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
         libxpm-dev libxt-dev \
         libperl-dev libpq-dev libpcap-dev fortunes ruby-dev \
-        libffi-dev libssl-dev grc automake whatweb)
+        libffi-dev libssl-dev automake whatweb)
 
     }
 
