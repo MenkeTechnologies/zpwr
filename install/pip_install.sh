@@ -26,7 +26,7 @@ function pipInstallerCommonCmd() {
 if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         python3 -m pip install --upgrade --break-system-packages --user $1
     else
-        sudo -EH python3 -m pip install --upgrade $1
+        python3 -m pip install --upgrade --break-system-packages --user $1
     fi
 }
 
