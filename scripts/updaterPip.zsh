@@ -32,4 +32,3 @@ fi
 
 
 zpwrUpdatePip "python3" "pip3" "false"
-zpwrUpdatePip "python2" "pip2" "false"

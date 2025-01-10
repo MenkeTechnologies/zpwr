@@ -89,7 +89,6 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     export HOMEBREW_OPT_HOME="$HOMEBREW_PREFIX/opt"
     export HOMEBREW_DBHOME="$HOMEBREW_PREFIX/var"
     export HOMEBREW_DB_CONF="$HOMEBREW_PREFIX/etc"
-    export PIP3_HOME="$HOMEBREW_PREFIX/lib/$ZPWR_PYTHON/site-packages"
     export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
     export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
     export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
@@ -105,7 +104,6 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         fi
     fi
 else
-    export PIP3_HOME="/usr/local/lib/$ZPWR_PYTHON/site-packages"
     if [[ "$ZPWR_EDITOR_TO_VIM" == true ]]; then
         if zpwrCommandExists nvim; then
             export EDITOR="$ZPWR_VIM"

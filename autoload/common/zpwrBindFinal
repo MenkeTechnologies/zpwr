@@ -63,8 +63,16 @@ function zpwrBindFinal(){
     fi
 
     if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
-        for p in $HOME/Library/Python/*/bin(N); do
-            export PATH="$PATH:$p"
+        for p in $HOME/Library/Python/*(N); do
+            export PATH="$p/bin:$PATH"
+            export PIP3_HOME="$p/lib/python/site-packages"
+            break
+        done
+        unset p
+    else
+        for p in $HOME/.local/lib/python*(N); do
+            export PIP3_HOME="$p/site-packages"
+            break
         done
         unset p
     fi
