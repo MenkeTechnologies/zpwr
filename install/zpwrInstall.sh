@@ -196,7 +196,7 @@ EOF
 dependencies_ary=(subversion openssl moreutils cmake tig hexedit boxes tal iperf vim tmux wget cowsay cmatrix htop bpython sl mutt \
     screenfetch ccze htop figlet zsh docker.io docker erlang elixir links \
     rlwrap tor nvm nginx nmap mtr mytop tcpdump redis toilet mysql \
-    mongodb postgresql jnettop iotop fping ctags texinfo lsof \
+    mongodb jnettop iotop fping ctags texinfo lsof \
     whois weechat gradle ant maven telnet tree mc ocaml groovy slurm \
     bmon ruby parallel pssh shfmt global)
 
@@ -778,14 +778,19 @@ if [[ $justConfig != true ]]; then
             zpwrInstallerUpdate snort "$ZPWR_DISTRO_FAMILY"
             zpwrPrettyPrintBox "Installing logwatch"
             zpwrInstallerUpdate logwatch "$ZPWR_DISTRO_FAMILY"
-            zpwrPrettyPrintBox "Installing postfix"
-            zpwrInstallerUpdate postfix "$ZPWR_DISTRO_FAMILY"
-            zpwrPrettyPrintBox "Installing chkrootkit"
-            zpwrInstallerUpdate chkrootkit "$ZPWR_DISTRO_FAMILY"
         fi
+        zpwrPrettyPrintBox "Installing postfix"
+        zpwrInstallerUpdate postfix "$ZPWR_DISTRO_FAMILY"
+
+        zpwrPrettyPrintBox "Installing chkrootkit"
+        zpwrInstallerUpdate chkrootkit "$ZPWR_DISTRO_FAMILY"
+
+        zpwrPrettyPrintBox "Installing postgresql"
+        zpwrInstallerUpdate postgresql "$ZPWR_DISTRO_FAMILY"
 
         zpwrPrettyPrintBox "Installing wireshark"
         zpwrInstallerUpdate wireshark "$ZPWR_DISTRO_FAMILY"
+
         zpwrPrettyPrintBox "Installing mailutils"
         zpwrInstallerUpdate mailutils "$ZPWR_DISTRO_FAMILY"
     fi
