@@ -549,8 +549,6 @@ export ZPWR_OPTS=
 export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework
 export ZPWR_PLUGIN_MANAGER=zinit
-# global python version
-export ZPWR_PYTHON='python3.10'
 # uses the zprof function to profile startup
 export ZPWR_PROFILING=false
 # set to POWERLEVEL to use the powerlevel10k prompt

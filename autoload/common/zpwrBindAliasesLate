@@ -69,8 +69,8 @@ function zpwrBindAliasesLate(){
         alias hk='heroku'
     fi
 
+
     test -d "$ZPWR_PYSCRIPTS" && alias py="zpwrCd $ZPWR_PYSCRIPTS"
-    alias p2="python2"
     alias p3="python3"
 
     zpwrExists fc && alias please="$ZPWR_FULL_SUDO \$(fc -ln -1)"
@@ -149,6 +149,8 @@ function zpwrBindAliasesLate(){
         alias jcfc='"builtin" command sudo -E env PATH="$PATH" journalctl -n 100 -f | ccze'
     fi
     #alias df='grc --colour=on -c "$HOME/conf.df" df'
+    alias pip="'builtin' 'noglob' 'command' 'python3' -m pip" # allows square brackets for pip command invocation
+    alias pin="'builtin' 'noglob' 'command' 'python3' -m pip install --user --break-system-packages"
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         # Darwin/macOS specific aliases
