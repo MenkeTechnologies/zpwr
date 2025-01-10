@@ -459,8 +459,6 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
             zpwrInstallerUpgrade mac
         fi
 
-        zpwrPrettyPrintBox "Tapping Homebrew fonts"
-        brew tap homebrew/cask-fonts
         zpwrPrettyPrintBox "Installing hack nerd font"
         brew install --cask font-hack-nerd-font
 
