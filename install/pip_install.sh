@@ -22,78 +22,79 @@ if [[ ! -f "$HOME/.gdbinit" ]]; then
     wget -P ~ https://git.io/.gdbinit
 fi
 
+function pipInstallerCommonCmd() {
+if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
+        python3 -m pip install --upgrade --break-system-packages --user $1
+    else
+        sudo -EH python3 -m pip install --upgrade $1
+    fi
+}
+
 function pipInstallerCommon() {
 
-    zpwrPrettyPrintBox "Ensure pip"
-    sudo -EH python3 -m ensurepip
-
-
     zpwrPrettyPrintBox "Upgrading pip"
-    sudo -EH python3 -m pip install --upgrade pip
+    pipInstallerCommonCmd '--upgrade pip'
 
     zpwrPrettyPrintBox "Installing psutil for Python Glances"
-    sudo -EH python3 -m pip install psutil
+    pipInstallerCommonCmd psutil
 
     zpwrPrettyPrintBox "Installing setuptools"
-    sudo -EH python3 -m pip install setuptools
+    pipInstallerCommonCmd setuptools
 
     zpwrPrettyPrintBox "Installing Python Glances"
-    sudo -EH python3 -m pip install glances
+    pipInstallerCommonCmd glances
 
     zpwrPrettyPrintBox "Installing Virtualenv"
-    sudo -EH python3 -m pip install virtualenv
+    pipInstallerCommonCmd virtualenv
 
     zpwrPrettyPrintBox "Installing Powerline..."
-    sudo -EH python3 -m pip install powerline-status
-
-    zpwrPrettyPrintBox "Installing Powerline Mem Segment..."
-    sudo -EH python3 -m pip install powerline-mem-segment
+    pipInstallerCommonCmd powerline-status
 
     zpwrPrettyPrintBox "Installing Tmux Powerline"
     tmuxPowerlineDir="$HOME/.config/powerline/themes/tmux"
     [[ ! -d "$tmuxPowerlineDir" ]] && mkdir -p "$tmuxPowerlineDir"
 
     zpwrPrettyPrintBox "Installing Powerline Mem Segment..."
-    sudo -EH python3 -m pip install powerline-mem-segment
+    pipInstallerCommonCmd powerline-mem-segment
 
     zpwrPrettyPrintBox "Installing PyDf"
-    sudo -EH python3 -m pip install pydf
+    pipInstallerCommonCmd pydf
 
     zpwrPrettyPrintBox "Installing neovim python lib"
-    sudo -EH python3 -m pip install pynvim
+    pipInstallerCommonCmd pynvim
 
     zpwrPrettyPrintBox "Installing neovim remote"
-    sudo -EH python3 -m pip install neovim-remote
+    pipInstallerCommonCmd neovim-remote
 
     zpwrPrettyPrintBox "Installing MyCLI"
-    sudo -EH python3 -m pip install mycli
+    pipInstallerCommonCmd mycli
 
     zpwrPrettyPrintBox "Installing Speedtest"
-    sudo -EH python3 -m pip install speedtest-cli
+    pipInstallerCommonCmd speedtest-cli
 
     zpwrPrettyPrintBox "Installing PGCLI"
-    sudo -EH python3 -m pip install pgcli
+    pipInstallerCommonCmd pgcli
 
     zpwrExists youtube_dl || {
 
         zpwrPrettyPrintBox "Installing youtube-dl"
-        sudo -EH python3 -m pip install --upgrade youtube_dl
+        pipInstallerCommonCmd youtube-dl
     }
 
     zpwrPrettyPrintBox "Installing bpython for python3"
-    sudo -EH python3 -m pip install bpython
+    pipInstallerCommonCmd bpython
 
     zpwrPrettyPrintBox "Installing httpie for python3"
-    sudo -EH python3 -m pip install httpie
+    pipInstallerCommonCmd httpie
 
     zpwrPrettyPrintBox "Installing pygments for python3"
-    sudo -EH python3 -m pip install pygments
+    pipInstallerCommonCmd pygments
 
     zpwrPrettyPrintBox "Installing yapf"
-    sudo -EH python3 -m pip install yapf
+    pipInstallerCommonCmd yapf
 
     zpwrPrettyPrintBox "Installing vim-vint"
-    sudo -EH python3 -m pip install vim-vint
+    pipInstallerCommonCmd vim-vint
 
 }
 
@@ -102,6 +103,9 @@ if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
     pipInstallerCommon
 
 elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
+
+    zpwrPrettyPrintBox "Ensure pip"
+    sudo -EH python3 -m ensurepip --user
 
     if [[ -z $ZPWR_DISTRO_NAME ]]; then
 
