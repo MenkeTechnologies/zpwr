@@ -53,27 +53,23 @@ if zpwrIsZsh; then
 
             zpwrPrettyPrint "Updating $cmd packages"
 
-            installDir=$(${=cmd} -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')
+            installDir="$PIP3_HOME"
 
-            if [[ $forceSudo == true || ! -w "$installDir" ]]; then
-                needSudoBase=true
-            else
-                needSudoBase=false
-            fi
+            needSudoBase=false
 
             zpwrPrettyPrint "Outdated $packageManager list with sudo needed: $needSudoBase"
 
             if [[ "$needSudoBase" == true ]]; then
-                outdated=$(sudo -EH ${=cmd} -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+                outdated=$(sudo -EH ${=cmd} -m pip list --user --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
             else
-                outdated=$(${=cmd} -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
+                outdated=$(${=cmd} -m pip list --user --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')
             fi
 
             for package in "${(@f)outdated}"; do
 
                 zpwrValidatePipPackage "$package" || continue
 
-                installDir=$(${=cmd} -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"
+                installDir="$PIP3_HOME/$package"
 
                 if [[ $forceSudo == true || ! -w "$installDir" ]]; then
                     zpwrNeedSudo=true
@@ -84,9 +80,9 @@ if zpwrIsZsh; then
                 zpwrPrettyPrint "sudo needed: $zpwrNeedSudo for $package at $installDir"
 
                 if [[ "$zpwrNeedSudo" == true ]]; then
-                    sudo -EH ${=cmd} -m pip install --upgrade --ignore-installed -- "$package"
+                    sudo -EH ${=cmd} -m pip install --break-system-packages --user --upgrade --ignore-installed -- "$package"
                 else
-                    ${=cmd} -m pip install --upgrade --ignore-installed -- "$package"
+                    ${=cmd} -m pip install --break-system-packages --user --upgrade --ignore-installed -- "$package"
                 fi
 
             done
@@ -94,9 +90,9 @@ if zpwrIsZsh; then
             zpwrPrettyPrint "Updating $packageManager with sudo needed: $needSudoBase"
 
             if [[ "$needSudoBase" == true ]]; then
-                sudo -EH ${=cmd} -m pip install --upgrade pip setuptools wheel
+                sudo -EH ${=cmd} -m pip install --break-system-packages --user --upgrade pip setuptools wheel
             else
-                ${=cmd} -m pip install --upgrade pip setuptools wheel
+                ${=cmd} -m pip install --break-system-packages --user --upgrade pip setuptools wheel
             fi
 
         }
