@@ -3,6 +3,8 @@
 
 function zpwrBindFinal(){
 
+    emulate -L zsh
+
     #{{{                    MARK:OPAM env
     #**************************************************************
     test -f "$HOME/.opam/opam-init/init.zsh" &&
@@ -58,6 +60,13 @@ function zpwrBindFinal(){
 
     if [[ -d "$HOMEBREW_PREFIX/bin" ]]; then
         export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+    fi
+
+    if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
+        for p in $HOME/Library/Python/*/bin(N); do
+            export PATH="$PATH:$p"
+        done
+        unset p
     fi
 
     builtin export SHELL="$(which zsh)"
