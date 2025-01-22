@@ -204,11 +204,11 @@ addDependenciesLinux(){
     dependencies_ary=(neovim pkg-config libclang1 clang llvm ${dependencies_ary[@]})
     dependencies_ary+=(python3-pip inxi build-essential traceroute proxychains atop tcl mlocate php-bcmath php-mysql php-sockets \
         php-mbstring php-gettext nmon clamav gparted sysstat git reptyr iptraf dstat ecryptfs-utils at netatalk dnsutils ltrace zabbix-agent \
-        lua5.1 lua5.1-dev rl-dev software-properties-common afpfs-ng \
+        lua5.1 lua5.1-dev rl-dev software-properties-common afpfs-ng net-tools \
         samba samba-common scrot syslog-ng sshfs fuse tomcat8 golang xclip strace)
     }
 addDependenciesArch(){
-    dependencies_ary+=(cronie ncurses npm autoconf make the_silver_searcher go linux-headers net-tools)
+    dependencies_ary+=(cronie ncurses npm autoconf make the_silver_searcher go linux-headers )
 }
 
 addDependenciesSuse(){
@@ -224,7 +224,7 @@ addDependenciesAlpine(){
 
 addDependenciesDebian(){
     dependencies_ary=(python3-dev libssl-dev ${dependencies_ary[@]})
-    dependencies_ary+=(mysql-server mariadb-server gcc bc lib-gnome2-dev silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    dependencies_ary+=(mysql-server mariadb-server gcc bc lib-gnome2-dev iftop silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
         ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
         libxpm-dev libxt-dev \
         libperl-dev libpq-dev libpcap-dev fortunes ruby-dev \
