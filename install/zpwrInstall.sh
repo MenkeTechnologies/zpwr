@@ -859,20 +859,12 @@ fi
 #**************************************************************
 zpwrGoInstallerDir
 
-zpwrPrettyPrintBox "Generating $ZPWR_INSTALLER_OUTPUT/zpwr_log.txt with $ESCAPE_REMOVER from $LOGFILE"
-"$ESCAPE_REMOVER" "$LOGFILE" > "$ZPWR_INSTALLER_OUTPUT/zpwr_log.txt"
 
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
     zpwrPrettyPrintBox "Waiting for cargo installer to finish"
     wait $CARGO_PID
     wait $YCM_PID
     wait $PLUGIN_PID
-fi
-
-if [[ $justConfig != true ]] && [[ $skip != true ]]; then
-    zpwrPrettyPrintBox "Done!!!!!!"
-    zpwrPrettyPrintBox "Starting Tmux..."
-    zpwrPrettyPrintBox "Starting the matrix"
 fi
 
 # must have zsh at this point
@@ -902,11 +894,16 @@ else
     fi
 fi
 
+zpwrPrettyPrintBox "Generating $ZPWR_INSTALLER_OUTPUT/zpwr_log.txt with $ESCAPE_REMOVER from $LOGFILE"
+"$ESCAPE_REMOVER" "$LOGFILE" > "$ZPWR_INSTALLER_OUTPUT/zpwr_log.txt"
 #}}}***********************************************************
 
 #{{{                    MARK:start tmux
 #**************************************************************
 if [[ $justConfig != true ]] && [[ $skip != true ]]; then
+    zpwrPrettyPrintBox "Done!!!!!!"
+    zpwrPrettyPrintBox "Starting Tmux..."
+    zpwrPrettyPrintBox "Starting the matrix"
     if [[ $noTmux != true ]];then
         zpwrGoInstallerDir
         source "startMux.sh"
