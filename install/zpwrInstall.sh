@@ -741,7 +741,7 @@ if [[ $justConfig != true ]]; then
     fi
 
     if [[ $ZPWR_OS_TYPE == darwin ]]; then
-        zpwrPrettyPrintBox "Try again for ponysay and lolcat on mac"
+        zpwrPrettyPrintBox "Try again for ponysay on mac"
         zpwrCommandExists ponysay || brew install ponysay
     fi
 
@@ -752,11 +752,13 @@ if [[ $justConfig != true ]]; then
         GRC_DIR=/usr/share/grc
     fi
 
-    zpwrGoInstallerOutputDir
 
-    zpwrPrettyPrintBox "Installing ponysay from source"
-    git clone https://github.com/erkin/ponysay.git && {
-        builtin cd ponysay && sudo ./setup.py --freedom=partial install
+    zpwrCommandExists ponysay || {
+        zpwrGoInstallerOutputDir
+        zpwrPrettyPrintBox "Installing ponysay from source"
+        git clone https://github.com/erkin/ponysay.git && {
+            builtin cd ponysay && sudo ./setup.py --freedom=partial install
+        }
     }
 
     zpwrPrettyPrintBox "Installing Go deps"
