@@ -23,7 +23,7 @@ function _zpwr(){
   local curcontext=$curcontext state line ret=0
 
   arguments=(
-        '(- * :)'{-h,--help}'[show help message and exit]'
+        '(- * :)'{-h,-\?,--help}'[show help message and exit]'
         '(- * :)'{-V,--version}'[show zpwr version and exit]'
         '1:zpwr subcommand:->verb'
         '*:: :->args'

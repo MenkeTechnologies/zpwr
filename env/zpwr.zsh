@@ -411,7 +411,7 @@ ZPWR_VARS[VERB_0]="$0"
             return 0
         fi
 
-        if [[ $verb =~ '-h|--help' ]]; then
+        if [[ $verb =~ '-h|-\?|--help' ]]; then
             zpwrListVerbs | less
             return 0
         fi
