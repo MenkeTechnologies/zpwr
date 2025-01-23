@@ -676,8 +676,8 @@ zpwrOsAllVsFedora \
     zpwrNeedSudo=no
 
 zpwrPrettyPrintBox "Installing Iftop config..."
-ip=$(ifconfig | grep "inet\s" | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
-iface=$(ifconfig | grep -B3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
+ip=$(command ifconfig | grep -E 'inet\s' | grep -v 127 | awk '{print $2}' | sed 's@addr:@@')
+iface=$(command ifconfig | grep -EB3 "inet .*$ip" | grep '^[a-zA-Z0-9].*' | awk '{print $1}' | tr -d ":")
 
 if [[ -n "$iface" ]]; then
     echo "IPv4: $ip and interface: $iface"
