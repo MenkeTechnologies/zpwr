@@ -121,13 +121,6 @@ elif [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 
     fi
 
-    if [[ "$ZPWR_DISTRO_FAMILY" == redhat ]]; then
-
-        zpwrGoInstallerOutputDir
-        zpwrPrettyPrintBox "Installing grc for RedHat"
-        git clone https://github.com/garabik/grc.git && builtin cd grc && sudo bash install.sh
-    fi
-
     if [[ "$ZPWR_DISTRO_NAME" == centos ]]; then
 
         sudo yum install -y python36
