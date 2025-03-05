@@ -211,6 +211,7 @@ ZPWR_GH_PLUGINS=(
 
 ZPWR_OMZ_PLUGINS=(
     rust
+    gcloud
     ruby
     rake
     yarn
