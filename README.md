@@ -91,7 +91,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 410+ zpwr subcommands covering most of ZPWR functionality with colorized zsh menucompletion `zpwr <tab>`
 - 175+ centralized environment variables in ZPWR namespace to control functionality
 - 775+ centralized ZPWR files in `~/.zpwr` allowing easy uninstall
-- 14k+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
+- 14k.1+ zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions)
 - 175+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)

@@ -30,6 +30,7 @@ function zpwrEnvCounts(){
     echo "ZPWR scripts: $(zpwrScriptCount)"
     echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
     echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
+    echo "ZPWR files count: ${#${(@f)$(zpwrListFiles | perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}')}}"
 }
 
 zpwrEnvCounts "$@"
