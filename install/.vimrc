@@ -94,12 +94,8 @@ set grepprg=ag\ --nogroup\ --column\ $*
 " file:line:column:match
 set grepformat=%f:%l:%c:%m
 
-" visual selection automatically into system clipboard
-set guioptions+=a
 " font sizee 14 for Hack Nerd Font (powerine symbols)
 set guifont=Hack\ Nerd\ Font:h14
-" start browsing in current dir
-set browsedir=current
 " reduce enter key after message alerts
 set shortmess=aIcFT
 
@@ -117,11 +113,6 @@ set showcmd
 
 set completeopt=longest,noinsert,noselect,menuone
 set omnifunc=zsh_completion#Complete
-
-if ! has('nvim')
-    " visual mode automatically copies to system clipboard
-    set clipboard=autoselect
-endif
 
 " show trailing spaces and tabs
 set list listchars=tab:\ \ ,trail:·
@@ -934,7 +925,6 @@ augroup end
 
 "{{{                    MARK:Remaps
 "**************************************************************
-set pastetoggle=<F9>
 
 function! TmuxRun(...)
     let str = join(a:000, ' ')
@@ -1606,9 +1596,6 @@ elseif os == 'Linux'
     endif
 
 endif
-if ! has('nvim')
-    set runtimepath+=~/.tmux/powerline/bindings/vim/
-endif
 
 " gf and :find will find files automatically in these locations
 set path+=~/Desktop
@@ -1688,6 +1675,14 @@ if ! has('nvim')
     set ttymouse=xterm2
     set ballooneval
     set balloonevalterm
+    set pastetoggle=<F9>
+    set runtimepath+=~/.tmux/powerline/bindings/vim/
+    " visual mode automatically copies to system clipboard
+    set clipboard=autoselect
+    " visual selection automatically into system clipboard
+    set guioptions+=a
+    " start browsing in current dir
+    set browsedir=current
 endif
 
 let g:ale_linters = {'perl': ['perl', 'perlcritic']}
