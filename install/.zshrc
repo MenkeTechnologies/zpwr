@@ -276,6 +276,10 @@ if zpwrCommandExists docker-compose; then
     ZPWR_OMZ_COMPS+=( docker-compose/_docker-compose )
 fi
 
+if zpwrCommandExists ngrok; then
+    ZPWR_OMZ_PLUGINS+=( ngrok)
+fi
+
 if zpwrCommandExists kubectl;then
     ZPWR_GH_PLUGINS+=( MenkeTechnologies/kubectl-aliases nnao45/zsh-kubectl-completion )
 fi
