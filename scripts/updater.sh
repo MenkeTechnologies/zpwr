@@ -129,6 +129,11 @@ if [[ $skip != true ]]; then
         yes | gem cleanup
     }
 
+    zpwrCommandExists opam && {
+        opam update -y
+        opam upgrade -y
+    }
+
     zpwrCommandExists brew && {
         zpwrPrettyPrint "Updating Homebrew Packages"
         brew update  #&> /dev/null
