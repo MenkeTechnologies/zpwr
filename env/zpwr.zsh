@@ -384,6 +384,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[zcd]='zpwrFzfZListVerb=list then cd to z frecency ranked dir'
     ZPWR_VERBS[z]='z=cd to z frecency ranked dir'
     ZPWR_VERBS[zcompdump]='zpwrZcompdump=edit zcompdump'
+    ZPWR_VERBS[zshsearch]='zpwrFzfZshKeybind=search zsh keybindings'
 
     if zpwrCommandExists systemctl; then
         ZPWR_VERBS[restart]='restart=restart zpwr systemd service'
