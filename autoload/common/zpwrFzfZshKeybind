@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFzfZshKeybind(){
+
+    if [[ ! -s "$ZPWR_ALL_KEYBINDINGS" ]]; then
+        zpwrLogDebug "regenerating $ZPWR_ALL_KEYBINDINGS"
+        zpwrRegenAllKeybindingsCache
+    fi
+    cat "$ZPWR_ALL_KEYBINDINGS" | command grep bindkey | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:5:wrap" __fzf_comprun -m
+}
+
+zpwrFzfZshKeybind "$@"
