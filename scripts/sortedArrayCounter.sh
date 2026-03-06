@@ -17,7 +17,7 @@ arr=()
 for i in $PATH; do
     ls $i &>/dev/null
     if [[ $? == 0 ]]; then
-        let "sum += $(ls $i | wc -w)"
+        (( sum += "$(ls $i | wc -w)" ))
 
         IFS="$oldifs"
         for i in $(ls $i); do

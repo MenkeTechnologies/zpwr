@@ -105,7 +105,7 @@ for i in "$@"; do
         dd if=/dev/zero of="$file" bs=$blocksize count=$flength
         # Fill with zeros.
         sync # Flush buffers yet again.
-        let "pass_count += 1"
+        (( ++pass_count ))
         echo
     done
 

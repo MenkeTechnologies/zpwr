@@ -10,7 +10,7 @@ function color (){
 function extend (){
 
     local str="$1"
-    let spaces=60-${#1}
+    (( spaces = 60 - ${#1} ))
     while (( spaces > 0 )); do
         str="$str "
         (( --spaces ))
