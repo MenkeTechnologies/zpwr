@@ -18,7 +18,7 @@ if [[ ! -d $ZPWR_INSTALLER_OUTPUT ]]; then
     mkdir -p $ZPWR_INSTALLER_OUTPUT
 fi
 
-NODE_VERSION="18"
+NODE_VERSION="22"
 
 zpwrGoInstallerOutputDir
 
