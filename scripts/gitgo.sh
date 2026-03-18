@@ -171,7 +171,7 @@ function commitTheDirectory() {
     myPrettyPrint "Commiting to $origin with message $commitMessage"
     git add .
     git commit -m "$commitMessage"
-    git push "$origin" master || {
+    git push "$origin" main || {
         #if error then need to establish remote repository
         local REPO_NAME="$(git remote -v | awk '{print $2}' | tail -1 | tr -d ' ')"
         getRemoteDetails "${REPO_NAME##*/}"

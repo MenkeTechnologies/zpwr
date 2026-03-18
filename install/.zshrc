@@ -473,7 +473,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
             local files=(music spotify) f
             for f in ${files[@]}; do
                 if [[ ! -f "$ZSH/snippets/OMZP::macos/$f" ]]; then
-                    wget -qP "$ZSH/snippets/OMZP::macos" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/plugins/macos/$f
+                    wget -qP "$ZSH/snippets/OMZP::macos" https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/main/plugins/macos/$f
                 fi
             done
         fi

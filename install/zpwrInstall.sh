@@ -824,7 +824,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
 elif [[ "$ZPWR_PLUGIN_MANAGER" == oh-my-zsh ]]; then
     zpwrPrettyPrintBox "Installing OhMyZsh"
-    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/zpwrInstall.sh)"
+    sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/main/tools/zpwrInstall.sh)"
     zpwrPrettyPrintBox "Installing fzf"
     "$ZPWR_PLUGIN_MANAGER_HOME/custom/plugins/fzf/install" --bin
 
