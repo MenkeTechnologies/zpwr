@@ -12,7 +12,7 @@ function zpwrPoll() {
 
     cmd="git log --stat --format=fuller -1"
     sleepTime="1"
-    ref="origin/master"
+    ref="origin/main"
     remoteName=origin
 
     if [[ -n "$1" ]]; then

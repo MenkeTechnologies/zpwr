@@ -52,7 +52,7 @@ function zpwrBindZstyle(){
 
     zstyle ':completion:*' cache-policy zpwrMonthlyCachingPolicy
     zstyle ':completion:*:(fasd|fasd-file|zdir)' cache-policy zpwrDailyCachingPolicy
-    zstyle ':completion:*:*:(f|z|zshz|zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' cache-policy zpwrDailyCachingPolicy
+    zstyle ':completion:*:*:(f|z|zshz|zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmain|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' cache-policy zpwrDailyCachingPolicy
     zstyle ':completion:daily-cache:*' cache-policy zpwrDailyCachingPolicy
 
     # separate files and dirs in _files completion
@@ -363,14 +363,14 @@ function zpwrBindZstyle(){
     #**************************************************************
     #not working for zpwr subcommands
     zstyle ":completion:*:*:zpwr-gitedittag:*:*:commit-tags" sort off
-    zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg|z|zs):*:*' group-order options argument-rest globbed-files fasd-file fasd zdir files last-ten
+    zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmain|zpwr-gitzfordirdevelop|zm|zd|zg|z|zs):*:*' group-order options argument-rest globbed-files fasd-file fasd zdir files last-ten
 
     zstyle ':completion::megacomplete:zpwr-gitedittag::commit-tags' sort off
 
     #working
     zstyle ":completion:*:*:*:*:*:zdir" sort off
     zstyle ":completion:*:*:*:*:*:fasd" sort off
-    zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmaster|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' sort off
+    zstyle ':completion:*:*:(zpwr-z|zpwr-gitzfordir|zpwr-gitzfordirmain|zpwr-gitzfordirdevelop|zm|zd|zg):*:*' sort off
     #}}}***********************************************************
 
     #{{{                    MARK:fzf-tab change fzf cmd

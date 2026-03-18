@@ -3,7 +3,7 @@
 #**************************************************************
 ##### Author: JACOBMENKE
 ##### Date: Thu Apr 12 00:02:45 EDT 2018
-##### Purpose: bash script to keep remote hosts in sync with master
+##### Purpose: bash script to keep remote hosts in sync with main
 ##### Notes: watches 2 repos
 #}}}***********************************************************
 
@@ -22,13 +22,13 @@ function zsh-gacp-mainBranch() {
         remote="$1"
     fi
 
-    for branch in master main; do
+    for branch in main master; do
         if command git show-ref -q --verify refs/remotes/$remote/$branch; then
             echo "$branch"
             return
         fi
     done
-    echo master
+    echo main
 }
 
 function zsh-gacp-devBranch() {
@@ -61,11 +61,11 @@ remoteName=origin
 [[ ! -d "$configDir" ]] && echo "no config dir '$configDir'" >&2 && exit 1
 [[ ! -d "$zshPluginDir" ]] && echo "no zshPluginDir '$zshPluginDir'" >&2 && exit 1
 
-function resetToMaster() {
+function resetToMain() {
 
     git fetch -f --all --prune --tags
     git reset --hard $remoteName/$(zsh-gacp-mainBranch "$remote")
-    git checkout -B master $remoteName/$(zsh-gacp-mainBranch "$remote")
+    git checkout -B main $remoteName/$(zsh-gacp-mainBranch "$remote")
     git pull --force
     git reset --hard $remoteName/$(zsh-gacp-mainBranch "$remote")
     git fetch -f --all --prune --tags
@@ -98,7 +98,7 @@ function main() {
             builtin cd "$dir" &&
             zpwrIsGitDir &&
             printf "$dir: " &&
-            resetToMaster
+            resetToMain
         )
     done
     refreshers
@@ -147,7 +147,7 @@ while true; do
 
     if [[ -n "$output" ]]; then
         echo "$(date) We have change to $(git remote -v)" >&2
-        resetToMaster
+        resetToMain
         refreshers
     fi
 

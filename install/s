@@ -5,7 +5,7 @@
 ##### GitHub: https://github.com/MenkeTechnologies
 ##### Date: Wed Sep 16 02:36:02 EDT 2020
 ##### Purpose: bash script to install zpwr
-##### Notes: run with sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/master/s)"
+##### Notes: run with sh -c "$(curl -fsSL raw.githubusercontent.com/MenkeTechnologies/zpwr/main/s)"
 #}}}***********************************************************
 
 git clone --depth 1 -- https://github.com/MenkeTechnologies/zpwr.git ~/.zpwr && cd ~/.zpwr/install && ./zpwrInstall.sh

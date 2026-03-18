@@ -17,8 +17,8 @@ source common.sh
 
 zpwrGoInstallerOutputDir
 
-git clone https://github.com/vim/vim.git vim-master
-builtin cd "vim-master" && {
+git clone https://github.com/vim/vim.git vim-main
+builtin cd "vim-main" && {
     ./configure --with-features=huge \
         --enable-multibyte \
         --enable-rubyinterp=yes \

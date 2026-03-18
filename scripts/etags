@@ -650,7 +650,7 @@ function r(){r549,21129
         group=$(id -gn)group684,24509
         service_path="$ZPWR_LOCAL/$service.service"service_path688,24576
 function zpwrCloneToForked(){zpwrCloneToForked710,25250
-    branch=masterbranch712,25277
+    branch=mainbranch712,25277
 function s(){s724,25561
         cmd=sublcmd727,25601
         cmd="$ZPWR_OPEN_CMD"cmd729,25627
@@ -805,7 +805,7 @@ function zpwrLinkConf(){zpwrLinkConf1914,53368
     symFiles=(.tmux.conf .ideavimrc .vimrc grc.zsh conf.gls conf.df conf.ifconfig conf.mount conf.whois .iftopcolors .inputrc .zshrc .spacemacs)symFiles1924,53594
     local snipDir="$HOME/.emacs.d/private"snipDir1936,54146
 function zpwrGetrc(){zpwrGetrc1948,54545
-        branch=masterbranch1951,54591
+        branch=mainbranch1951,54591
         branch="$1"branch1953,54622
             REPLY="$(cat "$ZPWR_TEMPFILE")"REPLY1960,54909
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"COMPLETION_DIR1982,55428
@@ -1164,7 +1164,7 @@ optstring=shtaoptstring57,1370
 
 /Users/wizard/.zpwr/scripts/dsDownloader.sh,71
 outputDir="Desktop"outputDir10,307
-master="jacobmenke"master11,327
+main="jacobmenke"main11,327
 
 /Users/wizard/.zpwr/scripts/duplicateLineDeleter.sh,198
 home_dir=$HOMEhome_dir10,315
@@ -1772,13 +1772,13 @@ main() {main31,869
     COMPLETION_DIR="$HOME/.oh-my-zsh/custom/plugins"COMPLETION_DIR52,1461
 refreshers() {refreshers60,1665
     output=$(git log HEAD..origin/dev --oneline)output84,2397
-    output=$(git log HEAD..origin/master --oneline)output94,2721
+    output=$(git log HEAD..origin/main --oneline)output94,2721
 
 /Users/wizard/.zpwr/scripts/removeSpaces.sh,0
 
 /Users/wizard/.zpwr/scripts/rpiDownloader.sh,71
 outputDir="Desktop"outputDir10,307
-master="jacobmenke"master11,327
+main="jacobmenke"main11,327
 
 /Users/wizard/.zpwr/scripts/rpiSoftwareUpdater.sh,400
 zpwrPrettyPrint() {zpwrPrettyPrint13,380
