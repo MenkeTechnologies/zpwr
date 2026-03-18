@@ -44,20 +44,20 @@ function zsh-gacp-mainBranch() {
 
     local branch
 
-    for branch in master main; do
+    for branch in main master; do
         if command git show-ref -q --verify refs/heads/$branch; then
             echo "$branch"
             return
         fi
     done
-    echo master
+    echo main
 }
 
 branch='$(zsh-gacp-mainBranch)'
 dir="$1"
 
 if [[ ! -d "$dir" ]]; then
-    zpwrLogConsoleErr "usage: forDirMaster.sh <dir> to run <cmd> in each dir/*"
+    zpwrLogConsoleErr "usage: forDirMain.sh <dir> to run <cmd> in each dir/*"
     exit 1
 fi
 

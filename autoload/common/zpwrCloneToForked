@@ -4,7 +4,7 @@ function zpwrCloneToForked(){
 
     local branch
 
-    branch=master
+    branch=main
     (
         if [[ -z "$1" ]]; then
             builtin cd "$ZPWR_FORKED_DIR" || return 1

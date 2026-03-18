@@ -41,7 +41,7 @@ function globalAliasesInit(){
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}gp="git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push"
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}grp="git reset --soft $ZPWR_TABSTOP && git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push -f origin $ZPWR_TABSTOP"
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${ZPWR_TABSTOP}m${ZPWR_TABSTOP}\\x1b[0m"
-        alias rrd="www 5 'remoteName=origin;git fetch -f --all --prune --tags;output=\$(git log HEAD..\$remoteName/master --oneline); if [[ -n "\$output" ]]; then echo \"\$(date) We have change to \$(git remote -v)\" >&2; git reset --hard \$remoteName/master;$ZPWR_TABSTOP; fi'"
+        alias rrd="www 5 'remoteName=origin;git fetch -f --all --prune --tags;output=\$(git log HEAD..\$remoteName/main --oneline); if [[ -n "\$output" ]]; then echo \"\$(date) We have change to \$(git remote -v)\" >&2; git reset --hard \$remoteName/main;$ZPWR_TABSTOP; fi'"
     fi
 
     alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
@@ -160,7 +160,7 @@ globalAliasesInit
             $ZPWR_TABSTOP
         done"
 
-        alias dry="git merge-tree \$(git merge-base FETCH_HEAD master$ZPWR_TABSTOP) master$ZPWR_TABSTOP FETCH_HEAD | less"
+        alias dry="git merge-tree \$(git merge-base FETCH_HEAD main$ZPWR_TABSTOP) main$ZPWR_TABSTOP FETCH_HEAD | less"
 
         alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
 
@@ -172,11 +172,11 @@ globalAliasesInit
 
 zpwrExists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gffa; bk; gla; zp gitclearcache; }' *"
 
-zpwrExists zfgmw || alias zfgmw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco master; gffa; git clean -dff && git reset --hard origin/master && git clean -dff ; gla; zp gitclearcache; }' *"
+zpwrExists zfgmw || alias zfgmw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco main; gffa; git clean -dff && git reset --hard origin/main && git clean -dff ; gla; zp gitclearcache; }' *"
 
 zpwrExists zfgdw || alias zfgdw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco development; gffa; git clean -dff && git reset --hard origin/development && git clean -dff ; gla; zp gitclearcache; }' *"
 
-zpwrExists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco master; gffa; bk; gla; zp gitclearcache; }' *"
+zpwrExists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco main; gffa; bk; gla; zp gitclearcache; }' *"
 
 zpwrExists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco development; gffa; bk; gla; zp gitclearcache; }' *"
 

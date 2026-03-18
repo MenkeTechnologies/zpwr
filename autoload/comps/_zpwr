@@ -88,7 +88,7 @@ function _zpwr(){
                 gitedittag)
                     __zpwr_gtl
                     ;;
-                gitzfordir|gitzfordirmaster|gitzfordirdevelop)
+                gitzfordir|gitzfordirmain|gitzfordirdevelop)
                     _zcommand
                     ;;
                 info | clearlist)

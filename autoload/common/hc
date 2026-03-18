@@ -30,7 +30,7 @@ function hc(){
         fi
         git add .
         git commit -m "first commit"
-        git push --set-upstream origin master
+        git push --set-upstream origin main
         printf "\x1b[0m"
     fi
 }
