@@ -52,7 +52,7 @@ function createTemplate() {
 #}}}***********************************************************
 
 if [[ -z "$1" ]]; then
-    echo "usage: templater.sh <file>" >&2
+    echo "usage: templater.sh FILE" >&2
     exit 1
 fi
 

@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 if [[ -z "$1" ]]; then
-    echo "usage: uploadDS.sh <file>" >&2
+    echo "usage: uploadDS.sh FILE" >&2
     exit 1
 fi
 

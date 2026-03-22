@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 if [[ -z "$1" ]]; then
-    echo "usage: uploadWebDS.sh <file>" >&2
+    echo "usage: uploadWebDS.sh FILE" >&2
     exit 1
 fi
 

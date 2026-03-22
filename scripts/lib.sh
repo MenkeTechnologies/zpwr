@@ -357,7 +357,7 @@ function zpwrLogTrace(){
 function zpwrNeedSudo(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrNeedSudo <file>"
+        zpwrLogConsoleErr "usage: zpwrNeedSudo FILE"
         return 1
     fi
 

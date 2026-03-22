@@ -45,7 +45,7 @@ function createTheFile() {
 }
 
 if [[ -z "$1" ]]; then
-    echo "usage: createScriptButDontOpenSublime.sh <file>" >&2
+    echo "usage: createScriptButDontOpenSublime.sh FILE" >&2
     exit 1
 fi
 

@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 if [[ -z "$1" ]]; then
-    echo "usage: say.sh <message>..." >&2
+    echo "usage: say.sh MESSAGE..." >&2
     exit 1
 fi
 

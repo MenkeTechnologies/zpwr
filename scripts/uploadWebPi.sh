@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 if [[ -z "$1" ]]; then
-    echo "usage: uploadWebPi.sh <file>" >&2
+    echo "usage: uploadWebPi.sh FILE" >&2
     exit 1
 fi
 

@@ -58,7 +58,7 @@ function executeFileFirstArgIsCommand() {
 }
 
 if [[ -z "$1" ]]; then
-    echo "usage: runner.sh <file>" >&2
+    echo "usage: runner.sh FILE" >&2
     exit 1
 fi
 

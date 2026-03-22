@@ -74,7 +74,7 @@ function createTheFile() {
 }
 
 if [[ -z "$1" ]]; then
-    echo "usage: createTextFile.sh <file>" >&2
+    echo "usage: createTextFile.sh FILE" >&2
     exit 1
 fi
 
