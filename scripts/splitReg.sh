@@ -88,7 +88,7 @@ shift $(($OPTIND - 1))
 
 
 if (($# < 2)); then
-    echo "usage: splitReg.sh <file>" >&2
+    echo "usage: splitReg.sh FILE" >&2
     exit 1
 fi
 

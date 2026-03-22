@@ -9,7 +9,7 @@
 firstFile="$1"
 
 if (($# < 2)); then
-    echo "usage: sync.sh <file1> <file2>" >&2
+    echo "usage: sync.sh FILE1 FILE2" >&2
     exit 1
 fi
 

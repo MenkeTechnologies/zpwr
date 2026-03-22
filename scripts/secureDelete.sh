@@ -66,7 +66,7 @@ function killCursor() {
 trap 'killCursor; echo; exit' INT
 
 if [[ -z "$1" ]]; then
-    echo "Usage: $(basename $0) filename"
+    echo "Usage: $(basename $0) FILENAME"
     exit $e_badargs
 fi
 

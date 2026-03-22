@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 if [[ -z "$1" ]]; then
-    echo "usage: randomCow.sh <width> [<filter>]" >&2
+    echo "usage: randomCow.sh WIDTH [FILTER]" >&2
     exit 1
 fi
 

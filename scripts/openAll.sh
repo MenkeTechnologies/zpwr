@@ -51,7 +51,7 @@ function killCursor() {
 printf "\e[37;44m"
 
 if [[ -z "$1" ]]; then
-    echo "usage: openAll.sh <file>..." >&2
+    echo "usage: openAll.sh FILE..." >&2
     exit 1
 fi
 
