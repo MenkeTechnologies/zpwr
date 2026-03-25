@@ -8,7 +8,7 @@
 #}}}***********************************************************
 
 if [[ -z "$2" ]]; then
-    echo "usage: rsyncr.sh <local_dir> <remote_dir>" >&2
+    echo "usage: rsyncr.sh LOCAL_DIR REMOTE_DIR" >&2
     exit 1
 fi
 

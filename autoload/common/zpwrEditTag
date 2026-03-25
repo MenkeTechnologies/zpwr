@@ -8,7 +8,7 @@ function zpwrEditTag(){
     fi
 
     if [[ -n "$2" ]]; then
-        zpwrLogConsoleErr "usage: zpwrEditTag <tag>"
+        zpwrLogConsoleErr "usage: zpwrEditTag TAG"
         return 1
     fi
 

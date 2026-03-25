@@ -40,7 +40,7 @@ fi
 function zpwrFordir(){
 
     if [[ -z "$2" ]]; then
-       zpwrLogConsoleErr "usage: fordir <cmd> <dirs> to run <cmd> in each dir"
+       zpwrLogConsoleErr "usage: fordir CMD DIRS to run CMD in each dir"
        return 1
     fi
 
@@ -49,7 +49,7 @@ function zpwrFordir(){
     cmd="$1"
 
     if [[ -d "$cmd" || -f "$cmd" ]]; then
-       zpwrLogConsoleErr "usage: fordir <cmd> <dirs> to run <cmd> in each dir"
+       zpwrLogConsoleErr "usage: fordir CMD DIRS to run CMD in each dir"
        return 1
     fi
 

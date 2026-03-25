@@ -3,7 +3,7 @@
 function zpwrGetGtagsEdit(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrGetGtagsEdit <editor>"
+        zpwrLogConsoleErr "usage: zpwrGetGtagsEdit EDITOR"
         return 1
     fi
 

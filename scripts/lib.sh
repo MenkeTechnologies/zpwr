@@ -203,7 +203,7 @@ function zpwrEscapeRemove(){
 function zpwrPrettyPrintNoNewline(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrPrettyPrintNoNewline <string>"
+        zpwrLogConsoleErr "usage: zpwrPrettyPrintNoNewline STRING"
         return 1
     fi
 
@@ -220,7 +220,7 @@ function zpwrIsBinary() {
 function zpwrLogColor(){
 
     if [[ -z $2 ]]; then
-        zpwrLogConsoleErr "usage: zpwrLogColor <lvl> <msg>"
+        zpwrLogConsoleErr "usage: zpwrLogColor LVL MSG"
         return 1
     fi
 
@@ -234,7 +234,7 @@ function zpwrLogColor(){
 function zpwrLogConsoleInfo(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrLogConsoleInfo <msg>"
+        zpwrLogConsoleErr "usage: zpwrLogConsoleInfo MSG"
         return 1
     fi
     zpwrLogColor INFO "$*" >&1
@@ -243,7 +243,7 @@ function zpwrLogConsoleInfo(){
 function zpwrLogConsoleErr(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrLogConsoleErr <msg>"
+        zpwrLogConsoleErr "usage: zpwrLogConsoleErr MSG"
         return 1
     fi
     zpwrLogColor ERROR "$*" >&2
@@ -252,7 +252,7 @@ function zpwrLogConsoleErr(){
 function zpwrLogConsoleDebug(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrLogConsoleDebug <msg>"
+        zpwrLogConsoleErr "usage: zpwrLogConsoleDebug MSG"
         return 1
     fi
 
@@ -264,7 +264,7 @@ function zpwrLogConsoleDebug(){
 function zpwrLogConsoleTrace(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrLogConsoleTrace <msg>"
+        zpwrLogConsoleErr "usage: zpwrLogConsoleTrace MSG"
         return 1
     fi
 
@@ -304,7 +304,7 @@ function zpwrLog(){
         elif [[ -p /dev/stdin ]]; then
             zpwrLogColor STDIN "$(cat)" >> "$ZPWR_LOGFILE"
         elif [[ -z "$2" ]]; then
-                zpwrLogConsoleErr "usage: zpwrLog <lvl> <msg>"
+                zpwrLogConsoleErr "usage: zpwrLog LVL MSG"
                 return 1
         fi
     else
@@ -324,7 +324,7 @@ function zpwrLog(){
             } >> "$ZPWR_LOGFILE"
         else
             if [[ -z "$1" ]]; then
-                zpwrLogConsoleErr "usage: zpwrLog <msg>"
+                zpwrLogConsoleErr "usage: zpwrLog MSG"
                 return 1
             fi
         fi
@@ -466,7 +466,7 @@ function zpwrInstallGitHubPluginsFromFile(){
     shift $((OPTIND-1))
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrInstallGitHubPluginsFromFile <repo_file>"
+        zpwrLogConsoleErr "usage: zpwrInstallGitHubPluginsFromFile REPO_FILE"
         return 1
     fi
 
@@ -490,7 +490,7 @@ function zpwrInstallGitHubPluginsFromFile(){
 function zpwrOverwriteGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrOverwriteGitHubPlugin <repo>"
+        zpwrLogConsoleErr "usage: zpwrOverwriteGitHubPlugin REPO"
         return 1
     fi
 
@@ -511,7 +511,7 @@ function zpwrOverwriteGitHubPlugin(){
 function zpwrInstallGitHubPlugin(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrInstallGitHubPlugin <repo>"
+        zpwrLogConsoleErr "usage: zpwrInstallGitHubPlugin REPO"
         return 1
     fi
 
@@ -645,7 +645,7 @@ function zpwrPrettyPrint(){
         printf "%s " "$@"
         printf "\x1b[0m\n"
     else
-        zpwrLogConsoleErr "usage: zpwrPrettyPrint <msg>"
+        zpwrLogConsoleErr "usage: zpwrPrettyPrint MSG"
         return 1
     fi
 }

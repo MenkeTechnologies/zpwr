@@ -3,7 +3,7 @@
 function zpwrFzfWordsearchVerbEdit(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrFzfWordsearchVerbEdit <editor>"
+        zpwrLogConsoleErr "usage: zpwrFzfWordsearchVerbEdit EDITOR"
         return 1
     fi
 

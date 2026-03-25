@@ -56,7 +56,7 @@ done
 shift $(($OPTIND - 1))
 
 if (($# < 2)); then
-    echo "usage: splitReg.sh <regex> <filter>" >&2
+    echo "usage: splitReg.sh REGEX FILTER" >&2
     exit 1
 fi
 

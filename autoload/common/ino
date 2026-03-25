@@ -3,7 +3,7 @@
 function __ino(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: ino <dir>"
+        zpwrLogConsoleErr "usage: ino DIR"
         return 1
     fi
 

@@ -3,7 +3,7 @@
 function zpwrForAllGitDirsRefreshDirty(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrForAllGitDirsRefreshDirty <cmd>"
+        zpwrLogConsoleErr "usage: zpwrForAllGitDirsRefreshDirty CMD"
         return 1
     fi
 

@@ -4,7 +4,7 @@
 function zpwrExercismDownloadAll(){
 
     function ___usage() {
-        echo "usage: zpwrExercismDownloadAll [-h,--help] | [-r,--redownload] [-s,--sleep <time>] <track>" >&2
+        echo "usage: zpwrExercismDownloadAll [-h,--help] | [-r,--redownload] [-s,--sleep TIME] TRACK" >&2
         unset -f ___usage
     }
 

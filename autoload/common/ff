@@ -14,7 +14,7 @@ function ff(){
             eval "$@"
         done
     else
-       zpwrLogConsoleErr "usage: ff <cmd> to run <cmd> 10 times" 
+       zpwrLogConsoleErr "usage: ff CMD to run CMD 10 times" 
        return 1
     fi
 }

@@ -3,7 +3,7 @@
 function zpwrExecpy(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrExecpy <file>"
+        zpwrLogConsoleErr "usage: zpwrExecpy FILE"
         return 1
     fi
 
