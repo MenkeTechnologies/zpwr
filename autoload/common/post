@@ -3,7 +3,7 @@
 function post(){
 
     if [[ -z "$2" ]]; then
-        zpwrLogConsoleErr "usage: post <suffix> <cmd>"
+        zpwrLogConsoleErr "usage: post SUFFIX CMD"
         return 1
     fi
 

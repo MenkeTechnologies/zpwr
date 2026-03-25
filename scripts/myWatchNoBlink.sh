@@ -70,7 +70,7 @@ done
 shift $((OPTIND - 1))
 
 if [[ -z "$1" ]]; then
-    echo "usage: myWatchNoBlink.sh <command>  [<timeToSleep>]" >&2
+    echo "usage: myWatchNoBlink.sh COMMAND  [TIMETOSLEEP]" >&2
     exit 1
 fi
 

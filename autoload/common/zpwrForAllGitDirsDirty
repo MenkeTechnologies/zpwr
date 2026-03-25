@@ -3,7 +3,7 @@
 function zpwrForAllGitDirsDirty(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrForAllGitDirsDirty <cmd>"
+        zpwrLogConsoleErr "usage: zpwrForAllGitDirsDirty CMD"
         return 1
     fi
 

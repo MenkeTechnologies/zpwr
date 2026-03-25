@@ -3,7 +3,7 @@
 function zpwrRegenGtagsType(){
 
     if [[ -z $1 ]]; then
-        zpwrLogConsoleErr "usage: zpwrRegenGtagsType <type>"
+        zpwrLogConsoleErr "usage: zpwrRegenGtagsType TYPE"
         return 1
     fi
 

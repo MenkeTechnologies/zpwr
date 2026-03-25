@@ -3,7 +3,7 @@
 function pre(){
 
     if [[ -z "$2" ]]; then
-        zpwrLogConsoleErr "usage: pre <prefix> <cmd>"
+        zpwrLogConsoleErr "usage: pre PREFIX CMD"
         return 1
     fi
 

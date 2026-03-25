@@ -25,7 +25,7 @@ if ! zmodload zsh/net/socket; then
 fi
 
 if [[ -z "$4" ]]; then
-    tmux display-message "usage: allPanesSwap.zsh <sess_id> <win_id> <single/multi> <socket>"
+    tmux display-message "usage: allPanesSwap.zsh SESS_ID WIN_ID <single/multi> SOCKET"
     exit 1
 fi
 

@@ -3,7 +3,7 @@
 function zpwrGoclean() {
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrGoclean <package>"
+        zpwrLogConsoleErr "usage: zpwrGoclean PACKAGE"
         return 1
     fi
 

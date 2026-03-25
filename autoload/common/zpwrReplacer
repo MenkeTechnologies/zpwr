@@ -3,7 +3,7 @@
 function zpwrReplacer(){
 
     if [[ -z "$2" ]]; then
-        zpwrLogConsoleErr "usage: zpwrReplacer <original> <replacement>"
+        zpwrLogConsoleErr "usage: zpwrReplacer ORIGINAL REPLACEMENT"
         return 1
     fi
 

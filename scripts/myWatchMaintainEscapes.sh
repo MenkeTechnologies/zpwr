@@ -43,7 +43,7 @@ done
 shift $((OPTIND - 1))
 
 if [[ -z "$1" ]]; then
-    echo "usage: myWatchMaintainEscapes.sh <command>" >&2
+    echo "usage: myWatchMaintainEscapes.sh COMMAND" >&2
     exit 1
 fi
 
