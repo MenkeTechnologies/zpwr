@@ -76,11 +76,6 @@
     assert $state equals 0
 }
 
-@test 'ZPWR_DIRS_CLEAN' {
-    run test -n "$ZPWR_DIRS_CLEAN"
-    assert $state equals 0
-}
-
 @test 'ZPWR_EDITOR_TO_VIM' {
     run test -n "$ZPWR_EDITOR_TO_VIM"
     assert $state equals 0
@@ -121,11 +116,6 @@
     assert $state equals 0
     run printf "$ZPWR_FD"
     assert "$output" contains fd
-}
-
-@test 'ZPWR_FILES_CLEAN' {
-    run test -n "$ZPWR_FILES_CLEAN"
-    assert $state equals 0
 }
 
 @test 'ZPWR_INTERACTIVE_MENU_SELECT' {

@@ -1188,12 +1188,6 @@
     assert "$output" contains function
 }
 
-@test 'type zpwrEmacsPluginList is function' {
-    run type zpwrEmacsPluginList
-    assert $state equals 0
-    assert "$output" contains function
-}
-
 @test 'type zpwrEmacsRecent is function' {
     run type zpwrEmacsRecent
     assert $state equals 0

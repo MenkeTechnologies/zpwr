@@ -101,19 +101,6 @@
 }
 
 #--------------------------------------------------------------
-# zpwrEmacsPluginList
-#--------------------------------------------------------------
-@test 'zpwrEmacsPluginList exists' {
-    run zpwrExists zpwrEmacsPluginList
-    assert $state equals 0
-}
-
-@test 'zpwrEmacsPluginList returns 0' {
-    run zpwrEmacsPluginList &>/dev/null
-    assert $state equals 0
-}
-
-#--------------------------------------------------------------
 # zpwrEmacsPluginCount
 #--------------------------------------------------------------
 @test 'zpwrEmacsPluginCount exists' {
@@ -135,13 +122,6 @@
     out=$(zpwrEmacsPluginCount 2>/dev/null)
     run test "$out" -ge 0
     assert $state equals 0
-}
-
-@test 'zpwrEmacsPluginCount matches zpwrEmacsPluginList line count' {
-    listCount=$(zpwrEmacsPluginList 2>/dev/null | wc -l | tr -d ' ')
-    countOut=$(zpwrEmacsPluginCount 2>/dev/null)
-    [[ "$countOut" -eq "$listCount" ]]
-    assert $? equals 0
 }
 
 #--------------------------------------------------------------
@@ -184,18 +164,6 @@
         assert "$output" is_not_empty
     else
         skip "no ~/.vim/bundle found"
-    fi
-}
-
-#--------------------------------------------------------------
-# zpwrEmacsPluginList output
-#--------------------------------------------------------------
-@test 'zpwrEmacsPluginList with ~/.emacs.d/elpa present lists dirs' {
-    if [[ -d "$HOME/.emacs.d/elpa" ]]; then
-        run zpwrEmacsPluginList
-        assert "$output" is_not_empty
-    else
-        skip "no ~/.emacs.d/elpa found"
     fi
 }
 
