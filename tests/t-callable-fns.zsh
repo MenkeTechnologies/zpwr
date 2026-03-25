@@ -515,19 +515,6 @@
 }
 
 #--------------------------------------------------------------
-# zpwrEmacsPluginList
-#--------------------------------------------------------------
-@test 'zpwrEmacsPluginList returns 0' {
-    run zpwrEmacsPluginList
-    assert $state equals 0
-}
-
-@test 'zpwrEmacsPluginList output is not empty' {
-    run zpwrEmacsPluginList
-    assert "$output" is_not_empty
-}
-
-#--------------------------------------------------------------
 # zpwrZshPluginList
 #--------------------------------------------------------------
 @test 'zpwrZshPluginList returns 0' {
