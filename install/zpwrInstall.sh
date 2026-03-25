@@ -225,7 +225,7 @@ addDependenciesAlpine(){
 addDependenciesDebian(){
     dependencies_ary=(python3-dev libssl-dev ${dependencies_ary[@]})
     dependencies_ary+=(mysql-server mariadb-server gcc bc lib-gnome2-dev iftop silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
-        ncurses-dev libevent-dev libncurses5-dev libcairo2-dev libx11-dev \
+        ncurses-dev libevent-dev libncurses5-dev libncursesw5-dev libcairo2-dev libx11-dev \
         libxpm-dev libxt-dev \
         libperl-dev libpq-dev libpcap-dev fortunes ruby-dev \
         libffi-dev libssl-dev automake whatweb)
