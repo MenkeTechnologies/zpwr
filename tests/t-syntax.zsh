@@ -124,7 +124,7 @@
 
     tty 2>/dev/null 1>&2 || skip 'not a tty'
 
-    run vim -u NONE -c 'try | source install/.vimrc | catch | cq | endtry | q';
+    run command vim -u NONE -c 'try | source install/.vimrc | catch | cq | endtry | q';
     if [[ $state != 0 ]]; then
         echo "$state was not 0"
     fi
@@ -135,7 +135,7 @@
        skip "$- must be interactive term"
     fi
 
-    run vim -u NONE -c 'try | source env/.minvimrc | catch | cq | endtry | q';
+    run command vim -u NONE -c 'try | source env/.minvimrc | catch | cq | endtry | q';
     assert $state equals 0
 }
 
