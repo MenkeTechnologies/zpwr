@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function nn(){
+
+        if [[ -z "$2" ]];then
+            zpwrLogConsoleErr "usage: nn <title> <message>..." &&
+            return 1
+        fi
+
+        local title msg
+
+        title="$1"
+        msg="$2"
+        echo "display notification \"$msg\" with title \"$title\"" |
+            osascript
+    }
+
+nn "$@"

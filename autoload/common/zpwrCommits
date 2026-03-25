@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCommits(){
+
+    if zpwrIsGitDir; then
+        if [[ $EDITOR = nvim ]];then
+            nvim -c 'call feedkeys(":Commits!\<CR>")'
+        elif [[ $EDITOR == 'mvim -v' ]];then
+            mvim -v -c 'call feedkeys(":Commits!\<CR>")'
+        else
+            vim -c 'call feedkeys(":Commits!\<CR>")'
+        fi
+    else
+        zpwrLogConsoleNotGit
+        return 1
+    fi
+}
+
+zpwrCommits "$@"

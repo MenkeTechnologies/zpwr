@@ -1,0 +1,34 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrBindOverrideOMZCompdefs(){
+
+    #{{{                    MARK:Compdefs
+    #**************************************************************
+    _comps[npm]=_npm
+    _comps[ftp]=_ftp
+    _comps[lftp]=_lftp
+    _comps[traceroute]=_traceroute
+    _comps[host]=_host
+    _comps[passwd]=_passwd
+    _comps[ksh]=_ksh
+    _comps[tcsh]=_tcsh
+    _comps[csh]=_tcsh
+    _comps[pmap]=_pmap
+    _comps[chfn]=_chfn
+    _comps[o]=_files
+
+    compdef _git-clone gcl
+    compdef _zcommand_mult zm zd zg
+    compdef _man fm
+    compdef _tmux _zsh_tmux_plugin_run
+    zpwrExists _kubectl && compdef _kubectl kubectl
+    zpwrExists _express && compdef _express express
+
+    # load inner tmux comp fns for _zpwr
+    _tmux &> /dev/null
+    _docker &> /dev/null
+
+    #}}}***********************************************************
+}
+zpwrBindOverrideOMZCompdefs "$@"

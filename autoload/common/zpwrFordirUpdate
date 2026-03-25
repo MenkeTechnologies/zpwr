@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFordirUpdate(){
+
+    if [[ -z "$1" ]]; then
+       zpwrLogConsoleErr "usage: fordirUpdate <dirs> to run git update in each dir"
+       return 1
+    fi
+
+    local dir cmd
+
+    cmd="git fetch --all --prune;git clean -dff && git reset --hard HEAD && git clean -dff;git pull --all;zp gitclearcache"
+    for dir in "$@"; do
+        if [[ -d "$dir" ]]; then
+            (
+                builtin cd "$dir" && zpwrIsGitDir && zpwrPrettyPrint "cd $dir && $cmd" && eval "$cmd"
+            )
+        fi
+    done
+}
+
+zpwrFordirUpdate "$@"

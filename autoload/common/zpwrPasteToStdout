@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrPasteToStdout(){
+
+    print -n -- "${$(${(Q)=ZPWR_PASTE_CMD} 2>/dev/null )//$'\r'}"
+}
+
+zpwrPasteToStdout "$@"

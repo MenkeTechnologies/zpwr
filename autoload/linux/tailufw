@@ -1,0 +1,21 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function tailufw(){
+
+    local size
+
+    size=100
+
+    if [[ -n $1 ]]; then
+        size=$1
+    fi
+    if zpwrCommandExists ccze; then
+        sudo tail -n $size -F /var/log/{syslog,messages} |
+            command grep -i ufw | ccze
+    else
+        sudo tail -n $size -F /var/log/{syslog,messages} |
+            command grep -i ufw
+    fi
+}
+
+tailufw "$@"

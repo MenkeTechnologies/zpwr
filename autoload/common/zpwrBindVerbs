@@ -1,0 +1,77 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrBindVerbs(){
+
+        #{{{                    MARK:ZPWR Compsys Functions
+#**************************************************************
+    local cnt
+    local k v
+    # get zpwr verbs
+    source "$ZPWR_VERBS_FILE"
+
+    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrSendVerbs zpwrLogVerbs
+    typeset -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs zpwrLogVerbs
+
+    for k v in ${(kv)ZPWR_VERBS[@]};do
+        case $k in
+            forgit*)
+                zpwrForgitVerbs+=("$k:$v")
+                ;;
+            vim*)
+                zpwrVimVerbs+=("$k:$v")
+                ;;
+            emacs*)
+                zpwrEmacsVerbs+=("$k:$v")
+                ;;
+            quiz*|qu*|*learn*|searchl*|searchfull|searchall|ser|see*|sef)
+                zpwrLearnVerbs+=("$k:$v")
+                ;;
+            regen*)
+                zpwrRegenVerbs+=("$k:$v")
+                ;;
+            clean*)
+                zpwrCleanVerbs+=("$k:$v")
+                ;;
+            gitrepos*)
+                zpwrGitReposVerbs+=("$k:$v")
+                ;;
+            github*)
+                zpwrGithubVerbs+=("$k:$v")
+                ;;
+            git*)
+                zpwrGitVerbs+=("$k:$v")
+                ;;
+            travis*)
+                zpwrTravisVerbs+=("$k:$v")
+                ;;
+            copy*|paste*)
+                zpwrClipboardVerbs+=("$k:$v")
+                ;;
+            ev*|env*|*search)
+                zpwrSearchVerbs+=("$k:$v")
+                ;;
+            update*)
+                zpwrUpdateVerbs+=("$k:$v")
+                ;;
+            *send*)
+                zpwrSendVerbs+=("$k:$v")
+                ;;
+            cd*|*cd|home*)
+                zpwrCdVerbs+=("$k:$v")
+                ;;
+            log*)
+                zpwrLogVerbs+=("$k:$v")
+                ;;
+            *)
+                zpwrMiscVerbs+=("$k:$v")
+                ;;
+        esac
+
+        zpwrSubcommandsAry+="$k:$v"
+    done
+
+    ZPWR_VARS[zpwrSubcommandsAry]=zpwrSubcommandsAry
+#}}}***********************************************************
+}
+
+zpwrBindVerbs "$@"

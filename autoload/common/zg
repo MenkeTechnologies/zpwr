@@ -1,0 +1,67 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zg() {
+
+    local branch dir optstr
+
+    function usage() {
+        echo "Usage : zg [options] [--] <branch> <zdir>...
+        Options:
+        -[celrtx]     See z -h
+        -h|help       Display this message
+        -b|branch     branch name" >&2
+    }
+
+    function runGit() {
+        ${=ZPWR_REPO_NAME} fordir "zpwrIsGitDir && { gco $branch ; gffa; git clean -dff && git reset --hard origin/$branch && git clean -dff ; gla; zp gitclearcache; }" *
+    }
+
+    while getopts ":hb:" opt; do
+        case $opt in
+        h|help)
+            usage
+            return 0
+            ;;
+        b|branch)
+            branch="$OPTARG"
+            ;;
+        [celrtx])
+            optstr="$optstr-$opt "
+            ;;
+        *)
+            printf "\n  Option does not exist : $OPTARG\n"
+            usage
+            return 1
+            ;;
+        esac
+    done
+
+    shift $(( OPTIND - 1 ))
+
+    if [[ -z "$branch" ]]; then
+        if [[ -n $1 ]]; then
+            branch=$1
+            shift
+        else
+            branch=development
+        fi
+    fi
+
+    if [[ -z "$1" ]]; then
+        runGit
+        return 0
+    fi
+
+    for dir in "$@" ; do
+        if [[ -n "$dir" ]]; then
+            if z ${=optstr} "$dir"; then
+                zpwrPrettyPrint "z $optstr$dir => cd $(z -e $dir)"
+
+                runGit
+            fi
+        fi
+    done
+
+}
+
+zg "$@"

@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zarg(){
+
+    if [[ -z "$2" ]]; then
+        zpwrLogConsoleErr "usage: zarg <escaped glob> <cmd with {}>"
+        return 1
+    fi
+
+    local first
+
+    first="$1"
+    shift
+
+    echo eval "zargs -i{} -- '$first' -- '$*'"
+    eval "zargs -i{} -- $first -- $*"
+}
+
+zarg "$@"

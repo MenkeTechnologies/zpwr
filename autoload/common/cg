@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function cg() {
+
+    if [[ -d "$HOME/ClionProjects" ]]; then
+        zpwrCd "$HOME/ClionProjects"
+    else
+        zpwrLogConsoleErr "HOME/ClionProjects '$HOME/ClionProjects' is not a dir."
+    fi
+
+}
+
+cg "$@"

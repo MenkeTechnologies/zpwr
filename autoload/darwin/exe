@@ -1,0 +1,7 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function exe(){
+
+    python3 "$ZPWR_PYSCRIPTS/ssh_runner.py" "$@"
+}
+exe "$@"

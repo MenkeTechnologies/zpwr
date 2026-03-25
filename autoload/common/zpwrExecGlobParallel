@@ -1,0 +1,83 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrExecGlobParallel(){
+
+    if [[ -z "$2" ]]; then
+        zpwrLogConsoleErr "usage: zpwrExecGlobParallel <glob> <command with auto \$f replacement and 1 level of eval>"
+        return 1
+    fi
+    builtin emulate -L zsh
+    setopt noshwordsplit extendedglob globdots nullglob globsubst #no_notify
+    command rm -f $ZPWR_TEMPFILE4
+
+    if ! (( $+ZPWR_PROCESSED )); then
+        typeset -Ag ZPWR_PROCESSED
+    fi
+
+    function zpwrKillProcessGrp() {
+        local p f
+
+        for p in ${pids[@]}; do
+            # echo kill -9 -$p
+            kill -9 -$p &>/dev/null
+        done
+
+        if [[ -f "$ZPWR_TEMPFILE4" ]]; then
+            for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
+                test -z "$f" && continue
+                zpwrLogConsoleErr "FAILED: ${(e)command}"
+            done
+        fi
+    }
+
+    local glob command f
+    local -a files failed pids key
+
+    glob="$1"
+    command="$2"
+    shift
+    shift
+
+    files=( ${glob} )
+
+
+    if (( $#files )); then
+        zpwrPrettyPrint "Processing ${#files} files"
+    else
+        eval :
+        return 0
+    fi
+
+    trap 'zpwrKillProcessGrp; return 1' INT QUIT
+
+    for f in "${files[@]}"; do
+        key="$$-${f:t}-$(du "$f" | awk '{print $1}')"
+        if ! (( ${+ZPWR_PROCESSED[$key]} )); then
+            zpwrLogConsoleInfo "${(e)command}"
+            if ! eval "${(e)command}"; then
+                echo "${f:A}" >> "$ZPWR_TEMPFILE4"
+            fi &
+            ZPWR_PROCESSED[$key]="${f:A}"
+            pids+=( $! )
+        else
+            ZPWR_PROCESSED[$key]="${f:A}"
+        fi
+    done
+
+    if (( $#pids )); then
+        wait ${=pids}
+    fi
+
+    if [[ -f "$ZPWR_TEMPFILE4" ]]; then
+        for f in "${(@f)$(<$ZPWR_TEMPFILE4)}"; do
+            test -z "$f" && continue
+            rel="${f:t}"
+            key="$$-${rel}-$(du "$f" | awk '{print $1}')"
+            unset "ZPWR_PROCESSED[$key]"
+            zpwrLogConsoleErr "FAILED: ${(e)command}"
+        done
+    fi
+
+}
+
+zpwrExecGlobParallel "$@"

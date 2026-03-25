@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrRegenAll(){
+
+    zpwrRegenMost
+    zsh-git-repo-regenAllGitRepos regen
+    zsh-git-repo-regenAllGitReposDirty
+}
+
+zpwrRegenAll "$@"

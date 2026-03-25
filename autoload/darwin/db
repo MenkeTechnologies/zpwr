@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function db(){
+
+    python3 "$ZPWR_PYSCRIPTS/loginDBChrome.py"
+}
+
+db "$@"

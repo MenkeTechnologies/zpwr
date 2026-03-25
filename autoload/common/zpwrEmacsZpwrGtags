@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEmacsZpwrGtags(){
+
+    if ! zpwrExists emacs; then
+        logErr "emacs must exist"
+        return 1
+    fi
+
+    zpwrGetGtags "$ZPWR_EMACS_CLIENT"
+}
+
+zpwrEmacsZpwrGtags "$@"

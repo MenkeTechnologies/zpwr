@@ -1,0 +1,141 @@
+snippet pr "printf default"
+printf "%$1\n" $2
+endsnippet
+
+snippet loe "zpwrLogConsoleError default"
+zpwrLogConsoleErr "______'"'$1'"'_____ = ""'$1'"
+endsnippet
+
+snippet lod "zpwrLogDebug default"
+zpwrLogDebug "______'"'$1'"'_____ = ""'$1'"
+endsnippet
+
+snippet lo "zpwrLogInfo default"
+zpwrLogInfo "______'"'$1'"'_____ = ""'$1'"
+endsnippet
+
+snippet p "printf default"
+printf "______'"'$1'"'_____ = ""'$1' \n"
+endsnippet
+
+snippet ine "if not else"
+if [[ ! $1 ]]; then
+	${2::}
+else
+	${3::}
+fi
+endsnippet
+
+snippet ie "if else"
+if [[ $1 ]]; then
+	${2::}
+else
+	${3::}
+fi
+endsnippet
+
+snippet ineee "if not elif elif else"
+if [[ ! $1 ]]; then
+	${2::}
+elif [[ $3 ]]; then
+	${4::}
+elif [[ $5 ]]; then
+	${6::}
+else
+	${7::}
+fi
+
+endsnippet
+
+snippet ieee "if elif elif else"
+if [[ $1 ]]; then
+	${2::}
+elif [[ $3 ]]; then
+	${4::}
+elif [[ $5 ]]; then
+	${6::}
+else
+	${7::}
+fi
+endsnippet
+
+snippet inee "if not elif else"
+if [[ ! $1 ]]; then
+	${2::}
+elif [[ $3 ]]; then
+	${4::}
+else
+	${5::}
+fi
+endsnippet
+
+snippet iee "if elif else"
+if [[ $1 ]]; then
+	${2::}
+elif [[ $3 ]]; then
+	${4::}
+else
+	${5::}
+fi
+endsnippet
+
+snippet fkv "for key value loop zsh"
+for k v in ${(kv)$1[@]};do
+	$2
+done
+endsnippet
+
+snippet fun "function"
+function $1() {
+    ${2}
+}
+endsnippet
+
+snippet ff "for loop shell"
+for (( i = 0; i < $1; ++i )); do
+	$2
+done
+endsnippet
+
+snippet ifn "if not"
+if [[ ! ${1:condition} ]]; then
+    $2
+fi
+endsnippet
+
+snippet getopt
+local scriptVersion
+
+script="${1:version}"
+
+function usage() {
+    echo "Usage :  $${0:0} [options] [--]
+
+    Options:
+    -h|       Display this message
+    -V|       Display script version"
+
+}
+
+while getopts ":hv$2" opt; do
+    case $opt in
+
+    h)
+        usage
+        exit 0
+        ;;
+
+    V)
+        echo "$${0:0} -- Version $__ScriptVersion"
+        exit 0
+        ;;$3
+    *)
+        printf "\n  Option does not exist : $OPTARG\n"
+        usage
+        exit 1
+        ;;
+    esac
+done
+
+shift $(($OPTIND-1))
+endsnippet

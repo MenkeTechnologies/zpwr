@@ -1,0 +1,17 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrScriptToPDF(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrScriptToPDF <script>"
+        return 1
+    fi
+    local tempFile
+
+    tempFile="$HOME/__test.ps"
+
+    vim "$1" -c "hardcopy > $tempFile" -c quitall
+    ps2pdf "$tempFile" "${1%%.*}".pdf
+    rm "$tempFile"
+}
+zpwrScriptToPDF "$@"

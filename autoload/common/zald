@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zald(){
+
+    if [[ -d "$ZPWR_AUTOLOAD_DARWIN" ]]; then
+        zpwrCd "$ZPWR_AUTOLOAD_DARWIN"
+    else
+        zpwrLogConsoleErr "ZPWR_AUTOLOAD_DARWIN '$ZPWR_AUTOLOAD_DARWIN' is not a directory."
+    fi
+
+}
+
+zald "$@"

@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrListVerbs(){
+
+    builtin emulate -L zsh
+    setopt nullglob globdots extendedglob
+    local len sep k v i width
+    sep=" "
+    width=25
+
+    for k in ${(ko)ZPWR_VERBS[@]};do
+        len=$#k
+        printf $k
+        spaces=$(( width - len ))
+
+        for (( i = 0; i < $spaces; ++i )); do
+            printf $sep
+        done
+        printf "${ZPWR_VERBS[$k]}\n"
+    done
+}
+
+zpwrListVerbs "$@"

@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrScnew(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrScnew <file>"
+        return 1
+    fi
+
+    bash "$ZPWR_SCRIPTS/createScriptButDontOpenSublime.sh" "$1"
+}
+
+zpwrScnew "$@"

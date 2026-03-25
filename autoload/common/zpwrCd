@@ -1,0 +1,61 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrCd(){
+
+    builtin emulate -L zsh
+
+    setopt extendedglob
+
+    local base dir noTrailSlash
+
+    if [[ $1 == /## ]]; then
+        cd /
+        return
+    else
+        noTrailSlash="${1%/}"
+        base="${noTrailSlash:h}"
+    fi
+
+    if [[ -z "$noTrailSlash" ]]; then
+        cd -
+    elif [[ -f "$noTrailSlash" ]]; then
+        cd "$base"
+    elif [[ -d "$noTrailSlash" ]];then
+        cd "$noTrailSlash"
+    elif [[ -d "${nameddirs[$noTrailSlash]}" ]];then
+        cd "${nameddirs[$noTrailSlash]}"
+    elif [[ -d "${userdirs[$noTrailSlash]}" ]];then
+        cd "${userdirs[$noTrailSlash]}"
+    else
+
+        #cd -1
+        if [[ $noTrailSlash == [-+][0-9]## ]]; then
+            cd "$noTrailSlash"
+            return
+        fi
+
+        #cd to first partial leading name match
+        for dir in (#i)$noTrailSlash*(DN-/) (#i)${noTrailSlash:gs/\//*\/}*(DN-/); do
+            cd "$dir"
+            return
+        done
+
+        if [[ $base == "." ]]; then
+            zpwrLogConsoleErr "'$noTrailSlash': Not a valid file or directory."
+            return 1
+        fi
+
+        #find next dir to root
+        while [[ "$base" != / ]]; do
+            test -d "$base" && cd "$base"&& return
+            base="${base:h}"
+        done
+
+        zpwrLogConsoleErr "'$noTrailSlash': Not a valid file or directory."
+        return 1
+    fi
+
+}
+
+zpwrCd "$@"

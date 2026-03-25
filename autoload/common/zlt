@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zlt() {
+
+    if [[ -d "$ZPWR_LOCAL_TEMP" ]]; then
+        zpwrCd "$ZPWR_LOCAL_TEMP"
+    else
+        zpwrLogConsoleErr "ZPWR_LOCAL_TEMP '$ZPWR_LOCAL_TEMP' is not a dir."
+    fi
+
+}
+
+zlt "$@"

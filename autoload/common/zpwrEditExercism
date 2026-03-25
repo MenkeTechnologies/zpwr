@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEditExercism(){
+
+    local f
+
+    builtin cd -q "$HOME/Exercism" &>/dev/null || {
+        zpwrLogConsoleErr "$HOME/Exercism does not exist"
+        return 1
+    }
+
+    f="$(zpwrFzfFileSearch sort)"
+
+    if [[ -n "$f" ]]; then
+        BUFFER="EDITOR='$ZPWR_VIM' zpwr vimcd $f"
+        #print -rs -- "$BUFFER"
+        eval "$BUFFER"
+    fi
+
+}
+
+zpwrEditExercism "$@"

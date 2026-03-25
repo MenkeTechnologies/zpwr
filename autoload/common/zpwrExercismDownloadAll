@@ -1,0 +1,44 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrExercismDownloadAll(){
+
+    function ___usage() {
+        echo "usage: zpwrExercismDownloadAll [-h,--help] | [-r,--redownload] [-s,--sleep <time>] <track>" >&2
+        unset -f ___usage
+    }
+
+    local trackName redownload help cmd
+    local -a opts
+
+    zparseopts -D -E -F -- {r,-redownload}=redownload {s,-sleep}:=sleep {h,-help}=help &>/dev/null || { ___usage; return 1 }
+
+    if [[ -z "$1" ]] || (( $#help )); then
+        ___usage
+        return 1
+    fi
+
+    zpwrCommandExists exercism || {
+        zpwrLogConsoleErr "exercism command not found."
+        return 1
+    }
+
+    if (( $#redownload )); then
+        opts+=('--force' )
+    fi
+    for trackName in "$@"; do
+        while read; do
+            if (( $#redownload )) || [[ ! -d "$HOME/Exercism/$trackName/$REPLY" ]]; then
+                cmd="command exercism download --exercise=$REPLY --track=$trackName ${=opts[@]}"
+                printf "\x1b[1;4m$cmd\x1b[0m\x0a"
+                ${=cmd}
+                if (( $#sleep )); then
+                    sleep $sleep[-1]
+                fi
+            fi
+        done < <(curl https://exercism.org/tracks/$trackName/exercises 2>&1 | tr ';&' '\n' | perl -nE 'say "$1" if m{/tracks/'$trackName'/exercises/(.*)}')
+
+    done
+}
+
+zpwrExercismDownloadAll "$@"

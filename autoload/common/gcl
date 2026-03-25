@@ -1,0 +1,24 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function gcl() {
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: gcl <repo>"
+        return 1
+    fi
+
+    local git_name dir_name last_arg
+
+    last_arg=${@: -1}
+    git_name="${last_arg##*/}"
+    dir_name=${git_name%.*}
+    git clone -v --progress --recursive "$@"
+    if [[ -d "$dir_name" ]]; then
+        zpwrCd "$dir_name"
+    else
+        zpwrLogConsoleErr "$dir_name failed to clone"
+        return 1
+    fi
+}
+
+gcl "$@"

@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrDeleteLastWord(){
+
+    local mywords
+
+    mywords=(${(z)BUFFER})
+    if (( $#mywords > 1  )); then
+        BUFFER=${mywords[1,-2]}" "
+    else
+        BUFFER=
+    fi
+}
+
+zpwrDeleteLastWord "$@"

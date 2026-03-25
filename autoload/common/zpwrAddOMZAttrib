@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrAddOMZAttrib() {
+    zcompdump_metadata="#omz revision: $(builtin cd -q "$ZSH"; git rev-parse HEAD 2>/dev/null)\n#omz fpath: $fpath"
+    echo "\n$zcompdump_metadata" | tee -a "$ZSH_COMPDUMP" &>/dev/null
+}
+
+zpwrAddOMZAttrib "$@"

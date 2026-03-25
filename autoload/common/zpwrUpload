@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrUpload(){
+
+    if [[ -z "$2" ]]; then
+        zpwrLogConsoleErr "usage: upload <file> <URL>"
+        return 1
+    fi
+    command curl -vvv -fsSL -F file=@"$1" http://"$2"
+}
+
+zpwrUpload "$@"

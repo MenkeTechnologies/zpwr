@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTabNumCmd() {
+
+    local num args
+
+    num=$1
+    shift
+    args="$@"
+    echo "${ZPWR_TABSTOP}$num$args${ZPWR_TABSTOP}${ZPWR_TABSTOP}"
+}
+
+zpwrTabNumCmd "$@"

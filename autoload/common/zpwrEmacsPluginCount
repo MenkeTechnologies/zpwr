@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEmacsPluginCount(){
+
+    zpwrEmacsPluginList |
+        wc -l |
+        awk '{$1=$1};1'
+}
+
+zpwrEmacsPluginCount "$@"

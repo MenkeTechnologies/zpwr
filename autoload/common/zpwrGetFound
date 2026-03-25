@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGetFound(){
+
+    eval "find / 2>/dev/null | $ZPWR_FZF -m $FZF_CTRL_T_OPTS" |
+        perl -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+}
+
+
+zpwrGetFound "$@"

@@ -1,0 +1,67 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+#link over latest configuration files from $ZPWR_REPO_NAME
+function zpwrUnlinkConf(){
+
+    local symFiles file snipDir abspath
+
+    local -A userSymFiles
+
+    userSymFiles=(
+        .tmux.conf "${ZPWR_TMUXRC}"
+        .vimrc "${ZPWR_VIMRC}"
+    )
+
+    symFiles=(
+        conf.gls
+        conf.df
+        conf.ifconfig
+        conf.mount
+        conf.whois
+        .iftopcolors
+        .inputrc
+        .zshrc
+        #"$ZPWR_IDEAVIMRC"
+        #.spacemacs
+        .globalrc
+    )
+
+    for file abspath in ${(kv)userSymFiles[@]} ; do
+        if [[ -f "$HOME/$file" ]]; then
+            if [[ -h "$HOME/$file" ]]; then
+                zpwrPrettyPrint "REMOVING $HOME/$file"
+                echo rm -f $HOME/$file
+                rm -f -- $HOME/$file
+            else
+                zpwrPrettyPrint "not REMOVING $HOME/$file because not symlink"
+            fi
+        fi
+    done
+
+    for file in ${symFiles[@]} ; do
+        if [[ -f "$HOME/$file" ]]; then
+            if [[ -h "$HOME/$file" ]]; then
+                zpwrPrettyPrint "REMOVING $HOME/$file"
+                echo rm -f $HOME/$file
+                rm -f -- $HOME/$file
+            else
+                zpwrPrettyPrint "not REMOVING $HOME/$file because not symlink"
+            fi
+        fi
+    done
+    rm -rf "$HOME/.vim/UltiSnips"
+
+    snipDir="$HOME/.emacs.d/private/snippets/zpwr-snippets"
+
+    if [[ -d "$snipDir" ]]; then
+       rm -rf "$snipDir"
+    fi
+
+    if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+        zpwrPrettyPrint "Unlink fzf for zinit"
+        echo rm -rf "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
+        rm -rf "$ZPWR_PLUGIN_MANAGER_HOME/plugins/fzf"
+    fi
+}
+
+zpwrUnlinkConf "$@"

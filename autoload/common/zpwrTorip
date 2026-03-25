@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTorip(){
+
+    local ip
+
+    ip=$(curl --socks5 127.0.0.1:9050 icanhazip.com)
+    whois $ip
+    echo $ip
+}
+
+zpwrTorip "$@"

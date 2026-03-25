@@ -1,0 +1,38 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFordir(){
+
+    if [[ -z "$2" ]]; then
+       zpwrLogConsoleErr "usage: zpwrFordir [ -q ] <cmd> <dirs> to run <cmd> in each dir"
+       return 1
+    fi
+
+    local dir cmd opts
+
+    zparseopts -D -E -A opts -- q
+
+    cmd="$1"
+
+    if [[ -d "$cmd" || -f "$cmd" ]]; then
+       zpwrLogConsoleErr "usage: zpwForDir [ -q ] <cmd> <dirs> to run <cmd> in each dir"
+       return 1
+    fi
+
+    shift
+
+    for dir in "$@"; do
+        if [[ -d "$dir" ]]; then
+            if (( $+opts[-q] )); then
+            (
+                'builtin' 'cd' "$dir" && eval "$cmd"
+            )
+            else
+            (
+                'builtin' 'cd' "$dir" && zpwrPrettyPrint "'builtin' 'cd' $dir && $cmd" && eval "$cmd"
+            )
+            fi
+        fi
+    done
+}
+
+zpwrFordir "$@"

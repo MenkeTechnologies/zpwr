@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function return2(){
+
+    if zpwrIsZsh; then
+        exec 2> /dev/tty
+    else
+        zpwrLogConsoleErr "only for zsh"
+        return 1
+    fi
+}
+
+return2 "$@"

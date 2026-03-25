@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrPygmentcolors(){
+
+    local dir i
+    dir="$(command python3 -m pip show pygments | command grep Location | awk '{print $2}')"
+    for i in "$dir/pygments/styles/"* ; do
+        echo "$i"
+    done
+}
+
+zpwrPygmentcolors "$@"

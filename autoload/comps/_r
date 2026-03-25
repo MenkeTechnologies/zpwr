@@ -1,0 +1,10 @@
+#compdef r
+
+function __r(){
+
+    rdirs=( ${(@f)"$(dirname "$(pwd)" | perl -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)."\n";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)."\n"};print ++$c.":/"')"} )
+
+    _describe -t zdir 'rdirs' rdirs
+}
+
+__r "$@"

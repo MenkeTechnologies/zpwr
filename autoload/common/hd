@@ -1,0 +1,22 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function hd(){
+
+    local cmd
+
+    if cmd="$(zpwrGetGHDelURL)";then
+
+        if zpwrConfirm "Exe '${cmd//$GITHUB_TOKEN/***}'"; then
+            if eval "$cmd"; then
+                zpwrPrettyPrint "Successful deletion."
+            else
+                zpwrLogConsoleErr "Error in deletion."
+            fi
+        fi
+    else
+            zpwrLogConsoleErr "zpwrGetGHDelURL failed."
+    fi
+
+}
+
+hd "$@"

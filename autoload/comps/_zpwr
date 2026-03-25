@@ -1,0 +1,137 @@
+#compdef zpwr zp
+function __zpwr_gtl(){
+
+    if ! zpwrIsGitDir; then
+        _message "$PWD is not a git dir"
+        return 1
+    fi
+
+    local -a ary
+    local tag des
+
+    while read tag desc; do
+        ary+=("$tag:$desc")
+    done < <(git tag --sort=-v:refname -n -l)
+
+    _describe -t commit-tags tags ary
+}
+
+
+function _zpwr(){
+
+  local arguments verb
+  local curcontext=$curcontext state line ret=0
+
+  arguments=(
+        '(- * :)'{-h,-\?,--help}'[show help message and exit]'
+        '(- * :)'{-V,--version}'[show zpwr version and exit]'
+        '1:zpwr subcommand:->verb'
+        '*:: :->args'
+    )
+
+    _arguments -S -s $arguments && return 0
+
+    case $state in
+        verb)
+            ret=1
+            _describe -t zpwr-regen "zpwr regen verbs" zpwrRegenVerbs && ret=0
+            _describe -t zpwr-clean "zpwr clean verbs" zpwrCleanVerbs && ret=0
+            _describe -t zpwr-travis "zpwr travis verbs" zpwrTravisVerbs && ret=0
+            _describe -t zpwr-learn "zpwr learn verbs" zpwrLearnVerbs && ret=0
+            _describe -t zpwr-search "zpwr env verbs" zpwrSearchVerbs && ret=0
+            _describe -t zpwr-update "zpwr update verbs" zpwrUpdateVerbs && ret=0
+            _describe -t zpwr-cd "zpwr cd verbs" zpwrCdVerbs && ret=0
+            _describe -t zpwr-clipboard "zpwr clipboard verbs" zpwrClipboardVerbs && ret=0
+            _describe -t zpwr-emacs "zpwr emacs verbs" zpwrEmacsVerbs && ret=0
+            _describe -t zpwr-vim "zpwr vim verbs" zpwrVimVerbs && ret=0
+            _describe -t zpwr-github "zpwr github verbs" zpwrGithubVerbs && ret=0
+            _describe -t zpwr-gitrepos "zpwr git repo cache verbs" zpwrGitReposVerbs && ret=0
+            _describe -t zpwr-git "zpwr git verbs" zpwrGitVerbs && ret=0
+            _describe -t zpwr-misc "zpwr misc verbs" zpwrMiscVerbs && ret=0
+            _describe -t zpwr-send "zpwr send verbs" zpwrSendVerbs && ret=0
+            _describe -t zpwr-forgit "zpwr forgit verbs" zpwrForgitVerbs && ret=0
+            _describe -t zpwr-log "zpwr log verbs" zpwrLogVerbs && ret=0
+
+            #_describe -t commands "zpwr verbs" zpwrSubcommandsAry && ret=0
+            ;;
+        args)
+            verb=$words[1]
+            curcontext="${curcontext%:*:*}:zpwr-$verb:"
+            case $verb in
+                redo|re|redosql|rsql|searchl|se|see|seee|searchlee|searchle|getlearn|learnget)
+                    _se
+                    ;;
+                attach)
+                    _tmux-attach-session
+                    ;;
+                cat)
+                    _c
+                    ;;
+                cd|f|fwd|forward)
+                    _f
+                    ;;
+                cdup|reverse|rvs|r)
+                    _r
+                    ;;
+                clone|zpwrCloneToForked)
+                    _git-clone
+                    ;;
+                dfimage)
+                    __docker_complete_images
+                    ;;
+                digs)
+                    _digs
+                    ;;
+                exists)
+                    _zpwrExists
+                    ;;
+                gitedittag)
+                    __zpwr_gtl
+                    ;;
+                gitzfordir|gitzfordirmain|gitzfordirdevelop)
+                    _zcommand
+                    ;;
+                info | clearlist)
+                    _cl
+                    ;;
+                man)
+                    _man
+                    ;;
+                printmap)
+                    _zpwrPrintMap
+                    ;;
+                ps)
+                    _p
+                    ;;
+                reveal)
+                    _reveal
+                    ;;
+                search)
+                    words=(s "${(@)words[2,-1]}") _s
+                    ;;
+                servicedown)
+                    _ssd
+                    ;;
+                serviceup)
+                    _ssu
+                    ;;
+                startsend*|stopsend*)
+                    __tmux-panes
+                    ;;
+                z)
+                    _zcommand
+                    ;;
+                *)
+                    _alternative \
+                'files:files:_files' \
+                'directory-stack:directory stack:_directory_stack'
+                    ;;
+            esac
+            ret=$?
+        ;;
+    esac
+
+    return ret
+}
+
+_zpwr "$@"

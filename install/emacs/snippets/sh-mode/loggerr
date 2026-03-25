@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: zpwrLogInfo error
+# key: loe
+# --
+zpwrLogConsoleErr "______'"'$1'"'_____ = ""'$1'"

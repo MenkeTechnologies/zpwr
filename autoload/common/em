@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function em(){
+
+    if [[ -z "$1" ]]; then
+        "${=ZPWR_EMACS}" .
+    else
+        "${=ZPWR_EMACS}" "$@"
+    fi
+
+}
+
+em "$@"

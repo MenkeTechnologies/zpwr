@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrUp8widget() {
+
+    zle .kill-whole-line
+    BUFFER=u8
+    zle .accept-line
+}
+
+zpwrUp8widget "$@"

@@ -1,0 +1,18 @@
+[Unit]
+Description=start docker compose containers
+After=docker.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/docker
+Environment="ZPWR_SCRIPTS=/home/pi/.zpwr/scripts"
+Environment="HOME=/home/pi"
+ExecStart=/usr/bin/env bash /home/pi/.zpwr/scripts/startContainers.sh
+ExecStart=/usr/bin/env bash /home/pi/.zpwr/scripts/stopContainers.sh
+
+
+[Install]
+WantedBy=multi-user.target

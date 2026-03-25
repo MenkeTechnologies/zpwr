@@ -1,0 +1,302 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrBindAliasesLate(){
+
+    alias v="$ZPWR_VIM"
+    alias vi="$ZPWR_VIM"
+    alias vv="$ZPWR_VIM"
+    alias vim="$ZPWR_VIM"
+    alias vm="$ZPWR_VIM -u $ZPWR_ENV/.mininit.vim"
+    alias sv="$ZPWR_FULL_SUDO $ZPWR_VIM"
+    #{{{                    MARK:Aliases
+    #**************************************************************
+    # portable aliases
+    zpwrExists c.pl && {
+        alias pp='c.pl'
+        alias ppp='c.pl *'
+    }
+    alias dirs='"builtin" dirs -v'
+    zpwrExists proxychains && alias pc='proxychains'
+    zpwrExists proxychains4 && alias pc='proxychains'
+    alias debug='ZPWR_TRACE=true;ZPWR_DEBUG=true;'
+    alias unbug='ZPWR_TRACE=false;ZPWR_DEBUG=false;'
+    alias lo="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE | nl"
+    alias loo="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE | nl"
+    alias ol="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE"
+    alias llo="'builtin' command' 'tail' -n +1 -F $ZPWR_LOGFILE"
+    zpwrExists rlwrap && alias plr="'builtin' 'command' 'rlwrap' -A -pgreen -S'perl> ' perl -wnE'say eval()//\$@'"
+    alias cpan='"builtin" command rlwrap cpan'
+    alias nz='"builtin" "exec" "zsh"'
+    alias ll="zpwrClearList"
+    alias la="zpwrClearList"
+    alias l="zpwrClearList"
+    alias ca='"builtin" "command" "cat" "-n"'
+    alias sa="$ZPWR_FULL_SUDO 'cat' '-n'"
+    alias ra="$ZPWR_FULL_SUDO 'rm' '-rf' '--'"
+    alias die="$ZPWR_FULL_SUDO 'kill' '-9' '--'"
+    alias da=zpwrDetachall
+    alias ni='npm install'
+    alias zu=zunit
+    alias pk=p10k
+    local prefix=
+    if zpwrCommandExists grc; then
+        prefix='\grc --colour=on '
+    fi
+    alias tl='"builtin" "command" "tmux" list-sessions'
+    alias tlw='"builtin" "command" "tmux" list-windows'
+    alias tlp='"builtin" "command" "tmux" list-panes'
+    alias tlb='"builtin" "command" "tmux" list-buffers'
+    alias tlc='"builtin" "command" "tmux" list-clients'
+    alias tlk='"builtin" "command" "tmux" list-keys'
+    alias ta='"builtin" "command" "tmux" attach-session'
+    alias tn='"builtin" "command" "tmux" new-session'
+    alias ts='"builtin" "command" "tmux" new-session -s'
+
+    alias mk='make'
+    alias mkc="make clean"
+    alias mka="make all"
+    alias mkca="make clean all"
+    alias mki="$ZPWR_FULL_SUDO ${prefix}make install"
+
+    if zpwrExists emacs; then
+        alias emacs="$ZPWR_EMACS"
+        alias ee="$ZPWR_EMACS_CLIENT"
+        alias me='source em-server.sh'
+    fi
+
+    if zpwrExists heroku; then
+        alias hk='heroku'
+    fi
+
+
+    test -d "$ZPWR_PYSCRIPTS" && alias py="zpwrCd $ZPWR_PYSCRIPTS"
+    alias p3="python3"
+
+    zpwrExists fc && alias please="$ZPWR_FULL_SUDO \$(fc -ln -1)"
+
+    if zpwrExists spotify; then
+        alias rep='spotify replay'
+        alias ne='spotify next'
+        alias pe='spotify prev'
+        alias spa='spotify pause'
+    fi
+
+    if zpwrCommandExists exercism; then
+        alias es='exercism submit'
+    fi
+
+    if zpwrIsZsh; then
+        export READNULLCMD='less'
+        # zsh xtrace prompt
+        export PROMPT4=$'\e[34m%x\t%0N\t%I\t%_\e[0m\t'
+        alias 10='cd -10'
+        alias 11='cd -11'
+        alias 12='cd -12'
+        alias 13='cd -13'
+        alias 14='cd -14'
+        alias 15='cd -15'
+        alias 16='cd -16'
+        alias 17='cd -17'
+        alias 18='cd -18'
+        alias 19='cd -19'
+    else
+        # bash xtrace prompt
+        export PS4=$'>\e[1;4;39m${BASH_SOURCE}\e[37m\e[0;34m__${LINENO}\e[37m__\e[0;32m${FUNCNAME[0]}> \e[0m'
+    fi
+
+    #{{{                    MARK:ALIASES for editing config files
+    #**************************************************************
+    alias vrc='${=ZPWR_VIM} -S $HOME/.vim/sessions/vrc.vim $HOME/.vimrc'
+    alias brc='${=ZPWR_VIM} -S $HOME/.vim/sessions/aliases.vim + $ZPWR_ALIAS_FILE; bash $ZPWR_SCRIPTS/backupConfig.sh 2> /dev/null'
+    alias zrc='${=ZPWR_VIM} -S $HOME/.vim/sessions/zshrc.vim + $HOME/.zshrc'
+    alias trc='${=ZPWR_VIM} -S $HOME/.vim/sessions/trc.vim $HOME/.tmux.conf'
+    alias tok='"builtin" cd $ZPWR; ${=ZPWR_VIM} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST; zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias conf='"builtin" cd $ZPWR; ${=ZPWR_VIM} $ZPWR_INSTALL/.zshrc $ZPWR_INSTALL/.globalrc $ZPWR_INSTALL/.tmux.conf $ZPWR_INSTALL/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias etok='"builtin" cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias econf='"builtin" cd $ZPWR; ${=ZPWR_EMACS_CLIENT} $HOME/.zshrc $HOME/.tmux.conf $HOME/.vimrc $ZPWR_ALIAS_FILE $ZPWR_TMUX/*(.) $ZPWR_PROMPT_FILE $ZPWR_TOKEN_PRE $ZPWR_TOKEN_POST $ZPWR_ENV/.minvimrc;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias zvt='"builtin" cd $ZPWR_TEST; ${=ZPWR_VIM} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    alias zet='"builtin" cd $ZPWR_TEST; ${=ZPWR_EMACS_CLIENT} $ZPWR_TEST/*.{zsh,zunit} $ZPWR/.travis.yml;zpwrClearList;zpwrIsGitDir && git diff HEAD'
+    #}}}***********************************************************
+
+    alias deleteTab="sed '/^[\x20\x09]*$/d'"
+    alias ba="HISTFILE=\"$HOME/.bash_history\" PS4=$'>\e[1;4;39m\${BASH_SOURCE}\e[37m\e[0;34m__\${LINENO}\e[37m__\e[0;32m\${FUNCNAME[0]}> \e[0m' bash"
+    alias ks="HISTFILE=\"$HOME/.bash_history\" PS4=$'>\e[1;4;39m\${BASH_SOURCE}\e[37m\e[0;34m__\${LINENO}\e[37m__\e[0;32m\${FUNCNAME[0]}> \e[0m' ksh"
+    alias upper="tr 'a-z' 'A-Z'"
+    # over aliases
+    if pwd | command grep -sq --color=always / 2>/dev/null; then
+        alias grep="grep --color=always"
+    fi
+    if pwd | command egrep -sq --color=always / 2>/dev/null; then
+        alias egrep="egrep --color=always"
+    fi
+    alias _="$ZPWR_FULL_SUDO"
+    alias tree='tree -afC'
+
+    alias k="pkill"
+    if zpwrExists kubectl; then
+        alias k8=kubectl
+    fi
+    alias kal="killall"
+    alias sin="./configure && make && $ZPWR_FULL_SUDO make install"
+    alias curl='curl -fsSL'
+    alias mount='grc --colour=on -c "$HOME/conf.mount" mount'
+    alias ifconfig='grc --colour=on -c "$HOME/conf.ifconfig" ifconfig'
+
+    if zpwrCommandExists systemctl; then
+        alias sc="$ZPWR_FULL_SUDO systemctl"
+        alias jcf="$ZPWR_FULL_SUDO journalctl -f"
+        alias jcfc='"builtin" command sudo -E env PATH="$PATH" journalctl -n 100 -f | ccze'
+    fi
+    #alias df='grc --colour=on -c "$HOME/conf.df" df'
+    alias pip="'builtin' 'noglob' 'command' 'python3' -m pip" # allows square brackets for pip command invocation
+    alias pin="'builtin' 'noglob' 'command' 'python3' -m pip install --user --break-system-packages"
+
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
+        # Darwin/macOS specific aliases
+        alias p_refresh="pio -f -c clion init --ide clion "
+        alias spd="du -csh {.[^.]*,..?*} * 2> /dev/null | gsort -h"
+        alias cpu="top -o cpu"
+        alias mem="top -o mem"
+        alias tip="top -o +command"
+        alias nd="defaults write com.apple.dock autohide-delay -float 100 && defaults write com.apple.dock tilesize -int 1 && killall Dock"
+        alias bsaver="nohup /System/Library/Frameworks/ScreenSaver.framework/Resources/ScreenSaverEngine.app/Contents/MacOS/ScreenSaverEngine -background > /dev/null &"
+        alias pkill="pkill -iIl"
+        alias q="qlmanage -p &>/dev/null"
+        # keep remote tty sessions alive by stopping sleep
+        # sudo pmset -c ttyskeepawake 1
+        alias v1="open -a 'vnc viewer';zpwrExecpy enterPasswordForVNC.py & bash $ZPWR_SCRIPTS/sshTunnelVnc.sh"
+        alias v2="open -a 'vnc viewer';zpwrExecpy enterPasswordForVNC2.py & bash $ZPWR_SCRIPTS/sshTunnelVnc2.sh"
+        alias rtsync="$ZPWR_SCRIPTS_MAC/rsyncr.sh"
+        alias xg='zpwrCd $HOME/Documents/xcode'
+        alias ap='zpwrCd /Applications'
+        alias tra='zpwrCd $HOME/.Trash'
+        alias sudoedit="$ZPWR_FULL_SUDO $EDITOR"
+        alias colo="bash $ZPWR_SCRIPTS_MAC/commandToColors.sh"
+        alias bl="'builtin' 'noglob' 'command' 'brew' link --force --overwrite"
+        alias bi="'builtin' 'noglob' 'command' 'brew' install"
+        alias bu="'builtin' 'noglob' 'command' 'brew' uninstall --zap"
+        alias buc="'builtin' 'noglob' 'command' 'brew' uninstall --zap --cask"
+        alias bs="'builtin' 'noglob' 'command' 'brew' search"
+        alias bic="'builtin' 'noglob' 'command' 'brew' install --cask"
+
+        if [[ -d "$HOMEBREW_OPT_HOME/tcl-tk/bin" ]]; then
+            export PATH="$HOMEBREW_OPT_HOME/tcl-tk/bin:$PATH"
+        fi
+
+
+        if zpwrCommandExists exa; then
+            alias lr="$ZPWR_EXA_COMMAND -R --tree | less -rMN"
+        else
+            zpwrCommandExists gls &&
+            alias lr='grc -c "$HOME/conf.gls" gls -iAlhFR --color=always' ||
+            alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR'
+        fi
+
+
+    else
+        # Linux or Unix
+        alias ip="grc -c $HOME/conf.ifconfig ip"
+        if zpwrExists exa; then
+            alias lr="$ZPWR_EXA_COMMAND -R --tree | less -rMN"
+        else
+            alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
+        fi
+        test -d "$HOME/.local/share/Trash" &&
+            alias tra='cd $HOME/.local/share/Trash'
+        if [[ "$ZPWR_OS_TYPE" == linux ]]; then
+            alias sjf='"builtin" command sudo -E env PATH="$PATH" journalctl -n 100 -f | ccze'
+            if zpwrExists pacman;then
+                alias api="$ZPWR_FULL_SUDO pacman -Sy --noconfirm"
+                alias apa="$ZPWR_FULL_SUDO pacman -Syyu --noconfirm --overwrite='*'"
+            elif zpwrExists apt;then
+                alias api="$ZPWR_FULL_SUDO apt install -y"
+                alias apa="$ZPWR_FULL_SUDO apt update; $ZPWR_FULL_SUDO apt dist-upgrade -y; $ZPWR_FULL_SUDO apt autoremove -y; $ZPWR_FULL_SUDO apt clean"
+            elif zpwrExists yum;then
+                alias api="$ZPWR_FULL_SUDO yum install -y"
+                alias apa="$ZPWR_FULL_SUDO yum check-update; $ZPWR_FULL_SUDO yum upgrade -y "
+            fi
+
+            alias ipt="$ZPWR_FULL_SUDO iptables --line-numbers -L"
+
+            zpwrOsRaspbianVsRHvsSuse \
+                'if [[ -f "$ZPWR_LOCAL/.rpitokens.sh" ]]; then
+                    source "$ZPWR_LOCAL/.rpitokens.sh"
+                elif [[ -f "$HOME/.rpitokens.sh" ]]; then
+                        source "$HOME/.rpitokens.sh"
+                fi' \
+                'alias exa="$ZPWR_EXA_COMMAND"' \
+                'if zpwrExists zypper;then
+                    alias api="$ZPWR_FULL_SUDO zypper install -y"
+                    alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"
+                    alias zy="$ZPWR_FULL_SUDO zypper"
+                fi'
+        elif [[ "$ZPWR_OS_TYPE" == freebsd ]]; then
+                alias api="$ZPWR_FULL_SUDO pkg install -y"
+                alias apa="yes | sudo pkg -E update; $ZPWR_FULL_SUDO pkg upgrade -y"
+        else
+            zpwrLogConsoleErr "unsupported OS $ZPWR_OS_TYPE"
+        fi
+    fi
+    alias tclsh="rlwrap tclsh"
+    alias logs="$ZPWR_FULL_SUDO tail -f /var/log/**/*.log | ccze"
+    alias beats="$ZPWR_FULL_SUDO tail -f /var/log/*beat/* | ccze"
+    alias matr="cmatrix -C blue -abs"
+    #}}}***********************************************************
+
+    #{{{                          MARK:PYTHON ZPWR_SCRIPTS
+    #**************************************************************
+    alias tmm='zpwrExecpy tmux_starter.py'
+    alias tmms="zpwrExecpy ssh_starter.py"
+    alias tmm_notabs="zpwrExecpy complete_ssh_starter.py;"
+    alias tmm_full="zpwrExecpy tabs.py; zpwrExecpy complete_ssh_starter.py"
+    alias mapit="zpwrExecpy mapIt.py"
+    alias ,,="zpwrExecpy amazonSearch.py"
+    alias shutpy="zpwrExecpy shutdown.py"
+    alias pb="zpwrExecpy bills.py"
+    alias ud=" zpwrExecpy udemy.py"
+    alias ipa="command ifconfig | perl -lane 'do {print \$F[1] =~ s/addr//r;exit0} if /inet\\s/ and !/127/'"
+    alias pgrep='pgrep -l'
+    alias jobs="jobs -l -d"
+    alias sd="clear;ssh d "
+    alias cl=clear
+    alias mkdir='mkdir -pv'
+    zpwrExists hexedit && alias he='hexedit -l 16'
+    alias fh='f !$'
+    alias gh=zpwrOpenmygh
+    eval "alias $ZPWR_GITHUB_ACCOUNT='zpwrOpenmygh $ZPWR_GITHUB_ACCOUNT'"
+    alias mus="cd $HOME/Music"
+
+    #}}}***********************************************************
+
+    #{{{                          MARK:aliases for ZPWR_SCRIPTS
+    #**************************************************************
+    alias inst="bash $ZPWR_SCRIPTS/tgzLocalInstaller.sh"
+    alias ctxt="bash $ZPWR_SCRIPTS/createTextFile.sh"
+    alias u="bash $ZPWR_SCRIPTS/upLoadPi.sh"
+    alias u2="bash $ZPWR_SCRIPTS/upLoadPi2.sh"
+    alias pw="bash $ZPWR_SCRIPTS/uploadWebPi.sh"
+    alias sy="bash $ZPWR_SCRIPTS/sync.sh"
+    alias sf="bash $ZPWR_SCRIPTS/directoryContentsSize.sh"
+    alias bluef='source $ZPWR_SCRIPTS/blueText.sh'
+    alias u8="bash $ZPWR_SCRIPTS/updater.sh"
+    alias u8r="bash -l $ZPWR_SCRIPTS/updater.sh -s"
+    alias gitgo='$ZPWR_SCRIPTS/gitgo.sh'
+    alias watchGit='bash $ZPWR_SCRIPTS/watchServiceFSWatchGit.sh'
+    alias watchPiWeb='bash $ZPWR_SCRIPTS/watchServiceFSWatchPiWeb.sh'
+    zpwrExists tput && {
+        ZPWR_VARS[bold]=$(tput bold || tput md)
+        ZPWR_VARS[red]=$(tput setaf 1)
+    }
+
+    zpwrExists idea && {
+        alias ic="idea create"
+        alias il="idea list"
+    }
+
+    unalias gcl >/dev/null 2>&1
+    #}}}***********************************************************
+
+}
+
+zpwrBindAliasesLate "$@"

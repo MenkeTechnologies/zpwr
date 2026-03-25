@@ -1,0 +1,99 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrUncompile(){
+
+    builtin emulate -L zsh
+    setopt nullglob
+
+    local dir knownZshFiles globalFiles file
+
+    knownZshFiles=(
+        "$HOME/.zshrc"*
+        "$HOME/.zshenv"*
+        "$HOME/.zlogout"*
+        "$HOME/.zlogin"*
+        "$ZSH/oh-my-zsh.sh"
+        "$ZSH_COMPDUMP"
+        "$ZPWR_ALIAS_FILE"
+        "$ZPWR_PROMPT_FILE"
+        "$ZPWR_LOCAL/.tokens.sh"
+        "$ZPWR_LOCAL/.tokens-post.sh"
+        "$ZPWR_ENV_FILE"
+        "$ZPWR_ENV/grc.zsh"
+        "$ZPWR_RE_ENV_FILE"
+        "$ZPWR_SCRIPTS/"*.zsh
+        "$ZPWR_SCRIPTS/"**/*.zsh
+        "$ZPWR_LIB"
+        "$ZPWR_LIB_INIT"
+        "$ZPWR_CROSS_OS_CMD"
+        "$ZPWR_CROSS_OS_EXE"
+        "$ZPWR_COMPSYS_CACHE/"*
+        "$ZPWR_PLUGIN_MANAGER_HOME/"*.zsh
+        "$ZPWR_PLUGIN_MANAGER_HOME/bin/"**/*.zsh
+        "$ZSH/lib/"*.zsh
+        "$ZSH/plugins/"*/*.plugin.zsh
+        "$ZSH/plugins/"*/*.zsh
+        "$ZSH/themes/"*.zsh-theme
+        "$ZSH_CUSTOM/plugins/"*/*.plugin.zsh
+        "$ZSH_CUSTOM/plugins/"*/*.zsh
+        "$ZSH_CUSTOM/themes/"*/*.zsh-theme
+        "$ZSH_CUSTOM/lib/"*.zsh
+        "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.zsh
+        "$ZSH_CUSTOM/snippets/OMZ::lib/"*/*.zsh
+        "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.plugin.zsh
+    )
+
+    globalFiles=(
+        /etc/profile*
+        /etc/zprofile*
+        /etc/zshrc*
+        /etc/zshenv*
+        /etc/zlogin*
+        /etc/zlogout*
+        /etc/zsh/z*
+        /etc/profile.env*
+    )
+
+    zpwrPrettyPrint "Removing ${#knownZshFiles} local and ${#globalFiles} global *.zwc files if exist"
+
+    for file in ${knownZshFiles[@]}; do
+        file=${file%*.zwc*}
+        if [[ -f "$file.zwc" ]]; then
+            echo rm -f "$file.zwc"
+            rm -f "$file.zwc"
+        fi
+        if [[ -f "$file.zwc.old" ]]; then
+            echo rm -f "$file.zwc.old"
+            rm -f "$file.zwc.old"
+        fi
+    done
+
+    for file in ${globalFiles[@]}; do
+        file=${file%*.zwc*}
+        if [[ -f "$file.zwc" ]]; then
+            echo sudo rm "$file".zwc
+            sudo rm -f "$file".zwc
+        fi
+        if [[ -f "$file.zwc.old" ]]; then
+            echo sudo rm "$file.zwc.old"
+            sudo rm -f "$file.zwc.old"
+        fi
+    done
+
+	for dir in $fpath; do
+		if test -d $dir;then
+            if [[ -f "$dir.zwc" ]]; then
+                echo rm -f "$dir.zwc"
+                rm -f "$dir.zwc" 2>/dev/null ||
+                sudo rm -f "$dir.zwc"
+            fi
+            if [[ -f "$dir.zwc.old" ]]; then
+                echo rm -f "$dir.zwc.old"
+                rm -f "$dir.zwc.old" ||
+                sudo rm -f "$dir.zwc.old"
+            fi
+        fi
+	done
+}
+
+zpwrUncompile "$@"

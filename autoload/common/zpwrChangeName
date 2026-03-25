@@ -1,0 +1,53 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrChangeName(){
+
+    if [[ -z "$3" ]]; then
+        zpwrLogConsoleErr "usage: zpwrChangeName <rootdir> <prefix> <file/terms...>"
+        return 1
+    fi
+    local oldName newName arg newPrefix rootDir
+
+    rootDir="$1"
+    newPrefix="$2"
+
+    shift
+    shift
+
+    for arg; do
+        oldName="$arg"
+        newName="$newPrefix${oldName:0:1:u}${oldName:1}"
+
+        echo "mv $oldName $newName;
+        perl -i -pe 's@\b___'$oldName'\b@$newName@g' **/*(.);
+        perl -i -pe 's@\b'$oldName'\b@newName@g' **/*(.);
+        less $newName"
+
+        if zpwrConfirm; then
+
+            echo
+
+            if [[ -f "$oldName" ]]; then
+                zpwrPrettyPrint "mv $oldName $newName"
+                mv "$oldName" "$newName"
+            fi
+
+            perl -i -pe 's@\b___'"$oldName"'\b@'"$newName"'@g' \
+                "$rootDir/"**/*~"$rootDir/".git/**~"$rootDir/"**/*.zwc(.)
+            perl -i -pe 's@\b'"$oldName"'\b@'"$newName"'@g' \
+                "$rootDir/"**/*~"$rootDir/".git/**~"$rootDir/"**/*.zwc(.)
+
+            if [[ -f "$newName" ]]; then
+                zpwrPrettyPrint "less $newName"
+                less "$newName"
+            fi
+        fi
+
+        echo
+
+    done
+
+
+}
+
+zpwrChangeName "$@"

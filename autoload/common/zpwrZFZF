@@ -1,0 +1,18 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrZFZF(){
+
+    local mywords
+
+    zle .kill-whole-line
+    BUFFER="z $(zpwrFzfZList)"
+    mywords=(${(z)BUFFER})
+
+    if (( $#mywords == 1 )); then
+        zle .kill-whole-line
+    else
+        zle .accept-line
+    fi
+}
+
+zpwrZFZF "$@"

@@ -1,0 +1,31 @@
+addons:
+  apt:
+    packages:
+    - zsh
+    - vim
+dist: bionic
+language: python
+python: 3.8
+os: linux
+before_script:
+- python3 --version
+- git clone https://github.com/MenkeTechnologies/zpwr ~/.zpwr
+- cd ~/.zpwr
+- ls -Al
+- mkdir .bin
+- export ZPWR=$PWD
+- export ZPWR_SCRIPTS="$ZPWR/scripts"
+- curl -L https://raw.githubusercontent.com/molovo/revolver/main/revolver > .bin/revolver
+- curl -L https://raw.githubusercontent.com/molovo/color/main/color.zsh > .bin/color
+- chmod u+x .bin/{color,revolver}
+- export PATH="$HOME/.zvm/bin:$PWD/.bin:$PATH"
+- git clone https://github.com/MenkeTechnologies/zunit
+- cd zunit && pwd
+- "./build.zsh"
+- export PATH="$PWD:$PATH"
+- echo $PATH
+- cd .. && pwd
+- tty
+script: "zunit --verbose tests/*.zsh"
+notifications:
+  email: false

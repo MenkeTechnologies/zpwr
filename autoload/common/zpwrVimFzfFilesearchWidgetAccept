@@ -1,0 +1,17 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimFzfFilesearchWidgetAccept(){
+
+    local f
+
+    f="$(zpwrFzfFileSearch)"
+
+    if [[ -n "$f" ]]; then
+        zle .kill-whole-line
+        BUFFER="$ZPWR_VIM $f"
+        zpwrLogDebug "$BUFFER"
+        zle .accept-line
+    fi
+}
+
+zpwrVimFzfFilesearchWidgetAccept "$@"

@@ -1,0 +1,50 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrRecompileFpath() {
+    builtin emulate -L zsh
+    setopt nullglob
+    setopt extendedglob
+
+    local dir compileFile origDir
+
+    typeset -aU fpathZshFiles fpathFilesToTest
+
+    zpwrPrettyPrint "ZRecompiling fpath/dir/* into fpath/dir.zwc"
+
+	for dir in $fpath; do
+		if [[ -d $dir ]];then
+            origDir="${dir}"
+            builtin cd "${dir:h}"
+            dir=${dir:t}
+            # zcompile all _comps and *.zsh
+            #echo (#i)$dir/(*.zsh|_*)(.)
+            fpathZshFiles=( (#i)$dir/(*.zsh|_*)(.) (#i)$dir/(*.zsh|_*)(@) )
+
+            # find other files
+            # echo (#i)$dir/*~($dir/*.(zsh|zwc|md)|$dir/.*|$dir/_*|$dir/LICENSE)(.)
+            fpathFilesToTest=( (#i)$dir/*~($dir/*.(zsh|zwc|md)|$dir/.*|$dir/_*|$dir/LICENSE)(.) )
+
+            #zpwrPrettyPrint "Processing $dir"
+            if (( $#fpathFilesToTest )); then
+                # echo "Found known zsh files: ${#fpathZshFiles} and checking possible autoload files: ${#fpathFilesToTest}"
+            fi
+            # test other file if zsh functions to autoload
+            for compileFile in ${fpathFilesToTest[@]}; do
+                #echo zsh -n -- $compileFile
+                zsh -n -- "$compileFile" &>> "$ZPWR_LOGFILE" && fpathZshFiles+=( "$compileFile" )
+            done
+
+            if (( $#fpathZshFiles )); then
+                print "Found ${#fpathZshFiles} zsh files in ${origDir}: "
+                if ! zrecompile -p -U $dir.zwc $fpathZshFiles 2>> "$ZPWR_LOGFILE"; then
+                    echo ">>> FALLBACK to sudo zsh -c autoload zrecompile; zrecompile -p -U $dir.zwc \$fpathZshFiles"
+                    sudo zsh -c "autoload zrecompile; zrecompile -p -U $dir.zwc $fpathZshFiles"
+                fi
+            fi
+        fi
+	done
+
+}
+
+zpwrRecompileFpath "$@"

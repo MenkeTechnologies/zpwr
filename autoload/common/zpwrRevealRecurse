@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrRevealRecurse(){
+
+    for i in **/*(/); do
+        ( builtin cd $i && reveal 2>/dev/null; )
+    done
+}
+
+zpwrRevealRecurse "$@"

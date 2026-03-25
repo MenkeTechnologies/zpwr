@@ -1,0 +1,44 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+if [[ "$UID" != "0" ]]; then
+
+    if [[ $ZPWR_BANNER_DESKTOP_LINUX == true ]]; then
+        if [[ -n "$SSH_CONNECTION" ]]; then
+            if [[ -d "$ZPWR_D" ]]; then
+                builtin cd "$ZPWR_D"
+            fi
+        fi
+    fi
+
+    if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
+        clear
+    fi
+    if [[ $ZPWR_BANNER_TYPE == ponies ]]; then
+
+
+        zpwrOsRaspbianVsFamily \
+                'if type ponysay 1>/dev/null 2>&1; then
+                    bash "$ZPWR_SCRIPTS/motd.sh" | ponysay -W 120
+                else
+                    bash "$ZPWR_SCRIPTS/motd.sh"
+                fi' \
+                'figlet -f block "$(whoami)" | ponysay -W 120 |
+                    splitReg.sh -- ------------- lolcat' \
+                'figlet -f block "$(whoami)" | ponysay -W 120 |
+                    splitReg.sh -- ------------- lolcat' \
+                'figlet -f block "$(whoami)" | ponysay -W 120 |
+                    splitReg.sh -- ------------- lolcat'
+    else
+        zpwrOsRaspbianVsFamily \
+                'bash "$ZPWR_SCRIPTS/motd.sh"' \
+                zpwrNoPonyBanner \
+                zpwrNoPonyBanner
+
+    fi
+    if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
+        zpwrListNoClear
+    fi
+else
+    # root on linux
+    zpwrClearList
+fi

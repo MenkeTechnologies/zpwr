@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: zpwrLog
+# key: lo
+# --
+zpwrLogInfo "______'"'$1'"'_____ = ""'$1'"

@@ -1,0 +1,33 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrCat(){
+
+    builtin emulate -L zsh
+    local ret=1
+
+    if [[ -p /dev/stdin ]]; then
+
+        if [[ -p /dev/stdout ]];then
+            zpwrCCommon =(cat) && ret=0
+        else
+            zpwrCCommon =(cat) | less
+            ret=${pipestatus[1]}
+        fi
+    else
+        if [[ -z "$1" ]]; then
+            zpwrLogConsoleErr "usage: zpwrCat <file...>"
+            return 1
+        fi
+
+        if [[ -p /dev/stdout ]];then
+            zpwrCCommon "$@" && ret=0
+        else
+            zpwrCCommon "$@"
+            ret=${pipestatus[1]}
+        fi
+    fi
+
+    return $ret
+}
+
+zpwrCat "$@"

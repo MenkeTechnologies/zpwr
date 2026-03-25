@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function j(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: j <dir/file>"
+        return 1
+    fi
+
+    local file
+
+    for file;do
+        dirname="$(dirname $file)"
+        [[ "$dirname" != . ]] && command mkdir -p "$dirname"
+        touch "$file"
+    done
+}
+
+j "$@"

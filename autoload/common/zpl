@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpl() {
+
+    if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
+        zpwrCd "$ZPWR_PLUGIN_DIR"
+    else
+        zpwrLogConsoleErr "ZPWR_PLUGIN_DIR '$ZPWR_PLUGIN_DIR' is not a dir."
+    fi
+
+}
+
+zpl "$@"

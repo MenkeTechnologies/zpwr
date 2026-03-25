@@ -1,0 +1,29 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGetGtagsEdit(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrGetGtagsEdit <editor>"
+        return 1
+    fi
+
+    local firstdir editor file mywords
+
+    editor="$1"
+    BUFFER=$(zpwrGtagsIntoFzf)
+
+    if [[ -n "$BUFFER" ]]; then
+        mywords=(${(z)BUFFER})
+        firstdir=${mywords[2]:h}
+        zpwrLogDebug "builtin cd $firstdir\""
+        #:h takes aways last "
+        BUFFER="builtin cd $firstdir\"; $editor $BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
+        zpwrLogDebug "$BUFFER"
+        print -zr -- "$BUFFER"
+    else
+        return
+    fi
+
+}
+
+zpwrGetGtagsEdit "$@"

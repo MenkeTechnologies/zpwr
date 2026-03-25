@@ -1,0 +1,48 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function s(){
+
+    zpwrExists zpwrIsZsh || {
+        source "$ZPWR_SCRIPTS/lib.sh" || {
+            echo "where is $ZPWR_SCRIPTS/lib.sh" >&2
+            return 1
+        } && zpwrLogConsoleErr 'forced to load lib.sh due to missing zpwrIsZsh'
+    }
+
+    local cmd sec_cmd out url
+
+    if zpwrExists subl; then
+        cmd=subl
+    else
+        cmd="$ZPWR_OPEN_CMD"
+    fi
+
+    if zpwrCommandExists s; then
+        sec_cmd=s
+    else
+        sec_cmd="$ZPWR_OPEN_CMD"
+    fi
+    if zpwrIsZsh; then
+        if [[ $sec_cmd == s ]]; then
+            {
+            test -z "$1" && ${=cmd} . || command s --provider google "$@"
+            }
+        else
+            {
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            url="https://google.com/search?q=$out"
+            ${=sec_cmd} $url &>/dev/null
+            }
+        fi
+    else
+        if [[ $sec_cmd == s ]]; then
+            test -z "$1" && $cmd . || command s --provider google  "$@"
+        else
+            out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
+            url="https://google.com/search?q=$out"
+            $sec_cmd $url &>/dev/null
+        fi
+    fi
+}
+
+s "$@"

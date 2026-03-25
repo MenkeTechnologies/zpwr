@@ -1,0 +1,41 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrBackup(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrBackup [ -d <dir> ] <file/dir...>"
+        return 1
+    fi
+
+    local newfile f dir dest opts
+
+    zparseopts -D -E -A opts -- d:
+
+    if (( $+opts[-d] )); then
+        dir=${opts[-d]}
+    else
+        dir=.
+    fi
+
+    dir="${dir:A}"
+
+    if ! [[ -d "$dir" ]]; then
+        mkdir -pv "$dir"
+    fi
+
+
+    for f in "$@"; do
+
+        f="${f:A}"
+        if [[ "$f" == "$dir" ]]; then
+            continue
+        fi
+        newfile="${f:t}".$(date +%Y%m%d.%H.%M.bak)
+        dest="$dir/$newfile"
+        cp -pR "$f" "$dest"
+        print -- "\e[4;1m$f\e[0m backed up to \e[4;1m$dest\e[0m"
+    done
+
+}
+
+zpwrBackup "$@"

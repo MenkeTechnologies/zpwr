@@ -1,0 +1,20 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+__zpwr_galiases(){
+
+    local galiasesAry
+    local k v
+
+    if ( ! (( $+__galiases_ary )) || _cache_invalid galias_cache ) && ! _retrieve_cache galias_cache; then
+        for k v in ${(kv)galiases}; do
+            __galiases_ary+=($k:"${(q)v}")
+        done
+
+        _store_cache galias_cache __galiases_ary
+    fi
+
+    _describe -t global-aliases 'global alias' __galiases_ary
+}
+
+__zpwr_galiases "$@"

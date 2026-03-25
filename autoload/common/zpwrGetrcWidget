@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGetrcWidget(){
+
+    zle .kill-whole-line
+    BUFFER="zpwrGetrc"
+    zle .accept-line
+}
+
+zpwrGetrcWidget "$@"

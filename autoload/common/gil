@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function gil(){
+
+    if ! zpwrIsGitDir; then
+       zpwrLogConsoleNotGit
+       return 1
+    fi
+
+    local file
+
+    file=".git/info/exclude"
+
+    if [[ ! -f "$file" ]]; then
+       zpwrLogConsoleErr "$file must exist"
+       return 1
+    fi
+
+    ${=EDITOR} "$file"
+
+}
+
+gil "$@"

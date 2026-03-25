@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimAllWidgetAccept(){
+
+    local sel
+
+    sel="$(zpwrFzvimAll)"
+
+    if [[ -n "$sel" ]]; then
+        zle .kill-whole-line
+        BUFFER="$ZPWR_VIM $sel"
+        zle .accept-line
+    fi
+}
+
+zpwrVimAllWidgetAccept "$@"

@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+# c ;<tab>
+function ___fzf_complete_c() {
+
+  FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '-m' "$@" < <(
+    find . -type f |& perl -lpe '$_=~s@$ENV{HOME}@~@'
+    )
+}
+
+___fzf_complete_c "$@"

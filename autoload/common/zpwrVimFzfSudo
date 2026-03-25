@@ -1,0 +1,31 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimFzfSudo(){
+
+    zle .kill-whole-line
+    local firstDir editor numWordsPre out
+
+    if [[ $ZPWR_VIM == *nvim* ]]; then
+        pre="$ZPWR_FULL_SUDO $ZPWR_VIM"
+        LBUFFER="$pre $(zpwrFzvim nvim)"
+    else
+        pre="$ZPWR_FULL_SUDO $ZPWR_VIM"
+        LBUFFER="$pre $(zpwrFzvim vim)"
+    fi
+
+    numWordsPre=( "${(z)pre}" )
+    out=( "${(z)BUFFER}" )
+
+    if (( $#numWordsPre == $#out)); then
+        zle .kill-whole-line
+    else
+        firstIndexOut=$(( $#numWordsPre + 1 ))
+        firstDir=${out[$firstIndexOut]:h}
+        #zpwrLogInfo "words='$out[4]'=>'$firstDir'"
+        #:h takes aways last "
+        BUFFER="cd $firstDir\"; $BUFFER; zpwrClearList"
+        zle .accept-line
+    fi
+}
+
+zpwrVimFzfSudo "$@"

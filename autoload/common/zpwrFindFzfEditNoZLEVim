@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function findFzfEditNoZLEVim(){
+
+    zpwrFindFzfEditNoZLE "$ZPWR_VIM"
+}
+
+findFzfEditNoZLEVim "$@"

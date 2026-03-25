@@ -1,0 +1,116 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrAcceptLine () {
+
+    builtin emulate -L zsh
+    setopt noshwordsplit
+
+    local pane commandsThatModifyFiles regex mywords line command cmd acceptAliases args grc_cmd prefix cmdstr value
+
+    if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
+        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
+        zc-rename $ZPWR_CONVEY_NAME &>/dev/null
+        ZPWR_CONVEY_LAST_CMD=$BUFFER
+    else
+        if [[ -z $ZPWR_CONVEY_LAST_CMD ]]; then
+            ZPWR_CONVEY_LAST_CMD="-zsh $-"
+        fi
+
+        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD: $ZPWR_CONVEY_LAST_CMD PWD:${PWD} DATE:$(date)"
+        zc-rename $ZPWR_CONVEY_NAME &>/dev/null
+    fi
+
+    ZPWR_WILL_CLEAR=false
+    if [[ $ZPWR_SEND_KEYS_FULL == false ]]; then
+        zpwrKeyClear
+    else
+        if ! [[ $BUFFER == *zpwrStopSend* ]]; then
+            for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+                tmux send-keys -t $pane "C-m"
+            done
+        else
+            for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
+                tmux send-keys -t $pane "C-u"
+            done
+        fi
+    fi
+
+    #do we want to clear the screen and run ls after we exec the current line?
+
+    commandsThatModifyFiles=(rm mv cp mkdir ln chown chmod touch unlink srm md rmdir chflags chgrp git\ reset git\ clone gcl dot_clean)
+
+    zpwrExpandParseWords "$BUFFER"
+
+    if [[ "${(j@ @)ZPWR_EXPAND_WORDS_LPARTITION}" =~ ${ZPWR_VARS[continueFirstPositionRegexNoZpwr]} ]]; then
+
+        cmdstr=${(QL)match[-1]}
+        prefix=${(QLj@@)match[1,-2]}
+        mywords=( ${(z)cmdstr} )
+
+        for command in ${commandsThatModifyFiles[@]}; do
+            # match touch t
+            # NOT touchtest t
+
+            if [[ ${cmdstr} == ${command}([^[:alnum:]_]*|) ]]; then
+                ZPWR_WILL_CLEAR=true
+                zpwrLogDebug "found '$command' in '$BUFFER' with matches '$match'"
+                break
+            fi
+        done
+
+        # sudo =iftop fails so remove =
+        cmd=${mywords[1]#=}
+
+        #so sudo -E env ping uses grc overalias of ping
+        if zpwrCommandExists grc; then
+
+            args=( "${mywords[2,-1]}" )
+
+            if [[ $prefix == (*sudo*|*env*|*nice*|*time*) ]]; then
+
+                value="${aliases[$cmd]}"
+                if [[ $value == grc([^[:alnum:]_]*|) ]]; then
+                    print -srn -- "$BUFFER"
+                    BUFFER="$ZPWR_FULL_SUDO $value ${args[@]}"
+                    echo
+                    eval "$BUFFER"
+                    BUFFER=""
+                    zle .accept-line
+                    return 0
+                fi
+            fi
+        fi
+    fi
+
+    # prevent global alias in first position from expanding
+    if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
+        if [[ -z "$BUFFER" ]]; then
+            zle .accept-line
+            return 0
+        fi
+        if [[ -n ${galiases[$cmd]} ]];then
+            if [[ -n ${aliases[$cmd]} ]];then
+                # non global alias
+                print -- "$line" | grep -F "'" && \
+                    BUFFER="${line:1:-1} $mywords[2,$]" ||
+                    BUFFER="$line $mywords[2,$]"
+            else
+                # function
+                BUFFER="\\$mywords"
+            fi
+        fi
+    fi
+
+
+    if [[ $ZPWR_EXPAND_PRE_EXEC == true ]]; then
+        CURSOR=${#BUFFER}
+        zpwrExpandSupernaturalSpace "${ZPWR_VARS[ENTER_KEY]}"
+    fi
+
+    zle .accept-line
+    # leaky $ZPWR_DEFAULT_OMZ_THEME theme so reset ANSI escape sequences
+    printf "\x1b[0m"
+}
+
+zpwrAcceptLine "$@"

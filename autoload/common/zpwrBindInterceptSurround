@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrBindInterceptSurround() {
+    zle -N zpwrInterceptDelete
+    zle -N zpwrInterceptSurround
+    zle -N zpwrSelfInsert
+    bindkey -M viins "^?" zpwrInterceptDelete
+    bindkey -M viins '"' zpwrInterceptSurround
+    bindkey -M viins "'" zpwrInterceptSurround
+    bindkey -M viins '`' zpwrInterceptSurround
+    bindkey -M viins "(" zpwrInterceptSurround
+    bindkey -M viins "[" zpwrInterceptSurround
+    bindkey -M viins "{" zpwrInterceptSurround
+
+    zle -A zpwrSelfInsert self-insert
+}
+
+zpwrBindInterceptSurround "$@"

@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimAll(){
+
+    builtin cd $ZPWR
+    ${=ZPWR_VIM} "${=$(zpwrListFiles)}"
+    zpwrClearList
+    zpwrIsGitDir && git diff HEAD
+}
+
+zpwrVimAll "$@"

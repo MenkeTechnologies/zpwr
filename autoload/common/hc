@@ -1,0 +1,38 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function hc(){
+
+    local repoName old_dir
+
+    if ! zpwrCommandExists hub; then
+        zpwrLogConsoleErr "You need the 'hub' command for repo creation."
+        return 1
+    fi
+
+    if [[ -z "$1" ]]; then
+        repoName="$(basename "$(pwd)")" ||
+    else
+        repoName="$1"
+        command mkdir "$repoName"
+        if ! cd "$repoName"; then
+            zpwrLogConsoleErr "could not cd to $repoName"
+            return 1
+        fi
+    fi
+    printf "\x1b[1m"
+
+    git init
+
+    if hub create "$repoName"; then
+        if [[ ! -f README.md ]]; then
+            echo "# $repoName" > README.md
+            echo "# created by $ZPWR_GITHUB_ACCOUNT" >> README.md
+        fi
+        git add .
+        git commit -m "first commit"
+        git push --set-upstream origin main
+        printf "\x1b[0m"
+    fi
+}
+
+hc "$@"

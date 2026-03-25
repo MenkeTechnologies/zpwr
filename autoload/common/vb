@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function vb() {
+
+    if [[ -d "$HOME/.vim/bundle" ]]; then
+        zpwrCd "$HOME/.vim/bundle"
+    else
+        zpwrLogConsoleErr "HOME/.vim/bundle '$HOME/.vim/bundle' is not a dir."
+    fi
+
+}
+
+vb "$@"

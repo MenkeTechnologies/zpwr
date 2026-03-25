@@ -1,0 +1,36 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEnvCounts(){
+
+    zpwrPrettyPrint "ENV COUNTS"
+    echo "Commands: ${#commands}"
+    echo "Functions: ${#functions}"
+    echo "Completions: ${#_comps}"
+    echo "Functions (not completions): "$(( $#functions - $#_comps ))
+    echo "Builtins: ${#builtins}"
+    echo "Reserved words: ${#reswords}"
+    echo "Parameters: ${#parameters}"
+    echo "Environment Variables: "${#parameters[(R)scalar-export]}
+    echo "Local Parameters: "${#parameters[(R)^scalar-export]}
+    echo "Aliases: ${#aliases}"
+    echo "Global Aliases: ${#galiases}"
+    echo "Git Aliases: "${#aliases[(R)*git*]}
+    echo "Cd Aliases: "${#aliases[(R)*cd*]}
+    echo "Suffix Aliases: ${#saliases}"
+    echo "PATH entries: ${#path}"
+    echo "FPATH entries: ${#fpath}"
+    zpwrPrettyPrint "ZPWR COUNTS"
+    echo "ZPWR functions: "${#functions[(I)(#i)*zpwr*]}
+    echo "ZPWR aliases: "${#aliases[(R)(#i)*zpwr*]}
+    echo "ZPWR verbs: ${#ZPWR_VERBS}"
+    echo "ZPWR zsh plugins: $(zpwrZshPluginCount)"
+    echo "ZPWR vim plugins: $(zpwrVimPluginCount)"
+    echo "ZPWR emacs plugins: $(zpwrEmacsPluginCount)"
+    echo "ZPWR autoloads: $(zpwrAutoloadCount)"
+    echo "ZPWR scripts: $(zpwrScriptCount)"
+    echo "ZPWR environment variables: "${#${(M)${(k)parameters[(R)scalar-export]}%ZPWR*}}
+    echo "ZPWR startup time: "$ZPWR_VARS[startupTimeMs]
+    echo "ZPWR files count: ${#${(@f)$(zpwrListFiles | perl -lne '@l=<>;@u=do{my %seen;grep{!$seen{$_}++}@l};for(@u){do{$o=$1;($f=$1)=~s@~@$ENV{HOME}@;$o=~s@$ENV{HOME}@~@;print $o if -f $f}if m{^(.*)}}')}}"
+}
+
+zpwrEnvCounts "$@"

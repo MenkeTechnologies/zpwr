@@ -1,0 +1,224 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrBindAliasesZshLate(){
+
+unalias zpl &>/dev/null
+unalias z &>/dev/null
+#{{{                    MARK:Suffix aliases
+#**************************************************************
+alias -s txt='vim'
+#}}}***********************************************************
+
+#{{{                    MARK:Global Aliases
+#**************************************************************
+function globalAliasesInit(){
+
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}a="|& 'builtin' command ag -v '\bag\b' |& \\ag --hidden --color -i --"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}r="|& 'builtin' command rg -v '\brg\b' |& \\rg --hidden --threads=8 --color=always -i --"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}b='&>> "$ZPWR_LOGFILE" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
+
+    if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ap="| awk -F: 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}oo='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'"'
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| 'builtin' command perl -lanE 'say $ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="'builtin' command perl -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="'builtin' command perl -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
+
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="'builtin' command perl -i -pe 's,\\b$ZPWR_TABSTOP\\b,$ZPWR_TABSTOP,g' **/*~.git/**(.)~*.zwc(.)"
+
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ipf="'builtin' command perl -i -pe 's,\\b$ZPWR_TABSTOP\\b,quotemeta($ZPWR_TABSTOP),ge' **/*~.git/**(.)~*.zwc(.)"
+
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
+        #default value tabstops
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}see="| sed -E 's@.*$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}seee="| sed -E 's@.$ZPWR_TABSTOP@(&)$ZPWR_TABSTOP@g'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}sp="| sed -n '$ZPWR_TABSTOP,\$p'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}t="| tr '$ZPWR_TABSTOP' '$ZPWR_TABSTOP'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}uu="| awk '{$ZPWR_TABSTOP}' | uniq -c | sort -rn | head -10"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}g="git add . && git commit -m \""$ZPWR_TABSTOP\"""
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}gp="git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}grp="git reset --soft $ZPWR_TABSTOP && git add . && git commit -m \""$ZPWR_TABSTOP\"" && git push -f origin $ZPWR_TABSTOP"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}co="\\x1b[38;5;${ZPWR_TABSTOP}m${ZPWR_TABSTOP}\\x1b[0m"
+        alias rrd="www 5 'remoteName=origin;git fetch -f --all --prune --tags;output=\$(git log HEAD..\$remoteName/main --oneline); if [[ -n "\$output" ]]; then echo \"\$(date) We have change to \$(git remote -v)\" >&2; git reset --hard \$remoteName/main;$ZPWR_TABSTOP; fi'"
+    fi
+
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}c="| cut -d ' ' -f1"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}cf2="| sed 's@.*@_\U\l&_@' | boldText.sh | blueText.sh"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}e="|& 'builtin' command grep -v -E '\bgrep\b' |& command grep --color=always -i -E --"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}l='| less -rMN'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}lo='"$ZPWR_LOGFILE"'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}n="2> /dev/null"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}nn="> /dev/null 2>&1"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}o='&>> "$ZPWR_LOGFILE"'
+
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}sr="| sort"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}ta="| tail"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}u="| awk '{print \$1}' | uniq -c | sort -rn | head -10"
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}wc='| wc -l'
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}x='| tr a-z A-Z'
+
+
+    alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}v="| ${ZPWR_COPY_CMD}"
+}
+
+globalAliasesInit
+#}}}***********************************************************
+
+#{{{                    MARK:Regular Aliases
+#**************************************************************
+    if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
+
+        if zpwrExists lftp; then
+            alias lf="lftp sftp://$ZPWR_TABSTOP"
+        fi
+
+        alias au='autoload -Uz'
+        alias gacp="git add . && git commit -m '$ZPWR_TABSTOP' && git push"
+        alias gacpf="git add . && git commit -m '$ZPWR_TABSTOP' && git push -f"
+        alias gac="git add . && git commit -m '$ZPWR_TABSTOP'"
+        zpwrExists zff || alias zff="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { $ZPWR_TABSTOP; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
+        alias i='if [[ '$ZPWR_TABSTOP' ]];then
+            '$ZPWR_TABSTOP'
+        fi'
+
+        if zpwrCommandExists openssl; then
+            alias osc=': | openssl s_client -connect '$ZPWR_TABSTOP':443 | openssl x509 -text -noout | less -MNRKFX'
+        fi
+
+        alias iee='if [[ '$ZPWR_TABSTOP' ]];then
+            '$ZPWR_TABSTOP'
+        elif [[ '$ZPWR_TABSTOP' ]];then
+            '$ZPWR_TABSTOP'
+        else
+            '$ZPWR_TABSTOP'
+        fi'
+
+        alias cas='case '$ZPWR_TABSTOP' in
+            ( '$ZPWR_TABSTOP' )
+                '$ZPWR_TABSTOP'
+                ;;
+            ( * )
+                '$ZPWR_TABSTOP'
+                ;;
+        esac'
+
+        alias sel='select choice in '$ZPWR_TABSTOP'; do
+            '$ZPWR_TABSTOP'
+        done'
+
+        alias repe='repeat '$ZPWR_TABSTOP'; do
+            '$ZPWR_TABSTOP'
+        done'
+
+        alias ieee='if [[ '$ZPWR_TABSTOP' ]];then
+            '$ZPWR_TABSTOP'
+        elif [[ '$ZPWR_TABSTOP' ]];then
+            '$ZPWR_TABSTOP'
+        elif [[ '$ZPWR_TABSTOP' ]];then
+            '$ZPWR_TABSTOP'
+        else
+            '$ZPWR_TABSTOP'
+        fi'
+
+        alias fx="find . -print0 -iname '$ZPWR_TABSTOP' | xargs -0 -n1 -I{} $ZPWR_TABSTOP {}"
+
+        alias ie='if [[ '$ZPWR_TABSTOP' ]];then
+            '$ZPWR_TABSTOP'
+        else
+            '$ZPWR_TABSTOP'
+        fi'
+
+        alias wr='while read line;do
+            '$ZPWR_TABSTOP'
+        done < '$ZPWR_TABSTOP''
+
+        alias wh='while [[ '$ZPWR_TABSTOP' ]];do
+            '$ZPWR_TABSTOP'
+        done'
+
+        alias wt='while true'$ZPWR_TABSTOP';do
+            '$ZPWR_TABSTOP'
+        done'
+
+        alias fkv='for k v in ${(kv)'$ZPWR_TABSTOP'[@]};do
+            '$ZPWR_TABSTOP'
+        done'
+
+        alias fun='function '$ZPWR_TABSTOP'(){
+            '$ZPWR_TABSTOP';
+        }'
+
+        alias fe='for i in '$ZPWR_TABSTOP';do
+            '$ZPWR_TABSTOP'
+        done'
+
+        alias gta="git tag -fam \"$ZPWR_TABSTOP\" $ZPWR_TABSTOP && git push -f origin --tags"
+
+        alias fori="for (( i = 0; i < $ZPWR_TABSTOP; ++i )); do
+            $ZPWR_TABSTOP
+        done"
+
+        alias dry="git merge-tree \$(git merge-base FETCH_HEAD main$ZPWR_TABSTOP) main$ZPWR_TABSTOP FETCH_HEAD | less"
+
+        alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pl 80"
+
+        zpwrExists zfgw || alias zfgw="$ZPWR_REPO_NAME fordir 'zpwrWipedBranch=$ZPWR_TABSTOP; zpwrIsGitDir && { gco \$zpwrWipedBranch; gffa; git clean -dff && git reset --hard origin/\$zpwrWipedBranch && git clean -dff ; gla; zp gitclearcache; }' *"
+        zpwrExists zf || alias zf="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { $ZPWR_TABSTOP; }' *"
+        alias lg="zpwrLogInfo $(zpwrTabNumCmd 1 tr a-zA-Z)=$(zpwrTabNumCmd 1 tr a-zA-Z)"
+    fi
+
+
+zpwrExists zfg || alias zfg="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gffa; bk; gla; zp gitclearcache; }' *"
+
+zpwrExists zfgmw || alias zfgmw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco main; gffa; git clean -dff && git reset --hard origin/main && git clean -dff ; gla; zp gitclearcache; }' *"
+
+zpwrExists zfgdw || alias zfgdw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco development; gffa; git clean -dff && git reset --hard origin/development && git clean -dff ; gla; zp gitclearcache; }' *"
+
+zpwrExists zfgm || alias zfgm="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco main; gffa; bk; gla; zp gitclearcache; }' *"
+
+zpwrExists zfgd || alias zfgd="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gco development; gffa; bk; gla; zp gitclearcache; }' *"
+
+zpwrExists zfff || alias zfff="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gfa;bk;gla;zp gitclearcache; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
+
+zpwrExists zffw || alias zffw="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { gfa;git reset origin/\$(git_current_branch) --hard ;gla;zp gitclearcache; }' \$(cat $ZPWR_ALL_GIT_DIRS)"
+
+zpwrExists zu8 || alias zu8='zpwr updateall'
+
+alias zpg=zpwrgh
+alias zpw=zpwr
+alias zpgh=zpwrgh
+
+alias numcmd='print $#commands'
+#}}}***********************************************************
+
+#{{{                    MARK:Misc
+#**************************************************************
+
+if zpwrExists zunit; then
+    alias tru="( builtin cd $ZPWR && zunit --verbose )"
+fi
+
+# Example usage: zmv -W '*.pl' '*.perl'
+alias mmv='noglob zmv -W'
+
+zpwrExists thefuck && eval $(thefuck --alias)
+
+alias za=zc-all
+alias zid=zc-id
+alias zls=zc-ls
+alias zla=zc-logo-all
+alias zn=zc-bg-notify
+
+alias wget='noglob wget'
+alias curl='noglob \curl -fsSL'
+alias http='noglob http'
+alias digs='noglob digs'
+alias lftp='noglob lftp'
+
+alias pn='print -Prl -- "'"$ZPWR_TABSTOP"'"'
+
+###}}}***********************************************************
+}
+zpwrBindAliasesZshLate "$@"

@@ -1,0 +1,9 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGitConfig(){
+
+    ${=EDITOR} "$HOME/.gitconfig"
+
+}
+
+zpwrGitConfig "$@"

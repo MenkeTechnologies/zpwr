@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zph() {
+
+    if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME/plugins" ]]; then
+        zpwrCd "$ZPWR_PLUGIN_MANAGER_HOME/plugins"
+    else
+        zpwrLogConsoleErr "ZPWR_PLUGIN_MANAGER_HOME/plugins '$ZPWR_PLUGIN_MANAGER_HOME/plugins' is not a dir."
+    fi
+
+}
+
+zph "$@"

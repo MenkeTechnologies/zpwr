@@ -1,0 +1,73 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrRecompileFiles(){
+
+    local dir compileFile
+    typeset -aU knownZshFiles globalFiles
+
+
+    knownZshFiles=(
+        "$HOME/.zshrc"*
+        "$HOME/.zshenv"*
+        "$HOME/.zlogout"*
+        "$HOME/.zlogin"*
+        "$ZSH/oh-my-zsh.sh"
+        "$ZSH_COMPDUMP"
+        "$ZPWR_ALIAS_FILE"
+        "$ZPWR_PROMPT_FILE"
+        "$ZPWR_LOCAL/.tokens.sh"
+        "$ZPWR_LOCAL/.tokens-post.sh"
+        "$ZPWR_ENV_FILE"
+        "$ZPWR_ENV/"*.zsh
+        "$ZPWR_ENV/"*.sh
+        "$ZPWR_RE_ENV_FILE"
+        "$ZPWR_SCRIPTS/"**/*.zsh
+        "$ZPWR_LIB"
+        "$ZPWR_LIB_INIT"
+        "$ZPWR_CROSS_OS_CMD"
+        "$ZPWR_CROSS_OS_EXE"
+        "$ZPWR_COMPSYS_CACHE/"*
+        "$ZPWR_PLUGIN_MANAGER_HOME/"*.zsh
+        "$ZPWR_PLUGIN_MANAGER_HOME/bin/"**/*.zsh
+        "$ZSH/lib/"*.zsh
+        "$ZSH/plugins/"*/*.plugin.zsh
+        "$ZSH/plugins/"*/*.zsh
+        "$ZSH/themes/"*.zsh-theme
+        "$ZSH_CUSTOM/plugins/"*/*.plugin.zsh
+        "$ZSH_CUSTOM/plugins/"*/*.zsh
+        "$ZSH_CUSTOM/themes/"*/*.zsh-theme
+        "$ZSH_CUSTOM/lib/"*.zsh
+        "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.zsh
+        "$ZSH_CUSTOM/snippets/OMZ::lib/"*/*.zsh
+        "$ZSH_CUSTOM/snippets/OMZ::plugins/"*/*.plugin.zsh
+    )
+
+    globalFiles=(
+        /etc/profile*
+        /etc/zprofile*
+        /etc/zshrc*
+        /etc/zshenv*
+        /etc/zlogin*
+        /etc/zlogout*
+        /etc/zsh/z*
+        /etc/profile.env*
+    )
+
+    zpwrPrettyPrint "ZRecompiling ${#knownZshFiles} local and ${#globalFiles} global zsh files"
+
+    for compileFile in ${knownZshFiles[@]}; do
+        if [[ -f "$compileFile" ]]; then
+            zrecompile -p -U "$compileFile"
+        fi
+    done
+    for compileFile in ${globalFiles[@]}; do
+        if [[ -f "$compileFile" ]]; then
+            sudo zsh -c "autoload zrecompile; zrecompile -p -U $compileFile"
+        fi
+    done
+
+
+  }
+
+zpwrRecompileFiles "$@"

@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTestAll(){
+
+    zpwrTest
+
+    zpwrFordir -q "test -d tests && zpwrPrettyPrint \$PWD && zunit --verbose" "$ZPWR_PLUGIN_DIR/"*(/)
+}
+
+zpwrTestAll "$@"

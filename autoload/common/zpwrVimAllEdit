@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimAllEdit(){
+
+    BUFFER="$(zpwrFzvimAll)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    BUFFER="$ZPWR_VIM $BUFFER"
+    zpwrLogDebug "builtin cd $ZPWR"
+    eval "builtin cd $ZPWR"
+
+    BUFFER="$BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
+    zpwrLogDebug "$BUFFER"
+    print -s -- "$BUFFER"
+    eval "$BUFFER"
+}
+
+zpwrVimAllEdit "$@"

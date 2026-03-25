@@ -1,0 +1,75 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrBindFinal(){
+
+    emulate -L zsh
+
+    #{{{                    MARK:OPAM env
+    #**************************************************************
+    test -f "$HOME/.opam/opam-init/init.zsh" &&
+    source "$HOME/.opam/opam-init/init.zsh" &> /dev/null
+    #}}}***********************************************************
+    if [[ $ZPWR_TABSTOP_ALIASES == true ]]; then
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ag="'builtin' command ag --hidden --color -i -- '$ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rg="'builtin' command rg --hidden --threads=8 --color=always -i -- '$ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}rgf="'builtin' command rg --hidden --threads=8 --color=always -i --no-ignore-vcs -- '$ZPWR_TABSTOP'"
+    fi
+    export CHEATCOLORS=true
+
+    #Filter stderr through shell scripts
+    #having this setting messes with tmux resurrect so will enable it on individual basis
+    #exec 2> >("$ZPWR_SCRIPTS"/redText.sh)
+    # stderr colorization filter
+    # color2
+
+    # set right prompt string during continuation
+    export RPS2='+%N:%i:%^'
+
+    #{{{                    MARK:grc colorizer
+    #**************************************************************
+    # colors for common commands
+    test -s "$ZPWR_ENV/grc.zsh" && source "$ZPWR_ENV/grc.zsh"
+    #}}}***********************************************************
+
+    if zpwrExists jenv;then
+        export PATH="$HOME/.jenv/shims:$PATH"
+    fi
+
+    #{{{                    MARK:Groovy
+    #**************************************************************
+    unset GROOVY_HOME # when set this messes up classpath
+    ###}}}***********************************************************
+
+    if [[ -d "$ZPWR_PLUGIN_DIR" ]]; then
+        : ~ZPWR_PLUGIN_DIR
+        # ./ = dont show in prompt
+        export PD="$ZPWR_PLUGIN_DIR/."
+    fi
+
+    test -s \
+    "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash" &&
+    source "$GOPATH/src/github.com/zquestz/s/autocomplete/s-completion.bash"
+
+    ZPWR_VARS[EDITOR]="$ZPWR_VIM"
+
+    if [[ ! -p "$ZPWR_FIFO" ]]; then
+        rm -f "$ZPWR_FIFO"
+        mkfifo "$ZPWR_FIFO" &>> "$ZPWR_LOGFILE"
+    fi
+
+    if [[ -d "$HOMEBREW_PREFIX/bin" ]]; then
+        export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+    fi
+
+    builtin export SHELL="$(which zsh)"
+
+    bindkey -M viins '^r' redo
+    bindkey -M vicmd '^r' redo
+    bindkey -M viins '^z' undo
+    bindkey -M vicmd '^z' undo
+
+    autoload -Uz age
+}
+
+zpwrBindFinal "$@"

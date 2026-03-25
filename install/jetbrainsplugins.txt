@@ -1,0 +1,22 @@
+IdeaVim
+Custom Postfix Templates
+CPU Usage Indicator
+Rainbow Brackets
+Nyan Progress Bar
+Extra Icons
+Material Theme UI
+VisualVM Launcher
+SequenceDiagram
+GitToolBox
+Lombok
+.ignore
+MavenHelper
+Perl
+Rust
+Toml
+Scala
+Jms messenger
+Kubernetes
+MapStruct Support
+String Manipulation
+swagger

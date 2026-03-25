@@ -1,0 +1,27 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function cv() {
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: cv <file...>"
+        return 1
+    fi
+
+    emulate -L zsh
+    setopt noshwordsplit
+
+    local firstArg sel firstDir args
+
+    args=( "$@" )
+    firstArg="${args[1]}"
+    firstDir="${(Q)firstArg:A:h}"
+
+    BUFFER="builtin cd \"$firstDir\" && $EDITOR ${(qqq@)args:A}; zpwrClearList; zpwrIsGitDir && git diff HEAD; "
+
+    print -sr "$BUFFER"
+    zpwrLogDebug "$BUFFER"
+    eval "$BUFFER"
+
+}
+
+cv "$@"

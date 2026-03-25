@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGtagsIntoFzf(){
+
+    #gtags referenced to $HOME
+    (
+        builtin cd "$HOME"
+        global -x '.*' |
+        eval "$ZPWR_FZF $FZF_GTAGS_OPTS" |
+    perl -pe 's@^(\S*?)\s+(\d+)\s+(\S*)\s+.*@+$2 "'"$HOME/"'$3"@;s@\n@ @g'
+    )
+}
+
+zpwrGtagsIntoFzf "$@"

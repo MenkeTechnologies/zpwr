@@ -1,0 +1,129 @@
+snippet shebang "shebang line"
+#!/usr/bin/env ${1:bash}
+endsnippet
+
+snippet sig "My Signature"
+#created by `!v g:snips_author` at `date`
+endsnippet
+
+snippet mypy "all the env vars"
+`!p import os
+if not snip.c:
+	str = ""
+	for k,v in os.environ.items():
+		str+="{} {}\n".format(k,v)
+	snip.rv = str`
+endsnippet
+
+snippet fmarker "simple marker"
+#{{{                    MARK:$1
+#**************************************************************
+endsnippet
+
+snippet fm "complete fold marker"
+#{{{                    MARK:$1
+#**************************************************************
+$2
+#}}}***********************************************************
+endsnippet
+		
+
+snippet endmark "simple marker"
+#**************************************************************
+#}}}
+$1
+endsnippet
+
+snippet marker "description"
+#**************************************************************
+#                       MARK:$1
+#**************************************************************
+endsnippet	
+
+
+snippet sect "section"
+##########################################
+###############  $1  ##############
+##########################################
+endsnippet
+
+snippet email "my email"
+`echo $EMAIL`
+endsnippet
+
+snippet temp "default header"
+#!/usr/bin/env $1
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: `echo $ZPWR_GITHUB_ACCOUNT`
+##### GitHub: `echo $ZPWR_GITHUB_URL`
+##### Date: `date`
+##### Purpose: $1 script to $2 
+##### Notes: 
+#}}}***********************************************************
+endsnippet
+
+snippet _z "comp starter"
+#compdef z
+
+local arguments
+
+__display(){
+        _alternative \
+        'aliases:command:(('"$(_z |& awk -v q=\' '{printf "%s\\:\"%s\" ", $2,$1}')"'))' \
+        'files:directory:_path_files -g ".*(/) *(/)"'
+}
+
+arguments=(
+       '-c[restrict matches to subdirectories of the current directory]'
+       '-e[echo the best match, do not cd]'
+       '-c[show a brief help message]'
+       '-l[list only]'
+       '-r[match by rank only]'
+       '-t[match by recent access only]'
+       '-x[remove the current directory from the datafile]'
+        '1:command:->command'
+        '*::options:->options'
+)
+
+local curcontext="$curcontext" state state_descr line expl
+local tmp ret=1
+
+_arguments -s -C : $arguments && return 0
+
+  case "$state" in
+    command)
+      __display && return 0
+      ;;
+    options)
+      _message "no more options for $words[1]"
+      return 1
+    ;;
+  esac
+
+endsnippet
+
+snippet evil "evil skull"
+#        .n                   .                 .                  n.
+#  .   .dP                  dP                   9b                 9b.    .
+# 4    qXb         .       dX                     Xb       .        dXp     t
+#dX.    9Xb      .dXb    __                         __    dXb.     dXP     .Xb
+#9XXb._       _.dXXXXb dXXXXbo.                 .odXXXXb dXXXXb._       _.dXXP
+# 9XXXXXXXXXXXXXXXXXXXVXXXXXXXXOo.           .oOXXXXXXXXVXXXXXXXXXXXXXXXXXXXP
+#  \`9XXXXXXXXXXXXXXXXXXXXX'~   ~\`OOO8b   d8OOO'~   ~\`XXXXXXXXXXXXXXXXXXXXXP'
+#    \`9XXXXXXXXXXXP' \`9XX'   DIE    \`98v8P'  HUMAN   \`XXP' \`9XXXXXXXXXXXP'
+#        ~~~~~~~       9X.          .db|db.          .XP       ~~~~~~~
+#                        )b.  .dbo.dP'\`v'\`9b.odb.  .dX(
+#                      ,dXXXXXXXXXXXb     dXXXXXXXXXXXb.
+#                     dXXXXXXXXXXXP'   .   \`9XXXXXXXXXXXb
+#                    dXXXXXXXXXXXXb   d|b   dXXXXXXXXXXXXb
+#                    9XXb'   `XXXXXb.dX|Xb.dXXXXX'   \`dXXP
+#                     \`'      9XXXXXX(   )XXXXXXP      \`'
+#                              XXXX X.\`v'.X XXXX
+#                              XP^X'\`b   d'\`X^XX
+#                              X. 9  \`   '  P )X
+#                              \`b  \`       '  d'
+
+endsnippet
+
+

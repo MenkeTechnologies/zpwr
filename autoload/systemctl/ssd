@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ssd() {
+
+    local service
+
+    for service in "$@"; do
+        zpwrPrettyPrint "sudo systemctl stop $service"
+        zpwrPrettyPrint "sudo systemctl disable $service"
+        sudo systemctl stop "$service"
+        sudo systemctl disable "$service"
+    done
+}
+
+ssd "$@"

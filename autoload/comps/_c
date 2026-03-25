@@ -1,0 +1,47 @@
+#compdef c
+
+ZPWR_HAS_Z=true
+ZPWR_HAS_FASD=true
+
+if zpwrExists zshz; then
+    ZPWR_VARS[zcmd]=zshz
+elif zpwrExists _z; then
+    ZPWR_VARS[zcmd]=_z
+else
+    ZPWR_HAS_Z=false
+fi
+
+if ! zpwrExists fasd;then
+    ZPWR_HAS_FASD=false
+fi
+
+function _c(){
+
+    _alternative 'files:files:_path_files -g "*(D^/) *(DF)"' && return 0
+
+    local ret
+
+    if (( $#words > 1 )); then
+        if [[ "$ZPWR_HAS_FASD" == true ]]; then
+
+            if [[ "$ZPWR_HAS_Z" == true ]]; then
+                _alternative \
+                'fasd:fasd ranked directories:__fasd_dirs_comp' \
+                'fasd:fasd ranked files:__fasd_files_comp' \
+                'zdir:z ranked directories:__z_dirs_comp'
+            else
+                _alternative \
+                'fasd:fasd ranked files:__fasd_files_comp' \
+                'fasd:fasd ranked directories:__fasd_dirs_comp'
+            fi
+        else
+            if [[ "$ZPWR_HAS_Z" == true ]]; then
+                _alternative \
+                'zdir:z ranked directories:__z_dirs_comp' 
+            fi
+        fi
+        return 1
+    fi
+}
+
+_c "$@"

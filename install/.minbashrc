@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# -*- mode: sh -*-
+# vim: set ft=sh:
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: MenkeTechnologies
+##### GitHub: https://github.com/MenkeTechnologies
+##### Date: Thu Sep 10 21:49:19 EDT 2020
+##### Purpose: bash script or minima setup
+##### Notes: 
+#}}}***********************************************************
+
+zpwrClearList() {
+   clear
+   ls -AlhF
+}
+
+clearListRec() {
+   clear
+   ls -AlhFR
+}
+
+
+cdClear() {
+    cd "$@" && zpwrClearList
+}
+
+f() {
+    if [[ -z "$1" ]]; then
+        cdClear -
+    else
+        cdClear "$@"
+    fi
+}
+
+t() {
+    cdClear "/"
+}
+
+d() {
+    cdClear "$HOME/Desktop"
+}
+
+a() {
+    cdClear "$HOME"
+}
+
+r() {
+    cdClear ..
+}
+
+e() {
+    cdClear "/etc"
+}
+
+alias l='zpwrClearList'
+alias la='zpwrClearList'
+alias lr='clearListRec'
+alias v=vi
+
+c() {
+    cat "$@" | less -M -N -R -K -F -X
+}

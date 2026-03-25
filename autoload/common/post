@@ -1,0 +1,17 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function post(){
+
+    if [[ -z "$2" ]]; then
+        zpwrLogConsoleErr "usage: post <suffix> <cmd>"
+        return 1
+    fi
+
+    local out postfix
+    postfix="$1"
+    shift
+    out="$(eval "$@")"
+    echo "$out" | perl -lnE "say \"\$_ $postfix\""
+}
+
+post "$@"

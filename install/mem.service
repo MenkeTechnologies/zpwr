@@ -1,0 +1,14 @@
+[Unit]
+Description=mem watch service
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+Environment="EMAIL=myemail"
+ExecStart=/usr/bin/env bash /home/pi/.zpwr/scripts/memWatch.sh
+ExecStop=/usr/bin/env kill $MAINPID
+
+[Install]
+WantedBy=multi-user.target

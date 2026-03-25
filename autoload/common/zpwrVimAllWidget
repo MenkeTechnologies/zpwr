@@ -1,0 +1,17 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimAllWidget(){
+
+    local sel
+
+    sel="$(zpwrFzvimAll)"
+
+    if [[ -n "$sel" ]]; then
+        zle .kill-whole-line
+        BUFFER="$ZPWR_VIM $sel"
+        CURSOR=$#BUFFER
+        zle vi-insert
+    fi
+}
+
+zpwrVimAllWidget"$@"

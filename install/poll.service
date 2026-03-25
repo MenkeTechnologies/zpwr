@@ -1,0 +1,16 @@
+[Unit]
+Description=github poll service
+After=network.target
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+Environment="ZPWR=/home/pi/.zpwr"
+Environment="ZSH_CUSTOM=/home/pi/.zinit"
+Environment="ZPWR_SCRIPTS=/home/pi/.zpwr/scripts"
+ExecStart=/usr/bin/env bash /home/pi/.zpwr/scripts/remoteRepoMonitorDaemon.sh
+ExecStop=/usr/bin/env kill $MAINPID
+
+[Install]
+WantedBy=multi-user.target

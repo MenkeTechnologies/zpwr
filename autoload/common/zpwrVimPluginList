@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVimPluginList(){
+
+    builtin emulate -L zsh
+    setopt nullglob
+    local -aU dirs
+
+    dirs=(
+        "$HOME/.vim/bundle/"*(/)
+    )
+
+    (($#dirs)) && command ls -d $dirs 2> /dev/null
+}
+
+zpwrVimPluginList "$@"

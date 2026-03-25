@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrKillRemote() {
+
+    zpwrPrettyPrint "die tmux and ssh"
+    command tmux kill-server
+    command killall ssh autossh
+
+}
+
+zpwrKillRemote "$@"

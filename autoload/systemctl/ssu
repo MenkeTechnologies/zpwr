@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ssu() {
+
+    local service
+
+    for service in "$@"; do
+        zpwrPrettyPrint "sudo systemctl start $service"
+        zpwrPrettyPrint "sudo systemctl enable $service"
+        sudo systemctl start "$service"
+        sudo systemctl enable "$service"
+    done
+}
+
+ssu "$@"

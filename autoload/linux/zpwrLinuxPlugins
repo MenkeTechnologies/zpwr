@@ -1,0 +1,21 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+typeset -a tmpAry
+#[[ "$ZPWR_PARENT_PROCESS" == *(#i)(login|tmux|vim|alacritty)* ]] && tmpAry+=(tmux)
+tmpAry+=(systemd)
+
+zpwrOsDebVsUbuntu \
+    'tmpAry+=(debian)' \
+    'tmpAry+=(ubuntu)' \
+    'tmpAry+=(yum dnf)' \
+    'tmpAry+=(archlinux)' \
+    'tmpAry+=(suse)'
+
+if [[ $ZPWR_PLUGIN_MANAGER == zinit ]]; then
+    ZPWR_OMZ_PLUGINS+=("${tmpAry[@]}")
+else
+    plugins+=("${tmpAry[@]}")
+fi
+
+unset tmpAry

@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwr(){
+
+    if test -z $1;then
+        zpwrCd "$ZPWR"
+    else
+        source "$ZPWR_VERBS_FILE" "$@"
+    fi
+}
+
+zpwr "$@"

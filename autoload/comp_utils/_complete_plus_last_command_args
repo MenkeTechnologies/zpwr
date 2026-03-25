@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function _complete_plus_last_command_args() {
+
+    _wanted last-line expl 'last args' compadd -Qa last_command_array
+}
+
+_complete_plus_last_command_args "$@"

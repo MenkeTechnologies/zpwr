@@ -1,0 +1,25 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrOpenExercism(){
+
+    local open_cmd
+
+    open_cmd="$ZPWR_OPEN_CMD" || return 1
+
+    if zpwrIsZsh; then
+        if [[ -n "$1" ]]; then
+            ${=open_cmd} "https://exercism.org/$1" >> "$ZPWR_LOGFILE" 2>&1
+        else
+            ${=open_cmd} "https://exercism.org" >> "$ZPWR_LOGFILE" 2>&1
+        fi
+    else
+        if [[ -n "$1" ]]; then
+            ${open_cmd} "https://exercism.org/$1" > /dev/null 2>&1
+        else
+            ${open_cmd} "https://exercism.org" > /dev/null 2>&1
+        fi
+    fi
+
+}
+
+zpwrOpenExercism "$@"

@@ -1,0 +1,34 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrRegenPowerlineLink(){
+    local dir out command="${*:-python3 -m pip show powerline-status}"
+    if ! out="$(${=command} 2>&1)"; then
+        if [[ $out =~ 'not found' ]]; then
+            zpwrLogConsoleErr 'You do not have powerline-status installed!'
+        else
+            zpwrLogConsoleErr 'Pip failed'
+        fi
+
+        return 1
+    fi
+
+    dir="$(echo "$out" | command perl -ne 'print "$2" if m{^(Location:)\s+(.*)$}')/powerline"
+    if zpwrNeedSudo "$dir"; then
+        zpwrPrettyPrint "linking $dir to $TMUX_HOME/powerline with sudo"
+        echo sudo ln -sfn "$dir" "$TMUX_HOME"
+        (
+            builtin cd "$HOME"
+            sudo ln -sfn "$dir" "$TMUX_HOME"
+        )
+    else
+        zpwrPrettyPrint "linking $dir to $TMUX_HOME/powerline"
+        echo ln -sfn "$dir" "$TMUX_HOME/powerline"
+        (
+            builtin cd "$HOME"
+            ln -sfn "$dir" "$TMUX_HOME"
+        )
+    fi
+    command tmux source-file "$ZPWR_TMUX/init.conf" &>> "$ZPWR_LOGFILE"
+}
+
+zpwrRegenPowerlineLink "$@"

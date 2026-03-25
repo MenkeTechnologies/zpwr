@@ -1,0 +1,77 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTotalLines(){
+
+    function ___usage() {
+        zpwrLogConsoleErr "___usage: zpwrTotalLines [-h,--help] | [-w,--nows] [<blacklist strings>...]"
+        unset -f ___usage
+    }
+    if ! zpwrIsGitDir; then
+       zpwrLogConsoleNotGit
+       return 1
+    fi
+
+    local filter lineCount nows help
+
+    zparseopts -D -E -F -- {w,-nows}=nows {h,-help}=help &>/dev/null || {
+        ___usage
+        return 1
+    }
+
+    if (( $#help )); then
+        ___usage
+        return 1
+    fi
+
+    if (( $#nows )); then
+        zpwrPrettyPrint "starting total line count no whitespace..."
+    else
+        zpwrPrettyPrint "starting total line count..."
+    fi
+    {
+
+    while read; do
+        zpwrIsBinary "$REPLY" && continue
+        filter=false
+        for arg in "$@"; do
+           if echo "$REPLY" | command grep -sq "$arg"; then
+               filter=true
+               break
+           fi
+        done
+
+        if [[ $filter = false ]]; then
+            cat "$REPLY"
+        fi
+    done < <(git ls-files) 2>/dev/null
+
+    } > "$ZPWR_TEMPFILE"
+
+    if ! test -f "$ZPWR_TEMPFILE"; then
+        printf "\x1b[0;1;31m"
+        zpwrLogConsoleErr "where is $ZPWR_TEMPFILE" 
+        printf "\x1b[0m"
+        return 1
+    fi
+
+    zpwrPrettyPrint "Total Line Count"
+
+    if (( $#nows )); then
+        lineCount="$(cat "$ZPWR_TEMPFILE" | perl -ne 'print if /\S/' | wc -l)"
+    else
+        lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
+    fi
+
+    if (( $lineCount > 10 )); then
+        echo "$lineCount" |
+            perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            zpwrAlternatingPrettyPrint | less -r
+    else
+        echo "$lineCount" |
+            perl -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            zpwrAlternatingPrettyPrint
+    fi
+    command rm "$ZPWR_TEMPFILE"
+}
+
+zpwrTotalLines "$@"

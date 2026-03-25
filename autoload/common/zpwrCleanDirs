@@ -1,0 +1,37 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrCleanDirs() {
+
+    builtin builtin emulate -L zsh
+    setopt nullglob extendedglob globdots noshwordsplit globsubst
+
+    local dir files f
+
+    if ! (( $#zpwrDirsClean )); then
+        zpwrLogConsoleErr "zpwrDirsClean is empty."
+        return 1
+    fi
+
+    for dir in ${zpwrDirsClean[@]} ; do
+
+        files=( $dir/* )
+
+        if (( $#files )); then
+            zpwrPrettyPrint sudo rm -rfv -- $dir/*
+            sudo rm -rfv -- $dir/*
+        fi
+    done
+
+    for f in ${zpwrFilesClean[@]} ; do
+
+        files=( $f )
+
+        if (( $#files )); then
+            zpwrPrettyPrint sudo rm -rfv -- $files
+            sudo rm -rfv -- $files
+        fi
+    done
+}
+
+zpwrCleanDirs "$@"

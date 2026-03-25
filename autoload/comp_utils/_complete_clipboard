@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function _complete_clipboard(){
+
+    local clipboard_str clipboard_array
+    clipboard_str="${$(${(Q)=ZPWR_PASTE_CMD} 2>/dev/null)//$'\r'}"
+    if [[ -n "$clipboard_str" ]]; then
+    clipboard_array=(${(u)=clipboard_str} ${clipboard_str} "\"${clipboard_str}\"" "'${clipboard_str}'")
+    _wanted last-clip expl 'clipboard args' compadd -Qa clipboard_array
+    fi
+}
+
+_complete_clipboard "$@"

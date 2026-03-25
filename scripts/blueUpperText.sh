@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+#{{{                    MARK:Header
+#**************************************************************
+##### Author: JACOBMENKE
+##### Date: Mon Jul 10 12:11:46 EDT 2017
+##### Purpose: bash script to make text white on blue background and some underscores
+##### Notes:
+#}}}***********************************************************
+
+#loop through stdin and add escape sequences at head and tail of each line
+while read; do
+    echo "$REPLY" | sed 's@.*@_______ & ______@' | boldText.sh | blueText.sh
+done

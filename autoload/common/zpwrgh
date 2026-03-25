@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrgh(){
+
+    if test -z $1;then
+        zpwrOpenmygh "$ZPWR_GITHUB_ACCOUNT/$ZPWR_REPO_NAME"
+    else
+        source "$ZPWR_VERBS_FILE" "$@"
+    fi
+}
+
+
+zpwrgh "$@"

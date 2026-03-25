@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrDfimage(){
+
+    if ! zpwrCommandExists docker; then
+        zpwrLogConsoleErr 'docker command is missing'
+        return 1
+    fi
+
+    docker run -v /var/run/docker.sock:/var/run/docker.sock --rm chenzj/dfimage "$@"
+}
+
+zpwrDfimage "$@"

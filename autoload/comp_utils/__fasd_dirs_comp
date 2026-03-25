@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+__fasd_dirs_comp(){
+
+    local curcontext="daily-cache$curcontext"
+
+    if ! (( $+__fasd_dirs )) && ! _retrieve_cache fasd_dirs_cache; then
+        __fasd_dirs=( ${(@f)"$(fasd -d 2>&1 | perl -e '@l=reverse<>;do{print quotemeta($2).":".quotemeta($1)."\n" if m{^\s*(\S+)\s+(\S+.*)$}}for@l')"} )
+        _store_cache fasd_dirs_cache __fasd_dirs
+    fi
+
+    _describe -t fasd "fasd ranked directories" __fasd_dirs
+}
+
+__fasd_dirs_comp "$@"

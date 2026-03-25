@@ -1,0 +1,73 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrAttachSetup() {
+
+    builtin emulate -L zsh
+    setopt nullglob rcquotes
+
+    if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
+
+        local mobile out key num_con ret sid
+        mobile=true
+        if [[ -f "$HOME/.ssh/authorized_keys" ]]; then
+            command cat "$HOME/.ssh/authorized_keys" |
+                command grep "$ZPWR_GITHUB_ACCOUNT" > "$ZPWR_TEMPFILE"
+
+            zpwrOsFedoraVsJournalctl \
+                    'out="$(command cat /dev/null | sudo env grep -a "Accepted publickey for" /var/log/auth.log* | command grep -av sudo | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | awk "{print \$2}")"' \
+                    'out="$(command tail /var/log/messages | command grep "Accepted publickey" | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne ''print "$1" if m{^\w+\s+\w+:(\w+).*$}'')"' \
+                    'out="$(sudo journalctl -u sshd.service 2>/dev/null | command grep "Accepted publickey" | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne ''print "$1" if m{^\w+\s+\w+:(\w+).*$}'')"' \
+                    'out="$(sudo cat /var/log/secure | command grep -a "Accepted publickey" | command tail -1)"
+                    key="$(command ssh-keygen -l -f "$ZPWR_TEMPFILE" 2>/dev/null | command perl -ne ''print "$1" if m{^\w+\s+\w+:(\w+).*$}'')"'
+
+            zpwrLogInfo "searching for '$key' in '$out'"
+            [[ "$out" == *"$key"* ]] && mobile=false
+            command rm "$ZPWR_TEMPFILE"
+        else
+            zpwrLogInfo "$HOME/.ssh/authorized_keys does not exist so NO attach"
+            return
+        fi
+
+        if [[ $mobile == "false" ]]; then
+            zpwrLogInfo "found '$key' so desktop"
+            out="$(sudo ps -ef | command perl -ne 'print if /\bsshd\b/ and /\bpts\b/ and ! /\bperl\b/')"
+            zpwrLogInfo "sshd and pts: $out"
+            num_con="$(echo "$out" | wc -l)"
+            zpwrLogInfo "num connections: '$num_con'"
+            if (( $num_con <= 1 )); then
+                zpwrLogInfo "no tmux clients"
+                {
+                    out="$(command tmux ls 2>&1)"
+                    ret=$?
+                    zpwrLogInfo "tmux ls = ret: '$ret', out: '$out'"
+                    if [[ $ret == 0 ]]; then
+                        zpwrLogInfo "attaching to existing"
+                        zpwrLogInfo command tmux attach
+                        command tmux attach
+                        ret=$?
+                        zpwrLogInfo "tmux attach ret: '$ret'"
+                    else
+                        zpwrLogInfo "creating new session"
+                        zpwrLogInfo tmux new-session \; source-file "$ZPWR_TMUX/control-window.conf"
+                        command tmux new-session \; source-file "$ZPWR_TMUX/control-window.conf"
+                        sid=$(command tmux new-session -P -d 2>> "$ZPWR_LOGFILE") 
+                        ret=$?
+                        zpwrLogInfo "tmux create ret: '$ret'"
+                        #2x q C-h to rid copy-mode
+                        command tmux send-keys -t $sid q C-h
+                        command tmux send-keys -t $sid q C-h
+                        command tmux send-keys -t $sid 'command tmux source-file "$ZPWR_TMUX/control-window.conf"' C-m
+                        command tmux attach-session -t $sid
+                    fi
+                } &>> "$ZPWR_LOGFILE"
+            else
+                zpwrLogInfo "clients so NO attach"
+            fi
+        else
+            zpwrLogInfo "not desktop so NO attach"
+        fi
+    fi
+}

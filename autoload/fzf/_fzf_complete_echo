@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+# echo $;<tab>
+function ___fzf_complete_echo() {
+
+  _fzf_complete '-m' "$@" < <(
+      typeset -x | perl -ne 'print "$1\n" if m{^([^=]+)=(\S+)}'
+    )
+}
+
+___fzf_complete_echo "$@"

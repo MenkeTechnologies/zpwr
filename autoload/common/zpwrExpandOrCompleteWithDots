@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+
+function zpwrExpandOrCompleteWithDots() {
+    print -Pn "%F{red}…%f"
+    zle expand-or-complete
+    zle redisplay
+}
+
+zpwrExpandOrCompleteWithDots "$@"

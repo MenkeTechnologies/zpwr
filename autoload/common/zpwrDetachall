@@ -1,0 +1,9 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrDetachall(){
+
+    tmux list-clients | tr -d : |
+        perl -ane '`tmux detach-client -t $F[0]`'
+}
+
+zpwrDetachall "$@"

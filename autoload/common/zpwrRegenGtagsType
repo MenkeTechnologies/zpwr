@@ -1,0 +1,43 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrRegenGtagsType(){
+
+    if [[ -z $1 ]]; then
+        zpwrLogConsoleErr "usage: zpwrRegenGtagsType <type>"
+        return 1
+    fi
+
+    local type file
+    type=$1
+
+    if zpwrExists gtags; then
+        zpwrPrettyPrint "Regen GNU gtags to $HOME/GTAGS with $type parser"
+        (
+        builtin cd "$HOME"
+        command rm GPATH GRTAGS GTAGS 2>/dev/null
+        for file in \
+            "$ZPWR/"* \
+            "$ZPWR_ENV/".*.sh \
+            "$ZPWR_INSTALL/"* \
+            "$ZPWR_AUTOLOAD_LINUX/"* "$ZPWR_AUTOLOAD_DARWIN/"* \
+            "$ZPWR_AUTOLOAD_SYSTEMCTL/"* "$ZPWR_AUTOLOAD_COMMON/"* \
+            "$ZPWR_COMPS/"* \
+            "$ZPWR_SCRIPTS"/* \
+            "$ZPWR_SCRIPTS_MAC/"*; do
+            if [[ -f "$file" ]]; then
+                echo "$file"
+            fi
+        done | gtags --accept-dotfiles --gtagslabel=$type -f -
+        if [[ ! -s GTAGS ]]; then
+            zpwrLogConsoleErr "forced to copy back gtags because empty"
+            echo command cp "$ZPWR_INSTALL/g-tags/"{GPATH,GRTAGS,GTAGS} "$HOME"
+            command cp "$ZPWR_INSTALL/g-tags/"{GPATH,GRTAGS,GTAGS} "$HOME"
+        fi
+        )
+    else
+        zpwrLogConsoleErr "gtags does not exist"
+    fi
+
+}
+
+zpwrRegenGtagsType "$@"

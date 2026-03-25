@@ -1,0 +1,23 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrRelPath(){
+
+    if [[ -z $1 ]] || [[ ! -e $1 ]]; then
+        zpwrLogConsoleErr "usage: zpwrRelPath ABSOLUTE_PATH"
+        return 1
+    fi
+    local source=$PWD target=${1:A}
+    if [[ -d $target ]]; then
+        target+='/'
+    fi
+    local common_part=$source back=
+    while [[ "${target#$common_part}" = "$target" ]]; do
+        common_part=${common_part:h}
+        back="../$back"
+    done
+
+    echo $back${target#$common_part/}
+}
+
+zpwrRelPath "$@"

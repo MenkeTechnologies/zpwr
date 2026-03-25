@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ff
+# key: ff
+# --
+for (( i = 0; i < $1; ++i )); do
+	$2
+done

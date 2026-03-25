@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: while loop
+# key: w
+# --
+while [[ ${1:cond} ]]; do
+    $0
+done

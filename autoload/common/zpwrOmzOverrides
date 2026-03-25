@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrOmzOverrides(){
+    #{{{                    MARK:forgit https://github.com/wfxr/forgit
+#**************************************************************
+unfunction d &>/dev/null
+autoload "$ZPWR_AUTOLOAD_COMMON"/d
+
+if [[ ! -d "$ZSH_CACHE_DIR/completions" ]]; then
+    command mkdir -p "$ZSH_CACHE_DIR/completions"
+fi
+#}}}***********************************************************
+
+}
+
+zpwrOmzOverrides "$@"

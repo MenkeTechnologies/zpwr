@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function fp(){
+
+    if [[ -d "$ZPWR_FORKED_DIR" ]]; then
+        zpwrCd "$ZPWR_FORKED_DIR"
+    else
+        zpwrLogConsoleErr "ZPWR_FORKED_DIR '$ZPWR_FORKED_DIR' is not a dir"
+    fi
+
+}
+
+fp "$@"

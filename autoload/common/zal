@@ -1,0 +1,13 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zal(){
+
+    if [[ -d "$ZPWR_AUTOLOAD" ]]; then
+        zpwrCd "$ZPWR_AUTOLOAD"
+    else
+        zpwrLogConsoleErr "ZPWR_AUTOLOAD '$ZPWR_AUTOLOAD' is not a directory."
+    fi
+
+}
+
+zal "$@"

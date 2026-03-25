@@ -1,0 +1,8 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrSudoEditorRecentCd(){
+
+    zpwrEditorRecentCd "$ZPWR_FULL_SUDO $1"
+}
+
+zpwrSudoEditorRecentCd "$@"

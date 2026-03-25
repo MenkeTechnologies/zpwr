@@ -1,0 +1,12 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrTest(){
+
+    (
+        builtin cd "$ZPWR" && zunit --verbose
+    )
+
+}
+
+zpwrTest "$@"

@@ -1,0 +1,14 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function __regenZshCompCache(){
+
+    builtin emulate -L zsh
+    setopt nullglob
+    zpwrPrettyPrint "regen zsh compsys cache"
+
+    echo command rm -fv "$ZSH_COMPDUMP"*(DN) "$ZPWR_LOCAL/.zcompdump"*(D) "$HOME/.zcompdump"*(D)
+    command rm -fv "$ZSH_COMPDUMP"*(DN) "$ZPWR_LOCAL/.zcompdump"*(D) "$HOME/.zcompdump"*(D)
+    compinit -u -d "$ZSH_COMPDUMP"
+}
+
+__regenZshCompCache "$@"

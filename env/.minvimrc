@@ -1,0 +1,162 @@
+                         ".....     .      ...     ..      ..
+                       ".d88888neu. 'l   x*8888x.:*8888: -"888:
+     "...     ..        f""""*8888888f  x   48888x `8888h  8888
+  ":~""888h.:^"888:    *      `"*88*"  x8x.  8888x  8888x  !888>
+ "8x   `8888x  8888>    -....    ue=:. x8888 x8888  88888   "*8%-
+"x888n. 8888x  ?888>           :88n  ` '*888!x8888> x8888  xh8>
+"'88888 8888x   ?**h.          9888l     `?8 `8888  x888x x888>
+  "`*88 8888~ x88x.     uzu.   `8888l    -^  '888"  x888  8888>
+ "..<"  88*`  88888x  ,""888i   ?8888     dx '88~x. !88~  8888>
+    "..xc.    `*8888k 4  9888l   %888>  .8888xf.888x:!    x888x.:
+  ":888888h.    `%88> '  '8888   '88%  :""888":~"888"     `888*"
+ "<  `"888888:    x"       "*8nu.z*"       "~'    "~        ""
+       "%888888x.-`
+         """**""
+"
+" https://github.com/menketechnologies
+"
+if has("nvim")
+    "source $VIM/sysinit.vim
+else
+    if !empty(glob('$VIMRUNTIME/defaults.vim'))
+        source $VIMRUNTIME/defaults.vim
+    endif
+endif
+
+let mapleader = "\<space>"
+
+set nocompatible              " be improved, required
+"for youcompleteme doc window to open at bottom
+set splitright
+set noswapfile
+set nowritebackup
+set ruler
+set autoread
+set ignorecase
+set smartcase
+set tabstop=4
+"snap to nearest tabstop
+set shiftround
+set cindent
+set ttyfast
+"60 ms wait for next key in mappings
+"set timeoutlen=300
+"using powerline status bar instead
+"set statusline+=%F
+"set statusline+=%=
+"set statusline+=Row:\%l
+"set statusline+=/
+"set statusline+=%L
+"set statusline+=\
+"set statusline+=Col:\ %c
+"status bar always shown
+set laststatus=2
+set wrapscan
+set t_Co=256
+set backspace=2
+set encoding=utf8
+set showmatch
+set showmode
+set hlsearch
+"search performed for each keypress
+set incsearch
+set mouse=a
+set shiftwidth=4 "indent set to four spaces
+set expandtab
+"wrap lines
+set linebreak
+"line wrap indicator
+set showbreak=-->
+set number
+set backupdir=~/tmp
+set wildmenu "tab completion in command mode cycles through menu
+set wildignorecase "globbing is case insensitive
+syntax on
+set grepprg=ag
+
+"visual selection automatically into system clipboard
+set guioptions+=a
+set guifont=Hack\ Nerd\ Font:h14
+"start browsing in current dir
+set browsedir=current
+"reduce enter key after message alerts
+set shortmess=a
+
+"show the leader
+set showcmd
+
+if ! has('nvim')
+    "visual mode automatically copies to system clipboard
+    set clipboard=autoselect
+endif
+
+
+"show trailing spaces and tabs
+set list listchars=tab:\ \ ,trail:·
+
+"customize .viminfo
+set viminfo='1000,<50,s10,h
+
+"faster movements, used in all modes
+noremap <c-j> 4j
+noremap <c-k> 4k
+noremap <c-h> 4h
+noremap <c-l> 4l
+noremap <leader>- 4-
+noremap <leader>= 4+
+
+"reselect after indenting
+vnoremap < <gv
+vnoremap > >gv
+
+"copy to system clipboard and move cursor to end of selection
+vnoremap <C-B> "*y`>
+"copy to tmux clipboard
+vnoremap <silent><leader>b :w !tmux set-buffer "$(cat)"<CR><CR>
+noremap <silent><leader>sudo :w !sudo tee % &>/dev/null<CR><CR><CR>
+
+"Ctrl-C exits like in shell
+nnoremap <silent> <C-C> :wq!<CR>:qa!<CR>
+"vnoremap <silent> <C-C> :<C-C>:wq!<CR>:qa!<CR>
+inoremap <silent> <C-C> <C-[>:wq!<CR>:qa!<CR>
+
+nnoremap <silent> <C-F> :q!<CR>
+vnoremap <silent> <C-F> :<C-C>:q!<CR>
+
+autocmd VimEnter * inoremap <silent> <C-F> <C-[>:q!<CR>
+autocmd VimEnter * set background=dark
+" dont hide json quotes
+autocmd VimEnter * set conceallevel=0
+inoremap <silent> <C-Z> <C-[>:suspend<CR>
+
+vnoremap <RightMouse> "*y`>
+inoremap <Home> <C-[>ggi
+inoremap <End> <C-[>Gi
+nnoremap <Home> gg
+nnoremap <End> G
+
+imap jf <ESC>
+imap fj <ESC>
+
+"comment out
+inoremap <silent> <C-B> <ESC>I//<ESC>ji
+inoremap <silent> <C-B><C-N> <ESC>^2xji
+
+"nnoremap <silent> <C-I> :SaveSession<CR>
+"vnoremap <silent> <C-I> :<C-C>:SaveSession<CR>
+"inoremap <silent> <C-I> <C-[>:SaveSession<CR>a
+
+nnoremap <silent> <leader>q :qa!<CR>
+nnoremap <silent> <leader>c :wq!<CR>
+nnoremap <silent> <leader>e :q!<CR>
+nnoremap <silent> <leader>w :w!<CR>
+nnoremap <silent> <leader>n :bnext<CR>
+nnoremap <silent> <leader>p :bprev<CR>
+"vertical split
+nnoremap <silent> <leader>s :vs<CR>
+"horizontal split
+nnoremap <silent> <leader>h :sp<CR>
+nnoremap <silent> <leader>t :tabnew<CR>
+
+onoremap <silent> i# ?#<CR>jV/#<CR>kc
+

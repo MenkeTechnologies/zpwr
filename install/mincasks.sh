@@ -1,0 +1,15 @@
+brew install --cask -f alacritty
+brew install --cask -f docker
+brew install --cask -f font-hack-nerd-font
+brew install --cask -f google-chrome
+brew install --cask -f intellij-idea
+brew install --cask -f java
+brew install --cask -f java11
+brew install --cask -f mattermost
+brew install --cask -f microsoft-teams
+brew install --cask -f postman
+brew install --cask -f slack
+brew install --cask -f spotify
+brew install --cask -f visual-studio-code
+brew install --cask -f vlc
+brew install --cask -f zoom

@@ -1,0 +1,20 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrEditorRecent(){
+
+    local firstdir editor mywords
+
+    editor="$1"
+
+    BUFFER="$(zpwrFzvim $editor)"
+    if [[ -z "$BUFFER" ]]; then
+        return
+    fi
+    mywords=( ${(z)BUFFER} )
+    BUFFER="$editor $BUFFER"
+    zpwrLogDebug "$BUFFER"
+    print -sr -- "$BUFFER"
+    eval "$BUFFER"
+}
+
+zpwrEditorRecent "$@"

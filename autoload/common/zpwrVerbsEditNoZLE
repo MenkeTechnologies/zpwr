@@ -1,0 +1,15 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrVerbsEditNoZLE(){
+
+    local firstArg sel editor
+
+    sel="$(zpwrVerbsFZF)"
+
+    if [[ -n "$sel" ]]; then
+        BUFFER="$sel"
+        print -zr -- "$BUFFER"
+    fi
+}
+
+zpwrVerbsEditNoZLE "$@"

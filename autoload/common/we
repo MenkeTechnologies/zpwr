@@ -1,0 +1,16 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function we(){
+
+    if [[ -d "/var/www/html" ]];then
+        zpwrCd /var/www/html
+    elif [[ -d "$HOMEBREW_PREFIX/var/www" ]];then
+        zpwrCd "$HOMEBREW_PREFIX/var/www"
+    elif [[ -d "/usr/local/var/www" ]]; then
+        zpwrCd "/usr/local/var/www"
+    else
+        zpwrLogConsoleErr "could NOT zpwrCd to /var/ww/html NOR $HOMEBREW_PREFIX/var/www NOR /usr/local/var/www"
+    fi
+}
+
+we "$@"

@@ -1,0 +1,38 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+if [[ "$UID" != "0" ]]; then
+
+    if [[ $ZPWR_BANNER_DESKTOP_DARWIN == true ]]; then
+        if [[ -d "$ZPWR_D" ]]; then
+            builtin cd "$ZPWR_D"
+        fi
+    fi
+
+    if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
+        clear
+    fi
+
+    if type figlet > /dev/null 2>&1; then
+        printf "\e[1m"
+        if [[ -f "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh" ]]; then
+            if [[ "$ZPWR_BANNER_TYPE" == ponies ]]; then
+                if [[ -f "$ZPWR_SCRIPTS/splitReg.sh" ]];then
+                    zpwrBannerLolcat
+                else
+                    banner
+                fi
+            else
+                zpwrNoPonyBanner
+            fi
+        fi
+    fi
+
+    printf "\e[0m"
+
+    if [[ $ZPWR_BANNER_CLEARLIST == true ]]; then
+        zpwrListNoClear
+    fi
+else
+    # root on unix
+    zpwrClearList
+fi

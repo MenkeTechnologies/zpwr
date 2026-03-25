@@ -1,0 +1,10 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrStopSend(){
+
+    ZPWR_SEND_KEYS_PANE=-1
+    ZPWR_SEND_KEYS_FULL=false
+    command rm $ZPWR_LOCK_FILE &>/dev/null
+}
+
+zpwrStopSend "$@"

@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrZshPluginList(){
+
+    builtin emulate -L zsh
+    setopt nullglob extendedglob
+
+    local -aU dirs
+
+    dirs=(
+        "$ZPWR_PLUGIN_MANAGER_HOME/plugins"/*(/)
+        "$ZPWR_PLUGIN_MANAGER_HOME/snippets"/OMZ::plugins/*(/)
+        #"$ZPWR_PLUGIN_MANAGER_HOME/snippets"/^OMZ::plugins/*
+    )
+
+    (($#dirs)) && command ls -d $dirs 2> /dev/null
+}
+
+zpwrZshPluginList "$@"

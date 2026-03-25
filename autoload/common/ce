@@ -1,0 +1,19 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function ce() {
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: ce <file...>"
+        return 1
+    fi
+
+    local firstArg sel firstdir
+
+    firstArg="${${(Az)@}[1]//\"/}"
+    firstdir=${firstArg:h}
+    BUFFER="builtin cd \"$firstdir\"; $ZPWR_EMACS_CLIENT ""$@""; zpwrClearList; zpwrIsGitDir && git diff HEAD; "
+    zpwrLogInfo "$BUFFER"
+    eval "$BUFFER"
+}
+
+ce "$@"

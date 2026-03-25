@@ -1,0 +1,11 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+
+function zpwrRefreshZwc(){
+
+    zpwrUncompile
+    zpwrRecompile
+
+  }
+
+zpwrRefreshZwc "$@"
