@@ -992,11 +992,6 @@
     assert $state equals 0
 }
 
-@test 'fn zpwrEmacsPluginList exists' {
-    run zpwrExists zpwrEmacsPluginList
-    assert $state equals 0
-}
-
 @test 'fn zpwrEmacsRecent exists' {
     run zpwrExists zpwrEmacsRecent
     assert $state equals 0
