@@ -3,7 +3,7 @@
 function zpwrExecGlobParallel(){
 
     if [[ -z "$2" ]]; then
-        zpwrLogConsoleErr "usage: zpwrExecGlobParallel <glob> <command with auto \$f replacement and 1 level of eval>"
+        zpwrLogConsoleErr "usage: zpwrExecGlobParallel GLOB <command with auto \$f replacement and 1 level of eval>"
         return 1
     fi
     builtin emulate -L zsh

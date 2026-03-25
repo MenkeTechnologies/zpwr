@@ -3,7 +3,7 @@
 function nn(){
 
         if [[ -z "$2" ]];then
-            zpwrLogConsoleErr "usage: nn <title> <message>..." &&
+            zpwrLogConsoleErr "usage: nn TITLE MESSAGE..." &&
             return 1
         fi
 

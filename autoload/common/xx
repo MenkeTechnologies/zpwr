@@ -3,7 +3,7 @@
 function xx(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: xx <cmd>"
+        zpwrLogConsoleErr "usage: xx CMD"
         return 1
     fi
 

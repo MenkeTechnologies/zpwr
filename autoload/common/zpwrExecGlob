@@ -3,7 +3,7 @@
 function zpwrExecGlob(){
 
     if [[ -z "$2" ]]; then
-        zpwrLogConsoleErr "usage: zpwrExecGlob <glob> <command with auto \$f replacement and 1 level of eval>"
+        zpwrLogConsoleErr "usage: zpwrExecGlob GLOB <command with auto \$f replacement and 1 level of eval>"
         return 1
     fi
     builtin emulate -L zsh

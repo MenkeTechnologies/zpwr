@@ -4,7 +4,7 @@ function zpwrPoll() {
 
     if ! zpwrIsGitDir; then
         zpwrLogConsoleNotGit
-        zpwrLogConsoleErr "usage: zpwrPoll <cmd> <time> <refspec>"
+        zpwrLogConsoleErr "usage: zpwrPoll CMD TIME REFSPEC"
         return 1
     fi
 

@@ -62,7 +62,7 @@ done
 shift $(($OPTIND - 1))
 
 if (($# == 0)); then
-    echo "usage: powerTo.sh (<num> <command)|(<command>)" >&2
+    echo "usage: powerTo.sh (NUM COMMAND)|(COMMAND)" >&2
     exit 1
 fi
 

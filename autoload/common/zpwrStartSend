@@ -3,7 +3,7 @@
 function zpwrStartSend(){
 
     if [[ -z "$1" ]]; then
-        zpwrLogConsoleErr "usage: zpwrStartSend <pane>"
+        zpwrLogConsoleErr "usage: zpwrStartSend PANE"
         return 1
     fi
 
