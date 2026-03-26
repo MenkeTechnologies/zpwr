@@ -50,11 +50,4 @@ while getopts ":hv" opt; do
 done
 shift $(($OPTIND - 1))
 
-if (($# > 1)); then
-    num="$1"
-    shift
-    bash "$ZPWR_SCRIPTS/myWatchMaintainEscapes.sh" -l "$num" "grc -c $HOME/conf.df --colour=auto df -H" "$@"
-else
-    bash "$ZPWR_SCRIPTS/myWatchMaintainEscapes.sh" "grc -c $HOME/conf.df --colour=auto df -H" "$@"
-
-fi
+bash "$ZPWR_SCRIPTS/storageshowerCyberpunk.sh" "$@"
