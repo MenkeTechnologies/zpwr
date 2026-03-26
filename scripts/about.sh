@@ -30,78 +30,88 @@ function banner() {
         fi
     fi
 
-    printf "\x1b[32m"
+    # Cyberpunk color codes
+    local cyan="\x1b[1;36m"
+    local magenta="\x1b[1;35m"
+    local yellow="\x1b[1;33m"
+    local green="\x1b[1;32m"
+    local red="\x1b[1;31m"
+    local dim="\x1b[2m"
+    local reset="\x1b[0m"
+    local blink="\x1b[5m"
+    local bg_black="\x1b[40m"
+    local bold="\x1b[1m"
+
+    printf "${bg_black}"
     echo
+    printf "${dim}${cyan}"
     cat <<\EOF
-                _______ ______ _  _  _ ______  
-               (_______|_____ (_)(_)(_|_____ \ 
-                  __    _____) )  _  _ _____) )
-                 / /   |  ____/ || || |  __  / 
-                / /____| |    | || || | |  \ \ 
-               (_______)_|     \_____/|_|   |_|
+    ┌──────────────────────────────────────────────────────────┐
+    │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+EOF
+    printf "${reset}${bg_black}${magenta}"
+    cat <<\EOF
+    │    ███████╗██████╗ ██╗    ██╗██████╗     //SYSTEMS//    │
+    │    ╚══███╔╝██╔══██╗██║    ██║██╔══██╗                   │
+    │      ███╔╝ ██████╔╝██║ █╗ ██║██████╔╝                   │
+    │     ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗                   │
+    │    ███████╗██║      ╚███╔███╔╝██║  ██║                   │
+    │    ╚══════╝╚═╝       ╚══╝╚══╝ ╚═╝  ╚═╝                   │
+EOF
+    printf "${reset}${bg_black}${dim}${cyan}"
+    cat <<\EOF
+    │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+    └──────────────────────────────────────────────────────────┘
 EOF
 
+    printf "${reset}${bg_black}"
+    echo
+    printf "${cyan}${bold}"
+    cat <<\EOF
+      ╔══════════════════════════════════════════════════════╗
+      ║  ▓▓ M E N K E   T E C H N O L O G I E S   ▓▓      ║
+      ╚══════════════════════════════════════════════════════╝
+EOF
+
+    printf "${reset}${bg_black}"
+    echo
+    printf "${dim}${green}      > INITIALIZING NEURAL LINK...${reset}${bg_black}\n"
+    printf "${dim}${green}      > ZPWR KERNEL ONLINE${reset}${bg_black}\n"
     echo
 
-    printf "\x1b[0m"
-    printf "\x1b[35m"
-    printf "\x1b[1m"
+    printf "${yellow}${bold}"
     cat <<EOF
-            $info
+      ┌─── VERSION ──────────────────────────────────────────┐
+      │  $info
+      └──────────────────────────────────────────────────────┘
 EOF
 
-    printf "\x1b[0m"
-    printf "\x1b[34m"
-    cat <<\EOF
-
-                        eeeee  e    e
-                        8   8  8    8
-                        8eee8e 8eeee8
-                        8   8   88
-                        8eee8   88
-EOF
-
-    printf "\x1b[0m"
-    printf "\x1b[33m"
+    printf "${reset}${bg_black}"
     echo
-    cat <<\EOF
-            ___ ___    ___  ____   __  _    ___
-           |   T   T  /  _]|    \ |  l/ ]  /  _]
-           | _   _ | /  [_ |  _  Y|  ' /  /  [_
-           |  \_/  |Y    _]|  |  ||    \ Y    _]
-           |   |   ||   [_ |  |  ||     Y|   [_
-           |   |   ||     T|  |  ||  .  ||     T
-           l___j___jl_____jl__j__jl__j\_jl_____j
-             ______    ___     __  __ __  ____
-            |      T  /  _]   /  ]|  T  T|    \
-            |      | /  [_   /  / |  l  ||  _  Y
-            l_j  l_jY    _] /  /  |  _  ||  |  |
-              |  |  |   [_ /   \_ |  |  ||  |  |
-              |  |  |     T\     ||  |  ||  |  |
-              l__j  l_____j \____jl__j__jl__j__j
-          ___   _       ___    ____  ____    ___  _____
-         /   \ | T     /   \  /    Tl    j  /  _]/ ___/
-        Y     Y| |    Y     YY   __j |  T  /  [_(   \_
-        |  O  || l___ |  O  ||  T  | |  | Y    _]\__  T
-        |     ||     T|     ||  l_ | |  | |   [_ /  \ |
-        l     !|     |l     !|     | j  l |     T\    |
-         \___/ l_____j \___/ l___,_j|____jl_____j \___j
-EOF
+    printf "${cyan}      ┌─── NETWORK ─────────────────────────────────────────┐\n"
+    printf "      │  ${dim}${cyan}FETCH >>${reset}${bg_black}${cyan} %s\n" "$fetch"
+    printf "      │  ${dim}${cyan}PUSH  >>${reset}${bg_black}${cyan} %s\n" "$push"
+    printf "${cyan}      └──────────────────────────────────────────────────────┘\n"
+
+    printf "${reset}${bg_black}"
     echo
-    printf "\x1b[0m"
-    printf "\x1b[35m"
-    printf "\x1b[1m"
+    printf "${magenta}"
     cat <<EOF
-   $fetch
-   $push
-
-            $lastcommit
-
+      ┌─── LAST TRANSMISSION ───────────────────────────────┐
+      │  $lastcommit
+      └──────────────────────────────────────────────────────┘
 EOF
 
-    printf "\x1b[0m"
-    printf "\x1b[35m"
-    printf "\x1b[4m"
+    printf "${reset}${bg_black}"
+    echo
+    printf "${dim}${red}"
+    cat <<\EOF
+      ██████████████████████████████████████████████████████
+      ░░░░░░░░░░░ WELCOME TO THE GRID ░░░░░░░░░░░░░░░░░░░░
+      ██████████████████████████████████████████████████████
+EOF
+    echo
+    printf "${reset}"
 
     #if [[ -d "$ZPWR" ]]; then
     #if cd "$ZPWR";then

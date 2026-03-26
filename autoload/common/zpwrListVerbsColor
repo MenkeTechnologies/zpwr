@@ -1,0 +1,55 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrListVerbs(){
+
+    builtin emulate -L zsh
+    setopt nullglob globdots extendedglob
+    local len sep k v i width count
+    sep=" "
+    width=25
+
+    local cyan='\x1b[1;36m'
+    local magenta='\x1b[1;35m'
+    local yellow='\x1b[1;33m'
+    local green='\x1b[1;32m'
+    local red='\x1b[1;31m'
+    local dim='\x1b[2m'
+    local reset='\x1b[0m'
+    local bg='\x1b[40m'
+    local bold='\x1b[1m'
+
+    count=${#ZPWR_VERBS[@]}
+
+    printf "${bg}\n"
+    printf "${dim}${cyan}  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░${reset}${bg}\n"
+    printf "${magenta}  ╔═══════════════════════════════════════════════════════════╗${reset}${bg}\n"
+    printf "${magenta}  ║${reset}${bg}${yellow}${bold}    ███████╗██████╗ ██╗    ██╗██████╗  //COMMANDS//     ${reset}${bg}${magenta}║${reset}${bg}\n"
+    printf "${magenta}  ║${reset}${bg}${yellow}${bold}    ╚══███╔╝██╔══██╗██║    ██║██╔══██╗                  ${reset}${bg}${magenta}║${reset}${bg}\n"
+    printf "${magenta}  ║${reset}${bg}${yellow}${bold}      ███╔╝ ██████╔╝██║ █╗ ██║██████╔╝                  ${reset}${bg}${magenta}║${reset}${bg}\n"
+    printf "${magenta}  ║${reset}${bg}${yellow}${bold}     ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗                  ${reset}${bg}${magenta}║${reset}${bg}\n"
+    printf "${magenta}  ║${reset}${bg}${yellow}${bold}    ███████╗██║      ╚███╔███╔╝██║  ██║                  ${reset}${bg}${magenta}║${reset}${bg}\n"
+    printf "${magenta}  ║${reset}${bg}${yellow}${bold}    ╚══════╝╚═╝       ╚══╝╚══╝ ╚═╝  ╚═╝                  ${reset}${bg}${magenta}║${reset}${bg}\n"
+    printf "${magenta}  ╚═══════════════════════════════════════════════════════════╝${reset}${bg}\n"
+    printf "${dim}${cyan}  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░${reset}${bg}\n"
+    printf "\n"
+    printf "${dim}${green}  > LOADING COMMAND MATRIX... ${count} MODULES DETECTED${reset}${bg}\n"
+    printf "${dim}${green}  > NEURAL INTERFACE READY${reset}${bg}\n"
+    printf "\n"
+    printf "${cyan}  ┌─── VERB ──────────────────── DIRECTIVE ──────────────────────┐${reset}${bg}\n"
+
+    for k in ${(ko)ZPWR_VERBS[@]};do
+        len=$#k
+        printf "${cyan}  │ ${reset}${bg}${magenta}${bold}%-${width}s${reset}${bg}" "$k"
+        printf "${dim}${cyan}%s${reset}${bg}" "${ZPWR_VERBS[$k]}"
+        printf "\n"
+    done
+
+    printf "${cyan}  └─────────────────────────────────────────────────────────────┘${reset}${bg}\n"
+    printf "\n"
+    printf "${dim}${red}  ██████████████████████████████████████████████████████████████${reset}${bg}\n"
+    printf "${dim}${red}  ░░░░░░░░░░░░░░░░ JACK IN ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░${reset}${bg}\n"
+    printf "${dim}${red}  ██████████████████████████████████████████████████████████████${reset}${bg}\n"
+    printf "\n${reset}"
+}
+
+zpwrListVerbs "$@"
