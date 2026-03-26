@@ -53,8 +53,8 @@ shift $(($OPTIND - 1))
 if (($# > 1)); then
     num="$1"
     shift
-    bash "$ZPWR_SCRIPTS/myWatchMaintainEscapes.sh" -l "$num" "grc -c $HOME/conf.df --colour=auto df -H" "$@"
+    bash "$ZPWR_SCRIPTS/myWatchMaintainEscapes.sh" -l "$num" "bash $ZPWR_SCRIPTS/storageshowerCyberpunk.sh" "$@"
 else
-    bash "$ZPWR_SCRIPTS/myWatchMaintainEscapes.sh" "grc -c $HOME/conf.df --colour=auto df -H" "$@"
+    bash "$ZPWR_SCRIPTS/myWatchMaintainEscapes.sh" "bash $ZPWR_SCRIPTS/storageshowerCyberpunk.sh" "$@"
 
 fi
