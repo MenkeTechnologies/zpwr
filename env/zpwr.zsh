@@ -310,7 +310,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[subcommandsedit]='zpwrVerbsEditNoZLE=edit the subcommands for zpwr <tab>'
     ZPWR_VERBS[subcommandsfzf]='zpwrVerbsFZF=fzf the subcommands for zpwr <tab>'
     ZPWR_VERBS[subcommandslist]='zpwrListVerbs=the subcommands for zpwr <tab>'
-    ZPWR_VERBS[help]='zpwrListVerbs=the subcommands for zpwr <tab>'
+    ZPWR_VERBS[help]='zpwrListVerbsColor=the subcommands for zpwr <tab>'
     ZPWR_VERBS[subcommandscount]='zpwrNumVerbs=number of choice for zpwr <tab>'
     ZPWR_VERBS[taillog]='lo=tail -F $ZPWR_LOGFILE'
     ZPWR_VERBS[test]='zpwrTest=run all zpwr tests'
@@ -442,7 +442,7 @@ ZPWR_VARS[VERB_0]="$0"
         fi
 
         if [[ $verb =~ '-h|-\?|--help' ]]; then
-            zpwrListVerbs | less
+            zpwrListVerbsColor | less
             return 0
         fi
 
