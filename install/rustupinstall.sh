@@ -49,6 +49,7 @@ fi
 
 ins bat bat
 ins storageshower storageshower
+ins iftoprs iftoprs
 ins hyperfine hyperfine
 ins diskus diskus
 ins vivid vivid
