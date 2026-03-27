@@ -21,6 +21,7 @@ if builtin cd "$HOME/forkedRepos"; then
     if builtin cd iftopcolor; then
         cmake . && make && sudo make install
         make clean
+        cd ..
     else
         zpwrFail "could not cd to ZPWR_FORKED_DIR '$ZPWR_FORKED_DIR'"
     fi
@@ -28,6 +29,7 @@ if builtin cd "$HOME/forkedRepos"; then
     if builtin cd lsofng; then
         cmake . && make && sudo make install
         make clean
+        cd ..
     else
         zpwrFail "could not cd to ZPWR_FORKED_DIR '$ZPWR_FORKED_DIR'"
     fi
