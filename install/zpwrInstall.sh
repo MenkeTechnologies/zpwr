@@ -224,7 +224,7 @@ addDependenciesAlpine(){
 
 addDependenciesDebian(){
     dependencies_ary=(python3-dev libssl-dev ${dependencies_ary[@]})
-    dependencies_ary+=(mysql-server mariadb-server gcc bc lib-gnome2-dev iftop silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
+    dependencies_ary+=(libntirpc-dev mysql-server mariadb-server gcc bc lib-gnome2-dev iftop silversearcher-ag libgnomeui-dev libgtk2.0-dev libatk1.0-dev libbonoboui2-dev \
         ncurses-dev libevent-dev libncurses5-dev libncursesw5-dev libcairo2-dev libx11-dev \
         libxpm-dev libxt-dev \
         libperl-dev libpq-dev libpcap-dev fortunes ruby-dev \
@@ -238,7 +238,7 @@ addDependenciesRedHat(){
     fi
 
     dependencies_ary=(python3-devel llvm-devel openssl-devel ${dependencies_ary[@]})
-    dependencies_ary+=(gcc-c++ 'fortune-mod.*' mariadb-server clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
+    dependencies_ary+=(libntirpc-devel gcc-c++ 'fortune-mod.*' mariadb-server clamav-update openldap-devel libcurl-devel net-snmp-devel mysql-devel libevent-devel libffi-devel mysql-server \
         python36-tools ncurses-devel libpcap-devel curses-devel automake the_silver_searcher kernel-devel postgresql-devel)
     }
 
