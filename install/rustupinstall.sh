@@ -48,6 +48,7 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 fi
 
 ins bat bat
+ins storageshower storageshower
 ins hyperfine hyperfine
 ins diskus diskus
 ins vivid vivid
