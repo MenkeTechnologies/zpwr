@@ -577,11 +577,6 @@
     assert $state equals 0
 }
 
-@test 'script storageShower.sh exists' {
-    run test -f "$ZPWR_SCRIPTS/storageShower.sh"
-    assert $state equals 0
-}
-
 @test 'script sync.sh exists' {
     run test -f "$ZPWR_SCRIPTS/sync.sh"
     assert $state equals 0

@@ -942,16 +942,6 @@
     assert $state equals 0
 }
 
-@test 'storageShower.sh bash syntax' {
-    run bash -n "$ZPWR_SCRIPTS/storageShower.sh"
-    assert $state equals 0
-}
-
-@test 'storageShower.sh zsh syntax' {
-    run zsh -n "$ZPWR_SCRIPTS/storageShower.sh"
-    assert $state equals 0
-}
-
 @test 'sync.sh bash syntax' {
     run bash -n "$ZPWR_SCRIPTS/sync.sh"
     assert $state equals 0
