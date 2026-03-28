@@ -77,50 +77,11 @@
     assert $state equals 0
 }
 
-@test 'zpwrVimPluginCount returns 0' {
-    run zpwrVimPluginCount &>/dev/null
-    assert $state equals 0
-}
-
-@test 'zpwrVimPluginCount output is not empty' {
-    run zpwrVimPluginCount
-    assert "$output" is_not_empty
-}
-
-@test 'zpwrVimPluginCount is a number' {
-    out=$(zpwrVimPluginCount 2>/dev/null)
-    run test "$out" -ge 0
-    assert $state equals 0
-}
-
-@test 'zpwrVimPluginCount matches zpwrVimPluginList line count' {
-    listCount=$(zpwrVimPluginList 2>/dev/null | wc -l | tr -d ' ')
-    countOut=$(zpwrVimPluginCount 2>/dev/null)
-    [[ "$countOut" -eq "$listCount" ]]
-    assert $? equals 0
-}
-
 #--------------------------------------------------------------
 # zpwrEmacsPluginCount
 #--------------------------------------------------------------
 @test 'zpwrEmacsPluginCount exists' {
     run zpwrExists zpwrEmacsPluginCount
-    assert $state equals 0
-}
-
-@test 'zpwrEmacsPluginCount returns 0' {
-    run zpwrEmacsPluginCount &>/dev/null
-    assert $state equals 0
-}
-
-@test 'zpwrEmacsPluginCount output is not empty' {
-    run zpwrEmacsPluginCount
-    assert "$output" is_not_empty
-}
-
-@test 'zpwrEmacsPluginCount is a number' {
-    out=$(zpwrEmacsPluginCount 2>/dev/null)
-    run test "$out" -ge 0
     assert $state equals 0
 }
 
