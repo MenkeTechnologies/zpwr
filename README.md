@@ -21,8 +21,8 @@ If your terminal isn't glowing, you're not running ZPWR.
 
 ## System Map
 
-- [Full Install](#full-installation-instructions-to-zpwr) -- Jack In
-- [Install Options](#installation-options) -- Configuration Flags
+- [Full Install](#full-installation----jack-into-zpwr) -- Jack In
+- [Install Options](#installation-options-to-zpwrinstallzpwrinstallsh) -- Configuration Flags
 - [Augmentations](#zpwr-augmentations) -- System Specs
 - [Firmware Stack](#zpwr-firmware-stack) -- Required Components
 - [Compatible Chassis](#compatible-chassis) -- Supported Platforms
@@ -35,23 +35,23 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Vim Autosave](#autosaving-vim-plugins----persistent-memory) -- Persistent Memory
 - [Auto Display Completion Choices](#auto-list-completions) -- Predictive Input
 - [Bypass Space Expansion](#bypassing-expansion-on-space) -- Override Expansion
-- [Turning Off Ponies And Colors](#turning-off-ponies-and-colors-globally) -- Kill The Neon
-- [Vim Language Support](#running-script-from-vim-in-tmux-right-pane-is-supported-for-these-languages) -- Supported Runtimes
+- [Turning Off Ponies And Colors](#turning-off-ponies-default-is-off-and-colors-globally----kill-the-neon) -- Kill The Neon
+- [Vim Language Support](#supported-runtimes----running-script-from-vim-in-tmux-right-pane) -- Supported Runtimes
 - [Main Window](#tmux-main-window----the-cockpit) -- The Cockpit
 - [Personal Config](#personal-config----your-identity-file) -- Your Identity File
 - [ZPWR Verbs](#zpwr-verbs) -- Command Vocabulary
-- [ZPWR auto menu completion](#zpwr-start-auto) -- Predictive Completion
+- [ZPWR auto menu completion](#auto-list-completions) -- Predictive Completion
 - [Github Account Variable](#zpwr_github_account-variable) -- Network Identity
 - [Adding Zsh Plugins](#adding-more-zinit-plugins) -- Sideloading Modules
 - [Environment Variables](#environment-variables----system-tuning-parameters) -- System Tuning
-- [Test Suite](#tests) -- Diagnostics
-- [Shell Startup Speed](#shell-startup-speed) -- Boot Time
-- [Contributing](#contributing) -- Join The Grid
-- [Warning](#warnings) -- Read Before Modifying
+- [Test Suite](#diagnostics) -- Diagnostics
+- [Shell Startup Speed](#boot-time----shell-startup-speed) -- Boot Time
+- [Contributing](#contributing----join-the-grid) -- Join The Grid
+- [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
 - [RasberryPi Screenshots](#running-on-the-raspberry-pi-3)
 - [Rock64 Screenshots](#running-on-the-rock64)
-- [KeyBindings](#keybindings-generated-with-source-keybindingstoreadmezsh--readmemd) -- Neural Mappings
+- [KeyBindings](#neural-mappings----keybindings-generated-with-source-keybindingstoreadmezsh--readmemd) -- Neural Mappings
 - [Tmux Keybindings](#tmux-keybindings-tmux-lsk)
 - [Zsh Vim Insert Mode](#zsh-vim-insert-mode-keybindings-bindkey--m-viins--l)
 - [Zsh Vim Normal Mode](#zsh-vim-normal-mode-keybindings-bindkey--m-vicmd--l)
