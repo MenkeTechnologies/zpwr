@@ -37,8 +37,7 @@ jobs:
         run: |
           cd ~/.zpwr
           curl -fsSL https://raw.githubusercontent.com/molovo/revolver/refs/heads/master/revolver > .bin/revolver
-          curl -fsSL https://raw.githubusercontent.com/molovo/color/refs/heads/master/color.zsh > .bin/color
-          chmod u+x .bin/{color,revolver}
+          chmod u+x .bin/revolver
           echo "$HOME/.zpwr/.bin" >> "$GITHUB_PATH"
 
       - name: Build zunit
