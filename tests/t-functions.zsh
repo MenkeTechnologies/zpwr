@@ -287,6 +287,9 @@
 }
 
 @test 'zpwrCommandExists jq' {
+    if ! command -v jq &>/dev/null; then
+        skip "jq not installed"
+    fi
     run zpwrCommandExists jq
     assert $state equals 0
 }

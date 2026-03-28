@@ -96,6 +96,9 @@
     else
         expected="/usr/local/etc"
     fi
+    if [[ ! -d "$expected" ]]; then
+        skip "$expected does not exist"
+    fi
     ue &>/dev/null
     [[ "$PWD" == "$expected" ]]
     assert $? equals 0
@@ -153,6 +156,9 @@
 }
 
 @test 'fp navigates to ZPWR_FORKED_DIR' {
+    if [[ ! -d "$ZPWR_FORKED_DIR" ]]; then
+        skip "ZPWR_FORKED_DIR '$ZPWR_FORKED_DIR' does not exist"
+    fi
     local orig
     orig="$PWD"
     fp &>/dev/null
@@ -191,6 +197,9 @@
 }
 
 @test 'zlt navigates to ZPWR_LOCAL_TEMP' {
+    if [[ ! -d "$ZPWR_LOCAL_TEMP" ]]; then
+        skip "ZPWR_LOCAL_TEMP '$ZPWR_LOCAL_TEMP' does not exist"
+    fi
     local orig
     orig="$PWD"
     zlt &>/dev/null
