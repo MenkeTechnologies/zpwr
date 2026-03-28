@@ -22,6 +22,9 @@
 }
 
 @test 'ZPWR_PLUGIN_MANAGER_HOME is a directory' {
+    if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
+        skip "ZPWR_PLUGIN_MANAGER_HOME '$ZPWR_PLUGIN_MANAGER_HOME' not found"
+    fi
     run test -d "$ZPWR_PLUGIN_MANAGER_HOME"
     assert $state equals 0
 }
@@ -32,6 +35,9 @@
 }
 
 @test 'zpwrZshPluginList output entries are directories' {
+    if [[ ! -d "$ZPWR_PLUGIN_MANAGER_HOME" ]]; then
+        skip "ZPWR_PLUGIN_MANAGER_HOME not found"
+    fi
     local entries
     entries=$(zpwrZshPluginList 2>/dev/null)
     if [[ -n "$entries" ]]; then

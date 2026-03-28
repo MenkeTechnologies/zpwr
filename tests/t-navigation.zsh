@@ -205,6 +205,9 @@
     local orig expected
     orig="$PWD"
     expected="${HOMEBREW_PREFIX:-/usr/local}"
+    if [[ ! -d "$expected" ]]; then
+        skip "$expected does not exist"
+    fi
     h &>/dev/null
     [[ "$PWD" == "$expected" ]]
     assert $? equals 0
@@ -215,6 +218,9 @@
 # d - cd to ZPWR_D
 #--------------------------------------------------------------
 @test 'd navigates to ZPWR_D' {
+    if [[ ! -d "$ZPWR_D" ]]; then
+        skip "ZPWR_D '$ZPWR_D' does not exist"
+    fi
     local orig
     orig="$PWD"
     d &>/dev/null
