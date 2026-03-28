@@ -39,6 +39,12 @@ jobs:
           echo "ZPWR=$HOME/.zpwr" >> "$GITHUB_ENV"
           echo "ZPWR_SCRIPTS=$HOME/.zpwr/scripts" >> "$GITHUB_ENV"
 
+      - name: Create directories expected by tests
+        run: |
+          mkdir -p "$HOME/Desktop" "$HOME/Documents" "$HOME/Downloads" "$HOME/forkedRepos"
+          mkdir -p "$HOME/.zpwr/local/.temp" "$HOME/.zpwr/local/.cache" "$HOME/.zpwr/local/zcompcache"
+          mkdir -p "$HOME/.zinit/plugins/fzf" "$HOME/.zinit/plugins/MenkeTechnologies---fzf"
+
       - name: Install test tools
         run: |
           cd ~/.zpwr

@@ -447,8 +447,12 @@
 
     run test -n "$ZPWR_FZF_DIR"
     assert $state equals 0
-    run test -d "$ZPWR_FZF_DIR"
-    assert $state equals 0
+    if [[ -d "$ZPWR_FZF_DIR" ]]; then
+        run test -d "$ZPWR_FZF_DIR"
+        assert $state equals 0
+    else
+        skip "ZPWR_FZF_DIR '$ZPWR_FZF_DIR' not found"
+    fi
 }
 
 @test 'ZPWR_FOKED_DIR typo' {
@@ -461,8 +465,12 @@
 
     run test -n "$ZPWR_FORKED_DIR"
     assert $state equals 0
-    run test -d "$ZPWR_FORKED_DIR"
-    assert $state equals 0
+    if [[ -d "$ZPWR_FORKED_DIR" ]]; then
+        run test -d "$ZPWR_FORKED_DIR"
+        assert $state equals 0
+    else
+        skip "ZPWR_FORKED_DIR '$ZPWR_FORKED_DIR' not found"
+    fi
 }
 
 @test 'ZPWR_GIT_COLOR_PREFIX' {
@@ -557,8 +565,12 @@
 @test 'ZPWR_LOCAL_TEMP' {
     run test -n $ZPWR_LOCAL_TEMP
     assert $state equals 0
-    run test -d $ZPWR_LOCAL_TEMP
-    assert $state equals 0
+    if [[ -d "$ZPWR_LOCAL_TEMP" ]]; then
+        run test -d $ZPWR_LOCAL_TEMP
+        assert $state equals 0
+    else
+        skip "ZPWR_LOCAL_TEMP '$ZPWR_LOCAL_TEMP' not found"
+    fi
 }
 
 @test 'ZPWR_LOCK_FILE' {

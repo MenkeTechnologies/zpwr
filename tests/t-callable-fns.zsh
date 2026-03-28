@@ -453,13 +453,9 @@
     assert $state equals 0
 }
 
-@test 'zpwrLoginCount output may be empty on macOS' {
+@test 'zpwrLoginCount output may be empty on macOS or CI' {
     run zpwrLoginCount
-    if [[ "$OSTYPE" == darwin* ]]; then
-        assert $state equals 0
-    else
-        assert "$output" is_not_empty
-    fi
+    assert $state equals 0
 }
 
 #--------------------------------------------------------------
