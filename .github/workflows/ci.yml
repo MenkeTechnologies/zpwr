@@ -15,6 +15,11 @@ jobs:
       fail-fast: true
 
     steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh vim perl python3 curl git
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -22,14 +27,9 @@ jobs:
 
       - name: Set terminal size variables
         run: |
-          echo "TERM=xterm256-color" >> "$GITHUB_ENV"
+          echo "TERM=xterm" >> "$GITHUB_ENV"
           echo "COLUMNS=120" >> "$GITHUB_ENV"
           echo "LINES=40" >> "$GITHUB_ENV"
-
-      - name: Install system dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y zsh vim perl python3 curl git
 
       - name: Set up ZPWR environment
         run: |
