@@ -20,6 +20,12 @@ jobs:
         with:
           path: zpwr
 
+      - name: Set terminal size variables
+        run: |
+          echo "TERM=xterm256-color" >> "$GITHUB_ENV"
+          echo "COLUMNS=120" >> "$GITHUB_ENV"
+          echo "LINES=40" >> "$GITHUB_ENV"
+
       - name: Install system dependencies
         run: |
           sudo apt-get update
