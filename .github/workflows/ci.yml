@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        zsh-version: ['default']
+      fail-fast: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          path: zpwr
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y zsh vim perl python3 curl git
+
+      - name: Set up ZPWR environment
+        run: |
+          cp -a zpwr ~/.zpwr
+          cd ~/.zpwr
+          mkdir -p .bin
+          echo "ZPWR=$HOME/.zpwr" >> "$GITHUB_ENV"
+          echo "ZPWR_SCRIPTS=$HOME/.zpwr/scripts" >> "$GITHUB_ENV"
+
+      - name: Install test tools
+        run: |
+          cd ~/.zpwr
+          curl -fsSL https://raw.githubusercontent.com/molovo/revolver/refs/heads/master/revolver > .bin/revolver
+          curl -fsSL https://raw.githubusercontent.com/molovo/color/refs/heads/master/color.zsh > .bin/color
+          chmod u+x .bin/{color,revolver}
+          echo "$HOME/.zpwr/.bin" >> "$GITHUB_PATH"
+
+      - name: Build zunit
+        run: |
+          cd ~/.zpwr
+          git clone https://github.com/MenkeTechnologies/zunit
+          cd zunit
+          ./build.zsh
+          echo "$HOME/.zpwr/zunit" >> "$GITHUB_PATH"
+
+      - name: Run tests
+        run: |
+          cd ~/.zpwr
+          zunit --verbose tests/*.zsh

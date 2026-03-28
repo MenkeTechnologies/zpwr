@@ -2,7 +2,7 @@
 
 ![tmux final](https://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
 
-#### Main [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=main)](https://travis-ci.com/MenkeTechnologies/zpwr) Dev [![Build Status](https://travis-ci.com/MenkeTechnologies/zpwr.svg?branch=dev)](https://travis-ci.com/MenkeTechnologies/zpwr) Version [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) Commits [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) Contributors [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+#### Main [![CI](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml) Dev [![CI](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml) Version [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) Commits [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) Contributors [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 ```
  _______ _______ _  _  _ ______
