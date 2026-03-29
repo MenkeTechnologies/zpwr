@@ -283,19 +283,6 @@
 }
 
 #--------------------------------------------------------------
-# root .travis.yml
-#--------------------------------------------------------------
-@test 'root .travis.yml exists' {
-    run test -f "$ZPWR/.travis.yml"
-    assert $state equals 0
-}
-
-@test 'root .travis.yml is not empty' {
-    run test -s "$ZPWR/.travis.yml"
-    assert $state equals 0
-}
-
-#--------------------------------------------------------------
 # root README.md
 #--------------------------------------------------------------
 @test 'root README.md exists' {
