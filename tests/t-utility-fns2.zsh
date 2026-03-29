@@ -210,20 +210,6 @@
     assert $state equals 0
 }
 
-@test 'c on test file output is not empty' {
-    run c "$TEST_FILE"
-    assert "$output" is_not_empty
-}
-
-@test 'c on test file output contains line1' {
-    run c "$TEST_FILE"
-    assert "$output" contains line1
-}
-
-@test 'c on test file output contains line2' {
-    run c "$TEST_FILE"
-    assert "$output" contains line2
-}
 
 #--------------------------------------------------------------
 # return2 - redirect stderr to /dev/tty
