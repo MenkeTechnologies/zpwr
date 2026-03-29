@@ -2,7 +2,7 @@
 
 ![tmux final](https://menketechnologies.github.io/img/tmuxfinal1.png?raw=true)
 
-#### Main [![CI](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml) Dev [![CI](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml) Version [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) Commits [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) Contributors [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
+#### Main [![CI](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/MenkeTechnologies/zpwr/actions/workflows/ci.yml) Version [![GitHub tag](https://img.shields.io/github/tag/MenkeTechnologies/zpwr.svg)](https://GitHub.com/MenkeTechnologies/zpwr/tags/) Commits [![GitHub commits](https://img.shields.io/github/commits-since/MenkeTechnologies/zpwr/v1.0.svg)](https://GitHub.com/MenkeTechnologies/zpwr/commit/) Contributors [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 ```
  _______ _______ _  _  _ ______
@@ -3039,3 +3039,8 @@ Moving scripts from `$ZPWR_SCRIPTS` (`~/.zpwr/scripts`) and `$ZPWR_TMUX` (`~/.zp
 - ``` c  <C-U>       * <SNR>128_ctrl_u() ```
 - ``` c  <C-X><C-A>  * <C-A> ```
 - ``` c  <C-Y>       * pumvisible() ? "\<C-Y>" : "\<C-R>-" ```
+
+## Contributors
+
+| [<img src="https://avatars.githubusercontent.com/u/18195247?v=4" width="100px;" alt=""/><br /><sub><b>MenkeTechnologies</b></sub>](https://github.com/MenkeTechnologies) | [<img src="https://avatars.githubusercontent.com/u/11463275?v=4" width="100px;" alt=""/><br /><sub><b>MichaelDimmitt</b></sub>](https://github.com/MichaelDimmitt) |
+| :---: | :---: |
