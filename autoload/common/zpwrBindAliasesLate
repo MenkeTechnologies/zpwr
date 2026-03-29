@@ -263,7 +263,7 @@ function zpwrBindAliasesLate(){
     alias mkdir='mkdir -pv'
     zpwrExists hexedit && alias he='hexedit -l 16'
     alias fh='f !$'
-    alias gh=zpwrOpenmygh
+    alias ogh=zpwrOpenmygh
     eval "alias $ZPWR_GITHUB_ACCOUNT='zpwrOpenmygh $ZPWR_GITHUB_ACCOUNT'"
     alias mus="cd $HOME/Music"
 
