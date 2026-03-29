@@ -214,7 +214,7 @@ function zpwrPrettyPrintNoNewline(){
 
 function zpwrIsBinary() {
 
-    [[ $(LC_MESSAGES=C command grep -Hm1 '^' < "${1:-$REPLY}") =~ '^Binary' ]]
+    [[ $(LC_MESSAGES=C command grep -Hm1 '^' < "${1:-$REPLY}" 2>&1) =~ [Bb]inary ]]
 }
 
 function zpwrLogColor(){
