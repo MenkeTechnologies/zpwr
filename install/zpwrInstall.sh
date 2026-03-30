@@ -347,7 +347,7 @@ function cargoinstall(){
     bash rustupinstall.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
     CARGO_PID=$!
     echo $CARGO_PID
-    zpwrPrettyPrintBox "Installing rustup for exa, fd and bat in background @ $CARGO_PID"
+    zpwrPrettyPrintBox "Installing rustup for eza, fd and bat in background @ $CARGO_PID"
 }
 #}}}***********************************************************
 

@@ -395,7 +395,7 @@
     run test -n "$ZPWR_EXA_COMMAND"
     assert $state equals 0
     run printf "$ZPWR_EXA_COMMAND"
-    assert "$output" contains exa
+    assert "$output" contains eza
 }
 
 @test 'ZPWR_EXA_EXTENDED' {

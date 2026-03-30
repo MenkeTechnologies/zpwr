@@ -142,8 +142,8 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
 #{{{                    MARK:Rust Config
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
-    if zpwrCommandExists exa; then
-        alias exa="$ZPWR_EXA_COMMAND"
+    if zpwrCommandExists eza; then
+        alias eza="$ZPWR_EXA_COMMAND"
     fi
 
 #}}}***********************************************************

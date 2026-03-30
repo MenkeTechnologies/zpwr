@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function zpwrListNoClear () {
 
-    if zpwrCommandExists exa; then
+    if zpwrCommandExists eza; then
         eval "$ZPWR_EXA_COMMAND"
         return 0
     fi

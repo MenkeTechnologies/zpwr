@@ -55,7 +55,7 @@ ins diskus diskus
 ins vivid vivid
 ins hexyl hexyl
 ins fd-find fd
-ins exa exa
+ins eza eza
 ins ripgrep rg
 ins thumbs thumbs
 ins temprs tp

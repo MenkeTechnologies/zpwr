@@ -761,7 +761,7 @@ function zpwrClearList() {
     local FOUND out out2 ls_command lib_command rank loc arg
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        if zpwrCommandExists exa;then
+        if zpwrCommandExists eza;then
             ls_command="$ZPWR_EXA_COMMAND"
         else
             if zpwrCommandExists grc; then
@@ -773,7 +773,7 @@ function zpwrClearList() {
         lib_command="otool -L"
     elif [[ "$ZPWR_OS_TYPE" == linux ]];then
 
-        if zpwrCommandExists exa;then
+        if zpwrCommandExists eza;then
             ls_command="$ZPWR_EXA_COMMAND"
         else
             if zpwrCommandExists grc; then

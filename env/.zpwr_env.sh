@@ -89,7 +89,7 @@ export ZPWR_EDITOR_TO_VIM='true'
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command
 export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
-# exa command invoked from zpwrClearList shows extended attributes
+# eza command invoked from zpwrClearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # enable all expansion
 export ZPWR_EXPAND=true
