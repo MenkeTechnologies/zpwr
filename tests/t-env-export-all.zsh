@@ -13,535 +13,535 @@
 }
 
 @test 'ZPWR_AUTO_ATTACH is exported' {
-    run zsh -c 'echo $ZPWR_AUTO_ATTACH'
+    local tflags="${(t)ZPWR_AUTO_ATTACH}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_AUTO_COMPLETE is exported' {
-    run zsh -c 'echo $ZPWR_AUTO_COMPLETE'
+    local tflags="${(t)ZPWR_AUTO_COMPLETE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_AUTO_COMPLETE_DELAY is exported' {
-    run zsh -c 'echo $ZPWR_AUTO_COMPLETE_DELAY'
+    local tflags="${(t)ZPWR_AUTO_COMPLETE_DELAY}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_AUTO_LS_RM is exported' {
-    run zsh -c 'echo $ZPWR_AUTO_LS_RM'
+    local tflags="${(t)ZPWR_AUTO_LS_RM}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_AUTO_LS_CD is exported' {
-    run zsh -c 'echo $ZPWR_AUTO_LS_CD'
+    local tflags="${(t)ZPWR_AUTO_LS_CD}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_AUTO_SELECT is exported' {
-    run zsh -c 'echo $ZPWR_AUTO_SELECT'
+    local tflags="${(t)ZPWR_AUTO_SELECT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_BANNER_CLEARLIST is exported' {
-    run zsh -c 'echo $ZPWR_BANNER_CLEARLIST'
+    local tflags="${(t)ZPWR_BANNER_CLEARLIST}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_BANNER_DESKTOP_DARWIN is exported' {
-    run zsh -c 'echo $ZPWR_BANNER_DESKTOP_DARWIN'
+    local tflags="${(t)ZPWR_BANNER_DESKTOP_DARWIN}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_BANNER_DESKTOP_LINUX is exported' {
-    run zsh -c 'echo $ZPWR_BANNER_DESKTOP_LINUX'
+    local tflags="${(t)ZPWR_BANNER_DESKTOP_LINUX}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_BANNER_TYPE is exported' {
-    run zsh -c 'echo $ZPWR_BANNER_TYPE'
+    local tflags="${(t)ZPWR_BANNER_TYPE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_BAT_THEME is exported' {
-    run zsh -c 'echo $ZPWR_BAT_THEME'
+    local tflags="${(t)ZPWR_BAT_THEME}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_CHAR_LOGO is exported' {
-    run zsh -c 'echo $ZPWR_CHAR_LOGO'
+    local tflags="${(t)ZPWR_CHAR_LOGO}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_DESC_PRE is exported' {
-    run zsh -c 'echo $ZPWR_DESC_PRE'
+    local tflags="${(t)ZPWR_DESC_PRE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_DESC_POST is exported' {
-    run zsh -c 'echo $ZPWR_DESC_POST'
+    local tflags="${(t)ZPWR_DESC_POST}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_DESC_TEXT_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_DESC_TEXT_COLOR'
+    local tflags="${(t)ZPWR_DESC_TEXT_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_DESC_PRE_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_DESC_PRE_COLOR'
+    local tflags="${(t)ZPWR_DESC_PRE_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_DESC_POST_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_DESC_POST_COLOR'
+    local tflags="${(t)ZPWR_DESC_POST_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COLORS is exported' {
-    run zsh -c 'echo $ZPWR_COLORS'
+    local tflags="${(t)ZPWR_COLORS}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COLORS_SECTIONS is exported' {
-    run zsh -c 'echo $ZPWR_COLORS_SECTIONS'
+    local tflags="${(t)ZPWR_COLORS_SECTIONS}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COLORS_VERBS is exported' {
-    run zsh -c 'echo $ZPWR_COLORS_VERBS'
+    local tflags="${(t)ZPWR_COLORS_VERBS}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COLOR_BLUE is exported' {
-    run zsh -c 'echo $ZPWR_COLOR_BLUE'
+    local tflags="${(t)ZPWR_COLOR_BLUE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COLOR_RED is exported' {
-    run zsh -c 'echo $ZPWR_COLOR_RED'
+    local tflags="${(t)ZPWR_COLOR_RED}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COLOR_RESET is exported' {
-    run zsh -c 'echo $ZPWR_COLOR_RESET'
+    local tflags="${(t)ZPWR_COLOR_RESET}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COMMIT_STYLE is exported' {
-    run zsh -c 'echo $ZPWR_COMMIT_STYLE'
+    local tflags="${(t)ZPWR_COMMIT_STYLE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_NAMED_COLORS is exported' {
-    run zsh -c 'echo $ZPWR_NAMED_COLORS'
+    local tflags="${(t)ZPWR_NAMED_COLORS}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COMMON_ZSTYLE_OPTS is exported' {
-    run zsh -c 'echo $ZPWR_COMMON_ZSTYLE_OPTS'
+    local tflags="${(t)ZPWR_COMMON_ZSTYLE_OPTS}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_SUDO_CMD is exported' {
-    run zsh -c 'echo $ZPWR_SUDO_CMD'
+    local tflags="${(t)ZPWR_SUDO_CMD}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_FULL_SUDO is exported' {
-    run zsh -c 'echo $ZPWR_FULL_SUDO'
+    local tflags="${(t)ZPWR_FULL_SUDO}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COMPLETION_DIR is exported' {
-    run zsh -c 'echo $ZPWR_COMPLETION_DIR'
+    local tflags="${(t)ZPWR_COMPLETION_DIR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_CORRECT is exported' {
-    run zsh -c 'echo $ZPWR_CORRECT'
+    local tflags="${(t)ZPWR_CORRECT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_CORRECT_EXPAND is exported' {
-    run zsh -c 'echo $ZPWR_CORRECT_EXPAND'
+    local tflags="${(t)ZPWR_CORRECT_EXPAND}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_DEBUG is exported' {
-    run zsh -c 'echo $ZPWR_DEBUG'
+    local tflags="${(t)ZPWR_DEBUG}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_DEFAULT_OMZ_THEME is exported' {
-    run zsh -c 'echo $ZPWR_DEFAULT_OMZ_THEME'
+    local tflags="${(t)ZPWR_DEFAULT_OMZ_THEME}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_DELIMITER_CHAR is exported' {
-    run zsh -c 'echo $ZPWR_DELIMITER_CHAR'
+    local tflags="${(t)ZPWR_DELIMITER_CHAR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_VIM is exported' {
-    run zsh -c 'echo $ZPWR_VIM'
+    local tflags="${(t)ZPWR_VIM}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EDITOR_TO_VIM is exported' {
-    run zsh -c 'echo $ZPWR_EDITOR_TO_VIM'
+    local tflags="${(t)ZPWR_EDITOR_TO_VIM}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EMACS is exported' {
-    run zsh -c 'echo $ZPWR_EMACS'
+    local tflags="${(t)ZPWR_EMACS}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EMACS_CLIENT is exported' {
-    run zsh -c 'echo $ZPWR_EMACS_CLIENT'
+    local tflags="${(t)ZPWR_EMACS_CLIENT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXA_EXTENDED is exported' {
-    run zsh -c 'echo $ZPWR_EXA_EXTENDED'
+    local tflags="${(t)ZPWR_EXA_EXTENDED}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXPAND is exported' {
-    run zsh -c 'echo $ZPWR_EXPAND'
+    local tflags="${(t)ZPWR_EXPAND}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXPAND_SECOND_POSITION is exported' {
-    run zsh -c 'echo $ZPWR_EXPAND_SECOND_POSITION'
+    local tflags="${(t)ZPWR_EXPAND_SECOND_POSITION}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXPAND_NATIVE is exported' {
-    run zsh -c 'echo $ZPWR_EXPAND_NATIVE'
+    local tflags="${(t)ZPWR_EXPAND_NATIVE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXPAND_PRE_EXEC is exported' {
-    run zsh -c 'echo $ZPWR_EXPAND_PRE_EXEC'
+    local tflags="${(t)ZPWR_EXPAND_PRE_EXEC}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXPAND_PRE_EXEC_NATIVE is exported' {
-    run zsh -c 'echo $ZPWR_EXPAND_PRE_EXEC_NATIVE'
+    local tflags="${(t)ZPWR_EXPAND_PRE_EXEC_NATIVE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION is exported' {
-    run zsh -c 'echo $ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION'
+    local tflags="${(t)ZPWR_EXPAND_PRE_EXEC_SECOND_POSITION}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXPAND_QUOTE_DOUBLE is exported' {
-    run zsh -c 'echo $ZPWR_EXPAND_QUOTE_DOUBLE'
+    local tflags="${(t)ZPWR_EXPAND_QUOTE_DOUBLE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_EXPAND_QUOTE_SINGLE is exported' {
-    run zsh -c 'echo $ZPWR_EXPAND_QUOTE_SINGLE'
+    local tflags="${(t)ZPWR_EXPAND_QUOTE_SINGLE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_FZF is exported' {
-    run zsh -c 'echo $ZPWR_FZF'
+    local tflags="${(t)ZPWR_FZF}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_FD is exported' {
-    run zsh -c 'echo $ZPWR_FD'
+    local tflags="${(t)ZPWR_FD}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_FZF_LOGO is exported' {
-    run zsh -c 'echo $ZPWR_FZF_LOGO'
+    local tflags="${(t)ZPWR_FZF_LOGO}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_GITHUB_ACCOUNT is exported' {
-    run zsh -c 'echo $ZPWR_GITHUB_ACCOUNT'
+    local tflags="${(t)ZPWR_GITHUB_ACCOUNT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_GLOBAL_ALIAS_PREFIX is exported' {
-    run zsh -c 'echo $ZPWR_GLOBAL_ALIAS_PREFIX'
+    local tflags="${(t)ZPWR_GLOBAL_ALIAS_PREFIX}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_INTERACTIVE_MENU_SELECT is exported' {
-    run zsh -c 'echo $ZPWR_INTERACTIVE_MENU_SELECT'
+    local tflags="${(t)ZPWR_INTERACTIVE_MENU_SELECT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_KEYTIMEOUT is exported' {
-    run zsh -c 'echo $ZPWR_KEYTIMEOUT'
+    local tflags="${(t)ZPWR_KEYTIMEOUT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_LEARN is exported' {
-    run zsh -c 'echo $ZPWR_LEARN'
+    local tflags="${(t)ZPWR_LEARN}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_LOG_UNDER_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_LOG_UNDER_COLOR'
+    local tflags="${(t)ZPWR_LOG_UNDER_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_LOG_QUOTE_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_LOG_QUOTE_COLOR'
+    local tflags="${(t)ZPWR_LOG_QUOTE_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_LOG_DATE_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_LOG_DATE_COLOR'
+    local tflags="${(t)ZPWR_LOG_DATE_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_LOG_MSG_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_LOG_MSG_COLOR'
+    local tflags="${(t)ZPWR_LOG_MSG_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_MAP_C_V_VIM_NORMAL is exported' {
-    run zsh -c 'echo $ZPWR_MAP_C_V_VIM_NORMAL'
+    local tflags="${(t)ZPWR_MAP_C_V_VIM_NORMAL}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_MARKER_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_MARKER_COLOR'
+    local tflags="${(t)ZPWR_MARKER_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_PYGMENTIZE_COLOR is exported' {
-    run zsh -c 'echo $ZPWR_PYGMENTIZE_COLOR'
+    local tflags="${(t)ZPWR_PYGMENTIZE_COLOR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_COLORIZER is exported' {
-    run zsh -c 'echo $ZPWR_COLORIZER'
+    local tflags="${(t)ZPWR_COLORIZER}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_OPTS is exported' {
-    run zsh -c 'echo $ZPWR_OPTS'
+    local tflags="${(t)ZPWR_OPTS}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_OS_TYPE is exported' {
-    run zsh -c 'echo $ZPWR_OS_TYPE'
+    local tflags="${(t)ZPWR_OS_TYPE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_PLUGIN_MANAGER is exported' {
-    run zsh -c 'echo $ZPWR_PLUGIN_MANAGER'
+    local tflags="${(t)ZPWR_PLUGIN_MANAGER}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_PROFILING is exported' {
-    run zsh -c 'echo $ZPWR_PROFILING'
+    local tflags="${(t)ZPWR_PROFILING}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_PROMPT is exported' {
-    run zsh -c 'echo $ZPWR_PROMPT'
+    local tflags="${(t)ZPWR_PROMPT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_PSSH_TIMEOUT is exported' {
-    run zsh -c 'echo $ZPWR_PSSH_TIMEOUT'
+    local tflags="${(t)ZPWR_PSSH_TIMEOUT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_GIT_COLOR_PREFIX is exported' {
-    run zsh -c 'echo $ZPWR_GIT_COLOR_PREFIX'
+    local tflags="${(t)ZPWR_GIT_COLOR_PREFIX}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_QUOTE_START_CHAR is exported' {
-    run zsh -c 'echo $ZPWR_QUOTE_START_CHAR'
+    local tflags="${(t)ZPWR_QUOTE_START_CHAR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_QUOTE_END_CHAR is exported' {
-    run zsh -c 'echo $ZPWR_QUOTE_END_CHAR'
+    local tflags="${(t)ZPWR_QUOTE_END_CHAR}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_REPO_NAME is exported' {
-    run zsh -c 'echo $ZPWR_REPO_NAME'
+    local tflags="${(t)ZPWR_REPO_NAME}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_SEND_KEYS_FULL is exported' {
-    run zsh -c 'echo $ZPWR_SEND_KEYS_FULL'
+    local tflags="${(t)ZPWR_SEND_KEYS_FULL}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_LOOK_TIME is exported' {
-    run zsh -c 'echo $ZPWR_LOOK_TIME'
+    local tflags="${(t)ZPWR_LOOK_TIME}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_SEND_KEYS_PANE is exported' {
-    run zsh -c 'echo $ZPWR_SEND_KEYS_PANE'
+    local tflags="${(t)ZPWR_SEND_KEYS_PANE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_SURROUND is exported' {
-    run zsh -c 'echo $ZPWR_SURROUND'
+    local tflags="${(t)ZPWR_SURROUND}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_TABSTOP is exported' {
-    run zsh -c 'echo $ZPWR_TABSTOP'
+    local tflags="${(t)ZPWR_TABSTOP}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_TABSTOP_ALIASES is exported' {
-    run zsh -c 'echo $ZPWR_TABSTOP_ALIASES'
+    local tflags="${(t)ZPWR_TABSTOP_ALIASES}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_TMUX_PREFIX_MAC is exported' {
-    run zsh -c 'echo $ZPWR_TMUX_PREFIX_MAC'
+    local tflags="${(t)ZPWR_TMUX_PREFIX_MAC}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_TMUX_PREFIX_LINUX is exported' {
-    run zsh -c 'echo $ZPWR_TMUX_PREFIX_LINUX'
+    local tflags="${(t)ZPWR_TMUX_PREFIX_LINUX}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_TMUX_HISTORY_LIMIT is exported' {
-    run zsh -c 'echo $ZPWR_TMUX_HISTORY_LIMIT'
+    local tflags="${(t)ZPWR_TMUX_HISTORY_LIMIT}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_TRACE is exported' {
-    run zsh -c 'echo $ZPWR_TRACE'
+    local tflags="${(t)ZPWR_TRACE}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_VIM_TEMPLATES is exported' {
-    run zsh -c 'echo $ZPWR_VIM_TEMPLATES'
+    local tflags="${(t)ZPWR_VIM_TEMPLATES}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_BINDKEY_VI is exported' {
-    run zsh -c 'echo $ZPWR_BINDKEY_VI'
+    local tflags="${(t)ZPWR_BINDKEY_VI}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_ZINIT_COMPINIT_DELAY is exported' {
-    run zsh -c 'echo $ZPWR_ZINIT_COMPINIT_DELAY'
+    local tflags="${(t)ZPWR_ZINIT_COMPINIT_DELAY}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_ZDHARMA is exported' {
-    run zsh -c 'echo $ZPWR_ZDHARMA'
+    local tflags="${(t)ZPWR_ZDHARMA}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_THUMBS_REGEX is exported' {
-    run zsh -c 'echo $ZPWR_THUMBS_REGEX'
+    local tflags="${(t)ZPWR_THUMBS_REGEX}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }
 
 @test 'ZPWR_TTY is exported' {
-    run zsh -c 'echo $ZPWR_TTY'
+    local tflags="${(t)ZPWR_TTY}"
+    run test "${tflags}" != "${tflags/export/}"
     assert $state equals 0
-    assert "$output" is_not_empty
 }

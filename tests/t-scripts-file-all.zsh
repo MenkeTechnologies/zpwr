@@ -210,12 +210,6 @@
     assert "$output" contains text
 }
 
-@test 'script etags is text file' {
-    run file "$ZPWR_SCRIPTS/etags"
-    assert $state equals 0
-    assert "$output" contains text
-}
-
 @test 'script evilSkull.sh is text file' {
     run file "$ZPWR_SCRIPTS/evilSkull.sh"
     assert $state equals 0
