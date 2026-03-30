@@ -402,7 +402,7 @@
     run test -n "$ZPWR_EXA_EXTENDED"
     assert $state equals 0
     run printf "$ZPWR_EXA_EXTENDED"
-    assert "$output" contains true
+    assert "$output" contains false
 }
 
 @test 'ZPWR_EXPAND_NATIVE' {
