@@ -755,6 +755,10 @@ zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GI
 ```
 
 ## Diagnostics
+The test suite contains 10,000+ [zunit](https://github.com/zunit-zsh/zunit) tests across 57 test files covering autoload function existence, type resolution, whence/which lookups, function body validation, fpath integrity, source syntax, script readability, shebang detection, verb callability, and environment variable isolation.
+
+All ZPWR_* environment variables are unset before each test run to prevent user env from leaking into test results.
+
 You can run zpwr unit tests via `zpwr test` and include plugin tests with `zpwr testall`.
 
 There is also the alias `tru` (tests run) to run the tests.
