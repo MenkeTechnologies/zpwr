@@ -1183,11 +1183,13 @@
 }
 
 @test 'ZPWR_VERBS[pi] exists' {
+    if ! (( ${+ZPWR_VERBS[pi]} )); then skip "pi command not available"; fi
     run test -n "${(qqq)ZPWR_VERBS[pi]}"
     assert $state equals 0
 }
 
 @test 'ZPWR_VERBS[ping] exists' {
+    if ! (( ${+ZPWR_VERBS[ping]} )); then skip "pi command not available"; fi
     run test -n "${(qqq)ZPWR_VERBS[ping]}"
     assert $state equals 0
 }
@@ -1343,6 +1345,7 @@
 }
 
 @test 'ZPWR_VERBS[restart] exists' {
+    if ! (( ${+ZPWR_VERBS[restart]} )); then skip "systemctl not available"; fi
     run test -n "${(qqq)ZPWR_VERBS[restart]}"
     assert $state equals 0
 }
@@ -1403,16 +1406,19 @@
 }
 
 @test 'ZPWR_VERBS[servicedown] exists' {
+    if ! (( ${+ZPWR_VERBS[servicedown]} )); then skip "systemctl not available"; fi
     run test -n "${(qqq)ZPWR_VERBS[servicedown]}"
     assert $state equals 0
 }
 
 @test 'ZPWR_VERBS[serviceup] exists' {
+    if ! (( ${+ZPWR_VERBS[serviceup]} )); then skip "systemctl not available"; fi
     run test -n "${(qqq)ZPWR_VERBS[serviceup]}"
     assert $state equals 0
 }
 
 @test 'ZPWR_VERBS[start] exists' {
+    if ! (( ${+ZPWR_VERBS[start]} )); then skip "ZPWR_PYSCRIPTS not available"; fi
     run test -n "${(qqq)ZPWR_VERBS[start]}"
     assert $state equals 0
 }
@@ -1433,6 +1439,7 @@
 }
 
 @test 'ZPWR_VERBS[starttabs] exists' {
+    if ! (( ${+ZPWR_VERBS[starttabs]} )); then skip "ZPWR_PYSCRIPTS not available"; fi
     run test -n "${(qqq)ZPWR_VERBS[starttabs]}"
     assert $state equals 0
 }
