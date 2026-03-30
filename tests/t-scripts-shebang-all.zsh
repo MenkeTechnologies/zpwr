@@ -544,13 +544,6 @@
     assert $state equals 0
 }
 
-@test 'script macOnly has shebang' {
-    local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly")
-    run test -n "$first_line"
-    assert $state equals 0
-}
-
 @test 'script mantozshcomp.py has shebang' {
     local first_line
     first_line=$(head -1 "$ZPWR_SCRIPTS/mantozshcomp.py")
@@ -834,13 +827,6 @@
 @test 'script sync.sh has shebang' {
     local first_line
     first_line=$(head -1 "$ZPWR_SCRIPTS/sync.sh")
-    run test -n "$first_line"
-    assert $state equals 0
-}
-
-@test 'script tags has shebang' {
-    local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/tags")
     run test -n "$first_line"
     assert $state equals 0
 }

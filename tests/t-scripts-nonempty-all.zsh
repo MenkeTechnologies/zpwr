@@ -392,11 +392,6 @@
     assert $state equals 0
 }
 
-@test 'script macOnly is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/macOnly"
-    assert $state equals 0
-}
-
 @test 'script mantozshcomp.py is non-empty' {
     run test -s "$ZPWR_SCRIPTS/mantozshcomp.py"
     assert $state equals 0
@@ -599,11 +594,6 @@
 
 @test 'script sync.sh is non-empty' {
     run test -s "$ZPWR_SCRIPTS/sync.sh"
-    assert $state equals 0
-}
-
-@test 'script tags is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/tags"
     assert $state equals 0
 }
 

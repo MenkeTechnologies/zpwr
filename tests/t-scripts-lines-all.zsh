@@ -544,13 +544,6 @@
     assert $state equals 0
 }
 
-@test 'script macOnly has lines' {
-    local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly")
-    run test "$lc" -gt 0
-    assert $state equals 0
-}
-
 @test 'script mantozshcomp.py has lines' {
     local lc
     lc=$(wc -l < "$ZPWR_SCRIPTS/mantozshcomp.py")
@@ -834,13 +827,6 @@
 @test 'script sync.sh has lines' {
     local lc
     lc=$(wc -l < "$ZPWR_SCRIPTS/sync.sh")
-    run test "$lc" -gt 0
-    assert $state equals 0
-}
-
-@test 'script tags has lines' {
-    local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/tags")
     run test "$lc" -gt 0
     assert $state equals 0
 }

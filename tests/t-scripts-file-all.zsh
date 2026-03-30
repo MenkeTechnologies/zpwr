@@ -462,12 +462,6 @@
     assert "$output" contains text
 }
 
-@test 'script macOnly is text file' {
-    run file "$ZPWR_SCRIPTS/macOnly"
-    assert $state equals 0
-    assert "$output" contains text
-}
-
 @test 'script mantozshcomp.py is text file' {
     run file "$ZPWR_SCRIPTS/mantozshcomp.py"
     assert $state equals 0
@@ -710,12 +704,6 @@
 
 @test 'script sync.sh is text file' {
     run file "$ZPWR_SCRIPTS/sync.sh"
-    assert $state equals 0
-    assert "$output" contains text
-}
-
-@test 'script tags is text file' {
-    run file "$ZPWR_SCRIPTS/tags"
     assert $state equals 0
     assert "$output" contains text
 }
