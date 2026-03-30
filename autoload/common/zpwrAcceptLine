@@ -81,17 +81,24 @@ function zpwrAcceptLine () {
                 fi
             fi
         fi
+    else
+        # single word: parser skips single-word input, so set cmd here
+        mywords=( ${(z)BUFFER} )
+        cmd=${mywords[1]#=}
     fi
 
     # prevent global alias in first position from expanding
-    if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
-        if [[ -z "$BUFFER" ]]; then
-            zle .accept-line
-            return 0
-        fi
-        if [[ -n ${galiases[$cmd]} ]];then
+    local skipExpand=false
+    if [[ -z "$BUFFER" ]]; then
+        zle .accept-line
+        return 0
+    fi
+    if [[ -n ${galiases[$cmd]} ]];then
+        skipExpand=true
+        if [[ -z "$ZPWR_GLOBAL_ALIAS_PREFIX" ]]; then
             if [[ -n ${aliases[$cmd]} ]];then
-                # non global alias
+                # non global alias - expand regular alias to prevent global alias expansion
+                line="${aliases[$cmd]}"
                 print -- "$line" | grep -F "'" && \
                     BUFFER="${line:1:-1} $mywords[2,$]" ||
                     BUFFER="$line $mywords[2,$]"
@@ -99,11 +106,17 @@ function zpwrAcceptLine () {
                 # function
                 BUFFER="\\$mywords"
             fi
+        else
+            if [[ -n $prefix ]]; then
+                BUFFER="$prefix \\$cmdstr"
+            else
+                BUFFER="\\$mywords"
+            fi
         fi
     fi
 
 
-    if [[ $ZPWR_EXPAND_PRE_EXEC == true ]]; then
+    if [[ $ZPWR_EXPAND_PRE_EXEC == true && $skipExpand == false ]]; then
         CURSOR=${#BUFFER}
         zpwrExpandSupernaturalSpace "${ZPWR_VARS[ENTER_KEY]}"
     fi
