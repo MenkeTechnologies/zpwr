@@ -1836,3 +1836,138 @@
     run test -n "${(qqq)ZPWR_VERBS[zstyle]}"
     assert $state equals 0
 }
+
+@test 'ZPWR_VERBS[animate] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[animate]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[bannerlolcat] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[bannerlolcat]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[bannernopony] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[bannernopony]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[bannerpony] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[bannerpony]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[cleangitcleancache] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[cleangitcleancache]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[creategif] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[creategif]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[curl] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[curl]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[deduppaths] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[deduppaths]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[execpy] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[execpy]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[filesearch] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[filesearch]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[filesearchedit] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[filesearchedit]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[goclean] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[goclean]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[google] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[google]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[help] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[help]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[openurl] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[openurl]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[pstreemonitor] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[pstreemonitor]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[regengtagspygments] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[regengtagspygments]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[regengtagstype] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[regengtagstype]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[replacer] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[replacer]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[reset] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[reset]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[revealrecurse] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[revealrecurse]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[scriptnew] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[scriptnew]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[torip] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[torip]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[toriprenew] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[toriprenew]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[updatepull] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[updatepull]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[wordsearch] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[wordsearch]}"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS[wordsearchedit] exists' {
+    run test -n "${(qqq)ZPWR_VERBS[wordsearchedit]}"
+    assert $state equals 0
+}

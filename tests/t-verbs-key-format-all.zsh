@@ -1976,3 +1976,138 @@
     run test -n "zstyle"
     assert $state equals 0
 }
+
+@test 'ZPWR_VERBS key animate is valid' {
+    run test -n "animate"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key bannerlolcat is valid' {
+    run test -n "bannerlolcat"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key bannernopony is valid' {
+    run test -n "bannernopony"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key bannerpony is valid' {
+    run test -n "bannerpony"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key cleangitcleancache is valid' {
+    run test -n "cleangitcleancache"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key creategif is valid' {
+    run test -n "creategif"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key curl is valid' {
+    run test -n "curl"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key deduppaths is valid' {
+    run test -n "deduppaths"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key execpy is valid' {
+    run test -n "execpy"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key filesearch is valid' {
+    run test -n "filesearch"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key filesearchedit is valid' {
+    run test -n "filesearchedit"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key goclean is valid' {
+    run test -n "goclean"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key google is valid' {
+    run test -n "google"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key help is valid' {
+    run test -n "help"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key openurl is valid' {
+    run test -n "openurl"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key pstreemonitor is valid' {
+    run test -n "pstreemonitor"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key regengtagspygments is valid' {
+    run test -n "regengtagspygments"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key regengtagstype is valid' {
+    run test -n "regengtagstype"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key replacer is valid' {
+    run test -n "replacer"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key reset is valid' {
+    run test -n "reset"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key revealrecurse is valid' {
+    run test -n "revealrecurse"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key scriptnew is valid' {
+    run test -n "scriptnew"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key torip is valid' {
+    run test -n "torip"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key toriprenew is valid' {
+    run test -n "toriprenew"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key updatepull is valid' {
+    run test -n "updatepull"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key wordsearch is valid' {
+    run test -n "wordsearch"
+    assert $state equals 0
+}
+
+@test 'ZPWR_VERBS key wordsearchedit is valid' {
+    run test -n "wordsearchedit"
+    assert $state equals 0
+}

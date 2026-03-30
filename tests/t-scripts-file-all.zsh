@@ -899,3 +899,135 @@
     assert $state equals 0
     assert "$output" contains text
 }
+
+@test 'script macOnly/combo.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/combo.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/commandToColors.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/commandToColors.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/figletLooper.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/figletLooper.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/figletRandomFont.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/figletRandomFont.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/figletRandomFontOnce.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/figletRotater.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/figletRotater.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/getPath.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/getPath.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/gradleShadowJar.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/gradleShadowJar.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/istatsShower.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/istatsShower.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/keyboardMaestro.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/keyboardMaestro.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/menkeTechRandomFont.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/menkeTechRandomFont.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/mountInstall.zsh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/mountInstall.zsh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/PIORun.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/PIORun.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/postscriptToPDFCreator.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/postscriptToPDFCreator.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/randomCow.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/randomCow.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/resetWIFI.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/resetWIFI.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/rsyncr.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/rsyncr.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/say.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/say.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/splitReg.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/splitReg.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/tmuxer.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/tmuxer.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/tor.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/tor.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}
+
+@test 'script macOnly/tutorialConfigUpdater.sh is text file' {
+    run file "$ZPWR_SCRIPTS/macOnly/tutorialConfigUpdater.sh"
+    assert $state equals 0
+    assert "$output" contains text
+}

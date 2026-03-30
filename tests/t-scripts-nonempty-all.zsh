@@ -756,3 +756,113 @@
     run test -s "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh"
     assert $state equals 0
 }
+
+@test 'script macOnly/combo.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/combo.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/commandToColors.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/commandToColors.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletLooper.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/figletLooper.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRandomFont.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/figletRandomFont.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRandomFontOnce.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRotater.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/figletRotater.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/getPath.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/getPath.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/gradleShadowJar.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/gradleShadowJar.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/istatsShower.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/istatsShower.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/keyboardMaestro.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/keyboardMaestro.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/menkeTechRandomFont.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/menkeTechRandomFont.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/mountInstall.zsh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/mountInstall.zsh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/PIORun.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/PIORun.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/postscriptToPDFCreator.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/postscriptToPDFCreator.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/randomCow.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/randomCow.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/resetWIFI.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/resetWIFI.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/rsyncr.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/rsyncr.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/say.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/say.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/splitReg.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/splitReg.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tmuxer.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/tmuxer.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tor.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/tor.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tutorialConfigUpdater.sh is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/macOnly/tutorialConfigUpdater.sh"
+    assert $state equals 0
+}

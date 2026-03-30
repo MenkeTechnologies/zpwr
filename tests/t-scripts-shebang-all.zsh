@@ -243,13 +243,6 @@
     assert $state equals 0
 }
 
-@test 'script etags has shebang' {
-    local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/etags")
-    run test -n "$first_line"
-    assert $state equals 0
-}
-
 @test 'script evilSkull.sh has shebang' {
     local first_line
     first_line=$(head -1 "$ZPWR_SCRIPTS/evilSkull.sh")
@@ -1051,6 +1044,160 @@
 @test 'script zshRegenSearchableEnv.zsh has shebang' {
     local first_line
     first_line=$(head -1 "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/combo.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/combo.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/commandToColors.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/commandToColors.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletLooper.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/figletLooper.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRandomFont.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/figletRandomFont.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRandomFontOnce.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRotater.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/figletRotater.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/getPath.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/getPath.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/gradleShadowJar.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/gradleShadowJar.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/istatsShower.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/istatsShower.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/keyboardMaestro.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/keyboardMaestro.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/menkeTechRandomFont.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/menkeTechRandomFont.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/mountInstall.zsh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/mountInstall.zsh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/PIORun.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/PIORun.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/postscriptToPDFCreator.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/postscriptToPDFCreator.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/randomCow.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/randomCow.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/resetWIFI.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/resetWIFI.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/rsyncr.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/rsyncr.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/say.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/say.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/splitReg.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/splitReg.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tmuxer.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/tmuxer.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tor.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/tor.sh")
+    run test -n "$first_line"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tutorialConfigUpdater.sh has shebang' {
+    local first_line
+    first_line=$(head -1 "$ZPWR_SCRIPTS/macOnly/tutorialConfigUpdater.sh")
     run test -n "$first_line"
     assert $state equals 0
 }

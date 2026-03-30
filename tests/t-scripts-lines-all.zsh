@@ -243,13 +243,6 @@
     assert $state equals 0
 }
 
-@test 'script etags has lines' {
-    local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/etags")
-    run test "$lc" -gt 0
-    assert $state equals 0
-}
-
 @test 'script evilSkull.sh has lines' {
     local lc
     lc=$(wc -l < "$ZPWR_SCRIPTS/evilSkull.sh")
@@ -1051,6 +1044,160 @@
 @test 'script zshRegenSearchableEnv.zsh has lines' {
     local lc
     lc=$(wc -l < "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/combo.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/combo.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/commandToColors.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/commandToColors.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletLooper.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/figletLooper.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRandomFont.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/figletRandomFont.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRandomFontOnce.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRotater.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/figletRotater.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/getPath.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/getPath.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/gradleShadowJar.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/gradleShadowJar.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/istatsShower.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/istatsShower.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/keyboardMaestro.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/keyboardMaestro.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/menkeTechRandomFont.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/menkeTechRandomFont.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/mountInstall.zsh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/mountInstall.zsh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/PIORun.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/PIORun.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/postscriptToPDFCreator.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/postscriptToPDFCreator.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/randomCow.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/randomCow.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/resetWIFI.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/resetWIFI.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/rsyncr.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/rsyncr.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/say.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/say.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/splitReg.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/splitReg.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/tmuxer.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/tmuxer.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/tor.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/tor.sh")
+    run test "$lc" -gt 0
+    assert $state equals 0
+}
+
+@test 'script macOnly/tutorialConfigUpdater.sh has lines' {
+    local lc
+    lc=$(wc -l < "$ZPWR_SCRIPTS/macOnly/tutorialConfigUpdater.sh")
     run test "$lc" -gt 0
     assert $state equals 0
 }

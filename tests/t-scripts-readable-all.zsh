@@ -756,3 +756,113 @@
     run test -r "$ZPWR_SCRIPTS/zshRegenSearchableEnv.zsh"
     assert $state equals 0
 }
+
+@test 'script macOnly/combo.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/combo.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/commandToColors.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/commandToColors.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletLooper.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/figletLooper.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRandomFont.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/figletRandomFont.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRandomFontOnce.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/figletRandomFontOnce.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/figletRotater.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/figletRotater.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/getPath.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/getPath.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/gradleShadowJar.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/gradleShadowJar.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/istatsShower.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/istatsShower.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/keyboardMaestro.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/keyboardMaestro.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/menkeTechRandomFont.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/menkeTechRandomFont.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/mountInstall.zsh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/mountInstall.zsh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/PIORun.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/PIORun.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/postscriptToPDFCreator.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/postscriptToPDFCreator.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/randomCow.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/randomCow.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/resetWIFI.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/resetWIFI.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/rsyncr.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/rsyncr.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/say.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/say.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/splitReg.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/splitReg.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tmuxer.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/tmuxer.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tor.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/tor.sh"
+    assert $state equals 0
+}
+
+@test 'script macOnly/tutorialConfigUpdater.sh is readable' {
+    run test -r "$ZPWR_SCRIPTS/macOnly/tutorialConfigUpdater.sh"
+    assert $state equals 0
+}
