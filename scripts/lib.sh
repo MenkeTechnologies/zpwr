@@ -899,7 +899,7 @@ function zpwrClearList() {
             fi
         done
     else
-        clear && eval "$ls_command"
+        clear && eval "$ls_command" < /dev/tty
     fi
 }
 

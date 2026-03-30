@@ -3,7 +3,7 @@
 function zpwrListNoClear () {
 
     if zpwrCommandExists eza; then
-        eval "$ZPWR_EXA_COMMAND"
+        eval "$ZPWR_EXA_COMMAND" < /dev/tty
         return 0
     fi
 
