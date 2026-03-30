@@ -713,7 +713,7 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $output is_greater_than 200
 }
 
-@test 'ZPWR_VIM' {
+@test 'ZPWR_VIM 2' {
     run test -n "$ZPWR_VIM"
     assert $state equals 0
     run printf "$ZPWR_VIM"
@@ -884,12 +884,12 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert $? equals 0
 }
 
-@test 'zpwrExists zpwrIsZsh' {
+@test 'zpwrExists zpwrIsZsh 2' {
     run zpwrExists zpwrIsZsh
     assert $? equals 0
 }
 
-@test 'zpwrExists zpwrPrettyPrint' {
+@test 'zpwrExists zpwrPrettyPrint 2' {
     run zpwrExists zpwrPrettyPrint
     assert $? equals 0
 }
@@ -936,7 +936,7 @@ run test -n "${(qqq)ZPWR_VERBS[tests]}"
     assert "$firstline" equals "$out"
 }
 
-@test 'tac content' {
+@test 'tac content 2' {
     run tac $TEST_FILE
     assert $? equals 0
 

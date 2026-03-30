@@ -84,6 +84,13 @@
     assert $state equals 0
 }
 
+@test 'no duplicate ZPWR_VERBS keys' {
+    local keys=("${(@k)ZPWR_VERBS}")
+    local unique_keys=("${(@u)keys}")
+    run test "${#keys}" -eq "${#unique_keys}"
+    assert $state equals 0
+}
+
 @test 'no ZPWR_VERBS command contains unbalanced quotes' {
     local key cmd fail=0
     for key in ${(k)ZPWR_VERBS}; do

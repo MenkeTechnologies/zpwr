@@ -102,7 +102,7 @@
     assert $state equals 0
 }
 
-@test 'min bash alias file syntax check' {
+@test 'min bash alias file syntax check 2' {
 	run zsh -n "$ZPWR_INSTALL/.minbashrc"
     assert $state equals 0
 }
