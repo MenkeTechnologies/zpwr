@@ -48,6 +48,7 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 fi
 
 ins bat bat
+ins lsofrs lsofrs
 ins storageshower storageshower
 ins iftoprs iftoprs
 ins hyperfine hyperfine
