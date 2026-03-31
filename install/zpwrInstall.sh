@@ -725,10 +725,6 @@ fi
 if [[ $justConfig != true ]]; then
     zpwrPrettyPrintBox "Installing IFTOP-color by MenkeTechnologies"
 
-    zpwrGoInstallerDir
-    zpwrFileMustExist iftop_install.sh
-    source iftop_install.sh
-
     if ! zpwrCommandExists grc; then
         zpwrGoInstallerOutputDir
         zpwrPrettyPrintBox "Installing grc from source to $(pwd)"
