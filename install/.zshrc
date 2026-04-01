@@ -849,6 +849,8 @@ if [[ "$ZPWR_PROFILING" == true ]]; then
 fi
 
 (( ! ${+functions[p10k]} )) || p10k finalize
+# $TTY is set by zsh before rc files, immune to instant prompt fd redirects
+[[ -n "$TTY" ]] && export ZPWR_TTY=$TTY
 
 if [[ -n "$__p9k_instant_prompt_active" && "$ZPWR_BANNER_CLEARLIST" == true ]]; then
     zpwrClearList || true
