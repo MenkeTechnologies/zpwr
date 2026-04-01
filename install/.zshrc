@@ -60,18 +60,19 @@
 # https://github.com/MenkeTechnologies
 #
 
+#{{{                    MARK:start timestamp
+#**************************************************************
+builtin zmodload zsh/datetime
+startTimestamp=$EPOCHREALTIME
+#}}}***********************************************************
+
 #{{{                    MARK:p10k instant prompt
 #**************************************************************
 # must stay near the top before any console output
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
-#}}}***********************************************************
-
-#{{{                    MARK:start timestamp
-#**************************************************************
-builtin zmodload zsh/datetime
-startTimestamp=$EPOCHREALTIME
+promptTimestamp=$EPOCHREALTIME
 #}}}***********************************************************
 
 #{{{                    MARK:FPATH AND PATH NO DUPLICATES
@@ -832,13 +833,16 @@ builtin alias tm='tmux'
 
 endTimestamp=$EPOCHREALTIME
 startupTimeMs=$( printf "%.3f" $(( endTimestamp - startTimestamp )) )
+promptTimeMs=$( printf "%.3f" $(( promptTimestamp - startTimestamp )) )
 zpwrLogDebug "zsh startup took $startupTimeMs seconds"
 
 ZPWR_VARS[startTimestamp]="$startTimestamp"
 ZPWR_VARS[endTimestamp]="$endTimestamp"
+ZPWR_VARS[promptTimestamp]="$promptTimestamp"
 ZPWR_VARS[startupTimeMs]="$startupTimeMs"
+ZPWR_VARS[promptTimeMs]="$promptTimeMs"
 
-builtin unset startupTimeMs startTimestamp endTimestamp
+builtin unset startupTimeMs promptTimeMs startTimestamp endTimestamp promptTimestamp
 
 if [[ "$ZPWR_PROFILING" == true ]]; then
     zprof
