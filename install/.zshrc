@@ -147,7 +147,7 @@ fi
 builtin export LC_ALL="en_US.UTF-8"
 # stop delay when entering normal mode
 builtin export KEYTIMEOUT="$ZPWR_KEYTIMEOUT"
-builtin export SHELL="$(which zsh)"
+builtin export SHELL="${commands[zsh]}"
 # default vi-backward-delete-char does not delete paste insert point
 builtin export AUTOPAIR_BKSPC_WIDGET='.backward-delete-char'
 #}}}***********************************************************
@@ -340,7 +340,7 @@ function zpwrTokenPre() {
             zpwrLogConsoleErr "could not source ZPWR_TOKEN_PRE '$ZPWR_TOKEN_PRE'"
         fi
     else
-        command touch "$ZPWR_TOKEN_PRE"
+        : >| "$ZPWR_TOKEN_PRE"
     fi
 
     builtin source "$ZPWR_RE_ENV_FILE" || {
@@ -434,7 +434,7 @@ function zpwrTokenPost() {
             zpwrLogConsoleErr "could not source ZPWR_TOKEN_POST '$ZPWR_TOKEN_POST'"
         fi
     else
-        touch "$ZPWR_TOKEN_POST"
+        : >| "$ZPWR_TOKEN_POST"
     fi
 
     builtin source "$ZPWR_RE_ENV_FILE" || {
@@ -471,8 +471,9 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
             zinit snippet OMZP::$p
         done
         # WARNING temporary hack to allow linking OMZ completions into .zinit/completions
+        zmodload -F zsh/files b:zf_ln 2>/dev/null
         for p in $ZPWR_OMZ_COMPS; do
-            ln -sfhn $ZSH/snippets/OMZP::${p%/*}/${p#*/}/${p#*/} $ZSH/completions/${p#*/} 2>/dev/null
+            zf_ln -sfn $ZSH/snippets/OMZP::${p%/*}/${p#*/}/${p#*/} $ZSH/completions/${p#*/} 2>/dev/null
         done
 
         for p in $ZPWR_OMZ_LIBS; do
