@@ -7,7 +7,7 @@
 ```
  _______ _______ _  _  _ ______
 |____   |_____  | |  \| |_____/
-    /  / |_____] |_|\_| |    \_  v8.0
+    /  / |_____] |_|\_| |    \_  v48.1.0
 >>> JACK INTO THE GRID <<<
 ```
 
@@ -100,7 +100,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 
 - 435+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
-- 855+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
+- 885+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 16k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
 - 170+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
@@ -178,7 +178,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - systemd service, learn.service, that runs learning collection API
 - restart function that launches poll.service and learn by enabling and starting in systemd
 - 3k+ line README -- you are here, deep in the docs
-- 134k+ LOC -- hand-forged in the neon glow of late-night terminals
+- 172k+ LOC -- hand-forged in the neon glow of late-night terminals
 
 
 ## ZPWR Firmware Stack
@@ -188,7 +188,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - perl
 - bash (4.0+, 3.2 not supported)
 - zinit with 65+ plugins of which 34+ are custom
-- forked powerlevel10k zsh prompt with ~dirs
+- upstream powerlevel10k zsh prompt with ~dirs via cached hash dirs and prompt_dir override
 - youcompleteme
 - ultisnips
 - supertab
@@ -609,8 +609,8 @@ export ZPWR_ZDHARMA="zdharma-continuum"
 # regex for tmux thumbs
 export ZPWR_THUMBS_REGEX='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
 ((?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,})(?::.*)?'
-# store tty for faster prompt
-export ZPWR_TTY=$(tty)
+# store tty for prompt, set from zsh $TTY after p10k finalize
+export ZPWR_TTY=$TTY
 ```
 
 ```sh
@@ -686,14 +686,14 @@ zpwrEvalIfNeeded ZPWR_LOCAL_TEMP "$ZPWR_LOCAL_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_L
 zpwrEvalIfNeeded ZPWR_LOCK_FILE "$ZPWR_LOCK_FILE" "$ZPWR_LOCAL/.lock" "$ZPWR_LOCAL"
 # cache file for all zpwr env lookups
 zpwrEvalIfNeeded ZPWR_LOCAL_ENV "$ZPWR_LOCAL_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL"
-# forked powerlevel10k config file for PROMPT
+# powerlevel10k config file for PROMPT
 zpwrEvalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.p10k.zsh" "$ZPWR_ENV"
 # the location of associated interpreted scripts
 zpwrEvalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
 # the location of macOS only associated interpreted scripts
 zpwrEvalIfNeeded ZPWR_SCRIPTS_MAC "$ZPWR_SCRIPTS_MAC" "$ZPWR_SCRIPTS/macOnly" "$ZPWR_SCRIPTS"
 # the location of zpwr verbs setup script
-zpwrEvalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_SCRIPTS/zpwr.zsh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_ENV/zpwr.zsh" "$ZPWR_ENV"
 # the location of zpwr lib file
 zpwrEvalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 # the location of zpwr init file
@@ -756,7 +756,7 @@ zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GI
 ```
 
 ## Diagnostics
-The test suite contains 10,000+ [zunit](https://github.com/zunit-zsh/zunit) tests across 57 test files covering autoload function existence, type resolution, whence/which lookups, function body validation, fpath integrity, source syntax, script readability, shebang detection, verb callability, and environment variable isolation.
+The test suite contains 10,000+ [zunit](https://github.com/zunit-zsh/zunit) tests across 60 test files covering autoload function existence, type resolution, whence/which lookups, function body validation, fpath integrity, source syntax, script readability, shebang detection, verb callability, and environment variable isolation.
 
 All ZPWR_* environment variables are unset before each test run to prevent user env from leaking into test results.
 
