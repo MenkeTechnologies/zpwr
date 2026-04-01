@@ -11,6 +11,11 @@ function zpwrOverridePromptDir(){
     old+='$match[1]}}'
     local new='local p=${(%):-%~}'
     functions[prompt_dir]=${body/$old/$new}
+
+    # auto_name_dirs auto-registers all p10k internals (_p9k__cwd, _p9k__cwd_a, etc.)
+    # as named dirs which compete with explicit hash dirs like ~ZPWR in %~ resolution
+    body=${functions[prompt_dir]}
+    functions[prompt_dir]='for 1 in ${(k)nameddirs[(I)_p9k*]}; do unhash -d $1; done; '${body}
 }
 
 zpwrOverridePromptDir "$@"
