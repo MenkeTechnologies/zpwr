@@ -60,6 +60,14 @@
 # https://github.com/MenkeTechnologies
 #
 
+#{{{                    MARK:p10k instant prompt
+#**************************************************************
+# must stay near the top before any console output
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+#}}}***********************************************************
+
 #{{{                    MARK:start timestamp
 #**************************************************************
 builtin zmodload zsh/datetime
@@ -794,10 +802,12 @@ zpwrBindMenu
 
 #{{{                    MARK:Initialize Login
 #**************************************************************
-if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-    zpwrDarwinBanner
-else
-    zpwrLinuxBanner
+if [[ -z "$__p9k_instant_prompt_active" ]]; then
+    if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
+        zpwrDarwinBanner
+    else
+        zpwrLinuxBanner
+    fi
 fi
 #}}}***********************************************************
 
