@@ -96,6 +96,20 @@ function zpwrBindDirs(){
     fi
     #}}}***********************************************************
 
+    # write hash dir cache for instant prompt
+    local cache="${XDG_CACHE_HOME:-$HOME/.cache}/zpwr-hash-dirs.zsh"
+    {
+        print -r "hash -d ZPWR=${(q)ZPWR}"
+        (( $+nameddirs[ZPWR_LOCAL] )) && print -r "hash -d ZPWR_LOCAL=${(q)nameddirs[ZPWR_LOCAL]}"
+        (( $+nameddirs[ZPWR_TEMP] )) && print -r "hash -d ZPWR_TEMP=${(q)nameddirs[ZPWR_TEMP]}"
+        (( $+nameddirs[ZPWR_COMPSYS_CACHE] )) && print -r "hash -d ZPWR_COMPSYS_CACHE=${(q)nameddirs[ZPWR_COMPSYS_CACHE]}"
+        (( $+nameddirs[ZPWR_TMUX] )) && print -r "hash -d ZPWR_TMUX=${(q)nameddirs[ZPWR_TMUX]}"
+        (( $+nameddirs[TMUXH] )) && print -r "hash -d TMUXH=${(q)nameddirs[TMUXH]}"
+        for k v in ${(kv)nameddirs}; do
+            [[ $k == (ZPWR|ZPWR_LOCAL|ZPWR_TEMP|ZPWR_COMPSYS_CACHE|ZPWR_TMUX|TMUXH) ]] && continue
+            print -r "hash -d ${k}=${(q)v}"
+        done
+    } >| "$cache"
 }
 
 zpwrBindDirs "$@"
