@@ -150,9 +150,15 @@ function zpwrCommandExists(){
     fi
     local cmd
 
-    for cmd in "$@"; do
-        type -ap -- "$cmd" >/dev/null 2>&1 || return 1
-    done
+    if zpwrIsZsh; then
+        for cmd in "$@"; do
+            (( $+commands[$cmd] )) || return 1
+        done
+    else
+        for cmd in "$@"; do
+            type -ap -- "$cmd" >/dev/null 2>&1 || return 1
+        done
+    fi
 }
 
 function zpwrBlocksToSize(){
