@@ -446,9 +446,9 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         compinit -u -d ${ZINIT[ZCOMPDUMP_PATH]:-${ZDOTDIR:-$HOME}/.zcompdump} "${(Q@)${(z@)ZINIT[COMPINIT_OPTS]}}" 2>/dev/null
     }
 
-    # late load prompt and call precmd fns first thing after prompt loads
+    # load prompt synchronously for instant prompt compatibility
 
-    zinit ice lucid nocd nocompile wait'!' atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs; zpwrPrecmd' \
+    zinit ice lucid nocd nocompile atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs; zpwrPrecmd' \
         atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPrecmd; _p9k_precmd &> /dev/null'
     zinit load MenkeTechnologies/zpwrp10k
 
@@ -843,4 +843,6 @@ builtin unset startupTimeMs startTimestamp endTimestamp
 if [[ "$ZPWR_PROFILING" == true ]]; then
     zprof
 fi
+
+(( ! ${+functions[p10k]} )) || p10k finalize
 #}}}***********************************************************

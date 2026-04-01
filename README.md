@@ -772,7 +772,9 @@ zpwrExists zunit && {
 ## Boot Time -- Shell Startup Speed
 Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded functions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed -- a tighter boot sequence.
 
-With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines (.15 to .2 seconds on M1 Max) but up to 2-10 seconds on slower rigs such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
+ZPWR uses Powerlevel10k instant prompt to render a cached prompt in under 10ms -- well below the 100ms human perceptibility threshold.  The remaining shell initialization (env vars, aliases, autoloads, zinit plugin declarations) completes behind the visible prompt.  Turbo-deferred plugins (syntax highlighting, autosuggestions, completions) load asynchronously after the prompt is interactive.  The banner is automatically suppressed when instant prompt is active to avoid fd conflicts.
+
+With Zinit Turbo mode, despite the number of plugins and completions, total initialization usually takes < 1 second on faster machines (.15 to .4 seconds on M1 Max) but up to 2-10 seconds on slower rigs such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
 ```sh
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 ```
