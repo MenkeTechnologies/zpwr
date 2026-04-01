@@ -451,7 +451,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
 
     zinit ice lucid nocd nocompile atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs; zpwrPrecmd' \
         atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPrecmd; _p9k_precmd &> /dev/null'
-    zinit load MenkeTechnologies/zpwrp10k
+    zinit load romkatv/powerlevel10k
 
     # late
     () {
@@ -463,7 +463,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
         done
         # WARNING temporary hack to allow linking OMZ completions into .zinit/completions
         for p in $ZPWR_OMZ_COMPS; do
-            ln -sfn $ZSH/snippets/OMZP::${p%/*}/${p#*/}/${p#*/} $ZSH/completions/${p#*/}
+            ln -sfhn $ZSH/snippets/OMZP::${p%/*}/${p#*/}/${p#*/} $ZSH/completions/${p#*/} 2>/dev/null
         done
 
         for p in $ZPWR_OMZ_LIBS; do
@@ -849,4 +849,8 @@ if [[ "$ZPWR_PROFILING" == true ]]; then
 fi
 
 (( ! ${+functions[p10k]} )) || p10k finalize
+
+if [[ -n "$__p9k_instant_prompt_active" && "$ZPWR_BANNER_CLEARLIST" == true ]]; then
+    zpwrClearList || true
+fi
 #}}}***********************************************************
