@@ -193,7 +193,11 @@ export ZPWR_ZDHARMA="zdharma-continuum"
 export ZPWR_THUMBS_REGEX='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
 ((?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,})(?::.*)?'
 # store tty for faster prompt
-export ZPWR_TTY=$(tty)
+if [[ -n "$ZSH_VERSION" && -n "$TTY" ]]; then
+    export ZPWR_TTY=$TTY
+else
+    export ZPWR_TTY=$(tty)
+fi
 
 # set to false if this file is sourced during remote execution with no ZPWR env
 test -z "$ZPWR_REMOTE" && export ZPWR_REMOTE=false
