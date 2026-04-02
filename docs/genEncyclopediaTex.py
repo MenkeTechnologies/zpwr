@@ -129,7 +129,7 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
     {}
     {0pt}
     {}
-    [\vspace{2pt}{\color{ruleglow}\rule{\textwidth}{0.3pt}}]
+    [\vspace{2pt}{\color{ruleglow}\rule{\textwidth}{0.5pt}}\vspace{1pt}{\color{neonpink!40}\rule{\textwidth}{0.2pt}}]
 \titlespacing*{\section}{0pt}{24pt}{12pt}
 
 \pagestyle{fancy}
@@ -194,6 +194,11 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
         \draw[neonpink, line width=0.3pt, opacity=0.15]
             ([xshift=-8mm,yshift=8mm]current page.south east) --
             ([xshift=-25mm,yshift=8mm]current page.south east);
+        % Subtle scanlines across entire page
+        \foreach \y in {0,0.4,...,29.7} {
+            \draw[white, line width=0.08pt, opacity=0.012]
+                ([yshift=-\y cm]current page.north west) -- ([yshift=-\y cm]current page.north east);
+        }
     \end{tikzpicture}}
 }
 
@@ -215,12 +220,16 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
         \foreach \y in {-2,-3,...,-6} {
             \draw[neonpink, line width=0.2pt, opacity=0.06] ([yshift=\y cm]current page.north west) -- ([yshift=\y cm]current page.north east);
         }
-        % Dot grid
-        \foreach \x in {3,6,...,15} {
-            \foreach \y in {-2,-4,-6} {
-                \fill[neoncyan, opacity=0.15] ([xshift=\x cm, yshift=\y cm]current page.north west) circle (1pt);
+        % Dot grid with glow
+        \foreach \x in {2,4,...,18} {
+            \foreach \y in {-1.5,-3,...,-6.5} {
+                \fill[neoncyan, opacity=0.2] ([xshift=\x cm, yshift=\y cm]current page.north west) circle (1.2pt);
+                \fill[neoncyan, opacity=0.05] ([xshift=\x cm, yshift=\y cm]current page.north west) circle (3pt);
             }
         }
+        % Glowing orb
+        \fill[neonpink, opacity=0.08] ([xshift=-3cm, yshift=-3.5cm]current page.north east) circle (2.5cm);
+        \fill[neoncyan, opacity=0.06] ([xshift=2cm, yshift=-4cm]current page.north west) circle (2cm);
     \end{tikzpicture}\vspace{-20pt}}
     [\vspace{8pt}{\color{dimtext}\small\itshape // ZPWR ENCYCLOPEDIA // CYBERPUNK EDITION //}]
 
@@ -231,12 +240,43 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
 
 \begin{titlepage}
 \begin{tikzpicture}[remember picture, overlay]
-    \fill[neoncyan, opacity=0.08] (current page.north west) rectangle ([yshift=-4cm]current page.north east);
-    \fill[neonpink, opacity=0.06] ([yshift=-4cm]current page.north west) rectangle ([yshift=-8cm]current page.north east);
-    \draw[neoncyan, line width=2pt] ([yshift=-3cm, xshift=2cm]current page.north west) -- ([yshift=-3cm, xshift=-2cm]current page.north east);
-    \draw[neonpink, line width=1pt, opacity=0.6] ([yshift=-3.1cm, xshift=2cm]current page.north west) -- ([yshift=-3.1cm, xshift=-2cm]current page.north east);
-    \draw[neoncyan, line width=2pt] ([yshift=3cm, xshift=2cm]current page.south west) -- ([yshift=3cm, xshift=-2cm]current page.south east);
-    \draw[neonpink, line width=1pt, opacity=0.6] ([yshift=2.9cm, xshift=2cm]current page.south west) -- ([yshift=2.9cm, xshift=-2cm]current page.south east);
+    % Full page gradient wash
+    \fill[bg] (current page.south west) rectangle (current page.north east);
+    \shade[top color=neoncyan!8!bg, bottom color=bg]
+        (current page.north west) rectangle ([yshift=-10cm]current page.north east);
+    \shade[bottom color=neonpink!6!bg, top color=bg]
+        ([yshift=8cm]current page.south west) rectangle (current page.south east);
+    % Hexagonal grid background
+    \foreach \x in {0,1.5,...,21} {
+        \foreach \y in {0,1.732,...,29.7} {
+            \pgfmathsetmacro{\xshift}{mod(round(\y/1.732),2)*0.75}
+            \draw[neoncyan, line width=0.15pt, opacity=0.04]
+                ([xshift=\x cm + \xshift cm, yshift=-\y cm]current page.north west)
+                ++(30:0.5) -- ++(330:0.5) -- ++(270:0.5) -- ++(210:0.5) -- ++(150:0.5) -- ++(90:0.5) -- cycle;
+        }
+    }
+    % Scanlines
+    \foreach \y in {0,0.25,...,29.7} {
+        \draw[white, line width=0.1pt, opacity=0.015]
+            ([yshift=-\y cm]current page.north west) -- ([yshift=-\y cm]current page.north east);
+    }
+    % Neon glow bars
+    \draw[neoncyan, line width=3pt] ([yshift=-3cm, xshift=1.5cm]current page.north west) -- ([yshift=-3cm, xshift=-1.5cm]current page.north east);
+    \draw[neonpink, line width=1.5pt, opacity=0.7] ([yshift=-3.15cm, xshift=1.5cm]current page.north west) -- ([yshift=-3.15cm, xshift=-1.5cm]current page.north east);
+    \draw[neoncyan, line width=0.5pt, opacity=0.3] ([yshift=-3.35cm, xshift=1.5cm]current page.north west) -- ([yshift=-3.35cm, xshift=-1.5cm]current page.north east);
+    \draw[neoncyan, line width=3pt] ([yshift=3cm, xshift=1.5cm]current page.south west) -- ([yshift=3cm, xshift=-1.5cm]current page.south east);
+    \draw[neonpink, line width=1.5pt, opacity=0.7] ([yshift=2.85cm, xshift=1.5cm]current page.south west) -- ([yshift=2.85cm, xshift=-1.5cm]current page.south east);
+    \draw[neoncyan, line width=0.5pt, opacity=0.3] ([yshift=2.65cm, xshift=1.5cm]current page.south west) -- ([yshift=2.65cm, xshift=-1.5cm]current page.south east);
+    % Glowing orbs
+    \fill[neoncyan, opacity=0.06] ([xshift=3cm, yshift=-5cm]current page.north west) circle (2cm);
+    \fill[neonpink, opacity=0.04] ([xshift=-4cm, yshift=6cm]current page.south east) circle (3cm);
+    \fill[neongreen, opacity=0.03] ([xshift=8cm, yshift=-15cm]current page.north west) circle (1.5cm);
+    % Data streams (diagonal lines)
+    \foreach \i in {1,...,8} {
+        \pgfmathsetmacro{\xoff}{\i * 2.5}
+        \draw[neoncyan, line width=0.2pt, opacity=0.06]
+            ([xshift=\xoff cm]current page.south west) -- ([xshift=\xoff cm + 3cm]current page.north west);
+    }
 \end{tikzpicture}
 \vspace*{5cm}
 \begin{center}
@@ -370,26 +410,38 @@ with open(outfile, 'w') as f:
             if key in title_lower:
                 insert_image(f, img)
                 break
+        text_buffer = []
+        def flush_text():
+            if text_buffer:
+                f.write(' '.join(text_buffer) + '\n\n')
+                text_buffer.clear()
+
         for line in prints:
             result = convert_line(line)
             if result is None:
+                flush_text()
                 flush_cmds()
                 continue
             rtype, content = result
             if rtype == 'heading':
+                flush_text()
                 flush_cmds()
                 f.write(f'\n\\vspace{{10pt}}\n{{\\large\\bfseries\\color{{neoncyan}} {content}}}\\vspace{{6pt}}\n\n')
             elif rtype == 'section_title':
+                flush_text()
                 flush_cmds()
                 f.write(f'\n\\vspace{{12pt}}\n{{\\bfseries\\color{{neonyellow}} {content}}}\\vspace{{4pt}}\n\n')
             elif rtype == 'command':
+                flush_text()
                 cmd_buffer.append(content)
             elif rtype == 'comment':
+                flush_text()
                 flush_cmds()
                 f.write(f'{{\\small\\itshape\\color{{dimtext}} {content}}}\n\n')
             else:
                 flush_cmds()
-                f.write(f'{content}\n\n')
+                text_buffer.append(content)
+        flush_text()
         flush_cmds()
         f.write('\n\\vspace{16pt}\n\n')
     f.write('\\end{document}\n')
