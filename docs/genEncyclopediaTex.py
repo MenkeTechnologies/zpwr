@@ -54,6 +54,11 @@ def convert_line(text):
         return ('comment', clean)
     return ('text', clean)
 
+# Screenshot directory (computed early for title page)
+screenshotdir = os.path.join(os.path.dirname(outfile), "screenshots")
+figlet_path = os.path.join(screenshotdir, 'figlet_zpwr.png')
+figlet_include = r'\includegraphics[width=0.5\textwidth]{' + figlet_path + '}' if os.path.exists(figlet_path) else ''
+
 PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
 \usepackage[margin=2.5cm,top=3cm,bottom=3cm,headheight=22pt]{geometry}
 \usepackage{xcolor}
@@ -66,6 +71,7 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
 \usepackage{tikz}
 \usepackage{bookmark}
 \usepackage{tcolorbox}
+\usepackage{graphicx}
 \tcbuselibrary{skins,breakable}
 
 \definecolor{bg}{HTML}{06060C}
@@ -154,13 +160,59 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
 ''' + r'''{\large\color{neongreen} ''' + str(len(pages)) + r''' Pages\quad\color{dimtext}//\quad\color{neonyellow}43 Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
 ''' + r'''{\color{bodytext}\large MenkeTechnologies}\\[0.3cm]
 {\color{dimtext}\small \url{https://github.com/MenkeTechnologies/zpwr}}\\[3cm]
-{\color{dimtext}\small CYBERPUNK EDITION\quad//\quad Generated from \texttt{zpwr wizard}}
+{\color{dimtext}\small CYBERPUNK EDITION\quad//\quad Generated from \texttt{zpwr wizard}}\\[1cm]
+''' + figlet_include + r'''
 \end{center}
 \end{titlepage}
 
 {\hypersetup{linkcolor=neoncyan}\tableofcontents}
 
 '''
+
+# Map section titles (lowercase) to screenshot filenames
+section_screenshots = {
+    'startup performance': 'zpwr_bench_help.png',
+    'benchmarking startup': 'zpwr_bench_help.png',
+    'flame charts': 'zpwr_flame_help.png',
+    'the doctor is in': 'zpwr_doctor_help.png',
+    'command autopsy': 'zpwr_trace_help.png',
+    'dependency cartography': 'zpwr_deps_help.png',
+    'environment snapshots': 'zpwr_snapshot_help.png',
+    'snapshots': 'zpwr_snapshot_help.png',
+    'command replay': 'zpwr_replay_help.png',
+    'file watching': 'zpwr_watch_help.png',
+    'temprs: the stack machine': 'temprs_help.png',
+    'temprs: advanced': 'temprs_help.png',
+    'lsofrs: network': 'lsofrs_help.png',
+    'eza: ls evolved': 'eza_listing.png',
+    'eza: colors': 'eza_listing.png',
+    'bat: syntax': 'bat_sample.png',
+    'bat: configuration': 'bat_zshrc.png',
+    'fd: find for humans': 'fd_help.png',
+    'fd: integration': 'fd_zsh_files.png',
+    'ripgrep: grep reimagined': 'rg_help.png',
+    'ripgrep: advanced': 'rg_search.png',
+    'perl oneliners: the secret': 'perl_version.png',
+    'live dashboard': 'zpwr_bench_help.png',
+}
+
+# Map chapter names (lowercase) to screenshot filenames
+chapter_screenshots = {
+    'the red pill': 'figlet_zpwr.png',
+    'performance cult': 'zpwr_bench_help.png',
+    'temprs': 'temprs_help.png',
+    'lsofrs': 'lsofrs_help.png',
+    'eza': 'eza_listing.png',
+    'bat': 'bat_zshrc.png',
+    'fd-find': 'fd_zsh_files.png',
+    'ripgrep': 'rg_search.png',
+    'perl in zpwr': 'perl_version.png',
+}
+
+def insert_image(f, img_name, width=0.8):
+    img_path = os.path.join(screenshotdir, img_name)
+    if os.path.exists(img_path):
+        f.write(f'\n\\begin{{center}}\n\\includegraphics[width={width}\\textwidth]{{{img_path}}}\n\\end{{center}}\n\n')
 
 with open(outfile, 'w') as f:
     f.write(PREAMBLE)
@@ -183,8 +235,21 @@ with open(outfile, 'w') as f:
             current_chapter = chapter
             ch_display = re.sub(r'^CHAPTER \d+:\s*', '', escape_latex(strip_colors(chapter)))
             f.write(f'\n\\chapter{{{ch_display}}}\n\n')
+            # Insert chapter screenshot
+            ch_lower = strip_colors(chapter).lower()
+            for key, img in chapter_screenshots.items():
+                if key in ch_lower:
+                    insert_image(f, img, 0.85)
+                    break
         flush_cmds()
-        f.write(f'\\section{{{escape_latex(strip_colors(title))}}}\n\n')
+        clean_title = escape_latex(strip_colors(title))
+        f.write(f'\\section{{{clean_title}}}\n\n')
+        # Insert section screenshot
+        title_lower = strip_colors(title).lower()
+        for key, img in section_screenshots.items():
+            if key in title_lower:
+                insert_image(f, img)
+                break
         for line in prints:
             result = convert_line(line)
             if result is None:

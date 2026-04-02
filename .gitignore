@@ -1,5 +1,12 @@
 local/
 zpwr-encyclopedia.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
 tmux/local/
 tmux/plugins/
 GTAGS
