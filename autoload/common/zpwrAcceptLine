@@ -4,7 +4,7 @@
 function zpwrAcceptLine () {
 
     builtin emulate -L zsh
-    setopt noshwordsplit
+    setopt noshwordsplit extendedglob
 
     local pane commandsThatModifyFiles mywords line command cmd Aliases args prefix cmdstr value
 
