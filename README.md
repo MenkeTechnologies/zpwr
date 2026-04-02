@@ -48,6 +48,12 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Shell Startup Speed](#boot-time----shell-startup-speed) -- Boot Time
 - [Startup Benchmark](#startup-benchmark----zpwr-bench) -- zpwr bench
 - [Environment Snapshots](#environment-snapshots----zpwr-snapshot--zpwr-restore) -- zpwr snapshot / zpwr restore
+- [Live Dashboard](#live-dashboard----zpwr-top) -- zpwr top
+- [Health Check](#health-check----zpwr-doctor) -- zpwr doctor
+- [Flame Chart](#flame-chart----zpwr-flame) -- zpwr flame
+- [Alias Analytics](#alias-analytics----zpwr-aliasrank) -- zpwr aliasrank
+- [File Watcher](#file-watcher----zpwr-watch) -- zpwr watch
+- [Command Replay](#command-replay----zpwr-replay) -- zpwr replay
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
@@ -804,6 +810,55 @@ zpwr restore myproject aliases env  # restore only specific components
 ```
 
 Available restore components: `hash`, `aliases`, `env`, `tmux`, `vim`, `history`, `dirs`.  Tmux restore stages the resurrect file -- press `prefix+Ctrl-r` to apply.  History is merged rather than overwritten.
+
+## Live Dashboard -- zpwr top
+`zpwr top [interval]` displays a live-updating dashboard of shell resource usage.  Shows memory (RSS with bar graph, virtual memory), history size, child processes, jobs, zle widgets, hooks, shell objects (functions, completions, aliases, commands, builtins, parameters, modules) with delta tracking between refreshes, loaded zsh modules, paths, git status, tmux session counts, top 5 largest functions with size bars, and top 5 longest PATH entries.  Runs in an alternate screen buffer -- press `q` to quit cleanly.
+
+```sh
+zpwr top       # refresh every 2s (default)
+zpwr top 5     # refresh every 5s
+```
+
+## Health Check -- zpwr doctor
+`zpwr doctor` scans the environment for common issues and reports with pass/warn/fail indicators.  Checks for: stale `.zwc` compiled files, zcompdump freshness, duplicate and missing PATH/FPATH entries, broken symlinks, invalid named directories, p10k named dir pollution, missing dependencies (git, eza, fzf, tmux, perl, python3), zinit installation, history file and backups, and config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh).  Reports a signal bar and summary with pass/warning/error counts.
+
+```sh
+zpwr doctor
+```
+
+## Flame Chart -- zpwr flame
+`zpwr flame [N]` launches an instrumented shell with `zprof`, parses the profiling data, and renders an ASCII flame chart of the top N functions by total time.  Bars are heat-colored (red = hot, yellow = warm, green = cool, cyan = cold).  Includes a summary with the hottest function, total profiled count, and contextual optimization tips based on which function dominates startup.
+
+```sh
+zpwr flame       # top 20 functions (default)
+zpwr flame 40    # top 40 functions
+```
+
+## Alias Analytics -- zpwr aliasrank
+`zpwr aliasrank [N]` mines shell history to rank alias usage.  Shows the top N most-used aliases with frequency bars, lists never-used aliases (candidates for removal), and identifies frequently typed commands that have no alias (candidates for creation).  Reports total alias count, usage percentage, and waste metrics.  Results are cached in `$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh` and rebuild automatically when history changes.
+
+```sh
+zpwr aliasrank       # top 20 (default)
+zpwr aliasrank 50    # top 50
+```
+
+## File Watcher -- zpwr watch
+`zpwr watch <glob> <command>` watches files for changes using `fswatch` (macOS) or `inotifywait` (Linux) and runs a command on each change.  Shows trigger count, timestamp, changed filename, and execution time.
+
+```sh
+zpwr watch '*.zsh' 'zpwr recompile'
+zpwr watch 'src/**/*.ts' 'npm run build'
+zpwr watch 'Makefile' 'make'
+```
+
+## Command Replay -- zpwr replay
+`zpwr replay [N] [mode]` replays the last N commands from history.  Three modes: `preview` (default) lists commands without executing, `exec` runs them in the current shell with per-command timing, and `tmux` opens a new tmux split pane and plays them with a delay between each.
+
+```sh
+zpwr replay 10         # preview last 10 commands
+zpwr replay 10 exec    # execute in current shell
+zpwr replay 10 tmux    # replay in new tmux pane
+```
 
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.
