@@ -121,6 +121,7 @@ function zpwrInitEnv() {
 }
 
 zpwrInitEnv
+ZPWR_VARS[phaseEnvTs]=$EPOCHREALTIME
 
 # You may need to manually set your language environment
 # has all aliases and functions common to bourne like shells
@@ -445,6 +446,7 @@ function zpwrTokenPost() {
 
 #{{{                    MARK:ZPWR_PLUGIN_MANAGER
 #**************************************************************
+ZPWR_VARS[phasePluginsTs]=$EPOCHREALTIME
 if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     ZINIT[ZCOMPDUMP_PATH]="$ZSH_COMPDUMP"
     ZINIT[COMPINIT_OPTS]='-C -u'
@@ -606,6 +608,7 @@ fi
 
 #{{{                    MARK:Override OMZ config
 #**************************************************************
+ZPWR_VARS[phaseCompsysTs]=$EPOCHREALTIME
 ZPWR_VARS[recachedCompsys]=false
 # reload compsys cache if file is stale for 1 week
 zpwrStaleZcompdump
@@ -636,6 +639,7 @@ builtin export SAVEHIST=99999999
 
 #{{{                    MARK:Setopt Options
 #**************************************************************
+ZPWR_VARS[phaseOptionsTs]=$EPOCHREALTIME
 # fish like menu select search
 builtin zmodload -i zsh/complist
 
@@ -851,6 +855,7 @@ ZPWR_VARS[endTimestamp]="$endTimestamp"
 ZPWR_VARS[promptTimestamp]="$promptTimestamp"
 ZPWR_VARS[startupTimeMs]="$startupTimeMs"
 ZPWR_VARS[promptTimeMs]="$promptTimeMs"
+ZPWR_VARS[phaseFinishTs]="$endTimestamp"
 
 builtin unset startupTimeMs promptTimeMs startTimestamp endTimestamp promptTimestamp
 

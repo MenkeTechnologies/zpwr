@@ -40,6 +40,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[backuphistory]='zpwrBackupHistfile=backup $HISTFILE'
     ZPWR_VERBS[banner]='zpwrAbout=show $ZPWR_REPO_NAME banner'
     ZPWR_VERBS[bannercounts]='zpwrBannerCounts=show $ZPWR_REPO_NAME banner and env counts'
+    ZPWR_VERBS[bench]='zpwrBench=benchmark startup time with percentiles and baseline diff'
     ZPWR_VERBS[brc]='brc=shell aliases file vim session'
     ZPWR_VERBS[c]='zpwrCat=zpwr cat args'
     ZPWR_VERBS[cat]='zpwrCat=zpwr cat args'

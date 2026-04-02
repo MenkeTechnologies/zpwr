@@ -1,0 +1,267 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrBench(){
+
+    builtin emulate -L zsh
+    builtin zmodload zsh/datetime
+
+    local -i runs=${1:-10}
+    local -a prompt_times startup_times run_details
+    local baseline="$ZPWR_LOCAL/zpwr-bench-baseline.txt"
+    local history_file="$ZPWR_LOCAL/zpwr-bench-history.txt"
+    local tmpfile=$(mktemp)
+    local i total_prompt total_startup
+
+    # colors
+    local C='\033[36m'    # cyan
+    local G='\033[32m'    # green
+    local Y='\033[33m'    # yellow
+    local R='\033[31m'    # red
+    local M='\033[35m'    # magenta
+    local B='\033[1m'     # bold
+    local D='\033[2m'     # dim
+    local N='\033[0m'     # reset
+
+    # banner
+    printf "\n"
+    printf "${C} ███████╗██████╗ ██╗    ██╗██████╗     ██████╗ ███████╗███╗   ██╗ ██████╗██╗  ██╗${N}\n"
+    printf "${C} ╚══███╔╝██╔══██╗██║    ██║██╔══██╗    ██╔══██╗██╔════╝████╗  ██║██╔════╝██║  ██║${N}\n"
+    printf "${M}   ███╔╝ ██████╔╝██║ █╗ ██║██████╔╝    ██████╔╝█████╗  ██╔██╗ ██║██║     ███████║${N}\n"
+    printf "${M}  ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗    ██╔══██╗██╔══╝  ██║╚██╗██║██║     ██╔══██║${N}\n"
+    printf "${C} ███████╗██║     ╚███╔███╔╝██║  ██║    ██████╔╝███████╗██║ ╚████║╚██████╗██║  ██║${N}\n"
+    printf "${C} ╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝${N}\n"
+
+    # status bar
+    printf " ${D}┌──────────────────────────────────────────────────────────────────────────────────┐${N}\n"
+    printf " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}RUNS: %d${N}  ${D}//${N} ${M}ZSH: %s${N}  ${D}//${N} ${Y}%s${N}  ${D}│${N}\n" \
+        $runs "$ZSH_VERSION" "$(date '+%Y-%m-%d %H:%M')"
+    printf " ${D}└──────────────────────────────────────────────────────────────────────────────────┘${N}\n"
+    printf "  ${D}>> STARTUP PERFORMANCE PROFILER // FULL SPECTRUM <<${N}\n"
+
+    # system
+    printf "\n"
+    printf "  ${C}── SYSTEM ──────────────────────────────────────────${N}\n"
+    printf "  ${D}//${N} ${B}machine${N}      %s\n" "$(uname -m)"
+    printf "  ${D}//${N} ${B}os${N}           %s %s\n" "$(uname -s)" "$(uname -r)"
+    printf "  ${D}//${N} ${B}zsh${N}          %s\n" "$ZSH_VERSION"
+    printf "  ${D}//${N} ${B}term${N}         %s\n" "$TERM"
+    printf "  ${D}//${N} ${B}zpwr${N}         %s\n" "$ZPWR"
+
+    # environment
+    printf "\n"
+    printf "  ${C}── ENVIRONMENT ─────────────────────────────────────${N}\n"
+    printf "  ${D}//${N} ${B}functions${N}    %d\n" "${#functions}"
+    printf "  ${D}//${N} ${B}completions${N}  %d\n" "${#_comps}"
+    printf "  ${D}//${N} ${B}aliases${N}      %d\n" "${#aliases}"
+    printf "  ${D}//${N} ${B}commands${N}     %d\n" "${#commands}"
+    printf "  ${D}//${N} ${B}fpath${N}        %d entries\n" "${#fpath}"
+    printf "  ${D}//${N} ${B}path${N}         %d entries\n" "${#path}"
+    printf "  ${D}//${N} ${B}zsh plugins${N}  %s\n" "$(zpwrZshPluginCount 2>/dev/null || echo '?')"
+    printf "  ${D}//${N} ${B}vim plugins${N}  %s\n" "$(zpwrVimPluginCount 2>/dev/null || echo '?')"
+
+    # runs
+    printf "\n"
+    printf "  ${C}── BENCHMARK (%d runs) ──────────────────────────────${N}\n" $runs
+
+    for (( i = 1; i <= runs; i++ )); do
+        script -q /dev/null zsh -ic "
+            {
+                printf '%s %s ' \"\$ZPWR_VARS[promptTimeMs]\" \"\$ZPWR_VARS[startupTimeMs]\"
+                printf '%s %s %s %s %s ' \\
+                    \"\$ZPWR_VARS[startTimestamp]\" \\
+                    \"\$ZPWR_VARS[phaseEnvTs]\" \\
+                    \"\$ZPWR_VARS[phasePluginsTs]\" \\
+                    \"\$ZPWR_VARS[phaseCompsysTs]\" \\
+                    \"\$ZPWR_VARS[phaseOptionsTs]\"
+                printf '%s' \"\$ZPWR_VARS[phaseFinishTs]\"
+            } >| $tmpfile
+            exit
+        " &>/dev/null
+        local out=$(<"$tmpfile")
+        local -a parts=( ${(s: :)out} )
+        local pt=${parts[1]}
+        local st=${parts[2]}
+        prompt_times+=($pt)
+        startup_times+=($st)
+        run_details+=("$out")
+
+        # progress bar
+        local -i filled=$(( i * 20 / runs ))
+        local -i empty=$(( 20 - filled ))
+        local bar="${G}$(printf '█%.0s' {1..$filled})${D}$(printf '░%.0s' {1..$empty})${N}"
+        printf "\r  ${D}//${N} run ${B}%2d${N}  ${D}[${N}%b${D}]${N}  prompt ${C}%.3fs${N}  startup ${M}%.3fs${N}" $i $bar $pt $st
+    done
+    command rm -f "$tmpfile"
+    printf "\n"
+
+    # sort for percentiles
+    local -a sorted_startup=( ${(on)startup_times} )
+    local -a sorted_prompt=( ${(on)prompt_times} )
+
+    # compute stats
+    total_prompt=0
+    total_startup=0
+    for (( i = 1; i <= runs; i++ )); do
+        (( total_prompt += prompt_times[i] ))
+        (( total_startup += startup_times[i] ))
+    done
+
+    local avg_prompt avg_startup p50_prompt p50_startup p99_prompt p99_startup min_startup max_startup
+    (( avg_prompt = total_prompt / runs ))
+    (( avg_startup = total_startup / runs ))
+
+    local p50_idx p99_idx
+    (( p50_idx = (runs + 1) / 2 ))
+    (( p99_idx = runs ))
+    p50_prompt=$sorted_prompt[$p50_idx]
+    p50_startup=$sorted_startup[$p50_idx]
+    p99_prompt=$sorted_prompt[$p99_idx]
+    p99_startup=$sorted_startup[$p99_idx]
+    min_startup=$sorted_startup[1]
+    max_startup=$sorted_startup[$runs]
+
+    # results
+    printf "\n"
+    printf "  ${C}══════════════════════════════════════════════════════${N}\n"
+    printf "  ${B}${C}RESULTS${N}\n"
+    printf "  ${C}══════════════════════════════════════════════════════${N}\n"
+
+    printf "\n"
+    printf "  ${M}▸ Prompt Time ${D}(instant prompt)${N}\n"
+    printf "    avg ${G}%.3fs${N}  ${D}//${N}  p50 ${G}%.3fs${N}  ${D}//${N}  p99 ${Y}%.3fs${N}\n" $avg_prompt $p50_prompt $p99_prompt
+
+    printf "\n"
+    printf "  ${M}▸ Startup Time ${D}(total init)${N}\n"
+    printf "    avg ${G}%.3fs${N}  ${D}//${N}  p50 ${G}%.3fs${N}  ${D}//${N}  p99 ${Y}%.3fs${N}\n" $avg_startup $p50_startup $p99_startup
+    printf "    min ${G}%.3fs${N}  ${D}//${N}  max ${Y}%.3fs${N}  ${D}//${N}  spread ${C}%.3fs${N}\n" $min_startup $max_startup $(( max_startup - min_startup ))
+
+    # signal bar for avg startup
+    local -i sig_filled sig_empty
+    if (( avg_startup < 1.0 )); then
+        (( sig_filled = 10 - (avg_startup * 10) ))
+        (( sig_filled = sig_filled < 1 ? 1 : sig_filled ))
+        (( sig_filled = sig_filled > 10 ? 10 : sig_filled ))
+    else
+        sig_filled=1
+    fi
+    (( sig_empty = 10 - sig_filled ))
+    printf "    signal ${G}$(printf '█%.0s' {1..$sig_filled})${D}$(printf '░%.0s' {1..$sig_empty})${N}"
+    if (( avg_startup < 0.2 )); then
+        printf "  ${G}BLAZING${N}\n"
+    elif (( avg_startup < 0.4 )); then
+        printf "  ${G}FAST${N}\n"
+    elif (( avg_startup < 0.7 )); then
+        printf "  ${Y}NOMINAL${N}\n"
+    elif (( avg_startup < 1.0 )); then
+        printf "  ${Y}ACCEPTABLE${N}\n"
+    else
+        printf "  ${R}SLOW${N}\n"
+    fi
+
+    # phase breakdown from last run
+    local -a last=( ${(s: :)run_details[$runs]} )
+    if (( $#last >= 7 )); then
+        local ts_start=${last[3]}
+        local ts_env=${last[4]}
+        local ts_plugins=${last[5]}
+        local ts_compsys=${last[6]}
+        local ts_options=${last[7]}
+        local ts_finish=${last[8]:-$ts_options}
+        local total_ms=$(( (ts_finish - ts_start) * 1000 ))
+
+        printf "\n"
+        printf "  ${M}▸ Phase Breakdown ${D}(last run)${N}\n"
+        printf "  ${D}──────────────────────────────────────────────────${N}\n"
+
+        local -a phase_names=( "instant prompt" "env + aliases " "plugin decl   " "compsys       " "options + fzf " )
+        local -a phase_ms
+        phase_ms+=( $(( (${last[1]} * 1000) )) )
+        phase_ms+=( $(( (ts_plugins - ts_env) * 1000 )) )
+        phase_ms+=( $(( (ts_compsys - ts_plugins) * 1000 )) )
+        phase_ms+=( $(( (ts_options - ts_compsys) * 1000 )) )
+        phase_ms+=( $(( (ts_finish - ts_options) * 1000 )) )
+
+        local j phase_pct phase_bar_len
+        for (( j = 1; j <= $#phase_names; j++ )); do
+            if (( total_ms > 0 )); then
+                (( phase_pct = phase_ms[j] / total_ms * 100 ))
+                (( phase_bar_len = phase_ms[j] / total_ms * 30 ))
+                (( phase_bar_len = phase_bar_len < 1 && phase_ms[j] > 0 ? 1 : phase_bar_len ))
+            else
+                phase_pct=0
+                phase_bar_len=0
+            fi
+            local phase_bar=""
+            if (( phase_bar_len > 0 )); then
+                phase_bar="${C}$(printf '█%.0s' {1..$phase_bar_len})${N}"
+            fi
+            printf "    ${B}%s${N} %7.0f ms  ${D}%5.1f%%${N}  %b\n" "${phase_names[j]}" ${phase_ms[j]} $phase_pct "$phase_bar"
+        done
+        printf "  ${D}──────────────────────────────────────────────────${N}\n"
+        printf "    ${B}total          ${N} %7.0f ms\n" $total_ms
+    fi
+
+    # baseline comparison
+    if [[ -r "$baseline" ]]; then
+        local base_avg
+        base_avg=$(<"$baseline")
+        if [[ -n "$base_avg" ]]; then
+            local diff pct
+            (( diff = avg_startup - base_avg ))
+            if (( base_avg != 0 )); then
+                (( pct = diff / base_avg * 100 ))
+            else
+                pct=0
+            fi
+            printf "\n"
+            printf "  ${M}▸ Baseline Comparison${N}\n"
+            printf "  ${D}──────────────────────────────────────────────────${N}\n"
+            printf "    baseline  ${D}%.3fs${N}  ${D}//${N}  current  ${C}%.3fs${N}\n" $base_avg $avg_startup
+            if (( diff > 0 )); then
+                printf "    delta     ${R}+%.3fs (%+.1f%%)${N}  ${R}▲ SLOWER${N}\n" $diff $pct
+            elif (( diff < 0 )); then
+                printf "    delta     ${G}%.3fs (%+.1f%%)${N}  ${G}▼ FASTER${N}\n" $diff $pct
+            else
+                printf "    delta     ${C}0.000s${N}  ${C}═ NO CHANGE${N}\n"
+            fi
+        fi
+    fi
+
+    # run history
+    if [[ -r "$history_file" ]]; then
+        local -a hist_lines
+        hist_lines=( "${(@f)$(<"$history_file")}" )
+        if (( $#hist_lines > 0 )); then
+            printf "\n"
+            printf "  ${M}▸ History ${D}(last %d runs)${N}\n" $(( $#hist_lines < 10 ? $#hist_lines : 10 ))
+            printf "  ${D}──────────────────────────────────────────────────${N}\n"
+            local line
+            for line in ${hist_lines[-10,-1]}; do
+                [[ -n "$line" ]] && printf "    ${D}//${N} %s\n" "$line"
+            done
+        fi
+    fi
+
+    # save to history
+    printf "%s  avg:%.3fs  p50:%.3fs  p99:%.3fs  min:%.3fs  max:%.3fs  n:%d" \
+        "$(date '+%Y-%m-%d %H:%M')" $avg_startup $p50_startup $p99_startup $min_startup $max_startup $runs \
+        >> "$history_file"
+    print >> "$history_file"
+
+    # save baseline prompt
+    printf "\n"
+    printf "  ${D}┌──────────────────────────────────────────────────┐${N}\n"
+    printf "  ${D}│${N} ${C}Save as baseline? [y/N]${N}                           ${D}│${N}\n"
+    printf "  ${D}└──────────────────────────────────────────────────┘${N}\n"
+    printf "  ${D}>>${N} "
+    local answer
+    read -q answer
+    echo
+    if [[ $answer == y ]]; then
+        printf "%.3f" $avg_startup >| "$baseline"
+        printf "  ${G}▸ Baseline saved${N} ${D}// %s${N}\n" "$baseline"
+    fi
+    printf "\n"
+}
+
+zpwrBench "$@"
