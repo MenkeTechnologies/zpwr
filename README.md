@@ -56,6 +56,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [File Watcher](#file-watcher----zpwr-watch) -- zpwr watch
 - [Command Replay](#command-replay----zpwr-replay) -- zpwr replay
 - [Command Trace](#command-trace----zpwr-trace) -- zpwr trace
+- [Function Dependencies](#function-dependencies----zpwr-deps) -- zpwr deps
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
@@ -902,6 +903,20 @@ zpwr trace -a ls -la       # both strace + ltrace (default)
 ```
 
 On Linux the command re-runs for strace/ltrace stats (2-3 executions total).  Use `-q` for destructive commands to run once with timing only.
+
+## Function Dependencies -- zpwr deps
+`zpwr deps [OPTIONS] [FUNCTION]` analyzes which zpwr functions call which other functions.  Scans all autoload directories (`common`, `darwin`, `linux`, `comp_utils`) and `scripts/lib.sh` for cross-references.  Functions with names of 2 characters or fewer are excluded.
+
+```sh
+zpwr deps -h                       # cyberpunk help
+zpwr deps                          # summary: top 10 most deps + most depended on
+zpwr deps zpwrClearList             # what does zpwrClearList call?
+zpwr deps -r zpwrPrettyPrint        # who calls zpwrPrettyPrint?
+zpwr deps --orphans                # functions not called by any other function
+zpwr deps --dot > graph.dot        # graphviz export with cyberpunk colors
+```
+
+The summary shows outgoing dependency counts (which functions call the most others) and incoming dependency counts (which functions are most depended on), with bar charts and totals.
 
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.
