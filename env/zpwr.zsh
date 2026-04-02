@@ -284,6 +284,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[recompilefiles]='zpwrRecompileFiles=recompile all files cache comps'
     ZPWR_VERBS[refreshzwc]='zpwrRefreshZwc=delete then regen compiled zsh word code'
     ZPWR_VERBS[regen]='zpwrRegenMost=regen caches except git drive search'
+    ZPWR_VERBS[regenpdf]='bash $ZPWR_SCRIPTS/regenPDF.sh=regenerate encyclopedia PDF'
     ZPWR_VERBS[regenall]='zpwrRegenAll=regen all caches'
     ZPWR_VERBS[regenenvcache]='zpwrRegenSearchEnv=regen search env to $ZPWR/zpwrEnv{Key,Value}.txt'
     ZPWR_VERBS[regengitrepocache]='zsh-git-repo-regenAllGitRepos=regen list of all git repos to $ZPWR_ALL_GIT_DIRS'
