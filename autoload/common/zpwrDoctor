@@ -248,7 +248,7 @@ function zpwrDoctor(){
 
     if [[ -d "$ZPWR_LOCAL/rcBackups" ]]; then
         local -i backups
-        backups=$(command ls "$ZPWR_LOCAL/rcBackups/" 2>/dev/null | wc -l)
+        backups=$(command ls -A "$ZPWR_LOCAL/rcBackups/" 2>/dev/null | wc -l)
         _dr_pass "$backups history backups in \$ZPWR_LOCAL/rcBackups"
     else
         _dr_warn "no history backup directory"
@@ -258,7 +258,7 @@ function zpwrDoctor(){
     # ── CONFIG LINKS ──────────────────────────────────────────
     printf "\n  ${C}── CONFIG LINKS ────────────────────────────────────${N}\n"
 
-    local -a config_files=( .zshrc .vimrc .tmux.conf .p10k.zsh )
+    local -a config_files=( .zshrc .vimrc .tmux.conf )
     local cf
     for cf in $config_files; do
         if [[ -L "$HOME/$cf" ]]; then
