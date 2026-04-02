@@ -230,11 +230,77 @@ function zpwrLogColor(){
         return 1
     fi
 
-    printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____$1: "
+    local lvl="$1"
     shift
-    printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
-    printf "\x1b[0m"
+    # neon 256-color palette
+    local _NC='\x1b[38;5;51m'   # bright cyan
+    local _NP='\x1b[38;5;201m'  # neon pink
+    local _NG='\x1b[38;5;46m'   # neon green
+    local _NY='\x1b[38;5;226m'  # neon yellow
+    local _NR='\x1b[38;5;196m'  # neon red
+    local _NM='\x1b[38;5;129m'  # neon magenta
+    local _NO='\x1b[38;5;208m'  # neon orange
+    local _NW='\x1b[38;5;255m'  # bright white
+    local _DM='\x1b[38;5;240m'  # dim gray
+    local _B='\x1b[1m' _N='\x1b[0m'
+    local c1 c2 c3 sig_fill sig_empty sig_color
+    case "$lvl" in
+        INFO)  c1="${_NC}"; c2="${_NP}"; c3="${_NG}"; sig_fill=8; sig_color="${_NG}" ;;
+        ERROR) c1='\x1b[38;5;196m'; c2='\x1b[38;5;160m'; c3='\x1b[38;5;124m'; sig_fill=2; sig_color="${_NR}" ;;
+        DEBUG) c1="${_NY}"; c2="${_NC}"; c3="${_NG}"; sig_fill=6; sig_color="${_NY}" ;;
+        TRACE) c1="${_NM}"; c2="${_NC}"; c3="${_NP}"; sig_fill=4; sig_color="${_NM}" ;;
+        STDIN) c1="${_NC}"; c2="${_NP}"; c3="${_NG}"; sig_fill=8; sig_color="${_NC}" ;;
+        *)     c1="${_NC}"; c2="${_NP}"; c3="${_NG}"; sig_fill=8; sig_color="${_NC}" ;;
+    esac
+    sig_empty=$((10 - sig_fill))
+
     printf "\n"
+    case "$lvl" in
+        INFO)
+            printf " ${c1}██╗${_N}${c1}███╗   ██╗${_N}${c1}███████╗${_N} ${c1}██████╗${_N}\n"
+            printf " ${c1}██║${_N}${c1}████╗  ██║${_N}${c1}██╔════╝${_N}${c1}██╔═══██╗${_N}\n"
+            printf " ${c2}██║${_N}${c2}██╔██╗ ██║${_N}${c2}█████╗${_N}  ${c2}██║   ██║${_N}\n"
+            printf " ${c2}██║${_N}${c2}██║╚██╗██║${_N}${c2}██╔══╝${_N}  ${c2}██║   ██║${_N}\n"
+            printf " ${c3}██║${_N}${c3}██║ ╚████║${_N}${c3}██║${_N}     ${c3}╚██████╔╝${_N}\n"
+            printf " ${c3}╚═╝${_N}${c3}╚═╝  ╚═══╝${_N}${c3}╚═╝${_N}      ${c3}╚═════╝${_N}\n"
+            ;;
+        ERROR)
+            printf " ${c1}███████╗██████╗ ██████╗  ██████╗ ██████╗${_N}\n"
+            printf " ${c1}██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔══██╗${_N}\n"
+            printf " ${c2}█████╗  ██████╔╝██████╔╝██║   ██║██████╔╝${_N}\n"
+            printf " ${c2}██╔══╝  ██╔══██╗██╔══██╗██║   ██║██╔══██╗${_N}\n"
+            printf " ${c3}███████╗██║  ██║██║  ██║╚██████╔╝██║  ██║${_N}\n"
+            printf " ${c3}╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝${_N}\n"
+            ;;
+        DEBUG)
+            printf " ${c1}██████╗ ███████╗██████╗ ██╗   ██╗ ██████╗${_N}\n"
+            printf " ${c1}██╔══██╗██╔════╝██╔══██╗██║   ██║██╔════╝${_N}\n"
+            printf " ${c2}██║  ██║█████╗  ██████╔╝██║   ██║██║  ███╗${_N}\n"
+            printf " ${c2}██║  ██║██╔══╝  ██╔══██╗██║   ██║██║   ██║${_N}\n"
+            printf " ${c3}██████╔╝███████╗██████╔╝╚██████╔╝╚██████╔╝${_N}\n"
+            printf " ${c3}╚═════╝ ╚══════╝╚═════╝  ╚═════╝  ╚═════╝${_N}\n"
+            ;;
+        TRACE)
+            printf " ${c1}████████╗██████╗  █████╗  ██████╗███████╗${_N}\n"
+            printf " ${c1}╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██╔════╝${_N}\n"
+            printf " ${c2}   ██║   ██████╔╝███████║██║     █████╗${_N}\n"
+            printf " ${c2}   ██║   ██╔══██╗██╔══██║██║     ██╔══╝${_N}\n"
+            printf " ${c3}   ██║   ██║  ██║██║  ██║╚██████╗███████╗${_N}\n"
+            printf " ${c3}   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝${_N}\n"
+            ;;
+        *)
+            printf " ${c1}${_B}${lvl}${_N}\n"
+            ;;
+    esac
+    printf " ${_DM}┌──────────────────────────────────────────────────────────────────────────┐${_N}\n"
+    printf " ${_DM}│${_N} ${_NG}STATUS:${_N} ${_NW}${_B}${lvl}${_N}  ${_DM}//${_N} ${_NC}SIGNAL: ${sig_color}"
+    local _i
+    for (( _i=0; _i<sig_fill; _i++ )); do printf "█"; done
+    printf "${_DM}"
+    for (( _i=0; _i<sig_empty; _i++ )); do printf "░"; done
+    printf "${_N} ${_DM}//${_N} ${_NC}$(date '+%H:%M:%S')${_N}  ${_DM}│${_N}\n"
+    printf " ${_DM}└──────────────────────────────────────────────────────────────────────────┘${_N}\n"
+    printf "  ${_DM}>>${_N} ${c1}%b${_N}\n" "$*"
 }
 
 function zpwrLogConsoleInfo(){
