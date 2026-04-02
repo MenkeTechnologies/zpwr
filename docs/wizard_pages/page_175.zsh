@@ -4,9 +4,9 @@ PAGE_CONTENT() {
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
     print "  ${B}${M}=== THE EPILOGUE: YOU ARE THE WIZARD ===${N}"
-    print "  ${D}175 pages later, the terminal bows to you${N}"
+    print "  ${D}the terminal bows to you${N}"
     print "  ${B}${Y}WHAT YOU'VE LEARNED${N}"
-    print "  ${D}  175 pages across 43 chapters. From keybindings to kernel.${N}"
+    print "  ${D}  From keybindings to kernel. Every chapter, every verb.${N}"
     print "  ${D}  Autoloaded functions. Tmux pipelines. Fzf integration.${N}"
     print "  ${D}  Vim execution. Perl oneliners. Systemd services.${N}"
     print "  ${D}  32-pane REPL layouts. Cross-platform installers.${N}"
