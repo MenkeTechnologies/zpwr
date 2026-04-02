@@ -123,14 +123,14 @@ export ZPWR_INTERACTIVE_MENU_SELECT=true
 export ZPWR_KEYTIMEOUT=10
 # whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
-# zpwrLogColor function underscore color ANSI codes
-export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
-# zpwrLogColor function quote color
-export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
-# zpwrLogColor function timestamp color
-export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
-# zpwrLogColor function message color
-export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
+# zpwrLogColor function underscore color ANSI codes (neon cyan)
+export ZPWR_LOG_UNDER_COLOR='\x1b[0;36m'
+# zpwrLogColor function quote color (neon magenta)
+export ZPWR_LOG_QUOTE_COLOR='\x1b[0;95m'
+# zpwrLogColor function timestamp color (bright green on dark bg)
+export ZPWR_LOG_DATE_COLOR='\x1b[1;32;40m'
+# zpwrLogColor function message color (bright white on purple bg)
+export ZPWR_LOG_MSG_COLOR='\x1b[1;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
 # the marker found color in bat output into fzf from ag search ANSI codes
