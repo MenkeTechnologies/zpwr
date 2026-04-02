@@ -321,7 +321,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[subcommandslist]='zpwrListVerbs=the subcommands for zpwr <tab>'
     ZPWR_VERBS[help]='zpwrListVerbsColor=the subcommands for zpwr <tab>'
     ZPWR_VERBS[subcommandscount]='zpwrNumVerbs=number of choice for zpwr <tab>'
-    ZPWR_VERBS[taillog]='lo=tail -F $ZPWR_LOGFILE'
+    ZPWR_VERBS[taillog]='zpwrTailLog=colorized tail of $ZPWR_LOGFILE'
     ZPWR_VERBS[test]='zpwrTest=run all zpwr tests'
     ZPWR_VERBS[tests]='zpwrTest=run all zpwr tests'
     ZPWR_VERBS[testsall]='zpwrTestAll=run all env tests'

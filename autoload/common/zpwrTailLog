@@ -1,0 +1,111 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTailLog(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}████████╗ █████╗ ██╗██╗     ██╗      ██████╗  ██████╗${N}"
+        print " ${C}╚══██╔══╝██╔══██╗██║██║     ██║     ██╔═══██╗██╔════╝${N}"
+        print " ${M}   ██║   ███████║██║██║     ██║     ██║   ██║██║  ███╗${N}"
+        print " ${M}   ██║   ██╔══██║██║██║     ██║     ██║   ██║██║   ██║${N}"
+        print " ${C}   ██║   ██║  ██║██║███████╗███████╗╚██████╔╝╚██████╔╝${N}"
+        print " ${C}   ╚═╝   ╚═╝  ╚═╝╚═╝╚══════╝╚══════╝ ╚═════╝  ╚═════╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}TAILLOG${N}                  ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> COLORIZED LOG VIEWER // CCZE-POWERED OUTPUT <<${N}"
+        print ""
+        print ""
+        print "  Tail the zpwr logfile with ccze colorization."
+        print "  Falls back to plain output if ccze is not installed."
+        print ""
+        print "  ${B}USAGE:${N} zpwr taillog ${D}[OPTIONS] [LOGFILE]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-n, --lines N${N}                                    ${D}// Show last N lines (default: all)${N}"
+        print "  ${C}-f, --no-follow${N}                                  ${D}// Don't follow, just colorize${N}"
+        print "  ${C}-r, --raw${N}                                        ${D}// No ccze, plain output with nl${N}"
+        print "  ${C}LOGFILE${N}                                          ${D}// Custom logfile (default: \$ZPWR_LOGFILE)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr taillog${N}                                     ${D}// follow log with ccze colors${N}"
+        print "  ${C}zpwr taillog -n 50${N}                               ${D}// last 50 lines then follow${N}"
+        print "  ${C}zpwr taillog -f${N}                                  ${D}// colorize without following${N}"
+        print "  ${C}zpwr taillog -r${N}                                  ${D}// plain output with line numbers${N}"
+        print "  ${C}zpwr taillog /var/log/system.log${N}                 ${D}// custom logfile${N}"
+        print ""
+        print "  ${D}── DEPENDENCIES ─────────────────────────────────────────────────────${N}"
+        print "  ${C}ccze${N}             ${D}brew install ccze // apt install ccze${N}"
+        print ""
+        return 0
+    fi
+
+    local -i lines=0 follow=1 raw=0
+    local logfile=""
+
+    while [[ "$1" == -* ]]; do
+        case "$1" in
+            -n|--lines) shift; lines=${1:-50}; shift ;;
+            -f|--no-follow) follow=0; shift ;;
+            -r|--raw) raw=1; shift ;;
+            *) break ;;
+        esac
+    done
+
+    # remaining arg is logfile
+    logfile="${1:-$ZPWR_LOGFILE}"
+
+    if [[ ! -r "$logfile" ]]; then
+        print "  ${R}logfile not found: ${logfile}${N}"
+        return 1
+    fi
+
+    # determine colorizer
+    local colorizer=""
+    if (( ! raw )) && (( $+commands[ccze] )); then
+        colorizer="ccze -A"
+    elif (( ! raw )); then
+        print "  ${Y}ccze not found, falling back to plain output${N}"
+        print "  ${D}install: brew install ccze // apt install ccze${N}"
+        print ""
+    fi
+
+    if [[ -n "$colorizer" ]]; then
+        if (( follow )); then
+            if (( lines > 0 )); then
+                tail -n $lines -F "$logfile" 2>/dev/null | ccze -A
+            else
+                tail -n 100 -F "$logfile" 2>/dev/null | ccze -A
+            fi
+        else
+            if (( lines > 0 )); then
+                tail -n $lines "$logfile" 2>/dev/null | ccze -A
+            else
+                cat "$logfile" | ccze -A
+            fi
+        fi
+    else
+        if (( follow )); then
+            if (( lines > 0 )); then
+                tail -n $lines -F "$logfile" 2>/dev/null | nl
+            else
+                tail -n 100 -F "$logfile" 2>/dev/null | nl
+            fi
+        else
+            if (( lines > 0 )); then
+                tail -n $lines "$logfile" 2>/dev/null | nl
+            else
+                cat "$logfile" | nl
+            fi
+        fi
+    fi
+}
+
+zpwrTailLog "$@"

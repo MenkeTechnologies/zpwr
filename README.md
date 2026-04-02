@@ -7,7 +7,7 @@
 ```
  _______ _______ _  _  _ ______
 |____   |_____  | |  \| |_____/
-    /  / |_____] |_|\_| |    \_  v48.3.3
+    /  / |_____] |_|\_| |    \_  v48.4.1
 >>> JACK INTO THE GRID <<<
 ```
 
@@ -57,6 +57,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Command Replay](#command-replay----zpwr-replay) -- zpwr replay
 - [Command Trace](#command-trace----zpwr-trace) -- zpwr trace
 - [Function Dependencies](#function-dependencies----zpwr-deps) -- zpwr deps
+- [Colorized Log Viewer](#colorized-log-viewer----zpwr-taillog) -- zpwr taillog
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
@@ -917,6 +918,20 @@ zpwr deps --dot > graph.dot        # graphviz export with cyberpunk colors
 ```
 
 The summary shows outgoing dependency counts (which functions call the most others) and incoming dependency counts (which functions are most depended on), with bar charts and totals.
+
+## Colorized Log Viewer -- zpwr taillog
+`zpwr taillog [OPTIONS] [LOGFILE]` tails the zpwr logfile with ccze colorization.  Timestamps, log levels, process names, file paths, and keywords are syntax-highlighted in the style of system log viewers.  Falls back to plain `nl` output if ccze is not installed.
+
+```sh
+zpwr taillog -h            # cyberpunk help
+zpwr taillog               # follow log with ccze colors (last 100 lines)
+zpwr taillog -n 50         # last 50 lines then follow
+zpwr taillog -f            # colorize without following
+zpwr taillog -r            # plain output with line numbers
+zpwr taillog /var/log/system.log  # custom logfile
+```
+
+Requires `ccze` (`brew install ccze` or `apt install ccze`).
 
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.
