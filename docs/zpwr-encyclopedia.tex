@@ -10,6 +10,8 @@
 \usepackage{tikz}
 \usepackage{bookmark}
 \usepackage{tcolorbox}
+\usepackage{graphicx}
+\graphicspath{{/Users/wizard/.zpwr/docs/screenshots/}}
 \tcbuselibrary{skins,breakable}
 
 \definecolor{bg}{HTML}{06060C}
@@ -70,6 +72,12 @@
     \renewcommand{\headrule}{}
 }
 
+\newtcolorbox{imgbox}{
+    colback=bg,colframe=neoncyan,boxrule=0.5pt,arc=4pt,
+    left=4pt,right=4pt,top=4pt,bottom=4pt,
+    shadow={1mm}{-1mm}{0mm}{neoncyan!20!bg},
+    breakable
+}
 \newtcolorbox{codebox}{
     colback=codebg,colframe=ruleglow,boxrule=0.3pt,arc=2pt,
     left=8pt,right=8pt,top=4pt,bottom=4pt,
@@ -98,7 +106,9 @@
 {\large\color{neongreen} 175 Pages\quad\color{dimtext}//\quad\color{neonyellow}43 Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
 {\color{bodytext}\large MenkeTechnologies}\\[0.3cm]
 {\color{dimtext}\small \url{https://github.com/MenkeTechnologies/zpwr}}\\[3cm]
-{\color{dimtext}\small CYBERPUNK EDITION\quad//\quad Generated from \texttt{zpwr wizard}}
+{\color{dimtext}\small CYBERPUNK EDITION}\\[0.5cm]
+\includegraphics[width=0.6\textwidth]{figlet_zpwr.png}\\[0.3cm]
+{\color{dimtext}\small\quad//\quad Generated from \texttt{zpwr wizard}}
 \end{center}
 \end{titlepage}
 
@@ -106,6 +116,11 @@
 
 
 \chapter{THE RED PILL}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{figlet_zpwr.png}
+\end{center}
+
 
 \section{Welcome to the Machine}
 
@@ -2345,6 +2360,11 @@ Both sides get the same firepower.
 
 \chapter{PERFORMANCE CULT}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{zpwr_bench_help.png}
+\end{center}
+
+
 \section{Benchmarking Startup}
 
 
@@ -2454,6 +2474,11 @@ Measure. Optimize. Measure again.
 \vspace{16pt}
 
 \section{Flame Charts}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{zpwr_flame_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -2670,7 +2695,22 @@ Your shell is no longer a black box. It is an open book.
 
 \chapter{HEALTH \& DIAGNOSTICS}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{zpwr_doctor_help.png}
+\end{center}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{zpwr_doctor_help.png}
+\end{center}
+
+
 \section{The Doctor Is In}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{zpwr_doctor_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -2798,6 +2838,11 @@ Pair it with zpwr recompile for a full tune-up.\\
 \vspace{16pt}
 
 \section{Dependency Cartography}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{zpwr_deps_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -2929,6 +2974,11 @@ big enough to matter.
 \vspace{16pt}
 
 \section{Command Autopsy}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{zpwr_trace_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -4739,7 +4789,17 @@ stale code until you recompile.
 
 \chapter{MONITORING \& AUTOMATION}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{zpwr_watch_help.png}
+\end{center}
+
+
 \section{File Watching}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{zpwr_watch_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -4860,6 +4920,11 @@ For inotifywait, it uses zsh's glob matching on filenames.
 \vspace{16pt}
 
 \section{Command Replay}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{zpwr_replay_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -7733,6 +7798,11 @@ Most issues are fixed by reload. Reset handles the rest.
 
 
 \chapter{BATCH OPERATIONS}
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{bat_zshrc.png}
+\end{center}
+
 
 \section{Loop Warriors}
 
@@ -15395,7 +15465,17 @@ This is not an IDE. This is a weapon system.
 
 \chapter{TEMPRS — TEMPORARY FILE STACK MANAGER}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{temprs_help.png}
+\end{center}
+
+
 \section{temprs: The Stack Machine}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{temprs_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -15596,7 +15676,17 @@ and --replace INDEX PAT REPL for in-place sed-style edits.
 
 \chapter{LSOFRS — ENHANCED LSOF}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{lsofrs_help.png}
+\end{center}
+
+
 \section{lsofrs: Network Intelligence}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{lsofrs_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -15786,7 +15876,17 @@ lsofrs -u \textbackslash{}\$(whoami) -a -i         \# your network connections
 
 \chapter{EZA — THE MODERN LS}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{eza_listing.png}
+\end{center}
+
+
 \section{eza: ls Evolved}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{eza_listing.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -15977,6 +16077,11 @@ Your file listings become as curated as your code.
 
 \section{bat: Syntax Highlighting for Everything}
 
+\begin{center}
+\includegraphics[width=0.8\textwidth]{bat_sample.png}
+\end{center}
+
+
 
 \vspace{10pt}
 {\large\bfseries\color{neoncyan} BAT: SYNTAX HIGHLIGHTING FOR EVERYTHING}\vspace{6pt}
@@ -16066,6 +16171,11 @@ The -r (--line-range) flag is perfect for surgical code review.
 \vspace{16pt}
 
 \section{bat: Configuration \& Tricks}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{bat_zshrc.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -16176,7 +16286,17 @@ paging entirely — zpwr does this with --paging never.
 
 \chapter{FD-FIND — FIND REPLACEMENT}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{fd_zsh_files.png}
+\end{center}
+
+
 \section{fd: find for Humans}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{fd_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -16266,6 +16386,11 @@ This is the find | xargs pattern without the pipe.
 \vspace{16pt}
 
 \section{fd: Integration with zpwr \& fzf}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{fd_zsh_files.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -16364,7 +16489,17 @@ Stack -E flags to build precise exclusion lists on the fly.
 
 \chapter{RIPGREP — GREP AT LIGHT SPEED}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{rg_search.png}
+\end{center}
+
+
 \section{ripgrep: grep Reimagined}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{rg_help.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -16464,6 +16599,11 @@ slower than both ag and rg. still has loyal users.
 \vspace{16pt}
 
 \section{ripgrep: Advanced \& zpwr Integration}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{rg_search.png}
+\end{center}
+
 
 
 \vspace{10pt}
@@ -16776,7 +16916,17 @@ Both editors, one config, zero excuses. The way it should be.
 
 \chapter{PERL IN ZPWR}
 
+\begin{center}
+\includegraphics[width=0.85\textwidth]{perl_version.png}
+\end{center}
+
+
 \section{Perl Oneliners: The Secret Weapon}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{perl_version.png}
+\end{center}
+
 
 
 \vspace{10pt}
