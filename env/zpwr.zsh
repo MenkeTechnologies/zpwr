@@ -329,6 +329,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[to]='to=toggle external ip'
     ZPWR_VERBS[tokens]='tok=vim the .tokens.sh file'
     ZPWR_VERBS[top]='zpwrTop=live shell resource dashboard'
+    ZPWR_VERBS[trace]='zpwrTrace=run command with full instrumentation'
     ZPWR_VERBS[toggle]='to=toggle external ip'
     ZPWR_VERBS[travis]='trav-git=open current travis project in browser'
     ZPWR_VERBS[travisbuild]='trav-git-build=open current travis builds in browser'
