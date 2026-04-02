@@ -8,6 +8,40 @@ function zpwrFlame(){
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
 
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗██╗      █████╗ ███╗   ███╗███████╗${N}"
+        print " ${C}██╔════╝██║     ██╔══██╗████╗ ████║██╔════╝${N}"
+        print " ${M}█████╗  ██║     ███████║██╔████╔██║█████╗${N}"
+        print " ${M}██╔══╝  ██║     ██╔══██║██║╚██╔╝██║██╔══╝${N}"
+        print " ${C}██║     ███████╗██║  ██║██║ ╚═╝ ██║███████╗${N}"
+        print " ${C}╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}FLAME${N}                    ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> STARTUP FLAME CHART // ZPROF VISUALIZER <<${N}"
+        print ""
+        print ""
+        print "  Launch an instrumented shell, capture zprof data, and render"
+        print "  an ASCII flame chart with heat-colored bars and optimization tips."
+        print ""
+        print "  ${B}USAGE:${N} zpwr flame ${D}[OPTIONS] [N]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}N${N}                                                 ${D}// Top N functions (default: 20)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr flame${N}                                       ${D}// top 20 by total time${N}"
+        print "  ${C}zpwr flame 40${N}                                    ${D}// top 40${N}"
+        print "  ${C}zpwr flame 5${N}                                     ${D}// quick view of hottest 5${N}"
+        print ""
+        print "  ${D}── HEAT SCALE ───────────────────────────────────────────────────────${N}"
+        print "  ${R}▓▓▓▓▓${N}  ${D}>75% of max${N}    ${Y}▓▓▓▓▓${N}  ${D}>50%${N}    ${G}▓▓▓▓▓${N}  ${D}>25%${N}    ${C}▓▓▓▓▓${N}  ${D}<25%${N}"
+        print ""
+        return 0
+    fi
+
     local -i top_n=${1:-20}
 
     print ""

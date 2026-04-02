@@ -52,6 +52,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Health Check](#health-check----zpwr-doctor) -- zpwr doctor
 - [Flame Chart](#flame-chart----zpwr-flame) -- zpwr flame
 - [Alias Analytics](#alias-analytics----zpwr-aliasrank) -- zpwr aliasrank
+- [Function Rank](#function-rank----zpwr-funcrank) -- zpwr funcrank
 - [File Watcher](#file-watcher----zpwr-watch) -- zpwr watch
 - [Command Replay](#command-replay----zpwr-replay) -- zpwr replay
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
@@ -792,8 +793,10 @@ export ZPWR_ZINIT_COMPINIT_DELAY=0
 `zpwr bench [N]` runs N shell startups (default 10) and reports detailed performance metrics with a cyberpunk-styled output.  It reports system info, environment counts (functions, completions, aliases, plugins), per-run timing with a progress bar, percentile statistics (avg, p50, p99, min, max, spread), a phase breakdown showing time spent in each startup stage (instant prompt, env+aliases, plugin declarations, compsys, options+fzf), baseline comparison with delta percentage, and a persistent run history.  Save a baseline after optimizing and future runs will show whether startup got faster or slower.
 
 ```sh
+zpwr bench -h      # cyberpunk help
 zpwr bench 5       # run 5 iterations
 zpwr bench         # default 10 iterations
+zpwr bench 20      # 20 iterations for stable p99
 ```
 
 Baselines and history are stored in `$ZPWR_LOCAL/zpwr-bench-baseline.txt` and `$ZPWR_LOCAL/zpwr-bench-history.txt`.
@@ -802,10 +805,12 @@ Baselines and history are stored in `$ZPWR_LOCAL/zpwr-bench-baseline.txt` and `$
 `zpwr snapshot [name]` captures the full terminal environment into a portable snapshot stored in `$ZPWR_LOCAL/snapshots/`.  Each snapshot captures: named directories (`hash -d`), aliases (regular, global, suffix), environment variables, ZPWR_VARS, shell history, directory stack, git repo status, tmux sessions/windows/panes with tmux-resurrect integration, and vim session files.
 
 ```sh
-zpwr snapshot myproject    # capture with custom name
-zpwr snapshot              # capture with timestamp name
-zpwr restore               # list all snapshots
-zpwr restore myproject     # restore everything
+zpwr snapshot -h                    # cyberpunk help
+zpwr snapshot myproject             # capture with custom name
+zpwr snapshot                       # capture with timestamp name
+zpwr restore -h                     # cyberpunk help
+zpwr restore                        # list all snapshots
+zpwr restore myproject              # restore everything
 zpwr restore myproject aliases env  # restore only specific components
 ```
 
@@ -815,50 +820,73 @@ Available restore components: `hash`, `aliases`, `env`, `tmux`, `vim`, `history`
 `zpwr top [interval]` displays a live-updating dashboard of shell resource usage.  Shows memory (RSS with bar graph, virtual memory), history size, child processes, jobs, zle widgets, hooks, shell objects (functions, completions, aliases, commands, builtins, parameters, modules) with delta tracking between refreshes, loaded zsh modules, paths, git status, tmux session counts, top 5 largest functions with size bars, and top 5 longest PATH entries.  Runs in an alternate screen buffer -- press `q` to quit cleanly.
 
 ```sh
+zpwr top -h    # cyberpunk help
 zpwr top       # refresh every 2s (default)
 zpwr top 5     # refresh every 5s
+zpwr top 1     # fast refresh
 ```
 
 ## Health Check -- zpwr doctor
 `zpwr doctor` scans the environment for common issues and reports with pass/warn/fail indicators.  Checks for: stale `.zwc` compiled files, zcompdump freshness, duplicate and missing PATH/FPATH entries, broken symlinks, invalid named directories, p10k named dir pollution, missing dependencies (git, eza, fzf, tmux, perl, python3), zinit installation, history file and backups, and config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh).  Reports a signal bar and summary with pass/warning/error counts.
 
 ```sh
-zpwr doctor
+zpwr doctor -h  # cyberpunk help
+zpwr doctor     # run full diagnostic
 ```
 
 ## Flame Chart -- zpwr flame
 `zpwr flame [N]` launches an instrumented shell with `zprof`, parses the profiling data, and renders an ASCII flame chart of the top N functions by total time.  Bars are heat-colored (red = hot, yellow = warm, green = cool, cyan = cold).  Includes a summary with the hottest function, total profiled count, and contextual optimization tips based on which function dominates startup.
 
 ```sh
+zpwr flame -h    # cyberpunk help with heat scale legend
 zpwr flame       # top 20 functions (default)
 zpwr flame 40    # top 40 functions
+zpwr flame 5     # quick view of hottest 5
 ```
 
 ## Alias Analytics -- zpwr aliasrank
-`zpwr aliasrank [N]` mines shell history to rank alias usage.  Shows the top N most-used aliases with frequency bars, lists never-used aliases (candidates for removal), and identifies frequently typed commands that have no alias (candidates for creation).  Reports total alias count, usage percentage, and waste metrics.  Results are cached in `$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh` and rebuild automatically when history changes.
+`zpwr aliasrank [N]` mines shell history to rank alias usage.  Since `zsh-expand` expands aliases before they hit history, aliasrank matches expanded commands against alias definitions (reverse lookup).  Shows the top N most-used aliases with frequency bars, lists never-matched aliases (candidates for removal), and identifies frequently typed commands that have no alias (candidates for creation).  Results are cached in `$ZPWR_LOCAL/` and rebuild automatically when history grows by 1000+ lines.  Use `--reset` to force a cache rebuild.
 
 ```sh
-zpwr aliasrank       # top 20 (default)
-zpwr aliasrank 50    # top 50
+zpwr aliasrank -h       # cyberpunk help
+zpwr aliasrank          # top 20 (default)
+zpwr aliasrank 50       # top 50
+zpwr aliasrank --reset  # clear cache and rebuild
+```
+
+## Function Rank -- zpwr funcrank
+`zpwr funcrank [N]` ranks functions and zpwr verbs by history usage.  Shows top N most-called functions, top N most-used zpwr verbs (parsed from `zpwr <verb>` history entries), lists never-used zpwr verbs (candidates for discovery), and lists unused autoloaded functions that were never called directly.  Shares the same history cache as aliasrank.
+
+```sh
+zpwr funcrank -h       # cyberpunk help
+zpwr funcrank          # top 20 (default)
+zpwr funcrank 40       # top 40
+zpwr funcrank --reset  # clear cache and rebuild
 ```
 
 ## File Watcher -- zpwr watch
 `zpwr watch <glob> <command>` watches files for changes using `fswatch` (macOS) or `inotifywait` (Linux) and runs a command on each change.  Shows trigger count, timestamp, changed filename, and execution time.
 
 ```sh
-zpwr watch '*.zsh' 'zpwr recompile'
+zpwr watch -h                          # cyberpunk help
+zpwr watch '*.zsh' 'zpwr recompile'   # recompile on zsh change
 zpwr watch 'src/**/*.ts' 'npm run build'
 zpwr watch 'Makefile' 'make'
+zpwr watch '.' 'echo changed'         # watch entire directory
 ```
 
 ## Command Replay -- zpwr replay
 `zpwr replay [N] [mode]` replays the last N commands from history.  Three modes: `preview` (default) lists commands without executing, `exec` runs them in the current shell with per-command timing, and `tmux` opens a new tmux split pane and plays them with a delay between each.
 
 ```sh
+zpwr replay -h         # cyberpunk help with mode docs
 zpwr replay 10         # preview last 10 commands
-zpwr replay 10 exec    # execute in current shell
+zpwr replay 20         # preview last 20
+zpwr replay 5 exec     # execute last 5 with timing
 zpwr replay 10 tmux    # replay in new tmux pane
 ```
+
+All new commands support `-h`/`--help` with cyberpunk-styled output matching the temprs aesthetic -- ASCII banners, signal bars, `//` separators, and full option documentation.
 
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.

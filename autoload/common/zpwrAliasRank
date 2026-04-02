@@ -9,6 +9,49 @@ function zpwrAliasRank(){
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
 
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C} █████╗ ██╗     ██╗ █████╗ ███████╗    ██████╗  █████╗ ███╗   ██╗██╗  ██╗${N}"
+        print " ${C}██╔══██╗██║     ██║██╔══██╗██╔════╝    ██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝${N}"
+        print " ${M}███████║██║     ██║███████║███████╗     ██████╔╝███████║██╔██╗ ██║█████╔╝${N}"
+        print " ${M}██╔══██║██║     ██║██╔══██║╚════██║     ██╔══██╗██╔══██║██║╚██╗██║██╔═██╗${N}"
+        print " ${C}██║  ██║███████╗██║██║  ██║███████║     ██║  ██║██║  ██║██║ ╚████║██║  ██╗${N}"
+        print " ${C}╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}ALIAS RANK${N}                   ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> ALIAS USAGE PROFILER // REVERSE EXPANSION MATCH <<${N}"
+        print ""
+        print ""
+        print "  Mine history to rank alias usage by matching expanded commands."
+        print "  Since zsh-expand expands aliases pre-exec, this matches history"
+        print "  against alias values (reverse lookup) instead of alias names."
+        print ""
+        print "  ${B}USAGE:${N} zpwr aliasrank ${D}[OPTIONS] [N]${N}"
+        print ""
+        print "  ${D}── DATA I/O ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-r, --reset${N}                                      ${D}// Clear cache and rebuild${N}"
+        print "  ${C}N${N}                                                 ${D}// Top N entries (default: 20)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr aliasrank${N}                                   ${D}// top 20 by expanded usage${N}"
+        print "  ${C}zpwr aliasrank 50${N}                                ${D}// top 50${N}"
+        print "  ${C}zpwr aliasrank --reset${N}                           ${D}// force cache rebuild${N}"
+        print "  ${C}zpwr aliasrank --reset 50${N}                        ${D}// rebuild then show top 50${N}"
+        print ""
+        print "  ${D}── CACHE ────────────────────────────────────────────────────────────${N}"
+        print "  ${D}rebuilds when history grows by 1000+ lines${N}"
+        print "  ${D}\$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh${N}             ${D}// command counts${N}"
+        print "  ${D}\$ZPWR_LOCAL/zpwr-rank-stamp${N}                      ${D}// history line watermark${N}"
+        print ""
+        return 0
+    fi
+    if [[ "$1" == "--reset" || "$1" == "-r" ]]; then
+        command rm -f "$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh" "$ZPWR_LOCAL/zpwr-verbrank-cache.zsh" "$ZPWR_LOCAL/zpwr-rank-stamp"
+        print "  ${G}cache cleared${N}"
+        shift
+    fi
     local -i top_n=${1:-20}
 
     print ""
@@ -21,17 +64,21 @@ function zpwrAliasRank(){
     print " ${D}┌──────────────────────────────────────────────────────────────────────────────┐${N}"
     print " ${D}│${N} ${G}MINING${N}  ${D}//${N} ${C}${HISTFILE:t}${N}  ${D}//${N} ${M}$(wc -l < "$HISTFILE" 2>/dev/null | tr -d ' ') lines${N}                      ${D}│${N}"
     print " ${D}└──────────────────────────────────────────────────────────────────────────────┘${N}"
-    print "  ${D}>> analyzing command frequency against alias definitions <<${N}"
+    print "  ${D}>> matching expanded commands against alias definitions <<${N}"
     print ""
 
-    # count first words in history — cached for speed
+    # build cmd_counts from cache or history
     local -A cmd_counts
-    local word
+    local word line k v key
     local cache_file="$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh"
     local -i need_rebuild=1
 
-    if [[ -r "$cache_file" && -r "$HISTFILE" ]]; then
-        if [[ "$cache_file" -nt "$HISTFILE" ]]; then
+    local stamp_file="$ZPWR_LOCAL/zpwr-rank-stamp"
+    if [[ -r "$cache_file" && -r "$stamp_file" ]]; then
+        local -i cached_hist_lines=$(<"$stamp_file")
+        local hist_wc=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        local -i current_hist_lines=${hist_wc//[^0-9]/}
+        if (( current_hist_lines - cached_hist_lines < 1000 )); then
             need_rebuild=0
         fi
     fi
@@ -40,60 +87,68 @@ function zpwrAliasRank(){
         print "  ${D}>> parsing ${HISTFILE:t} (this may take a moment, result is cached) <<${N}"
         print ""
         while IFS= read -r line; do
-            # strip leading timestamp if present (: 1234:0;cmd)
             [[ "$line" == ": "* ]] && line="${line#*;}"
-            # get first word
             word="${line%%[[:space:]]*}"
             word="${word%%[;|&]*}"
             [[ -z "$word" ]] && continue
-            # only allow simple alphanumeric words, hyphens, underscores, dots, slashes
             [[ "$word" != [[:alnum:]_./-]## ]] && continue
             (( cmd_counts[$word]++ ))
         done < "$HISTFILE"
-
-        # write cache
         {
             for k v in ${(kv)cmd_counts}; do
-                print -r "cmd_counts[${k}]=${v}"
+                print -r -- "${k}=${v}"
             done
         } >| "$cache_file"
+        local hwc=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        print -r "${hwc//[^0-9]/}" >| "$stamp_file"
         print "  ${G}>> cached to ${cache_file:t} <<${N}"
         print ""
     else
         print "  ${D}>> loading from cache (rm ${cache_file:t} to rebuild) <<${N}"
         print ""
         while IFS='=' read -r k v; do
-            # k is cmd_counts[word], v is count
-            local key="${k#cmd_counts\[}"
-            key="${key%\]}"
-            cmd_counts[$key]=$v
+            cmd_counts[$k]=$v
         done < "$cache_file"
     fi
 
-    # ── TOP USED ALIASES ──────────────────────────────────────
-    print "  ${C}── TOP ${top_n} MOST USED ALIASES ─────────────────────────────────────────${N}"
+    # ── REVERSE ALIAS MATCH ──────────────────────────────────
+    # match history first-words against alias EXPANSIONS (first word of value)
+    # since zsh-expand expands aliases before they hit history
+    print "  ${C}── TOP ${top_n} ALIASES BY EXPANDED USAGE ────────────────────────────────${N}"
     print ""
 
     local -a alias_usage=()
-    local k v
-    for k v in ${(kv)aliases}; do
-        local -i cnt=${cmd_counts[$k]:-0}
-        (( cnt > 0 )) && alias_usage+=( "$cnt $k" )
+    local alias_name alias_val alias_first_word
+    local -i cnt
+    for alias_name alias_val in ${(kv)aliases}; do
+        # get first word of expansion
+        alias_first_word="${alias_val%%[[:space:]]*}"
+        # strip quoting
+        alias_first_word="${alias_first_word#\'}"
+        alias_first_word="${alias_first_word%\'}"
+        alias_first_word="${alias_first_word#\"}"
+        alias_first_word="${alias_first_word%\"}"
+        cnt=${cmd_counts[$alias_first_word]:-0}
+        # also check direct alias name usage
+        local -i direct=${cmd_counts[$alias_name]:-0}
+        (( direct > cnt )) && cnt=$direct
+        (( cnt > 0 )) && alias_usage+=( "$cnt $alias_name")
     done
     alias_usage=( ${(On)alias_usage} )
 
-    local -i max_cnt=${${alias_usage[1]}%% *}
-    local -i i
+    local -i max_cnt=0
+    (( $#alias_usage > 0 )) && max_cnt=${alias_usage[1]%% *}
+    local -i i bar_len
+    local name expansion bar
     for (( i = 1; i <= top_n && i <= $#alias_usage; i++ )); do
-        local cnt=${alias_usage[i]%% *}
-        local name=${alias_usage[i]#* }
-        local expansion="${aliases[$name]}"
-        # truncate expansion
+        cnt=${alias_usage[i]%% *}
+        name=${alias_usage[i]#* }
+        expansion="${aliases[$name]}"
         (( ${#expansion} > 35 )) && expansion="${expansion[1,32]}..."
 
-        local -i bar_len=$(( max_cnt > 0 ? cnt * 30 / max_cnt : 0 ))
+        bar_len=$(( max_cnt > 0 ? cnt * 30 / max_cnt : 0 ))
         (( bar_len < 1 && cnt > 0 )) && bar_len=1
-        local bar="${G}$(printf '█%.0s' {1..$bar_len})${N}"
+        bar="${G}$(printf '█%.0s' {1..$bar_len})${N}"
 
         print -n "  ${D}$(printf '%3d.' $i)${N} "
         print -n "${B}$(printf '%-15s' "$name")${N} "
@@ -102,21 +157,26 @@ function zpwrAliasRank(){
         print "  ${D}${expansion}${N}"
     done
 
-    # ── NEVER USED ALIASES ────────────────────────────────────
+    # ── NEVER MATCHED ALIASES ─────────────────────────────────
     print ""
-    print "  ${C}── NEVER USED ALIASES ${D}(candidates for removal)${N} ──────────────────────${N}"
+    print "  ${C}── NEVER MATCHED ALIASES ${D}(candidates for removal)${N} ─────────────────────${N}"
     print ""
 
     local -a unused=()
-    for k v in ${(kv)aliases}; do
-        local -i cnt=${cmd_counts[$k]:-0}
-        if (( cnt == 0 )); then
-            unused+=( "$k" )
-        fi
+    local -i shown=0
+    for alias_name alias_val in ${(kv)aliases}; do
+        alias_first_word="${alias_val%%[[:space:]]*}"
+        alias_first_word="${alias_first_word#\'}"
+        alias_first_word="${alias_first_word%\'}"
+        alias_first_word="${alias_first_word#\"}"
+        alias_first_word="${alias_first_word%\"}"
+        cnt=${cmd_counts[$alias_first_word]:-0}
+        local -i direct=${cmd_counts[$alias_name]:-0}
+        (( direct > cnt )) && cnt=$direct
+        (( cnt == 0 )) && unused+=( "$alias_name" )
     done
     unused=( ${(o)unused} )
 
-    local -i shown=0
     local line_buf=""
     for k in $unused; do
         if [[ -n "$line_buf" ]]; then
@@ -132,7 +192,7 @@ function zpwrAliasRank(){
     done
     [[ -n "$line_buf" ]] && print "  ${D}//${N} ${Y}${line_buf}${N}"
     print ""
-    print "  ${D}${shown} aliases never used in history${N}"
+    print "  ${D}${shown} aliases never matched in history${N}"
 
     # ── MISSING ALIASES ───────────────────────────────────────
     print ""
@@ -140,8 +200,18 @@ function zpwrAliasRank(){
     print ""
 
     local -a unaliased=()
+    # build set of alias first-words for quick lookup
+    local -A alias_first_words
+    for alias_name alias_val in ${(kv)aliases}; do
+        alias_first_word="${alias_val%%[[:space:]]*}"
+        alias_first_word="${alias_first_word#\'}"
+        alias_first_word="${alias_first_word%\'}"
+        alias_first_words[$alias_first_word]=1
+        alias_first_words[$alias_name]=1
+    done
+
     for k v in ${(kv)cmd_counts}; do
-        # skip if alias exists, skip short commands, skip builtins
+        (( ${+alias_first_words[$k]} )) && continue
         (( ${+aliases[$k]} )) && continue
         (( ${#k} < 4 )) && continue
         [[ "$k" == (sudo|command|builtin|source|eval|exec|noglob|nocorrect) ]] && continue
@@ -149,14 +219,15 @@ function zpwrAliasRank(){
     done
     unaliased=( ${(On)unaliased} )
 
-    local -i ua_max=${${unaliased[1]}%% *}
+    local -i ua_max=0
+    (( $#unaliased > 0 )) && ua_max=${unaliased[1]%% *}
     for (( i = 1; i <= top_n && i <= $#unaliased; i++ )); do
-        local cnt=${unaliased[i]%% *}
-        local name=${unaliased[i]#* }
+        cnt=${unaliased[i]%% *}
+        name=${unaliased[i]#* }
 
-        local -i bar_len=$(( ua_max > 0 ? cnt * 25 / ua_max : 0 ))
+        bar_len=$(( ua_max > 0 ? cnt * 25 / ua_max : 0 ))
         (( bar_len < 1 && cnt > 0 )) && bar_len=1
-        local bar="${M}$(printf '█%.0s' {1..$bar_len})${N}"
+        bar="${M}$(printf '█%.0s' {1..$bar_len})${N}"
 
         print -n "  ${D}$(printf '%3d.' $i)${N} "
         print -n "${B}$(printf '%-20s' "$name")${N} "
@@ -168,14 +239,9 @@ function zpwrAliasRank(){
     print ""
     print "  ${C}══════════════════════════════════════════════════════════════════════════${N}"
     print "  ${B}total aliases:${N}     ${C}${#aliases}${N}"
-    print "  ${B}used aliases:${N}      ${G}$(( ${#aliases} - shown ))${N}"
-    print "  ${B}unused aliases:${N}    ${Y}${shown}${N}  ${D}($(( shown * 100 / ${#aliases} ))% waste)${N}"
+    print "  ${B}matched:${N}           ${G}$(( ${#aliases} - shown ))${N}"
+    print "  ${B}unmatched:${N}         ${Y}${shown}${N}  ${D}($(( shown * 100 / ${#aliases} ))% unused)${N}"
     print "  ${B}missing aliases:${N}   ${M}${#unaliased} candidates${N}"
-    local -i total_alias_hits=0
-    for entry in $alias_usage; do
-        (( total_alias_hits += ${entry%% *} ))
-    done
-    print "  ${B}alias keystrokes saved:${N}  ${G}~${total_alias_hits} invocations${N}"
     print "  ${C}══════════════════════════════════════════════════════════════════════════${N}"
     print ""
 }

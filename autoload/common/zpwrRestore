@@ -7,9 +7,52 @@ function zpwrRestore(){
 
     local snapdir="$ZPWR_LOCAL/snapshots"
 
-    # colors
-    local C='\033[36m' G='\033[32m' Y='\033[33m' R='\033[31m'
-    local M='\033[35m' B='\033[1m' D='\033[2m' N='\033[0m'
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██████╗ ███████╗███████╗████████╗ ██████╗ ██████╗ ███████╗${N}"
+        print " ${C}██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝${N}"
+        print " ${M}██████╔╝█████╗  ███████╗   ██║   ██║   ██║██████╔╝█████╗${N}"
+        print " ${M}██╔══██╗██╔══╝  ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝${N}"
+        print " ${C}██║  ██║███████╗███████║   ██║   ╚██████╔╝██║  ██║███████╗${N}"
+        print " ${C}╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}RESTORE${N}                  ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> ENVIRONMENT RESTORE // SELECTIVE RECOVERY <<${N}"
+        print ""
+        print ""
+        print "  Restore terminal environment from a snapshot. With no args,"
+        print "  lists available snapshots. With a name, restores all or"
+        print "  selected components."
+        print ""
+        print "  ${B}USAGE:${N} zpwr restore ${D}[NAME] [COMPONENT...]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}NAME${N}                                             ${D}// Snapshot to restore${N}"
+        print "  ${C}COMPONENT${N}                                        ${D}// One or more components${N}"
+        print ""
+        print "  ${D}── COMPONENTS ───────────────────────────────────────────────────────${N}"
+        print "  ${C}all${N}                                              ${D}// Restore everything (default)${N}"
+        print "  ${C}hash${N}                                             ${D}// Named directories${N}"
+        print "  ${C}aliases${N}                                          ${D}// Regular, global, suffix aliases${N}"
+        print "  ${C}env${N}                                              ${D}// Environment variables${N}"
+        print "  ${C}tmux${N}                                             ${D}// Stage tmux-resurrect file${N}"
+        print "  ${C}vim${N}                                              ${D}// Vim session files${N}"
+        print "  ${C}history${N}                                          ${D}// Merge history entries${N}"
+        print "  ${C}dirs${N}                                             ${D}// cd to snapshot pwd${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr restore${N}                                     ${D}// list all snapshots${N}"
+        print "  ${C}zpwr restore myproject${N}                           ${D}// restore everything${N}"
+        print "  ${C}zpwr restore myproject aliases env${N}               ${D}// restore only aliases+env${N}"
+        print "  ${C}zpwr restore myproject dirs${N}                      ${D}// just cd to saved pwd${N}"
+        print ""
+        return 0
+    fi
 
     printf "\n"
     printf "${C} ██████╗ ███████╗███████╗████████╗ ██████╗ ██████╗ ███████╗${N}\n"

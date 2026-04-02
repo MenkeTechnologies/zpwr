@@ -148,6 +148,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[environmentcachesearch]='zpwrFzfEnv=search all cached aliases, parameters, builtins, keywords and functions'
     ZPWR_VERBS[figletfonts]='zpwrFigletfonts=show all figlet fonts'
     ZPWR_VERBS[flame]='zpwrFlame=startup flame chart from zprof data'
+    ZPWR_VERBS[funcrank]='zpwrFuncRank=rank functions and zpwr verbs by history usage'
     ZPWR_VERBS[findsearch]='zpwrFindFzfNoZLEC=c find drive for file'
     ZPWR_VERBS[findsearchedit]='zpwrFindFzfEditNoZLEC=c edit find drive for file'
     ZPWR_VERBS[fordir]='zpwrFordir=run first arg in following dirs'

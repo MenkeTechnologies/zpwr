@@ -5,12 +5,49 @@ function zpwrReplay(){
     builtin emulate -L zsh
     setopt extendedglob
 
-    local -i count=${1:-10}
-    local mode="${2:-preview}"  # preview, exec, tmux
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
 
-    # colors
-    local C='\033[36m' G='\033[32m' Y='\033[33m' R='\033[31m'
-    local M='\033[35m' B='\033[1m' D='\033[2m' N='\033[0m'
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██████╗ ███████╗██████╗ ██╗      █████╗ ██╗   ██╗${N}"
+        print " ${C}██╔══██╗██╔════╝██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝${N}"
+        print " ${M}██████╔╝█████╗  ██████╔╝██║     ███████║ ╚████╔╝${N}"
+        print " ${M}██╔══██╗██╔══╝  ██╔═══╝ ██║     ██╔══██║  ╚██╔╝${N}"
+        print " ${C}██║  ██║███████╗██║     ███████╗██║  ██║   ██║${N}"
+        print " ${C}╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}REPLAY${N}                   ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> COMMAND REPLAY ENGINE // HISTORY PLAYBACK <<${N}"
+        print ""
+        print ""
+        print "  Replay the last N commands from history in three modes:"
+        print "  preview (list only), exec (run with timing), tmux (new pane)."
+        print ""
+        print "  ${B}USAGE:${N} zpwr replay ${D}[N] [MODE]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}N${N}                                                 ${D}// Number of commands (default: 10)${N}"
+        print "  ${C}MODE${N}                                              ${D}// preview, exec, or tmux${N}"
+        print ""
+        print "  ${D}── MODES ────────────────────────────────────────────────────────────${N}"
+        print "  ${C}preview${N}                                          ${D}// list commands (default, safe)${N}"
+        print "  ${C}exec${N}                                             ${D}// run in current shell with timing${N}"
+        print "  ${C}tmux${N}                                             ${D}// open new tmux pane and replay${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr replay${N}                                      ${D}// preview last 10${N}"
+        print "  ${C}zpwr replay 20${N}                                   ${D}// preview last 20${N}"
+        print "  ${C}zpwr replay 5 exec${N}                               ${D}// execute last 5 with timing${N}"
+        print "  ${C}zpwr replay 10 tmux${N}                              ${D}// replay in tmux split pane${N}"
+        print ""
+        return 0
+    fi
+
+    local -i count=${1:-10}
+    local mode="${2:-preview}"
 
     printf "\n"
     printf " ${C}██████╗ ███████╗██████╗ ██╗      █████╗ ██╗   ██╗${N}\n"

@@ -5,9 +5,46 @@ function zpwrDoctor(){
     builtin emulate -L zsh
     setopt extendedglob
 
-    # colors
-    local C='\033[36m' G='\033[32m' Y='\033[33m' R='\033[31m'
-    local M='\033[35m' B='\033[1m' D='\033[2m' N='\033[0m'
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██████╗  ██████╗  ██████╗████████╗ ██████╗ ██████╗${N}"
+        print " ${C}██╔══██╗██╔═══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗${N}"
+        print " ${M}██║  ██║██║   ██║██║        ██║   ██║   ██║██████╔╝${N}"
+        print " ${M}██║  ██║██║   ██║██║        ██║   ██║   ██║██╔══██╗${N}"
+        print " ${C}██████╔╝╚██████╔╝╚██████╗   ██║   ╚██████╔╝██║  ██║${N}"
+        print " ${C}╚═════╝  ╚═════╝  ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}DOCTOR${N}               ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> ENVIRONMENT HEALTH CHECK // FULL DIAGNOSTIC <<${N}"
+        print ""
+        print ""
+        print "  Scan the zpwr environment for common issues: stale .zwc files,"
+        print "  duplicate PATH/FPATH, broken symlinks, invalid named dirs,"
+        print "  missing dependencies, p10k pollution, and config link integrity."
+        print ""
+        print "  ${B}USAGE:${N} zpwr doctor ${D}[OPTIONS]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print ""
+        print "  ${D}── CHECKS ───────────────────────────────────────────────────────────${N}"
+        print "  ${D}stale .zwc compiled files${N}                        ${D}// fix: zpwr recompile${N}"
+        print "  ${D}zcompdump freshness${N}                              ${D}// fix: zpwr regenzsh${N}"
+        print "  ${D}duplicate/missing PATH entries${N}"
+        print "  ${D}duplicate/missing FPATH entries${N}"
+        print "  ${D}broken symlinks in \$ZPWR${N}"
+        print "  ${D}invalid named directories${N}"
+        print "  ${D}p10k/gitstatus named dir pollution${N}"
+        print "  ${D}missing dependencies (git, eza, fzf, tmux, perl, python3)${N}"
+        print "  ${D}history file and backups${N}"
+        print "  ${D}config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh)${N}"
+        print ""
+        return 0
+    fi
 
     local -i warnings=0 errors=0 fixed=0 checks=0
 

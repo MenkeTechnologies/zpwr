@@ -5,6 +5,44 @@ function zpwrBench(){
     builtin emulate -L zsh
     builtin zmodload zsh/datetime
 
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗██████╗ ██╗    ██╗██████╗     ██████╗ ███████╗███╗   ██╗ ██████╗██╗  ██╗${N}"
+        print " ${C}╚══███╔╝██╔══██╗██║    ██║██╔══██╗    ██╔══██╗██╔════╝████╗  ██║██╔════╝██║  ██║${N}"
+        print " ${M}  ███╔╝ ██████╔╝██║ █╗ ██║██████╔╝    ██████╔╝█████╗  ██╔██╗ ██║██║     ███████║${N}"
+        print " ${M} ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗    ██╔══██╗██╔══╝  ██║╚██╗██║██║     ██╔══██║${N}"
+        print " ${C}███████╗██║     ╚███╔███╔╝██║  ██║    ██████╔╝███████╗██║ ╚████║╚██████╗██║  ██║${N}"
+        print " ${C}╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝  ╚═╝    ╚═════╝ ╚══════╝╚═╝  ╚═══╝ ╚═════╝╚═╝  ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}BENCH${N}                        ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> STARTUP PERFORMANCE PROFILER // FULL SPECTRUM <<${N}"
+        print ""
+        print ""
+        print "  Benchmark shell startup with percentile stats, phase breakdown,"
+        print "  baseline comparison, and persistent run history."
+        print ""
+        print "  ${B}USAGE:${N} zpwr bench ${D}[OPTIONS] [N]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}N${N}                                                 ${D}// Number of iterations (default: 10)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr bench${N}                                       ${D}// 10 iterations${N}"
+        print "  ${C}zpwr bench 5${N}                                     ${D}// 5 iterations${N}"
+        print "  ${C}zpwr bench 20${N}                                    ${D}// 20 iterations for stable p99${N}"
+        print ""
+        print "  ${D}── DATA ─────────────────────────────────────────────────────────────${N}"
+        print "  ${D}\$ZPWR_LOCAL/zpwr-bench-baseline.txt${N}              ${D}// saved baseline${N}"
+        print "  ${D}\$ZPWR_LOCAL/zpwr-bench-history.txt${N}               ${D}// run history log${N}"
+        print ""
+        return 0
+    fi
+
     local -i runs=${1:-10}
     local -a prompt_times startup_times run_details
     local baseline="$ZPWR_LOCAL/zpwr-bench-baseline.txt"

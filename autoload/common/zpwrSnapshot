@@ -5,12 +5,49 @@ function zpwrSnapshot(){
     builtin emulate -L zsh
     setopt extendedglob
 
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗███╗   ██╗ █████╗ ██████╗ ███████╗██╗  ██╗ ██████╗ ████████╗${N}"
+        print " ${C}██╔════╝████╗  ██║██╔══██╗██╔══██╗██╔════╝██║  ██║██╔═══██╗╚══██╔══╝${N}"
+        print " ${M}███████╗██╔██╗ ██║███████║██████╔╝███████╗███████║██║   ██║   ██║${N}"
+        print " ${M}╚════██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══██║██║   ██║   ██║${N}"
+        print " ${C}███████║██║ ╚████║██║  ██║██║     ███████║██║  ██║╚██████╔╝   ██║${N}"
+        print " ${C}╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}SNAPSHOT${N}                 ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> ENVIRONMENT CHECKPOINT // FULL CAPTURE <<${N}"
+        print ""
+        print ""
+        print "  Capture the full terminal environment to a portable snapshot."
+        print ""
+        print "  ${B}USAGE:${N} zpwr snapshot ${D}[NAME]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}NAME${N}                                             ${D}// Snapshot name (default: timestamp)${N}"
+        print ""
+        print "  ${D}── CAPTURED ─────────────────────────────────────────────────────────${N}"
+        print "  ${D}hash dirs, aliases (regular/global/suffix), env vars, ZPWR_VARS${N}"
+        print "  ${D}shell history, dir stack, git status, vim sessions${N}"
+        print "  ${D}tmux sessions/windows/panes + tmux-resurrect state${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr snapshot${N}                                    ${D}// timestamp name${N}"
+        print "  ${C}zpwr snapshot myproject${N}                          ${D}// custom name${N}"
+        print "  ${C}zpwr snapshot before-refactor${N}                    ${D}// meaningful name${N}"
+        print ""
+        print "  ${D}── STORAGE ──────────────────────────────────────────────────────────${N}"
+        print "  ${D}\$ZPWR_LOCAL/snapshots/<name>/${N}                    ${D}// snapshot directory${N}"
+        print ""
+        return 0
+    fi
+
     local name="${1:-$(date '+%Y%m%d_%H%M%S')}"
     local snapdir="$ZPWR_LOCAL/snapshots/$name"
-
-    # colors
-    local C='\033[36m' G='\033[32m' Y='\033[33m' R='\033[31m'
-    local M='\033[35m' B='\033[1m' D='\033[2m' N='\033[0m'
 
     printf "\n"
     printf "${C} ███████╗███╗   ██╗ █████╗ ██████╗ ███████╗██╗  ██╗ ██████╗ ████████╗${N}\n"

@@ -6,9 +6,46 @@ function zpwrTop(){
     setopt extendedglob
     builtin zmodload zsh/datetime
 
-    local interval=${1:-2}
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗██████╗ ██╗    ██╗██████╗    ████████╗ ██████╗ ██████╗${N}"
+        print " ${C}╚══███╔╝██╔══██╗██║    ██║██╔══██╗   ╚══██╔══╝██╔═══██╗██╔══██╗${N}"
+        print " ${M}  ███╔╝ ██████╔╝██║ █╗ ██║██████╔╝      ██║   ██║   ██║██████╔╝${N}"
+        print " ${M} ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗      ██║   ██║   ██║██╔═══╝${N}"
+        print " ${C}███████╗██║     ╚███╔███╔╝██║  ██║      ██║   ╚██████╔╝██║${N}"
+        print " ${C}╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝  ╚═╝      ╚═╝    ╚═════╝ ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}TOP${N}                  ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> LIVE SHELL RESOURCE DASHBOARD // FULL SPECTRUM <<${N}"
+        print ""
+        print ""
+        print "  Live-updating dashboard showing memory, shell objects, paths,"
+        print "  loaded modules, git status, tmux info, and largest functions."
+        print "  Runs in alternate screen buffer -- press q to quit."
+        print ""
+        print "  ${B}USAGE:${N} zpwr top ${D}[OPTIONS] [INTERVAL]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}INTERVAL${N}                                         ${D}// Refresh seconds (default: 2)${N}"
+        print ""
+        print "  ${D}── CONTROLS ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}q${N}                                                ${D}// Quit and restore screen${N}"
+        print "  ${C}Ctrl-C${N}                                           ${D}// Force quit${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr top${N}                                         ${D}// refresh every 2s${N}"
+        print "  ${C}zpwr top 5${N}                                       ${D}// refresh every 5s${N}"
+        print "  ${C}zpwr top 1${N}                                       ${D}// fast refresh (more forks)${N}"
+        print ""
+        return 0
+    fi
+
+    local interval=${1:-2}
     local K=$'\033[K'
 
     # declare ALL variables once up front
