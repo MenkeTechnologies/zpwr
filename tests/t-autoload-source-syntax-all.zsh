@@ -2221,3 +2221,73 @@
     run zsh -n "$ZPWR/autoload/common/zua"
     assert $state equals 0
 }
+
+@test 'fn zpwrBench source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrBench"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTop source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrTop"
+    assert $state equals 0
+}
+
+@test 'fn zpwrDoctor source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrDoctor"
+    assert $state equals 0
+}
+
+@test 'fn zpwrFlame source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrFlame"
+    assert $state equals 0
+}
+
+@test 'fn zpwrAliasRank source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrAliasRank"
+    assert $state equals 0
+}
+
+@test 'fn zpwrFuncRank source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrFuncRank"
+    assert $state equals 0
+}
+
+@test 'fn zpwrWatch source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrWatch"
+    assert $state equals 0
+}
+
+@test 'fn zpwrReplay source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrReplay"
+    assert $state equals 0
+}
+
+@test 'fn zpwrSnapshot source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrSnapshot"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTrace source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrTrace"
+    assert $state equals 0
+}
+
+@test 'fn zpwrDeps source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrDeps"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTailLog source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrTailLog"
+    assert $state equals 0
+}
+
+@test 'fn zpwrStudy source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrStudy"
+    assert $state equals 0
+}
+
+@test 'fn zpwrWizard source syntax valid' {
+    run zsh -n "$ZPWR/autoload/common/zpwrWizard"
+    assert $state equals 0
+}

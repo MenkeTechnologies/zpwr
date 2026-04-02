@@ -2663,3 +2663,87 @@
     assert $state equals 0
     assert "$output" is_not_empty
 }
+
+@test 'fn zpwrBench body non-empty' {
+    run functions zpwrBench
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrTop body non-empty' {
+    run functions zpwrTop
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrDoctor body non-empty' {
+    run functions zpwrDoctor
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrFlame body non-empty' {
+    run functions zpwrFlame
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrAliasRank body non-empty' {
+    run functions zpwrAliasRank
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrFuncRank body non-empty' {
+    run functions zpwrFuncRank
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrWatch body non-empty' {
+    run functions zpwrWatch
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrReplay body non-empty' {
+    run functions zpwrReplay
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrSnapshot body non-empty' {
+    run functions zpwrSnapshot
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrTrace body non-empty' {
+    run functions zpwrTrace
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrDeps body non-empty' {
+    run functions zpwrDeps
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrTailLog body non-empty' {
+    run functions zpwrTailLog
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrStudy body non-empty' {
+    run functions zpwrStudy
+    assert $state equals 0
+    assert "$output" is_not_empty
+}
+
+@test 'fn zpwrWizard body non-empty' {
+    run functions zpwrWizard
+    assert $state equals 0
+    assert "$output" is_not_empty
+}

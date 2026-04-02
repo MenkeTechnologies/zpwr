@@ -2221,3 +2221,73 @@
     run test -n "${functions[zua]+x}"
     assert $state equals 0
 }
+
+@test 'fn zpwrBench is defined' {
+    run test -n "${functions[zpwrBench]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTop is defined' {
+    run test -n "${functions[zpwrTop]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrDoctor is defined' {
+    run test -n "${functions[zpwrDoctor]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrFlame is defined' {
+    run test -n "${functions[zpwrFlame]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrAliasRank is defined' {
+    run test -n "${functions[zpwrAliasRank]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrFuncRank is defined' {
+    run test -n "${functions[zpwrFuncRank]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrWatch is defined' {
+    run test -n "${functions[zpwrWatch]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrReplay is defined' {
+    run test -n "${functions[zpwrReplay]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrSnapshot is defined' {
+    run test -n "${functions[zpwrSnapshot]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTrace is defined' {
+    run test -n "${functions[zpwrTrace]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrDeps is defined' {
+    run test -n "${functions[zpwrDeps]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTailLog is defined' {
+    run test -n "${functions[zpwrTailLog]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrStudy is defined' {
+    run test -n "${functions[zpwrStudy]+x}"
+    assert $state equals 0
+}
+
+@test 'fn zpwrWizard is defined' {
+    run test -n "${functions[zpwrWizard]+x}"
+    assert $state equals 0
+}

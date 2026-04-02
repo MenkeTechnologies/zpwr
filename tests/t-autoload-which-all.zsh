@@ -2221,3 +2221,73 @@
     run which zua
     assert $state equals 0
 }
+
+@test 'which zpwrBench found' {
+    run which zpwrBench
+    assert $state equals 0
+}
+
+@test 'which zpwrTop found' {
+    run which zpwrTop
+    assert $state equals 0
+}
+
+@test 'which zpwrDoctor found' {
+    run which zpwrDoctor
+    assert $state equals 0
+}
+
+@test 'which zpwrFlame found' {
+    run which zpwrFlame
+    assert $state equals 0
+}
+
+@test 'which zpwrAliasRank found' {
+    run which zpwrAliasRank
+    assert $state equals 0
+}
+
+@test 'which zpwrFuncRank found' {
+    run which zpwrFuncRank
+    assert $state equals 0
+}
+
+@test 'which zpwrWatch found' {
+    run which zpwrWatch
+    assert $state equals 0
+}
+
+@test 'which zpwrReplay found' {
+    run which zpwrReplay
+    assert $state equals 0
+}
+
+@test 'which zpwrSnapshot found' {
+    run which zpwrSnapshot
+    assert $state equals 0
+}
+
+@test 'which zpwrTrace found' {
+    run which zpwrTrace
+    assert $state equals 0
+}
+
+@test 'which zpwrDeps found' {
+    run which zpwrDeps
+    assert $state equals 0
+}
+
+@test 'which zpwrTailLog found' {
+    run which zpwrTailLog
+    assert $state equals 0
+}
+
+@test 'which zpwrStudy found' {
+    run which zpwrStudy
+    assert $state equals 0
+}
+
+@test 'which zpwrWizard found' {
+    run which zpwrWizard
+    assert $state equals 0
+}

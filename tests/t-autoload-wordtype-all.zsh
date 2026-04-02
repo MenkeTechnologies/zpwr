@@ -2663,3 +2663,87 @@
     assert $state equals 0
     assert "$output" contains function
 }
+
+@test 'whence -w zpwrBench is function' {
+    run whence -w zpwrBench
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrTop is function' {
+    run whence -w zpwrTop
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrDoctor is function' {
+    run whence -w zpwrDoctor
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrFlame is function' {
+    run whence -w zpwrFlame
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrAliasRank is function' {
+    run whence -w zpwrAliasRank
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrFuncRank is function' {
+    run whence -w zpwrFuncRank
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrWatch is function' {
+    run whence -w zpwrWatch
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrReplay is function' {
+    run whence -w zpwrReplay
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrSnapshot is function' {
+    run whence -w zpwrSnapshot
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrTrace is function' {
+    run whence -w zpwrTrace
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrDeps is function' {
+    run whence -w zpwrDeps
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrTailLog is function' {
+    run whence -w zpwrTailLog
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrStudy is function' {
+    run whence -w zpwrStudy
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'whence -w zpwrWizard is function' {
+    run whence -w zpwrWizard
+    assert $state equals 0
+    assert "$output" contains function
+}
