@@ -1,0 +1,199 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrSnapshot(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local name="${1:-$(date '+%Y%m%d_%H%M%S')}"
+    local snapdir="$ZPWR_LOCAL/snapshots/$name"
+
+    # colors
+    local C='\033[36m' G='\033[32m' Y='\033[33m' R='\033[31m'
+    local M='\033[35m' B='\033[1m' D='\033[2m' N='\033[0m'
+
+    printf "\n"
+    printf "${C} ███████╗███╗   ██╗ █████╗ ██████╗ ███████╗██╗  ██╗ ██████╗ ████████╗${N}\n"
+    printf "${C} ██╔════╝████╗  ██║██╔══██╗██╔══██╗██╔════╝██║  ██║██╔═══██╗╚══██╔══╝${N}\n"
+    printf "${M} ███████╗██╔██╗ ██║███████║██████╔╝███████╗███████║██║   ██║   ██║${N}\n"
+    printf "${M} ╚════██║██║╚██╗██║██╔══██║██╔═══╝ ╚════██║██╔══██║██║   ██║   ██║${N}\n"
+    printf "${C} ███████║██║ ╚████║██║  ██║██║     ███████║██║  ██║╚██████╔╝   ██║${N}\n"
+    printf "${C} ╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝${N}\n"
+    printf " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}\n"
+    printf " ${D}│${N} ${G}CAPTURING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}              ${D}│${N}\n" "$name" "$(date '+%Y-%m-%d %H:%M:%S')"
+    printf " ${D}└──────────────────────────────────────────────────────────────────────┘${N}\n"
+
+    command mkdir -p "$snapdir"
+
+    # manifest
+    local manifest="$snapdir/manifest.txt"
+    {
+        echo "name=$name"
+        echo "date=$(date '+%Y-%m-%d %H:%M:%S')"
+        echo "host=$(hostname -s)"
+        echo "user=$USER"
+        echo "zsh=$ZSH_VERSION"
+        echo "zpwr=$ZPWR"
+        echo "pwd=$PWD"
+    } >| "$manifest"
+
+    local -i count=0
+
+    # 1. hash dirs
+    printf "  ${D}//${N} ${B}hash dirs${N}       "
+    hash -d >| "$snapdir/hash-dirs.zsh" 2>/dev/null
+    # convert hash -d output to sourceable format
+    {
+        while IFS='=' read -r k v; do
+            echo "hash -d ${k}=${v}"
+        done < "$snapdir/hash-dirs.zsh"
+    } >| "$snapdir/hash-dirs-restore.zsh"
+    (( count++ ))
+    printf "${G}captured${N}\n"
+
+    # 2. aliases
+    printf "  ${D}//${N} ${B}aliases${N}         "
+    {
+        echo "# regular aliases"
+        for k v in ${(kv)aliases}; do
+            printf "alias %s=%s\n" "${(q)k}" "${(q)v}"
+        done
+        echo "# global aliases"
+        for k v in ${(kv)galiases}; do
+            printf "alias -g %s=%s\n" "${(q)k}" "${(q)v}"
+        done
+        echo "# suffix aliases"
+        for k v in ${(kv)saliases}; do
+            printf "alias -s %s=%s\n" "${(q)k}" "${(q)v}"
+        done
+    } >| "$snapdir/aliases.zsh"
+    (( count++ ))
+    printf "${G}%d regular + %d global + %d suffix${N}\n" "${#aliases}" "${#galiases}" "${#saliases}"
+
+    # 3. environment variables
+    printf "  ${D}//${N} ${B}env vars${N}        "
+    {
+        for k v in ${(kv)parameters[(R)scalar-export]}; do
+            # skip sensitive vars
+            [[ $k == (PASSWORD|SECRET|TOKEN|AWS_SECRET*|GITHUB_TOKEN) ]] && continue
+            printf "export %s=%s\n" "$k" "${(q)v}"
+        done
+    } >| "$snapdir/env-vars.zsh"
+    (( count++ ))
+    printf "${G}%d variables${N}\n" "${#parameters[(R)scalar-export]}"
+
+    # 4. ZPWR_VARS
+    printf "  ${D}//${N} ${B}zpwr vars${N}       "
+    {
+        for k v in ${(kv)ZPWR_VARS}; do
+            printf "ZPWR_VARS[%s]=%s\n" "$k" "${(q)v}"
+        done
+    } >| "$snapdir/zpwr-vars.zsh"
+    (( count++ ))
+    printf "${G}%d entries${N}\n" "${#ZPWR_VARS}"
+
+    # 5. functions (user-defined, not autoloaded stubs)
+    printf "  ${D}//${N} ${B}functions${N}       "
+    local -i fcount=0
+    {
+        for k in ${(k)functions}; do
+            # skip completion functions, prompt functions, and zpwr autoloads
+            [[ $k == (_*|prompt_*|compdef) ]] && continue
+            # only capture functions with bodies (not autoload stubs)
+            [[ ${functions[$k]} == *"builtin autoload"* ]] && continue
+            (( fcount++ ))
+        done
+    }
+    echo "$fcount" >| "$snapdir/function-count.txt"
+    (( count++ ))
+    printf "${G}%d user functions tracked${N}\n" $fcount
+
+    # 6. shell history
+    printf "  ${D}//${N} ${B}history${N}         "
+    if [[ -f "$HISTFILE" ]]; then
+        builtin fc -W "$snapdir/history.zsh" 2>/dev/null
+        local -i hcount=$(wc -l < "$snapdir/history.zsh" 2>/dev/null)
+        (( count++ ))
+        printf "${G}%d entries${N}\n" $hcount
+    else
+        printf "${Y}skipped (no HISTFILE)${N}\n"
+    fi
+
+    # 7. tmux state
+    printf "  ${D}//${N} ${B}tmux${N}            "
+    if [[ -n "$TMUX" ]]; then
+        command mkdir -p "$snapdir/tmux"
+        # session list
+        tmux list-sessions -F '#{session_name}|#{session_windows}|#{session_width}x#{session_height}' \
+            >| "$snapdir/tmux/sessions.txt" 2>/dev/null
+        # window + pane layout
+        tmux list-windows -a -F '#{session_name}|#{window_index}|#{window_name}|#{window_layout}|#{window_active}' \
+            >| "$snapdir/tmux/windows.txt" 2>/dev/null
+        tmux list-panes -a -F '#{session_name}|#{window_index}|#{pane_index}|#{pane_current_path}|#{pane_current_command}|#{pane_active}' \
+            >| "$snapdir/tmux/panes.txt" 2>/dev/null
+        # trigger tmux-resurrect save
+        if [[ -d "$HOME/.tmux/plugins/tmux-resurrect" ]]; then
+            tmux run-shell "$HOME/.tmux/plugins/tmux-resurrect/scripts/save.sh" 2>/dev/null
+            # copy latest resurrect file
+            local latest_resurrect
+            latest_resurrect=$(command ls -t ~/.tmux/resurrect/tmux_resurrect_*.txt 2>/dev/null | head -1)
+            if [[ -n "$latest_resurrect" ]]; then
+                command cp "$latest_resurrect" "$snapdir/tmux/resurrect.txt"
+            fi
+        fi
+        local -i scount=$(wc -l < "$snapdir/tmux/sessions.txt" 2>/dev/null)
+        local -i wcount=$(wc -l < "$snapdir/tmux/windows.txt" 2>/dev/null)
+        local -i pcount=$(wc -l < "$snapdir/tmux/panes.txt" 2>/dev/null)
+        (( count++ ))
+        printf "${G}%d sessions, %d windows, %d panes${N}\n" $scount $wcount $pcount
+    else
+        printf "${Y}skipped (not in tmux)${N}\n"
+    fi
+
+    # 8. vim sessions
+    printf "  ${D}//${N} ${B}vim sessions${N}    "
+    if [[ -d "$HOME/.vim/sessions" ]]; then
+        command mkdir -p "$snapdir/vim"
+        command cp "$HOME/.vim/sessions/"*.vim "$snapdir/vim/" 2>/dev/null
+        local -i vcount=$(command ls "$snapdir/vim/"*.vim 2>/dev/null | wc -l)
+        (( count++ ))
+        printf "${G}%d sessions${N}\n" $vcount
+    else
+        printf "${Y}skipped (no sessions dir)${N}\n"
+    fi
+
+    # 9. working directories (recent dirs from dirstack)
+    printf "  ${D}//${N} ${B}dir stack${N}       "
+    {
+        echo "$PWD"
+        dirs -p 2>/dev/null
+    } >| "$snapdir/dirstack.txt"
+    (( count++ ))
+    printf "${G}%d entries${N}\n" $(wc -l < "$snapdir/dirstack.txt")
+
+    # 10. git repos status
+    printf "  ${D}//${N} ${B}git status${N}      "
+    if [[ -d "$PWD/.git" ]]; then
+        {
+            echo "repo=$PWD"
+            echo "branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
+            echo "commit=$(git rev-parse --short HEAD 2>/dev/null)"
+            echo "dirty=$(git status --porcelain 2>/dev/null | wc -l | tr -d ' ')"
+        } >| "$snapdir/git-status.txt"
+        (( count++ ))
+        printf "${G}$(git rev-parse --abbrev-ref HEAD 2>/dev/null) @ $(git rev-parse --short HEAD 2>/dev/null)${N}\n"
+    else
+        printf "${Y}skipped (not a git repo)${N}\n"
+    fi
+
+    # summary
+    local snapsize=$(du -sh "$snapdir" 2>/dev/null | cut -f1)
+    printf "\n"
+    printf "  ${D}┌──────────────────────────────────────────────────────────────────────┐${N}\n"
+    printf "  ${D}│${N} ${G}SNAPSHOT COMPLETE${N}  ${D}//${N} ${C}%d components${N}  ${D}//${N} ${M}%s${N}                    ${D}│${N}\n" $count "$snapsize"
+    printf "  ${D}│${N} ${D}saved to:${N} %s   ${D}│${N}\n" "$snapdir"
+    printf "  ${D}└──────────────────────────────────────────────────────────────────────┘${N}\n"
+    printf "\n"
+}
+
+zpwrSnapshot "$@"

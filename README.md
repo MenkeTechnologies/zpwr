@@ -46,6 +46,8 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Environment Variables](#environment-variables----system-tuning-parameters) -- System Tuning
 - [Test Suite](#diagnostics) -- Diagnostics
 - [Shell Startup Speed](#boot-time----shell-startup-speed) -- Boot Time
+- [Startup Benchmark](#startup-benchmark----zpwr-bench) -- zpwr bench
+- [Environment Snapshots](#environment-snapshots----zpwr-snapshot--zpwr-restore) -- zpwr snapshot / zpwr restore
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
@@ -772,7 +774,7 @@ zpwrExists zunit && {
 ## Boot Time -- Shell Startup Speed
 Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded functions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed -- a tighter boot sequence.
 
-ZPWR uses Powerlevel10k instant prompt to render a cached prompt in under 10ms -- well below the 100ms human perceptibility threshold.  Named directories (`hash -d`) are cached to `~/.cache/zpwr-hash-dirs.zsh` so the instant prompt resolves paths like `~ZPWR` without sourcing the full environment first.  The cache is regenerated each session by `zpwrBindDirs`.  The remaining shell initialization (env vars, aliases, autoloads, zinit plugin declarations) completes behind the visible prompt.  Turbo-deferred plugins (syntax highlighting, autosuggestions, completions) load asynchronously after the prompt is interactive.  The banner is automatically suppressed when instant prompt is active to avoid fd conflicts.  Run `zpwr environmentcounts` to see both prompt time and total startup time.
+ZPWR uses Powerlevel10k instant prompt to render a cached prompt in under 10ms -- well below the 100ms human perceptibility threshold.  Named directories (`hash -d`) are cached to `$ZPWR_LOCAL/zpwr-hash-dirs.zsh` so the instant prompt resolves paths like `~ZPWR` without sourcing the full environment first.  The cache is regenerated each session by `zpwrBindDirs`.  The remaining shell initialization (env vars, aliases, autoloads, zinit plugin declarations) completes behind the visible prompt.  Turbo-deferred plugins (syntax highlighting, autosuggestions, completions) load asynchronously after the prompt is interactive.  The banner is automatically suppressed when instant prompt is active to avoid fd conflicts.  Run `zpwr environmentcounts` to see both prompt time and total startup time.
 
 External command forks in the startup path have been systematically replaced with zsh builtins: `${commands[zsh]}` instead of `$(which zsh)`, `zf_ln` from `zsh/files` instead of `ln` for completion symlinks, `$TTY` instead of `$(tty)`, `: >|` instead of `touch` for empty file creation, and `[[ pattern ]]` instead of `echo | grep` for PATH checks.  These changes eliminate ~35ms of fork overhead per interactive shell startup.
 
@@ -780,6 +782,29 @@ With Zinit Turbo mode, despite the number of plugins and completions, total init
 ```sh
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 ```
+## Startup Benchmark -- zpwr bench
+`zpwr bench [N]` runs N shell startups (default 10) and reports detailed performance metrics with a cyberpunk-styled output.  It reports system info, environment counts (functions, completions, aliases, plugins), per-run timing with a progress bar, percentile statistics (avg, p50, p99, min, max, spread), a phase breakdown showing time spent in each startup stage (instant prompt, env+aliases, plugin declarations, compsys, options+fzf), baseline comparison with delta percentage, and a persistent run history.  Save a baseline after optimizing and future runs will show whether startup got faster or slower.
+
+```sh
+zpwr bench 5       # run 5 iterations
+zpwr bench         # default 10 iterations
+```
+
+Baselines and history are stored in `$ZPWR_LOCAL/zpwr-bench-baseline.txt` and `$ZPWR_LOCAL/zpwr-bench-history.txt`.
+
+## Environment Snapshots -- zpwr snapshot / zpwr restore
+`zpwr snapshot [name]` captures the full terminal environment into a portable snapshot stored in `$ZPWR_LOCAL/snapshots/`.  Each snapshot captures: named directories (`hash -d`), aliases (regular, global, suffix), environment variables, ZPWR_VARS, shell history, directory stack, git repo status, tmux sessions/windows/panes with tmux-resurrect integration, and vim session files.
+
+```sh
+zpwr snapshot myproject    # capture with custom name
+zpwr snapshot              # capture with timestamp name
+zpwr restore               # list all snapshots
+zpwr restore myproject     # restore everything
+zpwr restore myproject aliases env  # restore only specific components
+```
+
+Available restore components: `hash`, `aliases`, `env`, `tmux`, `vim`, `history`, `dirs`.  Tmux restore stages the resurrect file -- press `prefix+Ctrl-r` to apply.  History is merged rather than overwritten.
+
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.
 
