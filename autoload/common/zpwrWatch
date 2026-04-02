@@ -9,7 +9,7 @@ function zpwrWatch(){
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
 
-    if [[ "$1" == "-h" || "$1" == "--help" || $# -lt 2 ]]; then
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
         print " ${C}██╗    ██╗ █████╗ ████████╗ ██████╗██╗  ██╗${N}"
         print " ${C}██║    ██║██╔══██╗╚══██╔══╝██╔════╝██║  ██║${N}"
@@ -42,6 +42,12 @@ function zpwrWatch(){
         print "  ${C}zpwr watch 'Makefile' 'make'${N}                    ${D}// make on Makefile change${N}"
         print "  ${C}zpwr watch '.' 'echo changed'${N}                   ${D}// watch entire directory${N}"
         print ""
+        return 0
+    fi
+
+    if (( $# < 2 )); then
+        print "  ${R}usage: zpwr watch <glob> <command>${N}"
+        print "  ${D}run zpwr watch -h for help${N}"
         return 1
     fi
 
