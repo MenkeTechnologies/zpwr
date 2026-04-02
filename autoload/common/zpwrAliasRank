@@ -1,0 +1,183 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrAliasRank(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+    builtin zmodload zsh/datetime
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    local -i top_n=${1:-20}
+
+    print ""
+    print " ${C} █████╗ ██╗     ██╗ █████╗ ███████╗    ██████╗  █████╗ ███╗   ██╗██╗  ██╗${N}"
+    print " ${C}██╔══██╗██║     ██║██╔══██╗██╔════╝    ██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝${N}"
+    print " ${M}███████║██║     ██║███████║███████╗     ██████╔╝███████║██╔██╗ ██║█████╔╝${N}"
+    print " ${M}██╔══██║██║     ██║██╔══██║╚════██║     ██╔══██╗██╔══██║██║╚██╗██║██╔═██╗${N}"
+    print " ${C}██║  ██║███████╗██║██║  ██║███████║     ██║  ██║██║  ██║██║ ╚████║██║  ██╗${N}"
+    print " ${C}╚═╝  ╚═╝╚══════╝╚═╝╚═╝  ╚═╝╚══════╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝${N}"
+    print " ${D}┌──────────────────────────────────────────────────────────────────────────────┐${N}"
+    print " ${D}│${N} ${G}MINING${N}  ${D}//${N} ${C}${HISTFILE:t}${N}  ${D}//${N} ${M}$(wc -l < "$HISTFILE" 2>/dev/null | tr -d ' ') lines${N}                      ${D}│${N}"
+    print " ${D}└──────────────────────────────────────────────────────────────────────────────┘${N}"
+    print "  ${D}>> analyzing command frequency against alias definitions <<${N}"
+    print ""
+
+    # count first words in history — cached for speed
+    local -A cmd_counts
+    local word
+    local cache_file="$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh"
+    local -i need_rebuild=1
+
+    if [[ -r "$cache_file" && -r "$HISTFILE" ]]; then
+        if [[ "$cache_file" -nt "$HISTFILE" ]]; then
+            need_rebuild=0
+        fi
+    fi
+
+    if (( need_rebuild )); then
+        print "  ${D}>> parsing ${HISTFILE:t} (this may take a moment, result is cached) <<${N}"
+        print ""
+        while IFS= read -r line; do
+            # strip leading timestamp if present (: 1234:0;cmd)
+            [[ "$line" == ": "* ]] && line="${line#*;}"
+            # get first word
+            word="${line%%[[:space:]]*}"
+            word="${word%%[;|&]*}"
+            [[ -z "$word" ]] && continue
+            # only allow simple alphanumeric words, hyphens, underscores, dots, slashes
+            [[ "$word" != [[:alnum:]_./-]## ]] && continue
+            (( cmd_counts[$word]++ ))
+        done < "$HISTFILE"
+
+        # write cache
+        {
+            for k v in ${(kv)cmd_counts}; do
+                print -r "cmd_counts[${k}]=${v}"
+            done
+        } >| "$cache_file"
+        print "  ${G}>> cached to ${cache_file:t} <<${N}"
+        print ""
+    else
+        print "  ${D}>> loading from cache (rm ${cache_file:t} to rebuild) <<${N}"
+        print ""
+        while IFS='=' read -r k v; do
+            # k is cmd_counts[word], v is count
+            local key="${k#cmd_counts\[}"
+            key="${key%\]}"
+            cmd_counts[$key]=$v
+        done < "$cache_file"
+    fi
+
+    # ── TOP USED ALIASES ──────────────────────────────────────
+    print "  ${C}── TOP ${top_n} MOST USED ALIASES ─────────────────────────────────────────${N}"
+    print ""
+
+    local -a alias_usage=()
+    local k v
+    for k v in ${(kv)aliases}; do
+        local -i cnt=${cmd_counts[$k]:-0}
+        (( cnt > 0 )) && alias_usage+=( "$cnt $k" )
+    done
+    alias_usage=( ${(On)alias_usage} )
+
+    local -i max_cnt=${${alias_usage[1]}%% *}
+    local -i i
+    for (( i = 1; i <= top_n && i <= $#alias_usage; i++ )); do
+        local cnt=${alias_usage[i]%% *}
+        local name=${alias_usage[i]#* }
+        local expansion="${aliases[$name]}"
+        # truncate expansion
+        (( ${#expansion} > 35 )) && expansion="${expansion[1,32]}..."
+
+        local -i bar_len=$(( max_cnt > 0 ? cnt * 30 / max_cnt : 0 ))
+        (( bar_len < 1 && cnt > 0 )) && bar_len=1
+        local bar="${G}$(printf '█%.0s' {1..$bar_len})${N}"
+
+        print -n "  ${D}$(printf '%3d.' $i)${N} "
+        print -n "${B}$(printf '%-15s' "$name")${N} "
+        print -n "${C}$(printf '%6d' $cnt)${N}  "
+        print -n "$bar"
+        print "  ${D}${expansion}${N}"
+    done
+
+    # ── NEVER USED ALIASES ────────────────────────────────────
+    print ""
+    print "  ${C}── NEVER USED ALIASES ${D}(candidates for removal)${N} ──────────────────────${N}"
+    print ""
+
+    local -a unused=()
+    for k v in ${(kv)aliases}; do
+        local -i cnt=${cmd_counts[$k]:-0}
+        if (( cnt == 0 )); then
+            unused+=( "$k" )
+        fi
+    done
+    unused=( ${(o)unused} )
+
+    local -i shown=0
+    local line_buf=""
+    for k in $unused; do
+        if [[ -n "$line_buf" ]]; then
+            line_buf+=", "
+        fi
+        if (( ${#line_buf} + ${#k} > 68 )); then
+            print "  ${D}//${N} ${Y}${line_buf}${N}"
+            line_buf="$k"
+        else
+            line_buf+="$k"
+        fi
+        (( shown++ ))
+    done
+    [[ -n "$line_buf" ]] && print "  ${D}//${N} ${Y}${line_buf}${N}"
+    print ""
+    print "  ${D}${shown} aliases never used in history${N}"
+
+    # ── MISSING ALIASES ───────────────────────────────────────
+    print ""
+    print "  ${C}── FREQUENT COMMANDS WITHOUT ALIASES ${D}(candidates for creation)${N} ────${N}"
+    print ""
+
+    local -a unaliased=()
+    for k v in ${(kv)cmd_counts}; do
+        # skip if alias exists, skip short commands, skip builtins
+        (( ${+aliases[$k]} )) && continue
+        (( ${#k} < 4 )) && continue
+        [[ "$k" == (sudo|command|builtin|source|eval|exec|noglob|nocorrect) ]] && continue
+        (( v >= 10 )) && unaliased+=( "$v $k" )
+    done
+    unaliased=( ${(On)unaliased} )
+
+    local -i ua_max=${${unaliased[1]}%% *}
+    for (( i = 1; i <= top_n && i <= $#unaliased; i++ )); do
+        local cnt=${unaliased[i]%% *}
+        local name=${unaliased[i]#* }
+
+        local -i bar_len=$(( ua_max > 0 ? cnt * 25 / ua_max : 0 ))
+        (( bar_len < 1 && cnt > 0 )) && bar_len=1
+        local bar="${M}$(printf '█%.0s' {1..$bar_len})${N}"
+
+        print -n "  ${D}$(printf '%3d.' $i)${N} "
+        print -n "${B}$(printf '%-20s' "$name")${N} "
+        print -n "${C}$(printf '%6d' $cnt)${N}  "
+        print "$bar"
+    done
+
+    # summary
+    print ""
+    print "  ${C}══════════════════════════════════════════════════════════════════════════${N}"
+    print "  ${B}total aliases:${N}     ${C}${#aliases}${N}"
+    print "  ${B}used aliases:${N}      ${G}$(( ${#aliases} - shown ))${N}"
+    print "  ${B}unused aliases:${N}    ${Y}${shown}${N}  ${D}($(( shown * 100 / ${#aliases} ))% waste)${N}"
+    print "  ${B}missing aliases:${N}   ${M}${#unaliased} candidates${N}"
+    local -i total_alias_hits=0
+    for entry in $alias_usage; do
+        (( total_alias_hits += ${entry%% *} ))
+    done
+    print "  ${B}alias keystrokes saved:${N}  ${G}~${total_alias_hits} invocations${N}"
+    print "  ${C}══════════════════════════════════════════════════════════════════════════${N}"
+    print ""
+}
+
+zpwrAliasRank "$@"

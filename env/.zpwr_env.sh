@@ -146,7 +146,7 @@ export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework
 export ZPWR_PLUGIN_MANAGER=zinit
 # uses the zprof function to profile startup
-export ZPWR_PROFILING=false
+test -z "$ZPWR_PROFILING" && export ZPWR_PROFILING=false
 # set to POWERLEVEL to use the powerlevel10k prompt
 export ZPWR_PROMPT=powerlevel10k
 # pssh timeout
