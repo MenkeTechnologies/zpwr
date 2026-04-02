@@ -43,7 +43,11 @@ PAGE_CONTENT() {
     print "  ${C}cleanall${N}                   ${D}clean everything${N}"
     print "  ${C}cleancache${N}                 ${D}clean caches${N}"
     print "  ${C}cleancompcache${N}             ${D}clean completion cache${N}"
+    print "  ${C}color2${N}                     ${D}turn on stderr color filter${N}"
+    print "  ${C}environmentvariables${N}       ${D}list zpwr env vars (alias: envvars)${N}"
+    print "  ${C}environmentvariablesall${N}    ${D}list all env vars (alias: envvarsall)${N}"
+    print "  ${C}environmentvars${N}            ${D}list zpwr env vars (alias: envvars)${N}"
+    print "  ${C}environmentvarsall${N}         ${D}list all env vars (alias: envvarsall)${N}"
     print ""
     print "  ${D}... continued. Run zpwr verbs for the complete list.${N}"
-    print "  ${D}Or use zpwr wizard --search <term> to find specific verbs.${N}"
 }

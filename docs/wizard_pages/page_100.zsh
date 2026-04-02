@@ -43,7 +43,11 @@ PAGE_CONTENT() {
     print "  ${C}scriptnew${N}                  ${D}create new script${N}"
     print "  ${C}scripts${N}                    ${D}browse scripts${N}"
     print "  ${C}scripttopdf${N}                ${D}convert script to PDF${N}"
+    print "  ${C}testsall${N}                   ${D}run all env tests (alias: testall)${N}"
+    print "  ${C}upload${N}                     ${D}upload file with curl${N}"
+    print "  ${C}verbsedit${N}                  ${D}edit verb selection${N}"
+    print "  ${C}zpwrCloneToForked${N}          ${D}clone zpwr to forked dir${N}"
+    print "  ${C}zpwrgithub${N}                 ${D}open zpwr GitHub page${N}"
     print ""
-    print "  ${D}... continued. Run zpwr verbs for the complete list.${N}"
-    print "  ${D}Or use zpwr wizard --search <term> to find specific verbs.${N}"
+    print "  ${D}Run zpwr verbs for the complete live list.${N}"
 }

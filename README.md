@@ -954,6 +954,8 @@ zpwr study -v              # vertical split (book top, shell bottom)
 
 Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  43 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), FZF architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Perl oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grc, ccze, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
 
+The PDF can be regenerated with `zpwr regenpdf` which runs `genEncyclopediaTex.py` and compiles with xelatex.  All documentation lives in `$ZPWR/docs/` — wizard pages, screenshots, LaTeX source, and the compiled PDF.
+
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.
 
