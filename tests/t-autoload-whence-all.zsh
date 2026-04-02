@@ -2221,3 +2221,73 @@
     run whence zua
     assert $state equals 0
 }
+
+@test 'whence zpwrBench resolves' {
+    run whence zpwrBench
+    assert $state equals 0
+}
+
+@test 'whence zpwrTop resolves' {
+    run whence zpwrTop
+    assert $state equals 0
+}
+
+@test 'whence zpwrDoctor resolves' {
+    run whence zpwrDoctor
+    assert $state equals 0
+}
+
+@test 'whence zpwrFlame resolves' {
+    run whence zpwrFlame
+    assert $state equals 0
+}
+
+@test 'whence zpwrAliasRank resolves' {
+    run whence zpwrAliasRank
+    assert $state equals 0
+}
+
+@test 'whence zpwrFuncRank resolves' {
+    run whence zpwrFuncRank
+    assert $state equals 0
+}
+
+@test 'whence zpwrWatch resolves' {
+    run whence zpwrWatch
+    assert $state equals 0
+}
+
+@test 'whence zpwrReplay resolves' {
+    run whence zpwrReplay
+    assert $state equals 0
+}
+
+@test 'whence zpwrSnapshot resolves' {
+    run whence zpwrSnapshot
+    assert $state equals 0
+}
+
+@test 'whence zpwrTrace resolves' {
+    run whence zpwrTrace
+    assert $state equals 0
+}
+
+@test 'whence zpwrDeps resolves' {
+    run whence zpwrDeps
+    assert $state equals 0
+}
+
+@test 'whence zpwrTailLog resolves' {
+    run whence zpwrTailLog
+    assert $state equals 0
+}
+
+@test 'whence zpwrStudy resolves' {
+    run whence zpwrStudy
+    assert $state equals 0
+}
+
+@test 'whence zpwrWizard resolves' {
+    run whence zpwrWizard
+    assert $state equals 0
+}

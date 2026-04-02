@@ -2663,3 +2663,87 @@
     assert $state equals 0
     assert "$output" contains zua
 }
+
+@test 'functions zpwrBench contains name' {
+    run functions zpwrBench
+    assert $state equals 0
+    assert "$output" contains zpwrBench
+}
+
+@test 'functions zpwrTop contains name' {
+    run functions zpwrTop
+    assert $state equals 0
+    assert "$output" contains zpwrTop
+}
+
+@test 'functions zpwrDoctor contains name' {
+    run functions zpwrDoctor
+    assert $state equals 0
+    assert "$output" contains zpwrDoctor
+}
+
+@test 'functions zpwrFlame contains name' {
+    run functions zpwrFlame
+    assert $state equals 0
+    assert "$output" contains zpwrFlame
+}
+
+@test 'functions zpwrAliasRank contains name' {
+    run functions zpwrAliasRank
+    assert $state equals 0
+    assert "$output" contains zpwrAliasRank
+}
+
+@test 'functions zpwrFuncRank contains name' {
+    run functions zpwrFuncRank
+    assert $state equals 0
+    assert "$output" contains zpwrFuncRank
+}
+
+@test 'functions zpwrWatch contains name' {
+    run functions zpwrWatch
+    assert $state equals 0
+    assert "$output" contains zpwrWatch
+}
+
+@test 'functions zpwrReplay contains name' {
+    run functions zpwrReplay
+    assert $state equals 0
+    assert "$output" contains zpwrReplay
+}
+
+@test 'functions zpwrSnapshot contains name' {
+    run functions zpwrSnapshot
+    assert $state equals 0
+    assert "$output" contains zpwrSnapshot
+}
+
+@test 'functions zpwrTrace contains name' {
+    run functions zpwrTrace
+    assert $state equals 0
+    assert "$output" contains zpwrTrace
+}
+
+@test 'functions zpwrDeps contains name' {
+    run functions zpwrDeps
+    assert $state equals 0
+    assert "$output" contains zpwrDeps
+}
+
+@test 'functions zpwrTailLog contains name' {
+    run functions zpwrTailLog
+    assert $state equals 0
+    assert "$output" contains zpwrTailLog
+}
+
+@test 'functions zpwrStudy contains name' {
+    run functions zpwrStudy
+    assert $state equals 0
+    assert "$output" contains zpwrStudy
+}
+
+@test 'functions zpwrWizard contains name' {
+    run functions zpwrWizard
+    assert $state equals 0
+    assert "$output" contains zpwrWizard
+}

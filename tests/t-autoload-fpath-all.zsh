@@ -2221,3 +2221,73 @@
     run test -f "$ZPWR/autoload/common/zua"
     assert $state equals 0
 }
+
+@test 'fn zpwrBench file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrBench"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTop file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrTop"
+    assert $state equals 0
+}
+
+@test 'fn zpwrDoctor file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrDoctor"
+    assert $state equals 0
+}
+
+@test 'fn zpwrFlame file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrFlame"
+    assert $state equals 0
+}
+
+@test 'fn zpwrAliasRank file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrAliasRank"
+    assert $state equals 0
+}
+
+@test 'fn zpwrFuncRank file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrFuncRank"
+    assert $state equals 0
+}
+
+@test 'fn zpwrWatch file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrWatch"
+    assert $state equals 0
+}
+
+@test 'fn zpwrReplay file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrReplay"
+    assert $state equals 0
+}
+
+@test 'fn zpwrSnapshot file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrSnapshot"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTrace file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrTrace"
+    assert $state equals 0
+}
+
+@test 'fn zpwrDeps file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrDeps"
+    assert $state equals 0
+}
+
+@test 'fn zpwrTailLog file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrTailLog"
+    assert $state equals 0
+}
+
+@test 'fn zpwrStudy file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrStudy"
+    assert $state equals 0
+}
+
+@test 'fn zpwrWizard file exists in fpath' {
+    run test -f "$ZPWR/autoload/common/zpwrWizard"
+    assert $state equals 0
+}

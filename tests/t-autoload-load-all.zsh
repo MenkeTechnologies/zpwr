@@ -2221,3 +2221,73 @@
     run autoload +X zua
     assert $state equals 0
 }
+
+@test 'autoload zpwrBench loads' {
+    run autoload +X zpwrBench
+    assert $state equals 0
+}
+
+@test 'autoload zpwrTop loads' {
+    run autoload +X zpwrTop
+    assert $state equals 0
+}
+
+@test 'autoload zpwrDoctor loads' {
+    run autoload +X zpwrDoctor
+    assert $state equals 0
+}
+
+@test 'autoload zpwrFlame loads' {
+    run autoload +X zpwrFlame
+    assert $state equals 0
+}
+
+@test 'autoload zpwrAliasRank loads' {
+    run autoload +X zpwrAliasRank
+    assert $state equals 0
+}
+
+@test 'autoload zpwrFuncRank loads' {
+    run autoload +X zpwrFuncRank
+    assert $state equals 0
+}
+
+@test 'autoload zpwrWatch loads' {
+    run autoload +X zpwrWatch
+    assert $state equals 0
+}
+
+@test 'autoload zpwrReplay loads' {
+    run autoload +X zpwrReplay
+    assert $state equals 0
+}
+
+@test 'autoload zpwrSnapshot loads' {
+    run autoload +X zpwrSnapshot
+    assert $state equals 0
+}
+
+@test 'autoload zpwrTrace loads' {
+    run autoload +X zpwrTrace
+    assert $state equals 0
+}
+
+@test 'autoload zpwrDeps loads' {
+    run autoload +X zpwrDeps
+    assert $state equals 0
+}
+
+@test 'autoload zpwrTailLog loads' {
+    run autoload +X zpwrTailLog
+    assert $state equals 0
+}
+
+@test 'autoload zpwrStudy loads' {
+    run autoload +X zpwrStudy
+    assert $state equals 0
+}
+
+@test 'autoload zpwrWizard loads' {
+    run autoload +X zpwrWizard
+    assert $state equals 0
+}
