@@ -935,7 +935,7 @@ zpwr taillog /var/log/system.log  # custom logfile
 Requires `ccze` (`brew install ccze` or `apt install ccze`).
 
 ## The ZPWR Encyclopedia -- zpwr wizard
-`zpwr wizard` launches a 110-page interactive encyclopedia covering every zpwr feature, verb, subsystem, and keybinding reference appendix.  Also invokable as `zpwr manual`, `zpwr tutorial`, or `zpwr docs`.  Vim-style navigation with chapter jumping, search, random page, and a full keybinding help screen.
+`zpwr wizard` launches a 150-page interactive encyclopedia covering every zpwr feature, verb, subsystem, and keybinding reference appendix.  Also invokable as `zpwr manual`, `zpwr tutorial`, or `zpwr docs`.  Vim-style navigation with chapter jumping, search, random page, and a full keybinding help screen.
 
 ```sh
 zpwr wizard -h             # cyberpunk help with keybinding reference
