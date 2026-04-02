@@ -9,10 +9,10 @@
 
 set -e
 
-INSTALL_DIR="${ZPWR_INSTALL:-$HOME/.zpwr/install}"
-TEX_FILE="$INSTALL_DIR/zpwr-encyclopedia.tex"
-PDF_FILE="$INSTALL_DIR/zpwr-encyclopedia.pdf"
-PAGE_DIR="$INSTALL_DIR/wizard_pages"
+DOCS_DIR="${ZPWR:-$HOME/.zpwr}/docs"
+TEX_FILE="$DOCS_DIR/zpwr-encyclopedia.tex"
+PDF_FILE="$DOCS_DIR/zpwr-encyclopedia.pdf"
+PAGE_DIR="${ZPWR:-$HOME/.zpwr}/docs/wizard_pages"
 
 if [[ ! -d "$PAGE_DIR" ]]; then
     echo "Error: wizard pages not found at $PAGE_DIR" >&2
@@ -24,12 +24,12 @@ echo "Generating LaTeX from $(ls "$PAGE_DIR"/page_*.zsh | wc -l | tr -d ' ') pag
 python3 "$ZPWR_SCRIPTS/genEncyclopediaTex.py" "$PAGE_DIR" "$TEX_FILE"
 
 echo "Compiling PDF (pass 1)..."
-xelatex -interaction=nonstopmode -output-directory="$INSTALL_DIR" "$TEX_FILE" >/dev/null 2>&1
+xelatex -interaction=nonstopmode -output-directory="$DOCS_DIR" "$TEX_FILE" >/dev/null 2>&1
 
 echo "Compiling PDF (pass 2 for TOC)..."
-xelatex -interaction=nonstopmode -output-directory="$INSTALL_DIR" "$TEX_FILE" >/dev/null 2>&1
+xelatex -interaction=nonstopmode -output-directory="$DOCS_DIR" "$TEX_FILE" >/dev/null 2>&1
 
 # Cleanup
-command rm -f "$INSTALL_DIR/zpwr-encyclopedia."{aux,log,out,toc} 2>/dev/null
+command rm -f "$DOCS_DIR/zpwr-encyclopedia."{aux,log,out,toc} 2>/dev/null
 
 echo "Done: $PDF_FILE ($(du -h "$PDF_FILE" | cut -f1))"

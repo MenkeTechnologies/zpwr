@@ -2,8 +2,8 @@
 """Generate zpwr-encyclopedia.tex from wizard page files."""
 import os, re, glob, sys
 
-pagedir = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/.zpwr/install/wizard_pages")
-outfile = sys.argv[2] if len(sys.argv) > 2 else os.path.expanduser("~/.zpwr/install/zpwr-encyclopedia.tex")
+pagedir = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/.zpwr/docs/wizard_pages")
+outfile = sys.argv[2] if len(sys.argv) > 2 else os.path.expanduser("~/.zpwr/docs/zpwr-encyclopedia.tex")
 pages = sorted(glob.glob(os.path.join(pagedir, "page_*.zsh")))
 
 def extract_page(filepath):
