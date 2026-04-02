@@ -3,7 +3,7 @@
 function zpwrOverridePromptDir(){
 
     # patch p10k prompt_dir to use %~ for hash dir resolution
-    # upstream uses simple $HOME replacement when auto_name_dirs is set
+    # upstream uses simple $HOME replacement in some branches
     # which doesn't resolve hash -d named directories like ~ZPWR
     local body=${functions[prompt_dir]}
     local old='local p=${(V)${_p9k__cwd/#(#b)$HOME(|\/*)/'
@@ -12,10 +12,7 @@ function zpwrOverridePromptDir(){
     local new='local p=${(%):-%~}'
     functions[prompt_dir]=${body/$old/$new}
 
-    # auto_name_dirs auto-registers all p10k internals (_p9k__cwd, _p9k__cwd_a, etc.)
-    # as named dirs which compete with explicit hash dirs like ~ZPWR in %~ resolution
-    body=${functions[prompt_dir]}
-    functions[prompt_dir]='unhash -dm "_p9k*" 2>/dev/null; unhash -dm "VCS_STATUS_*" 2>/dev/null; '${body}
+
 }
 
 zpwrOverridePromptDir "$@"

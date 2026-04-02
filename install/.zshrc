@@ -708,8 +708,8 @@ builtin setopt always_to_end
 # show completion menu on successive tab press. needs unsetopt menu_complete to work
 # builtin setopt auto_menu
 
-# any parameter that is set to the absolute name of a directory immediately becomes a name for that directory
-builtin setopt auto_name_dirs
+# auto_name_dirs removed: pollutes named dirs with p10k/gitstatus internals
+# explicit hash -d calls in zpwrBindDirs handle all named directories
 
 # Allow completion from within a word/phrase
 builtin setopt complete_in_word
