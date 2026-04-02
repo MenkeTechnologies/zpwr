@@ -459,7 +459,7 @@ if [[ "$ZPWR_PLUGIN_MANAGER" == zinit ]]; then
     # load prompt synchronously for instant prompt compatibility
 
     zinit ice lucid nocd nocompile atinit'zpwrBindPowerline; zpwrBindPowerlineTmux; zpwrBindDirs; zpwrPrecmd' \
-        atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPrecmd; zpwrOverridePromptDir; _p9k_precmd &> /dev/null'
+        atload'_powerline_set_jobnum &> /dev/null;_powerline_set_main_keymap_name &> /dev/null; zpwrBindPrecmd; _p9k_precmd &> /dev/null'
     zinit load romkatv/powerlevel10k
 
     # late

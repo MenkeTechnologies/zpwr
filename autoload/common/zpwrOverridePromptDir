@@ -1,18 +1,9 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
+# no longer needed: p10k prompt_dir uses %~ natively without auto_name_dirs
+# explicit hash -d entries in zpwrBindDirs resolve correctly via %~
 function zpwrOverridePromptDir(){
-
-    # patch p10k prompt_dir to use %~ for hash dir resolution
-    # upstream uses simple $HOME replacement in some branches
-    # which doesn't resolve hash -d named directories like ~ZPWR
-    local body=${functions[prompt_dir]}
-    local old='local p=${(V)${_p9k__cwd/#(#b)$HOME(|\/*)/'
-    old+=\'~\'
-    old+='$match[1]}}'
-    local new='local p=${(%):-%~}'
-    functions[prompt_dir]=${body/$old/$new}
-
-
+    :
 }
 
 zpwrOverridePromptDir "$@"
