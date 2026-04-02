@@ -15,6 +15,7 @@ function zpwrTrace(){
     local -i fs_inputs=0 fs_outputs=0 signals=0
     local -i msg_sent=0 msg_recv=0 max_stack=0
     local -i in_table=0 sc_shown=0 mem_delta=0 perf_score=0 sig_empty=0
+    local -i do_strace=1 do_ltrace=1
     local -a fields=()
 
     if [[ "$1" == "-h" || "$1" == "--help" || $# -eq 0 ]]; then
@@ -39,13 +40,17 @@ function zpwrTrace(){
         print ""
         print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
         print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
-        print "  ${C}-q, --quick${N}                                      ${D}// Timing + resources only (no sudo)${N}"
+        print "  ${C}-q, --quick${N}                                      ${D}// Timing + resources only (1 run)${N}"
+        print "  ${C}-s, --strace${N}                                     ${D}// Syscalls only (no ltrace)${N}"
+        print "  ${C}-l, --ltrace${N}                                     ${D}// C library calls only (no strace)${N}"
+        print "  ${C}-a, --all${N}                                        ${D}// Both strace + ltrace (default)${N}"
         print ""
         print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
-        print "  ${C}zpwr trace ls -la${N}                                ${D}// full trace (may ask sudo)${N}"
-        print "  ${C}zpwr trace -q make${N}                               ${D}// quick mode, no sudo${N}"
-        print "  ${C}zpwr trace git status${N}                            ${D}// full trace of git${N}"
-        print "  ${C}zpwr trace npm install${N}                           ${D}// trace npm with syscalls${N}"
+        print "  ${C}zpwr trace ls -la${N}                                ${D}// full trace (strace + ltrace)${N}"
+        print "  ${C}zpwr trace -q make${N}                               ${D}// quick: timing + resources only${N}"
+        print "  ${C}zpwr trace -s git status${N}                         ${D}// syscalls only${N}"
+        print "  ${C}zpwr trace -l npm install${N}                        ${D}// C library calls only${N}"
+        print "  ${C}zpwr trace -a id${N}                                 ${D}// both (same as default)${N}"
         print ""
         print "  ${D}── OUTPUT ───────────────────────────────────────────────────────────${N}"
         print "  ${D}wall/user/sys time, exit code, peak RSS, context switches${N}"
@@ -54,17 +59,24 @@ function zpwrTrace(){
         print "  ${D}memory delta, child process count, performance signal bar${N}"
         print ""
         print "  ${D}── PLATFORM ─────────────────────────────────────────────────────────${N}"
-        print "  ${D}macOS:  resource stats only (SIP blocks dtruss/dtrace)${N}"
-        print "  ${D}linux:  full trace with strace (syscalls) + ltrace (C library)${N}"
+        print "  ${C}macOS${N}   resource stats from /usr/bin/time -l              ${D}// SIP blocks dtrace${N}"
+        print "  ${C}linux${N}   strace -c (syscalls) + ltrace -c (C library)     ${D}// full spectrum${N}"
+        print ""
+        print "  ${D}── NOTE ─────────────────────────────────────────────────────────────${N}"
+        print "  ${D}on linux, command re-runs for strace/ltrace stats (2-3x total)${N}"
+        print "  ${D}use -q for destructive commands to run once with timing only${N}"
         print ""
         return 0
     fi
 
     # parse flags
-    quick_mode=0
+    quick_mode=0; do_strace=1; do_ltrace=1
     while [[ "$1" == -* ]]; do
         case "$1" in
-            -q|--quick) quick_mode=1; shift ;;
+            -q|--quick) quick_mode=1; do_strace=0; do_ltrace=0; shift ;;
+            -s|--strace) do_strace=1; do_ltrace=0; shift ;;
+            -l|--ltrace) do_strace=0; do_ltrace=1; shift ;;
+            -a|--all) do_strace=1; do_ltrace=1; shift ;;
             *) break ;;
         esac
     done
@@ -148,16 +160,24 @@ function zpwrTrace(){
         $time_cmd $time_flags zsh -c "$*" 2>"$time_out"
         exit_code=$?
     elif [[ "$trace_tool" == "strace" ]]; then
-        # Linux: strace for syscalls + ltrace for C library calls + time for resources
-        print "  ${D}>> full trace: strace + /usr/bin/time // linux <<${N}"
+        # Linux: selective tracing based on flags
+        local trace_desc=""
+        (( do_strace )) && trace_desc+="strace"
+        (( do_strace && do_ltrace )) && trace_desc+=" + "
+        (( do_ltrace )) && trace_desc+="ltrace"
+        [[ -z "$trace_desc" ]] && trace_desc="resources only"
+        print "  ${D}>> ${trace_desc} + /usr/bin/time // linux <<${N}"
         print ""
-        $time_cmd $time_flags strace -c -f -o "$dtrace_out" zsh -c "$*" 2>"$time_out"
+        # always run time for resource stats + command output
+        $time_cmd $time_flags zsh -c "$*" 2>"$time_out"
         exit_code=$?
-        # also run ltrace for C library calls if available
-        if (( $+commands[ltrace] )); then
-            print ""
-            print "  ${D}>> capturing C library calls with ltrace <<${N}"
-            ltrace -c -f -o "$ltrace_out" zsh -c "$*" &>/dev/null
+        # strace for syscall counts
+        if (( do_strace )) && (( $+commands[strace] )); then
+            strace -c -f zsh -c "$*" >/dev/null 2>"$dtrace_out"
+        fi
+        # ltrace for C library call counts
+        if (( do_ltrace )) && (( $+commands[ltrace] )); then
+            ltrace -c -f zsh -c "$*" 2>"$ltrace_out" >/dev/null
         fi
     fi
 
@@ -261,18 +281,28 @@ function zpwrTrace(){
 
         in_table=0 sc_shown=0
         while IFS= read -r tline; do
-            # dtruss -c output: header line then data
-            [[ "$tline" == *"CALL"*"COUNT"* ]] && { in_table=1; continue; }
+            # skip headers: dtruss "CALL  COUNT" or strace "% time  seconds..."
+            [[ "$tline" == *"CALL"*"COUNT"* || "$tline" == *"% time"*"syscall"* ]] && { in_table=1; continue; }
             [[ "$tline" == *"------"* ]] && continue
+            [[ "$tline" == *"total"* ]] && break
             [[ -z "${tline// /}" ]] && { (( in_table )) && break; continue; }
             if (( in_table )); then
-                # format varies: "syscall_name   count" or multiple columns
                 fields=( ${(s: :)tline} )
                 if (( $#fields >= 2 )); then
-                    sc_name=${fields[1]}
-                    sc_count=${fields[-1]}
+                    # strace -c: %time seconds usecs/call calls [errors] syscall
+                    # dtruss -c: CALL COUNT
+                    # syscall name is always the last field
+                    sc_name=${fields[-1]}
+                    # calls count: for strace it's field 4, for dtruss it's field 2
+                    if (( $#fields >= 5 )); then
+                        # strace format — calls is field 4 (or 5 if errors column present)
+                        sc_count=${fields[4]}
+                    else
+                        # dtruss format — count is last numeric field
+                        sc_count=${fields[-1]}
+                    fi
                     sc_count=${sc_count//[^0-9]/}
-                    [[ -z "$sc_count" ]] && continue
+                    [[ -z "$sc_count" || "$sc_count" == "0" ]] && continue
                     (( sc_shown++ ))
 
                     # heat color based on count
