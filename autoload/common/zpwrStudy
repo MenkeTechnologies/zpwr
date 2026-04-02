@@ -1,0 +1,105 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrStudy(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗████████╗██╗   ██╗██████╗ ██╗   ██╗${N}"
+        print " ${C}██╔════╝╚══██╔══╝██║   ██║██╔══██╗╚██╗ ██╔╝${N}"
+        print " ${M}███████╗   ██║   ██║   ██║██║  ██║ ╚████╔╝${N}"
+        print " ${M}╚════██║   ██║   ██║   ██║██║  ██║  ╚██╔╝${N}"
+        print " ${C}███████║   ██║   ╚██████╔╝██████╔╝   ██║${N}"
+        print " ${C}╚══════╝   ╚═╝    ╚═════╝ ╚═════╝    ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}STUDY${N}                    ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> SPLIT-PANE STUDYING ENVIRONMENT // READ + PRACTICE <<${N}"
+        print ""
+        print ""
+        print "  Open a tmux split with the zpwr encyclopedia on the left"
+        print "  and a live shell on the right. Read the docs and try"
+        print "  commands simultaneously."
+        print ""
+        print "  ${B}USAGE:${N} zpwr study ${D}[OPTIONS] [PAGE]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-v, --vertical${N}                                   ${D}// Vertical split (top/bottom)${N}"
+        print "  ${C}-s, --size PCT${N}                                   ${D}// Left pane size % (default: 50)${N}"
+        print "  ${C}PAGE${N}                                             ${D}// Start at page number${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr study${N}                                       ${D}// book left, shell right${N}"
+        print "  ${C}zpwr study 42${N}                                    ${D}// start at page 42${N}"
+        print "  ${C}zpwr study -v${N}                                    ${D}// book top, shell bottom${N}"
+        print "  ${C}zpwr study -s 60${N}                                 ${D}// book takes 60% width${N}"
+        print "  ${C}zpwr study --search git${N}                         ${D}// open search results${N}"
+        print ""
+        print "  ${D}── LAYOUT ───────────────────────────────────────────────────────────${N}"
+        print "  ${D}┌─────────────────────┬─────────────────────┐${N}"
+        print "  ${D}│${N}  ${C}ZPWR ENCYCLOPEDIA${N}   ${D}│${N}  ${G}LIVE SHELL${N}           ${D}│${N}"
+        print "  ${D}│${N}  ${D}navigate with${N}       ${D}│${N}  ${D}try commands here${N}    ${D}│${N}"
+        print "  ${D}│${N}  ${D}j/k/t/q${N}            ${D}│${N}  ${D}as you read${N}          ${D}│${N}"
+        print "  ${D}└─────────────────────┴─────────────────────┘${N}"
+        print ""
+        return 0
+    fi
+
+    # parse flags
+    local split_flag="-h"  # horizontal split = left/right
+    local -i pane_size=50
+    local wizard_args=""
+    local session_name="zpwr-study"
+
+    while [[ "$1" == -* ]]; do
+        case "$1" in
+            -v|--vertical) split_flag="-v"; shift ;;
+            -s|--size) shift; pane_size=${1:-50}; shift ;;
+            --search) wizard_args="--search $2"; shift 2 ;;
+            --toc) wizard_args="--toc"; shift ;;
+            *) break ;;
+        esac
+    done
+
+    # remaining arg is page number
+    [[ -n "$1" ]] && wizard_args="$1"
+
+    # build the wizard command
+    local wizard_cmd="zpwr wizard ${wizard_args}"
+
+    # if session already exists, attach to it
+    if tmux has-session -t "$session_name" 2>/dev/null; then
+        if [[ -n "$TMUX" ]]; then
+            tmux switch-client -t "$session_name"
+        else
+            tmux attach-session -t "$session_name"
+        fi
+        return 0
+    fi
+
+    # create new session starting in $ZPWR (pane 0 = left)
+    tmux new-session -d -s "$session_name" -c "$ZPWR"
+    # split: pane 1 = right (shell), also in $ZPWR
+    tmux split-window ${split_flag} -t "${session_name}:0" -p $(( 100 - pane_size )) -c "$ZPWR"
+    # clear the right pane
+    tmux send-keys -t "${session_name}:0.1" "clear" C-m
+    # run wizard in left pane (pane 0)
+    tmux send-keys -t "${session_name}:0.0" "${wizard_cmd}" C-m
+    # focus right pane (shell)
+    tmux select-pane -t "${session_name}:0.1"
+
+    # attach or switch
+    if [[ -n "$TMUX" ]]; then
+        tmux switch-client -t "$session_name"
+    else
+        tmux attach-session -t "$session_name"
+    fi
+}
+
+zpwrStudy "$@"

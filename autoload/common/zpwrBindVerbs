@@ -9,8 +9,8 @@ function zpwrBindVerbs(){
     # get zpwr verbs
     source "$ZPWR_VERBS_FILE"
 
-    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrSendVerbs zpwrLogVerbs
-    typeset -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs zpwrLogVerbs
+    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrSendVerbs zpwrLogVerbs zpwrDiagVerbs zpwrMonitorVerbs
+    typeset -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs zpwrLogVerbs zpwrDiagVerbs zpwrMonitorVerbs
 
     for k v in ${(kv)ZPWR_VERBS[@]};do
         case $k in
@@ -59,8 +59,14 @@ function zpwrBindVerbs(){
             cd*|*cd|home*)
                 zpwrCdVerbs+=("$k:$v")
                 ;;
-            log*)
+            log*|taillog)
                 zpwrLogVerbs+=("$k:$v")
+                ;;
+            bench|flame|top|doctor|deps|trace|funcrank|aliasrank)
+                zpwrDiagVerbs+=("$k:$v")
+                ;;
+            watch|replay|snapshot|restore|wizard|manual|tutorial|docs|study)
+                zpwrMonitorVerbs+=("$k:$v")
                 ;;
             *)
                 zpwrMiscVerbs+=("$k:$v")

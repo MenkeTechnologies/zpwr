@@ -3,13 +3,14 @@
 function zpwrWizard(){
 
     builtin emulate -L zsh
-    setopt extendedglob
     builtin zmodload zsh/datetime
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
     local UL=$'\033[4m' W=$'\033[37m'
-    local PAGEDIR="$ZPWR/autoload/common/wizard_pages"
+    local PAGEDIR="$ZPWR_INSTALL/wizard_pages"
+    local -a page_files
+    local -i total_pages=0 current_page=1 found=0
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -39,13 +40,19 @@ function zpwrWizard(){
         print "  ${C}PAGE${N}                                             ${D}// Jump to page number${N}"
         print ""
         print "  ${D}── NAVIGATION (vim-style) ───────────────────────────────────────────────${N}"
-        print "  ${C}j / n / enter / space${N}                            ${D}// Next page${N}"
-        print "  ${C}k / p${N}                                            ${D}// Previous page${N}"
-        print "  ${C}g${N}                                                ${D}// First page${N}"
-        print "  ${C}G${N}                                                ${D}// Last page${N}"
+        print "  ${C}j / n / l / enter / space${N}                        ${D}// Next page${N}"
+        print "  ${C}k / p / h${N}                                        ${D}// Previous page${N}"
+        print "  ${C}d${N}                                                ${D}// Forward 5 pages${N}"
+        print "  ${C}u${N}                                                ${D}// Back 5 pages${N}"
+        print "  ${C}g / 0 / ^${N}                                        ${D}// First page${N}"
+        print "  ${C}G / \$${N}                                            ${D}// Last page${N}"
+        print "  ${C}] / }${N}                                            ${D}// Next chapter${N}"
+        print "  ${C}[ / {${N}                                            ${D}// Previous chapter${N}"
         print "  ${C}t${N}                                                ${D}// Table of contents${N}"
-        print "  ${C}/ <pattern>${N}                                      ${D}// Search forward${N}"
+        print "  ${C}/ <pattern>${N}                                      ${D}// Search pages${N}"
         print "  ${C}:<number>${N}                                        ${D}// Jump to page${N}"
+        print "  ${C}r${N}                                                ${D}// Random page${N}"
+        print "  ${C}?${N}                                                ${D}// Keybinding help${N}"
         print "  ${C}q${N}                                                ${D}// Quit${N}"
         print ""
         print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────────${N}"
@@ -58,9 +65,8 @@ function zpwrWizard(){
     fi
 
     # count total pages
-    local -a page_files
     page_files=( "$PAGEDIR"/page_*.zsh(N) )
-    local -i total_pages=${#page_files}
+    total_pages=${#page_files}
 
     if (( total_pages == 0 )); then
         print "  ${R}no wizard pages found in ${PAGEDIR}${N}"
@@ -71,16 +77,15 @@ function zpwrWizard(){
     # sort pages by number
     page_files=( ${(n)page_files} )
 
-    local -i current_page=1
-    local key search_pattern
+    current_page=1
 
     # ── RENDER ENGINE ─────────────────────────────────────────
     _wiz_render() {
         printf '\033[H\033[2J'
-        local page_file="$PAGEDIR/page_$(printf '%03d' $current_page).zsh"
+        page_file="$PAGEDIR/page_$(printf '%03d' $current_page).zsh"
         if [[ -r "$page_file" ]]; then
             # source page file — it defines PAGE_TITLE and PAGE_CONTENT function
-            local PAGE_TITLE=""
+            PAGE_TITLE=""
             source "$page_file"
             # header
             print ""
@@ -105,7 +110,7 @@ function zpwrWizard(){
         # footer
         print ""
         print "  ${D}──────────────────────────────────────────────────────────────────────────${N}"
-        print "  ${C}j${N}/${C}n${N} next  ${C}k${N}/${C}p${N} prev  ${C}t${N} toc  ${C}g${N} first  ${C}G${N} last  ${C}/${N} search  ${C}:${N}num  ${C}q${N} quit"
+        print "  ${C}j${N}/${C}n${N} next  ${C}k${N}/${C}p${N} prev  ${C}d${N}/${C}u${N} ±5  ${C}]${N}/${C}[${N} chapter  ${C}t${N} toc  ${C}/${N} search  ${C}:${N}num  ${C}r${N} rand  ${C}?${N} help  ${C}q${N} quit"
         print -n "  ${D}>>>${N} "
     }
 
@@ -124,10 +129,10 @@ function zpwrWizard(){
         print " ${D}└──────────────────────────────────────────────────────────────────────────┘${N}"
         print ""
 
-        local pf pt chapter_shown=""
+        chapter_shown=""
         for pf in $page_files; do
             source "$pf" 2>/dev/null
-            local num=${${pf:t}#page_}
+            num=${${pf:t}#page_}
             num=${num%.zsh}
             num=${num##0##}
             [[ -z "$num" ]] && num=0
@@ -149,15 +154,15 @@ function zpwrWizard(){
 
     # ── SEARCH ────────────────────────────────────────────────
     _wiz_search() {
-        local pattern="$1"
+        pattern="$1"
         printf '\033[H\033[2J'
         print ""
         print "  ${C}── SEARCH RESULTS FOR: ${B}${pattern}${N}"
         print ""
-        local pf found=0
+        found=0
         for pf in $page_files; do
             source "$pf" 2>/dev/null
-            local num=${${pf:t}#page_}
+            num=${${pf:t}#page_}
             num=${num%.zsh}; num=${num##0##}
             if [[ "${(L)PAGE_TITLE}" == *"${(L)pattern}"* ]]; then
                 printf "    ${C}%3s.${N} %s\n" "$num" "$PAGE_TITLE"
@@ -170,7 +175,7 @@ function zpwrWizard(){
             for pf in $page_files; do
                 if grep -qil "$pattern" "$pf" 2>/dev/null; then
                     source "$pf" 2>/dev/null
-                    local num=${${pf:t}#page_}
+                    num=${${pf:t}#page_}
                     num=${num%.zsh}; num=${num##0##}
                     printf "    ${C}%3s.${N} %s\n" "$num" "$PAGE_TITLE"
                     (( found++ ))
@@ -187,7 +192,6 @@ function zpwrWizard(){
     # ── HANDLE ARGS ───────────────────────────────────────────
     if [[ "$1" == "-t" || "$1" == "--toc" ]]; then
         _wiz_toc
-        local line
         read -r line
         if [[ "$line" == <-> ]]; then
             current_page=$line
@@ -198,7 +202,6 @@ function zpwrWizard(){
         fi
     elif [[ "$1" == "-s" || "$1" == "--search" ]]; then
         _wiz_search "${2:-}"
-        local line
         read -r line
         if [[ "$line" == <-> ]]; then
             current_page=$line
@@ -208,10 +211,9 @@ function zpwrWizard(){
             return 0
         fi
     elif [[ "$1" == "-l" || "$1" == "--list" ]]; then
-        local pf
         for pf in $page_files; do
             source "$pf" 2>/dev/null
-            local num=${${pf:t}#page_}
+            num=${${pf:t}#page_}
             num=${num%.zsh}; num=${num##0##}
             printf "%3s. %s\n" "$num" "$PAGE_TITLE"
             unfunction PAGE_CONTENT 2>/dev/null
@@ -229,21 +231,72 @@ function zpwrWizard(){
 
         read -s -k 1 key
         case "$key" in
-            j|n|$'\n'|' ')
+            # next page: j n l space enter down-arrow
+            j|n|l|$'\n'|' ')
                 (( current_page < total_pages )) && (( current_page++ ))
                 ;;
-            k|p)
+            # previous page: k p h
+            k|p|h)
                 (( current_page > 1 )) && (( current_page-- ))
                 ;;
-            g)
+            # first page: g 0 ^
+            g|0|'^')
                 current_page=1
                 ;;
-            G)
+            # last page: G $
+            G|'$')
                 current_page=$total_pages
                 ;;
+            # half forward: d (ctrl-d style)
+            d)
+                (( current_page += 5 ))
+                (( current_page > total_pages )) && current_page=$total_pages
+                ;;
+            # half back: u (ctrl-u style)
+            u)
+                (( current_page -= 5 ))
+                (( current_page < 1 )) && current_page=1
+                ;;
+            # next chapter: ] }
+            ']'|'}')
+                # skip to next chapter by finding next page with different PAGE_CHAPTER
+                cur_chapter=""
+                source "$PAGEDIR/page_$(printf '%03d' $current_page).zsh" 2>/dev/null
+                cur_chapter="$PAGE_CHAPTER"
+                unfunction PAGE_CONTENT 2>/dev/null
+                while (( current_page < total_pages )); do
+                    (( current_page++ ))
+                    source "$PAGEDIR/page_$(printf '%03d' $current_page).zsh" 2>/dev/null
+                    if [[ "$PAGE_CHAPTER" != "$cur_chapter" ]]; then
+                        unfunction PAGE_CONTENT 2>/dev/null
+                        break
+                    fi
+                    unfunction PAGE_CONTENT 2>/dev/null
+                done
+                ;;
+            # prev chapter: [ {
+            '['|'{')
+                cur_chapter=""
+                source "$PAGEDIR/page_$(printf '%03d' $current_page).zsh" 2>/dev/null
+                cur_chapter="$PAGE_CHAPTER"
+                unfunction PAGE_CONTENT 2>/dev/null
+                while (( current_page > 1 )); do
+                    (( current_page-- ))
+                    source "$PAGEDIR/page_$(printf '%03d' $current_page).zsh" 2>/dev/null
+                    if [[ "$PAGE_CHAPTER" != "$cur_chapter" ]]; then
+                        unfunction PAGE_CONTENT 2>/dev/null
+                        break
+                    fi
+                    unfunction PAGE_CONTENT 2>/dev/null
+                done
+                ;;
+            # random page: r
+            r)
+                current_page=$(( RANDOM % total_pages + 1 ))
+                ;;
+            # table of contents: t
             t)
                 _wiz_toc
-                local line
                 read -r line
                 if [[ "$line" == <-> ]]; then
                     current_page=$line
@@ -251,9 +304,9 @@ function zpwrWizard(){
                     (( current_page > total_pages )) && current_page=$total_pages
                 fi
                 ;;
+            # search: /
             /)
                 print -n ""
-                local line
                 read -r line
                 if [[ -n "$line" ]]; then
                     _wiz_search "$line"
@@ -265,9 +318,9 @@ function zpwrWizard(){
                     fi
                 fi
                 ;;
+            # goto page: :
             :)
                 print -n ""
-                local line
                 read -r line
                 if [[ "$line" == <-> ]]; then
                     current_page=$line
@@ -275,6 +328,36 @@ function zpwrWizard(){
                     (( current_page > total_pages )) && current_page=$total_pages
                 fi
                 ;;
+            # help: ?
+            '?')
+                printf '\033[H\033[2J'
+                print ""
+                print "  ${C}── KEYBINDINGS ────────────────────────────────────────────────────────${N}"
+                print ""
+                print "  ${B}Navigation${N}"
+                print "  ${C}j n l space enter${N}    ${D}next page${N}"
+                print "  ${C}k p h${N}                ${D}previous page${N}"
+                print "  ${C}d${N}                    ${D}forward 5 pages${N}"
+                print "  ${C}u${N}                    ${D}back 5 pages${N}"
+                print "  ${C}g 0 ^${N}                ${D}first page${N}"
+                print "  ${C}G \$${N}                  ${D}last page${N}"
+                print "  ${C}] }${N}                  ${D}next chapter${N}"
+                print "  ${C}[ {${N}                  ${D}previous chapter${N}"
+                print ""
+                print "  ${B}Search & Jump${N}"
+                print "  ${C}/${N}                    ${D}search pages${N}"
+                print "  ${C}:${N}                    ${D}go to page number${N}"
+                print "  ${C}t${N}                    ${D}table of contents${N}"
+                print "  ${C}r${N}                    ${D}random page${N}"
+                print ""
+                print "  ${B}Other${N}"
+                print "  ${C}?${N}                    ${D}this help${N}"
+                print "  ${C}q Q${N}                  ${D}quit${N}"
+                print ""
+                print "  ${D}press any key to return${N}"
+                read -s -k 1
+                ;;
+            # quit: q Q
             q|Q)
                 unfunction _wiz_render _wiz_toc _wiz_search 2>/dev/null
                 return 0

@@ -51,6 +51,8 @@ function _zpwr(){
             _describe -t zpwr-send "zpwr send verbs" zpwrSendVerbs && ret=0
             _describe -t zpwr-forgit "zpwr forgit verbs" zpwrForgitVerbs && ret=0
             _describe -t zpwr-log "zpwr log verbs" zpwrLogVerbs && ret=0
+            _describe -t zpwr-diag "zpwr diagnostics verbs" zpwrDiagVerbs && ret=0
+            _describe -t zpwr-monitor "zpwr monitoring verbs" zpwrMonitorVerbs && ret=0
 
             #_describe -t commands "zpwr verbs" zpwrSubcommandsAry && ret=0
             ;;
@@ -114,6 +116,73 @@ function _zpwr(){
                     ;;
                 serviceup)
                     _ssu
+                    ;;
+                bench|flame|funcrank|aliasrank|replay)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-r --reset)'{-r,--reset}'[reset cache]' \
+                        '1:count:(5 10 20 50)'
+                    ;;
+                top)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '1:interval:(1 2 5 10)'
+                    ;;
+                doctor|deps)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-r --reverse)'{-r,--reverse}'[reverse deps]' \
+                        '(-o --orphans)'{-o,--orphans}'[show orphans]' \
+                        '(-s --summary)'{-s,--summary}'[show summary]' \
+                        '(-d --dot)'{-d,--dot}'[graphviz output]' \
+                        '*:function:_functions'
+                    ;;
+                trace)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-q --quick)'{-q,--quick}'[quick mode]' \
+                        '(-s --strace)'{-s,--strace}'[syscalls only]' \
+                        '(-l --ltrace)'{-l,--ltrace}'[library calls only]' \
+                        '(-a --all)'{-a,--all}'[strace + ltrace]' \
+                        '*:command:_command_names -e'
+                    ;;
+                watch)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '1:glob pattern:_files' \
+                        '2:command:_command_names -e'
+                    ;;
+                snapshot)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '1:name:'
+                    ;;
+                restore)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '1:snapshot:->snapshots' \
+                        '*:component:(all hash aliases env tmux vim history dirs)'
+                    if [[ "$state" == snapshots ]]; then
+                        local -a snaps
+                        snaps=( "$ZPWR_LOCAL"/snapshots/*(N/:t) )
+                        _describe 'snapshot' snaps
+                    fi
+                    ;;
+                taillog)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-n --lines)'{-n,--lines}'[number of lines]:lines:' \
+                        '(-f --no-follow)'{-f,--no-follow}'[no follow]' \
+                        '(-r --raw)'{-r,--raw}'[raw output]' \
+                        '*:logfile:_files'
+                    ;;
+                wizard|manual|tutorial|docs|study)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-t --toc)'{-t,--toc}'[table of contents]' \
+                        '(-s --search)'{-s,--search}'[search]:pattern:' \
+                        '(-l --list)'{-l,--list}'[list pages]' \
+                        '1:page number:'
                     ;;
                 startsend*|stopsend*)
                     __tmux-panes

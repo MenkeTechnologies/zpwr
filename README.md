@@ -58,6 +58,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Command Trace](#command-trace----zpwr-trace) -- zpwr trace
 - [Function Dependencies](#function-dependencies----zpwr-deps) -- zpwr deps
 - [Colorized Log Viewer](#colorized-log-viewer----zpwr-taillog) -- zpwr taillog
+- [The ZPWR Encyclopedia](#the-zpwr-encyclopedia----zpwr-wizard) -- zpwr wizard
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
@@ -932,6 +933,26 @@ zpwr taillog /var/log/system.log  # custom logfile
 ```
 
 Requires `ccze` (`brew install ccze` or `apt install ccze`).
+
+## The ZPWR Encyclopedia -- zpwr wizard
+`zpwr wizard` launches a 110-page interactive encyclopedia covering every zpwr feature, verb, subsystem, and keybinding reference appendix.  Also invokable as `zpwr manual`, `zpwr tutorial`, or `zpwr docs`.  Vim-style navigation with chapter jumping, search, random page, and a full keybinding help screen.
+
+```sh
+zpwr wizard -h             # cyberpunk help with keybinding reference
+zpwr wizard                # start from page 1
+zpwr wizard 42             # jump to page 42
+zpwr wizard --toc          # table of contents
+zpwr wizard --search git   # find pages about git
+zpwr wizard --list         # list all pages
+zpwr manual                # same as wizard
+zpwr tutorial              # same as wizard
+zpwr docs                  # same as wizard
+zpwr study                 # split-pane: book left, shell right (new tmux session)
+zpwr study 42              # start study session at page 42
+zpwr study -v              # vertical split (book top, shell bottom)
+```
+
+Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  25 chapters covering getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, and a complete alphabetical reference of all 408+ verbs.
 
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.
