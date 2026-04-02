@@ -77,23 +77,13 @@ def convert_line(text):
         if stripped_clean.startswith(cmd_prefixes) or check_clean.startswith(cmd_prefixes):
             is_cmd = True
     if is_cmd:
-        # Use strip_colors + escape_latex on the raw text for commands
-        # but preserve $ZPWR style env vars
         cmd_text = strip_colors(text).strip()
-        # Strip leading $ prompt
-        cmd_text = re.sub(r'^\$\s*', '', cmd_text)
-        # Escape for LaTeX but preserve $ in env var names
-        cmd_text = cmd_text.replace('\\', '\\textbackslash{}')
-        cmd_text = cmd_text.replace('&', '\\&')
-        cmd_text = cmd_text.replace('%', '\\%')
-        cmd_text = cmd_text.replace('#', '\\#')
-        cmd_text = cmd_text.replace('_', '\\_')
-        cmd_text = cmd_text.replace('{', '\\{')
-        cmd_text = cmd_text.replace('}', '\\}')
-        cmd_text = cmd_text.replace('~', '\\textasciitilde{}')
-        cmd_text = cmd_text.replace('^', '\\textasciicircum{}')
-        # Keep $ for env vars like $ZPWR
-        cmd_text = cmd_text.replace('\\textbackslash\\{\\}', '\\textbackslash{}')
+        # Strip leading $ prompt and \$ prompt
+        cmd_text = re.sub(r'^\\?\$\s*', '', cmd_text)
+        # Escape for LaTeX
+        cmd_text = escape_latex(cmd_text)
+        # Remove any remaining \$ from code box output
+        cmd_text = cmd_text.replace('\\$', '')
         return ('command', cmd_text)
     if '${D}' in original and '//' in text:
         return ('comment', clean)
@@ -314,7 +304,7 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
 {\fontsize{42}{50}\selectfont\bfseries\color{neoncyan} THE ZPWR}\\[0.5cm]
 {\fontsize{42}{50}\selectfont\bfseries\color{neonpink} ENCYCLOPEDIA}\\[2cm]
 {\Large\color{bodytext} A Hacker's Field Guide to the Terminal}\\[2cm]
-''' + r'''{\large\color{neongreen} ''' + str(len(pages)) + r''' Pages\quad\color{dimtext}//\quad\color{neonyellow}''' + str(num_chapters) + r''' Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
+''' + r'''{\large\color{neonyellow}''' + str(num_chapters) + r''' Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
 ''' + r'''{\color{bodytext}\large MenkeTechnologies}\\[0.3cm]
 {\color{dimtext}\small \url{https://github.com/MenkeTechnologies/zpwr}}\\[3cm]
 {\color{dimtext}\small CYBERPUNK EDITION\quad//\quad Generated from \texttt{zpwr wizard}}\\[1cm]

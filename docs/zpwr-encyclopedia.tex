@@ -208,7 +208,7 @@
 {\fontsize{42}{50}\selectfont\bfseries\color{neoncyan} THE ZPWR}\\[0.5cm]
 {\fontsize{42}{50}\selectfont\bfseries\color{neonpink} ENCYCLOPEDIA}\\[2cm]
 {\Large\color{bodytext} A Hacker's Field Guide to the Terminal}\\[2cm]
-{\large\color{neongreen} 175 Pages\quad\color{dimtext}//\quad\color{neonyellow}45 Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
+{\large\color{neonyellow}45 Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
 {\color{bodytext}\large MenkeTechnologies}\\[0.3cm]
 {\color{dimtext}\small \url{https://github.com/MenkeTechnologies/zpwr}}\\[3cm]
 {\color{dimtext}\small CYBERPUNK EDITION\quad//\quad Generated from \texttt{zpwr wizard}}\\[1cm]
@@ -447,7 +447,7 @@ Located at \textbackslash{}\$ZPWR\_LOCAL/.tokens.sh This file is gitignored. Put
 {\bfseries\color{neonyellow} EDITOR COMMANDS}\vspace{4pt}
 
 \begin{codebox}
-zpwr edit      \# launch \textbackslash{}$EDITOR\\
+zpwr edit      \# launch \textbackslash{}EDITOR\\
 zpwr editor    \# same thing\\
 zpwr vimconfig \# edit all zpwr configs in vim\\
 \end{codebox}
@@ -556,17 +556,17 @@ Every zpwr directory has a one-word teleporter. No paths. No thinking. Just say 
 {\bfseries\color{neonyellow} THE HOME VERB FAMILY}\vspace{4pt}
 
 \begin{codebox}
-zpwr home                \# cd \textbackslash{}$ZPWR (the root)\\
-zpwr homelocal           \# cd \textbackslash{}$ZPWR\_LOCAL\\
-zpwr homescripts         \# cd \textbackslash{}$ZPWR\_SCRIPTS\\
-zpwr homeenv             \# cd \textbackslash{}$ZPWR\_ENV\\
-zpwr homeinstall         \# cd \textbackslash{}$ZPWR\_INSTALL\\
-zpwr homeautoload        \# cd \textbackslash{}$ZPWR\_AUTOLOAD\\
-zpwr homeautoloadcommon   \# cd \textbackslash{}$ZPWR\_AUTOLOAD\_COMMON\\
-zpwr homecomps           \# cd \textbackslash{}$ZPWR\_COMPS\\
-zpwr hometest            \# cd \textbackslash{}$ZPWR\_TEST\\
-zpwr hometmux            \# cd \textbackslash{}$ZPWR\_TMUX\\
-zpwr homeexercism        \# cd \textbackslash{}$HOME/Exercism\\
+zpwr home                \# cd \textbackslash{}ZPWR (the root)\\
+zpwr homelocal           \# cd \textbackslash{}ZPWR\_LOCAL\\
+zpwr homescripts         \# cd \textbackslash{}ZPWR\_SCRIPTS\\
+zpwr homeenv             \# cd \textbackslash{}ZPWR\_ENV\\
+zpwr homeinstall         \# cd \textbackslash{}ZPWR\_INSTALL\\
+zpwr homeautoload        \# cd \textbackslash{}ZPWR\_AUTOLOAD\\
+zpwr homeautoloadcommon   \# cd \textbackslash{}ZPWR\_AUTOLOAD\_COMMON\\
+zpwr homecomps           \# cd \textbackslash{}ZPWR\_COMPS\\
+zpwr hometest            \# cd \textbackslash{}ZPWR\_TEST\\
+zpwr hometmux            \# cd \textbackslash{}ZPWR\_TMUX\\
+zpwr homeexercism        \# cd \textbackslash{}HOME/Exercism\\
 \end{codebox}
 
 
@@ -684,13 +684,13 @@ shortcut alias: zco
 {\bfseries\color{neonyellow} PLUGIN ECOSYSTEM}\vspace{4pt}
 
 \begin{codebox}
-zpwr plugins       \# cd to \textbackslash{}$ZSH\_CUSTOM/plugins\\
+zpwr plugins       \# cd to \textbackslash{}ZSH\_CUSTOM/plugins\\
 \end{codebox}
 
 shortcut alias: zpl This is where oh-my-zsh custom plugins live. Your third-party zsh plugins are neighbors here.
 
 \begin{codebox}
-zpwr forked        \# cd to \textbackslash{}$ZPWR\_FORKED\_DIR\\
+zpwr forked        \# cd to \textbackslash{}ZPWR\_FORKED\_DIR\\
 zpwr fp            \# same thing\\
 \end{codebox}
 
@@ -701,13 +701,13 @@ Forked repos that zpwr depends on live here. Useful when you need to hack on a d
 {\bfseries\color{neonyellow} SPECIAL DIRECTORIES}\vspace{4pt}
 
 \begin{codebox}
-zpwr hidden        \# cd to \textbackslash{}$ZPWR\_HIDDEN\_DIR\\
+zpwr hidden        \# cd to \textbackslash{}ZPWR\_HIDDEN\_DIR\\
 \end{codebox}
 
 The hidden directory. Dot-prefixed internal state.
 
 \begin{codebox}
-zpwr repo          \# cd to \textbackslash{}$ZPWR\_REPO\_NAME\\
+zpwr repo          \# cd to \textbackslash{}ZPWR\_REPO\_NAME\\
 zpwr zp            \# same thing\\
 zpwr zpwr          \# same thing (yes, zpwr zpwr)\\
 \end{codebox}
@@ -788,8 +788,8 @@ zpwr gitdir            \# check if pwd is a git dir\\
 {\bfseries\color{neonyellow} TAGS}\vspace{4pt}
 
 \begin{codebox}
-zpwr gitedittag        \# print tag to \textbackslash{}$BUFFER\\
-zpwr gitupdatetag      \# print tag and latest msg to \textbackslash{}$BUFFER\\
+zpwr gitedittag        \# print tag to \textbackslash{}BUFFER\\
+zpwr gitupdatetag      \# print tag and latest msg to \textbackslash{}BUFFER\\
 \end{codebox}
 
 
@@ -1321,7 +1321,7 @@ zpwr findsearch          \# find across the entire drive\\
 Uses find(1) to search the whole filesystem. Results feed into fzf. Pick one, open it. Slow on first run. Worth the wait.
 
 \begin{codebox}
-zpwr findsearchedit      \# same but result goes to \textbackslash{}$BUFFER\\
+zpwr findsearchedit      \# same but result goes to \textbackslash{}BUFFER\\
 \end{codebox}
 
 
@@ -1335,7 +1335,7 @@ zpwr locatesearch        \# search the locate database\\
 Uses locate(1) which searches a pre-built index. Blazing fast. But only as fresh as your last updatedb.
 
 \begin{codebox}
-zpwr locatesearchedit    \# same but result goes to \textbackslash{}$BUFFER\\
+zpwr locatesearchedit    \# same but result goes to \textbackslash{}BUFFER\\
 \end{codebox}
 
 
@@ -1368,7 +1368,7 @@ zpwr wordsearch          \# find file by content in sub dir\\
 Greps through files in the current tree. Results show matching lines with filenames. Fzf preview shows the file with match highlighted. Select one, jump straight to it.
 
 \begin{codebox}
-zpwr wordsearchedit      \# same but result goes to \textbackslash{}$BUFFER\\
+zpwr wordsearchedit      \# same but result goes to \textbackslash{}BUFFER\\
 \end{codebox}
 
 Puts the selected file path on your command line. Useful when you want to pipe or chain commands.
@@ -1640,7 +1640,7 @@ zpwr vimfilesearch          \# fzf find file -> open in vim\\
 Lists files in the current tree via fzf. Select one, it opens in vim. No path typing.
 
 \begin{codebox}
-zpwr vimfilesearchedit      \# fzf find file -> path to \textbackslash{}$BUFFER\\
+zpwr vimfilesearchedit      \# fzf find file -> path to \textbackslash{}BUFFER\\
 \end{codebox}
 
 Same search but puts the path on your command line.
@@ -1656,7 +1656,7 @@ zpwr vimwordsearch          \# fzf grep content -> open in vim\\
 Searches file contents, shows matches in fzf. Select a match, vim opens at that location.
 
 \begin{codebox}
-zpwr vimwordsearchedit      \# same but path to \textbackslash{}$BUFFER\\
+zpwr vimwordsearchedit      \# same but path to \textbackslash{}BUFFER\\
 \end{codebox}
 
 
@@ -1665,9 +1665,9 @@ zpwr vimwordsearchedit      \# same but path to \textbackslash{}$BUFFER\\
 
 \begin{codebox}
 zpwr vimfindsearch          \# find(1) -> fzf -> vim\\
-zpwr vimfindsearchedit      \# find(1) -> fzf -> \textbackslash{}$BUFFER\\
+zpwr vimfindsearchedit      \# find(1) -> fzf -> \textbackslash{}BUFFER\\
 zpwr vimlocatesearch        \# locate -> fzf -> vim\\
-zpwr vimlocatesearchedit    \# locate -> fzf -> \textbackslash{}$BUFFER\\
+zpwr vimlocatesearchedit    \# locate -> fzf -> \textbackslash{}BUFFER\\
 \end{codebox}
 
 The search escalation ladder from page 15 but with vim as the final destination instead of a pager.
@@ -2502,7 +2502,7 @@ After finding a variable in the cache, this verb applies it to your current sess
 {\bfseries\color{neonyellow} ENVEDIT: EDIT THE ENVIRONMENT}\vspace{4pt}
 
 \begin{codebox}
-zpwr envedit                        \# open env cache in \textbackslash{}$EDITOR\\
+zpwr envedit                        \# open env cache in \textbackslash{}EDITOR\\
 \end{codebox}
 
 Opens the environment cache file in your editor. Make changes, save, and the cache is updated. This is the surgical approach: when you know exactly which variable needs tweaking.
@@ -2530,7 +2530,7 @@ Found it: ZPWR\_EDITOR=nvim
 \textbackslash{}"I want to change a bunch of ZPWR\_ vars.\textbackslash{}"
 
 \begin{codebox}
-zpwr envedit                       \# opens in \textbackslash{}$EDITOR\\
+zpwr envedit                       \# opens in \textbackslash{}EDITOR\\
 \end{codebox}
 
 Edit the vars, save, done.
@@ -2857,7 +2857,7 @@ zpwr doctor                         \# checks for duplicate PATH/FPATH\\
 print -l \textbackslash{}\$path | sort | uniq -d     \# show only duplicated entries
 
 \begin{codebox}
-echo \textbackslash{}$\#path                         \# count PATH entries\\
+echo \textbackslash{}\#path                         \# count PATH entries\\
 \end{codebox}
 
 A healthy PATH has 10-30 entries. If you see 50+, something is adding entries in a loop.
@@ -4209,8 +4209,8 @@ emacs: an operating system lacking only a decent editor
 Opens all ZPWR framework files in emacs via fzf. Every autoload, script, config -- the whole kingdom.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsall              \# browse all files\\
-\textbackslash{}$ zpwr emacsalledit          \# same but editable\\
+zpwr emacsall              \# browse all files\\
+zpwr emacsalledit          \# same but editable\\
 \end{codebox}
 
 
@@ -4220,10 +4220,10 @@ Opens all ZPWR framework files in emacs via fzf. Every autoload, script, config 
 Opens recently edited files. Emacs remembers where you have been, like a browser history for code.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsrecent            \# fzf recent files\\
-\textbackslash{}$ zpwr emacsrecentcd          \# cd to recent dir\\
-\textbackslash{}$ zpwr emacsrecentsudo        \# recent with sudo\\
-\textbackslash{}$ zpwr emacsrecentsudocd      \# sudo + cd combo\\
+zpwr emacsrecent            \# fzf recent files\\
+zpwr emacsrecentcd          \# cd to recent dir\\
+zpwr emacsrecentsudo        \# recent with sudo\\
+zpwr emacsrecentsudocd      \# sudo + cd combo\\
 \end{codebox}
 
 
@@ -4233,8 +4233,8 @@ Opens recently edited files. Emacs remembers where you have been, like a browser
 Browse and open ZPWR scripts directory. Where the shell scripts live and breathe.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsscripts           \# browse scripts\\
-\textbackslash{}$ zpwr emacsscriptedit        \# edit a script\\
+zpwr emacsscripts           \# browse scripts\\
+zpwr emacsscriptedit        \# edit a script\\
 \end{codebox}
 
 
@@ -4244,7 +4244,7 @@ Browse and open ZPWR scripts directory. Where the shell scripts live and breathe
 Open autoloaded zsh functions in emacs. The beating heart of ZPWR's function library.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsautoload          \# browse autoloads\\
+zpwr emacsautoload          \# browse autoloads\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // protip: emacsrecent is your daily driver}
@@ -4269,8 +4269,8 @@ grep is for amateurs, we have fzf-powered search beams
 {\bfseries\color{neonyellow} FILE SEARCH (by filename):}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsfilesearch        \# fzf filename search\\
-\textbackslash{}$ zpwr emacsfilesearchedit    \# search + edit\\
+zpwr emacsfilesearch        \# fzf filename search\\
+zpwr emacsfilesearchedit    \# search + edit\\
 \end{codebox}
 
 Searches file NAMES across the ZPWR tree. Fast, fuzzy, and feeds results into emacs.
@@ -4280,8 +4280,8 @@ Searches file NAMES across the ZPWR tree. Fast, fuzzy, and feeds results into em
 {\bfseries\color{neonyellow} WORD SEARCH (by content):}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacswordsearch        \# search file content\\
-\textbackslash{}$ zpwr emacswordsearchedit    \# content search + edit\\
+zpwr emacswordsearch        \# search file content\\
+zpwr emacswordsearchedit    \# content search + edit\\
 \end{codebox}
 
 Searches INSIDE files for patterns. Like ag/rg but with fzf preview and direct-to-emacs piping.
@@ -4291,10 +4291,10 @@ Searches INSIDE files for patterns. Like ag/rg but with fzf preview and direct-t
 {\bfseries\color{neonyellow} FIND \& LOCATE SEARCH:}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsfindsearch        \# find-based search\\
-\textbackslash{}$ zpwr emacsfindsearchedit    \# find + edit\\
-\textbackslash{}$ zpwr emacslocatesearch      \# locate db search\\
-\textbackslash{}$ zpwr emacslocatesearchedit  \# locate + edit\\
+zpwr emacsfindsearch        \# find-based search\\
+zpwr emacsfindsearchedit    \# find + edit\\
+zpwr emacslocatesearch      \# locate db search\\
+zpwr emacslocatesearchedit  \# locate + edit\\
 \end{codebox}
 
 
@@ -4302,9 +4302,9 @@ Searches INSIDE files for patterns. Like ag/rg but with fzf preview and direct-t
 {\bfseries\color{neonyellow} TAGS -- CODE NAVIGATION:}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsctags             \# ctags generation\\
-\textbackslash{}$ zpwr emacsgtags             \# GNU Global tags\\
-\textbackslash{}$ zpwr emacsgtagsedit         \# gtags + jump to def\\
+zpwr emacsctags             \# ctags generation\\
+zpwr emacsgtags             \# GNU Global tags\\
+zpwr emacsgtagsedit         \# gtags + jump to def\\
 \end{codebox}
 
 Tags let emacs jump to function definitions instantly. ctags for basic tagging, gtags for cross-reference.
@@ -4339,7 +4339,7 @@ because starting emacs fresh every time is a war crime
 Edit ZPWR's emacs configuration files. The bridge between the shell framework and emacs-land.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsconfig            \# edit zpwr emacs cfg\\
+zpwr emacsconfig            \# edit zpwr emacs cfg\\
 \end{codebox}
 
 
@@ -4349,7 +4349,7 @@ Edit ZPWR's emacs configuration files. The bridge between the shell framework an
 Edit your personal emacs init files (init.el, etc). Deeper than emacsconfig -- this is YOUR emacs setup.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsemacsconfig       \# edit \textasciitilde{}/.emacs.d\\
+zpwr emacsemacsconfig       \# edit \textasciitilde{}/.emacs.d\\
 \end{codebox}
 
 
@@ -4359,7 +4359,7 @@ Edit your personal emacs init files (init.el, etc). Deeper than emacsconfig -- t
 Opens files using emacsclient, connecting to a running emacs daemon. Instant file opens, no startup penalty.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsallserver         \# open via daemon\\
+zpwr emacsallserver         \# open via daemon\\
 \end{codebox}
 
 HOW THE SERVER WORKFLOW WORKS: 1. Start emacs daemon:  emacs --daemon 2. Use emacsallserver to open files via emacsclient 3. Files open instantly in the running emacs instance 4. No more 3-second startup tax per file
@@ -4371,7 +4371,7 @@ HOW THE SERVER WORKFLOW WORKS: 1. Start emacs daemon:  emacs --daemon 2. Use ema
 Edit your tokens/secrets file in emacs. API keys, env vars, the classified stuff.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacstokens            \# edit \textbackslash{}$ZPWR\_LOCAL/.tokens.sh\\
+zpwr emacstokens            \# edit \textbackslash{}ZPWR\_LOCAL/.tokens.sh\\
 \end{codebox}
 
 
@@ -4381,7 +4381,7 @@ Edit your tokens/secrets file in emacs. API keys, env vars, the classified stuff
 Open the entire ZPWR directory tree in emacs.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacszpwr              \# the whole framework\\
+zpwr emacszpwr              \# the whole framework\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // emacsclient + daemon = the cheat code}
@@ -4416,7 +4416,7 @@ one terminal to rule them all, split them, and in panes bind them
 Attach to an existing tmux session. If no session exists, one will be summoned.
 
 \begin{codebox}
-\textbackslash{}$ zpwr attach                 \# rejoin the matrix\\
+zpwr attach                 \# rejoin the matrix\\
 \end{codebox}
 
 
@@ -4426,7 +4426,7 @@ Attach to an existing tmux session. If no session exists, one will be summoned.
 Detach from current tmux session gracefully. Your processes keep running in the background.
 
 \begin{codebox}
-\textbackslash{}$ zpwr detach                 \# leave but don't kill\\
+zpwr detach                 \# leave but don't kill\\
 \end{codebox}
 
 
@@ -4436,7 +4436,7 @@ Detach from current tmux session gracefully. Your processes keep running in the 
 Kill the tmux server. Nuclear option. Everything dies. WARNING: all sessions, windows, and panes -- gone.
 
 \begin{codebox}
-\textbackslash{}$ zpwr killmux                \# scorched earth\\
+zpwr killmux                \# scorched earth\\
 \end{codebox}
 
 
@@ -4446,7 +4446,7 @@ Kill the tmux server. Nuclear option. Everything dies. WARNING: all sessions, wi
 Start a new tmux session with ZPWR's custom layout. Preconfigured panes, windows, and keybindings.
 
 \begin{codebox}
-\textbackslash{}$ zpwr start                  \# bootstrap tmux\\
+zpwr start                  \# bootstrap tmux\\
 \end{codebox}
 
 
@@ -4456,7 +4456,7 @@ Start a new tmux session with ZPWR's custom layout. Preconfigured panes, windows
 Start tmux with multiple pre-configured tabs. Each tab gets its own purpose -- dev, logs, git, etc.
 
 \begin{codebox}
-\textbackslash{}$ zpwr starttabs              \# multi-tab setup\\
+zpwr starttabs              \# multi-tab setup\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // the tmux lifecycle:}
@@ -4485,7 +4485,7 @@ the closest thing to being in two places at once
 Send keystrokes to ALL panes in the current window. Whatever you type goes to every pane simultaneously.
 
 \begin{codebox}
-\textbackslash{}$ zpwr startsend              \# enable key broadcast\\
+zpwr startsend              \# enable key broadcast\\
 \end{codebox}
 
 USE CASE: You have 4 panes SSHed into 4 servers. You need to run the same command on all of them. startsend + type once = executed on all 4.
@@ -4497,7 +4497,7 @@ USE CASE: You have 4 panes SSHed into 4 servers. You need to run the same comman
 Like startsend, but broadcasts across ALL windows and ALL panes in the entire tmux session.
 
 \begin{codebox}
-\textbackslash{}$ zpwr startsendfull          \# global broadcast\\
+zpwr startsendfull          \# global broadcast\\
 \end{codebox}
 
 DANGER: every pane in every window receives input. Make sure you know what you are doing.
@@ -4509,7 +4509,7 @@ DANGER: every pane in every window receives input. Make sure you know what you a
 Turn off key broadcasting. Back to single-pane input.
 
 \begin{codebox}
-\textbackslash{}$ zpwr stopsend               \# disable broadcast\\
+zpwr stopsend               \# disable broadcast\\
 \end{codebox}
 
 
@@ -4540,7 +4540,7 @@ because Ctrl-C Ctrl-V is so last millennium
 Paste from the tmux paste buffer into the terminal. Tmux has its own clipboard, separate from the system.
 
 \begin{codebox}
-\textbackslash{}$ zpwr pastebuffer            \# paste tmux buffer\\
+zpwr pastebuffer            \# paste tmux buffer\\
 \end{codebox}
 
 
@@ -4550,7 +4550,7 @@ Paste from the tmux paste buffer into the terminal. Tmux has its own clipboard, 
 Paste a specific string into the active pane. Programmatic pasting -- useful in scripts.
 
 \begin{codebox}
-\textbackslash{}$ zpwr pastestring 'echo hello' \# paste literal text\\
+zpwr pastestring 'echo hello' \# paste literal text\\
 \end{codebox}
 
 
@@ -4560,7 +4560,7 @@ Paste a specific string into the active pane. Programmatic pasting -- useful in 
 Paste and execute a command in the active pane. Like pastestring but hits enter for you.
 
 \begin{codebox}
-\textbackslash{}$ zpwr pastecommand 'ls -la'  \# paste + execute\\
+zpwr pastecommand 'ls -la'  \# paste + execute\\
 \end{codebox}
 
 
@@ -4570,7 +4570,7 @@ Paste and execute a command in the active pane. Like pastestring but hits enter 
 Open a Google search in your default browser. Because sometimes you need to leave the terminal.
 
 \begin{codebox}
-\textbackslash{}$ zpwr google 'zsh completion' \# search the web\\
+zpwr google 'zsh completion' \# search the web\\
 \end{codebox}
 
 
@@ -4580,7 +4580,7 @@ Open a Google search in your default browser. Because sometimes you need to leav
 Open any URL in the default browser.
 
 \begin{codebox}
-\textbackslash{}$ zpwr openurl https://github.com \# open URL\\
+zpwr openurl https://github.com \# open URL\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // the clipboard pipeline:}
@@ -4609,7 +4609,7 @@ zsh-autocomplete + tmux = sentient tab completion
 Enable the ZPWR autocomplete integration. Completions appear as you type, no Tab needed.
 
 \begin{codebox}
-\textbackslash{}$ zpwr startauto              \# enable live complete\\
+zpwr startauto              \# enable live complete\\
 \end{codebox}
 
 
@@ -4619,7 +4619,7 @@ Enable the ZPWR autocomplete integration. Completions appear as you type, no Tab
 Disable autocomplete. Sometimes you want silence.
 
 \begin{codebox}
-\textbackslash{}$ zpwr stopauto               \# disable live complete\\
+zpwr stopauto               \# disable live complete\\
 \end{codebox}
 
 
@@ -4637,8 +4637,8 @@ FEATURES: * Live suggestions as you type * History-based predictions * Path comp
 * Each tmux pane runs its own zsh instance * Autocomplete state is per-pane * startauto/stopauto affects current pane only * If completions feel slow, check \textbackslash{}\$ZPWR\_COMPS\_CACHE
 
 \begin{codebox}
-\textbackslash{}$ zpwr stopauto               \# when it gets noisy\\
-\textbackslash{}$ zpwr startauto              \# when you miss it\\
+zpwr stopauto               \# when it gets noisy\\
+zpwr startauto              \# when you miss it\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // autocomplete is like a copilot for your shell}
@@ -4665,7 +4665,7 @@ every PID tells a story, most of them tragic
 Displays a live process tree. Watch your processes branch, fork, and occasionally die unexpectedly.
 
 \begin{codebox}
-\textbackslash{}$ zpwr pstreemonitor          \# live process tree\\
+zpwr pstreemonitor          \# live process tree\\
 \end{codebox}
 
 Uses pstree under the hood with continuous refresh. Like htop's tree view but from the ZPWR command line.
@@ -4677,7 +4677,7 @@ Uses pstree under the hood with continuous refresh. Like htop's tree view but fr
 Show info about the current terminal/tty.
 
 \begin{codebox}
-\textbackslash{}$ zpwr tty                    \# current tty info\\
+zpwr tty                    \# current tty info\\
 \end{codebox}
 
 
@@ -4729,8 +4729,8 @@ packets don't lie, but DNS sometimes does
 Enhanced DNS lookup. Wraps dig with cleaner output. When you need to know where a domain really points.
 
 \begin{codebox}
-\textbackslash{}$ zpwr digs github.com         \# DNS lookup\\
-\textbackslash{}$ zpwr digs example.com        \# check any domain\\
+zpwr digs github.com         \# DNS lookup\\
+zpwr digs example.com        \# check any domain\\
 \end{codebox}
 
 Shows A records, CNAME chains, TTLs -- the works. Faster than remembering dig +short +noall +answer.
@@ -4742,8 +4742,8 @@ Shows A records, CNAME chains, TTLs -- the works. Faster than remembering dig +s
 Ping a host. Simple, reliable, essential. 'pi' is the short alias because typing matters.
 
 \begin{codebox}
-\textbackslash{}$ zpwr pi google.com           \# quick ping\\
-\textbackslash{}$ zpwr ping 8.8.8.8           \# verbose ping\\
+zpwr pi google.com           \# quick ping\\
+zpwr ping 8.8.8.8           \# verbose ping\\
 \end{codebox}
 
 
@@ -4753,7 +4753,7 @@ Ping a host. Simple, reliable, essential. 'pi' is the short alias because typing
 Ping with extended options. More detailed network diagnostics for when simple ping is not enough.
 
 \begin{codebox}
-\textbackslash{}$ zpwr pir 192.168.1.1        \# extended ping\\
+zpwr pir 192.168.1.1        \# extended ping\\
 \end{codebox}
 
 
@@ -4786,7 +4786,7 @@ the onion router: because privacy is not a crime
 Check your current Tor exit node IP address. Confirms you're routing through the onion network.
 
 \begin{codebox}
-\textbackslash{}$ zpwr torip                  \# show tor exit IP\\
+zpwr torip                  \# show tor exit IP\\
 \end{codebox}
 
 If Tor is running, this shows the exit node's IP. If not, it'll tell you Tor isn't connected.
@@ -4798,7 +4798,7 @@ If Tor is running, this shows the exit node's IP. If not, it'll tell you Tor isn
 Request a new Tor circuit. Get a fresh exit node and a new apparent IP address.
 
 \begin{codebox}
-\textbackslash{}$ zpwr toriprenew             \# new identity\\
+zpwr toriprenew             \# new identity\\
 \end{codebox}
 
 BEFORE YOU START:
@@ -4837,7 +4837,7 @@ it works on my machine --> we ship the machine
 The nuclear option for Docker. Removes EVERYTHING: containers, images, volumes, networks -- all of it.
 
 \begin{codebox}
-\textbackslash{}$ zpwr dockerwipe             \# purge all docker\\
+zpwr dockerwipe             \# purge all docker\\
 \end{codebox}
 
 WARNING: This is not gentle. It will: - Stop all running containers - Remove all containers - Remove all images - Remove all volumes - Prune everything
@@ -4851,8 +4851,8 @@ WHEN TO USE: * Disk space emergency (docker images love eating disk) * Fresh sta
 Reverse-engineer a Docker image to show its Dockerfile. See how an image was built without the source.
 
 \begin{codebox}
-\textbackslash{}$ zpwr dfimage nginx:latest   \# reverse Dockerfile\\
-\textbackslash{}$ zpwr dfimage myapp:v2       \# inspect any image\\
+zpwr dfimage nginx:latest   \# reverse Dockerfile\\
+zpwr dfimage myapp:v2       \# inspect any image\\
 \end{codebox}
 
 Useful for auditing third-party images. Trust but verify what's in that container.
@@ -4885,8 +4885,8 @@ git clone is just the beginning of the relationship
 Clone a git repository with ZPWR's enhanced setup. Handles auth, directory placement, and post-clone hooks.
 
 \begin{codebox}
-\textbackslash{}$ zpwr clone user/repo         \# clone from GitHub\\
-\textbackslash{}$ zpwr clone https://...       \# clone any URL\\
+zpwr clone user/repo         \# clone from GitHub\\
+zpwr clone https://...       \# clone any URL\\
 \end{codebox}
 
 
@@ -4896,7 +4896,7 @@ Clone a git repository with ZPWR's enhanced setup. Handles auth, directory place
 Open the current git repo's GitHub page in browser. Instant context switch from terminal to web.
 
 \begin{codebox}
-\textbackslash{}$ zpwr reveal                 \# open repo in browser\\
+zpwr reveal                 \# open repo in browser\\
 \end{codebox}
 
 
@@ -4906,7 +4906,7 @@ Open the current git repo's GitHub page in browser. Instant context switch from 
 Open GitHub pages for the repo AND its submodules. When you need the full picture of a multi-repo project.
 
 \begin{codebox}
-\textbackslash{}$ zpwr revealrecurse          \# open all repos\\
+zpwr revealrecurse          \# open all repos\\
 \end{codebox}
 
 
@@ -4920,7 +4920,7 @@ Open GitHub pages for the repo AND its submodules. When you need the full pictur
 {\bfseries\color{neonyellow} RELATED TOOLS:}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr killremote             \# kill remote sessions\\
+zpwr killremote             \# kill remote sessions\\
 \end{codebox}
 
 killremote terminates remote SSH/tmux sessions that have gone stale. Cleanup for the disciplined operator.
@@ -4957,7 +4957,7 @@ ZPWR has a full structured logging system with four levels. Each level has a fil
 {\bfseries\color{neonyellow} LEVEL 1: TRACE}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr logtrace 'entering func'  \# most verbose\\
+zpwr logtrace 'entering func'  \# most verbose\\
 \end{codebox}
 
 The firehose. Every function entry, variable assignment, and internal state change. Use for deep debugging only.
@@ -4967,7 +4967,7 @@ The firehose. Every function entry, variable assignment, and internal state chan
 {\bfseries\color{neonyellow} LEVEL 2: DEBUG}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr logdebug 'cache miss'    \# developer detail\\
+zpwr logdebug 'cache miss'    \# developer detail\\
 \end{codebox}
 
 Detailed info for development. Cache behavior, branch decisions, intermediate values.
@@ -4977,7 +4977,7 @@ Detailed info for development. Cache behavior, branch decisions, intermediate va
 {\bfseries\color{neonyellow} LEVEL 3: INFO}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr loginfo 'update done'    \# normal operations\\
+zpwr loginfo 'update done'    \# normal operations\\
 \end{codebox}
 
 Standard operational messages. \textbackslash{}"Started\textbackslash{}", \textbackslash{}"Completed\textbackslash{}", \textbackslash{}"Loaded 47 plugins\textbackslash{}". The daily heartbeat.
@@ -4987,7 +4987,7 @@ Standard operational messages. \textbackslash{}"Started\textbackslash{}", \textb
 {\bfseries\color{neonyellow} LEVEL 4: ERROR}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr logerror 'file not found' \# something broke\\
+zpwr logerror 'file not found' \# something broke\\
 \end{codebox}
 
 Things that should not have happened but did. Missing files, failed commands, broken assumptions.
@@ -5014,10 +5014,10 @@ Every log verb comes in two flavors:
 {\bfseries\color{neonyellow} FILE VARIANTS (write to \textbackslash{}\$ZPWR\_LOGFILE):}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr logtrace 'msg'          \# --> logfile\\
-\textbackslash{}$ zpwr logdebug 'msg'          \# --> logfile\\
-\textbackslash{}$ zpwr loginfo 'msg'           \# --> logfile\\
-\textbackslash{}$ zpwr logerror 'msg'          \# --> logfile\\
+zpwr logtrace 'msg'          \# --> logfile\\
+zpwr logdebug 'msg'          \# --> logfile\\
+zpwr loginfo 'msg'           \# --> logfile\\
+zpwr logerror 'msg'          \# --> logfile\\
 \end{codebox}
 
 These write silently to the log file. No terminal output. Perfect for background operations and scripts.
@@ -5027,10 +5027,10 @@ These write silently to the log file. No terminal output. Perfect for background
 {\bfseries\color{neonyellow} CONSOLE VARIANTS (write to stderr AND logfile):}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr logtraceconsole 'msg'   \# --> stderr + file\\
-\textbackslash{}$ zpwr logdebugconsole 'msg'   \# --> stderr + file\\
-\textbackslash{}$ zpwr loginfoconsole 'msg'    \# --> stderr + file\\
-\textbackslash{}$ zpwr logerrorconsole 'msg'   \# --> stderr + file\\
+zpwr logtraceconsole 'msg'   \# --> stderr + file\\
+zpwr logdebugconsole 'msg'   \# --> stderr + file\\
+zpwr loginfoconsole 'msg'    \# --> stderr + file\\
+zpwr logerrorconsole 'msg'   \# --> stderr + file\\
 \end{codebox}
 
 These print to your terminal AND write to the log. For interactive debugging when you need to see it live.
@@ -5073,7 +5073,7 @@ somewhere in that wall of text is the answer you seek
 Live tail of the ZPWR log file with ccze colorization. Watch events stream by in glorious technicolor.
 
 \begin{codebox}
-\textbackslash{}$ zpwr taillog                \# live colorized tail\\
+zpwr taillog                \# live colorized tail\\
 \end{codebox}
 
 ccze automatically highlights timestamps, levels, paths, and errors. Makes raw logs actually readable.
@@ -5089,9 +5089,9 @@ ERROR  lines = something broke, investigate immediately WARN   lines = potential
 {\bfseries\color{neonyellow} FILTERING TECHNIQUES:}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ grep ERROR \textbackslash{}$ZPWR\_LOGFILE     \# errors only\\
-\textbackslash{}$ grep -c ERROR \textbackslash{}$ZPWR\_LOGFILE  \# count errors\\
-\textbackslash{}$ tail -100 \textbackslash{}$ZPWR\_LOGFILE      \# last 100 lines\\
+grep ERROR \textbackslash{}ZPWR\_LOGFILE     \# errors only\\
+grep -c ERROR \textbackslash{}ZPWR\_LOGFILE  \# count errors\\
+tail -100 \textbackslash{}ZPWR\_LOGFILE      \# last 100 lines\\
 \end{codebox}
 
 
@@ -5132,9 +5132,9 @@ enabling verbose output is how you stop guessing
 Set this env var to enable debug-level logging. More detail in the log, more signal for your hunt.
 
 \begin{codebox}
-\textbackslash{}$ export ZPWR\_DEBUG=true       \# enable debug\\
-\textbackslash{}$ zpwr reload                  \# reload with debug\\
-\textbackslash{}$ zpwr taillog                 \# watch debug output\\
+export ZPWR\_DEBUG=true       \# enable debug\\
+zpwr reload                  \# reload with debug\\
+zpwr taillog                 \# watch debug output\\
 \end{codebox}
 
 
@@ -5144,8 +5144,8 @@ Set this env var to enable debug-level logging. More detail in the log, more sig
 Maximum verbosity. Every function entry and exit, every variable, every decision point.
 
 \begin{codebox}
-\textbackslash{}$ export ZPWR\_TRACE=true       \# enable trace\\
-\textbackslash{}$ zpwr reload                  \# reload with trace\\
+export ZPWR\_TRACE=true       \# enable trace\\
+zpwr reload                  \# reload with trace\\
 \end{codebox}
 
 WARNING: Trace mode generates MASSIVE log output. Your logfile will grow fast. Use sparingly.
@@ -5163,7 +5163,7 @@ WARNING: Trace mode generates MASSIVE log output. Your logfile will grow fast. U
 \textbackslash{}\$ unset ZPWR\_DEBUG ZPWR\_TRACE  \# back to normal
 
 \begin{codebox}
-\textbackslash{}$ zpwr reload                  \# reload clean\\
+zpwr reload                  \# reload clean\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // debug mode: \textbackslash{}"trust but verify\textbackslash{}" in action}
@@ -5200,7 +5200,7 @@ ZPWR tracks the size of every component. These verbs tell you exactly how big yo
 Count of autoloaded zsh functions in the framework.
 
 \begin{codebox}
-\textbackslash{}$ zpwr autoloadcount           \# how many functions?\\
+zpwr autoloadcount           \# how many functions?\\
 \end{codebox}
 
 
@@ -5210,7 +5210,7 @@ Count of autoloaded zsh functions in the framework.
 Count of shell scripts in \textbackslash{}\$ZPWR/scripts.
 
 \begin{codebox}
-\textbackslash{}$ zpwr scriptcount             \# how many scripts?\\
+zpwr scriptcount             \# how many scripts?\\
 \end{codebox}
 
 
@@ -5220,7 +5220,7 @@ Count of shell scripts in \textbackslash{}\$ZPWR/scripts.
 Count of installed zsh plugins (zinit, oh-my-zsh, etc).
 
 \begin{codebox}
-\textbackslash{}$ zpwr zshplugincount          \# zsh plugins loaded\\
+zpwr zshplugincount          \# zsh plugins loaded\\
 \end{codebox}
 
 
@@ -5230,7 +5230,7 @@ Count of installed zsh plugins (zinit, oh-my-zsh, etc).
 Count of installed vim/neovim plugins.
 
 \begin{codebox}
-\textbackslash{}$ zpwr vimplugincount          \# vim plugins loaded\\
+zpwr vimplugincount          \# vim plugins loaded\\
 \end{codebox}
 
 
@@ -5240,7 +5240,7 @@ Count of installed vim/neovim plugins.
 Count of installed emacs packages.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacsplugincount        \# emacs pkgs loaded\\
+zpwr emacsplugincount        \# emacs pkgs loaded\\
 \end{codebox}
 
 
@@ -5277,8 +5277,8 @@ Counts tell you how many. Lists tell you WHAT. Every count verb has a list count
 List every autoloaded function by name.
 
 \begin{codebox}
-\textbackslash{}$ zpwr autoloadlist            \# all function names\\
-\textbackslash{}$ zpwr autoloadlist | grep fzf \# find fzf funcs\\
+zpwr autoloadlist            \# all function names\\
+zpwr autoloadlist | grep fzf \# find fzf funcs\\
 \end{codebox}
 
 
@@ -5288,7 +5288,7 @@ List every autoloaded function by name.
 List every script in the scripts directory.
 
 \begin{codebox}
-\textbackslash{}$ zpwr scriptlist              \# all scripts\\
+zpwr scriptlist              \# all scripts\\
 \end{codebox}
 
 
@@ -5298,7 +5298,7 @@ List every script in the scripts directory.
 List installed zsh plugins with their sources.
 
 \begin{codebox}
-\textbackslash{}$ zpwr zshpluginlist           \# all zsh plugins\\
+zpwr zshpluginlist           \# all zsh plugins\\
 \end{codebox}
 
 
@@ -5308,7 +5308,7 @@ List installed zsh plugins with their sources.
 List installed vim/neovim plugins.
 
 \begin{codebox}
-\textbackslash{}$ zpwr vimpluginlist           \# all vim plugins\\
+zpwr vimpluginlist           \# all vim plugins\\
 \end{codebox}
 
 
@@ -5318,7 +5318,7 @@ List installed vim/neovim plugins.
 List installed emacs packages.
 
 \begin{codebox}
-\textbackslash{}$ zpwr emacspluginlist         \# all emacs packages\\
+zpwr emacspluginlist         \# all emacs packages\\
 \end{codebox}
 
 
@@ -5326,9 +5326,9 @@ List installed emacs packages.
 {\bfseries\color{neonyellow} POWER COMBOS:}\vspace{4pt}
 
 \begin{codebox}
-\textbackslash{}$ zpwr autoloadlist | wc -l    \# quick count\\
-\textbackslash{}$ zpwr autoloadlist | fzf      \# fuzzy browse\\
-\textbackslash{}$ zpwr scriptlist | sort       \# alphabetical\\
+zpwr autoloadlist | wc -l    \# quick count\\
+zpwr autoloadlist | fzf      \# fuzzy browse\\
+zpwr scriptlist | sort       \# alphabetical\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // lists are grep-able, fzf-able, pipe-able}
@@ -5355,7 +5355,7 @@ your terminal remembers everything, even the mistakes
 Browse command history with fzf. Search, preview, and re-execute past commands interactively.
 
 \begin{codebox}
-\textbackslash{}$ zpwr hist                   \# fzf history browser\\
+zpwr hist                   \# fzf history browser\\
 \end{codebox}
 
 
@@ -5365,7 +5365,7 @@ Browse command history with fzf. Search, preview, and re-execute past commands i
 Edit the history file directly. Surgically remove embarrassing commands or fix typos in saved history.
 
 \begin{codebox}
-\textbackslash{}$ zpwr histedit               \# edit history file\\
+zpwr histedit               \# edit history file\\
 \end{codebox}
 
 Use with care. History surgery is delicate work.
@@ -5377,7 +5377,7 @@ Use with care. History surgery is delicate work.
 Show the path to the current history file. Useful when you're not sure which histfile is active.
 
 \begin{codebox}
-\textbackslash{}$ zpwr histfile               \# show histfile path\\
+zpwr histfile               \# show histfile path\\
 \end{codebox}
 
 
@@ -5387,7 +5387,7 @@ Show the path to the current history file. Useful when you're not sure which his
 Display vim's recent file history from viminfo. What files has vim touched recently?
 
 \begin{codebox}
-\textbackslash{}$ zpwr catviminfo             \# vim file history\\
+zpwr catviminfo             \# vim file history\\
 \end{codebox}
 
 
@@ -5397,8 +5397,8 @@ Display vim's recent file history from viminfo. What files has vim touched recen
 Cross-reference vim/nvim recent files with the recentf list. Where vim and shell history intersect.
 
 \begin{codebox}
-\textbackslash{}$ zpwr catrecentfviminfo      \# vim+recentf cross\\
-\textbackslash{}$ zpwr catnviminforecentf     \# nvim+recentf cross\\
+zpwr catrecentfviminfo      \# vim+recentf cross\\
+zpwr catnviminforecentf     \# nvim+recentf cross\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // your history is a goldmine of workflow patterns}
@@ -5425,7 +5425,7 @@ you can't use what you don't know exists
 List all zpwr subcommands (verbs). The master index of everything zpwr can do.
 
 \begin{codebox}
-\textbackslash{}$ zpwr subcommands             \# all subcommands\\
+zpwr subcommands             \# all subcommands\\
 \end{codebox}
 
 
@@ -5435,7 +5435,7 @@ List all zpwr subcommands (verbs). The master index of everything zpwr can do.
 How many subcommands exist? The number keeps growing.
 
 \begin{codebox}
-\textbackslash{}$ zpwr subcommandscount        \# total count\\
+zpwr subcommandscount        \# total count\\
 \end{codebox}
 
 
@@ -5445,7 +5445,7 @@ How many subcommands exist? The number keeps growing.
 Browse subcommands interactively with fzf. The best way to explore when you're not sure what to try.
 
 \begin{codebox}
-\textbackslash{}$ zpwr verbs         \# fzf subcommands\\
+zpwr verbs         \# fzf subcommands\\
 \end{codebox}
 
 
@@ -5455,9 +5455,9 @@ Browse subcommands interactively with fzf. The best way to explore when you're n
 Alternative verb-centric views of available commands.
 
 \begin{codebox}
-\textbackslash{}$ zpwr verbslist              \# list all verbs\\
-\textbackslash{}$ zpwr verbs               \# fzf browse verbs\\
-\textbackslash{}$ zpwr verbscount             \# count verbs\\
+zpwr verbslist              \# list all verbs\\
+zpwr verbs               \# fzf browse verbs\\
+zpwr verbscount             \# count verbs\\
 \end{codebox}
 
 
@@ -5467,10 +5467,10 @@ Alternative verb-centric views of available commands.
 You're reading it right now. The interactive encyclopedia with vim-style navigation. Very meta. All four names work.
 
 \begin{codebox}
-\textbackslash{}$ zpwr wizard                 \# start the wizard\\
-\textbackslash{}$ zpwr wizard --toc           \# table of contents\\
-\textbackslash{}$ zpwr wizard --search docker  \# search pages\\
-\textbackslash{}$ zpwr wizard 42              \# jump to page 42\\
+zpwr wizard                 \# start the wizard\\
+zpwr wizard --toc           \# table of contents\\
+zpwr wizard --search docker  \# search pages\\
+zpwr wizard 42              \# jump to page 42\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // verbsfzf is the fastest way to discover (alias: subcommandsfzf)}
@@ -5497,7 +5497,7 @@ introspection: when the shell looks in the mirror
 Check if a ZPWR component exists (functions, files, etc).
 
 \begin{codebox}
-\textbackslash{}$ zpwr exists zpwrReload       \# does this exist?\\
+zpwr exists zpwrReload       \# does this exist?\\
 \end{codebox}
 
 
@@ -5507,8 +5507,8 @@ Check if a ZPWR component exists (functions, files, etc).
 Check if a command exists in PATH. Cleaner than 'which' or 'command -v' in scripts.
 
 \begin{codebox}
-\textbackslash{}$ zpwr existscommand git      \# is git installed?\\
-\textbackslash{}$ zpwr existscommand rg       \# is ripgrep here?\\
+zpwr existscommand git      \# is git installed?\\
+zpwr existscommand rg       \# is ripgrep here?\\
 \end{codebox}
 
 
@@ -5518,7 +5518,7 @@ Check if a command exists in PATH. Cleaner than 'which' or 'command -v' in scrip
 Reload the entire ZPWR framework without restarting. Re-sources configs, rebuilds caches, refreshes state.
 
 \begin{codebox}
-\textbackslash{}$ zpwr reload                 \# hot reload everything\\
+zpwr reload                 \# hot reload everything\\
 \end{codebox}
 
 
@@ -5536,7 +5536,7 @@ These are built into zsh, but ZPWR makes them accessible:
 Copy a command's path or definition to clipboard.
 
 \begin{codebox}
-\textbackslash{}$ zpwr copycommand ls         \# copy ls path\\
+zpwr copycommand ls         \# copy ls path\\
 \end{codebox}
 
 
@@ -5546,7 +5546,7 @@ Copy a command's path or definition to clipboard.
 Open a command's source file in your editor. Works for functions, scripts, and binaries.
 
 \begin{codebox}
-\textbackslash{}$ zpwr opencommand zpwrReload  \# view the source\\
+zpwr opencommand zpwrReload  \# view the source\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // existscommand before you call, reload after you change}
@@ -5581,7 +5581,7 @@ ZPWR provides shortcut verbs for every config file you'll ever need to edit. No 
 Edit your .bashrc. For when bash compatibility matters.
 
 \begin{codebox}
-\textbackslash{}$ zpwr brc                    \# edit .bashrc\\
+zpwr brc                    \# edit .bashrc\\
 \end{codebox}
 
 
@@ -5591,7 +5591,7 @@ Edit your .bashrc. For when bash compatibility matters.
 Edit your .zshrc. The most-touched config in ZPWR.
 
 \begin{codebox}
-\textbackslash{}$ zpwr zrc                    \# edit .zshrc\\
+zpwr zrc                    \# edit .zshrc\\
 \end{codebox}
 
 
@@ -5601,7 +5601,7 @@ Edit your .zshrc. The most-touched config in ZPWR.
 Edit your .vimrc or init.vim/init.lua.
 
 \begin{codebox}
-\textbackslash{}$ zpwr vrc                    \# edit vim config\\
+zpwr vrc                    \# edit vim config\\
 \end{codebox}
 
 
@@ -5611,7 +5611,7 @@ Edit your .vimrc or init.vim/init.lua.
 Edit your .tmux.conf. Keybindings, statusbar, the works.
 
 \begin{codebox}
-\textbackslash{}$ zpwr trc                    \# edit tmux config\\
+zpwr trc                    \# edit tmux config\\
 \end{codebox}
 
 
@@ -5621,9 +5621,9 @@ Edit your .tmux.conf. Keybindings, statusbar, the works.
 Edit \textbackslash{}\$ZPWR\_LOCAL/.tokens.sh. API keys, secrets, env vars.
 
 \begin{codebox}
-\textbackslash{}$ zpwr tokens                 \# edit tokens/secrets\\
-\textbackslash{}$ zpwr vimtokens              \# same, force vim\\
-\textbackslash{}$ zpwr emacstokens            \# same, force emacs\\
+zpwr tokens                 \# edit tokens/secrets\\
+zpwr vimtokens              \# same, force vim\\
+zpwr emacstokens            \# same, force emacs\\
 \end{codebox}
 
 
@@ -5633,7 +5633,7 @@ Edit \textbackslash{}\$ZPWR\_LOCAL/.tokens.sh. API keys, secrets, env vars.
 Inspect or regenerate the zsh completion dump file. When completions act weird, this is where you look.
 
 \begin{codebox}
-\textbackslash{}$ zpwr zcompdump              \# inspect comp cache\\
+zpwr zcompdump              \# inspect comp cache\\
 \end{codebox}
 
 {\small\itshape\color{dimtext} // brc, zrc, vrc, trc -- four letters, four configs}
@@ -5658,7 +5658,7 @@ easy to install, clean to remove -- no malware energy
 Run the full ZPWR installation process. Installs dependencies, links configs, sets up plugins.
 
 \begin{codebox}
-\textbackslash{}$ zpwr install                \# full installation\\
+zpwr install                \# full installation\\
 \end{codebox}
 
 WHAT IT DOES: 1. Installs system dependencies (brew/apt) 2. Links config files to their proper locations 3. Installs zsh, vim, and emacs plugins 4. Generates caches and completion dumps 5. Sets up tmux configuration
@@ -5670,7 +5670,7 @@ WHAT IT DOES: 1. Installs system dependencies (brew/apt) 2. Links config files t
 Remove ZPWR configuration. Restores your shell to its pre-ZPWR state. Clean breakup, no hard feelings.
 
 \begin{codebox}
-\textbackslash{}$ zpwr uninstall              \# remove zpwr config\\
+zpwr uninstall              \# remove zpwr config\\
 \end{codebox}
 
 
@@ -5713,7 +5713,7 @@ every system needs a panic button -- here are yours
 Full framework reset. Clears caches, regenerates configs, rebuilds completion dumps, relinks everything.
 
 \begin{codebox}
-\textbackslash{}$ zpwr reset                  \# the big red button\\
+zpwr reset                  \# the big red button\\
 \end{codebox}
 
 WHEN TO USE: * Completions are broken or stale * Config changes aren't taking effect * Something feels \textbackslash{}"off\textbackslash{}" and you can't pin it down * After a major ZPWR update
@@ -5725,7 +5725,7 @@ WHEN TO USE: * Completions are broken or stale * Config changes aren't taking ef
 Hot reload without resetting. Re-sources all configs and refreshes the environment. Faster than reset.
 
 \begin{codebox}
-\textbackslash{}$ zpwr reload                 \# hot reload\\
+zpwr reload                 \# hot reload\\
 \end{codebox}
 
 Use reload when you've edited a config and want to apply changes without nuking caches.
@@ -6289,7 +6289,7 @@ ZPWR does not hardcode paths. Every directory is an environment variable. Move t
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR — THE ROOT OF ALL THINGS}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR   \# typically \textasciitilde{}/.zpwr\\
+echo \textbackslash{}ZPWR   \# typically \textasciitilde{}/.zpwr\\
 \end{codebox}
 
 The root directory. Every other path derives from this. Change this one variable and the whole tree moves.
@@ -6299,7 +6299,7 @@ The root directory. Every other path derives from this. Change this one variable
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_LOCAL — YOUR PRIVATE SANCTUM}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_LOCAL   \# \textbackslash{}$ZPWR/local\\
+echo \textbackslash{}ZPWR\_LOCAL   \# \textbackslash{}ZPWR/local\\
 \end{codebox}
 
 Gitignored. Your tokens, secrets, local overrides. Nothing in here ever touches a remote repository. Your .tokens.sh lives here. Guard it with your life.
@@ -6309,7 +6309,7 @@ Gitignored. Your tokens, secrets, local overrides. Nothing in here ever touches 
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_SCRIPTS — THE ARMORY}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_SCRIPTS   \# \textbackslash{}$ZPWR/scripts\\
+echo \textbackslash{}ZPWR\_SCRIPTS   \# \textbackslash{}ZPWR/scripts\\
 \end{codebox}
 
 Executable scripts. Bash, Python, Perl — whatever gets the job done. These are on your PATH.
@@ -6319,7 +6319,7 @@ Executable scripts. Bash, Python, Perl — whatever gets the job done. These are
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_TMUX — THE MULTIPLEXER CONFIG}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_TMUX   \# \textbackslash{}$ZPWR/tmux\\
+echo \textbackslash{}ZPWR\_TMUX   \# \textbackslash{}ZPWR/tmux\\
 \end{codebox}
 
 Tmux configuration, scripts, and status line logic. The control center for your terminal multiplexer.
@@ -6329,7 +6329,7 @@ Tmux configuration, scripts, and status line logic. The control center for your 
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_INSTALL — THE INSTALLER}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_INSTALL   \# \textbackslash{}$ZPWR/install\\
+echo \textbackslash{}ZPWR\_INSTALL   \# \textbackslash{}ZPWR/install\\
 \end{codebox}
 
 OS-specific installation scripts. macOS, Ubuntu, Fedora, Arch — each gets its own installer. Run zpwr install and the right one fires.
@@ -6360,7 +6360,7 @@ Zsh autoloading is the secret to ZPWR's fast startup. Functions are not loaded i
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_AUTOLOAD — THE FUNCTION WAREHOUSE}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_AUTOLOAD   \# \textbackslash{}$ZPWR/autoload\\
+echo \textbackslash{}ZPWR\_AUTOLOAD   \# \textbackslash{}ZPWR/autoload\\
 \end{codebox}
 
 The root of the autoload tree. Every file in this tree becomes a function name. The filename IS the function.
@@ -6370,7 +6370,7 @@ The root of the autoload tree. Every file in this tree becomes a function name. 
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_AUTOLOAD\_COMMON — CROSS-PLATFORM FUNCTIONS}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_AUTOLOAD\_COMMON   \# \textbackslash{}$ZPWR/autoload/common\\
+echo \textbackslash{}ZPWR\_AUTOLOAD\_COMMON   \# \textbackslash{}ZPWR/autoload/common\\
 \end{codebox}
 
 Functions that work on every OS. The common denominator. macOS, Linux, BSD — these functions do not care.
@@ -6500,7 +6500,7 @@ ZPWR uses zinit (formerly zplugin) as its plugin manager. But not the basic way.
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_PLUGIN\_MANAGER — CHOOSE YOUR LOADER}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_PLUGIN\_MANAGER   \# zinit\\
+echo \textbackslash{}ZPWR\_PLUGIN\_MANAGER   \# zinit\\
 \end{codebox}
 
 Controls which plugin manager ZPWR uses. The default and recommended value is zinit. Other managers exist but zinit's turbo mode is what makes ZPWR fast.
@@ -6560,7 +6560,7 @@ These variables control what you see and how fast the shell responds to your key
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_EXA\_COMMAND — THE LS REPLACEMENT}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_EXA\_COMMAND   \# exa or eza\\
+echo \textbackslash{}ZPWR\_EXA\_COMMAND   \# exa or eza\\
 \end{codebox}
 
 Controls which modern ls replacement ZPWR uses. exa is the original, eza is the maintained fork. Both give you colored, git-aware directory listings.
@@ -6572,7 +6572,7 @@ ZPWR verbs like zpwr ls and zpwr clearls use this. Set it in your tokens file to
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_KEYTIMEOUT — KEYSTROKE LATENCY}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_KEYTIMEOUT   \# in hundredths of a second\\
+echo \textbackslash{}ZPWR\_KEYTIMEOUT   \# in hundredths of a second\\
 \end{codebox}
 
 How long zsh waits for the next key in a multi-key sequence. Lower = snappier. Too low = missed sequences. Default is tuned for fast typists.
@@ -6584,7 +6584,7 @@ If vi-mode feels laggy on Esc, lower this. If key combos misfire, raise this. Sw
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_EXPAND\_PRE\_EXEC — ALIAS EXPANSION}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_EXPAND\_PRE\_EXEC\\
+echo \textbackslash{}ZPWR\_EXPAND\_PRE\_EXEC\\
 \end{codebox}
 
 Controls whether ZPWR expands aliases before execution. When enabled, you type the alias and see the full command in your history. Transparency mode.
@@ -6596,7 +6596,7 @@ With expansion:    you type ga  -> history shows git add Without expansion: you 
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_SEND\_KEYS\_FULL — TMUX KEY PASSTHROUGH}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_SEND\_KEYS\_FULL\\
+echo \textbackslash{}ZPWR\_SEND\_KEYS\_FULL\\
 \end{codebox}
 
 Controls full send-keys behavior in tmux integration. When ZPWR manages tmux panes, this determines how keystrokes are forwarded to target panes.
@@ -6627,7 +6627,7 @@ These variables hold runtime state — what OS you are on, what TTY you are usin
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_TTY — YOUR TERMINAL IDENTITY}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_TTY   \# e.g., /dev/ttys003\\
+echo \textbackslash{}ZPWR\_TTY   \# e.g., /dev/ttys003\\
 \end{codebox}
 
 The TTY device for the current shell session. Used by ZPWR to track which terminal is which, especially when managing multiple tmux panes.
@@ -6639,7 +6639,7 @@ The zpwr tty verb shows your current TTY info.
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_OS\_TYPE — PLATFORM DETECTION}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_OS\_TYPE   \# Darwin, Linux, etc.\\
+echo \textbackslash{}ZPWR\_OS\_TYPE   \# Darwin, Linux, etc.\\
 \end{codebox}
 
 Detected at startup. Used throughout ZPWR to branch on platform-specific behavior. macOS vs Linux vs BSD, the right code path fires automatically.
@@ -6651,7 +6651,7 @@ This is why ZPWR works on macOS and Linux without you changing a single setting.
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_LOGFILE — THE BLACK BOX}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_LOGFILE\\
+echo \textbackslash{}ZPWR\_LOGFILE\\
 \end{codebox}
 
 Where ZPWR writes its log output. Debug, info, error, trace — all levels go here when enabled.
@@ -6671,7 +6671,7 @@ zpwr taillog         live tail with colorized output\\
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_COMPSYS\_CACHE — COMPLETION CACHE}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_COMPSYS\_CACHE\\
+echo \textbackslash{}ZPWR\_COMPSYS\_CACHE\\
 \end{codebox}
 
 Controls the completion system cache. Zsh completions are expensive to regenerate. This flag keeps them cached.
@@ -6681,7 +6681,7 @@ Controls the completion system cache. Zsh completions are expensive to regenerat
 {\bfseries\color{neonyellow} \textbackslash{}\$ZPWR\_HISTFILE — HISTORY FILE}\vspace{4pt}
 
 \begin{codebox}
-echo \textbackslash{}$ZPWR\_HISTFILE\\
+echo \textbackslash{}ZPWR\_HISTFILE\\
 \end{codebox}
 
 Your shell history file location. ZPWR manages history with deduplication and backup. Your commands are sacred.
@@ -7529,7 +7529,7 @@ prefix t              clock-mode\\
 {\bfseries\color{neonyellow} SESSION MANAGEMENT:}\vspace{4pt}
 
 \begin{codebox}
-prefix \textbackslash{}$              rename current session\\
+prefix \textbackslash{}              rename current session\\
 prefix (              switch to previous client (repeatable)\\
 prefix )              switch to next client (repeatable)\\
 prefix d              detach client\\
@@ -7952,7 +7952,7 @@ Ctrl-F Ctrl-O         open URL from buffer\\
 Ctrl-F Ctrl-P         basic sed substitution\\
 Ctrl-F Ctrl-R         wrap buffer as variable\\
 Ctrl-F Ctrl-S         git diff check (gacp)\\
-Ctrl-F Ctrl-V         edit command line in \textbackslash{}$EDITOR\\
+Ctrl-F Ctrl-V         edit command line in \textbackslash{}EDITOR\\
 Ctrl-F j              zpwr verbs widget (accept)\\
 Ctrl-F n              zpwr verbs widget (browse)\\
 \end{codebox}
@@ -9614,7 +9614,7 @@ Autoloading is zsh's lazy-loading mechanism. Register a name, and zsh only reads
 {\bfseries\color{neonyellow} THE GLOB IN .zshrc}\vspace{4pt}
 
 \begin{codebox}
-builtin autoload -z \textbackslash{}$ZPWR\_AUTOLOAD\_COMMON/*(.:t)\\
+builtin autoload -z \textbackslash{}ZPWR\_AUTOLOAD\_COMMON/*(.:t)\\
 \end{codebox}
 
 The glob *(.:t) means: *    All files in the directory (.)  Qualifier: regular files only (not dirs or symlinks) :t   Modifier: tail only (strip directory, keep filename) So it registers every regular file's name as a function. Same pattern runs for ZPWR\_AUTOLOAD\_DARWIN or ZPWR\_AUTOLOAD\_LINUX.
@@ -10168,7 +10168,7 @@ TmuxRepeat detects file type by extension: sh, zsh, py, rb, pl, clj, tcl, vim, l
 1. Ctrl-V in normal/insert mode (or leader-vj): Saves the file, then sends:
 
 \begin{codebox}
-tmux send-keys -t right 'bash \textbackslash{}"\textbackslash{}$ZPWR\_SCRIPTS/zpwrRunner.sh\textbackslash{}" \textbackslash{}"file\textbackslash{}"' C-m\\
+tmux send-keys -t right 'bash \textbackslash{}"\textbackslash{}ZPWR\_SCRIPTS/zpwrRunner.sh\textbackslash{}" \textbackslash{}"file\textbackslash{}"' C-m\\
 \end{codebox}
 
 2. leader-vk in visual mode: Yanks selection to temp file \textbackslash{}\$ZPWR\_HIDDEN\_DIR\_TEMP/.vimTempFile.<ext>, then sends that temp file to the right pane for execution. 3. leader-vl in visual mode (REPL mode): Yanks selection, loads it into tmux buffer 'buffer0099', then pastes directly into the right pane. For REPLs like python, irb, node -- code runs line-by-line in the REPL.
@@ -10659,7 +10659,7 @@ lsof    — the OG. every Unix has it. output is a wall of text. ss      — soc
 \begin{codebox}
 lsofrs -t -i :3000 | xargs kill  \# kill whatever's on 3000\\
 lsofrs -c node -a -i TCP          \# node's TCP connections\\
-lsofrs -u \textbackslash{}$(whoami) -a -i         \# your network connections\\
+lsofrs -u \textbackslash{}(whoami) -a -i         \# your network connections\\
 \end{codebox}
 
 
@@ -10715,8 +10715,8 @@ Not just -F. Under p10k instant prompt, stdout gets redirected during init. eza'
 zpwrClearList and zpwrListNoClear both eval \textbackslash{}\$ZPWR\_EXA\_COMMAND. The fallback chain: eza -> grc + gls -> raw ls. zpwrListNoClear checks for eza first, falls back to gls on macOS (with grc for colorization) or plain ls on Linux.
 
 \begin{codebox}
-alias eza=\textbackslash{}"\textbackslash{}$ZPWR\_EXA\_COMMAND\textbackslash{}"  \# bound in zpwrBindAliasesLate\\
-alias lr=\textbackslash{}"\textbackslash{}$ZPWR\_EXA\_COMMAND -R --tree | less -rMN\textbackslash{}"\\
+alias eza=\textbackslash{}"\textbackslash{}ZPWR\_EXA\_COMMAND\textbackslash{}"  \# bound in zpwrBindAliasesLate\\
+alias lr=\textbackslash{}"\textbackslash{}ZPWR\_EXA\_COMMAND -R --tree | less -rMN\textbackslash{}"\\
 \end{codebox}
 
 The lr alias gives you a recursive tree piped through less with line numbers — a full filesystem X-ray.
@@ -10998,7 +10998,7 @@ Rust by David Peter (sharkdp — also the author of bat). It respects .gitignore
 \begin{codebox}
 fd PATTERN           \# search current dir recursively\\
 fd PATTERN path/     \# search specific directory\\
-fd '\textasciicircum{}test.*\textbackslash{}\textbackslash{}.zsh\textbackslash{}$'  \# full regex support\\
+fd '\textasciicircum{}test.*\textbackslash{}\textbackslash{}.zsh\textbackslash{}'  \# full regex support\\
 \end{codebox}
 
 No -name, no -type f, no quoting gymnastics. Just the pattern.
@@ -11072,7 +11072,7 @@ fd is faster because it parallelizes traversal and skips .gitignore entries with
 \begin{codebox}
 fd -e zsh | fzf                 \# fuzzy find zsh files\\
 fd -t f | fzf --preview 'bat \{\}'  \# find + preview\\
-vim \textbackslash{}$(fd -t f | fzf)             \# find, select, edit\\
+vim \textbackslash{}(fd -t f | fzf)             \# find, select, edit\\
 \end{codebox}
 
 This three-tool combo (fd + fzf + bat) is the holy trinity of file navigation. fd finds, fzf filters, bat previews.
@@ -11211,7 +11211,7 @@ rg --json TODO | jq 'select(.type==\textbackslash{}"match\textbackslash{}") | .d
 rg --replace 'NEW' PATTERN  \# preview replacements This prints what the output WOULD look like with replacements but does NOT modify files. It's a dry-run. Capture groups work:
 
 \begin{codebox}
-rg 'foo(\textbackslash{}\textbackslash{}w+)' --replace 'bar\textbackslash{}$1'  \# foo\_x -> bar\_x\\
+rg 'foo(\textbackslash{}\textbackslash{}w+)' --replace 'bar\textbackslash{}1'  \# foo\_x -> bar\_x\\
 \end{codebox}
 
 
@@ -11427,7 +11427,7 @@ delimiter handling, and file manipulation.
 {\bfseries\color{neonyellow} WHITESPACE CLEANUP (scripts/lib.sh)}\vspace{4pt}
 
 \begin{codebox}
-perl -pi -e 's@\textbackslash{}\textbackslash{}s+\textbackslash{}$@\textbackslash{}\textbackslash{}n@g; s@\textbackslash{}\textbackslash{}x09\textbackslash{}$@    @g'\\
+perl -pi -e 's@\textbackslash{}\textbackslash{}s+\textbackslash{}@\textbackslash{}\textbackslash{}n@g; s@\textbackslash{}\textbackslash{}x09\textbackslash{}@    @g'\\
 \end{codebox}
 
 Strips trailing whitespace, converts trailing tabs to spaces. The -pi combo: -p loops, -i edits in place. zpwr's file cleaner.
@@ -11447,7 +11447,7 @@ Prints 80 \# characters. The x operator repeats a string. Used in zpwrPrettyPrin
 {\bfseries\color{neonyellow} DELIMITER TRANSFORMATION}\vspace{4pt}
 
 \begin{codebox}
-perl -F\textbackslash{}"\textbackslash{}$ZPWR\_DELIMITER\_CHAR\textbackslash{}" -anE 'say ...'\\
+perl -F\textbackslash{}"\textbackslash{}ZPWR\_DELIMITER\_CHAR\textbackslash{}" -anE 'say ...'\\
 \end{codebox}
 
 Splits lines on ZPWR\_DELIMITER\_CHAR into @F fields. Used heavily in zpwrContribCount, zpwrTotalLines for reformatting git contribution data into tabular output.
@@ -11486,7 +11486,7 @@ when you need a chainsaw, not a butter knife
 {\bfseries\color{neonyellow} PATH QUOTING (zpwrGetFound)}\vspace{4pt}
 
 \begin{codebox}
-perl -pe 's@\textasciicircum{}([\textasciitilde{}]*)([\textasciicircum{}\textasciitilde{}].*)\textbackslash{}$@\textbackslash{}$1\textbackslash{}"\textbackslash{}$2\textbackslash{}"@;s@\textbackslash{}\textbackslash{}s+@ @g'\\
+perl -pe 's@\textasciicircum{}([\textasciitilde{}]*)([\textasciicircum{}\textasciitilde{}].*)\textbackslash{}@\textbackslash{}1\textbackslash{}"\textbackslash{}2\textbackslash{}"@;s@\textbackslash{}\textbackslash{}s+@ @g'\\
 \end{codebox}
 
 Wraps non-tilde paths in double quotes and collapses spaces. Handles filenames with spaces for safe shell consumption.
@@ -11496,7 +11496,7 @@ Wraps non-tilde paths in double quotes and collapses spaces. Handles filenames w
 {\bfseries\color{neonyellow} FZF RESULT FORMATTING (zpwrAgIntoFzf)}\vspace{4pt}
 
 \begin{codebox}
-perl -pe 's@\textasciicircum{}(.*?):(\textbackslash{}\textbackslash{}d+):(.*)@+\textbackslash{}$2 \textbackslash{}"PWD/\textbackslash{}$1\textbackslash{}"@'\\
+perl -pe 's@\textasciicircum{}(.*?):(\textbackslash{}\textbackslash{}d+):(.*)@+\textbackslash{}2 \textbackslash{}"PWD/\textbackslash{}1\textbackslash{}"@'\\
 \end{codebox}
 
 Converts grep output (file:line:match) into vim args (+line \textbackslash{}"file\textbackslash{}"). The brain behind zpwr grep -> fzf -> vim pipeline.
@@ -11506,7 +11506,7 @@ Converts grep output (file:line:match) into vim args (+line \textbackslash{}"fil
 {\bfseries\color{neonyellow} VERB LIST FORMATTING (zpwrVerbsFZF)}\vspace{4pt}
 
 \begin{codebox}
-perl -e '@a=<>;for(@a)\{print \textbackslash{}"zpwr \textbackslash{}$1\textbackslash{}" if m\{\textasciicircum{}(\textbackslash{}\textbackslash{}S+)\textbackslash{}\textbackslash{}s+\}\}'\\
+perl -e '@a=<>;for(@a)\{print \textbackslash{}"zpwr \textbackslash{}1\textbackslash{}" if m\{\textasciicircum{}(\textbackslash{}\textbackslash{}S+)\textbackslash{}\textbackslash{}s+\}\}'\\
 \end{codebox}
 
 Reads verb list, extracts first word, prepends 'zpwr '. Builds the command string that fzf executes on selection.
@@ -11526,7 +11526,7 @@ Renames all occurrences across all files. The \textbackslash{}\textbackslash{}b 
 {\bfseries\color{neonyellow} LOGIN COUNTING (zpwrLoginCount)}\vspace{4pt}
 
 \begin{codebox}
-perl -e '"'"'print qx(last -f "$\_") for </var/log/wtmp*>'"'"'\\
+perl -e '"'"'print qx(last -f "\_") for </var/log/wtmp*>'"'"'\\
 \end{codebox}
 
 Reads all wtmp files and runs last on each. The diamond operator <> globs and iterates. Then pipes to:
@@ -11542,7 +11542,7 @@ Extracts username (first field) from non-empty, non-header lines.
 {\bfseries\color{neonyellow} FILE COUNT DEDUP (zpwrEnvCounts)}\vspace{4pt}
 
 \begin{codebox}
-perl -lne '@l=<>;@u=do\{my \%seen;grep\{!\textbackslash{}$seen\{\textbackslash{}$\_\}++\}@l\};'\\
+perl -lne '@l=<>;@u=do\{my \%seen;grep\{!\textbackslash{}seen\{\textbackslash{}\_\}++\}@l\};'\\
 \end{codebox}
 
 Reads all lines, deduplicates with a hash, then checks if each unique path is a real file. The densest oneliner in zpwr. Counts unique zpwr files across all tracked locations.
@@ -11683,10 +11683,10 @@ every language, one screen, zero excuses
 {\bfseries\color{neonyellow} THE TMUX KEYBINDINGS}\vspace{4pt}
 
 \begin{codebox}
-prefix R  source \textbackslash{}$ZPWR\_TMUX/thirtytwo-panes-repl.conf\\
-prefix O  source \textbackslash{}$ZPWR\_TMUX/sixteen-panes.conf\\
-prefix G  source \textbackslash{}$ZPWR\_TMUX/eight-panes.conf\\
-prefix F  source \textbackslash{}$ZPWR\_TMUX/four-panes.conf\\
+prefix R  source \textbackslash{}ZPWR\_TMUX/thirtytwo-panes-repl.conf\\
+prefix O  source \textbackslash{}ZPWR\_TMUX/sixteen-panes.conf\\
+prefix G  source \textbackslash{}ZPWR\_TMUX/eight-panes.conf\\
+prefix F  source \textbackslash{}ZPWR\_TMUX/four-panes.conf\\
 \end{codebox}
 
 One keystroke splits your terminal into a REPL army.
@@ -11837,13 +11837,13 @@ The fallback chain when listing files: 1. eza              preferred (color-scal
 macOS:
 
 \begin{codebox}
-grc -c \textbackslash{}$HOME/conf.gls gls -iFlhA --color=always\\
+grc -c \textbackslash{}HOME/conf.gls gls -iFlhA --color=always\\
 \end{codebox}
 
 Linux:
 
 \begin{codebox}
-grc -c \textbackslash{}$HOME/conf.gls ls -iFlhA --color=always\\
+grc -c \textbackslash{}HOME/conf.gls ls -iFlhA --color=always\\
 \end{codebox}
 
 macOS uses gls (GNU ls from coreutils) because BSD ls doesn't support all the flags. Linux uses native ls.
