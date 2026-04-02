@@ -15,7 +15,7 @@ function zpwrOverridePromptDir(){
     # auto_name_dirs auto-registers all p10k internals (_p9k__cwd, _p9k__cwd_a, etc.)
     # as named dirs which compete with explicit hash dirs like ~ZPWR in %~ resolution
     body=${functions[prompt_dir]}
-    functions[prompt_dir]='unhash -dm "_p9k*" 2>/dev/null; '${body}
+    functions[prompt_dir]='unhash -dm "_p9k*" 2>/dev/null; unhash -dm "VCS_STATUS_*" 2>/dev/null; '${body}
 }
 
 zpwrOverridePromptDir "$@"
