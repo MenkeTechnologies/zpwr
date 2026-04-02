@@ -12,7 +12,7 @@ function zpwrRecompileFiles(){
         "$HOME/.zshenv"*
         "$HOME/.zlogout"*
         "$HOME/.zlogin"*
-        "${XDG_CACHE_HOME:-$HOME/.cache}/zpwr-hash-dirs.zsh"
+        "$ZPWR_LOCAL/zpwr-hash-dirs.zsh"
         "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
         "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-dump-${(%):-%n}.zsh"
         "$ZSH/oh-my-zsh.sh"

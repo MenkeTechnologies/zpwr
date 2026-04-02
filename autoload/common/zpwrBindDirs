@@ -96,7 +96,7 @@ function zpwrBindDirs(){
     #}}}***********************************************************
 
     # write hash dir cache for instant prompt
-    local cache="${XDG_CACHE_HOME:-$HOME/.cache}/zpwr-hash-dirs.zsh"
+    local cache="$ZPWR_LOCAL/zpwr-hash-dirs.zsh"
     {
         print -r "hash -d ZPWR=${(q)ZPWR}"
         (( $+nameddirs[ZPWR_LOCAL] )) && print -r "hash -d ZPWR_LOCAL=${(q)nameddirs[ZPWR_LOCAL]}"
