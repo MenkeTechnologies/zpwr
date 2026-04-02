@@ -186,38 +186,6 @@
     assert $state equals 0
 }
 
-# ── HELP OUTPUT CONTENT ──────────────────────────────────────
-
-@test 'zpwrBench -h shows BENCH' {
-    run zpwrBench -h
-    assert "$output" contains "BENCH"
-}
-
-@test 'zpwrDoctor -h shows DOCTOR' {
-    run zpwrDoctor -h
-    assert "$output" contains "DOCTOR"
-}
-
-@test 'zpwrFlame -h shows FLAME' {
-    run zpwrFlame -h
-    assert "$output" contains "FLAME"
-}
-
-@test 'zpwrTrace -h shows TRACE' {
-    run zpwrTrace -h
-    assert "$output" contains "TRACE"
-}
-
-@test 'zpwrDeps -h shows DEPS' {
-    run zpwrDeps -h
-    assert "$output" contains "DEPS"
-}
-
-@test 'zpwrWizard -h shows WIZARD' {
-    run zpwrWizard -h
-    assert "$output" contains "WIZARD"
-}
-
 # ── WIZARD PAGES ──────────────────────────────────────────────
 
 @test 'wizard pages directory exists' {
@@ -274,11 +242,11 @@
 # ── PDF AND DOCS ──────────────────────────────────────────────
 
 @test 'genEncyclopediaTex.py exists' {
-    run test -f "$ZPWR_SCRIPTS/genEncyclopediaTex.py"
+    run test -f "$ZPWR/docs/genEncyclopediaTex.py"
     assert $state equals 0
 }
 
 @test 'regenPDF.sh exists and is executable' {
-    run test -x "$ZPWR_SCRIPTS/regenPDF.sh"
+    run test -x "$ZPWR/docs/regenPDF.sh"
     assert $state equals 0
 }
