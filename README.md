@@ -55,6 +55,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Function Rank](#function-rank----zpwr-funcrank) -- zpwr funcrank
 - [File Watcher](#file-watcher----zpwr-watch) -- zpwr watch
 - [Command Replay](#command-replay----zpwr-replay) -- zpwr replay
+- [Command Trace](#command-trace----zpwr-trace) -- zpwr trace
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
@@ -887,6 +888,20 @@ zpwr replay 10 tmux    # replay in new tmux pane
 ```
 
 All new commands support `-h`/`--help` with cyberpunk-styled output matching the temprs aesthetic -- ASCII banners, signal bars, `//` separators, and full option documentation.
+
+## Command Trace -- zpwr trace
+`zpwr trace [OPTIONS] <command>` runs a command with full instrumentation.  On Linux, it captures syscall counts (strace), C library call counts (ltrace), and resource stats (/usr/bin/time -v).  On macOS, SIP restricts dtrace so only resource stats from `/usr/bin/time -l` are available (context switches, page faults, block I/O, peak RSS, signals, IPC messages).  All platforms show wall/user/sys time, exit code, memory delta, child process count, and a performance signal bar.
+
+```sh
+zpwr trace -h              # cyberpunk help with platform notes
+zpwr trace id              # full trace (strace + ltrace on Linux)
+zpwr trace -s git status   # syscalls only (no ltrace)
+zpwr trace -l npm install  # C library calls only (no strace)
+zpwr trace -q rm -rf tmp   # quick mode: timing only, runs once
+zpwr trace -a ls -la       # both strace + ltrace (default)
+```
+
+On Linux the command re-runs for strace/ltrace stats (2-3 executions total).  Use `-q` for destructive commands to run once with timing only.
 
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.
