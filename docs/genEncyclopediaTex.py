@@ -6,6 +6,14 @@ pagedir = sys.argv[1] if len(sys.argv) > 1 else os.path.expanduser("~/.zpwr/docs
 outfile = sys.argv[2] if len(sys.argv) > 2 else os.path.expanduser("~/.zpwr/docs/zpwr-encyclopedia.tex")
 pages = sorted(glob.glob(os.path.join(pagedir, "page_*.zsh")))
 
+# Count unique chapters
+_chapters = set()
+for _p in pages:
+    with open(_p) as _f:
+        _m = re.search(r'PAGE_CHAPTER="(.*?)"', _f.read())
+        if _m: _chapters.add(_m.group(1))
+num_chapters = len(_chapters)
+
 def extract_page(filepath):
     with open(filepath) as f:
         content = f.read()
@@ -31,8 +39,10 @@ def escape_latex(text):
     return text
 
 def strip_colors(text):
-    text = re.sub(r'\$\{[A-Z]+\}', '', text)
-    text = re.sub(r'\$[A-Z]', '', text)
+    # Remove ${X} color vars like ${C}, ${N}, ${M}, ${B}, ${D}, ${UL}
+    text = re.sub(r'\$\{[A-Z]{1,2}\}', '', text)
+    # Remove $X single-letter color vars but NOT $ZPWR or $HOME etc
+    text = re.sub(r'\$[A-Z](?![A-Za-z_])', '', text)
     text = re.sub(r'\\033\[[0-9;]*m', '', text)
     return text.strip()
 
@@ -50,20 +60,41 @@ def convert_line(text):
     # - uses ${M} (magenta) which is the command color in page files
     # - the clean text starts with a command-like pattern (indented command)
     stripped_clean = strip_colors(text).strip()
+    # Strip leading $ prompt for matching
+    check_clean = re.sub(r'^[\$\\]*\$?\s*', '', stripped_clean)
     is_cmd = False
-    if '${M}' in original:
-        # ${M} is used specifically for command examples in the page files
-        # But only if it starts with a command pattern, not mid-sentence
-        if stripped_clean.startswith(('zpwr ', '$ ', 'sudo ', 'git ', 'cd ', 'tmux ',
+    has_cmd_color = '${M}' in original or '${C}' in original
+    is_header = '${B}${Y}' in original or '${B}${M}' in original
+    if has_cmd_color and not is_header:
+        cmd_prefixes = ('zpwr ', 'sudo ', 'git ', 'cd ', 'tmux ',
             'perl ', 'fd ', 'rg ', 'bat ', 'eza ', 'strace ', 'ltrace ', 'temprs ',
             'brew ', 'apt ', 'pip ', 'npm ', 'cargo ', 'lsofrs ', 'ccze ', 'grc ',
             'figlet ', 'toilet ', 'export ', 'alias ', 'bindkey ', 'prefix ',
             'Ctrl-', 'vim ', 'nvim ', 'emacs ', 'zsh ', 'bash ',
             'echo ', 'cat ', 'tail ', 'grep ', 'find ', 'ls ', 'mkdir ',
-            'source ', 'eval ', 'exec ', 'command ', 'builtin ')):
+            'source ', 'eval ', 'exec ', 'command ', 'builtin ',
+            'ifconfig ', 'dtruss ', 'strace ', 'ltrace ')
+        if stripped_clean.startswith(cmd_prefixes) or check_clean.startswith(cmd_prefixes):
             is_cmd = True
     if is_cmd:
-        return ('command', clean.replace('\\$', '').strip())
+        # Use strip_colors + escape_latex on the raw text for commands
+        # but preserve $ZPWR style env vars
+        cmd_text = strip_colors(text).strip()
+        # Strip leading $ prompt
+        cmd_text = re.sub(r'^\$\s*', '', cmd_text)
+        # Escape for LaTeX but preserve $ in env var names
+        cmd_text = cmd_text.replace('\\', '\\textbackslash{}')
+        cmd_text = cmd_text.replace('&', '\\&')
+        cmd_text = cmd_text.replace('%', '\\%')
+        cmd_text = cmd_text.replace('#', '\\#')
+        cmd_text = cmd_text.replace('_', '\\_')
+        cmd_text = cmd_text.replace('{', '\\{')
+        cmd_text = cmd_text.replace('}', '\\}')
+        cmd_text = cmd_text.replace('~', '\\textasciitilde{}')
+        cmd_text = cmd_text.replace('^', '\\textasciicircum{}')
+        # Keep $ for env vars like $ZPWR
+        cmd_text = cmd_text.replace('\\textbackslash\\{\\}', '\\textbackslash{}')
+        return ('command', cmd_text)
     if '${D}' in original and '//' in text:
         return ('comment', clean)
     return ('text', clean)
@@ -283,7 +314,7 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
 {\fontsize{42}{50}\selectfont\bfseries\color{neoncyan} THE ZPWR}\\[0.5cm]
 {\fontsize{42}{50}\selectfont\bfseries\color{neonpink} ENCYCLOPEDIA}\\[2cm]
 {\Large\color{bodytext} A Hacker's Field Guide to the Terminal}\\[2cm]
-''' + r'''{\large\color{neongreen} ''' + str(len(pages)) + r''' Pages\quad\color{dimtext}//\quad\color{neonyellow}43 Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
+''' + r'''{\large\color{neongreen} ''' + str(len(pages)) + r''' Pages\quad\color{dimtext}//\quad\color{neonyellow}''' + str(num_chapters) + r''' Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
 ''' + r'''{\color{bodytext}\large MenkeTechnologies}\\[0.3cm]
 {\color{dimtext}\small \url{https://github.com/MenkeTechnologies/zpwr}}\\[3cm]
 {\color{dimtext}\small CYBERPUNK EDITION\quad//\quad Generated from \texttt{zpwr wizard}}\\[1cm]
@@ -410,10 +441,18 @@ with open(outfile, 'w') as f:
             if key in title_lower:
                 insert_image(f, img)
                 break
+        # Detect keybinding dump pages — don't join lines
+        is_keybinding_page = chapter and ('KEYBINDING' in chapter.upper() or 'APPENDIX B' in chapter.upper())
         text_buffer = []
         def flush_text():
             if text_buffer:
-                f.write(' '.join(text_buffer) + '\n\n')
+                if is_keybinding_page:
+                    # Each line stays separate in keybinding dumps
+                    for t in text_buffer:
+                        f.write(f'{t}\\\\\n')
+                    f.write('\n')
+                else:
+                    f.write(' '.join(text_buffer) + '\n\n')
                 text_buffer.clear()
 
         for line in prints:
