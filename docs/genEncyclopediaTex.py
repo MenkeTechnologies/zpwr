@@ -45,11 +45,25 @@ def convert_line(text):
         return ('heading', clean.replace('===','').replace('<<<','').replace('>>>','').strip())
     if '${B}${Y}' in original or '${B}${M}' in original:
         return ('section_title', clean)
-    cmd_words = ['zpwr','perl','fd ','rg ','bat ','eza','strace','ltrace','temprs','prefix',
-                 'Ctrl','bindkey','tmux','vim ','git ','brew','apt','pip','npm','cargo',
-                 'lsofrs','ccze','grc','ponysay','figlet','cowsay','zunit']
-    if ('${M}' in original or '${C}' in original) and any(w in text for w in cmd_words):
-        return ('command', clean)
+    # Only classify as command if it looks like an actual command invocation:
+    # - starts with "zpwr " or "$ " after stripping color codes
+    # - uses ${M} (magenta) which is the command color in page files
+    # - the clean text starts with a command-like pattern (indented command)
+    stripped_clean = strip_colors(text).strip()
+    is_cmd = False
+    if '${M}' in original:
+        # ${M} is used specifically for command examples in the page files
+        # But only if it starts with a command pattern, not mid-sentence
+        if stripped_clean.startswith(('zpwr ', '$ ', 'sudo ', 'git ', 'cd ', 'tmux ',
+            'perl ', 'fd ', 'rg ', 'bat ', 'eza ', 'strace ', 'ltrace ', 'temprs ',
+            'brew ', 'apt ', 'pip ', 'npm ', 'cargo ', 'lsofrs ', 'ccze ', 'grc ',
+            'figlet ', 'toilet ', 'export ', 'alias ', 'bindkey ', 'prefix ',
+            'Ctrl-', 'vim ', 'nvim ', 'emacs ', 'zsh ', 'bash ',
+            'echo ', 'cat ', 'tail ', 'grep ', 'find ', 'ls ', 'mkdir ',
+            'source ', 'eval ', 'exec ', 'command ', 'builtin ')):
+            is_cmd = True
+    if is_cmd:
+        return ('command', clean.replace('\\$', '').strip())
     if '${D}' in original and '//' in text:
         return ('comment', clean)
     return ('text', clean)
@@ -133,10 +147,82 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
 }
 
 \newtcolorbox{codebox}{
-    colback=codebg,colframe=ruleglow,boxrule=0.3pt,arc=2pt,
-    left=8pt,right=8pt,top=4pt,bottom=4pt,
-    fontupper=\small\ttfamily\color{neongreen},breakable
+    enhanced,colback=codebg,colframe=ruleglow,boxrule=0.5pt,arc=3pt,
+    left=10pt,right=10pt,top=6pt,bottom=6pt,
+    fontupper=\small\ttfamily\color{neongreen},breakable,
+    shadow={1mm}{-1mm}{0mm}{neoncyan!15!bg},
+    borderline west={2pt}{0pt}{neonpink!60}
 }
+
+% Glowing info box for tips and notes
+\newtcolorbox{glowbox}{
+    enhanced,colback=bg,colframe=neonpink,boxrule=0.4pt,arc=4pt,
+    left=10pt,right=10pt,top=6pt,bottom=6pt,
+    fontupper=\color{bodytext},breakable,
+    shadow={2mm}{-2mm}{0mm}{neonpink!10!bg},
+    borderline north={2pt}{0pt}{neoncyan!40},
+    borderline south={2pt}{0pt}{neoncyan!40}
+}
+
+% Page border on every page
+\usepackage{background}
+\backgroundsetup{
+    scale=1,angle=0,opacity=1,
+    contents={\begin{tikzpicture}[remember picture, overlay]
+        % Corner decorations
+        \draw[neoncyan, line width=0.3pt, opacity=0.15]
+            ([xshift=8mm,yshift=-8mm]current page.north west) --
+            ([xshift=8mm,yshift=-25mm]current page.north west);
+        \draw[neoncyan, line width=0.3pt, opacity=0.15]
+            ([xshift=8mm,yshift=-8mm]current page.north west) --
+            ([xshift=25mm,yshift=-8mm]current page.north west);
+        \draw[neonpink, line width=0.3pt, opacity=0.15]
+            ([xshift=-8mm,yshift=-8mm]current page.north east) --
+            ([xshift=-8mm,yshift=-25mm]current page.north east);
+        \draw[neonpink, line width=0.3pt, opacity=0.15]
+            ([xshift=-8mm,yshift=-8mm]current page.north east) --
+            ([xshift=-25mm,yshift=-8mm]current page.north east);
+        \draw[neoncyan, line width=0.3pt, opacity=0.15]
+            ([xshift=8mm,yshift=8mm]current page.south west) --
+            ([xshift=8mm,yshift=25mm]current page.south west);
+        \draw[neoncyan, line width=0.3pt, opacity=0.15]
+            ([xshift=8mm,yshift=8mm]current page.south west) --
+            ([xshift=25mm,yshift=8mm]current page.south west);
+        \draw[neonpink, line width=0.3pt, opacity=0.15]
+            ([xshift=-8mm,yshift=8mm]current page.south east) --
+            ([xshift=-8mm,yshift=25mm]current page.south east);
+        \draw[neonpink, line width=0.3pt, opacity=0.15]
+            ([xshift=-8mm,yshift=8mm]current page.south east) --
+            ([xshift=-25mm,yshift=8mm]current page.south east);
+    \end{tikzpicture}}
+}
+
+% Enhanced chapter page with circuit board pattern
+\titleformat{\chapter}[display]
+    {\normalfont\Huge\bfseries\color{neoncyan}}
+    {}
+    {0pt}
+    {\begin{tikzpicture}[remember picture, overlay]
+        \fill[chapterbg] (current page.north west) rectangle ([yshift=-7cm]current page.north east);
+        % Neon glow lines
+        \draw[neoncyan, line width=2pt] ([yshift=-7cm]current page.north west) -- ([yshift=-7cm]current page.north east);
+        \draw[neonpink, line width=0.8pt, opacity=0.5] ([yshift=-6.9cm]current page.north west) -- ([yshift=-6.9cm]current page.north east);
+        \draw[neoncyan, line width=0.3pt, opacity=0.2] ([yshift=-6.7cm]current page.north west) -- ([yshift=-6.7cm]current page.north east);
+        % Circuit traces
+        \foreach \x in {2,4,...,18} {
+            \draw[neoncyan, line width=0.2pt, opacity=0.08] ([xshift=\x cm, yshift=-1cm]current page.north west) -- ([xshift=\x cm, yshift=-7cm]current page.north west);
+        }
+        \foreach \y in {-2,-3,...,-6} {
+            \draw[neonpink, line width=0.2pt, opacity=0.06] ([yshift=\y cm]current page.north west) -- ([yshift=\y cm]current page.north east);
+        }
+        % Dot grid
+        \foreach \x in {3,6,...,15} {
+            \foreach \y in {-2,-4,-6} {
+                \fill[neoncyan, opacity=0.15] ([xshift=\x cm, yshift=\y cm]current page.north west) circle (1pt);
+            }
+        }
+    \end{tikzpicture}\vspace{-20pt}}
+    [\vspace{8pt}{\color{dimtext}\small\itshape // ZPWR ENCYCLOPEDIA // CYBERPUNK EDITION //}]
 
 \hypersetup{colorlinks=true,linkcolor=neoncyan,urlcolor=neongreen,
     pdftitle={The ZPWR Encyclopedia},pdfauthor={MenkeTechnologies}}
@@ -198,15 +284,49 @@ section_screenshots = {
 
 # Map chapter names (lowercase) to screenshot filenames
 chapter_screenshots = {
-    'the red pill': 'figlet_zpwr.png',
+    'the red pill': 'art_jack_in.png',
+    'navigation': 'art_the_grid.png',
+    'git dimension': 'art_data_stream.png',
+    'search engine': 'figlet_scan.png',
+    'editor mastery': 'art_neural_link.png',
     'performance cult': 'zpwr_bench_help.png',
+    'health': 'zpwr_doctor_help.png',
+    'environment mastery': 'art_system_core.png',
+    'janitor': 'art_override.png',
+    'build system': 'figlet_exec.png',
+    'monitoring': 'zpwr_watch_help.png',
+    'utility arsenal': 'art_mainframe.png',
+    'emacs': 'art_neural_link.png',
+    'tmux warfare': 'art_hack_the_planet.png',
+    'network': 'art_firewall.png',
+    'logging': 'art_data_stream.png',
+    'introspection': 'art_deep_dive.png',
+    'installation': 'figlet_init.png',
+    'batch': 'art_override.png',
+    'forgit': 'art_the_grid.png',
+    'environment variables': 'art_system_core.png',
+    'creative': 'figlet_zpwr.png',
+    'tips': 'art_hack_the_planet.png',
+    'complete reference': 'figlet_docs.png',
+    'powerlevel10k': 'art_neural_link.png',
+    'zinit': 'art_system_core.png',
+    'zsh internal': 'art_deep_dive.png',
+    'fzf': 'figlet_scan.png',
+    'tmux deep': 'art_mainframe.png',
+    'vim deep': 'art_neural_link.png',
     'temprs': 'temprs_help.png',
     'lsofrs': 'lsofrs_help.png',
     'eza': 'eza_listing.png',
     'bat': 'bat_zshrc.png',
     'fd-find': 'fd_zsh_files.png',
     'ripgrep': 'rg_search.png',
-    'perl in zpwr': 'perl_version.png',
+    'neovim': 'art_neural_link.png',
+    'perl': 'perl_version.png',
+    'hidden': 'art_mainframe.png',
+    'quality': 'figlet_trace.png',
+    'colorization': 'art_data_stream.png',
+    'the end': 'art_hack_the_planet.png',
+    'keybinding': 'art_the_grid.png',
 }
 
 def insert_image(f, img_name, width=0.8):
