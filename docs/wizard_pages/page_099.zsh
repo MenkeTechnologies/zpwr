@@ -43,7 +43,12 @@ PAGE_CONTENT() {
     print "  ${C}gitedittag${N}                 ${D}edit a git tag${N}"
     print "  ${C}gitemail${N}                   ${D}show git email${N}"
     print "  ${C}gitforalldir${N}               ${D}git cmd in all dirs${N}"
+    print "  ${C}hometests${N}                  ${D}cd to test directory (alias: hometest)${N}"
+    print "  ${C}loadjenv${N}                   ${D}lazy load jenv${N}"
+    print "  ${C}logincount${N}                 ${D}count logins by user${N}"
+    print "  ${C}regenpdf${N}                   ${D}regenerate encyclopedia PDF${N}"
+    print "  ${C}subcommandsedit${N}            ${D}edit subcommand selection${N}"
+    print "  ${C}subcommandslist${N}             ${D}list all subcommands${N}"
     print ""
     print "  ${D}... continued. Run zpwr verbs for the complete list.${N}"
-    print "  ${D}Or use zpwr wizard --search <term> to find specific verbs.${N}"
 }
