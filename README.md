@@ -935,7 +935,7 @@ zpwr taillog /var/log/system.log  # custom logfile
 Requires `ccze` (`brew install ccze` or `apt install ccze`).
 
 ## The ZPWR Encyclopedia -- zpwr wizard
-`zpwr wizard` launches a 150-page interactive encyclopedia covering every zpwr feature, verb, subsystem, and keybinding reference appendix.  Also invokable as `zpwr manual`, `zpwr tutorial`, or `zpwr docs`.  Vim-style navigation with chapter jumping, search, random page, and a full keybinding help screen.
+`zpwr wizard` launches a 175-page interactive encyclopedia covering every zpwr feature, verb, subsystem, tool integration, and keybinding reference.  Also invokable as `zpwr manual`, `zpwr tutorial`, or `zpwr docs`.  Vim-style navigation with chapter jumping, search, random page, and a full keybinding help screen.
 
 ```sh
 zpwr wizard -h             # cyberpunk help with keybinding reference
@@ -952,7 +952,7 @@ zpwr study 42              # start study session at page 42
 zpwr study -v              # vertical split (book top, shell bottom)
 ```
 
-Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  25 chapters covering getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, and a complete alphabetical reference of all 408+ verbs.
+Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  43 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), FZF architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Perl oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grc, ccze, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
 
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.

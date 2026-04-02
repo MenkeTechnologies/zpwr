@@ -27,10 +27,10 @@ PAGE_CONTENT() {
     print "  ${D}  prevents partial matches. The **(.) glob hits all regular files.${N}"
     print ""
     print "  ${B}${Y}LOGIN COUNTING (zpwrLoginCount)${N}"
-    print "  ${M}  perl -e 'print \\`last -f \"\$_\"\\`for</var/log/wtmp*>'${N}"
-    print "  ${D}  Reads all wtmp files and runs 'last' on each. The diamond${N}"
+    print '  ${M}  perl -e '"'"'print qx(last -f "$_") for </var/log/wtmp*>'"'"'${N}'
+    print "  ${D}  Reads all wtmp files and runs last on each. The diamond${N}"
     print "  ${D}  operator <> globs and iterates. Then pipes to:${N}"
-    print "  ${M}  perl -lane 'print \$F[0] if /\\S+/ && !/wtmp/'${N}"
+    print '  ${M}  perl -lane '"'"'print $F[0] if /\S+/ && !/wtmp/'"'"'${N}'
     print "  ${D}  Extracts username (first field) from non-empty, non-header lines.${N}"
     print ""
     print "  ${B}${Y}FILE COUNT DEDUP (zpwrEnvCounts)${N}"
