@@ -1,0 +1,130 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrReplay(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local -i count=${1:-10}
+    local mode="${2:-preview}"  # preview, exec, tmux
+
+    # colors
+    local C='\033[36m' G='\033[32m' Y='\033[33m' R='\033[31m'
+    local M='\033[35m' B='\033[1m' D='\033[2m' N='\033[0m'
+
+    printf "\n"
+    printf " ${C}██████╗ ███████╗██████╗ ██╗      █████╗ ██╗   ██╗${N}\n"
+    printf " ${C}██╔══██╗██╔════╝██╔══██╗██║     ██╔══██╗╚██╗ ██╔╝${N}\n"
+    printf " ${M}██████╔╝█████╗  ██████╔╝██║     ███████║ ╚████╔╝${N}\n"
+    printf " ${M}██╔══██╗██╔══╝  ██╔═══╝ ██║     ██╔══██║  ╚██╔╝${N}\n"
+    printf " ${C}██║  ██║███████╗██║     ███████╗██║  ██║   ██║${N}\n"
+    printf " ${C}╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝╚═╝  ╚═╝   ╚═╝${N}\n"
+
+    # get last N history entries
+    local -a cmds
+    local -a timestamps
+    local line ts cmd_text
+
+    # fc -l gives: number  command
+    # fc -rl for reverse order (most recent first), then we reverse for playback order
+    local -a raw_lines
+    raw_lines=( "${(@f)$(builtin fc -rl -$count)}" )
+
+    # reverse to chronological order
+    local -i i
+    for (( i = $#raw_lines; i >= 1; i-- )); do
+        line="${raw_lines[i]}"
+        # strip leading spaces and history number
+        cmd_text="${line##[[:space:]]#[0-9]##[[:space:]]#}"
+        [[ -n "$cmd_text" ]] && cmds+=( "$cmd_text" )
+    done
+
+    if (( $#cmds == 0 )); then
+        printf " ${D}┌──────────────────────────────────────────────┐${N}\n"
+        printf " ${D}│${N} ${Y}No history entries found${N}                     ${D}│${N}\n"
+        printf " ${D}└──────────────────────────────────────────────┘${N}\n\n"
+        return 1
+    fi
+
+    printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
+    printf " ${D}│${N} ${G}%d COMMANDS${N}  ${D}//${N} ${C}mode: %s${N}  ${D}//${N} ${M}pwd: %s${N}  ${D}│${N}\n" $#cmds "$mode" "$PWD"
+    printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n"
+
+    if [[ "$mode" == "preview" ]]; then
+        printf "\n"
+        printf "  ${D}>> preview mode: showing commands without executing <<${N}\n\n"
+
+        for (( i = 1; i <= $#cmds; i++ )); do
+            printf "  ${D}%3d${N}  ${C}\$${N} ${B}%s${N}\n" $i "${cmds[i]}"
+        done
+
+        printf "\n"
+        printf "  ${D}┌──────────────────────────────────────────────────────────┐${N}\n"
+        printf "  ${D}│${N} ${Y}Replay modes:${N}                                             ${D}│${N}\n"
+        printf "  ${D}│${N}   ${C}zpwr replay %d exec${N}   ${D}// execute in current shell${N}       ${D}│${N}\n" $count
+        printf "  ${D}│${N}   ${C}zpwr replay %d tmux${N}   ${D}// execute in new tmux pane${N}       ${D}│${N}\n" $count
+        printf "  ${D}└──────────────────────────────────────────────────────────┘${N}\n"
+
+    elif [[ "$mode" == "exec" ]]; then
+        printf "\n"
+        printf "  ${Y}>> executing %d commands in current shell <<${N}\n\n" $#cmds
+
+        for (( i = 1; i <= $#cmds; i++ )); do
+            printf "  ${D}[%d/%d]${N} ${C}\$${N} ${B}%s${N}\n" $i $#cmds "${cmds[i]}"
+
+            local start=$EPOCHREALTIME
+            eval "${cmds[i]}"
+            local -i ret=$?
+            local elapsed=$(printf '%.0f' $(( (EPOCHREALTIME - start) * 1000 )))
+
+            if (( ret == 0 )); then
+                printf "  ${G}→ ok${N} ${D}(%d ms)${N}\n\n" $elapsed
+            else
+                printf "  ${R}→ exit %d${N} ${D}(%d ms)${N}\n\n" $ret $elapsed
+            fi
+        done
+
+        printf "  ${D}┌──────────────────────────────────────────────────────────┐${N}\n"
+        printf "  ${D}│${N} ${G}REPLAY COMPLETE${N}  ${D}//${N} ${C}%d commands executed${N}                  ${D}│${N}\n" $#cmds
+        printf "  ${D}└──────────────────────────────────────────────────────────┘${N}\n"
+
+    elif [[ "$mode" == "tmux" ]]; then
+        if [[ -z "$TMUX" ]]; then
+            printf "\n  ${R}not in tmux session${N}\n\n"
+            return 1
+        fi
+
+        printf "\n"
+        printf "  ${M}>> launching replay in new tmux pane <<${N}\n"
+
+        # build script for tmux pane
+        local replay_script=$(mktemp)
+        {
+            echo '#!/usr/bin/env zsh'
+            echo "cd ${(q)PWD}"
+            echo 'printf "\n  \033[36m>> ZPWR REPLAY START <<\033[0m\n\n"'
+            for (( i = 1; i <= $#cmds; i++ )); do
+                echo "printf '  \033[2m[${i}/${#cmds}]\033[0m \033[36m\$\033[0m \033[1m%s\033[0m\n' ${(q)cmds[i]}"
+                echo "eval ${(q)cmds[i]}"
+                echo "printf '  \033[32m→ exit %d\033[0m\n\n' \$?"
+                echo "sleep 0.5"
+            done
+            echo 'printf "  \033[36m>> REPLAY COMPLETE <<\033[0m\n\n"'
+            echo 'printf "  press enter to close..."'
+            echo 'read'
+            echo "command rm -f ${(q)replay_script}"
+        } >| "$replay_script"
+        chmod +x "$replay_script"
+
+        tmux split-window -h "zsh $replay_script"
+        printf "  ${G}pane opened${N}\n"
+    else
+        printf "\n  ${R}unknown mode: %s${N}\n" "$mode"
+        printf "  ${D}valid modes: preview, exec, tmux${N}\n\n"
+        return 1
+    fi
+
+    printf "\n"
+}
+
+zpwrReplay "$@"

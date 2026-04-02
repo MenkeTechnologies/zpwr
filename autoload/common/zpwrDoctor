@@ -1,0 +1,272 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrDoctor(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    # colors
+    local C='\033[36m' G='\033[32m' Y='\033[33m' R='\033[31m'
+    local M='\033[35m' B='\033[1m' D='\033[2m' N='\033[0m'
+
+    local -i warnings=0 errors=0 fixed=0 checks=0
+
+    printf "\n"
+    printf " ${C}██████╗  ██████╗  ██████╗████████╗ ██████╗ ██████╗${N}\n"
+    printf " ${C}██╔══██╗██╔═══██╗██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗${N}\n"
+    printf " ${M}██║  ██║██║   ██║██║        ██║   ██║   ██║██████╔╝${N}\n"
+    printf " ${M}██║  ██║██║   ██║██║        ██║   ██║   ██║██╔══██╗${N}\n"
+    printf " ${C}██████╔╝╚██████╔╝╚██████╗   ██║   ╚██████╔╝██║  ██║${N}\n"
+    printf " ${C}╚═════╝  ╚═════╝  ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝${N}\n"
+    printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
+    printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}                   ${D}│${N}\n" "$ZPWR" "$(date '+%H:%M:%S')"
+    printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n"
+    printf "  ${D}>> ENVIRONMENT HEALTH CHECK // FULL DIAGNOSTIC <<${N}\n"
+
+    # helper
+    _dr_pass() { (( checks++ )); printf "  ${G}✓${N} %s\n" "$1"; }
+    _dr_warn() { (( checks++ )); (( warnings++ )); printf "  ${Y}⚠${N} %s\n" "$1"; }
+    _dr_fail() { (( checks++ )); (( errors++ )); printf "  ${R}✗${N} %s\n" "$1"; }
+    _dr_info() { printf "    ${D}%s${N}\n" "$1"; }
+
+    # ── STALE .zwc FILES ──────────────────────────────────────
+    printf "\n  ${C}── COMPILED FILES (.zwc) ────────────────────────────${N}\n"
+
+    local f zwc
+    local -i stale_zwc=0
+    for f in "$ZPWR"/**/*.zsh(N) "$ZPWR"/**/*(N.:t); do
+        zwc="${f}.zwc"
+        if [[ -f "$zwc" && "$f" -nt "$zwc" ]]; then
+            (( stale_zwc++ ))
+            if (( stale_zwc <= 5 )); then
+                _dr_warn "stale: ${zwc#$ZPWR/}"
+            fi
+        fi
+    done
+    if (( stale_zwc > 5 )); then
+        _dr_warn "... and $(( stale_zwc - 5 )) more stale .zwc files"
+    fi
+    if (( stale_zwc > 0 )); then
+        _dr_info "fix: zpwr recompile"
+    else
+        _dr_pass "all .zwc files up to date"
+    fi
+
+    # zcompdump staleness
+    if [[ -f "$ZSH_COMPDUMP" ]]; then
+        local -a stale_dump
+        stale_dump=( ${ZSH_COMPDUMP}(N.mh+168) )
+        if (( $#stale_dump > 0 )); then
+            _dr_warn "zcompdump older than 1 week"
+            _dr_info "fix: zpwr regenzsh"
+        else
+            _dr_pass "zcompdump is fresh"
+        fi
+    else
+        _dr_warn "no zcompdump found"
+    fi
+
+    # ── DUPLICATE PATH ENTRIES ────────────────────────────────
+    printf "\n  ${C}── PATH ────────────────────────────────────────────${N}\n"
+
+    local -A seen_path
+    local -i dup_path=0
+    local p
+    for p in $path; do
+        if (( ${+seen_path[$p]} )); then
+            (( dup_path++ ))
+            if (( dup_path <= 3 )); then
+                _dr_warn "duplicate PATH: $p"
+            fi
+        fi
+        seen_path[$p]=1
+    done
+    if (( dup_path > 3 )); then
+        _dr_warn "... and $(( dup_path - 3 )) more duplicate PATH entries"
+    fi
+    (( dup_path == 0 )) && _dr_pass "no duplicate PATH entries ($#path total)"
+
+    # nonexistent PATH entries
+    local -i missing_path=0
+    for p in $path; do
+        if [[ ! -d "$p" ]]; then
+            (( missing_path++ ))
+            if (( missing_path <= 3 )); then
+                _dr_warn "missing PATH dir: $p"
+            fi
+        fi
+    done
+    if (( missing_path > 3 )); then
+        _dr_warn "... and $(( missing_path - 3 )) more missing PATH dirs"
+    fi
+    (( missing_path == 0 )) && _dr_pass "all PATH dirs exist"
+
+    # ── DUPLICATE FPATH ENTRIES ───────────────────────────────
+    printf "\n  ${C}── FPATH ───────────────────────────────────────────${N}\n"
+
+    local -A seen_fpath
+    local -i dup_fpath=0
+    for p in $fpath; do
+        if (( ${+seen_fpath[$p]} )); then
+            (( dup_fpath++ ))
+            if (( dup_fpath <= 3 )); then
+                _dr_warn "duplicate FPATH: $p"
+            fi
+        fi
+        seen_fpath[$p]=1
+    done
+    if (( dup_fpath > 3 )); then
+        _dr_warn "... and $(( dup_fpath - 3 )) more duplicate FPATH entries"
+    fi
+    (( dup_fpath == 0 )) && _dr_pass "no duplicate FPATH entries ($#fpath total)"
+
+    # nonexistent FPATH entries
+    local -i missing_fpath=0
+    for p in $fpath; do
+        if [[ ! -d "$p" ]]; then
+            (( missing_fpath++ ))
+            if (( missing_fpath <= 3 )); then
+                _dr_warn "missing FPATH dir: $p"
+            fi
+        fi
+    done
+    if (( missing_fpath > 3 )); then
+        _dr_warn "... and $(( missing_fpath - 3 )) more missing FPATH dirs"
+    fi
+    (( missing_fpath == 0 )) && _dr_pass "all FPATH dirs exist"
+
+    # ── BROKEN SYMLINKS ───────────────────────────────────────
+    printf "\n  ${C}── SYMLINKS ────────────────────────────────────────${N}\n"
+
+    local -i broken_links=0
+    local link
+    for link in "$ZPWR"/**/*(@N-); do
+        if [[ ! -e "$link" ]]; then
+            (( broken_links++ ))
+            if (( broken_links <= 5 )); then
+                _dr_warn "broken: ${link#$ZPWR/} -> $(readlink "$link" 2>/dev/null)"
+            fi
+        fi
+    done
+    if (( broken_links > 5 )); then
+        _dr_warn "... and $(( broken_links - 5 )) more broken symlinks"
+    fi
+    (( broken_links == 0 )) && _dr_pass "no broken symlinks in \$ZPWR"
+
+    # ── NAMED DIRS ────────────────────────────────────────────
+    printf "\n  ${C}── NAMED DIRECTORIES ───────────────────────────────${N}\n"
+
+    local -i bad_named=0
+    local k v
+    for k v in ${(kv)nameddirs}; do
+        if [[ ! -d "$v" ]]; then
+            (( bad_named++ ))
+            _dr_warn "~$k -> $v (does not exist)"
+        fi
+    done
+    (( bad_named == 0 )) && _dr_pass "all $#nameddirs named dirs valid"
+
+    # check for p10k pollution
+    local -i p10k_named=0
+    for k in ${(k)nameddirs}; do
+        [[ $k == _p9k* || $k == VCS_STATUS_* ]] && (( p10k_named++ ))
+    done
+    if (( p10k_named > 0 )); then
+        _dr_warn "$p10k_named p10k/gitstatus named dirs leaked (auto_name_dirs?)"
+        _dr_info "should not happen with auto_name_dirs off"
+    else
+        _dr_pass "no p10k named dir pollution"
+    fi
+
+    # ── DEPENDENCIES ──────────────────────────────────────────
+    printf "\n  ${C}── DEPENDENCIES ────────────────────────────────────${N}\n"
+
+    local -a required_cmds=( git eza fzf tmux perl python3 )
+    local cmd
+    for cmd in $required_cmds; do
+        if (( $+commands[$cmd] )); then
+            _dr_pass "$cmd found: $commands[$cmd]"
+        else
+            _dr_warn "$cmd not found"
+        fi
+    done
+
+    # zinit
+    if [[ -d "$ZPWR_PLUGIN_MANAGER_HOME/bin" ]]; then
+        _dr_pass "zinit installed"
+    else
+        _dr_fail "zinit not found at $ZPWR_PLUGIN_MANAGER_HOME/bin"
+    fi
+
+    # ── HISTORY ───────────────────────────────────────────────
+    printf "\n  ${C}── HISTORY ─────────────────────────────────────────${N}\n"
+
+    if [[ -f "$HISTFILE" ]]; then
+        local -i hist_lines
+        hist_lines=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        _dr_pass "HISTFILE exists ($hist_lines lines)"
+    else
+        _dr_fail "HISTFILE not found: $HISTFILE"
+    fi
+
+    if [[ -d "$ZPWR_LOCAL/rcBackups" ]]; then
+        local -i backups
+        backups=$(command ls "$ZPWR_LOCAL/rcBackups/" 2>/dev/null | wc -l)
+        _dr_pass "$backups history backups in \$ZPWR_LOCAL/rcBackups"
+    else
+        _dr_warn "no history backup directory"
+        _dr_info "fix: zpwr backuphistory"
+    fi
+
+    # ── CONFIG LINKS ──────────────────────────────────────────
+    printf "\n  ${C}── CONFIG LINKS ────────────────────────────────────${N}\n"
+
+    local -a config_files=( .zshrc .vimrc .tmux.conf .p10k.zsh )
+    local cf
+    for cf in $config_files; do
+        if [[ -L "$HOME/$cf" ]]; then
+            local target=$(readlink "$HOME/$cf" 2>/dev/null)
+            if [[ -e "$HOME/$cf" ]]; then
+                _dr_pass "~/$cf -> $target"
+            else
+                _dr_fail "~/$cf -> $target (broken)"
+            fi
+        elif [[ -f "$HOME/$cf" ]]; then
+            _dr_warn "~/$cf exists but is not a symlink"
+        else
+            _dr_warn "~/$cf not found"
+        fi
+    done
+
+    # ── SUMMARY ───────────────────────────────────────────────
+    printf "\n"
+    printf "  ${C}══════════════════════════════════════════════════════${N}\n"
+
+    local status_color status_label status_signal
+    if (( errors > 0 )); then
+        status_color=$R
+        status_label="CRITICAL"
+        status_signal="${R}██${G}░░░░░░░░${N}"
+    elif (( warnings > 0 )); then
+        status_color=$Y
+        status_label="WARNINGS"
+        local -i sig=$(( 10 - (warnings < 10 ? warnings : 9) ))
+        status_signal="${G}$(printf '█%.0s' {1..$sig})${Y}$(printf '░%.0s' {1..$(( 10 - sig ))})${N}"
+    else
+        status_color=$G
+        status_label="HEALTHY"
+        status_signal="${G}██████████${N}"
+    fi
+
+    printf "  ${B}${status_color}STATUS: %s${N}  ${D}//${N}  signal %b  ${D}//${N}  ${C}%d checks${N}\n" \
+        "$status_label" "$status_signal" $checks
+    printf "  ${G}%d passed${N}  ${D}//${N}  ${Y}%d warnings${N}  ${D}//${N}  ${R}%d errors${N}\n" \
+        $(( checks - warnings - errors )) $warnings $errors
+    printf "  ${C}══════════════════════════════════════════════════════${N}\n"
+    printf "\n"
+
+    unfunction _dr_pass _dr_warn _dr_fail _dr_info 2>/dev/null
+    return $(( errors > 0 ? 1 : 0 ))
+}
+
+zpwrDoctor "$@"
