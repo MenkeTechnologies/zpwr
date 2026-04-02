@@ -88,6 +88,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[completions]='zco=cd to completion directory'
     ZPWR_VERBS[copycommand]='zpwrGetCopyCommand=get the command to copy with system'
     ZPWR_VERBS[decompile]='zpwrUncompile=delete all cache comps'
+    ZPWR_VERBS[deps]='zpwrDeps=function dependency graph and call chain analysis'
     ZPWR_VERBS[detach]='zpwrDetachall=detach from all tmux sessions'
     ZPWR_VERBS[digs]='digs=run series on networking commands on arg'
     ZPWR_VERBS[dirsearch]='zpwrFzfDirsearchVerb=cd to a sub dir'
