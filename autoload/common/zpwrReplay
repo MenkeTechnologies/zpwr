@@ -84,7 +84,7 @@ function zpwrReplay(){
     fi
 
     printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
-    printf " ${D}│${N} ${G}%d COMMANDS${N}  ${D}//${N} ${C}mode: %s${N}  ${D}//${N} ${M}pwd: %s${N}  ${D}│${N}\n" $#cmds "$mode" "$PWD"
+    printf " ${D}│${N} ${G}%d COMMANDS${N}  ${D}//${N} ${C}mode: %s${N}  ${D}//${N} ${M}pwd: %s${N}\n" $#cmds "$mode" "$PWD"
     printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n"
 
     if [[ "$mode" == "preview" ]]; then
@@ -98,8 +98,8 @@ function zpwrReplay(){
         printf "\n"
         printf "  ${D}┌──────────────────────────────────────────────────────────┐${N}\n"
         printf "  ${D}│${N} ${Y}Replay modes:${N}                                             ${D}│${N}\n"
-        printf "  ${D}│${N}   ${C}zpwr replay %d exec${N}   ${D}// execute in current shell${N}       ${D}│${N}\n" $count
-        printf "  ${D}│${N}   ${C}zpwr replay %d tmux${N}   ${D}// execute in new tmux pane${N}       ${D}│${N}\n" $count
+        printf "  ${D}│${N}   ${C}zpwr replay %d exec${N}   ${D}// execute in current shell${N}\n" $count
+        printf "  ${D}│${N}   ${C}zpwr replay %d tmux${N}   ${D}// execute in new tmux pane${N}\n" $count
         printf "  ${D}└──────────────────────────────────────────────────────────┘${N}\n"
 
     elif [[ "$mode" == "exec" ]]; then
@@ -122,7 +122,7 @@ function zpwrReplay(){
         done
 
         printf "  ${D}┌──────────────────────────────────────────────────────────┐${N}\n"
-        printf "  ${D}│${N} ${G}REPLAY COMPLETE${N}  ${D}//${N} ${C}%d commands executed${N}                  ${D}│${N}\n" $#cmds
+        printf "  ${D}│${N} ${G}REPLAY COMPLETE${N}  ${D}//${N} ${C}%d commands executed${N}\n" $#cmds
         printf "  ${D}└──────────────────────────────────────────────────────────┘${N}\n"
 
     elif [[ "$mode" == "tmux" ]]; then
