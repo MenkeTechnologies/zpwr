@@ -484,6 +484,13 @@
     assert "$output" is_empty
 }
 
+@test 'zpwrLogConsoleTrace ZPWR_TRACE true outputs' {
+    ZPWR_TRACE=true
+    run zpwrLogConsoleTrace "tracetestuniq"
+    assert "$output" contains tracetestuniq
+    ZPWR_TRACE=false
+}
+
 #--------------------------------------------------------------
 # zpwrLogInfo / zpwrLogError
 #--------------------------------------------------------------
@@ -501,6 +508,27 @@
     ZPWR_DEBUG=false
     run zpwrLogDebug "should not appear"
     assert "$output" is_empty
+}
+
+@test 'zpwrLogTrace ZPWR_TRACE false is silent' {
+    ZPWR_TRACE=false
+    run zpwrLogTrace "should not appear in stdout"
+    assert "$output" is_empty
+}
+
+@test 'zpwrLogTrace ZPWR_TRACE true appends to logfile' {
+    local tmp prev
+    tmp=$(mktemp)
+    prev=$ZPWR_LOGFILE
+    ZPWR_LOGFILE=$tmp
+    ZPWR_TRACE=true
+    ZPWR_COLORS=false
+    run zpwrLogTrace logtraceuniq
+    assert $state equals 0
+    assert "$(command cat "$tmp")" contains logtraceuniq
+    ZPWR_TRACE=false
+    ZPWR_LOGFILE=$prev
+    command rm -f "$tmp"
 }
 
 #--------------------------------------------------------------
@@ -606,4 +634,25 @@
     run zpwrLogConsoleHeader INFO "hdruniq456" 2>&1
     assert $state equals 0
     assert "$output" contains hdruniq456
+}
+
+#--------------------------------------------------------------
+# zpwrLogConsoleNotGit
+#--------------------------------------------------------------
+@test 'zpwrLogConsoleNotGit stderr mentions not a git dir' {
+    run zsh -c "source $ZPWR_LIB; zpwrLogConsoleNotGit" 2>&1
+    assert "$output" contains "not a git dir"
+}
+
+#--------------------------------------------------------------
+# zpwrPrettyPrintBox
+#--------------------------------------------------------------
+@test 'zpwrPrettyPrintBox with arg returns 0' {
+    run zpwrPrettyPrintBox "boxlbluniq"
+    assert $state equals 0
+}
+
+@test 'zpwrPrettyPrintBox output includes label' {
+    run zpwrPrettyPrintBox "boxcontentuniq42"
+    assert "$output" contains boxcontentuniq42
 }
