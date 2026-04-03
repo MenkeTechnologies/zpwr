@@ -77,15 +77,15 @@ function zpwrReplay(){
     done
 
     if (( $#cmds == 0 )); then
-        printf " ${D}┌──────────────────────────────────────────────┐${N}\n"
-        printf " ${D}│${N} ${Y}No history entries found${N}                     ${D}│${N}\n"
-        printf " ${D}└──────────────────────────────────────────────┘${N}\n\n"
+        printf " ${D}┌──────────────────────────────────────────────${N}\n"
+        printf " ${D}│${N} ${Y}No history entries found${N}\n"
+        printf " ${D}└──────────────────────────────────────────────${N}\n\n"
         return 1
     fi
 
-    printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
+    printf " ${D}┌──────────────────────────────────────────────────────────────${N}\n"
     printf " ${D}│${N} ${G}%d COMMANDS${N}  ${D}//${N} ${C}mode: %s${N}  ${D}//${N} ${M}pwd: %s${N}\n" $#cmds "$mode" "$PWD"
-    printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n"
+    printf " ${D}└──────────────────────────────────────────────────────────────${N}\n"
 
     if [[ "$mode" == "preview" ]]; then
         printf "\n"
@@ -96,11 +96,11 @@ function zpwrReplay(){
         done
 
         printf "\n"
-        printf "  ${D}┌──────────────────────────────────────────────────────────┐${N}\n"
-        printf "  ${D}│${N} ${Y}Replay modes:${N}                                             ${D}│${N}\n"
+        printf "  ${D}┌──────────────────────────────────────────────────────────${N}\n"
+        printf "  ${D}│${N} ${Y}Replay modes:${N}\n"
         printf "  ${D}│${N}   ${C}zpwr replay %d exec${N}   ${D}// execute in current shell${N}\n" $count
         printf "  ${D}│${N}   ${C}zpwr replay %d tmux${N}   ${D}// execute in new tmux pane${N}\n" $count
-        printf "  ${D}└──────────────────────────────────────────────────────────┘${N}\n"
+        printf "  ${D}└──────────────────────────────────────────────────────────${N}\n"
 
     elif [[ "$mode" == "exec" ]]; then
         printf "\n"
@@ -121,9 +121,9 @@ function zpwrReplay(){
             fi
         done
 
-        printf "  ${D}┌──────────────────────────────────────────────────────────┐${N}\n"
+        printf "  ${D}┌──────────────────────────────────────────────────────────${N}\n"
         printf "  ${D}│${N} ${G}REPLAY COMPLETE${N}  ${D}//${N} ${C}%d commands executed${N}\n" $#cmds
-        printf "  ${D}└──────────────────────────────────────────────────────────┘${N}\n"
+        printf "  ${D}└──────────────────────────────────────────────────────────${N}\n"
 
     elif [[ "$mode" == "tmux" ]]; then
         if [[ -z "$TMUX" ]]; then
