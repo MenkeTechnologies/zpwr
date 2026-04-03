@@ -61,6 +61,15 @@ function zpwrMatrix(){
     n_params=${#parameters}
     [[ -s "$ZPWR_ALL_GIT_DIRS" ]] && n_repos=$(wc -l < "$ZPWR_ALL_GIT_DIRS")
 
+    # compute stats dynamically
+    local -i n_autoloads=0 n_scripts=0 n_comps=0 n_commits=0 n_files=0 n_lines=0 n_pages=0
+    n_autoloads=$(ls "$ZPWR_AUTOLOAD_COMMON" "$ZPWR_AUTOLOAD_DARWIN" "$ZPWR_AUTOLOAD_LINUX" 2>/dev/null | wc -l)
+    n_scripts=$(ls "$ZPWR_SCRIPTS"/*.sh "$ZPWR_SCRIPTS"/*.zsh "$ZPWR_SCRIPTS"/*.pl "$ZPWR_SCRIPTS"/*.py 2>/dev/null | wc -l)
+    n_comps=$(ls "$ZPWR_COMPS"/_* 2>/dev/null | wc -l)
+    n_commits=$(git -C "$ZPWR" log --oneline 2>/dev/null | wc -l)
+    n_pages=$(ls "$ZPWR"/docs/wizard_pages/page_*.zsh 2>/dev/null | wc -l)
+    n_files=$(find "$ZPWR" -not -path '*/local/*' -not -path '*/.git/*' -not -name '*.zwc' -not -name '*.pdf' 2>/dev/null | wc -l)
+
     printf '\033[?25l\033[2J'
     trap 'printf "\033[?25h\033[0m\033[2J\033[H"; return 0' INT QUIT
 
@@ -324,7 +333,16 @@ function zpwrMatrix(){
             "  ZPWR_VERBS=${n_verbs}"
             "  ZPWR_ALIASES=${n_aliases}"
             "  ZPWR_FUNCTIONS=${n_funcs}"
+            "  ZPWR_PARAMETERS=${n_params}"
+            "  ZPWR_AUTOLOADS=${n_autoloads}"
+            "  ZPWR_SCRIPTS=${n_scripts}"
+            "  ZPWR_COMPLETIONS=${n_comps}"
             "  ZPWR_REPOS=${n_repos}"
+            "  ZPWR_COMMITS=${n_commits}"
+            "  ZPWR_FILES=${n_files}"
+            "  ZPWR_ENCYCLOPEDIA=${n_pages} pages"
+            "  ZPWR_PLATFORM=${ZPWR_OS_TYPE:-unknown}"
+            "  ZPWR_ZSH=${ZSH_VERSION}"
             '  ZPWR_STATUS=ARMED'
             '  ZPWR_SIGNAL=████████░░'
         )
@@ -440,7 +458,49 @@ function zpwrMatrix(){
     printf '\n\n'
     _mx_center "a terminal story" "2;35"
     printf '\n'
-    _mx_pause 3 || return 0
+    _mx_pause 2 || return 0
+
+    _mx_crt "7;36"
+    printf '\033[2J\033[H\n'
+
+    # system specs readout
+    local -a specs
+    specs=(
+        '[SYS] ZPWR ECOSYSTEM SCAN'
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+        ''
+        "  VERBS ................. ${n_verbs}+"
+        "  ALIASES ............... ${n_aliases}"
+        "  FUNCTIONS ............. ${n_funcs}"
+        "  PARAMETERS ............ ${n_params}"
+        "  AUTOLOAD FILES ........ ${n_autoloads}"
+        "  SCRIPTS ............... ${n_scripts}"
+        "  COMPLETION FUNCTIONS .. ${n_comps}"
+        "  GIT REPOS INDEXED ..... ${n_repos}"
+        "  ENCYCLOPEDIA PAGES .... ${n_pages}"
+        "  GIT COMMITS ........... ${n_commits}"
+        "  TOTAL FILES ........... ${n_files}"
+        "  PLATFORM .............. ${ZPWR_OS_TYPE:-unknown}"
+        "  SHELL ................. zsh ${ZSH_VERSION}"
+        "  PID ................... $$"
+        ''
+        '━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'
+        '[SYS] ALL SYSTEMS NOMINAL'
+    )
+    for line in "${specs[@]}"; do
+        if [[ "$line" == *"SCAN"* || "$line" == *"NOMINAL"* ]]; then
+            _mx_type "  $line" "1;32" 0.015 || return 0
+        elif [[ "$line" == *"━"* ]]; then
+            _mx_type "  $line" "2;36" 0.002 || return 0
+        elif [[ "$line" == *"..."* ]]; then
+            _mx_type "  $line" "0;36" 0.008 || return 0
+        else
+            _mx_type "  $line" "0;32" 0.01 || return 0
+        fi
+        printf '\n'
+        sleep 0.04
+    done
+    _mx_pause 2 || return 0
 
     _mx_transition
 
@@ -493,9 +553,11 @@ function zpwrMatrix(){
         '  Something changed.'
         '  The prompt... it was glowing.'
         ''
-        '  466 verbs loaded into memory.'
+        "  ${n_verbs} verbs loaded into memory."
         "  ${n_aliases} aliases. ${n_funcs} functions. ${n_params} parameters."
+        "  ${n_autoloads} autoloaded files. ${n_scripts} scripts. ${n_comps} completions."
         "  ${n_repos} git repos indexed across the filesystem."
+        "  ${n_pages} encyclopedia pages. ${n_commits} git commits deep."
         ''
         '  This was not a dotfiles repo.'
         '  This was a weapons system.'
@@ -776,21 +838,28 @@ function zpwrMatrix(){
     local -a pulse_msgs
     pulse_msgs=(
         "// ${n_verbs} VERBS LOADED // NEURAL COMMAND VOCABULARY //"
-        "// ${n_aliases} ALIASES // SHORTHAND FOR THE INITIATED //"
+        "// ${n_aliases} ALIASES ACTIVE // SHORTHAND FOR THE INITIATED //"
+        "// ${n_funcs} FUNCTIONS // ${n_autoloads} AUTOLOADED // THE LAZY ARMY //"
+        "// ${n_repos} GIT REPOS INDEXED // THE NETWORK MAP //"
+        "// ${n_pages} ENCYCLOPEDIA PAGES // ${n_commits} COMMITS DEEP //"
+        "// ${n_files} FILES // ${n_scripts} SCRIPTS // ${n_comps} COMPLETIONS //"
+        "// ZSH ${ZSH_VERSION} // ${ZPWR_OS_TYPE:-unknown} // PID $$ //"
         "// IF YOUR TERMINAL ISN'T GLOWING YOU'RE NOT RUNNING ZPWR //"
         "// THERE IS NO SPOON // ONLY ZPWR_VERBS //"
         "// WAKE UP NEO // YOUR .zshrc HAS YOU //"
         "// MENKETECHNOLOGIES // THE DIGITAL UNDERGROUND //"
         "// ALL YOUR SHELL ARE BELONG TO ZPWR //"
         "// THE GUI IS A LIE // THE TERMINAL IS THE TRUTH //"
+        "// ${n_params} PARAMETERS // DIALS AND SWITCHES FOR EVERY SUBSYSTEM //"
     )
     local -i n_pulses=${#pulse_msgs}
 
     local -a ticker_msgs
     ticker_msgs=(
-        ">>> ZPWR MATRIX /// ${n_verbs} VERBS ${n_aliases} ALIASES ${n_funcs} FUNCTIONS ${n_repos} REPOS /// MENKETECHNOLOGIES >>>"
-        ">>> SIGNAL LOCKED /// ALL SYSTEMS NOMINAL /// NEURAL INTERFACE ACTIVE >>>"
-        ">>> SCANNING FILESYSTEM /// LOADING PLUGINS /// TURBO MODE ENGAGED >>>"
+        ">>> ZPWR MATRIX /// ${n_verbs} VERBS ${n_aliases} ALIASES ${n_funcs} FUNCTIONS ${n_repos} REPOS ${n_commits} COMMITS /// MENKETECHNOLOGIES >>>"
+        ">>> ${n_autoloads} AUTOLOADS ${n_scripts} SCRIPTS ${n_comps} COMPLETIONS ${n_pages} ENCYCLOPEDIA PAGES ${n_files} FILES /// ARMED >>>"
+        ">>> SIGNAL LOCKED /// ALL SYSTEMS NOMINAL /// NEURAL INTERFACE ACTIVE /// ZSH ${ZSH_VERSION} >>>"
+        ">>> SCANNING FILESYSTEM /// LOADING PLUGINS /// TURBO MODE ENGAGED /// ${ZPWR_OS_TYPE:-unknown} >>>"
     )
     local -i ticker_idx=1 ticker_pos=0
     local ticker_text="${ticker_msgs[1]}"
@@ -988,15 +1057,18 @@ function zpwrMatrix(){
             done
 
             printf '\033[%d;1H\033[1;32;40m ⚡ ZPWR' $(( lines - 1 ))
-            printf '  \033[2;32m//\033[1;32;40m  %dv %da %df %dr' $n_verbs $n_aliases $n_funcs $n_repos
+            printf '  \033[2;32m//\033[1;32;40m  %dv %da %df %dp %dr' $n_verbs $n_aliases $n_funcs $n_params $n_repos
+            printf '  \033[2;32m//\033[1;35;40m  %dauto %dscr %dcomp' $n_autoloads $n_scripts $n_comps
             printf '  \033[2;32m//\033[1;36;40m  %s' "$sig_bar"
-            printf '%*s\033[0m' $(( cols - 48 )) ''
+            printf '%*s\033[0m' $(( cols - 80 )) ''
 
             printf '\033[%d;1H\033[2;36;40m ▸ f%05d' $lines $frame
             printf '  //  %02d:%02d:%02d' $up_h $up_m $up_s
             printf '  //  %dx%d' $cols $lines
+            printf '  //  %d commits' $n_commits
+            printf '  //  %d pages' $n_pages
             printf '  //  [q] quit'
-            printf '%*s\033[0m' $(( cols - 50 )) ''
+            printf '%*s\033[0m' $(( cols - 72 )) ''
         fi
 
         sleep $(( 0.08 / speed ))
