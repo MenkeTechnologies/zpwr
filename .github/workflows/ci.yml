@@ -20,6 +20,7 @@ jobs:
     timeout-minutes: 120
     env:
       GIT_TERMINAL_PROMPT: 0
+      DEBIAN_FRONTEND: noninteractive
     strategy:
       matrix:
         zsh-version: ['default']
@@ -29,7 +30,9 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends zsh vim perl python3 curl git
+          sudo apt-get install -y --no-install-recommends \
+            zsh vim perl python3 curl git \
+            netcat-openbsd net-tools bc screen rsync zip unzip openssh-client iputils-ping
 
       - name: Checkout repository
         uses: actions/checkout@v4
