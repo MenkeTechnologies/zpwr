@@ -45,6 +45,9 @@ function zpwrMatrix(){
         print "  ${C}--sound${N}                                          ${D}// Terminal bell on events${N}"
         print "  ${C}--no-fx${N}                                          ${D}// Disable all visual FX${N}"
         print ""
+        print "  ${D}── MULTIPLAYER ──────────────────────────────────────────────────────${N}"
+        print "  ${C}--battle${N}                                         ${D}// 2-player tmux typing battle${N}"
+        print ""
         print "  ${D}── INFO ─────────────────────────────────────────────────────────────${N}"
         print "  ${C}--cast${N}                                           ${D}// Show character bios${N}"
         print "  ${C}--stats${N}                                          ${D}// Ecosystem stats and exit${N}"
@@ -76,6 +79,8 @@ function zpwrMatrix(){
     local -i sound_mode=0 no_fx=0 extended=0
     local -i show_cast=0 show_stats=0 show_credits=0
     local -i _mx_pause_orig_turbo=0
+    local -i battle_mode=0 battle_p2=0
+    local _battle_gamedir=""
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -94,6 +99,9 @@ function zpwrMatrix(){
             --cast) show_cast=1; shift ;;
             --stats) show_stats=1; shift ;;
             --credits) show_credits=1; shift ;;
+            --battle) battle_mode=1; shift ;;
+            --player2) battle_p2=1; shift ;;
+            --gamedir) _battle_gamedir="$2"; shift 2 ;;
             *) shift ;;
         esac
     done
@@ -223,6 +231,328 @@ function zpwrMatrix(){
         print "  ${G}SHELL${N} ................. ${B}zsh ${ZSH_VERSION}${N}"
         print "  ${D}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
         return 0
+    fi
+
+    # ── BATTLE MODE ──────────────────────────────────────────
+    if (( battle_mode || battle_p2 )); then
+        local _bdir="/tmp/zpwr-battle-$$"
+        local _bplayer _bname _bcolor _bopponent _bocolor
+        local -i _bhp=100 _bohp=100 _bround=0 _bdmg=0 _bwins=0 _blosses=0
+        local -i _btimeout=8 _bcols _blines
+        local _bcmd _binput _bresult _bstate
+        local -a _bverbs _btaunts_hit _btaunts_miss _btaunts_win
+
+        _bverbs=()
+        if (( ${+ZPWR_VERBS} )); then
+            _bverbs=( ${(k)ZPWR_VERBS} )
+        else
+            _bverbs=( bench doctor flame lint stale ports top matrix wizard gitwho
+                       deps trace watch snapshot restore replay timeline startup
+                       pathaudit resolve fortune study )
+        fi
+
+        _btaunts_hit=(
+            "DIRECT HIT."
+            "CRITICAL STRIKE."
+            "SEGMENT VIOLATION."
+            "PACKET DELIVERED."
+            "BUFFER OVERFLOW."
+            "STACK SMASHED."
+            "ROOT ACQUIRED."
+            "FIREWALL BREACHED."
+            "CORE DUMPED."
+            "SIGNAL 9."
+        )
+        _btaunts_miss=(
+            "MISS. PACKET DROPPED."
+            "TIMEOUT. CONNECTION REFUSED."
+            "404. COMMAND NOT FOUND."
+            "EPERM. PERMISSION DENIED."
+            "SEGFAULT. TRY AGAIN."
+            "ECONNRESET. PIPE BROKEN."
+            "ENOMEM. OUT OF BUFFERS."
+        )
+        _btaunts_win=(
+            "GAME OVER. THE TERMINAL WINS."
+            "FLAWLESS MERGE. ALL TESTS PASS."
+            "PUSHED TO PRODUCTION. NO ROLLBACK."
+            "ROOT ACCESS GRANTED. PERMANENTLY."
+            "THE GUI IS DEAD. LONG LIVE THE PIPE."
+        )
+
+        # HP bar renderer
+        _bx_hpbar() {
+            local label="$1" color="$2"
+            local -i hp=$3 maxhp=100
+            local -i filled=$(( hp * 30 / maxhp ))
+            local -i empty=$(( 30 - filled ))
+            (( filled < 0 )) && filled=0
+            (( empty < 0 )) && empty=0
+            local hpcolor=$G
+            (( hp < 60 )) && hpcolor=$Y
+            (( hp < 30 )) && hpcolor=$R
+            printf "  ${color}${B}%-16s${N} " "$label"
+            printf "${hpcolor}"
+            (( filled > 0 )) && printf '█%.0s' {1..$filled}
+            printf "${D}"
+            (( empty > 0 )) && printf '░%.0s' {1..$empty}
+            printf "${N} ${hpcolor}${B}%3d${N}/${D}${maxhp}${N}\n" $hp
+        }
+
+        # Battle screen renderer
+        _bx_render() {
+            printf '\033[H\033[2J'
+            _bcols=$COLUMNS
+            _blines=$LINES
+            print ""
+            print " ${C}██████╗  █████╗ ████████╗████████╗██╗     ███████╗${N}"
+            print " ${C}██╔══██╗██╔══██╗╚══██╔══╝╚══██╔══╝██║     ██╔════╝${N}"
+            print " ${M}██████╔╝███████║   ██║      ██║   ██║     █████╗${N}"
+            print " ${M}██╔══██╗██╔══██║   ██║      ██║   ██║     ██╔══╝${N}"
+            print " ${C}██████╔╝██║  ██║   ██║      ██║   ███████╗███████╗${N}"
+            print " ${C}╚═════╝ ╚═╝  ╚═╝   ╚═╝      ╚═╝   ╚══════╝╚══════╝${N}"
+            print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
+            printf " ${D}│${N} ${G}ROUND %d${N}  ${D}//${N} ${C}%s${N} vs ${R}%s${N}" $_bround "$_bname" "$_bopponent"
+            printf "%*s${D}│${N}\n" $(( 43 - ${#_bname} - ${#_bopponent} - ${#_bround} )) ""
+            print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+            print ""
+            _bx_hpbar "$_bname" "$_bcolor" $_bhp
+            _bx_hpbar "$_bopponent" "$_bocolor" $_bohp
+            print ""
+        }
+
+        # P1 initiates: create game dir, split tmux
+        if (( ! battle_p2 )); then
+            _bplayer=1
+            _bname="NULL POINTER"
+            _bcolor=$G
+            _bopponent="CHAD ELECTRON"
+            _bocolor=$R
+
+            if [[ -z "$TMUX" ]]; then
+                print "  ${R}ERROR: --battle requires tmux${N}"
+                print "  ${D}run inside a tmux session${N}"
+                return 1
+            fi
+
+            command mkdir -p "$_bdir"
+            print "100" > "$_bdir/p1hp"
+            print "100" > "$_bdir/p2hp"
+            print "0" > "$_bdir/round"
+            print "waiting" > "$_bdir/state"
+            print "" > "$_bdir/p1input"
+            print "" > "$_bdir/p2input"
+            print "" > "$_bdir/command"
+
+            # split tmux and launch P2
+            tmux split-window -h "ZPWR='$ZPWR' zsh -c 'source $ZPWR/autoload/common/zpwrMatrix --player2 --gamedir $_bdir'"
+            sleep 0.3
+
+            # ── P1 GAME LOOP ────────────────────────────
+            printf '\033[?25l'
+            trap 'printf "\033[?25h\033[0m\033[2J\033[H"; command rm -rf "$_bdir" 2>/dev/null; return 0' INT QUIT
+
+            while (( _bhp > 0 && _bohp > 0 )); do
+                (( _bround++ ))
+                print "$_bround" > "$_bdir/round"
+
+                # pick a command
+                _bcmd="zpwr ${_bverbs[$(( RANDOM % ${#_bverbs} + 1 ))]}"
+                print "$_bcmd" > "$_bdir/command"
+                print "ready" > "$_bdir/state"
+
+                _bx_render
+                print "  ${D}── INCOMING TRANSMISSION ──────────────────────────────────────────${N}"
+                print ""
+                print "  ${B}${C}TYPE:${N}  ${B}${M}${_bcmd}${N}"
+                print ""
+                _bdmg=$(( ${#_bcmd} / 2 + RANDOM % 8 + 5 ))
+
+                # read P1 input with timeout
+                printf "  ${G}>${N} "
+                printf '\033[?25h'
+                _binput=""
+                read -t $_btimeout -r _binput
+                printf '\033[?25l'
+                print "$_binput" > "$_bdir/p1input"
+
+                # wait briefly for P2
+                sleep 0.3
+
+                # evaluate round
+                local _p2in=""
+                [[ -f "$_bdir/p2input" ]] && _p2in=$(< "$_bdir/p2input")
+
+                if [[ "$_binput" == "$_bcmd" && "$_p2in" != "$_bcmd" ]]; then
+                    # P1 wins round
+                    _bohp=$(( _bohp - _bdmg ))
+                    (( _bohp < 0 )) && _bohp=0
+                    print "$_bohp" > "$_bdir/p2hp"
+                    _bresult="${_btaunts_hit[$(( RANDOM % ${#_btaunts_hit} + 1 ))]}"
+                    (( _bwins++ ))
+                    _bx_render
+                    print "  ${G}${B}>>> ${_bresult}${N}  ${D}(-${_bdmg} to ${_bopponent})${N}"
+                elif [[ "$_binput" != "$_bcmd" && "$_p2in" == "$_bcmd" ]]; then
+                    # P2 wins round
+                    _bhp=$(( _bhp - _bdmg ))
+                    (( _bhp < 0 )) && _bhp=0
+                    print "$_bhp" > "$_bdir/p1hp"
+                    _bresult="${_btaunts_miss[$(( RANDOM % ${#_btaunts_miss} + 1 ))]}"
+                    (( _blosses++ ))
+                    _bx_render
+                    print "  ${R}${B}>>> ${_bresult}${N}  ${D}(-${_bdmg} to ${_bname})${N}"
+                elif [[ "$_binput" == "$_bcmd" && "$_p2in" == "$_bcmd" ]]; then
+                    # both correct — coin flip
+                    if (( RANDOM % 2 )); then
+                        _bohp=$(( _bohp - _bdmg / 2 ))
+                        (( _bohp < 0 )) && _bohp=0
+                        print "$_bohp" > "$_bdir/p2hp"
+                        (( _bwins++ ))
+                        _bx_render
+                        print "  ${Y}${B}>>> BOTH CORRECT — EDGE TO ${_bname}${N}  ${D}(-$(( _bdmg/2 )))${N}"
+                    else
+                        _bhp=$(( _bhp - _bdmg / 2 ))
+                        (( _bhp < 0 )) && _bhp=0
+                        print "$_bhp" > "$_bdir/p1hp"
+                        (( _blosses++ ))
+                        _bx_render
+                        print "  ${Y}${B}>>> BOTH CORRECT — EDGE TO ${_bopponent}${N}  ${D}(-$(( _bdmg/2 )))${N}"
+                    fi
+                else
+                    # both wrong
+                    _bx_render
+                    print "  ${D}${B}>>> BOTH MISSED. MUTUAL EMBARRASSMENT.${N}"
+                fi
+
+                # sync HP from files
+                [[ -f "$_bdir/p1hp" ]] && _bhp=$(< "$_bdir/p1hp")
+                [[ -f "$_bdir/p2hp" ]] && _bohp=$(< "$_bdir/p2hp")
+                _bhp=${_bhp//[^0-9]/}; _bohp=${_bohp//[^0-9]/}
+
+                print "done" > "$_bdir/state"
+                sleep 2
+            done
+
+            # ── GAME OVER ───────────────────────────────
+            _bx_render
+            print ""
+            if (( _bhp > 0 )); then
+                print "  ${G}${B}╔══════════════════════════════════════════════╗${N}"
+                print "  ${G}${B}║   ${_bname} WINS                             ║${N}"
+                print "  ${G}${B}╚══════════════════════════════════════════════╝${N}"
+                print ""
+                print "  ${_btaunts_win[$(( RANDOM % ${#_btaunts_win} + 1 ))]}"
+            else
+                print "  ${R}${B}╔══════════════════════════════════════════════╗${N}"
+                print "  ${R}${B}║   ${_bopponent} WINS                         ║${N}"
+                print "  ${R}${B}╚══════════════════════════════════════════════╝${N}"
+                print ""
+                print "  ${R}The GUI wins this time. There will be a rematch.${N}"
+            fi
+            print ""
+            print "  ${D}rounds: ${_bround}  wins: ${_bwins}  losses: ${_blosses}${N}"
+            print ""
+            printf '\033[?25h'
+            print "  ${D}press any key${N}"
+            read -s -k 1
+            command rm -rf "$_bdir" 2>/dev/null
+            return 0
+        fi
+
+        # ── PLAYER 2 (launched in split pane) ────────────────
+        if (( battle_p2 )); then
+            [[ -n "$_battle_gamedir" ]] && _bdir="$_battle_gamedir"
+            # fallback: scan /tmp for game dir
+            if [[ ! -d "$_bdir" ]]; then
+                local _found
+                for _found in /tmp/zpwr-battle-*(N); do
+                    [[ -f "$_found/state" ]] && { _bdir="$_found"; break; }
+                done
+            fi
+            if [[ ! -d "$_bdir" ]]; then
+                print "  ${R}ERROR: no active battle found${N}"
+                sleep 2
+                return 1
+            fi
+
+            _bplayer=2
+            _bname="CHAD ELECTRON"
+            _bcolor=$R
+            _bopponent="NULL POINTER"
+            _bocolor=$G
+
+            printf '\033[?25l'
+            trap 'printf "\033[?25h\033[0m\033[2J\033[H"; return 0' INT QUIT
+
+            while true; do
+                # wait for round to start
+                _bstate=""
+                while [[ "$_bstate" != "ready" ]]; do
+                    [[ -f "$_bdir/state" ]] && _bstate=$(< "$_bdir/state")
+                    [[ "$_bstate" == "ready" ]] && break
+                    sleep 0.1
+                    # check if game dir still exists (P1 quit)
+                    [[ ! -d "$_bdir" ]] && { printf '\033[?25h\033[0m\033[2J\033[H'; return 0; }
+                done
+
+                # read game state
+                _bround=$(< "$_bdir/round")
+                _bcmd=$(< "$_bdir/command")
+                [[ -f "$_bdir/p1hp" ]] && _bohp=$(< "$_bdir/p1hp")
+                [[ -f "$_bdir/p2hp" ]] && _bhp=$(< "$_bdir/p2hp")
+                _bohp=${_bohp//[^0-9]/}; _bhp=${_bhp//[^0-9]/}
+
+                (( _bhp <= 0 || _bohp <= 0 )) && break
+
+                _bx_render
+                print "  ${D}── INCOMING TRANSMISSION ──────────────────────────────────────────${N}"
+                print ""
+                print "  ${B}${C}TYPE:${N}  ${B}${M}${_bcmd}${N}"
+                print ""
+
+                printf "  ${R}>${N} "
+                printf '\033[?25h'
+                _binput=""
+                read -t $_btimeout -r _binput
+                printf '\033[?25l'
+                print "$_binput" > "$_bdir/p2input"
+
+                # wait for P1 to evaluate
+                while [[ "$(< "$_bdir/state")" != "done" ]]; do
+                    sleep 0.1
+                    [[ ! -d "$_bdir" ]] && { printf '\033[?25h\033[0m\033[2J\033[H'; return 0; }
+                done
+
+                # refresh HP
+                [[ -f "$_bdir/p1hp" ]] && _bohp=$(< "$_bdir/p1hp")
+                [[ -f "$_bdir/p2hp" ]] && _bhp=$(< "$_bdir/p2hp")
+                _bohp=${_bohp//[^0-9]/}; _bhp=${_bhp//[^0-9]/}
+
+                _bx_render
+                if (( _bhp <= 0 )); then
+                    print "  ${R}${B}YOU HAVE BEEN DEFEATED.${N}"
+                elif (( _bohp <= 0 )); then
+                    print "  ${G}${B}YOU WIN. THE GUI PREVAILS... THIS TIME.${N}"
+                fi
+                sleep 1.5
+            done
+
+            # final screen
+            _bx_render
+            print ""
+            if (( _bhp > 0 )); then
+                print "  ${G}${B}  CHAD ELECTRON WINS${N}"
+                print "  ${D}  The rounded corners were too powerful.${N}"
+            else
+                print "  ${R}${B}  CHAD ELECTRON HAS FALLEN${N}"
+                print "  ${D}  His Electron app couldn't render the death screen.${N}"
+            fi
+            print ""
+            printf '\033[?25h'
+            print "  ${D}press any key${N}"
+            read -s -k 1
+            return 0
+        fi
     fi
 
     printf '\033[?25l\033[2J'
