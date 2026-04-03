@@ -7,6 +7,11 @@ function zpwrPorts(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -58,9 +63,11 @@ function zpwrPorts(){
     printf " ${C}╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝${N}\n"
 
     if [[ "$kill_mode" == true && -n "$port_filter" ]]; then
-        printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
-        printf " ${D}│${N} ${R}KILL MODE${N}  ${D}//${N} ${C}port %s${N}  ${D}//${N} ${M}%s${N}                    ${D}│${N}\n" "$port_filter" "$(date '+%H:%M:%S')"
-        printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n\n"
+        _bt
+        printf -v _msg " ${R}KILL MODE${N}  ${D}//${N} ${C}port %s${N}  ${D}//${N} ${M}%s${N}" "$port_filter" "$(date '+%H:%M:%S')"
+        _bx "$_msg"
+        _bb
+        printf "\n"
 
         local -a pids
         pids=( $(command lsof -ti :"$port_filter" 2>/dev/null) )
@@ -79,9 +86,11 @@ function zpwrPorts(){
         return 0
     fi
 
-    printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
-    printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}                          ${D}│${N}\n" "${port_filter:-all ports}" "$(date '+%H:%M:%S')"
-    printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n\n"
+    _bt
+    printf -v _msg " ${G}SCANNING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}" "${port_filter:-all ports}" "$(date '+%H:%M:%S')"
+    _bx "$_msg"
+    _bb
+    printf "\n"
 
     local lsof_cmd header
     local -i count=0
@@ -126,6 +135,7 @@ function zpwrPorts(){
     printf "\n  ${C}══════════════════════════════════════════════════════════════════${N}\n"
     printf "  ${G}%d listening ports${N}\n" $count
     printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+    unfunction _bx _bt _bb 2>/dev/null
 }
 
 zpwrPorts "$@"

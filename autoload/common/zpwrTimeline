@@ -8,6 +8,11 @@ function zpwrTimeline(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -60,9 +65,11 @@ function zpwrTimeline(){
     printf " ${M}   ██║   ██║██║╚██╔╝██║██╔══╝  ██║     ██║██║╚██╗██║██╔══╝${N}\n"
     printf " ${C}   ██║   ██║██║ ╚═╝ ██║███████╗███████╗██║██║ ╚████║███████╗${N}\n"
     printf " ${C}   ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝${N}\n"
-    printf " ${D}┌──────────────────────────────────────────────────────────────────┐${N}\n"
-    printf " ${D}│${N} ${G}TIMELINE${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}                          ${D}│${N}\n" "$date_filter" "$(date '+%H:%M:%S')"
-    printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n\n"
+    _bt
+    printf -v _msg " ${G}TIMELINE${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}" "$date_filter" "$(date '+%H:%M:%S')"
+    _bx "$_msg"
+    _bb
+    printf "\n"
 
     if [[ ! -f "$HISTFILE" ]]; then
         printf "  ${R}No HISTFILE found${N}\n\n"
@@ -162,6 +169,7 @@ function zpwrTimeline(){
     printf "  ${G}%d commands${N}  ${D}//${N}  ${C}%s${N}  ${D}//${N}  ${M}%d hours active${N}\n" \
         $total "$date_filter" ${#hour_counts}
     printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+    unfunction _bx _bt _bb 2>/dev/null
 }
 
 zpwrTimeline "$@"
