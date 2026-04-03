@@ -60,6 +60,8 @@ def strip_colors(text):
     # Remove $X single-letter color vars but NOT $ZPWR or $HOME etc
     text = re.sub(r'\$[A-Z](?![A-Za-z_])', '', text)
     text = re.sub(r'\\033\[[0-9;]*m', '', text)
+    # unescape zsh \" inside double-quoted print strings
+    text = text.replace('\\"', '"')
     return text.strip()
 
 def convert_line(text):
