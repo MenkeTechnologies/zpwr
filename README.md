@@ -65,6 +65,8 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Command Trace](#command-trace----zpwr-trace) -- zpwr trace
 - [Function Dependencies](#function-dependencies----zpwr-deps) -- zpwr deps
 - [Colorized Log Viewer](#colorized-log-viewer----zpwr-taillog) -- zpwr taillog
+- [Resolve](#resolve----zpwr-resolve) -- zpwr resolve
+- [Fortune](#fortune----zpwr-fortune) -- zpwr fortune
 - [Matrix](#matrix----zpwr-matrix) -- zpwr matrix
 - [The ZPWR Encyclopedia](#the-zpwr-encyclopedia----zpwr-wizard) -- zpwr wizard
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
@@ -119,7 +121,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 500+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 506+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 16.8k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
@@ -1010,6 +1012,30 @@ zpwr taillog /var/log/system.log  # custom logfile
 ```
 
 Requires `ccze` (`brew install ccze` or `apt install ccze`).
+
+## Resolve -- zpwr resolve
+`zpwr resolve <command>` traces a command through its full resolution chain: alias → function → builtin → external binary.  Follows alias expansion recursively (stripping `command`/`builtin`/`noglob` prefixes), shows function source file paths and line counts, detects zpwr verb mappings, follows symlink chains for binaries, and shows `file` type info.  Handles multiple commands in one call.  Also invokable as `zpwr which` or `zpwr whatis`.
+
+```sh
+zpwr resolve -h            # cyberpunk help
+zpwr resolve ll            # trace ll through aliases to binary
+zpwr resolve ls cd git     # trace multiple commands
+zpwr resolve zpwr          # trace the zpwr dispatcher
+zpwr resolve -a grep       # show all type -a matches
+zpwr which vim             # alias for resolve
+```
+
+## Fortune -- zpwr fortune
+`zpwr fortune` displays a random cyberpunk-themed fortune cookie rendered in a random figlet font with neon colors.  40 curated quotes from Torvalds, Kernighan, Hopper, Dijkstra, and original ZPWR/MenkeTechnologies wisdom.  Picks a keyword from the quote for figlet rendering, prints the full quote centered below.  Also invokable as `zpwr wisdom` or `zpwr quote`.
+
+```sh
+zpwr fortune -h            # cyberpunk help
+zpwr fortune               # random quote in random figlet font
+zpwr fortune -p            # plain text mode with box frame
+zpwr fortune -f doom       # force specific figlet font
+zpwr wisdom                # alias for fortune
+zpwr quote                 # alias for fortune
+```
 
 ## Matrix -- zpwr matrix
 `zpwr matrix` is an animated cyberpunk hacker story told in ASCII art, figlet banners, and CRT effects, followed by an infinite ecosystem rain screensaver.  The story is a four-act narrative about discovering zpwr, with your live ecosystem stats woven throughout.  Unique to zpwr — instead of random characters, it rains your actual verb names, function names, aliases, env vars, and git repo names, color-coded by type.
