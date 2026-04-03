@@ -360,7 +360,7 @@ function zpwrLogConsolePrefix(){
 function zpwrLogConsoleHeader(){
 
     zpwrPrettyPrint "$*"
-    zpwrLogColor "$*"
+    zpwrLogColor "$@"
 
 }
 

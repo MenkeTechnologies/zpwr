@@ -587,3 +587,23 @@
     assert $state equals 0
     assert "$output" contains uniqline123
 }
+
+#--------------------------------------------------------------
+# zpwrLogConsolePrefix / zpwrLogConsoleHeader
+#--------------------------------------------------------------
+@test 'zpwrLogConsolePrefix with args returns 0' {
+    run zpwrLogConsolePrefix "uniqprefix789" 2>&1
+    assert $state equals 0
+}
+
+@test 'zpwrLogConsolePrefix output includes logo and message' {
+    run zpwrLogConsolePrefix "uniqprefix789" 2>&1
+    assert "$output" contains "$ZPWR_CHAR_LOGO"
+    assert "$output" contains uniqprefix789
+}
+
+@test 'zpwrLogConsoleHeader INFO returns 0 and shows message' {
+    run zpwrLogConsoleHeader INFO "hdruniq456" 2>&1
+    assert $state equals 0
+    assert "$output" contains hdruniq456
+}
