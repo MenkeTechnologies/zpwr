@@ -7,6 +7,7 @@ function zpwrMatrix(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local REV=$'\033[7m' UL=$'\033[4m'
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -19,25 +20,28 @@ function zpwrMatrix(){
         print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
         print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}MATRIX${N}                ${D}│${N}"
         print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
-        print "  ${D}>> ECOSYSTEM RAIN // CYBERPUNK CHAOS ENGINE <<${N}"
+        print "  ${D}>> HACKER STORY // ANIMATED CYBERPUNK CINEMA <<${N}"
         print ""
-        print "  Rains zpwr ecosystem data with figlet banners, scanline glitches,"
-        print "  pulse events, horizontal scrollers, and a live HUD."
+        print "  An animated hacker story told in ASCII, figlet banners, CRT"
+        print "  scanlines, and ecosystem rain. Like telnet towel.blinkenlights.nl"
+        print "  but for the zpwr underground."
         print ""
         print "  ${B}USAGE:${N} zpwr matrix ${D}[OPTIONS]${N}"
         print ""
         print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
         print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
-        print "  ${C}-s, --speed N${N}                                    ${D}// Drop speed 1-9 (default: 3)${N}"
+        print "  ${C}-s, --speed N${N}                                    ${D}// Speed 1-9 (default: 3)${N}"
+        print "  ${C}-r, --rain${N}                                       ${D}// Skip story, go to rain${N}"
         print ""
         return 0
     fi
 
-    local -i speed=3
+    local -i speed=3 skip_story=0
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
             -s|--speed) speed=$2; shift 2 ;;
+            -r|--rain) skip_story=1; shift ;;
             *) shift ;;
         esac
     done
@@ -45,7 +49,360 @@ function zpwrMatrix(){
     (( speed < 1 )) && speed=1
     (( speed > 9 )) && speed=9
 
-    # harvest ecosystem data
+    local -i cols lines
+    cols=$COLUMNS
+    lines=$LINES
+
+    # ecosystem stats
+    local -i n_verbs=0 n_aliases=0 n_funcs=0 n_repos=0 n_params=0
+    (( ${+ZPWR_VERBS} )) && n_verbs=${#ZPWR_VERBS}
+    n_aliases=${#aliases}
+    n_funcs=${#functions}
+    n_params=${#parameters}
+    [[ -s "$ZPWR_ALL_GIT_DIRS" ]] && n_repos=$(wc -l < "$ZPWR_ALL_GIT_DIRS")
+
+    printf '\033[?25l\033[2J'
+    trap 'printf "\033[?25h\033[0m\033[2J\033[H"; return 0' INT QUIT
+
+    local ch
+    local -i i j
+
+    # ── HELPERS ───────────────────────────────────────────────
+
+    # type text character by character
+    _mx_type() {
+        local text="$1" color="${2:-0;32}" spd="${3:-0.03}"
+        local -i ti
+        for (( ti=1; ti<=${#text}; ti++ )); do
+            printf '\033[%sm%s\033[0m' "$color" "${text[$ti]}"
+            sleep $spd
+            read -t 0.001 -k 1 ch 2>/dev/null
+            [[ "$ch" == "q" || "$ch" == "Q" ]] && { printf '\033[?25h\033[0m\033[2J\033[H'; return 1; }
+        done
+        return 0
+    }
+
+    # print centered text
+    _mx_center() {
+        local text="$1" color="${2:-0;32}"
+        local -i cx=$(( (cols - ${#text}) / 2 ))
+        (( cx < 1 )) && cx=1
+        printf '\033[%sm%*s%s\033[0m' "$color" $cx '' "$text"
+    }
+
+    # centered type
+    _mx_ctype() {
+        local text="$1" color="${2:-0;32}" spd="${3:-0.03}"
+        local -i cx=$(( (cols - ${#text}) / 2 ))
+        (( cx < 1 )) && cx=1
+        printf '%*s' $cx ''
+        _mx_type "$text" "$color" "$spd" || return 1
+    }
+
+    # CRT scanline sweep
+    _mx_crt() {
+        local color="${1:-7;32}"
+        local -i sy
+        for (( sy=1; sy<=lines; sy++ )); do
+            printf '\033[%d;1H\033[%sm%*s\033[0m' $sy "$color" $cols ''
+            sleep 0.005
+            printf '\033[%d;1H%*s' $sy $cols ''
+        done
+    }
+
+    # CRT horizontal noise sweep
+    _mx_static() {
+        local -i sy sx sw
+        for (( sy=1; sy<=lines; sy++ )); do
+            sw=$(( RANDOM % 20 + 5 ))
+            sx=$(( RANDOM % (cols - sw) + 1 ))
+            printf '\033[%d;%dH' $sy $sx
+            for (( i=0; i<sw; i++ )); do
+                printf '\033[2;3%dm%s' $(( RANDOM % 7 + 1 )) "${${(s::):-░▒▓}[$((RANDOM % 3 + 1))]}"
+            done
+            sleep 0.003
+        done
+        sleep 0.1
+        printf '\033[2J'
+    }
+
+    # figlet centered with color
+    _mx_figlet() {
+        local text="$1" font="${2:-doom}" color="${3:-1;36}"
+        local fig_out
+        if (( $+commands[figlet] )); then
+            fig_out=$(figlet -f "$font" "$text" 2>/dev/null)
+        fi
+        if [[ -z "$fig_out" ]]; then
+            # fallback: just print big
+            printf '\n'
+            _mx_center "$text" "$color"
+            printf '\n'
+            return
+        fi
+        local fline
+        local -i fx
+        while IFS= read -r fline; do
+            fx=$(( (cols - ${#fline}) / 2 ))
+            (( fx < 1 )) && fx=1
+            printf '\033[%dG\033[%sm%s\033[0m\n' $fx "$color" "$fline"
+        done <<< "$fig_out"
+    }
+
+    # pause with quit check
+    _mx_pause() {
+        local -i dur=$(( ${1:-1} * 100 ))
+        local -i pi
+        for (( pi=0; pi<dur; pi++ )); do
+            sleep 0.01
+            read -t 0.001 -k 1 ch 2>/dev/null
+            [[ "$ch" == "q" || "$ch" == "Q" ]] && { printf '\033[?25h\033[0m\033[2J\033[H'; return 1; }
+        done
+        return 0
+    }
+
+    # scene transition: clear + CRT + clear
+    _mx_transition() {
+        _mx_crt "7;32"
+        printf '\033[2J\033[H'
+    }
+
+    # brief rain burst (non-blocking visual filler)
+    _mx_rainburst() {
+        local -i rb_frames=${1:-30}
+        local -i rb_f rb_x rb_y rb_len
+        local rb_char
+        for (( rb_f=0; rb_f<rb_frames; rb_f++ )); do
+            for (( i=0; i<8; i++ )); do
+                rb_x=$(( RANDOM % cols + 1 ))
+                rb_y=$(( RANDOM % lines + 1 ))
+                rb_char="${${(s::):-アイウエオカキクケコサシスセソタチツテトナニヌネノ0123456789}[$((RANDOM % 35 + 1))]}"
+                printf '\033[%d;%dH\033[0;3%dm%s' $rb_y $rb_x $(( RANDOM % 3 + 2 )) "$rb_char"
+            done
+            sleep 0.02
+            read -t 0.001 -k 1 ch 2>/dev/null
+            [[ "$ch" == "q" || "$ch" == "Q" ]] && { printf '\033[?25h\033[0m\033[2J\033[H'; return 1; }
+        done
+        return 0
+    }
+
+    # ── STORY ────────────────────────────────────────────────
+
+    if (( skip_story == 0 )); then
+
+    # ── ACT I: THE SIGNAL ────────────────────────────────────
+    printf '\033[2J\033[H'
+    _mx_static || return 0
+
+    printf '\033[H'
+    printf '\n\n\n\n\n'
+    _mx_center "M E N K E T E C H N O L O G I E S" "2;32"
+    printf '\n'
+    _mx_center "p r e s e n t s" "2;36"
+    printf '\n'
+    _mx_pause 2 || return 0
+
+    _mx_transition
+
+    printf '\n\n'
+    _mx_figlet "ZPWR" "doom" "1;36"
+    printf '\n'
+    _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;36"
+    printf '\n'
+    _mx_center "T H E   D I G I T A L   U N D E R G R O U N D" "1;32"
+    printf '\n'
+    _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;36"
+    printf '\n\n'
+    _mx_center "a terminal story" "2;35"
+    printf '\n'
+    _mx_pause 3 || return 0
+
+    _mx_transition
+
+    # terminal boot
+    printf '\033[H\n'
+    printf '\033[0;32m'
+    local -a act1
+    act1=(
+        '  Last login: Thu Jan  1 00:00:00 on ttys000'
+        ''
+        '  The year is 2026.'
+        '  The GUI wars are over. The browsers won.'
+        '  Electron apps consume 64GB of RAM to render a text field.'
+        ''
+        '  But in the underground...'
+        '  a few still remember the old ways.'
+        ''
+        '  They live in terminals.'
+        '  They speak in shell.'
+        '  They see in green.'
+    )
+    for line in "${act1[@]}"; do
+        _mx_type "$line" "0;32" 0.02 || return 0
+        printf '\n'
+        sleep 0.15
+    done
+    _mx_pause 2 || return 0
+
+    _mx_transition
+
+    # ── ACT II: THE DISCOVERY ────────────────────────────────
+    printf '\033[H\n\n'
+    _mx_figlet "SHELL" "slant" "1;32"
+    printf '\n'
+    _mx_center "ACT II: THE DISCOVERY" "1;33"
+    printf '\n'
+    _mx_pause 2 || return 0
+    _mx_crt "7;33"
+    printf '\033[2J\033[H\n'
+
+    local -a act2
+    act2=(
+        '  $ curl -sL https://github.com/MenkeTechnologies/zpwr | zsh'
+        ''
+        '  Something changed.'
+        '  The prompt... it was glowing.'
+        ''
+        '  466 verbs loaded into memory.'
+        "  ${n_aliases} aliases. ${n_funcs} functions. ${n_params} parameters."
+        "  ${n_repos} git repos indexed across the filesystem."
+        ''
+        '  This was not a dotfiles repo.'
+        '  This was a weapons system.'
+    )
+    for line in "${act2[@]}"; do
+        if [[ "$line" == '  $ curl'* ]]; then
+            _mx_type "$line" "1;36" 0.04 || return 0
+        elif [[ "$line" == *"466"* || "$line" == *"aliases"* || "$line" == *"repos"* ]]; then
+            _mx_type "$line" "1;35" 0.02 || return 0
+        elif [[ "$line" == *"weapons"* ]]; then
+            _mx_type "$line" "1;31" 0.04 || return 0
+        else
+            _mx_type "$line" "0;32" 0.02 || return 0
+        fi
+        printf '\n'
+        sleep 0.15
+    done
+    _mx_pause 2 || return 0
+
+    _mx_transition
+    _mx_rainburst 40 || return 0
+    printf '\033[2J'
+
+    # ── ACT III: THE POWER ───────────────────────────────────
+    printf '\033[H\n\n'
+    _mx_figlet "NEON" "cyberlarge" "1;35"
+    printf '\n'
+    _mx_center "ACT III: THE POWER" "1;36"
+    printf '\n'
+    _mx_pause 2 || return 0
+    _mx_crt "7;35"
+    printf '\033[2J\033[H\n'
+
+    local -a act3
+    act3=(
+        '  zpwr bench     — she measured her startup. 47ms.'
+        '  zpwr flame     — she found the bottleneck. compinit.'
+        '  zpwr doctor    — zero warnings. all green.'
+        '  zpwr gitwho    — 35,000 contributors across 509 repos.'
+        ''
+        '  She typed faster than the autocomplete could follow.'
+        '  fzf opened like a third eye.'
+        '  Completions cascaded in color — 16,800 options,'
+        '  each one a loaded gun.'
+        ''
+        '  zpwr top showed her shell breathing.'
+        '  Functions loaded. Aliases active. Memory climbing.'
+        '  She was not using a terminal.'
+        '  She was inside one.'
+    )
+    for line in "${act3[@]}"; do
+        if [[ "$line" == *"zpwr"* ]]; then
+            _mx_type "$line" "1;36" 0.02 || return 0
+        elif [[ "$line" == *"inside"* ]]; then
+            _mx_type "$line" "1;37" 0.04 || return 0
+        else
+            _mx_type "$line" "0;32" 0.025 || return 0
+        fi
+        printf '\n'
+        sleep 0.12
+    done
+    _mx_pause 2 || return 0
+
+    _mx_transition
+    _mx_static || return 0
+
+    # ── ACT IV: THE CHOICE ───────────────────────────────────
+    printf '\033[H\n\n'
+    _mx_figlet "HACKED" "speed" "1;31"
+    printf '\n'
+    _mx_center "ACT IV: THE CHOICE" "1;31"
+    printf '\n'
+    _mx_pause 2 || return 0
+    _mx_crt "7;31"
+    printf '\033[2J\033[H\n'
+
+    local -a act4
+    act4=(
+        '  They told her to use VS Code.'
+        '  They told her the terminal was dead.'
+        '  They told her nobody reads man pages.'
+        ''
+        '  She smiled.'
+        ''
+        '  $ zpwr matrix'
+        ''
+        '  The screen dissolved into rain.'
+        '  Her verbs. Her aliases. Her functions.'
+        '  All of them falling, glowing, alive.'
+        ''
+        '  This was not a screensaver.'
+        '  This was a mirror.'
+    )
+    for line in "${act4[@]}"; do
+        if [[ "$line" == *'$ zpwr'* ]]; then
+            _mx_type "$line" "1;36" 0.06 || return 0
+        elif [[ "$line" == *"smiled"* ]]; then
+            _mx_type "$line" "1;33" 0.05 || return 0
+        elif [[ "$line" == *"mirror"* ]]; then
+            _mx_type "$line" "1;37" 0.05 || return 0
+        else
+            _mx_type "$line" "0;32" 0.025 || return 0
+        fi
+        printf '\n'
+        sleep 0.12
+    done
+    _mx_pause 2 || return 0
+
+    _mx_transition
+
+    # ── EPILOGUE ─────────────────────────────────────────────
+    printf '\033[H\n\n\n\n'
+    _mx_figlet "ZPWR" "doom" "1;36"
+    printf '\n'
+    _mx_center "If your terminal isn't glowing," "0;36"
+    printf '\n'
+    _mx_center "you're not running ZPWR." "1;37"
+    printf '\n\n'
+    _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;36"
+    printf '\n'
+    _mx_center "github.com/MenkeTechnologies" "2;35"
+    printf '\n'
+    _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;36"
+    printf '\n\n'
+    _mx_center "[ entering the rain ]" "2;32"
+    printf '\n'
+    _mx_pause 3 || return 0
+
+    # final CRT into rain
+    _mx_crt "7;36"
+    printf '\033[2J'
+
+    fi # end skip_story
+
+    # ── ECOSYSTEM RAIN ───────────────────────────────────────
+
+    # harvest data
     local -a words wcolors
     local k
 
@@ -80,48 +437,36 @@ function zpwrMatrix(){
 
     local -i nwords=${#words}
     if (( nwords == 0 )); then
-        printf "  ${R}No ecosystem data found${N}\n"
-        return 1
+        # fallback: use some hardcoded zpwr words
+        words=( zpwr verbs aliases functions parameters bench doctor flame top lint stale ports matrix )
+        wcolors=( 32 32 33 36 35 36 36 36 36 36 36 36 32 )
+        nwords=${#words}
     fi
 
-    local -i cols lines
-    cols=$COLUMNS
-    lines=$LINES
-
-    # ecosystem stats
-    local -i n_verbs=0 n_aliases=0 n_funcs=0 n_repos=0
-    (( ${+ZPWR_VERBS} )) && n_verbs=${#ZPWR_VERBS}
-    n_aliases=${#aliases}
-    n_funcs=${#functions}
-    [[ -s "$ZPWR_ALL_GIT_DIRS" ]] && n_repos=$(wc -l < "$ZPWR_ALL_GIT_DIRS")
-
-    # figlet fonts for chaos banners
+    # chaos assets
     local -a chaos_fonts chaos_words chaos_colors
     chaos_fonts=( cyberlarge cybermedium doom slant speed )
-    chaos_words=( ZPWR MENKE HACKED NEON SHELL ROOT SUDO RECON TRACE FLUX )
+    chaos_words=( ZPWR MENKE NEON SHELL ROOT TRACE FLUX HACK ZERO NODE VOID )
     chaos_colors=( '1;36' '1;32' '1;35' '1;33' '1;31' '0;36' '1;37' )
 
     local -a pulse_msgs
     pulse_msgs=(
-        "// ${n_verbs} VERBS LOADED // YOUR NEURAL COMMAND VOCABULARY //"
-        "// ${n_aliases} ALIASES ACTIVE // SHORTHAND FOR THE INITIATED //"
-        "// ${n_funcs} FUNCTIONS IN MEMORY // THE AUTOLOAD ARMY //"
-        "// ${n_repos} GIT REPOS CACHED // THE NETWORK MAP //"
+        "// ${n_verbs} VERBS LOADED // NEURAL COMMAND VOCABULARY //"
+        "// ${n_aliases} ALIASES // SHORTHAND FOR THE INITIATED //"
         "// IF YOUR TERMINAL ISN'T GLOWING YOU'RE NOT RUNNING ZPWR //"
-        "// MENKETECHNOLOGIES // FORGED IN THE DIGITAL UNDERGROUND //"
-        "// ${ZPWR_OS_TYPE:-unknown} // ${COLUMNS}x${LINES} // PID $$ //"
-        "// ALL YOUR SHELL ARE BELONG TO ZPWR //"
         "// THERE IS NO SPOON // ONLY ZPWR_VERBS //"
         "// WAKE UP NEO // YOUR .zshrc HAS YOU //"
+        "// MENKETECHNOLOGIES // THE DIGITAL UNDERGROUND //"
+        "// ALL YOUR SHELL ARE BELONG TO ZPWR //"
+        "// THE GUI IS A LIE // THE TERMINAL IS THE TRUTH //"
     )
     local -i n_pulses=${#pulse_msgs}
 
-    # scrolling ticker messages
     local -a ticker_msgs
     ticker_msgs=(
-        ">>> ZPWR MATRIX v${ZPWR_VERSION:-dev} /// ECOSYSTEM VISUALIZER /// ${n_verbs} VERBS ${n_aliases} ALIASES ${n_funcs} FUNCTIONS ${n_repos} REPOS /// MENKETECHNOLOGIES >>>"
-        ">>> DIGITAL UNDERGROUND TRANSMISSION /// SIGNAL LOCKED /// ALL SYSTEMS NOMINAL /// NEURAL INTERFACE ACTIVE >>>"
-        ">>> SCANNING FILESYSTEM /// COMPILING BYTECODE /// LOADING PLUGINS /// INITIALIZING TURBO MODE >>> READY >>>"
+        ">>> ZPWR MATRIX /// ${n_verbs} VERBS ${n_aliases} ALIASES ${n_funcs} FUNCTIONS ${n_repos} REPOS /// MENKETECHNOLOGIES >>>"
+        ">>> SIGNAL LOCKED /// ALL SYSTEMS NOMINAL /// NEURAL INTERFACE ACTIVE >>>"
+        ">>> SCANNING FILESYSTEM /// LOADING PLUGINS /// TURBO MODE ENGAGED >>>"
     )
     local -i ticker_idx=1 ticker_pos=0
     local ticker_text="${ticker_msgs[1]}"
@@ -141,92 +486,16 @@ function zpwrMatrix(){
         col_delay[$ci]=$(( RANDOM % 15 ))
     done
 
-    printf '\033[?25l\033[2J'
-    trap 'printf "\033[?25h\033[0m\033[2J\033[H"; return 0' INT QUIT
-
     local -i frame=0 x y word_len char_y wi_char erase_y
     local -i glitch_cooldown=0 pulse_cooldown=30 figlet_cooldown=50 scanline_cooldown=0
-    local ch word wcolor
+    local word wcolor
     local -i gi gx gy gw
 
-    # ── BOOT SEQUENCE ────────────────────────────────────────
-    local -a boot_lines
-    boot_lines=(
-        '[    0.000] ZPWR BIOS v4.2.0'
-        '[    0.012] detecting ecosystem...'
-        "[    0.034] found ${n_verbs} verbs in ZPWR_VERBS"
-        "[    0.051] found ${n_aliases} aliases loaded"
-        "[    0.067] found ${n_funcs} functions in memory"
-        "[    0.083] found ${n_repos} git repos in cache"
-        "[    0.099] word pool: ${nwords} entries"
-        '[    0.120] loading figlet fonts...'
-        '[    0.142] initializing rain columns...'
-        '[    0.170] enabling glitch subsystem...'
-        '[    0.198] enabling pulse transmitter...'
-        '[    0.220] calibrating chaos engine...'
-        '[    0.250] ALL SYSTEMS GO'
-        ''
-        '    press [q] to disconnect'
-    )
-
-    local bline
-    local -i bi=0
-    for bline in "${boot_lines[@]}"; do
-        (( bi++ ))
-        if [[ "$bline" == *"ALL SYSTEMS"* ]]; then
-            printf '\033[%d;3H\033[1;32m%s\033[0m\n' $bi "$bline"
-        elif [[ "$bline" == *"press"* ]]; then
-            printf '\033[%d;3H\033[2;36m%s\033[0m\n' $bi "$bline"
-        else
-            printf '\033[%d;3H\033[0;32m%s\033[0m\n' $bi "$bline"
-        fi
-        sleep 0.07
-    done
-    sleep 0.4
-
-    # figlet splash
-    if (( $+commands[figlet] )); then
-        local splash
-        splash=$(figlet -f doom "ZPWR" 2>/dev/null)
-        if [[ -n "$splash" ]]; then
-            local -i sy=$(( bi + 2 )) sx
-            local sline
-            while IFS= read -r sline; do
-                sx=$(( (cols - ${#sline}) / 2 ))
-                (( sx < 1 )) && sx=1
-                printf '\033[%d;%dH\033[1;36m%s\033[0m' $sy $sx "$sline"
-                (( sy++ ))
-            done <<< "$splash"
-            sleep 0.5
-
-            # glitch out the splash
-            for gi in {1..10}; do
-                gy=$(( bi + 2 + RANDOM % 8 ))
-                gw=$(( RANDOM % 40 + 15 ))
-                gx=$(( (cols - gw) / 2 ))
-                (( gx < 1 )) && gx=1
-                printf '\033[%d;%dH' $gy $gx
-                local -i gz
-                for (( gz=0; gz<gw; gz++ )); do
-                    if (( RANDOM % 2 == 0 )); then
-                        printf '\033[1;3%dm%s' $(( RANDOM % 7 + 1 )) "${${(s::):-░▒▓█▀▄╬╪═║╔╗╚╝┼┤├}[$((RANDOM % 17 + 1))]}"
-                    else
-                        printf '\033[2;32m%s' "${${(s::):-░▒▓}[$((RANDOM % 3 + 1))]}"
-                    fi
-                done
-                sleep 0.03
-            done
-        fi
-    fi
-
-    sleep 0.3
-    printf '\033[2J'
-
-    # ── MAIN LOOP ────────────────────────────────────────────
     while true; do
         read -t 0.001 -k 1 ch 2>/dev/null
         if [[ "$ch" == "q" || "$ch" == "Q" ]]; then
             printf '\033[?25h\033[0m\033[2J\033[H'
+            unfunction _mx_type _mx_center _mx_ctype _mx_crt _mx_static _mx_figlet _mx_pause _mx_transition _mx_rainburst 2>/dev/null
             return 0
         fi
 
@@ -281,16 +550,14 @@ function zpwrMatrix(){
         if (( glitch_cooldown > 0 )); then
             (( glitch_cooldown-- ))
         elif (( RANDOM % 60 == 0 )); then
-            # multi-line glitch band
-            local -i g_height=$(( RANDOM % 3 + 1 ))
+            local -i g_height=$(( RANDOM % 3 + 1 )) gh
             gy=$(( RANDOM % (lines - 5) + 1 ))
             gw=$(( RANDOM % (cols / 2) + 20 ))
             gx=$(( RANDOM % (cols - gw) + 1 ))
-            local -i gh
             for (( gh=0; gh<g_height; gh++ )); do
                 printf '\033[%d;%dH' $(( gy + gh )) $gx
                 for (( gi=0; gi<gw; gi++ )); do
-                    printf '\033[1;3%dm%s' $(( RANDOM % 7 + 1 )) "${${(s::):-░▒▓█▀▄╬╪═║╔╗╚╝┼┤├╫╪}[$((RANDOM % 19 + 1))]}"
+                    printf '\033[1;3%dm%s' $(( RANDOM % 7 + 1 )) "${${(s::):-░▒▓█▀▄╬╪═║╔╗╚╝┼┤├╫}[$((RANDOM % 18 + 1))]}"
                 done
             done
             glitch_cooldown=15
@@ -300,21 +567,20 @@ function zpwrMatrix(){
             done
         fi
 
-        # ── SCANLINE EFFECT ──────────────────────────────────
+        # ── SCANLINE ─────────────────────────────────────────
         if (( scanline_cooldown > 0 )); then
             (( scanline_cooldown-- ))
-        elif (( RANDOM % 200 == 0 )); then
-            # horizontal scanline sweeps down
+        elif (( RANDOM % 250 == 0 )); then
             local -i sy
             for (( sy=1; sy<=lines-3; sy+=2 )); do
                 printf '\033[%d;1H\033[7;32m%*s\033[0m' $sy $cols ''
-                sleep 0.008
+                sleep 0.006
                 printf '\033[%d;1H%*s' $sy $cols ''
             done
-            scanline_cooldown=100
+            scanline_cooldown=120
         fi
 
-        # ── FIGLET CHAOS BANNER ──────────────────────────────
+        # ── FIGLET CHAOS ─────────────────────────────────────
         if (( figlet_cooldown > 0 )); then
             (( figlet_cooldown-- ))
         elif (( RANDOM % 150 == 0 && $+commands[figlet] )); then
@@ -325,10 +591,8 @@ function zpwrMatrix(){
             fig_out=$(figlet -f "$fig_font" "$fig_word" 2>/dev/null)
 
             if [[ -n "$fig_out" ]]; then
-                local -i fy=$(( RANDOM % (lines / 2) + 2 ))
+                local -i fy=$(( RANDOM % (lines / 2) + 2 )) fx
                 local fline
-                local -i fx
-                # render with glow
                 while IFS= read -r fline; do
                     fx=$(( (cols - ${#fline}) / 2 ))
                     (( fx < 1 )) && fx=1
@@ -337,29 +601,9 @@ function zpwrMatrix(){
                     (( fy++ ))
                 done <<< "$fig_out"
 
-                sleep 0.25
+                sleep 0.3
 
-                # dissolve: replace with random chars then blank
-                fy=$(( fy - $(echo "$fig_out" | wc -l) ))
-                while IFS= read -r fline; do
-                    fx=$(( (cols - ${#fline}) / 2 ))
-                    (( fx < 1 )) && fx=1
-                    (( fy > lines - 4 )) && break
-                    printf '\033[%d;%dH' $fy $fx
-                    local -i fci
-                    for (( fci=0; fci<${#fline}; fci++ )); do
-                        if (( RANDOM % 3 == 0 )); then
-                            printf '\033[2;3%dm%s' $(( RANDOM % 7 + 1 )) "${${(s::):-░▒▓}[$((RANDOM % 3 + 1))]}"
-                        else
-                            printf ' '
-                        fi
-                    done
-                    (( fy++ ))
-                done <<< "$fig_out"
-
-                sleep 0.08
-
-                # final clear
+                # dissolve
                 fy=$(( fy - $(echo "$fig_out" | wc -l) ))
                 while IFS= read -r fline; do
                     fx=$(( (cols - ${#fline}) / 2 ))
@@ -381,31 +625,19 @@ function zpwrMatrix(){
             local -i px=$(( (cols - ${#pmsg}) / 2 ))
             (( px < 1 )) && px=1
 
-            # double-line pulse with border
-            printf '\033[%d;1H\033[0;32;40m%*s' $(( py - 1 )) $cols ''
             printf '\033[%d;1H\033[7;36m%*s\033[0m' $py $cols ''
             printf '\033[%d;%dH\033[1;37;46m %s \033[0m' $py $px "$pmsg"
-            printf '\033[%d;1H\033[0;32;40m%*s' $(( py + 1 )) $cols ''
             sleep 0.35
-            # fade
-            printf '\033[%d;%dH\033[0;36m %s \033[0m' $py $px "$pmsg"
-            sleep 0.15
-            # clear
-            printf '\033[%d;1H%*s' $(( py - 1 )) $cols ''
             printf '\033[%d;1H%*s' $py $cols ''
-            printf '\033[%d;1H%*s' $(( py + 1 )) $cols ''
             pulse_cooldown=50
         fi
 
-        # ── SCROLLING TICKER (line -3) ───────────────────────
+        # ── TICKER ───────────────────────────────────────────
         if (( frame % 2 == 0 )); then
             local -i tline=$(( lines - 2 ))
-            local visible
-            # extract visible window of ticker
+            local visible=""
             if (( ticker_pos < ticker_len )); then
                 visible="${ticker_text:$ticker_pos:$cols}"
-            else
-                visible=""
             fi
             printf '\033[%d;1H\033[0;33;40m%-*s\033[0m' $tline $cols "$visible"
             (( ticker_pos++ ))
@@ -418,44 +650,29 @@ function zpwrMatrix(){
             fi
         fi
 
-        # ── HUD (bottom 2 lines) ─────────────────────────────
+        # ── HUD ──────────────────────────────────────────────
         if (( frame % 10 == 0 )); then
             local -i up_s=$SECONDS up_m up_h
             up_h=$(( up_s / 3600 ))
             up_m=$(( (up_s % 3600) / 60 ))
             up_s=$(( up_s % 60 ))
 
-            # signal bar animation
-            local -i sig_fill=$(( frame % 20 ))
             local sig_bar=""
-            local -i si
+            local -i sf=$(( frame % 20 )) si
             for (( si=0; si<10; si++ )); do
-                if (( si <= sig_fill / 2 )); then
-                    sig_bar+="█"
-                else
-                    sig_bar+="░"
-                fi
+                if (( si <= sf / 2 )); then sig_bar+="█"; else sig_bar+="░"; fi
             done
 
-            printf '\033[%d;1H\033[1;32;40m' $(( lines - 1 ))
-            printf ' ⚡ ZPWR MATRIX'
-            printf '  \033[2;32m//\033[1;32;40m  %d verbs' $n_verbs
-            printf '  \033[2;32m//\033[1;32;40m  %d aliases' $n_aliases
-            printf '  \033[2;32m//\033[1;32;40m  %d funcs' $n_funcs
-            printf '  \033[2;32m//\033[1;32;40m  %d repos' $n_repos
+            printf '\033[%d;1H\033[1;32;40m ⚡ ZPWR' $(( lines - 1 ))
+            printf '  \033[2;32m//\033[1;32;40m  %dv %da %df %dr' $n_verbs $n_aliases $n_funcs $n_repos
             printf '  \033[2;32m//\033[1;36;40m  %s' "$sig_bar"
-            printf '%*s' $(( cols - 78 )) ''
-            printf '\033[0m'
+            printf '%*s\033[0m' $(( cols - 48 )) ''
 
-            printf '\033[%d;1H\033[2;36;40m' $lines
-            printf ' ▸ frame %05d' $frame
-            printf '  //  up %02d:%02d:%02d' $up_h $up_m $up_s
+            printf '\033[%d;1H\033[2;36;40m ▸ f%05d' $lines $frame
+            printf '  //  %02d:%02d:%02d' $up_h $up_m $up_s
             printf '  //  %dx%d' $cols $lines
-            printf '  //  pool %d' $nwords
-            printf '  //  speed %d' $speed
             printf '  //  [q] quit'
-            printf '%*s' $(( cols - 75 )) ''
-            printf '\033[0m'
+            printf '%*s\033[0m' $(( cols - 50 )) ''
         fi
 
         sleep $(( 0.08 / speed ))
