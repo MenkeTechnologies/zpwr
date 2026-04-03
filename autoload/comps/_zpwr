@@ -117,66 +117,79 @@ function _zpwr(){
                 serviceup)
                     _ssu
                     ;;
-                bench|flame|funcrank|aliasrank|replay)
+                bench|benchmark|flame|flamechart|heatmap|funcrank|aliasrank|aliasusage|rank|replay|rerun)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-r --reset)'{-r,--reset}'[reset cache]' \
                         '1:count:(5 10 20 50)'
                     ;;
-                top)
+                top|dashboard|live)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '1:interval:(1 2 5 10)'
                     ;;
-                doctor)
+                doctor|doc|checkup)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]'
                     ;;
-                startup)
+                startup|profile|zprof)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '1:top N functions:(10 20 30 50 100)'
                     ;;
-                lint)
+                lint|check)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-s --shellcheck)'{-s,--shellcheck}'[shellcheck only]' \
                         '(-z --zsh)'{-z,--zsh}'[zsh -n only]'
                     ;;
-                ports)
+                ports|listening|netstat)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-k --kill)'{-k,--kill}'[kill process on port]' \
                         '1:port:(80 443 3000 5000 8000 8080 8443 9090)'
                     ;;
-                stale)
+                stale|cruft)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-f --fix)'{-f,--fix}'[delete stale files]'
                     ;;
-                pathaudit)
+                pathaudit|audit)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-v --verbose)'{-v,--verbose}'[show all entries]'
                     ;;
-                gitwho)
+                gitwho|gitcontribs|who)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-r --reset)'{-r,--reset}'[force cache rebuild]' \
                         '(-a --all)'{-a,--all}'[show all authors]' \
                         '1:top N authors:(10 20 50 100)'
                     ;;
-                timeline)
+                timeline|today|activity)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-n --lines)'{-n,--lines}'[last N history entries]:count:(100 200 500 1000)' \
                         '1:date (YYYY-MM-DD):'
                     ;;
-                matrix)
+                matrix|rain|screensaver)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
-                        '(-s --speed)'{-s,--speed}'[drop speed 1-9]:speed:(1 2 3 4 5 6 7 8 9)' \
-                        '(-d --dense)'{-d,--dense}'[more columns]'
+                        '(-s --speed)'{-s,--speed}'[speed 1-9]:speed:(1 2 3 4 5 6 7 8 9)' \
+                        '(-r --rain)'{-r,--rain}'[skip story, go to rain]' \
+                        '(-a --act)'{-a,--act}'[jump to act 1-8]:act:(1 2 3 4 5 6 7 8)' \
+                        '(-c --chaos)'{-c,--chaos}'[chaos level 1-10]:chaos:(1 2 3 4 5 6 7 8 9 10)' \
+                        '(-t --turbo)'{-t,--turbo}'[skip pauses (speed run)]' \
+                        '--extended[play all 8 acts]' \
+                        '--noir[monochrome green mode]' \
+                        '--vhs[VHS tracking distortion]' \
+                        '--crt[CRT scanline overlay]' \
+                        '--glitch[extra corruption FX]' \
+                        '--sound[terminal bell on events]' \
+                        '--no-fx[disable all visual FX]' \
+                        '--cast[show character bios]' \
+                        '--stats[ecosystem stats and exit]' \
+                        '--credits[end credits roll]'
                     ;;
                 fortune|wisdom|quote)
                     _arguments \
@@ -199,7 +212,7 @@ function _zpwr(){
                         '(-d --dot)'{-d,--dot}'[graphviz output]' \
                         '*:function:_functions'
                     ;;
-                trace)
+                trace|instrument)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-q --quick)'{-q,--quick}'[quick mode]' \
@@ -208,18 +221,18 @@ function _zpwr(){
                         '(-a --all)'{-a,--all}'[strace + ltrace]' \
                         '*:command:_command_names -e'
                     ;;
-                watch)
+                watch|onchange)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '1:glob pattern:_files' \
                         '2:command:_command_names -e'
                     ;;
-                snapshot)
+                snapshot|snap|save)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '1:name:'
                     ;;
-                restore)
+                restore|load)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '1:snapshot:->snapshots' \
@@ -230,7 +243,7 @@ function _zpwr(){
                         _describe 'snapshot' snaps
                     fi
                     ;;
-                taillog)
+                taillog|logs)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-n --lines)'{-n,--lines}'[number of lines]:lines:' \
@@ -246,7 +259,7 @@ function _zpwr(){
                         '(-l --list)'{-l,--list}'[list pages]' \
                         '1:page number:'
                     ;;
-                study)
+                study|book)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-v --vertical)'{-v,--vertical}'[vertical split]' \
@@ -318,6 +331,19 @@ function _zpwr(){
                     ;;
                 scripttopdf)
                     _arguments '*:script:_files'
+                    ;;
+                exercismdownload)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-r --redownload)'{-r,--redownload}'[force redownload]' \
+                        '(-s --sleep)'{-s,--sleep}'[sleep between downloads]:seconds:' \
+                        '*:track:'
+                    ;;
+                gittotallines)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-w --nows)'{-w,--nows}'[exclude whitespace lines]' \
+                        '*:blacklist string:'
                     ;;
                 *)
                     _alternative \
