@@ -7,6 +7,11 @@ function zpwrGitwho(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -78,11 +83,12 @@ function zpwrGitwho(){
     printf " ${M}██║   ██║██║   ██║   ██║███╗██║██╔══██║██║   ██║${N}\n"
     printf " ${C}╚██████╔╝██║   ██║   ╚███╔███╔╝██║  ██║╚██████╔╝${N}\n"
     printf " ${C} ╚═════╝ ╚═╝   ╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝${N}\n"
-    printf " ${D}┌──────────────────────────────────────────────────────────────────┐${N}\n"
+    _bt
 
     if [[ "$use_cache" != true ]]; then
-        printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}all cached repos${N}  ${D}//${N} ${M}%s${N}                  ${D}│${N}\n" "$(date '+%H:%M:%S')"
-        printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n"
+        printf -v _msg " ${G}SCANNING${N}  ${D}//${N} ${C}all cached repos${N}  ${D}//${N} ${M}%s${N}" "$(date '+%H:%M:%S')"
+        _bx "$_msg"
+        _bb
         printf "  ${D}>> AGGREGATING CONTRIBUTORS <<${N}\n\n"
 
         while IFS= read -r dir; do
@@ -111,8 +117,9 @@ function zpwrGitwho(){
             done | sort -t$'\t' -k1,1rn
         } > "$cache_file"
     else
-        printf " ${D}│${N} ${G}CACHED${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}                           ${D}│${N}\n" "${cache_file:t}" "$(date '+%H:%M:%S')"
-        printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n"
+        printf -v _msg " ${G}CACHED${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}" "${cache_file:t}" "$(date '+%H:%M:%S')"
+        _bx "$_msg"
+        _bb
         printf "  ${D}>> READING CACHED RESULTS <<${N}\n\n"
     fi
 
@@ -165,6 +172,7 @@ function zpwrGitwho(){
     printf "  ${G}%d total commits${N}  ${D}//${N}  ${C}%d authors${N}  ${D}//${N}  ${M}%d repos${N}\n" \
         $total_commits $total_authors $total_repos
     printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+    unfunction _bx _bt _bb 2>/dev/null
 }
 
 zpwrGitwho "$@"

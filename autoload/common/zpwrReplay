@@ -7,6 +7,11 @@ function zpwrReplay(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=70
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -77,15 +82,17 @@ function zpwrReplay(){
     done
 
     if (( $#cmds == 0 )); then
-        printf " ${D}┌──────────────────────────────────────────────┐${N}\n"
-        printf " ${D}│${N} ${Y}No history entries found${N}                     ${D}│${N}\n"
-        printf " ${D}└──────────────────────────────────────────────┘${N}\n\n"
+        _bt
+        _bx " ${Y}No history entries found${N}"
+        _bb
+        printf "\n"
         return 1
     fi
 
-    printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
-    printf " ${D}│${N} ${G}%d COMMANDS${N}  ${D}//${N} ${C}mode: %s${N}  ${D}//${N} ${M}pwd: %s${N}  ${D}│${N}\n" $#cmds "$mode" "$PWD"
-    printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n"
+    _bt
+    printf -v _msg " ${G}%d COMMANDS${N}  ${D}//${N} ${C}mode: %s${N}  ${D}//${N} ${M}pwd: %s${N}" $#cmds "$mode" "$PWD"
+    _bx "$_msg"
+    _bb
 
     if [[ "$mode" == "preview" ]]; then
         printf "\n"
@@ -162,6 +169,7 @@ function zpwrReplay(){
     fi
 
     printf "\n"
+    unfunction _bx _bt _bb 2>/dev/null
 }
 
 zpwrReplay "$@"
