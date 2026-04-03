@@ -1038,17 +1038,30 @@ zpwr quote                 # alias for fortune
 ```
 
 ## Matrix -- zpwr matrix
-`zpwr matrix` is an animated cyberpunk hacker story told in ASCII art, figlet banners, and CRT effects, followed by an infinite ecosystem rain screensaver.  The story is a four-act narrative about discovering zpwr, with your live ecosystem stats woven throughout.  Unique to zpwr — instead of random characters, it rains your actual verb names, function names, aliases, env vars, and git repo names, color-coded by type.
+`zpwr matrix` is an animated cyberpunk hacker story told in ASCII art, figlet banners, and CRT effects, followed by an infinite ecosystem rain screensaver.  The default story is a four-act narrative about discovering zpwr; `--extended` unlocks the full eight-act saga with six named characters (Null Pointer, Segfault, Chmod777, DevNull, Chad Electron, The Kernel), a heist to liberate the tab key patent, a training montage to build the ultimate .zshrc, and a force push to every machine on Earth.  Your live ecosystem stats are woven throughout.  Unique to zpwr — instead of random characters, it rains your actual verb names, function names, aliases, env vars, and git repo names, color-coded by type.
 
 FX include: CRT scanline sweeps, VHS tracking distortion, pixel corruption, screen tears, screen shake, terminal bells, fake SSH sessions with your live manifest, encrypted transmission decryption with glitchy progress bars, figlet chaos banners in random cyberpunk fonts (doom, slant, speed, cyberlarge, cybermedium), dissolve effects, a scrolling ticker with stats, pulse events with ecosystem facts, and a persistent HUD with live counters.  Also invokable as `zpwr rain` or `zpwr screensaver`.
 
 ```sh
-zpwr matrix -h         # cyberpunk help
-zpwr matrix            # full story + rain
-zpwr matrix -r         # skip story, go straight to rain
-zpwr matrix -s 7       # faster speed (1-9)
-zpwr rain              # alias for matrix
-zpwr screensaver       # alias for matrix
+zpwr matrix -h              # cyberpunk help with act/character list
+zpwr matrix                 # 4-act story + rain
+zpwr matrix --extended      # full 8-act saga + rain
+zpwr matrix -r              # skip story, go straight to rain
+zpwr matrix -s 7            # faster speed (1-9)
+zpwr matrix -a 5 --extended # jump to act 5
+zpwr matrix --turbo         # skip pauses (speed run)
+zpwr matrix --noir          # monochrome green mode
+zpwr matrix --vhs           # VHS tracking distortion
+zpwr matrix --crt           # CRT scanline overlay
+zpwr matrix --glitch        # extra corruption FX
+zpwr matrix --sound         # terminal bell on events
+zpwr matrix --no-fx         # disable all visual FX
+zpwr matrix -c 10           # chaos level 1-10
+zpwr matrix --cast          # show character bios
+zpwr matrix --stats         # ecosystem stats and exit
+zpwr matrix --credits       # end credits roll
+zpwr rain                   # alias for matrix
+zpwr screensaver            # alias for matrix
 ```
 
 ## The ZPWR Encyclopedia -- zpwr wizard

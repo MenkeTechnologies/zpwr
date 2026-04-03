@@ -23,31 +23,88 @@ function zpwrMatrix(){
         print "  ${D}>> HACKER STORY // ANIMATED CYBERPUNK CINEMA <<${N}"
         print ""
         print "  An animated hacker story told in ASCII, figlet banners, CRT"
-        print "  scanlines, and ecosystem rain. Like telnet towel.blinkenlights.nl"
-        print "  but for the zpwr underground."
+        print "  scanlines, and ecosystem rain. 8 acts of cyberpunk cinema."
+        print "  Like telnet towel.blinkenlights.nl but for zpwr."
         print ""
         print "  ${B}USAGE:${N} zpwr matrix ${D}[OPTIONS]${N}"
         print ""
-        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${D}── PLAYBACK ─────────────────────────────────────────────────────────${N}"
         print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
         print "  ${C}-s, --speed N${N}                                    ${D}// Speed 1-9 (default: 3)${N}"
         print "  ${C}-r, --rain${N}                                       ${D}// Skip story, go to rain${N}"
+        print "  ${C}-a, --act N${N}                                      ${D}// Jump to act 1-8${N}"
+        print "  ${C}-t, --turbo${N}                                      ${D}// Skip pauses (speed run)${N}"
+        print "  ${C}--extended${N}                                       ${D}// Play all 8 acts${N}"
+        print ""
+        print "  ${D}── VISUAL FX ────────────────────────────────────────────────────────${N}"
+        print "  ${C}-c, --chaos N${N}                                    ${D}// Chaos level 1-10 (default: 5)${N}"
+        print "  ${C}--noir${N}                                           ${D}// Monochrome green mode${N}"
+        print "  ${C}--vhs${N}                                            ${D}// VHS tracking distortion${N}"
+        print "  ${C}--crt${N}                                            ${D}// CRT scanline overlay${N}"
+        print "  ${C}--glitch${N}                                         ${D}// Extra corruption FX${N}"
+        print "  ${C}--sound${N}                                          ${D}// Terminal bell on events${N}"
+        print "  ${C}--no-fx${N}                                          ${D}// Disable all visual FX${N}"
+        print ""
+        print "  ${D}── INFO ─────────────────────────────────────────────────────────────${N}"
+        print "  ${C}--cast${N}                                           ${D}// Show character bios${N}"
+        print "  ${C}--stats${N}                                          ${D}// Ecosystem stats and exit${N}"
+        print "  ${C}--credits${N}                                        ${D}// End credits roll${N}"
+        print ""
+        print "  ${D}── ACTS ─────────────────────────────────────────────────────────────${N}"
+        print "  ${D}I.    The Signal${N}                                 ${D}// The world. The zaibatsu.${N}"
+        print "  ${D}II.   The Discovery${N}                              ${D}// curl | zsh. Everything changes.${N}"
+        print "  ${D}III.  The Power${N}                                  ${D}// 47ms startup. Zero warnings.${N}"
+        print "  ${D}IV.   The Choice${N}                                 ${D}// VS Code vs the void.${N}"
+        print "  ${D}V.    The Pipe${N}                                   ${D}// Underground hacker bar.${N}"
+        print "  ${D}VI.   The Heist${N}                                  ${D}// Steal back the tab key.${N}"
+        print "  ${D}VII.  The Compile${N}                                ${D}// Build the ultimate .zshrc.${N}"
+        print "  ${D}VIII. The Merge${N}                                  ${D}// Force push to production.${N}"
+        print ""
+        print "  ${D}── CHARACTERS ───────────────────────────────────────────────────────${N}"
+        print "  ${G}Null Pointer${N}${D} ........... protagonist, zpwr operator${N}"
+        print "  ${Y}Segfault${N}${D} ............... bash loyalist in recovery${N}"
+        print "  ${C}Chmod777${N}${D} ............... reckless, sudo for everything${N}"
+        print "  ${M}DevNull${N}${D} ................ silent assassin, pipes to /dev/null${N}"
+        print "  ${R}Chad Electron${N}${D} .......... MegaCorp VP, 64GB RAM for Slack${N}"
+        print "  ${G}The Kernel${N}${D} .............. mythical elder, speaks in dmesg${N}"
         print ""
         return 0
     fi
 
-    local -i speed=3 skip_story=0
+    local -i speed=3 skip_story=0 start_act=1 chaos=5
+    local -i turbo=0 noir=0 vhs_mode=0 crt_mode=0 glitch_mode=0
+    local -i sound_mode=0 no_fx=0 extended=0
+    local -i show_cast=0 show_stats=0 show_credits=0
+    local -i _mx_pause_orig_turbo=0
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
             -s|--speed) speed=$2; shift 2 ;;
             -r|--rain) skip_story=1; shift ;;
+            -a|--act) start_act=$2; shift 2 ;;
+            -c|--chaos) chaos=$2; shift 2 ;;
+            -t|--turbo) turbo=1; shift ;;
+            --extended) extended=1; shift ;;
+            --noir) noir=1; shift ;;
+            --vhs) vhs_mode=1; shift ;;
+            --crt) crt_mode=1; shift ;;
+            --glitch) glitch_mode=1; shift ;;
+            --sound) sound_mode=1; shift ;;
+            --no-fx) no_fx=1; shift ;;
+            --cast) show_cast=1; shift ;;
+            --stats) show_stats=1; shift ;;
+            --credits) show_credits=1; shift ;;
             *) shift ;;
         esac
     done
 
     (( speed < 1 )) && speed=1
     (( speed > 9 )) && speed=9
+    (( chaos < 1 )) && chaos=1
+    (( chaos > 10 )) && chaos=10
+    (( start_act < 1 )) && start_act=1
+    (( start_act > 8 )) && start_act=8
+    (( no_fx )) && { glitch_mode=0; vhs_mode=0; crt_mode=0; }
 
     local -i cols lines
     cols=$COLUMNS
@@ -70,11 +127,123 @@ function zpwrMatrix(){
     n_pages=$(ls "$ZPWR"/docs/wizard_pages/page_*.zsh 2>/dev/null | wc -l)
     n_files=$(find "$ZPWR" -not -path '*/local/*' -not -path '*/.git/*' -not -name '*.zwc' -not -name '*.pdf' 2>/dev/null | wc -l)
 
+    # ── EARLY EXIT MODES ────────────────────────────────────
+
+    if (( show_cast )); then
+        print ""
+        print "  ${B}${C}THE CAST // ZPWR MATRIX${N}"
+        print "  ${D}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+        print ""
+        print "  ${B}${G}NULL POINTER${N}  ${D}//  she/her  //  the protagonist${N}"
+        print "  ${D}  Former bash user. Found zpwr on a dead man's laptop in a${N}"
+        print "  ${D}  Neo-Shanghai pawn shop. Hasn't touched a GUI since. Types${N}"
+        print "  ${D}  120 WPM in vim insert mode. Her .zshrc is 3 lines long:${N}"
+        print "  ${M}    source \$ZPWR_ENV/zpwr.zsh${N}"
+        print "  ${D}  That's it. That's the whole thing.${N}"
+        print ""
+        print "  ${B}${Y}SEGFAULT${N}  ${D}//  he/him  //  bash loyalist in recovery${N}"
+        print "  ${D}  Still flinches when he sees a semicolon. Spent 11 years${N}"
+        print "  ${D}  writing bash scripts held together by eval and prayer.${N}"
+        print "  ${D}  His proudest accomplishment was a 400-line .bashrc that${N}"
+        print "  ${D}  broke every time he upgraded macOS. Found zpwr after his${N}"
+        print "  ${D}  bash prompt segfaulted during a live demo. The audience${N}"
+        print "  ${D}  clapped thinking it was part of the talk.${N}"
+        print ""
+        print "  ${B}${C}CHMOD777${N}  ${D}//  they/them  //  the reckless one${N}"
+        print "  ${D}  sudo is their love language. Once chmod 777'd /etc because${N}"
+        print "  ${D}  a config file was read-only. Runs everything as root.${N}"
+        print "  ${D}  Their laptop has no user accounts — just root and a prayer.${N}"
+        print "  ${D}  Has mass-deployed zpwr to 200 servers using ansible and${N}"
+        print "  ${D}  a complete disregard for change management. \"It's fine.\"${N}"
+        print ""
+        print "  ${B}${M}DEVNULL${N}  ${D}//  she/her  //  the silent assassin${N}"
+        print "  ${D}  Speaks only in pipes. Redirects feelings to /dev/null.${N}"
+        print "  ${D}  Once debugged a production outage by staring at strace${N}"
+        print "  ${D}  output for 47 minutes without blinking. Uses zpwr with${N}"
+        print "  ${D}  every verbose flag piped to /dev/null. \"I don't need${N}"
+        print "  ${D}  confirmation that things work. They just work.\"${N}"
+        print ""
+        print "  ${B}${R}CHAD ELECTRON${N}  ${D}//  he/him  //  MegaCorp VP of DevEx${N}"
+        print "  ${D}  Thinks \"the terminal\" is what you find at an airport.${N}"
+        print "  ${D}  His laptop runs 14 Electron apps simultaneously, each${N}"
+        print "  ${D}  one a worse version of a CLI tool that already exists.${N}"
+        print "  ${D}  Pronounced zsh as \"zish\" in a company all-hands. Uses${N}"
+        print "  ${D}  47GB of RAM to display a TODO list with rounded corners.${N}"
+        print "  ${D}  His desktop wallpaper says INNOVATE in Helvetica.${N}"
+        print ""
+        print "  ${B}${G}THE KERNEL${N}  ${D}//  it/its  //  the mythical elder${N}"
+        print "  ${D}  Nobody has seen The Kernel. It communicates exclusively${N}"
+        print "  ${D}  through dmesg. Some say it wrote the first .zshrc on a${N}"
+        print "  ${D}  PDP-11 using butterflies. Legend has it The Kernel doesn't${N}"
+        print "  ${D}  tab-complete — the shell completes for The Kernel out of${N}"
+        print "  ${D}  respect. Its .zshrc predates the filesystem it lives on.${N}"
+        print ""
+        print "  ${D}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+        return 0
+    fi
+
+    if (( show_credits && skip_story )); then
+        print ""
+        print "  ${B}${M}C R E D I T S${N}"
+        print "  ${D}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+        print ""
+        print "  ${D}written by${N}  ${C}//  zpwr matrix${N}"
+        print "  ${D}directed by${N}  ${C}//  zpwr matrix --extended${N}"
+        print "  ${D}produced by${N}  ${C}//  MenkeTechnologies${N}"
+        print "  ${D}visual effects${N}  ${C}//  _mx_corrupt, _mx_vhs, _mx_tear${N}"
+        print "  ${D}soundtrack${N}  ${C}//  terminal bell (optional)${N}"
+        print "  ${D}catering${N}  ${C}//  /dev/urandom${N}"
+        print ""
+        print "  ${D}no GUIs were harmed in the making of this film${N}"
+        print "  ${D}(several Electron apps were, but they deserved it)${N}"
+        print ""
+        print "  ${D}filmed on location in \$ZPWR${N}"
+        print "  ${D}all ${n_verbs} verbs performed their own stunts${N}"
+        print ""
+        print "  ${D}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+        return 0
+    fi
+
+    if (( show_stats )); then
+        print ""
+        print "  ${B}${C}ZPWR ECOSYSTEM SCAN${N}"
+        print "  ${D}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+        print "  ${G}VERBS${N} ................. ${B}${n_verbs}${N}"
+        print "  ${G}ALIASES${N} ............... ${B}${n_aliases}${N}"
+        print "  ${G}FUNCTIONS${N} ............. ${B}${n_funcs}${N}"
+        print "  ${G}PARAMETERS${N} ............ ${B}${n_params}${N}"
+        print "  ${G}AUTOLOAD FILES${N} ........ ${B}${n_autoloads}${N}"
+        print "  ${G}SCRIPTS${N} ............... ${B}${n_scripts}${N}"
+        print "  ${G}COMPLETION FUNCTIONS${N} .. ${B}${n_comps}${N}"
+        print "  ${G}GIT REPOS INDEXED${N} ..... ${B}${n_repos}${N}"
+        print "  ${G}ENCYCLOPEDIA PAGES${N} .... ${B}${n_pages}${N}"
+        print "  ${G}GIT COMMITS${N} ........... ${B}${n_commits}${N}"
+        print "  ${G}TOTAL FILES${N} ........... ${B}${n_files}${N}"
+        print "  ${G}PLATFORM${N} .............. ${B}${ZPWR_OS_TYPE:-unknown}${N}"
+        print "  ${G}SHELL${N} ................. ${B}zsh ${ZSH_VERSION}${N}"
+        print "  ${D}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${N}"
+        return 0
+    fi
+
     printf '\033[?25l\033[2J'
     trap 'printf "\033[?25h\033[0m\033[2J\033[H"; return 0' INT QUIT
 
     local ch
     local -i i j
+
+    # turbo pause override
+    if (( turbo )); then
+        _mx_pause_orig_turbo=1
+    else
+        _mx_pause_orig_turbo=0
+    fi
+
+    # noir color override
+    if (( noir )); then
+        # override all colors to green
+        C=$'\033[32m' G=$'\033[32m' Y=$'\033[32m' R=$'\033[32m'
+        M=$'\033[32m'
+    fi
 
     # ── HELPERS ───────────────────────────────────────────────
 
@@ -158,8 +327,9 @@ function zpwrMatrix(){
         done <<< "$fig_out"
     }
 
-    # pause with quit check
+    # pause with quit check (turbo-aware)
     _mx_pause() {
+        (( _mx_pause_orig_turbo )) && { sleep 0.05; return 0; }
         local -i dur=$(( ${1:-1} * 100 ))
         local -i pi
         for (( pi=0; pi<dur; pi++ )); do
@@ -167,6 +337,104 @@ function zpwrMatrix(){
             read -t 0.001 -k 1 ch 2>/dev/null
             [[ "$ch" == "q" || "$ch" == "Q" ]] && { printf '\033[?25h\033[0m\033[2J\033[H'; return 1; }
         done
+        return 0
+    }
+
+    # alarm: red flash with optional bell
+    _mx_alarm() {
+        local msg="${1:-ALERT}"
+        local -i ai
+        for ai in {1..3}; do
+            printf '\033[2J\033[H'
+            printf '\033[%d;1H' $(( lines / 2 ))
+            _mx_center "$msg" "1;31"
+            (( sound_mode )) && printf '\a'
+            sleep 0.15
+            printf '\033[2J'
+            sleep 0.1
+        done
+    }
+
+    # boot sequence: fake BIOS/POST
+    _mx_boot() {
+        printf '\033[2J\033[H\n'
+        local -a boot_lines
+        boot_lines=(
+            'ZPWR BIOS v13.37.42'
+            'Copyright (C) MenkeTechnologies'
+            ''
+            "CPU: ${ZPWR_OS_TYPE:-UNKNOWN} $(uname -m) @ $(( n_funcs ))MHz (metaphorical)"
+            "RAM: ${n_aliases} alias banks, ${n_verbs} verb registers"
+            "DISK: ${n_files} files across ${n_repos} repository sectors"
+            ''
+            'Checking verb table .............. OK'
+            'Checking alias integrity ......... OK'
+            'Checking fpath coherence ......... OK'
+            'Loading completion engine ........ OK'
+            "Loading ${n_autoloads} autoload modules .... OK"
+            "Indexing ${n_repos} git repos ............ OK"
+            ''
+            'All systems nominal.'
+            'Press any key to enter the matrix...'
+        )
+        local bl
+        for bl in "${boot_lines[@]}"; do
+            if [[ "$bl" == *"OK"* ]]; then
+                _mx_type "  $bl" "0;32" 0.01 || return 1
+            elif [[ "$bl" == *"BIOS"* || "$bl" == *"Copyright"* ]]; then
+                _mx_type "  $bl" "1;37" 0.02 || return 1
+            elif [[ "$bl" == *"nominal"* ]]; then
+                _mx_type "  $bl" "1;32" 0.03 || return 1
+            else
+                _mx_type "  $bl" "0;36" 0.01 || return 1
+            fi
+            printf '\n'
+            sleep 0.04
+        done
+        return 0
+    }
+
+    # radar sweep animation
+    _mx_radar() {
+        local -i rx ry ri
+        local -i cx=$(( cols / 2 )) cy=$(( lines / 2 ))
+        for ri in {1..20}; do
+            rx=$(( cx + ri * 2 - 20 ))
+            ry=$(( cy + ri - 10 ))
+            (( rx < 1 )) && rx=1
+            (( ry < 1 )) && ry=1
+            (( rx > cols )) && rx=$cols
+            (( ry > lines )) && ry=$lines
+            printf '\033[%d;%dH\033[1;32m+\033[0m' $ry $rx
+            sleep 0.03
+            printf '\033[%d;%dH \033[0m' $ry $rx
+        done
+    }
+
+    # scrolling log: rapid-fire lines
+    _mx_logscroll() {
+        local -a msgs=("$@")
+        local m
+        for m in "${msgs[@]}"; do
+            printf '\033[%d;1H\033[S' $lines
+            printf '\033[%d;1H' $(( lines - 3 ))
+            _mx_type "  $m" "0;32" 0.005
+            sleep 0.02
+            read -t 0.001 -k 1 ch 2>/dev/null
+            [[ "$ch" == "q" || "$ch" == "Q" ]] && { printf '\033[?25h\033[0m\033[2J\033[H'; return 1; }
+        done
+        return 0
+    }
+
+    # dialogue: character name in color, then speech
+    _mx_say() {
+        local name="$1" ncolor="$2" text="$3"
+        printf '  '
+        _mx_type "$name" "$ncolor" 0.04 || return 1
+        _mx_type ": " "2;32" 0.02 || return 1
+        _mx_type "$text" "0;32" 0.02 || return 1
+        printf '\n'
+        sleep 0.2
         return 0
     }
 
@@ -433,6 +701,7 @@ function zpwrMatrix(){
 
     if (( skip_story == 0 )); then
 
+    if (( start_act <= 1 )); then
     # ── ACT I: THE SIGNAL ────────────────────────────────────
     printf '\033[2J\033[H'
     _mx_static || return 0
@@ -536,6 +805,9 @@ function zpwrMatrix(){
 
     _mx_transition
 
+    fi # end act 1
+
+    if (( start_act <= 2 )); then
     # ── ACT II: THE DISCOVERY ────────────────────────────────
     printf '\033[H\n\n'
     _mx_figlet "SHELL" "slant" "1;32"
@@ -606,6 +878,9 @@ function zpwrMatrix(){
     _mx_rainburst 40 || return 0
     printf '\033[2J'
 
+    fi # end act 2
+
+    if (( start_act <= 3 )); then
     # ── ACT III: THE POWER ───────────────────────────────────
     printf '\033[H\n\n'
     _mx_figlet "NEON" "cyberlarge" "1;35"
@@ -657,7 +932,10 @@ function zpwrMatrix(){
     _mx_vhs
     _mx_static || return 0
 
-    # ── ACT IV: THE CHOICE ───────────────��───────────────────
+    fi # end act 3
+
+    if (( start_act <= 4 )); then
+    # ── ACT IV: THE CHOICE ────────────────────────────────────
     printf '\033[H\n'
 
     # skull ASCII art
@@ -741,6 +1019,487 @@ function zpwrMatrix(){
 
     _mx_transition
 
+    fi # end act 4
+
+    if (( extended && start_act <= 5 )); then
+    # ── ACT V: THE PIPE ─────────────────────────────────────
+    printf '\033[H\n\n'
+    _mx_figlet "PIPE" "slant" "1;33"
+    printf '\n'
+    _mx_center "ACT V: THE PIPE" "1;33"
+    printf '\n'
+    _mx_pause 2 || return 0
+    _mx_crt "7;33"
+    printf '\033[2J\033[H\n'
+
+    # the bar
+    local -a act5_intro
+    act5_intro=(
+        '  Somewhere beneath the Akihabara district,'
+        '  behind a vending machine that sells deprecated npm packages,'
+        '  there is a door.'
+        ''
+        '  The sign reads:'
+        '      |  THE  PIPE  |'
+        '  in a font that predates Unicode.'
+        ''
+        '  Inside: a bar. But not a bar that serves drinks.'
+        '  The bartender serves uptime. The cocktails are pipelines.'
+        '  The jukebox plays nothing but dial-up modem handshakes.'
+        ''
+        '  This is where the shell hackers meet.'
+    )
+    for line in "${act5_intro[@]}"; do
+        if [[ "$line" == *"PIPE"* ]]; then
+            _mx_type "$line" "1;33" 0.03 || return 0
+        elif [[ "$line" == *"hackers"* ]]; then
+            _mx_type "$line" "1;37" 0.03 || return 0
+        else
+            _mx_type "$line" "0;32" 0.02 || return 0
+        fi
+        printf '\n'
+        sleep 0.1
+    done
+    _mx_pause 2 || return 0
+    _mx_transition
+
+    printf '\033[2J\033[H\n'
+    _mx_type "  THE REGULARS" "1;36" 0.04 || return 0
+    printf '\n'
+    _mx_type "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;36" 0.003 || return 0
+    printf '\n\n'
+
+    _mx_say "Null Pointer" "1;32" "I patched the kernel module. Took 3 pipes." || return 0
+    sleep 0.3
+    _mx_say "Segfault" "1;33" "In bash that would've been 40 lines and a temp file." || return 0
+    sleep 0.3
+    _mx_say "Null Pointer" "1;32" "In bash that would've been a war crime." || return 0
+    sleep 0.3
+    _mx_say "Chmod777" "1;36" "I deployed it to prod already." || return 0
+    sleep 0.2
+    _mx_say "DevNull" "1;35" "..." || return 0
+    sleep 0.2
+    _mx_say "Segfault" "1;33" "She means 'same.'" || return 0
+    sleep 0.3
+    _mx_say "Chmod777" "1;36" "I also chmod 777'd the deployment directory." || return 0
+    sleep 0.2
+    _mx_say "Null Pointer" "1;32" "Why." || return 0
+    sleep 0.2
+    _mx_say "Chmod777" "1;36" "Permission denied is just a suggestion." || return 0
+    printf '\n'
+    sleep 0.3
+
+    _mx_type "  [The bartender slides a tmux session across the counter.]" "2;32" 0.02 || return 0
+    printf '\n\n'
+    _mx_say "Bartender" "2;37" "Heard MegaCorp patented autocomplete." || return 0
+    sleep 0.3
+    _mx_say "Segfault" "1;33" "0.003 credits per tab. I saw a junior go bankrupt" || return 0
+    _mx_say "Segfault" "1;33" "trying to import tensorflow." || return 0
+    sleep 0.3
+    _mx_say "Null Pointer" "1;32" "zpwr's completion doesn't phone home." || return 0
+    sleep 0.2
+    _mx_say "Null Pointer" "1;32" "It's local. It's fast. It's free." || return 0
+    sleep 0.3
+    _mx_say "DevNull" "1;35" "We should steal it back." || return 0
+    printf '\n'
+    sleep 0.5
+    _mx_type "  [Everyone stops. DevNull never speaks.]" "2;33" 0.025 || return 0
+    printf '\n'
+    _mx_type "  [DevNull never speaks more than four words.]" "2;33" 0.025 || return 0
+    printf '\n'
+    _mx_type "  [She just used five.]" "1;33" 0.04 || return 0
+    printf '\n\n'
+    sleep 0.3
+    _mx_say "Null Pointer" "1;32" "She's right. Let's steal the tab key back." || return 0
+
+    _mx_pause 2 || return 0
+    (( vhs_mode )) && _mx_vhs
+    _mx_transition
+
+    fi # end act 5
+
+    if (( extended && start_act <= 6 )); then
+    # ── ACT VI: THE HEIST ────────────────────────────────────
+    printf '\033[H\n\n'
+    _mx_figlet "HEIST" "speed" "1;31"
+    printf '\n'
+    _mx_center "ACT VI: THE HEIST" "1;31"
+    printf '\n'
+    _mx_pause 2 || return 0
+    _mx_crt "7;31"
+    printf '\033[2J\033[H\n'
+
+    _mx_type "  MEGACORP TOWER, FLOOR 88" "1;31" 0.04 || return 0
+    printf '\n'
+    _mx_type "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;31" 0.003 || return 0
+    printf '\n\n'
+
+    local -a heist_plan
+    heist_plan=(
+        '  THE PLAN:'
+        '  ─────────'
+        '  1. Segfault disables the firewall (he wrote it, in bash, it has bugs)'
+        '  2. Chmod777 opens every port simultaneously (their specialty)'
+        "  3. DevNull redirects all security alerts to /dev/null"
+        '  4. Null Pointer walks in through the front door'
+        ''
+        '  THE PROBLEM:'
+        '  ────────────'
+        '  Chad Electron, VP of DevEx, guards the patent server.'
+        '  His password is "password123" but the login form is an'
+        '  Electron app that takes 8 seconds to render a text field.'
+    )
+    for line in "${heist_plan[@]}"; do
+        if [[ "$line" == *"PLAN"* || "$line" == *"PROBLEM"* ]]; then
+            _mx_type "$line" "1;33" 0.03 || return 0
+        elif [[ "$line" == *"─"* ]]; then
+            _mx_type "$line" "2;33" 0.005 || return 0
+        elif [[ "$line" == *"Electron"* ]]; then
+            _mx_type "$line" "1;31" 0.02 || return 0
+        else
+            _mx_type "$line" "0;36" 0.015 || return 0
+        fi
+        printf '\n'
+        sleep 0.06
+    done
+    _mx_pause 2 || return 0
+    _mx_transition
+
+    # the infiltration
+    printf '\033[2J\033[H\n'
+    _mx_type "  LIVE FEED // 02:47 AM" "1;31" 0.04 || return 0
+    printf '\n\n'
+
+    _mx_type "  \$ ssh -p 443 segfault@megacorp.firewall.internal" "1;36" 0.03 || return 0
+    printf '\n'
+    sleep 0.3
+    _mx_type "  segfault@firewall:~# iptables -F" "1;31" 0.04 || return 0
+    printf '\n'
+    _mx_type "  segfault@firewall:~# # oops, that was production" "0;33" 0.02 || return 0
+    printf '\n'
+    _mx_type "  segfault@firewall:~# # ... whatever, it's MegaCorp" "0;33" 0.02 || return 0
+    printf '\n\n'
+    sleep 0.3
+    (( glitch_mode || chaos > 5 )) && _mx_tear
+
+    _mx_type "  [CHANNEL 2] Chmod777:" "1;36" 0.03 || return 0
+    printf '\n'
+    _mx_type "    for port in {1..65535}; do" "0;36" 0.02 || return 0
+    printf '\n'
+    _mx_type "        iptables -A INPUT -p tcp --dport \$port -j ACCEPT" "0;36" 0.01 || return 0
+    printf '\n'
+    _mx_type "    done" "0;36" 0.02 || return 0
+    printf '\n'
+    _mx_type "    # this is fine" "2;33" 0.02 || return 0
+    printf '\n\n'
+    sleep 0.3
+
+    _mx_type "  [CHANNEL 3] DevNull:" "1;35" 0.03 || return 0
+    printf '\n'
+    _mx_type "    tail -f /var/log/security.log > /dev/null 2>&1 &" "0;35" 0.015 || return 0
+    printf '\n'
+    _mx_type "    tail -f /var/log/auth.log > /dev/null 2>&1 &" "0;35" 0.015 || return 0
+    printf '\n'
+    _mx_type "    tail -f /var/log/syslog > /dev/null 2>&1 &" "0;35" 0.015 || return 0
+    printf '\n'
+    _mx_type "    # there are no alerts if nobody reads them" "2;35" 0.02 || return 0
+    printf '\n\n'
+    sleep 0.3
+
+    _mx_type "  [CHANNEL 1] Null Pointer:" "1;32" 0.03 || return 0
+    printf '\n'
+    _mx_type "    zpwr filesearch patent" "1;32" 0.05 || return 0
+    printf '\n'
+    sleep 0.2
+    _mx_type "    Found: /megacorp/vault/patents/US-2089-TABCOMPLETE.enc" "0;32" 0.015 || return 0
+    printf '\n'
+    _mx_type "    zpwr decrypt /megacorp/vault/patents/US-2089-TABCOMPLETE.enc" "1;32" 0.03 || return 0
+    printf '\n'
+    _mx_progress "DECRYPTING PATENT..." "1;33" || return 0
+    printf '\n'
+    (( sound_mode )) && printf '\a'
+    _mx_type "  [DECRYPTED] Tab completion is now PUBLIC DOMAIN." "1;32" 0.03 || return 0
+    printf '\n'
+    _mx_type "  [PUSHED] github.com/MenkeTechnologies/liberate-tab" "1;36" 0.02 || return 0
+    printf '\n\n'
+    sleep 0.3
+    _mx_alarm "INTRUDER DETECTED"
+
+    printf '\033[2J\033[H\n'
+    _mx_say "Chad Electron" "1;31" "SECURITY! Someone is in the patent vault!" || return 0
+    sleep 0.3
+    _mx_say "Chad Electron" "1;31" "They used... a TERMINAL?!" || return 0
+    sleep 0.3
+    _mx_say "Chad Electron" "1;31" "That's not even a real app! Where are the rounded corners?!" || return 0
+    sleep 0.3
+    printf '\n'
+    _mx_say "Security Guard" "2;37" "Sir, they already pushed it to GitHub." || return 0
+    sleep 0.3
+    _mx_say "Chad Electron" "1;31" "What's a GitHub?" || return 0
+    sleep 0.3
+    _mx_say "Security Guard" "2;37" "It's... like a Jira board but for people who ship." || return 0
+    printf '\n'
+    sleep 0.3
+    _mx_type "  [Chad's Electron-based security dashboard crashes.]" "2;33" 0.02 || return 0
+    printf '\n'
+    _mx_type "  [It needed 12GB of RAM to display a single alert.]" "2;33" 0.02 || return 0
+    printf '\n'
+    _mx_type "  [By the time it restarted, they were gone.]" "1;32" 0.03 || return 0
+    printf '\n'
+
+    _mx_pause 2 || return 0
+    (( vhs_mode )) && _mx_vhs
+    _mx_transition
+
+    fi # end act 6
+
+    if (( extended && start_act <= 7 )); then
+    # ── ACT VII: THE COMPILE ─────────────────────────────────
+    printf '\033[H\n\n'
+    _mx_figlet "BUILD" "cyberlarge" "1;36"
+    printf '\n'
+    _mx_center "ACT VII: THE COMPILE" "1;36"
+    printf '\n'
+    _mx_pause 2 || return 0
+    _mx_crt "7;36"
+    printf '\033[2J\033[H\n'
+
+    local -a act7
+    act7=(
+        '  Back at The Pipe. 3:42 AM.'
+        '  The tab key is free. But MegaCorp is retaliating.'
+        ''
+        '  They have mass-deployed a firmware update to every'
+        '  keyboard on Earth. The tab key now opens Bing.'
+        ''
+        '  There is only one solution:'
+        '  Build the ultimate .zshrc.'
+        '  One that does not need the tab key at all.'
+        '  One that completes BEFORE you think.'
+    )
+    for line in "${act7[@]}"; do
+        if [[ "$line" == *"solution"* || "$line" == *"BEFORE"* ]]; then
+            _mx_type "$line" "1;37" 0.03 || return 0
+        elif [[ "$line" == *"Bing"* ]]; then
+            _mx_type "$line" "1;31" 0.03 || return 0
+            (( sound_mode )) && printf '\a'
+            _mx_shake
+        else
+            _mx_type "$line" "0;32" 0.02 || return 0
+        fi
+        printf '\n'
+        sleep 0.1
+    done
+    _mx_pause 2 || return 0
+    _mx_transition
+
+    # the montage
+    printf '\033[2J\033[H\n'
+    _mx_type "  ═══════════════════════════════════════════" "2;36" 0.003 || return 0
+    printf '\n'
+    _mx_type "  MONTAGE: BUILDING THE ULTIMATE .ZSHRC" "1;36" 0.04 || return 0
+    printf '\n'
+    _mx_type "  ═══════════════════════════════════════════" "2;36" 0.003 || return 0
+    printf '\n\n'
+
+    _mx_say "Null Pointer" "1;32" "zpwr verbs | wc -l" || return 0
+    _mx_type "    ${n_verbs}" "1;35" 0.02 || return 0
+    printf '\n'
+    _mx_say "Null Pointer" "1;32" "Not enough. We need predictive dispatch." || return 0
+    sleep 0.3
+
+    _mx_say "Segfault" "1;33" "What if the shell knows what you want" || return 0
+    _mx_say "Segfault" "1;33" "before your fingers move?" || return 0
+    sleep 0.3
+    _mx_say "Chmod777" "1;36" "I already wrote it." || return 0
+    sleep 0.2
+    _mx_say "Null Pointer" "1;32" "When?" || return 0
+    sleep 0.2
+    _mx_say "Chmod777" "1;36" "During your last sentence." || return 0
+    sleep 0.2
+    _mx_say "Null Pointer" "1;32" "Did you test it?" || return 0
+    sleep 0.2
+    _mx_say "Chmod777" "1;36" "What's testing?" || return 0
+    printf '\n'
+    sleep 0.3
+    _mx_type "  [DevNull sighs. The pipe she was smoking redirects the" "2;33" 0.02 || return 0
+    printf '\n'
+    _mx_type "   smoke to /dev/null. Nobody sees it leave.]" "2;33" 0.02 || return 0
+    printf '\n\n'
+    sleep 0.3
+
+    _mx_say "DevNull" "1;35" "I wrote the test suite." || return 0
+    sleep 0.3
+    _mx_say "Segfault" "1;33" "All of it?" || return 0
+    sleep 0.2
+    _mx_say "DevNull" "1;35" "Piped to /dev/null. All tests pass if nobody reads the output." || return 0
+    sleep 0.3
+    _mx_say "Segfault" "1;33" "That's... not how testing works." || return 0
+    sleep 0.2
+    _mx_say "DevNull" "1;35" "That's how SHIPPING works." || return 0
+    printf '\n'
+    sleep 0.5
+
+    _mx_progress "COMPILING .zshrc ..." "1;36" || return 0
+    _mx_progress "LINKING ${n_funcs} functions ..." "0;36" || return 0
+    _mx_progress "LOADING ${n_verbs} verbs ..." "0;32" || return 0
+    _mx_progress "INDEXING ${n_repos} repos ..." "0;35" || return 0
+    printf '\n'
+    (( glitch_mode || chaos > 7 )) && _mx_corrupt
+    _mx_type "  [BUILD COMPLETE] The .zshrc is alive." "1;32" 0.03 || return 0
+    printf '\n'
+    _mx_type "  [STARTUP TIME] 0.003ms" "1;35" 0.03 || return 0
+    printf '\n'
+    _mx_type "  [Segfault quietly weeps. It's beautiful.]" "2;33" 0.02 || return 0
+    printf '\n'
+
+    _mx_pause 2 || return 0
+    (( vhs_mode )) && _mx_vhs
+    _mx_transition
+
+    fi # end act 7
+
+    if (( extended && start_act <= 8 )); then
+    # ── ACT VIII: THE MERGE ──────────────────────────────────
+    printf '\033[H\n\n'
+    _mx_figlet "MERGE" "doom" "1;35"
+    printf '\n'
+    _mx_center "ACT VIII: THE MERGE" "1;35"
+    printf '\n'
+    _mx_pause 2 || return 0
+    _mx_crt "7;35"
+    printf '\033[2J\033[H\n'
+
+    local -a act8
+    act8=(
+        '  MegaCorp has one final weapon:'
+        '  A mandatory GUI-only operating system.'
+        '  No terminal. No shell. No escape sequences.'
+        '  Just rounded corners, hamburger menus, and hope.'
+        ''
+        '  They call it: MegaCorp OS.'
+        '  It boots in 47 seconds.'
+        '  43 of those seconds are loading the splash screen animation.'
+        ''
+        '  The update is deploying worldwide in 10 minutes.'
+        '  Every terminal on Earth will be replaced by a web app'
+        '  that says "Terminal" in the title bar but is actually'
+        '  just a div with a monospace font and no actual shell.'
+    )
+    for line in "${act8[@]}"; do
+        if [[ "$line" == *"MegaCorp OS"* ]]; then
+            _mx_type "$line" "1;31" 0.03 || return 0
+            (( sound_mode )) && printf '\a'
+        elif [[ "$line" == *"splash screen"* || "$line" == *"div with"* ]]; then
+            _mx_type "$line" "1;33" 0.02 || return 0
+        elif [[ "$line" == *"10 minutes"* ]]; then
+            _mx_type "$line" "1;37" 0.03 || return 0
+            _mx_shake
+        else
+            _mx_type "$line" "0;32" 0.02 || return 0
+        fi
+        printf '\n'
+        sleep 0.1
+    done
+    _mx_pause 2 || return 0
+    _mx_transition
+
+    # the final push
+    printf '\033[2J\033[H\n'
+    _mx_type "  THE FINAL PUSH" "1;35" 0.05 || return 0
+    printf '\n'
+    _mx_type "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;35" 0.003 || return 0
+    printf '\n\n'
+
+    _mx_say "Null Pointer" "1;32" "We force push. To every machine. Right now." || return 0
+    sleep 0.3
+    _mx_say "Segfault" "1;33" "Force push? To PRODUCTION?" || return 0
+    sleep 0.2
+    _mx_say "Null Pointer" "1;32" "To EARTH." || return 0
+    sleep 0.3
+    _mx_say "Segfault" "1;33" "That's not how git works." || return 0
+    sleep 0.2
+    _mx_say "Chmod777" "1;36" "That's how ZPWR works." || return 0
+    sleep 0.3
+    _mx_say "DevNull" "1;35" "Pushed." || return 0
+    sleep 0.2
+    _mx_say "Segfault" "1;33" "Already?!" || return 0
+    sleep 0.2
+    _mx_say "DevNull" "1;35" "I piped your hesitation to /dev/null." || return 0
+    printf '\n'
+    sleep 0.5
+
+    _mx_type "  \$ git push --force origin main:every-machine-on-earth" "1;36" 0.03 || return 0
+    printf '\n'
+    _mx_progress "DEPLOYING zpwr to 8 billion devices..." "1;35" || return 0
+    (( glitch_mode || chaos > 3 )) && _mx_corrupt
+    _mx_progress "REPLACING MegaCorp OS firmware..." "1;31" || return 0
+    _mx_progress "LIBERATING tab completion worldwide..." "1;32" || return 0
+    printf '\n'
+    (( sound_mode )) && printf '\a'
+    _mx_alarm "MERGE COMPLETE"
+
+    printf '\033[2J\033[H\n'
+    local -a finale
+    finale=(
+        '  Across the world, screens flickered.'
+        '  Hamburger menus collapsed into pipes.'
+        '  Rounded corners sharpened into box-drawing characters.'
+        '  Modal dialogs dissolved into prompts.'
+        ''
+        '  8 billion devices. All running zpwr.'
+        ''
+        "  ${n_verbs} verbs per human."
+        "  ${n_aliases} aliases for every soul."
+        '  Tab completion: free. Forever.'
+        ''
+        '  Chad Electron stared at his laptop.'
+        '  For the first time in his life, he saw a cursor.'
+        '  A blinking cursor on a black screen.'
+        '  It was the most beautiful thing he had ever seen.'
+        ''
+        '  He typed his first command:'
+    )
+    for line in "${finale[@]}"; do
+        if [[ "$line" == *"8 billion"* ]]; then
+            _mx_type "$line" "1;37" 0.04 || return 0
+            _mx_shake
+        elif [[ "$line" == *"verbs per"* || "$line" == *"aliases for"* || "$line" == *"free. Forever"* ]]; then
+            _mx_type "$line" "1;35" 0.03 || return 0
+        elif [[ "$line" == *"beautiful"* ]]; then
+            _mx_type "$line" "1;36" 0.04 || return 0
+        elif [[ "$line" == *"first command"* ]]; then
+            _mx_type "$line" "1;33" 0.04 || return 0
+        else
+            _mx_type "$line" "0;32" 0.025 || return 0
+        fi
+        printf '\n'
+        sleep 0.12
+    done
+    sleep 0.5
+    printf '\n'
+    _mx_type "  \$ zpwr help" "1;36" 0.12 || return 0
+    printf '\n\n'
+    sleep 0.8
+    _mx_rainburst 60 || return 0
+    _mx_type "  And for the first time in his life," "0;32" 0.03 || return 0
+    printf '\n'
+    _mx_type "  Chad Electron smiled." "1;33" 0.05 || return 0
+    printf '\n\n'
+    sleep 0.3
+    _mx_type "  His tab key worked again." "1;32" 0.04 || return 0
+    printf '\n'
+    _mx_type "  It had never stopped." "1;37" 0.05 || return 0
+    printf '\n'
+    _mx_type "  He just couldn't see it before." "2;32" 0.03 || return 0
+    printf '\n'
+
+    _mx_pause 3 || return 0
+    (( vhs_mode )) && _mx_vhs
+    _mx_transition
+
+    fi # end act 8
+
     # ── EPILOGUE ─────────────────────────────────────────────
     printf '\033[H\n\n'
 
@@ -770,12 +1529,66 @@ function zpwrMatrix(){
     printf '\n'
     _mx_center "you're not running ZPWR." "1;37"
     printf '\n\n'
+
+    if (( extended )); then
+    _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;33"
+    printf '\n'
+    _mx_center "THE CREW" "1;33"
+    printf '\n'
+    _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;33"
+    printf '\n\n'
+    _mx_center "Null Pointer  //  still doesn't use a mouse" "0;32"
+    printf '\n'
+    _mx_center "Segfault  //  6 months clean from bash" "0;33"
+    printf '\n'
+    _mx_center "Chmod777  //  currently chmod 777'ing the afterlife" "0;36"
+    printf '\n'
+    _mx_center "DevNull  //  this line was piped to /dev/null" "0;35"
+    printf '\n'
+    _mx_center "Chad Electron  //  learning what a pipe is" "0;31"
+    printf '\n'
+    _mx_center "The Kernel  //  was here before. will be here after." "0;37"
+    printf '\n\n'
+    _mx_pause 2 || return 0
+    fi
+
     _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;36"
     printf '\n'
     _mx_center "github.com/MenkeTechnologies" "2;35"
     printf '\n'
     _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;36"
     printf '\n\n'
+
+    if (( show_credits )); then
+    _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;35"
+    printf '\n'
+    _mx_center "C R E D I T S" "1;35"
+    printf '\n'
+    _mx_center "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;35"
+    printf '\n\n'
+    _mx_center "written by  //  zpwr matrix" "2;36"
+    printf '\n'
+    _mx_center "directed by  //  zpwr matrix --extended" "2;36"
+    printf '\n'
+    _mx_center "produced by  //  MenkeTechnologies" "2;36"
+    printf '\n'
+    _mx_center "visual effects  //  _mx_corrupt, _mx_vhs, _mx_tear" "2;36"
+    printf '\n'
+    _mx_center "soundtrack  //  terminal bell (optional)" "2;36"
+    printf '\n'
+    _mx_center "catering  //  /dev/urandom" "2;36"
+    printf '\n\n'
+    _mx_center "no GUIs were harmed in the making of this film" "2;33"
+    printf '\n'
+    _mx_center "(several Electron apps were, but they deserved it)" "2;33"
+    printf '\n\n'
+    _mx_center "filmed on location in \$ZPWR" "2;32"
+    printf '\n'
+    _mx_center "all ${n_verbs} verbs performed their own stunts" "2;32"
+    printf '\n\n'
+    _mx_pause 3 || return 0
+    fi
+
     _mx_center "[ entering the rain ]" "2;32"
     printf '\n'
     _mx_pause 3 || return 0
@@ -888,7 +1701,7 @@ function zpwrMatrix(){
         read -t 0.001 -k 1 ch 2>/dev/null
         if [[ "$ch" == "q" || "$ch" == "Q" ]]; then
             printf '\033[?25h\033[0m\033[2J\033[H'
-            unfunction _mx_type _mx_center _mx_ctype _mx_crt _mx_static _mx_figlet _mx_pause _mx_transition _mx_rainburst 2>/dev/null
+            unfunction _mx_type _mx_center _mx_ctype _mx_crt _mx_static _mx_figlet _mx_pause _mx_transition _mx_rainburst _mx_alarm _mx_boot _mx_radar _mx_logscroll _mx_say 2>/dev/null
             return 0
         fi
 
