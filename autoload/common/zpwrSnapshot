@@ -57,7 +57,7 @@ function zpwrSnapshot(){
     printf "${C} ███████║██║ ╚████║██║  ██║██║     ███████║██║  ██║╚██████╔╝   ██║${N}\n"
     printf "${C} ╚══════╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═╝     ╚══════╝╚═╝  ╚═╝ ╚═════╝    ╚═╝${N}\n"
     printf " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}\n"
-    printf " ${D}│${N} ${G}CAPTURING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}\n" "$name" "$(date '+%Y-%m-%d %H:%M:%S')"
+    printf " ${D}│${N} ${G}CAPTURING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}              ${D}│${N}\n" "$name" "$(date '+%Y-%m-%d %H:%M:%S')"
     printf " ${D}└──────────────────────────────────────────────────────────────────────┘${N}\n"
 
     command mkdir -p "$snapdir"
@@ -227,8 +227,8 @@ function zpwrSnapshot(){
     local snapsize=$(du -sh "$snapdir" 2>/dev/null | cut -f1)
     printf "\n"
     printf "  ${D}┌──────────────────────────────────────────────────────────────────────┐${N}\n"
-    printf "  ${D}│${N} ${G}SNAPSHOT COMPLETE${N}  ${D}//${N} ${C}%d components${N}  ${D}//${N} ${M}%s${N}\n" $count "$snapsize"
-    printf "  ${D}│${N} ${D}saved to:${N} %s\n" "$snapdir"
+    printf "  ${D}│${N} ${G}SNAPSHOT COMPLETE${N}  ${D}//${N} ${C}%d components${N}  ${D}//${N} ${M}%s${N}                    ${D}│${N}\n" $count "$snapsize"
+    printf "  ${D}│${N} ${D}saved to:${N} %s   ${D}│${N}\n" "$snapdir"
     printf "  ${D}└──────────────────────────────────────────────────────────────────────┘${N}\n"
     printf "\n"
 }
