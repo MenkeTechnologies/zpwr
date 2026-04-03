@@ -128,10 +128,14 @@ function _zpwr(){
                         '(-h --help)'{-h,--help}'[show help]' \
                         '1:interval:(1 2 5 10)'
                     ;;
-                doctor|deps)
+                doctor)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]'
+                    ;;
+                deps)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
-                        '(-r --reverse)'{-r,--reverse}'[reverse deps]' \
+                        '(-r --reverse)'{-r,--reverse}'[show callers]' \
                         '(-o --orphans)'{-o,--orphans}'[show orphans]' \
                         '(-s --summary)'{-s,--summary}'[show summary]' \
                         '(-d --dot)'{-d,--dot}'[graphviz output]' \
@@ -176,7 +180,7 @@ function _zpwr(){
                         '(-r --raw)'{-r,--raw}'[raw output]' \
                         '*:logfile:_files'
                     ;;
-                wizard|manual|tutorial|docs|study)
+                wizard|manual|tutorial|docs)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-t --toc)'{-t,--toc}'[table of contents]' \
@@ -184,11 +188,78 @@ function _zpwr(){
                         '(-l --list)'{-l,--list}'[list pages]' \
                         '1:page number:'
                     ;;
+                study)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-v --vertical)'{-v,--vertical}'[vertical split]' \
+                        '(-s --size)'{-s,--size}'[pane size percent]:percent:(30 40 50 60 70)' \
+                        '--search[search pages]:pattern:' \
+                        '--toc[table of contents]' \
+                        '1:page number:'
+                    ;;
                 startsend*|stopsend*)
                     __tmux-panes
                     ;;
-                z)
+                z|zcd)
                     _zcommand
+                    ;;
+                backup)
+                    _arguments \
+                        '(-d)-d[destination directory]:directory:_directories' \
+                        '*:files:_files'
+                    ;;
+                fordir|fordirupdate)
+                    _arguments \
+                        '1:command:_command_names -e' \
+                        '*:directories:_directories'
+                    ;;
+                for|for10|whiletrue|whilesleep)
+                    _arguments \
+                        '1:count or seconds:' \
+                        '*:command:_command_names -e'
+                    ;;
+                execglob|execglobparallel)
+                    _arguments '*:files:_files'
+                    ;;
+                changename|changenamezpwr)
+                    _arguments \
+                        '1:old name:' \
+                        '2:new name:'
+                    ;;
+                rename|replacer)
+                    _arguments \
+                        '1:pattern:' \
+                        '2:replacement:' \
+                        '*:files:_files'
+                    ;;
+                regenpdf)
+                    _arguments '(-h --help)'{-h,--help}'[show help]'
+                    ;;
+                home*)
+                    ;;
+                gitcommit)
+                    _arguments '1:commit message:'
+                    ;;
+                gitforalldir|gitreposexec|gitreposcleanexec|gitreposdirtyexec|gitreposcleancacheexec|gitreposdirtycacheexec)
+                    _arguments '*:command:_command_names -e'
+                    ;;
+                poll)
+                    _arguments '*:command:_command_names -e'
+                    ;;
+                timer)
+                    _arguments '*:command:_command_names -e'
+                    ;;
+                background)
+                    _arguments '*:command:_command_names -e'
+                    ;;
+                upload|curl)
+                    _arguments '*:files:_files'
+                    ;;
+                open)
+                    _arguments '*:files:_files'
+                    ;;
+                scripttopdf)
+                    _arguments '*:script:_files'
                     ;;
                 *)
                     _alternative \
