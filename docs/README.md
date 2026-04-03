@@ -9,4 +9,4 @@ This directory holds the **ZPWR Encyclopedia** sources and generators.
 | `regenPDF.sh` | Shell driver for LaTeX/PDF rebuild (`bash -n` covered in `tests/t-lib-batch11.zsh`). |
 | `zpwr-encyclopedia.tex` | TeX master (tracked; build artifacts may be gitignored). |
 
-**CI:** The GitHub Actions workflow runs the full zunit suite (`zunit --verbose tests/*.zsh`) on Ubuntu with dependencies listed in the repository **Diagnostics** section of the top-level `README.md` (`.github/workflows/ci.yml`). Extra integration checks for the docs tree and autoload syntax live in `tests/t-lib-batch15.zsh` (see that section for **emacs/vim/zsh** verb clusters and **`zsh -n`** spot checks).
+**CI:** The GitHub Actions workflow runs the full zunit suite (`zunit --verbose tests/*.zsh`) on Ubuntu with dependencies listed in the repository **Diagnostics** section of the top-level `README.md` (`.github/workflows/ci.yml`). Extra integration checks for the docs tree and autoload syntax live in `tests/t-lib-batch15.zsh` (see **Diagnostics** in the top-level `README.md` for **emacs/vim/zsh** verb clusters and **`zsh -n`** spot checks).
