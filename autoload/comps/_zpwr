@@ -159,6 +159,18 @@ function _zpwr(){
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-v --verbose)'{-v,--verbose}'[show all entries]'
                     ;;
+                gitwho)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-a --all)'{-a,--all}'[show all authors]' \
+                        '1:top N authors:(10 20 50 100)'
+                    ;;
+                timeline)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-n --lines)'{-n,--lines}'[last N history entries]:count:(100 200 500 1000)' \
+                        '1:date (YYYY-MM-DD):'
+                    ;;
                 deps)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
