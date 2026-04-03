@@ -18,6 +18,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    env:
+      GIT_TERMINAL_PROMPT: 0
     strategy:
       matrix:
         zsh-version: ['default']
