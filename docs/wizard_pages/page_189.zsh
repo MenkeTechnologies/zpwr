@@ -18,6 +18,8 @@ PAGE_CONTENT() {
     print "  ${M}  zpwr cruft${N}${D}        = stale        ${M}zpwr rank${N}${D}       = funcrank${N}"
     print "  ${M}  zpwr benchmark${N}${D}    = bench        ${M}zpwr dashboard${N}${D}  = top${N}"
     print "  ${M}  zpwr heatmap${N}${D}      = flame        ${M}zpwr instrument${N}${D} = trace${N}"
+    print "  ${M}  zpwr flamechart${N}${D}   = flame        ${M}zpwr checkup${N}${D}    = doctor${N}"
+    print "  ${M}  zpwr callers${N}${D}      = deps         ${M}zpwr aliasusage${N}${D} = aliasrank${N}"
     print ""
     print "  ${B}${Y}MONITORING${N}"
     print "  ${M}  zpwr snap${N}${D}         = snapshot     ${M}zpwr load${N}${D}       = restore${N}"
