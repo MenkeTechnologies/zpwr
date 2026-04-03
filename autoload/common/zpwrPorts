@@ -1,0 +1,131 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrPorts(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██████╗  ██████╗ ██████╗ ████████╗███████╗${N}"
+        print " ${C}██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝${N}"
+        print " ${M}██████╔╝██║   ██║██████╔╝   ██║   ███████╗${N}"
+        print " ${M}██╔═══╝ ██║   ██║██╔══██╗   ██║   ╚════██║${N}"
+        print " ${C}██║     ╚██████╔╝██║  ██║   ██║   ███████║${N}"
+        print " ${C}╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}PORTS${N}                 ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> LISTENING PORTS // NETWORK SCAN <<${N}"
+        print ""
+        print "  Show all listening ports with process info. Optionally filter"
+        print "  by port number or pipe through fzf for interactive selection."
+        print ""
+        print "  ${B}USAGE:${N} zpwr ports ${D}[OPTIONS] [PORT]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-k, --kill${N}                                       ${D}// Kill process on port${N}"
+        print "  ${C}PORT${N}                                             ${D}// Filter by port number${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr ports${N}                                      ${D}// Show all listening ports${N}"
+        print "  ${C}zpwr ports 8080${N}                                 ${D}// Show what's on port 8080${N}"
+        print "  ${C}zpwr ports -k 8080${N}                              ${D}// Kill process on port 8080${N}"
+        print ""
+        return 0
+    fi
+
+    local kill_mode=false
+    local port_filter=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -k|--kill) kill_mode=true; shift ;;
+            *) port_filter="$1"; shift ;;
+        esac
+    done
+
+    printf "\n"
+    printf " ${C}██████╗  ██████╗ ██████╗ ████████╗███████╗${N}\n"
+    printf " ${C}██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝${N}\n"
+    printf " ${M}██████╔╝██║   ██║██████╔╝   ██║   ███████╗${N}\n"
+    printf " ${M}██╔═══╝ ██║   ██║██╔══██╗   ██║   ╚════██║${N}\n"
+    printf " ${C}██║     ╚██████╔╝██║  ██║   ██║   ███████║${N}\n"
+    printf " ${C}╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝${N}\n"
+
+    if [[ "$kill_mode" == true && -n "$port_filter" ]]; then
+        printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
+        printf " ${D}│${N} ${R}KILL MODE${N}  ${D}//${N} ${C}port %s${N}  ${D}//${N} ${M}%s${N}                    ${D}│${N}\n" "$port_filter" "$(date '+%H:%M:%S')"
+        printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n\n"
+
+        local -a pids
+        pids=( $(command lsof -ti :"$port_filter" 2>/dev/null) )
+        if (( $#pids == 0 )); then
+            printf "  ${D}No process found on port %s${N}\n\n" "$port_filter"
+            return 0
+        fi
+        local pid
+        for pid in $pids; do
+            local pname
+            pname=$(command ps -p "$pid" -o comm= 2>/dev/null)
+            printf "  ${R}Killing${N} PID ${C}%s${N} ${D}(%s)${N}\n" "$pid" "$pname"
+            kill "$pid" 2>/dev/null
+        done
+        printf "\n"
+        return 0
+    fi
+
+    printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
+    printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}                          ${D}│${N}\n" "${port_filter:-all ports}" "$(date '+%H:%M:%S')"
+    printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n\n"
+
+    local lsof_cmd header
+    local -i count=0
+
+    if [[ -n "$port_filter" ]]; then
+        lsof_cmd="command lsof -nP -iTCP:$port_filter -sTCP:LISTEN"
+    else
+        lsof_cmd="command lsof -nP -iTCP -sTCP:LISTEN"
+    fi
+
+    # header
+    printf "  ${B}%-8s %-6s %-10s %-8s %s${N}\n" "COMMAND" "PID" "USER" "PORT" "ADDR"
+    printf "  ${D}%-8s %-6s %-10s %-8s %s${N}\n" "───────" "─────" "─────────" "───────" "────"
+
+    eval "$lsof_cmd" 2>/dev/null | while IFS= read -r line; do
+        # skip header
+        [[ "$line" == COMMAND* ]] && continue
+        local -a fields
+        fields=( ${(s: :)line} )
+        local cmd="${fields[1]}" pid="${fields[2]}" user="${fields[3]}"
+        local name="${fields[9]:-${fields[8]}}"
+
+        # extract port from name field (e.g., *:8080 or 127.0.0.1:3000)
+        local addr="${name%:*}"
+        local pt="${name##*:}"
+
+        local port_color=$G
+        if (( pt < 1024 )); then
+            port_color=$R
+        elif (( pt < 10000 )); then
+            port_color=$Y
+        fi
+
+        printf "  %-8s ${C}%-6s${N} ${D}%-10s${N} ${port_color}%-8s${N} %s\n" "$cmd" "$pid" "$user" "$pt" "$addr"
+        (( count++ ))
+    done
+
+    if (( count == 0 )); then
+        printf "  ${D}No listening ports found${N}\n"
+    fi
+
+    printf "\n  ${C}══════════════════════════════════════════════════════════════════${N}\n"
+    printf "  ${G}%d listening ports${N}\n" $count
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+}
+
+zpwrPorts "$@"

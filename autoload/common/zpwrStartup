@@ -1,0 +1,135 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrStartup(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+    builtin zmodload zsh/datetime
+    builtin zmodload zsh/zprof 2>/dev/null
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗████████╗ █████╗ ██████╗ ████████╗██╗   ██╗██████╗${N}"
+        print " ${C}██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██╔══██╗${N}"
+        print " ${M}███████╗   ██║   ███████║██████╔╝   ██║   ██║   ██║██████╔╝${N}"
+        print " ${M}╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ██║   ██║██╔═══╝${N}"
+        print " ${C}███████║   ██║   ██║  ██║██║  ██║   ██║   ╚██████╔╝██║${N}"
+        print " ${C}╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}STARTUP${N}               ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> ZPROF STARTUP PROFILE // SINGLE SHOT <<${N}"
+        print ""
+        print "  Launch a fresh zsh with zprof enabled and display the full"
+        print "  profiling breakdown by function call time."
+        print ""
+        print "  ${B}USAGE:${N} zpwr startup ${D}[OPTIONS] [N]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}N${N}                                                 ${D}// Top N functions (default: 30)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr startup${N}                                     ${D}// Top 30 functions${N}"
+        print "  ${C}zpwr startup 50${N}                                  ${D}// Top 50 functions${N}"
+        print ""
+        return 0
+    fi
+
+    local -i top_n=${1:-30}
+    local tmpfile=$(mktemp)
+
+    printf "\n"
+    printf " ${C}███████╗████████╗ █████╗ ██████╗ ████████╗██╗   ██╗██████╗${N}\n"
+    printf " ${C}██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██║   ██║██╔══██╗${N}\n"
+    printf " ${M}███████╗   ██║   ███████║██████╔╝   ██║   ██║   ██║██████╔╝${N}\n"
+    printf " ${M}╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ██║   ██║██╔═══╝${N}\n"
+    printf " ${C}███████║   ██║   ██║  ██║██║  ██║   ██║   ╚██████╔╝██║${N}\n"
+    printf " ${C}╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝${N}\n"
+    printf " ${D}┌──────────────────────────────────────────────────────────────────┐${N}\n"
+    printf " ${D}│${N} ${G}PROFILING${N}  ${D}//${N} ${C}top %d${N}  ${D}//${N} ${M}%s${N}                       ${D}│${N}\n" $top_n "$(date '+%H:%M:%S')"
+    printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n"
+    printf "  ${D}>> LAUNCHING PROFILED SHELL <<${N}\n\n"
+
+    # launch a fresh zsh with profiling, capture zprof output
+    ZPWR_PROFILING=true zsh -i -c "zprof" > "$tmpfile" 2>&1
+
+    local -i total_lines
+    total_lines=$(wc -l < "$tmpfile")
+
+    if (( total_lines < 2 )); then
+        printf "  ${R}No zprof data captured${N}\n"
+        command rm -f "$tmpfile"
+        return 1
+    fi
+
+    # display top N lines from the "num  calls" table
+    printf "  ${C}── BY CALL TIME ────────────────────────────────────────────────${N}\n"
+    printf "  ${D}%s${N}\n" "$(head -1 "$tmpfile")"
+
+    local line self_pct
+    local -a fields
+    local -i shown=0
+    while IFS= read -r line; do
+        (( shown >= top_n )) && break
+        # skip header line
+        [[ "$line" == num* ]] && continue
+        [[ -z "$line" ]] && { (( shown > 0 )) && break; continue }
+
+        if [[ "$line" == *([[:space:]])[0-9]* ]]; then
+            # zprof fields: num calls time self% name
+            # split and extract self% (field 3), strip trailing %
+            fields=( ${(s: :)line} )
+            self_pct="${fields[3]%\%}"
+            # guard against non-numeric values
+            if [[ "$self_pct" == <->* ]]; then
+                if (( ${self_pct%.*} >= 10 )); then
+                    printf "  ${R}%s${N}\n" "$line"
+                elif (( ${self_pct%.*} >= 3 )); then
+                    printf "  ${Y}%s${N}\n" "$line"
+                elif (( ${self_pct%.*} >= 1 )); then
+                    printf "  ${C}%s${N}\n" "$line"
+                else
+                    printf "  ${D}%s${N}\n" "$line"
+                fi
+            else
+                printf "  ${D}%s${N}\n" "$line"
+            fi
+            (( shown++ ))
+        fi
+    done < "$tmpfile"
+
+    # show call tree section if present
+    local -i tree_start=0
+    local -i i=0
+    while IFS= read -r line; do
+        (( i++ ))
+        if [[ "$line" == *"called"* && "$line" == *"total"* && "$line" == *"self"* ]]; then
+            tree_start=$i
+            break
+        fi
+    done < "$tmpfile"
+
+    if (( tree_start > 0 )); then
+        printf "\n  ${C}── CALL TREE ───────────────────────────────────────────────────${N}\n"
+        local -i tree_shown=0
+        tail -n +$tree_start "$tmpfile" | while IFS= read -r line; do
+            (( tree_shown >= top_n )) && break
+            [[ -z "$line" ]] && { (( tree_shown > 0 )) && break; continue }
+            printf "  ${D}%s${N}\n" "$line"
+            (( tree_shown++ ))
+        done
+    fi
+
+    printf "\n  ${C}══════════════════════════════════════════════════════════════════${N}\n"
+    printf "  ${G}Total: %d profiled functions${N}  ${D}//${N}  ${C}showing top %d${N}\n" \
+        $(( total_lines / 2 )) $top_n
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+
+    command rm -f "$tmpfile"
+}
+
+zpwrStartup "$@"

@@ -62,7 +62,7 @@ function zpwrBindVerbs(){
             log*|taillog)
                 zpwrLogVerbs+=("$k:$v")
                 ;;
-            bench|flame|top|doctor|deps|trace|funcrank|aliasrank)
+            bench|flame|top|doctor|deps|trace|funcrank|aliasrank|startup|lint|stale|pathaudit|ports)
                 zpwrDiagVerbs+=("$k:$v")
                 ;;
             watch|replay|snapshot|restore|wizard|manual|tutorial|docs|study)
