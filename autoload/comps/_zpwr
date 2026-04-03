@@ -172,6 +172,12 @@ function _zpwr(){
                         '(-n --lines)'{-n,--lines}'[last N history entries]:count:(100 200 500 1000)' \
                         '1:date (YYYY-MM-DD):'
                     ;;
+                matrix)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-s --speed)'{-s,--speed}'[drop speed 1-9]:speed:(1 2 3 4 5 6 7 8 9)' \
+                        '(-d --dense)'{-d,--dense}'[more columns]'
+                    ;;
                 deps)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
