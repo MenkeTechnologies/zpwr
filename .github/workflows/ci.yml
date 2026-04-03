@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y zsh vim perl python3 curl git
+          sudo apt-get install -y --no-install-recommends zsh vim perl python3 curl git
 
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -65,7 +65,10 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.zpwr/.cache/zunit-bin
-          key: zunit-${{ runner.os }}-v1-0.8.x
+          key: zunit-${{ runner.os }}-v1-0.8.x-${{ hashFiles('.github/workflows/ci.yml') }}
+          restore-keys: |
+            zunit-${{ runner.os }}-v1-0.8.x-
+            zunit-${{ runner.os }}-v1-
 
       - name: Build zunit
         if: steps.cache-zunit.outputs.cache-hit != 'true'
