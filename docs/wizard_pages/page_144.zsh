@@ -27,7 +27,7 @@ PAGE_CONTENT() {
     print "  ${D}  Part of forgit: the git + fzf integration plugin.${N}"
     print "  ${B}${Y}VERB SEARCH (zpwr verbsfzf)${N}"
     print "  ${D}Pattern: ZPWR_VERBS keys | fzf --preview 'help' | eval${N}"
-    print "  ${D}  1. All 408+ zpwr verbs piped into fzf${N}"
+    print "  ${D}  1. All ${#ZPWR_VERBS}+ zpwr verbs piped into fzf${N}"
     print "  ${D}  2. Preview shows the verb description and command${N}"
     print "  ${D}  3. Select a verb to execute it immediately${N}"
     print "  ${D}  FZF_ENV_OPTS_VERBS configures the preview for verbs.${N}"
