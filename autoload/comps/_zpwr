@@ -189,7 +189,8 @@ function _zpwr(){
                         '--no-fx[disable all visual FX]' \
                         '--cast[show character bios]' \
                         '--stats[ecosystem stats and exit]' \
-                        '--credits[end credits roll]'
+                        '--credits[end credits roll]' \
+                        '--battle[2-player tmux typing battle]'
                     ;;
                 fortune|wisdom|quote)
                     _arguments \

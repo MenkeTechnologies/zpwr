@@ -1042,7 +1042,7 @@ zpwr quote                 # alias for fortune
 ## Matrix -- zpwr matrix
 `zpwr matrix` is an animated cyberpunk hacker story told in ASCII art, figlet banners, and CRT effects, followed by an infinite ecosystem rain screensaver.  The default story is a four-act narrative about discovering zpwr; `--extended` unlocks the full eight-act saga with six named characters (Null Pointer, Segfault, Chmod777, DevNull, Chad Electron, The Kernel), a heist to liberate the tab key patent, a training montage to build the ultimate .zshrc, and a force push to every machine on Earth.  Your live ecosystem stats are woven throughout.  Unique to zpwr — instead of random characters, it rains your actual verb names, function names, aliases, env vars, and git repo names, color-coded by type.
 
-FX include: CRT scanline sweeps, VHS tracking distortion, pixel corruption, screen tears, screen shake, terminal bells, fake SSH sessions with your live manifest, encrypted transmission decryption with glitchy progress bars, figlet chaos banners in random cyberpunk fonts (doom, slant, speed, cyberlarge, cybermedium), dissolve effects, a scrolling ticker with stats, pulse events with ecosystem facts, and a persistent HUD with live counters.  Also invokable as `zpwr rain` or `zpwr screensaver`.
+FX include: CRT scanline sweeps, VHS tracking distortion, pixel corruption, screen tears, screen shake, terminal bells, fake SSH sessions with your live manifest, encrypted transmission decryption with glitchy progress bars, figlet chaos banners in random cyberpunk fonts (doom, slant, speed, cyberlarge, cybermedium), dissolve effects, a scrolling ticker with stats, pulse events with ecosystem facts, and a persistent HUD with live counters.  `--battle` launches a two-player typing battle over tmux: Player 1 (Null Pointer) vs Player 2 (Chad Electron) race to type zpwr commands correctly, dealing damage based on command length with HP bars, taunts, and a winner-takes-all endgame.  Also invokable as `zpwr rain` or `zpwr screensaver`.
 
 ```sh
 zpwr matrix -h              # cyberpunk help with act/character list
@@ -1062,6 +1062,7 @@ zpwr matrix -c 10           # chaos level 1-10
 zpwr matrix --cast          # show character bios
 zpwr matrix --stats         # ecosystem stats and exit
 zpwr matrix --credits       # end credits roll
+zpwr matrix --battle        # 2-player tmux typing battle
 zpwr rain                   # alias for matrix
 zpwr screensaver            # alias for matrix
 ```
