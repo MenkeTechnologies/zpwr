@@ -64,6 +64,8 @@ def strip_colors(text):
     text = text.replace('\\"', '"')
     text = text.replace('\\$', '$')
     text = text.replace('\\\\', '\\')
+    # replace block drawing chars that don't render in Helvetica Neue
+    text = text.replace('░', '-').replace('▒', '=').replace('▓', '#').replace('█', '#')
     return text.strip()
 
 def convert_line(text):
@@ -408,11 +410,17 @@ with open(outfile, 'w') as f:
     current_chapter = ""
     cmd_buffer = []
 
+    def _protect_bracket(s):
+        """Protect [ at start of line from being parsed as \\[optional]"""
+        if s.lstrip().startswith('['):
+            return '{[}' + s.lstrip()[1:]
+        return s
+
     def flush_cmds():
         if cmd_buffer:
             f.write('\\begin{codebox}\n')
             for c in cmd_buffer:
-                f.write(f'{c}\\\\\n')
+                f.write(f'{_protect_bracket(c)}\\\\\n')
             f.write('\\end{codebox}\n\n')
             cmd_buffer.clear()
 
@@ -447,7 +455,7 @@ with open(outfile, 'w') as f:
                 if is_keybinding_page:
                     # Each line stays separate in keybinding dumps
                     for t in text_buffer:
-                        f.write(f'{t}\\\\\n')
+                        f.write(f'{_protect_bracket(t)}\\\\\n')
                     f.write('\n')
                 else:
                     f.write(' '.join(text_buffer) + '\n\n')
