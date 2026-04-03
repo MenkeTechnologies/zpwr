@@ -93,8 +93,8 @@ function zpwrGitwho(){
                 count="${count// /}"
                 author="${line#*	}"
                 [[ -z "$author" || -z "$count" ]] && continue
-                (( author_commits[$author] += count ))
-                (( author_repos[$author]++ ))
+                (( author_commits["$author"] += count ))
+                (( author_repos["$author"]++ ))
                 (( total_commits += count ))
             done < <(git -C "$dir" shortlog -sn --all 2>/dev/null)
         done < "$ZPWR_ALL_GIT_DIRS"
