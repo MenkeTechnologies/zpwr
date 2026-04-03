@@ -60,7 +60,8 @@ jobs:
       - name: Install test tools
         run: |
           cd ~/.zpwr
-          curl -fsSL https://raw.githubusercontent.com/molovo/revolver/refs/heads/master/revolver > .bin/revolver
+          curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 15 \
+            https://raw.githubusercontent.com/molovo/revolver/refs/heads/master/revolver > .bin/revolver
           chmod u+x .bin/revolver
           echo "$HOME/.zpwr/.bin" >> "$GITHUB_PATH"
 
