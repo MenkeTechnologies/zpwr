@@ -49,6 +49,7 @@ PAGE_CONTENT() {
     print "  ${D}  before zpwr loads, duplicates can sneak in.${N}"
     print ""
     print "  ${B}${Y}DIAGNOSING THE PROBLEM${N}"
+    print "  ${M}  zpwr pathaudit${N}${D}                       # full audit: dupes, missing, writable${N}"
     print "  ${M}  zpwr doctor${N}${D}                         # checks for duplicate PATH/FPATH${N}"
     print "  ${M}  print -l \$path | sort | uniq -d${N}${D}     # show only duplicated entries${N}"
     print "  ${M}  echo \$#path${N}${D}                         # count PATH entries${N}"

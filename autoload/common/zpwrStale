@@ -1,0 +1,146 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrStale(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗████████╗ █████╗ ██╗     ███████╗${N}"
+        print " ${C}██╔════╝╚══██╔══╝██╔══██╗██║     ██╔════╝${N}"
+        print " ${M}███████╗   ██║   ███████║██║     █████╗${N}"
+        print " ${M}╚════██║   ██║   ██╔══██║██║     ██╔══╝${N}"
+        print " ${C}███████║   ██║   ██║  ██║███████╗███████╗${N}"
+        print " ${C}╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}STALE${N}                 ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> STALE FILE FINDER // CACHE HYGIENE <<${N}"
+        print ""
+        print "  Find stale .zwc compiled files, orphaned caches, and broken"
+        print "  symlinks across the zpwr directory tree."
+        print ""
+        print "  ${B}USAGE:${N} zpwr stale ${D}[OPTIONS]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-f, --fix${N}                                        ${D}// Delete stale files${N}"
+        print ""
+        return 0
+    fi
+
+    local fix_mode=false
+    [[ "$1" == "-f" || "$1" == "--fix" ]] && fix_mode=true
+
+    local -i stale_zwc=0 orphan_zwc=0 broken_links=0 empty_cache=0 total_fixed=0
+
+    printf "\n"
+    printf " ${C}███████╗████████╗ █████╗ ██╗     ███████╗${N}\n"
+    printf " ${C}██╔════╝╚══██╔══╝██╔══██╗██║     ██╔════╝${N}\n"
+    printf " ${M}███████╗   ██║   ███████║██║     █████╗${N}\n"
+    printf " ${M}╚════██║   ██║   ██╔══██║██║     ██╔══╝${N}\n"
+    printf " ${C}███████║   ██║   ██║  ██║███████╗███████╗${N}\n"
+    printf " ${C}╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚══════╝${N}\n"
+    printf " ${D}┌──────────────────────────────────────────────────────────────────┐${N}\n"
+    printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}                         ${D}│${N}\n" "$ZPWR" "$(date '+%H:%M:%S')"
+    printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n"
+
+    local f zwc src
+
+    # ── STALE .zwc FILES (source newer than compiled) ────────
+    printf "\n  ${C}── STALE .zwc (source newer than compiled) ─────────────${N}\n"
+
+    for zwc in "$ZPWR"/**/*.zwc(N) "$HOME"/.zcompdump*.zwc(N); do
+        src="${zwc%.zwc}"
+        if [[ -f "$src" && "$src" -nt "$zwc" ]]; then
+            (( stale_zwc++ ))
+            printf "  ${Y}STALE${N}  %s\n" "${zwc/#$HOME/~}"
+            if [[ "$fix_mode" == true ]]; then
+                command rm -f "$zwc"
+                printf "         ${G}deleted${N}\n"
+                (( total_fixed++ ))
+            fi
+        fi
+    done
+    (( stale_zwc == 0 )) && printf "  ${G}No stale .zwc files${N}\n"
+
+    # ── ORPHAN .zwc FILES (source no longer exists) ──────────
+    printf "\n  ${C}── ORPHAN .zwc (source removed) ────────────────────────${N}\n"
+
+    for zwc in "$ZPWR"/**/*.zwc(N); do
+        src="${zwc%.zwc}"
+        if [[ ! -f "$src" && ! -d "$src" ]]; then
+            (( orphan_zwc++ ))
+            printf "  ${R}ORPHAN${N} %s\n" "${zwc#$ZPWR/}"
+            if [[ "$fix_mode" == true ]]; then
+                command rm -f "$zwc"
+                printf "         ${G}deleted${N}\n"
+                (( total_fixed++ ))
+            fi
+        fi
+    done
+    (( orphan_zwc == 0 )) && printf "  ${G}No orphan .zwc files${N}\n"
+
+    # ── BROKEN SYMLINKS ──────────────────────────────────────
+    printf "\n  ${C}── BROKEN SYMLINKS ─────────────────────────────────────${N}\n"
+
+    local link target
+    for link in "$ZPWR"/**/*(@N-); do
+        if [[ ! -e "$link" ]]; then
+            target=$(command readlink "$link" 2>/dev/null)
+            (( broken_links++ ))
+            printf "  ${R}BROKEN${N} %s ${D}-> %s${N}\n" "${link#$ZPWR/}" "$target"
+            if [[ "$fix_mode" == true ]]; then
+                command rm -f "$link"
+                printf "         ${G}deleted${N}\n"
+                (( total_fixed++ ))
+            fi
+        fi
+    done
+    (( broken_links == 0 )) && printf "  ${G}No broken symlinks${N}\n"
+
+    # ── EMPTY CACHE FILES ────────────────────────────────────
+    printf "\n  ${C}── EMPTY CACHE FILES ───────────────────────────────────${N}\n"
+
+    for f in "$ZPWR_LOCAL"/**/*(.NL0) "$ZPWR_COMPSYS_CACHE"/*(.NL0); do
+        (( empty_cache++ ))
+        printf "  ${Y}EMPTY${N}  %s\n" "${f/#$HOME/~}"
+        if [[ "$fix_mode" == true ]]; then
+            command rm -f "$f"
+            printf "         ${G}deleted${N}\n"
+            (( total_fixed++ ))
+        fi
+    done
+    (( empty_cache == 0 )) && printf "  ${G}No empty cache files${N}\n"
+
+    # ── SUMMARY ──────────────────────────────────────────────
+    local -i total=$(( stale_zwc + orphan_zwc + broken_links + empty_cache ))
+    printf "\n"
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n"
+
+    local status_color status_label
+    if (( total == 0 )); then
+        status_color=$G
+        status_label="ALL CLEAN"
+    else
+        status_color=$Y
+        status_label="FOUND $total"
+    fi
+
+    printf "  ${B}${status_color}%s${N}  ${D}//${N}  ${Y}%d stale${N}  ${D}//${N}  ${R}%d orphan${N}  ${D}//${N}  ${R}%d broken${N}  ${D}//${N}  ${Y}%d empty${N}\n" \
+        "$status_label" $stale_zwc $orphan_zwc $broken_links $empty_cache
+
+    if [[ "$fix_mode" == true ]]; then
+        printf "  ${G}Fixed: %d files deleted${N}\n" $total_fixed
+    elif (( total > 0 )); then
+        printf "  ${D}Run 'zpwr stale -f' to clean up${N}\n"
+    fi
+
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+}
+
+zpwrStale "$@"

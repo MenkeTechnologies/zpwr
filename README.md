@@ -51,6 +51,11 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Live Dashboard](#live-dashboard----zpwr-top) -- zpwr top
 - [Health Check](#health-check----zpwr-doctor) -- zpwr doctor
 - [Flame Chart](#flame-chart----zpwr-flame) -- zpwr flame
+- [Startup Profile](#startup-profile----zpwr-startup) -- zpwr startup
+- [Shell Lint](#shell-lint----zpwr-lint) -- zpwr lint
+- [Listening Ports](#listening-ports----zpwr-ports) -- zpwr ports
+- [Stale File Finder](#stale-file-finder----zpwr-stale) -- zpwr stale
+- [Path Audit](#path-audit----zpwr-pathaudit) -- zpwr pathaudit
 - [Alias Analytics](#alias-analytics----zpwr-aliasrank) -- zpwr aliasrank
 - [Function Rank](#function-rank----zpwr-funcrank) -- zpwr funcrank
 - [File Watcher](#file-watcher----zpwr-watch) -- zpwr watch
@@ -111,7 +116,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 455+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 419+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 16.8k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
@@ -846,6 +851,54 @@ zpwr flame -h    # cyberpunk help with heat scale legend
 zpwr flame       # top 20 functions (default)
 zpwr flame 40    # top 40 functions
 zpwr flame 5     # quick view of hottest 5
+```
+
+## Startup Profile -- zpwr startup
+`zpwr startup [N]` launches a fresh zsh with `zprof` enabled and displays a colorized breakdown of function call times.  Unlike `zpwr bench` (which measures total wall time over multiple iterations), `zpwr startup` gives a single-shot, per-function profile showing exactly where time is spent during initialization.  Functions are color-coded by self-percentage: red (>=10%), yellow (>=3%), cyan (>=1%), dim (<1%).  Includes the call tree section when available.
+
+```sh
+zpwr startup -h        # cyberpunk help
+zpwr startup           # top 30 functions (default)
+zpwr startup 50        # top 50 functions
+zpwr startup 100       # full breakdown
+```
+
+## Shell Lint -- zpwr lint
+`zpwr lint [OPTIONS]` runs `zsh -n` syntax checking on all autoload functions and env files, and `shellcheck` on all shell scripts in `scripts/` and `install/`.  Shellcheck runs with zsh-incompatible warnings suppressed (SC1071, SC1090, SC1091, SC2034, SC2139, SC2148, SC2154, SC2206, SC2296).  Reports per-file pass/fail with a summary of errors and warnings.
+
+```sh
+zpwr lint -h           # cyberpunk help
+zpwr lint              # run all checks
+zpwr lint -z           # zsh -n syntax check only
+zpwr lint -s           # shellcheck only
+```
+
+## Listening Ports -- zpwr ports
+`zpwr ports [OPTIONS] [PORT]` shows all listening TCP ports with process name, PID, user, port number, and bind address.  Ports are color-coded: red for privileged (<1024), yellow for common ranges (<10000), green for high ports.  Supports filtering by port number and killing the process on a specific port.
+
+```sh
+zpwr ports -h          # cyberpunk help
+zpwr ports             # show all listening ports
+zpwr ports 8080        # filter to port 8080
+zpwr ports -k 3000     # kill whatever is on port 3000
+```
+
+## Stale File Finder -- zpwr stale
+`zpwr stale [OPTIONS]` scans the zpwr directory tree for stale `.zwc` compiled files (source newer than compiled), orphan `.zwc` files (source deleted), broken symlinks, and empty cache files.  Use `--fix` to delete all stale artifacts in one pass.
+
+```sh
+zpwr stale -h          # cyberpunk help
+zpwr stale             # scan and report
+zpwr stale -f          # delete all stale files
+```
+
+## Path Audit -- zpwr pathaudit
+`zpwr pathaudit [OPTIONS]` audits `PATH`, `FPATH`, and `MANPATH` for duplicate entries, missing directories, and world-writable directories (security risk).  Reports per-array with totals.  Use `--verbose` to see every entry including healthy ones.
+
+```sh
+zpwr pathaudit -h      # cyberpunk help
+zpwr pathaudit         # audit all three arrays
+zpwr pathaudit -v      # verbose: show all entries
 ```
 
 ## Alias Analytics -- zpwr aliasrank

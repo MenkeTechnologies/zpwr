@@ -132,6 +132,33 @@ function _zpwr(){
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]'
                     ;;
+                startup)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '1:top N functions:(10 20 30 50 100)'
+                    ;;
+                lint)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-s --shellcheck)'{-s,--shellcheck}'[shellcheck only]' \
+                        '(-z --zsh)'{-z,--zsh}'[zsh -n only]'
+                    ;;
+                ports)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-k --kill)'{-k,--kill}'[kill process on port]' \
+                        '1:port:(80 443 3000 5000 8000 8080 8443 9090)'
+                    ;;
+                stale)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-f --fix)'{-f,--fix}'[delete stale files]'
+                    ;;
+                pathaudit)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-v --verbose)'{-v,--verbose}'[show all entries]'
+                    ;;
                 deps)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
