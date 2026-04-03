@@ -6,9 +6,17 @@ on:
   pull_request:
     branches: [main, dev]
 
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     strategy:
       matrix:
         zsh-version: ['default']
@@ -52,13 +60,26 @@ jobs:
           chmod u+x .bin/revolver
           echo "$HOME/.zpwr/.bin" >> "$GITHUB_PATH"
 
+      - name: Cache zunit binary
+        id: cache-zunit
+        uses: actions/cache@v4
+        with:
+          path: ~/.zpwr/.cache/zunit-bin
+          key: zunit-${{ runner.os }}-v1-0.8.x
+
       - name: Build zunit
+        if: steps.cache-zunit.outputs.cache-hit != 'true'
         run: |
+          mkdir -p ~/.zpwr/.cache/zunit-bin
           cd ~/.zpwr
-          git clone https://github.com/MenkeTechnologies/zunit
-          cd zunit
+          git clone --depth 1 https://github.com/MenkeTechnologies/zunit zunit-src
+          cd zunit-src
           ./build.zsh
-          echo "$HOME/.zpwr/zunit" >> "$GITHUB_PATH"
+          command cp zunit ~/.zpwr/.cache/zunit-bin/zunit
+          chmod +x ~/.zpwr/.cache/zunit-bin/zunit
+
+      - name: Add zunit to PATH
+        run: echo "$HOME/.zpwr/.cache/zunit-bin" >> "$GITHUB_PATH"
 
       - name: Run tests
         run: |
