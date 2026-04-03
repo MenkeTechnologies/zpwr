@@ -1,3 +1,7 @@
+# docs/ is often ignored by user global gitignore; keep the tree guide tracked
+!docs/
+!docs/README.md
+
 local/
 zpwr-encyclopedia.pdf
 *.aux
