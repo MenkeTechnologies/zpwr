@@ -264,6 +264,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[makedir]='jd=make a dir tree'
     ZPWR_VERBS[makefile]='j=make a dir tree with file at end'
     ZPWR_VERBS[man]='fm=fzf through man pages'
+    ZPWR_VERBS[matrix]='zpwrMatrix=fullscreen matrix digital rain screensaver'
     ZPWR_VERBS[modules]='zpwrModulesFZF=show zsh modules'
     ZPWR_VERBS[mygithub]='zpwrOpenmygh=open github profile'
     ZPWR_VERBS[open]='o=open with system'

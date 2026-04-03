@@ -1,0 +1,149 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrMatrix(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███╗   ███╗ █████╗ ████████╗██████╗ ██╗██╗  ██╗${N}"
+        print " ${C}████╗ ████║██╔══██╗╚══██╔══╝██╔══██╗██║╚██╗██╔╝${N}"
+        print " ${M}██╔████╔██║███████║   ██║   ██████╔╝██║ ╚███╔╝${N}"
+        print " ${M}██║╚██╔╝██║██╔══██║   ██║   ██╔══██╗██║ ██╔██╗${N}"
+        print " ${C}██║ ╚═╝ ██║██║  ██║   ██║   ██║  ██║██║██╔╝ ██╗${N}"
+        print " ${C}╚═╝     ╚═╝╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝╚═╝╚═╝  ╚═╝${N}"
+        print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
+        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}MATRIX${N}                ${D}│${N}"
+        print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+        print "  ${D}>> DIGITAL RAIN // THE SCREENSAVER ZPWR DESERVES <<${N}"
+        print ""
+        print "  Fullscreen terminal matrix rain. Press ${C}q${N} or ${C}Ctrl-C${N} to exit."
+        print ""
+        print "  ${B}USAGE:${N} zpwr matrix ${D}[OPTIONS]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-s, --speed N${N}                                    ${D}// Drop speed 1-9 (default: 3)${N}"
+        print "  ${C}-d, --dense${N}                                      ${D}// More columns${N}"
+        print ""
+        return 0
+    fi
+
+    local -i speed=3 dense=0
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -s|--speed) speed=$2; shift 2 ;;
+            -d|--dense) dense=1; shift ;;
+            *) shift ;;
+        esac
+    done
+
+    (( speed < 1 )) && speed=1
+    (( speed > 9 )) && speed=9
+
+    local -i cols lines
+    cols=$COLUMNS
+    lines=$LINES
+
+    # characters: mix of katakana, latin, digits, symbols
+    local chars='アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789abcdefghijklmnopqrstuvwxyz@#$%&*+=<>~'
+    local -i nchars=${#chars}
+
+    # column state: position of the head of each rain drop
+    local -i spacing=2
+    (( dense )) && spacing=1
+    local -i ncols=$(( cols / spacing ))
+
+    # arrays for column state
+    local -a col_pos col_len col_speed col_delay
+    local -i ci
+
+    # initialize columns
+    for (( ci=1; ci<=ncols; ci++ )); do
+        col_pos[$ci]=$(( RANDOM % lines ))
+        col_len[$ci]=$(( RANDOM % 15 + 5 ))
+        col_speed[$ci]=$(( RANDOM % 3 + 1 ))
+        col_delay[$ci]=$(( RANDOM % 20 ))
+    done
+
+    # hide cursor, clear screen, set up cleanup
+    printf '\033[?25l\033[2J'
+    trap 'printf "\033[?25h\033[0m\033[2J\033[H"; return 0' INT QUIT
+
+    local -i frame=0 x y tail_y age char_idx
+    local ch color_code
+
+    # read key non-blocking
+    while true; do
+        # check for quit
+        read -t 0.001 -k 1 ch 2>/dev/null
+        if [[ "$ch" == "q" || "$ch" == "Q" ]]; then
+            printf '\033[?25h\033[0m\033[2J\033[H'
+            return 0
+        fi
+
+        (( frame++ ))
+
+        for (( ci=1; ci<=ncols; ci++ )); do
+            # skip if still in delay
+            if (( col_delay[ci] > 0 )); then
+                (( col_delay[ci]-- ))
+                continue
+            fi
+
+            # only advance on frames matching column speed
+            (( frame % col_speed[ci] != 0 )) && continue
+
+            x=$(( (ci - 1) * spacing + 1 ))
+            y=${col_pos[$ci]}
+
+            # draw the bright head character
+            if (( y >= 1 && y <= lines )); then
+                char_idx=$(( RANDOM % nchars + 1 ))
+                ch="${chars[$char_idx]}"
+                printf '\033[%d;%dH\033[1;37m%s' $y $x "$ch"
+            fi
+
+            # dim the previous head to green
+            if (( y - 1 >= 1 && y - 1 <= lines )); then
+                char_idx=$(( RANDOM % nchars + 1 ))
+                ch="${chars[$char_idx]}"
+                printf '\033[%d;%dH\033[0;32m%s' $(( y - 1 )) $x "$ch"
+            fi
+
+            # fade older characters to dark green
+            if (( y - 3 >= 1 && y - 3 <= lines )); then
+                char_idx=$(( RANDOM % nchars + 1 ))
+                ch="${chars[$char_idx]}"
+                printf '\033[%d;%dH\033[2;32m%s' $(( y - 3 )) $x "$ch"
+            fi
+
+            # erase the tail
+            tail_y=$(( y - col_len[ci] ))
+            if (( tail_y >= 1 && tail_y <= lines )); then
+                printf '\033[%d;%dH ' $tail_y $x
+            fi
+
+            # advance
+            (( col_pos[ci]++ ))
+
+            # reset column when tail is off screen
+            if (( tail_y > lines )); then
+                col_pos[$ci]=1
+                col_len[$ci]=$(( RANDOM % 15 + 5 ))
+                col_speed[$ci]=$(( RANDOM % 3 + 1 ))
+                col_delay[$ci]=$(( RANDOM % 30 ))
+            fi
+        done
+
+        # frame delay based on speed (lower = slower)
+        sleep $(( 0.1 / speed ))
+    done
+}
+
+zpwrMatrix "$@"
