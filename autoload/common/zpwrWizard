@@ -99,16 +99,24 @@ function zpwrWizard(){
             printf " ${D}│${N} ${G}%3d/${total_pages}${N}  ${D}//${N} ${C}%-55s${N}  ${D}│${N}\n" $current_page "$PAGE_TITLE"
             print " ${D}└──────────────────────────────────────────────────────────────────────────┘${N}"
             print ""
-            # render content
+            # render content into variable to measure height
+            local _page_out=""
             if (( ${+functions[PAGE_CONTENT]} )); then
-                PAGE_CONTENT
+                _page_out="$(PAGE_CONTENT)"
                 unfunction PAGE_CONTENT 2>/dev/null
+            fi
+            print "$_page_out"
+            # pad to pin footer at bottom: 11 lines for header+banner, 3 for footer
+            local -i _content_lines _pad_lines
+            _content_lines=$(echo "$_page_out" | wc -l)
+            _pad_lines=$(( LINES - 11 - _content_lines - 3 ))
+            if (( _pad_lines > 0 )); then
+                printf '%0.s\n' {1..$_pad_lines}
             fi
         else
             print "  ${R}page ${current_page} not found${N}"
         fi
-        # footer
-        print ""
+        # footer — pinned to bottom
         print "  ${D}──────────────────────────────────────────────────────────────────────────${N}"
         print "  ${C}j${N}/${C}n${N} next  ${C}k${N}/${C}p${N} prev  ${C}d${N}/${C}u${N} ±5  ${C}]${N}/${C}[${N} chapter  ${C}t${N} toc  ${C}/${N} search  ${C}:${N}num  ${C}r${N} rand  ${C}?${N} help  ${C}q${N} quit"
         print -n "  ${D}>>>${N} "
