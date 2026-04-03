@@ -162,6 +162,7 @@ function _zpwr(){
                 gitwho)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
+                        '(-r --reset)'{-r,--reset}'[force cache rebuild]' \
                         '(-a --all)'{-a,--all}'[show all authors]' \
                         '1:top N authors:(10 20 50 100)'
                     ;;
