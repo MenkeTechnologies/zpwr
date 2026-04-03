@@ -22,12 +22,13 @@ function zpwrGitwho(){
         print "  ${D}>> GIT CONTRIBUTOR STATS // ALL REPOS <<${N}"
         print ""
         print "  Aggregate git shortlog -sn across all cached git repos."
-        print "  Shows who committed where and how much, ranked by total commits."
+        print "  Results cached in \$ZPWR_LOCAL; rebuilds when repo cache changes."
         print ""
         print "  ${B}USAGE:${N} zpwr gitwho ${D}[OPTIONS] [N]${N}"
         print ""
         print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
         print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-r, --reset${N}                                      ${D}// Force cache rebuild${N}"
         print "  ${C}-a, --all${N}                                        ${D}// Show all authors${N}"
         print "  ${C}N${N}                                                 ${D}// Top N authors (default: 20)${N}"
         print ""
@@ -35,16 +36,18 @@ function zpwrGitwho(){
         print "  ${C}zpwr gitwho${N}                                     ${D}// Top 20 across all repos${N}"
         print "  ${C}zpwr gitwho 50${N}                                  ${D}// Top 50${N}"
         print "  ${C}zpwr gitwho -a${N}                                  ${D}// Everyone${N}"
+        print "  ${C}zpwr gitwho -r${N}                                  ${D}// Force rebuild${N}"
         print ""
         return 0
     fi
 
-    local show_all=false
+    local show_all=false reset=false
     local -i top_n=20
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
             -a|--all) show_all=true; shift ;;
+            -r|--reset) reset=true; shift ;;
             *) top_n=$1; shift ;;
         esac
     done
@@ -55,9 +58,17 @@ function zpwrGitwho(){
         return 1
     fi
 
+    local cache_file="$ZPWR_LOCAL/zpwrGitwho.txt"
+    local use_cache=false
+
+    # use cache if it exists, is newer than repo list, and no --reset
+    if [[ "$reset" != true && -s "$cache_file" && "$cache_file" -nt "$ZPWR_ALL_GIT_DIRS" ]]; then
+        use_cache=true
+    fi
+
     local -i total_repos=0 total_commits=0
     local -A author_commits author_repos
-    local dir line author count
+    local dir line author count repos_str
 
     printf "\n"
     printf " ${C} ██████╗ ██╗████████╗██╗    ██╗██╗  ██╗ ██████╗${N}\n"
@@ -67,24 +78,57 @@ function zpwrGitwho(){
     printf " ${C}╚██████╔╝██║   ██║   ╚███╔███╔╝██║  ██║╚██████╔╝${N}\n"
     printf " ${C} ╚═════╝ ╚═╝   ╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝${N}\n"
     printf " ${D}┌──────────────────────────────────────────────────────────────────┐${N}\n"
-    printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}all cached repos${N}  ${D}//${N} ${M}%s${N}                  ${D}│${N}\n" "$(date '+%H:%M:%S')"
-    printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n"
-    printf "  ${D}>> AGGREGATING CONTRIBUTORS <<${N}\n\n"
 
-    while IFS= read -r dir; do
-        [[ -d "$dir/.git" || -d "$dir" ]] || continue
-        (( total_repos++ ))
+    if [[ "$use_cache" == true ]]; then
+        printf " ${D}│${N} ${G}CACHED${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}                           ${D}│${N}\n" "${cache_file:t}" "$(date '+%H:%M:%S')"
+        printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n"
+        printf "  ${D}>> READING CACHED RESULTS <<${N}\n\n"
+
+        # cache format line 1: "#repos=N"
+        # remaining lines: "commits\trepos\tauthor"
         while IFS= read -r line; do
-            # git shortlog -sn format: "    123\tAuthor Name"
+            if [[ "$line" == "#repos="* ]]; then
+                total_repos="${line#\#repos=}"
+                continue
+            fi
             count="${line%%	*}"
-            count="${count// /}"
+            line="${line#*	}"
+            repos_str="${line%%	*}"
             author="${line#*	}"
             [[ -z "$author" || -z "$count" ]] && continue
-            (( author_commits[$author] += count ))
-            (( author_repos[$author]++ ))
+            author_commits[$author]=$count
+            author_repos[$author]=$repos_str
             (( total_commits += count ))
-        done < <(git -C "$dir" shortlog -sn --all 2>/dev/null)
-    done < "$ZPWR_ALL_GIT_DIRS"
+        done < "$cache_file"
+    else
+        printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}all cached repos${N}  ${D}//${N} ${M}%s${N}                  ${D}│${N}\n" "$(date '+%H:%M:%S')"
+        printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n"
+        printf "  ${D}>> AGGREGATING CONTRIBUTORS <<${N}\n\n"
+
+        while IFS= read -r dir; do
+            [[ -d "$dir/.git" || -d "$dir" ]] || continue
+            (( total_repos++ ))
+            while IFS= read -r line; do
+                # git shortlog -sn format: "    123\tAuthor Name"
+                count="${line%%	*}"
+                count="${count// /}"
+                author="${line#*	}"
+                [[ -z "$author" || -z "$count" ]] && continue
+                (( author_commits[$author] += count ))
+                (( author_repos[$author]++ ))
+                (( total_commits += count ))
+            done < <(git -C "$dir" shortlog -sn --all 2>/dev/null)
+        done < "$ZPWR_ALL_GIT_DIRS"
+
+        # write cache: header then "commits\trepos\tauthor" per line
+        {
+            printf "#repos=%d\n" $total_repos
+            local k
+            for k in ${(k)author_commits}; do
+                printf "%d\t%d\t%s\n" ${author_commits[$k]} ${author_repos[$k]} "$k"
+            done
+        } > "$cache_file"
+    fi
 
     # sort by commit count descending
     local -a sorted
@@ -103,7 +147,8 @@ function zpwrGitwho(){
     printf "  ${B}%-6s %-5s %-40s %s${N}\n" "COMMITS" "REPOS" "AUTHOR" "BAR"
     printf "  ${D}%-6s %-5s %-40s %s${N}\n" "──────" "─────" "────────────────────────────────────────" "───────────────"
 
-    local -i shown=0 commits repos bar_len
+    local -i shown=0 commits repos bar_len i
+    local bar color
     for line in $sorted; do
         if [[ "$show_all" != true ]] && (( shown >= top_n )); then
             break
@@ -114,13 +159,12 @@ function zpwrGitwho(){
         bar_len=$(( commits * 30 / max_commits ))
         (( bar_len == 0 )) && bar_len=1
 
-        local bar=""
-        local -i i
+        bar=""
         for (( i=0; i<bar_len; i++ )); do
             bar+="█"
         done
 
-        local color=$G
+        color=$G
         if (( commits == max_commits )); then
             color=$C
         elif (( commits * 4 < max_commits )); then
