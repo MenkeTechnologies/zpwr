@@ -904,13 +904,14 @@ zpwr pathaudit -v      # verbose: show all entries
 ```
 
 ## Git Who -- zpwr gitwho
-`zpwr gitwho [N]` aggregates `git shortlog -sn` across all cached git repos (`$ZPWR_ALL_GIT_DIRS`).  Shows each contributor's total commits and number of repos, ranked by commit count with bar charts.  Requires the git repo cache — run `zpwr regengitrepocache` first.
+`zpwr gitwho [N]` aggregates `git shortlog -sn` across all cached git repos (`$ZPWR_ALL_GIT_DIRS`).  Shows each contributor's total commits and number of repos, ranked by commit count with bar charts.  Results are cached in `$ZPWR_LOCAL/zpwrGitwho.txt` (pre-sorted) and auto-rebuild when the repo cache changes.  Use `--reset` to force a rebuild.  Requires the git repo cache — run `zpwr regengitrepocache` first.
 
 ```sh
 zpwr gitwho -h         # cyberpunk help
 zpwr gitwho            # top 20 authors across all repos
 zpwr gitwho 50         # top 50
 zpwr gitwho -a         # show everyone
+zpwr gitwho -r         # force cache rebuild
 ```
 
 ## History Timeline -- zpwr timeline
