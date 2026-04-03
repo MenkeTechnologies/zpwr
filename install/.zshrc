@@ -850,6 +850,9 @@ startupTimeMs=$( printf "%.3f" $(( endTimestamp - startTimestamp )) )
 promptTimeMs=$( printf "%.3f" $(( promptTimestamp - startTimestamp )) )
 zpwrLogDebug "zsh startup took $startupTimeMs seconds"
 
+# persist startup time for sparkline history in zpwr top
+printf '%s %s\n' "$(strftime '%Y-%m-%dT%H:%M:%S' $EPOCHSECONDS)" "$startupTimeMs" >> "$ZPWR_LOCAL/startup_history.log" 2>/dev/null
+
 ZPWR_VARS[startTimestamp]="$startTimestamp"
 ZPWR_VARS[endTimestamp]="$endTimestamp"
 ZPWR_VARS[promptTimestamp]="$promptTimestamp"

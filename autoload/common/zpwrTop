@@ -62,6 +62,11 @@ function zpwrTop(){
     local df dc da dcm dp dfp dpa mc mb key
     local fn nm sz sd mm mod_line
     local -a fsz lp mod_list
+    local -a spark_vals spark_commits spark_chars
+    local spark_line spark_min spark_max spark_avg spark_last frac
+    local -i si sv sn spark_sum srange sidx
+    local startup_log="$ZPWR_LOCAL/startup_history.log"
+    spark_chars=( '▁' '▂' '▃' '▄' '▅' '▆' '▇' '█' )
 
     printf '\033[?1049h'
     tput civis
@@ -255,6 +260,90 @@ function zpwrTop(){
         [[ -n "$ti" ]] && print -r "  ${D}//${N} ${B}tmux${N}           ${ti}${K}"
         print -r "  ${D}//${N} ${B}term${N}           ${TERM}  ${D}(${COLUMNS}x${LINES})${N}${K}"
         print -r "  ${D}//${N} ${B}tty${N}            ${TTY}${K}"
+
+        # ── SPARKLINE: STARTUP HISTORY ────────────────────────
+        spark_vals=()
+        if [[ -f "$startup_log" ]]; then
+            spark_vals=( ${${(f)"$(tail -40 "$startup_log" 2>/dev/null)"}##* } )
+        fi
+        print -r "${K}"
+        print -r "  ${C}── STARTUP HISTORY (last ${#spark_vals}) ────────────────────────────────────────${N}${K}"
+        if (( ${#spark_vals} >= 2 )); then
+            # compute min/max/avg from integer millis to avoid float arithmetic
+            spark_min=999999 spark_max=0 spark_sum=0
+            for sv in "${spark_vals[@]}"; do
+                # convert e.g. "0.047" to integer millis: strip dot, parse
+                si=$(( ${sv//./} ))
+                # handle varying decimal places: normalize to millis
+                if [[ "$sv" == *.* ]]; then
+                    frac="${sv#*.}"
+                    si=$(( ${sv%.*} * 1000 + 10#${(l:3::0:)frac} ))
+                else
+                    si=$(( sv * 1000 ))
+                fi
+                (( si < spark_min )) && spark_min=$si
+                (( si > spark_max )) && spark_max=$si
+                spark_sum=$(( spark_sum + si ))
+            done
+            sn=${#spark_vals}
+            spark_avg=$(( spark_sum / sn ))
+            spark_last=${spark_vals[-1]}
+
+            # build sparkline: map each value to ▁▂▃▄▅▆▇█
+            spark_line=""
+            srange=$(( spark_max - spark_min ))
+            (( srange < 1 )) && srange=1
+            for sv in "${spark_vals[@]}"; do
+                if [[ "$sv" == *.* ]]; then
+                    frac="${sv#*.}"
+                    si=$(( ${sv%.*} * 1000 + 10#${(l:3::0:)frac} ))
+                else
+                    si=$(( sv * 1000 ))
+                fi
+                sidx=$(( (si - spark_min) * 7 / srange + 1 ))
+                (( sidx < 1 )) && sidx=1
+                (( sidx > 8 )) && sidx=8
+                # color: green if fast, yellow if mid, red if slow
+                if (( si < spark_avg )); then
+                    spark_line+="${G}${spark_chars[$sidx]}${N}"
+                elif (( si < spark_avg + srange / 3 )); then
+                    spark_line+="${Y}${spark_chars[$sidx]}${N}"
+                else
+                    spark_line+="${R}${spark_chars[$sidx]}${N}"
+                fi
+            done
+            print -r "  ${D}//${N} ${spark_line}${K}"
+            print -r "  ${D}//${N} ${B}last${N} ${spark_last}s  ${D}//${N} ${B}min${N} ${G}$(printf '%.3f' $(( spark_min / 1000.0 )))s${N}  ${D}//${N} ${B}max${N} ${R}$(printf '%.3f' $(( spark_max / 1000.0 )))s${N}  ${D}//${N} ${B}avg${N} ${C}$(printf '%.3f' $(( spark_avg / 1000.0 )))s${N}${K}"
+        else
+            print -r "  ${D}//${N} ${Y}not enough data yet (need 2+ shell starts)${N}${K}"
+        fi
+
+        # ── SPARKLINE: COMMIT VELOCITY ───────────────────────
+        spark_commits=()
+        if git -C "$ZPWR" rev-parse --git-dir &>/dev/null 2>&1; then
+            spark_commits=( ${(f)"$(git -C "$ZPWR" log --oneline --since='30 days ago' --format='%cd' --date='format:%Y-%m-%d' 2>/dev/null | sort | uniq -c | awk '{print $1}')"} )
+        fi
+        if (( ${#spark_commits} >= 2 )); then
+            print -r "${K}"
+            print -r "  ${C}── COMMIT VELOCITY (30d, ${#spark_commits} days active) ────────────────────────────${N}${K}"
+            spark_min=999999 spark_max=0
+            for sv in "${spark_commits[@]}"; do
+                si=$sv
+                (( si < spark_min )) && spark_min=$si
+                (( si > spark_max )) && spark_max=$si
+            done
+            srange=$(( spark_max - spark_min ))
+            (( srange < 1 )) && srange=1
+            spark_line=""
+            for sv in "${spark_commits[@]}"; do
+                si=$sv
+                sidx=$(( (si - spark_min) * 7 / srange + 1 ))
+                (( sidx < 1 )) && sidx=1
+                (( sidx > 8 )) && sidx=8
+                spark_line+="${C}${spark_chars[$sidx]}${N}"
+            done
+            print -r "  ${D}//${N} ${spark_line}  ${D}(${spark_min}-${spark_max} commits/day)${N}${K}"
+        fi
 
         print -r "${K}"
         print -r "  ${C}── TOP 5 LARGEST FUNCTIONS ────────────────────────────────────────────${N}${K}"
