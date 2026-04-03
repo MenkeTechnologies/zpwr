@@ -81,6 +81,12 @@ jobs:
       - name: Add zunit to PATH
         run: echo "$HOME/.zpwr/.cache/zunit-bin" >> "$GITHUB_PATH"
 
+      - name: Verify zunit
+        run: |
+          test -x "$HOME/.zpwr/.cache/zunit-bin/zunit"
+          command -v zunit
+          zunit --version
+
       - name: Run tests
         run: |
           cd ~/.zpwr
