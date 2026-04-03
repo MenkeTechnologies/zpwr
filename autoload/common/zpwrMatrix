@@ -22,7 +22,7 @@ function zpwrMatrix(){
         print "  ${D}>> ECOSYSTEM RAIN // YOUR SHELL VISUALIZED <<${N}"
         print ""
         print "  Rains zpwr verbs, functions, aliases, env vars, and git repos"
-        print "  down the screen. Color-coded by type. Your shell as a screensaver."
+        print "  down the screen with glitch effects, HUD overlay, and pulse events."
         print ""
         print "  ${B}USAGE:${N} zpwr matrix ${D}[OPTIONS]${N}"
         print ""
@@ -30,10 +30,16 @@ function zpwrMatrix(){
         print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
         print "  ${C}-s, --speed N${N}                                    ${D}// Drop speed 1-9 (default: 3)${N}"
         print ""
-        print "  ${D}── COLORS ───────────────────────────────────────────────────────────${N}"
+        print "  ${D}── RAIN COLORS ──────────────────────────────────────────────────────${N}"
         print "  ${G}green${N}   verbs          ${C}cyan${N}    functions"
         print "  ${Y}yellow${N}  aliases         ${M}magenta${N} env vars"
         print "  ${R}red${N}     git repos"
+        print ""
+        print "  ${D}── FX ───────────────────────────────────────────────────────────────${N}"
+        print "  ${D}HUD overlay with live stats (verbs, aliases, functions, uptime)${N}"
+        print "  ${D}Glitch bursts: random horizontal static lines${N}"
+        print "  ${D}Pulse events: full-width highlight bars with ecosystem facts${N}"
+        print "  ${D}Fade-in intro sequence with zpwr banner${N}"
         print ""
         return 0
     fi
@@ -51,14 +57,14 @@ function zpwrMatrix(){
     (( speed > 9 )) && speed=9
 
     # harvest ecosystem data
-    local -a words colors
+    local -a words wcolors
     local k
 
     # verbs (green)
     if (( ${+ZPWR_VERBS} )); then
         for k in ${(k)ZPWR_VERBS}; do
             words+=("$k")
-            colors+=("32")
+            wcolors+=("32")
         done
     fi
 
@@ -67,29 +73,29 @@ function zpwrMatrix(){
     fns=( ${(k)functions} )
     for k in ${(M)fns:#zpwr*}; do
         words+=("$k")
-        colors+=("36")
+        wcolors+=("36")
     done
 
-    # aliases (yellow) — sample to avoid flooding
+    # aliases (yellow)
     local -i alias_count=0
     for k in ${(k)aliases}; do
         words+=("$k")
-        colors+=("33")
+        wcolors+=("33")
         (( ++alias_count > 200 )) && break
     done
 
-    # env vars (magenta) — ZPWR namespace
+    # env vars (magenta)
     for k in ${(Mk)parameters:#ZPWR_*}; do
         words+=("${k}")
-        colors+=("35")
+        wcolors+=("35")
     done
 
-    # git repos (red) — just basenames
+    # git repos (red)
     if [[ -s "$ZPWR_ALL_GIT_DIRS" ]]; then
         local repo
         while IFS= read -r repo; do
             words+=("${repo:t}")
-            colors+=("31")
+            wcolors+=("31")
         done < <(head -100 "$ZPWR_ALL_GIT_DIRS")
     fi
 
@@ -103,18 +109,38 @@ function zpwrMatrix(){
     cols=$COLUMNS
     lines=$LINES
 
+    # ecosystem stats for HUD and pulses
+    local -i n_verbs=0 n_aliases=0 n_funcs=0 n_params=0 n_repos=0
+    (( ${+ZPWR_VERBS} )) && n_verbs=${#ZPWR_VERBS}
+    n_aliases=${#aliases}
+    n_funcs=${#functions}
+    n_params=${#parameters}
+    [[ -s "$ZPWR_ALL_GIT_DIRS" ]] && n_repos=$(wc -l < "$ZPWR_ALL_GIT_DIRS")
+
+    local -a pulse_msgs
+    pulse_msgs=(
+        "// ${n_verbs} VERBS LOADED // YOUR NEURAL COMMAND VOCABULARY //"
+        "// ${n_aliases} ALIASES ACTIVE // SHORTHAND FOR THE INITIATED //"
+        "// ${n_funcs} FUNCTIONS IN MEMORY // THE AUTOLOAD ARMY //"
+        "// ${n_params} PARAMETERS // DIALS AND SWITCHES //"
+        "// ${n_repos} GIT REPOS CACHED // THE NETWORK //"
+        "// ZPWR ${ZPWR_VERSION:-dev} // IF YOUR TERMINAL ISN'T GLOWING YOU'RE NOT RUNNING ZPWR //"
+        "// MENKETECHNOLOGIES // FORGED IN THE DIGITAL UNDERGROUND //"
+        "// ${ZPWR_OS_TYPE:-unknown} // ${COLUMNS}x${LINES} // PID $$ //"
+    )
+    local -i n_pulses=${#pulse_msgs}
+
     # column state
     local -i ncols=$(( cols / 2 ))
     (( ncols > 80 )) && ncols=80
-    local -a col_y col_word col_color col_pos col_delay
+    local -a col_y col_word col_color col_delay
     local -i ci wi
 
     for (( ci=1; ci<=ncols; ci++ )); do
         wi=$(( RANDOM % nwords + 1 ))
         col_y[$ci]=$(( -(RANDOM % lines) ))
         col_word[$ci]="${words[$wi]}"
-        col_color[$ci]="${colors[$wi]}"
-        col_pos[$ci]=0
+        col_color[$ci]="${wcolors[$wi]}"
         col_delay[$ci]=$(( RANDOM % 15 ))
     done
 
@@ -123,10 +149,62 @@ function zpwrMatrix(){
     trap 'printf "\033[?25h\033[0m\033[2J\033[H"; return 0' INT QUIT
 
     local -i frame=0 x y word_len char_y wi_char erase_y
+    local -i glitch_cooldown=0 pulse_cooldown=30
     local ch word wcolor
 
+    # ── INTRO SEQUENCE ───────────────────────────────────────
+    local -i intro_y=$(( lines / 2 - 4 ))
+    local -i intro_x=$(( (cols - 52) / 2 ))
+    (( intro_x < 1 )) && intro_x=1
+
+    local -a banner
+    banner=(
+        '███████╗██████╗ ██╗    ██╗██████╗'
+        '╚══███╔╝██╔══██╗██║    ██║██╔══██╗'
+        '  ███╔╝ ██████╔╝██║ █╗ ██║██████╔╝'
+        ' ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗'
+        '███████╗██║     ╚███╔███╔╝██║  ██║'
+        '╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝  ╚═╝'
+    )
+
+    # fade in: dim -> normal -> bright
+    local -a fade_codes
+    fade_codes=( '2;32' '0;32' '0;36' '1;36' '1;37' )
+    local -i fi_idx
+    local bline
+    for fi_idx in {1..${#fade_codes}}; do
+        local -i bi=0
+        for bline in "${banner[@]}"; do
+            printf '\033[%d;%dH\033[%sm%s' $(( intro_y + bi )) $intro_x "${fade_codes[$fi_idx]}" "$bline"
+            (( bi++ ))
+        done
+        printf '\033[%d;%dH\033[%sm%s' $(( intro_y + bi + 1 )) $(( intro_x + 2 )) "${fade_codes[$fi_idx]}" ">> INITIALIZING ECOSYSTEM RAIN <<"
+        sleep 0.15
+    done
+    sleep 0.6
+
+    # glitch the banner out
+    local -i gi
+    for gi in {1..6}; do
+        local -i gy=$(( intro_y + RANDOM % 8 ))
+        local -i gw=$(( RANDOM % 30 + 10 ))
+        printf '\033[%d;%dH' $gy $(( intro_x - 2 ))
+        local -i gx
+        for (( gx=0; gx<gw; gx++ )); do
+            if (( RANDOM % 3 == 0 )); then
+                printf '\033[1;3%dm%s' $(( RANDOM % 7 + 1 )) "${${(s::):-░▒▓█▀▄╬╪}[$((RANDOM % 8 + 1))]}"
+            else
+                printf ' '
+            fi
+        done
+        sleep 0.06
+    done
+
+    printf '\033[2J'
+    sleep 0.2
+
+    # ── MAIN LOOP ────────────────────────────────────────────
     while true; do
-        # check for quit
         read -t 0.001 -k 1 ch 2>/dev/null
         if [[ "$ch" == "q" || "$ch" == "Q" ]]; then
             printf '\033[?25h\033[0m\033[2J\033[H'
@@ -135,6 +213,7 @@ function zpwrMatrix(){
 
         (( frame++ ))
 
+        # ── RAIN ─────────────────────────────────────────────
         for (( ci=1; ci<=ncols; ci++ )); do
             if (( col_delay[ci] > 0 )); then
                 (( col_delay[ci]-- ))
@@ -149,46 +228,105 @@ function zpwrMatrix(){
             x=$(( (ci - 1) * (cols / ncols) + 1 ))
             y=${col_y[$ci]}
 
-            # draw characters of the word vertically, top to bottom
-            # y is the bottom (head), first char at y - word_len + 1
             for (( wi_char=0; wi_char<word_len; wi_char++ )); do
                 char_y=$(( y - word_len + 1 + wi_char ))
 
-                if (( char_y >= 1 && char_y <= lines && x + 1 <= cols )); then
+                if (( char_y >= 1 && char_y <= lines - 2 && x + 1 <= cols )); then
                     if (( wi_char == word_len - 1 )); then
-                        # head (bottom): bright white
                         printf '\033[%d;%dH\033[1;37m%s' $char_y $x "${word[$((wi_char+1))]}"
                     elif (( wi_char >= word_len - 3 )); then
-                        # near head: bright color
                         printf '\033[%d;%dH\033[1;%sm%s' $char_y $x "$wcolor" "${word[$((wi_char+1))]}"
                     elif (( wi_char >= word_len / 2 )); then
-                        # body: normal color
                         printf '\033[%d;%dH\033[0;%sm%s' $char_y $x "$wcolor" "${word[$((wi_char+1))]}"
                     else
-                        # tail (top): dim
                         printf '\033[%d;%dH\033[2;%sm%s' $char_y $x "$wcolor" "${word[$((wi_char+1))]}"
                     fi
                 fi
             done
 
-            # erase the topmost character as it scrolls
             erase_y=$(( y - word_len ))
-            if (( erase_y >= 1 && erase_y <= lines )); then
+            if (( erase_y >= 1 && erase_y <= lines - 2 )); then
                 printf '\033[%d;%dH ' $erase_y $x
             fi
 
-            # advance
             (( col_y[ci]++ ))
 
-            # reset when top of word is off screen
             if (( y - word_len > lines )); then
                 wi=$(( RANDOM % nwords + 1 ))
                 col_y[$ci]=$(( -(RANDOM % (lines / 2)) ))
                 col_word[$ci]="${words[$wi]}"
-                col_color[$ci]="${colors[$wi]}"
+                col_color[$ci]="${wcolors[$wi]}"
                 col_delay[$ci]=$(( RANDOM % 20 ))
             fi
         done
+
+        # ── GLITCH BURST ─────────────────────────────────────
+        if (( glitch_cooldown > 0 )); then
+            (( glitch_cooldown-- ))
+        elif (( RANDOM % 80 == 0 )); then
+            local -i gy gx gw
+            gy=$(( RANDOM % (lines - 3) + 1 ))
+            gw=$(( RANDOM % (cols / 2) + 10 ))
+            gx=$(( RANDOM % (cols - gw) + 1 ))
+            printf '\033[%d;%dH' $gy $gx
+            for (( gi=0; gi<gw; gi++ )); do
+                printf '\033[1;3%dm%s' $(( RANDOM % 7 + 1 )) "${${(s::):-░▒▓█▀▄╬╪═║╔╗╚╝}[$((RANDOM % 15 + 1))]}"
+            done
+            glitch_cooldown=20
+            # clear glitch after a few frames
+            sleep 0.04
+            printf '\033[%d;%dH%*s' $gy $gx $gw ''
+        fi
+
+        # ── PULSE EVENT ──────────────────────────────────────
+        if (( pulse_cooldown > 0 )); then
+            (( pulse_cooldown-- ))
+        elif (( RANDOM % 120 == 0 )); then
+            local pmsg="${pulse_msgs[$((RANDOM % n_pulses + 1))]}"
+            local -i py=$(( RANDOM % (lines - 4) + 2 ))
+            local -i px=$(( (cols - ${#pmsg}) / 2 ))
+            (( px < 1 )) && px=1
+
+            # flash: bright bar
+            printf '\033[%d;1H\033[7;36m%*s\033[0m' $py $cols ''
+            printf '\033[%d;%dH\033[1;37;46m %s \033[0m' $py $px "$pmsg"
+            sleep 0.3
+            # fade
+            printf '\033[%d;%dH\033[0;36m %s \033[0m' $py $px "$pmsg"
+            sleep 0.15
+            # clear
+            printf '\033[%d;1H%*s' $py $cols ''
+
+            pulse_cooldown=60
+        fi
+
+        # ── HUD OVERLAY (bottom 2 lines) ─────────────────────
+        if (( frame % 10 == 0 )); then
+            local -i up_s=$SECONDS
+            local -i up_m=$(( up_s / 60 )) up_h=$(( up_s / 3600 ))
+            up_s=$(( up_s % 60 ))
+            up_m=$(( up_m % 60 ))
+
+            # bottom bar
+            printf '\033[%d;1H\033[0;32;40m' $(( lines - 1 ))
+            printf ' ZPWR MATRIX'
+            printf '  \033[2;32m//\033[0;32;40m  %d verbs' $n_verbs
+            printf '  \033[2;32m//\033[0;32;40m  %d aliases' $n_aliases
+            printf '  \033[2;32m//\033[0;32;40m  %d funcs' $n_funcs
+            printf '  \033[2;32m//\033[0;32;40m  %d repos' $n_repos
+            printf '%*s' $(( cols - 70 )) ''
+            printf '\033[0m'
+
+            # status line
+            printf '\033[%d;1H\033[2;36;40m' $lines
+            printf ' frame %d' $frame
+            printf '  //  uptime %02d:%02d:%02d' $up_h $up_m $up_s
+            printf '  //  %dx%d' $cols $lines
+            printf '  //  pool %d words' $nwords
+            printf '  //  [q] quit'
+            printf '%*s' $(( cols - 72 )) ''
+            printf '\033[0m'
+        fi
 
         sleep $(( 0.08 / speed ))
     done
