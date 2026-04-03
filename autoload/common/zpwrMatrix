@@ -186,6 +186,231 @@ function zpwrMatrix(){
         return 0
     }
 
+    # screen tear: offset a band of rows horizontally
+    _mx_tear() {
+        local -i ty=$(( RANDOM % (lines - 6) + 2 ))
+        local -i th=$(( RANDOM % 4 + 2 ))
+        local -i tshift=$(( RANDOM % 12 + 3 ))
+        local -i ti
+        for (( ti=0; ti<th; ti++ )); do
+            (( ty + ti > lines )) && break
+            # read line, shift it
+            printf '\033[%d;%dH\033[1;3%dm' $(( ty + ti )) $tshift $(( RANDOM % 6 + 1 ))
+            local -i tw
+            for (( tw=0; tw<cols-tshift; tw++ )); do
+                printf '%s' "${${(s::):-░▒▓█╬╪}[$((RANDOM % 6 + 1))]}"
+            done
+        done
+        printf '\033[0m'
+        sleep 0.06
+        for (( ti=0; ti<th; ti++ )); do
+            (( ty + ti > lines )) && break
+            printf '\033[%d;1H%*s' $(( ty + ti )) $cols ''
+        done
+    }
+
+    # VHS tracking distortion
+    _mx_vhs() {
+        local -i vi
+        for vi in {1..8}; do
+            local -i vy=$(( RANDOM % lines + 1 ))
+            local -i vshift=$(( RANDOM % 6 - 3 ))
+            local -i vw=$(( cols / 2 + RANDOM % (cols / 2) ))
+            printf '\033[%d;%dH' $vy $(( vshift > 0 ? vshift : 1 ))
+            local -i vx
+            for (( vx=0; vx<vw; vx++ )); do
+                if (( RANDOM % 4 == 0 )); then
+                    printf '\033[7;3%dm ' $(( RANDOM % 7 + 1 ))
+                else
+                    printf '\033[2;32m%s' "${${(s::):-─═~░}[$((RANDOM % 4 + 1))]}"
+                fi
+            done
+            printf '\033[0m'
+            sleep 0.02
+        done
+        sleep 0.08
+        printf '\033[2J'
+    }
+
+    # pixel corruption: random blocks of garbage spreading
+    _mx_corrupt() {
+        local -i cx cy cw ch ci cj
+        for ci in {1..15}; do
+            cx=$(( RANDOM % (cols - 10) + 1 ))
+            cy=$(( RANDOM % (lines - 4) + 1 ))
+            cw=$(( RANDOM % 8 + 2 ))
+            ch=$(( RANDOM % 3 + 1 ))
+            for (( cj=0; cj<ch; cj++ )); do
+                printf '\033[%d;%dH' $(( cy + cj )) $cx
+                local -i ck
+                for (( ck=0; ck<cw; ck++ )); do
+                    printf '\033[%d;3%dm%s' $(( RANDOM % 2 )) $(( RANDOM % 7 + 1 )) "${${(s::):-█▓▒░╳╬▪▫●◆}[$((RANDOM % 10 + 1))]}"
+                done
+            done
+            sleep 0.015
+        done
+        printf '\033[0m'
+        sleep 0.1
+        printf '\033[2J'
+    }
+
+    # screen shake
+    _mx_shake() {
+        local -i si
+        for si in {1..6}; do
+            printf '\033[%d;%dH' $(( RANDOM % 2 )) $(( RANDOM % 3 ))
+            sleep 0.03
+        done
+        printf '\033[0;0H'
+    }
+
+    # fake progress bar with glitches
+    _mx_progress() {
+        local label="$1" color="${2:-1;36}"
+        local -i pw=$(( cols - 20 )) pi pct
+        local -i py row
+        printf '\n'
+        printf '  \033[%sm%s\033[0m\n' "$color" "$label"
+        printf '  \033[2;32m[\033[0m'
+        local bar_start=$COLUMNS
+        for (( pi=0; pi<pw; pi++ )); do
+            pct=$(( pi * 100 / pw ))
+            # occasional glitch
+            if (( RANDOM % 30 == 0 )); then
+                printf '\033[1;31m!\033[0m'
+                sleep 0.08
+                printf '\b\033[1;36m#\033[0m'
+            else
+                printf '\033[%sm#\033[0m' "$color"
+            fi
+            # speed varies
+            if (( RANDOM % 10 == 0 )); then
+                sleep 0.04
+            else
+                sleep 0.005
+            fi
+            read -t 0.001 -k 1 ch 2>/dev/null
+            [[ "$ch" == "q" || "$ch" == "Q" ]] && { printf '\033[?25h\033[0m\033[2J\033[H'; return 1; }
+        done
+        printf '\033[2;32m]\033[0m \033[1;32m%d%%\033[0m\n' 100
+        return 0
+    }
+
+    # fake hack interlude: ssh session
+    _mx_hack_ssh() {
+        printf '\033[2J\033[H\n'
+        _mx_type "  \$ ssh -p 443 root@neon.menketechnologies.io" "1;36" 0.04 || return 1
+        printf '\n'
+        sleep 0.5
+        _mx_type "  Connecting to 10.13.37.42..." "2;32" 0.02 || return 1
+        printf '\n'
+        sleep 0.3
+        _mx_tear
+        _mx_type "  Warning: Remote host identification has changed." "1;33" 0.02 || return 1
+        printf '\n'
+        _mx_type "  Someone could be eavesdropping on you right now." "1;31" 0.02 || return 1
+        printf '\n'
+        sleep 0.3
+        _mx_type "  Proceeding anyway." "0;32" 0.03 || return 1
+        printf '\n\n'
+        sleep 0.2
+        _mx_type "  root@neon:~# " "1;31" 0.04 || return 1
+        _mx_type "cat /etc/zpwr/manifest" "0;32" 0.05 || return 1
+        printf '\n'
+        sleep 0.3
+        local -a manifest
+        manifest=(
+            "  ZPWR_VERSION=${ZPWR_VERSION:-dev}"
+            "  ZPWR_VERBS=${n_verbs}"
+            "  ZPWR_ALIASES=${n_aliases}"
+            "  ZPWR_FUNCTIONS=${n_funcs}"
+            "  ZPWR_REPOS=${n_repos}"
+            '  ZPWR_STATUS=ARMED'
+            '  ZPWR_SIGNAL=████████░░'
+        )
+        for line in "${manifest[@]}"; do
+            if [[ "$line" == *"ARMED"* ]]; then
+                _mx_type "$line" "1;31" 0.015 || return 1
+            elif [[ "$line" == *"████"* ]]; then
+                _mx_type "$line" "1;32" 0.015 || return 1
+            else
+                _mx_type "$line" "0;36" 0.015 || return 1
+            fi
+            printf '\n'
+        done
+        sleep 0.3
+        _mx_type "  root@neon:~# " "1;31" 0.04 || return 1
+        _mx_type "exit" "0;32" 0.08 || return 1
+        printf '\n'
+        _mx_type "  Connection closed." "2;32" 0.02 || return 1
+        printf '\n'
+        _mx_pause 1 || return 1
+        return 0
+    }
+
+    # fake decrypt sequence
+    _mx_decrypt() {
+        printf '\033[2J\033[H\n'
+        _mx_type "  INTERCEPTED TRANSMISSION" "1;33" 0.04 || return 1
+        printf '\n'
+        _mx_type "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;33" 0.005 || return 1
+        printf '\n\n'
+        # show encrypted gibberish
+        local -i di
+        for di in {1..4}; do
+            local -i dj giblen=$(( RANDOM % 30 + 30 ))
+            printf '  '
+            for (( dj=0; dj<giblen; dj++ )); do
+                printf '\033[2;31m%s' "${${(s::):-╬╪═║╔╗╚╝░▒▓█@#$%^&}[$((RANDOM % 17 + 1))]}"
+            done
+            printf '\033[0m\n'
+            sleep 0.05
+        done
+        printf '\n'
+        _mx_progress "DECRYPTING..." "1;33" || return 1
+        sleep 0.3
+        _mx_shake
+        printf '\n'
+        local -a decrypted
+        decrypted=(
+            '  > CLEARTEXT FOLLOWS'
+            '  > The command line is not a relic.'
+            '  > It is the cockpit.'
+            "  > ${n_verbs} weapons loaded. Awaiting operator."
+            '  > END TRANSMISSION'
+        )
+        for line in "${decrypted[@]}"; do
+            if [[ "$line" == *"CLEARTEXT"* || "$line" == *"END"* ]]; then
+                _mx_type "$line" "1;33" 0.03 || return 1
+            elif [[ "$line" == *"weapons"* ]]; then
+                _mx_type "$line" "1;35" 0.03 || return 1
+            else
+                _mx_type "$line" "0;32" 0.025 || return 1
+            fi
+            printf '\n'
+            sleep 0.1
+        done
+        _mx_pause 1 || return 1
+        return 0
+    }
+
+    # fake download sequence
+    _mx_download() {
+        printf '\033[2J\033[H\n'
+        _mx_type "  root@neon:~# wget -q zpwr.io/payload.tar.gz.enc" "1;36" 0.04 || return 1
+        printf '\n'
+        sleep 0.3
+        _mx_progress "DOWNLOADING payload.tar.gz.enc" "0;36" || return 1
+        _mx_tear
+        _mx_progress "EXTRACTING 509 repositories..." "0;35" || return 1
+        _mx_progress "INDEXING ${n_funcs} functions..." "0;32" || return 1
+        printf '\n'
+        _mx_type "  [COMPLETE] Ecosystem loaded." "1;32" 0.03 || return 1
+        printf '\n'
+        _mx_pause 1 || return 1
+        return 0
+    }
+
     # ── STORY ────────────────────────────────────────────────
 
     if (( skip_story == 0 )); then
@@ -244,6 +469,11 @@ function zpwrMatrix(){
     done
     _mx_pause 2 || return 0
 
+    # INTERLUDE: intercepted transmission
+    _mx_vhs
+    _mx_decrypt || return 0
+    _mx_corrupt
+
     _mx_transition
 
     # ── ACT II: THE DISCOVERY ────────────────────────────────
@@ -276,16 +506,41 @@ function zpwrMatrix(){
         elif [[ "$line" == *"466"* || "$line" == *"aliases"* || "$line" == *"repos"* ]]; then
             _mx_type "$line" "1;35" 0.02 || return 0
         elif [[ "$line" == *"weapons"* ]]; then
+            printf '\a'
             _mx_type "$line" "1;31" 0.04 || return 0
+            _mx_shake
         else
             _mx_type "$line" "0;32" 0.02 || return 0
         fi
         printf '\n'
         sleep 0.15
     done
+
+    # ASCII art: loaded
+    printf '\n'
+    local -a weapon_art
+    weapon_art=(
+        '          ╔══════════════════════════════════╗'
+        '          ║  ▓▓▓ ECOSYSTEM ARMED ▓▓▓        ║'
+        '          ║  ┌──┐  ┌──┐  ┌──┐  ┌──┐        ║'
+        '          ║  │▓▓│  │▓▓│  │▓▓│  │▓▓│        ║'
+        '          ║  │VB│  │AL│  │FN│  │GR│        ║'
+        '          ║  └──┘  └──┘  └──┘  └──┘        ║'
+        '          ║  VERB  ALIAS FUNC  REPO         ║'
+        '          ╚══════════════════════════════════╝'
+    )
+    for line in "${weapon_art[@]}"; do
+        _mx_center "$line" "1;36"
+        printf '\n'
+        sleep 0.04
+    done
     _mx_pause 2 || return 0
 
     _mx_transition
+
+    # INTERLUDE: hack into the system
+    _mx_hack_ssh || return 0
+    _mx_tear
     _mx_rainburst 40 || return 0
     printf '\033[2J'
 
@@ -321,6 +576,9 @@ function zpwrMatrix(){
             _mx_type "$line" "1;36" 0.02 || return 0
         elif [[ "$line" == *"inside"* ]]; then
             _mx_type "$line" "1;37" 0.04 || return 0
+            printf '\a'
+            _mx_shake
+            _mx_tear
         else
             _mx_type "$line" "0;32" 0.025 || return 0
         fi
@@ -330,10 +588,36 @@ function zpwrMatrix(){
     _mx_pause 2 || return 0
 
     _mx_transition
+
+    # INTERLUDE: payload download
+    _mx_download || return 0
+    _mx_shake
+    _mx_vhs
     _mx_static || return 0
 
-    # ── ACT IV: THE CHOICE ───────────────────────────────────
-    printf '\033[H\n\n'
+    # ── ACT IV: THE CHOICE ───────────────��───────────────────
+    printf '\033[H\n'
+
+    # skull ASCII art
+    local -a skull
+    skull=(
+        '            ░░░░░░░░░░░░░░░░░░'
+        '          ░░░░▓▓▓▓▓▓▓▓▓▓▓▓░░░░'
+        '        ░░▓▓▓▓▓▓▓▓▓��▓▓▓▓▓▓▓▓░░'
+        '       ░▓▓▓▓░░░▓▓▓▓▓▓░░░▓▓▓▓▓░'
+        '       ░▓▓▓▓░░░▓▓▓▓▓▓░░░▓▓▓▓▓░'
+        '       ░▓▓▓▓▓▓▓▓░░░░▓▓▓���▓▓▓▓▓░'
+        '        ░░▓▓▓░▓▓░▓▓░▓▓░▓▓▓░░'
+        '          ░░░▓▓▓▓▓▓▓▓▓▓▓░░░'
+        '             ░░░░░░░░░░░'
+    )
+    for line in "${skull[@]}"; do
+        _mx_center "$line" "1;31"
+        printf '\n'
+        sleep 0.03
+    done
+
+    printf '\n'
     _mx_figlet "HACKED" "speed" "1;31"
     printf '\n'
     _mx_center "ACT IV: THE CHOICE" "1;31"
@@ -361,11 +645,30 @@ function zpwrMatrix(){
     )
     for line in "${act4[@]}"; do
         if [[ "$line" == *'$ zpwr'* ]]; then
-            _mx_type "$line" "1;36" 0.06 || return 0
+            _mx_type "$line" "1;36" 0.08 || return 0
+            sleep 0.5
+            _mx_corrupt
+            _mx_vhs
+            printf '\033[2J\033[H\n'
+            # re-render from this point
+            _mx_type "  The screen dissolved into rain." "0;32" 0.025 || return 0
+            printf '\n'
+            _mx_type "  Her verbs. Her aliases. Her functions." "0;32" 0.025 || return 0
+            printf '\n'
+            _mx_type "  All of them falling, glowing, alive." "0;32" 0.025 || return 0
+            printf '\n\n'
+            _mx_rainburst 50 || return 0
+            _mx_type "  This was not a screensaver." "0;32" 0.025 || return 0
+            printf '\n'
+            _mx_type "  This was a mirror." "1;37" 0.05 || return 0
+            printf '\a\n'
+            _mx_shake
+            _mx_pause 2 || return 0
+            break
         elif [[ "$line" == *"smiled"* ]]; then
             _mx_type "$line" "1;33" 0.05 || return 0
         elif [[ "$line" == *"mirror"* ]]; then
-            _mx_type "$line" "1;37" 0.05 || return 0
+            continue
         else
             _mx_type "$line" "0;32" 0.025 || return 0
         fi
@@ -377,7 +680,28 @@ function zpwrMatrix(){
     _mx_transition
 
     # ── EPILOGUE ─────────────────────────────────────────────
-    printf '\033[H\n\n\n\n'
+    printf '\033[H\n\n'
+
+    # circuit board art
+    local -a circuit
+    circuit=(
+        '     ┌──────────┐      ┌──────────┐      ┌──────────┐'
+        '     │ ▓▓ VERB ▓▓├──────┤ ▓▓ FUNC ▓▓├──────┤ ▓▓ REPO ▓▓│'
+        '     └─────┬────┘      └─────┬────┘      └─────┬────┘'
+        '           │                 │                  │'
+        '     ══════╪═════════════════╪══════════════════╪══════'
+        '           │                 │                  │'
+        '     ┌─────┴────┐      ┌────┴─────┐      ┌────┴─────┐'
+        '     │ ▓▓ ALIAS ▓├──────┤ ▓▓  ZSH ▓▓├──────┤ ▓▓ TMUX ▓▓│'
+        '     └──────────┘      └──────────┘      └──────────┘'
+    )
+    for line in "${circuit[@]}"; do
+        _mx_center "$line" "0;36"
+        printf '\n'
+        sleep 0.05
+    done
+
+    printf '\n'
     _mx_figlet "ZPWR" "doom" "1;36"
     printf '\n'
     _mx_center "If your terminal isn't glowing," "0;36"
