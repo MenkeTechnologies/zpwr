@@ -56,6 +56,8 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Listening Ports](#listening-ports----zpwr-ports) -- zpwr ports
 - [Stale File Finder](#stale-file-finder----zpwr-stale) -- zpwr stale
 - [Path Audit](#path-audit----zpwr-pathaudit) -- zpwr pathaudit
+- [Git Who](#git-who----zpwr-gitwho) -- zpwr gitwho
+- [History Timeline](#history-timeline----zpwr-timeline) -- zpwr timeline
 - [Alias Analytics](#alias-analytics----zpwr-aliasrank) -- zpwr aliasrank
 - [Function Rank](#function-rank----zpwr-funcrank) -- zpwr funcrank
 - [File Watcher](#file-watcher----zpwr-watch) -- zpwr watch
@@ -116,7 +118,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 466+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 468+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 16.8k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
@@ -899,6 +901,26 @@ zpwr stale -f          # delete all stale files
 zpwr pathaudit -h      # cyberpunk help
 zpwr pathaudit         # audit all three arrays
 zpwr pathaudit -v      # verbose: show all entries
+```
+
+## Git Who -- zpwr gitwho
+`zpwr gitwho [N]` aggregates `git shortlog -sn` across all cached git repos (`$ZPWR_ALL_GIT_DIRS`).  Shows each contributor's total commits and number of repos, ranked by commit count with bar charts.  Requires the git repo cache — run `zpwr regengitrepocache` first.
+
+```sh
+zpwr gitwho -h         # cyberpunk help
+zpwr gitwho            # top 20 authors across all repos
+zpwr gitwho 50         # top 50
+zpwr gitwho -a         # show everyone
+```
+
+## History Timeline -- zpwr timeline
+`zpwr timeline [DATE]` renders a visual timeline of shell history grouped by hour.  Commands are color-coded by type (git=green, editors=cyan, zpwr=magenta, destructive=red, navigation=yellow).  Directory changes are highlighted inline.  Includes an activity heatmap showing commands-per-hour with bars.
+
+```sh
+zpwr timeline -h              # cyberpunk help
+zpwr timeline                 # today's activity
+zpwr timeline 2026-04-01      # specific date
+zpwr timeline -n 500          # last 500 history entries
 ```
 
 ## Alias Analytics -- zpwr aliasrank
