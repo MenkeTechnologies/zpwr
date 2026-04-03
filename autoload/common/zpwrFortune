@@ -1,0 +1,227 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFortune(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗ ██████╗ ██████╗ ████████╗██╗   ██╗███╗   ██╗███████╗${N}"
+        print " ${C}██╔════╝██╔═══██╗██╔══██╗╚══██╔══╝██║   ██║████╗  ██║██╔════╝${N}"
+        print " ${M}█████╗  ██║   ██║██████╔╝   ██║   ██║   ██║██╔██╗ ██║█████╗${N}"
+        print " ${M}██╔══╝  ██║   ██║██╔══██╗   ██║   ██║   ██║██║╚██╗██║██╔══╝${N}"
+        print " ${C}██║     ╚██████╔╝██║  ██║   ██║   ╚██████╔╝██║ ╚████║███████╗${N}"
+        print " ${C}╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═══╝╚══════╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}FORTUNE${N}"
+        _bb
+        print "  ${D}>> CYBERPUNK FORTUNE COOKIES // TERMINAL WISDOM <<${N}"
+        print ""
+        print "  Hacker quotes and terminal wisdom rendered in random figlet"
+        print "  fonts with neon colors."
+        print ""
+        print "  ${B}USAGE:${N} zpwr fortune ${D}[OPTIONS]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-p, --plain${N}                                      ${D}// No figlet, just text${N}"
+        print "  ${C}-f, --font FONT${N}                                  ${D}// Force specific figlet font${N}"
+        print ""
+        return 0
+    fi
+
+    local plain=false font=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -p|--plain) plain=true; shift ;;
+            -f|--font) font="$2"; shift 2 ;;
+            *) shift ;;
+        esac
+    done
+
+    # curated fortune database
+    local -a fortunes authors
+    fortunes=(
+        'The command line is not a relic. It is the cockpit.'
+        'If your terminal is not glowing you are not running ZPWR.'
+        'There is no spoon. Only ZPWR_VERBS.'
+        'The GUI is a cage. The terminal is the sky.'
+        'Talk is cheap. Show me the code.'
+        'First, solve the problem. Then, write the code.'
+        'Any sufficiently advanced .zshrc is indistinguishable from magic.'
+        'Unix is user-friendly. It is just selective about who its friends are.'
+        'In a world without walls who needs Windows.'
+        'There are only two hard things: cache invalidation and naming things.'
+        'Weeks of coding can save you hours of planning.'
+        'The best code is no code at all.'
+        'Make it work. Make it right. Make it fast.'
+        'Simplicity is the ultimate sophistication.'
+        'A ship in harbor is safe but that is not what ships are built for.'
+        'The only way to go fast is to go well.'
+        'Perfection is achieved when there is nothing left to take away.'
+        'Programs must be written for people to read.'
+        'Controlling complexity is the essence of computer programming.'
+        'The most dangerous phrase is: We have always done it this way.'
+        'chmod 777 is not a security policy.'
+        'There are 10 types of people. Those who understand binary and those who do not.'
+        'It works on my machine. Then we will ship your machine.'
+        'A good programmer looks both ways before crossing a one-way street.'
+        'Deleted code is debugged code.'
+        'The best error message is the one that never shows up.'
+        'Code never lies. Comments sometimes do.'
+        'sudo make me a sandwich.'
+        'Real programmers count from 0.'
+        'I do not always test my code but when I do I do it in production.'
+        'rm -rf / is a state of mind.'
+        'There is no place like 127.0.0.1.'
+        'Home is where the .zshrc is.'
+        'The terminal remembers what the GUI forgets.'
+        'Your .zshrc is your autobiography in shell.'
+        'Aliases are love letters to your future self.'
+        'A function a day keeps the repetition away.'
+        'The best dotfiles are the ones you never have to think about.'
+        'Behind every great developer is a great .vimrc.'
+        'May your startup time be low and your completion count be high.'
+    )
+    authors=(
+        '— MenkeTechnologies'
+        '— ZPWR'
+        '— The Matrix'
+        '— The Terminal Underground'
+        '— Linus Torvalds'
+        '— Kent Beck'
+        '— Arthur C. Clarke, adapted'
+        '— Dennis Ritchie'
+        '— anonymous'
+        '— Phil Karlton'
+        '— anonymous'
+        '— Jeff Atwood'
+        '— Kent Beck'
+        '— Leonardo da Vinci'
+        '— John A. Shedd'
+        '— Robert C. Martin'
+        '— Antoine de Saint-Exupéry'
+        '— Abelson & Sussman'
+        '— Brian Kernighan'
+        '— Grace Hopper'
+        '— anonymous'
+        '— anonymous'
+        '— anonymous'
+        '— anonymous'
+        '— Jeff Sickel'
+        '— Thomas Fuchs'
+        '— Ron Jeffries'
+        '— xkcd'
+        '— Dijkstra'
+        '— anonymous'
+        '— anonymous'
+        '— anonymous'
+        '— ZPWR'
+        '— The Terminal Underground'
+        '— MenkeTechnologies'
+        '— MenkeTechnologies'
+        '— MenkeTechnologies'
+        '— MenkeTechnologies'
+        '— anonymous'
+        '— ZPWR'
+    )
+
+    local -i n_fortunes=${#fortunes}
+    local -i idx=$(( RANDOM % n_fortunes + 1 ))
+    local quote="${fortunes[$idx]}"
+    local author="${authors[$idx]}"
+
+    # pick a random figlet font
+    local -a cyber_fonts
+    cyber_fonts=( cyberlarge cybermedium doom slant speed banner standard )
+
+    if [[ -z "$font" ]]; then
+        font="${cyber_fonts[$((RANDOM % ${#cyber_fonts} + 1))]}"
+    fi
+
+    # pick a random color
+    local -a neon_colors
+    neon_colors=( '1;36' '1;32' '1;35' '1;33' '0;36' '1;37' )
+    local qcolor="${neon_colors[$((RANDOM % ${#neon_colors} + 1))]}"
+
+    printf "\n"
+
+    if [[ "$plain" == true ]] || ! (( $+commands[figlet] )); then
+        # plain text mode
+        _bt
+        _bx ""
+        # word wrap the quote
+        local -a words_arr
+        words_arr=( ${(s: :)quote} )
+        local line_buf="" word
+        for word in "${words_arr[@]}"; do
+            if (( ${#line_buf} + ${#word} + 1 > _bw - 6 )); then
+                _bx "  \033[${qcolor}m${line_buf}\033[0m"
+                line_buf="$word"
+            else
+                if [[ -n "$line_buf" ]]; then
+                    line_buf+=" $word"
+                else
+                    line_buf="$word"
+                fi
+            fi
+        done
+        [[ -n "$line_buf" ]] && _bx "  \033[${qcolor}m${line_buf}\033[0m"
+        _bx ""
+        _bx "  \033[2;35m${author}\033[0m"
+        _bx ""
+        _bb
+    else
+        # figlet mode — render first meaningful word or short phrase
+        local fig_text
+        # pick a short keyword from the quote for figlet
+        local -a quote_words
+        quote_words=( ${(s: :)quote} )
+        # find the longest word <= 10 chars for figlet, or first word
+        fig_text="${quote_words[1]}"
+        local qw
+        for qw in "${quote_words[@]}"; do
+            if (( ${#qw} > ${#fig_text} && ${#qw} <= 10 )); then
+                fig_text="$qw"
+            fi
+        done
+        # strip punctuation
+        fig_text="${fig_text//[.,!?:;\"\']/}"
+
+        local fig_out
+        fig_out=$(figlet -f "$font" "$fig_text" 2>/dev/null)
+
+        if [[ -n "$fig_out" ]]; then
+            local fline
+            local -i fx
+            while IFS= read -r fline; do
+                fx=$(( (COLUMNS - ${#fline}) / 2 ))
+                (( fx < 1 )) && fx=1
+                printf '\033[%dG\033[%sm%s\033[0m\n' $fx "$qcolor" "$fline"
+            done <<< "$fig_out"
+        fi
+
+        printf "\n"
+        # print full quote
+        local -i qx=$(( (COLUMNS - ${#quote} - 4) / 2 ))
+        (( qx < 2 )) && qx=2
+        printf '%*s\033[0;37m"%s"\033[0m\n' $qx '' "$quote"
+        printf '%*s\033[2;35m%s\033[0m\n' $(( qx + ${#quote} - ${#author} )) '' "$author"
+    fi
+
+    printf "\n"
+
+    unfunction _bx _bt _bb 2>/dev/null
+}
+
+zpwrFortune "$@"
