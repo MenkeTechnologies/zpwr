@@ -1,10 +1,10 @@
-PAGE_TITLE="All 408 Verbs T-Z + Epilogue"
+PAGE_TITLE="All Verbs T-Z"
 PAGE_CHAPTER="CHAPTER 25: THE COMPLETE REFERENCE"
 PAGE_CONTENT() {
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
     print ""
-    print "  ${B}${M}<<< ALL 408 VERBS: refreshzwc through zstyle (3/3) >>>${N}"
+    print "  ${B}${M}<<< ALL ${#ZPWR_VERBS} VERBS: refreshzwc through zstyle (3/3) >>>${N}"
     print "  ${D}the final stretch. the end of the alphabet. the beginning of mastery.${N}"
     print ""
     print "  ${C}refreshzwc${N}                 ${D}refresh compiled wordcode${N}"

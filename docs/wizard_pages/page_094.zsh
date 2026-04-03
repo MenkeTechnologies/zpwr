@@ -7,7 +7,7 @@ PAGE_CONTENT() {
     print "  ${B}${M}<<< THE ONE-LETTER VERBS — MAXIMUM POWER, MINIMUM KEYSTROKES >>>${N}"
     print "  ${D}six letters that do the work of six paragraphs${N}"
     print ""
-    print "  ${C}ZPWR has 408 verbs. Six of them are single characters.${N}"
+    print "  ${C}ZPWR has ${#ZPWR_VERBS} verbs. Six of them are single characters.${N}"
     print "  ${C}These are not abbreviations — they are the distilled${N}"
     print "  ${C}essence of the most common operations. One keystroke${N}"
     print "  ${C}each. The speed limit of human-shell interaction.${N}"

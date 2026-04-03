@@ -1,10 +1,10 @@
-PAGE_TITLE="All 408 Verbs H-S"
+PAGE_TITLE="All Verbs H-S"
 PAGE_CHAPTER="CHAPTER 25: THE COMPLETE REFERENCE"
 PAGE_CONTENT() {
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
     print ""
-    print "  ${B}${M}<<< ALL 408 VERBS: forgitdiff through recompilefpath (2/3) >>>${N}"
+    print "  ${B}${M}<<< ALL ${#ZPWR_VERBS} VERBS: forgitdiff through recompilefpath (2/3) >>>${N}"
     print "  ${D}the middle of the alphabet is where the real work lives${N}"
     print ""
     print "  ${C}forgitdiff${N}                 ${D}interactive diff via fzf${N}"

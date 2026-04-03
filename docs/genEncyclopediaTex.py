@@ -14,6 +14,22 @@ for _p in pages:
         if _m: _chapters.add(_m.group(1))
 num_chapters = len(_chapters)
 
+# Count verbs dynamically from zpwr.zsh + plugin estimate
+_zpwr_zsh = os.path.expanduser("~/.zpwr/env/zpwr.zsh")
+_verb_count = 0
+if os.path.exists(_zpwr_zsh):
+    with open(_zpwr_zsh) as _f:
+        _verb_count = _f.read().count("ZPWR_VERBS[")
+# add plugin verbs (zinit plugins that register ZPWR_VERBS)
+_zinit_plugins = os.path.expanduser("~/.zinit/plugins")
+if os.path.isdir(_zinit_plugins):
+    import subprocess
+    _r = subprocess.run(["grep", "-rch", "ZPWR_VERBS\\[", _zinit_plugins], capture_output=True, text=True)
+    for _line in _r.stdout.strip().split("\n"):
+        if _line.strip().isdigit():
+            _verb_count += int(_line.strip())
+num_verbs = _verb_count
+
 def extract_page(filepath):
     with open(filepath) as f:
         content = f.read()
@@ -304,7 +320,7 @@ PREAMBLE = r'''\documentclass[11pt,a4paper,twoside]{book}
 {\fontsize{42}{50}\selectfont\bfseries\color{neoncyan} THE ZPWR}\\[0.5cm]
 {\fontsize{42}{50}\selectfont\bfseries\color{neonpink} ENCYCLOPEDIA}\\[2cm]
 {\Large\color{bodytext} A Hacker's Field Guide to the Terminal}\\[2cm]
-''' + r'''{\large\color{neonyellow}''' + str(num_chapters) + r''' Chapters\quad\color{dimtext}//\quad\color{neonorange}410+ Verbs}\\[2cm]
+''' + r'''{\large\color{neonyellow}''' + str(num_chapters) + r''' Chapters\quad\color{dimtext}//\quad\color{neonorange}''' + str(num_verbs) + r'''+ Verbs}\\[2cm]
 ''' + r'''{\color{bodytext}\large MenkeTechnologies}\\[0.3cm]
 {\color{dimtext}\small \url{https://github.com/MenkeTechnologies/zpwr}}\\[3cm]
 {\color{dimtext}\small CYBERPUNK EDITION\quad//\quad Generated from \texttt{zpwr wizard}}\\[1cm]
