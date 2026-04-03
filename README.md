@@ -65,6 +65,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Command Trace](#command-trace----zpwr-trace) -- zpwr trace
 - [Function Dependencies](#function-dependencies----zpwr-deps) -- zpwr deps
 - [Colorized Log Viewer](#colorized-log-viewer----zpwr-taillog) -- zpwr taillog
+- [Matrix](#matrix----zpwr-matrix) -- zpwr matrix
 - [The ZPWR Encyclopedia](#the-zpwr-encyclopedia----zpwr-wizard) -- zpwr wizard
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
@@ -118,7 +119,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 468+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 500+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 16.8k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
@@ -1009,6 +1010,20 @@ zpwr taillog /var/log/system.log  # custom logfile
 ```
 
 Requires `ccze` (`brew install ccze` or `apt install ccze`).
+
+## Matrix -- zpwr matrix
+`zpwr matrix` is an animated cyberpunk hacker story told in ASCII art, figlet banners, and CRT effects, followed by an infinite ecosystem rain screensaver.  The story is a four-act narrative about discovering zpwr, with your live ecosystem stats woven throughout.  Unique to zpwr — instead of random characters, it rains your actual verb names, function names, aliases, env vars, and git repo names, color-coded by type.
+
+FX include: CRT scanline sweeps, VHS tracking distortion, pixel corruption, screen tears, screen shake, terminal bells, fake SSH sessions with your live manifest, encrypted transmission decryption with glitchy progress bars, figlet chaos banners in random cyberpunk fonts (doom, slant, speed, cyberlarge, cybermedium), dissolve effects, a scrolling ticker with stats, pulse events with ecosystem facts, and a persistent HUD with live counters.  Also invokable as `zpwr rain` or `zpwr screensaver`.
+
+```sh
+zpwr matrix -h         # cyberpunk help
+zpwr matrix            # full story + rain
+zpwr matrix -r         # skip story, go straight to rain
+zpwr matrix -s 7       # faster speed (1-9)
+zpwr rain              # alias for matrix
+zpwr screensaver       # alias for matrix
+```
 
 ## The ZPWR Encyclopedia -- zpwr wizard
 `zpwr wizard` launches an interactive encyclopedia covering every zpwr feature, verb, subsystem, tool integration, and keybinding reference.  Also invokable as `zpwr manual`, `zpwr tutorial`, or `zpwr docs`.  Vim-style navigation with chapter jumping, search, random page, and a full keybinding help screen.
