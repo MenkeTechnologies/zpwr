@@ -56,7 +56,7 @@ function zpwrDoctor(){
     printf " ${C}██████╔╝╚██████╔╝╚██████╗   ██║   ╚██████╔╝██║  ██║${N}\n"
     printf " ${C}╚═════╝  ╚═════╝  ╚═════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝${N}\n"
     printf " ${D}┌──────────────────────────────────────────────────────────────┐${N}\n"
-    printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}\n" "$ZPWR" "$(date '+%H:%M:%S')"
+    printf " ${D}│${N} ${G}SCANNING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}                   ${D}│${N}\n" "$ZPWR" "$(date '+%H:%M:%S')"
     printf " ${D}└──────────────────────────────────────────────────────────────┘${N}\n"
     printf "  ${D}>> ENVIRONMENT HEALTH CHECK // FULL DIAGNOSTIC <<${N}\n"
 

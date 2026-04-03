@@ -50,7 +50,7 @@ function zpwrStartup(){
     printf " ${C}███████║   ██║   ██║  ██║██║  ██║   ██║   ╚██████╔╝██║${N}\n"
     printf " ${C}╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝${N}\n"
     printf " ${D}┌──────────────────────────────────────────────────────────────────┐${N}\n"
-    printf " ${D}│${N} ${G}PROFILING${N}  ${D}//${N} ${C}top %d${N}  ${D}//${N} ${M}%s${N}\n" $top_n "$(date '+%H:%M:%S')"
+    printf " ${D}│${N} ${G}PROFILING${N}  ${D}//${N} ${C}top %d${N}  ${D}//${N} ${M}%s${N}                       ${D}│${N}\n" $top_n "$(date '+%H:%M:%S')"
     printf " ${D}└──────────────────────────────────────────────────────────────────┘${N}\n"
     printf "  ${D}>> LAUNCHING PROFILED SHELL <<${N}\n\n"
 
