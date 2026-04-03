@@ -833,7 +833,7 @@ zpwr restore myproject aliases env  # restore only specific components
 Available restore components: `hash`, `aliases`, `env`, `tmux`, `vim`, `history`, `dirs`.  Tmux restore stages the resurrect file -- press `prefix+Ctrl-r` to apply.  History is merged rather than overwritten.
 
 ## Live Dashboard -- zpwr top
-`zpwr top [interval]` displays a live-updating dashboard of shell resource usage.  Shows memory (RSS with bar graph, virtual memory), history size, child processes, jobs, zle widgets, hooks, shell objects (functions, completions, aliases, commands, builtins, parameters, modules) with delta tracking between refreshes, loaded zsh modules, paths, git status, tmux session counts, top 5 largest functions with size bars, and top 5 longest PATH entries.  Runs in an alternate screen buffer -- press `q` to quit cleanly.
+`zpwr top [interval]` displays a live-updating dashboard of shell resource usage.  Shows memory (RSS with bar graph, virtual memory), history size, child processes, jobs, zle widgets, hooks, shell objects (functions, completions, aliases, commands, builtins, parameters, modules) with delta tracking between refreshes, loaded zsh modules, paths, git status, tmux session counts, top 5 largest functions with size bars, and top 5 longest PATH entries.  Includes sparkline graphs: startup time history (last 40 shell starts, color-coded green/yellow/red with min/max/avg stats) and commit velocity (commits per day over last 30 days).  Startup times are automatically logged to `$ZPWR_LOCAL/startup_history.log` on each shell init.  Runs in an alternate screen buffer -- press `q` to quit cleanly.
 
 ```sh
 zpwr top -h    # cyberpunk help
