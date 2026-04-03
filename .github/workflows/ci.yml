@@ -73,7 +73,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.zpwr/.cache/zunit-bin
-          key: zunit-${{ runner.os }}-v1-0.8.x-${{ hashFiles('.github/workflows/ci.yml') }}
+          key: zunit-${{ runner.os }}-v1-0.8.x-${{ hashFiles('zpwr/.github/workflows/ci.yml') }}
           restore-keys: |
             zunit-${{ runner.os }}-v1-0.8.x-
             zunit-${{ runner.os }}-v1-
