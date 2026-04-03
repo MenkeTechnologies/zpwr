@@ -546,3 +546,44 @@
     run zpwrAlternatingPrettyPrint "hello world"
     assert "$output" is_not_empty
 }
+
+#--------------------------------------------------------------
+# zpwrFail
+#--------------------------------------------------------------
+@test 'zpwrFail exits 1' {
+    run zsh -c "source $ZPWR_LIB; zpwrFail reason" 2>&1
+    assert $state equals 1
+}
+
+@test 'zpwrFail stderr mentions supplied reason' {
+    run zsh -c "source $ZPWR_LIB; zpwrFail myreason" 2>&1
+    assert "$output" contains "Failure due to myreason"
+}
+
+#--------------------------------------------------------------
+# zpwrFileMustExist
+#--------------------------------------------------------------
+@test 'zpwrFileMustExist on existing file returns 0' {
+    run zpwrFileMustExist "$TEST_FILE"
+    assert $state equals 0
+}
+
+@test 'zpwrFileMustExist on missing file exits 1' {
+    run zsh -c "source $ZPWR_LIB; zpwrFileMustExist /tmp/zpwr_mustexist_missing_$$" 2>&1
+    assert $state equals 1
+    assert "$output" contains "Where is the file"
+}
+
+#--------------------------------------------------------------
+# zpwrPrettyPrintBoxStdin
+#--------------------------------------------------------------
+@test 'zpwrPrettyPrintBoxStdin with stdin returns 0' {
+    run zsh -c "source $ZPWR_LIB; printf '%s\n' hello | zpwrPrettyPrintBoxStdin mylabel" 2>&1
+    assert $state equals 0
+}
+
+@test 'zpwrPrettyPrintBoxStdin output includes stdin text' {
+    run zsh -c "source $ZPWR_LIB; printf '%s\n' uniqline123 | zpwrPrettyPrintBoxStdin lbl" 2>&1
+    assert $state equals 0
+    assert "$output" contains uniqline123
+}
