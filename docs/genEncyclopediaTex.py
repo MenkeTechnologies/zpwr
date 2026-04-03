@@ -68,6 +68,37 @@ def strip_colors(text):
     text = text.replace('░', '-').replace('▒', '=').replace('▓', '#').replace('█', '#')
     return text.strip()
 
+def markup_inline(text):
+    """Bold environment variables and file paths in LaTeX text."""
+    # Bold ALLCAPS env vars (PATH, FPATH, HISTFILE, MANPATH, EDITOR, SHELL, HOME, etc.)
+    # Must be already LaTeX-escaped (underscores are \_)
+    # Bold file paths first (longer matches before variable-only matches)
+    # Match ~/ paths (~ is escaped to \textasciitilde{} by escape_latex)
+    text = re.sub(r'(\\textasciitilde\{\}/[A-Za-z0-9\\_./\-]+)', r'\\textbf{\1}', text)
+    # Match \$ZPWR_XXX/path and \$HOME/path (full path with variable prefix)
+    # Only allow word chars, escaped underscores, dots, slashes, hyphens — not \{ \}
+    text = re.sub(r'(\\\$(?:ZPWR(?:\\_[A-Z\_]+)?|HOME)/(?:[A-Za-z0-9./\-]|\\_)+)', r'\\textbf{\1}', text)
+    # Match absolute paths like /etc/..., /usr/..., /var/...
+    text = re.sub(r'(?<![a-zA-Z])(/(?:etc|usr|var|tmp|opt|bin|sbin|lib|dev|proc|sys)/[A-Za-z0-9\\_./\-]+)', r'\\textbf{\1}', text)
+    # Bold ZPWR\_SOMETHING env vars (standalone, not already inside path \textbf)
+    def _bold_zpwr(m):
+        start = m.start()
+        # check if already inside \textbf{...}
+        before = text[:start]
+        open_bf = before.rfind('\\textbf{')
+        if open_bf >= 0:
+            # check if there's an unmatched \textbf{ before us
+            between = before[open_bf:]
+            if between.count('{') > between.count('}'):
+                return m.group(0)  # already bolded
+        return '\\textbf{' + m.group(1) + '}'
+    text = re.sub(r'(?<![\\a-zA-Z])(ZPWR(?:\\_[A-Z][A-Z0-9\_]*)?)', _bold_zpwr, text)
+    # Bold well-known env vars
+    text = re.sub(r'(?<![\\a-zA-Z{])\b((?:PATH|FPATH|MANPATH|HISTFILE|EDITOR|VISUAL|SHELL|HOME|TERM|DISPLAY|COLUMNS|LINES|ZSH\\_VERSION|ZSH\\_COMPDUMP|ZDOTDIR|PAGER|LANG|LC\\_ALL|TMPDIR|USER|LOGNAME|PWD|OLDPWD|SECONDS|RANDOM|IFS|PS1|PS2|PS3|PS4|PROMPT|RPROMPT))\b', r'\\textbf{\1}', text)
+    # Match absolute paths like /etc/..., /usr/..., /var/...
+    text = re.sub(r'(?<![a-zA-Z])(/(?:etc|usr|var|tmp|opt|bin|sbin|lib|dev|proc|sys)/[A-Za-z0-9\\_./\-]+)', r'\\textbf{\1}', text)
+    return text
+
 def convert_line(text):
     original = text
     clean = escape_latex(strip_colors(text))
@@ -76,7 +107,7 @@ def convert_line(text):
     if '===' in clean or '<<<' in clean or '>>>' in clean:
         return ('heading', clean.replace('===','').replace('<<<','').replace('>>>','').strip())
     if '${B}${Y}' in original or '${B}${M}' in original:
-        return ('section_title', clean)
+        return ('section_title', markup_inline(clean))
     # Classify as command if ${M} is the PRIMARY color (starts the content),
     # not just embedded inline in a ${C} prose sentence.
     # Command pattern: line content starts with optional spaces then ${M}
@@ -99,8 +130,10 @@ def convert_line(text):
         cmd_text = cmd_text.replace('\\$', '')
         return ('command', cmd_text)
     if '${D}' in original and '//' in text:
-        return ('comment', clean)
-    return ('text', clean)
+        return ('comment', markup_inline(clean))
+    # Strip "$ " prompt before commands in prose text (e.g. "1. $ zpwr start")
+    clean = re.sub(r'\\\$\s+(zpwr\b)', r'\1', clean)
+    return ('text', markup_inline(clean))
 
 def fix_prose(text):
     """Fix grammar for prose text: capitalize sentences, ensure trailing period."""
@@ -125,17 +158,26 @@ def fix_prose(text):
             return m.group(1) + ' ' + word
         return m.group(1) + ' ' + word[0].upper() + word[1:]
 
-    # capitalize first word if not a command name
+    # capitalize first word if not a command name or LaTeX macro
+    # skip over LaTeX commands like \textbf{...}, \$, \textasciitilde{} at start
     i = 0
     while i < len(text) and not text[i].isalpha():
         i += 1
     if i < len(text):
-        first_word = re.match(r'[a-zA-Z_\-]+', text[i:])
-        if first_word and first_word.group().lower() not in _cmds:
-            text = text[:i] + text[i].upper() + text[i+1:]
+        # don't capitalize if inside a LaTeX command (preceded by \)
+        if i > 0 and text[i-1] == '\\':
+            pass  # skip — this is part of \textbf, \textasciitilde, etc.
+        else:
+            first_word = re.match(r'[a-zA-Z_\-]+', text[i:])
+            if first_word and first_word.group().lower() not in _cmds:
+                text = text[:i] + text[i].upper() + text[i+1:]
 
     # capitalize after sentence-ending punctuation, unless next word is a command
+    # skip if next char after space is \ (LaTeX command like \textbf)
     text = re.sub(r'([.!?])\s+([a-z][a-z_\-]*)', _cap_if_not_cmd, text)
+    # fix any \Textbf that snuck through
+    text = text.replace('\\Textbf', '\\textbf')
+    text = text.replace('\\Textasciitilde', '\\textasciitilde')
 
     # add trailing period if ends with alphanumeric
     stripped = text.rstrip()
