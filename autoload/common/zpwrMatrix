@@ -122,7 +122,7 @@ function zpwrMatrix(){
     printf '\033[?25l\033[2J'
     trap 'printf "\033[?25h\033[0m\033[2J\033[H"; return 0' INT QUIT
 
-    local -i frame=0 x y word_len char_y
+    local -i frame=0 x y word_len char_y wi_char erase_y
     local ch word wcolor
 
     while true; do
@@ -149,30 +149,30 @@ function zpwrMatrix(){
             x=$(( (ci - 1) * (cols / ncols) + 1 ))
             y=${col_y[$ci]}
 
-            # draw characters of the word vertically
-            local -i wi_char
+            # draw characters of the word vertically, top to bottom
+            # y is the bottom (head), first char at y - word_len + 1
             for (( wi_char=0; wi_char<word_len; wi_char++ )); do
-                char_y=$(( y - wi_char ))
+                char_y=$(( y - word_len + 1 + wi_char ))
 
                 if (( char_y >= 1 && char_y <= lines && x + 1 <= cols )); then
-                    if (( wi_char == 0 )); then
-                        # head: bright white
+                    if (( wi_char == word_len - 1 )); then
+                        # head (bottom): bright white
                         printf '\033[%d;%dH\033[1;37m%s' $char_y $x "${word[$((wi_char+1))]}"
-                    elif (( wi_char <= 2 )); then
+                    elif (( wi_char >= word_len - 3 )); then
                         # near head: bright color
                         printf '\033[%d;%dH\033[1;%sm%s' $char_y $x "$wcolor" "${word[$((wi_char+1))]}"
-                    elif (( wi_char <= word_len / 2 )); then
+                    elif (( wi_char >= word_len / 2 )); then
                         # body: normal color
                         printf '\033[%d;%dH\033[0;%sm%s' $char_y $x "$wcolor" "${word[$((wi_char+1))]}"
                     else
-                        # tail: dim
+                        # tail (top): dim
                         printf '\033[%d;%dH\033[2;%sm%s' $char_y $x "$wcolor" "${word[$((wi_char+1))]}"
                     fi
                 fi
             done
 
-            # erase trailing character
-            local -i erase_y=$(( y - word_len ))
+            # erase the topmost character as it scrolls
+            erase_y=$(( y - word_len ))
             if (( erase_y >= 1 && erase_y <= lines )); then
                 printf '\033[%d;%dH ' $erase_y $x
             fi
@@ -180,7 +180,7 @@ function zpwrMatrix(){
             # advance
             (( col_y[ci]++ ))
 
-            # reset when fully off screen
+            # reset when top of word is off screen
             if (( y - word_len > lines )); then
                 wi=$(( RANDOM % nwords + 1 ))
                 col_y[$ci]=$(( -(RANDOM % (lines / 2)) ))
