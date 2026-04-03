@@ -88,10 +88,13 @@ def convert_line(text):
     first_color = re.search(r'\$\{([A-Z]{1,2})\}', content_after_indent)
     is_cmd_color_first = first_color and first_color.group(1) == 'M' if first_color else False
     is_cmd = is_cmd_color_first and not is_header and '${M}' in original
-    if is_cmd:
-        cmd_text = strip_colors(text).strip()
+    # Also detect lines with \$ prompt (e.g. "\$ zpwr bench") as commands
+    stripped_raw = strip_colors(text).strip()
+    has_prompt = bool(re.match(r'^\\?\$\s+\S', stripped_raw))
+    if is_cmd or has_prompt:
+        cmd_text = stripped_raw
         # Strip leading $ prompt and \$ prompt
-        cmd_text = re.sub(r'^\\?\$\s*', '', cmd_text)
+        cmd_text = re.sub(r'^\\?\$\s+', '', cmd_text)
         cmd_text = escape_latex(cmd_text)
         cmd_text = cmd_text.replace('\\$', '')
         return ('command', cmd_text)
