@@ -73,34 +73,22 @@ def convert_line(text):
         return ('heading', clean.replace('===','').replace('<<<','').replace('>>>','').strip())
     if '${B}${Y}' in original or '${B}${M}' in original:
         return ('section_title', clean)
-    # Only classify as command if it looks like an actual command invocation:
-    # - starts with "zpwr " or "$ " after stripping color codes
-    # - uses ${M} (magenta) which is the command color in page files
-    # - the clean text starts with a command-like pattern (indented command)
-    stripped_clean = strip_colors(text).strip()
-    # Strip leading $ prompt for matching
-    check_clean = re.sub(r'^[\$\\]*\$?\s*', '', stripped_clean)
-    is_cmd = False
-    has_cmd_color = '${M}' in original
+    # Classify as command if ${M} is the PRIMARY color (starts the content),
+    # not just embedded inline in a ${C} prose sentence.
+    # Command pattern: line content starts with optional spaces then ${M}
+    # Prose pattern: line content starts with ${C} or ${D} with ${M} inline later
     is_header = '${B}${Y}' in original or '${B}${M}' in original
-    if has_cmd_color and not is_header:
-        cmd_prefixes = ('zpwr ', 'sudo ', 'git ', 'cd ', 'tmux ',
-            'perl ', 'fd ', 'rg ', 'bat ', 'eza ', 'strace ', 'ltrace ', 'temprs ',
-            'brew ', 'apt ', 'pip ', 'npm ', 'cargo ', 'lsofrs ', 'ccze ', 'grc ',
-            'figlet ', 'toilet ', 'export ', 'alias ', 'bindkey ', 'prefix ',
-            'Ctrl-', 'vim ', 'nvim ', 'emacs ', 'zsh ', 'bash ',
-            'echo ', 'cat ', 'tail ', 'grep ', 'find ', 'ls ', 'mkdir ',
-            'source ', 'eval ', 'exec ', 'command ', 'builtin ',
-            'ifconfig ', 'dtruss ', 'strace ', 'ltrace ')
-        if stripped_clean.startswith(cmd_prefixes) or check_clean.startswith(cmd_prefixes):
-            is_cmd = True
+    # extract the raw content after "print" indentation
+    content_after_indent = re.sub(r'^[\s]*', '', original)
+    # check if ${M} is the first color code (command) vs ${C}/${D} first (prose)
+    first_color = re.search(r'\$\{([A-Z]{1,2})\}', content_after_indent)
+    is_cmd_color_first = first_color and first_color.group(1) == 'M' if first_color else False
+    is_cmd = is_cmd_color_first and not is_header and '${M}' in original
     if is_cmd:
         cmd_text = strip_colors(text).strip()
         # Strip leading $ prompt and \$ prompt
         cmd_text = re.sub(r'^\\?\$\s*', '', cmd_text)
-        # Escape for LaTeX
         cmd_text = escape_latex(cmd_text)
-        # Remove any remaining \$ from code box output
         cmd_text = cmd_text.replace('\\$', '')
         return ('command', cmd_text)
     if '${D}' in original and '//' in text:
