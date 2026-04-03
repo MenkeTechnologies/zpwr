@@ -2020,15 +2020,16 @@ Use these for quick spot checks without the full dashboard.
 
 
 \vspace{12pt}
-{\bfseries\color{neonyellow} THE PERFORMANCE TRILOGY}\vspace{4pt}
+{\bfseries\color{neonyellow} THE PERFORMANCE QUARTET}\vspace{4pt}
 
 \begin{codebox}
-zpwr bench  -> how fast is startup?\\
-zpwr flame  -> where does the time go?\\
-zpwr top    -> what is loaded right now?\\
+zpwr bench    -> how fast is total startup?\\
+zpwr flame    -> ASCII flame chart of function hotspots\\
+zpwr startup  -> per-function zprof breakdown\\
+zpwr top      -> what is loaded right now?\\
 \end{codebox}
 
-Three verbs. Three perspectives. Complete observability. Your shell is no longer a black box. It is an open book.
+Four verbs. Four perspectives. Complete observability. Your shell is no longer a black box. It is an open book.
 
 
 \vspace{16pt}
@@ -2098,6 +2099,18 @@ green checkmark  = healthy, move along yellow warning   = degraded but functiona
 {\bfseries\color{neonyellow} THE SIGNAL BAR}\vspace{4pt}
 
 At the bottom: a 10-block signal meter. ██████████  = HEALTHY. All green. You are a clean machine. ██████░░░░  = WARNINGS. Stuff works but something is off. ██░░░░░░░░  = CRITICAL. Your shell is on fire.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} COMPANION VERBS}\vspace{4pt}
+
+\begin{codebox}
+zpwr stale                \# find stale .zwc, orphan caches, broken links\\
+zpwr pathaudit             \# deep PATH/FPATH/MANPATH audit\\
+zpwr lint                  \# shellcheck + zsh -n on all zpwr files\\
+zpwr startup               \# per-function zprof breakdown\\
+zpwr ports                 \# show listening ports with process info\\
+\end{codebox}
 
 
 \vspace{12pt}
@@ -2851,6 +2864,7 @@ Zsh has a built-in mechanism: the typeset -U flag. typeset -U path fpath This ma
 {\bfseries\color{neonyellow} DIAGNOSING THE PROBLEM}\vspace{4pt}
 
 \begin{codebox}
+zpwr pathaudit                       \# full audit: dupes, missing, writable\\
 zpwr doctor                         \# checks for duplicate PATH/FPATH\\
 \end{codebox}
 
@@ -11941,6 +11955,278 @@ zpwr colortest       test terminal basic 16 colors zpwr colortest256    test ful
 {\bfseries\color{neonyellow} THE FALLBACK PHILOSOPHY}\vspace{4pt}
 
 Every color tool has a plain fallback: No eza? grc+ls. No grc? plain ls. No bat? cat. zpwr degrades gracefully. Color is never a hard dependency. SSH into a minimal server? Everything still works. Just less pretty. Function over form, always. THE RESULT: In a fully-equipped zpwr terminal: File listings glow. Logs are semantic. Diffs are surgical. Your eyes never have to parse raw monochrome again. The color pipeline is zpwr's cosmetic surgery department.
+
+
+\vspace{16pt}
+
+
+\chapter{HEALTH \& DIAGNOSTICS}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_doctor_help.png}
+\end{center}
+
+\section{Startup Profile}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} STARTUP PROFILE}\vspace{6pt}
+
+{\small\itshape\color{dimtext} // bench tells you HOW FAST. startup tells you WHERE the time goes. //}
+
+\begin{codebox}
+zpwr bench measures total wall time over multiple iterations.\\
+zpwr startup gives a single-shot, per-function breakdown\\
+\end{codebox}
+
+using zsh's built-in zprof profiler.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE VERB}\vspace{4pt}
+
+\begin{codebox}
+zpwr startup               \# top 30 functions (default)\\
+zpwr startup 50            \# top 50 functions\\
+zpwr startup 100           \# full breakdown\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+1. Launches a fresh zsh with ZPWR\_PROFILING=true 2. zprof runs at the end of the init sequence 3. Output is captured and colorized by self-time: >= 10\%  RED       — hot path, optimize here >= 3\%   YELLOW    — warm, worth investigating >= 1\%   CYAN      — normal < 1\%    DIM       — negligible
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE PERFORMANCE QUARTET}\vspace{4pt}
+
+\begin{codebox}
+zpwr bench    -> how fast is total startup?\\
+zpwr flame    -> ASCII flame chart of function hotspots\\
+zpwr startup  -> per-function zprof breakdown\\
+zpwr top      -> what is loaded right now?\\
+\end{codebox}
+
+Four verbs. Four perspectives. Your shell is transparent.
+
+
+\vspace{16pt}
+
+\section{Shell Lint}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} SHELL LINT}\vspace{6pt}
+
+{\small\itshape\color{dimtext} // if it parses, it ships. but does it REALLY parse? //}
+
+\begin{codebox}
+zpwr lint runs two levels of analysis on every zpwr file:\\
+\end{codebox}
+
+syntax checking with zsh -n, and static analysis with shellcheck.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE VERB}\vspace{4pt}
+
+\begin{codebox}
+zpwr lint                  \# run all checks\\
+zpwr lint -z               \# zsh -n syntax check only\\
+zpwr lint -s               \# shellcheck only\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT CHECKS}\vspace{4pt}
+
+zsh -n (syntax check) Every file in autoload/common, autoload/darwin, autoload/linux, env/*.sh, env/*.zsh, install/.zshrc. This catches unmatched brackets, bad redirections, and broken quoting. Fast — no execution, just parsing.
+
+shellcheck (static analysis) Every .sh and .zsh file in scripts/ and install/. Catches quoting bugs, unused variables, subshell pitfalls. Zsh-incompatible warnings are suppressed (SC1071 etc).
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHEN TO RUN IT}\vspace{4pt}
+
+After editing any zpwr file. Before committing. Before pushing. Catch it at the gate, not in production.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} COMPANION VERBS}\vspace{4pt}
+
+\begin{codebox}
+zpwr doctor               \# broader health check\\
+zpwr stale                \# find stale compiled files\\
+zpwr recompile            \# rebuild .zwc files after fixes\\
+\end{codebox}
+
+
+\vspace{16pt}
+
+\section{Listening Ports}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} LISTENING PORTS}\vspace{6pt}
+
+{\small\itshape\color{dimtext} // who is listening? and on which door? //}
+
+\begin{codebox}
+zpwr ports wraps lsof to show every TCP port in LISTEN\\
+\end{codebox}
+
+state with the process name, PID, user, and bind address.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE VERB}\vspace{4pt}
+
+\begin{codebox}
+zpwr ports                 \# show all listening ports\\
+zpwr ports 8080            \# filter to port 8080\\
+zpwr ports -k 3000         \# kill whatever is on port 3000\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} COLOR CODING}\vspace{4pt}
+
+Privileged ports (< 1024)    — RED These require root. sshd on 22, httpd on 80. Common ports (< 10000)       — YELLOW Dev servers, databases. 3000, 5432, 8080. High ports (>= 10000)        — GREEN Ephemeral and user-space. Generally safe.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE KILL FLAG}\vspace{4pt}
+
+\begin{codebox}
+zpwr ports -k 3000 finds the PID on port 3000 and\\
+\end{codebox}
+
+sends SIGTERM. Shows process name before killing. Use when a dev server refuses to die.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} COMPANION VERBS}\vspace{4pt}
+
+\begin{codebox}
+zpwr lsof                 \# interactive fzf over all lsof output\\
+zpwr ps                   \# grep through ps output\\
+zpwr kill                 \# fzf kill from ps\\
+\end{codebox}
+
+
+\vspace{16pt}
+
+\section{Stale File Finder}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} STALE FILE FINDER}\vspace{6pt}
+
+{\small\itshape\color{dimtext} // compiled cruft is invisible cruft. make it visible. //}
+
+\begin{codebox}
+zpwr stale scans the entire zpwr tree for artifacts that\\
+\end{codebox}
+
+have gone stale, orphaned, or broken.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE VERB}\vspace{4pt}
+
+\begin{codebox}
+zpwr stale                 \# scan and report\\
+zpwr stale -f              \# delete all stale files\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT FINDS}\vspace{4pt}
+
+STALE .zwc Source file is newer than its compiled .zwc. Your shell is running yesterday's bytecode.
+
+ORPHAN .zwc The source file was deleted but the .zwc remains. Dead weight taking up space and confusing zsh.
+
+BROKEN SYMLINKS Symlinks pointing to files that no longer exist. Source of cryptic 'file not found' errors.
+
+EMPTY CACHE FILES Zero-byte files in cache directories. Usually left behind by interrupted operations.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE FIX FLAG}\vspace{4pt}
+
+\begin{codebox}
+zpwr stale -f deletes everything it finds in one pass.\\
+\end{codebox}
+
+Follow up with zpwr recompile to rebuild .zwc files.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WORKFLOW}\vspace{4pt}
+
+\begin{codebox}
+zpwr stale                 \# see what is stale\\
+zpwr stale -f              \# nuke the cruft\\
+zpwr recompile             \# rebuild fresh .zwc files\\
+zpwr doctor                \# verify everything is clean\\
+\end{codebox}
+
+
+\vspace{16pt}
+
+\section{Path Audit}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} PATH AUDIT}\vspace{6pt}
+
+{\small\itshape\color{dimtext} // your PATH is your attack surface. audit it. //}
+
+\begin{codebox}
+zpwr pathaudit inspects PATH, FPATH, and MANPATH for\\
+\end{codebox}
+
+duplicates, missing directories, and world-writable entries.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE VERB}\vspace{4pt}
+
+\begin{codebox}
+zpwr pathaudit             \# audit all three arrays\\
+zpwr pathaudit -v          \# verbose: show every entry\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT CHECKS}\vspace{4pt}
+
+DUPLICATES Same directory appearing more than once. Wastes hash lookups and obscures precedence. Fix: zpwr deduppaths
+
+MISSING DIRECTORIES PATH entry pointing to a dir that does not exist. Slows command lookup — zsh checks every entry.
+
+WORLD-WRITABLE DIRECTORIES Any user can write to this directory. If it is in your PATH, an attacker can plant a malicious binary that shadows a real command. Security risk.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} ALL THREE ARRAYS}\vspace{4pt}
+
+PATH     — command lookup for executables FPATH    — function autoload lookup for zsh MANPATH  — man page lookup for documentation
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} COMPANION VERBS}\vspace{4pt}
+
+\begin{codebox}
+zpwr doctor               \# broader health check (also checks paths)\\
+zpwr deduppaths            \# remove duplicate entries\\
+zpwr environmentcounts      \# count all env arrays\\
+\end{codebox}
+
+doctor checks paths as part of a broader scan. pathaudit goes deeper with world-writable detection.
 
 
 \vspace{16pt}
