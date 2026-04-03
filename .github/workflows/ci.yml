@@ -33,6 +33,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           path: zpwr
+          fetch-depth: 1
 
       - name: Set terminal size variables
         run: |
@@ -84,6 +85,9 @@ jobs:
 
       - name: Add zunit to PATH
         run: echo "$HOME/.zpwr/.cache/zunit-bin" >> "$GITHUB_PATH"
+
+      - name: Ensure zunit executable bit
+        run: chmod +x "$HOME/.zpwr/.cache/zunit-bin/zunit"
 
       - name: Verify zunit
         run: |
