@@ -11,6 +11,46 @@ function zpwrWizard(){
     local PAGEDIR="$ZPWR/docs/wizard_pages"
     local -a page_files
     local -i total_pages=0 current_page=1 found=0
+    local _page_out=""
+    local -i _content_lines=0 _pad_lines=0 fw=0 hw=0
+
+    # ── BOX HELPERS ──────────────────────────────────────────
+    _wiz_box_width() {
+        print 76
+    }
+
+    _wiz_hline() {
+        local corner_l="$1" corner_r="$2"
+        local -i w=$(_wiz_box_width)
+        local -i inner=$(( w - 2 ))
+        printf " ${D}%s" "$corner_l"
+        printf '─%.0s' {1..$inner}
+        printf "%s${N}\n" "$corner_r"
+    }
+
+    _wiz_boxline() {
+        local content="$1"
+        local -i w=$(_wiz_box_width)
+        # strip ANSI to measure visible width — zsh glob can't match ESC byte
+        local stripped
+        stripped=$(print -r -- "$content" | command sed "s/$(printf '\033')\[[0-9;]*m//g")
+        local -i visible=${#stripped}
+        local -i inner=$(( w - 2 ))
+        local -i pad=$(( inner - visible ))
+        (( pad < 0 )) && pad=0
+        printf " ${D}│${N}%s%*s${D}│${N}\n" "$content" $pad ""
+    }
+
+    _wiz_separator() {
+        local label="$1"
+        local -i w=$(_wiz_box_width)
+        local -i label_len=${#label}
+        local -i trail=$(( w - label_len - 4 ))
+        (( trail < 1 )) && trail=1
+        printf "  ${D}── %s " "$label"
+        printf '─%.0s' {1..$trail}
+        printf "${N}\n"
+    }
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -20,9 +60,9 @@ function zpwrWizard(){
         print " ${M} ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗    ██║  ██║██║   ██║██║     ╚════██║${N}"
         print " ${C}███████╗██║     ╚███╔███╔╝██║  ██║    ██████╔╝╚██████╔╝╚██████╗███████║${N}"
         print " ${C}╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚══════╝${N}"
-        print " ${D}┌──────────────────────────────────────────────────────────────────────────┐${N}"
-        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}ZPWR DOCS${N}                       ${D}│${N}"
-        print " ${D}└──────────────────────────────────────────────────────────────────────────┘${N}"
+        _wiz_hline '┌' '┐'
+        _wiz_boxline "$(printf " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}ZPWR DOCS${N}")"
+        _wiz_hline '└' '┘'
         print "  ${D}>> THE ZPWR ENCYCLOPEDIA // INTERACTIVE TUTORIAL SYSTEM <<${N}"
         print ""
         print ""
@@ -32,14 +72,14 @@ function zpwrWizard(){
         print ""
         print "  ${B}USAGE:${N} zpwr wizard ${D}[OPTIONS] [PAGE|CHAPTER]${N}"
         print ""
-        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────────${N}"
+        _wiz_separator "OPTIONS"
         print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
         print "  ${C}-t, --toc${N}                                        ${D}// Table of contents${N}"
         print "  ${C}-s, --search <pattern>${N}                           ${D}// Search pages${N}"
         print "  ${C}-l, --list${N}                                       ${D}// List all pages${N}"
         print "  ${C}PAGE${N}                                             ${D}// Jump to page number${N}"
         print ""
-        print "  ${D}── NAVIGATION (vim-style) ───────────────────────────────────────────────${N}"
+        _wiz_separator "NAVIGATION (vim-style)"
         print "  ${C}j / n / l / enter / space${N}                        ${D}// Next page${N}"
         print "  ${C}k / p / h${N}                                        ${D}// Previous page${N}"
         print "  ${C}d${N}                                                ${D}// Forward 5 pages${N}"
@@ -55,12 +95,13 @@ function zpwrWizard(){
         print "  ${C}?${N}                                                ${D}// Keybinding help${N}"
         print "  ${C}q${N}                                                ${D}// Quit${N}"
         print ""
-        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────────${N}"
+        _wiz_separator "EXAMPLES"
         print "  ${C}zpwr wizard${N}                                      ${D}// start from page 1${N}"
         print "  ${C}zpwr wizard --toc${N}                                ${D}// table of contents${N}"
         print "  ${C}zpwr wizard 42${N}                                   ${D}// jump to page 42${N}"
         print "  ${C}zpwr wizard --search git${N}                         ${D}// find git pages${N}"
         print ""
+        unfunction _wiz_box_width _wiz_hline _wiz_boxline _wiz_separator 2>/dev/null
         return 0
     fi
 
@@ -95,19 +136,18 @@ function zpwrWizard(){
             print " ${M} ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗    ██║  ██║██║   ██║██║     ╚════██║${N}"
             print " ${C}███████╗██║     ╚███╔███╔╝██║  ██║    ██████╔╝╚██████╔╝╚██████╗███████║${N}"
             print " ${C}╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚══════╝${N}"
-            print " ${D}┌──────────────────────────────────────────────────────────────────────────┐${N}"
-            printf " ${D}│${N} ${G}%3d/${total_pages}${N}  ${D}//${N} ${C}%-55s${N}  ${D}│${N}\n" $current_page "$PAGE_TITLE"
-            print " ${D}└──────────────────────────────────────────────────────────────────────────┘${N}"
+            _wiz_hline '┌' '┐'
+            _wiz_boxline "$(printf " ${G}%3d/${total_pages}${N}  ${D}//${N} ${C}%s${N}" $current_page "$PAGE_TITLE")"
+            _wiz_hline '└' '┘'
             print ""
             # render content into variable to measure height
-            local _page_out=""
+            _page_out=""
             if (( ${+functions[PAGE_CONTENT]} )); then
                 _page_out="$(PAGE_CONTENT)"
                 unfunction PAGE_CONTENT 2>/dev/null
             fi
             print "$_page_out"
             # pad to pin footer at bottom: 11 lines for header+banner, 3 for footer
-            local -i _content_lines _pad_lines
             _content_lines=$(echo "$_page_out" | wc -l)
             _pad_lines=$(( LINES - 11 - _content_lines - 3 ))
             if (( _pad_lines > 0 )); then
@@ -117,7 +157,10 @@ function zpwrWizard(){
             print "  ${R}page ${current_page} not found${N}"
         fi
         # footer — pinned to bottom
-        print "  ${D}──────────────────────────────────────────────────────────────────────────${N}"
+        fw=$(_wiz_box_width)
+        printf "  ${D}"
+        printf '─%.0s' {1..$fw}
+        printf "${N}\n"
         print "  ${C}j${N}/${C}n${N} next  ${C}k${N}/${C}p${N} prev  ${C}d${N}/${C}u${N} ±5  ${C}]${N}/${C}[${N} chapter  ${C}t${N} toc  ${C}/${N} search  ${C}:${N}num  ${C}r${N} rand  ${C}?${N} help  ${C}q${N} quit"
         print -n "  ${D}>>>${N} "
     }
@@ -132,9 +175,9 @@ function zpwrWizard(){
         print " ${M} ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗    ██║  ██║██║   ██║██║     ╚════██║${N}"
         print " ${C}███████╗██║     ╚███╔███╔╝██║  ██║    ██████╔╝╚██████╔╝╚██████╗███████║${N}"
         print " ${C}╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝  ╚═╝    ╚═════╝  ╚═════╝  ╚═════╝╚══════╝${N}"
-        print " ${D}┌──────────────────────────────────────────────────────────────────────────┐${N}"
-        print " ${D}│${N} ${G}TABLE OF CONTENTS${N}  ${D}//${N} ${C}${total_pages} pages${N}  ${D}//${N} ${M}The ZPWR Encyclopedia${N}       ${D}│${N}"
-        print " ${D}└──────────────────────────────────────────────────────────────────────────┘${N}"
+        _wiz_hline '┌' '┐'
+        _wiz_boxline "$(printf " ${G}TABLE OF CONTENTS${N}  ${D}//${N} ${C}${total_pages} pages${N}  ${D}//${N} ${M}The ZPWR Encyclopedia${N}")"
+        _wiz_hline '└' '┘'
         print ""
 
         chapter_shown=""
@@ -155,7 +198,10 @@ function zpwrWizard(){
             unfunction PAGE_CONTENT 2>/dev/null
         done
         print ""
-        print "  ${D}──────────────────────────────────────────────────────────────────────────${N}"
+        fw=$(_wiz_box_width)
+        printf "  ${D}"
+        printf '─%.0s' {1..$fw}
+        printf "${N}\n"
         print "  ${D}enter page number or press any key to return${N}"
         print -n "  ${D}>>>${N} "
     }
@@ -232,6 +278,9 @@ function zpwrWizard(){
         (( current_page < 1 )) && current_page=1
         (( current_page > total_pages )) && current_page=$total_pages
     fi
+
+    # ── SIGWINCH HANDLER ─────────────────────────────────────
+    trap '_wiz_render' WINCH
 
     # ── MAIN LOOP ─────────────────────────────────────────────
     while true; do
@@ -340,7 +389,10 @@ function zpwrWizard(){
             '?')
                 printf '\033[H\033[2J'
                 print ""
-                print "  ${C}── KEYBINDINGS ────────────────────────────────────────────────────────${N}"
+                hw=$(_wiz_box_width)
+                printf "  ${C}── KEYBINDINGS "
+                printf '─%.0s' {1..$(( hw - 15 ))}
+                printf "${N}\n"
                 print ""
                 print "  ${B}Navigation${N}"
                 print "  ${C}j n l space enter${N}    ${D}next page${N}"
@@ -367,7 +419,8 @@ function zpwrWizard(){
                 ;;
             # quit: q Q
             q|Q)
-                unfunction _wiz_render _wiz_toc _wiz_search 2>/dev/null
+                trap - WINCH
+                unfunction _wiz_render _wiz_toc _wiz_search _wiz_box_width _wiz_hline _wiz_boxline _wiz_separator 2>/dev/null
                 return 0
                 ;;
         esac
