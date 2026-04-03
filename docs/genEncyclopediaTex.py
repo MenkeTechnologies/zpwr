@@ -79,7 +79,7 @@ def convert_line(text):
     # Strip leading $ prompt for matching
     check_clean = re.sub(r'^[\$\\]*\$?\s*', '', stripped_clean)
     is_cmd = False
-    has_cmd_color = '${M}' in original or '${C}' in original
+    has_cmd_color = '${M}' in original
     is_header = '${B}${Y}' in original or '${B}${M}' in original
     if has_cmd_color and not is_header:
         cmd_prefixes = ('zpwr ', 'sudo ', 'git ', 'cd ', 'tmux ',
