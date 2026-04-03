@@ -99,6 +99,47 @@ def convert_line(text):
         return ('comment', clean)
     return ('text', clean)
 
+def fix_prose(text):
+    """Fix grammar for prose text: capitalize sentences, ensure trailing period."""
+    if not text or len(text) < 3:
+        return text
+    # skip if it looks like a list/table/key=value/dotted line
+    if re.match(r'^[\-\*\d]', text) or '...' in text or '===' in text:
+        return text
+    # known command names that must stay lowercase
+    _cmds = {'zpwr', 'zsh', 'bash', 'tmux', 'vim', 'nvim', 'emacs', 'git',
+             'fzf', 'eza', 'bat', 'fd', 'rg', 'grep', 'sed', 'awk', 'curl',
+             'ssh', 'sudo', 'brew', 'pip', 'npm', 'cargo', 'perl', 'python3',
+             'lsof', 'lsofrs', 'temprs', 'ccze', 'grc', 'figlet', 'zinit',
+             'compinit', 'autoload', 'bindkey', 'zstyle', 'zmodload',
+             'shellcheck', 'shfmt', 'xelatex', 'delta', 'netstat', 'ss',
+             'strace', 'ltrace', 'dtrace', 'dtruss', 'fswatch', 'inotifywait',
+             'ponysay', 'lolcat', 'cmatrix', 'zprof', 'zcompile'}
+
+    def _cap_if_not_cmd(m):
+        word = m.group(2)
+        if word in _cmds:
+            return m.group(1) + ' ' + word
+        return m.group(1) + ' ' + word[0].upper() + word[1:]
+
+    # capitalize first word if not a command name
+    i = 0
+    while i < len(text) and not text[i].isalpha():
+        i += 1
+    if i < len(text):
+        first_word = re.match(r'[a-zA-Z_\-]+', text[i:])
+        if first_word and first_word.group().lower() not in _cmds:
+            text = text[:i] + text[i].upper() + text[i+1:]
+
+    # capitalize after sentence-ending punctuation, unless next word is a command
+    text = re.sub(r'([.!?])\s+([a-z][a-z_\-]*)', _cap_if_not_cmd, text)
+
+    # add trailing period if ends with alphanumeric
+    stripped = text.rstrip()
+    if stripped and stripped[-1] not in '.!?:;,)]\'"' and stripped[-1].isalnum():
+        text = stripped + '.'
+    return text
+
 # Screenshot directory (computed early for title page)
 screenshotdir = os.path.join(os.path.dirname(outfile), "screenshots")
 figlet_path = os.path.join(screenshotdir, 'figlet_zpwr.png')
@@ -458,7 +499,7 @@ with open(outfile, 'w') as f:
                         f.write(f'{_protect_bracket(t)}\\\\\n')
                     f.write('\n')
                 else:
-                    f.write(' '.join(text_buffer) + '\n\n')
+                    f.write(fix_prose(' '.join(text_buffer)) + '\n\n')
                 text_buffer.clear()
 
         for line in prints:
