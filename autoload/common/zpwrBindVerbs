@@ -59,13 +59,13 @@ function zpwrBindVerbs(){
             cd*|*cd|home*)
                 zpwrCdVerbs+=("$k:$v")
                 ;;
-            log*|taillog)
+            log*|taillog|logs)
                 zpwrLogVerbs+=("$k:$v")
                 ;;
-            bench|flame|top|doctor|deps|trace|funcrank|aliasrank|startup|lint|stale|pathaudit|ports)
+            bench|benchmark|flame|flamechart|heatmap|top|dashboard|live|doctor|doc|checkup|deps|callers|trace|instrument|funcrank|rank|aliasrank|aliasusage|startup|profile|zprof|lint|check|stale|cruft|pathaudit|audit|ports|listening|netstat)
                 zpwrDiagVerbs+=("$k:$v")
                 ;;
-            watch|replay|snapshot|restore|wizard|manual|tutorial|docs|study)
+            watch|onchange|replay|rerun|snapshot|snap|save|restore|load|wizard|manual|tutorial|docs|study|book)
                 zpwrMonitorVerbs+=("$k:$v")
                 ;;
             *)
