@@ -84,10 +84,10 @@ function zpwrMatrix(){
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            -s|--speed) speed=$2; shift 2 ;;
+            -s|--speed) (( $# >= 2 )) && { speed=$2; shift 2; } || shift ;;
             -r|--rain) skip_story=1; shift ;;
-            -a|--act) start_act=$2; shift 2 ;;
-            -c|--chaos) chaos=$2; shift 2 ;;
+            -a|--act) (( $# >= 2 )) && { start_act=$2; shift 2; } || shift ;;
+            -c|--chaos) (( $# >= 2 )) && { chaos=$2; shift 2; } || shift ;;
             -t|--turbo) turbo=1; shift ;;
             --extended) extended=1; shift ;;
             --noir) noir=1; shift ;;
@@ -101,7 +101,7 @@ function zpwrMatrix(){
             --credits) show_credits=1; shift ;;
             --battle) battle_mode=1; shift ;;
             --player2) battle_p2=1; shift ;;
-            --gamedir) _battle_gamedir="$2"; shift 2 ;;
+            --gamedir) (( $# >= 2 )) && { _battle_gamedir="$2"; shift 2; } || shift ;;
             *) shift ;;
         esac
     done
