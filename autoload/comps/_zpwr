@@ -66,7 +66,7 @@ function _zpwr(){
                 attach)
                     _tmux-attach-session
                     ;;
-                cat)
+                cat|c)
                     _c
                     ;;
                 cd|f|fwd|forward)
@@ -204,7 +204,7 @@ function _zpwr(){
                         '(-a --all)'{-a,--all}'[show all type -a matches]' \
                         '*:command:_command_names -e'
                     ;;
-                deps)
+                deps|callers)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
                         '(-r --reverse)'{-r,--reverse}'[show callers]' \
@@ -333,6 +333,14 @@ function _zpwr(){
                 scripttopdf)
                     _arguments '*:script:_files'
                     ;;
+                linecount)
+                    _arguments '*:command:_command_names -e'
+                    ;;
+                gitlargest)
+                    _arguments '(-h --help)'{-h,--help}'[show help]'
+                    ;;
+                to|toggle)
+                    ;;
                 exercismdownload)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
@@ -347,9 +355,13 @@ function _zpwr(){
                         '*:blacklist string:'
                     ;;
                 *)
-                    _alternative \
-                'files:files:_files' \
-                'directory-stack:directory stack:_directory_stack'
+                    # only offer file/dir completion for unknown verbs
+                    # known ZPWR_VERBS with no args should not complete files
+                    if (( ! ${+ZPWR_VERBS[$verb]} )); then
+                        _alternative \
+                    'files:files:_files' \
+                    'directory-stack:directory stack:_directory_stack'
+                    fi
                     ;;
             esac
             ret=$?
