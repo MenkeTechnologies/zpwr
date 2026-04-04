@@ -24,7 +24,7 @@ PAGE_CONTENT() {
     print "  ${M}  zpwr help${N}${D}               # colorized list of ALL verbs${N}"
     print "  ${M}  zpwr verbs${N}${D}     # fzf fuzzy search through verbs${N}"
     print ""
-    print "  ${G}The ${M}verbsfzf${G} verb is your panic button (alias: subcommandsfzf).${N}"
+    print "  ${G}The ${M}verbs${G} verb is your panic button (alias: subcommandsfzf).${N}"
     print "  ${G}Forgot what a command is called? Fuzzy search it.${N}"
     print "  ${G}This pipes every verb and its description into fzf.${N}"
     print "  ${G}Type a few characters. Watch the list collapse.${N}"
