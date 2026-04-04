@@ -331,8 +331,7 @@ function zpwrMatrix(){
             _bocolor=$R
 
             if [[ -z "$TMUX" ]]; then
-                zpwrLogConsoleErr "--battle requires tmux"
-                zpwrLogConsoleErr "run inside a tmux session"
+                zpwrLogConsoleErr "--battle requires tmux\nrun inside a tmux session"
                 return 1
             fi
 
