@@ -14791,4 +14791,176 @@ Every alias that fires is a keystroke investment paying dividends. This dashboar
 
 \vspace{16pt}
 
+
+\chapter{ZINIT \& PLUGIN SYSTEM}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/art_system_core.png}
+\end{center}
+
+\section{zsh-sudo: Privilege Escalation}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} ZSH-SUDO: PRIVILEGE ESCALATION}\vspace{6pt}
+
+Toggle sudo on the current command line with one keybind.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE KEYBINDING}\vspace{4pt}
+
+Ctrl-S   (or Escape Escape in some configs)
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+sudo not on the line? .... it gets prepended sudo already there? ...... it gets stripped empty line? .............. pulls last command from history with sudo
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT STRIPS}\vspace{4pt}
+
+When removing sudo, it also strips: builtin, command, env, and all their arguments. So sudo -E env \textbf{PATH}=... command foo becomes just foo.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} EXAMPLE}\vspace{4pt}
+
+You type:  vim \textbf{\textbf{/etc/hosts}} Hit Ctrl-S: sudo vim \textbf{\textbf{/etc/hosts}} Hit Ctrl-S again: vim \textbf{\textbf{/etc/hosts}}
+
+Empty line + Ctrl-S: pulls your last command back with sudo prepended. No retyping. No arrow keys.
+
+Plugin: MenkeTechnologies/zsh-sudo.
+
+
+\vspace{16pt}
+
+\section{zsh-sed-sub: Inline Search \& Replace}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} ZSH-SED-SUB: INLINE SEARCH \& REPLACE}\vspace{6pt}
+
+Global search and replace on the current command line.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE KEYBINDING}\vspace{4pt}
+
+Ctrl-F Ctrl-P   in both viins and vicmd modes.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+1. Type a command on the line 2. Hit Ctrl-F Ctrl-P 3. Enter the search pattern 4. Enter the replacement 5. All occurrences on the line are replaced
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} EXAMPLE}\vspace{4pt}
+
+You type:  cp file.txt /old/path/ \&\& mv file.txt /old/path/bak Hit Ctrl-F Ctrl-P, search: old, replace: new Result:   cp file.txt /new/path/ \&\& mv file.txt /new/path/bak.
+
+Faster than arrow keys. Works on the entire line. Like sed but for your command line buffer.
+
+Plugin: MenkeTechnologies/zsh-sed-sub.
+
+
+\vspace{16pt}
+
+\section{gh\_reveal: Open Repo in Browser}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} GH\_REVEAL: OPEN REPO IN BROWSER}\vspace{6pt}
+
+Quickly open the current git project in your browser.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE COMMAND}\vspace{4pt}
+
+\begin{codebox}
+zpwr reveal              \# open current repo on GitHub\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+Reads the git remote URL from the current repo, converts it to an HTTPS URL, and opens it in your default browser. Works with GitHub, GitLab, Bitbucket, and any git remote.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} USE CASES}\vspace{4pt}
+
+- Check the PR page for the branch you are on - View the README without cat-ing it locally - Jump to Issues or Actions from the terminal - Share a repo link with a coworker fast
+
+Also accessible as zpwr revealrecurse to search up the directory tree for a git repo.
+
+Plugin: MenkeTechnologies/gh\_reveal.
+
+
+\vspace{16pt}
+
+\section{Colorful Manuals \& Package Completions}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} COLORFUL MANUALS \& PACKAGE COMPLETIONS}\vspace{6pt}
+
+The smaller plugins that make everything nicer.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-very-colorful-manuals}\vspace{4pt}
+
+Custom colorscheme for man pages. Headers in bold cyan, underlines in magenta, flags in green. Makes man pages actually readable instead of a wall of white text. Works automatically — no commands needed.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-gem-completion}\vspace{4pt}
+
+Enhanced Ruby gem completion. Includes all OMZ gem completion plus remote gem search:
+
+\begin{codebox}
+gem install <tab>         \# completes remote gems\\
+\end{codebox}
+
+Results come from gem search output.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-pip-description-completion}\vspace{4pt}
+
+Enhanced pip completion. All OMZ pip completion plus remote package search:
+
+\begin{codebox}
+pip install <tab>         \# completes remote packages\\
+\end{codebox}
+
+Results come from pip search output with descriptions.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-better-npm-completion}\vspace{4pt}
+
+Better npm completion. Context-aware:
+
+\begin{codebox}
+npm install <tab>         \# completes package names\\
+npm run <tab>             \# completes scripts from package.json\\
+npm uninstall <tab>       \# completes installed packages\\
+\end{codebox}
+
+Each subcommand gets the right completions.
+
+All plugins: MenkeTechnologies/*
+
+
+\vspace{16pt}
+
 \end{document}
