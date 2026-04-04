@@ -208,7 +208,7 @@
 {\fontsize{42}{50}\selectfont\bfseries\color{neoncyan} THE ZPWR}\\[0.5cm]
 {\fontsize{42}{50}\selectfont\bfseries\color{neonpink} ENCYCLOPEDIA}\\[2cm]
 {\Large\color{bodytext} A Hacker's Field Guide to the Terminal}\\[2cm]
-{\large\color{neonyellow}45 Chapters\quad\color{dimtext}//\quad\color{neonorange}506+ Verbs}\\[2cm]
+{\large\color{neonyellow}45 Chapters\quad\color{dimtext}//\quad\color{neonorange}510+ Verbs}\\[2cm]
 {\color{bodytext}\large MenkeTechnologies}\\[0.3cm]
 {\color{dimtext}\small \url{https://github.com/MenkeTechnologies/zpwr}}\\[3cm]
 {\color{dimtext}\small CYBERPUNK EDITION\quad//\quad Generated from \texttt{zpwr wizard}}\\[1cm]
@@ -14453,6 +14453,219 @@ v  <D-v>  '-d'*P\\
 \vspace{16pt}
 
 
+\chapter{TMUX DEEP DIVE}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/art_mainframe.png}
+\end{center}
+
+\section{Tmux Layout Save \& Restore}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} TMUX LAYOUT SAVE \& RESTORE}\vspace{6pt}
+
+Your pane arrangement, preserved forever.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE PROBLEM}\vspace{4pt}
+
+You spent 20 minutes splitting panes, resizing them, cd-ing into the right directories. Then tmux crashes. Or you reboot. Or you accidentally kill the session. All that layout work? Gone. Every time.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE SOLUTION}\vspace{4pt}
+
+\begin{codebox}
+zpwr tmuxsave dev             \# save layout as 'dev'\\
+zpwr tmuxload dev             \# restore it later\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT GETS SAVED}\vspace{4pt}
+
+Windows ............... names and count Pane splits ........... exact geometry via select-layout Directories ........... per-pane working directory Running commands ...... full args from process tree Window options ........ synchronize-panes, auto-rename Session options ....... non-plugin tmux settings Active pane/window .... cursor position restored
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} MANAGEMENT}\vspace{4pt}
+
+\begin{codebox}
+zpwr tmuxsave                 \# save with timestamp name\\
+zpwr tmuxsave --list          \# list saved layouts\\
+zpwr tmuxsave --delete dev    \# remove a layout\\
+zpwr tmuxload                 \# fzf picker (no args)\\
+zpwr tmuxload dev mywork      \# restore as session 'mywork'\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} KEYBINDING}\vspace{4pt}
+
+Prefix W                      \# save layout (tmux keybinding)
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} ALIASES}\vspace{4pt}
+
+\begin{codebox}
+zpwr layoutsave  = zpwr tmuxsave\\
+zpwr layoutload  = zpwr tmuxload\\
+\end{codebox}
+
+Layouts are stored as self-contained zsh scripts in \textbf{\$ZPWR\_LOCAL/layouts/.} You can edit them by hand, version control them, or share them with your team.
+
+PROTIP: Save your layout before experimenting. If you break everything, one command brings it back.
+
+
+\vspace{16pt}
+
+
+\chapter{MONITORING \& AUTOMATION}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_watch_help.png}
+\end{center}
+
+\section{Live Dashboard \& Sparklines}
+
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_bench_help.png}
+\end{center}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} LIVE DASHBOARD \& SPARKLINES}\vspace{6pt}
+
+Your shell's vital signs, in real time.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zpwr top}\vspace{4pt}
+
+A live-updating dashboard of your shell's resource usage. Runs in alternate screen buffer. Press q to quit.
+
+\begin{codebox}
+zpwr top       \# refresh every 2s\\
+zpwr top 1     \# fast refresh\\
+zpwr top 5     \# slow refresh\\
+zpwr dashboard \# same verb\\
+zpwr live      \# same verb\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT SHOWS}\vspace{4pt}
+
+Memory ............ RSS bar graph, virtual memory Shell objects ..... functions, aliases, completions, params Delta tracking .... changes between refreshes in yellow Loaded modules .... all zsh modules currently loaded Paths ............ fpath, path, named dirs, dir stack Context .......... git branch, tmux info, startup time Top 5 functions .. largest functions with size bars Top 5 paths ...... longest \textbf{PATH} entries
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} SPARKLINES}\vspace{4pt}
+
+Startup time history: last 40 shell starts Color-coded: green=fast yellow=mid red=slow Shows min/max/avg stats below the graph.
+
+Commit velocity: commits per day over 30 days Visualizes your development pace as a mini bar chart.
+
+Startup times are logged automatically on each shell init to \textbf{\$ZPWR\_LOCAL/startup\_history.log.}
+
+
+\vspace{16pt}
+
+
+\chapter{CREATIVE TOOLS}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/figlet_zpwr.png}
+\end{center}
+
+\section{Matrix: The Full Experience}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} MATRIX: THE FULL EXPERIENCE}\vspace{6pt}
+
+8 acts, 6 characters, and your ecosystem raining down
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE STORY}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix               \# 4-act story + rain\\
+zpwr matrix --extended     \# full 8-act saga\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE CHARACTERS}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix --cast         \# show character bios\\
+\end{codebox}
+
+Null Pointer .... protagonist, zpwr operator Segfault ........ bash loyalist in recovery Chmod777 ........ reckless, sudo for everything
+
+\begin{codebox}
+DevNull ......... silent assassin\\
+\end{codebox}
+
+Chad Electron ... MegaCorp VP, 64GB for Slack The Kernel ...... mythical elder, speaks in dmesg
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} \textbf{VISUAL} FX}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix --noir         \# monochrome green\\
+zpwr matrix --vhs          \# VHS tracking distortion\\
+zpwr matrix --crt          \# CRT scanlines\\
+zpwr matrix --glitch       \# extra corruption\\
+zpwr matrix --sound        \# terminal bells\\
+zpwr matrix --no-fx        \# disable all FX\\
+zpwr matrix -c 10          \# chaos level 1-10\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} PLAYBACK CONTROL}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix -s 7           \# speed 1-9\\
+zpwr matrix --turbo        \# skip all pauses\\
+zpwr matrix -a 5           \# jump to act 5\\
+zpwr matrix -r             \# skip story, rain only\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} MULTIPLAYER}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix --battle       \# 2-player tmux typing battle\\
+\end{codebox}
+
+Player 1 (Null Pointer) vs Player 2 (Chad Electron). Type zpwr commands faster than your opponent. HP bars, taunts, and a winner-takes-all endgame. Requires tmux. Auto-splits into two panes.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} INFO}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix --stats        \# ecosystem stats\\
+zpwr matrix --credits      \# end credits roll\\
+\end{codebox}
+
+
+\vspace{16pt}
+
+
 \chapter{THE END}
 
 
@@ -14517,6 +14730,63 @@ Run zpwr about to see the zpwr banner. Then open a new terminal. Watch the pony 
 {\small\itshape\color{dimtext} // \textbf{ZPWR} WIZARD ENCYCLOPEDIA v1.0 // SIGNAL LOST //}
 
 May your shell be fast, your pipes be clean, and your exit codes always zero.
+
+
+\vspace{16pt}
+
+
+\chapter{HEALTH \& DIAGNOSTICS}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_doctor_help.png}
+\end{center}
+
+\section{Expansion Stats Dashboard}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} EXPANSION STATS DASHBOARD}\vspace{6pt}
+
+Your aliases are working for you — here's the proof.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zpwrExpandStats}\vspace{4pt}
+
+Every time zsh-expand fires — alias, global alias, suffix alias, self-ref escape, native glob/hist, or spelling correction — it logs the event. zpwrExpandStats reads that log and shows you a ranked dashboard.
+
+\begin{codebox}
+zpwrExpandStats            \# show full dashboard\\
+zpwrExpandStats -h         \# help with all options\\
+zpwrExpandStats -t 10      \# top 10 aliases\\
+zpwrExpandStats -w 80      \# wider box (80 cols)\\
+zpwrExpandStats -r         \# reset all stats\\
+zpwrExpandStats -f FILE    \# custom stats file\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT TRACKS}\vspace{4pt}
+
+By trigger ......... space expansions vs history expansions By type ............ alias, global, suffix, escape, native Corrections ........ spelling fixes applied Total expansions ... how many times the engine fired Keystrokes saved ... chars you didn't have to type Top aliases ........ ranked bar chart with expansions shown
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+The zsh-expand plugin hooks into the zle accept-line widget. Before each command runs, it expands aliases, globals, and suffixes inline. Each expansion is logged to \textbf{\$ZPWR\_LOCAL/zpwr-expand-stats.dat} with the trigger type, expansion type, and original alias name.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} CONFIG}\vspace{4pt}
+
+\begin{codebox}
+ZPWR\_EXPAND\_STATS\_FILE     \# override stats file path\\
+ZPWR\_EXPAND\_STATS\_TOP      \# default top N (default: 20)\\
+\end{codebox}
+
+Every alias that fires is a keystroke investment paying dividends. This dashboard shows your ROI.
 
 
 \vspace{16pt}
