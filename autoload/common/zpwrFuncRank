@@ -8,6 +8,11 @@ function zpwrFuncRank(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=78
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -60,9 +65,10 @@ function zpwrFuncRank(){
     print " ${M}██╔══╝  ██║   ██║██║╚██╗██║██║         ██╔══██╗██╔══██║██║╚██╗██║██╔═██╗${N}"
     print " ${C}██║     ╚██████╔╝██║ ╚████║╚██████╗    ██║  ██║██║  ██║██║ ╚████║██║  ██╗${N}"
     print " ${C}╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝${N}"
-    print " ${D}┌──────────────────────────────────────────────────────────────────────────────┐${N}"
-    print " ${D}│${N} ${G}MINING${N}  ${D}//${N} ${C}${HISTFILE:t}${N}  ${D}//${N} ${M}${#functions} functions${N}  ${D}//${N} ${Y}${#ZPWR_VERBS} verbs${N}              ${D}│${N}"
-    print " ${D}└──────────────────────────────────────────────────────────────────────────────┘${N}"
+    _bt
+    printf -v _msg " ${G}MINING${N}  ${D}//${N} ${C}${HISTFILE:t}${N}  ${D}//${N} ${M}${#functions} functions${N}  ${D}//${N} ${Y}${#ZPWR_VERBS} verbs${N}"
+    _bx "$_msg"
+    _bb
     print ""
 
     # shared cache for cmd_counts + verb_counts

@@ -647,7 +647,7 @@ builtin zmodload -i zsh/complist
 builtin setopt glob_assign
 
 # no local var prints
-builtin setopt typesafe_silent
+builtin setopt typeset_silent
 
 # long format
 builtin setopt long_list_jobs

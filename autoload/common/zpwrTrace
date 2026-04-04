@@ -7,6 +7,11 @@ function zpwrTrace(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=70
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
 
     # pre-declare all variables to avoid local-in-loop printing
     local -i quick_mode=0 exit_code=0
@@ -95,9 +100,10 @@ function zpwrTrace(){
     print " ${M}   ██║   ██╔══██╗██╔══██║██║     ██╔══╝${N}"
     print " ${C}   ██║   ██║  ██║██║  ██║╚██████╗███████╗${N}"
     print " ${C}   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝${N}"
-    print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
-    print " ${D}│${N} ${G}TRACING${N}  ${D}//${N} ${C}${cmd_display}${N}                                        ${D}│${N}"
-    print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+    _bt
+    printf -v _msg " ${G}TRACING${N}  ${D}//${N} ${C}${cmd_display}${N}"
+    _bx "$_msg"
+    _bb
     print ""
 
     tmpdir=$(mktemp -d)
@@ -397,12 +403,13 @@ function zpwrTrace(){
     sig_empty=$(( 10 - perf_score ))
     (( perf_score >= 7 )) && sig_color=$G || { (( perf_score >= 4 )) && sig_color=$Y || sig_color=$R; }
 
-    print "  ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
-    printf "  ${D}│${N} ${B}SIGNAL${N}  ${sig_color}$(printf '█%.0s' {1..$perf_score})${D}$(printf '░%.0s' {1..$sig_empty})${N}"
-    printf "  ${D}//${N} ${wall_color}${wall_rating}${N}  ${D}//${N} "
-    if (( quick_mode )); then printf "${D}quick mode${N}"; else printf "${C}full trace${N}"; fi
-    print "                        ${D}│${N}"
-    print "  ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+    local _mode_text
+    if (( quick_mode )); then _mode_text="${D}quick mode${N}"; else _mode_text="${C}full trace${N}"; fi
+    _bt
+    printf -v _msg " ${B}SIGNAL${N}  ${sig_color}%s${D}%s${N}  ${D}//${N} ${wall_color}${wall_rating}${N}  ${D}//${N} %s" \
+        "$(printf '█%.0s' {1..$perf_score})" "$(printf '░%.0s' {1..$sig_empty})" "$_mode_text"
+    _bx "$_msg"
+    _bb
     print ""
 
     command rm -rf "$tmpdir"
