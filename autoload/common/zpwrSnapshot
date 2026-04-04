@@ -232,10 +232,12 @@ function zpwrSnapshot(){
     # summary
     local snapsize=$(du -sh "$snapdir" 2>/dev/null | cut -f1)
     printf "\n"
-    printf "  ${D}┌──────────────────────────────────────────────────────────────────────┐${N}\n"
-    printf "  ${D}│${N} ${G}SNAPSHOT COMPLETE${N}  ${D}//${N} ${C}%d components${N}  ${D}//${N} ${M}%s${N}                    ${D}│${N}\n" $count "$snapsize"
-    printf "  ${D}│${N} ${D}saved to:${N} %s   ${D}│${N}\n" "$snapdir"
-    printf "  ${D}└──────────────────────────────────────────────────────────────────────┘${N}\n"
+    _bt
+    printf -v _msg " ${G}SNAPSHOT COMPLETE${N}  ${D}//${N} ${C}%d components${N}  ${D}//${N} ${M}%s${N}" $count "$snapsize"
+    _bx "$_msg"
+    printf -v _msg " ${D}saved to:${N} %s" "$snapdir"
+    _bx "$_msg"
+    _bb
     printf "\n"
     unfunction _bx _bt _bb 2>/dev/null
 }

@@ -8,6 +8,11 @@ function zpwrWatch(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -85,10 +90,12 @@ function zpwrWatch(){
     print " ██║███╗██║██╔══██║   ██║   ██║     ██╔══██║"
     print " ╚███╔███╔╝██║  ██║   ██║   ╚██████╗██║  ██║"
     print "  ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝${N}"
-    print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
-    print " ${D}│${N} ${G}WATCHING${N}  ${D}//${N} ${C}${pattern}${N}  ${D}//${N} ${M}${watcher}${N}                 ${D}│${N}"
-    print " ${D}│${N} ${G}COMMAND${N}   ${D}//${N} ${Y}${cmd}${N}                                    ${D}│${N}"
-    print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+    _bt
+    printf -v _msg " ${G}WATCHING${N}  ${D}//${N} ${C}${pattern}${N}  ${D}//${N} ${M}${watcher}${N}"
+    _bx "$_msg"
+    printf -v _msg " ${G}COMMAND${N}   ${D}//${N} ${Y}${cmd}${N}"
+    _bx "$_msg"
+    _bb
     print "  ${D}>> Ctrl-C to stop <<${N}"
     print ""
 
@@ -107,9 +114,10 @@ function zpwrWatch(){
             (( run_count++ ))
             local ts="$(date '+%H:%M:%S')"
             print ""
-            print "  ${D}┌──────────────────────────────────────────────────────────┐${N}"
-            print "  ${D}│${N} ${G}TRIGGERED${N}  ${D}//${N} ${C}#${run_count}${N}  ${D}//${N} ${M}${ts}${N}  ${D}//${N} ${Y}${changed_file:t}${N}  ${D}│${N}"
-            print "  ${D}└──────────────────────────────────────────────────────────┘${N}"
+            _bt
+            printf -v _msg " ${G}TRIGGERED${N}  ${D}//${N} ${C}#${run_count}${N}  ${D}//${N} ${M}${ts}${N}  ${D}//${N} ${Y}${changed_file:t}${N}"
+            _bx "$_msg"
+            _bb
             print ""
 
             local start=$EPOCHREALTIME
@@ -137,9 +145,10 @@ function zpwrWatch(){
             (( run_count++ ))
             local ts="$(date '+%H:%M:%S')"
             print ""
-            print "  ${D}┌──────────────────────────────────────────────────────────┐${N}"
-            print "  ${D}│${N} ${G}TRIGGERED${N}  ${D}//${N} ${C}#${run_count}${N}  ${D}//${N} ${M}${ts}${N}  ${D}//${N} ${Y}${event_file}${N}  ${D}│${N}"
-            print "  ${D}└──────────────────────────────────────────────────────────┘${N}"
+            _bt
+            printf -v _msg " ${G}TRIGGERED${N}  ${D}//${N} ${C}#${run_count}${N}  ${D}//${N} ${M}${ts}${N}  ${D}//${N} ${Y}${event_file}${N}"
+            _bx "$_msg"
+            _bb
             print ""
 
             local start=$EPOCHREALTIME

@@ -7,6 +7,11 @@ function zpwrFlame(){
 
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=70
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -128,9 +133,10 @@ function zpwrFlame(){
     total_time_us=${entries[1]%% *}
 
     # results
-    print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
-    print " ${D}│${N} ${G}STARTUP FLAME CHART${N}  ${D}//${N} ${C}top ${top_n} functions by total time${N}        ${D}│${N}"
-    print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+    _bt
+    printf -v _msg " ${G}STARTUP FLAME CHART${N}  ${D}//${N} ${C}top ${top_n} functions by total time${N}"
+    _bx "$_msg"
+    _bb
     print ""
 
     # color gradient: hottest = red, warm = yellow, cool = green, cold = cyan
