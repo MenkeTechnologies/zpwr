@@ -138,6 +138,10 @@ function zpwrStdinExists(){
     if [[ -n "$in" ]]; then
         echo "$in"
     else
+        if [[ -z "$arg" ]]; then
+            zpwrLogConsoleErr "usage: zpwrStdinExists LABEL (no stdin)"
+            return 1
+        fi
         echo "No input found for $arg!"
     fi
 }
@@ -225,7 +229,7 @@ function zpwrIsBinary() {
 
 function zpwrLogColor(){
 
-    if [[ -z $2 ]]; then
+    if [[ $# -lt 2 ]]; then
         zpwrLogConsoleErr "usage: zpwrLogColor LVL MSG"
         return 1
     fi
@@ -352,6 +356,10 @@ function zpwrLogConsoleNotGit() {
 
 function zpwrLogConsolePrefix(){
 
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrLogConsolePrefix MSG"
+        return 1
+    fi
     zpwrPrettyPrint "$ZPWR_CHAR_LOGO $*"
     zpwrLogInfo "$ZPWR_CHAR_LOGO $*"
 
@@ -359,6 +367,10 @@ function zpwrLogConsolePrefix(){
 
 function zpwrLogConsoleHeader(){
 
+    if [[ $# -lt 2 ]]; then
+        zpwrLogConsoleErr "usage: zpwrLogConsoleHeader LVL MSG"
+        return 1
+    fi
     zpwrPrettyPrint "$*"
     zpwrLogColor "$@"
 
@@ -442,12 +454,20 @@ function zpwrNeedSudo(){
 
 function zpwrFail(){
 
-        echo "Failure due to $1" >&2
+    if [[ -z "$1" ]]; then
+        echo "usage: zpwrFail REASON" >&2
         exit 1
+    fi
+    echo "Failure due to $1" >&2
+    exit 1
 }
 
 function zpwrFileMustExist(){
 
+    if [[ -z "$1" ]]; then
+        echo "usage: zpwrFileMustExist FILE" >&2
+        exit 1
+    fi
     if [[ ! -f "$1" ]]; then
         echo "Where is the file '$1'?" >&2
         exit 1
@@ -599,6 +619,11 @@ function zpwrInstallGitHubPlugin(){
 
 function zpwrInstallerUpdate(){
 
+    if [[ -z "$1" || -z "$2" ]]; then
+        zpwrLogConsoleErr "usage: zpwrInstallerUpdate COMMAND DISTRO"
+        return 1
+    fi
+
     zpwrExists "$1" || {
 
         if [[ $2 == mac ]]; then
@@ -622,6 +647,11 @@ function zpwrInstallerUpdate(){
 }
 
 function zpwrInstallerUpgrade(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrInstallerUpgrade DISTRO"
+        return 1
+    fi
 
     if [[ $1 == mac ]]; then
         brew update
@@ -647,6 +677,11 @@ function zpwrInstallerUpgrade(){
 
 function zpwrInstallerRefresh(){
 
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrInstallerRefresh DISTRO"
+        return 1
+    fi
+
     if [[ $1 == mac ]]; then
         brew update
     elif [[ $1 == debian ]];then
@@ -670,6 +705,11 @@ function zpwrInstallerRefresh(){
 
 function zpwrPrettyPrintInstaller(){
 
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrPrettyPrintInstaller MSG"
+        return 1
+    fi
+
     (( ++INSTALL_COUNTER ))
     printf "\x1b[32;1m"
     perl -le "print '#'x80"
@@ -679,15 +719,6 @@ function zpwrPrettyPrintInstaller(){
     perl -le "print '#'x80"
     printf "\x1b[0m"
     printf "\n"
-}
-
-function zpwrNeedSudo(){
-
-    if [[ ! -w "$1" ]]; then
-        return 0
-    else
-        return 1
-    fi
 }
 
 function proceed(){
@@ -724,6 +755,11 @@ function zpwrPrettyPrint(){
 
 function zpwrPrettyPrintBoxStdin(){
 
+    if [[ -z "$1" ]]; then
+        echo "usage: zpwrPrettyPrintBoxStdin LABEL" >&1
+        exit 1
+    fi
+
     local perlfile
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
@@ -738,6 +774,11 @@ function zpwrPrettyPrintBoxStdin(){
 }
 
 function zpwrPrettyPrintBox(){
+
+    if [[ -z "$1" ]]; then
+        echo "usage: zpwrPrettyPrintBox MSG" >&1
+        exit 1
+    fi
 
     local perlfile
 
@@ -810,6 +851,11 @@ function zpwrClearGitCache(){
 function zpwrGitRepoUpdater() {
 
     local enclosing_dir generic_git_repo_plugin
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrGitRepoUpdater DIR"
+        return 1
+    fi
 
     enclosing_dir="$1"
 
