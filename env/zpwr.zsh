@@ -104,6 +104,7 @@ ZPWR_VARS[VERB_0]="$0"
     ZPWR_VERBS[exercismedit]='zpwrEditExercism=edit file in $HOME/Exercism'
     ZPWR_VERBS[homeexercism]='cd $HOME/Exercism=cd to $HOME/Exercism'
     ZPWR_VERBS[exercismdownload]='zpwrExercismDownloadAll=download all for track'
+    ZPWR_VERBS[expandstats]='zpwrExpandStats=expansion stats dashboard from zsh-expand'
     ZPWR_VERBS[exists]='zpwrExists=check if identifier is valid'
     ZPWR_VERBS[existscommand]='zpwrCommandExists=check if command is valid'
     ZPWR_VERBS[emacstokens]='etok=emacs the .tokens.sh file'

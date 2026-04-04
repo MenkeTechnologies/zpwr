@@ -365,6 +365,15 @@ function _zpwr(){
                         _describe 'layout' _layouts
                     fi
                     ;;
+                expandstats)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-t --top)'{-t,--top}'[top N aliases]:count:(5 10 20 50)' \
+                        '(-w --width)'{-w,--width}'[box width]:width:(60 70 80 100)' \
+                        '(-c --color)'{-c,--color}'[force ANSI colors]' \
+                        '(-r --reset)'{-r,--reset}'[clear all stats]' \
+                        '(-f --file)'{-f,--file}'[override stats file]:file:_files'
+                    ;;
                 exercismdownload)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \
