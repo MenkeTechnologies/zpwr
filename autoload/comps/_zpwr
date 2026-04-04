@@ -341,6 +341,30 @@ function _zpwr(){
                     ;;
                 to|toggle)
                     ;;
+                tmuxsave|layoutsave)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-l --list)'{-l,--list}'[list saved layouts]' \
+                        '(-d --delete)'{-d,--delete}'[delete layout]:layout:->layouts' \
+                        '1:layout name:'
+                    if [[ "$state" == layouts ]]; then
+                        local -a _layouts
+                        _layouts=( "$ZPWR_LOCAL"/layouts/*.zsh(N:t:r) )
+                        _describe 'layout' _layouts
+                    fi
+                    ;;
+                tmuxload|layoutload)
+                    _arguments \
+                        '(-h --help)'{-h,--help}'[show help]' \
+                        '(-l --list)'{-l,--list}'[list saved layouts]' \
+                        '1:layout:->layouts' \
+                        '2:session name:'
+                    if [[ "$state" == layouts ]]; then
+                        local -a _layouts
+                        _layouts=( "$ZPWR_LOCAL"/layouts/*.zsh(N:t:r) )
+                        _describe 'layout' _layouts
+                    fi
+                    ;;
                 exercismdownload)
                     _arguments \
                         '(-h --help)'{-h,--help}'[show help]' \

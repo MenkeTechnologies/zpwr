@@ -842,6 +842,19 @@ zpwr top 5     # refresh every 5s
 zpwr top 1     # fast refresh
 ```
 
+## Tmux Layout Save/Load -- zpwr tmuxsave / zpwr tmuxload
+`zpwr tmuxsave [name]` captures the current tmux session layout — windows, pane splits, layout geometry, working directories, and window names — into a self-contained zsh script in `$ZPWR_LOCAL/layouts/`.  The generated script recreates the exact layout via `tmux new-session`, `split-window`, and `select-layout` with the original geometry string, then `cd`s each pane to its saved directory.  `zpwr tmuxload [name]` sources the script to restore the layout, with optional fzf picker when no name is given.  Also available as `zpwr layoutsave` and `zpwr layoutload`.
+
+```sh
+zpwr tmuxsave              # save with timestamp name
+zpwr tmuxsave dev          # save as "dev"
+zpwr tmuxsave --list       # list saved layouts
+zpwr tmuxsave --delete dev # delete "dev" layout
+zpwr tmuxload dev          # restore "dev" layout
+zpwr tmuxload dev mywork   # restore as session "mywork"
+zpwr tmuxload              # fzf picker (if fzf available)
+```
+
 ## Health Check -- zpwr doctor
 `zpwr doctor` scans the environment for common issues and reports with pass/warn/fail indicators.  Checks for: stale `.zwc` compiled files, zcompdump freshness, duplicate and missing PATH/FPATH entries, broken symlinks, invalid named directories, p10k named dir pollution, missing dependencies (git, eza, fzf, tmux, perl, python3), zinit installation, history file and backups, and config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh).  Reports a signal bar and summary with pass/warning/error counts.
 
