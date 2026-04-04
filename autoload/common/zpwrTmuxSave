@@ -93,11 +93,21 @@ function zpwrTmuxSave(){
     layout_name="${1:-$(date +%Y%m%d_%H%M%S)}"
     layout_file="$layout_dir/${layout_name}.zsh"
 
-    local session_name idx wname wlayout wact widx wline pline pp pc pa
+    local session_name idx wname wlayout wact widx wline pline pp pc pa ppid
+    local child_args child_pid wopts_line opt_name opt_val
     local -a win_indices win_names win_layouts win_active
-    local -a pane_paths pane_cmds pane_acts
-    local -i wi pi pane_count first_win=1 active_win=0
+    local -a pane_paths pane_cmds pane_acts pane_pids
+    local -a session_opts window_opts
+    local -i wi pi pane_count active_win=0
     session_name=$(tmux display-message -p '#{session_name}')
+
+    # capture session-level options that differ from defaults
+    session_opts=()
+    while IFS= read -r wopts_line; do
+        [[ "$wopts_line" == @* ]] && continue  # skip plugin vars
+        [[ -z "$wopts_line" ]] && continue
+        session_opts+=( "$wopts_line" )
+    done < <(tmux show-options 2>/dev/null)
 
     while IFS=$'\t' read -r wline; do
         idx="${wline%%	*}"; wline="${wline#*	}"
@@ -123,6 +133,17 @@ function zpwrTmuxSave(){
         print "tmux new-session -d -s \"\$_sess\" -n '${win_names[1]}'"
         print ""
 
+        # session-level options
+        if (( ${#session_opts} > 0 )); then
+            print "# ── session options ──────────────────────────"
+            for wopts_line in "${session_opts[@]}"; do
+                opt_name="${wopts_line%% *}"
+                opt_val="${wopts_line#* }"
+                print "tmux set-option -t \"\$_sess\" ${opt_name} ${opt_val}"
+            done
+            print ""
+        fi
+
         for (( wi=1; wi<=${#win_indices}; wi++ )); do
             widx="${win_indices[$wi]}"
             wname="${win_names[$wi]}"
@@ -136,16 +157,32 @@ function zpwrTmuxSave(){
                 print "# ── window ${widx}: ${wname} (initial) ─────────────────"
             fi
 
-            # get pane info for this window
-            pane_paths=() pane_cmds=() pane_acts=()
+            # per-window options
+            window_opts=()
+            while IFS= read -r wopts_line; do
+                [[ "$wopts_line" == @* || -z "$wopts_line" ]] && continue
+                window_opts+=( "$wopts_line" )
+            done < <(tmux show-window-options -t ":${widx}" 2>/dev/null)
+            if (( ${#window_opts} > 0 )); then
+                for wopts_line in "${window_opts[@]}"; do
+                    opt_name="${wopts_line%% *}"
+                    opt_val="${wopts_line#* }"
+                    print "tmux set-window-option -t \"\$_sess:${widx}\" ${opt_name} ${opt_val}"
+                done
+            fi
+
+            # get pane info for this window (path, command, active, pid)
+            pane_paths=() pane_cmds=() pane_acts=() pane_pids=()
             while IFS=$'\t' read -r pline; do
                 pp="${pline%%	*}"; pline="${pline#*	}"
                 pc="${pline%%	*}"; pline="${pline#*	}"
-                pa="${pline}"
+                pa="${pline%%	*}"; pline="${pline#*	}"
+                ppid="${pline}"
                 pane_paths+=( "$pp" )
                 pane_cmds+=( "$pc" )
                 pane_acts+=( "$pa" )
-            done < <(tmux list-panes -t ":${widx}" -F "#{pane_current_path}	#{pane_current_command}	#{pane_active}")
+                pane_pids+=( "$ppid" )
+            done < <(tmux list-panes -t ":${widx}" -F "#{pane_current_path}	#{pane_current_command}	#{pane_active}	#{pane_pid}")
 
             pane_count=${#pane_paths}
 
@@ -164,6 +201,29 @@ function zpwrTmuxSave(){
 
             # apply the exact layout geometry
             print "tmux select-layout -t \"\$_sess:${widx}\" '${wlayout}'"
+
+            # restore running commands in each pane
+            for (( pi=1; pi<=pane_count; pi++ )); do
+                pc="${pane_cmds[$pi]}"
+                # skip if pane is just running a shell
+                if [[ "$pc" != "zsh" && "$pc" != "bash" && "$pc" != "sh" && -n "$pc" ]]; then
+                    # get full command line from process tree
+                    child_args=""
+                    child_pid=$(pgrep -P "${pane_pids[$pi]}" 2>/dev/null | head -1)
+                    if [[ -n "$child_pid" ]]; then
+                        child_args=$(ps -o args= -p "$child_pid" 2>/dev/null)
+                    fi
+                    [[ -z "$child_args" ]] && child_args=$(ps -o args= -p "${pane_pids[$pi]}" 2>/dev/null)
+                    if [[ -n "$child_args" ]]; then
+                        # strip reattach-to-user-namespace wrapper
+                        child_args="${child_args#reattach-to-user-namespace -l }"
+                        # skip if it's just a shell
+                        if [[ "$child_args" != */zsh && "$child_args" != */bash ]]; then
+                            print "tmux send-keys -t \"\$_sess:${widx}.$((pi-1))\" ${(q)child_args} Enter"
+                        fi
+                    fi
+                fi
+            done
 
             # select the active pane
             for (( pi=1; pi<=pane_count; pi++ )); do
