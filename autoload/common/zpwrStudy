@@ -61,7 +61,7 @@ function zpwrStudy(){
         case "$1" in
             -v|--vertical) split_flag="-v"; shift ;;
             -s|--size) shift; pane_size=${1:-50}; shift ;;
-            --search) wizard_args="--search $2"; shift 2 ;;
+            --search) (( $# >= 2 )) && { wizard_args="--search $2"; shift 2; } || shift ;;
             --toc) wizard_args="--toc"; shift ;;
             *) break ;;
         esac
