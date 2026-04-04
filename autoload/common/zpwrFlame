@@ -56,9 +56,9 @@ function zpwrFlame(){
     print " ${M}██╔══╝  ██║     ██╔══██║██║╚██╔╝██║██╔══╝${N}"
     print " ${C}██║     ███████╗██║  ██║██║ ╚═╝ ██║███████╗${N}"
     print " ${C}╚═╝     ╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝${N}"
-    print " ${D}┌──────────────────────────────────────────────────────────────────────┐${N}"
-    print " ${D}│${N} ${G}PROFILING${N}  ${D}//${N} ${C}launching instrumented shell${N}                       ${D}│${N}"
-    print " ${D}└──────────────────────────────────────────────────────────────────────┘${N}"
+    _bt
+    _bx " ${G}PROFILING${N}  ${D}//${N} ${C}launching instrumented shell${N}"
+    _bb
     print "  ${D}>> collecting zprof data from a fresh shell startup <<${N}"
     print ""
 
