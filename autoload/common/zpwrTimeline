@@ -22,9 +22,9 @@ function zpwrTimeline(){
         print " ${M}   ██║   ██║██║╚██╔╝██║██╔══╝  ██║     ██║██║╚██╗██║██╔══╝${N}"
         print " ${C}   ██║   ██║██║ ╚═╝ ██║███████╗███████╗██║██║ ╚████║███████╗${N}"
         print " ${C}   ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝${N}"
-        print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
-        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}TIMELINE${N}              ${D}│${N}"
-        print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}TIMELINE${N}"
+        _bb
         print "  ${D}>> SHELL HISTORY TIMELINE // VISUAL REPLAY <<${N}"
         print ""
         print "  Visual timeline of shell history grouped by hour and directory."

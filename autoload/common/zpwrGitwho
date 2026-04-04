@@ -21,9 +21,9 @@ function zpwrGitwho(){
         print " ${M}██║   ██║██║   ██║   ██║███╗██║██╔══██║██║   ██║${N}"
         print " ${C}╚██████╔╝██║   ██║   ╚███╔███╔╝██║  ██║╚██████╔╝${N}"
         print " ${C} ╚═════╝ ╚═╝   ╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝${N}"
-        print " ${D}┌──────────────────────────────────────────────────────────────────┐${N}"
-        print " ${D}│${N} ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}GITWHO${N}                ${D}│${N}"
-        print " ${D}└──────────────────────────────────────────────────────────────────┘${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}GITWHO${N}"
+        _bb
         print "  ${D}>> GIT CONTRIBUTOR STATS // ALL REPOS <<${N}"
         print ""
         print "  Aggregate git shortlog -sn across all cached git repos."
