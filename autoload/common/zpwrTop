@@ -66,6 +66,8 @@ function zpwrTop(){
     local spark_line spark_min spark_max spark_avg spark_last frac
     local -i si sv sn spark_sum srange sidx
     local startup_log="$ZPWR_LOCAL/startup_history.log"
+    local hud_plain pad_count
+    local -i box_inner=76
     spark_chars=( '▁' '▂' '▃' '▄' '▅' '▆' '▇' '█' )
 
     printf '\033[?1049h'
@@ -198,9 +200,13 @@ function zpwrTop(){
         print -r " ${M} ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗      ██║   ██║   ██║██╔═══╝${N}${K}"
         print -r " ${C}███████╗██║     ╚███╔███╔╝██║  ██║      ██║   ╚██████╔╝██║${N}${K}"
         print -r " ${C}╚══════╝╚═╝      ╚══╝╚══╝ ╚═╝  ╚═╝      ╚═╝    ╚═════╝ ╚═╝${N}${K}"
-        print -r " ${D}┌────────────────────────────────────────────────────────────────────────────┐${N}${K}"
-        print -r " ${D}│${N} ${G}LIVE${N}  ${D}//${N} ${C}PID $$${N}  ${D}//${N} ${M}up ${up}${N}  ${D}//${N} ${Y}${interval}s${N}  ${D}//${N} ${D}#${iteration}${N}  ${D}//${N} ${D}q quit${N}          ${D}│${N}${K}"
-        print -r " ${D}└────────────────────────────────────────────────────────────────────────────┘${N}${K}"
+        # compute dynamic padding: " LIVE  // PID N  // up X  // Ns  // #N  // q quit "
+        hud_plain=" LIVE  // PID $$  // up ${up}  // ${interval}s  // #${iteration}  // q quit "
+        pad_count=$(( box_inner - ${#hud_plain} ))
+        (( pad_count < 0 )) && pad_count=0
+        print -r " ${D}┌$(printf '─%.0s' {1..$box_inner})┐${N}${K}"
+        print -r " ${D}│${N} ${G}LIVE${N}  ${D}//${N} ${C}PID $$${N}  ${D}//${N} ${M}up ${up}${N}  ${D}//${N} ${Y}${interval}s${N}  ${D}//${N} ${D}#${iteration}${N}  ${D}//${N} ${D}q quit${N}${(l:pad_count:: :)} ${D}│${N}${K}"
+        print -r " ${D}└$(printf '─%.0s' {1..$box_inner})┘${N}${K}"
 
         print -r "${K}"
         print -r "  ${C}── MEMORY & RESOURCES ──────────────────────────────────────────────────${N}${K}"
