@@ -12783,6 +12783,524 @@ zpwr restart               \# restart zpwr systemd service\\
 \vspace{16pt}
 
 
+\chapter{TMUX DEEP DIVE}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/art_mainframe.png}
+\end{center}
+
+\section{Tmux Layout Save \& Restore}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} TMUX LAYOUT SAVE \& RESTORE}\vspace{6pt}
+
+Your pane arrangement, preserved forever.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE PROBLEM}\vspace{4pt}
+
+You spent 20 minutes splitting panes, resizing them, cd-ing into the right directories. Then tmux crashes. Or you reboot. Or you accidentally kill the session. All that layout work? Gone. Every time.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE SOLUTION}\vspace{4pt}
+
+\begin{codebox}
+zpwr tmuxsave dev             \# save layout as 'dev'\\
+zpwr tmuxload dev             \# restore it later\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT GETS SAVED}\vspace{4pt}
+
+Windows ............... names and count Pane splits ........... exact geometry via select-layout Directories ........... per-pane working directory Running commands ...... full args from process tree Window options ........ synchronize-panes, auto-rename Session options ....... non-plugin tmux settings Active pane/window .... cursor position restored
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} MANAGEMENT}\vspace{4pt}
+
+\begin{codebox}
+zpwr tmuxsave                 \# save with timestamp name\\
+zpwr tmuxsave --list          \# list saved layouts\\
+zpwr tmuxsave --delete dev    \# remove a layout\\
+zpwr tmuxload                 \# fzf picker (no args)\\
+zpwr tmuxload dev mywork      \# restore as session 'mywork'\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} KEYBINDING}\vspace{4pt}
+
+Prefix W                      \# save layout (tmux keybinding)
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} ALIASES}\vspace{4pt}
+
+\begin{codebox}
+zpwr layoutsave  = zpwr tmuxsave\\
+zpwr layoutload  = zpwr tmuxload\\
+\end{codebox}
+
+Layouts are stored as self-contained zsh scripts in \textbf{\$ZPWR\_LOCAL/layouts/.} You can edit them by hand, version control them, or share them with your team.
+
+PROTIP: Save your layout before experimenting. If you break everything, one command brings it back.
+
+
+\vspace{16pt}
+
+
+\chapter{MONITORING \& AUTOMATION}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_watch_help.png}
+\end{center}
+
+\section{Live Dashboard \& Sparklines}
+
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_bench_help.png}
+\end{center}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} LIVE DASHBOARD \& SPARKLINES}\vspace{6pt}
+
+Your shell's vital signs, in real time.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zpwr top}\vspace{4pt}
+
+A live-updating dashboard of your shell's resource usage. Runs in alternate screen buffer. Press q to quit.
+
+\begin{codebox}
+zpwr top       \# refresh every 2s\\
+zpwr top 1     \# fast refresh\\
+zpwr top 5     \# slow refresh\\
+zpwr dashboard \# same verb\\
+zpwr live      \# same verb\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT SHOWS}\vspace{4pt}
+
+Memory ............ RSS bar graph, virtual memory Shell objects ..... functions, aliases, completions, params Delta tracking .... changes between refreshes in yellow Loaded modules .... all zsh modules currently loaded Paths ............ fpath, path, named dirs, dir stack Context .......... git branch, tmux info, startup time Top 5 functions .. largest functions with size bars Top 5 paths ...... longest \textbf{PATH} entries
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} SPARKLINES}\vspace{4pt}
+
+Startup time history: last 40 shell starts Color-coded: green=fast yellow=mid red=slow Shows min/max/avg stats below the graph.
+
+Commit velocity: commits per day over 30 days Visualizes your development pace as a mini bar chart.
+
+Startup times are logged automatically on each shell init to \textbf{\$ZPWR\_LOCAL/startup\_history.log.}
+
+
+\vspace{16pt}
+
+
+\chapter{CREATIVE TOOLS}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/figlet_zpwr.png}
+\end{center}
+
+\section{Matrix: The Full Experience}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} MATRIX: THE FULL EXPERIENCE}\vspace{6pt}
+
+8 acts, 6 characters, and your ecosystem raining down
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE STORY}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix               \# 4-act story + rain\\
+zpwr matrix --extended     \# full 8-act saga\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE CHARACTERS}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix --cast         \# show character bios\\
+\end{codebox}
+
+Null Pointer .... protagonist, zpwr operator Segfault ........ bash loyalist in recovery Chmod777 ........ reckless, sudo for everything
+
+\begin{codebox}
+DevNull ......... silent assassin\\
+\end{codebox}
+
+Chad Electron ... MegaCorp VP, 64GB for Slack The Kernel ...... mythical elder, speaks in dmesg
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} \textbf{VISUAL} FX}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix --noir         \# monochrome green\\
+zpwr matrix --vhs          \# VHS tracking distortion\\
+zpwr matrix --crt          \# CRT scanlines\\
+zpwr matrix --glitch       \# extra corruption\\
+zpwr matrix --sound        \# terminal bells\\
+zpwr matrix --no-fx        \# disable all FX\\
+zpwr matrix -c 10          \# chaos level 1-10\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} PLAYBACK CONTROL}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix -s 7           \# speed 1-9\\
+zpwr matrix --turbo        \# skip all pauses\\
+zpwr matrix -a 5           \# jump to act 5\\
+zpwr matrix -r             \# skip story, rain only\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} MULTIPLAYER}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix --battle       \# 2-player tmux typing battle\\
+\end{codebox}
+
+Player 1 (Null Pointer) vs Player 2 (Chad Electron). Type zpwr commands faster than your opponent. HP bars, taunts, and a winner-takes-all endgame. Requires tmux. Auto-splits into two panes.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} INFO}\vspace{4pt}
+
+\begin{codebox}
+zpwr matrix --stats        \# ecosystem stats\\
+zpwr matrix --credits      \# end credits roll\\
+\end{codebox}
+
+
+\vspace{16pt}
+
+
+\chapter{HEALTH \& DIAGNOSTICS}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_doctor_help.png}
+\end{center}
+
+\section{Expansion Stats Dashboard}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} EXPANSION STATS DASHBOARD}\vspace{6pt}
+
+Your aliases are working for you — here's the proof.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zpwrExpandStats}\vspace{4pt}
+
+Every time zsh-expand fires — alias, global alias, suffix alias, self-ref escape, native glob/hist, or spelling correction — it logs the event. zpwrExpandStats reads that log and shows you a ranked dashboard.
+
+\begin{codebox}
+zpwrExpandStats            \# show full dashboard\\
+zpwrExpandStats -h         \# help with all options\\
+zpwrExpandStats -t 10      \# top 10 aliases\\
+zpwrExpandStats -w 80      \# wider box (80 cols)\\
+zpwrExpandStats -r         \# reset all stats\\
+zpwrExpandStats -f FILE    \# custom stats file\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT TRACKS}\vspace{4pt}
+
+By trigger ......... space expansions vs history expansions By type ............ alias, global, suffix, escape, native Corrections ........ spelling fixes applied Total expansions ... how many times the engine fired Keystrokes saved ... chars you didn't have to type Top aliases ........ ranked bar chart with expansions shown
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+The zsh-expand plugin hooks into the zle accept-line widget. Before each command runs, it expands aliases, globals, and suffixes inline. Each expansion is logged to \textbf{\$ZPWR\_LOCAL/zpwr-expand-stats.dat} with the trigger type, expansion type, and original alias name.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} CONFIG}\vspace{4pt}
+
+\begin{codebox}
+ZPWR\_EXPAND\_STATS\_FILE     \# override stats file path\\
+ZPWR\_EXPAND\_STATS\_TOP      \# default top N (default: 20)\\
+\end{codebox}
+
+Every alias that fires is a keystroke investment paying dividends. This dashboard shows your ROI.
+
+
+\vspace{16pt}
+
+
+\chapter{ZINIT \& PLUGIN SYSTEM}
+
+
+\begin{center}
+\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/art_system_core.png}
+\end{center}
+
+\section{zsh-sudo: Privilege Escalation}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} ZSH-SUDO: PRIVILEGE ESCALATION}\vspace{6pt}
+
+Toggle sudo on the current command line with one keybind.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE KEYBINDING}\vspace{4pt}
+
+Ctrl-S   (or Escape Escape in some configs)
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+sudo not on the line? .... it gets prepended sudo already there? ...... it gets stripped empty line? .............. pulls last command from history with sudo
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} WHAT IT STRIPS}\vspace{4pt}
+
+When removing sudo, it also strips: builtin, command, env, and all their arguments. So sudo -E env \textbf{PATH}=... command foo becomes just foo.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} EXAMPLE}\vspace{4pt}
+
+You type:  vim \textbf{\textbf{/etc/hosts}} Hit Ctrl-S: sudo vim \textbf{\textbf{/etc/hosts}} Hit Ctrl-S again: vim \textbf{\textbf{/etc/hosts}}
+
+Empty line + Ctrl-S: pulls your last command back with sudo prepended. No retyping. No arrow keys.
+
+Plugin: MenkeTechnologies/zsh-sudo.
+
+
+\vspace{16pt}
+
+\section{zsh-sed-sub: Inline Search \& Replace}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} ZSH-SED-SUB: INLINE SEARCH \& REPLACE}\vspace{6pt}
+
+Global search and replace on the current command line.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE KEYBINDING}\vspace{4pt}
+
+Ctrl-F Ctrl-P   in both viins and vicmd modes.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+1. Type a command on the line 2. Hit Ctrl-F Ctrl-P 3. Enter the search pattern 4. Enter the replacement 5. All occurrences on the line are replaced
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} EXAMPLE}\vspace{4pt}
+
+You type:  cp file.txt /old/path/ \&\& mv file.txt /old/path/bak Hit Ctrl-F Ctrl-P, search: old, replace: new Result:   cp file.txt /new/path/ \&\& mv file.txt /new/path/bak.
+
+Faster than arrow keys. Works on the entire line. Like sed but for your command line buffer.
+
+Plugin: MenkeTechnologies/zsh-sed-sub.
+
+
+\vspace{16pt}
+
+\section{gh\_reveal: Open Repo in Browser}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} GH\_REVEAL: OPEN REPO IN BROWSER}\vspace{6pt}
+
+Quickly open the current git project in your browser.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} THE COMMAND}\vspace{4pt}
+
+\begin{codebox}
+zpwr reveal              \# open current repo on GitHub\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
+
+Reads the git remote URL from the current repo, converts it to an HTTPS URL, and opens it in your default browser. Works with GitHub, GitLab, Bitbucket, and any git remote.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} USE CASES}\vspace{4pt}
+
+- Check the PR page for the branch you are on - View the README without cat-ing it locally - Jump to Issues or Actions from the terminal - Share a repo link with a coworker fast
+
+Also accessible as zpwr revealrecurse to search up the directory tree for a git repo.
+
+Plugin: MenkeTechnologies/gh\_reveal.
+
+
+\vspace{16pt}
+
+\section{Colorful Manuals \& Package Completions}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} COLORFUL MANUALS \& PACKAGE COMPLETIONS}\vspace{6pt}
+
+The smaller plugins that make everything nicer.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-very-colorful-manuals}\vspace{4pt}
+
+Custom colorscheme for man pages. Headers in bold cyan, underlines in magenta, flags in green. Makes man pages actually readable instead of a wall of white text. Works automatically — no commands needed.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-gem-completion}\vspace{4pt}
+
+Enhanced Ruby gem completion. Includes all OMZ gem completion plus remote gem search:
+
+\begin{codebox}
+gem install <tab>         \# completes remote gems\\
+\end{codebox}
+
+Results come from gem search output.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-pip-description-completion}\vspace{4pt}
+
+Enhanced pip completion. All OMZ pip completion plus remote package search:
+
+\begin{codebox}
+pip install <tab>         \# completes remote packages\\
+\end{codebox}
+
+Results come from pip search output with descriptions.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-better-npm-completion}\vspace{4pt}
+
+Better npm completion. Context-aware:
+
+\begin{codebox}
+npm install <tab>         \# completes package names\\
+npm run <tab>             \# completes scripts from package.json\\
+npm uninstall <tab>       \# completes installed packages\\
+\end{codebox}
+
+Each subcommand gets the right completions.
+
+All plugins: MenkeTechnologies/*
+
+
+\vspace{16pt}
+
+\section{Specialty Completions \& Aliases}
+
+
+\vspace{10pt}
+{\large\bfseries\color{neoncyan} SPECIALTY COMPLETIONS \& ALIASES}\vspace{6pt}
+
+Platform-specific plugins loaded conditionally.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-cpan-completion}\vspace{4pt}
+
+Tab completion for Perl CPAN modules.
+
+\begin{codebox}
+cpan install <tab>       \# complete module names\\
+\end{codebox}
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-dotnet-completion}\vspace{4pt}
+
+Tab completion for .NET CLI (dotnet).
+
+\begin{codebox}
+dotnet <tab>             \# complete subcommands\\
+dotnet add package <tab>  \# complete packages\\
+\end{codebox}
+
+Loaded conditionally when dotnet is available.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} zsh-xcode-completions}\vspace{4pt}
+
+Tab completion for Xcode CLI tools on macOS.
+
+\begin{codebox}
+xcodebuild <tab>         \# complete build options\\
+xcrun <tab>              \# complete SDK tools\\
+\end{codebox}
+
+MacOS only — loaded when Xcode is detected.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} kubectl-aliases}\vspace{4pt}
+
+800+ aliases for kubectl. Every common operation is a short alias:
+
+\begin{codebox}
+kgp   = kubectl get pods\\
+kgs   = kubectl get services\\
+kd    = kubectl describe\\
+kl    = kubectl logs\\
+\end{codebox}
+
+Loaded conditionally when kubectl is available.
+
+
+\vspace{12pt}
+{\bfseries\color{neonyellow} jhipster-oh-my-zsh-plugin}\vspace{4pt}
+
+Aliases and completions for JHipster (Java/Spring Boot scaffold generator).
+
+\begin{codebox}
+jh    = jhipster\\
+\end{codebox}
+
+Loaded conditionally when jhipster is available.
+
+All plugins: MenkeTechnologies/* Conditional loading means zero overhead if the tool isn't installed on your system.
+
+
+\vspace{16pt}
+
+
 \chapter{APPENDIX A: KEYBINDING REFERENCE}
 
 
@@ -14453,219 +14971,6 @@ v  <D-v>  '-d'*P\\
 \vspace{16pt}
 
 
-\chapter{TMUX DEEP DIVE}
-
-
-\begin{center}
-\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/art_mainframe.png}
-\end{center}
-
-\section{Tmux Layout Save \& Restore}
-
-
-\vspace{10pt}
-{\large\bfseries\color{neoncyan} TMUX LAYOUT SAVE \& RESTORE}\vspace{6pt}
-
-Your pane arrangement, preserved forever.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} THE PROBLEM}\vspace{4pt}
-
-You spent 20 minutes splitting panes, resizing them, cd-ing into the right directories. Then tmux crashes. Or you reboot. Or you accidentally kill the session. All that layout work? Gone. Every time.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} THE SOLUTION}\vspace{4pt}
-
-\begin{codebox}
-zpwr tmuxsave dev             \# save layout as 'dev'\\
-zpwr tmuxload dev             \# restore it later\\
-\end{codebox}
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} WHAT GETS SAVED}\vspace{4pt}
-
-Windows ............... names and count Pane splits ........... exact geometry via select-layout Directories ........... per-pane working directory Running commands ...... full args from process tree Window options ........ synchronize-panes, auto-rename Session options ....... non-plugin tmux settings Active pane/window .... cursor position restored
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} MANAGEMENT}\vspace{4pt}
-
-\begin{codebox}
-zpwr tmuxsave                 \# save with timestamp name\\
-zpwr tmuxsave --list          \# list saved layouts\\
-zpwr tmuxsave --delete dev    \# remove a layout\\
-zpwr tmuxload                 \# fzf picker (no args)\\
-zpwr tmuxload dev mywork      \# restore as session 'mywork'\\
-\end{codebox}
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} KEYBINDING}\vspace{4pt}
-
-Prefix W                      \# save layout (tmux keybinding)
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} ALIASES}\vspace{4pt}
-
-\begin{codebox}
-zpwr layoutsave  = zpwr tmuxsave\\
-zpwr layoutload  = zpwr tmuxload\\
-\end{codebox}
-
-Layouts are stored as self-contained zsh scripts in \textbf{\$ZPWR\_LOCAL/layouts/.} You can edit them by hand, version control them, or share them with your team.
-
-PROTIP: Save your layout before experimenting. If you break everything, one command brings it back.
-
-
-\vspace{16pt}
-
-
-\chapter{MONITORING \& AUTOMATION}
-
-
-\begin{center}
-\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_watch_help.png}
-\end{center}
-
-\section{Live Dashboard \& Sparklines}
-
-
-\begin{center}
-\includegraphics[width=0.8\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_bench_help.png}
-\end{center}
-
-
-\vspace{10pt}
-{\large\bfseries\color{neoncyan} LIVE DASHBOARD \& SPARKLINES}\vspace{6pt}
-
-Your shell's vital signs, in real time.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} zpwr top}\vspace{4pt}
-
-A live-updating dashboard of your shell's resource usage. Runs in alternate screen buffer. Press q to quit.
-
-\begin{codebox}
-zpwr top       \# refresh every 2s\\
-zpwr top 1     \# fast refresh\\
-zpwr top 5     \# slow refresh\\
-zpwr dashboard \# same verb\\
-zpwr live      \# same verb\\
-\end{codebox}
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} WHAT IT SHOWS}\vspace{4pt}
-
-Memory ............ RSS bar graph, virtual memory Shell objects ..... functions, aliases, completions, params Delta tracking .... changes between refreshes in yellow Loaded modules .... all zsh modules currently loaded Paths ............ fpath, path, named dirs, dir stack Context .......... git branch, tmux info, startup time Top 5 functions .. largest functions with size bars Top 5 paths ...... longest \textbf{PATH} entries
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} SPARKLINES}\vspace{4pt}
-
-Startup time history: last 40 shell starts Color-coded: green=fast yellow=mid red=slow Shows min/max/avg stats below the graph.
-
-Commit velocity: commits per day over 30 days Visualizes your development pace as a mini bar chart.
-
-Startup times are logged automatically on each shell init to \textbf{\$ZPWR\_LOCAL/startup\_history.log.}
-
-
-\vspace{16pt}
-
-
-\chapter{CREATIVE TOOLS}
-
-
-\begin{center}
-\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/figlet_zpwr.png}
-\end{center}
-
-\section{Matrix: The Full Experience}
-
-
-\vspace{10pt}
-{\large\bfseries\color{neoncyan} MATRIX: THE FULL EXPERIENCE}\vspace{6pt}
-
-8 acts, 6 characters, and your ecosystem raining down
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} THE STORY}\vspace{4pt}
-
-\begin{codebox}
-zpwr matrix               \# 4-act story + rain\\
-zpwr matrix --extended     \# full 8-act saga\\
-\end{codebox}
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} THE CHARACTERS}\vspace{4pt}
-
-\begin{codebox}
-zpwr matrix --cast         \# show character bios\\
-\end{codebox}
-
-Null Pointer .... protagonist, zpwr operator Segfault ........ bash loyalist in recovery Chmod777 ........ reckless, sudo for everything
-
-\begin{codebox}
-DevNull ......... silent assassin\\
-\end{codebox}
-
-Chad Electron ... MegaCorp VP, 64GB for Slack The Kernel ...... mythical elder, speaks in dmesg
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} \textbf{VISUAL} FX}\vspace{4pt}
-
-\begin{codebox}
-zpwr matrix --noir         \# monochrome green\\
-zpwr matrix --vhs          \# VHS tracking distortion\\
-zpwr matrix --crt          \# CRT scanlines\\
-zpwr matrix --glitch       \# extra corruption\\
-zpwr matrix --sound        \# terminal bells\\
-zpwr matrix --no-fx        \# disable all FX\\
-zpwr matrix -c 10          \# chaos level 1-10\\
-\end{codebox}
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} PLAYBACK CONTROL}\vspace{4pt}
-
-\begin{codebox}
-zpwr matrix -s 7           \# speed 1-9\\
-zpwr matrix --turbo        \# skip all pauses\\
-zpwr matrix -a 5           \# jump to act 5\\
-zpwr matrix -r             \# skip story, rain only\\
-\end{codebox}
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} MULTIPLAYER}\vspace{4pt}
-
-\begin{codebox}
-zpwr matrix --battle       \# 2-player tmux typing battle\\
-\end{codebox}
-
-Player 1 (Null Pointer) vs Player 2 (Chad Electron). Type zpwr commands faster than your opponent. HP bars, taunts, and a winner-takes-all endgame. Requires tmux. Auto-splits into two panes.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} INFO}\vspace{4pt}
-
-\begin{codebox}
-zpwr matrix --stats        \# ecosystem stats\\
-zpwr matrix --credits      \# end credits roll\\
-\end{codebox}
-
-
-\vspace{16pt}
-
-
 \chapter{THE END}
 
 
@@ -14730,235 +15035,6 @@ Run zpwr about to see the zpwr banner. Then open a new terminal. Watch the pony 
 {\small\itshape\color{dimtext} // \textbf{ZPWR} WIZARD ENCYCLOPEDIA v1.0 // SIGNAL LOST //}
 
 May your shell be fast, your pipes be clean, and your exit codes always zero.
-
-
-\vspace{16pt}
-
-
-\chapter{HEALTH \& DIAGNOSTICS}
-
-
-\begin{center}
-\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/zpwr_doctor_help.png}
-\end{center}
-
-\section{Expansion Stats Dashboard}
-
-
-\vspace{10pt}
-{\large\bfseries\color{neoncyan} EXPANSION STATS DASHBOARD}\vspace{6pt}
-
-Your aliases are working for you — here's the proof.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} zpwrExpandStats}\vspace{4pt}
-
-Every time zsh-expand fires — alias, global alias, suffix alias, self-ref escape, native glob/hist, or spelling correction — it logs the event. zpwrExpandStats reads that log and shows you a ranked dashboard.
-
-\begin{codebox}
-zpwrExpandStats            \# show full dashboard\\
-zpwrExpandStats -h         \# help with all options\\
-zpwrExpandStats -t 10      \# top 10 aliases\\
-zpwrExpandStats -w 80      \# wider box (80 cols)\\
-zpwrExpandStats -r         \# reset all stats\\
-zpwrExpandStats -f FILE    \# custom stats file\\
-\end{codebox}
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} WHAT IT TRACKS}\vspace{4pt}
-
-By trigger ......... space expansions vs history expansions By type ............ alias, global, suffix, escape, native Corrections ........ spelling fixes applied Total expansions ... how many times the engine fired Keystrokes saved ... chars you didn't have to type Top aliases ........ ranked bar chart with expansions shown
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
-
-The zsh-expand plugin hooks into the zle accept-line widget. Before each command runs, it expands aliases, globals, and suffixes inline. Each expansion is logged to \textbf{\$ZPWR\_LOCAL/zpwr-expand-stats.dat} with the trigger type, expansion type, and original alias name.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} CONFIG}\vspace{4pt}
-
-\begin{codebox}
-ZPWR\_EXPAND\_STATS\_FILE     \# override stats file path\\
-ZPWR\_EXPAND\_STATS\_TOP      \# default top N (default: 20)\\
-\end{codebox}
-
-Every alias that fires is a keystroke investment paying dividends. This dashboard shows your ROI.
-
-
-\vspace{16pt}
-
-
-\chapter{ZINIT \& PLUGIN SYSTEM}
-
-
-\begin{center}
-\includegraphics[width=0.85\textwidth]{/Users/wizard/.zpwr/docs/screenshots/art_system_core.png}
-\end{center}
-
-\section{zsh-sudo: Privilege Escalation}
-
-
-\vspace{10pt}
-{\large\bfseries\color{neoncyan} ZSH-SUDO: PRIVILEGE ESCALATION}\vspace{6pt}
-
-Toggle sudo on the current command line with one keybind.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} THE KEYBINDING}\vspace{4pt}
-
-Ctrl-S   (or Escape Escape in some configs)
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
-
-sudo not on the line? .... it gets prepended sudo already there? ...... it gets stripped empty line? .............. pulls last command from history with sudo
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} WHAT IT STRIPS}\vspace{4pt}
-
-When removing sudo, it also strips: builtin, command, env, and all their arguments. So sudo -E env \textbf{PATH}=... command foo becomes just foo.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} EXAMPLE}\vspace{4pt}
-
-You type:  vim \textbf{\textbf{/etc/hosts}} Hit Ctrl-S: sudo vim \textbf{\textbf{/etc/hosts}} Hit Ctrl-S again: vim \textbf{\textbf{/etc/hosts}}
-
-Empty line + Ctrl-S: pulls your last command back with sudo prepended. No retyping. No arrow keys.
-
-Plugin: MenkeTechnologies/zsh-sudo.
-
-
-\vspace{16pt}
-
-\section{zsh-sed-sub: Inline Search \& Replace}
-
-
-\vspace{10pt}
-{\large\bfseries\color{neoncyan} ZSH-SED-SUB: INLINE SEARCH \& REPLACE}\vspace{6pt}
-
-Global search and replace on the current command line.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} THE KEYBINDING}\vspace{4pt}
-
-Ctrl-F Ctrl-P   in both viins and vicmd modes.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
-
-1. Type a command on the line 2. Hit Ctrl-F Ctrl-P 3. Enter the search pattern 4. Enter the replacement 5. All occurrences on the line are replaced
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} EXAMPLE}\vspace{4pt}
-
-You type:  cp file.txt /old/path/ \&\& mv file.txt /old/path/bak Hit Ctrl-F Ctrl-P, search: old, replace: new Result:   cp file.txt /new/path/ \&\& mv file.txt /new/path/bak.
-
-Faster than arrow keys. Works on the entire line. Like sed but for your command line buffer.
-
-Plugin: MenkeTechnologies/zsh-sed-sub.
-
-
-\vspace{16pt}
-
-\section{gh\_reveal: Open Repo in Browser}
-
-
-\vspace{10pt}
-{\large\bfseries\color{neoncyan} GH\_REVEAL: OPEN REPO IN BROWSER}\vspace{6pt}
-
-Quickly open the current git project in your browser.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} THE COMMAND}\vspace{4pt}
-
-\begin{codebox}
-zpwr reveal              \# open current repo on GitHub\\
-\end{codebox}
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} HOW IT WORKS}\vspace{4pt}
-
-Reads the git remote URL from the current repo, converts it to an HTTPS URL, and opens it in your default browser. Works with GitHub, GitLab, Bitbucket, and any git remote.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} USE CASES}\vspace{4pt}
-
-- Check the PR page for the branch you are on - View the README without cat-ing it locally - Jump to Issues or Actions from the terminal - Share a repo link with a coworker fast
-
-Also accessible as zpwr revealrecurse to search up the directory tree for a git repo.
-
-Plugin: MenkeTechnologies/gh\_reveal.
-
-
-\vspace{16pt}
-
-\section{Colorful Manuals \& Package Completions}
-
-
-\vspace{10pt}
-{\large\bfseries\color{neoncyan} COLORFUL MANUALS \& PACKAGE COMPLETIONS}\vspace{6pt}
-
-The smaller plugins that make everything nicer.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} zsh-very-colorful-manuals}\vspace{4pt}
-
-Custom colorscheme for man pages. Headers in bold cyan, underlines in magenta, flags in green. Makes man pages actually readable instead of a wall of white text. Works automatically — no commands needed.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} zsh-gem-completion}\vspace{4pt}
-
-Enhanced Ruby gem completion. Includes all OMZ gem completion plus remote gem search:
-
-\begin{codebox}
-gem install <tab>         \# completes remote gems\\
-\end{codebox}
-
-Results come from gem search output.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} zsh-pip-description-completion}\vspace{4pt}
-
-Enhanced pip completion. All OMZ pip completion plus remote package search:
-
-\begin{codebox}
-pip install <tab>         \# completes remote packages\\
-\end{codebox}
-
-Results come from pip search output with descriptions.
-
-
-\vspace{12pt}
-{\bfseries\color{neonyellow} zsh-better-npm-completion}\vspace{4pt}
-
-Better npm completion. Context-aware:
-
-\begin{codebox}
-npm install <tab>         \# completes package names\\
-npm run <tab>             \# completes scripts from package.json\\
-npm uninstall <tab>       \# completes installed packages\\
-\end{codebox}
-
-Each subcommand gets the right completions.
-
-All plugins: MenkeTechnologies/*
 
 
 \vspace{16pt}
