@@ -296,13 +296,18 @@ function zpwrLogColor(){
             printf " ${c1}${_B}${lvl}${_N}\n"
             ;;
     esac
+    # box_inner = 74 chars; content visible length (minus lvl) = " STATUS: " (9) + "  // SIGNAL: " (13) + 10 bars + " // HH:MM:SS  " (14) = 46
+    local _i
+    local -i _pad=$(( 74 - 46 - ${#lvl} ))
+    (( _pad < 0 )) && _pad=0
     printf " ${_DM}┌──────────────────────────────────────────────────────────────────────────┐${_N}\n"
     printf " ${_DM}│${_N} ${_NG}STATUS:${_N} ${_NW}${_B}${lvl}${_N}  ${_DM}//${_N} ${_NC}SIGNAL: ${sig_color}"
-    local _i
     for (( _i=0; _i<sig_fill; _i++ )); do printf "█"; done
     printf "${_DM}"
     for (( _i=0; _i<sig_empty; _i++ )); do printf "░"; done
-    printf "${_N} ${_DM}//${_N} ${_NC}$(date '+%H:%M:%S')${_N}  ${_DM}│${_N}\n"
+    printf "${_N} ${_DM}//${_N} ${_NC}$(date '+%H:%M:%S')${_N}  "
+    for (( _i=0; _i<_pad; _i++ )); do printf " "; done
+    printf "${_DM}│${_N}\n"
     printf " ${_DM}└──────────────────────────────────────────────────────────────────────────┘${_N}\n"
     printf "  ${_DM}>>${_N} ${c1}%b${_N}\n" "$*"
 }
