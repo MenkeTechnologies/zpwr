@@ -32,7 +32,7 @@ PAGE_CONTENT() {
     print "  ${C}  4. ${N}The file contents replace the stub${N}"
     print "  ${C}  5. ${N}The function executes with the loaded code${N}"
     print ""
-    print "  ${D}  This means 400+ functions cost near-zero at startup.${N}"
+    print "  ${D}  This means hundreds of autoload stubs cost near-zero at startup.${N}"
     print "  ${D}  Only the ones you actually use consume memory.${N}"
     print ""
     print "  ${B}${Y}THE COMPILE ACCELERATION:${N}"

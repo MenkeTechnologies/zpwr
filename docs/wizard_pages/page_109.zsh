@@ -7,7 +7,7 @@ PAGE_CONTENT() {
     print "  ${D}// compinit is the most expensive call in zsh startup. defer it. //${N}"
     print "  ${C}The completion system (compsys) needs compinit to initialize.${N}"
     print "  ${C}But compinit scans all fpath entries and parses completion${N}"
-    print "  ${C}files. On a system with 400+ completions, this is slow.${N}"
+    print "  ${C}files. On a system with many registered completions, this is slow.${N}"
     print "  ${C}ZPWR defers it behind turbo mode.${N}"
     print "  ${B}${Y}ZINIT COMPINIT OPTIONS${N}"
     print "  ${M}  ZINIT[COMPINIT_OPTS]='-C -u'${N}"

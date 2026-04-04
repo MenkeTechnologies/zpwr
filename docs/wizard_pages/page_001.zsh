@@ -12,7 +12,7 @@ PAGE_CONTENT() {
     print "  ${C}to run inside your terminal.${N}"
     print ""
     print "  ${B}${Y}WHAT IS ZPWR?${N}"
-    print "  ${G}A 400+ verb command dispatcher built on top of zsh, tmux,${N}"
+    print "  ${G}A ${#ZPWR_VERBS}-verb command dispatcher built on top of zsh, tmux,${N}"
     print "  ${G}vim/nvim, fzf, and git. Every verb is a surgical tool.${N}"
     print "  ${G}Every keybinding is a weapon. Every alias is a shortcut${N}"
     print "  ${G}through the matrix.${N}"

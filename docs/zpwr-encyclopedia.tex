@@ -238,7 +238,7 @@ You found it. The rabbit hole. \textbf{ZPWR} is not a dotfiles repo. It is not a
 \vspace{12pt}
 {\bfseries\color{neonyellow} WHAT IS \textbf{ZPWR}?}\vspace{4pt}
 
-A 400+ verb command dispatcher built on top of zsh, tmux, vim/nvim, fzf, and git. Every verb is a surgical tool. Every keybinding is a weapon. Every alias is a shortcut through the matrix.
+A \$\{\#\textbf{ZPWR\_VERBS}\}-verb command dispatcher built on top of zsh, tmux, vim/nvim, fzf, and git. Every verb is a surgical tool. Every keybinding is a weapon. Every alias is a shortcut through the matrix.
 
 
 \vspace{12pt}
@@ -322,7 +322,7 @@ zpwr colortest256       \# the full 256-color palette\\
 \vspace{12pt}
 {\bfseries\color{neonyellow} STEP 5: TAB COMPLETE EVERYTHING}\vspace{4pt}
 
-Type zpwr and press <tab>. You will see 400+ verbs. Type zpwr git and press <tab>. Filtered to git verbs. Type zpwr vim and press <tab>. Filtered to vim verbs. The completion system knows every verb. Trust it.
+Type zpwr and press <tab>. You will see \$\{\#\textbf{ZPWR\_VERBS}\} verbs. Type zpwr git and press <tab>. Filtered to git verbs. Type zpwr vim and press <tab>. Filtered to vim verbs. The completion system knows every verb. Trust it.
 
 If you only remember one command from this page: zpwr verbs It is the cheat code to everything else.
 
@@ -2366,7 +2366,7 @@ WARNING: Default mode re-runs the command for strace/ltrace. Use -q for destruct
 
 {\small\itshape\color{dimtext} // your shell keeps a diary. these verbs read it. //}
 
-You have 400+ verbs and thousands of aliases. Which ones do you actually use? Funcrank and aliasrank mine your shell history to answer that question.
+You have \$\{\#\textbf{ZPWR\_VERBS}\} verbs and thousands of aliases. Which ones do you actually use? Funcrank and aliasrank mine your shell history to answer that question.
 
 
 \vspace{12pt}
@@ -2476,7 +2476,7 @@ This is the census. It counts everything loaded in your current shell session:
 
 Aliases         regular + global + suffix aliases functions       autoloaded + defined functions builtins        zsh builtin commands parameters      shell variables (scalar, array, assoc) completions     registered completion functions modules         loaded zsh modules named dirs      hash -d entries \textbf{PATH} entries    directories in \textbf{PATH} \textbf{FPATH} entries   directories in \textbf{FPATH}
 
-The numbers tell you how armed you are. A fresh zpwr install might show 3000+ aliases, 500+ functions, and 100+ completions. If the numbers are low, something failed to load.
+The numbers tell you how armed you are. A fresh zpwr install might show thousands of aliases, hundreds of functions, and many registered completions. If the numbers are low, something failed to load.
 
 
 \vspace{12pt}
@@ -6443,7 +6443,7 @@ Functions that work on every OS. The common denominator. MacOS, Linux, BSD — t
 
 1. Zsh scans \$fpath directories at startup 2. Each filename is registered as a function stub 3. When you call the function, zsh reads the file 4. The file contents replace the stub 5. The function executes with the loaded code
 
-This means 400+ functions cost near-zero at startup. Only the ones you actually use consume memory.
+This means hundreds of autoload stubs cost near-zero at startup. Only the ones you actually use consume memory.
 
 
 \vspace{12pt}
@@ -7947,7 +7947,7 @@ atinit'zpwrBindZdharma' atload'zpwrBindZdharmaPost'\\
 
 {\small\itshape\color{dimtext} // compinit is the most expensive call in zsh startup. defer it. //}
 
-The completion system (compsys) needs compinit to initialize. But compinit scans all fpath entries and parses completion files. On a system with 400+ completions, this is slow. \textbf{ZPWR} defers it behind turbo mode.
+The completion system (compsys) needs compinit to initialize. But compinit scans all fpath entries and parses completion files. On a system with many registered completions, this is slow. \textbf{ZPWR} defers it behind turbo mode.
 
 
 \vspace{12pt}
@@ -8108,7 +8108,7 @@ Next shell start auto-clones zinit and re-downloads everything. Slow but thoroug
 
 {\small\itshape\color{dimtext} // 443 functions. zero parsing until you call one. //}
 
-Autoloading is zsh's lazy-loading mechanism. Register a name, and zsh only reads the function body from disk on first call. This is why \textbf{ZPWR} can have 443+ functions with negligible startup cost.
+Autoloading is zsh's lazy-loading mechanism. Register a name, and zsh only reads the function body from disk on first call. This is why \textbf{ZPWR} can have hundreds of autoloaded functions with negligible startup cost.
 
 
 \vspace{12pt}
@@ -11463,7 +11463,7 @@ Plugin: MenkeTechnologies/zsh-docker-aliases.
 \vspace{12pt}
 {\bfseries\color{neonyellow} KEY PLUGINS}\vspace{4pt}
 
-Zsh-learn              60 verbs, MySQL learning DB zsh-git-repo-cache    20 verbs, filesystem repo index fzf-zsh-plugin        14 verbs, brew/chrome fzf zsh-git-acp           318 aliases, git workflows zsh-docker-aliases    148 aliases, Docker shortcuts zsh-openshift-aliases 106 aliases, OpenShift zsh-expand            spell correct, abbreviation expand zsh-more-completions  14,100+ tab completions zsh-cargo-completion  32 Rust/Cargo aliases zsh-travis            8 functions, CI integration zsh-nginx             nginx management forgit                fzf-powered git (add, diff, log) zsh-z                 frecency directory jumping fzf-tab               fzf-powered tab completion zconvey               cross-session communication.
+Zsh-learn              60 verbs, MySQL learning DB zsh-git-repo-cache    20 verbs, filesystem repo index fzf-zsh-plugin        14 verbs, brew/chrome fzf zsh-git-acp           318 aliases, git workflows zsh-docker-aliases    148 aliases, Docker shortcuts zsh-openshift-aliases 106 aliases, OpenShift zsh-expand            spell correct, abbreviation expand zsh-more-completions  many thousands of tab completions zsh-cargo-completion  32 Rust/Cargo aliases zsh-travis            8 functions, CI integration zsh-nginx             nginx management forgit                fzf-powered git (add, diff, log) zsh-z                 frecency directory jumping fzf-tab               fzf-powered tab completion zconvey               cross-session communication.
 
 
 \vspace{12pt}

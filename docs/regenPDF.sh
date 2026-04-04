@@ -23,11 +23,20 @@ echo "Generating LaTeX from $(ls "$PAGE_DIR"/page_*.zsh | wc -l | tr -d ' ') pag
 
 python3 "$DOCS_DIR/genEncyclopediaTex.py" "$PAGE_DIR" "$TEX_FILE"
 
+# xelatex often exits non-zero when there are undefined refs or rerun hints; PDF is still written.
+compile_pdf_pass() {
+    xelatex -interaction=nonstopmode -output-directory="$DOCS_DIR" "$TEX_FILE" >/dev/null 2>&1 || true
+    if [[ ! -s "$PDF_FILE" ]]; then
+        echo "Error: xelatex did not produce $PDF_FILE (see $DOCS_DIR/zpwr-encyclopedia.log if present)" >&2
+        exit 1
+    fi
+}
+
 echo "Compiling PDF (pass 1)..."
-xelatex -interaction=nonstopmode -output-directory="$DOCS_DIR" "$TEX_FILE" >/dev/null 2>&1
+compile_pdf_pass
 
 echo "Compiling PDF (pass 2 for TOC)..."
-xelatex -interaction=nonstopmode -output-directory="$DOCS_DIR" "$TEX_FILE" >/dev/null 2>&1
+compile_pdf_pass
 
 # Cleanup
 command rm -f "$DOCS_DIR/zpwr-encyclopedia."{aux,log,out,toc} 2>/dev/null
