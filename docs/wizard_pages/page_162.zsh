@@ -20,7 +20,7 @@ PAGE_CONTENT() {
     print "  ${G}  zsh-docker-aliases${N}${D}    148 aliases, Docker shortcuts${N}"
     print "  ${G}  zsh-openshift-aliases${N}${D} 106 aliases, OpenShift${N}"
     print "  ${G}  zsh-expand${N}${D}            spell correct, abbreviation expand${N}"
-    print "  ${G}  zsh-more-completions${N}${D}  14,100+ tab completions${N}"
+    print "  ${G}  zsh-more-completions${N}${D}  many thousands of tab completions${N}"
     print "  ${G}  zsh-cargo-completion${N}${D}  32 Rust/Cargo aliases${N}"
     print "  ${G}  zsh-travis${N}${D}            8 functions, CI integration${N}"
     print "  ${G}  zsh-nginx${N}${D}             nginx management${N}"

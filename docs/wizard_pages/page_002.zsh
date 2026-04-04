@@ -37,7 +37,7 @@ PAGE_CONTENT() {
     print "  ${M}  zpwr colortest256${N}${D}       # the full 256-color palette${N}"
     print ""
     print "  ${B}${Y}STEP 5: TAB COMPLETE EVERYTHING${N}"
-    print "  ${C}  Type ${M}zpwr ${C}and press ${B}<tab>${C}. You will see 400+ verbs.${N}"
+    print "  ${C}  Type ${M}zpwr ${C}and press ${B}<tab>${C}. You will see ${#ZPWR_VERBS} verbs.${N}"
     print "  ${C}  Type ${M}zpwr git${C} and press ${B}<tab>${C}. Filtered to git verbs.${N}"
     print "  ${C}  Type ${M}zpwr vim${C} and press ${B}<tab>${C}. Filtered to vim verbs.${N}"
     print "  ${C}  The completion system knows every verb. Trust it.${N}"

@@ -7,7 +7,7 @@ PAGE_CONTENT() {
     print "  ${D}// 443 functions. zero parsing until you call one. //${N}"
     print "  ${C}Autoloading is zsh's lazy-loading mechanism. Register a name,${N}"
     print "  ${C}and zsh only reads the function body from disk on first call.${N}"
-    print "  ${C}This is why ZPWR can have 443+ functions with negligible startup cost.${N}"
+    print "  ${C}This is why ZPWR can have hundreds of autoloaded functions with negligible startup cost.${N}"
     print "  ${B}${Y}HOW autoload -z WORKS${N}"
     print "  ${D}1. ${M}autoload -z funcname${D} registers 'funcname' as autoloadable.${N}"
     print "  ${D}2. Zsh records the name but does NOT read the file yet.${N}"

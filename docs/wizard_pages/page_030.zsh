@@ -7,7 +7,7 @@ PAGE_CONTENT() {
     print "  ${B}${M}=== USAGE INTELLIGENCE ===${N}"
     print "  ${D}// your shell keeps a diary. these verbs read it. //${N}"
     print ""
-    print "  ${C}You have 400+ verbs and thousands of aliases.${N}"
+    print "  ${C}You have ${#ZPWR_VERBS} verbs and thousands of aliases.${N}"
     print "  ${C}Which ones do you actually use? ${M}funcrank${C} and ${M}aliasrank${N}"
     print "  ${C}mine your shell history to answer that question.${N}"
     print ""
