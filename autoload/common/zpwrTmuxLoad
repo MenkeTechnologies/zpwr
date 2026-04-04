@@ -43,24 +43,24 @@ function zpwrTmuxLoad(){
         local -a layouts
         layouts=( "$layout_dir"/*.zsh(N:t:r) )
         if (( ${#layouts} == 0 )); then
-            print "  ${Y}no saved layouts${N}"
-            print "  ${D}save one with: zpwr tmuxsave <name>${N}"
+            zpwrLogConsoleErr "no saved layouts"
+            zpwrLogConsoleErr "save one with: zpwr tmuxsave <name>"
             return 1
         fi
         if (( $+commands[fzf] )); then
             layout_name=$(printf '%s\n' "${layouts[@]}" | fzf --prompt="layout> " --height=10)
             [[ -z "$layout_name" ]] && return 0
         else
-            print "  ${R}usage: zpwr tmuxload <name>${N}"
-            print "  ${D}available: ${layouts[*]}${N}"
+            zpwrLogConsoleErr "usage: zpwr tmuxload <name>"
+            zpwrLogConsoleErr "available: ${layouts[*]}"
             return 1
         fi
     fi
 
     layout_file="$layout_dir/${layout_name}.zsh"
     if [[ ! -f "$layout_file" ]]; then
-        print "  ${R}layout \"${layout_name}\" not found${N}"
-        print "  ${D}list layouts: zpwr tmuxsave --list${N}"
+        zpwrLogConsoleErr "layout \"${layout_name}\" not found"
+        zpwrLogConsoleErr "list layouts: zpwr tmuxsave --list"
         return 1
     fi
 

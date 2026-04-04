@@ -71,12 +71,12 @@ function zpwrTmuxSave(){
     # ── DELETE MODE ──────────────────────────────────────────
     if (( delete_mode )); then
         if [[ -z "$layout_name" ]]; then
-            print "  ${R}usage: zpwr tmuxsave --delete <name>${N}"
+            zpwrLogConsoleErr "usage: zpwr tmuxsave --delete <name>"
             return 1
         fi
         layout_file="$layout_dir/${layout_name}.zsh"
         if [[ ! -f "$layout_file" ]]; then
-            print "  ${R}layout \"${layout_name}\" not found${N}"
+            zpwrLogConsoleErr "layout \"${layout_name}\" not found"
             return 1
         fi
         command rm "$layout_file"
@@ -86,7 +86,7 @@ function zpwrTmuxSave(){
 
     # ── SAVE MODE ────────────────────────────────────────────
     if [[ -z "$TMUX" ]]; then
-        print "  ${R}ERROR: not inside a tmux session${N}"
+        zpwrLogConsoleErr "not inside a tmux session"
         return 1
     fi
 
