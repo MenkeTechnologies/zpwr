@@ -3,7 +3,7 @@
 function zpwrEmacsRecentCd(){
 
     if ! zpwrExists emacs; then
-        logErr "emacs must exist"
+        zpwrLogConsoleErr "emacs must exist"
         return 1
     fi
 
