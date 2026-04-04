@@ -90,7 +90,14 @@ function zpwrReplay(){
     fi
 
     _bt
-    printf -v _msg " ${G}%d COMMANDS${N}  ${D}//${N} ${C}mode: %s${N}  ${D}//${N} ${M}pwd: %s${N}" $#cmds "$mode" "$PWD"
+    # shorten PWD: replace $HOME with ~ and truncate to fit in box
+    local _pwd_display="${PWD/#$HOME/~}"
+    # prefix: " N COMMANDS  // mode: MODE  // pwd: " ≈ 40 chars
+    local -i _budget=$(( _bw - 40 - ${#mode} - ${#${#cmds}} ))
+    if (( ${#_pwd_display} > _budget )); then
+        _pwd_display="…${_pwd_display: -$(( _budget - 1 ))}"
+    fi
+    printf -v _msg " ${G}%d COMMANDS${N}  ${D}//${N} ${C}mode: %s${N}  ${D}//${N} ${M}pwd: %s${N}" $#cmds "$mode" "$_pwd_display"
     _bx "$_msg"
     _bb
 
