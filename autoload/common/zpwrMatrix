@@ -239,7 +239,7 @@ function zpwrMatrix(){
         local _bplayer _bname _bcolor _bopponent _bocolor
         local -i _bhp=100 _bohp=100 _bround=0 _bdmg=0 _bwins=0 _blosses=0
         local -i _btimeout=8 _bcols _blines
-        local _bcmd _binput _bresult _bstate
+        local _bcmd _binput _bresult _bstate _p2in
         local -a _bverbs _btaunts_hit _btaunts_miss _btaunts_win
 
         _bverbs=()
@@ -380,7 +380,7 @@ function zpwrMatrix(){
                 sleep 0.3
 
                 # evaluate round
-                local _p2in=""
+                _p2in=""
                 [[ -f "$_bdir/p2input" ]] && _p2in=$(< "$_bdir/p2input")
 
                 if [[ "$_binput" == "$_bcmd" && "$_p2in" != "$_bcmd" ]]; then
