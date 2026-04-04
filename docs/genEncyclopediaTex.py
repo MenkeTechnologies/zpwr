@@ -128,6 +128,8 @@ def convert_line(text):
         cmd_text = re.sub(r'^\\?\$\s+', '', cmd_text)
         cmd_text = escape_latex(cmd_text)
         cmd_text = cmd_text.replace('\\$', '')
+        # Keep # comments green inside codebox — \# resets color
+        cmd_text = cmd_text.replace('\\#', '\\textcolor{neongreen}{\\#}')
         return ('command', cmd_text)
     if '${D}' in original and '//' in text:
         return ('comment', markup_inline(clean))
