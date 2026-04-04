@@ -508,7 +508,7 @@ with open(outfile, 'w') as f:
         if cmd_buffer:
             f.write('\\begin{codebox}\n')
             for c in cmd_buffer:
-                f.write(f'{_protect_bracket(c)}\\\\\n')
+                f.write(f'\\color{{neongreen}}{_protect_bracket(c)}\\\\\n')
             f.write('\\end{codebox}\n\n')
             cmd_buffer.clear()
 
