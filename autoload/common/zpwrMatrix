@@ -331,8 +331,8 @@ function zpwrMatrix(){
             _bocolor=$R
 
             if [[ -z "$TMUX" ]]; then
-                print "  ${R}ERROR: --battle requires tmux${N}"
-                print "  ${D}run inside a tmux session${N}"
+                zpwrLogConsoleErr "--battle requires tmux"
+                zpwrLogConsoleErr "run inside a tmux session"
                 return 1
             fi
 
@@ -471,7 +471,7 @@ function zpwrMatrix(){
                 done
             fi
             if [[ ! -d "$_bdir" ]]; then
-                print "  ${R}ERROR: no active battle found${N}"
+                zpwrLogConsoleErr "no active battle found"
                 sleep 2
                 return 1
             fi

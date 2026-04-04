@@ -51,8 +51,8 @@ function zpwrWatch(){
     fi
 
     if (( $# < 2 )); then
-        print "  ${R}usage: zpwr watch <glob> <command>${N}"
-        print "  ${D}run zpwr watch -h for help${N}"
+        zpwrLogConsoleErr "usage: zpwr watch <glob> <command>"
+        zpwrLogConsoleErr "run zpwr watch -h for help"
         return 1
     fi
 
@@ -67,8 +67,8 @@ function zpwrWatch(){
     elif (( $+commands[inotifywait] )); then
         watcher="inotifywait"
     else
-        print "  ${R}neither fswatch nor inotifywait found${N}"
-        print "  ${D}install: brew install fswatch  // or: apt install inotify-tools${N}"
+        zpwrLogConsoleErr "neither fswatch nor inotifywait found"
+        zpwrLogConsoleErr "install: brew install fswatch  // or: apt install inotify-tools"
         return 1
     fi
 
