@@ -1,4 +1,5 @@
 # -*- mode: sh -*-
+# g
 # vim: set ft=sh:
 function zpwrWatch(){
 
