@@ -8,7 +8,10 @@ function zpwrVimScriptEdit(){
     fi
     BUFFER="$EDITOR $BUFFER"
     zpwrLogDebug "builtin cd $ZPWR_SCRIPTS"
-    eval "builtin cd $ZPWR_SCRIPTS"
+    builtin cd "$ZPWR_SCRIPTS" || {
+        zpwrLogConsoleErr "cannot cd to $ZPWR_SCRIPTS"
+        return 1
+    }
 
     BUFFER="$BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
     zpwrLogDebug "$BUFFER"
