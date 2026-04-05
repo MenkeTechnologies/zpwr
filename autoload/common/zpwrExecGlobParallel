@@ -30,7 +30,7 @@ function zpwrExecGlobParallel(){
         fi
     }
 
-    local glob command f
+    local glob command f rel
     local -a files failed pids key
 
     glob="$1"

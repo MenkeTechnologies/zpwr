@@ -65,7 +65,7 @@
     prev=$ZPWR_LOGFILE
     ZPWR_LOGFILE=$tmp
     ZPWR_COLORS=false
-    run printf 'stdinplainuniq005' | zpwrLog 2>&1
+    run printf 'stdinplainuniq005' \| zpwrLog 2>&1
     assert $state equals 0
     assert "$(command cat "$tmp")" contains stdinplainuniq005
     ZPWR_LOGFILE=$prev
@@ -254,6 +254,11 @@
 @test 'zpwrExists false returns 0 in bash' {
     run bash -c "source $ZPWR_LIB; zpwrExists false"
     assert $state equals 0
+}
+
+@test 'zpwrExists multiple with bogus first returns 1 in bash' {
+    run bash -c "source $ZPWR_LIB; zpwrExists __zpwr_bogus_fn_999__ echo"
+    assert $state equals 1
 }
 
 #--------------------------------------------------------------

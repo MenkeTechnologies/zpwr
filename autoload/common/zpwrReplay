@@ -66,6 +66,8 @@ function zpwrReplay(){
     local -a cmds
     local -a timestamps
     local line ts cmd_text
+    local start elapsed replay_script
+    local -i ret
 
     # fc -l gives: number  command
     # fc -rl for reverse order (most recent first), then we reverse for playback order
@@ -125,10 +127,10 @@ function zpwrReplay(){
         for (( i = 1; i <= $#cmds; i++ )); do
             printf "  ${D}[%d/%d]${N} ${C}\$${N} ${B}%s${N}\n" $i $#cmds "${cmds[i]}"
 
-            local start=$EPOCHREALTIME
+            start=$EPOCHREALTIME
             eval "${cmds[i]}"
-            local -i ret=$?
-            local elapsed=$(printf '%.0f' $(( (EPOCHREALTIME - start) * 1000 )))
+            ret=$?
+            elapsed=$(printf '%.0f' $(( (EPOCHREALTIME - start) * 1000 )))
 
             if (( ret == 0 )); then
                 printf "  ${G}→ ok${N} ${D}(%d ms)${N}\n\n" $elapsed
@@ -152,7 +154,7 @@ function zpwrReplay(){
         printf "  ${M}>> launching replay in new tmux pane <<${N}\n"
 
         # build script for tmux pane
-        local replay_script=$(mktemp)
+        replay_script=$(mktemp)
         {
             echo '#!/usr/bin/env zsh'
             echo "cd ${(q)PWD}"

@@ -7,7 +7,7 @@
 ```
  _______ _______ _  _  _ ______
 |____   |_____  | |  \| |_____/
-    /  / |_____] |_|\_| |    \_  v48.7.0
+    /  / |_____] |_|\_| |    \_  v48.7.1
 >>> JACK INTO THE GRID <<<
 ```
 
@@ -72,7 +72,7 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
-- [RasberryPi Screenshots](#running-on-the-raspberry-pi-3)
+- [Raspberry Pi Screenshots](#running-on-the-raspberry-pi-3)
 - [Rock64 Screenshots](#running-on-the-rock64)
 - [KeyBindings](#neural-mappings----keybindings-generated-with-source-keybindingstoreadmezsh--readmemd) -- Neural Mappings
 - [Tmux Keybindings](#tmux-keybindings-tmux-lsk)
@@ -779,7 +779,7 @@ zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GI
 ```
 
 ## Diagnostics
-The test suite contains thousands of [zunit](https://github.com/zunit-zsh/zunit) tests across `tests/*.zsh` covering autoload function existence, type resolution, whence/which lookups, function body validation, fpath integrity, source syntax, script readability, shebang detection, verb callability, environment variable isolation, and behavioral checks for `scripts/lib.sh` helpers (required-argument validation and usage errors).
+The test suite contains thousands of [zunit](https://github.com/zunit-zsh/zunit) tests across `tests/*.zsh` covering autoload function existence, type resolution, whence/which lookups, function body validation, fpath integrity, source syntax, script readability, shebang detection, verb callability, environment variable isolation, and behavioral checks for `scripts/lib.sh` helpers (required-argument validation, usage errors, and bash `zpwrExists` multi-argument parity with zsh).
 
 All ZPWR_* environment variables are unset before each test run to prevent user env from leaking into test results.
 

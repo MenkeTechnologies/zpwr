@@ -81,6 +81,12 @@ function zpwrMatrix(){
     local -i _mx_pause_orig_turbo=0
     local -i battle_mode=0 battle_p2=0
     local _battle_gamedir=""
+    local _bdir _bplayer _bname _bcolor _bopponent _bocolor
+    local -i _bhp _bohp _bround _bdmg _bwins _blosses
+    local -i _btimeout _bcols _blines
+    local _bcmd _binput _bresult _bstate _p2in
+    local -a _bverbs _btaunts_hit _btaunts_miss _btaunts_win
+    local _found
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -235,13 +241,11 @@ function zpwrMatrix(){
 
     # ── BATTLE MODE ──────────────────────────────────────────
     if (( battle_mode || battle_p2 )); then
-        local _bdir="/tmp/zpwr-battle-$$"
-        local _bplayer _bname _bcolor _bopponent _bocolor
-        local -i _bhp=100 _bohp=100 _bround=0 _bdmg=0 _bwins=0 _blosses=0
-        local -i _btimeout=8 _bcols _blines
-        local _bcmd _binput _bresult _bstate _p2in
-        local -a _bverbs _btaunts_hit _btaunts_miss _btaunts_win
-
+        _bdir="/tmp/zpwr-battle-$$"
+        _bplayer="" _bname="" _bcolor="" _bopponent="" _bocolor=""
+        _bhp=100 _bohp=100 _bround=0 _bdmg=0 _bwins=0 _blosses=0
+        _btimeout=8
+        _bcmd="" _binput="" _bresult="" _bstate="" _p2in=""
         _bverbs=()
         if (( ${+ZPWR_VERBS} )); then
             _bverbs=( ${(k)ZPWR_VERBS} )
@@ -464,7 +468,6 @@ function zpwrMatrix(){
             [[ -n "$_battle_gamedir" ]] && _bdir="$_battle_gamedir"
             # fallback: scan /tmp for game dir
             if [[ ! -d "$_bdir" ]]; then
-                local _found
                 for _found in /tmp/zpwr-battle-*(N); do
                     [[ -f "$_found/state" ]] && { _bdir="$_found"; break; }
                 done
@@ -798,12 +801,11 @@ function zpwrMatrix(){
         local -i ty=$(( RANDOM % (lines - 6) + 2 ))
         local -i th=$(( RANDOM % 4 + 2 ))
         local -i tshift=$(( RANDOM % 12 + 3 ))
-        local -i ti
+        local -i ti tw
         for (( ti=0; ti<th; ti++ )); do
             (( ty + ti > lines )) && break
             # read line, shift it
             printf '\033[%d;%dH\033[1;3%dm' $(( ty + ti )) $tshift $(( RANDOM % 6 + 1 ))
-            local -i tw
             for (( tw=0; tw<cols-tshift; tw++ )); do
                 printf '%s' "${${(s::):-░▒▓█╬╪}[$((RANDOM % 6 + 1))]}"
             done
@@ -818,13 +820,12 @@ function zpwrMatrix(){
 
     # VHS tracking distortion
     _mx_vhs() {
-        local -i vi
+        local -i vi vy vshift vw vx
         for vi in {1..8}; do
-            local -i vy=$(( RANDOM % lines + 1 ))
-            local -i vshift=$(( RANDOM % 6 - 3 ))
-            local -i vw=$(( cols / 2 + RANDOM % (cols / 2) ))
+            vy=$(( RANDOM % lines + 1 ))
+            vshift=$(( RANDOM % 6 - 3 ))
+            vw=$(( cols / 2 + RANDOM % (cols / 2) ))
             printf '\033[%d;%dH' $vy $(( vshift > 0 ? vshift : 1 ))
-            local -i vx
             for (( vx=0; vx<vw; vx++ )); do
                 if (( RANDOM % 4 == 0 )); then
                     printf '\033[7;3%dm ' $(( RANDOM % 7 + 1 ))
@@ -841,7 +842,7 @@ function zpwrMatrix(){
 
     # pixel corruption: random blocks of garbage spreading
     _mx_corrupt() {
-        local -i cx cy cw ch ci cj
+        local -i cx cy cw ch ci cj ck
         for ci in {1..15}; do
             cx=$(( RANDOM % (cols - 10) + 1 ))
             cy=$(( RANDOM % (lines - 4) + 1 ))
@@ -849,7 +850,6 @@ function zpwrMatrix(){
             ch=$(( RANDOM % 3 + 1 ))
             for (( cj=0; cj<ch; cj++ )); do
                 printf '\033[%d;%dH' $(( cy + cj )) $cx
-                local -i ck
                 for (( ck=0; ck<cw; ck++ )); do
                     printf '\033[%d;3%dm%s' $(( RANDOM % 2 )) $(( RANDOM % 7 + 1 )) "${${(s::):-█▓▒░╳╬▪▫●◆}[$((RANDOM % 10 + 1))]}"
                 done
@@ -972,9 +972,10 @@ function zpwrMatrix(){
         _mx_type "  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" "2;33" 0.005 || return 1
         printf '\n\n'
         # show encrypted gibberish
-        local -i di
+        local -i di dj
+        local giblen
         for di in {1..4}; do
-            local -i dj giblen=$(( RANDOM % 30 + 30 ))
+            giblen=$(( RANDOM % 30 + 30 ))
             printf '  '
             for (( dj=0; dj<giblen; dj++ )); do
                 printf '\033[2;31m%s' "${${(s::):-╬╪═║╔╗╚╝░▒▓█@#$%^&}[$((RANDOM % 17 + 1))]}"
@@ -1933,7 +1934,7 @@ function zpwrMatrix(){
 
     # harvest data
     local -a words wcolors
-    local k
+    local k repo
 
     if (( ${+ZPWR_VERBS} )); then
         for k in ${(k)ZPWR_VERBS}; do
@@ -1958,7 +1959,6 @@ function zpwrMatrix(){
     done
 
     if [[ -s "$ZPWR_ALL_GIT_DIRS" ]]; then
-        local repo
         while IFS= read -r repo; do
             words+=("${repo:t}"); wcolors+=("31")
         done < <(head -100 "$ZPWR_ALL_GIT_DIRS")
@@ -2025,7 +2025,8 @@ function zpwrMatrix(){
     local -i frame=0 x y word_len char_y wi_char erase_y
     local -i glitch_cooldown=0 pulse_cooldown=30 figlet_cooldown=50 scanline_cooldown=0
     local word wcolor
-    local -i gi gx gy gw
+    local -i gi gx gy gw g_height gh fy fx py px tline sf up_s up_m up_h sy si
+    local fig_font fig_word fig_color fig_out fline pmsg visible sig_bar
 
     while true; do
         read -t 0.001 -k 1 ch 2>/dev/null
@@ -2086,7 +2087,7 @@ function zpwrMatrix(){
         if (( glitch_cooldown > 0 )); then
             (( glitch_cooldown-- ))
         elif (( RANDOM % 60 == 0 )); then
-            local -i g_height=$(( RANDOM % 3 + 1 )) gh
+            g_height=$(( RANDOM % 3 + 1 ))
             gy=$(( RANDOM % (lines - 5) + 1 ))
             gw=$(( RANDOM % (cols / 2) + 20 ))
             gx=$(( RANDOM % (cols - gw) + 1 ))
@@ -2107,7 +2108,6 @@ function zpwrMatrix(){
         if (( scanline_cooldown > 0 )); then
             (( scanline_cooldown-- ))
         elif (( RANDOM % 250 == 0 )); then
-            local -i sy
             for (( sy=1; sy<=lines-3; sy+=2 )); do
                 printf '\033[%d;1H\033[7;32m%*s\033[0m' $sy $cols ''
                 sleep 0.006
@@ -2120,15 +2120,13 @@ function zpwrMatrix(){
         if (( figlet_cooldown > 0 )); then
             (( figlet_cooldown-- ))
         elif (( RANDOM % 150 == 0 && $+commands[figlet] )); then
-            local fig_font="${chaos_fonts[$((RANDOM % ${#chaos_fonts} + 1))]}"
-            local fig_word="${chaos_words[$((RANDOM % ${#chaos_words} + 1))]}"
-            local fig_color="${chaos_colors[$((RANDOM % ${#chaos_colors} + 1))]}"
-            local fig_out
+            fig_font="${chaos_fonts[$((RANDOM % ${#chaos_fonts} + 1))]}"
+            fig_word="${chaos_words[$((RANDOM % ${#chaos_words} + 1))]}"
+            fig_color="${chaos_colors[$((RANDOM % ${#chaos_colors} + 1))]}"
             fig_out=$(figlet -f "$fig_font" "$fig_word" 2>/dev/null)
 
             if [[ -n "$fig_out" ]]; then
-                local -i fy=$(( RANDOM % (lines / 2) + 2 )) fx
-                local fline
+                fy=$(( RANDOM % (lines / 2) + 2 ))
                 while IFS= read -r fline; do
                     fx=$(( (cols - ${#fline}) / 2 ))
                     (( fx < 1 )) && fx=1
@@ -2156,9 +2154,9 @@ function zpwrMatrix(){
         if (( pulse_cooldown > 0 )); then
             (( pulse_cooldown-- ))
         elif (( RANDOM % 100 == 0 )); then
-            local pmsg="${pulse_msgs[$((RANDOM % n_pulses + 1))]}"
-            local -i py=$(( RANDOM % (lines - 6) + 2 ))
-            local -i px=$(( (cols - ${#pmsg}) / 2 ))
+            pmsg="${pulse_msgs[$((RANDOM % n_pulses + 1))]}"
+            py=$(( RANDOM % (lines - 6) + 2 ))
+            px=$(( (cols - ${#pmsg}) / 2 ))
             (( px < 1 )) && px=1
 
             printf '\033[%d;1H\033[7;36m%*s\033[0m' $py $cols ''
@@ -2170,8 +2168,8 @@ function zpwrMatrix(){
 
         # ── TICKER ───────────────────────────────────────────
         if (( frame % 2 == 0 )); then
-            local -i tline=$(( lines - 2 ))
-            local visible=""
+            tline=$(( lines - 2 ))
+            visible=""
             if (( ticker_pos < ticker_len )); then
                 visible="${ticker_text:$ticker_pos:$cols}"
             fi
@@ -2188,13 +2186,13 @@ function zpwrMatrix(){
 
         # ── HUD ──────────────────────────────────────────────
         if (( frame % 10 == 0 )); then
-            local -i up_s=$SECONDS up_m up_h
+            up_s=$SECONDS
             up_h=$(( up_s / 3600 ))
             up_m=$(( (up_s % 3600) / 60 ))
             up_s=$(( up_s % 60 ))
 
-            local sig_bar=""
-            local -i sf=$(( frame % 20 )) si
+            sig_bar=""
+            sf=$(( frame % 20 ))
             for (( si=0; si<10; si++ )); do
                 if (( si <= sf / 2 )); then sig_bar+="█"; else sig_bar+="░"; fi
             done

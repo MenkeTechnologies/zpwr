@@ -2,12 +2,12 @@
 # vim: set ft=sh:
 function nn(){
 
+        local title msg
+
         if [[ -z "$2" ]];then
             zpwrLogConsoleErr "usage: nn TITLE MESSAGE..." &&
             return 1
         fi
-
-        local title msg
 
         title="$1"
         msg="$2"

@@ -81,6 +81,8 @@ function zpwrSnapshot(){
     } >| "$manifest"
 
     local -i count=0
+    local -i hcount scount wcount pcount vcount
+    local latest_resurrect
 
     # 1. hash dirs
     printf "  ${D}//${N} ${B}hash dirs${N}       "
@@ -155,7 +157,7 @@ function zpwrSnapshot(){
     printf "  ${D}//${N} ${B}history${N}         "
     if [[ -f "$HISTFILE" ]]; then
         builtin fc -W "$snapdir/history.zsh" 2>/dev/null
-        local -i hcount=$(wc -l < "$snapdir/history.zsh" 2>/dev/null)
+        hcount=$(wc -l < "$snapdir/history.zsh" 2>/dev/null)
         (( count++ ))
         printf "${G}%d entries${N}\n" $hcount
     else
@@ -178,15 +180,14 @@ function zpwrSnapshot(){
         if [[ -d "$HOME/.tmux/plugins/tmux-resurrect" ]]; then
             tmux run-shell "$HOME/.tmux/plugins/tmux-resurrect/scripts/save.sh" 2>/dev/null
             # copy latest resurrect file
-            local latest_resurrect
             latest_resurrect=$(command ls -t ~/.tmux/resurrect/tmux_resurrect_*.txt 2>/dev/null | head -1)
             if [[ -n "$latest_resurrect" ]]; then
                 command cp "$latest_resurrect" "$snapdir/tmux/resurrect.txt"
             fi
         fi
-        local -i scount=$(wc -l < "$snapdir/tmux/sessions.txt" 2>/dev/null)
-        local -i wcount=$(wc -l < "$snapdir/tmux/windows.txt" 2>/dev/null)
-        local -i pcount=$(wc -l < "$snapdir/tmux/panes.txt" 2>/dev/null)
+        scount=$(wc -l < "$snapdir/tmux/sessions.txt" 2>/dev/null)
+        wcount=$(wc -l < "$snapdir/tmux/windows.txt" 2>/dev/null)
+        pcount=$(wc -l < "$snapdir/tmux/panes.txt" 2>/dev/null)
         (( count++ ))
         printf "${G}%d sessions, %d windows, %d panes${N}\n" $scount $wcount $pcount
     else
@@ -198,7 +199,7 @@ function zpwrSnapshot(){
     if [[ -d "$HOME/.vim/sessions" ]]; then
         command mkdir -p "$snapdir/vim"
         command cp "$HOME/.vim/sessions/"*.vim "$snapdir/vim/" 2>/dev/null
-        local -i vcount=$(command ls "$snapdir/vim/"*.vim 2>/dev/null | wc -l)
+        vcount=$(command ls "$snapdir/vim/"*.vim 2>/dev/null | wc -l)
         (( count++ ))
         printf "${G}%d sessions${N}\n" $vcount
     else

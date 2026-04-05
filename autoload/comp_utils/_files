@@ -12,6 +12,8 @@ local original_ret
 
 __origfiles(){
 
+local subtree
+
 # Look for glob qualifiers. This is duplicated from _path_files because
 # we don't want to complete them multiple times (for each file pattern).
 if _have_glob_qual $PREFIX; then
@@ -118,7 +120,6 @@ for def in "$pats[@]"; do
           if _path_files -g "$pat" "$opts[@]" "$expl[@]"; then
 	    ret=0
 	  elif [[ $PREFIX$SUFFIX != */* ]] && zstyle -a ":completion:${curcontext}:$tag" recursive-files rfiles; then
-	    local subtree
 	    for rfile in $rfiles; do
 	      if [[ $PWD/ = ${~rfile} ]]; then
 		if [[ -z $subtree ]]; then

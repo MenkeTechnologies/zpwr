@@ -40,6 +40,9 @@ function zpwrFortune(){
     fi
 
     local plain=false font=""
+    local -a words_arr quote_words cyber_fonts neon_colors
+    local line_buf word qw fig_text fig_out fline
+    local -i fx qx
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -142,7 +145,6 @@ function zpwrFortune(){
     local author="${authors[$idx]}"
 
     # pick a random figlet font
-    local -a cyber_fonts
     cyber_fonts=( cyberlarge cybermedium doom slant speed banner standard )
 
     if [[ -z "$font" ]]; then
@@ -150,7 +152,6 @@ function zpwrFortune(){
     fi
 
     # pick a random color
-    local -a neon_colors
     neon_colors=( '1;36' '1;32' '1;35' '1;33' '0;36' '1;37' )
     local qcolor="${neon_colors[$((RANDOM % ${#neon_colors} + 1))]}"
 
@@ -161,9 +162,8 @@ function zpwrFortune(){
         _bt
         _bx ""
         # word wrap the quote
-        local -a words_arr
         words_arr=( ${(s: :)quote} )
-        local line_buf="" word
+        line_buf=""
         for word in "${words_arr[@]}"; do
             if (( ${#line_buf} + ${#word} + 1 > _bw - 6 )); then
                 _bx "  \033[${qcolor}m${line_buf}\033[0m"
@@ -183,13 +183,10 @@ function zpwrFortune(){
         _bb
     else
         # figlet mode — render first meaningful word or short phrase
-        local fig_text
         # pick a short keyword from the quote for figlet
-        local -a quote_words
         quote_words=( ${(s: :)quote} )
         # find the longest word <= 10 chars for figlet, or first word
         fig_text="${quote_words[1]}"
-        local qw
         for qw in "${quote_words[@]}"; do
             if (( ${#qw} > ${#fig_text} && ${#qw} <= 10 )); then
                 fig_text="$qw"
@@ -198,12 +195,9 @@ function zpwrFortune(){
         # strip punctuation
         fig_text="${fig_text//[.,!?:;\"\']/}"
 
-        local fig_out
         fig_out=$(figlet -f "$font" "$fig_text" 2>/dev/null)
 
         if [[ -n "$fig_out" ]]; then
-            local fline
-            local -i fx
             while IFS= read -r fline; do
                 fx=$(( (COLUMNS - ${#fline}) / 2 ))
                 (( fx < 1 )) && fx=1
@@ -213,7 +207,7 @@ function zpwrFortune(){
 
         printf "\n"
         # print full quote
-        local -i qx=$(( (COLUMNS - ${#quote} - 4) / 2 ))
+        qx=$(( (COLUMNS - ${#quote} - 4) / 2 ))
         (( qx < 2 )) && qx=2
         printf '%*s\033[0;37m"%s"\033[0m\n' $qx '' "$quote"
         printf '%*s\033[2;35m%s\033[0m\n' $(( qx + ${#quote} - ${#author} )) '' "$author"

@@ -45,7 +45,7 @@ function initializeGitDirectory() {
 
     #there is no .git directory
     if [[ ! -d ".git" ]]; then
-        myPrettyPrint "Do you want to initialize this diqrectory with Git?"
+        myPrettyPrint "Do you want to initialize this directory with Git?"
         #read one character
         read -n1
         echo
@@ -93,16 +93,16 @@ function getRemoteDetails() {
 
     #get origin from git remote -v if the origin has been established
     #awk to print first column, tail for last line and tr to delete any spaces
-    local ORGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
-    if [ -z "$ORGIN_NAME" ]; then
+    local ORIGIN_NAME="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
+    if [ -z "$ORIGIN_NAME" ]; then
         #no origin so prompt for it
         myPrettyPrint "What is your origin?"
-        read ORGIN_NAME
+        read ORIGIN_NAME
     fi
     #concat url from variables
     local URL="https://github.com/$ZPWR_GITHUB_ACCOUNT/$REPO_NAME_TO_CREATE"
     #add the remote repository
-    git remote add "$ORGIN_NAME" "$URL" 2>/dev/null
+    git remote add "$ORIGIN_NAME" "$URL" 2>/dev/null
     getInitialCommit
 }
 
@@ -168,7 +168,7 @@ function commitTheDirectory() {
     #commitMessage is first argument
     local commitMessage="$1"
     local origin="$(git remote -v | awk '{print $1}' | tail -1 | tr -d ' ')"
-    myPrettyPrint "Commiting to $origin with message $commitMessage"
+    myPrettyPrint "Committing to $origin with message $commitMessage"
     git add .
     git commit -m "$commitMessage"
     git push "$origin" main || {

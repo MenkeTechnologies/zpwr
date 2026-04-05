@@ -10,6 +10,8 @@ function zpwrTmuxSave(){
     local layout_dir="$ZPWR_LOCAL/layouts"
     local layout_name layout_file
     local -i list_mode=0 delete_mode=0
+    local -a layouts
+    local lf lmod
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -49,7 +51,6 @@ function zpwrTmuxSave(){
 
     # ── LIST MODE ────────────────────────────────────────────
     if (( list_mode )); then
-        local -a layouts
         layouts=( "$layout_dir"/*.zsh(N:t:r) )
         if (( ${#layouts} == 0 )); then
             print "  ${Y}no saved layouts${N}"
@@ -59,7 +60,6 @@ function zpwrTmuxSave(){
         print ""
         print "  ${B}${C}SAVED LAYOUTS${N}  ${D}(${#layouts})${N}"
         print ""
-        local lf lmod
         for lf in "$layout_dir"/*.zsh(N); do
             lmod=$(command stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$lf" 2>/dev/null || command stat -c '%y' "$lf" 2>/dev/null | cut -d. -f1)
             print "  ${G}${lf:t:r}${N}  ${D}// ${lmod}${N}"

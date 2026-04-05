@@ -21,6 +21,7 @@ function _zpwr(){
 
   local arguments verb
   local curcontext=$curcontext state line ret=0
+  local -a snaps _layouts
 
   arguments=(
         '(- * :)'{-h,-\?,--help}'[show help message and exit]'
@@ -239,7 +240,6 @@ function _zpwr(){
                         '1:snapshot:->snapshots' \
                         '*:component:(all hash aliases env tmux vim history dirs)'
                     if [[ "$state" == snapshots ]]; then
-                        local -a snaps
                         snaps=( "$ZPWR_LOCAL"/snapshots/*(N/:t) )
                         _describe 'snapshot' snaps
                     fi
@@ -348,7 +348,6 @@ function _zpwr(){
                         '(-d --delete)'{-d,--delete}'[delete layout]:layout:->layouts' \
                         '1:layout name:'
                     if [[ "$state" == layouts ]]; then
-                        local -a _layouts
                         _layouts=( "$ZPWR_LOCAL"/layouts/*.zsh(N:t:r) )
                         _describe 'layout' _layouts
                     fi
@@ -360,7 +359,6 @@ function _zpwr(){
                         '1:layout:->layouts' \
                         '2:session name:'
                     if [[ "$state" == layouts ]]; then
-                        local -a _layouts
                         _layouts=( "$ZPWR_LOCAL"/layouts/*.zsh(N:t:r) )
                         _describe 'layout' _layouts
                     fi
