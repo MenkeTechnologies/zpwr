@@ -46,6 +46,8 @@ function zpwrPorts(){
 
     local kill_mode=false
     local port_filter=""
+    local -a pids fields
+    local pid pname line cmd user name addr pt port_color
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -69,15 +71,12 @@ function zpwrPorts(){
         _bb
         printf "\n"
 
-        local -a pids
         pids=( $(command lsof -ti :"$port_filter" 2>/dev/null) )
         if (( $#pids == 0 )); then
             printf "  ${D}No process found on port %s${N}\n\n" "$port_filter"
             return 0
         fi
-        local pid
         for pid in $pids; do
-            local pname
             pname=$(command ps -p "$pid" -o comm= 2>/dev/null)
             printf "  ${R}Killing${N} PID ${C}%s${N} ${D}(%s)${N}\n" "$pid" "$pname"
             kill "$pid" 2>/dev/null
@@ -108,16 +107,15 @@ function zpwrPorts(){
     eval "$lsof_cmd" 2>/dev/null | while IFS= read -r line; do
         # skip header
         [[ "$line" == COMMAND* ]] && continue
-        local -a fields
         fields=( ${(s: :)line} )
-        local cmd="${fields[1]}" pid="${fields[2]}" user="${fields[3]}"
-        local name="${fields[9]:-${fields[8]}}"
+        cmd="${fields[1]}" pid="${fields[2]}" user="${fields[3]}"
+        name="${fields[9]:-${fields[8]}}"
 
         # extract port from name field (e.g., *:8080 or 127.0.0.1:3000)
-        local addr="${name%:*}"
-        local pt="${name##*:}"
+        addr="${name%:*}"
+        pt="${name##*:}"
 
-        local port_color=$G
+        port_color=$G
         if (( pt < 1024 )); then
             port_color=$R
         elif (( pt < 10000 )); then

@@ -78,12 +78,15 @@ function zpwrAliasRank(){
     local word line k v key
     local cache_file="$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh"
     local -i need_rebuild=1
+    local -i cached_hist_lines current_hist_lines
+    local hist_wc hwc
+    local -i direct
 
     local stamp_file="$ZPWR_LOCAL/zpwr-rank-stamp"
     if [[ -r "$cache_file" && -r "$stamp_file" ]]; then
-        local -i cached_hist_lines=$(<"$stamp_file")
-        local hist_wc=$(command wc -l < "$HISTFILE" 2>/dev/null)
-        local -i current_hist_lines=${hist_wc//[^0-9]/}
+        cached_hist_lines=$(<"$stamp_file")
+        hist_wc=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        current_hist_lines=${hist_wc//[^0-9]/}
         if (( current_hist_lines - cached_hist_lines < 1000 )); then
             need_rebuild=0
         fi
@@ -105,7 +108,7 @@ function zpwrAliasRank(){
                 print -r -- "${k}=${v}"
             done
         } >| "$cache_file"
-        local hwc=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        hwc=$(command wc -l < "$HISTFILE" 2>/dev/null)
         print -r "${hwc//[^0-9]/}" >| "$stamp_file"
         print "  ${G}>> cached to ${cache_file:t} <<${N}"
         print ""
@@ -136,7 +139,7 @@ function zpwrAliasRank(){
         alias_first_word="${alias_first_word%\"}"
         cnt=${cmd_counts[$alias_first_word]:-0}
         # also check direct alias name usage
-        local -i direct=${cmd_counts[$alias_name]:-0}
+        direct=${cmd_counts[$alias_name]:-0}
         (( direct > cnt )) && cnt=$direct
         (( cnt > 0 )) && alias_usage+=( "$cnt $alias_name")
     done
@@ -177,7 +180,7 @@ function zpwrAliasRank(){
         alias_first_word="${alias_first_word#\"}"
         alias_first_word="${alias_first_word%\"}"
         cnt=${cmd_counts[$alias_first_word]:-0}
-        local -i direct=${cmd_counts[$alias_name]:-0}
+        direct=${cmd_counts[$alias_name]:-0}
         (( direct > cnt )) && cnt=$direct
         (( cnt == 0 )) && unused+=( "$alias_name" )
     done

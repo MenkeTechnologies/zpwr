@@ -9,6 +9,7 @@ function zpwrTmuxLoad(){
 
     local layout_dir="$ZPWR_LOCAL/layouts"
     local layout_name layout_file session_name
+    local -a layouts
 
     if [[ "$1" == "-h" || "$1" == "--help" ]]; then
         print ""
@@ -40,7 +41,6 @@ function zpwrTmuxLoad(){
 
     if [[ -z "$layout_name" ]]; then
         # fzf picker if available
-        local -a layouts
         layouts=( "$layout_dir"/*.zsh(N:t:r) )
         if (( ${#layouts} == 0 )); then
             zpwrLogConsoleErr "no saved layouts\nsave one with: zpwr tmuxsave <name>"

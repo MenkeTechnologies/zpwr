@@ -109,7 +109,7 @@ function zpwrStartup(){
     done < "$tmpfile"
 
     # show call tree section if present
-    local -i tree_start=0
+    local -i tree_start=0 tree_shown=0
     local -i i=0
     while IFS= read -r line; do
         (( i++ ))
@@ -121,7 +121,7 @@ function zpwrStartup(){
 
     if (( tree_start > 0 )); then
         printf "\n  ${C}── CALL TREE ───────────────────────────────────────────────────${N}\n"
-        local -i tree_shown=0
+        tree_shown=0
         tail -n +$tree_start "$tmpfile" | while IFS= read -r line; do
             (( tree_shown >= top_n )) && break
             [[ -z "$line" ]] && { (( tree_shown > 0 )) && break; continue }

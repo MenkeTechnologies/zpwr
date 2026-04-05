@@ -2,6 +2,10 @@
 # vim: set ft=sh:
 function zpwrBindFZFLate(){
 
+    local rpm_cmd deb_cmd
+    local base03 base02 base01 base00 base0 base1 base2 base3
+    local yellow orange red magenta violet blue cyan green
+
     if zpwrCommandExists fzf; then
 
         function zpwrBatSetup() {
@@ -56,8 +60,6 @@ function zpwrBindFZFLate(){
     #to include dirs files in search
         export FZF_DEFAULT_COMMAND='find * | ag -v ".git/"'
         export FZF_DEFAULT_OPTS="$ZPWR_COMMON_FZF_ELEM --reverse --border --height 100%"
-        local rpm_cmd
-        local deb_cmd
         zpwrExists rpm && rpm_cmd="rpm -qi" || rpm_cmd="stat"
         zpwrExists dpkg && deb_cmd="dpkg -I" || deb_cmd="stat"
 
@@ -99,22 +101,22 @@ function zpwrBindFZFLate(){
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}zb="\$($ZPWR_FZF $FZF_CTRL_T_OPTS)"
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}z="| $ZPWR_FZF $FZF_CTRL_T_OPTS "
 
-        local base03="234"
-        local base02="235"
-        local base01="240"
-        local base00="241"
-        local base0="244"
-        local base1="245"
-        local base2="254"
-        local base3="230"
-        local yellow="136"
-        local orange="166"
-        local red="160"
-        local magenta="125"
-        local violet="61"
-        local blue="33"
-        local cyan="37"
-        local green="64"
+        base03="234"
+        base02="235"
+        base01="240"
+        base00="241"
+        base0="244"
+        base1="245"
+        base2="254"
+        base3="230"
+        yellow="136"
+        orange="166"
+        red="160"
+        magenta="125"
+        violet="61"
+        blue="33"
+        cyan="37"
+        green="64"
 
     # Solarized Dark color scheme for fzf
         export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS

@@ -13,6 +13,8 @@ function zpwrWizard(){
     local -i total_pages=0 current_page=1 found=0
     local _page_out=""
     local -i _content_lines=0 _pad_lines=0 fw=0 hw=0
+    local page_file chapter_shown pattern line cur_chapter key num pf
+    local PAGE_TITLE PAGE_CHAPTER
 
     # ── BOX HELPERS ──────────────────────────────────────────
     _wiz_box_width() {

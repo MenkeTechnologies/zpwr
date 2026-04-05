@@ -80,6 +80,7 @@ function zpwrTimeline(){
     local -i count=0 total=0
     local prev_hour="" prev_dir=""
     local line timestamp cmd hour_str dir_part
+    local rest dt tm hm hour cmd_color
 
     # hour buckets for activity bar
     local -A hour_counts
@@ -87,19 +88,19 @@ function zpwrTimeline(){
     fc -l -t '%Y-%m-%d %H:%M:%S' -$max_lines | while IFS= read -r line; do
         # format: "  NUM  YYYY-MM-DD HH:MM:SS  command"
         # strip leading event number
-        local rest="${line#*[0-9]  }"
-        local dt="${rest%% *}"
+        rest="${line#*[0-9]  }"
+        dt="${rest%% *}"
         rest="${rest#* }"
-        local tm="${rest%% *}"
+        tm="${rest%% *}"
         rest="${rest#* }"
-        local hm="${rest%% *}"
+        hm="${rest%% *}"
         cmd="${rest#* }"
 
         # skip if wrong date
         [[ "$dt" != "$date_filter" ]] && continue
 
         (( total++ ))
-        local hour="${tm%%:*}"
+        hour="${tm%%:*}"
         hour_str="${hour}:00"
         (( hour_counts[$hour_str]++ ))
 
@@ -121,7 +122,7 @@ function zpwrTimeline(){
         fi
 
         # colorize by command type
-        local cmd_color=$D
+        cmd_color=$D
         case "$cmd" in
             git\ *|zpwr\ git*) cmd_color=$G ;;
             vim\ *|nvim\ *|emacs\ *|zpwr\ vim*|zpwr\ emacs*) cmd_color=$C ;;
@@ -135,29 +136,28 @@ function zpwrTimeline(){
     done
 
     # activity heatmap
+    local -i max_hour=0 hi bar_len hc bi
+    local h bar hcolor
     if (( total > 0 )); then
         printf "\n  ${C}── ACTIVITY ────────────────────────────────────────────${N}\n"
 
-        local -i max_hour=0
-        local h
+        max_hour=0
         for h in ${(v)hour_counts}; do
             (( h > max_hour )) && max_hour=$h
         done
         (( max_hour == 0 )) && max_hour=1
 
-        local -i hi bar_len
         for (( hi=0; hi<=23; hi++ )); do
             h=$(printf '%02d:00' $hi)
-            local -i hc=${hour_counts[$h]:-0}
+            hc=${hour_counts[$h]:-0}
             if (( hc > 0 )); then
                 bar_len=$(( hc * 30 / max_hour ))
                 (( bar_len == 0 )) && bar_len=1
-                local bar=""
-                local -i bi
+                bar=""
                 for (( bi=0; bi<bar_len; bi++ )); do
                     bar+="█"
                 done
-                local hcolor=$G
+                hcolor=$G
                 (( hc * 2 > max_hour )) && hcolor=$Y
                 (( hc == max_hour )) && hcolor=$R
                 printf "  ${D}%s${N} ${hcolor}%s${N} ${D}%d${N}\n" "$h" "$bar" $hc

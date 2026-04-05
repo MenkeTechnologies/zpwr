@@ -22,6 +22,7 @@ function zpwrTrace(){
     local -i in_table=0 sc_shown=0 mem_delta=0 perf_score=0 sig_empty=0
     local -i do_strace=1 do_ltrace=1
     local -a fields=()
+    local trace_desc
 
     if [[ "$1" == "-h" || "$1" == "--help" || $# -eq 0 ]]; then
         print ""
@@ -167,7 +168,7 @@ function zpwrTrace(){
         exit_code=$?
     elif [[ "$trace_tool" == "strace" ]]; then
         # Linux: selective tracing based on flags
-        local trace_desc=""
+        trace_desc=""
         (( do_strace )) && trace_desc+="strace"
         (( do_strace && do_ltrace )) && trace_desc+=" + "
         (( do_ltrace )) && trace_desc+="ltrace"

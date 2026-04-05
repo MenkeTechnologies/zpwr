@@ -54,6 +54,14 @@ function zpwrBench(){
     local history_file="$ZPWR_LOCAL/zpwr-bench-history.txt"
     local tmpfile=$(mktemp)
     local i total_prompt total_startup
+    local out parts pt st bar
+    local -i filled empty sig_filled sig_empty
+    local ts_start ts_env ts_plugins ts_compsys ts_options ts_finish total_ms
+    local -a phase_names phase_ms
+    local j phase_pct phase_bar_len phase_bar
+    local base_avg diff pct
+    local -a hist_lines last
+    local line
 
     # colors
     local C='\033[36m'    # cyan
@@ -121,18 +129,18 @@ function zpwrBench(){
             } >| $tmpfile
             exit
         " &>/dev/null
-        local out=$(<"$tmpfile")
-        local -a parts=( ${(s: :)out} )
-        local pt=${parts[1]}
-        local st=${parts[2]}
+        out=$(<"$tmpfile")
+        parts=( ${(s: :)out} )
+        pt=${parts[1]}
+        st=${parts[2]}
         prompt_times+=($pt)
         startup_times+=($st)
         run_details+=("$out")
 
         # progress bar
-        local -i filled=$(( i * 20 / runs ))
-        local -i empty=$(( 20 - filled ))
-        local bar="${G}$(printf '█%.0s' {1..$filled})${D}$(printf '░%.0s' {1..$empty})${N}"
+        filled=$(( i * 20 / runs ))
+        empty=$(( 20 - filled ))
+        bar="${G}$(printf '█%.0s' {1..$filled})${D}$(printf '░%.0s' {1..$empty})${N}"
         printf "\r  ${D}//${N} run ${B}%2d${N}  ${D}[${N}%b${D}]${N}  prompt ${C}%.3fs${N}  startup ${M}%.3fs${N}" $i $bar $pt $st
     done
     command rm -f "$tmpfile"
@@ -180,7 +188,6 @@ function zpwrBench(){
     printf "    min ${G}%.3fs${N}  ${D}//${N}  max ${Y}%.3fs${N}  ${D}//${N}  spread ${C}%.3fs${N}\n" $min_startup $max_startup $(( max_startup - min_startup ))
 
     # signal bar for avg startup
-    local -i sig_filled sig_empty
     if (( avg_startup < 1.0 )); then
         (( sig_filled = 10 - (avg_startup * 10) ))
         (( sig_filled = sig_filled < 1 ? 1 : sig_filled ))
@@ -203,29 +210,28 @@ function zpwrBench(){
     fi
 
     # phase breakdown from last run
-    local -a last=( ${(s: :)run_details[$runs]} )
+    last=( ${(s: :)run_details[$runs]} )
     if (( $#last >= 7 )); then
-        local ts_start=${last[3]}
-        local ts_env=${last[4]}
-        local ts_plugins=${last[5]}
-        local ts_compsys=${last[6]}
-        local ts_options=${last[7]}
-        local ts_finish=${last[8]:-$ts_options}
-        local total_ms=$(( (ts_finish - ts_start) * 1000 ))
+        ts_start=${last[3]}
+        ts_env=${last[4]}
+        ts_plugins=${last[5]}
+        ts_compsys=${last[6]}
+        ts_options=${last[7]}
+        ts_finish=${last[8]:-$ts_options}
+        total_ms=$(( (ts_finish - ts_start) * 1000 ))
 
         printf "\n"
         printf "  ${M}▸ Phase Breakdown ${D}(last run)${N}\n"
         printf "  ${D}──────────────────────────────────────────────────${N}\n"
 
-        local -a phase_names=( "instant prompt" "env + aliases " "plugin decl   " "compsys       " "options + fzf " )
-        local -a phase_ms
+        phase_names=( "instant prompt" "env + aliases " "plugin decl   " "compsys       " "options + fzf " )
+        phase_ms=()
         phase_ms+=( $(( (${last[1]} * 1000) )) )
         phase_ms+=( $(( (ts_plugins - ts_env) * 1000 )) )
         phase_ms+=( $(( (ts_compsys - ts_plugins) * 1000 )) )
         phase_ms+=( $(( (ts_options - ts_compsys) * 1000 )) )
         phase_ms+=( $(( (ts_finish - ts_options) * 1000 )) )
 
-        local j phase_pct phase_bar_len
         for (( j = 1; j <= $#phase_names; j++ )); do
             if (( total_ms > 0 )); then
                 (( phase_pct = phase_ms[j] / total_ms * 100 ))
@@ -235,7 +241,7 @@ function zpwrBench(){
                 phase_pct=0
                 phase_bar_len=0
             fi
-            local phase_bar=""
+            phase_bar=""
             if (( phase_bar_len > 0 )); then
                 phase_bar="${C}$(printf '█%.0s' {1..$phase_bar_len})${N}"
             fi
@@ -247,10 +253,8 @@ function zpwrBench(){
 
     # baseline comparison
     if [[ -r "$baseline" ]]; then
-        local base_avg
         base_avg=$(<"$baseline")
         if [[ -n "$base_avg" ]]; then
-            local diff pct
             (( diff = avg_startup - base_avg ))
             if (( base_avg != 0 )); then
                 (( pct = diff / base_avg * 100 ))
@@ -273,13 +277,11 @@ function zpwrBench(){
 
     # run history
     if [[ -r "$history_file" ]]; then
-        local -a hist_lines
         hist_lines=( "${(@f)$(<"$history_file")}" )
         if (( $#hist_lines > 0 )); then
             printf "\n"
             printf "  ${M}▸ History ${D}(last %d runs)${N}\n" $(( $#hist_lines < 10 ? $#hist_lines : 10 ))
             printf "  ${D}──────────────────────────────────────────────────${N}\n"
-            local line
             for line in ${hist_lines[-10,-1]}; do
                 [[ -n "$line" ]] && printf "    ${D}//${N} %s\n" "$line"
             done

@@ -45,7 +45,7 @@ if zpwrIsZsh; then
         local cmd="$1"
         local packageManager="$2"
         local forceSudo="$3"
-        local needSudoBase installDir
+        local needSudoBase installDir outdated
 
         typeset -Tgx ZPWR_PIP_BLACKLIST zpwrPipBlacklist
 
@@ -125,7 +125,7 @@ else
 
         #alternative is command -v
         for i in "$@";do
-            type -a -- "$i" >/dev/null 2>&1
+            type -a -- "$i" >/dev/null 2>&1 || return 1
         done
     }
 fi
@@ -812,8 +812,6 @@ function zpwrTurnOnDebugging(){
 
 function zpwrAlternatingPrettyPrint(){
 
-    local counter=0
-
     if [[ -z $1 ]]; then
         cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
@@ -881,7 +879,7 @@ function zpwrGitRepoUpdater() {
 
 function zpwrClearList() {
 
-    local FOUND out out2 ls_command lib_command rank loc arg
+    local FOUND out out2 ls_command lib_command rank loc arg lf
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
         if zpwrCommandExists eza;then

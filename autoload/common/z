@@ -2,8 +2,9 @@
 # vim: set ft=sh:
 function z(){
 
+    local zcmd
+
     if [[ -z ${ZPWR_VARS[zcmd]} ]]; then
-        local zcmd
         if zpwrExists zshz; then
             ZPWR_VARS[zcmd]="zshz"
         elif zpwrExists _z; then

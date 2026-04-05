@@ -47,6 +47,10 @@ function zpwrLint(){
 
     local -i errors=0 warnings=0 checked=0 passed=0
     local f line
+    local -i zsh_errors=0 zsh_checked=0
+    local -i sc_errors=0 sc_warnings=0 sc_checked=0
+    local -i file_errors file_warnings
+    local sc_out
 
     printf "\n"
     printf " ${C}██╗     ██╗███╗   ██╗████████╗${N}\n"
@@ -64,7 +68,8 @@ function zpwrLint(){
     if [[ "$mode" == "all" || "$mode" == "zsh" ]]; then
         printf "\n  ${C}── ZSH SYNTAX CHECK (zsh -n) ───────────────────────────${N}\n"
 
-        local -i zsh_errors=0 zsh_checked=0
+        zsh_errors=0
+        zsh_checked=0
 
         # autoload functions
         for f in "$ZPWR_AUTOLOAD_COMMON"/*(N.) "$ZPWR_AUTOLOAD_DARWIN"/*(N.) "$ZPWR_AUTOLOAD_LINUX"/*(N.); do
@@ -105,15 +110,15 @@ function zpwrLint(){
             printf "  ${Y}shellcheck not found${N} ${D}// install: brew install shellcheck${N}\n"
             (( warnings++ ))
         else
-            local -i sc_errors=0 sc_warnings=0 sc_checked=0
-            local sc_out
+            sc_errors=0
+            sc_warnings=0
+            sc_checked=0
 
             for f in "$ZPWR"/scripts/*.sh(N) "$ZPWR"/scripts/*.zsh(N) "$ZPWR"/install/*.sh(N); do
                 (( sc_checked++ ))
                 (( checked++ ))
                 sc_out=$(shellcheck -S warning -e SC1071,SC1090,SC1091,SC2034,SC2139,SC2148,SC2154,SC2206,SC2296 "$f" 2>&1)
                 if [[ -n "$sc_out" ]]; then
-                    local -i file_errors file_warnings
                     file_errors=$(echo "$sc_out" | command grep -c "error" 2>/dev/null)
                     file_warnings=$(echo "$sc_out" | command grep -c "warning" 2>/dev/null)
                     if (( file_errors > 0 )); then

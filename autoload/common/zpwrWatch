@@ -99,19 +99,23 @@ function zpwrWatch(){
     print ""
 
     local -i run_count=0
+    local -a fswatch_args
+    local regex ts start elapsed
+    local -i ret
+    local event_file
 
     if [[ "$watcher" == "fswatch" ]]; then
-        local -a fswatch_args=( -r "$watch_dir" )
+        fswatch_args=( -r "$watch_dir" )
         if [[ -n "$watch_filter" ]]; then
             # convert glob to regex
-            local regex="${watch_filter//\*/.*}"
+            regex="${watch_filter//\*/.*}"
             regex="${regex//\?/.}"
             fswatch_args+=( -e '.*' -i "${regex}$" )
         fi
 
         fswatch "${fswatch_args[@]}" | while read -r changed_file; do
             (( run_count++ ))
-            local ts="$(date '+%H:%M:%S')"
+            ts="$(date '+%H:%M:%S')"
             print ""
             _bt
             printf -v _msg " ${G}TRIGGERED${N}  ${D}//${N} ${C}#${run_count}${N}  ${D}//${N} ${M}${ts}${N}  ${D}//${N} ${Y}${changed_file:t}${N}"
@@ -119,10 +123,10 @@ function zpwrWatch(){
             _bb
             print ""
 
-            local start=$EPOCHREALTIME
+            start=$EPOCHREALTIME
             eval "$cmd"
-            local -i ret=$?
-            local elapsed=$(( EPOCHREALTIME - start ))
+            ret=$?
+            elapsed=$(( EPOCHREALTIME - start ))
 
             print ""
             if (( ret == 0 )); then
@@ -133,7 +137,6 @@ function zpwrWatch(){
         done
     elif [[ "$watcher" == "inotifywait" ]]; then
         while true; do
-            local event_file
             if [[ -n "$watch_filter" ]]; then
                 event_file=$(inotifywait -r -q --format '%f' -e modify,create,delete "$watch_dir" 2>/dev/null)
                 [[ "$event_file" != ${~watch_filter} ]] && continue
@@ -142,7 +145,7 @@ function zpwrWatch(){
             fi
 
             (( run_count++ ))
-            local ts="$(date '+%H:%M:%S')"
+            ts="$(date '+%H:%M:%S')"
             print ""
             _bt
             printf -v _msg " ${G}TRIGGERED${N}  ${D}//${N} ${C}#${run_count}${N}  ${D}//${N} ${M}${ts}${N}  ${D}//${N} ${Y}${event_file}${N}"
@@ -150,10 +153,10 @@ function zpwrWatch(){
             _bb
             print ""
 
-            local start=$EPOCHREALTIME
+            start=$EPOCHREALTIME
             eval "$cmd"
-            local -i ret=$?
-            local elapsed=$(( EPOCHREALTIME - start ))
+            ret=$?
+            elapsed=$(( EPOCHREALTIME - start ))
 
             print ""
             if (( ret == 0 )); then

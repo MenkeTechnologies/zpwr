@@ -52,6 +52,10 @@ function zpwrDoctor(){
     fi
 
     local -i warnings=0 errors=0 fixed=0 checks=0
+    local -a stale_dump
+    local -i hist_lines backups
+    local target cf
+    local -i sig
 
     printf "\n"
     printf " ${C}██████╗  ██████╗  ██████╗████████╗ ██████╗ ██████╗${N}\n"
@@ -97,7 +101,6 @@ function zpwrDoctor(){
 
     # zcompdump staleness
     if [[ -f "$ZSH_COMPDUMP" ]]; then
-        local -a stale_dump
         stale_dump=( ${ZSH_COMPDUMP}(N.mh+168) )
         if (( $#stale_dump > 0 )); then
             _dr_warn "zcompdump older than 1 week"
@@ -245,7 +248,6 @@ function zpwrDoctor(){
     printf "\n  ${C}── HISTORY ─────────────────────────────────────────${N}\n"
 
     if [[ -f "$HISTFILE" ]]; then
-        local -i hist_lines
         hist_lines=$(command wc -l < "$HISTFILE" 2>/dev/null)
         _dr_pass "HISTFILE exists ($hist_lines lines)"
     else
@@ -253,7 +255,6 @@ function zpwrDoctor(){
     fi
 
     if [[ -d "$ZPWR_LOCAL/rcBackups" ]]; then
-        local -i backups
         backups=$(command ls -A "$ZPWR_LOCAL/rcBackups/" 2>/dev/null | wc -l)
         _dr_pass "$backups history backups in \$ZPWR_LOCAL/rcBackups"
     else
@@ -268,7 +269,7 @@ function zpwrDoctor(){
     local cf
     for cf in $config_files; do
         if [[ -L "$HOME/$cf" ]]; then
-            local target=$(readlink "$HOME/$cf" 2>/dev/null)
+            target=$(readlink "$HOME/$cf" 2>/dev/null)
             if [[ -e "$HOME/$cf" ]]; then
                 _dr_pass "~/$cf -> $target"
             else
@@ -293,7 +294,7 @@ function zpwrDoctor(){
     elif (( warnings > 0 )); then
         status_color=$Y
         status_label="WARNINGS"
-        local -i sig=$(( 10 - (warnings < 10 ? warnings : 9) ))
+        sig=$(( 10 - (warnings < 10 ? warnings : 9) ))
         status_signal="${G}$(printf '█%.0s' {1..$sig})${Y}$(printf '░%.0s' {1..$(( 10 - sig ))})${N}"
     else
         status_color=$G

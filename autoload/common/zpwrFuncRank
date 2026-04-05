@@ -79,13 +79,16 @@ function zpwrFuncRank(){
     local -i need_rebuild=1
     local -i cnt bar_len i max_cnt ua_shown uv_shown
     local bar name fname line_buf
+    local -i cached_hist_lines current_hist_lines
+    local hist_wc hwc
+    local verb
 
     # rebuild only if cache is missing or history grew by 1000+ lines
     local stamp_file="$ZPWR_LOCAL/zpwr-rank-stamp"
     if [[ -r "$cache_file" && -r "$verb_cache" && -r "$stamp_file" ]]; then
-        local -i cached_hist_lines=$(<"$stamp_file")
-        local hist_wc=$(command wc -l < "$HISTFILE" 2>/dev/null)
-        local -i current_hist_lines=${hist_wc//[^0-9]/}
+        cached_hist_lines=$(<"$stamp_file")
+        hist_wc=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        current_hist_lines=${hist_wc//[^0-9]/}
         if (( current_hist_lines - cached_hist_lines < 1000 )); then
             need_rebuild=0
         fi
@@ -103,7 +106,7 @@ function zpwrFuncRank(){
             (( cmd_counts[$word]++ ))
             # also extract zpwr verb
             if [[ "$word" == "zpwr" ]]; then
-                local verb="${line#zpwr}"
+                verb="${line#zpwr}"
                 verb="${verb##[[:space:]]#}"
                 verb="${verb%%[[:space:]]*}"
                 [[ -n "$verb" && "$verb" == [[:alnum:]_-]## ]] && (( verb_counts[$verb]++ ))
@@ -121,7 +124,7 @@ function zpwrFuncRank(){
             done
         } >| "$verb_cache"
         # stamp with current history line count
-        local hwc=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        hwc=$(command wc -l < "$HISTFILE" 2>/dev/null)
         print -r "${hwc//[^0-9]/}" >| "$stamp_file"
         print "  ${G}>> cached <<${N}"
         print ""

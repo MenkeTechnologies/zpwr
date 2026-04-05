@@ -70,7 +70,9 @@ function zpwrResolve(){
     printf "\n"
 
     local cmd depth_prefix resolved_cmd first_word
-    local -i depth max_depth=10
+    local alias_val func_file bin_path link_target file_type
+    local vk vv
+    local -i depth max_depth=10 di func_lines
 
     for cmd in "$@"; do
         printf "  ${B}${C}%s${N}\n" "$cmd"
@@ -81,14 +83,13 @@ function zpwrResolve(){
 
         while (( depth < max_depth )); do
             depth_prefix=""
-            local -i di
             for (( di=0; di<depth; di++ )); do
                 depth_prefix+="  "
             done
 
             # check alias
             if (( ${+aliases[$resolved_cmd]} )); then
-                local alias_val="${aliases[$resolved_cmd]}"
+                alias_val="${aliases[$resolved_cmd]}"
                 printf "  %s${Y}↳ alias${N}  ${D}%s${N} ${Y}→${N} ${D}'%s'${N}\n" "$depth_prefix" "$resolved_cmd" "$alias_val"
 
                 # extract first word of alias expansion to continue resolving
@@ -112,7 +113,7 @@ function zpwrResolve(){
 
             # check function
             if (( ${+functions[$resolved_cmd]} )); then
-                local func_file=""
+                func_file=""
                 # try to find the source file
                 if [[ -f "$ZPWR_AUTOLOAD_COMMON/$resolved_cmd" ]]; then
                     func_file="${ZPWR_AUTOLOAD_COMMON/$ZPWR\//}/$resolved_cmd"
@@ -129,13 +130,11 @@ function zpwrResolve(){
                 printf "\n"
 
                 # show function body size
-                local -i func_lines
                 func_lines=$(echo "${functions[$resolved_cmd]}" | wc -l)
                 printf "  %s  ${D}%d lines${N}\n" "$depth_prefix" $func_lines
 
                 # check if it's a zpwr verb
                 if (( ${+ZPWR_VERBS} )); then
-                    local vk vv
                     for vk vv in ${(kv)ZPWR_VERBS}; do
                         if [[ "${vv%%=*}" == "$resolved_cmd" ]]; then
                             printf "  %s  ${G}verb: zpwr %s${N}  ${D}— %s${N}\n" "$depth_prefix" "$vk" "${vv#*=}"
@@ -160,12 +159,11 @@ function zpwrResolve(){
 
             # check external command
             if (( ${+commands[$resolved_cmd]} )); then
-                local bin_path="${commands[$resolved_cmd]}"
+                bin_path="${commands[$resolved_cmd]}"
                 printf "  %s${C}↳ binary${N}  ${D}%s${N}\n" "$depth_prefix" "$bin_path"
 
                 # show if it's a symlink
                 if [[ -L "$bin_path" ]]; then
-                    local link_target
                     link_target=$(command readlink "$bin_path" 2>/dev/null)
                     printf "  %s  ${D}→ %s${N}\n" "$depth_prefix" "$link_target"
                     # follow symlink chain
@@ -176,7 +174,6 @@ function zpwrResolve(){
                 fi
 
                 # show file type
-                local file_type
                 file_type=$(command file -b "$bin_path" 2>/dev/null)
                 if [[ -n "$file_type" ]]; then
                     # truncate long descriptions
