@@ -171,7 +171,7 @@ function zpwrBlocksToSize(){
 
     read input
     bytes=$(( input * 512 ))
-    echo $bytes | humanreadable
+    echo $bytes | zpwrHumanReadable
 }
 
 function zpwrHumanReadable(){

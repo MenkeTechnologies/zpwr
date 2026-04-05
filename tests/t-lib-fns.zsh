@@ -251,6 +251,15 @@
 }
 
 #--------------------------------------------------------------
+# zpwrBlocksToSize
+#--------------------------------------------------------------
+@test 'zpwrBlocksToSize 1 block equals 512 bytes' {
+    out=$(print -r -- 1 | zpwrBlocksToSize)
+    assert "$out" contains "512"
+    assert "$out" contains "B"
+}
+
+#--------------------------------------------------------------
 # zpwrEscapeRemove
 #--------------------------------------------------------------
 @test 'zpwrEscapeRemove passes plain text through' {
