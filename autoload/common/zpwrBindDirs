@@ -8,21 +8,20 @@ function zpwrBindDirs(){
     # if this is a mac or linux
     if [[ "$ZPWR_OS_TYPE" == "darwin" ]];then
         if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
-            : ~HOMEBREW_HOME_FORMULAE
+            hash -d HOMEBREW_HOME_FORMULAE="$HOMEBREW_HOME_FORMULAE"
         fi
     fi
 
     if [[ -d "$ZSH" ]]; then
-        # oh-my-zsh sets this
-        : ~ZSH
+        hash -d ZSH="$ZSH"
     fi
 
     if [[ -d "$ZPWR_FORKED_DIR" ]]; then
-        : ~ZPWR_FORKED_DIR
+        hash -d ZPWR_FORKED_DIR="$ZPWR_FORKED_DIR"
     fi
 
     if [[ -d "$ZPWR_SCRIPTS" ]]; then
-        : ~ZPWR_SCRIPTS
+        hash -d ZPWR_SCRIPTS="$ZPWR_SCRIPTS"
     fi
 
     if [[ -d "$ZPWR_LOCAL_TEMP" ]]; then
@@ -54,11 +53,11 @@ function zpwrBindDirs(){
     fi
 
     if [[ -d "$ZPWR_PYSCRIPTS" ]]; then
-        : ~ZPWR_PYSCRIPTS
+        hash -d ZPWR_PYSCRIPTS="$ZPWR_PYSCRIPTS"
     fi
 
     if [[ -d "$PYEXECUTABLES" ]]; then
-        : ~PYEXECUTABLES
+        hash -d PYEXECUTABLES="$PYEXECUTABLES"
     fi
 
     if [[ -d "$TMUX_HOME" ]]; then
@@ -68,34 +67,48 @@ function zpwrBindDirs(){
     fi
 
     if [[ -d "$ZPWR_DOC" ]]; then
-        : ~ZPWR_DOC
+        hash -d ZPWR_DOC="$ZPWR_DOC"
     fi
 
     if [[ -d "$HOMEBREW_HOME_FORMULAE" ]]; then
-        : ~HOMEBREW_HOME_FORMULAE
+        hash -d HOMEBREW_HOME_FORMULAE="$HOMEBREW_HOME_FORMULAE"
     fi
 
     if [[ -d "$YARN_HOME" ]]; then
-        : ~YARN_HOME
+        hash -d YARN_HOME="$YARN_HOME"
     fi
 
     if [[ -d "$PERL5LIB" ]]; then
-        : ~PERL5LIB
+        hash -d PERL5LIB="$PERL5LIB"
     fi
 
     if [[ -d "$NODE_HOME" ]]; then
-        : ~NODE_HOME
+        hash -d NODE_HOME="$NODE_HOME"
     fi
 
     if [[ -d "$ZPWR_D" ]]; then
-        : ~ZPWR_D
+        hash -d ZPWR_D="$ZPWR_D"
     fi
 
     if [[ -d "$ZPWR_DL" ]]; then
-        : ~ZPWR_DL
+        hash -d ZPWR_DL="$ZPWR_DL"
     fi
     #}}}***********************************************************
 
+    # write hash dir cache for instant prompt
+    local cache="$ZPWR_LOCAL/zpwr-hash-dirs.zsh"
+    {
+        print -r "hash -d ZPWR=${(q)ZPWR}"
+        (( $+nameddirs[ZPWR_LOCAL] )) && print -r "hash -d ZPWR_LOCAL=${(q)nameddirs[ZPWR_LOCAL]}"
+        (( $+nameddirs[ZPWR_TEMP] )) && print -r "hash -d ZPWR_TEMP=${(q)nameddirs[ZPWR_TEMP]}"
+        (( $+nameddirs[ZPWR_COMPSYS_CACHE] )) && print -r "hash -d ZPWR_COMPSYS_CACHE=${(q)nameddirs[ZPWR_COMPSYS_CACHE]}"
+        (( $+nameddirs[ZPWR_TMUX] )) && print -r "hash -d ZPWR_TMUX=${(q)nameddirs[ZPWR_TMUX]}"
+        (( $+nameddirs[TMUXH] )) && print -r "hash -d TMUXH=${(q)nameddirs[TMUXH]}"
+        for k v in ${(kv)nameddirs}; do
+            [[ $k == (ZPWR|ZPWR_LOCAL|ZPWR_TEMP|ZPWR_COMPSYS_CACHE|ZPWR_TMUX|TMUXH) ]] && continue
+            print -r "hash -d ${k}=${(q)v}"
+        done
+    } >| "$cache"
 }
 
 zpwrBindDirs "$@"

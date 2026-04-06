@@ -9,8 +9,8 @@ function zpwrBindVerbs(){
     # get zpwr verbs
     source "$ZPWR_VERBS_FILE"
 
-    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrSendVerbs zpwrLogVerbs
-    typeset -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs zpwrLogVerbs
+    unset zpwrSubcommandsAry zpwrForgitVerbs zpwrGitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrSendVerbs zpwrLogVerbs zpwrDiagVerbs zpwrMonitorVerbs
+    typeset -agU zpwrSubcommandsAry zpwrForgitVerbs zpwrGitReposVerbs zpwrGithubVerbs zpwrGitVerbs zpwrSearchVerbs zpwrCleanVerbs zpwrEmacsVerbs zpwrVimVerbs zpwrCdVerbs zpwrUpdateVerbs zpwrLearnVerbs zpwrTravisVerbs zpwrRegenVerbs zpwrZVerbs zpwrMiscVerbs zpwrClipboardVerbs zpwrLogVerbs zpwrDiagVerbs zpwrMonitorVerbs
 
     for k v in ${(kv)ZPWR_VERBS[@]};do
         case $k in
@@ -59,8 +59,14 @@ function zpwrBindVerbs(){
             cd*|*cd|home*)
                 zpwrCdVerbs+=("$k:$v")
                 ;;
-            log*)
+            log*|taillog|logs)
                 zpwrLogVerbs+=("$k:$v")
+                ;;
+            bench|benchmark|flame|flamechart|heatmap|top|dashboard|live|doctor|doc|checkup|deps|callers|trace|instrument|funcrank|rank|aliasrank|aliasusage|startup|profile|zprof|lint|check|stale|cruft|pathaudit|audit|ports|listening|netstat)
+                zpwrDiagVerbs+=("$k:$v")
+                ;;
+            watch|onchange|replay|rerun|snapshot|snap|save|restore|load|wizard|manual|tutorial|docs|study|book)
+                zpwrMonitorVerbs+=("$k:$v")
                 ;;
             *)
                 zpwrMiscVerbs+=("$k:$v")

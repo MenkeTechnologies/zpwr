@@ -2,8 +2,14 @@
 # vim: set ft=sh:
 function zpwrListNoClear () {
 
-    if zpwrCommandExists exa; then
-        eval "$ZPWR_EXA_COMMAND"
+    if zpwrCommandExists eza; then
+        if [[ -t 0 ]]; then
+            eval "$ZPWR_EXA_COMMAND"
+        elif : < /dev/tty 2>/dev/null; then
+            eval "$ZPWR_EXA_COMMAND" < /dev/tty
+        else
+            eval "$ZPWR_EXA_COMMAND"
+        fi
         return 0
     fi
 

@@ -837,7 +837,27 @@
     assert $state equals 0
 }
 
+@test 'macOnly script postscriptToPDFCreator.sh exists' {
+    run test -f "$ZPWR_SCRIPTS_MAC/postscriptToPDFCreator.sh"
+    assert $state equals 0
+}
+
 @test 'macOnly script tutorialConfigUpdater.sh exists' {
     run test -f "$ZPWR_SCRIPTS_MAC/tutorialConfigUpdater.sh"
+    assert $state equals 0
+}
+
+@test 'script remoteRepoMonitorDaemon.sh exists' {
+    run test -f "$ZPWR_SCRIPTS/remoteRepoMonitorDaemon.sh"
+    assert $state equals 0
+}
+
+@test 'script saygoogle.sh exists' {
+    run test -f "$ZPWR_SCRIPTS/saygoogle.sh"
+    assert $state equals 0
+}
+
+@test 'script updaterPipSudo.sh exists' {
+    run test -f "$ZPWR_SCRIPTS/updaterPipSudo.sh"
     assert $state equals 0
 }

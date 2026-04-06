@@ -5,9 +5,10 @@ function zpwrAttachSetup() {
     builtin emulate -L zsh
     setopt nullglob rcquotes
 
+    local mobile out key num_con ret sid
+
     if [[ -z "$TMUX" ]] && [[ -n $SSH_CONNECTION ]]; then
 
-        local mobile out key num_con ret sid
         mobile=true
         if [[ -f "$HOME/.ssh/authorized_keys" ]]; then
             command cat "$HOME/.ssh/authorized_keys" |

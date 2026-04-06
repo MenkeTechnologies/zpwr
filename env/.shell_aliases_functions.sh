@@ -117,7 +117,7 @@ fi
 
 #{{{                    MARK:PATH
 #**************************************************************
-if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
+if [[ "$PATH" != *"$ZPWR_SCRIPTS"* ]]; then
     export PATH="$PATH:$HOME/go/bin"
 
     export PATH="$PYEXECUTABLES:$ZPWR_SCRIPTS/save-run:$HOME/.local/bin:$HOME/perl5/bin:$ZPWR_SCRIPTS:/opt/X11/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:$PATH"
@@ -142,8 +142,8 @@ if ! echo "$PATH" | command grep -isq "$ZPWR_SCRIPTS"; then
 #{{{                    MARK:Rust Config
 #**************************************************************
     export PATH="$HOME/.cargo/bin:$PATH"
-    if zpwrCommandExists exa; then
-        alias exa="$ZPWR_EXA_COMMAND"
+    if zpwrCommandExists eza; then
+        alias eza="$ZPWR_EXA_COMMAND"
     fi
 
 #}}}***********************************************************

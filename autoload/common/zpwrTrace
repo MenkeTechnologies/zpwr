@@ -1,0 +1,419 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTrace(){
+
+    builtin emulate -L zsh
+    builtin zmodload zsh/datetime
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=70
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    # pre-declare all variables to avoid local-in-loop printing
+    local -i quick_mode=0 exit_code=0
+    local -i peak_rss=0 max_rss=0 vol_ctx=0 invol_ctx=0
+    local -i page_reclaims=0 page_faults=0 swaps=0
+    local -i fs_inputs=0 fs_outputs=0 signals=0
+    local -i msg_sent=0 msg_recv=0 max_stack=0
+    local -i in_table=0 sc_shown=0 mem_delta=0 perf_score=0 sig_empty=0
+    local -i do_strace=1 do_ltrace=1
+    local -a fields=()
+    local trace_desc
+
+    if [[ "$1" == "-h" || "$1" == "--help" || $# -eq 0 ]]; then
+        print ""
+        print " ${C}████████╗██████╗  █████╗  ██████╗███████╗${N}"
+        print " ${C}╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██╔════╝${N}"
+        print " ${M}   ██║   ██████╔╝███████║██║     █████╗${N}"
+        print " ${M}   ██║   ██╔══██╗██╔══██║██║     ██╔══╝${N}"
+        print " ${C}   ██║   ██║  ██║██║  ██║╚██████╗███████╗${N}"
+        print " ${C}   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}TRACE${N}"
+        _bb
+        print "  ${D}>> COMMAND INSTRUMENTATION // FULL SPECTRUM <<${N}"
+        print ""
+        print ""
+        print "  Run a command with full instrumentation: timing, resource stats,"
+        print "  syscall trace, file I/O, and library calls. Shows everything by"
+        print "  default. Syscall/file tracing requires sudo on macOS (SIP)."
+        print ""
+        print "  ${B}USAGE:${N} zpwr trace ${D}[OPTIONS] <COMMAND...>${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-q, --quick${N}                                      ${D}// Timing + resources only (1 run)${N}"
+        print "  ${C}-s, --strace${N}                                     ${D}// Syscalls only (no ltrace)${N}"
+        print "  ${C}-l, --ltrace${N}                                     ${D}// C library calls only (no strace)${N}"
+        print "  ${C}-a, --all${N}                                        ${D}// Both strace + ltrace (default)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr trace ls -la${N}                                ${D}// full trace (strace + ltrace)${N}"
+        print "  ${C}zpwr trace -q make${N}                               ${D}// quick: timing + resources only${N}"
+        print "  ${C}zpwr trace -s git status${N}                         ${D}// syscalls only${N}"
+        print "  ${C}zpwr trace -l npm install${N}                        ${D}// C library calls only${N}"
+        print "  ${C}zpwr trace -a id${N}                                 ${D}// both (same as default)${N}"
+        print ""
+        print "  ${D}── OUTPUT ───────────────────────────────────────────────────────────${N}"
+        print "  ${D}wall/user/sys time, exit code, peak RSS, context switches${N}"
+        print "  ${D}page faults, block I/O, signals received, max stack size${N}"
+        print "  ${D}syscall counts (strace, Linux), C library calls (ltrace, Linux)${N}"
+        print "  ${D}memory delta, child process count, performance signal bar${N}"
+        print ""
+        print "  ${D}── PLATFORM ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}macOS${N}   resource stats from /usr/bin/time -l              ${D}// SIP blocks dtrace${N}"
+        print "  ${C}linux${N}   strace -c (syscalls) + ltrace -c (C library)     ${D}// full spectrum${N}"
+        print ""
+        print "  ${D}── NOTE ─────────────────────────────────────────────────────────────${N}"
+        print "  ${D}on linux, command re-runs for strace/ltrace stats (2-3x total)${N}"
+        print "  ${D}use -q for destructive commands to run once with timing only${N}"
+        print ""
+        return 0
+    fi
+
+    # parse flags
+    quick_mode=0; do_strace=1; do_ltrace=1
+    while [[ "$1" == -* ]]; do
+        case "$1" in
+            -q|--quick) quick_mode=1; do_strace=0; do_ltrace=0; shift ;;
+            -s|--strace) do_strace=1; do_ltrace=0; shift ;;
+            -l|--ltrace) do_strace=0; do_ltrace=1; shift ;;
+            -a|--all) do_strace=1; do_ltrace=1; shift ;;
+            *) break ;;
+        esac
+    done
+
+    if (( $# == 0 )); then
+        print "  ${R}no command specified${N}"
+        return 1
+    fi
+
+    cmd_display="$*"
+
+    print ""
+    print " ${C}████████╗██████╗  █████╗  ██████╗███████╗${N}"
+    print " ${C}╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██╔════╝${N}"
+    print " ${M}   ██║   ██████╔╝███████║██║     █████╗${N}"
+    print " ${M}   ██║   ██╔══██╗██╔══██║██║     ██╔══╝${N}"
+    print " ${C}   ██║   ██║  ██║██║  ██║╚██████╗███████╗${N}"
+    print " ${C}   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝${N}"
+    _bt
+    printf -v _msg " ${G}TRACING${N}  ${D}//${N} ${C}${cmd_display}${N}"
+    _bx "$_msg"
+    _bb
+    print ""
+
+    tmpdir=$(mktemp -d)
+    time_out="$tmpdir/time.txt"
+    dtrace_out="$tmpdir/dtrace.txt"
+    fsusage_out="$tmpdir/fsusage.txt"
+    proc_before="$tmpdir/proc_before.txt"
+    proc_after="$tmpdir/proc_after.txt"
+
+    # snapshot: memory before (RSS in KB)
+    rss_before=$(command ps -p $$ -o rss= 2>/dev/null | head -1)
+    rss_before=${rss_before//[^0-9]/}
+    [[ -z "$rss_before" ]] && rss_before=0
+
+    # snapshot: process count before
+    pgrep -P $$ > "$proc_before" 2>/dev/null
+
+    exit_code=0
+    start_ts=$EPOCHREALTIME
+
+    print "  ${C}── COMMAND OUTPUT ─────────────────────────────────────────────────────${N}"
+    print ""
+
+    # detect platform and trace tool
+    trace_tool="none"
+    if (( ! quick_mode )); then
+        if (( $+commands[dtruss] )); then
+            trace_tool="dtruss"
+        elif (( $+commands[strace] )); then
+            trace_tool="strace"
+        fi
+    fi
+
+    # detect time command flags (macOS: -l, Linux: -v)
+    time_cmd="/usr/bin/time"
+    time_flags="-lp"
+    if [[ "$ZPWR_OS_TYPE" == "linux" ]]; then
+        time_flags="-v"
+    fi
+
+    local ltrace_out="$tmpdir/ltrace.txt"
+
+    if (( quick_mode )) || [[ "$trace_tool" == "none" ]]; then
+        # quick mode or no trace tool: just time
+        if [[ "$trace_tool" == "none" ]] && (( ! quick_mode )); then
+            if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
+                print "  ${Y}>> macOS SIP blocks syscall/library tracing <<${N}"
+                print "  ${D}>> showing resource stats from /usr/bin/time -l <<${N}"
+            else
+                print "  ${Y}>> install strace/ltrace for full trace <<${N}"
+            fi
+        fi
+        $time_cmd $time_flags zsh -c "$*" 2>"$time_out"
+        exit_code=$?
+    elif [[ "$trace_tool" == "dtruss" ]]; then
+        # macOS: SIP blocks dtruss on most binaries, fall back to time -l
+        print "  ${D}>> macOS with SIP: resource stats only (dtruss blocked) <<${N}"
+        print "  ${D}>> disable SIP for syscall/library tracing <<${N}"
+        print ""
+        $time_cmd $time_flags zsh -c "$*" 2>"$time_out"
+        exit_code=$?
+    elif [[ "$trace_tool" == "strace" ]]; then
+        # Linux: selective tracing based on flags
+        trace_desc=""
+        (( do_strace )) && trace_desc+="strace"
+        (( do_strace && do_ltrace )) && trace_desc+=" + "
+        (( do_ltrace )) && trace_desc+="ltrace"
+        [[ -z "$trace_desc" ]] && trace_desc="resources only"
+        print "  ${D}>> ${trace_desc} + /usr/bin/time // linux <<${N}"
+        print ""
+        # always run time for resource stats + command output
+        $time_cmd $time_flags zsh -c "$*" 2>"$time_out"
+        exit_code=$?
+        # strace for syscall counts
+        if (( do_strace )) && (( $+commands[strace] )); then
+            strace -c -f zsh -c "$*" >/dev/null 2>"$dtrace_out"
+        fi
+        # ltrace for C library call counts
+        if (( do_ltrace )) && (( $+commands[ltrace] )); then
+            ltrace -c -f zsh -c "$*" 2>"$ltrace_out" >/dev/null
+        fi
+    fi
+
+    end_ts=$EPOCHREALTIME
+    wall_time=$(( end_ts - start_ts ))
+
+    print ""
+    print "  ${C}══════════════════════════════════════════════════════════════════════════${N}"
+    print "  ${B}${C}RESULTS${N}"
+    print "  ${C}══════════════════════════════════════════════════════════════════════════${N}"
+
+    # ── EXIT CODE ─────────────────────────────────────────────
+    print ""
+    if (( exit_code == 0 )); then
+        print "  ${D}//${N} ${B}exit code${N}        ${G}${exit_code}${N}"
+    else
+        print "  ${D}//${N} ${B}exit code${N}        ${R}${exit_code}${N}"
+    fi
+
+    # ── TIMING ────────────────────────────────────────────────
+    if (( wall_time < 0.1 )); then wall_color=$G; wall_rating="INSTANT"
+    elif (( wall_time < 1.0 )); then wall_color=$G; wall_rating="FAST"
+    elif (( wall_time < 5.0 )); then wall_color=$Y; wall_rating="NOMINAL"
+    elif (( wall_time < 30.0 )); then wall_color=$Y; wall_rating="SLOW"
+    else wall_color=$R; wall_rating="HEAVY"
+    fi
+
+    printf "  ${D}//${N} ${B}wall time${N}        ${wall_color}"
+    if (( wall_time < 1.0 )); then printf "%.0fms" $(( wall_time * 1000 ))
+    elif (( wall_time < 60 )); then printf "%.2fs" $wall_time
+    else printf "%dm %.1fs" $(( wall_time / 60 )) $(( wall_time % 60 ))
+    fi
+    print "  ${wall_color}${wall_rating}${N}"
+
+    # ── /usr/bin/time -l STATS ────────────────────────────────
+    if [[ -r "$time_out" && -s "$time_out" ]]; then
+        print ""
+        print "  ${C}── RESOURCE STATS ─────────────────────────────────────────────────────${N}"
+
+        peak_rss=0 max_rss=0 vol_ctx=0 invol_ctx=0
+        page_reclaims=0 page_faults=0 swaps=0
+        fs_inputs=0 fs_outputs=0 signals=0
+        msg_sent=0 msg_recv=0 max_stack=0
+
+        while IFS= read -r tline; do
+            # macOS -lp: "user 0.01" / Linux -v: "User time (seconds): 0.01"
+            case "$tline" in
+                *real*) ;;
+                "User time"*|*user*) user_time="${tline##*[[:space:]]}" ;;
+                "System time"*|*sys*) sys_time="${tline##*[[:space:]]}" ;;
+            esac
+            # /usr/bin/time -l format: "  12345  description"
+            val="${tline%%[[:alpha:]]*}"
+            val=${val//[^0-9]/}
+            case "$tline" in
+                *"maximum resident"*|*"peak memory"*) peak_rss=$val ;;
+                *"average shared"*) ;;
+                *"average unshared"*) ;;
+                *"page reclaims"*|*"soft page"*) page_reclaims=$val ;;
+                *"page faults"*|*"hard page"*) page_faults=$val ;;
+                *"swaps"*) swaps=$val ;;
+                *"block input"*|*"file system input"*) fs_inputs=$val ;;
+                *"block output"*|*"file system output"*) fs_outputs=$val ;;
+                *"voluntary context"*) vol_ctx=$val ;;
+                *"involuntary context"*) invol_ctx=$val ;;
+                *"signals received"*) signals=$val ;;
+                *"messages sent"*) msg_sent=$val ;;
+                *"messages received"*) msg_recv=$val ;;
+                *"maximum.*stack"*|*"stack size"*) max_stack=$val ;;
+            esac
+        done < "$time_out"
+
+        [[ -n "$user_time" ]] && print "  ${D}//${N} ${B}user time${N}        ${C}${user_time}s${N}"
+        [[ -n "$sys_time" ]] && print "  ${D}//${N} ${B}sys time${N}         ${C}${sys_time}s${N}"
+
+        if (( peak_rss > 0 )); then
+            if (( peak_rss > 1073741824 )); then rss_display="$(( peak_rss / 1073741824 )) GB"
+            elif (( peak_rss > 1048576 )); then rss_display="$(( peak_rss / 1048576 )) MB"
+            elif (( peak_rss > 1024 )); then rss_display="$(( peak_rss / 1024 )) KB"
+            else rss_display="${peak_rss} B"
+            fi
+            print "  ${D}//${N} ${B}peak RSS${N}         ${M}${rss_display}${N}  ${D}(${peak_rss} bytes)${N}"
+        fi
+
+        print ""
+        print "  ${C}── KERNEL STATS ───────────────────────────────────────────────────────${N}"
+        print "  ${D}//${N} ${B}ctx switches${N}     ${D}voluntary: ${C}${vol_ctx}${D}, involuntary: ${C}${invol_ctx}${N}"
+        print "  ${D}//${N} ${B}page reclaims${N}    ${C}${page_reclaims}${N}  ${D}(soft faults)${N}"
+        print "  ${D}//${N} ${B}page faults${N}      ${C}${page_faults}${N}  ${D}(hard faults)${N}"
+        print "  ${D}//${N} ${B}swaps${N}            ${C}${swaps}${N}"
+        print "  ${D}//${N} ${B}block I/O${N}        ${D}in: ${C}${fs_inputs}${D}, out: ${C}${fs_outputs}${N}"
+        print "  ${D}//${N} ${B}signals recv${N}     ${C}${signals}${N}"
+        print "  ${D}//${N} ${B}IPC messages${N}     ${D}sent: ${C}${msg_sent}${D}, recv: ${C}${msg_recv}${N}"
+        (( max_stack > 0 )) && print "  ${D}//${N} ${B}max stack${N}        ${C}${max_stack}${N} bytes"
+    fi
+
+    # ── SYSCALL SUMMARY ───────────────────────────────────────
+    if [[ -r "$dtrace_out" && -s "$dtrace_out" ]]; then
+        print ""
+        print "  ${C}── SYSCALL SUMMARY ────────────────────────────────────────────────────${N}"
+
+        in_table=0 sc_shown=0
+        while IFS= read -r tline; do
+            # skip headers: dtruss "CALL  COUNT" or strace "% time  seconds..."
+            [[ "$tline" == *"CALL"*"COUNT"* || "$tline" == *"% time"*"syscall"* ]] && { in_table=1; continue; }
+            [[ "$tline" == *"------"* ]] && continue
+            [[ "$tline" == *"total"* ]] && break
+            [[ -z "${tline// /}" ]] && { (( in_table )) && break; continue; }
+            if (( in_table )); then
+                fields=( ${(s: :)tline} )
+                if (( $#fields >= 2 )); then
+                    # strace -c: %time seconds usecs/call calls [errors] syscall
+                    # dtruss -c: CALL COUNT
+                    # syscall name is always the last field
+                    sc_name=${fields[-1]}
+                    # calls count: for strace it's field 4, for dtruss it's field 2
+                    if (( $#fields >= 5 )); then
+                        # strace format — calls is field 4 (or 5 if errors column present)
+                        sc_count=${fields[4]}
+                    else
+                        # dtruss format — count is last numeric field
+                        sc_count=${fields[-1]}
+                    fi
+                    sc_count=${sc_count//[^0-9]/}
+                    [[ -z "$sc_count" || "$sc_count" == "0" ]] && continue
+                    (( sc_shown++ ))
+
+                    # heat color based on count
+                    if (( sc_count > 1000 )); then sc_color=$R
+                    elif (( sc_count > 100 )); then sc_color=$Y
+                    elif (( sc_count > 10 )); then sc_color=$G
+                    else sc_color=$C
+                    fi
+
+                    if (( sc_shown <= 20 )); then
+                        print "  ${D}//${N} ${B}$(printf '%-22s' "$sc_name")${N} ${sc_color}$(printf '%8s' "$sc_count")${N}"
+                    fi
+                fi
+            fi
+        done < "$dtrace_out"
+        (( sc_shown > 20 )) && print "  ${D}... and $(( sc_shown - 20 )) more syscall types${N}"
+        (( sc_shown > 0 )) && print "  ${D}total: ${sc_shown} syscall types captured${N}"
+    fi
+
+    # ── C LIBRARY CALLS (ltrace, Linux only) ─────────────────
+    if [[ -r "$ltrace_out" && -s "$ltrace_out" ]]; then
+        print ""
+        print "  ${C}── C LIBRARY CALLS (ltrace) ───────────────────────────────────────────${N}"
+
+        # ltrace -c output format:
+        # % time     seconds  usecs/call     calls      function
+        # ------ ----------- ----------- --------- --------------------
+        #  45.12    0.001234          12       100 malloc
+        in_table=0
+        sc_shown=0
+        while IFS= read -r tline; do
+            [[ "$tline" == *"% time"* ]] && { in_table=1; continue; }
+            [[ "$tline" == *"------"* ]] && continue
+            [[ -z "${tline// /}" ]] && continue
+            [[ "$tline" == *"total"* ]] && break
+            if (( in_table )); then
+                fields=( ${(s: :)tline} )
+                # fields: %time seconds usecs/call calls function
+                if (( $#fields >= 5 )); then
+                    sc_name=${fields[-1]}
+                    sc_count=${fields[-2]}
+                    sc_count=${sc_count//[^0-9]/}
+                    [[ -z "$sc_count" ]] && continue
+                    (( sc_shown++ ))
+
+                    if (( sc_count > 1000 )); then sc_color=$R
+                    elif (( sc_count > 100 )); then sc_color=$Y
+                    elif (( sc_count > 10 )); then sc_color=$G
+                    else sc_color=$C
+                    fi
+
+                    if (( sc_shown <= 20 )); then
+                        print "  ${D}//${N} ${B}$(printf '%-22s' "$sc_name")${N} ${sc_color}$(printf '%8s' "$sc_count")${N}  ${D}${fields[2]}s${N}"
+                    fi
+                fi
+            fi
+        done < "$ltrace_out"
+        (( sc_shown > 20 )) && print "  ${D}... and $(( sc_shown - 20 )) more library calls${N}"
+        (( sc_shown > 0 )) && print "  ${D}total: ${sc_shown} library call types${N}"
+    fi
+
+    # ── MEMORY DELTA ──────────────────────────────────────────
+    print ""
+    print "  ${C}── MEMORY ─────────────────────────────────────────────────────────────${N}"
+    rss_after=$(command ps -p $$ -o rss= 2>/dev/null | head -1)
+    rss_after=${rss_after//[^0-9]/}
+    [[ -z "$rss_after" ]] && rss_after=0
+    mem_delta=$(( rss_after - rss_before ))
+    if (( mem_delta > 0 )); then
+        print "  ${D}//${N} ${B}shell delta${N}     ${Y}+$(( mem_delta )) KB${N}  ${D}(${rss_before}→${rss_after} KB)${N}"
+    elif (( mem_delta < 0 )); then
+        print "  ${D}//${N} ${B}shell delta${N}     ${G}$(( mem_delta )) KB${N}  ${D}(${rss_before}→${rss_after} KB)${N}"
+    else
+        print "  ${D}//${N} ${B}shell delta${N}     ${D}0 KB (unchanged)${N}"
+    fi
+
+    # ── CHILD PROCESSES ───────────────────────────────────────
+    pgrep -P $$ > "$proc_after" 2>/dev/null
+    procs_b=$(wc -l < "$proc_before" 2>/dev/null); procs_b=${procs_b//[^0-9]/}
+    procs_a=$(wc -l < "$proc_after" 2>/dev/null); procs_a=${procs_a//[^0-9]/}
+    print "  ${D}//${N} ${B}child procs${N}      ${D}before: ${C}${procs_b:-0}${D}, after: ${C}${procs_a:-0}${N}"
+
+    # ── SIGNAL BAR ────────────────────────────────────────────
+    print ""
+    if (( wall_time < 0.1 )); then perf_score=10
+    elif (( wall_time < 0.5 )); then perf_score=8
+    elif (( wall_time < 2.0 )); then perf_score=6
+    elif (( wall_time < 10.0 )); then perf_score=4
+    elif (( wall_time < 30.0 )); then perf_score=2
+    else perf_score=1
+    fi
+    sig_empty=$(( 10 - perf_score ))
+    (( perf_score >= 7 )) && sig_color=$G || { (( perf_score >= 4 )) && sig_color=$Y || sig_color=$R; }
+
+    local _mode_text
+    if (( quick_mode )); then _mode_text="${D}quick mode${N}"; else _mode_text="${C}full trace${N}"; fi
+    _bt
+    printf -v _msg " ${B}SIGNAL${N}  ${sig_color}%s${D}%s${N}  ${D}//${N} ${wall_color}${wall_rating}${N}  ${D}//${N} %s" \
+        "$(printf '█%.0s' {1..$perf_score})" "$(printf '░%.0s' {1..$sig_empty})" "$_mode_text"
+    _bx "$_msg"
+    _bb
+    print ""
+
+    command rm -rf "$tmpdir"
+}
+
+zpwrTrace "$@"

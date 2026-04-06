@@ -185,7 +185,7 @@ function zpwrBindAliasesLate(){
         fi
 
 
-        if zpwrCommandExists exa; then
+        if zpwrCommandExists eza; then
             alias lr="$ZPWR_EXA_COMMAND -R --tree | less -rMN"
         else
             zpwrCommandExists gls &&
@@ -197,7 +197,7 @@ function zpwrBindAliasesLate(){
     else
         # Linux or Unix
         alias ip="grc -c $HOME/conf.ifconfig ip"
-        if zpwrExists exa; then
+        if zpwrExists eza; then
             alias lr="$ZPWR_EXA_COMMAND -R --tree | less -rMN"
         else
             alias lr='grc -c "$HOME/conf.gls" ls -iAlhFR --color=always'
@@ -225,7 +225,7 @@ function zpwrBindAliasesLate(){
                 elif [[ -f "$HOME/.rpitokens.sh" ]]; then
                         source "$HOME/.rpitokens.sh"
                 fi' \
-                'alias exa="$ZPWR_EXA_COMMAND"' \
+                'alias eza="$ZPWR_EXA_COMMAND"' \
                 'if zpwrExists zypper;then
                     alias api="$ZPWR_FULL_SUDO zypper install -y"
                     alias apa="$ZPWR_FULL_SUDO zypper update -y; $ZPWR_FULL_SUDO zypper dist-upgrade -y"

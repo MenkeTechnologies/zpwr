@@ -8,7 +8,10 @@ function zpwrVimAllEdit(){
     fi
     BUFFER="$ZPWR_VIM $BUFFER"
     zpwrLogDebug "builtin cd $ZPWR"
-    eval "builtin cd $ZPWR"
+    builtin cd "$ZPWR" || {
+        zpwrLogConsoleErr "cannot cd to $ZPWR"
+        return 1
+    }
 
     BUFFER="$BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
     zpwrLogDebug "$BUFFER"

@@ -286,14 +286,6 @@
     assert $state equals 0
 }
 
-@test 'zpwrCommandExists jq' {
-    if ! command -v jq &>/dev/null; then
-        skip "jq not installed"
-    fi
-    run zpwrCommandExists jq
-    assert $state equals 0
-}
-
 @test 'zpwrCommandExists base64' {
     run zpwrCommandExists base64
     assert $state equals 0

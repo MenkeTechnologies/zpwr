@@ -158,7 +158,7 @@
     assert $state equals 1
 }
 
-@test 'zpwrExists ze' {
+@test 'zpwrExists ze 2' {
     run zpwrExists ze &>/dev/null
     assert $state equals 0
 }
@@ -238,7 +238,7 @@
     assert $? equals 0
 }
 
-@test 'zalf' {
+@test 'zalf 2' {
     zalf &>/dev/null
     [[ "$PWD" == "$ZPWR_AUTOLOAD_FZF" ]]
     assert $? equals 0
@@ -256,7 +256,7 @@
     assert $? equals 0
 }
 
-@test 'zalc' {
+@test 'zalc 2' {
     zalc &>/dev/null
     [[ "$PWD" == "$ZPWR_AUTOLOAD_COMMON" ]]
     assert $? equals 0

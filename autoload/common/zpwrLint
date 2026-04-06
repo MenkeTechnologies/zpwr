@@ -1,0 +1,170 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrLint(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██╗     ██╗███╗   ██╗████████╗${N}"
+        print " ${C}██║     ██║████╗  ██║╚══██╔══╝${N}"
+        print " ${M}██║     ██║██╔██╗ ██║   ██║${N}"
+        print " ${M}██║     ██║██║╚██╗██║   ██║${N}"
+        print " ${C}███████╗██║██║ ╚████║   ██║${N}"
+        print " ${C}╚══════╝╚═╝╚═╝  ╚═══╝   ╚═╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}LINT${N}"
+        _bb
+        print "  ${D}>> SHELL LINT // SYNTAX CHECK <<${N}"
+        print ""
+        print "  Run shellcheck on zpwr scripts and zsh -n syntax check on"
+        print "  all autoload functions."
+        print ""
+        print "  ${B}USAGE:${N} zpwr lint ${D}[OPTIONS]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-s, --shellcheck${N}                                 ${D}// Run shellcheck only${N}"
+        print "  ${C}-z, --zsh${N}                                        ${D}// Run zsh -n only${N}"
+        print ""
+        return 0
+    fi
+
+    local mode="all"
+    case "$1" in
+        -s|--shellcheck) mode="shellcheck" ;;
+        -z|--zsh) mode="zsh" ;;
+    esac
+
+    local -i errors=0 warnings=0 checked=0 passed=0
+    local f line
+    local -i zsh_errors=0 zsh_checked=0
+    local -i sc_errors=0 sc_warnings=0 sc_checked=0
+    local -i file_errors file_warnings
+    local sc_out
+
+    printf "\n"
+    printf " ${C}██╗     ██╗███╗   ██╗████████╗${N}\n"
+    printf " ${C}██║     ██║████╗  ██║╚══██╔══╝${N}\n"
+    printf " ${M}██║     ██║██╔██╗ ██║   ██║${N}\n"
+    printf " ${M}██║     ██║██║╚██╗██║   ██║${N}\n"
+    printf " ${C}███████╗██║██║ ╚████║   ██║${N}\n"
+    printf " ${C}╚══════╝╚═╝╚═╝  ╚═══╝   ╚═╝${N}\n"
+    _bt
+    printf -v _msg " ${G}SCANNING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}" "$ZPWR" "$(date '+%H:%M:%S')"
+    _bx "$_msg"
+    _bb
+
+    # ── ZSH SYNTAX CHECK ─────────────────────────────────────
+    if [[ "$mode" == "all" || "$mode" == "zsh" ]]; then
+        printf "\n  ${C}── ZSH SYNTAX CHECK (zsh -n) ───────────────────────────${N}\n"
+
+        zsh_errors=0
+        zsh_checked=0
+
+        # autoload functions
+        for f in "$ZPWR_AUTOLOAD_COMMON"/*(N.) "$ZPWR_AUTOLOAD_DARWIN"/*(N.) "$ZPWR_AUTOLOAD_LINUX"/*(N.); do
+            (( zsh_checked++ ))
+            (( checked++ ))
+            if ! zsh -n "$f" 2>/dev/null; then
+                printf "  ${R}FAIL${N} %s\n" "${f#$ZPWR/}"
+                (( zsh_errors++ ))
+                (( errors++ ))
+            fi
+        done
+
+        # .zsh and .zshrc files
+        for f in "$ZPWR"/env/*.sh(N) "$ZPWR"/env/*.zsh(N) "$ZPWR_INSTALL"/.zshrc(N); do
+            (( zsh_checked++ ))
+            (( checked++ ))
+            if ! zsh -n "$f" 2>/dev/null; then
+                printf "  ${R}FAIL${N} %s\n" "${f#$ZPWR/}"
+                (( zsh_errors++ ))
+                (( errors++ ))
+            fi
+        done
+
+        if (( zsh_errors == 0 )); then
+            printf "  ${G}All %d files pass zsh -n${N}\n" $zsh_checked
+            (( passed += zsh_checked ))
+        else
+            printf "  ${R}%d/%d files failed${N}\n" $zsh_errors $zsh_checked
+            (( passed += zsh_checked - zsh_errors ))
+        fi
+    fi
+
+    # ── SHELLCHECK ───────────────────────────────────────────
+    if [[ "$mode" == "all" || "$mode" == "shellcheck" ]]; then
+        printf "\n  ${C}── SHELLCHECK ──────────────────────────────────────────${N}\n"
+
+        if ! (( $+commands[shellcheck] )); then
+            printf "  ${Y}shellcheck not found${N} ${D}// install: brew install shellcheck${N}\n"
+            (( warnings++ ))
+        else
+            sc_errors=0
+            sc_warnings=0
+            sc_checked=0
+
+            for f in "$ZPWR"/scripts/*.sh(N) "$ZPWR"/scripts/*.zsh(N) "$ZPWR"/install/*.sh(N); do
+                (( sc_checked++ ))
+                (( checked++ ))
+                sc_out=$(shellcheck -S warning -e SC1071,SC1090,SC1091,SC2034,SC2139,SC2148,SC2154,SC2206,SC2296 "$f" 2>&1)
+                if [[ -n "$sc_out" ]]; then
+                    file_errors=$(echo "$sc_out" | command grep -c "error" 2>/dev/null)
+                    file_warnings=$(echo "$sc_out" | command grep -c "warning" 2>/dev/null)
+                    if (( file_errors > 0 )); then
+                        printf "  ${R}ERROR${N} %s ${D}(%d issues)${N}\n" "${f#$ZPWR/}" $(echo "$sc_out" | command grep -c "^In\|SC[0-9]")
+                        (( sc_errors++ ))
+                        (( errors++ ))
+                    else
+                        printf "  ${Y}WARN${N}  %s ${D}(%d issues)${N}\n" "${f#$ZPWR/}" $(echo "$sc_out" | command grep -c "^In\|SC[0-9]")
+                        (( sc_warnings++ ))
+                        (( warnings++ ))
+                    fi
+                else
+                    (( passed++ ))
+                fi
+            done
+
+            if (( sc_errors == 0 && sc_warnings == 0 )); then
+                printf "  ${G}All %d scripts pass shellcheck${N}\n" $sc_checked
+            else
+                printf "  ${D}%d checked: %d errors, %d warnings${N}\n" $sc_checked $sc_errors $sc_warnings
+            fi
+        fi
+    fi
+
+    # ── SUMMARY ──────────────────────────────────────────────
+    printf "\n"
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n"
+
+    local status_color status_label
+    if (( errors > 0 )); then
+        status_color=$R
+        status_label="ERRORS FOUND"
+    elif (( warnings > 0 )); then
+        status_color=$Y
+        status_label="WARNINGS"
+    else
+        status_color=$G
+        status_label="ALL CLEAN"
+    fi
+
+    printf "  ${B}${status_color}%s${N}  ${D}//${N}  ${G}%d passed${N}  ${D}//${N}  ${Y}%d warnings${N}  ${D}//${N}  ${R}%d errors${N}  ${D}//${N}  ${C}%d checked${N}\n" \
+        "$status_label" $passed $warnings $errors $checked
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+
+    unfunction _bx _bt _bb 2>/dev/null
+    return $(( errors > 0 ? 1 : 0 ))
+}
+
+zpwrLint "$@"

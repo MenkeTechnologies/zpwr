@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# update README ASCII art version from latest git tag before push
+version="$(git describe --tags "$(git rev-list --tags --max-count=1)" 2>/dev/null)" || exit 0
+
+readme="$(git rev-parse --show-toplevel)/README.md"
+[ -f "$readme" ] || exit 0
+
+# only update if version changed in the ASCII art
+current="$(grep -o '|    \\_  v.*' "$readme" | head -1 | /usr/bin/sed 's#|    \\_  ##')"
+[ "$current" = "$version" ] && exit 0
+
+/usr/bin/sed -i '' 's#|    \\_  v.*#|    \\_  '"$version"'#' "$readme"
+git add "$readme"
+git commit --amend --no-edit --quiet

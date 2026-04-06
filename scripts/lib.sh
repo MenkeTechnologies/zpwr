@@ -45,7 +45,7 @@ if zpwrIsZsh; then
         local cmd="$1"
         local packageManager="$2"
         local forceSudo="$3"
-        local needSudoBase installDir
+        local needSudoBase installDir outdated
 
         typeset -Tgx ZPWR_PIP_BLACKLIST zpwrPipBlacklist
 
@@ -125,7 +125,7 @@ else
 
         #alternative is command -v
         for i in "$@";do
-            type -a -- "$i" >/dev/null 2>&1
+            type -a -- "$i" >/dev/null 2>&1 || return 1
         done
     }
 fi
@@ -138,6 +138,10 @@ function zpwrStdinExists(){
     if [[ -n "$in" ]]; then
         echo "$in"
     else
+        if [[ -z "$arg" ]]; then
+            zpwrLogConsoleErr "usage: zpwrStdinExists LABEL (no stdin)"
+            return 1
+        fi
         echo "No input found for $arg!"
     fi
 }
@@ -150,9 +154,15 @@ function zpwrCommandExists(){
     fi
     local cmd
 
-    for cmd in "$@"; do
-        type -ap -- "$cmd" >/dev/null 2>&1 || return 1
-    done
+    if zpwrIsZsh; then
+        for cmd in "$@"; do
+            (( $+commands[$cmd] )) || return 1
+        done
+    else
+        for cmd in "$@"; do
+            type -ap -- "$cmd" >/dev/null 2>&1 || return 1
+        done
+    fi
 }
 
 function zpwrBlocksToSize(){
@@ -161,7 +171,7 @@ function zpwrBlocksToSize(){
 
     read input
     bytes=$(( input * 512 ))
-    echo $bytes | humanreadable
+    echo $bytes | zpwrHumanReadable
 }
 
 function zpwrHumanReadable(){
@@ -219,16 +229,87 @@ function zpwrIsBinary() {
 
 function zpwrLogColor(){
 
-    if [[ -z $2 ]]; then
+    if [[ $# -lt 2 ]]; then
         zpwrLogConsoleErr "usage: zpwrLogColor LVL MSG"
         return 1
     fi
 
-    printf "${ZPWR_LOG_UNDER_COLOR}_____________$ZPWR_LOG_DATE_COLOR$(date)\x1b[0m${ZPWR_LOG_UNDER_COLOR}____$1: "
+    local lvl="$1"
     shift
-    printf "_$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_START_CHAR$ZPWR_LOG_MSG_COLOR%b\x1b[0m$ZPWR_LOG_QUOTE_COLOR$ZPWR_QUOTE_END_CHAR${ZPWR_LOG_UNDER_COLOR}_" "$*"
-    printf "\x1b[0m"
+    # neon 256-color palette
+    local _NC='\x1b[38;5;51m'   # bright cyan
+    local _NP='\x1b[38;5;201m'  # neon pink
+    local _NG='\x1b[38;5;46m'   # neon green
+    local _NY='\x1b[38;5;226m'  # neon yellow
+    local _NR='\x1b[38;5;196m'  # neon red
+    local _NM='\x1b[38;5;129m'  # neon magenta
+    local _NO='\x1b[38;5;208m'  # neon orange
+    local _NW='\x1b[38;5;255m'  # bright white
+    local _DM='\x1b[38;5;240m'  # dim gray
+    local _B='\x1b[1m' _N='\x1b[0m'
+    local c1 c2 c3 sig_fill sig_empty sig_color
+    case "$lvl" in
+        INFO)  c1="${_NC}"; c2="${_NP}"; c3="${_NG}"; sig_fill=8; sig_color="${_NG}" ;;
+        ERROR) c1='\x1b[38;5;196m'; c2='\x1b[38;5;160m'; c3='\x1b[38;5;124m'; sig_fill=2; sig_color="${_NR}" ;;
+        DEBUG) c1="${_NY}"; c2="${_NC}"; c3="${_NG}"; sig_fill=6; sig_color="${_NY}" ;;
+        TRACE) c1="${_NM}"; c2="${_NC}"; c3="${_NP}"; sig_fill=4; sig_color="${_NM}" ;;
+        STDIN) c1="${_NC}"; c2="${_NP}"; c3="${_NG}"; sig_fill=8; sig_color="${_NC}" ;;
+        *)     c1="${_NC}"; c2="${_NP}"; c3="${_NG}"; sig_fill=8; sig_color="${_NC}" ;;
+    esac
+    sig_empty=$((10 - sig_fill))
+
     printf "\n"
+    case "$lvl" in
+        INFO)
+            printf " ${c1}██╗${_N}${c1}███╗   ██╗${_N}${c1}███████╗${_N} ${c1}██████╗${_N}\n"
+            printf " ${c1}██║${_N}${c1}████╗  ██║${_N}${c1}██╔════╝${_N}${c1}██╔═══██╗${_N}\n"
+            printf " ${c2}██║${_N}${c2}██╔██╗ ██║${_N}${c2}█████╗${_N}  ${c2}██║   ██║${_N}\n"
+            printf " ${c2}██║${_N}${c2}██║╚██╗██║${_N}${c2}██╔══╝${_N}  ${c2}██║   ██║${_N}\n"
+            printf " ${c3}██║${_N}${c3}██║ ╚████║${_N}${c3}██║${_N}     ${c3}╚██████╔╝${_N}\n"
+            printf " ${c3}╚═╝${_N}${c3}╚═╝  ╚═══╝${_N}${c3}╚═╝${_N}      ${c3}╚═════╝${_N}\n"
+            ;;
+        ERROR)
+            printf " ${c1}███████╗██████╗ ██████╗  ██████╗ ██████╗${_N}\n"
+            printf " ${c1}██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔══██╗${_N}\n"
+            printf " ${c2}█████╗  ██████╔╝██████╔╝██║   ██║██████╔╝${_N}\n"
+            printf " ${c2}██╔══╝  ██╔══██╗██╔══██╗██║   ██║██╔══██╗${_N}\n"
+            printf " ${c3}███████╗██║  ██║██║  ██║╚██████╔╝██║  ██║${_N}\n"
+            printf " ${c3}╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝${_N}\n"
+            ;;
+        DEBUG)
+            printf " ${c1}██████╗ ███████╗██████╗ ██╗   ██╗ ██████╗${_N}\n"
+            printf " ${c1}██╔══██╗██╔════╝██╔══██╗██║   ██║██╔════╝${_N}\n"
+            printf " ${c2}██║  ██║█████╗  ██████╔╝██║   ██║██║  ███╗${_N}\n"
+            printf " ${c2}██║  ██║██╔══╝  ██╔══██╗██║   ██║██║   ██║${_N}\n"
+            printf " ${c3}██████╔╝███████╗██████╔╝╚██████╔╝╚██████╔╝${_N}\n"
+            printf " ${c3}╚═════╝ ╚══════╝╚═════╝  ╚═════╝  ╚═════╝${_N}\n"
+            ;;
+        TRACE)
+            printf " ${c1}████████╗██████╗  █████╗  ██████╗███████╗${_N}\n"
+            printf " ${c1}╚══██╔══╝██╔══██╗██╔══██╗██╔════╝██╔════╝${_N}\n"
+            printf " ${c2}   ██║   ██████╔╝███████║██║     █████╗${_N}\n"
+            printf " ${c2}   ██║   ██╔══██╗██╔══██║██║     ██╔══╝${_N}\n"
+            printf " ${c3}   ██║   ██║  ██║██║  ██║╚██████╗███████╗${_N}\n"
+            printf " ${c3}   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝╚══════╝${_N}\n"
+            ;;
+        *)
+            printf " ${c1}${_B}${lvl}${_N}\n"
+            ;;
+    esac
+    # box_inner = 74 chars; content visible length (minus lvl) = " STATUS: " (9) + "  // SIGNAL: " (13) + 10 bars + " // HH:MM:SS  " (14) = 46
+    local _i
+    local -i _pad=$(( 74 - 46 - ${#lvl} ))
+    (( _pad < 0 )) && _pad=0
+    printf " ${_DM}┌──────────────────────────────────────────────────────────────────────────┐${_N}\n"
+    printf " ${_DM}│${_N} ${_NG}STATUS:${_N} ${_NW}${_B}${lvl}${_N}  ${_DM}//${_N} ${_NC}SIGNAL: ${sig_color}"
+    for (( _i=0; _i<sig_fill; _i++ )); do printf "█"; done
+    printf "${_DM}"
+    for (( _i=0; _i<sig_empty; _i++ )); do printf "░"; done
+    printf "${_N} ${_DM}//${_N} ${_NC}$(date '+%H:%M:%S')${_N}  "
+    for (( _i=0; _i<_pad; _i++ )); do printf " "; done
+    printf "${_DM}│${_N}\n"
+    printf " ${_DM}└──────────────────────────────────────────────────────────────────────────┘${_N}\n"
+    printf "  ${_DM}>>${_N} ${c1}%b${_N}\n" "$*"
 }
 
 function zpwrLogConsoleInfo(){
@@ -280,6 +361,10 @@ function zpwrLogConsoleNotGit() {
 
 function zpwrLogConsolePrefix(){
 
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrLogConsolePrefix MSG"
+        return 1
+    fi
     zpwrPrettyPrint "$ZPWR_CHAR_LOGO $*"
     zpwrLogInfo "$ZPWR_CHAR_LOGO $*"
 
@@ -287,8 +372,12 @@ function zpwrLogConsolePrefix(){
 
 function zpwrLogConsoleHeader(){
 
+    if [[ $# -lt 2 ]]; then
+        zpwrLogConsoleErr "usage: zpwrLogConsoleHeader LVL MSG"
+        return 1
+    fi
     zpwrPrettyPrint "$*"
-    zpwrLogColor "$*"
+    zpwrLogColor "$@"
 
 }
 
@@ -370,12 +459,20 @@ function zpwrNeedSudo(){
 
 function zpwrFail(){
 
-        echo "Failure due to $1" >&2
+    if [[ -z "$1" ]]; then
+        echo "usage: zpwrFail REASON" >&2
         exit 1
+    fi
+    echo "Failure due to $1" >&2
+    exit 1
 }
 
 function zpwrFileMustExist(){
 
+    if [[ -z "$1" ]]; then
+        echo "usage: zpwrFileMustExist FILE" >&2
+        exit 1
+    fi
     if [[ ! -f "$1" ]]; then
         echo "Where is the file '$1'?" >&2
         exit 1
@@ -527,6 +624,11 @@ function zpwrInstallGitHubPlugin(){
 
 function zpwrInstallerUpdate(){
 
+    if [[ -z "$1" || -z "$2" ]]; then
+        zpwrLogConsoleErr "usage: zpwrInstallerUpdate COMMAND DISTRO"
+        return 1
+    fi
+
     zpwrExists "$1" || {
 
         if [[ $2 == mac ]]; then
@@ -550,6 +652,11 @@ function zpwrInstallerUpdate(){
 }
 
 function zpwrInstallerUpgrade(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrInstallerUpgrade DISTRO"
+        return 1
+    fi
 
     if [[ $1 == mac ]]; then
         brew update
@@ -575,6 +682,11 @@ function zpwrInstallerUpgrade(){
 
 function zpwrInstallerRefresh(){
 
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrInstallerRefresh DISTRO"
+        return 1
+    fi
+
     if [[ $1 == mac ]]; then
         brew update
     elif [[ $1 == debian ]];then
@@ -598,6 +710,11 @@ function zpwrInstallerRefresh(){
 
 function zpwrPrettyPrintInstaller(){
 
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrPrettyPrintInstaller MSG"
+        return 1
+    fi
+
     (( ++INSTALL_COUNTER ))
     printf "\x1b[32;1m"
     perl -le "print '#'x80"
@@ -607,15 +724,6 @@ function zpwrPrettyPrintInstaller(){
     perl -le "print '#'x80"
     printf "\x1b[0m"
     printf "\n"
-}
-
-function zpwrNeedSudo(){
-
-    if [[ ! -w "$1" ]]; then
-        return 0
-    else
-        return 1
-    fi
 }
 
 function proceed(){
@@ -652,6 +760,11 @@ function zpwrPrettyPrint(){
 
 function zpwrPrettyPrintBoxStdin(){
 
+    if [[ -z "$1" ]]; then
+        echo "usage: zpwrPrettyPrintBoxStdin LABEL" >&1
+        exit 1
+    fi
+
     local perlfile
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
@@ -666,6 +779,11 @@ function zpwrPrettyPrintBoxStdin(){
 }
 
 function zpwrPrettyPrintBox(){
+
+    if [[ -z "$1" ]]; then
+        echo "usage: zpwrPrettyPrintBox MSG" >&1
+        exit 1
+    fi
 
     local perlfile
 
@@ -693,8 +811,6 @@ function zpwrTurnOnDebugging(){
 }
 
 function zpwrAlternatingPrettyPrint(){
-
-    local counter=0
 
     if [[ -z $1 ]]; then
         cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
@@ -739,6 +855,11 @@ function zpwrGitRepoUpdater() {
 
     local enclosing_dir generic_git_repo_plugin
 
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: zpwrGitRepoUpdater DIR"
+        return 1
+    fi
+
     enclosing_dir="$1"
 
     if [[ -d "$enclosing_dir" ]]; then
@@ -758,10 +879,10 @@ function zpwrGitRepoUpdater() {
 
 function zpwrClearList() {
 
-    local FOUND out out2 ls_command lib_command rank loc arg
+    local FOUND out out2 ls_command lib_command rank loc arg lf
 
     if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
-        if zpwrCommandExists exa;then
+        if zpwrCommandExists eza;then
             ls_command="$ZPWR_EXA_COMMAND"
         else
             if zpwrCommandExists grc; then
@@ -773,7 +894,7 @@ function zpwrClearList() {
         lib_command="otool -L"
     elif [[ "$ZPWR_OS_TYPE" == linux ]];then
 
-        if zpwrCommandExists exa;then
+        if zpwrCommandExists eza;then
             ls_command="$ZPWR_EXA_COMMAND"
         else
             if zpwrCommandExists grc; then
@@ -899,7 +1020,13 @@ function zpwrClearList() {
             fi
         done
     else
-        clear && eval "$ls_command"
+        if [[ -t 0 ]]; then
+            clear && eval "$ls_command"
+        elif : < /dev/tty 2>/dev/null; then
+            clear && eval "$ls_command" < /dev/tty
+        else
+            clear && eval "$ls_command"
+        fi
     fi
 }
 

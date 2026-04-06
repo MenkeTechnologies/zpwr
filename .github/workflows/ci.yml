@@ -5,10 +5,22 @@ on:
     branches: [main, dev]
   pull_request:
     branches: [main, dev]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   test:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      GIT_TERMINAL_PROMPT: 0
+      DEBIAN_FRONTEND: noninteractive
     strategy:
       matrix:
         zsh-version: ['default']
@@ -18,12 +30,18 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y zsh vim perl python3 curl git
+          # zpwrCommandExists tests must not assume tools outside this list (plus
+          # coreutils/util-linux from the Ubuntu image). Optional packages like
+          # lsof, jq, openssl, sudo, pagers, procps (pgrep/pkill), file, strings are not guaranteed.
+          sudo apt-get install -y --no-install-recommends \
+            zsh vim perl python3 curl git \
+            netcat-openbsd net-tools bc screen rsync zip unzip openssh-client iputils-ping
 
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           path: zpwr
+          fetch-depth: 1
 
       - name: Set terminal size variables
         run: |
@@ -48,17 +66,43 @@ jobs:
       - name: Install test tools
         run: |
           cd ~/.zpwr
-          curl -fsSL https://raw.githubusercontent.com/molovo/revolver/refs/heads/master/revolver > .bin/revolver
+          curl -fsSL --retry 3 --retry-delay 2 --connect-timeout 15 \
+            https://raw.githubusercontent.com/molovo/revolver/refs/heads/master/revolver > .bin/revolver
           chmod u+x .bin/revolver
           echo "$HOME/.zpwr/.bin" >> "$GITHUB_PATH"
 
+      - name: Cache zunit binary
+        id: cache-zunit
+        uses: actions/cache@v4
+        with:
+          path: ~/.zpwr/.cache/zunit-bin
+          key: zunit-${{ runner.os }}-v1-0.8.x-${{ hashFiles('zpwr/.github/workflows/ci.yml') }}
+          restore-keys: |
+            zunit-${{ runner.os }}-v1-0.8.x-
+            zunit-${{ runner.os }}-v1-
+
       - name: Build zunit
+        if: steps.cache-zunit.outputs.cache-hit != 'true'
         run: |
+          mkdir -p ~/.zpwr/.cache/zunit-bin
           cd ~/.zpwr
-          git clone https://github.com/MenkeTechnologies/zunit
-          cd zunit
+          git clone --depth 1 https://github.com/MenkeTechnologies/zunit zunit-src
+          cd zunit-src
           ./build.zsh
-          echo "$HOME/.zpwr/zunit" >> "$GITHUB_PATH"
+          command cp zunit ~/.zpwr/.cache/zunit-bin/zunit
+          chmod +x ~/.zpwr/.cache/zunit-bin/zunit
+
+      - name: Add zunit to PATH
+        run: echo "$HOME/.zpwr/.cache/zunit-bin" >> "$GITHUB_PATH"
+
+      - name: Ensure zunit executable bit
+        run: chmod +x "$HOME/.zpwr/.cache/zunit-bin/zunit"
+
+      - name: Verify zunit
+        run: |
+          test -x "$HOME/.zpwr/.cache/zunit-bin/zunit"
+          command -v zunit
+          zunit --version
 
       - name: Run tests
         run: |

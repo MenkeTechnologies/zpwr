@@ -1,0 +1,311 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrDeps(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=70
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██████╗ ███████╗██████╗ ███████╗${N}"
+        print " ${C}██╔══██╗██╔════╝██╔══██╗██╔════╝${N}"
+        print " ${M}██║  ██║█████╗  ██████╔╝███████╗${N}"
+        print " ${M}██║  ██║██╔══╝  ██╔═══╝ ╚════██║${N}"
+        print " ${C}██████╔╝███████╗██║     ███████║${N}"
+        print " ${C}╚═════╝ ╚══════╝╚═╝     ╚══════╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}DEPS${N}"
+        _bb
+        print "  ${D}>> FUNCTION DEPENDENCY GRAPH // CALL CHAIN ANALYZER <<${N}"
+        print ""
+        print ""
+        print "  Analyze which zpwr functions call which other functions."
+        print "  Find orphans, circular deps, hot paths, and call depth."
+        print ""
+        print "  ${B}USAGE:${N} zpwr deps ${D}[OPTIONS] [FUNCTION]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-r, --reverse${N}                                    ${D}// Show callers (who calls this?)${N}"
+        print "  ${C}-o, --orphans${N}                                    ${D}// List functions called by nobody${N}"
+        print "  ${C}-s, --summary${N}                                    ${D}// Overview stats${N}"
+        print "  ${C}-d, --dot${N}                                        ${D}// Output dot format for graphviz${N}"
+        print "  ${C}FUNCTION${N}                                         ${D}// Show deps for specific function${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr deps${N}                                        ${D}// summary overview${N}"
+        print "  ${C}zpwr deps zpwrClearList${N}                          ${D}// what does zpwrClearList call?${N}"
+        print "  ${C}zpwr deps -r zpwrPrettyPrint${N}                     ${D}// who calls zpwrPrettyPrint?${N}"
+        print "  ${C}zpwr deps --orphans${N}                              ${D}// unused functions${N}"
+        print "  ${C}zpwr deps --dot > graph.dot${N}                      ${D}// graphviz export${N}"
+        print ""
+        return 0
+    fi
+
+    # parse flags
+    local -i do_reverse=0 do_orphans=0 do_summary=0 do_dot=0
+    local -i cnt=0 bar_len=0 i=0 max_out=0 max_in=0 count=0
+    local -i with_deps=0 with_callers=0 orphan_count=0 total_edges=0
+    local target="" fname body called check_fn caller sub_calls
+    local fn_pattern line_buf name scan_dir lib_body lib_fn
+    local -A calls_out calls_in all_funcs func_file
+    local -a zpwr_funcs found_calls orphans by_out by_in scan_dirs
+    while [[ "$1" == -* ]]; do
+        case "$1" in
+            -r|--reverse) do_reverse=1; shift ;;
+            -o|--orphans) do_orphans=1; shift ;;
+            -s|--summary) do_summary=1; shift ;;
+            -d|--dot) do_dot=1; shift ;;
+            *) break ;;
+        esac
+    done
+    target="$1"
+
+    # no flags and no target = summary mode
+    (( ! do_reverse && ! do_orphans && ! do_dot )) && [[ -z "$target" ]] && do_summary=1
+
+    # build dependency map by scanning all function bodies
+
+    # collect ALL functions from all autoload dirs
+    scan_dirs=()
+    [[ -d "$ZPWR_AUTOLOAD_COMMON" ]] && scan_dirs+=( "$ZPWR_AUTOLOAD_COMMON" )
+    [[ -d "$ZPWR_AUTOLOAD_DARWIN" ]] && scan_dirs+=( "$ZPWR_AUTOLOAD_DARWIN" )
+    [[ -d "$ZPWR_AUTOLOAD_LINUX" ]] && scan_dirs+=( "$ZPWR_AUTOLOAD_LINUX" )
+    [[ -d "$ZPWR_AUTOLOAD_COMP_UTILS" ]] && scan_dirs+=( "$ZPWR_AUTOLOAD_COMP_UTILS" )
+
+    # map function name -> source file path
+    for scan_dir in $scan_dirs; do
+        for fname in "$scan_dir"/*(N.:t); do
+            [[ "$fname" == *.zwc ]] && continue
+            (( ${#fname} <= 2 )) && continue
+            zpwr_funcs+=( "$fname" )
+            all_funcs[$fname]=1
+            func_file[$fname]="$scan_dir/$fname"
+        done
+    done
+
+    # also collect function names defined in scripts/lib.sh
+    if [[ -r "$ZPWR_SCRIPTS/lib.sh" ]]; then
+        lib_body=$(<"$ZPWR_SCRIPTS/lib.sh")
+        for lib_fn in ${(f)"$(grep -oE 'function [a-zA-Z_][a-zA-Z_0-9]+' "$ZPWR_SCRIPTS/lib.sh")"}; do
+            lib_fn=${lib_fn#function }
+            if (( ! ${+all_funcs[$lib_fn]} )); then
+                zpwr_funcs+=( "$lib_fn" )
+                all_funcs[$lib_fn]=1
+                func_file[$lib_fn]="$ZPWR_SCRIPTS/lib.sh"
+            fi
+        done
+    fi
+
+    # scan each function body for calls to other functions
+    for fname in $zpwr_funcs; do
+        # get function body from file or runtime
+        if [[ -n "${func_file[$fname]}" && -r "${func_file[$fname]}" ]]; then
+            if [[ "${func_file[$fname]}" == *lib.sh ]]; then
+                # extract function body from lib.sh
+                body=$(sed -n "/^function $fname/,/^}/p" "${func_file[$fname]}" 2>/dev/null)
+            else
+                body=$(<"${func_file[$fname]}")
+            fi
+        elif (( ${+functions[$fname]} )); then
+            body="${functions[$fname]}"
+        else
+            continue
+        fi
+
+        found_calls=()
+        for check_fn in $zpwr_funcs; do
+            [[ "$check_fn" == "$fname" ]] && continue
+            if [[ "$body" == *"$check_fn"* ]]; then
+                found_calls+=( "$check_fn" )
+                # record reverse mapping
+                if [[ -n "${calls_in[$check_fn]}" ]]; then
+                    calls_in[$check_fn]+=" $fname"
+                else
+                    calls_in[$check_fn]="$fname"
+                fi
+            fi
+        done
+        calls_out[$fname]="${found_calls[*]}"
+    done
+
+    # ── DOT OUTPUT ────────────────────────────────────────────
+    if (( do_dot )); then
+        print "digraph zpwr_deps {"
+        print "  rankdir=LR;"
+        print "  node [shape=box, style=filled, fillcolor=\"#1a1a2e\", fontcolor=\"#00ffff\", color=\"#00ffff\"];"
+        print "  edge [color=\"#ff00ff\"];"
+        for fname in $zpwr_funcs; do
+            [[ -z "${calls_out[$fname]}" ]] && continue
+            for called in ${(s: :)calls_out[$fname]}; do
+                print "  \"$fname\" -> \"$called\";"
+            done
+        done
+        print "}"
+        return 0
+    fi
+
+    # banner for non-dot output
+    print ""
+    print " ${C}██████╗ ███████╗██████╗ ███████╗${N}"
+    print " ${C}██╔══██╗██╔════╝██╔══██╗██╔════╝${N}"
+    print " ${M}██║  ██║█████╗  ██████╔╝███████╗${N}"
+    print " ${M}██║  ██║██╔══╝  ██╔═══╝ ╚════██║${N}"
+    print " ${C}██████╔╝███████╗██║     ███████║${N}"
+    print " ${C}╚═════╝ ╚══════╝╚═╝     ╚══════╝${N}"
+    _bt
+    printf -v _msg " ${G}SCANNING${N}  ${D}//${N} ${C}${#zpwr_funcs} zpwr functions${N}  ${D}//${N} ${M}~/.zpwr${N}"
+    _bx "$_msg"
+    _bb
+    print ""
+
+    # ── SPECIFIC FUNCTION ─────────────────────────────────────
+    if [[ -n "$target" ]]; then
+        if (( do_reverse )); then
+            # who calls this function?
+            print "  ${C}── WHO CALLS ${B}${target}${C} ─────────────────────────────────────────────${N}"
+            print ""
+            if [[ -n "${calls_in[$target]}" ]]; then
+                for caller in ${(s: :)calls_in[$target]}; do
+                    print "  ${D}//${N} ${G}${caller}${N} ${D}→${N} ${B}${target}${N}"
+                done
+                print ""
+                print "  ${D}${#${(s: :)calls_in[$target]}} callers${N}"
+            else
+                print "  ${Y}no zpwr functions call ${target}${N}"
+            fi
+        else
+            # what does this function call?
+            print "  ${C}── ${B}${target}${C} CALLS ──────────────────────────────────────────────────${N}"
+            print ""
+            if [[ -n "${calls_out[$target]}" ]]; then
+                for called in ${(s: :)calls_out[$target]}; do
+                    # check depth: what does the callee call?
+                    sub_calls="${calls_out[$called]}"
+                    if [[ -n "$sub_calls" ]]; then
+                        print "  ${D}//${N} ${B}${target}${N} ${D}→${N} ${C}${called}${N} ${D}→ [${sub_calls// /, }]${N}"
+                    else
+                        print "  ${D}//${N} ${B}${target}${N} ${D}→${N} ${C}${called}${N}"
+                    fi
+                done
+                print ""
+                print "  ${D}${#${(s: :)calls_out[$target]}} direct dependencies${N}"
+            else
+                print "  ${Y}${target} calls no other zpwr functions${N}"
+            fi
+        fi
+        print ""
+        return 0
+    fi
+
+    # ── ORPHANS ───────────────────────────────────────────────
+    if (( do_orphans )); then
+        print "  ${C}── ORPHAN FUNCTIONS ${D}(called by nobody)${C} ─────────────────────────────${N}"
+        print ""
+        orphans=()
+        for fname in $zpwr_funcs; do
+            [[ -z "${calls_in[$fname]}" ]] && orphans+=( "$fname" )
+        done
+        orphans=( ${(o)orphans} )
+
+        line_buf=""
+        count=0
+        for fname in $orphans; do
+            if [[ -n "$line_buf" ]]; then
+                line_buf+=", "
+            fi
+            if (( ${#line_buf} + ${#fname} > 68 )); then
+                print "  ${D}//${N} ${Y}${line_buf}${N}"
+                line_buf="$fname"
+            else
+                line_buf+="$fname"
+            fi
+            (( count++ ))
+        done
+        [[ -n "$line_buf" ]] && print "  ${D}//${N} ${Y}${line_buf}${N}"
+        print ""
+        print "  ${D}${count}/${#zpwr_funcs} functions are not called by other zpwr functions${N}"
+        print "  ${D}(they may be called from .zshrc, zinit hooks, or directly by user)${N}"
+        print ""
+        return 0
+    fi
+
+    # ── SUMMARY ───────────────────────────────────────────────
+    if (( do_summary )); then
+        # most connected (most outgoing calls)
+        by_out=()
+        for fname in $zpwr_funcs; do
+            cnt=0
+            [[ -n "${calls_out[$fname]}" ]] && cnt=${#${(s: :)calls_out[$fname]}}
+            (( cnt > 0 )) && by_out+=( "$cnt $fname" )
+        done
+        by_out=( ${(On)by_out} )
+
+        print "  ${C}── TOP 10 MOST DEPENDENCIES (outgoing calls) ─────────────────────────${N}"
+        print ""
+        max_out=0
+        (( $#by_out > 0 )) && max_out=${by_out[1]%% *}
+        for (( i = 1; i <= 10 && i <= $#by_out; i++ )); do
+            cnt=${by_out[i]%% *}
+            name=${by_out[i]#* }
+            bar_len=$(( max_out > 0 ? cnt * 25 / max_out : 0 ))
+            (( bar_len < 1 && cnt > 0 )) && bar_len=1
+            print -n "  ${D}$(printf '%3d.' $i)${N} ${B}$(printf '%-30s' "$name")${N} ${C}$(printf '%3d' $cnt)${N}  "
+            print "${M}$(printf '█%.0s' {1..$bar_len})${N}"
+        done
+
+        # most depended on (most incoming calls)
+        by_in=()
+        for fname in $zpwr_funcs; do
+            cnt=0
+            [[ -n "${calls_in[$fname]}" ]] && cnt=${#${(s: :)calls_in[$fname]}}
+            (( cnt > 0 )) && by_in+=( "$cnt $fname" )
+        done
+        by_in=( ${(On)by_in} )
+
+        print ""
+        print "  ${C}── TOP 10 MOST DEPENDED ON (incoming calls) ──────────────────────────${N}"
+        print ""
+        max_in=0
+        (( $#by_in > 0 )) && max_in=${by_in[1]%% *}
+        for (( i = 1; i <= 10 && i <= $#by_in; i++ )); do
+            cnt=${by_in[i]%% *}
+            name=${by_in[i]#* }
+            bar_len=$(( max_in > 0 ? cnt * 25 / max_in : 0 ))
+            (( bar_len < 1 && cnt > 0 )) && bar_len=1
+            print -n "  ${D}$(printf '%3d.' $i)${N} ${B}$(printf '%-30s' "$name")${N} ${G}$(printf '%3d' $cnt)${N}  "
+            print "${C}$(printf '█%.0s' {1..$bar_len})${N}"
+        done
+
+        # stats
+        with_deps=0 with_callers=0 orphan_count=0 total_edges=0
+        for fname in $zpwr_funcs; do
+            [[ -n "${calls_out[$fname]}" ]] && (( with_deps++ ))
+            [[ -n "${calls_in[$fname]}" ]] && (( with_callers++ ))
+            [[ -z "${calls_in[$fname]}" ]] && (( orphan_count++ ))
+            [[ -n "${calls_out[$fname]}" ]] && (( total_edges += ${#${(s: :)calls_out[$fname]}} ))
+        done
+
+        print ""
+        print "  ${C}══════════════════════════════════════════════════════════════════════${N}"
+        print "  ${B}total zpwr functions:${N}   ${C}${#zpwr_funcs}${N}"
+        print "  ${B}with dependencies:${N}      ${C}${with_deps}${N}  ${D}(call other zpwr functions)${N}"
+        print "  ${B}depended on:${N}            ${C}${with_callers}${N}  ${D}(called by other zpwr functions)${N}"
+        print "  ${B}orphans:${N}                ${Y}${orphan_count}${N}  ${D}(not called by any zpwr function)${N}"
+        print "  ${B}total call edges:${N}       ${C}${total_edges}${N}"
+        print "  ${C}══════════════════════════════════════════════════════════════════════${N}"
+        print ""
+    fi
+
+    unfunction _bx _bt _bb 2>/dev/null
+}
+
+zpwrDeps "$@"

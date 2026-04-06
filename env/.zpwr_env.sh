@@ -89,8 +89,8 @@ export ZPWR_EDITOR_TO_VIM='true'
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command
 export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
-# exa command invoked from zpwrClearList shows extended attributes
-export ZPWR_EXA_EXTENDED=true
+# eza command invoked from zpwrClearList shows extended attributes
+export ZPWR_EXA_EXTENDED=false
 # enable all expansion
 export ZPWR_EXPAND=true
 # aliases expand in second position after sudo
@@ -123,14 +123,14 @@ export ZPWR_INTERACTIVE_MENU_SELECT=true
 export ZPWR_KEYTIMEOUT=10
 # whether to include all the zpwr learning functions
 export ZPWR_LEARN=true
-# zpwrLogColor function underscore color ANSI codes
-export ZPWR_LOG_UNDER_COLOR='\x1b[0;34m'
-# zpwrLogColor function quote color
-export ZPWR_LOG_QUOTE_COLOR='\x1b[0;35m'
-# zpwrLogColor function timestamp color
-export ZPWR_LOG_DATE_COLOR='\x1b[0;32;44m'
-# zpwrLogColor function message color
-export ZPWR_LOG_MSG_COLOR='\x1b[0;37;45m'
+# zpwrLogColor function underscore color ANSI codes (neon cyan)
+export ZPWR_LOG_UNDER_COLOR='\x1b[0;36m'
+# zpwrLogColor function quote color (neon magenta)
+export ZPWR_LOG_QUOTE_COLOR='\x1b[0;95m'
+# zpwrLogColor function timestamp color (bright green on dark bg)
+export ZPWR_LOG_DATE_COLOR='\x1b[1;32;40m'
+# zpwrLogColor function message color (bright white on purple bg)
+export ZPWR_LOG_MSG_COLOR='\x1b[1;37;45m'
 # when true vim normal mode C-V mapped to exec current file in right tmux pane
 export ZPWR_MAP_C_V_VIM_NORMAL=false
 # the marker found color in bat output into fzf from ag search ANSI codes
@@ -146,7 +146,7 @@ export ZPWR_OS_TYPE="$(uname -s | tr A-Z a-z)"
 # plugin framework
 export ZPWR_PLUGIN_MANAGER=zinit
 # uses the zprof function to profile startup
-export ZPWR_PROFILING=false
+test -z "$ZPWR_PROFILING" && export ZPWR_PROFILING=false
 # set to POWERLEVEL to use the powerlevel10k prompt
 export ZPWR_PROMPT=powerlevel10k
 # pssh timeout
@@ -193,7 +193,11 @@ export ZPWR_ZDHARMA="zdharma-continuum"
 export ZPWR_THUMBS_REGEX='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
 ((?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,})(?::.*)?'
 # store tty for faster prompt
-export ZPWR_TTY=$(tty)
+if [[ -n "$ZSH_VERSION" && -n "$TTY" ]]; then
+    export ZPWR_TTY=$TTY
+else
+    export ZPWR_TTY=$(tty)
+fi
 
 # set to false if this file is sourced during remote execution with no ZPWR env
 test -z "$ZPWR_REMOTE" && export ZPWR_REMOTE=false

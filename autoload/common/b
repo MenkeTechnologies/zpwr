@@ -10,8 +10,12 @@ function b(){
     local cmd sleepTime
 
     if [[ $1 == -s ]]; then
-        sleepTime=$2
-        shift 2
+        if (( $# >= 2 )); then
+            sleepTime=$2
+            shift 2
+        else
+            shift
+        fi
     fi
 
     for cmd; do

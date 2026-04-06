@@ -347,7 +347,7 @@ function cargoinstall(){
     bash rustupinstall.sh >> "$LOGFILE_CARGO_YCM" 2>&1 &
     CARGO_PID=$!
     echo $CARGO_PID
-    zpwrPrettyPrintBox "Installing rustup for exa, fd and bat in background @ $CARGO_PID"
+    zpwrPrettyPrintBox "Installing rustup for eza, fd and bat in background @ $CARGO_PID"
 }
 #}}}***********************************************************
 
@@ -724,10 +724,6 @@ fi
 #**************************************************************
 if [[ $justConfig != true ]]; then
     zpwrPrettyPrintBox "Installing IFTOP-color by MenkeTechnologies"
-
-    zpwrGoInstallerDir
-    zpwrFileMustExist iftop_install.sh
-    source iftop_install.sh
 
     if ! zpwrCommandExists grc; then
         zpwrGoInstallerOutputDir

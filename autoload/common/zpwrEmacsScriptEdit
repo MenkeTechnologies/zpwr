@@ -3,7 +3,7 @@
 function zpwrEmacsScriptEdit(){
 
     if ! zpwrExists emacs; then
-        logErr "emacs must exist"
+        zpwrLogConsoleErr "emacs must exist"
         return 1
     fi
 
@@ -13,7 +13,10 @@ function zpwrEmacsScriptEdit(){
     fi
     BUFFER="$ZPWR_EMACS_CLIENT $BUFFER"
     zpwrLogDebug "builtin cd $ZPWR_SCRIPTS"
-    eval "builtin cd $ZPWR_SCRIPTS"
+    builtin cd "$ZPWR_SCRIPTS" || {
+        zpwrLogConsoleErr "cannot cd to $ZPWR_SCRIPTS"
+        return 1
+    }
 
     BUFFER="$BUFFER; zpwrClearList; zpwrIsGitDir && git diff HEAD"
     zpwrLogDebug "$BUFFER"

@@ -7,7 +7,7 @@
 ```
  _______ _______ _  _  _ ______
 |____   |_____  | |  \| |_____/
-    /  / |_____] |_|\_| |    \_  v8.0
+    /  / |_____] |_|\_| |    \_  v48.7.2
 >>> JACK INTO THE GRID <<<
 ```
 
@@ -46,10 +46,33 @@ If your terminal isn't glowing, you're not running ZPWR.
 - [Environment Variables](#environment-variables----system-tuning-parameters) -- System Tuning
 - [Test Suite](#diagnostics) -- Diagnostics
 - [Shell Startup Speed](#boot-time----shell-startup-speed) -- Boot Time
+- [Startup Benchmark](#startup-benchmark----zpwr-bench) -- zpwr bench
+- [Environment Snapshots](#environment-snapshots----zpwr-snapshot--zpwr-restore) -- zpwr snapshot / zpwr restore
+- [Live Dashboard](#live-dashboard----zpwr-top) -- zpwr top
+- [Health Check](#health-check----zpwr-doctor) -- zpwr doctor
+- [Flame Chart](#flame-chart----zpwr-flame) -- zpwr flame
+- [Startup Profile](#startup-profile----zpwr-startup) -- zpwr startup
+- [Shell Lint](#shell-lint----zpwr-lint) -- zpwr lint
+- [Listening Ports](#listening-ports----zpwr-ports) -- zpwr ports
+- [Stale File Finder](#stale-file-finder----zpwr-stale) -- zpwr stale
+- [Path Audit](#path-audit----zpwr-pathaudit) -- zpwr pathaudit
+- [Git Who](#git-who----zpwr-gitwho) -- zpwr gitwho
+- [History Timeline](#history-timeline----zpwr-timeline) -- zpwr timeline
+- [Alias Analytics](#alias-analytics----zpwr-aliasrank) -- zpwr aliasrank
+- [Function Rank](#function-rank----zpwr-funcrank) -- zpwr funcrank
+- [File Watcher](#file-watcher----zpwr-watch) -- zpwr watch
+- [Command Replay](#command-replay----zpwr-replay) -- zpwr replay
+- [Command Trace](#command-trace----zpwr-trace) -- zpwr trace
+- [Function Dependencies](#function-dependencies----zpwr-deps) -- zpwr deps
+- [Colorized Log Viewer](#colorized-log-viewer----zpwr-taillog) -- zpwr taillog
+- [Resolve](#resolve----zpwr-resolve) -- zpwr resolve
+- [Fortune](#fortune----zpwr-fortune) -- zpwr fortune
+- [Matrix](#matrix----zpwr-matrix) -- zpwr matrix
+- [The ZPWR Encyclopedia](#the-zpwr-encyclopedia----zpwr-wizard) -- zpwr wizard
 - [Contributing](#contributing----join-the-grid) -- Join The Grid
 - [Warning](#warnings----read-before-you-modify) -- Read Before Modifying
 - [MacbookPro Screenshots](#running-on-a-macbookpro)
-- [RasberryPi Screenshots](#running-on-the-raspberry-pi-3)
+- [Raspberry Pi Screenshots](#running-on-the-raspberry-pi-3)
 - [Rock64 Screenshots](#running-on-the-rock64)
 - [KeyBindings](#neural-mappings----keybindings-generated-with-source-keybindingstoreadmezsh--readmemd) -- Neural Mappings
 - [Tmux Keybindings](#tmux-keybindings-tmux-lsk)
@@ -98,10 +121,10 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 ## ZPWR Augmentations
 > `[ SYSTEM SPECS // ACTIVE MODULES ]`
 
-- 435+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
+- 506+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
-- 855+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
-- 16k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
+- 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
+- 17k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
 - 170+ bash, perl, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
@@ -178,7 +201,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - systemd service, learn.service, that runs learning collection API
 - restart function that launches poll.service and learn by enabling and starting in systemd
 - 3k+ line README -- you are here, deep in the docs
-- 134k+ LOC -- hand-forged in the neon glow of late-night terminals
+- 172k+ LOC -- hand-forged in the neon glow of late-night terminals
 
 
 ## ZPWR Firmware Stack
@@ -188,7 +211,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - perl
 - bash (4.0+, 3.2 not supported)
 - zinit with 65+ plugins of which 34+ are custom
-- forked powerlevel10k zsh prompt with ~dirs
+- upstream powerlevel10k zsh prompt with ~dirs via cached hash dirs and prompt_dir override
 - youcompleteme
 - ultisnips
 - supertab
@@ -196,13 +219,14 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - vundle
 - iftoprs
 - temprs
+- lsofrs
 - storageshower
 - lsofng
 - htop
 - ccze
 - rust/cargo
 - rustup
-- exa
+- eza
 - bat
 - fd-find
 - thumbs
@@ -505,7 +529,7 @@ export ZPWR_EDITOR_TO_VIM='true'
 export ZPWR_EMACS='command emacs -nw'
 # the emacs client command
 export ZPWR_EMACS_CLIENT='emacsclient -c -nw -a ""'
-# exa command invoked from zpwrClearList shows extended attributes
+# eza command invoked from zpwrClearList shows extended attributes
 export ZPWR_EXA_EXTENDED=true
 # enable all expansion
 export ZPWR_EXPAND=true
@@ -608,8 +632,8 @@ export ZPWR_ZDHARMA="zdharma-continuum"
 # regex for tmux thumbs
 export ZPWR_THUMBS_REGEX='^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$
 ((?:[a-z0-9]+(?:-[a-z0-9]+)*\.)+[a-z]{2,})(?::.*)?'
-# store tty for faster prompt
-export ZPWR_TTY=$(tty)
+# store tty for prompt, set from zsh $TTY after p10k finalize
+export ZPWR_TTY=$TTY
 ```
 
 ```sh
@@ -685,14 +709,14 @@ zpwrEvalIfNeeded ZPWR_LOCAL_TEMP "$ZPWR_LOCAL_TEMP" "$ZPWR_LOCAL/.temp" "$ZPWR_L
 zpwrEvalIfNeeded ZPWR_LOCK_FILE "$ZPWR_LOCK_FILE" "$ZPWR_LOCAL/.lock" "$ZPWR_LOCAL"
 # cache file for all zpwr env lookups
 zpwrEvalIfNeeded ZPWR_LOCAL_ENV "$ZPWR_LOCAL_ENV" "$ZPWR_LOCAL/zpwrEnv" "$ZPWR_LOCAL"
-# forked powerlevel10k config file for PROMPT
+# powerlevel10k config file for PROMPT
 zpwrEvalIfNeeded ZPWR_PROMPT_FILE "$ZPWR_PROMPT_FILE" "$ZPWR_ENV/.p10k.zsh" "$ZPWR_ENV"
 # the location of associated interpreted scripts
 zpwrEvalIfNeeded ZPWR_SCRIPTS "$ZPWR_SCRIPTS" "$ZPWR/scripts" "$ZPWR"
 # the location of macOS only associated interpreted scripts
 zpwrEvalIfNeeded ZPWR_SCRIPTS_MAC "$ZPWR_SCRIPTS_MAC" "$ZPWR_SCRIPTS/macOnly" "$ZPWR_SCRIPTS"
 # the location of zpwr verbs setup script
-zpwrEvalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_SCRIPTS/zpwr.zsh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_VERBS_FILE "$ZPWR_VERBS_FILE" "$ZPWR_ENV/zpwr.zsh" "$ZPWR_ENV"
 # the location of zpwr lib file
 zpwrEvalIfNeeded ZPWR_LIB "$ZPWR_LIB" "$ZPWR_SCRIPTS/lib.sh" "$ZPWR_SCRIPTS"
 # the location of zpwr init file
@@ -755,6 +779,12 @@ zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GI
 ```
 
 ## Diagnostics
+The test suite contains thousands of [zunit](https://github.com/zunit-zsh/zunit) tests across `tests/*.zsh` covering autoload function existence, type resolution, whence/which lookups, function body validation, fpath integrity, source syntax, script readability, shebang detection, verb callability, environment variable isolation, and behavioral checks for `scripts/lib.sh` helpers (required-argument validation, usage errors, and bash `zpwrExists` multi-argument parity with zsh).
+
+`zpwrCommandExists` tests are limited to commands present on the Ubuntu runner base image or installed by `.github/workflows/ci.yml`; they do not assume optional packages (for example `lsof`, `jq`, `openssl`, `sudo`, pagers, or `file`/`strings` from extra packages) unless those packages are added to that workflow.
+
+All ZPWR_* environment variables are unset before each test run to prevent user env from leaking into test results.
+
 You can run zpwr unit tests via `zpwr test` and include plugin tests with `zpwr testall`.
 
 There is also the alias `tru` (tests run) to run the tests.
@@ -767,10 +797,311 @@ zpwrExists zunit && {
 ## Boot Time -- Shell Startup Speed
 Running `zpwr recompile` will zrecompile all zpwr configs and all autoloaded functions and compsys completions in fpath. `zpwr refreshzwc` will remove old .zwc files before zrecompile.  This will maximize startup and running speed -- a tighter boot sequence.
 
-With Zinit Turbo mode, despite the number of plugins and completions, startup usually takes < 1 second on faster machines (.15 to .2 seconds on M1 Max) but up to 2-10 seconds on slower rigs such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
+ZPWR uses Powerlevel10k instant prompt to render a cached prompt in under 10ms -- well below the 100ms human perceptibility threshold.  Named directories (`hash -d`) are cached to `$ZPWR_LOCAL/zpwr-hash-dirs.zsh` so the instant prompt resolves paths like `~ZPWR` without sourcing the full environment first.  The cache is regenerated each session by `zpwrBindDirs`.  The remaining shell initialization (env vars, aliases, autoloads, zinit plugin declarations) completes behind the visible prompt.  Turbo-deferred plugins (syntax highlighting, autosuggestions, completions) load asynchronously after the prompt is interactive.  The banner is automatically suppressed when instant prompt is active to avoid fd conflicts.  Run `zpwr environmentcounts` to see both prompt time and total startup time.
+
+External command forks in the startup path have been systematically replaced with zsh builtins: `${commands[zsh]}` instead of `$(which zsh)`, `zf_ln` from `zsh/files` instead of `ln` for completion symlinks, `$TTY` instead of `$(tty)`, `: >|` instead of `touch` for empty file creation, and `[[ pattern ]]` instead of `echo | grep` for PATH checks.  These changes eliminate ~35ms of fork overhead per interactive shell startup.
+
+With Zinit Turbo mode, despite the number of plugins and completions, total initialization usually takes < 1 second on faster machines (.15 to .4 seconds on M1 Max) but up to 2-10 seconds on slower rigs such as WSL.  Zinit runs compinit in the background after startup and you will experience a brief lockup (unnoticeable if `zpwr regenzsh` and `zpwr recompile` have run to create .zcompdump.zwc).  This variable controls the delay between prompt and compinit.
 ```sh
 export ZPWR_ZINIT_COMPINIT_DELAY=0
 ```
+## Startup Benchmark -- zpwr bench
+`zpwr bench [N]` runs N shell startups (default 10) and reports detailed performance metrics with a cyberpunk-styled output.  It reports system info, environment counts (functions, completions, aliases, plugins), per-run timing with a progress bar, percentile statistics (avg, p50, p99, min, max, spread), a phase breakdown showing time spent in each startup stage (instant prompt, env+aliases, plugin declarations, compsys, options+fzf), baseline comparison with delta percentage, and a persistent run history.  Save a baseline after optimizing and future runs will show whether startup got faster or slower.
+
+```sh
+zpwr bench -h      # cyberpunk help
+zpwr bench 5       # run 5 iterations
+zpwr bench         # default 10 iterations
+zpwr bench 20      # 20 iterations for stable p99
+```
+
+Baselines and history are stored in `$ZPWR_LOCAL/zpwr-bench-baseline.txt` and `$ZPWR_LOCAL/zpwr-bench-history.txt`.
+
+## Environment Snapshots -- zpwr snapshot / zpwr restore
+`zpwr snapshot [name]` captures the full terminal environment into a portable snapshot stored in `$ZPWR_LOCAL/snapshots/`.  Each snapshot captures: named directories (`hash -d`), aliases (regular, global, suffix), environment variables, ZPWR_VARS, shell history, directory stack, git repo status, tmux sessions/windows/panes with tmux-resurrect integration, and vim session files.
+
+```sh
+zpwr snapshot -h                    # cyberpunk help
+zpwr snapshot myproject             # capture with custom name
+zpwr snapshot                       # capture with timestamp name
+zpwr restore -h                     # cyberpunk help
+zpwr restore                        # list all snapshots
+zpwr restore myproject              # restore everything
+zpwr restore myproject aliases env  # restore only specific components
+```
+
+Available restore components: `hash`, `aliases`, `env`, `tmux`, `vim`, `history`, `dirs`.  Tmux restore stages the resurrect file -- press `prefix+Ctrl-r` to apply.  History is merged rather than overwritten.
+
+## Live Dashboard -- zpwr top
+`zpwr top [interval]` displays a live-updating dashboard of shell resource usage.  Shows memory (RSS with bar graph, virtual memory), history size, child processes, jobs, zle widgets, hooks, shell objects (functions, completions, aliases, commands, builtins, parameters, modules) with delta tracking between refreshes, loaded zsh modules, paths, git status, tmux session counts, top 5 largest functions with size bars, and top 5 longest PATH entries.  Includes sparkline graphs: startup time history (last 40 shell starts, color-coded green/yellow/red with min/max/avg stats) and commit velocity (commits per day over last 30 days).  Startup times are automatically logged to `$ZPWR_LOCAL/startup_history.log` on each shell init.  Runs in an alternate screen buffer -- press `q` to quit cleanly.
+
+```sh
+zpwr top -h    # cyberpunk help
+zpwr top       # refresh every 2s (default)
+zpwr top 5     # refresh every 5s
+zpwr top 1     # fast refresh
+```
+
+## Tmux Layout Save/Load -- zpwr tmuxsave / zpwr tmuxload
+`zpwr tmuxsave [name]` captures the current tmux session layout — windows, pane splits, layout geometry, working directories, and window names — into a self-contained zsh script in `$ZPWR_LOCAL/layouts/`.  The generated script recreates the exact layout via `tmux new-session`, `split-window`, and `select-layout` with the original geometry string, then `cd`s each pane to its saved directory.  `zpwr tmuxload [name]` sources the script to restore the layout, with optional fzf picker when no name is given.  Also available as `zpwr layoutsave` and `zpwr layoutload`.
+
+```sh
+zpwr tmuxsave              # save with timestamp name
+zpwr tmuxsave dev          # save as "dev"
+zpwr tmuxsave --list       # list saved layouts
+zpwr tmuxsave --delete dev # delete "dev" layout
+zpwr tmuxload dev          # restore "dev" layout
+zpwr tmuxload dev mywork   # restore as session "mywork"
+zpwr tmuxload              # fzf picker (if fzf available)
+```
+
+## Health Check -- zpwr doctor
+`zpwr doctor` scans the environment for common issues and reports with pass/warn/fail indicators.  Checks for: stale `.zwc` compiled files, zcompdump freshness, duplicate and missing PATH/FPATH entries, broken symlinks, invalid named directories, p10k named dir pollution, missing dependencies (git, eza, fzf, tmux, perl, python3), zinit installation, history file and backups, and config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh).  Reports a signal bar and summary with pass/warning/error counts.
+
+```sh
+zpwr doctor -h  # cyberpunk help
+zpwr doctor     # run full diagnostic
+```
+
+## Flame Chart -- zpwr flame
+`zpwr flame [N]` launches an instrumented shell with `zprof`, parses the profiling data, and renders an ASCII flame chart of the top N functions by total time.  Bars are heat-colored (red = hot, yellow = warm, green = cool, cyan = cold).  Includes a summary with the hottest function, total profiled count, and contextual optimization tips based on which function dominates startup.
+
+```sh
+zpwr flame -h    # cyberpunk help with heat scale legend
+zpwr flame       # top 20 functions (default)
+zpwr flame 40    # top 40 functions
+zpwr flame 5     # quick view of hottest 5
+```
+
+## Startup Profile -- zpwr startup
+`zpwr startup [N]` launches a fresh zsh with `zprof` enabled and displays a colorized breakdown of function call times.  Unlike `zpwr bench` (which measures total wall time over multiple iterations), `zpwr startup` gives a single-shot, per-function profile showing exactly where time is spent during initialization.  Functions are color-coded by self-percentage: red (>=10%), yellow (>=3%), cyan (>=1%), dim (<1%).  Includes the call tree section when available.
+
+```sh
+zpwr startup -h        # cyberpunk help
+zpwr startup           # top 30 functions (default)
+zpwr startup 50        # top 50 functions
+zpwr startup 100       # full breakdown
+```
+
+## Shell Lint -- zpwr lint
+`zpwr lint [OPTIONS]` runs `zsh -n` syntax checking on all autoload functions and env files, and `shellcheck` on all shell scripts in `scripts/` and `install/`.  Shellcheck runs with zsh-incompatible warnings suppressed (SC1071, SC1090, SC1091, SC2034, SC2139, SC2148, SC2154, SC2206, SC2296).  Reports per-file pass/fail with a summary of errors and warnings.
+
+```sh
+zpwr lint -h           # cyberpunk help
+zpwr lint              # run all checks
+zpwr lint -z           # zsh -n syntax check only
+zpwr lint -s           # shellcheck only
+```
+
+## Listening Ports -- zpwr ports
+`zpwr ports [OPTIONS] [PORT]` shows all listening TCP ports with process name, PID, user, port number, and bind address.  Ports are color-coded: red for privileged (<1024), yellow for common ranges (<10000), green for high ports.  Supports filtering by port number and killing the process on a specific port.
+
+```sh
+zpwr ports -h          # cyberpunk help
+zpwr ports             # show all listening ports
+zpwr ports 8080        # filter to port 8080
+zpwr ports -k 3000     # kill whatever is on port 3000
+```
+
+## Stale File Finder -- zpwr stale
+`zpwr stale [OPTIONS]` scans the zpwr directory tree for stale `.zwc` compiled files (source newer than compiled), orphan `.zwc` files (source deleted), broken symlinks, and empty cache files.  Use `--fix` to delete all stale artifacts in one pass.
+
+```sh
+zpwr stale -h          # cyberpunk help
+zpwr stale             # scan and report
+zpwr stale -f          # delete all stale files
+```
+
+## Path Audit -- zpwr pathaudit
+`zpwr pathaudit [OPTIONS]` audits `PATH`, `FPATH`, and `MANPATH` for duplicate entries, missing directories, and world-writable directories (security risk).  Reports per-array with totals.  Use `--verbose` to see every entry including healthy ones.
+
+```sh
+zpwr pathaudit -h      # cyberpunk help
+zpwr pathaudit         # audit all three arrays
+zpwr pathaudit -v      # verbose: show all entries
+```
+
+## Git Who -- zpwr gitwho
+`zpwr gitwho [N]` aggregates `git shortlog -sn` across all cached git repos (`$ZPWR_ALL_GIT_DIRS`).  Shows each contributor's total commits and number of repos, ranked by commit count with bar charts.  Results are cached in `$ZPWR_LOCAL/zpwrGitwho.txt` (pre-sorted) and auto-rebuild when the repo cache changes.  Use `--reset` to force a rebuild.  Requires the git repo cache — run `zpwr regengitrepocache` first.
+
+```sh
+zpwr gitwho -h         # cyberpunk help
+zpwr gitwho            # top 20 authors across all repos
+zpwr gitwho 50         # top 50
+zpwr gitwho -a         # show everyone
+zpwr gitwho -r         # force cache rebuild
+```
+
+## History Timeline -- zpwr timeline
+`zpwr timeline [DATE]` renders a visual timeline of shell history grouped by hour.  Commands are color-coded by type (git=green, editors=cyan, zpwr=magenta, destructive=red, navigation=yellow).  Directory changes are highlighted inline.  Includes an activity heatmap showing commands-per-hour with bars.
+
+```sh
+zpwr timeline -h              # cyberpunk help
+zpwr timeline                 # today's activity
+zpwr timeline 2026-04-01      # specific date
+zpwr timeline -n 500          # last 500 history entries
+```
+
+## Alias Analytics -- zpwr aliasrank
+`zpwr aliasrank [N]` mines shell history to rank alias usage.  Since `zsh-expand` expands aliases before they hit history, aliasrank matches expanded commands against alias definitions (reverse lookup).  Shows the top N most-used aliases with frequency bars, lists never-matched aliases (candidates for removal), and identifies frequently typed commands that have no alias (candidates for creation).  Results are cached in `$ZPWR_LOCAL/` and rebuild automatically when history grows by 1000+ lines.  Use `--reset` to force a cache rebuild.
+
+```sh
+zpwr aliasrank -h       # cyberpunk help
+zpwr aliasrank          # top 20 (default)
+zpwr aliasrank 50       # top 50
+zpwr aliasrank --reset  # clear cache and rebuild
+```
+
+## Function Rank -- zpwr funcrank
+`zpwr funcrank [N]` ranks functions and zpwr verbs by history usage.  Shows top N most-called functions, top N most-used zpwr verbs (parsed from `zpwr <verb>` history entries), lists never-used zpwr verbs (candidates for discovery), and lists unused autoloaded functions that were never called directly.  Shares the same history cache as aliasrank.
+
+```sh
+zpwr funcrank -h       # cyberpunk help
+zpwr funcrank          # top 20 (default)
+zpwr funcrank 40       # top 40
+zpwr funcrank --reset  # clear cache and rebuild
+```
+
+## File Watcher -- zpwr watch
+`zpwr watch <glob> <command>` watches files for changes using `fswatch` (macOS) or `inotifywait` (Linux) and runs a command on each change.  Shows trigger count, timestamp, changed filename, and execution time.
+
+```sh
+zpwr watch -h                          # cyberpunk help
+zpwr watch '*.zsh' 'zpwr recompile'   # recompile on zsh change
+zpwr watch 'src/**/*.ts' 'npm run build'
+zpwr watch 'Makefile' 'make'
+zpwr watch '.' 'echo changed'         # watch entire directory
+```
+
+## Command Replay -- zpwr replay
+`zpwr replay [N] [mode]` replays the last N commands from history.  Three modes: `preview` (default) lists commands without executing, `exec` runs them in the current shell with per-command timing, and `tmux` opens a new tmux split pane and plays them with a delay between each.
+
+```sh
+zpwr replay -h         # cyberpunk help with mode docs
+zpwr replay 10         # preview last 10 commands
+zpwr replay 20         # preview last 20
+zpwr replay 5 exec     # execute last 5 with timing
+zpwr replay 10 tmux    # replay in new tmux pane
+```
+
+All new commands support `-h`/`--help` with cyberpunk-styled output matching the temprs aesthetic -- ASCII banners, signal bars, `//` separators, and full option documentation.
+
+## Command Trace -- zpwr trace
+`zpwr trace [OPTIONS] <command>` runs a command with full instrumentation.  On Linux, it captures syscall counts (strace), C library call counts (ltrace), and resource stats (/usr/bin/time -v).  On macOS, SIP restricts dtrace so only resource stats from `/usr/bin/time -l` are available (context switches, page faults, block I/O, peak RSS, signals, IPC messages).  All platforms show wall/user/sys time, exit code, memory delta, child process count, and a performance signal bar.
+
+```sh
+zpwr trace -h              # cyberpunk help with platform notes
+zpwr trace id              # full trace (strace + ltrace on Linux)
+zpwr trace -s git status   # syscalls only (no ltrace)
+zpwr trace -l npm install  # C library calls only (no strace)
+zpwr trace -q rm -rf tmp   # quick mode: timing only, runs once
+zpwr trace -a ls -la       # both strace + ltrace (default)
+```
+
+On Linux the command re-runs for strace/ltrace stats (2-3 executions total).  Use `-q` for destructive commands to run once with timing only.
+
+## Function Dependencies -- zpwr deps
+`zpwr deps [OPTIONS] [FUNCTION]` analyzes which zpwr functions call which other functions.  Scans all autoload directories (`common`, `darwin`, `linux`, `comp_utils`) and `scripts/lib.sh` for cross-references.  Functions with names of 2 characters or fewer are excluded.
+
+```sh
+zpwr deps -h                       # cyberpunk help
+zpwr deps                          # summary: top 10 most deps + most depended on
+zpwr deps zpwrClearList             # what does zpwrClearList call?
+zpwr deps -r zpwrPrettyPrint        # who calls zpwrPrettyPrint?
+zpwr deps --orphans                # functions not called by any other function
+zpwr deps --dot > graph.dot        # graphviz export with cyberpunk colors
+```
+
+The summary shows outgoing dependency counts (which functions call the most others) and incoming dependency counts (which functions are most depended on), with bar charts and totals.
+
+## Colorized Log Viewer -- zpwr taillog
+`zpwr taillog [OPTIONS] [LOGFILE]` tails the zpwr logfile with ccze colorization.  Timestamps, log levels, process names, file paths, and keywords are syntax-highlighted in the style of system log viewers.  Falls back to plain `nl` output if ccze is not installed.
+
+```sh
+zpwr taillog -h            # cyberpunk help
+zpwr taillog               # follow log with ccze colors (last 100 lines)
+zpwr taillog -n 50         # last 50 lines then follow
+zpwr taillog -f            # colorize without following
+zpwr taillog -r            # plain output with line numbers
+zpwr taillog /var/log/system.log  # custom logfile
+```
+
+Requires `ccze` (`brew install ccze` or `apt install ccze`).
+
+## Resolve -- zpwr resolve
+`zpwr resolve <command>` traces a command through its full resolution chain: alias → function → builtin → external binary.  Follows alias expansion recursively (stripping `command`/`builtin`/`noglob` prefixes), shows function source file paths and line counts, detects zpwr verb mappings, follows symlink chains for binaries, and shows `file` type info.  Handles multiple commands in one call.  Also invokable as `zpwr which` or `zpwr whatis`.
+
+```sh
+zpwr resolve -h            # cyberpunk help
+zpwr resolve ll            # trace ll through aliases to binary
+zpwr resolve ls cd git     # trace multiple commands
+zpwr resolve zpwr          # trace the zpwr dispatcher
+zpwr resolve -a grep       # show all type -a matches
+zpwr which vim             # alias for resolve
+```
+
+## Fortune -- zpwr fortune
+`zpwr fortune` displays a random cyberpunk-themed fortune cookie rendered in a random figlet font with neon colors.  40 curated quotes from Torvalds, Kernighan, Hopper, Dijkstra, and original ZPWR/MenkeTechnologies wisdom.  Picks a keyword from the quote for figlet rendering, prints the full quote centered below.  Also invokable as `zpwr wisdom` or `zpwr quote`.
+
+```sh
+zpwr fortune -h            # cyberpunk help
+zpwr fortune               # random quote in random figlet font
+zpwr fortune -p            # plain text mode with box frame
+zpwr fortune -f doom       # force specific figlet font
+zpwr wisdom                # alias for fortune
+zpwr quote                 # alias for fortune
+```
+
+## Matrix -- zpwr matrix
+`zpwr matrix` is an animated cyberpunk hacker story told in ASCII art, figlet banners, and CRT effects, followed by an infinite ecosystem rain screensaver.  The default story is a four-act narrative about discovering zpwr; `--extended` unlocks the full eight-act saga with six named characters (Null Pointer, Segfault, Chmod777, DevNull, Chad Electron, The Kernel), a heist to liberate the tab key patent, a training montage to build the ultimate .zshrc, and a force push to every machine on Earth.  Your live ecosystem stats are woven throughout.  Unique to zpwr — instead of random characters, it rains your actual verb names, function names, aliases, env vars, and git repo names, color-coded by type.
+
+FX include: CRT scanline sweeps, VHS tracking distortion, pixel corruption, screen tears, screen shake, terminal bells, fake SSH sessions with your live manifest, encrypted transmission decryption with glitchy progress bars, figlet chaos banners in random cyberpunk fonts (doom, slant, speed, cyberlarge, cybermedium), dissolve effects, a scrolling ticker with stats, pulse events with ecosystem facts, and a persistent HUD with live counters.  `--battle` launches a two-player typing battle over tmux: Player 1 (Null Pointer) vs Player 2 (Chad Electron) race to type zpwr commands correctly, dealing damage based on command length with HP bars, taunts, and a winner-takes-all endgame.  Also invokable as `zpwr rain` or `zpwr screensaver`.
+
+```sh
+zpwr matrix -h              # cyberpunk help with act/character list
+zpwr matrix                 # 4-act story + rain
+zpwr matrix --extended      # full 8-act saga + rain
+zpwr matrix -r              # skip story, go straight to rain
+zpwr matrix -s 7            # faster speed (1-9)
+zpwr matrix -a 5 --extended # jump to act 5
+zpwr matrix --turbo         # skip pauses (speed run)
+zpwr matrix --noir          # monochrome green mode
+zpwr matrix --vhs           # VHS tracking distortion
+zpwr matrix --crt           # CRT scanline overlay
+zpwr matrix --glitch        # extra corruption FX
+zpwr matrix --sound         # terminal bell on events
+zpwr matrix --no-fx         # disable all visual FX
+zpwr matrix -c 10           # chaos level 1-10
+zpwr matrix --cast          # show character bios
+zpwr matrix --stats         # ecosystem stats and exit
+zpwr matrix --credits       # end credits roll
+zpwr matrix --battle        # 2-player tmux typing battle
+zpwr rain                   # alias for matrix
+zpwr screensaver            # alias for matrix
+```
+
+## The ZPWR Encyclopedia -- zpwr wizard
+`zpwr wizard` launches an interactive encyclopedia covering every zpwr feature, verb, subsystem, tool integration, and keybinding reference.  Also invokable as `zpwr manual`, `zpwr tutorial`, or `zpwr docs`.  Vim-style navigation with chapter jumping, search, random page, and a full keybinding help screen.
+
+```sh
+zpwr wizard -h             # cyberpunk help with keybinding reference
+zpwr wizard                # start from page 1
+zpwr wizard 42             # jump to page 42
+zpwr wizard --toc          # table of contents
+zpwr wizard --search git   # find pages about git
+zpwr wizard --list         # list all pages
+zpwr manual                # same as wizard
+zpwr tutorial              # same as wizard
+zpwr docs                  # same as wizard
+zpwr study                 # split-pane: book left, shell right (new tmux session)
+zpwr study 42              # start study session at page 42
+zpwr study -v              # vertical split (book top, shell bottom)
+```
+
+Navigation: `j`/`k` next/prev, `d`/`u` ±5 pages, `]`/`[` next/prev chapter, `g`/`G` first/last, `t` table of contents, `/` search, `:` goto page, `r` random, `?` help.  `zpwr study` opens a dedicated tmux session with the encyclopedia on the left and a live shell on the right for hands-on practice.  43 chapters covering: getting started, navigation, git (58 verbs), editors (57 verbs), search, performance profiling, diagnostics, environment, cleanup, build system, monitoring, utilities, tmux, networking, logging, introspection, batch operations, forgit, environment variables, creative tools, the complete verb reference, Powerlevel10k & instant prompt, Zinit & turbo loading, Zsh internals (autoloading, ZLE, hooks, parameter expansion, .zwc compilation), FZF architecture, Tmux deep dive (vim-tmux code execution, resurrect/continuum), Vim deep dive (80 plugins, sessions), temprs, lsofrs, eza, bat, fd-find, ripgrep, Neovim, Perl oneliners, zconvey, the 24-hour updater, cross-platform installer, test suite, colorization stack (grc, ccze, ponysay, lolcat, figlet), and a complete keybinding dump (tmux, zsh, vim).
+
+The PDF can be regenerated with `zpwr regenpdf` which runs `genEncyclopediaTex.py` and compiles with xelatex.  All documentation lives in `$ZPWR/docs/` — wizard pages, screenshots, LaTeX source, and the compiled PDF.
+
 ## Contributing -- Join The Grid
 Looking for operators to help with documentation, signal boosting, video tutorials, GIFs/screenshots in README and expanding the test suite. If you live in the terminal, you belong here.
 

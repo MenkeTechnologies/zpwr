@@ -2,7 +2,10 @@
 # vim: set ft=sh:
 function zpwrEmacsZpwr(){
 
-    builtin cd $ZPWR
+    builtin cd "$ZPWR" || {
+        zpwrLogConsoleErr "cannot cd to $ZPWR"
+        return 1
+    }
     ${=ZPWR_EMACS_CLIENT} .
     zpwrClearList
     zpwrIsGitDir && git diff HEAD

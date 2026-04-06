@@ -2,6 +2,8 @@
 # vim: set ft=sh:
 function zpwrBufferXtrace() {
 
+        local wasXtrace=false
+
         if [[ $ZPWR_TRACE == true ]]; then
             set -x
         fi
@@ -11,7 +13,7 @@ function zpwrBufferXtrace() {
         ZPWR_VARS[origL]="$LBUFFER"
         ZPWR_VARS[origR]="$RBUFFER"
 
-        local wasXtrace=false
+        wasXtrace=false
 
         if [[ $LBUFFER =~ '^(.*)((set|setopt)[[:space:]]+(-x|xtrace|-o xtrace)[[:space:]]*\;+[;[:space:]]*)+(.*)$' ]]; then
             LBUFFER="${match[1]}${match[5]}"

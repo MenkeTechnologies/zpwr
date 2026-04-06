@@ -48,6 +48,7 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 fi
 
 ins bat bat
+ins lsofrs lsofrs
 ins storageshower storageshower
 ins iftoprs iftoprs
 ins hyperfine hyperfine
@@ -55,7 +56,7 @@ ins diskus diskus
 ins vivid vivid
 ins hexyl hexyl
 ins fd-find fd
-ins exa exa
+ins eza eza
 ins ripgrep rg
 ins thumbs thumbs
 ins temprs tp
