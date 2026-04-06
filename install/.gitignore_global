@@ -1389,5 +1389,43 @@ htmldocs/
 
 #{{{                    MARK: ai
 #**************************************************************
+# Claude Code
 .claude/
+CLAUDE.md
+CLAUDE.local.md
+
+# Cursor
+.cursor/
+.cursorignore
+.cursorrules
+.cursorrc
+
+# OpenCode / Crush
+OPENCODE.md
+opencode.md
+OPENCODE.local.md
+.opencode.json
+
+# GitHub Copilot
+.github/copilot-instructions.md
+
+# Aider
+.aider*
+.aiderignore
+
+# Codeium / Windsurf
+.codeium/
+.windsurf/
+
+# Continue.dev
+.continue/
+.continuerc.json
+
+# Cody (Sourcegraph)
+.cody/
+
+# Generic AI
+.ai/
+.llm/
+.prompt
 #}}}***********************************************************

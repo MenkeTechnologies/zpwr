@@ -8,7 +8,7 @@ MenkeTechnologies/jhipster-oh-my-zsh-plugin
 MenkeTechnologies/kubectl-aliases
 MenkeTechnologies/revolver
 MenkeTechnologies/zconvey
-MenkeTechnologies/zpwrp10k
+romkatv/powerlevel10k
 MenkeTechnologies/zsh-better-npm-completion
 MenkeTechnologies/zsh-cargo-completion
 MenkeTechnologies/zsh-cpan-completion

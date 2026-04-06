@@ -1,0 +1,143 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrPathaudit(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██████╗  █████╗ ████████╗██╗  ██╗${N}"
+        print " ${C}██╔══██╗██╔══██╗╚══██╔══╝██║  ██║${N}"
+        print " ${M}██████╔╝███████║   ██║   ███████║${N}"
+        print " ${M}██╔═══╝ ██╔══██║   ██║   ██╔══██║${N}"
+        print " ${C}██║     ██║  ██║   ██║   ██║  ██║${N}"
+        print " ${C}╚═╝     ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}PATHAUDIT${N}"
+        _bb
+        print "  ${D}>> PATH AUDIT // ENVIRONMENT INTEGRITY <<${N}"
+        print ""
+        print "  Audit PATH, FPATH, and MANPATH for duplicates, missing dirs,"
+        print "  permission issues, and world-writable entries."
+        print ""
+        print "  ${B}USAGE:${N} zpwr pathaudit ${D}[OPTIONS]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-v, --verbose${N}                                    ${D}// Show all entries${N}"
+        print ""
+        return 0
+    fi
+
+    local verbose=false
+    [[ "$1" == "-v" || "$1" == "--verbose" ]] && verbose=true
+
+    printf "\n"
+    printf " ${C}██████╗  █████╗ ████████╗██╗  ██╗${N}\n"
+    printf " ${C}██╔══██╗██╔══██╗╚══██╔══╝██║  ██║${N}\n"
+    printf " ${M}██████╔╝███████║   ██║   ███████║${N}\n"
+    printf " ${M}██╔═══╝ ██╔══██║   ██║   ██╔══██║${N}\n"
+    printf " ${C}██║     ██║  ██║   ██║   ██║  ██║${N}\n"
+    printf " ${C}╚═╝     ╚═╝  ╚═╝   ╚═╝   ╚═╝  ╚═╝${N}\n"
+    _bt
+    printf -v _msg " ${G}AUDITING${N}  ${D}//${N} ${C}PATH FPATH MANPATH${N}  ${D}//${N} ${M}%s${N}" "$(date '+%H:%M:%S')"
+    _bx "$_msg"
+    _bb
+
+    local -i total_issues=0
+    local p
+
+    # audit a single path array
+    # args: $1=label $2=array_name
+    _pa_audit() {
+        local label="$1"
+        local -a entries
+        eval "entries=( \$$2 )"
+        local -i count=$#entries dupes=0 missing=0 writable=0 empty=0
+        local -A seen
+        local p perms
+
+        printf "\n  ${C}── %s (%d entries) ───────────────────────────────────${N}\n" "$label" $count
+
+        for p in $entries; do
+            # empty entry
+            if [[ -z "$p" ]]; then
+                (( empty++ ))
+                continue
+            fi
+
+            # duplicate
+            if (( ${+seen[$p]} )); then
+                (( dupes++ ))
+                printf "  ${Y}DUP${N}     %s\n" "$p"
+                (( total_issues++ ))
+                continue
+            fi
+            seen[$p]=1
+
+            # missing
+            if [[ ! -d "$p" ]]; then
+                (( missing++ ))
+                printf "  ${R}MISSING${N} %s\n" "$p"
+                (( total_issues++ ))
+                continue
+            fi
+
+            # world-writable: check other-write bit via octal permissions
+            perms=$(command stat -f '%Lp' "$p" 2>/dev/null || command stat -c '%a' "$p" 2>/dev/null)
+            if [[ -n "$perms" ]] && (( perms % 10 >= 2 && perms % 10 != 4 && perms % 10 != 5 )); then
+                (( writable++ ))
+                printf "  ${R}WRITABLE${N} %s ${D}(0%s)${N}\n" "$p" "$perms"
+                (( total_issues++ ))
+                continue
+            fi
+
+            # show entry in verbose mode
+            if [[ "$verbose" == true ]]; then
+                printf "  ${G}OK${N}      %s\n" "$p"
+            fi
+        done
+
+        if (( dupes == 0 && missing == 0 && writable == 0 && empty == 0 )); then
+            printf "  ${G}All %d entries valid${N}\n" $count
+        else
+            printf "  ${D}%d total: %d duplicates, %d missing, %d writable, %d empty${N}\n" \
+                $count $dupes $missing $writable $empty
+        fi
+    }
+
+    _pa_audit "PATH" path
+    _pa_audit "FPATH" fpath
+    _pa_audit "MANPATH" manpath
+
+    # ── SUMMARY ──────────────────────────────────────────────
+    printf "\n"
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n"
+
+    local status_color status_label
+    if (( total_issues == 0 )); then
+        status_color=$G
+        status_label="ALL CLEAN"
+    else
+        status_color=$Y
+        status_label="$total_issues ISSUES"
+    fi
+
+    printf "  ${B}${status_color}%s${N}  ${D}//${N}  ${C}%d PATH${N}  ${D}//${N}  ${C}%d FPATH${N}  ${D}//${N}  ${C}%d MANPATH${N}\n" \
+        "$status_label" $#path $#fpath $#manpath
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+
+    unfunction _pa_audit _bx _bt _bb 2>/dev/null
+    return $(( total_issues > 0 ? 1 : 0 ))
+}
+
+zpwrPathaudit "$@"

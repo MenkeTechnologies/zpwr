@@ -411,9 +411,9 @@
     assert "$output" contains fzf
 }
 
-@test 'ZPWR_EXA_COMMAND contains exa' {
+@test 'ZPWR_EXA_COMMAND contains eza' {
     run printf "$ZPWR_EXA_COMMAND"
-    assert "$output" contains exa
+    assert "$output" contains eza
 }
 
 @test 'ZPWR_ZDHARMA contains zdharma' {

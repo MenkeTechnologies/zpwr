@@ -1,0 +1,175 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTimeline(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+    builtin zmodload zsh/datetime
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}████████╗██╗███╗   ███╗███████╗██╗     ██╗███╗   ██╗███████╗${N}"
+        print " ${C}╚══██╔══╝██║████╗ ████║██╔════╝██║     ██║████╗  ██║██╔════╝${N}"
+        print " ${M}   ██║   ██║██╔████╔██║█████╗  ██║     ██║██╔██╗ ██║█████╗${N}"
+        print " ${M}   ██║   ██║██║╚██╔╝██║██╔══╝  ██║     ██║██║╚██╗██║██╔══╝${N}"
+        print " ${C}   ██║   ██║██║ ╚═╝ ██║███████╗███████╗██║██║ ╚████║███████╗${N}"
+        print " ${C}   ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}TIMELINE${N}"
+        _bb
+        print "  ${D}>> SHELL HISTORY TIMELINE // VISUAL REPLAY <<${N}"
+        print ""
+        print "  Visual timeline of shell history grouped by hour and directory."
+        print "  Shows what you did, when, and where."
+        print ""
+        print "  ${B}USAGE:${N} zpwr timeline ${D}[OPTIONS] [DATE]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-n, --lines N${N}                                    ${D}// Show last N entries (default: 200)${N}"
+        print "  ${C}DATE${N}                                             ${D}// Filter by date (YYYY-MM-DD)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr timeline${N}                                   ${D}// Today's activity${N}"
+        print "  ${C}zpwr timeline 2026-04-01${N}                        ${D}// Yesterday${N}"
+        print "  ${C}zpwr timeline -n 500${N}                            ${D}// Last 500 entries${N}"
+        print ""
+        return 0
+    fi
+
+    local -i max_lines=200
+    local date_filter=""
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -n|--lines) (( $# >= 2 )) && { max_lines=$2; shift 2; } || shift ;;
+            *) date_filter="$1"; shift ;;
+        esac
+    done
+
+    # default to today
+    [[ -z "$date_filter" ]] && date_filter=$(date '+%Y-%m-%d')
+
+    printf "\n"
+    printf " ${C}████████╗██╗███╗   ███╗███████╗██╗     ██╗███╗   ██╗███████╗${N}\n"
+    printf " ${C}╚══██╔══╝██║████╗ ████║██╔════╝██║     ██║████╗  ██║██╔════╝${N}\n"
+    printf " ${M}   ██║   ██║██╔████╔██║█████╗  ██║     ██║██╔██╗ ██║█████╗${N}\n"
+    printf " ${M}   ██║   ██║██║╚██╔╝██║██╔══╝  ██║     ██║██║╚██╗██║██╔══╝${N}\n"
+    printf " ${C}   ██║   ██║██║ ╚═╝ ██║███████╗███████╗██║██║ ╚████║███████╗${N}\n"
+    printf " ${C}   ╚═╝   ╚═╝╚═╝     ╚═╝╚══════╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝${N}\n"
+    _bt
+    printf -v _msg " ${G}TIMELINE${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}" "$date_filter" "$(date '+%H:%M:%S')"
+    _bx "$_msg"
+    _bb
+    printf "\n"
+
+    if [[ ! -f "$HISTFILE" ]]; then
+        printf "  ${R}No HISTFILE found${N}\n\n"
+        return 1
+    fi
+
+    # parse extended history format: ": timestamp:duration;command"
+    local -i count=0 total=0
+    local prev_hour="" prev_dir=""
+    local line timestamp cmd hour_str dir_part
+    local rest dt tm hm hour cmd_color
+
+    # hour buckets for activity bar
+    local -A hour_counts
+
+    fc -l -t '%Y-%m-%d %H:%M:%S' -$max_lines | while IFS= read -r line; do
+        # format: "  NUM  YYYY-MM-DD HH:MM:SS  command"
+        # strip leading event number
+        rest="${line#*[0-9]  }"
+        dt="${rest%% *}"
+        rest="${rest#* }"
+        tm="${rest%% *}"
+        rest="${rest#* }"
+        hm="${rest%% *}"
+        cmd="${rest#* }"
+
+        # skip if wrong date
+        [[ "$dt" != "$date_filter" ]] && continue
+
+        (( total++ ))
+        hour="${tm%%:*}"
+        hour_str="${hour}:00"
+        (( hour_counts[$hour_str]++ ))
+
+        # print hour separator
+        if [[ "$hour_str" != "$prev_hour" ]]; then
+            [[ -n "$prev_hour" ]] && printf "\n"
+            printf "  ${C}── %s ──────────────────────────────────────────────${N}\n" "$hour_str"
+            prev_hour="$hour_str"
+        fi
+
+        # detect directory from cd commands
+        if [[ "$cmd" == cd* || "$cmd" == z\ * || "$cmd" == zpwr\ cd* ]]; then
+            dir_part="${cmd#* }"
+            dir_part="${dir_part%% *}"
+            if [[ -n "$dir_part" && "$dir_part" != "$prev_dir" ]]; then
+                printf "  ${M}  📂 %s${N}\n" "$dir_part"
+                prev_dir="$dir_part"
+            fi
+        fi
+
+        # colorize by command type
+        cmd_color=$D
+        case "$cmd" in
+            git\ *|zpwr\ git*) cmd_color=$G ;;
+            vim\ *|nvim\ *|emacs\ *|zpwr\ vim*|zpwr\ emacs*) cmd_color=$C ;;
+            zpwr\ *) cmd_color=$M ;;
+            sudo\ *|rm\ *|kill\ *) cmd_color=$R ;;
+            cd\ *|z\ *|ls\ *) cmd_color=$Y ;;
+        esac
+
+        printf "  ${D}%s${N}  ${cmd_color}%s${N}\n" "$tm" "$cmd"
+        (( count++ ))
+    done
+
+    # activity heatmap
+    local -i max_hour=0 hi bar_len hc bi
+    local h bar hcolor
+    if (( total > 0 )); then
+        printf "\n  ${C}── ACTIVITY ────────────────────────────────────────────${N}\n"
+
+        max_hour=0
+        for h in ${(v)hour_counts}; do
+            (( h > max_hour )) && max_hour=$h
+        done
+        (( max_hour == 0 )) && max_hour=1
+
+        for (( hi=0; hi<=23; hi++ )); do
+            h=$(printf '%02d:00' $hi)
+            hc=${hour_counts[$h]:-0}
+            if (( hc > 0 )); then
+                bar_len=$(( hc * 30 / max_hour ))
+                (( bar_len == 0 )) && bar_len=1
+                bar=""
+                for (( bi=0; bi<bar_len; bi++ )); do
+                    bar+="█"
+                done
+                hcolor=$G
+                (( hc * 2 > max_hour )) && hcolor=$Y
+                (( hc == max_hour )) && hcolor=$R
+                printf "  ${D}%s${N} ${hcolor}%s${N} ${D}%d${N}\n" "$h" "$bar" $hc
+            fi
+        done
+    fi
+
+    printf "\n  ${C}══════════════════════════════════════════════════════════════════${N}\n"
+    printf "  ${G}%d commands${N}  ${D}//${N}  ${C}%s${N}  ${D}//${N}  ${M}%d hours active${N}\n" \
+        $total "$date_filter" ${#hour_counts}
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+    unfunction _bx _bt _bb 2>/dev/null
+}
+
+zpwrTimeline "$@"

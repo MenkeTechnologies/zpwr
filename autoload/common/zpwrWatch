@@ -1,0 +1,171 @@
+# -*- mode: sh -*-
+# g
+# vim: set ft=sh:
+function zpwrWatch(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+    builtin zmodload zsh/datetime
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██╗    ██╗ █████╗ ████████╗ ██████╗██╗  ██╗${N}"
+        print " ${C}██║    ██║██╔══██╗╚══██╔══╝██╔════╝██║  ██║${N}"
+        print " ${M}██║ █╗ ██║███████║   ██║   ██║     ███████║${N}"
+        print " ${M}██║███╗██║██╔══██║   ██║   ██║     ██╔══██║${N}"
+        print " ${C}╚███╔███╔╝██║  ██║   ██║   ╚██████╗██║  ██║${N}"
+        print " ${C} ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}WATCH${N}"
+        _bb
+        print "  ${D}>> FILE WATCHER // AUTO-RUN ON CHANGE <<${N}"
+        print ""
+        print ""
+        print "  Watch files for changes and auto-run a command."
+        print "  Uses fswatch (macOS) or inotifywait (Linux)."
+        print ""
+        print "  ${B}USAGE:${N} zpwr watch ${D}<GLOB> <COMMAND>${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}GLOB${N}                                             ${D}// File pattern to watch${N}"
+        print "  ${C}COMMAND${N}                                          ${D}// Command to run on change${N}"
+        print ""
+        print "  ${D}── CONTROLS ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}Ctrl-C${N}                                           ${D}// Stop watching${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr watch '*.zsh' 'zpwr recompile'${N}             ${D}// recompile on zsh change${N}"
+        print "  ${C}zpwr watch 'src/**/*.ts' 'npm run build'${N}        ${D}// build on ts change${N}"
+        print "  ${C}zpwr watch 'Makefile' 'make'${N}                    ${D}// make on Makefile change${N}"
+        print "  ${C}zpwr watch '.' 'echo changed'${N}                   ${D}// watch entire directory${N}"
+        print ""
+        return 0
+    fi
+
+    if (( $# < 2 )); then
+        zpwrLogConsoleErr "usage: zpwr watch <glob> <command>\nrun zpwr watch -h for help"
+        return 1
+    fi
+
+    local pattern="$1"
+    shift
+    local cmd="$*"
+
+    # find watcher binary
+    local watcher=""
+    if (( $+commands[fswatch] )); then
+        watcher="fswatch"
+    elif (( $+commands[inotifywait] )); then
+        watcher="inotifywait"
+    else
+        zpwrLogConsoleErr "neither fswatch nor inotifywait found\ninstall: brew install fswatch  // or: apt install inotify-tools"
+        return 1
+    fi
+
+    # resolve glob to directory
+    local watch_dir watch_filter
+    if [[ -d "$pattern" ]]; then
+        watch_dir="$pattern"
+        watch_filter=""
+    else
+        watch_dir="${pattern:h}"
+        watch_filter="${pattern:t}"
+        [[ "$watch_dir" == "$watch_filter" ]] && watch_dir="."
+    fi
+
+    print "${C}"
+    print " ██╗    ██╗ █████╗ ████████╗ ██████╗██╗  ██╗"
+    print " ██║    ██║██╔══██╗╚══██╔══╝██╔════╝██║  ██║"
+    print " ██║ █╗ ██║███████║   ██║   ██║     ███████║"
+    print " ██║███╗██║██╔══██║   ██║   ██║     ██╔══██║"
+    print " ╚███╔███╔╝██║  ██║   ██║   ╚██████╗██║  ██║"
+    print "  ╚══╝╚══╝ ╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝${N}"
+    _bt
+    printf -v _msg " ${G}WATCHING${N}  ${D}//${N} ${C}${pattern}${N}  ${D}//${N} ${M}${watcher}${N}"
+    _bx "$_msg"
+    printf -v _msg " ${G}COMMAND${N}   ${D}//${N} ${Y}${cmd}${N}"
+    _bx "$_msg"
+    _bb
+    print "  ${D}>> Ctrl-C to stop <<${N}"
+    print ""
+
+    local -i run_count=0
+    local -a fswatch_args
+    local regex ts start elapsed
+    local -i ret
+    local event_file
+
+    if [[ "$watcher" == "fswatch" ]]; then
+        fswatch_args=( -r "$watch_dir" )
+        if [[ -n "$watch_filter" ]]; then
+            # convert glob to regex
+            regex="${watch_filter//\*/.*}"
+            regex="${regex//\?/.}"
+            fswatch_args+=( -e '.*' -i "${regex}$" )
+        fi
+
+        fswatch "${fswatch_args[@]}" | while read -r changed_file; do
+            (( run_count++ ))
+            ts="$(date '+%H:%M:%S')"
+            print ""
+            _bt
+            printf -v _msg " ${G}TRIGGERED${N}  ${D}//${N} ${C}#${run_count}${N}  ${D}//${N} ${M}${ts}${N}  ${D}//${N} ${Y}${changed_file:t}${N}"
+            _bx "$_msg"
+            _bb
+            print ""
+
+            start=$EPOCHREALTIME
+            eval "$cmd"
+            ret=$?
+            elapsed=$(( EPOCHREALTIME - start ))
+
+            print ""
+            if (( ret == 0 )); then
+                print "  ${G}→ ok${N} ${D}($(printf '%.1f' $elapsed)s)${N}"
+            else
+                print "  ${R}→ exit ${ret}${N} ${D}($(printf '%.1f' $elapsed)s)${N}"
+            fi
+        done
+    elif [[ "$watcher" == "inotifywait" ]]; then
+        while true; do
+            if [[ -n "$watch_filter" ]]; then
+                event_file=$(inotifywait -r -q --format '%f' -e modify,create,delete "$watch_dir" 2>/dev/null)
+                [[ "$event_file" != ${~watch_filter} ]] && continue
+            else
+                event_file=$(inotifywait -r -q --format '%f' -e modify,create,delete "$watch_dir" 2>/dev/null)
+            fi
+
+            (( run_count++ ))
+            ts="$(date '+%H:%M:%S')"
+            print ""
+            _bt
+            printf -v _msg " ${G}TRIGGERED${N}  ${D}//${N} ${C}#${run_count}${N}  ${D}//${N} ${M}${ts}${N}  ${D}//${N} ${Y}${event_file}${N}"
+            _bx "$_msg"
+            _bb
+            print ""
+
+            start=$EPOCHREALTIME
+            eval "$cmd"
+            ret=$?
+            elapsed=$(( EPOCHREALTIME - start ))
+
+            print ""
+            if (( ret == 0 )); then
+                print "  ${G}→ ok${N} ${D}($(printf '%.1f' $elapsed)s)${N}"
+            else
+                print "  ${R}→ exit ${ret}${N} ${D}($(printf '%.1f' $elapsed)s)${N}"
+            fi
+        done
+    fi
+}
+
+zpwrWatch "$@"

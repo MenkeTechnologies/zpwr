@@ -155,7 +155,7 @@
     assert $state equals 0
 }
 
-@test 'ZPWR_VERBS[verbscount]' {
+@test 'ZPWR_VERBS[verbscount] 2' {
     run test -n "${(qqq)ZPWR_VERBS[verbscount]}"
     assert $state equals 0
 }
@@ -205,7 +205,7 @@
     assert $state equals 0
 }
 
-@test 'ZPWR_VERBS[envcounts]' {
+@test 'ZPWR_VERBS[envcounts] 2' {
     run test -n "${(qqq)ZPWR_VERBS[envcounts]}"
     assert $state equals 0
 }

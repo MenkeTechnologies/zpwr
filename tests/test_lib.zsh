@@ -35,6 +35,12 @@ if [[ "$PWD" != "$ZPWR" ]]; then
     cd "$ZPWR"
 fi
 
+# unset all ZPWR_* env vars to prevent user env leaking into tests
+for __zpwr_test_var in ${(k)parameters[(I)ZPWR_*]}; do
+    unset "$__zpwr_test_var"
+done
+unset __zpwr_test_var
+
 ZPWR_ENV="$ZPWR/env"
 ZPWR_ENV_FILE="$ZPWR_ENV/.zpwr_env.sh"
 ZPWR_RE_ENV_FILE="$ZPWR_ENV/.zpwr_re_env.sh"

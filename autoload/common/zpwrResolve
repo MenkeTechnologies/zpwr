@@ -1,0 +1,220 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrResolve(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██████╗ ███████╗███████╗ ██████╗ ██╗    ██╗   ██╗███████╗${N}"
+        print " ${C}██╔══██╗██╔════╝██╔════╝██╔═══██╗██║    ██║   ██║██╔════╝${N}"
+        print " ${M}██████╔╝█████╗  ███████╗██║   ██║██║    ██║   ██║█████╗${N}"
+        print " ${M}██╔══██╗██╔══╝  ╚════██║██║   ██║██║    ╚██╗ ██╔╝██╔══╝${N}"
+        print " ${C}██║  ██║███████╗███████║╚██████╔╝███████╗╚████╔╝ ███████╗${N}"
+        print " ${C}╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}RESOLVE${N}"
+        _bb
+        print "  ${D}>> COMMAND RESOLUTION CHAIN // FULL TRACE <<${N}"
+        print ""
+        print "  Trace a command through its full resolution chain:"
+        print "  alias -> function -> builtin -> external binary."
+        print "  Shows each hop with alias expansion inline."
+        print ""
+        print "  ${B}USAGE:${N} zpwr resolve ${D}<command> [command...]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-a, --all${N}                                        ${D}// Show all matches from type -a${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr resolve ll${N}                                 ${D}// Trace ll through aliases${N}"
+        print "  ${C}zpwr resolve ls cd git${N}                          ${D}// Trace multiple commands${N}"
+        print "  ${C}zpwr resolve zpwr${N}                               ${D}// Trace the zpwr dispatcher${N}"
+        print ""
+        return 0
+    fi
+
+    local show_all=false
+
+    if [[ "$1" == "-a" || "$1" == "--all" ]]; then
+        show_all=true
+        shift
+    fi
+
+    if [[ $# -eq 0 ]]; then
+        printf "  ${R}Usage: zpwr resolve <command>${N}\n"
+        return 1
+    fi
+
+    printf "\n"
+    printf " ${C}██████╗ ███████╗███████╗ ██████╗ ██╗    ██╗   ██╗███████╗${N}\n"
+    printf " ${C}██╔══██╗██╔════╝██╔════╝██╔═══██╗██║    ██║   ██║██╔════╝${N}\n"
+    printf " ${M}██████╔╝█████╗  ███████╗██║   ██║██║    ██║   ██║█████╗${N}\n"
+    printf " ${M}██╔══██╗██╔══╝  ╚════██║██║   ██║██║    ╚██╗ ██╔╝██╔══╝${N}\n"
+    printf " ${C}██║  ██║███████╗███████║╚██████╔╝███████╗╚████╔╝ ███████╗${N}\n"
+    printf " ${C}╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝ ╚══════╝ ╚═══╝  ╚══════╝${N}\n"
+    _bt
+    printf -v _msg " ${G}RESOLVING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}" "$*" "$(date '+%H:%M:%S')"
+    _bx "$_msg"
+    _bb
+    printf "\n"
+
+    local cmd depth_prefix resolved_cmd first_word
+    local alias_val func_file bin_path link_target file_type
+    local vk vv
+    local -i depth max_depth=10 di func_lines
+
+    for cmd in "$@"; do
+        printf "  ${B}${C}%s${N}\n" "$cmd"
+        printf "  ${D}──────────────────────────────────────────────────────${N}\n"
+
+        depth=0
+        resolved_cmd="$cmd"
+
+        while (( depth < max_depth )); do
+            depth_prefix=""
+            for (( di=0; di<depth; di++ )); do
+                depth_prefix+="  "
+            done
+
+            # check alias
+            if (( ${+aliases[$resolved_cmd]} )); then
+                alias_val="${aliases[$resolved_cmd]}"
+                printf "  %s${Y}↳ alias${N}  ${D}%s${N} ${Y}→${N} ${D}'%s'${N}\n" "$depth_prefix" "$resolved_cmd" "$alias_val"
+
+                # extract first word of alias expansion to continue resolving
+                first_word="${alias_val%%[[:space:]]*}"
+                # strip leading 'command ', 'builtin ', 'noglob ' etc
+                while [[ "$first_word" == (command|builtin|noglob|nocorrect|exec) ]]; do
+                    alias_val="${alias_val#*[[:space:]]}"
+                    first_word="${alias_val%%[[:space:]]*}"
+                done
+
+                if [[ "$first_word" == "$resolved_cmd" ]]; then
+                    # self-referencing alias, stop
+                    printf "  %s  ${D}(self-referencing)${N}\n" "$depth_prefix"
+                    break
+                fi
+
+                resolved_cmd="$first_word"
+                (( depth++ ))
+                continue
+            fi
+
+            # check function
+            if (( ${+functions[$resolved_cmd]} )); then
+                func_file=""
+                # try to find the source file
+                if [[ -f "$ZPWR_AUTOLOAD_COMMON/$resolved_cmd" ]]; then
+                    func_file="${ZPWR_AUTOLOAD_COMMON/$ZPWR\//}/$resolved_cmd"
+                elif [[ -f "$ZPWR_AUTOLOAD_DARWIN/$resolved_cmd" ]]; then
+                    func_file="${ZPWR_AUTOLOAD_DARWIN/$ZPWR\//}/$resolved_cmd"
+                elif [[ -f "$ZPWR_AUTOLOAD_LINUX/$resolved_cmd" ]]; then
+                    func_file="${ZPWR_AUTOLOAD_LINUX/$ZPWR\//}/$resolved_cmd"
+                fi
+
+                printf "  %s${M}↳ function${N}  ${D}%s${N}" "$depth_prefix" "$resolved_cmd"
+                if [[ -n "$func_file" ]]; then
+                    printf "  ${D}(%s)${N}" "$func_file"
+                fi
+                printf "\n"
+
+                # show function body size
+                func_lines=$(echo "${functions[$resolved_cmd]}" | wc -l)
+                printf "  %s  ${D}%d lines${N}\n" "$depth_prefix" $func_lines
+
+                # check if it's a zpwr verb
+                if (( ${+ZPWR_VERBS} )); then
+                    for vk vv in ${(kv)ZPWR_VERBS}; do
+                        if [[ "${vv%%=*}" == "$resolved_cmd" ]]; then
+                            printf "  %s  ${G}verb: zpwr %s${N}  ${D}— %s${N}\n" "$depth_prefix" "$vk" "${vv#*=}"
+                            break
+                        fi
+                    done
+                fi
+                break
+            fi
+
+            # check builtin
+            if [[ "$(builtin whence -w "$resolved_cmd" 2>/dev/null)" == *": builtin" ]]; then
+                printf "  %s${G}↳ builtin${N}  ${D}%s${N}\n" "$depth_prefix" "$resolved_cmd"
+                break
+            fi
+
+            # check reserved word
+            if [[ "$(builtin whence -w "$resolved_cmd" 2>/dev/null)" == *": reserved" ]]; then
+                printf "  %s${G}↳ reserved word${N}  ${D}%s${N}\n" "$depth_prefix" "$resolved_cmd"
+                break
+            fi
+
+            # check external command
+            if (( ${+commands[$resolved_cmd]} )); then
+                bin_path="${commands[$resolved_cmd]}"
+                printf "  %s${C}↳ binary${N}  ${D}%s${N}\n" "$depth_prefix" "$bin_path"
+
+                # show if it's a symlink
+                if [[ -L "$bin_path" ]]; then
+                    link_target=$(command readlink "$bin_path" 2>/dev/null)
+                    printf "  %s  ${D}→ %s${N}\n" "$depth_prefix" "$link_target"
+                    # follow symlink chain
+                    while [[ -L "$link_target" ]]; do
+                        link_target=$(command readlink "$link_target" 2>/dev/null)
+                        printf "  %s  ${D}→ %s${N}\n" "$depth_prefix" "$link_target"
+                    done
+                fi
+
+                # show file type
+                file_type=$(command file -b "$bin_path" 2>/dev/null)
+                if [[ -n "$file_type" ]]; then
+                    # truncate long descriptions
+                    printf "  %s  ${D}%s${N}\n" "$depth_prefix" "${file_type:0:60}"
+                fi
+                break
+            fi
+
+            # check suffix alias
+            if [[ "$(builtin whence -w "$resolved_cmd" 2>/dev/null)" == *": suffix alias" ]]; then
+                printf "  %s${Y}↳ suffix alias${N}  ${D}%s${N}\n" "$depth_prefix" "$resolved_cmd"
+                break
+            fi
+
+            # check global alias
+            if (( ${+galiases[$resolved_cmd]} )); then
+                printf "  %s${Y}↳ global alias${N}  ${D}%s${N} ${Y}→${N} ${D}'%s'${N}\n" "$depth_prefix" "$resolved_cmd" "${galiases[$resolved_cmd]}"
+                break
+            fi
+
+            # not found
+            printf "  %s${R}✗ not found${N}  ${D}%s${N}\n" "$depth_prefix" "$resolved_cmd"
+            break
+        done
+
+        if (( depth >= max_depth )); then
+            printf "  ${R}⚠ max depth reached (circular?)${N}\n"
+        fi
+
+        # show all matches if requested
+        if [[ "$show_all" == true ]]; then
+            printf "\n  ${D}type -a %s:${N}\n" "$cmd"
+            builtin whence -a "$cmd" 2>/dev/null | while IFS= read -r line; do
+                printf "  ${D}  %s${N}\n" "$line"
+            done
+        fi
+
+        printf "\n"
+    done
+
+    unfunction _bx _bt _bb 2>/dev/null
+}
+
+zpwrResolve "$@"

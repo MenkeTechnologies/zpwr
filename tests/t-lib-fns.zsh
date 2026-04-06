@@ -251,6 +251,15 @@
 }
 
 #--------------------------------------------------------------
+# zpwrBlocksToSize
+#--------------------------------------------------------------
+@test 'zpwrBlocksToSize 1 block equals 512 bytes' {
+    out=$(print -r -- 1 | zpwrBlocksToSize)
+    assert "$out" contains "512"
+    assert "$out" contains "B"
+}
+
+#--------------------------------------------------------------
 # zpwrEscapeRemove
 #--------------------------------------------------------------
 @test 'zpwrEscapeRemove passes plain text through' {
@@ -312,6 +321,11 @@
     assert $state equals 0
     chmod 644 "$tmpfile"
     command rm -f "$tmpfile"
+}
+
+@test 'zpwrNeedSudo no args returns 1' {
+    run zpwrNeedSudo
+    assert $state equals 1
 }
 
 #--------------------------------------------------------------
@@ -484,6 +498,13 @@
     assert "$output" is_empty
 }
 
+@test 'zpwrLogConsoleTrace ZPWR_TRACE true outputs' {
+    ZPWR_TRACE=true
+    run zpwrLogConsoleTrace "tracetestuniq"
+    assert "$output" contains tracetestuniq
+    ZPWR_TRACE=false
+}
+
 #--------------------------------------------------------------
 # zpwrLogInfo / zpwrLogError
 #--------------------------------------------------------------
@@ -503,6 +524,27 @@
     assert "$output" is_empty
 }
 
+@test 'zpwrLogTrace ZPWR_TRACE false is silent' {
+    ZPWR_TRACE=false
+    run zpwrLogTrace "should not appear in stdout"
+    assert "$output" is_empty
+}
+
+@test 'zpwrLogTrace ZPWR_TRACE true appends to logfile' {
+    local tmp prev
+    tmp=$(mktemp)
+    prev=$ZPWR_LOGFILE
+    ZPWR_LOGFILE=$tmp
+    ZPWR_TRACE=true
+    ZPWR_COLORS=false
+    run zpwrLogTrace logtraceuniq
+    assert $state equals 0
+    assert "$(command cat "$tmp")" contains logtraceuniq
+    ZPWR_TRACE=false
+    ZPWR_LOGFILE=$prev
+    command rm -f "$tmp"
+}
+
 #--------------------------------------------------------------
 # zpwrStdinExists
 #--------------------------------------------------------------
@@ -515,6 +557,11 @@
 @test 'zpwrStdinExists no stdin outputs No input' {
     run zpwrStdinExists testarg < /dev/null
     assert "$output" contains "No input"
+}
+
+@test 'zpwrStdinExists no stdin and no label returns 1' {
+    run zpwrStdinExists < /dev/null
+    assert $state equals 1
 }
 
 #--------------------------------------------------------------
@@ -545,4 +592,120 @@
 @test 'zpwrAlternatingPrettyPrint output is not empty' {
     run zpwrAlternatingPrettyPrint "hello world"
     assert "$output" is_not_empty
+}
+
+#--------------------------------------------------------------
+# zpwrFail
+#--------------------------------------------------------------
+@test 'zpwrFail exits 1' {
+    run zsh -c "source $ZPWR_LIB; zpwrFail reason" 2>&1
+    assert $state equals 1
+}
+
+@test 'zpwrFail stderr mentions supplied reason' {
+    run zsh -c "source $ZPWR_LIB; zpwrFail myreason" 2>&1
+    assert "$output" contains "Failure due to myreason"
+}
+
+@test 'zpwrFail no args exits 1 with usage' {
+    run zsh -c "source $ZPWR_LIB; zpwrFail" 2>&1
+    assert $state equals 1
+    assert "$output" contains "usage: zpwrFail"
+}
+
+#--------------------------------------------------------------
+# zpwrFileMustExist
+#--------------------------------------------------------------
+@test 'zpwrFileMustExist on existing file returns 0' {
+    run zpwrFileMustExist "$TEST_FILE"
+    assert $state equals 0
+}
+
+@test 'zpwrFileMustExist on missing file exits 1' {
+    run zsh -c "source $ZPWR_LIB; zpwrFileMustExist /tmp/zpwr_mustexist_missing_$$" 2>&1
+    assert $state equals 1
+    assert "$output" contains "Where is the file"
+}
+
+@test 'zpwrFileMustExist no args exits 1 with usage' {
+    run zsh -c "source $ZPWR_LIB; zpwrFileMustExist" 2>&1
+    assert $state equals 1
+    assert "$output" contains "usage: zpwrFileMustExist"
+}
+
+#--------------------------------------------------------------
+# zpwrPrettyPrintBoxStdin
+#--------------------------------------------------------------
+@test 'zpwrPrettyPrintBoxStdin with stdin returns 0' {
+    run zsh -c "source $ZPWR_LIB; printf '%s\n' hello | zpwrPrettyPrintBoxStdin mylabel" 2>&1
+    assert $state equals 0
+}
+
+@test 'zpwrPrettyPrintBoxStdin output includes stdin text' {
+    run zsh -c "source $ZPWR_LIB; printf '%s\n' uniqline123 | zpwrPrettyPrintBoxStdin lbl" 2>&1
+    assert $state equals 0
+    assert "$output" contains uniqline123
+}
+
+@test 'zpwrPrettyPrintBoxStdin no label exits 1' {
+    run zsh -c "source $ZPWR_LIB; printf x | zpwrPrettyPrintBoxStdin" 2>&1
+    assert $state equals 1
+    assert "$output" contains "usage: zpwrPrettyPrintBoxStdin"
+}
+
+#--------------------------------------------------------------
+# zpwrLogConsolePrefix / zpwrLogConsoleHeader
+#--------------------------------------------------------------
+@test 'zpwrLogConsolePrefix with args returns 0' {
+    run zpwrLogConsolePrefix "uniqprefix789" 2>&1
+    assert $state equals 0
+}
+
+@test 'zpwrLogConsolePrefix output includes logo and message' {
+    run zpwrLogConsolePrefix "uniqprefix789" 2>&1
+    assert "$output" contains "$ZPWR_CHAR_LOGO"
+    assert "$output" contains uniqprefix789
+}
+
+@test 'zpwrLogConsoleHeader INFO returns 0 and shows message' {
+    run zpwrLogConsoleHeader INFO "hdruniq456" 2>&1
+    assert $state equals 0
+    assert "$output" contains hdruniq456
+}
+
+@test 'zpwrLogConsolePrefix no args returns 1' {
+    run zpwrLogConsolePrefix 2>&1
+    assert $state equals 1
+}
+
+@test 'zpwrLogConsoleHeader one arg returns 1' {
+    run zpwrLogConsoleHeader ONLYLVL 2>&1
+    assert $state equals 1
+}
+
+#--------------------------------------------------------------
+# zpwrLogConsoleNotGit
+#--------------------------------------------------------------
+@test 'zpwrLogConsoleNotGit stderr mentions not a git dir' {
+    run zsh -c "source $ZPWR_LIB; zpwrLogConsoleNotGit" 2>&1
+    assert "$output" contains "not a git dir"
+}
+
+#--------------------------------------------------------------
+# zpwrPrettyPrintBox
+#--------------------------------------------------------------
+@test 'zpwrPrettyPrintBox with arg returns 0' {
+    run zpwrPrettyPrintBox "boxlbluniq"
+    assert $state equals 0
+}
+
+@test 'zpwrPrettyPrintBox output includes label' {
+    run zpwrPrettyPrintBox "boxcontentuniq42"
+    assert "$output" contains boxcontentuniq42
+}
+
+@test 'zpwrPrettyPrintBox no args exits 1' {
+    run zpwrPrettyPrintBox 2>&1
+    assert $state equals 1
+    assert "$output" contains "usage: zpwrPrettyPrintBox"
 }

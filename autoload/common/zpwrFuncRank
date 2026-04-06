@@ -1,0 +1,278 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrFuncRank(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+    builtin zmodload zsh/datetime
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=78
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}███████╗██╗   ██╗███╗   ██╗ ██████╗    ██████╗  █████╗ ███╗   ██╗██╗  ██╗${N}"
+        print " ${C}██╔════╝██║   ██║████╗  ██║██╔════╝    ██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝${N}"
+        print " ${M}█████╗  ██║   ██║██╔██╗ ██║██║         ██████╔╝███████║██╔██╗ ██║█████╔╝${N}"
+        print " ${M}██╔══╝  ██║   ██║██║╚██╗██║██║         ██╔══██╗██╔══██║██║╚██╗██║██╔═██╗${N}"
+        print " ${C}██║     ╚██████╔╝██║ ╚████║╚██████╗    ██║  ██║██║  ██║██║ ╚████║██║  ██╗${N}"
+        print " ${C}╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}FUNC RANK${N}"
+        _bb
+        print "  ${D}>> FUNCTION & VERB USAGE PROFILER // FULL SPECTRUM <<${N}"
+        print ""
+        print ""
+        print "  Rank functions and zpwr verbs by shell history usage."
+        print ""
+        print "  ${B}USAGE:${N} zpwr funcrank ${D}[OPTIONS] [N]${N}"
+        print ""
+        print "  ${D}── DATA I/O ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-r, --reset${N}                                      ${D}// Clear cache and rebuild${N}"
+        print "  ${C}N${N}                                                 ${D}// Top N entries (default: 20)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr funcrank${N}                                    ${D}// top 20 functions and verbs${N}"
+        print "  ${C}zpwr funcrank 40${N}                                 ${D}// top 40${N}"
+        print "  ${C}zpwr funcrank --reset${N}                            ${D}// force cache rebuild${N}"
+        print "  ${C}zpwr funcrank --reset 50${N}                         ${D}// rebuild then show top 50${N}"
+        print ""
+        print "  ${D}── CACHE ────────────────────────────────────────────────────────────${N}"
+        print "  ${D}rebuilds when history grows by 1000+ lines${N}"
+        print "  ${D}\$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh${N}             ${D}// command counts${N}"
+        print "  ${D}\$ZPWR_LOCAL/zpwr-verbrank-cache.zsh${N}              ${D}// verb counts${N}"
+        print "  ${D}\$ZPWR_LOCAL/zpwr-rank-stamp${N}                      ${D}// history line watermark${N}"
+        print ""
+        return 0
+    fi
+    if [[ "$1" == "--reset" || "$1" == "-r" ]]; then
+        command rm -f "$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh" "$ZPWR_LOCAL/zpwr-verbrank-cache.zsh" "$ZPWR_LOCAL/zpwr-rank-stamp"
+        print "  ${G}cache cleared${N}"
+        shift
+    fi
+    local -i top_n=${1:-20}
+
+    print ""
+    print " ${C}███████╗██╗   ██╗███╗   ██╗ ██████╗    ██████╗  █████╗ ███╗   ██╗██╗  ██╗${N}"
+    print " ${C}██╔════╝██║   ██║████╗  ██║██╔════╝    ██╔══██╗██╔══██╗████╗  ██║██║ ██╔╝${N}"
+    print " ${M}█████╗  ██║   ██║██╔██╗ ██║██║         ██████╔╝███████║██╔██╗ ██║█████╔╝${N}"
+    print " ${M}██╔══╝  ██║   ██║██║╚██╗██║██║         ██╔══██╗██╔══██║██║╚██╗██║██╔═██╗${N}"
+    print " ${C}██║     ╚██████╔╝██║ ╚████║╚██████╗    ██║  ██║██║  ██║██║ ╚████║██║  ██╗${N}"
+    print " ${C}╚═╝      ╚═════╝ ╚═╝  ╚═══╝ ╚═════╝    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝${N}"
+    _bt
+    printf -v _msg " ${G}MINING${N}  ${D}//${N} ${C}${HISTFILE:t}${N}  ${D}//${N} ${M}${#functions} functions${N}  ${D}//${N} ${Y}${#ZPWR_VERBS} verbs${N}"
+    _bx "$_msg"
+    _bb
+    print ""
+
+    # shared cache for cmd_counts + verb_counts
+    local -A cmd_counts verb_counts
+    local word line k v key entry
+    local cache_file="$ZPWR_LOCAL/zpwr-aliasrank-cache.zsh"
+    local verb_cache="$ZPWR_LOCAL/zpwr-verbrank-cache.zsh"
+    local -i need_rebuild=1
+    local -i cnt bar_len i max_cnt ua_shown uv_shown
+    local bar name fname line_buf
+    local -i cached_hist_lines current_hist_lines
+    local hist_wc hwc
+    local verb
+
+    # rebuild only if cache is missing or history grew by 1000+ lines
+    local stamp_file="$ZPWR_LOCAL/zpwr-rank-stamp"
+    if [[ -r "$cache_file" && -r "$verb_cache" && -r "$stamp_file" ]]; then
+        cached_hist_lines=$(<"$stamp_file")
+        hist_wc=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        current_hist_lines=${hist_wc//[^0-9]/}
+        if (( current_hist_lines - cached_hist_lines < 1000 )); then
+            need_rebuild=0
+        fi
+    fi
+
+    if (( need_rebuild )); then
+        print "  ${D}>> parsing ${HISTFILE:t} (cached after first run) <<${N}"
+        print ""
+        while IFS= read -r line; do
+            [[ "$line" == ": "* ]] && line="${line#*;}"
+            word="${line%%[[:space:]]*}"
+            word="${word%%[;|&]*}"
+            [[ -z "$word" ]] && continue
+            [[ "$word" != [[:alnum:]_./-]## ]] && continue
+            (( cmd_counts[$word]++ ))
+            # also extract zpwr verb
+            if [[ "$word" == "zpwr" ]]; then
+                verb="${line#zpwr}"
+                verb="${verb##[[:space:]]#}"
+                verb="${verb%%[[:space:]]*}"
+                [[ -n "$verb" && "$verb" == [[:alnum:]_-]## ]] && (( verb_counts[$verb]++ ))
+            fi
+        done < "$HISTFILE"
+        # write caches
+        {
+            for k v in ${(kv)cmd_counts}; do
+                print -r -- "${k}=${v}"
+            done
+        } >| "$cache_file"
+        {
+            for k v in ${(kv)verb_counts}; do
+                print -r -- "${k}=${v}"
+            done
+        } >| "$verb_cache"
+        # stamp with current history line count
+        hwc=$(command wc -l < "$HISTFILE" 2>/dev/null)
+        print -r "${hwc//[^0-9]/}" >| "$stamp_file"
+        print "  ${G}>> cached <<${N}"
+        print ""
+    else
+        print "  ${D}>> loading from cache (rm ${cache_file:t} to rebuild) <<${N}"
+        print ""
+        while IFS='=' read -r k v; do
+            cmd_counts[$k]=$v
+        done < "$cache_file"
+        while IFS='=' read -r k v; do
+            verb_counts[$k]=$v
+        done < "$verb_cache"
+    fi
+
+    # ── TOP USED FUNCTIONS ────────────────────────────────────
+    print "  ${C}── TOP ${top_n} MOST USED FUNCTIONS ──────────────────────────────────────${N}"
+    print ""
+
+    local -a func_usage=()
+    for fname in ${(k)functions}; do
+        [[ $fname == _* || $fname == prompt_* ]] && continue
+        cnt=${cmd_counts[$fname]:-0}
+        (( cnt > 0 )) && func_usage+=( "$cnt $fname" )
+    done
+    func_usage=( ${(On)func_usage} )
+
+    max_cnt=0
+    (( $#func_usage > 0 )) && max_cnt=${func_usage[1]%% *}
+    for (( i = 1; i <= top_n && i <= $#func_usage; i++ )); do
+        cnt=${func_usage[i]%% *}
+        name=${func_usage[i]#* }
+
+        bar_len=$(( max_cnt > 0 ? cnt * 30 / max_cnt : 0 ))
+        (( bar_len < 1 && cnt > 0 )) && bar_len=1
+        bar="${G}$(printf '█%.0s' {1..$bar_len})${N}"
+
+        print -n "  ${D}$(printf '%3d.' $i)${N} "
+        print -n "${B}$(printf '%-35s' "$name")${N} "
+        print -n "${C}$(printf '%6d' $cnt)${N}  "
+        print "$bar"
+    done
+
+    # ── TOP USED ZPWR VERBS ───────────────────────────────────
+    print ""
+    print "  ${C}── TOP ${top_n} MOST USED ZPWR VERBS ─────────────────────────────────────${N}"
+    print ""
+
+    local -a verb_usage=()
+    for k v in ${(kv)verb_counts}; do
+        (( ${+ZPWR_VERBS[$k]} )) && verb_usage+=( "$v $k" )
+    done
+    verb_usage=( ${(On)verb_usage} )
+
+    if (( $#verb_usage > 0 )); then
+        max_cnt=${verb_usage[1]%% *}
+        for (( i = 1; i <= top_n && i <= $#verb_usage; i++ )); do
+            cnt=${verb_usage[i]%% *}
+            name=${verb_usage[i]#* }
+
+            bar_len=$(( max_cnt > 0 ? cnt * 30 / max_cnt : 0 ))
+            (( bar_len < 1 && cnt > 0 )) && bar_len=1
+            bar="${C}$(printf '█%.0s' {1..$bar_len})${N}"
+
+            print -n "  ${D}$(printf '%3d.' $i)${N} "
+            print -n "${B}$(printf '%-25s' "$name")${N} "
+            print -n "${M}$(printf '%6d' $cnt)${N}  "
+            print "$bar"
+        done
+    else
+        print "  ${D}no 'zpwr <verb>' usage found in history${N}"
+    fi
+
+    # ── NEVER USED ZPWR VERBS ─────────────────────────────────
+    print ""
+    print "  ${C}── NEVER USED ZPWR VERBS ${D}(candidates for discovery)${N} ────────────────${N}"
+    print ""
+
+    local -a unused_verbs=()
+    for k v in ${(kv)ZPWR_VERBS}; do
+        (( ! ${+verb_counts[$k]} )) && unused_verbs+=( "$k" )
+    done
+    unused_verbs=( ${(o)unused_verbs} )
+
+    line_buf=""
+    uv_shown=0
+    for k in $unused_verbs; do
+        if [[ -n "$line_buf" ]]; then
+            line_buf+=", "
+        fi
+        if (( ${#line_buf} + ${#k} > 68 )); then
+            print "  ${D}//${N} ${Y}${line_buf}${N}"
+            line_buf="$k"
+        else
+            line_buf+="$k"
+        fi
+        (( uv_shown++ ))
+    done
+    [[ -n "$line_buf" ]] && print "  ${D}//${N} ${Y}${line_buf}${N}"
+    print ""
+    print "  ${D}${uv_shown}/${#ZPWR_VERBS} verbs never used${N}"
+
+    # ── UNUSED AUTOLOADS ──────────────────────────────────────
+    print ""
+    print "  ${C}── UNUSED AUTOLOADED FUNCTIONS ${D}(never called in history)${N} ─────────────${N}"
+    print ""
+
+    local -a unused_autoloads=()
+    local autoload_dir="$ZPWR_AUTOLOAD_COMMON"
+    if [[ -d "$autoload_dir" ]]; then
+        for fname in "$autoload_dir"/*(N.:t); do
+            [[ $fname == _* ]] && continue
+            cnt=${cmd_counts[$fname]:-0}
+            (( cnt == 0 )) && unused_autoloads+=( "$fname" )
+        done
+    fi
+    unused_autoloads=( ${(o)unused_autoloads} )
+
+    line_buf=""
+    ua_shown=0
+    for k in $unused_autoloads; do
+        if [[ -n "$line_buf" ]]; then
+            line_buf+=", "
+        fi
+        if (( ${#line_buf} + ${#k} > 68 )); then
+            print "  ${D}//${N} ${Y}${line_buf}${N}"
+            line_buf="$k"
+        else
+            line_buf+="$k"
+        fi
+        (( ua_shown++ ))
+    done
+    [[ -n "$line_buf" ]] && print "  ${D}//${N} ${Y}${line_buf}${N}"
+
+    local -i total_autoloads=0
+    [[ -d "$autoload_dir" ]] && total_autoloads=$(command ls "$autoload_dir" 2>/dev/null | grep -vc '^_')
+
+    print ""
+    print "  ${D}${ua_shown}/${total_autoloads} autoloaded functions never called directly${N}"
+
+    # ── SUMMARY ───────────────────────────────────────────────
+    print ""
+    print "  ${C}══════════════════════════════════════════════════════════════════════════${N}"
+    print "  ${B}total functions:${N}     ${C}${#functions}${N}"
+    print "  ${B}used in history:${N}     ${G}${#func_usage}${N}"
+    print "  ${B}zpwr verbs used:${N}     ${G}$(( ${#ZPWR_VERBS} - uv_shown ))${N}/${#ZPWR_VERBS}"
+    print "  ${B}autoloads unused:${N}    ${Y}${ua_shown}${N}/${total_autoloads}"
+    print "  ${C}══════════════════════════════════════════════════════════════════════════${N}"
+    print ""
+}
+
+zpwrFuncRank "$@"

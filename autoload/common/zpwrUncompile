@@ -12,6 +12,9 @@ function zpwrUncompile(){
         "$HOME/.zshenv"*
         "$HOME/.zlogout"*
         "$HOME/.zlogin"*
+        "$ZPWR_LOCAL/zpwr-hash-dirs.zsh"
+        "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+        "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-dump-${(%):-%n}.zsh"
         "$ZSH/oh-my-zsh.sh"
         "$ZSH_COMPDUMP"
         "$ZPWR_ALIAS_FILE"

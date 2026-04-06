@@ -1,0 +1,237 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrRestore(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local snapdir="$ZPWR_LOCAL/snapshots"
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=70
+    local _msg
+    local dir name manifest snap_date snap_host snap_pwd snap_size
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C}██████╗ ███████╗███████╗████████╗ ██████╗ ██████╗ ███████╗${N}"
+        print " ${C}██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝${N}"
+        print " ${M}██████╔╝█████╗  ███████╗   ██║   ██║   ██║██████╔╝█████╗${N}"
+        print " ${M}██╔══██╗██╔══╝  ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝${N}"
+        print " ${C}██║  ██║███████╗███████║   ██║   ╚██████╔╝██║  ██║███████╗${N}"
+        print " ${C}╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}RESTORE${N}"
+        _bb
+        print "  ${D}>> ENVIRONMENT RESTORE // SELECTIVE RECOVERY <<${N}"
+        print ""
+        print ""
+        print "  Restore terminal environment from a snapshot. With no args,"
+        print "  lists available snapshots. With a name, restores all or"
+        print "  selected components."
+        print ""
+        print "  ${B}USAGE:${N} zpwr restore ${D}[NAME] [COMPONENT...]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}NAME${N}                                             ${D}// Snapshot to restore${N}"
+        print "  ${C}COMPONENT${N}                                        ${D}// One or more components${N}"
+        print ""
+        print "  ${D}── COMPONENTS ───────────────────────────────────────────────────────${N}"
+        print "  ${C}all${N}                                              ${D}// Restore everything (default)${N}"
+        print "  ${C}hash${N}                                             ${D}// Named directories${N}"
+        print "  ${C}aliases${N}                                          ${D}// Regular, global, suffix aliases${N}"
+        print "  ${C}env${N}                                              ${D}// Environment variables${N}"
+        print "  ${C}tmux${N}                                             ${D}// Stage tmux-resurrect file${N}"
+        print "  ${C}vim${N}                                              ${D}// Vim session files${N}"
+        print "  ${C}history${N}                                          ${D}// Merge history entries${N}"
+        print "  ${C}dirs${N}                                             ${D}// cd to snapshot pwd${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr restore${N}                                     ${D}// list all snapshots${N}"
+        print "  ${C}zpwr restore myproject${N}                           ${D}// restore everything${N}"
+        print "  ${C}zpwr restore myproject aliases env${N}               ${D}// restore only aliases+env${N}"
+        print "  ${C}zpwr restore myproject dirs${N}                      ${D}// just cd to saved pwd${N}"
+        print ""
+        return 0
+    fi
+
+    printf "\n"
+    printf "${C} ██████╗ ███████╗███████╗████████╗ ██████╗ ██████╗ ███████╗${N}\n"
+    printf "${C} ██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔═══██╗██╔══██╗██╔════╝${N}\n"
+    printf "${M} ██████╔╝█████╗  ███████╗   ██║   ██║   ██║██████╔╝█████╗${N}\n"
+    printf "${M} ██╔══██╗██╔══╝  ╚════██║   ██║   ██║   ██║██╔══██╗██╔══╝${N}\n"
+    printf "${C} ██║  ██║███████╗███████║   ██║   ╚██████╔╝██║  ██║███████╗${N}\n"
+    printf "${C} ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝╚══════╝${N}\n"
+
+    # no arg: list snapshots
+    if [[ -z "$1" ]]; then
+        if [[ ! -d "$snapdir" ]] || [[ -z "$(ls -A "$snapdir" 2>/dev/null)" ]]; then
+            _bt
+            _bx " ${Y}No snapshots found${N}"
+            _bx " ${D}Create one with:${N} ${C}zpwr snapshot [name]${N}"
+            _bb
+            printf "\n"
+            return 1
+        fi
+
+        _bt
+        _bx " ${G}AVAILABLE SNAPSHOTS${N}"
+        _bb
+        printf "  ${D}>> usage: zpwr restore <name> [component...]  <<${N}\n"
+        printf "  ${D}>> components: all hash aliases env tmux vim history dirs <<${N}\n\n"
+
+        for dir in "$snapdir"/*(N-/on); do
+            name="${dir:t}"
+            manifest="$dir/manifest.txt"
+            snap_date="" snap_host="" snap_pwd=""
+            if [[ -r "$manifest" ]]; then
+                snap_date=$(grep '^date=' "$manifest" | cut -d= -f2-)
+                snap_host=$(grep '^host=' "$manifest" | cut -d= -f2-)
+                snap_pwd=$(grep '^pwd=' "$manifest" | cut -d= -f2-)
+            fi
+            snap_size=$(du -sh "$dir" 2>/dev/null | cut -f1)
+            printf "  ${D}//${N} ${B}${C}%-25s${N}" "$name"
+            [[ -n "$snap_date" ]] && printf "  ${D}%s${N}" "$snap_date"
+            [[ -n "$snap_size" ]] && printf "  ${D}(%s)${N}" "$snap_size"
+            printf "\n"
+            [[ -n "$snap_pwd" ]] && printf "     ${D}pwd: %s${N}\n" "$snap_pwd"
+        done
+        printf "\n"
+        return 0
+    fi
+
+    local name="$1"
+    shift
+    local target="$snapdir/$name"
+
+    if [[ ! -d "$target" ]]; then
+        printf "  ${R}snapshot '%s' not found${N}\n\n" "$name"
+        return 1
+    fi
+
+    # what to restore
+    local -a components
+    if (( $# == 0 )) || [[ "$1" == "all" ]]; then
+        components=( hash aliases env tmux vim history dirs )
+    else
+        components=( "$@" )
+    fi
+
+    local manifest="$target/manifest.txt"
+    local snap_date=""
+    local resurrect_dir
+    local -i vcount=0
+    local f first_dir
+    [[ -r "$manifest" ]] && snap_date=$(grep '^date=' "$manifest" | cut -d= -f2-)
+
+    _bt
+    printf -v _msg " ${G}RESTORING${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}" "$name" "$snap_date"
+    _bx "$_msg"
+    _bb
+
+    local comp
+    for comp in $components; do
+        case $comp in
+            hash)
+                printf "  ${D}//${N} ${B}hash dirs${N}       "
+                if [[ -r "$target/hash-dirs-restore.zsh" ]]; then
+                    source "$target/hash-dirs-restore.zsh"
+                    printf "${G}restored${N}\n"
+                else
+                    printf "${Y}not in snapshot${N}\n"
+                fi
+                ;;
+            aliases)
+                printf "  ${D}//${N} ${B}aliases${N}         "
+                if [[ -r "$target/aliases.zsh" ]]; then
+                    source "$target/aliases.zsh"
+                    printf "${G}restored${N}\n"
+                else
+                    printf "${Y}not in snapshot${N}\n"
+                fi
+                ;;
+            env)
+                printf "  ${D}//${N} ${B}env vars${N}        "
+                if [[ -r "$target/env-vars.zsh" ]]; then
+                    source "$target/env-vars.zsh"
+                    printf "${G}restored${N}\n"
+                else
+                    printf "${Y}not in snapshot${N}\n"
+                fi
+                ;;
+            tmux)
+                printf "  ${D}//${N} ${B}tmux${N}            "
+                if [[ -r "$target/tmux/resurrect.txt" && -n "$TMUX" ]]; then
+                    # copy resurrect file to tmux-resurrect dir and trigger restore
+                    resurrect_dir="$HOME/.tmux/resurrect"
+                    if [[ -d "$resurrect_dir" ]]; then
+                        command cp "$target/tmux/resurrect.txt" "$resurrect_dir/last"
+                        ln -sf "$resurrect_dir/last" "$resurrect_dir/last"
+                        printf "${G}resurrect file staged${N} ${D}// press prefix+Ctrl-r to restore${N}\n"
+                    else
+                        printf "${Y}tmux-resurrect dir not found${N}\n"
+                    fi
+                elif [[ ! -n "$TMUX" ]]; then
+                    printf "${Y}not in tmux${N}\n"
+                else
+                    printf "${Y}not in snapshot${N}\n"
+                fi
+                ;;
+            vim)
+                printf "  ${D}//${N} ${B}vim sessions${N}    "
+                if [[ -d "$target/vim" ]]; then
+                    command mkdir -p "$HOME/.vim/sessions"
+                    vcount=0
+                    for f in "$target/vim/"*.vim(N); do
+                        command cp "$f" "$HOME/.vim/sessions/"
+                        (( vcount++ ))
+                    done
+                    printf "${G}%d sessions restored${N}\n" $vcount
+                else
+                    printf "${Y}not in snapshot${N}\n"
+                fi
+                ;;
+            history)
+                printf "  ${D}//${N} ${B}history${N}         "
+                if [[ -r "$target/history.zsh" ]]; then
+                    # merge rather than overwrite
+                    builtin fc -R "$target/history.zsh" 2>/dev/null
+                    printf "${G}merged into current history${N}\n"
+                else
+                    printf "${Y}not in snapshot${N}\n"
+                fi
+                ;;
+            dirs)
+                printf "  ${D}//${N} ${B}dir stack${N}       "
+                if [[ -r "$target/dirstack.txt" ]]; then
+                    first_dir=$(head -1 "$target/dirstack.txt")
+                    if [[ -d "$first_dir" ]]; then
+                        cd "$first_dir"
+                        printf "${G}cd %s${N}\n" "$first_dir"
+                    else
+                        printf "${Y}%s no longer exists${N}\n" "$first_dir"
+                    fi
+                else
+                    printf "${Y}not in snapshot${N}\n"
+                fi
+                ;;
+            *)
+                printf "  ${D}//${N} ${R}unknown component: %s${N}\n" "$comp"
+                ;;
+        esac
+    done
+
+    printf "\n"
+    printf "  ${D}┌──────────────────────────────────────────────────────────┐${N}\n"
+    printf "  ${D}│${N} ${G}RESTORE COMPLETE${N}                                          ${D}│${N}\n"
+    printf "  ${D}└──────────────────────────────────────────────────────────┘${N}\n"
+    printf "\n"
+    unfunction _bx _bt _bb 2>/dev/null
+}
+
+zpwrRestore "$@"

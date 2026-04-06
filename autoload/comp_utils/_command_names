@@ -10,6 +10,8 @@ function _command_names(){
     # `-' as the first argument is then removed from the arguments.
 
     local args defs ffilt aliasesAry galiasesAry k v
+    local -a cmdpath
+    local -a _saved_path
 
     zstyle -t ":completion:${curcontext}:commands" rehash && rehash
 
@@ -43,10 +45,11 @@ function _command_names(){
 
     args=( "$@" )
 
-    local -a cmdpath
+    _saved_path=( $path )
+    local -a +h path
+    local -A +h commands
+    path=( $_saved_path )
     if zstyle -a ":completion:${curcontext}" command-path cmdpath && (( $#cmdpath )); then
-        local -a +h path
-        local -A +h commands
         path=( $cmdpath )
     fi
     _alternative -O args "$defs[@]"

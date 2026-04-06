@@ -2,7 +2,10 @@
 # vim: set ft=sh:
 function zpwrEmacsAllServer(){
 
-    builtin cd $ZPWR
+    builtin cd "$ZPWR" || {
+        zpwrLogConsoleErr "cannot cd to $ZPWR"
+        return 1
+    }
     ${=ZPWR_EMACS} \
     "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,.vimrc,init.vim,.ideavimrc,.globalrc,.spacemacs} \
     "$ZPWR/"*.{sh,py,zsh,pl} \

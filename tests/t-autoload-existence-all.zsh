@@ -2211,3 +2211,73 @@
     run zpwrExists zua
     assert $state equals 0
 }
+
+@test 'fn zpwrBench exists' {
+    run zpwrExists zpwrBench
+    assert $state equals 0
+}
+
+@test 'fn zpwrTop exists' {
+    run zpwrExists zpwrTop
+    assert $state equals 0
+}
+
+@test 'fn zpwrDoctor exists' {
+    run zpwrExists zpwrDoctor
+    assert $state equals 0
+}
+
+@test 'fn zpwrFlame exists' {
+    run zpwrExists zpwrFlame
+    assert $state equals 0
+}
+
+@test 'fn zpwrAliasRank exists' {
+    run zpwrExists zpwrAliasRank
+    assert $state equals 0
+}
+
+@test 'fn zpwrFuncRank exists' {
+    run zpwrExists zpwrFuncRank
+    assert $state equals 0
+}
+
+@test 'fn zpwrWatch exists' {
+    run zpwrExists zpwrWatch
+    assert $state equals 0
+}
+
+@test 'fn zpwrReplay exists' {
+    run zpwrExists zpwrReplay
+    assert $state equals 0
+}
+
+@test 'fn zpwrSnapshot exists' {
+    run zpwrExists zpwrSnapshot
+    assert $state equals 0
+}
+
+@test 'fn zpwrTrace exists' {
+    run zpwrExists zpwrTrace
+    assert $state equals 0
+}
+
+@test 'fn zpwrDeps exists' {
+    run zpwrExists zpwrDeps
+    assert $state equals 0
+}
+
+@test 'fn zpwrTailLog exists' {
+    run zpwrExists zpwrTailLog
+    assert $state equals 0
+}
+
+@test 'fn zpwrStudy exists' {
+    run zpwrExists zpwrStudy
+    assert $state equals 0
+}
+
+@test 'fn zpwrWizard exists' {
+    run zpwrExists zpwrWizard
+    assert $state equals 0
+}

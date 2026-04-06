@@ -1,0 +1,28 @@
+PAGE_TITLE="ALL Vim Insert Mode (2/2)"
+PAGE_CHAPTER="APPENDIX B: COMPLETE KEYBINDING DUMP"
+PAGE_CONTENT() {
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    print "  ${B}${M}=== ALL VIM INSERT MODE (2/2) ===${N}"
+    print "  ${D}i  <F7>  * <Esc>:TTags<CR>${N}"
+    print "  ${D}i  <F6>  * <Esc>:SyntasticToggleMode<CR>${N}"
+    print "  ${D}i  <F5>  * <Esc>:LOTRToggle<CR>${N}"
+    print "  ${D}i  <F4>  * <Esc>:MinimapToggle<CR>${N}"
+    print "  ${D}i  <F3>  * <Esc>:TlistAddFiles *<CR>:TlistToggle<CR>${N}"
+    print "  ${D}i  <F2>  * <Esc>:UndotreeToggle<CR>${N}"
+    print "  ${D}i  <F1>  * <Esc>:NERDTreeToggle<CR>${N}"
+    print "  ${D}i  <F8>  * <Esc>:%s@@@g<Left><Left><Left>${N}"
+    print "  ${D}i  <C-Up>  * <Esc>:<C-U>call GoToNextMarker('{{{',1)<CR>i${N}"
+    print "  ${D}i  <C-Down>  * <Esc>:<C-U>call GoToNextMarker('{{{',0)<CR>i${N}"
+    print "  ${D}i  <C-B><C-N>  * <Esc>^2xji${N}"
+    print "  ${D}i  <C-B>  * getline('.')=~'^\\s*'&&col('.')>strlen(getline('.'))?'0\\<C-D>${N}"
+    print "  ${D}i  <End>  * <Esc>Gi${N}"
+    print "  ${D}i  <Home>  * <Esc>ggi${N}"
+    print "  ${D}i  <C-C>  * <Esc>:wq.<CR>:qa.<CR>${N}"
+    print "  ${D}i  <C-T>  * i<BS><C-O>:silent. undojoin | normal. xp<CR>${N}"
+    print "  ${D}i  <C-D><C-T>  * <C-O>:call TransposeWords()<CR>${N}"
+    print "  ${D}i  <C-L>  * <Esc>mbgg=G'bzza${N}"
+    print "  ${D}i  <Tab>  * <C-R>=UltiSnips#ExpandSnippetOrJump()<CR>${N}"
+    print "  ${D}i  fj  <Esc>${N}"
+    print "  ${D}i  jf  <Esc>${N}"
+}

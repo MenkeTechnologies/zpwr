@@ -4,7 +4,10 @@ function zpwrCdUp(){
 
     local cdstr
     if [[ -z $1 ]]; then
-        cd ..
+        cd .. || {
+            zpwrLogConsoleErr "cannot cd .."
+            return 1
+        }
     else
         for (( i = 0; i < $1; ++i )); do
             cdstr+="../"

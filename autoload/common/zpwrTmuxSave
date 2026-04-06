@@ -1,0 +1,263 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrTmuxSave(){
+
+    builtin emulate -L zsh
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+
+    local layout_dir="$ZPWR_LOCAL/layouts"
+    local layout_name layout_file
+    local -i list_mode=0 delete_mode=0
+    local -a layouts
+    local lf lmod
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print "  ${B}${C}TMUX SAVE${N}  ${D}//  save tmux layout to repeatable script${N}"
+        print ""
+        print "  ${B}USAGE:${N} zpwr tmuxsave ${D}[OPTIONS] [NAME]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-l, --list${N}                                       ${D}// List saved layouts${N}"
+        print "  ${C}-d, --delete NAME${N}                                ${D}// Delete a saved layout${N}"
+        print "  ${C}NAME${N}                                             ${D}// Layout name (default: timestamp)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr tmuxsave${N}                                    ${D}// save with timestamp name${N}"
+        print "  ${C}zpwr tmuxsave dev${N}                                ${D}// save as \"dev\"${N}"
+        print "  ${C}zpwr tmuxsave --list${N}                             ${D}// list saved layouts${N}"
+        print "  ${C}zpwr tmuxsave --delete dev${N}                       ${D}// delete \"dev\" layout${N}"
+        print "  ${C}zpwr tmuxload dev${N}                                ${D}// restore layout (see tmuxload)${N}"
+        print ""
+        print "  ${D}── SAVED DATA ───────────────────────────────────────────────────────${N}"
+        print "  ${D}windows, pane splits, layout geometry, working directories,${N}"
+        print "  ${D}window names. Saved to \$ZPWR_LOCAL/layouts/<name>.zsh${N}"
+        print ""
+        return 0
+    fi
+
+    while [[ "$1" == -* ]]; do
+        case "$1" in
+            -l|--list) list_mode=1; shift ;;
+            -d|--delete) (( $# >= 2 )) && { delete_mode=1; layout_name="$2"; shift 2; } || shift ;;
+            *) shift ;;
+        esac
+    done
+
+    command mkdir -p "$layout_dir"
+
+    # ── LIST MODE ────────────────────────────────────────────
+    if (( list_mode )); then
+        layouts=( "$layout_dir"/*.zsh(N:t:r) )
+        if (( ${#layouts} == 0 )); then
+            print "  ${Y}no saved layouts${N}"
+            print "  ${D}save one with: zpwr tmuxsave <name>${N}"
+            return 0
+        fi
+        print ""
+        print "  ${B}${C}SAVED LAYOUTS${N}  ${D}(${#layouts})${N}"
+        print ""
+        for lf in "$layout_dir"/*.zsh(N); do
+            lmod=$(command stat -f '%Sm' -t '%Y-%m-%d %H:%M' "$lf" 2>/dev/null || command stat -c '%y' "$lf" 2>/dev/null | cut -d. -f1)
+            print "  ${G}${lf:t:r}${N}  ${D}// ${lmod}${N}"
+        done
+        print ""
+        return 0
+    fi
+
+    # ── DELETE MODE ──────────────────────────────────────────
+    if (( delete_mode )); then
+        if [[ -z "$layout_name" ]]; then
+            zpwrLogConsoleErr "usage: zpwr tmuxsave --delete <name>"
+            return 1
+        fi
+        layout_file="$layout_dir/${layout_name}.zsh"
+        if [[ ! -f "$layout_file" ]]; then
+            zpwrLogConsoleErr "layout \"${layout_name}\" not found"
+            return 1
+        fi
+        command rm "$layout_file"
+        print "  ${G}deleted${N} ${layout_name}"
+        return 0
+    fi
+
+    # ── SAVE MODE ────────────────────────────────────────────
+    if [[ -z "$TMUX" ]]; then
+        zpwrLogConsoleErr "not inside a tmux session"
+        return 1
+    fi
+
+    layout_name="${1:-$(date +%Y%m%d_%H%M%S)}"
+    layout_file="$layout_dir/${layout_name}.zsh"
+
+    local session_name idx wname wlayout wact widx wline pline pp pc pa ppid
+    local child_args child_pid wopts_line opt_name opt_val
+    local -a win_indices win_names win_layouts win_active
+    local -a pane_paths pane_cmds pane_acts pane_pids
+    local -a session_opts window_opts
+    local -i wi pi pane_count active_win=0
+    session_name=$(tmux display-message -p '#{session_name}')
+
+    # capture session-level options that differ from defaults
+    session_opts=()
+    while IFS= read -r wopts_line; do
+        [[ "$wopts_line" == @* ]] && continue  # skip plugin vars
+        [[ -z "$wopts_line" ]] && continue
+        session_opts+=( "$wopts_line" )
+    done < <(tmux show-options 2>/dev/null)
+
+    while IFS=$'\t' read -r wline; do
+        idx="${wline%%	*}"; wline="${wline#*	}"
+        wname="${wline%%	*}"; wline="${wline#*	}"
+        wlayout="${wline%%	*}"; wline="${wline#*	}"
+        wact="${wline}"
+        win_indices+=( "$idx" )
+        win_names+=( "$wname" )
+        win_layouts+=( "$wlayout" )
+        win_active+=( "$wact" )
+    done < <(tmux list-windows -F "#{window_index}	#{window_name}	#{window_layout}	#{window_active}")
+
+    {
+        print "#!/usr/bin/env zsh"
+        print "# zpwr tmux layout: ${layout_name}"
+        print "# saved: $(date '+%Y-%m-%d %H:%M:%S')"
+        print "# session: ${session_name}"
+        print "# windows: ${#win_indices}"
+        print ""
+        print "local _sess=\"\${1:-${layout_name}}\""
+        print ""
+        print "# create session with first window"
+        print "tmux new-session -d -s \"\$_sess\" -n '${win_names[1]}'"
+        print ""
+
+        # session-level options
+        if (( ${#session_opts} > 0 )); then
+            print "# ── session options ──────────────────────────"
+            for wopts_line in "${session_opts[@]}"; do
+                opt_name="${wopts_line%% *}"
+                opt_val="${wopts_line#* }"
+                print "tmux set-option -t \"\$_sess\" ${opt_name} ${opt_val}"
+            done
+            print ""
+        fi
+
+        for (( wi=1; wi<=${#win_indices}; wi++ )); do
+            widx="${win_indices[$wi]}"
+            wname="${win_names[$wi]}"
+            wlayout="${win_layouts[$wi]}"
+            wact="${win_active[$wi]}"
+
+            if (( wi > 1 )); then
+                print "# ── window ${widx}: ${wname} ──────────────────────────"
+                print "tmux new-window -t \"\$_sess\" -n '${wname}'"
+            else
+                print "# ── window ${widx}: ${wname} (initial) ─────────────────"
+            fi
+
+            # per-window options
+            window_opts=()
+            while IFS= read -r wopts_line; do
+                [[ "$wopts_line" == @* || -z "$wopts_line" ]] && continue
+                window_opts+=( "$wopts_line" )
+            done < <(tmux show-window-options -t ":${widx}" 2>/dev/null)
+            if (( ${#window_opts} > 0 )); then
+                for wopts_line in "${window_opts[@]}"; do
+                    opt_name="${wopts_line%% *}"
+                    opt_val="${wopts_line#* }"
+                    print "tmux set-window-option -t \"\$_sess:${widx}\" ${opt_name} ${opt_val}"
+                done
+            fi
+
+            # get pane info for this window (path, command, active, pid)
+            pane_paths=() pane_cmds=() pane_acts=() pane_pids=()
+            while IFS=$'\t' read -r pline; do
+                pp="${pline%%	*}"; pline="${pline#*	}"
+                pc="${pline%%	*}"; pline="${pline#*	}"
+                pa="${pline%%	*}"; pline="${pline#*	}"
+                ppid="${pline}"
+                pane_paths+=( "$pp" )
+                pane_cmds+=( "$pc" )
+                pane_acts+=( "$pa" )
+                pane_pids+=( "$ppid" )
+            done < <(tmux list-panes -t ":${widx}" -F "#{pane_current_path}	#{pane_current_command}	#{pane_active}	#{pane_pid}")
+
+            pane_count=${#pane_paths}
+
+            # first pane: cd to its directory
+            if [[ -n "${pane_paths[1]}" && "${pane_paths[1]}" != "" ]]; then
+                print "tmux send-keys -t \"\$_sess\" 'builtin cd ${(q)pane_paths[1]}; clear' Enter"
+            fi
+
+            # create additional panes via splits
+            for (( pi=2; pi<=pane_count; pi++ )); do
+                print "tmux split-window -t \"\$_sess\""
+                if [[ -n "${pane_paths[$pi]}" && "${pane_paths[$pi]}" != "" ]]; then
+                    print "tmux send-keys -t \"\$_sess\" 'builtin cd ${(q)pane_paths[$pi]}; clear' Enter"
+                fi
+            done
+
+            # apply the exact layout geometry
+            print "tmux select-layout -t \"\$_sess:${widx}\" '${wlayout}'"
+
+            # restore running commands in each pane
+            for (( pi=1; pi<=pane_count; pi++ )); do
+                pc="${pane_cmds[$pi]}"
+                # skip if pane is just running a shell
+                if [[ "$pc" != "zsh" && "$pc" != "bash" && "$pc" != "sh" && -n "$pc" ]]; then
+                    # get full command line from process tree
+                    child_args=""
+                    child_pid=$(pgrep -P "${pane_pids[$pi]}" 2>/dev/null | head -1)
+                    if [[ -n "$child_pid" ]]; then
+                        child_args=$(ps -o args= -p "$child_pid" 2>/dev/null)
+                    fi
+                    [[ -z "$child_args" ]] && child_args=$(ps -o args= -p "${pane_pids[$pi]}" 2>/dev/null)
+                    if [[ -n "$child_args" ]]; then
+                        # strip reattach-to-user-namespace wrapper
+                        child_args="${child_args#reattach-to-user-namespace -l }"
+                        # skip if it's just a shell
+                        if [[ "$child_args" != */zsh && "$child_args" != */bash ]]; then
+                            print "tmux send-keys -t \"\$_sess:${widx}.$((pi-1))\" ${(q)child_args} Enter"
+                        fi
+                    fi
+                fi
+            done
+
+            # select the active pane
+            for (( pi=1; pi<=pane_count; pi++ )); do
+                if [[ "${pane_acts[$pi]}" == "1" ]]; then
+                    print "tmux select-pane -t \"\$_sess:${widx}.$((pi-1))\""
+                    break
+                fi
+            done
+
+            # track active window
+            if [[ "$wact" == "1" ]]; then
+                active_win=$widx
+            fi
+
+            print ""
+        done
+
+        # select active window
+        print "# restore active window"
+        print "tmux select-window -t \"\$_sess:${active_win}\""
+        print ""
+        print "# attach"
+        print "if [[ -z \"\$TMUX\" ]]; then"
+        print "    tmux attach-session -t \"\$_sess\""
+        print "else"
+        print "    tmux switch-client -t \"\$_sess\""
+        print "fi"
+    } > "$layout_file"
+
+    chmod +x "$layout_file"
+
+    print "  ${G}saved${N} ${B}${layout_name}${N}  ${D}// ${#win_indices} windows, $(tmux list-panes -a -F '#{pane_id}' | wc -l | tr -d ' ') panes${N}"
+    print "  ${D}${layout_file}${N}"
+    print "  ${D}restore with: ${M}zpwr tmuxload ${layout_name}${N}"
+}
+
+zpwrTmuxSave "$@"

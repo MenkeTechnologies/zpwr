@@ -2651,3 +2651,87 @@
     assert $state equals 0
     assert "$output" contains function
 }
+
+@test 'type zpwrBench is function' {
+    run type zpwrBench
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrTop is function' {
+    run type zpwrTop
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrDoctor is function' {
+    run type zpwrDoctor
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrFlame is function' {
+    run type zpwrFlame
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrAliasRank is function' {
+    run type zpwrAliasRank
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrFuncRank is function' {
+    run type zpwrFuncRank
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrWatch is function' {
+    run type zpwrWatch
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrReplay is function' {
+    run type zpwrReplay
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrSnapshot is function' {
+    run type zpwrSnapshot
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrTrace is function' {
+    run type zpwrTrace
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrDeps is function' {
+    run type zpwrDeps
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrTailLog is function' {
+    run type zpwrTailLog
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrStudy is function' {
+    run type zpwrStudy
+    assert $state equals 0
+    assert "$output" contains function
+}
+
+@test 'type zpwrWizard is function' {
+    run type zpwrWizard
+    assert $state equals 0
+    assert "$output" contains function
+}

@@ -2,7 +2,10 @@
 # vim: set ft=sh:
 function zpwrVimEmacsConfig(){
 
-    builtin cd $ZPWR
+    builtin cd "$ZPWR" || {
+        zpwrLogConsoleErr "cannot cd to $ZPWR"
+        return 1
+    }
     ${=ZPWR_VIM} \
     "$ZPWR_INSTALL/.spacemacs" \
     "$ZPWR_INSTALL/emacs/snippets/"*-mode/*

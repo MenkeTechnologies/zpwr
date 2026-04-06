@@ -91,7 +91,7 @@ brew install elm
 brew install emacs
 brew install erlang
 brew install etcd
-brew install exa
+brew install eza
 brew install exercism
 brew install expat
 brew install faac

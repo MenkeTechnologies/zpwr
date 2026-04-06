@@ -11,6 +11,7 @@ function zpwrMagicEnter () {
         echo
         if zpwrIsGitDir; then
             eval "$MAGIC_ENTER_GIT_COMMAND"
+            echo
         else
             eval "$MAGIC_ENTER_OTHER_COMMAND"
         fi

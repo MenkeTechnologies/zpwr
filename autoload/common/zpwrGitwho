@@ -1,0 +1,178 @@
+# -*- mode: sh -*-
+# vim: set ft=sh:
+function zpwrGitwho(){
+
+    builtin emulate -L zsh
+    setopt extendedglob
+
+    local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
+    local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
+    local -i _bw=66
+    local _msg
+    _bx() { local _r; _r=$(printf "%s" "$1" | command sed $'s/\033\\[[0-9;]*m//g'); printf " ${D}│${N}%s%*s${D}│${N}\n" "$1" $(( _bw - ${#_r} )) ""; }
+    _bt() { printf " ${D}┌"; printf '─%.0s' {1..$_bw}; printf "┐${N}\n"; }
+    _bb() { printf " ${D}└"; printf '─%.0s' {1..$_bw}; printf "┘${N}\n"; }
+
+    if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+        print ""
+        print " ${C} ██████╗ ██╗████████╗██╗    ██╗██╗  ██╗ ██████╗${N}"
+        print " ${C}██╔════╝ ██║╚══██╔══╝██║    ██║██║  ██║██╔═══██╗${N}"
+        print " ${M}██║  ███╗██║   ██║   ██║ █╗ ██║███████║██║   ██║${N}"
+        print " ${M}██║   ██║██║   ██║   ██║███╗██║██╔══██║██║   ██║${N}"
+        print " ${C}╚██████╔╝██║   ██║   ╚███╔███╔╝██║  ██║╚██████╔╝${N}"
+        print " ${C} ╚═════╝ ╚═╝   ╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝${N}"
+        _bt
+        _bx " ${G}STATUS: ONLINE${N}  ${D}//${N} ${C}SIGNAL: ${G}████████${D}░░${N}  ${D}//${N} ${M}GITWHO${N}"
+        _bb
+        print "  ${D}>> GIT CONTRIBUTOR STATS // ALL REPOS <<${N}"
+        print ""
+        print "  Aggregate git shortlog -sn across all cached git repos."
+        print "  Results cached in \$ZPWR_LOCAL; rebuilds when repo cache changes."
+        print ""
+        print "  ${B}USAGE:${N} zpwr gitwho ${D}[OPTIONS] [N]${N}"
+        print ""
+        print "  ${D}── OPTIONS ──────────────────────────────────────────────────────────${N}"
+        print "  ${C}-h, --help${N}                                       ${D}// Show this help${N}"
+        print "  ${C}-r, --reset${N}                                      ${D}// Force cache rebuild${N}"
+        print "  ${C}-a, --all${N}                                        ${D}// Show all authors${N}"
+        print "  ${C}N${N}                                                 ${D}// Top N authors (default: 20)${N}"
+        print ""
+        print "  ${D}── EXAMPLES ─────────────────────────────────────────────────────────${N}"
+        print "  ${C}zpwr gitwho${N}                                     ${D}// Top 20 across all repos${N}"
+        print "  ${C}zpwr gitwho 50${N}                                  ${D}// Top 50${N}"
+        print "  ${C}zpwr gitwho -a${N}                                  ${D}// Everyone${N}"
+        print "  ${C}zpwr gitwho -r${N}                                  ${D}// Force rebuild${N}"
+        print ""
+        return 0
+    fi
+
+    local show_all=false reset=false
+    local -i top_n=20
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            -a|--all) show_all=true; shift ;;
+            -r|--reset) reset=true; shift ;;
+            *) top_n=$1; shift ;;
+        esac
+    done
+
+    if [[ ! -s "$ZPWR_ALL_GIT_DIRS" ]]; then
+        printf "  ${Y}No git repo cache found${N}\n"
+        printf "  ${D}Run 'zpwr regengitrepocache' first${N}\n"
+        return 1
+    fi
+
+    local cache_file="$ZPWR_LOCAL/zpwrGitwho.txt"
+    local use_cache=false
+
+    # use cache if it exists, is newer than repo list, and no --reset
+    if [[ "$reset" != true && -s "$cache_file" && "$cache_file" -nt "$ZPWR_ALL_GIT_DIRS" ]]; then
+        use_cache=true
+    fi
+
+    local -i total_repos=0 total_commits=0
+    local -A author_commits author_repos
+    local dir line author count repos_str k
+    local -i total_authors=0
+
+    printf "\n"
+    printf " ${C} ██████╗ ██╗████████╗██╗    ██╗██╗  ██╗ ██████╗${N}\n"
+    printf " ${C}██╔════╝ ██║╚══██╔══╝██║    ██║██║  ██║██╔═══██╗${N}\n"
+    printf " ${M}██║  ███╗██║   ██║   ██║ █╗ ██║███████║██║   ██║${N}\n"
+    printf " ${M}██║   ██║██║   ██║   ██║███╗██║██╔══██║██║   ██║${N}\n"
+    printf " ${C}╚██████╔╝██║   ██║   ╚███╔███╔╝██║  ██║╚██████╔╝${N}\n"
+    printf " ${C} ╚═════╝ ╚═╝   ╚═╝    ╚══╝╚══╝ ╚═╝  ╚═╝ ╚═════╝${N}\n"
+    _bt
+
+    if [[ "$use_cache" != true ]]; then
+        printf -v _msg " ${G}SCANNING${N}  ${D}//${N} ${C}all cached repos${N}  ${D}//${N} ${M}%s${N}" "$(date '+%H:%M:%S')"
+        _bx "$_msg"
+        _bb
+        printf "  ${D}>> AGGREGATING CONTRIBUTORS <<${N}\n\n"
+
+        while IFS= read -r dir; do
+            [[ -d "$dir/.git" || -d "$dir" ]] || continue
+            (( total_repos++ ))
+            while IFS= read -r line; do
+                count="${line%%	*}"
+                count="${count// /}"
+                author="${line#*	}"
+                [[ -z "$author" || -z "$count" ]] && continue
+                (( author_commits["$author"] += count ))
+                (( author_repos["$author"]++ ))
+                (( total_commits += count ))
+            done < <(git -C "$dir" shortlog -sn --all 2>/dev/null)
+        done < "$ZPWR_ALL_GIT_DIRS"
+
+        total_authors=${#author_commits}
+
+        # write cache pre-sorted by commits descending
+        # header: #repos=N, #authors=N, #commits=N
+        # data: commits<tab>repos<tab>author
+        {
+            printf "#repos=%d\n#authors=%d\n#commits=%d\n" $total_repos $total_authors $total_commits
+            for k in ${(k)author_commits}; do
+                printf "%d\t%d\t%s\n" ${author_commits[$k]} ${author_repos[$k]} "$k"
+            done | sort -t$'\t' -k1,1rn
+        } > "$cache_file"
+    else
+        printf -v _msg " ${G}CACHED${N}  ${D}//${N} ${C}%s${N}  ${D}//${N} ${M}%s${N}" "${cache_file:t}" "$(date '+%H:%M:%S')"
+        _bx "$_msg"
+        _bb
+        printf "  ${D}>> READING CACHED RESULTS <<${N}\n\n"
+    fi
+
+    # read header for totals
+    while IFS= read -r line; do
+        [[ "$line" != "#"* ]] && break
+        case "$line" in
+            "#repos="*) total_repos="${line#\#repos=}" ;;
+            "#authors="*) total_authors="${line#\#authors=}" ;;
+            "#commits="*) total_commits="${line#\#commits=}" ;;
+        esac
+    done < "$cache_file"
+
+    # max commits = first data line (already sorted descending)
+    local -i max_commits=0
+    max_commits=$(command grep -m1 '^[0-9]' "$cache_file" | cut -f1)
+    (( max_commits == 0 )) && max_commits=1
+
+    printf "  ${B}%-6s %-5s %-40s %s${N}\n" "COMMITS" "REPOS" "AUTHOR" "BAR"
+    printf "  ${D}%-6s %-5s %-40s %s${N}\n" "------" "-----" "----------------------------------------" "---------------"
+
+    # stream from pre-sorted cache — only read what we need
+    local -i shown=0 commits repos bar_len i
+    local bar color
+
+    command grep -v '^#' "$cache_file" | \
+    if [[ "$show_all" != true ]]; then head -$top_n; else cat; fi | \
+    while IFS=$'\t' read -r commits repos author; do
+        [[ -z "$author" ]] && continue
+        bar_len=$(( commits * 30 / max_commits ))
+        (( bar_len == 0 )) && bar_len=1
+
+        bar=""
+        for (( i=0; i<bar_len; i++ )); do
+            bar+="█"
+        done
+
+        color=$G
+        if (( commits == max_commits )); then
+            color=$C
+        elif (( commits * 4 < max_commits )); then
+            color=$D
+        fi
+
+        printf "  ${color}%-6d${N} ${M}%-5d${N} %-40s ${color}%s${N}\n" $commits $repos "$author" "$bar"
+        (( shown++ ))
+    done
+
+    printf "\n  ${C}══════════════════════════════════════════════════════════════════${N}\n"
+    printf "  ${G}%d total commits${N}  ${D}//${N}  ${C}%d authors${N}  ${D}//${N}  ${M}%d repos${N}\n" \
+        $total_commits $total_authors $total_repos
+    printf "  ${C}══════════════════════════════════════════════════════════════════${N}\n\n"
+    unfunction _bx _bt _bb 2>/dev/null
+}
+
+zpwrGitwho "$@"

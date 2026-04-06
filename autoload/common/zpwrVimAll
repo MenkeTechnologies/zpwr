@@ -2,7 +2,10 @@
 # vim: set ft=sh:
 function zpwrVimAll(){
 
-    builtin cd $ZPWR
+    builtin cd "$ZPWR" || {
+        zpwrLogConsoleErr "cannot cd to $ZPWR"
+        return 1
+    }
     ${=ZPWR_VIM} "${=$(zpwrListFiles)}"
     zpwrClearList
     zpwrIsGitDir && git diff HEAD
