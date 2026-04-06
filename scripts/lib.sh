@@ -760,11 +760,6 @@ function zpwrPrettyPrint(){
 
 function zpwrPrettyPrintBoxStdin(){
 
-    if [[ -z "$1" ]]; then
-        echo "usage: zpwrPrettyPrintBoxStdin LABEL" >&1
-        exit 1
-    fi
-
     local perlfile
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
