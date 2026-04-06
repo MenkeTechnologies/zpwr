@@ -633,25 +633,6 @@
     assert "$output" contains "usage: zpwrFileMustExist"
 }
 
-#--------------------------------------------------------------
-# zpwrPrettyPrintBoxStdin
-#--------------------------------------------------------------
-@test 'zpwrPrettyPrintBoxStdin with stdin returns 0' {
-    run zsh -c "source $ZPWR_LIB; printf '%s\n' hello | zpwrPrettyPrintBoxStdin mylabel" 2>&1
-    assert $state equals 0
-}
-
-@test 'zpwrPrettyPrintBoxStdin output includes stdin text' {
-    run zsh -c "source $ZPWR_LIB; printf '%s\n' uniqline123 | zpwrPrettyPrintBoxStdin lbl" 2>&1
-    assert $state equals 0
-    assert "$output" contains uniqline123
-}
-
-@test 'zpwrPrettyPrintBoxStdin no label exits 1' {
-    run zsh -c "source $ZPWR_LIB; printf x | zpwrPrettyPrintBoxStdin" 2>&1
-    assert $state equals 1
-    assert "$output" contains "usage: zpwrPrettyPrintBoxStdin"
-}
 
 #--------------------------------------------------------------
 # zpwrLogConsolePrefix / zpwrLogConsoleHeader

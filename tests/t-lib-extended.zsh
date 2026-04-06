@@ -72,17 +72,17 @@
     command rm -f "$tmp"
 }
 
-# Subshell zsh -c tests: always </dev/null so stdin is not a pipe. zunit run
-# can leave stdin as a pipe; zpwrLog tests [[ -p /dev/stdin ]] before usage
-# (ZPWR_COLORS=true → wrong exit 0) and takes the stdin branch for plain logs
-# when colors are off (different code path than a closed stdin).
+# Subshell zsh -c: pin stdin inside the -c script (exec 0</dev/null). Trailing
+# </dev/null on the run line is not reliable on Linux CI — zunit/run may still
+# leave the child zsh with a pipe on stdin, so [[ -p /dev/stdin ]] is true and
+# zpwrLog wrongly takes the STDIN branch (exit 0) instead of usage (exit 1).
 @test 'zpwrLog usage error when only level with ZPWR_COLORS true' {
-    run zsh -c "source $ZPWR_LIB; export ZPWR_COLORS=true; zpwrLog INFO" 2>&1 </dev/null
+    run zsh -c "source $ZPWR_LIB; export ZPWR_COLORS=true; exec 0</dev/null; zpwrLog INFO" 2>&1
     assert $state equals 1
 }
 
 @test 'zpwrLog single token INFO with ZPWR_COLORS false exits 0 (no strict usage)' {
-    run zsh -c "source $ZPWR_LIB; export ZPWR_COLORS=false; zpwrLog INFO" 2>&1 </dev/null
+    run zsh -c "source $ZPWR_LIB; export ZPWR_COLORS=false; exec 0</dev/null; zpwrLog INFO" 2>&1
     assert $state equals 0
 }
 
