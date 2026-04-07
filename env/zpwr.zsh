@@ -20,8 +20,8 @@ fi
 ZPWR_VARS[VERB_0]="$0"
 
 () {
-    local k v verb cmd found ret exp
-    builtin builtin emulate -L zsh
+    local v verb cmd found ret exp
+    builtin emulate -L zsh
     setopt nullglob globdots extendedglob
 
 
@@ -526,25 +526,22 @@ ZPWR_VARS[VERB_0]="$0"
 
         found=false
 
-        for k v in ${(kv)ZPWR_VERBS[@]};do
-
-            if [[ $k == $verb ]]; then
-                found=true
-                cmd=${v%%=*}
-                for exp in ${(s%;%)cmd}; do
-                    if alias $exp 1>/dev/null 2>&1;then
-                        zpwrLogDebug "Eval subcommand '$exp'"
-                        eval "$exp"
-                        ret=$?
-                    else
-                        zpwrLogDebug "Eval subcommand '$exp'"
-                        eval "$exp " ${(q)@}
-                        ret=$?
-                    fi
-                done
-                break
-            fi
-        done
+        if (( ${+ZPWR_VERBS[$verb]} )); then
+            found=true
+            v=$ZPWR_VERBS[$verb]
+            cmd=${v%%=*}
+            for exp in ${(s%;%)cmd}; do
+                if alias $exp 1>/dev/null 2>&1;then
+                    zpwrLogDebug "Eval subcommand '$exp'"
+                    eval "$exp"
+                    ret=$?
+                else
+                    zpwrLogDebug "Eval subcommand '$exp'"
+                    eval "$exp " ${(q)@}
+                    ret=$?
+                fi
+            done
+        fi
 
         if [[ $found == false ]]; then
             zpwrLogConsoleErr "Unknown subcommand: '$verb'"
