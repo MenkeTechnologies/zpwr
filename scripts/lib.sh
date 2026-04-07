@@ -106,11 +106,11 @@ if zpwrIsZsh; then
                 zpwrLogConsoleErr "usage: zpwrExists <item...>"
                 return 1
             fi
-            local i
+            local i t
             #alternative is command -v
             for i in "$@";do
-                type -a -- "$i" &>/dev/null || return 1 &&
-                [[ $(type -a -- "$i" 2>/dev/null) != *"suffix alias"* ]]
+                t=$(type -a -- "$i" 2>/dev/null) || return 1
+                [[ $t != *"suffix alias"* ]] || return 1
             done
         }
     fi
