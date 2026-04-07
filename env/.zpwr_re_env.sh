@@ -108,10 +108,10 @@ zpwrEvalIfNeeded ZPWR_AUTOLOAD_LINUX "$ZPWR_AUTOLOAD_LINUX" "$ZPWR_AUTOLOAD/linu
 zpwrEvalIfNeeded ZPWR_AUTOLOAD_SYSTEMCTL "$ZPWR_AUTOLOAD_SYSTEMCTL" "$ZPWR_AUTOLOAD/systemctl" "$ZPWR_AUTOLOAD"
 # autoloaded completion functions
 zpwrEvalIfNeeded ZPWR_COMPS "$ZPWR_COMPS" "$ZPWR/autoload/comps" "$ZPWR"
-# cross OS comand file
-zpwrEvalIfNeeded ZPWR_CROSS_OS_CMD "$ZPWR_CROSS_OS" "$ZPWR_SCRIPTS/crossOSCommands.sh" "$ZPWR_SCRIPTS"
+# cross OS command file
+zpwrEvalIfNeeded ZPWR_CROSS_OS_CMD "$ZPWR_CROSS_OS_CMD" "$ZPWR_SCRIPTS/crossOSCommands.sh" "$ZPWR_SCRIPTS"
 # cross OS fn file
-zpwrEvalIfNeeded ZPWR_CROSS_OS_EXE "$ZPWR_CROSS_OS" "$ZPWR_SCRIPTS/crossOSExecute.sh" "$ZPWR_SCRIPTS"
+zpwrEvalIfNeeded ZPWR_CROSS_OS_EXE "$ZPWR_CROSS_OS_EXE" "$ZPWR_SCRIPTS/crossOSExecute.sh" "$ZPWR_SCRIPTS"
 # the location of macOS only associated interpreted scripts
 # custom plugin dir
 zpwrEvalIfNeeded ZPWR_PLUGIN_DIR "$ZPWR_PLUGIN_DIR" "$ZSH_CUSTOM/plugins" "$ZSH_CUSTOM"
