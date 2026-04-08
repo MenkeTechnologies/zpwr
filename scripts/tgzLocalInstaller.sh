@@ -42,7 +42,7 @@ function install() {
     fi
 
     tar xvfz "$1"
-    cd *"$directory_name" && {
+    builtin cd *"$directory_name" && {
         if [[ $no_install == true ]]; then
             ./configure && make
         else

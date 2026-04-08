@@ -38,7 +38,7 @@ fi
 if [[ $ZPWR_TRACE == true ]]; then
     set -x
 fi
-trap 'rm "$file"' INT
+trap 'command rm "$file"' INT
 
 function usage() {
 
@@ -143,7 +143,7 @@ else
     perl -ne "print if 1 .. eof" "$file"
 fi
 
-rm "$file"
+command rm "$file"
 
 #alternatively
 

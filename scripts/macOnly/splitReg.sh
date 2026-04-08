@@ -7,7 +7,7 @@
 ##### Notes:
 #}}}***********************************************************
 
-trap 'rm "$file"' INT
+trap 'command rm "$file"' INT
 
 function usage() {
 
@@ -84,7 +84,7 @@ delim=$(echo "$output" | grep -n -- "$regex" | tail -$level | head -1 | cut -d: 
     fi
 } || sed -n '1,$p' "$file"
 
-rm "$file"
+command rm "$file"
 
 #alternatively
 

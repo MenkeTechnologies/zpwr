@@ -30,11 +30,11 @@ else
         if [[ $1 =~ .*.zip ]]; then
             if [[ $encrypt_program == zip ]]; then
                 eval "un$encrypt_program $1"
-                rm -rf "$1"
+                command rm -rf "$1"
             fi
         else
             eval "$encrypt_program -er $1.zip $1"
-            rm -rf "$1"
+            command rm -rf "$1"
         fi
     }
 

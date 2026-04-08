@@ -117,11 +117,11 @@ function refreshers() {
 
 while true; do
 
-    cd "$configDir" || {
+    builtin cd "$configDir" || {
         echo "$(date) Directory $configDir does not exist" >&2
         if [[ ! -d "$baseDir" ]]; then
-            mkdir -pv "baseDir"
-            cd "$baseDir" || exit 1
+            mkdir -pv "$baseDir"
+            builtin cd "$baseDir" || exit 1
             echo "$(date) Created $configDir and exiting." >&2
             exit 1
         fi
