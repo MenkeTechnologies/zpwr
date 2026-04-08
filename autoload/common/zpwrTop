@@ -91,12 +91,17 @@ function zpwrTop(){
         nzc=${#_comps[(I)(#i)*zpwr*]}
 
         ps_out="$(command ps -o rss=,vsz= -p $$ 2>/dev/null)"
-        mod_out="$(zmodload 2>/dev/null)"
-        opts_out="$(setopt 2>/dev/null)"
+        # use zsh builtins instead of forking to zmodload/setopt commands
+        mod_out="${(pj:\n:)${(k)modules[(R)loaded]}}"
+        opts_out="${(pj:\n:)${(k)options[(R)on]}}"
+        # use zsh stat builtin instead of wc fork for file size
         nch_raw="$(pgrep -P $$ 2>/dev/null | wc -l)"
         hb_raw="0" hl_raw="0"
         if [[ -f "$HISTFILE" ]]; then
-            hb_raw="$(command wc -c < "$HISTFILE" 2>/dev/null)"
+            # use zstat for byte size (no fork), keep wc -l for line count
+            builtin zmodload -F zsh/stat b:zstat
+            local -A _st
+            zstat -H _st "$HISTFILE" 2>/dev/null && hb_raw="${_st[size]}"
             hl_raw="$(command wc -l < "$HISTFILE" 2>/dev/null)"
         fi
         gb="" gdr=""
@@ -179,12 +184,15 @@ function zpwrTop(){
             mb="${D}$(printf '░%.0s' {1..20})${N}"
         fi
 
-        fsz=()
-        for fn in ${(k)functions}; do
-            [[ $fn == _* ]] && continue
-            fsz+=( "${#functions[$fn]} $fn" )
-        done
-        fsz=( ${(On)fsz} )
+        # only recompute function sizes every 5 iterations (they rarely change)
+        if (( iteration == 1 || iteration % 5 == 0 )); then
+            fsz=()
+            for fn in ${(k)functions}; do
+                [[ $fn == _* ]] && continue
+                fsz+=( "${#functions[$fn]} $fn" )
+            done
+            fsz=( ${(On)fsz} )
+        fi
 
         lp=()
         for pp in $path; do lp+=( "${#pp} $pp" ); done
@@ -275,18 +283,17 @@ function zpwrTop(){
         print -r "${K}"
         print -r "  ${C}── STARTUP HISTORY (last ${#spark_vals}) ────────────────────────────────────────${N}${K}"
         if (( ${#spark_vals} >= 2 )); then
-            # compute min/max/avg from integer millis to avoid float arithmetic
+            # pre-compute all millis values in one pass (avoids duplicate conversion)
+            local -a spark_millis=()
             spark_min=999999 spark_max=0 spark_sum=0
             for sv in "${spark_vals[@]}"; do
-                # convert e.g. "0.047" to integer millis: strip dot, parse
-                si=$(( ${sv//./} ))
-                # handle varying decimal places: normalize to millis
                 if [[ "$sv" == *.* ]]; then
                     frac="${sv#*.}"
                     si=$(( ${sv%.*} * 1000 + 10#${(l:3::0:)frac} ))
                 else
                     si=$(( sv * 1000 ))
                 fi
+                spark_millis+=( $si )
                 (( si < spark_min )) && spark_min=$si
                 (( si > spark_max )) && spark_max=$si
                 spark_sum=$(( spark_sum + si ))
@@ -295,17 +302,11 @@ function zpwrTop(){
             spark_avg=$(( spark_sum / sn ))
             spark_last=${spark_vals[-1]}
 
-            # build sparkline: map each value to ▁▂▃▄▅▆▇█
+            # build sparkline from pre-computed millis array
             spark_line=""
             srange=$(( spark_max - spark_min ))
             (( srange < 1 )) && srange=1
-            for sv in "${spark_vals[@]}"; do
-                if [[ "$sv" == *.* ]]; then
-                    frac="${sv#*.}"
-                    si=$(( ${sv%.*} * 1000 + 10#${(l:3::0:)frac} ))
-                else
-                    si=$(( sv * 1000 ))
-                fi
+            for si in "${spark_millis[@]}"; do
                 sidx=$(( (si - spark_min) * 7 / srange + 1 ))
                 (( sidx < 1 )) && sidx=1
                 (( sidx > 8 )) && sidx=8

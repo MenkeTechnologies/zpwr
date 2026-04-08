@@ -6,10 +6,21 @@ function zpwrAcceptLine () {
     builtin emulate -L zsh
     setopt noshwordsplit extendedglob
 
-    local pane commandsThatModifyFiles mywords line command cmd Aliases args prefix cmdstr value
+    local pane mywords line command cmd Aliases args prefix cmdstr value
+    local _expanded _datestamp
 
-    if ! [[ $(zpwrExpandAliases $BUFFER 2>/dev/null) = zc* ]]; then
-        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$(date)"
+    # inline alias expansion check — avoids fork+subshell on every Enter
+    unset 'functions[_expand-aliases]'
+    functions[_expand-aliases]=$BUFFER
+    _expanded=${functions[_expand-aliases]#$'\t'}
+    unset 'functions[_expand-aliases]'
+
+    # use strftime builtin instead of $(date) fork
+    # zsh/datetime already loaded at init time
+    strftime -s _datestamp '%Y-%m-%d %H:%M:%S'
+
+    if ! [[ $_expanded = zc* ]]; then
+        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD:$BUFFER PWD:${PWD} DATE:$_datestamp"
         zc-rename $ZPWR_CONVEY_NAME &>/dev/null
         ZPWR_CONVEY_LAST_CMD=$BUFFER
     else
@@ -17,7 +28,7 @@ function zpwrAcceptLine () {
             ZPWR_CONVEY_LAST_CMD="-zsh $-"
         fi
 
-        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD: $ZPWR_CONVEY_LAST_CMD PWD:${PWD} DATE:$(date)"
+        ZPWR_CONVEY_NAME="TTY:${TTY} PID:${$} CMD: $ZPWR_CONVEY_LAST_CMD PWD:${PWD} DATE:$_datestamp"
         zc-rename $ZPWR_CONVEY_NAME &>/dev/null
     fi
 
@@ -37,8 +48,7 @@ function zpwrAcceptLine () {
     fi
 
     #do we want to clear the screen and run ls after we exec the current line?
-
-    commandsThatModifyFiles=(rm mv cp mkdir ln chown chmod touch unlink srm md rmdir chflags chgrp git\ reset git\ clone gcl dot_clean)
+    # ZPWR_CMDS_THAT_MODIFY_FILES defined in env/.zpwr_env.sh
 
     zpwrExpandParseWords "$BUFFER"
 
@@ -48,7 +58,7 @@ function zpwrAcceptLine () {
 
         mywords=( ${(z)cmdstr} )
 
-        for command in ${commandsThatModifyFiles[@]}; do
+        for command in ${ZPWR_CMDS_THAT_MODIFY_FILES[@]}; do
             # match touch t
             # NOT touchtest t
 
@@ -99,9 +109,12 @@ function zpwrAcceptLine () {
             if [[ -n ${aliases[$cmd]} ]];then
                 # non global alias - expand regular alias to prevent global alias expansion
                 line="${aliases[$cmd]}"
-                print -- "$line" | grep -F "'" && \
-                    BUFFER="${line:1:-1} $mywords[2,$]" ||
+                # zsh pattern match avoids fork+pipe of grep
+                if [[ $line == *"'"* ]]; then
+                    BUFFER="${line:1:-1} $mywords[2,$]"
+                else
                     BUFFER="$line $mywords[2,$]"
+                fi
             else
                 # function
                 BUFFER="\\$mywords"
