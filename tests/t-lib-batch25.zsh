@@ -33,7 +33,8 @@
 }
 
 @test 'ci.yml defines concurrency group for workflow' {
-    run grep -q 'group: ci-' "$ZPWR/.github/workflows/ci.yml"
+    # Regex: literal ${{…}} breaks zunit run (zsh bad substitution).
+    run grep -qE 'group:.*github\.workflow.*github\.ref' "$ZPWR/.github/workflows/ci.yml"
     assert $state equals 0
 }
 
