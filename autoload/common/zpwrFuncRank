@@ -259,7 +259,11 @@ function zpwrFuncRank(){
     [[ -n "$line_buf" ]] && print "  ${D}//${N} ${Y}${line_buf}${N}"
 
     local -i total_autoloads=0
-    [[ -d "$autoload_dir" ]] && total_autoloads=$(command ls "$autoload_dir" 2>/dev/null | grep -vc '^_')
+    if [[ -d "$autoload_dir" ]]; then
+        # glob instead of ls|grep fork pipeline
+        local -a _non_underscore=( "$autoload_dir"/^_*(N.:t) )
+        total_autoloads=${#_non_underscore}
+    fi
 
     print ""
     print "  ${D}${ua_shown}/${total_autoloads} autoloaded functions never called directly${N}"

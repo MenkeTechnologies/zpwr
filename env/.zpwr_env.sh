@@ -226,6 +226,7 @@ if [[ "$ZPWR_REMOTE" != true ]]; then
         typeset -Tgx ZPWR_DIRS_CLEAN zpwrDirsClean
         typeset -Tgx ZPWR_FILES_CLEAN zpwrFilesClean
         typeset -Ag ZPWR_PROCESSED=()
+        typeset -gaU ZPWR_CMDS_THAT_MODIFY_FILES=(rm mv cp mkdir ln chown chmod touch unlink srm md rmdir chflags chgrp 'git reset' 'git clone' gcl dot_clean)
     fi
 fi
 
