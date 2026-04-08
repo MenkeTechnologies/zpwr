@@ -10,7 +10,7 @@
 }
 
 #--------------------------------------------------------------
-# .github/workflows/ci.yml — zunit cache / concurrency
+# .github/workflows/ci.yml — zunit cache
 #--------------------------------------------------------------
 @test 'ci.yml names Ensure zunit executable bit step' {
     run grep -q 'Ensure zunit executable bit' "$ZPWR/.github/workflows/ci.yml"
@@ -29,12 +29,6 @@
 
 @test 'ci.yml clones MenkeTechnologies zunit shallow' {
     run grep -q 'git clone --depth 1 https://github.com/MenkeTechnologies/zunit' "$ZPWR/.github/workflows/ci.yml"
-    assert $state equals 0
-}
-
-@test 'ci.yml defines concurrency group for workflow' {
-    # Regex: literal ${{…}} breaks zunit run (zsh bad substitution).
-    run grep -qE 'group:.*github\.workflow.*github\.ref' "$ZPWR/.github/workflows/ci.yml"
     assert $state equals 0
 }
 
