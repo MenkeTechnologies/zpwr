@@ -39,7 +39,7 @@ function executeTheFile() {
     if [[ "$1" == "java" ]]; then
         dir="$(dirname "$2")"
         file="$(basename "$2")"
-        cd "$dir" && {
+        builtin cd "$dir" && {
             javac "$file"
             java "${file%.*}"
         }

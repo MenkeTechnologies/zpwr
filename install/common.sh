@@ -48,7 +48,7 @@ if ! test -f common.sh; then
 fi
 
 # resolve all symlinks
-test -z $ZINIT_HOME && export ZINIT_HOME="$HOME/.zinit"
+test -z "$ZINIT_HOME" && export ZINIT_HOME="$HOME/.zinit"
 #}}}***********************************************************
 
 #{{{                    MARK:installer lib fns
@@ -86,6 +86,7 @@ if source "$ZPWR_RE_ENV_FILE"; then
     echo "loaded $ZPWR_RE_ENV_FILE"
 else
     echo "where is ZPWR_RE_ENV_FILE '$ZPWR_RE_ENV_FILE'" >&2
+    exit 1
 fi
 
 export ZPWR_INSTALLER_OUTPUT="$ZPWR_LOCAL/installer"

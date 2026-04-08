@@ -9,12 +9,12 @@
 
 if [[ "$(uname)" == "Darwin" ]]; then
 
-    rm -rf "$HOME"/.Trash/*
+    command rm -rf "$HOME"/.Trash/*
 else
 
     case $ZPWR_DISTRO_NAME in
         raspbian)
-            rm -rf "$HOME/.local/share/Trash/files/"*
+            command rm -rf "$HOME/.local/share/Trash/files/"*
             ;;
         *)
             printf "Your distro '$ZPWR_DISTRO_NAME' is unsupported now...cannot proceed!\n" >&2

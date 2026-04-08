@@ -47,7 +47,7 @@ read -u $fdc && msg=$REPLY
 
 exec {fdc}>&-
 exec {fdl}>&-
-rm -f "$ZPWR_SOCKET$$"
+command rm -f "$ZPWR_SOCKET$$"
 
 #tmux wait-for -L fingerl1
 #tmux resize-pane -Z

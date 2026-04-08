@@ -14,7 +14,7 @@ while read f; do
     cmd="$(echo $f | cut -c2-)"
     if [[ -n $_comps[$cmd] ]]; then
         echo "remove $f"
-        rm "$f"
+        command rm "$f"
     else
         echo "keeping $f"
     fi

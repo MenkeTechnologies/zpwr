@@ -6,7 +6,7 @@
 ##### Purpose: bash script to cd to new directory and show contents
 ##### Notes: must be sourced
 #}}}***********************************************************
-cd "$1"
+builtin cd "$1"
 clear
 ls -FlhA
 

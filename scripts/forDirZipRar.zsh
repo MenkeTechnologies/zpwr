@@ -107,7 +107,7 @@ function zpwrForDirZipRarRm() {
         read a
         if [[ $a == y ]]; then
             for f in "${(v)files[@]}"; do
-                rm -rf "$f"
+                command rm -rf "$f"
             done
         fi
     fi

@@ -45,7 +45,7 @@ shopt -s dotglob
 
 #{{{ MARK:installer
 #**************************************************************
-cd "$ZPWR_DIR" || exit 1
+builtin cd "$ZPWR_DIR" || exit 1
 git checkout dev
 
 zpwrLogInfo "Copying scripts to custom Installer Repo $ZPWR_DIR"
@@ -131,7 +131,7 @@ cp "$HOME/"{GTAGS,GPATH,GRTAGS} \
     "$tutorialDir"
 
 zpwrLogInfo "Copying tmux.conf"
-rm -rf "$tutorialDir/tmux/"*
+command rm -rf "$tutorialDir/tmux/"*
 cp "$ZPWR_DIR_INSTALL/.tmux.conf" "$tutorialDir/tmux"
 cp -R "$ZPWR_TMUX/"* "$tutorialDir/tmux/.tmux" 2>/dev/null
 
@@ -140,7 +140,7 @@ cp "$ZPWR_ALIAS_FILE" "$tutorialDir/aliases"
 
 zpwrLogInfo "Copying shell scripts"
 #clear out old scripts, dbl quotes escape asterisk
-rm -rf "$tutorialDir/shell/"*
+command rm -rf "$tutorialDir/shell/"*
 cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$tutorialDir/shell"
 cp -R "$ZPWR_SCRIPTS/macOnly" "$tutorialDir/shell"
 cp -R "$HOME/.vim/UltiSnips" "$tutorialDir"
@@ -173,7 +173,7 @@ cp "$ZPWR_PROMPT_FILE" "$tutorialDir"
 
 #sudo cp -R "$HOME/.vim" "$tutorialDir/vim"
 
-cd "$tutorialDir" || exit 1
+builtin cd "$tutorialDir" || exit 1
 
 #zpwrLogInfo "Removing .git dirs..."
 
@@ -218,7 +218,7 @@ cp "$ZPWR_ALIAS_FILE" "$dotdir"
 cp "$ZPWR_DIR_INSTALL/.zshrc" "$dotdir"
 
 zpwrLogInfo "Copying scripts to $websiteDir"
-rm -rf "$websiteDir/downloads/scripts/"*
+command rm -rf "$websiteDir/downloads/scripts/"*
 if [[ ! -d "$websiteDir"/downloads/scripts ]]; then
     mkdir -p "$websiteDir/downloads/scripts"
 fi
@@ -226,10 +226,10 @@ fi
 cp "$ZPWR_SCRIPTS"/*.{sh,zsh,pl,py} "$websiteDir/downloads/scripts" 2>/dev/null
 cp -R "$ZPWR_SCRIPTS/macOnly" "$websiteDir/downloads/scripts"
 
-cd "$websiteDir/downloads" || exit 1
+builtin cd "$websiteDir/downloads" || exit 1
 tar cfz MenkeTechnologiesShellScripts.tgz scripts
 tar cfz dotfiles.tgz dotfiles
-cd ..
+builtin cd ..
 
 git add .
 git commit -m "$commitMessage"

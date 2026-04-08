@@ -599,7 +599,7 @@ function zpwrOverwriteGitHubPlugin(){
     echo "Installing plugin $user/$repo."
     if [[ -d "$repo" ]]; then
         zpwrPrettyPrint "rm -rf $repo"
-        rm -rf "$repo"
+        command rm -rf "$repo"
     fi
 
     test -d "$repo" || git clone "https://github.com/$1.git"
