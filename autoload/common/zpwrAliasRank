@@ -126,7 +126,9 @@ function zpwrAliasRank(){
     print "  ${C}── TOP ${top_n} ALIASES BY EXPANDED USAGE ────────────────────────────────${N}"
     print ""
 
-    local -a alias_usage=()
+    # single pass over aliases — collect used, unused, and first-words for missing-alias check
+    local -a alias_usage=() unused=()
+    local -A alias_first_words
     local alias_name alias_val alias_first_word
     local -i cnt
     for alias_name alias_val in ${(kv)aliases}; do
@@ -137,13 +139,21 @@ function zpwrAliasRank(){
         alias_first_word="${alias_first_word%\'}"
         alias_first_word="${alias_first_word#\"}"
         alias_first_word="${alias_first_word%\"}"
+        # build first-words lookup for missing-alias section
+        alias_first_words[$alias_first_word]=1
+        alias_first_words[$alias_name]=1
         cnt=${cmd_counts[$alias_first_word]:-0}
         # also check direct alias name usage
         direct=${cmd_counts[$alias_name]:-0}
         (( direct > cnt )) && cnt=$direct
-        (( cnt > 0 )) && alias_usage+=( "$cnt $alias_name")
+        if (( cnt > 0 )); then
+            alias_usage+=( "$cnt $alias_name")
+        else
+            unused+=( "$alias_name" )
+        fi
     done
     alias_usage=( ${(On)alias_usage} )
+    unused=( ${(o)unused} )
 
     local -i max_cnt=0
     (( $#alias_usage > 0 )) && max_cnt=${alias_usage[1]%% *}
@@ -171,21 +181,7 @@ function zpwrAliasRank(){
     print "  ${C}── NEVER MATCHED ALIASES ${D}(candidates for removal)${N} ─────────────────────${N}"
     print ""
 
-    local -a unused=()
     local -i shown=0
-    for alias_name alias_val in ${(kv)aliases}; do
-        alias_first_word="${alias_val%%[[:space:]]*}"
-        alias_first_word="${alias_first_word#\'}"
-        alias_first_word="${alias_first_word%\'}"
-        alias_first_word="${alias_first_word#\"}"
-        alias_first_word="${alias_first_word%\"}"
-        cnt=${cmd_counts[$alias_first_word]:-0}
-        direct=${cmd_counts[$alias_name]:-0}
-        (( direct > cnt )) && cnt=$direct
-        (( cnt == 0 )) && unused+=( "$alias_name" )
-    done
-    unused=( ${(o)unused} )
-
     local line_buf=""
     for k in $unused; do
         if [[ -n "$line_buf" ]]; then
@@ -209,16 +205,7 @@ function zpwrAliasRank(){
     print ""
 
     local -a unaliased=()
-    # build set of alias first-words for quick lookup
-    local -A alias_first_words
-    for alias_name alias_val in ${(kv)aliases}; do
-        alias_first_word="${alias_val%%[[:space:]]*}"
-        alias_first_word="${alias_first_word#\'}"
-        alias_first_word="${alias_first_word%\'}"
-        alias_first_words[$alias_first_word]=1
-        alias_first_words[$alias_name]=1
-    done
-
+    # alias_first_words already built in the single-pass loop above
     for k v in ${(kv)cmd_counts}; do
         (( ${+alias_first_words[$k]} )) && continue
         (( ${+aliases[$k]} )) && continue

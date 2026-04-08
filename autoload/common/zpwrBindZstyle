@@ -170,10 +170,13 @@ function zpwrBindZstyle(){
         'm:{a-z\-}={A-Z\_}' 'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' 'r:|?=** m:{a-z\-}={A-Z\_}'
 
     # parse out host aliases and hostnames from ssh config
+    # read file once into variable instead of twice via $(< ...)
     if [[ -r "$HOME/.ssh/config" ]]; then
+        local _ssh_cfg
+        _ssh_cfg="$(< ~/.ssh/config)"
         ZPWR_HOSTS=(
-            ${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Host *}#Host }:#*[*?]*}
-            ${${${(@M)${(f)"$(< ~/.ssh/config)"}:#Hostname *}#Hostname }:#*[*?]*}
+            ${${${(@M)${(f)_ssh_cfg}:#Host *}#Host }:#*[*?]*}
+            ${${${(@M)${(f)_ssh_cfg}:#Hostname *}#Hostname }:#*[*?]*}
         )
     fi
 
