@@ -49,6 +49,9 @@ fi
 
 ins bat bat
 ins lsofrs lsofrs
+ins awkrs awkrs
+ins perlrs perlrs
+ins nmaprs nmaprs
 ins storageshower storageshower
 ins iftoprs iftoprs
 ins hyperfine hyperfine
