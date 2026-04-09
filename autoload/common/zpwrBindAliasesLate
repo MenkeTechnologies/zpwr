@@ -77,8 +77,8 @@ function zpwrBindAliasesLate(){
 
     if zpwrExists spotify; then
         alias rep='spotify replay'
-        alias ne='spotify next'
-        alias pe='spotify prev'
+        alias next='spotify next'
+        alias prev='spotify prev'
         alias spa='spotify pause'
     fi
 
