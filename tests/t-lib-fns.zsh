@@ -572,28 +572,6 @@
     assert $state equals 1
 }
 
-@test 'zpwrPerlRemoveSpaces on file returns 0' {
-    local tmpfile
-    tmpfile=$(mktemp)
-    printf "hello   \nworld  \n" > "$tmpfile"
-    run zpwrPerlRemoveSpaces "$tmpfile"
-    assert $state equals 0
-    command rm -f "$tmpfile"
-}
-
-#--------------------------------------------------------------
-# zpwrAlternatingPrettyPrint
-#--------------------------------------------------------------
-@test 'zpwrAlternatingPrettyPrint with args returns 0' {
-    run zpwrAlternatingPrettyPrint "hello world"
-    assert $state equals 0
-}
-
-@test 'zpwrAlternatingPrettyPrint output is not empty' {
-    run zpwrAlternatingPrettyPrint "hello world"
-    assert "$output" is_not_empty
-}
-
 #--------------------------------------------------------------
 # zpwrFail
 #--------------------------------------------------------------

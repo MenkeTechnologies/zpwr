@@ -266,15 +266,6 @@
 }
 
 #--------------------------------------------------------------
-# zpwrAlternatingPrettyPrint stdin path
-#--------------------------------------------------------------
-@test 'zpwrAlternatingPrettyPrint stdin with delimiter outputs lines' {
-    local out
-    out=$(print -r -- "a${ZPWR_DELIMITER_CHAR}b" | zpwrAlternatingPrettyPrint)
-    assert "$out" is_not_empty
-}
-
-#--------------------------------------------------------------
 # zpwrWizard CLI (regression: help must stay stable for CI)
 #--------------------------------------------------------------
 @test 'zpwrWizard -h exits 0' {

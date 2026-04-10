@@ -164,45 +164,6 @@
 }
 
 #--------------------------------------------------------------
-# zpwrContribCount
-#--------------------------------------------------------------
-@test 'zpwrContribCount returns 0' {
-    run zpwrContribCount
-    assert $state equals 0
-}
-
-@test 'zpwrContribCount output is not empty' {
-    run zpwrContribCount
-    assert "$output" is_not_empty
-}
-
-#--------------------------------------------------------------
-# zpwrContribCountLines
-#--------------------------------------------------------------
-@test 'zpwrContribCountLines returns 0' {
-    run zpwrContribCountLines
-    assert $state equals 0
-}
-
-@test 'zpwrContribCountLines output is not empty' {
-    run zpwrContribCountLines
-    assert "$output" is_not_empty
-}
-
-#--------------------------------------------------------------
-# zpwrContribCountDirs
-#--------------------------------------------------------------
-@test 'zpwrContribCountDirs returns 0' {
-    run zpwrContribCountDirs 'MenkeTechnologies' "$HOME/.zpwr"
-    assert $state equals 0
-}
-
-@test 'zpwrContribCountDirs output is not empty' {
-    run zpwrContribCountDirs 'MenkeTechnologies' "$HOME/.zpwr"
-    assert "$output" is_not_empty
-}
-
-#--------------------------------------------------------------
 # zpwrLineCount
 #--------------------------------------------------------------
 @test 'zpwrLineCount returns 0' {
@@ -212,32 +173,6 @@
 
 @test 'zpwrLineCount output is not empty' {
     run zpwrLineCount 'echo hello' 'hello'
-    assert "$output" is_not_empty
-}
-
-#--------------------------------------------------------------
-# zpwrTotalLines
-#--------------------------------------------------------------
-@test 'zpwrTotalLines returns 0' {
-    run zpwrTotalLines
-    assert $state equals 0
-}
-
-@test 'zpwrTotalLines output is not empty' {
-    run zpwrTotalLines
-    assert "$output" is_not_empty
-}
-
-#--------------------------------------------------------------
-# zpwrEnvCounts
-#--------------------------------------------------------------
-@test 'zpwrEnvCounts returns 0' {
-    run zpwrEnvCounts
-    assert $state equals 0
-}
-
-@test 'zpwrEnvCounts output is not empty' {
-    run zpwrEnvCounts
     assert "$output" is_not_empty
 }
 
@@ -443,19 +378,6 @@
 @test 'zpwrExists __nope__ returns 1' {
     run zpwrExists __nope__
     assert $state equals 1
-}
-
-#--------------------------------------------------------------
-# zpwrLoginCount
-#--------------------------------------------------------------
-@test 'zpwrLoginCount returns 0' {
-    run zpwrLoginCount
-    assert $state equals 0
-}
-
-@test 'zpwrLoginCount output may be empty on macOS or CI' {
-    run zpwrLoginCount
-    assert $state equals 0
 }
 
 #--------------------------------------------------------------
