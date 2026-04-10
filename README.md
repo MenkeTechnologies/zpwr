@@ -781,7 +781,7 @@ zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GI
 ## Diagnostics
 The test suite contains thousands of [zunit](https://github.com/zunit-zsh/zunit) tests across `tests/*.zsh` covering autoload function existence, type resolution, whence/which lookups, function body validation, fpath integrity, source syntax, script readability, shebang detection, verb callability, environment variable isolation, and behavioral checks for `scripts/lib.sh` helpers (required-argument validation, usage errors, and bash `zpwrExists` multi-argument parity with zsh).
 
-`zpwrCommandExists` tests are limited to commands present on the Ubuntu runner base image or installed by `.github/workflows/ci.yml`; they do not assume optional packages (for example `lsof`, `jq`, `openssl`, `sudo`, pagers, or `file`/`strings` from extra packages) unless those packages are added to that workflow.
+`zpwrCommandExists` tests are limited to commands present on the Ubuntu runner base image or installed by `.github/workflows/ci.yml` (including `perlrs`, installed there via `cargo install perlrs` for functions such as `zpwrContribCount`); they do not assume optional packages (for example `lsof`, `jq`, `openssl`, `sudo`, pagers, or `file`/`strings` from extra packages) unless those packages are added to that workflow.
 
 All ZPWR_* environment variables are unset before each test run to prevent user env from leaking into test results.
 
