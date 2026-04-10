@@ -1,6 +1,19 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
+
+# Historical name — originally also sourced
+# $HOME/.tmux/powerline/bindings/zsh/powerline.zsh to set up powerline's zsh
+# prompt bindings and its tmux PWD/COLUMNS env-var pushers. That sourcing was
+# ~140ms of startup (two powerline-config python subprocesses + two
+# `tmux setenv`/`tmux refresh` calls) and delivered nothing:
+#   - zpwr uses p10k for the zsh prompt, so powerline's PS1/RPS1 setup was
+#     overwritten milliseconds later.
+#   - The default zpwr tmux powerline theme (and the common segments: vcs,
+#     cpu, mem, date, hostname, etc.) never reads TMUX_PWD_* / TMUX_COLUMNS_*
+#     from tmux global env — tmux tracks pane cwd natively via OSC updates.
+# All that's left here is the Python user-install PATH / PIP3_HOME setup.
 function zpwrBindPowerlineTmux(){
+    local p
 
     if [[ "$ZPWR_OS_TYPE" == "darwin" ]]; then
         for p in $HOME/Library/Python/*(N); do
@@ -8,17 +21,12 @@ function zpwrBindPowerlineTmux(){
             export PIP3_HOME="$p/lib/python/site-packages"
             break
         done
-        unset p
     else
         for p in $HOME/.local/lib/python*(N); do
             export PIP3_HOME="$p/site-packages"
             break
         done
-        unset p
     fi
-
-    [[ -f "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh" ]] &&
-    source "$HOME/.tmux/powerline/bindings/zsh/powerline.zsh"
 }
 
 zpwrBindPowerlineTmux "$@"
