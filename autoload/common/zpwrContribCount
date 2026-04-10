@@ -13,10 +13,10 @@ function zpwrContribCount(){
     lineCount="$(echo $lines | wc -l)"
     zpwrPrettyPrint "Contribution Count"
     if (( $lineCount > 10 )); then
-        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+        echo "$lines" | perlrs -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             zpwrAlternatingPrettyPrint | less -r
     else
-        echo "$lines" | perl -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+        echo "$lines" | perlrs -pane 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             zpwrAlternatingPrettyPrint
     fi
 }

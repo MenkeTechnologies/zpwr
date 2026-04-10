@@ -88,7 +88,7 @@ fi
     echo
 
 
-} | escapeRemover.pl | perl -ne 'do{$_=~ s@$ENV{HOME}@~@g;print} if m{\S+}' > "$ZPWR_TEMPFILE"
+} | escapeRemover.pl | perlrs -ne 'do{$_=~ s@$ENV{HOME}@~@g;print} if m{\S+}' > "$ZPWR_TEMPFILE"
 
 
 command rm "$ZPWR_TEMPFILE1"
@@ -97,6 +97,6 @@ command rm "$ZPWR_TEMPFILE3"
 command rm "$ZPWR_TEMPFILE4"
 
 #do not know why have to create tempfile here
-perl -pe 's@^([^#].*)$@- ``` $1 ```@g' "$ZPWR_TEMPFILE" | perl -pe 's@(.*) \(:.map\).*@$1@'
+perlrs -pe 's@^([^#].*)$@- ``` $1 ```@g' "$ZPWR_TEMPFILE" | perlrs -pe 's@(.*) \(:.map\).*@$1@'
 
 command rm "$ZPWR_TEMPFILE"

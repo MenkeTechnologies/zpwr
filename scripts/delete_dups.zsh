@@ -18,4 +18,4 @@ while read f; do
     else
         echo "keeping $f"
     fi
-done < <(git status -u | command grep _ | perl -pe 's@\s@@')
+done < <(git status -u | command grep _ | perlrs -pe 's@\s@@')

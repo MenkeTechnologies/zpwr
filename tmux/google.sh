@@ -34,7 +34,7 @@ test -z "$ZPWR_LOGFILE" && ZPWR_LOGFILE="$ZPWR_LOCAL/zpwrLog.txt"
 
 exec 1>> "$ZPWR_LOGFILE" 2>&1
 
-ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"
+ZPWR_OS_TYPE="$(uname -s | perlrs -e 'print lc<>')"
 
 pyScript='import sys,urllib.parse; print(urllib.parse.quote(sys.stdin.read().strip(), safe=""))'
 
@@ -84,7 +84,7 @@ else
     esac
 
     # trim spaces
-    out="$(printf -- "%s" "$out" | perl -pe 's@^\s+|\s+$@@g')"
+    out="$(printf -- "%s" "$out" | perlrs -pe 's@^\s+|\s+$@@g')"
 fi
 
 cmd="$(zpwrGetOpenCommand)"

@@ -22,7 +22,7 @@ function updaterLoop(){
         print \$tp->strftime("%Y-%m-%d %H:%M:%S")."\n";
 EOF
         )
-        nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)
+        nextdate=$(echo "$perlscript" | perlrs -MTime::Piece -MTime::Seconds)
         bash -l updater.sh -e
         while true; do
             sleep $((minutes_to_sleep * 60))
