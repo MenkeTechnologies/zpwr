@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/usr/bin/env perlrs
 use utf8;
 
 use feature qw/say/;
