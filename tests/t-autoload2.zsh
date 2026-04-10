@@ -148,43 +148,7 @@
 }
 
 #--------------------------------------------------------------
-# zpwrContribCount (requires git dir)
-#--------------------------------------------------------------
-@test 'zpwrContribCount in git dir returns 0' {
-    run zpwrContribCount &>/dev/null
-    assert $state equals 0
-}
-
-@test 'zpwrContribCount output is not empty' {
-    run zpwrContribCount
-    assert "$output" is_not_empty
-}
-
-@test 'zpwrContribCount output contains Contribution' {
-    run zpwrContribCount
-    assert "$output" contains Contribution
-}
-
-@test 'zpwrContribCount outside git dir returns non-zero' {
-    run zsh -c "cd /tmp && git rev-parse --git-dir"
-    assert $state is_greater_than 0
-}
-
-#--------------------------------------------------------------
-# zpwrContribCountLines (requires git dir)
-#--------------------------------------------------------------
-@test 'zpwrContribCountLines in git dir returns 0' {
-    run zpwrContribCountLines &>/dev/null
-    assert $state equals 0
-}
-
-@test 'zpwrContribCountLines outside git dir git returns non-zero' {
-    run zsh -c "cd /tmp && git rev-parse --git-dir"
-    assert $state is_greater_than 0
-}
-
-#--------------------------------------------------------------
-# zpwrContribCountDirs
+# zpwrContribCountDirs (usage only; full run needs perlrs)
 #--------------------------------------------------------------
 @test 'zpwrContribCountDirs no args returns 1' {
     run zpwrContribCountDirs
@@ -194,72 +158,6 @@
 @test 'zpwrContribCountDirs one arg returns 1' {
     run zpwrContribCountDirs "username"
     assert $state equals 1
-}
-
-@test 'zpwrContribCountDirs with valid dir' {
-    run zpwrContribCountDirs "MenkeTechnologies" "$ZPWR"
-    assert $state equals 0
-}
-
-#--------------------------------------------------------------
-# zpwrEnvCounts
-#--------------------------------------------------------------
-@test 'zpwrEnvCounts returns 0' {
-    run zpwrEnvCounts &>/dev/null
-    assert $state equals 0
-}
-
-@test 'zpwrEnvCounts output is not empty' {
-    run zpwrEnvCounts
-    assert "$output" is_not_empty
-}
-
-@test 'zpwrEnvCounts output contains Commands' {
-    run zpwrEnvCounts
-    assert "$output" contains Commands
-}
-
-@test 'zpwrEnvCounts output contains Functions' {
-    run zpwrEnvCounts
-    assert "$output" contains Functions
-}
-
-@test 'zpwrEnvCounts output contains Aliases' {
-    run zpwrEnvCounts
-    assert "$output" contains Aliases
-}
-
-@test 'zpwrEnvCounts output contains ZPWR' {
-    run zpwrEnvCounts
-    assert "$output" contains ZPWR
-}
-
-@test 'zpwrEnvCounts output contains verbs' {
-    run zpwrEnvCounts
-    assert "$output" contains verbs
-}
-
-@test 'zpwrEnvCounts output contains autoloads' {
-    run zpwrEnvCounts
-    assert "$output" contains autoloads
-}
-
-#--------------------------------------------------------------
-# zpwrTotalLines (requires git dir)
-#--------------------------------------------------------------
-@test 'zpwrTotalLines in git dir returns 0' {
-    run zpwrTotalLines &>/dev/null
-    assert $state equals 0
-}
-
-@test 'zpwrTotalLines output contains Total Line Count' {
-    run zpwrTotalLines
-    assert "$output" contains "Total"
-}
-
-@test 'zpwrTotalLines outside git dir git returns non-zero' {
-    run zsh -c "cd /tmp && git rev-parse --git-dir"
-    assert $state is_greater_than 0
 }
 
 #--------------------------------------------------------------

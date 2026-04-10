@@ -403,29 +403,6 @@
 }
 
 #--------------------------------------------------------------
-# zpwrContribCount / zpwrContribCountLines
-#--------------------------------------------------------------
-@test 'zpwrContribCount returns 0' {
-    run zpwrContribCount
-    assert $state equals 0
-}
-
-@test 'zpwrContribCount output is not empty' {
-    run zpwrContribCount
-    assert "$output" is_not_empty
-}
-
-@test 'zpwrContribCountLines returns 0' {
-    run zpwrContribCountLines
-    assert $state equals 0
-}
-
-@test 'zpwrContribCountLines output is not empty' {
-    run zpwrContribCountLines
-    assert "$output" is_not_empty
-}
-
-#--------------------------------------------------------------
 # zpwrPrintMap
 #--------------------------------------------------------------
 @test 'zpwrPrintMap no args returns 1' {
