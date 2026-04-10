@@ -104,6 +104,30 @@ jobs:
           command -v zunit
           zunit --version
 
+      # zpwrContribCount, zpwrAlternatingPrettyPrint, and many scripts require perlrs on PATH
+      # (same as install/rustupinstall.sh: cargo install perlrs).
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo (perlrs)
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin/perlrs
+          key: ${{ runner.os }}-cargo-perlrs-v1-${{ hashFiles('zpwr/.github/workflows/ci.yml') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-perlrs-
+
+      - name: Install perlrs
+        run: |
+          if ! command -v perlrs >/dev/null 2>&1; then
+            cargo install perlrs
+          fi
+          command -v perlrs
+          perlrs --version
+
       - name: Run tests
         run: |
           cd ~/.zpwr
