@@ -21,15 +21,21 @@
 () {
   builtin emulate -L zsh -o extended_glob
 
+  # Bail out when the shell can't enable job control (e.g. `zsh -c '...'` invocations
+  # that lack a controlling terminal). No prompt will ever render in those contexts,
+  # so configuring 1500+ lines of segments/colors/helpers is wasted work. Also disable
+  # gitstatus so p10k doesn't try to spawn gitstatusd, which bails at `setopt monitor`
+  # and prints `[ERROR]: gitstatus failed to initialize`. In real interactive TTYs
+  # `monitor` is on by default so this is a no-op.
+  if [[ ! -o monitor ]]; then
+    typeset -g POWERLEVEL9K_DISABLE_GITSTATUS=true
+    return
+  fi
+
   # Unset all configuration options. This allows you to apply configuration changes without
   # restarting zsh. Edit ~/.p10k.zsh and type `source ~/.p10k.zsh`.
   unset -m '(POWERLEVEL9K_*|DEFAULT_USER)~POWERLEVEL9K_GITSTATUS_DIR'
 
-  # Disable gitstatus when the shell can't enable job control (e.g. `zsh -c '...'`
-  # invocations that lack a controlling terminal). Otherwise gitstatus.plugin.zsh
-  # bails at `setopt monitor` and prints `[ERROR]: gitstatus failed to initialize`.
-  # In real interactive TTYs `monitor` is on by default so this is a no-op.
-  [[ -o monitor ]] || typeset -g POWERLEVEL9K_DISABLE_GITSTATUS=true
 
   # Zsh >= 5.1 is required.
   autoload -Uz is-at-least && is-at-least 5.1 || return
