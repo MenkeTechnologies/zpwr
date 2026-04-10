@@ -18,7 +18,7 @@ function memCheckLoop() {
     local used
 
     while true; do
-        used=$(free | perl -anE 'say $F[2] if $. == 2')
+        used=$(free | perlrs -anE 'say $F[2] if $. == 2')
         echo "Used memory: $used"
         if (( used > "$2" )); then
             echo "mail: MEMORY_THRESHOLD exceeded: $used"

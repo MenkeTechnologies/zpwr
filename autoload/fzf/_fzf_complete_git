@@ -21,7 +21,7 @@ function ___fzf_complete_git() {
         _fzf_complete "-m $FZF_DRACULA --ansi" "$@" < <(
         printf "\x1b[${ZPWR_COMMIT_STYLE}m"
         git log --format='%h %s'
-        git for-each-ref | perl -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
+        git for-each-ref | perlrs -lane '$_=substr($F[0],0,7)." $F[2]";print if ! m{^\s*$}'
         printf "\x1b[0m"
     )
 }

@@ -2,7 +2,7 @@
 # vim: set ft=sh:
 function ___fzf_complete_printf_post() {
 
-    perl -pe '$_="\$$_" if ! m{^\$.*}'
+    perlrs -pe '$_="\$$_" if ! m{^\$.*}'
 }
 
 ___fzf_complete_printf_post "$@"

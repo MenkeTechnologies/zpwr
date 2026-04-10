@@ -199,7 +199,7 @@ function zpwrPerlRemoveSpaces(){
 
     for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
-        perl -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
+        perlrs -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
     done
 }
 
@@ -717,11 +717,11 @@ function zpwrPrettyPrintInstaller(){
 
     (( ++INSTALL_COUNTER ))
     printf "\x1b[32;1m"
-    perl -le "print '#'x80"
+    perlrs -le "print '#'x80"
     printf "\x1b[34;4m"
     printf "$INSTALL_COUNTER>>> $1\n"
     printf "\x1b[0;32;1m"
-    perl -le "print '#'x80"
+    perlrs -le "print '#'x80"
     printf "\x1b[0m"
     printf "\n"
 }
@@ -808,7 +808,7 @@ function zpwrTurnOnDebugging(){
 function zpwrAlternatingPrettyPrint(){
 
     if [[ -z $1 ]]; then
-        cat | perl -F"$ZPWR_DELIMITER_CHAR" -anE '
+        cat | perlrs -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){
@@ -819,7 +819,7 @@ function zpwrAlternatingPrettyPrint(){
         ++$counter;
         };print "\x1b[0m"'
     else
-        perl -F"$ZPWR_DELIMITER_CHAR" -anE '
+        perlrs -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){

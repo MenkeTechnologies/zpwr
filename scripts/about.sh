@@ -22,10 +22,10 @@ function banner() {
 
     if [[ -d "$ZPWR" ]]; then
         if cd "$ZPWR"; then
-            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"
-            info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"
-            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"
-            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\t ]+@    @')"
+            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perlrs -pe 's@[\t ]@@')"
+            info="$(git tag -l -n9 "$version" | perlrs -pe 's@[\t ]+@ @')"
+            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perlrs -pe 's@[\t ]+@    @')"
+            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perlrs -pe 's@[\t ]+@    @')"
             lastcommit="$(git log --oneline -n 1)"
         fi
     fi
@@ -117,7 +117,7 @@ EOF
     #if cd "$ZPWR";then
     #{
     #zpwrAllRemotes
-    #} | perl -pe 's@(.*)@\x1b[31m$1@'
+    #} | perlrs -pe 's@(.*)@\x1b[31m$1@'
 
     #fi
     #fi

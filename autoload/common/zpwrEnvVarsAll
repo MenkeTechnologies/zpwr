@@ -3,8 +3,8 @@
 function zpwrEnvVarsAll(){
 
     export -p |
-            command perl -ne 'print "$1\n" if m{^export ([A-Z0-9_]+)=}' |
-        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS_CURRENT" | perl -pe 's@\n@ @g'
+            command perlrs -ne 'print "$1\n" if m{^export ([A-Z0-9_]+)=}' |
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS_CURRENT" | perlrs -pe 's@\n@ @g'
 }
 
 zpwrEnvVarsAll "$@"

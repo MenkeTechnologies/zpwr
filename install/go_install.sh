@@ -16,7 +16,7 @@ source common.sh
 
 export GOPATH="$HOME/go"
 
-goV=$(go version | perl -ne 'print "$1$2" if /(\d+)\.(\d+)\./')
+goV=$(go version | perlrs -ne 'print "$1$2" if /(\d+)\.(\d+)\./')
 
 function goInstall() {
     if (( goV >= 117 )); then

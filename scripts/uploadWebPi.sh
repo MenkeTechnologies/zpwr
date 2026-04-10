@@ -35,7 +35,7 @@ for i in "$@"; do
 done
 
 #decolorize prompt with ZPWR_COLOR_RESET environment variable
-perl -le "print'_'x $w" | lolcat
+perlrs -le "print'_'x $w" | lolcat
 printf "${ZPWR_COLOR_BLUE}Done\n${ZPWR_COLOR_RESET}"
 
 #if just uploading to website one html file

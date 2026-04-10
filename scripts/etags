@@ -1,6 +1,6 @@
 
 /Users/wizard/.zshrc,30884
-startTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')startTimestamp65,3063
+startTimestamp=$(perlrs -MTime::HiRes -e 'print Time::HiRes::time')startTimestamp65,3063
 export ZPWR="$HOME/.zpwr"ZPWR75,3563
 export ZPWR_LOCAL="$ZPWR/local"ZPWR_LOCAL76,3589
 export ZPWR_TEST="$ZPWR/tests"ZPWR_TEST77,3621
@@ -83,8 +83,8 @@ forgit_restore=fgcfforgit_restore325,11853
 forgit_clean=fgcleanforgit_clean326,11873
 forgit_stash_show=fgssforgit_stash_show327,11894
 plugins=(fzf-tab revolver zunit jhipster-oh-my-zsh-plugin fasd-simple gh_reveal \plugins370,14154
-ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perl -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"ZPWR_PARENT_PROCESS395,15040
-    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)ZPWR_DISTRO_NAME406,15568
+ZPWR_PARENT_PROCESS="$(command ps -p $PPID | perlrs -lane '$"=" ";print "@F[3..$#F]" if m{^\s*\d+.*}')"ZPWR_PARENT_PROCESS395,15040
+    ZPWR_DISTRO_NAME=$(perlrs -lne 'do{($_=$1)=~s@"@@g;print;exit0}if m{^ID=(.*)}' /etc/os-release)ZPWR_DISTRO_NAME406,15568
 _alias_file="$ZPWR/.shell_aliases_functions.sh"_alias_file445,16534
 function sub (){sub452,16841
     BUFFER="suc"BUFFER455,16884
@@ -109,7 +109,7 @@ function zpwrLastWordDouble(){zpwrLastWordDouble515,18483
         BUFFER="$BUFFER "$mywords[-1]BUFFER522,18648
         CURSOR=$#BUFFERCURSOR523,18686
 function zpwrUpdater (){zpwrUpdater529,18743
-    BUFFER="( cat $ZPWR_SCRIPTS/zpwrUpdater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perl -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"BUFFER534,18911
+    BUFFER="( cat $ZPWR_SCRIPTS/zpwrUpdater.sh |  bash -l 2>&1 | tee -a $ZPWR_LOGFILE | perlrs -pe 's@\\e\[.*m@\n@g' | mutt -s \"Log from `date`\" $ZPWR_EMAIL 2>$ZPWR_LOGFILE &)"BUFFER534,18911
 function zpwrTutsUpdate() {zpwrTutsUpdate538,19108
     commitMessage="$BUFFER"commitMessage540,19133
             BUFFER="( tutorialConfigUpdater.sh '$commitMessage' >> \"$ZPWR_LOGFILE\" 2>&1 & )"BUFFER547,19366
@@ -207,10 +207,10 @@ function zpwrKillLsofVerbEdit(){zpwrKillLsofVerbEdit964,30171
     sel="$(sudo lsof -i | sed 1d | FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-50%} --min-height 15 --reverse $FZF_DEFAULT_OPTS $FZF_COMPLETION_OPTS --preview 'echo {}' --preview-window down:3:wrap" __fzf_comprun "$cmd" -m | awk '{print $2}' | uniq | tr '\n' ' ')"sel966,30201
         BUFFER="sudo kill -9 -- $sel"BUFFER968,30495
 function zpwrHistoryVerbAccept(){zpwrHistoryVerbAccept975,30597
-      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |sel978,30646
+      sel=$(fc -rl 1 | perlrs -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |sel978,30646
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |FZF_DEFAULT_OPTS979,30728
 function zpwrHistoryVerbEdit(){zpwrHistoryVerbEdit990,31026
-      sel=$(fc -rl 1 | perl -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |sel993,31073
+      sel=$(fc -rl 1 | perlrs -ne 'print if !$seen{($_ =~ s/^\s*[0-9]+\s+//r)}++' |sel993,31073
     FZF_DEFAULT_OPTS="--height ${FZF_TMUX_HEIGHT:-40%} $FZF_DEFAULT_OPTS -n2..,.. --tiebreak=index --bind=ctrl-r:toggle-sort $FZF_CTRL_R_OPTS +m" fzf |FZF_DEFAULT_OPTS994,31155
 function zpwrVimFzfSudo(){zpwrVimFzfSudo1004,31433
         LBUFFER="sudo -E nvim $(zpwrFzvim)"LBUFFER1009,31527
@@ -232,7 +232,7 @@ function zpwrStartSendFull(){zpwrStartSendFull1057,32549
     ZPWR_SEND_KEYS_FULL=trueZPWR_SEND_KEYS_FULL1059,32576
 function zpwrStartSend(){zpwrStartSend1063,32627
     ZPWR_SEND_KEYS_PANE=$1ZPWR_SEND_KEYS_PANE1069,32736
-        pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perl -lane 'print $F[1] if $F[0] =~ m{'$pane'}')pid1078,32921
+        pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perlrs -lane 'print $F[1] if $F[0] =~ m{'$pane'}')pid1078,32921
 function zpwrKeyClear(){zpwrKeyClear1083,33082
 function self-insert() {self1092,33274
 function zpwrClearLine() {zpwrClearLine1100,33360
@@ -284,7 +284,7 @@ function my-accept-line () {my1483,41590
             BUFFER="sudo $cmdlet $mywords[3,$]"BUFFER1522,42890
             BUFFER=""BUFFER1525,42982
             aliases="$(cat $ZPWR_LOCAL/.common_aliases)"aliases1534,43233
-            line="$(print -r $aliases | perl -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"line1535,43290
+            line="$(print -r $aliases | perlrs -ne 'print $1 if m{\Q'$mywords[1]'\E=(.*)}')"line1535,43290
                 BUFFER="\\$mywords"BUFFER1538,43437
                     BUFFER="${line:1:-1} $mywords[2,$]" ||BUFFER1542,43573
                     BUFFER="$line $mywords[2,$]"BUFFER1543,43632
@@ -413,16 +413,16 @@ function _c(){_c2861,88841
         ret=0 || ret=1ret2865,88949
         ret=0 || ret=1ret2874,89609
 function _ssd(){_ssd2882,89889
-    arguments=('*:systemd running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and/running/')"')')arguments2884,89907
+    arguments=('*:systemd running services:('"$(systemctl list-units -at service | perlrs -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and/running/')"')')arguments2884,89907
 function _ssu(){_ssu2888,90122
-    arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perl -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')arguments2890,90140
+    arguments=('*:systemd non running services:('"$(systemctl list-units -at service | perlrs -lane '$_=~s@[\xe2\x97\x8f]@@g;do{$_=~s@\s*(\S+).*@$1@;print} if /service/ and!/running/')"')')arguments2890,90140
 function _zpwr(){_zpwr2899,90459
   arguments=(arguments2902,90496
 function _tmux_pane_words() {_tmux_pane_words2937,91378
   _tmux_capture_pane() {_tmux_capture_pane2944,91565
   w=( ${(u)=$(_tmux_capture_pane)} )w2958,92063
 function _complete_hist(){_complete_hist2970,92365
-    last_ten=( ${(f)"$(fc -l 200 | perl -lane 'print "@F[1..$#F]"')"} )last_ten2972,92393
+    last_ten=( ${(f)"$(fc -l 200 | perlrs -lane 'print "@F[1..$#F]"')"} )last_ten2972,92393
 function _complete_plus_last_command_args() {_complete_plus_last_command_args2975,92530
 function _complete_clipboard(){_complete_clipboard2980,92650
         clipboard_str="$(${=ZPWR_PASTE_CMD} 2>/dev/null)"clipboard_str2984,92745
@@ -440,7 +440,7 @@ function _megacomplete(){_megacomplete3018,93887
         last_command=$history[$num]last_command3038,94335
         last_command_array=(${(u)=last_command} ${last_command} "\"${last_command}\"" "( ${last_command}; )" "{ ${last_command}; }" "\$(${last_command})" "\"\$(${last_command})"\" "'${last_command}'")last_command_array3039,94371
 function _r(){_r3050,94732
-    rdirs=($(dirname $(pwd) | perl -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)." "};print ++$c.":/"'))rdirs3052,94748
+    rdirs=($(dirname $(pwd) | perlrs -e '$s=<>;chomp $s;$c=1;print "$c:".quotemeta($s)." ";exit if $s eq "/";while( ($s=substr($s,0,rindex($s, "/"))) ne ""){print ++$c.":".quotemeta($s)." "};print ++$c.":/"'))rdirs3052,94748
 function _command_names(){_command_names3084,95856
     ffilt='[(I)[^_.]*]'ffilt3096,96292
     defs=(defs3098,96317
@@ -472,7 +472,7 @@ function zshrcsearch(){zshrcsearch3298,102885
 function zarg(){zarg3312,103238
     first="$1"first3319,103370
     export PATH="$HOME/.jenv/shims:$PATH"PATH3327,103504
-endTimestamp=$(perl -MTime::HiRes -e 'print Time::HiRes::time')endTimestamp3332,103593
+endTimestamp=$(perlrs -MTime::HiRes -e 'print Time::HiRes::time')endTimestamp3332,103593
 startupTimeMs=$(printf "%.3f" $((endTimestamp - startTimestamp)))startupTimeMs3333,103657
 function zpwrAllUpdates(){zpwrAllUpdates3342,103887
 function zpwrForAllGitDirs(){zpwrForAllGitDirs3360,104197
@@ -622,7 +622,7 @@ export LESS="-M -N -R -K -F -X"LESS162,6035
             export EXA_COLORS="in=34:ur=32:uw=32:ux=32:gr=33:gw=33:gx=33:tr=31:tw=31:tx=31:xx=34:uu=38:gu=32:lc=32;1:un=41;37;1:gn=43;37;1:sb=4;1:xa=1;34:df=31;46;1:ds=31;45;1:lp=36;1:cc=1;31;46:da=34:b0=31;1;4:gm=32;1;4:ga=36;1;4:gd=34;1;4:gv=35;1;4:gt=37;1;4"EXA_COLORS250,9686
     export GOPATH="$HOME/go"GOPATH258,10128
 function rm(){rm269,10463
-            ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME446,17530
+            ZPWR_DISTRO_NAME=$(perlrs -lne 'do{($_=$1)=~s/"//;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME446,17530
     bold=$(tput bold || tput md)bold523,20647
     red=$(tput setaf 1)red524,20680
 function em(){em539,21031
@@ -959,10 +959,10 @@ killpids() {killpids101,2320
 /Users/wizard/.zpwr/scripts/about.sh,559
 zpwrAllRemotes() {zpwrAllRemotes10,341
 banner() {banner17,498
-            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perl -pe 's@[\t ]@@')"version20,577
-            info="$(git tag -l -n9 "$version" | perl -pe 's@[\t ]+@ @')"info21,682
-            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perl -pe 's@[\t ]+@    @')"fetch22,755
-            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perl -pe 's@[\t ]+@    @')"push23,857
+            version="$(git describe --tags $(git rev-list --tags --max-count=1) | perlrs -pe 's@[\t ]@@')"version20,577
+            info="$(git tag -l -n9 "$version" | perlrs -pe 's@[\t ]+@ @')"info21,682
+            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | perlrs -pe 's@[\t ]+@    @')"fetch22,755
+            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | perlrs -pe 's@[\t ]+@    @')"push23,857
             lastcommit="$(git log --oneline -n 1)"lastcommit24,957
 
 /Users/wizard/.zpwr/scripts/archetypeShower.sh,0
@@ -972,7 +972,7 @@ minutes_to_sleep=10minutes_to_sleep9,273
     oldtime=$(date +"%s")oldtime12,337
     olddate="$(date +'%Y-%m-%d %H:%M:%S')"olddate13,363
     perlscript=$(perlscript15,425
-    nextdate=$(echo "$perlscript" | perl -MTime::Piece -MTime::Seconds)nextdate21,598
+    nextdate=$(echo "$perlscript" | perlrs -MTime::Piece -MTime::Seconds)nextdate21,598
         newtime=$(date +"%s")newtime25,756
         timediff=$((newtime - oldtime))timediff26,786
 
@@ -1097,13 +1097,13 @@ zpwrClearList() {zpwrClearList46,1037
                             out="$(hash | command grep "^$arg=")"out110,3231
 
 /Users/wizard/.zpwr/scripts/clearTrash.sh,112
-        ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME15,377
+        ZPWR_DISTRO_NAME=$(perlrs -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME15,377
 
 /Users/wizard/.zpwr/scripts/colorLogger.sh,321
 zpwrPrettyPrint() {zpwrPrettyPrint10,302
 tailVersion=tailtailVersion20,494
 weHaveCCZE=noweHaveCCZE22,512
-    ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME47,1390
+    ZPWR_DISTRO_NAME=$(perlrs -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME47,1390
         distro=debiandistro51,1576
         distro=redhatdistro54,1637
         distro=susedistro57,1711
@@ -1131,7 +1131,7 @@ newfile="$1"newfile74,1789
     newfile="$newfile".txtnewfile97,2448
 
 /Users/wizard/.zpwr/scripts/crossOSCommands.sh,1176
-    export ZPWR_OS_TYPE="$(uname -s | perl -e 'print lc<>')"ZPWR_OS_TYPE11,347
+    export ZPWR_OS_TYPE="$(uname -s | perlrs -e 'print lc<>')"ZPWR_OS_TYPE11,347
 zpwrGetOpenCommand(){zpwrGetOpenCommand14,412
                 open_cmd='nohup xdg-open'open_cmd24,646
                 open_cmd='cmd.exe /c start ""'open_cmd26,705
@@ -1211,20 +1211,20 @@ zpwrIsZsh(){zpwrIsZsh11,358
     zpwrExists(){zpwrExists21,488
     zpwrExists(){zpwrExists29,682
 line={};line38,986
-line=\$(echo \$line| perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")line39,995
+line=\$(echo \$line| perlrs -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")line39,995
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")cmdType40,1066
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")file41,1143
-        file=\$(echo \$file| perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")file93,2849
+        file=\$(echo \$file| perlrs -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")file93,2849
 
 /Users/wizard/.zpwr/scripts/fzfEnvVerbs.sh,550
 zpwrIsZsh(){zpwrIsZsh11,358
     zpwrExists(){zpwrExists21,488
     zpwrExists(){zpwrExists29,682
 line={};line39,987
-line=\$(echo \$line | perl -ne "do{@ary=split /\\\s+/,\\\$1;print \\\$ary[0]} if m{^\\\S+\\\s+([\\\s\\\S]+)=\\\S+}" | perl -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")line40,996
+line=\$(echo \$line | perlrs -ne "do{@ary=split /\\\s+/,\\\$1;print \\\$ary[0]} if m{^\\\S+\\\s+([\\\s\\\S]+)=\\\S+}" | perlrs -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")line40,996
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$1}")cmdType42,1165
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV}Key.txt | awk "{print \\\$2}")file43,1242
-        file=\$(echo \$file | perl -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")file95,2948
+        file=\$(echo \$file | perlrs -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")file95,2948
 
 /Users/wizard/.zpwr/scripts/fzfGitOpts.sh,65
 ref=$1ref13,382
@@ -1233,7 +1233,7 @@ ref=$1ref13,382
 /Users/wizard/.zpwr/scripts/fzfMan.sh,148
 cmd="$1"cmd11,333
 log=/Users/wizard/updaterlog.txtlog12,342
-line=\$(echo {} | perl -lane "do{\\\$_=~s@^\\\s+|\\\s+\\\$@@g;print}");line14,384
+line=\$(echo {} | perlrs -lane "do{\\\$_=~s@^\\\s+|\\\s+\\\$@@g;print}");line14,384
 
 /Users/wizard/.zpwr/scripts/fzfPreviewOpts.sh,0
 
@@ -1382,7 +1382,7 @@ arr=()arr13,330
 IFS=:IFS15,404
 
 /Users/wizard/.zpwr/scripts/logs.sh,112
-        ZPWR_DISTRO_NAME=$(perl -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME16,443
+        ZPWR_DISTRO_NAME=$(perlrs -lne 'do{($_=$1)=~s/"//g;print;exit0}if/^ID=(.*)/' /etc/os-release)ZPWR_DISTRO_NAME16,443
 
 /Users/wizard/.zpwr/scripts/mantozshcomp.py,7598
 import bz2bz217,1466
@@ -1981,20 +1981,20 @@ updatePI() { #-t to force pseudoterminal allocation for interactive programs on 
 
 /Users/wizard/.zpwr/scripts/updaterPip.sh,1358
 zpwrPrettyPrint() {zpwrPrettyPrint10,285
-    installDir=$(python3 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir19,449
+    installDir=$(python3 -m pip show "pip" | \perlrs -ne 'print $1 if /^Location: (.*)/')installDir19,449
         needSudoBase=trueneedSudoBase21,575
         needSudoBase=falseneedSudoBase23,610
         outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated27,753
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated30,942
-        installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir35,1112
+        installDir=$(python3 -m pip show "$package" | \perlrs -ne 'print $1 if /^Location: (.*)/')"/$package"installDir35,1112
             zpwrNeedSudo=truezpwrNeedSudo37,1262
             zpwrNeedSudo=falsezpwrNeedSudo39,1301
-    installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir68,2274
+    installDir=$(python2 -m pip show "pip" | \perlrs -ne 'print $1 if /^Location: (.*)/')installDir68,2274
         needSudoBase=trueneedSudoBase70,2400
         needSudoBase=falseneedSudoBase72,2435
         outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated77,2579
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated80,2768
-        installDir=$(python2 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir84,2912
+        installDir=$(python2 -m pip show "$package" | \perlrs -ne 'print $1 if /^Location: (.*)/')"/$package"installDir84,2912
             zpwrNeedSudo=truezpwrNeedSudo86,3062
             zpwrNeedSudo=falsezpwrNeedSudo88,3101
 
@@ -2004,12 +2004,12 @@ zpwrPrettyPrint() {zpwrPrettyPrint10,285
         outdated=$(sudo -E python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated22,580
         outdated=$(python3 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated25,769
         zpwrNeedSudo=truezpwrNeedSudo30,939
-        installDir=$(python3 -m pip show "$package" | \perl -ne 'print $1 if /^Location: (.*)/')"/$package"installDir32,962
+        installDir=$(python3 -m pip show "$package" | \perlrs -ne 'print $1 if /^Location: (.*)/')"/$package"installDir32,962
     needSudoBase=trueneedSudoBase58,2003
         outdated=$(sudo -E python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated62,2135
         outdated=$(python2 -m pip list --outdated --format=columns | sed -n '3,$p' | awk '{print $1}')outdated65,2324
         zpwrNeedSudo=truezpwrNeedSudo69,2468
-        installDir=$(python2 -m pip show "pip" | \perl -ne 'print $1 if /^Location: (.*)/')installDir70,2490
+        installDir=$(python2 -m pip show "pip" | \perlrs -ne 'print $1 if /^Location: (.*)/')installDir70,2490
 
 /Users/wizard/.zpwr/scripts/uploadWebDS.sh,61
 address="jacobmenke@$MY_IP:/var/services/web"address11,363
@@ -2138,11 +2138,11 @@ rangePossibleIndices=${#ary[*]}rangePossibleIndices28,665
 width=$1width14,375
 FILTER="$2"FILTER15,384
 node_exe="$HOMEBREW_PREFIX/lib/node_modules/cowsay/cli.js"node_exe17,397
-    COW_FILES=($("$node_exe" -l | perl -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))COW_FILES20,481
+    COW_FILES=($("$node_exe" -l | perlrs -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))COW_FILES20,481
     rangePossibleIndices=${#COW_FILES[@]}rangePossibleIndices21,585
     randIndex=$((RANDOM % rangePossibleIndices))randIndex23,628
     font=${COW_FILES[$randIndex]}font24,677
-    COW_FILES=($(cowsay -l | perl -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))COW_FILES32,880
+    COW_FILES=($(cowsay -l | perlrs -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))COW_FILES32,880
     rangePossibleIndices=${#COW_FILES[@]}rangePossibleIndices34,980
     randIndex=$((RANDOM % rangePossibleIndices))randIndex36,1023
     font=${COW_FILES[$randIndex]}font37,1072

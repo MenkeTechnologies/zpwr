@@ -11,7 +11,7 @@ function post(){
     postfix="$1"
     shift
     out="$(eval "$@")"
-    echo "$out" | perl -lnE "say \"\$_ $postfix\""
+    echo "$out" | perlrs -lnE "say \"\$_ $postfix\""
 }
 
 post "$@"

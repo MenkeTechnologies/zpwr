@@ -3,7 +3,7 @@
 while true; do
     { {
         cat
-        perl -E 'say "dogs are $_" foreach @INC' | tr a-z A-Z | figlet -f alligator
+        perlrs -E 'say "dogs are $_" foreach @INC' | tr a-z A-Z | figlet -f alligator
         cat
         cat | figlet
         whoami | toilet | figlet -f ntgreek
