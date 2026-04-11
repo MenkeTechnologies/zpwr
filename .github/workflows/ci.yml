@@ -37,6 +37,14 @@ jobs:
             zsh vim perl python3 curl git \
             netcat-openbsd net-tools bc screen rsync zip unzip openssh-client iputils-ping
 
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install perlrs
+        run: |
+          cargo install perlrs
+          command -v perlrs
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
