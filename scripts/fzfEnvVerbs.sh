@@ -94,10 +94,10 @@ case \$cmdType in
         command perlrs -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or m{^======\$} ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} and ! m{^======\$} ) ) } for @a; }" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (builtin)
-        command grep -m1 -Fa "\$file" | grep -F "is a shell builtin" "${ZPWR_ENV_VALUE_FILE}"
+        command grep -m1 -Fa "\$file" "${ZPWR_ENV_VALUE_FILE}" | grep -F "is a shell builtin"
         ;;
     (resword)
-        command grep -m1 -Fa "\$file" | grep -F "is a reserved word" "${ZPWR_ENV_VALUE_FILE}"
+        command grep -m1 -Fa "\$file" "${ZPWR_ENV_VALUE_FILE}" | grep -F "is a reserved word"
         ;;
     (func)
         file=\$(echo \$file | perlrs -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
@@ -106,19 +106,6 @@ case \$cmdType in
         fi
         command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV_VALUE_FILE}"
         command perlrs -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV_VALUE_FILE}"
-        ;;
-    (command)
-        if test -f \$file;then
-            if LC_MESSAGES=C command grep -Hm1 "^" "\$file" | command grep -q "^Binary";then
-                $ZPWR_FZF_CLEARLIST
-                test -x \$file && objdump -d \$file | $FZF_COLORIZER_YAML
-                xxd \$file | $FZF_COLORIZER_YAML
-            else
-                $FZF_COLORIZER_FILE 2>/dev/null
-            fi
-        else
-            $ZPWR_FZF_CLEARLIST
-        fi
         ;;
 esac
 } $filter

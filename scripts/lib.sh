@@ -205,9 +205,7 @@ function zpwrPerlRemoveSpaces(){
 
 function zpwrEscapeRemove(){
 
-    while read; do
-        echo "$REPLY" | sed -e 's@\e\[.\{1,5\}m@@g'
-    done
+    sed -e 's@\e\[.\{1,5\}m@@g'
 }
 
 function zpwrPrettyPrintNoNewline(){
@@ -719,7 +717,7 @@ function zpwrPrettyPrintInstaller(){
     printf "\x1b[32;1m"
     perlrs -le "print '#'x80"
     printf "\x1b[34;4m"
-    printf "$INSTALL_COUNTER>>> $1\n"
+    printf "%s>>> %s\n" "$INSTALL_COUNTER" "$1"
     printf "\x1b[0;32;1m"
     perlrs -le "print '#'x80"
     printf "\x1b[0m"
@@ -764,10 +762,10 @@ function zpwrPrettyPrintBoxStdin(){
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
 
-    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&1 && exit 1
+    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&2 && exit 1
     (( ++INSTALL_COUNTER ))
     {
-        printf "$INSTALL_COUNTER>>> $@\n"
+        printf "%s>>> %s\n" "$INSTALL_COUNTER" "$@"
         cat
     } | "$perlfile" -f
     echo
@@ -776,7 +774,7 @@ function zpwrPrettyPrintBoxStdin(){
 function zpwrPrettyPrintBox(){
 
     if [[ -z "$1" ]]; then
-        echo "usage: zpwrPrettyPrintBox MSG" >&1
+        echo "usage: zpwrPrettyPrintBox MSG" >&2
         exit 1
     fi
 
@@ -784,9 +782,9 @@ function zpwrPrettyPrintBox(){
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
 
-    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&1 && exit 1
+    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&2 && exit 1
     (( ++INSTALL_COUNTER ))
-    printf "$INSTALL_COUNTER>>> $@\n" | "$perlfile" -f
+    printf "%s>>> %s\n" "$INSTALL_COUNTER" "$@" | "$perlfile" -f
     echo
 }
 

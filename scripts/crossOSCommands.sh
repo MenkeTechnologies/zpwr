@@ -11,6 +11,11 @@ if [[ -z "$ZPWR_OS_TYPE" ]]; then
     export ZPWR_OS_TYPE="$(uname -s | perlrs -e 'print lc<>')"
 fi
 
+# cache uname -r for WSL detection (avoids repeated subshells)
+if [[ "$ZPWR_OS_TYPE" == linux* && -z "$_zpwr_uname_r" ]]; then
+    _zpwr_uname_r="$(uname -r)"
+fi
+
 function zpwrGetOpenCommand(){
 
     local open_cmd
@@ -21,7 +26,7 @@ function zpwrGetOpenCommand(){
         cygwin*)  open_cmd='cygstart'
           ;;
         linux*)
-            if [[ "$(uname -r)" != *icrosoft* ]];then
+            if [[ "$_zpwr_uname_r" != *icrosoft* ]];then
                 open_cmd='nohup xdg-open'
             else
                 open_cmd='cmd.exe /c start ""'
@@ -52,7 +57,7 @@ function zpwrGetPasteCommand(){
             paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"
             ;;
         linux*)
-            if [[ "$(uname -r)" != *icrosoft* ]];then
+            if [[ "$_zpwr_uname_r" != *icrosoft* ]];then
                 paste_cmd='xclip -o -sel clip'
             else
                 paste_cmd="powershell.exe -noprofile -command 'Get-Clipboard'"
@@ -86,7 +91,7 @@ function zpwrGetCopyCommand(){
             copy_cmd='clip.exe'
             ;;
         linux*)
-            if [[ "$(uname -r)" != *icrosoft* ]];then
+            if [[ "$_zpwr_uname_r" != *icrosoft* ]];then
                 copy_cmd='xclip -i -sel clip'
             else
                 copy_cmd='clip.exe'
@@ -107,9 +112,9 @@ function zpwrGetCopyCommand(){
     echo "$copy_cmd"
 }
 
-export ZPWR_OPEN_CMD="$(zpwrGetOpenCommand)"
-export ZPWR_COPY_CMD="$(zpwrGetCopyCommand)"
-export ZPWR_PASTE_CMD="$(zpwrGetPasteCommand)"
+[[ -z "$ZPWR_OPEN_CMD" ]] && export ZPWR_OPEN_CMD="$(zpwrGetOpenCommand)"
+[[ -z "$ZPWR_COPY_CMD" ]] && export ZPWR_COPY_CMD="$(zpwrGetCopyCommand)"
+[[ -z "$ZPWR_PASTE_CMD" ]] && export ZPWR_PASTE_CMD="$(zpwrGetPasteCommand)"
 
 
 

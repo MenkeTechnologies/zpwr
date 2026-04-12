@@ -31,7 +31,7 @@ else
     unset zpwrBaseDir
 fi
 
-test -z $ZPWR_EXA_COMMAND && ZPWR_EXA_COMMAND="command eza --git -il --classify=always -H --extended --color-scale -g -a --colour=always"
+test -z "$ZPWR_EXA_COMMAND" && ZPWR_EXA_COMMAND="command eza --git -il --classify=always -H --extended --color-scale -g -a --colour=always"
 
 if [[ "$1" == "--" ]]; then
     shift

@@ -40,9 +40,9 @@ zpwrCommandExists rpm && rpm_cmd='{ rpm -qi $file; rpm -qlp $file; }' || rpm_cmd
 zpwrCommandExists dpkg && deb_cmd='{ dpkg -I $file; dpkg -c $file; }' || deb_cmd="stat"
 
 os="$(uname -s)"
-if echo "$os" | grep -iq darwin; then
+if [[ "$os" == [Dd]arwin* ]]; then
     nmcmd="nm"
-elif echo "$os" | grep -iq linux; then
+elif [[ "$os" == [Ll]inux* ]]; then
     nmcmd="nm -D"
 else
     nmcmd="nm"

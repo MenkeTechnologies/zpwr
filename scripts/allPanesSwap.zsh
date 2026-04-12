@@ -9,7 +9,7 @@
 #}}}***********************************************************
 
 exec 2>> "$ZPWR_LOGFILE"
-printf "" > $ZPWR_TEMPFILE
+printf "" > "$ZPWR_TEMPFILE"
 typeset -a ZPWR_PANES
 typeset -A ZPWR_PANE_INFO
 local line out cnt id winw winh pw ph pl pt h w t l o row col win wid type ary socket fdc err=0
