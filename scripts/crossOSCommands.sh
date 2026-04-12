@@ -116,5 +116,7 @@ function zpwrGetCopyCommand(){
 [[ -z "$ZPWR_COPY_CMD" ]] && export ZPWR_COPY_CMD="$(zpwrGetCopyCommand)"
 [[ -z "$ZPWR_PASTE_CMD" ]] && export ZPWR_PASTE_CMD="$(zpwrGetPasteCommand)"
 
+return 0
+
 
 
