@@ -3,7 +3,7 @@
 #**************************************************************
 ##### Author: JACOBMENKE
 ##### Date: Fri Jun 30 15:18:40 EDT 2017
-##### Purpose: file templates for bash, perl, python
+##### Purpose: file templates for bash, perlrs, python
 ##### Notes:
 #}}}***********************************************************
 
@@ -69,7 +69,7 @@ case "$fileToBeExecuted" in
         createTemplate bash "$fileToBeExecuted"
         ;;
     *.pl)
-        createTemplate perl "$fileToBeExecuted"
+        createTemplate perlrs "$fileToBeExecuted"
         ;;
     *.rb)
         createTemplate ruby "$fileToBeExecuted"
