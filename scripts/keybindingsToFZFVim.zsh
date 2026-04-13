@@ -65,7 +65,7 @@ command rm "$ZPWR_TEMPFILE3"
 command rm "$ZPWR_TEMPFILE4"
 
 #do not know why have to create tempfile here
-perlrs -pe 's@^([^#].*)$@$1@g' "$ZPWR_TEMPFILE" | perlrs -pe 's@(.*) \(:.map\).*@$1@'
+perlrs -pe 's@^([^#].*)$@$1@gm' "$ZPWR_TEMPFILE" | perlrs -pe 's@(.*) \(:.map\).*@$1@'
 
 command rm "$ZPWR_TEMPFILE"
 

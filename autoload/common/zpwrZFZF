@@ -5,7 +5,7 @@ function zpwrZFZF(){
     local mywords
 
     zle .kill-whole-line
-    BUFFER="z $(zpwrFzfZList)"
+    BUFFER="z \"$(zpwrFzfZList)\""
     mywords=(${(z)BUFFER})
 
     if (( $#mywords == 1 )); then
