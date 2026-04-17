@@ -47,8 +47,8 @@
     assert $state equals 0
 }
 
-@test 'script banner.pl is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/banner.pl"
+@test 'script banner.pr is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/banner.pr"
     assert $state equals 0
 }
 
@@ -92,8 +92,8 @@
     assert $state equals 0
 }
 
-@test 'script c.pl is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/c.pl"
+@test 'script c.pr is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/c.pr"
     assert $state equals 0
 }
 
@@ -172,8 +172,8 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.pl is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/escapeRemover.pl"
+@test 'script escapeRemover.pr is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/escapeRemover.pr"
     assert $state equals 0
 }
 
@@ -317,8 +317,8 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.pl is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/gitSdiffColorizer.pl"
+@test 'script gitSdiffColorizer.pr is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/gitSdiffColorizer.pr"
     assert $state equals 0
 }
 
@@ -417,8 +417,8 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.pl is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/minifySpaces.pl"
+@test 'script minifySpaces.pr is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/minifySpaces.pr"
     assert $state equals 0
 }
 
@@ -507,8 +507,8 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.pl is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/regexReplace.pl"
+@test 'script regexReplace.pr is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/regexReplace.pr"
     assert $state equals 0
 }
 
@@ -537,8 +537,8 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.pl is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/sdiffColorizer.pl"
+@test 'script sdiffColorizer.pr is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/sdiffColorizer.pr"
     assert $state equals 0
 }
 
@@ -582,8 +582,8 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.pl is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/stdinSdiffColorizer.pl"
+@test 'script stdinSdiffColorizer.pr is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr"
     assert $state equals 0
 }
 

@@ -1282,8 +1282,8 @@
     assert $state equals 0
 }
 
-@test 'banner.pl perl syntax' {
-    run perl -c "$ZPWR_SCRIPTS/banner.pl"
+@test 'banner.pr perlrs syntax' {
+    run perlrs "$ZPWR_SCRIPTS/banner.pr" --help
     assert $state equals 0
 }
 
@@ -1292,38 +1292,38 @@
     assert $state equals 0
 }
 
-@test 'c.pl perl syntax' {
-    run perl -c "$ZPWR_SCRIPTS/c.pl"
+@test 'c.pr perlrs syntax' {
+    run perlrs "$ZPWR_SCRIPTS/c.pr" --help
     assert $state equals 0
 }
 
-@test 'escapeRemover.pl perl syntax' {
-    run perl -c "$ZPWR_SCRIPTS/escapeRemover.pl"
+@test 'escapeRemover.pr perlrs syntax' {
+    run perlrs "$ZPWR_SCRIPTS/escapeRemover.pr" --help
     assert $state equals 0
 }
 
-@test 'gitSdiffColorizer.pl perl syntax' {
-    run perl -c "$ZPWR_SCRIPTS/gitSdiffColorizer.pl"
+@test 'gitSdiffColorizer.pr perlrs syntax' {
+    run perlrs "$ZPWR_SCRIPTS/gitSdiffColorizer.pr" --help
     assert $state equals 0
 }
 
-@test 'minifySpaces.pl perl syntax' {
-    run perl -c "$ZPWR_SCRIPTS/minifySpaces.pl"
+@test 'minifySpaces.pr perlrs syntax' {
+    run perlrs "$ZPWR_SCRIPTS/minifySpaces.pr" --help
     assert $state equals 0
 }
 
-@test 'regexReplace.pl perl syntax' {
-    run perl -c "$ZPWR_SCRIPTS/regexReplace.pl"
+@test 'regexReplace.pr perlrs syntax' {
+    run perlrs "$ZPWR_SCRIPTS/regexReplace.pr" --help
     assert $state equals 0
 }
 
-@test 'sdiffColorizer.pl perl syntax' {
-    run perl -c "$ZPWR_SCRIPTS/sdiffColorizer.pl"
+@test 'sdiffColorizer.pr perlrs syntax' {
+    run perlrs "$ZPWR_SCRIPTS/sdiffColorizer.pr" --help
     assert $state equals 0
 }
 
-@test 'stdinSdiffColorizer.pl perl syntax' {
-    run perl -c "$ZPWR_SCRIPTS/stdinSdiffColorizer.pl"
+@test 'stdinSdiffColorizer.pr perlrs syntax' {
+    run perlrs "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr" --help
     assert $state equals 0
 }
 

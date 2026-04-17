@@ -9,4 +9,4 @@
 
 [[ -z "$ZPWR_SCRIPTS" ]] && ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
 
-perlrs -X "$ZPWR_SCRIPTS/banner.pl"
+perlrs -X "$ZPWR_SCRIPTS/banner.pr"

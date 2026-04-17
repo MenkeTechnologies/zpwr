@@ -61,9 +61,9 @@
     assert $state equals 0
 }
 
-@test 'script banner.pl has lines' {
+@test 'script banner.pr has lines' {
     local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/banner.pl")
+    lc=$(wc -l < "$ZPWR_SCRIPTS/banner.pr")
     run test "$lc" -gt 0
     assert $state equals 0
 }
@@ -124,9 +124,9 @@
     assert $state equals 0
 }
 
-@test 'script c.pl has lines' {
+@test 'script c.pr has lines' {
     local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/c.pl")
+    lc=$(wc -l < "$ZPWR_SCRIPTS/c.pr")
     run test "$lc" -gt 0
     assert $state equals 0
 }
@@ -236,9 +236,9 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.pl has lines' {
+@test 'script escapeRemover.pr has lines' {
     local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/escapeRemover.pl")
+    lc=$(wc -l < "$ZPWR_SCRIPTS/escapeRemover.pr")
     run test "$lc" -gt 0
     assert $state equals 0
 }
@@ -432,9 +432,9 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.pl has lines' {
+@test 'script gitSdiffColorizer.pr has lines' {
     local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/gitSdiffColorizer.pl")
+    lc=$(wc -l < "$ZPWR_SCRIPTS/gitSdiffColorizer.pr")
     run test "$lc" -gt 0
     assert $state equals 0
 }
@@ -572,9 +572,9 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.pl has lines' {
+@test 'script minifySpaces.pr has lines' {
     local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/minifySpaces.pl")
+    lc=$(wc -l < "$ZPWR_SCRIPTS/minifySpaces.pr")
     run test "$lc" -gt 0
     assert $state equals 0
 }
@@ -698,9 +698,9 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.pl has lines' {
+@test 'script regexReplace.pr has lines' {
     local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/regexReplace.pl")
+    lc=$(wc -l < "$ZPWR_SCRIPTS/regexReplace.pr")
     run test "$lc" -gt 0
     assert $state equals 0
 }
@@ -740,9 +740,9 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.pl has lines' {
+@test 'script sdiffColorizer.pr has lines' {
     local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/sdiffColorizer.pl")
+    lc=$(wc -l < "$ZPWR_SCRIPTS/sdiffColorizer.pr")
     run test "$lc" -gt 0
     assert $state equals 0
 }
@@ -803,9 +803,9 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.pl has lines' {
+@test 'script stdinSdiffColorizer.pr has lines' {
     local lc
-    lc=$(wc -l < "$ZPWR_SCRIPTS/stdinSdiffColorizer.pl")
+    lc=$(wc -l < "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr")
     run test "$lc" -gt 0
     assert $state equals 0
 }

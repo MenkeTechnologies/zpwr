@@ -44,7 +44,7 @@ function zpwrDoctor(){
         print "  ${D}broken symlinks in \$ZPWR${N}"
         print "  ${D}invalid named directories${N}"
         print "  ${D}p10k/gitstatus named dir pollution${N}"
-        print "  ${D}missing dependencies (git, eza, fzf, tmux, perl, python3)${N}"
+        print "  ${D}missing dependencies (git, eza, fzf, tmux, perlrs, python3)${N}"
         print "  ${D}history file and backups${N}"
         print "  ${D}config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh)${N}"
         print ""
@@ -227,7 +227,7 @@ function zpwrDoctor(){
     # ── DEPENDENCIES ──────────────────────────────────────────
     printf "\n  ${C}── DEPENDENCIES ────────────────────────────────────${N}\n"
 
-    local -a required_cmds=( git eza fzf tmux perl python3 )
+    local -a required_cmds=( git eza fzf tmux perlrs python3 )
     local cmd
     for cmd in $required_cmds; do
         if (( $+commands[$cmd] )); then

@@ -61,9 +61,9 @@
     assert $state equals 0
 }
 
-@test 'script banner.pl has shebang' {
+@test 'script banner.pr has shebang' {
     local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/banner.pl")
+    first_line=$(head -1 "$ZPWR_SCRIPTS/banner.pr")
     run test -n "$first_line"
     assert $state equals 0
 }
@@ -124,9 +124,9 @@
     assert $state equals 0
 }
 
-@test 'script c.pl has shebang' {
+@test 'script c.pr has shebang' {
     local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/c.pl")
+    first_line=$(head -1 "$ZPWR_SCRIPTS/c.pr")
     run test -n "$first_line"
     assert $state equals 0
 }
@@ -236,9 +236,9 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.pl has shebang' {
+@test 'script escapeRemover.pr has shebang' {
     local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/escapeRemover.pl")
+    first_line=$(head -1 "$ZPWR_SCRIPTS/escapeRemover.pr")
     run test -n "$first_line"
     assert $state equals 0
 }
@@ -432,9 +432,9 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.pl has shebang' {
+@test 'script gitSdiffColorizer.pr has shebang' {
     local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/gitSdiffColorizer.pl")
+    first_line=$(head -1 "$ZPWR_SCRIPTS/gitSdiffColorizer.pr")
     run test -n "$first_line"
     assert $state equals 0
 }
@@ -572,9 +572,9 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.pl has shebang' {
+@test 'script minifySpaces.pr has shebang' {
     local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/minifySpaces.pl")
+    first_line=$(head -1 "$ZPWR_SCRIPTS/minifySpaces.pr")
     run test -n "$first_line"
     assert $state equals 0
 }
@@ -698,9 +698,9 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.pl has shebang' {
+@test 'script regexReplace.pr has shebang' {
     local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/regexReplace.pl")
+    first_line=$(head -1 "$ZPWR_SCRIPTS/regexReplace.pr")
     run test -n "$first_line"
     assert $state equals 0
 }
@@ -740,9 +740,9 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.pl has shebang' {
+@test 'script sdiffColorizer.pr has shebang' {
     local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/sdiffColorizer.pl")
+    first_line=$(head -1 "$ZPWR_SCRIPTS/sdiffColorizer.pr")
     run test -n "$first_line"
     assert $state equals 0
 }
@@ -803,9 +803,9 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.pl has shebang' {
+@test 'script stdinSdiffColorizer.pr has shebang' {
     local first_line
-    first_line=$(head -1 "$ZPWR_SCRIPTS/stdinSdiffColorizer.pl")
+    first_line=$(head -1 "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr")
     run test -n "$first_line"
     assert $state equals 0
 }

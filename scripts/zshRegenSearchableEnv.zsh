@@ -58,7 +58,7 @@
     print "======" >> "$ZPWR_TEMPFILE2"
 
     for k v in ${(kv)reswords}; do
-        type -a -- $reswords
+        type -a -- $k
     done >> "$ZPWR_TEMPFILE2"
 
     print "======" >> "$ZPWR_TEMPFILE2"

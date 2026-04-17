@@ -221,7 +221,6 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - temprs
 - lsofrs
 - storageshower
-- lsofng
 - htop
 - ccze
 - rust/cargo

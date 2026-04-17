@@ -123,6 +123,16 @@ function zpwrInitEnv() {
 zpwrInitEnv
 ZPWR_VARS[phaseEnvTs]=$EPOCHREALTIME
 
+function rm(){
+
+    if [[ -z "$1" ]]; then
+        zpwrLogConsoleErr "usage: rm FILE"
+        return 1
+    fi
+
+    command rm -v "$@"
+}
+
 # You may need to manually set your language environment
 # has all aliases and functions common to bourne like shells
 builtin test -s "$ZPWR_ALIAS_FILE" && builtin source "$ZPWR_ALIAS_FILE"

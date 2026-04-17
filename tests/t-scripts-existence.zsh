@@ -47,8 +47,8 @@
     assert $state equals 0
 }
 
-@test 'script banner.pl exists' {
-    run test -f "$ZPWR_SCRIPTS/banner.pl"
+@test 'script banner.pr exists' {
+    run test -f "$ZPWR_SCRIPTS/banner.pr"
     assert $state equals 0
 }
 
@@ -92,8 +92,8 @@
     assert $state equals 0
 }
 
-@test 'script c.pl exists' {
-    run test -f "$ZPWR_SCRIPTS/c.pl"
+@test 'script c.pr exists' {
+    run test -f "$ZPWR_SCRIPTS/c.pr"
     assert $state equals 0
 }
 
@@ -172,8 +172,8 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.pl exists' {
-    run test -f "$ZPWR_SCRIPTS/escapeRemover.pl"
+@test 'script escapeRemover.pr exists' {
+    run test -f "$ZPWR_SCRIPTS/escapeRemover.pr"
     assert $state equals 0
 }
 
@@ -312,8 +312,8 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.pl exists' {
-    run test -f "$ZPWR_SCRIPTS/gitSdiffColorizer.pl"
+@test 'script gitSdiffColorizer.pr exists' {
+    run test -f "$ZPWR_SCRIPTS/gitSdiffColorizer.pr"
     assert $state equals 0
 }
 
@@ -412,8 +412,8 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.pl exists' {
-    run test -f "$ZPWR_SCRIPTS/minifySpaces.pl"
+@test 'script minifySpaces.pr exists' {
+    run test -f "$ZPWR_SCRIPTS/minifySpaces.pr"
     assert $state equals 0
 }
 
@@ -502,8 +502,8 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.pl exists' {
-    run test -f "$ZPWR_SCRIPTS/regexReplace.pl"
+@test 'script regexReplace.pr exists' {
+    run test -f "$ZPWR_SCRIPTS/regexReplace.pr"
     assert $state equals 0
 }
 
@@ -522,8 +522,8 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.pl exists' {
-    run test -f "$ZPWR_SCRIPTS/sdiffColorizer.pl"
+@test 'script sdiffColorizer.pr exists' {
+    run test -f "$ZPWR_SCRIPTS/sdiffColorizer.pr"
     assert $state equals 0
 }
 
@@ -567,8 +567,8 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.pl exists' {
-    run test -f "$ZPWR_SCRIPTS/stdinSdiffColorizer.pl"
+@test 'script stdinSdiffColorizer.pr exists' {
+    run test -f "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr"
     assert $state equals 0
 }
 

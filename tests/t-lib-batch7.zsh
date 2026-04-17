@@ -1,7 +1,7 @@
 #!/usr/bin/env zunit
 #{{{                    MARK:Header
 ##### Author: MenkeTechnologies
-##### Purpose: perl -c on scripts/*.pl (beyond boxPrint), bash -n on install/*.sh, verb spots
+##### Purpose: perlrs on scripts/*.pr (beyond boxPrint), bash -n on install/*.sh, verb spots
 ##### Notes: Complements t-lib-batch4 (boxPrint.pl only)
 #}}}***********************************************************
 
@@ -10,45 +10,45 @@
 }
 
 #--------------------------------------------------------------
-# scripts/*.pl — syntax (batch4 covers boxPrint.pl)
+# scripts/*.pr — syntax (batch4 covers boxPrint.pl)
 #--------------------------------------------------------------
-@test 'banner.pl passes perl -c' {
-    run perl -c "$ZPWR_SCRIPTS/banner.pl" 2>&1
+@test 'banner.pr runs with perlrs' {
+    run perlrs "$ZPWR_SCRIPTS/banner.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'c.pl passes perl -c' {
-    run perl -c "$ZPWR_SCRIPTS/c.pl" 2>&1
+@test 'c.pr runs with perlrs' {
+    run perlrs "$ZPWR_SCRIPTS/c.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'escapeRemover.pl passes perl -c' {
-    run perl -c "$ZPWR_SCRIPTS/escapeRemover.pl" 2>&1
+@test 'escapeRemover.pr runs with perlrs' {
+    run perlrs "$ZPWR_SCRIPTS/escapeRemover.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'gitSdiffColorizer.pl passes perl -c' {
-    run perl -c "$ZPWR_SCRIPTS/gitSdiffColorizer.pl" 2>&1
+@test 'gitSdiffColorizer.pr runs with perlrs' {
+    run perlrs "$ZPWR_SCRIPTS/gitSdiffColorizer.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'minifySpaces.pl passes perl -c' {
-    run perl -c "$ZPWR_SCRIPTS/minifySpaces.pl" 2>&1
+@test 'minifySpaces.pr runs with perlrs' {
+    run perlrs "$ZPWR_SCRIPTS/minifySpaces.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'regexReplace.pl passes perl -c' {
-    run perl -c "$ZPWR_SCRIPTS/regexReplace.pl" 2>&1
+@test 'regexReplace.pr runs with perlrs' {
+    run perlrs "$ZPWR_SCRIPTS/regexReplace.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'sdiffColorizer.pl passes perl -c' {
-    run perl -c "$ZPWR_SCRIPTS/sdiffColorizer.pl" 2>&1
+@test 'sdiffColorizer.pr runs with perlrs' {
+    run perlrs "$ZPWR_SCRIPTS/sdiffColorizer.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'stdinSdiffColorizer.pl passes perl -c' {
-    run perl -c "$ZPWR_SCRIPTS/stdinSdiffColorizer.pl" 2>&1
+@test 'stdinSdiffColorizer.pr runs with perlrs' {
+    run perlrs "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr" --help 2>&1
     assert $state equals 0
 }
 

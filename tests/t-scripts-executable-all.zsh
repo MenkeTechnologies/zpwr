@@ -47,8 +47,8 @@
     assert $state equals 0
 }
 
-@test 'script banner.pl is executable' {
-    run test -x "$ZPWR_SCRIPTS/banner.pl"
+@test 'script banner.pr is executable' {
+    run test -x "$ZPWR_SCRIPTS/banner.pr"
     assert $state equals 0
 }
 
@@ -92,8 +92,8 @@
     assert $state equals 0
 }
 
-@test 'script c.pl is executable' {
-    run test -x "$ZPWR_SCRIPTS/c.pl"
+@test 'script c.pr is executable' {
+    run test -x "$ZPWR_SCRIPTS/c.pr"
     assert $state equals 0
 }
 
@@ -172,8 +172,8 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.pl is executable' {
-    run test -x "$ZPWR_SCRIPTS/escapeRemover.pl"
+@test 'script escapeRemover.pr is executable' {
+    run test -x "$ZPWR_SCRIPTS/escapeRemover.pr"
     assert $state equals 0
 }
 
@@ -312,8 +312,8 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.pl is executable' {
-    run test -x "$ZPWR_SCRIPTS/gitSdiffColorizer.pl"
+@test 'script gitSdiffColorizer.pr is executable' {
+    run test -x "$ZPWR_SCRIPTS/gitSdiffColorizer.pr"
     assert $state equals 0
 }
 
@@ -412,8 +412,8 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.pl is executable' {
-    run test -x "$ZPWR_SCRIPTS/minifySpaces.pl"
+@test 'script minifySpaces.pr is executable' {
+    run test -x "$ZPWR_SCRIPTS/minifySpaces.pr"
     assert $state equals 0
 }
 
@@ -502,8 +502,8 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.pl is executable' {
-    run test -x "$ZPWR_SCRIPTS/regexReplace.pl"
+@test 'script regexReplace.pr is executable' {
+    run test -x "$ZPWR_SCRIPTS/regexReplace.pr"
     assert $state equals 0
 }
 
@@ -532,8 +532,8 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.pl is executable' {
-    run test -x "$ZPWR_SCRIPTS/sdiffColorizer.pl"
+@test 'script sdiffColorizer.pr is executable' {
+    run test -x "$ZPWR_SCRIPTS/sdiffColorizer.pr"
     assert $state equals 0
 }
 
@@ -577,8 +577,8 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.pl is executable' {
-    run test -x "$ZPWR_SCRIPTS/stdinSdiffColorizer.pl"
+@test 'script stdinSdiffColorizer.pr is executable' {
+    run test -x "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr"
     assert $state equals 0
 }
 

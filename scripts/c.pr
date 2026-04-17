@@ -1,0 +1,29 @@
+#!/usr/bin/env perlrs
+
+use warnings
+use strict
+use Env "@PATH"
+
+open(my $less, "|-", "less") or die $!
+my $exe_bat = "bat"
+my $exe_bat_exists = @PATH |> grep { -x"${_}/${exe_bat}" }
+my $exe = "pygmentize"
+my $exe_exists = @PATH |> grep { -x"${_}/${exe}" }
+my $colorizer = $ENV{"ZPWR_COLORIZER"}
+my $PYGMENTIZE_COLOR = $ENV{"ZPWR_PYGMENTIZE_COLOR"}
+$PYGMENTIZE_COLOR =~ s/(\$\w+)/$1/eeg
+$less |> select
+
+for (@ARGV) {
+    if (! -d) {
+        if ((qx "file \"${_}\"") =~ /text/) {
+            if ($colorizer =~ "pygmentize") {
+                p $exe_exists ? ("\e[4;1m${_}\e[0m\n" . qx "${colorizer} \"${_}\" | cat -n") : ("\e[4;1m${_}\e[0m\n" . qx "cat -n \"${_}\"")
+            } else {
+                p $exe_bat_exists ? ("\e[4;1m${_}\e[0m\n" . qx "${colorizer} \"${_}\"") : ("\e[4;1m${_}\e[0m\n" . qx "cat -n \"${_}\"")
+            }
+        }
+    }
+}
+
+$less |> close
