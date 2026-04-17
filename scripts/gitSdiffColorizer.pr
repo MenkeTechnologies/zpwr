@@ -1,0 +1,23 @@
+#!/usr/bin/env perlrs
+
+my $numColumns = qx "tput cols"
+$numColumns |> chomp
+my ($changeColor, $insertColor, $deleteColor) = ("41", "43", "42")
+my $fmt = "1;4"
+
+p "\e[1;4mStatus\e[0m\n"
+p qx "git status"
+
+open(my $fh, "git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\n\";sdiff --expand-tabs -w '${numColumns} HEAD * | cat -n |")
+
+while (<$fh>) {
+    my $len = $_ |> length
+    if ($len < $numColumns) {
+        $_ |> chomp
+        $_ .= " " x ($numColumns - $len) . "\n"
+    }
+    $_ =~ s/(^.*[ ]{2,}\|[ ]+.*$)/\e[${changeColor};${fmt};37m$1\e[0m/g
+    $_ =~ s/(^.*[ ]{15,}\>.*$)/\e[${insertColor};${fmt};37m$1\e[0m/g
+    $_ =~ s/(^.*\<[ ]+$)/\e[${deleteColor};${fmt};37m$1\e[0m/g
+    p
+}

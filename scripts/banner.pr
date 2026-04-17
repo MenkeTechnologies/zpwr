@@ -1,0 +1,21 @@
+#!/usr/bin/env perlrs
+
+STDOUT |> binmode ":encoding(UTF-8)"
+
+my $width = 80
+my $date = qx "date"
+my $widthHalf = $width / 4
+
+fn printD { p "ሕ" x $width }
+
+fn printDate {
+    p "ሕ" x $width
+    p " " x $widthHalf
+    p "${date}"
+    p "ሕ" x $width
+}
+
+printD
+p qx "bash figletRandomFontOnce.sh MenkeTechnologies"
+printD
+printDate

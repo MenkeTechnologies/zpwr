@@ -199,15 +199,13 @@ function zpwrPerlRemoveSpaces(){
 
     for file;do
         printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
-        perlrs -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
+        ${ZPWR_PERL:-perlrs} -pi -e 's@\s+$@\n@g; s@\x09$@    @g;s@\x20@ @g; s@^s*\n$@@; s@(\S)[\x20]{2,}@$1\x20@' "$file"
     done
 }
 
 function zpwrEscapeRemove(){
 
-    while read; do
-        echo "$REPLY" | sed -e 's@\e\[.\{1,5\}m@@g'
-    done
+    sed -e 's@\e\[.\{1,5\}m@@g'
 }
 
 function zpwrPrettyPrintNoNewline(){
@@ -715,13 +713,20 @@ function zpwrPrettyPrintInstaller(){
         return 1
     fi
 
+    local pe
+    if type -p perlrs &>/dev/null; then
+        pe=perlrs
+    else
+        pe=perl
+    fi
+
     (( ++INSTALL_COUNTER ))
     printf "\x1b[32;1m"
-    perlrs -le "print '#'x80"
+    "$pe" -le "print '#'x80"
     printf "\x1b[34;4m"
-    printf "$INSTALL_COUNTER>>> $1\n"
+    printf "%s>>> %s\n" "$INSTALL_COUNTER" "$1"
     printf "\x1b[0;32;1m"
-    perlrs -le "print '#'x80"
+    "$pe" -le "print '#'x80"
     printf "\x1b[0m"
     printf "\n"
 }
@@ -764,10 +769,10 @@ function zpwrPrettyPrintBoxStdin(){
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
 
-    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&1 && exit 1
+    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&2 && exit 1
     (( ++INSTALL_COUNTER ))
     {
-        printf "$INSTALL_COUNTER>>> $@\n"
+        printf "%s>>> %s\n" "$INSTALL_COUNTER" "$@"
         cat
     } | "$perlfile" -f
     echo
@@ -776,7 +781,7 @@ function zpwrPrettyPrintBoxStdin(){
 function zpwrPrettyPrintBox(){
 
     if [[ -z "$1" ]]; then
-        echo "usage: zpwrPrettyPrintBox MSG" >&1
+        echo "usage: zpwrPrettyPrintBox MSG" >&2
         exit 1
     fi
 
@@ -784,9 +789,9 @@ function zpwrPrettyPrintBox(){
 
     perlfile="$ZPWR_SCRIPTS/boxPrint.pl"
 
-    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&1 && exit 1
+    [[ ! -e "$perlfile" ]] && echo "where is perlfile '$perlfile'?" >&2 && exit 1
     (( ++INSTALL_COUNTER ))
-    printf "$INSTALL_COUNTER>>> $@\n" | "$perlfile" -f
+    printf "%s>>> %s\n" "$INSTALL_COUNTER" "$@" | "$perlfile" -f
     echo
 }
 
@@ -808,7 +813,7 @@ function zpwrTurnOnDebugging(){
 function zpwrAlternatingPrettyPrint(){
 
     if [[ -z $1 ]]; then
-        cat | perlrs -F"$ZPWR_DELIMITER_CHAR" -anE '
+        cat | ${ZPWR_PERL:-perlrs} -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){
@@ -819,7 +824,7 @@ function zpwrAlternatingPrettyPrint(){
         ++$counter;
         };print "\x1b[0m"'
     else
-        perlrs -F"$ZPWR_DELIMITER_CHAR" -anE '
+        ${ZPWR_PERL:-perlrs} -F"$ZPWR_DELIMITER_CHAR" -anE '
         my $counter=0;
         for (@F){
             if ($counter % 2 == 0){

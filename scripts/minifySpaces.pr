@@ -1,0 +1,25 @@
+#!/usr/bin/env perlrs
+
+fn removeSpaces {
+    if (-d$_[0]) {
+        $_ |> removeSpaces foreach glob("$_[0]/* $_[0]/.[!.]*")
+    } else {
+        p "working on $_[0]\n"
+        my $tmp = $_[0] . ".bak"
+        rename($_[0], $tmp)
+        open(my $in, "<${tmp}")
+        open(my $out, ">$_[0]")
+        while (<$in>) {
+            $_ =~ s/\s+$/\n/g
+            $_ =~ s/\x20/ /g
+            $_ =~ s/^\s*\n$//
+            $_ =~ s/\x09$/    /g
+            $out |> p $_
+        }
+        unlink($tmp)
+        $in |> close
+        $out |> close
+    }
+}
+
+$_ |> removeSpaces for @ARGV

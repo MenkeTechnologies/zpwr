@@ -1,0 +1,29 @@
+#!/usr/bin/env perlrs
+
+my $numColumns = 0
+if (@ARGV) {
+    $numColumns = $ARGV[0]
+} else {
+    $numColumns = qx "tput cols"
+    $numColumns |> chomp
+}
+my ($changeColor, $insertColor, $deleteColor) = ("41", "43", "42")
+my $fmt = "1;4"
+open(my $less, "|-", "less -M") or die $!
+$less |> select
+my $numSpaces = $numColumns / 2 |> int
+p " " x $numSpaces
+
+while (<STDIN>) {
+    my $len = $_ |> length
+    if ($len < $numColumns) {
+        chomp
+        $_ .= " " x ($numColumns - $len) . "\n"
+    }
+    $_ =~ s/(^.*\|[ ]{1,2}.*$)/\e[${changeColor};${fmt};37m$1\e[0m/g
+    $_ =~ s/(^.*>[ ]{1,2}.*$)/\e[${insertColor};${fmt};37m$1\e[0m/g
+    $_ =~ s/(^.*<[ ]{1,2}.*$)/\e[${deleteColor};${fmt};37m$1\e[0m/g
+    p
+}
+
+$less |> close

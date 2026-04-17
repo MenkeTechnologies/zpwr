@@ -1,4 +1,4 @@
-#!/usr/bin/env perlrs
+#!/usr/bin/env perl
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE
@@ -68,12 +68,10 @@ if ($length) {
     say "";
     say "*" x 80 for ( 0 .. 2 );
     say "";
-    say
-"\x1b[34;1m<<<(\x1b[0;34m$_\x1b[0m has got \x1b[34m$regex!\x1b[0;34;1m)>>>\x1b[0m"
-      for @files;
+    say "\x1b[34;1m<<<(\x1b[0;34m$_\x1b[0m has got \x1b[34m$regex!\x1b[0;34;1m)>>>\x1b[0m" for @files;
 
     say
-      "\x1b[34;1m<<<(\x1b[0;34m$length \x1b[0;34mfiles!\x1b[0;34;1m)>>>\x1b[0m";
+      "\x1b[34;1m<<<(\x1b[0;34m${length} \x1b[0;34mfiles!\x1b[0;34;1m)>>>\x1b[0m";
     print "Remove $regex?\x1b[1;34m>\x1b[0m ";
     my $answer = <STDIN>;
     chomp $answer;

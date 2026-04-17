@@ -1691,6 +1691,13 @@ let g:ale_set_balloons = 1
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {'ruby': ['rubocop'], 'sh': ['shfmt'], 'perl': ['perltidy'], 'python': ['yapf']}
 
+" perlrs
+if executable('pe') && filereadable(expand('~/.zpwr/install/perlrs.vim'))
+  source ~/.zpwr/install/perlrs.vim
+endif
+
+
+
 " less intrusive linting
 let g:ale_lint_on_text_changed = 'always'
 let g:ale_lint_delay = 1000
@@ -1986,6 +1993,7 @@ endfunction
 "if has('nvim')
     "exe 'normal :UpdateRemotePlugins'
 "endif
+
 
 
 "}}}***********************************************************

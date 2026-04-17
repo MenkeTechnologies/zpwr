@@ -12,9 +12,9 @@ function zpwrBindAliasesLate(){
     #{{{                    MARK:Aliases
     #**************************************************************
     # portable aliases
-    zpwrExists c.pl && {
-        alias pp='c.pl'
-        alias ppp='c.pl *'
+    zpwrExists c.pr && {
+        alias pp='c.pr'
+        alias ppp='c.pr *'
     }
     alias dirs='"builtin" dirs -v'
     zpwrExists proxychains && alias pc='proxychains'

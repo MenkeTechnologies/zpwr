@@ -71,6 +71,9 @@ case "$fileToBeExecuted" in
     *.pl)
         createTemplate perlrs "$fileToBeExecuted"
         ;;
+    *.pr)
+        createTemplate perlrs "$fileToBeExecuted"
+        ;;
     *.rb)
         createTemplate ruby "$fileToBeExecuted"
         ;;

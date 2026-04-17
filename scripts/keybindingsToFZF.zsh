@@ -71,7 +71,7 @@ fi
 } | perlrs -ne 'print if /\S+/' > "$ZPWR_TEMPFILE"
 
 #do not know why have to create tempfile here
-perlrs -pe 's@^([^#].*)$@$1@g' "$ZPWR_TEMPFILE" | perlrs -pe 's@(.*) \(:.map\).*@$1@'
+perlrs -pe 's@^([^#].*)$@$1@gm' "$ZPWR_TEMPFILE" | perlrs -pe 's@(.*) \(:.map\).*@$1@'
 
 command rm "$ZPWR_TEMPFILE"
 
