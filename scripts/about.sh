@@ -47,20 +47,17 @@ function banner() {
     printf "${dim}${cyan}"
     cat <<\EOF
     ┌──────────────────────────────────────────────────────────┐
-    │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+    │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
 EOF
-    printf "${reset}${bg_black}${magenta}"
-    cat <<\EOF
-    │    ███████╗██████╗ ██╗    ██╗██████╗     //SYSTEMS//    │
-    │    ╚══███╔╝██╔══██╗██║    ██║██╔══██╗                   │
-    │      ███╔╝ ██████╔╝██║ █╗ ██║██████╔╝                   │
-    │     ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗                   │
-    │    ███████╗██║      ╚███╔███╔╝██║  ██║                   │
-    │    ╚══════╝╚═╝       ╚══╝╚══╝ ╚═╝  ╚═╝                   │
-EOF
+    printf "${dim}${cyan}    │${reset}${bg_black}${magenta}    ███████╗██████╗ ██╗    ██╗██████╗     //SYSTEMS//     ${dim}${cyan}│${reset}${bg_black}\n"
+    printf "${dim}${cyan}    │${reset}${bg_black}${magenta}    ╚══███╔╝██╔══██╗██║    ██║██╔══██╗                    ${dim}${cyan}│${reset}${bg_black}\n"
+    printf "${dim}${cyan}    │${reset}${bg_black}${magenta}      ███╔╝ ██████╔╝██║ █╗ ██║██████╔╝                    ${dim}${cyan}│${reset}${bg_black}\n"
+    printf "${dim}${cyan}    │${reset}${bg_black}${magenta}     ███╔╝  ██╔═══╝ ██║███╗██║██╔══██╗                    ${dim}${cyan}│${reset}${bg_black}\n"
+    printf "${dim}${cyan}    │${reset}${bg_black}${magenta}    ███████╗██║      ╚███╔███╔╝██║  ██║                   ${dim}${cyan}│${reset}${bg_black}\n"
+    printf "${dim}${cyan}    │${reset}${bg_black}${magenta}    ╚══════╝╚═╝       ╚══╝╚══╝ ╚═╝  ╚═╝                   ${dim}${cyan}│${reset}${bg_black}\n"
     printf "${reset}${bg_black}${dim}${cyan}"
     cat <<\EOF
-    │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
+    │  ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░  │
     └──────────────────────────────────────────────────────────┘
 EOF
 
@@ -69,7 +66,7 @@ EOF
     printf "${cyan}${bold}"
     cat <<\EOF
       ╔══════════════════════════════════════════════════════╗
-      ║  ▓▓ M E N K E   T E C H N O L O G I E S   ▓▓      ║
+      ║  ▓▓ M E N K E   T E C H N O L O G I E S   ▓▓         ║
       ╚══════════════════════════════════════════════════════╝
 EOF
 
@@ -79,28 +76,45 @@ EOF
     printf "${dim}${green}      > ZPWR KERNEL ONLINE${reset}${bg_black}\n"
     echo
 
+    # Compute box inner width from the longest content line
+    local lines=("  $info" "  FETCH >> $fetch" "  PUSH  >> $push" "  $lastcommit")
+    local bw=54 len
+    for line in "${lines[@]}"; do
+        len=${#line}
+        (( len > bw )) && bw=$len
+    done
+
+    # Box drawing helpers
+    _top() { printf "      ┌─── %s " "$1"; printf '─%.0s' $(seq 1 $(( bw - ${#1} - 5 ))); printf "┐\n"; }
+    _bot() { printf "      └"; printf '─%.0s' $(seq 1 $bw); printf "┘\n"; }
+    _row() { printf "      │%-${bw}s│\n" "$1"; }
+
     printf "${yellow}${bold}"
-    cat <<EOF
-      ┌─── VERSION ──────────────────────────────────────────┐
-      │  $info
-      └──────────────────────────────────────────────────────┘
-EOF
+    _top "VERSION"
+    _row "  $info"
+    _bot
 
     printf "${reset}${bg_black}"
     echo
-    printf "${cyan}      ┌─── NETWORK ─────────────────────────────────────────┐\n"
-    printf "      │  ${dim}${cyan}FETCH >>${reset}${bg_black}${cyan} %s\n" "$fetch"
-    printf "      │  ${dim}${cyan}PUSH  >>${reset}${bg_black}${cyan} %s\n" "$push"
-    printf "${cyan}      └──────────────────────────────────────────────────────┘\n"
+    local fetch_content="  FETCH >> $fetch"
+    local push_content="  PUSH  >> $push"
+    local fetch_pad=$(( bw - ${#fetch_content} ))
+    local push_pad=$(( bw - ${#push_content} ))
+    [[ $fetch_pad -lt 0 ]] && fetch_pad=0
+    [[ $push_pad -lt 0 ]] && push_pad=0
+    printf "${cyan}"
+    _top "NETWORK"
+    printf "      │  ${dim}${cyan}FETCH >>${reset}${bg_black}${cyan} %-s%*s│\n" "$fetch" "$fetch_pad" ""
+    printf "      │  ${dim}${cyan}PUSH  >>${reset}${bg_black}${cyan} %-s%*s│\n" "$push" "$push_pad" ""
+    printf "${cyan}"
+    _bot
 
     printf "${reset}${bg_black}"
     echo
     printf "${magenta}"
-    cat <<EOF
-      ┌─── LAST TRANSMISSION ───────────────────────────────┐
-      │  $lastcommit
-      └──────────────────────────────────────────────────────┘
-EOF
+    _top "LAST TRANSMISSION"
+    _row "  $lastcommit"
+    _bot
 
     printf "${reset}${bg_black}"
     echo
