@@ -318,12 +318,6 @@
     assert "$output" contains function
 }
 
-@test 'whence -w s is function' {
-    run whence -w s
-    assert $state equals 0
-    assert "$output" contains function
-}
-
 @test 'whence -w sub is function' {
     run whence -w sub
     assert $state equals 0

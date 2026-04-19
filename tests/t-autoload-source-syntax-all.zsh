@@ -267,11 +267,6 @@
     assert $state equals 0
 }
 
-@test 'fn s source syntax valid' {
-    run zsh -n "$ZPWR/autoload/common/s"
-    assert $state equals 0
-}
-
 @test 'fn sub source syntax valid' {
     run zsh -n "$ZPWR/autoload/common/sub"
     assert $state equals 0

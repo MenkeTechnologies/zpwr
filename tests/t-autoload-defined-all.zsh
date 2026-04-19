@@ -267,11 +267,6 @@
     assert $state equals 0
 }
 
-@test 'fn s is defined' {
-    run test -n "${functions[s]+x}"
-    assert $state equals 0
-}
-
 @test 'fn sub is defined' {
     run test -n "${functions[sub]+x}"
     assert $state equals 0
