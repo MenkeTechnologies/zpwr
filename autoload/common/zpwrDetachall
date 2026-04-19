@@ -3,7 +3,7 @@
 function zpwrDetachall(){
 
     tmux list-clients | tr -d : |
-        perlrs -ane '`tmux detach-client -t $F[0]`'
+        stryke -ane '`tmux detach-client -t $F[0]`'
 }
 
 zpwrDetachall "$@"

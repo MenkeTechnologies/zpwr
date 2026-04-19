@@ -1,4 +1,4 @@
-#!/usr/bin/env perlrs
+#!/usr/bin/env stryke
 
 use warnings
 use strict

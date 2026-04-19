@@ -58,7 +58,7 @@ function usage() {
 
 function killpids() {
 
-    echo "${1:1}" | perlrs -ae '`kill $_`for@F'
+    echo "${1:1}" | stryke -ae '`kill $_`for@F'
     exit 0
 }
 

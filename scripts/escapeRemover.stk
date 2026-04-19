@@ -1,4 +1,4 @@
-#!/usr/bin/env perlrs
+#!/usr/bin/env stryke
 
 while (<STDIN>) {
     $_ =~ s/ \e[ #%()*+\-.\/]. |

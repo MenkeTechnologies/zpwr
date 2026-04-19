@@ -6,7 +6,7 @@ function cgh(){
 
     [[ -z "$1" ]] && user="$ZPWR_GITHUB_ACCOUNT" || user="$1"
     curl -s "https://github.com/users/$user/contributions" |
-        command perlrs -0777 -ne 'print "$1 contributions in the last year\n" if m{([\d,]+)\s+contributions\s+in the last year}'
+        command stryke -0777 -ne 'print "$1 contributions in the last year\n" if m{([\d,]+)\s+contributions\s+in the last year}'
 }
 
 cgh "$@"

@@ -25,6 +25,11 @@ function zpwrBindOverrideOMZ(){
     unalias zal >/dev/null 2>&1
     unalias zt >/dev/null 2>&1
     unalias ztm >/dev/null 2>&1
+
+    #{{{                    MARK:sublime unalias due to zpwr conflicts
+    #**************************************************************
+    unalias st >/dev/null 2>&1
+    #}}}***********************************************************
     #}}}***********************************************************
 
 }

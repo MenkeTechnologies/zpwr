@@ -36,7 +36,7 @@ function zpwrExercismDownloadAll(){
                     sleep $sleep[-1]
                 fi
             fi
-        done < <(curl https://exercism.org/tracks/$trackName/exercises 2>&1 | tr ';&' '\n' | perlrs -nE 'say "$1" if m{/tracks/'$trackName'/exercises/(.*)}')
+        done < <(curl https://exercism.org/tracks/$trackName/exercises 2>&1 | tr ';&' '\n' | stryke -nE 'say "$1" if m{/tracks/'$trackName'/exercises/(.*)}')
 
     done
 }

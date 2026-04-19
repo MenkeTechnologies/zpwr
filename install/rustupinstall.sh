@@ -50,7 +50,7 @@ fi
 ins bat bat
 ins lsofrs lsofrs
 ins awkrs awkrs
-ins perlrs perlrs
+ins stryke stryke
 ins nmaprs nmaprs
 ins storageshower storageshower
 ins iftoprs iftoprs

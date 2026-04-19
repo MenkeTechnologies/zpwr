@@ -2,8 +2,8 @@
 # vim: set ft=sh:
 function zpwrLoginCount(){
 
-    perlrs -e 'print `last -f "$_"`for</var/log/wtmp*>' |
-        perlrs -lane 'print $F[0] if /\S+/ && !/wtmp/' |
+    stryke -e 'print `last -f "$_"`for</var/log/wtmp*>' |
+        stryke -lane 'print $F[0] if /\S+/ && !/wtmp/' |
         sort | uniq -c | sort -rn
 }
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env perlrs
+#!/usr/bin/env stryke
 
 STDOUT |> binmode ":encoding(UTF-8)"
 

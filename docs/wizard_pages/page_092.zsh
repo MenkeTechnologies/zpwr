@@ -4,7 +4,7 @@ PAGE_CONTENT() {
     local C=$'\033[36m' G=$'\033[32m' Y=$'\033[33m' R=$'\033[31m'
     local M=$'\033[35m' B=$'\033[1m' D=$'\033[2m' N=$'\033[0m'
     print ""
-    print "  ${B}${M}<<< SCRIPT MANAGEMENT — THE FORGE >>>${N}"
+    print "  ${B}${M}<<< SCRIPT MANAGEMENT — THE STRYKE >>>${N}"
     print "  ${D}create scripts. count scripts. print scripts to PDF. ship scripts.${N}"
     print ""
     print "  ${C}ZPWR manages its own script collection and gives you${N}"
@@ -57,6 +57,6 @@ PAGE_CONTENT() {
     print ""
     print "  ${D}  // a script unwritten is a problem unsolved${N}"
     print "  ${D}  // a script uncounted is a tool forgotten${N}"
-    print "  ${D}  // the forge never closes. the armory always grows.${N}"
+    print "  ${D}  // the stryke never closes. the armory always grows.${N}"
     print ""
 }

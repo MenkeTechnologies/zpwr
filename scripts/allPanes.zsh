@@ -55,7 +55,7 @@ command rm -f "$ZPWR_SOCKET$$"
 #tmux swap-pane -d -s "$new_pane" -t "$active_pane"
 
 if [[ $action == "open" ]]; then
-    raw="$(tmux save-buffer - | perlrs -pe 's@(^\s|\s$)@@')"
+    raw="$(tmux save-buffer - | stryke -pe 's@(^\s|\s$)@@')"
     if [[ -n "$raw" ]]; then
         if ! [[ $raw =~ :// ]]; then
             raw="http://$raw"
@@ -64,7 +64,7 @@ if [[ $action == "open" ]]; then
         ${=ZPWR_OPEN_CMD} "$raw"
     fi
 elif [[ $action == "google" ]]; then
-        raw="$(tmux save-buffer - | perlrs -pe 's@(^\s|\s$)@@')"
+        raw="$(tmux save-buffer - | stryke -pe 's@(^\s|\s$)@@')"
         if [[ -n "$raw" ]]; then
             print -rn -- "$raw" | ${=ZPWR_COPY_CMD}
             echo "allPanes.zsh exec: bash \"$ZPWR_TMUX/google.sh\" google" >&2

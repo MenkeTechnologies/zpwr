@@ -54,8 +54,8 @@
     assert "$output" contains text
 }
 
-@test 'script banner.pr is text file' {
-    run file "$ZPWR_SCRIPTS/banner.pr"
+@test 'script banner.stk is text file' {
+    run file "$ZPWR_SCRIPTS/banner.stk"
     assert $state equals 0
     assert "$output" contains text
 }
@@ -108,8 +108,8 @@
     assert "$output" contains text
 }
 
-@test 'script c.pr is text file' {
-    run file "$ZPWR_SCRIPTS/c.pr"
+@test 'script c.stk is text file' {
+    run file "$ZPWR_SCRIPTS/c.stk"
     assert $state equals 0
     assert "$output" contains text
 }
@@ -204,8 +204,8 @@
     assert "$output" contains text
 }
 
-@test 'script escapeRemover.pr is text file' {
-    run file "$ZPWR_SCRIPTS/escapeRemover.pr"
+@test 'script escapeRemover.stk is text file' {
+    run file "$ZPWR_SCRIPTS/escapeRemover.stk"
     assert $state equals 0
     assert "$output" contains text
 }
@@ -372,8 +372,8 @@
     assert "$output" contains text
 }
 
-@test 'script gitSdiffColorizer.pr is text file' {
-    run file "$ZPWR_SCRIPTS/gitSdiffColorizer.pr"
+@test 'script gitSdiffColorizer.stk is text file' {
+    run file "$ZPWR_SCRIPTS/gitSdiffColorizer.stk"
     assert $state equals 0
     assert "$output" contains text
 }
@@ -492,8 +492,8 @@
     assert "$output" contains text
 }
 
-@test 'script minifySpaces.pr is text file' {
-    run file "$ZPWR_SCRIPTS/minifySpaces.pr"
+@test 'script minifySpaces.stk is text file' {
+    run file "$ZPWR_SCRIPTS/minifySpaces.stk"
     assert $state equals 0
     assert "$output" contains text
 }
@@ -600,8 +600,8 @@
     assert "$output" contains text
 }
 
-@test 'script regexReplace.pr is text file' {
-    run file "$ZPWR_SCRIPTS/regexReplace.pr"
+@test 'script regexReplace.stk is text file' {
+    run file "$ZPWR_SCRIPTS/regexReplace.stk"
     assert $state equals 0
     assert "$output" contains text
 }
@@ -636,8 +636,8 @@
     assert "$output" contains text
 }
 
-@test 'script sdiffColorizer.pr is text file' {
-    run file "$ZPWR_SCRIPTS/sdiffColorizer.pr"
+@test 'script sdiffColorizer.stk is text file' {
+    run file "$ZPWR_SCRIPTS/sdiffColorizer.stk"
     assert $state equals 0
     assert "$output" contains text
 }
@@ -690,8 +690,8 @@
     assert "$output" contains text
 }
 
-@test 'script stdinSdiffColorizer.pr is text file' {
-    run file "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr"
+@test 'script stdinSdiffColorizer.stk is text file' {
+    run file "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk"
     assert $state equals 0
     assert "$output" contains text
 }

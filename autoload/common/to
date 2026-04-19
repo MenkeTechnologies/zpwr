@@ -7,10 +7,10 @@ function to(){
 
     [[ ! -f "$file" ]] && zpwrLogConsoleErr "no tmux config" && return 1
     if cat "$file" | grep -sq "external_ip"; then
-        perlrs -i -pe 's@^.*external_ip.*$@@' "$file"
+        stryke -i -pe 's@^.*external_ip.*$@@' "$file"
         printf "Removing External IP\n"
     else
-        perlrs -0 -i -pe 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
+        stryke -0 -i -pe 's@\{\s*\n+\s*\}@{\n\t\t\t\t"function": "powerline.segments.common.net.external_ip"\n\t\t\t}@' "$file"
         printf "Adding External IP\n"
     fi
 }

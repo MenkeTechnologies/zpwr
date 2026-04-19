@@ -22,13 +22,13 @@ function globalAliasesInit(){
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}oo='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'"'
-        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| 'builtin' command perlrs -lanE 'say $ZPWR_TABSTOP'"
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="'builtin' command perlrs -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="'builtin' command perlrs -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| 'builtin' command stryke -lanE 'say $ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="'builtin' command stryke -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="'builtin' command stryke -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
 
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="'builtin' command perlrs -i -pe 's,\\b$ZPWR_TABSTOP\\b,$ZPWR_TABSTOP,g' **/*~.git/**(.)~*.zwc(.)"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="'builtin' command stryke -i -pe 's,\\b$ZPWR_TABSTOP\\b,$ZPWR_TABSTOP,g' **/*~.git/**(.)~*.zwc(.)"
 
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ipf="'builtin' command perlrs -i -pe 's,\\b$ZPWR_TABSTOP\\b,quotemeta($ZPWR_TABSTOP),ge' **/*~.git/**(.)~*.zwc(.)"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ipf="'builtin' command stryke -i -pe 's,\\b$ZPWR_TABSTOP\\b,quotemeta($ZPWR_TABSTOP),ge' **/*~.git/**(.)~*.zwc(.)"
 
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
         #default value tabstops
@@ -162,7 +162,7 @@ globalAliasesInit
 
         alias dry="git merge-tree \$(git merge-base FETCH_HEAD main$ZPWR_TABSTOP) main$ZPWR_TABSTOP FETCH_HEAD | less"
 
-        alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.pr 80"
+        alias gsc="git difftool -y -x 'printf \"\\x1b[1;4m\$REMOTE\\x1b[0m\\x0a\";sdiff --expand-tabs -w '\$COLUMNS $ZPWR_TABSTOP | stdinSdiffColorizer.stk 80"
 
         zpwrExists zfgw || alias zfgw="$ZPWR_REPO_NAME fordir 'zpwrWipedBranch=$ZPWR_TABSTOP; zpwrIsGitDir && { gco \$zpwrWipedBranch; gffa; git clean -dff && git reset --hard origin/\$zpwrWipedBranch && git clean -dff ; gla; zp gitclearcache; }' *"
         zpwrExists zf || alias zf="$ZPWR_REPO_NAME fordir 'zpwrIsGitDir && { $ZPWR_TABSTOP; }' *"

@@ -13,8 +13,8 @@ function zpwrChangeNameZpwr(){
         newName="zpwr${oldName:0:1:u}${oldName:1}"
 
         echo "mv $oldName $newName;
-        perlrs -i -pe 's@\b___'$oldName'\b@$newName@g' **/*(.);
-        perlrs -i -pe 's@\b'$oldName'\b@$newName@g' **/*(.);
+        stryke -i -pe 's@\b___'$oldName'\b@$newName@g' **/*(.);
+        stryke -i -pe 's@\b'$oldName'\b@$newName@g' **/*(.);
         less $newName"
 
         if zpwrConfirm; then
@@ -26,9 +26,9 @@ function zpwrChangeNameZpwr(){
                 mv "$oldName" "$newName"
             fi
 
-            perlrs -i -pe 's@\b___'"$oldName"'\b@'"$newName"'@g' \
+            stryke -i -pe 's@\b___'"$oldName"'\b@'"$newName"'@g' \
                 "$ZPWR/"**/*~"$ZPWR/".git/**~"$ZPWR/"**/*.zwc(.)
-            perlrs -i -pe 's@\b'"$oldName"'\b@'"$newName"'@g' \
+            stryke -i -pe 's@\b'"$oldName"'\b@'"$newName"'@g' \
                 "$ZPWR/"**/*~"$ZPWR/".git/**~"$ZPWR/"**/*.zwc(.)
 
             if [[ -f "$newName" ]]; then

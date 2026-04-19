@@ -148,7 +148,7 @@
 }
 
 #--------------------------------------------------------------
-# zpwrContribCountDirs (usage only; full run needs perlrs)
+# zpwrContribCountDirs (usage only; full run needs stryke)
 #--------------------------------------------------------------
 @test 'zpwrContribCountDirs no args returns 1' {
     run zpwrContribCountDirs
