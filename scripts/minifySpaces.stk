@@ -2,7 +2,7 @@
 
 fn removeSpaces {
     if (-d$_[0]) {
-        $_ |> removeSpaces foreach glob("$_[0]/* $_[0]/.[!.]*")
+        $_ |> removeSpaces for glob("$_[0]/* $_[0]/.[!.]*")
     } else {
         p "working on $_[0]\n"
         my $tmp = $_[0] . ".bak"

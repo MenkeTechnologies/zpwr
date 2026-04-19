@@ -1517,6 +1517,7 @@ if $ZPWR_VIM_TEMPLATES == 'true'
         autocmd BufNewFile *.rb silent! exe '!templater.sh %:p' | e
         autocmd BufNewFile *.py silent! exe '!templater.sh %:p' | e
         autocmd BufNewFile *.pl silent! exe '!templater.sh %:p' | e
+        autocmd BufNewFile *.stk silent! exe '!templater.sh %:p' | e
     augroup end
 endif
 
@@ -1692,7 +1693,7 @@ let g:ale_completion_enabled = 1
 let g:ale_fixers = {'ruby': ['rubocop'], 'sh': ['shfmt'], 'perl': ['perltidy'], 'python': ['yapf']}
 
 " stryke
-if executable('pe') && filereadable(expand('~/.zpwr/install/stryke.vim'))
+if executable('stryke') && filereadable(expand('~/.zpwr/install/stryke.vim'))
   source ~/.zpwr/install/stryke.vim
 endif
 

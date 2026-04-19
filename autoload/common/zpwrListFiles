@@ -13,8 +13,8 @@ command ls "$ZPWR_INSTALL/"{.zshrc,.tmux.conf,.vimrc,init.vim,.ideavimrc,.global
     "$ZPWR_INSTALL/".* \
     "$ZPWR_INSTALL/"*.service \
     "$ZPWR_INSTALL/UltiSnips/"*.snippets \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl} \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl,stk} \
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl,stk} \
     "$ZPWR_AUTOLOAD/"*/*(.N) \
     "$ZPWR_COMPS/"**/*(.N) \
     "$ZPWR_TEST/"**/*(.N)
