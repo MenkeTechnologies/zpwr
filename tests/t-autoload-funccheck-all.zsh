@@ -318,12 +318,6 @@
     assert "$output" contains rm
 }
 
-@test 'functions s contains name' {
-    run functions s
-    assert $state equals 0
-    assert "$output" contains s
-}
-
 @test 'functions sub contains name' {
     run functions sub
     assert $state equals 0

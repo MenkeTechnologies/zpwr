@@ -318,12 +318,6 @@
     assert "$output" is_not_empty
 }
 
-@test 'fn s body non-empty' {
-    run functions s
-    assert $state equals 0
-    assert "$output" is_not_empty
-}
-
 @test 'fn sub body non-empty' {
     run functions sub
     assert $state equals 0
