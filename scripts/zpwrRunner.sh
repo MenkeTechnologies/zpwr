@@ -76,7 +76,7 @@ case "$fileToBeExecuted" in
     *.pl)
         executeTheFile forge "$fileToBeExecuted"
         ;;
-    *.pr)
+    *.for)
         executeTheFile forge "$fileToBeExecuted"
         ;;
     *.rb)

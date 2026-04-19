@@ -71,7 +71,7 @@ case "$fileToBeExecuted" in
     *.pl)
         createTemplate forge "$fileToBeExecuted"
         ;;
-    *.pr)
+    *.for)
         createTemplate forge "$fileToBeExecuted"
         ;;
     *.rb)

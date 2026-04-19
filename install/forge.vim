@@ -1,11 +1,11 @@
 " Vim/Neovim configuration for forge
 " Usage: source ~/.zpwr/install/forge.vim
 
-" Register .pr files as forge filetype with perl syntax
+" Register .for files as forge filetype with perl syntax
 augroup forge_filetype
   autocmd!
-  autocmd BufNewFile,BufRead *.pr set filetype=forge
-  autocmd BufReadPost *.pr set filetype=forge
+  autocmd BufNewFile,BufRead *.for set filetype=forge
+  autocmd BufReadPost *.for set filetype=forge
   autocmd FileType forge setlocal syntax=perl commentstring=#\ %s
 augroup END
 

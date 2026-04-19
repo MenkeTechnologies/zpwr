@@ -12,9 +12,9 @@ function zpwrBindAliasesLate(){
     #{{{                    MARK:Aliases
     #**************************************************************
     # portable aliases
-    zpwrExists c.pr && {
-        alias pp='c.pr'
-        alias ppp='c.pr *'
+    zpwrExists c.for && {
+        alias pp='c.for'
+        alias ppp='c.for *'
     }
     alias dirs='"builtin" dirs -v'
     zpwrExists proxychains && alias pc='proxychains'
@@ -255,7 +255,7 @@ function zpwrBindAliasesLate(){
     alias shutpy="zpwrExecpy shutdown.py"
     alias pb="zpwrExecpy bills.py"
     alias ud=" zpwrExecpy udemy.py"
-    alias ipa="command ifconfig | forge -lane 'do {print \$F[1] =~ s/addr//r;exit0} if /inet\\s/ and !/127/'"
+    alias ipa="command ifconfig | forge -lane 'do {print \$F[1] =~ s/addr//r;exit 0} if /inet\\s/ and !/127/'"
     alias pgrep='pgrep -l'
     alias jobs="jobs -l -d"
     alias sd="clear;ssh d "

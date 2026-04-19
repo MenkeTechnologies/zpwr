@@ -30,7 +30,7 @@ function gsdc(){
         return 0
 	}
 
-	gitSdiffColorizer.pr | less -r
+	gitSdiffColorizer.for | less -r
 
     printf "\x1b[0m"
 

@@ -135,7 +135,7 @@ function zpwrMatrix(){
     # compute stats dynamically
     local -i n_autoloads=0 n_scripts=0 n_comps=0 n_commits=0 n_files=0 n_lines=0 n_pages=0
     n_autoloads=$(ls "$ZPWR_AUTOLOAD_COMMON" "$ZPWR_AUTOLOAD_DARWIN" "$ZPWR_AUTOLOAD_LINUX" 2>/dev/null | wc -l)
-    n_scripts=$(ls "$ZPWR_SCRIPTS"/*.sh "$ZPWR_SCRIPTS"/*.zsh "$ZPWR_SCRIPTS"/*.pr "$ZPWR_SCRIPTS"/*.py 2>/dev/null | wc -l)
+    n_scripts=$(ls "$ZPWR_SCRIPTS"/*.sh "$ZPWR_SCRIPTS"/*.zsh "$ZPWR_SCRIPTS"/*.for "$ZPWR_SCRIPTS"/*.py 2>/dev/null | wc -l)
     n_comps=$(ls "$ZPWR_COMPS"/_* 2>/dev/null | wc -l)
     n_commits=$(git -C "$ZPWR" log --oneline 2>/dev/null | wc -l)
     n_pages=$(ls "$ZPWR"/docs/wizard_pages/page_*.zsh 2>/dev/null | wc -l)

@@ -19,7 +19,7 @@ my $help        = 0
 fn usage {
     STDERR |> select
     p "Use --regex or --replacement to specify strings.\n"
-    p "Usage: regexReplace.pr [-h|--help] [--regex=REGEX] [--replacement=STRING]\n"
+    p "Usage: regexReplace.for [-h|--help] [--regex=REGEX] [--replacement=STRING]\n"
     p "    [-h|--help] show this message\n"
     p "    [--regex] REGEX replace this REGEX\n"
     p "    [--replacement] STRING replace regex with this STRING\n"

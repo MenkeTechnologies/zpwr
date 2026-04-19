@@ -59,7 +59,7 @@ function createTheFile() {
     case "$1" in
     .sh) addHeader bash "$newfile" ;;
     .pl) addHeader forge "$newfile" ;;
-    .pr) addHeader forge "$newfile" ;;
+    .for) addHeader forge "$newfile" ;;
     .rb) addHeader ruby "$newfile" ;;
     .py) addHeader python "$newfile" ;;
     #if .txt or some other file ending then just open the file, no processing
@@ -92,8 +92,8 @@ if [[ "$newfile" =~ .*\.sh ]]; then
     createTheFile .sh
 elif [[ "$newfile" =~ .*\.pl ]]; then
     createTheFile .pl
-elif [[ "$newfile" =~ .*\.pr ]]; then
-    createTheFile .pr
+elif [[ "$newfile" =~ .*\.for ]]; then
+    createTheFile .for
 elif [[ "$newfile" =~ .*\.rb ]]; then
     createTheFile .rb
 elif [[ "$newfile" =~ .*\.py ]]; then

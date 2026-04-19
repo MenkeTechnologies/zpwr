@@ -47,8 +47,8 @@
     assert $state equals 0
 }
 
-@test 'script banner.pr exists' {
-    run test -f "$ZPWR_SCRIPTS/banner.pr"
+@test 'script banner.for exists' {
+    run test -f "$ZPWR_SCRIPTS/banner.for"
     assert $state equals 0
 }
 
@@ -92,8 +92,8 @@
     assert $state equals 0
 }
 
-@test 'script c.pr exists' {
-    run test -f "$ZPWR_SCRIPTS/c.pr"
+@test 'script c.for exists' {
+    run test -f "$ZPWR_SCRIPTS/c.for"
     assert $state equals 0
 }
 
@@ -172,8 +172,8 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.pr exists' {
-    run test -f "$ZPWR_SCRIPTS/escapeRemover.pr"
+@test 'script escapeRemover.for exists' {
+    run test -f "$ZPWR_SCRIPTS/escapeRemover.for"
     assert $state equals 0
 }
 
@@ -312,8 +312,8 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.pr exists' {
-    run test -f "$ZPWR_SCRIPTS/gitSdiffColorizer.pr"
+@test 'script gitSdiffColorizer.for exists' {
+    run test -f "$ZPWR_SCRIPTS/gitSdiffColorizer.for"
     assert $state equals 0
 }
 
@@ -412,8 +412,8 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.pr exists' {
-    run test -f "$ZPWR_SCRIPTS/minifySpaces.pr"
+@test 'script minifySpaces.for exists' {
+    run test -f "$ZPWR_SCRIPTS/minifySpaces.for"
     assert $state equals 0
 }
 
@@ -502,8 +502,8 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.pr exists' {
-    run test -f "$ZPWR_SCRIPTS/regexReplace.pr"
+@test 'script regexReplace.for exists' {
+    run test -f "$ZPWR_SCRIPTS/regexReplace.for"
     assert $state equals 0
 }
 
@@ -522,8 +522,8 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.pr exists' {
-    run test -f "$ZPWR_SCRIPTS/sdiffColorizer.pr"
+@test 'script sdiffColorizer.for exists' {
+    run test -f "$ZPWR_SCRIPTS/sdiffColorizer.for"
     assert $state equals 0
 }
 
@@ -567,8 +567,8 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.pr exists' {
-    run test -f "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr"
+@test 'script stdinSdiffColorizer.for exists' {
+    run test -f "$ZPWR_SCRIPTS/stdinSdiffColorizer.for"
     assert $state equals 0
 }
 

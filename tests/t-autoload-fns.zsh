@@ -251,9 +251,9 @@
     assert "$output" contains .zsh
 }
 
-@test 'zpwrScriptList output contains .pr' {
+@test 'zpwrScriptList output contains .for' {
     run zpwrScriptList
-    assert "$output" contains .pr
+    assert "$output" contains .for
 }
 
 @test 'zpwrScriptList output contains .py' {
