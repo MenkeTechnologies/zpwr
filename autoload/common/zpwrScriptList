@@ -3,10 +3,10 @@
 function zpwrScriptList(){
 
     command ls \
-    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl,pr} \
-    "$ZPWR_TMUX/"*.{sh,py,zsh,pl,pr} \
-    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl,pr} \
-    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl,pr}
+    "$ZPWR_LOCAL/"*.{sh,py,zsh,pl,stk} \
+    "$ZPWR_TMUX/"*.{sh,py,zsh,pl,stk} \
+    "$ZPWR_SCRIPTS/"*.{sh,py,zsh,pl,stk} \
+    "$ZPWR_SCRIPTS_MAC/"*.{sh,py,zsh,pl,stk}
 }
 
 zpwrScriptList "$@"
