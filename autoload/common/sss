@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function s(){
+function sss(){
 
     zpwrExists zpwrIsZsh || {
         source "$ZPWR_SCRIPTS/lib.sh" || {
@@ -17,15 +17,15 @@ function s(){
         cmd="$ZPWR_OPEN_CMD"
     fi
 
-    if zpwrCommandExists s; then
-        sec_cmd=s
+    if zpwrCommandExists s-search; then
+        sec_cmd=s-search
     else
         sec_cmd="$ZPWR_OPEN_CMD"
     fi
     if zpwrIsZsh; then
-        if [[ $sec_cmd == s ]]; then
+        if [[ $sec_cmd == s-search ]]; then
             {
-            test -z "$1" && ${=cmd} . || command s --provider google "$@"
+            test -z "$1" && ${=cmd} . || command s-search --provider google "$@"
             }
         else
             {
@@ -35,8 +35,8 @@ function s(){
             }
         fi
     else
-        if [[ $sec_cmd == s ]]; then
-            test -z "$1" && $cmd . || command s --provider google  "$@"
+        if [[ $sec_cmd == s-search ]]; then
+            test -z "$1" && $cmd . || command s-search --provider google  "$@"
         else
             out="$(echo "$@" | python3 -c 'import urllib.parse; print(urllib.parse.quote(input(), safe=""))')"
             url="https://google.com/search?q=$out"

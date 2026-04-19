@@ -267,11 +267,6 @@
     assert $state equals 0
 }
 
-@test 'fn s exists' {
-    run zpwrExists s
-    assert $state equals 0
-}
-
 @test 'fn sub exists' {
     run zpwrExists sub
     assert $state equals 0
