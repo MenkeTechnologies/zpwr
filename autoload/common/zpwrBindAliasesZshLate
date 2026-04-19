@@ -22,13 +22,13 @@ function globalAliasesInit(){
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}oo='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'"'
-        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| 'builtin' command perlrs -lanE 'say $ZPWR_TABSTOP'"
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="'builtin' command perlrs -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="'builtin' command perlrs -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| 'builtin' command forge -lanE 'say $ZPWR_TABSTOP'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="'builtin' command forge -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="'builtin' command forge -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
 
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="'builtin' command perlrs -i -pe 's,\\b$ZPWR_TABSTOP\\b,$ZPWR_TABSTOP,g' **/*~.git/**(.)~*.zwc(.)"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="'builtin' command forge -i -pe 's,\\b$ZPWR_TABSTOP\\b,$ZPWR_TABSTOP,g' **/*~.git/**(.)~*.zwc(.)"
 
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ipf="'builtin' command perlrs -i -pe 's,\\b$ZPWR_TABSTOP\\b,quotemeta($ZPWR_TABSTOP),ge' **/*~.git/**(.)~*.zwc(.)"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ipf="'builtin' command forge -i -pe 's,\\b$ZPWR_TABSTOP\\b,quotemeta($ZPWR_TABSTOP),ge' **/*~.git/**(.)~*.zwc(.)"
 
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}se="| sed -E 's@$ZPWR_TABSTOP@$ZPWR_TABSTOP@g'"
         #default value tabstops

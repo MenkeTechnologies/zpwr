@@ -40,10 +40,10 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Install perlrs
+      - name: Install forge
         run: |
-          cargo install perlrs
-          command -v perlrs
+          cargo install forge
+          command -v forge
 
       - name: Checkout repository
         uses: actions/checkout@v4

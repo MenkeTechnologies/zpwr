@@ -57,18 +57,18 @@ function zpwrTotalLines(){
     zpwrPrettyPrint "Total Line Count"
 
     if (( $#nows )); then
-        lineCount="$(cat "$ZPWR_TEMPFILE" | perlrs -ne 'print if /\S/' | wc -l)"
+        lineCount="$(cat "$ZPWR_TEMPFILE" | forge -ne 'print if /\S/' | wc -l)"
     else
         lineCount="$(cat "$ZPWR_TEMPFILE" | wc -l)"
     fi
 
     if (( $lineCount > 10 )); then
         echo "$lineCount" |
-            perlrs -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            forge -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             zpwrAlternatingPrettyPrint | less -r
     else
         echo "$lineCount" |
-            perlrs -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
+            forge -panE 's@(\d) (\D)(.*)$@\1'" $ZPWR_DELIMITER_CHAR"'\2\3'"$ZPWR_DELIMITER_CHAR@" |
             zpwrAlternatingPrettyPrint
     fi
     command rm "$ZPWR_TEMPFILE"

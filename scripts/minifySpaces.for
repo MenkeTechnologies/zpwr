@@ -1,4 +1,4 @@
-#!/usr/bin/env perlrs
+#!/usr/bin/env forge
 
 fn removeSpaces {
     if (-d$_[0]) {

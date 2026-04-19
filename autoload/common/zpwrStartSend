@@ -18,7 +18,7 @@ function zpwrStartSend(){
     echo > $ZPWR_LOCK_FILE
 
     for pane in ${(Az)${(s@,@)ZPWR_SEND_KEYS_PANE}}; do
-        pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | perlrs -lane 'print $F[1] if $F[0] =~ m{'$pane'}')
+        pid=$(tmux list-panes -F '#{pane_index} #{pane_pid}' | forge -lane 'print $F[1] if $F[0] =~ m{'$pane'}')
         echo $pid >> $ZPWR_LOCK_FILE
     done
 }

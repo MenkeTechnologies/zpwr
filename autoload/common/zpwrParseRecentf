@@ -7,7 +7,7 @@ function zpwrParseRecentf(){
         return 1
     fi
 
-    tac "$ZPWR_RECENTF" | command perlrs -ne 'do {$_=~s@$ENV{HOME}@~@;$_=~s@[ ]+@@g; $_="> $_"; $_=~s@"@@g; print $_} if m{/}'
+    tac "$ZPWR_RECENTF" | command forge -ne 'do {$_=~s@$ENV{HOME}@~@;$_=~s@[ ]+@@g; $_="> $_"; $_=~s@"@@g; print $_} if m{/}'
 }
 
 zpwrParseRecentf "$@"

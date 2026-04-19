@@ -4,7 +4,7 @@
 function ___fzf_complete_f() {
 
   FZF_COMPLETION_OPTS=$FZF_CTRL_T_OPTS _fzf_complete '--ansi' "$@" < <(
-        find . -type d |& perlrs -lpe '$_=~s@$ENV{HOME}@~@'
+        find . -type d |& forge -lpe '$_=~s@$ENV{HOME}@~@'
     )
 }
 

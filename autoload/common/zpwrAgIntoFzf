@@ -6,13 +6,13 @@ function zpwrAgIntoFzf(){
         command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
         eval "$ZPWR_FZF $FZF_AG_OPTS" |
         cut -d ':' -f1 |
-        perlrs -pe 's@^(.*)\n$@"'"$PWD/"'$1" @'
+        forge -pe 's@^(.*)\n$@"'"$PWD/"'$1" @'
 
     else
 
         command ag '^.*$' --nogroup --hidden --ignore .git --color 2>/dev/null |
         eval "$ZPWR_FZF $FZF_AG_OPTS" |
-        perlrs -pe 's@^(.*?):(\d+):(.*)@+$2 "'"$PWD/"'$1"@;s@\n@ @g'
+        forge -pe 's@^(.*?):(\d+):(.*)@+$2 "'"$PWD/"'$1"@;s@\n@ @g'
 
     fi
 }

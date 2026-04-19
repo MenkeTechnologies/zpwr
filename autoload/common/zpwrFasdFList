@@ -2,8 +2,8 @@
 # vim: set ft=sh:
 function zpwrFasdFList(){
 
-    fasd -f |& perlrs -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
+    fasd -f |& forge -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+)\s*$}}' |
     eval "$ZPWR_FZF -m --no-sort --border $FZF_CTRL_T_OPTS" |
-        perlrs -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+        forge -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 zpwrFasdFList "$@"

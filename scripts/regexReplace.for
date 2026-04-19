@@ -1,4 +1,4 @@
-#!/usr/bin/env perlrs
+#!/usr/bin/env forge
 #{{{                    MARK:Header
 #**************************************************************
 #####   Author: JACOBMENKE

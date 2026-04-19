@@ -19,8 +19,8 @@ function zpwrChangeName(){
         newName="$newPrefix${oldName:0:1:u}${oldName:1}"
 
         echo "mv $oldName $newName;
-        perlrs -i -pe 's@\b___'$oldName'\b@$newName@g' **/*(.);
-        perlrs -i -pe 's@\b'$oldName'\b@newName@g' **/*(.);
+        forge -i -pe 's@\b___'$oldName'\b@$newName@g' **/*(.);
+        forge -i -pe 's@\b'$oldName'\b@newName@g' **/*(.);
         less $newName"
 
         if zpwrConfirm; then
@@ -32,9 +32,9 @@ function zpwrChangeName(){
                 mv "$oldName" "$newName"
             fi
 
-            perlrs -i -pe 's@\b___'"$oldName"'\b@'"$newName"'@g' \
+            forge -i -pe 's@\b___'"$oldName"'\b@'"$newName"'@g' \
                 "$rootDir/"**/*~"$rootDir/".git/**~"$rootDir/"**/*.zwc(.)
-            perlrs -i -pe 's@\b'"$oldName"'\b@'"$newName"'@g' \
+            forge -i -pe 's@\b'"$oldName"'\b@'"$newName"'@g' \
                 "$rootDir/"**/*~"$rootDir/".git/**~"$rootDir/"**/*.zwc(.)
 
             if [[ -f "$newName" ]]; then

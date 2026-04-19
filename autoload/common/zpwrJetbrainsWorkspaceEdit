@@ -2,16 +2,16 @@
 # vim: set ft=sh:
 function zpwrJetbrainsWorkspaceEdit(){
 
-    perlrs -E 'say "_"x100'
+    forge -E 'say "_"x100'
     zpwrPrettyPrint "MONITORING WORKSPACE..."
-    perlrs -E 'say "_"x100'
+    forge -E 'say "_"x100'
     while true; do
         if command grep -q '<component name="RunManager" selected=' \
             .idea/workspace.xml; then
-            perlrs -E 'say "_"x100' | lolcat
+            forge -E 'say "_"x100' | lolcat
             figletRandomFontOnce.sh "MATCH ENJOY>>>>" \
             | ponysay -W 120
-            perlrs -E 'say "_"x100' | lolcat
+            forge -E 'say "_"x100' | lolcat
             sed 's@<component name="RunManager" selected=.*@<component name="RunManager" selected="Application.PLATFORMIO_JAKE"><configuration name="PLATFORMIO_JAKE" type="CMakeRunConfiguration" factoryName="Application" CONFIG_NAME="Debug" TARGET_NAME="PLATFORMIO_JAKE" PASS_PARENT_ENVS_2="true" PROJECT_NAME="'$1'" RUN_PATH="$PROJECT_DIR$/Runner.sh"><envs /><method> <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="false" /></method></configuration>@' .idea/workspace.xml > x.xml && mv x.xml .idea/workspace.xml && return 0
 
         else
