@@ -74,10 +74,10 @@ case "$fileToBeExecuted" in
         executeTheFile bash "$fileToBeExecuted"
         ;;
     *.pl)
-        executeTheFile perlrs "$fileToBeExecuted"
+        executeTheFile stryke "$fileToBeExecuted"
         ;;
-    *.pr)
-        executeTheFile perlrs "$fileToBeExecuted"
+    *.stk)
+        executeTheFile stryke "$fileToBeExecuted"
         ;;
     *.rb)
         executeTheFile ruby "$fileToBeExecuted"

@@ -1,4 +1,4 @@
-#!/usr/bin/env perlrs
+#!/usr/bin/env stryke
 
 fn removeSpaces {
     if (-d$_[0]) {

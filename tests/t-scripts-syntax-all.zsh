@@ -1282,8 +1282,8 @@
     assert $state equals 0
 }
 
-@test 'banner.pr perlrs syntax' {
-    run perlrs "$ZPWR_SCRIPTS/banner.pr" --help
+@test 'banner.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/banner.stk" --help
     assert $state equals 0
 }
 
@@ -1292,38 +1292,38 @@
     assert $state equals 0
 }
 
-@test 'c.pr perlrs syntax' {
-    run perlrs "$ZPWR_SCRIPTS/c.pr" --help
+@test 'c.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/c.stk" --help
     assert $state equals 0
 }
 
-@test 'escapeRemover.pr perlrs syntax' {
-    run perlrs "$ZPWR_SCRIPTS/escapeRemover.pr" --help
+@test 'escapeRemover.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/escapeRemover.stk" --help
     assert $state equals 0
 }
 
-@test 'gitSdiffColorizer.pr perlrs syntax' {
-    run perlrs "$ZPWR_SCRIPTS/gitSdiffColorizer.pr" --help
+@test 'gitSdiffColorizer.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/gitSdiffColorizer.stk" --help
     assert $state equals 0
 }
 
-@test 'minifySpaces.pr perlrs syntax' {
-    run perlrs "$ZPWR_SCRIPTS/minifySpaces.pr" --help
+@test 'minifySpaces.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/minifySpaces.stk" --help
     assert $state equals 0
 }
 
-@test 'regexReplace.pr perlrs syntax' {
-    run perlrs "$ZPWR_SCRIPTS/regexReplace.pr" --help
+@test 'regexReplace.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/regexReplace.stk" --help
     assert $state equals 0
 }
 
-@test 'sdiffColorizer.pr perlrs syntax' {
-    run perlrs "$ZPWR_SCRIPTS/sdiffColorizer.pr" --help
+@test 'sdiffColorizer.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/sdiffColorizer.stk" --help
     assert $state equals 0
 }
 
-@test 'stdinSdiffColorizer.pr perlrs syntax' {
-    run perlrs "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr" --help
+@test 'stdinSdiffColorizer.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk" --help
     assert $state equals 0
 }
 

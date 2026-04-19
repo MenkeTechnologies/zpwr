@@ -47,8 +47,8 @@
     assert $state equals 0
 }
 
-@test 'script banner.pr is readable' {
-    run test -r "$ZPWR_SCRIPTS/banner.pr"
+@test 'script banner.stk is readable' {
+    run test -r "$ZPWR_SCRIPTS/banner.stk"
     assert $state equals 0
 }
 
@@ -92,8 +92,8 @@
     assert $state equals 0
 }
 
-@test 'script c.pr is readable' {
-    run test -r "$ZPWR_SCRIPTS/c.pr"
+@test 'script c.stk is readable' {
+    run test -r "$ZPWR_SCRIPTS/c.stk"
     assert $state equals 0
 }
 
@@ -172,8 +172,8 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.pr is readable' {
-    run test -r "$ZPWR_SCRIPTS/escapeRemover.pr"
+@test 'script escapeRemover.stk is readable' {
+    run test -r "$ZPWR_SCRIPTS/escapeRemover.stk"
     assert $state equals 0
 }
 
@@ -317,8 +317,8 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.pr is readable' {
-    run test -r "$ZPWR_SCRIPTS/gitSdiffColorizer.pr"
+@test 'script gitSdiffColorizer.stk is readable' {
+    run test -r "$ZPWR_SCRIPTS/gitSdiffColorizer.stk"
     assert $state equals 0
 }
 
@@ -417,8 +417,8 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.pr is readable' {
-    run test -r "$ZPWR_SCRIPTS/minifySpaces.pr"
+@test 'script minifySpaces.stk is readable' {
+    run test -r "$ZPWR_SCRIPTS/minifySpaces.stk"
     assert $state equals 0
 }
 
@@ -507,8 +507,8 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.pr is readable' {
-    run test -r "$ZPWR_SCRIPTS/regexReplace.pr"
+@test 'script regexReplace.stk is readable' {
+    run test -r "$ZPWR_SCRIPTS/regexReplace.stk"
     assert $state equals 0
 }
 
@@ -537,8 +537,8 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.pr is readable' {
-    run test -r "$ZPWR_SCRIPTS/sdiffColorizer.pr"
+@test 'script sdiffColorizer.stk is readable' {
+    run test -r "$ZPWR_SCRIPTS/sdiffColorizer.stk"
     assert $state equals 0
 }
 
@@ -582,8 +582,8 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.pr is readable' {
-    run test -r "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr"
+@test 'script stdinSdiffColorizer.stk is readable' {
+    run test -r "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk"
     assert $state equals 0
 }
 

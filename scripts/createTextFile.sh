@@ -58,8 +58,8 @@ function createTheFile() {
     #echo shebang line into newfile
     case "$1" in
     .sh) addHeader bash "$newfile" ;;
-    .pl) addHeader perlrs "$newfile" ;;
-    .pr) addHeader perlrs "$newfile" ;;
+    .pl) addHeader stryke "$newfile" ;;
+    .stk) addHeader stryke "$newfile" ;;
     .rb) addHeader ruby "$newfile" ;;
     .py) addHeader python "$newfile" ;;
     #if .txt or some other file ending then just open the file, no processing
@@ -92,8 +92,8 @@ if [[ "$newfile" =~ .*\.sh ]]; then
     createTheFile .sh
 elif [[ "$newfile" =~ .*\.pl ]]; then
     createTheFile .pl
-elif [[ "$newfile" =~ .*\.pr ]]; then
-    createTheFile .pr
+elif [[ "$newfile" =~ .*\.stk ]]; then
+    createTheFile .stk
 elif [[ "$newfile" =~ .*\.rb ]]; then
     createTheFile .rb
 elif [[ "$newfile" =~ .*\.py ]]; then

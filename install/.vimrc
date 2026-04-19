@@ -1691,9 +1691,9 @@ let g:ale_set_balloons = 1
 let g:ale_completion_enabled = 1
 let g:ale_fixers = {'ruby': ['rubocop'], 'sh': ['shfmt'], 'perl': ['perltidy'], 'python': ['yapf']}
 
-" perlrs
-if executable('pe') && filereadable(expand('~/.zpwr/install/perlrs.vim'))
-  source ~/.zpwr/install/perlrs.vim
+" stryke
+if executable('pe') && filereadable(expand('~/.zpwr/install/stryke.vim'))
+  source ~/.zpwr/install/stryke.vim
 endif
 
 

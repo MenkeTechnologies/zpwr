@@ -1,4 +1,4 @@
-#!/usr/bin/env perlrs
+#!/usr/bin/env stryke
 
 my $numColumns = qx "tput cols"
 $numColumns |> chomp

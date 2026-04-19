@@ -12,7 +12,7 @@ function pre(){
     prefix="$1"
     shift
     out="$(eval "$@")"
-    echo "$out" | perlrs -lnE "say \"$prefix \$_\""
+    echo "$out" | stryke -lnE "say \"$prefix \$_\""
 }
 
 pre "$@"

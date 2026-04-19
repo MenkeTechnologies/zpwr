@@ -1,21 +1,21 @@
-" Vim/Neovim configuration for perlrs
-" Usage: source ~/.zpwr/install/perlrs.vim
+" Vim/Neovim configuration for stryke
+" Usage: source ~/.zpwr/install/stryke.vim
 
-" Register .pr files as perlrs filetype with perl syntax
-augroup perlrs_filetype
+" Register .stk files as stryke filetype with perl syntax
+augroup forge_filetype
   autocmd!
-  autocmd BufNewFile,BufRead *.pr set filetype=perlrs
-  autocmd BufReadPost *.pr set filetype=perlrs
-  autocmd FileType perlrs setlocal syntax=perl commentstring=#\ %s
+  autocmd BufNewFile,BufRead *.stk set filetype=stryke
+  autocmd BufReadPost *.stk set filetype=stryke
+  autocmd FileType stryke setlocal syntax=perl commentstring=#\ %s
 augroup END
 
 " ALE linter functions
-function! PerlrsProjectRoot(buffer) abort
+function! StrykeProjectRoot(buffer) abort
   let l:git = ale#path#FindNearestDirectory(a:buffer, '.git')
   return !empty(l:git) ? fnamemodify(l:git, ':h:h') : expand('#' . a:buffer . ':p:h')
 endfunction
 
-function! PerlrsHandler(buffer, lines) abort
+function! StrykeHandler(buffer, lines) abort
   let l:output = []
   for l:line in a:lines
     let l:match = matchlist(l:line, '\v^(.+) at .+ line (\d+)')
@@ -26,38 +26,38 @@ function! PerlrsHandler(buffer, lines) abort
   return l:output
 endfunction
 
-function! s:RegisterPerlrsALE() abort
+function! s:RegisterForgeALE() abort
   if exists('*ale#linter#Define')
-    call ale#linter#Define('perlrs', {
-    \   'name': 'perlrs',
+    call ale#linter#Define('stryke', {
+    \   'name': 'stryke',
     \   'executable': 'pe',
     \   'command': 'pe --lint %t 2>&1',
-    \   'callback': 'PerlrsHandler',
-    \   'project_root': function('PerlrsProjectRoot'),
+    \   'callback': 'StrykeHandler',
+    \   'project_root': function('StrykeProjectRoot'),
     \})
     let g:ale_linters = get(g:, 'ale_linters', {})
-    let g:ale_linters.perlrs = ['perlrs']
+    let g:ale_linters.stryke = ['stryke']
   endif
 endfunction
 
-autocmd VimEnter * call s:RegisterPerlrsALE()
+autocmd VimEnter * call s:RegisterForgeALE()
 
 " vim-lsp plugin
 if exists('*lsp#register_server')
   call lsp#register_server({
-  \   'name': 'perlrs',
+  \   'name': 'stryke',
   \   'cmd': ['pe', '--lsp'],
-  \   'allowlist': ['perlrs', 'perl'],
+  \   'allowlist': ['stryke', 'perl'],
   \})
 endif
 
 " coc.nvim: add to coc-settings.json:
 " {
 "   "languageserver": {
-"     "perlrs": {
+"     "stryke": {
 "       "command": "pe",
 "       "args": ["--lsp"],
-"       "filetypes": ["perlrs", "perl"]
+"       "filetypes": ["stryke", "perl"]
 "     }
 "   }
 " }

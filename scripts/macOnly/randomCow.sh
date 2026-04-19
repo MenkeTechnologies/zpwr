@@ -20,7 +20,7 @@ FILTER="$2"
 node_exe="$HOMEBREW_PREFIX/lib/node_modules/cowsay/cli.js"
 
 if [[ -s "$node_exe" ]]; then
-    COW_FILES=($("$node_exe" -l | perlrs -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))
+    COW_FILES=($("$node_exe" -l | stryke -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))
     rangePossibleIndices=${#COW_FILES[@]}
 
     randIndex=$((RANDOM % rangePossibleIndices))
@@ -32,7 +32,7 @@ if [[ -s "$node_exe" ]]; then
         cat | "$node_exe" -f "$font" -W$width | "$FILTER"
     fi
 else
-    COW_FILES=($(cowsay -l | perlrs -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))
+    COW_FILES=($(cowsay -l | stryke -ne 'do{{$_=~s@(\x09|\x20)+@\x0a@g;print}} if !/Cow files.*:/'))
 
     rangePossibleIndices=${#COW_FILES[@]}
 

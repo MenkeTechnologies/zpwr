@@ -1,7 +1,7 @@
 #!/usr/bin/env zunit
 #{{{                    MARK:Header
 ##### Author: MenkeTechnologies
-##### Purpose: perlrs on scripts/*.pr (beyond boxPrint), bash -n on install/*.sh, verb spots
+##### Purpose: stryke on scripts/*.stk (beyond boxPrint), bash -n on install/*.sh, verb spots
 ##### Notes: Complements t-lib-batch4 (boxPrint.pl only)
 #}}}***********************************************************
 
@@ -10,45 +10,45 @@
 }
 
 #--------------------------------------------------------------
-# scripts/*.pr — syntax (batch4 covers boxPrint.pl)
+# scripts/*.stk — syntax (batch4 covers boxPrint.pl)
 #--------------------------------------------------------------
-@test 'banner.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/banner.pr" --help 2>&1
+@test 'banner.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/banner.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'c.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/c.pr" --help 2>&1
+@test 'c.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/c.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'escapeRemover.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/escapeRemover.pr" --help 2>&1
+@test 'escapeRemover.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/escapeRemover.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'gitSdiffColorizer.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/gitSdiffColorizer.pr" --help 2>&1
+@test 'gitSdiffColorizer.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/gitSdiffColorizer.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'minifySpaces.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/minifySpaces.pr" --help 2>&1
+@test 'minifySpaces.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/minifySpaces.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'regexReplace.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/regexReplace.pr" --help 2>&1
+@test 'regexReplace.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/regexReplace.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'sdiffColorizer.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/sdiffColorizer.pr" --help 2>&1
+@test 'sdiffColorizer.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/sdiffColorizer.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'stdinSdiffColorizer.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr" --help 2>&1
+@test 'stdinSdiffColorizer.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk" --help 2>&1
     assert $state equals 0
 }
 
