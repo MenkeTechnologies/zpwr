@@ -2,9 +2,9 @@
 # vim: set ft=sh:
 function zpwrFzfZList(){
 
-    { z -l; fasd -d; } |& forge -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+.*)$}}' |
+    { z -l; fasd -d; } |& stryke -lne 'for (reverse <>){do{($_=$2)=~s@$ENV{HOME}@~@;print} if m{^\s*(\S+)\s+(\S+.*)$}}' |
     eval "$ZPWR_FZF -e --no-sort --border $FZF_CTRL_T_OPTS" |
-        forge -pe 's@\s+$@@g;s@^([~])([^~]*)$@"$ENV{HOME}$2"@'
+        stryke -pe 's@\s+$@@g;s@^([~])([^~]*)$@"$ENV{HOME}$2"@'
 }
 
 zpwrFzfZList "$@"

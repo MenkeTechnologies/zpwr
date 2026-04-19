@@ -15,7 +15,7 @@
 
 This project began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) and evolved into something far beyond its origins -- a sprawling cyberdeck OS for the command line.
 
-ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and forge code. It rewires your shell into a neural interface -- autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a tmux cockpit that turns your terminal into a multi-pane command center.
+ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and stryke code. It rewires your shell into a neural interface -- autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a tmux cockpit that turns your terminal into a multi-pane command center.
 
 If your terminal isn't glowing, you're not running ZPWR.
 
@@ -125,7 +125,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
 - 17k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
-- 170+ bash, forge, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
+- 170+ bash, stryke, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
 - user specific ZPWR files in `~/.zpwr/local` git ignored -- your private data vault
@@ -171,9 +171,9 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - custom banners when new shell is launched `ZPWR_BANNER_COMMAND`
 - zle sed sub widget to replace globally on current command line [zsh-sed-sub](https://github.com/MenkeTechnologies/zsh-sed-sub)
 - expanded vim text objects on command line
-- vim extract method from visual selection for shell, forge and python scripts (`gv` to select extracted)
-- vim extract variable under cursor for shell, forge and python scripts (`gv` to select extracted)
-- vim extract variable from visual selection for shell, forge and python scripts (`gv` to select extracted)
+- vim extract method from visual selection for shell, stryke and python scripts (`gv` to select extracted)
+- vim extract variable under cursor for shell, stryke and python scripts (`gv` to select extracted)
+- vim extract variable from visual selection for shell, stryke and python scripts (`gv` to select extracted)
 - vim autohighlight word under cursor after delay like JetBrains IDEs
 - software updater script, `source ~/.zpwr/scripts/autoUpdater.sh`,  on 24 hour loop
 - colorized side diffs on zsh keybinding before git push [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
@@ -208,7 +208,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - zsh
 - tmux
 - neovim with 77 plugins and python3/node support
-- forge
+- stryke
 - bash (4.0+, 3.2 not supported)
 - zinit with 65+ plugins of which 34+ are custom
 - upstream powerlevel10k zsh prompt with ~dirs via cached hash dirs and prompt_dir override
@@ -780,7 +780,7 @@ zpwrEvalIfNeeded ZPWR_GITHUB_URL "$ZPWR_GITHUB_URL" "https://github.com/$ZPWR_GI
 ## Diagnostics
 The test suite contains thousands of [zunit](https://github.com/zunit-zsh/zunit) tests across `tests/*.zsh` covering autoload function existence, type resolution, whence/which lookups, function body validation, fpath integrity, source syntax, script readability, shebang detection, verb callability, environment variable isolation, and behavioral checks for `scripts/lib.sh` helpers (required-argument validation, usage errors, and bash `zpwrExists` multi-argument parity with zsh).
 
-`zpwrCommandExists` tests are limited to commands present on the Ubuntu runner base image or installed by `.github/workflows/ci.yml` (including `forge`, installed there via `cargo install forge` for functions such as `zpwrContribCount`); they do not assume optional packages (for example `lsof`, `jq`, `openssl`, `sudo`, pagers, or `file`/`strings` from extra packages) unless those packages are added to that workflow.
+`zpwrCommandExists` tests are limited to commands present on the Ubuntu runner base image or installed by `.github/workflows/ci.yml` (including `stryke`, installed there via `cargo install stryke` for functions such as `zpwrContribCount`); they do not assume optional packages (for example `lsof`, `jq`, `openssl`, `sudo`, pagers, or `file`/`strings` from extra packages) unless those packages are added to that workflow.
 
 All ZPWR_* environment variables are unset before each test run to prevent user env from leaking into test results.
 
@@ -855,7 +855,7 @@ zpwr tmuxload              # fzf picker (if fzf available)
 ```
 
 ## Health Check -- zpwr doctor
-`zpwr doctor` scans the environment for common issues and reports with pass/warn/fail indicators.  Checks for: stale `.zwc` compiled files, zcompdump freshness, duplicate and missing PATH/FPATH entries, broken symlinks, invalid named directories, p10k named dir pollution, missing dependencies (git, eza, fzf, tmux, forge, python3), zinit installation, history file and backups, and config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh).  Reports a signal bar and summary with pass/warning/error counts.
+`zpwr doctor` scans the environment for common issues and reports with pass/warn/fail indicators.  Checks for: stale `.zwc` compiled files, zcompdump freshness, duplicate and missing PATH/FPATH entries, broken symlinks, invalid named directories, p10k named dir pollution, missing dependencies (git, eza, fzf, tmux, stryke, python3), zinit installation, history file and backups, and config symlinks (.zshrc, .vimrc, .tmux.conf, .p10k.zsh).  Reports a signal bar and summary with pass/warning/error counts.
 
 ```sh
 zpwr doctor -h  # cyberpunk help

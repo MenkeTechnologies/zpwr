@@ -40,10 +40,10 @@ jobs:
       - name: Install Rust toolchain
         uses: dtolnay/rust-toolchain@stable
 
-      - name: Install forge
+      - name: Install stryke
         run: |
-          cargo install forge
-          command -v forge
+          cargo install stryke
+          command -v stryke
 
       - name: Checkout repository
         uses: actions/checkout@v4

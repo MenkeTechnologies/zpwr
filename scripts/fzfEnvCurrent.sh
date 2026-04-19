@@ -48,7 +48,7 @@ fi
 cat<<EOF
 line={};
 orig={};
-line=\$(echo \$line| forge -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
+line=\$(echo \$line| stryke -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
 
 function zpwrStdinExists(){
     local in arg
@@ -62,6 +62,6 @@ function zpwrStdinExists(){
 }
 
 export -p |
-command forge -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$line=} ... (m{^export .*=} or eof ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} ) ) } for @a; }" $filter
+command stryke -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$line=} ... (m{^export .*=} or eof ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} ) ) } for @a; }" $filter
 
 EOF

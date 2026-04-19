@@ -47,8 +47,8 @@
     assert $state equals 0
 }
 
-@test 'script banner.for is executable' {
-    run test -x "$ZPWR_SCRIPTS/banner.for"
+@test 'script banner.stk is executable' {
+    run test -x "$ZPWR_SCRIPTS/banner.stk"
     assert $state equals 0
 }
 
@@ -92,8 +92,8 @@
     assert $state equals 0
 }
 
-@test 'script c.for is executable' {
-    run test -x "$ZPWR_SCRIPTS/c.for"
+@test 'script c.stk is executable' {
+    run test -x "$ZPWR_SCRIPTS/c.stk"
     assert $state equals 0
 }
 
@@ -172,8 +172,8 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.for is executable' {
-    run test -x "$ZPWR_SCRIPTS/escapeRemover.for"
+@test 'script escapeRemover.stk is executable' {
+    run test -x "$ZPWR_SCRIPTS/escapeRemover.stk"
     assert $state equals 0
 }
 
@@ -312,8 +312,8 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.for is executable' {
-    run test -x "$ZPWR_SCRIPTS/gitSdiffColorizer.for"
+@test 'script gitSdiffColorizer.stk is executable' {
+    run test -x "$ZPWR_SCRIPTS/gitSdiffColorizer.stk"
     assert $state equals 0
 }
 
@@ -412,8 +412,8 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.for is executable' {
-    run test -x "$ZPWR_SCRIPTS/minifySpaces.for"
+@test 'script minifySpaces.stk is executable' {
+    run test -x "$ZPWR_SCRIPTS/minifySpaces.stk"
     assert $state equals 0
 }
 
@@ -502,8 +502,8 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.for is executable' {
-    run test -x "$ZPWR_SCRIPTS/regexReplace.for"
+@test 'script regexReplace.stk is executable' {
+    run test -x "$ZPWR_SCRIPTS/regexReplace.stk"
     assert $state equals 0
 }
 
@@ -532,8 +532,8 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.for is executable' {
-    run test -x "$ZPWR_SCRIPTS/sdiffColorizer.for"
+@test 'script sdiffColorizer.stk is executable' {
+    run test -x "$ZPWR_SCRIPTS/sdiffColorizer.stk"
     assert $state equals 0
 }
 
@@ -577,8 +577,8 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.for is executable' {
-    run test -x "$ZPWR_SCRIPTS/stdinSdiffColorizer.for"
+@test 'script stdinSdiffColorizer.stk is executable' {
+    run test -x "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk"
     assert $state equals 0
 }
 

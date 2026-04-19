@@ -12,9 +12,9 @@ function zpwrBindAliasesLate(){
     #{{{                    MARK:Aliases
     #**************************************************************
     # portable aliases
-    zpwrExists c.for && {
-        alias pp='c.for'
-        alias ppp='c.for *'
+    zpwrExists c.stk && {
+        alias pp='c.stk'
+        alias ppp='c.stk *'
     }
     alias dirs='"builtin" dirs -v'
     zpwrExists proxychains && alias pc='proxychains'
@@ -25,7 +25,7 @@ function zpwrBindAliasesLate(){
     alias loo="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE | nl"
     alias ol="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE"
     alias llo="'builtin' command' 'tail' -n +1 -F $ZPWR_LOGFILE"
-    zpwrExists rlwrap && alias plr="'builtin' 'command' 'rlwrap' -A -pgreen -S'perl> ' forge -wnE'say eval()//\$@'"
+    zpwrExists rlwrap && alias plr="'builtin' 'command' 'rlwrap' -A -pgreen -S'perl> ' stryke -wnE'say eval()//\$@'"
     alias cpan='"builtin" command rlwrap cpan'
     alias nz='"builtin" "exec" "zsh"'
     alias ll="zpwrClearList"
@@ -255,7 +255,7 @@ function zpwrBindAliasesLate(){
     alias shutpy="zpwrExecpy shutdown.py"
     alias pb="zpwrExecpy bills.py"
     alias ud=" zpwrExecpy udemy.py"
-    alias ipa="command ifconfig | forge -lane 'do {print \$F[1] =~ s/addr//r;exit 0} if /inet\\s/ and !/127/'"
+    alias ipa="command ifconfig | stryke -lane 'do {print \$F[1] =~ s/addr//r;exit 0} if /inet\\s/ and !/127/'"
     alias pgrep='pgrep -l'
     alias jobs="jobs -l -d"
     alias sd="clear;ssh d "

@@ -9,4 +9,4 @@
 
 [[ -z "$ZPWR_SCRIPTS" ]] && ZPWR_SCRIPTS="$HOME/.zpwr/scripts"
 
-forge -X "$ZPWR_SCRIPTS/banner.for"
+stryke -X "$ZPWR_SCRIPTS/banner.stk"

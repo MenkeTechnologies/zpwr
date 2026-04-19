@@ -92,11 +92,11 @@ clear
 
 if [[ -f "$ZPWR_SCRIPTS/printHeader.sh" ]]; then
     width=80
-    forge -le "print '_'x$width" | lolcat
+    stryke -le "print '_'x$width" | lolcat
     if [[ "$ZPWR_BANNER_TYPE" == ponies ]]; then
         zpwrCommandExists catme && zpwrCommandExists cowsay && zpwrCommandExists shelobsay && echo "UPDATER" | "$ZPWR_SCRIPTS/macOnly/combo.sh"
     fi
-    forge -le "print '_'x$width" | lolcat
+    stryke -le "print '_'x$width" | lolcat
 fi
 
 if [[ $skip != true ]]; then

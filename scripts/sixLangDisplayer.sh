@@ -13,19 +13,19 @@ echo "$o" | {
     echo "we got $o"
     echo "tommy was here @ $o"
     echo "bad ass peeeeps are "
-    forge -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's@.*@<&>@g' | cowsay -f www
+    stryke -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's@.*@<&>@g' | cowsay -f www
     echo
-    forge -E 'say "perl"' | figlet -f cosmic
+    stryke -E 'say "perl"' | figlet -f cosmic
     echo
-    cat /etc/passwd | forge -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>g' | cowsay -f eyes
+    cat /etc/passwd | stryke -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>g' | cowsay -f eyes
 } | sed 's@.@&@g' | {
     cat >/dev/stdout
     python -c 'print("tommy"*30)'
     python -c 'print("tommy"*30)'
     x="$(python -c 'print("trina"*5)')"
     ruby -e "10.times do |x| puts \"dogs are cool $x #{x}\" end"
-    forge -E 'say "TCL IN THE HOUSE",a..z,-235..235' | fold -w 10 | pr -t -3
-    forge -E 'say "perl ftw"' | toilet
+    stryke -E 'say "TCL IN THE HOUSE",a..z,-235..235' | fold -w 10 | pr -t -3
+    stryke -E 'say "perl ftw"' | toilet
     node -e 'console.log(process)' | head | cowsay -f kiss
     x=$(date | cut -c1-10)
     #echo "set x 55; puts \"we got \$x $x\"" | tclsh | figlet -f kban

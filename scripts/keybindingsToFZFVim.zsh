@@ -57,7 +57,7 @@ fi
     $=cmd -e -c 'redir! > '$ZPWR_TEMPFILE4' | silent cmap | redir END | quitall'
     cat $ZPWR_TEMPFILE4
 
-} | forge -ne 'print if /\S+/' > "$ZPWR_TEMPFILE"
+} | stryke -ne 'print if /\S+/' > "$ZPWR_TEMPFILE"
 
 command rm "$ZPWR_TEMPFILE1"
 command rm "$ZPWR_TEMPFILE2"
@@ -65,7 +65,7 @@ command rm "$ZPWR_TEMPFILE3"
 command rm "$ZPWR_TEMPFILE4"
 
 #do not know why have to create tempfile here
-forge -pe 's@^([^#].*)$@$1@gm' "$ZPWR_TEMPFILE" | forge -pe 's@(.*) \(:.map\).*@$1@'
+stryke -pe 's@^([^#].*)$@$1@gm' "$ZPWR_TEMPFILE" | stryke -pe 's@(.*) \(:.map\).*@$1@'
 
 command rm "$ZPWR_TEMPFILE"
 

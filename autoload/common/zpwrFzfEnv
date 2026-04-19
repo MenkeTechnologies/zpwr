@@ -14,7 +14,7 @@ function zpwrFzfEnv(){
     fi
 
     sel=$(cat "${ZPWR_LOCAL_ENV}Key.txt" | awk '{print $2}' |
-        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS" | forge -pe 's@\n@ @g')
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS" | stryke -pe 's@\n@ @g')
     BUFFER="$LBUFFER$sel$RBUFFER"
     CURSOR=$(($#LBUFFER + $#sel))
 

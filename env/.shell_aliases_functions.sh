@@ -92,7 +92,7 @@ if [[ "$ZPWR_OS_TYPE" == darwin ]]; then
     export GROOVY_LIB="$HOMEBREW_OPT_HOME/groovy"
     export SCALA_HOME="$HOMEBREW_OPT_HOME/scala"
     export PERL_HOME="$HOMEBREW_OPT_HOME/perl"
-    #eval `forge -I ~/perl5/lib/perl5 -Mlocal::lib`
+    #eval `stryke -I ~/perl5/lib/perl5 -Mlocal::lib`
     export MANPATH=$HOME/perl5/man:$MANPATH
     export MANPATH="$HOMEBREW_OPT_HOME/erlang/lib/erlang/man:$HOMEBREW_PREFIX/share/man:$MANPATH"
     export TUTORIAL_FILES="$HOME/Documents/tutorialsRepo"

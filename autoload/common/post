@@ -11,7 +11,7 @@ function post(){
     postfix="$1"
     shift
     out="$(eval "$@")"
-    echo "$out" | forge -lnE "say \"\$_ $postfix\""
+    echo "$out" | stryke -lnE "say \"\$_ $postfix\""
 }
 
 post "$@"

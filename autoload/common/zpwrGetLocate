@@ -3,7 +3,7 @@
 function zpwrGetLocate(){
 
     eval "locate / 2>/dev/null | $ZPWR_FZF -m $FZF_CTRL_T_OPTS" |
-        forge -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
+        stryke -pe 's@^([~]*)([^~].*)$@$1"$2"@;s@\s+@ @g;'
 }
 
 zpwrGetLocate "$@"

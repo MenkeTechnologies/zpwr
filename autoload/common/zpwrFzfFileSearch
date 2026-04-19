@@ -36,7 +36,7 @@ function zpwrFzfFileSearch(){
         ${=ZPWR_FD} . ./ 2>/dev/null | cut -c3-
     fi | ${=filter} |
         eval "$ZPWR_FZF -m --border $FZF_CTRL_T_OPTS" |
-        forge -ne 'chomp $_; print "\"$_\" "'
+        stryke -ne 'chomp $_; print "\"$_\" "'
 }
 
 zpwrFzfFileSearch "$@"

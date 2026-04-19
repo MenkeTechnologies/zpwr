@@ -59,7 +59,7 @@ function pkgInstall(){
 
     while read f; do
 
-        if ! echo "$f" | forge -ne 'exit 1 if '"$blackList"; then
+        if ! echo "$f" | stryke -ne 'exit 1 if '"$blackList"; then
             continue
         fi
         bold "---------- PKG $f ----------"
@@ -72,7 +72,7 @@ function pkgInstall(){
 
     while read f; do
 
-        if ! echo "$f" | forge -ne 'exit 1 if '"$blackList"' or m{.*.mpkg/}'; then
+        if ! echo "$f" | stryke -ne 'exit 1 if '"$blackList"' or m{.*.mpkg/}'; then
             continue
         fi
         bold "---------- MPKG $f ----------"
@@ -90,7 +90,7 @@ function vstInstall(){
 
     while read f; do
 
-        if ! echo "$f" | forge -ne 'exit 1 if '"$blackList"; then
+        if ! echo "$f" | stryke -ne 'exit 1 if '"$blackList"; then
             continue
         fi
 
@@ -107,7 +107,7 @@ function vstInstall(){
 
     while read f; do
 
-        if ! echo "$f" | forge -ne 'exit 1 if '"$blackList"; then
+        if ! echo "$f" | stryke -ne 'exit 1 if '"$blackList"; then
             continue
         fi
 
@@ -125,7 +125,7 @@ function vstInstall(){
 
     while read f; do
 
-        if ! echo "$f" | forge -ne 'exit 1 if '"$blackList"; then
+        if ! echo "$f" | stryke -ne 'exit 1 if '"$blackList"; then
             continue
         fi
 
@@ -148,7 +148,7 @@ function main() {
 
     while read i; do
 
-        if ! echo "$i" | forge -ne 'exit 1 if '"$blackList"; then
+        if ! echo "$i" | stryke -ne 'exit 1 if '"$blackList"; then
             continue
         fi
 

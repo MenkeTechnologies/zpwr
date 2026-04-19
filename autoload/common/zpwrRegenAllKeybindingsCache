@@ -4,12 +4,12 @@ function zpwrRegenAllKeybindingsCache(){
 
     zpwrPrettyPrint "regen vim keybindings cache to to $ZPWR_VIM_KEYBINDINGS and all to $ZPWR_ALL_KEYBINDINGS"
     zsh "$ZPWR_SCRIPTS/keybindingsToFZFVim.zsh" |
-    escapeRemover.for |
-    forge -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"
+    escapeRemover.stk |
+    stryke -ne 'print if /\S/' > "$ZPWR_VIM_KEYBINDINGS"
 
     zpwrIsZsh && source "$ZPWR_SCRIPTS/keybindingsToFZF.zsh" |
-        escapeRemover.for |
-        forge -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
+        escapeRemover.stk |
+        stryke -ne 'print if /\S/' > "$ZPWR_ALL_KEYBINDINGS"
 }
 
 zpwrRegenAllKeybindingsCache "$@"

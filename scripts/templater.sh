@@ -3,7 +3,7 @@
 #**************************************************************
 ##### Author: JACOBMENKE
 ##### Date: Fri Jun 30 15:18:40 EDT 2017
-##### Purpose: file templates for bash, forge, python
+##### Purpose: file templates for bash, stryke, python
 ##### Notes:
 #}}}***********************************************************
 
@@ -69,10 +69,10 @@ case "$fileToBeExecuted" in
         createTemplate bash "$fileToBeExecuted"
         ;;
     *.pl)
-        createTemplate forge "$fileToBeExecuted"
+        createTemplate stryke "$fileToBeExecuted"
         ;;
-    *.for)
-        createTemplate forge "$fileToBeExecuted"
+    *.stk)
+        createTemplate stryke "$fileToBeExecuted"
         ;;
     *.rb)
         createTemplate ruby "$fileToBeExecuted"

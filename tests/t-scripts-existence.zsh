@@ -47,8 +47,8 @@
     assert $state equals 0
 }
 
-@test 'script banner.for exists' {
-    run test -f "$ZPWR_SCRIPTS/banner.for"
+@test 'script banner.stk exists' {
+    run test -f "$ZPWR_SCRIPTS/banner.stk"
     assert $state equals 0
 }
 
@@ -92,8 +92,8 @@
     assert $state equals 0
 }
 
-@test 'script c.for exists' {
-    run test -f "$ZPWR_SCRIPTS/c.for"
+@test 'script c.stk exists' {
+    run test -f "$ZPWR_SCRIPTS/c.stk"
     assert $state equals 0
 }
 
@@ -172,8 +172,8 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.for exists' {
-    run test -f "$ZPWR_SCRIPTS/escapeRemover.for"
+@test 'script escapeRemover.stk exists' {
+    run test -f "$ZPWR_SCRIPTS/escapeRemover.stk"
     assert $state equals 0
 }
 
@@ -312,8 +312,8 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.for exists' {
-    run test -f "$ZPWR_SCRIPTS/gitSdiffColorizer.for"
+@test 'script gitSdiffColorizer.stk exists' {
+    run test -f "$ZPWR_SCRIPTS/gitSdiffColorizer.stk"
     assert $state equals 0
 }
 
@@ -412,8 +412,8 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.for exists' {
-    run test -f "$ZPWR_SCRIPTS/minifySpaces.for"
+@test 'script minifySpaces.stk exists' {
+    run test -f "$ZPWR_SCRIPTS/minifySpaces.stk"
     assert $state equals 0
 }
 
@@ -502,8 +502,8 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.for exists' {
-    run test -f "$ZPWR_SCRIPTS/regexReplace.for"
+@test 'script regexReplace.stk exists' {
+    run test -f "$ZPWR_SCRIPTS/regexReplace.stk"
     assert $state equals 0
 }
 
@@ -522,8 +522,8 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.for exists' {
-    run test -f "$ZPWR_SCRIPTS/sdiffColorizer.for"
+@test 'script sdiffColorizer.stk exists' {
+    run test -f "$ZPWR_SCRIPTS/sdiffColorizer.stk"
     assert $state equals 0
 }
 
@@ -567,8 +567,8 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.for exists' {
-    run test -f "$ZPWR_SCRIPTS/stdinSdiffColorizer.for"
+@test 'script stdinSdiffColorizer.stk exists' {
+    run test -f "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk"
     assert $state equals 0
 }
 

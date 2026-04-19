@@ -1282,8 +1282,8 @@
     assert $state equals 0
 }
 
-@test 'banner.for forge syntax' {
-    run forge "$ZPWR_SCRIPTS/banner.for" --help
+@test 'banner.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/banner.stk" --help
     assert $state equals 0
 }
 
@@ -1292,38 +1292,38 @@
     assert $state equals 0
 }
 
-@test 'c.for forge syntax' {
-    run forge "$ZPWR_SCRIPTS/c.for" --help
+@test 'c.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/c.stk" --help
     assert $state equals 0
 }
 
-@test 'escapeRemover.for forge syntax' {
-    run forge "$ZPWR_SCRIPTS/escapeRemover.for" --help
+@test 'escapeRemover.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/escapeRemover.stk" --help
     assert $state equals 0
 }
 
-@test 'gitSdiffColorizer.for forge syntax' {
-    run forge "$ZPWR_SCRIPTS/gitSdiffColorizer.for" --help
+@test 'gitSdiffColorizer.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/gitSdiffColorizer.stk" --help
     assert $state equals 0
 }
 
-@test 'minifySpaces.for forge syntax' {
-    run forge "$ZPWR_SCRIPTS/minifySpaces.for" --help
+@test 'minifySpaces.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/minifySpaces.stk" --help
     assert $state equals 0
 }
 
-@test 'regexReplace.for forge syntax' {
-    run forge "$ZPWR_SCRIPTS/regexReplace.for" --help
+@test 'regexReplace.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/regexReplace.stk" --help
     assert $state equals 0
 }
 
-@test 'sdiffColorizer.for forge syntax' {
-    run forge "$ZPWR_SCRIPTS/sdiffColorizer.for" --help
+@test 'sdiffColorizer.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/sdiffColorizer.stk" --help
     assert $state equals 0
 }
 
-@test 'stdinSdiffColorizer.for forge syntax' {
-    run forge "$ZPWR_SCRIPTS/stdinSdiffColorizer.for" --help
+@test 'stdinSdiffColorizer.stk stryke syntax' {
+    run stryke "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk" --help
     assert $state equals 0
 }
 

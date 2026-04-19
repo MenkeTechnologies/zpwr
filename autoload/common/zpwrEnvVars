@@ -3,8 +3,8 @@
 function zpwrEnvVars(){
 
     export -p |
-            command forge -ne 'print "$1\n" if m{^export ('$ZPWR_REPO_NAME'[A-Z0-9_]+)=}i' |
-        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS_CURRENT" | forge -pe 's@\n@ @g'
+            command stryke -ne 'print "$1\n" if m{^export ('$ZPWR_REPO_NAME'[A-Z0-9_]+)=}i' |
+        eval "$ZPWR_FZF -m --border $FZF_ENV_OPTS_CURRENT" | stryke -pe 's@\n@ @g'
 }
 
 zpwrEnvVars "$@"

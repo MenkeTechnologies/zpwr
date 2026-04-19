@@ -24,11 +24,11 @@ echo "$o" | {
     echo "we got $o"
     echo "tommy was here @ $o"
     echo "bad peeeeps are "
-    forge -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's@.*@<&>@g' | fold -w 50 | "$randomCowsayCowScript" 120
+    stryke -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's@.*@<&>@g' | fold -w 50 | "$randomCowsayCowScript" 120
     echo
-    forge -E 'say "perl"' | "$randomFigletFontScript"
+    stryke -E 'say "perl"' | "$randomFigletFontScript"
     echo
-    cat /etc/passwd | forge -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>@g' | fold -w 50 | "$randomCowsayCowScript" 100
+    cat /etc/passwd | stryke -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>@g' | fold -w 50 | "$randomCowsayCowScript" 100
 } | sed 's@.@&@g' | {
     cat >/dev/stdout
     echo "SCRIPTING" | "$randomFigletFontScript"
@@ -38,8 +38,8 @@ echo "$o" | {
     } | shelobsay
     x="$(python -c 'print("trina"*5)')"
     ruby -e "10.times do |x| puts \"dogs are cool $x #{x}\" end" | yosay
-    forge -E 'say "TCL IN THE HOUSE",a..z,-235..235' | fold -w 10 | pr -t -3
-    forge -E 'say "perl ftw"' | toilet
+    stryke -E 'say "TCL IN THE HOUSE",a..z,-235..235' | fold -w 10 | pr -t -3
+    stryke -E 'say "perl ftw"' | toilet
     node -e 'console.log(process)' | head | "$randomCowsayCowScript" 80
     x=$(date | cut -c1-10)
     #echo "set x 55; puts \"we got \$x $x\"" | tclsh | "$randomFigletFontScript"

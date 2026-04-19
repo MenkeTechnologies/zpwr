@@ -1,7 +1,7 @@
 #!/usr/bin/env zunit
 #{{{                    MARK:Header
 ##### Author: MenkeTechnologies
-##### Purpose: forge on scripts/*.for (beyond boxPrint), bash -n on install/*.sh, verb spots
+##### Purpose: stryke on scripts/*.stk (beyond boxPrint), bash -n on install/*.sh, verb spots
 ##### Notes: Complements t-lib-batch4 (boxPrint.pl only)
 #}}}***********************************************************
 
@@ -10,45 +10,45 @@
 }
 
 #--------------------------------------------------------------
-# scripts/*.for — syntax (batch4 covers boxPrint.pl)
+# scripts/*.stk — syntax (batch4 covers boxPrint.pl)
 #--------------------------------------------------------------
-@test 'banner.for runs with forge' {
-    run forge "$ZPWR_SCRIPTS/banner.for" --help 2>&1
+@test 'banner.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/banner.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'c.for runs with forge' {
-    run forge "$ZPWR_SCRIPTS/c.for" --help 2>&1
+@test 'c.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/c.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'escapeRemover.for runs with forge' {
-    run forge "$ZPWR_SCRIPTS/escapeRemover.for" --help 2>&1
+@test 'escapeRemover.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/escapeRemover.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'gitSdiffColorizer.for runs with forge' {
-    run forge "$ZPWR_SCRIPTS/gitSdiffColorizer.for" --help 2>&1
+@test 'gitSdiffColorizer.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/gitSdiffColorizer.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'minifySpaces.for runs with forge' {
-    run forge "$ZPWR_SCRIPTS/minifySpaces.for" --help 2>&1
+@test 'minifySpaces.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/minifySpaces.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'regexReplace.for runs with forge' {
-    run forge "$ZPWR_SCRIPTS/regexReplace.for" --help 2>&1
+@test 'regexReplace.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/regexReplace.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'sdiffColorizer.for runs with forge' {
-    run forge "$ZPWR_SCRIPTS/sdiffColorizer.for" --help 2>&1
+@test 'sdiffColorizer.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/sdiffColorizer.stk" --help 2>&1
     assert $state equals 0
 }
 
-@test 'stdinSdiffColorizer.for runs with forge' {
-    run forge "$ZPWR_SCRIPTS/stdinSdiffColorizer.for" --help 2>&1
+@test 'stdinSdiffColorizer.stk runs with stryke' {
+    run stryke "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk" --help 2>&1
     assert $state equals 0
 }
 

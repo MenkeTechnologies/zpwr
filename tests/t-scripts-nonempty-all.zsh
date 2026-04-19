@@ -47,8 +47,8 @@
     assert $state equals 0
 }
 
-@test 'script banner.for is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/banner.for"
+@test 'script banner.stk is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/banner.stk"
     assert $state equals 0
 }
 
@@ -92,8 +92,8 @@
     assert $state equals 0
 }
 
-@test 'script c.for is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/c.for"
+@test 'script c.stk is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/c.stk"
     assert $state equals 0
 }
 
@@ -172,8 +172,8 @@
     assert $state equals 0
 }
 
-@test 'script escapeRemover.for is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/escapeRemover.for"
+@test 'script escapeRemover.stk is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/escapeRemover.stk"
     assert $state equals 0
 }
 
@@ -317,8 +317,8 @@
     assert $state equals 0
 }
 
-@test 'script gitSdiffColorizer.for is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/gitSdiffColorizer.for"
+@test 'script gitSdiffColorizer.stk is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/gitSdiffColorizer.stk"
     assert $state equals 0
 }
 
@@ -417,8 +417,8 @@
     assert $state equals 0
 }
 
-@test 'script minifySpaces.for is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/minifySpaces.for"
+@test 'script minifySpaces.stk is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/minifySpaces.stk"
     assert $state equals 0
 }
 
@@ -507,8 +507,8 @@
     assert $state equals 0
 }
 
-@test 'script regexReplace.for is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/regexReplace.for"
+@test 'script regexReplace.stk is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/regexReplace.stk"
     assert $state equals 0
 }
 
@@ -537,8 +537,8 @@
     assert $state equals 0
 }
 
-@test 'script sdiffColorizer.for is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/sdiffColorizer.for"
+@test 'script sdiffColorizer.stk is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/sdiffColorizer.stk"
     assert $state equals 0
 }
 
@@ -582,8 +582,8 @@
     assert $state equals 0
 }
 
-@test 'script stdinSdiffColorizer.for is non-empty' {
-    run test -s "$ZPWR_SCRIPTS/stdinSdiffColorizer.for"
+@test 'script stdinSdiffColorizer.stk is non-empty' {
+    run test -s "$ZPWR_SCRIPTS/stdinSdiffColorizer.stk"
     assert $state equals 0
 }
 

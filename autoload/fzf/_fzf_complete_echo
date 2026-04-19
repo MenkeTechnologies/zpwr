@@ -4,7 +4,7 @@
 function ___fzf_complete_echo() {
 
   _fzf_complete '-m' "$@" < <(
-      typeset -x | forge -ne 'print "$1\n" if m{^([^=]+)=(\S+)}'
+      typeset -x | stryke -ne 'print "$1\n" if m{^([^=]+)=(\S+)}'
     )
 }
 

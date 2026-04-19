@@ -22,10 +22,10 @@ function banner() {
 
     if [[ -d "$ZPWR" ]]; then
         if cd "$ZPWR"; then
-            version="$(git describe --tags $(git rev-list --tags --max-count=1) | forge -pe 's@[\t ]@@')"
-            info="$(git tag -l -n9 "$version" | forge -pe 's@[\t ]+@ @')"
-            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | forge -pe 's@[\t ]+@    @')"
-            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | forge -pe 's@[\t ]+@    @')"
+            version="$(git describe --tags $(git rev-list --tags --max-count=1) | stryke -pe 's@[\t ]@@')"
+            info="$(git tag -l -n9 "$version" | stryke -pe 's@[\t ]+@ @')"
+            fetch="$(git remote -v | grep zpwr | grep fetch | head -n 1 | stryke -pe 's@[\t ]+@    @')"
+            push="$(git remote -v | grep zpwr | grep push | tail -n 1 | stryke -pe 's@[\t ]+@    @')"
             lastcommit="$(git log --oneline -n 1)"
         fi
     fi
@@ -131,7 +131,7 @@ EOF
     #if cd "$ZPWR";then
     #{
     #zpwrAllRemotes
-    #} | forge -pe 's@(.*)@\x1b[31m$1@'
+    #} | stryke -pe 's@(.*)@\x1b[31m$1@'
 
     #fi
     #fi

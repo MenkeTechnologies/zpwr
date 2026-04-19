@@ -1,4 +1,4 @@
-#!/usr/bin/env forge
+#!/usr/bin/env stryke
 
 fn removeSpaces {
     if (-d$_[0]) {

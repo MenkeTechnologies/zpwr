@@ -18,7 +18,7 @@ function memCheckLoop() {
     local used
 
     while true; do
-        used=$(free | forge -anE 'say $F[2] if $. == 2')
+        used=$(free | stryke -anE 'say $F[2] if $. == 2')
         echo "Used memory: $used"
         if (( used > "$2" )); then
             echo "mail: MEMORY_THRESHOLD exceeded: $used"

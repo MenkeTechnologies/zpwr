@@ -106,5 +106,5 @@ cat<<EOF
             $casestr
         fi
     fi
-fi | forge -ne "if (\$lineNum .. \$lineNum){s@\\\x1b\\\[[0-9;]+m@@g;s@(.*)@\\\x1b[$ZPWR_MARKER_COLOR\\\$1\\\x1b[0m@;print} elsif (\$startNum .. eof) {print;}"
+fi | stryke -ne "if (\$lineNum .. \$lineNum){s@\\\x1b\\\[[0-9;]+m@@g;s@(.*)@\\\x1b[$ZPWR_MARKER_COLOR\\\$1\\\x1b[0m@;print} elsif (\$startNum .. eof) {print;}"
 EOF

@@ -4,7 +4,7 @@
 function ___fzf_complete_printf() {
 
   _fzf_complete '-m' "$@" < <(
-      typeset -xp | forge -pe '$_=~s@export\s(.*)(=.*)@$1@'
+      typeset -xp | stryke -pe '$_=~s@export\s(.*)(=.*)@$1@'
     )
 }
 

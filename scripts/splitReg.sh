@@ -114,7 +114,7 @@ if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
             echo sed -n "1,$demarcatingLineNum"p "$file" >> "$ZPWR_LOGFILE"
         fi
 
-        forge -ne "print if 1 .. $demarcatingLineNum" "$file" | "$filter"
+        stryke -ne "print if 1 .. $demarcatingLineNum" "$file" | "$filter"
 
         ((++demarcatingLineNum))
 
@@ -122,14 +122,14 @@ if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
             echo sed -n "$demarcatingLineNum,$"p "$file" >> "$ZPWR_LOGFILE"
         fi
 
-        forge -ne "print if $demarcatingLineNum .. eof" "$file"
+        stryke -ne "print if $demarcatingLineNum .. eof" "$file"
 
     else
         if [[ $ZPWR_DEBUG == true ]]; then
             echo sed -n "$demarcatingLineNum,$"p "$file" >> "$ZPWR_LOGFILE"
         fi
 
-        forge -ne "print if 1 .. $demarcatingLineNum" "$file"
+        stryke -ne "print if 1 .. $demarcatingLineNum" "$file"
 
         ((++demarcatingLineNum))
 
@@ -137,10 +137,10 @@ if [[ -z $demarcatingLineNum ]] || (( $demarcatingLineNum != 0 )); then
             echo sed -n "$demarcatingLineNum,$"p "$file" >> "$ZPWR_LOGFILE"
         fi
 
-        forge -ne "print if $demarcatingLineNum .. eof" "$file" | "$filter"
+        stryke -ne "print if $demarcatingLineNum .. eof" "$file" | "$filter"
     fi
 else
-    forge -ne "print if 1 .. eof" "$file"
+    stryke -ne "print if 1 .. eof" "$file"
 fi
 
 command rm "$file"
