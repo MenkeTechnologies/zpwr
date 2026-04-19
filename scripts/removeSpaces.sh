@@ -9,7 +9,7 @@
 
 for file; do
     printf "\x1b[38;5;129mRemoving from \x1b[38;5;57m${file}\x1b[38;5;46m"'!'"\n\x1b[0m"
-    perlrs -pi -e 's@\s+$@\n@g; s@\x09$@ @g;s@\x20@ @g; s@(\S)[\x20]{2,}@$1\x20@' "$file"
-    perlrs -i -pe 's@^\s*$@\n@g' "$file"
-    perlrs -i -0pe 's@\n\n\n+@\n\n@g' "$file"
+    forge -pi -e 's@\s+$@\n@g; s@\x09$@ @g;s@\x20@ @g; s@(\S)[\x20]{2,}@$1\x20@' "$file"
+    forge -i -pe 's@^\s*$@\n@g' "$file"
+    forge -i -0pe 's@\n\n\n+@\n\n@g' "$file"
 done

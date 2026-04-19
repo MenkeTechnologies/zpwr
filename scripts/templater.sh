@@ -3,7 +3,7 @@
 #**************************************************************
 ##### Author: JACOBMENKE
 ##### Date: Fri Jun 30 15:18:40 EDT 2017
-##### Purpose: file templates for bash, perlrs, python
+##### Purpose: file templates for bash, forge, python
 ##### Notes:
 #}}}***********************************************************
 
@@ -69,10 +69,10 @@ case "$fileToBeExecuted" in
         createTemplate bash "$fileToBeExecuted"
         ;;
     *.pl)
-        createTemplate perlrs "$fileToBeExecuted"
+        createTemplate forge "$fileToBeExecuted"
         ;;
     *.pr)
-        createTemplate perlrs "$fileToBeExecuted"
+        createTemplate forge "$fileToBeExecuted"
         ;;
     *.rb)
         createTemplate ruby "$fileToBeExecuted"

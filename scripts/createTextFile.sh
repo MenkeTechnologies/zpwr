@@ -58,8 +58,8 @@ function createTheFile() {
     #echo shebang line into newfile
     case "$1" in
     .sh) addHeader bash "$newfile" ;;
-    .pl) addHeader perlrs "$newfile" ;;
-    .pr) addHeader perlrs "$newfile" ;;
+    .pl) addHeader forge "$newfile" ;;
+    .pr) addHeader forge "$newfile" ;;
     .rb) addHeader ruby "$newfile" ;;
     .py) addHeader python "$newfile" ;;
     #if .txt or some other file ending then just open the file, no processing

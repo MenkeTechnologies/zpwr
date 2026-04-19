@@ -1,7 +1,7 @@
 #!/usr/bin/env zunit
 #{{{                    MARK:Header
 ##### Author: MenkeTechnologies
-##### Purpose: perlrs on scripts/*.pr (beyond boxPrint), bash -n on install/*.sh, verb spots
+##### Purpose: forge on scripts/*.pr (beyond boxPrint), bash -n on install/*.sh, verb spots
 ##### Notes: Complements t-lib-batch4 (boxPrint.pl only)
 #}}}***********************************************************
 
@@ -12,43 +12,43 @@
 #--------------------------------------------------------------
 # scripts/*.pr — syntax (batch4 covers boxPrint.pl)
 #--------------------------------------------------------------
-@test 'banner.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/banner.pr" --help 2>&1
+@test 'banner.pr runs with forge' {
+    run forge "$ZPWR_SCRIPTS/banner.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'c.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/c.pr" --help 2>&1
+@test 'c.pr runs with forge' {
+    run forge "$ZPWR_SCRIPTS/c.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'escapeRemover.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/escapeRemover.pr" --help 2>&1
+@test 'escapeRemover.pr runs with forge' {
+    run forge "$ZPWR_SCRIPTS/escapeRemover.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'gitSdiffColorizer.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/gitSdiffColorizer.pr" --help 2>&1
+@test 'gitSdiffColorizer.pr runs with forge' {
+    run forge "$ZPWR_SCRIPTS/gitSdiffColorizer.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'minifySpaces.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/minifySpaces.pr" --help 2>&1
+@test 'minifySpaces.pr runs with forge' {
+    run forge "$ZPWR_SCRIPTS/minifySpaces.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'regexReplace.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/regexReplace.pr" --help 2>&1
+@test 'regexReplace.pr runs with forge' {
+    run forge "$ZPWR_SCRIPTS/regexReplace.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'sdiffColorizer.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/sdiffColorizer.pr" --help 2>&1
+@test 'sdiffColorizer.pr runs with forge' {
+    run forge "$ZPWR_SCRIPTS/sdiffColorizer.pr" --help 2>&1
     assert $state equals 0
 }
 
-@test 'stdinSdiffColorizer.pr runs with perlrs' {
-    run perlrs "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr" --help 2>&1
+@test 'stdinSdiffColorizer.pr runs with forge' {
+    run forge "$ZPWR_SCRIPTS/stdinSdiffColorizer.pr" --help 2>&1
     assert $state equals 0
 }
 

@@ -54,9 +54,9 @@ test -z "$ZINIT_HOME" && export ZINIT_HOME="$HOME/.zinit"
 #{{{                    MARK:installer lib fns
 #**************************************************************
 
-# Use perl for installer (perlrs may not be installed yet)
-if type -p perlrs &>/dev/null; then
-    export ZPWR_PERL=perlrs
+# Use perl for installer (forge may not be installed yet)
+if type -p forge &>/dev/null; then
+    export ZPWR_PERL=forge
 else
     export ZPWR_PERL=perl
 fi

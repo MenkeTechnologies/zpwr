@@ -49,7 +49,7 @@ fi
 cat<<EOF
 line={};
 orig={};
-line=\$(echo \$line| perlrs -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
+line=\$(echo \$line| forge -pe "s@[]\\\[^\\\$.*/]@quotemeta(\\\$&)@ge")
 cmdType=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV_KEY_FILE} | awk "{print \\\$1}")
 file=\$(grep -m1 -a " \$line\$" ${ZPWR_ENV_KEY_FILE} | awk "{print \\\$2}")
 
@@ -91,7 +91,7 @@ case \$cmdType in
         command grep -m1 -Fa "alias \$file=" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (param)
-        command perlrs -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or m{^======\$} ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} and ! m{^======\$} ) ) } for @a; }" "${ZPWR_ENV_VALUE_FILE}"
+        command forge -ne "BEGIN{@a=();};push@a,\\\$_ if m{^export \$file=} ... (m{^export .*=} or m{^======\$} ); END { \\\$c=0;do {++\\\$c;print if (\\\$c==1 or ( ! m{^export .*=} and ! m{^======\$} ) ) } for @a; }" "${ZPWR_ENV_VALUE_FILE}"
         ;;
     (builtin)
         command grep -m1 -Fa "\$file" "${ZPWR_ENV_VALUE_FILE}" | grep -F "is a shell builtin"
@@ -100,12 +100,12 @@ case \$cmdType in
         command grep -m1 -Fa "\$file" "${ZPWR_ENV_VALUE_FILE}" | grep -F "is a reserved word"
         ;;
     (func)
-        file=\$(echo \$file| perlrs -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
+        file=\$(echo \$file| forge -pe "s@[]\\\[^\$.*/]@quotemeta(\\\$&)@ge")
         if [[ \$ZPWR_DEBUG == true ]]; then
             echo "line:_\${line}_, cmdType:_\${cmdType}_ file:_\${file}_" >> "$ZPWR_LOGFILE"
         fi
         command grep -m1 -a "^\$file is a shell function" "${ZPWR_ENV_VALUE_FILE}"
-        command perlrs -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV_VALUE_FILE}"
+        command forge -ne "print if /^\${file} \\\(\\\) \\\{/ .. /^\\\}\\\$/" "${ZPWR_ENV_VALUE_FILE}"
         ;;
 esac
 } $filter
