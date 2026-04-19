@@ -42,7 +42,7 @@ jobs:
 
       - name: Install stryke
         run: |
-          cargo install stryke
+          cargo install strykelang
           command -v stryke
 
       - name: Checkout repository

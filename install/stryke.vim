@@ -2,7 +2,7 @@
 " Usage: source ~/.zpwr/install/stryke.vim
 
 " Register .stk files as stryke filetype with perl syntax
-augroup forge_filetype
+augroup stryke_filetype
   autocmd!
   autocmd BufNewFile,BufRead *.stk set filetype=stryke
   autocmd BufReadPost *.stk set filetype=stryke
@@ -30,8 +30,8 @@ function! s:RegisterForgeALE() abort
   if exists('*ale#linter#Define')
     call ale#linter#Define('stryke', {
     \   'name': 'stryke',
-    \   'executable': 'pe',
-    \   'command': 'pe --lint %t 2>&1',
+    \   'executable': 'stryke',
+    \   'command': 'stryke --lint %t 2>&1',
     \   'callback': 'StrykeHandler',
     \   'project_root': function('StrykeProjectRoot'),
     \})
@@ -46,7 +46,7 @@ autocmd VimEnter * call s:RegisterForgeALE()
 if exists('*lsp#register_server')
   call lsp#register_server({
   \   'name': 'stryke',
-  \   'cmd': ['pe', '--lsp'],
+  \   'cmd': ['stryke', '--lsp'],
   \   'allowlist': ['stryke', 'perl'],
   \})
 endif
@@ -55,7 +55,7 @@ endif
 " {
 "   "languageserver": {
 "     "stryke": {
-"       "command": "pe",
+"       "command": "stryke",
 "       "args": ["--lsp"],
 "       "filetypes": ["stryke", "perl"]
 "     }

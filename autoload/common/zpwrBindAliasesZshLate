@@ -26,7 +26,7 @@ function globalAliasesInit(){
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="'builtin' command stryke -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="'builtin' command stryke -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
 
-        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="'builtin' command stryke -i -pe 's,\\b$ZPWR_TABSTOP\\b,$ZPWR_TABSTOP,g' **/*~.git/**(.)~*.zwc(.)"
+        alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ip="'builtin' command stryke -i -pe 's,\\b$ZPWR_TABSTOP\\b,$ZPWR_TABSTOP,g' **/*~.git/**~*.zwc(.)"
 
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}ipf="'builtin' command stryke -i -pe 's,\\b$ZPWR_TABSTOP\\b,quotemeta($ZPWR_TABSTOP),ge' **/*~.git/**(.)~*.zwc(.)"
 
