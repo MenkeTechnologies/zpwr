@@ -17,6 +17,8 @@ This project began as a fork of Hashrocket's [Dotmatrix](https://github.com/hash
 
 ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface -- autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a tmux cockpit that turns your terminal into a multi-pane command center.
 
+ZPWR will migrating to the [zshrs](https://github.com/MenkeTechnologies/zshrs) soon.  The stryke shell (also known as zshrs) is a next gen, highly parallel login shell designed as drop in replacement for zsh.
+
 If your terminal isn't glowing, you're not running ZPWR.
 
 ## System Map
