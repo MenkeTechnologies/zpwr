@@ -13,9 +13,9 @@ echo "$o" | {
     echo "we got $o"
     echo "tommy was here @ $o"
     echo "bad ass peeeeps are "
-    stryke -E "say foreach @INC;say;say 'tommy tribe@ $o';say \"$^O baby.\"."baby";" | sed 's@.*@<&>@g' | cowsay -f www
+    stryke -E "p for @INC;p '';p 'tommy tribe@ $o';p \"$^O baby.\"."baby";" | sed 's@.*@<&>@g' | cowsay -f www
     echo
-    stryke -E 'say "perl"' | figlet -f cosmic
+    stryke -E 'p "perl"' | figlet -f cosmic
     echo
     cat /etc/passwd | stryke -nE 'print "dogs gone wild $_"' | head | sed 's@.@<&>g' | cowsay -f eyes
 } | sed 's@.@&@g' | {
@@ -24,8 +24,8 @@ echo "$o" | {
     python -c 'print("tommy"*30)'
     x="$(python -c 'print("trina"*5)')"
     ruby -e "10.times do |x| puts \"dogs are cool $x #{x}\" end"
-    stryke -E 'say "TCL IN THE HOUSE",a..z,-235..235' | fold -w 10 | pr -t -3
-    stryke -E 'say "perl ftw"' | toilet
+    stryke -E 'p "TCL IN THE HOUSE",a..z,-235..235' | fold -w 10 | pr -t -3
+    stryke -E 'p "perl ftw"' | toilet
     node -e 'console.log(process)' | head | cowsay -f kiss
     x=$(date | cut -c1-10)
     #echo "set x 55; puts \"we got \$x $x\"" | tclsh | figlet -f kban

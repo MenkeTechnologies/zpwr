@@ -22,7 +22,7 @@ function globalAliasesInit(){
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}bb='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'" &; disown %1 && unset __pid && __pid=$! && ps -ef | command grep -v grep | command grep --color=always $__pid; unset __pid;'
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}k="| awk 'BEGIN {$ZPWR_TABSTOP} {printf \"%s$ZPWR_TABSTOP\\n\", \$1} END {$ZPWR_TABSTOP}'"
         alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}oo='&>> "$ZPWR_LOGFILE'"$ZPWR_TABSTOP"'"'
-        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| 'builtin' command stryke -lanE 'say $ZPWR_TABSTOP'"
+        alias -g ${ZPWR_GLOBAL_ALIAS_PREFIX}p="| 'builtin' command stryke -lanE 'p $ZPWR_TABSTOP'"
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pg="'builtin' command stryke -e 'print \`$ZPWR_TABSTOP \"\$_\"\`for<*>'"
         alias ${ZPWR_GLOBAL_ALIAS_PREFIX}pf="'builtin' command stryke -e 'print \`$ZPWR_TABSTOP\`for($ZPWR_TABSTOP)'"
 
