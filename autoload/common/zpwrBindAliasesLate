@@ -25,7 +25,7 @@ function zpwrBindAliasesLate(){
     alias loo="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE | nl"
     alias ol="'builtin' 'command' 'tail' -n +1 -F $ZPWR_LOGFILE"
     alias llo="'builtin' command' 'tail' -n +1 -F $ZPWR_LOGFILE"
-    zpwrExists rlwrap && alias plr="'builtin' 'command' 'rlwrap' -A -pgreen -S'perl> ' stryke -wnE'say eval()//\$@'"
+    zpwrExists rlwrap && alias plr="'builtin' 'command' 'rlwrap' -A -pgreen -S'perl> ' stryke -wnE'p eval()//\$@'"
     alias cpan='"builtin" command rlwrap cpan'
     alias nz='"builtin" "exec" "zsh"'
     alias ll="zpwrClearList"
