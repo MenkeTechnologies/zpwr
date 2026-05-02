@@ -76,10 +76,6 @@ else
 fi
 
 if zpwrCommandExists npm; then
-    zpwrExists diff-so-fancy || {
-        zpwrPrettyPrintBox "npm installing diff-so-fancy"
-        sudo npm i -g diff-so-fancy
-    }
 
     zpwrPrettyPrintBox "installing neovim nodejs lib"
     sudo npm i -g neovim

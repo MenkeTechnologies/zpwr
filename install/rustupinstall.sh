@@ -48,6 +48,7 @@ if [[ "$ZPWR_OS_TYPE" == "linux" ]];then
 fi
 
 ins bat bat
+ins git-delta git-delta
 ins lsofrs lsofrs
 ins awkrs awkrs
 ins strykelang stryke

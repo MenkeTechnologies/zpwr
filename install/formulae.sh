@@ -80,7 +80,6 @@ brew install dbus
 brew install dcraw
 brew install dhex
 brew install dialog
-brew install diff-so-fancy
 brew install docbook
 brew install docbook-xsl
 brew install double-conversion

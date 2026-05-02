@@ -6,9 +6,12 @@
     editor = nvim
 	excludesfile = ~/.gitignore_global
     autocrlf = input
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = delta | less --tabs=4 -RFX
 	commentchar = |
 	abbrev = 8
+
+[delta]
+    dark=true
 
 [color]
 	ui = true
