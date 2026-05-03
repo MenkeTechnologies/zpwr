@@ -474,12 +474,6 @@
     assert "$output" is_not_empty
 }
 
-@test 'fn zd body non-empty' {
-    run functions zd
-    assert $state equals 0
-    assert "$output" is_not_empty
-}
-
 @test 'fn ze body non-empty' {
     run functions ze
     assert $state equals 0

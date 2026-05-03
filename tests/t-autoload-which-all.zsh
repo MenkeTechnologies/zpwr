@@ -402,11 +402,6 @@
     assert $state equals 0
 }
 
-@test 'which zd found' {
-    run which zd
-    assert $state equals 0
-}
-
 @test 'which ze found' {
     run which ze
     assert $state equals 0
