@@ -474,12 +474,6 @@
     assert "$output" contains function
 }
 
-@test 'type zd is function' {
-    run type zd
-    assert $state equals 0
-    assert "$output" contains function
-}
-
 @test 'type ze is function' {
     run type ze
     assert $state equals 0

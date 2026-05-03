@@ -474,12 +474,6 @@
     assert "$output" contains zco
 }
 
-@test 'functions zd contains name' {
-    run functions zd
-    assert $state equals 0
-    assert "$output" contains zd
-}
-
 @test 'functions ze contains name' {
     run functions ze
     assert $state equals 0

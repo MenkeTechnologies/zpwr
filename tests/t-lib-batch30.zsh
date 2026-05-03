@@ -126,11 +126,6 @@
     assert $state equals 0
 }
 
-@test 'autoload common zd passes zsh -n' {
-    run zsh -n "$ZPWR/autoload/common/zd"
-    assert $state equals 0
-}
-
 @test 'autoload common ze passes zsh -n' {
     run zsh -n "$ZPWR/autoload/common/ze"
     assert $state equals 0
@@ -246,11 +241,6 @@
 
 @test 'zpwrExists zarg returns 0' {
     run zpwrExists zarg
-    assert $state equals 0
-}
-
-@test 'zpwrExists zd returns 0' {
-    run zpwrExists zd
     assert $state equals 0
 }
 

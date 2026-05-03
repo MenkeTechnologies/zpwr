@@ -1,6 +1,6 @@
 # -*- mode: sh -*-
 # vim: set ft=sh:
-function zd() {
+function zde() {
 
     local branch dir optstr
     branch='$(zsh-gacp-devBranch)'
@@ -56,4 +56,4 @@ function zd() {
 
 }
 
-zd "$@"
+zde "$@"

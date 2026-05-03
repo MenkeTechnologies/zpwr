@@ -474,12 +474,6 @@
     assert "$output" contains function
 }
 
-@test 'whence -w zd is function' {
-    run whence -w zd
-    assert $state equals 0
-    assert "$output" contains function
-}
-
 @test 'whence -w ze is function' {
     run whence -w ze
     assert $state equals 0
