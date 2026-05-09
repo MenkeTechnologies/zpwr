@@ -13,6 +13,8 @@
 
 > *"The street finds its own uses for things."* -- William Gibson
 
+### [`Read the Docs`](https://menketechnologies.github.io/zpwr/)
+
 This project began as a fork of Hashrocket's [Dotmatrix](https://github.com/hashrocket/dotmatrix) and evolved into something far beyond its origins -- a sprawling cyberdeck OS for the command line.
 
 ZPWR is a high-voltage terminal environment built on [zinit](https://github.com/zdharma-continuum/zinit), weaponized with layers of custom zsh, bash, vimL and [stryke](https://github.com/MenkeTechnologies/strykelang) (the official language of ZPWR) code. It rewires your shell into a neural interface -- autocomplete that anticipates your next move, keybindings that feel like muscle memory from a past life, and a tmux cockpit that turns your terminal into a multi-pane command center.
@@ -126,7 +128,7 @@ Then run `zpwr regenconfiglinks` in same shell to create new sym links pointing 
 - 506+ zpwr subcommands -- your neural command vocabulary with colorized zsh menucompletion `zpwr <tab>`
 - 215+ centralized environment variables in the ZPWR namespace -- dials and switches for every subsystem
 - 890+ centralized ZPWR files in `~/.zpwr` -- clean uninstall, no ghost processes
-- 21k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
+- 22k zsh tab completions including [zsh-more-completions](https://github.com/MenkeTechnologies/zsh-more-completions) -- predictive input at machine speed
 - 170+ bash, stryke, zsh and python scripts in `~/.zpwr/scripts` or `$ZPWR_SCRIPTS` git tracked
 - 2000+ aliases -- shorthand for the initiated
 - 360+ git aliases from OMZ git plugin and [zsh-git-acp](https://github.com/MenkeTechnologies/zsh-git-acp)
